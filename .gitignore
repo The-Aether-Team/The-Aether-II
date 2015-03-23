@@ -8,16 +8,12 @@
 eclipse
 bin
 
-# IntelliJ Idea
-.idea
-
 # Gradle
 /build/
 /bin/
 gradle
 gradlew.bat
 gradlew
-.gradle
 
 # Windows image file caches
 Thumbs.db
@@ -25,11 +21,3 @@ ehthumbs.db
 
 # Folder config file
 Desktop.ini
-
-/saves/
-/logs/
-/crash-reports/
-/config/
-/mod-config/
-options.txt
-usernamecache.json
