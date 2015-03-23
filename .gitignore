@@ -1,12 +1,35 @@
+# Compiled Java
 *.class
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Eclipse
+.classpath
+.project
+.settings
+eclipse
+bin
 
-# Package Files #
-*.jar
-*.war
-*.ear
+# IntelliJ Idea
+.idea
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# Gradle
+/build/
+/bin/
+gradle
+gradlew.bat
+gradlew
+.gradle
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+/saves/
+/logs/
+/crash-reports/
+/config/
+/mod-config/
+options.txt
+usernamecache.json
