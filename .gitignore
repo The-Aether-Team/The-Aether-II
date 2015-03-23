@@ -9,6 +9,7 @@ eclipse
 bin
 
 # Gradle
+/.gradle/
 /build/
 /bin/
 gradle
