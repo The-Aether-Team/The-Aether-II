@@ -1,19 +1,19 @@
 package net.aetherteam.aether.items.itemblocks;
 
-import net.aetherteam.aether.blocks.util.ISubtypedAetherBlock;
+import net.aetherteam.aether.blocks.util.IAetherBlockWithVariants;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockSubtypes extends ItemBlock
+public class ItemBlockVariants extends ItemBlock
 {
-	private final ISubtypedAetherBlock subtypeBlock;
+	private final IAetherBlockWithVariants variantBlock;
 
-	public ItemBlockSubtypes(Block block)
+	public ItemBlockVariants(Block block)
 	{
 		super(block);
 
-		this.subtypeBlock = (ISubtypedAetherBlock) block;
+		this.variantBlock = (IAetherBlockWithVariants) block;
 		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
 	}
@@ -27,7 +27,7 @@ public class ItemBlockSubtypes extends ItemBlock
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		return super.getUnlocalizedName() + "." + this.subtypeBlock.getNameFromSubtype(stack);
+		return super.getUnlocalizedName() + "." + this.variantBlock.getVariantNameFromStack(stack);
 	}
 
 }

@@ -2,7 +2,8 @@ package net.aetherteam.aether.blocks.natural;
 
 import java.util.List;
 
-import net.aetherteam.aether.blocks.util.ISubtypedAetherBlock;
+import net.aetherteam.aether.blocks.util.IAetherBlockVariant;
+import net.aetherteam.aether.blocks.util.IAetherBlockWithVariants;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -16,9 +17,9 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockHolystone extends Block implements ISubtypedAetherBlock
+public class BlockHolystone extends Block implements IAetherBlockWithVariants
 {
-	public enum HolystoneVariant implements IStringSerializable
+	public enum HolystoneVariant implements IStringSerializable, IAetherBlockVariant
 	{
 		NORMAL(0, "holystone"),
 		MOSSY(1, "mossy_holystone"),
@@ -28,9 +29,9 @@ public class BlockHolystone extends Block implements ISubtypedAetherBlock
 
 		static
 		{
-			for (HolystoneVariant type : HolystoneVariant.values())
+			for (HolystoneVariant variant : HolystoneVariant.values())
 			{
-				metaLookup[type.getMetadata()] = type;
+				metaLookup[variant.getMetadata()] = variant;
 			}
 		}
 
@@ -50,12 +51,13 @@ public class BlockHolystone extends Block implements ISubtypedAetherBlock
 			return this.name;
 		}
 
+		@Override
 		public int getMetadata()
 		{
 			return this.metadata;
 		}
 
-		public static HolystoneVariant getTypeFromMetadata(int meta)
+		public static HolystoneVariant getVariantFromMetadata(int meta)
 		{
 			return HolystoneVariant.metaLookup[meta];
 		}
@@ -87,7 +89,7 @@ public class BlockHolystone extends Block implements ISubtypedAetherBlock
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(HOLYSTONE_TYPE, HolystoneVariant.getTypeFromMetadata(meta));
+		return this.getDefaultState().withProperty(HOLYSTONE_TYPE, HolystoneVariant.getVariantFromMetadata(meta));
 	}
 
 	@Override
@@ -109,8 +111,8 @@ public class BlockHolystone extends Block implements ISubtypedAetherBlock
 	}
 
 	@Override
-	public String getNameFromSubtype(ItemStack stack)
+	public String getVariantNameFromStack(ItemStack stack)
 	{
-		return HolystoneVariant.getTypeFromMetadata(stack.getMetadata()).getName();
+		return HolystoneVariant.getVariantFromMetadata(stack.getMetadata()).getName();
 	}
 }

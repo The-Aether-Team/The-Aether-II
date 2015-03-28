@@ -4,7 +4,7 @@ import net.aetherteam.aether.Aether;
 import net.aetherteam.aether.blocks.natural.BlockAetherDirt;
 import net.aetherteam.aether.blocks.natural.BlockHolystone;
 import net.aetherteam.aether.client.models.ModelsAether;
-import net.aetherteam.aether.items.itemblocks.ItemBlockSubtypes;
+import net.aetherteam.aether.items.itemblocks.ItemBlockVariants;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -19,7 +19,7 @@ public class BlocksAether
 	{
 		this.aether_dirt = this.registerBlock("aether_dirt", new BlockAetherDirt());
 
-		this.holystone = this.registerBlock("holystone", ItemBlockSubtypes.class, new BlockHolystone());
+		this.holystone = this.registerBlock("holystone", ItemBlockVariants.class, new BlockHolystone());
 	}
 
 	private <T extends Block> T registerBlock(String name, Class<? extends ItemBlock> itemblock, T block)
@@ -44,10 +44,8 @@ public class BlocksAether
 		{
 			ModelsAether models = Aether.PROXY.getModels();
 
-			models.registerItemRenderer(this.aether_dirt, 0, "aether_dirt", "inventory");
-			models.registerItemRenderer(this.holystone, BlockHolystone.HolystoneVariant.NORMAL.getMetadata(), "holystone", "inventory");
-			models.registerItemRenderer(this.holystone, BlockHolystone.HolystoneVariant.MOSSY.getMetadata(), "holystone", "inventory");
-			models.registerItemRenderer(this.holystone, BlockHolystone.HolystoneVariant.BLOOD.getMetadata(), "holystone", "inventory");
+			models.registerItemRenderer(this.aether_dirt, 0);
+			models.registerItemRenderer(this.holystone, BlockHolystone.HolystoneVariant.values());
 		}
 	}
 }
