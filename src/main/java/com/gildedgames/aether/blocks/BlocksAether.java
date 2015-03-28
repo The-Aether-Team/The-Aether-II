@@ -1,10 +1,11 @@
-package net.aetherteam.aether.blocks;
+package com.gildedgames.aether.blocks;
 
-import net.aetherteam.aether.Aether;
-import net.aetherteam.aether.blocks.natural.BlockAetherDirt;
-import net.aetherteam.aether.blocks.natural.BlockHolystone;
-import net.aetherteam.aether.client.models.ModelsAether;
-import net.aetherteam.aether.items.itemblocks.ItemBlockVariants;
+import com.gildedgames.aether.Aether;
+import com.gildedgames.aether.blocks.natural.BlockAetherDirt;
+import com.gildedgames.aether.blocks.natural.BlockHolystone;
+import com.gildedgames.aether.client.models.ModelsAether;
+import com.gildedgames.aether.items.itemblocks.ItemBlockVariants;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;

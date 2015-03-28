@@ -1,7 +1,8 @@
-package net.aetherteam.aether.client.models;
+package com.gildedgames.aether.client.models;
 
-import net.aetherteam.aether.Aether;
-import net.aetherteam.aether.blocks.util.IAetherBlockVariant;
+import com.gildedgames.aether.Aether;
+import com.gildedgames.aether.blocks.util.IAetherBlockVariant;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelBakery;

@@ -1,7 +1,7 @@
-package net.aetherteam.aether.client;
+package com.gildedgames.aether.client;
 
-import net.aetherteam.aether.CommonProxy;
-import net.aetherteam.aether.client.models.ModelsAether;
+import com.gildedgames.aether.CommonProxy;
+import com.gildedgames.aether.client.models.ModelsAether;
 
 public class ClientProxy extends CommonProxy
 {

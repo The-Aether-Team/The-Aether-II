@@ -1,6 +1,7 @@
-package net.aetherteam.aether;
+package com.gildedgames.aether;
 
-import net.aetherteam.aether.blocks.BlocksAether;
+import com.gildedgames.aether.blocks.BlocksAether;
+
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -20,7 +21,7 @@ public class Aether
 
 	public static final String MOD_VERSION = "1.8-1.0";
 
-	@SidedProxy(clientSide = "net.aetherteam.aether.client.ClientProxy", serverSide = "net.aetherteam.aether.CommonProxy")
+	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.CommonProxy")
 	public static CommonProxy PROXY;
 
 	private BlocksAether blocks = new BlocksAether();

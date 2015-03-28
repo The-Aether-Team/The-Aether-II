@@ -1,4 +1,4 @@
-package net.aetherteam.aether.blocks.natural;
+package com.gildedgames.aether.blocks.natural;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

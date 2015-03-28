@@ -1,6 +1,7 @@
-package net.aetherteam.aether.items.itemblocks;
+package com.gildedgames.aether.items.itemblocks;
 
-import net.aetherteam.aether.blocks.util.IAetherBlockWithVariants;
+import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;

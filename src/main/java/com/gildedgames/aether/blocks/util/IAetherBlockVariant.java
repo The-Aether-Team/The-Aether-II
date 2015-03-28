@@ -1,4 +1,4 @@
-package net.aetherteam.aether.blocks.util;
+package com.gildedgames.aether.blocks.util;
 
 public interface IAetherBlockVariant
 {

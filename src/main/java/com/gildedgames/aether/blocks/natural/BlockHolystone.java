@@ -1,9 +1,10 @@
-package net.aetherteam.aether.blocks.natural;
+package com.gildedgames.aether.blocks.natural;
 
 import java.util.List;
 
-import net.aetherteam.aether.blocks.util.IAetherBlockVariant;
-import net.aetherteam.aether.blocks.util.IAetherBlockWithVariants;
+import com.gildedgames.aether.blocks.util.IAetherBlockVariant;
+import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
