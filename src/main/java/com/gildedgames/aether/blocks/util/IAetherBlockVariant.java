@@ -1,8 +1,8 @@
 package com.gildedgames.aether.blocks.util;
 
-public interface IAetherBlockVariant
-{
-	public abstract String getName();
+import net.minecraft.util.IStringSerializable;
 
-	public abstract int getMetadata();
+public interface IAetherBlockVariant extends IStringSerializable
+{
+	int getMetadata();
 }

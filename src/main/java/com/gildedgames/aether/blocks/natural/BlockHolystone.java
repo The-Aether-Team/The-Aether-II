@@ -2,9 +2,6 @@ package com.gildedgames.aether.blocks.natural;
 
 import java.util.List;
 
-import com.gildedgames.aether.blocks.util.IAetherBlockVariant;
-import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -14,13 +11,15 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.gildedgames.aether.blocks.util.IAetherBlockVariant;
+import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
+
 public class BlockHolystone extends Block implements IAetherBlockWithVariants
 {
-	public enum HolystoneVariant implements IStringSerializable, IAetherBlockVariant
+	public enum HolystoneVariant implements IAetherBlockVariant
 	{
 		NORMAL(0, "holystone"),
 		MOSSY(1, "mossy_holystone"),
