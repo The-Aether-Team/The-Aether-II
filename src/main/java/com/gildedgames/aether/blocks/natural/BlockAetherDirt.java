@@ -20,6 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.gildedgames.aether.Aether;
 import com.gildedgames.aether.blocks.util.IAetherBlockVariant;
 import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
+import com.gildedgames.aether.creativetabs.AetherCreativeTabs;
 
 public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 {
@@ -77,7 +78,7 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 		this.setTickRandomly(true);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(GRASS_TYPE, AetherGrassVariant.NORMAL));
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 
 	@Override

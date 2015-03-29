@@ -16,6 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.gildedgames.aether.blocks.util.IAetherBlockVariant;
 import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
+import com.gildedgames.aether.creativetabs.AetherCreativeTabs;
 
 public class BlockHolystone extends Block implements IAetherBlockWithVariants
 {
@@ -72,7 +73,7 @@ public class BlockHolystone extends Block implements IAetherBlockWithVariants
 		this.setStepSound(Block.soundTypeStone);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(HOLYSTONE_TYPE, HolystoneVariant.NORMAL));
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 
 	@Override

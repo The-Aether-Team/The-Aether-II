@@ -4,3 +4,5 @@ tile.aether_dirt.aether_enchanted_grass.name=Enchanted Aether Grass
 tile.holystone.holystone.name=Holystone
 tile.holystone.mossy_holystone.name=Mossy Holystone
 tile.holystone.blood_holystone.name=Blood Moss Holystone
+
+itemGroup.aetherBlocks=Aether Blocks
