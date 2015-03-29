@@ -10,18 +10,20 @@ import com.gildedgames.aether.blocks.natural.BlockAetherDirt;
 
 public class AetherCreativeTabs
 {
-    public static final CreativeTabs tabBlocks = new CreativeTabs("aetherBlocks")
-    {
-        @SideOnly(Side.CLIENT)
-        public Item getTabIconItem()
-        {
-            return Item.getItemFromBlock(Aether.getBlocks().aether_dirt);
-        }
+	public static final CreativeTabs tabBlocks = new CreativeTabs("aetherBlocks")
+	{
+		@Override
+		@SideOnly(Side.CLIENT)
+		public Item getTabIconItem()
+		{
+			return Item.getItemFromBlock(Aether.getBlocks().aether_dirt);
+		}
 
-        @SideOnly(Side.CLIENT)
-        public int getIconItemDamage()
-        {
-            return BlockAetherDirt.AetherGrassVariant.GRASS.getMetadata();
-        }
-    };
+		@Override
+		@SideOnly(Side.CLIENT)
+		public int getIconItemDamage()
+		{
+			return BlockAetherDirt.AetherGrassVariant.GRASS.getMetadata();
+		}
+	};
 }

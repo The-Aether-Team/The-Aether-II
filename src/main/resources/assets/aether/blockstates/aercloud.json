@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "variant=aercloud_cold": { "model": "aether:aercloud_cold" },
+        "variant=aercloud_blue": { "model": "aether:aercloud_blue" },
+        "variant=aercloud_green": { "model": "aether:aercloud_green" },
+        "variant=aercloud_golden": { "model": "aether:aercloud_golden" },
+        "variant=aercloud_purple": { "model": "aether:aercloud_purple" },
+        "variant=aercloud_storm": { "model": "aether:aercloud_storm" }
+    }
+}
