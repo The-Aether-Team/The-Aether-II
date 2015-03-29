@@ -9,5 +9,6 @@ tile.aercloud.aercloud_blue.name=Blue Aercloud
 tile.aercloud.aercloud_green.name=Green Aercloud
 tile.aercloud.aercloud_golden.name=Golden Aercloud
 tile.aercloud.aercloud_storm.name=Storm Aercloud
+tile.aercloud.aercloud_purple.name=Purple Aercloud
 
 itemGroup.aetherBlocks=Aether Blocks

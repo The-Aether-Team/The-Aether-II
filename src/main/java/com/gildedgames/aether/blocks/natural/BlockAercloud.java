@@ -1,7 +1,6 @@
 package com.gildedgames.aether.blocks.natural;
 
 import java.util.List;
-import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -11,6 +10,7 @@ import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -34,8 +34,8 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 		BLUE(1, "aercloud_blue"),
 		GREEN(2, "aercloud_green"),
 		GOLDEN(3, "aercloud_golden"),
-		PURPLE(4, "aercloud_purple"),
-		STORM(5, "aercloud_storm");
+		STORM(4, "aercloud_storm"),
+		PURPLE(5, "aercloud_purple");
 
 		private static final AercloudVariant[] metaLookup = new AercloudVariant[AercloudVariant.values().length];
 
@@ -77,14 +77,16 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 
 	public static final PropertyEnum AERCLOUD_TYPE = PropertyEnum.create("variant", AercloudVariant.class);
 
-	private Random rand = new Random();
+	public static final PropertyEnum FACING = PropertyEnum.create("facing", EnumFacing.class);
 
 	public BlockAercloud()
 	{
 		super(Material.ice);
 		this.setStepSound(Block.soundTypeCloth);
+		this.setHardness(0.2f);
+		this.setLightOpacity(1);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(AERCLOUD_TYPE, AercloudVariant.COLD));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(AERCLOUD_TYPE, AercloudVariant.COLD).withProperty(FACING, EnumFacing.NORTH));
 		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 
@@ -144,10 +146,19 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 			}
 			else if (variant == AercloudVariant.GREEN)
 			{
-				EnumFacing randomSide = EnumFacing.random(this.rand);
+				EnumFacing randomSide = EnumFacing.random(worldIn.rand);
 
 				entityIn.motionX = randomSide.getFrontOffsetX() * 2.5D;
 				entityIn.motionZ = randomSide.getFrontOffsetZ() * 2.5D;
+
+				return;
+			}
+			else if (variant == AercloudVariant.PURPLE)
+			{
+				EnumFacing side = (EnumFacing) state.getValue(FACING);
+
+				entityIn.motionX = side.getFrontOffsetX() * 2.5D;
+				entityIn.motionZ = side.getFrontOffsetZ() * 2.5D;
 
 				return;
 			}
@@ -180,19 +191,29 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
+		if (meta >= AercloudVariant.PURPLE.getMetadata())
+		{
+			return this.getDefaultState().withProperty(AERCLOUD_TYPE, AercloudVariant.PURPLE).withProperty(FACING, EnumFacing.getFront(meta));
+		}
+
 		return this.getDefaultState().withProperty(AERCLOUD_TYPE, AercloudVariant.getVariantFromMetadata(meta));
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
+		if (state.getValue(AERCLOUD_TYPE) == AercloudVariant.PURPLE)
+		{
+			return AercloudVariant.PURPLE.getMetadata() + ((EnumFacing) state.getValue(FACING)).getIndex();
+		}
+
 		return ((AercloudVariant) state.getValue(AERCLOUD_TYPE)).getMetadata();
 	}
 
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { AERCLOUD_TYPE });
+		return new BlockState(this, new IProperty[] { AERCLOUD_TYPE, FACING });
 	}
 
 	@Override
@@ -200,4 +221,17 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	{
 		return AercloudVariant.getVariantFromMetadata(stack.getMetadata()).getName();
 	}
+
+	@Override
+	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	{
+		return this.getStateFromMeta(meta).withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+	}
+
+	@Override
+	protected ItemStack createStackedBlock(IBlockState state)
+	{
+		return new ItemStack(this, 1, ((AercloudVariant) state.getValue(AERCLOUD_TYPE)).getMetadata());
+	}
+
 }
