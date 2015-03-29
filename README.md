@@ -1,41 +1,49 @@
-Aether II
+Aether II 1.8
 ======
 
-In development by Gilded Games, the Aether II is an extensive mod for Minecraft which implements
-a remarkable world in the skies. Adventure, danger, and mystery awaits in the depths of the Aether.
+In development by Gilded Games, the Aether II is an extensive mod for Minecraft which implements a remarkable world in the skies. Adventure, danger, and mystery awaits in the depths of the Aether.
 
-#### Developers
-See [CONTRIBUTING.md](https://github.com/gildedgames/aether/blob/master/CONTRIBUTING.md).
+### Setting up your Workspace
 
+Before you begin, you need to install the _Gradle Intergration for Eclipse (4.4)_. You can install it through the Eclipse Marketplace, which is found in _Help > Eclipse Marketplace_.
 
-##### Not a developer and need to setup your Eclipse workspace?
+1. Open the Import dialog by clicking _File > Import..._ and search for "Gradle Project", then click _Next_.
 
-1. Simply clone the Aether repo. If you don't have the GitHub client installed, grab it [here](https://windows.github.com/).
-![cloning.png](http://i.imgur.com/72jYiaS.png)
+2. Fill in the _Root folder_ field by clicking _Browse_ and navigating to the location you cloned the repository, then click "Build Model".
 
-2. Download the [Forge 1.7.10.1291 source code](http://files.minecraftforge.net/maven/net/minecraftforge/forge/1.7.10-10.13.2.1291/forge-1.7.10-10.13.2.1291-src.zip)  and extract the following files into the location you cloned the Aether to. *DO NOT COPY THE SRC OR BUILD.GRADLE!*
-  - gradlew.bat
-  - eclipse
-  - gradle
+3. If all goes well, two projects will be shown. Checkmark _both_ of them if they aren't already. In the "Import options" section, checkmark "Run before" and set it's contents to: `setupDecompWorkspace cleanEclipse eclipse`.
 
-3. Run the _setup.bat_ inside the Aether repo folder. This might take a while to finish the first time.
+4. Click "Finish" and wait for Eclipse to setup your projects. This may take 10 or so minutes.
 
-4. Open Eclipse. When asked where to open your workspace, choose the _eclipse_ folder within the Aether repo folder.
+5. If the imported projects have errors, try right clicking each one and going to _Gradle > Refresh All..._
 
-5. To launch the Aether, look for the _Launch_ button on the toolbar. It looks a bit like a green play button.
+6. Once done, go to the "Launch" button and click the dropdown, then click "Run Configurations". Create the following configurations below by double clicking on "Java Application" in the left pane.
 
-###### Syncing changes made to the Aether (getting the latest commits)
+	a. Aether Client
+	```
+	[Main tab]
+	Project: (the Aether project)
+	Main class: GradleStart
 
-The GitHub client will usually alert you whenever there's unsynced changes.
+	[Arguments tab]
+	Program arguments: --username MY_USERNAME
+	Working directory: {WORKSPACE_LOC}\eclipse
+	```
 
-![sync.png](http://i.imgur.com/H9lZ0HP.png)
+	Replace `MY_USERNAME` with your Minecraft character's username and `{WORKSPACE_LOC}` with the default working directory's text.
 
-Clicking the "Sync" button in the top right corner of the GitHub client will automatically get the latest changes.
+	b. Aether Server
+	```
+	[Main tab]
+	Project: (the Aether project)
+	Main class: net.minecraftforge.fml.relauncher.ServerLaunchWrapper
 
-##### Compiling the Aether
+	[Arguments tab]
+	Working directory: {WORKSPACE_LOC}\eclipse
+	```
 
-1. Run the _build.bat_ file inside the Aether repo folder. This might take a while to finish.
+	Be sure to replace `{WORKSPACE_LOC}` with the default working directory's text.
 
-2. Once the build is finished (and without errors), the compiled JARs will be copied to the _build/libs_ folder. 
+7. Choose which configuration you want to run and simply press the "Run" button. After you run it, it'll be added to your launch history and will be accessible from the Launch dropdown menu.
 
-_Note: Gilded Games Util is built seperately from the Aether and is needed for the Aether._
+If the gradle configurations have changed since the last time you used it, you'll need to go to each imported project, right click, and run _Gradle > Refresh All..._
