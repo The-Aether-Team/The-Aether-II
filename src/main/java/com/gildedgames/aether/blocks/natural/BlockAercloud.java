@@ -177,15 +177,15 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
-	{
-		return new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY(), pos.getZ() + 1);
-	}
-
-	@Override
 	public boolean isFullCube()
 	{
 		return false;
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
+	{
+		return new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + this.maxX, pos.getY(), pos.getZ() + this.maxZ);
 	}
 
 	@Override
@@ -193,7 +193,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	{
 		if (meta >= AercloudVariant.PURPLE.getMetadata())
 		{
-			return this.getDefaultState().withProperty(AERCLOUD_TYPE, AercloudVariant.PURPLE).withProperty(FACING, EnumFacing.getFront(meta));
+			return this.getDefaultState().withProperty(AERCLOUD_TYPE, AercloudVariant.PURPLE).withProperty(FACING, EnumFacing.getFront(meta - AercloudVariant.PURPLE.getMetadata()));
 		}
 
 		return this.getDefaultState().withProperty(AERCLOUD_TYPE, AercloudVariant.getVariantFromMetadata(meta));
@@ -207,6 +207,12 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 			return AercloudVariant.PURPLE.getMetadata() + ((EnumFacing) state.getValue(FACING)).getIndex();
 		}
 
+		return ((AercloudVariant) state.getValue(AERCLOUD_TYPE)).getMetadata();
+	}
+
+	@Override
+	public int damageDropped(IBlockState state)
+	{
 		return ((AercloudVariant) state.getValue(AERCLOUD_TYPE)).getMetadata();
 	}
 

@@ -6,6 +6,7 @@
         "north": "aether:blocks/aercloud_purple_front",
         "east": "aether:blocks/aercloud_purple_right",
         "south": "aether:blocks/aercloud_purple_back",
-        "west": "aether:blocks/aercloud_purple_left"
+        "west": "aether:blocks/aercloud_purple_left",
+        "particle": "aether:blocks/aercloud_purple_down"
     }
 }
