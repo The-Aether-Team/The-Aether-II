@@ -94,7 +94,7 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
-		if (!world.isRemote)
+		if (!world.isRemote && state.getValue(GRASS_TYPE) == AetherGrassVariant.NORMAL)
 		{
 			if (world.getLightFromNeighbors(pos.up()) < 4 && world.getBlockState(pos.up()).getBlock().getLightOpacity(world, pos.up()) > 2)
 			{
