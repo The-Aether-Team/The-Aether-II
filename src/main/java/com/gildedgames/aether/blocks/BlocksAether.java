@@ -1,14 +1,14 @@
 package com.gildedgames.aether.blocks;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
 import com.gildedgames.aether.Aether;
 import com.gildedgames.aether.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.client.models.ModelsAether;
 import com.gildedgames.aether.items.itemblocks.ItemBlockVariants;
-
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class BlocksAether
 {
@@ -18,7 +18,7 @@ public class BlocksAether
 
 	public void preInit()
 	{
-		this.aether_dirt = this.registerBlock("aether_dirt", new BlockAetherDirt());
+		this.aether_dirt = this.registerBlock("aether_dirt", ItemBlockVariants.class, new BlockAetherDirt());
 
 		this.holystone = this.registerBlock("holystone", ItemBlockVariants.class, new BlockHolystone());
 	}
@@ -31,21 +31,13 @@ public class BlocksAether
 		return block;
 	}
 
-	private <T extends Block> T registerBlock(String name, T block)
-	{
-		block.setUnlocalizedName(name);
-		GameRegistry.registerBlock(block, name);
-
-		return block;
-	}
-
 	public void init()
 	{
 		if (Aether.PROXY.getModels() != null)
 		{
 			ModelsAether models = Aether.PROXY.getModels();
 
-			models.registerItemRenderer(this.aether_dirt, 0);
+			models.registerItemRenderer(this.aether_dirt, BlockAetherDirt.AetherGrassVariant.values());
 			models.registerItemRenderer(this.holystone, BlockHolystone.HolystoneVariant.values());
 		}
 	}

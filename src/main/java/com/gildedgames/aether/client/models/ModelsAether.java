@@ -1,13 +1,13 @@
 package com.gildedgames.aether.client.models;
 
-import com.gildedgames.aether.Aether;
-import com.gildedgames.aether.blocks.util.IAetherBlockVariant;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+
+import com.gildedgames.aether.Aether;
+import com.gildedgames.aether.blocks.util.IAetherBlockVariant;
 
 public class ModelsAether
 {
