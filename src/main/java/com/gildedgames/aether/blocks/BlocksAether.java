@@ -6,13 +6,13 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.gildedgames.aether.Aether;
+import com.gildedgames.aether.AetherCreativeTabs;
 import com.gildedgames.aether.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.blocks.util.BlockCustom;
 import com.gildedgames.aether.client.models.ModelsAether;
-import com.gildedgames.aether.creativetabs.AetherCreativeTabs;
 import com.gildedgames.aether.items.itemblocks.ItemBlockVariants;
 
 public class BlocksAether

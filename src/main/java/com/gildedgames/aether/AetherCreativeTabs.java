@@ -1,11 +1,10 @@
-package com.gildedgames.aether.creativetabs;
+package com.gildedgames.aether;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.gildedgames.aether.Aether;
 import com.gildedgames.aether.blocks.natural.BlockAetherDirt;
 
 public class AetherCreativeTabs

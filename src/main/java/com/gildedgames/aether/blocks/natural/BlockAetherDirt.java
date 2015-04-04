@@ -17,10 +17,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.gildedgames.aether.Aether;
+import com.gildedgames.aether.AetherCreativeTabs;
 import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
 import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
 import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
-import com.gildedgames.aether.creativetabs.AetherCreativeTabs;
 
 public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 {
