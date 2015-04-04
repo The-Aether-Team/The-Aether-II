@@ -15,5 +15,9 @@ tile.aether_log.skyroot_log.name=Skyroot Log
 tile.aether_log.golden_oak_log.name=Golden Oak Log
 tile.skyroot_planks.name=Skyroot Planks
 
+# Aether Items
+item.skyroot_stick.name=Skyroot Stick
+
 # Creative Tabs
 itemGroup.aetherBlocks=Aether Blocks
+itemGroup.aetherMaterials=Aether Materials

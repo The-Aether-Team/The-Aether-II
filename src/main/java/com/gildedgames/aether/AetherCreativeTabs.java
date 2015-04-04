@@ -22,7 +22,17 @@ public class AetherCreativeTabs
 		@SideOnly(Side.CLIENT)
 		public int getIconItemDamage()
 		{
-			return BlockAetherDirt.AETHER_DIRT.getMeta();
+			return BlockAetherDirt.AETHER_GRASS.getMeta();
+		}
+	};
+
+	public static final CreativeTabs tabMaterials = new CreativeTabs("aetherMaterials")
+	{
+		@Override
+		@SideOnly(Side.CLIENT)
+		public Item getTabIconItem()
+		{
+			return Aether.getItems().skyroot_stick;
 		}
 	};
 }
