@@ -145,6 +145,12 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	}
 
 	@Override
+	public boolean isPassable(IBlockAccess worldIn, BlockPos pos)
+	{
+		return true;
+	}
+
+	@Override
 	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
 	{
 		return new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + this.maxX, pos.getY(), pos.getZ() + this.maxZ);
