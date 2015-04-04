@@ -29,4 +29,10 @@ public class BlockVariant implements Comparable<BlockVariant>
 		// It's probably best case to sort by meta.
 		return this.meta;
 	}
+
+	@Override
+	public String toString()
+	{
+		return this.getName();
+	}
 }
