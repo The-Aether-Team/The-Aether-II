@@ -13,6 +13,7 @@ tile.aercloud.aercloud_storm.name=Storm Aercloud
 tile.aercloud.aercloud_purple.name=Purple Aercloud
 tile.aether_log.skyroot_log.name=Skyroot Log
 tile.aether_log.golden_oak_log.name=Golden Oak Log
+tile.skyroot_planks.name=Skyroot Planks
 
 # Creative Tabs
 itemGroup.aetherBlocks=Aether Blocks

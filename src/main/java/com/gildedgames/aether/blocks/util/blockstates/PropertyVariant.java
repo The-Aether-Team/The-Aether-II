@@ -1,4 +1,4 @@
-package com.gildedgames.aether.blocks.util;
+package com.gildedgames.aether.blocks.util.blockstates;
 
 import java.util.Collection;
 import java.util.HashMap;

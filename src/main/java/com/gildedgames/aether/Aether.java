@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import com.gildedgames.aether.blocks.BlocksAether;
+import com.gildedgames.aether.recipes.RecipesAether;
 
 @Mod(name = Aether.MOD_NAME, modid = Aether.MOD_ID, version = Aether.MOD_VERSION)
 public class Aether
@@ -26,12 +27,15 @@ public class Aether
 
 	private BlocksAether blocks = new BlocksAether();
 
+	private RecipesAether recipes = new RecipesAether();
+
 	@EventHandler
 	public void onPreInit(FMLPreInitializationEvent event)
 	{
 		Aether.PROXY.init();
 
 		this.blocks.preInit();
+		this.recipes.preInit();
 	}
 
 	@EventHandler
@@ -43,5 +47,10 @@ public class Aether
 	public static BlocksAether getBlocks()
 	{
 		return Aether.INSTANCE.blocks;
+	}
+
+	public static RecipesAether getRecipes()
+	{
+		return Aether.INSTANCE.recipes;
 	}
 }

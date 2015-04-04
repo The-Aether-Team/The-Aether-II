@@ -10,7 +10,7 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 
 import com.gildedgames.aether.Aether;
-import com.gildedgames.aether.blocks.util.BlockVariant;
+import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
 
 public class ModelsAether
 {
