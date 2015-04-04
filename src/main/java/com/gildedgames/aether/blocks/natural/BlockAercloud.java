@@ -22,60 +22,22 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.gildedgames.aether.blocks.util.IAetherBlockVariant;
+import com.gildedgames.aether.blocks.util.BlockVariant;
 import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
+import com.gildedgames.aether.blocks.util.PropertyVariant;
 import com.gildedgames.aether.creativetabs.AetherCreativeTabs;
 
 public class BlockAercloud extends Block implements IAetherBlockWithVariants
 {
-	public enum AercloudVariant implements IAetherBlockVariant
-	{
-		COLD(0, "aercloud_cold"),
-		BLUE(1, "aercloud_blue"),
-		GREEN(2, "aercloud_green"),
-		GOLDEN(3, "aercloud_golden"),
-		STORM(4, "aercloud_storm"),
-		PURPLE(5, "aercloud_purple");
+	public static final BlockVariant
+			COLD_AERCLOUD = new BlockVariant(0, "aercloud_cold"),
+			BLUE_AERCLOUD = new BlockVariant(1, "aercloud_blue"),
+			GREEN_AERCLOUD = new BlockVariant(2, "aercloud_green"),
+			GOLDEN_AERCLOUD = new BlockVariant(3, "aercloud_golden"),
+			STORM_AERCLOUD = new BlockVariant(4, "aercloud_storm"),
+			PURPLE_AERCLOUD = new BlockVariant(5, "aercloud_purple");
 
-		private static final AercloudVariant[] metaLookup = new AercloudVariant[AercloudVariant.values().length];
-
-		static
-		{
-			for (AercloudVariant variant : AercloudVariant.values())
-			{
-				metaLookup[variant.getMetadata()] = variant;
-			}
-		}
-
-		private int metadata;
-
-		private String name;
-
-		AercloudVariant(int metadata, String name)
-		{
-			this.metadata = metadata;
-			this.name = name;
-		}
-
-		@Override
-		public String getName()
-		{
-			return this.name;
-		}
-
-		@Override
-		public int getMetadata()
-		{
-			return this.metadata;
-		}
-
-		public static AercloudVariant getVariantFromMetadata(int meta)
-		{
-			return AercloudVariant.metaLookup[meta];
-		}
-	}
-
-	public static final PropertyEnum AERCLOUD_TYPE = PropertyEnum.create("variant", AercloudVariant.class);
+	public static final PropertyVariant AERCLOUD_TYPE = PropertyVariant.create("variant", COLD_AERCLOUD, BLUE_AERCLOUD, GREEN_AERCLOUD, GOLDEN_AERCLOUD, STORM_AERCLOUD, PURPLE_AERCLOUD);
 
 	public static final PropertyEnum FACING = PropertyEnum.create("facing", EnumFacing.class);
 
@@ -86,7 +48,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 		this.setHardness(0.2f);
 		this.setLightOpacity(1);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(AERCLOUD_TYPE, AercloudVariant.COLD).withProperty(FACING, EnumFacing.NORTH));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(AERCLOUD_TYPE, COLD_AERCLOUD).withProperty(FACING, EnumFacing.NORTH));
 		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 
@@ -95,9 +57,9 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
 	{
-		for (AercloudVariant type : AercloudVariant.values())
+		for (BlockVariant variant : AERCLOUD_TYPE.getAllowedValues())
 		{
-			list.add(new ItemStack(itemIn, 1, type.getMetadata()));
+			list.add(new ItemStack(itemIn, 1, variant.getMeta()));
 		}
 	}
 
@@ -128,23 +90,23 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	@Override
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
 	{
-		AercloudVariant variant = (AercloudVariant) state.getValue(AERCLOUD_TYPE);
+		BlockVariant variant = (BlockVariant) state.getValue(AERCLOUD_TYPE);
 
 		entityIn.fallDistance = 0;
 
 		if (!entityIn.isSneaking())
 		{
-			if (variant == AercloudVariant.BLUE)
+			if (variant == BLUE_AERCLOUD)
 			{
 				entityIn.motionY = 2.0D;
 				return;
 			}
-			else if (variant == AercloudVariant.GOLDEN)
+			else if (variant == GOLDEN_AERCLOUD)
 			{
 				entityIn.motionY = -1.5D;
 				return;
 			}
-			else if (variant == AercloudVariant.GREEN)
+			else if (variant == GREEN_AERCLOUD)
 			{
 				EnumFacing randomSide = EnumFacing.random(worldIn.rand);
 
@@ -153,7 +115,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 
 				return;
 			}
-			else if (variant == AercloudVariant.PURPLE)
+			else if (variant == PURPLE_AERCLOUD)
 			{
 				EnumFacing side = (EnumFacing) state.getValue(FACING);
 
@@ -191,29 +153,29 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		if (meta >= AercloudVariant.PURPLE.getMetadata())
+		if (meta >= PURPLE_AERCLOUD.getMeta())
 		{
-			return this.getDefaultState().withProperty(AERCLOUD_TYPE, AercloudVariant.PURPLE).withProperty(FACING, EnumFacing.getFront(meta - AercloudVariant.PURPLE.getMetadata()));
+			return this.getDefaultState().withProperty(AERCLOUD_TYPE, PURPLE_AERCLOUD).withProperty(FACING, EnumFacing.getFront(meta - PURPLE_AERCLOUD.getMeta()));
 		}
 
-		return this.getDefaultState().withProperty(AERCLOUD_TYPE, AercloudVariant.getVariantFromMetadata(meta));
+		return this.getDefaultState().withProperty(AERCLOUD_TYPE, AERCLOUD_TYPE.getVariantFromMeta(meta));
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		if (state.getValue(AERCLOUD_TYPE) == AercloudVariant.PURPLE)
+		if (state.getValue(AERCLOUD_TYPE) == PURPLE_AERCLOUD)
 		{
-			return AercloudVariant.PURPLE.getMetadata() + ((EnumFacing) state.getValue(FACING)).getIndex();
+			return PURPLE_AERCLOUD.getMeta() + ((EnumFacing) state.getValue(FACING)).getIndex();
 		}
 
-		return ((AercloudVariant) state.getValue(AERCLOUD_TYPE)).getMetadata();
+		return ((BlockVariant) state.getValue(AERCLOUD_TYPE)).getMeta();
 	}
 
 	@Override
 	public int damageDropped(IBlockState state)
 	{
-		return ((AercloudVariant) state.getValue(AERCLOUD_TYPE)).getMetadata();
+		return ((BlockVariant) state.getValue(AERCLOUD_TYPE)).getMeta();
 	}
 
 	@Override
@@ -225,7 +187,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	@Override
 	public String getVariantNameFromStack(ItemStack stack)
 	{
-		return AercloudVariant.getVariantFromMetadata(stack.getMetadata()).getName();
+		return AERCLOUD_TYPE.getVariantFromMeta(stack.getMetadata()).getName();
 	}
 
 	@Override
@@ -237,7 +199,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	@Override
 	protected ItemStack createStackedBlock(IBlockState state)
 	{
-		return new ItemStack(this, 1, ((AercloudVariant) state.getValue(AERCLOUD_TYPE)).getMetadata());
+		return new ItemStack(this, 1, ((BlockVariant) state.getValue(AERCLOUD_TYPE)).getMeta());
 	}
 
 }

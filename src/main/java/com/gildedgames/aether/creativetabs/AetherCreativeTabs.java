@@ -23,7 +23,7 @@ public class AetherCreativeTabs
 		@SideOnly(Side.CLIENT)
 		public int getIconItemDamage()
 		{
-			return BlockAetherDirt.AetherGrassVariant.GRASS.getMetadata();
+			return BlockAetherDirt.AETHER_DIRT.getMeta();
 		}
 	};
 }

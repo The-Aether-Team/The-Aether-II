@@ -42,9 +42,9 @@ public class BlocksAether
 		{
 			ModelsAether models = Aether.PROXY.getModels();
 
-			models.registerItemRenderer(this.aether_dirt, BlockAetherDirt.AetherGrassVariant.values());
-			models.registerItemRenderer(this.holystone, BlockHolystone.HolystoneVariant.values());
-			models.registerItemRenderer(this.aercloud, BlockAercloud.AercloudVariant.values());
+			models.registerItemRenderer(this.aether_dirt, BlockAetherDirt.GRASS_TYPE.getAllowedValues());
+			models.registerItemRenderer(this.holystone, BlockHolystone.HOLYSTONE_TYPE.getAllowedValues());
+			models.registerItemRenderer(this.aercloud, BlockAercloud.AERCLOUD_TYPE.getAllowedValues());
 		}
 	}
 }

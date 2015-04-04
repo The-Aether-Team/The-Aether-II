@@ -5,7 +5,6 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -14,57 +13,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.gildedgames.aether.blocks.util.IAetherBlockVariant;
+import com.gildedgames.aether.blocks.util.BlockVariant;
 import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
+import com.gildedgames.aether.blocks.util.PropertyVariant;
 import com.gildedgames.aether.creativetabs.AetherCreativeTabs;
 
 public class BlockHolystone extends Block implements IAetherBlockWithVariants
 {
-	public enum HolystoneVariant implements IAetherBlockVariant
-	{
-		NORMAL(0, "holystone"),
-		MOSSY(1, "mossy_holystone"),
-		BLOOD(2, "blood_holystone");
+	public static final BlockVariant
+	NORMAL_HOLYSTONE = new BlockVariant(0, "holystone"),
+	MOSSY_HOLYSTONE = new BlockVariant(1, "mossy_holystone"),
+	BLOOD_MOSS_HOLYSTONE = new BlockVariant(2, "blood_holystone");
 
-		private static final HolystoneVariant[] metaLookup = new HolystoneVariant[HolystoneVariant.values().length];
-
-		static
-		{
-			for (HolystoneVariant variant : HolystoneVariant.values())
-			{
-				metaLookup[variant.getMetadata()] = variant;
-			}
-		}
-
-		private int metadata;
-
-		private String name;
-
-		HolystoneVariant(int metadata, String name)
-		{
-			this.metadata = metadata;
-			this.name = name;
-		}
-
-		@Override
-		public String getName()
-		{
-			return this.name;
-		}
-
-		@Override
-		public int getMetadata()
-		{
-			return this.metadata;
-		}
-
-		public static HolystoneVariant getVariantFromMetadata(int meta)
-		{
-			return HolystoneVariant.metaLookup[meta];
-		}
-	}
-
-	public static final PropertyEnum HOLYSTONE_TYPE = PropertyEnum.create("variant", HolystoneVariant.class);
+	public static final PropertyVariant HOLYSTONE_TYPE = PropertyVariant.create("variant", NORMAL_HOLYSTONE, MOSSY_HOLYSTONE, BLOOD_MOSS_HOLYSTONE);
 
 	public BlockHolystone()
 	{
@@ -72,7 +33,7 @@ public class BlockHolystone extends Block implements IAetherBlockWithVariants
 		this.setHardness(2.0F);
 		this.setStepSound(Block.soundTypeStone);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(HOLYSTONE_TYPE, HolystoneVariant.NORMAL));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(HOLYSTONE_TYPE, NORMAL_HOLYSTONE));
 		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 
@@ -81,22 +42,22 @@ public class BlockHolystone extends Block implements IAetherBlockWithVariants
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
 	{
-		for (HolystoneVariant type : HolystoneVariant.values())
+		for (BlockVariant variant : HOLYSTONE_TYPE.getAllowedValues())
 		{
-			list.add(new ItemStack(itemIn, 1, type.getMetadata()));
+			list.add(new ItemStack(itemIn, 1, variant.getMeta()));
 		}
 	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(HOLYSTONE_TYPE, HolystoneVariant.getVariantFromMetadata(meta));
+		return this.getDefaultState().withProperty(HOLYSTONE_TYPE, HOLYSTONE_TYPE.getVariantFromMeta(meta));
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return ((HolystoneVariant) state.getValue(HOLYSTONE_TYPE)).getMetadata();
+		return ((BlockVariant) state.getValue(HOLYSTONE_TYPE)).getMeta();
 	}
 
 	@Override
@@ -108,12 +69,12 @@ public class BlockHolystone extends Block implements IAetherBlockWithVariants
 	@Override
 	public int damageDropped(IBlockState state)
 	{
-		return ((HolystoneVariant) state.getValue(HOLYSTONE_TYPE)).getMetadata();
+		return ((BlockVariant) state.getValue(HOLYSTONE_TYPE)).getMeta();
 	}
 
 	@Override
 	public String getVariantNameFromStack(ItemStack stack)
 	{
-		return HolystoneVariant.getVariantFromMetadata(stack.getMetadata()).getName();
+		return HOLYSTONE_TYPE.getVariantFromMeta(stack.getMetadata()).getName();
 	}
 }

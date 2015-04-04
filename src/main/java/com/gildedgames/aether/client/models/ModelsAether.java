@@ -1,5 +1,8 @@
 package com.gildedgames.aether.client.models;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelBakery;
@@ -7,7 +10,7 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 
 import com.gildedgames.aether.Aether;
-import com.gildedgames.aether.blocks.util.IAetherBlockVariant;
+import com.gildedgames.aether.blocks.util.BlockVariant;
 
 public class ModelsAether
 {
@@ -24,16 +27,17 @@ public class ModelsAether
 	 * @param block The block
 	 * @param variants The block's subtypes
 	 */
-	public void registerItemRenderer(Block block, IAetherBlockVariant[] variants)
+	public void registerItemRenderer(Block block, Collection<BlockVariant> variants)
 	{
-		String[] names = new String[variants.length];
+		String[] names = new String[variants.size()];
 
-		for (int i = 0; i < variants.length; ++i)
+		Iterator<BlockVariant> iterator = variants.iterator();
+		for (int i = 0; iterator.hasNext(); i++)
 		{
-			IAetherBlockVariant subtype = variants[i];
-			names[i] = (Aether.MOD_ID + ":") + subtype.getName();
+			BlockVariant variant = iterator.next();
+			names[i] = (Aether.MOD_ID + ":") + variant.getName();
 
-			this.registerItemRenderer(names[i], Item.getItemFromBlock(block), subtype.getMetadata());
+			this.registerItemRenderer(names[i], Item.getItemFromBlock(block), variant.getMeta());
 		}
 
 		ModelBakery.addVariantName(Item.getItemFromBlock(block), names);
