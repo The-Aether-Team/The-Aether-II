@@ -22,7 +22,7 @@ group= "net.aetherteam.aether"
 archivesBaseName = "aether"
 
 minecraft {
-    version = "1.8-11.14.1.1341"
+    version = "1.8-11.14.1.1354"
     runDir = "eclipse"
 
     mappings = "snapshot_20141130"
