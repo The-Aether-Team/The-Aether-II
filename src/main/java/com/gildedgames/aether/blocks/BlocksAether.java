@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import com.gildedgames.aether.Aether;
 import com.gildedgames.aether.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.blocks.natural.BlockAetherDirt;
+import com.gildedgames.aether.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.client.models.ModelsAether;
 import com.gildedgames.aether.items.itemblocks.ItemBlockVariants;
@@ -19,6 +20,8 @@ public class BlocksAether
 
 	public BlockAercloud aercloud;
 
+	public BlockAetherLog aether_log;
+
 	public void preInit()
 	{
 		this.aether_dirt = this.registerBlock("aether_dirt", ItemBlockVariants.class, new BlockAetherDirt());
@@ -26,6 +29,8 @@ public class BlocksAether
 		this.holystone = this.registerBlock("holystone", ItemBlockVariants.class, new BlockHolystone());
 
 		this.aercloud = this.registerBlock("aercloud", ItemBlockVariants.class, new BlockAercloud());
+
+		this.aether_log = this.registerBlock("aether_log", ItemBlockVariants.class, new BlockAetherLog());
 	}
 
 	private <T extends Block> T registerBlock(String name, Class<? extends ItemBlock> itemblock, T block)
@@ -45,6 +50,7 @@ public class BlocksAether
 			models.registerItemRenderer(this.aether_dirt, BlockAetherDirt.GRASS_TYPE.getAllowedValues());
 			models.registerItemRenderer(this.holystone, BlockHolystone.HOLYSTONE_TYPE.getAllowedValues());
 			models.registerItemRenderer(this.aercloud, BlockAercloud.AERCLOUD_TYPE.getAllowedValues());
+			models.registerItemRenderer(this.aether_log, BlockAetherLog.LOG_TYPE.getAllowedValues());
 		}
 	}
 }

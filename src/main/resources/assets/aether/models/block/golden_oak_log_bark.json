@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "aether:blocks/golden_oak_log_side"
+    }
+}

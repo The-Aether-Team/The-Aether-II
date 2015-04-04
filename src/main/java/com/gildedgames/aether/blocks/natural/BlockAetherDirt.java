@@ -25,9 +25,9 @@ import com.gildedgames.aether.creativetabs.AetherCreativeTabs;
 public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 {
 	public static final BlockVariant
-	AETHER_DIRT = new BlockVariant(0, "aether_dirt"),
-	AETHER_GRASS = new BlockVariant(1, "aether_grass"),
-	ENCHANTED_AETHER_GRASS = new BlockVariant(2, "aether_enchanted_grass");
+			AETHER_DIRT = new BlockVariant(0, "aether_dirt"),
+			AETHER_GRASS = new BlockVariant(1, "aether_grass"),
+			ENCHANTED_AETHER_GRASS = new BlockVariant(2, "aether_enchanted_grass");
 
 	public static final PropertyVariant GRASS_TYPE = PropertyVariant.create("variant", AETHER_DIRT, AETHER_GRASS, ENCHANTED_AETHER_GRASS);
 

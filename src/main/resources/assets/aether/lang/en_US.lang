@@ -1,3 +1,4 @@
+# Aether Blocks
 tile.aether_dirt.aether_dirt.name=Aether Dirt
 tile.aether_dirt.aether_grass.name=Aether Grass
 tile.aether_dirt.aether_enchanted_grass.name=Enchanted Aether Grass
@@ -10,5 +11,8 @@ tile.aercloud.aercloud_green.name=Green Aercloud
 tile.aercloud.aercloud_golden.name=Golden Aercloud
 tile.aercloud.aercloud_storm.name=Storm Aercloud
 tile.aercloud.aercloud_purple.name=Purple Aercloud
+tile.aether_log.skyroot_log.name=Skyroot Log
+tile.aether_log.golden_oak_log.name=Golden Oak Log
 
+# Creative Tabs
 itemGroup.aetherBlocks=Aether Blocks
