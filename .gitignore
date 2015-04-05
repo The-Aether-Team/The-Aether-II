@@ -12,9 +12,9 @@ bin
 /.gradle/
 /build/
 /bin/
-gradle
-gradlew.bat
-gradlew
+
+# Gradle Wrapper
+/gradle/wrapper/dists
 
 # Windows image file caches
 Thumbs.db
