@@ -16,13 +16,13 @@ pushd ..
 :: Configure Aether-1.8
 call gradlew setupDecompWorkspace eclipse
 
-:: Pop back into the scripts directoy
-popd
-
 echo.
 echo Finished. You can now change your workspace in Eclipse to:
 echo %cd%\eclipse\
 echo.
+
+:: Pop back into the scripts directoy
+popd
 
 pause
 exit

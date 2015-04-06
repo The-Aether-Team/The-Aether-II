@@ -11,8 +11,7 @@ call gradlew.bat setupDecompWorkspace
 popd
 
 echo.
-echo Finished. You can now change your workspace in Eclipse to:
-echo %cd%\eclipse\
+echo Finished.
 echo.
 
 pause
