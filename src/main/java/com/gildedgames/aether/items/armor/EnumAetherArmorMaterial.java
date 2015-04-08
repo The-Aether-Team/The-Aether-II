@@ -2,7 +2,7 @@ package com.gildedgames.aether.items.armor;
 
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 
-public enum EnumAetherArmorMaterial 
+public enum EnumAetherArmorMaterial
 {
 	Zanite
 	{
@@ -12,7 +12,7 @@ public enum EnumAetherArmorMaterial
 			return ArmorMaterial.IRON;
 		}
 	},
-	
+
 	Gravitite
 	{
 		@Override
@@ -21,6 +21,6 @@ public enum EnumAetherArmorMaterial
 			return ArmorMaterial.DIAMOND;
 		}
 	};
-	
+
 	public abstract ArmorMaterial getArmorMaterial();
 }

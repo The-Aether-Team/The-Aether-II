@@ -47,7 +47,7 @@ public class AetherCreativeTabs
 			return Aether.getItems().zanite_pickaxe;
 		}
 	};
-	
+
 	public static final CreativeTabs tabArmor = new CreativeTabs("aetherArmor")
 	{
 		@Override
