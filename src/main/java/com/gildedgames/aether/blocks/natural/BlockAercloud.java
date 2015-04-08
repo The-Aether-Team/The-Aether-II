@@ -8,6 +8,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -67,7 +68,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	@SideOnly(Side.CLIENT)
 	public EnumWorldBlockLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.TRANSLUCENT;
+		return Minecraft.isFancyGraphicsEnabled() ? EnumWorldBlockLayer.TRANSLUCENT : EnumWorldBlockLayer.SOLID;
 	}
 
 	@Override
