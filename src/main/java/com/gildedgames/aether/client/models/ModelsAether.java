@@ -49,9 +49,23 @@ public class ModelsAether
 	 * @param block The block to register
 	 * @param meta The metadata to bind to
 	 */
-	public void registerItemRenderer(Block block, int meta)
+	public void registerItemRenderer(int meta, Block block)
 	{
-		this.registerItemRenderer(Item.getItemFromBlock(block), meta);
+		this.registerItemRenderer(meta, Item.getItemFromBlock(block));
+	}
+
+	/**
+	 * Registers multiples item renderers at the same metadata index.
+	 * This assumes the unlocalized name of the item is the model name.
+	 * @param meta The meta to bind to
+	 * @param items Array of items to register
+	 */
+	public void registerItemRenderers(int meta, Item... items)
+	{
+		for (Item item : items)
+		{
+			this.registerItemRenderer(meta, item);
+		}
 	}
 
 	/**
@@ -60,7 +74,7 @@ public class ModelsAether
 	 * @param item The item to register
 	 * @param meta The meta to bind to
 	 */
-	public void registerItemRenderer(Item item, int meta)
+	public void registerItemRenderer(int meta, Item item)
 	{
 		String name = (Aether.MOD_ID + ":") + item.getUnlocalizedName().substring(5);
 

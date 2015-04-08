@@ -28,8 +28,8 @@ import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
 public class BlockAetherLog extends Block implements IAetherBlockWithVariants
 {
 	public static final BlockVariant
-	SKYROOT_LOG = new BlockVariant(0, "skyroot_log"),
-	GOLDEN_OAK_LOG = new BlockVariant(4, "golden_oak_log");
+			SKYROOT_LOG = new BlockVariant(0, "skyroot_log"),
+			GOLDEN_OAK_LOG = new BlockVariant(4, "golden_oak_log");
 
 	public static final PropertyVariant LOG_TYPE = PropertyVariant.create("variant", SKYROOT_LOG, GOLDEN_OAK_LOG);
 
