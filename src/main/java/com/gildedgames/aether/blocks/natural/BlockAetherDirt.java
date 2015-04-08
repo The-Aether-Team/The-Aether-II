@@ -17,7 +17,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.gildedgames.aether.Aether;
-import com.gildedgames.aether.AetherCreativeTabs;
 import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
 import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
 import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
@@ -25,9 +24,9 @@ import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
 public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 {
 	public static final BlockVariant
-	AETHER_DIRT = new BlockVariant(0, "aether_dirt"),
-	AETHER_GRASS = new BlockVariant(1, "aether_grass"),
-	ENCHANTED_AETHER_GRASS = new BlockVariant(2, "aether_enchanted_grass");
+			AETHER_DIRT = new BlockVariant(0, "aether_dirt"),
+			AETHER_GRASS = new BlockVariant(1, "aether_grass"),
+			ENCHANTED_AETHER_GRASS = new BlockVariant(2, "aether_enchanted_grass");
 
 	public static final PropertyVariant GRASS_TYPE = PropertyVariant.create("variant", AETHER_DIRT, AETHER_GRASS, ENCHANTED_AETHER_GRASS);
 
@@ -39,7 +38,7 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 		this.setTickRandomly(true);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(GRASS_TYPE, AETHER_DIRT));
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
+		this.setCreativeTab(Aether.getCreativeTabs().tabBlocks);
 	}
 
 	@Override

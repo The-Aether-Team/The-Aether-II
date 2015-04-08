@@ -4,7 +4,6 @@ import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.gildedgames.aether.Aether;
-import com.gildedgames.aether.AetherCreativeTabs;
 import com.gildedgames.aether.client.models.ModelsAether;
 import com.gildedgames.aether.items.armor.EnumAetherArmorMaterial;
 import com.gildedgames.aether.items.armor.ItemAetherArmor;
@@ -34,8 +33,8 @@ public class ItemsAether
 
 	public void preInit()
 	{
-		this.skyroot_stick = this.registerItem("skyroot_stick", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
-		this.ambrosium_shard = this.registerItem("ambrosium_shard", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
+		this.skyroot_stick = this.registerItem("skyroot_stick", new Item().setCreativeTab(Aether.getCreativeTabs().tabMaterials));
+		this.ambrosium_shard = this.registerItem("ambrosium_shard", new Item().setCreativeTab(Aether.getCreativeTabs().tabMaterials));
 
 		this.skyroot_axe = this.registerItem("skyroot_axe", new ItemAetherAxe(EnumAetherToolMaterial.SKYROOT));
 		this.skyroot_pickaxe = this.registerItem("skyroot_pickaxe", new ItemAetherPickaxe(EnumAetherToolMaterial.SKYROOT));

@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-import com.gildedgames.aether.AetherCreativeTabs;
+import com.gildedgames.aether.Aether;
 
 public class ItemAetherAxe extends ItemAxe
 {
@@ -17,7 +17,7 @@ public class ItemAetherAxe extends ItemAxe
 	{
 		super(type.getToolMaterial());
 
-		this.setCreativeTab(AetherCreativeTabs.tabTools);
+		this.setCreativeTab(Aether.getCreativeTabs().tabTools);
 		this.toolType = type;
 	}
 

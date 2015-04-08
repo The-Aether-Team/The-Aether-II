@@ -4,7 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
-import com.gildedgames.aether.AetherCreativeTabs;
+import com.gildedgames.aether.Aether;
 
 public class ItemAetherArmor extends ItemArmor
 {
@@ -14,7 +14,7 @@ public class ItemAetherArmor extends ItemArmor
 	{
 		super(material.getArmorMaterial(), renderIndex, armorType);
 
-		this.setCreativeTab(AetherCreativeTabs.tabArmor);
+		this.setCreativeTab(Aether.getCreativeTabs().tabArmor);
 		this.armorMaterial = material;
 	}
 
