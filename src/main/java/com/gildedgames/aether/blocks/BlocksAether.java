@@ -67,7 +67,7 @@ public class BlocksAether
 			models.registerItemRenderer(this.holystone, BlockHolystone.HOLYSTONE_TYPE.getAllowedValues());
 			models.registerItemRenderer(this.aercloud, BlockAercloud.AERCLOUD_TYPE.getAllowedValues());
 			models.registerItemRenderer(this.aether_log, BlockAetherLog.LOG_TYPE.getAllowedValues());
-			models.registerItemRenderer(this.skyroot_planks, 0);
+			models.registerItemRenderer(0, this.skyroot_planks);
 		}
 	}
 }

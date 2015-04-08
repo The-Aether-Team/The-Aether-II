@@ -17,7 +17,21 @@ tile.skyroot_planks.name=Skyroot Planks
 
 # Aether Items
 item.skyroot_stick.name=Skyroot Stick
+item.ambrosium_shard.name=Ambrosium Shard
+item.skyroot_pickaxe.name=Skyroot Pickaxe
+item.skyroot_axe.name=Skyroot Axe
+item.skyroot_shovel.name=Skyroot Shovel
+item.holystone_pickaxe.name=Holystone Pickaxe
+item.holystone_axe.name=Holystone Axe
+item.holystone_shovel.name=Holystone Shovel
+item.zanite_pickaxe.name=Zanite Pickaxe
+item.zanite_axe.name=Zanite Axe
+item.zanite_shovel.name=Zanite Shovel
+item.gravitite_pickaxe.name=Gravitite Pickaxe
+item.gravitite_axe.name=Gravitite Axe
+item.gravitite_shovel.name=Gravitite Shovel
 
 # Creative Tabs
 itemGroup.aetherBlocks=Aether Blocks
 itemGroup.aetherMaterials=Aether Materials
+itemGroup.aetherTools=Aether Tools

@@ -9,6 +9,8 @@ import com.gildedgames.aether.blocks.natural.BlockAetherDirt;
 
 public class AetherCreativeTabs
 {
+	// TODO: Make this not terrible.
+
 	public static final CreativeTabs tabBlocks = new CreativeTabs("aetherBlocks")
 	{
 		@Override
@@ -33,6 +35,16 @@ public class AetherCreativeTabs
 		public Item getTabIconItem()
 		{
 			return Aether.getItems().skyroot_stick;
+		}
+	};
+
+	public static final CreativeTabs tabTools = new CreativeTabs("aetherTools")
+	{
+		@Override
+		@SideOnly(Side.CLIENT)
+		public Item getTabIconItem()
+		{
+			return Aether.getItems().zanite_pickaxe;
 		}
 	};
 }
