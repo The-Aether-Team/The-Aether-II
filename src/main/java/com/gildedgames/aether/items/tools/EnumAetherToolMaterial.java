@@ -1,7 +1,9 @@
 package com.gildedgames.aether.items.tools;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
@@ -29,6 +31,16 @@ public enum EnumAetherToolMaterial
 	{
 		@Override
 		public void onBlockDestroyed(BlockPos pos, World world)
+		{
+			this.dropAmbrosium(pos, world);
+		}
+		
+		public void onEntityAttacked(ItemStack stack, EntityLivingBase prey, EntityLivingBase predator)
+		{
+			this.dropAmbrosium(prey.getPosition(), prey.getEntityWorld());
+		}
+		
+		private void dropAmbrosium(BlockPos pos, World world)
 		{
 			// 5% Chance
 			if (world.rand.nextInt(100) <= 5)
@@ -73,6 +85,18 @@ public enum EnumAetherToolMaterial
 			return ToolMaterial.EMERALD;
 		}
 
+		@Override
+		public void onEntityAttacked(ItemStack stack, EntityLivingBase prey, EntityLivingBase predator)
+		{
+			if (predator instanceof EntityPlayer && predator.isSneaking())
+			{
+				if (prey.hurtTime > 0 || prey.deathTime > 0)
+				{
+					prey.addVelocity(0.0D, 1.0D, 0.0D);
+				}
+			}
+		}
+
 		// TODO: Floating blocks!
 	};
 
@@ -82,6 +106,11 @@ public enum EnumAetherToolMaterial
 	}
 
 	public void onBlockActivated(BlockPos pos, World world)
+	{
+		return;
+	}
+	
+	public void onEntityAttacked(ItemStack stack, EntityLivingBase prey, EntityLivingBase predator)
 	{
 		return;
 	}
