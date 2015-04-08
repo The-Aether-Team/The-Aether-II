@@ -30,8 +30,17 @@ item.zanite_shovel.name=Zanite Shovel
 item.gravitite_pickaxe.name=Gravitite Pickaxe
 item.gravitite_axe.name=Gravitite Axe
 item.gravitite_shovel.name=Gravitite Shovel
+item.zanite_helmet.name=Zanite Helmet
+item.zanite_chestplate.name=Zanite Chestplate
+item.zanite_leggings.name=Zanite Leggings
+item.zanite_boots.name=Zanite Boots
+item.gravitite_helmet.name=Gravitite Helmet
+item.gravitite_chestplate.name=Gravitite Chestplate
+item.gravitite_leggings.name=Gravitite Leggings
+item.gravitite_boots.name=Gravitite Boots
 
 # Creative Tabs
 itemGroup.aetherBlocks=Aether Blocks
 itemGroup.aetherMaterials=Aether Materials
 itemGroup.aetherTools=Aether Tools
+itemGroup.aetherArmor=Aether Armor
