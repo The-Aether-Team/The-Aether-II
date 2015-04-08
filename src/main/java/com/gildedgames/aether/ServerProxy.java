@@ -2,7 +2,7 @@ package com.gildedgames.aether;
 
 import com.gildedgames.aether.client.models.ModelsAether;
 
-public class CommonProxy
+public class ServerProxy
 {
 	public void init()
 	{

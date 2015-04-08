@@ -23,8 +23,8 @@ public class Aether
 
 	public static final String MOD_VERSION = "1.8-1.0";
 
-	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.CommonProxy")
-	public static CommonProxy PROXY;
+	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.ServerProxy")
+	public static ServerProxy PROXY;
 
 	private BlocksAether blocks = new BlocksAether();
 
