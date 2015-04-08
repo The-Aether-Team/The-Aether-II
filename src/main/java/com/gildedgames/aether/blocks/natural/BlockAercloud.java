@@ -31,12 +31,12 @@ import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
 public class BlockAercloud extends Block implements IAetherBlockWithVariants
 {
 	public static final BlockVariant
-			COLD_AERCLOUD = new BlockVariant(0, "aercloud_cold"),
-			BLUE_AERCLOUD = new BlockVariant(1, "aercloud_blue"),
-			GREEN_AERCLOUD = new BlockVariant(2, "aercloud_green"),
-			GOLDEN_AERCLOUD = new BlockVariant(3, "aercloud_golden"),
-			STORM_AERCLOUD = new BlockVariant(4, "aercloud_storm"),
-			PURPLE_AERCLOUD = new BlockVariant(5, "aercloud_purple");
+	COLD_AERCLOUD = new BlockVariant(0, "aercloud_cold"),
+	BLUE_AERCLOUD = new BlockVariant(1, "aercloud_blue"),
+	GREEN_AERCLOUD = new BlockVariant(2, "aercloud_green"),
+	GOLDEN_AERCLOUD = new BlockVariant(3, "aercloud_golden"),
+	STORM_AERCLOUD = new BlockVariant(4, "aercloud_storm"),
+	PURPLE_AERCLOUD = new BlockVariant(5, "aercloud_purple");
 
 	public static final PropertyVariant AERCLOUD_TYPE = PropertyVariant.create("variant", COLD_AERCLOUD, BLUE_AERCLOUD, GREEN_AERCLOUD, GOLDEN_AERCLOUD, STORM_AERCLOUD, PURPLE_AERCLOUD);
 

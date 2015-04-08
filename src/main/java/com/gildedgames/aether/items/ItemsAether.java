@@ -26,9 +26,11 @@ public class ItemsAether
 
 	public ItemAetherShovel skyroot_shovel, holystone_shovel, zanite_shovel, gravitite_shovel;
 
-	public ItemAetherArmor zanite_helmet, zanite_chestplate, zanite_leggings, zanite_boots, gravitite_helmet, gravitite_chestplate, gravitite_leggings, gravitite_boots;
-
 	public ItemAetherSword skyroot_sword, holystone_sword, zanite_sword, gravitite_sword;
+
+	public ItemAetherArmor zanite_helmet, zanite_chestplate, zanite_leggings, zanite_boots;
+
+	public ItemAetherArmor gravitite_helmet, gravitite_chestplate, gravitite_leggings, gravitite_boots;
 
 	public void preInit()
 	{
@@ -89,20 +91,13 @@ public class ItemsAether
 			models.registerItemRenderers(0, this.zanite_pickaxe, this.zanite_axe, this.zanite_shovel);
 			models.registerItemRenderers(0, this.gravitite_pickaxe, this.gravitite_axe, this.gravitite_shovel);
 
-			models.registerItemRenderer(0, this.zanite_helmet);
-			models.registerItemRenderer(0, this.zanite_chestplate);
-			models.registerItemRenderer(0, this.zanite_leggings);
-			models.registerItemRenderer(0, this.zanite_boots);
-
-			models.registerItemRenderer(0, this.gravitite_helmet);
-			models.registerItemRenderer(0, this.gravitite_chestplate);
-			models.registerItemRenderer(0, this.gravitite_leggings);
-			models.registerItemRenderer(0, this.gravitite_boots);
-
 			models.registerItemRenderers(0, this.skyroot_pickaxe, this.skyroot_axe, this.skyroot_shovel, this.skyroot_sword);
 			models.registerItemRenderers(0, this.holystone_pickaxe, this.holystone_axe, this.holystone_shovel, this.holystone_sword);
 			models.registerItemRenderers(0, this.zanite_pickaxe, this.zanite_axe, this.zanite_shovel, this.zanite_sword);
 			models.registerItemRenderers(0, this.gravitite_pickaxe, this.gravitite_axe, this.gravitite_shovel, this.gravitite_sword);
+
+			models.registerItemRenderers(0, this.zanite_helmet, this.zanite_chestplate, this.zanite_leggings, this.zanite_boots);
+			models.registerItemRenderers(0, this.gravitite_helmet, this.gravitite_chestplate, this.gravitite_leggings, this.gravitite_boots);
 		}
 	}
 }

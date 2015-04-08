@@ -35,7 +35,7 @@ public class ItemAetherSword extends ItemSword
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
 	{
-		toolType.onEntityAttacked(stack, target, attacker);
+		this.toolType.onEntityAttacked(stack, target, attacker);
 
 		return super.hitEntity(stack, target, attacker);
 	}
