@@ -38,19 +38,24 @@ public class ItemsAether
 		this.ambrosium_shard = this.registerItem("ambrosium_shard", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
 
 		this.skyroot_axe = this.registerItem("skyroot_axe", new ItemAetherAxe(EnumAetherToolMaterial.SKYROOT));
-		this.holystone_axe = this.registerItem("holystone_axe", new ItemAetherAxe(EnumAetherToolMaterial.HOLYSTONE));
-		this.zanite_axe = this.registerItem("zanite_axe", new ItemAetherAxe(EnumAetherToolMaterial.ZANITE));
-		this.gravitite_axe = this.registerItem("gravitite_axe", new ItemAetherAxe(EnumAetherToolMaterial.GRAVITITE));
-
 		this.skyroot_pickaxe = this.registerItem("skyroot_pickaxe", new ItemAetherPickaxe(EnumAetherToolMaterial.SKYROOT));
-		this.holystone_pickaxe = this.registerItem("holystone_pickaxe", new ItemAetherPickaxe(EnumAetherToolMaterial.HOLYSTONE));
-		this.zanite_pickaxe = this.registerItem("zanite_pickaxe", new ItemAetherPickaxe(EnumAetherToolMaterial.ZANITE));
-		this.gravitite_pickaxe = this.registerItem("gravitite_pickaxe", new ItemAetherPickaxe(EnumAetherToolMaterial.GRAVITITE));
-
 		this.skyroot_shovel = this.registerItem("skyroot_shovel", new ItemAetherShovel(EnumAetherToolMaterial.SKYROOT));
+		this.skyroot_sword = this.registerItem("skyroot_sword", new ItemAetherSword(EnumAetherToolMaterial.SKYROOT));
+
+		this.holystone_axe = this.registerItem("holystone_axe", new ItemAetherAxe(EnumAetherToolMaterial.HOLYSTONE));
+		this.holystone_pickaxe = this.registerItem("holystone_pickaxe", new ItemAetherPickaxe(EnumAetherToolMaterial.HOLYSTONE));
 		this.holystone_shovel = this.registerItem("holystone_shovel", new ItemAetherShovel(EnumAetherToolMaterial.HOLYSTONE));
+		this.holystone_sword = this.registerItem("holystone_sword", new ItemAetherSword(EnumAetherToolMaterial.HOLYSTONE));
+
+		this.zanite_axe = this.registerItem("zanite_axe", new ItemAetherAxe(EnumAetherToolMaterial.ZANITE));
+		this.zanite_pickaxe = this.registerItem("zanite_pickaxe", new ItemAetherPickaxe(EnumAetherToolMaterial.ZANITE));
 		this.zanite_shovel = this.registerItem("zanite_shovel", new ItemAetherShovel(EnumAetherToolMaterial.ZANITE));
+		this.zanite_sword = this.registerItem("zanite_sword", new ItemAetherSword(EnumAetherToolMaterial.ZANITE));
+
+		this.gravitite_axe = this.registerItem("gravitite_axe", new ItemAetherAxe(EnumAetherToolMaterial.GRAVITITE));
+		this.gravitite_pickaxe = this.registerItem("gravitite_pickaxe", new ItemAetherPickaxe(EnumAetherToolMaterial.GRAVITITE));
 		this.gravitite_shovel = this.registerItem("gravitite_shovel", new ItemAetherShovel(EnumAetherToolMaterial.GRAVITITE));
+		this.gravitite_sword = this.registerItem("gravitite_sword", new ItemAetherSword(EnumAetherToolMaterial.GRAVITITE));
 
 		this.zanite_helmet = this.registerItem("zanite_helmet", new ItemAetherArmor(EnumAetherArmorMaterial.Zanite, 0, 0));
 		this.zanite_chestplate = this.registerItem("zanite_chestplate", new ItemAetherArmor(EnumAetherArmorMaterial.Zanite, 0, 1));
@@ -61,12 +66,6 @@ public class ItemsAether
 		this.gravitite_chestplate = this.registerItem("gravitite_chestplate", new ItemAetherArmor(EnumAetherArmorMaterial.Gravitite, 0, 1));
 		this.gravitite_leggings = this.registerItem("gravitite_leggings", new ItemAetherArmor(EnumAetherArmorMaterial.Gravitite, 0, 2));
 		this.gravitite_boots = this.registerItem("gravitite_boots", new ItemAetherArmor(EnumAetherArmorMaterial.Gravitite, 0, 3));
-
-		this.skyroot_sword = this.registerItem("skyroot_sword", new ItemAetherSword(EnumAetherToolMaterial.SKYROOT));
-		this.holystone_sword = this.registerItem("holystone_sword", new ItemAetherSword(EnumAetherToolMaterial.HOLYSTONE));
-		this.zanite_sword = this.registerItem("zanite_sword", new ItemAetherSword(EnumAetherToolMaterial.ZANITE));
-		this.gravitite_sword = this.registerItem("gravitite_sword", new ItemAetherSword(EnumAetherToolMaterial.GRAVITITE));
-
 	}
 
 	private <T extends Item> T registerItem(String name, T item)
@@ -85,11 +84,6 @@ public class ItemsAether
 
 			models.registerItemRenderer(0, this.skyroot_stick);
 			models.registerItemRenderer(0, this.ambrosium_shard);
-
-			models.registerItemRenderers(0, this.skyroot_pickaxe, this.skyroot_axe, this.skyroot_shovel);
-			models.registerItemRenderers(0, this.holystone_pickaxe, this.holystone_axe, this.holystone_shovel);
-			models.registerItemRenderers(0, this.zanite_pickaxe, this.zanite_axe, this.zanite_shovel);
-			models.registerItemRenderers(0, this.gravitite_pickaxe, this.gravitite_axe, this.gravitite_shovel);
 
 			models.registerItemRenderers(0, this.skyroot_pickaxe, this.skyroot_axe, this.skyroot_shovel, this.skyroot_sword);
 			models.registerItemRenderers(0, this.holystone_pickaxe, this.holystone_axe, this.holystone_shovel, this.holystone_sword);
