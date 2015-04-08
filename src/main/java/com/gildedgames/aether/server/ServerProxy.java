@@ -1,8 +1,8 @@
-package com.gildedgames.aether;
+package com.gildedgames.aether.server;
 
 import com.gildedgames.aether.client.models.ModelsAether;
 
-public class CommonProxy
+public class ServerProxy
 {
 	public void init()
 	{

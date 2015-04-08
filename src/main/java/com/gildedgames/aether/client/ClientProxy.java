@@ -1,9 +1,9 @@
 package com.gildedgames.aether.client;
 
-import com.gildedgames.aether.CommonProxy;
 import com.gildedgames.aether.client.models.ModelsAether;
+import com.gildedgames.aether.server.ServerProxy;
 
-public class ClientProxy extends CommonProxy
+public class ClientProxy extends ServerProxy
 {
 	private ModelsAether models;
 

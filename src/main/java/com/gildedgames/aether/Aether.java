@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import com.gildedgames.aether.blocks.BlocksAether;
 import com.gildedgames.aether.items.ItemsAether;
 import com.gildedgames.aether.recipes.RecipesAether;
+import com.gildedgames.aether.server.ServerProxy;
 
 @Mod(name = Aether.MOD_NAME, modid = Aether.MOD_ID, version = Aether.MOD_VERSION)
 public class Aether
@@ -23,8 +24,8 @@ public class Aether
 
 	public static final String MOD_VERSION = "1.8-1.0";
 
-	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.CommonProxy")
-	public static CommonProxy PROXY;
+	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.server.ServerProxy")
+	public static ServerProxy PROXY;
 
 	private BlocksAether blocks = new BlocksAether();
 
