@@ -21,11 +21,11 @@ import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
 public class BlockHolystone extends Block implements IAetherBlockWithVariants
 {
 	public static final BlockVariant
-			NORMAL_HOLYSTONE = new BlockVariant(0, "holystone"),
-			MOSSY_HOLYSTONE = new BlockVariant(1, "mossy_holystone"),
-			BLOOD_MOSS_HOLYSTONE = new BlockVariant(2, "blood_holystone");
+	NORMAL_HOLYSTONE = new BlockVariant(0, "holystone"),
+	MOSSY_HOLYSTONE = new BlockVariant(1, "mossy_holystone"),
+	BLOOD_MOSS_HOLYSTONE = new BlockVariant(2, "blood_holystone");
 
-	public static final PropertyVariant HOLYSTONE_TYPE = PropertyVariant.create("variant", NORMAL_HOLYSTONE, MOSSY_HOLYSTONE, BLOOD_MOSS_HOLYSTONE);
+	public static final PropertyVariant HOLYSTONE_VARIANT = PropertyVariant.create("variant", NORMAL_HOLYSTONE, MOSSY_HOLYSTONE, BLOOD_MOSS_HOLYSTONE);
 
 	public BlockHolystone()
 	{
@@ -33,7 +33,7 @@ public class BlockHolystone extends Block implements IAetherBlockWithVariants
 		this.setHardness(2.0F);
 		this.setStepSound(Block.soundTypeStone);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(HOLYSTONE_TYPE, NORMAL_HOLYSTONE));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(HOLYSTONE_VARIANT, NORMAL_HOLYSTONE));
 		this.setCreativeTab(Aether.getCreativeTabs().tabBlocks);
 	}
 
@@ -42,7 +42,7 @@ public class BlockHolystone extends Block implements IAetherBlockWithVariants
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
 	{
-		for (BlockVariant variant : HOLYSTONE_TYPE.getAllowedValues())
+		for (BlockVariant variant : HOLYSTONE_VARIANT.getAllowedValues())
 		{
 			list.add(new ItemStack(itemIn, 1, variant.getMeta()));
 		}
@@ -51,30 +51,30 @@ public class BlockHolystone extends Block implements IAetherBlockWithVariants
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(HOLYSTONE_TYPE, HOLYSTONE_TYPE.getVariantFromMeta(meta));
+		return this.getDefaultState().withProperty(HOLYSTONE_VARIANT, HOLYSTONE_VARIANT.getVariantFromMeta(meta));
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return ((BlockVariant) state.getValue(HOLYSTONE_TYPE)).getMeta();
+		return ((BlockVariant) state.getValue(HOLYSTONE_VARIANT)).getMeta();
 	}
 
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { HOLYSTONE_TYPE });
+		return new BlockState(this, new IProperty[] { HOLYSTONE_VARIANT });
 	}
 
 	@Override
 	public int damageDropped(IBlockState state)
 	{
-		return ((BlockVariant) state.getValue(HOLYSTONE_TYPE)).getMeta();
+		return ((BlockVariant) state.getValue(HOLYSTONE_VARIANT)).getMeta();
 	}
 
 	@Override
-	public String getVariantNameFromStack(ItemStack stack)
+	public String getUnlocalizedNameFromStack(ItemStack stack)
 	{
-		return HOLYSTONE_TYPE.getVariantFromMeta(stack.getMetadata()).getName();
+		return HOLYSTONE_VARIANT.getVariantFromMeta(stack.getMetadata()).getName();
 	}
 }

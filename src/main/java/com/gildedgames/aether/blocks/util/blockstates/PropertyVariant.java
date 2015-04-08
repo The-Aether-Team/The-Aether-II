@@ -1,24 +1,24 @@
 package com.gildedgames.aether.blocks.util.blockstates;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 
 import net.minecraft.block.properties.IProperty;
 
-import com.google.common.collect.ImmutableSet;
-
 public class PropertyVariant implements IProperty
 {
 	private String name;
 
-	private ImmutableSet<BlockVariant> valuesSet;
+	private ArrayList<BlockVariant> values;
 
 	private HashMap<Integer, BlockVariant> metaMap;
 
 	protected PropertyVariant(String name, BlockVariant... variants)
 	{
 		this.name = name;
-		this.valuesSet = ImmutableSet.copyOf(variants);
+		this.values = new ArrayList<BlockVariant>(Arrays.asList(variants));
 		this.metaMap = new HashMap<Integer, BlockVariant>();
 
 		for (BlockVariant variant : variants)
@@ -41,7 +41,7 @@ public class PropertyVariant implements IProperty
 	@Override
 	public Collection<BlockVariant> getAllowedValues()
 	{
-		return this.valuesSet;
+		return this.values;
 	}
 
 	@Override
@@ -50,8 +50,8 @@ public class PropertyVariant implements IProperty
 		return BlockVariant.class;
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
+	@SuppressWarnings("rawtypes")
 	public String getName(Comparable value)
 	{
 		return ((BlockVariant) value).getName();

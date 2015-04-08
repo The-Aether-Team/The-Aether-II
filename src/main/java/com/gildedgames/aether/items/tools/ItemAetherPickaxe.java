@@ -11,14 +11,14 @@ import com.gildedgames.aether.Aether;
 
 public class ItemAetherPickaxe extends ItemPickaxe
 {
-	private EnumAetherToolMaterial toolType;
+	private EnumAetherToolMaterial aetherToolMaterial;
 
-	public ItemAetherPickaxe(EnumAetherToolMaterial type)
+	public ItemAetherPickaxe(EnumAetherToolMaterial toolMaterial)
 	{
-		super(type.getToolMaterial());
+		super(toolMaterial.getToolMaterial());
 
 		this.setCreativeTab(Aether.getCreativeTabs().tabTools);
-		this.toolType = type;
+		this.aetherToolMaterial = toolMaterial;
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class ItemAetherPickaxe extends ItemPickaxe
 	{
 		if (!world.isRemote)
 		{
-			this.toolType.onBlockDestroyed(pos, world);
+			this.aetherToolMaterial.onBlockDestroyed(pos, world);
 		}
 
 		return super.onBlockDestroyed(stack, world, block, pos, entity);
@@ -35,7 +35,7 @@ public class ItemAetherPickaxe extends ItemPickaxe
 	@Override
 	public float getStrVsBlock(ItemStack stack, Block block)
 	{
-		return this.toolType.getDigSpeed(stack, block, super.getStrVsBlock(stack, block));
+		return this.aetherToolMaterial.getDigSpeed(stack, block, super.getStrVsBlock(stack, block));
 	}
 
 }

@@ -62,10 +62,10 @@ public class BlocksAether
 		{
 			ModelsAether models = Aether.PROXY.getModels();
 
-			models.registerItemRenderer(this.aether_dirt, BlockAetherDirt.GRASS_TYPE.getAllowedValues());
-			models.registerItemRenderer(this.holystone, BlockHolystone.HOLYSTONE_TYPE.getAllowedValues());
-			models.registerItemRenderer(this.aercloud, BlockAercloud.AERCLOUD_TYPE.getAllowedValues());
-			models.registerItemRenderer(this.aether_log, BlockAetherLog.LOG_TYPE.getAllowedValues());
+			models.registerItemRenderer(this.aether_dirt, BlockAetherDirt.GRASS_VARIANT.getAllowedValues());
+			models.registerItemRenderer(this.holystone, BlockHolystone.HOLYSTONE_VARIANT.getAllowedValues());
+			models.registerItemRenderer(this.aercloud, BlockAercloud.AERCLOUD_VARIANT.getAllowedValues());
+			models.registerItemRenderer(this.aether_log, BlockAetherLog.LOG_VARIANT.getAllowedValues());
 			models.registerItemRenderer(0, this.skyroot_planks);
 		}
 	}

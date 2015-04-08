@@ -4,7 +4,7 @@ import net.minecraft.item.ItemArmor.ArmorMaterial;
 
 public enum EnumAetherArmorMaterial
 {
-	Zanite
+	ZANITE
 	{
 		@Override
 		public ArmorMaterial getArmorMaterial()
@@ -15,11 +15,11 @@ public enum EnumAetherArmorMaterial
 		@Override
 		public String getArmorResourceLocation(int armorType)
 		{
-			return armorType == 2 ? "aether:textures/armor/Zanite_2.png" : "aether:textures/armor/Zanite_1.png";
+			return armorType == 2 ? "aether:textures/armor/zanite_layer_2.png" : "aether:textures/armor/zanite_layer_1.png";
 		}
 	},
 
-	Gravitite
+	GRAVITITE
 	{
 		@Override
 		public ArmorMaterial getArmorMaterial()
@@ -30,7 +30,7 @@ public enum EnumAetherArmorMaterial
 		@Override
 		public String getArmorResourceLocation(int armorType)
 		{
-			return armorType == 2 ? "aether:textures/armor/Gravitite_2.png" : "aether:textures/armor/Gravitite_1.png";
+			return armorType == 2 ? "aether:textures/armor/gravitite_layer_2.png" : "aether:textures/armor/gravitite_layer_1.png";
 		}
 	};
 

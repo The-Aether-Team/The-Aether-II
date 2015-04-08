@@ -56,15 +56,15 @@ public class ItemsAether
 		this.gravitite_shovel = this.registerItem("gravitite_shovel", new ItemAetherShovel(EnumAetherToolMaterial.GRAVITITE));
 		this.gravitite_sword = this.registerItem("gravitite_sword", new ItemAetherSword(EnumAetherToolMaterial.GRAVITITE));
 
-		this.zanite_helmet = this.registerItem("zanite_helmet", new ItemAetherArmor(EnumAetherArmorMaterial.Zanite, 0, 0));
-		this.zanite_chestplate = this.registerItem("zanite_chestplate", new ItemAetherArmor(EnumAetherArmorMaterial.Zanite, 0, 1));
-		this.zanite_leggings = this.registerItem("zanite_leggings", new ItemAetherArmor(EnumAetherArmorMaterial.Zanite, 0, 2));
-		this.zanite_boots = this.registerItem("zanite_boots", new ItemAetherArmor(EnumAetherArmorMaterial.Zanite, 0, 3));
+		this.zanite_helmet = this.registerItem("zanite_helmet", new ItemAetherArmor(EnumAetherArmorMaterial.ZANITE, 0, 0));
+		this.zanite_chestplate = this.registerItem("zanite_chestplate", new ItemAetherArmor(EnumAetherArmorMaterial.ZANITE, 0, 1));
+		this.zanite_leggings = this.registerItem("zanite_leggings", new ItemAetherArmor(EnumAetherArmorMaterial.ZANITE, 0, 2));
+		this.zanite_boots = this.registerItem("zanite_boots", new ItemAetherArmor(EnumAetherArmorMaterial.ZANITE, 0, 3));
 
-		this.gravitite_helmet = this.registerItem("gravitite_helmet", new ItemAetherArmor(EnumAetherArmorMaterial.Gravitite, 0, 0));
-		this.gravitite_chestplate = this.registerItem("gravitite_chestplate", new ItemAetherArmor(EnumAetherArmorMaterial.Gravitite, 0, 1));
-		this.gravitite_leggings = this.registerItem("gravitite_leggings", new ItemAetherArmor(EnumAetherArmorMaterial.Gravitite, 0, 2));
-		this.gravitite_boots = this.registerItem("gravitite_boots", new ItemAetherArmor(EnumAetherArmorMaterial.Gravitite, 0, 3));
+		this.gravitite_helmet = this.registerItem("gravitite_helmet", new ItemAetherArmor(EnumAetherArmorMaterial.GRAVITITE, 0, 0));
+		this.gravitite_chestplate = this.registerItem("gravitite_chestplate", new ItemAetherArmor(EnumAetherArmorMaterial.GRAVITITE, 0, 1));
+		this.gravitite_leggings = this.registerItem("gravitite_leggings", new ItemAetherArmor(EnumAetherArmorMaterial.GRAVITITE, 0, 2));
+		this.gravitite_boots = this.registerItem("gravitite_boots", new ItemAetherArmor(EnumAetherArmorMaterial.GRAVITITE, 0, 3));
 	}
 
 	private <T extends Item> T registerItem(String name, T item)

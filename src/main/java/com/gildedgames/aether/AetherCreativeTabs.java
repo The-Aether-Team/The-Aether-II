@@ -25,7 +25,7 @@ public class AetherCreativeTabs
 			this.item = item;
 			this.metadata = metadata;
 		}
-		
+
 		@Override
 		public Item getTabIconItem()
 		{

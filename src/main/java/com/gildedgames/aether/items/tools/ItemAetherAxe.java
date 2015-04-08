@@ -11,20 +11,20 @@ import com.gildedgames.aether.Aether;
 
 public class ItemAetherAxe extends ItemAxe
 {
-	private EnumAetherToolMaterial toolType;
+	private EnumAetherToolMaterial aetherToolMaterial;
 
-	public ItemAetherAxe(EnumAetherToolMaterial type)
+	public ItemAetherAxe(EnumAetherToolMaterial aetherToolMaterial)
 	{
-		super(type.getToolMaterial());
+		super(aetherToolMaterial.getToolMaterial());
 
 		this.setCreativeTab(Aether.getCreativeTabs().tabTools);
-		this.toolType = type;
+		this.aetherToolMaterial = aetherToolMaterial;
 	}
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, BlockPos pos, EntityLivingBase entity)
 	{
-		this.toolType.onBlockDestroyed(pos, world);
+		this.aetherToolMaterial.onBlockDestroyed(pos, world);
 
 		return super.onBlockDestroyed(stack, world, block, pos, entity);
 	}
@@ -32,6 +32,6 @@ public class ItemAetherAxe extends ItemAxe
 	@Override
 	public float getStrVsBlock(ItemStack stack, Block block)
 	{
-		return this.toolType.getDigSpeed(stack, block, super.getStrVsBlock(stack, block));
+		return this.aetherToolMaterial.getDigSpeed(stack, block, super.getStrVsBlock(stack, block));
 	}
 }
