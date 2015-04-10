@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "aether:gravitite_ore" }
-    }
+	"variants": {
+		"normal": {
+			"model": "aether:gravitite_ore"
+		}
+	}
 }

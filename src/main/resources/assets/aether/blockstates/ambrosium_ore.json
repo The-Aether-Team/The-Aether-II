@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "aether:ambrosium_ore" }
-    }
+	"variants": {
+		"normal": {
+			"model": "aether:ambrosium_ore"
+		}
+	}
 }

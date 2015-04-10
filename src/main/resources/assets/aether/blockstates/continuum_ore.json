@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "aether:continuum_ore" }
-    }
+	"variants": {
+		"normal": {
+			"model": "aether:continuum_ore"
+		}
+	}
 }
