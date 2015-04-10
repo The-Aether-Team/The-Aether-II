@@ -21,7 +21,7 @@ public class BlockContinuumOre extends Block
 		this.setStepSound(soundTypeStone);
 		this.setHarvestLevel("pickaxe", 3);
 
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
+		this.setCreativeTab(Aether.getCreativeTabs().tabBlocks);
 
 	}
 

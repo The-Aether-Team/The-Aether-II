@@ -21,7 +21,7 @@ public class BlockZaniteOre extends Block
 		this.setStepSound(soundTypeStone);
 		this.setHarvestLevel("pickaxe", 1);
 
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
+		this.setCreativeTab(Aether.getCreativeTabs().tabBlocks);
 	}
 
 	@Override

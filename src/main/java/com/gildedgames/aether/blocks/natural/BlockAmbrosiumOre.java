@@ -22,7 +22,7 @@ public class BlockAmbrosiumOre extends Block
 		this.setStepSound(soundTypeStone);
 		this.setHarvestLevel("pickaxe", 0);
 
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
+		this.setCreativeTab(Aether.getCreativeTabs().tabBlocks);
 
 	}
 

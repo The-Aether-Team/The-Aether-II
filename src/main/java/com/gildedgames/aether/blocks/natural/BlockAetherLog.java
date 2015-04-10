@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.gildedgames.aether.AetherCreativeTabs;
+import com.gildedgames.aether.Aether;
 import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
 import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
 import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
@@ -31,7 +31,7 @@ public class BlockAetherLog extends Block implements IAetherBlockWithVariants
 			SKYROOT_LOG = new BlockVariant(0, "skyroot_log"),
 			GOLDEN_OAK_LOG = new BlockVariant(4, "golden_oak_log");
 
-	public static final PropertyVariant LOG_TYPE = PropertyVariant.create("variant", SKYROOT_LOG, GOLDEN_OAK_LOG);
+	public static final PropertyVariant LOG_VARIANT = PropertyVariant.create("variant", SKYROOT_LOG, GOLDEN_OAK_LOG);
 
 	public static final PropertyEnum LOG_AXIS = PropertyEnum.create("axis", BlockLog.EnumAxis.class);
 
@@ -49,9 +49,9 @@ public class BlockAetherLog extends Block implements IAetherBlockWithVariants
 		super(Material.wood);
 		this.setStepSound(Block.soundTypeWood);
 		this.setHardness(2.0f);
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
+		this.setCreativeTab(Aether.getCreativeTabs().tabBlocks);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(LOG_TYPE, SKYROOT_LOG).withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(LOG_VARIANT, SKYROOT_LOG).withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class BlockAetherLog extends Block implements IAetherBlockWithVariants
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
 	{
-		for (BlockVariant variant : LOG_TYPE.getAllowedValues())
+		for (BlockVariant variant : LOG_VARIANT.getAllowedValues())
 		{
 			list.add(new ItemStack(itemIn, 1, variant.getMeta()));
 		}
@@ -75,7 +75,7 @@ public class BlockAetherLog extends Block implements IAetherBlockWithVariants
 	public IBlockState getStateFromMeta(int meta)
 	{
 		int variantMeta = meta - (meta % 4);
-		IBlockState state = this.getDefaultState().withProperty(LOG_TYPE, LOG_TYPE.getVariantFromMeta((variantMeta)));
+		IBlockState state = this.getDefaultState().withProperty(LOG_VARIANT, LOG_VARIANT.getVariantFromMeta((variantMeta)));
 
 		switch (meta - variantMeta)
 		{
@@ -98,7 +98,7 @@ public class BlockAetherLog extends Block implements IAetherBlockWithVariants
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		int stateMeta = ((BlockVariant) state.getValue(LOG_TYPE)).getMeta();
+		int stateMeta = ((BlockVariant) state.getValue(LOG_VARIANT)).getMeta();
 		int variantMeta = stateMeta - (stateMeta % 4);
 
 		switch (AXIS_LOOKUP[((BlockLog.EnumAxis) state.getValue(LOG_AXIS)).ordinal()])
@@ -131,27 +131,27 @@ public class BlockAetherLog extends Block implements IAetherBlockWithVariants
 	@Override
 	protected ItemStack createStackedBlock(IBlockState state)
 	{
-		return new ItemStack(Item.getItemFromBlock(this), 1, ((BlockVariant) state.getValue(LOG_TYPE)).getMeta());
+		return new ItemStack(Item.getItemFromBlock(this), 1, ((BlockVariant) state.getValue(LOG_VARIANT)).getMeta());
 	}
 
 	@Override
 	public int damageDropped(IBlockState state)
 	{
-		return ((BlockVariant) state.getValue(LOG_TYPE)).getMeta();
+		return ((BlockVariant) state.getValue(LOG_VARIANT)).getMeta();
 	}
 
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { LOG_TYPE, LOG_AXIS });
+		return new BlockState(this, new IProperty[] { LOG_VARIANT, LOG_AXIS });
 	}
 
 	@Override
-	public String getVariantNameFromStack(ItemStack stack)
+	public String getUnlocalizedNameFromStack(ItemStack stack)
 	{
 		int variantMeta = stack.getMetadata() - (stack.getMetadata() % 4);
 
-		return LOG_TYPE.getVariantFromMeta(variantMeta).getName();
+		return LOG_VARIANT.getVariantFromMeta(variantMeta).getName();
 	}
 
 }

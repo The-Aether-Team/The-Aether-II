@@ -6,7 +6,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.gildedgames.aether.Aether;
-import com.gildedgames.aether.AetherCreativeTabs;
 import com.gildedgames.aether.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.blocks.natural.BlockAetherLog;
@@ -50,7 +49,7 @@ public class BlocksAether
 		this.aether_log = this.registerBlock("aether_log", ItemBlockVariants.class, new BlockAetherLog());
 
 		this.skyroot_planks = this.registerBlock("skyroot_planks", (BlockCustom) new BlockCustom(Material.wood).setStepSound(Block.soundTypeWood).setHardness(2.0f)
-				.setResistance(5.0f).setCreativeTab(AetherCreativeTabs.tabBlocks));
+				.setResistance(5.0f).setCreativeTab(Aether.getCreativeTabs().tabBlocks));
 
 		this.ambrosium_ore = this.registerBlock("ambrosium_ore", new BlockAmbrosiumOre());
 
@@ -83,10 +82,10 @@ public class BlocksAether
 		{
 			ModelsAether models = Aether.PROXY.getModels();
 
-			models.registerItemRenderer(this.aether_dirt, BlockAetherDirt.GRASS_TYPE.getAllowedValues());
-			models.registerItemRenderer(this.holystone, BlockHolystone.HOLYSTONE_TYPE.getAllowedValues());
-			models.registerItemRenderer(this.aercloud, BlockAercloud.AERCLOUD_TYPE.getAllowedValues());
-			models.registerItemRenderer(this.aether_log, BlockAetherLog.LOG_TYPE.getAllowedValues());
+			models.registerItemRenderer(this.aether_dirt, BlockAetherDirt.GRASS_VARIANT.getAllowedValues());
+			models.registerItemRenderer(this.holystone, BlockHolystone.HOLYSTONE_VARIANT.getAllowedValues());
+			models.registerItemRenderer(this.aercloud, BlockAercloud.AERCLOUD_VARIANT.getAllowedValues());
+			models.registerItemRenderer(this.aether_log, BlockAetherLog.LOG_VARIANT.getAllowedValues());
 			models.registerItemRenderer(0, this.skyroot_planks);
 			models.registerItemRenderer(0, this.ambrosium_ore);
 			models.registerItemRenderer(0, this.zanite_ore);

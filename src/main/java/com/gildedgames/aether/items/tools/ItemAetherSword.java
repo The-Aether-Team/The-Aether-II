@@ -9,19 +9,19 @@ import net.minecraft.world.World;
 
 public class ItemAetherSword extends ItemSword
 {
-	private EnumAetherToolMaterial toolType;
+	private EnumAetherToolMaterial aetherToolMaterial;
 
-	public ItemAetherSword(EnumAetherToolMaterial toolType)
+	public ItemAetherSword(EnumAetherToolMaterial toolMaterial)
 	{
-		super(toolType.getToolMaterial());
+		super(toolMaterial.getToolMaterial());
 
-		this.toolType = toolType;
+		this.aetherToolMaterial = toolMaterial;
 	}
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, BlockPos pos, EntityLivingBase entity)
 	{
-		this.toolType.onBlockDestroyed(pos, world);
+		this.aetherToolMaterial.onBlockDestroyed(pos, world);
 
 		return super.onBlockDestroyed(stack, world, block, pos, entity);
 	}
@@ -29,13 +29,13 @@ public class ItemAetherSword extends ItemSword
 	@Override
 	public float getStrVsBlock(ItemStack stack, Block block)
 	{
-		return this.toolType.getDigSpeed(stack, block, super.getStrVsBlock(stack, block));
+		return this.aetherToolMaterial.getDigSpeed(stack, block, super.getStrVsBlock(stack, block));
 	}
 
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
 	{
-		this.toolType.onEntityAttacked(stack, target, attacker);
+		this.aetherToolMaterial.onEntityAttacked(stack, target, attacker);
 
 		return super.hitEntity(stack, target, attacker);
 	}

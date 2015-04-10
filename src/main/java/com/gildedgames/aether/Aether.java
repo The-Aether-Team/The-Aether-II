@@ -33,6 +33,8 @@ public class Aether
 
 	private ItemsAether items = new ItemsAether();
 
+	private AetherCreativeTabs tabs = new AetherCreativeTabs();
+
 	@EventHandler
 	public void onPreInit(FMLPreInitializationEvent event)
 	{
@@ -41,6 +43,7 @@ public class Aether
 		this.blocks.preInit();
 		this.items.preInit();
 		this.recipes.preInit();
+		this.tabs.preInit();
 	}
 
 	@EventHandler
@@ -63,5 +66,10 @@ public class Aether
 	public static ItemsAether getItems()
 	{
 		return Aether.INSTANCE.items;
+	}
+
+	public static AetherCreativeTabs getCreativeTabs()
+	{
+		return Aether.INSTANCE.tabs;
 	}
 }

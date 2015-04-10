@@ -4,5 +4,5 @@ import net.minecraft.item.ItemStack;
 
 public interface IAetherBlockWithVariants
 {
-	String getVariantNameFromStack(ItemStack stack);
+	String getUnlocalizedNameFromStack(ItemStack stack);
 }

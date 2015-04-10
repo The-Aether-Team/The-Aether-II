@@ -9,52 +9,50 @@ import com.gildedgames.aether.blocks.natural.BlockAetherDirt;
 
 public class AetherCreativeTabs
 {
-	// TODO: Make this not terrible.
-
-	public static final CreativeTabs tabBlocks = new CreativeTabs("aetherBlocks")
+	private class AetherCreativeTab extends CreativeTabs
 	{
+		private Item item;
+
+		private int metadata;
+
+		public AetherCreativeTab(String unlocalizedName)
+		{
+			super(unlocalizedName);
+		}
+
+		private void setItemToDisplay(Item item, int metadata)
+		{
+			this.item = item;
+			this.metadata = metadata;
+		}
+
 		@Override
-		@SideOnly(Side.CLIENT)
 		public Item getTabIconItem()
 		{
-			return Item.getItemFromBlock(Aether.getBlocks().aether_dirt);
+			return this.item;
 		}
 
 		@Override
 		@SideOnly(Side.CLIENT)
 		public int getIconItemDamage()
 		{
-			return BlockAetherDirt.AETHER_GRASS.getMeta();
+			return this.metadata;
 		}
-	};
+	}
 
-	public static final CreativeTabs tabMaterials = new CreativeTabs("aetherMaterials")
-	{
-		@Override
-		@SideOnly(Side.CLIENT)
-		public Item getTabIconItem()
-		{
-			return Aether.getItems().skyroot_stick;
-		}
-	};
+	public AetherCreativeTab tabBlocks = new AetherCreativeTab("aetherBlocks");
 
-	public static final CreativeTabs tabTools = new CreativeTabs("aetherTools")
-	{
-		@Override
-		@SideOnly(Side.CLIENT)
-		public Item getTabIconItem()
-		{
-			return Aether.getItems().zanite_pickaxe;
-		}
-	};
+	public AetherCreativeTab tabMaterials = new AetherCreativeTab("aetherMaterials");
 
-	public static final CreativeTabs tabArmor = new CreativeTabs("aetherArmor")
+	public AetherCreativeTab tabTools = new AetherCreativeTab("aetherTools");
+
+	public AetherCreativeTab tabArmor = new AetherCreativeTab("aetherArmor");
+
+	public void preInit()
 	{
-		@Override
-		@SideOnly(Side.CLIENT)
-		public Item getTabIconItem()
-		{
-			return Aether.getItems().zanite_chestplate;
-		}
-	};
+		this.tabBlocks.setItemToDisplay(Item.getItemFromBlock(Aether.getBlocks().aether_dirt), BlockAetherDirt.AETHER_GRASS.getMeta());
+		this.tabMaterials.setItemToDisplay(Aether.getItems().skyroot_stick, 0);
+		this.tabTools.setItemToDisplay(Aether.getItems().gravitite_pickaxe, 0);
+		this.tabArmor.setItemToDisplay(Aether.getItems().zanite_chestplate, 0);
+	}
 }

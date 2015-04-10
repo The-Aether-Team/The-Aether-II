@@ -17,7 +17,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.gildedgames.aether.Aether;
-import com.gildedgames.aether.AetherCreativeTabs;
 import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
 import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
 import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
@@ -29,7 +28,7 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 			AETHER_GRASS = new BlockVariant(1, "aether_grass"),
 			ENCHANTED_AETHER_GRASS = new BlockVariant(2, "aether_enchanted_grass");
 
-	public static final PropertyVariant GRASS_TYPE = PropertyVariant.create("variant", AETHER_DIRT, AETHER_GRASS, ENCHANTED_AETHER_GRASS);
+	public static final PropertyVariant GRASS_VARIANT = PropertyVariant.create("variant", AETHER_DIRT, AETHER_GRASS, ENCHANTED_AETHER_GRASS);
 
 	public BlockAetherDirt()
 	{
@@ -38,8 +37,8 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 		this.setHardness(0.5F);
 		this.setTickRandomly(true);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(GRASS_TYPE, AETHER_DIRT));
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(GRASS_VARIANT, AETHER_DIRT));
+		this.setCreativeTab(Aether.getCreativeTabs().tabBlocks);
 	}
 
 	@Override
@@ -47,7 +46,7 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
 	{
-		for (BlockVariant variant : GRASS_TYPE.getAllowedValues())
+		for (BlockVariant variant : GRASS_VARIANT.getAllowedValues())
 		{
 			list.add(new ItemStack(itemIn, 1, variant.getMeta()));
 		}
@@ -56,7 +55,7 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
-		if (!world.isRemote && state.getValue(GRASS_TYPE) == AETHER_GRASS)
+		if (!world.isRemote && state.getValue(GRASS_VARIANT) == AETHER_GRASS)
 		{
 			if (world.getLightFromNeighbors(pos.up()) < 4 && world.getBlockState(pos.up()).getBlock().getLightOpacity(world, pos.up()) > 2)
 			{
@@ -72,10 +71,10 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 						Block neighborBlock = world.getBlockState(randomNeighbor.up()).getBlock();
 						IBlockState neighborState = world.getBlockState(randomNeighbor);
 
-						if (neighborState.getBlock() == Aether.getBlocks().aether_dirt && neighborState.getValue(GRASS_TYPE) == AETHER_DIRT &&
+						if (neighborState.getBlock() == Aether.getBlocks().aether_dirt && neighborState.getValue(GRASS_VARIANT) == AETHER_DIRT &&
 								world.getLightFromNeighbors(randomNeighbor.up()) >= 4 && neighborBlock.getLightOpacity(world, randomNeighbor.up()) <= 2)
 						{
-							world.setBlockState(randomNeighbor, this.getDefaultState().withProperty(GRASS_TYPE, AETHER_GRASS));
+							world.setBlockState(randomNeighbor, this.getDefaultState().withProperty(GRASS_VARIANT, AETHER_GRASS));
 						}
 					}
 				}
@@ -92,19 +91,19 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(GRASS_TYPE, GRASS_TYPE.getVariantFromMeta(meta));
+		return this.getDefaultState().withProperty(GRASS_VARIANT, GRASS_VARIANT.getVariantFromMeta(meta));
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return ((BlockVariant) state.getValue(GRASS_TYPE)).getMeta();
+		return ((BlockVariant) state.getValue(GRASS_VARIANT)).getMeta();
 	}
 
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { GRASS_TYPE });
+		return new BlockState(this, new IProperty[] { GRASS_VARIANT });
 	}
 
 	@Override
@@ -114,8 +113,8 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 	}
 
 	@Override
-	public String getVariantNameFromStack(ItemStack stack)
+	public String getUnlocalizedNameFromStack(ItemStack stack)
 	{
-		return GRASS_TYPE.getVariantFromMeta(stack.getMetadata()).getName();
+		return GRASS_VARIANT.getVariantFromMeta(stack.getMetadata()).getName();
 	}
 }
