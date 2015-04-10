@@ -35,6 +35,7 @@ public enum EnumAetherToolMaterial
 			this.dropAmbrosium(pos, world);
 		}
 
+		@Override
 		public void onEntityAttacked(ItemStack stack, EntityLivingBase prey, EntityLivingBase predator)
 		{
 			this.dropAmbrosium(prey.getPosition(), prey.getEntityWorld());

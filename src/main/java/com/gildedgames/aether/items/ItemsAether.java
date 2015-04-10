@@ -18,7 +18,7 @@ public class ItemsAether
 {
 	public Item skyroot_stick;
 
-	public Item ambrosium_shard;
+	public Item ambrosium_shard, continuum_orb, zanite_gemstone;
 
 	public ItemAetherAxe skyroot_axe, holystone_axe, zanite_axe, gravitite_axe;
 
@@ -34,6 +34,8 @@ public class ItemsAether
 	{
 		this.skyroot_stick = this.registerItem("skyroot_stick", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
 		this.ambrosium_shard = this.registerItem("ambrosium_shard", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
+		this.continuum_orb = this.registerItem("continuum_orb", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
+		this.zanite_gemstone = this.registerItem("zanite_gemstone", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
 
 		this.skyroot_axe = this.registerItem("skyroot_axe", new ItemAetherAxe(EnumAetherToolMaterial.SKYROOT));
 		this.holystone_axe = this.registerItem("holystone_axe", new ItemAetherAxe(EnumAetherToolMaterial.HOLYSTONE));
@@ -83,6 +85,8 @@ public class ItemsAether
 
 			models.registerItemRenderer(0, this.skyroot_stick);
 			models.registerItemRenderer(0, this.ambrosium_shard);
+			models.registerItemRenderer(0, this.continuum_orb);
+			models.registerItemRenderer(0, this.zanite_gemstone);
 
 			models.registerItemRenderers(0, this.skyroot_pickaxe, this.skyroot_axe, this.skyroot_shovel);
 			models.registerItemRenderers(0, this.holystone_pickaxe, this.holystone_axe, this.holystone_shovel);

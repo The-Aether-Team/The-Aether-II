@@ -17,6 +17,7 @@ public class ItemAetherArmor extends ItemArmor
 		this.setCreativeTab(AetherCreativeTabs.tabArmor);
 	}
 
+	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
 	{
 		if (stack.getItem() == Aether.getItems().zanite_helmet || stack.getItem() == Aether.getItems().zanite_chestplate || stack.getItem() == Aether.getItems().zanite_boots)

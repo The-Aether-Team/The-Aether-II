@@ -14,10 +14,16 @@ tile.aercloud.aercloud_purple.name=Purple Aercloud
 tile.aether_log.skyroot_log.name=Skyroot Log
 tile.aether_log.golden_oak_log.name=Golden Oak Log
 tile.skyroot_planks.name=Skyroot Planks
+tile.ambrosium_ore.name=Ambrosium Ore
+tile.zanite_ore.name=Zanite Ore
+tile.gravitite_ore.name=Gravitite Ore
+tile.continuum_ore.name=Continuum Ore
 
 # Aether Items
 item.skyroot_stick.name=Skyroot Stick
 item.ambrosium_shard.name=Ambrosium Shard
+item.zanite_gemstone.name=Zanite Gemstone
+item.continuum_orb=Continuum Orb
 item.skyroot_pickaxe.name=Skyroot Pickaxe
 item.skyroot_axe.name=Skyroot Axe
 item.skyroot_shovel.name=Skyroot Shovel
