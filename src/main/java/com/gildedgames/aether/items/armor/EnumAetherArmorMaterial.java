@@ -34,7 +34,7 @@ public enum EnumAetherArmorMaterial
 		}
 	};
 
-	public abstract ArmorMaterial getArmorMaterial();
+	abstract ArmorMaterial getArmorMaterial();
 
-	public abstract String getArmorResourceLocation(int armorType);
+	abstract String getArmorResourceLocation(int armorType);
 }
