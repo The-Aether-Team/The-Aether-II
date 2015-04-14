@@ -30,13 +30,67 @@ import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
 
 public class BlockAercloud extends Block implements IAetherBlockWithVariants
 {
-	public static final BlockVariant
-	COLD_AERCLOUD = new BlockVariant(0, "aercloud_cold"),
-	BLUE_AERCLOUD = new BlockVariant(1, "aercloud_blue"),
-	GREEN_AERCLOUD = new BlockVariant(2, "aercloud_green"),
-	GOLDEN_AERCLOUD = new BlockVariant(3, "aercloud_golden"),
-	STORM_AERCLOUD = new BlockVariant(4, "aercloud_storm"),
-	PURPLE_AERCLOUD = new BlockVariant(5, "aercloud_purple");
+	public static class AercloudVariant extends BlockVariant
+	{
+		public AercloudVariant(int meta, String name)
+		{
+			super(meta, name);
+		}
+
+		public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
+		{
+			entity.fallDistance = 0;
+
+			if (entity.motionY < 0)
+			{
+				entity.motionY *= 0.005D;
+			}
+		}
+	}
+
+	public static final AercloudVariant
+			COLD_AERCLOUD = new AercloudVariant(0, "aercloud_cold"),
+			BLUE_AERCLOUD = new AercloudVariant(1, "aercloud_blue")
+			{
+				@Override
+				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
+				{
+					entity.motionY = 2.0D;
+
+					super.onEntityCollision(world, pos, state, entity);
+				}
+			},
+			GREEN_AERCLOUD = new AercloudVariant(2, "aercloud_green")
+			{
+				@Override
+				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
+				{
+					EnumFacing randomSide = EnumFacing.random(world.rand);
+
+					entity.motionX = randomSide.getFrontOffsetX() * 2.5D;
+					entity.motionZ = randomSide.getFrontOffsetZ() * 2.5D;
+				}
+			},
+			GOLDEN_AERCLOUD = new AercloudVariant(3, "aercloud_golden")
+			{
+				@Override
+				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
+				{
+					entity.motionY = -1.5D;
+				}
+			},
+			STORM_AERCLOUD = new AercloudVariant(4, "aercloud_storm"),
+			PURPLE_AERCLOUD = new AercloudVariant(5, "aercloud_purple")
+			{
+				@Override
+				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
+				{
+					EnumFacing side = (EnumFacing) state.getValue(FACING);
+
+					entity.motionX = side.getFrontOffsetX() * 2.5D;
+					entity.motionZ = side.getFrontOffsetZ() * 2.5D;
+				}
+			};
 
 	public static final PropertyVariant AERCLOUD_VARIANT = PropertyVariant.create("variant", COLD_AERCLOUD, BLUE_AERCLOUD, GREEN_AERCLOUD, GOLDEN_AERCLOUD, STORM_AERCLOUD, PURPLE_AERCLOUD);
 
@@ -89,47 +143,17 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
-		BlockVariant variant = (BlockVariant) state.getValue(AERCLOUD_VARIANT);
+		AercloudVariant variant = (AercloudVariant) state.getValue(AERCLOUD_VARIANT);
 
-		entityIn.fallDistance = 0;
-
-		if (!entityIn.isSneaking())
+		if (entity.isSneaking())
 		{
-			if (variant == BLUE_AERCLOUD)
-			{
-				entityIn.motionY = 2.0D;
-				return;
-			}
-			else if (variant == GOLDEN_AERCLOUD)
-			{
-				entityIn.motionY = -1.5D;
-				return;
-			}
-			else if (variant == GREEN_AERCLOUD)
-			{
-				EnumFacing randomSide = EnumFacing.random(worldIn.rand);
-
-				entityIn.motionX = randomSide.getFrontOffsetX() * 2.5D;
-				entityIn.motionZ = randomSide.getFrontOffsetZ() * 2.5D;
-
-				return;
-			}
-			else if (variant == PURPLE_AERCLOUD)
-			{
-				EnumFacing side = (EnumFacing) state.getValue(FACING);
-
-				entityIn.motionX = side.getFrontOffsetX() * 2.5D;
-				entityIn.motionZ = side.getFrontOffsetZ() * 2.5D;
-
-				return;
-			}
+			BlockAercloud.COLD_AERCLOUD.onEntityCollision(world, pos, state, entity);
 		}
-
-		if (entityIn.motionY < 0)
+		else
 		{
-			entityIn.motionY *= 0.005D;
+			variant.onEntityCollision(world, pos, state, entity);
 		}
 	}
 
