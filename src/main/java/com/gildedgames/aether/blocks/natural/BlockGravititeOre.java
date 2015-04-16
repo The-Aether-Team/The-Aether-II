@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
 import com.gildedgames.aether.Aether;
-import com.gildedgames.aether.AetherCreativeTabs;
 
 public class BlockGravititeOre extends Block
 {

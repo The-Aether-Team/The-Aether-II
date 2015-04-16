@@ -8,7 +8,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 
 import com.gildedgames.aether.Aether;
-import com.gildedgames.aether.AetherCreativeTabs;
 
 public class BlockContinuumOre extends Block
 {

@@ -121,5 +121,5 @@ public enum EnumAetherToolMaterial
 		return baseSpeed;
 	}
 
-	public abstract ToolMaterial getToolMaterial();
+	abstract ToolMaterial getToolMaterial();
 }

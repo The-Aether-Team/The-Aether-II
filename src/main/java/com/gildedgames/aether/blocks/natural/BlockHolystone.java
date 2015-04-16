@@ -21,9 +21,9 @@ import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
 public class BlockHolystone extends Block implements IAetherBlockWithVariants
 {
 	public static final BlockVariant
-			NORMAL_HOLYSTONE = new BlockVariant(0, "holystone"),
-			MOSSY_HOLYSTONE = new BlockVariant(1, "mossy_holystone"),
-			BLOOD_MOSS_HOLYSTONE = new BlockVariant(2, "blood_holystone");
+	NORMAL_HOLYSTONE = new BlockVariant(0, "holystone"),
+	MOSSY_HOLYSTONE = new BlockVariant(1, "mossy_holystone"),
+	BLOOD_MOSS_HOLYSTONE = new BlockVariant(2, "blood_holystone");
 
 	public static final PropertyVariant HOLYSTONE_VARIANT = PropertyVariant.create("variant", NORMAL_HOLYSTONE, MOSSY_HOLYSTONE, BLOOD_MOSS_HOLYSTONE);
 
