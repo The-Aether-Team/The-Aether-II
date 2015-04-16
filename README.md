@@ -1,10 +1,10 @@
-<center>
+<p align="center">
 
-![Aether II Logo](http://i.imgur.com/RgWAINr.png)<br>
+ <img src=http://i.imgur.com/RgWAINr.png"><br>
 
-In development by Gilded Games, the Aether II is an extensive mod for Minecraft which implements a remarkable world in the skies. Adventure, danger, and mystery awaits in the depths of the Aether.
+  In development by Gilded Games, the Aether II is an extensive mod for Minecraft which implements a remarkable world in the   skies. Adventure, danger, and mystery awaits in the depths of the Aether.
 
-</center>
+</p>
 
 ### Setting up your Workspace
 
