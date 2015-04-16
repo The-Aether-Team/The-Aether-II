@@ -8,8 +8,14 @@
 eclipse
 bin
 
+# IntelliJ IDEA
+*.iml
+*.ipr
+*.iws
+.idea
+
 # Gradle
-/.gradle/
+/gradle/.gradle/
 /build/
 /bin/
 

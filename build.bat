@@ -1,11 +1,8 @@
 @echo off
 title Building the Aether II...
 
-:: Push in to the root folder
-pushd ..
-
 :: Call Gradle Setup
-call gradlew.bat build
+call gradle/gradlew.bat build
 
 echo.
 echo Finished. The compiled jars can be found in the following locations:
@@ -14,9 +11,6 @@ echo Aether II          : %CD%\build\libs
 echo.
 echo Gilded Games Util  : %CD%\gilded-games-util\build\libs
 echo.
-
-:: Pop back into the scripts folder
-popd
 
 pause
 exit
