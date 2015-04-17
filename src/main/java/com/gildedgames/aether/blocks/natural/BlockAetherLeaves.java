@@ -1,0 +1,104 @@
+package com.gildedgames.aether.blocks.natural;
+
+import java.util.List;
+
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockPlanks.EnumType;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.gildedgames.aether.Aether;
+import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
+import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
+import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
+
+public class BlockAetherLeaves extends BlockLeaves implements IAetherBlockWithVariants
+{
+	public static final BlockVariant
+			BLUE_SKYROOT_LEAVES = new BlockVariant(0, "blue_skyroot_leaves"),
+			GREEN_SKYROOT_LEAVES = new BlockVariant(1, "green_skyroot_leaves"),
+			DARK_BLUE_SKYROOT_LEAVES = new BlockVariant(2, "dark_blue_skyroot_leaves"),
+			GOLDEN_OAK_LEAVES = new BlockVariant(3, "golden_oak_leaves"),
+			PURPLE_CRYSTAL_LEAVES = new BlockVariant(4, "purple_crystal_leaves"),
+			PURPLE_FRUIT_LEAVES = new BlockVariant(5, "purple_fruit_leaves");
+
+	public static final PropertyVariant LEAVES_VARIANT = PropertyVariant.create("variant", BLUE_SKYROOT_LEAVES, GREEN_SKYROOT_LEAVES, DARK_BLUE_SKYROOT_LEAVES, GOLDEN_OAK_LEAVES, PURPLE_CRYSTAL_LEAVES, PURPLE_FRUIT_LEAVES);
+
+	public BlockAetherLeaves()
+	{
+		super();
+		this.setCreativeTab(Aether.getCreativeTabs().tabBlocks);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
+	}
+
+	@Override
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SideOnly(Side.CLIENT)
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
+	{
+		for (BlockVariant variant : LEAVES_VARIANT.getAllowedValues())
+		{
+			list.add(new ItemStack(itemIn, 1, variant.getMeta()));
+		}
+	}
+
+	@Override
+	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
+	{
+		return null;
+	}
+
+	@Override
+	public EnumType getWoodType(int meta)
+	{
+		return null;
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		return this.getDefaultState().withProperty(LEAVES_VARIANT, LEAVES_VARIANT.getVariantFromMeta(meta)).withProperty(DECAYABLE, Boolean.valueOf((meta & 6) == 0)).withProperty(CHECK_DECAY, Boolean.valueOf((meta & 6) > 0));
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		byte b0 = 0;
+		int i = b0 | ((BlockVariant) state.getValue(LEAVES_VARIANT)).getMeta();
+
+		if (!((Boolean) state.getValue(DECAYABLE)).booleanValue())
+		{
+			i |= 6;
+		}
+
+		if (((Boolean) state.getValue(CHECK_DECAY)).booleanValue())
+		{
+			i |= 6;
+		}
+
+		return i;
+	}
+
+	// return ((BlockVariant) state.getValue(LEAVES_VARIANT)).getMeta();
+
+	@Override
+	protected BlockState createBlockState()
+	{
+		return new BlockState(this, new IProperty[] { LEAVES_VARIANT, CHECK_DECAY, DECAYABLE });
+	}
+
+	@Override
+	public String getUnlocalizedNameFromStack(ItemStack stack)
+	{
+		return LEAVES_VARIANT.getVariantFromMeta(stack.getMetadata()).getName();
+	}
+
+}

@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import com.gildedgames.aether.Aether;
 import com.gildedgames.aether.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.blocks.natural.BlockAetherDirt;
+import com.gildedgames.aether.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.blocks.natural.BlockAmbrosiumOre;
 import com.gildedgames.aether.blocks.natural.BlockContinuumOre;
@@ -38,6 +39,8 @@ public class BlocksAether
 
 	public BlockCustom skyroot_planks;
 
+	public BlockAetherLeaves aether_leaves;
+
 	public void preInit()
 	{
 		this.aether_dirt = this.registerBlock("aether_dirt", ItemBlockVariants.class, new BlockAetherDirt());
@@ -48,8 +51,7 @@ public class BlocksAether
 
 		this.aether_log = this.registerBlock("aether_log", ItemBlockVariants.class, new BlockAetherLog());
 
-		this.skyroot_planks = this.registerBlock("skyroot_planks", (BlockCustom) new BlockCustom(Material.wood).setStepSound(Block.soundTypeWood).setHardness(2.0f)
-				.setResistance(5.0f).setCreativeTab(Aether.getCreativeTabs().tabBlocks));
+		this.skyroot_planks = this.registerBlock("skyroot_planks", (BlockCustom) new BlockCustom(Material.wood).setStepSound(Block.soundTypeWood).setHardness(2.0f).setResistance(5.0f).setCreativeTab(Aether.getCreativeTabs().tabBlocks));
 
 		this.ambrosium_ore = this.registerBlock("ambrosium_ore", new BlockAmbrosiumOre());
 
@@ -58,6 +60,8 @@ public class BlocksAether
 		this.gravitite_ore = this.registerBlock("gravitite_ore", new BlockGravititeOre());
 
 		this.continuum_ore = this.registerBlock("continuum_ore", new BlockContinuumOre());
+
+		this.aether_leaves = this.registerBlock("aether_leaves", ItemBlockVariants.class, new BlockAetherLeaves());
 	}
 
 	private <T extends Block> T registerBlock(String name, T block)
@@ -86,6 +90,7 @@ public class BlocksAether
 			models.registerItemRenderer(this.holystone, BlockHolystone.HOLYSTONE_VARIANT.getAllowedValues());
 			models.registerItemRenderer(this.aercloud, BlockAercloud.AERCLOUD_VARIANT.getAllowedValues());
 			models.registerItemRenderer(this.aether_log, BlockAetherLog.LOG_VARIANT.getAllowedValues());
+			models.registerItemRenderer(this.aether_leaves, BlockAetherLeaves.LEAVES_VARIANT.getAllowedValues());
 			models.registerItemRenderer(0, this.skyroot_planks);
 			models.registerItemRenderer(0, this.ambrosium_ore);
 			models.registerItemRenderer(0, this.zanite_ore);
