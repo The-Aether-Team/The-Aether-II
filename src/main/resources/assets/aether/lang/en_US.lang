@@ -18,6 +18,15 @@ tile.ambrosium_ore.name=Ambrosium Ore
 tile.zanite_ore.name=Zanite Ore
 tile.gravitite_ore.name=Gravitite Ore
 tile.continuum_ore.name=Continuum Ore
+tile.aether_leaves.blue_skyroot_leaves.name=Blue Skyroot Leaves
+tile.aether_leaves.dark_blue_skyroot_leaves.name=Dark Blue Skyroot Leaves
+tile.aether_leaves.golden_oak_leaves.name=Golden Oak Leaves
+tile.aether_leaves.purple_crystal_leaves.name=Purple Crystal Leaves
+tile.aether_leaves.purple_fruit_leaves.name=Purple Fruit Leaves
+
+
+
+
 
 # Aether Items
 item.skyroot_stick.name=Skyroot Stick
@@ -48,6 +57,10 @@ item.gravitite_chestplate.name=Gravitite Chestplate
 item.gravitite_leggings.name=Gravitite Leggings
 item.gravitite_boots.name=Gravitite Boots
 item.gravitite_sword.name=Gravitite Sword
+
+
+
+
 
 # Creative Tabs
 itemGroup.aetherBlocks=Aether Blocks
