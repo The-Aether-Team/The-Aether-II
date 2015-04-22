@@ -1,22 +1,22 @@
 {
-    "variants": {
-        "variant=blue_skyroot_leaves": { 
-        	"model": "aether:blue_skyroot_leaves" 
-        },
-    	"variant=green_skyroot_leaves": { 
-    		"model": "aether:green_skyroot_leaves" 
-    	},
-    	"variant=dark_blue_skyroot_leaves": { 
-    		"model": "aether:dark_blue_skyroot_leaves" 
-    	},
-    	"variant=golden_oak_leaves": { 
-    		"model": "aether:golden_oak_leaves" 
-    	},
-    	"variant=purple_crystal_leaves": { 
-    		"model": "aether:purple_crystal_leaves" 
-    	},
-    	"variant=purple_fruit_leaves": { 
-    		"model": "aether:purple_fruit_leaves" 
-        }
-    }
+	"variants": {
+		"variant=blue_skyroot_leaves": {
+			"model": "aether:blue_skyroot_leaves"
+		},
+		"variant=green_skyroot_leaves": {
+			"model": "aether:green_skyroot_leaves"
+		},
+		"variant=dark_blue_skyroot_leaves": {
+			"model": "aether:dark_blue_skyroot_leaves"
+		},
+		"variant=golden_oak_leaves": {
+			"model": "aether:golden_oak_leaves"
+		},
+		"variant=purple_crystal_leaves": {
+			"model": "aether:purple_crystal_leaves"
+		},
+		"variant=purple_fruit_leaves": {
+			"model": "aether:purple_fruit_leaves"
+		}
+	}
 }
