@@ -11,7 +11,6 @@ import com.gildedgames.aether.blocks.natural.BlockGravititeOre;
 import com.gildedgames.aether.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.blocks.natural.BlockZaniteOre;
 import com.gildedgames.aether.blocks.util.BlockCustom;
-import com.gildedgames.aether.client.models.ModelsAether;
 import com.gildedgames.aether.items.itemblocks.ItemBlockVariants;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -78,24 +77,5 @@ public class BlocksAether
 		GameRegistry.registerBlock(block, itemblock, name);
 
 		return block;
-	}
-
-	public void init()
-	{
-		if (Aether.PROXY.getModels() != null)
-		{
-			ModelsAether models = Aether.PROXY.getModels();
-
-			models.registerBlockModelVariants(this.aether_dirt, BlockAetherDirt.GRASS_VARIANT.getAllowedValues());
-			models.registerBlockModelVariants(this.holystone, BlockHolystone.HOLYSTONE_VARIANT.getAllowedValues());
-			models.registerBlockModelVariants(this.aercloud, BlockAercloud.AERCLOUD_VARIANT.getAllowedValues());
-			models.registerBlockModelVariants(this.aether_log, BlockAetherLog.LOG_VARIANT.getAllowedValues());
-			models.registerBlockModelVariants(this.aether_leaves, BlockAetherLeaves.LEAVES_VARIANT.getAllowedValues());
-			models.registerBlockModel(this.skyroot_planks);
-			models.registerBlockModel(this.ambrosium_ore);
-			models.registerBlockModel(this.zanite_ore);
-			models.registerBlockModel(this.gravitite_ore);
-			models.registerBlockModel(this.continuum_ore);
-		}
 	}
 }

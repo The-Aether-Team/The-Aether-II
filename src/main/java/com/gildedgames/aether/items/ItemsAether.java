@@ -1,7 +1,6 @@
 package com.gildedgames.aether.items;
 
 import com.gildedgames.aether.Aether;
-import com.gildedgames.aether.client.models.ModelsAether;
 import com.gildedgames.aether.items.armor.EnumAetherArmorMaterial;
 import com.gildedgames.aether.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.items.tools.EnumAetherToolMaterial;
@@ -75,48 +74,5 @@ public class ItemsAether
 		GameRegistry.registerItem(item, name);
 
 		return item;
-	}
-
-	public void init()
-	{
-		if (Aether.PROXY.getModels() != null)
-		{
-			ModelsAether models = Aether.PROXY.getModels();
-
-			models.registerItemModel(this.skyroot_stick);
-			models.registerItemModel(this.ambrosium_shard);
-			models.registerItemModel(this.continuum_orb);
-			models.registerItemModel(this.zanite_gemstone);
-
-			models.registerItemModel(this.skyroot_pickaxe);
-			models.registerItemModel(this.skyroot_axe);
-			models.registerItemModel(this.skyroot_shovel);
-			models.registerItemModel(this.skyroot_sword);
-
-			models.registerItemModel(this.holystone_pickaxe);
-			models.registerItemModel(this.holystone_axe);
-			models.registerItemModel(this.holystone_shovel);
-			models.registerItemModel(this.holystone_sword);
-
-			models.registerItemModel(this.zanite_pickaxe);
-			models.registerItemModel(this.zanite_axe);
-			models.registerItemModel(this.zanite_shovel);
-			models.registerItemModel(this.zanite_sword);
-
-			models.registerItemModel(this.gravitite_pickaxe);
-			models.registerItemModel(this.gravitite_axe);
-			models.registerItemModel(this.gravitite_shovel);
-			models.registerItemModel(this.gravitite_sword);
-
-			models.registerItemModel(this.zanite_helmet);
-			models.registerItemModel(this.zanite_chestplate);
-			models.registerItemModel(this.zanite_leggings);
-			models.registerItemModel(this.zanite_boots);
-
-			models.registerItemModel(this.gravitite_helmet);
-			models.registerItemModel(this.gravitite_chestplate);
-			models.registerItemModel(this.gravitite_leggings);
-			models.registerItemModel(this.gravitite_boots);
-		}
 	}
 }

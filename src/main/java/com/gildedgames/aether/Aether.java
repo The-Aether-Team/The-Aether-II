@@ -1,16 +1,15 @@
 package com.gildedgames.aether;
 
+import com.gildedgames.aether.blocks.BlocksAether;
+import com.gildedgames.aether.items.ItemsAether;
+import com.gildedgames.aether.recipes.RecipesAether;
+import com.gildedgames.aether.server.ServerProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-
-import com.gildedgames.aether.blocks.BlocksAether;
-import com.gildedgames.aether.items.ItemsAether;
-import com.gildedgames.aether.recipes.RecipesAether;
-import com.gildedgames.aether.server.ServerProxy;
 
 @Mod(name = Aether.MOD_NAME, modid = Aether.MOD_ID, version = Aether.MOD_VERSION)
 public class Aether
@@ -38,19 +37,18 @@ public class Aether
 	@EventHandler
 	public void onPreInit(FMLPreInitializationEvent event)
 	{
-		Aether.PROXY.init();
-
 		this.blocks.preInit();
 		this.items.preInit();
 		this.recipes.preInit();
 		this.tabs.preInit();
+
+		Aether.PROXY.preInit();
 	}
 
 	@EventHandler
 	public void onInit(FMLInitializationEvent event)
 	{
-		this.blocks.init();
-		this.items.init();
+		Aether.PROXY.init();
 	}
 
 	public static BlocksAether getBlocks()

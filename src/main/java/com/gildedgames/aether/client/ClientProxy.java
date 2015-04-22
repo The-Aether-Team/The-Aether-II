@@ -9,9 +9,17 @@ public class ClientProxy extends ServerProxy
 	private ModelsAether models;
 
 	@Override
-	public void init()
+	public void preInit()
 	{
 		this.models = new ModelsAether(Minecraft.getMinecraft());
+
+		this.models.prepareModels();
+	}
+
+	@Override
+	public void init()
+	{
+		this.models.registerModels();
 	}
 
 	@Override
