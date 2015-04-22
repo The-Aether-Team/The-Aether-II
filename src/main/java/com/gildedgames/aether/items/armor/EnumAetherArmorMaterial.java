@@ -4,14 +4,8 @@ import net.minecraft.item.ItemArmor.ArmorMaterial;
 
 public enum EnumAetherArmorMaterial
 {
-	ZANITE
+	ZANITE(ArmorMaterial.IRON)
 	{
-		@Override
-		public ArmorMaterial getArmorMaterial()
-		{
-			return ArmorMaterial.IRON;
-		}
-
 		@Override
 		public String getArmorResourceLocation(int armorType)
 		{
@@ -19,14 +13,8 @@ public enum EnumAetherArmorMaterial
 		}
 	},
 
-	GRAVITITE
+	GRAVITITE(ArmorMaterial.DIAMOND)
 	{
-		@Override
-		public ArmorMaterial getArmorMaterial()
-		{
-			return ArmorMaterial.DIAMOND;
-		}
-
 		@Override
 		public String getArmorResourceLocation(int armorType)
 		{
@@ -34,7 +22,17 @@ public enum EnumAetherArmorMaterial
 		}
 	};
 
-	abstract ArmorMaterial getArmorMaterial();
+	ArmorMaterial armorMaterial;
+
+	EnumAetherArmorMaterial(ArmorMaterial armorMaterial)
+	{
+		this.armorMaterial = armorMaterial;
+	}
+
+	public ArmorMaterial getArmorMaterial()
+	{
+		return this.armorMaterial;
+	}
 
 	abstract String getArmorResourceLocation(int armorType);
 }

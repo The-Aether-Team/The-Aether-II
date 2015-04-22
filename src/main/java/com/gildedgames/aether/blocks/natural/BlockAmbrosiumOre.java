@@ -1,13 +1,12 @@
 package com.gildedgames.aether.blocks.natural;
 
-import java.util.Random;
-
+import com.gildedgames.aether.Aether;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 
-import com.gildedgames.aether.Aether;
+import java.util.Random;
 
 public class BlockAmbrosiumOre extends Block
 {
@@ -22,7 +21,6 @@ public class BlockAmbrosiumOre extends Block
 		this.setHarvestLevel("pickaxe", 0);
 
 		this.setCreativeTab(Aether.getCreativeTabs().tabBlocks);
-
 	}
 
 	@Override

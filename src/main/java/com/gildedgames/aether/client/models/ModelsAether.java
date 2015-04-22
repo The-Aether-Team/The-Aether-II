@@ -1,105 +1,82 @@
 package com.gildedgames.aether.client.models;
 
-import java.util.Collection;
-import java.util.Iterator;
-
+import com.gildedgames.aether.Aether;
+import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 
-import com.gildedgames.aether.Aether;
-import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
+import java.util.Collection;
 
 public class ModelsAether
 {
 	private Minecraft mc;
 
-	public ModelsAether()
+	public ModelsAether(Minecraft mc)
 	{
-		this.mc = Minecraft.getMinecraft();
+		this.mc = mc;
 	}
 
 	/**
-	 * Registers each of the block's subtypes' item renderers to the appropriate metadata.
-	 * Assumes the model name is the block's unlocalizedName plus the variant's name.
-	 * @param block The block
-	 * @param variants The block's subtypes
+	 * Registers all the models for variants of a block.
+	 * @param block The block to bind to
+	 * @param variants All of the block's variants
 	 */
-	public void registerItemRenderer(Block block, Collection<BlockVariant> variants)
+	public void registerBlockModelVariants(Block block, Collection<BlockVariant> variants)
 	{
-		String[] names = new String[variants.size()];
-
-		Iterator<BlockVariant> iterator = variants.iterator();
-		for (int i = 0; iterator.hasNext(); i++)
+		for (BlockVariant variant : variants)
 		{
-			BlockVariant variant = iterator.next();
-			names[i] = (Aether.MOD_ID + ":") + variant.getName();
+			Item item = Item.getItemFromBlock(block);
 
-			this.registerItemRenderer(names[i], Item.getItemFromBlock(block), variant.getMeta());
-		}
-
-		ModelBakery.addVariantName(Item.getItemFromBlock(block), names);
-	}
-
-	/**
-	 * Registers the block's item renderer and binds it to the specified metadata.
-	 * This assumes the unlocalized name of the block is the model name.
-	 * @param block The block to register
-	 * @param meta The metadata to bind to
-	 */
-	public void registerItemRenderer(int meta, Block block)
-	{
-		this.registerItemRenderer(meta, Item.getItemFromBlock(block));
-	}
-
-	/**
-	 * Registers multiples item renderers at the same metadata index.
-	 * This assumes the unlocalized name of the item is the model name.
-	 * @param meta The meta to bind to
-	 * @param items Array of items to register
-	 */
-	public void registerItemRenderers(int meta, Item... items)
-	{
-		for (Item item : items)
-		{
-			this.registerItemRenderer(meta, item);
+			this.registerItemModel(item, variant.getName(), variant.getMeta());
+			ModelBakery.addVariantName(item, (Aether.MOD_ID + ":") + variant.getName());
 		}
 	}
 
 	/**
-	 * Registers the item's item renderer and binds it to the specified metadata.
-	 * This assumes the unlocalized name of the item is the model name.
-	 * @param item The item to register
-	 * @param meta The meta to bind to
+	 * Registers a block model and binds it to the block's unlocalized name and metadata 0.
+	 * @param block The block to bind to
 	 */
-	public void registerItemRenderer(int meta, Item item)
+	public void registerBlockModel(Block block)
 	{
-		String name = (Aether.MOD_ID + ":") + item.getUnlocalizedName().substring(5);
-
-		this.registerItemRenderer(name, item, meta);
+		this.registerBlockModel(block, block.getUnlocalizedName().substring(5), 0);
 	}
 
 	/**
-	 * Registers the block's item renderer with the specified name and binds it to the metadata.
-	 * @param name The model resource name
-	 * @param block The block to register
+	 * Registers a block model and binds it to the specified block, name and metadata.
+	 * @param block The block to bind to
+	 * @param name The name to bind to
 	 * @param meta The metadata to bind to
 	 */
-	public void registerItemRenderer(String name, Block block, int meta)
+	public void registerBlockModel(Block block, String name, int meta)
 	{
-		this.registerItemRenderer(name, Item.getItemFromBlock(block), meta);
+		this.registerItemModel(Item.getItemFromBlock(block), name, meta);
 	}
 
 	/**
-	 * Registers the item's item renderer with the specified name and binds it to the metadata.
-	 * @param name The model resource name
-	 * @param item The item to register
+	 * Registers a item model and binds it to the item's unlocalized name and metadata 0.
+	 * @param item The item to bind to
+	 */
+	public void registerItemModel(Item item)
+	{
+		this.registerItemModel(item, item.getUnlocalizedName().substring(5), 0);
+	}
+
+	/**
+	 * Registers an item model and binds it to the specified item, name, and metadata.
+	 * @param item The item to bind to
+	 * @param name The name to bind to
 	 * @param meta The metadata to bind to
 	 */
-	public void registerItemRenderer(String name, Item item, int meta)
+	public void registerItemModel(Item item, String name, int meta)
 	{
-		this.mc.getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation(name, "inventory"));
+		this.mc.getRenderItem().getItemModelMesher().register(item, meta, this.getModelResource(name, "inventory"));
+	}
+
+	private ModelResourceLocation getModelResource(String name, String type)
+	{
+		return new ModelResourceLocation((Aether.MOD_ID + ":") + name, type);
 	}
 }

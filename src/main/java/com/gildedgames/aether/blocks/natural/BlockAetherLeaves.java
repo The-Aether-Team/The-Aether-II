@@ -1,7 +1,9 @@
 package com.gildedgames.aether.blocks.natural;
 
-import java.util.List;
-
+import com.gildedgames.aether.Aether;
+import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
+import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
+import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.properties.IProperty;
@@ -15,10 +17,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.gildedgames.aether.Aether;
-import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
-import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
-import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
+import java.util.List;
 
 public class BlockAetherLeaves extends BlockLeaves implements IAetherBlockWithVariants
 {
@@ -74,12 +73,12 @@ public class BlockAetherLeaves extends BlockLeaves implements IAetherBlockWithVa
 		byte b0 = 0;
 		int i = b0 | ((BlockVariant) state.getValue(LEAVES_VARIANT)).getMeta();
 
-		if (!((Boolean) state.getValue(DECAYABLE)).booleanValue())
+		if (!(Boolean) state.getValue(DECAYABLE))
 		{
 			i |= 6;
 		}
 
-		if (((Boolean) state.getValue(CHECK_DECAY)).booleanValue())
+		if ((Boolean) state.getValue(CHECK_DECAY))
 		{
 			i |= 6;
 		}

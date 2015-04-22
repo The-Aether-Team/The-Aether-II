@@ -1,11 +1,12 @@
 package com.gildedgames.aether.blocks.natural;
 
-import java.util.List;
-
+import com.gildedgames.aether.Aether;
+import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
+import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
+import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
@@ -20,10 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.gildedgames.aether.Aether;
-import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
-import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
-import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
+import java.util.List;
 
 public class BlockAetherLog extends Block implements IAetherBlockWithVariants
 {
@@ -34,15 +32,6 @@ public class BlockAetherLog extends Block implements IAetherBlockWithVariants
 	public static final PropertyVariant LOG_VARIANT = PropertyVariant.create("variant", SKYROOT_LOG, GOLDEN_OAK_LOG);
 
 	public static final PropertyEnum LOG_AXIS = PropertyEnum.create("axis", BlockLog.EnumAxis.class);
-
-	protected static final int[] AXIS_LOOKUP = new int[BlockLog.EnumAxis.values().length];
-
-	static
-	{
-		AXIS_LOOKUP[BlockLog.EnumAxis.X.ordinal()] = 1;
-		AXIS_LOOKUP[BlockLog.EnumAxis.Z.ordinal()] = 2;
-		AXIS_LOOKUP[BlockLog.EnumAxis.NONE.ordinal()] = 3;
-	}
 
 	public BlockAetherLog()
 	{
@@ -75,24 +64,10 @@ public class BlockAetherLog extends Block implements IAetherBlockWithVariants
 	public IBlockState getStateFromMeta(int meta)
 	{
 		int variantMeta = meta - (meta % 4);
-		IBlockState state = this.getDefaultState().withProperty(LOG_VARIANT, LOG_VARIANT.getVariantFromMeta((variantMeta)));
+		int rotateMeta = (meta - variantMeta) % 4;
 
-		switch (meta - variantMeta)
-		{
-		case 0:
-			state = state.withProperty(LOG_AXIS, BlockLog.EnumAxis.Y);
-			break;
-		case 4:
-			state = state.withProperty(LOG_AXIS, BlockLog.EnumAxis.X);
-			break;
-		case 8:
-			state = state.withProperty(LOG_AXIS, BlockLog.EnumAxis.Z);
-			break;
-		default:
-			state = state.withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
-		}
-
-		return state;
+		return this.getDefaultState().withProperty(LOG_VARIANT, LOG_VARIANT.getVariantFromMeta((variantMeta)))
+				.withProperty(LOG_AXIS, BlockLog.EnumAxis.values()[rotateMeta]);
 	}
 
 	@Override
@@ -100,20 +75,9 @@ public class BlockAetherLog extends Block implements IAetherBlockWithVariants
 	{
 		int stateMeta = ((BlockVariant) state.getValue(LOG_VARIANT)).getMeta();
 		int variantMeta = stateMeta - (stateMeta % 4);
+		int rotateMeta = ((BlockLog.EnumAxis) state.getValue(LOG_AXIS)).ordinal();
 
-		switch (AXIS_LOOKUP[((BlockLog.EnumAxis) state.getValue(LOG_AXIS)).ordinal()])
-		{
-		case 1:
-			variantMeta += 1;
-			break;
-		case 2:
-			variantMeta += 2;
-			break;
-		case 3:
-			variantMeta += 3;
-		}
-
-		return variantMeta;
+		return variantMeta + rotateMeta;
 	}
 
 	@Override
@@ -143,7 +107,7 @@ public class BlockAetherLog extends Block implements IAetherBlockWithVariants
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { LOG_VARIANT, LOG_AXIS });
+		return new BlockState(this, LOG_VARIANT, LOG_AXIS);
 	}
 
 	@Override

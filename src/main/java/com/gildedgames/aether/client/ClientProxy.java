@@ -2,6 +2,7 @@ package com.gildedgames.aether.client;
 
 import com.gildedgames.aether.client.models.ModelsAether;
 import com.gildedgames.aether.server.ServerProxy;
+import net.minecraft.client.Minecraft;
 
 public class ClientProxy extends ServerProxy
 {
@@ -10,7 +11,7 @@ public class ClientProxy extends ServerProxy
 	@Override
 	public void init()
 	{
-		this.models = new ModelsAether();
+		this.models = new ModelsAether(Minecraft.getMinecraft());
 	}
 
 	@Override

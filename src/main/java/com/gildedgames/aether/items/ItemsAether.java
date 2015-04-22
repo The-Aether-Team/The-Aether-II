@@ -1,8 +1,5 @@
 package com.gildedgames.aether.items;
 
-import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
 import com.gildedgames.aether.Aether;
 import com.gildedgames.aether.client.models.ModelsAether;
 import com.gildedgames.aether.items.armor.EnumAetherArmorMaterial;
@@ -12,6 +9,8 @@ import com.gildedgames.aether.items.tools.ItemAetherAxe;
 import com.gildedgames.aether.items.tools.ItemAetherPickaxe;
 import com.gildedgames.aether.items.tools.ItemAetherShovel;
 import com.gildedgames.aether.items.tools.ItemAetherSword;
+import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemsAether
 {
@@ -19,17 +18,17 @@ public class ItemsAether
 
 	public Item ambrosium_shard, continuum_orb, zanite_gemstone;
 
-	public ItemAetherAxe skyroot_axe, holystone_axe, zanite_axe, gravitite_axe;
+	public Item skyroot_axe, holystone_axe, zanite_axe, gravitite_axe;
 
-	public ItemAetherPickaxe skyroot_pickaxe, holystone_pickaxe, zanite_pickaxe, gravitite_pickaxe;
+	public Item skyroot_pickaxe, holystone_pickaxe, zanite_pickaxe, gravitite_pickaxe;
 
-	public ItemAetherShovel skyroot_shovel, holystone_shovel, zanite_shovel, gravitite_shovel;
+	public Item skyroot_shovel, holystone_shovel, zanite_shovel, gravitite_shovel;
 
-	public ItemAetherSword skyroot_sword, holystone_sword, zanite_sword, gravitite_sword;
+	public Item skyroot_sword, holystone_sword, zanite_sword, gravitite_sword;
 
-	public ItemAetherArmor zanite_helmet, zanite_chestplate, zanite_leggings, zanite_boots;
+	public Item zanite_helmet, zanite_chestplate, zanite_leggings, zanite_boots;
 
-	public ItemAetherArmor gravitite_helmet, gravitite_chestplate, gravitite_leggings, gravitite_boots;
+	public Item gravitite_helmet, gravitite_chestplate, gravitite_leggings, gravitite_boots;
 
 	public void preInit()
 	{
@@ -70,7 +69,7 @@ public class ItemsAether
 		this.gravitite_boots = this.registerItem("gravitite_boots", new ItemAetherArmor(EnumAetherArmorMaterial.GRAVITITE, 0, 3));
 	}
 
-	private <T extends Item> T registerItem(String name, T item)
+	private Item registerItem(String name, Item item)
 	{
 		item.setUnlocalizedName(name);
 		GameRegistry.registerItem(item, name);
@@ -84,18 +83,40 @@ public class ItemsAether
 		{
 			ModelsAether models = Aether.PROXY.getModels();
 
-			models.registerItemRenderer(0, this.skyroot_stick);
-			models.registerItemRenderer(0, this.ambrosium_shard);
-			models.registerItemRenderer(0, this.continuum_orb);
-			models.registerItemRenderer(0, this.zanite_gemstone);
+			models.registerItemModel(this.skyroot_stick);
+			models.registerItemModel(this.ambrosium_shard);
+			models.registerItemModel(this.continuum_orb);
+			models.registerItemModel(this.zanite_gemstone);
 
-			models.registerItemRenderers(0, this.skyroot_pickaxe, this.skyroot_axe, this.skyroot_shovel, this.skyroot_sword);
-			models.registerItemRenderers(0, this.holystone_pickaxe, this.holystone_axe, this.holystone_shovel, this.holystone_sword);
-			models.registerItemRenderers(0, this.zanite_pickaxe, this.zanite_axe, this.zanite_shovel, this.zanite_sword);
-			models.registerItemRenderers(0, this.gravitite_pickaxe, this.gravitite_axe, this.gravitite_shovel, this.gravitite_sword);
+			models.registerItemModel(this.skyroot_pickaxe);
+			models.registerItemModel(this.skyroot_axe);
+			models.registerItemModel(this.skyroot_shovel);
+			models.registerItemModel(this.skyroot_sword);
 
-			models.registerItemRenderers(0, this.zanite_helmet, this.zanite_chestplate, this.zanite_leggings, this.zanite_boots);
-			models.registerItemRenderers(0, this.gravitite_helmet, this.gravitite_chestplate, this.gravitite_leggings, this.gravitite_boots);
+			models.registerItemModel(this.holystone_pickaxe);
+			models.registerItemModel(this.holystone_axe);
+			models.registerItemModel(this.holystone_shovel);
+			models.registerItemModel(this.holystone_sword);
+
+			models.registerItemModel(this.zanite_pickaxe);
+			models.registerItemModel(this.zanite_axe);
+			models.registerItemModel(this.zanite_shovel);
+			models.registerItemModel(this.zanite_sword);
+
+			models.registerItemModel(this.gravitite_pickaxe);
+			models.registerItemModel(this.gravitite_axe);
+			models.registerItemModel(this.gravitite_shovel);
+			models.registerItemModel(this.gravitite_sword);
+
+			models.registerItemModel(this.zanite_helmet);
+			models.registerItemModel(this.zanite_chestplate);
+			models.registerItemModel(this.zanite_leggings);
+			models.registerItemModel(this.zanite_boots);
+
+			models.registerItemModel(this.gravitite_helmet);
+			models.registerItemModel(this.gravitite_chestplate);
+			models.registerItemModel(this.gravitite_leggings);
+			models.registerItemModel(this.gravitite_boots);
 		}
 	}
 }
