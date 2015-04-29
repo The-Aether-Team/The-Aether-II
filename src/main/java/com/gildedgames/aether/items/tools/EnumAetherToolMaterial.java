@@ -101,20 +101,11 @@ public enum EnumAetherToolMaterial
 		// TODO: Floating blocks!
 	};
 
-	public void onBlockDestroyed(BlockPos pos, World world)
-	{
-		return;
-	}
+	public void onBlockDestroyed(BlockPos pos, World world) { }
 
-	public void onBlockActivated(BlockPos pos, World world)
-	{
-		return;
-	}
+	public void onBlockActivated(BlockPos pos, World world) { }
 
-	public void onEntityAttacked(ItemStack stack, EntityLivingBase prey, EntityLivingBase predator)
-	{
-		return;
-	}
+	public void onEntityAttacked(ItemStack stack, EntityLivingBase prey, EntityLivingBase predator) { }
 
 	public float getDigSpeed(ItemStack stack, Block block, float baseSpeed)
 	{

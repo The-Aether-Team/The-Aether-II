@@ -1,10 +1,12 @@
 package com.gildedgames.aether.blocks.natural;
 
-import java.util.List;
-
+import com.gildedgames.aether.Aether;
+import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
+import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
+import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
+import com.gildedgames.aether.world.TeleporterAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
@@ -12,8 +14,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -23,10 +28,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.gildedgames.aether.Aether;
-import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
-import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
-import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
+import java.util.List;
 
 public class BlockAercloud extends Block implements IAetherBlockWithVariants
 {
@@ -79,7 +81,20 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 					entity.motionY = -1.5D;
 				}
 			},
-			STORM_AERCLOUD = new AercloudVariant(4, "aercloud_storm"),
+			STORM_AERCLOUD = new AercloudVariant(4, "aercloud_storm")
+			{
+				@Override
+				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
+				{
+					if (entity instanceof EntityPlayerMP)
+					{
+						EntityPlayerMP player = (EntityPlayerMP) entity;
+						ServerConfigurationManager scm = MinecraftServer.getServer().getConfigurationManager();
+
+						scm.transferPlayerToDimension(player, 3, new TeleporterAether(MinecraftServer.getServer().worldServerForDimension(3)));
+					}
+				}
+			},
 			PURPLE_AERCLOUD = new AercloudVariant(5, "aercloud_purple")
 			{
 				@Override
@@ -212,7 +227,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { AERCLOUD_VARIANT, FACING });
+		return new BlockState(this, AERCLOUD_VARIANT, FACING);
 	}
 
 	@Override

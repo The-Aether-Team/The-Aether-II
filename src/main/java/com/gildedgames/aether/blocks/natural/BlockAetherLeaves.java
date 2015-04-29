@@ -6,7 +6,6 @@ import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
 import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks.EnumType;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -35,7 +34,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IAetherBlockWithVa
 	{
 		super();
 		this.setCreativeTab(Aether.getCreativeTabs().tabBlocks);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, true).withProperty(DECAYABLE, true));
 	}
 
 	@Override
@@ -64,7 +63,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IAetherBlockWithVa
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(LEAVES_VARIANT, LEAVES_VARIANT.getVariantFromMeta(meta)).withProperty(DECAYABLE, Boolean.valueOf((meta & 6) == 0)).withProperty(CHECK_DECAY, Boolean.valueOf((meta & 6) > 0));
+		return this.getDefaultState().withProperty(LEAVES_VARIANT, LEAVES_VARIANT.getVariantFromMeta(meta)).withProperty(DECAYABLE, (meta & 6) == 0).withProperty(CHECK_DECAY, (meta & 6) > 0);
 	}
 
 	@Override
@@ -91,7 +90,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IAetherBlockWithVa
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { LEAVES_VARIANT, CHECK_DECAY, DECAYABLE });
+		return new BlockState(this, LEAVES_VARIANT, CHECK_DECAY, DECAYABLE);
 	}
 
 	@Override

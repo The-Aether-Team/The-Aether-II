@@ -40,13 +40,13 @@ public class AetherCreativeTabs
 		}
 	}
 
-	public AetherCreativeTab tabBlocks = new AetherCreativeTab("aetherBlocks");
+	public final AetherCreativeTab tabBlocks = new AetherCreativeTab("aetherBlocks");
 
-	public AetherCreativeTab tabMaterials = new AetherCreativeTab("aetherMaterials");
+	public final AetherCreativeTab tabMaterials = new AetherCreativeTab("aetherMaterials");
 
-	public AetherCreativeTab tabTools = new AetherCreativeTab("aetherTools");
+	public final AetherCreativeTab tabTools = new AetherCreativeTab("aetherTools");
 
-	public AetherCreativeTab tabArmor = new AetherCreativeTab("aetherArmor");
+	public final AetherCreativeTab tabArmor = new AetherCreativeTab("aetherArmor");
 
 	public void preInit()
 	{

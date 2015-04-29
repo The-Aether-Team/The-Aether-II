@@ -1,10 +1,11 @@
 package com.gildedgames.aether.blocks.natural;
 
-import java.util.List;
-
+import com.gildedgames.aether.Aether;
+import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
+import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
+import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,10 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.gildedgames.aether.Aether;
-import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
-import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
-import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
+import java.util.List;
 
 public class BlockHolystone extends Block implements IAetherBlockWithVariants
 {
@@ -63,7 +61,7 @@ public class BlockHolystone extends Block implements IAetherBlockWithVariants
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { HOLYSTONE_VARIANT });
+		return new BlockState(this, HOLYSTONE_VARIANT);
 	}
 
 	@Override

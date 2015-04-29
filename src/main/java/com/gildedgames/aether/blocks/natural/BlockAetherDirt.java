@@ -1,11 +1,11 @@
 package com.gildedgames.aether.blocks.natural;
 
-import java.util.List;
-import java.util.Random;
-
+import com.gildedgames.aether.Aether;
+import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
+import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
+import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -16,10 +16,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.gildedgames.aether.Aether;
-import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
-import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
-import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
+import java.util.List;
+import java.util.Random;
 
 public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 {
@@ -103,7 +101,7 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { GRASS_VARIANT });
+		return new BlockState(this, GRASS_VARIANT);
 	}
 
 	@Override

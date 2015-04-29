@@ -42,14 +42,14 @@ public class ModelsAether
 		{
 			protected ModelResourceLocation getModelResourceLocation(IBlockState state)
 			{
-				LinkedHashMap linkedhashmap = Maps.newLinkedHashMap(state.getProperties());
+				LinkedHashMap mappings = Maps.newLinkedHashMap(state.getProperties());
 
 				if (state.getValue(BlockAercloud.AERCLOUD_VARIANT) != BlockAercloud.PURPLE_AERCLOUD)
 				{
-					linkedhashmap.remove(BlockAercloud.FACING);
+					mappings.remove(BlockAercloud.FACING);
 				}
 
-				return new ModelResourceLocation((ResourceLocation) Block.blockRegistry.getNameForObject(state.getBlock()), this.getPropertyString(linkedhashmap));
+				return new ModelResourceLocation((ResourceLocation) Block.blockRegistry.getNameForObject(state.getBlock()), this.getPropertyString(mappings));
 			}
 		});
 	}
