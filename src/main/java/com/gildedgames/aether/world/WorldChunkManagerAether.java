@@ -53,7 +53,6 @@ public class WorldChunkManagerAether extends WorldChunkManager
 		return af;
 	}
 
-
 	@Override
 	public BiomeGenBase[] loadBlockGeneratorData(BiomeGenBase listToReuse[], int i, int j, int k, int l)
 	{

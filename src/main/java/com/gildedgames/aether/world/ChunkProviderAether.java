@@ -37,7 +37,7 @@ public class ChunkProviderAether implements IChunkProvider
 
 	private double[] field_28093_d, field_28092_e, field_28091_f, field_28090_g, field_28089_h;
 
-	private IBlockState topBlock, fillerBlock, airBlock, stoneBlock;
+	private final IBlockState topBlock, fillerBlock, airBlock, stoneBlock;
 
 	public ChunkProviderAether(World world, long seed)
 	{
@@ -65,68 +65,37 @@ public class ChunkProviderAether implements IChunkProvider
 		return true;
 	}
 
-	private double[] func_28073_a(double ad[], int i, int j, int k, int l, int i1, int j1)
+	private double[] func_28073_a(double source[], int i, int j, int k, int l, int i1, int j1)
 	{
-		if (ad == null)
+		if (source == null)
 		{
-			ad = new double[l * i1 * j1];
+			source = new double[l * i1 * j1];
 		}
+
 		double d = 684.41200000000003D;
 		double d1 = 684.41200000000003D;
 
 		this.field_28090_g = this.ngo6.generateNoiseOctaves(this.field_28090_g, i, k, l, j1, 1.121D, 1.121D, 0.5D);
 		this.field_28089_h = this.ngo7.generateNoiseOctaves(this.field_28089_h, i, k, l, j1, 200D, 200D, 0.5D);
+
 		d *= 2D;
 		this.field_28093_d = this.ngo3.generateNoiseOctaves(this.field_28093_d, i, j, k, l, i1, j1, d / 80D, d1 / 160D, d / 80D);
 		this.field_28092_e = this.ngo1.generateNoiseOctaves(this.field_28092_e, i, j, k, l, i1, j1, d, d1, d);
 		this.field_28091_f = this.ngo2.generateNoiseOctaves(this.field_28091_f, i, j, k, l, i1, j1, d, d1, d);
+
 		int k1 = 0;
-		int l1 = 0;
+
 		for (int j2 = 0; j2 < l; j2++)
 		{
 			for (int l2 = 0; l2 < j1; l2++)
 			{
-				double d4 = 1.0D;
-				d4 *= d4;
-				d4 *= d4;
-				d4 = 1.0D - d4;3
-				double d5 = (this.field_28090_g[l1] + 256D) / 512D;
-				d5 *= d4;
-				if (d5 > 1.0D)
-				{
-					d5 = 1.0D;
-				}
-				double d6 = this.field_28089_h[l1] / 8000D;
-				if (d6 < 0.0D)
-				{
-					d6 = -d6 * 0.29999999999999999D;
-				}
-				d6 = d6 * 3D - 2D;
-				if (d6 > 1.0D)
-				{
-					d6 = 1.0D;
-				}
-				d6 /= 8D;
-				d6 = 0.0D;
-				if (d5 < 0.0D)
-				{
-					d5 = 0.0D;
-				}
-				d5 += 0.5D;
-				d6 = d6 * i1 / 16D;
-				l1++;
-				double d7 = i1 / 2D;
 				for (int j3 = 0; j3 < i1; j3++)
 				{
-					double d8 = 0.0D;
-					double d9 = (j3 - d7) * 8D / d5;
-					if (d9 < 0.0D)
-					{
-						d9 *= -1D;
-					}
+					double d8;
 					double d10 = this.field_28092_e[k1] / 512D;
 					double d11 = this.field_28091_f[k1] / 512D;
 					double d12 = (this.field_28093_d[k1] / 10D + 1.0D) / 2D;
+
 					if (d12 < 0.0D)
 					{
 						d8 = d10;
@@ -139,28 +108,31 @@ public class ChunkProviderAether implements IChunkProvider
 					{
 						d8 = d10 + (d11 - d10) * d12;
 					}
+
 					d8 -= 8D;
 					int k3 = 32;
+
 					if (j3 > i1 - k3)
 					{
 						double d13 = (j3 - (i1 - k3)) / (k3 - 1.0F);
 						d8 = d8 * (1.0D - d13) + -30D * d13;
 					}
+
 					k3 = 8;
+
 					if (j3 < k3)
 					{
 						double d14 = (k3 - j3) / (k3 - 1.0F);
 						d8 = d8 * (1.0D - d14) + -30D * d14;
 					}
-					ad[k1] = d8;
+
+					source[k1] = d8;
 					k1++;
 				}
-
 			}
-
 		}
 
-		return ad;
+		return source;
 	}
 
 	public void setBlocksInChunk(int x, int z, ChunkPrimer primer)
@@ -171,6 +143,7 @@ public class ChunkProviderAether implements IChunkProvider
 		int l = byte0 + 1;
 
 		this.field_28080_q = this.func_28073_a(this.field_28080_q, x * byte0, 0, z * byte0, k, byte1, l);
+
 		for (int i1 = 0; i1 < byte0; i1++)
 		{
 			for (int j1 = 0; j1 < byte0; j1++)
@@ -197,7 +170,7 @@ public class ChunkProviderAether implements IChunkProvider
 
 						for (int i2 = 0; i2 < 8; i2++)
 						{
-							int j2 = i2 + i1 * 8 << 11 | j1 * 8 << 7 | k1 * 4 + l1;
+							int index = i2 + i1 * 8 << 11 | j1 * 8 << 7 | k1 * 4 + l1;
 
 							char c = '\200';
 
@@ -214,9 +187,9 @@ public class ChunkProviderAether implements IChunkProvider
 									state = this.fillerBlock;
 								}
 
-								primer.setBlockState(j2, state);
+								primer.setBlockState(index, state);
 
-								j2 += c;
+								index += c;
 								d15 += d16;
 							}
 
@@ -240,56 +213,64 @@ public class ChunkProviderAether implements IChunkProvider
 		this.field_28079_r = this.ngo4.generateNoiseOctaves(this.field_28079_r, i * 16, j * 16, 0, 16, 16, 1, d, d, 1.0D);
 		this.field_28078_s = this.ngo4.generateNoiseOctaves(this.field_28078_s, i * 16, 109, j * 16, 16, 1, 16, d, 1.0D, d);
 		this.field_28077_t = this.ngo5.generateNoiseOctaves(this.field_28077_t, i * 16, j * 16, 0, 16, 16, 1, d * 2D, d * 2D, d * 2D);
+
 		for (int k = 0; k < 16; k++)
 		{
 			for (int l = 0; l < 16; l++)
 			{
-
 				int i1 = (int) (this.field_28077_t[k + l * 16] / 3D + 3D + this.rand.nextDouble() * 0.25D);
 
 				int j1 = -1;
-				IBlockState byte0 = this.topBlock;
-				IBlockState byte1 = this.fillerBlock;
-				IBlockState stone = this.stoneBlock;
+				IBlockState topBlock = this.topBlock;
+				IBlockState fillerBlock = this.fillerBlock;
+				IBlockState stoneBlock = this.stoneBlock;
 
 				for (int k1 = 127; k1 >= 0; k1--)
 				{
-					int l1 = (l * 16 + k) * 128 + k1;
-					IBlockState byte2 = primer.getBlockState(l1);
-					if (byte2 == Blocks.air.getDefaultState())
+					int index = (l * 16 + k) * 128 + k1;
+
+					IBlockState stateAtPos = primer.getBlockState(index);
+
+					if (stateAtPos == Blocks.air.getDefaultState())
 					{
 						j1 = -1;
 						continue;
 					}
-					if (byte2 != stone)
+
+					if (stateAtPos != stoneBlock)
 					{
 						continue;
 					}
+
 					if (j1 == -1)
 					{
 						if (i1 <= 0)
 						{
-							byte0 = Blocks.air.getDefaultState();
-							byte1 = stone;
+							topBlock = Blocks.air.getDefaultState();
+							fillerBlock = stoneBlock;
 						}
+
 						j1 = i1;
+
 						if (k1 >= 0)
 						{
-							primer.setBlockState(l1, byte0);
+							primer.setBlockState(index, topBlock);
 						}
 						else
 						{
-							primer.setBlockState(l1, byte1);
+							primer.setBlockState(index, fillerBlock);
 						}
+
 						continue;
 					}
+
 					if (j1 <= 0)
 					{
 						continue;
 					}
 
 					j1--;
-					primer.setBlockState(l1, byte1);
+					primer.setBlockState(index, fillerBlock);
 				}
 			}
 		}
@@ -374,7 +355,7 @@ public class ChunkProviderAether implements IChunkProvider
 	}
 
 	@Override
-	public void recreateStructures(Chunk p_180514_1_, int p_180514_2_, int p_180514_3_)
+	public void recreateStructures(Chunk chunk, int x, int z)
 	{
 
 	}

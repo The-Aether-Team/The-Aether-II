@@ -28,10 +28,12 @@ public class WorldProviderAether extends WorldProvider
 			float f5 = (f3 - f4) / f2 * 0.5F + 0.5F;
 			float f6 = 1.0F - (1.0F - MathHelper.sin(f5 * 3.141593F)) * 0.99F;
 			f6 *= f6;
+
 			this.skyColors[0] = f5 * 0.3F + 0.1F;
 			this.skyColors[1] = f5 * f5 * 0.7F + 0.2F;
 			this.skyColors[2] = f5 * f5 * 0.7F + 0.2F;
 			this.skyColors[3] = f6;
+
 			return this.skyColors;
 		}
 		else
