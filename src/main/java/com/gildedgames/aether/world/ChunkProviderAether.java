@@ -18,12 +18,8 @@ import java.util.List;
 import java.util.Random;
 
 /*
- * WARNING:
- * This was reconstructed with almost no knowledge of how
- * world generation works. This entire class is dumb luck.
- *
- * If you break it, you're fixing it.
- * ~ Collin
+ * I'm a stupid class.
+ * Please don't touch me.
  */
 public class ChunkProviderAether implements IChunkProvider
 {
@@ -65,36 +61,38 @@ public class ChunkProviderAether implements IChunkProvider
 		return true;
 	}
 
-	private double[] func_28073_a(double source[], int i, int j, int k, int l, int i1, int j1)
+	private double[] generateNoiseOctaves(double source[], int offsetX, int offsetY, int offsetZ, int length, int width, int height)
 	{
 		if (source == null)
 		{
-			source = new double[l * i1 * j1];
+			source = new double[length * width * height];
 		}
 
-		double d = 684.41200000000003D;
-		double d1 = 684.41200000000003D;
+		double noise1 = 684.41200000000003D;
+		double noise2 = 684.41200000000003D;
 
-		this.field_28090_g = this.ngo6.generateNoiseOctaves(this.field_28090_g, i, k, l, j1, 1.121D, 1.121D, 0.5D);
-		this.field_28089_h = this.ngo7.generateNoiseOctaves(this.field_28089_h, i, k, l, j1, 200D, 200D, 0.5D);
+		// generateNoiseOctaves(arrayToFill, offsetX, offsetZ, length, height, noiseX, noiseY, noiseZ);
+		this.field_28090_g = this.ngo6.generateNoiseOctaves(this.field_28090_g, offsetX, offsetZ, length, height, 1.121D, 1.121D, 0.5D);
+		this.field_28089_h = this.ngo7.generateNoiseOctaves(this.field_28089_h, offsetX, offsetZ, length, height, 200D, 200D, 0.5D);
 
-		d *= 2D;
-		this.field_28093_d = this.ngo3.generateNoiseOctaves(this.field_28093_d, i, j, k, l, i1, j1, d / 80D, d1 / 160D, d / 80D);
-		this.field_28092_e = this.ngo1.generateNoiseOctaves(this.field_28092_e, i, j, k, l, i1, j1, d, d1, d);
-		this.field_28091_f = this.ngo2.generateNoiseOctaves(this.field_28091_f, i, j, k, l, i1, j1, d, d1, d);
+		// generateNoiseOctaves(arrayToFill, offsetX, offsetY, offsetZ, length, width, height, noiseX, noiseY, noiseZ);
+		noise1 *= 2D;
+		this.field_28093_d = this.ngo3.generateNoiseOctaves(this.field_28093_d, offsetX, offsetY, offsetZ, length, width, height, noise1 / 80D, noise2 / 160D, noise1 / 80D);
+		this.field_28092_e = this.ngo1.generateNoiseOctaves(this.field_28092_e, offsetX, offsetY, offsetZ, length, width, height, noise1, noise2, noise1);
+		this.field_28091_f = this.ngo2.generateNoiseOctaves(this.field_28091_f, offsetX, offsetY, offsetZ, length, width, height, noise1, noise2, noise1);
 
-		int k1 = 0;
+		int index = 0;
 
-		for (int j2 = 0; j2 < l; j2++)
+		for (int x = 0; x < length; x++)
 		{
-			for (int l2 = 0; l2 < j1; l2++)
+			for (int y = 0; y < height; y++)
 			{
-				for (int j3 = 0; j3 < i1; j3++)
+				for (int z = 0; z < width; z++)
 				{
 					double d8;
-					double d10 = this.field_28092_e[k1] / 512D;
-					double d11 = this.field_28091_f[k1] / 512D;
-					double d12 = (this.field_28093_d[k1] / 10D + 1.0D) / 2D;
+					double d10 = this.field_28092_e[index] / 512D;
+					double d11 = this.field_28091_f[index] / 512D;
+					double d12 = (this.field_28093_d[index] / 10D + 1.0D) / 2D;
 
 					if (d12 < 0.0D)
 					{
@@ -112,22 +110,22 @@ public class ChunkProviderAether implements IChunkProvider
 					d8 -= 8D;
 					int k3 = 32;
 
-					if (j3 > i1 - k3)
+					if (z > width - k3)
 					{
-						double d13 = (j3 - (i1 - k3)) / (k3 - 1.0F);
+						double d13 = (z - (width - k3)) / (k3 - 1.0F);
 						d8 = d8 * (1.0D - d13) + -30D * d13;
 					}
 
 					k3 = 8;
 
-					if (j3 < k3)
+					if (z < k3)
 					{
-						double d14 = (k3 - j3) / (k3 - 1.0F);
+						double d14 = (k3 - z) / (k3 - 1.0F);
 						d8 = d8 * (1.0D - d14) + -30D * d14;
 					}
 
-					source[k1] = d8;
-					k1++;
+					source[index] = d8;
+					index++;
 				}
 			}
 		}
@@ -135,30 +133,30 @@ public class ChunkProviderAether implements IChunkProvider
 		return source;
 	}
 
-	public void setBlocksInChunk(int x, int z, ChunkPrimer primer)
+	public void setBlocksInChunk(int chunkX, int chunkZ, ChunkPrimer primer)
 	{
-		byte byte0 = 2;
-		int k = byte0 + 1;
-		byte byte1 = 33;
-		int l = byte0 + 1;
+		byte offsetX = 2;
+		int k = offsetX + 1;
+		byte offsetZ = 33;
+		int l = offsetX + 1;
 
-		this.field_28080_q = this.func_28073_a(this.field_28080_q, x * byte0, 0, z * byte0, k, byte1, l);
+		this.field_28080_q = this.generateNoiseOctaves(this.field_28080_q, chunkX * offsetX, 0, chunkZ * offsetX, k, offsetZ, l);
 
-		for (int i1 = 0; i1 < byte0; i1++)
+		for (int i1 = 0; i1 < offsetX; i1++)
 		{
-			for (int j1 = 0; j1 < byte0; j1++)
+			for (int j1 = 0; j1 < offsetX; j1++)
 			{
 				for (int k1 = 0; k1 < 32; k1++)
 				{
 					double d = 0.25D;
-					double d1 = this.field_28080_q[((i1 * l + j1) * byte1 + k1)];
-					double d2 = this.field_28080_q[((i1 * l + j1 + 1) * byte1 + k1)];
-					double d3 = this.field_28080_q[(((i1 + 1) * l + j1) * byte1 + k1)];
-					double d4 = this.field_28080_q[(((i1 + 1) * l + j1 + 1) * byte1 + k1)];
-					double d5 = (this.field_28080_q[(i1 * l + j1) * byte1 + k1 + 1] - d1) * d;
-					double d6 = (this.field_28080_q[(i1 * l + j1 + 1) * byte1 + k1 + 1] - d2) * d;
-					double d7 = (this.field_28080_q[((i1 + 1) * l + j1) * byte1 + k1 + 1] - d3) * d;
-					double d8 = (this.field_28080_q[((i1 + 1) * l + j1 + 1) * byte1 + k1 + 1] - d4) * d;
+					double d1 = this.field_28080_q[((i1 * l + j1) * offsetZ + k1)];
+					double d2 = this.field_28080_q[((i1 * l + j1 + 1) * offsetZ + k1)];
+					double d3 = this.field_28080_q[(((i1 + 1) * l + j1) * offsetZ + k1)];
+					double d4 = this.field_28080_q[(((i1 + 1) * l + j1 + 1) * offsetZ + k1)];
+					double d5 = (this.field_28080_q[(i1 * l + j1) * offsetZ + k1 + 1] - d1) * d;
+					double d6 = (this.field_28080_q[(i1 * l + j1 + 1) * offsetZ + k1 + 1] - d2) * d;
+					double d7 = (this.field_28080_q[((i1 + 1) * l + j1) * offsetZ + k1 + 1] - d3) * d;
+					double d8 = (this.field_28080_q[((i1 + 1) * l + j1 + 1) * offsetZ + k1 + 1] - d4) * d;
 
 					for (int l1 = 0; l1 < 4; l1++)
 					{
@@ -172,7 +170,7 @@ public class ChunkProviderAether implements IChunkProvider
 						{
 							int index = i2 + i1 * 8 << 11 | j1 * 8 << 7 | k1 * 4 + l1;
 
-							char c = '\200';
+							int c = 128;
 
 							double d14 = 0.125D;
 							double d15 = d10;
@@ -207,52 +205,51 @@ public class ChunkProviderAether implements IChunkProvider
 		}
 	}
 
-	public void setBlocksInChunk2(int i, int j, ChunkPrimer primer)
+	public void fillChunk(int chunkX, int chunkZ, ChunkPrimer primer)
 	{
-		double d = 0.03125D;
-		this.field_28079_r = this.ngo4.generateNoiseOctaves(this.field_28079_r, i * 16, j * 16, 0, 16, 16, 1, d, d, 1.0D);
-		this.field_28078_s = this.ngo4.generateNoiseOctaves(this.field_28078_s, i * 16, 109, j * 16, 16, 1, 16, d, 1.0D, d);
-		this.field_28077_t = this.ngo5.generateNoiseOctaves(this.field_28077_t, i * 16, j * 16, 0, 16, 16, 1, d * 2D, d * 2D, d * 2D);
+		double noiseFactor = 0.03125D;
+		this.field_28079_r = this.ngo4.generateNoiseOctaves(this.field_28079_r, chunkX * 16, chunkZ * 16, 0, 16, 16, 1, noiseFactor, noiseFactor, 1.0D);
+		this.field_28078_s = this.ngo4.generateNoiseOctaves(this.field_28078_s, chunkX * 16, 109, chunkZ * 16, 16, 1, 16, noiseFactor, 1.0D, noiseFactor);
+		this.field_28077_t = this.ngo5.generateNoiseOctaves(this.field_28077_t, chunkX * 16, chunkZ * 16, 0, 16, 16, 1, noiseFactor * 2D, noiseFactor * 2D, noiseFactor * 2D);
 
-		for (int k = 0; k < 16; k++)
+		for (int x = 0; x < 16; x++)
 		{
-			for (int l = 0; l < 16; l++)
+			for (int z = 0; z < 16; z++)
 			{
-				int i1 = (int) (this.field_28077_t[k + l * 16] / 3D + 3D + this.rand.nextDouble() * 0.25D);
+				int i1 = (int) (this.field_28077_t[x + z * 16] / 3D + 3D + this.rand.nextDouble() * 0.25D);
 
-				int j1 = -1;
+				int top = -1;
 				IBlockState topBlock = this.topBlock;
 				IBlockState fillerBlock = this.fillerBlock;
-				IBlockState stoneBlock = this.stoneBlock;
 
-				for (int k1 = 127; k1 >= 0; k1--)
+				for (int y = 127; y >= 0; y--)
 				{
-					int index = (l * 16 + k) * 128 + k1;
+					int index = (z * 16 + x) * 128 + y;
 
-					IBlockState stateAtPos = primer.getBlockState(index);
+					IBlockState blockState = primer.getBlockState(index);
 
-					if (stateAtPos == Blocks.air.getDefaultState())
+					if (blockState == Blocks.air.getDefaultState())
 					{
-						j1 = -1;
+						top = -1;
 						continue;
 					}
 
-					if (stateAtPos != stoneBlock)
+					if (blockState != this.stoneBlock)
 					{
 						continue;
 					}
 
-					if (j1 == -1)
+					if (top == -1)
 					{
 						if (i1 <= 0)
 						{
-							topBlock = Blocks.air.getDefaultState();
-							fillerBlock = stoneBlock;
+							topBlock = this.airBlock;
+							fillerBlock = this.stoneBlock;
 						}
 
-						j1 = i1;
+						top = i1;
 
-						if (k1 >= 0)
+						if (y >= 0)
 						{
 							primer.setBlockState(index, topBlock);
 						}
@@ -264,12 +261,12 @@ public class ChunkProviderAether implements IChunkProvider
 						continue;
 					}
 
-					if (j1 <= 0)
+					if (top <= 0)
 					{
 						continue;
 					}
 
-					j1--;
+					top--;
 					primer.setBlockState(index, fillerBlock);
 				}
 			}
@@ -284,7 +281,7 @@ public class ChunkProviderAether implements IChunkProvider
 		ChunkPrimer primer = new ChunkPrimer();
 
 		this.setBlocksInChunk(x, z, primer);
-		this.setBlocksInChunk2(x, z, primer);
+		this.fillChunk(x, z, primer);
 
 		Chunk chunk = new Chunk(this.world, primer, x, z);
 		chunk.generateSkylightMap();
