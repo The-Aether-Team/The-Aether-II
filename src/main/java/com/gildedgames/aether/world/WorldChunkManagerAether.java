@@ -30,38 +30,42 @@ public class WorldChunkManagerAether extends WorldChunkManager
 	}
 
 	@Override
-	public BlockPos findBiomePosition(int i, int j, int k, List list, Random random)
+	public BlockPos findBiomePosition(int x, int z, int range, List biomes, Random random)
 	{
-		if (list.contains(this.biomeGenerator))
+		if (biomes.contains(this.biomeGenerator))
 		{
-			return new BlockPos(i - k + random.nextInt(k * 2 + 1), 0, j - k + random.nextInt(k * 2 + 1));
+			return new BlockPos(x - range + random.nextInt(range * 2 + 1), 0, z - range + random.nextInt(range * 2 + 1));
 		}
 
 		return null;
 	}
 
 	@Override
-	public float[] getRainfall(float af[], int i, int j, int k, int l)
+	public float[] getRainfall(float listToReuse[], int x, int z, int width, int length)
 	{
-		if (af == null || af.length < k * l)
+		int size = width * length;
+
+		if (listToReuse == null || listToReuse.length < size)
 		{
-			af = new float[k * l];
+			listToReuse = new float[size];
 		}
 
-		Arrays.fill(af, 0, k * l, 0);
+		Arrays.fill(listToReuse, 0, size, 0);
 
-		return af;
+		return listToReuse;
 	}
 
 	@Override
-	public BiomeGenBase[] loadBlockGeneratorData(BiomeGenBase listToReuse[], int i, int j, int k, int l)
+	public BiomeGenBase[] loadBlockGeneratorData(BiomeGenBase listToReuse[], int x, int z, int width, int depth)
 	{
-		if (listToReuse == null || listToReuse.length < k * l)
+		int size = width * depth;
+
+		if (listToReuse == null || listToReuse.length < size)
 		{
-			listToReuse = new BiomeGenBase[k * l];
+			listToReuse = new BiomeGenBase[size];
 		}
 
-		Arrays.fill(listToReuse, 0, k * l, this.biomeGenerator);
+		Arrays.fill(listToReuse, 0, size, this.biomeGenerator);
 
 		return listToReuse;
 	}

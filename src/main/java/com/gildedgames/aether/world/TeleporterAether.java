@@ -13,19 +13,19 @@ public class TeleporterAether extends Teleporter
 	}
 
 	@Override
-	public void placeInPortal(Entity par1Entity, float rotationYaw)
+	public void placeInPortal(Entity entity, float rotationYaw)
 	{
 		return;
 	}
 
 	@Override
-	public boolean placeInExistingPortal(Entity par1Entity, float rotationYaw)
+	public boolean placeInExistingPortal(Entity entity, float rotationYaw)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean makePortal(Entity par1Entity)
+	public boolean makePortal(Entity entity)
 	{
 		return false;
 	}

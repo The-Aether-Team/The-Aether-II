@@ -14,27 +14,27 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldProviderAether extends WorldProvider
 {
-	private float[] skyColors = new float[4];
+	private float[] sunriseSunsetColors = new float[4];
 
 	@Override
-	public float[] calcSunriseSunsetColors(float f, float f1)
+	public float[] calcSunriseSunsetColors(float angle, float partialTicks)
 	{
 		float f2 = 0.4F;
-		float f3 = MathHelper.cos(f * 3.141593F * 2.0F) - 0.0F;
+		float cos = MathHelper.cos(angle * 3.141593F * 2.0F) - 0.0F;
 		float f4 = -0F;
 
-		if (f3 >= f4 - f2 && f3 <= f4 + f2)
+		if (cos >= f4 - f2 && cos <= f4 + f2)
 		{
-			float f5 = (f3 - f4) / f2 * 0.5F + 0.5F;
+			float f5 = (cos - f4) / f2 * 0.5F + 0.5F;
 			float f6 = 1.0F - (1.0F - MathHelper.sin(f5 * 3.141593F)) * 0.99F;
 			f6 *= f6;
 
-			this.skyColors[0] = f5 * 0.3F + 0.1F;
-			this.skyColors[1] = f5 * f5 * 0.7F + 0.2F;
-			this.skyColors[2] = f5 * f5 * 0.7F + 0.2F;
-			this.skyColors[3] = f6;
+			this.sunriseSunsetColors[0] = f5 * 0.3F + 0.1F;
+			this.sunriseSunsetColors[1] = f5 * f5 * 0.7F + 0.2F;
+			this.sunriseSunsetColors[2] = f5 * f5 * 0.7F + 0.2F;
+			this.sunriseSunsetColors[3] = f6;
 
-			return this.skyColors;
+			return this.sunriseSunsetColors;
 		}
 		else
 		{
@@ -55,11 +55,11 @@ public class WorldProviderAether extends WorldProvider
 	}
 
 	@Override
-	public boolean canCoordinateBeSpawn(int i, int j)
+	public boolean canCoordinateBeSpawn(int x, int z)
 	{
-		Block k = this.worldObj.getGroundAboveSeaLevel(new BlockPos(i, 0, j));
+		Block block = this.worldObj.getGroundAboveSeaLevel(new BlockPos(x, 0, z));
 
-		return k != Blocks.air && k.getMaterial().isSolid();
+		return block != Blocks.air && block.getMaterial().isSolid();
 	}
 
 	@Override
@@ -87,29 +87,29 @@ public class WorldProviderAether extends WorldProvider
 	}
 
 	@Override
-	public Vec3 getFogColor(float f, float f1)
+	public Vec3 getFogColor(float angle, float partialTicks)
 	{
-		int i = 0x8080a0;
+		int color = 0x8080a0;
 
-		float f2 = MathHelper.cos(f * 3.141593F * 2.0F) * 2.0F + 0.5F;
+		float cos = MathHelper.cos(angle * 3.141593F * 2.0F) * 2.0F + 0.5F;
 
-		if (f2 < 0.0F)
+		if (cos < 0.0F)
 		{
-			f2 = 0.0F;
+			cos = 0.0F;
 		}
-		else if (f2 > 1.0F)
+		else if (cos > 1.0F)
 		{
-			f2 = 1.0F;
+			cos = 1.0F;
 		}
 
-		float f3 = (i >> 16 & 0xff) / 255F;
-		float f4 = (i >> 8 & 0xff) / 255F;
-		float f5 = (i & 0xff) / 255F;
-		f3 *= f2 * 0.94F + 0.06F;
-		f4 *= f2 * 0.94F + 0.06F;
-		f5 *= f2 * 0.91F + 0.09F;
+		float red = (color >> 16 & 0xff) / 255F;
+		float green = (color >> 8 & 0xff) / 255F;
+		float blue = (color & 0xff) / 255F;
+		red *= cos * 0.94F + 0.06F;
+		green *= cos * 0.94F + 0.06F;
+		blue *= cos * 0.91F + 0.09F;
 
-		return new Vec3(f3, f4, f5);
+		return new Vec3(red, green, blue);
 	}
 
 	@Override
