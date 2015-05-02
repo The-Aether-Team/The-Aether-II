@@ -5,7 +5,6 @@
 .classpath
 .project
 .settings
-eclipse
 bin
 
 # IntelliJ IDEA
@@ -13,11 +12,13 @@ bin
 *.ipr
 *.iws
 .idea
+/out/
 
 # Gradle
 .gradle
 /build/
 /bin/
+/run/
 
 # Gradle Wrapper
 /gradle/wrapper/dists

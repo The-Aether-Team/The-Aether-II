@@ -1,9 +1,10 @@
 buildscript {
     repositories {
         mavenCentral()
+        mavenLocal()
 
         maven {
-            name = "forge"
+            name = "ForgeFS"
             url = "http://files.minecraftforge.net/maven"
         }
 
@@ -18,34 +19,87 @@ buildscript {
     }
 }
 
+repositories {
+    mavenCentral()
+    maven {
+        name = "Collin1971-FS"
+        url = "http://collin1971.net/maven/"
+    }
+}
+
+// Load ForgeGradle
 apply plugin: 'forge'
+group = 'com.gildedgames.aether'
 
-version = "1.8-1.0"
-group = "net.aetherteam.aether"
-archivesBaseName = "aether"
+// Define config location.
+ext.configFile = file "build.properties"
 
-minecraft {
-    version = "1.8-11.14.1.1371"
-    runDir = "eclipse"
-
-    mappings = "snapshot_20150305"
+// Load the config.
+configFile.withReader {
+    def config = new Properties()
+    config.load(it)
+    project.ext.config = new ConfigSlurper().parse config
 }
 
+// Define dependencies this project depends on.
 dependencies {
-    compile project('gilded-games-util')
+    compile "com.gildedgames.util:GildedGamesUtil:${config.minecraft_version}-${config.ggutil_version}:dev"
 }
 
+task buildInfo {
+    if (System.getenv().BUILD_NUMBER != null) {
+        ext.buildNum = "build${System.getenv().BUILD_NUMBER}"
+    } else {
+        def cmd = "git rev-parse --short HEAD"
+        def proc = cmd.execute()
+        proc.waitFor()
+
+        if (proc.exitValue() != 0) {
+            ext.revision = "GITOOPS"
+        } else {
+            ext.revision = proc.text.trim()
+        }
+
+        ext.buildNum = "DEV.${project.buildInfo.revision}"
+    }
+}
+
+ext.artifact_version = 'OOPS'
+
+if (System.getenv().ARTIFACT_VERSION == null) {
+    artifact_version = "${config.mod_version}.${project.buildInfo.buildNum}"
+} else {
+    artifact_version = "${system.getenv().ARTIFACT_VERSION}"
+}
+
+// Define artifact version.
+version = "${config.minecraft_version}-${artifact_version}"
+
+// Define ForgeGradle variables.
+minecraft {
+    version = config.minecraft_version + "-" + config.forge_version
+    replace "${version}", project.version
+    
+    mappings = "${config.mappings}"
+
+    runDir = "run"
+}
+
+/* Processes src/main/resources */
 processResources {
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
 
-    from(sourceSets.main.resources.srcDirs) {
+    // replace stuff in mcmod.info, nothing else
+    from (sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
- 
+
+        // replace version and mcversion
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
-        
-    from(sourceSets.main.resources.srcDirs) {
+
+    // copy everything else, thats not the mcmod.info
+    from (sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
 }
