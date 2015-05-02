@@ -105,6 +105,7 @@ public class WorldProviderAether extends WorldProvider
 		float red = (color >> 16 & 0xff) / 255F;
 		float green = (color >> 8 & 0xff) / 255F;
 		float blue = (color & 0xff) / 255F;
+
 		red *= cos * 0.94F + 0.06F;
 		green *= cos * 0.94F + 0.06F;
 		blue *= cos * 0.91F + 0.09F;

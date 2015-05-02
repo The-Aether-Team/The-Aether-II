@@ -6,7 +6,6 @@ import net.minecraft.world.WorldServer;
 
 public class TeleporterAether extends Teleporter
 {
-
 	public TeleporterAether(WorldServer world)
 	{
 		super(world);
