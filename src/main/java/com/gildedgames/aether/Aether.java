@@ -82,4 +82,9 @@ public class Aether
 	{
 		return Aether.INSTANCE.aetherBiome;
 	}
+
+	public static String getResource(String resource)
+	{
+		return (Aether.MOD_ID + ":") + resource;
+	}
 }

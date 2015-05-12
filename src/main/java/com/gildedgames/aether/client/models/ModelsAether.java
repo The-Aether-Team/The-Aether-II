@@ -175,6 +175,6 @@ public class ModelsAether
 
 	private ModelResourceLocation getModelResource(String name, String type)
 	{
-		return new ModelResourceLocation((Aether.MOD_ID + ":") + name, type);
+		return new ModelResourceLocation(Aether.getResource(name), type);
 	}
 }

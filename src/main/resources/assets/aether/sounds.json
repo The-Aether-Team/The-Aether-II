@@ -1,0 +1,8 @@
+{
+	"aeportal.portal": {
+		"category": "block",
+		"sounds": [
+			"aeportal/portal"
+		]
+	}
+}
