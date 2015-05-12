@@ -9,6 +9,7 @@ import com.gildedgames.aether.blocks.natural.BlockAmbrosiumOre;
 import com.gildedgames.aether.blocks.natural.BlockContinuumOre;
 import com.gildedgames.aether.blocks.natural.BlockGravititeOre;
 import com.gildedgames.aether.blocks.natural.BlockHolystone;
+import com.gildedgames.aether.blocks.natural.BlockTallAetherGrass;
 import com.gildedgames.aether.blocks.natural.BlockZaniteOre;
 import com.gildedgames.aether.blocks.util.BlockCustom;
 import com.gildedgames.aether.items.itemblocks.ItemBlockVariants;
@@ -41,6 +42,8 @@ public class BlocksAether
 
 	public Block aether_portal;
 
+	public Block aether_tall_grass;
+
 	public void preInit()
 	{
 		this.aether_dirt = this.registerBlock("aether_dirt", ItemBlockVariants.class, new BlockAetherDirt());
@@ -65,6 +68,8 @@ public class BlocksAether
 		this.aether_leaves = this.registerBlock("aether_leaves", ItemBlockVariants.class, new BlockAetherLeaves());
 
 		this.aether_portal = this.registerBlock("aether_portal", new BlockAetherPortal());
+
+		this.aether_tall_grass = this.registerBlock("aether_tall_grass", new BlockTallAetherGrass());
 	}
 
 	private Block registerBlock(String name, Block block)

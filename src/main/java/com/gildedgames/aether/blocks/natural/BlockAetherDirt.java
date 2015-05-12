@@ -12,7 +12,10 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -78,6 +81,21 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 				}
 			}
 		}
+	}
+
+	public boolean canSustainPlant(IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable)
+	{
+		IBlockState state = world.getBlockState(pos);
+
+		if (state.getBlock() == this)
+		{
+			if (state.getValue(GRASS_VARIANT) == AETHER_GRASS)
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	@Override

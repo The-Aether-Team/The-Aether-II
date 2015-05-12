@@ -25,6 +25,7 @@ tile.aether_leaves.golden_oak_leaves.name=Golden Oak Leaves
 tile.aether_leaves.purple_crystal_leaves.name=Purple Crystal Leaves
 tile.aether_leaves.purple_fruit_leaves.name=Purple Fruit Leaves
 tile.aether_portal.name=Aether Portal
+tile.tall_aether_grass.name=Tall Aether Grass
 
 # Aether Items
 item.skyroot_stick.name=Skyroot Stick

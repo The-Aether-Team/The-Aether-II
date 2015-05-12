@@ -1,0 +1,6 @@
+{
+	"parent": "block/tallgrass",
+	"textures": {
+		"cross": "aether:blocks/aether_tall_grass"
+	}
+}

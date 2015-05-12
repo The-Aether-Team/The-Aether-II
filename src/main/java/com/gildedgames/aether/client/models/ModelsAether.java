@@ -75,6 +75,7 @@ public class ModelsAether
 		this.registerBlockModel(blocks.gravitite_ore);
 		this.registerBlockModel(blocks.continuum_ore);
 		this.registerBlockModel(blocks.aether_portal);
+		this.registerBlockModel(blocks.aether_tall_grass);
 	}
 
 	private void registerItemModels()
