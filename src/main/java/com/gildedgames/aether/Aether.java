@@ -32,7 +32,7 @@ public class Aether
 
 	public static final int AETHER_DIM_ID = 3;
 
-	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.comsmon.CommonProxy")
+	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.common.CommonProxy")
 	public static CommonProxy PROXY;
 
 	private final BlocksAether blocks = new BlocksAether();
