@@ -24,12 +24,13 @@ tile.aether_leaves.dark_blue_skyroot_leaves.name=Dark Blue Skyroot Leaves
 tile.aether_leaves.golden_oak_leaves.name=Golden Oak Leaves
 tile.aether_leaves.purple_crystal_leaves.name=Purple Crystal Leaves
 tile.aether_leaves.purple_fruit_leaves.name=Purple Fruit Leaves
+tile.aether_portal.name=Aether Portal
 
 # Aether Items
 item.skyroot_stick.name=Skyroot Stick
 item.ambrosium_shard.name=Ambrosium Shard
 item.zanite_gemstone.name=Zanite Gemstone
-item.continuum_orb=Continuum Orb
+item.continuum_orb.name=Continuum Orb
 item.skyroot_pickaxe.name=Skyroot Pickaxe
 item.skyroot_axe.name=Skyroot Axe
 item.skyroot_shovel.name=Skyroot Shovel
