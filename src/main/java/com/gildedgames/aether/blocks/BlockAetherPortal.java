@@ -39,36 +39,6 @@ public class BlockAetherPortal extends BlockBreakable
 		this.setDefaultState(this.blockState.getBaseState().withProperty(PORTAL_AXIS, EnumFacing.Axis.X));
 	}
 
-	public static boolean tryToCreatePortal(World world, BlockPos pos, EnumFacing facing)
-	{
-		if (world.getBlockState(pos).getBlock() == Blocks.glowstone)
-		{
-			BlockPos portalPos = pos.offset(facing);
-
-			BlockAetherPortal.Size size = new BlockAetherPortal.Size(world, portalPos, EnumFacing.Axis.X);
-
-			if (size.isWithinSizeBounds() && size.get_field_150864_e() == 0)
-			{
-				size.createPortal();
-
-				return true;
-			}
-			else
-			{
-				BlockAetherPortal.Size size1 = new BlockAetherPortal.Size(world, portalPos, EnumFacing.Axis.Z);
-
-				if (size1.isWithinSizeBounds() && size1.get_field_150864_e() == 0)
-				{
-					size1.createPortal();
-
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
 	@Override
 	public boolean isFullCube()
 	{

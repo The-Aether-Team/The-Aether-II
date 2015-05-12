@@ -2,7 +2,10 @@ package com.gildedgames.aether;
 
 import com.gildedgames.aether.blocks.BlockAetherPortal;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -19,7 +22,7 @@ public class CommonEvents
 			{
 				if (FluidContainerRegistry.isFilledContainer(event.current) && FluidContainerRegistry.getFluidForFilledItem(event.current).fluidID == FluidRegistry.WATER.getID())
 				{
-					if (BlockAetherPortal.tryToCreatePortal(event.world, event.target.getBlockPos(), event.target.sideHit))
+					if (this.tryToCreatePortal(event.world, event.target.getBlockPos(), event.target.sideHit))
 					{
 						if (!event.entityPlayer.capabilities.isCreativeMode)
 						{
@@ -31,5 +34,35 @@ public class CommonEvents
 				}
 			}
 		}
+	}
+
+	private boolean tryToCreatePortal(World world, BlockPos pos, EnumFacing facing)
+	{
+		if (world.getBlockState(pos).getBlock() == Blocks.glowstone)
+		{
+			BlockPos portalPos = pos.offset(facing);
+
+			BlockAetherPortal.Size size = new BlockAetherPortal.Size(world, portalPos, EnumFacing.Axis.X);
+
+			if (size.isWithinSizeBounds() && size.get_field_150864_e() == 0)
+			{
+				size.createPortal();
+
+				return true;
+			}
+			else
+			{
+				BlockAetherPortal.Size size1 = new BlockAetherPortal.Size(world, portalPos, EnumFacing.Axis.Z);
+
+				if (size1.isWithinSizeBounds() && size1.get_field_150864_e() == 0)
+				{
+					size1.createPortal();
+
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 }
