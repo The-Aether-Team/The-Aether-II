@@ -1,13 +1,18 @@
 package com.gildedgames.aether.blocks;
 
 import com.gildedgames.aether.Aether;
+import com.gildedgames.aether.world.TeleporterAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -141,6 +146,19 @@ public class BlockAetherPortal extends BlockBreakable
 		boolean nszFlag = northFlag || southFlag || axis == EnumFacing.Axis.Z;
 
 		return wexFlag && side == EnumFacing.WEST || (wexFlag && side == EnumFacing.EAST || (nszFlag && side == EnumFacing.NORTH || nszFlag && side == EnumFacing.SOUTH));
+	}
+
+	@Override
+	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
+	{
+		if (entity instanceof EntityPlayerMP)
+		{
+			EntityPlayerMP player = (EntityPlayerMP) entity;
+			ServerConfigurationManager scm = MinecraftServer.getServer().getConfigurationManager();
+
+			int transferToID = player.dimension == Aether.AETHER_DIM_ID ? 0 : Aether.AETHER_DIM_ID;
+			scm.transferPlayerToDimension(player, transferToID , new TeleporterAether(MinecraftServer.getServer().worldServerForDimension(3)));
+		}
 	}
 
 	@Override

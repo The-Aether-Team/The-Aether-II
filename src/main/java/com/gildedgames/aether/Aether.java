@@ -25,6 +25,8 @@ public class Aether
 
 	public static final String MOD_VERSION = "1.8-1.0";
 
+	public static final int AETHER_DIM_ID = 3;
+
 	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.CommonProxy")
 	public static CommonProxy PROXY;
 
@@ -36,7 +38,7 @@ public class Aether
 
 	private final AetherCreativeTabs tabs = new AetherCreativeTabs();
 
-	private final BiomeGenAether aetherBiome = new BiomeGenAether(3);
+	private final BiomeGenAether aetherBiome = new BiomeGenAether(AETHER_DIM_ID);
 
 	@EventHandler
 	public void onPreInit(FMLPreInitializationEvent event)

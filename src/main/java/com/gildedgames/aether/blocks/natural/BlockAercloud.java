@@ -4,7 +4,6 @@ import com.gildedgames.aether.Aether;
 import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
 import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
 import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
-import com.gildedgames.aether.world.TeleporterAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -14,11 +13,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -81,20 +77,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 					entity.motionY = -1.5D;
 				}
 			},
-			STORM_AERCLOUD = new AercloudVariant(4, "aercloud_storm")
-			{
-				@Override
-				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
-				{
-					if (entity instanceof EntityPlayerMP)
-					{
-						EntityPlayerMP player = (EntityPlayerMP) entity;
-						ServerConfigurationManager scm = MinecraftServer.getServer().getConfigurationManager();
-
-						scm.transferPlayerToDimension(player, 3, new TeleporterAether(MinecraftServer.getServer().worldServerForDimension(3)));
-					}
-				}
-			},
+			STORM_AERCLOUD = new AercloudVariant(4, "aercloud_storm"),
 			PURPLE_AERCLOUD = new AercloudVariant(5, "aercloud_purple")
 			{
 				@Override
