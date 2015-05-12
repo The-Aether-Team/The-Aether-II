@@ -39,6 +39,8 @@ public class BlocksAether
 
 	public Block aether_leaves;
 
+	public Block aether_portal;
+
 	public void preInit()
 	{
 		this.aether_dirt = this.registerBlock("aether_dirt", ItemBlockVariants.class, new BlockAetherDirt());
@@ -61,6 +63,8 @@ public class BlocksAether
 		this.continuum_ore = this.registerBlock("continuum_ore", new BlockContinuumOre());
 
 		this.aether_leaves = this.registerBlock("aether_leaves", ItemBlockVariants.class, new BlockAetherLeaves());
+
+		this.aether_portal = this.registerBlock("aether_portal", new BlockAetherPortal());
 	}
 
 	private Block registerBlock(String name, Block block)

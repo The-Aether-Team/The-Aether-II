@@ -3,7 +3,6 @@ package com.gildedgames.aether;
 import com.gildedgames.aether.blocks.BlocksAether;
 import com.gildedgames.aether.items.ItemsAether;
 import com.gildedgames.aether.recipes.RecipesAether;
-import com.gildedgames.aether.server.ServerProxy;
 import com.gildedgames.aether.world.WorldProviderAether;
 import com.gildedgames.aether.world.biome.BiomeGenAether;
 import net.minecraftforge.common.DimensionManager;
@@ -26,8 +25,8 @@ public class Aether
 
 	public static final String MOD_VERSION = "1.8-1.0";
 
-	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.server.ServerProxy")
-	public static ServerProxy PROXY;
+	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.CommonProxy")
+	public static CommonProxy PROXY;
 
 	private final BlocksAether blocks = new BlocksAether();
 
