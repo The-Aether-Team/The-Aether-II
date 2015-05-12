@@ -5,6 +5,8 @@ import com.gildedgames.aether.items.ItemsAether;
 import com.gildedgames.aether.recipes.RecipesAether;
 import com.gildedgames.aether.world.WorldProviderAether;
 import com.gildedgames.aether.world.biome.BiomeGenAether;
+import com.gildedgames.util.core.SidedObject;
+import com.gildedgames.util.player.PlayerCore;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -12,6 +14,7 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.relauncher.Side;
 
 @Mod(name = Aether.MOD_NAME, modid = Aether.MOD_ID, version = Aether.MOD_VERSION)
 public class Aether
@@ -40,9 +43,14 @@ public class Aether
 
 	private final BiomeGenAether aetherBiome = new BiomeGenAether(AETHER_DIM_ID);
 
+	private SidedObject<AetherServices> services;
+
 	@EventHandler
 	public void onPreInit(FMLPreInitializationEvent event)
 	{
+		this.services = new SidedObject<AetherServices>(new AetherServices(Side.CLIENT), new AetherServices(Side.SERVER));
+		PlayerCore.INSTANCE.registerPlayerPool(this.services.client().getPool(), this.services.server().getPool());
+
 		this.blocks.preInit();
 		this.items.preInit();
 		this.recipes.preInit();
@@ -83,6 +91,11 @@ public class Aether
 	public static BiomeGenAether getAetherBiome()
 	{
 		return Aether.INSTANCE.aetherBiome;
+	}
+
+	public static SidedObject<AetherServices> getServices()
+	{
+		return Aether.INSTANCE.services;
 	}
 
 	public static String getResource(String resource)
