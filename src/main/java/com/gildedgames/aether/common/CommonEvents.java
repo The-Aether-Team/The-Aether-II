@@ -1,4 +1,4 @@
-package com.gildedgames.aether;
+package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.blocks.BlockAetherPortal;
 import net.minecraft.init.Blocks;

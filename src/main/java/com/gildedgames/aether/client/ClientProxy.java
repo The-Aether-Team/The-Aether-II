@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client;
 
-import com.gildedgames.aether.CommonProxy;
+import com.gildedgames.aether.common.CommonProxy;
 import com.gildedgames.aether.client.models.ModelsAether;
 import net.minecraft.client.Minecraft;
 

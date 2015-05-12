@@ -1,6 +1,8 @@
 package com.gildedgames.aether;
 
 import com.gildedgames.aether.blocks.BlocksAether;
+import com.gildedgames.aether.common.CommonProxy;
+import com.gildedgames.aether.common.services.AetherServices;
 import com.gildedgames.aether.items.ItemsAether;
 import com.gildedgames.aether.recipes.RecipesAether;
 import com.gildedgames.aether.world.WorldProviderAether;
@@ -30,7 +32,7 @@ public class Aether
 
 	public static final int AETHER_DIM_ID = 3;
 
-	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.CommonProxy")
+	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.comsmon.CommonProxy")
 	public static CommonProxy PROXY;
 
 	private final BlocksAether blocks = new BlocksAether();

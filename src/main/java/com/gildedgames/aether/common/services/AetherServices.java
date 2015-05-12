@@ -1,5 +1,6 @@
-package com.gildedgames.aether;
+package com.gildedgames.aether.common.services;
 
+import com.gildedgames.aether.Aether;
 import com.gildedgames.aether.player.PlayerAether;
 import com.gildedgames.aether.player.PlayerAetherHookFactory;
 import com.gildedgames.util.player.common.IPlayerHookPool;

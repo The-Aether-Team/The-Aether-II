@@ -1,6 +1,7 @@
-package com.gildedgames.aether;
+package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.client.models.ModelsAether;
+import com.gildedgames.aether.common.CommonEvents;
 import net.minecraftforge.common.MinecraftForge;
 
 public class CommonProxy
