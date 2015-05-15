@@ -27,8 +27,8 @@ public class BlockTallAetherGrass extends BlockBush implements IShearable, IGrow
 	{
 		super(Material.vine);
 
-		float f = 0.4F;
-		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.8F, 0.5F + f);
+		this.setBlockBounds(0.1f, 0.0f, 0.1f, 0.9f, 0.8f, 0.9f);
+		this.setCreativeTab(Aether.getCreativeTabs().tabBlocks);
 	}
 
 	protected boolean canPlaceBlockOn(Block ground)
