@@ -11,5 +11,4 @@ public class PlayerAetherHookFactory implements IPlayerHookFactory<PlayerAether>
 	{
 		return new PlayerAether(profile, pool);
 	}
-
 }

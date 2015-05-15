@@ -10,7 +10,6 @@ import net.minecraft.util.DamageSource;
 
 public class PlayerAether implements IPlayerHook
 {
-
 	private final IPlayerProfile playerProfile;
 
 	private final IPlayerHookPool<PlayerAether> playerHookPool;
