@@ -1,13 +1,13 @@
 package com.gildedgames.aether.blocks.natural;
 
-import java.util.Random;
-
+import com.gildedgames.aether.AetherCreativeTabs;
+import com.gildedgames.aether.items.ItemsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 
-import com.gildedgames.aether.Aether;
+import java.util.Random;
 
 public class BlockContinuumOre extends Block
 {
@@ -20,14 +20,14 @@ public class BlockContinuumOre extends Block
 		this.setStepSound(soundTypeStone);
 		this.setHarvestLevel("pickaxe", 3);
 
-		this.setCreativeTab(Aether.getCreativeTabs().tabBlocks);
+		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 
 	}
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return Aether.getItems().continuum_orb;
+		return ItemsAether.continuum_orb;
 	}
 
 }

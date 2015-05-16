@@ -1,6 +1,6 @@
 package com.gildedgames.aether.blocks.natural;
 
-import com.gildedgames.aether.Aether;
+import com.gildedgames.aether.AetherCreativeTabs;
 import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
 import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
 import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
@@ -26,8 +26,8 @@ import java.util.List;
 public class BlockAetherLog extends Block implements IAetherBlockWithVariants
 {
 	public static final BlockVariant
-	SKYROOT_LOG = new BlockVariant(0, "skyroot_log"),
-	GOLDEN_OAK_LOG = new BlockVariant(4, "golden_oak_log");
+			SKYROOT_LOG = new BlockVariant(0, "skyroot_log"),
+			GOLDEN_OAK_LOG = new BlockVariant(4, "golden_oak_log");
 
 	public static final PropertyVariant LOG_VARIANT = PropertyVariant.create("variant", SKYROOT_LOG, GOLDEN_OAK_LOG);
 
@@ -38,7 +38,7 @@ public class BlockAetherLog extends Block implements IAetherBlockWithVariants
 		super(Material.wood);
 		this.setStepSound(Block.soundTypeWood);
 		this.setHardness(2.0f);
-		this.setCreativeTab(Aether.getCreativeTabs().tabBlocks);
+		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(LOG_VARIANT, SKYROOT_LOG).withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
 	}

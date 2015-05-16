@@ -1,6 +1,6 @@
 package com.gildedgames.aether.blocks;
 
-import com.gildedgames.aether.Aether;
+import com.gildedgames.aether.AetherCreativeTabs;
 import com.gildedgames.aether.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.blocks.natural.BlockAetherLeaves;
@@ -21,63 +21,63 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class BlocksAether
 {
-	public Block aether_dirt;
+	public static Block aether_dirt;
 
-	public Block holystone;
+	public static Block holystone;
 
-	public Block aercloud;
+	public static Block aercloud;
 
-	public Block aether_log;
+	public static Block aether_log;
 
-	public Block ambrosium_ore;
+	public static Block ambrosium_ore;
 
-	public Block zanite_ore;
+	public static Block zanite_ore;
 
-	public Block gravitite_ore;
+	public static Block gravitite_ore;
 
-	public Block continuum_ore;
+	public static Block continuum_ore;
 
-	public Block skyroot_planks;
+	public static Block skyroot_planks;
 
-	public Block aether_leaves;
+	public static Block aether_leaves;
 
-	public Block aether_portal;
+	public static Block aether_portal;
 
-	public Block aether_tall_grass;
+	public static Block aether_tall_grass;
 
-	public Block quicksoil;
+	public static Block quicksoil;
 
-	public void preInit()
+	public static void preInit()
 	{
-		this.aether_dirt = this.registerBlock("aether_dirt", ItemBlockVariants.class, new BlockAetherDirt());
+		aether_dirt = registerBlock("aether_dirt", ItemBlockVariants.class, new BlockAetherDirt());
 
-		this.holystone = this.registerBlock("holystone", ItemBlockVariants.class, new BlockHolystone());
+		holystone = registerBlock("holystone", ItemBlockVariants.class, new BlockHolystone());
 
-		this.aercloud = this.registerBlock("aercloud", ItemBlockVariants.class, new BlockAercloud());
+		aercloud = registerBlock("aercloud", ItemBlockVariants.class, new BlockAercloud());
 
-		this.aether_log = this.registerBlock("aether_log", ItemBlockVariants.class, new BlockAetherLog());
+		aether_log = registerBlock("aether_log", ItemBlockVariants.class, new BlockAetherLog());
 
-		this.skyroot_planks = this.registerBlock("skyroot_planks", new BlockCustom(Material.wood).setStepSound(Block.soundTypeWood).setHardness(2.0f)
-				.setResistance(5.0f).setCreativeTab(Aether.getCreativeTabs().tabBlocks));
+		skyroot_planks = registerBlock("skyroot_planks", new BlockCustom(Material.wood).setStepSound(Block.soundTypeWood).setHardness(2.0f)
+				.setResistance(5.0f).setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		this.ambrosium_ore = this.registerBlock("ambrosium_ore", new BlockAmbrosiumOre());
+		ambrosium_ore = registerBlock("ambrosium_ore", new BlockAmbrosiumOre());
 
-		this.zanite_ore = this.registerBlock("zanite_ore", new BlockZaniteOre());
+		zanite_ore = registerBlock("zanite_ore", new BlockZaniteOre());
 
-		this.gravitite_ore = this.registerBlock("gravitite_ore", new BlockGravititeOre());
+		gravitite_ore = registerBlock("gravitite_ore", new BlockGravititeOre());
 
-		this.continuum_ore = this.registerBlock("continuum_ore", new BlockContinuumOre());
+		continuum_ore = registerBlock("continuum_ore", new BlockContinuumOre());
 
-		this.aether_leaves = this.registerBlock("aether_leaves", ItemBlockVariants.class, new BlockAetherLeaves());
+		aether_leaves = registerBlock("aether_leaves", ItemBlockVariants.class, new BlockAetherLeaves());
 
-		this.aether_portal = this.registerBlock("aether_portal", new BlockAetherPortal());
+		aether_portal = registerBlock("aether_portal", new BlockAetherPortal());
 
-		this.aether_tall_grass = this.registerBlock("aether_tall_grass", new BlockTallAetherGrass());
+		aether_tall_grass = registerBlock("aether_tall_grass", new BlockTallAetherGrass());
 
-		this.quicksoil = this.registerBlock("quicksoil", new BlockQuicksoil());
+		quicksoil = registerBlock("quicksoil", new BlockQuicksoil());
 	}
 
-	private Block registerBlock(String name, Block block)
+	private static Block registerBlock(String name, Block block)
 	{
 		block.setUnlocalizedName(name);
 		GameRegistry.registerBlock(block, name);
@@ -85,7 +85,7 @@ public class BlocksAether
 		return block;
 	}
 
-	private Block registerBlock(String name, Class<? extends ItemBlock> itemblock, Block block)
+	private static Block registerBlock(String name, Class<? extends ItemBlock> itemblock, Block block)
 	{
 		block.setUnlocalizedName(name);
 		GameRegistry.registerBlock(block, itemblock, name);

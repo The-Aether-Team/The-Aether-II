@@ -127,7 +127,7 @@ public class BlockAetherPortal extends BlockBreakable
 			ServerConfigurationManager scm = MinecraftServer.getServer().getConfigurationManager();
 
 			int transferToID = player.dimension == Aether.AETHER_DIM_ID ? 0 : Aether.AETHER_DIM_ID;
-			scm.transferPlayerToDimension(player, transferToID , new TeleporterAether(MinecraftServer.getServer().worldServerForDimension(3)));
+			scm.transferPlayerToDimension(player, transferToID, new TeleporterAether(MinecraftServer.getServer().worldServerForDimension(3)));
 		}
 	}
 
@@ -327,7 +327,7 @@ public class BlockAetherPortal extends BlockBreakable
 
 		protected boolean isBlockSuitable(Block block)
 		{
-			return block.getMaterial() == Material.air || block == Blocks.water || block == Aether.getBlocks().aether_portal;
+			return block.getMaterial() == Material.air || block == Blocks.water || block == BlocksAether.aether_portal;
 		}
 
 		public boolean isWithinSizeBounds()
@@ -343,7 +343,7 @@ public class BlockAetherPortal extends BlockBreakable
 
 				for (int j = 0; j < this.height; ++j)
 				{
-					this.world.setBlockState(blockpos.up(j), Aether.getBlocks().aether_portal.getDefaultState().withProperty(BlockAetherPortal.PORTAL_AXIS, this.axis), 2);
+					this.world.setBlockState(blockpos.up(j), BlocksAether.aether_portal.getDefaultState().withProperty(BlockAetherPortal.PORTAL_AXIS, this.axis), 2);
 				}
 			}
 		}

@@ -1,17 +1,15 @@
 package com.gildedgames.aether.blocks.natural;
 
-import com.gildedgames.aether.Aether;
+import com.gildedgames.aether.AetherCreativeTabs;
+import com.gildedgames.aether.blocks.BlocksAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
@@ -28,12 +26,12 @@ public class BlockTallAetherGrass extends BlockBush implements IShearable, IGrow
 		super(Material.vine);
 
 		this.setBlockBounds(0.1f, 0.0f, 0.1f, 0.9f, 0.8f, 0.9f);
-		this.setCreativeTab(Aether.getCreativeTabs().tabBlocks);
+		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 
 	protected boolean canPlaceBlockOn(Block ground)
 	{
-		return ground == Aether.getBlocks().aether_dirt;
+		return ground == BlocksAether.aether_dirt;
 	}
 
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
@@ -61,7 +59,6 @@ public class BlockTallAetherGrass extends BlockBush implements IShearable, IGrow
 	{
 		return Block.EnumOffsetType.XYZ;
 	}
-
 
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess world, BlockPos pos, int renderPass)

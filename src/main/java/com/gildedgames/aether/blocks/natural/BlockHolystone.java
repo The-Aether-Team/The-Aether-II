@@ -1,6 +1,6 @@
 package com.gildedgames.aether.blocks.natural;
 
-import com.gildedgames.aether.Aether;
+import com.gildedgames.aether.AetherCreativeTabs;
 import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
 import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
 import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
@@ -19,9 +19,9 @@ import java.util.List;
 public class BlockHolystone extends Block implements IAetherBlockWithVariants
 {
 	public static final BlockVariant
-	NORMAL_HOLYSTONE = new BlockVariant(0, "holystone"),
-	MOSSY_HOLYSTONE = new BlockVariant(1, "mossy_holystone"),
-	BLOOD_MOSS_HOLYSTONE = new BlockVariant(2, "blood_holystone");
+			NORMAL_HOLYSTONE = new BlockVariant(0, "holystone"),
+			MOSSY_HOLYSTONE = new BlockVariant(1, "mossy_holystone"),
+			BLOOD_MOSS_HOLYSTONE = new BlockVariant(2, "blood_holystone");
 
 	public static final PropertyVariant HOLYSTONE_VARIANT = PropertyVariant.create("variant", NORMAL_HOLYSTONE, MOSSY_HOLYSTONE, BLOOD_MOSS_HOLYSTONE);
 
@@ -32,7 +32,7 @@ public class BlockHolystone extends Block implements IAetherBlockWithVariants
 		this.setStepSound(Block.soundTypeStone);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(HOLYSTONE_VARIANT, NORMAL_HOLYSTONE));
-		this.setCreativeTab(Aether.getCreativeTabs().tabBlocks);
+		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 
 	@Override

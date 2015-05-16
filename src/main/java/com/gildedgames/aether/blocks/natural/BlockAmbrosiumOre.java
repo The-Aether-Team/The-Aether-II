@@ -1,6 +1,7 @@
 package com.gildedgames.aether.blocks.natural;
 
-import com.gildedgames.aether.Aether;
+import com.gildedgames.aether.AetherCreativeTabs;
+import com.gildedgames.aether.items.ItemsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -20,13 +21,13 @@ public class BlockAmbrosiumOre extends Block
 		this.setStepSound(soundTypeStone);
 		this.setHarvestLevel("pickaxe", 0);
 
-		this.setCreativeTab(Aether.getCreativeTabs().tabBlocks);
+		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return Aether.getItems().ambrosium_shard;
+		return ItemsAether.ambrosium_shard;
 	}
 
 }

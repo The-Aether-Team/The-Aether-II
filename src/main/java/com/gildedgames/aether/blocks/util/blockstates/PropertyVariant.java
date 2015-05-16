@@ -1,11 +1,11 @@
 package com.gildedgames.aether.blocks.util.blockstates;
 
+import net.minecraft.block.properties.IProperty;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-
-import net.minecraft.block.properties.IProperty;
 
 public class PropertyVariant implements IProperty
 {

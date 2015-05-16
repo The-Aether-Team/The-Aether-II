@@ -2,27 +2,24 @@ package com.gildedgames.aether.client;
 
 import com.gildedgames.aether.client.models.ModelsAether;
 import com.gildedgames.aether.common.CommonProxy;
-import net.minecraft.client.Minecraft;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ClientProxy extends CommonProxy
 {
-	private ModelsAether models;
-
 	@Override
-	public void preInit()
+	public void preInit(FMLPreInitializationEvent event)
 	{
-		this.models = new ModelsAether(Minecraft.getMinecraft());
+		super.preInit(event);
 
-		this.models.prepareModels();
-
-		super.preInit();
+		ModelsAether.prepareModels();
 	}
 
 	@Override
-	public void init()
+	public void init(FMLInitializationEvent event)
 	{
-		this.models.registerModels();
+		super.init(event);
 
-		super.init();
+		ModelsAether.registerModels();
 	}
 }

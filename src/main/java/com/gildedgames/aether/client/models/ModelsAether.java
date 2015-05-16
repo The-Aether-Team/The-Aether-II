@@ -26,19 +26,10 @@ import java.util.LinkedHashMap;
 
 public class ModelsAether
 {
-	private Minecraft mc;
-
-	public ModelsAether(Minecraft mc)
+	public static void prepareModels()
 	{
-		this.mc = mc;
-	}
-
-	public void prepareModels()
-	{
-		BlocksAether blocks = Aether.getBlocks();
-
-		ModelLoader.setCustomStateMapper(blocks.aether_leaves, new StateMap.Builder().setProperty(BlockAetherLeaves.LEAVES_VARIANT).addPropertiesToIgnore(BlockAetherLeaves.CHECK_DECAY, BlockAetherLeaves.DECAYABLE).build());
-		ModelLoader.setCustomStateMapper(blocks.aercloud, new StateMapperBase()
+		ModelLoader.setCustomStateMapper(BlocksAether.aether_leaves, new StateMap.Builder().setProperty(BlockAetherLeaves.LEAVES_VARIANT).addPropertiesToIgnore(BlockAetherLeaves.CHECK_DECAY, BlockAetherLeaves.DECAYABLE).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.aercloud, new StateMapperBase()
 		{
 			protected ModelResourceLocation getModelResourceLocation(IBlockState state)
 			{
@@ -49,74 +40,70 @@ public class ModelsAether
 					mappings.remove(BlockAercloud.FACING);
 				}
 
-				return new ModelResourceLocation((ResourceLocation) Block.blockRegistry.getNameForObject(state.getBlock()), this.getPropertyString(mappings));
+				return new ModelResourceLocation((ResourceLocation) Block.blockRegistry.getNameForObject(state.getBlock()), getPropertyString(mappings));
 			}
 		});
 	}
 
-	public void registerModels()
+	public static void registerModels()
 	{
-		this.registerBlockModels();
-		this.registerItemModels();
+		registerBlockModels();
+		registerItemModels();
 	}
 
-	private void registerBlockModels()
+	private static void registerBlockModels()
 	{
-		BlocksAether blocks = Aether.getBlocks();
-
-		this.registerBlockModelVariants(blocks.aether_dirt, BlockAetherDirt.GRASS_VARIANT.getAllowedValues());
-		this.registerBlockModelVariants(blocks.holystone, BlockHolystone.HOLYSTONE_VARIANT.getAllowedValues());
-		this.registerBlockModelVariants(blocks.aercloud, BlockAercloud.AERCLOUD_VARIANT.getAllowedValues());
-		this.registerBlockModelVariants(blocks.aether_log, BlockAetherLog.LOG_VARIANT.getAllowedValues());
-		this.registerBlockModelVariants(blocks.aether_leaves, BlockAetherLeaves.LEAVES_VARIANT.getAllowedValues());
-		this.registerBlockModel(blocks.skyroot_planks);
-		this.registerBlockModel(blocks.ambrosium_ore);
-		this.registerBlockModel(blocks.zanite_ore);
-		this.registerBlockModel(blocks.gravitite_ore);
-		this.registerBlockModel(blocks.continuum_ore);
-		this.registerBlockModel(blocks.aether_portal);
-		this.registerBlockModel(blocks.aether_tall_grass);
-		this.registerBlockModel(blocks.quicksoil);
+		registerBlockModelVariants(BlocksAether.aether_dirt, BlockAetherDirt.GRASS_VARIANT.getAllowedValues());
+		registerBlockModelVariants(BlocksAether.holystone, BlockHolystone.HOLYSTONE_VARIANT.getAllowedValues());
+		registerBlockModelVariants(BlocksAether.aercloud, BlockAercloud.AERCLOUD_VARIANT.getAllowedValues());
+		registerBlockModelVariants(BlocksAether.aether_log, BlockAetherLog.LOG_VARIANT.getAllowedValues());
+		registerBlockModelVariants(BlocksAether.aether_leaves, BlockAetherLeaves.LEAVES_VARIANT.getAllowedValues());
+		registerBlockModel(BlocksAether.skyroot_planks);
+		registerBlockModel(BlocksAether.ambrosium_ore);
+		registerBlockModel(BlocksAether.zanite_ore);
+		registerBlockModel(BlocksAether.gravitite_ore);
+		registerBlockModel(BlocksAether.continuum_ore);
+		registerBlockModel(BlocksAether.aether_portal);
+		registerBlockModel(BlocksAether.aether_tall_grass);
+		registerBlockModel(BlocksAether.quicksoil);
 	}
 
-	private void registerItemModels()
+	private static void registerItemModels()
 	{
-		ItemsAether items = Aether.getItems();
+		registerItemModel(ItemsAether.skyroot_stick);
+		registerItemModel(ItemsAether.ambrosium_shard);
+		registerItemModel(ItemsAether.continuum_orb);
+		registerItemModel(ItemsAether.zanite_gemstone);
 
-		this.registerItemModel(items.skyroot_stick);
-		this.registerItemModel(items.ambrosium_shard);
-		this.registerItemModel(items.continuum_orb);
-		this.registerItemModel(items.zanite_gemstone);
+		registerItemModel(ItemsAether.skyroot_pickaxe);
+		registerItemModel(ItemsAether.skyroot_axe);
+		registerItemModel(ItemsAether.skyroot_shovel);
+		registerItemModel(ItemsAether.skyroot_sword);
 
-		this.registerItemModel(items.skyroot_pickaxe);
-		this.registerItemModel(items.skyroot_axe);
-		this.registerItemModel(items.skyroot_shovel);
-		this.registerItemModel(items.skyroot_sword);
+		registerItemModel(ItemsAether.holystone_pickaxe);
+		registerItemModel(ItemsAether.holystone_axe);
+		registerItemModel(ItemsAether.holystone_shovel);
+		registerItemModel(ItemsAether.holystone_sword);
 
-		this.registerItemModel(items.holystone_pickaxe);
-		this.registerItemModel(items.holystone_axe);
-		this.registerItemModel(items.holystone_shovel);
-		this.registerItemModel(items.holystone_sword);
+		registerItemModel(ItemsAether.zanite_pickaxe);
+		registerItemModel(ItemsAether.zanite_axe);
+		registerItemModel(ItemsAether.zanite_shovel);
+		registerItemModel(ItemsAether.zanite_sword);
 
-		this.registerItemModel(items.zanite_pickaxe);
-		this.registerItemModel(items.zanite_axe);
-		this.registerItemModel(items.zanite_shovel);
-		this.registerItemModel(items.zanite_sword);
+		registerItemModel(ItemsAether.gravitite_pickaxe);
+		registerItemModel(ItemsAether.gravitite_axe);
+		registerItemModel(ItemsAether.gravitite_shovel);
+		registerItemModel(ItemsAether.gravitite_sword);
 
-		this.registerItemModel(items.gravitite_pickaxe);
-		this.registerItemModel(items.gravitite_axe);
-		this.registerItemModel(items.gravitite_shovel);
-		this.registerItemModel(items.gravitite_sword);
+		registerItemModel(ItemsAether.zanite_helmet);
+		registerItemModel(ItemsAether.zanite_chestplate);
+		registerItemModel(ItemsAether.zanite_leggings);
+		registerItemModel(ItemsAether.zanite_boots);
 
-		this.registerItemModel(items.zanite_helmet);
-		this.registerItemModel(items.zanite_chestplate);
-		this.registerItemModel(items.zanite_leggings);
-		this.registerItemModel(items.zanite_boots);
-
-		this.registerItemModel(items.gravitite_helmet);
-		this.registerItemModel(items.gravitite_chestplate);
-		this.registerItemModel(items.gravitite_leggings);
-		this.registerItemModel(items.gravitite_boots);
+		registerItemModel(ItemsAether.gravitite_helmet);
+		registerItemModel(ItemsAether.gravitite_chestplate);
+		registerItemModel(ItemsAether.gravitite_leggings);
+		registerItemModel(ItemsAether.gravitite_boots);
 	}
 
 	/**
@@ -124,13 +111,13 @@ public class ModelsAether
 	 * @param block The block to bind to
 	 * @param variants All of the block's variants
 	 */
-	public void registerBlockModelVariants(Block block, Collection<BlockVariant> variants)
+	private static void registerBlockModelVariants(Block block, Collection<BlockVariant> variants)
 	{
 		for (BlockVariant variant : variants)
 		{
 			Item item = Item.getItemFromBlock(block);
 
-			this.registerItemModel(item, variant.getName(), variant.getMeta());
+			registerItemModel(item, variant.getName(), variant.getMeta());
 			ModelBakery.addVariantName(item, (Aether.MOD_ID + ":") + variant.getName());
 		}
 	}
@@ -139,9 +126,9 @@ public class ModelsAether
 	 * Registers a block model and binds it to the block's unlocalized name and metadata 0.
 	 * @param block The block to bind to
 	 */
-	public void registerBlockModel(Block block)
+	private static void registerBlockModel(Block block)
 	{
-		this.registerBlockModel(block, block.getUnlocalizedName().substring(5), 0);
+		registerBlockModel(block, block.getUnlocalizedName().substring(5), 0);
 	}
 
 	/**
@@ -150,18 +137,18 @@ public class ModelsAether
 	 * @param name The name to bind to
 	 * @param meta The metadata to bind to
 	 */
-	public void registerBlockModel(Block block, String name, int meta)
+	private static void registerBlockModel(Block block, String name, int meta)
 	{
-		this.registerItemModel(Item.getItemFromBlock(block), name, meta);
+		registerItemModel(Item.getItemFromBlock(block), name, meta);
 	}
 
 	/**
 	 * Registers a item model and binds it to the item's unlocalized name and metadata 0.
 	 * @param item The item to bind to
 	 */
-	public void registerItemModel(Item item)
+	public static void registerItemModel(Item item)
 	{
-		this.registerItemModel(item, item.getUnlocalizedName().substring(5), 0);
+		registerItemModel(item, item.getUnlocalizedName().substring(5), 0);
 	}
 
 	/**
@@ -170,12 +157,12 @@ public class ModelsAether
 	 * @param name The name to bind to
 	 * @param meta The metadata to bind to
 	 */
-	public void registerItemModel(Item item, String name, int meta)
+	public static void registerItemModel(Item item, String name, int meta)
 	{
-		this.mc.getRenderItem().getItemModelMesher().register(item, meta, this.getModelResource(name, "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, getModelResource(name, "inventory"));
 	}
 
-	private ModelResourceLocation getModelResource(String name, String type)
+	private static ModelResourceLocation getModelResource(String name, String type)
 	{
 		return new ModelResourceLocation(Aether.getResource(name), type);
 	}

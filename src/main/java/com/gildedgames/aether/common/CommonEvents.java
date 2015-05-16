@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.Aether;
 import com.gildedgames.aether.blocks.BlockAetherPortal;
+import com.gildedgames.aether.blocks.BlocksAether;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
@@ -74,7 +74,7 @@ public class CommonEvents
 	{
 		Block blockBeneath = event.entity.worldObj.getBlockState(event.entity.getPosition().down()).getBlock();
 
-		if (blockBeneath == Aether.getBlocks().quicksoil)
+		if (blockBeneath == BlocksAether.quicksoil)
 		{
 			// This doesn't work all the time, because it's only called when the player is
 			// directly on top of Quicksoil. If you go slow enough, during the next player update, it

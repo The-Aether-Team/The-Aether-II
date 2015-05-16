@@ -1,6 +1,7 @@
 package com.gildedgames.aether.blocks.natural;
 
-import com.gildedgames.aether.Aether;
+import com.gildedgames.aether.AetherCreativeTabs;
+import com.gildedgames.aether.blocks.BlocksAether;
 import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
 import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
 import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
@@ -25,9 +26,9 @@ import java.util.Random;
 public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 {
 	public static final BlockVariant
-	AETHER_DIRT = new BlockVariant(0, "aether_dirt"),
-	AETHER_GRASS = new BlockVariant(1, "aether_grass"),
-	ENCHANTED_AETHER_GRASS = new BlockVariant(2, "aether_enchanted_grass");
+			AETHER_DIRT = new BlockVariant(0, "aether_dirt"),
+			AETHER_GRASS = new BlockVariant(1, "aether_grass"),
+			ENCHANTED_AETHER_GRASS = new BlockVariant(2, "aether_enchanted_grass");
 
 	public static final PropertyVariant GRASS_VARIANT = PropertyVariant.create("variant", AETHER_DIRT, AETHER_GRASS, ENCHANTED_AETHER_GRASS);
 
@@ -39,7 +40,7 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 		this.setTickRandomly(true);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(GRASS_VARIANT, AETHER_DIRT));
-		this.setCreativeTab(Aether.getCreativeTabs().tabBlocks);
+		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 
 	@Override
@@ -60,7 +61,7 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 		{
 			if (world.getLightFromNeighbors(pos.up()) < 4 && world.getBlockState(pos.up()).getBlock().getLightOpacity(world, pos.up()) > 2)
 			{
-				world.setBlockState(pos, Aether.getBlocks().aether_dirt.getDefaultState());
+				world.setBlockState(pos, BlocksAether.aether_dirt.getDefaultState());
 			}
 			else
 			{
@@ -72,7 +73,7 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 						Block neighborBlock = world.getBlockState(randomNeighbor.up()).getBlock();
 						IBlockState neighborState = world.getBlockState(randomNeighbor);
 
-						if (neighborState.getBlock() == Aether.getBlocks().aether_dirt && neighborState.getValue(GRASS_VARIANT) == AETHER_DIRT &&
+						if (neighborState.getBlock() == BlocksAether.aether_dirt && neighborState.getValue(GRASS_VARIANT) == AETHER_DIRT &&
 								world.getLightFromNeighbors(randomNeighbor.up()) >= 4 && neighborBlock.getLightOpacity(world, randomNeighbor.up()) <= 2)
 						{
 							world.setBlockState(randomNeighbor, this.getDefaultState().withProperty(GRASS_VARIANT, AETHER_GRASS));
@@ -101,7 +102,7 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return Item.getItemFromBlock(Aether.getBlocks().aether_dirt);
+		return Item.getItemFromBlock(BlocksAether.aether_dirt);
 	}
 
 	@Override

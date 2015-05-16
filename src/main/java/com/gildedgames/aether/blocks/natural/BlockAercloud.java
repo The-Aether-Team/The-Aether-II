@@ -1,6 +1,6 @@
 package com.gildedgames.aether.blocks.natural;
 
-import com.gildedgames.aether.Aether;
+import com.gildedgames.aether.AetherCreativeTabs;
 import com.gildedgames.aether.blocks.util.IAetherBlockWithVariants;
 import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
 import com.gildedgames.aether.blocks.util.blockstates.PropertyVariant;
@@ -102,7 +102,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 		this.setLightOpacity(1);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(AERCLOUD_VARIANT, COLD_AERCLOUD).withProperty(FACING, EnumFacing.NORTH));
-		this.setCreativeTab(Aether.getCreativeTabs().tabBlocks);
+		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 
 	@Override

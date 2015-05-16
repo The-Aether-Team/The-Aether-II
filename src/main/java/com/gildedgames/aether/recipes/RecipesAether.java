@@ -1,31 +1,26 @@
 package com.gildedgames.aether.recipes;
 
+import com.gildedgames.aether.blocks.BlocksAether;
+import com.gildedgames.aether.items.ItemsAether;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import com.gildedgames.aether.Aether;
-import com.gildedgames.aether.blocks.BlocksAether;
-import com.gildedgames.aether.items.ItemsAether;
-
 public class RecipesAether
 {
-	public void preInit()
+	public static void preInit()
 	{
-		BlocksAether blocks = Aether.getBlocks();
-		ItemsAether items = Aether.getItems();
+		registerShapelessRecipe(new ItemStack(BlocksAether.skyroot_planks, 4), new ItemStack(BlocksAether.aether_log, 1));
 
-		this.registerShapelessRecipe(new ItemStack(blocks.skyroot_planks, 4), new ItemStack(blocks.aether_log, 1));
-
-		this.registerShapedRecipe(new ItemStack(items.skyroot_stick, 4), "X", "X",
-				'X', new ItemStack(blocks.skyroot_planks, 1));
+		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_stick, 4), "X", "X",
+				'X', new ItemStack(BlocksAether.skyroot_planks, 1));
 	}
 
-	private void registerShapelessRecipe(ItemStack output, Object... stacks)
+	private static void registerShapelessRecipe(ItemStack output, Object... stacks)
 	{
 		GameRegistry.addShapelessRecipe(output, stacks);
 	}
 
-	private void registerShapedRecipe(ItemStack output, Object... params)
+	private static void registerShapedRecipe(ItemStack output, Object... params)
 	{
 		GameRegistry.addShapedRecipe(output, params);
 	}

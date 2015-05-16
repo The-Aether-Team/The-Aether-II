@@ -1,9 +1,8 @@
 package com.gildedgames.aether.blocks.natural;
 
+import com.gildedgames.aether.AetherCreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-
-import com.gildedgames.aether.Aether;
 
 public class BlockGravititeOre extends Block
 {
@@ -16,7 +15,7 @@ public class BlockGravititeOre extends Block
 		this.setStepSound(soundTypeStone);
 		this.setHarvestLevel("pickaxe", 2);
 
-		this.setCreativeTab(Aether.getCreativeTabs().tabBlocks);
+		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 
 }

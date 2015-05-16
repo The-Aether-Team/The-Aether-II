@@ -1,13 +1,12 @@
 package com.gildedgames.aether.items.tools;
 
+import com.gildedgames.aether.AetherCreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-
-import com.gildedgames.aether.Aether;
 
 public class ItemAetherAxe extends ItemAxe
 {
@@ -17,7 +16,7 @@ public class ItemAetherAxe extends ItemAxe
 	{
 		super(aetherToolMaterial.getToolMaterial());
 
-		this.setCreativeTab(Aether.getCreativeTabs().tabTools);
+		this.setCreativeTab(AetherCreativeTabs.tabTools);
 		this.aetherToolMaterial = aetherToolMaterial;
 	}
 
