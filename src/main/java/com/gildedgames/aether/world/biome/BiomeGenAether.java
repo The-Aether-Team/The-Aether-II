@@ -1,5 +1,6 @@
 package com.gildedgames.aether.world.biome;
 
+import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public class BiomeGenAether extends BiomeGenBase
@@ -25,4 +26,9 @@ public class BiomeGenAether extends BiomeGenBase
 		return 0x70DB70;
 	}
 
+	@Override
+	public BiomeDecorator createBiomeDecorator()
+	{
+		return getModdedBiomeDecorator(new BiomeDecoratorAether());
+	}
 }

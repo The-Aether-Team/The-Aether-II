@@ -43,7 +43,7 @@ public class BlocksAether
 
 	public static Block aether_portal;
 
-	public static Block aether_tall_grass;
+	public static Block tall_aether_grass;
 
 	public static Block quicksoil;
 
@@ -72,7 +72,7 @@ public class BlocksAether
 
 		aether_portal = registerBlock("aether_portal", new BlockAetherPortal());
 
-		aether_tall_grass = registerBlock("aether_tall_grass", new BlockTallAetherGrass());
+		tall_aether_grass = registerBlock("tall_aether_grass", new BlockTallAetherGrass());
 
 		quicksoil = registerBlock("quicksoil", new BlockQuicksoil());
 	}

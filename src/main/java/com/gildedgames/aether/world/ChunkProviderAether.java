@@ -308,8 +308,15 @@ public class ChunkProviderAether implements IChunkProvider
 	@Override
 	public void populate(IChunkProvider chunkProvider, int chunkX, int chunkZ)
 	{
-		// int x = chunkX * 16;
-		// int z = chunkZ * 16;
+		int x = chunkX * 16;
+		int z = chunkZ * 16;
+
+		BlockPos pos = new BlockPos(x, 0, z);
+		BiomeGenBase genBase = this.worldObj.getBiomeGenForCoords(pos.add(16, 0, 16));
+
+		this.random.setSeed(this.worldObj.getSeed());
+
+		genBase.decorate(this.worldObj, this.random, pos);
 	}
 
 	@Override

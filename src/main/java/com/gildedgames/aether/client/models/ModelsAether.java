@@ -64,7 +64,7 @@ public class ModelsAether
 		registerBlockModel(BlocksAether.gravitite_ore);
 		registerBlockModel(BlocksAether.continuum_ore);
 		registerBlockModel(BlocksAether.aether_portal);
-		registerBlockModel(BlocksAether.aether_tall_grass);
+		registerBlockModel(BlocksAether.tall_aether_grass);
 		registerBlockModel(BlocksAether.quicksoil);
 	}
 
