@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "aether:blocks/aether_tall_grass"
+		"layer0": "aether:blocks/tall_aether_grass"
 	},
 	"display": {
 		"thirdperson": {

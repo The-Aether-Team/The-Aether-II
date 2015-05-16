@@ -1,6 +1,6 @@
 {
 	"parent": "block/tallgrass",
 	"textures": {
-		"cross": "aether:blocks/aether_tall_grass"
+		"cross": "aether:blocks/tall_aether_grass"
 	}
 }
