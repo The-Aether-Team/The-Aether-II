@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.blocks.BlockAetherPortal;
-import com.gildedgames.aether.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.BlockAetherPortal;
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;

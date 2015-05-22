@@ -1,11 +1,9 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.Aether;
-import com.gildedgames.aether.AetherCreativeTabs;
-import com.gildedgames.aether.blocks.BlocksAether;
-import com.gildedgames.aether.items.ItemsAether;
-import com.gildedgames.aether.recipes.RecipesAether;
-import com.gildedgames.aether.world.WorldProviderAether;
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.recipes.RecipesAether;
+import com.gildedgames.aether.common.world.WorldProviderAether;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;

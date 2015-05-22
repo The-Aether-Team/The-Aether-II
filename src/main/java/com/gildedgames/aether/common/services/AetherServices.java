@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.services;
 
-import com.gildedgames.aether.Aether;
-import com.gildedgames.aether.player.PlayerAether;
-import com.gildedgames.aether.player.PlayerAetherHookFactory;
+import com.gildedgames.aether.common.Aether;
+import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.aether.common.player.PlayerAetherHookFactory;
 import com.gildedgames.util.player.common.IPlayerHookPool;
 import com.gildedgames.util.player.common.PlayerHookPool;
 import net.minecraftforge.fml.relauncher.Side;

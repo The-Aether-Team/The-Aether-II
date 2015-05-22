@@ -1,14 +1,14 @@
 package com.gildedgames.aether.client.models;
 
-import com.gildedgames.aether.Aether;
-import com.gildedgames.aether.blocks.BlocksAether;
-import com.gildedgames.aether.blocks.natural.BlockAercloud;
-import com.gildedgames.aether.blocks.natural.BlockAetherDirt;
-import com.gildedgames.aether.blocks.natural.BlockAetherLeaves;
-import com.gildedgames.aether.blocks.natural.BlockAetherLog;
-import com.gildedgames.aether.blocks.natural.BlockHolystone;
-import com.gildedgames.aether.blocks.util.blockstates.BlockVariant;
-import com.gildedgames.aether.items.ItemsAether;
+import com.gildedgames.aether.common.Aether;
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
+import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
+import com.gildedgames.aether.common.blocks.util.blockstates.BlockVariant;
+import com.gildedgames.aether.common.items.ItemsAether;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
