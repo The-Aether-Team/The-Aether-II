@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.tools;
 
+import com.gildedgames.aether.common.AetherCreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -16,6 +17,8 @@ public class ItemAetherSword extends ItemSword
 		super(toolMaterial.getToolMaterial());
 
 		this.aetherToolMaterial = toolMaterial;
+
+		this.setCreativeTab(AetherCreativeTabs.tabWeapons);
 	}
 
 	@Override

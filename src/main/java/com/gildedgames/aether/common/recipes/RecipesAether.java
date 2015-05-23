@@ -43,7 +43,7 @@ public class RecipesAether
 		// Holystone Tools
 
 		registerShapedRecipe(new ItemStack(ItemsAether.holystone_axe, 1), "XX ", "XY ", " Y ",
-			'X', holystone, 'Y', skyrootStick);
+				'X', holystone, 'Y', skyrootStick);
 
 		registerShapedRecipe(new ItemStack(ItemsAether.holystone_pickaxe, 1), "XXX", " Y ", " Y ",
 				'X', holystone, 'Y', skyrootStick);
