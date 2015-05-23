@@ -25,6 +25,8 @@ public class BlockTallAetherGrass extends BlockBush implements IShearable, IGrow
 	{
 		super(Material.vine);
 
+		this.setStepSound(Block.soundTypeGrass);
+
 		this.setBlockBounds(0.1f, 0.0f, 0.1f, 0.9f, 0.8f, 0.9f);
 		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
