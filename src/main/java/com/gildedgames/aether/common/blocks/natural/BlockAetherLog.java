@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.common.AetherCreativeTabs;
-import com.gildedgames.aether.common.blocks.util.IAetherBlockWithVariants;
-import com.gildedgames.aether.common.blocks.util.blockstates.BlockVariant;
-import com.gildedgames.aether.common.blocks.util.blockstates.PropertyVariant;
+import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
+import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
+import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;

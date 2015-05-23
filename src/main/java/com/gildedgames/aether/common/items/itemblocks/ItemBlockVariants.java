@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.itemblocks;
 
-import com.gildedgames.aether.common.blocks.util.IAetherBlockWithVariants;
+import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;

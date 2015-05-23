@@ -12,7 +12,7 @@ public class ClientProxy extends CommonProxy
 	{
 		super.preInit(event);
 
-		ModelsAether.prepareModels();
+		ModelsAether.prepareModelLoader();
 	}
 
 	@Override

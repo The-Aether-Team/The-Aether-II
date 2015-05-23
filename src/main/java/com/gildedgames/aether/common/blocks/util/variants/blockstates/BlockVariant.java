@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.blocks.util.blockstates;
+package com.gildedgames.aether.common.blocks.util.variants.blockstates;
 
 public class BlockVariant implements Comparable<BlockVariant>
 {
@@ -23,10 +23,8 @@ public class BlockVariant implements Comparable<BlockVariant>
 	}
 
 	@Override
-	public int compareTo(BlockVariant o)
+	public int compareTo(BlockVariant variant)
 	{
-		// Huh?! Apparently this method is used to sort things.
-		// It's probably best case to sort by meta.
 		return this.meta;
 	}
 

@@ -7,7 +7,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
-import com.gildedgames.aether.common.blocks.util.blockstates.BlockVariant;
+import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
@@ -26,7 +26,7 @@ import java.util.LinkedHashMap;
 
 public class ModelsAether
 {
-	public static void prepareModels()
+	public static void prepareModelLoader()
 	{
 		ModelLoader.setCustomStateMapper(BlocksAether.aether_leaves, new StateMap.Builder().setProperty(BlockAetherLeaves.LEAVES_VARIANT).addPropertiesToIgnore(BlockAetherLeaves.CHECK_DECAY, BlockAetherLeaves.DECAYABLE).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.aercloud, new StateMapperBase()
@@ -53,11 +53,11 @@ public class ModelsAether
 
 	private static void registerBlockModels()
 	{
-		registerBlockModelVariants(BlocksAether.aether_dirt, BlockAetherDirt.GRASS_VARIANT.getAllowedValues());
-		registerBlockModelVariants(BlocksAether.holystone, BlockHolystone.HOLYSTONE_VARIANT.getAllowedValues());
-		registerBlockModelVariants(BlocksAether.aercloud, BlockAercloud.AERCLOUD_VARIANT.getAllowedValues());
-		registerBlockModelVariants(BlocksAether.aether_log, BlockAetherLog.LOG_VARIANT.getAllowedValues());
-		registerBlockModelVariants(BlocksAether.aether_leaves, BlockAetherLeaves.LEAVES_VARIANT.getAllowedValues());
+		registerBlockModelWithVariants(BlocksAether.aether_dirt, BlockAetherDirt.GRASS_VARIANT.getAllowedValues());
+		registerBlockModelWithVariants(BlocksAether.holystone, BlockHolystone.HOLYSTONE_VARIANT.getAllowedValues());
+		registerBlockModelWithVariants(BlocksAether.aercloud, BlockAercloud.AERCLOUD_VARIANT.getAllowedValues());
+		registerBlockModelWithVariants(BlocksAether.aether_log, BlockAetherLog.LOG_VARIANT.getAllowedValues());
+		registerBlockModelWithVariants(BlocksAether.aether_leaves, BlockAetherLeaves.LEAVES_VARIANT.getAllowedValues());
 		registerBlockModel(BlocksAether.skyroot_planks);
 		registerBlockModel(BlocksAether.ambrosium_ore);
 		registerBlockModel(BlocksAether.zanite_ore);
@@ -111,13 +111,14 @@ public class ModelsAether
 	 * @param block The block to bind to
 	 * @param variants All of the block's variants
 	 */
-	private static void registerBlockModelVariants(Block block, Collection<BlockVariant> variants)
+	private static void registerBlockModelWithVariants(Block block, Collection<BlockVariant> variants)
 	{
+		Item item = Item.getItemFromBlock(block);
+
 		for (BlockVariant variant : variants)
 		{
-			Item item = Item.getItemFromBlock(block);
-
 			registerItemModel(item, variant.getName(), variant.getMeta());
+
 			ModelBakery.addVariantName(item, (Aether.MOD_ID + ":") + variant.getName());
 		}
 	}
