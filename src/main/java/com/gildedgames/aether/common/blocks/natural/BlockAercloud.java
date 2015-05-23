@@ -44,6 +44,11 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 				entity.motionY *= 0.005D;
 			}
 		}
+
+		public AxisAlignedBB getBoundingBox(BlockPos pos, double maxX, double maxY, double maxZ)
+		{
+			return new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + maxX, pos.getY(), pos.getZ() + maxZ);
+		}
 	}
 
 	public static final AercloudVariant
@@ -75,6 +80,12 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
 				{
 					entity.motionY = -1.5D;
+				}
+
+				@Override
+				public AxisAlignedBB getBoundingBox(BlockPos pos, double maxX, double maxY, double maxZ)
+				{
+					return null;
 				}
 			},
 			STORM_AERCLOUD = new AercloudVariant(4, "aercloud_storm"),
@@ -176,7 +187,9 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
 	{
-		return new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + this.maxX, pos.getY(), pos.getZ() + this.maxZ);
+		AercloudVariant variant = (AercloudVariant) state.getValue(AERCLOUD_VARIANT);
+
+		return variant.getBoundingBox(pos, this.minX, this.minY, this.minZ);
 	}
 
 	@Override
