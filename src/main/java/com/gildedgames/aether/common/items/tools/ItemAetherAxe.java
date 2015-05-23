@@ -16,8 +16,9 @@ public class ItemAetherAxe extends ItemAxe
 	{
 		super(aetherToolMaterial.getToolMaterial());
 
-		this.setCreativeTab(AetherCreativeTabs.tabTools);
 		this.aetherToolMaterial = aetherToolMaterial;
+
+		this.setCreativeTab(AetherCreativeTabs.tabTools);
 	}
 
 	@Override

@@ -26,17 +26,20 @@ import java.util.Random;
 
 public class BlockAetherPortal extends BlockBreakable
 {
-	public static final PropertyEnum PORTAL_AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
+	public static final PropertyEnum PROPERTY_AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
 
 	public BlockAetherPortal()
 	{
 		super(Material.portal, false);
+
 		this.setStepSound(soundTypeGlass);
+
 		this.setHardness(-1.0F);
 		this.setLightLevel(0.75F);
+
 		this.setTickRandomly(true);
 
-		this.setDefaultState(this.blockState.getBaseState().withProperty(PORTAL_AXIS, EnumFacing.Axis.X));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(PROPERTY_AXIS, EnumFacing.Axis.X));
 	}
 
 	@Override
@@ -54,7 +57,7 @@ public class BlockAetherPortal extends BlockBreakable
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos)
 	{
-		EnumFacing.Axis axis = (EnumFacing.Axis) world.getBlockState(pos).getValue(PORTAL_AXIS);
+		EnumFacing.Axis axis = (EnumFacing.Axis) world.getBlockState(pos).getValue(PROPERTY_AXIS);
 
 		float xThickness = 0.125F, zThickness = 0.125F;
 
@@ -90,7 +93,7 @@ public class BlockAetherPortal extends BlockBreakable
 
 		if (world.getBlockState(pos).getBlock() == this)
 		{
-			axis = (EnumFacing.Axis) state.getValue(PORTAL_AXIS);
+			axis = (EnumFacing.Axis) state.getValue(PROPERTY_AXIS);
 
 			if (axis == null)
 			{
@@ -134,7 +137,7 @@ public class BlockAetherPortal extends BlockBreakable
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		EnumFacing.Axis axis = (EnumFacing.Axis) state.getValue(PORTAL_AXIS);
+		EnumFacing.Axis axis = (EnumFacing.Axis) state.getValue(PROPERTY_AXIS);
 
 		return axis == EnumFacing.Axis.X ? 1 : (axis == EnumFacing.Axis.Z ? 2 : 0);
 	}
@@ -142,13 +145,13 @@ public class BlockAetherPortal extends BlockBreakable
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(PORTAL_AXIS, (meta & 3) == 2 ? EnumFacing.Axis.Z : EnumFacing.Axis.X);
+		return this.getDefaultState().withProperty(PROPERTY_AXIS, (meta & 3) == 2 ? EnumFacing.Axis.Z : EnumFacing.Axis.X);
 	}
 
 	@Override
 	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
 	{
-		EnumFacing.Axis axis = (EnumFacing.Axis) state.getValue(PORTAL_AXIS);
+		EnumFacing.Axis axis = (EnumFacing.Axis) state.getValue(PROPERTY_AXIS);
 
 		if (axis == EnumFacing.Axis.X || axis == EnumFacing.Axis.Z)
 		{
@@ -170,7 +173,7 @@ public class BlockAetherPortal extends BlockBreakable
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, PORTAL_AXIS);
+		return new BlockState(this, PROPERTY_AXIS);
 	}
 
 	@Override
@@ -343,7 +346,7 @@ public class BlockAetherPortal extends BlockBreakable
 
 				for (int j = 0; j < this.height; ++j)
 				{
-					this.world.setBlockState(blockpos.up(j), BlocksAether.aether_portal.getDefaultState().withProperty(BlockAetherPortal.PORTAL_AXIS, this.axis), 2);
+					this.world.setBlockState(blockpos.up(j), BlocksAether.aether_portal.getDefaultState().withProperty(BlockAetherPortal.PROPERTY_AXIS, this.axis), 2);
 				}
 			}
 		}

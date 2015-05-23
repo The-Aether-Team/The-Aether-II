@@ -14,6 +14,7 @@ public class ItemBlockVariants extends ItemBlock
 		super(block);
 
 		this.variantBlock = (IAetherBlockWithVariants) block;
+
 		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
 	}
@@ -27,7 +28,7 @@ public class ItemBlockVariants extends ItemBlock
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		return super.getUnlocalizedName() + "." + this.variantBlock.getUnlocalizedNameFromStack(stack);
+		return super.getUnlocalizedName() + "." + this.variantBlock.getVariantNameFromStack(stack);
 	}
 
 }

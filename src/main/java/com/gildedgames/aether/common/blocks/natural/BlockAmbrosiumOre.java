@@ -16,10 +16,11 @@ public class BlockAmbrosiumOre extends Block
 	{
 		super(Material.rock);
 
-		this.setLightLevel(1.0F);
-		this.setHardness(3.0F);
-		this.setStepSound(soundTypeStone);
+		this.setHardness(3.0f);
+		this.setResistance(5.0f);
 		this.setHarvestLevel("pickaxe", 0);
+
+		this.setStepSound(Block.soundTypeStone);
 
 		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}

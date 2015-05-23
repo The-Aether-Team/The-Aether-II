@@ -11,9 +11,11 @@ public class BlockGravititeOre extends Block
 	{
 		super(Material.rock);
 
-		this.setHardness(3.0F);
-		this.setStepSound(soundTypeStone);
+		this.setHardness(3.0f);
+		this.setResistance(5.0f);
 		this.setHarvestLevel("pickaxe", 2);
+
+		this.setStepSound(soundTypeStone);
 
 		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}

@@ -16,12 +16,13 @@ public class BlockContinuumOre extends Block
 	{
 		super(Material.rock);
 
-		this.setHardness(3.0F);
-		this.setStepSound(soundTypeStone);
+		this.setHardness(3.0f);
+		this.setResistance(5.0f);
 		this.setHarvestLevel("pickaxe", 3);
 
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
+		this.setStepSound(Block.soundTypeStone);
 
+		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 
 	@Override

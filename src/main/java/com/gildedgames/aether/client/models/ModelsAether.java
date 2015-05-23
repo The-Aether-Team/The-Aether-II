@@ -28,16 +28,16 @@ public class ModelsAether
 {
 	public static void prepareModelLoader()
 	{
-		ModelLoader.setCustomStateMapper(BlocksAether.aether_leaves, new StateMap.Builder().setProperty(BlockAetherLeaves.LEAVES_VARIANT).addPropertiesToIgnore(BlockAetherLeaves.CHECK_DECAY, BlockAetherLeaves.DECAYABLE).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.aether_leaves, new StateMap.Builder().setProperty(BlockAetherLeaves.PROPERTY_VARIANT).addPropertiesToIgnore(BlockAetherLeaves.CHECK_DECAY, BlockAetherLeaves.DECAYABLE).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.aercloud, new StateMapperBase()
 		{
 			protected ModelResourceLocation getModelResourceLocation(IBlockState state)
 			{
 				LinkedHashMap mappings = Maps.newLinkedHashMap(state.getProperties());
 
-				if (state.getValue(BlockAercloud.AERCLOUD_VARIANT) != BlockAercloud.PURPLE_AERCLOUD)
+				if (state.getValue(BlockAercloud.PROPERTY_VARIANT) != BlockAercloud.PURPLE_AERCLOUD)
 				{
-					mappings.remove(BlockAercloud.FACING);
+					mappings.remove(BlockAercloud.PROPERTY_FACING);
 				}
 
 				return new ModelResourceLocation((ResourceLocation) Block.blockRegistry.getNameForObject(state.getBlock()), getPropertyString(mappings));
@@ -53,11 +53,11 @@ public class ModelsAether
 
 	private static void registerBlockModels()
 	{
-		registerBlockModelWithVariants(BlocksAether.aether_dirt, BlockAetherDirt.GRASS_VARIANT.getAllowedValues());
-		registerBlockModelWithVariants(BlocksAether.holystone, BlockHolystone.HOLYSTONE_VARIANT.getAllowedValues());
-		registerBlockModelWithVariants(BlocksAether.aercloud, BlockAercloud.AERCLOUD_VARIANT.getAllowedValues());
-		registerBlockModelWithVariants(BlocksAether.aether_log, BlockAetherLog.LOG_VARIANT.getAllowedValues());
-		registerBlockModelWithVariants(BlocksAether.aether_leaves, BlockAetherLeaves.LEAVES_VARIANT.getAllowedValues());
+		registerBlockModelWithVariants(BlocksAether.aether_dirt, BlockAetherDirt.PROPERTY_VARIANT.getAllowedValues());
+		registerBlockModelWithVariants(BlocksAether.holystone, BlockHolystone.PROPERTY_VARIANT.getAllowedValues());
+		registerBlockModelWithVariants(BlocksAether.aercloud, BlockAercloud.PROPERTY_VARIANT.getAllowedValues());
+		registerBlockModelWithVariants(BlocksAether.aether_log, BlockAetherLog.PROPERTY_VARIANT.getAllowedValues());
+		registerBlockModelWithVariants(BlocksAether.aether_leaves, BlockAetherLeaves.PROPERTY_VARIANT.getAllowedValues());
 		registerBlockModel(BlocksAether.skyroot_planks);
 		registerBlockModel(BlocksAether.ambrosium_ore);
 		registerBlockModel(BlocksAether.zanite_ore);

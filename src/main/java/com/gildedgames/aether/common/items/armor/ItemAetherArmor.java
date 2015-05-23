@@ -13,8 +13,9 @@ public class ItemAetherArmor extends ItemArmor
 	{
 		super(material.getArmorMaterial(), renderIndex, armorType);
 
-		this.setCreativeTab(AetherCreativeTabs.tabArmor);
 		this.armorMaterial = material;
+
+		this.setCreativeTab(AetherCreativeTabs.tabArmor);
 	}
 
 	@Override

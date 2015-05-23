@@ -16,8 +16,9 @@ public class ItemAetherShovel extends ItemSpade
 	{
 		super(toolMaterial.getToolMaterial());
 
-		this.setCreativeTab(AetherCreativeTabs.tabTools);
 		this.aetherToolMaterial = toolMaterial;
+
+		this.setCreativeTab(AetherCreativeTabs.tabTools);
 	}
 
 	@Override

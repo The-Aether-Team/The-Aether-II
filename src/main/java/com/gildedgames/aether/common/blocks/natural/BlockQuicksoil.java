@@ -13,7 +13,9 @@ public class BlockQuicksoil extends Block
 		this.slipperiness = 1.23f;
 
 		this.setHardness(1.5f);
+
 		this.setStepSound(Block.soundTypeSand);
+
 		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 }

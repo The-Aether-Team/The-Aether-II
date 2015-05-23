@@ -9,7 +9,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.state.pattern.BlockHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -28,23 +27,35 @@ public class BlockHolystone extends Block implements IAetherBlockWithVariants
 			MOSSY_HOLYSTONE = new BlockVariant(1, "mossy_holystone"),
 			BLOOD_MOSS_HOLYSTONE = new BlockVariant(2, "blood_holystone");
 
-	public static final PropertyVariant HOLYSTONE_VARIANT = PropertyVariant.create("variant", NORMAL_HOLYSTONE, MOSSY_HOLYSTONE, BLOOD_MOSS_HOLYSTONE);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", NORMAL_HOLYSTONE, MOSSY_HOLYSTONE, BLOOD_MOSS_HOLYSTONE);
 
 	public BlockHolystone()
 	{
 		super(Material.rock);
+
 		this.setHardness(2.0F);
+
 		this.setStepSound(Block.soundTypeStone);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(HOLYSTONE_VARIANT, NORMAL_HOLYSTONE));
 		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
+
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, NORMAL_HOLYSTONE));
 	}
 
 	@Override
 	public boolean isReplaceableOreGen(World world, BlockPos pos, Predicate<IBlockState> target)
 	{
-		// TODO: BAD BAD BAD
-		return true;
+		if (target.apply(Blocks.stone.getDefaultState()))
+		{
+			IBlockState state = world.getBlockState(pos);
+
+			if (state.getBlock() == this && state.getValue(PROPERTY_VARIANT) == NORMAL_HOLYSTONE)
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	@Override
@@ -52,7 +63,7 @@ public class BlockHolystone extends Block implements IAetherBlockWithVariants
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
 	{
-		for (BlockVariant variant : HOLYSTONE_VARIANT.getAllowedValues())
+		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
 			list.add(new ItemStack(itemIn, 1, variant.getMeta()));
 		}
@@ -61,30 +72,30 @@ public class BlockHolystone extends Block implements IAetherBlockWithVariants
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(HOLYSTONE_VARIANT, HOLYSTONE_VARIANT.getVariantFromMeta(meta));
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.getVariantFromMeta(meta));
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return ((BlockVariant) state.getValue(HOLYSTONE_VARIANT)).getMeta();
+		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
 	}
 
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, HOLYSTONE_VARIANT);
+		return new BlockState(this, PROPERTY_VARIANT);
 	}
 
 	@Override
 	public int damageDropped(IBlockState state)
 	{
-		return ((BlockVariant) state.getValue(HOLYSTONE_VARIANT)).getMeta();
+		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
 	}
 
 	@Override
-	public String getUnlocalizedNameFromStack(ItemStack stack)
+	public String getVariantNameFromStack(ItemStack stack)
 	{
-		return HOLYSTONE_VARIANT.getVariantFromMeta(stack.getMetadata()).getName();
+		return PROPERTY_VARIANT.getVariantFromMeta(stack.getMetadata()).getName();
 	}
 }

@@ -35,7 +35,7 @@ public class ChunkProviderAether implements IChunkProvider
 
 	public ChunkProviderAether(World world, long seed)
 	{
-		this.aether_grass = BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.GRASS_VARIANT, BlockAetherDirt.AETHER_GRASS);
+		this.aether_grass = BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.AETHER_GRASS);
 		this.aether_dirt = BlocksAether.aether_dirt.getDefaultState();
 		this.aether_stone = BlocksAether.holystone.getDefaultState();
 

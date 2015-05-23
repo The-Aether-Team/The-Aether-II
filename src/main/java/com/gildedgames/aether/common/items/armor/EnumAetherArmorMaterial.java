@@ -22,7 +22,7 @@ public enum EnumAetherArmorMaterial
 				}
 			};
 
-	ArmorMaterial armorMaterial;
+	private final ArmorMaterial armorMaterial;
 
 	EnumAetherArmorMaterial(ArmorMaterial armorMaterial)
 	{

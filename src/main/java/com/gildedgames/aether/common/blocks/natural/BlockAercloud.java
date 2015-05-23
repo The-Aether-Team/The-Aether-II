@@ -94,26 +94,29 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 				@Override
 				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
 				{
-					EnumFacing side = (EnumFacing) state.getValue(FACING);
+					EnumFacing side = (EnumFacing) state.getValue(PROPERTY_FACING);
 
 					entity.motionX = side.getFrontOffsetX() * 2.5D;
 					entity.motionZ = side.getFrontOffsetZ() * 2.5D;
 				}
 			};
 
-	public static final PropertyVariant AERCLOUD_VARIANT = PropertyVariant.create("variant", COLD_AERCLOUD, BLUE_AERCLOUD, GREEN_AERCLOUD, GOLDEN_AERCLOUD, STORM_AERCLOUD, PURPLE_AERCLOUD);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", COLD_AERCLOUD, BLUE_AERCLOUD, GREEN_AERCLOUD, GOLDEN_AERCLOUD, STORM_AERCLOUD, PURPLE_AERCLOUD);
 
-	public static final PropertyEnum FACING = PropertyEnum.create("facing", EnumFacing.class);
+	public static final PropertyEnum PROPERTY_FACING = PropertyEnum.create("facing", EnumFacing.class);
 
 	public BlockAercloud()
 	{
 		super(Material.ice);
+
 		this.setStepSound(Block.soundTypeCloth);
+
 		this.setHardness(0.2f);
 		this.setLightOpacity(1);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(AERCLOUD_VARIANT, COLD_AERCLOUD).withProperty(FACING, EnumFacing.NORTH));
 		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
+
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, COLD_AERCLOUD).withProperty(PROPERTY_FACING, EnumFacing.NORTH));
 	}
 
 	@Override
@@ -121,7 +124,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
 	{
-		for (BlockVariant variant : AERCLOUD_VARIANT.getAllowedValues())
+		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
 			list.add(new ItemStack(itemIn, 1, variant.getMeta()));
 		}
@@ -142,7 +145,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 
 		if (worldIn.getBlockState(otherBlock).getBlock() == worldIn.getBlockState(pos).getBlock())
 		{
-			if (worldIn.getBlockState(otherBlock).getValue(AERCLOUD_VARIANT) == worldIn.getBlockState(pos).getValue(AERCLOUD_VARIANT))
+			if (worldIn.getBlockState(otherBlock).getValue(PROPERTY_VARIANT) == worldIn.getBlockState(pos).getValue(PROPERTY_VARIANT))
 			{
 				return false;
 			}
@@ -154,7 +157,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	@Override
 	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
-		AercloudVariant variant = (AercloudVariant) state.getValue(AERCLOUD_VARIANT);
+		AercloudVariant variant = (AercloudVariant) state.getValue(PROPERTY_VARIANT);
 
 		if (entity.isSneaking())
 		{
@@ -187,7 +190,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
 	{
-		AercloudVariant variant = (AercloudVariant) state.getValue(AERCLOUD_VARIANT);
+		AercloudVariant variant = (AercloudVariant) state.getValue(PROPERTY_VARIANT);
 
 		return variant.getBoundingBox(pos, this.minX, this.minY, this.minZ);
 	}
@@ -197,51 +200,51 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	{
 		if (meta >= PURPLE_AERCLOUD.getMeta())
 		{
-			return this.getDefaultState().withProperty(AERCLOUD_VARIANT, PURPLE_AERCLOUD).withProperty(FACING, EnumFacing.getFront(meta - PURPLE_AERCLOUD.getMeta()));
+			return this.getDefaultState().withProperty(PROPERTY_VARIANT, PURPLE_AERCLOUD).withProperty(PROPERTY_FACING, EnumFacing.getFront(meta - PURPLE_AERCLOUD.getMeta()));
 		}
 
-		return this.getDefaultState().withProperty(AERCLOUD_VARIANT, AERCLOUD_VARIANT.getVariantFromMeta(meta));
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.getVariantFromMeta(meta));
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		if (state.getValue(AERCLOUD_VARIANT) == PURPLE_AERCLOUD)
+		if (state.getValue(PROPERTY_VARIANT) == PURPLE_AERCLOUD)
 		{
-			return PURPLE_AERCLOUD.getMeta() + ((EnumFacing) state.getValue(FACING)).getIndex();
+			return PURPLE_AERCLOUD.getMeta() + ((EnumFacing) state.getValue(PROPERTY_FACING)).getIndex();
 		}
 
-		return ((BlockVariant) state.getValue(AERCLOUD_VARIANT)).getMeta();
+		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
 	}
 
 	@Override
 	public int damageDropped(IBlockState state)
 	{
-		return ((BlockVariant) state.getValue(AERCLOUD_VARIANT)).getMeta();
+		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
 	}
 
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, AERCLOUD_VARIANT, FACING);
+		return new BlockState(this, PROPERTY_VARIANT, PROPERTY_FACING);
 	}
 
 	@Override
-	public String getUnlocalizedNameFromStack(ItemStack stack)
+	public String getVariantNameFromStack(ItemStack stack)
 	{
-		return AERCLOUD_VARIANT.getVariantFromMeta(stack.getMetadata()).getName();
+		return PROPERTY_VARIANT.getVariantFromMeta(stack.getMetadata()).getName();
 	}
 
 	@Override
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
-		return this.getStateFromMeta(meta).withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+		return this.getStateFromMeta(meta).withProperty(PROPERTY_FACING, placer.getHorizontalFacing().getOpposite());
 	}
 
 	@Override
 	protected ItemStack createStackedBlock(IBlockState state)
 	{
-		return new ItemStack(this, 1, ((BlockVariant) state.getValue(AERCLOUD_VARIANT)).getMeta());
+		return new ItemStack(this, 1, ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta());
 	}
 
 }

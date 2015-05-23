@@ -28,12 +28,14 @@ public class BlockAetherLeaves extends BlockLeaves implements IAetherBlockWithVa
 			PURPLE_CRYSTAL_LEAVES = new BlockVariant(4, "purple_crystal_leaves"),
 			PURPLE_FRUIT_LEAVES = new BlockVariant(5, "purple_fruit_leaves");
 
-	public static final PropertyVariant LEAVES_VARIANT = PropertyVariant.create("variant", BLUE_SKYROOT_LEAVES, GREEN_SKYROOT_LEAVES, DARK_BLUE_SKYROOT_LEAVES, GOLDEN_OAK_LEAVES, PURPLE_CRYSTAL_LEAVES, PURPLE_FRUIT_LEAVES);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BLUE_SKYROOT_LEAVES, GREEN_SKYROOT_LEAVES, DARK_BLUE_SKYROOT_LEAVES, GOLDEN_OAK_LEAVES, PURPLE_CRYSTAL_LEAVES, PURPLE_FRUIT_LEAVES);
 
 	public BlockAetherLeaves()
 	{
 		super();
+
 		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
+
 		this.setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, true).withProperty(DECAYABLE, true));
 	}
 
@@ -42,7 +44,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IAetherBlockWithVa
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
 	{
-		for (BlockVariant variant : LEAVES_VARIANT.getAllowedValues())
+		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
 			list.add(new ItemStack(itemIn, 1, variant.getMeta()));
 		}
@@ -63,14 +65,14 @@ public class BlockAetherLeaves extends BlockLeaves implements IAetherBlockWithVa
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(LEAVES_VARIANT, LEAVES_VARIANT.getVariantFromMeta(meta)).withProperty(DECAYABLE, (meta & 6) == 0).withProperty(CHECK_DECAY, (meta & 6) > 0);
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.getVariantFromMeta(meta)).withProperty(DECAYABLE, (meta & 6) == 0).withProperty(CHECK_DECAY, (meta & 6) > 0);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
 		byte b0 = 0;
-		int i = b0 | ((BlockVariant) state.getValue(LEAVES_VARIANT)).getMeta();
+		int i = b0 | ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
 
 		if (!(Boolean) state.getValue(DECAYABLE))
 		{
@@ -85,18 +87,18 @@ public class BlockAetherLeaves extends BlockLeaves implements IAetherBlockWithVa
 		return i;
 	}
 
-	// return ((BlockVariant) state.getValue(LEAVES_VARIANT)).getMeta();
+	// return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
 
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, LEAVES_VARIANT, CHECK_DECAY, DECAYABLE);
+		return new BlockState(this, PROPERTY_VARIANT, CHECK_DECAY, DECAYABLE);
 	}
 
 	@Override
-	public String getUnlocalizedNameFromStack(ItemStack stack)
+	public String getVariantNameFromStack(ItemStack stack)
 	{
-		return LEAVES_VARIANT.getVariantFromMeta(stack.getMetadata()).getName();
+		return PROPERTY_VARIANT.getVariantFromMeta(stack.getMetadata()).getName();
 	}
 
 }

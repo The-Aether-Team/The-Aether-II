@@ -30,7 +30,7 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 			AETHER_GRASS = new BlockVariant(1, "aether_grass"),
 			ENCHANTED_AETHER_GRASS = new BlockVariant(2, "aether_enchanted_grass");
 
-	public static final PropertyVariant GRASS_VARIANT = PropertyVariant.create("variant", AETHER_DIRT, AETHER_GRASS, ENCHANTED_AETHER_GRASS);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", AETHER_DIRT, AETHER_GRASS, ENCHANTED_AETHER_GRASS);
 
 	public BlockAetherDirt()
 	{
@@ -39,7 +39,7 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 		this.setHardness(0.5F);
 		this.setTickRandomly(true);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(GRASS_VARIANT, AETHER_DIRT));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, AETHER_DIRT));
 		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 
@@ -48,7 +48,7 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
 	{
-		for (BlockVariant variant : GRASS_VARIANT.getAllowedValues())
+		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
 			list.add(new ItemStack(itemIn, 1, variant.getMeta()));
 		}
@@ -57,7 +57,7 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
-		if (!world.isRemote && state.getValue(GRASS_VARIANT) == AETHER_GRASS)
+		if (!world.isRemote && state.getValue(PROPERTY_VARIANT) == AETHER_GRASS)
 		{
 			if (world.getLightFromNeighbors(pos.up()) < 4 && world.getBlockState(pos.up()).getBlock().getLightOpacity(world, pos.up()) > 2)
 			{
@@ -73,10 +73,10 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 						Block neighborBlock = world.getBlockState(randomNeighbor.up()).getBlock();
 						IBlockState neighborState = world.getBlockState(randomNeighbor);
 
-						if (neighborState.getBlock() == BlocksAether.aether_dirt && neighborState.getValue(GRASS_VARIANT) == AETHER_DIRT &&
+						if (neighborState.getBlock() == BlocksAether.aether_dirt && neighborState.getValue(PROPERTY_VARIANT) == AETHER_DIRT &&
 								world.getLightFromNeighbors(randomNeighbor.up()) >= 4 && neighborBlock.getLightOpacity(world, randomNeighbor.up()) <= 2)
 						{
-							world.setBlockState(randomNeighbor, this.getDefaultState().withProperty(GRASS_VARIANT, AETHER_GRASS));
+							world.setBlockState(randomNeighbor, this.getDefaultState().withProperty(PROPERTY_VARIANT, AETHER_GRASS));
 						}
 					}
 				}
@@ -90,7 +90,7 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 
 		if (state.getBlock() == this)
 		{
-			if (state.getValue(GRASS_VARIANT) == AETHER_GRASS)
+			if (state.getValue(PROPERTY_VARIANT) == AETHER_GRASS)
 			{
 				return true;
 			}
@@ -108,19 +108,19 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(GRASS_VARIANT, GRASS_VARIANT.getVariantFromMeta(meta));
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.getVariantFromMeta(meta));
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return ((BlockVariant) state.getValue(GRASS_VARIANT)).getMeta();
+		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
 	}
 
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, GRASS_VARIANT);
+		return new BlockState(this, PROPERTY_VARIANT);
 	}
 
 	@Override
@@ -130,8 +130,8 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 	}
 
 	@Override
-	public String getUnlocalizedNameFromStack(ItemStack stack)
+	public String getVariantNameFromStack(ItemStack stack)
 	{
-		return GRASS_VARIANT.getVariantFromMeta(stack.getMetadata()).getName();
+		return PROPERTY_VARIANT.getVariantFromMeta(stack.getMetadata()).getName();
 	}
 }
