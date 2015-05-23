@@ -1,18 +1,21 @@
 package com.gildedgames.aether.common.world.biome;
 
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.features.WorldGenAetherTallGrass;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
 public class BiomeDecoratorAether extends BiomeDecorator
 {
-	private static final int TALL_GRASS_PER_CHUNK = 1;
-
 	private WorldGenAetherTallGrass genAetherGrass;
+
+	private WorldGenMinable genAmbrosium, genZanite, genGravitite;
 
 	public void decorate(World world, Random random, BiomeGenBase genBase, BlockPos pos)
 	{
@@ -27,6 +30,10 @@ public class BiomeDecoratorAether extends BiomeDecorator
 
 		this.genAetherGrass = new WorldGenAetherTallGrass();
 
+		this.genAmbrosium = new WorldGenMinable(BlocksAether.ambrosium_ore.getDefaultState(), 16);
+		this.genZanite = new WorldGenMinable(BlocksAether.zanite_ore.getDefaultState(), 8);
+		this.genGravitite = new WorldGenMinable(BlocksAether.gravitite_ore.getDefaultState(), 4);
+
 		this.genDecorations(genBase);
 
 		this.randomGenerator = null;
@@ -35,17 +42,29 @@ public class BiomeDecoratorAether extends BiomeDecorator
 
 	protected void genDecorations(BiomeGenBase genBase)
 	{
-		int count;
+		this.generateOres();
 
 		int x, y, z;
 
-		for (count = 0; count < TALL_GRASS_PER_CHUNK; count++)
+		int count;
+
+		for (count = 0; count < 1; count++)
 		{
 			x = this.randomGenerator.nextInt(16) + 8;
 			z = this.randomGenerator.nextInt(16) + 8;
 			y = nextInt(this.currentWorld.getHeight(this.field_180294_c.add(x, 0, z)).getY() * 2);
 
 			this.genAetherGrass.generate(this.currentWorld, this.randomGenerator, this.field_180294_c.add(x, y, z));
+		}
+	}
+
+	private void genMinableOre(WorldGenerator gen, World world, Random random, BlockPos pos, int minY, int maxY, int attempts)
+	{
+		for (int count = 0; count < attempts; count++)
+		{
+			BlockPos randomPos = pos.add(random.nextInt(16), random.nextInt(maxY - minY) + minY, random.nextInt(16));
+
+			gen.generate(world, random, randomPos);
 		}
 	}
 
@@ -61,6 +80,8 @@ public class BiomeDecoratorAether extends BiomeDecorator
 
 	protected void generateOres()
 	{
-
+		this.genMinableOre(this.genAmbrosium, this.currentWorld, this.randomGenerator, this.field_180294_c, 0, 128, 20);
+		this.genMinableOre(this.genZanite, this.currentWorld, this.randomGenerator, this.field_180294_c, 0, 64, 15);
+		this.genMinableOre(this.genGravitite, this.currentWorld, this.randomGenerator, this.field_180294_c, 0, 32, 6);
 	}
 }

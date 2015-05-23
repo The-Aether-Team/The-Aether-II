@@ -4,13 +4,18 @@ import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
+import com.google.common.base.Predicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.state.pattern.BlockHelper;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -33,6 +38,13 @@ public class BlockHolystone extends Block implements IAetherBlockWithVariants
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(HOLYSTONE_VARIANT, NORMAL_HOLYSTONE));
 		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
+	}
+
+	@Override
+	public boolean isReplaceableOreGen(World world, BlockPos pos, Predicate<IBlockState> target)
+	{
+		// TODO: BAD BAD BAD
+		return true;
 	}
 
 	@Override
