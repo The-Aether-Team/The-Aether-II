@@ -15,7 +15,7 @@ public class BiomeDecoratorAether extends BiomeDecorator
 {
 	private WorldGenAetherTallGrass genAetherGrass;
 
-	private WorldGenMinable genAmbrosium, genZanite, genGravitite;
+	private WorldGenMinable genAmbrosium, genZanite, genGravitite, genContinuum;
 
 	public void decorate(World world, Random random, BiomeGenBase genBase, BlockPos pos)
 	{
@@ -33,6 +33,7 @@ public class BiomeDecoratorAether extends BiomeDecorator
 		this.genAmbrosium = new WorldGenMinable(BlocksAether.ambrosium_ore.getDefaultState(), 16);
 		this.genZanite = new WorldGenMinable(BlocksAether.zanite_ore.getDefaultState(), 8);
 		this.genGravitite = new WorldGenMinable(BlocksAether.gravitite_ore.getDefaultState(), 4);
+		this.genContinuum = new WorldGenMinable(BlocksAether.continuum_ore.getDefaultState(), 4);
 
 		this.genDecorations(genBase);
 
@@ -83,5 +84,6 @@ public class BiomeDecoratorAether extends BiomeDecorator
 		this.genMinableOre(this.genAmbrosium, this.currentWorld, this.randomGenerator, this.field_180294_c, 0, 128, 20);
 		this.genMinableOre(this.genZanite, this.currentWorld, this.randomGenerator, this.field_180294_c, 0, 64, 15);
 		this.genMinableOre(this.genGravitite, this.currentWorld, this.randomGenerator, this.field_180294_c, 0, 32, 6);
+		this.genMinableOre(this.genContinuum, this.currentWorld, this.randomGenerator, this.field_180294_c, 0, 128, 4);
 	}
 }
