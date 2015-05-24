@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.blocks;
 
 import com.gildedgames.aether.common.AetherCreativeTabs;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootWorkbench;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
@@ -46,6 +47,8 @@ public class BlocksAether
 
 	public static Block quicksoil;
 
+	public static Block skyroot_workbench;
+
 	public static void preInit()
 	{
 		aether_dirt = registerBlockWithVariants("aether_dirt", new BlockAetherDirt());
@@ -74,6 +77,8 @@ public class BlocksAether
 		tall_aether_grass = registerBlock("tall_aether_grass", new BlockTallAetherGrass());
 
 		quicksoil = registerBlock("quicksoil", new BlockQuicksoil());
+
+		skyroot_workbench = registerBlock("skyroot_workbench", new BlockSkyrootWorkbench());
 	}
 
 	private static Block registerBlock(String name, Block block)

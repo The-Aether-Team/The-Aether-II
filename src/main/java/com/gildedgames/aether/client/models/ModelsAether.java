@@ -66,6 +66,7 @@ public class ModelsAether
 		registerBlockModel(BlocksAether.aether_portal);
 		registerBlockModel(BlocksAether.tall_aether_grass);
 		registerBlockModel(BlocksAether.quicksoil);
+		registerBlockModel(BlocksAether.skyroot_workbench);
 	}
 
 	private static void registerItemModels()
