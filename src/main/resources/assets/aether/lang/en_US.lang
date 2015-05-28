@@ -70,6 +70,10 @@ item.phoenix_helmet.name=Phoenix Helmet
 item.phoenix_chestplate.name=Phoenix Chestplate
 item.phoenix_leggings.name=Phoenix Leggings
 item.phoenix_boots.name=Phoenix Boots
+item.valkyrie_helmet.name=Valkyrie Helmet
+item.valkyrie_chestplate.name=Valkyrie Chestplate
+item.valkyrie_leggings.name=Valkyrie Leggings
+item.valkyrie_boots.name=Valkyrie Boots
 
 # Creative Tabs
 itemGroup.aetherBlocks=Aether Blocks
