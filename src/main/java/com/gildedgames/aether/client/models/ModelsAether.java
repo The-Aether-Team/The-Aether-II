@@ -105,6 +105,11 @@ public class ModelsAether
 		registerItemModel(ItemsAether.gravitite_chestplate);
 		registerItemModel(ItemsAether.gravitite_leggings);
 		registerItemModel(ItemsAether.gravitite_boots);
+
+		registerItemModel(ItemsAether.obsidian_helmet);
+		registerItemModel(ItemsAether.obsidian_chestplate);
+		registerItemModel(ItemsAether.obsidian_leggings);
+		registerItemModel(ItemsAether.obsidian_boots);
 	}
 
 	/**
