@@ -35,6 +35,8 @@ public class ItemsAether
 
 	public static Item phoenix_helmet, phoenix_chestplate, phoenix_leggings, phoenix_boots;
 
+	public static Item valkyrie_helmet, valkyrie_chestplate, valkyrie_leggings, valkyrie_boots;
+
 	public static void preInit()
 	{
 		skyroot_stick = registerItem("skyroot_stick", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
@@ -86,6 +88,11 @@ public class ItemsAether
 		phoenix_chestplate = registerItem("phoenix_chestplate", new ItemAetherArmor(EnumAetherArmorMaterial.PHOENIX, 0, 1));
 		phoenix_leggings = registerItem("phoenix_leggings", new ItemAetherArmor(EnumAetherArmorMaterial.PHOENIX, 0, 2));
 		phoenix_boots = registerItem("phoenix_boots", new ItemAetherArmor(EnumAetherArmorMaterial.PHOENIX, 0, 3));
+		
+		valkyrie_helmet = registerItem("valkyrie_helmet", new ItemAetherArmor(EnumAetherArmorMaterial.VALKYRIE, 0, 0));
+		valkyrie_chestplate = registerItem("valkyrie_chestplate", new ItemAetherArmor(EnumAetherArmorMaterial.VALKYRIE, 0, 1));
+		valkyrie_leggings = registerItem("valkyrie_leggings", new ItemAetherArmor(EnumAetherArmorMaterial.VALKYRIE, 0, 2));
+		valkyrie_boots = registerItem("valkyrie_boots", new ItemAetherArmor(EnumAetherArmorMaterial.VALKYRIE, 0, 3));
 	}
 
 	private static Item registerItem(String name, Item item)

@@ -40,12 +40,22 @@ public enum EnumAetherArmorMaterial
 		    		return armorType == 2 ? "aether:textures/armor/neptune_layer_2.png" : "aether:textures/armor/neptune_layer_1.png";
 		    	}
 			},
+
 	PHOENIX(ArmorMaterial.DIAMOND)
 			{
 		    	@Override
 		    	public String getArmorResourceLocation(int armorType)
 		    	{
 		    		return armorType == 2 ? "aether:textures/armor/phoenix_layer_2.png" : "aether:textures/armor/phoenix_layer_1.png";
+		    	}
+			},
+
+	VALKYRIE(EnumHelper.addArmorMaterial("AETHER_VALKYRIE", "", 30, new int[] { 2, 6, 5, 2 }, 10))
+			{
+		    	@Override
+		    	public String getArmorResourceLocation(int armorType)
+		    	{
+		    		return armorType == 2 ? "aether:textures/armor/valkyrie_layer_2.png" : "aether:textures/armor/valkyrie_layer_1.png";
 		    	}
 			};
 
