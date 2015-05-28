@@ -31,6 +31,8 @@ public class ItemsAether
 
 	public static Item obsidian_helmet, obsidian_chestplate, obsidian_leggings, obsidian_boots;
 
+	public static Item neptune_helmet, neptune_chestplate, neptune_leggings, neptune_boots;
+
 	public static void preInit()
 	{
 		skyroot_stick = registerItem("skyroot_stick", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
@@ -72,6 +74,11 @@ public class ItemsAether
 		obsidian_chestplate = registerItem("obsidian_chestplate", new ItemAetherArmor(EnumAetherArmorMaterial.OBSIDIAN, 0, 1));
 		obsidian_leggings = registerItem("obsidian_leggings", new ItemAetherArmor(EnumAetherArmorMaterial.OBSIDIAN, 0, 2));
 		obsidian_boots = registerItem("obsidian_boots", new ItemAetherArmor(EnumAetherArmorMaterial.OBSIDIAN, 0, 3));
+
+		neptune_helmet = registerItem("neptune_helmet", new ItemAetherArmor(EnumAetherArmorMaterial.NEPTUNE, 0, 0));
+		neptune_chestplate = registerItem("neptune_chestplate", new ItemAetherArmor(EnumAetherArmorMaterial.NEPTUNE, 0, 1));
+		neptune_leggings = registerItem("neptune_leggings", new ItemAetherArmor(EnumAetherArmorMaterial.NEPTUNE, 0, 2));
+		neptune_boots = registerItem("neptune_boots", new ItemAetherArmor(EnumAetherArmorMaterial.NEPTUNE, 0, 3));
 	}
 
 	private static Item registerItem(String name, Item item)
