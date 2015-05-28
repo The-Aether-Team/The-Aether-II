@@ -66,6 +66,10 @@ item.neptune_helmet.name=Neptune Helmet
 item.neptune_chestplate.name=Neptune Chestplate
 item.neptune_leggings.name=Neptune Leggings
 item.neptune_boots.name=Neptune Boots
+item.phoenix_helmet.name=Phoenix Helmet
+item.phoenix_chestplate.name=Phoenix Chestplate
+item.phoenix_leggings.name=Phoenix Leggings
+item.phoenix_boots.name=Phoenix Boots
 
 # Creative Tabs
 itemGroup.aetherBlocks=Aether Blocks
