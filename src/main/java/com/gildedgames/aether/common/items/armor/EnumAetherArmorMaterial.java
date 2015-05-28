@@ -39,6 +39,14 @@ public enum EnumAetherArmorMaterial
 		    	{
 		    		return armorType == 2 ? "aether:textures/armor/neptune_layer_2.png" : "aether:textures/armor/neptune_layer_1.png";
 		    	}
+			},
+	PHOENIX(ArmorMaterial.DIAMOND)
+			{
+		    	@Override
+		    	public String getArmorResourceLocation(int armorType)
+		    	{
+		    		return armorType == 2 ? "aether:textures/armor/phoenix_layer_2.png" : "aether:textures/armor/phoenix_layer_1.png";
+		    	}
 			};
 
 	private final ArmorMaterial armorMaterial;

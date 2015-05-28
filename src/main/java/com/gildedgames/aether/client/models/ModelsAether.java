@@ -115,6 +115,11 @@ public class ModelsAether
 		registerItemModel(ItemsAether.neptune_chestplate);
 		registerItemModel(ItemsAether.neptune_leggings);
 		registerItemModel(ItemsAether.neptune_boots);
+
+		registerItemModel(ItemsAether.phoenix_helmet);
+		registerItemModel(ItemsAether.phoenix_chestplate);
+		registerItemModel(ItemsAether.phoenix_leggings);
+		registerItemModel(ItemsAether.phoenix_boots);
 	}
 
 	/**
