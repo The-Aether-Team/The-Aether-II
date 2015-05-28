@@ -62,6 +62,10 @@ item.obsidian_helmet.name=Obsidian Helmet
 item.obsidian_chestplate.name=Obsidian Chestplate
 item.obsidian_leggings.name=Obsidian Leggings
 item.obsidian_boots.name=Obsidian Boots
+item.neptune_helmet.name=Neptune Helmet
+item.neptune_chestplate.name=Neptune Chestplate
+item.neptune_leggings.name=Neptune Leggings
+item.neptune_boots.name=Neptune Boots
 
 # Creative Tabs
 itemGroup.aetherBlocks=Aether Blocks
