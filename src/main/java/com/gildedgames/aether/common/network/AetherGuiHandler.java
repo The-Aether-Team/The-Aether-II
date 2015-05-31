@@ -20,9 +20,9 @@ public class AetherGuiHandler implements IGuiHandler
 		{
 		case SKYROOT_WORKBENCH_ID:
 			return new ContainerSkyrootWorkbench(player.inventory, world, new BlockPos(x, y, z));
+		default:
+			return null;
 		}
-
-		return null;
 	}
 
 	@Override
@@ -32,8 +32,8 @@ public class AetherGuiHandler implements IGuiHandler
 		{
 		case SKYROOT_WORKBENCH_ID:
 			return new GuiCrafting(player.inventory, world, new BlockPos(x, y, z));
+		default:
+			return null;
 		}
-
-		return null;
 	}
 }

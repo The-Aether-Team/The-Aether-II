@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.items;
 
 import com.gildedgames.aether.common.AetherCreativeTabs;
-import com.gildedgames.aether.common.items.armor.EnumAetherArmorMaterial;
+import com.gildedgames.aether.common.items.armor.EnumAetherArmorVariant;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.items.tools.EnumAetherToolMaterial;
 import com.gildedgames.aether.common.items.tools.ItemAetherAxe;
@@ -64,35 +64,35 @@ public class ItemsAether
 		gravitite_shovel = registerItem("gravitite_shovel", new ItemAetherShovel(EnumAetherToolMaterial.GRAVITITE));
 		gravitite_sword = registerItem("gravitite_sword", new ItemAetherSword(EnumAetherToolMaterial.GRAVITITE));
 
-		zanite_helmet = registerItem("zanite_helmet", new ItemAetherArmor(EnumAetherArmorMaterial.ZANITE, 0, 0));
-		zanite_chestplate = registerItem("zanite_chestplate", new ItemAetherArmor(EnumAetherArmorMaterial.ZANITE, 0, 1));
-		zanite_leggings = registerItem("zanite_leggings", new ItemAetherArmor(EnumAetherArmorMaterial.ZANITE, 0, 2));
-		zanite_boots = registerItem("zanite_boots", new ItemAetherArmor(EnumAetherArmorMaterial.ZANITE, 0, 3));
+		zanite_helmet = registerItem("zanite_helmet", new ItemAetherArmor(EnumAetherArmorVariant.ZANITE, 0, 0));
+		zanite_chestplate = registerItem("zanite_chestplate", new ItemAetherArmor(EnumAetherArmorVariant.ZANITE, 0, 1));
+		zanite_leggings = registerItem("zanite_leggings", new ItemAetherArmor(EnumAetherArmorVariant.ZANITE, 0, 2));
+		zanite_boots = registerItem("zanite_boots", new ItemAetherArmor(EnumAetherArmorVariant.ZANITE, 0, 3));
 
-		gravitite_helmet = registerItem("gravitite_helmet", new ItemAetherArmor(EnumAetherArmorMaterial.GRAVITITE, 0, 0));
-		gravitite_chestplate = registerItem("gravitite_chestplate", new ItemAetherArmor(EnumAetherArmorMaterial.GRAVITITE, 0, 1));
-		gravitite_leggings = registerItem("gravitite_leggings", new ItemAetherArmor(EnumAetherArmorMaterial.GRAVITITE, 0, 2));
-		gravitite_boots = registerItem("gravitite_boots", new ItemAetherArmor(EnumAetherArmorMaterial.GRAVITITE, 0, 3));
+		gravitite_helmet = registerItem("gravitite_helmet", new ItemAetherArmor(EnumAetherArmorVariant.GRAVITITE, 0, 0));
+		gravitite_chestplate = registerItem("gravitite_chestplate", new ItemAetherArmor(EnumAetherArmorVariant.GRAVITITE, 0, 1));
+		gravitite_leggings = registerItem("gravitite_leggings", new ItemAetherArmor(EnumAetherArmorVariant.GRAVITITE, 0, 2));
+		gravitite_boots = registerItem("gravitite_boots", new ItemAetherArmor(EnumAetherArmorVariant.GRAVITITE, 0, 3));
 
-		obsidian_helmet = registerItem("obsidian_helmet", new ItemAetherArmor(EnumAetherArmorMaterial.OBSIDIAN, 0, 0));
-		obsidian_chestplate = registerItem("obsidian_chestplate", new ItemAetherArmor(EnumAetherArmorMaterial.OBSIDIAN, 0, 1));
-		obsidian_leggings = registerItem("obsidian_leggings", new ItemAetherArmor(EnumAetherArmorMaterial.OBSIDIAN, 0, 2));
-		obsidian_boots = registerItem("obsidian_boots", new ItemAetherArmor(EnumAetherArmorMaterial.OBSIDIAN, 0, 3));
+		obsidian_helmet = registerItem("obsidian_helmet", new ItemAetherArmor(EnumAetherArmorVariant.OBSIDIAN, 0, 0));
+		obsidian_chestplate = registerItem("obsidian_chestplate", new ItemAetherArmor(EnumAetherArmorVariant.OBSIDIAN, 0, 1));
+		obsidian_leggings = registerItem("obsidian_leggings", new ItemAetherArmor(EnumAetherArmorVariant.OBSIDIAN, 0, 2));
+		obsidian_boots = registerItem("obsidian_boots", new ItemAetherArmor(EnumAetherArmorVariant.OBSIDIAN, 0, 3));
 
-		neptune_helmet = registerItem("neptune_helmet", new ItemAetherArmor(EnumAetherArmorMaterial.NEPTUNE, 0, 0));
-		neptune_chestplate = registerItem("neptune_chestplate", new ItemAetherArmor(EnumAetherArmorMaterial.NEPTUNE, 0, 1));
-		neptune_leggings = registerItem("neptune_leggings", new ItemAetherArmor(EnumAetherArmorMaterial.NEPTUNE, 0, 2));
-		neptune_boots = registerItem("neptune_boots", new ItemAetherArmor(EnumAetherArmorMaterial.NEPTUNE, 0, 3));
+		neptune_helmet = registerItem("neptune_helmet", new ItemAetherArmor(EnumAetherArmorVariant.NEPTUNE, 0, 0));
+		neptune_chestplate = registerItem("neptune_chestplate", new ItemAetherArmor(EnumAetherArmorVariant.NEPTUNE, 0, 1));
+		neptune_leggings = registerItem("neptune_leggings", new ItemAetherArmor(EnumAetherArmorVariant.NEPTUNE, 0, 2));
+		neptune_boots = registerItem("neptune_boots", new ItemAetherArmor(EnumAetherArmorVariant.NEPTUNE, 0, 3));
 		
-		phoenix_helmet = registerItem("phoenix_helmet", new ItemAetherArmor(EnumAetherArmorMaterial.PHOENIX, 0, 0));
-		phoenix_chestplate = registerItem("phoenix_chestplate", new ItemAetherArmor(EnumAetherArmorMaterial.PHOENIX, 0, 1));
-		phoenix_leggings = registerItem("phoenix_leggings", new ItemAetherArmor(EnumAetherArmorMaterial.PHOENIX, 0, 2));
-		phoenix_boots = registerItem("phoenix_boots", new ItemAetherArmor(EnumAetherArmorMaterial.PHOENIX, 0, 3));
+		phoenix_helmet = registerItem("phoenix_helmet", new ItemAetherArmor(EnumAetherArmorVariant.PHOENIX, 0, 0));
+		phoenix_chestplate = registerItem("phoenix_chestplate", new ItemAetherArmor(EnumAetherArmorVariant.PHOENIX, 0, 1));
+		phoenix_leggings = registerItem("phoenix_leggings", new ItemAetherArmor(EnumAetherArmorVariant.PHOENIX, 0, 2));
+		phoenix_boots = registerItem("phoenix_boots", new ItemAetherArmor(EnumAetherArmorVariant.PHOENIX, 0, 3));
 		
-		valkyrie_helmet = registerItem("valkyrie_helmet", new ItemAetherArmor(EnumAetherArmorMaterial.VALKYRIE, 0, 0));
-		valkyrie_chestplate = registerItem("valkyrie_chestplate", new ItemAetherArmor(EnumAetherArmorMaterial.VALKYRIE, 0, 1));
-		valkyrie_leggings = registerItem("valkyrie_leggings", new ItemAetherArmor(EnumAetherArmorMaterial.VALKYRIE, 0, 2));
-		valkyrie_boots = registerItem("valkyrie_boots", new ItemAetherArmor(EnumAetherArmorMaterial.VALKYRIE, 0, 3));
+		valkyrie_helmet = registerItem("valkyrie_helmet", new ItemAetherArmor(EnumAetherArmorVariant.VALKYRIE, 0, 0));
+		valkyrie_chestplate = registerItem("valkyrie_chestplate", new ItemAetherArmor(EnumAetherArmorVariant.VALKYRIE, 0, 1));
+		valkyrie_leggings = registerItem("valkyrie_leggings", new ItemAetherArmor(EnumAetherArmorVariant.VALKYRIE, 0, 2));
+		valkyrie_boots = registerItem("valkyrie_boots", new ItemAetherArmor(EnumAetherArmorVariant.VALKYRIE, 0, 3));
 	}
 
 	private static Item registerItem(String name, Item item)

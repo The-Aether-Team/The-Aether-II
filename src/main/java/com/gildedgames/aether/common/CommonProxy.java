@@ -2,6 +2,7 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.armor.AetherArmorMaterials;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.recipes.RecipesAether;
 import com.gildedgames.aether.common.world.WorldProviderAether;
@@ -28,6 +29,8 @@ public class CommonProxy
 		NetworkRegistry.INSTANCE.registerGuiHandler(Aether.INSTANCE, new AetherGuiHandler());
 
 		// Pre-initialize content.
+		AetherArmorMaterials.preInit();
+
 		BlocksAether.preInit();
 		ItemsAether.preInit();
 

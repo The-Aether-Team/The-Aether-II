@@ -7,13 +7,13 @@ import net.minecraft.item.ItemStack;
 
 public class ItemAetherArmor extends ItemArmor
 {
-	private EnumAetherArmorMaterial armorMaterial;
+	private EnumAetherArmorVariant armorVariant;
 
-	public ItemAetherArmor(EnumAetherArmorMaterial material, int renderIndex, int armorType)
+	public ItemAetherArmor(EnumAetherArmorVariant material, int renderIndex, int armorType)
 	{
 		super(material.getArmorMaterial(), renderIndex, armorType);
 
-		this.armorMaterial = material;
+		this.armorVariant = material;
 
 		this.setCreativeTab(AetherCreativeTabs.tabArmor);
 	}
@@ -21,7 +21,13 @@ public class ItemAetherArmor extends ItemArmor
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
 	{
-		return this.armorMaterial.getArmorResourceLocation(slot);
+		return this.armorVariant.getResourceForSlot(slot);
+	}
+
+	@Override
+	public boolean getIsRepairable(ItemStack target, ItemStack stack)
+	{
+		return this.armorVariant.getRepairItem() == stack.getItem();
 	}
 
 }
