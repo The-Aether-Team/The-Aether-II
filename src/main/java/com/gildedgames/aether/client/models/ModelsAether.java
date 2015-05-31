@@ -28,7 +28,8 @@ public class ModelsAether
 {
 	public static void prepareModelLoader()
 	{
-		ModelLoader.setCustomStateMapper(BlocksAether.aether_leaves, new StateMap.Builder().setProperty(BlockAetherLeaves.PROPERTY_VARIANT).addPropertiesToIgnore(BlockAetherLeaves.CHECK_DECAY, BlockAetherLeaves.DECAYABLE).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.aether_leaves, new StateMap.Builder().addPropertiesToIgnore(BlockAetherLeaves.PROPERTY_CHECK_DECAY, BlockAetherLeaves.PROPERTY_DECAYABLE).build());
+
 		ModelLoader.setCustomStateMapper(BlocksAether.aercloud, new StateMapperBase()
 		{
 			protected ModelResourceLocation getModelResourceLocation(IBlockState state)
