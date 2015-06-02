@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.items.tools;
 
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
@@ -30,8 +31,8 @@ public class ItemAetherShovel extends ItemSpade
 	}
 
 	@Override
-	public float getStrVsBlock(ItemStack stack, Block block)
+	public float getDigSpeed(ItemStack stack, IBlockState state)
 	{
-		return this.aetherToolMaterial.getDigSpeed(stack, block, super.getStrVsBlock(stack, block));
+		return this.aetherToolMaterial.getDigSpeed(stack, state, super.getDigSpeed(stack, state));
 	}
 }

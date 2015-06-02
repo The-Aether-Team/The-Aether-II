@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.items.tools;
 
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -52,14 +53,17 @@ public enum EnumAetherToolMaterial
 	ZANITE(ToolMaterial.IRON)
 			{
 				@Override
-				public float getDigSpeed(ItemStack stack, Block block, float baseSpeed)
+				public float getDigSpeed(ItemStack stack, IBlockState state, float baseSpeed)
 				{
+					float modifiedSpeed = baseSpeed;
+
 					if (stack != null)
 					{
-						return baseSpeed + ((stack.getItemDamage() / stack.getItem().getMaxDamage()) + 0.5F);
+						float additionalSpeed = (2.0F * stack.getItemDamage() / stack.getItem().getMaxDamage() + 0.5F);
+						modifiedSpeed = baseSpeed * additionalSpeed;
 					}
 
-					return baseSpeed;
+					return modifiedSpeed;
 				}
 			},
 	GRAVITITE(ToolMaterial.EMERALD)
@@ -98,7 +102,7 @@ public enum EnumAetherToolMaterial
 	{
 	}
 
-	public float getDigSpeed(ItemStack stack, Block block, float baseSpeed)
+	public float getDigSpeed(ItemStack stack, IBlockState state, float baseSpeed)
 	{
 		return baseSpeed;
 	}
