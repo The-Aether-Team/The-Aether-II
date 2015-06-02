@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.items.itemblocks;
 
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
+import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -28,7 +29,11 @@ public class ItemBlockVariants extends ItemBlock
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		return super.getUnlocalizedName() + "." + this.variantBlock.getVariantNameFromStack(stack);
+		BlockVariant variant = this.variantBlock.getVariantFromStack(stack);
+
+		String suffix = variant != null ? variant.getName() : "missingno";
+
+		return super.getUnlocalizedName() + "." + suffix;
 	}
 
 }

@@ -130,8 +130,8 @@ public class BlockAetherDirt extends Block implements IAetherBlockWithVariants
 	}
 
 	@Override
-	public String getVariantNameFromStack(ItemStack stack)
+	public BlockVariant getVariantFromStack(ItemStack stack)
 	{
-		return PROPERTY_VARIANT.getVariantFromMeta(stack.getMetadata()).getName();
+		return PROPERTY_VARIANT.getVariantFromMeta(stack.getMetadata());
 	}
 }

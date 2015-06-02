@@ -154,11 +154,11 @@ public class BlockAetherLog extends Block implements IAetherBlockWithVariants
 	}
 
 	@Override
-	public String getVariantNameFromStack(ItemStack stack)
+	public BlockVariant getVariantFromStack(ItemStack stack)
 	{
 		int variantMeta = stack.getMetadata() - (stack.getMetadata() % 4);
 
-		return PROPERTY_VARIANT.getVariantFromMeta(variantMeta).getName();
+		return PROPERTY_VARIANT.getVariantFromMeta(variantMeta);
 	}
 
 }

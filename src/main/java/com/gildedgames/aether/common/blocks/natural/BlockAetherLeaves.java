@@ -295,8 +295,8 @@ public class BlockAetherLeaves extends Block implements IShearable, IAetherBlock
 	}
 
 	@Override
-	public String getVariantNameFromStack(ItemStack stack)
+	public BlockVariant getVariantFromStack(ItemStack stack)
 	{
-		return PROPERTY_VARIANT.getVariantFromMeta(stack.getMetadata()).getName();
+		return PROPERTY_VARIANT.getVariantFromMeta(stack.getMetadata());
 	}
 }
