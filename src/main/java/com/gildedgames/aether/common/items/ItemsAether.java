@@ -42,7 +42,7 @@ public class ItemsAether
 	public static void preInit()
 	{
 		skyroot_stick = registerItem("skyroot_stick", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
-		ambrosium_shard = registerItem("ambrosium_shard", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
+		ambrosium_shard = registerItem("ambrosium_shard", new ItemAmbrosiumShard());
 		continuum_orb = registerItem("continuum_orb", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
 		zanite_gemstone = registerItem("zanite_gemstone", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
 
