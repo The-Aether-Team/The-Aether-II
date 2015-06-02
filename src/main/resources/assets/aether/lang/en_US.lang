@@ -74,6 +74,7 @@ item.valkyrie_helmet.name=Valkyrie Helmet
 item.valkyrie_chestplate.name=Valkyrie Chestplate
 item.valkyrie_leggings.name=Valkyrie Leggings
 item.valkyrie_boots.name=Valkyrie Boots
+item.golden_amber.name=Golden Amber
 
 # Creative Tabs
 itemGroup.aetherBlocks=Aether Blocks

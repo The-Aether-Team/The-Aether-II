@@ -126,6 +126,8 @@ public class ModelsAether
 		registerItemModel(ItemsAether.valkyrie_chestplate);
 		registerItemModel(ItemsAether.valkyrie_leggings);
 		registerItemModel(ItemsAether.valkyrie_boots);
+
+		registerItemModel(ItemsAether.golden_amber);
 	}
 
 	/**

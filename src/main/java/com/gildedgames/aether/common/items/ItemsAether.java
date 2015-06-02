@@ -37,6 +37,8 @@ public class ItemsAether
 
 	public static Item valkyrie_helmet, valkyrie_chestplate, valkyrie_leggings, valkyrie_boots;
 
+	public static Item golden_amber;
+
 	public static void preInit()
 	{
 		skyroot_stick = registerItem("skyroot_stick", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
@@ -93,6 +95,8 @@ public class ItemsAether
 		valkyrie_chestplate = registerItem("valkyrie_chestplate", new ItemAetherArmor(EnumAetherArmorVariant.VALKYRIE, 0, 1));
 		valkyrie_leggings = registerItem("valkyrie_leggings", new ItemAetherArmor(EnumAetherArmorVariant.VALKYRIE, 0, 2));
 		valkyrie_boots = registerItem("valkyrie_boots", new ItemAetherArmor(EnumAetherArmorVariant.VALKYRIE, 0, 3));
+
+		golden_amber = registerItem("golden_amber", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
 	}
 
 	private static Item registerItem(String name, Item item)

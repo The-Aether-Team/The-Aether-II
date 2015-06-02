@@ -12,21 +12,18 @@ import net.minecraft.world.World;
 
 public enum EnumAetherToolMaterial
 {
-	SKYROOT
+	// TODO: The tool classes are terrible.
+	// They seriously need to be fixed.
+
+	SKYROOT(ToolMaterial.WOOD)
 			{
 				@Override
 				public void onBlockDestroyed(BlockPos pos, World world)
 				{
 					// TODO: Chunk hooks!
 				}
-
-				@Override
-				public ToolMaterial getToolMaterial()
-				{
-					return ToolMaterial.WOOD;
-				}
 			},
-	HOLYSTONE
+	HOLYSTONE(ToolMaterial.STONE)
 			{
 				@Override
 				public void onBlockDestroyed(BlockPos pos, World world)
@@ -51,14 +48,8 @@ public enum EnumAetherToolMaterial
 						world.spawnEntityInWorld(entity);
 					}
 				}
-
-				@Override
-				public ToolMaterial getToolMaterial()
-				{
-					return ToolMaterial.STONE;
-				}
 			},
-	ZANITE
+	ZANITE(ToolMaterial.IRON)
 			{
 				@Override
 				public float getDigSpeed(ItemStack stack, Block block, float baseSpeed)
@@ -70,21 +61,9 @@ public enum EnumAetherToolMaterial
 
 					return baseSpeed;
 				}
-
-				@Override
-				public ToolMaterial getToolMaterial()
-				{
-					return ToolMaterial.IRON;
-				}
 			},
-	GRAVITITE
+	GRAVITITE(ToolMaterial.EMERALD)
 			{
-				@Override
-				public ToolMaterial getToolMaterial()
-				{
-					return ToolMaterial.EMERALD;
-				}
-
 				@Override
 				public void onEntityAttacked(ItemStack stack, EntityLivingBase prey, EntityLivingBase predator)
 				{
@@ -99,6 +78,13 @@ public enum EnumAetherToolMaterial
 
 				// TODO: Floating blocks!
 			};
+
+	private final ToolMaterial material;
+
+	EnumAetherToolMaterial(ToolMaterial material)
+	{
+		this.material = material;
+	}
 
 	public void onBlockDestroyed(BlockPos pos, World world)
 	{
@@ -117,5 +103,8 @@ public enum EnumAetherToolMaterial
 		return baseSpeed;
 	}
 
-	abstract ToolMaterial getToolMaterial();
+	public ToolMaterial getToolMaterial()
+	{
+		return this.material;
+	}
 }
