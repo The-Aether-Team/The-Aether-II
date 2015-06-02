@@ -65,8 +65,21 @@ public class BlockHolystone extends Block implements IAetherBlockWithVariants
 	{
 		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
-			list.add(new ItemStack(itemIn, 1, variant.getMeta()));
+			if (variant != BLOOD_MOSS_HOLYSTONE)
+			{
+				list.add(new ItemStack(itemIn, 1, variant.getMeta()));
+			}
 		}
+	}
+
+	public float getBlockHardness(World world, BlockPos pos)
+	{
+		if (world.getBlockState(pos).getValue(PROPERTY_VARIANT) == BLOOD_MOSS_HOLYSTONE)
+		{
+			return -1.0f;
+		}
+
+		return this.blockHardness;
 	}
 
 	@Override
