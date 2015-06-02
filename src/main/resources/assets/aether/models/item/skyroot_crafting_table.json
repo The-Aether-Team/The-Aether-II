@@ -1,5 +1,5 @@
 {
-	"parent": "aether:block/skyroot_workbench",
+	"parent": "aether:block/skyroot_crafting_table",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

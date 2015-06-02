@@ -47,7 +47,7 @@ public class BlocksAether
 
 	public static Block quicksoil;
 
-	public static Block skyroot_workbench;
+	public static Block skyroot_crafting_table;
 
 	public static void preInit()
 	{
@@ -78,7 +78,7 @@ public class BlocksAether
 
 		quicksoil = registerBlock("quicksoil", new BlockQuicksoil());
 
-		skyroot_workbench = registerBlock("skyroot_workbench", new BlockSkyrootWorkbench());
+		skyroot_crafting_table = registerBlock("skyroot_crafting_table", new BlockSkyrootWorkbench());
 	}
 
 	private static Block registerBlock(String name, Block block)

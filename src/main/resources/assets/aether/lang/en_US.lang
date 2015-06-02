@@ -27,7 +27,7 @@ tile.aether_leaves.purple_fruit_leaves.name=Purple Fruit Leaves
 tile.aether_portal.name=Aether Portal
 tile.tall_aether_grass.name=Tall Aether Grass
 tile.quicksoil.name=Quicksoil
-tile.skyroot_workbench.name=Skyroot Workbench
+tile.skyroot_crafting_table.name=Skyroot Crafting Table
 
 # Aether Items
 item.skyroot_stick.name=Skyroot Stick

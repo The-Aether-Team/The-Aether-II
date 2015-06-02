@@ -23,7 +23,7 @@ public class ContainerSkyrootWorkbench extends ContainerWorkbench
 
 	public boolean canInteractWith(EntityPlayer player)
 	{
-		return this.world.getBlockState(this.pos).getBlock() == BlocksAether.skyroot_workbench &&
+		return this.world.getBlockState(this.pos).getBlock() == BlocksAether.skyroot_crafting_table &&
 				player.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 }
