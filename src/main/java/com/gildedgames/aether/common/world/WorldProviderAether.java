@@ -65,7 +65,7 @@ public class WorldProviderAether extends WorldProvider
 	@Override
 	public boolean canRespawnHere()
 	{
-		return true;
+		return false;
 	}
 
 	@Override
