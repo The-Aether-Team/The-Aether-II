@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"variant=aether_grass": {
+			"model": "aether:aether_grass"
+		},
+		"variant=aether_enchanted_grass": {
+			"model": "aether:aether_enchanted_grass"
+		}
+	}
+}

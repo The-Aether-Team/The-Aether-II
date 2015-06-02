@@ -3,7 +3,7 @@ package com.gildedgames.aether.client.models;
 import com.gildedgames.aether.common.Aether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
@@ -54,11 +54,12 @@ public class ModelsAether
 
 	private static void registerBlockModels()
 	{
-		registerBlockModelWithVariants(BlocksAether.aether_dirt, BlockAetherDirt.PROPERTY_VARIANT.getAllowedValues());
+		registerBlockModelWithVariants(BlocksAether.aether_grass, BlockAetherGrass.PROPERTY_VARIANT.getAllowedValues());
 		registerBlockModelWithVariants(BlocksAether.holystone, BlockHolystone.PROPERTY_VARIANT.getAllowedValues());
 		registerBlockModelWithVariants(BlocksAether.aercloud, BlockAercloud.PROPERTY_VARIANT.getAllowedValues());
 		registerBlockModelWithVariants(BlocksAether.aether_log, BlockAetherLog.PROPERTY_VARIANT.getAllowedValues());
 		registerBlockModelWithVariants(BlocksAether.aether_leaves, BlockAetherLeaves.PROPERTY_VARIANT.getAllowedValues());
+		registerBlockModel(BlocksAether.aether_dirt);
 		registerBlockModel(BlocksAether.skyroot_planks);
 		registerBlockModel(BlocksAether.ambrosium_ore);
 		registerBlockModel(BlocksAether.zanite_ore);

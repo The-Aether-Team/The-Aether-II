@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.blocks;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootWorkbench;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.common.blocks.natural.BlockAmbrosiumOre;
@@ -22,6 +22,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class BlocksAether
 {
 	public static Block aether_dirt;
+
+	public static Block aether_grass;
 
 	public static Block holystone;
 
@@ -51,7 +53,10 @@ public class BlocksAether
 
 	public static void preInit()
 	{
-		aether_dirt = registerBlockWithVariants("aether_dirt", new BlockAetherDirt());
+		aether_dirt = registerBlock("aether_dirt", new BlockAether(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f)
+				.setCreativeTab(AetherCreativeTabs.tabBlocks));
+
+		aether_grass = registerBlockWithVariants("aether_grass", new BlockAetherGrass());
 
 		holystone = registerBlockWithVariants("holystone", new BlockHolystone());
 

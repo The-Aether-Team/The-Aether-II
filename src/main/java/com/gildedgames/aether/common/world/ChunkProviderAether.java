@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
@@ -25,7 +25,7 @@ public class ChunkProviderAether implements IChunkProvider
 {
 	private final World worldObj;
 
-	private final IBlockState aether_grass, aether_dirt, aether_stone;
+	private final IBlockState aether_dirt, aether_grass, aether_stone;
 
 	private final Random random;
 
@@ -35,8 +35,8 @@ public class ChunkProviderAether implements IChunkProvider
 
 	public ChunkProviderAether(World world, long seed)
 	{
-		this.aether_grass = BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.AETHER_GRASS);
 		this.aether_dirt = BlocksAether.aether_dirt.getDefaultState();
+		this.aether_grass = BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.AETHER_GRASS);
 		this.aether_stone = BlocksAether.holystone.getDefaultState();
 
 		this.worldObj = world;

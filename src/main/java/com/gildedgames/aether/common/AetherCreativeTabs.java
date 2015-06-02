@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -53,7 +53,7 @@ public class AetherCreativeTabs
 
 	public static void preInit()
 	{
-		tabBlocks.setItemToDisplay(Item.getItemFromBlock(BlocksAether.aether_dirt), BlockAetherDirt.AETHER_GRASS.getMeta());
+		tabBlocks.setItemToDisplay(Item.getItemFromBlock(BlocksAether.aether_grass), BlockAetherGrass.AETHER_GRASS.getMeta());
 		tabMaterials.setItemToDisplay(ItemsAether.skyroot_stick, 0);
 		tabTools.setItemToDisplay(ItemsAether.gravitite_pickaxe, 0);
 		tabWeapons.setItemToDisplay(ItemsAether.gravitite_sword, 0);

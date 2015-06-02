@@ -34,7 +34,7 @@ public class BlockTallAetherGrass extends BlockBush implements IShearable, IGrow
 
 	protected boolean canPlaceBlockOn(Block ground)
 	{
-		return ground == BlocksAether.aether_dirt;
+		return ground == BlocksAether.aether_grass;
 	}
 
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
