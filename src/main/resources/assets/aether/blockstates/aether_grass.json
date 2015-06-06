@@ -4,7 +4,7 @@
 			"model": "aether:aether_grass"
 		},
 		"variant=aether_enchanted_grass": {
-			"model": "aether:aether_enchanted_grass"
+			"model": "aether:enchanted_aether_grass"
 		}
 	}
 }

@@ -1,5 +1,5 @@
 {
-	"parent": "aether:block/aercloud_green",
+	"parent": "aether:block/enchanted_aether_grass",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

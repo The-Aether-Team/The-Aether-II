@@ -1,5 +1,5 @@
 {
-	"parent": "aether:block/aercloud_cold",
+	"parent": "aether:block/storm_aercloud",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],
