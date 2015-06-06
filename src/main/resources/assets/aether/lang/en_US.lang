@@ -28,6 +28,8 @@ tile.aether_portal.name=Aether Portal
 tile.tall_aether_grass.name=Tall Aether Grass
 tile.quicksoil.name=Quicksoil
 tile.skyroot_crafting_table.name=Skyroot Crafting Table
+tile.berry_bush.ripe.name=Berry Bush
+tile.berry_bush.stem.name=Berry Bush Stem
 
 # Aether Items
 item.skyroot_stick.name=Skyroot Stick
@@ -75,6 +77,7 @@ item.valkyrie_chestplate.name=Valkyrie Chestplate
 item.valkyrie_leggings.name=Valkyrie Leggings
 item.valkyrie_boots.name=Valkyrie Boots
 item.golden_amber.name=Golden Amber
+item.blue_berry.name=Blue Berry
 
 # Creative Tabs
 itemGroup.aetherBlocks=Aether Blocks

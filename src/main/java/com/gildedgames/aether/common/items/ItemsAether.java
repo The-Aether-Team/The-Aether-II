@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.items;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.items.armor.EnumAetherArmorVariant;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
+import com.gildedgames.aether.common.items.consumables.ItemAetherFood;
 import com.gildedgames.aether.common.items.tools.EnumAetherToolMaterial;
 import com.gildedgames.aether.common.items.tools.ItemAetherAxe;
 import com.gildedgames.aether.common.items.tools.ItemAetherPickaxe;
@@ -38,6 +39,8 @@ public class ItemsAether
 	public static Item valkyrie_helmet, valkyrie_chestplate, valkyrie_leggings, valkyrie_boots;
 
 	public static Item golden_amber;
+
+	public static Item blue_berry;
 
 	public static void preInit()
 	{
@@ -97,6 +100,8 @@ public class ItemsAether
 		valkyrie_boots = registerItem("valkyrie_boots", new ItemAetherArmor(EnumAetherArmorVariant.VALKYRIE, 0, 3));
 
 		golden_amber = registerItem("golden_amber", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
+
+		blue_berry = registerItem("blue_berry", new ItemAetherFood(2, false));
 	}
 
 	private static Item registerItem(String name, Item item)
