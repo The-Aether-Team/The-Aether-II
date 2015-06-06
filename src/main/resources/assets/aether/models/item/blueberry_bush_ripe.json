@@ -1,5 +1,5 @@
 {
-	"parent": "aether:block/berry_bush_ripe",
+	"parent": "aether:block/blueberry_bush_ripe",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

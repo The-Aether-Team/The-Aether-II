@@ -7,7 +7,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.common.blocks.natural.BlockAmbrosiumOre;
-import com.gildedgames.aether.common.blocks.natural.BlockBerryBush;
+import com.gildedgames.aether.common.blocks.natural.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.BlockContinuumOre;
 import com.gildedgames.aether.common.blocks.natural.BlockGravititeOre;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
@@ -53,7 +53,7 @@ public class BlocksAether
 
 	public static Block skyroot_crafting_table;
 
-	public static Block berry_bush;
+	public static Block blueberry_bush;
 
 	public static void preInit()
 	{
@@ -89,7 +89,7 @@ public class BlocksAether
 
 		skyroot_crafting_table = registerBlock("skyroot_crafting_table", new BlockSkyrootWorkbench());
 
-		berry_bush = registerBlock("berry_bush", ItemBlockAetherSubtypes.class, new BlockBerryBush());
+		blueberry_bush = registerBlock("blueberry_bush", ItemBlockAetherSubtypes.class, new BlockBlueberryBush());
 	}
 
 	private static Block registerBlock(String name, Block block)

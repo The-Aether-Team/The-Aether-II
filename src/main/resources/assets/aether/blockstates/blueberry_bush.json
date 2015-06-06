@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"harvestable=true": {
+			"model": "aether:blueberry_bush_ripe"
+		},
+		"harvestable=false": {
+			"model": "aether:blueberry_bush_stem"
+		}
+	}
+}

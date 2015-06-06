@@ -28,8 +28,8 @@ tile.aether_portal.name=Aether Portal
 tile.tall_aether_grass.name=Tall Aether Grass
 tile.quicksoil.name=Quicksoil
 tile.skyroot_crafting_table.name=Skyroot Crafting Table
-tile.berry_bush.ripe.name=Berry Bush
-tile.berry_bush.stem.name=Berry Bush Stem
+tile.blueberry_bush.ripe.name=Blueberry Bush
+tile.blueberry_bush.stem.name=Blueberry Bush Stem
 
 # Aether Items
 item.skyroot_stick.name=Skyroot Stick

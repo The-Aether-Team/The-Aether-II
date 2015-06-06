@@ -6,7 +6,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
-import com.gildedgames.aether.common.blocks.natural.BlockBerryBush;
+import com.gildedgames.aether.common.blocks.natural.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.google.common.collect.Maps;
@@ -81,8 +81,8 @@ public class ModelsAether
 		registerBlockModelVariant(BlocksAether.aether_leaves, BlockAetherLeaves.PURPLE_CRYSTAL_LEAVES.getMeta(), "purple_crystal_leaves");
 		registerBlockModelVariant(BlocksAether.aether_leaves, BlockAetherLeaves.PURPLE_FRUIT_LEAVES.getMeta(), "purple_fruit_leaves");
 
-		registerBlockModelVariant(BlocksAether.berry_bush, BlockBerryBush.BERRY_BUSH_STEM, "berry_bush_stem");
-		registerBlockModelVariant(BlocksAether.berry_bush, BlockBerryBush.BERRY_BUSH_RIPE, "berry_bush_ripe");
+		registerBlockModelVariant(BlocksAether.blueberry_bush, BlockBlueberryBush.BERRY_BUSH_STEM, "blueberry_bush_stem");
+		registerBlockModelVariant(BlocksAether.blueberry_bush, BlockBlueberryBush.BERRY_BUSH_RIPE, "blueberry_bush_ripe");
 
 		registerBlockModel(BlocksAether.aether_dirt);
 		registerBlockModel(BlocksAether.skyroot_planks);

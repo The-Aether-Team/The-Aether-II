@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "aether:blocks/berry_bush_stem"
+		"layer0": "aether:blocks/blueberry_bush_stem"
 	},
 	"display": {
 		"thirdperson": {

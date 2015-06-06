@@ -25,7 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
-public class BlockBerryBush extends Block implements IAetherBlockWithSubtypes
+public class BlockBlueberryBush extends Block implements IAetherBlockWithSubtypes
 {
 	public static final int
 			BERRY_BUSH_STEM = 0,
@@ -33,7 +33,7 @@ public class BlockBerryBush extends Block implements IAetherBlockWithSubtypes
 
 	public static final PropertyBool PROPERTY_HARVESTABLE = PropertyBool.create("harvestable");
 
-	public BlockBerryBush()
+	public BlockBlueberryBush()
 	{
 		super(Material.leaves);
 

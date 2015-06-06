@@ -1,24 +1,12 @@
 {
-	"textures": {
-		"outer": "aether:blocks/berry_bush_berries",
-		"inner": "aether:blocks/berry_bush_stem",
-		"particle": "aether:blocks/berry_bush_berries"
-	},
-	
-	"elements": [
-		{
-			"from": [ 0, 0, 0 ],
-			"to": [ 16, 16, 16 ],
+	"ambientocclusion": false,
 
-			"faces": {
-				"down": { "texture": "#outer", "cullface": "down" },
-				"up": { "texture": "#outer", "cullface": "up" },
-				"north": { "texture": "#outer", "cullface": "north" },
-				"south": { "texture": "#outer", "cullface": "south" },
-				"west": { "texture": "#outer", "cullface": "west" },
-				"east": { "texture": "#outer", "cullface": "east" }
-			}
-		},
+	"textures": {
+		"inner": "aether:blocks/blueberry_bush_stem",
+		"particle": "aether:blocks/blueberry_bush_stem"
+	},
+
+	"elements": [
 		{
 			"from": [ 0.8, 0, 8 ],
 			"to": [ 15.2, 16, 8 ],
