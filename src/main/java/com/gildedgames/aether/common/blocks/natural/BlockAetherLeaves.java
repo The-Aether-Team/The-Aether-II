@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.common.AetherCreativeTabs;
-import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
+import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import net.minecraft.block.Block;
@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BlockAetherLeaves extends Block implements IShearable, IAetherBlockWithVariants
+public class BlockAetherLeaves extends Block implements IShearable, IAetherBlockWithSubtypes
 {
 	public static final BlockVariant
 			BLUE_SKYROOT_LEAVES = new BlockVariant(0, "blue_skyroot_leaves"),
@@ -279,7 +279,7 @@ public class BlockAetherLeaves extends Block implements IShearable, IAetherBlock
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.getVariantFromMeta(meta));
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
 	}
 
 	@Override
@@ -295,8 +295,8 @@ public class BlockAetherLeaves extends Block implements IShearable, IAetherBlock
 	}
 
 	@Override
-	public BlockVariant getVariantFromStack(ItemStack stack)
+	public String getSubtypeUnlocalizedName(ItemStack stack)
 	{
-		return PROPERTY_VARIANT.getVariantFromMeta(stack.getMetadata());
+		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}
 }

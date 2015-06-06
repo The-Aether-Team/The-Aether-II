@@ -67,6 +67,7 @@ public class ModelsAether
 		registerBlockModelVariant(BlocksAether.aercloud, BlockAercloud.BLUE_AERCLOUD.getMeta(), "blue_aercloud");
 		registerBlockModelVariant(BlocksAether.aercloud, BlockAercloud.GOLDEN_AERCLOUD.getMeta(), "golden_aercloud");
 		registerBlockModelVariant(BlocksAether.aercloud, BlockAercloud.GREEN_AERCLOUD.getMeta(), "green_aercloud");
+		registerBlockModelVariant(BlocksAether.aercloud, BlockAercloud.STORM_AERCLOUD.getMeta(), "storm_aercloud");
 		registerBlockModelVariant(BlocksAether.aercloud, BlockAercloud.PURPLE_AERCLOUD.getMeta(), "purple_aercloud");
 
 		registerBlockModelVariant(BlocksAether.aether_log, BlockAetherLog.SKYROOT_LOG.getMeta(), "skyroot_log");

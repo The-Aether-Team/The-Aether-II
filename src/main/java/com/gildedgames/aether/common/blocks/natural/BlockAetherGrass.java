@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
+import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import net.minecraft.block.Block;
@@ -23,7 +23,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
-public class BlockAetherGrass extends Block implements IAetherBlockWithVariants
+public class BlockAetherGrass extends Block implements IAetherBlockWithSubtypes
 {
 	public static final BlockVariant
 			AETHER_GRASS = new BlockVariant(0, "aether_grass"),
@@ -101,13 +101,13 @@ public class BlockAetherGrass extends Block implements IAetherBlockWithVariants
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return Item.getItemFromBlock(BlocksAether.aether_grass);
+		return Item.getItemFromBlock(BlocksAether.aether_dirt);
 	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.getVariantFromMeta(meta));
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
 	}
 
 	@Override
@@ -123,14 +123,8 @@ public class BlockAetherGrass extends Block implements IAetherBlockWithVariants
 	}
 
 	@Override
-	public int damageDropped(IBlockState state)
+	public String getSubtypeUnlocalizedName(ItemStack stack)
 	{
-		return 0;
-	}
-
-	@Override
-	public BlockVariant getVariantFromStack(ItemStack stack)
-	{
-		return PROPERTY_VARIANT.getVariantFromMeta(stack.getMetadata());
+		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}
 }

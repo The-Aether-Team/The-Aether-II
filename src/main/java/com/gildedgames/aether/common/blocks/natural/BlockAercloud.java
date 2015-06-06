@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.common.AetherCreativeTabs;
-import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
+import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import net.minecraft.block.Block;
@@ -26,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class BlockAercloud extends Block implements IAetherBlockWithVariants
+public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 {
 	public static class AercloudVariant extends BlockVariant
 	{
@@ -203,7 +203,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 			return this.getDefaultState().withProperty(PROPERTY_VARIANT, PURPLE_AERCLOUD).withProperty(PROPERTY_FACING, EnumFacing.getFront(meta - PURPLE_AERCLOUD.getMeta()));
 		}
 
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.getVariantFromMeta(meta));
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
 	}
 
 	@Override
@@ -230,12 +230,6 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	}
 
 	@Override
-	public BlockVariant getVariantFromStack(ItemStack stack)
-	{
-		return PROPERTY_VARIANT.getVariantFromMeta(stack.getMetadata());
-	}
-
-	@Override
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
 		return this.getStateFromMeta(meta).withProperty(PROPERTY_FACING, placer.getHorizontalFacing().getOpposite());
@@ -247,4 +241,9 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 		return new ItemStack(this, 1, ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta());
 	}
 
+	@Override
+	public String getSubtypeUnlocalizedName(ItemStack stack)
+	{
+		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
+	}
 }

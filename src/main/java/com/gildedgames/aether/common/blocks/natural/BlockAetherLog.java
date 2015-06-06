@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.common.AetherCreativeTabs;
-import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
+import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -26,11 +26,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BlockAetherLog extends Block implements IAetherBlockWithVariants
+public class BlockAetherLog extends Block implements IAetherBlockWithSubtypes
 {
 	public static final BlockVariant
 			SKYROOT_LOG = new BlockVariant(0, "skyroot_log"),
@@ -76,7 +75,7 @@ public class BlockAetherLog extends Block implements IAetherBlockWithVariants
 		int variantMeta = meta - (meta % 4);
 		int rotateMeta = (meta - variantMeta) % 4;
 
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.getVariantFromMeta((variantMeta)))
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta((variantMeta)))
 				.withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.values()[rotateMeta]);
 	}
 
@@ -154,11 +153,10 @@ public class BlockAetherLog extends Block implements IAetherBlockWithVariants
 	}
 
 	@Override
-	public BlockVariant getVariantFromStack(ItemStack stack)
+	public String getSubtypeUnlocalizedName(ItemStack stack)
 	{
 		int variantMeta = stack.getMetadata() - (stack.getMetadata() % 4);
 
-		return PROPERTY_VARIANT.getVariantFromMeta(variantMeta);
+		return PROPERTY_VARIANT.fromMeta(variantMeta).getName();
 	}
-
 }

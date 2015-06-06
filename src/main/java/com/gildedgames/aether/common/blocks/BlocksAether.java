@@ -14,9 +14,10 @@ import com.gildedgames.aether.common.blocks.natural.BlockQuicksoil;
 import com.gildedgames.aether.common.blocks.natural.BlockTallAetherGrass;
 import com.gildedgames.aether.common.blocks.natural.BlockZaniteOre;
 import com.gildedgames.aether.common.blocks.util.BlockAether;
-import com.gildedgames.aether.common.items.itemblocks.ItemBlockVariants;
+import com.gildedgames.aether.common.items.itemblocks.ItemBlockAetherSubtypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class BlocksAether
@@ -56,13 +57,13 @@ public class BlocksAether
 		aether_dirt = registerBlock("aether_dirt", new BlockAether(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f)
 				.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		aether_grass = registerBlockWithVariants("aether_grass", new BlockAetherGrass());
+		aether_grass = registerBlock("aether_grass", ItemBlockAetherSubtypes.class, new BlockAetherGrass());
 
-		holystone = registerBlockWithVariants("holystone", new BlockHolystone());
+		holystone = registerBlock("holystone", ItemBlockAetherSubtypes.class, new BlockHolystone());
 
-		aercloud = registerBlockWithVariants("aercloud", new BlockAercloud());
+		aercloud = registerBlock("aercloud", ItemBlockAetherSubtypes.class, new BlockAercloud());
 
-		aether_log = registerBlockWithVariants("aether_log", new BlockAetherLog());
+		aether_log = registerBlock("aether_log", ItemBlockAetherSubtypes.class, new BlockAetherLog());
 
 		skyroot_planks = registerBlock("skyroot_planks", new BlockAether(Material.wood).setStepSound(Block.soundTypeWood).setHardness(2.0f)
 				.setResistance(5.0f).setCreativeTab(AetherCreativeTabs.tabBlocks));
@@ -75,7 +76,7 @@ public class BlocksAether
 
 		continuum_ore = registerBlock("continuum_ore", new BlockContinuumOre());
 
-		aether_leaves = registerBlockWithVariants("aether_leaves", new BlockAetherLeaves());
+		aether_leaves = registerBlock("aether_leaves", ItemBlockAetherSubtypes.class, new BlockAetherLeaves());
 
 		aether_portal = registerBlock("aether_portal", new BlockAetherPortal());
 
@@ -88,16 +89,13 @@ public class BlocksAether
 
 	private static Block registerBlock(String name, Block block)
 	{
-		block.setUnlocalizedName(name);
-		GameRegistry.registerBlock(block, name);
-
-		return block;
+		return registerBlock(name, ItemBlock.class, block);
 	}
 
-	private static Block registerBlockWithVariants(String name, Block block)
+	private static Block registerBlock(String name, Class<? extends ItemBlock> itemClass, Block block)
 	{
 		block.setUnlocalizedName(name);
-		GameRegistry.registerBlock(block, ItemBlockVariants.class, name);
+		GameRegistry.registerBlock(block, itemClass, name);
 
 		return block;
 	}
