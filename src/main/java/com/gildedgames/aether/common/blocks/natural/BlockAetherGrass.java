@@ -26,8 +26,8 @@ import java.util.Random;
 public class BlockAetherGrass extends Block implements IAetherBlockWithSubtypes
 {
 	public static final BlockVariant
-			AETHER_GRASS = new BlockVariant(0, "aether_grass"),
-			ENCHANTED_AETHER_GRASS = new BlockVariant(1, "aether_enchanted_grass");
+			AETHER_GRASS = new BlockVariant(0, "normal"),
+			ENCHANTED_AETHER_GRASS = new BlockVariant(1, "enchanted");
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", AETHER_GRASS, ENCHANTED_AETHER_GRASS);
 

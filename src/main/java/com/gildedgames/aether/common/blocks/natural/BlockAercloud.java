@@ -52,8 +52,8 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 	}
 
 	public static final AercloudVariant
-			COLD_AERCLOUD = new AercloudVariant(0, "aercloud_cold"),
-			BLUE_AERCLOUD = new AercloudVariant(1, "aercloud_blue")
+			COLD_AERCLOUD = new AercloudVariant(0, "cold"),
+			BLUE_AERCLOUD = new AercloudVariant(1, "blue")
 			{
 				@Override
 				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
@@ -63,7 +63,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 					super.onEntityCollision(world, pos, state, entity);
 				}
 			},
-			GREEN_AERCLOUD = new AercloudVariant(2, "aercloud_green")
+			GREEN_AERCLOUD = new AercloudVariant(2, "green")
 			{
 				@Override
 				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
@@ -74,7 +74,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 					entity.motionZ = randomSide.getFrontOffsetZ() * 2.5D;
 				}
 			},
-			GOLDEN_AERCLOUD = new AercloudVariant(3, "aercloud_golden")
+			GOLDEN_AERCLOUD = new AercloudVariant(3, "golden")
 			{
 				@Override
 				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
@@ -88,8 +88,8 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 					return null;
 				}
 			},
-			STORM_AERCLOUD = new AercloudVariant(4, "aercloud_storm"),
-			PURPLE_AERCLOUD = new AercloudVariant(5, "aercloud_purple")
+			STORM_AERCLOUD = new AercloudVariant(4, "storm"),
+			PURPLE_AERCLOUD = new AercloudVariant(5, "purple")
 			{
 				@Override
 				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)

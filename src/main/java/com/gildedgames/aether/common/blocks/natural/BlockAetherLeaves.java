@@ -27,12 +27,12 @@ import java.util.Random;
 public class BlockAetherLeaves extends Block implements IShearable, IAetherBlockWithSubtypes
 {
 	public static final BlockVariant
-			BLUE_SKYROOT_LEAVES = new BlockVariant(0, "blue_skyroot_leaves"),
-			GREEN_SKYROOT_LEAVES = new BlockVariant(1, "green_skyroot_leaves"),
-			DARK_BLUE_SKYROOT_LEAVES = new BlockVariant(2, "dark_blue_skyroot_leaves"),
-			GOLDEN_OAK_LEAVES = new BlockVariant(3, "golden_oak_leaves"),
-			PURPLE_CRYSTAL_LEAVES = new BlockVariant(4, "purple_crystal_leaves"),
-			PURPLE_FRUIT_LEAVES = new BlockVariant(5, "purple_fruit_leaves");
+			BLUE_SKYROOT_LEAVES = new BlockVariant(0, "blue_skyroot"),
+			GREEN_SKYROOT_LEAVES = new BlockVariant(1, "green_skyroot"),
+			DARK_BLUE_SKYROOT_LEAVES = new BlockVariant(2, "dark_blue_skyroot"),
+			GOLDEN_OAK_LEAVES = new BlockVariant(3, "golden_oak"),
+			PURPLE_CRYSTAL_LEAVES = new BlockVariant(4, "purple_crystal"),
+			PURPLE_FRUIT_LEAVES = new BlockVariant(5, "purple_fruit");
 
 	public static PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BLUE_SKYROOT_LEAVES, GREEN_SKYROOT_LEAVES, DARK_BLUE_SKYROOT_LEAVES,
 			GOLDEN_OAK_LEAVES, PURPLE_CRYSTAL_LEAVES, PURPLE_FRUIT_LEAVES);

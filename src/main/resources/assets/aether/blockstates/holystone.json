@@ -1,13 +1,13 @@
 {
 	"variants": {
-		"variant=holystone": {
+		"variant=normal": {
 			"model": "aether:holystone"
 		},
-		"variant=blood_holystone": {
-			"model": "aether:blood_holystone"
-		},
-		"variant=mossy_holystone": {
+		"variant=mossy": {
 			"model": "aether:mossy_holystone"
+		},
+		"variant=blood_moss": {
+			"model": "aether:blood_moss_holystone"
 		}
 	}
 }

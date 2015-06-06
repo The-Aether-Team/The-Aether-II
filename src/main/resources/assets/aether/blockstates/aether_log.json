@@ -1,29 +1,29 @@
 {
 	"variants": {
-		"axis=y,variant=skyroot_log": {
+		"axis=y,variant=skyroot": {
 			"model": "aether:skyroot_log"
 		},
-		"axis=z,variant=skyroot_log": {
+		"axis=z,variant=skyroot": {
 			"model": "aether:skyroot_log_side"
 		},
-		"axis=x,variant=skyroot_log": {
+		"axis=x,variant=skyroot": {
 			"model": "aether:skyroot_log_side",
 			"y": 90
 		},
-		"axis=none,variant=skyroot_log": {
+		"axis=none,variant=skyroot": {
 			"model": "aether:skyroot_log_bark"
 		},
-		"axis=y,variant=golden_oak_log": {
+		"axis=y,variant=golden_oak": {
 			"model": "aether:golden_oak_log"
 		},
-		"axis=z,variant=golden_oak_log": {
+		"axis=z,variant=golden_oak": {
 			"model": "aether:golden_oak_log_side"
 		},
-		"axis=x,variant=golden_oak_log": {
+		"axis=x,variant=golden_oak": {
 			"model": "aether:golden_oak_log_side",
 			"y": 90
 		},
-		"axis=none,variant=golden_oak_log": {
+		"axis=none,variant=golden_oak": {
 			"model": "aether:golden_oak_log_bark"
 		}
 	}

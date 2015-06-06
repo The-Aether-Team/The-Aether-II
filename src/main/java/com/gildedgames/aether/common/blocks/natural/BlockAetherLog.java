@@ -32,8 +32,8 @@ import java.util.Random;
 public class BlockAetherLog extends Block implements IAetherBlockWithSubtypes
 {
 	public static final BlockVariant
-			SKYROOT_LOG = new BlockVariant(0, "skyroot_log"),
-			GOLDEN_OAK_LOG = new BlockVariant(4, "golden_oak_log");
+			SKYROOT_LOG = new BlockVariant(0, "skyroot"),
+			GOLDEN_OAK_LOG = new BlockVariant(4, "golden_oak");
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", SKYROOT_LOG, GOLDEN_OAK_LOG);
 
