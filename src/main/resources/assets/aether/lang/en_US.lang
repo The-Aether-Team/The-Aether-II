@@ -77,7 +77,7 @@ item.valkyrie_chestplate.name=Valkyrie Chestplate
 item.valkyrie_leggings.name=Valkyrie Leggings
 item.valkyrie_boots.name=Valkyrie Boots
 item.golden_amber.name=Golden Amber
-item.blue_berry.name=Blue Berry
+item.blueberry.name=Blueberry
 
 # Creative Tabs
 itemGroup.aetherBlocks=Aether Blocks

@@ -40,7 +40,7 @@ public class ItemsAether
 
 	public static Item golden_amber;
 
-	public static Item blue_berry;
+	public static Item blueberry;
 
 	public static void preInit()
 	{
@@ -101,7 +101,7 @@ public class ItemsAether
 
 		golden_amber = registerItem("golden_amber", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
 
-		blue_berry = registerItem("blue_berry", new ItemAetherFood(2, false));
+		blueberry = registerItem("blueberry", new ItemAetherFood(2, false));
 	}
 
 	private static Item registerItem(String name, Item item)

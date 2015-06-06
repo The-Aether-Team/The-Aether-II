@@ -155,7 +155,7 @@ public class ModelsAether
 
 		registerItemModel(ItemsAether.golden_amber);
 
-		registerItemModel(ItemsAether.blue_berry);
+		registerItemModel(ItemsAether.blueberry);
 	}
 
 	/**

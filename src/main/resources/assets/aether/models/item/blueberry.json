@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "aether:items/blue_berry"
+		"layer0": "aether:items/blueberry"
 	},
 	"display": {
 		"thirdperson": {

@@ -82,7 +82,7 @@ public class BlockBerryBush extends Block implements IAetherBlockWithSubtypes
 
 		int count = random.nextInt(2) + (applyBonus ? 2 : 1);
 
-		ItemStack itemStack = new ItemStack(ItemsAether.blue_berry, count);
+		ItemStack itemStack = new ItemStack(ItemsAether.blueberry, count);
 		EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), itemStack);
 
 		world.spawnEntityInWorld(entityItem);
