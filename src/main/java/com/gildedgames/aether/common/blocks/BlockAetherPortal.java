@@ -26,7 +26,8 @@ import java.util.Random;
 
 public class BlockAetherPortal extends BlockBreakable
 {
-	public static final PropertyEnum PROPERTY_AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
+	public static final PropertyEnum PROPERTY_AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class,
+			new EnumFacing.Axis[] { EnumFacing.Axis.X, EnumFacing.Axis.Z });
 
 	public BlockAetherPortal()
 	{

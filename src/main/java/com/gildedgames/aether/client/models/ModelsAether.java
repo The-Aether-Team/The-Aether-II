@@ -26,7 +26,28 @@ import java.util.LinkedHashMap;
 
 public class ModelsAether
 {
-	public static void prepareModelLoader()
+	public static void prepareBakery()
+	{
+		registerStateMappers();
+
+		addVariantNames(BlocksAether.aether_grass, "aether_grass", "enchanted_aether_grass");
+
+		addVariantNames(BlocksAether.holystone, "holystone", "mossy_holystone", "blood_moss_holystone");
+
+		addVariantNames(BlocksAether.aercloud, "cold_aercloud", "blue_aercloud", "golden_aercloud", "green_aercloud", "storm_aercloud", "purple_aercloud");
+
+		addVariantNames(BlocksAether.aether_log, "skyroot_log", "golden_oak_log");
+
+		addVariantNames(BlocksAether.aether_leaves, "blue_skyroot_leaves", "dark_blue_skyroot_leaves", "green_skyroot_leaves",
+				"golden_oak_leaves", "purple_crystal_leaves", "purple_fruit_leaves");
+
+		addVariantNames(BlocksAether.blueberry_bush, "blueberry_bush_stem", "blueberry_bush_ripe");
+	}
+
+	/**
+	 * Registers state mappers.
+	 */
+	private static void registerStateMappers()
 	{
 		ModelLoader.setCustomStateMapper(BlocksAether.aether_leaves, new StateMap.Builder().addPropertiesToIgnore(BlockAetherLeaves.PROPERTY_CHECK_DECAY, BlockAetherLeaves.PROPERTY_DECAYABLE).build());
 
@@ -69,51 +90,39 @@ public class ModelsAether
 		});
 	}
 
-	public static void registerModels()
+	/**
+	 * Registers block/item models.
+	 */
+	public static void registerItemModels()
 	{
-		registerBlockModels();
-		registerItemModels();
-	}
+		registerBlockModel(BlocksAether.aether_dirt);
 
-	private static void registerBlockModels()
-	{
-		registerBlockModel(BlocksAether.aether_dirt, 0, "aether_dirt");
+		registerBlockModel(BlocksAether.aether_grass, BlockAetherGrass.AETHER_GRASS.getMeta(), Aether.getResource("aether_grass"));
+		registerBlockModel(BlocksAether.aether_grass, BlockAetherGrass.ENCHANTED_AETHER_GRASS.getMeta(), Aether.getResource("enchanted_aether_grass"));
 
-		registerBlockModelVariant(BlocksAether.aether_grass, BlockAetherGrass.AETHER_GRASS.getMeta(), "aether_grass");
-		registerBlockModelVariant(BlocksAether.aether_grass, BlockAetherGrass.ENCHANTED_AETHER_GRASS.getMeta(), "enchanted_aether_grass");
+		registerBlockModel(BlocksAether.holystone, BlockHolystone.NORMAL_HOLYSTONE.getMeta(), Aether.getResource("holystone"));
+		registerBlockModel(BlocksAether.holystone, BlockHolystone.MOSSY_HOLYSTONE.getMeta(), Aether.getResource("mossy_holystone"));
+		registerBlockModel(BlocksAether.holystone, BlockHolystone.BLOOD_MOSS_HOLYSTONE.getMeta(), Aether.getResource("blood_moss_holystone"));
 
-		registerBlockModelVariant(BlocksAether.holystone, BlockHolystone.NORMAL_HOLYSTONE.getMeta(), "holystone");
-		registerBlockModelVariant(BlocksAether.holystone, BlockHolystone.MOSSY_HOLYSTONE.getMeta(), "mossy_holystone");
-		registerBlockModelVariant(BlocksAether.holystone, BlockHolystone.BLOOD_MOSS_HOLYSTONE.getMeta(), "blood_moss_holystone");
+		registerBlockModel(BlocksAether.aercloud, BlockAercloud.COLD_AERCLOUD.getMeta(), Aether.getResource("cold_aercloud"));
+		registerBlockModel(BlocksAether.aercloud, BlockAercloud.BLUE_AERCLOUD.getMeta(), Aether.getResource("blue_aercloud"));
+		registerBlockModel(BlocksAether.aercloud, BlockAercloud.GOLDEN_AERCLOUD.getMeta(), Aether.getResource("golden_aercloud"));
+		registerBlockModel(BlocksAether.aercloud, BlockAercloud.GREEN_AERCLOUD.getMeta(), Aether.getResource("green_aercloud"));
+		registerBlockModel(BlocksAether.aercloud, BlockAercloud.STORM_AERCLOUD.getMeta(), Aether.getResource("storm_aercloud"));
+		registerBlockModel(BlocksAether.aercloud, BlockAercloud.PURPLE_AERCLOUD.getMeta(), Aether.getResource("purple_aercloud"));
 
-		registerBlockModelVariant(BlocksAether.aercloud, BlockAercloud.COLD_AERCLOUD.getMeta(), "cold_aercloud");
-		registerBlockModelVariant(BlocksAether.aercloud, BlockAercloud.BLUE_AERCLOUD.getMeta(), "blue_aercloud");
-		registerBlockModelVariant(BlocksAether.aercloud, BlockAercloud.GOLDEN_AERCLOUD.getMeta(), "golden_aercloud");
-		registerBlockModelVariant(BlocksAether.aercloud, BlockAercloud.GREEN_AERCLOUD.getMeta(), "green_aercloud");
-		registerBlockModelVariant(BlocksAether.aercloud, BlockAercloud.STORM_AERCLOUD.getMeta(), "storm_aercloud");
-		registerBlockModelVariant(BlocksAether.aercloud, BlockAercloud.PURPLE_AERCLOUD.getMeta(), "purple_aercloud");
+		registerBlockModel(BlocksAether.aether_log, BlockAetherLog.SKYROOT_LOG.getMeta(), Aether.getResource("skyroot_log"));
+		registerBlockModel(BlocksAether.aether_log, BlockAetherLog.GOLDEN_OAK_LOG.getMeta(), Aether.getResource("golden_oak_log"));
 
-		registerBlockModelVariant(BlocksAether.aether_log, BlockAetherLog.SKYROOT_LOG.getMeta(), "skyroot_log");
-		registerBlockModelVariant(BlocksAether.aether_log, BlockAetherLog.GOLDEN_OAK_LOG.getMeta(), "golden_oak_log");
+		registerBlockModel(BlocksAether.aether_leaves, BlockAetherLeaves.BLUE_SKYROOT_LEAVES.getMeta(), Aether.getResource("blue_skyroot_leaves"));
+		registerBlockModel(BlocksAether.aether_leaves, BlockAetherLeaves.DARK_BLUE_SKYROOT_LEAVES.getMeta(), Aether.getResource("dark_blue_skyroot_leaves"));
+		registerBlockModel(BlocksAether.aether_leaves, BlockAetherLeaves.GREEN_SKYROOT_LEAVES.getMeta(), Aether.getResource("green_skyroot_leaves"));
+		registerBlockModel(BlocksAether.aether_leaves, BlockAetherLeaves.GOLDEN_OAK_LEAVES.getMeta(), Aether.getResource("golden_oak_leaves"));
+		registerBlockModel(BlocksAether.aether_leaves, BlockAetherLeaves.PURPLE_CRYSTAL_LEAVES.getMeta(), Aether.getResource("purple_crystal_leaves"));
+		registerBlockModel(BlocksAether.aether_leaves, BlockAetherLeaves.PURPLE_FRUIT_LEAVES.getMeta(), Aether.getResource("purple_fruit_leaves"));
 
-		registerBlockModelVariant(BlocksAether.aether_leaves, BlockAetherLeaves.BLUE_SKYROOT_LEAVES.getMeta(), "blue_skyroot_leaves");
-		registerBlockModelVariant(BlocksAether.aether_leaves, BlockAetherLeaves.DARK_BLUE_SKYROOT_LEAVES.getMeta(), "dark_blue_skyroot_leaves");
-		registerBlockModelVariant(BlocksAether.aether_leaves, BlockAetherLeaves.GREEN_SKYROOT_LEAVES.getMeta(), "green_skyroot_leaves");
-		registerBlockModelVariant(BlocksAether.aether_leaves, BlockAetherLeaves.GOLDEN_OAK_LEAVES.getMeta(), "golden_oak_leaves");
-		registerBlockModelVariant(BlocksAether.aether_leaves, BlockAetherLeaves.PURPLE_CRYSTAL_LEAVES.getMeta(), "purple_crystal_leaves");
-		registerBlockModelVariant(BlocksAether.aether_leaves, BlockAetherLeaves.PURPLE_FRUIT_LEAVES.getMeta(), "purple_fruit_leaves");
-
-		registerBlockModelVariant(BlocksAether.blueberry_bush, BlockBlueberryBush.BERRY_BUSH_STEM, "blueberry_bush_stem");
-		registerBlockModelVariant(BlocksAether.blueberry_bush, BlockBlueberryBush.BERRY_BUSH_RIPE, "blueberry_bush_ripe");
-
-//		registerBlockModelState(BlocksAether.orange_tree, "orange_tree_bottom_stage_1");
-//		registerBlockModelState(BlocksAether.orange_tree, "orange_tree_bottom_stage_2");
-//		registerBlockModelState(BlocksAether.orange_tree, "orange_tree_bottom_stage_3");
-//		registerBlockModelState(BlocksAether.orange_tree, "orange_tree_bottom_ripe");
-//		registerBlockModelState(BlocksAether.orange_tree, "orange_tree_top_stage_3");
-//		registerBlockModelState(BlocksAether.orange_tree, "orange_tree_top_stage_4");
-//		registerBlockModelState(BlocksAether.orange_tree, "orange_tree_bottom_ripe");
-		registerBlockModel(BlocksAether.orange_tree);
+		registerBlockModel(BlocksAether.blueberry_bush, BlockBlueberryBush.BERRY_BUSH_STEM, Aether.getResource("blueberry_bush_stem"));
+		registerBlockModel(BlocksAether.blueberry_bush, BlockBlueberryBush.BERRY_BUSH_RIPE, Aether.getResource("blueberry_bush_ripe"));
 
 		registerBlockModel(BlocksAether.aether_dirt);
 		registerBlockModel(BlocksAether.skyroot_planks);
@@ -125,10 +134,8 @@ public class ModelsAether
 		registerBlockModel(BlocksAether.tall_aether_grass);
 		registerBlockModel(BlocksAether.quicksoil);
 		registerBlockModel(BlocksAether.skyroot_crafting_table);
-	}
+		registerBlockModel(BlocksAether.orange_tree);
 
-	private static void registerItemModels()
-	{
 		registerItemModel(ItemsAether.skyroot_stick);
 		registerItemModel(ItemsAether.ambrosium_shard);
 		registerItemModel(ItemsAether.continuum_orb);
@@ -191,6 +198,21 @@ public class ModelsAether
 	}
 
 	/**
+	 * Utility method for ModelBakery.addVariantName.
+	 * @param block The block to add names to.
+	 * @param names The list of names to add.
+	 */
+	private static void addVariantNames(Block block, String... names)
+	{
+		for (int i = 0; i < names.length; i++)
+		{
+			names[i] = Aether.getResource(names[i]);
+		}
+
+		ModelBakery.addVariantName(Item.getItemFromBlock(block), names);
+	}
+
+	/**
 	 * Registers the appropriate model to the block. This assumes the model resource name
 	 * will be the same as the block's unlocalized name.
 	 * @param block The block to register to.
@@ -199,7 +221,7 @@ public class ModelsAether
 	{
 		ResourceLocation resourceLocation = (ResourceLocation) Block.blockRegistry.getNameForObject(block);
 
-		registerBlockModel(block, 0, resourceLocation.getResourcePath());
+		registerBlockModel(block, 0, resourceLocation.toString());
 	}
 
 	/**
@@ -211,7 +233,7 @@ public class ModelsAether
 	{
 		ResourceLocation resourceLocation = (ResourceLocation) Item.itemRegistry.getNameForObject(item);
 
-		registerItemModel(item, 0, resourceLocation.getResourcePath());
+		registerItemModel(item, 0, resourceLocation.toString());
 	}
 
 	/**
@@ -233,33 +255,8 @@ public class ModelsAether
 	 */
 	private static void registerItemModel(Item item, int meta, String resourcePath)
 	{
-		ModelResourceLocation modelResourceLocation = new ModelResourceLocation(Aether.getResource(resourcePath), "inventory");
+		ModelResourceLocation modelResourceLocation = new ModelResourceLocation(resourcePath, "inventory");
 
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, modelResourceLocation);
-	}
-
-	/**
-	 * Registers a model variant to the specified block and metadata.
-	 * @param block The block to register to.
-	 * @param meta The metadata to register to.
-	 * @param resourcePath The path of the model in the AETHER domain.
-	 */
-	private static void registerBlockModelVariant(Block block, int meta, String resourcePath)
-	{
-		Item item = Item.getItemFromBlock(block);
-
-		registerItemModel(item, meta, resourcePath);
-
-		ModelBakery.addVariantName(item, Aether.getResource(resourcePath));
-	}
-
-	/**
-	 * Registers a block variant without a item model.
-	 * @param block The block to register to.
-	 * @param resourcePath The path of the model in the AETHER domain.
-	 */
-	private static void registerBlockModelState(Block block, String resourcePath)
-	{
-		ModelBakery.addVariantName(Item.getItemFromBlock(block), Aether.getResource(resourcePath));
 	}
 }

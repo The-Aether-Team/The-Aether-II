@@ -12,7 +12,7 @@ public class ClientProxy extends CommonProxy
 	{
 		super.preInit(event);
 
-		ModelsAether.prepareModelLoader();
+		ModelsAether.prepareBakery();
 	}
 
 	@Override
@@ -20,6 +20,6 @@ public class ClientProxy extends CommonProxy
 	{
 		super.init(event);
 
-		ModelsAether.registerModels();
+		ModelsAether.registerItemModels();
 	}
 }

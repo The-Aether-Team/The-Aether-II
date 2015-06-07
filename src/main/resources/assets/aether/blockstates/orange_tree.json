@@ -1,5 +1,8 @@
 {
 	"variants": {
+		"normal": {
+			"model": "aether:orange_tree_bottom_stage_1"
+		},
 		"is_top_block=false,stage=1": {
 			"model": "aether:orange_tree_bottom_stage_1"
 		},
