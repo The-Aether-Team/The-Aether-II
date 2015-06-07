@@ -51,6 +51,8 @@ public class AetherCreativeTabs
 
 	public static final AetherCreativeTab tabArmor = new AetherCreativeTab("aetherArmor");
 
+	public static final AetherCreativeTab tabConsumables = new AetherCreativeTab("aetherConsumables");
+
 	public static void preInit()
 	{
 		tabBlocks.setItemToDisplay(Item.getItemFromBlock(BlocksAether.aether_grass), BlockAetherGrass.AETHER_GRASS.getMeta());
@@ -58,5 +60,6 @@ public class AetherCreativeTabs
 		tabTools.setItemToDisplay(ItemsAether.gravitite_pickaxe, 0);
 		tabWeapons.setItemToDisplay(ItemsAether.gravitite_sword, 0);
 		tabArmor.setItemToDisplay(ItemsAether.zanite_chestplate, 0);
+		tabConsumables.setItemToDisplay(ItemsAether.orange, 0);
 	}
 }

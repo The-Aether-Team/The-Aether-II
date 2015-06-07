@@ -11,6 +11,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.BlockContinuumOre;
 import com.gildedgames.aether.common.blocks.natural.BlockGravititeOre;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
+import com.gildedgames.aether.common.blocks.natural.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.natural.BlockQuicksoil;
 import com.gildedgames.aether.common.blocks.natural.BlockTallAetherGrass;
 import com.gildedgames.aether.common.blocks.natural.BlockZaniteOre;
@@ -55,6 +56,8 @@ public class BlocksAether
 
 	public static Block blueberry_bush;
 
+	public static Block orange_tree;
+
 	public static void preInit()
 	{
 		aether_dirt = registerBlock("aether_dirt", new BlockAether(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f)
@@ -90,6 +93,8 @@ public class BlocksAether
 		skyroot_crafting_table = registerBlock("skyroot_crafting_table", new BlockSkyrootWorkbench());
 
 		blueberry_bush = registerBlock("blueberry_bush", ItemBlockAetherSubtypes.class, new BlockBlueberryBush());
+
+		orange_tree = registerBlock("orange_tree", new BlockOrangeTree());
 	}
 
 	private static Block registerBlock(String name, Block block)

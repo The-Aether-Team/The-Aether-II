@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.common.blocks.natural.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
+import com.gildedgames.aether.common.blocks.natural.BlockOrangeTree;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
@@ -38,6 +39,27 @@ public class ModelsAether
 				if (state.getValue(BlockAercloud.PROPERTY_VARIANT) != BlockAercloud.PURPLE_AERCLOUD)
 				{
 					mappings.remove(BlockAercloud.PROPERTY_FACING);
+				}
+
+				ResourceLocation resourceLocation = (ResourceLocation) Block.blockRegistry.getNameForObject(state.getBlock());
+
+				return new ModelResourceLocation(resourceLocation, getPropertyString(mappings));
+			}
+		});
+
+		ModelLoader.setCustomStateMapper(BlocksAether.orange_tree, new StateMapperBase()
+		{
+			protected ModelResourceLocation getModelResourceLocation(IBlockState state)
+			{
+				LinkedHashMap mappings = Maps.newLinkedHashMap(state.getProperties());
+
+				if ((Boolean) state.getValue(BlockOrangeTree.PROPERTY_IS_TOP_BLOCK))
+				{
+					if ((Integer) state.getValue(BlockOrangeTree.PROPERTY_STAGE) < 3)
+					{
+						mappings.remove(BlockOrangeTree.PROPERTY_IS_TOP_BLOCK);
+						mappings.remove(BlockOrangeTree.PROPERTY_STAGE);
+					}
 				}
 
 				ResourceLocation resourceLocation = (ResourceLocation) Block.blockRegistry.getNameForObject(state.getBlock());
@@ -83,6 +105,15 @@ public class ModelsAether
 
 		registerBlockModelVariant(BlocksAether.blueberry_bush, BlockBlueberryBush.BERRY_BUSH_STEM, "blueberry_bush_stem");
 		registerBlockModelVariant(BlocksAether.blueberry_bush, BlockBlueberryBush.BERRY_BUSH_RIPE, "blueberry_bush_ripe");
+
+//		registerBlockModelState(BlocksAether.orange_tree, "orange_tree_bottom_stage_1");
+//		registerBlockModelState(BlocksAether.orange_tree, "orange_tree_bottom_stage_2");
+//		registerBlockModelState(BlocksAether.orange_tree, "orange_tree_bottom_stage_3");
+//		registerBlockModelState(BlocksAether.orange_tree, "orange_tree_bottom_ripe");
+//		registerBlockModelState(BlocksAether.orange_tree, "orange_tree_top_stage_3");
+//		registerBlockModelState(BlocksAether.orange_tree, "orange_tree_top_stage_4");
+//		registerBlockModelState(BlocksAether.orange_tree, "orange_tree_bottom_ripe");
+		registerBlockModel(BlocksAether.orange_tree);
 
 		registerBlockModel(BlocksAether.aether_dirt);
 		registerBlockModel(BlocksAether.skyroot_planks);
@@ -156,6 +187,7 @@ public class ModelsAether
 		registerItemModel(ItemsAether.golden_amber);
 
 		registerItemModel(ItemsAether.blueberry);
+		registerItemModel(ItemsAether.orange);
 	}
 
 	/**
@@ -219,5 +251,15 @@ public class ModelsAether
 		registerItemModel(item, meta, resourcePath);
 
 		ModelBakery.addVariantName(item, Aether.getResource(resourcePath));
+	}
+
+	/**
+	 * Registers a block variant without a item model.
+	 * @param block The block to register to.
+	 * @param resourcePath The path of the model in the AETHER domain.
+	 */
+	private static void registerBlockModelState(Block block, String resourcePath)
+	{
+		ModelBakery.addVariantName(Item.getItemFromBlock(block), Aether.getResource(resourcePath));
 	}
 }
