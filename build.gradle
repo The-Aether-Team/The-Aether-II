@@ -50,17 +50,7 @@ task buildInfo {
     if (System.getenv().BUILD_NUMBER != null) {
         ext.buildNum = "build${System.getenv().BUILD_NUMBER}"
     } else {
-        def cmd = "git rev-parse --short HEAD"
-        def proc = cmd.execute()
-        proc.waitFor()
-
-        if (proc.exitValue() != 0) {
-            ext.revision = "GITOOPS"
-        } else {
-            ext.revision = proc.text.trim()
-        }
-
-        ext.buildNum = "DEV.${project.buildInfo.revision}"
+        ext.buildNum = "git"
     }
 }
 
