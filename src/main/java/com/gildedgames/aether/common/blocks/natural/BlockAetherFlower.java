@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.common.AetherCreativeTabs;
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
@@ -38,6 +39,13 @@ public class BlockAetherFlower extends Block implements IAetherBlockWithSubtypes
 		this.setBlockBounds(0.3f, 0.0F, 0.3f, 0.7f, 0.6f, 0.7f);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, WHITE_ROSE));
+	}
+
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+	{
+		Block block = worldIn.getBlockState(pos.down()).getBlock();
+
+		return block == BlocksAether.aether_grass || block == BlocksAether.aether_dirt;
 	}
 
 	@Override

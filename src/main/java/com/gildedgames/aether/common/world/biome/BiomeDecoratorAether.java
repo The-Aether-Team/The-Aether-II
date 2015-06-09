@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.world.biome;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherFlower;
+import com.gildedgames.aether.common.world.features.WorldGenAetherFlowers;
 import com.gildedgames.aether.common.world.features.WorldGenAetherTallGrass;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -16,6 +18,8 @@ public class BiomeDecoratorAether extends BiomeDecorator
 	private WorldGenAetherTallGrass genAetherGrass;
 
 	private WorldGenMinable genAmbrosium, genZanite, genGravitite, genContinuum;
+
+	private WorldGenAetherFlowers genPurpleFlowers, genWhiteRoses;
 
 	public void decorate(World world, Random random, BiomeGenBase genBase, BlockPos pos)
 	{
@@ -34,6 +38,9 @@ public class BiomeDecoratorAether extends BiomeDecorator
 		this.genZanite = new WorldGenMinable(BlocksAether.zanite_ore.getDefaultState(), 8);
 		this.genGravitite = new WorldGenMinable(BlocksAether.gravitite_ore.getDefaultState(), 4);
 		this.genContinuum = new WorldGenMinable(BlocksAether.continuum_ore.getDefaultState(), 4);
+
+		this.genPurpleFlowers = new WorldGenAetherFlowers(BlocksAether.aether_flower, BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER));
+		this.genWhiteRoses = new WorldGenAetherFlowers(BlocksAether.aether_flower, BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE));
 
 		this.genDecorations(genBase);
 
@@ -56,6 +63,27 @@ public class BiomeDecoratorAether extends BiomeDecorator
 			y = nextInt(this.currentWorld.getHeight(this.field_180294_c.add(x, 0, z)).getY() * 2);
 
 			this.genAetherGrass.generate(this.currentWorld, this.randomGenerator, this.field_180294_c.add(x, y, z));
+		}
+
+		for (count = 0; count < 6; count++)
+		{
+			x = this.randomGenerator.nextInt(16) + 8;
+			y = this.randomGenerator.nextInt(128);
+			z = this.randomGenerator.nextInt(16) + 8;
+
+			this.genWhiteRoses.generate(this.currentWorld, this.randomGenerator, this.field_180294_c.add(x, y, z));
+		}
+
+		for (count = 0; count < 6; count++)
+		{
+			if (randomGenerator.nextInt(2) == 0)
+			{
+				x = this.randomGenerator.nextInt(16) + 8;
+				y = this.randomGenerator.nextInt(128);
+				z = this.randomGenerator.nextInt(16) + 8;
+
+				this.genPurpleFlowers.generate(this.currentWorld, this.randomGenerator, this.field_180294_c.add(x, y, z));
+			}
 		}
 	}
 
