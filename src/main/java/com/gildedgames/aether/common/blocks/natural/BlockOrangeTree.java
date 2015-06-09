@@ -88,9 +88,6 @@ public class BlockOrangeTree extends Block
 		}
 		else
 		{
-			BlockPos adjacentPos = isTop ? pos.down() : pos.up();
-			world.setBlockToAir(adjacentPos);
-
 			super.harvestBlock(world, player, pos, state, tileEntity);
 		}
 	}
@@ -114,6 +111,15 @@ public class BlockOrangeTree extends Block
 		EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack);
 
 		world.spawnEntityInWorld(entityItem);
+	}
+
+	@Override
+	public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state)
+	{
+		boolean isTop = (Boolean) state.getValue(PROPERTY_IS_TOP_BLOCK);
+
+		BlockPos adjacentPos = isTop ? pos.down() : pos.up();
+		world.setBlockToAir(adjacentPos);
 	}
 
 	@Override
