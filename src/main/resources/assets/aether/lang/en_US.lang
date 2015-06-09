@@ -31,6 +31,8 @@ tile.skyroot_crafting_table.name=Skyroot Crafting Table
 tile.blueberry_bush.ripe.name=Blueberry Bush
 tile.blueberry_bush.stem.name=Blueberry Bush Stem
 tile.orange_tree.name=Orange Tree
+tile.aether_flower.purple_flower.name=Purple Flower
+tile.aether_flower.white_rose.name=White Rose
 
 # Aether Items
 item.skyroot_stick.name=Skyroot Stick

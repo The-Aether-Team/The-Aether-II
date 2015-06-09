@@ -3,6 +3,7 @@ package com.gildedgames.aether.client.models;
 import com.gildedgames.aether.common.Aether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
@@ -42,6 +43,8 @@ public class ModelsAether
 				"golden_oak_leaves", "purple_crystal_leaves", "purple_fruit_leaves");
 
 		addVariantNames(BlocksAether.blueberry_bush, "blueberry_bush_stem", "blueberry_bush_ripe");
+
+		addVariantNames(BlocksAether.aether_flower, "white_rose", "purple_flower");
 	}
 
 	/**
@@ -123,6 +126,9 @@ public class ModelsAether
 
 		registerBlockModel(BlocksAether.blueberry_bush, BlockBlueberryBush.BERRY_BUSH_STEM, Aether.getResource("blueberry_bush_stem"));
 		registerBlockModel(BlocksAether.blueberry_bush, BlockBlueberryBush.BERRY_BUSH_RIPE, Aether.getResource("blueberry_bush_ripe"));
+
+		registerBlockModel(BlocksAether.aether_flower, BlockAetherFlower.WHITE_ROSE.getMeta(), Aether.getResource("white_rose"));
+		registerBlockModel(BlocksAether.aether_flower, BlockAetherFlower.PURPLE_FLOWER.getMeta(), Aether.getResource("purple_flower"));
 
 		registerBlockModel(BlocksAether.aether_dirt);
 		registerBlockModel(BlocksAether.skyroot_planks);
