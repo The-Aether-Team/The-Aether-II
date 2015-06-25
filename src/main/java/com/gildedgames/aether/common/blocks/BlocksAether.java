@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootWorkbench;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
+import com.gildedgames.aether.common.blocks.natural.BlockAerogel;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
@@ -67,6 +68,8 @@ public class BlocksAether
 
 	public static Block icestone;
 
+	public static Block aerogel;
+
 	public static void preInit()
 	{
 		aether_dirt = registerBlock("aether_dirt", new BlockAether(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f)
@@ -110,6 +113,8 @@ public class BlocksAether
 		altar = registerBlock("altar", new BlockAltar());
 
 		icestone = registerBlock("icestone", new BlockIcestone());
+
+		aerogel = registerBlock("aerogel", new BlockAerogel());
 	}
 
 	private static Block registerBlock(String name, Block block)

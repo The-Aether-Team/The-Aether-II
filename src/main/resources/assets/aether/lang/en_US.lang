@@ -35,6 +35,7 @@ tile.aether_flower.purple_flower.name=Purple Flower
 tile.aether_flower.white_rose.name=White Rose
 tile.altar.name=Altar
 tile.icestone.name=Icestone
+tile.aerogel.name=Aerogel
 
 # Aether Items
 item.skyroot_stick.name=Skyroot Stick

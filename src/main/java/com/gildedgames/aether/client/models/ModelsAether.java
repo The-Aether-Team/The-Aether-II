@@ -143,6 +143,7 @@ public class ModelsAether
 		registerBlockModel(BlocksAether.orange_tree);
 		registerBlockModel(BlocksAether.altar);
 		registerBlockModel(BlocksAether.icestone);
+		registerBlockModel(BlocksAether.aerogel);
 
 		registerItemModel(ItemsAether.skyroot_stick);
 		registerItemModel(ItemsAether.ambrosium_shard);
