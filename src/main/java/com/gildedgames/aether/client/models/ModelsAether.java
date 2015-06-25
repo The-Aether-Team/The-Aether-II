@@ -142,6 +142,7 @@ public class ModelsAether
 		registerBlockModel(BlocksAether.skyroot_crafting_table);
 		registerBlockModel(BlocksAether.orange_tree);
 		registerBlockModel(BlocksAether.altar);
+		registerBlockModel(BlocksAether.icestone);
 
 		registerItemModel(ItemsAether.skyroot_stick);
 		registerItemModel(ItemsAether.ambrosium_shard);

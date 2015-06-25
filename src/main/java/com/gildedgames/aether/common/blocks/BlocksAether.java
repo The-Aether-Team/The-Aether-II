@@ -13,6 +13,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.BlockContinuumOre;
 import com.gildedgames.aether.common.blocks.natural.BlockGravititeOre;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
+import com.gildedgames.aether.common.blocks.natural.BlockIcestone;
 import com.gildedgames.aether.common.blocks.natural.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.natural.BlockQuicksoil;
 import com.gildedgames.aether.common.blocks.natural.BlockTallAetherGrass;
@@ -64,6 +65,8 @@ public class BlocksAether
 
 	public static Block altar;
 
+	public static Block icestone;
+
 	public static void preInit()
 	{
 		aether_dirt = registerBlock("aether_dirt", new BlockAether(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f)
@@ -105,6 +108,8 @@ public class BlocksAether
 		aether_flower = registerBlock("aether_flower", ItemBlockAetherSubtypes.class, new BlockAetherFlower());
 
 		altar = registerBlock("altar", new BlockAltar());
+
+		icestone = registerBlock("icestone", new BlockIcestone());
 	}
 
 	private static Block registerBlock(String name, Block block)
