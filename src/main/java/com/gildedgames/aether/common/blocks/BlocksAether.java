@@ -70,6 +70,8 @@ public class BlocksAether
 
 	public static Block aerogel;
 
+	public static Block zanite_block;
+
 	public static void preInit()
 	{
 		aether_dirt = registerBlock("aether_dirt", new BlockAether(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f)
@@ -115,6 +117,8 @@ public class BlocksAether
 		icestone = registerBlock("icestone", new BlockIcestone());
 
 		aerogel = registerBlock("aerogel", new BlockAerogel());
+
+		zanite_block = registerBlock("zanite_block", new BlockAether(Material.rock).setHardness(5f).setStepSound(Block.soundTypeStone));
 	}
 
 	private static Block registerBlock(String name, Block block)

@@ -9,13 +9,18 @@ public class RecipesAether
 {
 	public static void preInit()
 	{
+		registerNaturalRecipes();
+		registerToolRecipes();
+		registerArmorRecipes();
+		registerUtilityRecipes();
+	}
+
+	private static void registerNaturalRecipes()
+	{
 		registerShapelessRecipe(new ItemStack(BlocksAether.skyroot_planks, 4), new ItemStack(BlocksAether.aether_log, 1));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_stick, 4), "X", "X",
 				'X', new ItemStack(BlocksAether.skyroot_planks, 1));
-
-		registerToolRecipes();
-		registerArmorRecipes();
 	}
 
 	private static void registerToolRecipes()
@@ -90,6 +95,14 @@ public class RecipesAether
 				'X', zanite);
 
 		// TODO: Other armor types.
+	}
+
+	private static void registerUtilityRecipes()
+	{
+		ItemStack zanite = new ItemStack(ItemsAether.zanite_gemstone);
+
+		registerShapedRecipe(new ItemStack(BlocksAether.zanite_block, 1), "XXX", "XXX", "XXX",
+				'X', zanite);
 	}
 
 	private static void registerShapelessRecipe(ItemStack output, Object... stacks)

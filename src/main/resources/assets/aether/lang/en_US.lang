@@ -36,6 +36,7 @@ tile.aether_flower.white_rose.name=White Rose
 tile.altar.name=Altar
 tile.icestone.name=Icestone
 tile.aerogel.name=Aerogel
+tile.zanite_block.name=Zanite Block
 
 # Aether Items
 item.skyroot_stick.name=Skyroot Stick

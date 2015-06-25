@@ -144,6 +144,7 @@ public class ModelsAether
 		registerBlockModel(BlocksAether.altar);
 		registerBlockModel(BlocksAether.icestone);
 		registerBlockModel(BlocksAether.aerogel);
+		registerBlockModel(BlocksAether.zanite_block);
 
 		registerItemModel(ItemsAether.skyroot_stick);
 		registerItemModel(ItemsAether.ambrosium_shard);
