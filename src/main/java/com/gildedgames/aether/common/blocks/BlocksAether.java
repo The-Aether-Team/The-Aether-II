@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.blocks;
 
 import com.gildedgames.aether.common.AetherCreativeTabs;
+import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootWorkbench;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherFlower;
@@ -61,6 +62,8 @@ public class BlocksAether
 
 	public static Block aether_flower;
 
+	public static Block altar;
+
 	public static void preInit()
 	{
 		aether_dirt = registerBlock("aether_dirt", new BlockAether(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f)
@@ -100,6 +103,8 @@ public class BlocksAether
 		orange_tree = registerBlock("orange_tree", new BlockOrangeTree());
 
 		aether_flower = registerBlock("aether_flower", ItemBlockAetherSubtypes.class, new BlockAetherFlower());
+
+		altar = registerBlock("altar", new BlockAltar());
 	}
 
 	private static Block registerBlock(String name, Block block)

@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.AetherArmorMaterials;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.recipes.RecipesAether;
+import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
 import com.gildedgames.aether.common.world.WorldProviderAether;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
@@ -33,6 +34,8 @@ public class CommonProxy
 
 		BlocksAether.preInit();
 		ItemsAether.preInit();
+
+		TileEntitiesAether.preInit();
 
 		RecipesAether.preInit();
 		AetherCreativeTabs.preInit();

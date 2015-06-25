@@ -2,8 +2,6 @@ package com.gildedgames.aether.common.blocks.util.variants.blockstates;
 
 import net.minecraft.block.properties.IProperty;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 
