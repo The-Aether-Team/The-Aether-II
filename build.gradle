@@ -22,8 +22,8 @@ buildscript {
 repositories {
     mavenCentral()
     maven {
-        name = "Collin1971-FS"
-        url = "http://collin1971.net/maven/"
+        name = "GGUtil-Maven"
+        url = "http://gilded-games.com/maven/"
     }
 }
 
@@ -43,7 +43,7 @@ configFile.withReader {
 
 // Define dependencies this project depends on.
 dependencies {
-    compile "com.gildedgames.util:GildedGamesUtil:${config.minecraft_version}-${config.ggutil_version}:dev"
+    compile "com.gildedgames.util:GildedGamesUtil:${config.ggutil_version}:dev"
 }
 
 task buildInfo {
