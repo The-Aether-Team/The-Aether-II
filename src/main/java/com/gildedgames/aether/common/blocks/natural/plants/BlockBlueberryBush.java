@@ -1,7 +1,8 @@
-package com.gildedgames.aether.common.blocks.natural;
+package com.gildedgames.aether.common.blocks.natural.plants;
 
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.Block;

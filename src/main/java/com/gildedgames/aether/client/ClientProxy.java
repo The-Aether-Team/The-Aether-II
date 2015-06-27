@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client;
 
 import com.gildedgames.aether.client.models.ModelsAether;
+import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.CommonProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -12,7 +13,8 @@ public class ClientProxy extends CommonProxy
 	{
 		super.preInit(event);
 
-		ModelsAether.prepareBakery();
+		ModelsAether.preInit();
+		AetherCreativeTabs.registerTabIcons();
 	}
 
 	@Override
@@ -20,6 +22,6 @@ public class ClientProxy extends CommonProxy
 	{
 		super.init(event);
 
-		ModelsAether.registerItemModels();
+		ModelsAether.init();
 	}
 }

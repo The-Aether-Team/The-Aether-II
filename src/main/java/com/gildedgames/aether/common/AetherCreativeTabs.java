@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -12,32 +13,30 @@ public class AetherCreativeTabs
 {
 	private static class AetherCreativeTab extends CreativeTabs
 	{
-		private Item item;
-
-		private int metadata;
+		private ItemStack stack;
 
 		public AetherCreativeTab(String unlocalizedName)
 		{
 			super(unlocalizedName);
 		}
 
-		private void setItemToDisplay(Item item, int metadata)
+		private void setDisplayStack(ItemStack stack)
 		{
-			this.item = item;
-			this.metadata = metadata;
+			this.stack = stack;
 		}
 
 		@Override
+		@SideOnly(Side.CLIENT)
 		public Item getTabIconItem()
 		{
-			return this.item;
+			return this.stack.getItem();
 		}
 
 		@Override
 		@SideOnly(Side.CLIENT)
 		public int getIconItemDamage()
 		{
-			return this.metadata;
+			return this.stack.getItemDamage();
 		}
 	}
 
@@ -53,13 +52,13 @@ public class AetherCreativeTabs
 
 	public static final AetherCreativeTab tabConsumables = new AetherCreativeTab("aetherConsumables");
 
-	public static void preInit()
+	public static void registerTabIcons()
 	{
-		tabBlocks.setItemToDisplay(Item.getItemFromBlock(BlocksAether.aether_grass), BlockAetherGrass.AETHER_GRASS.getMeta());
-		tabMaterials.setItemToDisplay(ItemsAether.skyroot_stick, 0);
-		tabTools.setItemToDisplay(ItemsAether.gravitite_pickaxe, 0);
-		tabWeapons.setItemToDisplay(ItemsAether.gravitite_sword, 0);
-		tabArmor.setItemToDisplay(ItemsAether.zanite_chestplate, 0);
-		tabConsumables.setItemToDisplay(ItemsAether.orange, 0);
+		tabBlocks.setDisplayStack(new ItemStack(BlocksAether.aether_grass, BlockAetherGrass.AETHER_GRASS.getMeta()));
+		tabMaterials.setDisplayStack(new ItemStack(ItemsAether.skyroot_stick));
+		tabTools.setDisplayStack(new ItemStack(ItemsAether.gravitite_pickaxe));
+		tabWeapons.setDisplayStack(new ItemStack(ItemsAether.gravitite_sword));
+		tabArmor.setDisplayStack(new ItemStack(ItemsAether.zanite_chestplate));
+		tabConsumables.setDisplayStack(new ItemStack(ItemsAether.orange));
 	}
 }

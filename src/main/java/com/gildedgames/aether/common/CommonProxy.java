@@ -38,7 +38,6 @@ public class CommonProxy
 		TileEntitiesAether.preInit();
 
 		RecipesAether.preInit();
-		AetherCreativeTabs.preInit();
 	}
 
 	public void init(FMLInitializationEvent event)

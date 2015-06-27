@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.blocks.natural;
+package com.gildedgames.aether.common.blocks.natural.ores;
 
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.items.ItemsAether;

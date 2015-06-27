@@ -83,6 +83,7 @@ public class BlockAetherGrass extends Block implements IAetherBlockWithSubtypes
 		}
 	}
 
+	@Override
 	public boolean canSustainPlant(IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable)
 	{
 		IBlockState state = world.getBlockState(pos);

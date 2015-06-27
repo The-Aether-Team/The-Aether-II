@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.items.armor.EnumAetherArmorVariant;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.items.consumables.ItemAetherFood;
+import com.gildedgames.aether.common.items.consumables.ItemAmbrosiumShard;
 import com.gildedgames.aether.common.items.tools.EnumAetherToolMaterial;
 import com.gildedgames.aether.common.items.tools.ItemAetherAxe;
 import com.gildedgames.aether.common.items.tools.ItemAetherPickaxe;

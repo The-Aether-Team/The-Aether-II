@@ -24,6 +24,7 @@ public class WorldChunkManagerAether extends WorldChunkManager
 		return list.contains(this.biomeGenerator);
 	}
 
+	@Override
 	public BiomeGenBase[] getBiomeGenAt(BiomeGenBase[] listToReuse, int x, int z, int width, int length, boolean cacheFlag)
 	{
 		return this.loadBlockGeneratorData(listToReuse, x, z, width, length);

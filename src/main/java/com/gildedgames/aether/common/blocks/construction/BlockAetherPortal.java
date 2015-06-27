@@ -1,6 +1,7 @@
-package com.gildedgames.aether.common.blocks;
+package com.gildedgames.aether.common.blocks.construction;
 
 import com.gildedgames.aether.common.Aether;
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.TeleporterAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;

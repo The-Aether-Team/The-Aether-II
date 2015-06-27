@@ -101,6 +101,7 @@ public class BlockAetherLog extends Block implements IAetherBlockWithSubtypes
 		return true;
 	}
 
+	@Override
 	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
 		if (state.getValue(PROPERTY_VARIANT) == GOLDEN_OAK_LOG)

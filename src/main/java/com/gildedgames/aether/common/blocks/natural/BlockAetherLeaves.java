@@ -124,6 +124,7 @@ public class BlockAetherLeaves extends Block implements IShearable, IAetherBlock
 		}
 	}
 
+	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
 		if (!worldIn.isRemote)

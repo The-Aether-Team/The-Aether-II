@@ -21,6 +21,7 @@ public class ContainerSkyrootWorkbench extends ContainerWorkbench
 		this.pos = pos;
 	}
 
+	@Override
 	public boolean canInteractWith(EntityPlayer player)
 	{
 		return this.world.getBlockState(this.pos).getBlock() == BlocksAether.skyroot_crafting_table &&

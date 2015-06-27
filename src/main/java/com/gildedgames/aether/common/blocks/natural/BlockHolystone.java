@@ -72,6 +72,7 @@ public class BlockHolystone extends Block implements IAetherBlockWithSubtypes
 		}
 	}
 
+	@Override
 	public float getBlockHardness(World world, BlockPos pos)
 	{
 		if (world.getBlockState(pos).getValue(PROPERTY_VARIANT) == BLOOD_MOSS_HOLYSTONE)

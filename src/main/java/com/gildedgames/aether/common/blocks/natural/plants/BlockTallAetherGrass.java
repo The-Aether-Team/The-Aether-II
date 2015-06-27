@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.blocks.natural;
+package com.gildedgames.aether.common.blocks.natural.plants;
 
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.BlocksAether;
@@ -32,11 +32,13 @@ public class BlockTallAetherGrass extends BlockBush implements IShearable, IGrow
 		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 
+	@Override
 	protected boolean canPlaceBlockOn(Block ground)
 	{
 		return ground == BlocksAether.aether_grass;
 	}
 
+	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
 		return null;
@@ -57,18 +59,21 @@ public class BlockTallAetherGrass extends BlockBush implements IShearable, IGrow
 		return drops;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public Block.EnumOffsetType getOffsetType()
 	{
 		return Block.EnumOffsetType.XYZ;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess world, BlockPos pos, int renderPass)
 	{
 		return super.colorMultiplier(world, pos, renderPass);
 	}
 
+	@Override
 	public boolean isReplaceable(World worldIn, BlockPos pos)
 	{
 		return true;

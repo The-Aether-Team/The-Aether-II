@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.blocks.natural;
+package com.gildedgames.aether.common.blocks.natural.plants;
 
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.BlocksAether;
@@ -40,6 +40,7 @@ public class BlockAetherFlower extends Block implements IAetherBlockWithSubtypes
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, WHITE_ROSE));
 	}
 
+	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
 	{
 		Block block = worldIn.getBlockState(pos.down()).getBlock();

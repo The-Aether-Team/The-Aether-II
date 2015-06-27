@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.biome;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherFlower;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.world.features.WorldGenAetherFlowers;
 import com.gildedgames.aether.common.world.features.WorldGenAetherTallGrass;
 import net.minecraft.util.BlockPos;
@@ -21,6 +21,7 @@ public class BiomeDecoratorAether extends BiomeDecorator
 
 	private WorldGenAetherFlowers genPurpleFlowers, genWhiteRoses;
 
+	@Override
 	public void decorate(World world, Random random, BiomeGenBase genBase, BlockPos pos)
 	{
 		if (this.currentWorld != null)
@@ -48,6 +49,7 @@ public class BiomeDecoratorAether extends BiomeDecorator
 		this.currentWorld = null;
 	}
 
+	@Override
 	protected void genDecorations(BiomeGenBase genBase)
 	{
 		this.generateOres();
@@ -107,6 +109,7 @@ public class BiomeDecoratorAether extends BiomeDecorator
 		return this.randomGenerator.nextInt(i);
 	}
 
+	@Override
 	protected void generateOres()
 	{
 		this.genMinableOre(this.genAmbrosium, this.currentWorld, this.randomGenerator, this.field_180294_c, 0, 128, 20);

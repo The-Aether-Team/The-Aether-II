@@ -14,7 +14,6 @@ public class TeleporterAether extends Teleporter
 	@Override
 	public void placeInPortal(Entity entity, float rotationYaw)
 	{
-		return;
 	}
 
 	@Override
@@ -32,6 +31,5 @@ public class TeleporterAether extends Teleporter
 	@Override
 	public void removeStalePortalLocations(long par1)
 	{
-		return;
 	}
 }
