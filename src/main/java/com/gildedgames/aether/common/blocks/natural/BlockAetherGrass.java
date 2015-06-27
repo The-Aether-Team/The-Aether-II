@@ -84,22 +84,6 @@ public class BlockAetherGrass extends Block implements IAetherBlockWithSubtypes
 	}
 
 	@Override
-	public boolean canSustainPlant(IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable)
-	{
-		IBlockState state = world.getBlockState(pos);
-
-		if (state.getBlock() == this)
-		{
-			if (state.getValue(PROPERTY_VARIANT) == AETHER_GRASS)
-			{
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
 		return Item.getItemFromBlock(BlocksAether.aether_dirt);

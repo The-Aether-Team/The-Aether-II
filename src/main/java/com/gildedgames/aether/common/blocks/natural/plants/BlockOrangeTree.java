@@ -3,8 +3,11 @@ package com.gildedgames.aether.common.blocks.natural.plants;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
+import com.gildedgames.aether.common.blocks.util.BlockAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
@@ -15,6 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
@@ -24,7 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockOrangeTree extends Block
+public class BlockOrangeTree extends BlockBush implements IGrowable
 {
 	private static int STAGE_COUNT = 5;
 
@@ -40,6 +44,8 @@ public class BlockOrangeTree extends Block
 
 		this.setTickRandomly(true);
 
+		this.setBlockBounds(0.3f, 0.0F, 0.3f, 0.7f, 0.6f, 0.7f);
+
 		this.setStepSound(Block.soundTypeGrass);
 
 		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
@@ -48,26 +54,23 @@ public class BlockOrangeTree extends Block
 	}
 
 	@Override
-	public void randomTick(World world, BlockPos pos, IBlockState state, Random random)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
 	{
-		int nextStage = (Integer) state.getValue(PROPERTY_STAGE) + 1;
+		BlockPos topBlock = (Boolean) state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos : pos.up();
+		BlockPos bottomBlock = (Boolean) state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos.down() : pos;
 
-		if (nextStage <= STAGE_COUNT)
+		IBlockState soilState = world.getBlockState(bottomBlock.down());
+
+		int chance = 8;
+
+		if (soilState.getBlock() == BlocksAether.aether_grass && soilState.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED_AETHER_GRASS)
 		{
-			BlockPos topBlock = (Boolean) state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos : pos.up();
-			BlockPos bottomBlock = (Boolean) state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos.down() : pos;
+			chance /= 2;
+		}
 
-			if (nextStage >= 3)
-			{
-				if (!world.isAirBlock(topBlock) && world.getBlockState(topBlock).getBlock() != this)
-				{
-					return;
-				}
-
-				world.setBlockState(topBlock, state.withProperty(PROPERTY_STAGE, nextStage).withProperty(PROPERTY_IS_TOP_BLOCK, true));
-			}
-
-			world.setBlockState(bottomBlock, state.withProperty(PROPERTY_STAGE, nextStage).withProperty(PROPERTY_IS_TOP_BLOCK, false));
+		if (random.nextInt(chance) == 0)
+		{
+			this.growTree(world, topBlock, bottomBlock, 1);
 		}
 	}
 
@@ -124,6 +127,12 @@ public class BlockOrangeTree extends Block
 	}
 
 	@Override
+	public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
+	{
+		return null;
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public EnumWorldBlockLayer getBlockLayer()
 	{
@@ -170,5 +179,64 @@ public class BlockOrangeTree extends Block
 	protected BlockState createBlockState()
 	{
 		return new BlockState(this, PROPERTY_IS_TOP_BLOCK, PROPERTY_STAGE);
+	}
+
+	@Override
+	public boolean canPlaceBlockAt(World world, BlockPos pos)
+	{
+		return this.canPlaceBlockOn(world.getBlockState(pos.down()).getBlock());
+	}
+
+	@Override
+	public boolean canPlaceBlockOn(Block ground)
+	{
+		return ground == BlocksAether.aether_grass || ground == this;
+	}
+
+	@Override
+	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
+	{
+		int stage = (Integer) state.getValue(PROPERTY_STAGE);
+
+		return stage < 5;
+	}
+
+	@Override
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	{
+		int stage = (Integer) state.getValue(PROPERTY_STAGE);
+
+		return stage < 5;
+	}
+
+	@Override
+	public void grow(World world, Random rand, BlockPos pos, IBlockState state)
+	{
+		BlockPos topBlock = (Boolean) state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos : pos.up();
+		BlockPos bottomBlock = (Boolean) state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos.down() : pos;
+
+		this.growTree(world, topBlock, bottomBlock, rand.nextInt(3));
+	}
+
+	private void growTree(World world, BlockPos topPos, BlockPos bottomPos, int amount)
+	{
+		IBlockState state = world.getBlockState(bottomPos);
+
+		int nextStage = (Integer) state.getValue(PROPERTY_STAGE) + amount;
+
+		if (nextStage <= STAGE_COUNT)
+		{
+			if (nextStage >= 3)
+			{
+				if (!world.isAirBlock(topPos) && world.getBlockState(topPos).getBlock() != this)
+				{
+					return;
+				}
+
+				world.setBlockState(topPos, state.withProperty(PROPERTY_STAGE, nextStage).withProperty(PROPERTY_IS_TOP_BLOCK, true));
+			}
+
+			world.setBlockState(bottomPos, state.withProperty(PROPERTY_STAGE, nextStage).withProperty(PROPERTY_IS_TOP_BLOCK, false));
+		}
 	}
 }
