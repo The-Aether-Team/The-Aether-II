@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtyp
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
@@ -21,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class BlockAetherFlower extends Block implements IAetherBlockWithSubtypes
+public class BlockAetherFlower extends BlockBush implements IAetherBlockWithSubtypes
 {
 	public static final BlockVariant
 			WHITE_ROSE = new BlockVariant(0, "white_rose"),
@@ -38,14 +39,6 @@ public class BlockAetherFlower extends Block implements IAetherBlockWithSubtypes
 		this.setBlockBounds(0.3f, 0.0F, 0.3f, 0.7f, 0.6f, 0.7f);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, WHITE_ROSE));
-	}
-
-	@Override
-	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
-	{
-		Block block = worldIn.getBlockState(pos.down()).getBlock();
-
-		return block == BlocksAether.aether_grass || block == BlocksAether.aether_dirt;
 	}
 
 	@Override
@@ -79,9 +72,15 @@ public class BlockAetherFlower extends Block implements IAetherBlockWithSubtypes
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
+	public boolean canPlaceBlockAt(World world, BlockPos pos)
 	{
-		return null;
+		return this.canPlaceBlockOn(world.getBlockState(pos.down()).getBlock());
+	}
+
+	@Override
+	public boolean canPlaceBlockOn(Block ground)
+	{
+		return ground == BlocksAether.aether_grass || ground == this;
 	}
 
 	@Override

@@ -19,23 +19,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
-public class BlockTallAetherGrass extends BlockBush implements IShearable, IGrowable
+public class BlockTallAetherGrass extends BlockBush implements IShearable
 {
 	public BlockTallAetherGrass()
 	{
-		super(Material.vine);
+		super(Material.plants);
 
 		this.setBlockBounds(0.1f, 0.0f, 0.1f, 0.9f, 0.8f, 0.9f);
 
 		this.setStepSound(Block.soundTypeGrass);
 
 		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
-	}
-
-	@Override
-	protected boolean canPlaceBlockOn(Block ground)
-	{
-		return ground == BlocksAether.aether_grass;
 	}
 
 	@Override
@@ -67,33 +61,20 @@ public class BlockTallAetherGrass extends BlockBush implements IShearable, IGrow
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public int colorMultiplier(IBlockAccess world, BlockPos pos, int renderPass)
+	public boolean canPlaceBlockAt(World world, BlockPos pos)
 	{
-		return super.colorMultiplier(world, pos, renderPass);
+		return this.canPlaceBlockOn(world.getBlockState(pos.down()).getBlock());
+	}
+
+	@Override
+	public boolean canPlaceBlockOn(Block ground)
+	{
+		return ground == BlocksAether.aether_grass || ground == this;
 	}
 
 	@Override
 	public boolean isReplaceable(World worldIn, BlockPos pos)
 	{
 		return true;
-	}
-
-	@Override
-	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
-	{
-		return false;
-	}
-
-	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
-	{
-		return false;
-	}
-
-	@Override
-	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
-	{
-
 	}
 }

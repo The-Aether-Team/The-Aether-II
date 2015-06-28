@@ -30,7 +30,7 @@ import java.util.Random;
 
 public class BlockOrangeTree extends BlockBush implements IGrowable
 {
-	private static int STAGE_COUNT = 5;
+	private static final int STAGE_COUNT = 5;
 
 	public static final PropertyBool PROPERTY_IS_TOP_BLOCK = PropertyBool.create("is_top_block");
 

@@ -6,6 +6,8 @@ import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockState;
@@ -17,6 +19,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.World;
@@ -26,7 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
-public class BlockBlueberryBush extends Block implements IAetherBlockWithSubtypes
+public class BlockBlueberryBush extends BlockBush implements IAetherBlockWithSubtypes, IGrowable
 {
 	public static final int
 			BERRY_BUSH_STEM = 0,
@@ -43,6 +46,8 @@ public class BlockBlueberryBush extends Block implements IAetherBlockWithSubtype
 		this.setStepSound(Block.soundTypeGrass);
 
 		this.setTickRandomly(true);
+
+		this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
 
 		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
@@ -105,9 +110,33 @@ public class BlockBlueberryBush extends Block implements IAetherBlockWithSubtype
 	}
 
 	@Override
+	public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
+	{
+		return new AxisAlignedBB(pos.getX() + this.minX, pos.getY() + this.minY, pos.getZ() + this.minZ, pos.getX() + this.maxX, pos.getY() + this.maxY, pos.getZ() + this.maxZ);
+	}
+
+	@Override
 	public int damageDropped(IBlockState state)
 	{
 		return BERRY_BUSH_STEM;
+	}
+
+	@Override
+	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
+	{
+		return state.getValue(PROPERTY_HARVESTABLE) == Boolean.FALSE;
+	}
+
+	@Override
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	{
+		return state.getValue(PROPERTY_HARVESTABLE) == Boolean.FALSE;
+	}
+
+	@Override
+	public void grow(World world, Random rand, BlockPos pos, IBlockState state)
+	{
+		world.setBlockState(pos, state.withProperty(PROPERTY_HARVESTABLE, true));
 	}
 
 	@Override
@@ -145,6 +174,18 @@ public class BlockBlueberryBush extends Block implements IAetherBlockWithSubtype
 	protected BlockState createBlockState()
 	{
 		return new BlockState(this, PROPERTY_HARVESTABLE);
+	}
+
+	@Override
+	public boolean canPlaceBlockAt(World world, BlockPos pos)
+	{
+		return this.canPlaceBlockOn(world.getBlockState(pos.down()).getBlock());
+	}
+
+	@Override
+	public boolean canPlaceBlockOn(Block ground)
+	{
+		return ground == BlocksAether.aether_grass || ground == this;
 	}
 
 	@Override
