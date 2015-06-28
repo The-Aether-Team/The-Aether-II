@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.natural;
 
+import com.gildedgames.aether.client.render.effects.EntityGoldenFX;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
@@ -17,6 +18,7 @@ import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -91,6 +93,26 @@ public class BlockAetherLeaves extends Block implements IShearable, IAetherBlock
 	public boolean isVisuallyOpaque()
 	{
 		return false;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
+	{
+		BlockVariant variant = (BlockVariant) state.getValue(PROPERTY_VARIANT);
+
+		if (variant == GOLDEN_OAK_LEAVES)
+		{
+			for (int count = 0; count < 3; count++)
+			{
+				double x = pos.getX() + (rand.nextFloat() * 6f) - 3f;
+				double y = pos.getY() + (rand.nextFloat() * 6f) - 3f;
+				double z = pos.getZ() + (rand.nextFloat() * 6f) - 3f;
+
+				EntityGoldenFX effect = new EntityGoldenFX(world, x, y, z, 0, 0, 0);
+				FMLClientHandler.instance().getClient().effectRenderer.addEffect(effect);
+			}
+		}
 	}
 
 	@Override

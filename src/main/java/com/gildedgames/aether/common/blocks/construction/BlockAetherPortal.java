@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.construction;
 
+import com.gildedgames.aether.client.render.effects.EntityAetherPortalFX;
 import com.gildedgames.aether.common.Aether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.TeleporterAether;
@@ -17,9 +18,11 @@ import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -83,6 +86,31 @@ public class BlockAetherPortal extends BlockBreakable
 		if (rand.nextInt(100) == 0)
 		{
 			world.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, Aether.getResource("aeportal.portal"), 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
+		}
+
+		for (int count = 0; count < 4; count++)
+		{
+			double posX = pos.getX() + rand.nextFloat();
+			double posY = pos.getY() + rand.nextFloat();
+			double posZ = pos.getZ() + rand.nextFloat();
+			double motionX = (rand.nextFloat() - 0.5D) * 0.5D;
+			double motionY = (rand.nextFloat() - 0.5D) * 0.5D;
+			double motionZ = (rand.nextFloat() - 0.5D) * 0.5D;
+			int angle = rand.nextInt(2) * 2 - 1;
+
+			if (world.getBlockState(pos.west()).getBlock() != this && world.getBlockState(pos.east()).getBlock() != this)
+			{
+				posX = pos.getX() + 0.5D + 0.25D * angle;
+				motionX = (rand.nextFloat() * 2.0F * angle);
+			}
+			else
+			{
+				posZ = pos.getZ() + 0.5D + 0.25D * angle;
+				motionZ = (rand.nextFloat() * 2.0F * angle);
+			}
+
+			EntityAetherPortalFX effect = new EntityAetherPortalFX(world, posX, posY, posZ, motionX, motionY, motionZ);
+			FMLClientHandler.instance().getClient().effectRenderer.addEffect(effect);
 		}
 	}
 

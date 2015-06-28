@@ -18,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -25,6 +26,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
+import java.util.Random;
 
 public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 {
@@ -166,6 +168,25 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 			AercloudVariant variant = (AercloudVariant) state.getValue(PROPERTY_VARIANT);
 
 			variant.onEntityCollision(world, pos, state, entity);
+		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
+	{
+		if (state.getValue(PROPERTY_VARIANT) == PURPLE_AERCLOUD)
+		{
+			float x = pos.getX() + (rand.nextFloat() * 0.7f) + 0.15f;
+			float y = pos.getY() + (rand.nextFloat() * 0.7f) + 0.15f;
+			float z = pos.getZ() + (rand.nextFloat() * 0.7f) + 0.15f;
+
+			EnumFacing facing = (EnumFacing) state.getValue(PROPERTY_FACING);
+
+			float motionX = facing.getFrontOffsetX() * ((rand.nextFloat() * 0.01f) + 0.05f);
+			float motionZ = facing.getFrontOffsetZ() * ((rand.nextFloat() * 0.01f) + 0.05f);
+
+			world.spawnParticle(EnumParticleTypes.CLOUD, x, y, z, motionX, 0, motionZ);
 		}
 	}
 
