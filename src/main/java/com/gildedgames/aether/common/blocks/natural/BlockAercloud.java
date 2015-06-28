@@ -134,7 +134,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 	@SideOnly(Side.CLIENT)
 	public EnumWorldBlockLayer getBlockLayer()
 	{
-		return Minecraft.isFancyGraphicsEnabled() ? EnumWorldBlockLayer.TRANSLUCENT : EnumWorldBlockLayer.SOLID;
+		return  EnumWorldBlockLayer.TRANSLUCENT;
 	}
 
 	@Override
@@ -157,14 +157,14 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 	@Override
 	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
-		AercloudVariant variant = (AercloudVariant) state.getValue(PROPERTY_VARIANT);
-
 		if (entity.isSneaking())
 		{
 			BlockAercloud.COLD_AERCLOUD.onEntityCollision(world, pos, state, entity);
 		}
 		else
 		{
+			AercloudVariant variant = (AercloudVariant) state.getValue(PROPERTY_VARIANT);
+
 			variant.onEntityCollision(world, pos, state, entity);
 		}
 	}
@@ -192,7 +192,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 	{
 		AercloudVariant variant = (AercloudVariant) state.getValue(PROPERTY_VARIANT);
 
-		return variant.getBoundingBox(pos, this.minX, this.minY, this.minZ);
+		return variant.getBoundingBox(pos, 1, 1, 1);
 	}
 
 	@Override
