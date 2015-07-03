@@ -1,10 +1,9 @@
 buildscript {
     repositories {
         mavenCentral()
-        mavenLocal()
 
         maven {
-            name = "ForgeFS"
+            name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
 
@@ -19,77 +18,48 @@ buildscript {
     }
 }
 
-repositories {
-    mavenCentral()
-    maven {
-        name = "GGUtil-Maven"
-        url = "http://gilded-games.com/maven/"
-    }
-}
-
-// Load ForgeGradle
 apply plugin: 'forge'
+
+ext.config = loadConfig(file('build.properties'))
+
 group = 'com.gildedgames.aether'
 
-// Define config location.
-ext.configFile = file "build.properties"
+task defineVersion {
+	def build = System.getenv("BUILD_NUMBER")
 
-// Load the config.
-configFile.withReader {
-    def config = new Properties()
-    config.load(it)
-    project.ext.config = new ConfigSlurper().parse config
+	if (build != null) {
+		version = "${config.mc_version}-${config.build}.jenkins-${build}"
+	} else {
+		version = "${config.mc_version}-${config.build}"
+	}
 }
 
-// Define dependencies this project depends on.
-dependencies {
-    compile "com.gildedgames.util:GildedGamesUtil:${config.ggutil_version}:dev"
-}
-
-task buildInfo {
-    if (System.getenv().BUILD_NUMBER != null) {
-        ext.buildNum = "build${System.getenv().BUILD_NUMBER}"
-    } else {
-        ext.buildNum = "git"
-    }
-}
-
-ext.artifact_version = 'OOPS'
-
-if (System.getenv().ARTIFACT_VERSION == null) {
-    artifact_version = "${config.mod_version}.${project.buildInfo.buildNum}"
-} else {
-    artifact_version = "${system.getenv().ARTIFACT_VERSION}"
-}
-
-// Define artifact version.
-version = "${config.minecraft_version}-${artifact_version}"
-
-// Define ForgeGradle variables.
 minecraft {
-    version = config.minecraft_version + "-" + config.forge_version
+    version = "${config.mc_version}-${config.forge_version}"
+    mappings = config.forge_mappings
+
     replace "${version}", project.version
-    
-    mappings = "${config.mappings}"
 
     runDir = "run"
 }
 
-/* Processes src/main/resources */
 processResources {
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    // replace stuff in mcmod.info, nothing else
     from (sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
 
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version': project.version, 'mcversion': project.minecraft.version
     }
 
-    // copy everything else, thats not the mcmod.info
     from (sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+def loadConfig(File config) {
+	config.withReader {
+		def properties = new Properties()
+		properties.load(it)
+
+		return (new ConfigSlurper().parse(properties))
+	}
 }
