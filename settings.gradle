@@ -1,1 +1,3 @@
+include 'gilded-games-util'
+
 rootProject.name = 'AetherII'
