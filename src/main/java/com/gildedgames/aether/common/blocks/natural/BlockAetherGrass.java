@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
@@ -13,10 +12,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -39,7 +35,6 @@ public class BlockAetherGrass extends Block implements IAetherBlockWithSubtypes
 		this.setTickRandomly(true);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, AETHER_GRASS));
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 
 	@Override

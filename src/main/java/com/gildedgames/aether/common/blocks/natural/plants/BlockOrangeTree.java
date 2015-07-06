@@ -1,9 +1,7 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
-import com.gildedgames.aether.common.blocks.util.BlockAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -47,8 +45,6 @@ public class BlockOrangeTree extends BlockBush implements IGrowable
 		this.setBlockBounds(0.3f, 0.0F, 0.3f, 0.7f, 0.6f, 0.7f);
 
 		this.setStepSound(Block.soundTypeGrass);
-
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_IS_TOP_BLOCK, false).withProperty(PROPERTY_STAGE, 1));
 	}

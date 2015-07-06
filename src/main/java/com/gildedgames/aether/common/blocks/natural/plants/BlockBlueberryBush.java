@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
@@ -48,8 +47,6 @@ public class BlockBlueberryBush extends BlockBush implements IAetherBlockWithSub
 		this.setTickRandomly(true);
 
 		this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
-
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
@@ -13,7 +12,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.World;
@@ -33,8 +31,6 @@ public class BlockAetherFlower extends BlockBush implements IAetherBlockWithSubt
 	public BlockAetherFlower()
 	{
 		super(Material.leaves);
-
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 
 		this.setBlockBounds(0.3f, 0.0F, 0.3f, 0.7f, 0.6f, 0.7f);
 

@@ -1,10 +1,8 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
-import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -28,8 +26,6 @@ public class BlockTallAetherGrass extends BlockBush implements IShearable
 		this.setBlockBounds(0.1f, 0.0f, 0.1f, 0.9f, 0.8f, 0.9f);
 
 		this.setStepSound(Block.soundTypeGrass);
-
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 
 	@Override

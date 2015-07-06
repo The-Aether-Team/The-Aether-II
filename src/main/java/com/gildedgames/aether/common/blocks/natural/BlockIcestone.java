@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -21,8 +20,6 @@ public class BlockIcestone extends Block
 		this.setHardness(3f);
 
 		this.setStepSound(Block.soundTypeGlass);
-
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 
 		this.setTickRandomly(true);
 	}

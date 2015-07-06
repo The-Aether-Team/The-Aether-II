@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
@@ -15,7 +14,5 @@ public class BlockQuicksoil extends Block
 		this.setHardness(1.5f);
 
 		this.setStepSound(Block.soundTypeSand);
-
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 }

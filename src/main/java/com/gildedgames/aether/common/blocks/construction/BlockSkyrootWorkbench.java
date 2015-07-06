@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.blocks.construction;
 
 import com.gildedgames.aether.common.Aether;
-import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -20,8 +19,6 @@ public class BlockSkyrootWorkbench extends Block
 		this.setHardness(2.5f);
 
 		this.setStepSound(Block.soundTypeWood);
-
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 
 	@Override

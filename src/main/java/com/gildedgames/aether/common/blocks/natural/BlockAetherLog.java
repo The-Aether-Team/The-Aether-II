@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
@@ -46,8 +45,6 @@ public class BlockAetherLog extends Block implements IAetherBlockWithSubtypes
 		this.setStepSound(Block.soundTypeWood);
 
 		this.setHardness(2.0f);
-
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, SKYROOT_LOG).withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.Y));
 	}

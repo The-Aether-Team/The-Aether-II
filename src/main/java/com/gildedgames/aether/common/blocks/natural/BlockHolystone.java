@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
@@ -36,8 +35,6 @@ public class BlockHolystone extends Block implements IAetherBlockWithSubtypes
 		this.setHardness(2.0F);
 
 		this.setStepSound(Block.soundTypeStone);
-
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, NORMAL_HOLYSTONE));
 	}

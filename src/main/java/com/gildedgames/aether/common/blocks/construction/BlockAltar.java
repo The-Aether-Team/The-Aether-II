@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.construction;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -17,8 +16,6 @@ public class BlockAltar extends Block implements ITileEntityProvider
 		this.setHardness(2.0f);
 
 		this.setStepSound(Block.soundTypeStone);
-
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 
 	@Override

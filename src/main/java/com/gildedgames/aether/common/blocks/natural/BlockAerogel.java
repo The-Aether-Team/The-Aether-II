@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.EnumWorldBlockLayer;
@@ -17,8 +16,6 @@ public class BlockAerogel extends Block
 		this.setResistance(2000f);
 
 		this.setLightOpacity(3);
-
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 	}
 
 	@Override

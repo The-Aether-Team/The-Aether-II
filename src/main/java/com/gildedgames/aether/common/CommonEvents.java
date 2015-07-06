@@ -23,7 +23,7 @@ public class CommonEvents
 		{
 			if (event.world.getBlockState(event.target.getBlockPos()).getBlock() == Blocks.glowstone)
 			{
-				if (FluidContainerRegistry.isFilledContainer(event.current) && FluidContainerRegistry.getFluidForFilledItem(event.current).fluidID == FluidRegistry.WATER.getID())
+				if (FluidContainerRegistry.isFilledContainer(event.current) && FluidContainerRegistry.getFluidForFilledItem(event.current).getFluidID() == FluidRegistry.WATER.getID())
 				{
 					if (this.tryToCreatePortal(event.world, event.target.getBlockPos(), event.target.sideHit))
 					{

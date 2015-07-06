@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
@@ -9,7 +8,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -115,8 +113,6 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 
 		this.setHardness(0.2f);
 		this.setLightOpacity(1);
-
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, COLD_AERCLOUD).withProperty(PROPERTY_FACING, EnumFacing.NORTH));
 	}

@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.items.consumables;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import net.minecraft.block.state.IBlockState;
@@ -13,11 +12,6 @@ import net.minecraft.world.World;
 
 public class ItemAmbrosiumShard extends Item
 {
-	public ItemAmbrosiumShard()
-	{
-		this.setCreativeTab(AetherCreativeTabs.tabMaterials);
-	}
-
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
 	{

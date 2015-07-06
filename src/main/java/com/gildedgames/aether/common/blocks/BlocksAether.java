@@ -24,6 +24,7 @@ import com.gildedgames.aether.common.blocks.util.BlockAether;
 import com.gildedgames.aether.common.items.itemblocks.ItemBlockAetherSubtypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -75,63 +76,69 @@ public class BlocksAether
 
 	public static void preInit()
 	{
-		aether_dirt = registerBlock("aether_dirt", new BlockAether(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f)
-				.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		aether_dirt = registerBlock("aether_dirt", new BlockAether(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f), AetherCreativeTabs.tabBlocks);
 
-		aether_grass = registerBlock("aether_grass", ItemBlockAetherSubtypes.class, new BlockAetherGrass());
+		aether_grass = registerBlockWithItem("aether_grass", new BlockAetherGrass(), ItemBlockAetherSubtypes.class, AetherCreativeTabs.tabBlocks);
 
-		holystone = registerBlock("holystone", ItemBlockAetherSubtypes.class, new BlockHolystone());
+		holystone = registerBlockWithItem("holystone", new BlockHolystone(), ItemBlockAetherSubtypes.class, AetherCreativeTabs.tabBlocks);
 
-		aercloud = registerBlock("aercloud", ItemBlockAetherSubtypes.class, new BlockAercloud());
+		aercloud = registerBlockWithItem("aercloud", new BlockAercloud(), ItemBlockAetherSubtypes.class, AetherCreativeTabs.tabBlocks);
 
-		aether_log = registerBlock("aether_log", ItemBlockAetherSubtypes.class, new BlockAetherLog());
+		aether_log = registerBlockWithItem("aether_log", new BlockAetherLog(), ItemBlockAetherSubtypes.class, AetherCreativeTabs.tabBlocks);
 
 		skyroot_planks = registerBlock("skyroot_planks", new BlockAether(Material.wood).setStepSound(Block.soundTypeWood).setHardness(2.0f)
-				.setResistance(5.0f).setCreativeTab(AetherCreativeTabs.tabBlocks));
+				.setResistance(5.0f), AetherCreativeTabs.tabBlocks);
 
-		ambrosium_ore = registerBlock("ambrosium_ore", new BlockAmbrosiumOre());
+		ambrosium_ore = registerBlock("ambrosium_ore", new BlockAmbrosiumOre(), AetherCreativeTabs.tabBlocks);
 
-		zanite_ore = registerBlock("zanite_ore", new BlockZaniteOre());
+		zanite_ore = registerBlock("zanite_ore", new BlockZaniteOre(), AetherCreativeTabs.tabBlocks);
 
-		gravitite_ore = registerBlock("gravitite_ore", new BlockGravititeOre());
+		gravitite_ore = registerBlock("gravitite_ore", new BlockGravititeOre(), AetherCreativeTabs.tabBlocks);
 
-		continuum_ore = registerBlock("continuum_ore", new BlockContinuumOre());
+		continuum_ore = registerBlock("continuum_ore", new BlockContinuumOre(), AetherCreativeTabs.tabBlocks);
 
-		aether_leaves = registerBlock("aether_leaves", ItemBlockAetherSubtypes.class, new BlockAetherLeaves());
+		aether_leaves = registerBlockWithItem("aether_leaves", new BlockAetherLeaves(), ItemBlockAetherSubtypes.class, AetherCreativeTabs.tabBlocks);
 
 		aether_portal = registerBlock("aether_portal", new BlockAetherPortal());
 
-		tall_aether_grass = registerBlock("tall_aether_grass", new BlockTallAetherGrass());
+		tall_aether_grass = registerBlock("tall_aether_grass", new BlockTallAetherGrass(), AetherCreativeTabs.tabBlocks);
 
-		quicksoil = registerBlock("quicksoil", new BlockQuicksoil());
+		quicksoil = registerBlock("quicksoil", new BlockQuicksoil(), AetherCreativeTabs.tabBlocks);
 
-		skyroot_crafting_table = registerBlock("skyroot_crafting_table", new BlockSkyrootWorkbench());
+		skyroot_crafting_table = registerBlock("skyroot_crafting_table", new BlockSkyrootWorkbench(), AetherCreativeTabs.tabBlocks);
 
-		blueberry_bush = registerBlock("blueberry_bush", ItemBlockAetherSubtypes.class, new BlockBlueberryBush());
+		blueberry_bush = registerBlockWithItem("blueberry_bush", new BlockBlueberryBush(), ItemBlockAetherSubtypes.class, AetherCreativeTabs.tabBlocks);
 
-		orange_tree = registerBlock("orange_tree", new BlockOrangeTree());
+		orange_tree = registerBlock("orange_tree", new BlockOrangeTree(), AetherCreativeTabs.tabBlocks);
 
-		aether_flower = registerBlock("aether_flower", ItemBlockAetherSubtypes.class, new BlockAetherFlower());
+		aether_flower = registerBlockWithItem("aether_flower", new BlockAetherFlower(), ItemBlockAetherSubtypes.class, AetherCreativeTabs.tabBlocks);
 
-		altar = registerBlock("altar", new BlockAltar());
+		altar = registerBlock("altar", new BlockAltar(), AetherCreativeTabs.tabBlocks);
 
-		icestone = registerBlock("icestone", new BlockIcestone());
+		icestone = registerBlock("icestone", new BlockIcestone(), AetherCreativeTabs.tabBlocks);
 
-		aerogel = registerBlock("aerogel", new BlockAerogel());
+		aerogel = registerBlock("aerogel", new BlockAerogel(), AetherCreativeTabs.tabBlocks);
 
-		zanite_block = registerBlock("zanite_block", new BlockAether(Material.rock).setHardness(5f).setStepSound(Block.soundTypeStone));
+		zanite_block = registerBlock("zanite_block", new BlockAether(Material.rock).setHardness(5f).setStepSound(Block.soundTypeStone), AetherCreativeTabs.tabBlocks);
+	}
+
+	private static Block registerBlock(String name, Block block, CreativeTabs tab)
+	{
+		return registerBlock(name, block.setCreativeTab(tab));
 	}
 
 	private static Block registerBlock(String name, Block block)
 	{
-		return registerBlock(name, ItemBlock.class, block);
+		return registerBlockWithItem(name, block, ItemBlock.class);
 	}
 
-	private static Block registerBlock(String name, Class<? extends ItemBlock> itemClass, Block block)
+	private static Block registerBlockWithItem(String name, Block block, Class<? extends ItemBlock> item, CreativeTabs tab)
 	{
-		block.setUnlocalizedName(name);
-		GameRegistry.registerBlock(block, itemClass, name);
+		return registerBlockWithItem(name, block.setCreativeTab(tab), item);
+	}
 
-		return block;
+	private static Block registerBlockWithItem(String name, Block block, Class<? extends ItemBlock> item)
+	{
+		return GameRegistry.registerBlock(block.setUnlocalizedName(name), item, name);
 	}
 }

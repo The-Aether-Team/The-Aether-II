@@ -10,6 +10,7 @@ import com.gildedgames.aether.common.items.tools.ItemAetherAxe;
 import com.gildedgames.aether.common.items.tools.ItemAetherPickaxe;
 import com.gildedgames.aether.common.items.tools.ItemAetherShovel;
 import com.gildedgames.aether.common.items.tools.ItemAetherSword;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -45,10 +46,10 @@ public class ItemsAether
 
 	public static void preInit()
 	{
-		skyroot_stick = registerItem("skyroot_stick", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
-		ambrosium_shard = registerItem("ambrosium_shard", new ItemAmbrosiumShard());
-		continuum_orb = registerItem("continuum_orb", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
-		zanite_gemstone = registerItem("zanite_gemstone", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
+		skyroot_stick = registerItem("skyroot_stick", new Item(), AetherCreativeTabs.tabMaterials);
+		ambrosium_shard = registerItem("ambrosium_shard", new ItemAmbrosiumShard(), AetherCreativeTabs.tabMaterials);
+		continuum_orb = registerItem("continuum_orb", new Item(), AetherCreativeTabs.tabMaterials);
+		zanite_gemstone = registerItem("zanite_gemstone", new Item(), AetherCreativeTabs.tabMaterials);
 
 		skyroot_axe = registerItem("skyroot_axe", new ItemAetherAxe(EnumAetherToolMaterial.SKYROOT));
 		skyroot_pickaxe = registerItem("skyroot_pickaxe", new ItemAetherPickaxe(EnumAetherToolMaterial.SKYROOT));
@@ -100,10 +101,17 @@ public class ItemsAether
 		valkyrie_leggings = registerItem("valkyrie_leggings", new ItemAetherArmor(EnumAetherArmorVariant.VALKYRIE, 0, 2));
 		valkyrie_boots = registerItem("valkyrie_boots", new ItemAetherArmor(EnumAetherArmorVariant.VALKYRIE, 0, 3));
 
-		golden_amber = registerItem("golden_amber", new Item().setCreativeTab(AetherCreativeTabs.tabMaterials));
+		golden_amber = registerItem("golden_amber", new Item(), AetherCreativeTabs.tabMaterials);
 
-		blueberry = registerItem("blueberry", new ItemAetherFood(2, false));
-		orange = registerItem("orange", new ItemAetherFood(4, false));
+		blueberry = registerItem("blueberry", new ItemAetherFood(2, false), AetherCreativeTabs.tabConsumables);
+		orange = registerItem("orange", new ItemAetherFood(4, false), AetherCreativeTabs.tabConsumables);
+	}
+
+	private static Item registerItem(String name, Item item, CreativeTabs tab)
+	{
+		item.setCreativeTab(tab);
+
+		return registerItem(name, item);
 	}
 
 	private static Item registerItem(String name, Item item)

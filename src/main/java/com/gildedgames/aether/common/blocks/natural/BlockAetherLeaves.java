@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.client.render.effects.EntityGoldenFX;
-import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
@@ -53,8 +52,6 @@ public class BlockAetherLeaves extends Block implements IShearable, IAetherBlock
 		this.setTickRandomly(true);
 
 		this.setStepSound(Block.soundTypeGrass);
-
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, BLUE_SKYROOT_LEAVES)
 				.withProperty(PROPERTY_DECAYABLE, Boolean.TRUE).withProperty(PROPERTY_CHECK_DECAY, Boolean.TRUE));
