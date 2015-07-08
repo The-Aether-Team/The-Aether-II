@@ -37,17 +37,15 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 
 		public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
 		{
-			entity.fallDistance = 0;
-
 			if (entity.motionY < 0)
 			{
 				entity.motionY *= 0.005D;
 			}
 		}
 
-		public AxisAlignedBB getBoundingBox(BlockPos pos, double maxX, double maxY, double maxZ)
+		public AxisAlignedBB getBoundingBox(BlockPos pos)
 		{
-			return new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + maxX, pos.getY(), pos.getZ() + maxZ);
+			return new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
 		}
 	}
 
@@ -59,8 +57,6 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
 				{
 					entity.motionY = 2.0D;
-
-					super.onEntityCollision(world, pos, state, entity);
 				}
 			},
 			GREEN_AERCLOUD = new AercloudVariant(2, "green")
@@ -68,10 +64,10 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 				@Override
 				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
 				{
-					EnumFacing randomSide = EnumFacing.random(world.rand);
+					EnumFacing facing = EnumFacing.random(world.rand);
 
-					entity.motionX = randomSide.getFrontOffsetX() * 2.5D;
-					entity.motionZ = randomSide.getFrontOffsetZ() * 2.5D;
+					entity.motionX = facing.getFrontOffsetX() * 2.5D;
+					entity.motionZ = facing.getFrontOffsetZ() * 2.5D;
 				}
 			},
 			GOLDEN_AERCLOUD = new AercloudVariant(3, "golden")
@@ -83,7 +79,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 				}
 
 				@Override
-				public AxisAlignedBB getBoundingBox(BlockPos pos, double maxX, double maxY, double maxZ)
+				public AxisAlignedBB getBoundingBox(BlockPos pos)
 				{
 					return null;
 				}
@@ -120,11 +116,11 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
+	public void getSubBlocks(Item item, CreativeTabs tab, List list)
 	{
 		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
-			list.add(new ItemStack(itemIn, 1, variant.getMeta()));
+			list.add(new ItemStack(item, 1, variant.getMeta()));
 		}
 	}
 
@@ -132,39 +128,27 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 	@SideOnly(Side.CLIENT)
 	public EnumWorldBlockLayer getBlockLayer()
 	{
-		return  EnumWorldBlockLayer.TRANSLUCENT;
+		return EnumWorldBlockLayer.TRANSLUCENT;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
+	public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
-		BlockPos otherBlock = pos.offset(side.getOpposite());
+		BlockPos adjacentBlock = pos.offset(side.getOpposite());
 
-		if (worldIn.getBlockState(otherBlock).getBlock() == worldIn.getBlockState(pos).getBlock())
-		{
-			if (worldIn.getBlockState(otherBlock).getValue(PROPERTY_VARIANT) == worldIn.getBlockState(pos).getValue(PROPERTY_VARIANT))
-			{
-				return false;
-			}
-		}
+		return world.getBlockState(adjacentBlock) != world.getBlockState(pos) && super.shouldSideBeRendered(world, pos, side);
 
-		return super.shouldSideBeRendered(worldIn, pos, side);
 	}
 
 	@Override
 	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
-		if (entity.isSneaking())
-		{
-			BlockAercloud.COLD_AERCLOUD.onEntityCollision(world, pos, state, entity);
-		}
-		else
-		{
-			AercloudVariant variant = (AercloudVariant) state.getValue(PROPERTY_VARIANT);
+		AercloudVariant variant = entity.isSneaking() ? BlockAercloud.COLD_AERCLOUD : (AercloudVariant) state.getValue(PROPERTY_VARIANT);
 
-			variant.onEntityCollision(world, pos, state, entity);
-		}
+		entity.fallDistance = 0;
+
+		variant.onEntityCollision(world, pos, state, entity);
 	}
 
 	@Override
@@ -199,17 +183,17 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 	}
 
 	@Override
-	public boolean isPassable(IBlockAccess worldIn, BlockPos pos)
+	public boolean isPassable(IBlockAccess world, BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
+	public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
 	{
 		AercloudVariant variant = (AercloudVariant) state.getValue(PROPERTY_VARIANT);
 
-		return variant.getBoundingBox(pos, 1, 1, 1);
+		return variant.getBoundingBox(pos);
 	}
 
 	@Override
@@ -247,7 +231,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
 		return this.getStateFromMeta(meta).withProperty(PROPERTY_FACING, placer.getHorizontalFacing().getOpposite());
 	}

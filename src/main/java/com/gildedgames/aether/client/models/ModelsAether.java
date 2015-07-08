@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -45,6 +46,9 @@ public class ModelsAether
 		addVariantNames(BlocksAether.blueberry_bush, "blueberry_bush_stem", "blueberry_bush_ripe");
 
 		addVariantNames(BlocksAether.aether_flower, "white_rose", "purple_flower");
+
+		addVariantNames(BlocksAether.aether_sapling, "blue_skyroot_sapling", "green_skyroot_sapling", "dark_blue_skyroot_sapling",
+				"golden_oak_sapling", "purple_crystal_sapling");
 	}
 
 	/**
@@ -132,21 +136,11 @@ public class ModelsAether
 		registerBlockModel(BlocksAether.aether_flower, BlockAetherFlower.WHITE_ROSE.getMeta(), Aether.getResource("white_rose"));
 		registerBlockModel(BlocksAether.aether_flower, BlockAetherFlower.PURPLE_FLOWER.getMeta(), Aether.getResource("purple_flower"));
 
-		registerBlockModel(BlocksAether.aether_dirt);
-		registerBlockModel(BlocksAether.skyroot_planks);
-		registerBlockModel(BlocksAether.ambrosium_ore);
-		registerBlockModel(BlocksAether.zanite_ore);
-		registerBlockModel(BlocksAether.gravitite_ore);
-		registerBlockModel(BlocksAether.continuum_ore);
-		registerBlockModel(BlocksAether.aether_portal);
-		registerBlockModel(BlocksAether.tall_aether_grass);
-		registerBlockModel(BlocksAether.quicksoil);
-		registerBlockModel(BlocksAether.skyroot_crafting_table);
-		registerBlockModel(BlocksAether.orange_tree);
-		registerBlockModel(BlocksAether.altar);
-		registerBlockModel(BlocksAether.icestone);
-		registerBlockModel(BlocksAether.aerogel);
-		registerBlockModel(BlocksAether.zanite_block);
+		registerBlockModel(BlocksAether.aether_sapling, BlockAetherSapling.BLUE_SKYROOT_SAPLING.getMeta(), Aether.getResource("blue_skyroot_sapling"));
+		registerBlockModel(BlocksAether.aether_sapling, BlockAetherSapling.DARK_BLUE_SKYROOT_SAPLING.getMeta(), Aether.getResource("dark_blue_skyroot_sapling"));
+		registerBlockModel(BlocksAether.aether_sapling, BlockAetherSapling.GOLDEN_OAK_SAPLING.getMeta(), Aether.getResource("golden_oak_sapling"));
+		registerBlockModel(BlocksAether.aether_sapling, BlockAetherSapling.GREEN_SKYROOT_SAPLING.getMeta(), Aether.getResource("green_skyroot_sapling"));
+		registerBlockModel(BlocksAether.aether_sapling, BlockAetherSapling.PURPLE_CRYSTAL_SAPLING.getMeta(), Aether.getResource("purple_crystal_sapling"));
 
 		registerItemModel(ItemsAether.skyroot_stick);
 		registerItemModel(ItemsAether.ambrosium_shard);

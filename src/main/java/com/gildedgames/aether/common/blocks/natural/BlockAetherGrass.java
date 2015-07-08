@@ -30,7 +30,9 @@ public class BlockAetherGrass extends Block implements IAetherBlockWithSubtypes
 	public BlockAetherGrass()
 	{
 		super(Material.grass);
+
 		this.setStepSound(Block.soundTypeGrass);
+
 		this.setHardness(0.5F);
 		this.setTickRandomly(true);
 
@@ -40,11 +42,11 @@ public class BlockAetherGrass extends Block implements IAetherBlockWithSubtypes
 	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
+	public void getSubBlocks(Item item, CreativeTabs tab, List list)
 	{
 		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
-			list.add(new ItemStack(itemIn, 1, variant.getMeta()));
+			list.add(new ItemStack(item, 1, variant.getMeta()));
 		}
 	}
 

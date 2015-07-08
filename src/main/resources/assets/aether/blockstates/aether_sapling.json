@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"variant=blue_skyroot": {
+			"model": "aether:blue_skyroot_sapling"
+		},
+		"variant=green_skyroot": {
+			"model": "aether:green_skyroot_sapling"
+		},
+		"variant=dark_blue_skyroot": {
+			"model": "aether:dark_blue_skyroot_sapling"
+		},
+		"variant=golden_oak": {
+			"model": "aether:golden_oak_sapling"
+		},
+		"variant=purple_crystal": {
+			"model": "aether:purple_crystal_sapling"
+		}
+	}
+}

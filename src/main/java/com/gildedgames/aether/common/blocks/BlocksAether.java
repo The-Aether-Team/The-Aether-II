@@ -17,6 +17,7 @@ import com.gildedgames.aether.common.blocks.natural.ores.BlockContinuumOre;
 import com.gildedgames.aether.common.blocks.natural.ores.BlockGravititeOre;
 import com.gildedgames.aether.common.blocks.natural.ores.BlockZaniteOre;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
@@ -74,6 +75,8 @@ public class BlocksAether
 
 	public static Block zanite_block;
 
+	public static Block aether_sapling;
+
 	public static void preInit()
 	{
 		aether_dirt = registerBlock("aether_dirt", new BlockAether(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f), AetherCreativeTabs.tabBlocks);
@@ -120,6 +123,8 @@ public class BlocksAether
 		aerogel = registerBlock("aerogel", new BlockAerogel(), AetherCreativeTabs.tabBlocks);
 
 		zanite_block = registerBlock("zanite_block", new BlockAether(Material.rock).setHardness(5f).setStepSound(Block.soundTypeStone), AetherCreativeTabs.tabBlocks);
+
+		aether_sapling = registerBlockWithItem("aether_sapling", new BlockAetherSapling(), ItemBlockAetherSubtypes.class, AetherCreativeTabs.tabBlocks);
 	}
 
 	private static Block registerBlock(String name, Block block, CreativeTabs tab)

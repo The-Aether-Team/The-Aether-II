@@ -1,0 +1,6 @@
+{
+	"parent": "block/cross",
+	"textures": {
+		"cross": "aether:blocks/golden_oak_sapling"
+	}
+}

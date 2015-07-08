@@ -6,37 +6,45 @@ import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVaria
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
+import java.util.Random;
 
-public class BlockAetherFlower extends BlockBush implements IAetherBlockWithSubtypes
+public class BlockAetherSapling extends BlockBush implements IGrowable, IAetherBlockWithSubtypes
 {
 	public static final BlockVariant
-			WHITE_ROSE = new BlockVariant(0, "white_rose"),
-			PURPLE_FLOWER = new BlockVariant(1, "purple_flower");
+			BLUE_SKYROOT_SAPLING = new BlockVariant(0, "blue_skyroot"),
+			GREEN_SKYROOT_SAPLING = new BlockVariant(1, "green_skyroot"),
+			DARK_BLUE_SKYROOT_SAPLING = new BlockVariant(2, "dark_blue_skyroot"),
+			GOLDEN_OAK_SAPLING = new BlockVariant(3, "golden_oak"),
+			PURPLE_CRYSTAL_SAPLING = new BlockVariant(4, "purple_crystal");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", WHITE_ROSE, PURPLE_FLOWER);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BLUE_SKYROOT_SAPLING, GREEN_SKYROOT_SAPLING, DARK_BLUE_SKYROOT_SAPLING,
+			GOLDEN_OAK_SAPLING, PURPLE_CRYSTAL_SAPLING);
 
-	public BlockAetherFlower()
+	public BlockAetherSapling()
 	{
-		super(Material.leaves);
+		super(Material.plants);
 
 		this.setStepSound(Block.soundTypeGrass);
 
-		this.setBlockBounds(0.3f, 0.0F, 0.3f, 0.7f, 0.6f, 0.7f);
+		this.setBlockBounds(0.1f, 0.0F, 0.1f, 0.9f, 0.8f, 0.9f);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, WHITE_ROSE));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, BLUE_SKYROOT_SAPLING));
 	}
 
 	@Override
@@ -48,6 +56,12 @@ public class BlockAetherFlower extends BlockBush implements IAetherBlockWithSubt
 		{
 			list.add(new ItemStack(item, 1, variant.getMeta()));
 		}
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
+	{
+		return null;
 	}
 
 	@Override
@@ -70,6 +84,12 @@ public class BlockAetherFlower extends BlockBush implements IAetherBlockWithSubt
 	}
 
 	@Override
+	public boolean isPassable(IBlockAccess world, BlockPos pos)
+	{
+		return true;
+	}
+
+	@Override
 	public boolean canPlaceBlockAt(World world, BlockPos pos)
 	{
 		return this.canPlaceBlockOn(world.getBlockState(pos.down()).getBlock());
@@ -79,12 +99,6 @@ public class BlockAetherFlower extends BlockBush implements IAetherBlockWithSubt
 	public boolean canPlaceBlockOn(Block ground)
 	{
 		return ground == BlocksAether.aether_grass || ground == this;
-	}
-
-	@Override
-	public int damageDropped(IBlockState state)
-	{
-		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
 	}
 
 	@Override
@@ -103,6 +117,24 @@ public class BlockAetherFlower extends BlockBush implements IAetherBlockWithSubt
 	protected BlockState createBlockState()
 	{
 		return new BlockState(this, PROPERTY_VARIANT);
+	}
+
+	@Override
+	public boolean canGrow(World world, BlockPos pos, IBlockState state, boolean isClient)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean canUseBonemeal(World world, Random rand, BlockPos pos, IBlockState state)
+	{
+		return false;
+	}
+
+	@Override
+	public void grow(World world, Random rand, BlockPos pos, IBlockState state)
+	{
+		// TODO
 	}
 
 	@Override

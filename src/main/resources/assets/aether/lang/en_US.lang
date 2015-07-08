@@ -37,6 +37,11 @@ tile.altar.name=Altar
 tile.icestone.name=Icestone
 tile.aerogel.name=Aerogel
 tile.zanite_block.name=Zanite Block
+tile.aether_sapling.blue_skyroot.name=Blue Skyroot Sapling
+tile.aether_sapling.green_skyroot.name=Green Skyroot Sapling
+tile.aether_sapling.dark_blue_skyroot.name=Dark Blue Skyroot Sapling
+tile.aether_sapling.golden_oak.name=Golden Oak Sapling
+tile.aether_sapling.purple_crystal.name=Purple Crystal Sapling
 
 # Aether Items
 item.skyroot_stick.name=Skyroot Stick
