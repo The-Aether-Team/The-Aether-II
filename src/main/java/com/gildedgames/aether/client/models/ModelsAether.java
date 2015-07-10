@@ -153,6 +153,22 @@ public class ModelsAether
 		registerBlockModel(BlocksAether.sentry_stone, BlockDungeon.NORMAL, Aether.getResource("sentry_stone"));
 		registerBlockModel(BlocksAether.sentry_stone, BlockDungeon.DIVINE, Aether.getResource("divine_sentry_stone"));
 
+		registerBlockModel(BlocksAether.aether_dirt);
+		registerBlockModel(BlocksAether.skyroot_planks);
+		registerBlockModel(BlocksAether.ambrosium_ore);
+		registerBlockModel(BlocksAether.zanite_ore);
+		registerBlockModel(BlocksAether.gravitite_ore);
+		registerBlockModel(BlocksAether.continuum_ore);
+		registerBlockModel(BlocksAether.aether_portal);
+		registerBlockModel(BlocksAether.tall_aether_grass);
+		registerBlockModel(BlocksAether.quicksoil);
+		registerBlockModel(BlocksAether.skyroot_crafting_table);
+		registerBlockModel(BlocksAether.orange_tree);
+		registerBlockModel(BlocksAether.altar);
+		registerBlockModel(BlocksAether.icestone);
+		registerBlockModel(BlocksAether.aerogel);
+		registerBlockModel(BlocksAether.zanite_block);
+
 		registerItemModel(ItemsAether.skyroot_stick);
 		registerItemModel(ItemsAether.ambrosium_shard);
 		registerItemModel(ItemsAether.continuum_orb);
