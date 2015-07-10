@@ -138,7 +138,6 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 		BlockPos adjacentBlock = pos.offset(side.getOpposite());
 
 		return world.getBlockState(adjacentBlock) != world.getBlockState(pos) && super.shouldSideBeRendered(world, pos, side);
-
 	}
 
 	@Override

@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"is_divine=false": {
+			"model": "aether:carved_stone"
+		},
+		"is_divine=true": {
+			"model": "aether:divine_carved_stone"
+		}
+	}
+}

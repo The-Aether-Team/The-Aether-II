@@ -42,6 +42,10 @@ tile.aether_sapling.green_skyroot.name=Green Skyroot Sapling
 tile.aether_sapling.dark_blue_skyroot.name=Dark Blue Skyroot Sapling
 tile.aether_sapling.golden_oak.name=Golden Oak Sapling
 tile.aether_sapling.purple_crystal.name=Purple Crystal Sapling
+tile.carved_stone.normal.name=Carved Stone
+tile.carved_stone.divine.name=Divine Carved Stone
+tile.sentry_stone.normal.name=Sentry Stone
+tile.sentry_stone.divine.name=Divine Sentry Stone
 
 # Aether Items
 item.skyroot_stick.name=Skyroot Stick

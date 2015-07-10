@@ -2,6 +2,7 @@ package com.gildedgames.aether.client.models;
 
 import com.gildedgames.aether.common.Aether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.dungeon.BlockDungeon;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
@@ -49,6 +50,10 @@ public class ModelsAether
 
 		addVariantNames(BlocksAether.aether_sapling, "blue_skyroot_sapling", "green_skyroot_sapling", "dark_blue_skyroot_sapling",
 				"golden_oak_sapling", "purple_crystal_sapling");
+
+		addVariantNames(BlocksAether.carved_stone, "carved_stone", "divine_carved_stone");
+
+		addVariantNames(BlocksAether.sentry_stone, "sentry_stone", "divine_sentry_stone");
 	}
 
 	/**
@@ -141,6 +146,12 @@ public class ModelsAether
 		registerBlockModel(BlocksAether.aether_sapling, BlockAetherSapling.GOLDEN_OAK_SAPLING.getMeta(), Aether.getResource("golden_oak_sapling"));
 		registerBlockModel(BlocksAether.aether_sapling, BlockAetherSapling.GREEN_SKYROOT_SAPLING.getMeta(), Aether.getResource("green_skyroot_sapling"));
 		registerBlockModel(BlocksAether.aether_sapling, BlockAetherSapling.PURPLE_CRYSTAL_SAPLING.getMeta(), Aether.getResource("purple_crystal_sapling"));
+
+		registerBlockModel(BlocksAether.carved_stone, BlockDungeon.NORMAL, Aether.getResource("carved_stone"));
+		registerBlockModel(BlocksAether.carved_stone, BlockDungeon.DIVINE, Aether.getResource("divine_carved_stone"));
+
+		registerBlockModel(BlocksAether.sentry_stone, BlockDungeon.NORMAL, Aether.getResource("sentry_stone"));
+		registerBlockModel(BlocksAether.sentry_stone, BlockDungeon.DIVINE, Aether.getResource("divine_sentry_stone"));
 
 		registerItemModel(ItemsAether.skyroot_stick);
 		registerItemModel(ItemsAether.ambrosium_shard);

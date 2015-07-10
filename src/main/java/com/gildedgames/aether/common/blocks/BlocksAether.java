@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootWorkbench;
+import com.gildedgames.aether.common.blocks.dungeon.BlockDungeon;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAerogel;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
@@ -77,6 +78,10 @@ public class BlocksAether
 
 	public static Block aether_sapling;
 
+	public static Block carved_stone;
+
+	public static Block sentry_stone;
+
 	public static void preInit()
 	{
 		aether_dirt = registerBlock("aether_dirt", new BlockAether(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f), AetherCreativeTabs.tabBlocks);
@@ -125,6 +130,10 @@ public class BlocksAether
 		zanite_block = registerBlock("zanite_block", new BlockAether(Material.rock).setHardness(5f).setStepSound(Block.soundTypeStone), AetherCreativeTabs.tabBlocks);
 
 		aether_sapling = registerBlockWithItem("aether_sapling", new BlockAetherSapling(), ItemBlockAetherSubtypes.class, AetherCreativeTabs.tabBlocks);
+
+		carved_stone = registerBlockWithItem("carved_stone", new BlockDungeon(Material.rock), ItemBlockAetherSubtypes.class, AetherCreativeTabs.tabBlocks);
+
+		sentry_stone = registerBlockWithItem("sentry_stone", new BlockDungeon(Material.rock).setLightLevel(0.75f), ItemBlockAetherSubtypes.class, AetherCreativeTabs.tabBlocks);
 	}
 
 	private static Block registerBlock(String name, Block block, CreativeTabs tab)
