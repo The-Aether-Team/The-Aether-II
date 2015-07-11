@@ -21,6 +21,7 @@ import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
@@ -233,6 +234,12 @@ public class ModelsAether
 		registerItemModel(ItemsAether.skyroot_water_bucket);
 		registerItemModel(ItemsAether.skyroot_milk_bucket);
 		registerItemModel(ItemsAether.skyroot_poison_bucket);
+
+		registerItemModel(ItemsAether.aerwhale_music_disc);
+		registerItemModel(ItemsAether.labyrinth_music_disc);
+		registerItemModel(ItemsAether.moa_music_disc);
+		registerItemModel(ItemsAether.valkyrie_music_disc);
+		registerItemModel(ItemsAether.recording_892);
 	}
 
 	/**

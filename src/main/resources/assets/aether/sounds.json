@@ -4,5 +4,50 @@
 		"sounds": [
 			"aeportal/portal"
 		]
+	},
+	"records.aerwhale": {
+		"category": "record",
+		"sounds": [
+			{
+				"name": "aerecord/aerwhale",
+				"stream": true
+			}
+		]
+	},
+	"records.moa": {
+		"category": "record",
+		"sounds": [
+			{
+				"name": "aerecord/approaches",
+				"stream": true
+			}
+		]
+	},
+	"records.valkyrie": {
+		"category": "record",
+		"sounds": [
+			{
+				"name": "aerecord/ascending_dawn",
+				"stream": true
+			}
+		]
+	},
+	"records.labyrinth": {
+		"category": "record",
+		"sounds": [
+			{
+				"name": "aerecord/demise",
+				"stream": true
+			}
+		]
+	},
+	"records.recording_892": {
+		"category": "record",
+		"sounds": [
+			{
+				"name": "aerecord/recording_892",
+				"stream": true
+			}
+		]
 	}
 }

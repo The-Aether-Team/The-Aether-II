@@ -99,6 +99,19 @@ item.skyroot_bucket.name=Skyroot Bucket
 item.skyroot_water_bucket.name=Skyroot Water Bucket
 item.skyroot_milk_bucket.name=Skyroot Milk Bucket
 item.skyroot_poison_bucket.name=Skyroot Poison Bucket
+item.valkyrie_music_disc.name=Valkyrie Music Disc
+item.labyrinth_music_disc.name=Labyrinth Music Disc
+item.moa_music_disc.name=Moa Music Disc
+item.aerwhale_music_disc.name=Aerwhale Music Disc
+item.recording_892.name=Recording #892
+
+# Records
+item.aether_record.moa.desc=Emile van Krieken - Approaches
+item.aether_record.aerwhale.desc=AetherAudio - Aerwhale
+item.aether_record.labyrinth.desc=Moorziey - Demise
+item.aether_record.valkyrie.desc=Emile van Krieken - Ascending Dawn
+item.aether_record.recording_892.desc=Emile van Krieken - ???
+
 
 # Creative Tabs
 itemGroup.aetherBlocks=Aether Blocks
