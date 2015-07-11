@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class BlockAetherFlower extends BlockBush implements IAetherBlockWithSubtypes
+public class BlockAetherFlower extends BlockAetherPlant implements IAetherBlockWithSubtypes
 {
 	public static final BlockVariant
 			WHITE_ROSE = new BlockVariant(0, "white_rose"),
@@ -48,37 +48,6 @@ public class BlockAetherFlower extends BlockBush implements IAetherBlockWithSubt
 		{
 			list.add(new ItemStack(item, 1, variant.getMeta()));
 		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
-	{
-		return EnumWorldBlockLayer.CUTOUT;
-	}
-
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isFullCube()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean canPlaceBlockAt(World world, BlockPos pos)
-	{
-		return this.canPlaceBlockOn(world.getBlockState(pos.down()).getBlock());
-	}
-
-	@Override
-	public boolean canPlaceBlockOn(Block ground)
-	{
-		return ground == BlocksAether.aether_grass || ground == this;
 	}
 
 	@Override

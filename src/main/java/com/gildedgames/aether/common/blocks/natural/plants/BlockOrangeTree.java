@@ -26,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockOrangeTree extends BlockBush implements IGrowable
+public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 {
 	private static final int STAGE_COUNT = 5;
 
@@ -123,37 +123,6 @@ public class BlockOrangeTree extends BlockBush implements IGrowable
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
-	{
-		return null;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
-	{
-		return EnumWorldBlockLayer.CUTOUT;
-	}
-
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isFullCube()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isPassable(IBlockAccess world, BlockPos pos)
-	{
-		return true;
-	}
-
-	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
 		int isTop = (meta / STAGE_COUNT);
@@ -175,18 +144,6 @@ public class BlockOrangeTree extends BlockBush implements IGrowable
 	protected BlockState createBlockState()
 	{
 		return new BlockState(this, PROPERTY_IS_TOP_BLOCK, PROPERTY_STAGE);
-	}
-
-	@Override
-	public boolean canPlaceBlockAt(World world, BlockPos pos)
-	{
-		return this.canPlaceBlockOn(world.getBlockState(pos.down()).getBlock());
-	}
-
-	@Override
-	public boolean canPlaceBlockOn(Block ground)
-	{
-		return ground == BlocksAether.aether_grass || ground == this;
 	}
 
 	@Override

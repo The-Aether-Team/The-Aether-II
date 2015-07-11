@@ -24,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
-public class BlockAetherSapling extends BlockBush implements IGrowable, IAetherBlockWithSubtypes
+public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, IAetherBlockWithSubtypes
 {
 	public static final BlockVariant
 			BLUE_SKYROOT_SAPLING = new BlockVariant(0, "blue_skyroot"),
@@ -56,49 +56,6 @@ public class BlockAetherSapling extends BlockBush implements IGrowable, IAetherB
 		{
 			list.add(new ItemStack(item, 1, variant.getMeta()));
 		}
-	}
-
-	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
-	{
-		return null;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
-	{
-		return EnumWorldBlockLayer.CUTOUT;
-	}
-
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isFullCube()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isPassable(IBlockAccess world, BlockPos pos)
-	{
-		return true;
-	}
-
-	@Override
-	public boolean canPlaceBlockAt(World world, BlockPos pos)
-	{
-		return this.canPlaceBlockOn(world.getBlockState(pos.down()).getBlock());
-	}
-
-	@Override
-	public boolean canPlaceBlockOn(Block ground)
-	{
-		return ground == BlocksAether.aether_grass || ground == this;
 	}
 
 	@Override

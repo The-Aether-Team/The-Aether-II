@@ -40,7 +40,7 @@ public class WorldGenAetherTallGrass extends WorldGenerator
 		{
 			BlockPos randomPos = pos.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
 
-			if (world.isAirBlock(randomPos) && ((BlockTallAetherGrass) BlocksAether.tall_aether_grass).canBlockStay(world, randomPos, this.state))
+			if (world.isAirBlock(randomPos) && BlocksAether.tall_aether_grass.canPlaceBlockAt(world, randomPos))
 			{
 				world.setBlockState(randomPos, this.state, 2);
 			}

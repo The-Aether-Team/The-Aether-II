@@ -28,7 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
-public class BlockBlueberryBush extends BlockBush implements IAetherBlockWithSubtypes, IGrowable
+public class BlockBlueberryBush extends BlockAetherPlant implements IAetherBlockWithSubtypes, IGrowable
 {
 	public static final int
 			BERRY_BUSH_STEM = 0,
@@ -137,25 +137,6 @@ public class BlockBlueberryBush extends BlockBush implements IAetherBlockWithSub
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
-	{
-		return EnumWorldBlockLayer.CUTOUT;
-	}
-
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isFullCube()
-	{
-		return false;
-	}
-
-	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
 		return this.getDefaultState().withProperty(PROPERTY_HARVESTABLE, meta == BERRY_BUSH_RIPE);
@@ -171,18 +152,6 @@ public class BlockBlueberryBush extends BlockBush implements IAetherBlockWithSub
 	protected BlockState createBlockState()
 	{
 		return new BlockState(this, PROPERTY_HARVESTABLE);
-	}
-
-	@Override
-	public boolean canPlaceBlockAt(World world, BlockPos pos)
-	{
-		return this.canPlaceBlockOn(world.getBlockState(pos.down()).getBlock());
-	}
-
-	@Override
-	public boolean canPlaceBlockOn(Block ground)
-	{
-		return ground == BlocksAether.aether_grass || ground == this;
 	}
 
 	@Override

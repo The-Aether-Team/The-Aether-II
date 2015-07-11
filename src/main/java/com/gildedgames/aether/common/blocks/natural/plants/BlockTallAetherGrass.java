@@ -17,7 +17,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
-public class BlockTallAetherGrass extends BlockBush implements IShearable
+public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 {
 	public BlockTallAetherGrass()
 	{
@@ -54,18 +54,6 @@ public class BlockTallAetherGrass extends BlockBush implements IShearable
 	public Block.EnumOffsetType getOffsetType()
 	{
 		return Block.EnumOffsetType.XYZ;
-	}
-
-	@Override
-	public boolean canPlaceBlockAt(World world, BlockPos pos)
-	{
-		return this.canPlaceBlockOn(world.getBlockState(pos.down()).getBlock());
-	}
-
-	@Override
-	public boolean canPlaceBlockOn(Block ground)
-	{
-		return ground == BlocksAether.aether_grass || ground == this;
 	}
 
 	@Override
