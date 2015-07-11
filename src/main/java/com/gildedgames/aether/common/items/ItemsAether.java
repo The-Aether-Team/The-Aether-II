@@ -11,6 +11,7 @@ import com.gildedgames.aether.common.items.tools.ItemAetherPickaxe;
 import com.gildedgames.aether.common.items.tools.ItemAetherShovel;
 import com.gildedgames.aether.common.items.tools.ItemAetherSword;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -43,6 +44,8 @@ public class ItemsAether
 	public static Item golden_amber;
 
 	public static Item blueberry, orange;
+
+	public static Item skyroot_bucket, skyroot_water_bucket, skyroot_milk_bucket, skyroot_poison_bucket;
 
 	public static void preInit()
 	{
@@ -105,6 +108,11 @@ public class ItemsAether
 
 		blueberry = registerItem("blueberry", new ItemAetherFood(2, false), AetherCreativeTabs.tabConsumables);
 		orange = registerItem("orange", new ItemAetherFood(4, false), AetherCreativeTabs.tabConsumables);
+
+		skyroot_bucket = registerItem("skyroot_bucket", new ItemSkyrootBucket(Blocks.air), AetherCreativeTabs.tabTools);
+		skyroot_water_bucket = registerItem("skyroot_water_bucket", new ItemSkyrootBucket(Blocks.flowing_water), AetherCreativeTabs.tabTools);
+		skyroot_milk_bucket = registerItem("skyroot_milk_bucket", new ItemSkyrootConsumableBucket(), AetherCreativeTabs.tabConsumables);
+		skyroot_poison_bucket = registerItem("skyroot_poison_bucket", new ItemSkyrootConsumableBucket(), AetherCreativeTabs.tabConsumables);
 	}
 
 	private static Item registerItem(String name, Item item, CreativeTabs tab)

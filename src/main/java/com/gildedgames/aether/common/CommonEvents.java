@@ -2,13 +2,17 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.player.EntityInteractEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -86,6 +90,24 @@ public class CommonEvents
 
 				event.entity.motionX *= 1.03D;
 				event.entity.motionZ *= 1.03D;
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public void onPlayerInteract(EntityInteractEvent event)
+	{
+		ItemStack itemstack = event.entityPlayer.inventory.getCurrentItem();
+
+		if (itemstack != null && itemstack.getItem() == ItemsAether.skyroot_bucket && !event.entityPlayer.capabilities.isCreativeMode)
+		{
+			if (itemstack.stackSize-- == 1)
+			{
+				event.entityPlayer.inventory.setInventorySlotContents(event.entityPlayer.inventory.currentItem, new ItemStack(ItemsAether.skyroot_milk_bucket));
+			}
+			else if (!event.entityPlayer.inventory.addItemStackToInventory(new ItemStack(ItemsAether.skyroot_milk_bucket)))
+			{
+				event.entityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(ItemsAether.skyroot_milk_bucket, 1, 0), false);
 			}
 		}
 	}

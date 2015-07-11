@@ -228,6 +228,11 @@ public class ModelsAether
 
 		registerItemModel(ItemsAether.blueberry);
 		registerItemModel(ItemsAether.orange);
+
+		registerItemModel(ItemsAether.skyroot_bucket);
+		registerItemModel(ItemsAether.skyroot_water_bucket);
+		registerItemModel(ItemsAether.skyroot_milk_bucket);
+		registerItemModel(ItemsAether.skyroot_poison_bucket);
 	}
 
 	/**
