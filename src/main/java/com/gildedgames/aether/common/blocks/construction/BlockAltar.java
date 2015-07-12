@@ -60,12 +60,11 @@ public class BlockAltar extends Block implements ITileEntityProvider
 		{
 			if (stack != null)
 			{
-				if (stack.getItem() == ItemsAether.ambrosium_shard)
+				if (stack.getItem() == ItemsAether.ambrosium_shard && altar.getAmbrosiumCount() < 20)
 				{
-					int count = player.isSneaking() ? stack.stackSize : 1;
-					altar.setAmbrosiumCount(altar.getAmbrosiumCount() + count);
+					altar.setAmbrosiumCount(altar.getAmbrosiumCount() + 1);
 
-					stack.stackSize -= count;
+					stack.stackSize -= 1;
 				}
 				else if (altar.getItemToEnchant() == null)
 				{
