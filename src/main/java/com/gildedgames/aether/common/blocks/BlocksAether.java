@@ -84,6 +84,8 @@ public class BlocksAether
 	public static Block carved_stone;
 
 	public static Block sentry_stone;
+	
+	public static Block holystone_brick;
 
 	public static void preInit()
 	{
@@ -139,6 +141,8 @@ public class BlocksAether
 		carved_stone = registerBlockWithItem("carved_stone", new BlockDungeon(Material.rock), ItemBlockAetherSubtypes.class, AetherCreativeTabs.tabBlocks);
 
 		sentry_stone = registerBlockWithItem("sentry_stone", new BlockDungeon(Material.rock).setLightLevel(0.75f), ItemBlockAetherSubtypes.class, AetherCreativeTabs.tabBlocks);
+		
+		holystone_brick = registerBlock("holystone_brick", new BlockAether(Material.rock), AetherCreativeTabs.tabBlocks);
 	}
 
 	private static Block registerBlock(String name, Block block, CreativeTabs tab)

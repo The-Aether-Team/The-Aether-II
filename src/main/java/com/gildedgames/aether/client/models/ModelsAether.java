@@ -175,6 +175,7 @@ public class ModelsAether
 		registerBlockModel(BlocksAether.aerogel);
 		registerBlockModel(BlocksAether.zanite_block);
 		registerBlockModel(BlocksAether.enchanted_gravitite);
+		registerBlockModel(BlocksAether.holystone_brick);
 
 		registerItemModel(ItemsAether.skyroot_stick);
 		registerItemModel(ItemsAether.ambrosium_shard);
