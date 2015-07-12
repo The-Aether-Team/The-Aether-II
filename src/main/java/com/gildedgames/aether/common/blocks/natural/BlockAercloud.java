@@ -45,7 +45,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 
 		public AxisAlignedBB getBoundingBox(BlockPos pos)
 		{
-			return new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+			return new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY(), pos.getZ() + 1);
 		}
 	}
 
