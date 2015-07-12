@@ -243,6 +243,8 @@ public class ModelsAether
 		registerItemModel(ItemsAether.valkyrie_music_disc);
 		registerItemModel(ItemsAether.recording_892);
 
+		registerItemModel(ItemsAether.healing_stone);
+
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAltar.class, new TileEntityAltarRenderer());
 	}
 

@@ -104,6 +104,7 @@ item.labyrinth_music_disc.name=Labyrinth Music Disc
 item.moa_music_disc.name=Moa Music Disc
 item.aerwhale_music_disc.name=Aerwhale Music Disc
 item.recording_892.name=Recording #892
+item.healing_stone.name=Healing Stone
 
 # Records
 item.aether_record.moa.desc=Emile van Krieken - Approaches

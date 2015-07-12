@@ -13,6 +13,8 @@ import com.gildedgames.aether.common.items.tools.ItemAetherSword;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
+import net.minecraft.potion.Potion;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemsAether
@@ -48,6 +50,8 @@ public class ItemsAether
 	public static Item skyroot_bucket, skyroot_water_bucket, skyroot_milk_bucket, skyroot_poison_bucket;
 
 	public static Item valkyrie_music_disc, labyrinth_music_disc, moa_music_disc, aerwhale_music_disc, recording_892;
+
+	public static Item healing_stone;
 
 	public static void preInit()
 	{
@@ -121,6 +125,8 @@ public class ItemsAether
 		moa_music_disc = registerItem("moa_music_disc", new ItemAetherRecord("moa"), AetherCreativeTabs.tabTools);
 		aerwhale_music_disc = registerItem("aerwhale_music_disc", new ItemAetherRecord("aerwhale"), AetherCreativeTabs.tabTools);
 		recording_892 = registerItem("recording_892", new ItemAetherRecord("recording_892"), AetherCreativeTabs.tabTools);
+
+		healing_stone = registerItem("healing_stone", new ItemFood(0, 1.2f, false).setAlwaysEdible().setPotionEffect(Potion.regeneration.getId(), 30, 0, 1.0f), AetherCreativeTabs.tabConsumables);
 	}
 
 	private static Item registerItem(String name, Item item, CreativeTabs tab)
