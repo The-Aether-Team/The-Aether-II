@@ -28,7 +28,7 @@ public class BlockDungeon extends Block implements IAetherBlockWithSubtypes
 	{
 		IBlockState state = world.getBlockState(pos);
 
-		return (Boolean) state.getValue(PROPERTY_IS_DIVINE) ? -1.0f : this.blockHardness;
+		return state.getBlock() == this && (Boolean) state.getValue(PROPERTY_IS_DIVINE) ? -1.0f : this.blockHardness;
 	}
 
 	@Override
