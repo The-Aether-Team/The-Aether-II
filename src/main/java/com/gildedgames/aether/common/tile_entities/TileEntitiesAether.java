@@ -4,7 +4,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class TileEntitiesAether
 {
-	public static final String ALTAR_ID = "aether_altar";
+	public static final String ALTAR_ID = "aether.altar";
 
 	public static void preInit()
 	{

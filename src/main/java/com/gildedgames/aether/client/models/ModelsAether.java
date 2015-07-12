@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.models;
 
+import com.gildedgames.aether.client.renderer.tile_entity.TileEntityAltarRenderer;
 import com.gildedgames.aether.common.Aether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.dungeon.BlockDungeon;
@@ -13,6 +14,7 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -21,10 +23,10 @@ import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 import java.util.LinkedHashMap;
 
@@ -240,6 +242,8 @@ public class ModelsAether
 		registerItemModel(ItemsAether.moa_music_disc);
 		registerItemModel(ItemsAether.valkyrie_music_disc);
 		registerItemModel(ItemsAether.recording_892);
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAltar.class, new TileEntityAltarRenderer());
 	}
 
 	/**

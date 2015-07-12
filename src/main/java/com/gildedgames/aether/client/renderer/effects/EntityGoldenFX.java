@@ -1,4 +1,4 @@
-package com.gildedgames.aether.client.render.effects;
+package com.gildedgames.aether.client.renderer.effects;
 
 import net.minecraft.world.World;
 

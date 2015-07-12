@@ -2,17 +2,24 @@ package com.gildedgames.aether.common.recipes;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.recipes.altar.AltarBasicRecipe;
+import com.gildedgames.aether.common.recipes.altar.IAltarRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import java.util.ArrayList;
+
 public class RecipesAether
 {
+	private static ArrayList<IAltarRecipe> altarRecipes = new ArrayList<IAltarRecipe>();
+
 	public static void preInit()
 	{
 		registerNaturalRecipes();
 		registerToolRecipes();
 		registerArmorRecipes();
 		registerUtilityRecipes();
+		registerAltarRecipes();
 	}
 
 	private static void registerNaturalRecipes()
@@ -105,6 +112,11 @@ public class RecipesAether
 				'X', zanite);
 	}
 
+	private static void registerAltarRecipes()
+	{
+		registerAltarRecipe(new AltarBasicRecipe(4, new ItemStack(BlocksAether.holystone, 1), new ItemStack(ItemsAether.recording_892, 1)));
+	}
+
 	private static void registerShapelessRecipe(ItemStack output, Object... stacks)
 	{
 		GameRegistry.addShapelessRecipe(output, stacks);
@@ -113,5 +125,15 @@ public class RecipesAether
 	private static void registerShapedRecipe(ItemStack output, Object... params)
 	{
 		GameRegistry.addShapedRecipe(output, params);
+	}
+
+	private static void registerAltarRecipe(IAltarRecipe recipe)
+	{
+		altarRecipes.add(recipe);
+	}
+
+	public static ArrayList<IAltarRecipe> getAltarRecipes()
+	{
+		return altarRecipes;
 	}
 }

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.construction;
 
-import com.gildedgames.aether.client.render.effects.EntityAetherPortalFX;
+import com.gildedgames.aether.client.renderer.effects.EntityAetherPortalFX;
 import com.gildedgames.aether.common.Aether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.TeleporterAether;
