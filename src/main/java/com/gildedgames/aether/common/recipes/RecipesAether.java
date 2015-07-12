@@ -115,6 +115,7 @@ public class RecipesAether
 	private static void registerAltarRecipes()
 	{
 		registerAltarRecipe(new AltarBasicRecipe(4, new ItemStack(BlocksAether.holystone, 1), new ItemStack(ItemsAether.healing_stone, 1)));
+		registerAltarRecipe(new AltarBasicRecipe(4, new ItemStack(BlocksAether.gravitite_ore, 1), new ItemStack(BlocksAether.enchanted_gravitite, 1)));
 	}
 
 	private static void registerShapelessRecipe(ItemStack output, Object... stacks)

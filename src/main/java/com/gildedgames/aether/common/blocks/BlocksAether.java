@@ -23,6 +23,7 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.blocks.util.BlockAether;
+import com.gildedgames.aether.common.blocks.util.BlockFloating;
 import com.gildedgames.aether.common.items.itemblocks.ItemBlockAetherSubtypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -76,6 +77,8 @@ public class BlocksAether
 
 	public static Block zanite_block;
 
+	public static Block enchanted_gravitite;
+
 	public static Block aether_sapling;
 
 	public static Block carved_stone;
@@ -128,6 +131,8 @@ public class BlocksAether
 		aerogel = registerBlock("aerogel", new BlockAerogel(), AetherCreativeTabs.tabBlocks);
 
 		zanite_block = registerBlock("zanite_block", new BlockAether(Material.rock).setHardness(5f).setStepSound(Block.soundTypeStone), AetherCreativeTabs.tabBlocks);
+
+		enchanted_gravitite = registerBlock("enchanted_gravitite", new BlockAether(Material.rock).setHardness(5f).setStepSound(Block.soundTypeStone), AetherCreativeTabs.tabBlocks);
 
 		aether_sapling = registerBlockWithItem("aether_sapling", new BlockAetherSapling(), ItemBlockAetherSubtypes.class, AetherCreativeTabs.tabBlocks);
 

@@ -46,6 +46,7 @@ tile.carved_stone.normal.name=Carved Stone
 tile.carved_stone.divine.name=Divine Carved Stone
 tile.sentry_stone.normal.name=Sentry Stone
 tile.sentry_stone.divine.name=Divine Sentry Stone
+tile.enchanted_gravitite.name=Enchanted Gravitite
 
 # Aether Items
 item.skyroot_stick.name=Skyroot Stick

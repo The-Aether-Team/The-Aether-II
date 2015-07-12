@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.AetherArmorMaterials;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
@@ -36,6 +37,7 @@ public class CommonProxy
 		ItemsAether.preInit();
 
 		TileEntitiesAether.preInit();
+		EntitiesAether.preInit();
 
 		RecipesAether.preInit();
 	}

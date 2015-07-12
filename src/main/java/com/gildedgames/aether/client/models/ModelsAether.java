@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.models;
 
+import com.gildedgames.aether.client.renderer.entities.RenderFloatingBlock;
 import com.gildedgames.aether.client.renderer.tile_entity.TileEntityAltarRenderer;
 import com.gildedgames.aether.common.Aether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
@@ -13,6 +14,7 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
+import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
 import com.google.common.collect.Maps;
@@ -27,6 +29,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 import java.util.LinkedHashMap;
 
@@ -171,6 +174,7 @@ public class ModelsAether
 		registerBlockModel(BlocksAether.icestone);
 		registerBlockModel(BlocksAether.aerogel);
 		registerBlockModel(BlocksAether.zanite_block);
+		registerBlockModel(BlocksAether.enchanted_gravitite);
 
 		registerItemModel(ItemsAether.skyroot_stick);
 		registerItemModel(ItemsAether.ambrosium_shard);
@@ -246,6 +250,8 @@ public class ModelsAether
 		registerItemModel(ItemsAether.healing_stone);
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAltar.class, new TileEntityAltarRenderer());
+
+		RenderingRegistry.registerEntityRenderingHandler(EntityFloatingBlock.class, new RenderFloatingBlock(Minecraft.getMinecraft().getRenderManager()));
 	}
 
 	/**
