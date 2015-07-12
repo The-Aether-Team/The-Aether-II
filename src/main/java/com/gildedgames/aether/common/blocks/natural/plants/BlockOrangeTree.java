@@ -163,6 +163,12 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
+	public boolean isSuitableSoilBlock(Block soilBlock)
+	{
+		return soilBlock == this || super.isSuitableSoilBlock(soilBlock);
+	}
+
+	@Override
 	public void grow(World world, Random rand, BlockPos pos, IBlockState state)
 	{
 		BlockPos topBlock = (Boolean) state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos : pos.up();
