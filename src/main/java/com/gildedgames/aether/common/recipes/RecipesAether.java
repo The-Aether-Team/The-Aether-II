@@ -2,16 +2,14 @@ package com.gildedgames.aether.common.recipes;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.recipes.altar.AltarBasicRecipe;
+import com.gildedgames.aether.common.recipes.altar.AltarSimpleRecipe;
 import com.gildedgames.aether.common.recipes.altar.IAltarRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import java.util.ArrayList;
-
 public class RecipesAether
 {
-	private static ArrayList<IAltarRecipe> altarRecipes = new ArrayList<IAltarRecipe>();
+	public static final AltarRegistry altarRegistry = new AltarRegistry();
 
 	public static void preInit()
 	{
@@ -114,8 +112,8 @@ public class RecipesAether
 
 	private static void registerAltarRecipes()
 	{
-		registerAltarRecipe(new AltarBasicRecipe(4, new ItemStack(BlocksAether.holystone, 1), new ItemStack(ItemsAether.healing_stone, 1)));
-		registerAltarRecipe(new AltarBasicRecipe(4, new ItemStack(BlocksAether.gravitite_ore, 1), new ItemStack(BlocksAether.enchanted_gravitite, 1)));
+		registerAltarRecipe(new AltarSimpleRecipe(4, new ItemStack(BlocksAether.holystone, 1), new ItemStack(ItemsAether.healing_stone, 1)));
+		registerAltarRecipe(new AltarSimpleRecipe(4, new ItemStack(BlocksAether.gravitite_ore, 1), new ItemStack(BlocksAether.enchanted_gravitite, 1)));
 	}
 
 	private static void registerShapelessRecipe(ItemStack output, Object... stacks)
@@ -130,11 +128,6 @@ public class RecipesAether
 
 	private static void registerAltarRecipe(IAltarRecipe recipe)
 	{
-		altarRecipes.add(recipe);
-	}
-
-	public static ArrayList<IAltarRecipe> getAltarRecipes()
-	{
-		return altarRecipes;
+		altarRegistry.addRecipe(recipe);
 	}
 }

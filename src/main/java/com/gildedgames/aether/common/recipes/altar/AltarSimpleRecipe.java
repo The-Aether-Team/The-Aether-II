@@ -1,8 +1,9 @@
 package com.gildedgames.aether.common.recipes.altar;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class AltarBasicRecipe implements IAltarRecipe
+public class AltarSimpleRecipe implements IAltarRecipe
 {
 	private final int ambrosiumNeeded;
 
@@ -10,12 +11,18 @@ public class AltarBasicRecipe implements IAltarRecipe
 
 	private final ItemStack input;
 
-	public AltarBasicRecipe(int ambrosiumNeeded, ItemStack input, ItemStack output)
+	public AltarSimpleRecipe(int ambrosiumNeeded, ItemStack input, ItemStack output)
 	{
 		this.ambrosiumNeeded = ambrosiumNeeded;
 
 		this.input = input;
 		this.output = output;
+	}
+
+	@Override
+	public boolean matchesItem(ItemStack stack)
+	{
+		return this.input.isItemEqual(stack);
 	}
 
 	@Override

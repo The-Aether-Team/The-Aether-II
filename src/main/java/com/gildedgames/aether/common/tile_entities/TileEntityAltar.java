@@ -44,16 +44,15 @@ public class TileEntityAltar extends TileEntity
 
 	public void update()
 	{
-		for (IAltarRecipe recipe : RecipesAether.getAltarRecipes())
-		{
-			if (recipe.matchesRecipe(this.ambrosiumCount, this.itemToEnchant))
-			{
-				this.ambrosiumCount -= recipe.getAmbrosiumNeeded();
-				this.setItemToEnchant(null);
+		IAltarRecipe recipe = RecipesAether.altarRegistry.getMatchingRecipe(this.itemToEnchant, this.ambrosiumCount);
 
-				EntityItem entity = new EntityItem(this.worldObj, this.pos.getX() + 0.5D, this.pos.getY() + 0.8D, this.pos.getZ() + 0.5D, recipe.getOutput().copy());
-				this.worldObj.spawnEntityInWorld(entity);
-			}
+		if (recipe != null)
+		{
+			this.ambrosiumCount -= recipe.getAmbrosiumNeeded();
+			this.setItemToEnchant(null);
+
+			EntityItem entity = new EntityItem(this.worldObj, this.pos.getX() + 0.5D, this.pos.getY() + 0.8D, this.pos.getZ() + 0.5D, recipe.getOutput().copy());
+			this.worldObj.spawnEntityInWorld(entity);
 		}
 	}
 

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.blocks.construction;
 
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.recipes.RecipesAether;
 import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -60,13 +61,16 @@ public class BlockAltar extends Block implements ITileEntityProvider
 		{
 			if (stack != null)
 			{
-				if (stack.getItem() == ItemsAether.ambrosium_shard && altar.getAmbrosiumCount() < 20)
+				if (stack.getItem() == ItemsAether.ambrosium_shard)
 				{
-					altar.setAmbrosiumCount(altar.getAmbrosiumCount() + 1);
+					if (altar.getAmbrosiumCount() < 20)
+					{
+						altar.setAmbrosiumCount(altar.getAmbrosiumCount() + 1);
 
-					stack.stackSize -= 1;
+						stack.stackSize -= 1;
+					}
 				}
-				else if (altar.getItemToEnchant() == null)
+				else if (altar.getItemToEnchant() == null && RecipesAether.altarRegistry.isEnchantableInAltar(stack))
 				{
 					ItemStack newStack = stack.copy();
 					newStack.stackSize = 1;

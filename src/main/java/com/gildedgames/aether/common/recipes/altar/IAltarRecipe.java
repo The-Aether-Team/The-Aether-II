@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface IAltarRecipe
 {
+	boolean matchesItem(ItemStack stack);
+
 	boolean matchesRecipe(int ambrosiumCount, ItemStack stack);
 
 	int getAmbrosiumNeeded();
