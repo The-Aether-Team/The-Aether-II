@@ -141,6 +141,15 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
+	public void dropBlockAsItemWithChance(World world, BlockPos pos, IBlockState state, float chance, int fortune)
+	{
+		if (!((Boolean) state.getValue(PROPERTY_IS_TOP_BLOCK)))
+		{
+			super.dropBlockAsItemWithChance(world, pos, state, chance, fortune);
+		}
+	}
+
+	@Override
 	protected BlockState createBlockState()
 	{
 		return new BlockState(this, PROPERTY_IS_TOP_BLOCK, PROPERTY_STAGE);
