@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemSkull;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
@@ -25,11 +25,21 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer
 
 		GlStateManager.pushMatrix();
 
-		GlStateManager.translate(x + 0.5, y + 1.16, z + 0.5);
+		GlStateManager.translate(x + 0.5f, y + 1.18f, z + 0.5f);
 
 		if (stack != null)
 		{
+			GlStateManager.pushMatrix();
+
+			if (!(stack.getItem() instanceof ItemBlock))
+			{
+				GlStateManager.translate(0, -0.13f, 0);
+				GlStateManager.rotate(90f, 90f, 0f, 0f);
+			}
+
 			this.renderItem(stack);
+
+			GlStateManager.popMatrix();
 		}
 
 		this.renderOrbitingItems(altar.getAmbrosiumCount(), 0.15);
@@ -52,9 +62,9 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer
 			GlStateManager.pushMatrix();
 			GlStateManager.disableLighting();
 
-			GlStateManager.scale(0.5F, 0.5F, 0.5F);
+			GlStateManager.scale(0.6F, 0.6F, 0.6F);
 
-			if (!itemRenderer.shouldRenderItemIn3D(entityItem.getEntityItem()) || item instanceof ItemSkull)
+			if (!itemRenderer.shouldRenderItemIn3D(entityItem.getEntityItem()))
 			{
 				GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
 			}
