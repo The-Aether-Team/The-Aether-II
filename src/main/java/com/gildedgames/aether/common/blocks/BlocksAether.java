@@ -23,7 +23,6 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.blocks.util.BlockAether;
-import com.gildedgames.aether.common.blocks.util.BlockFloating;
 import com.gildedgames.aether.common.items.itemblocks.ItemBlockAetherSubtypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -143,6 +142,35 @@ public class BlocksAether
 		sentry_stone = registerBlockWithItem("sentry_stone", new BlockDungeon(Material.rock).setLightLevel(0.75f), ItemBlockAetherSubtypes.class, AetherCreativeTabs.tabBlocks);
 		
 		holystone_brick = registerBlock("holystone_brick", new BlockAether(Material.rock), AetherCreativeTabs.tabBlocks);
+
+		registerHarvestLevels();
+	}
+
+	private static void registerHarvestLevels()
+	{
+		// Do not register harvest levels to blocks that can be mined without a tool!
+
+		aether_dirt.setHarvestLevel("shovel", 0);
+		aether_grass.setHarvestLevel("shovel", 0);
+		holystone.setHarvestLevel("pickaxe", 0);
+
+		ambrosium_ore.setHarvestLevel("pickaxe", 0);
+		zanite_ore.setHarvestLevel("pickaxe", 1);
+		gravitite_ore.setHarvestLevel("pickaxe", 2);
+		continuum_ore.setHarvestLevel("pickaxe", 3);
+
+		icestone.setHarvestLevel("pickaxe", 1);
+		aerogel.setHarvestLevel("pickaxe", 1);
+
+		altar.setHarvestLevel("pickaxe", 0);
+
+		zanite_block.setHarvestLevel("pickaxe", 1);
+		enchanted_gravitite.setHarvestLevel("pickaxe", 2);
+
+		carved_stone.setHarvestLevel("pickaxe", 0);
+		sentry_stone.setHarvestLevel("pickaxe", 0);
+
+		holystone_brick.setHarvestLevel("pickaxe", 0);
 	}
 
 	private static Block registerBlock(String name, Block block, CreativeTabs tab)

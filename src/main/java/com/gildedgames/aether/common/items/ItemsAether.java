@@ -5,11 +5,15 @@ import com.gildedgames.aether.common.items.armor.EnumAetherArmorVariant;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.items.consumables.ItemAetherFood;
 import com.gildedgames.aether.common.items.consumables.ItemAmbrosiumShard;
-import com.gildedgames.aether.common.items.tools.EnumAetherToolMaterial;
-import com.gildedgames.aether.common.items.tools.ItemAetherAxe;
-import com.gildedgames.aether.common.items.tools.ItemAetherPickaxe;
-import com.gildedgames.aether.common.items.tools.ItemAetherShovel;
-import com.gildedgames.aether.common.items.tools.ItemAetherSword;
+import com.gildedgames.aether.common.items.tools.EnumToolType;
+import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
+import com.gildedgames.aether.common.items.tools.ItemHolystoneTool;
+import com.gildedgames.aether.common.items.tools.ItemSkyrootTool;
+import com.gildedgames.aether.common.items.tools.ItemZaniteTool;
+import com.gildedgames.aether.common.items.weapons.ItemGravititeSword;
+import com.gildedgames.aether.common.items.weapons.ItemHolystoneSword;
+import com.gildedgames.aether.common.items.weapons.ItemSkyrootSword;
+import com.gildedgames.aether.common.items.weapons.ItemZaniteSword;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -60,25 +64,25 @@ public class ItemsAether
 		continuum_orb = registerItem("continuum_orb", new Item(), AetherCreativeTabs.tabMaterials);
 		zanite_gemstone = registerItem("zanite_gemstone", new Item(), AetherCreativeTabs.tabMaterials);
 
-		skyroot_axe = registerItem("skyroot_axe", new ItemAetherAxe(EnumAetherToolMaterial.SKYROOT));
-		skyroot_pickaxe = registerItem("skyroot_pickaxe", new ItemAetherPickaxe(EnumAetherToolMaterial.SKYROOT));
-		skyroot_shovel = registerItem("skyroot_shovel", new ItemAetherShovel(EnumAetherToolMaterial.SKYROOT));
-		skyroot_sword = registerItem("skyroot_sword", new ItemAetherSword(EnumAetherToolMaterial.SKYROOT));
+		skyroot_axe = registerItem("skyroot_axe", new ItemSkyrootTool(EnumToolType.AXE));
+		skyroot_pickaxe = registerItem("skyroot_pickaxe", new ItemSkyrootTool(EnumToolType.PICKAXE));
+		skyroot_shovel = registerItem("skyroot_shovel", new ItemSkyrootTool(EnumToolType.SHOVEL));
+		skyroot_sword = registerItem("skyroot_sword", new ItemSkyrootSword());
 
-		holystone_axe = registerItem("holystone_axe", new ItemAetherAxe(EnumAetherToolMaterial.HOLYSTONE));
-		holystone_pickaxe = registerItem("holystone_pickaxe", new ItemAetherPickaxe(EnumAetherToolMaterial.HOLYSTONE));
-		holystone_shovel = registerItem("holystone_shovel", new ItemAetherShovel(EnumAetherToolMaterial.HOLYSTONE));
-		holystone_sword = registerItem("holystone_sword", new ItemAetherSword(EnumAetherToolMaterial.HOLYSTONE));
+		holystone_axe = registerItem("holystone_axe", new ItemHolystoneTool(EnumToolType.AXE));
+		holystone_pickaxe = registerItem("holystone_pickaxe", new ItemHolystoneTool(EnumToolType.PICKAXE));
+		holystone_shovel = registerItem("holystone_shovel", new ItemHolystoneTool(EnumToolType.SHOVEL));
+		holystone_sword = registerItem("holystone_sword", new ItemHolystoneSword());
 
-		zanite_axe = registerItem("zanite_axe", new ItemAetherAxe(EnumAetherToolMaterial.ZANITE));
-		zanite_pickaxe = registerItem("zanite_pickaxe", new ItemAetherPickaxe(EnumAetherToolMaterial.ZANITE));
-		zanite_shovel = registerItem("zanite_shovel", new ItemAetherShovel(EnumAetherToolMaterial.ZANITE));
-		zanite_sword = registerItem("zanite_sword", new ItemAetherSword(EnumAetherToolMaterial.ZANITE));
+		zanite_axe = registerItem("zanite_axe", new ItemZaniteTool(EnumToolType.AXE));
+		zanite_pickaxe = registerItem("zanite_pickaxe", new ItemZaniteTool(EnumToolType.PICKAXE));
+		zanite_shovel = registerItem("zanite_shovel", new ItemZaniteTool(EnumToolType.SHOVEL));
+		zanite_sword = registerItem("zanite_sword", new ItemZaniteSword());
 
-		gravitite_axe = registerItem("gravitite_axe", new ItemAetherAxe(EnumAetherToolMaterial.GRAVITITE));
-		gravitite_pickaxe = registerItem("gravitite_pickaxe", new ItemAetherPickaxe(EnumAetherToolMaterial.GRAVITITE));
-		gravitite_shovel = registerItem("gravitite_shovel", new ItemAetherShovel(EnumAetherToolMaterial.GRAVITITE));
-		gravitite_sword = registerItem("gravitite_sword", new ItemAetherSword(EnumAetherToolMaterial.GRAVITITE));
+		gravitite_axe = registerItem("gravitite_axe", new ItemGravititeTool(EnumToolType.AXE));
+		gravitite_pickaxe = registerItem("gravitite_pickaxe", new ItemGravititeTool(EnumToolType.PICKAXE));
+		gravitite_shovel = registerItem("gravitite_shovel", new ItemGravititeTool(EnumToolType.SHOVEL));
+		gravitite_sword = registerItem("gravitite_sword", new ItemGravititeSword());
 
 		zanite_helmet = registerItem("zanite_helmet", new ItemAetherArmor(EnumAetherArmorVariant.ZANITE, 0, 0));
 		zanite_chestplate = registerItem("zanite_chestplate", new ItemAetherArmor(EnumAetherArmorVariant.ZANITE, 0, 1));
