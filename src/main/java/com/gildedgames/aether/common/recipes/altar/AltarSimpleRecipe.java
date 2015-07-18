@@ -26,20 +26,14 @@ public class AltarSimpleRecipe implements IAltarRecipe
 	}
 
 	@Override
-	public boolean matchesRecipe(int ambrosiumCount, ItemStack stack)
-	{
-		return ambrosiumCount >= ambrosiumNeeded && input.isItemEqual(stack);
-	}
-
-	@Override
-	public int getAmbrosiumNeeded()
+	public int getAmbrosiumCost(ItemStack stack)
 	{
 		return this.ambrosiumNeeded;
 	}
 
 	@Override
-	public ItemStack getOutput()
+	public ItemStack getOutput(ItemStack stack)
 	{
-		return this.output;
+		return this.output.copy();
 	}
 }

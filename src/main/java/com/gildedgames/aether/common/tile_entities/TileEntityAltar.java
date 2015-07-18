@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.tile_entities;
 
+import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.recipes.RecipesAether;
 import com.gildedgames.aether.common.recipes.altar.IAltarRecipe;
 import net.minecraft.entity.item.EntityItem;
@@ -12,9 +13,21 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityAltar extends TileEntity
 {
+	private ItemStack stackOnAltar;
+
 	private int ambrosiumCount;
 
-	private ItemStack itemToEnchant;
+	public ItemStack getStackOnAltar()
+	{
+		return this.stackOnAltar;
+	}
+
+	public void setStackOnAltar(ItemStack stack)
+	{
+		this.stackOnAltar = stack;
+
+		this.sendUpdates();
+	}
 
 	public int getAmbrosiumCount()
 	{
@@ -25,65 +38,85 @@ public class TileEntityAltar extends TileEntity
 	{
 		this.ambrosiumCount = count;
 
-		this.worldObj.markBlockForUpdate(pos);
-		this.markDirty();
+		this.sendUpdates();
 	}
 
-	public void setItemToEnchant(ItemStack stack)
+	public void removeAmbrosiumShard()
 	{
-		this.itemToEnchant = stack;
-
-		this.worldObj.markBlockForUpdate(pos);
-		this.markDirty();
+		this.setAmbrosiumCount(this.getAmbrosiumCount() - 1);
 	}
 
-	public ItemStack getItemToEnchant()
+	public void addAmbrosiumShard()
 	{
-		return this.itemToEnchant;
+		this.setAmbrosiumCount(this.getAmbrosiumCount() + 1);
 	}
 
-	public void update()
+	public void attemptCrafting()
 	{
-		IAltarRecipe recipe = RecipesAether.altarRegistry.getMatchingRecipe(this.itemToEnchant, this.ambrosiumCount);
+		IAltarRecipe recipe = RecipesAether.altarRegistry.getMatchingRecipe(this.getStackOnAltar());
 
 		if (recipe != null)
 		{
-			this.ambrosiumCount -= recipe.getAmbrosiumNeeded();
-			this.setItemToEnchant(null);
+			int cost = recipe.getAmbrosiumCost(this.getStackOnAltar());
 
-			EntityItem entity = new EntityItem(this.worldObj, this.pos.getX() + 0.5D, this.pos.getY() + 0.8D, this.pos.getZ() + 0.5D, recipe.getOutput().copy());
-			this.worldObj.spawnEntityInWorld(entity);
+			if (this.getAmbrosiumCount() >= cost)
+			{
+				ItemStack stack = recipe.getOutput(this.getStackOnAltar());
+
+				this.getWorld().spawnEntityInWorld(this.createEntityItemAboveAltar(stack));
+
+				this.ambrosiumCount -= cost;
+				this.setStackOnAltar(null);
+			}
 		}
 	}
 
+	public void dropContents()
+	{
+		if (this.getAmbrosiumCount() > 0)
+		{
+			ItemStack stack = new ItemStack(ItemsAether.ambrosium_shard, this.getAmbrosiumCount());
+
+			this.getWorld().spawnEntityInWorld(this.createEntityItemAboveAltar(stack));
+		}
+
+		if (this.getStackOnAltar() != null)
+		{
+			this.getWorld().spawnEntityInWorld(this.createEntityItemAboveAltar(this.getStackOnAltar()));
+		}
+
+		this.setAmbrosiumCount(0);
+		this.setStackOnAltar(null);
+	}
+
+	public EntityItem createEntityItemAboveAltar(ItemStack stack)
+	{
+		return new EntityItem(this.getWorld(), this.getPos().getX() + 0.5D, this.getPos().getY() + 1.1D, this.getPos().getZ() + 0.5D, stack);
+	}
+
+	@Override
 	public void writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
 
-		if (this.itemToEnchant != null)
-		{
-			NBTTagCompound itemToEnchantNBT = new NBTTagCompound();
-			this.itemToEnchant.writeToNBT(itemToEnchantNBT);
+		NBTTagCompound itemCompound = new NBTTagCompound();
 
-			compound.setTag("ItemToEnchant", itemToEnchantNBT);
+		if (this.stackOnAltar != null)
+		{
+			this.stackOnAltar.writeToNBT(itemCompound);
 		}
 
+		compound.setTag("StackOnAltar", itemCompound);
 		compound.setInteger("AmbrosiumCount", this.ambrosiumCount);
 	}
 
+	@Override
 	public void readFromNBT(NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
 
-		if (compound.hasKey("ItemToEnchant"))
-		{
-			NBTTagCompound itemToEnchantNBT = compound.getCompoundTag("ItemToEnchant");
-			this.itemToEnchant = ItemStack.loadItemStackFromNBT(itemToEnchantNBT);
-		}
-		else
-		{
-			this.itemToEnchant = null;
-		}
+		NBTTagCompound itemCompound = compound.getCompoundTag("StackOnAltar");
+		this.stackOnAltar = itemCompound.hasNoTags() ? null : ItemStack.loadItemStackFromNBT(itemCompound);
 
 		this.ambrosiumCount = compound.getInteger("AmbrosiumCount");
 	}
@@ -91,15 +124,22 @@ public class TileEntityAltar extends TileEntity
 	@Override
 	public Packet getDescriptionPacket()
 	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		this.writeToNBT(nbt);
+		NBTTagCompound compound = new NBTTagCompound();
+		this.writeToNBT(compound);
 
-		return new S35PacketUpdateTileEntity(pos, 1, nbt);
+		return new S35PacketUpdateTileEntity(pos, 1, compound);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager networkManager, S35PacketUpdateTileEntity packet)
 	{
 		this.readFromNBT(packet.getNbtCompound());
+	}
+
+	private void sendUpdates()
+	{
+		this.worldObj.markBlockForUpdate(pos);
+
+		this.markDirty();
 	}
 }

@@ -21,7 +21,7 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer
 	public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float p_180535_8_, int p_180535_9_)
 	{
 		TileEntityAltar altar = (TileEntityAltar) tileEntity;
-		ItemStack stack = altar.getItemToEnchant();
+		ItemStack stack = altar.getStackOnAltar();
 
 		GlStateManager.pushMatrix();
 

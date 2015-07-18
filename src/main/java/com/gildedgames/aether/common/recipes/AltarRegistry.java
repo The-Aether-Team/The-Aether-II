@@ -14,16 +14,11 @@ public class AltarRegistry
 		this.altarRecipes.add(recipe);
 	}
 
-	public ArrayList<IAltarRecipe> getAltarRecipes()
-	{
-		return altarRecipes;
-	}
-
-	public IAltarRecipe getMatchingRecipe(ItemStack stack, int ambrosiumCount)
+	public IAltarRecipe getMatchingRecipe(ItemStack stack)
 	{
 		for (IAltarRecipe recipe : this.getAltarRecipes())
 		{
-			if (recipe.matchesRecipe(ambrosiumCount, stack))
+			if (recipe.matchesItem(stack))
 			{
 				return recipe;
 			}
@@ -32,16 +27,13 @@ public class AltarRegistry
 		return null;
 	}
 
-	public boolean isEnchantableInAltar(ItemStack stack)
+	public boolean isEnchantableItem(ItemStack stack)
 	{
-		for (IAltarRecipe recipe : this.getAltarRecipes())
-		{
-			if (recipe.matchesItem(stack))
-			{
-				return true;
-			}
-		}
+		return this.getMatchingRecipe(stack) != null;
+	}
 
-		return false;
+	public ArrayList<IAltarRecipe> getAltarRecipes()
+	{
+		return altarRecipes;
 	}
 }

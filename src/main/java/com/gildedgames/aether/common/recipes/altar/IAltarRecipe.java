@@ -8,9 +8,7 @@ public interface IAltarRecipe
 {
 	boolean matchesItem(ItemStack stack);
 
-	boolean matchesRecipe(int ambrosiumCount, ItemStack stack);
+	int getAmbrosiumCost(ItemStack stack);
 
-	int getAmbrosiumNeeded();
-
-	ItemStack getOutput();
+	ItemStack getOutput(ItemStack stack);
 }

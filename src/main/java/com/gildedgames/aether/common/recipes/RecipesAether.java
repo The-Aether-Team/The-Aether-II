@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.recipes;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.recipes.altar.AltarSimpleRecipe;
+import com.gildedgames.aether.common.recipes.altar.AltarRepairRecipe;
 import com.gildedgames.aether.common.recipes.altar.IAltarRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -114,6 +115,7 @@ public class RecipesAether
 	{
 		registerAltarRecipe(new AltarSimpleRecipe(4, new ItemStack(BlocksAether.holystone, 1), new ItemStack(ItemsAether.healing_stone, 1)));
 		registerAltarRecipe(new AltarSimpleRecipe(4, new ItemStack(BlocksAether.gravitite_ore, 1), new ItemStack(BlocksAether.enchanted_gravitite, 1)));
+		registerAltarRecipe(new AltarRepairRecipe());
 	}
 
 	private static void registerShapelessRecipe(ItemStack output, Object... stacks)
