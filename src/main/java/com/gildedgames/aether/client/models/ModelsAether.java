@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client.models;
 
 import com.gildedgames.aether.client.renderer.entities.RenderFloatingBlock;
+import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDart;
 import com.gildedgames.aether.client.renderer.tile_entity.TileEntityAltarRenderer;
 import com.gildedgames.aether.common.Aether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
@@ -15,7 +16,10 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
+import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.weapons.ItemDart;
+import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
 import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
@@ -60,6 +64,10 @@ public class ModelsAether
 		addVariantNames(BlocksAether.carved_stone, "carved_stone", "divine_carved_stone");
 
 		addVariantNames(BlocksAether.sentry_stone, "sentry_stone", "divine_sentry_stone");
+
+		addVariantNames(ItemsAether.dart_shooter, "golden_dart_shooter", "enchanted_dart_shooter", "poison_dart_shooter", "phoenix_dart_shooter");
+
+		addVariantNames(ItemsAether.dart, "golden_dart", "enchanted_dart", "poison_dart");
 	}
 
 	/**
@@ -250,9 +258,32 @@ public class ModelsAether
 
 		registerItemModel(ItemsAether.healing_stone);
 
+		registerItemModel(ItemsAether.dart_shooter, ItemDartShooter.DartShooterType.GOLDEN.ordinal(), Aether.getResource("golden_dart_shooter"));
+		registerItemModel(ItemsAether.dart_shooter, ItemDartShooter.DartShooterType.ENCHANTED.ordinal(), Aether.getResource("enchanted_dart_shooter"));
+		registerItemModel(ItemsAether.dart_shooter, ItemDartShooter.DartShooterType.POISON.ordinal(), Aether.getResource("poison_dart_shooter"));
+		registerItemModel(ItemsAether.dart_shooter, ItemDartShooter.DartShooterType.PHOENIX.ordinal(), Aether.getResource("phoenix_dart_shooter"));
+
+		registerItemModel(ItemsAether.dart, ItemDart.DartType.GOLDEN.ordinal(), Aether.getResource("golden_dart"));
+		registerItemModel(ItemsAether.dart, ItemDart.DartType.ENCHANTED.ordinal(), Aether.getResource("enchanted_dart"));
+		registerItemModel(ItemsAether.dart, ItemDart.DartType.POISON.ordinal(), Aether.getResource("poison_dart"));
+
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAltar.class, new TileEntityAltarRenderer());
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityFloatingBlock.class, new RenderFloatingBlock(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDart.class, new RenderDart(Minecraft.getMinecraft().getRenderManager()));
+	}
+
+	/**
+	 * Utility method for ModelBakery.addVariantName.
+	 * @param item The item to add names to.
+	 * @param names The list of names to add.
+	 */
+	private static void addVariantNames(Item item, String... names)
+	{
+		for (String name : names)
+		{
+			ModelBakery.addVariantName(item, Aether.getResource(name));
+		}
 	}
 
 	/**
@@ -262,12 +293,7 @@ public class ModelsAether
 	 */
 	private static void addVariantNames(Block block, String... names)
 	{
-		for (int i = 0; i < names.length; i++)
-		{
-			names[i] = Aether.getResource(names[i]);
-		}
-
-		ModelBakery.addVariantName(Item.getItemFromBlock(block), names);
+		addVariantNames(Item.getItemFromBlock(block), names);
 	}
 
 	/**

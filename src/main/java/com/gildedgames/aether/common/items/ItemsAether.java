@@ -10,6 +10,8 @@ import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
 import com.gildedgames.aether.common.items.tools.ItemHolystoneTool;
 import com.gildedgames.aether.common.items.tools.ItemSkyrootTool;
 import com.gildedgames.aether.common.items.tools.ItemZaniteTool;
+import com.gildedgames.aether.common.items.weapons.ItemDart;
+import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
 import com.gildedgames.aether.common.items.weapons.ItemGravititeSword;
 import com.gildedgames.aether.common.items.weapons.ItemHolystoneSword;
 import com.gildedgames.aether.common.items.weapons.ItemSkyrootSword;
@@ -56,6 +58,10 @@ public class ItemsAether
 	public static Item valkyrie_music_disc, labyrinth_music_disc, moa_music_disc, aerwhale_music_disc, recording_892;
 
 	public static Item healing_stone;
+
+	public static Item dart_shooter;
+
+	public static Item dart;
 
 	public static void preInit()
 	{
@@ -131,6 +137,9 @@ public class ItemsAether
 		recording_892 = registerItem("recording_892", new ItemAetherRecord("recording_892"), AetherCreativeTabs.tabTools);
 
 		healing_stone = registerItem("healing_stone", new ItemFood(0, 1.2f, false).setAlwaysEdible().setPotionEffect(Potion.regeneration.getId(), 30, 0, 1.0f), AetherCreativeTabs.tabConsumables);
+
+		dart_shooter = registerItem("dart_shooter", new ItemDartShooter().setCreativeTab(AetherCreativeTabs.tabWeapons));
+		dart = registerItem("dart", new ItemDart().setCreativeTab(AetherCreativeTabs.tabWeapons));
 	}
 
 	private static Item registerItem(String name, Item item, CreativeTabs tab)

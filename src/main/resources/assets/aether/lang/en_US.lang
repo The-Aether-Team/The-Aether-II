@@ -107,6 +107,15 @@ item.moa_music_disc.name=Moa Music Disc
 item.aerwhale_music_disc.name=Aerwhale Music Disc
 item.recording_892.name=Recording #892
 item.healing_stone.name=Healing Stone
+item.dart_shooter.golden.name=Golden Dart Shooter
+item.dart_shooter.enchanted.name=Enchanted Dart Shooter
+item.dart_shooter.poison.name=Poison Dart Shooter
+item.dart_shooter.phoenix.name=Phoenix Dart Shooter
+item.dart.golden.name=Golden Dart
+item.dart.enchanted.name=Enchanted Dart
+item.dart.poison.name=Posion Dart
+item.dart.phoenix.name=Phoenix Dart
+
 
 # Records
 item.aether_record.moa.desc=Emile van Krieken - Approaches
