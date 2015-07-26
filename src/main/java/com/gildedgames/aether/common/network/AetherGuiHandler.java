@@ -8,6 +8,8 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class AetherGuiHandler implements IGuiHandler
 {
@@ -26,6 +28,7 @@ public class AetherGuiHandler implements IGuiHandler
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public GuiContainer getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
 	{
 		switch (id)
