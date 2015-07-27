@@ -1,40 +1,40 @@
 {
 	"variants": {
 		"variant=cold": {
-			"model": "aether:cold_aercloud"
+			"model": "aether:aercloud/cold_aercloud"
 		},
 		"variant=blue": {
-			"model": "aether:blue_aercloud"
+			"model": "aether:aercloud/blue_aercloud"
 		},
 		"variant=golden": {
-			"model": "aether:golden_aercloud"
+			"model": "aether:aercloud/golden_aercloud"
 		},
 		"variant=green": {
-			"model": "aether:green_aercloud"
+			"model": "aether:aercloud/green_aercloud"
 		},
 		"facing=north,variant=purple": {
-			"model": "aether:purple_aercloud"
+			"model": "aether:aercloud/purple_aercloud"
 		},
 		"facing=south,variant=purple": {
-			"model": "aether:purple_aercloud",
+			"model": "aether:aercloud/purple_aercloud",
 			"y": 180
 		},
 		"facing=west,variant=purple": {
-			"model": "aether:purple_aercloud",
+			"model": "aether:aercloud/purple_aercloud",
 			"y": 270
 		},
 		"facing=east,variant=purple": {
-			"model": "aether:purple_aercloud",
+			"model": "aether:aercloud/purple_aercloud",
 			"y": 90
 		},
 		"facing=up,variant=purple": {
-			"model": "aether:purple_aercloud"
+			"model": "aether:aercloud/purple_aercloud"
 		},
 		"facing=down,variant=purple": {
-			"model": "aether:purple_aercloud"
+			"model": "aether:aercloud/purple_aercloud"
 		},
 		"variant=storm": {
-			"model": "aether:storm_aercloud"
+			"model": "aether:aercloud/storm_aercloud"
 		}
 	}
 }

@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "aether:items/healing_stone"
+		"layer0": "aether:items/consumables/healing_stone"
 	},
 	"display": {
 		"thirdperson": {

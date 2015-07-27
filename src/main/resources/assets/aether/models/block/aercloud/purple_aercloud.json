@@ -1,0 +1,12 @@
+{
+	"parent": "block/cube",
+	"textures": {
+		"down": "aether:blocks/aercloud/purple_aercloud_down",
+		"up": "aether:blocks/aercloud/purple_aercloud_up",
+		"north": "aether:blocks/aercloud/purple_aercloud_front",
+		"east": "aether:blocks/aercloud/purple_aercloud_right",
+		"south": "aether:blocks/aercloud/purple_aercloud_back",
+		"west": "aether:blocks/aercloud/purple_aercloud_left",
+		"particle": "aether:blocks/aercloud/purple_aercloud_down"
+	}
+}

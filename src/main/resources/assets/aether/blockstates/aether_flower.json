@@ -1,10 +1,10 @@
 {
 	"variants": {
 		"variant=white_rose": {
-			"model": "aether:white_rose"
+			"model": "aether:aether_flower/white_rose"
 		},
 		"variant=purple_flower": {
-			"model": "aether:purple_flower"
+			"model": "aether:aether_flower/purple_flower"
 		}
 	}
 }

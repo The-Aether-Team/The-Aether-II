@@ -1,0 +1,6 @@
+{
+	"parent": "block/cross",
+	"textures": {
+		"cross": "aether:blocks/aether_flower/purple_flower"
+	}
+}

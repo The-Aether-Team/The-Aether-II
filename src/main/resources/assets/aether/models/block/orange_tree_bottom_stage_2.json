@@ -1,6 +1,0 @@
-{
-	"parent": "block/cross",
-	"textures": {
-		"cross": "aether:blocks/orange_tree_bottom_stage_2"
-	}
-}

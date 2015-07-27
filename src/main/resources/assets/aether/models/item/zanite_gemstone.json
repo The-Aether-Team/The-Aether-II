@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "aether:items/zanite_gemstone"
+		"layer0": "aether:items/materials/zanite_gemstone"
 	},
 	"display": {
 		"thirdperson": {

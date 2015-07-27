@@ -1,7 +1,7 @@
 {
 	"textures": {
 		"0": "aether:tile_entities/altar",
-		"particle": "aether:blocks/holystone"
+		"particle": "aether:blocks/holystone/holystone"
 	},
 	"elements": [
 		{

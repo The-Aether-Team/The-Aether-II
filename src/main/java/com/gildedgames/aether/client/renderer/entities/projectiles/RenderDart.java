@@ -18,10 +18,10 @@ public class RenderDart extends Render
 
 	static
 	{
-		dartTextures[ItemDart.DartType.GOLDEN.ordinal()] = new ResourceLocation("aether", "textures/entities/dart/golden_dart.png");
-		dartTextures[ItemDart.DartType.ENCHANTED.ordinal()] = new ResourceLocation("aether", "textures/entities/dart/enchanted_dart.png");
-		dartTextures[ItemDart.DartType.POISON.ordinal()] = new ResourceLocation("aether", "textures/entities/dart/poison_dart.png");
-		dartTextures[ItemDart.DartType.PHOENIX.ordinal()] = new ResourceLocation("aether", "textures/entities/dart/golden_dart.png");
+		dartTextures[ItemDart.DartType.GOLDEN.ordinal()] = new ResourceLocation("aether", "textures/entities/projectiles/dart/golden_dart.png");
+		dartTextures[ItemDart.DartType.ENCHANTED.ordinal()] = new ResourceLocation("aether", "textures/entities/projectiles/dart/enchanted_dart.png");
+		dartTextures[ItemDart.DartType.POISON.ordinal()] = new ResourceLocation("aether", "textures/entities/projectiles/dart/poison_dart.png");
+		dartTextures[ItemDart.DartType.PHOENIX.ordinal()] = new ResourceLocation("aether", "textures/entities/projectiles/dart/golden_dart.png");
 	}
 
 	public RenderDart(RenderManager renderManager)

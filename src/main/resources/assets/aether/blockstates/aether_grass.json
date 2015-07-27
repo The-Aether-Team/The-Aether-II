@@ -1,16 +1,16 @@
 {
 	"variants": {
 		"variant=normal": [
-			{ "model": "aether:aether_grass" },
-			{ "model": "aether:aether_grass", "y": 90 },
-			{ "model": "aether:aether_grass", "y": 180 },
-			{ "model": "aether:aether_grass", "y": 270 }
+			{ "model": "aether:aether_grass/aether_grass" },
+			{ "model": "aether:aether_grass/aether_grass", "y": 90 },
+			{ "model": "aether:aether_grass/aether_grass", "y": 180 },
+			{ "model": "aether:aether_grass/aether_grass", "y": 270 }
 		],
 		"variant=enchanted": [ 
-			{ "model": "aether:enchanted_aether_grass" },
-			{ "model": "aether:enchanted_aether_grass", "y": 90 },
-			{ "model": "aether:enchanted_aether_grass", "y": 180 },
-			{ "model": "aether:enchanted_aether_grass", "y": 270 }
+			{ "model": "aether:aether_grass/enchanted_aether_grass" },
+			{ "model": "aether:aether_grass/enchanted_aether_grass", "y": 90 },
+			{ "model": "aether:aether_grass/enchanted_aether_grass", "y": 180 },
+			{ "model": "aether:aether_grass/enchanted_aether_grass", "y": 270 }
 		]
 	}
 }

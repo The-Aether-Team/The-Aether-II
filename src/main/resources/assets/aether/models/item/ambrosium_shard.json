@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "aether:items/ambrosium_shard"
+		"layer0": "aether:items/consumables/ambrosium_shard"
 	},
 	"display": {
 		"thirdperson": {

@@ -1,7 +1,7 @@
 {
 	"variants": {
 		"normal": {
-			"model": "aether:zanite_ore"
+			"model": "aether:ores/zanite_ore"
 		}
 	}
 }

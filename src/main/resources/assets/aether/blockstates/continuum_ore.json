@@ -1,7 +1,7 @@
 {
 	"variants": {
 		"normal": {
-			"model": "aether:continuum_ore"
+			"model": "aether:ores/continuum_ore"
 		}
 	}
 }
