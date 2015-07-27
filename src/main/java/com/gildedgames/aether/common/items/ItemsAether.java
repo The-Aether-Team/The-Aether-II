@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.items;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.items.armor.EnumAetherArmorVariant;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
-import com.gildedgames.aether.common.items.consumables.ItemAetherFood;
 import com.gildedgames.aether.common.items.consumables.ItemAmbrosiumShard;
 import com.gildedgames.aether.common.items.tools.EnumToolType;
 import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
@@ -122,8 +121,8 @@ public class ItemsAether
 
 		golden_amber = registerItem("golden_amber", new Item(), AetherCreativeTabs.tabMaterials);
 
-		blueberry = registerItem("blueberry", new ItemAetherFood(2, false), AetherCreativeTabs.tabConsumables);
-		orange = registerItem("orange", new ItemAetherFood(4, false), AetherCreativeTabs.tabConsumables);
+		blueberry = registerItem("blueberry", new ItemFood(2, false), AetherCreativeTabs.tabConsumables);
+		orange = registerItem("orange", new ItemFood(4, false), AetherCreativeTabs.tabConsumables);
 
 		skyroot_bucket = registerItem("skyroot_bucket", new ItemSkyrootBucket(Blocks.air), AetherCreativeTabs.tabTools);
 		skyroot_water_bucket = registerItem("skyroot_water_bucket", new ItemSkyrootBucket(Blocks.flowing_water), AetherCreativeTabs.tabTools);
