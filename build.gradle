@@ -59,6 +59,12 @@ processResources {
     }
 }
 
+idea {
+	module {
+		inheritOutputDirs = true
+	}
+}
+
 def loadConfig(File config) {
 	config.withReader {
 		def properties = new Properties()
