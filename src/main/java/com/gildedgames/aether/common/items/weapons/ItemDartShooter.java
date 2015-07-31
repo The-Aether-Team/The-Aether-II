@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.weapons;
 
+import com.gildedgames.aether.common.Aether;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDart.DartType;
@@ -122,7 +123,7 @@ public class ItemDartShooter extends Item
 				dart.setIsCritical(true);
 			}
 
-			world.playSoundAtEntity(player, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + speed * 0.5F);
+			world.playSoundAtEntity(player, Aether.getResource("aerandom.dart_shooter"), 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + speed * 0.5F);
 
 			if (!world.isRemote)
 			{

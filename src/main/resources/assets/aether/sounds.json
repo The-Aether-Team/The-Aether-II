@@ -49,5 +49,13 @@
 				"stream": true
 			}
 		]
+	},
+	"aerandom.dart_shooter": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "aerandom/dart_shooter"
+			}
+		]
 	}
 }
