@@ -1,4 +1,4 @@
-package com.gildedgames.aether.client.models;
+package com.gildedgames.aether.client.models.util;
 
 import com.gildedgames.aether.common.Aether;
 

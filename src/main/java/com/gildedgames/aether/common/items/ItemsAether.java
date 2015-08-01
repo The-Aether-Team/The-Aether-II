@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.items.armor.EnumAetherArmorVariant;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.items.consumables.ItemAmbrosiumShard;
+import com.gildedgames.aether.common.items.consumables.ItemCloudParachute;
 import com.gildedgames.aether.common.items.tools.EnumToolType;
 import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
 import com.gildedgames.aether.common.items.tools.ItemHolystoneTool;
@@ -61,6 +62,8 @@ public class ItemsAether
 	public static Item dart_shooter;
 
 	public static Item dart;
+
+	public static Item cloud_parachute;
 
 	public static void preInit()
 	{
@@ -137,8 +140,10 @@ public class ItemsAether
 
 		healing_stone = registerItem("healing_stone", new ItemFood(0, 1.2f, false).setAlwaysEdible().setPotionEffect(Potion.regeneration.getId(), 30, 0, 1.0f), AetherCreativeTabs.tabConsumables);
 
-		dart_shooter = registerItem("dart_shooter", new ItemDartShooter().setCreativeTab(AetherCreativeTabs.tabWeapons));
-		dart = registerItem("dart", new ItemDart().setCreativeTab(AetherCreativeTabs.tabWeapons));
+		dart_shooter = registerItem("dart_shooter", new ItemDartShooter(), AetherCreativeTabs.tabWeapons);
+		dart = registerItem("dart", new ItemDart(), AetherCreativeTabs.tabWeapons);
+
+		cloud_parachute = registerItem("cloud_parachute", new ItemCloudParachute(), AetherCreativeTabs.tabConsumables);
 	}
 
 	private static Item registerItem(String name, Item item, CreativeTabs tab)

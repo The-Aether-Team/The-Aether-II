@@ -115,7 +115,11 @@ item.dart.golden.name=Golden Dart
 item.dart.enchanted.name=Enchanted Dart
 item.dart.poison.name=Posion Dart
 item.dart.phoenix.name=Phoenix Dart
-
+item.cloud_parachute.cold.name=Cold Cloud Parachute
+item.cloud_parachute.blue.name=Blue Cloud Parachute
+item.cloud_parachute.golden.name=Golden Cloud Parachute
+item.cloud_parachute.green.name=Green Cloud Parachute
+item.cloud_parachute.purple.name=Purple Cloud Parachute
 
 # Records
 item.aether_record.moa.desc=Emile van Krieken - Approaches
