@@ -5,10 +5,8 @@ import net.minecraft.block.material.Material;
 
 public class BlockAether extends Block
 {
-
 	public BlockAether(Material material)
 	{
 		super(material);
 	}
-
 }

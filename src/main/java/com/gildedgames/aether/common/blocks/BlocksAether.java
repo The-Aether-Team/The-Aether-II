@@ -3,7 +3,8 @@ package com.gildedgames.aether.common.blocks;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
-import com.gildedgames.aether.common.blocks.construction.BlockSkyrootWorkbench;
+import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
+import com.gildedgames.aether.common.blocks.containers.BlockSkyrootWorkbench;
 import com.gildedgames.aether.common.blocks.dungeon.BlockDungeon;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAerogel;
@@ -86,6 +87,8 @@ public class BlocksAether
 	
 	public static Block holystone_brick;
 
+	public static Block holystone_furnace;
+
 	public static void preInit()
 	{
 		aether_dirt = registerBlock("aether_dirt", new BlockAether(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f), AetherCreativeTabs.tabBlocks);
@@ -98,8 +101,8 @@ public class BlocksAether
 
 		aether_log = registerBlockWithItem("aether_log", new BlockAetherLog(), ItemBlockAetherSubtypes.class, AetherCreativeTabs.tabBlocks);
 
-		skyroot_planks = registerBlock("skyroot_planks", new BlockAether(Material.wood).setStepSound(Block.soundTypeWood).setHardness(2.0f)
-				.setResistance(5.0f), AetherCreativeTabs.tabBlocks);
+		skyroot_planks = registerBlock("skyroot_planks", new BlockAether(Material.wood)
+				.setStepSound(Block.soundTypeWood).setHardness(2.0f).setResistance(5.0f), AetherCreativeTabs.tabBlocks);
 
 		ambrosium_ore = registerBlock("ambrosium_ore", new BlockAmbrosiumOre(), AetherCreativeTabs.tabBlocks);
 
@@ -142,6 +145,8 @@ public class BlocksAether
 		sentry_stone = registerBlockWithItem("sentry_stone", new BlockDungeon(Material.rock).setLightLevel(0.75f), ItemBlockAetherSubtypes.class, AetherCreativeTabs.tabBlocks);
 		
 		holystone_brick = registerBlock("holystone_brick", new BlockAether(Material.rock), AetherCreativeTabs.tabBlocks);
+
+		holystone_furnace = registerBlock("holystone_furnace", new BlockHolystoneFurnace());
 
 		registerHarvestLevels();
 	}

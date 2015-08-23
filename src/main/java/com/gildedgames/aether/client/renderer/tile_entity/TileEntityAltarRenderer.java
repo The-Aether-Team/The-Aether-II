@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -54,7 +53,6 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer
 		if (stack != null)
 		{
 			EntityItem entityItem = new EntityItem(this.getWorld(), 0, 0, 0, stack);
-			Item item = entityItem.getEntityItem().getItem();
 
 			entityItem.getEntityItem().stackSize = 1;
 			entityItem.hoverStart = 0.0F;

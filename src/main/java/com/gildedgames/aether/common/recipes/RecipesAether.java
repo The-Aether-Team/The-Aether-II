@@ -3,8 +3,8 @@ package com.gildedgames.aether.common.recipes;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
-import com.gildedgames.aether.common.recipes.altar.AltarSimpleRecipe;
 import com.gildedgames.aether.common.recipes.altar.AltarRepairRecipe;
+import com.gildedgames.aether.common.recipes.altar.AltarSimpleRecipe;
 import com.gildedgames.aether.common.recipes.altar.IAltarRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -16,7 +16,11 @@ public class RecipesAether
 	public static void preInit()
 	{
 		registerCraftingRecipes();
+		registerToolRecipes();
+		registerArmorRecipes();
 		registerAltarRecipes();
+
+		GameRegistry.registerFuelHandler(new AetherFurnaceFuelHandler());
 	}
 
 	private static void registerCraftingRecipes()
@@ -38,15 +42,14 @@ public class RecipesAether
 				'X', new ItemStack(BlocksAether.skyroot_planks), 'Y', new ItemStack(ItemsAether.golden_amber));
 
 		// Poison Dart Shooter
-		registerShapelessRecipe(new ItemStack(ItemsAether.dart_shooter, 1, ItemDartShooter.DartShooterType.POISON.ordinal()),
-				new ItemStack(ItemsAether.dart_shooter, 1, ItemDartShooter.DartShooterType.GOLDEN.ordinal()), new ItemStack(ItemsAether.skyroot_poison_bucket));
+		registerShapelessRecipe(new ItemStack(ItemsAether.dart_shooter, 1, ItemDartShooter.DartShooterType.POISON
+						.ordinal()),
+				new ItemStack(ItemsAether.dart_shooter, 1, ItemDartShooter.DartShooterType.GOLDEN
+						.ordinal()), new ItemStack(ItemsAether.skyroot_poison_bucket));
 
 		// Zanite Block
 		registerShapedRecipe(new ItemStack(BlocksAether.zanite_block), "XXX", "XXX", "XXX",
 				'X', new ItemStack(ItemsAether.zanite_gemstone));
-
-		registerToolRecipes();
-		registerArmorRecipes();
 	}
 
 	private static void registerToolRecipes()

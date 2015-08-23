@@ -2,6 +2,7 @@ package com.gildedgames.aether.client.models;
 
 import com.gildedgames.aether.client.models.util.ModelResourceList;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.dungeon.BlockDungeon;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
@@ -92,7 +93,7 @@ public class ModelsAether
 
 				ResourceLocation resourceLocation = (ResourceLocation) Block.blockRegistry.getNameForObject(state.getBlock());
 
-				return new ModelResourceLocation(resourceLocation, getPropertyString(mappings));
+				return new ModelResourceLocation(resourceLocation, this.getPropertyString(mappings));
 			}
 		});
 	}
@@ -152,16 +153,9 @@ public class ModelsAether
 				.add(BlockDungeon.NORMAL, "sentry_stone")
 				.add(BlockDungeon.DIVINE, "divine_sentry_stone"));
 
-		registerModelList(ItemsAether.dart_shooter, new ModelResourceList("dart_shooter/")
-				.add(ItemDartShooter.DartShooterType.GOLDEN.ordinal(), "golden_dart_shooter")
-				.add(ItemDartShooter.DartShooterType.ENCHANTED.ordinal(), "enchanted_dart_shooter")
-				.add(ItemDartShooter.DartShooterType.POISON.ordinal(), "poison_dart_shooter")
-				.add(ItemDartShooter.DartShooterType.PHOENIX.ordinal(), "phoenix_dart_shooter"));
-
-		registerModelList(ItemsAether.dart, new ModelResourceList("dart/")
-				.add(ItemDart.DartType.GOLDEN.ordinal(), "golden_dart")
-				.add(ItemDart.DartType.ENCHANTED.ordinal(), "enchanted_dart")
-				.add(ItemDart.DartType.POISON.ordinal(), "poison_dart"));
+		registerModelList(getItem(BlocksAether.holystone_furnace), new ModelResourceList("holystone_furnace/")
+				.add(BlockHolystoneFurnace.LIT_META, "holystone_furnace_on")
+				.add(BlockHolystoneFurnace.UNLIT_META, "holystone_furnace_off"));
 
 		registerModelList(getItem(BlocksAether.ambrosium_ore), new ModelResourceList("ores/").add(0, "ambrosium_ore"));
 		registerModelList(getItem(BlocksAether.zanite_ore), new ModelResourceList("ores/").add(0, "zanite_ore"));

@@ -60,12 +60,15 @@ public class RenderFloatingBlock extends Render
 					int j = pos.getY();
 					int k = pos.getZ();
 
-					worldRenderer.setTranslation((double) ((float) (-i) - 0.5F), (double) (-j), (double) ((float) (-k) - 0.5F));
+					worldRenderer.setTranslation(((float) -i) - 0.5F, -j, ((float) -k) - 0.5F);
 
 					BlockRendererDispatcher blockRendererDispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
 
-					IBakedModel ibakedmodel = blockRendererDispatcher.getModelFromBlockState(state, world, null);
-					blockRendererDispatcher.getBlockModelRenderer().renderModel(world, ibakedmodel, state, pos, worldRenderer, false);
+					@SuppressWarnings("deprecation")
+					IBakedModel model = blockRendererDispatcher.getModelFromBlockState(state, world, null);
+
+					blockRendererDispatcher.getBlockModelRenderer()
+							.renderModel(world, model, state, pos, worldRenderer, false);
 
 					worldRenderer.setTranslation(0.0D, 0.0D, 0.0D);
 
