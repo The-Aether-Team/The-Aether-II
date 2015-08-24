@@ -32,6 +32,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class ModelsAether
 {
@@ -277,7 +278,7 @@ public class ModelsAether
 
 	private static void prepareModels()
 	{
-		for (HashMap.Entry<Item, ModelResourceList> entry : models.entrySet())
+		for (Map.Entry<Item, ModelResourceList> entry : models.entrySet())
 		{
 			Item item = entry.getKey();
 
@@ -298,7 +299,7 @@ public class ModelsAether
 
 			HashMap<Integer, String> registrations = entry.getValue().getRegistrations();
 
-			for (HashMap.Entry<Integer, String> registration : registrations.entrySet())
+			for (Map.Entry<Integer, String> registration : registrations.entrySet())
 			{
 				int meta = registration.getKey();
 				String path = registration.getValue();
