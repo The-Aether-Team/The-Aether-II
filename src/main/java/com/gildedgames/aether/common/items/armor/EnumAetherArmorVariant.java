@@ -12,7 +12,7 @@ public enum EnumAetherArmorVariant
 
 	public String getResourceForSlot(int layerIndex)
 	{
-		return Aether.getResource("textures/armor/" + this.name().toLowerCase() + "_layer_" + (layerIndex == 2 ? 2 : 1) + ".png");
+		return Aether.getResourcePath("textures/armor/" + this.name().toLowerCase() + "_layer_" + (layerIndex == 2 ? 2 : 1) + ".png");
 	}
 
 	public ArmorMaterial getArmorMaterial()

@@ -84,7 +84,7 @@ public class BlockAetherPortal extends BlockBreakable
 	{
 		if (rand.nextInt(100) == 0)
 		{
-			world.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, Aether.getResource("aeportal.portal"), 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
+			world.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, Aether.getResourcePath("aeportal.portal"), 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
 		}
 
 		for (int count = 0; count < 4; count++)

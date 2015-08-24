@@ -6,11 +6,8 @@ import com.gildedgames.aether.common.items.consumables.ItemCloudParachute;
 import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.aether.common.player.abilites.AbilityParachute;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderParachute
@@ -40,6 +37,7 @@ public class RenderParachute
 
 	private ResourceLocation getParachuteTexture(ItemCloudParachute.ParachuteType type)
 	{
-		return new ResourceLocation(Aether.getResource("textures/entities/player/attachments/cloud_parachute/" + type.name().toLowerCase() + "_parachute.png"));
+		return new ResourceLocation(Aether.getResourcePath("textures/entities/player/attachments/cloud_parachute/"
+				+ type.name().toLowerCase() + "_parachute.png"));
 	}
 }

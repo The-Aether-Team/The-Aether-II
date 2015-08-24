@@ -12,7 +12,7 @@ public class ModelResourceList
 
 	public ModelResourceList()
 	{
-		this("");
+		this(null);
 	}
 
 	public ModelResourceList(String rootPath)
@@ -22,7 +22,7 @@ public class ModelResourceList
 
 	public ModelResourceList add(int meta, String path)
 	{
-		this.registrations.put(meta, Aether.getResource(this.prefixRoot + path));
+		this.registrations.put(meta, Aether.getResourcePath((this.prefixRoot != null ? this.prefixRoot : "") + path));
 
 		return this;
 	}

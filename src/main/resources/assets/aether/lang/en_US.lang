@@ -129,7 +129,6 @@ item.aether_record.labyrinth.desc=Moorziey - Demise
 item.aether_record.valkyrie.desc=Emile van Krieken - Ascending Dawn
 item.aether_record.recording_892.desc=Emile van Krieken - ???
 
-
 # Creative Tabs
 itemGroup.aetherBlocks=Aether Blocks
 itemGroup.aetherMaterials=Aether Materials
@@ -137,7 +136,6 @@ itemGroup.aetherTools=Aether Tools
 itemGroup.aetherWeapons=Aether Weapons
 itemGroup.aetherArmor=Aether Armor
 itemGroup.aetherConsumables=Aether Consumables
-
 
 # Containers
 container.holystone_furnace=Holystone Furnace

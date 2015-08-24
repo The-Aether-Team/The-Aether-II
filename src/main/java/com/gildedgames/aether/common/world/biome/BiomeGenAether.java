@@ -29,6 +29,6 @@ public class BiomeGenAether extends BiomeGenBase
 	@Override
 	public BiomeDecorator createBiomeDecorator()
 	{
-		return getModdedBiomeDecorator(new BiomeDecoratorAether());
+		return this.getModdedBiomeDecorator(new BiomeDecoratorAether());
 	}
 }

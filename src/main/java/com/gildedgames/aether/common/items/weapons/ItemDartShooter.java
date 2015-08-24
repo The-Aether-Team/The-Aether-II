@@ -123,7 +123,7 @@ public class ItemDartShooter extends Item
 				dart.setIsCritical(true);
 			}
 
-			world.playSoundAtEntity(player, Aether.getResource("aerandom.dart_shooter"), 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + speed * 0.5F);
+			world.playSoundAtEntity(player, Aether.getResourcePath("aerandom.dart_shooter"), 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + speed * 0.5F);
 
 			if (!world.isRemote)
 			{

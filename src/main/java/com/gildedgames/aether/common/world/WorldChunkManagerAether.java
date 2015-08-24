@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world;
 
-import com.gildedgames.aether.common.Aether;
+import com.gildedgames.aether.common.world.biome.BiomeGenAether;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManager;
@@ -11,12 +11,8 @@ import java.util.Random;
 
 public class WorldChunkManagerAether extends WorldChunkManager
 {
-	private BiomeGenBase biomeGenerator;
-
-	public WorldChunkManagerAether()
-	{
-		this.biomeGenerator = Aether.getAetherBiome();
-	}
+	// TODO: Config option to change biome ID.
+	private final BiomeGenBase biomeGenerator = new BiomeGenAether(237);
 
 	@Override
 	public boolean areBiomesViable(int i, int j, int k, List list)
