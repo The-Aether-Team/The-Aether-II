@@ -16,6 +16,8 @@ public class EntityFloatingBlock extends Entity
 {
 	private static final int BLOCK_NAME_ID = 20, BLOCK_STATE_ID = 21;
 
+	private int inAirTicks;
+
 	public EntityFloatingBlock(World world)
 	{
 		super(world);
@@ -49,18 +51,41 @@ public class EntityFloatingBlock extends Entity
 	@Override
 	public void onUpdate()
 	{
-		if (this.ticksExisted++ > 200)
+		// Destroys the source block, since deleting a neighboring block in the actual block class
+		// causes a infinite loop of updates.
+
+		if (this.inAirTicks++ == 0)
+		{
+			BlockPos pos = new BlockPos(this);
+
+			if (this.worldObj.getBlockState(pos).getBlock() == this.getBlockState().getBlock())
+			{
+				this.worldObj.setBlockToAir(pos);
+			}
+			else
+			{
+				this.setDead();
+			}
+		}
+
+		if (this.inAirTicks > 200)
 		{
 			this.setDead();
 
 			if (!this.worldObj.isRemote)
 			{
-				IBlockState state = this.getBlockState();
-				Block block = state.getBlock();
-				int meta = block.getMetaFromState(state);
+				if (this.worldObj.getGameRules().getGameRuleBooleanValue("doTileDrops"))
+				{
+					IBlockState state = this.getBlockState();
 
-				EntityItem entityItem = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(block, 1, meta));
-				this.worldObj.spawnEntityInWorld(entityItem);
+					Block block = state.getBlock();
+					int meta = block.getMetaFromState(state);
+
+					ItemStack stack = new ItemStack(block, 1, meta);
+
+					EntityItem entityItem = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, stack);
+					this.worldObj.spawnEntityInWorld(entityItem);
+				}
 			}
 		}
 		else
@@ -84,7 +109,7 @@ public class EntityFloatingBlock extends Entity
 
 				if (!this.worldObj.isAirBlock(abovePos))
 				{
-					this.worldObj.setBlockState(abovePos, this.getBlockState());
+					this.worldObj.setBlockState(pos, this.getBlockState());
 
 					this.setDead();
 				}
