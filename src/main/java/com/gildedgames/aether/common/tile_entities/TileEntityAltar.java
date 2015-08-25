@@ -53,20 +53,23 @@ public class TileEntityAltar extends TileEntity
 
 	public void attemptCrafting()
 	{
-		IAltarRecipe recipe = RecipesAether.altarRegistry.getMatchingRecipe(this.getStackOnAltar());
-
-		if (recipe != null)
+		if (this.getStackOnAltar() != null && this.getAmbrosiumCount() > 0)
 		{
-			int cost = recipe.getAmbrosiumCost(this.getStackOnAltar());
+			IAltarRecipe recipe = RecipesAether.altarRegistry.getMatchingRecipe(this.getStackOnAltar());
 
-			if (this.getAmbrosiumCount() >= cost)
+			if (recipe != null)
 			{
-				ItemStack stack = recipe.getOutput(this.getStackOnAltar());
+				int cost = recipe.getAmbrosiumCost(this.getStackOnAltar());
 
-				this.getWorld().spawnEntityInWorld(this.createEntityItemAboveAltar(stack));
+				if (this.getAmbrosiumCount() >= cost)
+				{
+					ItemStack stack = recipe.getOutput(this.getStackOnAltar());
 
-				this.ambrosiumCount -= cost;
-				this.setStackOnAltar(null);
+					this.getWorld().spawnEntityInWorld(this.createEntityItemAboveAltar(stack));
+
+					this.ambrosiumCount -= cost;
+					this.setStackOnAltar(null);
+				}
 			}
 		}
 	}

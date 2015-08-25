@@ -42,59 +42,73 @@ public class BlockAltar extends Block implements ITileEntityProvider
 		{
 			TileEntityAltar altar = (TileEntityAltar) world.getTileEntity(pos);
 
-			ItemStack stackInHand = player.inventory.getCurrentItem();
+			ItemStack heldStack = player.inventory.getCurrentItem();
 
-			if (stackInHand != null)
+			if (heldStack != null)
 			{
-				if (stackInHand.getItem() == ItemsAether.ambrosium_shard)
+				if (heldStack.isItemEqual(altar.getStackOnAltar()))
+				{
+					this.dropNextItem(altar, world);
+				}
+				else if (heldStack.getItem() == ItemsAether.ambrosium_shard)
 				{
 					if (altar.getAmbrosiumCount() < 16)
 					{
 						if (!player.capabilities.isCreativeMode)
 						{
-							stackInHand.stackSize -= 1;
+							heldStack.stackSize -= 1;
 						}
 
 						altar.addAmbrosiumShard();
 					}
 				}
-				else if (RecipesAether.altarRegistry.isEnchantableItem(stackInHand))
+				else if (RecipesAether.altarRegistry.isEnchantableItem(heldStack))
 				{
-					ItemStack stack = stackInHand.copy();
+					ItemStack stack = heldStack.copy();
 					stack.stackSize = 1;
+
+					if (altar.getStackOnAltar() != null)
+					{
+						world.spawnEntityInWorld(altar.createEntityItemAboveAltar(altar.getStackOnAltar()));
+					}
 
 					altar.setStackOnAltar(stack);
 
-					stackInHand.stackSize--;
+					heldStack.stackSize--;
 				}
 			}
 			else
 			{
-				ItemStack stack = null;
-
-				if (altar.getStackOnAltar() != null)
-				{
-					stack = altar.getStackOnAltar();
-
-					altar.setStackOnAltar(null);
-				}
-				else if (altar.getAmbrosiumCount() > 0)
-				{
-					stack = new ItemStack(ItemsAether.ambrosium_shard, 1);
-
-					altar.removeAmbrosiumShard();
-				}
-
-				if (stack != null)
-				{
-					world.spawnEntityInWorld(altar.createEntityItemAboveAltar(stack));
-				}
+				this.dropNextItem(altar, world);
 			}
 
 			altar.attemptCrafting();
 		}
 
 		return true;
+	}
+
+	private void dropNextItem(TileEntityAltar altar, World world)
+	{
+		ItemStack stack = null;
+
+		if (altar.getStackOnAltar() != null)
+		{
+			stack = altar.getStackOnAltar();
+
+			altar.setStackOnAltar(null);
+		}
+		else if (altar.getAmbrosiumCount() > 0)
+		{
+			stack = new ItemStack(ItemsAether.ambrosium_shard, 1);
+
+			altar.removeAmbrosiumShard();
+		}
+
+		if (stack != null)
+		{
+			world.spawnEntityInWorld(altar.createEntityItemAboveAltar(stack));
+		}
 	}
 
 	@Override
