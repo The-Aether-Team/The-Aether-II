@@ -92,7 +92,7 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IAetherBlock
 	}
 
 	@Override
-	public void randomTick(World world, BlockPos pos, IBlockState state, Random random)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
 	{
 		if (!((Boolean) state.getValue(PROPERTY_HARVESTABLE)))
 		{

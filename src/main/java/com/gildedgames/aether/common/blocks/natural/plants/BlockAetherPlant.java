@@ -64,7 +64,7 @@ public class BlockAetherPlant extends Block
 
 	public boolean isSuitableSoilBlock(Block soilBlock)
 	{
-		return soilBlock == BlocksAether.aether_grass;
+		return soilBlock == BlocksAether.aether_grass || soilBlock == BlocksAether.aether_dirt;
 	}
 
 	@Override
