@@ -1,6 +1,5 @@
 @echo off
-title [Aether-1.8/] Running Gradle tasks... 'build'
-
+title Building the Aether II...
 call gradlew.bat build
 
 pause
