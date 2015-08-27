@@ -20,7 +20,10 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemsAether
@@ -144,6 +147,14 @@ public class ItemsAether
 		dart = registerItem("dart", new ItemDart(), AetherCreativeTabs.tabWeapons);
 
 		cloud_parachute = registerItem("cloud_parachute", new ItemCloudParachute(), AetherCreativeTabs.tabConsumables);
+
+		registerItemProperties();
+	}
+
+	private static void registerItemProperties()
+	{
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER,
+				new ItemStack(ItemsAether.skyroot_water_bucket), new ItemStack(ItemsAether.skyroot_bucket));
 	}
 
 	private static Item registerItem(String name, Item item, CreativeTabs tab)
