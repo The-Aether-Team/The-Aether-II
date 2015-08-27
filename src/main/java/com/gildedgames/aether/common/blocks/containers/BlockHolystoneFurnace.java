@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.blocks.containers;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.tile_entities.TileEntityHolystoneFurnance;
 import net.minecraft.block.BlockContainer;
-import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;

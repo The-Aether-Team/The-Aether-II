@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.recipes.altar;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class AltarSimpleRecipe implements IAltarRecipe

@@ -1,9 +1,7 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.common.services.AetherServices;
-import com.gildedgames.aether.common.world.biome.BiomeGenAether;
 import com.gildedgames.util.core.SidedObject;
-import com.gildedgames.util.player.PlayerCore;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
