@@ -12,6 +12,11 @@ public class BiomeGenAether extends BiomeGenBase
 		this.setBiomeName("Aether");
 		this.setDisableRain();
 		this.setTemperatureRainfall(0.5f, 0f);
+
+		this.spawnableMonsterList.clear();
+		this.spawnableCreatureList.clear();
+		this.spawnableWaterCreatureList.clear();
+		this.spawnableCaveCreatureList.clear();
 	}
 
 	@Override
