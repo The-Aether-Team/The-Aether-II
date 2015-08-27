@@ -6,10 +6,6 @@
 
 </p>
 
-### Setting up your Workspace
-
-Setting up your workspace is a lot easier now. Run the `setup_eclipse.bat` found in the root directory of the repo. Aftewards, open Eclipse and navigate to `File > Switch Workspace...`, then choose `Other...` and browse for the `eclipse` folder found inside the repo.
-
 ### Developers
 
 When working on the code, it is **mandatory** to keep consistent use of the Gilded Games' Formatting and Cleanup settings. We _will_ revert commits that do not adhere to it.

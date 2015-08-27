@@ -1,14 +1,11 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.common.services.AetherServices;
-import com.gildedgames.util.core.SidedObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.relauncher.Side;
 
 @Mod(name = Aether.MOD_NAME, modid = Aether.MOD_ID, version = Aether.MOD_VERSION)
 public class Aether
@@ -27,9 +24,6 @@ public class Aether
 	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.common.CommonProxy")
 	public static CommonProxy PROXY;
 
-	private final SidedObject<AetherServices> services =
-			new SidedObject<AetherServices>(new AetherServices(Side.CLIENT), new AetherServices(Side.SERVER));
-
 	@EventHandler
 	public void onFMLPreInit(FMLPreInitializationEvent event)
 	{
@@ -40,11 +34,6 @@ public class Aether
 	public void onFMLInit(FMLInitializationEvent event)
 	{
 		Aether.PROXY.init(event);
-	}
-
-	public static SidedObject<AetherServices> getServices()
-	{
-		return Aether.INSTANCE.services;
 	}
 
 	public static String getResourcePath(String resource)

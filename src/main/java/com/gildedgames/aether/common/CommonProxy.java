@@ -8,7 +8,6 @@ import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.recipes.RecipesAether;
 import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
 import com.gildedgames.aether.common.world.WorldProviderAether;
-import com.gildedgames.util.player.PlayerCore;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
@@ -25,9 +24,6 @@ public class CommonProxy
 
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		// Register our content with GGUtil.
-		PlayerCore.INSTANCE.registerPlayerPool(Aether.getServices().client().getPool(), Aether.getServices().server().getPool());
-
 		// Register with NetworkRegistry.
 		NetworkRegistry.INSTANCE.registerGuiHandler(Aether.INSTANCE, new AetherGuiHandler());
 

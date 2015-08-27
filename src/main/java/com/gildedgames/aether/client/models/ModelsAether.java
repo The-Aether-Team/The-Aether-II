@@ -14,7 +14,6 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.consumables.ItemCloudParachute;
 import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
 import com.google.common.collect.Maps;
@@ -262,13 +261,6 @@ public class ModelsAether
 				.add(ItemDart.DartType.GOLDEN.ordinal(), "golden_dart")
 				.add(ItemDart.DartType.ENCHANTED.ordinal(), "enchanted_dart")
 				.add(ItemDart.DartType.POISON.ordinal(), "poison_dart"));
-
-		registerModelList(ItemsAether.cloud_parachute, new ModelResourceList("cloud_parachute/")
-				.add(ItemCloudParachute.ParachuteType.COLD.ordinal(), "cold_cloud_parachute")
-				.add(ItemCloudParachute.ParachuteType.BLUE.ordinal(), "blue_cloud_parachute")
-				.add(ItemCloudParachute.ParachuteType.GOLDEN.ordinal(), "golden_cloud_parachute")
-				.add(ItemCloudParachute.ParachuteType.GREEN.ordinal(), "green_cloud_parachute")
-				.add(ItemCloudParachute.ParachuteType.PURPLE.ordinal(), "purple_cloud_parachute"));
 	}
 
 	private static void registerModelList(Item item, ModelResourceList list)
