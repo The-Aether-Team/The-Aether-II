@@ -40,12 +40,12 @@ public class AetherServices
 	
 	public void registerTabIcons()
 	{
-		tabBlocks.setDisplayStack(new ItemStack(BlocksAether.aether_grass, BlockAetherGrass.AETHER_GRASS.getMeta()));
-		tabMaterials.setDisplayStack(new ItemStack(ItemsAether.skyroot_stick));
-		tabTools.setDisplayStack(new ItemStack(ItemsAether.gravitite_pickaxe));
-		tabWeapons.setDisplayStack(new ItemStack(ItemsAether.gravitite_sword));
-		tabArmor.setDisplayStack(new ItemStack(ItemsAether.zanite_chestplate));
-		tabConsumables.setDisplayStack(new ItemStack(ItemsAether.orange));
+		this.tabBlocks.setDisplayStack(new ItemStack(BlocksAether.aether_grass, BlockAetherGrass.AETHER_GRASS.getMeta()));
+		this.tabMaterials.setDisplayStack(new ItemStack(ItemsAether.skyroot_stick));
+		this.tabTools.setDisplayStack(new ItemStack(ItemsAether.gravitite_pickaxe));
+		this.tabWeapons.setDisplayStack(new ItemStack(ItemsAether.gravitite_sword));
+		this.tabArmor.setDisplayStack(new ItemStack(ItemsAether.zanite_chestplate));
+		this.tabConsumables.setDisplayStack(new ItemStack(ItemsAether.orange));
 	}
 
 	public IPlayerHookPool<PlayerAether> getPool()

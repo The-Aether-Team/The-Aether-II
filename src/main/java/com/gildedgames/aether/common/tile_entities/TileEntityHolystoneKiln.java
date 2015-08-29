@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.tile_entities;
 
-import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
+import com.gildedgames.aether.common.blocks.containers.BlockHolystoneKiln;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -24,55 +24,55 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityHolystoneFurnance extends TileEntityLockable implements IUpdatePlayerListBox, ISidedInventory
+public class TileEntityHolystoneKiln extends TileEntityLockable implements IUpdatePlayerListBox, ISidedInventory
 {
 	private static final int[]
 			slotsTop = new int[] { 0 },
 			slotsBottom = new int[] { 2, 1 },
 			slotsSides = new int[] { 1 };
 
-	private ItemStack[] furnaceItemStacks = new ItemStack[3];
+	private ItemStack[] containedItemStacks = new ItemStack[3];
 
-	private String furnaceCustomName;
+	private String customName;
 
-	private int furnaceBurnTime;
+	private int burnTime;
 
 	private int currentItemBurnTime, cookTime, totalCookTime;
 
 	@Override
 	public int getSizeInventory()
 	{
-		return this.furnaceItemStacks.length;
+		return this.containedItemStacks.length;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int index)
 	{
-		return this.furnaceItemStacks[index];
+		return this.containedItemStacks[index];
 	}
 
 	@Override
 	public ItemStack decrStackSize(int index, int count)
 	{
-		if (this.furnaceItemStacks[index] != null)
+		if (this.containedItemStacks[index] != null)
 		{
 			ItemStack stack;
 
-			if (this.furnaceItemStacks[index].stackSize <= count)
+			if (this.containedItemStacks[index].stackSize <= count)
 			{
-				stack = this.furnaceItemStacks[index];
+				stack = this.containedItemStacks[index];
 
-				this.furnaceItemStacks[index] = null;
+				this.containedItemStacks[index] = null;
 
 				return stack;
 			}
 			else
 			{
-				stack = this.furnaceItemStacks[index].splitStack(count);
+				stack = this.containedItemStacks[index].splitStack(count);
 
-				if (this.furnaceItemStacks[index].stackSize == 0)
+				if (this.containedItemStacks[index].stackSize == 0)
 				{
-					this.furnaceItemStacks[index] = null;
+					this.containedItemStacks[index] = null;
 				}
 
 				return stack;
@@ -86,11 +86,11 @@ public class TileEntityHolystoneFurnance extends TileEntityLockable implements I
 
 	public ItemStack getStackInSlotOnClosing(int index)
 	{
-		if (this.furnaceItemStacks[index] != null)
+		if (this.containedItemStacks[index] != null)
 		{
-			ItemStack stack = this.furnaceItemStacks[index];
+			ItemStack stack = this.containedItemStacks[index];
 
-			this.furnaceItemStacks[index] = null;
+			this.containedItemStacks[index] = null;
 
 			return stack;
 		}
@@ -102,10 +102,10 @@ public class TileEntityHolystoneFurnance extends TileEntityLockable implements I
 
 	public void setInventorySlotContents(int index, ItemStack stack)
 	{
-		boolean isEqual = stack != null && stack.isItemEqual(this.furnaceItemStacks[index]) &&
-				ItemStack.areItemStackTagsEqual(stack, this.furnaceItemStacks[index]);
+		boolean isEqual = stack != null && stack.isItemEqual(this.containedItemStacks[index]) &&
+				ItemStack.areItemStackTagsEqual(stack, this.containedItemStacks[index]);
 
-		this.furnaceItemStacks[index] = stack;
+		this.containedItemStacks[index] = stack;
 
 		if (stack != null && stack.stackSize > this.getInventoryStackLimit())
 		{
@@ -122,24 +122,24 @@ public class TileEntityHolystoneFurnance extends TileEntityLockable implements I
 
 	public String getCommandSenderName()
 	{
-		return this.hasCustomName() ? this.furnaceCustomName : "container.holystone_furnace";
+		return this.hasCustomName() ? this.customName : "container.holystone_furnace";
 	}
 
 	public boolean hasCustomName()
 	{
-		return this.furnaceCustomName != null && this.furnaceCustomName.length() > 0;
+		return this.customName != null && this.customName.length() > 0;
 	}
 
 	public void setCustomInventoryName(String name)
 	{
-		this.furnaceCustomName = name;
+		this.customName = name;
 	}
 
 	public void readFromNBT(NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
 
-		this.furnaceItemStacks = new ItemStack[this.getSizeInventory()];
+		this.containedItemStacks = new ItemStack[this.getSizeInventory()];
 
 		NBTTagList stackList = compound.getTagList("Items", 10);
 
@@ -149,20 +149,20 @@ public class TileEntityHolystoneFurnance extends TileEntityLockable implements I
 
 			byte slotPos = stack.getByte("Slot");
 
-			if (slotPos >= 0 && slotPos < this.furnaceItemStacks.length)
+			if (slotPos >= 0 && slotPos < this.containedItemStacks.length)
 			{
-				this.furnaceItemStacks[slotPos] = ItemStack.loadItemStackFromNBT(stack);
+				this.containedItemStacks[slotPos] = ItemStack.loadItemStackFromNBT(stack);
 			}
 		}
 
-		this.furnaceBurnTime = compound.getShort("BurnTime");
+		this.burnTime = compound.getShort("BurnTime");
 		this.cookTime = compound.getShort("CookTime");
 		this.totalCookTime = compound.getShort("CookTimeTotal");
-		this.currentItemBurnTime = TileEntityFurnace.getItemBurnTime(this.furnaceItemStacks[1]);
+		this.currentItemBurnTime = TileEntityFurnace.getItemBurnTime(this.containedItemStacks[1]);
 
 		if (compound.hasKey("CustomName", 8))
 		{
-			this.furnaceCustomName = compound.getString("CustomName");
+			this.customName = compound.getString("CustomName");
 		}
 	}
 
@@ -170,21 +170,21 @@ public class TileEntityHolystoneFurnance extends TileEntityLockable implements I
 	{
 		super.writeToNBT(compound);
 
-		compound.setShort("BurnTime", (short) this.furnaceBurnTime);
+		compound.setShort("BurnTime", (short) this.burnTime);
 		compound.setShort("CookTime", (short) this.cookTime);
 		compound.setShort("CookTimeTotal", (short) this.totalCookTime);
 
 		NBTTagList stackList = new NBTTagList();
 
-		for (int i = 0; i < this.furnaceItemStacks.length; ++i)
+		for (int i = 0; i < this.containedItemStacks.length; ++i)
 		{
-			if (this.furnaceItemStacks[i] != null)
+			if (this.containedItemStacks[i] != null)
 			{
 				NBTTagCompound stackNBT = new NBTTagCompound();
 
 				stackNBT.setByte("Slot", (byte) i);
 
-				this.furnaceItemStacks[i].writeToNBT(stackNBT);
+				this.containedItemStacks[i].writeToNBT(stackNBT);
 
 				stackList.appendTag(stackNBT);
 			}
@@ -194,7 +194,7 @@ public class TileEntityHolystoneFurnance extends TileEntityLockable implements I
 
 		if (this.hasCustomName())
 		{
-			compound.setString("CustomName", this.furnaceCustomName);
+			compound.setString("CustomName", this.customName);
 		}
 	}
 
@@ -205,7 +205,7 @@ public class TileEntityHolystoneFurnance extends TileEntityLockable implements I
 
 	public boolean isBurning()
 	{
-		return this.furnaceBurnTime > 0;
+		return this.burnTime > 0;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -223,12 +223,12 @@ public class TileEntityHolystoneFurnance extends TileEntityLockable implements I
 
 		if (this.isBurning())
 		{
-			this.furnaceBurnTime--;
+			this.burnTime--;
 		}
 
 		if (!this.worldObj.isRemote)
 		{
-			if (!this.isBurning() && (this.furnaceItemStacks[1] == null || this.furnaceItemStacks[0] == null))
+			if (!this.isBurning() && (this.containedItemStacks[1] == null || this.containedItemStacks[0] == null))
 			{
 				if (!this.isBurning() && this.cookTime > 0)
 				{
@@ -239,21 +239,21 @@ public class TileEntityHolystoneFurnance extends TileEntityLockable implements I
 			{
 				if (!this.isBurning() && this.canSmelt())
 				{
-					this.currentItemBurnTime = this.furnaceBurnTime = TileEntityFurnace
-							.getItemBurnTime(this.furnaceItemStacks[1]);
+					this.currentItemBurnTime = this.burnTime = TileEntityFurnace
+							.getItemBurnTime(this.containedItemStacks[1]);
 
 					if (this.isBurning())
 					{
 						isDirty = true;
 
-						if (this.furnaceItemStacks[1] != null)
+						if (this.containedItemStacks[1] != null)
 						{
-							--this.furnaceItemStacks[1].stackSize;
+							--this.containedItemStacks[1].stackSize;
 
-							if (this.furnaceItemStacks[1].stackSize == 0)
+							if (this.containedItemStacks[1].stackSize == 0)
 							{
-								this.furnaceItemStacks[1] = this.furnaceItemStacks[1].getItem()
-										.getContainerItem(this.furnaceItemStacks[1]);
+								this.containedItemStacks[1] = this.containedItemStacks[1].getItem()
+										.getContainerItem(this.containedItemStacks[1]);
 							}
 						}
 					}
@@ -267,7 +267,7 @@ public class TileEntityHolystoneFurnance extends TileEntityLockable implements I
 					{
 						this.cookTime = 0;
 
-						this.totalCookTime = this.getCookTimeForItem(this.furnaceItemStacks[0]);
+						this.totalCookTime = this.getCookTimeForItem(this.containedItemStacks[0]);
 
 						this.smeltItem();
 
@@ -287,7 +287,7 @@ public class TileEntityHolystoneFurnance extends TileEntityLockable implements I
 				IBlockState state = this.worldObj.getBlockState(this.pos);
 
 				this.worldObj.setBlockState(this.pos, state
-						.withProperty(BlockHolystoneFurnace.PROPERTY_IS_LIT, this.isBurning()));
+						.withProperty(BlockHolystoneKiln.PROPERTY_IS_LIT, this.isBurning()));
 
 				this.validate();
 				this.worldObj.setTileEntity(this.pos, this);
@@ -307,32 +307,32 @@ public class TileEntityHolystoneFurnance extends TileEntityLockable implements I
 
 	private boolean canSmelt()
 	{
-		if (this.furnaceItemStacks[0] == null)
+		if (this.containedItemStacks[0] == null)
 		{
 			return false;
 		}
 		else
 		{
-			ItemStack itemstack = FurnaceRecipes.instance().getSmeltingResult(this.furnaceItemStacks[0]);
+			ItemStack itemstack = FurnaceRecipes.instance().getSmeltingResult(this.containedItemStacks[0]);
 
 			if (itemstack == null)
 			{
 				return false;
 			}
 
-			if (this.furnaceItemStacks[2] == null)
+			if (this.containedItemStacks[2] == null)
 			{
 				return true;
 			}
 
-			if (!this.furnaceItemStacks[2].isItemEqual(itemstack))
+			if (!this.containedItemStacks[2].isItemEqual(itemstack))
 			{
 				return false;
 			}
 
-			int result = this.furnaceItemStacks[2].stackSize + itemstack.stackSize;
+			int result = this.containedItemStacks[2].stackSize + itemstack.stackSize;
 
-			return result <= this.getInventoryStackLimit() && result <= this.furnaceItemStacks[2].getMaxStackSize();
+			return result <= this.getInventoryStackLimit() && result <= this.containedItemStacks[2].getMaxStackSize();
 		}
 	}
 
@@ -340,29 +340,29 @@ public class TileEntityHolystoneFurnance extends TileEntityLockable implements I
 	{
 		if (this.canSmelt())
 		{
-			ItemStack itemstack = FurnaceRecipes.instance().getSmeltingResult(this.furnaceItemStacks[0]);
+			ItemStack itemstack = FurnaceRecipes.instance().getSmeltingResult(this.containedItemStacks[0]);
 
-			if (this.furnaceItemStacks[2] == null)
+			if (this.containedItemStacks[2] == null)
 			{
-				this.furnaceItemStacks[2] = itemstack.copy();
+				this.containedItemStacks[2] = itemstack.copy();
 			}
-			else if (this.furnaceItemStacks[2].getItem() == itemstack.getItem())
+			else if (this.containedItemStacks[2].getItem() == itemstack.getItem())
 			{
-				this.furnaceItemStacks[2].stackSize += itemstack.stackSize;
-			}
-
-			if (this.furnaceItemStacks[0].getItem() == Item.getItemFromBlock(Blocks.sponge)
-					&& this.furnaceItemStacks[0].getMetadata() == 1 && this.furnaceItemStacks[1] != null
-					&& this.furnaceItemStacks[1].getItem() == Items.bucket)
-			{
-				this.furnaceItemStacks[1] = new ItemStack(Items.water_bucket);
+				this.containedItemStacks[2].stackSize += itemstack.stackSize;
 			}
 
-			--this.furnaceItemStacks[0].stackSize;
-
-			if (this.furnaceItemStacks[0].stackSize <= 0)
+			if (this.containedItemStacks[0].getItem() == Item.getItemFromBlock(Blocks.sponge)
+					&& this.containedItemStacks[0].getMetadata() == 1 && this.containedItemStacks[1] != null
+					&& this.containedItemStacks[1].getItem() == Items.bucket)
 			{
-				this.furnaceItemStacks[0] = null;
+				this.containedItemStacks[1] = new ItemStack(Items.water_bucket);
+			}
+
+			--this.containedItemStacks[0].stackSize;
+
+			if (this.containedItemStacks[0].stackSize <= 0)
+			{
+				this.containedItemStacks[0] = null;
 			}
 		}
 	}
@@ -426,7 +426,7 @@ public class TileEntityHolystoneFurnance extends TileEntityLockable implements I
 		switch (id)
 		{
 		case 0:
-			return this.furnaceBurnTime;
+			return this.burnTime;
 		case 1:
 			return this.currentItemBurnTime;
 		case 2:
@@ -443,7 +443,7 @@ public class TileEntityHolystoneFurnance extends TileEntityLockable implements I
 		switch (id)
 		{
 		case 0:
-			this.furnaceBurnTime = value;
+			this.burnTime = value;
 			break;
 		case 1:
 			this.currentItemBurnTime = value;
@@ -464,9 +464,9 @@ public class TileEntityHolystoneFurnance extends TileEntityLockable implements I
 
 	public void clear()
 	{
-		for (int i = 0; i < this.furnaceItemStacks.length; ++i)
+		for (int i = 0; i < this.containedItemStacks.length; ++i)
 		{
-			this.furnaceItemStacks[i] = null;
+			this.containedItemStacks[i] = null;
 		}
 	}
 }

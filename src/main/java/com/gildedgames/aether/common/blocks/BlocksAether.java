@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
-import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
+import com.gildedgames.aether.common.blocks.containers.BlockHolystoneKiln;
 import com.gildedgames.aether.common.blocks.containers.BlockSkyrootWorkbench;
 import com.gildedgames.aether.common.blocks.dungeon.BlockDungeon;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
@@ -88,7 +88,7 @@ public class BlocksAether
 	
 	public static Block holystone_brick;
 
-	public static Block holystone_furnace;
+	public static Block holystone_kiln;
 
 	public static void preInit()
 	{
@@ -147,7 +147,7 @@ public class BlocksAether
 		
 		holystone_brick = registerBlock("holystone_brick", new BlockAether(Material.rock), AetherCore.locate().tabBlocks);
 
-		holystone_furnace = registerBlock("holystone_furnace", new BlockHolystoneFurnace());
+		holystone_kiln = registerBlock("holystone_kiln", new BlockHolystoneKiln());
 
 		registerHarvestLevels();
 	}

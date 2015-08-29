@@ -11,6 +11,6 @@ public class TileEntitiesAether
 	public static void preInit()
 	{
 		GameRegistry.registerTileEntity(TileEntityAltar.class, ALTAR_ID);
-		GameRegistry.registerTileEntity(TileEntityHolystoneFurnance.class, HOLYSTONE_FURNACE_ID);
+		GameRegistry.registerTileEntity(TileEntityHolystoneKiln.class, HOLYSTONE_FURNACE_ID);
 	}
 }

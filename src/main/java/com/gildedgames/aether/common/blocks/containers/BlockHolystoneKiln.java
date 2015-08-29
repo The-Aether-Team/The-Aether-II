@@ -22,9 +22,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.tile_entities.TileEntityHolystoneFurnance;
+import com.gildedgames.aether.common.tile_entities.TileEntityHolystoneKiln;
 
-public class BlockHolystoneFurnace extends BlockContainer
+public class BlockHolystoneKiln extends BlockContainer
 {
 	public static final PropertyBool PROPERTY_IS_LIT = PropertyBool.create("is_lit");
 
@@ -32,7 +32,7 @@ public class BlockHolystoneFurnace extends BlockContainer
 
 	public static final int UNLIT_META = 0, LIT_META = 1;
 
-	public BlockHolystoneFurnace()
+	public BlockHolystoneKiln()
 	{
 		super(Material.rock);
 
@@ -56,9 +56,9 @@ public class BlockHolystoneFurnace extends BlockContainer
 		{
 			TileEntity tileEntity = world.getTileEntity(pos);
 
-			if (tileEntity instanceof TileEntityHolystoneFurnance)
+			if (tileEntity instanceof TileEntityHolystoneKiln)
 			{
-				player.displayGUIChest((TileEntityHolystoneFurnance) tileEntity);
+				player.displayGUIChest((TileEntityHolystoneKiln) tileEntity);
 			}
 		}
 
@@ -70,9 +70,9 @@ public class BlockHolystoneFurnace extends BlockContainer
 	{
 		TileEntity tileEntity = world.getTileEntity(pos);
 
-		if (tileEntity instanceof TileEntityHolystoneFurnance)
+		if (tileEntity instanceof TileEntityHolystoneKiln)
 		{
-			InventoryHelper.dropInventoryItems(world, pos, (TileEntityHolystoneFurnance) tileEntity);
+			InventoryHelper.dropInventoryItems(world, pos, (TileEntityHolystoneKiln) tileEntity);
 		}
 
 		super.breakBlock(world, pos, state);
@@ -170,6 +170,6 @@ public class BlockHolystoneFurnace extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{
-		return new TileEntityHolystoneFurnance();
+		return new TileEntityHolystoneKiln();
 	}
 }
