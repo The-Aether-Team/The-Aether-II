@@ -1,13 +1,14 @@
 package com.gildedgames.aether.common.world;
 
-import com.gildedgames.aether.common.world.biome.BiomeGenAether;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManager;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import com.gildedgames.aether.common.world.biome.BiomeGenAether;
 
 public class WorldChunkManagerAether extends WorldChunkManager
 {
@@ -38,32 +39,32 @@ public class WorldChunkManagerAether extends WorldChunkManager
 	}
 
 	@Override
-	public float[] getRainfall(float listToReuse[], int x, int z, int width, int length)
+	public float[] getRainfall(float[] arrayToReuse, int x, int z, int width, int length)
 	{
 		int size = width * length;
 
-		if (listToReuse == null || listToReuse.length < size)
+		if (arrayToReuse == null || arrayToReuse.length < size)
 		{
-			listToReuse = new float[size];
+			arrayToReuse = new float[size];
 		}
 
-		Arrays.fill(listToReuse, 0, size, 0);
+		Arrays.fill(arrayToReuse, 0, size, 0);
 
-		return listToReuse;
+		return arrayToReuse;
 	}
 
 	@Override
-	public BiomeGenBase[] loadBlockGeneratorData(BiomeGenBase listToReuse[], int x, int z, int width, int depth)
+	public BiomeGenBase[] loadBlockGeneratorData(BiomeGenBase[] arrayToReuse, int x, int z, int width, int depth)
 	{
 		int size = width * depth;
 
-		if (listToReuse == null || listToReuse.length < size)
+		if (arrayToReuse == null || arrayToReuse.length < size)
 		{
-			listToReuse = new BiomeGenBase[size];
+			arrayToReuse = new BiomeGenBase[size];
 		}
 
-		Arrays.fill(listToReuse, 0, size, this.biomeGenerator);
+		Arrays.fill(arrayToReuse, 0, size, this.biomeGenerator);
 
-		return listToReuse;
+		return arrayToReuse;
 	}
 }

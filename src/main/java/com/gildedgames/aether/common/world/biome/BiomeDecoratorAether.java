@@ -1,17 +1,20 @@
 package com.gildedgames.aether.common.world.biome;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
-import com.gildedgames.aether.common.world.features.WorldGenAetherFlowers;
-import com.gildedgames.aether.common.world.features.WorldGenAetherTallGrass;
+import java.util.Random;
+
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 
-import java.util.Random;
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
+import com.gildedgames.aether.common.world.features.WorldGenAetherFlowers;
+import com.gildedgames.aether.common.world.features.WorldGenAetherTallGrass;
 
 public class BiomeDecoratorAether extends BiomeDecorator
 {
@@ -52,6 +55,8 @@ public class BiomeDecoratorAether extends BiomeDecorator
 	@Override
 	protected void genDecorations(BiomeGenBase genBase)
 	{
+		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(this.currentWorld, this.randomGenerator, this.field_180294_c));
+
 		this.generateOres();
 
 		int x, y, z;
@@ -62,7 +67,7 @@ public class BiomeDecoratorAether extends BiomeDecorator
 		{
 			x = this.randomGenerator.nextInt(16) + 8;
 			z = this.randomGenerator.nextInt(16) + 8;
-			y = nextInt(this.currentWorld.getHeight(this.field_180294_c.add(x, 0, z)).getY() * 2);
+			y = this.nextInt(this.currentWorld.getHeight(this.field_180294_c.add(x, 0, z)).getY() * 2);
 
 			this.genAetherGrass.generate(this.currentWorld, this.randomGenerator, this.field_180294_c.add(x, y, z));
 		}
@@ -78,7 +83,7 @@ public class BiomeDecoratorAether extends BiomeDecorator
 
 		for (count = 0; count < 6; count++)
 		{
-			if (randomGenerator.nextInt(2) == 0)
+			if (this.randomGenerator.nextInt(2) == 0)
 			{
 				x = this.randomGenerator.nextInt(16) + 8;
 				y = this.randomGenerator.nextInt(128);
