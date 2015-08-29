@@ -122,7 +122,7 @@ public class TileEntityHolystoneKiln extends TileEntityLockable implements IUpda
 
 	public String getCommandSenderName()
 	{
-		return this.hasCustomName() ? this.customName : "container.holystone_furnace";
+		return this.hasCustomName() ? this.customName : "container.holystone_kiln";
 	}
 
 	public boolean hasCustomName()

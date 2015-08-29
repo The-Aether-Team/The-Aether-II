@@ -6,11 +6,11 @@ public class TileEntitiesAether
 {
 	public static final String
 			ALTAR_ID = "aether.altar",
-			HOLYSTONE_FURNACE_ID = "aether.holystone_furnace";
+			HOLYSTONE_KILN_ID = "aether.holystone_kiln";
 
 	public static void preInit()
 	{
 		GameRegistry.registerTileEntity(TileEntityAltar.class, ALTAR_ID);
-		GameRegistry.registerTileEntity(TileEntityHolystoneKiln.class, HOLYSTONE_FURNACE_ID);
+		GameRegistry.registerTileEntity(TileEntityHolystoneKiln.class, HOLYSTONE_KILN_ID);
 	}
 }
