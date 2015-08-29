@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.common.services.AetherServices;
 import com.gildedgames.util.core.SidedObject;
+
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -10,8 +10,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
-@Mod(name = Aether.MOD_NAME, modid = Aether.MOD_ID, version = Aether.MOD_VERSION)
-public class Aether
+@Mod(name = AetherCore.MOD_NAME, modid = AetherCore.MOD_ID, version = AetherCore.MOD_VERSION)
+public class AetherCore
 {
 	public static final String MOD_NAME = "Aether II";
 
@@ -22,33 +22,42 @@ public class Aether
 	public static final int AETHER_DIM_ID = 3;
 
 	@Instance
-	public static Aether INSTANCE;
+	public static AetherCore INSTANCE;
 
 	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.common.CommonProxy")
 	public static CommonProxy PROXY;
 
-	private final SidedObject<AetherServices> services =
-			new SidedObject<AetherServices>(new AetherServices(Side.CLIENT), new AetherServices(Side.SERVER));
+	private final SidedObject<AetherServices> services = new SidedObject<AetherServices>(new AetherServices(Side.CLIENT), new AetherServices(Side.SERVER));
 
 	@EventHandler
 	public void onFMLPreInit(FMLPreInitializationEvent event)
 	{
-		Aether.PROXY.preInit(event);
+		AetherCore.PROXY.preInit(event);
 	}
 
 	@EventHandler
 	public void onFMLInit(FMLInitializationEvent event)
 	{
-		Aether.PROXY.init(event);
+		AetherCore.PROXY.init(event);
 	}
 
-	public static SidedObject<AetherServices> getServices()
+	public static AetherServices locate()
 	{
-		return Aether.INSTANCE.services;
+		return AetherCore.INSTANCE.services.instance();
+	}
+	
+	public static AetherServices client()
+	{
+		return AetherCore.INSTANCE.services.client();
+	}
+	
+	public static AetherServices server()
+	{
+		return AetherCore.INSTANCE.services.server();
 	}
 
 	public static String getResourcePath(String resource)
 	{
-		return (Aether.MOD_ID + ":") + resource;
+		return (AetherCore.MOD_ID + ":") + resource;
 	}
 }

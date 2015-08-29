@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.player;
 
-import com.gildedgames.aether.common.Aether;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.player.abilites.AbilityParachute;
 import com.gildedgames.util.player.common.IPlayerHookPool;
 import com.gildedgames.util.player.common.player.IPlayerHook;
@@ -32,12 +32,12 @@ public class PlayerAether implements IPlayerHook
 
 	public static PlayerAether getPlayer(EntityPlayer player)
 	{
-		return Aether.getServices().instance().getPool().get(player);
+		return AetherCore.locate().getPool().get(player);
 	}
 
 	public static PlayerAether getPlayer(UUID uuid)
 	{
-		return Aether.getServices().instance().getPool().get(uuid);
+		return AetherCore.locate().getPool().get(uuid);
 	}
 
 	@Override

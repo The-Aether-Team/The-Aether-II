@@ -1,7 +1,7 @@
 package com.gildedgames.aether.client.renderer.entities.player.attachments;
 
 import com.gildedgames.aether.client.models.player.attachments.ModelParachute;
-import com.gildedgames.aether.common.Aether;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.items.consumables.ItemCloudParachute;
 import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.aether.common.player.abilites.AbilityParachute;
@@ -37,7 +37,7 @@ public class RenderParachute
 
 	private ResourceLocation getParachuteTexture(ItemCloudParachute.ParachuteType type)
 	{
-		return new ResourceLocation(Aether.getResourcePath("textures/entities/player/attachments/cloud_parachute/"
+		return new ResourceLocation(AetherCore.getResourcePath("textures/entities/player/attachments/cloud_parachute/"
 				+ type.name().toLowerCase() + "_parachute.png"));
 	}
 }

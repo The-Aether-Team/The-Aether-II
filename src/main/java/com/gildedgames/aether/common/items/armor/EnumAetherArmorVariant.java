@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.armor;
 
-import com.gildedgames.aether.common.Aether;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -12,7 +12,7 @@ public enum EnumAetherArmorVariant
 
 	public String getResourceForSlot(int layerIndex)
 	{
-		return Aether.getResourcePath("textures/armor/" + this.name().toLowerCase() + "_layer_" + (layerIndex == 2 ? 2 : 1) + ".png");
+		return AetherCore.getResourcePath("textures/armor/" + this.name().toLowerCase() + "_layer_" + (layerIndex == 2 ? 2 : 1) + ".png");
 	}
 
 	public ArmorMaterial getArmorMaterial()

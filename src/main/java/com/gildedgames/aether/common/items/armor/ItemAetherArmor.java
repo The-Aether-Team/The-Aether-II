@@ -1,9 +1,10 @@
 package com.gildedgames.aether.common.items.armor;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+
+import com.gildedgames.aether.common.AetherCore;
 
 public class ItemAetherArmor extends ItemArmor
 {
@@ -15,7 +16,7 @@ public class ItemAetherArmor extends ItemArmor
 
 		this.armorVariant = material;
 
-		this.setCreativeTab(AetherCreativeTabs.tabArmor);
+		this.setCreativeTab(AetherCore.locate().tabArmor);
 	}
 
 	@Override

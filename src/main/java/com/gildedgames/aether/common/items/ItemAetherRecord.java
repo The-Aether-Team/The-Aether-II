@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items;
 
-import com.gildedgames.aether.common.Aether;
+import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -24,6 +24,6 @@ public class ItemAetherRecord extends ItemRecord
 	@Override
 	public ResourceLocation getRecordResource(String name)
 	{
-		return new ResourceLocation(Aether.getResourcePath(name));
+		return new ResourceLocation(AetherCore.getResourcePath(name));
 	}
 }

@@ -1,7 +1,8 @@
 package com.gildedgames.aether.common.items.tools;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
 import net.minecraft.item.ItemTool;
+
+import com.gildedgames.aether.common.AetherCore;
 
 public class ItemAetherTool extends ItemTool
 {
@@ -9,6 +10,6 @@ public class ItemAetherTool extends ItemTool
 	{
 		super(toolType.getBaseDamage(), material, toolType.getEffectiveBlocks());
 
-		this.setCreativeTab(AetherCreativeTabs.tabTools);
+		this.setCreativeTab(AetherCore.locate().tabTools);
 	}
 }

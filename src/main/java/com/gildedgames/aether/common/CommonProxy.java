@@ -26,15 +26,15 @@ public class CommonProxy
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		// Register our content with GGUtil.
-		PlayerCore.INSTANCE.registerPlayerPool(Aether.getServices().client().getPool(), Aether.getServices().server().getPool());
+		PlayerCore.INSTANCE.registerPlayerPool(AetherCore.client().getPool(), AetherCore.server().getPool());
 
 		// Register with NetworkRegistry.
-		NetworkRegistry.INSTANCE.registerGuiHandler(Aether.INSTANCE, new AetherGuiHandler());
+		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 
 		// Register dimensions and biomes.
-		DimensionManager.registerProviderType(Aether.AETHER_DIM_ID, WorldProviderAether.class, true);
+		DimensionManager.registerProviderType(AetherCore.AETHER_DIM_ID, WorldProviderAether.class, true);
 
-		DimensionManager.registerDimension(Aether.AETHER_DIM_ID, Aether.AETHER_DIM_ID);
+		DimensionManager.registerDimension(AetherCore.AETHER_DIM_ID, AetherCore.AETHER_DIM_ID);
 
 		// Pre-initialize content.
 		AetherArmorMaterials.preInit();

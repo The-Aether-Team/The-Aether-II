@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.blocks.construction;
 
 import com.gildedgames.aether.client.renderer.effects.EntityAetherPortalFX;
-import com.gildedgames.aether.common.Aether;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.TeleporterAether;
 import net.minecraft.block.Block;
@@ -84,7 +84,7 @@ public class BlockAetherPortal extends BlockBreakable
 	{
 		if (rand.nextInt(100) == 0)
 		{
-			world.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, Aether.getResourcePath("aeportal.portal"), 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
+			world.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, AetherCore.getResourcePath("aeportal.portal"), 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
 		}
 
 		for (int count = 0; count < 4; count++)
@@ -158,7 +158,7 @@ public class BlockAetherPortal extends BlockBreakable
 			EntityPlayerMP player = (EntityPlayerMP) entity;
 			ServerConfigurationManager scm = MinecraftServer.getServer().getConfigurationManager();
 
-			int transferToID = player.dimension == Aether.AETHER_DIM_ID ? 0 : Aether.AETHER_DIM_ID;
+			int transferToID = player.dimension == AetherCore.AETHER_DIM_ID ? 0 : AetherCore.AETHER_DIM_ID;
 			scm.transferPlayerToDimension(player, transferToID, new TeleporterAether(MinecraftServer.getServer().worldServerForDimension(3)));
 		}
 	}

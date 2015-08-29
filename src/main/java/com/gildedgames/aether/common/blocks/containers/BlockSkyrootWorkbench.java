@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.containers;
 
-import com.gildedgames.aether.common.Aether;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -26,7 +26,7 @@ public class BlockSkyrootWorkbench extends Block
 	{
 		if (!world.isRemote)
 		{
-			player.openGui(Aether.INSTANCE, AetherGuiHandler.SKYROOT_WORKBENCH_ID, world, pos.getX(), pos.getY(), pos.getZ());
+			player.openGui(AetherCore.INSTANCE, AetherGuiHandler.SKYROOT_WORKBENCH_ID, world, pos.getX(), pos.getY(), pos.getZ());
 		}
 
 		return true;

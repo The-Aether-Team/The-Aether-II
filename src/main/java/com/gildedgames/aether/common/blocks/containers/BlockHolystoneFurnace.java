@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.blocks.containers;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
-import com.gildedgames.aether.common.tile_entities.TileEntityHolystoneFurnance;
+import java.util.Random;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -21,7 +21,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Random;
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.tile_entities.TileEntityHolystoneFurnance;
 
 public class BlockHolystoneFurnace extends BlockContainer
 {
@@ -35,7 +36,7 @@ public class BlockHolystoneFurnace extends BlockContainer
 	{
 		super(Material.rock);
 
-		this.setCreativeTab(AetherCreativeTabs.tabBlocks);
+		this.setCreativeTab(AetherCore.locate().tabBlocks);
 
 		this.setDefaultState(this.getBlockState().getBaseState()
 				.withProperty(PROPERTY_IS_LIT, Boolean.FALSE)

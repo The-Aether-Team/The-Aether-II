@@ -6,6 +6,14 @@
 .project
 .settings
 bin
+config
+crash-reports
+logs
+mod-config
+mods
+saves
+*.txt
+*.json
 
 # IntelliJ IDEA
 *.iml

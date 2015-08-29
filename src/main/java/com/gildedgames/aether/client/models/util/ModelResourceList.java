@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.models.util;
 
-import com.gildedgames.aether.common.Aether;
+import com.gildedgames.aether.common.AetherCore;
 
 import java.util.HashMap;
 
@@ -22,7 +22,7 @@ public class ModelResourceList
 
 	public ModelResourceList add(int meta, String path)
 	{
-		this.registrations.put(meta, Aether.getResourcePath((this.prefixRoot != null ? this.prefixRoot : "") + path));
+		this.registrations.put(meta, AetherCore.getResourcePath((this.prefixRoot != null ? this.prefixRoot : "") + path));
 
 		return this;
 	}
