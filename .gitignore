@@ -13,7 +13,7 @@ mod-config
 mods
 saves
 *.txt
-*.json
+usernamecache.json
 
 # IntelliJ IDEA
 *.iml
