@@ -154,9 +154,9 @@ public class ModelsAether
 				.add(BlockDungeon.NORMAL, "sentry_stone")
 				.add(BlockDungeon.DIVINE, "divine_sentry_stone"));
 
-		registerModelList(getItem(BlocksAether.holystone_kiln), new ModelResourceList("holystone_furnace/")
-				.add(BlockHolystoneKiln.LIT_META, "holystone_furnace_on")
-				.add(BlockHolystoneKiln.UNLIT_META, "holystone_furnace_off"));
+		registerModelList(getItem(BlocksAether.holystone_kiln), new ModelResourceList("holystone_kiln/")
+				.add(BlockHolystoneKiln.LIT_META, "holystone_kiln_on")
+				.add(BlockHolystoneKiln.UNLIT_META, "holystone_kiln_off"));
 
 		registerModelList(getItem(BlocksAether.ambrosium_ore), new ModelResourceList("ores/").add(0, "ambrosium_ore"));
 		registerModelList(getItem(BlocksAether.zanite_ore), new ModelResourceList("ores/").add(0, "zanite_ore"));
