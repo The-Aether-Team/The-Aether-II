@@ -10,6 +10,6 @@ public class ItemAetherSword extends ItemSword
 	{
 		super(material);
 
-		this.setCreativeTab(AetherCore.locate().tabWeapons);
+		this.setCreativeTab(AetherCore.locate().TAB_WEAPONS);
 	}
 }

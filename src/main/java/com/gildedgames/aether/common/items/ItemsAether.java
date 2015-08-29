@@ -71,10 +71,10 @@ public class ItemsAether
 
 	public static void preInit()
 	{
-		skyroot_stick = registerItem("skyroot_stick", new Item(), AetherCore.locate().tabMaterials);
-		ambrosium_shard = registerItem("ambrosium_shard", new ItemAmbrosiumShard(), AetherCore.locate().tabMaterials);
-		continuum_orb = registerItem("continuum_orb", new Item(), AetherCore.locate().tabMaterials);
-		zanite_gemstone = registerItem("zanite_gemstone", new Item(), AetherCore.locate().tabMaterials);
+		skyroot_stick = registerItem("skyroot_stick", new Item(), AetherCore.locate().TAB_MATERIALS);
+		ambrosium_shard = registerItem("ambrosium_shard", new ItemAmbrosiumShard(), AetherCore.locate().TAB_MATERIALS);
+		continuum_orb = registerItem("continuum_orb", new Item(), AetherCore.locate().TAB_MATERIALS);
+		zanite_gemstone = registerItem("zanite_gemstone", new Item(), AetherCore.locate().TAB_MATERIALS);
 
 		skyroot_axe = registerItem("skyroot_axe", new ItemSkyrootTool(EnumToolType.AXE));
 		skyroot_pickaxe = registerItem("skyroot_pickaxe", new ItemSkyrootTool(EnumToolType.PICKAXE));
@@ -126,28 +126,28 @@ public class ItemsAether
 		valkyrie_leggings = registerItem("valkyrie_leggings", new ItemAetherArmor(EnumAetherArmorVariant.VALKYRIE, 0, 2));
 		valkyrie_boots = registerItem("valkyrie_boots", new ItemAetherArmor(EnumAetherArmorVariant.VALKYRIE, 0, 3));
 
-		golden_amber = registerItem("golden_amber", new Item(), AetherCore.locate().tabMaterials);
+		golden_amber = registerItem("golden_amber", new Item(), AetherCore.locate().TAB_MATERIALS);
 
-		blueberry = registerItem("blueberry", new ItemFood(2, false), AetherCore.locate().tabConsumables);
-		orange = registerItem("orange", new ItemFood(4, false), AetherCore.locate().tabConsumables);
+		blueberry = registerItem("blueberry", new ItemFood(2, false), AetherCore.locate().TAB_CONSUMABLES);
+		orange = registerItem("orange", new ItemFood(4, false), AetherCore.locate().TAB_CONSUMABLES);
 
-		skyroot_bucket = registerItem("skyroot_bucket", new ItemSkyrootBucket(Blocks.air), AetherCore.locate().tabTools);
-		skyroot_water_bucket = registerItem("skyroot_water_bucket", new ItemSkyrootBucket(Blocks.flowing_water), AetherCore.locate().tabTools);
-		skyroot_milk_bucket = registerItem("skyroot_milk_bucket", new ItemSkyrootConsumableBucket(), AetherCore.locate().tabConsumables);
-		skyroot_poison_bucket = registerItem("skyroot_poison_bucket", new ItemSkyrootConsumableBucket(), AetherCore.locate().tabConsumables);
+		skyroot_bucket = registerItem("skyroot_bucket", new ItemSkyrootBucket(Blocks.air), AetherCore.locate().TAB_TOOLS);
+		skyroot_water_bucket = registerItem("skyroot_water_bucket", new ItemSkyrootBucket(Blocks.flowing_water), AetherCore.locate().TAB_TOOLS);
+		skyroot_milk_bucket = registerItem("skyroot_milk_bucket", new ItemSkyrootConsumableBucket(), AetherCore.locate().TAB_CONSUMABLES);
+		skyroot_poison_bucket = registerItem("skyroot_poison_bucket", new ItemSkyrootConsumableBucket(), AetherCore.locate().TAB_CONSUMABLES);
 
-		valkyrie_music_disc = registerItem("valkyrie_music_disc", new ItemAetherRecord("valkyrie"), AetherCore.locate().tabTools);
-		labyrinth_music_disc = registerItem("labyrinth_music_disc", new ItemAetherRecord("labyrinth"), AetherCore.locate().tabTools);
-		moa_music_disc = registerItem("moa_music_disc", new ItemAetherRecord("moa"), AetherCore.locate().tabTools);
-		aerwhale_music_disc = registerItem("aerwhale_music_disc", new ItemAetherRecord("aerwhale"), AetherCore.locate().tabTools);
-		recording_892 = registerItem("recording_892", new ItemAetherRecord("recording_892"), AetherCore.locate().tabTools);
+		valkyrie_music_disc = registerItem("valkyrie_music_disc", new ItemAetherRecord("valkyrie"), AetherCore.locate().TAB_TOOLS);
+		labyrinth_music_disc = registerItem("labyrinth_music_disc", new ItemAetherRecord("labyrinth"), AetherCore.locate().TAB_TOOLS);
+		moa_music_disc = registerItem("moa_music_disc", new ItemAetherRecord("moa"), AetherCore.locate().TAB_TOOLS);
+		aerwhale_music_disc = registerItem("aerwhale_music_disc", new ItemAetherRecord("aerwhale"), AetherCore.locate().TAB_TOOLS);
+		recording_892 = registerItem("recording_892", new ItemAetherRecord("recording_892"), AetherCore.locate().TAB_TOOLS);
 
-		healing_stone = registerItem("healing_stone", new ItemFood(0, 1.2f, false).setAlwaysEdible().setPotionEffect(Potion.regeneration.getId(), 30, 0, 1.0f), AetherCore.locate().tabConsumables);
+		healing_stone = registerItem("healing_stone", new ItemFood(0, 1.2f, false).setAlwaysEdible().setPotionEffect(Potion.regeneration.getId(), 30, 0, 1.0f), AetherCore.locate().TAB_CONSUMABLES);
 
-		dart_shooter = registerItem("dart_shooter", new ItemDartShooter(), AetherCore.locate().tabWeapons);
-		dart = registerItem("dart", new ItemDart(), AetherCore.locate().tabWeapons);
+		dart_shooter = registerItem("dart_shooter", new ItemDartShooter(), AetherCore.locate().TAB_WEAPONS);
+		dart = registerItem("dart", new ItemDart(), AetherCore.locate().TAB_WEAPONS);
 
-		cloud_parachute = registerItem("cloud_parachute", new ItemCloudParachute(), AetherCore.locate().tabConsumables);
+		cloud_parachute = registerItem("cloud_parachute", new ItemCloudParachute(), AetherCore.locate().TAB_CONSUMABLES);
 
 		registerItemProperties();
 	}

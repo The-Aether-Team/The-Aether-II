@@ -17,8 +17,7 @@ public class ClientProxy extends CommonProxy
 
 		ModelsAether.preInit();
 		
-		AetherCore.client().registerTabIcons();
-		AetherCore.server().registerTabIcons();
+		AetherCore.locate().registerTabIcons();
 	}
 
 	@Override

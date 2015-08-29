@@ -19,17 +19,17 @@ public class AetherServices
 
 	private final Side side;
 	
-	public final CreativeTab tabBlocks = new CreativeTab("aetherBlocks");
+	public static final CreativeTab TAB_BLOCKS = new CreativeTab("aetherBlocks");
 
-	public final CreativeTab tabMaterials = new CreativeTab("aetherMaterials");
+	public static final CreativeTab TAB_MATERIALS = new CreativeTab("aetherMaterials");
 
-	public final CreativeTab tabTools = new CreativeTab("aetherTools");
+	public static final CreativeTab TAB_TOOLS = new CreativeTab("aetherTools");
 
-	public final CreativeTab tabWeapons = new CreativeTab("aetherWeapons");
+	public static final CreativeTab TAB_WEAPONS = new CreativeTab("aetherWeapons");
 
-	public final CreativeTab tabArmor = new CreativeTab("aetherArmor");
+	public static final CreativeTab TAB_ARMOR = new CreativeTab("aetherArmor");
 
-	public final CreativeTab tabConsumables = new CreativeTab("aetherConsumables");
+	public static final CreativeTab TAB_CONSUMABLES = new CreativeTab("aetherConsumables");
 
 	public AetherServices(Side side)
 	{
@@ -40,12 +40,12 @@ public class AetherServices
 	
 	public void registerTabIcons()
 	{
-		this.tabBlocks.setDisplayStack(new ItemStack(BlocksAether.aether_grass, BlockAetherGrass.AETHER_GRASS.getMeta()));
-		this.tabMaterials.setDisplayStack(new ItemStack(ItemsAether.skyroot_stick));
-		this.tabTools.setDisplayStack(new ItemStack(ItemsAether.gravitite_pickaxe));
-		this.tabWeapons.setDisplayStack(new ItemStack(ItemsAether.gravitite_sword));
-		this.tabArmor.setDisplayStack(new ItemStack(ItemsAether.zanite_chestplate));
-		this.tabConsumables.setDisplayStack(new ItemStack(ItemsAether.orange));
+		this.TAB_BLOCKS.setDisplayStack(new ItemStack(BlocksAether.aether_grass, BlockAetherGrass.AETHER_GRASS.getMeta()));
+		this.TAB_MATERIALS.setDisplayStack(new ItemStack(ItemsAether.skyroot_stick));
+		this.TAB_TOOLS.setDisplayStack(new ItemStack(ItemsAether.gravitite_pickaxe));
+		this.TAB_WEAPONS.setDisplayStack(new ItemStack(ItemsAether.gravitite_sword));
+		this.TAB_ARMOR.setDisplayStack(new ItemStack(ItemsAether.zanite_chestplate));
+		this.TAB_CONSUMABLES.setDisplayStack(new ItemStack(ItemsAether.orange));
 	}
 
 	public IPlayerHookPool<PlayerAether> getPool()

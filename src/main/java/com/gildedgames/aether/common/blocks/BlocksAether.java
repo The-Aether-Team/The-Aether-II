@@ -92,60 +92,60 @@ public class BlocksAether
 
 	public static void preInit()
 	{
-		aether_dirt = registerBlock("aether_dirt", new BlockAether(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f), AetherCore.locate().tabBlocks);
+		aether_dirt = registerBlock("aether_dirt", new BlockAether(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f), AetherCore.locate().TAB_BLOCKS);
 
-		aether_grass = registerBlockWithItem("aether_grass", new BlockAetherGrass(), ItemBlockAetherSubtypes.class, AetherCore.locate().tabBlocks);
+		aether_grass = registerBlockWithItem("aether_grass", new BlockAetherGrass(), ItemBlockAetherSubtypes.class, AetherCore.locate().TAB_BLOCKS);
 
-		holystone = registerBlockWithItem("holystone", new BlockHolystone(), ItemBlockAetherSubtypes.class, AetherCore.locate().tabBlocks);
+		holystone = registerBlockWithItem("holystone", new BlockHolystone(), ItemBlockAetherSubtypes.class, AetherCore.locate().TAB_BLOCKS);
 
-		aercloud = registerBlockWithItem("aercloud", new BlockAercloud(), ItemBlockAetherSubtypes.class, AetherCore.locate().tabBlocks);
+		aercloud = registerBlockWithItem("aercloud", new BlockAercloud(), ItemBlockAetherSubtypes.class, AetherCore.locate().TAB_BLOCKS);
 
-		aether_log = registerBlockWithItem("aether_log", new BlockAetherLog(), ItemBlockAetherSubtypes.class, AetherCore.locate().tabBlocks);
+		aether_log = registerBlockWithItem("aether_log", new BlockAetherLog(), ItemBlockAetherSubtypes.class, AetherCore.locate().TAB_BLOCKS);
 
 		skyroot_planks = registerBlock("skyroot_planks", new BlockAether(Material.wood)
-				.setStepSound(Block.soundTypeWood).setHardness(2.0f).setResistance(5.0f), AetherCore.locate().tabBlocks);
+				.setStepSound(Block.soundTypeWood).setHardness(2.0f).setResistance(5.0f), AetherCore.locate().TAB_BLOCKS);
 
-		ambrosium_ore = registerBlock("ambrosium_ore", new BlockAmbrosiumOre(), AetherCore.locate().tabBlocks);
+		ambrosium_ore = registerBlock("ambrosium_ore", new BlockAmbrosiumOre(), AetherCore.locate().TAB_BLOCKS);
 
-		zanite_ore = registerBlock("zanite_ore", new BlockZaniteOre(), AetherCore.locate().tabBlocks);
+		zanite_ore = registerBlock("zanite_ore", new BlockZaniteOre(), AetherCore.locate().TAB_BLOCKS);
 
-		gravitite_ore = registerBlock("gravitite_ore", new BlockGravititeOre(), AetherCore.locate().tabBlocks);
+		gravitite_ore = registerBlock("gravitite_ore", new BlockGravititeOre(), AetherCore.locate().TAB_BLOCKS);
 
-		continuum_ore = registerBlock("continuum_ore", new BlockContinuumOre(), AetherCore.locate().tabBlocks);
+		continuum_ore = registerBlock("continuum_ore", new BlockContinuumOre(), AetherCore.locate().TAB_BLOCKS);
 
-		aether_leaves = registerBlockWithItem("aether_leaves", new BlockAetherLeaves(), ItemBlockAetherSubtypes.class, AetherCore.locate().tabBlocks);
+		aether_leaves = registerBlockWithItem("aether_leaves", new BlockAetherLeaves(), ItemBlockAetherSubtypes.class, AetherCore.locate().TAB_BLOCKS);
 
 		aether_portal = registerBlock("aether_portal", new BlockAetherPortal());
 
-		tall_aether_grass = registerBlock("tall_aether_grass", new BlockTallAetherGrass(), AetherCore.locate().tabBlocks);
+		tall_aether_grass = registerBlock("tall_aether_grass", new BlockTallAetherGrass(), AetherCore.locate().TAB_BLOCKS);
 
-		quicksoil = registerBlock("quicksoil", new BlockQuicksoil(), AetherCore.locate().tabBlocks);
+		quicksoil = registerBlock("quicksoil", new BlockQuicksoil(), AetherCore.locate().TAB_BLOCKS);
 
-		skyroot_crafting_table = registerBlock("skyroot_crafting_table", new BlockSkyrootWorkbench(), AetherCore.locate().tabBlocks);
+		skyroot_crafting_table = registerBlock("skyroot_crafting_table", new BlockSkyrootWorkbench(), AetherCore.locate().TAB_BLOCKS);
 
-		blueberry_bush = registerBlockWithItem("blueberry_bush", new BlockBlueberryBush(), ItemBlockAetherSubtypes.class, AetherCore.locate().tabBlocks);
+		blueberry_bush = registerBlockWithItem("blueberry_bush", new BlockBlueberryBush(), ItemBlockAetherSubtypes.class, AetherCore.locate().TAB_BLOCKS);
 
-		orange_tree = registerBlock("orange_tree", new BlockOrangeTree(), AetherCore.locate().tabBlocks);
+		orange_tree = registerBlock("orange_tree", new BlockOrangeTree(), AetherCore.locate().TAB_BLOCKS);
 
-		aether_flower = registerBlockWithItem("aether_flower", new BlockAetherFlower(), ItemBlockAetherSubtypes.class, AetherCore.locate().tabBlocks);
+		aether_flower = registerBlockWithItem("aether_flower", new BlockAetherFlower(), ItemBlockAetherSubtypes.class, AetherCore.locate().TAB_BLOCKS);
 
-		altar = registerBlock("altar", new BlockAltar(), AetherCore.locate().tabBlocks);
+		altar = registerBlock("altar", new BlockAltar(), AetherCore.locate().TAB_BLOCKS);
 
-		icestone = registerBlock("icestone", new BlockIcestone(), AetherCore.locate().tabBlocks);
+		icestone = registerBlock("icestone", new BlockIcestone(), AetherCore.locate().TAB_BLOCKS);
 
-		aerogel = registerBlock("aerogel", new BlockAerogel(), AetherCore.locate().tabBlocks);
+		aerogel = registerBlock("aerogel", new BlockAerogel(), AetherCore.locate().TAB_BLOCKS);
 
-		zanite_block = registerBlock("zanite_block", new BlockAether(Material.rock).setHardness(5f).setStepSound(Block.soundTypeStone), AetherCore.locate().tabBlocks);
+		zanite_block = registerBlock("zanite_block", new BlockAether(Material.rock).setHardness(5f).setStepSound(Block.soundTypeStone), AetherCore.locate().TAB_BLOCKS);
 
-		enchanted_gravitite = registerBlock("enchanted_gravitite", new BlockAether(Material.rock).setHardness(5f).setStepSound(Block.soundTypeStone), AetherCore.locate().tabBlocks);
+		enchanted_gravitite = registerBlock("enchanted_gravitite", new BlockAether(Material.rock).setHardness(5f).setStepSound(Block.soundTypeStone), AetherCore.locate().TAB_BLOCKS);
 
-		aether_sapling = registerBlockWithItem("aether_sapling", new BlockAetherSapling(), ItemBlockAetherSubtypes.class, AetherCore.locate().tabBlocks);
+		aether_sapling = registerBlockWithItem("aether_sapling", new BlockAetherSapling(), ItemBlockAetherSubtypes.class, AetherCore.locate().TAB_BLOCKS);
 
-		carved_stone = registerBlockWithItem("carved_stone", new BlockDungeon(Material.rock), ItemBlockAetherSubtypes.class, AetherCore.locate().tabBlocks);
+		carved_stone = registerBlockWithItem("carved_stone", new BlockDungeon(Material.rock), ItemBlockAetherSubtypes.class, AetherCore.locate().TAB_BLOCKS);
 
-		sentry_stone = registerBlockWithItem("sentry_stone", new BlockDungeon(Material.rock).setLightLevel(0.75f), ItemBlockAetherSubtypes.class, AetherCore.locate().tabBlocks);
+		sentry_stone = registerBlockWithItem("sentry_stone", new BlockDungeon(Material.rock).setLightLevel(0.75f), ItemBlockAetherSubtypes.class, AetherCore.locate().TAB_BLOCKS);
 		
-		holystone_brick = registerBlock("holystone_brick", new BlockAether(Material.rock), AetherCore.locate().tabBlocks);
+		holystone_brick = registerBlock("holystone_brick", new BlockAether(Material.rock), AetherCore.locate().TAB_BLOCKS);
 
 		holystone_kiln = registerBlock("holystone_kiln", new BlockHolystoneKiln());
 
