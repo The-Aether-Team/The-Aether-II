@@ -21,6 +21,7 @@ usernamecache.json
 *.iws
 .idea
 /out/
+classes
 
 # Gradle
 .gradle
