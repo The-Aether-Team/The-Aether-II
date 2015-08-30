@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -23,8 +23,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
-import java.util.Random;
+import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
+import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
+import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 
 public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 {
@@ -200,7 +201,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 	{
 		if (meta >= PURPLE_AERCLOUD.getMeta())
 		{
-			return this.getDefaultState().withProperty(PROPERTY_VARIANT, PURPLE_AERCLOUD).withProperty(PROPERTY_FACING, EnumFacing.getFront(meta - PURPLE_AERCLOUD.getMeta()));
+			return this.getDefaultState().withProperty(PROPERTY_VARIANT, PURPLE_AERCLOUD).withProperty(PROPERTY_FACING, EnumFacing.getHorizontal(meta - PURPLE_AERCLOUD.getMeta()));
 		}
 
 		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
@@ -211,7 +212,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
 	{
 		if (state.getValue(PROPERTY_VARIANT) == PURPLE_AERCLOUD)
 		{
-			return PURPLE_AERCLOUD.getMeta() + ((EnumFacing) state.getValue(PROPERTY_FACING)).getIndex();
+			return PURPLE_AERCLOUD.getMeta() + ((EnumFacing) state.getValue(PROPERTY_FACING)).getHorizontalIndex();
 		}
 
 		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();

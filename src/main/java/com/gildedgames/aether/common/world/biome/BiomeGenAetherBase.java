@@ -2,9 +2,17 @@ package com.gildedgames.aether.common.world.biome;
 
 import java.util.Random;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
+
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
+import com.gildedgames.aether.common.blocks.natural.BlockAercloud.AercloudVariant;
+import com.gildedgames.aether.common.world.features.WorldGenClouds;
 
 public abstract class BiomeGenAetherBase extends BiomeGenBase
 {
@@ -40,74 +48,52 @@ public abstract class BiomeGenAetherBase extends BiomeGenBase
 		return this.getModdedBiomeDecorator(new BiomeDecoratorAether());
 	}
 
+	private IBlockState stateFromVariant(AercloudVariant variant)
+	{
+		return BlocksAether.aercloud.getDefaultState().withProperty(BlockAercloud.PROPERTY_VARIANT, variant);
+	}
+
+	private IBlockState purpleFromFacing(EnumFacing facing)
+	{
+		return BlocksAether.aercloud.getDefaultState().withProperty(BlockAercloud.PROPERTY_VARIANT, BlockAercloud.PURPLE_AERCLOUD).withProperty(BlockAercloud.PROPERTY_FACING, facing);
+	}
+	
+	private void generateCloud(World world, Random rand, IBlockState state, int rarity, int x1, int z1, int width, int height, int offsetY, int numOfBlocks, boolean flat)
+	{
+		if (rand.nextInt(rarity) == 0)
+		{
+			int x = x1 + rand.nextInt(width);
+			int y = rand.nextInt(height);
+			int z = z1 + rand.nextInt(width);
+			(new WorldGenClouds(state, numOfBlocks, flat)).generate(world, rand, new BlockPos(x, y, z));
+		}
+	}
+
 	public void generateClouds(World world, Random rand, int chunkX, int chunkZ)
 	{
 		int x1 = chunkX * 16;
 		int z1 = chunkZ * 16;
 
-		//Purple Aercloud Generator
-		/*if (rand.nextInt(50) == 0)
-		{
-			int x = x1 + rand.nextInt(4);
-			int y = rand.nextInt(32);
-			int z = z1 + rand.nextInt(4);
-			(new AetherGenClouds(AetherBlocks.Aercloud.blockID, 8, 4, false)).generate(world, rand, x, y, z);
-		}
-		if (rand.nextInt(50) == 0)
-		{
-			int x = x1 + rand.nextInt(4);
-			int y = rand.nextInt(32);
-			int z = z1 + rand.nextInt(4);
-			(new AetherGenClouds(AetherBlocks.Aercloud.blockID, 7, 4, false)).generate(world, rand, x, y, z);
-		}
-		if (rand.nextInt(50) == 0)
-		{
-			int x = x1 + rand.nextInt(4);
-			int y = rand.nextInt(32);
-			int z = z1 + rand.nextInt(4);
-			(new AetherGenClouds(AetherBlocks.Aercloud.blockID, 6, 4, false)).generate(world, rand, x, y, z);
-		}
-		if (rand.nextInt(50) == 0)
-		{
-			int x = x1 + rand.nextInt(4);
-			int y = rand.nextInt(32);
-			int z = z1 + rand.nextInt(4);
-			(new AetherGenClouds(AetherBlocks.Aercloud.blockID, 5, 4, false)).generate(world, rand, x, y, z);
-		}
+		//								state								                rarity      width height offsetY numOfBlocks flat
+		this.generateCloud(world, rand, this.purpleFromFacing(EnumFacing.NORTH),            50, x1, z1, 4,    32,    0,      4,          false);
+		this.generateCloud(world, rand, this.purpleFromFacing(EnumFacing.EAST),             50, x1, z1, 4,    32,    0,      4,          false);
+		this.generateCloud(world, rand, this.purpleFromFacing(EnumFacing.WEST),             50, x1, z1, 4,    32,    0,      4,          false);
+		this.generateCloud(world, rand, this.purpleFromFacing(EnumFacing.SOUTH),            50, x1, z1, 4,    32,    0,      4,          false);
+		
+		this.generateCloud(world, rand, this.stateFromVariant(BlockAercloud.BLUE_AERCLOUD), 15, x1, z1, 16,   65,    32,     8,          false);
 
-		//Blue Aercloud Generator
-		if (rand.nextInt(15) == 0)
-		{
-			int x = x1 + rand.nextInt(16);
-			int y = rand.nextInt(65) + 32;
-			int z = z1 + rand.nextInt(16);
-			(new AetherGenClouds(AetherBlocks.Aercloud.blockID, 1, 8, false)).generate(world, rand, x, y, z);
-		}
+		this.generateCloud(world, rand, this.stateFromVariant(BlockAercloud.COLD_AERCLOUD), 10, x1, z1, 16,   65,    32,     16,         false);
 
-		//White Aercloud Generator
-		if (rand.nextInt(10) == 0)
-		{
-			int x = x1 + rand.nextInt(16);
-			int y = rand.nextInt(65) + 32;
-			int z = z1 + rand.nextInt(16);
-			(new AetherGenClouds(AetherBlocks.Aercloud.blockID, 0, 16, false)).generate(world, rand, x, y, z);
-		}
+		this.generateCloud(world, rand, this.stateFromVariant(BlockAercloud.COLD_AERCLOUD), 30, x1, z1, 16, 32, 0, 64, true);
 
-		if (rand.nextInt(6) == 0)
+
+		/*if (rand.nextInt(6) == 0)
 		{
 			int x = x1 + rand.nextInt(16);
 			int y = rand.nextInt(64) + 64;
 			int z = z1 + rand.nextInt(16);
-			(new AetherGenCumulusClouds(AetherBlocks.Aercloud.blockID, 10, 3)).generate(world, rand, x, y, z);
-		}
-
-		//Flat White Aercloud Generator
-		if (rand.nextInt(30) == 0)
-		{
-			int x = x1 + rand.nextInt(16);
-			int y = rand.nextInt(32);
-			int z = z1 + rand.nextInt(16);
-			(new AetherGenClouds(AetherBlocks.Aercloud.blockID, 0, 64, true)).generate(world, rand, x, y, z);
+			(new AetherGenCumulusClouds(AetherBlocks.Aercloud.blockID, 10, 3)).generate(world, rand, new BlockPos(x, y, z));
 		}*/
+
 	}
 }

@@ -22,6 +22,7 @@ import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
+import com.gildedgames.aether.common.world.biome.BiomeGenAetherBase;
 
 public class ChunkProviderAether implements IChunkProvider
 {
@@ -34,6 +35,8 @@ public class ChunkProviderAether implements IChunkProvider
 	private NoiseGeneratorOctaves[] octaveNoiseGenerators;
 
 	private double[][] noiseFields;
+
+	public final static int PLACEMENT_FLAG_TYPE = 2;
 
 	public ChunkProviderAether(World world, long seed)
 	{
@@ -315,11 +318,18 @@ public class ChunkProviderAether implements IChunkProvider
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(this, this.worldObj, this.random, chunkX, chunkZ, false));
 
 		BlockPos pos = new BlockPos(x, 0, z);
-		BiomeGenBase genBase = this.worldObj.getBiomeGenForCoords(pos.add(16, 0, 16));
+		BiomeGenAetherBase genBase = (BiomeGenAetherBase) this.worldObj.getBiomeGenForCoords(pos.add(16, 0, 16));
 
 		this.random.setSeed(this.worldObj.getSeed());
 
+		long i1 = this.random.nextLong() / 2L * 2L + 1L;
+		long j1 = this.random.nextLong() / 2L * 2L + 1L;
+
+		this.random.setSeed(chunkX * i1 + chunkZ * j1 ^ this.worldObj.getSeed());
+
 		genBase.decorate(this.worldObj, this.random, pos);
+
+		genBase.generateClouds(this.worldObj, this.random, chunkX, chunkZ);
 	}
 
 	@Override
