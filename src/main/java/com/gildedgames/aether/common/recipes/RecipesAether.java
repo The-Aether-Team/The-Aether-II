@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class RecipesAether
 {
 	public static final AltarRegistry altarRegistry = new AltarRegistry();
-
+	
 	public static void preInit()
 	{
 		registerCraftingRecipes();
@@ -43,10 +43,8 @@ public class RecipesAether
 				'X', new ItemStack(BlocksAether.skyroot_planks), 'Y', new ItemStack(ItemsAether.golden_amber));
 
 		// Poison Dart Shooter
-		registerShapelessRecipe(new ItemStack(ItemsAether.dart_shooter, 1, ItemDartShooter.DartShooterType.POISON
-						.ordinal()),
-				new ItemStack(ItemsAether.dart_shooter, 1, ItemDartShooter.DartShooterType.GOLDEN
-						.ordinal()), new ItemStack(ItemsAether.skyroot_poison_bucket));
+		registerShapelessRecipe(new ItemStack(ItemsAether.dart_shooter, 1, ItemDartShooter.DartShooterType.POISON.ordinal()),
+				new ItemStack(ItemsAether.dart_shooter, 1, ItemDartShooter.DartShooterType.GOLDEN.ordinal()), new ItemStack(ItemsAether.skyroot_poison_bucket));
 
 		// Zanite Block
 		registerShapedRecipe(new ItemStack(BlocksAether.zanite_block), "XXX", "XXX", "XXX",
@@ -182,6 +180,6 @@ public class RecipesAether
 
 	private static void registerAltarRecipe(IAltarRecipe recipe)
 	{
-		altarRegistry.addRecipe(recipe);
+		RecipesAether.altarRegistry.addRecipe(recipe);
 	}
 }
