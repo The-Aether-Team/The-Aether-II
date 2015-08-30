@@ -28,7 +28,7 @@ public class RecipesAether
 	{
 		// Skyroot Planks
 		registerShapelessRecipe(new ItemStack(BlocksAether.skyroot_planks, 4),
-				new ItemStack(BlocksAether.aether_log));
+				new ItemStack(BlocksAether.skyroot_log));
 
 		// Skyroot Sticks
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_stick, 4), "X", "X",

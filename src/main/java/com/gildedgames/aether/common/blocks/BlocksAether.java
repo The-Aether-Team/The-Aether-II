@@ -41,8 +41,6 @@ public class BlocksAether
 
 	public static Block aercloud;
 
-	public static Block aether_log;
-
 	public static Block ambrosium_ore;
 
 	public static Block zanite_ore;
@@ -53,7 +51,10 @@ public class BlocksAether
 
 	public static Block skyroot_planks;
 
-	public static Block aether_leaves;
+	public static Block skyroot_log, golden_oak_log;
+
+	public static Block blue_skyroot_leaves, green_skyroot_leaves, dark_blue_skyroot_leaves, golden_oak_leaves,
+			purple_crystal_leaves, purple_fruit_leaves;
 
 	public static Block aether_portal;
 
@@ -99,8 +100,6 @@ public class BlocksAether
 
 		aercloud = registerBlockWithItem("aercloud", new BlockAercloud(), ItemBlockAetherSubtypes.class, AetherCreativeTabs.tabBlocks);
 
-		aether_log = registerBlockWithItem("aether_log", new BlockAetherLog(), ItemBlockAetherSubtypes.class, AetherCreativeTabs.tabBlocks);
-
 		skyroot_planks = registerBlock("skyroot_planks", new BlockAether(Material.wood)
 				.setStepSound(Block.soundTypeWood).setHardness(2.0f).setResistance(5.0f), AetherCreativeTabs.tabBlocks);
 
@@ -112,7 +111,21 @@ public class BlocksAether
 
 		continuum_ore = registerBlock("continuum_ore", new BlockContinuumOre(), AetherCreativeTabs.tabBlocks);
 
-		aether_leaves = registerBlockWithItem("aether_leaves", new BlockAetherLeaves(), ItemBlockAetherSubtypes.class, AetherCreativeTabs.tabBlocks);
+		skyroot_log = registerBlock("skyroot_log", new BlockAetherLog(), AetherCreativeTabs.tabBlocks);
+
+		golden_oak_log = registerBlock("golden_oak_log", new BlockAetherLog(), AetherCreativeTabs.tabBlocks);
+
+		blue_skyroot_leaves = registerBlock("blue_skyroot_leaves", new BlockAetherLeaves(BlockAetherSapling.BLUE_SKYROOT_SAPLING.getMeta()), AetherCreativeTabs.tabBlocks);
+
+		green_skyroot_leaves = registerBlock("green_skyroot_leaves", new BlockAetherLeaves(BlockAetherSapling.GREEN_SKYROOT_SAPLING.getMeta()), AetherCreativeTabs.tabBlocks);
+
+		dark_blue_skyroot_leaves = registerBlock("dark_blue_skyroot_leaves", new BlockAetherLeaves(BlockAetherSapling.DARK_BLUE_SKYROOT_SAPLING.getMeta()), AetherCreativeTabs.tabBlocks);
+
+		golden_oak_leaves = registerBlock("golden_oak_leaves", new BlockAetherLeaves(BlockAetherSapling.GOLDEN_OAK_SAPLING.getMeta()), AetherCreativeTabs.tabBlocks);
+
+		purple_crystal_leaves = registerBlock("purple_crystal_leaves", new BlockAetherLeaves(BlockAetherSapling.PURPLE_CRYSTAL_SAPLING.getMeta()), AetherCreativeTabs.tabBlocks);
+
+		purple_fruit_leaves = registerBlock("purple_fruit_leaves", new BlockAetherLeaves(BlockAetherSapling.PURPLE_CRYSTAL_SAPLING.getMeta()), AetherCreativeTabs.tabBlocks);
 
 		aether_portal = registerBlock("aether_portal", new BlockAetherPortal());
 

@@ -1,8 +1,6 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
@@ -10,7 +8,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,20 +19,11 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
 import java.util.Random;
 
-public class BlockAetherLog extends Block implements IAetherBlockWithSubtypes
+public class BlockAetherLog extends Block
 {
-	public static final BlockVariant
-			SKYROOT_LOG = new BlockVariant(0, "skyroot"),
-			GOLDEN_OAK_LOG = new BlockVariant(4, "golden_oak");
-
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", SKYROOT_LOG, GOLDEN_OAK_LOG);
-
 	public static final PropertyEnum PROPERTY_AXIS = PropertyEnum.create("axis", BlockLog.EnumAxis.class);
 
 	public BlockAetherLog()
@@ -46,18 +34,7 @@ public class BlockAetherLog extends Block implements IAetherBlockWithSubtypes
 
 		this.setHardness(2.0f);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, SKYROOT_LOG).withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.Y));
-	}
-
-	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
-	{
-		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
-		{
-			list.add(new ItemStack(itemIn, 1, variant.getMeta()));
-		}
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.Y));
 	}
 
 	@Override
@@ -67,23 +44,67 @@ public class BlockAetherLog extends Block implements IAetherBlockWithSubtypes
 	}
 
 	@Override
+	public void breakBlock(World world, BlockPos pos, IBlockState state)
+	{
+		byte size = 4;
+		int chunkSize = size + 1;
+
+		if (world.isAreaLoaded(pos.add(-chunkSize, -chunkSize, -chunkSize), pos.add(chunkSize, chunkSize, chunkSize)))
+		{
+			for (Object obj : BlockPos.getAllInBox(pos.add(-size, -size, -size), pos.add(size, size, size)))
+			{
+				BlockPos neighborPos = (BlockPos) obj;
+				IBlockState neighborState = world.getBlockState(neighborPos);
+
+				if (neighborState.getBlock().isLeaves(world, neighborPos))
+				{
+					neighborState.getBlock().beginLeavesDecay(world, neighborPos);
+				}
+			}
+		}
+	}
+
+	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		int variantMeta = meta - (meta % 4);
-		int rotateMeta = (meta - variantMeta) % 4;
+		IBlockState state = this.getDefaultState();
 
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta((variantMeta)))
-				.withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.values()[rotateMeta]);
+		switch (meta & 8)
+		{
+		case 0:
+			state = state.withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.Y);
+			break;
+		case 4:
+			state = state.withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.X);
+			break;
+		case 8:
+			state = state.withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.Z);
+			break;
+		default:
+			state = state.withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.NONE);
+		}
+
+		return state;
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		int stateMeta = ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
-		int variantMeta = stateMeta - (stateMeta % 4);
-		int rotateMeta = ((BlockLog.EnumAxis) state.getValue(PROPERTY_AXIS)).ordinal();
+		int meta = 0;
 
-		return variantMeta + rotateMeta;
+		switch (((BlockLog.EnumAxis) state.getValue(PROPERTY_AXIS)))
+		{
+		case X:
+			meta |= 4;
+			break;
+		case Y:
+			meta |= 8;
+			break;
+		case NONE:
+			meta |= 12;
+		}
+
+		return meta;
 	}
 
 	@Override
@@ -101,7 +122,7 @@ public class BlockAetherLog extends Block implements IAetherBlockWithSubtypes
 	@Override
 	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
-		if (state.getValue(PROPERTY_VARIANT) == GOLDEN_OAK_LOG)
+		if (this == BlocksAether.golden_oak_log)
 		{
 			Item heldItem = player.getHeldItem().getItem();
 
@@ -126,35 +147,14 @@ public class BlockAetherLog extends Block implements IAetherBlockWithSubtypes
 	}
 
 	@Override
-	protected ItemStack createStackedBlock(IBlockState state)
-	{
-		return new ItemStack(Item.getItemFromBlock(this), 1, ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta());
-	}
-
-	@Override
 	public int damageDropped(IBlockState state)
 	{
-		BlockVariant variant = ((BlockVariant) state.getValue(PROPERTY_VARIANT));
-
-		if (variant == GOLDEN_OAK_LOG)
-		{
-			return SKYROOT_LOG.getMeta();
-		}
-
-		return variant.getMeta();
+		return 0;
 	}
 
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, PROPERTY_VARIANT, PROPERTY_AXIS);
-	}
-
-	@Override
-	public String getSubtypeUnlocalizedName(ItemStack stack)
-	{
-		int variantMeta = stack.getMetadata() - (stack.getMetadata() % 4);
-
-		return PROPERTY_VARIANT.fromMeta(variantMeta).getName();
+		return new BlockState(this, PROPERTY_AXIS);
 	}
 }

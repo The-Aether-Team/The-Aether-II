@@ -62,7 +62,7 @@ public class BiomeDecoratorAether extends BiomeDecorator
 		{
 			x = this.randomGenerator.nextInt(16) + 8;
 			z = this.randomGenerator.nextInt(16) + 8;
-			y = nextInt(this.currentWorld.getHeight(this.field_180294_c.add(x, 0, z)).getY() * 2);
+			y = this.nextInt(this.currentWorld.getHeight(this.field_180294_c.add(x, 0, z)).getY() * 2);
 
 			this.genAetherGrass.generate(this.currentWorld, this.randomGenerator, this.field_180294_c.add(x, y, z));
 		}
@@ -78,7 +78,7 @@ public class BiomeDecoratorAether extends BiomeDecorator
 
 		for (count = 0; count < 6; count++)
 		{
-			if (randomGenerator.nextInt(2) == 0)
+			if (this.randomGenerator.nextInt(2) == 0)
 			{
 				x = this.randomGenerator.nextInt(16) + 8;
 				y = this.randomGenerator.nextInt(128);
@@ -86,6 +86,17 @@ public class BiomeDecoratorAether extends BiomeDecorator
 
 				this.genPurpleFlowers.generate(this.currentWorld, this.randomGenerator, this.field_180294_c.add(x, y, z));
 			}
+		}
+
+		for (count = 0; count < 3; count++)
+		{
+			x = this.randomGenerator.nextInt(16) + 8;
+			z = this.randomGenerator.nextInt(16) + 8;
+
+			WorldGenerator treeGen = genBase.genBigTreeChance(this.randomGenerator);
+			BlockPos pos = this.currentWorld.getHeight(this.field_180294_c.add(x, 0, z));
+
+			treeGen.generate(this.currentWorld, this.randomGenerator, pos);
 		}
 	}
 
