@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.world.biome;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.world.features.WorldGenAetherFlowers;
 import com.gildedgames.aether.common.world.features.WorldGenAetherTallGrass;
 import com.gildedgames.aether.common.world.features.trees.WorldGenOrangeTree;
@@ -24,6 +25,8 @@ public class BiomeDecoratorAether extends BiomeDecorator
 
 	private WorldGenOrangeTree genOrangeTree;
 
+	private WorldGenAetherFlowers genBlueberryBushes;
+
 	@Override
 	public void decorate(World world, Random random, BiomeGenBase genBase, BlockPos pos)
 	{
@@ -43,10 +46,12 @@ public class BiomeDecoratorAether extends BiomeDecorator
 		this.genGravitite = new WorldGenMinable(BlocksAether.gravitite_ore.getDefaultState(), 4);
 		this.genContinuum = new WorldGenMinable(BlocksAether.continuum_ore.getDefaultState(), 4);
 
-		this.genPurpleFlowers = new WorldGenAetherFlowers(BlocksAether.aether_flower, BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER));
-		this.genWhiteRoses = new WorldGenAetherFlowers(BlocksAether.aether_flower, BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE));
+		this.genPurpleFlowers = new WorldGenAetherFlowers(BlocksAether.aether_flower, BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER), 64);
+		this.genWhiteRoses = new WorldGenAetherFlowers(BlocksAether.aether_flower, BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE), 64);
 
 		this.genOrangeTree = new WorldGenOrangeTree();
+
+		this.genBlueberryBushes = new WorldGenAetherFlowers(BlocksAether.blueberry_bush, BlocksAether.blueberry_bush.getDefaultState().withProperty(BlockBlueberryBush.PROPERTY_HARVESTABLE, true), 32);
 
 		this.genDecorations(genBase);
 
@@ -93,6 +98,15 @@ public class BiomeDecoratorAether extends BiomeDecorator
 			}
 		}
 
+		for (count = 0; count < 2; count ++)
+		{
+			x = this.randomGenerator.nextInt(16) + 8;
+			y = this.randomGenerator.nextInt(128);
+			z = this.randomGenerator.nextInt(16) + 8;
+
+			this.genWhiteRoses.generate(this.currentWorld, this.randomGenerator, this.field_180294_c.add(x, y, z));
+		}
+
 		for (count = 0; count < 3; count++)
 		{
 			x = this.randomGenerator.nextInt(16) + 8;
@@ -111,6 +125,15 @@ public class BiomeDecoratorAether extends BiomeDecorator
 			z = this.randomGenerator.nextInt(16) + 8;
 
 			this.genOrangeTree.generate(this.currentWorld, this.randomGenerator, this.field_180294_c.add(x, y, z));
+		}
+
+		for (count = 0; count < 2; count++)
+		{
+			x = this.randomGenerator.nextInt(16) + 8;
+			y = this.randomGenerator.nextInt(128);
+			z = this.randomGenerator.nextInt(16) + 8;
+
+			this.genBlueberryBushes.generate(this.currentWorld, this.randomGenerator, this.field_180294_c.add(x, y, z));
 		}
 	}
 

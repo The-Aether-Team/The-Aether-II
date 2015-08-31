@@ -14,16 +14,19 @@ public class WorldGenAetherFlowers extends WorldGenerator
 
 	private final IBlockState state;
 
-	public WorldGenAetherFlowers(Block block, IBlockState state)
+	private final int max;
+
+	public WorldGenAetherFlowers(Block block, IBlockState state, int max)
 	{
 		this.block = block;
 		this.state = state;
+		this.max = max;
 	}
 
 	@Override
 	public boolean generate(World world, Random rand, BlockPos pos)
 	{
-		for (int i = 0; i < 64; ++i)
+		for (int i = 0; i < this.max; ++i)
 		{
 			BlockPos randomPos = pos.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
 
