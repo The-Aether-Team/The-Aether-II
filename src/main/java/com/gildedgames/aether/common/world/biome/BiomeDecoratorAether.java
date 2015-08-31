@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.world.features.WorldGenAetherFlowers;
 import com.gildedgames.aether.common.world.features.WorldGenAetherTallGrass;
+import com.gildedgames.aether.common.world.features.trees.WorldGenOrangeTree;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeDecorator;
@@ -20,6 +21,8 @@ public class BiomeDecoratorAether extends BiomeDecorator
 	private WorldGenMinable genAmbrosium, genZanite, genGravitite, genContinuum;
 
 	private WorldGenAetherFlowers genPurpleFlowers, genWhiteRoses;
+
+	private WorldGenOrangeTree genOrangeTree;
 
 	@Override
 	public void decorate(World world, Random random, BiomeGenBase genBase, BlockPos pos)
@@ -42,6 +45,8 @@ public class BiomeDecoratorAether extends BiomeDecorator
 
 		this.genPurpleFlowers = new WorldGenAetherFlowers(BlocksAether.aether_flower, BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER));
 		this.genWhiteRoses = new WorldGenAetherFlowers(BlocksAether.aether_flower, BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE));
+
+		this.genOrangeTree = new WorldGenOrangeTree();
 
 		this.genDecorations(genBase);
 
@@ -97,6 +102,15 @@ public class BiomeDecoratorAether extends BiomeDecorator
 			BlockPos pos = this.currentWorld.getHeight(this.field_180294_c.add(x, 0, z));
 
 			treeGen.generate(this.currentWorld, this.randomGenerator, pos);
+		}
+
+		for (count = 0; count < 2; count++)
+		{
+			x = this.randomGenerator.nextInt(16) + 8;
+			y = this.randomGenerator.nextInt(128);
+			z = this.randomGenerator.nextInt(16) + 8;
+
+			this.genOrangeTree.generate(this.currentWorld, this.randomGenerator, this.field_180294_c.add(x, y, z));
 		}
 	}
 

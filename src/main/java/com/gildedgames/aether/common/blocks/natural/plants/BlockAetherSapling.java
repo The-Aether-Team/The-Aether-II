@@ -46,6 +46,8 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 
 		this.setBlockBounds(0.1f, 0.0F, 0.1f, 0.9f, 0.8f, 0.9f);
 
+		this.setTickRandomly(true);
+
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, BLUE_SKYROOT_SAPLING)
 				.withProperty(PROPERTY_STAGE, 0));
 	}
