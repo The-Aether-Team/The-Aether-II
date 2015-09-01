@@ -17,4 +17,10 @@ public class ItemZaniteTool extends ItemAetherTool
 	{
 		return super.getStrVsBlock(stack, block) * (2.0F * stack.getItemDamage() / stack.getItem().getMaxDamage() + 0.5F);
 	}
+
+	@Override
+	public float getDigSpeed(ItemStack stack, net.minecraft.block.state.IBlockState state)
+	{
+		return this.getStrVsBlock(stack, state.getBlock());
+	}
 }
