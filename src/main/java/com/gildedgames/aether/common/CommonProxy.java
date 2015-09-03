@@ -7,8 +7,10 @@ import com.gildedgames.aether.common.items.armor.AetherArmorMaterials;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.recipes.RecipesAether;
 import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
+import com.gildedgames.aether.common.util.CreativeTab;
 import com.gildedgames.aether.common.world.WorldProviderAether;
 import com.gildedgames.util.player.PlayerCore;
+
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
@@ -18,9 +20,22 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class CommonProxy
 {
+	
+	public final CreativeTab TabBlocks = new CreativeTab("aetherBlocks");
+
+	public final CreativeTab TabMaterials = new CreativeTab("aetherMaterials");
+
+	public final CreativeTab TabTools = new CreativeTab("aetherTools");
+
+	public final CreativeTab TabWeapons = new CreativeTab("aetherWeapons");
+
+	public final CreativeTab TabArmor = new CreativeTab("aetherArmor");
+
+	public final CreativeTab TabConsumables = new CreativeTab("aetherConsumables");
+	
 	public void construct(FMLConstructionEvent event)
 	{
-
+		
 	}
 
 	public void preInit(FMLPreInitializationEvent event)

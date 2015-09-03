@@ -16,7 +16,7 @@ public class ItemAetherArmor extends ItemArmor
 
 		this.armorVariant = material;
 
-		this.setCreativeTab(AetherCore.locate().TAB_ARMOR);
+		this.setCreativeTab(AetherCore.PROXY.TabArmor);
 	}
 
 	@Override

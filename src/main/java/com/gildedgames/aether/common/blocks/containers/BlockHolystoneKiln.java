@@ -36,7 +36,7 @@ public class BlockHolystoneKiln extends BlockContainer
 	{
 		super(Material.rock);
 
-		this.setCreativeTab(AetherCore.locate().TAB_BLOCKS);
+		this.setCreativeTab(AetherCore.PROXY.TabBlocks);
 
 		this.setDefaultState(this.getBlockState().getBaseState()
 				.withProperty(PROPERTY_IS_LIT, Boolean.FALSE)

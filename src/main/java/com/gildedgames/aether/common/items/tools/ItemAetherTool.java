@@ -10,6 +10,6 @@ public class ItemAetherTool extends ItemTool
 	{
 		super(toolType.getBaseDamage(), material, toolType.getEffectiveBlocks());
 
-		this.setCreativeTab(AetherCore.locate().TAB_TOOLS);
+		this.setCreativeTab(AetherCore.PROXY.TabTools);
 	}
 }
