@@ -16,8 +16,6 @@ public class Aether
 
 	public static final String MOD_VERSION = "1.8-1.0";
 
-	public static final int AETHER_DIM_ID = 3;
-
 	@Instance
 	public static Aether INSTANCE;
 
@@ -39,5 +37,15 @@ public class Aether
 	public static String getResourcePath(String resource)
 	{
 		return (Aether.MOD_ID + ":") + resource;
+	}
+
+	public static int aetherDimId()
+	{
+		return AetherConfig.AetherDimensionID;
+	}
+
+	public static int dungeonDimId()
+	{
+		return AetherConfig.DungeonDimensionID;
 	}
 }

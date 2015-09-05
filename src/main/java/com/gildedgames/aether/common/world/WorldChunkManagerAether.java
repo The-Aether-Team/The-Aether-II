@@ -1,18 +1,20 @@
 package com.gildedgames.aether.common.world;
 
-import com.gildedgames.aether.common.world.biome.BiomeGenAether;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.WorldChunkManager;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import com.gildedgames.aether.common.AetherConfig;
+import com.gildedgames.aether.common.world.biome.BiomeGenAether;
+
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.WorldChunkManager;
+
 public class WorldChunkManagerAether extends WorldChunkManager
 {
 	// TODO: Config option to change biome ID.
-	private final BiomeGenBase biomeGenerator = new BiomeGenAether(237);
+	private final BiomeGenBase biomeGenerator = new BiomeGenAether(AetherConfig.AetherBiomeID);
 
 	@Override
 	public boolean areBiomesViable(int i, int j, int k, List list)
