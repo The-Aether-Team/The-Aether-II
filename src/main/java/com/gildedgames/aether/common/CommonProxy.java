@@ -46,6 +46,9 @@ public class CommonProxy
 		// Register with NetworkRegistry.
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 
+		// Load the config
+		AetherConfig.initProps(event.getModConfigurationDirectory());
+
 		// Register dimensions and biomes.
 
 		DimensionManager.registerProviderType(AetherCore.aetherDimId(), WorldProviderAether.class, true);
