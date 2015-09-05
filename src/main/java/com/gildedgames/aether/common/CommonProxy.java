@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.recipes.RecipesAether;
 import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
 import com.gildedgames.aether.common.world.WorldProviderAether;
+
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
@@ -28,9 +29,9 @@ public class CommonProxy
 		NetworkRegistry.INSTANCE.registerGuiHandler(Aether.INSTANCE, new AetherGuiHandler());
 
 		// Register dimensions and biomes.
-		DimensionManager.registerProviderType(Aether.AETHER_DIM_ID, WorldProviderAether.class, true);
+		DimensionManager.registerProviderType(Aether.aetherDimId(), WorldProviderAether.class, true);
 
-		DimensionManager.registerDimension(Aether.AETHER_DIM_ID, Aether.AETHER_DIM_ID);
+		DimensionManager.registerDimension(Aether.aetherDimId(), Aether.aetherDimId());
 
 		// Pre-initialize content.
 		AetherArmorMaterials.preInit();
