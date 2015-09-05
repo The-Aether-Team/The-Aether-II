@@ -7,14 +7,12 @@ import com.gildedgames.aether.common.blocks.dungeon.BlockDungeon;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.consumables.ItemCloudParachute;
 import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
 import com.google.common.collect.Maps;
@@ -56,7 +54,16 @@ public class ModelsAether
 	 */
 	private static void registerStateMappers()
 	{
-		ModelLoader.setCustomStateMapper(BlocksAether.aether_leaves, new StateMap.Builder().addPropertiesToIgnore(BlockAetherLeaves.PROPERTY_CHECK_DECAY, BlockAetherLeaves.PROPERTY_DECAYABLE).build());
+		StateMap leavesMapper = new StateMap.Builder().addPropertiesToIgnore(BlockAetherLeaves.PROPERTY_CHECK_DECAY, BlockAetherLeaves.PROPERTY_DECAYABLE).build();
+
+		ModelLoader.setCustomStateMapper(BlocksAether.blue_skyroot_leaves, leavesMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.green_skyroot_leaves, leavesMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.dark_blue_skyroot_leaves, leavesMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.golden_oak_leaves, leavesMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.purple_crystal_leaves, leavesMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.purple_fruit_leaves, leavesMapper);
+
+		ModelLoader.setCustomStateMapper(BlocksAether.aether_sapling, new StateMap.Builder().addPropertiesToIgnore(BlockAetherSapling.PROPERTY_STAGE).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.aercloud, new StateMapperBase()
 		{
@@ -119,17 +126,15 @@ public class ModelsAether
 				.add(BlockAercloud.STORM_AERCLOUD.getMeta(), "storm_aercloud")
 				.add(BlockAercloud.PURPLE_AERCLOUD.getMeta(), "purple_aercloud"));
 
-		registerModelList(getItem(BlocksAether.aether_log), new ModelResourceList("aether_log/")
-				.add(BlockAetherLog.SKYROOT_LOG.getMeta(), "skyroot_log")
-				.add(BlockAetherLog.GOLDEN_OAK_LOG.getMeta(), "golden_oak_log"));
+		registerModelList(getItem(BlocksAether.skyroot_log), new ModelResourceList("aether_log/").add(0, "skyroot_log"));
+		registerModelList(getItem(BlocksAether.golden_oak_log), new ModelResourceList("aether_log/").add(0, "golden_oak_log"));
 
-		registerModelList(getItem(BlocksAether.aether_leaves), new ModelResourceList("aether_leaves/")
-				.add(BlockAetherLeaves.BLUE_SKYROOT_LEAVES.getMeta(), "blue_skyroot_leaves")
-				.add(BlockAetherLeaves.DARK_BLUE_SKYROOT_LEAVES.getMeta(), "dark_blue_skyroot_leaves")
-				.add(BlockAetherLeaves.GREEN_SKYROOT_LEAVES.getMeta(), "green_skyroot_leaves")
-				.add(BlockAetherLeaves.GOLDEN_OAK_LEAVES.getMeta(), "golden_oak_leaves")
-				.add(BlockAetherLeaves.PURPLE_CRYSTAL_LEAVES.getMeta(), "purple_crystal_leaves")
-				.add(BlockAetherLeaves.PURPLE_FRUIT_LEAVES.getMeta(), "purple_fruit_leaves"));
+		registerModelList(getItem(BlocksAether.blue_skyroot_leaves), new ModelResourceList("aether_leaves/").add(0, "blue_skyroot_leaves"));
+		registerModelList(getItem(BlocksAether.green_skyroot_leaves), new ModelResourceList("aether_leaves/").add(0, "green_skyroot_leaves"));
+		registerModelList(getItem(BlocksAether.dark_blue_skyroot_leaves), new ModelResourceList("aether_leaves/").add(0, "dark_blue_skyroot_leaves"));
+		registerModelList(getItem(BlocksAether.golden_oak_leaves), new ModelResourceList("aether_leaves/").add(0, "golden_oak_leaves"));
+		registerModelList(getItem(BlocksAether.purple_crystal_leaves), new ModelResourceList("aether_leaves/").add(0, "purple_crystal_leaves"));
+		registerModelList(getItem(BlocksAether.purple_fruit_leaves), new ModelResourceList("aether_leaves/").add(0, "purple_fruit_leaves"));
 
 		registerModelList(getItem(BlocksAether.blueberry_bush), new ModelResourceList("blueberry_bush/")
 				.add(BlockBlueberryBush.BERRY_BUSH_STEM, "blueberry_bush_stem")
@@ -262,13 +267,6 @@ public class ModelsAether
 				.add(ItemDart.DartType.GOLDEN.ordinal(), "golden_dart")
 				.add(ItemDart.DartType.ENCHANTED.ordinal(), "enchanted_dart")
 				.add(ItemDart.DartType.POISON.ordinal(), "poison_dart"));
-
-		registerModelList(ItemsAether.cloud_parachute, new ModelResourceList("cloud_parachute/")
-				.add(ItemCloudParachute.ParachuteType.COLD.ordinal(), "cold_cloud_parachute")
-				.add(ItemCloudParachute.ParachuteType.BLUE.ordinal(), "blue_cloud_parachute")
-				.add(ItemCloudParachute.ParachuteType.GOLDEN.ordinal(), "golden_cloud_parachute")
-				.add(ItemCloudParachute.ParachuteType.GREEN.ordinal(), "green_cloud_parachute")
-				.add(ItemCloudParachute.ParachuteType.PURPLE.ordinal(), "purple_cloud_parachute"));
 	}
 
 	private static void registerModelList(Item item, ModelResourceList list)

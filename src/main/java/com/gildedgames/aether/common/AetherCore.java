@@ -19,8 +19,6 @@ public class AetherCore
 
 	public static final String MOD_VERSION = "1.8-1.0";
 
-	public static final int AETHER_DIM_ID = 3;
-
 	@Instance
 	public static AetherCore INSTANCE;
 
@@ -45,19 +43,30 @@ public class AetherCore
 	{
 		return AetherCore.INSTANCE.services.instance();
 	}
-	
+
 	public static AetherServices client()
 	{
 		return AetherCore.INSTANCE.services.client();
 	}
-	
+
 	public static AetherServices server()
 	{
 		return AetherCore.INSTANCE.services.server();
+
 	}
 
 	public static String getResourcePath(String resource)
 	{
 		return (AetherCore.MOD_ID + ":") + resource;
+	}
+
+	public static int aetherDimId()
+	{
+		return AetherConfig.AetherDimensionID;
+	}
+
+	public static int dungeonDimId()
+	{
+		return AetherConfig.DungeonDimensionID;
 	}
 }

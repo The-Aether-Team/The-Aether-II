@@ -182,23 +182,27 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 
 	private void growTree(World world, BlockPos topPos, BlockPos bottomPos, int amount)
 	{
-		IBlockState state = world.getBlockState(bottomPos);
+		IBlockState topState = world.getBlockState(bottomPos);
+		IBlockState bottomState = world.getBlockState(bottomPos);
 
-		int nextStage = (Integer) state.getValue(PROPERTY_STAGE) + amount;
-
-		if (nextStage <= STAGE_COUNT)
+		if (topState.getBlock() == this && bottomState.getBlock() == this)
 		{
-			if (nextStage >= 3)
+			int nextStage = (Integer) topState.getValue(PROPERTY_STAGE) + amount;
+
+			if (nextStage <= STAGE_COUNT)
 			{
-				if (!world.isAirBlock(topPos) && world.getBlockState(topPos).getBlock() != this)
+				if (nextStage >= 3)
 				{
-					return;
+					if (!world.isAirBlock(topPos) && world.getBlockState(topPos).getBlock() != this)
+					{
+						return;
+					}
+
+					world.setBlockState(topPos, topState.withProperty(PROPERTY_STAGE, nextStage).withProperty(PROPERTY_IS_TOP_BLOCK, true));
 				}
 
-				world.setBlockState(topPos, state.withProperty(PROPERTY_STAGE, nextStage).withProperty(PROPERTY_IS_TOP_BLOCK, true));
+				world.setBlockState(bottomPos, topState.withProperty(PROPERTY_STAGE, nextStage).withProperty(PROPERTY_IS_TOP_BLOCK, false));
 			}
-
-			world.setBlockState(bottomPos, state.withProperty(PROPERTY_STAGE, nextStage).withProperty(PROPERTY_IS_TOP_BLOCK, false));
 		}
 	}
 }

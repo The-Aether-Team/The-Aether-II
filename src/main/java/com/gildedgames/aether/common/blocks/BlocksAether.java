@@ -1,11 +1,5 @@
 package com.gildedgames.aether.common.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemBlock;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
@@ -32,6 +26,12 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.blocks.util.BlockAether;
 import com.gildedgames.aether.common.items.itemblocks.ItemBlockAetherSubtypes;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemBlock;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
 public class BlocksAether
 {
 	public static Block aether_dirt;
@@ -41,8 +41,6 @@ public class BlocksAether
 	public static Block holystone;
 
 	public static Block aercloud;
-
-	public static Block aether_log;
 
 	public static Block ambrosium_ore;
 
@@ -54,7 +52,10 @@ public class BlocksAether
 
 	public static Block skyroot_planks;
 
-	public static Block aether_leaves;
+	public static Block skyroot_log, golden_oak_log;
+
+	public static Block blue_skyroot_leaves, green_skyroot_leaves, dark_blue_skyroot_leaves, golden_oak_leaves,
+			purple_crystal_leaves, purple_fruit_leaves;
 
 	public static Block aether_portal;
 
@@ -85,7 +86,7 @@ public class BlocksAether
 	public static Block carved_stone;
 
 	public static Block sentry_stone;
-	
+
 	public static Block holystone_brick;
 
 	public static Block holystone_kiln;
@@ -100,8 +101,6 @@ public class BlocksAether
 
 		aercloud = registerBlockWithItem("aercloud", new BlockAercloud(), ItemBlockAetherSubtypes.class, AetherCore.PROXY.TabBlocks);
 
-		aether_log = registerBlockWithItem("aether_log", new BlockAetherLog(), ItemBlockAetherSubtypes.class, AetherCore.PROXY.TabBlocks);
-
 		skyroot_planks = registerBlock("skyroot_planks", new BlockAether(Material.wood)
 				.setStepSound(Block.soundTypeWood).setHardness(2.0f).setResistance(5.0f), AetherCore.PROXY.TabBlocks);
 
@@ -113,7 +112,21 @@ public class BlocksAether
 
 		continuum_ore = registerBlock("continuum_ore", new BlockContinuumOre(), AetherCore.PROXY.TabBlocks);
 
-		aether_leaves = registerBlockWithItem("aether_leaves", new BlockAetherLeaves(), ItemBlockAetherSubtypes.class, AetherCore.PROXY.TabBlocks);
+		skyroot_log = registerBlock("skyroot_log", new BlockAetherLog(), AetherCore.PROXY.TabBlocks);
+
+		golden_oak_log = registerBlock("golden_oak_log", new BlockAetherLog(), AetherCore.PROXY.TabBlocks);
+
+		blue_skyroot_leaves = registerBlock("blue_skyroot_leaves", new BlockAetherLeaves(BlockAetherSapling.BLUE_SKYROOT_SAPLING.getMeta()), AetherCore.PROXY.TabBlocks);
+
+		green_skyroot_leaves = registerBlock("green_skyroot_leaves", new BlockAetherLeaves(BlockAetherSapling.GREEN_SKYROOT_SAPLING.getMeta()), AetherCore.PROXY.TabBlocks);
+
+		dark_blue_skyroot_leaves = registerBlock("dark_blue_skyroot_leaves", new BlockAetherLeaves(BlockAetherSapling.DARK_BLUE_SKYROOT_SAPLING.getMeta()), AetherCore.PROXY.TabBlocks);
+
+		golden_oak_leaves = registerBlock("golden_oak_leaves", new BlockAetherLeaves(BlockAetherSapling.GOLDEN_OAK_SAPLING.getMeta()), AetherCore.PROXY.TabBlocks);
+
+		purple_crystal_leaves = registerBlock("purple_crystal_leaves", new BlockAetherLeaves(BlockAetherSapling.PURPLE_CRYSTAL_SAPLING.getMeta()), AetherCore.PROXY.TabBlocks);
+
+		purple_fruit_leaves = registerBlock("purple_fruit_leaves", new BlockAetherLeaves(BlockAetherSapling.PURPLE_CRYSTAL_SAPLING.getMeta()), AetherCore.PROXY.TabBlocks);
 
 		aether_portal = registerBlock("aether_portal", new BlockAetherPortal());
 
@@ -144,7 +157,7 @@ public class BlocksAether
 		carved_stone = registerBlockWithItem("carved_stone", new BlockDungeon(Material.rock), ItemBlockAetherSubtypes.class, AetherCore.PROXY.TabBlocks);
 
 		sentry_stone = registerBlockWithItem("sentry_stone", new BlockDungeon(Material.rock).setLightLevel(0.75f), ItemBlockAetherSubtypes.class, AetherCore.PROXY.TabBlocks);
-		
+
 		holystone_brick = registerBlock("holystone_brick", new BlockAether(Material.rock), AetherCore.PROXY.TabBlocks);
 
 		holystone_kiln = registerBlock("holystone_kiln", new BlockHolystoneKiln());

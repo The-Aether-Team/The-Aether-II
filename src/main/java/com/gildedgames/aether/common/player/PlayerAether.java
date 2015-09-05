@@ -1,16 +1,17 @@
 package com.gildedgames.aether.common.player;
 
+import java.util.UUID;
+
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.player.abilites.AbilityParachute;
 import com.gildedgames.util.player.common.IPlayerHookPool;
 import com.gildedgames.util.player.common.player.IPlayerHook;
 import com.gildedgames.util.player.common.player.IPlayerProfile;
+
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
-
-import java.util.UUID;
 
 public class PlayerAether implements IPlayerHook
 {

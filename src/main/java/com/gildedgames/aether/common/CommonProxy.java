@@ -20,7 +20,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class CommonProxy
 {
-	
+
 	public final CreativeTab TabBlocks = new CreativeTab("aetherBlocks");
 
 	public final CreativeTab TabMaterials = new CreativeTab("aetherMaterials");
@@ -32,10 +32,10 @@ public class CommonProxy
 	public final CreativeTab TabArmor = new CreativeTab("aetherArmor");
 
 	public final CreativeTab TabConsumables = new CreativeTab("aetherConsumables");
-	
+
 	public void construct(FMLConstructionEvent event)
 	{
-		
+
 	}
 
 	public void preInit(FMLPreInitializationEvent event)
@@ -47,9 +47,10 @@ public class CommonProxy
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 
 		// Register dimensions and biomes.
-		DimensionManager.registerProviderType(AetherCore.AETHER_DIM_ID, WorldProviderAether.class, true);
 
-		DimensionManager.registerDimension(AetherCore.AETHER_DIM_ID, AetherCore.AETHER_DIM_ID);
+		DimensionManager.registerProviderType(AetherCore.aetherDimId(), WorldProviderAether.class, true);
+
+		DimensionManager.registerDimension(AetherCore.aetherDimId(), AetherCore.aetherDimId());
 
 		// Pre-initialize content.
 		AetherArmorMaterials.preInit();

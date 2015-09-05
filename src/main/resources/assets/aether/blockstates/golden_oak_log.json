@@ -1,0 +1,17 @@
+{
+	"variants": {
+		"axis=y": {
+			"model": "aether:aether_log/golden_oak_log"
+		},
+		"axis=z": {
+			"model": "aether:aether_log/golden_oak_log_side"
+		},
+		"axis=x": {
+			"model": "aether:aether_log/golden_oak_log_side",
+			"y": 90
+		},
+		"axis=none": {
+			"model": "aether:aether_log/golden_oak_log_bark"
+		}
+	}
+}

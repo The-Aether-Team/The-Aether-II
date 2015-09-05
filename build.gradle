@@ -34,10 +34,6 @@ task defineVersion {
 	}
 }
 
-dependencies {
-	compile project(":gilded-games-util")
-}
-
 minecraft {
     version = "${config.mc_version}-${config.forge_version}"
     mappings = config.forge_mappings
