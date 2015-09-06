@@ -1,15 +1,6 @@
 package com.gildedgames.aether.common;
 
-import java.io.File;
-import java.io.IOException;
-
-import com.gildedgames.aether.common.dungeons.DungeonHandler;
 import com.gildedgames.util.core.SidedObject;
-import com.gildedgames.util.core.UtilCore;
-import com.gildedgames.util.core.nbt.NBTFactory;
-import com.gildedgames.util.core.nbt.NBTFile;
-import com.gildedgames.util.io_manager.IOCore;
-
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -68,25 +59,6 @@ public class AetherCore
 	public static String getResourcePath(String resource)
 	{
 		return (AetherCore.MOD_ID + ":") + resource;
-	}
-
-	public static void flushData()
-	{
-		try
-		{
-			NBTFactory factory = new NBTFactory();
-
-			File worldDir = UtilCore.getWorldDirectory();
-
-			File dungeonsDir = new File(worldDir, "aetherData/dungeons/dungeons.dat");
-
-			IOCore.io().writeFile(dungeonsDir, new NBTFile(dungeonsDir, DungeonHandler.instance(), DungeonHandler.instance().getClass()), factory);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
 	}
 
 	public static void print(Object line)
