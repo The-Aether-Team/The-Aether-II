@@ -14,7 +14,7 @@ import net.minecraft.world.biome.WorldChunkManager;
 
 public class WorldChunkManagerAether extends WorldChunkManager
 {
-	private final BiomeGenBase biomeGenerator = new BiomeGenAether(AetherCore.CONFIG.aetherBiomeID);
+	private final BiomeGenBase biomeGenerator = new BiomeGenAether(AetherCore.CONFIG.getAetherBiomeID());
 
 	@Override
 	public boolean areBiomesViable(int i, int j, int k, List list)

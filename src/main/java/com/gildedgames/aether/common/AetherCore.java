@@ -69,6 +69,6 @@ public class AetherCore
 
 	public static int getAetherDimID()
 	{
-		return AetherCore.CONFIG.aetherDimID;
+		return AetherCore.CONFIG.getAetherDimID();
 	}
 }

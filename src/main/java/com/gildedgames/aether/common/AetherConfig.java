@@ -9,9 +9,9 @@ public class AetherConfig
 {
 	private final Configuration configuration;
 
-	public int aetherDimID;
+	private int aetherDimID;
 
-	public int aetherBiomeID;
+	private int aetherBiomeID;
 
 	public AetherConfig(File file)
 	{
@@ -28,7 +28,7 @@ public class AetherConfig
 		ConfigCategory dimIDs = this.configuration.getCategory("dimIDs");
 		this.aetherDimID = this.getInt(dimIDs, "Aether Dimension ID", 3);
 
-		this.save();
+		this.configuration.save();
 	}
 
 	private int getInt(ConfigCategory category, String name, int defaultValue)
@@ -36,8 +36,13 @@ public class AetherConfig
 		return this.configuration.get(category.getName(), name, defaultValue).getInt();
 	}
 
-	public void save()
+	public int getAetherDimID()
 	{
-		this.configuration.save();
+		return this.aetherDimID;
+	}
+
+	public int getAetherBiomeID()
+	{
+		return this.aetherBiomeID;
 	}
 }
