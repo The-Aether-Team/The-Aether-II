@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client;
 
+import com.gildedgames.aether.common.AetherCreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -20,13 +21,8 @@ public class ClientProxy extends CommonProxy
 		super.preInit(event);
 
 		ModelsAether.preInit();
-		
-		this.TabBlocks.setDisplayStack(new ItemStack(BlocksAether.aether_grass, BlockAetherGrass.AETHER_GRASS.getMeta()));
-		this.TabMaterials.setDisplayStack(new ItemStack(ItemsAether.skyroot_stick));
-		this.TabTools.setDisplayStack(new ItemStack(ItemsAether.gravitite_pickaxe));
-		this.TabWeapons.setDisplayStack(new ItemStack(ItemsAether.gravitite_sword));
-		this.TabArmor.setDisplayStack(new ItemStack(ItemsAether.zanite_chestplate));
-		this.TabConsumables.setDisplayStack(new ItemStack(ItemsAether.orange));
+
+		AetherCreativeTabs.registerTabIcons();
 	}
 
 	@Override

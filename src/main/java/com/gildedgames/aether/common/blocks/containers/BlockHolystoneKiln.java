@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks.containers;
 
 import java.util.Random;
 
+import com.gildedgames.aether.common.AetherCreativeTabs;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -35,8 +36,6 @@ public class BlockHolystoneKiln extends BlockContainer
 	public BlockHolystoneKiln()
 	{
 		super(Material.rock);
-
-		this.setCreativeTab(AetherCore.PROXY.TabBlocks);
 
 		this.setDefaultState(this.getBlockState().getBaseState()
 				.withProperty(PROPERTY_IS_LIT, Boolean.FALSE)

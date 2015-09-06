@@ -21,7 +21,7 @@ public class RecipesAether
 		registerArmorRecipes();
 		registerAltarRecipes();
 
-		GameRegistry.registerFuelHandler(new AetherKilnFuelHandler());
+		GameRegistry.registerFuelHandler(new AetherFuelHandler());
 	}
 
 	private static void registerCraftingRecipes()

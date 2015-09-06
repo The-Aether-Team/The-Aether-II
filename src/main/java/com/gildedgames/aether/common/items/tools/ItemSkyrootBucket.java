@@ -1,5 +1,6 @@
-package com.gildedgames.aether.common.items;
+package com.gildedgames.aether.common.items.tools;
 
+import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;

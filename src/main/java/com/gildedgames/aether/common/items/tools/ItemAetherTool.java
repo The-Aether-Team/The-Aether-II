@@ -9,7 +9,5 @@ public class ItemAetherTool extends ItemTool
 	public ItemAetherTool(ToolMaterial material, EnumToolType toolType)
 	{
 		super(toolType.getBaseDamage(), material, toolType.getEffectiveBlocks());
-
-		this.setCreativeTab(AetherCore.PROXY.TabTools);
 	}
 }

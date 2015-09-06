@@ -1,13 +1,15 @@
 package com.gildedgames.aether.common.items;
 
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.items.armor.EnumAetherArmorVariant;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.items.consumables.ItemAmbrosiumShard;
 import com.gildedgames.aether.common.items.consumables.ItemCloudParachute;
+import com.gildedgames.aether.common.items.consumables.ItemSkyrootConsumableBucket;
 import com.gildedgames.aether.common.items.tools.EnumToolType;
 import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
 import com.gildedgames.aether.common.items.tools.ItemHolystoneTool;
+import com.gildedgames.aether.common.items.tools.ItemSkyrootBucket;
 import com.gildedgames.aether.common.items.tools.ItemSkyrootTool;
 import com.gildedgames.aether.common.items.tools.ItemZaniteTool;
 import com.gildedgames.aether.common.items.weapons.ItemDart;
@@ -16,7 +18,6 @@ import com.gildedgames.aether.common.items.weapons.ItemGravititeSword;
 import com.gildedgames.aether.common.items.weapons.ItemHolystoneSword;
 import com.gildedgames.aether.common.items.weapons.ItemSkyrootSword;
 import com.gildedgames.aether.common.items.weapons.ItemZaniteSword;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -71,10 +72,10 @@ public class ItemsAether
 
 	public static void preInit()
 	{
-		skyroot_stick = registerItem("skyroot_stick", new Item(), AetherCore.PROXY.TabMaterials);
-		ambrosium_shard = registerItem("ambrosium_shard", new ItemAmbrosiumShard(), AetherCore.PROXY.TabMaterials);
-		continuum_orb = registerItem("continuum_orb", new Item(), AetherCore.PROXY.TabMaterials);
-		zanite_gemstone = registerItem("zanite_gemstone", new Item(), AetherCore.PROXY.TabMaterials);
+		skyroot_stick = registerItem("skyroot_stick", new Item(), AetherCreativeTabs.tabMaterials);
+		ambrosium_shard = registerItem("ambrosium_shard", new ItemAmbrosiumShard(), AetherCreativeTabs.tabMaterials);
+		continuum_orb = registerItem("continuum_orb", new Item(), AetherCreativeTabs.tabMaterials);
+		zanite_gemstone = registerItem("zanite_gemstone", new Item(), AetherCreativeTabs.tabMaterials);
 
 		skyroot_axe = registerItem("skyroot_axe", new ItemSkyrootTool(EnumToolType.AXE));
 		skyroot_pickaxe = registerItem("skyroot_pickaxe", new ItemSkyrootTool(EnumToolType.PICKAXE));
@@ -126,28 +127,28 @@ public class ItemsAether
 		valkyrie_leggings = registerItem("valkyrie_leggings", new ItemAetherArmor(EnumAetherArmorVariant.VALKYRIE, 0, 2));
 		valkyrie_boots = registerItem("valkyrie_boots", new ItemAetherArmor(EnumAetherArmorVariant.VALKYRIE, 0, 3));
 
-		golden_amber = registerItem("golden_amber", new Item(), AetherCore.PROXY.TabMaterials);
+		golden_amber = registerItem("golden_amber", new Item(), AetherCreativeTabs.tabMaterials);
 
-		blueberry = registerItem("blueberry", new ItemFood(2, false), AetherCore.PROXY.TabConsumables);
-		orange = registerItem("orange", new ItemFood(4, false), AetherCore.PROXY.TabConsumables);
+		blueberry = registerItem("blueberry", new ItemFood(2, false), AetherCreativeTabs.tabConsumables);
+		orange = registerItem("orange", new ItemFood(4, false), AetherCreativeTabs.tabConsumables);
 
-		skyroot_bucket = registerItem("skyroot_bucket", new ItemSkyrootBucket(Blocks.air), AetherCore.PROXY.TabTools);
-		skyroot_water_bucket = registerItem("skyroot_water_bucket", new ItemSkyrootBucket(Blocks.flowing_water), AetherCore.PROXY.TabTools);
-		skyroot_milk_bucket = registerItem("skyroot_milk_bucket", new ItemSkyrootConsumableBucket(), AetherCore.PROXY.TabConsumables);
-		skyroot_poison_bucket = registerItem("skyroot_poison_bucket", new ItemSkyrootConsumableBucket(), AetherCore.PROXY.TabConsumables);
+		skyroot_bucket = registerItem("skyroot_bucket", new ItemSkyrootBucket(Blocks.air), AetherCreativeTabs.tabTools);
+		skyroot_water_bucket = registerItem("skyroot_water_bucket", new ItemSkyrootBucket(Blocks.flowing_water), AetherCreativeTabs.tabTools);
+		skyroot_milk_bucket = registerItem("skyroot_milk_bucket", new ItemSkyrootConsumableBucket(), AetherCreativeTabs.tabConsumables);
+		skyroot_poison_bucket = registerItem("skyroot_poison_bucket", new ItemSkyrootConsumableBucket(), AetherCreativeTabs.tabConsumables);
 
-		valkyrie_music_disc = registerItem("valkyrie_music_disc", new ItemAetherRecord("valkyrie"), AetherCore.PROXY.TabTools);
-		labyrinth_music_disc = registerItem("labyrinth_music_disc", new ItemAetherRecord("labyrinth"), AetherCore.PROXY.TabTools);
-		moa_music_disc = registerItem("moa_music_disc", new ItemAetherRecord("moa"), AetherCore.PROXY.TabTools);
-		aerwhale_music_disc = registerItem("aerwhale_music_disc", new ItemAetherRecord("aerwhale"), AetherCore.PROXY.TabTools);
-		recording_892 = registerItem("recording_892", new ItemAetherRecord("recording_892"), AetherCore.PROXY.TabTools);
+		valkyrie_music_disc = registerItem("valkyrie_music_disc", new ItemAetherRecord("valkyrie"), AetherCreativeTabs.tabTools);
+		labyrinth_music_disc = registerItem("labyrinth_music_disc", new ItemAetherRecord("labyrinth"), AetherCreativeTabs.tabTools);
+		moa_music_disc = registerItem("moa_music_disc", new ItemAetherRecord("moa"), AetherCreativeTabs.tabTools);
+		aerwhale_music_disc = registerItem("aerwhale_music_disc", new ItemAetherRecord("aerwhale"), AetherCreativeTabs.tabTools);
+		recording_892 = registerItem("recording_892", new ItemAetherRecord("recording_892"), AetherCreativeTabs.tabTools);
 
-		healing_stone = registerItem("healing_stone", new ItemFood(0, 1.2f, false).setAlwaysEdible().setPotionEffect(Potion.regeneration.getId(), 30, 0, 1.0f), AetherCore.PROXY.TabConsumables);
+		healing_stone = registerItem("healing_stone", new ItemFood(0, 1.2f, false).setAlwaysEdible().setPotionEffect(Potion.regeneration.getId(), 30, 0, 1.0f), AetherCreativeTabs.tabConsumables);
 
-		dart_shooter = registerItem("dart_shooter", new ItemDartShooter(), AetherCore.PROXY.TabWeapons);
-		dart = registerItem("dart", new ItemDart(), AetherCore.PROXY.TabWeapons);
+		dart_shooter = registerItem("dart_shooter", new ItemDartShooter(), AetherCreativeTabs.tabWeapons);
+		dart = registerItem("dart", new ItemDart(), AetherCreativeTabs.tabWeapons);
 
-		cloud_parachute = registerItem("cloud_parachute", new ItemCloudParachute(), AetherCore.PROXY.TabConsumables);
+		cloud_parachute = registerItem("cloud_parachute", new ItemCloudParachute(), AetherCreativeTabs.tabConsumables);
 
 		registerItemProperties();
 	}
