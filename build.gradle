@@ -25,13 +25,24 @@ ext.config = loadConfig(file('build.properties'))
 group = 'com.gildedgames.aether'
 
 task defineVersion {
-	def build = System.getenv("BUILD_NUMBER")
+	def build = System.getenv().BUILD_NUMBER
 
 	if (build != null) {
 		version = "${config.mc_version}-${config.build}.jenkins-${build}"
 	} else {
 		version = "${config.mc_version}-${config.build}"
 	}
+}
+
+repositories {
+    maven {
+        name = "gildedgames"
+        url = "http://gilded-games.com/maven/"
+    }
+}
+
+dependencies {
+    compile "com.gildedgames.util:util:${config.ggutil_version}"
 }
 
 minecraft {
