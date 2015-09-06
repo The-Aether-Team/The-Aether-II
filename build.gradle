@@ -42,7 +42,7 @@ repositories {
 }
 
 dependencies {
-    compile "com.gildedgames.util:util:${config.ggutil_version}"
+    compile "com.gildedgames.util:util:${config.ggutil_version}:dev"
 }
 
 minecraft {
