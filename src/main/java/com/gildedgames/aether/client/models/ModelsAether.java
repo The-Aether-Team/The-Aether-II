@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.models;
 
 import com.gildedgames.aether.client.models.util.ModelResourceList;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.containers.BlockHolystoneKiln;
+import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.dungeon.BlockDungeon;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
@@ -159,9 +159,9 @@ public class ModelsAether
 				.add(BlockDungeon.NORMAL, "sentry_stone")
 				.add(BlockDungeon.DIVINE, "divine_sentry_stone"));
 
-		registerModelList(getItem(BlocksAether.holystone_kiln), new ModelResourceList("holystone_kiln/")
-				.add(BlockHolystoneKiln.LIT_META, "holystone_kiln_on")
-				.add(BlockHolystoneKiln.UNLIT_META, "holystone_kiln_off"));
+		registerModelList(getItem(BlocksAether.holystone_furnace), new ModelResourceList("holystone_furnace/")
+				.add(BlockHolystoneFurnace.LIT_META, "holystone_furnace_lit")
+				.add(BlockHolystoneFurnace.UNLIT_META, "holystone_furnace_unlit"));
 
 		registerModelList(getItem(BlocksAether.ambrosium_ore), new ModelResourceList("ores/").add(0, "ambrosium_ore"));
 		registerModelList(getItem(BlocksAether.zanite_ore), new ModelResourceList("ores/").add(0, "zanite_ore"));

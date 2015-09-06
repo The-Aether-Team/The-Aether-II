@@ -1,0 +1,28 @@
+{
+	"variants": {
+		"facing=north,is_lit=true": {
+			"model": "aether:holystone_furnace/holystone_furnace_lit"
+		},
+		"facing=east,is_lit=true": {
+			"model": "aether:holystone_furnace/holystone_furnace_lit", "y": 90
+		},
+		"facing=south,is_lit=true": {
+			"model": "aether:holystone_furnace/holystone_furnace_lit", "y": 180
+		},
+		"facing=west,is_lit=true": {
+			"model": "aether:holystone_furnace/holystone_furnace_lit", "y": 270
+		},
+		"facing=north,is_lit=false": {
+			"model": "aether:holystone_furnace/holystone_furnace_unlit"
+		},
+		"facing=east,is_lit=false": {
+			"model": "aether:holystone_furnace/holystone_furnace_unlit", "y": 90
+		},
+		"facing=south,is_lit=false": {
+			"model": "aether:holystone_furnace/holystone_furnace_unlit", "y": 180
+		},
+		"facing=west,is_lit=false": {
+			"model": "aether:holystone_furnace/holystone_furnace_unlit", "y": 270
+		}
+	}
+}

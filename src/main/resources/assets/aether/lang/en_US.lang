@@ -48,7 +48,7 @@ tile.sentry_stone.normal.name=Sentry Stone
 tile.sentry_stone.divine.name=Divine Sentry Stone
 tile.enchanted_gravitite.name=Enchanted Gravitite
 tile.holystone_brick.name=Holystone Brick
-tile.holystone_kiln.name=Holystone Kiln
+tile.holystone_furnace.name=Holystone Furnace
 
 # Aether Items
 item.skyroot_stick.name=Skyroot Stick
@@ -138,4 +138,4 @@ itemGroup.aetherArmor=Aether Armor
 itemGroup.aetherConsumables=Aether Consumables
 
 # Containers
-container.holystone_kiln=Holystone Kiln
+container.holystone_furnace=Holystone Furnace

@@ -1,8 +1,8 @@
 {
 	"textures": {
-		"inside": "aether:blocks/holystone_kiln/holystone_kiln_inside",
-		"inside_dark": "aether:blocks/holystone_kiln/holystone_kiln_inside_dark",
-		"fire": "aether:blocks/holystone_kiln/holystone_kiln_fire_off",
+		"inside": "aether:blocks/holystone_furnace/holystone_furnace_inside",
+		"inside_dark": "aether:blocks/holystone_furnace/holystone_furnace_inside_dark",
+		"fire": "aether:blocks/holystone_furnace/holystone_furnace_fire_on",
 		"particle": "aether:blocks/holystone/holystone"
 	},
 	"elements": [

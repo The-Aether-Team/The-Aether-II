@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.tile_entities;
 
-import com.gildedgames.aether.common.blocks.containers.BlockHolystoneKiln;
+import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -24,7 +24,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityHolystoneKiln extends TileEntityLockable implements IUpdatePlayerListBox, ISidedInventory
+public class TileEntityHolystoneFurnace extends TileEntityLockable implements IUpdatePlayerListBox, ISidedInventory
 {
 	private static final int[]
 			slotsTop = new int[] { 0 },
@@ -122,7 +122,7 @@ public class TileEntityHolystoneKiln extends TileEntityLockable implements IUpda
 
 	public String getCommandSenderName()
 	{
-		return this.hasCustomName() ? this.customName : "container.holystone_kiln";
+		return this.hasCustomName() ? this.customName : "container.holystone_furnace";
 	}
 
 	public boolean hasCustomName()
@@ -287,7 +287,7 @@ public class TileEntityHolystoneKiln extends TileEntityLockable implements IUpda
 				IBlockState state = this.worldObj.getBlockState(this.pos);
 
 				this.worldObj.setBlockState(this.pos, state
-						.withProperty(BlockHolystoneKiln.PROPERTY_IS_LIT, this.isBurning()));
+						.withProperty(BlockHolystoneFurnace.PROPERTY_IS_LIT, this.isBurning()));
 
 				this.validate();
 				this.worldObj.setTileEntity(this.pos, this);

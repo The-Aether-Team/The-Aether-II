@@ -1,5 +1,5 @@
 {
-	"parent": "aether:block/holystone_kiln/holystone_kiln_on",
+	"parent": "aether:block/holystone_furnace/holystone_furnace_lit",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

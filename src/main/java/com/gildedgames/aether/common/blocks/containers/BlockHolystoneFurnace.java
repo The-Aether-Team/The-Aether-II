@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.blocks.containers;
 
 import java.util.Random;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -22,10 +21,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.tile_entities.TileEntityHolystoneKiln;
+import com.gildedgames.aether.common.tile_entities.TileEntityHolystoneFurnace;
 
-public class BlockHolystoneKiln extends BlockContainer
+public class BlockHolystoneFurnace extends BlockContainer
 {
 	public static final PropertyBool PROPERTY_IS_LIT = PropertyBool.create("is_lit");
 
@@ -33,7 +31,7 @@ public class BlockHolystoneKiln extends BlockContainer
 
 	public static final int UNLIT_META = 0, LIT_META = 1;
 
-	public BlockHolystoneKiln()
+	public BlockHolystoneFurnace()
 	{
 		super(Material.rock);
 
@@ -55,9 +53,9 @@ public class BlockHolystoneKiln extends BlockContainer
 		{
 			TileEntity tileEntity = world.getTileEntity(pos);
 
-			if (tileEntity instanceof TileEntityHolystoneKiln)
+			if (tileEntity instanceof TileEntityHolystoneFurnace)
 			{
-				player.displayGUIChest((TileEntityHolystoneKiln) tileEntity);
+				player.displayGUIChest((TileEntityHolystoneFurnace) tileEntity);
 			}
 		}
 
@@ -69,9 +67,9 @@ public class BlockHolystoneKiln extends BlockContainer
 	{
 		TileEntity tileEntity = world.getTileEntity(pos);
 
-		if (tileEntity instanceof TileEntityHolystoneKiln)
+		if (tileEntity instanceof TileEntityHolystoneFurnace)
 		{
-			InventoryHelper.dropInventoryItems(world, pos, (TileEntityHolystoneKiln) tileEntity);
+			InventoryHelper.dropInventoryItems(world, pos, (TileEntityHolystoneFurnace) tileEntity);
 		}
 
 		super.breakBlock(world, pos, state);
@@ -169,6 +167,6 @@ public class BlockHolystoneKiln extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{
-		return new TileEntityHolystoneKiln();
+		return new TileEntityHolystoneFurnace();
 	}
 }
