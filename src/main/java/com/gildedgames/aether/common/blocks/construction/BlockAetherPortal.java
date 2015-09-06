@@ -159,7 +159,7 @@ public class BlockAetherPortal extends BlockBreakable
 			EntityPlayerMP player = (EntityPlayerMP) entity;
 			ServerConfigurationManager scm = MinecraftServer.getServer().getConfigurationManager();
 
-			int transferToID = player.dimension == AetherCore.aetherDimId() ? 0 : AetherCore.aetherDimId();
+			int transferToID = player.dimension == AetherCore.getAetherDimID() ? 0 : AetherCore.getAetherDimID();
 			scm.transferPlayerToDimension(player, transferToID, new TeleporterAether(MinecraftServer.getServer().worldServerForDimension(3)));
 		}
 	}
