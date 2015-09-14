@@ -185,6 +185,8 @@ public class ModelsAether
 		registerModelList(getItem(BlocksAether.skyroot_planks), new ModelResourceList().add(0, "skyroot_planks"));
 		registerModelList(getItem(BlocksAether.holystone_brick), new ModelResourceList().add(0, "holystone_brick"));
 
+		registerModelList(getItem(BlocksAether.quicksoil_glass), new ModelResourceList().add(0, "quicksoil_glass"));
+
 		registerModelList(ItemsAether.skyroot_stick, new ModelResourceList().add(0, "skyroot_stick"));
 		registerModelList(ItemsAether.golden_amber, new ModelResourceList().add(0, "golden_amber"));
 
