@@ -56,7 +56,7 @@ public class ItemsAether
 
 	public static Item golden_amber;
 
-	public static Item blueberry, orange;
+	public static Item blueberry, orange, wyndberry;
 
 	public static Item skyroot_bucket, skyroot_water_bucket, skyroot_milk_bucket, skyroot_poison_bucket;
 
@@ -131,6 +131,7 @@ public class ItemsAether
 
 		blueberry = registerItem("blueberry", new ItemFood(2, false), AetherCreativeTabs.tabConsumables);
 		orange = registerItem("orange", new ItemFood(4, false), AetherCreativeTabs.tabConsumables);
+		wyndberry = registerItem("wyndberry", new ItemFood(4, false), AetherCreativeTabs.tabConsumables);
 
 		skyroot_bucket = registerItem("skyroot_bucket", new ItemSkyrootBucket(Blocks.air), AetherCreativeTabs.tabTools);
 		skyroot_water_bucket = registerItem("skyroot_water_bucket", new ItemSkyrootBucket(Blocks.flowing_water), AetherCreativeTabs.tabTools);

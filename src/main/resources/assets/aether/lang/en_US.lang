@@ -49,6 +49,7 @@ tile.sentry_stone.divine.name=Divine Sentry Stone
 tile.enchanted_gravitite.name=Enchanted Gravitite
 tile.holystone_brick.name=Holystone Brick
 tile.holystone_furnace.name=Holystone Furnace
+tile.quicksoil_glass.name=Quicksoil Glass
 
 # Aether Items
 item.skyroot_stick.name=Skyroot Stick
@@ -98,6 +99,7 @@ item.valkyrie_boots.name=Valkyrie Boots
 item.golden_amber.name=Golden Amber
 item.blueberry.name=Blueberry
 item.orange.name=Orange
+item.wyndberry.name=Wyndberry
 item.skyroot_bucket.name=Skyroot Bucket
 item.skyroot_water_bucket.name=Skyroot Water Bucket
 item.skyroot_milk_bucket.name=Skyroot Milk Bucket
