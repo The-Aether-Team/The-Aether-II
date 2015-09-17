@@ -248,6 +248,7 @@ public class ModelsAether
 		registerModelList(ItemsAether.orange, new ModelResourceList().add(0, "orange"));
 		registerModelList(ItemsAether.healing_stone, new ModelResourceList().add(0, "healing_stone"));
 		registerModelList(ItemsAether.wyndberry, new ModelResourceList().add(0, "wyndberry"));
+		registerModelList(ItemsAether.rainbow_strawberry, new ModelResourceList().add(0, "rainbow_strawberry"));
 
 		registerModelList(ItemsAether.skyroot_bucket, new ModelResourceList("skyroot_bucket/").add(0, "skyroot_bucket"));
 		registerModelList(ItemsAether.skyroot_water_bucket, new ModelResourceList("skyroot_bucket/").add(0, "skyroot_water_bucket"));
