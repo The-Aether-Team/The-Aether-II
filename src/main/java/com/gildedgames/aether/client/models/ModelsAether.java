@@ -13,6 +13,7 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.consumables.ItemGummySwet;
 import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
 import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
@@ -255,6 +256,10 @@ public class ModelsAether
 			.add(ItemSwetJelly.JellyType.BLUE.ordinal(), "blue_swet_jelly")
 			.add(ItemSwetJelly.JellyType.GOLDEN.ordinal(), "golden_swet_jelly")
 			.add(ItemSwetJelly.JellyType.DARK.ordinal(), "dark_swet_jelly"));
+		registerModelList(ItemsAether.gummy_swet, new ModelResourceList()
+			.add(ItemGummySwet.GummyType.BLUE.ordinal(), "blue_gummy_swet")
+			.add(ItemGummySwet.GummyType.GOLDEN.ordinal(), "golden_gummy_swet")
+			.add(ItemGummySwet.GummyType.DARK.ordinal(), "dark_gummy_swet"));
 
 		registerModelList(ItemsAether.skyroot_bucket, new ModelResourceList("skyroot_bucket/").add(0, "skyroot_bucket"));
 		registerModelList(ItemsAether.skyroot_water_bucket, new ModelResourceList("skyroot_bucket/").add(0, "skyroot_water_bucket"));

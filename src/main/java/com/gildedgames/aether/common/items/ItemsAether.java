@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.items.armor.EnumAetherArmorVariant;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.items.consumables.ItemAmbrosiumShard;
 import com.gildedgames.aether.common.items.consumables.ItemCloudParachute;
+import com.gildedgames.aether.common.items.consumables.ItemGummySwet;
 import com.gildedgames.aether.common.items.consumables.ItemRainbowStrawberry;
 import com.gildedgames.aether.common.items.consumables.ItemSkyrootConsumableBucket;
 import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
@@ -59,7 +60,7 @@ public class ItemsAether
 
 	public static Item golden_amber;
 
-	public static Item blueberry, orange, wyndberry, rainbow_strawberry, swet_jelly;
+	public static Item blueberry, orange, wyndberry, rainbow_strawberry, swet_jelly, gummy_swet;
 
 	public static Item skyroot_bucket, skyroot_water_bucket, skyroot_milk_bucket, skyroot_poison_bucket;
 
@@ -137,6 +138,7 @@ public class ItemsAether
 		wyndberry = registerItem("wyndberry", new ItemFood(4, false), AetherCreativeTabs.tabConsumables);
 		rainbow_strawberry = registerItem("rainbow_strawberry", new ItemRainbowStrawberry(), AetherCreativeTabs.tabConsumables);
 		swet_jelly = registerItem("swet_jelly", new ItemSwetJelly(), AetherCreativeTabs.tabConsumables);
+		gummy_swet = registerItem("gummy_swet", new ItemGummySwet(), AetherCreativeTabs.tabConsumables);
 
 		skyroot_bucket = registerItem("skyroot_bucket", new ItemSkyrootBucket(Blocks.air), AetherCreativeTabs.tabTools);
 		skyroot_water_bucket = registerItem("skyroot_water_bucket", new ItemSkyrootBucket(Blocks.flowing_water), AetherCreativeTabs.tabTools);
