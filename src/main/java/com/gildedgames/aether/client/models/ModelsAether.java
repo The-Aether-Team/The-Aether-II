@@ -258,6 +258,7 @@ public class ModelsAether
 		registerModelList(ItemsAether.jelly_pumpkin, new ModelResourceList().add(0, "jelly_pumpkin"));
 		registerModelList(ItemsAether.stomper_pop, new ModelResourceList().add(0, "stomper_pop"));
 		registerModelList(ItemsAether.blueberry_lollipop, new ModelResourceList().add(0, "blueberry_lollipop"));
+		registerModelList(ItemsAether.orange_lollipop, new ModelResourceList().add(0, "orange_lollipop"));
 		registerModelList(ItemsAether.swet_jelly, new ModelResourceList()
 			.add(ItemSwetJelly.JellyType.BLUE.ordinal(), "blue_swet_jelly")
 			.add(ItemSwetJelly.JellyType.GOLDEN.ordinal(), "golden_swet_jelly")
