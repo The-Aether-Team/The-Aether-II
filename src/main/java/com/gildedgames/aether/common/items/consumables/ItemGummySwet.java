@@ -11,12 +11,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemGummySwet extends ItemFood
 {
-
 	public enum GummyType
 	{
 		BLUE("blue"), GOLDEN("golden"), DARK("dark");
 
-		public String name;
+		public final String name;
 
 		GummyType(String name)
 		{
@@ -25,7 +24,7 @@ public class ItemGummySwet extends ItemFood
 		
 		public static GummyType fromOrdinal(int ordinal)
 		{
-			 GummyType[] gummy = values();
+			GummyType[] gummy = values();
 
 			return gummy[ordinal > gummy.length || ordinal < 0 ? 0 : ordinal];
 		}
@@ -52,6 +51,6 @@ public class ItemGummySwet extends ItemFood
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		return "item." + GummyType.fromOrdinal(stack.getMetadata()).name + "_gummy_swet";
+		return "item.gummy_swet." + GummyType.fromOrdinal(stack.getMetadata()).name;
 	}
 }

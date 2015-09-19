@@ -8,11 +8,18 @@ import net.minecraft.item.ItemArmor.ArmorMaterial;
 
 public enum EnumAetherArmorVariant
 {
-	ZANITE, GRAVITITE, OBSIDIAN, NEPTUNE, PHOENIX, VALKYRIE;
+	ZANITE("zanite"), GRAVITITE("gravitite"), OBSIDIAN("obsidian"), NEPTUNE("neptune"), PHOENIX("phoenix"), VALKYRIE("valkyrie");
+
+	public final String name;
+
+	EnumAetherArmorVariant(String name)
+	{
+		this.name = name;
+	}
 
 	public String getResourceForSlot(int layerIndex)
 	{
-		return AetherCore.getResourcePath("textures/armor/" + this.name().toLowerCase() + "_layer_" + (layerIndex == 2 ? 2 : 1) + ".png");
+		return AetherCore.getResourcePath("textures/armor/" + this.name + "_layer_" + (layerIndex == 2 ? 2 : 1) + ".png");
 	}
 
 	public ArmorMaterial getArmorMaterial()

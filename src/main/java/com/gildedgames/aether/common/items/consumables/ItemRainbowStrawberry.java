@@ -9,7 +9,6 @@ import net.minecraft.world.World;
 
 public class ItemRainbowStrawberry extends ItemFood
 {
-
 	public ItemRainbowStrawberry()
 	{
 		super(8, false);
@@ -22,9 +21,9 @@ public class ItemRainbowStrawberry extends ItemFood
 		{
 			player.addPotionEffect(new PotionEffect(Potion.resistance.id, 200, 1));
 			player.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 200, 1));
-				
-			super.onFoodEaten(stack, worldIn, player);
 		}
+
+		super.onFoodEaten(stack, worldIn, player);
 	}
 
 }

@@ -11,12 +11,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemSwetJelly extends ItemFood
 {
-
 	public enum JellyType
 	{
 		BLUE("blue"), GOLDEN("golden"), DARK("dark");
 
-		public String name;
+		public final String name;
 
 		JellyType(String name)
 		{
@@ -31,7 +30,7 @@ public class ItemSwetJelly extends ItemFood
 		}
 	}
 
-	public ItemSwetJelly() 
+	public ItemSwetJelly()
 	{
 		super(5, false);
 
@@ -52,7 +51,6 @@ public class ItemSwetJelly extends ItemFood
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		return "item." + JellyType.fromOrdinal(stack.getMetadata()).name + "_swet_jelly";
+		return "item.swet_jelly." + JellyType.fromOrdinal(stack.getMetadata()).name;
 	}
-
 }
