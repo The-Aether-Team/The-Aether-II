@@ -12,6 +12,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockAerogel;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
+import com.gildedgames.aether.common.blocks.natural.BlockGoldenOakLog;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.natural.BlockIcestone;
 import com.gildedgames.aether.common.blocks.natural.BlockQuicksoil;
@@ -117,7 +118,7 @@ public class BlocksAether
 
 		skyroot_log = registerBlock("skyroot_log", new BlockAetherLog(), AetherCreativeTabs.tabBlocks);
 
-		golden_oak_log = registerBlock("golden_oak_log", new BlockAetherLog(), AetherCreativeTabs.tabBlocks);
+		golden_oak_log = registerBlock("golden_oak_log", new BlockGoldenOakLog(), AetherCreativeTabs.tabBlocks);
 
 		blue_skyroot_leaves = registerBlock("blue_skyroot_leaves", new BlockAetherLeaves(BlockAetherSapling.BLUE_SKYROOT_SAPLING.getMeta()), AetherCreativeTabs.tabBlocks);
 

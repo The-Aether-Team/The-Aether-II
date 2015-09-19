@@ -1,7 +1,5 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
@@ -9,18 +7,10 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class BlockAetherLog extends Block
 {
@@ -67,24 +57,22 @@ public class BlockAetherLog extends Block
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		IBlockState state = this.getDefaultState();
+		BlockLog.EnumAxis axis = BlockLog.EnumAxis.NONE;
 
-		switch (meta & 8)
+		switch (meta & 3)
 		{
-		case 0:
-			state = state.withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.Y);
+		case 1:
+			axis = BlockLog.EnumAxis.X;
 			break;
-		case 4:
-			state = state.withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.X);
+		case 2:
+			axis = BlockLog.EnumAxis.Y;
 			break;
-		case 8:
-			state = state.withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.Z);
+		case 3:
+			axis = BlockLog.EnumAxis.Z;
 			break;
-		default:
-			state = state.withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.NONE);
 		}
 
-		return state;
+		return this.getDefaultState().withProperty(PROPERTY_AXIS, axis);
 	}
 
 	@Override
@@ -95,13 +83,14 @@ public class BlockAetherLog extends Block
 		switch (((BlockLog.EnumAxis) state.getValue(PROPERTY_AXIS)))
 		{
 		case X:
-			meta |= 4;
+			meta |= 1;
 			break;
 		case Y:
-			meta |= 8;
+			meta |= 2;
 			break;
-		case NONE:
-			meta |= 12;
+		case Z:
+			meta |= 3;
+			break;
 		}
 
 		return meta;
@@ -117,33 +106,6 @@ public class BlockAetherLog extends Block
 	public boolean isWood(IBlockAccess world, BlockPos pos)
 	{
 		return true;
-	}
-
-	@Override
-	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player)
-	{
-		if (this == BlocksAether.golden_oak_log)
-		{
-			Item heldItem = player.getHeldItem().getItem();
-
-			if (heldItem instanceof ItemTool)
-			{
-				ToolMaterial material = ((ItemTool) heldItem).getToolMaterial();
-
-				if (material == ToolMaterial.GOLD || material == ToolMaterial.IRON || material == ToolMaterial.EMERALD)
-				{
-					this.dropGoldenAmber(world, pos, world.rand);
-				}
-			}
-		}
-	}
-
-	private void dropGoldenAmber(World world, BlockPos pos, Random random)
-	{
-		ItemStack stack = new ItemStack(ItemsAether.golden_amber, random.nextInt(3) + 1);
-
-		EntityItem entity = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack);
-		world.spawnEntityInWorld(entity);
 	}
 
 	@Override
