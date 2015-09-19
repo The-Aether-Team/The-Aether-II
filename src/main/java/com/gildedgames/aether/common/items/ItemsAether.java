@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.items.consumables.ItemCloudParachute;
 import com.gildedgames.aether.common.items.consumables.ItemGummySwet;
 import com.gildedgames.aether.common.items.consumables.ItemRainbowStrawberry;
 import com.gildedgames.aether.common.items.consumables.ItemSkyrootConsumableBucket;
+import com.gildedgames.aether.common.items.consumables.ItemStomperPop;
 import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
 import com.gildedgames.aether.common.items.tools.EnumToolType;
 import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
@@ -62,7 +63,7 @@ public class ItemsAether
 
 	public static Item blueberry, orange, wyndberry, rainbow_strawberry, swet_jelly, gummy_swet;
 
-	public static Item candy_corn, cocoatrice, wrapped_chocolates, jelly_pumpkin;
+	public static Item candy_corn, cocoatrice, wrapped_chocolates, jelly_pumpkin, stomper_pop;
 
 	public static Item skyroot_bucket, skyroot_water_bucket, skyroot_milk_bucket, skyroot_poison_bucket;
 
@@ -145,6 +146,7 @@ public class ItemsAether
 		cocoatrice = registerItem("cocoatrice", new ItemFood(12, false), AetherCreativeTabs.tabConsumables);
 		wrapped_chocolates = registerItem("wrapped_chocolates", new ItemFood(12, false), AetherCreativeTabs.tabConsumables);
 		jelly_pumpkin = registerItem("jelly_pumpkin", new ItemFood(12, false), AetherCreativeTabs.tabConsumables);
+		stomper_pop = registerItem("stomper_pop", new ItemStomperPop(), AetherCreativeTabs.tabConsumables);
 
 		skyroot_bucket = registerItem("skyroot_bucket", new ItemSkyrootBucket(Blocks.air), AetherCreativeTabs.tabTools);
 		skyroot_water_bucket = registerItem("skyroot_water_bucket", new ItemSkyrootBucket(Blocks.flowing_water), AetherCreativeTabs.tabTools);
