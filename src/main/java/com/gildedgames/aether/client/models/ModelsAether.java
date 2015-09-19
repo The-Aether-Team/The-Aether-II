@@ -261,6 +261,7 @@ public class ModelsAether
 		registerModelList(ItemsAether.orange_lollipop, new ModelResourceList().add(0, "orange_lollipop"));
 		registerModelList(ItemsAether.icestone_poprocks, new ModelResourceList().add(0, "icestone_poprocks"));
 		registerModelList(ItemsAether.ginger_bread_man, new ModelResourceList().add(0, "ginger_bread_man"));
+		registerModelList(ItemsAether.candy_cane, new ModelResourceList().add(0, "candy_cane"));
 		registerModelList(ItemsAether.swet_jelly, new ModelResourceList()
 			.add(ItemSwetJelly.JellyType.BLUE.ordinal(), "blue_swet_jelly")
 			.add(ItemSwetJelly.JellyType.GOLDEN.ordinal(), "golden_swet_jelly")
