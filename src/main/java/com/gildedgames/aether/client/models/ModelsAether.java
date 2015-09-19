@@ -252,6 +252,7 @@ public class ModelsAether
 		registerModelList(ItemsAether.healing_stone, new ModelResourceList().add(0, "healing_stone"));
 		registerModelList(ItemsAether.wyndberry, new ModelResourceList().add(0, "wyndberry"));
 		registerModelList(ItemsAether.rainbow_strawberry, new ModelResourceList().add(0, "rainbow_strawberry"));
+		registerModelList(ItemsAether.candy_corn, new ModelResourceList().add(0, "candy_corn"));
 		registerModelList(ItemsAether.swet_jelly, new ModelResourceList()
 			.add(ItemSwetJelly.JellyType.BLUE.ordinal(), "blue_swet_jelly")
 			.add(ItemSwetJelly.JellyType.GOLDEN.ordinal(), "golden_swet_jelly")
