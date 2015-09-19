@@ -1,17 +1,15 @@
 package com.gildedgames.aether.common.player;
 
-import java.util.UUID;
-
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.player.abilites.AbilityParachute;
 import com.gildedgames.util.player.common.IPlayerHookPool;
 import com.gildedgames.util.player.common.player.IPlayerHook;
 import com.gildedgames.util.player.common.player.IPlayerProfile;
-
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+
+import java.util.UUID;
 
 public class PlayerAether implements IPlayerHook
 {
@@ -20,8 +18,6 @@ public class PlayerAether implements IPlayerHook
 	private final IPlayerHookPool<PlayerAether> playerHookPool;
 
 	private EntityPlayer player;
-
-	private AbilityParachute abilityParachute = new AbilityParachute(this);
 
 	private boolean isDirty;
 
@@ -50,13 +46,7 @@ public class PlayerAether implements IPlayerHook
 	@Override
 	public void onUpdate()
 	{
-		this.abilityParachute.onUpdate();
 
-		if (this.abilityParachute.isDirty())
-		{
-			this.abilityParachute.markClean();
-			this.markDirty();
-		}
 	}
 
 	@Override
@@ -86,25 +76,25 @@ public class PlayerAether implements IPlayerHook
 	@Override
 	public void write(NBTTagCompound output)
 	{
-		this.abilityParachute.write(output);
+
 	}
 
 	@Override
 	public void read(NBTTagCompound input)
 	{
-		this.abilityParachute.read(input);
+
 	}
 
 	@Override
 	public void syncTo(ByteBuf buf, SyncSide side)
 	{
-		this.abilityParachute.syncTo(buf, side);
+
 	}
 
 	@Override
 	public void syncFrom(ByteBuf buf, SyncSide side)
 	{
-		this.abilityParachute.syncFrom(buf, side);
+
 	}
 
 	@Override
@@ -135,10 +125,5 @@ public class PlayerAether implements IPlayerHook
 	public IPlayerProfile getProfile()
 	{
 		return this.playerProfile;
-	}
-
-	public AbilityParachute getAbilityParachute()
-	{
-		return this.abilityParachute;
 	}
 }

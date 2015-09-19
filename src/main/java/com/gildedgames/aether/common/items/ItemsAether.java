@@ -4,7 +4,6 @@ import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.items.armor.EnumAetherArmorVariant;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.items.consumables.ItemAmbrosiumShard;
-import com.gildedgames.aether.common.items.consumables.ItemCloudParachute;
 import com.gildedgames.aether.common.items.consumables.ItemGummySwet;
 import com.gildedgames.aether.common.items.consumables.ItemRainbowStrawberry;
 import com.gildedgames.aether.common.items.consumables.ItemSkyrootConsumableBucket;
@@ -22,7 +21,6 @@ import com.gildedgames.aether.common.items.weapons.ItemGravititeSword;
 import com.gildedgames.aether.common.items.weapons.ItemHolystoneSword;
 import com.gildedgames.aether.common.items.weapons.ItemSkyrootSword;
 import com.gildedgames.aether.common.items.weapons.ItemZaniteSword;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -76,8 +74,6 @@ public class ItemsAether
 	public static Item dart_shooter;
 
 	public static Item dart;
-
-	public static Item cloud_parachute;
 
 	public static void preInit()
 	{
@@ -170,8 +166,6 @@ public class ItemsAether
 
 		dart_shooter = registerItem("dart_shooter", new ItemDartShooter(), AetherCreativeTabs.tabWeapons);
 		dart = registerItem("dart", new ItemDart(), AetherCreativeTabs.tabWeapons);
-
-		cloud_parachute = registerItem("cloud_parachute", new ItemCloudParachute(), AetherCreativeTabs.tabConsumables);
 
 		registerItemProperties();
 	}
