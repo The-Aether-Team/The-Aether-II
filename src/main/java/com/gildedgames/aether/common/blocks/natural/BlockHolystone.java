@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
+import com.gildedgames.aether.common.blocks.util.BlockWithDoubleDrops;
+import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import com.google.common.base.Predicate;
@@ -19,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class BlockHolystone extends Block implements IAetherBlockWithSubtypes
+public class BlockHolystone extends BlockWithDoubleDrops implements IAetherBlockWithVariants
 {
 	public static final BlockVariant
 			NORMAL_HOLYSTONE = new BlockVariant(0, "normal"),
@@ -80,25 +81,32 @@ public class BlockHolystone extends Block implements IAetherBlockWithSubtypes
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta & 7)).withProperty(PROPERTY_WAS_MINED, (meta & 8) == 8);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
+		int meta = ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
+
+		if (state.getValue(PROPERTY_WAS_MINED) == Boolean.TRUE)
+		{
+			meta |= 8;
+		}
+
+		return meta;
 	}
 
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, PROPERTY_VARIANT);
+		return new BlockState(this, PROPERTY_VARIANT, PROPERTY_WAS_MINED);
 	}
 
 	@Override
 	public int damageDropped(IBlockState state)
 	{
-		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
+		return this.getMetaFromState(state.withProperty(PROPERTY_WAS_MINED, Boolean.TRUE));
 	}
 
 	@Override

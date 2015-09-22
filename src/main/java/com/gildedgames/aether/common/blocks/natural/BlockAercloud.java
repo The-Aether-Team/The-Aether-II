@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import java.util.List;
-import java.util.Random;
-
+import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
+import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
+import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -23,11 +23,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
+import java.util.List;
+import java.util.Random;
 
-public class BlockAercloud extends Block implements IAetherBlockWithSubtypes
+public class BlockAercloud extends Block implements IAetherBlockWithVariants
 {
 	public static class AercloudVariant extends BlockVariant
 	{

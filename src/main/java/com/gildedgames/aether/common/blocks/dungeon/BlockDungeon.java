@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.dungeon;
 
-import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
+import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockDungeon extends Block implements IAetherBlockWithSubtypes
+public class BlockDungeon extends Block implements IAetherBlockWithVariants
 {
 	public static final int
 			NORMAL = 0,

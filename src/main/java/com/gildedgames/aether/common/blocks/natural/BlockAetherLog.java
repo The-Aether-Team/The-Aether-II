@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.natural;
 
+import com.gildedgames.aether.common.blocks.util.BlockWithDoubleDrops;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
@@ -12,7 +13,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockAetherLog extends Block
+public class BlockAetherLog extends BlockWithDoubleDrops
 {
 	public static final PropertyEnum PROPERTY_AXIS = PropertyEnum.create("axis", BlockLog.EnumAxis.class);
 
@@ -24,7 +25,7 @@ public class BlockAetherLog extends Block
 
 		this.setHardness(2.0f);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.Y));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.Y).withProperty(PROPERTY_WAS_MINED, false));
 	}
 
 	@Override
@@ -59,20 +60,22 @@ public class BlockAetherLog extends Block
 	{
 		BlockLog.EnumAxis axis = BlockLog.EnumAxis.NONE;
 
-		switch (meta & 3)
+		switch (meta & 7)
 		{
+		case 0:
+			axis = BlockLog.EnumAxis.Y;
+			break;
 		case 1:
 			axis = BlockLog.EnumAxis.X;
 			break;
 		case 2:
-			axis = BlockLog.EnumAxis.Y;
-			break;
-		case 3:
 			axis = BlockLog.EnumAxis.Z;
 			break;
 		}
 
-		return this.getDefaultState().withProperty(PROPERTY_AXIS, axis);
+		boolean wasPlaced = (meta & 8) == 8;
+
+		return this.getDefaultState().withProperty(PROPERTY_AXIS, axis).withProperty(PROPERTY_WAS_MINED, wasPlaced);
 	}
 
 	@Override
@@ -82,15 +85,20 @@ public class BlockAetherLog extends Block
 
 		switch (((BlockLog.EnumAxis) state.getValue(PROPERTY_AXIS)))
 		{
+		case Y:
+			meta |= 0;
+			break;
 		case X:
 			meta |= 1;
 			break;
-		case Y:
+		case Z:
 			meta |= 2;
 			break;
-		case Z:
-			meta |= 3;
-			break;
+		}
+
+		if ((Boolean) state.getValue(PROPERTY_WAS_MINED))
+		{
+			meta |= 8;
 		}
 
 		return meta;
@@ -111,12 +119,12 @@ public class BlockAetherLog extends Block
 	@Override
 	public int damageDropped(IBlockState state)
 	{
-		return 0;
+		return this.getMetaFromState(this.getDefaultState().withProperty(PROPERTY_WAS_MINED, true));
 	}
 
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, PROPERTY_AXIS);
+		return new BlockState(this, PROPERTY_AXIS, PROPERTY_WAS_MINED);
 	}
 }

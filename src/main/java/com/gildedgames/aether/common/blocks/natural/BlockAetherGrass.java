@@ -1,7 +1,8 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
+import com.gildedgames.aether.common.blocks.util.BlockWithDoubleDrops;
+import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import net.minecraft.block.Block;
@@ -19,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
-public class BlockAetherGrass extends Block implements IAetherBlockWithSubtypes
+public class BlockAetherGrass extends BlockWithDoubleDrops implements IAetherBlockWithVariants
 {
 	public static final BlockVariant
 			AETHER_GRASS = new BlockVariant(0, "normal"),
@@ -72,7 +73,10 @@ public class BlockAetherGrass extends Block implements IAetherBlockWithSubtypes
 						if (neighborState.getBlock() == BlocksAether.aether_dirt &&
 								world.getLightFromNeighbors(randomNeighbor.up()) >= 4 && neighborBlock.getLightOpacity(world, randomNeighbor.up()) <= 2)
 						{
-							world.setBlockState(randomNeighbor, this.getDefaultState().withProperty(PROPERTY_VARIANT, AETHER_GRASS));
+							IBlockState grassState = this.getDefaultState().withProperty(PROPERTY_VARIANT, AETHER_GRASS);
+							grassState.withProperty(PROPERTY_WAS_MINED, neighborState.getValue(PROPERTY_WAS_MINED));
+
+							world.setBlockState(randomNeighbor, grassState);
 						}
 					}
 				}
@@ -89,24 +93,41 @@ public class BlockAetherGrass extends Block implements IAetherBlockWithSubtypes
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
+		BlockVariant variant = PROPERTY_VARIANT.fromMeta(meta & 7);
+
+		boolean wasMined = (meta & 8) == 8;
+
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, variant).withProperty(PROPERTY_WAS_MINED, wasMined);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
+		int meta = ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
+
+		if (state.getValue(PROPERTY_WAS_MINED) == Boolean.TRUE)
+		{
+			meta |= 8;
+		}
+
+		return meta;
 	}
 
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, PROPERTY_VARIANT);
+		return new BlockState(this, PROPERTY_VARIANT, PROPERTY_WAS_MINED);
 	}
 
 	@Override
 	public String getSubtypeUnlocalizedName(ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
+	}
+
+	@Override
+	public int damageDropped(IBlockState state)
+	{
+		return 1;
 	}
 }

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithSubtypes;
+import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import com.gildedgames.aether.common.world.features.trees.WorldGenSkyrootTree;
@@ -24,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
-public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, IAetherBlockWithSubtypes
+public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, IAetherBlockWithVariants
 {
 	public static final BlockVariant
 			BLUE_SKYROOT_SAPLING = new BlockVariant(0, "blue_skyroot"),
