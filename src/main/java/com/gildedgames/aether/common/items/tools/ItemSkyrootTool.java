@@ -40,5 +40,4 @@ public class ItemSkyrootTool extends ItemAetherTool
 
 		return super.onBlockDestroyed(stack, world, block, pos, player);
 	}
-	// TODO: Double drops.
 }

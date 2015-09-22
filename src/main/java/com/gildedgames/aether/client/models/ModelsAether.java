@@ -66,7 +66,7 @@ public class ModelsAether
 		ModelLoader.setCustomStateMapper(BlocksAether.purple_crystal_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.purple_fruit_leaves, leavesMapper);
 
-		StateMap doubleDropMapper = new StateMap.Builder().addPropertiesToIgnore(BlockWithDoubleDrops.PROPERTY_WAS_MINED).build();
+		StateMap doubleDropMapper = new StateMap.Builder().addPropertiesToIgnore(BlockWithDoubleDrops.PROPERTY_WAS_PLACED).build();
 
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_log, doubleDropMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.golden_oak_log, doubleDropMapper);
@@ -119,21 +119,15 @@ public class ModelsAether
 
 	private static void defineModels()
 	{
-		registerItemModels(getItem(BlocksAether.aether_dirt), new ItemModelList()
-				.add(0, "aether_dirt")
-				.add(1, "aether_dirt"));
+		registerItemModels(getItem(BlocksAether.aether_dirt), new ItemModelList().add(0, "aether_dirt"));
 
 		registerItemModels(getItem(BlocksAether.aether_grass), new ItemModelList("aether_grass/")
 				.add(BlockAetherGrass.AETHER_GRASS.getMeta(), "aether_grass")
-				.add(BlockAetherGrass.AETHER_GRASS.getMeta(), "aether_grass")
-				.add(BlockAetherGrass.ENCHANTED_AETHER_GRASS.getMeta(), "enchanted_aether_grass")
 				.add(BlockAetherGrass.ENCHANTED_AETHER_GRASS.getMeta(), "enchanted_aether_grass"));
 
 		registerItemModels(getItem(BlocksAether.holystone), new ItemModelList("holystone/")
 				.add(BlockHolystone.NORMAL_HOLYSTONE.getMeta(), "holystone")
-				.add(BlockHolystone.NORMAL_HOLYSTONE.getMeta() + 8, "holystone")
-				.add(BlockHolystone.MOSSY_HOLYSTONE.getMeta(), "mossy_holystone")
-				.add(BlockHolystone.MOSSY_HOLYSTONE.getMeta() + 8, "mossy_holystone"));
+				.add(BlockHolystone.MOSSY_HOLYSTONE.getMeta(), "mossy_holystone"));
 
 		registerItemModels(getItem(BlocksAether.aercloud), new ItemModelList("aercloud/")
 				.add(BlockAercloud.COLD_AERCLOUD.getMeta(), "cold_aercloud")
@@ -143,13 +137,9 @@ public class ModelsAether
 				.add(BlockAercloud.STORM_AERCLOUD.getMeta(), "storm_aercloud")
 				.add(BlockAercloud.PURPLE_AERCLOUD.getMeta(), "purple_aercloud"));
 
-		registerItemModels(getItem(BlocksAether.skyroot_log), new ItemModelList("aether_log/")
-				.add(0, "skyroot_log")
-				.add(8, "skyroot_log"));
+		registerItemModels(getItem(BlocksAether.skyroot_log), new ItemModelList("aether_log/").add(0, "skyroot_log"));
 
-		registerItemModels(getItem(BlocksAether.golden_oak_log), new ItemModelList("aether_log/")
-				.add(0, "golden_oak_log")
-				.add(8, "golden_oak_log"));
+		registerItemModels(getItem(BlocksAether.golden_oak_log), new ItemModelList("aether_log/").add(0, "golden_oak_log"));
 
 		registerItemModels(getItem(BlocksAether.blue_skyroot_leaves), new ItemModelList("aether_leaves/").add(0, "blue_skyroot_leaves"));
 		registerItemModels(getItem(BlocksAether.green_skyroot_leaves), new ItemModelList("aether_leaves/").add(0, "green_skyroot_leaves"));

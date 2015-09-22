@@ -25,7 +25,7 @@ public class BlockAetherLog extends BlockWithDoubleDrops
 
 		this.setHardness(2.0f);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.Y).withProperty(PROPERTY_WAS_MINED, false));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.Y).withProperty(PROPERTY_WAS_PLACED, false));
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class BlockAetherLog extends BlockWithDoubleDrops
 
 		boolean wasPlaced = (meta & 8) == 8;
 
-		return this.getDefaultState().withProperty(PROPERTY_AXIS, axis).withProperty(PROPERTY_WAS_MINED, wasPlaced);
+		return this.getDefaultState().withProperty(PROPERTY_AXIS, axis).withProperty(PROPERTY_WAS_PLACED, wasPlaced);
 	}
 
 	@Override
@@ -96,7 +96,7 @@ public class BlockAetherLog extends BlockWithDoubleDrops
 			break;
 		}
 
-		if ((Boolean) state.getValue(PROPERTY_WAS_MINED))
+		if ((Boolean) state.getValue(PROPERTY_WAS_PLACED))
 		{
 			meta |= 8;
 		}
@@ -119,12 +119,12 @@ public class BlockAetherLog extends BlockWithDoubleDrops
 	@Override
 	public int damageDropped(IBlockState state)
 	{
-		return this.getMetaFromState(this.getDefaultState().withProperty(PROPERTY_WAS_MINED, true));
+		return 0;
 	}
 
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, PROPERTY_AXIS, PROPERTY_WAS_MINED);
+		return new BlockState(this, PROPERTY_AXIS, PROPERTY_WAS_PLACED);
 	}
 }

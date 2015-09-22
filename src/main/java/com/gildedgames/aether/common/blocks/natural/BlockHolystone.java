@@ -81,7 +81,7 @@ public class BlockHolystone extends BlockWithDoubleDrops implements IAetherBlock
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta & 7)).withProperty(PROPERTY_WAS_MINED, (meta & 8) == 8);
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta & 7)).withProperty(PROPERTY_WAS_PLACED, (meta & 8) == 8);
 	}
 
 	@Override
@@ -89,7 +89,7 @@ public class BlockHolystone extends BlockWithDoubleDrops implements IAetherBlock
 	{
 		int meta = ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
 
-		if (state.getValue(PROPERTY_WAS_MINED) == Boolean.TRUE)
+		if (state.getValue(PROPERTY_WAS_PLACED) == Boolean.TRUE)
 		{
 			meta |= 8;
 		}
@@ -100,13 +100,13 @@ public class BlockHolystone extends BlockWithDoubleDrops implements IAetherBlock
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, PROPERTY_VARIANT, PROPERTY_WAS_MINED);
+		return new BlockState(this, PROPERTY_VARIANT, PROPERTY_WAS_PLACED);
 	}
 
 	@Override
 	public int damageDropped(IBlockState state)
 	{
-		return this.getMetaFromState(state.withProperty(PROPERTY_WAS_MINED, Boolean.TRUE));
+		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
 	}
 
 	@Override

@@ -74,7 +74,7 @@ public class BlockAetherGrass extends BlockWithDoubleDrops implements IAetherBlo
 								world.getLightFromNeighbors(randomNeighbor.up()) >= 4 && neighborBlock.getLightOpacity(world, randomNeighbor.up()) <= 2)
 						{
 							IBlockState grassState = this.getDefaultState().withProperty(PROPERTY_VARIANT, AETHER_GRASS);
-							grassState.withProperty(PROPERTY_WAS_MINED, neighborState.getValue(PROPERTY_WAS_MINED));
+							grassState.withProperty(PROPERTY_WAS_PLACED, neighborState.getValue(PROPERTY_WAS_PLACED));
 
 							world.setBlockState(randomNeighbor, grassState);
 						}
@@ -97,7 +97,7 @@ public class BlockAetherGrass extends BlockWithDoubleDrops implements IAetherBlo
 
 		boolean wasMined = (meta & 8) == 8;
 
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, variant).withProperty(PROPERTY_WAS_MINED, wasMined);
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, variant).withProperty(PROPERTY_WAS_PLACED, wasMined);
 	}
 
 	@Override
@@ -105,7 +105,7 @@ public class BlockAetherGrass extends BlockWithDoubleDrops implements IAetherBlo
 	{
 		int meta = ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
 
-		if (state.getValue(PROPERTY_WAS_MINED) == Boolean.TRUE)
+		if (state.getValue(PROPERTY_WAS_PLACED) == Boolean.TRUE)
 		{
 			meta |= 8;
 		}
@@ -116,18 +116,12 @@ public class BlockAetherGrass extends BlockWithDoubleDrops implements IAetherBlo
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, PROPERTY_VARIANT, PROPERTY_WAS_MINED);
+		return new BlockState(this, PROPERTY_VARIANT, PROPERTY_WAS_PLACED);
 	}
 
 	@Override
 	public String getSubtypeUnlocalizedName(ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
-	}
-
-	@Override
-	public int damageDropped(IBlockState state)
-	{
-		return 1;
 	}
 }

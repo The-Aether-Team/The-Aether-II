@@ -28,7 +28,6 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.blocks.util.BlockAether;
 import com.gildedgames.aether.common.blocks.util.BlockWithDoubleDrops;
 import com.gildedgames.aether.common.items.itemblocks.ItemBlockAetherVariants;
-import com.gildedgames.aether.common.items.itemblocks.ItemBlockSubtypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -98,7 +97,7 @@ public class BlocksAether
 
 	public static void preInit()
 	{
-		aether_dirt = registerBlockWithItem("aether_dirt", new BlockWithDoubleDrops(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f), ItemBlockSubtypes.class, AetherCreativeTabs.tabBlocks);
+		aether_dirt = registerBlock("aether_dirt", new BlockWithDoubleDrops(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f), AetherCreativeTabs.tabBlocks);
 
 		aether_grass = registerBlockWithItem("aether_grass", new BlockAetherGrass(), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
 
@@ -117,7 +116,7 @@ public class BlocksAether
 
 		continuum_ore = registerBlock("continuum_ore", new BlockContinuumOre(), AetherCreativeTabs.tabBlocks);
 
-		skyroot_log = registerBlockWithItem("skyroot_log", new BlockAetherLog(), ItemBlockSubtypes.class, AetherCreativeTabs.tabBlocks);
+		skyroot_log = registerBlock("skyroot_log", new BlockAetherLog(), AetherCreativeTabs.tabBlocks);
 
 		golden_oak_log = registerBlock("golden_oak_log", new BlockGoldenOakLog(), AetherCreativeTabs.tabBlocks);
 
