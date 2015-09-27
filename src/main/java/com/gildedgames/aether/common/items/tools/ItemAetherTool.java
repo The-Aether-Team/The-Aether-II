@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.tools;
 
+import com.gildedgames.aether.common.AetherCreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 
@@ -12,6 +13,8 @@ public class ItemAetherTool extends ItemTool
 		super(toolType.getBaseDamage(), material, toolType.getEffectiveBlocks());
 
 		this.toolType = toolType;
+
+		this.setCreativeTab(AetherCreativeTabs.tabTools);
 	}
 
 	@Override
