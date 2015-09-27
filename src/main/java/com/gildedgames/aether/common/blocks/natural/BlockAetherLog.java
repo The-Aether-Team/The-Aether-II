@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.blocks.util.BlockWithDoubleDrops;
+import com.gildedgames.aether.common.blocks.util.BlockSkyrootMinable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
@@ -13,7 +13,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockAetherLog extends BlockWithDoubleDrops
+public class BlockAetherLog extends BlockSkyrootMinable
 {
 	public static final PropertyEnum PROPERTY_AXIS = PropertyEnum.create("axis", BlockLog.EnumAxis.class);
 

@@ -1,12 +1,15 @@
 package com.gildedgames.aether.common.items.tools;
 
-import com.gildedgames.aether.common.blocks.util.BlockWithDoubleDrops;
+import com.gildedgames.aether.common.blocks.util.ISkyrootMinable;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.Collection;
 
 public class ItemSkyrootTool extends ItemAetherTool
 {
@@ -18,26 +21,31 @@ public class ItemSkyrootTool extends ItemAetherTool
 	}
 
 	@Override
-	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, BlockPos pos, EntityLivingBase player)
+	public boolean onBlockDestroyed(ItemStack heldStack, World world, Block block, BlockPos pos, EntityLivingBase living)
 	{
 		if (!world.isRemote)
 		{
 			IBlockState state = world.getBlockState(pos);
 
-			if (state.getBlock().isToolEffective(this.toolType.getToolClass(), state))
+			if (!EnchantmentHelper.getSilkTouchModifier(living) && block instanceof ISkyrootMinable)
 			{
-				if (state.getBlock() instanceof BlockWithDoubleDrops)
-				{
-					BlockWithDoubleDrops doubleDropBlock = (BlockWithDoubleDrops) state.getBlock();
+				ISkyrootMinable doubleBlock = (ISkyrootMinable) block;
 
-					if (doubleDropBlock.canBeDoubleDropped(state))
+				if (block.isToolEffective(this.toolType.getToolClass(), state))
+				{
+					if (doubleBlock.canBlockDropDoubles(living, heldStack, state))
 					{
-						doubleDropBlock.dropBlockAsItem(world, pos, state, 0);
+						Collection<ItemStack> stacks = doubleBlock.getAdditionalDrops(world, pos, state, living);
+
+						for (ItemStack stack : stacks)
+						{
+							Block.spawnAsEntity(world, pos, stack);
+						}
 					}
 				}
 			}
 		}
 
-		return super.onBlockDestroyed(stack, world, block, pos, player);
+		return super.onBlockDestroyed(heldStack, world, block, pos, living);
 	}
 }

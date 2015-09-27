@@ -12,7 +12,7 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
-import com.gildedgames.aether.common.blocks.util.BlockWithDoubleDrops;
+import com.gildedgames.aether.common.blocks.util.BlockSkyrootMinable;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.consumables.ItemGummySwet;
 import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
@@ -66,7 +66,7 @@ public class ModelsAether
 		ModelLoader.setCustomStateMapper(BlocksAether.purple_crystal_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.purple_fruit_leaves, leavesMapper);
 
-		StateMap doubleDropMapper = new StateMap.Builder().addPropertiesToIgnore(BlockWithDoubleDrops.PROPERTY_WAS_PLACED).build();
+		StateMap doubleDropMapper = new StateMap.Builder().addPropertiesToIgnore(BlockSkyrootMinable.PROPERTY_WAS_PLACED).build();
 
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_log, doubleDropMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.golden_oak_log, doubleDropMapper);

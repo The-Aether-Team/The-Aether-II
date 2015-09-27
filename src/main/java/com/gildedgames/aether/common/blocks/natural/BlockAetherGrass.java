@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.util.BlockWithDoubleDrops;
+import com.gildedgames.aether.common.blocks.util.BlockSkyrootMinable;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
-public class BlockAetherGrass extends BlockWithDoubleDrops implements IAetherBlockWithVariants
+public class BlockAetherGrass extends BlockSkyrootMinable implements IAetherBlockWithVariants
 {
 	public static final BlockVariant
 			AETHER_GRASS = new BlockVariant(0, "normal"),

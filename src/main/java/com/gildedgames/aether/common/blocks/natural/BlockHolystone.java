@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.blocks.util.BlockWithDoubleDrops;
+import com.gildedgames.aether.common.blocks.util.BlockSkyrootMinable;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class BlockHolystone extends BlockWithDoubleDrops implements IAetherBlockWithVariants
+public class BlockHolystone extends BlockSkyrootMinable implements IAetherBlockWithVariants
 {
 	public static final BlockVariant
 			NORMAL_HOLYSTONE = new BlockVariant(0, "normal"),

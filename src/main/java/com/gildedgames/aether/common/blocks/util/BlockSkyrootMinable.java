@@ -5,20 +5,24 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-/**
- * Skyroot tools will automatically perform double drops on blocks extending this class's
- * functionality.
- */
-public class BlockWithDoubleDrops extends Block
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+public class BlockSkyrootMinable extends Block implements ISkyrootMinable
 {
 	public static final PropertyBool PROPERTY_WAS_PLACED = PropertyBool.create("was_placed");
 
-	public BlockWithDoubleDrops(Material material)
+	public BlockSkyrootMinable(Material material)
 	{
 		super(material);
 	}
@@ -29,9 +33,16 @@ public class BlockWithDoubleDrops extends Block
 		return this.getStateFromMeta(meta).withProperty(PROPERTY_WAS_PLACED, Boolean.TRUE);
 	}
 
-	public boolean canBeDoubleDropped(IBlockState state)
+	@Override
+	public boolean canBlockDropDoubles(EntityLivingBase player, ItemStack stack, IBlockState state)
 	{
 		return state.getValue(PROPERTY_WAS_PLACED) == Boolean.FALSE;
+	}
+
+	@Override
+	public Collection<ItemStack> getAdditionalDrops(World world, BlockPos pos, IBlockState state, EntityLivingBase living)
+	{
+		return this.getDrops(world, pos, state, EnchantmentHelper.getFortuneModifier(living));
 	}
 
 	@Override
