@@ -5,11 +5,16 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Collection;
+import java.util.List;
 
 public class ItemSkyrootTool extends ItemAetherTool
 {
@@ -47,5 +52,13 @@ public class ItemSkyrootTool extends ItemAetherTool
 		}
 
 		return super.onBlockDestroyed(heldStack, world, block, pos, living);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings("unchecked")
+	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced)
+	{
+		tooltip.add(EnumChatFormatting.BLUE + "Ability: " + EnumChatFormatting.WHITE + "Doubles drops from blocks");
 	}
 }
