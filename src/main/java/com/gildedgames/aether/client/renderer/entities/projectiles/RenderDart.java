@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.renderer.entities.projectiles;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.items.weapons.ItemDart;
 import net.minecraft.client.renderer.GlStateManager;
@@ -18,10 +19,10 @@ public class RenderDart extends Render
 
 	static
 	{
-		dartTextures[ItemDart.DartType.GOLDEN.ordinal()] = new ResourceLocation("aether", "textures/entities/projectiles/dart/golden_dart.png");
-		dartTextures[ItemDart.DartType.ENCHANTED.ordinal()] = new ResourceLocation("aether", "textures/entities/projectiles/dart/enchanted_dart.png");
-		dartTextures[ItemDart.DartType.POISON.ordinal()] = new ResourceLocation("aether", "textures/entities/projectiles/dart/poison_dart.png");
-		dartTextures[ItemDart.DartType.PHOENIX.ordinal()] = new ResourceLocation("aether", "textures/entities/projectiles/dart/golden_dart.png");
+		dartTextures[ItemDart.DartType.GOLDEN.ordinal()] = AetherCore.getResource("textures/entities/projectiles/dart/golden_dart.png");
+		dartTextures[ItemDart.DartType.ENCHANTED.ordinal()] = AetherCore.getResource("textures/entities/projectiles/dart/enchanted_dart.png");
+		dartTextures[ItemDart.DartType.POISON.ordinal()] = AetherCore.getResource("textures/entities/projectiles/dart/poison_dart.png");
+		dartTextures[ItemDart.DartType.PHOENIX.ordinal()] = AetherCore.getResource("textures/entities/projectiles/dart/golden_dart.png");
 	}
 
 	public RenderDart(RenderManager renderManager)
@@ -29,6 +30,7 @@ public class RenderDart extends Render
 		super(renderManager);
 	}
 
+	@Override
 	public void doRender(Entity entity, double posX, double posY, double posZ, float entityYaw, float partialTicks)
 	{
 		EntityDart dart = (EntityDart) entity;

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.util.core.SidedObject;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -62,9 +63,14 @@ public class AetherCore
 		return AetherCore.INSTANCE.services.server();
 	}
 
-	public static String getResourcePath(String resource)
+	public static ResourceLocation getResource(String name)
 	{
-		return (AetherCore.MOD_ID + ":") + resource;
+		return new ResourceLocation(AetherCore.MOD_ID, name);
+	}
+
+	public static String getResourcePath(String name)
+	{
+		return (AetherCore.MOD_ID + ":") + name;
 	}
 
 	public static int getAetherDimID()

@@ -24,6 +24,6 @@ public class ItemAetherRecord extends ItemRecord
 	@Override
 	public ResourceLocation getRecordResource(String name)
 	{
-		return new ResourceLocation(AetherCore.getResourcePath(name));
+		return AetherCore.getResource(name);
 	}
 }
