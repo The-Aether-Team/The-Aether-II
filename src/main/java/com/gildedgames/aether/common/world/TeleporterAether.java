@@ -343,7 +343,21 @@ public class TeleporterAether extends Teleporter implements NBT
 				final int blockY = posY + yi;
 				final int blockZ = posZ + zi - 1;
 				final boolean border = zi == 0 || zi == 3 || yi == -1 || yi == 3;
-				this.worldServerInstance.setBlockState(new BlockPos(blockX, blockY, blockZ), border ? frameBlock : portalBlock, 2);
+				if (border)
+				{
+					this.worldServerInstance.setBlockState(new BlockPos(blockX, blockY, blockZ), frameBlock, 2);
+				}
+			}
+		}
+
+		for (int zi = 1; zi < 3; ++zi)
+		{
+			for (int yi = 0; yi < 3; ++yi)
+			{
+				final int blockX = posX;
+				final int blockY = posY + yi;
+				final int blockZ = posZ + zi - 1;
+				this.worldServerInstance.setBlockState(new BlockPos(blockX, blockY, blockZ), portalBlock, 2);
 			}
 		}
 
@@ -355,7 +369,7 @@ public class TeleporterAether extends Teleporter implements NBT
 				final int blockY = posY + yi;
 				final int blockZ = posZ + zi - 1;
 				final BlockPos pos = new BlockPos(blockX, blockY, blockZ);
-				this.worldServerInstance.notifyNeighborsOfStateChange(pos, this.worldServerInstance.getBlockState(pos).getBlock());
+				//this.worldServerInstance.notifyNeighborsOfStateChange(pos, this.worldServerInstance.getBlockState(pos).getBlock());
 			}
 		}
 
