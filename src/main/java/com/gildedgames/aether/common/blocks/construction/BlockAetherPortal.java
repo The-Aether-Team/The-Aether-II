@@ -5,7 +5,6 @@ import java.util.Random;
 import com.gildedgames.aether.client.renderer.effects.EntityAetherPortalFX;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.world.TeleporterAether;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
@@ -62,7 +61,7 @@ public class BlockAetherPortal extends BlockBreakable
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos)
 	{
-		EnumFacing.Axis axis = (EnumFacing.Axis) world.getBlockState(pos).getValue(PROPERTY_AXIS);
+		final EnumFacing.Axis axis = (EnumFacing.Axis) world.getBlockState(pos).getValue(PROPERTY_AXIS);
 
 		float xThickness = 0.125F, zThickness = 0.125F;
 
@@ -91,12 +90,12 @@ public class BlockAetherPortal extends BlockBreakable
 		for (int count = 0; count < 4; count++)
 		{
 			double posX = pos.getX() + rand.nextFloat();
-			double posY = pos.getY() + rand.nextFloat();
+			final double posY = pos.getY() + rand.nextFloat();
 			double posZ = pos.getZ() + rand.nextFloat();
 			double motionX = (rand.nextFloat() - 0.5D) * 0.5D;
-			double motionY = (rand.nextFloat() - 0.5D) * 0.5D;
+			final double motionY = (rand.nextFloat() - 0.5D) * 0.5D;
 			double motionZ = (rand.nextFloat() - 0.5D) * 0.5D;
-			int angle = rand.nextInt(2) * 2 - 1;
+			final int angle = rand.nextInt(2) * 2 - 1;
 
 			if (world.getBlockState(pos.west()).getBlock() != this && world.getBlockState(pos.east()).getBlock() != this)
 			{
@@ -109,7 +108,7 @@ public class BlockAetherPortal extends BlockBreakable
 				motionZ = (rand.nextFloat() * 2.0F * angle);
 			}
 
-			EntityAetherPortalFX effect = new EntityAetherPortalFX(world, posX, posY, posZ, motionX, motionY, motionZ);
+			final EntityAetherPortalFX effect = new EntityAetherPortalFX(world, posX, posY, posZ, motionX, motionY, motionZ);
 			FMLClientHandler.instance().getClient().effectRenderer.addEffect(effect);
 		}
 	}
@@ -119,7 +118,7 @@ public class BlockAetherPortal extends BlockBreakable
 	public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
 		EnumFacing.Axis axis = null;
-		IBlockState state = world.getBlockState(pos);
+		final IBlockState state = world.getBlockState(pos);
 
 		if (world.getBlockState(pos).getBlock() == this)
 		{
@@ -141,12 +140,12 @@ public class BlockAetherPortal extends BlockBreakable
 			}
 		}
 
-		boolean westFlag = world.getBlockState(pos.west()).getBlock() == this && world.getBlockState(pos.west(2)).getBlock() != this;
-		boolean eastFlag = world.getBlockState(pos.east()).getBlock() == this && world.getBlockState(pos.east(2)).getBlock() != this;
-		boolean northFlag = world.getBlockState(pos.north()).getBlock() == this && world.getBlockState(pos.north(2)).getBlock() != this;
-		boolean southFlag = world.getBlockState(pos.south()).getBlock() == this && world.getBlockState(pos.south(2)).getBlock() != this;
-		boolean wexFlag = westFlag || eastFlag || axis == EnumFacing.Axis.X;
-		boolean nszFlag = northFlag || southFlag || axis == EnumFacing.Axis.Z;
+		final boolean westFlag = world.getBlockState(pos.west()).getBlock() == this && world.getBlockState(pos.west(2)).getBlock() != this;
+		final boolean eastFlag = world.getBlockState(pos.east()).getBlock() == this && world.getBlockState(pos.east(2)).getBlock() != this;
+		final boolean northFlag = world.getBlockState(pos.north()).getBlock() == this && world.getBlockState(pos.north(2)).getBlock() != this;
+		final boolean southFlag = world.getBlockState(pos.south()).getBlock() == this && world.getBlockState(pos.south(2)).getBlock() != this;
+		final boolean wexFlag = westFlag || eastFlag || axis == EnumFacing.Axis.X;
+		final boolean nszFlag = northFlag || southFlag || axis == EnumFacing.Axis.Z;
 
 		return wexFlag && side == EnumFacing.WEST || (wexFlag && side == EnumFacing.EAST || (nszFlag && side == EnumFacing.NORTH || nszFlag && side == EnumFacing.SOUTH));
 	}
@@ -156,18 +155,18 @@ public class BlockAetherPortal extends BlockBreakable
 	{
 		if (entity instanceof EntityPlayerMP)
 		{
-			EntityPlayerMP player = (EntityPlayerMP) entity;
-			ServerConfigurationManager scm = MinecraftServer.getServer().getConfigurationManager();
+			final EntityPlayerMP player = (EntityPlayerMP) entity;
+			final ServerConfigurationManager scm = MinecraftServer.getServer().getConfigurationManager();
 
-			int transferToID = player.dimension == AetherCore.getAetherDimID() ? 0 : AetherCore.getAetherDimID();
-			scm.transferPlayerToDimension(player, transferToID, new TeleporterAether(MinecraftServer.getServer().worldServerForDimension(3)));
+			final int transferToID = player.dimension == AetherCore.getAetherDimID() ? 0 : AetherCore.getAetherDimID();
+			scm.transferPlayerToDimension(player, transferToID, AetherCore.getTeleporter());
 		}
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		EnumFacing.Axis axis = (EnumFacing.Axis) state.getValue(PROPERTY_AXIS);
+		final EnumFacing.Axis axis = (EnumFacing.Axis) state.getValue(PROPERTY_AXIS);
 
 		return axis == EnumFacing.Axis.X ? 1 : (axis == EnumFacing.Axis.Z ? 2 : 0);
 	}
@@ -181,11 +180,11 @@ public class BlockAetherPortal extends BlockBreakable
 	@Override
 	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
 	{
-		EnumFacing.Axis axis = (EnumFacing.Axis) state.getValue(PROPERTY_AXIS);
+		final EnumFacing.Axis axis = (EnumFacing.Axis) state.getValue(PROPERTY_AXIS);
 
 		if (axis == EnumFacing.Axis.X || axis == EnumFacing.Axis.Z)
 		{
-			BlockAetherPortal.Size size = new BlockAetherPortal.Size(world, pos, axis);
+			final BlockAetherPortal.Size size = new BlockAetherPortal.Size(world, pos, axis);
 
 			if (!size.isWithinSizeBounds() || size.field_150864_e < size.height * size.width)
 			{
@@ -248,14 +247,14 @@ public class BlockAetherPortal extends BlockBreakable
 				this.rightSideFacing = EnumFacing.SOUTH;
 			}
 
-			BlockPos offsetPos = pos;
+			final BlockPos offsetPos = pos;
 
 			while (pos.getY() > offsetPos.getY() - 21 && pos.getY() > 0 && this.isBlockSuitable(world.getBlockState(pos.down()).getBlock()))
 			{
 				pos = pos.down();
 			}
 
-			int x = this.getWidth(pos, this.leftSideFacing) - 1;
+			final int x = this.getWidth(pos, this.leftSideFacing) - 1;
 
 			if (x >= 0)
 			{
@@ -281,7 +280,7 @@ public class BlockAetherPortal extends BlockBreakable
 
 			for (x = 0; x < 22; ++x)
 			{
-				BlockPos offsetPos = pos.offset(facing, x);
+				final BlockPos offsetPos = pos.offset(facing, x);
 
 				if (!this.isBlockSuitable(this.world.getBlockState(offsetPos).getBlock()) || this.world.getBlockState(offsetPos.down()).getBlock() != Blocks.glowstone)
 				{
@@ -289,7 +288,7 @@ public class BlockAetherPortal extends BlockBreakable
 				}
 			}
 
-			Block block = this.world.getBlockState(pos.offset(facing, x)).getBlock();
+			final Block block = this.world.getBlockState(pos.offset(facing, x)).getBlock();
 			return block == Blocks.glowstone ? x : 0;
 		}
 
@@ -302,7 +301,7 @@ public class BlockAetherPortal extends BlockBreakable
 			{
 				for (x = 0; x < this.width; ++x)
 				{
-					BlockPos blockpos = this.portalPos.offset(this.rightSideFacing, x).up(this.height);
+					final BlockPos blockpos = this.portalPos.offset(this.rightSideFacing, x).up(this.height);
 					Block block = this.world.getBlockState(blockpos).getBlock();
 
 					if (!this.isBlockSuitable(block))
@@ -372,7 +371,7 @@ public class BlockAetherPortal extends BlockBreakable
 		{
 			for (int i = 0; i < this.width; ++i)
 			{
-				BlockPos blockpos = this.portalPos.offset(this.rightSideFacing, i);
+				final BlockPos blockpos = this.portalPos.offset(this.rightSideFacing, i);
 
 				for (int j = 0; j < this.height; ++j)
 				{

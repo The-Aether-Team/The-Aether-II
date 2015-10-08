@@ -1,6 +1,11 @@
 package com.gildedgames.aether.common;
 
+import org.apache.logging.log4j.Logger;
+
+import com.gildedgames.aether.common.world.TeleporterAether;
 import com.gildedgames.util.core.SidedObject;
+
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -8,8 +13,8 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import org.apache.logging.log4j.Logger;
 
 @Mod(name = AetherCore.MOD_NAME, modid = AetherCore.MOD_ID, version = AetherCore.MOD_VERSION)
 public class AetherCore
@@ -32,6 +37,8 @@ public class AetherCore
 
 	private final SidedObject<AetherServices> services = new SidedObject<AetherServices>(new AetherServices(Side.CLIENT), new AetherServices(Side.SERVER));
 
+	private static TeleporterAether teleporter;
+
 	@EventHandler
 	public void onFMLPreInit(FMLPreInitializationEvent event)
 	{
@@ -46,6 +53,12 @@ public class AetherCore
 	public void onFMLInit(FMLInitializationEvent event)
 	{
 		AetherCore.PROXY.init(event);
+	}
+
+	@EventHandler
+	public void onServerStarted(FMLServerStartedEvent event)
+	{
+		teleporter = new TeleporterAether(MinecraftServer.getServer().worldServerForDimension(getAetherDimID()));
 	}
 
 	public static AetherServices locate()
@@ -76,5 +89,10 @@ public class AetherCore
 	public static int getAetherDimID()
 	{
 		return AetherCore.CONFIG.getAetherDimID();
+	}
+
+	public static TeleporterAether getTeleporter()
+	{
+		return teleporter;
 	}
 }
