@@ -1,6 +1,17 @@
-plugins {
-    id "net.minecraftforge.gradle.forge" version "2.0.1"
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.0-SNAPSHOT'
+    }
 }
+
+apply plugin: 'net.minecraftforge.gradle.forge'
 
 ext.config = loadConfig(file('build.properties'))
 
