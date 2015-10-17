@@ -1,11 +1,5 @@
 package com.gildedgames.aether.common.world;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Random;
-
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
@@ -14,7 +8,6 @@ import com.gildedgames.util.core.nbt.NBT;
 import com.gildedgames.util.instances.BlockPosDimension;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.state.IBlockState;
@@ -34,20 +27,26 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
+
 public class TeleporterAether extends Teleporter implements NBT
 {
-	private WorldServer worldServerInstance;
+	/**
+	 * Boolean here contains if the chunk is solid.
+	 */
+	public static Map<ChunkCoordIntPair, Boolean> chunksMarkedForPortal = new HashMap<ChunkCoordIntPair, Boolean>();
 
 	private final Random random;
 
 	private final BiMap<BlockPosDimension, BlockPosDimension> portalPairs = HashBiMap.create();
 
-	private World previousWorld;
+	private WorldServer worldServerInstance;
 
-	/**
-	 * Boolean here contains if the chunk is solid.
-	 */
-	public static Map<ChunkCoordIntPair, Boolean> chunksMarkedForPortal = new HashMap<ChunkCoordIntPair, Boolean>();
+	private World previousWorld;
 
 	public boolean createPortal = true;
 
@@ -55,9 +54,10 @@ public class TeleporterAether extends Teleporter implements NBT
 	{
 		super(worldServer);
 
+		this.random = new Random(worldServer.getSeed());
+
 		this.worldServerInstance = worldServer;
 		this.worldServerInstance.customTeleporters.add(this);
-		this.random = new Random(worldServer.getSeed());
 	}
 
 	@Override
@@ -104,7 +104,7 @@ public class TeleporterAether extends Teleporter implements NBT
 
 		boolean isSolid = false;
 
-		//Tries 16 random positions in the chunk to see if they're solid or not
+		// Tries 16 random positions in the chunk to see if they're solid or not
 		for (int count = 0; count < 16; count++)
 		{
 			final int x1 = x + this.random.nextInt(16);
@@ -139,15 +139,16 @@ public class TeleporterAether extends Teleporter implements NBT
 		final int radius = 2;
 		final BlockPosDimension check = new BlockPosDimension(x, y, z, world.provider.getDimensionId());
 
-		for (int ix = x - radius; ix < x + radius; ++ix)
+		for (int x2 = x - radius; x2 < x + radius; ++x2)
 		{
-			for (int iz = z - radius; iz < z + radius; ++iz)
+			for (int y2 = z - radius; y2 < z + radius; ++y2)
 			{
-				for (int iy = y - radius; iy < y + radius; ++iy)
+				for (int z2 = y - radius; z2 < y + radius; ++z2)
 				{
-					final BlockPosDimension pos = new BlockPosDimension(ix, iy, iz, world.provider.getDimensionId());
+					final BlockPosDimension pos = new BlockPosDimension(x2, z2, y2, world.provider.getDimensionId());
+
 					if (!findPortalBlock && (this.portalPairs.containsKey(pos) || this.portalPairs.containsValue(pos))
-							|| findPortalBlock && world.getBlockState(new BlockPos(ix, iy, iz)).getBlock() == BlocksAether.aether_portal)
+							|| findPortalBlock && world.getBlockState(new BlockPos(x2, z2, y2)).getBlock() == BlocksAether.aether_portal)
 					{
 						return pos;
 					}
@@ -254,8 +255,9 @@ public class TeleporterAether extends Teleporter implements NBT
 				{
 					boolean hasFoundPosition = false;
 
-					int innerAttempts = 0;
 					final EnumFacing innerDirection = EnumFacing.SOUTH;
+
+					int innerAttempts = 0;
 					x = (chunkX << 4) + 8;
 					z = (chunkZ << 4) + 8;
 
@@ -266,8 +268,8 @@ public class TeleporterAether extends Teleporter implements NBT
 
 						innerDirection.rotateY();
 
-						final int y1 = this.getFirstUncoveredCoord(world, xInner, zInner);
-						final BlockPos pos = new BlockPos(xInner, y1, zInner);
+						final int y1 = this.getFirstUncoveredCoord(world, xInner, zInner) + 1;
+						final BlockPos pos = new BlockPos(xInner, y1, zInner).down();
 
 						final IBlockState blockID = world.getBlockState(pos);
 
@@ -299,9 +301,10 @@ public class TeleporterAether extends Teleporter implements NBT
 					}
 				}
 			}
-			attempts++;
 
+			attempts++;
 		}
+
 		AetherCore.LOGGER.debug("Failed generating portal");
 
 		return isSolidChunk;
@@ -342,7 +345,9 @@ public class TeleporterAether extends Teleporter implements NBT
 				final int blockX = posX;
 				final int blockY = posY + yi;
 				final int blockZ = posZ + zi - 1;
+
 				final boolean border = zi == 0 || zi == 3 || yi == -1 || yi == 3;
+
 				if (border)
 				{
 					this.worldServerInstance.setBlockState(new BlockPos(blockX, blockY, blockZ), frameBlock, 2);
@@ -357,6 +362,7 @@ public class TeleporterAether extends Teleporter implements NBT
 				final int blockX = posX;
 				final int blockY = posY + yi;
 				final int blockZ = posZ + zi - 1;
+
 				this.worldServerInstance.setBlockState(new BlockPos(blockX, blockY, blockZ), portalBlock, 2);
 			}
 		}
@@ -368,7 +374,9 @@ public class TeleporterAether extends Teleporter implements NBT
 				final int blockX = posX;
 				final int blockY = posY + yi;
 				final int blockZ = posZ + zi - 1;
+
 				final BlockPos pos = new BlockPos(blockX, blockY, blockZ);
+
 				//this.worldServerInstance.notifyNeighborsOfStateChange(pos, this.worldServerInstance.getBlockState(pos).getBlock());
 			}
 		}
