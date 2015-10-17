@@ -2,8 +2,8 @@ package com.gildedgames.aether.common.recipes;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
+import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.recipes.altar.AltarRepairRecipe;
 import com.gildedgames.aether.common.recipes.altar.AltarSimpleRecipe;
 import com.gildedgames.aether.common.recipes.altar.IAltarRecipe;
@@ -161,8 +161,8 @@ public class RecipesAether
 				new ItemStack(ItemsAether.dart_shooter, 1, ItemDartShooter.DartShooterType.ENCHANTED.ordinal())));
 
 		// Enchanted Darts
-		registerAltarRecipe(new AltarSimpleRecipe(1, new ItemStack(ItemsAether.dart, 1, ItemDart.DartType.GOLDEN.ordinal()),
-				new ItemStack(ItemsAether.dart, 1, ItemDart.DartType.ENCHANTED.ordinal())));
+		registerAltarRecipe(new AltarSimpleRecipe(1, new ItemStack(ItemsAether.dart, 1, ItemDartType.GOLDEN.ordinal()),
+				new ItemStack(ItemsAether.dart, 1, ItemDartType.ENCHANTED.ordinal())));
 
 		// Tool Repair Recipes
 		registerAltarRecipe(new AltarRepairRecipe());

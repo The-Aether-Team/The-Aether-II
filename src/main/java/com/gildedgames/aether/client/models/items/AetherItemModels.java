@@ -13,8 +13,8 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.consumables.ItemGummySwet;
 import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
-import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
+import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelBakery;
@@ -223,9 +223,9 @@ public class AetherItemModels
 				.add(ItemDartShooter.DartShooterType.PHOENIX.ordinal(), "phoenix_dart_shooter"));
 
 		registerItemModels(ItemsAether.dart, new ItemModelList("dart/")
-				.add(ItemDart.DartType.GOLDEN.ordinal(), "golden_dart")
-				.add(ItemDart.DartType.ENCHANTED.ordinal(), "enchanted_dart")
-				.add(ItemDart.DartType.POISON.ordinal(), "poison_dart"));
+				.add(ItemDartType.GOLDEN.ordinal(), "golden_dart")
+				.add(ItemDartType.ENCHANTED.ordinal(), "enchanted_dart")
+				.add(ItemDartType.POISON.ordinal(), "poison_dart"));
 	}
 
 	private static void registerItemModels(Item item, ItemModelList list)

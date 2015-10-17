@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.items.weapons;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.weapons.ItemDart.DartType;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -20,16 +19,16 @@ public class ItemDartShooter extends Item
 {
 	public enum DartShooterType
 	{
-		GOLDEN("golden", DartType.GOLDEN),
-		ENCHANTED("enchanted", DartType.ENCHANTED),
-		POISON("poison", DartType.POISON),
-		PHOENIX("phoenix", DartType.PHOENIX);
+		GOLDEN("golden", ItemDartType.GOLDEN),
+		ENCHANTED("enchanted", ItemDartType.ENCHANTED),
+		POISON("poison", ItemDartType.POISON),
+		PHOENIX("phoenix", ItemDartType.PHOENIX);
 
 		private final String name;
 
-		private final DartType ammoType;
+		private final ItemDartType ammoType;
 
-		DartShooterType(String name, DartType ammoType)
+		DartShooterType(String name, ItemDartType ammoType)
 		{
 			this.name = name;
 			this.ammoType = ammoType;
@@ -77,7 +76,7 @@ public class ItemDartShooter extends Item
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
 	{
 		DartShooterType shooterType = DartShooterType.fromOrdinal(stack.getMetadata());
-		DartType ammoType = shooterType.ammoType;
+		ItemDartType ammoType = shooterType.ammoType;
 
 		ItemStack ammoStack = this.getMatchingAmmo(player.inventory, ammoType);
 
@@ -93,7 +92,7 @@ public class ItemDartShooter extends Item
 	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int timeLeft)
 	{
 		DartShooterType shooterType = DartShooterType.fromOrdinal(stack.getMetadata());
-		DartType ammoType = shooterType.ammoType;
+		ItemDartType ammoType = shooterType.ammoType;
 
 		ItemStack ammoStack = this.getMatchingAmmo(player.inventory, ammoType);
 
@@ -137,13 +136,13 @@ public class ItemDartShooter extends Item
 		}
 	}
 
-	private ItemStack getMatchingAmmo(InventoryPlayer inventory, DartType ammo)
+	private ItemStack getMatchingAmmo(InventoryPlayer inventory, ItemDartType ammo)
 	{
 		int searchMeta = ammo.ordinal();
 
-		if (ammo == DartType.PHOENIX)
+		if (ammo == ItemDartType.PHOENIX)
 		{
-			searchMeta = DartType.GOLDEN.ordinal();
+			searchMeta = ItemDartType.GOLDEN.ordinal();
 		}
 
 		for (ItemStack stack : inventory.mainInventory)

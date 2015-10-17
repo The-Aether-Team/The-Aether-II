@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.projectiles;
 
-import com.gildedgames.aether.common.items.weapons.ItemDart;
+import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -143,6 +143,8 @@ public class EntityDart extends Entity implements IProjectile
 	{
 		super.onUpdate();
 
+		ItemDartType dartType = this.getDartType();
+
 		if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F)
 		{
 			float sqrt = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
@@ -152,6 +154,7 @@ public class EntityDart extends Entity implements IProjectile
 		}
 
 		BlockPos pos = new BlockPos(this.xTile, this.yTile, this.zTile);
+
 		IBlockState state = this.worldObj.getBlockState(pos);
 		Block block = state.getBlock();
 
@@ -213,10 +216,10 @@ public class EntityDart extends Entity implements IProjectile
 				nextPosVec = new Vec3(raytrace.hitVec.xCoord, raytrace.hitVec.yCoord, raytrace.hitVec.zCoord);
 			}
 
-			Entity cloestEntity = null;
+			Entity closestEntity = null;
 			List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox().addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
 
-			double cloestDistance = 0.0D;
+			double closestDistance = 0.0D;
 			float boundaries;
 
 			for (Object obj : list)
@@ -234,18 +237,18 @@ public class EntityDart extends Entity implements IProjectile
 					{
 						double distance = posVec.distanceTo(intercept.hitVec);
 
-						if (distance < cloestDistance || cloestDistance == 0.0D)
+						if (distance < closestDistance || closestDistance == 0.0D)
 						{
-							cloestEntity = entity;
-							cloestDistance = distance;
+							closestEntity = entity;
+							closestDistance = distance;
 						}
 					}
 				}
 			}
 
-			if (cloestEntity != null)
+			if (closestEntity != null)
 			{
-				raytrace = new MovingObjectPosition(cloestEntity);
+				raytrace = new MovingObjectPosition(closestEntity);
 			}
 
 			if (raytrace != null && raytrace.entityHit != null && raytrace.entityHit instanceof EntityPlayer)
@@ -283,7 +286,7 @@ public class EntityDart extends Entity implements IProjectile
 
 					if (raytrace.entityHit.attackEntityFrom(damageSource, (float) damage))
 					{
-						if (this.getDartType() == ItemDart.DartType.PHOENIX)
+						if (this.getDartType() == ItemDartType.PHOENIX)
 						{
 							raytrace.entityHit.setFire(3);
 						}
@@ -391,9 +394,11 @@ public class EntityDart extends Entity implements IProjectile
 
 			this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
 
-			for (this.rotationPitch = (float) (Math.atan2(this.motionY, (double) distanceSqrt) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
+			this.rotationPitch = (float) (Math.atan2(this.motionY, (double) distanceSqrt) * 180.0D / Math.PI);
+
+			while (this.rotationPitch - this.prevRotationPitch < -180.0F)
 			{
-				;
+				this.prevRotationPitch -= 360.0F;
 			}
 
 			while (this.rotationPitch - this.prevRotationPitch >= 180.0F)
@@ -428,9 +433,7 @@ public class EntityDart extends Entity implements IProjectile
 				speed = 0.6F;
 			}
 
-			ItemDart.DartType dartType = this.getDartType();
-
-			if (dartType == ItemDart.DartType.PHOENIX)
+			if (dartType == ItemDartType.PHOENIX)
 			{
 				f4 = 0.25F;
 				this.worldObj.spawnParticle(EnumParticleTypes.FLAME, this.posX - this.motionX * (double) f4, this.posY - this.motionY * (double) f4, this.posZ - this.motionZ * (double) f4, 0, 0, 0);
@@ -526,12 +529,12 @@ public class EntityDart extends Entity implements IProjectile
 		this.dataWatcher.updateObject(16, (byte) (isCritical ? 1 : 0));
 	}
 
-	public ItemDart.DartType getDartType()
+	public ItemDartType getDartType()
 	{
-		return ItemDart.DartType.fromOrdinal(this.dataWatcher.getWatchableObjectByte(17));
+		return ItemDartType.fromOrdinal(this.dataWatcher.getWatchableObjectByte(17));
 	}
 
-	public void setDartType(ItemDart.DartType type)
+	public void setDartType(ItemDartType type)
 	{
 		this.dataWatcher.updateObject(17, (byte) type.ordinal());
 	}

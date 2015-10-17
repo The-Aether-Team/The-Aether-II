@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.renderer.entities.projectiles;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
-import com.gildedgames.aether.common.items.weapons.ItemDart;
+import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
@@ -13,16 +13,18 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import java.util.HashMap;
+
 public class RenderDart extends Render
 {
-	private static final ResourceLocation[] dartTextures = new ResourceLocation[ItemDart.DartType.values().length];
+	private static final HashMap<ItemDartType, ResourceLocation> dartTextures = new HashMap<ItemDartType, ResourceLocation>();
 
 	static
 	{
-		dartTextures[ItemDart.DartType.GOLDEN.ordinal()] = AetherCore.getResource("textures/entities/projectiles/dart/golden_dart.png");
-		dartTextures[ItemDart.DartType.ENCHANTED.ordinal()] = AetherCore.getResource("textures/entities/projectiles/dart/enchanted_dart.png");
-		dartTextures[ItemDart.DartType.POISON.ordinal()] = AetherCore.getResource("textures/entities/projectiles/dart/poison_dart.png");
-		dartTextures[ItemDart.DartType.PHOENIX.ordinal()] = AetherCore.getResource("textures/entities/projectiles/dart/golden_dart.png");
+		dartTextures.put(ItemDartType.GOLDEN, AetherCore.getResource("textures/entities/projectiles/dart/golden_dart.png"));
+		dartTextures.put(ItemDartType.ENCHANTED, AetherCore.getResource("textures/entities/projectiles/dart/enchanted_dart.png"));
+		dartTextures.put(ItemDartType.POISON, AetherCore.getResource("textures/entities/projectiles/dart/poison_dart.png"));
+		dartTextures.put(ItemDartType.PHOENIX, AetherCore.getResource("textures/entities/projectiles/dart/golden_dart.png"));
 	}
 
 	public RenderDart(RenderManager renderManager)
@@ -109,8 +111,6 @@ public class RenderDart extends Render
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity)
 	{
-		EntityDart dart = (EntityDart) entity;
-
-		return dartTextures[dart.getDartType().ordinal()];
+		return dartTextures.get(((EntityDart) entity).getDartType());
 	}
 }
