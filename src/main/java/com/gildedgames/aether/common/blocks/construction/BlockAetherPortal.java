@@ -309,7 +309,7 @@ public class BlockAetherPortal extends BlockBreakable
 						break loop;
 					}
 
-					if (block == Blocks.glowstone)
+					if (block == BlocksAether.aether_portal)
 					{
 						++this.field_150864_e;
 					}
