@@ -1,36 +1,20 @@
-buildscript {
-    repositories {
-        mavenCentral()
-
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-    }
-
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-    }
+plugins {
+    id "net.minecraftforge.gradle.forge" version "2.0.1"
 }
-
-apply plugin: 'forge'
 
 ext.config = loadConfig(file('build.properties'))
 
+version = config.mod_version
 group = 'com.gildedgames.aether'
+archivesBaseName = "AetherII"
 
 task defineVersion {
 	def build = System.getenv().BUILD_NUMBER
 
 	if (build != null) {
-		version = "${config.mc_version}-${config.build}.jenkins-${build}"
+		version = "${config.mc_version}-${config.mod_version}.jenkins-${mod_version}"
 	} else {
-		version = "${config.mc_version}-${config.build}"
+		version = "${config.mc_version}-${config.mod_version}"
 	}
 }
 
