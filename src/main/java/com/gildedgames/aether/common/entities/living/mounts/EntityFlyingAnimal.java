@@ -4,6 +4,7 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
@@ -54,15 +55,20 @@ public abstract class EntityFlyingAnimal extends EntityAnimal
 			return true;
 		}
 
-		if (player.getHeldItem() != null && player.getHeldItem().getItem() == Items.saddle)
-		{
-			this.setIsSaddled(true);
-		}
-		else if (this.isSaddled() && !this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == player))
+		if (this.isSaddled() && !this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == player))
 		{
 			player.mountEntity(this);
 
 			return true;
+		}
+		else if (player.getHeldItem() != null && player.getHeldItem().getItem() == Items.saddle)
+		{
+			this.setIsSaddled(true);
+
+			if (!player.capabilities.isCreativeMode)
+			{
+				player.getHeldItem().stackSize--;
+			}
 		}
 
 		return false;
