@@ -37,7 +37,7 @@ public class BlockAetherGrass extends BlockSkyrootMinable implements IAetherBloc
 		this.setHardness(0.5F);
 		this.setTickRandomly(true);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, AETHER_GRASS));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, AETHER_GRASS).withProperty(PROPERTY_WAS_PLACED, Boolean.FALSE));
 	}
 
 	@Override

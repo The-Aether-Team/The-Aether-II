@@ -25,7 +25,7 @@ public class BlockAetherLog extends BlockSkyrootMinable
 
 		this.setHardness(2.0f);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.Y).withProperty(PROPERTY_WAS_PLACED, false));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.Y).withProperty(PROPERTY_WAS_PLACED, Boolean.FALSE));
 	}
 
 	@Override

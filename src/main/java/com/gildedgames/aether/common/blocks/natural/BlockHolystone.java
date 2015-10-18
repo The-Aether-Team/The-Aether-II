@@ -37,7 +37,7 @@ public class BlockHolystone extends BlockSkyrootMinable implements IAetherBlockW
 
 		this.setStepSound(Block.soundTypeStone);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, NORMAL_HOLYSTONE));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, NORMAL_HOLYSTONE).withProperty(PROPERTY_WAS_PLACED, Boolean.FALSE));
 	}
 
 	@Override
