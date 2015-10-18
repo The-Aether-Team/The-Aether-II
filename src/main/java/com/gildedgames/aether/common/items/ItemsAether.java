@@ -17,6 +17,7 @@ import com.gildedgames.aether.common.items.tools.ItemSkyrootTool;
 import com.gildedgames.aether.common.items.tools.ItemZaniteTool;
 import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
+import com.gildedgames.aether.common.items.weapons.ItemPigSlayer;
 import com.gildedgames.aether.common.items.weapons.swords.ItemElementalSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemGravititeSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemHolystoneSword;
@@ -77,6 +78,8 @@ public class ItemsAether
 	public static Item dart;
 
 	public static Item flaming_sword, holy_sword, lightning_sword;
+
+	public static Item pig_slayer;
 
 	public static void preInit()
 	{
@@ -188,6 +191,8 @@ public class ItemsAether
 		flaming_sword = registerItem("flaming_sword", new ItemElementalSword(ItemElementalSword.SwordElement.FIRE));
 		holy_sword = registerItem("holy_sword", new ItemElementalSword(ItemElementalSword.SwordElement.HOLY));
 		lightning_sword = registerItem("lightning_sword", new ItemElementalSword(ItemElementalSword.SwordElement.LIGHTNING));
+
+		pig_slayer = registerItem("pig_slayer", new ItemPigSlayer(), AetherCreativeTabs.tabWeapons);
 
 		registerItemProperties();
 	}

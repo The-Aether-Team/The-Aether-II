@@ -230,6 +230,8 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.flaming_sword, new ItemModelList().add(0, "weapons/flaming_sword"));
 		registerItemModels(ItemsAether.holy_sword, new ItemModelList().add(0, "weapons/holy_sword"));
 		registerItemModels(ItemsAether.lightning_sword, new ItemModelList().add(0, "weapons/lightning_sword"));
+
+		registerItemModels(ItemsAether.pig_slayer, new ItemModelList().add(0, "weapons/pig_slayer"));
 	}
 
 	private static void registerItemModels(Item item, ItemModelList list)
