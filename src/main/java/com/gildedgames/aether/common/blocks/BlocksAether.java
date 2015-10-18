@@ -181,6 +181,7 @@ public class BlocksAether
 
 		skyroot_log.setHarvestLevel("axe", 0);
 		golden_oak_log.setHarvestLevel("axe", 0);
+		skyroot_planks.setHarvestLevel("axe", 0);
 
 		ambrosium_ore.setHarvestLevel("pickaxe", 0);
 		zanite_ore.setHarvestLevel("pickaxe", 1);
