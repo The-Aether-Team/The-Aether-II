@@ -62,13 +62,13 @@ public class BlockAetherLog extends BlockSkyrootMinable
 
 		switch (meta & 7)
 		{
-		case 0:
+		case 1:
 			axis = BlockLog.EnumAxis.Y;
 			break;
-		case 1:
+		case 2:
 			axis = BlockLog.EnumAxis.X;
 			break;
-		case 2:
+		case 3:
 			axis = BlockLog.EnumAxis.Z;
 			break;
 		}
@@ -86,13 +86,13 @@ public class BlockAetherLog extends BlockSkyrootMinable
 		switch (((BlockLog.EnumAxis) state.getValue(PROPERTY_AXIS)))
 		{
 		case Y:
-			meta |= 0;
-			break;
-		case X:
 			meta |= 1;
 			break;
-		case Z:
+		case X:
 			meta |= 2;
+			break;
+		case Z:
+			meta |= 3;
 			break;
 		}
 
