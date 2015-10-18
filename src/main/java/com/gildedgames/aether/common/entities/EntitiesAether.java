@@ -17,12 +17,19 @@ public class EntitiesAether
 
 	public static void preInit()
 	{
-		registerLivingEntity(EntityPhyg.class, "phyg");
-		registerLivingEntity(EntityFlyingCow.class, "flying_cow");
-		registerLivingEntity(EntitySheepuff.class, "sheepuff");
+		registerLivingEntity(EntityPhyg.class, "phyg", 0xCCFFFF, 0xFF9999);
+		registerLivingEntity(EntityFlyingCow.class, "flying_cow", 0xCCFFFF, 0x0066CC);
+		registerLivingEntity(EntitySheepuff.class, "sheepuff", 0xCCFFFF, 0xCCCCFF);
 
 		EntityRegistry.registerModEntity(EntityFloatingBlock.class, "floating_block", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityDart.class, "dart", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
+	}
+
+	private static void registerLivingEntity(Class<? extends Entity> entity, String id, int eggPrimaryColor, int eggSecondaryColor)
+	{
+		registerLivingEntity(entity, id);
+
+		EntityRegistry.registerEgg(entity, eggPrimaryColor, eggSecondaryColor);
 	}
 
 	private static void registerLivingEntity(Class<? extends Entity> entity, String id)
