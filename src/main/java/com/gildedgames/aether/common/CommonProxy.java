@@ -3,7 +3,6 @@ package com.gildedgames.aether.common;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.armor.AetherArmorMaterials;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.recipes.RecipesAether;
 import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
@@ -36,11 +35,10 @@ public class CommonProxy
 
 		// Register dimensions and biomes.
 		DimensionManager.registerProviderType(AetherCore.getAetherDimID(), WorldProviderAether.class, true);
-
 		DimensionManager.registerDimension(AetherCore.getAetherDimID(), AetherCore.getAetherDimID());
 
 		// Pre-initialize content.
-		AetherArmorMaterials.preInit();
+		AetherMaterials.preInit();
 
 		BlocksAether.preInit();
 		ItemsAether.preInit();

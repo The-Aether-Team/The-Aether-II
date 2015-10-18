@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.items.weapons;
+package com.gildedgames.aether.common.items.weapons.swords;
 
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.entity.EntityLivingBase;

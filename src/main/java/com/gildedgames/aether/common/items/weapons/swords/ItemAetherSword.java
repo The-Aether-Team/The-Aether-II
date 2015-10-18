@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.items.weapons;
+package com.gildedgames.aether.common.items.weapons.swords;
 
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import net.minecraft.item.ItemSword;

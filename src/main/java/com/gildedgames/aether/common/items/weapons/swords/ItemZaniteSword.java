@@ -1,8 +1,6 @@
-package com.gildedgames.aether.common.items.weapons;
+package com.gildedgames.aether.common.items.weapons.swords;
 
-import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;

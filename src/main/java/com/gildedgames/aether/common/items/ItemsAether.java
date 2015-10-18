@@ -17,10 +17,11 @@ import com.gildedgames.aether.common.items.tools.ItemSkyrootTool;
 import com.gildedgames.aether.common.items.tools.ItemZaniteTool;
 import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
-import com.gildedgames.aether.common.items.weapons.ItemGravititeSword;
-import com.gildedgames.aether.common.items.weapons.ItemHolystoneSword;
-import com.gildedgames.aether.common.items.weapons.ItemSkyrootSword;
-import com.gildedgames.aether.common.items.weapons.ItemZaniteSword;
+import com.gildedgames.aether.common.items.weapons.swords.ItemElementalSword;
+import com.gildedgames.aether.common.items.weapons.swords.ItemGravititeSword;
+import com.gildedgames.aether.common.items.weapons.swords.ItemHolystoneSword;
+import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
+import com.gildedgames.aether.common.items.weapons.swords.ItemZaniteSword;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -74,6 +75,8 @@ public class ItemsAether
 	public static Item dart_shooter;
 
 	public static Item dart;
+
+	public static Item flaming_sword, holy_sword, lightning_sword;
 
 	public static void preInit()
 	{
@@ -181,6 +184,10 @@ public class ItemsAether
 
 		dart_shooter = registerItem("dart_shooter", new ItemDartShooter(), AetherCreativeTabs.tabWeapons);
 		dart = registerItem("dart", new ItemDart(), AetherCreativeTabs.tabWeapons);
+
+		flaming_sword = registerItem("flaming_sword", new ItemElementalSword(ItemElementalSword.SwordElement.FIRE));
+		holy_sword = registerItem("holy_sword", new ItemElementalSword(ItemElementalSword.SwordElement.HOLY));
+		lightning_sword = registerItem("lightning_sword", new ItemElementalSword(ItemElementalSword.SwordElement.LIGHTNING));
 
 		registerItemProperties();
 	}

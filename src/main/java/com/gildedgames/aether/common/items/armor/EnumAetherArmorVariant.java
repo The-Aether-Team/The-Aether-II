@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.items.armor;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.AetherMaterials;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -31,13 +32,13 @@ public enum EnumAetherArmorVariant
 		case GRAVITITE:
 			return ArmorMaterial.DIAMOND;
 		case OBSIDIAN:
-			return AetherArmorMaterials.OBSIDIAN;
+			return AetherMaterials.OBSIDIAN_ARMOR;
 		case NEPTUNE:
 			return ArmorMaterial.DIAMOND;
 		case PHOENIX:
 			return ArmorMaterial.DIAMOND;
 		case VALKYRIE:
-			return AetherArmorMaterials.VALKYRIE;
+			return AetherMaterials.VALKYRIE_ARMOR;
 		default:
 			return ArmorMaterial.LEATHER;
 		}

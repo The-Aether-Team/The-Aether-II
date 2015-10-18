@@ -226,6 +226,10 @@ public class AetherItemModels
 				.add(ItemDartType.GOLDEN.ordinal(), "golden_dart")
 				.add(ItemDartType.ENCHANTED.ordinal(), "enchanted_dart")
 				.add(ItemDartType.POISON.ordinal(), "poison_dart"));
+
+		registerItemModels(ItemsAether.flaming_sword, new ItemModelList().add(0, "weapons/flaming_sword"));
+		registerItemModels(ItemsAether.holy_sword, new ItemModelList().add(0, "weapons/holy_sword"));
+		registerItemModels(ItemsAether.lightning_sword, new ItemModelList().add(0, "weapons/lightning_sword"));
 	}
 
 	private static void registerItemModels(Item item, ItemModelList list)

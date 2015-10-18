@@ -140,6 +140,9 @@ item.cloud_parachute.blue.name=Blue Cloud Parachute
 item.cloud_parachute.golden.name=Golden Cloud Parachute
 item.cloud_parachute.green.name=Green Cloud Parachute
 item.cloud_parachute.purple.name=Purple Cloud Parachute
+item.flaming_sword.name=Flaming Sword
+item.holy_sword.name=Holy Sword
+item.lightning_sword.name=Lightning Sword
 
 # Records
 item.aether_record.moa.desc=Emile van Krieken - Approaches
