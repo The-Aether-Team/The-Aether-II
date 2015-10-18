@@ -73,25 +73,12 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 		this.playSound("mob.cow.step", 0.15F, 1.0F);
 	}
 
-
 	@Override
 	protected Item getDropItem()
 	{
 		return this.isBurning() ? Items.cooked_beef : Items.beef;
 	}
 
-	@Override
-	protected void dropFewItems(boolean p_70628_1_, int looting)
-	{
-		int amount = this.rand.nextInt(3) + 1 + this.rand.nextInt(1 + looting);
-
-		for (int count = 0; count < amount; ++count)
-		{
-			this.dropItem(this.getDropItem(), 1);
-		}
-
-		super.dropFewItems(p_70628_1_, looting);
-	}
 	@Override
 	public EntityAgeable createChild(EntityAgeable ageable)
 	{

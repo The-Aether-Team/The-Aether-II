@@ -106,8 +106,17 @@ public abstract class EntityFlyingAnimal extends EntityAnimal
 			this.dropItem(this.getDropItem(), 1);
 		}
 
-		super.dropFewItems(p_70628_1_, looting);
+		this.dropSaddle();
 	}
+
+	protected void dropSaddle()
+	{
+		if (this.isSaddled())
+		{
+			this.dropItem(Items.saddle, 1);
+		}
+	}
+
 
 	public boolean isSaddled()
 	{

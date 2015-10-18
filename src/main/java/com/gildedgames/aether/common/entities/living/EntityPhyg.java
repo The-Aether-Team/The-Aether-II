@@ -16,6 +16,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -75,26 +76,9 @@ public class EntityPhyg extends EntityFlyingAnimal
 	}
 
 	@Override
-	protected void dropFewItems(boolean p_70628_1_, int looting)
+	protected Item getDropItem()
 	{
-		int j = this.rand.nextInt(3) + 1 + this.rand.nextInt(1 + looting);
-
-		for (int k = 0; k < j; ++k)
-		{
-			if (this.isBurning())
-			{
-				this.dropItem(Items.cooked_porkchop, 1);
-			}
-			else
-			{
-				this.dropItem(Items.porkchop, 1);
-			}
-		}
-
-		if (this.isSaddled())
-		{
-			this.dropItem(Items.saddle, 1);
-		}
+		return this.isBurning() ? Items.cooked_porkchop : Items.porkchop;
 	}
 
 	@Override
