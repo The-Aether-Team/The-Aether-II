@@ -1,11 +1,13 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.util.BlockSkyrootMinable;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import net.minecraft.block.Block;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
@@ -20,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
-public class BlockAetherGrass extends BlockSkyrootMinable implements IAetherBlockWithVariants
+public class BlockAetherGrass extends BlockSkyrootMinable implements IAetherBlockWithVariants, IGrowable
 {
 	public static final BlockVariant
 			AETHER_GRASS = new BlockVariant(0, "normal"),
@@ -123,5 +125,73 @@ public class BlockAetherGrass extends BlockSkyrootMinable implements IAetherBloc
 	public String getSubtypeUnlocalizedName(ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
+	}
+
+	@Override
+	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
+	{
+		return true;
+	}
+
+	@Override
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	{
+		return true;
+	}
+
+	@Override
+	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	{
+		int count = 0;
+
+		while (count < 128)
+		{
+			BlockPos nextPos = pos.up();
+			int grassCount = 0;
+
+			while (true)
+			{
+				if (grassCount < count / 16)
+				{
+					nextPos = nextPos.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
+
+					if (worldIn.getBlockState(nextPos.down()).getBlock() == BlocksAether.aether_grass &&
+							!worldIn.getBlockState(nextPos).getBlock().isNormalCube())
+					{
+						grassCount++;
+
+						continue;
+					}
+				}
+				else if (worldIn.isAirBlock(nextPos))
+				{
+					if (rand.nextInt(8) == 0 && BlocksAether.aether_flower.canPlaceBlockAt(worldIn, nextPos))
+					{
+						int randFlower = rand.nextInt(3);
+
+						if (randFlower >= 2)
+						{
+							worldIn.setBlockState(nextPos, BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE));
+						}
+						else
+						{
+							worldIn.setBlockState(nextPos, BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER));
+						}
+					}
+					else
+					{
+						IBlockState nextState = BlocksAether.tall_aether_grass.getDefaultState();
+
+						if (BlocksAether.tall_aether_grass.canPlaceBlockAt(worldIn, nextPos))
+						{
+							worldIn.setBlockState(nextPos, nextState, 3);
+						}
+					}
+				}
+
+				++count;
+				break;
+			}
+		}
 	}
 }
