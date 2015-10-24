@@ -72,15 +72,6 @@ public class BiomeDecoratorAether
 
 		for (count = 0; count < 6; count++)
 		{
-			x = random.nextInt(16) + 8;
-			y = random.nextInt(128);
-			z = random.nextInt(16) + 8;
-
-			this.genWhiteRoses.generate(world, random, pos.add(x, y, z));
-		}
-
-		for (count = 0; count < 6; count++)
-		{
 			if (random.nextInt(2) == 0)
 			{
 				x = random.nextInt(16) + 8;
