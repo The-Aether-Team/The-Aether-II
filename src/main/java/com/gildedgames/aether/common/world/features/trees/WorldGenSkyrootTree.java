@@ -15,9 +15,7 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 
 	private final int logMeta, leavesMeta;
 
-	private final int minTreeHeight;
-
-	public WorldGenSkyrootTree(Block logBlock, Block leavesBlock, int logMeta, int leavesMeta, int minTreeHeight)
+	public WorldGenSkyrootTree(Block logBlock, Block leavesBlock, int logMeta, int leavesMeta)
 	{
 		super(true);
 
@@ -26,14 +24,12 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 
 		this.logMeta = logMeta;
 		this.leavesMeta = leavesMeta;
-
-		this.minTreeHeight = minTreeHeight;
 	}
 
 	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos position)
 	{
-		int i = rand.nextInt(3) + this.minTreeHeight;
+		int i = rand.nextInt(3) + 4;
 		
 		boolean canCreateTree = true;
 
@@ -62,7 +58,7 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 					{
 						if (y >= 0 && y < 256)
 						{
-							if (!this.isReplaceable(worldIn, new BlockPos(k, y, l)))
+							if (!worldIn.isAirBlock(new BlockPos(k, y, l)))
 							{
 								canCreateTree = false;
 							}

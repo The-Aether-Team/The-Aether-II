@@ -87,11 +87,11 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 
 			if (meta == BLUE_SKYROOT_SAPLING.getMeta())
 			{
-				treeGenerator = new WorldGenSkyrootTree(BlocksAether.skyroot_log, BlocksAether.blue_skyroot_leaves, 0, 4, 4);
+				treeGenerator = new WorldGenSkyrootTree(BlocksAether.skyroot_log, BlocksAether.blue_skyroot_leaves, 0, 4);
 			}
 			else if (meta == GREEN_SKYROOT_SAPLING.getMeta())
 			{
-				treeGenerator = new WorldGenSkyrootTree(BlocksAether.skyroot_log, BlocksAether.green_skyroot_leaves, 0, 4, 4);
+				treeGenerator = new WorldGenSkyrootTree(BlocksAether.skyroot_log, BlocksAether.green_skyroot_leaves, 0, 4);
 			}
 
 			if (treeGenerator != null)
