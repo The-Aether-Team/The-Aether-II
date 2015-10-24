@@ -4,9 +4,11 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.world.features.WorldGenAetherFlowers;
+import com.gildedgames.aether.common.world.features.WorldGenAetherLakes;
 import com.gildedgames.aether.common.world.features.WorldGenAetherTallGrass;
 import com.gildedgames.aether.common.world.features.WorldGenQuicksoil;
 import com.gildedgames.aether.common.world.features.trees.WorldGenOrangeTree;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -32,6 +34,8 @@ public class BiomeDecoratorAether
 
 	protected WorldGenQuicksoil genQuicksoil;
 
+	protected WorldGenAetherLakes genAetherLakes;
+
 	public BiomeDecoratorAether()
 	{
 		this.genAetherGrass = new WorldGenAetherTallGrass();
@@ -49,6 +53,7 @@ public class BiomeDecoratorAether
 		this.genBlueberryBushes = new WorldGenAetherFlowers(BlocksAether.blueberry_bush, BlocksAether.blueberry_bush.getDefaultState().withProperty(BlockBlueberryBush.PROPERTY_HARVESTABLE, true), 32);
 
 		this.genQuicksoil = new WorldGenQuicksoil();
+		this.genAetherLakes = new WorldGenAetherLakes(Blocks.water);
 	}
 
 	protected void genDecorations(World world, Random random, BlockPos pos, BiomeGenBase genBase)
@@ -61,6 +66,17 @@ public class BiomeDecoratorAether
 
 		int count;
 
+		// Lake Generator
+		if (random.nextInt(4) == 0)
+		{
+			x = random.nextInt(16) + 8;
+			y = random.nextInt(128);
+			z = random.nextInt(16) + 8;
+
+			this.genAetherLakes.generate(world, random, pos.add(x, y, z));
+		}
+
+		// Aether Tall Grass Generator
 		for (count = 0; count < 1; count++)
 		{
 			x = random.nextInt(16) + 8;
@@ -70,6 +86,7 @@ public class BiomeDecoratorAether
 			this.genAetherGrass.generate(world, random, pos.add(x, y, z));
 		}
 
+		// Purple Flowers Generator
 		for (count = 0; count < 6; count++)
 		{
 			if (random.nextInt(2) == 0)
@@ -82,6 +99,7 @@ public class BiomeDecoratorAether
 			}
 		}
 
+		// White Rose Generator
 		for (count = 0; count < 2; count ++)
 		{
 			x = random.nextInt(16) + 8;
@@ -91,6 +109,7 @@ public class BiomeDecoratorAether
 			this.genWhiteRoses.generate(world, random, pos.add(x, y, z));
 		}
 
+		// Tree Generator
 		for (count = 0; count < 3; count++)
 		{
 			x = random.nextInt(16) + 8;
@@ -102,6 +121,7 @@ public class BiomeDecoratorAether
 			treeGen.generate(world, random, randPos);
 		}
 
+		// Orange Tree Generator
 		for (count = 0; count < 2; count++)
 		{
 			x = random.nextInt(16) + 8;
@@ -111,6 +131,7 @@ public class BiomeDecoratorAether
 			this.genOrangeTree.generate(world, random, pos.add(x, y, z));
 		}
 
+		// Blueberry Bush Generator
 		for (count = 0; count < 2; count++)
 		{
 			x = random.nextInt(16) + 8;
@@ -120,6 +141,7 @@ public class BiomeDecoratorAether
 			this.genBlueberryBushes.generate(world, random, pos.add(x, y, z));
 		}
 
+		// Quicksoil Generator
 		if (random.nextInt(5) == 0)
 		{
 			for (x = pos.getX(); x < pos.getX() + 16; x++)
