@@ -25,6 +25,8 @@ public class BlockSkyrootMinable extends Block implements ISkyrootMinable
 	public BlockSkyrootMinable(Material material)
 	{
 		super(material);
+
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_WAS_PLACED, Boolean.FALSE));
 	}
 
 	@Override

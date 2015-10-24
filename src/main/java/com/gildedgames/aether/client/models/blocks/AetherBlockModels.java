@@ -38,13 +38,14 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.purple_crystal_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.purple_fruit_leaves, leavesMapper);
 
-		StateMap doubleDropMapper = new StateMap.Builder().addPropertiesToIgnore(BlockSkyrootMinable.PROPERTY_WAS_PLACED).build();
+		StateMap skyrootMinableMapper = new StateMap.Builder().addPropertiesToIgnore(BlockSkyrootMinable.PROPERTY_WAS_PLACED).build();
 
-		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_log, doubleDropMapper);
-		ModelLoader.setCustomStateMapper(BlocksAether.golden_oak_log, doubleDropMapper);
-		ModelLoader.setCustomStateMapper(BlocksAether.aether_grass, doubleDropMapper);
-		ModelLoader.setCustomStateMapper(BlocksAether.aether_dirt, doubleDropMapper);
-		ModelLoader.setCustomStateMapper(BlocksAether.holystone, doubleDropMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_log, skyrootMinableMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.golden_oak_log, skyrootMinableMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.aether_grass, skyrootMinableMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.aether_dirt, skyrootMinableMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.holystone, skyrootMinableMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.quicksoil, skyrootMinableMapper);
 
 		ModelLoader.setCustomStateMapper(BlocksAether.aether_sapling, new StateMap.Builder().addPropertiesToIgnore(BlockAetherSapling.PROPERTY_STAGE).build());
 

@@ -173,11 +173,10 @@ public class BlocksAether
 
 	private static void registerHarvestLevels()
 	{
-		// Do not register harvest levels to blocks that can be mined without a tool!
-
 		aether_dirt.setHarvestLevel("shovel", 0);
 		aether_grass.setHarvestLevel("shovel", 0);
 		holystone.setHarvestLevel("pickaxe", 0);
+		quicksoil.setHarvestLevel("shovel", 0);
 
 		skyroot_log.setHarvestLevel("axe", 0);
 		golden_oak_log.setHarvestLevel("axe", 0);
@@ -192,6 +191,8 @@ public class BlocksAether
 		aerogel.setHarvestLevel("pickaxe", 1);
 
 		altar.setHarvestLevel("pickaxe", 0);
+		holystone_furnace.setHarvestLevel("pickaxe", 0);
+		skyroot_crafting_table.setHarvestLevel("axe", 0);
 
 		zanite_block.setHarvestLevel("pickaxe", 1);
 		enchanted_gravitite.setHarvestLevel("pickaxe", 2);
