@@ -28,7 +28,7 @@ public class WorldGenOrangeTree extends WorldGenerator
 
 			BlockPos pos = position.add(x, y, z);
 
-			if (world.isAirBlock(pos) && this.treeBlock.isSuitableSoilBlock(world.getBlockState(pos.down()).getBlock()))
+			if (world.isAirBlock(pos) && world.isAirBlock(pos.up()) && this.treeBlock.isSuitableSoilBlock(world.getBlockState(pos.down()).getBlock()))
 			{
 				int stage = (Integer) stages[rand.nextInt(stages.length)];
 
