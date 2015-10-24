@@ -186,7 +186,7 @@ public class BlockAetherPortal extends BlockBreakable
 		{
 			final BlockAetherPortal.Size size = new BlockAetherPortal.Size(world, pos, axis);
 
-			if (!size.isWithinSizeBounds() || size.field_150864_e < size.height * size.width)
+			if (!size.isWithinSizeBounds() || size.portalBlocks < size.height * size.width)
 			{
 				world.setBlockState(pos, Blocks.air.getDefaultState());
 			}
@@ -224,8 +224,7 @@ public class BlockAetherPortal extends BlockBreakable
 
 		private BlockPos portalPos;
 
-		// ???
-		private int field_150864_e = 0;
+		private int portalBlocks = 0;
 
 		private int height;
 
@@ -311,7 +310,7 @@ public class BlockAetherPortal extends BlockBreakable
 
 					if (block == BlocksAether.aether_portal)
 					{
-						++this.field_150864_e;
+						++this.portalBlocks;
 					}
 
 					if (x == 0)
@@ -380,9 +379,9 @@ public class BlockAetherPortal extends BlockBreakable
 			}
 		}
 
-		public int get_field_150864_e()
+		public int getPortalBlocks()
 		{
-			return this.field_150864_e;
+			return this.portalBlocks;
 		}
 	}
 }

@@ -4,10 +4,12 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -17,40 +19,40 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.Random;
+
 public class CommonEvents
 {
 	@SubscribeEvent
-	public void onPlayerInteractEvent(FillBucketEvent event)
+	public void onPlayerUseBucket(FillBucketEvent event)
 	{
 		if (event.target.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
 		{
-			if (event.world.getBlockState(event.target.getBlockPos()).getBlock() == Blocks.glowstone)
+			if (FluidContainerRegistry.isFilledContainer(event.current))
 			{
-				if (FluidContainerRegistry.isFilledContainer(event.current) && FluidContainerRegistry.getFluidForFilledItem(event.current).getFluidID() == FluidRegistry.WATER.getID())
-				{
-					if (this.tryToCreatePortal(event.world, event.target.getBlockPos(), event.target.sideHit))
-					{
-						if (!event.entityPlayer.capabilities.isCreativeMode)
-						{
-							event.entityPlayer.inventory.setInventorySlotContents(event.entityPlayer.inventory.currentItem, FluidContainerRegistry.drainFluidContainer(event.current));
-						}
+				EntityPlayer player = event.entityPlayer;
 
-						event.setCanceled(true);
-					}
+				BlockPos pos = event.target.getBlockPos().offset(event.target.sideHit);
+
+				if (FluidContainerRegistry.getFluidForFilledItem(event.current).getFluidID() == FluidRegistry.WATER.getID())
+				{
+					this.onWaterPlaced(event, player, pos);
+				}
+				else if (FluidContainerRegistry.getFluidForFilledItem(event.current).getFluidID() == FluidRegistry.LAVA.getID())
+				{
+					this.onLavaPlaced(event, player, pos);
 				}
 			}
 		}
 	}
 
-	private boolean tryToCreatePortal(World world, BlockPos pos, EnumFacing facing)
+	private boolean tryToCreatePortal(World world, BlockPos pos)
 	{
 		if (world.getBlockState(pos).getBlock() == Blocks.glowstone)
 		{
-			BlockPos portalPos = pos.offset(facing);
+			BlockAetherPortal.Size size = new BlockAetherPortal.Size(world, pos, EnumFacing.Axis.X);
 
-			BlockAetherPortal.Size size = new BlockAetherPortal.Size(world, portalPos, EnumFacing.Axis.X);
-
-			if (size.isWithinSizeBounds() && size.get_field_150864_e() == 0)
+			if (size.isWithinSizeBounds() && size.getPortalBlocks() == 0)
 			{
 				size.createPortal();
 
@@ -58,11 +60,11 @@ public class CommonEvents
 			}
 			else
 			{
-				BlockAetherPortal.Size size1 = new BlockAetherPortal.Size(world, portalPos, EnumFacing.Axis.Z);
+				size = new BlockAetherPortal.Size(world, pos, EnumFacing.Axis.Z);
 
-				if (size1.isWithinSizeBounds() && size1.get_field_150864_e() == 0)
+				if (size.isWithinSizeBounds() && size.getPortalBlocks() == 0)
 				{
-					size1.createPortal();
+					size.createPortal();
 
 					return true;
 				}
@@ -108,6 +110,55 @@ public class CommonEvents
 			{
 				event.entityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(ItemsAether.skyroot_milk_bucket, 1, 0), false);
 			}
+		}
+	}
+
+	private void onWaterPlaced(FillBucketEvent event, EntityPlayer player, BlockPos pos)
+	{
+		if (event.world.getBlockState(event.target.getBlockPos()).getBlock() == Blocks.glowstone)
+		{
+			if (this.tryToCreatePortal(event.world, pos))
+			{
+				if (!event.entityPlayer.capabilities.isCreativeMode)
+				{
+					event.entityPlayer.inventory.setInventorySlotContents(event.entityPlayer.inventory.currentItem, FluidContainerRegistry.drainFluidContainer(event.current));
+				}
+
+				event.setCanceled(true);
+			}
+		}
+	}
+
+	private void onLavaPlaced(FillBucketEvent event, EntityPlayer player, BlockPos pos)
+	{
+		if (player.dimension == AetherCore.getAetherDimID())
+		{
+			player.worldObj.setBlockState(pos, BlocksAether.aerogel.getDefaultState());
+
+			if (!player.capabilities.isCreativeMode)
+			{
+				ItemStack newStack = FluidContainerRegistry.drainFluidContainer(event.current);
+
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, newStack);
+			}
+
+			if (event.world.isRemote)
+			{
+				Random rand = event.world.rand;
+
+				for (int count = 0; count < 8; count++)
+				{
+					double parX = pos.getX() + rand.nextDouble();
+					double parY = pos.getY() + rand.nextDouble();
+					double parZ = pos.getZ() + rand.nextDouble();
+
+					event.world.spawnParticle(EnumParticleTypes.CLOUD, parX, parY, parZ, 0, 0, 0);
+				}
+
+				event.world.playSound(pos.getX(), pos.getY(), pos.getZ(), "random.fizz", 0.8f, 1.2f + (rand.nextFloat() * 0.2f), false);
+			}
+
+			event.setCanceled(true);
 		}
 	}
 }
