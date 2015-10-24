@@ -11,12 +11,11 @@ import com.gildedgames.aether.common.world.ChunkProviderAether;
 
 public class WorldGenClouds extends WorldGenerator
 {
+	private final IBlockState blockState;
 
-	private IBlockState blockState;
+	private final int numberOfBlocks;
 
-	private int numberOfBlocks;
-
-	private boolean flat;
+	private final boolean flat;
 
 	public WorldGenClouds(IBlockState blockState, int numberOfBlocks, boolean flat)
 	{

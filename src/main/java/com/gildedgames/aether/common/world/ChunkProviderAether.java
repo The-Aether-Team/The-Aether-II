@@ -328,8 +328,6 @@ public class ChunkProviderAether implements IChunkProvider
 		this.random.setSeed(chunkX * i1 + chunkZ * j1 ^ this.worldObj.getSeed());
 
 		genBase.decorate(this.worldObj, this.random, pos);
-
-		genBase.generateClouds(this.worldObj, this.random, chunkX, chunkZ);
 	}
 
 	@Override

@@ -1,48 +1,39 @@
 package com.gildedgames.aether.common.world.biome;
 
-import java.util.Random;
-
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.world.features.WorldGenAetherFlowers;
 import com.gildedgames.aether.common.world.features.WorldGenAetherTallGrass;
+import com.gildedgames.aether.common.world.features.WorldGenQuicksoil;
 import com.gildedgames.aether.common.world.features.trees.WorldGenOrangeTree;
-
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 
+import java.util.Random;
 
-public class BiomeDecoratorAether extends BiomeDecorator
+
+public class BiomeDecoratorAether
 {
-	private WorldGenAetherTallGrass genAetherGrass;
+	protected WorldGenAetherTallGrass genAetherGrass;
 
-	private WorldGenMinable genAmbrosium, genZanite, genGravitite, genContinuum;
+	protected WorldGenMinable genAmbrosium, genZanite, genGravitite, genContinuum;
 
-	private WorldGenAetherFlowers genPurpleFlowers, genWhiteRoses;
+	protected WorldGenAetherFlowers genPurpleFlowers, genWhiteRoses;
 
-	private WorldGenOrangeTree genOrangeTree;
+	protected WorldGenOrangeTree genOrangeTree;
 
-	private WorldGenAetherFlowers genBlueberryBushes;
+	protected WorldGenAetherFlowers genBlueberryBushes;
 
-	@Override
-	public void decorate(World world, Random random, BiomeGenBase genBase, BlockPos pos)
+	protected WorldGenQuicksoil genQuicksoil;
+
+	public BiomeDecoratorAether()
 	{
-		if (this.currentWorld != null)
-		{
-			throw new RuntimeException("Already decorating!");
-		}
-
-		this.currentWorld = world;
-		this.randomGenerator = random;
-		this.field_180294_c = pos;
-
 		this.genAetherGrass = new WorldGenAetherTallGrass();
 
 		this.genAmbrosium = new WorldGenMinable(BlocksAether.ambrosium_ore.getDefaultState(), 16);
@@ -57,18 +48,14 @@ public class BiomeDecoratorAether extends BiomeDecorator
 
 		this.genBlueberryBushes = new WorldGenAetherFlowers(BlocksAether.blueberry_bush, BlocksAether.blueberry_bush.getDefaultState().withProperty(BlockBlueberryBush.PROPERTY_HARVESTABLE, true), 32);
 
-		this.genDecorations(genBase);
-
-		this.randomGenerator = null;
-		this.currentWorld = null;
+		this.genQuicksoil = new WorldGenQuicksoil();
 	}
 
-	@Override
-	protected void genDecorations(BiomeGenBase genBase)
+	protected void genDecorations(World world, Random random, BlockPos pos, BiomeGenBase genBase)
 	{
-		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(this.currentWorld, this.randomGenerator, this.field_180294_c));
+		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(world, random, pos));
 
-		this.generateOres();
+		this.generateOres(world, random, pos);
 
 		int x, y, z;
 
@@ -76,70 +63,91 @@ public class BiomeDecoratorAether extends BiomeDecorator
 
 		for (count = 0; count < 1; count++)
 		{
-			x = this.randomGenerator.nextInt(16) + 8;
-			z = this.randomGenerator.nextInt(16) + 8;
-			y = this.nextInt(this.currentWorld.getHeight(this.field_180294_c.add(x, 0, z)).getY() * 2);
+			x = random.nextInt(16) + 8;
+			z = random.nextInt(16) + 8;
+			y = this.nextInt(random, world.getHeight(pos.add(x, 0, z)).getY() * 2);
 
-			this.genAetherGrass.generate(this.currentWorld, this.randomGenerator, this.field_180294_c.add(x, y, z));
+			this.genAetherGrass.generate(world, random, pos.add(x, y, z));
 		}
 
 		for (count = 0; count < 6; count++)
 		{
-			x = this.randomGenerator.nextInt(16) + 8;
-			y = this.randomGenerator.nextInt(128);
-			z = this.randomGenerator.nextInt(16) + 8;
+			x = random.nextInt(16) + 8;
+			y = random.nextInt(128);
+			z = random.nextInt(16) + 8;
 
-			this.genWhiteRoses.generate(this.currentWorld, this.randomGenerator, this.field_180294_c.add(x, y, z));
+			this.genWhiteRoses.generate(world, random, pos.add(x, y, z));
 		}
 
 		for (count = 0; count < 6; count++)
 		{
-			if (this.randomGenerator.nextInt(2) == 0)
+			if (random.nextInt(2) == 0)
 			{
-				x = this.randomGenerator.nextInt(16) + 8;
-				y = this.randomGenerator.nextInt(128);
-				z = this.randomGenerator.nextInt(16) + 8;
+				x = random.nextInt(16) + 8;
+				y = random.nextInt(128);
+				z = random.nextInt(16) + 8;
 
-				this.genPurpleFlowers.generate(this.currentWorld, this.randomGenerator, this.field_180294_c.add(x, y, z));
+				this.genPurpleFlowers.generate(world, random, pos.add(x, y, z));
 			}
 		}
 
 		for (count = 0; count < 2; count ++)
 		{
-			x = this.randomGenerator.nextInt(16) + 8;
-			y = this.randomGenerator.nextInt(128);
-			z = this.randomGenerator.nextInt(16) + 8;
+			x = random.nextInt(16) + 8;
+			y = random.nextInt(128);
+			z = random.nextInt(16) + 8;
 
-			this.genWhiteRoses.generate(this.currentWorld, this.randomGenerator, this.field_180294_c.add(x, y, z));
+			this.genWhiteRoses.generate(world, random, pos.add(x, y, z));
 		}
 
 		for (count = 0; count < 3; count++)
 		{
-			x = this.randomGenerator.nextInt(16) + 8;
-			z = this.randomGenerator.nextInt(16) + 8;
+			x = random.nextInt(16) + 8;
+			z = random.nextInt(16) + 8;
 
-			WorldGenerator treeGen = genBase.genBigTreeChance(this.randomGenerator);
-			BlockPos pos = this.currentWorld.getHeight(this.field_180294_c.add(x, 0, z));
+			WorldGenerator treeGen = genBase.genBigTreeChance(random);
+			BlockPos randPos = world.getHeight(pos.add(x, 0, z));
 
-			treeGen.generate(this.currentWorld, this.randomGenerator, pos);
+			treeGen.generate(world, random, randPos);
 		}
 
 		for (count = 0; count < 2; count++)
 		{
-			x = this.randomGenerator.nextInt(16) + 8;
-			y = this.randomGenerator.nextInt(128);
-			z = this.randomGenerator.nextInt(16) + 8;
+			x = random.nextInt(16) + 8;
+			y = random.nextInt(128);
+			z = random.nextInt(16) + 8;
 
-			this.genOrangeTree.generate(this.currentWorld, this.randomGenerator, this.field_180294_c.add(x, y, z));
+			this.genOrangeTree.generate(world, random, pos.add(x, y, z));
 		}
 
 		for (count = 0; count < 2; count++)
 		{
-			x = this.randomGenerator.nextInt(16) + 8;
-			y = this.randomGenerator.nextInt(128);
-			z = this.randomGenerator.nextInt(16) + 8;
+			x = random.nextInt(16) + 8;
+			y = random.nextInt(128);
+			z = random.nextInt(16) + 8;
 
-			this.genBlueberryBushes.generate(this.currentWorld, this.randomGenerator, this.field_180294_c.add(x, y, z));
+			this.genBlueberryBushes.generate(world, random, pos.add(x, y, z));
+		}
+
+		if (random.nextInt(5) == 0)
+		{
+			for (x = pos.getX(); x < pos.getX() + 16; x++)
+			{
+				for (z = pos.getZ(); z < pos.getZ() + 16; z++)
+				{
+					BlockPos top = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
+
+					for (y = top.getY(); y > 12 && y < 48; y--)
+					{
+						BlockPos randPos = new BlockPos(x, y, z);
+
+						if (world.isAirBlock(randPos) && world.getBlockState(randPos.up()).getBlock() == BlocksAether.aether_grass && world.isAirBlock(randPos.up(2)))
+						{
+							this.genQuicksoil.generate(world, random, randPos);
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -153,22 +161,22 @@ public class BiomeDecoratorAether extends BiomeDecorator
 		}
 	}
 
-	protected int nextInt(int i)
+	protected int nextInt(Random random, int i)
 	{
 		if (i <= 1)
 		{
 			return 0;
 		}
 
-		return this.randomGenerator.nextInt(i);
+		return random.nextInt(i);
 	}
 
-	@Override
-	protected void generateOres()
+
+	protected void generateOres(World world, Random random, BlockPos pos)
 	{
-		this.genMinableOre(this.genAmbrosium, this.currentWorld, this.randomGenerator, this.field_180294_c, 0, 128, 20);
-		this.genMinableOre(this.genZanite, this.currentWorld, this.randomGenerator, this.field_180294_c, 0, 64, 15);
-		this.genMinableOre(this.genGravitite, this.currentWorld, this.randomGenerator, this.field_180294_c, 0, 32, 6);
-		this.genMinableOre(this.genContinuum, this.currentWorld, this.randomGenerator, this.field_180294_c, 0, 128, 4);
+		this.genMinableOre(this.genAmbrosium, world, random, pos, 0, 128, 20);
+		this.genMinableOre(this.genZanite, world, random, pos, 0, 64, 15);
+		this.genMinableOre(this.genGravitite, world, random, pos, 0, 32, 6);
+		this.genMinableOre(this.genContinuum, world, random, pos, 0, 128, 4);
 	}
 }
