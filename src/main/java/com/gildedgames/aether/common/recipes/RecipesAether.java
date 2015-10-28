@@ -38,6 +38,9 @@ public class RecipesAether
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_crafting_table), "XX", "XX",
 				'X', new ItemStack(BlocksAether.skyroot_planks));
 
+		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_door), "XX", "XX", "XX",
+				'X', new ItemStack(BlocksAether.skyroot_planks));
+		
 		// Golden Dart Shooter
 		registerShapedRecipe(new ItemStack(ItemsAether.dart_shooter, 1, ItemDartShooter.DartShooterType.GOLDEN.ordinal()), "X", "X", "Y",
 				'X', new ItemStack(BlocksAether.skyroot_planks), 'Y', new ItemStack(ItemsAether.golden_amber));

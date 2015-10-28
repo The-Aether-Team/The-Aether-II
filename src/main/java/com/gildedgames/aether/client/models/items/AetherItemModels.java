@@ -232,6 +232,8 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.lightning_sword, new ItemModelList().add(0, "weapons/lightning_sword"));
 
 		registerItemModels(ItemsAether.pig_slayer, new ItemModelList().add(0, "weapons/pig_slayer"));
+
+		registerItemModels(ItemsAether.skyroot_door, new ItemModelList().add(0, "skyroot_door"));
 	}
 
 	private static void registerItemModels(Item item, ItemModelList list)

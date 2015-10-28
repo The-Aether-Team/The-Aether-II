@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client.models.blocks;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootDoor;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
@@ -48,6 +49,10 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.quicksoil, skyrootMinableMapper);
 
 		ModelLoader.setCustomStateMapper(BlocksAether.aether_sapling, new StateMap.Builder().addPropertiesToIgnore(BlockAetherSapling.PROPERTY_STAGE).build());
+
+		StateMap skyrootDoorMapper = new StateMap.Builder().addPropertiesToIgnore(BlockSkyrootDoor.POWERED).build();
+
+		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_door, skyrootDoorMapper);
 
 		ModelLoader.setCustomStateMapper(BlocksAether.aercloud, new StateMapperBase()
 		{

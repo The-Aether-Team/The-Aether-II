@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.blocks.construction.BlockQuicksoilGlass;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootDoor;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockSkyrootWorkbench;
 import com.gildedgames.aether.common.blocks.dungeon.BlockDungeon;
@@ -32,6 +33,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemDoor;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class BlocksAether
@@ -94,6 +96,8 @@ public class BlocksAether
 	public static Block holystone_furnace;
 
 	public static Block quicksoil_glass;
+
+	public static Block skyroot_door;
 
 	public static void preInit()
 	{
@@ -168,6 +172,8 @@ public class BlocksAether
 
 		quicksoil_glass = registerBlock("quicksoil_glass", new BlockQuicksoilGlass(), AetherCreativeTabs.tabBlocks);
 
+		skyroot_door = registerBlock("skyroot_door", new BlockSkyrootDoor());
+
 		registerHarvestLevels();
 	}
 
@@ -201,6 +207,8 @@ public class BlocksAether
 		sentry_stone.setHarvestLevel("pickaxe", 0);
 
 		holystone_brick.setHarvestLevel("pickaxe", 0);
+
+		skyroot_door.setHarvestLevel("axe", 0);
 	}
 
 	private static Block registerBlock(String name, Block block, CreativeTabs tab)

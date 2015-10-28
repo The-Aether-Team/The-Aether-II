@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.items;
 
 import com.gildedgames.aether.common.AetherCreativeTabs;
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.armor.EnumAetherArmorVariant;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.items.consumables.ItemAmbrosiumShard;
@@ -26,6 +27,7 @@ import com.gildedgames.aether.common.items.weapons.swords.ItemZaniteSword;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemDoor;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -80,6 +82,8 @@ public class ItemsAether
 	public static Item flaming_sword, holy_sword, lightning_sword;
 
 	public static Item pig_slayer;
+
+	public static Item skyroot_door;
 
 	public static void preInit()
 	{
@@ -193,6 +197,8 @@ public class ItemsAether
 		lightning_sword = registerItem("lightning_sword", new ItemElementalSword(ItemElementalSword.SwordElement.LIGHTNING));
 
 		pig_slayer = registerItem("pig_slayer", new ItemPigSlayer(), AetherCreativeTabs.tabWeapons);
+
+		skyroot_door = registerItem("skyroot_door_item", new ItemDoor(BlocksAether.skyroot_door), AetherCreativeTabs.tabBlocks);
 
 		registerItemProperties();
 	}
