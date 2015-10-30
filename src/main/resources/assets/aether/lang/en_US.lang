@@ -50,6 +50,7 @@ tile.enchanted_gravitite.name=Enchanted Gravitite
 tile.holystone_brick.name=Holystone Brick
 tile.holystone_furnace.name=Holystone Furnace
 tile.quicksoil_glass.name=Quicksoil Glass
+tile.skyroot_chest.name=Skyroot Chest
 
 # Aether Items
 item.skyroot_stick.name=Skyroot Stick
@@ -168,3 +169,5 @@ itemGroup.aetherConsumables=Aether Consumables
 
 # Containers
 container.holystone_furnace=Holystone Furnace
+container.skyroot_chest=Skyroot Chest
+container.skyroot_double_chest=Large Skyroot Chest

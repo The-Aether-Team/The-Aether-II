@@ -15,11 +15,15 @@ import com.gildedgames.aether.common.items.consumables.ItemGummySwet;
 import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
+import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootChest;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.ForgeHooksClient;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -234,6 +238,10 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.pig_slayer, new ItemModelList().add(0, "weapons/pig_slayer"));
 
 		registerItemModels(ItemsAether.skyroot_door, new ItemModelList().add(0, "skyroot_door"));
+
+		registerItemModels(getItem(BlocksAether.skyroot_chest), new ItemModelList().add(0, "skyroot_chest"));
+
+		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.skyroot_chest), 0, TileEntitySkyrootChest.class);
 	}
 
 	private static void registerItemModels(Item item, ItemModelList list)

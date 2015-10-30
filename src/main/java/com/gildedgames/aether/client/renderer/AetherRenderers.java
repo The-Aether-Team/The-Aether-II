@@ -7,12 +7,14 @@ import com.gildedgames.aether.client.renderer.entities.living.RenderPhyg;
 import com.gildedgames.aether.client.renderer.entities.living.RenderSheepuff;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDart;
 import com.gildedgames.aether.client.renderer.tile_entity.TileEntityAltarRenderer;
+import com.gildedgames.aether.client.renderer.tile_entity.TileEntitySkyrootChestRenderer;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.living.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.EntityPhyg;
 import com.gildedgames.aether.common.entities.living.EntitySheepuff;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
+import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootChest;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelCow;
 import net.minecraft.client.model.ModelPig;
@@ -44,5 +46,6 @@ public class AetherRenderers
 	private static void registerTESRs()
 	{
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAltar.class, new TileEntityAltarRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySkyrootChest.class, new TileEntitySkyrootChestRenderer());
 	}
 }

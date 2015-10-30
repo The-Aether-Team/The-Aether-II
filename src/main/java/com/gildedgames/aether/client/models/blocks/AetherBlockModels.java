@@ -9,6 +9,7 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.util.BlockSkyrootMinable;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
@@ -30,6 +31,10 @@ public class AetherBlockModels
 	 */
 	private static void registerStateMappers()
 	{
+		StateMap skyrootDoorMapper = new StateMap.Builder().addPropertiesToIgnore(BlockSkyrootDoor.POWERED).build();
+		StateMap skyrootChestMapper = new StateMap.Builder().addPropertiesToIgnore(BlockChest.FACING).build();
+		StateMap aetherSaplingMapper = new StateMap.Builder().addPropertiesToIgnore(BlockAetherSapling.PROPERTY_STAGE).build();
+		StateMap skyrootMinableMapper = new StateMap.Builder().addPropertiesToIgnore(BlockSkyrootMinable.PROPERTY_WAS_PLACED).build();
 		StateMap leavesMapper = new StateMap.Builder().addPropertiesToIgnore(BlockAetherLeaves.PROPERTY_CHECK_DECAY, BlockAetherLeaves.PROPERTY_DECAYABLE).build();
 
 		ModelLoader.setCustomStateMapper(BlocksAether.blue_skyroot_leaves, leavesMapper);
@@ -39,8 +44,6 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.purple_crystal_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.purple_fruit_leaves, leavesMapper);
 
-		StateMap skyrootMinableMapper = new StateMap.Builder().addPropertiesToIgnore(BlockSkyrootMinable.PROPERTY_WAS_PLACED).build();
-
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_log, skyrootMinableMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.golden_oak_log, skyrootMinableMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.aether_grass, skyrootMinableMapper);
@@ -48,11 +51,11 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.holystone, skyrootMinableMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.quicksoil, skyrootMinableMapper);
 
-		ModelLoader.setCustomStateMapper(BlocksAether.aether_sapling, new StateMap.Builder().addPropertiesToIgnore(BlockAetherSapling.PROPERTY_STAGE).build());
-
-		StateMap skyrootDoorMapper = new StateMap.Builder().addPropertiesToIgnore(BlockSkyrootDoor.POWERED).build();
+		ModelLoader.setCustomStateMapper(BlocksAether.aether_sapling, aetherSaplingMapper);
 
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_door, skyrootDoorMapper);
+
+		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_chest, skyrootChestMapper);
 
 		ModelLoader.setCustomStateMapper(BlocksAether.aercloud, new StateMapperBase()
 		{
