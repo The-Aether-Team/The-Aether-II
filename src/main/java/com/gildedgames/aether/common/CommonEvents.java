@@ -48,7 +48,7 @@ public class CommonEvents
 
 	private boolean tryToCreatePortal(World world, BlockPos pos)
 	{
-		if (world.getBlockState(pos).getBlock() == Blocks.glowstone)
+		if (world.getBlockState(pos.down()).getBlock() == Blocks.glowstone)
 		{
 			BlockAetherPortal.Size size = new BlockAetherPortal.Size(world, pos, EnumFacing.Axis.X);
 
