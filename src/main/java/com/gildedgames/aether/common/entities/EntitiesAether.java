@@ -2,13 +2,12 @@ package com.gildedgames.aether.common.entities;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
-import com.gildedgames.aether.common.entities.living.EntityFlyingCow;
-import com.gildedgames.aether.common.entities.living.EntityPhyg;
+import com.gildedgames.aether.common.entities.living.EntityAechorPlant;
+import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
+import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
 import com.gildedgames.aether.common.entities.living.EntitySheepuff;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class EntitiesAether
@@ -20,6 +19,7 @@ public class EntitiesAether
 		registerLivingEntity(EntityPhyg.class, "phyg", 0xCCFFFF, 0xFF9999);
 		registerLivingEntity(EntityFlyingCow.class, "flying_cow", 0xCCFFFF, 0x0066CC);
 		registerLivingEntity(EntitySheepuff.class, "sheepuff", 0xCCFFFF, 0xCCCCFF);
+		registerLivingEntity(EntityAechorPlant.class, "aechor_plant", 0xCCFFFF, 0xC88FE3);
 
 		EntityRegistry.registerModEntity(EntityFloatingBlock.class, "floating_block", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityDart.class, "dart", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);

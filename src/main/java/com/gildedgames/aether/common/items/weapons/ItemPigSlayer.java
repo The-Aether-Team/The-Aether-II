@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.items.weapons;
 
 import com.gildedgames.aether.common.AetherMaterials;
-import com.gildedgames.aether.common.entities.living.EntityPhyg;
+import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.passive.EntityPig;
@@ -10,12 +10,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
-import java.util.Random;
 
 public class ItemPigSlayer extends ItemSword
 {

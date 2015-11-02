@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.renderer.entities.living.layers.LayerWings;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.living.EntityFlyingCow;
+import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
