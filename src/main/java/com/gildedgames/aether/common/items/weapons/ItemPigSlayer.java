@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.items.weapons;
 import com.gildedgames.aether.common.AetherMaterials;
 import com.gildedgames.aether.common.entities.living.EntityPhyg;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -28,12 +29,10 @@ public class ItemPigSlayer extends ItemSword
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
 	{
-		if (target instanceof EntityPig || target instanceof EntityPhyg)
+		if (target instanceof EntityPig || target instanceof EntityPhyg || target instanceof EntityPigZombie)
 		{
 			if (target.getHealth() > 0)
 			{
-				target.isDead = true;
-
 				if (attacker instanceof EntityPlayer)
 				{
 					target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) attacker), Integer.MAX_VALUE);
@@ -43,7 +42,7 @@ public class ItemPigSlayer extends ItemSword
 					target.attackEntityFrom(DamageSource.causeMobDamage(attacker), Integer.MAX_VALUE);
 				}
 
-				// Particles don't work since this is called server-side...
+				target.setVelocity(0, 0, 0);
 			}
 		}
 
