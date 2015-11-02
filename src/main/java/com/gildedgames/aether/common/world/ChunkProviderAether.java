@@ -26,6 +26,8 @@ import com.gildedgames.aether.common.world.biome.BiomeGenAetherBase;
 
 public class ChunkProviderAether implements IChunkProvider
 {
+	private final IBlockState air;
+
 	private final World worldObj;
 
 	private final IBlockState aether_dirt, aether_grass, aether_stone;
@@ -40,6 +42,7 @@ public class ChunkProviderAether implements IChunkProvider
 
 	public ChunkProviderAether(World world, long seed)
 	{
+		this.air = Blocks.air.getDefaultState();
 		this.aether_dirt = BlocksAether.aether_dirt.getDefaultState();
 		this.aether_grass = BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.AETHER_GRASS);
 		this.aether_stone = BlocksAether.holystone.getDefaultState();
@@ -124,7 +127,7 @@ public class ChunkProviderAether implements IChunkProvider
 
 							for (int zIter = 0; zIter < 8; zIter++)
 							{
-								IBlockState fillBlock = Blocks.air.getDefaultState();
+								IBlockState fillBlock = this.air;
 
 								if (d15 > 0.0D)
 								{
@@ -192,7 +195,7 @@ public class ChunkProviderAether implements IChunkProvider
 					{
 						if (sthWithHeightMap <= 0)
 						{
-							topAetherBlock = Blocks.air.getDefaultState();
+							topAetherBlock = this.air;
 							fillAetherBlock = stone;
 						}
 
@@ -313,12 +316,14 @@ public class ChunkProviderAether implements IChunkProvider
 	@Override
 	public void populate(IChunkProvider chunkProvider, int chunkX, int chunkZ)
 	{
-		int x = chunkX * 16;
-		int z = chunkZ * 16;
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(this, this.worldObj, this.random, chunkX, chunkZ, false));
 
+		int x = chunkX * 16;
+		int z = chunkZ * 16;
+
 		BlockPos pos = new BlockPos(x, 0, z);
-		BiomeGenAetherBase genBase = (BiomeGenAetherBase) this.worldObj.getBiomeGenForCoords(pos.add(16, 0, 16));
+
+		BiomeGenBase biome = this.worldObj.getBiomeGenForCoords(pos.add(16, 0, 16));
 
 		this.random.setSeed(this.worldObj.getSeed());
 
@@ -327,7 +332,7 @@ public class ChunkProviderAether implements IChunkProvider
 
 		this.random.setSeed(chunkX * i1 + chunkZ * j1 ^ this.worldObj.getSeed());
 
-		genBase.decorate(this.worldObj, this.random, pos);
+		biome.decorate(this.worldObj, this.random, pos);
 	}
 
 	@Override

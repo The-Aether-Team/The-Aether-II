@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderSheepuff extends RenderLiving
 {
-	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/living/sheepuff/sheepuff.png");
+	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/sheepuff/sheepuff.png");
 
 	public RenderSheepuff(RenderManager renderManager, ModelBase modelBase, float shadowsSize)
 	{

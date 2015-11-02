@@ -21,10 +21,10 @@ public class RenderDart extends Render
 
 	static
 	{
-		dartTextures.put(ItemDartType.GOLDEN, AetherCore.getResource("textures/entities/projectiles/dart/golden_dart.png"));
-		dartTextures.put(ItemDartType.ENCHANTED, AetherCore.getResource("textures/entities/projectiles/dart/enchanted_dart.png"));
-		dartTextures.put(ItemDartType.POISON, AetherCore.getResource("textures/entities/projectiles/dart/poison_dart.png"));
-		dartTextures.put(ItemDartType.PHOENIX, AetherCore.getResource("textures/entities/projectiles/dart/golden_dart.png"));
+		dartTextures.put(ItemDartType.GOLDEN, AetherCore.getResource("textures/entities/darts/golden_dart.png"));
+		dartTextures.put(ItemDartType.ENCHANTED, AetherCore.getResource("textures/entities/darts/enchanted_dart.png"));
+		dartTextures.put(ItemDartType.POISON, AetherCore.getResource("textures/entities/darts/poison_dart.png"));
+		dartTextures.put(ItemDartType.PHOENIX, AetherCore.getResource("textures/entities/darts/golden_dart.png"));
 	}
 
 	public RenderDart(RenderManager renderManager)

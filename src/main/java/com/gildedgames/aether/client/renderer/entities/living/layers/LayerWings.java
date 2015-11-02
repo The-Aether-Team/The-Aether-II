@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class LayerWings implements LayerRenderer
 {
-	private static final ResourceLocation wingsTexture = AetherCore.getResource("textures/entities/living/flying_animal/wings.png");
+	private static final ResourceLocation wingsTexture = AetherCore.getResource("textures/entities/flying_animal/wings.png");
 
 	private final ModelWings modelWings = new ModelWings();
 

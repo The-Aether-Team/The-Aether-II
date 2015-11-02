@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class LayerSheepuffFur implements LayerRenderer
 {
-	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/living/sheepuff/fur.png");
+	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/sheepuff/fur.png");
 
 	private final ModelSheep1 sheepModel = new ModelSheep1();
 

@@ -1,8 +1,6 @@
 package com.gildedgames.aether.common.world;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
@@ -14,52 +12,25 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldProviderAether extends WorldProvider
 {
+	@SideOnly(Side.CLIENT)
 	private float[] sunriseSunsetColors = new float[4];
 
 	@Override
-	public float[] calcSunriseSunsetColors(float angle, float partialTicks)
+	protected void registerWorldChunkManager()
 	{
-		float f2 = 0.4F;
-		float cos = MathHelper.cos(angle * 3.141593F * 2.0F) - 0.0F;
-		float f4 = -0F;
-
-		if (cos >= f4 - f2 && cos <= f4 + f2)
-		{
-			float f5 = (cos - f4) / f2 * 0.5F + 0.5F;
-			float f6 = 1.0F - (1.0F - MathHelper.sin(f5 * 3.141593F)) * 0.99F;
-			f6 *= f6;
-
-			this.sunriseSunsetColors[0] = f5 * 0.3F + 0.1F;
-			this.sunriseSunsetColors[1] = f5 * f5 * 0.7F + 0.2F;
-			this.sunriseSunsetColors[2] = f5 * f5 * 0.7F + 0.2F;
-			this.sunriseSunsetColors[3] = f6;
-
-			return this.sunriseSunsetColors;
-		}
-		else
-		{
-			return null;
-		}
+		this.worldChunkMgr = new WorldChunkManagerAether();
 	}
 
 	@Override
-	public int getRespawnDimension(EntityPlayerMP player)
+	public IChunkProvider createChunkGenerator()
 	{
-		return 0;
-	}
-
-	@Override
-	public boolean isSurfaceWorld()
-	{
-		return true;
+		return new ChunkProviderAether(this.worldObj, this.worldObj.getSeed());
 	}
 
 	@Override
 	public boolean canCoordinateBeSpawn(int x, int z)
 	{
-		Block block = this.worldObj.getGroundAboveSeaLevel(new BlockPos(x, 0, z));
-
-		return block != Blocks.air && block.getMaterial().isSolid();
+		return this.worldObj.getGroundAboveSeaLevel(new BlockPos(x, 0, z)).getMaterial().isSolid();
 	}
 
 	@Override
@@ -69,9 +40,15 @@ public class WorldProviderAether extends WorldProvider
 	}
 
 	@Override
-	public IChunkProvider createChunkGenerator()
+	public boolean isSurfaceWorld()
 	{
-		return new ChunkProviderAether(this.worldObj, this.worldObj.getSeed());
+		return false;
+	}
+
+	@Override
+	public int getRespawnDimension(EntityPlayerMP player)
+	{
+		return 0;
 	}
 
 	@Override
@@ -83,10 +60,35 @@ public class WorldProviderAether extends WorldProvider
 	@Override
 	public String getInternalNameSuffix()
 	{
-		return "";
+		return "_aether";
 	}
 
 	@Override
+	public String getSaveFolder()
+	{
+		return "AETHER";
+	}
+
+	@Override
+	public String getWelcomeMessage()
+	{
+		return "Ascending to the Aether";
+	}
+
+	@Override
+	public String getDepartMessage()
+	{
+		return "Descending from the Aether";
+	}
+
+	@Override
+	public double getHorizon()
+	{
+		return 0.0;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
 	public Vec3 getFogColor(float angle, float partialTicks)
 	{
 		int color = 0x8080a0;
@@ -114,61 +116,41 @@ public class WorldProviderAether extends WorldProvider
 	}
 
 	@Override
-	public String getSaveFolder()
+	@SideOnly(Side.CLIENT)
+	public float[] calcSunriseSunsetColors(float angle, float partialTicks)
 	{
-		return "AETHER";
-	}
+		float f2 = 0.4F;
+		float cos = MathHelper.cos(angle * 3.141593F * 2.0F) - 0.0F;
+		float f4 = -0F;
 
-	@Override
-	public double getVoidFogYFactor()
-	{
-		return 100;
-	}
+		if (cos >= f4 - f2 && cos <= f4 + f2)
+		{
+			float f5 = (cos - f4) / f2 * 0.5F + 0.5F;
+			float f6 = 1.0F - (1.0F - MathHelper.sin(f5 * 3.141593F)) * 0.99F;
+			f6 *= f6;
 
-	@Override
-	public String getWelcomeMessage()
-	{
-		return "Ascending to the Aether";
-	}
+			this.sunriseSunsetColors[0] = f5 * 0.3F + 0.1F;
+			this.sunriseSunsetColors[1] = f5 * f5 * 0.7F + 0.2F;
+			this.sunriseSunsetColors[2] = f5 * f5 * 0.7F + 0.2F;
+			this.sunriseSunsetColors[3] = f6;
 
-	@Override
-	public String getDepartMessage()
-	{
-		return "Descending from the Aether";
-	}
-
-	@Override
-	public boolean doesXZShowFog(int x, int z)
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isSkyColored()
-	{
-		return true;
-	}
-
-	@Override
-	protected void registerWorldChunkManager()
-	{
-		this.worldChunkMgr = new WorldChunkManagerAether();
+			return this.sunriseSunsetColors;
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IRenderHandler getSkyRenderer()
+	public double getVoidFogYFactor()
 	{
-		return super.getSkyRenderer();
+		return 128;
 	}
 
 	@Override
-	public double getHorizon()
-	{
-		return 0.0;
-	}
-
-	@Override
+	@SideOnly(Side.CLIENT)
 	public float getCloudHeight()
 	{
 		return -128;

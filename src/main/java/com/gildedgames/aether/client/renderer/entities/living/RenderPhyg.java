@@ -11,9 +11,9 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderPhyg extends RenderLiving
 {
-	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/living/phyg/phyg.png");
+	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/phyg/phyg.png");
 
-	private static final ResourceLocation saddledTexture = AetherCore.getResource("textures/entities/living/phyg/phyg_saddled.png");
+	private static final ResourceLocation saddledTexture = AetherCore.getResource("textures/entities/phyg/phyg_saddled.png");
 
 	public RenderPhyg(RenderManager renderManager, ModelBase modelBase, float shadowSize)
 	{

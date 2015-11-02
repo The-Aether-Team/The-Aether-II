@@ -1,13 +1,18 @@
 package com.gildedgames.aether.common.world.biome;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
+import com.gildedgames.aether.common.blocks.natural.BlockAercloud.AercloudVariant;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.world.features.WorldGenAetherFlowers;
 import com.gildedgames.aether.common.world.features.WorldGenAetherLakes;
 import com.gildedgames.aether.common.world.features.WorldGenAetherTallGrass;
 import com.gildedgames.aether.common.world.features.WorldGenQuicksoil;
+import com.gildedgames.aether.common.world.features.aerclouds.WorldGenAercloud;
+import com.gildedgames.aether.common.world.features.aerclouds.WorldGenPurpleAercloud;
 import com.gildedgames.aether.common.world.features.trees.WorldGenOrangeTree;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -36,6 +41,10 @@ public class BiomeDecoratorAether
 
 	protected WorldGenAetherLakes genAetherLakes;
 
+	protected WorldGenAercloud genColdColumbusAercloud, genColdFlatAercloud, genBlueAercloud;
+
+	protected WorldGenPurpleAercloud genPurpleAercloud;
+
 	public BiomeDecoratorAether()
 	{
 		this.genAetherGrass = new WorldGenAetherTallGrass();
@@ -54,6 +63,17 @@ public class BiomeDecoratorAether
 
 		this.genQuicksoil = new WorldGenQuicksoil();
 		this.genAetherLakes = new WorldGenAetherLakes(Blocks.water);
+
+		this.genColdFlatAercloud = new WorldGenAercloud(this.getAercloudState(BlockAercloud.COLD_AERCLOUD), 64, true);
+		this.genColdColumbusAercloud = new WorldGenAercloud(this.getAercloudState(BlockAercloud.COLD_AERCLOUD), 16, false);
+		this.genBlueAercloud = new WorldGenAercloud(this.getAercloudState(BlockAercloud.BLUE_AERCLOUD), 8, false);
+
+		this.genPurpleAercloud = new WorldGenPurpleAercloud(this.getAercloudState(BlockAercloud.PURPLE_AERCLOUD), 4, false);
+	}
+
+	protected IBlockState getAercloudState(AercloudVariant variant)
+	{
+		return BlocksAether.aercloud.getDefaultState().withProperty(BlockAercloud.PROPERTY_VARIANT, variant);
 	}
 
 	protected void genDecorations(World world, Random random, BlockPos pos, BiomeGenBase genBase)
@@ -162,15 +182,27 @@ public class BiomeDecoratorAether
 				}
 			}
 		}
+
+		this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));
 	}
 
-	private void genMinableOre(WorldGenerator gen, World world, Random random, BlockPos pos, int minY, int maxY, int attempts)
+	private void generateMineable(WorldGenMinable minable, World world, Random random, BlockPos pos, int minY, int maxY, int attempts)
 	{
 		for (int count = 0; count < attempts; count++)
 		{
 			BlockPos randomPos = pos.add(random.nextInt(16), random.nextInt(maxY - minY) + minY, random.nextInt(16));
 
-			gen.generate(world, random, randomPos);
+			minable.generate(world, random, randomPos);
+		}
+	}
+
+	private void generateCloud(WorldGenAercloud gen, World world, BlockPos pos, Random rand, int rarity, int width, int height)
+	{
+		if (rand.nextInt(rarity) == 0)
+		{
+			BlockPos nextPos = pos.add(rand.nextInt(width), rand.nextInt(height), rand.nextInt(width));
+
+			gen.generate(world, rand, nextPos);
 		}
 	}
 
@@ -187,9 +219,18 @@ public class BiomeDecoratorAether
 
 	protected void generateOres(World world, Random random, BlockPos pos)
 	{
-		this.genMinableOre(this.genAmbrosium, world, random, pos, 0, 128, 20);
-		this.genMinableOre(this.genZanite, world, random, pos, 0, 64, 15);
-		this.genMinableOre(this.genGravitite, world, random, pos, 0, 32, 6);
-		this.genMinableOre(this.genContinuum, world, random, pos, 0, 128, 4);
+		this.generateMineable(this.genAmbrosium, world, random, pos, 0, 128, 20);
+		this.generateMineable(this.genZanite, world, random, pos, 0, 64, 15);
+		this.generateMineable(this.genGravitite, world, random, pos, 0, 32, 6);
+		this.generateMineable(this.genContinuum, world, random, pos, 0, 128, 4);
+	}
+
+	protected void generateClouds(World world, Random random, BlockPos pos)
+	{
+		this.generateCloud(this.genBlueAercloud, world, pos, random, 15, 16, 65);
+		this.generateCloud(this.genColdFlatAercloud, world, pos, random, 10, 16, 32);
+		this.generateCloud(this.genColdColumbusAercloud, world, pos, random, 30, 16, 65);
+
+		this.generateCloud(this.genPurpleAercloud, world, pos, random, 50, 4, 32);
 	}
 }

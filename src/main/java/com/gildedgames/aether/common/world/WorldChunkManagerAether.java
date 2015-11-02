@@ -40,32 +40,32 @@ public class WorldChunkManagerAether extends WorldChunkManager
 	}
 
 	@Override
-	public float[] getRainfall(float[] arrayToReuse, int x, int z, int width, int length)
+	public float[] getRainfall(float[] array, int x, int z, int width, int length)
 	{
 		int size = width * length;
 
-		if (arrayToReuse == null || arrayToReuse.length < size)
+		if (array == null || array.length < size)
 		{
-			arrayToReuse = new float[size];
+			array = new float[size];
 		}
 
-		Arrays.fill(arrayToReuse, 0, size, 0);
+		Arrays.fill(array, 0, size, 0);
 
-		return arrayToReuse;
+		return array;
 	}
 
 	@Override
-	public BiomeGenBase[] loadBlockGeneratorData(BiomeGenBase[] arrayToReuse, int x, int z, int width, int depth)
+	public BiomeGenBase[] loadBlockGeneratorData(BiomeGenBase[] array, int x, int z, int width, int depth)
 	{
 		int size = width * depth;
 
-		if (arrayToReuse == null || arrayToReuse.length < size)
+		if (array == null || array.length < size)
 		{
-			arrayToReuse = new BiomeGenBase[size];
+			array = new BiomeGenBase[size];
 		}
 
-		Arrays.fill(arrayToReuse, 0, size, this.biomeGenerator);
+		Arrays.fill(array, 0, size, this.biomeGenerator);
 
-		return arrayToReuse;
+		return array;
 	}
 }
