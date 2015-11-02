@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.projectiles;
 
+import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -11,6 +12,7 @@ import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.S2BPacketChangeGameState;
 import net.minecraft.util.AxisAlignedBB;
@@ -48,7 +50,7 @@ public class EntityDart extends Entity implements IProjectile
 
 	private double knockbackStrength;
 
-	private boolean canPickup;
+	private int canPickup;
 
 	public EntityDart(World world)
 	{
@@ -67,7 +69,7 @@ public class EntityDart extends Entity implements IProjectile
 
 		if (shooter instanceof EntityPlayer)
 		{
-			this.canPickup = true;
+			this.canPickup = 1;
 		}
 
 		this.setLocationAndAngles(shooter.posX, shooter.posY + (double) shooter.getEyeHeight(), shooter.posZ, shooter.rotationYaw, shooter.rotationPitch);
@@ -457,6 +459,29 @@ public class EntityDart extends Entity implements IProjectile
 	}
 
 	@Override
+	public void onCollideWithPlayer(EntityPlayer player)
+	{
+		if (!this.worldObj.isRemote && this.inGround && this.dartShake <= 0)
+		{
+			boolean canPickup = this.canPickup == 1 || this.canPickup == 2 && player.capabilities.isCreativeMode;
+
+			if (this.canPickup == 1 && !player.inventory.addItemStackToInventory(new ItemStack(ItemsAether.dart, 1, this.getDartType().ordinal())))
+			{
+				canPickup = false;
+			}
+
+			if (canPickup)
+			{
+				this.playSound("random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+
+				player.onItemPickup(this, 1);
+
+				this.setDead();
+			}
+		}
+	}
+
+	@Override
 	protected void readEntityFromNBT(NBTTagCompound tagCompund)
 	{
 		this.xTile = tagCompund.getShort("xTile");
@@ -482,13 +507,13 @@ public class EntityDart extends Entity implements IProjectile
 			this.damage = tagCompund.getDouble("damage");
 		}
 
-		if (tagCompund.hasKey("canPickup", 99))
+		if (tagCompund.hasKey("pickup", 99))
 		{
-			this.canPickup = tagCompund.getBoolean("canPickup");
+			this.canPickup = tagCompund.getByte("pickup");
 		}
 		else if (tagCompund.hasKey("player", 99))
 		{
-			this.canPickup = tagCompund.getBoolean("player");
+			this.canPickup = tagCompund.getByte("player");
 		}
 	}
 
@@ -505,7 +530,7 @@ public class EntityDart extends Entity implements IProjectile
 		tagCompound.setByte("inData", (byte) this.inMeta);
 		tagCompound.setByte("shake", (byte) this.dartShake);
 		tagCompound.setBoolean("inGround", this.inGround);
-		tagCompound.setBoolean("canPickup", this.canPickup);
+		tagCompound.setByte("pickup", (byte) this.canPickup);
 		tagCompound.setDouble("damage", this.damage);
 	}
 
@@ -547,5 +572,10 @@ public class EntityDart extends Entity implements IProjectile
 	public double getDamage()
 	{
 		return this.damage;
+	}
+
+	public void setCanPickup(int canPickup)
+	{
+		this.canPickup = canPickup;
 	}
 }

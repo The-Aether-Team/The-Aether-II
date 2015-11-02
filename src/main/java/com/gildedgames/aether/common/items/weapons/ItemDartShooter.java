@@ -4,6 +4,8 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.EnumAction;
@@ -101,6 +103,8 @@ public class ItemDartShooter extends Item
 			return;
 		}
 
+		boolean isInfiniteArrow = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, stack) > 0;
+
 		int duration = this.getMaxItemUseDuration(stack) - timeLeft - 5;
 
 		if (duration > 2)
@@ -120,6 +124,11 @@ public class ItemDartShooter extends Item
 			if (speed >= 0.8f)
 			{
 				dart.setIsCritical(true);
+			}
+
+			if (isInfiniteArrow)
+			{
+				dart.setCanPickup(2);
 			}
 
 			world.playSoundAtEntity(player, AetherCore.getResourcePath("aerandom.dart_shooter"), 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + speed * 0.5F);
