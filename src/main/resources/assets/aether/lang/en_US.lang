@@ -158,6 +158,7 @@ item.aether_record.recording_892.desc=Emile van Krieken - ???
 entity.aether.sheepuff.name=Sheepuff
 entity.aether.flying_cow.name=Flying Cow
 entity.aether.phyg.name=Phyg
+entity.aether.aechor_plant.name=Aechor Plant
 
 # Creative Tabs
 itemGroup.aetherBlocks=Aether Blocks

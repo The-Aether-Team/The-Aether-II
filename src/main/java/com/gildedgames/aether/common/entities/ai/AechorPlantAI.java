@@ -7,7 +7,7 @@ import net.minecraft.entity.ai.EntityAITarget;
 
 public class AechorPlantAI extends EntityAITarget
 {
-	private int ticksUntilAttack;
+	private int ticksUntilAttack = 3;
 
 	public AechorPlantAI(EntityCreature creature, boolean checkSight)
 	{
@@ -24,7 +24,16 @@ public class AechorPlantAI extends EntityAITarget
 	@Override
 	public boolean continueExecuting()
 	{
-		return this.hasTarget();
+		EntityLivingBase target = this.taskOwner.getAttackTarget();
+
+		if (target == null || !target.isEntityAlive())
+		{
+			this.ticksUntilAttack = 3;
+
+			return false;
+		}
+
+		return true;
 	}
 
 	@Override
@@ -66,6 +75,8 @@ public class AechorPlantAI extends EntityAITarget
 	{
 		EntityCreature predator = this.taskOwner;
 
-		return predator.getAttackTarget() != null && predator.isEntityAlive() && predator.getDistanceSqToEntity(predator.getAttackTarget()) < this.getTargetDistance();
+		double maxDistance = this.getTargetDistance();
+
+		return predator.getAttackTarget() != null && predator.isEntityAlive() && predator.getDistanceSqToEntity(predator.getAttackTarget()) < (maxDistance * maxDistance);
 	}
 }
