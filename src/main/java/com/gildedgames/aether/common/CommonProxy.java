@@ -42,6 +42,7 @@ public class CommonProxy
 
 		BlocksAether.preInit();
 		ItemsAether.preInit();
+		
 
 		TileEntitiesAether.preInit();
 		EntitiesAether.preInit();
@@ -52,5 +53,6 @@ public class CommonProxy
 	public void init(FMLInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new CommonEvents());
+		MinecraftForge.EVENT_BUS.register(ItemsAether.skyroot_sword);
 	}
 }
