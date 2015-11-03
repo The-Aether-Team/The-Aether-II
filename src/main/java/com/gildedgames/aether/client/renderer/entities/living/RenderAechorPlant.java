@@ -35,7 +35,7 @@ public class RenderAechorPlant extends RenderLiving
 		}
 		else
 		{
-			if (aechorPlant.isTargettingPrey())
+			if (aechorPlant.canSeePrey())
 			{
 				f1 *= 0.25F;
 				f3 = 1.75F + ((float) Math.sin(aechorPlant.sinage + 2.0F) * 1.5F);
@@ -52,7 +52,7 @@ public class RenderAechorPlant extends RenderLiving
 		model.sinage = f1;
 		model.sinage2 = f3;
 
-		float f2 = 0.625F + ((float) aechorPlant.getSize() / 6F);
+		float f2 = 0.625F + ((float) aechorPlant.getPlantSize() / 6F);
 
 		model.size = f2;
 		this.shadowSize = f2 - 0.25F;
