@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.recipes;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.recipes.altar.AltarRepairRecipe;
 import com.gildedgames.aether.common.recipes.altar.AltarSimpleRecipe;
@@ -47,12 +46,12 @@ public class RecipesAether
 				'X', new ItemStack(BlocksAether.skyroot_planks));
 
 		// Golden Dart Shooter
-		registerShapedRecipe(new ItemStack(ItemsAether.dart_shooter, 1, ItemDartShooter.DartShooterType.GOLDEN.ordinal()), "X", "X", "Y",
+		registerShapedRecipe(new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.GOLDEN.ordinal()), "X", "X", "Y",
 				'X', new ItemStack(BlocksAether.skyroot_planks), 'Y', new ItemStack(ItemsAether.golden_amber));
 
 		// Poison Dart Shooter
-		registerShapelessRecipe(new ItemStack(ItemsAether.dart_shooter, 1, ItemDartShooter.DartShooterType.POISON.ordinal()),
-				new ItemStack(ItemsAether.dart_shooter, 1, ItemDartShooter.DartShooterType.GOLDEN.ordinal()), new ItemStack(ItemsAether.skyroot_poison_bucket));
+		registerShapelessRecipe(new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.POISON.ordinal()),
+				new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.GOLDEN.ordinal()), new ItemStack(ItemsAether.skyroot_poison_bucket));
 
 		// Zanite Block
 		registerShapedRecipe(new ItemStack(BlocksAether.zanite_block), "XXX", "XXX", "XXX",
@@ -165,8 +164,8 @@ public class RecipesAether
 				new ItemStack(BlocksAether.enchanted_gravitite)));
 
 		// Enchanted Dart Shooter
-		registerAltarRecipe(new AltarSimpleRecipe(4, new ItemStack(ItemsAether.dart_shooter, 1, ItemDartShooter.DartShooterType.GOLDEN.ordinal()),
-				new ItemStack(ItemsAether.dart_shooter, 1, ItemDartShooter.DartShooterType.ENCHANTED.ordinal())));
+		registerAltarRecipe(new AltarSimpleRecipe(4, new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.GOLDEN.ordinal()),
+				new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.ENCHANTED.ordinal())));
 
 		// Enchanted Darts
 		registerAltarRecipe(new AltarSimpleRecipe(1, new ItemStack(ItemsAether.dart, 1, ItemDartType.GOLDEN.ordinal()),

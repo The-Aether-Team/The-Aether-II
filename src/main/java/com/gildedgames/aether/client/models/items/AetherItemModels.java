@@ -13,13 +13,10 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.consumables.ItemGummySwet;
 import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
-import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootChest;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -221,10 +218,10 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.recording_892, new ItemModelList("records/").add(0, "recording_892"));
 
 		registerItemModels(ItemsAether.dart_shooter, new ItemModelList("dart_shooter/")
-				.add(ItemDartShooter.DartShooterType.GOLDEN.ordinal(), "golden_dart_shooter")
-				.add(ItemDartShooter.DartShooterType.ENCHANTED.ordinal(), "enchanted_dart_shooter")
-				.add(ItemDartShooter.DartShooterType.POISON.ordinal(), "poison_dart_shooter")
-				.add(ItemDartShooter.DartShooterType.PHOENIX.ordinal(), "phoenix_dart_shooter"));
+				.add(ItemDartType.GOLDEN.ordinal(), "golden_dart_shooter")
+				.add(ItemDartType.ENCHANTED.ordinal(), "enchanted_dart_shooter")
+				.add(ItemDartType.POISON.ordinal(), "poison_dart_shooter")
+				.add(ItemDartType.PHOENIX.ordinal(), "phoenix_dart_shooter"));
 
 		registerItemModels(ItemsAether.dart, new ItemModelList("dart/")
 				.add(ItemDartType.GOLDEN.ordinal(), "golden_dart")

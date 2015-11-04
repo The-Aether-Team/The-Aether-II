@@ -19,31 +19,6 @@ import java.util.List;
 
 public class ItemDartShooter extends Item
 {
-	public enum DartShooterType
-	{
-		GOLDEN("golden", ItemDartType.GOLDEN),
-		ENCHANTED("enchanted", ItemDartType.ENCHANTED),
-		POISON("poison", ItemDartType.POISON),
-		PHOENIX("phoenix", ItemDartType.PHOENIX);
-
-		private final String name;
-
-		private final ItemDartType ammoType;
-
-		DartShooterType(String name, ItemDartType ammoType)
-		{
-			this.name = name;
-			this.ammoType = ammoType;
-		}
-
-		public static DartShooterType fromOrdinal(int ordinal)
-		{
-			DartShooterType[] darts = values();
-
-			return darts[ordinal > darts.length || ordinal < 0 ? 0 : ordinal];
-		}
-	}
-
 	public ItemDartShooter()
 	{
 		this.setHasSubtypes(true);
@@ -56,7 +31,7 @@ public class ItemDartShooter extends Item
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List subItems)
 	{
-		for (DartShooterType type : DartShooterType.values())
+		for (ItemDartType type : ItemDartType.values())
 		{
 			subItems.add(new ItemStack(item, 1, type.ordinal()));
 		}
@@ -77,12 +52,11 @@ public class ItemDartShooter extends Item
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
 	{
-		DartShooterType shooterType = DartShooterType.fromOrdinal(stack.getMetadata());
-		ItemDartType ammoType = shooterType.ammoType;
+		ItemDartType dartType = ItemDartType.fromOrdinal(stack.getMetadata());
 
-		ItemStack ammoStack = this.getMatchingAmmo(player.inventory, ammoType);
+		int ammoSlot = this.getMatchingAmmoSlot(player.inventory, dartType.getAmmoItem());
 
-		if (ammoStack != null || player.capabilities.isCreativeMode)
+		if (ammoSlot > 0 || player.capabilities.isCreativeMode)
 		{
 			player.setItemInUse(stack, this.getMaxItemUseDuration(stack) - 5);
 		}
@@ -93,12 +67,11 @@ public class ItemDartShooter extends Item
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int timeLeft)
 	{
-		DartShooterType shooterType = DartShooterType.fromOrdinal(stack.getMetadata());
-		ItemDartType ammoType = shooterType.ammoType;
+		ItemDartType dartType = ItemDartType.fromOrdinal(stack.getMetadata());
 
-		ItemStack ammoStack = this.getMatchingAmmo(player.inventory, ammoType);
+		int inventorySlot = this.getMatchingAmmoSlot(player.inventory, dartType.getAmmoItem());
 
-		if (ammoStack == null && !player.capabilities.isCreativeMode)
+		if (inventorySlot < 0 && !player.capabilities.isCreativeMode)
 		{
 			return;
 		}
@@ -118,8 +91,8 @@ public class ItemDartShooter extends Item
 			}
 
 			EntityDart dart = new EntityDart(world, player, speed * 2.0F);
-			dart.setDartType(ammoType);
-			dart.setDamage(ammoType.getDamage());
+			dart.setDartType(dartType);
+			dart.setDamage(dartType.getAmmoItem().getDamage());
 
 			if (speed >= 0.8f)
 			{
@@ -138,39 +111,43 @@ public class ItemDartShooter extends Item
 				world.spawnEntityInWorld(dart);
 			}
 
-			if (ammoStack != null && !player.capabilities.isCreativeMode)
+			if (inventorySlot >= 0 && !player.capabilities.isCreativeMode)
 			{
+				ItemStack ammoStack = player.inventory.getStackInSlot(inventorySlot);
+
 				ammoStack.stackSize--;
+
+				if (ammoStack.stackSize <= 0)
+				{
+					player.inventory.setInventorySlotContents(inventorySlot, null);
+				}
 			}
 		}
 	}
 
-	private ItemStack getMatchingAmmo(InventoryPlayer inventory, ItemDartType ammo)
+	private int getMatchingAmmoSlot(InventoryPlayer inventory, ItemDartType ammo)
 	{
 		int searchMeta = ammo.ordinal();
 
-		if (ammo == ItemDartType.PHOENIX)
+		for (int i = 0; i < inventory.mainInventory.length; i++)
 		{
-			searchMeta = ItemDartType.GOLDEN.ordinal();
-		}
+			ItemStack stack = inventory.mainInventory[i];
 
-		for (ItemStack stack : inventory.mainInventory)
-		{
 			if (stack != null && stack.getItem() == ItemsAether.dart)
 			{
 				if (stack.getMetadata() == searchMeta)
 				{
-					return stack;
+					return i;
 				}
 			}
 		}
 
-		return null;
+		return -1;
 	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		return super.getUnlocalizedName(stack) + "." + DartShooterType.fromOrdinal(stack.getMetadata()).name;
+		return super.getUnlocalizedName(stack) + "." + ItemDartType.fromOrdinal(stack.getMetadata()).getID();
 	}
 }
