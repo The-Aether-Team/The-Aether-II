@@ -19,11 +19,13 @@ import com.gildedgames.aether.common.items.tools.ItemZaniteTool;
 import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
 import com.gildedgames.aether.common.items.weapons.ItemPigSlayer;
+import com.gildedgames.aether.common.items.weapons.ItemVampireBlade;
 import com.gildedgames.aether.common.items.weapons.swords.ItemElementalSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemGravititeSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemHolystoneSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemZaniteSword;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -81,7 +83,7 @@ public class ItemsAether
 
 	public static Item flaming_sword, holy_sword, lightning_sword;
 
-	public static Item pig_slayer;
+	public static Item pig_slayer, vamp_blade;
 
 	public static Item skyroot_door;
 
@@ -197,6 +199,7 @@ public class ItemsAether
 		lightning_sword = registerItem("lightning_sword", new ItemElementalSword(ItemElementalSword.SwordElement.LIGHTNING));
 
 		pig_slayer = registerItem("pig_slayer", new ItemPigSlayer(), AetherCreativeTabs.tabWeapons);
+		vamp_blade = registerItem("vamp_blade", new ItemVampireBlade(), AetherCreativeTabs.tabWeapons);
 
 		skyroot_door = registerItem("skyroot_door_item", new ItemDoor(BlocksAether.skyroot_door), AetherCreativeTabs.tabBlocks);
 
