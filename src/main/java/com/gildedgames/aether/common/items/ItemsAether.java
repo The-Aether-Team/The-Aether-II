@@ -83,7 +83,7 @@ public class ItemsAether
 
 	public static Item flaming_sword, holy_sword, lightning_sword;
 
-	public static Item pig_slayer, vamp_blade;
+	public static Item pig_slayer, vampire_blade;
 
 	public static Item skyroot_door;
 
@@ -199,7 +199,7 @@ public class ItemsAether
 		lightning_sword = registerItem("lightning_sword", new ItemElementalSword(ItemElementalSword.SwordElement.LIGHTNING));
 
 		pig_slayer = registerItem("pig_slayer", new ItemPigSlayer(), AetherCreativeTabs.tabWeapons);
-		vamp_blade = registerItem("vamp_blade", new ItemVampireBlade(), AetherCreativeTabs.tabWeapons);
+		vampire_blade = registerItem("vampire_blade", new ItemVampireBlade(), AetherCreativeTabs.tabWeapons);
 
 		skyroot_door = registerItem("skyroot_door_item", new ItemDoor(BlocksAether.skyroot_door), AetherCreativeTabs.tabBlocks);
 
