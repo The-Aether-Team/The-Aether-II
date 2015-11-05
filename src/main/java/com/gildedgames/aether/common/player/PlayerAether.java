@@ -9,6 +9,7 @@ import com.gildedgames.util.player.common.player.IPlayerProfile;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class PlayerAether implements IPlayerHook
@@ -27,12 +28,12 @@ public class PlayerAether implements IPlayerHook
 		this.playerHookPool = playerHookPool;
 	}
 
-	public static PlayerAether getPlayer(EntityPlayer player)
+	public static PlayerAether get(EntityPlayer player)
 	{
 		return AetherCore.locate().getPool().get(player);
 	}
 
-	public static PlayerAether getPlayer(UUID uuid)
+	public static PlayerAether get(UUID uuid)
 	{
 		return AetherCore.locate().getPool().get(uuid);
 	}
@@ -95,5 +96,22 @@ public class PlayerAether implements IPlayerHook
 	public IPlayerProfile getProfile()
 	{
 		return this.playerProfile;
+	}
+	
+	public boolean wearingArmour(Item item)
+	{
+		for (int index = 0; index < 4; index++)
+		{
+			if ((this.player.inventory.armorInventory[index] != null))
+			{
+				Item armor = this.player.inventory.armorInventory[index].getItem();
+				if (armor == item)
+				{
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 }

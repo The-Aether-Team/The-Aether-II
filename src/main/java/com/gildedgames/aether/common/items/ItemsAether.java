@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.armor.EnumAetherArmorVariant;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
+import com.gildedgames.aether.common.items.armor.ItemZaniteArmor;
 import com.gildedgames.aether.common.items.consumables.ItemAmbrosiumShard;
 import com.gildedgames.aether.common.items.consumables.ItemGummySwet;
 import com.gildedgames.aether.common.items.consumables.ItemRainbowStrawberry;
@@ -114,10 +115,10 @@ public class ItemsAether
 		gravitite_shovel = registerItem("gravitite_shovel", new ItemGravititeTool(EnumToolType.SHOVEL));
 		gravitite_sword = registerItem("gravitite_sword", new ItemGravititeSword());
 
-		zanite_helmet = registerItem("zanite_helmet", new ItemAetherArmor(EnumAetherArmorVariant.ZANITE, 0, 0));
-		zanite_chestplate = registerItem("zanite_chestplate", new ItemAetherArmor(EnumAetherArmorVariant.ZANITE, 0, 1));
-		zanite_leggings = registerItem("zanite_leggings", new ItemAetherArmor(EnumAetherArmorVariant.ZANITE, 0, 2));
-		zanite_boots = registerItem("zanite_boots", new ItemAetherArmor(EnumAetherArmorVariant.ZANITE, 0, 3));
+		zanite_helmet = registerItem("zanite_helmet", new ItemZaniteArmor(EnumAetherArmorVariant.ZANITE, 0, 0));
+		zanite_chestplate = registerItem("zanite_chestplate", new ItemZaniteArmor(EnumAetherArmorVariant.ZANITE, 0, 1));
+		zanite_leggings = registerItem("zanite_leggings", new ItemZaniteArmor(EnumAetherArmorVariant.ZANITE, 0, 2));
+		zanite_boots = registerItem("zanite_boots", new ItemZaniteArmor(EnumAetherArmorVariant.ZANITE, 0, 3));
 
 		gravitite_helmet = registerItem("gravitite_helmet", new ItemAetherArmor(EnumAetherArmorVariant.GRAVITITE, 0, 0));
 		gravitite_chestplate = registerItem("gravitite_chestplate", new ItemAetherArmor(EnumAetherArmorVariant.GRAVITITE, 0, 1));

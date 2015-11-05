@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.AetherCreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class ItemAetherArmor extends ItemArmor
 {
@@ -23,6 +24,9 @@ public class ItemAetherArmor extends ItemArmor
 	{
 		return this.armorVariant.getResourceForSlot(slot);
 	}
+	
+	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {}
 
 	@Override
 	public boolean getIsRepairable(ItemStack target, ItemStack stack)
