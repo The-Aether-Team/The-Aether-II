@@ -27,6 +27,11 @@ public enum ItemDartType
 		return this.id;
 	}
 
+	public ItemDartType getAmmoItem()
+	{
+		return (this == ItemDartType.PHOENIX) ? ItemDartType.GOLDEN : this;
+	}
+
 	public static ItemDartType fromOrdinal(int ordinal)
 	{
 		ItemDartType[] darts = values();

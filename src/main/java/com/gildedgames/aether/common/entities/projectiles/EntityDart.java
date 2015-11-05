@@ -465,7 +465,7 @@ public class EntityDart extends Entity implements IProjectile
 		{
 			boolean canPickup = this.canPickup == 1 || this.canPickup == 2 && player.capabilities.isCreativeMode;
 
-			if (this.canPickup == 1 && !player.inventory.addItemStackToInventory(new ItemStack(ItemsAether.dart, 1, this.getDartType().ordinal())))
+			if (this.canPickup == 1 && !player.inventory.addItemStackToInventory(new ItemStack(ItemsAether.dart, 1, this.getDartType().getAmmoItem().ordinal())))
 			{
 				canPickup = false;
 			}
