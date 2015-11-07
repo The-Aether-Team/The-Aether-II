@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldProviderAether extends WorldProvider
 {
-	@SideOnly(Side.CLIENT)
+	
 	private float[] sunriseSunsetColors = new float[4];
 
 	@Override
