@@ -44,8 +44,6 @@ minecraft {
     version = "${config.mc_version}-${config.forge_version}"
     mappings = config.forge_mappings
 
-    replace "${version}", project.version
-
     runDir = "run"
 }
 
