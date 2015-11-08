@@ -2,9 +2,6 @@ package com.gildedgames.aether.common.items.armor;
 
 import java.util.List;
 
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.player.PlayerAether;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -14,6 +11,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.gildedgames.aether.common.util.PlayerUtil;
+
 public class ItemPhoenixArmor extends ItemAetherArmor
 {
 	public ItemPhoenixArmor(EnumAetherArmorVariant material, int renderIndex, int armorType)
@@ -21,26 +20,12 @@ public class ItemPhoenixArmor extends ItemAetherArmor
 		super(material, renderIndex, armorType);
 	}
 
-	public boolean isWearingFullSet(EntityPlayer player)
-	{
-		
-		for (ItemStack stack : player.inventory.armorInventory)
-		{
-			if (stack == null || !(stack.getItem() instanceof ItemPhoenixArmor))
-			{
-					return false;
-			}
-		}
-		return true;
-	}
-
-
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
 	{
 		if (!world.isRemote)
 		{
-			if (this.isWearingFullSet(player))
+			if (PlayerUtil.isWearingFullSet(player, ItemPhoenixArmor.class))
 			{
 				PotionEffect flameResistance = new PotionEffect(Potion.fireResistance.getId(), 2, 0, false, false);
 				player.addPotionEffect(flameResistance);
