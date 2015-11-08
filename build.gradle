@@ -23,7 +23,7 @@ task defineVersion {
 	def build = System.getenv().BUILD_NUMBER
 
 	if (build != null) {
-		version = "${config.mc_version}-${config.mod_version}.jenkins-${mod_version}"
+		version = "${config.mc_version}-${config.mod_version}.jenkins-${config.mod_version}"
 	} else {
 		version = "${config.mc_version}-${config.mod_version}"
 	}
@@ -43,8 +43,6 @@ dependencies {
 minecraft {
     version = "${config.mc_version}-${config.forge_version}"
     mappings = config.forge_mappings
-
-    replace "${version}", project.version
 
     runDir = "run"
 }
