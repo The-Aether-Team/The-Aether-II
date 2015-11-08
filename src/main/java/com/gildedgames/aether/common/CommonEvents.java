@@ -1,18 +1,29 @@
 package com.gildedgames.aether.common;
 
+import java.util.Random;
+
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemZaniteArmor;
+import com.gildedgames.util.universe.common.util.TeleporterGeneric;
+
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
@@ -20,8 +31,6 @@ import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import java.util.Random;
 
 public class CommonEvents
 {
@@ -32,9 +41,9 @@ public class CommonEvents
 		{
 			if (FluidContainerRegistry.isFilledContainer(event.current))
 			{
-				EntityPlayer player = event.entityPlayer;
+				final EntityPlayer player = event.entityPlayer;
 
-				BlockPos pos = event.target.getBlockPos().offset(event.target.sideHit);
+				final BlockPos pos = event.target.getBlockPos().offset(event.target.sideHit);
 
 				if (FluidContainerRegistry.getFluidForFilledItem(event.current).getFluidID() == FluidRegistry.WATER.getID())
 				{
@@ -79,7 +88,8 @@ public class CommonEvents
 	@SubscribeEvent
 	public void onLivingEntityUpdate(LivingEvent.LivingUpdateEvent event)
 	{
-		Block blockBeneath = event.entity.worldObj.getBlockState(event.entity.getPosition().down()).getBlock();
+		final Entity entity = event.entity;
+		final Block blockBeneath = entity.worldObj.getBlockState(entity.getPosition().down()).getBlock();
 
 		if (blockBeneath == BlocksAether.quicksoil)
 		{
@@ -87,20 +97,79 @@ public class CommonEvents
 			// directly on top of Quicksoil. If you go slow enough, during the next player update, it
 			// will see the player is on top of an air block instead, and this won't be called.
 
-			if (event.entity.isSneaking())
+			if (entity.isSneaking())
 			{
-				event.entity.onGround = false;
+				entity.onGround = false;
 
-				event.entity.motionX *= 1.03D;
-				event.entity.motionZ *= 1.03D;
+				entity.motionX *= 1.03D;
+				entity.motionZ *= 1.03D;
 			}
 		}
+
+		if (entity.dimension == AetherCore.getAetherDimID() && entity.posY < -2 && !entity.worldObj.isRemote)
+		{
+			final double posX = entity.posX;
+			final double posZ = entity.posZ;
+
+			final WorldServer server = MinecraftServer.getServer().worldServerForDimension(0);
+
+			final Entity transferMount = this.cutFromDim(entity.ridingEntity, server);
+			final Entity transferMountedBy = this.cutFromDim(entity.riddenByEntity, server);
+
+			final ServerConfigurationManager scm = MinecraftServer.getServer().getConfigurationManager();
+			final Teleporter teleporter = new TeleporterGeneric(server);
+
+			if (entity instanceof EntityPlayerMP)
+			{
+				scm.transferPlayerToDimension((EntityPlayerMP) entity, 0, teleporter);
+			}
+			else
+			{
+				scm.transferEntityToWorld(entity, 0, MinecraftServer.getServer().worldServerForDimension(AetherCore.getAetherDimID()), server, teleporter);
+			}
+
+			entity.setPositionAndUpdate(posX, 256, posZ);
+
+			if (transferMount != null)
+			{
+				this.teleportToSurface(transferMount, entity);
+				entity.mountEntity(transferMount);
+			}
+
+			if (transferMountedBy != null)
+			{
+				transferMountedBy.mountEntity(null);
+				this.teleportToSurface(transferMountedBy, entity);
+				transferMountedBy.mountEntity(entity);
+			}
+		}
+	}
+
+	private Entity cutFromDim(Entity entity, WorldServer server)
+	{
+		if (entity == null)
+		{
+			return null;
+		}
+		final Entity newEntity = EntityList.createEntityByName(EntityList.getEntityString(entity), server);
+		newEntity.copyDataFromOld(entity);
+		entity.worldObj.removeEntity(entity);
+		return newEntity;
+	}
+
+	private void teleportToSurface(Entity mount, Entity riding)
+	{
+		mount.dimension = riding.dimension;
+		mount.timeUntilPortal = mount.getPortalCooldown();
+		mount.setPosition(riding.posX, 256, riding.posZ);
+		mount.forceSpawn = true;
+		riding.worldObj.spawnEntityInWorld(mount);
 	}
 
 	@SubscribeEvent
 	public void onPlayerInteract(EntityInteractEvent event)
 	{
-		ItemStack itemstack = event.entityPlayer.inventory.getCurrentItem();
+		final ItemStack itemstack = event.entityPlayer.inventory.getCurrentItem();
 
 		if (itemstack != null && itemstack.getItem() == ItemsAether.skyroot_bucket && !event.entityPlayer.capabilities.isCreativeMode)
 		{
@@ -139,20 +208,20 @@ public class CommonEvents
 
 			if (!player.capabilities.isCreativeMode)
 			{
-				ItemStack newStack = FluidContainerRegistry.drainFluidContainer(event.current);
+				final ItemStack newStack = FluidContainerRegistry.drainFluidContainer(event.current);
 
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, newStack);
 			}
 
 			if (event.world.isRemote)
 			{
-				Random rand = event.world.rand;
+				final Random rand = event.world.rand;
 
 				for (int count = 0; count < 8; count++)
 				{
-					double parX = pos.getX() + rand.nextDouble();
-					double parY = pos.getY() + rand.nextDouble();
-					double parZ = pos.getZ() + rand.nextDouble();
+					final double parX = pos.getX() + rand.nextDouble();
+					final double parY = pos.getY() + rand.nextDouble();
+					final double parZ = pos.getZ() + rand.nextDouble();
 
 					event.world.spawnParticle(EnumParticleTypes.CLOUD, parX, parY, parZ, 0, 0, 0);
 				}
