@@ -2,9 +2,6 @@ package com.gildedgames.aether.common.items.armor;
 
 import java.util.List;
 
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.player.PlayerAether;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -13,27 +10,22 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.gildedgames.aether.common.util.PlayerUtil;
+
 public class ItemObsidianArmor extends ItemAetherArmor
 {
+
 	public ItemObsidianArmor(EnumAetherArmorVariant material, int renderIndex, int armorType)
 	{
 		super(material, renderIndex, armorType);
 	}
 
-	public boolean wearingFullSet(PlayerAether player)
-	{
-		return player.wearingArmour(ItemsAether.obsidian_boots) &&
-				player.wearingArmour(ItemsAether.obsidian_chestplate) &&
-				player.wearingArmour(ItemsAether.obsidian_leggings) &&
-				player.wearingArmour(ItemsAether.obsidian_helmet);
-	}
-	
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
 	{
 		if (!world.isRemote)
 		{
-			if (this.wearingFullSet(PlayerAether.get(player)))
+			if (PlayerUtil.isWearingFullSet(player, ItemObsidianArmor.class))
 			{
 				// Resistance is multiplied by 3; I wanted to do 4 but that made you practically invincible
 				// For estimation: 3: 5 zombie hits take half a heart ; 4: 10+ zombie hits...
@@ -42,6 +34,7 @@ public class ItemObsidianArmor extends ItemAetherArmor
 			}
 		}
 	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings("unchecked")

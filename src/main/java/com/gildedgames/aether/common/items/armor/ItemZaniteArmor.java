@@ -2,9 +2,6 @@ package com.gildedgames.aether.common.items.armor;
 
 import java.util.List;
 
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.player.PlayerAether;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -16,6 +13,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.gildedgames.aether.common.util.PlayerUtil;
+
 public class ItemZaniteArmor extends ItemAetherArmor
 {
 	public ItemZaniteArmor(EnumAetherArmorVariant material, int renderIndex, int armorType)
@@ -23,6 +22,7 @@ public class ItemZaniteArmor extends ItemAetherArmor
 		super(material, renderIndex, armorType);
 	}
 
+<<<<<<< HEAD
 	public boolean isWearingFullSet(EntityPlayer player)
 	{
 		
@@ -39,11 +39,19 @@ public class ItemZaniteArmor extends ItemAetherArmor
 	
 	/*
 	public void onPlayerAttacked(LivingAttackEvent event)
+=======
+	@Override
+	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
+>>>>>>> origin/master
 	{
 		if (event.entityLiving instanceof EntityPlayer && !event.source.isMagicDamage())
 		{
+<<<<<<< HEAD
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
 			if (this.armorType == 0 && this.isWearingFullSet(player))
+=======
+			if (this.armorType == 0 && PlayerUtil.isWearingFullSet(player, ItemZaniteArmor.class))
+>>>>>>> origin/master
 			{
 
 				int peicesWorn = 0; 
@@ -63,12 +71,19 @@ public class ItemZaniteArmor extends ItemAetherArmor
 
 				// 3 = helmet, deplets the fastest
 				// Dividing everything by 45 so max resistance is 3 (after this damage reduction gets ridiculous)
+<<<<<<< HEAD
 				int armorVal = (int)(percentDamaged / 45);
 
 				// Potion Effect Params: Resistance, duration, resistance multiplier, splash, particles
 				// duration is set to 2 for invincible effects. I noticed some "unstableness" when it was set to 1
 				PotionEffect resistanceUp = new PotionEffect(11, 2, armorVal, false, false);
 				System.out.println(armorVal);
+=======
+				int armourVal = player.getCurrentArmor(3).getItemDamage() / 45;
+
+				// Potion Effect Params: Resistance, duration, resistance multiplier, splash, particles
+				PotionEffect resistanceUp = new PotionEffect(11, 1, armourVal / 45, false, false);
+>>>>>>> origin/master
 
 				if (armorVal >= 1)
 				{
