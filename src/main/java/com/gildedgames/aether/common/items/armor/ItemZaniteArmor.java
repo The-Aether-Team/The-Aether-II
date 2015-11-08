@@ -6,11 +6,13 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.player.PlayerAether;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -21,31 +23,61 @@ public class ItemZaniteArmor extends ItemAetherArmor
 		super(material, renderIndex, armorType);
 	}
 
-	public boolean wearingFullSet(PlayerAether player)
+	public boolean isWearingFullSet(EntityPlayer player)
 	{
-		return player.wearingArmour(ItemsAether.zanite_boots) &&
-				player.wearingArmour(ItemsAether.zanite_chestplate) &&
-				player.wearingArmour(ItemsAether.zanite_leggings) &&
-				player.wearingArmour(ItemsAether.zanite_helmet);
+		
+		for (ItemStack stack : player.inventory.armorInventory)
+		{
+			if (stack == null || !(stack.getItem() instanceof ItemZaniteArmor))
+			{
+					return false;
+			}
+		}
+		return true;
 	}
 
-	@Override
-	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
+	
+	/*
+	public void onPlayerAttacked(LivingAttackEvent event)
 	{
-		if (!world.isRemote)
+		if (event.entityLiving instanceof EntityPlayer && !event.source.isMagicDamage())
 		{
-			if (this.armorType == 0 && this.wearingFullSet(PlayerAether.get(player)))
+			EntityPlayer player = (EntityPlayer) event.entityLiving;
+			if (this.armorType == 0 && this.isWearingFullSet(player))
 			{
+
+				int peicesWorn = 0; 
+				int totalDamage = 0;
+				int maxDamage = 0;
+				for (ItemStack stack : player.inventory.armorInventory)
+				{
+					if (stack != null && stack.getItem() == this)
+					{
+						peicesWorn++;
+						totalDamage += stack.getItemDamage();
+						maxDamage += stack.getItem().getMaxDamage();
+					}
+				}
+
+				float percentDamaged = (float) totalDamage / ((float) maxDamage*peicesWorn);
+
 				// 3 = helmet, deplets the fastest
 				// Dividing everything by 45 so max resistance is 3 (after this damage reduction gets ridiculous)
-				int armourVal = player.getCurrentArmor(3).getItemDamage()/45;
-																						
-				// Potion Effect Params: Resistance, duration, resistance multiplier, splash, particles
-				PotionEffect resistanceUp = new PotionEffect(11, 1, armourVal / 45, false, false); 
+				int armorVal = (int)(percentDamaged / 45);
 
-				if (armourVal >= 1)
+				// Potion Effect Params: Resistance, duration, resistance multiplier, splash, particles
+				// duration is set to 2 for invincible effects. I noticed some "unstableness" when it was set to 1
+				PotionEffect resistanceUp = new PotionEffect(11, 2, armorVal, false, false);
+				System.out.println(armorVal);
+
+				if (armorVal >= 1)
 				{
 					player.addPotionEffect(resistanceUp);
+				}
+
+				if (player.getHealth() < 2)
+				{
+					player.setHealth(20);
 				}
 			}
 			else if (player.isPotionActive(11))
@@ -54,7 +86,7 @@ public class ItemZaniteArmor extends ItemAetherArmor
 			}
 		}
 	}
-
+*/
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings("unchecked")
