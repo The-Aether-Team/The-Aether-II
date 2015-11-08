@@ -6,15 +6,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
-import com.gildedgames.util.core.nbt.NBT;
-import com.gildedgames.util.core.util.GGHelper;
-import com.gildedgames.util.instances.BlockPosDimension;
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.state.IBlockState;
@@ -33,6 +24,15 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
+import com.gildedgames.util.GGHelper;
+import com.gildedgames.util.core.nbt.NBT;
+import com.gildedgames.util.instances.BlockPosDimension;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 
 public class TeleporterAether extends Teleporter implements NBT
 {
