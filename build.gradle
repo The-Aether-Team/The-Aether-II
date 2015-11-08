@@ -23,7 +23,7 @@ task defineVersion {
 	def build = System.getenv().BUILD_NUMBER
 
 	if (build != null) {
-		version = "${config.mc_version}-${config.mod_version}.jenkins-${config.mod_version}"
+		version = "${config.mc_version}-${config.mod_version}-build${config.mod_version}"
 	} else {
 		version = "${config.mc_version}-${config.mod_version}"
 	}
