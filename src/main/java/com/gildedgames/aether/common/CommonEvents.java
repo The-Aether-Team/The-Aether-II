@@ -163,25 +163,4 @@ public class CommonEvents
 			event.setCanceled(true);
 		}
 	}
-
-	@SubscribeEvent
-	public void onLivingEntityHurt(LivingHurtEvent event)
-	{
-		if (event.entityLiving instanceof EntityPlayer && !event.source.isUnblockable())
-		{
-			EntityPlayer player = (EntityPlayer) event.entityLiving;
-
-			float dmgReduction = 0.0f;
-
-			for (ItemStack stack : player.inventory.armorInventory)
-			{
-				if (stack != null && stack.getItem() instanceof ItemZaniteArmor)
-				{
-					dmgReduction += ((float) stack.getItemDamage() / (float) stack.getMaxDamage()) * 0.8f;
-				}
-			}
-
-			event.ammount -= Math.min(event.ammount, dmgReduction);
-		}
-	}
 }

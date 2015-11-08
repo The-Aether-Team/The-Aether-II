@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
+import com.gildedgames.aether.common.player.PlayerAetherEventHandler;
 import com.gildedgames.aether.common.recipes.RecipesAether;
 import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
 import com.gildedgames.aether.common.world.WorldProviderAether;
@@ -42,7 +43,6 @@ public class CommonProxy
 
 		BlocksAether.preInit();
 		ItemsAether.preInit();
-		
 
 		TileEntitiesAether.preInit();
 		EntitiesAether.preInit();
@@ -53,6 +53,8 @@ public class CommonProxy
 	public void init(FMLInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new CommonEvents());
+		MinecraftForge.EVENT_BUS.register(new PlayerAetherEventHandler());
+
 		MinecraftForge.EVENT_BUS.register(ItemsAether.skyroot_sword);
 	}
 }

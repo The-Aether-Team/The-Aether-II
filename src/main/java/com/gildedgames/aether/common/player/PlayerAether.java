@@ -97,21 +97,4 @@ public class PlayerAether implements IPlayerHook
 	{
 		return this.playerProfile;
 	}
-	
-	public boolean wearingArmour(Item item)
-	{
-		for (int index = 0; index < 4; index++)
-		{
-			if ((this.player.inventory.armorInventory[index] != null))
-			{
-				Item armor = this.player.inventory.armorInventory[index].getItem();
-				if (armor == item)
-				{
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
 }

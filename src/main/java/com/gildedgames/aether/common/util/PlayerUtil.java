@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 
 public class PlayerUtil
 {
-
 	public static boolean isWearingFullSet(EntityPlayer player, Class<? extends Item> cls)
 	{
 		for (ItemStack stack : player.inventory.armorInventory)
@@ -19,5 +18,4 @@ public class PlayerUtil
 
 		return true;
 	}
-
 }
