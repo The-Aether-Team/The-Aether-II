@@ -3,6 +3,7 @@ package com.gildedgames.aether.common;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.armor.ItemZaniteArmor;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -13,6 +14,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -159,6 +161,27 @@ public class CommonEvents
 			}
 
 			event.setCanceled(true);
+		}
+	}
+
+	@SubscribeEvent
+	public void onLivingEntityHurt(LivingHurtEvent event)
+	{
+		if (event.entityLiving instanceof EntityPlayer && !event.source.isUnblockable())
+		{
+			EntityPlayer player = (EntityPlayer) event.entityLiving;
+
+			float dmgReduction = 0.0f;
+
+			for (ItemStack stack : player.inventory.armorInventory)
+			{
+				if (stack != null && stack.getItem() instanceof ItemZaniteArmor)
+				{
+					dmgReduction += ((float) stack.getItemDamage() / (float) stack.getMaxDamage()) * 0.8f;
+				}
+			}
+
+			event.ammount -= Math.min(event.ammount, dmgReduction);
 		}
 	}
 }
