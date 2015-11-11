@@ -1,9 +1,7 @@
 package com.gildedgames.aether.common.items.weapons;
 
-import java.util.List;
-
 import com.gildedgames.aether.common.AetherMaterials;
-
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,7 +10,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
+import java.util.List;
 
 public class ItemVampireBlade extends ItemSword
 {
@@ -39,7 +37,7 @@ public class ItemVampireBlade extends ItemSword
 	@SuppressWarnings("unchecked")
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced)
 	{
-		tooltip.add(EnumChatFormatting.BLUE + "Ability: " + EnumChatFormatting.WHITE + "Leeches life");
+		tooltip.add(String.format("%s: %s", EnumChatFormatting.BLUE + I18n.format("item.tooltip.ability"),
+				EnumChatFormatting.WHITE + I18n.format(this.getUnlocalizedName() + ".ability.desc")));
 	}
-
 }

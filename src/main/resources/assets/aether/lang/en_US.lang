@@ -148,6 +148,38 @@ item.pig_slayer.name=Pig Slayer
 item.vampire_blade.name=Vampire Blade
 item.skyroot_door_item.name=Skyroot Door
 
+# Weapon Tooltips
+item.skyroot_sword.ability.desc=Doubles drops from mobs
+item.holystone_sword.ability.desc=Chance to drop Ambrosium when attacking mobs
+item.zanite_sword.ability.desc=Becomes stronger as durability decreases
+item.gravitite_sword.ability.desc=Shifts gravity on mobs
+item.gravitite_sword.use.desc=Sneak while attacking
+item.holy_sword.ability.desc=Obliterates undead
+item.lightning_sword.ability.desc=Smites with lightning
+item.flaming_sword.ability.desc=Ignites mobs
+item.pig_slayer.ability.desc=Slaughters pigs
+item.vampire_blade.ability.desc=Leeches life
+
+# Tool tooltips
+item.tool.skyroot.ability.desc=Doubles drops from blocks
+item.tool.holystone.ability.desc=Chance to drop Ambrosium Shards while mining
+item.tool.zanite.ability.desc=Mines faster as durability decreases
+item.tool.gravitite.ability.desc=Shifts gravity on blocks
+item.tool.gravitite.use.desc=Right-Click block
+
+# Tooltips
+item.tooltip.ability=Ability
+item.tooltip.use=Use
+
+# Armor Tooltips
+item.armor.zanite.ability.desc=Becomes stronger as durability decreases
+item.armor.gravitite.ability.desc=Extended Jump
+item.armor.gravitite.use.desc=Sneak while jumping
+item.armor.obsidian.ability.desc=Extreme Protection
+item.armor.neptune.ability.desc=Breathe and walk underwater
+item.armor.phoenix.ability.desc=Fire Immunity
+item.armor.valkyrie.ability.desc=Wing Gliding
+
 # Records
 item.aether_record.moa.desc=Emile van Krieken - Approaches
 item.aether_record.aerwhale.desc=AetherAudio - Aerwhale

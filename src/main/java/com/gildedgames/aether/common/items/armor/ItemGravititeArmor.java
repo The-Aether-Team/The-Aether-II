@@ -1,25 +1,19 @@
 package com.gildedgames.aether.common.items.armor;
 
-import net.minecraft.entity.player.EntityPlayer;
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
 
 public class ItemGravititeArmor extends ItemAetherArmor
 {
-	public ItemGravititeArmor(EnumAetherArmorVariant material, int renderIndex, int armorType)
+	public ItemGravititeArmor(ArmorMaterial material, int armorType)
 	{
-		super(material, renderIndex, armorType);
+		super(material, "gravitite", armorType);
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	@SuppressWarnings("unchecked")
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced)
+	public boolean getIsRepairable(ItemStack target, ItemStack stack)
 	{
-		tooltip.add(EnumChatFormatting.BLUE + "Ability: " + EnumChatFormatting.WHITE + "Extended Jump");
+		return stack.getItem() == Item.getItemFromBlock(BlocksAether.enchanted_gravitite);
 	}
 }

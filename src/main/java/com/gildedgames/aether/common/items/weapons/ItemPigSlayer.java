@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.items.weapons;
 
 import com.gildedgames.aether.common.AetherMaterials;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.passive.EntityPig;
@@ -52,6 +53,7 @@ public class ItemPigSlayer extends ItemSword
 	@SuppressWarnings("unchecked")
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced)
 	{
-		tooltip.add(EnumChatFormatting.BLUE + "Ability: " + EnumChatFormatting.WHITE + "Slaughters pigs");
+		tooltip.add(String.format("%s: %s", EnumChatFormatting.BLUE + I18n.format("item.tooltip.ability"),
+				EnumChatFormatting.WHITE + I18n.format(this.getUnlocalizedName() + ".ability.desc")));
 	}
 }

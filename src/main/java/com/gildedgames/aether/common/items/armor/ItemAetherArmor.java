@@ -1,21 +1,27 @@
 package com.gildedgames.aether.common.items.armor;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.AetherCreativeTabs;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class ItemAetherArmor extends ItemArmor
 {
-	private EnumAetherArmorVariant armorVariant;
+	private final String name;
 
-	public ItemAetherArmor(EnumAetherArmorVariant material, int renderIndex, int armorType)
+	public ItemAetherArmor(ArmorMaterial material, String name, int armorType)
 	{
-		super(material.getArmorMaterial(), renderIndex, armorType);
+		super(material, 0, armorType);
 
-		this.armorVariant = material;
+		this.name = name;
 
 		this.setCreativeTab(AetherCreativeTabs.tabArmor);
 	}
@@ -23,12 +29,32 @@ public class ItemAetherArmor extends ItemArmor
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
 	{
-		return this.armorVariant.getResourceForSlot(slot);
+		return AetherCore.getResourcePath("textures/armor/" + this.name + "_layer_" + (slot == 2 ? 2 : 1) + ".png");
 	}
 
 	@Override
 	public boolean getIsRepairable(ItemStack target, ItemStack stack)
 	{
-		return this.armorVariant.getRepairItem() == stack.getItem();
+		return false;
+	}
+
+	protected boolean isAbilityPassive()
+	{
+		return true;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings("unchecked")
+	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced)
+	{
+		tooltip.add(EnumChatFormatting.BLUE + I18n.format("item.tooltip.ability") + ": " +
+				EnumChatFormatting.WHITE + I18n.format("item.armor." + this.name + ".ability.desc"));
+
+		if (!this.isAbilityPassive())
+		{
+			tooltip.add(EnumChatFormatting.DARK_AQUA + I18n.format("item.tooltip.use") + ": " +
+					EnumChatFormatting.WHITE + I18n.format("item.armor." + this.name + ".use.desc"));
+		}
 	}
 }

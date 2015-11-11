@@ -8,19 +8,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
-
-public class ItemElementalSword extends ItemSword
+public class ItemElementalSword extends ItemAetherSword
 {
 	public enum SwordElement
 	{
-		FIRE("Ignites mobs")
+		FIRE
 		{
 			@Override
 			public void onEntityAttacked(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
@@ -30,7 +24,7 @@ public class ItemElementalSword extends ItemSword
 				target.setFire(6 + (fireMultiplier * 4));
 			}
 		},
-		LIGHTNING("Smites with lightning")
+		LIGHTNING
 		{
 			@Override
 			public void onEntityAttacked(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
@@ -41,7 +35,7 @@ public class ItemElementalSword extends ItemSword
 				}
 			}
 		},
-		HOLY("Obliterates undead")
+		HOLY
 		{
 			@Override
 			public void onEntityAttacked(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
@@ -58,18 +52,6 @@ public class ItemElementalSword extends ItemSword
 				}
 			}
 		};
-
-		private final String abilityDesc;
-
-		SwordElement(String abilityDesc)
-		{
-			this.abilityDesc = abilityDesc;
-		}
-
-		public String getFormattedAbilityDesc()
-		{
-			return EnumChatFormatting.BLUE + "Ability: " + EnumChatFormatting.WHITE + this.abilityDesc;
-		}
 
 		public abstract void onEntityAttacked(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker);
 	}
@@ -105,13 +87,5 @@ public class ItemElementalSword extends ItemSword
 		}
 
 		return super.getDamageVsEntity();
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	@SuppressWarnings("unchecked")
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced)
-	{
-		tooltip.add(this.element.getFormattedAbilityDesc());
 	}
 }

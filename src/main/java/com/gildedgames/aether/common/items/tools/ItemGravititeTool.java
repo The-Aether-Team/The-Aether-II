@@ -5,20 +5,15 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
 
 public class ItemGravititeTool extends ItemAetherTool
 {
 	public ItemGravititeTool(EnumToolType toolType)
 	{
-		super(ToolMaterial.EMERALD, toolType);
+		super(ToolMaterial.EMERALD, "gravitite", toolType);
 
 		this.setHarvestLevel(toolType.getToolClass(), 3);
 	}
@@ -50,11 +45,8 @@ public class ItemGravititeTool extends ItemAetherTool
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	@SuppressWarnings("unchecked")
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced)
+	protected boolean isAbilityPassive()
 	{
-		tooltip.add(EnumChatFormatting.BLUE + "Ability: " + EnumChatFormatting.WHITE + "Shifts gravity on blocks");
-		tooltip.add(EnumChatFormatting.DARK_AQUA + "Use: " + EnumChatFormatting.WHITE + "Right-click block");
+		return true;
 	}
 }
