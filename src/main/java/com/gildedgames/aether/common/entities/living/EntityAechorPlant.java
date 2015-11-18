@@ -83,7 +83,10 @@ public class EntityAechorPlant extends EntityMob
 	}
 
 	@Override
-	public void knockBack(Entity p_70653_1_, float p_70653_2_, double p_70653_3_, double p_70653_5_) { }
+	public void knockBack(Entity entity, float distance, double x, double y) { }
+
+	@Override
+	public void moveEntity(double x, double y, double z) { }
 
 	@SideOnly(Side.CLIENT)
 	private void tickAnimation()
