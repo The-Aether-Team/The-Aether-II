@@ -24,7 +24,7 @@ public class ItemSkyrootSword extends ItemAetherSword
 		{
 			EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
 			
-			if (player.getHeldItem().getItem() == this)
+			if (player.getHeldItem() != null && player.getHeldItem().getItem() == this)
 			{	
 				BlockPos dyingPos = event.entityLiving.getPosition();				
 				List<ItemStack> stacks = new ArrayList<ItemStack>();
