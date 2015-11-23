@@ -1,0 +1,22 @@
+{
+	"variants": {
+		"facing=up": {
+			"model": "aether:ambrosium_torch/ambrosium_torch"
+		},
+		"facing=east":{
+			"model": "aether:ambrosium_torch/ambrosium_torch_wall"
+		},
+		"facing=south": {
+			"model": "aether:ambrosium_torch/ambrosium_torch_wall",
+			"y": 90
+		},
+		"facing=west": {
+			"model": "aether:ambrosium_torch/ambrosium_torch_wall",
+			"y": 180
+		},
+		"facing=north": {
+			"model": "aether:ambrosium_torch/ambrosium_torch_wall",
+			"y": 270
+		}
+	}
+}

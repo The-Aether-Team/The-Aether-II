@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.items.weapons.swords;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -26,7 +25,6 @@ public class ItemSkyrootSword extends ItemAetherSword
 			
 			if (player.getHeldItem() != null && player.getHeldItem().getItem() == this)
 			{	
-				BlockPos dyingPos = event.entityLiving.getPosition();				
 				List<ItemStack> stacks = new ArrayList<ItemStack>();
 
 				for (EntityItem item : event.drops)
@@ -36,7 +34,8 @@ public class ItemSkyrootSword extends ItemAetherSword
 				
 				for (ItemStack stack : stacks)
 				{	
-					EntityItem item = new EntityItem(event.entityLiving.getEntityWorld(), dyingPos.getX(), dyingPos.getY(), dyingPos.getZ(), stack);
+					EntityItem item = new EntityItem(event.entityLiving.getEntityWorld(), event.entity.posX, event.entity.posY, event.entity.posZ, stack);
+
 					event.entityLiving.getEntityWorld().spawnEntityInWorld(item);
 				}
 			}

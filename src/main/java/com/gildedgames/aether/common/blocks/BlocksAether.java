@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.blocks;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
+import com.gildedgames.aether.common.blocks.construction.BlockAmbrosiumTorch;
 import com.gildedgames.aether.common.blocks.construction.BlockQuicksoilGlass;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootChest;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootDoor;
@@ -101,6 +102,8 @@ public class BlocksAether
 
 	public static Block skyroot_chest;
 
+	public static Block ambrosium_torch;
+
 	public static void preInit()
 	{
 		aether_dirt = registerBlock("aether_dirt", new BlockSkyrootMinable(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f), AetherCreativeTabs.tabBlocks);
@@ -177,6 +180,8 @@ public class BlocksAether
 		skyroot_door = registerBlock("skyroot_door", new BlockSkyrootDoor());
 
 		skyroot_chest = registerBlock("skyroot_chest", new BlockSkyrootChest(), AetherCreativeTabs.tabBlocks);
+
+		ambrosium_torch = registerBlock("ambrosium_torch", new BlockAmbrosiumTorch(), AetherCreativeTabs.tabBlocks);
 
 		registerHarvestLevels();
 	}
