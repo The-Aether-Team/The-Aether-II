@@ -6,9 +6,15 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class BlockDungeon extends Block implements IAetherBlockWithVariants
 {
@@ -21,6 +27,15 @@ public class BlockDungeon extends Block implements IAetherBlockWithVariants
 	public BlockDungeon(Material material)
 	{
 		super(material);
+	}
+
+	@Override
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SideOnly(Side.CLIENT)
+	public void getSubBlocks(Item item, CreativeTabs tab, List list)
+	{
+		list.add(new ItemStack(item, 1, NORMAL));
+		list.add(new ItemStack(item, 1, DIVINE));
 	}
 
 	@Override
