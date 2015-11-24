@@ -27,7 +27,6 @@ public class ItemAetherArmorAbility
 	{
 		if (player.isInWater()) // if water is touching the player (excludes rain)
 		{
-			// movement speed boost needs to go here
 		}
 		if (player.isInsideOfMaterial(Material.water)) // if head is submerged
 		{
@@ -38,11 +37,11 @@ public class ItemAetherArmorAbility
 	}
 	private void obsidianArmorAbility(EntityPlayer player)
 	{
-		PotionEffect resistanceUp = new PotionEffect(Potion.resistance.getId(), 2, 2, false, false);
 		PotionEffect slowMovement = new PotionEffect(Potion.moveSlowdown.getId(), 2, 1, false, false);
 		
-		player.addPotionEffect(resistanceUp);
+		//Resistance is handled by a player event
 		player.addPotionEffect(slowMovement);
 		player.setSprinting(false);
 	}
+	
 }

@@ -1,8 +1,10 @@
 package com.gildedgames.aether.common.player;
 
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
+import com.gildedgames.aether.common.items.armor.ItemObsidianArmor;
 import com.gildedgames.aether.common.items.armor.ItemZaniteArmor;
 import com.gildedgames.aether.common.util.PlayerUtil;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -29,6 +31,10 @@ public class PlayerAetherEventHandler
 					if (stack != null && stack.getItem() instanceof ItemZaniteArmor)
 					{
 						dmgReduction += ((float) stack.getItemDamage() / (float) stack.getMaxDamage()) * 0.8f;
+					}
+					if (stack != null && stack.getItem() instanceof ItemObsidianArmor)
+					{
+						dmgReduction += (float)0.6;
 					}
 				}
 
