@@ -5,8 +5,8 @@ import net.minecraft.tileentity.TileEntityChest;
 public class TileEntitySkyrootChest extends TileEntityChest
 {
 	@Override
-	public String getCommandSenderName()
+	public String getName()
 	{
-		return this.hasCustomName() ? super.getCommandSenderName() : "container.skyroot_chest";
+		return this.hasCustomName() ? super.getName() : "container.skyroot_chest";
 	}
 }

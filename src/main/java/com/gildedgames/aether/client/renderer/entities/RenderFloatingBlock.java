@@ -53,9 +53,7 @@ public class RenderFloatingBlock extends Render
 					Tessellator tessellator = Tessellator.getInstance();
 
 					WorldRenderer worldRenderer = tessellator.getWorldRenderer();
-					worldRenderer.startDrawingQuads();
-					worldRenderer.setVertexFormat(DefaultVertexFormats.BLOCK);
-
+					worldRenderer.begin(7, DefaultVertexFormats.BLOCK);
 					int i = pos.getX();
 					int j = pos.getY();
 					int k = pos.getZ();

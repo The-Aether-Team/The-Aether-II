@@ -7,7 +7,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.0-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
     }
 }
 
@@ -19,29 +19,12 @@ version = config.mod_version
 group = 'com.gildedgames.aether'
 archivesBaseName = "AetherII"
 
-task defineVersion {
-	def build = System.getenv().BUILD_NUMBER
-
-	if (build != null) {
-		version = "${config.mc_version}-${config.mod_version}-build${config.mod_version}"
-	} else {
-		version = "${config.mc_version}-${config.mod_version}"
-	}
-}
-
-repositories {
-    maven {
-        name = "gildedgames"
-        url = "http://gilded-games.com/maven/"
-    }
-}
-
 dependencies {
-    compile "com.gildedgames.util:util:${config.ggutil_version}:dev"
+    compile project(":Gilded-Games-Util")
 }
 
 minecraft {
-    version = "${config.mc_version}-${config.forge_version}"
+    version = config.forge_version
     mappings = config.forge_mappings
 
     runDir = "run"

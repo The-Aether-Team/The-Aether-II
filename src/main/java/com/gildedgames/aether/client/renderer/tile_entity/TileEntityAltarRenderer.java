@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -70,7 +71,10 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer
 			GlStateManager.pushAttrib();
 
 			RenderHelper.enableStandardItemLighting();
-			itemRenderer.renderItemModel(entityItem.getEntityItem());
+
+			IBakedModel model = itemRenderer.getItemModelMesher().getItemModel(entityItem.getEntityItem());
+			itemRenderer.renderItem(entityItem.getEntityItem(), model);
+
 			RenderHelper.disableStandardItemLighting();
 
 			GlStateManager.popAttrib();

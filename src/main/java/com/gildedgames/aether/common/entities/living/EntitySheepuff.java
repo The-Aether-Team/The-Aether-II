@@ -26,7 +26,7 @@ public class EntitySheepuff extends EntitySheep
 	}
 
 	@Override
-	public EntityAgeable createChild(EntityAgeable ageable)
+	public EntitySheepuff createChild(EntityAgeable ageable)
 	{
 		return new EntitySheepuff(this.worldObj);
 	}

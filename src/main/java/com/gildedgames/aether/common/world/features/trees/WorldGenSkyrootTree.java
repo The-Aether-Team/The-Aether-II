@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.world.features.trees;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherPlant;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -11,19 +12,14 @@ import java.util.Random;
 
 public class WorldGenSkyrootTree extends WorldGenAbstractTree
 {
-	private final Block logBlock, leavesBlock;
+	private final IBlockState logState, leavesState;
 
-	private final int logMeta, leavesMeta;
-
-	public WorldGenSkyrootTree(Block logBlock, Block leavesBlock, int logMeta, int leavesMeta)
+	public WorldGenSkyrootTree(IBlockState logState, IBlockState leavesState)
 	{
 		super(true);
 
-		this.logBlock = logBlock;
-		this.leavesBlock = leavesBlock;
-
-		this.logMeta = logMeta;
-		this.leavesMeta = leavesMeta;
+		this.logState = logState;
+		this.leavesState = leavesState;
 	}
 
 	@Override
@@ -111,7 +107,7 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 
 									if (block.isAir(worldIn, pos) || block.isLeaves(worldIn, pos))
 									{
-										this.func_175905_a(worldIn, pos, this.leavesBlock, this.leavesMeta);
+										this.setBlockAndNotifyAdequately(worldIn, pos, this.leavesState);
 									}
 								}
 							}
@@ -125,7 +121,7 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 
 						if (block2.isAir(worldIn, upN) || block2.isLeaves(worldIn, upN))
 						{
-							this.func_175905_a(worldIn, position.up(l), this.logBlock, this.logMeta);
+							this.setBlockAndNotifyAdequately(worldIn, position.up(l), this.logState);
 						}
 					}
 

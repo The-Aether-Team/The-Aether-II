@@ -31,11 +31,11 @@ public class AetherBlockModels
 	 */
 	private static void registerStateMappers()
 	{
-		StateMap skyrootDoorMapper = new StateMap.Builder().addPropertiesToIgnore(BlockSkyrootDoor.POWERED).build();
-		StateMap skyrootChestMapper = new StateMap.Builder().addPropertiesToIgnore(BlockChest.FACING).build();
-		StateMap aetherSaplingMapper = new StateMap.Builder().addPropertiesToIgnore(BlockAetherSapling.PROPERTY_STAGE).build();
-		StateMap skyrootMinableMapper = new StateMap.Builder().addPropertiesToIgnore(BlockSkyrootMinable.PROPERTY_WAS_PLACED).build();
-		StateMap leavesMapper = new StateMap.Builder().addPropertiesToIgnore(BlockAetherLeaves.PROPERTY_CHECK_DECAY, BlockAetherLeaves.PROPERTY_DECAYABLE).build();
+		StateMap skyrootDoorMapper = new StateMap.Builder().ignore(BlockSkyrootDoor.POWERED).build();
+		StateMap skyrootChestMapper = new StateMap.Builder().ignore(BlockChest.FACING).build();
+		StateMap aetherSaplingMapper = new StateMap.Builder().ignore(BlockAetherSapling.PROPERTY_STAGE).build();
+		StateMap skyrootMinableMapper = new StateMap.Builder().ignore(BlockSkyrootMinable.PROPERTY_WAS_PLACED).build();
+		StateMap leavesMapper = new StateMap.Builder().ignore(BlockAetherLeaves.PROPERTY_CHECK_DECAY, BlockAetherLeaves.PROPERTY_DECAYABLE).build();
 
 		ModelLoader.setCustomStateMapper(BlocksAether.blue_skyroot_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.green_skyroot_leaves, leavesMapper);

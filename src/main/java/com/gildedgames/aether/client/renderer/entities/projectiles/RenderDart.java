@@ -8,14 +8,14 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import java.util.HashMap;
 
-public class RenderDart extends Render
+public class RenderDart extends Render<EntityDart>
 {
 	private static final HashMap<ItemDartType, ResourceLocation> dartTextures = new HashMap<ItemDartType, ResourceLocation>();
 
@@ -33,10 +33,8 @@ public class RenderDart extends Render
 	}
 
 	@Override
-	public void doRender(Entity entity, double posX, double posY, double posZ, float entityYaw, float partialTicks)
+	public void doRender(EntityDart dart, double posX, double posY, double posZ, float entityYaw, float partialTicks)
 	{
-		EntityDart dart = (EntityDart) entity;
-
 		this.bindEntityTexture(dart);
 
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -49,6 +47,8 @@ public class RenderDart extends Render
 		WorldRenderer worldrenderer = tessellator.getWorldRenderer();
 
 		byte b0 = 0;
+		float f = 0.0F;
+		float f1 = 0.5F;
 		float f2 = 0.0F;
 		float f3 = 0.5F;
 		float f4 = (float) (b0 * 10) / 32.0F;
@@ -73,20 +73,20 @@ public class RenderDart extends Render
 		GlStateManager.translate(-4.0F, 0.0F, 0.0F);
 		GL11.glNormal3f(scale, 0.0F, 0.0F);
 
-		worldrenderer.startDrawingQuads();
-		worldrenderer.addVertexWithUV(-7.0D, -2.0D, -2.0D, (double) f6, (double) f8);
-		worldrenderer.addVertexWithUV(-7.0D, -2.0D, 2.0D, (double) f7, (double) f8);
-		worldrenderer.addVertexWithUV(-7.0D, 2.0D, 2.0D, (double) f7, (double) f9);
-		worldrenderer.addVertexWithUV(-7.0D, 2.0D, -2.0D, (double) f6, (double) f9);
+		worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+		worldrenderer.pos(-7.0D, -2.0D, -2.0D).tex((double) f4, (double) f6).endVertex();
+		worldrenderer.pos(-7.0D, -2.0D, 2.0D).tex((double) f5, (double) f6).endVertex();
+		worldrenderer.pos(-7.0D, 2.0D, 2.0D).tex((double) f5, (double) f7).endVertex();
+		worldrenderer.pos(-7.0D, 2.0D, -2.0D).tex((double) f4, (double) f7).endVertex();
 		tessellator.draw();
 
 		GL11.glNormal3f(-scale, 0.0F, 0.0F);
 
-		worldrenderer.startDrawingQuads();
-		worldrenderer.addVertexWithUV(-7.0D, 2.0D, -2.0D, (double) f6, (double) f8);
-		worldrenderer.addVertexWithUV(-7.0D, 2.0D, 2.0D, (double) f7, (double) f8);
-		worldrenderer.addVertexWithUV(-7.0D, -2.0D, 2.0D, (double) f7, (double) f9);
-		worldrenderer.addVertexWithUV(-7.0D, -2.0D, -2.0D, (double) f6, (double) f9);
+		worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+		worldrenderer.pos(-7.0D, 2.0D, -2.0D).tex((double) f4, (double) f6).endVertex();
+		worldrenderer.pos(-7.0D, 2.0D, 2.0D).tex((double) f5, (double) f6).endVertex();
+		worldrenderer.pos(-7.0D, -2.0D, 2.0D).tex((double) f5, (double) f7).endVertex();
+		worldrenderer.pos(-7.0D, -2.0D, -2.0D).tex((double) f4, (double) f7).endVertex();
 		tessellator.draw();
 
 		for (int i = 0; i < 4; ++i)
@@ -94,11 +94,11 @@ public class RenderDart extends Render
 			GlStateManager.rotate(90.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glNormal3f(0.0F, 0.0F, scale);
 
-			worldrenderer.startDrawingQuads();
-			worldrenderer.addVertexWithUV(-8.0D, -2.0D, 0.0D, (double) f2, (double) f4);
-			worldrenderer.addVertexWithUV(8.0D, -2.0D, 0.0D, (double) f3, (double) f4);
-			worldrenderer.addVertexWithUV(8.0D, 2.0D, 0.0D, (double) f3, (double) f5);
-			worldrenderer.addVertexWithUV(-8.0D, 2.0D, 0.0D, (double) f2, (double) f5);
+			worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+			worldrenderer.pos(-8.0D, -2.0D, 0.0D).tex((double) f, (double) f2).endVertex();
+			worldrenderer.pos(8.0D, -2.0D, 0.0D).tex((double) f1, (double) f2).endVertex();
+			worldrenderer.pos(8.0D, 2.0D, 0.0D).tex((double) f1, (double) f3).endVertex();
+			worldrenderer.pos(-8.0D, 2.0D, 0.0D).tex((double) f, (double) f3).endVertex();
 			tessellator.draw();
 		}
 
@@ -109,8 +109,8 @@ public class RenderDart extends Render
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
+	protected ResourceLocation getEntityTexture(EntityDart dart)
 	{
-		return dartTextures.get(((EntityDart) entity).getDartType());
+		return dartTextures.get(dart.getDartType());
 	}
 }

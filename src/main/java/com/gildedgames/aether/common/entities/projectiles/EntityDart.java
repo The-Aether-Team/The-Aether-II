@@ -314,8 +314,8 @@ public class EntityDart extends Entity implements IProjectile
 
 							if (this.shootingEntity instanceof EntityLivingBase)
 							{
-								EnchantmentHelper.func_151384_a(entity, this.shootingEntity);
-								EnchantmentHelper.func_151385_b((EntityLivingBase) this.shootingEntity, entity);
+								EnchantmentHelper.applyThornEnchantments((EntityLivingBase) this.shootingEntity, entity);
+								EnchantmentHelper.applyArthropodEnchantments(entity, this.shootingEntity);
 							}
 
 							if (this.shootingEntity != null && raytrace.entityHit != this.shootingEntity && raytrace.entityHit instanceof EntityPlayer && this.shootingEntity instanceof EntityPlayerMP)

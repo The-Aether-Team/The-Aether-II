@@ -74,7 +74,7 @@ public class EntityFloatingBlock extends Entity
 
 			if (!this.worldObj.isRemote)
 			{
-				if (this.worldObj.getGameRules().getGameRuleBooleanValue("doTileDrops"))
+				if (this.worldObj.getGameRules().getBoolean("doTileDrops"))
 				{
 					IBlockState state = this.getBlockState();
 

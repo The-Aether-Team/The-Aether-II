@@ -30,6 +30,7 @@ import net.minecraftforge.event.entity.player.EntityInteractEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class CommonEvents
@@ -45,11 +46,13 @@ public class CommonEvents
 
 				final BlockPos pos = event.target.getBlockPos().offset(event.target.sideHit);
 
-				if (FluidContainerRegistry.getFluidForFilledItem(event.current).getFluidID() == FluidRegistry.WATER.getID())
+				FluidStack fluidStack = FluidContainerRegistry.getFluidForFilledItem(event.current);
+
+				if (fluidStack.getFluid().getID() == FluidRegistry.WATER.getID())
 				{
 					this.onWaterPlaced(event, player, pos);
 				}
-				else if (FluidContainerRegistry.getFluidForFilledItem(event.current).getFluidID() == FluidRegistry.LAVA.getID())
+				else if (fluidStack.getFluid().getID() == FluidRegistry.LAVA.getID())
 				{
 					this.onLavaPlaced(event, player, pos);
 				}

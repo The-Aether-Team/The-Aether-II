@@ -1,0 +1,3 @@
+[submodule "modules/Gilded-Games-Util"]
+	path = modules/Gilded-Games-Util
+	url = https://github.com/gildedgames/gilded-games-util.git
