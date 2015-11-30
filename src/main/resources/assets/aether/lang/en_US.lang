@@ -51,6 +51,7 @@ tile.holystone_brick.name=Holystone Brick
 tile.holystone_furnace.name=Holystone Furnace
 tile.quicksoil_glass.name=Quicksoil Glass
 tile.skyroot_chest.name=Skyroot Chest
+tile.ambrosium_torch.name=Ambrosium Torch
 
 # Aether Items
 item.skyroot_stick.name=Skyroot Stick
