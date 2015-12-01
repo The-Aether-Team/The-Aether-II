@@ -15,6 +15,9 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 ext.config = loadConfig(file('build.properties'))
 
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
 version = config.mod_version
 group = 'com.gildedgames.aether'
 archivesBaseName = "AetherII"
