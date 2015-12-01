@@ -25,7 +25,7 @@ public class AetherCore
 
 	public static final String MOD_VERSION = "1.8-1.0";
 
-	@Instance
+	@Instance(AetherCore.MOD_ID)
 	public static AetherCore INSTANCE;
 
 	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.common.CommonProxy")
