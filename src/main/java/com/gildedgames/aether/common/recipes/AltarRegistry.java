@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class AltarRegistry
 {
-	private ArrayList<IAltarRecipe> altarRecipes = new ArrayList<IAltarRecipe>();
+	private ArrayList<IAltarRecipe> altarRecipes = new ArrayList<>();
 
 	public void addRecipe(IAltarRecipe recipe)
 	{

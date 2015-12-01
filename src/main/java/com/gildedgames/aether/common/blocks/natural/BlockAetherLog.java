@@ -96,7 +96,7 @@ public class BlockAetherLog extends BlockSkyrootMinable
 			break;
 		}
 
-		if ((Boolean) state.getValue(PROPERTY_WAS_PLACED))
+		if (state.getValue(PROPERTY_WAS_PLACED))
 		{
 			meta |= 8;
 		}

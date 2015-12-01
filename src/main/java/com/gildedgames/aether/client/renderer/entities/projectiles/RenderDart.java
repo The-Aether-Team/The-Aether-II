@@ -17,7 +17,7 @@ import java.util.HashMap;
 
 public class RenderDart extends Render<EntityDart>
 {
-	private static final HashMap<ItemDartType, ResourceLocation> dartTextures = new HashMap<ItemDartType, ResourceLocation>();
+	private static final HashMap<ItemDartType, ResourceLocation> dartTextures = new HashMap<>();
 
 	static
 	{
@@ -55,8 +55,6 @@ public class RenderDart extends Render<EntityDart>
 		float f5 = (float) (5 + b0 * 10) / 32.0F;
 		float f6 = 0.0F;
 		float f7 = 0.15625F;
-		float f8 = (float) (5 + b0 * 10) / 32.0F;
-		float f9 = (float) (10 + b0 * 10) / 32.0F;
 		float scale = 0.05625F;
 		float shakeAmount = (float) dart.getDartShake() - partialTicks;
 

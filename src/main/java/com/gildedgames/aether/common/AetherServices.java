@@ -18,7 +18,7 @@ public class AetherServices
 	{
 		this.side = side;
 
-		this.playerHookPool = new PlayerHookPool<PlayerAether>(AetherCore.MOD_ID, new PlayerAetherHookFactory(), side);
+		this.playerHookPool = new PlayerHookPool<>(AetherCore.MOD_ID, new PlayerAetherHookFactory(), side);
 	}
 
 	public IPlayerHookPool<PlayerAether> getPool()

@@ -16,7 +16,7 @@ public class PropertyVariant implements IProperty
 	protected PropertyVariant(String name, BlockVariant... variants)
 	{
 		this.name = name;
-		this.metaMap = new HashMap<Integer, BlockVariant>();
+		this.metaMap = new HashMap<>();
 
 		this.defaultVariant = variants[0];
 

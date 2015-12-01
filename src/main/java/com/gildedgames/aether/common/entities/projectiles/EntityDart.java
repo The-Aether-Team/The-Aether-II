@@ -520,7 +520,7 @@ public class EntityDart extends Entity implements IProjectile
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound tagCompound)
 	{
-		ResourceLocation blockName = (ResourceLocation) Block.blockRegistry.getNameForObject(this.inBlock);
+		ResourceLocation blockName = Block.blockRegistry.getNameForObject(this.inBlock);
 
 		tagCompound.setShort("xTile", (short) this.xTile);
 		tagCompound.setShort("yTile", (short) this.yTile);

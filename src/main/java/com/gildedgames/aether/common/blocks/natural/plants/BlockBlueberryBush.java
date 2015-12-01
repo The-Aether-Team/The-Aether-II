@@ -59,7 +59,7 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IAetherBlock
 	@Override
 	public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity tileEntity)
 	{
-		if ((Boolean) state.getValue(PROPERTY_HARVESTABLE))
+		if (state.getValue(PROPERTY_HARVESTABLE))
 		{
 			world.setBlockState(pos, state.withProperty(PROPERTY_HARVESTABLE, false));
 
@@ -92,7 +92,7 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IAetherBlock
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
 	{
-		if (!((Boolean) state.getValue(PROPERTY_HARVESTABLE)))
+		if (!state.getValue(PROPERTY_HARVESTABLE))
 		{
 			if (world.getLight(pos) >= 9)
 			{
@@ -143,7 +143,7 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IAetherBlock
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return (Boolean) state.getValue(PROPERTY_HARVESTABLE) ? BERRY_BUSH_RIPE : BERRY_BUSH_STEM;
+		return state.getValue(PROPERTY_HARVESTABLE) ? BERRY_BUSH_RIPE : BERRY_BUSH_STEM;
 	}
 
 	@Override

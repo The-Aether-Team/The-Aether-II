@@ -6,11 +6,9 @@ import com.gildedgames.aether.common.entities.living.EntityAechorPlant;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderAechorPlant extends RenderLiving
+public class RenderAechorPlant extends RenderLiving<EntityAechorPlant>
 {
 	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/aechor_plant/aechor_plant.png");
 
@@ -20,25 +18,23 @@ public class RenderAechorPlant extends RenderLiving
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entity, float partialTicks)
+	protected void preRenderCallback(EntityAechorPlant plant, float partialTicks)
 	{
-		EntityAechorPlant aechorPlant = (EntityAechorPlant) entity;
-
-		float f1 = (float) Math.sin(aechorPlant.sinage);
+		float f1 = (float) Math.sin(plant.sinage);
 		float f3;
 
-		if (aechorPlant.hurtTime > 0)
+		if (plant.hurtTime > 0)
 		{
 			f1 *= 0.45F;
 			f1 -= 0.125F;
-			f3 = 1.75F + ((float) Math.sin(aechorPlant.sinage + 2.0F) * 1.5F);
+			f3 = 1.75F + ((float) Math.sin(plant.sinage + 2.0F) * 1.5F);
 		}
 		else
 		{
-			if (aechorPlant.canSeePrey())
+			if (plant.canSeePrey())
 			{
 				f1 *= 0.25F;
-				f3 = 1.75F + ((float) Math.sin(aechorPlant.sinage + 2.0F) * 1.5F);
+				f3 = 1.75F + ((float) Math.sin(plant.sinage + 2.0F) * 1.5F);
 			}
 			else
 			{
@@ -52,14 +48,14 @@ public class RenderAechorPlant extends RenderLiving
 		model.sinage = f1;
 		model.sinage2 = f3;
 
-		float f2 = 0.625F + ((float) aechorPlant.getPlantSize() / 6F);
+		float f2 = 0.625F + ((float) plant.getPlantSize() / 6F);
 
 		model.size = f2;
 		this.shadowSize = f2 - 0.25F;
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
+	protected ResourceLocation getEntityTexture(EntityAechorPlant entity)
 	{
 		return texture;
 	}

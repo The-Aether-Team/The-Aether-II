@@ -22,7 +22,6 @@ import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
-import com.gildedgames.aether.common.world.biome.BiomeGenAetherBase;
 
 public class ChunkProviderAether implements IChunkProvider
 {
@@ -388,7 +387,7 @@ public class ChunkProviderAether implements IChunkProvider
 	}
 
 	@Override
-	public List getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos)
+	public List<BiomeGenBase.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos)
 	{
 		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(pos);
 

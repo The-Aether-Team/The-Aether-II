@@ -79,9 +79,9 @@ public class BlockHolystoneFurnace extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
-		if ((Boolean) state.getValue(PROPERTY_IS_LIT))
+		if (state.getValue(PROPERTY_IS_LIT))
 		{
-			EnumFacing facing = ((EnumFacing) state.getValue(PROPERTY_FACING)).getOpposite();
+			EnumFacing facing = state.getValue(PROPERTY_FACING).getOpposite();
 
 			double x = pos.getX() + 0.5D;
 			double y = pos.getY() + rand.nextDouble() * 6.0D / 16.0D + 0.125D;
@@ -132,15 +132,15 @@ public class BlockHolystoneFurnace extends BlockContainer
 	@Override
 	public int getLightValue(IBlockAccess world, BlockPos pos)
 	{
-		return (Boolean) world.getBlockState(pos).getValue(PROPERTY_IS_LIT) ? 13 : 0;
+		return world.getBlockState(pos).getValue(PROPERTY_IS_LIT) ? 13 : 0;
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		int meta = ((EnumFacing) state.getValue(PROPERTY_FACING)).getIndex();
+		int meta = state.getValue(PROPERTY_FACING).getIndex();
 
-		if ((Boolean) state.getValue(PROPERTY_IS_LIT))
+		if (state.getValue(PROPERTY_IS_LIT))
 		{
 			meta |= 8;
 		}

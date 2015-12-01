@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderFlyingCow extends RenderLiving
+public class RenderFlyingCow extends RenderLiving<EntityFlyingCow>
 {
 	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/flying_cow/flying_cow.png");
 
@@ -23,8 +23,8 @@ public class RenderFlyingCow extends RenderLiving
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
+	protected ResourceLocation getEntityTexture(EntityFlyingCow entity)
 	{
-		return ((EntityFlyingCow) entity).isSaddled() ? saddledTexture : texture;
+		return entity.isSaddled() ? saddledTexture : texture;
 	}
 }

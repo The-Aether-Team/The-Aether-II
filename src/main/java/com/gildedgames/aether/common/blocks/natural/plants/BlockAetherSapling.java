@@ -117,7 +117,7 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta() | ((Integer) state.getValue(PROPERTY_STAGE) << 3);
+		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta() | (state.getValue(PROPERTY_STAGE) << 3);
 	}
 
 	@Override
@@ -141,7 +141,7 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	@Override
 	public void grow(World world, Random rand, BlockPos pos, IBlockState state)
 	{
-		if ((Integer) state.getValue(PROPERTY_STAGE) == 0)
+		if (state.getValue(PROPERTY_STAGE) == 0)
 		{
 			world.setBlockState(pos, state.cycleProperty(PROPERTY_STAGE), 4);
 		}

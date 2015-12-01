@@ -11,16 +11,14 @@ import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityAltarRenderer extends TileEntitySpecialRenderer
+public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntityAltar>
 {
 	private double radius = 0.5, theta = 5, alpha = 0;
 
 	@Override
-	public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float p_180535_8_, int p_180535_9_)
+	public void renderTileEntityAt(TileEntityAltar altar, double x, double y, double z, float p_180535_8_, int p_180535_9_)
 	{
-		TileEntityAltar altar = (TileEntityAltar) tileEntity;
 		ItemStack stack = altar.getStackOnAltar();
 
 		GlStateManager.pushMatrix();

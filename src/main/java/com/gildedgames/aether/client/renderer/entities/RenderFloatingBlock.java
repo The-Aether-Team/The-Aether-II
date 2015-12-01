@@ -13,12 +13,11 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.model.IBakedModel;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class RenderFloatingBlock extends Render
+public class RenderFloatingBlock extends Render<EntityFloatingBlock>
 {
 	public RenderFloatingBlock(RenderManager renderManager)
 	{
@@ -28,10 +27,8 @@ public class RenderFloatingBlock extends Render
 	}
 
 	@Override
-	public void doRender(Entity entity, double x, double y, double z, float entityYaw, float partialTicks)
+	public void doRender(EntityFloatingBlock floatingBlock, double x, double y, double z, float entityYaw, float partialTicks)
 	{
-		EntityFloatingBlock floatingBlock = (EntityFloatingBlock) entity;
-
 		if (floatingBlock.getBlockState() != null)
 		{
 			this.bindTexture(TextureMap.locationBlocksTexture);
@@ -82,7 +79,7 @@ public class RenderFloatingBlock extends Render
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
+	protected ResourceLocation getEntityTexture(EntityFloatingBlock entity)
 	{
 		return TextureMap.locationBlocksTexture;
 	}

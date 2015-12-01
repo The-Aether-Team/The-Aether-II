@@ -25,8 +25,8 @@ public class EntityAechorPlant extends EntityMob
 	{
 		super(worldIn);
 
-		this.tasks.addTask(0, new AechorPlantAI(this, true));
-		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		this.tasks.addTask(0, new AechorPlantAI(this));
+		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
 		this.setSize(0.75F + (this.getPlantSize() * 0.125F), 0.5F + (this.getPlantSize() * 0.075F));
 

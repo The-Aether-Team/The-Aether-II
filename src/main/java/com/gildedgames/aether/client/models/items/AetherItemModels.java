@@ -28,7 +28,7 @@ import java.util.Map;
 
 public class AetherItemModels
 {
-	private static HashMap<Item, ItemModelList> models = new HashMap<Item, ItemModelList>();
+	private static HashMap<Item, ItemModelList> models = new HashMap<>();
 
 	public static void preInit()
 	{

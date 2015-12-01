@@ -4,9 +4,9 @@ import net.minecraft.item.ItemStack;
 
 public class ItemNeptuneArmor extends ItemAetherArmor
 {
-	public ItemNeptuneArmor(ArmorMaterial material, int armorType)
+	public ItemNeptuneArmor(int armorType)
 	{
-		super(material, "neptune", armorType);
+		super(ArmorMaterial.DIAMOND, "neptune", armorType);
 	}
 	@Override
 	public boolean getIsRepairable(ItemStack target, ItemStack stack)

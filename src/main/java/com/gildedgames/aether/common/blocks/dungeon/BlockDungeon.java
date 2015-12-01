@@ -43,7 +43,7 @@ public class BlockDungeon extends Block implements IAetherBlockWithVariants
 	{
 		IBlockState state = world.getBlockState(pos);
 
-		return state.getBlock() == this && (Boolean) state.getValue(PROPERTY_IS_DIVINE) ? -1.0f : this.blockHardness;
+		return state.getBlock() == this && state.getValue(PROPERTY_IS_DIVINE) ? -1.0f : this.blockHardness;
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class BlockDungeon extends Block implements IAetherBlockWithVariants
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return (Boolean) state.getValue(PROPERTY_IS_DIVINE) ? DIVINE : NORMAL;
+		return state.getValue(PROPERTY_IS_DIVINE) ? DIVINE : NORMAL;
 	}
 
 	@Override

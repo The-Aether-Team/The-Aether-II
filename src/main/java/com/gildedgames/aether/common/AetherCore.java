@@ -35,7 +35,7 @@ public class AetherCore
 
 	public static Logger LOGGER;
 
-	private final SidedObject<AetherServices> services = new SidedObject<AetherServices>(new AetherServices(Side.CLIENT), new AetherServices(Side.SERVER));
+	private final SidedObject<AetherServices> services = new SidedObject<>(new AetherServices(Side.CLIENT), new AetherServices(Side.SERVER));
 
 	private static TeleporterAether teleporter;
 

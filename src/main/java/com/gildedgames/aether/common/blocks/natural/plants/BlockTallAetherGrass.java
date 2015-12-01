@@ -41,7 +41,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	@Override
 	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
 	{
-		List<ItemStack> drops = new java.util.ArrayList<ItemStack>();
+		List<ItemStack> drops = new java.util.ArrayList<>();
 		drops.add(item);
 
 		return drops;

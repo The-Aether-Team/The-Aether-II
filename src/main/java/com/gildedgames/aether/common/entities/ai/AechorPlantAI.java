@@ -9,9 +9,9 @@ public class AechorPlantAI extends EntityAITarget
 {
 	private int ticksUntilAttack = 3;
 
-	public AechorPlantAI(EntityCreature creature, boolean checkSight)
+	public AechorPlantAI(EntityCreature creature)
 	{
-		super(creature, checkSight);
+		super(creature, true);
 	}
 
 	@Override

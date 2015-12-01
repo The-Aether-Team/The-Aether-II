@@ -30,7 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockAetherPortal extends BlockBreakable
 {
 	public static final PropertyEnum PROPERTY_AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class,
-			new EnumFacing.Axis[] { EnumFacing.Axis.X, EnumFacing.Axis.Z });
+			EnumFacing.Axis.X, EnumFacing.Axis.Z);
 
 	public BlockAetherPortal()
 	{

@@ -46,7 +46,7 @@ public class BlockAmbrosiumOre extends Block implements ISkyrootMinable
 	@Override
 	public Collection<ItemStack> getAdditionalDrops(World world, BlockPos pos, IBlockState state, EntityLivingBase living)
 	{
-		Collection<ItemStack> drops = new ArrayList<ItemStack>();
+		Collection<ItemStack> drops = new ArrayList<>();
 		drops.add(new ItemStack(this.getItemDropped(state, world.rand, EnchantmentHelper.getFortuneModifier(living))));
 
 		return drops;

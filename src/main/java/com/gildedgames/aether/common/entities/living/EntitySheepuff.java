@@ -14,18 +14,6 @@ public class EntitySheepuff extends EntitySheep
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound compound)
-	{
-		super.writeEntityToNBT(compound);
-	}
-
-	@Override
-	public void readEntityFromNBT(NBTTagCompound compound)
-	{
-		super.readEntityFromNBT(compound);
-	}
-
-	@Override
 	public EntitySheepuff createChild(EntityAgeable ageable)
 	{
 		return new EntitySheepuff(this.worldObj);

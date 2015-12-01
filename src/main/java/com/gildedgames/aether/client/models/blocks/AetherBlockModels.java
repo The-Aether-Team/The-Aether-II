@@ -10,6 +10,7 @@ import com.gildedgames.aether.common.blocks.util.BlockSkyrootMinable;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
@@ -62,14 +63,14 @@ public class AetherBlockModels
 			@Override
 			protected ModelResourceLocation getModelResourceLocation(IBlockState state)
 			{
-				LinkedHashMap mappings = Maps.newLinkedHashMap(state.getProperties());
+				LinkedHashMap<IProperty, Comparable> mappings = Maps.newLinkedHashMap(state.getProperties());
 
 				if (state.getValue(BlockAercloud.PROPERTY_VARIANT) != BlockAercloud.PURPLE_AERCLOUD)
 				{
 					mappings.remove(BlockAercloud.PROPERTY_FACING);
 				}
 
-				ResourceLocation resource = (ResourceLocation) Block.blockRegistry.getNameForObject(state.getBlock());
+				ResourceLocation resource = Block.blockRegistry.getNameForObject(state.getBlock());
 
 				return new ModelResourceLocation(resource, this.getPropertyString(mappings));
 			}
@@ -80,18 +81,18 @@ public class AetherBlockModels
 			@Override
 			protected ModelResourceLocation getModelResourceLocation(IBlockState state)
 			{
-				LinkedHashMap mappings = Maps.newLinkedHashMap(state.getProperties());
+				LinkedHashMap<IProperty, Comparable> mappings = Maps.newLinkedHashMap(state.getProperties());
 
-				if ((Boolean) state.getValue(BlockOrangeTree.PROPERTY_IS_TOP_BLOCK))
+				if (state.getValue(BlockOrangeTree.PROPERTY_IS_TOP_BLOCK))
 				{
-					if ((Integer) state.getValue(BlockOrangeTree.PROPERTY_STAGE) < 3)
+					if (state.getValue(BlockOrangeTree.PROPERTY_STAGE) < 3)
 					{
 						mappings.remove(BlockOrangeTree.PROPERTY_IS_TOP_BLOCK);
 						mappings.remove(BlockOrangeTree.PROPERTY_STAGE);
 					}
 				}
 
-				ResourceLocation resourceLocation = (ResourceLocation) Block.blockRegistry.getNameForObject(state.getBlock());
+				ResourceLocation resourceLocation = Block.blockRegistry.getNameForObject(state.getBlock());
 
 				return new ModelResourceLocation(resourceLocation, this.getPropertyString(mappings));
 			}

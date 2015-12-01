@@ -67,7 +67,7 @@ public class ItemSkyrootBucket extends Item
 					IBlockState state = world.getBlockState(pos);
 					Material material = state.getBlock().getMaterial();
 
-					if (material == Material.water && (Integer) state.getValue(BlockLiquid.LEVEL) == 0)
+					if (material == Material.water && state.getValue(BlockLiquid.LEVEL) == 0)
 					{
 						world.setBlockToAir(pos);
 						player.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);

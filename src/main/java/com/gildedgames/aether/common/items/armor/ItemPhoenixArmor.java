@@ -2,9 +2,9 @@ package com.gildedgames.aether.common.items.armor;
 
 public class ItemPhoenixArmor extends ItemAetherArmor
 {
-	public ItemPhoenixArmor(ArmorMaterial material, int armorType)
+	public ItemPhoenixArmor(int armorType)
 	{
-		super(material, "phoenix", armorType);
+		super(ArmorMaterial.DIAMOND, "phoenix", armorType);
 	}
 	
 }
