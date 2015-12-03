@@ -9,6 +9,8 @@ import com.gildedgames.aether.common.recipes.RecipesAether;
 import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
 import com.gildedgames.aether.common.world.WorldProviderAether;
 import com.gildedgames.util.player.PlayerCore;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
@@ -56,5 +58,17 @@ public class CommonProxy
 		MinecraftForge.EVENT_BUS.register(new PlayerAetherEventHandler());
 
 		MinecraftForge.EVENT_BUS.register(ItemsAether.skyroot_sword);
+	}
+
+	public void spawnJumpParticles(EntityPlayer player)
+	{
+		for (int i = 0; i < 16; i++)
+		{
+			double x = player.posX + (player.worldObj.rand.nextFloat() * player.width * 2.5f) - (player.width * 1.25f);
+			double y = player.posY + (player.worldObj.rand.nextFloat() * 0.2f) - 0.2f;
+			double z = player.posZ + (player.worldObj.rand.nextFloat() * player.width * 2.5f) - (player.width * 1.25f);
+
+			player.worldObj.spawnParticle(EnumParticleTypes.CLOUD, x, y, z, 0.0D, 0.06D, 0.0D);
+		}
 	}
 }

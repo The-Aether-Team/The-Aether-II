@@ -1,16 +1,21 @@
 package com.gildedgames.aether.common.player;
 
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
-import com.gildedgames.aether.common.items.armor.ItemObsidianArmor;
-import com.gildedgames.aether.common.items.armor.ItemZaniteArmor;
+import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.util.PlayerUtil;
-
+import net.minecraft.block.material.Material;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class PlayerAetherEventHandler
@@ -24,35 +29,37 @@ public class PlayerAetherEventHandler
 
 			if (!event.source.isUnblockable())
 			{
-				float dmgReduction = 0.0f;
-
-				for (ItemStack stack : player.inventory.armorInventory)
-				{
-					if (stack != null && stack.getItem() instanceof ItemZaniteArmor)
-					{
-						dmgReduction += ((float) stack.getItemDamage() / (float) stack.getMaxDamage()) * 0.8f;
-					}
-					if (stack != null && stack.getItem() instanceof ItemObsidianArmor)
-					{
-						dmgReduction += (float)0.6;
-					}
-				}
-
-				event.ammount -= Math.min(event.ammount, dmgReduction);
+				event.ammount = this.applyArmorDamageReduction(player, event.ammount);
 			}
 		}
 	}
 
+	private float applyArmorDamageReduction(EntityPlayer player, float damage)
+	{
+		for (ItemStack stack : player.inventory.armorInventory)
+		{
+			if (stack != null && stack.getItem() instanceof ItemAetherArmor)
+			{
+				damage -= ((ItemAetherArmor) stack.getItem()).getExtraDamageReduction(stack);
+			}
+		}
+
+		return damage;
+	}
+
 	@SubscribeEvent
-	public void onLivingAttacked(LivingAttackEvent event)
+	public void onPlayerFall(LivingFallEvent event)
 	{
 		if (event.entityLiving instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
 
-			if (event.source == DamageSource.fall && PlayerUtil.isWearingFullSet(player, ItemGravititeArmor.class))
+			if (PlayerUtil.isWearingFullSet(player, ItemGravititeArmor.class))
 			{
-				event.setCanceled(true);
+				if (event.distance <= 5.0f)
+				{
+					event.setCanceled(true);
+				}
 			}
 		}
 	}
@@ -64,9 +71,33 @@ public class PlayerAetherEventHandler
 		{
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
 
-			if (player.isSneaking() && PlayerUtil.isWearingFullSet(player, ItemGravititeArmor.class))
+			Class<? extends Item> fullSet = PlayerUtil.findArmorSet(player);
+
+			if (fullSet == ItemGravititeArmor.class)
 			{
-				player.motionY += 0.5F;
+				if (player.isSneaking())
+				{
+					player.motionY += 0.5F;
+
+					AetherCore.PROXY.spawnJumpParticles(player);
+				}
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public void onCalculateBreakSpeed(BreakSpeed event)
+	{
+		if (event.entityLiving instanceof EntityPlayer)
+		{
+			EntityPlayer player = (EntityPlayer) event.entityLiving;
+
+			if (PlayerUtil.isWearingFullSet(player, ItemNeptuneArmor.class))
+			{
+				if (!EnchantmentHelper.getAquaAffinityModifier(player) && player.isInsideOfMaterial(Material.water))
+				{
+					event.newSpeed = event.originalSpeed * 5.0f;
+				}
 			}
 		}
 	}

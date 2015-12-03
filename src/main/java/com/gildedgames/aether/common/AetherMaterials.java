@@ -14,7 +14,7 @@ public class AetherMaterials
 
 	public static void preInit()
 	{
-		OBSIDIAN_ARMOR = EnumHelper.addArmorMaterial("aether_obsidian", "", 33, new int[] { 2, 6, 5, 2 }, 8);
+		OBSIDIAN_ARMOR = EnumHelper.addArmorMaterial("aether_obsidian", "", 33, new int[] { 4, 7, 6, 2 }, 8);
 
 		VALKYRIE_ARMOR = EnumHelper.addArmorMaterial("aether_valkyrie", "", 30, new int[] { 2, 6, 5, 2 }, 10);
 
