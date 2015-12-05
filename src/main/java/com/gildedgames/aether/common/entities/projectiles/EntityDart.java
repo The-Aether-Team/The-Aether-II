@@ -61,6 +61,41 @@ public class EntityDart extends Entity implements IProjectile
 		this.setSize(0.5F, 0.5F);
 	}
 
+
+	public EntityDart(World world, EntityLivingBase shooter, EntityLivingBase prey, float fromHeight, float damage)
+	{
+		super(world);
+
+		this.renderDistanceWeight = 10.0D;
+		this.shootingEntity = shooter;
+
+		if (shooter instanceof EntityPlayer)
+		{
+			this.canPickup = 1;
+		}
+
+		this.posY = shooter.posY + (double)shooter.getEyeHeight() - 0.1D;
+		double d0 = prey.posX - shooter.posX;
+		double d1 = prey.getEntityBoundingBox().minY + (double)(prey.height / 3.0F) - this.posY;
+		double d2 = prey.posZ - shooter.posZ;
+		double d3 = (double)MathHelper.sqrt_double(d0 * d0 + d2 * d2);
+
+		if (d3 >= 1.0E-7D)
+		{
+			float f = (float)(MathHelper.func_181159_b(d2, d0) * 180.0D / Math.PI) - 90.0F;
+			float f1 = (float)(-(MathHelper.func_181159_b(d1, d3) * 180.0D / Math.PI));
+
+			double d4 = d0 / d3;
+			double d5 = d2 / d3;
+
+			float f2 = (float)(d3 * 0.2D);
+
+			this.setLocationAndAngles(shooter.posX + d4, this.posY, shooter.posZ + d5, f, f1);
+			this.setThrowableHeading(d0, d1 + (double)f2, d2, fromHeight, damage);
+		}
+	}
+
+
 	public EntityDart(World worldIn, EntityLivingBase shooter, float velocity)
 	{
 		this(worldIn);

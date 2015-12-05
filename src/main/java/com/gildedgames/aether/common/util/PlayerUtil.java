@@ -36,4 +36,28 @@ public class PlayerUtil
 
 		return armorClass;
 	}
+
+	public static void fillBucketInHand(EntityPlayer player, ItemStack fillBucket)
+	{
+		ItemStack stack = player.getHeldItem();
+
+		if (stack.stackSize == 1)
+		{
+			player.inventory.setInventorySlotContents(player.inventory.currentItem, fillBucket);
+		}
+		else
+		{
+			if (!player.capabilities.isCreativeMode)
+			{
+				stack.stackSize--;
+
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, stack);
+			}
+
+			if (!player.inventory.addItemStackToInventory(fillBucket))
+			{
+				player.dropPlayerItemWithRandomChoice(fillBucket, false);
+			}
+		}
+	}
 }

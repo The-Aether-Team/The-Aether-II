@@ -1,16 +1,14 @@
 package com.gildedgames.aether.common;
 
-import java.util.Random;
-
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.armor.ItemZaniteArmor;
+import com.gildedgames.aether.common.util.PlayerUtil;
 import com.gildedgames.util.universe.common.util.TeleporterGeneric;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -25,13 +23,14 @@ import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.Random;
 
 public class CommonEvents
 {
@@ -172,17 +171,13 @@ public class CommonEvents
 	@SubscribeEvent
 	public void onPlayerInteract(EntityInteractEvent event)
 	{
-		final ItemStack itemstack = event.entityPlayer.inventory.getCurrentItem();
-
-		if (itemstack != null && itemstack.getItem() == ItemsAether.skyroot_bucket && !event.entityPlayer.capabilities.isCreativeMode)
+		if (event.target instanceof EntityCow && !((EntityCow) event.target).isChild())
 		{
-			if (itemstack.stackSize-- == 1)
+			final ItemStack stack = event.entityPlayer.inventory.getCurrentItem();
+
+			if (stack != null && stack.getItem() == ItemsAether.skyroot_bucket)
 			{
-				event.entityPlayer.inventory.setInventorySlotContents(event.entityPlayer.inventory.currentItem, new ItemStack(ItemsAether.skyroot_milk_bucket));
-			}
-			else if (!event.entityPlayer.inventory.addItemStackToInventory(new ItemStack(ItemsAether.skyroot_milk_bucket)))
-			{
-				event.entityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(ItemsAether.skyroot_milk_bucket, 1, 0), false);
+				PlayerUtil.fillBucketInHand(event.entityPlayer, new ItemStack(ItemsAether.skyroot_milk_bucket));
 			}
 		}
 	}

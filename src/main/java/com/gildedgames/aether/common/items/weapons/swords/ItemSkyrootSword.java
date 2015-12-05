@@ -40,6 +40,5 @@ public class ItemSkyrootSword extends ItemAetherSword
 				}
 			}
 		}
-		
 	}
 }

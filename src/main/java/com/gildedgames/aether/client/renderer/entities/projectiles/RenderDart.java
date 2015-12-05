@@ -39,64 +39,67 @@ public class RenderDart extends Render<EntityDart>
 
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.pushMatrix();
+
 		GlStateManager.translate((float) posX, (float) posY, (float) posZ);
 		GlStateManager.rotate(dart.prevRotationYaw + (dart.rotationYaw - dart.prevRotationYaw) * partialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(dart.prevRotationPitch + (dart.rotationPitch - dart.prevRotationPitch) * partialTicks, 0.0F, 0.0F, 1.0F);
 
 		Tessellator tessellator = Tessellator.getInstance();
-		WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+		WorldRenderer renderer = tessellator.getWorldRenderer();
 
-		byte b0 = 0;
+		int i = 0;
 		float f = 0.0F;
 		float f1 = 0.5F;
-		float f2 = 0.0F;
-		float f3 = 0.5F;
-		float f4 = (float) (b0 * 10) / 32.0F;
-		float f5 = (float) (5 + b0 * 10) / 32.0F;
-		float f6 = 0.0F;
-		float f7 = 0.15625F;
-		float scale = 0.05625F;
-		float shakeAmount = (float) dart.getDartShake() - partialTicks;
+		float f2 = (float) (i * 10) / 32.0F;
+		float f3 = (float) (5 + i * 10) / 32.0F;
+		float f4 = 0.0F;
+		float f5 = 0.15625F;
+		float f6 = (float) (5 + i * 10) / 32.0F;
+		float f7 = (float) (10 + i * 10) / 32.0F;
+		float f8 = 0.05625F;
+		float f9 = (float) dart.getDartShake() - partialTicks;
 
 		GlStateManager.enableRescaleNormal();
 
-		if (shakeAmount > 0.0F)
+		if (f9 > 0.0F)
 		{
-			float shakeAngle = -MathHelper.sin(shakeAmount * 3.0F) * shakeAmount;
-			GlStateManager.rotate(shakeAngle, 0.0F, 0.0F, 1.0F);
+			float f10 = -MathHelper.sin(f9 * 3.0F) * f9;
+
+			GlStateManager.rotate(f10, 0.0F, 0.0F, 1.0F);
 		}
 
 		GlStateManager.rotate(45.0F, 1.0F, 0.0F, 0.0F);
-		GlStateManager.scale(scale, scale, scale);
+		GlStateManager.scale(f8, f8, f8);
 		GlStateManager.translate(-4.0F, 0.0F, 0.0F);
-		GL11.glNormal3f(scale, 0.0F, 0.0F);
 
-		worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-		worldrenderer.pos(-7.0D, -2.0D, -2.0D).tex((double) f4, (double) f6).endVertex();
-		worldrenderer.pos(-7.0D, -2.0D, 2.0D).tex((double) f5, (double) f6).endVertex();
-		worldrenderer.pos(-7.0D, 2.0D, 2.0D).tex((double) f5, (double) f7).endVertex();
-		worldrenderer.pos(-7.0D, 2.0D, -2.0D).tex((double) f4, (double) f7).endVertex();
+		GL11.glNormal3f(f8, 0.0F, 0.0F);
+		renderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+		renderer.pos(-7.0D, -2.0D, -2.0D).tex((double) f4, (double) f6).endVertex();
+		renderer.pos(-7.0D, -2.0D, 2.0D).tex((double) f5, (double) f6).endVertex();
+		renderer.pos(-7.0D, 2.0D, 2.0D).tex((double) f5, (double) f7).endVertex();
+		renderer.pos(-7.0D, 2.0D, -2.0D).tex((double) f4, (double) f7).endVertex();
 		tessellator.draw();
 
-		GL11.glNormal3f(-scale, 0.0F, 0.0F);
+		GL11.glNormal3f(-f8, 0.0F, 0.0F);
+		renderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+		renderer.pos(-7.0D, 2.0D, -2.0D).tex((double) f4, (double) f6).endVertex();
+		renderer.pos(-7.0D, 2.0D, 2.0D).tex((double) f5, (double) f6).endVertex();
+		renderer.pos(-7.0D, -2.0D, 2.0D).tex((double) f5, (double) f7).endVertex();
+		renderer.pos(-7.0D, -2.0D, -2.0D).tex((double) f4, (double) f7).endVertex();
 
-		worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-		worldrenderer.pos(-7.0D, 2.0D, -2.0D).tex((double) f4, (double) f6).endVertex();
-		worldrenderer.pos(-7.0D, 2.0D, 2.0D).tex((double) f5, (double) f6).endVertex();
-		worldrenderer.pos(-7.0D, -2.0D, 2.0D).tex((double) f5, (double) f7).endVertex();
-		worldrenderer.pos(-7.0D, -2.0D, -2.0D).tex((double) f4, (double) f7).endVertex();
 		tessellator.draw();
 
-		for (int i = 0; i < 4; ++i)
+		for (int j = 0; j < 4; ++j)
 		{
 			GlStateManager.rotate(90.0F, 1.0F, 0.0F, 0.0F);
-			GL11.glNormal3f(0.0F, 0.0F, scale);
+			GL11.glNormal3f(0.0F, 0.0F, f8);
 
-			worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-			worldrenderer.pos(-8.0D, -2.0D, 0.0D).tex((double) f, (double) f2).endVertex();
-			worldrenderer.pos(8.0D, -2.0D, 0.0D).tex((double) f1, (double) f2).endVertex();
-			worldrenderer.pos(8.0D, 2.0D, 0.0D).tex((double) f1, (double) f3).endVertex();
-			worldrenderer.pos(-8.0D, 2.0D, 0.0D).tex((double) f, (double) f3).endVertex();
+			renderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+			renderer.pos(-8.0D, -2.0D, 0.0D).tex((double) f, (double) f2).endVertex();
+			renderer.pos(8.0D, -2.0D, 0.0D).tex((double) f1, (double) f2).endVertex();
+			renderer.pos(8.0D, 2.0D, 0.0D).tex((double) f1, (double) f3).endVertex();
+			renderer.pos(-8.0D, 2.0D, 0.0D).tex((double) f, (double) f3).endVertex();
+
 			tessellator.draw();
 		}
 

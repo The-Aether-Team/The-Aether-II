@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.entities.living.mounts;
 
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.util.PlayerUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -14,6 +16,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -75,6 +78,35 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 	protected Item getDropItem()
 	{
 		return this.isBurning() ? Items.cooked_beef : Items.beef;
+	}
+
+	@Override
+	public boolean interact(EntityPlayer player)
+	{
+		ItemStack stack = player.inventory.getCurrentItem();
+
+		if (!this.isChild() && stack != null)
+		{
+			ItemStack fillStack = null;
+
+			if (stack.getItem() == Items.bucket)
+			{
+				fillStack = new ItemStack(Items.milk_bucket);
+			}
+			else if (stack.getItem() == ItemsAether.skyroot_bucket)
+			{
+				fillStack = new ItemStack(ItemsAether.skyroot_milk_bucket);
+			}
+
+			if (fillStack != null)
+			{
+				PlayerUtil.fillBucketInHand(player, fillStack);
+			}
+
+			return true;
+		}
+
+		return super.interact(player);
 	}
 
 	@Override
