@@ -64,6 +64,9 @@ public class ItemAetherArmor extends ItemArmor
 			{
 				armorAbility = new ItemAetherArmorAbility(player, 3);
 			}
+			if (player.inventory.armorInventory[0] != null && player.inventory.armorInventory[0].getItem().getClass() == ItemSentryBoots.class) {
+				armorAbility = new ItemAetherArmorAbility(player, 4);
+			}
 		}
 	}
 
