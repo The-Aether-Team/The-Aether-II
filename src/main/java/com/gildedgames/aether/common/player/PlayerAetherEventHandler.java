@@ -79,7 +79,7 @@ public class PlayerAetherEventHandler
 				{
 					player.motionY += 0.5F;
 
-					AetherCore.PROXY.spawnJumpParticles(player);
+					AetherCore.PROXY.spawnJumpParticles(player.worldObj, player.posX, player.posY, player.posZ, 0.2D, 12);
 				}
 			}
 		}

@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.entities;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.living.EntityAechorPlant;
+import com.gildedgames.aether.common.entities.living.EntityAerbunny;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
 import com.gildedgames.aether.common.entities.living.EntitySheepuff;
@@ -20,6 +21,7 @@ public class EntitiesAether
 		registerLivingEntity(EntityFlyingCow.class, "flying_cow", 0xCCFFFF, 0x0066CC);
 		registerLivingEntity(EntitySheepuff.class, "sheepuff", 0xCCFFFF, 0xCCCCFF);
 		registerLivingEntity(EntityAechorPlant.class, "aechor_plant", 0xCCFFFF, 0xC88FE3);
+		registerLivingEntity(EntityAerbunny.class, "aerbunny", 0xCCFFFF, 0x0066CC);
 
 		EntityRegistry.registerModEntity(EntityFloatingBlock.class, "floating_block", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityDart.class, "dart", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);

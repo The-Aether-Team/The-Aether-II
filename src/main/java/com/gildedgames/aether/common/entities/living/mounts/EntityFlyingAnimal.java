@@ -1,16 +1,12 @@
 package com.gildedgames.aether.common.entities.living.mounts;
 
-import net.minecraft.entity.passive.EntityAnimal;
+import com.gildedgames.aether.common.entities.living.EntityAetherAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public abstract class EntityFlyingAnimal extends EntityAnimal
+public abstract class EntityFlyingAnimal extends EntityAetherAnimal
 {
 	public float wingFold, wingAngle;
 
@@ -91,20 +87,9 @@ public abstract class EntityFlyingAnimal extends EntityAnimal
 	}
 
 	@Override
-	protected Item getDropItem()
-	{
-		return this.isBurning() ? Items.cooked_porkchop : Items.porkchop;
-	}
-
-	@Override
 	protected void dropFewItems(boolean p_70628_1_, int looting)
 	{
-		int amount = this.rand.nextInt(3) + 1 + this.rand.nextInt(1 + looting);
-
-		for (int count = 0; count < amount; ++count)
-		{
-			this.dropItem(this.getDropItem(), 1);
-		}
+		super.dropFewItems(p_70628_1_, looting);
 
 		this.dropSaddle();
 	}
@@ -116,7 +101,6 @@ public abstract class EntityFlyingAnimal extends EntityAnimal
 			this.dropItem(Items.saddle, 1);
 		}
 	}
-
 
 	public boolean isSaddled()
 	{
