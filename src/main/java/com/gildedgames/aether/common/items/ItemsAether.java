@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.items.armor.ItemObsidianArmor;
 import com.gildedgames.aether.common.items.armor.ItemPhoenixArmor;
+import com.gildedgames.aether.common.items.armor.ItemSentryBoots;
 import com.gildedgames.aether.common.items.armor.ItemValkyrieArmor;
 import com.gildedgames.aether.common.items.armor.ItemZaniteArmor;
 import com.gildedgames.aether.common.items.consumables.ItemAmbrosiumShard;
@@ -30,10 +31,10 @@ import com.gildedgames.aether.common.items.weapons.swords.ItemGravititeSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemHolystoneSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemZaniteSword;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemDoor;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -67,6 +68,8 @@ public class ItemsAether
 	public static Item phoenix_helmet, phoenix_chestplate, phoenix_leggings, phoenix_boots;
 
 	public static Item valkyrie_helmet, valkyrie_chestplate, valkyrie_leggings, valkyrie_boots;
+	
+	public static Item sentry_boots;
 
 	public static Item golden_amber;
 
@@ -148,6 +151,8 @@ public class ItemsAether
 		valkyrie_chestplate = registerItem("valkyrie_chestplate", new ItemValkyrieArmor(AetherMaterials.VALKYRIE_ARMOR, 1));
 		valkyrie_leggings = registerItem("valkyrie_leggings", new ItemValkyrieArmor(AetherMaterials.VALKYRIE_ARMOR, 2));
 		valkyrie_boots = registerItem("valkyrie_boots", new ItemValkyrieArmor(AetherMaterials.VALKYRIE_ARMOR, 3));
+		
+		sentry_boots = registerItem("sentry_boots", new ItemSentryBoots(AetherMaterials.LEGENDARY_ARMOR, 3));
 
 		golden_amber = registerItem("golden_amber", new Item(), AetherCreativeTabs.tabMaterials);
 

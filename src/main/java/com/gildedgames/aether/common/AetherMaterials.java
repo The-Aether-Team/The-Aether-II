@@ -9,6 +9,8 @@ public class AetherMaterials
 	public static ArmorMaterial OBSIDIAN_ARMOR;
 
 	public static ArmorMaterial VALKYRIE_ARMOR;
+	
+	public static ArmorMaterial LEGENDARY_ARMOR;
 
 	public static ToolMaterial LEGENDARY_TOOL;
 
@@ -17,6 +19,8 @@ public class AetherMaterials
 		OBSIDIAN_ARMOR = EnumHelper.addArmorMaterial("aether_obsidian", "", 33, new int[] { 4, 7, 6, 2 }, 8);
 
 		VALKYRIE_ARMOR = EnumHelper.addArmorMaterial("aether_valkyrie", "", 30, new int[] { 2, 6, 5, 2 }, 10);
+		
+		LEGENDARY_ARMOR = EnumHelper.addArmorMaterial("aether_legendary_armor", "", 30, new int[] { 2, 6, 5, 2 }, 10);
 
 		LEGENDARY_TOOL = EnumHelper.addToolMaterial("aether_legendary", 2, 1000, 8.0F, 2.0F, 14);
 	}

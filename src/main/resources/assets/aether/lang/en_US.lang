@@ -98,6 +98,7 @@ item.valkyrie_helmet.name=Valkyrie Helmet
 item.valkyrie_chestplate.name=Valkyrie Chestplate
 item.valkyrie_leggings.name=Valkyrie Leggings
 item.valkyrie_boots.name=Valkyrie Boots
+item.sentry_boots.name=Sentry Boots
 item.golden_amber.name=Golden Amber
 item.blueberry.name=Blueberry
 item.orange.name=Orange
@@ -180,6 +181,7 @@ item.armor.obsidian.ability.desc=Extreme Protection
 item.armor.neptune.ability.desc=Breathe and walk underwater
 item.armor.phoenix.ability.desc=Fire Immunity
 item.armor.valkyrie.ability.desc=Wing Gliding
+item.armor.sentry_boots.ability.desc=Reduces Falling Damage
 
 # Records
 item.aether_record.moa.desc=Emile van Krieken - Approaches

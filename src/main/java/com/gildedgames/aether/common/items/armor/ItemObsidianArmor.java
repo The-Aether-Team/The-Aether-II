@@ -7,7 +7,7 @@ public class ItemObsidianArmor extends ItemAetherArmor
 {
 	public ItemObsidianArmor(ArmorMaterial material, int armorType)
 	{
-		super(material, "obsidian", armorType);
+		super(material, "aether_obsidian", armorType);
 	}
 
 	@Override
