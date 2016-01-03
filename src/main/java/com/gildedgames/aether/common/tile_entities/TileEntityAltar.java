@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.tile_entities;
 
+import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.recipes.RecipesAether;
 import com.gildedgames.aether.common.recipes.altar.IAltarRecipe;
@@ -10,12 +11,30 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityAltar extends TileEntity
+public class TileEntityAltar extends TileEntity implements ITickable
 {
+	@SideOnly(Side.CLIENT)
+	public double animationTicks, prevAnimationTicks;
+
 	private ItemStack stackOnAltar;
 
 	private int ambrosiumCount;
+
+	@Override
+	public void update()
+	{
+		if (this.worldObj.isRemote)
+		{
+			this.prevAnimationTicks = this.animationTicks;
+
+			this.animationTicks++;
+		}
+	}
 
 	public ItemStack getStackOnAltar()
 	{
@@ -95,6 +114,11 @@ public class TileEntityAltar extends TileEntity
 	public EntityItem createEntityItemAboveAltar(ItemStack stack)
 	{
 		return new EntityItem(this.getWorld(), this.getPos().getX() + 0.5D, this.getPos().getY() + 1.1D, this.getPos().getZ() + 0.5D, stack);
+	}
+
+	public EnumFacing getFacing()
+	{
+		return this.worldObj.getBlockState(this.pos).getValue(BlockAltar.PROPERTY_FACING);
 	}
 
 	@Override

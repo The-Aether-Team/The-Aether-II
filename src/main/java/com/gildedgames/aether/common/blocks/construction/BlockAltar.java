@@ -6,7 +6,10 @@ import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -16,6 +19,8 @@ import net.minecraft.world.World;
 
 public class BlockAltar extends Block implements ITileEntityProvider
 {
+	public static final PropertyDirection PROPERTY_FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+
 	public BlockAltar()
 	{
 		super(Material.rock);
@@ -23,15 +28,35 @@ public class BlockAltar extends Block implements ITileEntityProvider
 		this.setHardness(2.0f);
 
 		this.setStepSound(Block.soundTypeStone);
+
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_FACING, EnumFacing.NORTH));
 	}
 
 	@Override
-	public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity tileEntity)
+	public void breakBlock(World world, BlockPos pos, IBlockState state)
 	{
-		TileEntityAltar altar = (TileEntityAltar) tileEntity;
+		TileEntityAltar altar = (TileEntityAltar) world.getTileEntity(pos);
 		altar.dropContents();
 
-		super.harvestBlock(world, player, pos, state, tileEntity);
+		super.breakBlock(world, pos, state);
+	}
+
+	@Override
+	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	{
+		return this.getDefaultState().withProperty(PROPERTY_FACING, placer.getHorizontalFacing());
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		return this.getDefaultState().withProperty(PROPERTY_FACING, EnumFacing.getHorizontal(meta));
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return state.getValue(PROPERTY_FACING).getIndex();
 	}
 
 	@Override
@@ -126,5 +151,11 @@ public class BlockAltar extends Block implements ITileEntityProvider
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TileEntityAltar();
+	}
+
+	@Override
+	protected BlockState createBlockState()
+	{
+		return new BlockState(this, PROPERTY_FACING);
 	}
 }
