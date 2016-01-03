@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "aether:items/armor/obsidian_boots"
+		"layer0": "aether:items/armor/sentry_boots"
 	},
 	"display": {
 		"thirdperson": {

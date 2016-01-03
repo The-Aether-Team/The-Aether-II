@@ -82,8 +82,8 @@ public class EntityDart extends Entity implements IProjectile
 
 		if (d3 >= 1.0E-7D)
 		{
-			float f = (float)(MathHelper.func_181159_b(d2, d0) * 180.0D / Math.PI) - 90.0F;
-			float f1 = (float)(-(MathHelper.func_181159_b(d1, d3) * 180.0D / Math.PI));
+			float f = (float)(MathHelper.atan2(d2, d0) * 180.0D / Math.PI) - 90.0F;
+			float f1 = (float)(-(MathHelper.atan2(d1, d3) * 180.0D / Math.PI));
 
 			double d4 = d0 / d3;
 			double d5 = d2 / d3;

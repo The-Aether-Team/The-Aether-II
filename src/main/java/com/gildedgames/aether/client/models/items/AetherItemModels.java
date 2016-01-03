@@ -180,6 +180,8 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.valkyrie_leggings, new ItemModelList("armor/").add(0, "valkyrie_leggings"));
 		registerItemModels(ItemsAether.valkyrie_boots, new ItemModelList("armor/").add(0, "valkyrie_boots"));
 
+		registerItemModels(ItemsAether.sentry_boots, new ItemModelList("armor/").add(0, "sentry_boots"));
+
 		registerItemModels(ItemsAether.blueberry, new ItemModelList().add(0, "blueberry"));
 		registerItemModels(ItemsAether.orange, new ItemModelList().add(0, "orange"));
 		registerItemModels(ItemsAether.healing_stone, new ItemModelList().add(0, "healing_stone"));

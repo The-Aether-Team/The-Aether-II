@@ -60,4 +60,19 @@ public class PlayerUtil
 			}
 		}
 	}
+
+	public static boolean wearingArmor(EntityPlayer player, int slot, Item item)
+	{
+		ItemStack stack = player.inventory.armorInventory[slot];
+
+		if (stack != null)
+		{
+			if (stack.getItem() ==  item)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
 }

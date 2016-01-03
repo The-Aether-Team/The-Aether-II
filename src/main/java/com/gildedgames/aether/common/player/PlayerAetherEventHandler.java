@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.player;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
@@ -60,6 +61,13 @@ public class PlayerAetherEventHandler
 				{
 					event.setCanceled(true);
 				}
+			}
+			else if (PlayerUtil.wearingArmor(player, 0, ItemsAether.sentry_boots))
+			{
+				event.setCanceled(true);
+
+				// un-comment to divide fall damage rather then cancel
+				//event.damageMultiplier /= 3;
 			}
 		}
 	}
