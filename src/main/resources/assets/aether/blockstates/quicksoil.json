@@ -1,7 +1,10 @@
 {
 	"variants": {
-		"normal": {
-			"model": "aether:quicksoil"
-		}
+		"normal": [
+			{ "model": "aether:quicksoil" },
+			{ "model": "aether:quicksoil", "y": 90 },
+			{ "model": "aether:quicksoil", "y": 180 },
+			{ "model": "aether:quicksoil", "y": 270 }
+		]
 	}
 }
