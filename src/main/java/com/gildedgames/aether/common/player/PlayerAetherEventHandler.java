@@ -55,19 +55,10 @@ public class PlayerAetherEventHandler
 		{
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
 
-			if (PlayerUtil.isWearingFullSet(player, ItemGravititeArmor.class))
-			{
-				if (event.distance <= 5.0f)
-				{
-					event.setCanceled(true);
-				}
-			}
-			else if (PlayerUtil.wearingArmor(player, 0, ItemsAether.sentry_boots))
+			if (PlayerUtil.wearingArmor(player, 0, ItemsAether.sentry_boots) || PlayerUtil.isWearingFullSet(player, ItemGravititeArmor.class))
 			{
 				event.setCanceled(true);
 
-				// un-comment to divide fall damage rather then cancel
-				//event.damageMultiplier /= 3;
 			}
 		}
 	}
@@ -85,7 +76,7 @@ public class PlayerAetherEventHandler
 			{
 				if (player.isSneaking())
 				{
-					player.motionY += 0.5F;
+					player.motionY += 0.55F;
 
 					AetherCore.PROXY.spawnJumpParticles(player.worldObj, player.posX, player.posY, player.posZ, 0.2D, 12);
 				}
