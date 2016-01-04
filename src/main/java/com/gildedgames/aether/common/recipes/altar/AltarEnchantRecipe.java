@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.recipes.altar;
 
 import net.minecraft.item.ItemStack;
 
-public class AltarSimpleRecipe implements IAltarRecipe
+public class AltarEnchantRecipe implements IAltarRecipe
 {
 	private final int ambrosiumNeeded;
 
@@ -10,7 +10,7 @@ public class AltarSimpleRecipe implements IAltarRecipe
 
 	private final ItemStack input;
 
-	public AltarSimpleRecipe(int ambrosiumNeeded, ItemStack input, ItemStack output)
+	public AltarEnchantRecipe(int ambrosiumNeeded, ItemStack input, ItemStack output)
 	{
 		this.ambrosiumNeeded = ambrosiumNeeded;
 
