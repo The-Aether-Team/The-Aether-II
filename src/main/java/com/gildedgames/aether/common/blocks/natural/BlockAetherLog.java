@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.blocks.util.BlockSkyrootMinable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
@@ -13,7 +12,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockAetherLog extends BlockSkyrootMinable
+public class BlockAetherLog extends Block
 {
 	public static final PropertyEnum PROPERTY_AXIS = PropertyEnum.create("axis", BlockLog.EnumAxis.class);
 
@@ -25,7 +24,7 @@ public class BlockAetherLog extends BlockSkyrootMinable
 
 		this.setHardness(2.0f);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.Y).withProperty(PROPERTY_WAS_PLACED, Boolean.FALSE));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.Y));
 	}
 
 	@Override
@@ -73,9 +72,7 @@ public class BlockAetherLog extends BlockSkyrootMinable
 			break;
 		}
 
-		boolean wasPlaced = (meta & 8) == 8;
-
-		return this.getDefaultState().withProperty(PROPERTY_AXIS, axis).withProperty(PROPERTY_WAS_PLACED, wasPlaced);
+		return this.getDefaultState().withProperty(PROPERTY_AXIS, axis);
 	}
 
 	@Override
@@ -94,11 +91,6 @@ public class BlockAetherLog extends BlockSkyrootMinable
 		case Z:
 			meta |= 3;
 			break;
-		}
-
-		if (state.getValue(PROPERTY_WAS_PLACED))
-		{
-			meta |= 8;
 		}
 
 		return meta;
@@ -125,6 +117,6 @@ public class BlockAetherLog extends BlockSkyrootMinable
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, PROPERTY_AXIS, PROPERTY_WAS_PLACED);
+		return new BlockState(this, PROPERTY_AXIS);
 	}
 }

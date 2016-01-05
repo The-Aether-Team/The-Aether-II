@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.blocks.util.BlockSkyrootMinable;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
@@ -20,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class BlockHolystone extends BlockSkyrootMinable implements IAetherBlockWithVariants
+public class BlockHolystone extends Block implements IAetherBlockWithVariants
 {
 	public static final BlockVariant
 			NORMAL_HOLYSTONE = new BlockVariant(0, "normal"),
@@ -37,7 +36,7 @@ public class BlockHolystone extends BlockSkyrootMinable implements IAetherBlockW
 
 		this.setStepSound(Block.soundTypeStone);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, NORMAL_HOLYSTONE).withProperty(PROPERTY_WAS_PLACED, Boolean.FALSE));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, NORMAL_HOLYSTONE));
 	}
 
 	@Override
@@ -81,26 +80,19 @@ public class BlockHolystone extends BlockSkyrootMinable implements IAetherBlockW
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta & 7)).withProperty(PROPERTY_WAS_PLACED, (meta & 8) == 8);
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta & 7));
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		int meta = ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
-
-		if (state.getValue(PROPERTY_WAS_PLACED) == Boolean.TRUE)
-		{
-			meta |= 8;
-		}
-
-		return meta;
+		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
 	}
 
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, PROPERTY_VARIANT, PROPERTY_WAS_PLACED);
+		return new BlockState(this, PROPERTY_VARIANT);
 	}
 
 	@Override

@@ -6,7 +6,6 @@ import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
-import com.gildedgames.aether.common.blocks.util.BlockSkyrootMinable;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
@@ -35,7 +34,6 @@ public class AetherBlockModels
 		StateMap skyrootDoorMapper = new StateMap.Builder().ignore(BlockSkyrootDoor.POWERED).build();
 		StateMap skyrootChestMapper = new StateMap.Builder().ignore(BlockChest.FACING).build();
 		StateMap aetherSaplingMapper = new StateMap.Builder().ignore(BlockAetherSapling.PROPERTY_STAGE).build();
-		StateMap skyrootMinableMapper = new StateMap.Builder().ignore(BlockSkyrootMinable.PROPERTY_WAS_PLACED).build();
 		StateMap leavesMapper = new StateMap.Builder().ignore(BlockAetherLeaves.PROPERTY_CHECK_DECAY, BlockAetherLeaves.PROPERTY_DECAYABLE).build();
 
 		ModelLoader.setCustomStateMapper(BlocksAether.blue_skyroot_leaves, leavesMapper);
@@ -44,13 +42,6 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.golden_oak_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.purple_crystal_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.purple_fruit_leaves, leavesMapper);
-
-		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_log, skyrootMinableMapper);
-		ModelLoader.setCustomStateMapper(BlocksAether.golden_oak_log, skyrootMinableMapper);
-		ModelLoader.setCustomStateMapper(BlocksAether.aether_grass, skyrootMinableMapper);
-		ModelLoader.setCustomStateMapper(BlocksAether.aether_dirt, skyrootMinableMapper);
-		ModelLoader.setCustomStateMapper(BlocksAether.holystone, skyrootMinableMapper);
-		ModelLoader.setCustomStateMapper(BlocksAether.quicksoil, skyrootMinableMapper);
 
 		ModelLoader.setCustomStateMapper(BlocksAether.aether_sapling, aetherSaplingMapper);
 

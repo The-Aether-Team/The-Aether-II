@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.player.PlayerAetherEventHandler;
 import com.gildedgames.aether.common.recipes.RecipesAether;
 import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
 import com.gildedgames.aether.common.world.WorldProviderAether;
+import com.gildedgames.aether.common.world.chunk.PlacementFlagWorldHandler;
 import com.gildedgames.util.player.PlayerCore;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
@@ -60,6 +61,8 @@ public class CommonProxy
 	{
 		MinecraftForge.EVENT_BUS.register(new CommonEvents());
 		MinecraftForge.EVENT_BUS.register(new PlayerAetherEventHandler());
+
+		MinecraftForge.EVENT_BUS.register(PlacementFlagWorldHandler.INSTANCE);
 
 		MinecraftForge.EVENT_BUS.register(ItemsAether.skyroot_sword);
 	}

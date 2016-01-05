@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
-import com.gildedgames.aether.common.blocks.util.BlockSkyrootMinable;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
@@ -22,7 +21,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
-public class BlockAetherGrass extends BlockSkyrootMinable implements IAetherBlockWithVariants, IGrowable
+public class BlockAetherGrass extends Block implements IAetherBlockWithVariants, IGrowable
 {
 	public static final BlockVariant
 			AETHER_GRASS = new BlockVariant(0, "normal"),
@@ -39,7 +38,7 @@ public class BlockAetherGrass extends BlockSkyrootMinable implements IAetherBloc
 		this.setHardness(0.5F);
 		this.setTickRandomly(true);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, AETHER_GRASS).withProperty(PROPERTY_WAS_PLACED, Boolean.FALSE));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, AETHER_GRASS));
 	}
 
 	@Override
@@ -76,7 +75,6 @@ public class BlockAetherGrass extends BlockSkyrootMinable implements IAetherBloc
 								world.getLightFromNeighbors(randomNeighbor.up()) >= 4 && neighborBlock.getLightOpacity(world, randomNeighbor.up()) <= 2)
 						{
 							IBlockState grassState = this.getDefaultState().withProperty(PROPERTY_VARIANT, AETHER_GRASS);
-							grassState.withProperty(PROPERTY_WAS_PLACED, neighborState.getValue(PROPERTY_WAS_PLACED));
 
 							world.setBlockState(randomNeighbor, grassState);
 						}
@@ -97,28 +95,19 @@ public class BlockAetherGrass extends BlockSkyrootMinable implements IAetherBloc
 	{
 		BlockVariant variant = PROPERTY_VARIANT.fromMeta(meta & 7);
 
-		boolean wasMined = (meta & 8) == 8;
-
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, variant).withProperty(PROPERTY_WAS_PLACED, wasMined);
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, variant);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		int meta = ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
-
-		if (state.getValue(PROPERTY_WAS_PLACED) == Boolean.TRUE)
-		{
-			meta |= 8;
-		}
-
-		return meta;
+		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
 	}
 
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, PROPERTY_VARIANT, PROPERTY_WAS_PLACED);
+		return new BlockState(this, PROPERTY_VARIANT);
 	}
 
 	@Override
