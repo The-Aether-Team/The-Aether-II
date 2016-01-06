@@ -181,7 +181,7 @@ item.armor.obsidian.ability.desc=Extreme Protection
 item.armor.neptune.ability.desc=Breathe and walk underwater
 item.armor.phoenix.ability.desc=Fire Immunity
 item.armor.valkyrie.ability.desc=Wing Gliding
-item.armor.sentry_boots.ability.desc=Reduces Falling Damage
+item.armor.sentry_boots.ability.desc=Negates fall damage
 
 # Records
 item.aether_record.moa.desc=Emile van Krieken - Approaches
