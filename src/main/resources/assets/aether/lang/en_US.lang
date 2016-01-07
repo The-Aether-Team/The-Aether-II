@@ -148,6 +148,7 @@ item.holy_sword.name=Holy Sword
 item.lightning_sword.name=Lightning Sword
 item.pig_slayer.name=Pig Slayer
 item.vampire_blade.name=Vampire Blade
+item.candy_cane_sword.name=Candy Cane Sword
 item.skyroot_door_item.name=Skyroot Door
 
 # Weapon Tooltips
@@ -161,6 +162,7 @@ item.lightning_sword.ability.desc=Smites with lightning
 item.flaming_sword.ability.desc=Ignites mobs
 item.pig_slayer.ability.desc=Slaughters pigs
 item.vampire_blade.ability.desc=Leeches life
+item.candy_cane_sword.ability.desc=Drops edible candy canes
 
 # Tool tooltips
 item.tool.skyroot.ability.desc=Doubles drops from blocks
