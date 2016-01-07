@@ -198,6 +198,7 @@ entity.aether.flying_cow.name=Flying Cow
 entity.aether.phyg.name=Phyg
 entity.aether.aechor_plant.name=Aechor Plant
 entity.aether.aerbunny.name=Aerbunny
+entity.aether.carrion_sprout.name=Carrion Sprout
 
 # Creative Tabs
 itemGroup.aetherBlocks=Aether Blocks

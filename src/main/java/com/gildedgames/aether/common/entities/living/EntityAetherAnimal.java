@@ -15,12 +15,18 @@ public abstract class EntityAetherAnimal extends EntityAnimal
 	@Override
 	protected void dropFewItems(boolean p_70628_1_, int looting)
 	{
-		int amount = this.rand.nextInt(3) + 1 + this.rand.nextInt(1 + looting);
+		int amount = this.getItemQuantityDropped() + this.rand.nextInt(1 + looting);
+		;
 
 		for (int count = 0; count < amount; ++count)
 		{
 			this.dropItem(this.getDropItem(), 1);
 		}
+	}
+
+	protected int getItemQuantityDropped()
+	{
+		return this.rand.nextInt(3) + 1;
 	}
 
 	@Override

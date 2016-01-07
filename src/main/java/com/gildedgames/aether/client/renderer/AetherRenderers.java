@@ -2,10 +2,12 @@ package com.gildedgames.aether.client.renderer;
 
 import com.gildedgames.aether.client.models.entities.living.ModelAechorPlant;
 import com.gildedgames.aether.client.models.entities.living.ModelAerbunny;
+import com.gildedgames.aether.client.models.entities.living.ModelCarrionSprout;
 import com.gildedgames.aether.client.models.entities.living.ModelSheepuff;
 import com.gildedgames.aether.client.renderer.entities.RenderFloatingBlock;
 import com.gildedgames.aether.client.renderer.entities.living.RenderAechorPlant;
 import com.gildedgames.aether.client.renderer.entities.living.RenderAerbunny;
+import com.gildedgames.aether.client.renderer.entities.living.RenderCarrionSprout;
 import com.gildedgames.aether.client.renderer.entities.living.RenderFlyingCow;
 import com.gildedgames.aether.client.renderer.entities.living.RenderPhyg;
 import com.gildedgames.aether.client.renderer.entities.living.RenderSheepuff;
@@ -15,6 +17,7 @@ import com.gildedgames.aether.client.renderer.tile_entity.TileEntitySkyrootChest
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.living.EntityAechorPlant;
 import com.gildedgames.aether.common.entities.living.EntityAerbunny;
+import com.gildedgames.aether.common.entities.living.EntityCarrionSprout;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
 import com.gildedgames.aether.common.entities.living.EntitySheepuff;
@@ -48,6 +51,7 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntitySheepuff.class, new RenderSheepuff(renderManager, new ModelSheepuff(), 0.7f));
 		RenderingRegistry.registerEntityRenderingHandler(EntityAechorPlant.class, new RenderAechorPlant(renderManager, new ModelAechorPlant(), 0.7f));
 		RenderingRegistry.registerEntityRenderingHandler(EntityAerbunny.class, new RenderAerbunny(renderManager, new ModelAerbunny(), 0.7f));
+		RenderingRegistry.registerEntityRenderingHandler(EntityCarrionSprout.class, new RenderCarrionSprout(renderManager, new ModelCarrionSprout(), 0.25f));
 	}
 
 	private static void registerTESRs()

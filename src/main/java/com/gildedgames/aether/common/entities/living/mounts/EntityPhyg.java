@@ -74,6 +74,12 @@ public class EntityPhyg extends EntityFlyingAnimal
 	}
 
 	@Override
+	protected int getItemQuantityDropped()
+	{
+		return this.rand.nextInt(3);
+	}
+
+	@Override
 	protected Item getDropItem()
 	{
 		return this.isBurning() ? Items.cooked_porkchop : Items.porkchop;

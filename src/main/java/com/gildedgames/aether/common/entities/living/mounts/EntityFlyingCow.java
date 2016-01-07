@@ -74,16 +74,10 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 		this.playSound("mob.cow.step", 0.15F, 1.0F);
 	}
 
-	protected void dropFewItems(boolean p_70628_1_, int fortune)
+	@Override
+	protected int getItemQuantityDropped()
 	{
-		int i = this.rand.nextInt(3) + this.rand.nextInt(1 + fortune);
-
-		for (int j = 0; j < i; j++)
-		{
-			this.dropItem(Items.leather, 1);
-		}
-
-		super.dropFewItems(p_70628_1_, fortune);
+		return this.rand.nextInt(3);
 	}
 
 	@Override
