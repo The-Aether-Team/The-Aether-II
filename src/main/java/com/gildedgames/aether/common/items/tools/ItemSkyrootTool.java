@@ -1,7 +1,8 @@
 package com.gildedgames.aether.common.items.tools;
 
 import com.gildedgames.aether.common.blocks.util.ISkyrootMinable;
-import com.gildedgames.aether.common.world.chunk.PlacementFlagWorldHandler;
+import com.gildedgames.aether.common.world.chunk.PlacementFlagChunkData;
+import com.gildedgames.util.chunk.ChunkCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -28,7 +29,9 @@ public class ItemSkyrootTool extends ItemAetherTool
 		{
 			IBlockState state = world.getBlockState(pos);
 
-			boolean wasPlaced = PlacementFlagWorldHandler.INSTANCE.wasPlaced(world, pos);
+			PlacementFlagChunkData data = (PlacementFlagChunkData) ChunkCore.locate().getData(world, pos, PlacementFlagChunkData.class);
+
+			boolean wasPlaced = data.wasPlacedAt(pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15);
 
 			if (!wasPlaced && block.isToolEffective(this.toolType.getToolClass(), state))
 			{

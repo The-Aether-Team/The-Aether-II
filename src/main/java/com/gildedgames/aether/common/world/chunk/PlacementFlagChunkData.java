@@ -1,20 +1,13 @@
 package com.gildedgames.aether.common.world.chunk;
 
+import com.gildedgames.util.chunk.common.hook.IChunkHook;
+import net.minecraft.nbt.NBTTagCompound;
+
 import java.util.BitSet;
 
-public class PlacementFlagChunkData
+public class PlacementFlagChunkData implements IChunkHook
 {
-	private final BitSet bits;
-
-	public PlacementFlagChunkData()
-	{
-		this.bits = new BitSet(65535);
-	}
-
-	public PlacementFlagChunkData(byte[] data)
-	{
-		this.bits = BitSet.valueOf(data);
-	}
+	private BitSet bits;
 
 	public boolean wasPlacedAt(int x, int y, int z)
 	{
@@ -36,8 +29,22 @@ public class PlacementFlagChunkData
 		return (x * 256 * 16 + y * 16 + z);
 	}
 
-	public byte[] toBytes()
+	@Override
+	public void write(NBTTagCompound output)
 	{
-		return this.bits.toByteArray();
+		output.setByteArray("bits", this.bits.toByteArray());
+	}
+
+	@Override
+	public void read(NBTTagCompound input)
+	{
+		if (input.hasKey("bits"))
+		{
+			this.bits = BitSet.valueOf(input.getByteArray("bits"));
+		}
+		else
+		{
+			this.bits = new BitSet(65535);
+		}
 	}
 }

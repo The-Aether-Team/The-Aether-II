@@ -8,10 +8,10 @@ import com.gildedgames.aether.common.player.PlayerAetherEventHandler;
 import com.gildedgames.aether.common.recipes.RecipesAether;
 import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
 import com.gildedgames.aether.common.world.WorldProviderAether;
-import com.gildedgames.aether.common.world.chunk.PlacementFlagWorldHandler;
+import com.gildedgames.aether.common.world.chunk.PlacementFlagChunkData;
+import com.gildedgames.aether.common.world.chunk.PlacementFlagFactory;
+import com.gildedgames.util.chunk.ChunkCore;
 import com.gildedgames.util.player.PlayerCore;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
@@ -62,9 +62,9 @@ public class CommonProxy
 		MinecraftForge.EVENT_BUS.register(new CommonEvents());
 		MinecraftForge.EVENT_BUS.register(new PlayerAetherEventHandler());
 
-		MinecraftForge.EVENT_BUS.register(PlacementFlagWorldHandler.INSTANCE);
-
 		MinecraftForge.EVENT_BUS.register(ItemsAether.skyroot_sword);
+
+		ChunkCore.locate().registerHookFactory(new PlacementFlagFactory());
 	}
 
 	public void spawnJumpParticles(World world, double x, double y, double z, double radius, int quantity)

@@ -6,6 +6,8 @@ import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.util.PlayerUtil;
+import com.gildedgames.aether.common.world.chunk.PlacementFlagChunkData;
+import com.gildedgames.util.chunk.ChunkCore;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +17,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class PlayerAetherEventHandler
@@ -96,6 +99,17 @@ public class PlayerAetherEventHandler
 					event.newSpeed = event.originalSpeed * 5.0f;
 				}
 			}
+		}
+	}
+
+	@SubscribeEvent
+	public void onPlaceBlockEvent(BlockEvent.PlaceEvent event)
+	{
+		PlacementFlagChunkData data = (PlacementFlagChunkData) ChunkCore.locate().getData(event.world, event.pos, PlacementFlagChunkData.class);
+
+		if (data != null)
+		{
+			data.setPlaced(event.pos.getX() & 15, event.pos.getY() & 15, event.pos.getZ() & 15);
 		}
 	}
 }
