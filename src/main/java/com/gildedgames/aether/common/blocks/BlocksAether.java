@@ -29,7 +29,6 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.blocks.util.BlockAether;
-import com.gildedgames.aether.common.blocks.util.BlockSkyrootMinable;
 import com.gildedgames.aether.common.items.itemblocks.ItemBlockAetherVariants;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -106,7 +105,7 @@ public class BlocksAether
 
 	public static void preInit()
 	{
-		aether_dirt = registerBlock("aether_dirt", new BlockSkyrootMinable(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f), AetherCreativeTabs.tabBlocks);
+		aether_dirt = registerBlock("aether_dirt", new BlockAether(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f), AetherCreativeTabs.tabBlocks);
 
 		aether_grass = registerBlockWithItem("aether_grass", new BlockAetherGrass(), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
 

@@ -44,8 +44,8 @@ public class EntityFloatingBlock extends Entity
 	@Override
 	protected void entityInit()
 	{
-		this.dataWatcher.addObject(BLOCK_NAME_ID, new String(""));
-		this.dataWatcher.addObject(BLOCK_STATE_ID, new Integer(0));
+		this.dataWatcher.addObjectByDataType(BLOCK_STATE_ID, 2);
+		this.dataWatcher.addObjectByDataType(BLOCK_NAME_ID, 4);
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class EntityFloatingBlock extends Entity
 
 			if (!this.worldObj.isRemote)
 			{
-				if (this.worldObj.getGameRules().getGameRuleBooleanValue("doTileDrops"))
+				if (this.worldObj.getGameRules().getBoolean("doTileDrops"))
 				{
 					IBlockState state = this.getBlockState();
 
@@ -150,7 +150,7 @@ public class EntityFloatingBlock extends Entity
 	{
 		IBlockState state = this.getBlockState();
 		Block block = state.getBlock();
-		ResourceLocation resourceLocation = (ResourceLocation) Block.blockRegistry.getNameForObject(block);
+		ResourceLocation resourceLocation = Block.blockRegistry.getNameForObject(block);
 
 		compound.setString("Block", resourceLocation.toString());
 		compound.setByte("BlockState", (byte) block.getMetaFromState(state));

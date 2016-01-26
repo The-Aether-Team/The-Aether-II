@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderPhyg extends RenderLiving
+public class RenderPhyg extends RenderLiving<EntityPhyg>
 {
 	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/phyg/phyg.png");
 
@@ -23,8 +23,8 @@ public class RenderPhyg extends RenderLiving
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
+	protected ResourceLocation getEntityTexture(EntityPhyg entity)
 	{
-		return ((EntityPhyg) entity).isSaddled() ? saddledTexture : texture;
+		return entity.isSaddled() ? saddledTexture : texture;
 	}
 }

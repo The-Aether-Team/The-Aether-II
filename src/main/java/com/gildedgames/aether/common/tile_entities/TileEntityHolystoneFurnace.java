@@ -16,15 +16,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityHolystoneFurnace extends TileEntityLockable implements IUpdatePlayerListBox, ISidedInventory
+public class TileEntityHolystoneFurnace extends TileEntityLockable implements ITickable, ISidedInventory
 {
 	private static final int[]
 			slotsTop = new int[] { 0 },
@@ -84,6 +84,21 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IU
 		}
 	}
 
+	@Override
+	public ItemStack removeStackFromSlot(int index)
+	{
+		if (this.containedItemStacks[index] != null)
+		{
+			ItemStack itemstack = this.containedItemStacks[index];
+			this.containedItemStacks[index] = null;
+			return itemstack;
+		}
+		else
+		{
+			return null;
+		}
+	}
+
 	public ItemStack getStackInSlotOnClosing(int index)
 	{
 		if (this.containedItemStacks[index] != null)
@@ -120,11 +135,13 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IU
 		}
 	}
 
-	public String getCommandSenderName()
+	@Override
+	public String getName()
 	{
 		return this.hasCustomName() ? this.customName : "container.holystone_furnace";
 	}
 
+	@Override
 	public boolean hasCustomName()
 	{
 		return this.customName != null && this.customName.length() > 0;

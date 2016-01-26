@@ -2,12 +2,15 @@ package com.gildedgames.aether.common.entities.living;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.ai.AechorPlantAI;
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.util.PlayerUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -21,16 +24,23 @@ public class EntityAechorPlant extends EntityMob
 	@SideOnly(Side.CLIENT)
 	public float sinage;
 
-	public EntityAechorPlant(World worldIn)
-	{
-		super(worldIn);
+	private int poisonLeft;
 
-		this.tasks.addTask(0, new AechorPlantAI(this, true));
-		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+	public EntityAechorPlant(World world)
+	{
+		super(world);
+
+		this.tasks.addTask(0, new AechorPlantAI(this));
+		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
 		this.setSize(0.75F + (this.getPlantSize() * 0.125F), 0.5F + (this.getPlantSize() * 0.075F));
 
-		this.sinage = this.rand.nextFloat() * 6F;
+		this.setPoisonLeft(2);
+
+		if (world.isRemote)
+		{
+			this.sinage = this.rand.nextFloat() * 6F;
+		}
 	}
 
 	protected void entityInit()
@@ -66,11 +76,11 @@ public class EntityAechorPlant extends EntityMob
 			return;
 		}
 
-		boolean isTargetting = this.getAttackTarget() != null;
+		boolean isTargeting = this.getAttackTarget() != null;
 
-		if (this.canSeePrey() != isTargetting)
+		if (this.canSeePrey() != isTargeting)
 		{
-			this.setCanSeePrey(isTargetting);
+			this.setCanSeePrey(isTargeting);
 		}
 
 		BlockPos beneathPos = new BlockPos(this.posX, this.getEntityBoundingBox().minY - 0.1D, this.posZ);
@@ -87,6 +97,26 @@ public class EntityAechorPlant extends EntityMob
 
 	@Override
 	public void moveEntity(double x, double y, double z) { }
+
+	@Override
+	protected boolean interact(EntityPlayer player)
+	{
+		if (this.getPoisonLeft() <= 0)
+		{
+			return false;
+		}
+
+		ItemStack stack = player.getHeldItem();
+
+		if (stack != null && stack.getItem() == ItemsAether.skyroot_bucket)
+		{
+			PlayerUtil.fillBucketInHand(player, new ItemStack(ItemsAether.skyroot_poison_bucket));
+
+			this.setPoisonLeft(this.getPoisonLeft() - 1);
+		}
+
+		return false;
+	}
 
 	@SideOnly(Side.CLIENT)
 	private void tickAnimation()
@@ -114,6 +144,7 @@ public class EntityAechorPlant extends EntityMob
 		super.writeEntityToNBT(tagCompound);
 
 		tagCompound.setInteger("plantSize", this.getPlantSize());
+		tagCompound.setInteger("poisonLeft", this.getPoisonLeft());
 	}
 
 	@Override
@@ -122,6 +153,7 @@ public class EntityAechorPlant extends EntityMob
 		super.readEntityFromNBT(tagCompound);
 
 		this.setPlantSize(tagCompound.getInteger("plantSize"));
+		this.setPoisonLeft(tagCompound.getInteger("poisonLeft"));
 	}
 
 	public boolean canSeePrey()
@@ -142,5 +174,15 @@ public class EntityAechorPlant extends EntityMob
 	public void setPlantSize(int size)
 	{
 		this.dataWatcher.updateObject(EntityAechorPlant.plantSizeID, size);
+	}
+
+	public int getPoisonLeft()
+	{
+		return this.poisonLeft;
+	}
+
+	public void setPoisonLeft(int poisonLeft)
+	{
+		this.poisonLeft = poisonLeft;
 	}
 }

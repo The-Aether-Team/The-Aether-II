@@ -57,5 +57,35 @@
 				"name": "aerandom/dart_shooter"
 			}
 		]
+	},
+	"aemob.aerbunny.lift": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "aemob/aerbunny/lift"
+			}
+		]
+	},
+	"aemob.aerbunny.hurt": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "aemob/aerbunny/hurt1"
+			},
+			{
+				"name": "aemob/aerbunny/hurt2"
+			},
+			{
+				"name": "aemob/aerbunny/hurt3"
+			}
+		]
+	},
+	"aemob.aerbunny.die": {
+		"category": "neutral",
+		"sounds": [
+			{
+				"name": "aemob/aerbunny/die"
+			}
+		]
 	}
 }

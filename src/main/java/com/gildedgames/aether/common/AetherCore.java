@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common;
 
+import com.gildedgames.aether.common.world.chunk.PlacementFlagChunkData;
+import net.minecraft.util.BlockPos;
 import org.apache.logging.log4j.Logger;
 
 import com.gildedgames.aether.common.world.TeleporterAether;
@@ -25,7 +27,7 @@ public class AetherCore
 
 	public static final String MOD_VERSION = "1.8-1.0";
 
-	@Instance
+	@Instance(AetherCore.MOD_ID)
 	public static AetherCore INSTANCE;
 
 	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.common.CommonProxy")
@@ -35,7 +37,7 @@ public class AetherCore
 
 	public static Logger LOGGER;
 
-	private final SidedObject<AetherServices> services = new SidedObject<AetherServices>(new AetherServices(Side.CLIENT), new AetherServices(Side.SERVER));
+	private final SidedObject<AetherServices> services = new SidedObject<>(new AetherServices(Side.CLIENT), new AetherServices(Side.SERVER));
 
 	private static TeleporterAether teleporter;
 

@@ -28,7 +28,7 @@ import java.util.Map;
 
 public class AetherItemModels
 {
-	private static HashMap<Item, ItemModelList> models = new HashMap<Item, ItemModelList>();
+	private static HashMap<Item, ItemModelList> models = new HashMap<>();
 
 	public static void preInit()
 	{
@@ -180,6 +180,8 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.valkyrie_leggings, new ItemModelList("armor/").add(0, "valkyrie_leggings"));
 		registerItemModels(ItemsAether.valkyrie_boots, new ItemModelList("armor/").add(0, "valkyrie_boots"));
 
+		registerItemModels(ItemsAether.sentry_boots, new ItemModelList("armor/").add(0, "sentry_boots"));
+
 		registerItemModels(ItemsAether.blueberry, new ItemModelList().add(0, "blueberry"));
 		registerItemModels(ItemsAether.orange, new ItemModelList().add(0, "orange"));
 		registerItemModels(ItemsAether.healing_stone, new ItemModelList().add(0, "healing_stone"));
@@ -234,14 +236,16 @@ public class AetherItemModels
 
 		registerItemModels(ItemsAether.pig_slayer, new ItemModelList().add(0, "weapons/pig_slayer"));
 		registerItemModels(ItemsAether.vampire_blade, new ItemModelList().add(0, "weapons/vampire_blade"));
+		registerItemModels(ItemsAether.candy_cane_sword, new ItemModelList().add(0, "weapons/candy_cane_sword"));
 		
 		registerItemModels(ItemsAether.skyroot_door, new ItemModelList().add(0, "skyroot_door"));
 
+		registerItemModels(ItemsAether.zanite_ring, new ItemModelList("accessories/").add(0, "zanite_ring"));
+
 		registerItemModels(getItem(BlocksAether.skyroot_chest), new ItemModelList().add(0, "skyroot_chest"));
+		registerItemModels(getItem(BlocksAether.ambrosium_torch), new ItemModelList().add(0, "ambrosium_torch"));
 
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.skyroot_chest), 0, TileEntitySkyrootChest.class);
-
-		registerItemModels(getItem(BlocksAether.ambrosium_torch), new ItemModelList().add(0, "ambrosium_torch"));
 	}
 
 	private static void registerItemModels(Item item, ItemModelList list)

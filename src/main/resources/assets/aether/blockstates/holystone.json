@@ -1,13 +1,22 @@
 {
 	"variants": {
-		"variant=normal": {
-			"model": "aether:holystone/holystone"
-		},
-		"variant=mossy": {
-			"model": "aether:holystone/mossy_holystone"
-		},
-		"variant=blood_moss": {
-			"model": "aether:holystone/blood_moss_holystone"
-		}
+		"variant=normal": [
+			{ "model": "aether:holystone/holystone" },
+			{ "model": "aether:holystone/holystone", "y": 90 },
+			{ "model": "aether:holystone/holystone", "y": 180 },
+			{ "model": "aether:holystone/holystone", "y": 270 }
+		],
+		"variant=mossy": [
+			{ "model": "aether:holystone/mossy_holystone" },
+			{ "model": "aether:holystone/mossy_holystone", "y": 90 },
+			{ "model": "aether:holystone/mossy_holystone", "y": 180 },
+			{ "model": "aether:holystone/mossy_holystone", "y": 270 }
+		],
+		"variant=blood_moss": [
+			{ "model": "aether:holystone/blood_moss_holystone" },
+			{ "model": "aether:holystone/blood_moss_holystone", "y": 90 },
+			{ "model": "aether:holystone/blood_moss_holystone", "y": 180 },
+			{ "model": "aether:holystone/blood_moss_holystone", "y": 270 }
+		]
 	}
 }

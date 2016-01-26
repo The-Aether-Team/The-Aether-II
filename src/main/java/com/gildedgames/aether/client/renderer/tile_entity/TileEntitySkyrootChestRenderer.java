@@ -8,11 +8,10 @@ import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.model.ModelLargeChest;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class TileEntitySkyrootChestRenderer extends TileEntitySpecialRenderer
+public class TileEntitySkyrootChestRenderer extends TileEntitySpecialRenderer<TileEntitySkyrootChest>
 {
 	private static final ResourceLocation textureSingle = AetherCore.getResource("textures/tile_entities/skyroot_chest_large.png");
 
@@ -23,7 +22,8 @@ public class TileEntitySkyrootChestRenderer extends TileEntitySpecialRenderer
 
 	private ModelChest simpleChest = new ModelChest(), largeChest = new ModelLargeChest();
 
-	public void renderTileEntity(TileEntitySkyrootChest chest, double x, double y, double z, float partialTicks, int destroyStage)
+	@Override
+	public void renderTileEntityAt(TileEntitySkyrootChest chest, double x, double y, double z, float partialTicks, int destroyStage)
 	{
 		int metadata;
 
@@ -178,10 +178,5 @@ public class TileEntitySkyrootChestRenderer extends TileEntitySpecialRenderer
 				GlStateManager.matrixMode(GL11.GL_MODELVIEW);
 			}
 		}
-	}
-
-	public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float partialTicks, int destroyStage)
-	{
-		this.renderTileEntity((TileEntitySkyrootChest) tileEntity, x, y, z, partialTicks, destroyStage);
 	}
 }

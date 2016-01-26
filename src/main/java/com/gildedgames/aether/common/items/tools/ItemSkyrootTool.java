@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.items.tools;
 
 import com.gildedgames.aether.common.blocks.util.ISkyrootMinable;
+import com.gildedgames.aether.common.world.chunk.PlacementFlagChunkData;
+import com.gildedgames.util.chunk.ChunkCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -27,12 +29,16 @@ public class ItemSkyrootTool extends ItemAetherTool
 		{
 			IBlockState state = world.getBlockState(pos);
 
-			if (!EnchantmentHelper.getSilkTouchModifier(living) && block instanceof ISkyrootMinable)
-			{
-				ISkyrootMinable doubleBlock = (ISkyrootMinable) block;
+			PlacementFlagChunkData data = (PlacementFlagChunkData) ChunkCore.locate().getData(world, pos, PlacementFlagChunkData.class);
 
-				if (block.isToolEffective(this.toolType.getToolClass(), state))
+			boolean wasPlaced = data.wasPlacedAt(pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15);
+
+			if (!wasPlaced && block.isToolEffective(this.toolType.getToolClass(), state))
+			{
+				if (state.getBlock() instanceof ISkyrootMinable)
 				{
+					ISkyrootMinable doubleBlock = (ISkyrootMinable) block;
+
 					if (doubleBlock.canBlockDropDoubles(living, heldStack, state))
 					{
 						Collection<ItemStack> stacks = doubleBlock.getAdditionalDrops(world, pos, state, living);
@@ -42,6 +48,10 @@ public class ItemSkyrootTool extends ItemAetherTool
 							Block.spawnAsEntity(world, pos, stack);
 						}
 					}
+				}
+				else
+				{
+					state.getBlock().dropBlockAsItem(world, pos, state, EnchantmentHelper.getFortuneModifier(living));
 				}
 			}
 		}

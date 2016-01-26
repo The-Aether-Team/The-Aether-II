@@ -3,6 +3,8 @@ package com.gildedgames.aether.common.items;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.AetherMaterials;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.items.accessories.AccessoryType;
+import com.gildedgames.aether.common.items.accessories.ItemAccessory;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.items.armor.ItemObsidianArmor;
@@ -26,6 +28,7 @@ import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
 import com.gildedgames.aether.common.items.weapons.ItemPigSlayer;
 import com.gildedgames.aether.common.items.weapons.ItemVampireBlade;
+import com.gildedgames.aether.common.items.weapons.swords.ItemCandyCaneSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemElementalSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemGravititeSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemHolystoneSword;
@@ -35,7 +38,6 @@ import com.gildedgames.aether.common.items.weapons.swords.ItemZaniteSword;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemDoor;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -92,9 +94,11 @@ public class ItemsAether
 
 	public static Item flaming_sword, holy_sword, lightning_sword;
 
-	public static Item pig_slayer, vampire_blade;
+	public static Item pig_slayer, vampire_blade, candy_cane_sword;
 
 	public static Item skyroot_door;
+
+	public static Item zanite_ring;
 
 	public static void preInit()
 	{
@@ -123,30 +127,30 @@ public class ItemsAether
 		gravitite_shovel = registerItem("gravitite_shovel", new ItemGravititeTool(EnumToolType.SHOVEL));
 		gravitite_sword = registerItem("gravitite_sword", new ItemGravititeSword());
 
-		zanite_helmet = registerItem("zanite_helmet", new ItemZaniteArmor(ArmorMaterial.IRON, 0));
-		zanite_chestplate = registerItem("zanite_chestplate", new ItemZaniteArmor(ArmorMaterial.IRON, 1));
-		zanite_leggings = registerItem("zanite_leggings", new ItemZaniteArmor(ArmorMaterial.IRON, 2));
-		zanite_boots = registerItem("zanite_boots", new ItemZaniteArmor(ArmorMaterial.IRON, 3));
+		zanite_helmet = registerItem("zanite_helmet", new ItemZaniteArmor(0));
+		zanite_chestplate = registerItem("zanite_chestplate", new ItemZaniteArmor(1));
+		zanite_leggings = registerItem("zanite_leggings", new ItemZaniteArmor(2));
+		zanite_boots = registerItem("zanite_boots", new ItemZaniteArmor(3));
 
-		gravitite_helmet = registerItem("gravitite_helmet", new ItemGravititeArmor(ArmorMaterial.DIAMOND, 0));
-		gravitite_chestplate = registerItem("gravitite_chestplate", new ItemGravititeArmor(ArmorMaterial.DIAMOND, 1));
-		gravitite_leggings = registerItem("gravitite_leggings", new ItemGravititeArmor(ArmorMaterial.DIAMOND, 2));
-		gravitite_boots = registerItem("gravitite_boots", new ItemGravititeArmor(ArmorMaterial.DIAMOND, 3));
+		gravitite_helmet = registerItem("gravitite_helmet", new ItemGravititeArmor(0));
+		gravitite_chestplate = registerItem("gravitite_chestplate", new ItemGravititeArmor(1));
+		gravitite_leggings = registerItem("gravitite_leggings", new ItemGravititeArmor(2));
+		gravitite_boots = registerItem("gravitite_boots", new ItemGravititeArmor(3));
 
 		obsidian_helmet = registerItem("obsidian_helmet", new ItemObsidianArmor(AetherMaterials.OBSIDIAN_ARMOR, 0));
 		obsidian_chestplate = registerItem("obsidian_chestplate", new ItemObsidianArmor(AetherMaterials.OBSIDIAN_ARMOR, 1));
 		obsidian_leggings = registerItem("obsidian_leggings", new ItemObsidianArmor(AetherMaterials.OBSIDIAN_ARMOR, 2));
 		obsidian_boots = registerItem("obsidian_boots", new ItemObsidianArmor(AetherMaterials.OBSIDIAN_ARMOR, 3));
 
-		neptune_helmet = registerItem("neptune_helmet", new ItemNeptuneArmor(ArmorMaterial.DIAMOND, 0));
-		neptune_chestplate = registerItem("neptune_chestplate", new ItemNeptuneArmor(ArmorMaterial.DIAMOND, 1));
-		neptune_leggings = registerItem("neptune_leggings", new ItemNeptuneArmor(ArmorMaterial.DIAMOND, 2));
-		neptune_boots = registerItem("neptune_boots", new ItemNeptuneArmor(ArmorMaterial.DIAMOND, 3));
+		neptune_helmet = registerItem("neptune_helmet", new ItemNeptuneArmor(0));
+		neptune_chestplate = registerItem("neptune_chestplate", new ItemNeptuneArmor(1));
+		neptune_leggings = registerItem("neptune_leggings", new ItemNeptuneArmor(2));
+		neptune_boots = registerItem("neptune_boots", new ItemNeptuneArmor(3));
 
-		phoenix_helmet = registerItem("phoenix_helmet", new ItemPhoenixArmor(ArmorMaterial.DIAMOND, 0));
-		phoenix_chestplate = registerItem("phoenix_chestplate", new ItemPhoenixArmor(ArmorMaterial.DIAMOND, 1));
-		phoenix_leggings = registerItem("phoenix_leggings", new ItemPhoenixArmor(ArmorMaterial.DIAMOND, 2));
-		phoenix_boots = registerItem("phoenix_boots", new ItemPhoenixArmor(ArmorMaterial.DIAMOND, 3));
+		phoenix_helmet = registerItem("phoenix_helmet", new ItemPhoenixArmor(0));
+		phoenix_chestplate = registerItem("phoenix_chestplate", new ItemPhoenixArmor(1));
+		phoenix_leggings = registerItem("phoenix_leggings", new ItemPhoenixArmor(2));
+		phoenix_boots = registerItem("phoenix_boots", new ItemPhoenixArmor(3));
 
 		valkyrie_helmet = registerItem("valkyrie_helmet", new ItemValkyrieArmor(AetherMaterials.VALKYRIE_ARMOR, 0));
 		valkyrie_chestplate = registerItem("valkyrie_chestplate", new ItemValkyrieArmor(AetherMaterials.VALKYRIE_ARMOR, 1));
@@ -211,8 +215,11 @@ public class ItemsAether
 
 		pig_slayer = registerItem("pig_slayer", new ItemPigSlayer(), AetherCreativeTabs.tabWeapons);
 		vampire_blade = registerItem("vampire_blade", new ItemVampireBlade(), AetherCreativeTabs.tabWeapons);
+		candy_cane_sword = registerItem("candy_cane_sword", new ItemCandyCaneSword(), AetherCreativeTabs.tabWeapons);
 
 		skyroot_door = registerItem("skyroot_door_item", new ItemDoor(BlocksAether.skyroot_door), AetherCreativeTabs.tabBlocks);
+
+		zanite_ring = registerItem("zanite_ring", new ItemAccessory(AccessoryType.RING), AetherCreativeTabs.tabAccessories);
 
 		registerItemProperties();
 	}

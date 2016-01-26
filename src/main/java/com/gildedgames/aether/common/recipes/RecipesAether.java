@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.recipes.altar.AltarRepairRecipe;
-import com.gildedgames.aether.common.recipes.altar.AltarSimpleRecipe;
+import com.gildedgames.aether.common.recipes.altar.AltarEnchantRecipe;
 import com.gildedgames.aether.common.recipes.altar.IAltarRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -156,19 +156,19 @@ public class RecipesAether
 	private static void registerAltarRecipes()
 	{
 		// Healing Stone
-		registerAltarRecipe(new AltarSimpleRecipe(4, new ItemStack(BlocksAether.holystone),
+		registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(BlocksAether.holystone),
 				new ItemStack(ItemsAether.healing_stone)));
 
 		// Enchanted Gravitite
-		registerAltarRecipe(new AltarSimpleRecipe(4, new ItemStack(BlocksAether.gravitite_ore),
+		registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(BlocksAether.gravitite_ore),
 				new ItemStack(BlocksAether.enchanted_gravitite)));
 
 		// Enchanted Dart Shooter
-		registerAltarRecipe(new AltarSimpleRecipe(4, new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.GOLDEN.ordinal()),
+		registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.GOLDEN.ordinal()),
 				new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.ENCHANTED.ordinal())));
 
 		// Enchanted Darts
-		registerAltarRecipe(new AltarSimpleRecipe(1, new ItemStack(ItemsAether.dart, 1, ItemDartType.GOLDEN.ordinal()),
+		registerAltarRecipe(new AltarEnchantRecipe(1, new ItemStack(ItemsAether.dart, 1, ItemDartType.GOLDEN.ordinal()),
 				new ItemStack(ItemsAether.dart, 1, ItemDartType.ENCHANTED.ordinal())));
 
 		// Tool Repair Recipes

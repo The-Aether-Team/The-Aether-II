@@ -30,7 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockAetherPortal extends BlockBreakable
 {
 	public static final PropertyEnum PROPERTY_AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class,
-			new EnumFacing.Axis[] { EnumFacing.Axis.X, EnumFacing.Axis.Z });
+			EnumFacing.Axis.X, EnumFacing.Axis.Z);
 
 	public BlockAetherPortal()
 	{
@@ -90,12 +90,13 @@ public class BlockAetherPortal extends BlockBreakable
 		for (int count = 0; count < 4; count++)
 		{
 			double posX = pos.getX() + rand.nextFloat();
-			final double posY = pos.getY() + rand.nextFloat();
+			double posY = pos.getY() + rand.nextFloat();
 			double posZ = pos.getZ() + rand.nextFloat();
 			double motionX = (rand.nextFloat() - 0.5D) * 0.5D;
-			final double motionY = (rand.nextFloat() - 0.5D) * 0.5D;
+			double motionY = (rand.nextFloat() - 0.5D) * 0.5D;
 			double motionZ = (rand.nextFloat() - 0.5D) * 0.5D;
-			final int angle = rand.nextInt(2) * 2 - 1;
+
+			int angle = rand.nextInt(2) * 2 - 1;
 
 			if (world.getBlockState(pos.west()).getBlock() != this && world.getBlockState(pos.east()).getBlock() != this)
 			{
@@ -108,7 +109,7 @@ public class BlockAetherPortal extends BlockBreakable
 				motionZ = (rand.nextFloat() * 2.0F * angle);
 			}
 
-			final EntityAetherPortalFX effect = new EntityAetherPortalFX(world, posX, posY, posZ, motionX, motionY, motionZ);
+			EntityAetherPortalFX effect = new EntityAetherPortalFX(world, posX, posY, posZ, motionX, motionY, motionZ);
 			FMLClientHandler.instance().getClient().effectRenderer.addEffect(effect);
 		}
 	}

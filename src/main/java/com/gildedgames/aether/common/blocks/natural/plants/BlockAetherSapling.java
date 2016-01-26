@@ -1,11 +1,13 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import com.gildedgames.aether.common.world.features.trees.WorldGenSkyrootTree;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLog;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
@@ -87,11 +89,13 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 
 			if (meta == BLUE_SKYROOT_SAPLING.getMeta())
 			{
-				treeGenerator = new WorldGenSkyrootTree(BlocksAether.skyroot_log, BlocksAether.blue_skyroot_leaves, 0, 4);
+				treeGenerator = new WorldGenSkyrootTree(BlocksAether.skyroot_log.getDefaultState().withProperty(BlockAetherLog.PROPERTY_AXIS, BlockLog.EnumAxis.Y),
+						BlocksAether.green_skyroot_leaves.getDefaultState());
 			}
 			else if (meta == GREEN_SKYROOT_SAPLING.getMeta())
 			{
-				treeGenerator = new WorldGenSkyrootTree(BlocksAether.skyroot_log, BlocksAether.green_skyroot_leaves, 0, 4);
+				treeGenerator = new WorldGenSkyrootTree(BlocksAether.skyroot_log.getDefaultState().withProperty(BlockAetherLog.PROPERTY_AXIS, BlockLog.EnumAxis.Y),
+						BlocksAether.blue_skyroot_leaves.getDefaultState());
 			}
 
 			if (treeGenerator != null)
@@ -113,7 +117,7 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta() | ((Integer) state.getValue(PROPERTY_STAGE) << 3);
+		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta() | (state.getValue(PROPERTY_STAGE) << 3);
 	}
 
 	@Override
@@ -137,7 +141,7 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	@Override
 	public void grow(World world, Random rand, BlockPos pos, IBlockState state)
 	{
-		if ((Integer) state.getValue(PROPERTY_STAGE) == 0)
+		if (state.getValue(PROPERTY_STAGE) == 0)
 		{
 			world.setBlockState(pos, state.cycleProperty(PROPERTY_STAGE), 4);
 		}

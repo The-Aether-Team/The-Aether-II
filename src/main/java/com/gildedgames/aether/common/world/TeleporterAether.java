@@ -39,7 +39,7 @@ public class TeleporterAether extends Teleporter implements NBT
 	/**
 	 * Boolean here contains if the chunk is solid.
 	 */
-	public static Map<ChunkCoordIntPair, Boolean> chunksMarkedForPortal = new HashMap<ChunkCoordIntPair, Boolean>();
+	public static Map<ChunkCoordIntPair, Boolean> chunksMarkedForPortal = new HashMap<>();
 
 	private final Random random;
 
@@ -266,7 +266,7 @@ public class TeleporterAether extends Teleporter implements NBT
 					x = (chunkX << 4) + 8;
 					z = (chunkZ << 4) + 8;
 
-					while (!hasFoundPosition && innerAttempts < 4)
+					while (innerAttempts < 4)
 					{
 						final int xInner = x + innerDirection.getFrontOffsetX() * 7;
 						final int zInner = z + innerDirection.getFrontOffsetZ() * 7;

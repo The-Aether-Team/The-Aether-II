@@ -123,8 +123,8 @@ public class BlockAetherLeaves extends Block implements IShearable
 	{
 		if (!worldIn.isRemote)
 		{
-			boolean checkDecay = (Boolean) state.getValue(PROPERTY_CHECK_DECAY);
-			boolean isDecayable = (Boolean) state.getValue(PROPERTY_DECAYABLE);
+			boolean checkDecay = state.getValue(PROPERTY_CHECK_DECAY);
+			boolean isDecayable = state.getValue(PROPERTY_DECAYABLE);
 
 			if (checkDecay && isDecayable)
 			{
@@ -243,7 +243,7 @@ public class BlockAetherLeaves extends Block implements IShearable
 	{
 		IBlockState state = world.getBlockState(pos);
 
-		if (!(Boolean) state.getValue(PROPERTY_CHECK_DECAY))
+		if (!state.getValue(PROPERTY_CHECK_DECAY))
 		{
 			world.setBlockState(pos, state.withProperty(PROPERTY_CHECK_DECAY, true), 4);
 		}
@@ -272,7 +272,7 @@ public class BlockAetherLeaves extends Block implements IShearable
 	@Override
 	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
 	{
-		ArrayList<ItemStack> stacks = new ArrayList<ItemStack>();
+		ArrayList<ItemStack> stacks = new ArrayList<>();
 		stacks.add(new ItemStack(this));
 
 		return stacks;
@@ -287,7 +287,7 @@ public class BlockAetherLeaves extends Block implements IShearable
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		List<ItemStack> stacks = new ArrayList<ItemStack>();
+		List<ItemStack> stacks = new ArrayList<>();
 
 		Random rand = world instanceof World ? ((World) world).rand : new Random();
 
@@ -311,12 +311,12 @@ public class BlockAetherLeaves extends Block implements IShearable
 	{
 		int meta = 0;
 
-		if ((Boolean) state.getValue(PROPERTY_DECAYABLE))
+		if (state.getValue(PROPERTY_DECAYABLE))
 		{
 			meta |= 4;
 		}
 
-		if ((Boolean) state.getValue(PROPERTY_CHECK_DECAY))
+		if (state.getValue(PROPERTY_CHECK_DECAY))
 		{
 			meta |= 8;
 		}

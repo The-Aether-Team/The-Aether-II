@@ -148,7 +148,9 @@ item.holy_sword.name=Holy Sword
 item.lightning_sword.name=Lightning Sword
 item.pig_slayer.name=Pig Slayer
 item.vampire_blade.name=Vampire Blade
+item.candy_cane_sword.name=Candy Cane Sword
 item.skyroot_door_item.name=Skyroot Door
+item.zanite_ring.name=Zanite Ring
 
 # Weapon Tooltips
 item.skyroot_sword.ability.desc=Doubles drops from mobs
@@ -161,6 +163,7 @@ item.lightning_sword.ability.desc=Smites with lightning
 item.flaming_sword.ability.desc=Ignites mobs
 item.pig_slayer.ability.desc=Slaughters pigs
 item.vampire_blade.ability.desc=Leeches life
+item.candy_cane_sword.ability.desc=Drops edible candy canes
 
 # Tool tooltips
 item.tool.skyroot.ability.desc=Doubles drops from blocks
@@ -181,7 +184,7 @@ item.armor.obsidian.ability.desc=Extreme Protection
 item.armor.neptune.ability.desc=Breathe and walk underwater
 item.armor.phoenix.ability.desc=Fire Immunity
 item.armor.valkyrie.ability.desc=Wing Gliding
-item.armor.sentry_boots.ability.desc=Reduces falling damage
+item.armor.sentry_boots.ability.desc=Negates fall damage
 
 # Records
 item.aether_record.moa.desc=Emile van Krieken - Approaches
@@ -195,6 +198,8 @@ entity.aether.sheepuff.name=Sheepuff
 entity.aether.flying_cow.name=Flying Cow
 entity.aether.phyg.name=Phyg
 entity.aether.aechor_plant.name=Aechor Plant
+entity.aether.aerbunny.name=Aerbunny
+entity.aether.carrion_sprout.name=Carrion Sprout
 
 # Creative Tabs
 itemGroup.aetherBlocks=Aether Blocks
@@ -203,8 +208,20 @@ itemGroup.aetherTools=Aether Tools
 itemGroup.aetherWeapons=Aether Weapons
 itemGroup.aetherArmor=Aether Armor
 itemGroup.aetherConsumables=Aether Consumables
+itemGroup.aetherAccessories=Aether Accessories
 
 # Containers
 container.holystone_furnace=Holystone Furnace
 container.skyroot_chest=Skyroot Chest
 container.skyroot_double_chest=Large Skyroot Chest
+
+# Accessory slot names
+gui.slot.neckwear=Neckwear
+gui.slot.companion=Companion
+gui.slot.shield=Shield
+gui.slot.misc=Miscellaneous
+gui.slot.ring=Ring
+gui.slot.glove=Gloves
+
+# Tabs
+tab.accessories=Accessories

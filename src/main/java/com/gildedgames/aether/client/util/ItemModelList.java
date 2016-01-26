@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class ItemModelList
 {
-	private final HashMap<Integer, String> registrations = new HashMap<Integer, String>();
+	private final HashMap<Integer, String> registrations = new HashMap<>();
 
 	private final String rootDirectory;
 

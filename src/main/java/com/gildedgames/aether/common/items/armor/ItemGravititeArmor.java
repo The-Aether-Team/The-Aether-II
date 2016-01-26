@@ -6,9 +6,9 @@ import net.minecraft.item.ItemStack;
 
 public class ItemGravititeArmor extends ItemAetherArmor
 {
-	public ItemGravititeArmor(ArmorMaterial material, int armorType)
+	public ItemGravititeArmor(int armorType)
 	{
-		super(material, "gravitite", armorType);
+		super(ArmorMaterial.DIAMOND, "gravitite", armorType);
 	}
 
 	@Override

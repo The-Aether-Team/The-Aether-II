@@ -25,7 +25,7 @@ public class ItemSkyrootSword extends ItemAetherSword
 			
 			if (player.getHeldItem() != null && player.getHeldItem().getItem() == this)
 			{	
-				List<ItemStack> stacks = new ArrayList<ItemStack>();
+				List<ItemStack> stacks = new ArrayList<>();
 
 				for (EntityItem item : event.drops)
 				{
@@ -40,6 +40,5 @@ public class ItemSkyrootSword extends ItemAetherSword
 				}
 			}
 		}
-		
 	}
 }
