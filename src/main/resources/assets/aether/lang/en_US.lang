@@ -151,6 +151,8 @@ item.vampire_blade.name=Vampire Blade
 item.candy_cane_sword.name=Candy Cane Sword
 item.skyroot_door_item.name=Skyroot Door
 item.zanite_ring.name=Zanite Ring
+item.iron_ring.name=Iron Ring
+item.gold_ring.name=Gold Ring
 
 # Weapon Tooltips
 item.skyroot_sword.ability.desc=Doubles drops from mobs
