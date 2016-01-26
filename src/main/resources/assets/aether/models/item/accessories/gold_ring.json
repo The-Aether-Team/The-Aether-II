@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/zanite_ring"
+		"layer0": "aether:items/accessories/gold_ring"
 	},
 	"display": {
 		"thirdperson": {

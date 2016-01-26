@@ -98,7 +98,10 @@ public class ItemsAether
 
 	public static Item skyroot_door;
 
+	public static Item iron_ring, gold_ring;
+
 	public static Item zanite_ring;
+
 
 	public static void preInit()
 	{
@@ -219,6 +222,8 @@ public class ItemsAether
 
 		skyroot_door = registerItem("skyroot_door_item", new ItemDoor(BlocksAether.skyroot_door), AetherCreativeTabs.tabBlocks);
 
+		iron_ring = registerItem("iron_ring", new ItemAccessory(AccessoryType.RING), AetherCreativeTabs.tabAccessories);
+		gold_ring = registerItem("gold_ring", new ItemAccessory(AccessoryType.RING), AetherCreativeTabs.tabAccessories);
 		zanite_ring = registerItem("zanite_ring", new ItemAccessory(AccessoryType.RING), AetherCreativeTabs.tabAccessories);
 
 		registerItemProperties();
