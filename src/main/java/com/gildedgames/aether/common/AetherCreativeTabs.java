@@ -23,6 +23,8 @@ public class AetherCreativeTabs
 
 	public static final CreativeTab tabConsumables = new CreativeTab("aetherConsumables");
 
+	public static final CreativeTab tabAccessories = new CreativeTab("aetherAccessories");
+
 	@SideOnly(Side.CLIENT)
 	public static void registerTabIcons()
 	{
@@ -32,6 +34,7 @@ public class AetherCreativeTabs
 		tabWeapons.setDisplayStack(new ItemStack(ItemsAether.gravitite_sword));
 		tabArmor.setDisplayStack(new ItemStack(ItemsAether.zanite_chestplate));
 		tabConsumables.setDisplayStack(new ItemStack(ItemsAether.orange));
+		tabAccessories.setDisplayStack(new ItemStack(ItemsAether.zanite_ring));
 	}
 
 	public static class CreativeTab extends CreativeTabs

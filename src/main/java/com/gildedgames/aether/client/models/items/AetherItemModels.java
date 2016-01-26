@@ -240,11 +240,12 @@ public class AetherItemModels
 		
 		registerItemModels(ItemsAether.skyroot_door, new ItemModelList().add(0, "skyroot_door"));
 
+		registerItemModels(ItemsAether.zanite_ring, new ItemModelList("accessories/").add(0, "zanite_ring"));
+
 		registerItemModels(getItem(BlocksAether.skyroot_chest), new ItemModelList().add(0, "skyroot_chest"));
+		registerItemModels(getItem(BlocksAether.ambrosium_torch), new ItemModelList().add(0, "ambrosium_torch"));
 
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.skyroot_chest), 0, TileEntitySkyrootChest.class);
-
-		registerItemModels(getItem(BlocksAether.ambrosium_torch), new ItemModelList().add(0, "ambrosium_torch"));
 	}
 
 	private static void registerItemModels(Item item, ItemModelList list)

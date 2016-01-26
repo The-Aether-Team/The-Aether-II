@@ -3,6 +3,8 @@ package com.gildedgames.aether.common.items;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.AetherMaterials;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.items.accessories.AccessoryType;
+import com.gildedgames.aether.common.items.accessories.ItemAccessory;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.items.armor.ItemObsidianArmor;
@@ -95,6 +97,8 @@ public class ItemsAether
 	public static Item pig_slayer, vampire_blade, candy_cane_sword;
 
 	public static Item skyroot_door;
+
+	public static Item zanite_ring;
 
 	public static void preInit()
 	{
@@ -214,6 +218,8 @@ public class ItemsAether
 		candy_cane_sword = registerItem("candy_cane_sword", new ItemCandyCaneSword(), AetherCreativeTabs.tabWeapons);
 
 		skyroot_door = registerItem("skyroot_door_item", new ItemDoor(BlocksAether.skyroot_door), AetherCreativeTabs.tabBlocks);
+
+		zanite_ring = registerItem("zanite_ring", new ItemAccessory(AccessoryType.RING), AetherCreativeTabs.tabAccessories);
 
 		registerItemProperties();
 	}

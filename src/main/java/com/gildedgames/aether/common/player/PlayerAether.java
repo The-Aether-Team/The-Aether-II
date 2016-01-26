@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.player;
 import java.util.UUID;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
 import com.gildedgames.util.player.common.IPlayerHookPool;
 import com.gildedgames.util.player.common.player.IPlayerHook;
 import com.gildedgames.util.player.common.player.IPlayerProfile;
@@ -18,9 +19,9 @@ public class PlayerAether implements IPlayerHook
 
 	private final IPlayerHookPool<PlayerAether> playerHookPool;
 
-	private EntityPlayer player;
-
 	private boolean isDirty;
+
+	private InventoryAccessories inventoryAccessories = new InventoryAccessories(this);
 
 	public PlayerAether(IPlayerProfile playerProfile, IPlayerHookPool<PlayerAether> playerHookPool)
 	{
@@ -41,20 +42,24 @@ public class PlayerAether implements IPlayerHook
 	@Override
 	public void entityInit(EntityPlayer player)
 	{
-		this.player = player;
+
 	}
+
+	/* === DISK SYNCING === */
 
 	@Override
 	public void write(NBTTagCompound output)
 	{
-
+		this.inventoryAccessories.write(output);
 	}
 
 	@Override
 	public void read(NBTTagCompound input)
 	{
-
+		this.inventoryAccessories.read(input);
 	}
+
+	/* === NETWORK SYNCING === */
 
 	@Override
 	public void syncTo(ByteBuf buf, SyncSide side)
@@ -67,6 +72,8 @@ public class PlayerAether implements IPlayerHook
 	{
 
 	}
+
+	/* === BOILERPLATE === */
 
 	@Override
 	public boolean isDirty()
@@ -96,5 +103,15 @@ public class PlayerAether implements IPlayerHook
 	public IPlayerProfile getProfile()
 	{
 		return this.playerProfile;
+	}
+
+	public EntityPlayer getPlayer()
+	{
+		return this.getProfile().getEntity();
+	}
+
+	public InventoryAccessories getInventoryAccessories()
+	{
+		return this.inventoryAccessories;
 	}
 }

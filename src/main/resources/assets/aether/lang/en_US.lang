@@ -150,6 +150,7 @@ item.pig_slayer.name=Pig Slayer
 item.vampire_blade.name=Vampire Blade
 item.candy_cane_sword.name=Candy Cane Sword
 item.skyroot_door_item.name=Skyroot Door
+item.zanite_ring.name=Zanite Ring
 
 # Weapon Tooltips
 item.skyroot_sword.ability.desc=Doubles drops from mobs
@@ -207,8 +208,20 @@ itemGroup.aetherTools=Aether Tools
 itemGroup.aetherWeapons=Aether Weapons
 itemGroup.aetherArmor=Aether Armor
 itemGroup.aetherConsumables=Aether Consumables
+itemGroup.aetherAccessories=Aether Accessories
 
 # Containers
 container.holystone_furnace=Holystone Furnace
 container.skyroot_chest=Skyroot Chest
 container.skyroot_double_chest=Large Skyroot Chest
+
+# Accessory slot names
+gui.slot.neckwear=Neckwear
+gui.slot.companion=Companion
+gui.slot.shield=Shield
+gui.slot.misc=Miscellaneous
+gui.slot.ring=Ring
+gui.slot.glove=Gloves
+
+# Tabs
+tab.accessories=Accessories
