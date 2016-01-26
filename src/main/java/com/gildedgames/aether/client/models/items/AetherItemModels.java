@@ -270,7 +270,7 @@ public class AetherItemModels
 
 	private static void registerModels()
 	{
-		for (HashMap.Entry<Item, ItemModelList> entry : models.entrySet())
+		for (Map.Entry<Item, ItemModelList> entry : models.entrySet())
 		{
 			Item item = entry.getKey();
 
