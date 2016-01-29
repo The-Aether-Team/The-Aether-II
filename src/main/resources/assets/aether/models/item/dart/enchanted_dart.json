@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "aether:items/darts/enchanted_dart"
+		"layer0": "aether:items/enchanted_dart"
 	},
 	"display": {
 		"thirdperson": {

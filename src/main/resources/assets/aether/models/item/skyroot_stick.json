@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "aether:items/materials/skyroot_stick"
+		"layer0": "aether:items/skyroot_stick"
 	},
 	"display": {
 		"thirdperson": {

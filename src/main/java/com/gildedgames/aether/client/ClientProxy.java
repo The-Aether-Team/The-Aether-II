@@ -36,7 +36,5 @@ public class ClientProxy extends CommonProxy
 		MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
 
 		TabAPI.getInventoryGroup().getSide(Side.CLIENT).add(new TabAccessories());
-
-
 	}
 }

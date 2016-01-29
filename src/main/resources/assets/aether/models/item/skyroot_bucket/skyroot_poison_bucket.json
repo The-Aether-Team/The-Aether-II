@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "aether:items/skyroot_bucket/skyroot_poison_bucket"
+		"layer0": "aether:items/skyroot_poison_bucket"
 	},
 	"display": {
 		"thirdperson": {

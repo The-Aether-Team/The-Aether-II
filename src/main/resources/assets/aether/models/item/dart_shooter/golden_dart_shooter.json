@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "aether:items/dart_shooter/golden_dart_shooter"
+		"layer0": "aether:items/weapons/golden_dart_shooter"
 	},
 	"display": {
 		"thirdperson": {

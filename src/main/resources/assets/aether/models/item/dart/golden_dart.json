@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "aether:items/darts/golden_dart"
+		"layer0": "aether:items/golden_dart"
 	},
 	"display": {
 		"thirdperson": {

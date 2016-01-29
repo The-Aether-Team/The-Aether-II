@@ -33,12 +33,12 @@ public class SlotAccessory extends Slot
 	{
 		icons = new HashMap<>();
 
-		icons.put(AccessoryType.COMPANION, event.map.registerSprite(AetherCore.getResource("gui/inventory/accessories/slots/slot_companion")));
-		icons.put(AccessoryType.GLOVE, event.map.registerSprite(AetherCore.getResource("gui/inventory/accessories/slots/slot_glove")));
-		icons.put(AccessoryType.MISC, event.map.registerSprite(AetherCore.getResource("gui/inventory/accessories/slots/slot_misc")));
-		icons.put(AccessoryType.NECKWEAR, event.map.registerSprite(AetherCore.getResource("gui/inventory/accessories/slots/slot_neckwear")));
-		icons.put(AccessoryType.RING, event.map.registerSprite(AetherCore.getResource("gui/inventory/accessories/slots/slot_ring")));
-		icons.put(AccessoryType.SHIELD, event.map.registerSprite(AetherCore.getResource("gui/inventory/accessories/slots/slot_shield")));
+		icons.put(AccessoryType.COMPANION, event.map.registerSprite(AetherCore.getResource("gui/slots/slot_companion")));
+		icons.put(AccessoryType.GLOVE, event.map.registerSprite(AetherCore.getResource("gui/slots/slot_glove")));
+		icons.put(AccessoryType.MISC, event.map.registerSprite(AetherCore.getResource("gui/slots/slot_misc")));
+		icons.put(AccessoryType.NECKWEAR, event.map.registerSprite(AetherCore.getResource("gui/slots/slot_neckwear")));
+		icons.put(AccessoryType.RING, event.map.registerSprite(AetherCore.getResource("gui/slots/slot_ring")));
+		icons.put(AccessoryType.SHIELD, event.map.registerSprite(AetherCore.getResource("gui/slots/slot_shield")));
 	}
 
 	@Override
