@@ -2,6 +2,7 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.common.world.chunk.PlacementFlagChunkData;
 import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import org.apache.logging.log4j.Logger;
 
 import com.gildedgames.aether.common.world.TeleporterAether;
@@ -55,6 +56,12 @@ public class AetherCore
 	public void onFMLInit(FMLInitializationEvent event)
 	{
 		AetherCore.PROXY.init(event);
+	}
+
+	@EventHandler
+	public void onFMLPostInit(FMLPostInitializationEvent event)
+	{
+		AetherCore.PROXY.postInit(event);
 	}
 
 	@EventHandler

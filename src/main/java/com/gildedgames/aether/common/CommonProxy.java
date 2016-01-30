@@ -18,14 +18,18 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
+import java.io.File;
 import java.util.Random;
 
 public class CommonProxy
 {
 	private AetherGuiHandler guiHandler;
+
+	private File storageDir;
 
 	public void construct(FMLConstructionEvent event)
 	{
@@ -36,6 +40,8 @@ public class CommonProxy
 	{
 		// Load the configuration file.
 		AetherCore.CONFIG.load();
+
+		this.storageDir = new File(event.getSourceFile().getParent(), "Aether/");
 
 		// Register our content with GGUtil.
 		PlayerCore.INSTANCE.registerPlayerPool(AetherCore.client().getPool(), AetherCore.server().getPool());
@@ -71,6 +77,11 @@ public class CommonProxy
 		ChunkCore.locate().registerHookFactory(new PlacementFlagFactory());
 	}
 
+	public void postInit(FMLPostInitializationEvent event)
+	{
+
+	}
+
 	public void spawnJumpParticles(World world, double x, double y, double z, double radius, int quantity)
 	{
 		Random random = world.rand;
@@ -88,5 +99,10 @@ public class CommonProxy
 	public AetherGuiHandler getGuiHandler()
 	{
 		return this.guiHandler;
+	}
+
+	public File getAetherStorageDir()
+	{
+		return this.storageDir;
 	}
 }
