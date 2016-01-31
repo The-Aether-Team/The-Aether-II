@@ -8,6 +8,7 @@ import com.gildedgames.util.core.nbt.NBT;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -40,6 +41,11 @@ public class InventoryAccessories implements IInventory, NBT
 	public InventoryAccessories(PlayerAether aePlayer)
 	{
 		this.aePlayer = aePlayer;
+	}
+
+	public ItemStack[] getInventory()
+	{
+		return inventory;
 	}
 
 	@Override
@@ -124,6 +130,19 @@ public class InventoryAccessories implements IInventory, NBT
 		}
 
 		return -1;
+	}
+
+	public boolean isAccessoryEquipped(Item item)
+	{
+		for (ItemStack stack  : this.inventory)
+		{
+			if (stack != null && stack.getItem() == item)
+			{
+				return true;
+			}
+
+		}
+		return false;
 	}
 
 	@Override

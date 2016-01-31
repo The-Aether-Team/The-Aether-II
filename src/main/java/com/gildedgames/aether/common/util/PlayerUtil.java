@@ -1,5 +1,8 @@
 package com.gildedgames.aether.common.util;
 
+import com.gildedgames.aether.common.items.accessories.AccessoryType;
+import com.gildedgames.aether.common.items.accessories.ItemAccessory;
+import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -74,5 +77,12 @@ public class PlayerUtil
 		}
 
 		return false;
+	}
+
+	public static boolean wearingRing(EntityPlayer player, Item item)
+	{
+		PlayerAether aePlayer = PlayerAether.get(player);
+
+		return aePlayer.isAccessoryEquipped(item);
 	}
 }

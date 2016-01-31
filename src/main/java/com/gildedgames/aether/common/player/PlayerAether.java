@@ -114,4 +114,9 @@ public class PlayerAether implements IPlayerHook
 	{
 		return this.inventoryAccessories;
 	}
+
+	public boolean isAccessoryEquipped(Item item)
+	{
+		return this.getInventoryAccessories().isAccessoryEquipped(item);
+	}
 }

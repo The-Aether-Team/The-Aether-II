@@ -153,6 +153,9 @@ item.skyroot_door_item.name=Skyroot Door
 item.zanite_ring.name=Zanite Ring
 item.iron_ring.name=Iron Ring
 item.gold_ring.name=Gold Ring
+item.iron_pendant.name=Iron Pendant
+item.gold_pendant.name=Gold Pendant
+item.iron_bubble.name=Iron Bubble
 
 # Weapon Tooltips
 item.skyroot_sword.ability.desc=Doubles drops from mobs
@@ -224,6 +227,10 @@ gui.slot.shield=Shield
 gui.slot.misc=Miscellaneous
 gui.slot.ring=Ring
 gui.slot.glove=Gloves
+
+#Accessory Tooltips
+item.zanite_ring.ability.desc=Increases Mining Speed
+item.iron_bubble.ability.desc=Breathe Underwater
 
 # Tabs
 tab.accessories=Accessories
