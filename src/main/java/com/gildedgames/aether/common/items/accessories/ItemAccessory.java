@@ -22,6 +22,13 @@ public class ItemAccessory extends Item
 
 	public void onAccessoryUnequipped(PlayerAether aePlayer, ItemStack stack) { }
 
+	/**
+	 * Called every tick while this accessory is equipped.
+	 * @param aePlayer The player responsible for this tick
+	 * @param stack The stack equipped
+	 */
+	public void onAccessoryUpdate(PlayerAether aePlayer, ItemStack stack) { }
+
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
 	{

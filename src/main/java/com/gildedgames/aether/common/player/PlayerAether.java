@@ -5,6 +5,7 @@ import java.util.UUID;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.accessories.ItemAccessory;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import com.gildedgames.util.player.common.IPlayerHookPool;
@@ -16,6 +17,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
@@ -55,11 +57,11 @@ public class PlayerAether implements IPlayerHook
 	 */
 	public void onUpdate()
 	{
-		if (this.isAccessoryEquipped(ItemsAether.iron_bubble))
+		for (ItemStack stack : this.getInventoryAccessories().getInventory())
 		{
-			if (this.getPlayer().isInWater())
+			if (stack != null && stack.getItem() instanceof ItemAccessory)
 			{
-				this.getPlayer().setAir(300);
+				((ItemAccessory) stack.getItem()).onAccessoryUpdate(this, stack);
 			}
 		}
 	}
