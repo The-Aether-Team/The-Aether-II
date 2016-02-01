@@ -42,7 +42,6 @@ public class PlayerAether implements IPlayerHook
 	@Override
 	public void entityInit(EntityPlayer player)
 	{
-
 	}
 
 	/* === DISK SYNCING === */

@@ -151,6 +151,7 @@ item.vampire_blade.name=Vampire Blade
 item.candy_cane_sword.name=Candy Cane Sword
 item.skyroot_door_item.name=Skyroot Door
 item.zanite_ring.name=Zanite Ring
+item.zanite_pendant.name=Zanite Pendant
 item.iron_ring.name=Iron Ring
 item.gold_ring.name=Gold Ring
 item.iron_pendant.name=Iron Pendant
@@ -230,6 +231,7 @@ gui.slot.glove=Gloves
 
 #Accessory Tooltips
 item.zanite_ring.ability.desc=Increases Mining Speed
+item.zanite_pendant.ability.desc=Increases Mining Speed
 item.iron_bubble.ability.desc=Breathe Underwater
 
 # Tabs

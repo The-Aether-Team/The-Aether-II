@@ -79,7 +79,7 @@ public class PlayerUtil
 		return false;
 	}
 
-	public static boolean wearingRing(EntityPlayer player, Item item)
+	public static boolean wearingAccessory(EntityPlayer player, Item item)
 	{
 		PlayerAether aePlayer = PlayerAether.get(player);
 

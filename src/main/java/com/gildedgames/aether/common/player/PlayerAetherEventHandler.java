@@ -1,10 +1,7 @@
 package com.gildedgames.aether.common.player;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.accessories.ItemAccessory;
-import com.gildedgames.aether.common.items.accessories.ItemZaniteRing;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
@@ -102,9 +99,9 @@ public class PlayerAetherEventHandler
 					event.newSpeed = event.originalSpeed * 5.0f;
 				}
 			}
-			if (PlayerUtil.wearingRing(player, ItemsAether.zanite_ring))
+			if (PlayerUtil.wearingAccessory(player, ItemsAether.zanite_ring) || PlayerUtil.wearingAccessory(player, ItemsAether.zanite_pendant))
 			{
-				event.newSpeed = event.originalSpeed * 2.0f; // testing code!!!! Should be removed.
+				event.newSpeed = event.originalSpeed * 5.0f; // testing code!!!! Should be removed.
 
 				// rings don't have durability so the below code won't do anything
 				// when rings do have durability this should be uncommented and the above removed.

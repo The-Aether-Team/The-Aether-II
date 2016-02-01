@@ -6,7 +6,6 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.accessories.AccessoryType;
 import com.gildedgames.aether.common.items.accessories.ItemAccessory;
 import com.gildedgames.aether.common.items.accessories.ItemIronBubble;
-import com.gildedgames.aether.common.items.accessories.ItemZaniteRing;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.items.armor.ItemObsidianArmor;
@@ -102,7 +101,7 @@ public class ItemsAether
 
 	public static Item iron_ring, gold_ring;
 
-	public static Item zanite_ring;
+	public static Item zanite_ring, zanite_pendant;
 
 	public static Item iron_pendant, gold_pendant;
 
@@ -230,10 +229,11 @@ public class ItemsAether
 
 		iron_ring = registerItem("iron_ring", new ItemAccessory(AccessoryType.RING), AetherCreativeTabs.tabAccessories);
 		gold_ring = registerItem("gold_ring", new ItemAccessory(AccessoryType.RING), AetherCreativeTabs.tabAccessories);
-		zanite_ring = registerItem("zanite_ring", new ItemZaniteRing(), AetherCreativeTabs.tabAccessories);
-
 		iron_pendant = registerItem("iron_pendant", new ItemAccessory(AccessoryType.NECKWEAR), AetherCreativeTabs.tabAccessories);
 		gold_pendant = registerItem("gold_pendant", new ItemAccessory(AccessoryType.NECKWEAR), AetherCreativeTabs.tabAccessories);
+
+		zanite_ring = registerItem("zanite_ring", new ItemAccessory(AccessoryType.RING), AetherCreativeTabs.tabAccessories);
+		zanite_pendant = registerItem("zanite_pendant", new ItemAccessory(AccessoryType.NECKWEAR), AetherCreativeTabs.tabAccessories);
 
 		iron_bubble = registerItem("iron_bubble", new ItemIronBubble(), AetherCreativeTabs.tabAccessories);
 

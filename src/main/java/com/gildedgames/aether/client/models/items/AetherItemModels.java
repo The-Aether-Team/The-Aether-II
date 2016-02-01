@@ -242,10 +242,11 @@ public class AetherItemModels
 
 		registerItemModels(ItemsAether.gold_ring, new ItemModelList("accessories/").add(0, "gold_ring"));
 		registerItemModels(ItemsAether.iron_ring, new ItemModelList("accessories/").add(0, "iron_ring"));
-		registerItemModels(ItemsAether.zanite_ring, new ItemModelList("accessories/").add(0, "zanite_ring"));
-
 		registerItemModels(ItemsAether.iron_pendant, new ItemModelList("accessories/").add(0, "iron_pendant"));
 		registerItemModels(ItemsAether.gold_pendant, new ItemModelList("accessories/").add(0, "gold_pendant"));
+
+		registerItemModels(ItemsAether.zanite_ring, new ItemModelList("accessories/").add(0, "zanite_ring"));
+		registerItemModels(ItemsAether.zanite_pendant, new ItemModelList("accessories/").add(0, "zanite_pendant"));
 
 		registerItemModels(ItemsAether.iron_bubble, new ItemModelList("accessories/").add(0, "iron_bubble"));
 
