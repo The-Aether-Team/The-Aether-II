@@ -13,6 +13,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -33,6 +34,7 @@ public class PlayerAetherEventHandler
 			{
 				event.ammount = this.applyArmorDamageReduction(player, event.ammount);
 			}
+
 		}
 	}
 
@@ -132,6 +134,24 @@ public class PlayerAetherEventHandler
 		if (data != null)
 		{
 			data.setPlaced(event.pos.getX() & 15, event.pos.getY() & 15, event.pos.getZ() & 15);
+		}
+	}
+
+	// Added temporarily for accessory effects
+	@SubscribeEvent
+	public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
+		if (event.entityLiving instanceof EntityPlayer)
+		{
+			EntityPlayer player = (EntityPlayer) event.entityLiving;
+			PlayerAether aePlayer = PlayerAether.get(player);
+
+			if (aePlayer.isAccessoryEquipped(ItemsAether.iron_bubble))
+			{
+				if (player.isInWater())
+				{
+					player.setAir(300);
+				}
+			}
 		}
 	}
 }
