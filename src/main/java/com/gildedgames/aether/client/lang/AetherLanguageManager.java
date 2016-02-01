@@ -160,12 +160,12 @@ public class AetherLanguageManager implements IResourceManagerReloadListener
 
 	private List<IResourcePack> getDefaultResourcePacks()
 	{
-		return ObfuscationReflectionHelper.getPrivateValue(Minecraft.class, Minecraft.getMinecraft(), "defaultResourcePacks");
+		return ObfuscationReflectionHelper.getPrivateValue(Minecraft.class, Minecraft.getMinecraft(), "defaultResourcePacks", "field_110449_ao");
 	}
 
 	private void setDefaultResourcePacks(List<IResourcePack> packs)
 	{
-		ObfuscationReflectionHelper.setPrivateValue(Minecraft.class, Minecraft.getMinecraft(), packs, "defaultResourcePacks");
+		ObfuscationReflectionHelper.setPrivateValue(Minecraft.class, Minecraft.getMinecraft(), packs, "defaultResourcePacks", "field_110449_ao");
 	}
 
 	private File getLanguageDir()
