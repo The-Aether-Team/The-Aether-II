@@ -14,7 +14,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
@@ -34,7 +36,6 @@ public class PlayerAetherEventHandler
 			{
 				event.ammount = this.applyArmorDamageReduction(player, event.ammount);
 			}
-
 		}
 	}
 
@@ -61,7 +62,6 @@ public class PlayerAetherEventHandler
 			if (PlayerUtil.wearingArmor(player, 0, ItemsAether.sentry_boots) || PlayerUtil.isWearingFullSet(player, ItemGravititeArmor.class))
 			{
 				event.setCanceled(true);
-
 			}
 		}
 	}
@@ -90,39 +90,11 @@ public class PlayerAetherEventHandler
 	@SubscribeEvent
 	public void onCalculateBreakSpeed(BreakSpeed event)
 	{
-		if (event.entityLiving instanceof EntityPlayer)
+		PlayerAether aePlayer = this.getAetherPlayer(event);
+
+		if (aePlayer != null)
 		{
-			EntityPlayer player = (EntityPlayer) event.entityLiving;
-
-			if (PlayerUtil.isWearingFullSet(player, ItemNeptuneArmor.class))
-			{
-				if (!EnchantmentHelper.getAquaAffinityModifier(player) && player.isInsideOfMaterial(Material.water))
-				{
-					event.newSpeed = event.originalSpeed * 5.0f;
-				}
-			}
-			if (PlayerUtil.wearingAccessory(player, ItemsAether.zanite_ring) || PlayerUtil.wearingAccessory(player, ItemsAether.zanite_pendant))
-			{
-				event.newSpeed = event.originalSpeed * 5.0f; // testing code!!!! Should be removed.
-
-				// rings don't have durability so the below code won't do anything
-				// when rings do have durability this should be uncommented and the above removed.
-
-				/*
-				* PlayerAether aePlayer = PlayerAether.get(player);
-				* InventoryAccessories inventory = new InventoryAccessories(aePlayer);
-				*
-				*
-				* for (ItemStack stack : inventory.getInventory())
-				* {
-				*	if (stack != null && stack.getItem() == ItemsAether.zanite_ring)
-				*	{
-				*		event.newSpeed = 1.0f + (stack.getItemDamage() / stack.getMaxDamage() * 3);
-				*	}
-				* }
-				* */
-
-			}
+			aePlayer.onCalculateBreakSpeed(event);
 		}
 	}
 
@@ -137,21 +109,35 @@ public class PlayerAetherEventHandler
 		}
 	}
 
-	// Added temporarily for accessory effects
 	@SubscribeEvent
-	public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
+	public void onLivingUpdate(LivingUpdateEvent event)
+	{
+		PlayerAether aePlayer = this.getAetherPlayer(event);
+
+		if (aePlayer != null)
+		{
+			aePlayer.onUpdate();
+		}
+	}
+
+	@SubscribeEvent
+	public void onLivingDeath(LivingDeathEvent event)
+	{
+		PlayerAether aePlayer = this.getAetherPlayer(event);
+
+		if (aePlayer != null)
+		{
+			aePlayer.onDeath();
+		}
+	}
+
+	private PlayerAether getAetherPlayer(LivingEvent event)
+	{
 		if (event.entityLiving instanceof EntityPlayer)
 		{
-			EntityPlayer player = (EntityPlayer) event.entityLiving;
-			PlayerAether aePlayer = PlayerAether.get(player);
-
-			if (aePlayer.isAccessoryEquipped(ItemsAether.iron_bubble))
-			{
-				if (player.isInWater())
-				{
-					player.setAir(300);
-				}
-			}
+			return PlayerAether.get((EntityPlayer) event.entityLiving);
 		}
+
+		return null;
 	}
 }
