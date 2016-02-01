@@ -157,6 +157,7 @@ item.gold_ring.name=Gold Ring
 item.iron_pendant.name=Iron Pendant
 item.gold_pendant.name=Gold Pendant
 item.iron_bubble.name=Iron Bubble
+item.regeneration_stone.name=Regeneration Stone
 
 # Weapon Tooltips
 item.skyroot_sword.ability.desc=Doubles drops from mobs

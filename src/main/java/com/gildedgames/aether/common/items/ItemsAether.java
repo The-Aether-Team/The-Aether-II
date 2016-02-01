@@ -104,7 +104,7 @@ public class ItemsAether
 
 	public static Item iron_pendant, gold_pendant;
 
-	public static Item iron_bubble;
+	public static Item iron_bubble, regeneration_stone;
 
 
 	public static void preInit()
@@ -235,6 +235,7 @@ public class ItemsAether
 		zanite_pendant = registerItem("zanite_pendant", new ItemAccessory(AccessoryType.NECKWEAR), AetherCreativeTabs.tabAccessories);
 
 		iron_bubble = registerItem("iron_bubble", new ItemAccessory(AccessoryType.MISC), AetherCreativeTabs.tabAccessories);
+		regeneration_stone = registerItem("regeneration_stone", new ItemAccessory(AccessoryType.MISC), AetherCreativeTabs.tabAccessories);
 
 		registerItemProperties();
 	}

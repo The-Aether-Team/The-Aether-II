@@ -249,6 +249,7 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.zanite_pendant, new ItemModelList("accessories/").add(0, "zanite_pendant"));
 
 		registerItemModels(ItemsAether.iron_bubble, new ItemModelList("accessories/").add(0, "iron_bubble"));
+		registerItemModels(ItemsAether.regeneration_stone, new ItemModelList("accessories/").add(0, "regeneration_stone"));
 
 		registerItemModels(getItem(BlocksAether.skyroot_chest), new ItemModelList().add(0, "skyroot_chest"));
 		registerItemModels(getItem(BlocksAether.ambrosium_torch), new ItemModelList().add(0, "ambrosium_torch"));
