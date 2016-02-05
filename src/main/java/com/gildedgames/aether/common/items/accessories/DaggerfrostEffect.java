@@ -1,7 +1,10 @@
 package com.gildedgames.aether.common.items.accessories;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemSnowball;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 
@@ -51,6 +54,18 @@ public class DaggerfrostEffect implements AccessoryEffect
 		        }
 			}
 		}
+	}
+
+	@Override
+	public void onKillEntity(LivingDropsEvent event, EntityLivingBase killedEntity, PlayerAether aePlayer, ItemStack stack, AccessoryType type)
+	{
+		
+	}
+	
+	@Override
+	public void onAttackEntity(LivingHurtEvent event, PlayerAether aePlayer, ItemStack stack, AccessoryType type)
+	{
+		
 	}
 
 }

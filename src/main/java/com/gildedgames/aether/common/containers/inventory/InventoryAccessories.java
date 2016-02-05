@@ -1,13 +1,5 @@
 package com.gildedgames.aether.common.containers.inventory;
 
-import com.gildedgames.aether.common.containers.slots.SlotAccessory;
-import com.gildedgames.aether.common.items.accessories.AccessoryEffect;
-
-import com.gildedgames.aether.common.items.accessories.AccessoryType;
-import com.gildedgames.aether.common.items.accessories.ItemAccessory;
-import com.gildedgames.aether.common.player.PlayerAether;
-import com.gildedgames.util.core.nbt.NBT;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -16,6 +8,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
+
+import com.gildedgames.aether.common.items.accessories.AccessoryEffect;
+import com.gildedgames.aether.common.items.accessories.AccessoryType;
+import com.gildedgames.aether.common.items.accessories.ItemAccessory;
+import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.util.core.nbt.NBT;
 
 public class InventoryAccessories implements IInventory, NBT
 {

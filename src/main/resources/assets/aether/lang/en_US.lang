@@ -161,6 +161,9 @@ item.regeneration_stone.name=Regeneration Stone
 item.ice_ring.name=Ice Ring
 item.ice_pendant.name=Ice Pendant
 item.daggerfrost_locket.name=Daggerfrost Locket
+item.candy_ring.name=Candy Ring
+item.bone_ring.name=Bone Ring
+item.skyroot_ring.name=Skyroot Ring
 
 # Weapon Tooltips
 item.skyroot_sword.ability.desc=Doubles drops from mobs

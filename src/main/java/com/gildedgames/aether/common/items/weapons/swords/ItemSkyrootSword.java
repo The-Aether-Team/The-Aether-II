@@ -1,16 +1,31 @@
 package com.gildedgames.aether.common.items.weapons.swords;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ItemSkyrootSword extends ItemAetherSword
 {
+	
+	public static final Set<Item> blacklistedItems = new HashSet<Item>();
+
+	static
+	{
+		blacklistedItems.add(Items.saddle);
+		blacklistedItems.add(Items.skull);
+		blacklistedItems.add(Item.getItemFromBlock(Blocks.chest));
+	}
+	
 	public ItemSkyrootSword()
 	{
 		super(ToolMaterial.WOOD);
@@ -41,4 +56,5 @@ public class ItemSkyrootSword extends ItemAetherSword
 			}
 		}
 	}
+	
 }

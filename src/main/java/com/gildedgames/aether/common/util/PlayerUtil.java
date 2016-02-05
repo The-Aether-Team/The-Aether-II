@@ -1,11 +1,12 @@
 package com.gildedgames.aether.common.util;
 
-import com.gildedgames.aether.common.items.accessories.AccessoryType;
-import com.gildedgames.aether.common.items.accessories.ItemAccessory;
-import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import com.gildedgames.aether.common.items.accessories.AccessoryEffect;
+import com.gildedgames.aether.common.items.accessories.ItemAccessory;
+import com.gildedgames.aether.common.player.PlayerAether;
 
 public class PlayerUtil
 {
@@ -78,6 +79,37 @@ public class PlayerUtil
 
 		return false;
 	}
+	
+	public static boolean isAccessoryInFirstSlot(EntityPlayer player, ItemStack stack)
+	{
+		PlayerAether aePlayer = PlayerAether.get(player);
+		
+		if (!(stack.getItem() instanceof ItemAccessory))
+		{
+			return false;
+		}
+
+		for (int index = 0; index < 8; index++)
+		{
+			ItemStack slotStack = aePlayer.getInventoryAccessories().getInventory()[index];
+			
+			if (slotStack == stack)
+			{
+				return true;
+			}
+			else if (slotStack != null && slotStack.getItem() instanceof ItemAccessory)
+			{
+				ItemAccessory acc = (ItemAccessory)slotStack.getItem();
+				
+				if (acc.getType() == ((ItemAccessory)stack.getItem()).getType())
+				{
+					return false;
+				}
+			}
+		}
+
+		return false;
+	}
 
 	public static boolean wearingAccessory(EntityPlayer player, Item item)
 	{
@@ -85,4 +117,49 @@ public class PlayerUtil
 
 		return aePlayer.isAccessoryEquipped(item);
 	}
+	
+	public static int getAccessoryCount(EntityPlayer player, Item itemID)
+	{
+		PlayerAether aePlayer = PlayerAether.get(player);
+		
+		int count = 0;
+
+		for (int index = 0; index < 8; index++)
+		{
+			if (aePlayer.getInventoryAccessories().getInventory()[index] != null && aePlayer.getInventoryAccessories().getInventory()[index].getItem() == itemID)
+			{
+				count++;
+			}
+		}
+
+		return count;
+	}
+	
+	public static int getEffectCount(EntityPlayer player, AccessoryEffect effect)
+	{
+		PlayerAether aePlayer = PlayerAether.get(player);
+		
+		int count = 0;
+
+		for (int index = 0; index < 8; index++)
+		{
+			ItemStack stack = aePlayer.getInventoryAccessories().getInventory()[index];
+			
+			if (stack != null && stack.getItem() instanceof ItemAccessory)
+			{
+				ItemAccessory acc = (ItemAccessory)stack.getItem();
+				
+				for (AccessoryEffect itEffect : acc.getEffects())
+				{
+					if (effect.getClass().isAssignableFrom(itEffect.getClass()))
+					{
+						count++;
+					}
+				}
+			}
+		}
+
+		return count;
+	}
+	
 }

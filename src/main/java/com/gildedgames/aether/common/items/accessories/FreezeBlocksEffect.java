@@ -5,12 +5,15 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import com.gildedgames.aether.common.player.PlayerAether;
@@ -67,7 +70,7 @@ public class FreezeBlocksEffect implements AccessoryEffect
 							continue;
 						}
 						
-						if (x <= x1 - RADIUS || y <= y1 - RADIUS || z <= z1 - RADIUS || x >= x1 + RADIUS || y >= y1 + RADIUS || z >= z1 + RADIUS)
+						if (x == x1 - RADIUS || y == y1 - RADIUS || z == z1 - RADIUS || x == x1 + RADIUS || y == y1 + RADIUS || z == z1 + RADIUS)
 						{
 							if (this.frozenLocations.contains(pos))
 							{
@@ -118,6 +121,18 @@ public class FreezeBlocksEffect implements AccessoryEffect
 
 	@Override
 	public void onInteract(PlayerInteractEvent event, PlayerAether aePlayer, ItemStack stack, AccessoryType type)
+	{
+		
+	}
+
+	@Override
+	public void onKillEntity(LivingDropsEvent event, EntityLivingBase killedEntity, PlayerAether aePlayer, ItemStack stack, AccessoryType type)
+	{
+		
+	}
+	
+	@Override
+	public void onAttackEntity(LivingHurtEvent event, PlayerAether aePlayer, ItemStack stack, AccessoryType type)
 	{
 		
 	}

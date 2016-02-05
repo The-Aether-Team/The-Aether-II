@@ -1,34 +1,38 @@
 package com.gildedgames.aether.common.items.accessories;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.aether.common.util.PlayerUtil;
 
 
 /**
- * Sets player's "air" level to 300, which is one bubble worth of air. This means allows
- * them to breathe under water.
  * @author Brandon Pearce
  */
-public class BreatheInWaterEffect implements AccessoryEffect
+public class ExtraDamageEffect implements AccessoryEffect
 {
 	
-	public BreatheInWaterEffect()
+	private float extraDamage;
+	
+	public ExtraDamageEffect(float extraDamage)
 	{
-		
+		this.extraDamage = extraDamage;
+	}
+	
+	public float getPercentChance()
+	{
+		return this.extraDamage;
 	}
 
 	@Override
 	public void onUpdate(PlayerAether aePlayer, ItemStack stack, AccessoryType type)
 	{
-		if (aePlayer.getPlayer().isInWater())
-		{
-			aePlayer.getPlayer().setAir(300);
-		}
+		
 	}
 
 	@Override
@@ -54,11 +58,25 @@ public class BreatheInWaterEffect implements AccessoryEffect
 	{
 		
 	}
-	
+
 	@Override
 	public void onAttackEntity(LivingHurtEvent event, PlayerAether aePlayer, ItemStack stack, AccessoryType type)
 	{
+		if (!PlayerUtil.isAccessoryInFirstSlot(aePlayer.getPlayer(), stack))
+		{
+			return;
+		}
 		
+		EntityPlayer player = (EntityPlayer) event.source.getEntity();
+
+		if (player.swingProgressInt == -1)
+		{
+			player.swingProgressInt = 0;
+			
+			int effectCount = PlayerUtil.getEffectCount(player, this);
+
+			event.entityLiving.setHealth(Math.max(0, event.entityLiving.getHealth() - (effectCount * this.extraDamage)));
+		}
 	}
 	
 }

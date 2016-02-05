@@ -1,12 +1,5 @@
 package com.gildedgames.aether.common.player;
 
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.accessories.AccessoryEffect;
-import com.gildedgames.aether.common.items.accessories.ItemAccessory;
-import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
-import com.gildedgames.aether.common.util.PlayerUtil;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -17,6 +10,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.accessories.AccessoryEffect;
+import com.gildedgames.aether.common.items.accessories.ItemAccessory;
+import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
+import com.gildedgames.aether.common.util.PlayerUtil;
 
 public class PlayerAether implements IExtendedEntityProperties
 {

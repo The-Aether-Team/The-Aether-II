@@ -17,8 +17,11 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.accessories.AccessoryType;
 import com.gildedgames.aether.common.items.accessories.BreatheInWaterEffect;
 import com.gildedgames.aether.common.items.accessories.DaggerfrostEffect;
+import com.gildedgames.aether.common.items.accessories.DoubleDropEffect;
+import com.gildedgames.aether.common.items.accessories.ExtraDamageEffect;
 import com.gildedgames.aether.common.items.accessories.FreezeBlocksEffect;
 import com.gildedgames.aether.common.items.accessories.ItemAccessory;
+import com.gildedgames.aether.common.items.accessories.PauseHungerEffect;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.items.armor.ItemObsidianArmor;
@@ -112,6 +115,8 @@ public class ItemsAether
 	public static Item ice_ring, ice_pendant;
 
 	public static Item daggerfrost_locket;
+	
+	public static Item candy_ring, bone_ring, skyroot_ring;
 
 	public static void preInit()
 	{
@@ -247,6 +252,12 @@ public class ItemsAether
 		ice_pendant = registerItem("ice_pendant", new ItemAccessory(AccessoryType.RING, new FreezeBlocksEffect()), AetherCreativeTabs.tabAccessories);
 		
 		daggerfrost_locket = registerItem("daggerfrost_locket", new ItemAccessory(AccessoryType.NECKWEAR, new DaggerfrostEffect()), AetherCreativeTabs.tabAccessories);
+		
+		candy_ring = registerItem("candy_ring", new ItemAccessory(AccessoryType.RING, new PauseHungerEffect()), AetherCreativeTabs.tabAccessories);
+		
+		bone_ring = registerItem("bone_ring", new ItemAccessory(AccessoryType.RING, new ExtraDamageEffect(2.0F)), AetherCreativeTabs.tabAccessories);
+		
+		skyroot_ring = registerItem("skyroot_ring", new ItemAccessory(AccessoryType.RING, new DoubleDropEffect(1.5F)), AetherCreativeTabs.tabAccessories);
 		
 		registerItemProperties();
 	}

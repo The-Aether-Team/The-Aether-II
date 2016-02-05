@@ -259,6 +259,10 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.ice_pendant, new ItemModelList("accessories/").add(0, "ice_pendant"));
 		
 		registerItemModels(ItemsAether.daggerfrost_locket, new ItemModelList("accessories/").add(0, "daggerfrost_locket"));
+		
+		registerItemModels(ItemsAether.candy_ring, new ItemModelList("accessories/").add(0, "candy_ring"));
+		registerItemModels(ItemsAether.bone_ring, new ItemModelList("accessories/").add(0, "bone_ring"));
+		registerItemModels(ItemsAether.skyroot_ring, new ItemModelList("accessories/").add(0, "skyroot_ring"));
 
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.skyroot_chest), 0, TileEntitySkyrootChest.class);
 	}
