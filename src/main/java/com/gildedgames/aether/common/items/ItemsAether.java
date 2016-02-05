@@ -1,11 +1,23 @@
 package com.gildedgames.aether.common.items;
 
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemDoor;
+import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.AetherMaterials;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.accessories.AccessoryType;
+import com.gildedgames.aether.common.items.accessories.BreatheInWaterEffect;
+import com.gildedgames.aether.common.items.accessories.FreezeBlocksEffect;
 import com.gildedgames.aether.common.items.accessories.ItemAccessory;
-import com.gildedgames.aether.common.items.accessories.ItemIronBubble;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.items.armor.ItemObsidianArmor;
@@ -35,17 +47,6 @@ import com.gildedgames.aether.common.items.weapons.swords.ItemGravititeSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemHolystoneSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemZaniteSword;
-
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemDoor;
-import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemsAether
 {
@@ -106,6 +107,8 @@ public class ItemsAether
 	public static Item iron_pendant, gold_pendant;
 
 	public static Item iron_bubble, regeneration_stone;
+	
+	public static Item ice_ring, ice_pendant;
 
 
 	public static void preInit()
@@ -235,9 +238,12 @@ public class ItemsAether
 		zanite_ring = registerItem("zanite_ring", new ItemAccessory(AccessoryType.RING), AetherCreativeTabs.tabAccessories);
 		zanite_pendant = registerItem("zanite_pendant", new ItemAccessory(AccessoryType.NECKWEAR), AetherCreativeTabs.tabAccessories);
 
-		iron_bubble = registerItem("iron_bubble", new ItemIronBubble(), AetherCreativeTabs.tabAccessories);
+		iron_bubble = registerItem("iron_bubble", new ItemAccessory(AccessoryType.MISC).add(new BreatheInWaterEffect()), AetherCreativeTabs.tabAccessories);
 		regeneration_stone = registerItem("regeneration_stone", new ItemAccessory(AccessoryType.MISC), AetherCreativeTabs.tabAccessories);
 
+		ice_ring = registerItem("ice_ring", new ItemAccessory(AccessoryType.RING).add(new FreezeBlocksEffect()), AetherCreativeTabs.tabAccessories);
+		ice_pendant = registerItem("ice_pendant", new ItemAccessory(AccessoryType.RING).add(new FreezeBlocksEffect()), AetherCreativeTabs.tabAccessories);
+		
 		registerItemProperties();
 	}
 

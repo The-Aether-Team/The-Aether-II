@@ -1,15 +1,21 @@
 package com.gildedgames.aether.common.items.accessories;
 
-import com.gildedgames.aether.common.player.PlayerAether;
-import net.minecraft.entity.EntityLiving;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.gildedgames.aether.common.player.PlayerAether;
+
 public class ItemAccessory extends Item
 {
+	
 	private final AccessoryType type;
+	
+	private final List<AccessoryEffect> effects = new ArrayList<AccessoryEffect>();
 
 	public ItemAccessory(AccessoryType type)
 	{
@@ -17,18 +23,14 @@ public class ItemAccessory extends Item
 
 		this.setMaxStackSize(1);
 	}
-
-	public void onAccessoryEquipped(PlayerAether aePlayer, ItemStack stack) { }
-
-	public void onAccessoryUnequipped(PlayerAether aePlayer, ItemStack stack) { }
-
-	/**
-	 * Called every tick while this accessory is equipped.
-	 * @param aePlayer The player responsible for this tick
-	 * @param stack The stack equipped
-	 */
-	public void onAccessoryUpdate(PlayerAether aePlayer, ItemStack stack) { }
-
+	
+	public ItemAccessory add(AccessoryEffect effect)
+	{
+		this.effects.add(effect);
+		
+		return this;
+	}
+	
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
 	{
@@ -50,4 +52,10 @@ public class ItemAccessory extends Item
 	{
 		return this.type;
 	}
+	
+	public List<AccessoryEffect> getEffects()
+	{
+		return this.effects;
+	}
+	
 }

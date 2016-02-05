@@ -1,18 +1,9 @@
 package com.gildedgames.aether.common.player;
 
+import io.netty.buffer.ByteBuf;
+
 import java.util.UUID;
 
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.accessories.ItemAccessory;
-import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
-import com.gildedgames.aether.common.util.PlayerUtil;
-import com.gildedgames.util.player.common.IPlayerHookPool;
-import com.gildedgames.util.player.common.player.IPlayerHook;
-import com.gildedgames.util.player.common.player.IPlayerProfile;
-
-import io.netty.buffer.ByteBuf;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,6 +11,17 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.accessories.AccessoryEffect;
+import com.gildedgames.aether.common.items.accessories.ItemAccessory;
+import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
+import com.gildedgames.aether.common.util.PlayerUtil;
+import com.gildedgames.util.player.common.IPlayerHookPool;
+import com.gildedgames.util.player.common.player.IPlayerHook;
+import com.gildedgames.util.player.common.player.IPlayerProfile;
 
 public class PlayerAether implements IPlayerHook
 {
@@ -61,7 +63,12 @@ public class PlayerAether implements IPlayerHook
 		{
 			if (stack != null && stack.getItem() instanceof ItemAccessory)
 			{
-				((ItemAccessory) stack.getItem()).onAccessoryUpdate(this, stack);
+				ItemAccessory acc = (ItemAccessory) stack.getItem();
+				
+				for (AccessoryEffect effect : acc.getEffects())
+				{
+					effect.onAccessoryUpdate(this, stack, acc.getType());
+				}
 			}
 		}
 	}

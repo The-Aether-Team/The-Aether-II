@@ -1,10 +1,12 @@
 package com.gildedgames.aether.common.containers.inventory;
 
 import com.gildedgames.aether.common.containers.slots.SlotAccessory;
+import com.gildedgames.aether.common.items.accessories.AccessoryEffect;
 import com.gildedgames.aether.common.items.accessories.AccessoryType;
 import com.gildedgames.aether.common.items.accessories.ItemAccessory;
 import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.util.core.nbt.NBT;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -113,7 +115,12 @@ public class InventoryAccessories implements IInventory, NBT
 
 		if (stack != null && stack.getItem() instanceof ItemAccessory)
 		{
-			((ItemAccessory) stack.getItem()).onAccessoryEquipped(this.aePlayer, stack);
+			ItemAccessory acc = (ItemAccessory)stack.getItem();
+			
+			for (AccessoryEffect effect : acc.getEffects())
+			{
+				effect.onAccessoryEquipped(this.aePlayer, stack, acc.getType());
+			}
 		}
 
 		this.markDirty();

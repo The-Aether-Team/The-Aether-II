@@ -1,5 +1,16 @@
 package com.gildedgames.aether.client.models.items;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.model.ModelBakery;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.item.Item;
+import net.minecraftforge.client.ForgeHooksClient;
+
 import com.gildedgames.aether.client.util.ItemModelList;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
@@ -15,16 +26,6 @@ import com.gildedgames.aether.common.items.consumables.ItemGummySwet;
 import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootChest;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelBakery;
-import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.item.Item;
-import net.minecraftforge.client.ForgeHooksClient;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 public class AetherItemModels
 {
@@ -253,6 +254,9 @@ public class AetherItemModels
 
 		registerItemModels(getItem(BlocksAether.skyroot_chest), new ItemModelList().add(0, "skyroot_chest"));
 		registerItemModels(getItem(BlocksAether.ambrosium_torch), new ItemModelList().add(0, "ambrosium_torch"));
+		
+		registerItemModels(ItemsAether.ice_ring, new ItemModelList("accessories/").add(0, "ice_ring"));
+		registerItemModels(ItemsAether.ice_pendant, new ItemModelList("accessories/").add(0, "ice_pendant"));
 
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.skyroot_chest), 0, TileEntitySkyrootChest.class);
 	}

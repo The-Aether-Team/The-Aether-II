@@ -158,6 +158,8 @@ item.iron_pendant.name=Iron Pendant
 item.gold_pendant.name=Gold Pendant
 item.iron_bubble.name=Iron Bubble
 item.regeneration_stone.name=Regeneration Stone
+item.ice_ring.name=Ice Ring
+item.ice_pendant.name=Ice Pendant
 
 # Weapon Tooltips
 item.skyroot_sword.ability.desc=Doubles drops from mobs
@@ -234,6 +236,7 @@ gui.slot.glove=Gloves
 item.zanite_ring.ability.desc=Increases Mining Speed
 item.zanite_pendant.ability.desc=Increases Mining Speed
 item.iron_bubble.ability.desc=Breathe Underwater
+item.ice_ring.ability.desc=Freeze Nearby Blocks
 
 # Tabs
 tab.accessories=Accessories

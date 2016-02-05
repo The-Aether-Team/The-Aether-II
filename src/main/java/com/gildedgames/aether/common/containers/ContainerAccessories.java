@@ -1,15 +1,17 @@
 package com.gildedgames.aether.common.containers;
 
-import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
-import com.gildedgames.aether.common.containers.slots.SlotAccessory;
-import com.gildedgames.aether.common.items.accessories.AccessoryType;
-import com.gildedgames.aether.common.items.accessories.ItemAccessory;
-import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
+
+import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
+import com.gildedgames.aether.common.containers.slots.SlotAccessory;
+import com.gildedgames.aether.common.items.accessories.AccessoryEffect;
+import com.gildedgames.aether.common.items.accessories.AccessoryType;
+import com.gildedgames.aether.common.items.accessories.ItemAccessory;
+import com.gildedgames.aether.common.player.PlayerAether;
 
 public class ContainerAccessories extends ContainerPlayer
 {
@@ -113,7 +115,12 @@ public class ContainerAccessories extends ContainerPlayer
 			}
 			else if (slot instanceof SlotAccessory && stack.getItem() instanceof ItemAccessory)
 			{
-				((ItemAccessory) stack.getItem()).onAccessoryUnequipped(this.aePlayer, stack);
+				ItemAccessory acc = (ItemAccessory)stack.getItem();
+				
+				for (AccessoryEffect effect : acc.getEffects())
+				{
+					effect.onAccessoryUnequipped(this.aePlayer, stack, acc.getType());
+				}
 			}
 		}
 
