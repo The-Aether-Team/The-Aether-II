@@ -64,7 +64,19 @@ public class PlayerAether implements IExtendedEntityProperties
 	 */
 	public void onDeath()
 	{
-		this.getInventoryAccessories().clear();
+
+	}
+
+	public void dropAccessories()
+	{
+		if (!this.getPlayer().getEntityWorld().getGameRules().getBoolean("keepInventory"))
+		{
+			this.getPlayer().captureDrops = true;
+
+			this.getInventoryAccessories().dropAllItems();
+			
+			this.getPlayer().captureDrops = false;
+		}
 	}
 
 	public void onCalculateBreakSpeed(PlayerEvent.BreakSpeed event)

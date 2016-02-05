@@ -206,6 +206,18 @@ public class InventoryAccessories implements IInventory, NBT
 		}
 	}
 
+	public void dropAllItems()
+	{
+		for (int i = 0; i < this.inventory.length; ++i)
+		{
+			if (this.inventory[i] != null)
+			{
+				this.aePlayer.getPlayer().dropItem(this.inventory[i], true, false);
+				this.inventory[i] = null;
+			}
+		}
+	}
+
 	@Override
 	public String getName()
 	{

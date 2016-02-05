@@ -12,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -126,6 +127,18 @@ public class PlayerAetherEventHandler
 		if (aePlayer != null)
 		{
 			aePlayer.onDeath();
+		}
+	}
+
+
+	@SubscribeEvent
+	public void onLivingDrops(LivingDropsEvent event)
+	{
+		PlayerAether aePlayer = this.getAetherPlayer(event);
+
+		if (aePlayer != null)
+		{
+			aePlayer.dropAccessories();
 		}
 	}
 

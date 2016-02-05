@@ -51,6 +51,8 @@ public class PacketOpenContainer extends CustomPacket<PacketOpenContainer>
 			mpPlayer.openContainer = container;
 			mpPlayer.openContainer.windowId = mpPlayer.currentWindowId;
 
+			container.onCraftGuiOpened(mpPlayer);
+
 			NetworkingAether.sendPacketToPlayer(new PacketOpenContainer(mpPlayer.openContainer.windowId), mpPlayer);
 		}
 	}
