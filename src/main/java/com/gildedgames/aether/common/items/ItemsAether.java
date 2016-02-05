@@ -238,11 +238,11 @@ public class ItemsAether
 		zanite_ring = registerItem("zanite_ring", new ItemAccessory(AccessoryType.RING), AetherCreativeTabs.tabAccessories);
 		zanite_pendant = registerItem("zanite_pendant", new ItemAccessory(AccessoryType.NECKWEAR), AetherCreativeTabs.tabAccessories);
 
-		iron_bubble = registerItem("iron_bubble", new ItemAccessory(AccessoryType.MISC).add(new BreatheInWaterEffect()), AetherCreativeTabs.tabAccessories);
+		iron_bubble = registerItem("iron_bubble", new ItemAccessory(AccessoryType.MISC, new BreatheInWaterEffect()), AetherCreativeTabs.tabAccessories);
 		regeneration_stone = registerItem("regeneration_stone", new ItemAccessory(AccessoryType.MISC), AetherCreativeTabs.tabAccessories);
 
-		ice_ring = registerItem("ice_ring", new ItemAccessory(AccessoryType.RING).add(new FreezeBlocksEffect()), AetherCreativeTabs.tabAccessories);
-		ice_pendant = registerItem("ice_pendant", new ItemAccessory(AccessoryType.RING).add(new FreezeBlocksEffect()), AetherCreativeTabs.tabAccessories);
+		ice_ring = registerItem("ice_ring", new ItemAccessory(AccessoryType.RING, new FreezeBlocksEffect()), AetherCreativeTabs.tabAccessories);
+		ice_pendant = registerItem("ice_pendant", new ItemAccessory(AccessoryType.RING, new FreezeBlocksEffect()), AetherCreativeTabs.tabAccessories);
 		
 		registerItemProperties();
 	}
