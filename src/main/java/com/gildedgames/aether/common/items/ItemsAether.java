@@ -16,6 +16,7 @@ import com.gildedgames.aether.common.AetherMaterials;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.accessories.AccessoryType;
 import com.gildedgames.aether.common.items.accessories.BreatheInWaterEffect;
+import com.gildedgames.aether.common.items.accessories.DaggerfrostEffect;
 import com.gildedgames.aether.common.items.accessories.FreezeBlocksEffect;
 import com.gildedgames.aether.common.items.accessories.ItemAccessory;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
@@ -110,6 +111,7 @@ public class ItemsAether
 	
 	public static Item ice_ring, ice_pendant;
 
+	public static Item daggerfrost_locket;
 
 	public static void preInit()
 	{
@@ -243,6 +245,8 @@ public class ItemsAether
 
 		ice_ring = registerItem("ice_ring", new ItemAccessory(AccessoryType.RING, new FreezeBlocksEffect()), AetherCreativeTabs.tabAccessories);
 		ice_pendant = registerItem("ice_pendant", new ItemAccessory(AccessoryType.RING, new FreezeBlocksEffect()), AetherCreativeTabs.tabAccessories);
+		
+		daggerfrost_locket = registerItem("daggerfrost_locket", new ItemAccessory(AccessoryType.NECKWEAR, new DaggerfrostEffect()), AetherCreativeTabs.tabAccessories);
 		
 		registerItemProperties();
 	}

@@ -1,5 +1,12 @@
 package com.gildedgames.aether.client.renderer;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelCow;
+import net.minecraft.client.model.ModelPig;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+
 import com.gildedgames.aether.client.models.entities.living.ModelAechorPlant;
 import com.gildedgames.aether.client.models.entities.living.ModelAerbunny;
 import com.gildedgames.aether.client.models.entities.living.ModelCarrionSprout;
@@ -11,6 +18,7 @@ import com.gildedgames.aether.client.renderer.entities.living.RenderCarrionSprou
 import com.gildedgames.aether.client.renderer.entities.living.RenderFlyingCow;
 import com.gildedgames.aether.client.renderer.entities.living.RenderPhyg;
 import com.gildedgames.aether.client.renderer.entities.living.RenderSheepuff;
+import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDaggerfrostSnowball;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDart;
 import com.gildedgames.aether.client.renderer.tile_entity.TileEntityAltarRenderer;
 import com.gildedgames.aether.client.renderer.tile_entity.TileEntitySkyrootChestRenderer;
@@ -18,18 +26,13 @@ import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.living.EntityAechorPlant;
 import com.gildedgames.aether.common.entities.living.EntityAerbunny;
 import com.gildedgames.aether.common.entities.living.EntityCarrionSprout;
+import com.gildedgames.aether.common.entities.living.EntitySheepuff;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
-import com.gildedgames.aether.common.entities.living.EntitySheepuff;
+import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
 import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootChest;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelCow;
-import net.minecraft.client.model.ModelPig;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class AetherRenderers
 {
@@ -45,6 +48,7 @@ public class AetherRenderers
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityFloatingBlock.class, new RenderFloatingBlock(renderManager));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDart.class, new RenderDart(renderManager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDaggerfrostSnowball.class, new RenderDaggerfrostSnowball(renderManager));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityPhyg.class, new RenderPhyg(renderManager, new ModelPig(), 0.7f));
 		RenderingRegistry.registerEntityRenderingHandler(EntityFlyingCow.class, new RenderFlyingCow(renderManager, new ModelCow(), 0.7f));

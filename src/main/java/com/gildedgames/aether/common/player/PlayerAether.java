@@ -53,7 +53,7 @@ public class PlayerAether implements IExtendedEntityProperties
 				
 				for (AccessoryEffect effect : acc.getEffects())
 				{
-					effect.onAccessoryUpdate(this, stack, acc.getType());
+					effect.onUpdate(this, stack, acc.getType());
 				}
 			}
 		}

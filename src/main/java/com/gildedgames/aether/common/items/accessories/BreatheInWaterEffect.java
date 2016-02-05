@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.items.accessories;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import com.gildedgames.aether.common.player.PlayerAether;
 
@@ -19,7 +20,7 @@ public class BreatheInWaterEffect implements AccessoryEffect
 	}
 
 	@Override
-	public void onAccessoryUpdate(PlayerAether aePlayer, ItemStack stack, AccessoryType type)
+	public void onUpdate(PlayerAether aePlayer, ItemStack stack, AccessoryType type)
 	{
 		if (aePlayer.getPlayer().isInWater())
 		{
@@ -28,13 +29,19 @@ public class BreatheInWaterEffect implements AccessoryEffect
 	}
 
 	@Override
-	public void onAccessoryEquipped(PlayerAether aePlayer, ItemStack stack, AccessoryType type)
+	public void onEquipped(PlayerAether aePlayer, ItemStack stack, AccessoryType type)
 	{
 		
 	}
 
 	@Override
-	public void onAccessoryUnequipped(PlayerAether aePlayer, ItemStack stack, AccessoryType type)
+	public void onUnequipped(PlayerAether aePlayer, ItemStack stack, AccessoryType type)
+	{
+		
+	}
+
+	@Override
+	public void onInteract(PlayerInteractEvent event, PlayerAether aePlayer, ItemStack stack, AccessoryType type)
 	{
 		
 	}

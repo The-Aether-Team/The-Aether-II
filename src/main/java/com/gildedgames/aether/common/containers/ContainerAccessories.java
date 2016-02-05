@@ -140,7 +140,7 @@ public class ContainerAccessories extends ContainerPlayer
 				
 				for (AccessoryEffect effect : acc.getEffects())
 				{
-					effect.onAccessoryUnequipped(this.aePlayer, stack, acc.getType());
+					effect.onUnequipped(this.aePlayer, stack, acc.getType());
 				}
 			}
 		}

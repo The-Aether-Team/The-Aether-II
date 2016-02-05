@@ -119,7 +119,7 @@ public class InventoryAccessories implements IInventory, NBT
 			
 			for (AccessoryEffect effect : acc.getEffects())
 			{
-				effect.onAccessoryEquipped(this.aePlayer, stack, acc.getType());
+				effect.onEquipped(this.aePlayer, stack, acc.getType());
 			}
 		}
 

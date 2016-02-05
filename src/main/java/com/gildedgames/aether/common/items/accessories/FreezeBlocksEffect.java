@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import com.gildedgames.aether.common.player.PlayerAether;
 
@@ -25,19 +26,19 @@ public class FreezeBlocksEffect implements AccessoryEffect
 	private List<BlockPos> frozenLocations = new ArrayList<BlockPos>();
 
 	@Override
-	public void onAccessoryEquipped(PlayerAether aePlayer, ItemStack stack, AccessoryType type)
+	public void onEquipped(PlayerAether aePlayer, ItemStack stack, AccessoryType type)
 	{
 		
 	}
 
 	@Override
-	public void onAccessoryUnequipped(PlayerAether aePlayer, ItemStack stack, AccessoryType type)
+	public void onUnequipped(PlayerAether aePlayer, ItemStack stack, AccessoryType type)
 	{
 		
 	}
 
 	@Override
-	public void onAccessoryUpdate(PlayerAether aePlayer, ItemStack stack, AccessoryType type)
+	public void onUpdate(PlayerAether aePlayer, ItemStack stack, AccessoryType type)
 	{
 		EntityPlayer player = aePlayer.getPlayer();
 		World world = player.worldObj;
@@ -113,6 +114,12 @@ public class FreezeBlocksEffect implements AccessoryEffect
 				}
 			}
 		}
+	}
+
+	@Override
+	public void onInteract(PlayerInteractEvent event, PlayerAether aePlayer, ItemStack stack, AccessoryType type)
+	{
+		
 	}
 
 }

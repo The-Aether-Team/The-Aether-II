@@ -1,10 +1,7 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.util.PlayerUtil;
-import com.gildedgames.util.universe.common.util.TeleporterGeneric;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -25,12 +22,20 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.Random;
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.accessories.AccessoryEffect;
+import com.gildedgames.aether.common.items.accessories.ItemAccessory;
+import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.aether.common.util.PlayerUtil;
+import com.gildedgames.util.universe.common.util.TeleporterGeneric;
 
 public class CommonEvents
 {
@@ -230,4 +235,24 @@ public class CommonEvents
 			event.setCanceled(true);
 		}
 	}
+	
+	@SubscribeEvent
+	public void onPlayerInteract(PlayerInteractEvent event)
+	{
+		PlayerAether player = PlayerAether.get(event.entityPlayer);
+		
+		for (ItemStack stack : player.getInventoryAccessories().getInventory())
+		{
+			if (stack != null && stack.getItem() instanceof ItemAccessory)
+			{
+				ItemAccessory acc = (ItemAccessory) stack.getItem();
+				
+				for (AccessoryEffect effect : acc.getEffects())
+				{
+					effect.onInteract(event, player, stack, acc.getType());
+				}
+			}
+		}
+	}
+	
 }
