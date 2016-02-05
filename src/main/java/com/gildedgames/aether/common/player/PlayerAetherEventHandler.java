@@ -4,17 +4,15 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
-import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import com.gildedgames.aether.common.world.chunk.PlacementFlagChunkData;
 import com.gildedgames.util.chunk.ChunkCore;
-import net.minecraft.block.material.Material;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
@@ -139,5 +137,14 @@ public class PlayerAetherEventHandler
 		}
 
 		return null;
+	}
+
+	@SubscribeEvent
+	public void onConstructEntity(EntityEvent.EntityConstructing event)
+	{
+		if (event.entity instanceof EntityPlayer)
+		{
+			event.entity.registerExtendedProperties(AetherCore.MOD_ID, new PlayerAether());
+		}
 	}
 }

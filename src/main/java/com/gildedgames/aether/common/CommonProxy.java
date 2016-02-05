@@ -43,9 +43,6 @@ public class CommonProxy
 
 		this.storageDir = new File(event.getSourceFile().getParent(), "Aether/");
 
-		// Register our content with GGUtil.
-		PlayerCore.INSTANCE.registerPlayerPool(AetherCore.client().getPool(), AetherCore.server().getPool());
-
 		// Register with NetworkRegistry.
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, this.guiHandler = new AetherGuiHandler());
 

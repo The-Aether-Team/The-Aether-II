@@ -1,13 +1,6 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.common.world.chunk.PlacementFlagChunkData;
-import net.minecraft.util.BlockPos;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import org.apache.logging.log4j.Logger;
-
 import com.gildedgames.aether.common.world.TeleporterAether;
-import com.gildedgames.util.core.SidedObject;
-
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
@@ -15,9 +8,10 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
-import net.minecraftforge.fml.relauncher.Side;
+import org.apache.logging.log4j.Logger;
 
 @Mod(name = AetherCore.MOD_NAME, modid = AetherCore.MOD_ID, version = AetherCore.MOD_VERSION)
 public class AetherCore
@@ -37,8 +31,6 @@ public class AetherCore
 	public static AetherConfig CONFIG;
 
 	public static Logger LOGGER;
-
-	private final SidedObject<AetherServices> services = new SidedObject<>(new AetherServices(Side.CLIENT), new AetherServices(Side.SERVER));
 
 	private static TeleporterAether teleporter;
 
@@ -68,21 +60,6 @@ public class AetherCore
 	public void onServerStarted(FMLServerStartedEvent event)
 	{
 		teleporter = new TeleporterAether(MinecraftServer.getServer().worldServerForDimension(getAetherDimID()));
-	}
-
-	public static AetherServices locate()
-	{
-		return AetherCore.INSTANCE.services.instance();
-	}
-
-	public static AetherServices client()
-	{
-		return AetherCore.INSTANCE.services.client();
-	}
-
-	public static AetherServices server()
-	{
-		return AetherCore.INSTANCE.services.server();
 	}
 
 	public static ResourceLocation getResource(String name)

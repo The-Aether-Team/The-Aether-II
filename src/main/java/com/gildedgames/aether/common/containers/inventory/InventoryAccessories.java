@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.containers.inventory;
 
 import com.gildedgames.aether.common.containers.slots.SlotAccessory;
 import com.gildedgames.aether.common.items.accessories.AccessoryEffect;
+
 import com.gildedgames.aether.common.items.accessories.AccessoryType;
 import com.gildedgames.aether.common.items.accessories.ItemAccessory;
 import com.gildedgames.aether.common.player.PlayerAether;
@@ -9,7 +10,6 @@ import com.gildedgames.util.core.nbt.NBT;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -179,7 +179,7 @@ public class InventoryAccessories implements IInventory, NBT
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
-		return false;
+		return true;
 	}
 
 	@Override

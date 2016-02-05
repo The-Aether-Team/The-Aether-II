@@ -1,17 +1,5 @@
 package com.gildedgames.aether.common.player;
 
-import io.netty.buffer.ByteBuf;
-
-import java.util.UUID;
-
-import net.minecraft.block.material.Material;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -19,39 +7,37 @@ import com.gildedgames.aether.common.items.accessories.AccessoryEffect;
 import com.gildedgames.aether.common.items.accessories.ItemAccessory;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.util.PlayerUtil;
-import com.gildedgames.util.player.common.IPlayerHookPool;
-import com.gildedgames.util.player.common.player.IPlayerHook;
-import com.gildedgames.util.player.common.player.IPlayerProfile;
+import net.minecraft.block.material.Material;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
+import net.minecraftforge.common.IExtendedEntityProperties;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 
-public class PlayerAether implements IPlayerHook
+public class PlayerAether implements IExtendedEntityProperties
 {
-	private final IPlayerProfile playerProfile;
-
-	private final IPlayerHookPool<PlayerAether> playerHookPool;
-
-	private boolean isDirty;
+	private EntityPlayer player;
 
 	private InventoryAccessories inventoryAccessories = new InventoryAccessories(this);
 
-	public PlayerAether(IPlayerProfile playerProfile, IPlayerHookPool<PlayerAether> playerHookPool)
+	@Override
+	public void init(Entity entity, World world)
 	{
-		this.playerProfile = playerProfile;
-		this.playerHookPool = playerHookPool;
+		if (!(entity instanceof EntityPlayer))
+		{
+			throw new IllegalArgumentException("Entity " + entity.toString() + " isn't of type EntityPlayer");
+		}
+
+		this.player = (EntityPlayer) entity;
 	}
 
 	public static PlayerAether get(EntityPlayer player)
 	{
-		return AetherCore.locate().getPool().get(player);
-	}
-
-	public static PlayerAether get(UUID uuid)
-	{
-		return AetherCore.locate().getPool().get(uuid);
-	}
-
-	@Override
-	public void entityInit(EntityPlayer player)
-	{
+		return (PlayerAether) player.getExtendedProperties(AetherCore.MOD_ID);
 	}
 
 	/**
@@ -78,7 +64,7 @@ public class PlayerAether implements IPlayerHook
 	 */
 	public void onDeath()
 	{
-		// TODO: Drop accessories
+		this.getInventoryAccessories().clear();
 	}
 
 	public void onCalculateBreakSpeed(PlayerEvent.BreakSpeed event)
@@ -114,69 +100,9 @@ public class PlayerAether implements IPlayerHook
 		}
 	}
 
-	/* === DISK SYNCING === */
-
-	@Override
-	public void write(NBTTagCompound output)
-	{
-		this.inventoryAccessories.write(output);
-	}
-
-	@Override
-	public void read(NBTTagCompound input)
-	{
-		this.inventoryAccessories.read(input);
-	}
-
-	/* === NETWORK SYNCING === */
-
-	@Override
-	public void syncTo(ByteBuf buf, SyncSide side)
-	{
-
-	}
-
-	@Override
-	public void syncFrom(ByteBuf buf, SyncSide side)
-	{
-
-	}
-
-	/* === BOILERPLATE === */
-
-	@Override
-	public boolean isDirty()
-	{
-		return this.isDirty;
-	}
-
-	@Override
-	public void markDirty()
-	{
-		this.isDirty = true;
-	}
-
-	@Override
-	public void markClean()
-	{
-		this.isDirty = false;
-	}
-
-	@Override
-	public IPlayerHookPool getParentPool()
-	{
-		return this.playerHookPool;
-	}
-
-	@Override
-	public IPlayerProfile getProfile()
-	{
-		return this.playerProfile;
-	}
-
 	public EntityPlayer getPlayer()
 	{
-		return this.getProfile().getEntity();
+		return this.player;
 	}
 
 	public InventoryAccessories getInventoryAccessories()
@@ -187,5 +113,17 @@ public class PlayerAether implements IPlayerHook
 	public boolean isAccessoryEquipped(Item item)
 	{
 		return this.getInventoryAccessories().isAccessoryEquipped(item);
+	}
+
+	@Override
+	public void loadNBTData(NBTTagCompound compound)
+	{
+		this.inventoryAccessories.read(compound);
+	}
+
+	@Override
+	public void saveNBTData(NBTTagCompound compound)
+	{
+		this.inventoryAccessories.write(compound);
 	}
 }

@@ -1,20 +1,23 @@
 package com.gildedgames.aether.common.containers;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ContainerPlayer;
-import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotCrafting;
-import net.minecraft.item.ItemStack;
-
 import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
 import com.gildedgames.aether.common.containers.slots.SlotAccessory;
 import com.gildedgames.aether.common.items.accessories.AccessoryEffect;
 import com.gildedgames.aether.common.items.accessories.AccessoryType;
 import com.gildedgames.aether.common.items.accessories.ItemAccessory;
 import com.gildedgames.aether.common.player.PlayerAether;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ContainerPlayer;
+import net.minecraft.inventory.InventoryBasic;
+import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.SlotCrafting;
+import net.minecraft.item.ItemStack;
 
 public class ContainerAccessories extends ContainerPlayer
 {
+	// See GuiContainerCreative#field_147060_v
+	private static InventoryBasic dumbInventory = new InventoryBasic("fake", true, 45);
+
 	private final PlayerAether aePlayer;
 
 	private final InventoryAccessories inventoryAccessories;
@@ -42,7 +45,7 @@ public class ContainerAccessories extends ContainerPlayer
 			slot.yDisplayPosition += heightOffset;
 		}
 
-		this.binSlot = new Slot(this.aePlayer.getInventoryAccessories(), this.inventorySlots.size(), 228, 25);
+		this.binSlot = new Slot(ContainerAccessories.dumbInventory, this.inventorySlots.size(), 228, 25);
 
 		if (this.aePlayer.getPlayer().capabilities.isCreativeMode)
 		{
@@ -77,6 +80,24 @@ public class ContainerAccessories extends ContainerPlayer
 		return super.slotClick(slotId, clickedButton, mode, player);
 	}
 
+	private int getNextEmptySlot(AccessoryType type)
+	{
+		for (int i = 0; i < this.inventorySlots.size(); i++)
+		{
+			Slot slot = this.inventorySlots.get(i);
+
+			if (slot.getStack() == null && slot instanceof SlotAccessory)
+			{
+				if (((SlotAccessory) slot).getType() == type)
+				{
+					return i;
+				}
+			}
+		}
+
+		return -1;
+	}
+
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotNumber)
 	{
@@ -100,7 +121,7 @@ public class ContainerAccessories extends ContainerPlayer
 				{
 					ItemAccessory accessory = (ItemAccessory) stack.getItem();
 
-					destIndex = 46 + this.inventoryAccessories.getNextEmptySlotForType(accessory.getType());
+					destIndex = this.getNextEmptySlot(accessory.getType());
 				}
 
 				if (destIndex != -1)

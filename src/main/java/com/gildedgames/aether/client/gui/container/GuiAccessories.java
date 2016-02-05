@@ -9,7 +9,6 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Collections;
@@ -116,6 +115,8 @@ public class GuiAccessories extends GuiContainer
 	{
 //		boolean hasCompanion = player.currentCompanion != null;
 //		GuiInventory.drawEntityOnScreen(this.width / 2 - (hasCompanion ? 100 : 90), this.height / 2 + 40, 45, (this.guiLeft + 88) - mouseX, (this.guiTop + 42) - mouseY, this.mc.thePlayer);
+
+		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
 		GuiInventory.drawEntityOnScreen(this.width / 2 - 90, this.height / 2 + 40, 45, (this.guiLeft + 88) - mouseX, (this.guiTop + 42) - mouseY, this.mc.thePlayer);
 
