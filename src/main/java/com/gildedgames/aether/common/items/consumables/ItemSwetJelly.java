@@ -1,16 +1,33 @@
 package com.gildedgames.aether.common.items.consumables;
 
+import java.util.HashMap;
 import java.util.List;
 
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemSwetJelly extends ItemFood
 {
+	private static final HashMap<Block, IBlockState> growables = new HashMap<>();
+
+	static
+	{
+		ItemSwetJelly.growables.put(Blocks.dirt, Blocks.grass.getDefaultState());
+		ItemSwetJelly.growables.put(BlocksAether.aether_dirt, BlocksAether.aether_grass.getDefaultState());
+	}
+
 	public enum JellyType
 	{
 		BLUE("blue"), GOLDEN("golden"), DARK("dark");
@@ -46,6 +63,21 @@ public class ItemSwetJelly extends ItemFood
 		{
 			subItems.add(new ItemStack(item, 1, types.ordinal()));
 		}
+	}
+
+	@Override
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+	{
+		IBlockState state = world.getBlockState(pos);
+
+		if (ItemSwetJelly.growables.containsKey(state.getBlock()))
+		{
+			world.setBlockState(pos, ItemSwetJelly.growables.get(state.getBlock()));
+
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
