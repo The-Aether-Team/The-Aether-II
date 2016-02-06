@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -17,7 +18,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class ItemSkyrootSword extends ItemAetherSword
 {
 	
-	public static final Set<Item> blacklistedItems = new HashSet<Item>();
+	public static final Set<Item> blacklistedItems = new HashSet<>();
 
 	static
 	{

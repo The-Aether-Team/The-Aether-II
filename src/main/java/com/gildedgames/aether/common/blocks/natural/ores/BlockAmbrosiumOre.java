@@ -5,10 +5,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+import net.minecraft.util.MathHelper;
 
 import java.util.Random;
 
-public class BlockAmbrosiumOre extends Block
+public class BlockAmbrosiumOre extends BlockAetherOre
 {
 	public BlockAmbrosiumOre()
 	{
@@ -25,5 +26,11 @@ public class BlockAmbrosiumOre extends Block
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
 		return ItemsAether.ambrosium_shard;
+	}
+
+	@Override
+	protected int getUnmodifiedExpDrop(Random rand)
+	{
+		return MathHelper.getRandomIntegerInRange(rand, 0, 1);
 	}
 }

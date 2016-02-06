@@ -5,10 +5,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+import net.minecraft.util.MathHelper;
 
 import java.util.Random;
 
-public class BlockContinuumOre extends Block
+public class BlockContinuumOre extends BlockAetherOre
 {
 
 	public BlockContinuumOre()
@@ -28,4 +29,9 @@ public class BlockContinuumOre extends Block
 		return ItemsAether.continuum_orb;
 	}
 
+	@Override
+	protected int getUnmodifiedExpDrop(Random rand)
+	{
+		return MathHelper.getRandomIntegerInRange(rand, 7, 10);
+	}
 }

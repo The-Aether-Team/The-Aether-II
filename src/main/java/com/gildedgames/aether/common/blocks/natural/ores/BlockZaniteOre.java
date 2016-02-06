@@ -5,10 +5,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+import net.minecraft.util.MathHelper;
 
 import java.util.Random;
 
-public class BlockZaniteOre extends Block
+public class BlockZaniteOre extends BlockAetherOre
 {
 
 	public BlockZaniteOre()
@@ -28,4 +29,9 @@ public class BlockZaniteOre extends Block
 		return ItemsAether.zanite_gemstone;
 	}
 
+	@Override
+	protected int getUnmodifiedExpDrop(Random rand)
+	{
+		return MathHelper.getRandomIntegerInRange(rand, 2, 4);
+	}
 }

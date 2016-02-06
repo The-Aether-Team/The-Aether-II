@@ -35,6 +35,8 @@ public class ItemSkyrootTool extends ItemAetherTool
 
 			if (!wasPlaced && block.isToolEffective(this.toolType.getToolClass(), state))
 			{
+				int fortune = EnchantmentHelper.getFortuneModifier(living);
+
 				if (state.getBlock() instanceof ISkyrootMinable)
 				{
 					ISkyrootMinable doubleBlock = (ISkyrootMinable) block;
@@ -51,7 +53,7 @@ public class ItemSkyrootTool extends ItemAetherTool
 				}
 				else
 				{
-					state.getBlock().dropBlockAsItem(world, pos, state, EnchantmentHelper.getFortuneModifier(living));
+					state.getBlock().dropBlockAsItem(world, pos, state, fortune);
 				}
 			}
 		}
