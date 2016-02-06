@@ -191,6 +191,7 @@ public class BlocksAether
 		aether_grass.setHarvestLevel("shovel", 0);
 		holystone.setHarvestLevel("pickaxe", 0);
 		quicksoil.setHarvestLevel("shovel", 0);
+		aercloud.setHarvestLevel("shovel", 0);
 
 		skyroot_log.setHarvestLevel("axe", 0);
 		golden_oak_log.setHarvestLevel("axe", 0);
