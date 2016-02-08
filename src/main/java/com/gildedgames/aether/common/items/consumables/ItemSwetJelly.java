@@ -72,7 +72,22 @@ public class ItemSwetJelly extends ItemFood
 
 		if (ItemSwetJelly.growables.containsKey(state.getBlock()))
 		{
-			world.setBlockState(pos, ItemSwetJelly.growables.get(state.getBlock()));
+			IBlockState nState = ItemSwetJelly.growables.get(state.getBlock());
+
+			int radius = 1;
+
+			for (int x = pos.getX() - radius; x <= pos.getX() + radius; x++)
+			{
+				for (int z = pos.getZ() - radius; z <= pos.getZ() + radius; z++)
+				{
+					BlockPos nPos = new BlockPos(x, pos.getY(), z);
+
+					if (world.getBlockState(nPos).getBlock() == state.getBlock() && !world.getBlockState(nPos.up()).getBlock().isNormalCube())
+					{
+						world.setBlockState(nPos, nState);
+					}
+				}
+			}
 
 			return true;
 		}
