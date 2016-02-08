@@ -2,6 +2,8 @@ package com.gildedgames.aether.common.network;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.packets.PacketOpenContainer;
+import com.gildedgames.aether.common.network.packets.PacketUpdatePlayer;
+import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -19,6 +21,7 @@ public class NetworkingAether
 	public static void preInit()
 	{
 		registerBiPacket(PacketOpenContainer.class, PacketOpenContainer.class);
+		registerBiPacket(PacketUpdatePlayer.class, PacketUpdatePlayer.class);
 	}
 
 	private static <REQ extends IMessage, REPLY extends IMessage> void registerBiPacket(Class<? extends IMessageHandler<REQ, REPLY>> handler, Class<REQ> type)
@@ -36,5 +39,10 @@ public class NetworkingAether
 	public static void sendPacketToServer(IMessage message)
 	{
 		NetworkingAether.instance.sendToServer(message);
+	}
+
+	public static void syncPlayerToClient(PlayerAether aePlayer, EntityPlayerMP player)
+	{
+		NetworkingAether.sendPacketToPlayer(new PacketUpdatePlayer(aePlayer), player);
 	}
 }

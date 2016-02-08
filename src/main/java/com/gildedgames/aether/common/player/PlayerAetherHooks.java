@@ -2,34 +2,28 @@ package com.gildedgames.aether.common.player;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import com.gildedgames.aether.common.world.chunk.PlacementFlagChunkData;
 import com.gildedgames.util.chunk.ChunkCore;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.IExtendedEntityProperties;
-import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class PlayerAetherEventHandler
+public class PlayerAetherHooks
 {
 	@SubscribeEvent
 	public void onLivingEntityHurt(LivingHurtEvent event)
 	{
-		PlayerAether aePlayer = this.getAetherPlayer(event);
+		PlayerAether aePlayer = PlayerAether.get(event.entity);
 
 		if (aePlayer != null)
 		{
@@ -75,7 +69,7 @@ public class PlayerAetherEventHandler
 	@SubscribeEvent
 	public void onCalculateBreakSpeed(BreakSpeed event)
 	{
-		PlayerAether aePlayer = this.getAetherPlayer(event);
+		PlayerAether aePlayer = PlayerAether.get(event.entity);
 
 		if (aePlayer != null)
 		{
@@ -97,7 +91,7 @@ public class PlayerAetherEventHandler
 	@SubscribeEvent
 	public void onLivingUpdate(LivingUpdateEvent event)
 	{
-		PlayerAether aePlayer = this.getAetherPlayer(event);
+		PlayerAether aePlayer = PlayerAether.get(event.entity);
 
 		if (aePlayer != null)
 		{
@@ -108,7 +102,7 @@ public class PlayerAetherEventHandler
 	@SubscribeEvent
 	public void onLivingDeath(LivingDeathEvent event)
 	{
-		PlayerAether aePlayer = this.getAetherPlayer(event);
+		PlayerAether aePlayer = PlayerAether.get(event.entity);
 
 		if (aePlayer != null)
 		{
@@ -120,49 +114,11 @@ public class PlayerAetherEventHandler
 	@SubscribeEvent
 	public void onLivingDrops(LivingDropsEvent event)
 	{
-		PlayerAether aePlayer = this.getAetherPlayer(event);
+		PlayerAether aePlayer = PlayerAether.get(event.entity);
 
 		if (aePlayer != null)
 		{
 			aePlayer.dropAccessories();
-		}
-	}
-
-	private PlayerAether getAetherPlayer(LivingEvent event)
-	{
-		if (event.entityLiving instanceof EntityPlayer)
-		{
-			return PlayerAether.get((EntityPlayer) event.entityLiving);
-		}
-
-		return null;
-	}
-
-	@SubscribeEvent
-	public void onConstructEntity(EntityEvent.EntityConstructing event)
-	{
-		if (event.entity instanceof EntityPlayer)
-		{
-			if (event.entity.getExtendedProperties(AetherCore.MOD_ID) == null)
-			{
-				event.entity.registerExtendedProperties(AetherCore.MOD_ID, new PlayerAether());
-			}
-		}
-	}
-
-	@SubscribeEvent
-	public void onPlayerCloneEvent(PlayerEvent.Clone event)
-	{
-		if (event.entityPlayer.getExtendedProperties(AetherCore.MOD_ID) == null)
-		{
-			IExtendedEntityProperties oldProps = event.original.getExtendedProperties(AetherCore.MOD_ID);
-
-			if (oldProps != null)
-			{
-				oldProps = new PlayerAether();
-			}
-
-			event.entityPlayer.registerExtendedProperties(AetherCore.MOD_ID, oldProps);
 		}
 	}
 }
