@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketUpdatePlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityEvent;
@@ -26,16 +27,17 @@ public class PlayerAetherTracker
 	@SubscribeEvent
 	public void onPlayerCloneEvent(PlayerEvent.Clone event)
 	{
-		if (event.entityPlayer.getExtendedProperties(AetherCore.MOD_ID) == null)
+		if (event.wasDeath && event.entityPlayer instanceof EntityPlayerMP)
 		{
-			PlayerAether oldProps = PlayerAether.get(event.entityPlayer);
+			PlayerAether orig = PlayerAether.get(event.original);
 
-			if (oldProps != null)
-			{
-				oldProps = new PlayerAether();
-			}
+			NBTTagCompound compound = new NBTTagCompound();
+			orig.saveNBTData(compound);
 
-			event.entityPlayer.registerExtendedProperties(AetherCore.MOD_ID, oldProps);
+			PlayerAether next = PlayerAether.get(event.entityPlayer);
+			next.loadNBTData(compound);
+
+			NetworkingAether.syncPlayerToClient(orig, (EntityPlayerMP) event.entityPlayer);
 		}
 	}
 
