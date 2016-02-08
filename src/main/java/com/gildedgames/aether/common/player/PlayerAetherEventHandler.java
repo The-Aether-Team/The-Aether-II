@@ -10,6 +10,7 @@ import com.gildedgames.util.chunk.ChunkCore;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.IExtendedEntityProperties;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -18,6 +19,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -27,28 +29,12 @@ public class PlayerAetherEventHandler
 	@SubscribeEvent
 	public void onLivingEntityHurt(LivingHurtEvent event)
 	{
-		if (event.entityLiving instanceof EntityPlayer)
+		PlayerAether aePlayer = this.getAetherPlayer(event);
+
+		if (aePlayer != null)
 		{
-			EntityPlayer player = (EntityPlayer) event.entityLiving;
-
-			if (!event.source.isUnblockable())
-			{
-				event.ammount = this.applyArmorDamageReduction(player, event.ammount);
-			}
+			aePlayer.onHurt(event);
 		}
-	}
-
-	private float applyArmorDamageReduction(EntityPlayer player, float damage)
-	{
-		for (ItemStack stack : player.inventory.armorInventory)
-		{
-			if (stack != null && stack.getItem() instanceof ItemAetherArmor)
-			{
-				damage -= ((ItemAetherArmor) stack.getItem()).getExtraDamageReduction(stack);
-			}
-		}
-
-		return damage;
 	}
 
 	@SubscribeEvent
@@ -157,7 +143,26 @@ public class PlayerAetherEventHandler
 	{
 		if (event.entity instanceof EntityPlayer)
 		{
-			event.entity.registerExtendedProperties(AetherCore.MOD_ID, new PlayerAether());
+			if (event.entity.getExtendedProperties(AetherCore.MOD_ID) == null)
+			{
+				event.entity.registerExtendedProperties(AetherCore.MOD_ID, new PlayerAether());
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public void onPlayerCloneEvent(PlayerEvent.Clone event)
+	{
+		if (event.entityPlayer.getExtendedProperties(AetherCore.MOD_ID) == null)
+		{
+			IExtendedEntityProperties oldProps = event.original.getExtendedProperties(AetherCore.MOD_ID);
+
+			if (oldProps != null)
+			{
+				oldProps = new PlayerAether();
+			}
+
+			event.entityPlayer.registerExtendedProperties(AetherCore.MOD_ID, oldProps);
 		}
 	}
 }

@@ -139,15 +139,22 @@ public class InventoryAccessories implements IInventory, NBT
 
 	public boolean isAccessoryEquipped(Item item)
 	{
+		return this.getCountOfEquippedAccessory(item) > 0;
+	}
+
+	public int getCountOfEquippedAccessory(Item item)
+	{
+		int count = 0;
+
 		for (ItemStack stack  : this.inventory)
 		{
 			if (stack != null && stack.getItem() == item)
 			{
-				return true;
+				count++;
 			}
-
 		}
-		return false;
+
+		return count;
 	}
 
 	@Override

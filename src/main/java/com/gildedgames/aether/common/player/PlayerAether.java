@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.player;
 
+import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -7,8 +8,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
 import com.gildedgames.aether.common.AetherCore;
@@ -24,6 +27,8 @@ public class PlayerAether implements IExtendedEntityProperties
 	private EntityPlayer player;
 
 	private InventoryAccessories inventoryAccessories = new InventoryAccessories(this);
+
+	public int ticksSinceAttacked;
 
 	@Override
 	public void init(Entity entity, World world)
@@ -111,6 +116,22 @@ public class PlayerAether implements IExtendedEntityProperties
 				* }
 				* */
 		}
+	}
+
+	public void onHurt(LivingHurtEvent event)
+	{
+		if (!event.source.isUnblockable())
+		{
+			for (ItemStack stack : this.getPlayer().inventory.armorInventory)
+			{
+				if (stack != null && stack.getItem() instanceof ItemAetherArmor)
+				{
+					event.ammount -= ((ItemAetherArmor) stack.getItem()).getExtraDamageReduction(stack);
+				}
+			}
+		}
+
+		this.ticksSinceAttacked = 0;
 	}
 
 	public EntityPlayer getPlayer()

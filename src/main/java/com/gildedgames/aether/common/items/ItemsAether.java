@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items;
 
+import com.gildedgames.aether.common.items.accessories.RegenStoneEffect;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -246,7 +247,7 @@ public class ItemsAether
 		zanite_pendant = registerItem("zanite_pendant", new ItemAccessory(AccessoryType.NECKWEAR), AetherCreativeTabs.tabAccessories);
 
 		iron_bubble = registerItem("iron_bubble", new ItemAccessory(AccessoryType.MISC, new BreatheInWaterEffect()), AetherCreativeTabs.tabAccessories);
-		regeneration_stone = registerItem("regeneration_stone", new ItemAccessory(AccessoryType.MISC), AetherCreativeTabs.tabAccessories);
+		regeneration_stone = registerItem("regeneration_stone", new ItemAccessory(AccessoryType.MISC, new RegenStoneEffect()), AetherCreativeTabs.tabAccessories);
 
 		ice_ring = registerItem("ice_ring", new ItemAccessory(AccessoryType.RING, new FreezeBlocksEffect()), AetherCreativeTabs.tabAccessories);
 		ice_pendant = registerItem("ice_pendant", new ItemAccessory(AccessoryType.RING, new FreezeBlocksEffect()), AetherCreativeTabs.tabAccessories);
