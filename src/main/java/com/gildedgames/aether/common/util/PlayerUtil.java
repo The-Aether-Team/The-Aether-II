@@ -4,8 +4,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import com.gildedgames.aether.common.items.accessories.AccessoryEffect;
-import com.gildedgames.aether.common.items.accessories.ItemAccessory;
+import com.gildedgames.aether.common.entities.effects.EntityEffect;
+import com.gildedgames.aether.common.items.ItemAccessory;
 import com.gildedgames.aether.common.player.PlayerAether;
 
 public class PlayerUtil
@@ -135,7 +135,7 @@ public class PlayerUtil
 		return count;
 	}
 	
-	public static int getEffectCount(EntityPlayer player, AccessoryEffect effect)
+	public static int getEffectCount(EntityPlayer player, EntityEffect<EntityPlayer> effect)
 	{
 		PlayerAether aePlayer = PlayerAether.get(player);
 		
@@ -149,9 +149,9 @@ public class PlayerUtil
 			{
 				ItemAccessory acc = (ItemAccessory)stack.getItem();
 				
-				for (AccessoryEffect itEffect : acc.getEffects())
+				for (EntityEffect<EntityPlayer> itEffect : acc.getEffects())
 				{
-					if (effect.getClass().isAssignableFrom(itEffect.getClass()))
+					if (itEffect.getAbility().getClass().isAssignableFrom(effect.getAbility().getClass()))
 					{
 						count++;
 					}

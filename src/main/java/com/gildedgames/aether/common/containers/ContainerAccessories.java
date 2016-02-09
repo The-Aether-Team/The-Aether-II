@@ -9,9 +9,10 @@ import net.minecraft.item.ItemStack;
 
 import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
 import com.gildedgames.aether.common.containers.slots.SlotAccessory;
-import com.gildedgames.aether.common.items.accessories.AccessoryEffect;
-import com.gildedgames.aether.common.items.accessories.AccessoryType;
-import com.gildedgames.aether.common.items.accessories.ItemAccessory;
+import com.gildedgames.aether.common.entities.effects.EntityEffect;
+import com.gildedgames.aether.common.entities.effects.EntityEffects;
+import com.gildedgames.aether.common.items.AccessoryType;
+import com.gildedgames.aether.common.items.ItemAccessory;
 import com.gildedgames.aether.common.player.PlayerAether;
 
 public class ContainerAccessories extends ContainerPlayer
@@ -77,6 +78,34 @@ public class ContainerAccessories extends ContainerPlayer
 		{
 			this.aePlayer.getPlayer().inventory.setItemStack(null);
 		}
+		
+		if (slotId < this.inventorySlots.size() && slotId > 0)
+		{
+			Slot slot = this.inventorySlots.get(slotId);
+			
+			if (slot != null && slot.getHasStack())
+			{
+				ItemStack stack = slot.getStack();
+				
+				if (slot instanceof SlotAccessory && stack.getItem() instanceof ItemAccessory)
+				{
+					ItemAccessory acc = (ItemAccessory)stack.getItem();
+					EntityEffects<EntityPlayer> effects = EntityEffects.get(this.aePlayer.getPlayer());
+					
+					for (EntityEffect<EntityPlayer> effect : acc.getEffects())
+					{
+						if (effect.getAttributes().getInteger("modifier") >= 2)
+						{
+							effect.getAttributes().setInteger("modifier", effect.getAttributes().getInteger("modifier") - 1);
+						}
+						else
+						{
+							effects.removeEffect(effect);
+						}
+					}
+				}
+			}
+		}
 
 		return super.slotClick(slotId, clickedButton, mode, player);
 	}
@@ -138,10 +167,18 @@ public class ContainerAccessories extends ContainerPlayer
 			else if (slot instanceof SlotAccessory && stack.getItem() instanceof ItemAccessory)
 			{
 				ItemAccessory acc = (ItemAccessory)stack.getItem();
+				EntityEffects<EntityPlayer> effects = EntityEffects.get(this.aePlayer.getPlayer());
 				
-				for (AccessoryEffect effect : acc.getEffects())
+				for (EntityEffect<EntityPlayer> effect : acc.getEffects())
 				{
-					effect.onUnequipped(this.aePlayer, stack, acc.getType());
+					if (effect.getAttributes().getInteger("modifier") >= 2)
+					{
+						effect.getAttributes().setInteger("modifier", effect.getAttributes().getInteger("modifier") - 1);
+					}
+					else
+					{
+						effects.removeEffect(effect);
+					}
 				}
 			}
 		}

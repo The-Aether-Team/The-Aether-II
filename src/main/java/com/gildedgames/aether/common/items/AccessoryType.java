@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.items.accessories;
+package com.gildedgames.aether.common.items;
 
 public enum AccessoryType
 {

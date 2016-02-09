@@ -2,8 +2,9 @@ package com.gildedgames.aether.client.gui.container;
 
 import com.gildedgames.aether.common.containers.ContainerAccessories;
 import com.gildedgames.aether.common.containers.slots.SlotAccessory;
-import com.gildedgames.aether.common.items.accessories.AccessoryType;
+import com.gildedgames.aether.common.items.AccessoryType;
 import com.gildedgames.aether.common.player.PlayerAether;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;

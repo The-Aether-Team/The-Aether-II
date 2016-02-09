@@ -236,11 +236,25 @@ gui.slot.misc=Miscellaneous
 gui.slot.ring=Ring
 gui.slot.glove=Gloves
 
-#Accessory Tooltips
-item.zanite_ring.ability.desc=Increases Mining Speed
-item.zanite_pendant.ability.desc=Increases Mining Speed
-item.iron_bubble.ability.desc=Breathe Underwater
-item.ice_ring.ability.desc=Freeze Nearby Blocks
+#Ability Tooltips
+ability.breatheUnderwater.name=Underwater Breathing
+ability.daggerfrost.name=Daggerfrost
+ability.doubleDrops.name=Double Drops
+ability.extraDamage.name=Increased Damage
+ability.freezeBlocks.name=Freezing Aura
+ability.pauseHunger.name=Food Heaven
+ability.regenerateHealth.name=Health Regeneration
+
+ability.active=§5Only Active:
+ability.cosmetic=§eCosmetic
+ability.breatheUnderwater.desc=§9Water Breathing
+ability.daggerfrost.desc=§9Snowballs Cause Damage
+ability.doubleDrops.desc1=§2+%d%% Chance:§7 Double Drops
+ability.doubleDrops.desc2=§3Affects Mobs Only
+ability.extraDamage.desc=§9+%d Attack Damage
+ability.freezeBlocks.desc=§bFreezes Nearby Blocks
+ability.pauseHunger.desc=§6Stops Hunger
+ability.regenerateHealth.desc=§cRegenerates Health
 
 # Tabs
 tab.accessories=Accessories

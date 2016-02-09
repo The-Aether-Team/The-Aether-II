@@ -9,10 +9,12 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 
-import com.gildedgames.aether.common.items.accessories.AccessoryEffect;
-import com.gildedgames.aether.common.items.accessories.AccessoryType;
-import com.gildedgames.aether.common.items.accessories.ItemAccessory;
+import com.gildedgames.aether.common.entities.effects.EntityEffect;
+import com.gildedgames.aether.common.entities.effects.EntityEffects;
+import com.gildedgames.aether.common.items.AccessoryType;
+import com.gildedgames.aether.common.items.ItemAccessory;
 import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.aether.common.util.PlayerUtil;
 import com.gildedgames.util.core.nbt.NBT;
 
 public class InventoryAccessories implements IInventory, NBT
@@ -113,9 +115,16 @@ public class InventoryAccessories implements IInventory, NBT
 		{
 			ItemAccessory acc = (ItemAccessory)stack.getItem();
 			
-			for (AccessoryEffect effect : acc.getEffects())
+			EntityEffects<EntityPlayer> effects = EntityEffects.get(this.aePlayer.getPlayer());
+
+			for (EntityEffect<EntityPlayer> effect : acc.getEffects())
 			{
-				effect.onEquipped(this.aePlayer, stack, acc.getType());
+				if (!effects.addEffect(effect))
+				{
+					int count = PlayerUtil.getEffectCount(this.aePlayer.getPlayer(), effect);
+					
+					effect.getAttributes().setInteger("modifier", count);
+				}
 			}
 		}
 
@@ -212,7 +221,27 @@ public class InventoryAccessories implements IInventory, NBT
 		{
 			if (this.inventory[i] != null)
 			{
-				this.aePlayer.getPlayer().dropItem(this.inventory[i], true, false);
+				ItemStack stack = this.inventory[i];
+				
+				if (stack != null && stack.getItem() instanceof ItemAccessory)
+				{
+					ItemAccessory acc = (ItemAccessory)stack.getItem();
+					EntityEffects<EntityPlayer> effects = EntityEffects.get(this.aePlayer.getPlayer());
+					
+					for (EntityEffect<EntityPlayer> effect : acc.getEffects())
+					{
+						if (effect.getAttributes().getInteger("modifier") >= 2)
+						{
+							effect.getAttributes().setInteger("modifier", effect.getAttributes().getInteger("modifier") - 1);
+						}
+						else
+						{
+							effects.removeEffect(effect);
+						}
+					}
+				}
+				
+				this.aePlayer.getPlayer().dropItem(stack, true, false);
 				this.inventory[i] = null;
 			}
 		}

@@ -1,17 +1,8 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.EntitiesAether;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.network.AetherGuiHandler;
-import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.player.PlayerAetherEventHooks;
-import com.gildedgames.aether.common.player.PlayerAetherTracker;
-import com.gildedgames.aether.common.recipes.RecipesAether;
-import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
-import com.gildedgames.aether.common.world.WorldProviderAether;
-import com.gildedgames.aether.common.world.chunk.PlacementFlagFactory;
-import com.gildedgames.util.chunk.ChunkCore;
+import java.io.File;
+import java.util.Random;
+
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
@@ -22,8 +13,19 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-import java.io.File;
-import java.util.Random;
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.entities.EntitiesAether;
+import com.gildedgames.aether.common.entities.effects.EntityEffectsHooks;
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.network.AetherGuiHandler;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.player.PlayerAetherEventHooks;
+import com.gildedgames.aether.common.player.PlayerAetherTracker;
+import com.gildedgames.aether.common.recipes.RecipesAether;
+import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
+import com.gildedgames.aether.common.world.WorldProviderAether;
+import com.gildedgames.aether.common.world.chunk.PlacementFlagFactory;
+import com.gildedgames.util.chunk.ChunkCore;
 
 public class CommonProxy
 {
@@ -69,6 +71,7 @@ public class CommonProxy
 		MinecraftForge.EVENT_BUS.register(new CommonEvents());
 		MinecraftForge.EVENT_BUS.register(new PlayerAetherTracker());
 		MinecraftForge.EVENT_BUS.register(new PlayerAetherEventHooks());
+		MinecraftForge.EVENT_BUS.register(new EntityEffectsHooks());
 
 		MinecraftForge.EVENT_BUS.register(ItemsAether.skyroot_sword);
 

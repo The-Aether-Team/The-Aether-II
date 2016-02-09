@@ -19,12 +19,9 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -33,9 +30,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.accessories.AccessoryEffect;
-import com.gildedgames.aether.common.items.accessories.ItemAccessory;
-import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import com.gildedgames.util.universe.common.util.TeleporterGeneric;
 
@@ -235,71 +229,6 @@ public class CommonEvents
 			}
 
 			event.setCanceled(true);
-		}
-	}
-	
-	@SubscribeEvent
-	public void onPlayerInteract(PlayerInteractEvent event)
-	{
-		PlayerAether player = PlayerAether.get(event.entityPlayer);
-		
-		for (ItemStack stack : player.getInventoryAccessories().getInventory())
-		{
-			if (stack != null && stack.getItem() instanceof ItemAccessory)
-			{
-				ItemAccessory acc = (ItemAccessory) stack.getItem();
-				
-				for (AccessoryEffect effect : acc.getEffects())
-				{
-					effect.onInteract(event, player, stack, acc.getType());
-				}
-			}
-		}
-	}
-	
-	@SubscribeEvent
-	public void onLivingDropsEvent(LivingDropsEvent event)
-	{
-		if (event.source.getSourceOfDamage() instanceof EntityPlayer)
-		{
-			EntityPlayer entityPlayer = (EntityPlayer) event.source.getSourceOfDamage();
-			PlayerAether player = PlayerAether.get(entityPlayer);
-
-			for (ItemStack stack : player.getInventoryAccessories().getInventory())
-			{
-				if (stack != null && stack.getItem() instanceof ItemAccessory)
-				{
-					ItemAccessory acc = (ItemAccessory) stack.getItem();
-					
-					for (AccessoryEffect effect : acc.getEffects())
-					{
-						effect.onKillEntity(event, event.entityLiving, player, stack, acc.getType());
-					}
-				}
-			}
-		}
-	}
-	
-	@SubscribeEvent
-	public void onLivingAttack(LivingHurtEvent event)
-	{
-		if (event.source.getSourceOfDamage() instanceof EntityPlayer)
-		{
-			EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
-			PlayerAether aePlayer = PlayerAether.get(player);
-			
-			for (ItemStack stack : aePlayer.getInventoryAccessories().getInventory())
-			{
-				if (stack != null && stack.getItem() instanceof ItemAccessory)
-				{
-					ItemAccessory acc = (ItemAccessory) stack.getItem();
-					
-					for (AccessoryEffect effect : acc.getEffects())
-					{
-						effect.onAttackEntity(event, aePlayer, stack, acc.getType());
-					}
-				}
-			}
 		}
 	}
 	
