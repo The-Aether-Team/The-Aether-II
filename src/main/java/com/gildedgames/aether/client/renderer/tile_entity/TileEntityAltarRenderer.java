@@ -4,16 +4,12 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.resources.model.IBakedModel;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 
 public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntityAltar>
 {

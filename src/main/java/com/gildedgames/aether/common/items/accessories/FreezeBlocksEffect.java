@@ -26,7 +26,7 @@ import com.gildedgames.aether.common.player.PlayerAether;
 public class FreezeBlocksEffect implements AccessoryEffect
 {
 	
-	private List<BlockPos> frozenLocations = new ArrayList<BlockPos>();
+	private List<BlockPos> frozenLocations = new ArrayList<>();
 
 	@Override
 	public void onEquipped(PlayerAether aePlayer, ItemStack stack, AccessoryType type)

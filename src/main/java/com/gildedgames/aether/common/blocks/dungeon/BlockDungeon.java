@@ -77,4 +77,11 @@ public class BlockDungeon extends Block implements IAetherBlockWithVariants
 			return "missingno";
 		}
 	}
+
+	public BlockDungeon setGlows(boolean glows)
+	{
+		this.setLightLevel(glows ? 0.75f : 0.0f);
+
+		return this;
+	}
 }

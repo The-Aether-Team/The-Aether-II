@@ -13,7 +13,7 @@ public class WorldGenOrangeTree extends WorldGenerator
 {
 	private static final int count = 10;
 
-	private final BlockOrangeTree treeBlock = (BlockOrangeTree) BlocksAether.orange_tree;
+	private final BlockOrangeTree treeBlock = BlocksAether.orange_tree;
 
 	@Override
 	public boolean generate(World world, Random rand, BlockPos position)

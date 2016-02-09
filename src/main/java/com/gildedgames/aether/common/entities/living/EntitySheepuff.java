@@ -1,9 +1,7 @@
 package com.gildedgames.aether.common.entities.living;
 
 import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class EntitySheepuff extends EntitySheep

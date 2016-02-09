@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import com.gildedgames.aether.common.AetherConfig;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.world.biome.BiomeGenAether;
 

@@ -54,11 +54,11 @@ public class CommonEvents
 
 				FluidStack fluidStack = FluidContainerRegistry.getFluidForFilledItem(event.current);
 
-				if (fluidStack.getFluid().getID() == FluidRegistry.WATER.getID())
+				if (fluidStack.getFluid().getName().equals(FluidRegistry.WATER.getName()))
 				{
 					this.onWaterPlaced(event, player, pos);
 				}
-				else if (fluidStack.getFluid().getID() == FluidRegistry.LAVA.getID())
+				else if (fluidStack.getFluid().getName().equals(FluidRegistry.LAVA.getName()))
 				{
 					this.onLavaPlaced(event, player, pos);
 				}

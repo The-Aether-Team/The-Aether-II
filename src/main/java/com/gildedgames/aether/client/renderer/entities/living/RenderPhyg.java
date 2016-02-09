@@ -3,10 +3,9 @@ package com.gildedgames.aether.client.renderer.entities.living;
 import com.gildedgames.aether.client.renderer.entities.living.layers.LayerWings;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
-import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelPig;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderPhyg extends RenderLiving<EntityPhyg>
@@ -15,9 +14,9 @@ public class RenderPhyg extends RenderLiving<EntityPhyg>
 
 	private static final ResourceLocation saddledTexture = AetherCore.getResource("textures/entities/phyg/phyg_saddled.png");
 
-	public RenderPhyg(RenderManager renderManager, ModelBase modelBase, float shadowSize)
+	public RenderPhyg(RenderManager renderManager)
 	{
-		super(renderManager, modelBase, shadowSize);
+		super(renderManager, new ModelPig(), 0.75f);
 
 		this.addLayer(new LayerWings(this, 0.0f));
 	}

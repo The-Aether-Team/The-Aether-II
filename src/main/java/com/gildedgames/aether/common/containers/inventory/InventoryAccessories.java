@@ -36,8 +36,6 @@ public class InventoryAccessories implements IInventory, NBT
 
 	private ItemStack[] inventory = new ItemStack[InventoryAccessories.INVENTORY_SIZE];
 
-	private boolean isDirty;
-
 	public InventoryAccessories(PlayerAether aePlayer)
 	{
 		this.aePlayer = aePlayer;
@@ -164,10 +162,7 @@ public class InventoryAccessories implements IInventory, NBT
 	}
 
 	@Override
-	public void markDirty()
-	{
-		this.isDirty = true;
-	}
+	public void markDirty() { }
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)

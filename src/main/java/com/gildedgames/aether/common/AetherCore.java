@@ -34,7 +34,7 @@ public class AetherCore
 	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.common.CommonProxy")
 	public static CommonProxy PROXY;
 	
-	private static SidedObject<AetherServices> serviceLocator = new SidedObject<AetherServices>(new AetherServices(Side.CLIENT), new AetherServices(Side.SERVER));
+	private static SidedObject<AetherServices> serviceLocator = new SidedObject<>(new AetherServices(Side.CLIENT), new AetherServices(Side.SERVER));
 
 	public static AetherConfig CONFIG;
 

@@ -1,16 +1,6 @@
 package com.gildedgames.aether.client.renderer;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelCow;
-import net.minecraft.client.model.ModelPig;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
-
-import com.gildedgames.aether.client.models.entities.living.ModelAechorPlant;
-import com.gildedgames.aether.client.models.entities.living.ModelAerbunny;
-import com.gildedgames.aether.client.models.entities.living.ModelCarrionSprout;
-import com.gildedgames.aether.client.models.entities.living.ModelSheepuff;
+import com.gildedgames.aether.client.renderer.entities.AetherRenderFactory;
 import com.gildedgames.aether.client.renderer.entities.RenderFloatingBlock;
 import com.gildedgames.aether.client.renderer.entities.living.RenderAechorPlant;
 import com.gildedgames.aether.client.renderer.entities.living.RenderAerbunny;
@@ -33,29 +23,33 @@ import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowb
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
 import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootChest;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class AetherRenderers
 {
-	public static void init()
+	public static void preInit()
 	{
 		registerEntityRenderers();
+	}
+
+	public static void init()
+	{
 		registerTESRs();
 	}
 
 	private static void registerEntityRenderers()
 	{
-		RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
+		RenderingRegistry.registerEntityRenderingHandler(EntityFloatingBlock.class, new AetherRenderFactory<>(RenderFloatingBlock.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDart.class, new AetherRenderFactory<>(RenderDart.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDaggerfrostSnowball.class, new AetherRenderFactory<>(RenderDaggerfrostSnowball.class));
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityFloatingBlock.class, new RenderFloatingBlock(renderManager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDart.class, new RenderDart(renderManager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDaggerfrostSnowball.class, new RenderDaggerfrostSnowball(renderManager));
-
-		RenderingRegistry.registerEntityRenderingHandler(EntityPhyg.class, new RenderPhyg(renderManager, new ModelPig(), 0.7f));
-		RenderingRegistry.registerEntityRenderingHandler(EntityFlyingCow.class, new RenderFlyingCow(renderManager, new ModelCow(), 0.7f));
-		RenderingRegistry.registerEntityRenderingHandler(EntitySheepuff.class, new RenderSheepuff(renderManager, new ModelSheepuff(), 0.7f));
-		RenderingRegistry.registerEntityRenderingHandler(EntityAechorPlant.class, new RenderAechorPlant(renderManager, new ModelAechorPlant(), 0.7f));
-		RenderingRegistry.registerEntityRenderingHandler(EntityAerbunny.class, new RenderAerbunny(renderManager, new ModelAerbunny(), 0.7f));
-		RenderingRegistry.registerEntityRenderingHandler(EntityCarrionSprout.class, new RenderCarrionSprout(renderManager, new ModelCarrionSprout(), 0.25f));
+		RenderingRegistry.registerEntityRenderingHandler(EntityPhyg.class, new AetherRenderFactory<>(RenderPhyg.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityFlyingCow.class, new AetherRenderFactory<>(RenderFlyingCow.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySheepuff.class, new AetherRenderFactory<>(RenderSheepuff.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityAechorPlant.class, new AetherRenderFactory<>(RenderAechorPlant.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityAerbunny.class, new AetherRenderFactory<>(RenderAerbunny.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityCarrionSprout.class, new AetherRenderFactory<>(RenderCarrionSprout.class));
 	}
 
 	private static void registerTESRs()

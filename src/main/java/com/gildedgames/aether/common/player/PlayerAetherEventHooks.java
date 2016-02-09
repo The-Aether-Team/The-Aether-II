@@ -18,7 +18,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class PlayerAetherHooks
+public class PlayerAetherEventHooks
 {
 	@SubscribeEvent
 	public void onLivingEntityHurt(LivingHurtEvent event)

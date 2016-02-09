@@ -26,6 +26,7 @@ public class ClientProxy extends CommonProxy
 
 		AetherBlockModels.preInit();
 		AetherItemModels.preInit();
+		AetherRenderers.preInit();
 
 		AetherCreativeTabs.registerTabIcons();
 	}

@@ -26,11 +26,11 @@ public interface AccessoryEffect
 	
 	/**
 	 * Called when the player kills a living entity while they are wearing this accessory.
-	 * @param event
-	 * @param killedEntity TODO
-	 * @param aePlayer
-	 * @param stack
-	 * @param type
+	 * @param event The event fired by Forge
+	 * @param killedEntity The entity killed by the player
+	 * @param aePlayer The player who killed the entity
+	 * @param stack The accessory stack being notified
+	 * @param type The notified accessory's type
 	 */
 	void onKillEntity(LivingDropsEvent event, EntityLivingBase killedEntity, PlayerAether aePlayer, ItemStack stack, AccessoryType type);
 	

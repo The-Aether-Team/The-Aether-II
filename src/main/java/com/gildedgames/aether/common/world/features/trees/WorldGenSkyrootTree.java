@@ -73,7 +73,7 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 
 				Block rootBlock = worldIn.getBlockState(rootBlockPos).getBlock();
 
-				boolean isSoil = ((BlockAetherPlant) BlocksAether.aether_sapling).isSuitableSoilBlock(rootBlock);
+				boolean isSoil = BlocksAether.aether_sapling.isSuitableSoilBlock(rootBlock);
 
 				if (isSoil && position.getY() < 256 - i - 1)
 				{

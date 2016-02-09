@@ -13,10 +13,11 @@ public class RenderCarrionSprout extends RenderLiving<EntityCarrionSprout>
 
 	private final ModelCarrionSprout plantModel;
 
-	public RenderCarrionSprout(RenderManager manager, ModelCarrionSprout model, float shadowSize)
+	public RenderCarrionSprout(RenderManager manager)
 	{
-		super(manager, model, shadowSize);
-		this.plantModel = model;
+		super(manager, new ModelCarrionSprout(), 0.75f);
+
+		this.plantModel = (ModelCarrionSprout) this.mainModel;
 	}
 
 	@Override

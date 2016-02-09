@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.world.biome;
 import java.util.Random;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.common.world.features.trees.WorldGenSkyrootTree;
 

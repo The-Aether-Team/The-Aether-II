@@ -28,7 +28,6 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
-import com.gildedgames.aether.common.blocks.util.BlockAether;
 import com.gildedgames.aether.common.items.itemblocks.ItemBlockAetherVariants;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -40,72 +39,72 @@ public class BlocksAether
 {
 	public static Block aether_dirt;
 
-	public static Block aether_grass;
+	public static BlockAetherGrass aether_grass;
 
-	public static Block holystone;
+	public static BlockHolystone holystone;
 
-	public static Block aercloud;
+	public static BlockAercloud aercloud;
 
-	public static Block ambrosium_ore;
+	public static BlockAmbrosiumOre ambrosium_ore;
 
-	public static Block zanite_ore;
+	public static BlockZaniteOre zanite_ore;
 
-	public static Block gravitite_ore;
+	public static BlockGravititeOre gravitite_ore;
 
-	public static Block continuum_ore;
+	public static BlockContinuumOre continuum_ore;
 
 	public static Block skyroot_planks;
 
-	public static Block skyroot_log, golden_oak_log;
+	public static BlockAetherLog skyroot_log, golden_oak_log;
 
-	public static Block blue_skyroot_leaves, green_skyroot_leaves, dark_blue_skyroot_leaves, golden_oak_leaves,
-			purple_crystal_leaves, purple_fruit_leaves;
+	public static BlockAetherLeaves blue_skyroot_leaves, green_skyroot_leaves, dark_blue_skyroot_leaves,
+			golden_oak_leaves, purple_crystal_leaves, purple_fruit_leaves;
 
-	public static Block aether_portal;
+	public static BlockAetherPortal aether_portal;
 
-	public static Block tall_aether_grass;
+	public static BlockTallAetherGrass tall_aether_grass;
 
-	public static Block quicksoil;
+	public static BlockQuicksoil quicksoil;
 
-	public static Block skyroot_crafting_table;
+	public static BlockSkyrootWorkbench skyroot_crafting_table;
 
-	public static Block blueberry_bush;
+	public static BlockBlueberryBush blueberry_bush;
 
-	public static Block orange_tree;
+	public static BlockOrangeTree orange_tree;
 
-	public static Block aether_flower;
+	public static BlockAetherFlower aether_flower;
 
-	public static Block altar;
+	public static BlockAltar altar;
 
-	public static Block icestone;
+	public static BlockIcestone icestone;
 
-	public static Block aerogel;
+	public static BlockAerogel aerogel;
 
 	public static Block zanite_block;
 
 	public static Block enchanted_gravitite;
 
-	public static Block aether_sapling;
+	public static BlockAetherSapling aether_sapling;
 
-	public static Block carved_stone;
+	public static BlockDungeon carved_stone;
 
-	public static Block sentry_stone;
+	public static BlockDungeon sentry_stone;
 
 	public static Block holystone_brick;
 
-	public static Block holystone_furnace;
+	public static BlockHolystoneFurnace holystone_furnace;
 
-	public static Block quicksoil_glass;
+	public static BlockQuicksoilGlass quicksoil_glass;
 
-	public static Block skyroot_door;
+	public static BlockSkyrootDoor skyroot_door;
 
-	public static Block skyroot_chest;
+	public static BlockSkyrootChest skyroot_chest;
 
-	public static Block ambrosium_torch;
+	public static BlockAmbrosiumTorch ambrosium_torch;
 
 	public static void preInit()
 	{
-		aether_dirt = registerBlock("aether_dirt", new BlockAether(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f), AetherCreativeTabs.tabBlocks);
+		aether_dirt = registerBlock("aether_dirt", new Block(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f), AetherCreativeTabs.tabBlocks);
 
 		aether_grass = registerBlockWithItem("aether_grass", new BlockAetherGrass(), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
 
@@ -113,7 +112,7 @@ public class BlocksAether
 
 		aercloud = registerBlockWithItem("aercloud", new BlockAercloud(), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
 
-		skyroot_planks = registerBlock("skyroot_planks", new BlockAether(Material.wood)
+		skyroot_planks = registerBlock("skyroot_planks", new Block(Material.wood)
 				.setStepSound(Block.soundTypeWood).setHardness(2.0f).setResistance(5.0f), AetherCreativeTabs.tabBlocks);
 
 		ambrosium_ore = registerBlock("ambrosium_ore", new BlockAmbrosiumOre(), AetherCreativeTabs.tabBlocks);
@@ -160,17 +159,17 @@ public class BlocksAether
 
 		aerogel = registerBlock("aerogel", new BlockAerogel(), AetherCreativeTabs.tabBlocks);
 
-		zanite_block = registerBlock("zanite_block", new BlockAether(Material.rock).setHardness(5f).setStepSound(Block.soundTypeStone), AetherCreativeTabs.tabBlocks);
+		zanite_block = registerBlock("zanite_block", new Block(Material.rock).setHardness(5f).setStepSound(Block.soundTypeStone), AetherCreativeTabs.tabBlocks);
 
-		enchanted_gravitite = registerBlock("enchanted_gravitite", new BlockAether(Material.rock).setHardness(5f).setStepSound(Block.soundTypeStone), AetherCreativeTabs.tabBlocks);
+		enchanted_gravitite = registerBlock("enchanted_gravitite", new Block(Material.rock).setHardness(5f).setStepSound(Block.soundTypeStone), AetherCreativeTabs.tabBlocks);
 
 		aether_sapling = registerBlockWithItem("aether_sapling", new BlockAetherSapling(), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
 
 		carved_stone = registerBlockWithItem("carved_stone", new BlockDungeon(Material.rock), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
 
-		sentry_stone = registerBlockWithItem("sentry_stone", new BlockDungeon(Material.rock).setLightLevel(0.75f), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
+		sentry_stone = registerBlockWithItem("sentry_stone", new BlockDungeon(Material.rock).setGlows(true), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
 
-		holystone_brick = registerBlock("holystone_brick", new BlockAether(Material.rock), AetherCreativeTabs.tabBlocks);
+		holystone_brick = registerBlock("holystone_brick", new Block(Material.rock), AetherCreativeTabs.tabBlocks);
 
 		holystone_furnace = registerBlock("holystone_furnace", new BlockHolystoneFurnace(), AetherCreativeTabs.tabBlocks);
 
@@ -220,23 +219,31 @@ public class BlocksAether
 		skyroot_door.setHarvestLevel("axe", 0);
 	}
 
-	private static Block registerBlock(String name, Block block, CreativeTabs tab)
+	private static <T extends Block> T registerBlock(String name, T block, CreativeTabs tab)
 	{
-		return registerBlock(name, block.setCreativeTab(tab));
+		registerBlock(name, block.setCreativeTab(tab));
+
+		return block;
 	}
 
-	private static Block registerBlock(String name, Block block)
+	private static <T extends Block> T registerBlock(String name, T block)
 	{
-		return registerBlockWithItem(name, block, ItemBlock.class);
+		registerBlockWithItem(name, block, ItemBlock.class);
+
+		return block;
 	}
 
-	private static Block registerBlockWithItem(String name, Block block, Class<? extends ItemBlock> item, CreativeTabs tab)
+	private static <T extends Block> T registerBlockWithItem(String name, T block, Class<? extends ItemBlock> item, CreativeTabs tab)
 	{
-		return registerBlockWithItem(name, block.setCreativeTab(tab), item);
+		registerBlockWithItem(name, block.setCreativeTab(tab), item);
+
+		return block;
 	}
 
-	private static Block registerBlockWithItem(String name, Block block, Class<? extends ItemBlock> item)
+	private static <T extends Block> T registerBlockWithItem(String name, T block, Class<? extends ItemBlock> item)
 	{
-		return GameRegistry.registerBlock(block.setUnlocalizedName(name), item, name);
+		GameRegistry.registerBlock(block.setUnlocalizedName(name), item, name);
+
+		return block;
 	}
 }

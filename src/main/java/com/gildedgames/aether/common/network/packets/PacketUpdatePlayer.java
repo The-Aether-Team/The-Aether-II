@@ -7,7 +7,6 @@ import com.gildedgames.util.core.io.CustomPacket;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 public class PacketUpdatePlayer extends CustomPacket<PacketUpdatePlayer>
 {

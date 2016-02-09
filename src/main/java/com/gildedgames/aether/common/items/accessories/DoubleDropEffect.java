@@ -84,7 +84,7 @@ public class DoubleDropEffect implements AccessoryEffect
 		
 		if ((float)aePlayer.getPlayer().getRNG().nextInt(10) < ((float)effectCount * this.getPercentChance()))
 		{
-			List<ItemStack> stacks = new ArrayList<ItemStack>();
+			List<ItemStack> stacks = new ArrayList<>();
 
 			for (EntityItem item : event.drops)
 			{

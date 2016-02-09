@@ -1,12 +1,14 @@
 package com.gildedgames.aether.common.items;
 
 import com.gildedgames.aether.common.items.accessories.RegenStoneEffect;
+import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDoor;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -59,65 +61,69 @@ public class ItemsAether
 
 	public static Item ambrosium_shard, continuum_orb, zanite_gemstone;
 
-	public static Item skyroot_axe, holystone_axe, zanite_axe, gravitite_axe;
+	public static ItemSkyrootTool skyroot_axe, skyroot_pickaxe, skyroot_shovel;
 
-	public static Item skyroot_pickaxe, holystone_pickaxe, zanite_pickaxe, gravitite_pickaxe;
+	public static ItemHolystoneTool holystone_axe, holystone_pickaxe, holystone_shovel;
 
-	public static Item skyroot_shovel, holystone_shovel, zanite_shovel, gravitite_shovel;
+	public static ItemZaniteTool zanite_axe, zanite_pickaxe, zanite_shovel;
 
-	public static Item skyroot_sword, holystone_sword, zanite_sword, gravitite_sword;
+	public static ItemGravititeTool gravitite_axe, gravitite_pickaxe, gravitite_shovel;
 
-	public static Item zanite_helmet, zanite_chestplate, zanite_leggings, zanite_boots;
+	public static ItemAetherSword skyroot_sword, holystone_sword, zanite_sword, gravitite_sword;
 
-	public static Item gravitite_helmet, gravitite_chestplate, gravitite_leggings, gravitite_boots;
+	public static ItemZaniteArmor zanite_helmet, zanite_chestplate, zanite_leggings, zanite_boots;
 
-	public static Item obsidian_helmet, obsidian_chestplate, obsidian_leggings, obsidian_boots;
+	public static ItemGravititeArmor gravitite_helmet, gravitite_chestplate, gravitite_leggings, gravitite_boots;
 
-	public static Item neptune_helmet, neptune_chestplate, neptune_leggings, neptune_boots;
+	public static ItemObsidianArmor obsidian_helmet, obsidian_chestplate, obsidian_leggings, obsidian_boots;
 
-	public static Item phoenix_helmet, phoenix_chestplate, phoenix_leggings, phoenix_boots;
+	public static ItemNeptuneArmor neptune_helmet, neptune_chestplate, neptune_leggings, neptune_boots;
 
-	public static Item valkyrie_helmet, valkyrie_chestplate, valkyrie_leggings, valkyrie_boots;
+	public static ItemPhoenixArmor phoenix_helmet, phoenix_chestplate, phoenix_leggings, phoenix_boots;
+
+	public static ItemValkyrieArmor valkyrie_helmet, valkyrie_chestplate, valkyrie_leggings, valkyrie_boots;
 	
-	public static Item sentry_boots;
+	public static ItemSentryBoots sentry_boots;
 
 	public static Item golden_amber;
 
-	public static Item blueberry, orange, wyndberry, rainbow_strawberry, swet_jelly, gummy_swet;
+	public static ItemFood blueberry, orange, wyndberry, rainbow_strawberry, swet_jelly, gummy_swet;
 
-	public static Item candy_corn, cocoatrice, wrapped_chocolates, jelly_pumpkin, stomper_pop, blueberry_lollipop, orange_lollipop, icestone_poprocks;
+	public static ItemFood candy_corn, cocoatrice, wrapped_chocolates, jelly_pumpkin, stomper_pop, blueberry_lollipop, orange_lollipop, icestone_poprocks;
 
-	public static Item ginger_bread_man, candy_cane;
+	public static ItemFood ginger_bread_man, candy_cane;
 
-	public static Item skyroot_bucket, skyroot_water_bucket, skyroot_milk_bucket, skyroot_poison_bucket;
+	public static ItemSkyrootBucket skyroot_bucket, skyroot_water_bucket;
 
-	public static Item valkyrie_music_disc, labyrinth_music_disc, moa_music_disc, aerwhale_music_disc, recording_892;
+	public static ItemSkyrootConsumableBucket skyroot_milk_bucket, skyroot_poison_bucket;
 
-	public static Item healing_stone;
+	public static ItemAetherRecord valkyrie_music_disc, labyrinth_music_disc, moa_music_disc, aerwhale_music_disc, recording_892;
 
-	public static Item dart_shooter;
+	public static ItemFood healing_stone;
 
-	public static Item dart;
+	public static ItemDartShooter dart_shooter;
 
-	public static Item flaming_sword, holy_sword, lightning_sword;
+	public static ItemDart dart;
 
-	public static Item pig_slayer, vampire_blade, candy_cane_sword;
+	public static ItemElementalSword flaming_sword, holy_sword, lightning_sword;
 
-	public static Item skyroot_door;
+	public static ItemSword pig_slayer, vampire_blade, candy_cane_sword;
 
-	public static Item iron_ring, gold_ring;
+	public static ItemDoor skyroot_door;
 
-	public static Item zanite_ring, zanite_pendant;
+	public static ItemAccessory iron_ring, gold_ring;
 
-	public static Item iron_pendant, gold_pendant;
+	public static ItemAccessory zanite_ring, zanite_pendant;
 
-	public static Item iron_bubble, regeneration_stone;
+	public static ItemAccessory iron_pendant, gold_pendant;
+
+	public static ItemAccessory iron_bubble, regeneration_stone;
 	
-	public static Item ice_ring, ice_pendant;
+	public static ItemAccessory ice_ring, ice_pendant;
 
-	public static Item daggerfrost_locket;
+	public static ItemAccessory daggerfrost_locket;
 	
-	public static Item candy_ring, bone_ring, skyroot_ring;
+	public static ItemAccessory candy_ring, bone_ring, skyroot_ring;
 
 	public static void preInit()
 	{
@@ -269,14 +275,14 @@ public class ItemsAether
 				new ItemStack(ItemsAether.skyroot_water_bucket), new ItemStack(ItemsAether.skyroot_bucket));
 	}
 
-	private static Item registerItem(String name, Item item, CreativeTabs tab)
+	private static <T extends Item> T registerItem(String name, T item, CreativeTabs tab)
 	{
 		item.setCreativeTab(tab);
 
 		return registerItem(name, item);
 	}
 
-	private static Item registerItem(String name, Item item)
+	private static <T extends Item> T registerItem(String name, T item)
 	{
 		item.setUnlocalizedName(name);
 		GameRegistry.registerItem(item, name);

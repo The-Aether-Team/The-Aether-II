@@ -8,8 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 
-import java.util.List;
-
 public class AltarRepairRecipe implements IAltarRecipe
 {
 	@Override

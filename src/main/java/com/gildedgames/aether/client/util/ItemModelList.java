@@ -1,12 +1,13 @@
 package com.gildedgames.aether.client.util;
 
 import com.gildedgames.aether.common.AetherCore;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
 
 public class ItemModelList
 {
-	private final HashMap<Integer, String> registrations = new HashMap<>();
+	private final HashMap<Integer, ResourceLocation> registrations = new HashMap<>();
 
 	private final String rootDirectory;
 
@@ -27,12 +28,12 @@ public class ItemModelList
 
 	public ItemModelList add(int meta, String path)
 	{
-		this.registrations.put(meta, this.rootDirectory != null ? this.rootDirectory + path : AetherCore.getResourcePath(path));
+		this.registrations.put(meta, new ResourceLocation(this.rootDirectory != null ? this.rootDirectory + path : AetherCore.getResourcePath(path)));
 
 		return this;
 	}
 
-	public HashMap<Integer, String> getRegistrations()
+	public HashMap<Integer, ResourceLocation> getRegistrations()
 	{
 		return this.registrations;
 	}

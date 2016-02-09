@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.ForgeHooksClient;
 
 import com.gildedgames.aether.client.util.ItemModelList;
@@ -276,14 +277,9 @@ public class AetherItemModels
 	{
 		for (Map.Entry<Item, ItemModelList> entry : models.entrySet())
 		{
-			Item item = entry.getKey();
+			Collection<ResourceLocation> resources = entry.getValue().getRegistrations().values();
 
-			Collection<String> registrations = entry.getValue().getRegistrations().values();
-
-			for (String registration : registrations)
-			{
-				ModelBakery.addVariantName(item, registration);
-			}
+			ModelBakery.registerItemVariants(entry.getKey(), resources.toArray(new ResourceLocation[resources.size()]));
 		}
 	}
 
@@ -293,12 +289,12 @@ public class AetherItemModels
 		{
 			Item item = entry.getKey();
 
-			HashMap<Integer, String> registrations = entry.getValue().getRegistrations();
+			HashMap<Integer, ResourceLocation> registrations = entry.getValue().getRegistrations();
 
-			for (Map.Entry<Integer, String> registration : registrations.entrySet())
+			for (Map.Entry<Integer, ResourceLocation> registration : registrations.entrySet())
 			{
 				int meta = registration.getKey();
-				String path = registration.getValue();
+				ResourceLocation path = registration.getValue();
 
 				ModelResourceLocation resource = new ModelResourceLocation(path, "inventory");
 
