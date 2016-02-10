@@ -77,8 +77,7 @@ public class ItemAetherArmor extends ItemArmor
 	@SuppressWarnings("unchecked")
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced)
 	{
-		tooltip.add(EnumChatFormatting.BLUE + I18n.format("item.tooltip.ability") + ": " +
-				EnumChatFormatting.WHITE + I18n.format("item.armor." + this.name + ".ability.desc"));
+		tooltip.add(EnumChatFormatting.BLUE + I18n.format("item.armor." + this.name + ".ability.desc"));
 
 		if (!this.isAbilityPassive())
 		{

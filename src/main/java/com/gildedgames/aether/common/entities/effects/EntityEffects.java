@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import com.gildedgames.aether.common.AetherCore;
 
@@ -18,6 +20,8 @@ public class EntityEffects<S extends Entity> implements IExtendedEntityPropertie
 	private final static String PROP_ID = AetherCore.MOD_ID + "Effects";
 	
 	private List<EntityEffect<S>> effects = new ArrayList<EntityEffect<S>>();
+	
+	private int ticksSinceAttacked;
 	
 	private EntityEffects()
 	{
@@ -116,6 +120,16 @@ public class EntityEffects<S extends Entity> implements IExtendedEntityPropertie
 				effect.getAbility().tick(this.getEntity(), effect, effect.getAttributes());
 			}
 		}
+		
+		this.ticksSinceAttacked++;
+	}
+	
+	public void onHurt(LivingHurtEvent event)
+	{
+		if (event.source.getSourceOfDamage() instanceof IMob)
+		{
+			this.ticksSinceAttacked = 0;
+		}
 	}
 
 	public void clearEffects()
@@ -124,6 +138,11 @@ public class EntityEffects<S extends Entity> implements IExtendedEntityPropertie
 		{
 			this.removeEffect(effect);
 		}
+	}
+	
+	public int getTicksSinceAttacked()
+	{
+		return this.ticksSinceAttacked;
 	}
 
 }

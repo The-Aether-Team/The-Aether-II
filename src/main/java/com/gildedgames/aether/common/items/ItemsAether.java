@@ -24,6 +24,7 @@ import com.gildedgames.aether.common.entities.effects.abilities.ExtraDamageAbili
 import com.gildedgames.aether.common.entities.effects.abilities.FreezeBlocksAbility;
 import com.gildedgames.aether.common.entities.effects.abilities.PauseHungerAbility;
 import com.gildedgames.aether.common.entities.effects.abilities.RegenerateHealthAbility;
+import com.gildedgames.aether.common.entities.effects.rules.OutOfCombatRule;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.items.armor.ItemObsidianArmor;
@@ -253,7 +254,7 @@ public class ItemsAether
 		zanite_pendant = registerItem("zanite_pendant", new ItemAccessory(AccessoryType.NECKWEAR), AetherCreativeTabs.tabAccessories);
 
 		iron_bubble = registerItem("iron_bubble", new ItemAccessory(AccessoryType.MISC, new EntityEffect<EntityPlayer>(new BreatheUnderwaterAbility<EntityPlayer>())), AetherCreativeTabs.tabAccessories);
-		regeneration_stone = registerItem("regeneration_stone", new ItemAccessory(AccessoryType.MISC, new EntityEffect<EntityPlayer>(new RegenerateHealthAbility<EntityPlayer>())), AetherCreativeTabs.tabAccessories);
+		regeneration_stone = registerItem("regeneration_stone", new ItemAccessory(AccessoryType.MISC, RegenerateHealthAbility.build(EntityPlayer.class, 4, new OutOfCombatRule<EntityPlayer>(160))), AetherCreativeTabs.tabAccessories);
 
 		ice_ring = registerItem("ice_ring", new ItemAccessory(AccessoryType.RING, new EntityEffect<EntityPlayer>(new FreezeBlocksAbility<EntityPlayer>())), AetherCreativeTabs.tabAccessories);
 		ice_pendant = registerItem("ice_pendant", new ItemAccessory(AccessoryType.NECKWEAR, new EntityEffect<EntityPlayer>(new FreezeBlocksAbility<EntityPlayer>())), AetherCreativeTabs.tabAccessories);

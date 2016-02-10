@@ -8,10 +8,26 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import com.gildedgames.aether.common.entities.effects.Ability;
+import com.gildedgames.aether.common.entities.effects.AbilityRule;
 import com.gildedgames.aether.common.entities.effects.EntityEffect;
 
 public class RegenerateHealthAbility<S extends EntityLivingBase> implements Ability<S>
 {
+	
+	private RegenerateHealthAbility()
+	{
+		
+	}
+	
+	@SafeVarargs
+	public static <S extends EntityLivingBase> EntityEffect<S> build(Class<S> cls, int ticksInbetweenHeal, AbilityRule<S>... rules)
+	{
+		EntityEffect<S> effect = new EntityEffect<S>(new RegenerateHealthAbility<S>(), rules);
+		
+		effect.getAttributes().setInteger("ticksInbetweenHeal", ticksInbetweenHeal);
+		
+		return effect;
+	}
 
 	@Override
 	public String getUnlocalizedName(S source, EntityEffect<S> instance, NBTTagCompound attributes)
@@ -28,7 +44,7 @@ public class RegenerateHealthAbility<S extends EntityLivingBase> implements Abil
 	@Override
 	public void initAttributes(S source, NBTTagCompound attributes)
 	{
-		attributes.setInteger("minimumTime", 160);
+		
 	}
 
 	@Override
@@ -40,16 +56,12 @@ public class RegenerateHealthAbility<S extends EntityLivingBase> implements Abil
 	@Override
 	public void tick(S source, EntityEffect<S> holder, NBTTagCompound attributes)
 	{
-		/*EntityEffects<S> effects = EntityEffects.get(source);
+		int inbetween = 20 - (attributes.getInteger("modifier") * attributes.getInteger("ticksInbetweenHeal"));
 
-		effects.ticksSinceAttacked++;
-
-		int inbetween = 20 - (attributes.getInteger("modifier") * 4);
-
-		if (aePlayer.ticksSinceAttacked > attributes.getInteger("minimumTime") && aePlayer.ticksSinceAttacked % inbetween == 0)
+		if (source.ticksExisted % inbetween == 0)
 		{
 			source.heal(0.5F);
-		}*/
+		}
 	}
 
 	@Override

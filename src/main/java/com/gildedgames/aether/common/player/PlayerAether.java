@@ -25,8 +25,6 @@ public class PlayerAether implements IExtendedEntityProperties
 
 	private InventoryAccessories inventoryAccessories = new InventoryAccessories(this);
 
-	public int ticksSinceAttacked;
-
 	@Override
 	public void init(Entity entity, World world)
 	{
@@ -121,8 +119,6 @@ public class PlayerAether implements IExtendedEntityProperties
 				}
 			}
 		}
-
-		this.ticksSinceAttacked = 0;
 	}
 
 	public EntityPlayer getPlayer()

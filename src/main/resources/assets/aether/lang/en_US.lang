@@ -190,14 +190,14 @@ item.tooltip.ability=Ability
 item.tooltip.use=Use
 
 # Armor Tooltips
-item.armor.zanite.ability.desc=Becomes stronger as durability decreases
+item.armor.zanite.ability.desc=Strengthens as Durability Decreases
 item.armor.gravitite.ability.desc=Extended Jump
 item.armor.gravitite.use.desc=Sneak while jumping
 item.armor.obsidian.ability.desc=Extreme Protection
-item.armor.neptune.ability.desc=Breathe and walk underwater
+item.armor.neptune.ability.desc=Breathe and Walk Underwater
 item.armor.phoenix.ability.desc=Fire Immunity
 item.armor.valkyrie.ability.desc=Wing Gliding
-item.armor.sentry_boots.ability.desc=Negates fall damage
+item.armor.sentry_boots.ability.desc=Negates Fall Damage
 
 # Records
 item.aether_record.moa.desc=Emile van Krieken - Approaches
