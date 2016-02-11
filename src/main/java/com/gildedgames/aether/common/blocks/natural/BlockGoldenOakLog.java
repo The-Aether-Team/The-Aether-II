@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.items.ItemsAether;
+import java.util.Random;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,22 +11,25 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.Random;
+import com.gildedgames.aether.common.items.ItemsAether;
 
 public class BlockGoldenOakLog extends BlockAetherLog
 {
 	@Override
 	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
-		Item heldItem = player.getHeldItem().getItem();
-
-		if (heldItem instanceof ItemTool)
+		if (player.getHeldItem() != null)
 		{
-			Item.ToolMaterial material = ((ItemTool) heldItem).getToolMaterial();
+			Item heldItem = player.getHeldItem().getItem();
 
-			if (material.getHarvestLevel() > 2)
+			if (heldItem instanceof ItemTool)
 			{
-				this.dropGoldenAmber(world, pos, world.rand);
+				Item.ToolMaterial material = ((ItemTool) heldItem).getToolMaterial();
+
+				if (material.getHarvestLevel() > 2)
+				{
+					this.dropGoldenAmber(world, pos, world.rand);
+				}
 			}
 		}
 
