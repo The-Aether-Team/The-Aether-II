@@ -29,7 +29,7 @@ public class ChunkProviderAether implements IChunkProvider
 
 	private final World worldObj;
 
-	private final IBlockState aether_dirt, aether_grass, aether_stone;
+	private final IBlockState aether_stone;
 
 	private final Random random;
 
@@ -37,13 +37,14 @@ public class ChunkProviderAether implements IChunkProvider
 
 	private double[][] noiseFields;
 
+	private BiomeGenBase[] biomesForGeneration;
+
 	public final static int PLACEMENT_FLAG_TYPE = 2;
 
 	public ChunkProviderAether(World world, long seed)
 	{
 		this.air = Blocks.air.getDefaultState();
-		this.aether_dirt = BlocksAether.aether_dirt.getDefaultState();
-		this.aether_grass = BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.AETHER_GRASS);
+
 		this.aether_stone = BlocksAether.holystone.getDefaultState();
 
 		this.worldObj = world;
@@ -155,7 +156,7 @@ public class ChunkProviderAether implements IChunkProvider
 		}
 	}
 
-	public void replaceBlocksForBiome(ChunkPrimer primer, int chunkX, int chunkY)
+	public void replaceBlocksForBiome(ChunkPrimer primer, int chunkX, int chunkY, BiomeGenBase[] biomes)
 	{
 		double oneThirtySnd = 0.03125D;
 
@@ -167,12 +168,14 @@ public class ChunkProviderAether implements IChunkProvider
 		{
 			for (int z = 0; z < 16; z++)
 			{
+				BiomeGenBase biome = biomes[z + x * 16];
+
 				int sthWithHeightMap = (int) (this.noiseFields[3][x + z * 16] / 3D + 3D + this.random.nextDouble() / 4);
 
 				int j1 = -1;
 
-				IBlockState topAetherBlock = this.aether_grass;
-				IBlockState fillAetherBlock = this.aether_dirt;
+				IBlockState topAetherBlock = biome.topBlock;
+				IBlockState fillAetherBlock = biome.fillerBlock;
 				IBlockState stone = this.aether_stone;
 
 				for (int y = 127; y >= 0; y--)
@@ -342,7 +345,10 @@ public class ChunkProviderAether implements IChunkProvider
 		ChunkPrimer primer = new ChunkPrimer();
 
 		this.fillWithBlocks1(primer, chunkX, chunkZ);
-		this.replaceBlocksForBiome(primer, chunkX, chunkZ);
+
+		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, chunkX * 16, chunkZ * 16, 16, 16);
+
+		this.replaceBlocksForBiome(primer, chunkX, chunkZ, this.biomesForGeneration);
 
 		Chunk chunk = new Chunk(this.worldObj, primer, chunkX, chunkZ);
 		chunk.generateSkylightMap();
