@@ -155,7 +155,7 @@ public class ChunkProviderAether implements IChunkProvider
 		}
 	}
 
-	public void fillWithBlocks2(ChunkPrimer primer, int chunkX, int chunkY)
+	public void replaceBlocksForBiome(ChunkPrimer primer, int chunkX, int chunkY)
 	{
 		double oneThirtySnd = 0.03125D;
 
@@ -342,7 +342,7 @@ public class ChunkProviderAether implements IChunkProvider
 		ChunkPrimer primer = new ChunkPrimer();
 
 		this.fillWithBlocks1(primer, chunkX, chunkZ);
-		this.fillWithBlocks2(primer, chunkX, chunkZ);
+		this.replaceBlocksForBiome(primer, chunkX, chunkZ);
 
 		Chunk chunk = new Chunk(this.worldObj, primer, chunkX, chunkZ);
 		chunk.generateSkylightMap();

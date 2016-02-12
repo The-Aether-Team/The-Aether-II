@@ -5,13 +5,13 @@ import net.minecraft.block.properties.IProperty;
 import java.util.Collection;
 import java.util.HashMap;
 
-public class PropertyVariant implements IProperty
+public class PropertyVariant implements IProperty<BlockVariant>
 {
-	private String name;
+	private final String name;
 
-	private BlockVariant defaultVariant;
+	private final BlockVariant defaultVariant;
 
-	private HashMap<Integer, BlockVariant> metaMap;
+	private final HashMap<Integer, BlockVariant> metaMap;
 
 	protected PropertyVariant(String name, BlockVariant... variants)
 	{
@@ -50,9 +50,9 @@ public class PropertyVariant implements IProperty
 	}
 
 	@Override
-	public String getName(Comparable value)
+	public String getName(BlockVariant value)
 	{
-		return ((BlockVariant) value).getName();
+		return value.getName();
 	}
 
 	public BlockVariant fromMeta(int meta)
@@ -61,5 +61,4 @@ public class PropertyVariant implements IProperty
 
 		return variant != null ? variant : this.defaultVariant;
 	}
-
 }

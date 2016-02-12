@@ -101,7 +101,7 @@ public class BlockAetherGrass extends Block implements IAetherBlockWithVariants,
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
+		return state.getValue(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override

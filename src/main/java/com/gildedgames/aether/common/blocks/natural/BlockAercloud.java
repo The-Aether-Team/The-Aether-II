@@ -214,13 +214,13 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 			return PURPLE_AERCLOUD.getMeta() + ((EnumFacing) state.getValue(PROPERTY_FACING)).getHorizontalIndex();
 		}
 
-		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
+		return state.getValue(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
 	public int damageDropped(IBlockState state)
 	{
-		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
+		return state.getValue(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
@@ -238,7 +238,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	@Override
 	protected ItemStack createStackedBlock(IBlockState state)
 	{
-		return new ItemStack(this, 1, ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta());
+		return new ItemStack(this, 1, state.getValue(PROPERTY_VARIANT).getMeta());
 	}
 
 	@Override

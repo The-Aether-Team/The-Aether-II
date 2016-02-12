@@ -2,9 +2,9 @@ package com.gildedgames.aether.common.blocks.util.variants.blockstates;
 
 public class BlockVariant implements Comparable<BlockVariant>
 {
-	private int meta;
+	private final int meta;
 
-	private String name;
+	private final String name;
 
 	public BlockVariant(int meta, String name)
 	{

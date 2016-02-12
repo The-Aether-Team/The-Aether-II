@@ -48,7 +48,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IAetherBlockW
 	@Override
 	public int damageDropped(IBlockState state)
 	{
-		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
+		return state.getValue(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IAetherBlockW
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
+		return state.getValue(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override

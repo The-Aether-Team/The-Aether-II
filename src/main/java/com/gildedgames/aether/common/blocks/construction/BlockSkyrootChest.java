@@ -20,7 +20,7 @@ import java.util.Iterator;
 
 public class BlockSkyrootChest extends BlockChest
 {
-	public static int CHEST_TYPE_ID = 2;
+	public static final int CHEST_TYPE_ID = 2;
 
 	public BlockSkyrootChest()
 	{

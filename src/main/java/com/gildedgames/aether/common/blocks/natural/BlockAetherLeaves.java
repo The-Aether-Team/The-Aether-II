@@ -23,9 +23,9 @@ import java.util.Random;
 
 public class BlockAetherLeaves extends Block implements IShearable
 {
-	public static PropertyBool PROPERTY_DECAYABLE = PropertyBool.create("decayable");
+	public static final PropertyBool PROPERTY_DECAYABLE = PropertyBool.create("decayable");
 
-	public static PropertyBool PROPERTY_CHECK_DECAY = PropertyBool.create("check_decay");
+	public static final PropertyBool PROPERTY_CHECK_DECAY = PropertyBool.create("check_decay");
 
 	private final int saplingMeta;
 

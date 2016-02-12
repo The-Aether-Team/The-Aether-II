@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.world.features;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.util.BlockPosUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -21,13 +22,15 @@ public class WorldGenAetherLakes extends WorldGenerator
 	}
 
 	@Override
-	public boolean generate(World world, Random rand, BlockPos pos)
+	public boolean generate(World world, Random rand, BlockPos position)
 	{
-		pos = pos.add(-8, 0, -8);
+		BlockPos.MutableBlockPos pos = BlockPosUtil.convert(position);
+
+		BlockPosUtil.add(pos, -8, 0, -8);
 
 		while (pos.getY() > 5 && world.isAirBlock(pos))
 		{
-			pos = pos.down();
+			pos = BlockPosUtil.down(pos, 1);
 		}
 
 		if (pos.getY() <= 4)
@@ -35,7 +38,8 @@ public class WorldGenAetherLakes extends WorldGenerator
 			return false;
 		}
 
-		pos = pos.down(4);
+		pos = BlockPosUtil.down(pos, 4);
+
 		boolean[] aboolean = new boolean[2048];
 		int i = rand.nextInt(4) + 4;
 		int x;

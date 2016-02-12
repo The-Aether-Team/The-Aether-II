@@ -83,7 +83,7 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	{
 		if (TerrainGen.saplingGrowTree(world, random, pos))
 		{
-			int meta = ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta();
+			int meta = state.getValue(PROPERTY_VARIANT).getMeta();
 
 			WorldGenerator treeGenerator = null;
 
@@ -117,7 +117,7 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return ((BlockVariant) state.getValue(PROPERTY_VARIANT)).getMeta() | (state.getValue(PROPERTY_STAGE) << 3);
+		return state.getValue(PROPERTY_VARIANT).getMeta() | (state.getValue(PROPERTY_STAGE) << 3);
 	}
 
 	@Override

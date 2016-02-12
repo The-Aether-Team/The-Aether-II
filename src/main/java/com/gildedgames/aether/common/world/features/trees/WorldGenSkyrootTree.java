@@ -29,6 +29,8 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 		
 		boolean canCreateTree = true;
 
+		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(position.getX(), position.getY(), position.getZ());
+
 		if (position.getY() >= 1 && position.getY() + i + 1 <= 256)
 		{
 			byte b0;
@@ -54,7 +56,9 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 					{
 						if (y >= 0 && y < 256)
 						{
-							if (!worldIn.isAirBlock(new BlockPos(k, y, l)))
+							pos.set(k, y, l);
+
+							if (!worldIn.isAirBlock(pos))
 							{
 								canCreateTree = false;
 							}
@@ -85,7 +89,8 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 					int j1;
 					int k1;
 					int l1;
-					BlockPos pos;
+
+					pos = new BlockPos.MutableBlockPos(position.getX(), position.getY(), position.getZ());
 
 					for (l = position.getY() - b0 + i; l <= position.getY() + i; ++l)
 					{
@@ -102,7 +107,7 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 
 								if (Math.abs(l1) != j1 || Math.abs(j2) != j1 || rand.nextInt(2) != 0 && i1 != 0)
 								{
-									pos = new BlockPos(k1, l, i2);
+									pos.set(k1, l, i2);
 									Block block = worldIn.getBlockState(pos).getBlock();
 
 									if (block.isAir(worldIn, pos) || block.isLeaves(worldIn, pos))

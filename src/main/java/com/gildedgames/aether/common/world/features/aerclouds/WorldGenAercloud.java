@@ -28,6 +28,8 @@ public class WorldGenAercloud extends WorldGenerator
 	{
 		IBlockState state = this.getAercloudState(rand);
 
+		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(position.getX(), position.getY(), position.getZ());
+
 		int x = position.getX();
 		int y = position.getY();
 		int z = position.getZ();
@@ -52,9 +54,10 @@ public class WorldGenAercloud extends WorldGenerator
 				{
 					for (int z1 = z; z1 < z + rand.nextInt(4) + 3 * (this.isFlat ? 3 : 1); z1++)
 					{
-						BlockPos pos = new BlockPos(x1, y1, z1);
+						pos.set(x1, y1, z1);
 
-						if (worldIn.isAirBlock(pos) && Math.abs(x1 - x) + Math.abs(y1 - y) + Math.abs(z1 - z) < 4 * (this.isFlat ? 3 : 1) + rand.nextInt(2))
+						if (worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos) &&
+								Math.abs(x1 - x) + Math.abs(y1 - y) + Math.abs(z1 - z) < 4 * (this.isFlat ? 3 : 1) + rand.nextInt(2))
 						{
 							worldIn.setBlockState(pos, state, ChunkProviderAether.PLACEMENT_FLAG_TYPE);
 						}
