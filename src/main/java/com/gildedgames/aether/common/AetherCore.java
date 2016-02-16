@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common;
 
+import com.gildedgames.aether.client.ClientProxy;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;

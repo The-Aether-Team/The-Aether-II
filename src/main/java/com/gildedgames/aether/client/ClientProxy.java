@@ -7,14 +7,13 @@ import com.gildedgames.aether.client.models.items.AetherItemModels;
 import com.gildedgames.aether.client.renderer.AetherRenderers;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.CommonProxy;
-import com.gildedgames.util.tab.common.TabAPI;
+import com.gildedgames.util.tab.TabModule;
+import com.gildedgames.util.tab.common.TabApiImpl;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class ClientProxy extends CommonProxy
@@ -41,7 +40,7 @@ public class ClientProxy extends CommonProxy
 
 		MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
 
-		TabAPI.getInventoryGroup().getSide(Side.CLIENT).add(new TabAccessories());
+		TabModule.api().getInventoryGroup().getSide(Side.CLIENT).add(new TabAccessories());
 
 		((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(AetherLanguageManager.INSTANCE);
 	}

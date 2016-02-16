@@ -2,6 +2,7 @@ package com.gildedgames.aether.common;
 
 import java.util.Random;
 
+import com.gildedgames.util.universe.common.util.TeleporterGeneric;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -31,7 +32,6 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.util.PlayerUtil;
-import com.gildedgames.util.universe.common.util.TeleporterGeneric;
 
 public class CommonEvents
 {

@@ -25,7 +25,7 @@ import com.gildedgames.aether.common.recipes.RecipesAether;
 import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
 import com.gildedgames.aether.common.world.WorldProviderAether;
 import com.gildedgames.aether.common.world.chunk.PlacementFlagFactory;
-import com.gildedgames.util.chunk.ChunkCore;
+import com.gildedgames.util.chunk.ChunkModule;
 
 public class CommonProxy
 {
@@ -75,7 +75,7 @@ public class CommonProxy
 
 		MinecraftForge.EVENT_BUS.register(ItemsAether.skyroot_sword);
 
-		ChunkCore.locate().registerHookFactory(new PlacementFlagFactory());
+		ChunkModule.locate().registerHookFactory(new PlacementFlagFactory());
 	}
 
 	public void postInit(FMLPostInitializationEvent event)

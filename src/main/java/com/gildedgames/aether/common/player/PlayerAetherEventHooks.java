@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import com.gildedgames.aether.common.world.chunk.PlacementFlagChunkData;
-import com.gildedgames.util.chunk.ChunkCore;
+import com.gildedgames.util.chunk.ChunkModule;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -80,7 +80,7 @@ public class PlayerAetherEventHooks
 	@SubscribeEvent
 	public void onPlaceBlockEvent(BlockEvent.PlaceEvent event)
 	{
-		PlacementFlagChunkData data = (PlacementFlagChunkData) ChunkCore.locate().getData(event.world, event.pos, PlacementFlagChunkData.class);
+		PlacementFlagChunkData data = (PlacementFlagChunkData) ChunkModule.locate().getHook(event.world, event.pos, PlacementFlagChunkData.class);
 
 		if (data != null)
 		{

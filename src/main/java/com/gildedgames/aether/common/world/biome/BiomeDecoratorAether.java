@@ -228,8 +228,8 @@ public class BiomeDecoratorAether
 	protected void generateClouds(World world, Random random, BlockPos pos)
 	{
 		this.generateCloud(this.genBlueAercloud, world, pos, random, 15, 16, 65);
-		this.generateCloud(this.genColdFlatAercloud, world, pos, random, 10, 16, 32);
-		this.generateCloud(this.genColdColumbusAercloud, world, pos, random, 30, 16, 65);
+		//this.generateCloud(this.genColdFlatAercloud, world, pos, random, 10, 16, 32);
+		//this.generateCloud(this.genColdColumbusAercloud, world, pos, random, 30, 16, 65);
 
 		this.generateCloud(this.genPurpleAercloud, world, pos, random, 50, 4, 32);
 	}

@@ -35,6 +35,10 @@ public class ChunkProviderAether implements IChunkProvider
 
 	private NoiseGeneratorOctaves[] octaveNoiseGenerators;
 
+	private NoiseGeneratorOctaves cloudNoiseGenerator;
+
+	private double[] cloudNoise;
+
 	private double[][] noiseFields;
 
 	private BiomeGenBase[] biomesForGeneration;
@@ -63,6 +67,8 @@ public class ChunkProviderAether implements IChunkProvider
 		this.octaveNoiseGenerators[4] = new NoiseGeneratorOctaves(this.random, 4);
 		this.octaveNoiseGenerators[5] = new NoiseGeneratorOctaves(this.random, 10);
 		this.octaveNoiseGenerators[6] = new NoiseGeneratorOctaves(this.random, 16);
+
+		this.cloudNoiseGenerator = new NoiseGeneratorOctaves(this.random, 12);
 	}
 
 	@Override
@@ -315,6 +321,40 @@ public class ChunkProviderAether implements IChunkProvider
 		return "RandomAetherLevelSource";
 	}
 
+	public void genClouds(ChunkPrimer primer, int chunkX, int chunkZ)
+	{
+		int height = 160;
+		int sampleSize = 40;
+
+		this.cloudNoise = this.cloudNoiseGenerator.generateNoiseOctaves(this.cloudNoise, chunkX * 16, 0, chunkZ * 16, 16, height, 16, 64.0D, 1.5D, 64.0D);
+
+		for (int x = 0; x < 16; x++)
+		{
+			for (int z = 0; z < 16; z++)
+			{
+				for (int y = 0; y < height; y += sampleSize)
+				{
+					double samples = 0.0D;
+
+					for (int y2 = y; y2 < y + sampleSize; y2++)
+					{
+						samples += this.cloudNoise[(x * 16 + z) * height + y];
+					}
+
+					double sample = samples / sampleSize;
+
+					if (sample / 5.0D > 200.0D)
+					{
+						if (primer.getBlockState(x, y, z).getBlock() == Blocks.air)
+						{
+							primer.setBlockState(x, 8 + y / sampleSize, z, BlocksAether.aercloud.getDefaultState());
+						}
+					}
+				}
+			}
+		}
+	}
+
 	@Override
 	public void populate(IChunkProvider chunkProvider, int chunkX, int chunkZ)
 	{
@@ -349,6 +389,8 @@ public class ChunkProviderAether implements IChunkProvider
 		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, chunkX * 16, chunkZ * 16, 16, 16);
 
 		this.replaceBlocksForBiome(primer, chunkX, chunkZ, this.biomesForGeneration);
+
+		this.genClouds(primer, chunkX, chunkZ);
 
 		Chunk chunk = new Chunk(this.worldObj, primer, chunkX, chunkZ);
 		chunk.generateSkylightMap();
