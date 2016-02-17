@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
+import com.gildedgames.aether.common.world.features.trees.WorldGenGoldenOakTree;
 import com.gildedgames.aether.common.world.features.trees.WorldGenSkyrootTree;
 
 import net.minecraft.block.BlockLog;
@@ -17,6 +18,8 @@ public class BiomeGenAether extends BiomeGenAetherBase
 	public static final WorldGenSkyrootTree genBlueSkyrootTree = new WorldGenSkyrootTree(BlocksAether.skyroot_log.getDefaultState().withProperty(BlockAetherLog.PROPERTY_AXIS, BlockLog.EnumAxis.Y),
 			BlocksAether.blue_skyroot_leaves.getDefaultState());
 
+	public static final WorldGenGoldenOakTree genGoldenOakTree = new WorldGenGoldenOakTree(BlocksAether.golden_oak_log.getDefaultState(), BlocksAether.golden_oak_leaves.getDefaultState());
+
 	public BiomeGenAether(int id)
 	{
 		super(id);
@@ -27,16 +30,16 @@ public class BiomeGenAether extends BiomeGenAetherBase
 	{
 		int chance = random.nextInt(100);
 
-		if (chance < 50)
+		if (chance < 5)
 		{
-			return genBlueSkyrootTree;
+			return genGoldenOakTree;
 		}
-		else
+		else if (chance < 50)
 		{
 			return genGreenSkyrootTree;
 		}
 
-		// TODO: _actual_ chances
+		return genBlueSkyrootTree;
 	}
 
 }

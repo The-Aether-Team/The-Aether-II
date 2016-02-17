@@ -86,16 +86,6 @@ public class BiomeDecoratorAether
 
 		int count;
 
-		// Lake Generator
-		if (random.nextInt(4) == 0)
-		{
-			x = random.nextInt(16) + 8;
-			y = random.nextInt(128);
-			z = random.nextInt(16) + 8;
-
-			this.genAetherLakes.generate(world, random, pos.add(x, y, z));
-		}
-
 		// Aether Tall Grass Generator
 		for (count = 0; count < 1; count++)
 		{
@@ -181,6 +171,16 @@ public class BiomeDecoratorAether
 					}
 				}
 			}
+		}
+
+		// Lake Generator
+		if (random.nextInt(4) == 0)
+		{
+			x = random.nextInt(16) + 8;
+			y = random.nextInt(128);
+			z = random.nextInt(16) + 8;
+
+			this.genAetherLakes.generate(world, random, pos.add(x, y, z));
 		}
 
 		this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));

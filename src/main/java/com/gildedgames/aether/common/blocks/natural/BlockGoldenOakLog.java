@@ -2,12 +2,15 @@ package com.gildedgames.aether.common.blocks.natural;
 
 import java.util.Random;
 
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
@@ -16,7 +19,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 public class BlockGoldenOakLog extends BlockAetherLog
 {
 	@Override
-	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player)
+	public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te)
 	{
 		if (player.getHeldItem() != null)
 		{
@@ -26,7 +29,7 @@ public class BlockGoldenOakLog extends BlockAetherLog
 			{
 				Item.ToolMaterial material = ((ItemTool) heldItem).getToolMaterial();
 
-				if (material.getHarvestLevel() > 2)
+				if (material.getHarvestLevel() >= 2)
 				{
 					this.dropGoldenAmber(world, pos, world.rand);
 				}
@@ -38,9 +41,12 @@ public class BlockGoldenOakLog extends BlockAetherLog
 
 	private void dropGoldenAmber(World world, BlockPos pos, Random random)
 	{
-		ItemStack stack = new ItemStack(ItemsAether.golden_amber, random.nextInt(3) + 1);
+		Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.golden_amber, random.nextInt(3) + 1));
+	}
 
-		EntityItem entity = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack);
-		world.spawnEntityInWorld(entity);
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	{
+		return Item.getItemFromBlock(BlocksAether.skyroot_log);
 	}
 }
