@@ -36,7 +36,7 @@ public class BlockGoldenOakLog extends BlockAetherLog
 			}
 		}
 
-		super.onBlockHarvested(world, pos, state, player);
+		super.harvestBlock(world, player, pos, state, te);
 	}
 
 	private void dropGoldenAmber(World world, BlockPos pos, Random random)
