@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.items.tools;
 
 import com.gildedgames.aether.common.blocks.util.ISkyrootMinable;
 import com.gildedgames.aether.common.world.chunk.PlacementFlagChunkData;
-import com.gildedgames.util.chunk.ChunkModule;
+import com.gildedgames.util.modules.chunk.ChunkModule;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;

@@ -22,10 +22,10 @@ public class AetherConfig
 	{
 		this.configuration.load();
 
-		ConfigCategory biomeIDs = this.configuration.getCategory("biomeIDs");
+		ConfigCategory biomeIDs = this.configuration.getCategory("Biome IDs");
 		this.aetherBiomeID = this.getInt(biomeIDs, "Aether Biome ID", 237);
 
-		ConfigCategory dimIDs = this.configuration.getCategory("dimIDs");
+		ConfigCategory dimIDs = this.configuration.getCategory("Dimension IDs");
 		this.aetherDimID = this.getInt(dimIDs, "Aether Dimension ID", 3);
 
 		this.configuration.save();

@@ -7,7 +7,7 @@ import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketOpenContainer;
 import com.gildedgames.aether.common.player.PlayerAether;
-import com.gildedgames.util.tab.common.util.ITab;
+import com.gildedgames.util.modules.tab.common.util.ITab;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;

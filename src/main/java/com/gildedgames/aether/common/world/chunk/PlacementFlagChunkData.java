@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.chunk;
 
-import com.gildedgames.util.chunk.common.hook.IChunkHook;
+import com.gildedgames.util.modules.chunk.common.hook.IChunkHook;
 import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.BitSet;

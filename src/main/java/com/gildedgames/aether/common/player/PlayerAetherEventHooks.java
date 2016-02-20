@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import com.gildedgames.aether.common.world.chunk.PlacementFlagChunkData;
-import com.gildedgames.util.chunk.ChunkModule;
+import com.gildedgames.util.modules.chunk.ChunkModule;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;

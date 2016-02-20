@@ -2,7 +2,7 @@ package com.gildedgames.aether.common;
 
 import java.util.Random;
 
-import com.gildedgames.util.universe.common.util.TeleporterGeneric;
+import com.gildedgames.util.modules.universe.common.util.TeleporterGeneric;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;

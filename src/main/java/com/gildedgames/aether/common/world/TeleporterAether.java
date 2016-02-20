@@ -11,7 +11,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.util.core.nbt.NBT;
 import com.gildedgames.util.core.util.GGHelper;
-import com.gildedgames.util.instances.BlockPosDimension;
+import com.gildedgames.util.modules.instances.BlockPosDimension;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
