@@ -56,6 +56,10 @@ public class RecipesAether
 		// Zanite Block
 		registerShapedRecipe(new ItemStack(BlocksAether.zanite_block), "XXX", "XXX", "XXX",
 				'X', new ItemStack(ItemsAether.zanite_gemstone));
+
+		// Icestone Bricks
+		registerShapedRecipe(new ItemStack(BlocksAether.icestone_bricks, 4), "XX", "XX",
+				'X', new ItemStack(ItemsAether.icestone));
 	}
 
 	private static void registerToolRecipes()

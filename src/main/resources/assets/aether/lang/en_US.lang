@@ -34,7 +34,8 @@ tile.orange_tree.name=Orange Tree
 tile.aether_flower.purple_flower.name=Purple Flower
 tile.aether_flower.white_rose.name=White Rose
 tile.altar.name=Altar
-tile.icestone.name=Icestone
+tile.icestone_ore.name=Icestone Ore
+tile.icestone_bricks.name=Icestone Bricks
 tile.aerogel.name=Aerogel
 tile.zanite_block.name=Zanite Block
 tile.aether_sapling.blue_skyroot.name=Blue Skyroot Sapling
@@ -164,6 +165,7 @@ item.daggerfrost_locket.name=Daggerfrost Locket
 item.candy_ring.name=Candy Ring
 item.bone_ring.name=Bone Ring
 item.skyroot_ring.name=Skyroot Ring
+item.icestone.name=Icestone
 
 # Weapon Tooltips
 item.skyroot_sword.ability.desc=Doubles drops from mobs

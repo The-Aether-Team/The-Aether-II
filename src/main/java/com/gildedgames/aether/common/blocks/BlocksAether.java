@@ -17,11 +17,12 @@ import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.common.blocks.natural.BlockGoldenOakLog;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
-import com.gildedgames.aether.common.blocks.natural.BlockIcestone;
+import com.gildedgames.aether.common.blocks.natural.BlockIcestoneBricks;
 import com.gildedgames.aether.common.blocks.natural.BlockQuicksoil;
 import com.gildedgames.aether.common.blocks.natural.ores.BlockAmbrosiumOre;
 import com.gildedgames.aether.common.blocks.natural.ores.BlockContinuumOre;
 import com.gildedgames.aether.common.blocks.natural.ores.BlockGravititeOre;
+import com.gildedgames.aether.common.blocks.natural.ores.BlockIcestoneOre;
 import com.gildedgames.aether.common.blocks.natural.ores.BlockZaniteOre;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
@@ -76,7 +77,7 @@ public class BlocksAether
 
 	public static BlockAltar altar;
 
-	public static BlockIcestone icestone;
+	public static BlockIcestoneOre icestone_ore;
 
 	public static BlockAerogel aerogel;
 
@@ -101,6 +102,8 @@ public class BlocksAether
 	public static BlockSkyrootChest skyroot_chest;
 
 	public static BlockAmbrosiumTorch ambrosium_torch;
+
+	public static BlockIcestoneBricks icestone_bricks;
 
 	public static void preInit()
 	{
@@ -155,7 +158,7 @@ public class BlocksAether
 
 		altar = registerBlock("altar", new BlockAltar(), AetherCreativeTabs.tabBlocks);
 
-		icestone = registerBlock("icestone", new BlockIcestone(), AetherCreativeTabs.tabBlocks);
+		icestone_ore = registerBlock("icestone_ore", new BlockIcestoneOre(), AetherCreativeTabs.tabBlocks);
 
 		aerogel = registerBlock("aerogel", new BlockAerogel(), AetherCreativeTabs.tabBlocks);
 
@@ -181,6 +184,8 @@ public class BlocksAether
 
 		ambrosium_torch = registerBlock("ambrosium_torch", new BlockAmbrosiumTorch(), AetherCreativeTabs.tabBlocks);
 
+		icestone_bricks = registerBlock("icestone_bricks", new BlockIcestoneBricks(), AetherCreativeTabs.tabBlocks);
+
 		registerHarvestLevels();
 	}
 
@@ -201,7 +206,8 @@ public class BlocksAether
 		gravitite_ore.setHarvestLevel("pickaxe", 2);
 		continuum_ore.setHarvestLevel("pickaxe", 3);
 
-		icestone.setHarvestLevel("pickaxe", 1);
+		icestone_ore.setHarvestLevel("pickaxe", 1);
+		icestone_bricks.setHarvestLevel("pickaxe", 1);
 		aerogel.setHarvestLevel("pickaxe", 1);
 
 		altar.setHarvestLevel("pickaxe", 0);

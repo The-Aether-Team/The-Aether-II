@@ -108,7 +108,8 @@ public class AetherItemModels
 
 		registerItemModels(getItem(BlocksAether.aether_portal), new ItemModelList().add(0, "aether_portal"));
 		registerItemModels(getItem(BlocksAether.quicksoil), new ItemModelList().add(0, "quicksoil"));
-		registerItemModels(getItem(BlocksAether.icestone), new ItemModelList().add(0, "icestone"));
+		registerItemModels(getItem(BlocksAether.icestone_ore), new ItemModelList().add(0, "icestone_ore"));
+		registerItemModels(getItem(BlocksAether.icestone_bricks), new ItemModelList().add(0, "icestone_bricks"));
 		registerItemModels(getItem(BlocksAether.aerogel), new ItemModelList().add(0, "aerogel"));
 
 		registerItemModels(getItem(BlocksAether.altar), new ItemModelList().add(0, "altar"));
@@ -264,6 +265,8 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.candy_ring, new ItemModelList("accessories/").add(0, "candy_ring"));
 		registerItemModels(ItemsAether.bone_ring, new ItemModelList("accessories/").add(0, "bone_ring"));
 		registerItemModels(ItemsAether.skyroot_ring, new ItemModelList("accessories/").add(0, "skyroot_ring"));
+
+		registerItemModels(ItemsAether.icestone, new ItemModelList().add(0, "icestone"));
 
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.skyroot_chest), 0, TileEntitySkyrootChest.class);
 	}

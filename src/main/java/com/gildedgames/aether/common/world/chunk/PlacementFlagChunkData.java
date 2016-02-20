@@ -32,15 +32,15 @@ public class PlacementFlagChunkData implements IChunkHook
 	@Override
 	public void write(NBTTagCompound output)
 	{
-		output.setByteArray("bits", this.bits.toByteArray());
+		output.setByteArray("placeFlags", this.bits.toByteArray());
 	}
 
 	@Override
 	public void read(NBTTagCompound input)
 	{
-		if (input.hasKey("bits"))
+		if (input.hasKey("placeFlags"))
 		{
-			this.bits = BitSet.valueOf(input.getByteArray("bits"));
+			this.bits = BitSet.valueOf(input.getByteArray("placeFlags"));
 		}
 		else
 		{

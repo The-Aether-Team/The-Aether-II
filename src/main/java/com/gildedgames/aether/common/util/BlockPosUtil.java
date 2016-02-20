@@ -24,6 +24,13 @@ public class BlockPosUtil
 		return pos;
 	}
 
+	public static MutableBlockPos set(MutableBlockPos pos, int x, int y, int z)
+	{
+		pos.set(x, y, z);
+
+		return pos;
+	}
+
 	public static MutableBlockPos convert(BlockPos pos)
 	{
 		return new MutableBlockPos(pos.getX(), pos.getY(), pos.getZ());

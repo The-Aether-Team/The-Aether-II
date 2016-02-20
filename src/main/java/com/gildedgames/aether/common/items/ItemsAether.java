@@ -126,6 +126,8 @@ public class ItemsAether
 	
 	public static ItemAccessory candy_ring, bone_ring, skyroot_ring;
 
+	public static Item icestone;
+
 	public static void preInit()
 	{
 		skyroot_stick = registerItem("skyroot_stick", new Item(), AetherCreativeTabs.tabMaterials);
@@ -253,20 +255,22 @@ public class ItemsAether
 		zanite_ring = registerItem("zanite_ring", new ItemAccessory(AccessoryType.RING), AetherCreativeTabs.tabAccessories);
 		zanite_pendant = registerItem("zanite_pendant", new ItemAccessory(AccessoryType.NECKWEAR), AetherCreativeTabs.tabAccessories);
 
-		iron_bubble = registerItem("iron_bubble", new ItemAccessory(AccessoryType.MISC, new EntityEffect<EntityPlayer>(new BreatheUnderwaterAbility<EntityPlayer>())), AetherCreativeTabs.tabAccessories);
+		iron_bubble = registerItem("iron_bubble", new ItemAccessory(AccessoryType.MISC, new EntityEffect<>(new BreatheUnderwaterAbility<EntityPlayer>())), AetherCreativeTabs.tabAccessories);
 		regeneration_stone = registerItem("regeneration_stone", new ItemAccessory(AccessoryType.MISC, RegenerateHealthAbility.build(EntityPlayer.class, 4, new OutOfCombatRule<EntityPlayer>(160))), AetherCreativeTabs.tabAccessories);
 
-		ice_ring = registerItem("ice_ring", new ItemAccessory(AccessoryType.RING, new EntityEffect<EntityPlayer>(new FreezeBlocksAbility<EntityPlayer>())), AetherCreativeTabs.tabAccessories);
-		ice_pendant = registerItem("ice_pendant", new ItemAccessory(AccessoryType.NECKWEAR, new EntityEffect<EntityPlayer>(new FreezeBlocksAbility<EntityPlayer>())), AetherCreativeTabs.tabAccessories);
+		ice_ring = registerItem("ice_ring", new ItemAccessory(AccessoryType.RING, new EntityEffect<>(new FreezeBlocksAbility<EntityPlayer>())), AetherCreativeTabs.tabAccessories);
+		ice_pendant = registerItem("ice_pendant", new ItemAccessory(AccessoryType.NECKWEAR, new EntityEffect<>(new FreezeBlocksAbility<EntityPlayer>())), AetherCreativeTabs.tabAccessories);
 		
-		daggerfrost_locket = registerItem("daggerfrost_locket", new ItemAccessory(AccessoryType.NECKWEAR, new EntityEffect<EntityPlayer>(new DaggerfrostAbility())), AetherCreativeTabs.tabAccessories);
+		daggerfrost_locket = registerItem("daggerfrost_locket", new ItemAccessory(AccessoryType.NECKWEAR, new EntityEffect<>(new DaggerfrostAbility())), AetherCreativeTabs.tabAccessories);
 		
-		candy_ring = registerItem("candy_ring", new ItemAccessory(AccessoryType.RING, new EntityEffect<EntityPlayer>(new PauseHungerAbility())), AetherCreativeTabs.tabAccessories);
+		candy_ring = registerItem("candy_ring", new ItemAccessory(AccessoryType.RING, new EntityEffect<>(new PauseHungerAbility())), AetherCreativeTabs.tabAccessories);
 		
 		bone_ring = registerItem("bone_ring", new ItemAccessory(AccessoryType.RING, ExtraDamageAbility.build(EntityPlayer.class, 2.0F)), AetherCreativeTabs.tabAccessories);
 		
 		skyroot_ring = registerItem("skyroot_ring", new ItemAccessory(AccessoryType.RING, DoubleDropAbility.build(EntityPlayer.class, 1.5F)), AetherCreativeTabs.tabAccessories);
-		
+
+		icestone = registerItem("icestone", new Item(), AetherCreativeTabs.tabMaterials);
+
 		registerItemProperties();
 	}
 

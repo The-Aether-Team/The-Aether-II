@@ -29,7 +29,7 @@ public class BiomeDecoratorAether
 {
 	protected WorldGenAetherTallGrass genAetherGrass;
 
-	protected WorldGenMinable genAmbrosium, genZanite, genGravitite, genContinuum;
+	protected WorldGenMinable genAmbrosium, genZanite, genGravitite, genContinuum, genIcestone;
 
 	protected WorldGenAetherFlowers genPurpleFlowers, genWhiteRoses;
 
@@ -53,6 +53,7 @@ public class BiomeDecoratorAether
 		this.genZanite = new WorldGenMinable(BlocksAether.zanite_ore.getDefaultState(), 8);
 		this.genGravitite = new WorldGenMinable(BlocksAether.gravitite_ore.getDefaultState(), 4);
 		this.genContinuum = new WorldGenMinable(BlocksAether.continuum_ore.getDefaultState(), 4);
+		this.genIcestone = new WorldGenMinable(BlocksAether.icestone_ore.getDefaultState(), 10);
 
 		this.genPurpleFlowers = new WorldGenAetherFlowers(BlocksAether.aether_flower, BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER), 64);
 		this.genWhiteRoses = new WorldGenAetherFlowers(BlocksAether.aether_flower, BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE), 64);
@@ -223,6 +224,7 @@ public class BiomeDecoratorAether
 		this.generateMineable(this.genZanite, world, random, pos, 0, 64, 15);
 		this.generateMineable(this.genGravitite, world, random, pos, 0, 32, 6);
 		this.generateMineable(this.genContinuum, world, random, pos, 0, 128, 4);
+		this.generateMineable(this.genIcestone, world, random, pos, 0, 128, 10);
 	}
 
 	protected void generateClouds(World world, Random random, BlockPos pos)
