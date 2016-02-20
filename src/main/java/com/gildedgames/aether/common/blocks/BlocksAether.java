@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
@@ -248,7 +249,10 @@ public class BlocksAether
 
 	private static <T extends Block> T registerBlockWithItem(String name, T block, Class<? extends ItemBlock> item)
 	{
-		GameRegistry.registerBlock(block.setUnlocalizedName(name), item, name);
+		block.setUnlocalizedName(AetherCore.MOD_ID + "." + name);
+		block.setRegistryName(name);
+
+		GameRegistry.registerBlock(block, item);
 
 		return block;
 	}

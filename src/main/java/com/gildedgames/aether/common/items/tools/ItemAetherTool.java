@@ -50,15 +50,17 @@ public class ItemAetherTool extends ItemTool
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings("unchecked")
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced)
+	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
 	{
-		tooltip.add(String.format("%s: %s", EnumChatFormatting.BLUE + I18n.format("item.tooltip.ability"),
-				EnumChatFormatting.WHITE + I18n.format("item.tool." + this.name + ".ability.desc")));
+		tooltip.add(String.format("%s: %s",
+				EnumChatFormatting.BLUE + I18n.format("item.aether.tooltip.ability"),
+				EnumChatFormatting.WHITE + I18n.format("item.aether.tool." + this.name + ".ability.desc")));
 
 		if (!this.isAbilityPassive())
 		{
-			tooltip.add(String.format("%s: %s", EnumChatFormatting.DARK_AQUA + I18n.format("item.tooltip.use"),
-					EnumChatFormatting.WHITE + I18n.format("item.tool." + this.name + ".use.desc")));
+			tooltip.add(String.format("%s: %s",
+					EnumChatFormatting.DARK_AQUA + I18n.format("item.aether.tooltip.use"),
+					EnumChatFormatting.WHITE + I18n.format("item.aether.tool." + this.name + ".use.desc")));
 		}
 	}
 }

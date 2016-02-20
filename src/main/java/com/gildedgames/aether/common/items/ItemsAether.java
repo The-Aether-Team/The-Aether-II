@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items;
 
+import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -289,8 +290,10 @@ public class ItemsAether
 
 	private static <T extends Item> T registerItem(String name, T item)
 	{
-		item.setUnlocalizedName(name);
-		GameRegistry.registerItem(item, name);
+		item.setUnlocalizedName(AetherCore.MOD_ID + "." + name);
+		item.setRegistryName(name);
+
+		GameRegistry.registerItem(item);
 
 		return item;
 	}
