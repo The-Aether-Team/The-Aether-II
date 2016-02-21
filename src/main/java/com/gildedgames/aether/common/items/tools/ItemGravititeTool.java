@@ -2,12 +2,17 @@ package com.gildedgames.aether.common.items.tools;
 
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+
+import java.util.List;
 
 public class ItemGravititeTool extends ItemAetherTool
 {
@@ -27,11 +32,11 @@ public class ItemGravititeTool extends ItemAetherTool
 
 			if (ForgeHooks.isToolEffective(world, pos, stack))
 			{
-				if (world.isAirBlock(pos.up()))
+				if (!world.getBlockState(pos.up()).getBlock().isOpaqueCube())
 				{
-					world.setBlockToAir(pos);
+					List<ItemStack> drops = state.getBlock().getDrops(world, pos, state, EnchantmentHelper.getFortuneModifier(player));
 
-					EntityFloatingBlock floatingBlock = new EntityFloatingBlock(world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, state);
+					EntityFloatingBlock floatingBlock = new EntityFloatingBlock(world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, state, drops);
 					world.spawnEntityInWorld(floatingBlock);
 
 					stack.damageItem(5, player);

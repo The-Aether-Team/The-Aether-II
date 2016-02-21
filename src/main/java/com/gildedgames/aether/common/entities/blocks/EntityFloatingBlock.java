@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
@@ -12,9 +13,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EntityFloatingBlock extends Entity
 {
 	private static final int BLOCK_NAME_ID = 20, BLOCK_STATE_ID = 21;
+
+	private final List<ItemStack> drops = new ArrayList<>();
 
 	private int inAirTicks;
 
@@ -28,7 +34,7 @@ public class EntityFloatingBlock extends Entity
 		this.motionZ = 0.0D;
 	}
 
-	public EntityFloatingBlock(World world, double x, double y, double z, IBlockState state)
+	public EntityFloatingBlock(World world, double x, double y, double z, IBlockState state, List<ItemStack> drops)
 	{
 		this(world);
 
@@ -39,6 +45,8 @@ public class EntityFloatingBlock extends Entity
 		this.prevPosX = x;
 		this.prevPosY = y;
 		this.prevPosZ = z;
+
+		this.drops.addAll(drops);
 	}
 
 	@Override
@@ -76,15 +84,12 @@ public class EntityFloatingBlock extends Entity
 			{
 				if (this.worldObj.getGameRules().getBoolean("doTileDrops"))
 				{
-					IBlockState state = this.getBlockState();
+					for (ItemStack stack : this.drops)
+					{
+						EntityItem entityItem = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, stack);
 
-					Block block = state.getBlock();
-					int meta = block.getMetaFromState(state);
-
-					ItemStack stack = new ItemStack(block, 1, meta);
-
-					EntityItem entityItem = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, stack);
-					this.worldObj.spawnEntityInWorld(entityItem);
+						this.worldObj.spawnEntityInWorld(entityItem);
+					}
 				}
 			}
 		}

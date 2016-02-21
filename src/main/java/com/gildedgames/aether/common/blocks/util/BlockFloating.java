@@ -5,10 +5,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.List;
 import java.util.Random;
 
 public class BlockFloating extends Block
@@ -51,7 +54,9 @@ public class BlockFloating extends Block
 			{
 				if (!world.isRemote)
 				{
-					EntityFloatingBlock entity = new EntityFloatingBlock(world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, world.getBlockState(pos));
+					List<ItemStack> drops = this.getDrops(world, pos, world.getBlockState(pos), 0);
+
+					EntityFloatingBlock entity = new EntityFloatingBlock(world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, world.getBlockState(pos), drops);
 					world.spawnEntityInWorld(entity);
 				}
 			}
