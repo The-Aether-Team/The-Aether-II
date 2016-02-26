@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.entities.effects.rules;
 import net.minecraft.entity.EntityLivingBase;
 
 import com.gildedgames.aether.common.entities.effects.AbilityRule;
-import com.mojang.realmsclient.gui.ChatFormatting;
+import net.minecraft.util.EnumChatFormatting;
 
 public class InCombatRule implements AbilityRule<EntityLivingBase>
 {
@@ -17,7 +17,7 @@ public class InCombatRule implements AbilityRule<EntityLivingBase>
 	@Override
 	public String[] getUnlocalizedDesc()
 	{
-		return new String[] { ChatFormatting.GRAY + "" + ChatFormatting.ITALIC + "In Combat" };
+		return new String[] { EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + "In Combat" };
 	}
 	
 }

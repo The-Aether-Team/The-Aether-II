@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.entities.effects.rules;
 import net.minecraft.entity.Entity;
 
 import com.gildedgames.aether.common.entities.effects.AbilityRule;
-import com.mojang.realmsclient.gui.ChatFormatting;
+import net.minecraft.util.EnumChatFormatting;
 
 public class UndergroundRule implements AbilityRule<Entity>
 {
@@ -17,7 +17,7 @@ public class UndergroundRule implements AbilityRule<Entity>
 	@Override
 	public String[] getUnlocalizedDesc()
 	{
-		return new String[] { ChatFormatting.GRAY + "" + ChatFormatting.ITALIC + "Underground" };
+		return new String[] { EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + "Underground" };
 	}
 	
 }

@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.entities.effects.rules;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.biome.BiomeGenBase;
 
 import com.gildedgames.aether.common.entities.effects.AbilityRule;
-import com.mojang.realmsclient.gui.ChatFormatting;
 
 public class InBiomeRule implements AbilityRule<Entity>
 {
@@ -25,7 +25,7 @@ public class InBiomeRule implements AbilityRule<Entity>
 	@Override
 	public String[] getUnlocalizedDesc()
 	{
-		return new String[] { ChatFormatting.GRAY + "" + ChatFormatting.ITALIC + "In " + ChatFormatting.BOLD + this.biome.biomeName + "s" };
+		return new String[] { EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + "In " + EnumChatFormatting.BOLD + this.biome.biomeName + "s" };
 	}
 
 }
