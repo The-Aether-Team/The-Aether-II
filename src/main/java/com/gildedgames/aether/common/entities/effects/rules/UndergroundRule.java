@@ -19,5 +19,5 @@ public class UndergroundRule implements AbilityRule<Entity>
 	{
 		return new String[] { EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + "Underground" };
 	}
-	
+
 }

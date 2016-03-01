@@ -51,22 +51,14 @@ public class EntityEffects<S extends Entity> implements IExtendedEntityPropertie
 	
 	public boolean addEffect(EntityEffect<S> effect)
 	{
-		boolean hasAbility = false;
-		
-		for (EntityEffect<S> itEffect : this.effects)
-		{
-			if (itEffect.getAbility() == effect.getAbility())
-			{
-				hasAbility = true;
-				break;
-			}
-		}
-		
-		if (!this.effects.contains(effect) && !hasAbility)
+		if (!this.effects.contains(effect) && effect != null)
 		{
 			this.effects.add(effect);
 			
-			effect.getAbility().apply(this.getEntity(), effect, effect.getAttributes());
+			for (Ability<S> ability : effect.getAbilities())
+			{
+				ability.apply(this.getEntity(), effect, effect.getAttributes());
+			}
 			
 			return true;
 		}
@@ -76,7 +68,10 @@ public class EntityEffects<S extends Entity> implements IExtendedEntityPropertie
 	
 	public void removeEffect(EntityEffect<S> effect)
 	{
-		effect.getAbility().cancel(this.getEntity(), effect, effect.getAttributes());
+		for (Ability<S> ability : effect.getAbilities())
+		{
+			ability.cancel(this.getEntity(), effect, effect.getAttributes());
+		}
 		
 		this.effects.remove(effect);
 	}
@@ -117,7 +112,10 @@ public class EntityEffects<S extends Entity> implements IExtendedEntityPropertie
 			
 			if (isMet)
 			{
-				effect.getAbility().tick(this.getEntity(), effect, effect.getAttributes());
+				for (Ability<S> ability : effect.getAbilities())
+				{
+					ability.tick(this.getEntity(), effect, effect.getAttributes());
+				}
 			}
 		}
 		

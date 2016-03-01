@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.entities.effects.abilities;
+package com.gildedgames.aether.common.entities.effects.abilities.player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import com.gildedgames.aether.common.entities.effects.Ability;
 import com.gildedgames.aether.common.entities.effects.AbilityRule;
 import com.gildedgames.aether.common.entities.effects.EntityEffect;
+import com.gildedgames.aether.common.entities.effects.EntityEffectBuilder;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 
 
@@ -33,7 +34,7 @@ public class DoubleDropAbility<S extends Entity> implements Ability<S>
 	@SafeVarargs
 	public static <S extends EntityLivingBase> EntityEffect<S> build(Class<S> cls, float percentChance, AbilityRule<S>... rules)
 	{
-		EntityEffect<S> effect = new EntityEffect<S>(new DoubleDropAbility<S>(), rules);
+		EntityEffect<S> effect = new EntityEffectBuilder<S>().abilities(new DoubleDropAbility<S>()).flush(rules);
 		
 		effect.getAttributes().setFloat("percentChance", percentChance);
 		
@@ -55,7 +56,7 @@ public class DoubleDropAbility<S extends Entity> implements Ability<S>
 	@Override
 	public void formatLocalizedDesc(List<String> localizedDesc, S source, EntityEffect<S> instance, NBTTagCompound attributes)
 	{
-		localizedDesc.set(0, String.format(localizedDesc.get(0), (int)(attributes.getFloat("percentChance") * 10)));
+		localizedDesc.set(1, String.format(localizedDesc.get(1), (int)(attributes.getFloat("percentChance") * 10)));
 	}
 	
 	@Override

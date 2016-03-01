@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.entities.effects.abilities;
+package com.gildedgames.aether.common.entities.effects.abilities.player;
 
 import java.util.List;
 

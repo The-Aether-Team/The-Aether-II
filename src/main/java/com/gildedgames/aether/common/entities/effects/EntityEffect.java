@@ -6,17 +6,18 @@ import net.minecraft.nbt.NBTTagCompound;
 public class EntityEffect<S extends Entity>
 {
 	
-	private final Ability<S> ability;
+	private final Ability<S>[] abilities;
 	
 	private final AbilityRule<S>[] rules;
 	
 	private final NBTTagCompound attributes;
-	
-	@SafeVarargs
-	public EntityEffect(Ability<S> ability, AbilityRule<S>... rules)
+
+	protected EntityEffect(Ability<S>[] abilities, AbilityRule<S>[] rules)
 	{
-		this.ability = ability;
+		this.abilities = abilities;
+		
 		this.rules = rules;
+		
 		this.attributes = new NBTTagCompound();
 		
 		this.attributes.setInteger("modifier", 1);
@@ -27,9 +28,9 @@ public class EntityEffect<S extends Entity>
 		return this.attributes;
 	}
 
-	public Ability<S> getAbility()
+	public Ability<S>[] getAbilities()
 	{
-		return this.ability;
+		return this.abilities;
 	}
 	
 	public AbilityRule<S>[] getRules()

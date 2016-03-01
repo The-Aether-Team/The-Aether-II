@@ -24,7 +24,7 @@ public class InDimensionRule<S extends Entity> implements AbilityRule<S>
 	@Override
 	public String[] getUnlocalizedDesc()
 	{
-		return new String[] { "in the " + DimensionManager.getProvider(this.dimID).getDimensionName() };
+		return new String[] { "In the " + DimensionManager.getProvider(this.dimID).getDimensionName() };
 	}
-
+	
 }

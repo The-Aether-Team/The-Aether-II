@@ -27,5 +27,5 @@ public class InBiomeRule implements AbilityRule<Entity>
 	{
 		return new String[] { EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + "In " + EnumChatFormatting.BOLD + this.biome.biomeName + "s" };
 	}
-
+	
 }

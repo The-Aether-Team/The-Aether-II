@@ -10,6 +10,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import com.gildedgames.aether.common.entities.effects.Ability;
 import com.gildedgames.aether.common.entities.effects.AbilityRule;
 import com.gildedgames.aether.common.entities.effects.EntityEffect;
+import com.gildedgames.aether.common.entities.effects.EntityEffectBuilder;
 
 public class RegenerateHealthAbility<S extends EntityLivingBase> implements Ability<S>
 {
@@ -22,7 +23,7 @@ public class RegenerateHealthAbility<S extends EntityLivingBase> implements Abil
 	@SafeVarargs
 	public static <S extends EntityLivingBase> EntityEffect<S> build(Class<S> cls, int ticksInbetweenHeal, AbilityRule<S>... rules)
 	{
-		EntityEffect<S> effect = new EntityEffect<S>(new RegenerateHealthAbility<S>(), rules);
+		EntityEffect<S> effect = new EntityEffectBuilder<S>().abilities(new RegenerateHealthAbility<S>()).flush(rules);
 		
 		effect.getAttributes().setInteger("ticksInbetweenHeal", ticksInbetweenHeal);
 		

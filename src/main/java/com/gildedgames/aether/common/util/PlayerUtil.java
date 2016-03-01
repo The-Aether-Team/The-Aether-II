@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import com.gildedgames.aether.common.entities.effects.Ability;
 import com.gildedgames.aether.common.entities.effects.EntityEffect;
 import com.gildedgames.aether.common.items.ItemAccessory;
 import com.gildedgames.aether.common.player.PlayerAether;
@@ -151,9 +152,15 @@ public class PlayerUtil
 				
 				for (EntityEffect<EntityPlayer> itEffect : acc.getEffects())
 				{
-					if (itEffect.getAbility().getClass().isAssignableFrom(effect.getAbility().getClass()))
+					for (Ability<EntityPlayer> ability : itEffect.getAbilities())
 					{
-						count++;
+						for (Ability<EntityPlayer> otherAbility : effect.getAbilities())
+						{
+							if (ability.getClass().isAssignableFrom(otherAbility.getClass()))
+							{
+								count++;
+							}
+						}
 					}
 				}
 			}

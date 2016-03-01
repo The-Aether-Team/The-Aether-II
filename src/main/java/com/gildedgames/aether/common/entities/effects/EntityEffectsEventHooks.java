@@ -63,7 +63,10 @@ public class EntityEffectsEventHooks
 				
 				if (isMet)
 				{
-					effect.getAbility().onKill(event, entity, effect, effect.getAttributes());
+					for (Ability<Entity> ability : effect.getAbilities())
+					{
+						ability.onKill(event, entity, effect, effect.getAttributes());
+					}
 				}
 			}
 		}
@@ -79,24 +82,27 @@ public class EntityEffectsEventHooks
 		{
 			for (EntityEffect<EntityPlayer> effect : effects.getEffects())
 			{
-				if (effect.getAbility() instanceof PlayerAbility)
+				for (Ability<EntityPlayer> ability : effect.getAbilities())
 				{
-					boolean isMet = true;
-					
-					for (AbilityRule<EntityPlayer> rule : effect.getRules())
+					if (ability instanceof PlayerAbility)
 					{
-						if (!rule.isMet(entity))
-						{
-							isMet = false;
-							break;
-						}
-					}
-					
-					if (isMet)
-					{
-						PlayerAbility ability = (PlayerAbility)effect.getAbility();
+						boolean isMet = true;
 						
-						ability.onInteract(event, event.entityPlayer, effect, effect.getAttributes());
+						for (AbilityRule<EntityPlayer> rule : effect.getRules())
+						{
+							if (!rule.isMet(entity))
+							{
+								isMet = false;
+								break;
+							}
+						}
+						
+						if (isMet)
+						{
+							PlayerAbility pability = (PlayerAbility)ability;
+							
+							pability.onInteract(event, event.entityPlayer, effect, effect.getAttributes());
+						}
 					}
 				}
 			}
@@ -132,7 +138,10 @@ public class EntityEffectsEventHooks
 				
 				if (isMet)
 				{
-					effect.getAbility().onAttack(event, entity, effect, effect.getAttributes());
+					for (Ability<Entity> ability : effect.getAbilities())
+					{
+						ability.onAttack(event, entity, effect, effect.getAttributes());
+					}
 				}
 			}
 		}

@@ -10,6 +10,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import com.gildedgames.aether.common.entities.effects.Ability;
 import com.gildedgames.aether.common.entities.effects.AbilityRule;
 import com.gildedgames.aether.common.entities.effects.EntityEffect;
+import com.gildedgames.aether.common.entities.effects.EntityEffectBuilder;
 
 
 /**
@@ -26,7 +27,7 @@ public class ExtraDamageAbility<S extends EntityLivingBase> implements Ability<S
 	@SafeVarargs
 	public static <S extends EntityLivingBase> EntityEffect<S> build(Class<S> cls, float damage, AbilityRule<S>... rules)
 	{
-		EntityEffect<S> effect = new EntityEffect<S>(new ExtraDamageAbility<S>(), rules);
+		EntityEffect<S> effect = new EntityEffectBuilder<S>().abilities(new ExtraDamageAbility<S>()).flush(rules);
 		
 		effect.getAttributes().setFloat("damage", damage);
 		

@@ -3,9 +3,9 @@ package com.gildedgames.aether.common;
 import net.minecraftforge.fml.relauncher.Side;
 
 import com.gildedgames.aether.common.entities.effects.abilities.BreatheUnderwaterAbility;
-import com.gildedgames.aether.common.entities.effects.abilities.DaggerfrostAbility;
 import com.gildedgames.aether.common.entities.effects.abilities.FreezeBlocksAbility;
 import com.gildedgames.aether.common.entities.effects.abilities.PauseHungerAbility;
+import com.gildedgames.aether.common.entities.effects.abilities.player.DaggerfrostAbility;
 import com.gildedgames.util.io_manager.overhead.IOManager;
 import com.gildedgames.util.io_manager.overhead.IORegistry;
 import com.gildedgames.util.io_manager.util.IOManagerDefault;

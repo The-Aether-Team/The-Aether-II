@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.gildedgames.aether.common.entities.effects.Ability;
 import com.gildedgames.aether.common.entities.effects.AbilityRule;
 import com.gildedgames.aether.common.entities.effects.EntityEffect;
 import com.gildedgames.aether.common.player.PlayerAether;
@@ -68,12 +69,15 @@ public class ItemAccessory extends Item
 		{
 			List<String> localizedDesc = new ArrayList<String>();
 			
-			for (String line : effect.getAbility().getUnlocalizedDesc(player, effect, effect.getAttributes()))
+			for (Ability<EntityPlayer> ability : effect.getAbilities())
 			{
-				localizedDesc.add(I18n.format(line).replace("Format error: ", ""));
+				for (String line : ability.getUnlocalizedDesc(player, effect, effect.getAttributes()))
+				{
+					localizedDesc.add(I18n.format(line).replace("Format error: ", ""));
+				}
+				
+				ability.formatLocalizedDesc(localizedDesc, player, effect, effect.getAttributes());
 			}
-			
-			effect.getAbility().formatLocalizedDesc(localizedDesc, player, effect, effect.getAttributes());
 			
 			infoList.addAll(localizedDesc);
 			
@@ -81,16 +85,12 @@ public class ItemAccessory extends Item
 			{
 				//infoList.add(I18n.format("ability.active"));
 			}
-			
-			int ruleCount = 1;
-			
+
 			for (AbilityRule<EntityPlayer> rule : effect.getRules())
 			{
 				for (String line : rule.getUnlocalizedDesc())
 				{
-					infoList.add(ChatFormatting.GRAY + (ruleCount == 1 ? "While " : "") + I18n.format(line).replace("Format error: ", "") + (ruleCount < effect.getRules().length ? "," : ""));
-					
-					ruleCount++;
+					infoList.add(ChatFormatting.GRAY + "• " + I18n.format(line).replace("Format error: ", ""));
 				}
 			}
 		}

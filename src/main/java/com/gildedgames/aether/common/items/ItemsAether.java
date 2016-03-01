@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.items;
 
-import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -14,17 +13,18 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.AetherMaterials;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.effects.EntityEffect;
+import com.gildedgames.aether.common.entities.effects.EntityEffectBuilder;
 import com.gildedgames.aether.common.entities.effects.abilities.BreatheUnderwaterAbility;
-import com.gildedgames.aether.common.entities.effects.abilities.DaggerfrostAbility;
-import com.gildedgames.aether.common.entities.effects.abilities.DoubleDropAbility;
 import com.gildedgames.aether.common.entities.effects.abilities.ExtraDamageAbility;
 import com.gildedgames.aether.common.entities.effects.abilities.FreezeBlocksAbility;
 import com.gildedgames.aether.common.entities.effects.abilities.PauseHungerAbility;
 import com.gildedgames.aether.common.entities.effects.abilities.RegenerateHealthAbility;
+import com.gildedgames.aether.common.entities.effects.abilities.player.DaggerfrostAbility;
+import com.gildedgames.aether.common.entities.effects.abilities.player.DoubleDropAbility;
 import com.gildedgames.aether.common.entities.effects.rules.OutOfCombatRule;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
@@ -256,15 +256,15 @@ public class ItemsAether
 		zanite_ring = registerItem("zanite_ring", new ItemAccessory(AccessoryType.RING), AetherCreativeTabs.tabAccessories);
 		zanite_pendant = registerItem("zanite_pendant", new ItemAccessory(AccessoryType.NECKWEAR), AetherCreativeTabs.tabAccessories);
 
-		iron_bubble = registerItem("iron_bubble", new ItemAccessory(AccessoryType.MISC, new EntityEffect<>(new BreatheUnderwaterAbility<EntityPlayer>())), AetherCreativeTabs.tabAccessories);
+		iron_bubble = registerItem("iron_bubble", new ItemAccessory(AccessoryType.MISC, new EntityEffectBuilder<EntityPlayer>().abilities(new BreatheUnderwaterAbility<EntityPlayer>()).flush()), AetherCreativeTabs.tabAccessories);
 		regeneration_stone = registerItem("regeneration_stone", new ItemAccessory(AccessoryType.MISC, RegenerateHealthAbility.build(EntityPlayer.class, 4, new OutOfCombatRule<EntityPlayer>(160))), AetherCreativeTabs.tabAccessories);
 
-		ice_ring = registerItem("ice_ring", new ItemAccessory(AccessoryType.RING, new EntityEffect<>(new FreezeBlocksAbility<EntityPlayer>())), AetherCreativeTabs.tabAccessories);
-		ice_pendant = registerItem("ice_pendant", new ItemAccessory(AccessoryType.NECKWEAR, new EntityEffect<>(new FreezeBlocksAbility<EntityPlayer>())), AetherCreativeTabs.tabAccessories);
+		ice_ring = registerItem("ice_ring", new ItemAccessory(AccessoryType.RING, new EntityEffectBuilder<EntityPlayer>().abilities(new FreezeBlocksAbility<EntityPlayer>()).flush()), AetherCreativeTabs.tabAccessories);
+		ice_pendant = registerItem("ice_pendant", new ItemAccessory(AccessoryType.NECKWEAR, new EntityEffectBuilder<EntityPlayer>().abilities(new FreezeBlocksAbility<EntityPlayer>()).flush()), AetherCreativeTabs.tabAccessories);
 		
-		daggerfrost_locket = registerItem("daggerfrost_locket", new ItemAccessory(AccessoryType.NECKWEAR, new EntityEffect<>(new DaggerfrostAbility())), AetherCreativeTabs.tabAccessories);
+		daggerfrost_locket = registerItem("daggerfrost_locket", new ItemAccessory(AccessoryType.NECKWEAR, new EntityEffectBuilder<EntityPlayer>().abilities(new DaggerfrostAbility()).flush()), AetherCreativeTabs.tabAccessories);
 		
-		candy_ring = registerItem("candy_ring", new ItemAccessory(AccessoryType.RING, new EntityEffect<>(new PauseHungerAbility())), AetherCreativeTabs.tabAccessories);
+		candy_ring = registerItem("candy_ring", new ItemAccessory(AccessoryType.RING, new EntityEffectBuilder<EntityPlayer>().abilities(new PauseHungerAbility()).flush()), AetherCreativeTabs.tabAccessories);
 		
 		bone_ring = registerItem("bone_ring", new ItemAccessory(AccessoryType.RING, ExtraDamageAbility.build(EntityPlayer.class, 2.0F)), AetherCreativeTabs.tabAccessories);
 		
