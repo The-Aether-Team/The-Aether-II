@@ -115,13 +115,13 @@ public class InventoryAccessories implements IInventory, NBT
 		{
 			ItemAccessory acc = (ItemAccessory)stack.getItem();
 			
-			EntityEffects<EntityPlayer> effects = EntityEffects.get(this.aePlayer.getPlayer());
+			EntityEffects<EntityPlayer> effects = EntityEffects.get(this.aePlayer.getEntity());
 
 			for (EntityEffect<EntityPlayer> effect : acc.getEffects())
 			{
 				if (!effects.addEffect(effect))
 				{
-					int count = PlayerUtil.getEffectCount(this.aePlayer.getPlayer(), effect);
+					int count = PlayerUtil.getEffectCount(this.aePlayer.getEntity(), effect);
 					
 					effect.getAttributes().setInteger("modifier", count);
 				}
@@ -176,7 +176,7 @@ public class InventoryAccessories implements IInventory, NBT
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		return !this.aePlayer.getPlayer().isDead && player.getDistanceSqToEntity(this.aePlayer.getPlayer()) <= 64.0D;
+		return !this.aePlayer.getEntity().isDead && player.getDistanceSqToEntity(this.aePlayer.getEntity()) <= 64.0D;
 	}
 
 	@Override
@@ -226,7 +226,7 @@ public class InventoryAccessories implements IInventory, NBT
 				if (stack != null && stack.getItem() instanceof ItemAccessory)
 				{
 					ItemAccessory acc = (ItemAccessory)stack.getItem();
-					EntityEffects<EntityPlayer> effects = EntityEffects.get(this.aePlayer.getPlayer());
+					EntityEffects<EntityPlayer> effects = EntityEffects.get(this.aePlayer.getEntity());
 					
 					for (EntityEffect<EntityPlayer> effect : acc.getEffects())
 					{
@@ -241,7 +241,7 @@ public class InventoryAccessories implements IInventory, NBT
 					}
 				}
 				
-				this.aePlayer.getPlayer().dropItem(stack, true, false);
+				this.aePlayer.getEntity().dropItem(stack, true, false);
 				this.inventory[i] = null;
 			}
 		}

@@ -34,7 +34,6 @@ public class ClientProxy extends CommonProxy
 	{
 		super.init(event);
 
-		AetherItemModels.init();
 		AetherRenderers.init();
 
 		MinecraftForge.EVENT_BUS.register(new ClientEventHandler());

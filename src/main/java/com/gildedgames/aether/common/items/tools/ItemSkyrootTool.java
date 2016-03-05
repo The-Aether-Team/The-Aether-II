@@ -29,7 +29,7 @@ public class ItemSkyrootTool extends ItemAetherTool
 		{
 			IBlockState state = world.getBlockState(pos);
 
-			PlacementFlagChunkData data = (PlacementFlagChunkData) ChunkModule.locate().getHook(world, pos, PlacementFlagChunkData.class);
+			PlacementFlagChunkData data = (PlacementFlagChunkData) ChunkModule.api().getHook(world, pos, PlacementFlagChunkData.class);
 
 			boolean wasPlaced = data.wasPlacedAt(pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15);
 

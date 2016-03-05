@@ -18,7 +18,7 @@ import com.gildedgames.aether.common.player.PlayerAether;
 public class ContainerAccessories extends ContainerPlayer
 {
 	// See GuiContainerCreative#field_147060_v
-	private static InventoryBasic dumbInventory = new InventoryBasic("fake", true, 45);
+	private static InventoryBasic dumbInventory = new InventoryBasic("fake", true, 46);
 
 	private final PlayerAether aePlayer;
 
@@ -28,7 +28,7 @@ public class ContainerAccessories extends ContainerPlayer
 
 	public ContainerAccessories(PlayerAether aePlayer)
 	{
-		super(aePlayer.getPlayer().inventory, false, aePlayer.getPlayer());
+		super(aePlayer.getEntity().inventory, false, aePlayer.getEntity());
 
 		this.aePlayer = aePlayer;
 		this.inventoryAccessories = aePlayer.getInventoryAccessories();
@@ -49,7 +49,7 @@ public class ContainerAccessories extends ContainerPlayer
 
 		this.binSlot = new Slot(ContainerAccessories.dumbInventory, this.inventorySlots.size(), 228, 25);
 
-		if (this.aePlayer.getPlayer().capabilities.isCreativeMode)
+		if (this.aePlayer.getEntity().capabilities.isCreativeMode)
 		{
 			this.addSlotToContainer(this.binSlot);
 		}
@@ -76,7 +76,7 @@ public class ContainerAccessories extends ContainerPlayer
 	{
 		if (slotId == this.binSlot.slotNumber && player.capabilities.isCreativeMode)
 		{
-			this.aePlayer.getPlayer().inventory.setItemStack(null);
+			this.aePlayer.getEntity().inventory.setItemStack(null);
 		}
 		
 		if (slotId < this.inventorySlots.size() && slotId > 0)
@@ -90,7 +90,7 @@ public class ContainerAccessories extends ContainerPlayer
 				if (slot instanceof SlotAccessory && stack.getItem() instanceof ItemAccessory)
 				{
 					ItemAccessory acc = (ItemAccessory)stack.getItem();
-					EntityEffects<EntityPlayer> effects = EntityEffects.get(this.aePlayer.getPlayer());
+					EntityEffects<EntityPlayer> effects = EntityEffects.get(this.aePlayer.getEntity());
 					
 					for (EntityEffect<EntityPlayer> effect : acc.getEffects())
 					{
@@ -133,9 +133,9 @@ public class ContainerAccessories extends ContainerPlayer
 	{
 		Slot slot = this.inventorySlots.get(slotNumber);
 
-		if (slotNumber == this.binSlot.slotNumber && this.aePlayer.getPlayer().capabilities.isCreativeMode)
+		if (slotNumber == this.binSlot.slotNumber && this.aePlayer.getEntity().capabilities.isCreativeMode)
 		{
-			this.aePlayer.getPlayer().inventory.clear();
+			this.aePlayer.getEntity().inventory.clear();
 			this.aePlayer.getInventoryAccessories().clear();
 		}
 
@@ -167,7 +167,7 @@ public class ContainerAccessories extends ContainerPlayer
 			else if (slot instanceof SlotAccessory && stack.getItem() instanceof ItemAccessory)
 			{
 				ItemAccessory acc = (ItemAccessory)stack.getItem();
-				EntityEffects<EntityPlayer> effects = EntityEffects.get(this.aePlayer.getPlayer());
+				EntityEffects<EntityPlayer> effects = EntityEffects.get(this.aePlayer.getEntity());
 				
 				for (EntityEffect<EntityPlayer> effect : acc.getEffects())
 				{

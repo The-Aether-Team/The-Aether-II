@@ -1,9 +1,8 @@
 package com.gildedgames.aether.common.entities.effects.rules;
 
-import net.minecraft.entity.Entity;
-
 import com.gildedgames.aether.common.entities.effects.AbilityRule;
-import com.mojang.realmsclient.gui.ChatFormatting;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.EnumChatFormatting;
 
 public class WearingItemsRule implements AbilityRule<Entity>
 {
@@ -17,7 +16,7 @@ public class WearingItemsRule implements AbilityRule<Entity>
 	@Override
 	public String[] getUnlocalizedDesc()
 	{
-		return new String[] { ChatFormatting.GRAY + "" + ChatFormatting.ITALIC + "Wearing Full Set" };
+		return new String[] { EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + "Wearing Full Set" };
 	}
 
 }

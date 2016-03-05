@@ -1,20 +1,19 @@
 package com.gildedgames.aether.common.items;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.gildedgames.aether.common.entities.effects.Ability;
+import com.gildedgames.aether.common.entities.effects.AbilityRule;
+import com.gildedgames.aether.common.entities.effects.EntityEffect;
+import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
-import com.gildedgames.aether.common.entities.effects.Ability;
-import com.gildedgames.aether.common.entities.effects.AbilityRule;
-import com.gildedgames.aether.common.entities.effects.EntityEffect;
-import com.gildedgames.aether.common.player.PlayerAether;
-import com.mojang.realmsclient.gui.ChatFormatting;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemAccessory extends Item
 {
@@ -64,23 +63,23 @@ public class ItemAccessory extends Item
 		{
 			infoList.add(I18n.format("ability.cosmetic").replace("Format error: ", ""));
 		}
-		
+
 		for (EntityEffect<EntityPlayer> effect : this.effects)
 		{
 			List<String> localizedDesc = new ArrayList<String>();
-			
+
 			for (Ability<EntityPlayer> ability : effect.getAbilities())
 			{
 				for (String line : ability.getUnlocalizedDesc(player, effect, effect.getAttributes()))
 				{
 					localizedDesc.add(I18n.format(line).replace("Format error: ", ""));
 				}
-				
+
 				ability.formatLocalizedDesc(localizedDesc, player, effect, effect.getAttributes());
 			}
-			
+
 			infoList.addAll(localizedDesc);
-			
+
 			if (effect.getRules().length > 0)
 			{
 				//infoList.add(I18n.format("ability.active"));
@@ -90,12 +89,12 @@ public class ItemAccessory extends Item
 			{
 				for (String line : rule.getUnlocalizedDesc())
 				{
-					infoList.add(ChatFormatting.GRAY + "• " + I18n.format(line).replace("Format error: ", ""));
+					infoList.add(EnumChatFormatting.GRAY + "â€¢ " + I18n.format(line).replace("Format error: ", ""));
 				}
 			}
 		}
-		
-		infoList.add(ChatFormatting.DARK_GRAY + "" + ChatFormatting.ITALIC + I18n.format(this.getType().getUnlocalizedName()));
+
+		infoList.add(EnumChatFormatting.DARK_GRAY + "" + EnumChatFormatting.ITALIC + I18n.format(this.getType().getUnlocalizedName()));
 	}
 	
 	@Override

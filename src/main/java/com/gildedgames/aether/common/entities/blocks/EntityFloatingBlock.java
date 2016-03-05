@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -62,7 +63,7 @@ public class EntityFloatingBlock extends Entity
 		// Destroys the source block, since deleting a neighboring block in the actual block class
 		// causes a infinite loop of updates.
 
-		if (this.inAirTicks++ == 0)
+		if (!this.worldObj.isRemote && this.inAirTicks++ == 0)
 		{
 			BlockPos pos = new BlockPos(this);
 
@@ -107,16 +108,31 @@ public class EntityFloatingBlock extends Entity
 			this.motionY *= 0.98D;
 			this.motionZ *= 0.98D;
 
-			if (!this.worldObj.isRemote)
-			{
-				BlockPos pos = new BlockPos(this);
-				BlockPos abovePos = pos.up();
+			BlockPos pos = new BlockPos(this);
 
-				if (!this.worldObj.isAirBlock(abovePos))
+			if (!this.worldObj.isAirBlock(pos.up()))
+			{
+				if (!this.worldObj.isRemote)
 				{
 					this.worldObj.setBlockState(pos, this.getBlockState());
 
 					this.setDead();
+				}
+
+				this.posX = pos.getX() + 0.5D;
+				this.posY = pos.getY();
+				this.posZ = pos.getZ() + 0.5D;
+			}
+
+			if (this.worldObj.isAirBlock(pos.down()) && this.worldObj.isRemote)
+			{
+				for (int i = 0; i < 3; i++)
+				{
+					this.worldObj.spawnParticle(EnumParticleTypes.BLOCK_DUST,
+							this.posX - 0.5D + (this.worldObj.rand.nextDouble()),
+							this.posY - 0.5D,
+							this.posZ - 0.5D + (this.worldObj.rand.nextDouble()), 0.0D, 0.0D, 0.0D,
+							Block.getStateId(this.getBlockState()));
 				}
 			}
 		}

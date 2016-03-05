@@ -3,6 +3,13 @@ package com.gildedgames.aether.common;
 import java.io.File;
 import java.util.Random;
 
+import com.gildedgames.aether.client.gui.tab.TabAccessories;
+import com.gildedgames.aether.common.entities.effects.EntityEffects;
+import com.gildedgames.aether.common.party.PartyMemberTracker;
+import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.util.modules.entityhook.EntityHookModule;
+import com.gildedgames.util.modules.entityhook.impl.providers.PlayerHookProvider;
+import com.gildedgames.util.modules.tab.TabModule;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
@@ -26,11 +33,10 @@ import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
 import com.gildedgames.aether.common.world.WorldProviderAether;
 import com.gildedgames.aether.common.world.chunk.PlacementFlagFactory;
 import com.gildedgames.util.modules.chunk.ChunkModule;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class CommonProxy
 {
-	private AetherGuiHandler guiHandler;
-
 	private File storageDir;
 
 	public void construct(FMLConstructionEvent event)
@@ -40,13 +46,13 @@ public class CommonProxy
 
 	public void preInit(FMLPreInitializationEvent event)
 	{
+		this.storageDir = new File(event.getSourceFile().getParent(), "Aether/");
+
 		// Load the configuration file.
 		AetherCore.CONFIG.load();
 
-		this.storageDir = new File(event.getSourceFile().getParent(), "Aether/");
-
 		// Register with NetworkRegistry.
-		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, this.guiHandler = new AetherGuiHandler());
+		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 
 		// Register dimensions and biomes.
 		DimensionManager.registerProviderType(AetherCore.getAetherDimID(), WorldProviderAether.class, true);
@@ -64,6 +70,11 @@ public class CommonProxy
 		EntitiesAether.preInit();
 
 		RecipesAether.preInit();
+
+		TabModule.api().getInventoryGroup().getSide(Side.SERVER).add(new TabAccessories());
+
+		EntityHookModule.api().registerHookProvider(PlayerAether.PROVIDER);
+		EntityHookModule.api().registerHookProvider(EntityEffects.PROVIDER);
 	}
 
 	public void init(FMLInitializationEvent event)
@@ -72,10 +83,11 @@ public class CommonProxy
 		MinecraftForge.EVENT_BUS.register(new PlayerAetherTracker());
 		MinecraftForge.EVENT_BUS.register(new PlayerAetherEventHooks());
 		MinecraftForge.EVENT_BUS.register(new EntityEffectsEventHooks());
+		MinecraftForge.EVENT_BUS.register(new PartyMemberTracker());
 
 		MinecraftForge.EVENT_BUS.register(ItemsAether.skyroot_sword);
 
-		ChunkModule.locate().registerHookFactory(new PlacementFlagFactory());
+		ChunkModule.api().registerHookFactory(new PlacementFlagFactory());
 	}
 
 	public void postInit(FMLPostInitializationEvent event)
@@ -95,11 +107,6 @@ public class CommonProxy
 
 			world.spawnParticle(EnumParticleTypes.CLOUD, x2, y2, z2, 0.0D, random.nextDouble() * 0.03D, 0.0D);
 		}
-	}
-
-	public AetherGuiHandler getGuiHandler()
-	{
-		return this.guiHandler;
 	}
 
 	public File getAetherStorageDir()

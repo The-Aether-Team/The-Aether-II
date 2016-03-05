@@ -60,7 +60,7 @@ public class PlayerAetherEventHooks
 				{
 					player.motionY += 0.55F;
 
-					AetherCore.PROXY.spawnJumpParticles(player.worldObj, player.posX, player.posY, player.posZ, 0.4D, 12);
+					AetherCore.PROXY.spawnJumpParticles(player.worldObj, player.posX, player.posY, player.posZ, 1.2D, 12);
 				}
 			}
 		}
@@ -80,7 +80,7 @@ public class PlayerAetherEventHooks
 	@SubscribeEvent
 	public void onPlaceBlockEvent(BlockEvent.PlaceEvent event)
 	{
-		PlacementFlagChunkData data = (PlacementFlagChunkData) ChunkModule.locate().getHook(event.world, event.pos, PlacementFlagChunkData.class);
+		PlacementFlagChunkData data = (PlacementFlagChunkData) ChunkModule.api().getHook(event.world, event.pos, PlacementFlagChunkData.class);
 
 		if (data != null)
 		{
@@ -109,7 +109,6 @@ public class PlayerAetherEventHooks
 			aePlayer.onDeath();
 		}
 	}
-
 
 	@SubscribeEvent
 	public void onLivingDrops(LivingDropsEvent event)

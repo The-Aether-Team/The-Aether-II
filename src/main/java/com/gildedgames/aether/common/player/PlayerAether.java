@@ -1,5 +1,17 @@
 package com.gildedgames.aether.common.player;
 
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
+import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
+import com.gildedgames.aether.common.party.Party;
+import com.gildedgames.aether.common.util.PlayerUtil;
+import com.gildedgames.util.core.io.ByteBufHelper;
+import com.gildedgames.util.modules.entityhook.api.IEntityHookFactory;
+import com.gildedgames.util.modules.entityhook.impl.hooks.EntityHook;
+import com.gildedgames.util.modules.entityhook.impl.providers.PlayerHookProvider;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -8,42 +20,26 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IExtendedEntityProperties;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
-import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
-import com.gildedgames.aether.common.util.PlayerUtil;
-
-public class PlayerAether implements IExtendedEntityProperties
+public class PlayerAether extends EntityHook<EntityPlayer>
 {
-	private EntityPlayer player;
+	public static final PlayerHookProvider<PlayerAether> PROVIDER = new PlayerHookProvider<>("aether:player", new Factory());
 
 	private InventoryAccessories inventoryAccessories = new InventoryAccessories(this);
+
+	private Party currentParty;
 
 	@Override
 	public void init(Entity entity, World world)
 	{
-		if (!(entity instanceof EntityPlayer))
-		{
-			throw new IllegalArgumentException("Entity " + entity.toString() + " isn't of type EntityPlayer");
-		}
-
-		this.player = (EntityPlayer) entity;
+		super.init(entity, world);
 	}
 
-	public static PlayerAether get(Entity player)
+	public static PlayerAether get(Entity entity)
 	{
-		return (PlayerAether) player.getExtendedProperties(AetherCore.MOD_ID);
-	}
-
-	public static void register(Entity player)
-	{
-		player.registerExtendedProperties(AetherCore.MOD_ID, new PlayerAether());
+		return PlayerAether.PROVIDER.getHook(entity);
 	}
 
 	/**
@@ -64,27 +60,27 @@ public class PlayerAether implements IExtendedEntityProperties
 
 	public void dropAccessories()
 	{
-		if (!this.getPlayer().getEntityWorld().getGameRules().getBoolean("keepInventory"))
+		if (!this.getEntity().getEntityWorld().getGameRules().getBoolean("keepInventory"))
 		{
-			this.getPlayer().captureDrops = true;
+			this.getEntity().captureDrops = true;
 
 			this.getInventoryAccessories().dropAllItems();
 			
-			this.getPlayer().captureDrops = false;
+			this.getEntity().captureDrops = false;
 		}
 	}
 
 	public void onCalculateBreakSpeed(PlayerEvent.BreakSpeed event)
 	{
-		if (PlayerUtil.isWearingFullSet(this.getPlayer(), ItemNeptuneArmor.class))
+		if (PlayerUtil.isWearingFullSet(this.getEntity(), ItemNeptuneArmor.class))
 		{
-			if (!EnchantmentHelper.getAquaAffinityModifier(this.getPlayer()) && this.getPlayer().isInsideOfMaterial(Material.water))
+			if (!EnchantmentHelper.getAquaAffinityModifier(this.getEntity()) && this.getEntity().isInsideOfMaterial(Material.water))
 			{
 				event.newSpeed = event.originalSpeed * 5.0f;
 			}
 		}
 
-		if (PlayerUtil.wearingAccessory(this.getPlayer(), ItemsAether.zanite_ring) || PlayerUtil.wearingAccessory(this.getPlayer(), ItemsAether.zanite_pendant))
+		if (PlayerUtil.wearingAccessory(this.getEntity(), ItemsAether.zanite_ring) || PlayerUtil.wearingAccessory(this.getEntity(), ItemsAether.zanite_pendant))
 		{
 			event.newSpeed = event.newSpeed * 5.0f; // testing code!!!! Should be removed.
 
@@ -111,7 +107,7 @@ public class PlayerAether implements IExtendedEntityProperties
 	{
 		if (!event.source.isUnblockable())
 		{
-			for (ItemStack stack : this.getPlayer().inventory.armorInventory)
+			for (ItemStack stack : this.getEntity().inventory.armorInventory)
 			{
 				if (stack != null && stack.getItem() instanceof ItemAetherArmor)
 				{
@@ -119,11 +115,6 @@ public class PlayerAether implements IExtendedEntityProperties
 				}
 			}
 		}
-	}
-
-	public EntityPlayer getPlayer()
-	{
-		return this.player;
 	}
 
 	public InventoryAccessories getInventoryAccessories()
@@ -146,5 +137,41 @@ public class PlayerAether implements IExtendedEntityProperties
 	public void saveNBTData(NBTTagCompound compound)
 	{
 		this.inventoryAccessories.write(compound);
+	}
+
+	public Party getCurrentParty()
+	{
+		return this.currentParty;
+	}
+
+	public void setCurrentParty(Party party)
+	{
+		this.currentParty = party;
+	}
+
+	public static class Factory implements IEntityHookFactory<PlayerAether>
+	{
+		@Override
+		public PlayerAether createHook()
+		{
+			return new PlayerAether();
+		}
+
+		@Override
+		public void writeFull(ByteBuf buf, PlayerAether hook)
+		{
+			ByteBufHelper.writeItemStacks(buf, hook.getInventoryAccessories().getInventory());
+		}
+
+		@Override
+		public void readFull(ByteBuf buf, PlayerAether hook)
+		{
+			ItemStack[] accessories = ByteBufHelper.readItemStacks(buf);
+
+			for (int i = 0; i < accessories.length; i++)
+			{
+				hook.getInventoryAccessories().setInventorySlotContents(i, accessories[i]);
+			}
+		}
 	}
 }

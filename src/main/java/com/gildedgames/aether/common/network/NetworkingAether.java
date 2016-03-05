@@ -1,33 +1,39 @@
 package com.gildedgames.aether.common.network;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.network.packets.PacketOpenContainer;
-import com.gildedgames.aether.common.network.packets.PacketUpdatePlayer;
-import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.aether.common.network.packets.party.PacketAcceptInvite;
+import com.gildedgames.aether.common.network.packets.party.PacketCreateParty;
+import com.gildedgames.aether.common.network.packets.party.PacketJoinParty;
+import com.gildedgames.aether.common.network.packets.party.PacketMemberChange;
+import com.gildedgames.aether.common.network.packets.player.PacketOpenContainer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class NetworkingAether
 {
-	private static final SimpleNetworkWrapper instance = NetworkRegistry.INSTANCE.newSimpleChannel(AetherCore.MOD_ID);
+	private static SimpleNetworkWrapper instance;
 
 	private static int discriminant = 0;
 
 	public static void preInit()
 	{
-		registerBiPacket(PacketOpenContainer.class, PacketOpenContainer.class);
-		registerBiPacket(PacketUpdatePlayer.class, PacketUpdatePlayer.class);
-	}
+		instance = NetworkRegistry.INSTANCE.newSimpleChannel(AetherCore.MOD_ID);
 
-	private static <REQ extends IMessage, REPLY extends IMessage> void registerBiPacket(Class<? extends IMessageHandler<REQ, REPLY>> handler, Class<REQ> type)
-	{
-		NetworkingAether.instance.registerMessage(handler, type, discriminant++, Side.CLIENT);
-		NetworkingAether.instance.registerMessage(handler, type, discriminant++, Side.SERVER);
+		// CLIENT -> SERVER
+		instance.registerMessage(PacketOpenContainer.HandlerServer.class, PacketOpenContainer.class, discriminant++, Side.SERVER);
+
+		instance.registerMessage(PacketAcceptInvite.HandlerServer.class, PacketAcceptInvite.class, discriminant++, Side.SERVER);
+
+		instance.registerMessage(PacketCreateParty.HandlerServer.class, PacketCreateParty.class, discriminant++, Side.SERVER);
+
+		// SERVER -> CLIENT
+		instance.registerMessage(PacketMemberChange.HandlerClient.class, PacketMemberChange.class, discriminant++, Side.CLIENT);
+
+		instance.registerMessage(PacketJoinParty.HandlerClient.class, PacketJoinParty.class, discriminant++, Side.CLIENT);
 	}
 
 	public static void sendPacketToPlayer(IMessage message, EntityPlayerMP player)
@@ -39,10 +45,5 @@ public class NetworkingAether
 	public static void sendPacketToServer(IMessage message)
 	{
 		NetworkingAether.instance.sendToServer(message);
-	}
-
-	public static void syncPlayerToClient(PlayerAether aePlayer, EntityPlayerMP player)
-	{
-		NetworkingAether.sendPacketToPlayer(new PacketUpdatePlayer(aePlayer), player);
 	}
 }

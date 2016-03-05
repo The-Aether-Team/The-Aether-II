@@ -6,6 +6,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.Render;
@@ -43,9 +44,20 @@ public class RenderFloatingBlock extends Render<EntityFloatingBlock>
 			{
 				if (block.getRenderType() == 3)
 				{
+					RenderHelper.disableStandardItemLighting();
+
 					GlStateManager.pushMatrix();
 					GlStateManager.translate(x, y, z);
 					GlStateManager.disableLighting();
+
+					if (Minecraft.isAmbientOcclusionEnabled())
+					{
+						GlStateManager.shadeModel(7425);
+					}
+					else
+					{
+						GlStateManager.shadeModel(7424);
+					}
 
 					Tessellator tessellator = Tessellator.getInstance();
 
@@ -68,6 +80,8 @@ public class RenderFloatingBlock extends Render<EntityFloatingBlock>
 					worldRenderer.setTranslation(0.0D, 0.0D, 0.0D);
 
 					tessellator.draw();
+
+					RenderHelper.enableStandardItemLighting();
 
 					GlStateManager.enableLighting();
 					GlStateManager.popMatrix();

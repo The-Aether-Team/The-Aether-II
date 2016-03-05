@@ -1,86 +1,68 @@
 package com.gildedgames.aether.common.entities.effects;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.gildedgames.util.modules.entityhook.api.IEntityHookFactory;
+import com.gildedgames.util.modules.entityhook.impl.hooks.EntityHook;
+import com.gildedgames.util.modules.entityhook.impl.providers.LivingHookProvider;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IExtendedEntityProperties;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-import com.gildedgames.aether.common.AetherCore;
+import java.util.ArrayList;
+import java.util.List;
 
-public class EntityEffects<S extends Entity> implements IExtendedEntityProperties
+public class EntityEffects<E extends Entity> extends EntityHook<E>
 {
-	
-	private S entity;
-	
-	private final static String PROP_ID = AetherCore.MOD_ID + "Effects";
-	
-	private List<EntityEffect<S>> effects = new ArrayList<EntityEffect<S>>();
+	public static final LivingHookProvider<EntityEffects> PROVIDER = new LivingHookProvider<>("aether:effects", new Factory());
+
+	private List<EntityEffect<E>> effects = new ArrayList<>();
 	
 	private int ticksSinceAttacked;
-	
-	private EntityEffects()
-	{
-		
-	}
 	
 	@SuppressWarnings("unchecked")
 	public static <S extends Entity> EntityEffects<S> get(S entity)
 	{
-		return (EntityEffects<S>) entity.getExtendedProperties(PROP_ID);
+		return EntityEffects.PROVIDER.getHook(entity);
 	}
 
-	public static <S extends Entity> void register(S entity)
-	{
-		entity.registerExtendedProperties(PROP_ID, new EntityEffects<S>());
-	}
-	
-	public S getEntity()
-	{
-		return this.entity;
-	}
-	
-	public List<EntityEffect<S>> getEffects()
+	public List<EntityEffect<E>> getEffects()
 	{
 		return this.effects;
 	}
 	
-	public boolean addEffect(EntityEffect<S> effect)
+	public boolean addEffect(EntityEffect<E> effect)
 	{
 		if (!this.effects.contains(effect) && effect != null)
 		{
 			this.effects.add(effect);
-			
-			for (Ability<S> ability : effect.getAbilities())
+
+			for (Ability<E> ability : effect.getAbilities())
 			{
 				ability.apply(this.getEntity(), effect, effect.getAttributes());
 			}
-			
+
 			return true;
 		}
 		
 		return false;
 	}
 	
-	public void removeEffect(EntityEffect<S> effect)
+	public void removeEffect(EntityEffect<E> effect)
 	{
-		for (Ability<S> ability : effect.getAbilities())
+		for (Ability<E> ability : effect.getAbilities())
 		{
 			ability.cancel(this.getEntity(), effect, effect.getAttributes());
 		}
 		
 		this.effects.remove(effect);
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	@Override
 	public void init(Entity entity, World world)
 	{
-		this.entity = (S) entity;
+		super.init(entity, world);
 	}
 
 	@Override
@@ -97,11 +79,11 @@ public class EntityEffects<S extends Entity> implements IExtendedEntityPropertie
 
 	public void onUpdate()
 	{
-		for (EntityEffect<S> effect : this.getEffects())
+		for (EntityEffect<E> effect : this.getEffects())
 		{
 			boolean isMet = true;
 			
-			for (AbilityRule<S> rule : effect.getRules())
+			for (AbilityRule<E> rule : effect.getRules())
 			{
 				if (!rule.isMet(this.getEntity()))
 				{
@@ -112,7 +94,7 @@ public class EntityEffects<S extends Entity> implements IExtendedEntityPropertie
 			
 			if (isMet)
 			{
-				for (Ability<S> ability : effect.getAbilities())
+				for (Ability<E> ability : effect.getAbilities())
 				{
 					ability.tick(this.getEntity(), effect, effect.getAttributes());
 				}
@@ -132,7 +114,7 @@ public class EntityEffects<S extends Entity> implements IExtendedEntityPropertie
 
 	public void clearEffects()
 	{
-		for (EntityEffect<S> effect : new ArrayList<EntityEffect<S>>(this.effects))
+		for (EntityEffect<E> effect : new ArrayList<>(this.effects))
 		{
 			this.removeEffect(effect);
 		}
@@ -143,4 +125,18 @@ public class EntityEffects<S extends Entity> implements IExtendedEntityPropertie
 		return this.ticksSinceAttacked;
 	}
 
+	public static class Factory implements IEntityHookFactory<EntityEffects>
+	{
+		@Override
+		public EntityEffects createHook()
+		{
+			return new EntityEffects();
+		}
+
+		@Override
+		public void writeFull(ByteBuf buf, EntityEffects hook) { }
+
+		@Override
+		public void readFull(ByteBuf buf, EntityEffects hook) { }
+	}
 }

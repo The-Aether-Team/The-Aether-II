@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.renderer.tile_entity;
 
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
 import net.minecraft.client.Minecraft;
@@ -18,6 +19,11 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 	@Override
 	public void renderTileEntityAt(TileEntityAltar altar, double x, double y, double z, float partialTicks, int destroyStage)
 	{
+		if (altar.getWorld().getBlockState(altar.getPos()) != BlocksAether.altar)
+		{
+			return;
+		}
+
 		ItemStack stack = altar.getStackOnAltar();
 
 		GlStateManager.pushMatrix();

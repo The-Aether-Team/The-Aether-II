@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.ContainerAccessories;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.PacketOpenContainer;
+import com.gildedgames.aether.common.network.packets.player.PacketOpenContainer;
 import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.util.modules.tab.common.util.ITab;
 import net.minecraft.client.Minecraft;
@@ -46,8 +46,6 @@ public class TabAccessories implements ITab
 	@Override
 	public void onOpen(EntityPlayer player)
 	{
-		NetworkingAether.sendPacketToServer(new PacketOpenContainer(AetherGuiHandler.INVENTORY_ACCESSORIES_ID));
-
 		Minecraft.getMinecraft().displayGuiScreen(new GuiAccessories(PlayerAether.get(player)));
 	}
 
