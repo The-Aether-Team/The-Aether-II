@@ -22,18 +22,7 @@ public class EntityEffectsEventHooks
 			effects.onHurt(event);
 		}
 	}
-	
-	@SubscribeEvent
-	public void onLivingUpdate(LivingUpdateEvent event)
-	{
-		EntityEffects<Entity> effects = EntityEffects.get(event.entity);
 
-		if (effects != null)
-		{
-			effects.onUpdate();
-		}
-	}
-	
 	@SubscribeEvent
 	public void onLivingDropsEvent(LivingDropsEvent event)
 	{

@@ -89,17 +89,6 @@ public class PlayerAetherEventHooks
 	}
 
 	@SubscribeEvent
-	public void onLivingUpdate(LivingUpdateEvent event)
-	{
-		PlayerAether aePlayer = PlayerAether.get(event.entity);
-
-		if (aePlayer != null)
-		{
-			aePlayer.onUpdate();
-		}
-	}
-
-	@SubscribeEvent
 	public void onLivingDeath(LivingDeathEvent event)
 	{
 		PlayerAether aePlayer = PlayerAether.get(event.entity);

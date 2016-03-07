@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -126,7 +127,14 @@ public class EntityFloatingBlock extends Entity
 
 			if (this.worldObj.isAirBlock(pos.down()) && this.worldObj.isRemote)
 			{
-				for (int i = 0; i < 3; i++)
+				int count = MathHelper.floor_double(this.motionY / 0.15D);
+
+				if (count > 5)
+				{
+					count = 5;
+				}
+
+				for (int i = 0; i < count; i++)
 				{
 					this.worldObj.spawnParticle(EnumParticleTypes.BLOCK_DUST,
 							this.posX - 0.5D + (this.worldObj.rand.nextDouble()),

@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.containers;
 
+import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.InventoryBasic;
@@ -17,7 +18,7 @@ import com.gildedgames.aether.common.player.PlayerAether;
 
 public class ContainerAccessories extends ContainerPlayer
 {
-	// See GuiContainerCreative#field_147060_v
+	/** See {@link GuiContainerCreative#field_147060_v} **/
 	private static InventoryBasic dumbInventory = new InventoryBasic("fake", true, 46);
 
 	private final PlayerAether aePlayer;

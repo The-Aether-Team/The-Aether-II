@@ -60,10 +60,10 @@ public class EntityEffects<E extends Entity> extends EntityHook<E>
 	}
 
 	@Override
-	public void init(Entity entity, World world)
-	{
-		super.init(entity, world);
-	}
+	public void onLoaded() { }
+
+	@Override
+	public void onUnloaded() { }
 
 	@Override
 	public void saveNBTData(NBTTagCompound compound)
@@ -77,6 +77,7 @@ public class EntityEffects<E extends Entity> extends EntityHook<E>
 		
 	}
 
+	@Override
 	public void onUpdate()
 	{
 		for (EntityEffect<E> effect : this.getEffects())

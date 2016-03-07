@@ -27,7 +27,6 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.player.PlayerAetherEventHooks;
-import com.gildedgames.aether.common.player.PlayerAetherTracker;
 import com.gildedgames.aether.common.recipes.RecipesAether;
 import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
 import com.gildedgames.aether.common.world.WorldProviderAether;
@@ -80,7 +79,6 @@ public class CommonProxy
 	public void init(FMLInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new CommonEvents());
-		MinecraftForge.EVENT_BUS.register(new PlayerAetherTracker());
 		MinecraftForge.EVENT_BUS.register(new PlayerAetherEventHooks());
 		MinecraftForge.EVENT_BUS.register(new EntityEffectsEventHooks());
 		MinecraftForge.EVENT_BUS.register(new PartyMemberTracker());

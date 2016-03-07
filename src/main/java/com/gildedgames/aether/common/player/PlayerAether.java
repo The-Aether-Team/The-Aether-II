@@ -1,7 +1,9 @@
 package com.gildedgames.aether.common.player;
 
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
+import com.gildedgames.aether.common.entities.effects.EntityEffect;
+import com.gildedgames.aether.common.entities.effects.EntityEffects;
+import com.gildedgames.aether.common.items.ItemAccessory;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
@@ -19,7 +21,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
@@ -32,10 +33,36 @@ public class PlayerAether extends EntityHook<EntityPlayer>
 	private Party currentParty;
 
 	@Override
-	public void init(Entity entity, World world)
+	public void onLoaded()
 	{
-		super.init(entity, world);
+		if (!this.getEntity().worldObj.isRemote)
+		{
+			EntityEffects<EntityPlayer> effects = EntityEffects.get(this.getEntity());
+
+			effects.clearEffects();
+
+			for (ItemStack stack : this.getInventoryAccessories().getInventory())
+			{
+				if (stack != null && stack.getItem() instanceof ItemAccessory)
+				{
+					ItemAccessory acc = (ItemAccessory)stack.getItem();
+
+					for (EntityEffect<EntityPlayer> effect : acc.getEffects())
+					{
+						if (!effects.addEffect(effect))
+						{
+							int count = PlayerUtil.getEffectCount(this.getEntity(), effect);
+
+							effect.getAttributes().setInteger("modifier", count);
+						}
+					}
+				}
+			}
+		}
 	}
+
+	@Override
+	public void onUnloaded() { }
 
 	public static PlayerAether get(Entity entity)
 	{
