@@ -228,7 +228,7 @@ public class AetherItemModels
 				.add(ItemDartType.POISON.ordinal(), "poison_dart"));
 
 		registerItemModels(new ItemModelList(ItemsAether.crossbow).root("crossbow/").add(0, "crossbow"));
-		registerItemModels(new ItemModelList(ItemsAether.dart).root("bolts/")
+		registerItemModels(new ItemModelList(ItemsAether.bolt).root("bolts/")
 				.add(ItemBoltType.STONE.ordinal(), "stone_bolt")
 				.add(ItemBoltType.ZANITE.ordinal(), "zanite_bolt"));
 
