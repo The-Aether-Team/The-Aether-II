@@ -166,6 +166,9 @@ item.aether.candy_ring.name=Candy Ring
 item.aether.bone_ring.name=Bone Ring
 item.aether.skyroot_ring.name=Skyroot Ring
 item.aether.icestone.name=Icestone
+item.aether.crossbow.name=Crossbow
+item.aether.bolt.stone.name=Stone Bolt
+item.aether.bolt.zanite.name=Zanite Bolt
 
 # Weapon Tooltips
 item.aether.skyroot_sword.ability.desc=Doubles drops from mobs

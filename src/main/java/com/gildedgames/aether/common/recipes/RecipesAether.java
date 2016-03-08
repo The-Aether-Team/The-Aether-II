@@ -3,9 +3,11 @@ package com.gildedgames.aether.common.recipes;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import com.gildedgames.aether.common.recipes.altar.AltarRepairRecipe;
 import com.gildedgames.aether.common.recipes.altar.AltarEnchantRecipe;
 import com.gildedgames.aether.common.recipes.altar.IAltarRecipe;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -60,6 +62,20 @@ public class RecipesAether
 		// Icestone Bricks
 		registerShapedRecipe(new ItemStack(BlocksAether.icestone_bricks, 4), "XX", "XX",
 				'X', new ItemStack(ItemsAether.icestone));
+
+		//Crossbow
+		registerShapedRecipe(new ItemStack(ItemsAether.crossbow), " X ", " Y ", "ZZZ",
+				'X', new ItemStack(ItemsAether.skyroot_stick),
+				'Y', new ItemStack(Items.string),
+				'Z', new ItemStack(BlocksAether.skyroot_planks));
+
+		// Crossbow Bolts
+		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.STONE.ordinal()), " Y","X ",
+				'X', new ItemStack(ItemsAether.skyroot_stick),
+				'Y', new ItemStack(BlocksAether.holystone));
+		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.ZANITE.ordinal()), " Y","X ",
+				'X', new ItemStack(ItemsAether.skyroot_stick),
+				'Y', new ItemStack(ItemsAether.zanite_gemstone));
 	}
 
 	private static void registerToolRecipes()

@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.items;
 
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemBolt;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -106,6 +108,10 @@ public class ItemsAether
 	public static ItemDartShooter dart_shooter;
 
 	public static ItemDart dart;
+
+	public static ItemCrossbow crossbow;
+
+	public static ItemBolt bolt;
 
 	public static ItemElementalSword flaming_sword, holy_sword, lightning_sword;
 
@@ -237,6 +243,9 @@ public class ItemsAether
 
 		dart_shooter = registerItem("dart_shooter", new ItemDartShooter(), AetherCreativeTabs.tabWeapons);
 		dart = registerItem("dart", new ItemDart(), AetherCreativeTabs.tabWeapons);
+
+		crossbow = registerItem("crossbow", new ItemCrossbow(), AetherCreativeTabs.tabWeapons);
+		bolt = registerItem("bolt", new ItemBolt(), AetherCreativeTabs.tabWeapons);
 
 		flaming_sword = registerItem("flaming_sword", new ItemElementalSword(ItemElementalSword.SwordElement.FIRE));
 		holy_sword = registerItem("holy_sword", new ItemElementalSword(ItemElementalSword.SwordElement.HOLY));

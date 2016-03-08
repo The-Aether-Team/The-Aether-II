@@ -14,6 +14,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.consumables.ItemGummySwet;
 import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootChest;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -225,6 +226,11 @@ public class AetherItemModels
 				.add(ItemDartType.GOLDEN.ordinal(), "golden_dart")
 				.add(ItemDartType.ENCHANTED.ordinal(), "enchanted_dart")
 				.add(ItemDartType.POISON.ordinal(), "poison_dart"));
+
+		registerItemModels(new ItemModelList(ItemsAether.crossbow).root("crossbow/").add(0, "crossbow"));
+		registerItemModels(new ItemModelList(ItemsAether.dart).root("bolts/")
+				.add(ItemBoltType.STONE.ordinal(), "stone_bolt")
+				.add(ItemBoltType.ZANITE.ordinal(), "zanite_bolt"));
 
 		registerItemModels(new ItemModelList(ItemsAether.flaming_sword).add(0, "weapons/flaming_sword"));
 		registerItemModels(new ItemModelList(ItemsAether.holy_sword).add(0, "weapons/holy_sword"));
