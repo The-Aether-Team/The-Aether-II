@@ -156,12 +156,8 @@ public class CommonEvents
 			return entity;
 		}
 		final Entity newEntity = EntityList.createEntityByName(EntityList.getEntityString(entity), server);
-
-		if (newEntity != null)
-		{
-			newEntity.copyDataFromOld(entity);
-			entity.worldObj.removeEntity(entity);
-		}
+		newEntity.copyDataFromOld(entity);
+		entity.worldObj.removeEntity(entity);
 		return newEntity;
 	}
 
