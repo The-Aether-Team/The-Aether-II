@@ -5,6 +5,48 @@
 			"aeportal/portal"
 		]
 	},
+	"aemusic.day": {
+		"category": "music",
+		"sounds": [
+			{
+				"name": "aemusic/day1",
+				"stream": true
+			},
+			{
+				"name": "aemusic/day2",
+				"stream": true
+			},
+			{
+				"name": "aemusic/day3",
+				"stream": true
+			},
+			{
+				"name": "aemusic/day4",
+				"stream": true
+			},
+			{
+				"name": "aemusic/day5",
+				"stream": true
+			},
+			{
+				"name": "aemusic/day6",
+				"stream": true
+			}
+		]
+	},
+	"aemusic.night": {
+		"category": "music",
+		"sounds": [
+			{
+				"name": "aemusic/night1",
+				"stream": true
+			},
+			{
+				"name": "aemusic/night2",
+				"stream": true
+			}
+		]
+	},
 	"records.aerwhale": {
 		"category": "record",
 		"sounds": [
