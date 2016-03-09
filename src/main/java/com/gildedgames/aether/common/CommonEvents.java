@@ -153,7 +153,7 @@ public class CommonEvents
 	{
 		if (entity == null)
 		{
-			return null;
+			return entity;
 		}
 		final Entity newEntity = EntityList.createEntityByName(EntityList.getEntityString(entity), server);
 		newEntity.copyDataFromOld(entity);

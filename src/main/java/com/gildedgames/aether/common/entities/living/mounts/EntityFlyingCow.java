@@ -89,6 +89,7 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 	@Override
 	public boolean interact(EntityPlayer player)
 	{
+		super.interact(player);
 		ItemStack stack = player.inventory.getCurrentItem();
 
 		if (!this.isChild() && stack != null)
