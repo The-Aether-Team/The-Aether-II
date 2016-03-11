@@ -1,0 +1,208 @@
+package com.gildedgames.aether.common.entities.effects;
+
+import java.util.List;
+
+import net.minecraft.entity.Entity;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
+
+import com.google.common.collect.Lists;
+
+public class EffectPool<I extends EffectInstance>
+{
+	
+	private EffectProcessor<I> processor;
+	
+	private List<I> instances;
+
+	public EffectPool(EffectProcessor<I> processor, List<I> instances)
+	{
+		this.processor = processor;
+		this.instances = instances;
+	}
+	
+	public EffectProcessor<I> getProcessor()
+	{
+		return this.processor;
+	}
+	
+	public List<I> getInstances()
+	{
+		return this.instances;
+	}
+	
+	public <S extends Entity> void tick(S entity)
+	{
+		List<I> instancesRulesMet = Lists.newArrayList();
+		
+		for (I instance : this.getInstances())
+		{
+			boolean isMet = true;
+			
+			for (EffectRule rule : instance.getRules())
+			{
+				if (!rule.isMet(entity))
+				{
+					isMet = false;
+					break;
+				}
+			}
+			
+			if (isMet)
+			{
+				instancesRulesMet.add(instance);
+			}
+		}
+		
+		this.getProcessor().tick(entity, instancesRulesMet);
+	}
+	
+	public <S extends Entity> void onKill(LivingDropsEvent event, S entity)
+	{
+		List<I> instancesRulesMet = Lists.newArrayList();
+		
+		for (I instance : this.getInstances())
+		{
+			boolean isMet = true;
+			
+			for (EffectRule rule : instance.getRules())
+			{
+				if (!rule.isMet(entity))
+				{
+					isMet = false;
+					break;
+				}
+			}
+			
+			if (isMet)
+			{
+				instancesRulesMet.add(instance);
+			}
+		}
+		
+		this.getProcessor().onKill(event, entity, instancesRulesMet);
+	}
+	
+	public <S extends Entity> void onPlayerInteract(PlayerInteractEvent event, S entity)
+	{
+		if (!(this.getProcessor() instanceof EffectProcessorPlayer))
+		{
+			return;
+		}
+		
+		List<I> instancesRulesMet = Lists.newArrayList();
+		
+		for (I instance : this.getInstances())
+		{
+			boolean isMet = true;
+			
+			for (EffectRule rule : instance.getRules())
+			{
+				if (!rule.isMet(entity))
+				{
+					isMet = false;
+					break;
+				}
+			}
+			
+			if (isMet)
+			{
+				instancesRulesMet.add(instance);
+			}
+		}
+		
+		EffectProcessorPlayer<I> pability = (EffectProcessorPlayer<I>)this.getProcessor();
+		
+		pability.onInteract(event, event.entityPlayer, instancesRulesMet);
+	}
+	
+	public <S extends Entity> void onPickupXP(PlayerPickupXpEvent event, S entity)
+	{
+		if (!(this.getProcessor() instanceof EffectProcessorPlayer))
+		{
+			return;
+		}
+		
+		List<I> instancesRulesMet = Lists.newArrayList();
+		
+		for (I instance : this.getInstances())
+		{
+			boolean isMet = true;
+			
+			for (EffectRule rule : instance.getRules())
+			{
+				if (!rule.isMet(entity))
+				{
+					isMet = false;
+					break;
+				}
+			}
+			
+			if (isMet)
+			{
+				instancesRulesMet.add(instance);
+			}
+		}
+		
+		EffectProcessorPlayer<I> pability = (EffectProcessorPlayer<I>)this.getProcessor();
+		
+		pability.onPickupXP(event, event.entityPlayer, instancesRulesMet);
+	}
+	
+	public <S extends Entity> void onLivingAttack(LivingHurtEvent event, S entity)
+	{
+		List<I> instancesRulesMet = Lists.newArrayList();
+		
+		for (I instance : this.getInstances())
+		{
+			boolean isMet = true;
+			
+			for (EffectRule rule : instance.getRules())
+			{
+				if (!rule.isMet(entity))
+				{
+					isMet = false;
+					break;
+				}
+			}
+			
+			if (isMet)
+			{
+				instancesRulesMet.add(instance);
+			}
+		}
+		
+		this.getProcessor().onAttack(event, entity, instancesRulesMet);
+	}
+	
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (obj instanceof EffectPool)
+		{
+			EffectPool<?> pool = (EffectPool<?>)obj;
+			
+			if (pool.getProcessor() != this.getProcessor())
+			{
+				return false;
+			}
+			
+			if (pool.getInstances() != this.getInstances())
+			{
+				return false;
+			}
+			
+			return true;
+		}
+		
+		if (obj == this.processor)
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
+}

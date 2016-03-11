@@ -1,18 +1,5 @@
 package com.gildedgames.aether.common.player;
 
-import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
-import com.gildedgames.aether.common.entities.effects.EntityEffect;
-import com.gildedgames.aether.common.entities.effects.EntityEffects;
-import com.gildedgames.aether.common.items.ItemAccessory;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
-import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
-import com.gildedgames.aether.common.party.Party;
-import com.gildedgames.aether.common.util.PlayerUtil;
-import com.gildedgames.util.core.io.ByteBufHelper;
-import com.gildedgames.util.modules.entityhook.api.IEntityHookFactory;
-import com.gildedgames.util.modules.entityhook.impl.hooks.EntityHook;
-import com.gildedgames.util.modules.entityhook.impl.providers.PlayerHookProvider;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -23,6 +10,24 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
+import com.gildedgames.aether.common.entities.effects.EffectInstance;
+import com.gildedgames.aether.common.entities.effects.EffectProcessor;
+import com.gildedgames.aether.common.entities.effects.EntityEffects;
+import com.gildedgames.aether.common.entities.effects.ItemEffects;
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
+import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
+import com.gildedgames.aether.common.party.Party;
+import com.gildedgames.aether.common.util.PlayerUtil;
+import com.gildedgames.util.core.io.ByteBufHelper;
+import com.gildedgames.util.modules.entityhook.api.IEntityHookFactory;
+import com.gildedgames.util.modules.entityhook.impl.hooks.EntityHook;
+import com.gildedgames.util.modules.entityhook.impl.providers.PlayerHookProvider;
 
 public class PlayerAether extends EntityHook<EntityPlayer>
 {
@@ -37,24 +42,22 @@ public class PlayerAether extends EntityHook<EntityPlayer>
 	{
 		if (!this.getEntity().worldObj.isRemote)
 		{
-			EntityEffects<EntityPlayer> effects = EntityEffects.get(this.getEntity());
-
+			EntityEffects effects = EntityEffects.get(this.getEntity());
+			
 			effects.clearEffects();
-
+			
 			for (ItemStack stack : this.getInventoryAccessories().getInventory())
 			{
-				if (stack != null && stack.getItem() instanceof ItemAccessory)
+				if (stack != null && stack.hasCapability(AetherCore.ITEM_EFFECTS_CAPABILITY, null))
 				{
-					ItemAccessory acc = (ItemAccessory)stack.getItem();
+					ItemEffects itemEffects = stack.getCapability(AetherCore.ITEM_EFFECTS_CAPABILITY, null);
 
-					for (EntityEffect<EntityPlayer> effect : acc.getEffects())
+					for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
 					{
-						if (!effects.addEffect(effect))
-						{
-							int count = PlayerUtil.getEffectCount(this.getEntity(), effect);
-
-							effect.getAttributes().setInteger("modifier", count);
-						}
+						EffectProcessor processor = effect.getLeft();
+						EffectInstance instance = effect.getRight();
+						
+						effects.put(processor, instance);
 					}
 				}
 			}
@@ -62,7 +65,29 @@ public class PlayerAether extends EntityHook<EntityPlayer>
 	}
 
 	@Override
-	public void onUnloaded() { }
+	public void onUnloaded()
+	{
+		if (!this.getEntity().worldObj.isRemote)
+		{
+			EntityEffects effects = EntityEffects.get(this.getEntity());
+	
+			for (ItemStack stack : this.getInventoryAccessories().getInventory())
+			{
+				if (stack != null && stack.hasCapability(AetherCore.ITEM_EFFECTS_CAPABILITY, null))
+				{
+					ItemEffects itemEffects = stack.getCapability(AetherCore.ITEM_EFFECTS_CAPABILITY, null);
+	
+					for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
+					{
+						EffectProcessor processor = effect.getLeft();
+						EffectInstance instance = effect.getRight();
+						
+						effects.removeInstance(processor, instance);
+					}
+				}
+			}
+		}
+	}
 
 	public static PlayerAether get(Entity entity)
 	{

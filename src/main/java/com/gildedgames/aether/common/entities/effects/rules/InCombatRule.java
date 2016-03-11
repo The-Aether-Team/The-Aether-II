@@ -1,15 +1,16 @@
 package com.gildedgames.aether.common.entities.effects.rules;
 
-import net.minecraft.entity.EntityLivingBase;
-
-import com.gildedgames.aether.common.entities.effects.AbilityRule;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-public class InCombatRule implements AbilityRule<EntityLivingBase>
+import com.gildedgames.aether.common.entities.effects.EffectRule;
+
+public class InCombatRule implements EffectRule
 {
 
 	@Override
-	public boolean isMet(EntityLivingBase source)
+	public boolean isMet(Entity source)
 	{
 		return false;
 	}
@@ -18,6 +19,12 @@ public class InCombatRule implements AbilityRule<EntityLivingBase>
 	public String[] getUnlocalizedDesc()
 	{
 		return new String[] { EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + "In Combat" };
+	}
+	
+	@Override
+	public boolean blockLivingAttackAbility(Entity source, LivingHurtEvent event)
+	{
+		return false;
 	}
 	
 }

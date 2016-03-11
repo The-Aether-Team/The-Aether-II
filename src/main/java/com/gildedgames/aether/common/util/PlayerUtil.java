@@ -4,8 +4,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import com.gildedgames.aether.common.entities.effects.Ability;
-import com.gildedgames.aether.common.entities.effects.EntityEffect;
 import com.gildedgames.aether.common.items.ItemAccessory;
 import com.gildedgames.aether.common.player.PlayerAether;
 
@@ -130,39 +128,6 @@ public class PlayerUtil
 			if (aePlayer.getInventoryAccessories().getInventory()[index] != null && aePlayer.getInventoryAccessories().getInventory()[index].getItem() == itemID)
 			{
 				count++;
-			}
-		}
-
-		return count;
-	}
-	
-	public static int getEffectCount(EntityPlayer player, EntityEffect<EntityPlayer> effect)
-	{
-		PlayerAether aePlayer = PlayerAether.get(player);
-		
-		int count = 0;
-
-		for (int index = 0; index < 8; index++)
-		{
-			ItemStack stack = aePlayer.getInventoryAccessories().getInventory()[index];
-			
-			if (stack != null && stack.getItem() instanceof ItemAccessory)
-			{
-				ItemAccessory acc = (ItemAccessory)stack.getItem();
-				
-				for (EntityEffect<EntityPlayer> itEffect : acc.getEffects())
-				{
-					for (Ability<EntityPlayer> ability : itEffect.getAbilities())
-					{
-						for (Ability<EntityPlayer> otherAbility : effect.getAbilities())
-						{
-							if (ability.getClass().isAssignableFrom(otherAbility.getClass()))
-							{
-								count++;
-							}
-						}
-					}
-				}
 			}
 		}
 

@@ -6,9 +6,11 @@ public enum AccessoryType
 	NECKWEAR("gui.slot.neckwear"),
 	COMPANION("gui.slot.companion"),
 	SHIELD("gui.slot.shield"),
-	GLOVE("gui.slot.glove"),
-	MISC("gui.slot.misc");
-
+	HANDWEAR("gui.slot.handwear"),
+	RELIC("gui.slot.relic"),
+	CHARM("gui.slot.charm"),
+	ARTIFACT("gui.slot.artifact");
+	
 	private final String unlocalizedName;
 
 	AccessoryType(String unlocalizedName)

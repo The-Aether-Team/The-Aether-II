@@ -1,0 +1,54 @@
+package com.gildedgames.aether.common.entities.effects;
+
+import java.util.List;
+
+import net.minecraft.entity.Entity;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+
+public interface EffectProcessor<I extends EffectInstance>
+{
+	
+	String getUnlocalizedName(Entity source, I instance);
+	
+	String[] getUnlocalizedDesc(Entity source, I instance);
+	
+	void formatLocalizedDesc(List<String> localizedDesc, Entity source, I instance);
+
+	/**
+	 * Called once when this ability is added to an entity.
+	 * @param source The entity that is affected by this ability. 
+	 * @param holder The instances of this ability that are attached to the source.
+	 * @param attributes TODO
+	 */
+	void apply(Entity source, I instance, List<I> all);
+	
+	void tick(Entity source, List<I> all);
+	
+	/**
+	 * Called once when this ability is removed from an entity.
+	 * @param source The entity that is affected by this ability. 
+	 * @param holder The instances of this ability that are attached to the source.
+	 * @param attributes TODO
+	 */
+	void cancel(Entity source, I instance, List<I> all);
+	
+	/**
+	 * Called when the source kills a living entity while they have this ability.
+	 * @param event The event that is fired.
+	 * @param source The entity that is affected by this ability. 
+	 * @param holder The instances of this ability that are attached to the source.
+	 * @param attributes TODO
+	 */
+	void onKill(LivingDropsEvent event, Entity source, List<I> all);
+	
+	/**
+	 * Called when the source attacks a living entity while they have this ability.
+	 * @param event The event that is fired.
+	 * @param source The entity that is affected by this ability. 
+	 * @param holder The instances of this ability that are attached to the source.
+	 * @param attributes TODO
+	 */
+	void onAttack(LivingHurtEvent event, Entity source, List<I> all);
+	
+}

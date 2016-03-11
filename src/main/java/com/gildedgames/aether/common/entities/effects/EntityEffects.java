@@ -1,62 +1,107 @@
 package com.gildedgames.aether.common.entities.effects;
 
-import com.gildedgames.util.modules.entityhook.api.IEntityHookFactory;
-import com.gildedgames.util.modules.entityhook.impl.hooks.EntityHook;
-import com.gildedgames.util.modules.entityhook.impl.providers.LivingHookProvider;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntityEffects<E extends Entity> extends EntityHook<E>
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.IMob;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+
+import com.gildedgames.aether.common.entities.effects.processors.BreatheUnderwaterEffect;
+import com.gildedgames.aether.common.entities.effects.processors.DoubleDropEffect;
+import com.gildedgames.aether.common.entities.effects.processors.FreezeBlocksEffect;
+import com.gildedgames.aether.common.entities.effects.processors.ModifyDamageEffect;
+import com.gildedgames.aether.common.entities.effects.processors.ModifyMaxHealthEffect;
+import com.gildedgames.aether.common.entities.effects.processors.ModifySpeedEffect;
+import com.gildedgames.aether.common.entities.effects.processors.RegenerateHealthEffect;
+import com.gildedgames.aether.common.entities.effects.processors.player.DaggerfrostEffect;
+import com.gildedgames.aether.common.entities.effects.processors.player.ModifyXPCollectionEffect;
+import com.gildedgames.aether.common.entities.effects.processors.player.PauseHungerEffect;
+import com.gildedgames.util.modules.entityhook.api.IEntityHookFactory;
+import com.gildedgames.util.modules.entityhook.impl.hooks.EntityHook;
+import com.gildedgames.util.modules.entityhook.impl.providers.LivingHookProvider;
+import com.google.common.collect.Lists;
+
+public class EntityEffects extends EntityHook<Entity>
 {
+	
+	public static final EffectProcessorPlayer<EffectInstance> DAGGERFROST = new DaggerfrostEffect();
+	
+	public static final EffectProcessorPlayer<ModifyXPCollectionEffect.Instance> MODIFY_XP_COLLECTION = new ModifyXPCollectionEffect();
+	
+	public static final EffectProcessorPlayer<EffectInstance> PAUSE_HUNGER = new PauseHungerEffect();
+	
+	public static final EffectProcessor<EffectInstance> BREATHE_UNDERWATER = new BreatheUnderwaterEffect();
+	
+	public static final EffectProcessor<DoubleDropEffect.Instance> DOUBLE_DROPS = new DoubleDropEffect();
+	
+	public static final EffectProcessor<FreezeBlocksEffect.Instance> FREEZE_BLOCKS = new FreezeBlocksEffect();
+	
+	public static final EffectProcessor<ModifyDamageEffect.Instance> MODIFY_DAMAGE = new ModifyDamageEffect();
+	
+	public static final EffectProcessor<ModifyMaxHealthEffect.Instance> MODIFY_MAX_HEALTH = new ModifyMaxHealthEffect();
+	
+	public static final EffectProcessor<ModifySpeedEffect.Instance> MODIFY_SPEED = new ModifySpeedEffect();
+	
+	public static final EffectProcessor<RegenerateHealthEffect.Instance> REGENERATE_HEALTH = new RegenerateHealthEffect();
+	
 	public static final LivingHookProvider<EntityEffects> PROVIDER = new LivingHookProvider<>("aether:effects", new Factory());
 
-	private List<EntityEffect<E>> effects = new ArrayList<>();
+	private List<EffectPool<?>> effects = Lists.newArrayList();
 	
 	private int ticksSinceAttacked;
 	
-	@SuppressWarnings("unchecked")
-	public static <S extends Entity> EntityEffects<S> get(S entity)
+	private EntityEffects()
+	{
+		
+	}
+
+	public static EntityEffects get(Entity entity)
 	{
 		return EntityEffects.PROVIDER.getHook(entity);
 	}
-
-	public List<EntityEffect<E>> getEffects()
+	
+	public List<EffectPool<?>> getEffectPools()
 	{
 		return this.effects;
 	}
 	
-	public boolean addEffect(EntityEffect<E> effect)
+	@SuppressWarnings("unchecked")
+	private <I extends EffectInstance> EffectPool<I> getPool(EffectProcessor<I> processor)
 	{
-		if (!this.effects.contains(effect) && effect != null)
+		for (EffectPool<?> pool : this.effects)
 		{
-			this.effects.add(effect);
-
-			for (Ability<E> ability : effect.getAbilities())
+			if (pool.equals(processor))
 			{
-				ability.apply(this.getEntity(), effect, effect.getAttributes());
+				return (EffectPool<I>) pool;
 			}
-
-			return true;
 		}
 		
-		return false;
+		EffectPool<I> pool = new EffectPool<I>(processor, new ArrayList<I>());
+		
+		this.effects.add(pool);
+		
+		return pool;
 	}
-	
-	public void removeEffect(EntityEffect<E> effect)
+
+	public <I extends EffectInstance> void put(EffectProcessor<I> processor, I instance)
 	{
-		for (Ability<E> ability : effect.getAbilities())
+		if (processor == null || instance == null)
 		{
-			ability.cancel(this.getEntity(), effect, effect.getAttributes());
+			return;
 		}
+
+		EffectPool<I> pool = this.getPool(processor);
 		
-		this.effects.remove(effect);
+		if (!pool.getInstances().contains(instance))
+		{
+			pool.getInstances().add(instance);
+		}
+
+		processor.apply(this.getEntity(), instance, pool.getInstances());
 	}
 
 	@Override
@@ -64,6 +109,37 @@ public class EntityEffects<E extends Entity> extends EntityHook<E>
 
 	@Override
 	public void onUnloaded() { }
+	
+	public <I extends EffectInstance> void removeEntry(EffectProcessor<I> processor)
+	{
+		if (processor == null)
+		{
+			return;
+		}
+		
+		EffectPool<I> pool = this.getPool(processor);
+		
+		for (I instance : pool.getInstances())
+		{
+			processor.cancel(this.getEntity(), instance, pool.getInstances());
+		}
+		
+		this.effects.remove(pool);
+	}
+
+	public <I extends EffectInstance> void removeInstance(EffectProcessor<I> processor, I instance)
+	{
+		if (processor == null)
+		{
+			return;
+		}
+		
+		EffectPool<I> pool = this.getPool(processor);
+		
+		processor.cancel(this.getEntity(), instance, pool.getInstances());
+		
+		pool.getInstances().remove(instance);
+	}
 
 	@Override
 	public void saveNBTData(NBTTagCompound compound)
@@ -80,26 +156,9 @@ public class EntityEffects<E extends Entity> extends EntityHook<E>
 	@Override
 	public void onUpdate()
 	{
-		for (EntityEffect<E> effect : this.getEffects())
+		for (EffectPool<?> pool : this.getEffectPools())
 		{
-			boolean isMet = true;
-			
-			for (AbilityRule<E> rule : effect.getRules())
-			{
-				if (!rule.isMet(this.getEntity()))
-				{
-					isMet = false;
-					break;
-				}
-			}
-			
-			if (isMet)
-			{
-				for (Ability<E> ability : effect.getAbilities())
-				{
-					ability.tick(this.getEntity(), effect, effect.getAttributes());
-				}
-			}
+			pool.tick(this.getEntity());
 		}
 		
 		this.ticksSinceAttacked++;
@@ -115,9 +174,9 @@ public class EntityEffects<E extends Entity> extends EntityHook<E>
 
 	public void clearEffects()
 	{
-		for (EntityEffect<E> effect : new ArrayList<>(this.effects))
+		for (EffectPool<?> pool : this.effects)
 		{
-			this.removeEffect(effect);
+			this.removeEntry(pool.getProcessor());
 		}
 	}
 	

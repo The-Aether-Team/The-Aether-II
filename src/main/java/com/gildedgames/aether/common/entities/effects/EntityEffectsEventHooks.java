@@ -1,12 +1,12 @@
 package com.gildedgames.aether.common.entities.effects;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EntityEffectsEventHooks
@@ -15,11 +15,22 @@ public class EntityEffectsEventHooks
 	@SubscribeEvent
 	public void onLivingEntityHurt(LivingHurtEvent event)
 	{
-		EntityEffects<EntityLivingBase> effects = EntityEffects.get(event.entityLiving);
+		EntityEffects effects = EntityEffects.get(event.entityLiving);
 
 		if (effects != null)
 		{
 			effects.onHurt(event);
+		}
+	}
+
+	@SubscribeEvent
+	public void onLivingUpdate(LivingUpdateEvent event)
+	{
+		EntityEffects effects = EntityEffects.get(event.entity);
+		
+		if (effects != null)
+		{
+			effects.onUpdate();
 		}
 	}
 
@@ -33,30 +44,13 @@ public class EntityEffectsEventHooks
 			return;
 		}
 		
-		EntityEffects<Entity> effects = EntityEffects.get(entity);
+		EntityEffects effects = EntityEffects.get(entity);
 
 		if (effects != null)
 		{
-			for (EntityEffect<Entity> effect : effects.getEffects())
+			for (EffectPool<?> pool : effects.getEffectPools())
 			{
-				boolean isMet = true;
-				
-				for (AbilityRule<Entity> rule : effect.getRules())
-				{
-					if (!rule.isMet(entity))
-					{
-						isMet = false;
-						break;
-					}
-				}
-				
-				if (isMet)
-				{
-					for (Ability<Entity> ability : effect.getAbilities())
-					{
-						ability.onKill(event, entity, effect, effect.getAttributes());
-					}
-				}
+				pool.onKill(event, entity);
 			}
 		}
 	}
@@ -65,35 +59,28 @@ public class EntityEffectsEventHooks
 	public void onPlayerInteract(PlayerInteractEvent event)
 	{
 		EntityPlayer entity = event.entityPlayer;
-		EntityEffects<EntityPlayer> effects = EntityEffects.get(entity);
+		EntityEffects effects = EntityEffects.get(entity);
 
 		if (effects != null)
 		{
-			for (EntityEffect<EntityPlayer> effect : effects.getEffects())
+			for (EffectPool<?> pool : effects.getEffectPools())
 			{
-				for (Ability<EntityPlayer> ability : effect.getAbilities())
-				{
-					if (ability instanceof PlayerAbility)
-					{
-						boolean isMet = true;
-						
-						for (AbilityRule<EntityPlayer> rule : effect.getRules())
-						{
-							if (!rule.isMet(entity))
-							{
-								isMet = false;
-								break;
-							}
-						}
-						
-						if (isMet)
-						{
-							PlayerAbility pability = (PlayerAbility)ability;
-							
-							pability.onInteract(event, event.entityPlayer, effect, effect.getAttributes());
-						}
-					}
-				}
+				pool.onPlayerInteract(event, entity);
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onPickupXP(PlayerPickupXpEvent event)
+	{
+		EntityPlayer entity = event.entityPlayer;
+		EntityEffects effects = EntityEffects.get(entity);
+
+		if (effects != null)
+		{
+			for (EffectPool<?> pool : effects.getEffectPools())
+			{
+				pool.onPickupXP(event, entity);
 			}
 		}
 	}
@@ -108,30 +95,13 @@ public class EntityEffectsEventHooks
 			return;
 		}
 		
-		EntityEffects<Entity> effects = EntityEffects.get(entity);
+		EntityEffects effects = EntityEffects.get(entity);
 
 		if (effects != null)
 		{
-			for (EntityEffect<Entity> effect : effects.getEffects())
+			for (EffectPool<?> pool : effects.getEffectPools())
 			{
-				boolean isMet = true;
-				
-				for (AbilityRule<Entity> rule : effect.getRules())
-				{
-					if (!rule.isMet(entity))
-					{
-						isMet = false;
-						break;
-					}
-				}
-				
-				if (isMet)
-				{
-					for (Ability<Entity> ability : effect.getAbilities())
-					{
-						ability.onAttack(event, entity, effect, effect.getAttributes());
-					}
-				}
+				pool.onLivingAttack(event, entity);
 			}
 		}
 	}

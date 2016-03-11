@@ -1,0 +1,46 @@
+package com.gildedgames.aether.common.entities.effects.rules;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+
+import com.gildedgames.aether.common.entities.effects.EffectRule;
+import com.mojang.realmsclient.gui.ChatFormatting;
+
+public class HoldingItemRule implements EffectRule
+{
+	
+	private ItemStack stack;
+	
+	public HoldingItemRule(ItemStack stack)
+	{
+		this.stack = stack;
+	}
+
+	@Override
+	public boolean isMet(Entity source)
+	{
+		if (!(source instanceof EntityLivingBase))
+		{
+			return false;
+		}
+		
+		EntityLivingBase living = (EntityLivingBase)source;
+		
+		return this.stack.isItemEqual(living.getHeldItem());
+	}
+
+	@Override
+	public String[] getUnlocalizedDesc()
+	{
+		return new String[] { ChatFormatting.GRAY + "" + ChatFormatting.ITALIC + "Holding: " + this.stack.getDisplayName() };
+	}
+
+	@Override
+	public boolean blockLivingAttackAbility(Entity source, LivingHurtEvent event)
+	{
+		return false;
+	}
+	
+}

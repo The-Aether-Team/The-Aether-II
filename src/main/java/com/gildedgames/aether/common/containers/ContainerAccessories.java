@@ -8,10 +8,15 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
 import com.gildedgames.aether.common.containers.slots.SlotAccessory;
-import com.gildedgames.aether.common.entities.effects.EntityEffect;
+import com.gildedgames.aether.common.entities.effects.EffectInstance;
+import com.gildedgames.aether.common.entities.effects.EffectProcessor;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
+import com.gildedgames.aether.common.entities.effects.ItemEffects;
 import com.gildedgames.aether.common.items.AccessoryType;
 import com.gildedgames.aether.common.items.ItemAccessory;
 import com.gildedgames.aether.common.player.PlayerAether;
@@ -47,26 +52,51 @@ public class ContainerAccessories extends ContainerPlayer
 			slot.xDisplayPosition += widthOffset;
 			slot.yDisplayPosition += heightOffset;
 		}
+		
+		Slot helmet = this.inventorySlots.get(5);
+		Slot chestplate = this.inventorySlots.get(6);
+		Slot leggings = this.inventorySlots.get(7);
+		Slot boots = this.inventorySlots.get(8);
 
+		helmet.xDisplayPosition = 37;
+		helmet.yDisplayPosition = 7;
+		
+		chestplate.xDisplayPosition = 37;
+		chestplate.yDisplayPosition = 49;
+		
+		leggings.xDisplayPosition = 37;
+		leggings.yDisplayPosition = 70;
+		
+		boots.xDisplayPosition = 37;
+		boots.yDisplayPosition = 91;
+		
 		this.binSlot = new Slot(ContainerAccessories.dumbInventory, this.inventorySlots.size(), 228, 25);
 
 		if (this.aePlayer.getEntity().capabilities.isCreativeMode)
 		{
 			this.addSlotToContainer(this.binSlot);
 		}
-
+		
 		int slotID = 0;
 
-		for (int x = 0; x < 2; x++)
+		this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.RING, slotID++, 62, 70));
+		this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.RING, slotID++, 12, 70));
+		this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.NECKWEAR, slotID++, 37, 28));
+		this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.RELIC, slotID++, 12, 28));
+		this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.RELIC, slotID++, 62, 28));
+		this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.SHIELD, slotID++, 12, 49));
+		this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.HANDWEAR, slotID++, 62, 49));
+		this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.COMPANION, slotID++, 12, 123));
+		this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.ARTIFACT, slotID++, 62, 123));
+		
+		for (int x = 0; x < 3; x++)
 		{
-			for (int y = 0; y < 4; y++)
+			for (int y = 0; y < 2; y++)
 			{
-				int x1 = 23 + (x * 114);
-				int y1 = 30 + (y * 23);
+				int x1 = 104 + (x * 18);
+				int y1 = 105 + (y * 18);
 
-				AccessoryType type = InventoryAccessories.slotTypes[slotID];
-
-				this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, type, slotID, x1, y1));
+				this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.CHARM, slotID, x1, y1));
 				slotID++;
 			}
 		}
@@ -88,21 +118,17 @@ public class ContainerAccessories extends ContainerPlayer
 			{
 				ItemStack stack = slot.getStack();
 				
-				if (slot instanceof SlotAccessory && stack.getItem() instanceof ItemAccessory)
+				if (slot instanceof SlotAccessory && stack.hasCapability(AetherCore.ITEM_EFFECTS_CAPABILITY, null))
 				{
-					ItemAccessory acc = (ItemAccessory)stack.getItem();
-					EntityEffects<EntityPlayer> effects = EntityEffects.get(this.aePlayer.getEntity());
-					
-					for (EntityEffect<EntityPlayer> effect : acc.getEffects())
+					EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
+					ItemEffects itemEffects = stack.getCapability(AetherCore.ITEM_EFFECTS_CAPABILITY, null);
+
+					for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
 					{
-						if (effect.getAttributes().getInteger("modifier") >= 2)
-						{
-							effect.getAttributes().setInteger("modifier", effect.getAttributes().getInteger("modifier") - 1);
-						}
-						else
-						{
-							effects.removeEffect(effect);
-						}
+						EffectProcessor processor = effect.getLeft();
+						EffectInstance instance = effect.getRight();
+						
+						effects.removeInstance(processor, instance);
 					}
 				}
 			}
@@ -165,21 +191,17 @@ public class ContainerAccessories extends ContainerPlayer
 					return stack;
 				}
 			}
-			else if (slot instanceof SlotAccessory && stack.getItem() instanceof ItemAccessory)
+			else if (slot instanceof SlotAccessory && stack.hasCapability(AetherCore.ITEM_EFFECTS_CAPABILITY, null))
 			{
-				ItemAccessory acc = (ItemAccessory)stack.getItem();
-				EntityEffects<EntityPlayer> effects = EntityEffects.get(this.aePlayer.getEntity());
-				
-				for (EntityEffect<EntityPlayer> effect : acc.getEffects())
+				EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
+				ItemEffects itemEffects = stack.getCapability(AetherCore.ITEM_EFFECTS_CAPABILITY, null);
+
+				for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
 				{
-					if (effect.getAttributes().getInteger("modifier") >= 2)
-					{
-						effect.getAttributes().setInteger("modifier", effect.getAttributes().getInteger("modifier") - 1);
-					}
-					else
-					{
-						effects.removeEffect(effect);
-					}
+					EffectProcessor processor = effect.getLeft();
+					EffectInstance instance = effect.getRight();
+					
+					effects.removeInstance(processor, instance);
 				}
 			}
 		}

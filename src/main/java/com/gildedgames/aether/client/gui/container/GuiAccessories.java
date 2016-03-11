@@ -42,9 +42,9 @@ public class GuiAccessories extends GuiContainer
 		super.initGui();
 
 		this.guiLeft = this.width / 2 - 90 - (176 / 2);
-		this.guiTop = this.height / 2 - (146 / 2);
+		this.guiTop = this.height / 2 - (147 / 2);
 
-		this.xSize = 176 * 2;
+		this.xSize = 183 * 2;
 		this.ySize = 150;
 	}
 
@@ -57,7 +57,7 @@ public class GuiAccessories extends GuiContainer
 
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
-		this.drawTexturedModalRect(this.width / 2 - 90 - 176 / 2, this.height / 2 - 146 / 2, 0, 0, 176, 151);
+		this.drawTexturedModalRect(this.width / 2 - 90 - 183 / 2, this.height / 2 - 162 / 2, 0, 0, 183, 171);
 
 		this.mc.renderEngine.bindTexture(aePlayer.getEntity().capabilities.isCreativeMode ? textureBackpackCreative : textureBackpack);
 
@@ -65,9 +65,10 @@ public class GuiAccessories extends GuiContainer
 
 		this.fontRendererObj.drawString(I18n.format("container.crafting"), this.width / 2 + 88, this.height / 2 - 135 / 2, 4210752);
 
+		this.drawPlayer(mouseX, mouseY);
+		
 		super.drawScreen(mouseX, mouseY, partialTick);
 
-		this.drawPlayer(mouseX, mouseY);
 		// this.drawCoinCounter();
 
 		this.drawSlotName(mouseX, mouseY);
@@ -119,7 +120,7 @@ public class GuiAccessories extends GuiContainer
 
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
-		GuiInventory.drawEntityOnScreen(this.width / 2 - 90, this.height / 2 + 40, 45, (this.guiLeft + 88) - mouseX, (this.guiTop + 42) - mouseY, this.mc.thePlayer);
+		GuiInventory.drawEntityOnScreen(this.width / 2 - 48, this.height / 2 + 18, 40, (this.guiLeft + 88) - mouseX, (this.guiTop + 42) - mouseY, this.mc.thePlayer);
 
 //		if (player.currentCompanion != null)
 //		{

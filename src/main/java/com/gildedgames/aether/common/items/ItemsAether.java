@@ -1,9 +1,8 @@
 package com.gildedgames.aether.common.items;
 
-import com.gildedgames.aether.common.items.weapons.crossbow.ItemBolt;
-import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDoor;
@@ -11,6 +10,7 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.potion.Potion;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -19,14 +19,21 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.AetherMaterials;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.effects.EntityEffectBuilder;
-import com.gildedgames.aether.common.entities.effects.abilities.BreatheUnderwaterAbility;
-import com.gildedgames.aether.common.entities.effects.abilities.ExtraDamageAbility;
-import com.gildedgames.aether.common.entities.effects.abilities.FreezeBlocksAbility;
-import com.gildedgames.aether.common.entities.effects.abilities.PauseHungerAbility;
-import com.gildedgames.aether.common.entities.effects.abilities.RegenerateHealthAbility;
-import com.gildedgames.aether.common.entities.effects.abilities.player.DaggerfrostAbility;
-import com.gildedgames.aether.common.entities.effects.abilities.player.DoubleDropAbility;
+import com.gildedgames.aether.common.entities.effects.EffectInstance;
+import com.gildedgames.aether.common.entities.effects.EntityEffects;
+import com.gildedgames.aether.common.entities.effects.processors.DoubleDropEffect;
+import com.gildedgames.aether.common.entities.effects.processors.FreezeBlocksEffect;
+import com.gildedgames.aether.common.entities.effects.processors.ModifyDamageEffect;
+import com.gildedgames.aether.common.entities.effects.processors.ModifyMaxHealthEffect;
+import com.gildedgames.aether.common.entities.effects.processors.ModifySpeedEffect;
+import com.gildedgames.aether.common.entities.effects.processors.RegenerateHealthEffect;
+import com.gildedgames.aether.common.entities.effects.processors.player.ModifyXPCollectionEffect;
+import com.gildedgames.aether.common.entities.effects.rules.DamagingMobRule;
+import com.gildedgames.aether.common.entities.effects.rules.DamagingUndeadRule;
+import com.gildedgames.aether.common.entities.effects.rules.HoldingItemRule;
+import com.gildedgames.aether.common.entities.effects.rules.InBiomeRule;
+import com.gildedgames.aether.common.entities.effects.rules.InDirectMoonlightRule;
+import com.gildedgames.aether.common.entities.effects.rules.InDirectSunlightRule;
 import com.gildedgames.aether.common.entities.effects.rules.OutOfCombatRule;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
@@ -51,6 +58,8 @@ import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
 import com.gildedgames.aether.common.items.weapons.ItemPigSlayer;
 import com.gildedgames.aether.common.items.weapons.ItemVampireBlade;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemBolt;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
 import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemCandyCaneSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemElementalSword;
@@ -132,6 +141,28 @@ public class ItemsAether
 	public static ItemAccessory daggerfrost_locket;
 	
 	public static ItemAccessory candy_ring, bone_ring, skyroot_ring;
+	
+	public static ItemAccessory barbed_iron_ring, barbed_gold_ring;
+	
+	public static ItemAccessory solar_band, lunar_band;
+	
+	public static ItemAccessory ring_of_growth, plague_coil;
+	
+	public static ItemAccessory fleeting_ring, lesser_ring_of_growth, winged_ring;
+	
+	public static ItemAccessory life_coil;
+	
+	public static ItemAccessory iron_barbed_wire, wisdom_bauble, bone_shard;
+	
+	public static ItemAccessory moa_feather, blight_ward, skyroot_twig;
+
+	public static ItemAccessory gold_barbed_wire, ambrosium_talisman, carrion_petal;
+	
+	public static ItemAccessory moonlit_petal, cockatrice_heart;
+	
+	public static ItemAccessory damaged_moa_feather, osseous_bane, rot_bane;
+	
+	public static ItemAccessory continuum_talisman, labyrinth_plans;
 
 	public static Item icestone;
 
@@ -265,22 +296,74 @@ public class ItemsAether
 		zanite_ring = registerItem("zanite_ring", new ItemAccessory(AccessoryType.RING), AetherCreativeTabs.tabAccessories);
 		zanite_pendant = registerItem("zanite_pendant", new ItemAccessory(AccessoryType.NECKWEAR), AetherCreativeTabs.tabAccessories);
 
-		iron_bubble = registerItem("iron_bubble", new ItemAccessory(AccessoryType.MISC, new EntityEffectBuilder<EntityPlayer>().abilities(new BreatheUnderwaterAbility<EntityPlayer>()).flush()), AetherCreativeTabs.tabAccessories);
-		regeneration_stone = registerItem("regeneration_stone", new ItemAccessory(AccessoryType.MISC, RegenerateHealthAbility.build(EntityPlayer.class, 4, new OutOfCombatRule<EntityPlayer>(160))), AetherCreativeTabs.tabAccessories);
+		iron_bubble = registerItem("iron_bubble", new ItemAccessory(AccessoryType.RELIC).effect(EntityEffects.BREATHE_UNDERWATER, new EffectInstance()), AetherCreativeTabs.tabAccessories);
+		regeneration_stone = registerItem("regeneration_stone", new ItemAccessory(AccessoryType.RELIC).effect(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new OutOfCombatRule(160))), AetherCreativeTabs.tabAccessories);
 
-		ice_ring = registerItem("ice_ring", new ItemAccessory(AccessoryType.RING, new EntityEffectBuilder<EntityPlayer>().abilities(new FreezeBlocksAbility<EntityPlayer>()).flush()), AetherCreativeTabs.tabAccessories);
-		ice_pendant = registerItem("ice_pendant", new ItemAccessory(AccessoryType.NECKWEAR, new EntityEffectBuilder<EntityPlayer>().abilities(new FreezeBlocksAbility<EntityPlayer>()).flush()), AetherCreativeTabs.tabAccessories);
+		ice_ring = registerItem("ice_ring", new ItemAccessory(AccessoryType.RING).effect(EntityEffects.FREEZE_BLOCKS, new FreezeBlocksEffect.Instance(3)), AetherCreativeTabs.tabAccessories);
+		ice_pendant = registerItem("ice_pendant", new ItemAccessory(AccessoryType.NECKWEAR).effect(EntityEffects.FREEZE_BLOCKS, new FreezeBlocksEffect.Instance(3)), AetherCreativeTabs.tabAccessories);
 		
-		daggerfrost_locket = registerItem("daggerfrost_locket", new ItemAccessory(AccessoryType.NECKWEAR, new EntityEffectBuilder<EntityPlayer>().abilities(new DaggerfrostAbility()).flush()), AetherCreativeTabs.tabAccessories);
+		daggerfrost_locket = registerItem("daggerfrost_locket", new ItemAccessory(AccessoryType.NECKWEAR).effect(EntityEffects.DAGGERFROST, new EffectInstance()), AetherCreativeTabs.tabAccessories);
 		
-		candy_ring = registerItem("candy_ring", new ItemAccessory(AccessoryType.RING, new EntityEffectBuilder<EntityPlayer>().abilities(new PauseHungerAbility()).flush()), AetherCreativeTabs.tabAccessories);
+		candy_ring = registerItem("candy_ring", new ItemAccessory(AccessoryType.RING).effect(EntityEffects.PAUSE_HUNGER, new EffectInstance()), AetherCreativeTabs.tabAccessories);
 		
-		bone_ring = registerItem("bone_ring", new ItemAccessory(AccessoryType.RING, ExtraDamageAbility.build(EntityPlayer.class, 2.0F)), AetherCreativeTabs.tabAccessories);
+		bone_ring = registerItem("bone_ring", new ItemAccessory(ItemRarity.RARE, AccessoryType.RING).effect(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(2.0F)), AetherCreativeTabs.tabAccessories);
 		
-		skyroot_ring = registerItem("skyroot_ring", new ItemAccessory(AccessoryType.RING, DoubleDropAbility.build(EntityPlayer.class, 1.5F)), AetherCreativeTabs.tabAccessories);
+		skyroot_ring = registerItem("skyroot_ring", new ItemAccessory(ItemRarity.RARE, AccessoryType.RING).effect(EntityEffects.DOUBLE_DROPS, new DoubleDropEffect.Instance(1.5F)), AetherCreativeTabs.tabAccessories);
 
 		icestone = registerItem("icestone", new Item(), AetherCreativeTabs.tabMaterials);
+		
+		barbed_iron_ring = registerItem("barbed_iron_ring", new ItemAccessory(AccessoryType.RING).effect(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(1.0F)), AetherCreativeTabs.tabAccessories);
+		
+		barbed_gold_ring = registerItem("barbed_gold_ring", new ItemAccessory(ItemRarity.RARE, AccessoryType.RING).effect(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(1.0F, 3.0F, false)), AetherCreativeTabs.tabAccessories);
 
+		solar_band = registerItem("solar_band", new ItemAccessory(ItemRarity.EPIC, AccessoryType.RING).effect(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new InDirectSunlightRule())), AetherCreativeTabs.tabAccessories);
+		
+		lunar_band = registerItem("lunar_band", new ItemAccessory(ItemRarity.EPIC, AccessoryType.RING).effect(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new InDirectMoonlightRule())), AetherCreativeTabs.tabAccessories);
+		
+		ring_of_growth = registerItem("ring_of_growth", new ItemAccessory(ItemRarity.RARE, AccessoryType.RING).effect(EntityEffects.MODIFY_MAX_HEALTH, new ModifyMaxHealthEffect.Instance(1.0F)), AetherCreativeTabs.tabAccessories);
+		
+		plague_coil = registerItem("plague_coil", new ItemAccessory(ItemRarity.MYTHIC, AccessoryType.RING).effect(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(2.0F, 6.0F, false)).effect(EntityEffects.MODIFY_MAX_HEALTH, new ModifyMaxHealthEffect.Instance(-2.0F)), AetherCreativeTabs.tabAccessories);
+		
+		fleeting_ring = registerItem("fleeting_ring", new ItemAccessory(ItemRarity.COMMON, AccessoryType.RING).effect(EntityEffects.MODIFY_SPEED, new ModifySpeedEffect.Instance((float)SharedMonsterAttributes.movementSpeed.getDefaultValue() * 0.10F)), AetherCreativeTabs.tabAccessories);
+		
+		lesser_ring_of_growth = registerItem("lesser_ring_of_growth", new ItemAccessory(ItemRarity.COMMON, AccessoryType.RING).effect(EntityEffects.MODIFY_MAX_HEALTH, new ModifyMaxHealthEffect.Instance(0.5F)), AetherCreativeTabs.tabAccessories);
+		
+		winged_ring = registerItem("winged_ring", new ItemAccessory(ItemRarity.RARE, AccessoryType.RING).effect(EntityEffects.MODIFY_SPEED, new ModifySpeedEffect.Instance((float)SharedMonsterAttributes.movementSpeed.getDefaultValue() * 0.20F)), AetherCreativeTabs.tabAccessories);
+		
+		life_coil = registerItem("life_coil", new ItemAccessory(ItemRarity.MYTHIC, AccessoryType.RING).effect(EntityEffects.MODIFY_MAX_HEALTH, new ModifyMaxHealthEffect.Instance(2.0F)).effect(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(-4.0F)), AetherCreativeTabs.tabAccessories);
+		
+		iron_barbed_wire = registerItem("iron_barbed_wire", new ItemAccessory(ItemRarity.COMMON, AccessoryType.CHARM).effect(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(0.2F)), AetherCreativeTabs.tabAccessories);
+		
+		wisdom_bauble = registerItem("wisdom_bauble", new ItemAccessory(ItemRarity.RARE, AccessoryType.CHARM).effect(EntityEffects.MODIFY_XP_COLLECTION, new ModifyXPCollectionEffect.Instance(0.10F)), AetherCreativeTabs.tabAccessories);
+		
+		bone_shard = registerItem("bone_shard", new ItemAccessory(ItemRarity.RARE, AccessoryType.CHARM).effect(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(0.3F)), AetherCreativeTabs.tabAccessories);
+		
+		moa_feather = registerItem("moa_feather", new ItemAccessory(ItemRarity.RARE, AccessoryType.CHARM).effect(EntityEffects.MODIFY_SPEED, new ModifySpeedEffect.Instance((float)SharedMonsterAttributes.movementSpeed.getDefaultValue() * 0.03F)), AetherCreativeTabs.tabAccessories);
+		
+		blight_ward = registerItem("blight_ward", new ItemAccessory(ItemRarity.RARE, AccessoryType.CHARM), AetherCreativeTabs.tabAccessories);
+		
+		skyroot_twig = registerItem("skyroot_twig", new ItemAccessory(ItemRarity.RARE, AccessoryType.CHARM), AetherCreativeTabs.tabAccessories);
+		
+		gold_barbed_wire = registerItem("gold_barbed_wire", new ItemAccessory(ItemRarity.RARE, AccessoryType.CHARM).effect(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(0.1F, 0.5F, true)), AetherCreativeTabs.tabAccessories);
+		
+		ambrosium_talisman = registerItem("ambrosium_talisman", new ItemAccessory(ItemRarity.RARE, AccessoryType.CHARM).effect(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new HoldingItemRule(new ItemStack(ItemsAether.ambrosium_shard)))), AetherCreativeTabs.tabAccessories);
+		
+		carrion_petal = registerItem("carrion_petal", new ItemAccessory(ItemRarity.EPIC, AccessoryType.CHARM).effect(EntityEffects.PAUSE_HUNGER, new EffectInstance(new InDirectSunlightRule())), AetherCreativeTabs.tabAccessories);
+		
+		moonlit_petal = registerItem("moonlit_petal", new ItemAccessory(ItemRarity.EPIC, AccessoryType.CHARM).effect(EntityEffects.PAUSE_HUNGER, new EffectInstance(new InDirectMoonlightRule())), AetherCreativeTabs.tabAccessories);
+		
+		cockatrice_heart = registerItem("cockatrice_heart", new ItemAccessory(ItemRarity.EPIC, AccessoryType.CHARM).effect(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new InBiomeRule(BiomeGenBase.beach))), AetherCreativeTabs.tabAccessories);
+
+		damaged_moa_feather = registerItem("damaged_moa_feather", new ItemAccessory(ItemRarity.EPIC, AccessoryType.CHARM).effect(EntityEffects.MODIFY_SPEED, new ModifySpeedEffect.Instance((float)SharedMonsterAttributes.movementSpeed.getDefaultValue() * 0.10F, new OutOfCombatRule(160))), AetherCreativeTabs.tabAccessories);
+		
+		osseous_bane = registerItem("osseous_bane", new ItemAccessory(ItemRarity.EPIC, AccessoryType.CHARM).effect(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(2.0F, new DamagingMobRule(EntitySkeleton.class, "Skeleton"))), AetherCreativeTabs.tabAccessories);
+		
+		rot_bane = registerItem("rot_bane", new ItemAccessory(ItemRarity.EPIC, AccessoryType.CHARM).effect(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(1.0F, new DamagingUndeadRule())), AetherCreativeTabs.tabAccessories);
+		
+		continuum_talisman = registerItem("continuum_talisman", new ItemAccessory(ItemRarity.MYTHIC, AccessoryType.CHARM), AetherCreativeTabs.tabAccessories);
+		
+		labyrinth_plans = registerItem("labyrinth_plans", new ItemAccessory(ItemRarity.MYTHIC, AccessoryType.CHARM), AetherCreativeTabs.tabAccessories);
+		
 		registerItemProperties();
 	}
 
