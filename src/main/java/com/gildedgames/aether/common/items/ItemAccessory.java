@@ -120,7 +120,7 @@ public class ItemAccessory extends Item
 			{
 				for (String line : rule.getUnlocalizedDesc())
 				{
-					infoList.add(EnumChatFormatting.GRAY + "â€¢ " + I18n.format(line).replace("Format error: ", ""));
+					infoList.add(EnumChatFormatting.GRAY + "• " + I18n.format(line).replace("Format error: ", ""));
 				}
 			}
 		}
