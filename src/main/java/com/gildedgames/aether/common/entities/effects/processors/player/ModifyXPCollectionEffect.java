@@ -58,13 +58,13 @@ public class ModifyXPCollectionEffect implements EffectProcessorPlayer<Instance>
 	}
 
 	@Override
-	public void formatLocalizedDesc(List<String> localizedDesc, Entity source, Instance instance)
+	public String[] getFormatParameters(Entity source, Instance instance)
 	{
 		float percentMod = instance.getAttributes().getFloat("percentMod") * 100;
 
 		String prefix = percentMod > 0 ? "§9+" : "§c";
 		
-		localizedDesc.set(0, String.format(localizedDesc.get(0), prefix + this.displayValue(percentMod) + "%"));
+		return new String[] { (prefix + this.displayValue(percentMod) + "%") };
 	}
 
 	@Override

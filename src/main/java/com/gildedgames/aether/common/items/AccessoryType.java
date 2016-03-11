@@ -9,7 +9,8 @@ public enum AccessoryType
 	HANDWEAR("gui.slot.handwear"),
 	RELIC("gui.slot.relic"),
 	CHARM("gui.slot.charm"),
-	ARTIFACT("gui.slot.artifact");
+	ARTIFACT("gui.slot.artifact"),
+	AMMUNITION("gui.slot.ammunition");
 	
 	private final String unlocalizedName;
 

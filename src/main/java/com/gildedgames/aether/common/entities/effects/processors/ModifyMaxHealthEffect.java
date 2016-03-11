@@ -27,8 +27,8 @@ public class ModifyMaxHealthEffect implements EffectProcessor<Instance>
 		{
 			super(rules);
 		
-			this.getAttributes().setFloat("maxHealthMod", maxHealthMod * 0.1F);
-			this.modifier = new AttributeModifier(UUID.randomUUID(), "Extra Max Health", maxHealthMod * 0.1F, 2).setSaved(false);
+			this.getAttributes().setFloat("maxHealthMod", maxHealthMod);
+			this.modifier = new AttributeModifier(UUID.randomUUID(), "Extra Max Health", maxHealthMod, 2).setSaved(false);
 		}
 		
 		public AttributeModifier getModifier()
@@ -62,15 +62,17 @@ public class ModifyMaxHealthEffect implements EffectProcessor<Instance>
 	}
 	
 	@Override
-	public void formatLocalizedDesc(List<String> localizedDesc, Entity source, Instance instance)
+	public String[] getFormatParameters(Entity source, Instance instance)
 	{
 		float maxHealthMod = instance.getAttributes().getFloat("maxHealthMod");
 		
 		String prefix = maxHealthMod > 0 ? "§9+" : "§c";
 		
-		float value = maxHealthMod * 10;
+		float value = maxHealthMod * 10.0F;
+		
+		String par = prefix + (value == (int)Math.floor(value) ? String.valueOf((int)Math.floor(value)) : String.valueOf(value));
 
-		localizedDesc.set(0, String.format(localizedDesc.get(0), prefix + (value == (int)Math.floor(value) ? String.valueOf((int)Math.floor(value)) : value)));
+		return new String[] { par };
 	}
 
 	@Override

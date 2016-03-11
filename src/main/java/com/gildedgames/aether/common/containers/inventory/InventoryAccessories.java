@@ -22,7 +22,7 @@ import com.gildedgames.util.core.nbt.NBT;
 
 public class InventoryAccessories implements IInventory, NBT
 {
-	private static final int INVENTORY_SIZE = 15;
+	private static final int INVENTORY_SIZE = 16;
 
 	public static final AccessoryType[] slotTypes = new AccessoryType[]
 			{
@@ -33,6 +33,7 @@ public class InventoryAccessories implements IInventory, NBT
 					AccessoryType.RELIC,
 					AccessoryType.SHIELD,
 					AccessoryType.HANDWEAR,
+					AccessoryType.AMMUNITION,
 					AccessoryType.COMPANION,
 					AccessoryType.ARTIFACT,
 					AccessoryType.CHARM,

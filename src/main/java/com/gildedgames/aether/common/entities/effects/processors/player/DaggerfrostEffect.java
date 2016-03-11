@@ -33,12 +33,6 @@ public class DaggerfrostEffect implements EffectProcessorPlayer<EffectInstance>
 	}
 	
 	@Override
-	public void formatLocalizedDesc(List<String> localizedDesc, Entity source, EffectInstance instance)
-	{
-		
-	}
-	
-	@Override
 	public void apply(Entity source, EffectInstance instance, List<EffectInstance> all) {}
 
 	@Override
@@ -80,5 +74,8 @@ public class DaggerfrostEffect implements EffectProcessorPlayer<EffectInstance>
 	
 	@Override
 	public void onPickupXP(PlayerPickupXpEvent event, EntityPlayer source, List<EffectInstance> instances) {}
+
+	@Override
+	public String[] getFormatParameters(Entity source, EffectInstance instance) { return new String[] {}; }
 
 }

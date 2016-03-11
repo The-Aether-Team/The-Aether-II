@@ -74,21 +74,25 @@ public class ModifyDamageEffect implements EffectProcessor<Instance>
 	}
 	
 	@Override
-	public void formatLocalizedDesc(List<String> localizedDesc, Entity source, Instance instance)
+	public String[] getFormatParameters(Entity source, Instance instance)
 	{
 		float min = instance.getAttributes().getFloat("min");
 		float max = instance.getAttributes().getFloat("max");
 		
 		String prefix = min > 0 ? "§9+" : "§c";
 		
+		String par = "";
+		
 		if (min == max)
 		{
-			localizedDesc.set(0, String.format(localizedDesc.get(0), prefix + this.displayValue(min)));
+			par = prefix + this.displayValue(min);
 		}
 		else
 		{
-			localizedDesc.set(0, String.format(localizedDesc.get(0), prefix + this.displayValue(min) + "-" + this.displayValue(max)));
+			par = prefix + this.displayValue(min) + "-" + this.displayValue(max);
 		}
+		
+		return new String[] { par };
 	}
 	
 	@Override

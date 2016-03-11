@@ -62,9 +62,9 @@ public class DoubleDropEffect implements EffectProcessor<Instance>
 	}
 	
 	@Override
-	public void formatLocalizedDesc(List<String> localizedDesc, Entity source, Instance instance)
+	public String[] getFormatParameters(Entity source, Instance instance)
 	{
-		localizedDesc.set(1, String.format(localizedDesc.get(1), (int)(instance.getAttributes().getFloat("percentChance") * 10)));
+		return new String[] { String.valueOf(((int)instance.getAttributes().getFloat("percentChance") * 10)) };
 	}
 
 	@Override

@@ -190,6 +190,6 @@ public class FreezeBlocksEffect implements EffectProcessor<Instance>
 	public void onAttack(LivingHurtEvent event, Entity source, List<Instance> all) {}
 
 	@Override
-	public void formatLocalizedDesc(List<String> localizedDesc, Entity source, Instance instance) {}
+	public String[] getFormatParameters(Entity source, Instance instance) { return new String[] {}; }
 
 }

@@ -279,6 +279,7 @@ gui.slot.ring=Ring
 gui.slot.handwear=Handwear
 gui.slot.charm=Charm
 gui.slot.artifact=Artifact
+gui.slot.ammunition=Ammunition
 
 #Ability Tooltips
 ability.breatheUnderwater.name=Underwater Breathing
@@ -297,14 +298,14 @@ ability.cosmetic=§eCosmetic
 ability.breatheUnderwater.desc=§2Water Breathing
 ability.daggerfrost.desc=§2Snowballs Cause Damage
 ability.doubleDrops.desc1=§2Double Mob Drops
-ability.doubleDrops.desc2=§7• +%d%% Chance
-ability.extraDamage.desc=%d Attack Damage
+ability.doubleDrops.desc2=§7• +%s%% Chance
+ability.extraDamage.desc=%s Attack Damage
 ability.freezeBlocks.desc=§2Freezes Nearby Blocks
 ability.pauseHunger.desc=§2Stops Hunger
 ability.regenerateHealth.desc=§2Regenerates Health
-ability.maxHealthMod.desc=%d Max Health
-ability.movementSpeedMod.desc=%d Movement Speed
-ability.modifyXPCollection.desc=%d XP Collected
+ability.maxHealthMod.desc=%s Max Health
+ability.movementSpeedMod.desc=%s Movement Speed
+ability.modifyXPCollection.desc=%s XP Collected
 
 # Tabs
 tab.accessories=Accessories

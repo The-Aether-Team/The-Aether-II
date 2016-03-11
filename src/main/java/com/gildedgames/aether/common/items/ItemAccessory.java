@@ -92,7 +92,7 @@ public class ItemAccessory extends Item
 		
 		if (effects.getEffectPairs().size() <= 0)
 		{
-			infoList.add(I18n.format("ability.cosmetic").replace("Format error: ", ""));
+			infoList.add(I18n.format("ability.cosmetic"));
 		}
 
 		for (Pair<EffectProcessor, EffectInstance> effect : effects.getEffectPairs())
@@ -104,10 +104,8 @@ public class ItemAccessory extends Item
 
 			for (String line : processor.getUnlocalizedDesc(player, instance))
 			{
-				localizedDesc.add(I18n.format(line).replace("Format error: ", ""));
+				localizedDesc.add(I18n.format(line, (Object[])processor.getFormatParameters(player, instance)));
 			}
-			
-			processor.formatLocalizedDesc(localizedDesc, player, instance);
 			
 			infoList.addAll(localizedDesc);
 			
@@ -120,7 +118,7 @@ public class ItemAccessory extends Item
 			{
 				for (String line : rule.getUnlocalizedDesc())
 				{
-					infoList.add(EnumChatFormatting.GRAY + "• " + I18n.format(line).replace("Format error: ", ""));
+					infoList.add(EnumChatFormatting.GRAY + "\u2022 " + I18n.format(line).replace("Format error: ", ""));
 				}
 			}
 		}

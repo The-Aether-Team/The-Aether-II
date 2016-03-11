@@ -32,7 +32,7 @@ public abstract class AbstractEffectProcessor<I extends EffectInstance> implemen
 	}
 
 	@Override
-	public void formatLocalizedDesc(List<String> localizedDesc, Entity source, I instance) {}
+	public String[] getFormatParameters(Entity source, EffectInstance instance) { return new String[] {}; }
 
 	@Override
 	public void apply(Entity source, I instance, List<I> all) {}

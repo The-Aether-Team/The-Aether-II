@@ -41,6 +41,7 @@ public class SlotAccessory extends Slot
 		icons.put(AccessoryType.SHIELD, event.map.registerSprite(AetherCore.getResource("gui/slots/slot_shield")));
 		icons.put(AccessoryType.CHARM, event.map.registerSprite(AetherCore.getResource("gui/slots/slot_charm")));
 		icons.put(AccessoryType.ARTIFACT, event.map.registerSprite(AetherCore.getResource("gui/slots/slot_artifact")));
+		icons.put(AccessoryType.AMMUNITION, event.map.registerSprite(AetherCore.getResource("gui/slots/slot_ammunition")));
 	}
 
 	@Override

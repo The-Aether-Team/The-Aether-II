@@ -1,9 +1,6 @@
 package com.gildedgames.aether.client.gui.container;
 
-import com.gildedgames.aether.common.containers.ContainerAccessories;
-import com.gildedgames.aether.common.containers.slots.SlotAccessory;
-import com.gildedgames.aether.common.items.AccessoryType;
-import com.gildedgames.aether.common.player.PlayerAether;
+import java.util.Collections;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
@@ -12,7 +9,10 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.Collections;
+import com.gildedgames.aether.common.containers.ContainerAccessories;
+import com.gildedgames.aether.common.containers.slots.SlotAccessory;
+import com.gildedgames.aether.common.items.AccessoryType;
+import com.gildedgames.aether.common.player.PlayerAether;
 
 public class GuiAccessories extends GuiContainer
 {
@@ -20,6 +20,8 @@ public class GuiAccessories extends GuiContainer
 
 	private static final ResourceLocation textureAccessories = new ResourceLocation("aether", "textures/gui/inventory/accessories/accessories.png");
 
+	private static final ResourceLocation textureAccessoriesPattern = new ResourceLocation("aether", "textures/gui/inventory/accessories/accessories_pattern.png");
+	
 	private static final ResourceLocation textureBackpack = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack.png");
 
 	private static final ResourceLocation textureBackpackCreative = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack_creative.png");
@@ -57,7 +59,13 @@ public class GuiAccessories extends GuiContainer
 
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
-		this.drawTexturedModalRect(this.width / 2 - 90 - 183 / 2, this.height / 2 - 162 / 2, 0, 0, 183, 171);
+		this.drawTexturedModalRect(this.width / 2 - 90 - 183 / 2, this.height / 2 - 166 / 2, 0, 0, 183, 171);
+		
+		this.mc.renderEngine.bindTexture(textureAccessoriesPattern);
+
+		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+
+		this.drawTexturedModalRect(this.width / 2 - 90 - 183 / 2, this.height / 2 - 166 / 2, 0, 0, 183, 171);
 
 		this.mc.renderEngine.bindTexture(aePlayer.getEntity().capabilities.isCreativeMode ? textureBackpackCreative : textureBackpack);
 
@@ -100,6 +108,28 @@ public class GuiAccessories extends GuiContainer
 						AccessoryType type = ((SlotAccessory) slot).getType();
 
 						unlocalizedTooltip = type.getUnlocalizedName();
+					}
+					
+					final int dif = this.aePlayer.getEntity().inventory.getSizeInventory() - 1;
+					
+					if (slot.getSlotIndex() == dif)
+					{
+						unlocalizedTooltip = "Helmet";
+					}
+					
+					if (slot.getSlotIndex() == dif - 1)
+					{
+						unlocalizedTooltip = "Chestplate";
+					}
+					
+					if (slot.getSlotIndex() == dif - 2)
+					{
+						unlocalizedTooltip = "Leggings";
+					}
+					
+					if (slot.getSlotIndex() == dif - 3)
+					{
+						unlocalizedTooltip = "Boots";
 					}
 
 					break;

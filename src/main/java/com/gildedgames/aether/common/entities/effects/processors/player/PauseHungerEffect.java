@@ -89,7 +89,7 @@ public class PauseHungerEffect implements EffectProcessorPlayer<EffectInstance>
 	public void onAttack(LivingHurtEvent event, Entity source, List<EffectInstance> all) {}
 
 	@Override
-	public void formatLocalizedDesc(List<String> localizedDesc, Entity source, EffectInstance instance) {}
+	public String[] getFormatParameters(Entity source, EffectInstance instance) { return new String[] {}; }
 
 	@Override
 	public void onPickupXP(PlayerPickupXpEvent event, EntityPlayer source, List<EffectInstance> all) {}

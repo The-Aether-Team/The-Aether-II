@@ -13,7 +13,7 @@ public interface EffectProcessor<I extends EffectInstance>
 	
 	String[] getUnlocalizedDesc(Entity source, I instance);
 	
-	void formatLocalizedDesc(List<String> localizedDesc, Entity source, I instance);
+	String[] getFormatParameters(Entity source, I instance);
 
 	/**
 	 * Called once when this ability is added to an entity.

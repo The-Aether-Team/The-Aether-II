@@ -78,7 +78,7 @@ public class ModifySpeedEffect implements EffectProcessor<Instance>
 	}
 	
 	@Override
-	public void formatLocalizedDesc(List<String> localizedDesc, Entity source, Instance instance)
+	public String[] getFormatParameters(Entity source, Instance instance)
 	{
 		float movementSpeedMod = instance.getAttributes().getFloat("movementSpeedMod");
 		
@@ -86,7 +86,9 @@ public class ModifySpeedEffect implements EffectProcessor<Instance>
 		
 		float value = (float) (movementSpeedMod / SharedMonsterAttributes.movementSpeed.getDefaultValue()) * 100;
 
-		localizedDesc.set(0, String.format(localizedDesc.get(0), prefix + (int)(value) + "%"));
+		String par = prefix + (int)(value) + "%";
+		
+		return new String[] { par };
 	}
 
 	@Override
