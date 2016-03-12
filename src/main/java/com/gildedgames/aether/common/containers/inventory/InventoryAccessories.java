@@ -26,13 +26,13 @@ public class InventoryAccessories implements IInventory, NBT
 
 	public static final AccessoryType[] slotTypes = new AccessoryType[]
 			{
+					AccessoryType.RELIC,
+					AccessoryType.RELIC,
+					AccessoryType.HANDWEAR,
+					AccessoryType.SHIELD,
 					AccessoryType.RING,
 					AccessoryType.RING,
 					AccessoryType.NECKWEAR,
-					AccessoryType.RELIC,
-					AccessoryType.RELIC,
-					AccessoryType.SHIELD,
-					AccessoryType.HANDWEAR,
 					AccessoryType.AMMUNITION,
 					AccessoryType.COMPANION,
 					AccessoryType.ARTIFACT,
