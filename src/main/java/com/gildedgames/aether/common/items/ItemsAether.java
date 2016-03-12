@@ -346,7 +346,7 @@ public class ItemsAether
 		
 		gold_barbed_wire = registerItem("gold_barbed_wire", new ItemAccessory(ItemRarity.RARE, AccessoryType.CHARM).effect(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(0.1F, 0.5F, true)), AetherCreativeTabs.tabAccessories);
 		
-		ambrosium_talisman = registerItem("ambrosium_talisman", new ItemAccessory(ItemRarity.RARE, AccessoryType.CHARM).effect(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new HoldingItemRule(new ItemStack(ItemsAether.ambrosium_shard)))), AetherCreativeTabs.tabAccessories);
+		ambrosium_talisman = registerItem("ambrosium_talisman", new ItemAccessory(ItemRarity.GODLY, AccessoryType.CHARM).effect(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new HoldingItemRule(new ItemStack(ItemsAether.ambrosium_shard)))), AetherCreativeTabs.tabAccessories);
 		
 		carrion_petal = registerItem("carrion_petal", new ItemAccessory(ItemRarity.EPIC, AccessoryType.CHARM).effect(EntityEffects.PAUSE_HUNGER, new EffectInstance(new InDirectSunlightRule())), AetherCreativeTabs.tabAccessories);
 		

@@ -14,23 +14,27 @@ import com.gildedgames.aether.common.containers.slots.SlotAccessory;
 import com.gildedgames.aether.common.items.AccessoryType;
 import com.gildedgames.aether.common.player.PlayerAether;
 
-public class GuiAccessories extends GuiContainer
+public class GuiEquipment extends GuiContainer
 {
 	// TODO: COINBAR AND COMPANIONS-- SEE TRELLO
 
-	private static final ResourceLocation textureAccessories = new ResourceLocation("aether", "textures/gui/inventory/accessories/accessories.png");
+	private static final ResourceLocation textureAccessories = new ResourceLocation("aether", "textures/gui/inventory/accessories/equipment.png");
 
-	private static final ResourceLocation textureAccessoriesPattern = new ResourceLocation("aether", "textures/gui/inventory/accessories/accessories_pattern.png");
+	private static final ResourceLocation textureAccessoriesPattern = new ResourceLocation("aether", "textures/gui/inventory/accessories/equipment_pattern.png");
 	
 	private static final ResourceLocation textureBackpack = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack.png");
 
 	private static final ResourceLocation textureBackpackCreative = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack_creative.png");
 
+	private static final ResourceLocation textureBackpackPattern = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack_pattern.png");
+
+	private static final ResourceLocation textureBackpackCreativePattern = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack_creative_pattern.png");
+	
 //	private static final ResourceLocation TEXTURE_COINBAR = new ResourceLocation("aether", "textures/gui/coinbar.png");
 
 	private final PlayerAether aePlayer;
 
-	public GuiAccessories(PlayerAether aePlayer)
+	public GuiEquipment(PlayerAether aePlayer)
 	{
 		super(new ContainerAccessories(aePlayer));
 
@@ -71,7 +75,13 @@ public class GuiAccessories extends GuiContainer
 
 		this.drawTexturedModalRect(this.width / 2 + 90 - 176 / 2, this.height / 2 - 166 / 2, 0, 0, 176, 166);
 
-		this.fontRendererObj.drawString(I18n.format("container.crafting"), this.width / 2 + 88, this.height / 2 - 135 / 2, 4210752);
+		this.fontRendererObj.drawString(I18n.format("container.crafting"), this.width / 2 + (this.aePlayer.getEntity().capabilities.isCreativeMode ? 70 : 51), this.height / 2 - 135 / 2, 4210752);
+		
+		this.mc.renderEngine.bindTexture(aePlayer.getEntity().capabilities.isCreativeMode ? textureBackpackCreativePattern : textureBackpackPattern);
+
+		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+		
+		this.drawTexturedModalRect(this.width / 2 + 90 - 176 / 2, this.height / 2 - 166 / 2, 0, 0, 176, 166);
 
 		this.drawPlayer(mouseX, mouseY);
 		

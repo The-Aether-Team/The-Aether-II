@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client;
 
-import com.gildedgames.aether.client.gui.tab.TabAccessories;
+import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.client.lang.AetherLanguageManager;
 import com.gildedgames.aether.client.models.blocks.AetherBlockModels;
 import com.gildedgames.aether.client.models.items.AetherItemModels;
@@ -42,7 +42,7 @@ public class ClientProxy extends CommonProxy
 		MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
 		MinecraftForge.EVENT_BUS.register(new SoundEventHandler());
 
-		TabModule.api().getInventoryGroup().getSide(Side.CLIENT).add(new TabAccessories());
+		TabModule.api().getInventoryGroup().getSide(Side.CLIENT).add(new TabEquipment());
 
 		((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(AetherLanguageManager.INSTANCE);
 	}

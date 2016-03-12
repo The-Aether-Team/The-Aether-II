@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.network;
 
-import com.gildedgames.aether.client.gui.container.GuiAccessories;
+import com.gildedgames.aether.client.gui.container.GuiEquipment;
 import com.gildedgames.aether.common.containers.ContainerAccessories;
 import com.gildedgames.aether.common.containers.ContainerSkyrootWorkbench;
 import com.gildedgames.aether.common.player.PlayerAether;
@@ -43,7 +43,7 @@ public class AetherGuiHandler implements IGuiHandler
 		case SKYROOT_WORKBENCH_ID:
 			return new GuiCrafting(player.inventory, world, new BlockPos(x, y, z));
 		case INVENTORY_ACCESSORIES_ID:
-			return new GuiAccessories(PlayerAether.get(player));
+			return new GuiEquipment(PlayerAether.get(player));
 		default:
 			return null;
 		}

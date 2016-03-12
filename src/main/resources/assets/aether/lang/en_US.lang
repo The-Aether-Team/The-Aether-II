@@ -308,4 +308,4 @@ ability.movementSpeedMod.desc=%s Movement Speed
 ability.modifyXPCollection.desc=%s XP Collected
 
 # Tabs
-tab.accessories=Accessories
+tab.equipment=Equipment

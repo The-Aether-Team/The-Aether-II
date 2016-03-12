@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.gui.tab;
 
-import com.gildedgames.aether.client.gui.container.GuiAccessories;
+import com.gildedgames.aether.client.gui.container.GuiEquipment;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.ContainerAccessories;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
@@ -19,20 +19,20 @@ import net.minecraft.network.play.client.C0DPacketCloseWindow;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class TabAccessories implements ITab
+public class TabEquipment implements ITab
 {
-	private static final ResourceLocation iconResource = AetherCore.getResource("textures/gui/tabs/accessories.png");
+	private static final ResourceLocation iconResource = AetherCore.getResource("textures/gui/tabs/equipment.png");
 
 	@Override
 	public String getUnlocalizedName()
 	{
-		return "tab.accessories";
+		return "tab.equipment";
 	}
 
 	@Override
 	public boolean isTabValid(GuiScreen gui)
 	{
-		return gui instanceof GuiInventory || gui instanceof GuiAccessories;
+		return gui instanceof GuiInventory || gui instanceof GuiEquipment;
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class TabAccessories implements ITab
 	@Override
 	public void onOpen(EntityPlayer player)
 	{
-		Minecraft.getMinecraft().displayGuiScreen(new GuiAccessories(PlayerAether.get(player)));
+		Minecraft.getMinecraft().displayGuiScreen(new GuiEquipment(PlayerAether.get(player)));
 	}
 
 	@Override

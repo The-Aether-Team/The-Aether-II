@@ -28,7 +28,7 @@ public class ModifyMaxHealthEffect implements EffectProcessor<Instance>
 			super(rules);
 		
 			this.getAttributes().setFloat("maxHealthMod", maxHealthMod);
-			this.modifier = new AttributeModifier(UUID.randomUUID(), "Extra Max Health", maxHealthMod, 2).setSaved(false);
+			this.modifier = new AttributeModifier(UUID.randomUUID(), "Extra Max Health", maxHealthMod / 10, 2).setSaved(false);
 		}
 		
 		public AttributeModifier getModifier()
@@ -68,7 +68,7 @@ public class ModifyMaxHealthEffect implements EffectProcessor<Instance>
 		
 		String prefix = maxHealthMod > 0 ? "§9+" : "§c";
 		
-		float value = maxHealthMod * 10.0F;
+		float value = maxHealthMod;
 		
 		String par = prefix + (value == (int)Math.floor(value) ? String.valueOf((int)Math.floor(value)) : String.valueOf(value));
 

@@ -3,7 +3,7 @@ package com.gildedgames.aether.common;
 import java.io.File;
 import java.util.Random;
 
-import com.gildedgames.aether.client.gui.tab.TabAccessories;
+import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import com.gildedgames.aether.common.party.PartyMemberTracker;
 import com.gildedgames.aether.common.player.PlayerAether;
@@ -70,7 +70,7 @@ public class CommonProxy
 
 		RecipesAether.preInit();
 
-		TabModule.api().getInventoryGroup().getSide(Side.SERVER).add(new TabAccessories());
+		TabModule.api().getInventoryGroup().getSide(Side.SERVER).add(new TabEquipment());
 
 		EntityHookModule.api().registerHookProvider(PlayerAether.PROVIDER);
 		EntityHookModule.api().registerHookProvider(EntityEffects.PROVIDER);

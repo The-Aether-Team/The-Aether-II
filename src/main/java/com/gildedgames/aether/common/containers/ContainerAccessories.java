@@ -70,11 +70,34 @@ public class ContainerAccessories extends ContainerPlayer
 		boots.xDisplayPosition = 37;
 		boots.yDisplayPosition = 70;
 		
-		this.binSlot = new Slot(ContainerAccessories.dumbInventory, this.inventorySlots.size(), 228, 25);
+		Slot craftResult = this.inventorySlots.get(0);
+		
+		Slot craft1 = this.inventorySlots.get(1);
+		Slot craft2 = this.inventorySlots.get(2);
+		Slot craft3 = this.inventorySlots.get(3);
+		Slot craft4 = this.inventorySlots.get(4);
+
+		this.binSlot = new Slot(ContainerAccessories.dumbInventory, this.inventorySlots.size(), 213, 26);
 
 		if (this.aePlayer.getEntity().capabilities.isCreativeMode)
 		{
 			this.addSlotToContainer(this.binSlot);
+			
+			craftResult.xDisplayPosition -= 17;
+			
+			craft1.xDisplayPosition -= 17;
+			craft2.xDisplayPosition -= 17;
+			craft3.xDisplayPosition -= 17;
+			craft4.xDisplayPosition -= 17;
+		}
+		else
+		{
+			craftResult.xDisplayPosition -= 36;
+			
+			craft1.xDisplayPosition -= 36;
+			craft2.xDisplayPosition -= 36;
+			craft3.xDisplayPosition -= 36;
+			craft4.xDisplayPosition -= 36;
 		}
 		
 		int slotID = 0;
