@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.sound;
 
-import com.gildedgames.aether.client.sound.rules.AetherMusicGenerator;
+import com.gildedgames.aether.client.sound.generators.AetherMusicGenerator;
 
 public class AetherSounds
 {

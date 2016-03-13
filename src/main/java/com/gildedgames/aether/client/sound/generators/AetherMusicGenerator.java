@@ -1,4 +1,4 @@
-package com.gildedgames.aether.client.sound.rules;
+package com.gildedgames.aether.client.sound.generators;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.player.PlayerAether;
@@ -20,11 +20,17 @@ public class AetherMusicGenerator implements IMusicGenerator
 
 		if (world.getWorldTime() > 12800L || world.getWorldTime() < 22300L)
 		{
-			return new ResourceLocation("aether:aemusic.night");
+			return new ResourceLocation("aether:aemusic.day");
 		}
 		else
 		{
-			return new ResourceLocation("aether:aemusic.day");
+			return new ResourceLocation("aether:aemusic.night");
 		}
+	}
+
+	@Override
+	public int getQuietPeriod(PlayerAether player)
+	{
+		return player.getEntity().getEntityWorld().rand.nextInt(800) + 1800;
 	}
 }

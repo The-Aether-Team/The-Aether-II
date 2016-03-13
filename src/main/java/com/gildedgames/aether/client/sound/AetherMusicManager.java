@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.sound;
 
-import com.gildedgames.aether.client.sound.rules.IMusicGenerator;
+import com.gildedgames.aether.client.sound.generators.IMusicGenerator;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.client.Minecraft;
@@ -19,7 +19,7 @@ public class AetherMusicManager
 
 	private ISound currentSong, currentRecord;
 
-	private int musicTimer;
+	private int quietPeriod;
 
 	public void addGenerator(IMusicGenerator generator)
 	{
@@ -30,14 +30,14 @@ public class AetherMusicManager
 	{
 		if (this.canPlayMusic() && !this.isPlayingMusic())
 		{
-			if (this.musicTimer <= 0)
+			if (this.quietPeriod <= 0)
 			{
 				IMusicGenerator generator = this.getNextPlayableSong(aePlayer);
 
 				if (generator == null)
 				{
 					// If nothing can be played, wait 10 seconds
-					this.musicTimer += 200;
+					this.quietPeriod += 200;
 				}
 				else
 				{
@@ -45,12 +45,11 @@ public class AetherMusicManager
 
 					this.playMusic(resource);
 
-					// Waits 90 seconds after the song finishes before trying to play another
-					this.musicTimer = 1800;
+					this.quietPeriod = generator.getQuietPeriod(aePlayer);
 				}
 			}
 
-			this.musicTimer--;
+			this.quietPeriod--;
 		}
 	}
 
@@ -69,8 +68,6 @@ public class AetherMusicManager
 
 	private void playMusic(ResourceLocation location)
 	{
-		AetherCore.LOGGER.info("Playing music " + location);
-
 		if (this.isPlayingMusic())
 		{
 			this.stopMusic();

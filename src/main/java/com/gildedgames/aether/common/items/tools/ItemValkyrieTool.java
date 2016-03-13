@@ -7,5 +7,7 @@ public class ItemValkyrieTool extends ItemAetherTool
 	public ItemValkyrieTool(EnumToolType toolType)
 	{
 		super(AetherMaterials.LEGENDARY_TOOL, "valkyrie", toolType);
+
+		this.setHarvestLevel(toolType.getToolClass(), 3);
 	}
 }
