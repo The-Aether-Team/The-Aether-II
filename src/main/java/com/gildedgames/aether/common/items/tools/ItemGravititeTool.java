@@ -50,6 +50,6 @@ public class ItemGravititeTool extends ItemAetherTool
 	@Override
 	protected boolean isAbilityPassive()
 	{
-		return true;
+		return false;
 	}
 }

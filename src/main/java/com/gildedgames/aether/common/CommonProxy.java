@@ -10,6 +10,9 @@ import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.util.modules.entityhook.EntityHookModule;
 import com.gildedgames.util.modules.entityhook.impl.providers.PlayerHookProvider;
 import com.gildedgames.util.modules.tab.TabModule;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
@@ -110,5 +113,10 @@ public class CommonProxy
 	public File getAetherStorageDir()
 	{
 		return this.storageDir;
+	}
+
+	public void setExtendedReachDistance(EntityPlayer entity, float distance)
+	{
+		((EntityPlayerMP) entity).theItemInWorldManager.setBlockReachDistance((entity.capabilities.isCreativeMode ? 5.0f : 4.0f) + distance);
 	}
 }

@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items;
 
+import com.gildedgames.aether.common.items.tools.ItemValkyrieTool;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBolt;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
 import net.minecraft.creativetab.CreativeTabs;
@@ -72,6 +73,8 @@ public class ItemsAether
 	public static ItemZaniteTool zanite_axe, zanite_pickaxe, zanite_shovel;
 
 	public static ItemGravititeTool gravitite_axe, gravitite_pickaxe, gravitite_shovel;
+
+	public static ItemValkyrieTool valkyrie_axe, valkyrie_pickaxe, valkyrie_shovel;
 
 	public static ItemAetherSword skyroot_sword, holystone_sword, zanite_sword, gravitite_sword;
 
@@ -161,6 +164,10 @@ public class ItemsAether
 		gravitite_pickaxe = registerItem("gravitite_pickaxe", new ItemGravititeTool(EnumToolType.PICKAXE));
 		gravitite_shovel = registerItem("gravitite_shovel", new ItemGravititeTool(EnumToolType.SHOVEL));
 		gravitite_sword = registerItem("gravitite_sword", new ItemGravititeSword());
+
+		valkyrie_axe = registerItem("valkyrie_axe", new ItemValkyrieTool(EnumToolType.AXE));
+		valkyrie_pickaxe = registerItem("valkyrie_pickaxe", new ItemValkyrieTool(EnumToolType.PICKAXE));
+		valkyrie_shovel = registerItem("valkyrie_shovel", new ItemValkyrieTool(EnumToolType.SHOVEL));
 
 		zanite_helmet = registerItem("zanite_helmet", new ItemZaniteArmor(0));
 		zanite_chestplate = registerItem("zanite_chestplate", new ItemZaniteArmor(1));
