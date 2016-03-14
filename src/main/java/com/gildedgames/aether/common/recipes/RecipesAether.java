@@ -41,7 +41,10 @@ public class RecipesAether
 
 		// Skyroot Chest
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_chest), "XXX", "X X", "XXX",
-				'X', new ItemStack(BlocksAether.skyroot_chest));
+				'X', new ItemStack(BlocksAether.skyroot_planks));
+
+		registerShapedRecipe(new ItemStack(BlocksAether.altar), "XXX", "XYX", "XXX",
+				'X', new ItemStack(BlocksAether.holystone), 'Y', new ItemStack(ItemsAether.zanite_gemstone));
 
 		// Skyroot Door
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_door), "XX", "XX", "XX",
