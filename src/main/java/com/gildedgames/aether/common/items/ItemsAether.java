@@ -1,21 +1,5 @@
 package com.gildedgames.aether.common.items;
 
-import com.gildedgames.aether.common.items.tools.ItemValkyrieTool;
-import com.gildedgames.aether.common.items.weapons.crossbow.ItemBolt;
-import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemDoor;
-import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.potion.Potion;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.AetherMaterials;
@@ -47,11 +31,14 @@ import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
 import com.gildedgames.aether.common.items.tools.ItemHolystoneTool;
 import com.gildedgames.aether.common.items.tools.ItemSkyrootBucket;
 import com.gildedgames.aether.common.items.tools.ItemSkyrootTool;
+import com.gildedgames.aether.common.items.tools.ItemValkyrieTool;
 import com.gildedgames.aether.common.items.tools.ItemZaniteTool;
 import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
 import com.gildedgames.aether.common.items.weapons.ItemPigSlayer;
 import com.gildedgames.aether.common.items.weapons.ItemVampireBlade;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemBolt;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
 import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemCandyCaneSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemElementalSword;
@@ -59,6 +46,18 @@ import com.gildedgames.aether.common.items.weapons.swords.ItemGravititeSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemHolystoneSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemZaniteSword;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemDoor;
+import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.potion.Potion;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemsAether
 {
@@ -76,7 +75,7 @@ public class ItemsAether
 
 	public static ItemValkyrieTool valkyrie_axe, valkyrie_pickaxe, valkyrie_shovel;
 
-	public static ItemAetherSword skyroot_sword, holystone_sword, zanite_sword, gravitite_sword;
+	public static ItemAetherSword skyroot_sword, holystone_sword, zanite_sword, gravitite_sword, valkyrie_lance;
 
 	public static ItemZaniteArmor zanite_helmet, zanite_chestplate, zanite_leggings, zanite_boots;
 
@@ -168,6 +167,7 @@ public class ItemsAether
 		valkyrie_axe = registerItem("valkyrie_axe", new ItemValkyrieTool(EnumToolType.AXE));
 		valkyrie_pickaxe = registerItem("valkyrie_pickaxe", new ItemValkyrieTool(EnumToolType.PICKAXE));
 		valkyrie_shovel = registerItem("valkyrie_shovel", new ItemValkyrieTool(EnumToolType.SHOVEL));
+		valkyrie_lance = registerItem("valkyrie_lance", new ItemAetherSword(AetherMaterials.LEGENDARY_TOOL, ItemAbilityType.PASSIVE));
 
 		zanite_helmet = registerItem("zanite_helmet", new ItemZaniteArmor(0));
 		zanite_chestplate = registerItem("zanite_chestplate", new ItemZaniteArmor(1));

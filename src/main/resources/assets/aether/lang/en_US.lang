@@ -77,6 +77,7 @@ item.aether.gravitite_shovel.name=Gravitite Shovel
 item.aether.valkyrie_pickaxe.name=Valkyrie Pickaxe
 item.aether.valkyrie_axe.name=Valkyrie Axe
 item.aether.valkyrie_shovel.name=Valkyrie Shovel
+item.aether.valkyrie_lance.name=Valkyrie Lance
 item.aether.zanite_helmet.name=Zanite Helmet
 item.aether.zanite_chestplate.name=Zanite Chestplate
 item.aether.zanite_leggings.name=Zanite Leggings
@@ -185,6 +186,8 @@ item.aether.flaming_sword.ability.desc=Ignites mobs
 item.aether.pig_slayer.ability.desc=Slaughters pigs
 item.aether.vampire_blade.ability.desc=Leeches life
 item.aether.candy_cane_sword.ability.desc=Drops edible candy canes
+item.aether.valkyrie_lance.ability.desc=Extended Reach
+
 
 # Tool tooltips
 item.aether.tool.skyroot.ability.desc=Doubles drops from blocks
@@ -209,11 +212,11 @@ item.aether.armor.valkyrie.ability.desc=Wing Gliding
 item.aether.armor.sentry_boots.ability.desc=Negates Fall Damage
 
 # Records
-item.aether.aether_record.moa.desc=Emile van Krieken - Approaches
-item.aether.aether_record.aerwhale.desc=AetherAudio - Aerwhale
-item.aether.aether_record.labyrinth.desc=Moorziey - Demise
-item.aether.aether_record.valkyrie.desc=Emile van Krieken - Ascending Dawn
-item.aether.aether_record.recording_892.desc=Emile van Krieken - ???
+item.aether.moa_music_disc.desc=Emile van Krieken - Approaches
+item.aether.aerwhale_music_disc.desc=AetherAudio - Aerwhale
+item.aether.labyrinth_music_disc.desc=Moorziey - Demise
+item.aether.valkyrie_music_disc.desc=Emile van Krieken - Ascending Dawn
+item.aether.recording_892.desc=Emile van Krieken - ???
 
 # Entities
 entity.aether.sheepuff.name=Sheepuff

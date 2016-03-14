@@ -18,7 +18,7 @@ public class ItemAetherRecord extends ItemRecord
 	@SideOnly(Side.CLIENT)
 	public String getRecordNameLocal()
 	{
-		return StatCollector.translateToLocal("item.aether_record." + this.recordName + ".desc");
+		return StatCollector.translateToLocal(this.getUnlocalizedName() + ".desc");
 	}
 
 	@Override

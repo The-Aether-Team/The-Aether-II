@@ -2,6 +2,8 @@ package com.gildedgames.aether.common.items.weapons;
 
 import com.gildedgames.aether.common.AetherMaterials;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
+import com.gildedgames.aether.common.items.ItemAbilityType;
+import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityPigZombie;
@@ -16,11 +18,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemPigSlayer extends ItemSword
+public class ItemPigSlayer extends ItemAetherSword
 {
 	public ItemPigSlayer()
 	{
-		super(AetherMaterials.LEGENDARY_TOOL);
+		super(AetherMaterials.LEGENDARY_TOOL, ItemAbilityType.PASSIVE);
 
 		this.setMaxDamage(200);
 	}
@@ -46,14 +48,5 @@ public class ItemPigSlayer extends ItemSword
 		}
 
 		return super.hitEntity(stack, target, attacker);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	@SuppressWarnings("unchecked")
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced)
-	{
-		tooltip.add(String.format("%s: %s", EnumChatFormatting.BLUE + I18n.format("item.tooltip.ability"),
-				EnumChatFormatting.WHITE + I18n.format(this.getUnlocalizedName() + ".ability.desc")));
 	}
 }

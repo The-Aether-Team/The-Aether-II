@@ -29,7 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockAetherPortal extends BlockBreakable
 {
-	public static final PropertyEnum PROPERTY_AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class,
+	public static final PropertyEnum<EnumFacing.Axis> PROPERTY_AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class,
 			EnumFacing.Axis.X, EnumFacing.Axis.Z);
 
 	public BlockAetherPortal()
@@ -61,7 +61,7 @@ public class BlockAetherPortal extends BlockBreakable
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos)
 	{
-		final EnumFacing.Axis axis = (EnumFacing.Axis) world.getBlockState(pos).getValue(PROPERTY_AXIS);
+		final EnumFacing.Axis axis = world.getBlockState(pos).getValue(PROPERTY_AXIS);
 
 		float xThickness = 0.125F, zThickness = 0.125F;
 
@@ -82,9 +82,9 @@ public class BlockAetherPortal extends BlockBreakable
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
-		if (rand.nextInt(100) == 0)
+		if (rand.nextInt(150) == 0)
 		{
-			world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, AetherCore.getResourcePath("aeportal.portal"), 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
+			world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, AetherCore.getResourcePath("aeportal.portal"), 0.2F, (rand.nextFloat() * 0.2F) + 0.9F, false);
 		}
 
 		for (int count = 0; count < 4; count++)
@@ -123,7 +123,7 @@ public class BlockAetherPortal extends BlockBreakable
 
 		if (world.getBlockState(pos).getBlock() == this)
 		{
-			axis = (EnumFacing.Axis) state.getValue(PROPERTY_AXIS);
+			axis = state.getValue(PROPERTY_AXIS);
 
 			if (axis == null)
 			{
@@ -167,7 +167,7 @@ public class BlockAetherPortal extends BlockBreakable
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		final EnumFacing.Axis axis = (EnumFacing.Axis) state.getValue(PROPERTY_AXIS);
+		final EnumFacing.Axis axis = state.getValue(PROPERTY_AXIS);
 
 		return axis == EnumFacing.Axis.X ? 1 : (axis == EnumFacing.Axis.Z ? 2 : 0);
 	}
@@ -181,7 +181,7 @@ public class BlockAetherPortal extends BlockBreakable
 	@Override
 	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
 	{
-		final EnumFacing.Axis axis = (EnumFacing.Axis) state.getValue(PROPERTY_AXIS);
+		final EnumFacing.Axis axis = state.getValue(PROPERTY_AXIS);
 
 		if (axis == EnumFacing.Axis.X || axis == EnumFacing.Axis.Z)
 		{

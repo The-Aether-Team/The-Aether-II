@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.items.weapons.swords;
 
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.AetherMaterials;
+import com.gildedgames.aether.common.items.ItemAbilityType;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
@@ -60,7 +61,7 @@ public class ItemElementalSword extends ItemAetherSword
 
 	public ItemElementalSword(SwordElement element)
 	{
-		super(AetherMaterials.LEGENDARY_TOOL);
+		super(AetherMaterials.LEGENDARY_TOOL, ItemAbilityType.PASSIVE);
 
 		this.element = element;
 

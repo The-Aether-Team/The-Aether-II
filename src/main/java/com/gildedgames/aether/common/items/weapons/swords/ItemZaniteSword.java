@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.weapons.swords;
 
+import com.gildedgames.aether.common.items.ItemAbilityType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -9,7 +10,7 @@ public class ItemZaniteSword extends ItemAetherSword
 {
 	public ItemZaniteSword()
 	{
-		super(ToolMaterial.IRON);
+		super(ToolMaterial.IRON, ItemAbilityType.PASSIVE);
 	}
 
 	@Override

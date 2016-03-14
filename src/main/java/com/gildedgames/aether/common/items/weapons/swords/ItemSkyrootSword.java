@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.gildedgames.aether.common.items.ItemAbilityType;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -28,7 +29,7 @@ public class ItemSkyrootSword extends ItemAetherSword
 	
 	public ItemSkyrootSword()
 	{
-		super(ToolMaterial.WOOD);
+		super(ToolMaterial.WOOD, ItemAbilityType.PASSIVE);
 	}
 	
 	@SubscribeEvent

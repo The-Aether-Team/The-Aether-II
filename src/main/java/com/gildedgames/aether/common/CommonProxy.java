@@ -7,6 +7,7 @@ import com.gildedgames.aether.client.gui.tab.TabAccessories;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import com.gildedgames.aether.common.party.PartyMemberTracker;
 import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.aether.common.world.chunk.PlacementFlagChunkData;
 import com.gildedgames.util.modules.entityhook.EntityHookModule;
 import com.gildedgames.util.modules.entityhook.impl.providers.PlayerHookProvider;
 import com.gildedgames.util.modules.tab.TabModule;

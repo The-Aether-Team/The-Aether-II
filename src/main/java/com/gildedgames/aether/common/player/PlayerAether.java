@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.player;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
 import com.gildedgames.aether.common.entities.effects.EntityEffect;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
@@ -21,7 +20,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -35,8 +33,6 @@ public class PlayerAether extends EntityHook<EntityPlayer>
 	private InventoryAccessories inventoryAccessories = new InventoryAccessories(this);
 
 	private Party currentParty;
-
-	private float extendedReach;
 
 	@Override
 	public void onLoaded()
@@ -80,16 +76,19 @@ public class PlayerAether extends EntityHook<EntityPlayer>
 	 */
 	public void onUpdate()
 	{
-		if (this.getEntity().getHeldItem() != null && this.getEntity().getHeldItem().getItem() instanceof ItemValkyrieTool)
+		float extendedReach = 0.0f;
+
+		if (this.getEntity().getHeldItem() != null)
 		{
-			this.extendedReach = 3.5f;
-		}
-		else
-		{
-			this.extendedReach = 0.0f;
+			Item item = this.getEntity().getHeldItem().getItem();
+
+			if (item instanceof ItemValkyrieTool || item == ItemsAether.valkyrie_lance)
+			{
+				extendedReach = 3.5f;
+			}
 		}
 
-		AetherCore.PROXY.setExtendedReachDistance(this.getEntity(), this.extendedReach);
+		AetherCore.PROXY.setExtendedReachDistance(this.getEntity(), extendedReach);
 	}
 
 	/**

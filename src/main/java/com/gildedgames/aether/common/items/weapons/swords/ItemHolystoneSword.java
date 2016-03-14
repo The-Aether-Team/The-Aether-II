@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.weapons.swords;
 
+import com.gildedgames.aether.common.items.ItemAbilityType;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -9,7 +10,7 @@ public class ItemHolystoneSword extends ItemAetherSword
 {
 	public ItemHolystoneSword()
 	{
-		super(ToolMaterial.STONE);
+		super(ToolMaterial.STONE, ItemAbilityType.PASSIVE);
 	}
 
 	@Override

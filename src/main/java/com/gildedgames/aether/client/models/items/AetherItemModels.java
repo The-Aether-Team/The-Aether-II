@@ -150,6 +150,7 @@ public class AetherItemModels
 		registerItemModels(new ItemModelList(ItemsAether.valkyrie_pickaxe).add(0, "tools/valkyrie_pickaxe"));
 		registerItemModels(new ItemModelList(ItemsAether.valkyrie_axe).add(0, "tools/valkyrie_axe"));
 		registerItemModels(new ItemModelList(ItemsAether.valkyrie_shovel).add(0, "tools/valkyrie_shovel"));
+		registerItemModels(new ItemModelList(ItemsAether.valkyrie_lance).add(0, "weapons/valkyrie_lance"));
 
 		registerItemModels(new ItemModelList(ItemsAether.zanite_helmet).add(0, "armor/zanite_helmet"));
 		registerItemModels(new ItemModelList(ItemsAether.zanite_chestplate).add(0, "armor/zanite_chestplate"));
