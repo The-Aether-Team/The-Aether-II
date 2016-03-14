@@ -2,6 +2,9 @@ package com.gildedgames.aether.common.blocks;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.AetherCreativeTabs;
+import com.gildedgames.aether.common.AetherMaterials;
+import com.gildedgames.aether.common.blocks.construction.BlockAetherFence;
+import com.gildedgames.aether.common.blocks.construction.BlockAetherFenceGate;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.blocks.construction.BlockAmbrosiumTorch;
@@ -32,6 +35,8 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.items.itemblocks.ItemBlockAetherVariants;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFence;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
@@ -105,6 +110,10 @@ public class BlocksAether
 	public static BlockAmbrosiumTorch ambrosium_torch;
 
 	public static BlockIcestoneBricks icestone_bricks;
+
+	public static BlockAetherFence skyroot_fence;
+
+	public static BlockAetherFenceGate skyroot_fence_gate;
 
 	public static void preInit()
 	{
@@ -186,6 +195,10 @@ public class BlocksAether
 		ambrosium_torch = registerBlock("ambrosium_torch", new BlockAmbrosiumTorch(), AetherCreativeTabs.tabBlocks);
 
 		icestone_bricks = registerBlock("icestone_bricks", new BlockIcestoneBricks(), AetherCreativeTabs.tabBlocks);
+
+		skyroot_fence = registerBlock("skyroot_fence", new BlockAetherFence(Material.wood), AetherCreativeTabs.tabBlocks);
+
+		skyroot_fence_gate = registerBlock("skyroot_fence_gate", new BlockAetherFenceGate(Material.wood), AetherCreativeTabs.tabBlocks);
 
 		registerHarvestLevels();
 	}

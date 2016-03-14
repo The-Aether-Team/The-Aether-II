@@ -63,6 +63,16 @@ public class RecipesAether
 		registerShapedRecipe(new ItemStack(BlocksAether.icestone_bricks, 4), "XX", "XX",
 				'X', new ItemStack(ItemsAether.icestone));
 
+		// Fences and Walls
+		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_fence, 3), "XYX","XYX",
+		'X', new ItemStack(BlocksAether.skyroot_planks),
+		'Y', new ItemStack(ItemsAether.skyroot_stick));
+
+		// Gates
+		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_fence_gate, 1), "YXY", "YXY",
+				'Y', new ItemStack(ItemsAether.skyroot_stick),
+				'X', new ItemStack(BlocksAether.skyroot_planks));
+
 		//Crossbow
 		registerShapedRecipe(new ItemStack(ItemsAether.crossbow), " X ", " Y ", "ZZZ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),

@@ -95,6 +95,9 @@ public class AetherItemModels
 				.add(BlockHolystoneFurnace.LIT_META, "holystone_furnace_lit")
 				.add(BlockHolystoneFurnace.UNLIT_META, "holystone_furnace_unlit"));
 
+		registerItemModels(new ItemModelList(BlocksAether.skyroot_fence).add(0, "skyroot_fence"));
+		registerItemModels(new ItemModelList(BlocksAether.skyroot_fence_gate).add(0, "skyroot_fence_gate"));
+
 		registerItemModels(new ItemModelList(BlocksAether.ambrosium_ore).add(0, "ores/ambrosium_ore"));
 		registerItemModels(new ItemModelList(BlocksAether.zanite_ore).add(0, "ores/zanite_ore"));
 		registerItemModels(new ItemModelList(BlocksAether.gravitite_ore).add(0, "ores/gravitite_ore"));
