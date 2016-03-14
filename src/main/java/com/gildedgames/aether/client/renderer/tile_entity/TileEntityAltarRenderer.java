@@ -19,7 +19,7 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 	@Override
 	public void renderTileEntityAt(TileEntityAltar altar, double x, double y, double z, float partialTicks, int destroyStage)
 	{
-		if (altar.getWorld().getBlockState(altar.getPos()) != BlocksAether.altar)
+		if (altar.getWorld().getBlockState(altar.getPos()).getBlock() != BlocksAether.altar)
 		{
 			return;
 		}
