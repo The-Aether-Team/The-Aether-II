@@ -103,7 +103,6 @@ public class AetherItemModels
 		registerItemModels(new ItemModelList(BlocksAether.gravitite_ore).add(0, "ores/gravitite_ore"));
 		registerItemModels(new ItemModelList(BlocksAether.continuum_ore).add(0, "ores/continuum_ore"));
 
-		registerItemModels(new ItemModelList(BlocksAether.continuum_ore).add(0, "aether_portal"));
 		registerItemModels(new ItemModelList(BlocksAether.quicksoil).add(0, "quicksoil"));
 		registerItemModels(new ItemModelList(BlocksAether.icestone_ore).add(0, "icestone_ore"));
 		registerItemModels(new ItemModelList(BlocksAether.icestone_bricks).add(0, "icestone_bricks"));

@@ -4,8 +4,8 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
-import com.gildedgames.aether.common.recipes.altar.AltarRepairRecipe;
 import com.gildedgames.aether.common.recipes.altar.AltarEnchantRecipe;
+import com.gildedgames.aether.common.recipes.altar.AltarRepairRecipe;
 import com.gildedgames.aether.common.recipes.altar.IAltarRecipe;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -13,8 +13,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class RecipesAether
 {
-	public static final AltarRegistry altarRegistry = new AltarRegistry();
-	
+	public static final AltarRegistry ALTAR_REGISTRY = new AltarRegistry();
+
 	public static void preInit()
 	{
 		registerCraftingRecipes();
@@ -220,6 +220,6 @@ public class RecipesAether
 
 	private static void registerAltarRecipe(IAltarRecipe recipe)
 	{
-		RecipesAether.altarRegistry.addRecipe(recipe);
+		RecipesAether.ALTAR_REGISTRY.addRecipe(recipe);
 	}
 }

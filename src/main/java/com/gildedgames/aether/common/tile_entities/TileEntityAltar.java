@@ -74,7 +74,7 @@ public class TileEntityAltar extends TileEntity implements ITickable
 	{
 		if (this.getStackOnAltar() != null && this.getAmbrosiumCount() > 0)
 		{
-			IAltarRecipe recipe = RecipesAether.altarRegistry.getMatchingRecipe(this.getStackOnAltar());
+			IAltarRecipe recipe = RecipesAether.ALTAR_REGISTRY.getMatchingRecipe(this.getStackOnAltar());
 
 			if (recipe != null)
 			{

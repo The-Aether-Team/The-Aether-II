@@ -86,7 +86,7 @@ public class BlockAltar extends Block implements ITileEntityProvider
 						altar.addAmbrosiumShard();
 					}
 				}
-				else if (RecipesAether.altarRegistry.isEnchantableItem(heldStack))
+				else if (RecipesAether.ALTAR_REGISTRY.isEnchantableItem(heldStack))
 				{
 					ItemStack stack = heldStack.copy();
 					stack.stackSize = 1;
