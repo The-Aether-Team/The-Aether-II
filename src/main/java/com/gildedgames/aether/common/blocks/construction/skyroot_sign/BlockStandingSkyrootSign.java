@@ -18,6 +18,7 @@ public class BlockStandingSkyrootSign extends BlockSkyrootSign
 
 	public BlockStandingSkyrootSign()
 	{
+		super();
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ROTATION, Integer.valueOf(0)));
 	}
 

@@ -21,6 +21,7 @@ public class BlockWallSkyrootSign extends BlockSkyrootSign
 
 	public BlockWallSkyrootSign()
 	{
+		super();
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 	}
 

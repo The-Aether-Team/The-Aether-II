@@ -21,6 +21,13 @@ import java.util.Random;
 
 public class BlockSkyrootSign extends BlockSign
 {
+	protected BlockSkyrootSign()
+	{
+		this.setHardness(1.0F);
+		this.setStepSound(soundTypeWood);
+		this.disableStats();
+	}
+
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{
