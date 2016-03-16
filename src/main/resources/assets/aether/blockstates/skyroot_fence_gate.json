@@ -1,20 +1,26 @@
 {
+	"forge_marker": 1,
+	"defaults": {
+		"textures": {
+			"texture": "aether:blocks/skyroot_planks"
+		}
+	},
     "variants": {
-        "facing=south,in_wall=false,open=false": { "model": "aether:skyroot_fence_gate/skyroot_fence_gate_closed" },
-        "facing=west,in_wall=false,open=false":  { "model": "aether:skyroot_fence_gate/skyroot_fence_gate_closed", "y": 90, "uvlock": true },
-        "facing=north,in_wall=false,open=false": { "model": "aether:skyroot_fence_gate/skyroot_fence_gate_closed", "y": 180, "uvlock": true },
-        "facing=east,in_wall=false,open=false":  { "model": "aether:skyroot_fence_gate/skyroot_fence_gate_closed", "y": 270, "uvlock": true },
-        "facing=south,in_wall=false,open=true": { "model": "aether:skyroot_fence_gate/skyroot_fence_gate_open" },
-        "facing=west,in_wall=false,open=true":  { "model": "aether:skyroot_fence_gate/skyroot_fence_gate_open", "y": 90, "uvlock": true },
-        "facing=north,in_wall=false,open=true": { "model": "aether:skyroot_fence_gate/skyroot_fence_gate_open", "y": 180, "uvlock": true },
-        "facing=east,in_wall=false,open=true":  { "model": "aether:skyroot_fence_gate/skyroot_fence_gate_open", "y": 270, "uvlock": true },
-		"facing=south,in_wall=true,open=false": { "model": "aether:skyroot_fence_gate/skyroot_wall_gate_closed" },
-		"facing=west,in_wall=true,open=false":  { "model": "aether:skyroot_fence_gate/skyroot_wall_gate_closed", "y": 90, "uvlock": true },
-		"facing=north,in_wall=true,open=false": { "model": "aether:skyroot_fence_gate/skyroot_wall_gate_closed", "y": 180, "uvlock": true },
-		"facing=east,in_wall=true,open=false":  { "model": "aether:skyroot_fence_gate/skyroot_wall_gate_closed", "y": 270, "uvlock": true },
-		"facing=south,in_wall=true,open=true": { "model": "aether:skyroot_fence_gate/skyroot_wall_gate_open" },
-		"facing=west,in_wall=true,open=true":  { "model": "aether:skyroot_fence_gate/skyroot_wall_gate_open", "y": 90, "uvlock": true },
-		"facing=north,in_wall=true,open=true": { "model": "aether:skyroot_fence_gate/skyroot_wall_gate_open", "y": 180, "uvlock": true },
-		"facing=east,in_wall=true,open=true":  { "model": "aether:skyroot_fence_gate/skyroot_wall_gate_open", "y": 270, "uvlock": true }
+        "facing=south,in_wall=false,open=false": { "model": "fence_gate_closed" },
+        "facing=west,in_wall=false,open=false":  { "model": "fence_gate_closed", "y": 90, "uvlock": true },
+        "facing=north,in_wall=false,open=false": { "model": "fence_gate_closed", "y": 180, "uvlock": true },
+        "facing=east,in_wall=false,open=false":  { "model": "fence_gate_closed", "y": 270, "uvlock": true },
+        "facing=south,in_wall=false,open=true": { "model": "fence_gate_open" },
+        "facing=west,in_wall=false,open=true":  { "model": "fence_gate_open", "y": 90, "uvlock": true },
+        "facing=north,in_wall=false,open=true": { "model": "fence_gate_open", "y": 180, "uvlock": true },
+        "facing=east,in_wall=false,open=true":  { "model": "fence_gate_open", "y": 270, "uvlock": true },
+		"facing=south,in_wall=true,open=false": { "model": "wall_gate_closed" },
+		"facing=west,in_wall=true,open=false":  { "model": "wall_gate_closed", "y": 90, "uvlock": true },
+		"facing=north,in_wall=true,open=false": { "model": "wall_gate_closed", "y": 180, "uvlock": true },
+		"facing=east,in_wall=true,open=false":  { "model": "wall_gate_closed", "y": 270, "uvlock": true },
+		"facing=south,in_wall=true,open=true": { "model": "wall_gate_open" },
+		"facing=west,in_wall=true,open=true":  { "model": "wall_gate_open", "y": 90, "uvlock": true },
+		"facing=north,in_wall=true,open=true": { "model": "wall_gate_open", "y": 180, "uvlock": true },
+		"facing=east,in_wall=true,open=true":  { "model": "wall_gate_open", "y": 270, "uvlock": true }
     }
 }
