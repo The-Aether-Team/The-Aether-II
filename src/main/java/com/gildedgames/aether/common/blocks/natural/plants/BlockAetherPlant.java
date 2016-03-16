@@ -38,10 +38,15 @@ public class BlockAetherPlant extends Block
 	{
 		if (!this.canPlaceBlockAt(world, pos))
 		{
-			this.dropBlockAsItem(world, pos, state, 0);
-
-			world.setBlockToAir(pos);
+			this.invalidateBlock(world, pos, state);
 		}
+	}
+
+	protected void invalidateBlock(World world, BlockPos pos, IBlockState state)
+	{
+		this.dropBlockAsItem(world, pos, state, 0);
+
+		world.setBlockToAir(pos);
 	}
 
 	@Override

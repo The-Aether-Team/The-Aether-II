@@ -57,6 +57,19 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IAetherBlock
 	}
 
 	@Override
+	public boolean removedByPlayer(World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
+	{
+		IBlockState state = world.getBlockState(pos);
+
+		if (state.getValue(PROPERTY_HARVESTABLE))
+		{
+			return false;
+		}
+
+		return world.setBlockToAir(pos);
+	}
+
+	@Override
 	public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity tileEntity)
 	{
 		if (state.getValue(PROPERTY_HARVESTABLE))
@@ -72,6 +85,17 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IAetherBlock
 		{
 			super.harvestBlock(world, player, pos, state, tileEntity);
 		}
+	}
+
+	@Override
+	protected void invalidateBlock(World world, BlockPos pos, IBlockState state)
+	{
+		if (state.getValue(PROPERTY_HARVESTABLE))
+		{
+			this.dropBerries(world, pos, world.rand);
+		}
+
+		super.invalidateBlock(world, pos, state);
 	}
 
 	private void dropBerries(World world, BlockPos pos, Random random)

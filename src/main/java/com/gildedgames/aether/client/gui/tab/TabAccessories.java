@@ -3,9 +3,6 @@ package com.gildedgames.aether.client.gui.tab;
 import com.gildedgames.aether.client.gui.container.GuiAccessories;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.ContainerAccessories;
-import com.gildedgames.aether.common.network.AetherGuiHandler;
-import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.player.PacketOpenContainer;
 import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.util.modules.tab.common.util.ITab;
 import net.minecraft.client.Minecraft;
@@ -21,7 +18,7 @@ import net.minecraft.world.World;
 
 public class TabAccessories implements ITab
 {
-	private static final ResourceLocation iconResource = AetherCore.getResource("textures/gui/tabs/accessories.png");
+	private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/accessories.png");
 
 	@Override
 	public String getUnlocalizedName()
@@ -36,11 +33,9 @@ public class TabAccessories implements ITab
 	}
 
 	@Override
-	public void renderIcon(int x, int y)
+	public ResourceLocation getIcon()
 	{
-		Minecraft.getMinecraft().renderEngine.bindTexture(iconResource);
-
-		Gui.drawModalRectWithCustomSizedTexture(x, y, 0, 0, 16, 16, 16, 16);
+		return TabAccessories.ICON;
 	}
 
 	@Override

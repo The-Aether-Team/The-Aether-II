@@ -79,12 +79,30 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 
 		if (state.getValue(PROPERTY_STAGE) == STAGE_COUNT)
 		{
-			this.dropOranges(world, topPos, bottomPos);
+			this.dropOranges(world, topPos, bottomPos, !player.capabilities.isCreativeMode);
 		}
 		else
 		{
-			this.destroyTree(world, topPos, bottomPos);
+			this.destroyTree(world, topPos, bottomPos, !player.capabilities.isCreativeMode);
 		}
+	}
+
+	@Override
+	protected void invalidateBlock(World world, BlockPos pos, IBlockState state)
+	{
+		BlockPos topPos = state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos : pos.up();
+
+		BlockPos bottomPos = state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos.down() : pos;
+
+		if (state.getValue(PROPERTY_STAGE) == STAGE_COUNT)
+		{
+			this.dropOranges(world, topPos, bottomPos, true);
+		}
+
+		this.dropBlockAsItem(world, pos, state, 0);
+
+		world.setBlockToAir(topPos);
+		world.setBlockToAir(bottomPos);
 	}
 
 	@Override
@@ -92,7 +110,12 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	{
 		IBlockState state = world.getBlockState(pos);
 
-		return state.getBlock() == this && state.getValue(PROPERTY_STAGE) >= STAGE_COUNT;
+		if (state.getValue(PROPERTY_STAGE) == STAGE_COUNT)
+		{
+			return state.getBlock() == this && state.getValue(PROPERTY_STAGE) >= STAGE_COUNT;
+		}
+
+		return world.setBlockToAir(pos);
 	}
 
 	@Override
@@ -150,26 +173,32 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 		return soilBlock == this || super.isSuitableSoilBlock(soilBlock);
 	}
 
-	private void dropOranges(World world, BlockPos topPos, BlockPos bottomPos)
+	private void dropOranges(World world, BlockPos topPos, BlockPos bottomPos, boolean doDrops)
 	{
 		IBlockState state = world.getBlockState(bottomPos.down());
 
-		int count = world.rand.nextInt(3) + 1;
-
-		if (state.getBlock() == BlocksAether.aether_grass && state.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED_AETHER_GRASS)
+		if (doDrops)
 		{
-			count += 1;
-		}
+			int count = world.rand.nextInt(3) + 1;
 
-		Block.spawnAsEntity(world, topPos, new ItemStack(ItemsAether.orange, count));
+			if (state.getBlock() == BlocksAether.aether_grass && state.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED_AETHER_GRASS)
+			{
+				count += 1;
+			}
+
+			Block.spawnAsEntity(world, topPos, new ItemStack(ItemsAether.orange, count));
+		}
 
 		world.setBlockState(topPos, world.getBlockState(topPos).withProperty(PROPERTY_STAGE, 4));
 		world.setBlockState(bottomPos, world.getBlockState(bottomPos).withProperty(PROPERTY_STAGE, 4));
 	}
 
-	private void destroyTree(World world, BlockPos topPos, BlockPos bottomPos)
+	private void destroyTree(World world, BlockPos topPos, BlockPos bottomPos, boolean doDrops)
 	{
-		Block.spawnAsEntity(world, topPos, new ItemStack(BlocksAether.orange_tree));
+		if (doDrops)
+		{
+			Block.spawnAsEntity(world, topPos, new ItemStack(BlocksAether.orange_tree));
+		}
 
 		world.setBlockToAir(topPos);
 		world.setBlockToAir(bottomPos);

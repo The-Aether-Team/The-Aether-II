@@ -5,9 +5,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class EntityFlyingAnimal extends EntityAetherAnimal
 {
+	@SideOnly(Side.CLIENT)
 	public float wingFold, wingAngle;
 
 	public EntityFlyingAnimal(World world)
@@ -28,17 +31,22 @@ public abstract class EntityFlyingAnimal extends EntityAetherAnimal
 	{
 		this.fallDistance = 0;
 
-		float aimingForFold = 1.0F;
+		this.motionY *= 0.6D;
 
-		if (this.onGround)
+		if (this.worldObj.isRemote)
 		{
-			this.wingAngle *= 0.8F;
+			float aimingForFold = 1.0F;
 
-			aimingForFold = 0.1F;
+			if (this.onGround)
+			{
+				this.wingAngle *= 0.8F;
+
+				aimingForFold = 0.1F;
+			}
+
+			this.wingAngle = this.wingFold * (float) Math.sin(this.ticksExisted / 31.83098862F);
+			this.wingFold += (aimingForFold - this.wingFold) / 5F;
 		}
-
-		this.wingAngle = this.wingFold * (float) Math.sin(this.ticksExisted / 31.83098862F);
-		this.wingFold += (aimingForFold - this.wingFold) / 5F;
 
 		super.onUpdate();
 	}
@@ -51,19 +59,22 @@ public abstract class EntityFlyingAnimal extends EntityAetherAnimal
 			return true;
 		}
 
-		if (this.isSaddled() && !this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == player))
+		if (!this.worldObj.isRemote)
 		{
-			player.mountEntity(this);
-
-			return true;
-		}
-		else if (player.getHeldItem() != null && player.getHeldItem().getItem() == Items.saddle)
-		{
-			this.setIsSaddled(true);
-
-			if (!player.capabilities.isCreativeMode)
+			if (this.isSaddled() && this.riddenByEntity == null)
 			{
-				player.getHeldItem().stackSize--;
+				player.mountEntity(this);
+
+				return true;
+			}
+			else if (player.getHeldItem() != null && player.getHeldItem().getItem() == Items.saddle)
+			{
+				this.setIsSaddled(true);
+
+				if (!player.capabilities.isCreativeMode)
+				{
+					player.getHeldItem().stackSize--;
+				}
 			}
 		}
 
