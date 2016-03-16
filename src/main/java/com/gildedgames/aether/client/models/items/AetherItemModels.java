@@ -122,6 +122,11 @@ public class AetherItemModels
 
 		registerItemModels(new ItemModelList(BlocksAether.quicksoil_glass).add(0, "quicksoil_glass"));
 
+		registerItemModels(new ItemModelList(BlocksAether.aether_portal).add(0, "aether_portal"));
+
+		registerItemModels(new ItemModelList(BlocksAether.standing_skyroot_sign).add(0, "tesr"));
+		registerItemModels(new ItemModelList(BlocksAether.wall_skyroot_sign).add(0, "tesr"));
+
 		registerItemModels(new ItemModelList(ItemsAether.skyroot_stick).add(0, "skyroot_stick"));
 		registerItemModels(new ItemModelList(ItemsAether.golden_amber).add(0, "golden_amber"));
 

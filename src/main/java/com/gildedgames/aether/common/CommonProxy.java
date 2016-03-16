@@ -74,7 +74,7 @@ public class CommonProxy
 
 		RecipesAether.preInit();
 
-		TabModule.api().getInventoryGroup().getSide(Side.SERVER).add(new TabAccessories());
+		TabModule.api().getInventoryGroup().getServerGroup().add(new TabAccessories());
 
 		EntityHookModule.api().registerHookProvider(PlayerAether.PROVIDER);
 		EntityHookModule.api().registerHookProvider(EntityEffects.PROVIDER);

@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.network.packets.party.PacketCreateParty;
 import com.gildedgames.aether.common.network.packets.party.PacketJoinParty;
 import com.gildedgames.aether.common.network.packets.party.PacketMemberChange;
 import com.gildedgames.aether.common.network.packets.player.PacketOpenContainer;
+import com.gildedgames.util.core.UtilModule;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;

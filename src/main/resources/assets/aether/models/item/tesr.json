@@ -1,5 +1,5 @@
 {
-	"parent": "aether:block/aether_portal/aether_portal_ew",
+	"parent": "aether:block/tesr",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

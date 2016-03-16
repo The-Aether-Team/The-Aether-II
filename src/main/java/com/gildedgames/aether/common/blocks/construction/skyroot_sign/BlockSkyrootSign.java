@@ -1,16 +1,12 @@
 package com.gildedgames.aether.common.blocks.construction.skyroot_sign;
 
-import com.gildedgames.aether.common.AetherMaterials;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootSign;
 import net.minecraft.block.BlockSign;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
@@ -50,10 +46,9 @@ public class BlockSkyrootSign extends BlockSign
 		else
 		{
 			TileEntity tileentity = worldIn.getTileEntity(pos);
-			return tileentity instanceof TileEntitySkyrootSign ? ((TileEntitySkyrootSign)tileentity).executeCommand(playerIn) : false;
+			return tileentity instanceof TileEntitySkyrootSign && ((TileEntitySkyrootSign) tileentity).executeCommand(playerIn);
 		}
 	}
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World worldIn, BlockPos pos)
