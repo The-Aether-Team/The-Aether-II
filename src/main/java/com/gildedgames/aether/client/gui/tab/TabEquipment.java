@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.gui.tab;
 
 import com.gildedgames.aether.client.gui.container.GuiEquipment;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.containers.ContainerAccessories;
+import com.gildedgames.aether.common.containers.ContainerEquipment;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.player.PacketOpenContainer;
@@ -63,7 +63,7 @@ public class TabEquipment implements ITab
 	@Override
 	public Container getCurrentContainer(EntityPlayer player, World world, int posX, int posY, int posZ)
 	{
-		return new ContainerAccessories(PlayerAether.get(player));
+		return new ContainerEquipment(PlayerAether.get(player));
 	}
 
 	@Override

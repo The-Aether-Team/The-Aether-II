@@ -1,8 +1,10 @@
 package com.gildedgames.aether.common.items;
 
+
 public enum ItemRarity
 {
-
+	
+	NONE("", 1.0F),
 	COMMON("item.rarity.common.name", 1.0F),
 	RARE("item.rarity.rare.name", 1.0F),
 	EPIC("item.rarity.epic.name", 1.0F),
@@ -28,5 +30,5 @@ public enum ItemRarity
 	{
 		return this.weight;
 	}
-	
+
 }

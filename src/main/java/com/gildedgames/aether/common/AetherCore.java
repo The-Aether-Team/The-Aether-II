@@ -1,15 +1,8 @@
 package com.gildedgames.aether.common;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityInject;
-import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -18,12 +11,10 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 import org.apache.logging.log4j.Logger;
 
-import com.gildedgames.aether.common.entities.effects.ItemEffects;
 import com.gildedgames.aether.common.world.TeleporterAether;
 import com.gildedgames.util.core.SidedObject;
 import com.gildedgames.util.io_manager.IOCore;
@@ -53,9 +44,6 @@ public class AetherCore
 
 	private static TeleporterAether teleporter;
 	
-	@CapabilityInject(ItemEffects.class)
-    public static final Capability<ItemEffects> ITEM_EFFECTS_CAPABILITY = null;
-	
 	public static AetherServices locate()
 	{
 		return serviceLocator.instance();
@@ -76,11 +64,14 @@ public class AetherCore
 		AetherCore.LOGGER = event.getModLog();
 
 		AetherCore.CONFIG = new AetherConfig(event.getSuggestedConfigurationFile());
+		
+		AetherCapabilities capabilities = new AetherCapabilities();
+		
+		capabilities.init();
+		
+        MinecraftForge.EVENT_BUS.register(capabilities);
 
 		AetherCore.PROXY.preInit(event);
-		
-		CapabilityManager.INSTANCE.register(ItemEffects.class, new ItemEffects.Storage(), ItemEffects.DefaultImpl.class);
-        MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	@EventHandler
@@ -100,49 +91,6 @@ public class AetherCore
 	{
 		teleporter = new TeleporterAether(MinecraftServer.getServer().worldServerForDimension(getAetherDimID()));
 	}
-	
-	@SubscribeEvent
-    public void onTELoad(AttachCapabilitiesEvent.Item event)
-    {
-        class ItemEffectsProvider implements ICapabilityProvider
-        {
-        	
-            private ItemStack stack;
-            
-            private ItemEffects effects;
-
-            ItemEffectsProvider(ItemStack stack)
-            {
-                this.stack = stack;
-            }
-            
-            @Override
-            public boolean hasCapability(Capability<?> capability, EnumFacing facing)
-            {
-                return ITEM_EFFECTS_CAPABILITY != null && capability == ITEM_EFFECTS_CAPABILITY;
-            }
-            
-            @SuppressWarnings("unchecked")
-            @Override
-            public <T> T getCapability(Capability<T> capability, EnumFacing facing)
-            {
-                if (ITEM_EFFECTS_CAPABILITY != null && capability == ITEM_EFFECTS_CAPABILITY)
-                {
-                	if (this.effects == null)
-                	{
-                		this.effects = new ItemEffects.DefaultImpl(this.stack);
-                	}
-                	
-                	return (T)this.effects;
-                }
-                
-                return null;
-            }
-
-        }
-
-        event.addCapability(new ResourceLocation(AetherCore.MOD_ID + ":ItemEffectsCapability"), new ItemEffectsProvider(event.getItemStack()));
-    }
 
 	public static ResourceLocation getResource(String name)
 	{

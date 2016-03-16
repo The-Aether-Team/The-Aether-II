@@ -9,9 +9,9 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
 
-import com.gildedgames.aether.common.containers.ContainerAccessories;
-import com.gildedgames.aether.common.containers.slots.SlotAccessory;
-import com.gildedgames.aether.common.items.AccessoryType;
+import com.gildedgames.aether.common.containers.ContainerEquipment;
+import com.gildedgames.aether.common.containers.slots.SlotEquipment;
+import com.gildedgames.aether.common.items.ItemEquipmentType;
 import com.gildedgames.aether.common.player.PlayerAether;
 
 public class GuiEquipment extends GuiContainer
@@ -36,7 +36,7 @@ public class GuiEquipment extends GuiContainer
 
 	public GuiEquipment(PlayerAether aePlayer)
 	{
-		super(new ContainerAccessories(aePlayer));
+		super(new ContainerEquipment(aePlayer));
 
 		this.allowUserInput = true;
 		this.aePlayer = aePlayer;
@@ -113,9 +113,9 @@ public class GuiEquipment extends GuiContainer
 			{
 				if (this.isMouseOverSlot(slot, mouseX, mouseY))
 				{
-					if (slot instanceof SlotAccessory)
+					if (slot instanceof SlotEquipment)
 					{
-						AccessoryType type = ((SlotAccessory) slot).getType();
+						ItemEquipmentType type = ((SlotEquipment) slot).getEquipmentType();
 
 						unlocalizedTooltip = type.getUnlocalizedName();
 					}

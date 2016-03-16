@@ -11,44 +11,44 @@ import net.minecraft.util.IChatComponent;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.AetherCapabilities;
 import com.gildedgames.aether.common.entities.effects.EffectInstance;
 import com.gildedgames.aether.common.entities.effects.EffectProcessor;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
-import com.gildedgames.aether.common.entities.effects.ItemEffects;
-import com.gildedgames.aether.common.items.AccessoryType;
+import com.gildedgames.aether.common.items.ItemEffectsBase;
+import com.gildedgames.aether.common.items.ItemEquipmentType;
 import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.util.core.nbt.NBT;
 
-public class InventoryAccessories implements IInventory, NBT
+public class InventoryEquipment implements IInventory, NBT
 {
 	private static final int INVENTORY_SIZE = 16;
 
-	public static final AccessoryType[] slotTypes = new AccessoryType[]
-			{
-					AccessoryType.RELIC,
-					AccessoryType.RELIC,
-					AccessoryType.HANDWEAR,
-					AccessoryType.SHIELD,
-					AccessoryType.RING,
-					AccessoryType.RING,
-					AccessoryType.NECKWEAR,
-					AccessoryType.AMMUNITION,
-					AccessoryType.COMPANION,
-					AccessoryType.ARTIFACT,
-					AccessoryType.CHARM,
-					AccessoryType.CHARM,
-					AccessoryType.CHARM,
-					AccessoryType.CHARM,
-					AccessoryType.CHARM,
-					AccessoryType.CHARM
-			};
+	public static final ItemEquipmentType[] slotTypes = new ItemEquipmentType[]
+	{
+			ItemEquipmentType.RELIC,
+			ItemEquipmentType.RELIC,
+			ItemEquipmentType.HANDWEAR,
+			ItemEquipmentType.SHIELD,
+			ItemEquipmentType.RING,
+			ItemEquipmentType.RING,
+			ItemEquipmentType.NECKWEAR,
+			ItemEquipmentType.AMMUNITION,
+			ItemEquipmentType.COMPANION,
+			ItemEquipmentType.ARTIFACT,
+			ItemEquipmentType.CHARM,
+			ItemEquipmentType.CHARM,
+			ItemEquipmentType.CHARM,
+			ItemEquipmentType.CHARM,
+			ItemEquipmentType.CHARM,
+			ItemEquipmentType.CHARM
+	};
 
 	private final PlayerAether aePlayer;
 
-	private ItemStack[] inventory = new ItemStack[InventoryAccessories.INVENTORY_SIZE];
+	private ItemStack[] inventory = new ItemStack[InventoryEquipment.INVENTORY_SIZE];
 
-	public InventoryAccessories(PlayerAether aePlayer)
+	public InventoryEquipment(PlayerAether aePlayer)
 	{
 		this.aePlayer = aePlayer;
 	}
@@ -61,7 +61,7 @@ public class InventoryAccessories implements IInventory, NBT
 	@Override
 	public int getSizeInventory()
 	{
-		return InventoryAccessories.INVENTORY_SIZE;
+		return InventoryEquipment.INVENTORY_SIZE;
 	}
 
 	@Override
@@ -121,24 +121,27 @@ public class InventoryAccessories implements IInventory, NBT
 	{
 		this.inventory[index] = stack;
 
-		if (stack != null && stack.hasCapability(AetherCore.ITEM_EFFECTS_CAPABILITY, null))
+		if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 		{
 			EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
-			ItemEffects itemEffects = stack.getCapability(AetherCore.ITEM_EFFECTS_CAPABILITY, null);
+			ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
-			for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
+			if (itemEffects != null)
 			{
-				EffectProcessor processor = effect.getLeft();
-				EffectInstance instance = effect.getRight();
-				
-				effects.put(processor, instance);
+				for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
+				{
+					EffectProcessor processor = effect.getLeft();
+					EffectInstance instance = effect.getRight();
+					
+					effects.put(processor, instance);
+				}
 			}
 		}
 
 		this.markDirty();
 	}
 
-	public int getNextEmptySlotForType(AccessoryType type)
+	public int getNextEmptySlotForType(ItemEquipmentType type)
 	{
 		for (int i = 0; i < this.inventory.length; i++)
 		{
@@ -151,7 +154,7 @@ public class InventoryAccessories implements IInventory, NBT
 		return -1;
 	}
 
-	public boolean isAccessoryEquipped(Item item)
+	public boolean isItemEquipped(Item item)
 	{
 		return this.getCountOfEquippedAccessory(item) > 0;
 	}
@@ -174,7 +177,7 @@ public class InventoryAccessories implements IInventory, NBT
 	@Override
 	public int getInventoryStackLimit()
 	{
-		return 1;
+		return 999;
 	}
 
 	@Override
@@ -220,17 +223,20 @@ public class InventoryAccessories implements IInventory, NBT
 		{
 			ItemStack stack = this.inventory[i];
 			
-			if (stack != null && stack.hasCapability(AetherCore.ITEM_EFFECTS_CAPABILITY, null))
+			if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 			{
 				EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
-				ItemEffects itemEffects = stack.getCapability(AetherCore.ITEM_EFFECTS_CAPABILITY, null);
+				ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
-				for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
+				if (itemEffects != null)
 				{
-					EffectProcessor processor = effect.getLeft();
-					EffectInstance instance = effect.getRight();
-					
-					effects.removeInstance(processor, instance);
+					for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
+					{
+						EffectProcessor processor = effect.getLeft();
+						EffectInstance instance = effect.getRight();
+						
+						effects.removeInstance(processor, instance);
+					}
 				}
 			}
 			
@@ -246,17 +252,20 @@ public class InventoryAccessories implements IInventory, NBT
 			{
 				ItemStack stack = this.inventory[i];
 				
-				if (stack != null && stack.hasCapability(AetherCore.ITEM_EFFECTS_CAPABILITY, null))
+				if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 				{
 					EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
-					ItemEffects itemEffects = stack.getCapability(AetherCore.ITEM_EFFECTS_CAPABILITY, null);
+					ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
-					for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
+					if (itemEffects != null)
 					{
-						EffectProcessor processor = effect.getLeft();
-						EffectInstance instance = effect.getRight();
-						
-						effects.removeInstance(processor, instance);
+						for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
+						{
+							EffectProcessor processor = effect.getLeft();
+							EffectInstance instance = effect.getRight();
+							
+							effects.removeInstance(processor, instance);
+						}
 					}
 				}
 				

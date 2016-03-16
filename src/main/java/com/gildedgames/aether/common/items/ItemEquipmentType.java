@@ -1,7 +1,8 @@
 package com.gildedgames.aether.common.items;
 
-public enum AccessoryType
+public enum ItemEquipmentType
 {
+
 	RING("gui.slot.ring"),
 	NECKWEAR("gui.slot.neckwear"),
 	COMPANION("gui.slot.companion"),
@@ -14,7 +15,7 @@ public enum AccessoryType
 	
 	private final String unlocalizedName;
 
-	AccessoryType(String unlocalizedName)
+	ItemEquipmentType(String unlocalizedName)
 	{
 		this.unlocalizedName = unlocalizedName;
 	}
@@ -23,4 +24,5 @@ public enum AccessoryType
 	{
 		return this.unlocalizedName;
 	}
+	
 }

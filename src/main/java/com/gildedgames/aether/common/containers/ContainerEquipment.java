@@ -10,34 +10,34 @@ import net.minecraft.item.ItemStack;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
-import com.gildedgames.aether.common.containers.slots.SlotAccessory;
+import com.gildedgames.aether.common.AetherCapabilities;
+import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
+import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import com.gildedgames.aether.common.entities.effects.EffectInstance;
 import com.gildedgames.aether.common.entities.effects.EffectProcessor;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
-import com.gildedgames.aether.common.entities.effects.ItemEffects;
-import com.gildedgames.aether.common.items.AccessoryType;
-import com.gildedgames.aether.common.items.ItemAccessory;
+import com.gildedgames.aether.common.items.ItemEffectsBase;
+import com.gildedgames.aether.common.items.ItemEquipmentType;
+import com.gildedgames.aether.common.items.ItemPropertiesBase;
 import com.gildedgames.aether.common.player.PlayerAether;
 
-public class ContainerAccessories extends ContainerPlayer
+public class ContainerEquipment extends ContainerPlayer
 {
 	/** See {@link GuiContainerCreative#field_147060_v} **/
 	private static InventoryBasic dumbInventory = new InventoryBasic("fake", true, 46);
 
 	private final PlayerAether aePlayer;
 
-	private final InventoryAccessories inventoryAccessories;
+	private final InventoryEquipment inventoryEquipment;
 
 	private Slot binSlot;
 
-	public ContainerAccessories(PlayerAether aePlayer)
+	public ContainerEquipment(PlayerAether aePlayer)
 	{
 		super(aePlayer.getEntity().inventory, false, aePlayer.getEntity());
 
 		this.aePlayer = aePlayer;
-		this.inventoryAccessories = aePlayer.getInventoryAccessories();
+		this.inventoryEquipment = aePlayer.getEquipment();
 
 		this.createSlots();
 	}
@@ -77,7 +77,7 @@ public class ContainerAccessories extends ContainerPlayer
 		Slot craft3 = this.inventorySlots.get(3);
 		Slot craft4 = this.inventorySlots.get(4);
 
-		this.binSlot = new Slot(ContainerAccessories.dumbInventory, this.inventorySlots.size(), 213, 26);
+		this.binSlot = new Slot(ContainerEquipment.dumbInventory, this.inventorySlots.size(), 213, 26);
 
 		if (this.aePlayer.getEntity().capabilities.isCreativeMode)
 		{
@@ -102,28 +102,28 @@ public class ContainerAccessories extends ContainerPlayer
 		
 		int inventorySlotId = 0;
 		
-		this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.RELIC, inventorySlotId++, 12, 7));
-		this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.RELIC, inventorySlotId++, 62, 7));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RELIC, inventorySlotId++, 12, 7));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RELIC, inventorySlotId++, 62, 7));
 		
-		this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.HANDWEAR, inventorySlotId++, 62, 28));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.HANDWEAR, inventorySlotId++, 62, 28));
 		
-		this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.SHIELD, inventorySlotId++, 62, 49));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.SHIELD, inventorySlotId++, 62, 49));
 
-		this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.RING, inventorySlotId++, 12, 49));
-		this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.RING, inventorySlotId++, 12, 70));
-		this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.NECKWEAR, inventorySlotId++, 12, 28));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RING, inventorySlotId++, 12, 49));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RING, inventorySlotId++, 12, 70));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.NECKWEAR, inventorySlotId++, 12, 28));
 		
-		this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.AMMUNITION, inventorySlotId++, 62, 70));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.AMMUNITION, inventorySlotId++, 62, 70));
 
-		this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.COMPANION, inventorySlotId++, 19, 101));
-		this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.ARTIFACT, inventorySlotId++, 55, 101));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.COMPANION, inventorySlotId++, 19, 101));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.ARTIFACT, inventorySlotId++, 55, 101));
 		
 		for (int x = 0; x < 6; x++)
 		{
 			int x1 = 35 + (x * 18);
 			int y1 = 132;
 
-			this.addSlotToContainer(new SlotAccessory(this.inventoryAccessories, AccessoryType.CHARM, inventorySlotId, x1, y1));
+			this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.CHARM, inventorySlotId, x1, y1));
 			inventorySlotId++;
 		}
 	}
@@ -144,17 +144,20 @@ public class ContainerAccessories extends ContainerPlayer
 			{
 				ItemStack stack = slot.getStack();
 				
-				if (slot instanceof SlotAccessory && stack.hasCapability(AetherCore.ITEM_EFFECTS_CAPABILITY, null))
+				if (slot instanceof SlotEquipment && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 				{
 					EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
-					ItemEffects itemEffects = stack.getCapability(AetherCore.ITEM_EFFECTS_CAPABILITY, null);
+					ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
-					for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
+					if (itemEffects != null)
 					{
-						EffectProcessor processor = effect.getLeft();
-						EffectInstance instance = effect.getRight();
-						
-						effects.removeInstance(processor, instance);
+						for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
+						{
+							EffectProcessor processor = effect.getLeft();
+							EffectInstance instance = effect.getRight();
+							
+							effects.removeInstance(processor, instance);
+						}
 					}
 				}
 			}
@@ -163,15 +166,15 @@ public class ContainerAccessories extends ContainerPlayer
 		return super.slotClick(slotId, clickedButton, mode, player);
 	}
 
-	private int getNextEmptySlot(AccessoryType type)
+	private int getNextEmptySlot(ItemEquipmentType type)
 	{
 		for (int i = 0; i < this.inventorySlots.size(); i++)
 		{
 			Slot slot = this.inventorySlots.get(i);
 
-			if (slot.getStack() == null && slot instanceof SlotAccessory)
+			if (slot.getStack() == null && slot instanceof SlotEquipment)
 			{
-				if (((SlotAccessory) slot).getType() == type)
+				if (((SlotEquipment) slot).getEquipmentType() == type)
 				{
 					return i;
 				}
@@ -189,22 +192,22 @@ public class ContainerAccessories extends ContainerPlayer
 		if (slotNumber == this.binSlot.slotNumber && this.aePlayer.getEntity().capabilities.isCreativeMode)
 		{
 			this.aePlayer.getEntity().inventory.clear();
-			this.aePlayer.getInventoryAccessories().clear();
+			this.aePlayer.getEquipment().clear();
 		}
 
 		if (slot != null && slot.getHasStack())
 		{
 			ItemStack stack = slot.getStack();
 
-			if (!(slot instanceof SlotAccessory) && !(slot instanceof SlotCrafting))
+			if (!(slot instanceof SlotEquipment) && !(slot instanceof SlotCrafting))
 			{
 				int destIndex = -1;
 
-				if (stack.getItem() instanceof ItemAccessory)
+				if (stack.getItem() instanceof ItemPropertiesBase)
 				{
-					ItemAccessory accessory = (ItemAccessory) stack.getItem();
+					ItemPropertiesBase accessory = (ItemPropertiesBase) stack.getItem();
 
-					destIndex = this.getNextEmptySlot(accessory.getType());
+					destIndex = this.getNextEmptySlot(accessory.getEquipmentType());
 				}
 
 				if (destIndex != -1)
@@ -217,17 +220,20 @@ public class ContainerAccessories extends ContainerPlayer
 					return stack;
 				}
 			}
-			else if (slot instanceof SlotAccessory && stack.hasCapability(AetherCore.ITEM_EFFECTS_CAPABILITY, null))
+			else if (slot instanceof SlotEquipment && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 			{
 				EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
-				ItemEffects itemEffects = stack.getCapability(AetherCore.ITEM_EFFECTS_CAPABILITY, null);
+				ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
-				for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
+				if (itemEffects != null)
 				{
-					EffectProcessor processor = effect.getLeft();
-					EffectInstance instance = effect.getRight();
-					
-					effects.removeInstance(processor, instance);
+					for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
+					{
+						EffectProcessor processor = effect.getLeft();
+						EffectInstance instance = effect.getRight();
+						
+						effects.removeInstance(processor, instance);
+					}
 				}
 			}
 		}
