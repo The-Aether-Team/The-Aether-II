@@ -118,6 +118,6 @@ public class CommonProxy
 
 	public void setExtendedReachDistance(EntityPlayer entity, float distance)
 	{
-		((EntityPlayerMP) entity).theItemInWorldManager.setBlockReachDistance((entity.capabilities.isCreativeMode ? 5.0f : 4.0f) + distance);
+		((EntityPlayerMP) entity).theItemInWorldManager.setBlockReachDistance(5.0f + distance);
 	}
 }
