@@ -1,12 +1,12 @@
-package com.gildedgames.aether.common.blocks.construction;
+package com.gildedgames.aether.common.blocks.construction.skyroot_fence;
 
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.material.Material;
 
-public class BlockAetherFenceGate extends BlockFenceGate
+public class BlockSkyrootFenceGate extends BlockFenceGate
 {
-	public BlockAetherFenceGate()
+	public BlockSkyrootFenceGate()
 	{
 		super(BlockPlanks.EnumType.OAK);
 	}

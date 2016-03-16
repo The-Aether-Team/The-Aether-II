@@ -2,16 +2,14 @@ package com.gildedgames.aether.common.blocks;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.AetherCreativeTabs;
-import com.gildedgames.aether.common.AetherMaterials;
-import com.gildedgames.aether.common.blocks.construction.BlockAetherFence;
-import com.gildedgames.aether.common.blocks.construction.BlockAetherFenceGate;
+import com.gildedgames.aether.common.blocks.construction.skyroot_fence.BlockSkyrootFence;
+import com.gildedgames.aether.common.blocks.construction.skyroot_fence.BlockSkyrootFenceGate;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.blocks.construction.BlockAmbrosiumTorch;
 import com.gildedgames.aether.common.blocks.construction.BlockQuicksoilGlass;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootChest;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootDoor;
-import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockStandingSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockWallSkyrootSign;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
@@ -38,8 +36,6 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.items.itemblocks.ItemBlockAetherVariants;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFence;
-import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
@@ -114,9 +110,9 @@ public class BlocksAether
 
 	public static BlockIcestoneBricks icestone_bricks;
 
-	public static BlockAetherFence skyroot_fence;
+	public static BlockSkyrootFence skyroot_fence;
 
-	public static BlockAetherFenceGate skyroot_fence_gate;
+	public static BlockSkyrootFenceGate skyroot_fence_gate;
 
 	public static BlockStandingSkyrootSign standing_skyroot_sign;
 
@@ -203,9 +199,9 @@ public class BlocksAether
 
 		icestone_bricks = registerBlock("icestone_bricks", new BlockIcestoneBricks(), AetherCreativeTabs.tabBlocks);
 
-		skyroot_fence = registerBlock("skyroot_fence", new BlockAetherFence(Material.wood), AetherCreativeTabs.tabBlocks);
+		skyroot_fence = registerBlock("skyroot_fence", new BlockSkyrootFence(Material.wood), AetherCreativeTabs.tabBlocks);
 
-		skyroot_fence_gate = registerBlock("skyroot_fence_gate", new BlockAetherFenceGate(), AetherCreativeTabs.tabBlocks);
+		skyroot_fence_gate = registerBlock("skyroot_fence_gate", new BlockSkyrootFenceGate(), AetherCreativeTabs.tabBlocks);
 
 		standing_skyroot_sign = registerBlock("standing_skyroot_sign", new BlockStandingSkyrootSign());
 
