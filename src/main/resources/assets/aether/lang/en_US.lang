@@ -175,6 +175,8 @@ item.aether.icestone.name=Icestone
 item.aether.crossbow.name=Crossbow
 item.aether.bolt.stone.name=Stone Bolt
 item.aether.bolt.zanite.name=Zanite Bolt
+item.aether.skyroot_door_item.name=Skyroot Door
+item.aether.skyroot_sign.name=Skyroot Sign
 
 # Weapon Tooltips
 item.aether.skyroot_sword.ability.desc=Doubles drops from mobs

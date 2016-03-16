@@ -13,6 +13,7 @@ import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDaggerf
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDart;
 import com.gildedgames.aether.client.renderer.tile_entity.TileEntityAltarRenderer;
 import com.gildedgames.aether.client.renderer.tile_entity.TileEntitySkyrootChestRenderer;
+import com.gildedgames.aether.client.renderer.tile_entity.TileEntitySkyrootSignRenderer;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.living.EntityAechorPlant;
 import com.gildedgames.aether.common.entities.living.EntityAerbunny;
@@ -25,6 +26,7 @@ import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowb
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
 import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootChest;
+import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootSign;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
@@ -59,5 +61,6 @@ public class AetherRenderers
 	{
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAltar.class, new TileEntityAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySkyrootChest.class, new TileEntitySkyrootChestRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySkyrootSign.class, new TileEntitySkyrootSignRenderer());
 	}
 }

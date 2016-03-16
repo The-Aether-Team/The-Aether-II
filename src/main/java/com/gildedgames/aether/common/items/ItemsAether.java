@@ -27,6 +27,7 @@ import com.gildedgames.aether.common.items.consumables.ItemRainbowStrawberry;
 import com.gildedgames.aether.common.items.consumables.ItemSkyrootConsumableBucket;
 import com.gildedgames.aether.common.items.consumables.ItemStomperPop;
 import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
+import com.gildedgames.aether.common.items.misc.ItemSkyrootSign;
 import com.gildedgames.aether.common.items.tools.EnumToolType;
 import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
 import com.gildedgames.aether.common.items.tools.ItemHolystoneTool;
@@ -137,6 +138,8 @@ public class ItemsAether
 	public static ItemAccessory candy_ring, bone_ring, skyroot_ring;
 
 	public static Item icestone;
+
+	public static Item skyroot_sign;
 
 	public static void preInit()
 	{
@@ -288,6 +291,8 @@ public class ItemsAether
 		skyroot_ring = registerItem("skyroot_ring", new ItemAccessory(AccessoryType.RING, DoubleDropAbility.build(EntityPlayer.class, 1.5F)), AetherCreativeTabs.tabAccessories);
 
 		icestone = registerItem("icestone", new Item(), AetherCreativeTabs.tabMaterials);
+
+		skyroot_sign = registerItem("skyroot_sign", new ItemSkyrootSign(), AetherCreativeTabs.tabBlocks);
 
 		registerItemProperties();
 	}

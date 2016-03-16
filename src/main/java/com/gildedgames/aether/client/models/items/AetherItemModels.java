@@ -274,6 +274,8 @@ public class AetherItemModels
 
 		registerItemModels(new ItemModelList(ItemsAether.icestone).add(0, "icestone"));
 
+		registerItemModels(new ItemModelList(ItemsAether.skyroot_sign).add(0, "skyroot_sign"));
+
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.skyroot_chest), 0, TileEntitySkyrootChest.class);
 	}
 

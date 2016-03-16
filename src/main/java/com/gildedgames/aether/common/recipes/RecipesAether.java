@@ -76,6 +76,11 @@ public class RecipesAether
 				'Y', new ItemStack(ItemsAether.skyroot_stick),
 				'X', new ItemStack(BlocksAether.skyroot_planks));
 
+		// Sign
+		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_sign,3), "XXX","XXX"," Y ",
+				'X', new ItemStack(BlocksAether.skyroot_planks),
+				'Y', new ItemStack(ItemsAether.skyroot_stick));
+
 		//Crossbow
 		registerShapedRecipe(new ItemStack(ItemsAether.crossbow), " X ", " Y ", "ZZZ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),

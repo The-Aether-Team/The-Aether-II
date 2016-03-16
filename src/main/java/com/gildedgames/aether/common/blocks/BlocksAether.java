@@ -11,6 +11,9 @@ import com.gildedgames.aether.common.blocks.construction.BlockAmbrosiumTorch;
 import com.gildedgames.aether.common.blocks.construction.BlockQuicksoilGlass;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootChest;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootDoor;
+import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockSkyrootSign;
+import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockStandingSkyrootSign;
+import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockWallSkyrootSign;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockSkyrootWorkbench;
 import com.gildedgames.aether.common.blocks.dungeon.BlockDungeon;
@@ -115,6 +118,10 @@ public class BlocksAether
 
 	public static BlockAetherFenceGate skyroot_fence_gate;
 
+	public static BlockStandingSkyrootSign standing_skyroot_sign;
+
+	public static BlockWallSkyrootSign wall_skyroot_sign;
+
 	public static void preInit()
 	{
 		aether_dirt = registerBlock("aether_dirt", new Block(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f), AetherCreativeTabs.tabBlocks);
@@ -198,7 +205,11 @@ public class BlocksAether
 
 		skyroot_fence = registerBlock("skyroot_fence", new BlockAetherFence(Material.wood), AetherCreativeTabs.tabBlocks);
 
-		skyroot_fence_gate = registerBlock("skyroot_fence_gate", new BlockAetherFenceGate(Material.wood), AetherCreativeTabs.tabBlocks);
+		skyroot_fence_gate = registerBlock("skyroot_fence_gate", new BlockAetherFenceGate(), AetherCreativeTabs.tabBlocks);
+
+		standing_skyroot_sign = registerBlock("standing_skyroot_sign", new BlockStandingSkyrootSign());
+
+		wall_skyroot_sign = registerBlock("wall_skyroot_sign", new BlockWallSkyrootSign());
 
 		registerHarvestLevels();
 	}

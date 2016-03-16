@@ -2,6 +2,8 @@ package com.gildedgames.aether.client.models.blocks;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootDoor;
+import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockStandingSkyrootSign;
+import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockWallSkyrootSign;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
@@ -9,6 +11,7 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
+import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -88,5 +91,10 @@ public class AetherBlockModels
 				return new ModelResourceLocation(resourceLocation, this.getPropertyString(mappings));
 			}
 		});
+
+		ModelLoader.setCustomStateMapper(BlocksAether.standing_skyroot_sign, new StateMap.Builder().ignore(BlockStandingSkyrootSign.ROTATION).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.wall_skyroot_sign, new StateMap.Builder().ignore(BlockWallSkyrootSign.FACING).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_fence_gate, new StateMap.Builder().ignore(BlockFenceGate.POWERED).build());
+
 	}
 }
