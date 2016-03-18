@@ -2,8 +2,7 @@ package com.gildedgames.aether.client.gui.tab;
 
 import com.gildedgames.aether.client.gui.container.GuiAccessories;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.containers.ContainerAccessories;
-import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.util.modules.tab.common.util.ITab;
 import com.gildedgames.util.modules.tab.common.util.ITabClient;
 import net.minecraft.client.Minecraft;
@@ -11,10 +10,9 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.network.play.client.C0DPacketCloseWindow;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -27,15 +25,11 @@ public class TabAccessories implements ITab
 	}
 
 	@Override
-	public void onOpen(EntityPlayer player) { }
-
-	@Override
-	public void onClose(EntityPlayer player) { }
-
-	@Override
-	public Container getCurrentContainer(EntityPlayer player, World world, int posX, int posY, int posZ)
+	public void onOpen(EntityPlayer player)
 	{
-		return new ContainerAccessories(PlayerAether.get(player));
+		BlockPos pos = player.getPosition();
+
+		player.openGui(AetherCore.MOD_ID, AetherGuiHandler.INVENTORY_ACCESSORIES_ID, player.worldObj, pos.getX(), pos.getY(), pos.getZ());
 	}
 
 	@Override
@@ -62,20 +56,14 @@ public class TabAccessories implements ITab
 		}
 
 		@Override
-		public void onOpen(EntityPlayer player)
-		{
-			Minecraft.getMinecraft().displayGuiScreen(new GuiAccessories(PlayerAether.get(player)));
-		}
-
-		@Override
 		public void onClose(EntityPlayer player)
 		{
-			EntityPlayerSP spPlayer = Minecraft.getMinecraft().thePlayer;
-
-			spPlayer.sendQueue.addToSendQueue(new C0DPacketCloseWindow(player.openContainer.windowId));
-			spPlayer.openContainer = player.inventoryContainer;
-
-			spPlayer.inventory.setItemStack(null);
+//			EntityPlayerSP spPlayer = Minecraft.getMinecraft().thePlayer;
+//
+//			spPlayer.sendQueue.addToSendQueue(new C0DPacketCloseWindow(player.openContainer.windowId));
+//			spPlayer.openContainer = player.inventoryContainer;
+//
+//			spPlayer.inventory.setItemStack(null);
 		}
 
 		@Override
