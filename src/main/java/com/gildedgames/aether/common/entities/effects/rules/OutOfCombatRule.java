@@ -1,11 +1,12 @@
 package com.gildedgames.aether.common.entities.effects.rules;
 
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.Entity;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-import com.gildedgames.aether.common.entities.effects.AbilityRule;
+import com.gildedgames.aether.common.entities.effects.EffectRule;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
 
-public class OutOfCombatRule<S extends EntityLivingBase> implements AbilityRule<S>
+public class OutOfCombatRule implements EffectRule
 {
 	
 	private int minimumTime;
@@ -16,9 +17,9 @@ public class OutOfCombatRule<S extends EntityLivingBase> implements AbilityRule<
 	}
 
 	@Override
-	public boolean isMet(S source)
+	public boolean isMet(Entity source)
 	{
-		EntityEffects<S> effects = EntityEffects.get(source);
+		EntityEffects effects = EntityEffects.get(source);
 		
 		return effects.getTicksSinceAttacked() > this.minimumTime;
 	}
@@ -27,6 +28,12 @@ public class OutOfCombatRule<S extends EntityLivingBase> implements AbilityRule<
 	public String[] getUnlocalizedDesc()
 	{
 		return new String[] { "Out of Combat" };
+	}
+	
+	@Override
+	public boolean blockLivingAttackAbility(Entity source, LivingHurtEvent event)
+	{
+		return false;
 	}
 
 }

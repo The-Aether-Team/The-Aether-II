@@ -3,10 +3,11 @@ package com.gildedgames.aether.common.entities.effects.rules;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-import com.gildedgames.aether.common.entities.effects.AbilityRule;
+import com.gildedgames.aether.common.entities.effects.EffectRule;
 
-public class InBiomeRule implements AbilityRule<Entity>
+public class InBiomeRule implements EffectRule
 {
 	
 	private BiomeGenBase biome;
@@ -25,7 +26,13 @@ public class InBiomeRule implements AbilityRule<Entity>
 	@Override
 	public String[] getUnlocalizedDesc()
 	{
-		return new String[] { EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + "In " + EnumChatFormatting.BOLD + this.biome.biomeName + "s" };
+		return new String[] { EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + "In " + this.biome.biomeName + "s" };
+	}
+
+	@Override
+	public boolean blockLivingAttackAbility(Entity source, LivingHurtEvent event)
+	{
+		return false;
 	}
 	
 }

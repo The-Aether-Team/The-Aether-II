@@ -1,10 +1,12 @@
 package com.gildedgames.aether.common.entities.effects.rules;
 
-import com.gildedgames.aether.common.entities.effects.AbilityRule;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-public class WearingItemsRule implements AbilityRule<Entity>
+import com.gildedgames.aether.common.entities.effects.EffectRule;
+
+public class WearingItemsRule implements EffectRule
 {
 
 	@Override
@@ -19,4 +21,10 @@ public class WearingItemsRule implements AbilityRule<Entity>
 		return new String[] { EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + "Wearing Full Set" };
 	}
 
+	@Override
+	public boolean blockLivingAttackAbility(Entity source, LivingHurtEvent event)
+	{
+		return false;
+	}
+	
 }

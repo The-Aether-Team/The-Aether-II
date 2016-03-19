@@ -32,7 +32,7 @@ public class AetherCreativeTabs
 		tabMaterials.setDisplayStack(new ItemStack(ItemsAether.skyroot_stick));
 		tabTools.setDisplayStack(new ItemStack(ItemsAether.gravitite_pickaxe));
 		tabWeapons.setDisplayStack(new ItemStack(ItemsAether.gravitite_sword));
-		tabArmor.setDisplayStack(new ItemStack(ItemsAether.zanite_chestplate));
+		tabArmor.setDisplayStack(new ItemStack(ItemsAether.zanite_helmet));
 		tabConsumables.setDisplayStack(new ItemStack(ItemsAether.orange));
 		tabAccessories.setDisplayStack(new ItemStack(ItemsAether.zanite_ring));
 	}

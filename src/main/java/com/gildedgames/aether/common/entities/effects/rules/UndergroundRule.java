@@ -1,11 +1,12 @@
 package com.gildedgames.aether.common.entities.effects.rules;
 
 import net.minecraft.entity.Entity;
-
-import com.gildedgames.aether.common.entities.effects.AbilityRule;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-public class UndergroundRule implements AbilityRule<Entity>
+import com.gildedgames.aether.common.entities.effects.EffectRule;
+
+public class UndergroundRule implements EffectRule
 {
 
 	@Override
@@ -18,6 +19,12 @@ public class UndergroundRule implements AbilityRule<Entity>
 	public String[] getUnlocalizedDesc()
 	{
 		return new String[] { EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + "Underground" };
+	}
+	
+	@Override
+	public boolean blockLivingAttackAbility(Entity source, LivingHurtEvent event)
+	{
+		return false;
 	}
 
 }

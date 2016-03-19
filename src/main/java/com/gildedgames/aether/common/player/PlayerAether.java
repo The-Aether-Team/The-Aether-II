@@ -1,10 +1,12 @@
 package com.gildedgames.aether.common.player;
 
+import com.gildedgames.aether.common.AetherCapabilities;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.containers.inventory.InventoryAccessories;
-import com.gildedgames.aether.common.entities.effects.EntityEffect;
+import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
+import com.gildedgames.aether.common.entities.effects.EffectInstance;
+import com.gildedgames.aether.common.entities.effects.EffectProcessor;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
-import com.gildedgames.aether.common.items.ItemAccessory;
+import com.gildedgames.aether.common.items.ItemEffectsBase;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
@@ -25,12 +27,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class PlayerAether extends EntityHook<EntityPlayer>
 {
 	public static final PlayerHookProvider<PlayerAether> PROVIDER = new PlayerHookProvider<>("aether:player", new Factory());
 
-	private InventoryAccessories inventoryAccessories = new InventoryAccessories(this);
+	private InventoryEquipment inventoryEquipment = new InventoryEquipment(this);
 
 	private Party currentParty;
 
@@ -39,23 +42,24 @@ public class PlayerAether extends EntityHook<EntityPlayer>
 	{
 		if (!this.getEntity().worldObj.isRemote)
 		{
-			EntityEffects<EntityPlayer> effects = EntityEffects.get(this.getEntity());
-
+			EntityEffects effects = EntityEffects.get(this.getEntity());
+			
 			effects.clearEffects();
-
-			for (ItemStack stack : this.getInventoryAccessories().getInventory())
+			
+			for (ItemStack stack : this.getEquipment().getInventory())
 			{
-				if (stack != null && stack.getItem() instanceof ItemAccessory)
+				if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 				{
-					ItemAccessory acc = (ItemAccessory)stack.getItem();
+					ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
-					for (EntityEffect<EntityPlayer> effect : acc.getEffects())
+					if (itemEffects != null)
 					{
-						if (!effects.addEffect(effect))
+						for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
 						{
-							int count = PlayerUtil.getEffectCount(this.getEntity(), effect);
-
-							effect.getAttributes().setInteger("modifier", count);
+							EffectProcessor processor = effect.getLeft();
+							EffectInstance instance = effect.getRight();
+							
+							effects.put(processor, instance);
 						}
 					}
 				}
@@ -64,7 +68,32 @@ public class PlayerAether extends EntityHook<EntityPlayer>
 	}
 
 	@Override
-	public void onUnloaded() { }
+	public void onUnloaded()
+	{
+		if (!this.getEntity().worldObj.isRemote)
+		{
+			EntityEffects effects = EntityEffects.get(this.getEntity());
+	
+			for (ItemStack stack : this.getEquipment().getInventory())
+			{
+				if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
+				{
+					ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
+	
+					if (itemEffects != null)
+					{
+						for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
+						{
+							EffectProcessor processor = effect.getLeft();
+							EffectInstance instance = effect.getRight();
+							
+							effects.removeInstance(processor, instance);
+						}
+					}
+				}
+			}
+		}
+	}
 
 	public static PlayerAether get(Entity entity)
 	{
@@ -99,13 +128,13 @@ public class PlayerAether extends EntityHook<EntityPlayer>
 
 	}
 
-	public void dropAccessories()
+	public void dropEquipment()
 	{
 		if (!this.getEntity().getEntityWorld().getGameRules().getBoolean("keepInventory"))
 		{
 			this.getEntity().captureDrops = true;
 
-			this.getInventoryAccessories().dropAllItems();
+			this.getEquipment().dropAllItems();
 			
 			this.getEntity().captureDrops = false;
 		}
@@ -119,28 +148,6 @@ public class PlayerAether extends EntityHook<EntityPlayer>
 			{
 				event.newSpeed = event.originalSpeed * 5.0f;
 			}
-		}
-
-		if (PlayerUtil.wearingAccessory(this.getEntity(), ItemsAether.zanite_ring) || PlayerUtil.wearingAccessory(this.getEntity(), ItemsAether.zanite_pendant))
-		{
-			event.newSpeed = event.newSpeed * 5.0f; // testing code!!!! Should be removed.
-
-			// TODO: rings don't have durability so the below code won't do anything
-			// when rings do have durability this should be uncommented and the above removed.
-
-				/*
-				* PlayerAether aePlayer = PlayerAether.get(player);
-				* InventoryAccessories inventory = new InventoryAccessories(aePlayer);
-				*
-				*
-				* for (ItemStack stack : inventory.getInventory())
-				* {
-				*	if (stack != null && stack.getItem() == ItemsAether.zanite_ring)
-				*	{
-				*		event.newSpeed = 1.0f + (stack.getItemDamage() / stack.getMaxDamage() * 3);
-				*	}
-				* }
-				* */
 		}
 	}
 
@@ -158,26 +165,26 @@ public class PlayerAether extends EntityHook<EntityPlayer>
 		}
 	}
 
-	public InventoryAccessories getInventoryAccessories()
+	public InventoryEquipment getEquipment()
 	{
-		return this.inventoryAccessories;
+		return this.inventoryEquipment;
 	}
 
-	public boolean isAccessoryEquipped(Item item)
+	public boolean isItemEquipped(Item item)
 	{
-		return this.getInventoryAccessories().isAccessoryEquipped(item);
+		return this.getEquipment().isItemEquipped(item);
 	}
 
 	@Override
 	public void loadNBTData(NBTTagCompound compound)
 	{
-		this.inventoryAccessories.read(compound);
+		this.inventoryEquipment.read(compound);
 	}
 
 	@Override
 	public void saveNBTData(NBTTagCompound compound)
 	{
-		this.inventoryAccessories.write(compound);
+		this.inventoryEquipment.write(compound);
 	}
 
 	public Party getCurrentParty()
@@ -201,7 +208,7 @@ public class PlayerAether extends EntityHook<EntityPlayer>
 		@Override
 		public void writeFull(ByteBuf buf, PlayerAether hook)
 		{
-			ByteBufHelper.writeItemStacks(buf, hook.getInventoryAccessories().getInventory());
+			ByteBufHelper.writeItemStacks(buf, hook.getEquipment().getInventory());
 		}
 
 		@Override
@@ -211,7 +218,7 @@ public class PlayerAether extends EntityHook<EntityPlayer>
 
 			for (int i = 0; i < accessories.length; i++)
 			{
-				hook.getInventoryAccessories().setInventorySlotContents(i, accessories[i]);
+				hook.getEquipment().setInventorySlotContents(i, accessories[i]);
 			}
 		}
 	}

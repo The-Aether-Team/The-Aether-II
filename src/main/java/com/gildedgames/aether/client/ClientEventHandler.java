@@ -1,7 +1,7 @@
 package com.gildedgames.aether.client;
 
 import com.gildedgames.aether.client.sound.AetherMusicManager;
-import com.gildedgames.aether.common.containers.slots.SlotAccessory;
+import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import com.gildedgames.aether.common.items.armor.ItemObsidianArmor;
 import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.aether.common.util.PlayerUtil;
@@ -41,6 +41,6 @@ public class ClientEventHandler
 	@SubscribeEvent
 	public void onTextureStitchPre(TextureStitchEvent.Pre event)
 	{
-		SlotAccessory.registerIcons(event);
+		SlotEquipment.registerIcons(event);
 	}
 }

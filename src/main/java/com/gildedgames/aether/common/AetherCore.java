@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.client.ClientProxy;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -23,6 +23,7 @@ import com.gildedgames.util.io_manager.exceptions.IOManagerTakenException;
 @Mod(name = AetherCore.MOD_NAME, modid = AetherCore.MOD_ID, version = AetherCore.MOD_VERSION)
 public class AetherCore
 {
+	
 	public static final String MOD_NAME = "Aether II";
 
 	public static final String MOD_ID = "aether";
@@ -63,6 +64,12 @@ public class AetherCore
 		AetherCore.LOGGER = event.getModLog();
 
 		AetherCore.CONFIG = new AetherConfig(event.getSuggestedConfigurationFile());
+		
+		AetherCapabilities capabilities = new AetherCapabilities();
+		
+		capabilities.init();
+		
+        MinecraftForge.EVENT_BUS.register(capabilities);
 
 		AetherCore.PROXY.preInit(event);
 	}

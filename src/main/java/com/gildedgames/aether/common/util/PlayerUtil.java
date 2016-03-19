@@ -4,9 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import com.gildedgames.aether.common.entities.effects.Ability;
-import com.gildedgames.aether.common.entities.effects.EntityEffect;
-import com.gildedgames.aether.common.items.ItemAccessory;
+import com.gildedgames.aether.common.items.ItemPropertiesBase;
 import com.gildedgames.aether.common.player.PlayerAether;
 
 public class PlayerUtil
@@ -85,24 +83,24 @@ public class PlayerUtil
 	{
 		PlayerAether aePlayer = PlayerAether.get(player);
 		
-		if (!(stack.getItem() instanceof ItemAccessory))
+		if (!(stack.getItem() instanceof ItemPropertiesBase))
 		{
 			return false;
 		}
 
 		for (int index = 0; index < 8; index++)
 		{
-			ItemStack slotStack = aePlayer.getInventoryAccessories().getInventory()[index];
+			ItemStack slotStack = aePlayer.getEquipment().getInventory()[index];
 			
 			if (slotStack == stack)
 			{
 				return true;
 			}
-			else if (slotStack != null && slotStack.getItem() instanceof ItemAccessory)
+			else if (slotStack != null && slotStack.getItem() instanceof ItemPropertiesBase)
 			{
-				ItemAccessory acc = (ItemAccessory)slotStack.getItem();
+				ItemPropertiesBase acc = (ItemPropertiesBase)slotStack.getItem();
 				
-				if (acc.getType() == ((ItemAccessory)stack.getItem()).getType())
+				if (acc.getEquipmentType() == ((ItemPropertiesBase)stack.getItem()).getEquipmentType())
 				{
 					return false;
 				}
@@ -116,7 +114,7 @@ public class PlayerUtil
 	{
 		PlayerAether aePlayer = PlayerAether.get(player);
 
-		return aePlayer.isAccessoryEquipped(item);
+		return aePlayer.isItemEquipped(item);
 	}
 	
 	public static int getAccessoryCount(EntityPlayer player, Item itemID)
@@ -127,42 +125,9 @@ public class PlayerUtil
 
 		for (int index = 0; index < 8; index++)
 		{
-			if (aePlayer.getInventoryAccessories().getInventory()[index] != null && aePlayer.getInventoryAccessories().getInventory()[index].getItem() == itemID)
+			if (aePlayer.getEquipment().getInventory()[index] != null && aePlayer.getEquipment().getInventory()[index].getItem() == itemID)
 			{
 				count++;
-			}
-		}
-
-		return count;
-	}
-	
-	public static int getEffectCount(EntityPlayer player, EntityEffect<EntityPlayer> effect)
-	{
-		PlayerAether aePlayer = PlayerAether.get(player);
-		
-		int count = 0;
-
-		for (int index = 0; index < 8; index++)
-		{
-			ItemStack stack = aePlayer.getInventoryAccessories().getInventory()[index];
-			
-			if (stack != null && stack.getItem() instanceof ItemAccessory)
-			{
-				ItemAccessory acc = (ItemAccessory)stack.getItem();
-				
-				for (EntityEffect<EntityPlayer> itEffect : acc.getEffects())
-				{
-					for (Ability<EntityPlayer> ability : itEffect.getAbilities())
-					{
-						for (Ability<EntityPlayer> otherAbility : effect.getAbilities())
-						{
-							if (ability.getClass().isAssignableFrom(otherAbility.getClass()))
-							{
-								count++;
-							}
-						}
-					}
-				}
 			}
 		}
 

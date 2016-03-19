@@ -106,7 +106,7 @@ public class PlayerAetherEventHooks
 
 		if (aePlayer != null)
 		{
-			aePlayer.dropAccessories();
+			aePlayer.dropEquipment();
 		}
 	}
 }
