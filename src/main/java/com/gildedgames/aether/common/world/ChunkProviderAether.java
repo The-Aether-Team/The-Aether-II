@@ -423,7 +423,7 @@ public class ChunkProviderAether implements IChunkProvider
 	}
 
 	@Override
-	public boolean func_177460_a(IChunkProvider chunkProvider, Chunk chunk, int chunkX, int chunkZ)
+	public boolean populateChunk(IChunkProvider chunkProvider, Chunk chunk, int chunkX, int chunkZ)
 	{
 		return false;
 	}

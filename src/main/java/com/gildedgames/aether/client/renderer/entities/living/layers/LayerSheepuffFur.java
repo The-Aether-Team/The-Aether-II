@@ -30,7 +30,7 @@ public class LayerSheepuffFur implements LayerRenderer
 
 		if (!sheepuff.getSheared() && !sheepuff.isInvisible())
 		{
-			float[] colors = EntitySheep.func_175513_a(sheepuff.getFleeceColor());
+			float[] colors = EntitySheep.getDyeRgb(sheepuff.getFleeceColor());
 			GlStateManager.color(colors[0], colors[1], colors[2]);
 
 			this.render.bindTexture(texture);

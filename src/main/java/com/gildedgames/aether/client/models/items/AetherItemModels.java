@@ -36,6 +36,7 @@ public class AetherItemModels
 		registerModels();
 	}
 
+	@SuppressWarnings("deprecation")
 	private static void defineModels()
 	{
 		registerItemModels(new ItemModelList(BlocksAether.aether_dirt)

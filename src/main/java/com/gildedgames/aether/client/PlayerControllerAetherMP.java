@@ -30,15 +30,10 @@ public class PlayerControllerAetherMP extends PlayerControllerMP
 		this.controller = controller;
 	}
 
-	public static void clickBlockCreative(Minecraft mcIn, PlayerControllerMP p_178891_1_, BlockPos p_178891_2_, EnumFacing p_178891_3_)
-	{
-		PlayerControllerMP.clickBlockCreative(mcIn, p_178891_1_, p_178891_2_, p_178891_3_);
-	}
-
 	@Override
-	public void setPlayerCapabilities(EntityPlayer p_78748_1_)
+	public void setPlayerCapabilities(EntityPlayer player)
 	{
-		controller.setPlayerCapabilities(p_78748_1_);
+		controller.setPlayerCapabilities(player);
 	}
 
 	@Override
@@ -48,9 +43,9 @@ public class PlayerControllerAetherMP extends PlayerControllerMP
 	}
 
 	@Override
-	public void setGameType(WorldSettings.GameType p_78746_1_)
+	public void setGameType(WorldSettings.GameType type)
 	{
-		controller.setGameType(p_78746_1_);
+		controller.setGameType(type);
 	}
 
 	@Override
@@ -124,9 +119,9 @@ public class PlayerControllerAetherMP extends PlayerControllerMP
 	}
 
 	@Override
-	public EntityPlayerSP func_178892_a(World worldIn, StatFileWriter p_178892_2_)
+	public EntityPlayerSP func_178892_a(World worldIn, StatFileWriter statWriter)
 	{
-		return controller.func_178892_a(worldIn, p_178892_2_);
+		return controller.func_178892_a(worldIn, statWriter);
 	}
 
 	@Override
@@ -142,9 +137,9 @@ public class PlayerControllerAetherMP extends PlayerControllerMP
 	}
 
 	@Override
-	public boolean func_178894_a(EntityPlayer p_178894_1_, Entity p_178894_2_, MovingObjectPosition p_178894_3_)
+	public boolean isPlayerRightClickingOnEntity(EntityPlayer player, Entity entity, MovingObjectPosition mos)
 	{
-		return controller.func_178894_a(p_178894_1_, p_178894_2_, p_178894_3_);
+		return controller.isPlayerRightClickingOnEntity(player, entity, mos);
 	}
 
 	@Override
@@ -154,9 +149,9 @@ public class PlayerControllerAetherMP extends PlayerControllerMP
 	}
 
 	@Override
-	public void sendEnchantPacket(int p_78756_1_, int p_78756_2_)
+	public void sendEnchantPacket(int windowID, int button)
 	{
-		controller.sendEnchantPacket(p_78756_1_, p_78756_2_);
+		controller.sendEnchantPacket(windowID, button);
 	}
 
 	@Override
@@ -220,8 +215,8 @@ public class PlayerControllerAetherMP extends PlayerControllerMP
 	}
 
 	@Override
-	public boolean func_181040_m()
+	public boolean getIsHittingBlock()
 	{
-		return controller.func_181040_m();
+		return controller.getIsHittingBlock();
 	}
 }
