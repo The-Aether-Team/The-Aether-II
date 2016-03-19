@@ -20,15 +20,15 @@ public class GuiEquipment extends GuiContainer
 
 	private static final ResourceLocation textureAccessories = new ResourceLocation("aether", "textures/gui/inventory/accessories/equipment.png");
 
-	private static final ResourceLocation textureAccessoriesPattern = new ResourceLocation("aether", "textures/gui/inventory/accessories/equipment_pattern.png");
+	//private static final ResourceLocation textureAccessoriesPattern = new ResourceLocation("aether", "textures/gui/inventory/accessories/equipment_pattern.png");
 	
 	private static final ResourceLocation textureBackpack = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack.png");
 
 	private static final ResourceLocation textureBackpackCreative = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack_creative.png");
 
-	private static final ResourceLocation textureBackpackPattern = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack_pattern.png");
+	//private static final ResourceLocation textureBackpackPattern = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack_pattern.png");
 
-	private static final ResourceLocation textureBackpackCreativePattern = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack_creative_pattern.png");
+	//private static final ResourceLocation textureBackpackCreativePattern = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack_creative_pattern.png");
 	
 //	private static final ResourceLocation TEXTURE_COINBAR = new ResourceLocation("aether", "textures/gui/coinbar.png");
 
@@ -50,8 +50,8 @@ public class GuiEquipment extends GuiContainer
 		this.guiLeft = this.width / 2 - 90 - (176 / 2);
 		this.guiTop = this.height / 2 - (147 / 2);
 
-		this.xSize = 183 * 2;
-		this.ySize = 150;
+		this.xSize = 176 * 2;
+		this.ySize = 146;
 	}
 
 	@Override
@@ -63,13 +63,13 @@ public class GuiEquipment extends GuiContainer
 
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
-		this.drawTexturedModalRect(this.width / 2 - 90 - 183 / 2, this.height / 2 - 166 / 2, 0, 0, 183, 171);
+		this.drawTexturedModalRect(this.width / 2 - 90 - 170 / 2, this.height / 2 - 123 / 2, 0, 0, 183, 171);
 		
-		this.mc.renderEngine.bindTexture(textureAccessoriesPattern);
+		//this.mc.renderEngine.bindTexture(textureAccessoriesPattern);
 
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+		//GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
-		this.drawTexturedModalRect(this.width / 2 - 90 - 183 / 2, this.height / 2 - 166 / 2, 0, 0, 183, 171);
+		//this.drawTexturedModalRect(this.width / 2 - 90 - 183 / 2, this.height / 2 - 166 / 2, 0, 0, 183, 171);
 
 		this.mc.renderEngine.bindTexture(aePlayer.getEntity().capabilities.isCreativeMode ? textureBackpackCreative : textureBackpack);
 
@@ -77,11 +77,11 @@ public class GuiEquipment extends GuiContainer
 
 		this.fontRendererObj.drawString(I18n.format("container.crafting"), this.width / 2 + (this.aePlayer.getEntity().capabilities.isCreativeMode ? 70 : 51), this.height / 2 - 135 / 2, 4210752);
 		
-		this.mc.renderEngine.bindTexture(aePlayer.getEntity().capabilities.isCreativeMode ? textureBackpackCreativePattern : textureBackpackPattern);
+		//this.mc.renderEngine.bindTexture(aePlayer.getEntity().capabilities.isCreativeMode ? textureBackpackCreativePattern : textureBackpackPattern);
 
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+		//GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 		
-		this.drawTexturedModalRect(this.width / 2 + 90 - 176 / 2, this.height / 2 - 166 / 2, 0, 0, 176, 166);
+		//this.drawTexturedModalRect(this.width / 2 + 90 - 176 / 2, this.height / 2 - 166 / 2, 0, 0, 176, 166);
 
 		this.drawPlayer(mouseX, mouseY);
 		
@@ -160,7 +160,7 @@ public class GuiEquipment extends GuiContainer
 
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
-		GuiInventory.drawEntityOnScreen(this.width / 2 - 48, this.height / 2 + 18, 40, (this.guiLeft + 88) - mouseX, (this.guiTop + 42) - mouseY, this.mc.thePlayer);
+		GuiInventory.drawEntityOnScreen(this.width / 2 - 48, this.height / 2 + 25, 35, (this.guiLeft + 88) - mouseX, (this.guiTop + 42) - mouseY, this.mc.thePlayer);
 
 //		if (player.currentCompanion != null)
 //		{
