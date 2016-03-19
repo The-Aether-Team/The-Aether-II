@@ -29,19 +29,19 @@ public class InventoryEquipment implements IInventory, NBT
 			ItemEquipmentType.RELIC,
 			ItemEquipmentType.RELIC,
 			ItemEquipmentType.HANDWEAR,
-			ItemEquipmentType.SHIELD,
+			//ItemEquipmentType.SHIELD,
 			ItemEquipmentType.RING,
 			ItemEquipmentType.RING,
 			ItemEquipmentType.NECKWEAR,
 			ItemEquipmentType.AMMUNITION,
 			ItemEquipmentType.COMPANION,
-			ItemEquipmentType.ARTIFACT,
+			/*ItemEquipmentType.ARTIFACT,
 			ItemEquipmentType.CHARM,
 			ItemEquipmentType.CHARM,
 			ItemEquipmentType.CHARM,
 			ItemEquipmentType.CHARM,
 			ItemEquipmentType.CHARM,
-			ItemEquipmentType.CHARM
+			ItemEquipmentType.CHARM*/
 	};
 
 	private final PlayerAether aePlayer;
