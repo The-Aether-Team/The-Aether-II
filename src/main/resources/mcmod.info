@@ -1,0 +1,16 @@
+{
+  "modListVersion": 2,
+  "modList": [{
+    "modid": "aether",
+    "name": "Aether II",
+    "description": " In development by Gilded Games, the Aether II is an extensive mod for Minecraft which implements a remarkable world in the skies. Adventure, danger, and mystery awaits in the depths of the Aether.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "authorList": [ "Brandon Pearce", "Collin Soares", "Emile van Krieken", "Oscar Payn", "Hugo Payn", "Brandon Potts", "Christian Peterson", "Jon Lachney" ],
+    "url": "http://AetherII.com",
+    "credits": "Designed and Created by Gilded Games with <3",
+    "requiredMods": [ "Forge", "gildedgamesutil" ],
+    "dependencies": [ "gildedgamesutil" ],
+    "useDependencyInformation": true
+  }]
+}

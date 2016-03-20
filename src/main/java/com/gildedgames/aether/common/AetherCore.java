@@ -28,7 +28,7 @@ public class AetherCore
 
 	public static final String MOD_ID = "aether";
 
-	public static final String MOD_VERSION = "1.8-1.0";
+	public static final String MOD_VERSION = "1.8.9-r1";
 
 	public static final Logger LOGGER = LogManager.getLogger("AetherII");
 
