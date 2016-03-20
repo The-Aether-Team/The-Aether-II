@@ -2,6 +2,8 @@ package com.gildedgames.aether.common.blocks;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.AetherCreativeTabs;
+import com.gildedgames.aether.common.blocks.construction.aether_walls.BlockAerogelWall;
+import com.gildedgames.aether.common.blocks.construction.aether_walls.BlockAetherWall;
 import com.gildedgames.aether.common.blocks.construction.skyroot_fence.BlockSkyrootFence;
 import com.gildedgames.aether.common.blocks.construction.skyroot_fence.BlockSkyrootFenceGate;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
@@ -118,6 +120,9 @@ public class BlocksAether
 
 	public static BlockWallSkyrootSign wall_skyroot_sign;
 
+	public static BlockAetherWall holystone_wall, holystone_wall_mossy, carved_stone_wall, icestone_wall, aerogel_wall, skyroot_log_wall;
+
+
 	public static void preInit()
 	{
 		aether_dirt = registerBlock("aether_dirt", new Block(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f), AetherCreativeTabs.tabBlocks);
@@ -207,6 +212,13 @@ public class BlocksAether
 
 		wall_skyroot_sign = registerBlock("wall_skyroot_sign", new BlockWallSkyrootSign());
 
+		holystone_wall = registerBlock("holystone_wall", new BlockAetherWall(BlocksAether.holystone, 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
+		holystone_wall_mossy = registerBlock("holystone_wall_mossy", new BlockAetherWall(BlocksAether.holystone, 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
+		carved_stone_wall = registerBlock("carved_stone_wall", new BlockAetherWall(BlocksAether.carved_stone, 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
+		icestone_wall = registerBlock("icestone_wall", new BlockAetherWall(BlocksAether.icestone_bricks, 3.0f, 10.0f), AetherCreativeTabs.tabBlocks);
+		skyroot_log_wall = registerBlock("skyroot_log_wall", new BlockAetherWall(BlocksAether.skyroot_log, 2.0f, 10.0f), AetherCreativeTabs.tabBlocks);
+		aerogel_wall = registerBlock("aerogel_wall", new BlockAerogelWall(BlocksAether.aerogel, 1.0f, 10.f), AetherCreativeTabs.tabBlocks);
+
 		registerHarvestLevels();
 	}
 
@@ -244,6 +256,14 @@ public class BlocksAether
 		holystone_brick.setHarvestLevel("pickaxe", 0);
 
 		skyroot_door.setHarvestLevel("axe", 0);
+
+		holystone_wall.setHarvestLevel("pickaxe", 0);
+		holystone_wall_mossy.setHarvestLevel("pickaxe", 0);
+		carved_stone_wall.setHarvestLevel("pickaxe", 0);
+		skyroot_log_wall.setHarvestLevel("axe", 0);
+		icestone_wall.setHarvestLevel("pickaxe", 1);
+		aerogel_wall.setHarvestLevel("pickaxe", 1);
+
 	}
 
 	private static <T extends Block> T registerBlock(String name, T block, CreativeTabs tab)
