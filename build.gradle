@@ -1,48 +1,61 @@
 buildscript {
-    repositories {
-        jcenter()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-    }
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
-    }
+	repositories {
+		jcenter()
+		maven {
+			name = "forge"
+			url = "http://files.minecraftforge.net/maven"
+		}
+	}
+	dependencies {
+		classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
+		classpath 'org.ajoberstar:gradle-git:1.4.2'
+	}
 }
+
+import org.ajoberstar.grgit.*
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 
 ext.config = loadConfig(file('build.properties'))
+ext.repo = Grgit.open(project.file('.'))
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-version = config.mod_version
-group = 'com.gildedgames.aether'
+version = "${config.mod_version}"
+group = "com.gildedgames.aether"
 archivesBaseName = "AetherII"
 
+ext.ciVersion = System.getenv("BUILD_VERSION")
+ext.gitVersion = repo.head().abbreviatedId
+
+if (ciVersion != null) {
+	version = "${config.mod_version}.build-${ciVersion}"
+} else {
+	version = "${config.mod_version}.git-${gitVersion}"
+}
+
 dependencies {
-    compile project(":Gilded-Games-Util")
+	compile project(":Gilded-Games-Util")
 }
 
 minecraft {
-    version = config.forge_version
-    mappings = config.forge_mappings
+	version = config.forge_version
+	mappings = config.forge_mappings
 
-    runDir = "run"
+	runDir = "run"
 }
 
 processResources {
-    from (sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
+	from (sourceSets.main.resources.srcDirs) {
+		include 'mcmod.info'
 
-        expand 'version': project.version, 'mcversion': project.minecraft.version
-    }
+		expand 'version': project.version, 'mcversion': project.minecraft.version
+	}
 
-    from (sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
+	from (sourceSets.main.resources.srcDirs) {
+		exclude 'mcmod.info'
+	}
 }
 
 idea {
@@ -51,11 +64,27 @@ idea {
 	}
 }
 
-def loadConfig(File config) {
-	config.withReader {
-		def properties = new Properties()
-		properties.load(it)
+// We disable this because Gradle will fail to build otherwise for some reason.
+// See https://github.com/MinecraftForge/Srg2Source/issues/10
+minecraft {
+	makeObfSourceJar = false
+}
 
-		return (new ConfigSlurper().parse(properties))
+def loadConfig(File config) {
+	def props = new Properties()
+	config.withInputStream {
+		stream -> props.load(stream)
+	}
+	return new ConfigSlurper().parse(props)
+}
+
+task signJar(type: SignJar, dependsOn: reobfJar) {
+	if (project.hasProperty("aether_keystore")) {
+		keyStore = project.aether_keystore
+		alias = project.aether_keystore_alias
+		storePass = project.aether_keystore_pass
+		keyPass = project.aether_keystore_pass
+		inputFile = jar.archivePath
+		outputFile = jar.archivePath
 	}
 }

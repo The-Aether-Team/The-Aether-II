@@ -87,6 +87,11 @@ public class CommonProxy
 		MinecraftForge.EVENT_BUS.register(new EntityEffectsEventHooks());
 		MinecraftForge.EVENT_BUS.register(new PartyMemberTracker());
 
+		AetherCapabilities capabilities = new AetherCapabilities();
+		capabilities.init();
+
+		MinecraftForge.EVENT_BUS.register(capabilities);
+
 		MinecraftForge.EVENT_BUS.register(ItemsAether.skyroot_sword);
 
 		ChunkModule.api().registerHookFactory(new PlacementFlagFactory());

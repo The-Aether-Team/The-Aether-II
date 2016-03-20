@@ -54,13 +54,7 @@ tile.aether.quicksoil_glass.name=Quicksoil Glass
 tile.aether.skyroot_chest.name=Skyroot Chest
 tile.aether.ambrosium_torch.name=Ambrosium Torch
 tile.aether.skyroot_fence.name=Skyroot Fence
-tile.aether.skyroot_fence_gate.name=Skyroot Fence Gates
-tile.aether.holystone_wall.name=Holystone Wall
-tile.aether.carved_stone_wall.name=Carved Stone Wall
-tile.aether.holystone_wall_mossy.name=Mossy Holystone Wall
-tile.aether.icestone_wall.name=Icestone Brick Wall
-tile.aether.skyroot_log_wall.name=Skyroot Log Wall
-tile.aether.aerogel_wall.name=Aerogel Wall
+tile.aether.skyroot_fence_gate.name=Skyroot Fence Gate
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
