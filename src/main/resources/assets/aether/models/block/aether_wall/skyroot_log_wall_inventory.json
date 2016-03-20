@@ -1,0 +1,6 @@
+{
+    "parent": "block/wall_inventory",
+    "textures": {
+        "wall": "aether:blocks/aether_log/skyroot_log_side"
+    }
+}

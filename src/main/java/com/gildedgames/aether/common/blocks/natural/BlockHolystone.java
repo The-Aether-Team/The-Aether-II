@@ -33,6 +33,7 @@ public class BlockHolystone extends Block implements IAetherBlockWithVariants
 		super(Material.rock);
 
 		this.setHardness(2.0F);
+		this.setResistance(10.0F);
 
 		this.setStepSound(Block.soundTypeStone);
 

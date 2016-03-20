@@ -68,8 +68,19 @@ public class RecipesAether
 
 		// Fences and Walls
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_fence, 3), "XYX","XYX",
-		'X', new ItemStack(BlocksAether.skyroot_planks),
-		'Y', new ItemStack(ItemsAether.skyroot_stick));
+				'X', new ItemStack(BlocksAether.skyroot_planks),
+				'Y', new ItemStack(ItemsAether.skyroot_stick));
+
+		registerShapedRecipe(new ItemStack(BlocksAether.holystone_wall, 6), "XXX","XXX",
+				'X', new ItemStack(BlocksAether.holystone));
+		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_log_wall, 6), "XXX","XXX",
+				'X', new ItemStack(BlocksAether.skyroot_log));
+		registerShapedRecipe(new ItemStack(BlocksAether.icestone_wall, 6), "XXX","XXX",
+				'X', new ItemStack(BlocksAether.icestone_bricks));
+		registerShapedRecipe(new ItemStack(BlocksAether.carved_stone_wall, 6), "XXX","XXX",
+				'X', new ItemStack(BlocksAether.carved_stone));
+		registerShapedRecipe(new ItemStack(BlocksAether.aerogel_wall, 6), "XXX","XXX",
+				'X', new ItemStack(BlocksAether.aerogel));
 
 		// Gates
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_fence_gate, 1), "YXY", "YXY",
