@@ -18,3 +18,8 @@ We hope these templates should be usable for both Eclipse and IntelliJ IDEA user
 Setting up your workspace is identical to any other Forge-based mod environment. At this time, we only support IntelliJ 15 (and newer), sorry Eclipse users.
 
 We make use of _Git submodules_, which don't always get downloaded using the `Download as ZIP` button. If you've cloned using a Git client, make sure you've told it to recursively clone submodules as well.
+
+### License
+The Aether rewrite is under the [GNU GPL v3](http://www.gnu.org/licenses/gpl-3.0.en.html) license.
+
+Additionally, all assets of the Aether rewrite (found in `src/main/resources`) are under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
