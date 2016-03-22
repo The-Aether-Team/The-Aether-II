@@ -242,7 +242,7 @@ public class ItemsAether
 		valkyrie_chestplate = registerItem("valkyrie_chestplate", new ItemValkyrieArmor(AetherMaterials.VALKYRIE_ARMOR, 1));
 		valkyrie_leggings = registerItem("valkyrie_leggings", new ItemValkyrieArmor(AetherMaterials.VALKYRIE_ARMOR, 2));
 		valkyrie_boots = registerItem("valkyrie_boots", new ItemValkyrieArmor(AetherMaterials.VALKYRIE_ARMOR, 3));
-		
+
 		sentry_boots = registerItem("sentry_boots", new ItemSentryBoots(AetherMaterials.LEGENDARY_ARMOR, 3));
 
 		golden_amber = registerItem("golden_amber", new Item(), AetherCreativeTabs.tabMaterials);
@@ -457,7 +457,7 @@ public class ItemsAether
 			public List<Pair<EffectProcessor, EffectInstance>> provide()
 			{
 				List<Pair<EffectProcessor, EffectInstance>> clone = Lists.newArrayList();
-				
+
 				for (Pair<EffectProcessor, EffectInstance> pair : this.pairs)
 				{
 					clone.add(Pair.of(pair.getLeft(), pair.getRight().cloneInstance()));

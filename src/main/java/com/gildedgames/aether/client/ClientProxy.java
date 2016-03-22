@@ -5,6 +5,7 @@ import com.gildedgames.aether.client.lang.AetherLanguageManager;
 import com.gildedgames.aether.client.models.blocks.AetherBlockModels;
 import com.gildedgames.aether.client.models.items.AetherItemModels;
 import com.gildedgames.aether.client.renderer.AetherRenderers;
+import com.gildedgames.aether.client.renderer.ClientRenderHandler;
 import com.gildedgames.aether.client.sound.AetherSounds;
 import com.gildedgames.aether.client.sound.SoundEventHandler;
 import com.gildedgames.aether.common.AetherCreativeTabs;
@@ -40,6 +41,7 @@ public class ClientProxy extends CommonProxy
 		AetherSounds.init();
 
 		MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
+		MinecraftForge.EVENT_BUS.register(new ClientRenderHandler());
 		MinecraftForge.EVENT_BUS.register(new SoundEventHandler());
 
 		TabModule.api().getInventoryGroup().registerClientTab(new TabEquipment.Client());

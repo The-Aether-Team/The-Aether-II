@@ -11,9 +11,9 @@ public enum ItemRarity
 	MYTHIC("item.rarity.mythic.name", 1.0F),
 	GODLY("item.rarity.godly.name", 1.0F);
 	
-	private String unlocalizedName;
+	private final String unlocalizedName;
 	
-	private float weight;
+	private final float weight;
 	
 	ItemRarity(String unlocalizedName, float weight)
 	{

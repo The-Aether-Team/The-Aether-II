@@ -22,7 +22,7 @@ import com.gildedgames.util.core.nbt.NBT;
 
 public class InventoryEquipment implements IInventory, NBT
 {
-	private static final int INVENTORY_SIZE = 16;
+	private static final int INVENTORY_SIZE = 8;
 
 	public static final ItemEquipmentType[] slotTypes = new ItemEquipmentType[]
 	{
