@@ -7,10 +7,13 @@ import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 
 public class ClientEventHandler
@@ -35,6 +38,23 @@ public class ClientEventHandler
 			{
 				AetherMusicManager.INSTANCE.update(aePlayer);
 			}
+		}
+	}
+
+	@SubscribeEvent
+	public void onWorldLoad(WorldEvent.Load event)
+	{
+		if (event.world instanceof WorldClient)
+		{
+			Minecraft mc = Minecraft.getMinecraft();
+
+			if (!(mc.playerController instanceof PlayerControllerAetherMP))
+			{
+				Minecraft.getMinecraft().playerController = PlayerControllerAetherMP.create(mc.playerController);
+			}
+
+			ClientProxy.clientPlayerController = (PlayerControllerAetherMP) mc.playerController;
+
 		}
 	}
 

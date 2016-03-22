@@ -12,6 +12,7 @@ import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.CommonProxy;
 import com.gildedgames.util.modules.tab.TabModule;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
@@ -20,6 +21,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ClientProxy extends CommonProxy
 {
+	public static PlayerControllerAetherMP clientPlayerController;
+
 	@Override
 	public void preInit(FMLPreInitializationEvent event)
 	{
@@ -52,20 +55,13 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void setExtendedReachDistance(EntityPlayer entity, float distance)
 	{
-		if (!entity.worldObj.isRemote)
+		if (entity.worldObj instanceof WorldClient)
 		{
-			super.setExtendedReachDistance(entity, distance);
+			ClientProxy.clientPlayerController.setExtendedBlockReachDistance(distance);
 
 			return;
 		}
 
-		if (!(Minecraft.getMinecraft().playerController instanceof PlayerControllerAetherMP))
-		{
-			Minecraft.getMinecraft().playerController = new PlayerControllerAetherMP(Minecraft.getMinecraft(), Minecraft.getMinecraft().getNetHandler(), Minecraft.getMinecraft().playerController);
-		}
-
-		PlayerControllerAetherMP aeController = (PlayerControllerAetherMP) Minecraft.getMinecraft().playerController;
-
-		aeController.setExtendedBlockReachDistance(distance);
+		super.setExtendedReachDistance(entity, distance);
 	}
 }
