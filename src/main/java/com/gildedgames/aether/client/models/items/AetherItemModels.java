@@ -36,7 +36,6 @@ public class AetherItemModels
 		registerModels();
 	}
 
-	@SuppressWarnings("deprecation")
 	private static void defineModels()
 	{
 		registerItemModels(new ItemModelList(BlocksAether.aether_dirt)
@@ -252,7 +251,7 @@ public class AetherItemModels
 		registerItemModels(new ItemModelList(ItemsAether.pig_slayer).add(0, "weapons/pig_slayer"));
 		registerItemModels(new ItemModelList(ItemsAether.vampire_blade).add(0, "weapons/vampire_blade"));
 		registerItemModels(new ItemModelList(ItemsAether.candy_cane_sword).add(0, "weapons/candy_cane_sword"));
-		
+
 		registerItemModels(new ItemModelList(ItemsAether.skyroot_door).add(0, "skyroot_door"));
 
 		registerItemModels(new ItemModelList(ItemsAether.gold_ring).add(0, "accessories/gold_ring"));
@@ -268,12 +267,12 @@ public class AetherItemModels
 
 		registerItemModels(new ItemModelList(BlocksAether.skyroot_chest).add(0, "skyroot_chest"));
 		registerItemModels(new ItemModelList(BlocksAether.ambrosium_torch).add(0, "ambrosium_torch"));
-		
+
 		registerItemModels(new ItemModelList(ItemsAether.ice_ring).add(0, "accessories/ice_ring"));
 		registerItemModels(new ItemModelList(ItemsAether.ice_pendant).add(0, "accessories/ice_pendant"));
-		
+
 		registerItemModels(new ItemModelList(ItemsAether.daggerfrost_locket).add(0, "accessories/daggerfrost_locket"));
-		
+
 		registerItemModels(new ItemModelList(ItemsAether.candy_ring).add(0, "accessories/candy_ring"));
 		registerItemModels(new ItemModelList(ItemsAether.bone_ring).add(0, "accessories/bone_ring"));
 		registerItemModels(new ItemModelList(ItemsAether.skyroot_ring).add(0, "accessories/skyroot_ring"));
@@ -284,18 +283,18 @@ public class AetherItemModels
 
 		registerItemModels(new ItemModelList(ItemsAether.barbed_iron_ring).add(0, "accessories/barbed_iron_ring"));
 		registerItemModels(new ItemModelList(ItemsAether.barbed_gold_ring).add(0, "accessories/barbed_gold_ring"));
-		
+
 		registerItemModels(new ItemModelList(ItemsAether.solar_band).add(0, "accessories/solar_band"));
 		registerItemModels(new ItemModelList(ItemsAether.lunar_band).add(0, "accessories/lunar_band"));
-		
+
 		registerItemModels(new ItemModelList(ItemsAether.ring_of_growth).add(0, "accessories/ring_of_growth"));
 		registerItemModels(new ItemModelList(ItemsAether.plague_coil).add(0, "accessories/plague_coil"));
-		
+
 		registerItemModels(new ItemModelList(ItemsAether.fleeting_ring).add(0, "accessories/fleeting_ring"));
 		registerItemModels(new ItemModelList(ItemsAether.lesser_ring_of_growth).add(0, "accessories/lesser_ring_of_growth"));
 		registerItemModels(new ItemModelList(ItemsAether.winged_ring).add(0, "accessories/winged_ring"));
 		registerItemModels(new ItemModelList(ItemsAether.life_coil).add(0, "accessories/life_coil"));
-		
+
 		registerItemModels(new ItemModelList(ItemsAether.iron_barbed_wire).add(0, "accessories/iron_barbed_wire"));
 		registerItemModels(new ItemModelList(ItemsAether.wisdom_bauble).add(0, "accessories/wisdom_bauble"));
 		registerItemModels(new ItemModelList(ItemsAether.bone_shard).add(0, "accessories/bone_shard"));

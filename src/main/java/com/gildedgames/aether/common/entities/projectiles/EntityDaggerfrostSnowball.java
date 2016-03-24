@@ -11,44 +11,44 @@ import net.minecraft.world.World;
 public class EntityDaggerfrostSnowball extends EntitySnowball
 {
 
-    public EntityDaggerfrostSnowball(World world)
-    {
-        super(world);
-    }
+	public EntityDaggerfrostSnowball(World world)
+	{
+		super(world);
+	}
 
-    public EntityDaggerfrostSnowball(World world, EntityLivingBase thrower)
-    {
-        super(world, thrower);
-    }
+	public EntityDaggerfrostSnowball(World world, EntityLivingBase thrower)
+	{
+		super(world, thrower);
+	}
 
-    public EntityDaggerfrostSnowball(World world, double x, double y, double z)
-    {
-        super(world, x, y, z);
-    }
-    
-    protected void onImpact(MovingObjectPosition pos)
-    {
-        if (pos.entityHit != null)
-        {
-            byte b0 = 2;
+	public EntityDaggerfrostSnowball(World world, double x, double y, double z)
+	{
+		super(world, x, y, z);
+	}
 
-            if (pos.entityHit instanceof EntityBlaze)
-            {
-                b0 += 3;
-            }
+	protected void onImpact(MovingObjectPosition pos)
+	{
+		if (pos.entityHit != null)
+		{
+			byte b0 = 2;
 
-            pos.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)b0);
-        }
+			if (pos.entityHit instanceof EntityBlaze)
+			{
+				b0 += 3;
+			}
 
-        for (int i = 0; i < 8; ++i)
-        {
-            this.worldObj.spawnParticle(EnumParticleTypes.SNOWBALL, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
-        }
+			pos.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float) b0);
+		}
 
-        if (!this.worldObj.isRemote)
-        {
-            this.setDead();
-        }
-    }
+		for (int i = 0; i < 8; ++i)
+		{
+			this.worldObj.spawnParticle(EnumParticleTypes.SNOWBALL, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+		}
+
+		if (!this.worldObj.isRemote)
+		{
+			this.setDead();
+		}
+	}
 
 }

@@ -1,15 +1,5 @@
 package com.gildedgames.aether.common.containers;
 
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ContainerPlayer;
-import net.minecraft.inventory.InventoryBasic;
-import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotCrafting;
-import net.minecraft.item.ItemStack;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.gildedgames.aether.common.AetherCapabilities;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
@@ -20,6 +10,14 @@ import com.gildedgames.aether.common.items.ItemEffectsBase;
 import com.gildedgames.aether.common.items.ItemEquipmentType;
 import com.gildedgames.aether.common.items.ItemPropertiesBase;
 import com.gildedgames.aether.common.player.PlayerAether;
+import net.minecraft.client.gui.inventory.GuiContainerCreative;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ContainerPlayer;
+import net.minecraft.inventory.InventoryBasic;
+import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.SlotCrafting;
+import net.minecraft.item.ItemStack;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class ContainerEquipment extends ContainerPlayer
 {
@@ -52,7 +50,7 @@ public class ContainerEquipment extends ContainerPlayer
 			slot.xDisplayPosition += widthOffset;
 			slot.yDisplayPosition += heightOffset;
 		}
-		
+
 		Slot helmet = this.inventorySlots.get(5);
 		Slot chestplate = this.inventorySlots.get(6);
 		Slot leggings = this.inventorySlots.get(7);
@@ -60,18 +58,18 @@ public class ContainerEquipment extends ContainerPlayer
 
 		helmet.xDisplayPosition = 43;
 		helmet.yDisplayPosition = 33;
-		
+
 		chestplate.xDisplayPosition = 43;
 		chestplate.yDisplayPosition = 54;
-		
+
 		leggings.xDisplayPosition = 43;
 		leggings.yDisplayPosition = 75;
-		
+
 		boots.xDisplayPosition = 43;
 		boots.yDisplayPosition = 96;
-		
+
 		Slot craftResult = this.inventorySlots.get(0);
-		
+
 		Slot craft1 = this.inventorySlots.get(1);
 		Slot craft2 = this.inventorySlots.get(2);
 		Slot craft3 = this.inventorySlots.get(3);
@@ -82,9 +80,9 @@ public class ContainerEquipment extends ContainerPlayer
 		if (this.aePlayer.getEntity().capabilities.isCreativeMode)
 		{
 			this.addSlotToContainer(this.binSlot);
-			
+
 			craftResult.xDisplayPosition -= 17;
-			
+
 			craft1.xDisplayPosition -= 17;
 			craft2.xDisplayPosition -= 17;
 			craft3.xDisplayPosition -= 17;
@@ -93,26 +91,26 @@ public class ContainerEquipment extends ContainerPlayer
 		else
 		{
 			craftResult.xDisplayPosition -= 36;
-			
+
 			craft1.xDisplayPosition -= 36;
 			craft2.xDisplayPosition -= 36;
 			craft3.xDisplayPosition -= 36;
 			craft4.xDisplayPosition -= 36;
 		}
-		
+
 		int inventorySlotId = 0;
-		
+
 		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RELIC, inventorySlotId++, 18, 33));
 		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RELIC, inventorySlotId++, 68, 33));
-		
+
 		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.HANDWEAR, inventorySlotId++, 68, 54));
-		
+
 		//this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.SHIELD, inventorySlotId++, 62, 49));
 
 		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RING, inventorySlotId++, 18, 75));
 		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RING, inventorySlotId++, 18, 96));
 		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.NECKWEAR, inventorySlotId++, 18, 54));
-		
+
 		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.AMMUNITION, inventorySlotId++, 68, 96));
 
 		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.COMPANION, inventorySlotId++, 68, 75));
@@ -135,15 +133,15 @@ public class ContainerEquipment extends ContainerPlayer
 		{
 			this.aePlayer.getEntity().inventory.setItemStack(null);
 		}
-		
+
 		if (slotId < this.inventorySlots.size() && slotId > 0)
 		{
 			Slot slot = this.inventorySlots.get(slotId);
-			
+
 			if (slot != null && slot.getHasStack())
 			{
 				ItemStack stack = slot.getStack();
-				
+
 				if (slot instanceof SlotEquipment && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 				{
 					EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
@@ -155,7 +153,7 @@ public class ContainerEquipment extends ContainerPlayer
 						{
 							EffectProcessor processor = effect.getLeft();
 							EffectInstance instance = effect.getRight();
-							
+
 							effects.removeInstance(processor, instance);
 						}
 					}
@@ -231,7 +229,7 @@ public class ContainerEquipment extends ContainerPlayer
 					{
 						EffectProcessor processor = effect.getLeft();
 						EffectInstance instance = effect.getRight();
-						
+
 						effects.removeInstance(processor, instance);
 					}
 				}

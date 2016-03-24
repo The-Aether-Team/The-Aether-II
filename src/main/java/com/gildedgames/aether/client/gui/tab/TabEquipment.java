@@ -53,7 +53,9 @@ public class TabEquipment implements ITab
 		}
 
 		@Override
-		public void onClose(EntityPlayer player) { }
+		public void onClose(EntityPlayer player)
+		{
+		}
 
 		@Override
 		public ResourceLocation getIcon()

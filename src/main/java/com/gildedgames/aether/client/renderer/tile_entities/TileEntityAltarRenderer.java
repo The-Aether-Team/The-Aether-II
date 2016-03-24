@@ -1,4 +1,4 @@
-package com.gildedgames.aether.client.renderer.tile_entity;
+package com.gildedgames.aether.client.renderer.tile_entities;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;

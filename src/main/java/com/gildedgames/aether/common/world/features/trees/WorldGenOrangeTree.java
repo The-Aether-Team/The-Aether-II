@@ -19,7 +19,7 @@ public class WorldGenOrangeTree extends WorldGenerator
 	public boolean generate(World world, Random rand, BlockPos position)
 	{
 		Object[] stages = BlockOrangeTree.PROPERTY_STAGE.getAllowedValues().toArray();
-		
+
 		for (int i = 0; i < count; i++)
 		{
 			int x = rand.nextInt(8) - rand.nextInt(8);

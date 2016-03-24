@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.blocks.construction;
 import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.tileentity.TileEntity;
@@ -36,9 +35,9 @@ public class BlockSkyrootChest extends BlockChest
 	{
 		TileEntity tileentity = worldIn.getTileEntity(pos);
 
-		if (tileentity instanceof  TileEntitySkyrootChest)
+		if (tileentity instanceof TileEntitySkyrootChest)
 		{
-			Object object = tileentity;
+			ILockableContainer container = (ILockableContainer) tileentity;
 
 			if (!this.isBlocked(worldIn, pos))
 			{
@@ -60,17 +59,17 @@ public class BlockSkyrootChest extends BlockChest
 						{
 							if (facing != EnumFacing.WEST && facing != EnumFacing.NORTH)
 							{
-								object = new InventoryLargeChest("container.skyroot_double_chest", (ILockableContainer) object, (TileEntityChest) adjTileEntity);
+								container = new InventoryLargeChest("container.skyroot_double_chest", container, (ILockableContainer) adjTileEntity);
 							}
 							else
 							{
-								object = new InventoryLargeChest("container.skyroot_double_chest", (TileEntityChest) adjTileEntity, (ILockableContainer) object);
+								container = new InventoryLargeChest("container.skyroot_double_chest", (ILockableContainer) adjTileEntity, container);
 							}
 						}
 					}
 				}
 
-				return (ILockableContainer)object;
+				return container;
 			}
 		}
 
@@ -89,22 +88,21 @@ public class BlockSkyrootChest extends BlockChest
 
 	private boolean isOcelotSittingOnChest(World worldIn, BlockPos pos)
 	{
-		Iterator iterator = worldIn.getEntitiesWithinAABB(EntityOcelot.class, new AxisAlignedBB((double)pos.getX(), (double)(pos.getY() + 1), (double)pos.getZ(), (double)(pos.getX() + 1), (double)(pos.getY() + 2), (double)(pos.getZ() + 1))).iterator();
-		EntityOcelot entityocelot;
+		Iterator<EntityOcelot> iterator = worldIn.getEntitiesWithinAABB(EntityOcelot.class, new AxisAlignedBB(pos.getX(), pos.getY() + 1, pos.getZ(), pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1)).iterator();
 
-		do
+		EntityOcelot ocelot;
+
+		while (!iterator.hasNext())
 		{
-			if (!iterator.hasNext())
+			ocelot = iterator.next();
+
+			if (ocelot.isSitting())
 			{
-				return false;
+				return true;
 			}
-
-			Entity entity = (Entity)iterator.next();
-			entityocelot = (EntityOcelot)entity;
 		}
-		while (!entityocelot.isSitting());
 
-		return true;
+		return false;
 	}
 
 	@Override

@@ -15,7 +15,6 @@ public class AechorPlantAI extends EntityAITarget
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public boolean shouldExecute()
 	{
 		return this.hasTarget();

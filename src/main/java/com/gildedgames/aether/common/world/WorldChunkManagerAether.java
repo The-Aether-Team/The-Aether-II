@@ -1,15 +1,14 @@
 package com.gildedgames.aether.common.world;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.world.biome.BiomeGenAether;
-
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManager;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class WorldChunkManagerAether extends WorldChunkManager
 {

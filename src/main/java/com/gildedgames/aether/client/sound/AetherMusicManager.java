@@ -1,7 +1,6 @@
 package com.gildedgames.aether.client.sound;
 
 import com.gildedgames.aether.client.sound.generators.IMusicGenerator;
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;

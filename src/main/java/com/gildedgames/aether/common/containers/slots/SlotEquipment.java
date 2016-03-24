@@ -1,7 +1,9 @@
 package com.gildedgames.aether.common.containers.slots;
 
-import java.util.HashMap;
-
+import com.gildedgames.aether.common.AetherCapabilities;
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.items.ItemEquipmentType;
+import com.gildedgames.aether.common.items.ItemPropertiesBase;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -10,10 +12,7 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.gildedgames.aether.common.AetherCapabilities;
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.items.ItemEquipmentType;
-import com.gildedgames.aether.common.items.ItemPropertiesBase;
+import java.util.HashMap;
 
 public class SlotEquipment extends Slot
 {
@@ -63,7 +62,7 @@ public class SlotEquipment extends Slot
 		if (stack.hasCapability(AetherCapabilities.ITEM_PROPERTIES, null))
 		{
 			ItemPropertiesBase props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
-			
+
 			if (props.isEquippable())
 			{
 				return props.getEquipmentType() == this.getEquipmentType();

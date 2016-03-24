@@ -71,7 +71,6 @@ public class RenderFloatingBlock extends Render<EntityFloatingBlock>
 
 					BlockRendererDispatcher blockRendererDispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
 
-					@SuppressWarnings("deprecation")
 					IBakedModel model = blockRendererDispatcher.getModelFromBlockState(state, world, null);
 
 					blockRendererDispatcher.getBlockModelRenderer()

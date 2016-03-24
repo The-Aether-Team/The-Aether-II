@@ -48,9 +48,8 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IAetherBlock
 	}
 
 	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
 	{
 		list.add(new ItemStack(itemIn, 1, BERRY_BUSH_STEM));
 		list.add(new ItemStack(itemIn, 1, BERRY_BUSH_RIPE));
@@ -61,12 +60,7 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IAetherBlock
 	{
 		IBlockState state = world.getBlockState(pos);
 
-		if (state.getValue(PROPERTY_HARVESTABLE))
-		{
-			return false;
-		}
-
-		return world.setBlockToAir(pos);
+		return !state.getValue(PROPERTY_HARVESTABLE) && world.setBlockToAir(pos);
 	}
 
 	@Override

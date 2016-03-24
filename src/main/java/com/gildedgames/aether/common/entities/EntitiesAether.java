@@ -5,12 +5,11 @@ import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.living.EntityAechorPlant;
 import com.gildedgames.aether.common.entities.living.EntityAerbunny;
 import com.gildedgames.aether.common.entities.living.EntityCarrionSprout;
+import com.gildedgames.aether.common.entities.living.EntitySheepuff;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
-import com.gildedgames.aether.common.entities.living.EntitySheepuff;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
-
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 

@@ -59,9 +59,9 @@ public class WorldGenAetherLakes extends WorldGenerator
 				{
 					for (int j1 = 1; j1 < 7; ++j1)
 					{
-						double d6 = ((double)l - d3) / (d0 / 2.0D);
-						double d7 = ((double)j1 - d4) / (d1 / 2.0D);
-						double d8 = ((double)i1 - d5) / (d2 / 2.0D);
+						double d6 = ((double) l - d3) / (d0 / 2.0D);
+						double d7 = ((double) j1 - d4) / (d1 / 2.0D);
+						double d8 = ((double) i1 - d5) / (d2 / 2.0D);
 						double d9 = d6 * d6 + d7 * d7 + d8 * d8;
 
 						if (d9 < 1.0D)

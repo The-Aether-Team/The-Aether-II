@@ -1,17 +1,16 @@
 package com.gildedgames.aether.common.entities.effects.rules;
 
+import com.gildedgames.aether.common.entities.effects.EffectRule;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-import com.gildedgames.aether.common.entities.effects.EffectRule;
-
 public class InBiomeRule implements EffectRule
 {
-	
+
 	private BiomeGenBase biome;
-	
+
 	public InBiomeRule(BiomeGenBase biome)
 	{
 		this.biome = biome;
@@ -34,5 +33,5 @@ public class InBiomeRule implements EffectRule
 	{
 		return false;
 	}
-	
+
 }

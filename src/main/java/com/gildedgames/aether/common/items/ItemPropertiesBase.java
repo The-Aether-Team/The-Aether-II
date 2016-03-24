@@ -1,58 +1,57 @@
 package com.gildedgames.aether.common.items;
 
-import java.util.List;
-
+import com.google.common.collect.Lists;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 
-import com.google.common.collect.Lists;
+import java.util.List;
 
 public interface ItemPropertiesBase
 {
-	
-	public static class ItemProperties implements ItemPropertiesBase
+
+	class ItemProperties implements ItemPropertiesBase
 	{
-		
+
 		public static class RegistrationEntry
 		{
-			
+
 			private Item item;
-			
+
 			private ItemRarity rarity;
-			
+
 			private ItemEquipmentType equipmentType;
-			
+
 			public RegistrationEntry(Item item, ItemRarity rarity, ItemEquipmentType equipmentType)
 			{
 				this.item = item;
 				this.rarity = rarity;
 				this.equipmentType = equipmentType;
 			}
-			
+
 			public Item getItem()
 			{
 				return this.item;
 			}
-			
+
 			public ItemRarity getRarity()
 			{
 				return this.rarity;
 			}
-			
+
 			public ItemEquipmentType getEquipmentType()
 			{
 				return this.equipmentType;
 			}
-			
+
 		}
-		
+
 		private static List<RegistrationEntry> registeredEntries = Lists.newArrayList();
-		
+
 		private ItemEquipmentType equipmentType;
-		
+
 		private ItemRarity rarity;
 
 		public ItemProperties(ItemRarity rarity, ItemEquipmentType equipmentType)
@@ -60,22 +59,22 @@ public interface ItemPropertiesBase
 			this.rarity = rarity;
 			this.equipmentType = equipmentType;
 		}
-		
+
 		public static List<RegistrationEntry> getRegistrationEntries()
 		{
 			return ItemProperties.registeredEntries;
 		}
-		
+
 		public static void register(Item item, ItemRarity rarity)
 		{
 			ItemProperties.register(item, rarity, null);
 		}
-		
+
 		public static void register(Item item, ItemRarity rarity, ItemEquipmentType type)
 		{
 			ItemProperties.registeredEntries.add(new RegistrationEntry(item, rarity, type));
 		}
-		
+
 		@Override
 		public void setEquipmentType(ItemEquipmentType type)
 		{
@@ -105,10 +104,10 @@ public interface ItemPropertiesBase
 		{
 			return this.equipmentType != null;
 		}
-		
+
 	}
-	
-	public static class Storage implements IStorage<ItemPropertiesBase>
+
+	class Storage implements IStorage<ItemPropertiesBase>
 	{
 
 		@Override
@@ -120,20 +119,19 @@ public interface ItemPropertiesBase
 		@Override
 		public void readNBT(Capability<ItemPropertiesBase> capability, ItemPropertiesBase instance, EnumFacing side, NBTBase nbt)
 		{
-			
+
 		}
 
 	}
 
-	
 	void setEquipmentType(ItemEquipmentType type);
-	
+
 	ItemEquipmentType getEquipmentType();
-	
+
 	ItemRarity getRarity();
-	
+
 	void setRarity(ItemRarity rarity);
 
 	boolean isEquippable();
-	
+
 }

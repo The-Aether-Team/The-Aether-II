@@ -150,7 +150,7 @@ public class TeleporterAether extends Teleporter implements NBT
 
 					if (!findPortalBlock && (this.portalPairs.containsKey(pos) || this.portalPairs.containsValue(pos))
 							|| findPortalBlock && world.getBlockState(new BlockPos(x2, z2, y2))
-									.getBlock() == BlocksAether.aether_portal)
+							.getBlock() == BlocksAether.aether_portal)
 					{
 						return pos;
 					}
@@ -285,10 +285,10 @@ public class TeleporterAether extends Teleporter implements NBT
 						// this.hasSolidBlocks call: Checks if there are no
 						// blocks where you would place the portal
 						if ((hasFoundPosition))// && !this.hasSolidBlocks(world,
-												// xInner - 1, y1 + 1, zInner -
-												// 1, xInner, y1 + 4, zInner +
-												// 4)) || attempts > maxAttempts
-												// - 15)
+						// xInner - 1, y1 + 1, zInner -
+						// 1, xInner, y1 + 4, zInner +
+						// 4)) || attempts > maxAttempts
+						// - 15)
 						{
 							final int posX = MathHelper.floor_double(entity.posX);
 							final int posY = MathHelper.floor_double(entity.posY);

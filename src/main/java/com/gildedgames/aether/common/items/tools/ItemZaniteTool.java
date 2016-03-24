@@ -11,7 +11,7 @@ public class ItemZaniteTool extends ItemAetherTool
 
 		this.setHarvestLevel(toolType.getToolClass(), 1);
 	}
-	
+
 	@Override
 	public float getDigSpeed(ItemStack stack, IBlockState state)
 	{

@@ -27,7 +27,7 @@ public class EntityEffectsEventHooks
 	public void onLivingUpdate(LivingUpdateEvent event)
 	{
 		EntityEffects effects = EntityEffects.get(event.entity);
-		
+
 		if (effects != null)
 		{
 			effects.onUpdate();
@@ -38,12 +38,12 @@ public class EntityEffectsEventHooks
 	public void onLivingDropsEvent(LivingDropsEvent event)
 	{
 		Entity entity = event.source.getSourceOfDamage();
-		
+
 		if (entity == null)
 		{
 			return;
 		}
-		
+
 		EntityEffects effects = EntityEffects.get(entity);
 
 		if (effects != null)
@@ -54,7 +54,7 @@ public class EntityEffectsEventHooks
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void onPlayerInteract(PlayerInteractEvent event)
 	{
@@ -69,7 +69,7 @@ public class EntityEffectsEventHooks
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void onPickupXP(PlayerPickupXpEvent event)
 	{
@@ -84,17 +84,17 @@ public class EntityEffectsEventHooks
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void onLivingAttack(LivingHurtEvent event)
 	{
 		Entity entity = event.source.getSourceOfDamage();
-		
+
 		if (entity == null)
 		{
 			return;
 		}
-		
+
 		EntityEffects effects = EntityEffects.get(entity);
 
 		if (effects != null)

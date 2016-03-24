@@ -12,7 +12,7 @@ public enum ItemEquipmentType
 	CHARM("gui.slot.charm"),
 	ARTIFACT("gui.slot.artifact"),
 	AMMUNITION("gui.slot.ammunition");
-	
+
 	private final String unlocalizedName;
 
 	ItemEquipmentType(String unlocalizedName)
@@ -24,5 +24,5 @@ public enum ItemEquipmentType
 	{
 		return this.unlocalizedName;
 	}
-	
+
 }

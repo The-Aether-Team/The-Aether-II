@@ -49,6 +49,7 @@ public class BlockSkyrootSign extends BlockSign
 			return tileentity instanceof TileEntitySkyrootSign && ((TileEntitySkyrootSign) tileentity).executeCommand(playerIn);
 		}
 	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World worldIn, BlockPos pos)

@@ -1,9 +1,8 @@
 package com.gildedgames.aether.common.entities.effects.rules;
 
+import com.gildedgames.aether.common.entities.effects.EffectRule;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-
-import com.gildedgames.aether.common.entities.effects.EffectRule;
 
 public class OnGroundRule implements EffectRule
 {
@@ -13,7 +12,7 @@ public class OnGroundRule implements EffectRule
 	{
 		return source.onGround;
 	}
-	
+
 	@Override
 	public String[] getUnlocalizedDesc()
 	{
@@ -25,5 +24,5 @@ public class OnGroundRule implements EffectRule
 	{
 		return false;
 	}
-	
+
 }

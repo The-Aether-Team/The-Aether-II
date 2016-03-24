@@ -24,7 +24,6 @@ import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 
 import java.util.Random;
 
-
 public class BiomeDecoratorAether
 {
 	protected WorldGenAetherTallGrass genAetherGrass;
@@ -111,7 +110,7 @@ public class BiomeDecoratorAether
 		}
 
 		// White Rose Generator
-		for (count = 0; count < 2; count ++)
+		for (count = 0; count < 2; count++)
 		{
 			x = random.nextInt(16) + 8;
 			y = random.nextInt(128);
@@ -216,7 +215,6 @@ public class BiomeDecoratorAether
 
 		return random.nextInt(i);
 	}
-
 
 	protected void generateOres(World world, Random random, BlockPos pos)
 	{

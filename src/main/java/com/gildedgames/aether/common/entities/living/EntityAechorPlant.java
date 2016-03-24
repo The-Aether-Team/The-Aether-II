@@ -93,10 +93,14 @@ public class EntityAechorPlant extends EntityMob
 	}
 
 	@Override
-	public void knockBack(Entity entity, float distance, double x, double y) { }
+	public void knockBack(Entity entity, float distance, double x, double y)
+	{
+	}
 
 	@Override
-	public void moveEntity(double x, double y, double z) { }
+	public void moveEntity(double x, double y, double z)
+	{
+	}
 
 	@Override
 	protected boolean interact(EntityPlayer player)

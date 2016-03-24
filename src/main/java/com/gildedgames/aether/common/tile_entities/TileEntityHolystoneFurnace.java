@@ -8,7 +8,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerFurnace;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.SlotFurnaceFuel;
 import net.minecraft.item.Item;
@@ -21,8 +20,6 @@ import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.MathHelper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityHolystoneFurnace extends TileEntityLockable implements ITickable, ISidedInventory
 {
@@ -99,22 +96,6 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 		}
 	}
 
-	public ItemStack getStackInSlotOnClosing(int index)
-	{
-		if (this.containedItemStacks[index] != null)
-		{
-			ItemStack stack = this.containedItemStacks[index];
-
-			this.containedItemStacks[index] = null;
-
-			return stack;
-		}
-		else
-		{
-			return null;
-		}
-	}
-
 	public void setInventorySlotContents(int index, ItemStack stack)
 	{
 		boolean isEqual = stack != null && stack.isItemEqual(this.containedItemStacks[index]) &&
@@ -145,11 +126,6 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 	public boolean hasCustomName()
 	{
 		return this.customName != null && this.customName.length() > 0;
-	}
-
-	public void setCustomInventoryName(String name)
-	{
-		this.customName = name;
 	}
 
 	public void readFromNBT(NBTTagCompound compound)
@@ -223,12 +199,6 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 	public boolean isBurning()
 	{
 		return this.burnTime > 0;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static boolean isBurning(IInventory inventory)
-	{
-		return inventory.getField(0) > 0;
 	}
 
 	@Override
@@ -394,9 +364,13 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 				) <= 64.0D;
 	}
 
-	public void openInventory(EntityPlayer player) { }
+	public void openInventory(EntityPlayer player)
+	{
+	}
 
-	public void closeInventory(EntityPlayer player) { }
+	public void closeInventory(EntityPlayer player)
+	{
+	}
 
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{

@@ -1,10 +1,9 @@
 package com.gildedgames.aether.common.entities.effects.rules;
 
+import com.gildedgames.aether.common.entities.effects.EffectRule;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-
-import com.gildedgames.aether.common.entities.effects.EffectRule;
 
 public class UndergroundRule implements EffectRule
 {
@@ -20,7 +19,7 @@ public class UndergroundRule implements EffectRule
 	{
 		return new String[] { EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + "Underground" };
 	}
-	
+
 	@Override
 	public boolean blockLivingAttackAbility(Entity source, LivingHurtEvent event)
 	{

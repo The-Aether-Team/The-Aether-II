@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.blocks.containers;
 
-import java.util.Random;
-
+import com.gildedgames.aether.common.tile_entities.TileEntityHolystoneFurnace;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -21,7 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.gildedgames.aether.common.tile_entities.TileEntityHolystoneFurnace;
+import java.util.Random;
 
 public class BlockHolystoneFurnace extends BlockContainer
 {

@@ -37,13 +37,13 @@ public class AetherCore
 
 	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.common.CommonProxy")
 	public static CommonProxy PROXY;
-	
+
 	private static SidedObject<AetherServices> serviceLocator = new SidedObject<>(new AetherServices(Side.CLIENT), new AetherServices(Side.SERVER));
 
 	public static AetherConfig CONFIG;
 
 	private static TeleporterAether teleporter;
-	
+
 	public static AetherServices locate()
 	{
 		return serviceLocator.instance();
@@ -83,7 +83,6 @@ public class AetherCore
 	{
 		teleporter = new TeleporterAether(MinecraftServer.getServer().worldServerForDimension(getAetherDimID()));
 	}
-
 
 	@EventHandler
 	public void onFingerprintViolation(FMLFingerprintViolationEvent event)

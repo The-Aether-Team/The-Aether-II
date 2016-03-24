@@ -1,18 +1,17 @@
 package com.gildedgames.aether.common.entities.effects.rules;
 
+import com.gildedgames.aether.common.entities.effects.EffectRule;
+import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-import com.gildedgames.aether.common.entities.effects.EffectRule;
-import com.mojang.realmsclient.gui.ChatFormatting;
-
 public class HoldingItemRule implements EffectRule
 {
-	
+
 	private ItemStack stack;
-	
+
 	public HoldingItemRule(ItemStack stack)
 	{
 		this.stack = stack;
@@ -25,9 +24,9 @@ public class HoldingItemRule implements EffectRule
 		{
 			return false;
 		}
-		
-		EntityLivingBase living = (EntityLivingBase)source;
-		
+
+		EntityLivingBase living = (EntityLivingBase) source;
+
 		return this.stack.isItemEqual(living.getHeldItem());
 	}
 
@@ -42,5 +41,5 @@ public class HoldingItemRule implements EffectRule
 	{
 		return false;
 	}
-	
+
 }

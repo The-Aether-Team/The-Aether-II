@@ -11,7 +11,6 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.items.tools.ItemValkyrieTool;
-import com.gildedgames.aether.common.party.Party;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import com.gildedgames.util.core.io.ByteBufHelper;
 import com.gildedgames.util.modules.entityhook.api.IEntityHookFactory;
@@ -35,17 +34,15 @@ public class PlayerAether extends EntityHook<EntityPlayer>
 
 	private InventoryEquipment inventoryEquipment = new InventoryEquipment(this);
 
-	private Party currentParty;
-
 	@Override
 	public void onLoaded()
 	{
 		if (!this.getEntity().worldObj.isRemote)
 		{
 			EntityEffects effects = EntityEffects.get(this.getEntity());
-			
+
 			effects.clearEffects();
-			
+
 			for (ItemStack stack : this.getEquipment().getInventory())
 			{
 				if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
@@ -58,7 +55,7 @@ public class PlayerAether extends EntityHook<EntityPlayer>
 						{
 							EffectProcessor processor = effect.getLeft();
 							EffectInstance instance = effect.getRight();
-							
+
 							effects.put(processor, instance);
 						}
 					}
@@ -73,20 +70,20 @@ public class PlayerAether extends EntityHook<EntityPlayer>
 		if (!this.getEntity().worldObj.isRemote)
 		{
 			EntityEffects effects = EntityEffects.get(this.getEntity());
-	
+
 			for (ItemStack stack : this.getEquipment().getInventory())
 			{
 				if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 				{
 					ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
-	
+
 					if (itemEffects != null)
 					{
 						for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
 						{
 							EffectProcessor processor = effect.getLeft();
 							EffectInstance instance = effect.getRight();
-							
+
 							effects.removeInstance(processor, instance);
 						}
 					}
@@ -135,7 +132,7 @@ public class PlayerAether extends EntityHook<EntityPlayer>
 			this.getEntity().captureDrops = true;
 
 			this.getEquipment().dropAllItems();
-			
+
 			this.getEntity().captureDrops = false;
 		}
 	}
@@ -185,16 +182,6 @@ public class PlayerAether extends EntityHook<EntityPlayer>
 	public void saveNBTData(NBTTagCompound compound)
 	{
 		this.inventoryEquipment.write(compound);
-	}
-
-	public Party getCurrentParty()
-	{
-		return this.currentParty;
-	}
-
-	public void setCurrentParty(Party party)
-	{
-		this.currentParty = party;
 	}
 
 	public static class Factory implements IEntityHookFactory<PlayerAether>

@@ -16,43 +16,43 @@ public class ItemElementalSword extends ItemAetherSword
 	public enum SwordElement
 	{
 		FIRE
-		{
-			@Override
-			public void onEntityAttacked(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
-			{
-				int fireMultiplier = EnchantmentHelper.getEnchantmentLevel(Enchantment.fireAspect.effectId, stack);
+				{
+					@Override
+					public void onEntityAttacked(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
+					{
+						int fireMultiplier = EnchantmentHelper.getEnchantmentLevel(Enchantment.fireAspect.effectId, stack);
 
-				target.setFire(6 + (fireMultiplier * 4));
-			}
-		},
+						target.setFire(6 + (fireMultiplier * 4));
+					}
+				},
 		LIGHTNING
-		{
-			@Override
-			public void onEntityAttacked(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
-			{
-				if (!target.worldObj.isRemote)
 				{
-					target.worldObj.addWeatherEffect(new EntityLightningBolt(target.worldObj, target.posX, target.posY, target.posZ));
-				}
-			}
-		},
+					@Override
+					public void onEntityAttacked(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
+					{
+						if (!target.worldObj.isRemote)
+						{
+							target.worldObj.addWeatherEffect(new EntityLightningBolt(target.worldObj, target.posX, target.posY, target.posZ));
+						}
+					}
+				},
 		HOLY
-		{
-			@Override
-			public void onEntityAttacked(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
-			{
-				float damage = target.isEntityUndead() ? 12.0f : AetherMaterials.LEGENDARY_TOOL.getDamageVsEntity();
+				{
+					@Override
+					public void onEntityAttacked(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
+					{
+						float damage = target.isEntityUndead() ? 12.0f : AetherMaterials.LEGENDARY_TOOL.getDamageVsEntity();
 
-				if (attacker instanceof EntityPlayer)
-				{
-					target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) attacker), damage);
-				}
-				else
-				{
-					target.attackEntityFrom(DamageSource.causeMobDamage(attacker), damage);
-				}
-			}
-		};
+						if (attacker instanceof EntityPlayer)
+						{
+							target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) attacker), damage);
+						}
+						else
+						{
+							target.attackEntityFrom(DamageSource.causeMobDamage(attacker), damage);
+						}
+					}
+				};
 
 		public abstract void onEntityAttacked(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker);
 	}

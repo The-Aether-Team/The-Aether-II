@@ -1,8 +1,6 @@
 package com.gildedgames.aether.common.world;
 
-import java.util.List;
-import java.util.Random;
-
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
@@ -20,8 +18,8 @@ import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
+import java.util.List;
+import java.util.Random;
 
 public class ChunkProviderAether implements IChunkProvider
 {

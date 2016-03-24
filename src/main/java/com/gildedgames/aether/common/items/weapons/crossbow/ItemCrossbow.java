@@ -2,24 +2,16 @@ package com.gildedgames.aether.common.items.weapons.crossbow;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
-import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.weapons.ItemDart;
-import com.gildedgames.aether.common.items.weapons.ItemDartType;
-import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.Stack;
 
 /**
  * Created by Chris on 3/8/2016.
@@ -28,8 +20,11 @@ public class ItemCrossbow extends Item
 {
 
 	private final int QUIVERSLOT = 0;
+
 	private boolean isReadyToFire;
+
 	private ItemStack ammoBoltStack;
+
 	private int ammoBoltCount;
 
 	public ItemCrossbow()
@@ -43,16 +38,7 @@ public class ItemCrossbow extends Item
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
 	{
-		if (ammoBoltStack == null)
-		{
-			return false;
-		}
-		if (!isReadyToFire)
-		{
-			return false;
-		}
-
-		return true;
+		return ammoBoltStack != null && isReadyToFire;
 	}
 
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
@@ -61,7 +47,7 @@ public class ItemCrossbow extends Item
 
 		if (isSelected)
 		{
-			ammoBoltStack =  player.inventory.getStackInSlot(QUIVERSLOT);
+			ammoBoltStack = player.inventory.getStackInSlot(QUIVERSLOT);
 
 			if (ammoBoltStack != null)
 			{
@@ -131,7 +117,6 @@ public class ItemCrossbow extends Item
 			}
 		}
 
-
 		return stack;
 
 	}
@@ -185,7 +170,5 @@ public class ItemCrossbow extends Item
 
 		return -1;
 	}
-
-
 
 }

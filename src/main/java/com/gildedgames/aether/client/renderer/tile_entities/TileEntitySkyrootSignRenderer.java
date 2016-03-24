@@ -1,4 +1,4 @@
-package com.gildedgames.aether.client.renderer.tile_entity;
+package com.gildedgames.aether.client.renderer.tile_entities;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootSign;
@@ -8,8 +8,6 @@ import net.minecraft.client.gui.GuiUtilRenderComponents;
 import net.minecraft.client.model.ModelSign;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.init.Blocks;
-import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -19,6 +17,7 @@ import java.util.List;
 public class TileEntitySkyrootSignRenderer extends TileEntitySpecialRenderer<TileEntitySkyrootSign>
 {
 	private static final ResourceLocation SIGN_TEXTURE = new ResourceLocation("aether:textures/tile_entities/skyroot_sign.png");
+
 	/** The ModelSign instance for use in this renderer */
 	private final ModelSign model = new ModelSign();
 
@@ -31,8 +30,8 @@ public class TileEntitySkyrootSignRenderer extends TileEntitySpecialRenderer<Til
 
 		if (block == BlocksAether.standing_skyroot_sign)
 		{
-			GlStateManager.translate((float)x + 0.5F, (float)y + 0.75F * f, (float)z + 0.5F);
-			float f1 = (float)(te.getBlockMetadata() * 360) / 16.0F;
+			GlStateManager.translate((float) x + 0.5F, (float) y + 0.75F * f, (float) z + 0.5F);
+			float f1 = (float) (te.getBlockMetadata() * 360) / 16.0F;
 			GlStateManager.rotate(-f1, 0.0F, 1.0F, 0.0F);
 			this.model.signStick.showModel = true;
 		}
@@ -56,7 +55,7 @@ public class TileEntitySkyrootSignRenderer extends TileEntitySpecialRenderer<Til
 				f2 = -90.0F;
 			}
 
-			GlStateManager.translate((float)x + 0.5F, (float)y + 0.75F * f, (float)z + 0.5F);
+			GlStateManager.translate((float) x + 0.5F, (float) y + 0.75F * f, (float) z + 0.5F);
 			GlStateManager.rotate(-f2, 0.0F, 1.0F, 0.0F);
 			GlStateManager.translate(0.0F, -0.3125F, -0.4375F);
 			this.model.signStick.showModel = false;

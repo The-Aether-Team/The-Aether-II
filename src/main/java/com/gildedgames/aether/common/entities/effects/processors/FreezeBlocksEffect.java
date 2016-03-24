@@ -1,8 +1,9 @@
 package com.gildedgames.aether.common.entities.effects.processors;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.gildedgames.aether.common.entities.effects.EffectInstance;
+import com.gildedgames.aether.common.entities.effects.EffectProcessor;
+import com.gildedgames.aether.common.entities.effects.EffectRule;
+import com.gildedgames.aether.common.entities.effects.processors.FreezeBlocksEffect.Instance;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -13,10 +14,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-import com.gildedgames.aether.common.entities.effects.EffectInstance;
-import com.gildedgames.aether.common.entities.effects.EffectProcessor;
-import com.gildedgames.aether.common.entities.effects.EffectRule;
-import com.gildedgames.aether.common.entities.effects.processors.FreezeBlocksEffect.Instance;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Freezes appropriate blocks arounds the player when wearing the attached Accessory.
@@ -32,22 +31,22 @@ public class FreezeBlocksEffect implements EffectProcessor<Instance>
 		public Instance(int radius, EffectRule... rules)
 		{
 			super(rules);
-			
+
 			this.getAttributes().setInteger("radius", radius);
 		}
-		
+
 		@Override
 		public EffectInstance cloneInstance()
 		{
 			return new Instance(this.getAttributes().getInteger("radius"), this.getRules());
 		}
-		
+
 	}
-	
-	private List<BlockPos> frozenLocations = new ArrayList<BlockPos>();
-	
+
+	private List<BlockPos> frozenLocations = new ArrayList<>();
+
 	private static final int PLACEMENT_FLAG = 7;
-	
+
 	@Override
 	public String getUnlocalizedName(Entity source, Instance instance)
 	{
@@ -61,26 +60,28 @@ public class FreezeBlocksEffect implements EffectProcessor<Instance>
 	}
 
 	@Override
-	public void apply(Entity source, Instance instance, List<Instance> all) {}
+	public void apply(Entity source, Instance instance, List<Instance> all)
+	{
+	}
 
 	@Override
 	public void tick(Entity source, List<Instance> all)
 	{
 		World world = source.worldObj;
 		IBlockState ice = all.size() > 1 ? Blocks.packed_ice.getDefaultState() : Blocks.ice.getDefaultState();
-		
+
 		int maxRadius = 0;
-		
+
 		for (Instance instance : all)
 		{
 			int radius = instance.getAttributes().getInteger("radius");
-			
+
 			if (radius > maxRadius)
 			{
 				maxRadius = radius;
 			}
 		}
-		
+
 		if (!world.isRemote)
 		{
 			int x1 = MathHelper.floor_double(source.posX);
@@ -94,15 +95,15 @@ public class FreezeBlocksEffect implements EffectProcessor<Instance>
 					for (int z = z1 - maxRadius; z <= z1 + maxRadius; z++)
 					{
 						BlockPos pos = new BlockPos(x, y, z);
-						
+
 						IBlockState state = world.getBlockState(pos);
 						Block block = state.getBlock();
-						
+
 						if (block.getMetaFromState(state) != 0)
 						{
 							continue;
 						}
-						
+
 						if (x == x1 - maxRadius || y == y1 - maxRadius || z == z1 - maxRadius || x == x1 + maxRadius || y == y1 + maxRadius || z == z1 + maxRadius)
 						{
 							if (this.frozenLocations.contains(pos))
@@ -119,13 +120,13 @@ public class FreezeBlocksEffect implements EffectProcessor<Instance>
 								{
 									world.setBlockState(pos, Blocks.flowing_lava.getDefaultState(), PLACEMENT_FLAG);
 								}
-								
+
 								this.frozenLocations.remove(pos);
 							}
-							
+
 							continue;
 						}
-						
+
 						if (block == Blocks.flowing_water)
 						{
 							world.setBlockState(pos, ice, PLACEMENT_FLAG);
@@ -153,19 +154,19 @@ public class FreezeBlocksEffect implements EffectProcessor<Instance>
 					}
 				}
 			}
-		}		
+		}
 	}
 
 	@Override
 	public void cancel(Entity source, Instance instance, List<Instance> all)
 	{
 		World world = source.worldObj;
-		
+
 		for (BlockPos pos : this.frozenLocations)
 		{
 			IBlockState state = world.getBlockState(pos);
 			Block block = state.getBlock();
-			
+
 			if (block == Blocks.ice)
 			{
 				world.setBlockState(pos, Blocks.flowing_water.getDefaultState(), PLACEMENT_FLAG);
@@ -179,17 +180,24 @@ public class FreezeBlocksEffect implements EffectProcessor<Instance>
 				world.setBlockState(pos, Blocks.flowing_lava.getDefaultState(), PLACEMENT_FLAG);
 			}
 		}
-		
+
 		this.frozenLocations.clear();
 	}
 
 	@Override
-	public void onKill(LivingDropsEvent event, Entity source, List<Instance> all) {}
+	public void onKill(LivingDropsEvent event, Entity source, List<Instance> all)
+	{
+	}
 
 	@Override
-	public void onAttack(LivingHurtEvent event, Entity source, List<Instance> all) {}
+	public void onAttack(LivingHurtEvent event, Entity source, List<Instance> all)
+	{
+	}
 
 	@Override
-	public String[] getFormatParameters(Entity source, Instance instance) { return new String[] {}; }
+	public String[] getFormatParameters(Entity source, Instance instance)
+	{
+		return new String[] {};
+	}
 
 }

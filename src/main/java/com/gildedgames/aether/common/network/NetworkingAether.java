@@ -1,12 +1,6 @@
 package com.gildedgames.aether.common.network;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.network.packets.party.PacketAcceptInvite;
-import com.gildedgames.aether.common.network.packets.party.PacketCreateParty;
-import com.gildedgames.aether.common.network.packets.party.PacketJoinParty;
-import com.gildedgames.aether.common.network.packets.party.PacketMemberChange;
-import com.gildedgames.aether.common.network.packets.player.PacketOpenContainer;
-import com.gildedgames.util.core.UtilModule;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -24,17 +18,7 @@ public class NetworkingAether
 	{
 		instance = NetworkRegistry.INSTANCE.newSimpleChannel(AetherCore.MOD_ID);
 
-		// CLIENT -> SERVER
-		instance.registerMessage(PacketOpenContainer.HandlerServer.class, PacketOpenContainer.class, discriminant++, Side.SERVER);
-
-		instance.registerMessage(PacketAcceptInvite.HandlerServer.class, PacketAcceptInvite.class, discriminant++, Side.SERVER);
-
-		instance.registerMessage(PacketCreateParty.HandlerServer.class, PacketCreateParty.class, discriminant++, Side.SERVER);
-
-		// SERVER -> CLIENT
-		instance.registerMessage(PacketMemberChange.HandlerClient.class, PacketMemberChange.class, discriminant++, Side.CLIENT);
-
-		instance.registerMessage(PacketJoinParty.HandlerClient.class, PacketJoinParty.class, discriminant++, Side.CLIENT);
+		// TODO :)
 	}
 
 	public static void sendPacketToPlayer(IMessage message, EntityPlayerMP player)

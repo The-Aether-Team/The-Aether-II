@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.world.features.trees;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherPlant;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
@@ -26,7 +25,7 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 	public boolean generate(World worldIn, Random rand, BlockPos position)
 	{
 		int i = rand.nextInt(3) + 4;
-		
+
 		boolean canCreateTree = true;
 
 		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(position.getX(), position.getY(), position.getZ());

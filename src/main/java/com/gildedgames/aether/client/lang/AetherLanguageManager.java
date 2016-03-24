@@ -129,7 +129,7 @@ public class AetherLanguageManager implements IResourceManagerReloadListener
 
 		if (langPack != null)
 		{
-			 manager.reloadResourcePack(langPack);
+			manager.reloadResourcePack(langPack);
 		}
 		else
 		{

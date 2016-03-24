@@ -6,8 +6,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
-import java.util.Random;
-
 public class ItemCandyCaneSword extends ItemAetherSword
 {
 	public ItemCandyCaneSword()

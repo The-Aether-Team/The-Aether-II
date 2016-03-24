@@ -2,16 +2,16 @@ package com.gildedgames.aether.common.blocks;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.AetherCreativeTabs;
-import com.gildedgames.aether.common.blocks.construction.aether_walls.BlockAerogelWall;
-import com.gildedgames.aether.common.blocks.construction.aether_walls.BlockAetherWall;
-import com.gildedgames.aether.common.blocks.construction.skyroot_fence.BlockSkyrootFence;
-import com.gildedgames.aether.common.blocks.construction.skyroot_fence.BlockSkyrootFenceGate;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.blocks.construction.BlockAmbrosiumTorch;
 import com.gildedgames.aether.common.blocks.construction.BlockQuicksoilGlass;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootChest;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootDoor;
+import com.gildedgames.aether.common.blocks.construction.aether_walls.BlockAerogelWall;
+import com.gildedgames.aether.common.blocks.construction.aether_walls.BlockAetherWall;
+import com.gildedgames.aether.common.blocks.construction.skyroot_fence.BlockSkyrootFence;
+import com.gildedgames.aether.common.blocks.construction.skyroot_fence.BlockSkyrootFenceGate;
 import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockStandingSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockWallSkyrootSign;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
@@ -121,7 +121,6 @@ public class BlocksAether
 	public static BlockWallSkyrootSign wall_skyroot_sign;
 
 	public static BlockAetherWall holystone_wall, holystone_wall_mossy, carved_stone_wall, icestone_wall, aerogel_wall, skyroot_log_wall;
-
 
 	public static void preInit()
 	{

@@ -1,7 +1,9 @@
 package com.gildedgames.aether.client.gui.container;
 
-import java.util.Collections;
-
+import com.gildedgames.aether.common.containers.ContainerEquipment;
+import com.gildedgames.aether.common.containers.slots.SlotEquipment;
+import com.gildedgames.aether.common.items.ItemEquipmentType;
+import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
@@ -9,10 +11,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
 
-import com.gildedgames.aether.common.containers.ContainerEquipment;
-import com.gildedgames.aether.common.containers.slots.SlotEquipment;
-import com.gildedgames.aether.common.items.ItemEquipmentType;
-import com.gildedgames.aether.common.player.PlayerAether;
+import java.util.Collections;
 
 public class GuiEquipment extends GuiContainer
 {
@@ -21,7 +20,7 @@ public class GuiEquipment extends GuiContainer
 	private static final ResourceLocation textureAccessories = new ResourceLocation("aether", "textures/gui/inventory/accessories/equipment.png");
 
 	//private static final ResourceLocation textureAccessoriesPattern = new ResourceLocation("aether", "textures/gui/inventory/accessories/equipment_pattern.png");
-	
+
 	private static final ResourceLocation textureBackpack = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack.png");
 
 	private static final ResourceLocation textureBackpackCreative = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack_creative.png");
@@ -29,7 +28,7 @@ public class GuiEquipment extends GuiContainer
 	//private static final ResourceLocation textureBackpackPattern = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack_pattern.png");
 
 	//private static final ResourceLocation textureBackpackCreativePattern = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack_creative_pattern.png");
-	
+
 //	private static final ResourceLocation TEXTURE_COINBAR = new ResourceLocation("aether", "textures/gui/coinbar.png");
 
 	private final PlayerAether aePlayer;
@@ -64,7 +63,7 @@ public class GuiEquipment extends GuiContainer
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
 		this.drawTexturedModalRect(this.width / 2 - 90 - 170 / 2, this.height / 2 - 123 / 2, 0, 0, 183, 171);
-		
+
 		//this.mc.renderEngine.bindTexture(textureAccessoriesPattern);
 
 		//GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
@@ -76,15 +75,15 @@ public class GuiEquipment extends GuiContainer
 		this.drawTexturedModalRect(this.width / 2 + 90 - 176 / 2, this.height / 2 - 166 / 2, 0, 0, 176, 166);
 
 		this.fontRendererObj.drawString(I18n.format("container.crafting"), this.width / 2 + (this.aePlayer.getEntity().capabilities.isCreativeMode ? 70 : 51), this.height / 2 - 135 / 2, 4210752);
-		
+
 		//this.mc.renderEngine.bindTexture(aePlayer.getEntity().capabilities.isCreativeMode ? textureBackpackCreativePattern : textureBackpackPattern);
 
 		//GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-		
+
 		//this.drawTexturedModalRect(this.width / 2 + 90 - 176 / 2, this.height / 2 - 166 / 2, 0, 0, 176, 166);
 
 		this.drawPlayer(mouseX, mouseY);
-		
+
 		super.drawScreen(mouseX, mouseY, partialTick);
 
 		// this.drawCoinCounter();
@@ -93,10 +92,14 @@ public class GuiEquipment extends GuiContainer
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) { }
+	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
+	{
+	}
 
 	@Override
-	public void drawDefaultBackground() { }
+	public void drawDefaultBackground()
+	{
+	}
 
 	private boolean isMouseOverSlot(Slot slot, int mouseX, int mouseY)
 	{
@@ -119,24 +122,24 @@ public class GuiEquipment extends GuiContainer
 
 						unlocalizedTooltip = type.getUnlocalizedName();
 					}
-					
+
 					final int dif = this.aePlayer.getEntity().inventory.getSizeInventory() - 1;
-					
+
 					if (slot.getSlotIndex() == dif)
 					{
 						unlocalizedTooltip = "Helmet";
 					}
-					
+
 					if (slot.getSlotIndex() == dif - 1)
 					{
 						unlocalizedTooltip = "Chestplate";
 					}
-					
+
 					if (slot.getSlotIndex() == dif - 2)
 					{
 						unlocalizedTooltip = "Leggings";
 					}
-					
+
 					if (slot.getSlotIndex() == dif - 3)
 					{
 						unlocalizedTooltip = "Boots";

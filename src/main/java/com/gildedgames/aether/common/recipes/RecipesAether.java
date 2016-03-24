@@ -67,19 +67,19 @@ public class RecipesAether
 				'X', new ItemStack(ItemsAether.icestone));
 
 		// Fences and Walls
-		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_fence, 3), "XYX","XYX",
+		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_fence, 3), "XYX", "XYX",
 				'X', new ItemStack(BlocksAether.skyroot_planks),
 				'Y', new ItemStack(ItemsAether.skyroot_stick));
 
-		registerShapedRecipe(new ItemStack(BlocksAether.holystone_wall, 6), "XXX","XXX",
+		registerShapedRecipe(new ItemStack(BlocksAether.holystone_wall, 6), "XXX", "XXX",
 				'X', new ItemStack(BlocksAether.holystone));
-		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_log_wall, 6), "XXX","XXX",
+		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_log_wall, 6), "XXX", "XXX",
 				'X', new ItemStack(BlocksAether.skyroot_log));
-		registerShapedRecipe(new ItemStack(BlocksAether.icestone_wall, 6), "XXX","XXX",
+		registerShapedRecipe(new ItemStack(BlocksAether.icestone_wall, 6), "XXX", "XXX",
 				'X', new ItemStack(BlocksAether.icestone_bricks));
-		registerShapedRecipe(new ItemStack(BlocksAether.carved_stone_wall, 6), "XXX","XXX",
+		registerShapedRecipe(new ItemStack(BlocksAether.carved_stone_wall, 6), "XXX", "XXX",
 				'X', new ItemStack(BlocksAether.carved_stone));
-		registerShapedRecipe(new ItemStack(BlocksAether.aerogel_wall, 6), "XXX","XXX",
+		registerShapedRecipe(new ItemStack(BlocksAether.aerogel_wall, 6), "XXX", "XXX",
 				'X', new ItemStack(BlocksAether.aerogel));
 
 		// Gates
@@ -88,7 +88,7 @@ public class RecipesAether
 				'X', new ItemStack(BlocksAether.skyroot_planks));
 
 		// Sign
-		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_sign,3), "XXX","XXX"," Y ",
+		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_sign, 3), "XXX", "XXX", " Y ",
 				'X', new ItemStack(BlocksAether.skyroot_planks),
 				'Y', new ItemStack(ItemsAether.skyroot_stick));
 
@@ -99,10 +99,10 @@ public class RecipesAether
 				'Z', new ItemStack(BlocksAether.skyroot_planks));
 
 		// Crossbow Bolts
-		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.STONE.ordinal()), " Y","X ",
+		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.STONE.ordinal()), " Y", "X ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(BlocksAether.holystone));
-		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.ZANITE.ordinal()), " Y","X ",
+		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.ZANITE.ordinal()), " Y", "X ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(ItemsAether.zanite_gemstone));
 	}

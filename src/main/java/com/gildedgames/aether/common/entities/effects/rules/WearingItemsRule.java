@@ -1,10 +1,9 @@
 package com.gildedgames.aether.common.entities.effects.rules;
 
+import com.gildedgames.aether.common.entities.effects.EffectRule;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-
-import com.gildedgames.aether.common.entities.effects.EffectRule;
 
 public class WearingItemsRule implements EffectRule
 {
@@ -26,5 +25,5 @@ public class WearingItemsRule implements EffectRule
 	{
 		return false;
 	}
-	
+
 }

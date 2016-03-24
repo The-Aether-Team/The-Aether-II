@@ -27,7 +27,6 @@ public class ItemAetherSword extends ItemSword
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings("unchecked")
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
 	{
 		if (this.abilityType != ItemAbilityType.NONE)

@@ -1,7 +1,5 @@
 package com.gildedgames.aether.common.blocks.construction;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
@@ -13,9 +11,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Random;
+
 public class BlockQuicksoilGlass extends BlockBreakable
 {
-	public BlockQuicksoilGlass() 
+	public BlockQuicksoilGlass()
 	{
 		super(Material.glass, false);
 
@@ -48,6 +48,6 @@ public class BlockQuicksoilGlass extends BlockBreakable
 	@Override
 	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
-        return true;
-    }
+		return true;
+	}
 }

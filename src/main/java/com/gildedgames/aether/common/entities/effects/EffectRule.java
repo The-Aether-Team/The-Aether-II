@@ -11,9 +11,9 @@ public interface EffectRule
 	 * @return Whether or not the attached ability should be active.
 	 */
 	boolean isMet(Entity source);
-	
+
 	boolean blockLivingAttackAbility(Entity source, LivingHurtEvent event);
 
 	String[] getUnlocalizedDesc();
-	
+
 }

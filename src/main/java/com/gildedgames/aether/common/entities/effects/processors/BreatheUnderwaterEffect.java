@@ -1,12 +1,10 @@
 package com.gildedgames.aether.common.entities.effects.processors;
 
-import java.util.List;
-
-import net.minecraft.entity.Entity;
-
 import com.gildedgames.aether.common.entities.effects.AbstractEffectProcessor;
 import com.gildedgames.aether.common.entities.effects.EffectInstance;
+import net.minecraft.entity.Entity;
 
+import java.util.List;
 
 /**
  * Sets player's "air" level to 300, which is one bubble worth of air. This means allows
@@ -15,7 +13,7 @@ import com.gildedgames.aether.common.entities.effects.EffectInstance;
  */
 public class BreatheUnderwaterEffect extends AbstractEffectProcessor<EffectInstance>
 {
-	
+
 	public BreatheUnderwaterEffect()
 	{
 		super("ability.breatheUnderwater.name", "ability.breatheUnderwater.desc");

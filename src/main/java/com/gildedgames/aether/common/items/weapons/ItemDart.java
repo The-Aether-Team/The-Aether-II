@@ -18,9 +18,8 @@ public class ItemDart extends Item
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs tab, List subItems)
+	public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems)
 	{
 		for (ItemDartType type : ITEM_VARIANTS)
 		{

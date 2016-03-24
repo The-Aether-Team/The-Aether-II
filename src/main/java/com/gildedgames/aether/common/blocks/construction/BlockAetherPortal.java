@@ -1,11 +1,8 @@
 package com.gildedgames.aether.common.blocks.construction;
 
-import java.util.Random;
-
 import com.gildedgames.aether.client.renderer.effects.EntityAetherPortalFX;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
@@ -26,6 +23,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 public class BlockAetherPortal extends BlockBreakable
 {

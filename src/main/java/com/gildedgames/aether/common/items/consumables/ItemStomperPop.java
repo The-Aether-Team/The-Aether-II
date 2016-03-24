@@ -8,15 +8,15 @@ import net.minecraft.world.World;
 public class ItemStomperPop extends ItemFood
 {
 
-	public ItemStomperPop() 
+	public ItemStomperPop()
 	{
 		super(20, false);
 	}
 
 	@Override
-    public void onCreated(ItemStack stack, World worldIn, EntityPlayer player)
-    {
-    	//Play scary sound
-    }
+	public void onCreated(ItemStack stack, World worldIn, EntityPlayer player)
+	{
+		//Play scary sound
+	}
 
 }

@@ -1,7 +1,5 @@
 package com.gildedgames.aether.common;
 
-import net.minecraftforge.fml.relauncher.Side;
-
 import com.gildedgames.aether.common.entities.effects.processors.BreatheUnderwaterEffect;
 import com.gildedgames.aether.common.entities.effects.processors.FreezeBlocksEffect;
 import com.gildedgames.aether.common.entities.effects.processors.player.DaggerfrostEffect;
@@ -9,6 +7,7 @@ import com.gildedgames.aether.common.entities.effects.processors.player.PauseHun
 import com.gildedgames.util.io_manager.overhead.IOManager;
 import com.gildedgames.util.io_manager.overhead.IORegistry;
 import com.gildedgames.util.io_manager.util.IOManagerDefault;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class AetherServices
 {
@@ -19,7 +18,7 @@ public class AetherServices
 
 	public AetherServices(Side side)
 	{
-		
+
 	}
 
 	private void startIOManager()

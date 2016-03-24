@@ -1,11 +1,9 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import java.util.Random;
-
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,7 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-import com.gildedgames.aether.common.items.ItemsAether;
+import java.util.Random;
 
 public class BlockGoldenOakLog extends BlockAetherLog
 {

@@ -1,16 +1,5 @@
 package com.gildedgames.aether.common.containers.inventory;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.IChatComponent;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.gildedgames.aether.common.AetherCapabilities;
 import com.gildedgames.aether.common.entities.effects.EffectInstance;
 import com.gildedgames.aether.common.entities.effects.EffectProcessor;
@@ -19,22 +8,31 @@ import com.gildedgames.aether.common.items.ItemEffectsBase;
 import com.gildedgames.aether.common.items.ItemEquipmentType;
 import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.util.core.nbt.NBT;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.IChatComponent;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class InventoryEquipment implements IInventory, NBT
 {
 	private static final int INVENTORY_SIZE = 8;
 
 	public static final ItemEquipmentType[] slotTypes = new ItemEquipmentType[]
-	{
-			ItemEquipmentType.RELIC,
-			ItemEquipmentType.RELIC,
-			ItemEquipmentType.HANDWEAR,
-			//ItemEquipmentType.SHIELD,
-			ItemEquipmentType.RING,
-			ItemEquipmentType.RING,
-			ItemEquipmentType.NECKWEAR,
-			ItemEquipmentType.AMMUNITION,
-			ItemEquipmentType.COMPANION,
+			{
+					ItemEquipmentType.RELIC,
+					ItemEquipmentType.RELIC,
+					ItemEquipmentType.HANDWEAR,
+					//ItemEquipmentType.SHIELD,
+					ItemEquipmentType.RING,
+					ItemEquipmentType.RING,
+					ItemEquipmentType.NECKWEAR,
+					ItemEquipmentType.AMMUNITION,
+					ItemEquipmentType.COMPANION,
 			/*ItemEquipmentType.ARTIFACT,
 			ItemEquipmentType.CHARM,
 			ItemEquipmentType.CHARM,
@@ -42,7 +40,7 @@ public class InventoryEquipment implements IInventory, NBT
 			ItemEquipmentType.CHARM,
 			ItemEquipmentType.CHARM,
 			ItemEquipmentType.CHARM*/
-	};
+			};
 
 	private final PlayerAether aePlayer;
 
@@ -132,7 +130,7 @@ public class InventoryEquipment implements IInventory, NBT
 				{
 					EffectProcessor processor = effect.getLeft();
 					EffectInstance instance = effect.getRight();
-					
+
 					effects.put(processor, instance);
 				}
 			}
@@ -163,7 +161,7 @@ public class InventoryEquipment implements IInventory, NBT
 	{
 		int count = 0;
 
-		for (ItemStack stack  : this.inventory)
+		for (ItemStack stack : this.inventory)
 		{
 			if (stack != null && stack.getItem() == item)
 			{
@@ -181,7 +179,9 @@ public class InventoryEquipment implements IInventory, NBT
 	}
 
 	@Override
-	public void markDirty() { }
+	public void markDirty()
+	{
+	}
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
@@ -190,10 +190,14 @@ public class InventoryEquipment implements IInventory, NBT
 	}
 
 	@Override
-	public void openInventory(EntityPlayer player) { }
+	public void openInventory(EntityPlayer player)
+	{
+	}
 
 	@Override
-	public void closeInventory(EntityPlayer player) { }
+	public void closeInventory(EntityPlayer player)
+	{
+	}
 
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack)
@@ -208,7 +212,9 @@ public class InventoryEquipment implements IInventory, NBT
 	}
 
 	@Override
-	public void setField(int id, int value) { }
+	public void setField(int id, int value)
+	{
+	}
 
 	@Override
 	public int getFieldCount()
@@ -222,7 +228,7 @@ public class InventoryEquipment implements IInventory, NBT
 		for (int i = 0; i < this.inventory.length; i++)
 		{
 			ItemStack stack = this.inventory[i];
-			
+
 			if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 			{
 				EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
@@ -234,12 +240,12 @@ public class InventoryEquipment implements IInventory, NBT
 					{
 						EffectProcessor processor = effect.getLeft();
 						EffectInstance instance = effect.getRight();
-						
+
 						effects.removeInstance(processor, instance);
 					}
 				}
 			}
-			
+
 			this.inventory[i] = null;
 		}
 	}
@@ -251,7 +257,7 @@ public class InventoryEquipment implements IInventory, NBT
 			if (this.inventory[i] != null)
 			{
 				ItemStack stack = this.inventory[i];
-				
+
 				if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 				{
 					EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
@@ -263,12 +269,12 @@ public class InventoryEquipment implements IInventory, NBT
 						{
 							EffectProcessor processor = effect.getLeft();
 							EffectInstance instance = effect.getRight();
-							
+
 							effects.removeInstance(processor, instance);
 						}
 					}
 				}
-				
+
 				this.aePlayer.getEntity().dropItem(stack, true, false);
 				this.inventory[i] = null;
 			}

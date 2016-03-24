@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.entities.effects;
 
-import java.util.List;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
+
+import java.util.List;
 
 public interface EffectProcessorPlayer<I extends EffectInstance> extends EffectProcessor<I>
 {
@@ -18,7 +18,7 @@ public interface EffectProcessorPlayer<I extends EffectInstance> extends EffectP
 	 * @param attributes TODO
 	 */
 	void onInteract(PlayerInteractEvent event, EntityPlayer source, List<I> instances);
-	
+
 	void onPickupXP(PlayerPickupXpEvent event, EntityPlayer source, List<I> instances);
-	
+
 }

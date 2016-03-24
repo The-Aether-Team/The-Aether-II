@@ -1,16 +1,12 @@
 package com.gildedgames.aether.common.items.weapons.crossbow;
 
-/**
- * Created by Chris on 3/8/2016.
- */
-
-import java.util.List;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class ItemBolt extends Item
 {
@@ -22,9 +18,8 @@ public class ItemBolt extends Item
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs tab, List subItems)
+	public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems)
 	{
 		for (ItemBoltType type : ITEM_VARIANTS)
 		{

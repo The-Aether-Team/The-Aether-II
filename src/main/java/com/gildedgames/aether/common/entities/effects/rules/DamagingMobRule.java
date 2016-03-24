@@ -1,18 +1,17 @@
 package com.gildedgames.aether.common.entities.effects.rules;
 
+import com.gildedgames.aether.common.entities.effects.EffectRule;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-import com.gildedgames.aether.common.entities.effects.EffectRule;
-
 public class DamagingMobRule implements EffectRule
 {
-	
+
 	private Class<? extends Entity> mobClass;
-	
+
 	private String mobDisplayName;
-	
+
 	public DamagingMobRule(Class<? extends Entity> mobClass, String mobDisplayName)
 	{
 		this.mobClass = mobClass;
@@ -28,9 +27,7 @@ public class DamagingMobRule implements EffectRule
 	@Override
 	public boolean blockLivingAttackAbility(Entity source, LivingHurtEvent event)
 	{
-		boolean flag = !(event.entityLiving != null && this.mobClass.isAssignableFrom(event.entityLiving.getClass()));
-		
-		return flag;
+		return !(event.entityLiving != null && this.mobClass.isAssignableFrom(event.entityLiving.getClass()));
 	}
 
 	@Override
