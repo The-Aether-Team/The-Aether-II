@@ -1,14 +1,9 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.common.entities.effects.EffectInstance;
-import com.gildedgames.aether.common.entities.effects.EffectProcessor;
-import com.gildedgames.aether.common.entities.effects.EffectRule;
-import com.gildedgames.aether.common.items.ItemEffectsBase;
-import com.gildedgames.aether.common.items.ItemEffectsBase.ItemEffects;
-import com.gildedgames.aether.common.items.ItemPropertiesBase;
-import com.gildedgames.aether.common.items.ItemPropertiesBase.ItemProperties;
-import com.gildedgames.aether.common.items.ItemRarity;
-import com.gildedgames.aether.common.player.PlayerAether;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
@@ -22,11 +17,18 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import com.gildedgames.aether.common.entities.effects.EffectInstance;
+import com.gildedgames.aether.common.entities.effects.EffectProcessor;
+import com.gildedgames.aether.common.entities.effects.EffectRule;
+import com.gildedgames.aether.common.items.ItemEffectsBase;
+import com.gildedgames.aether.common.items.ItemEffectsBase.ItemEffects;
+import com.gildedgames.aether.common.items.ItemPropertiesBase;
+import com.gildedgames.aether.common.items.ItemPropertiesBase.ItemProperties;
+import com.gildedgames.aether.common.items.ItemRarity;
+import com.gildedgames.aether.common.player.PlayerAether;
 
 public class AetherCapabilities
 {
@@ -141,101 +143,106 @@ public class AetherCapabilities
 	}
 
 	@SubscribeEvent
-	public void onTELoad(AttachCapabilitiesEvent.Item event)
-	{
-		class ItemEffectsProvider implements ICapabilityProvider
-		{
+    public void onTELoad(AttachCapabilitiesEvent.Item event)
+    {
+        class ItemEffectsProvider implements ICapabilityProvider
+        {
 
-			private ItemEffectsBase effects;
+            private ItemEffectsBase effects;
 
-			private ItemStack stack;
+            private ItemStack stack;
+            
+            ItemEffectsProvider(ItemStack stack)
+            {
+                this.stack = stack;
+            }
+            
+            private void attemptToCreateEffects()
+            {
+            	if (this.effects == null)
+            	{
+            		for (ItemEffects.RegistrationEntry entry : ItemEffects.getRegistrationEntries())
+            		{
+            			if (entry.getItem() == this.stack.getItem())
+            			{
+            				List<Pair<EffectProcessor, EffectInstance>> emptyList = Collections.emptyList();
+            				
+            				this.effects = new ItemEffectsBase.ItemEffects(entry.getEffectsProvider() == null ? emptyList : entry.getEffectsProvider().provide());
+            				break;
+            			}
+            		}
+            	}
+            }
+            
+            @Override
+            public boolean hasCapability(Capability<?> capability, EnumFacing facing)
+            {
+            	this.attemptToCreateEffects();
+            	
+                return ITEM_EFFECTS != null && capability == ITEM_EFFECTS && this.effects != null;
+            }
+            
+            @SuppressWarnings("unchecked")
+            @Override
+            public <T> T getCapability(Capability<T> capability, EnumFacing facing)
+            {
+                if (this.hasCapability(capability, facing))
+                {
+                	return (T)this.effects;
+                }
+                
+                return null;
+            }
 
-			ItemEffectsProvider(ItemStack stack)
-			{
-				this.stack = stack;
-			}
+        }
 
-			@Override
-			public boolean hasCapability(Capability<?> capability, EnumFacing facing)
-			{
-				return ITEM_EFFECTS != null && capability == ITEM_EFFECTS;
-			}
+        event.addCapability(new ResourceLocation(AetherCore.MOD_ID + ":ItemEffectsCapability"), new ItemEffectsProvider(event.getItemStack()));
+    
+        class ItemPropertiesProvider implements ICapabilityProvider
+        {
 
-			@SuppressWarnings("unchecked")
-			@Override
-			public <T> T getCapability(Capability<T> capability, EnumFacing facing)
-			{
-				if (ITEM_EFFECTS != null && capability == ITEM_EFFECTS)
-				{
-					if (this.effects == null)
-					{
-						for (ItemEffects.RegistrationEntry entry : ItemEffects.getRegistrationEntries())
-						{
-							if (entry.getItem() == this.stack.getItem())
-							{
-								List<Pair<EffectProcessor, EffectInstance>> emptyList = Collections.emptyList();
+            private ItemPropertiesBase properties;
 
-								this.effects = new ItemEffectsBase.ItemEffects(entry.getEffectsProvider() == null ? emptyList : entry.getEffectsProvider().provide());
-								break;
-							}
-						}
-					}
+            private ItemStack stack;
+            
+            ItemPropertiesProvider(ItemStack stack)
+            {
+                this.stack = stack;
+            }
+            
+            @Override
+            public boolean hasCapability(Capability<?> capability, EnumFacing facing)
+            {
+                return ITEM_PROPERTIES != null && capability == ITEM_PROPERTIES;
+            }
+            
+            @SuppressWarnings("unchecked")
+            @Override
+            public <T> T getCapability(Capability<T> capability, EnumFacing facing)
+            {
+                if (ITEM_PROPERTIES != null && capability == ITEM_PROPERTIES)
+                {
+                	if (this.properties == null)
+                	{
+                		for (ItemProperties.RegistrationEntry entry : ItemProperties.getRegistrationEntries())
+                		{
+                			if (entry.getItem() == this.stack.getItem())
+                			{
+                				this.properties = new ItemPropertiesBase.ItemProperties(entry.getRarity(), entry.getEquipmentType());
+                				break;
+                			}
+                		}
+                	}
+                	
+                	return (T)this.properties;
+                }
+                
+                return null;
+            }
 
-					return (T) this.effects;
-				}
-
-				return null;
-			}
-
-		}
-
-		event.addCapability(new ResourceLocation(AetherCore.MOD_ID + ":ItemEffectsCapability"), new ItemEffectsProvider(event.getItemStack()));
-
-		class ItemPropertiesProvider implements ICapabilityProvider
-		{
-
-			private ItemPropertiesBase properties;
-
-			private ItemStack stack;
-
-			ItemPropertiesProvider(ItemStack stack)
-			{
-				this.stack = stack;
-			}
-
-			@Override
-			public boolean hasCapability(Capability<?> capability, EnumFacing facing)
-			{
-				return ITEM_PROPERTIES != null && capability == ITEM_PROPERTIES;
-			}
-
-			@SuppressWarnings("unchecked")
-			@Override
-			public <T> T getCapability(Capability<T> capability, EnumFacing facing)
-			{
-				if (ITEM_PROPERTIES != null && capability == ITEM_PROPERTIES)
-				{
-					if (this.properties == null)
-					{
-						for (ItemProperties.RegistrationEntry entry : ItemProperties.getRegistrationEntries())
-						{
-							if (entry.getItem() == this.stack.getItem())
-							{
-								this.properties = new ItemPropertiesBase.ItemProperties(entry.getRarity(), entry.getEquipmentType());
-								break;
-							}
-						}
-					}
-
-					return (T) this.properties;
-				}
-
-				return null;
-			}
-
-		}
-
-		event.addCapability(new ResourceLocation(AetherCore.MOD_ID + ":ItemPropertiesCapability"), new ItemPropertiesProvider(event.getItemStack()));
-	}
+        }
+        
+        event.addCapability(new ResourceLocation(AetherCore.MOD_ID + ":ItemPropertiesCapability"), new ItemPropertiesProvider(event.getItemStack()));
+    }
 
 }

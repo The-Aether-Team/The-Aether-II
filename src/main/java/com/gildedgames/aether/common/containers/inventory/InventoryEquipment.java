@@ -119,6 +119,7 @@ public class InventoryEquipment implements IInventory, NBT
 	{
 		this.inventory[index] = stack;
 
+<<<<<<< 5c341e7ca8244f2964aa87c05d0574967460672c
 		if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 		{
 			EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
@@ -136,6 +137,8 @@ public class InventoryEquipment implements IInventory, NBT
 			}
 		}
 
+=======
+>>>>>>> d5f20224b326f2f2568ee73a4e79dfc92466b165
 		this.markDirty();
 	}
 

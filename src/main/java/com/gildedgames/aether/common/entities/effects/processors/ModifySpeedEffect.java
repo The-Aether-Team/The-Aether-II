@@ -42,22 +42,6 @@ public class ModifySpeedEffect implements EffectProcessor<Instance>
 			return new Instance(this.getAttributes().getFloat("movementSpeedMod"), this.getRules());
 		}
 		
-		/*@Override
-		public boolean equals(Object obj)
-		{
-			if (obj instanceof Instance)
-			{
-				Instance inst = (Instance)obj;
-				
-				if (inst.getAttributes().getFloat("movementSpeedMod") == this.getAttributes().getFloat("movementSpeedMod"))
-				{
-					return true;
-				}
-			}
-			
-			return false;
-		}*/
-
 	}
 
 	public ModifySpeedEffect()

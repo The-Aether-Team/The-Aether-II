@@ -137,24 +137,51 @@ public class ContainerEquipment extends ContainerPlayer
 		if (slotId < this.inventorySlots.size() && slotId > 0)
 		{
 			Slot slot = this.inventorySlots.get(slotId);
+<<<<<<< 5c341e7ca8244f2964aa87c05d0574967460672c
 
 			if (slot != null && slot.getHasStack())
 			{
 				ItemStack stack = slot.getStack();
 
 				if (slot instanceof SlotEquipment && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
+=======
+			
+			if (slot instanceof SlotEquipment)
+			{
+				if (slot.getHasStack())
+>>>>>>> d5f20224b326f2f2568ee73a4e79dfc92466b165
 				{
-					EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
-					ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
+					ItemStack stack = slot.getStack();
 
-					if (itemEffects != null)
+					if (stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 					{
+						EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
+						ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
+
 						for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
 						{
 							EffectProcessor processor = effect.getLeft();
 							EffectInstance instance = effect.getRight();
 
 							effects.removeInstance(processor, instance);
+						}
+					}
+				}
+				else
+				{
+					ItemStack stack = this.aePlayer.getEntity().inventory.getItemStack();
+					
+					if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
+					{
+						EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
+						ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
+
+						for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
+						{
+							EffectProcessor processor = effect.getLeft();
+							EffectInstance instance = effect.getRight();
+							
+							effects.put(processor, instance);
 						}
 					}
 				}
@@ -201,11 +228,11 @@ public class ContainerEquipment extends ContainerPlayer
 			{
 				int destIndex = -1;
 
-				if (stack.getItem() instanceof ItemPropertiesBase)
+				if (stack.hasCapability(AetherCapabilities.ITEM_PROPERTIES, null))
 				{
-					ItemPropertiesBase accessory = (ItemPropertiesBase) stack.getItem();
+					ItemPropertiesBase properties = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
 
-					destIndex = this.getNextEmptySlot(accessory.getEquipmentType());
+					destIndex = this.getNextEmptySlot(properties.getEquipmentType());
 				}
 
 				if (destIndex != -1)
@@ -214,6 +241,23 @@ public class ContainerEquipment extends ContainerPlayer
 					accessorySlot.putStack(stack);
 
 					slot.putStack(null);
+					
+					if (stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
+					{
+						EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
+						ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
+
+						if (itemEffects != null)
+						{
+							for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
+							{
+								EffectProcessor processor = effect.getLeft();
+								EffectInstance instance = effect.getRight();
+								
+								effects.removeInstance(processor, instance);
+							}
+						}
+					}
 
 					return stack;
 				}
