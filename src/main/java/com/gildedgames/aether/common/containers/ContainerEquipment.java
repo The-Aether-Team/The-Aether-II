@@ -137,19 +137,10 @@ public class ContainerEquipment extends ContainerPlayer
 		if (slotId < this.inventorySlots.size() && slotId > 0)
 		{
 			Slot slot = this.inventorySlots.get(slotId);
-<<<<<<< 5c341e7ca8244f2964aa87c05d0574967460672c
-
-			if (slot != null && slot.getHasStack())
-			{
-				ItemStack stack = slot.getStack();
-
-				if (slot instanceof SlotEquipment && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
-=======
 			
 			if (slot instanceof SlotEquipment)
 			{
 				if (slot.getHasStack())
->>>>>>> d5f20224b326f2f2568ee73a4e79dfc92466b165
 				{
 					ItemStack stack = slot.getStack();
 

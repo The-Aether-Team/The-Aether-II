@@ -24,17 +24,6 @@ public class EntityEffectsEventHooks
 	}
 
 	@SubscribeEvent
-	public void onLivingUpdate(LivingUpdateEvent event)
-	{
-		EntityEffects effects = EntityEffects.get(event.entity);
-
-		if (effects != null)
-		{
-			effects.onUpdate();
-		}
-	}
-
-	@SubscribeEvent
 	public void onLivingDropsEvent(LivingDropsEvent event)
 	{
 		Entity entity = event.source.getSourceOfDamage();

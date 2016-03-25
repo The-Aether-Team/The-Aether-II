@@ -119,26 +119,6 @@ public class InventoryEquipment implements IInventory, NBT
 	{
 		this.inventory[index] = stack;
 
-<<<<<<< 5c341e7ca8244f2964aa87c05d0574967460672c
-		if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
-		{
-			EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
-			ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
-
-			if (itemEffects != null)
-			{
-				for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
-				{
-					EffectProcessor processor = effect.getLeft();
-					EffectInstance instance = effect.getRight();
-
-					effects.put(processor, instance);
-				}
-			}
-		}
-
-=======
->>>>>>> d5f20224b326f2f2568ee73a4e79dfc92466b165
 		this.markDirty();
 	}
 
