@@ -1,5 +1,15 @@
 package com.gildedgames.aether.client.models.items;
 
+import java.util.ArrayList;
+import java.util.Map;
+
+import net.minecraft.block.Block;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.ForgeHooksClient;
+import net.minecraftforge.client.model.ModelLoader;
+
 import com.gildedgames.aether.client.util.ItemModelList;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
@@ -16,15 +26,6 @@ import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootChest;
-import net.minecraft.block.Block;
-import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.ForgeHooksClient;
-import net.minecraftforge.client.model.ModelLoader;
-
-import java.util.ArrayList;
-import java.util.Map;
 
 public class AetherItemModels
 {
@@ -280,37 +281,6 @@ public class AetherItemModels
 		registerItemModels(new ItemModelList(ItemsAether.icestone).add(0, "icestone"));
 
 		registerItemModels(new ItemModelList(ItemsAether.skyroot_sign).add(0, "skyroot_sign"));
-
-		registerItemModels(new ItemModelList(ItemsAether.barbed_iron_ring).add(0, "accessories/barbed_iron_ring"));
-		registerItemModels(new ItemModelList(ItemsAether.barbed_gold_ring).add(0, "accessories/barbed_gold_ring"));
-
-		registerItemModels(new ItemModelList(ItemsAether.solar_band).add(0, "accessories/solar_band"));
-		registerItemModels(new ItemModelList(ItemsAether.lunar_band).add(0, "accessories/lunar_band"));
-
-		registerItemModels(new ItemModelList(ItemsAether.ring_of_growth).add(0, "accessories/ring_of_growth"));
-		registerItemModels(new ItemModelList(ItemsAether.plague_coil).add(0, "accessories/plague_coil"));
-
-		registerItemModels(new ItemModelList(ItemsAether.fleeting_ring).add(0, "accessories/fleeting_ring"));
-		registerItemModels(new ItemModelList(ItemsAether.lesser_ring_of_growth).add(0, "accessories/lesser_ring_of_growth"));
-		registerItemModels(new ItemModelList(ItemsAether.winged_ring).add(0, "accessories/winged_ring"));
-		registerItemModels(new ItemModelList(ItemsAether.life_coil).add(0, "accessories/life_coil"));
-
-		registerItemModels(new ItemModelList(ItemsAether.iron_barbed_wire).add(0, "accessories/iron_barbed_wire"));
-		registerItemModels(new ItemModelList(ItemsAether.wisdom_bauble).add(0, "accessories/wisdom_bauble"));
-		registerItemModels(new ItemModelList(ItemsAether.bone_shard).add(0, "accessories/bone_shard"));
-		registerItemModels(new ItemModelList(ItemsAether.moa_feather).add(0, "accessories/moa_feather"));
-		registerItemModels(new ItemModelList(ItemsAether.blight_ward).add(0, "accessories/blight_ward"));
-		registerItemModels(new ItemModelList(ItemsAether.skyroot_twig).add(0, "accessories/skyroot_twig"));
-		registerItemModels(new ItemModelList(ItemsAether.gold_barbed_wire).add(0, "accessories/gold_barbed_wire"));
-		registerItemModels(new ItemModelList(ItemsAether.ambrosium_talisman).add(0, "accessories/ambrosium_talisman"));
-		registerItemModels(new ItemModelList(ItemsAether.carrion_petal).add(0, "accessories/carrion_petal"));
-		registerItemModels(new ItemModelList(ItemsAether.moonlit_petal).add(0, "accessories/moonlit_petal"));
-		registerItemModels(new ItemModelList(ItemsAether.cockatrice_heart).add(0, "accessories/cockatrice_heart"));
-		registerItemModels(new ItemModelList(ItemsAether.damaged_moa_feather).add(0, "accessories/damaged_moa_feather"));
-		registerItemModels(new ItemModelList(ItemsAether.osseous_bane).add(0, "accessories/osseous_bane"));
-		registerItemModels(new ItemModelList(ItemsAether.rot_bane).add(0, "accessories/rot_bane"));
-		registerItemModels(new ItemModelList(ItemsAether.continuum_talisman).add(0, "accessories/continuum_talisman"));
-		registerItemModels(new ItemModelList(ItemsAether.labyrinth_plans).add(0, "accessories/labyrinth_plans"));
 
 		registerItemModels(new ItemModelList(BlocksAether.holystone_wall).add(0, "aether_wall/holystone_wall"));
 		registerItemModels(new ItemModelList(BlocksAether.holystone_wall_mossy).add(0, "aether_wall/mossy_wall"));

@@ -184,33 +184,6 @@ item.aether.bolt.stone.name=Stone Bolt
 item.aether.bolt.zanite.name=Zanite Bolt
 item.aether.skyroot_door_item.name=Skyroot Door
 item.aether.skyroot_sign.name=Skyroot Sign
-item.aether.barbed_iron_ring.name=Barbed Iron Ring
-item.aether.barbed_gold_ring.name=Barbed Gold Ring
-item.aether.solar_band.name=Solar Band
-item.aether.lunar_band.name=Lunar Band
-item.aether.ring_of_growth.name=Ring of Growth
-item.aether.plague_coil.name=Plague Coil
-item.aether.fleeting_ring.name=Fleeting Ring
-item.aether.lesser_ring_of_growth.name=Lesser Ring of Growth
-item.aether.winged_ring.name=Winged Ring
-item.aether.life_coil.name=Life Coil
-item.aether.iron_barbed_wire.name=Iron Barbed Wire
-item.aether.wisdom_bauble.name=Wisdom Bauble
-item.aether.bone_shard.name=Bone Shard
-item.aether.moa_feather.name=Moa Feather
-item.aether.blight_ward.name=Blight Ward
-item.aether.skyroot_twig.name=Skyroot Twig
-item.aether.gold_barbed_wire.name=Gold Barbed Wire
-item.aether.ambrosium_talisman.name=Ambrosium Talisman
-item.aether.carrion_petal.name=Carrion Petal
-item.aether.moonlit_petal.name=Moonlit Petal
-item.aether.cockatrice_heart.name=Cockatrice Heart
-item.aether.peer_healing_trinket.name=Peer-Healing Trinket
-item.aether.damaged_moa_feather.name=Damaged Moa Feather
-item.aether.osseous_bane.name=Osseous Bane
-item.aether.rot_bane.name=Rot Bane
-item.aether.continuum_talisman.name=Continuum Talisman
-item.aether.labyrinth_plans.name=Labyrinth Plans
 
 # Item Rarities
 item.rarity.common.name=§7§oCommon
@@ -278,7 +251,7 @@ itemGroup.aetherTools=Aether Tools
 itemGroup.aetherWeapons=Aether Weapons
 itemGroup.aetherArmor=Aether Armor
 itemGroup.aetherConsumables=Aether Consumables
-itemGroup.aetherAccessories=Aether Accessories
+itemGroup.aetherAccessories=Equipment
 
 # Containers
 container.holystone_furnace=Holystone Furnace
