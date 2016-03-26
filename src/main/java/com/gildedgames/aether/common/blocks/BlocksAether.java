@@ -1,5 +1,11 @@
 package com.gildedgames.aether.common.blocks;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemBlock;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
@@ -17,6 +23,7 @@ import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockWallS
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockSkyrootWorkbench;
 import com.gildedgames.aether.common.blocks.dungeon.BlockDungeon;
+import com.gildedgames.aether.common.blocks.dungeon.BlockTeleporter;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAerogel;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
@@ -37,11 +44,6 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.items.itemblocks.ItemBlockAetherVariants;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemBlock;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class BlocksAether
 {
@@ -122,6 +124,8 @@ public class BlocksAether
 
 	public static BlockAetherWall holystone_wall, holystone_wall_mossy, carved_stone_wall, icestone_wall, aerogel_wall, skyroot_log_wall;
 
+	public static Block labyrinth_totem;
+	
 	public static void preInit()
 	{
 		aether_dirt = registerBlock("aether_dirt", new Block(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f), AetherCreativeTabs.tabBlocks);
@@ -218,6 +222,8 @@ public class BlocksAether
 		skyroot_log_wall = registerBlock("skyroot_log_wall", new BlockAetherWall(BlocksAether.skyroot_log, 2.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		aerogel_wall = registerBlock("aerogel_wall", new BlockAerogelWall(BlocksAether.aerogel, 1.0f, 10.f), AetherCreativeTabs.tabBlocks);
 
+		labyrinth_totem = registerBlock("labyrinth_totem", new BlockTeleporter(Material.iron), AetherCreativeTabs.tabBlocks);
+		
 		registerHarvestLevels();
 	}
 

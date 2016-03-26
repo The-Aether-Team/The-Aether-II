@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"normal": [
+			{ "model": "aether:labyrinth_totem" },
+			{ "model": "aether:labyrinth_totem", "y": 90 },
+			{ "model": "aether:labyrinth_totem", "y": 180 },
+			{ "model": "aether:labyrinth_totem", "y": 270 }
+		]
+	}
+}

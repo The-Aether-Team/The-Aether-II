@@ -61,6 +61,7 @@ tile.aether.holystone_wall_mossy.name=Mossy Holystone Wall
 tile.aether.icestone_wall.name=Icestone Brick Wall
 tile.aether.skyroot_log_wall.name=Skyroot Log Wall
 tile.aether.aerogel_wall.name=Aerogel Wall
+tile.aether.labyrinth_totem.name=Labyrinth Totem
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
