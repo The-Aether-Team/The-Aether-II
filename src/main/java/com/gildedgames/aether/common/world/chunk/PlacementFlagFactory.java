@@ -10,9 +10,9 @@ import net.minecraft.world.World;
 public class PlacementFlagFactory implements IChunkHookFactory<IChunkHook>
 {
 	@Override
-	public PlacementFlagChunkData createHook(World world, NBTTagCompound tag)
+	public AetherPlaceFlagChunkHook createHook(World world, NBTTagCompound tag)
 	{
-		PlacementFlagChunkData data = new PlacementFlagChunkData();
+		AetherPlaceFlagChunkHook data = new AetherPlaceFlagChunkHook();
 		data.read(tag);
 
 		return data;

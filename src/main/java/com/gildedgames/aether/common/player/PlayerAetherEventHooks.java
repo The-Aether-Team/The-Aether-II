@@ -4,8 +4,9 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.util.PlayerUtil;
-import com.gildedgames.aether.common.world.chunk.PlacementFlagChunkData;
+import com.gildedgames.aether.common.world.chunk.AetherPlaceFlagChunkHook;
 import com.gildedgames.util.modules.chunk.ChunkModule;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -79,12 +80,11 @@ public class PlayerAetherEventHooks
 	@SubscribeEvent
 	public void onPlaceBlockEvent(BlockEvent.PlaceEvent event)
 	{
-		PlacementFlagChunkData data = (PlacementFlagChunkData) ChunkModule.api().getHook(event.world, event.pos, PlacementFlagChunkData.class);
+		AetherPlaceFlagChunkHook data = ChunkModule.api().getHook(event.world, event.pos, AetherPlaceFlagChunkHook.class);
 
-		if (data != null)
-		{
-			data.setPlaced(event.pos.getX() & 15, event.pos.getY() & 15, event.pos.getZ() & 15);
-		}
+		int x = event.pos.getX(), y = event.pos.getY(), z = event.pos.getZ();
+
+		data.setExtendedBlockState(x, y, z, data.getExtendedBlockState(x, y, z).withProperty(AetherPlaceFlagChunkHook.PROPERTY_BLOCK_PLACED, true));
 	}
 
 	@SubscribeEvent
