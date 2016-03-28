@@ -22,6 +22,7 @@ import com.gildedgames.aether.common.world.dungeon.instances.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.instances.DungeonInstanceFactory;
 import com.gildedgames.aether.common.world.dungeon.instances.DungeonInstanceHandler;
 import com.gildedgames.util.core.SidedObject;
+import com.gildedgames.util.io.ClassSerializer;
 import com.gildedgames.util.modules.instances.InstanceHandler;
 import com.gildedgames.util.modules.instances.InstanceModule;
 
@@ -49,10 +50,22 @@ public class AetherCore
 	public static AetherConfig CONFIG;
 
 	private static TeleporterAether teleporter;
+	
+	private ClassSerializer srl;
 
 	public static AetherServices locate()
 	{
 		return serviceLocator.instance();
+	}
+	
+	public static ClassSerializer srl()
+	{
+		if (AetherCore.INSTANCE.srl == null)
+		{
+			AetherCore.INSTANCE.srl = new ClassSerializer(AetherCore.MOD_ID + "Srl");
+		}
+		
+		return AetherCore.INSTANCE.srl;
 	}
 
 	@EventHandler

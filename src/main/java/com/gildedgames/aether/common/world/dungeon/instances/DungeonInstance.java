@@ -17,6 +17,12 @@ public class DungeonInstance implements Instance
 
 	private BlockPosDimension entrance;
 	
+	@SuppressWarnings("unused")
+	private DungeonInstance()
+	{
+		
+	}
+	
 	public DungeonInstance(int id, InstanceHandler<DungeonInstance> instanceHandler)
 	{
 		
