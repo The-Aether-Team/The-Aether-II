@@ -31,13 +31,11 @@ public class BlockAetherWall extends Block
 		this.setStepSound(block.stepSound);
 	}
 
-	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
+	public BlockAetherWall setGlows(boolean glows)
 	{
-		this.setBlockBoundsBasedOnState(worldIn, pos);
-		this.maxY = 1.5D;
+		this.setLightLevel(glows ? 0.75f : 0.0f);
 
-		return super.getCollisionBoundingBox(worldIn, pos, state);
+		return this;
 	}
 
 	public boolean canConnectTo(IBlockAccess world, BlockPos pos)
@@ -46,6 +44,15 @@ public class BlockAetherWall extends Block
 
 		return block != Blocks.barrier &&
 				(!(block != this && !(block instanceof BlockFenceGate)) || ((block.getMaterial().isOpaque() && block.isFullCube()) && block.getMaterial() != Material.gourd));
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
+	{
+		this.setBlockBoundsBasedOnState(worldIn, pos);
+		this.maxY = 1.5D;
+
+		return super.getCollisionBoundingBox(worldIn, pos, state);
 	}
 
 	@Override

@@ -61,6 +61,10 @@ tile.aether.holystone_wall_mossy.name=Mossy Holystone Wall
 tile.aether.icestone_wall.name=Icestone Brick Wall
 tile.aether.skyroot_log_wall.name=Skyroot Log Wall
 tile.aether.aerogel_wall.name=Aerogel Wall
+tile.aether.holystone_brick_wall.name=Holystone Brick Wall
+tile.aether.sentry_stone_wall.name=Sentry Stone Wall
+tile.aether.divine_sentry_stone_wall.name=Divine Sentry Stone Wall
+tile.aether.divine_stone_wall.name=Divine Stone Wall
 tile.aether.labyrinth_totem.name=Labyrinth Totem
 
 # Aether Items
