@@ -2,7 +2,6 @@ package com.gildedgames.aether.common;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.WorldProviderSurface;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -18,9 +17,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.gildedgames.aether.common.world.TeleporterAether;
-import com.gildedgames.aether.common.world.dungeon.instances.DungeonInstance;
-import com.gildedgames.aether.common.world.dungeon.instances.DungeonInstanceFactory;
-import com.gildedgames.aether.common.world.dungeon.instances.DungeonInstanceHandler;
+import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
+import com.gildedgames.aether.common.world.dungeon.DungeonInstanceFactory;
+import com.gildedgames.aether.common.world.dungeon.DungeonInstanceHandler;
+import com.gildedgames.aether.common.world.dungeon.WorldProviderSliderLabyrinth;
 import com.gildedgames.util.core.SidedObject;
 import com.gildedgames.util.io.ClassSerializer;
 import com.gildedgames.util.modules.instances.InstanceHandler;
@@ -81,7 +81,7 @@ public class AetherCore
 	{
 		AetherCore.PROXY.init(event);
 		
-		final DungeonInstanceFactory factory = new DungeonInstanceFactory(6, WorldProviderSurface.class);
+		final DungeonInstanceFactory factory = new DungeonInstanceFactory(6, WorldProviderSliderLabyrinth.class);
 
 		final InstanceHandler<DungeonInstance> client = InstanceModule.INSTANCE.createClientInstanceHandler(factory);
 		final InstanceHandler<DungeonInstance> server = InstanceModule.INSTANCE.createServerInstanceHandler(factory);

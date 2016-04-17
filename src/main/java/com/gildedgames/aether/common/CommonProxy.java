@@ -29,7 +29,7 @@ import com.gildedgames.aether.common.recipes.RecipesAether;
 import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
 import com.gildedgames.aether.common.world.WorldProviderAether;
 import com.gildedgames.aether.common.world.chunk.PlacementFlagFactory;
-import com.gildedgames.aether.common.world.dungeon.instances.DungeonInstance;
+import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
 import com.gildedgames.util.io.Instantiator;
 import com.gildedgames.util.modules.chunk.ChunkModule;
 import com.gildedgames.util.modules.entityhook.EntityHookModule;

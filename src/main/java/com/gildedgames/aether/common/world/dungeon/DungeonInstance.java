@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.world.dungeon.instances;
+package com.gildedgames.aether.common.world.dungeon;
 
 import java.util.List;
 
@@ -17,6 +17,8 @@ public class DungeonInstance implements Instance
 
 	private BlockPosDimension entrance;
 	
+	private boolean generated = false;
+	
 	@SuppressWarnings("unused")
 	private DungeonInstance()
 	{
@@ -26,6 +28,16 @@ public class DungeonInstance implements Instance
 	public DungeonInstance(int id, InstanceHandler<DungeonInstance> instanceHandler)
 	{
 		
+	}
+	
+	public void flagGenerated()
+	{
+		this.generated = true;
+	}
+	
+	public boolean hasGenerated()
+	{
+		return this.generated;
 	}
 	
 	public BlockPosDimension getEntrance()
@@ -41,13 +53,13 @@ public class DungeonInstance implements Instance
 	@Override
 	public void write(NBTTagCompound output)
 	{
-		
+		output.setBoolean("generated", this.generated);
 	}
 
 	@Override
 	public void read(NBTTagCompound input)
 	{
-		
+		this.generated = input.getBoolean("generated");
 	}
 
 	@Override

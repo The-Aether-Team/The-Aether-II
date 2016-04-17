@@ -10,8 +10,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.world.dungeon.instances.DungeonInstance;
-import com.gildedgames.aether.common.world.dungeon.instances.DungeonInstanceHandler;
+import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
+import com.gildedgames.aether.common.world.dungeon.DungeonInstanceHandler;
 import com.gildedgames.util.modules.instances.InstanceModule;
 import com.gildedgames.util.modules.instances.PlayerInstances;
 import com.gildedgames.util.modules.world.common.BlockPosDimension;

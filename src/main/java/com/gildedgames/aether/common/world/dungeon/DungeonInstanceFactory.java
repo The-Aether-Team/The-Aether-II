@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.world.dungeon.instances;
+package com.gildedgames.aether.common.world.dungeon;
 
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldProvider;

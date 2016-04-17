@@ -2,7 +2,7 @@ package com.gildedgames.aether.common;
 
 import net.minecraftforge.fml.relauncher.Side;
 
-import com.gildedgames.aether.common.world.dungeon.instances.DungeonInstanceHandler;
+import com.gildedgames.aether.common.world.dungeon.DungeonInstanceHandler;
 
 public class AetherServices
 {

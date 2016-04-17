@@ -1,5 +1,17 @@
 package com.gildedgames.aether.common.world.biome;
 
+import java.util.Random;
+
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
+
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud.AercloudVariant;
@@ -11,18 +23,8 @@ import com.gildedgames.aether.common.world.features.WorldGenAetherTallGrass;
 import com.gildedgames.aether.common.world.features.WorldGenQuicksoil;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenPurpleAercloud;
+import com.gildedgames.aether.common.world.features.dungeon.WorldGenSliderLabyrinthEntrance;
 import com.gildedgames.aether.common.world.features.trees.WorldGenOrangeTree;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.feature.WorldGenMinable;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
-
-import java.util.Random;
 
 public class BiomeDecoratorAether
 {
@@ -43,6 +45,8 @@ public class BiomeDecoratorAether
 	protected WorldGenAercloud genColdColumbusAercloud, genColdFlatAercloud, genBlueAercloud;
 
 	protected WorldGenPurpleAercloud genPurpleAercloud;
+	
+	protected WorldGenSliderLabyrinthEntrance genSliderLabyrinthEntrance;
 
 	public BiomeDecoratorAether()
 	{
@@ -69,6 +73,7 @@ public class BiomeDecoratorAether
 		this.genBlueAercloud = new WorldGenAercloud(this.getAercloudState(BlockAercloud.BLUE_AERCLOUD), 8, false);
 
 		this.genPurpleAercloud = new WorldGenPurpleAercloud(this.getAercloudState(BlockAercloud.PURPLE_AERCLOUD), 4, false);
+		this.genSliderLabyrinthEntrance = new WorldGenSliderLabyrinthEntrance(10);
 	}
 
 	protected IBlockState getAercloudState(AercloudVariant variant)
@@ -183,6 +188,16 @@ public class BiomeDecoratorAether
 			this.genAetherLakes.generate(world, random, pos.add(x, y, z));
 		}
 
+		//Entrance Generator
+		for (int n = 0; n < 3; n++)
+		{
+			x = random.nextInt(16) + 8;
+			y = random.nextInt(128);
+			z = random.nextInt(16) + 8;
+			
+			this.genSliderLabyrinthEntrance.generate(world, random, pos.add(x, y, z));
+		}
+		
 		this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));
 	}
 
