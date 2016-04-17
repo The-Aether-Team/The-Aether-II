@@ -119,11 +119,11 @@
 			}
 		]
 	},
-	"aemob.aerbunny.die": {
+	"aemob.aerbunny.death": {
 		"category": "neutral",
 		"sounds": [
 			{
-				"name": "aemob/aerbunny/die"
+				"name": "aemob/aerbunny/death"
 			}
 		]
 	}

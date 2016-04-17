@@ -138,13 +138,13 @@ public class EntityAerbunny extends EntityAetherAnimal
 	@Override
 	protected String getHurtSound()
 	{
-		return "aemob.aerbunny.hurt";
+		return AetherCore.getResourcePath("aemob.aerbunny.hurt");
 	}
 
 	@Override
 	protected String getDeathSound()
 	{
-		return "aemob.aerbunny.die";
+		return AetherCore.getResourcePath("aemob.aerbunny.death");
 	}
 
 	@Override
