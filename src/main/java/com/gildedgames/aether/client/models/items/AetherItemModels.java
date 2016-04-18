@@ -292,6 +292,8 @@ public class AetherItemModels
 		registerItemModels(new ItemModelList(BlocksAether.divine_stone_wall).add(0, "aether_wall/divine_stone_wall"));
 		registerItemModels(new ItemModelList(BlocksAether.sentry_stone_wall).add(0, "aether_wall/sentry_stone_wall"));
 		registerItemModels(new ItemModelList(BlocksAether.divine_sentry_stone_wall).add(0, "aether_wall/divine_sentry_stone_wall"));
+		
+		registerItemModels(new ItemModelList(ItemsAether.aether_portal_frame).add(0, "aether_portal_frame"));
 
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.skyroot_chest), 0, TileEntitySkyrootChest.class);
 	}

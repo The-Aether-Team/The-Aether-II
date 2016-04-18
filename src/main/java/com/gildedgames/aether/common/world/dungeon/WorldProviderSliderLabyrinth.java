@@ -67,7 +67,7 @@ public class WorldProviderSliderLabyrinth extends WorldProvider
 	@Override
 	public String getSaveFolder()
 	{
-		return "SLIDER_LABYRINTH" + dimensionId;
+		return super.getSaveFolder();
 	}
 
 	@Override

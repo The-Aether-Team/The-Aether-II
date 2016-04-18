@@ -84,7 +84,14 @@ public class PlayerAetherEventHooks
 
 		int x = event.pos.getX(), y = event.pos.getY(), z = event.pos.getZ();
 
-		data.setExtendedBlockState(x, y, z, data.getExtendedBlockState(x, y, z).withProperty(AetherPlaceFlagChunkHook.PROPERTY_BLOCK_PLACED, true));
+		if (data != null)
+		{
+			data.setExtendedBlockState(x, y, z, data.getExtendedBlockState(x, y, z).withProperty(AetherPlaceFlagChunkHook.PROPERTY_BLOCK_PLACED, true));
+		}
+		else
+		{
+			System.out.println("Chunk hook is null, something is going wrong!");
+		}
 	}
 
 	@SubscribeEvent

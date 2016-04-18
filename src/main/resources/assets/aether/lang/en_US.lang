@@ -188,6 +188,7 @@ item.aether.bolt.stone.name=Stone Bolt
 item.aether.bolt.zanite.name=Zanite Bolt
 item.aether.skyroot_door_item.name=Skyroot Door
 item.aether.skyroot_sign.name=Skyroot Sign
+item.aether.aether_portal_frame.name=Aether Portal Frame
 
 # Item Rarities
 item.rarity.common.name=§7§oCommon
