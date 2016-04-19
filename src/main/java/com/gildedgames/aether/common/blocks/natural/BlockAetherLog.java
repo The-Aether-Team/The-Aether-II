@@ -37,13 +37,13 @@ public class BlockAetherLog extends Block
 	public void breakBlock(World world, BlockPos pos, IBlockState state)
 	{
 		byte size = 4;
+
 		int chunkSize = size + 1;
 
 		if (world.isAreaLoaded(pos.add(-chunkSize, -chunkSize, -chunkSize), pos.add(chunkSize, chunkSize, chunkSize)))
 		{
-			for (Object obj : BlockPos.getAllInBox(pos.add(-size, -size, -size), pos.add(size, size, size)))
+			for (BlockPos neighborPos : BlockPos.getAllInBox(pos.add(-size, -size, -size), pos.add(size, size, size)))
 			{
-				BlockPos neighborPos = (BlockPos) obj;
 				IBlockState neighborState = world.getBlockState(neighborPos);
 
 				if (neighborState.getBlock().isLeaves(world, neighborPos))

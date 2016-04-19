@@ -3,6 +3,7 @@ package com.gildedgames.aether.client.models.items;
 import java.util.ArrayList;
 import java.util.Map;
 
+import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthTotem;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -295,7 +296,11 @@ public class AetherItemModels
 		
 		registerItemModels(new ItemModelList(ItemsAether.aether_portal_frame).add(0, "aether_portal_frame"));
 
+		registerItemModels(new ItemModelList(BlocksAether.labyrinth_totem).add(0, "tesr"));
+		registerItemModels(new ItemModelList(BlocksAether.multiblock_dummy).add(0, "tesr"));
+
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.skyroot_chest), 0, TileEntitySkyrootChest.class);
+		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.labyrinth_totem), 0, TileEntityLabyrinthTotem.class);
 	}
 
 	private static void registerItemModels(ItemModelList list)

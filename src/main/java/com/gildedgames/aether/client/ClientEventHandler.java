@@ -27,8 +27,6 @@ public class ClientEventHandler
 			if (PlayerUtil.isWearingFullSet(player, ItemObsidianArmor.class))
 			{
 				KeyBinding.setKeyBindState(Minecraft.getMinecraft().gameSettings.keyBindSprint.getKeyCode(), false);
-
-				player.setSneaking(false);
 			}
 
 			PlayerAether aePlayer = PlayerAether.get(player);
@@ -53,7 +51,6 @@ public class ClientEventHandler
 			}
 
 			ClientProxy.clientPlayerController = (PlayerControllerAetherMP) mc.playerController;
-
 		}
 	}
 

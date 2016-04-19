@@ -45,7 +45,7 @@ public class AetherCore
 	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.common.CommonProxy")
 	public static CommonProxy PROXY;
 
-	private static SidedObject<AetherServices> serviceLocator = new SidedObject<>(new AetherServices(Side.CLIENT), new AetherServices(Side.SERVER));
+	private final SidedObject<AetherServices> serviceLocator = new SidedObject<>(new AetherServices(Side.CLIENT), new AetherServices(Side.SERVER));
 
 	public static AetherConfig CONFIG;
 
@@ -55,7 +55,7 @@ public class AetherCore
 
 	public static AetherServices locate()
 	{
-		return serviceLocator.instance();
+		return AetherCore.INSTANCE.serviceLocator.instance();
 	}
 	
 	public static ClassSerializer srl()
@@ -105,7 +105,7 @@ public class AetherCore
 	@EventHandler
 	public void onFingerprintViolation(FMLFingerprintViolationEvent event)
 	{
-		AetherCore.LOGGER.warn("The Aether's signature is invalid, and will not receive support. Either you're running in a development environment, your JAR is corrupted, " +
+		AetherCore.LOGGER.warn("The Aether's signature is invalid and as such, this version will not receive support. Either you're running in a development environment, your JAR is corrupted, " +
 				"or you've downloaded an unofficial version of the Aether II. Proceed at your own risk.");
 	}
 

@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.blocks;
 
+import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiController;
+import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummy;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -126,6 +128,8 @@ public class BlocksAether
 									divine_stone_wall, sentry_stone_wall, divine_sentry_stone_wall;
 
 	public static Block labyrinth_totem;
+
+	public static Block multiblock_dummy;
 	
 	public static void preInit()
 	{
@@ -228,8 +232,10 @@ public class BlocksAether
 		divine_sentry_stone_wall = registerBlock("divine_sentry_stone_wall", new BlockAetherWall(BlocksAether.holystone, 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		divine_stone_wall = registerBlock("divine_stone_wall", new BlockAetherWall(BlocksAether.holystone, 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 
-		labyrinth_totem = registerBlock("labyrinth_totem", new BlockTeleporter(Material.iron), AetherCreativeTabs.tabBlocks);
-		
+		labyrinth_totem = registerBlock("labyrinth_totem", new BlockTeleporter(Material.iron).setBlockUnbreakable(), AetherCreativeTabs.tabBlocks);
+
+		multiblock_dummy = registerBlock("multiblock_dummy", new BlockMultiDummy().setBlockUnbreakable());
+
 		registerHarvestLevels();
 	}
 
