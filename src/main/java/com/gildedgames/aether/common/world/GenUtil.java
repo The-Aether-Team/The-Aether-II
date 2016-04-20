@@ -9,6 +9,41 @@ import net.minecraft.world.World;
 public class GenUtil
 {
 	
+	/**
+	 * Fast array filling for identical value
+	 * @param array
+	 * @param value
+	 */
+	public static <T> void fillArray(T[] array, T value) 
+	{
+		int len = array.length;
+	
+		if (len > 0)
+		{
+			array[0] = value;
+		}
+	
+		for (int i = 1; i < len; i += i) 
+		{
+			System.arraycopy(array, 0, array, i, ((len - i) < i) ? (len - i) : i);
+		}
+	}
+	
+	public static void fillArray(short[] array, short value) 
+	{
+		int len = array.length;
+	
+		if (len > 0)
+		{
+			array[0] = value;
+		}
+	
+		for (int i = 1; i < len; i += i) 
+		{
+			System.arraycopy(array, 0, array, i, ((len - i) < i) ? (len - i) : i);
+		}
+	}
+	
 	public static void cuboid(World world, BlockPos min, BlockPos max, IBlockState state)
 	{
 		GenUtil.cuboid(world, min, max, state, state, true);

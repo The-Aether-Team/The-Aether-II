@@ -3,6 +3,8 @@ package com.gildedgames.aether.common.world.dungeon;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
@@ -12,8 +14,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.world.GenUtil;
 
 public class ChunkProviderSliderLabyrinth implements IChunkProvider
 {
@@ -66,10 +70,7 @@ public class ChunkProviderSliderLabyrinth implements IChunkProvider
 	
 	public void genHolystoneEverywhere(ChunkPrimer primer, int chunkX, int chunkZ)
 	{
-		for (int index = 0; index < 65536; index++)
-		{
-			primer.setBlockState(index, BlocksAether.holystone.getDefaultState());
-		}
+		GenUtil.fillArray((short[])ObfuscationReflectionHelper.getPrivateValue(ChunkPrimer.class, primer, 0), (short)Block.BLOCK_STATE_IDS.get(BlocksAether.holystone.getDefaultState()));
 
 		for (int x = 0; x < 16; ++x)
 		{
