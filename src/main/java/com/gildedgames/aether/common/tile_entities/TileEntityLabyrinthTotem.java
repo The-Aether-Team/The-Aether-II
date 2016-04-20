@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.tile_entities;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiController;
 import com.gildedgames.aether.common.tile_entities.multiblock.TileEntityMultiblockController;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstanceHandler;
@@ -9,7 +11,6 @@ import com.gildedgames.util.modules.instances.PlayerInstances;
 import com.gildedgames.util.modules.world.common.BlockPosDimension;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -18,6 +19,11 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 {
 	@SideOnly(Side.CLIENT)
 	public int renderTicks, prevRenderTicks;
+
+	public TileEntityLabyrinthTotem()
+	{
+		super(BlocksAether.labyrinth_totem);
+	}
 
 	@Override
 	public void update()
@@ -53,11 +59,5 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 				handler.teleportToInst(player, inst);
 			}
 		}
-	}
-
-	@Override
-	public AxisAlignedBB getBoundingBox()
-	{
-		return new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX(), pos.getY() + 1.5D, pos.getZ());
 	}
 }

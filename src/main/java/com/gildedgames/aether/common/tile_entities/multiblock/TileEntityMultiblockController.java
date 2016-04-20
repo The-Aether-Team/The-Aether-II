@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.tile_entities.multiblock;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiController;
 import com.gildedgames.util.core.util.GGHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -9,21 +10,16 @@ import net.minecraft.util.BlockPos;
 
 public abstract class TileEntityMultiblockController extends TileEntity implements TileEntityMultiblockInterface
 {
-	/**
-	 * Returns the size this controller takes up in the world. This will be filled with
-	 * dummy blocks.
-	 *
-	 * @return The controller's volume in the world.
-	 */
-	public abstract AxisAlignedBB getBoundingBox();
+	private final BlockMultiController block;
 
-	/**
-	 * Fills {@link TileEntityMultiblockController#getBoundingBox()} with {@link TileEntityMultiblockDummy} and
-	 * links them to this controller
-	 */
+	public TileEntityMultiblockController(BlockMultiController block)
+	{
+		this.block = block;
+	}
+
 	public void rebuild()
 	{
-		for (BlockPos.MutableBlockPos pos : GGHelper.getInBox(this.getBoundingBox()))
+		for (BlockPos.MutableBlockPos pos : block.getMultiblockVolumeIterator(this.pos))
 		{
 			if (this.worldObj.getTileEntity(pos) == this)
 			{
@@ -40,7 +36,7 @@ public abstract class TileEntityMultiblockController extends TileEntity implemen
 	@Override
 	public void onDestroyed()
 	{
-		for (BlockPos.MutableBlockPos pos : GGHelper.getInBox(this.getBoundingBox()))
+		for (BlockPos.MutableBlockPos pos : block.getMultiblockVolumeIterator(this.pos))
 		{
 			if (this.doesControllerOwn(pos))
 			{

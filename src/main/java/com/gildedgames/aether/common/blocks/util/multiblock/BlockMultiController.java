@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.blocks.util.multiblock;
 
 import com.gildedgames.aether.common.tile_entities.multiblock.TileEntityMultiblockController;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,13 +16,26 @@ public abstract class BlockMultiController extends BlockMultiBase
 		super(material);
 	}
 
+	public abstract Iterable<BlockPos.MutableBlockPos> getMultiblockVolumeIterator(BlockPos pos);
+
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	public boolean canPlaceBlockAt(World world, BlockPos placePos)
 	{
-		this.rebuild(worldIn, pos);
+		for (BlockPos pos : this.getMultiblockVolumeIterator(placePos))
+		{
+			IBlockState state = world.getBlockState(pos);
+
+			if (!state.getBlock().isReplaceable(world, pos))
+			{
+				return false;
+			}
+		}
+
+		return true;
 	}
 
-	public void rebuild(World world, BlockPos pos)
+	@Override
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
 		TileEntity te = world.getTileEntity(pos);
 
