@@ -63,7 +63,7 @@ public class ItemContinuumOrb extends Item
 
 			IRecipe recipe = this.validRecipeCache.get(random.nextInt(this.validRecipeCache.size()));
 
-			ItemStack stack = recipe.getRecipeOutput();
+			ItemStack stack = recipe.getRecipeOutput().copy();
 			stack.stackSize = 1;
 
 			return stack;
