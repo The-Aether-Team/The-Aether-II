@@ -95,36 +95,26 @@
 	"aerandom.dart_shooter": {
 		"category": "neutral",
 		"sounds": [
-			{
-				"name": "aerandom/dart_shooter"
-			}
+			"aerandom/dart_shooter"
 		]
 	},
 	"aemob.aerbunny.lift": {
 		"category": "neutral",
 		"sounds": [
-			{
-				"name": "aemob/aerbunny/lift"
-			}
+			"aemob/aerbunny/lift"
 		]
 	},
 	"aemob.aerbunny.hurt": {
 		"category": "neutral",
 		"sounds": [
-			{
-				"name": "aemob/aerbunny/hurt1"
-			},
-			{
-				"name": "aemob/aerbunny/hurt2"
-			}
+			"aemob/aerbunny/hurt1",
+			"aemob/aerbunny/hurt2"
 		]
 	},
 	"aemob.aerbunny.death": {
 		"category": "neutral",
 		"sounds": [
-			{
-				"name": "aemob/aerbunny/death"
-			}
+			"aemob/aerbunny/death"
 		]
 	}
 }
