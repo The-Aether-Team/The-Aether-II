@@ -50,6 +50,6 @@ public class ItemGummySwet extends ItemFood
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		return "item.gummy_swet." + GummyType.fromOrdinal(stack.getMetadata()).name;
+		return "item.aether.gummy_swet." + GummyType.fromOrdinal(stack.getMetadata()).name;
 	}
 }

@@ -97,6 +97,6 @@ public class ItemSwetJelly extends ItemFood
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		return "item.swet_jelly." + JellyType.fromOrdinal(stack.getMetadata()).name;
+		return "item.aether.swet_jelly." + JellyType.fromOrdinal(stack.getMetadata()).name;
 	}
 }
