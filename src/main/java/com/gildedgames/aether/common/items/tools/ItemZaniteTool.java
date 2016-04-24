@@ -9,7 +9,7 @@ public class ItemZaniteTool extends ItemAetherTool
 	{
 		super(ToolMaterial.IRON, "zanite", toolType);
 
-		this.setHarvestLevel(toolType.getToolClass(), 1);
+		this.setHarvestLevel(toolType.getToolClass(), 2);
 	}
 
 	@Override
