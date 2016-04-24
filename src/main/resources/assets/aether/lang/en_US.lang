@@ -118,7 +118,9 @@ item.aether.valkyrie_leggings.name=Valkyrie Leggings
 item.aether.valkyrie_boots.name=Valkyrie Boots
 item.aether.sentry_boots.name=Sentry Boots
 item.aether.golden_amber.name=Golden Amber
+item.aether.aechor_petal.name=Aechor Petal
 item.aether.blueberry.name=Blueberry
+item.aether.enchanted_blueberry.name=Enchanted Blueberry
 item.aether.orange.name=Orange
 item.aether.wyndberry.name=Wyndberry
 item.aether.candy_corn.name=Candy Corn
@@ -302,3 +304,5 @@ ability.modifyXPCollection.desc=%s XP Collected
 
 # Tabs
 tab.equipment=Equipment
+tab.chat.name=Chat
+tab.group.name=Party

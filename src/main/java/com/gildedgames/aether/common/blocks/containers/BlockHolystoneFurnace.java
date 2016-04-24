@@ -33,6 +33,7 @@ public class BlockHolystoneFurnace extends BlockContainer
 	public BlockHolystoneFurnace()
 	{
 		super(Material.rock);
+		this.setHardness(3.5f);
 
 		this.setDefaultState(this.getBlockState().getBaseState()
 				.withProperty(PROPERTY_IS_LIT, Boolean.FALSE)

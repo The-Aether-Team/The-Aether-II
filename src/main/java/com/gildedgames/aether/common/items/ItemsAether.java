@@ -104,7 +104,7 @@ public class ItemsAether
 
 	public static Item golden_amber;
 
-	public static ItemFood blueberry, orange, wyndberry, rainbow_strawberry, swet_jelly, gummy_swet;
+	public static ItemFood blueberry, enchanted_blueberry, orange, wyndberry, rainbow_strawberry, swet_jelly, gummy_swet;
 
 	public static ItemFood candy_corn, cocoatrice, wrapped_chocolates, jelly_pumpkin, stomper_pop, blueberry_lollipop, orange_lollipop, icestone_poprocks;
 
@@ -152,12 +152,15 @@ public class ItemsAether
 	
 	public static Item aether_portal_frame;
 
+	public static Item aechor_petal;
+
 	public static void preInit()
 	{
 		skyroot_stick = registerItem("skyroot_stick", new Item(), AetherCreativeTabs.tabMaterials);
 		ambrosium_shard = registerItem("ambrosium_shard", new ItemAmbrosiumShard(), AetherCreativeTabs.tabMaterials);
 		continuum_orb = registerItem("continuum_orb", new ItemContinuumOrb(), AetherCreativeTabs.tabMaterials);
 		zanite_gemstone = registerItem("zanite_gemstone", new Item(), AetherCreativeTabs.tabMaterials);
+		icestone = registerItem("icestone", new Item(), AetherCreativeTabs.tabMaterials);
 
 		skyroot_axe = registerItem("skyroot_axe", new ItemSkyrootTool(EnumToolType.AXE));
 		skyroot_pickaxe = registerItem("skyroot_pickaxe", new ItemSkyrootTool(EnumToolType.PICKAXE));
@@ -218,7 +221,11 @@ public class ItemsAether
 
 		golden_amber = registerItem("golden_amber", new Item(), AetherCreativeTabs.tabMaterials);
 
+		aechor_petal = registerItem("aechor_petal", new Item(), AetherCreativeTabs.tabConsumables);
+
 		blueberry = registerItem("blueberry", new ItemFood(2, false), AetherCreativeTabs.tabConsumables);
+
+		enchanted_blueberry = registerItem("enchanted_blueberry", new ItemFood(6, false), AetherCreativeTabs.tabConsumables);
 
 		orange = registerItem("orange", new ItemFood(4, false), AetherCreativeTabs.tabConsumables);
 
@@ -267,7 +274,7 @@ public class ItemsAether
 		dart = registerItem("dart", new ItemDart(), AetherCreativeTabs.tabWeapons);
 
 		crossbow = registerItem("crossbow", new ItemCrossbow(), AetherCreativeTabs.tabWeapons);
-		bolt = (ItemBolt) registerItem("bolt", new ItemBolt().setMaxStackSize(999), AetherCreativeTabs.tabWeapons);
+		bolt = (ItemBolt) registerItem("bolt", new ItemBolt().setMaxStackSize(64), AetherCreativeTabs.tabWeapons);
 
 		flaming_sword = registerItem("flaming_sword", new ItemElementalSword(ItemElementalSword.SwordElement.FIRE));
 		holy_sword = registerItem("holy_sword", new ItemElementalSword(ItemElementalSword.SwordElement.HOLY));
@@ -300,8 +307,6 @@ public class ItemsAether
 		bone_ring = registerItem("bone_ring", new Item().setMaxStackSize(1), AetherCreativeTabs.tabAccessories);
 
 		skyroot_ring = registerItem("skyroot_ring", new Item().setMaxStackSize(1), AetherCreativeTabs.tabAccessories);
-
-		icestone = registerItem("icestone", new Item().setMaxStackSize(1), AetherCreativeTabs.tabMaterials);
 
 		skyroot_sign = registerItem("skyroot_sign", new ItemSkyrootSign(), AetherCreativeTabs.tabBlocks);
 		

@@ -20,6 +20,8 @@ public class RecipesAether
 		registerCraftingRecipes();
 		registerToolRecipes();
 		registerArmorRecipes();
+        registerAccessoryRecipes();
+        registerConsumableRecipes();
 		registerAltarRecipes();
 
 		GameRegistry.registerFuelHandler(new AetherFuelHandler());
@@ -43,7 +45,8 @@ public class RecipesAether
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_chest), "XXX", "X X", "XXX",
 				'X', new ItemStack(BlocksAether.skyroot_planks));
 
-		registerShapedRecipe(new ItemStack(BlocksAether.altar), "XXX", "XYX", "XXX",
+		// Altar
+        registerShapedRecipe(new ItemStack(BlocksAether.altar), "XXX", "XYX", "XXX",
 				'X', new ItemStack(BlocksAether.holystone), 'Y', new ItemStack(ItemsAether.zanite_gemstone));
 
 		// Skyroot Door
@@ -58,9 +61,32 @@ public class RecipesAether
 		registerShapelessRecipe(new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.POISON.ordinal()),
 				new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.GOLDEN.ordinal()), new ItemStack(ItemsAether.skyroot_poison_bucket));
 
+        // Golden Dart
+        registerShapedRecipe(new ItemStack(ItemsAether.dart), " X", " Y", " Z",
+                'X', new ItemStack(ItemsAether.golden_amber),
+                'Y', new ItemStack(ItemsAether.skyroot_stick),
+                'Z', new ItemStack(Items.feather));
+
+        // Poison Dart
+        registerShapedRecipe(new ItemStack(ItemsAether.dart, 2), "XXX", "XYX", "XXX",
+                'X', new ItemStack(ItemsAether.dart),
+                'Y', new ItemStack(ItemsAether.skyroot_poison_bucket));
+
+        // Skyroot Bucket
+        registerShapedRecipe(new ItemStack(ItemsAether.skyroot_bucket), "X X", " X ",
+                'X', new ItemStack(BlocksAether.skyroot_planks));
+
 		// Zanite Block
 		registerShapedRecipe(new ItemStack(BlocksAether.zanite_block), "XXX", "XXX", "XXX",
 				'X', new ItemStack(ItemsAether.zanite_gemstone));
+
+        // Zanite Uncraft
+        registerShapedRecipe(new ItemStack(BlocksAether.zanite_block), "X",
+                'X', new ItemStack(ItemsAether.zanite_gemstone, 9));
+
+		// Holystone Brick
+		registerShapedRecipe(new ItemStack(BlocksAether.holystone_brick, 4), "XX", "XX",
+				'X', new ItemStack(BlocksAether.holystone));
 
 		// Icestone Bricks
 		registerShapedRecipe(new ItemStack(BlocksAether.icestone_bricks, 4), "XX", "XX",
@@ -73,6 +99,10 @@ public class RecipesAether
 
 		registerShapedRecipe(new ItemStack(BlocksAether.holystone_wall, 6), "XXX", "XXX",
 				'X', new ItemStack(BlocksAether.holystone));
+        registerShapedRecipe(new ItemStack(BlocksAether.holystone_wall_mossy, 6), "XXX", "XXX",
+                'X', new ItemStack(BlocksAether.holystone));
+        registerShapedRecipe(new ItemStack(BlocksAether.holystone_brick_wall, 6), "XXX", "XXX",
+                'X', new ItemStack(BlocksAether.holystone));
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_log_wall, 6), "XXX", "XXX",
 				'X', new ItemStack(BlocksAether.skyroot_log));
 		registerShapedRecipe(new ItemStack(BlocksAether.icestone_wall, 6), "XXX", "XXX",
@@ -82,7 +112,12 @@ public class RecipesAether
 		registerShapedRecipe(new ItemStack(BlocksAether.aerogel_wall, 6), "XXX", "XXX",
 				'X', new ItemStack(BlocksAether.aerogel));
 
-		// Gates
+		// Fences
+        registerShapedRecipe(new ItemStack(BlocksAether.skyroot_fence, 3), "XYX", "XYX",
+                'X', new ItemStack(ItemsAether.skyroot_stick),
+                'Y', new ItemStack(BlocksAether.skyroot_planks));
+
+        // Gates
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_fence_gate, 1), "YXY", "YXY",
 				'Y', new ItemStack(ItemsAether.skyroot_stick),
 				'X', new ItemStack(BlocksAether.skyroot_planks));
@@ -92,7 +127,16 @@ public class RecipesAether
 				'X', new ItemStack(BlocksAether.skyroot_planks),
 				'Y', new ItemStack(ItemsAether.skyroot_stick));
 
-		//Crossbow
+        // Ambrosium Torch
+        registerShapedRecipe(new ItemStack(BlocksAether.ambrosium_torch, 8), " Y", " X",
+                'X', new ItemStack(ItemsAether.skyroot_stick),
+                'Y', new ItemStack(ItemsAether.ambrosium_shard));
+
+        // Holystone Furnace
+        registerShapedRecipe(new ItemStack(BlocksAether.holystone_furnace, 1), "XXX", "X X", "XXX",
+                'X', new ItemStack(BlocksAether.holystone));
+
+		// Crossbow
 		registerShapedRecipe(new ItemStack(ItemsAether.crossbow), " X ", " Y ", "ZZZ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(Items.string),
@@ -199,18 +243,104 @@ public class RecipesAether
 
 		registerShapedRecipe(new ItemStack(ItemsAether.gravitite_boots), "X X", "X X",
 				'X', gravitite);
-
 	}
+
+    private static void registerAccessoryRecipes() {
+        // Iron Ring
+        registerShapedRecipe(new ItemStack(ItemsAether.iron_ring), " X ", "X X", " X ",
+                'X', new ItemStack(Items.iron_ingot));
+        // Iron Pendant
+        registerShapedRecipe(new ItemStack(ItemsAether.iron_pendant), "XXX", "X X", " Y ",
+                'X', new ItemStack(Items.string),
+                'Y', new ItemStack(Items.iron_ingot));
+        // Gold Ring
+        registerShapedRecipe(new ItemStack(ItemsAether.gold_ring), " X ", "X X", " X ",
+                'X', new ItemStack(Items.gold_ingot));
+        // Gold Pendant
+        registerShapedRecipe(new ItemStack(ItemsAether.gold_pendant), "XXX", "X X", " Y ",
+                'X', new ItemStack(Items.string),
+                'Y', new ItemStack(Items.gold_ingot));
+        // Zanite Ring
+        registerShapedRecipe(new ItemStack(ItemsAether.zanite_ring), " X ", "X X", " X ",
+                'X', new ItemStack(ItemsAether.zanite_gemstone));
+        // Zanite Pendant
+        registerShapedRecipe(new ItemStack(ItemsAether.zanite_pendant), "XXX", "X X", " Y ",
+                'X', new ItemStack(Items.string),
+                'Y', new ItemStack(ItemsAether.zanite_gemstone));
+    }
+
+    private static void registerConsumableRecipes()
+    {
+        // Blue Gummy Swet
+        registerShapedRecipe(new ItemStack(ItemsAether.gummy_swet), "XXX", "XYX", "XXX",
+                'X', new ItemStack(ItemsAether.swet_jelly),
+                'Y', new ItemStack(Items.sugar));
+
+        // Gold Gummy Swet
+        registerShapedRecipe(new ItemStack(ItemsAether.gummy_swet, 1, 1), "XXX", "XYX", "XXX",
+                'X', new ItemStack(ItemsAether.swet_jelly, 1, 1),
+                'Y', new ItemStack(Items.sugar));
+
+        // Dark Gummy Swet
+        registerShapedRecipe(new ItemStack(ItemsAether.gummy_swet, 1, 2), "XXX", "XYX", "XXX",
+                'X', new ItemStack(ItemsAether.swet_jelly, 1, 2),
+                'Y', new ItemStack(Items.sugar));
+
+        // Cocoatrice
+        registerShapedRecipe(new ItemStack(ItemsAether.cocoatrice), "XY", "Z ",
+                'X', new ItemStack(Items.sugar),
+                'Y', new ItemStack(Items.dye, 1, 3),
+                'Z', new ItemStack(ItemsAether.skyroot_milk_bucket));
+
+        // Wrapped Chocolate
+        registerShapedRecipe(new ItemStack(ItemsAether.wrapped_chocolates), "WX", "YZ",
+                'W', new ItemStack(Items.sugar),
+                'X', new ItemStack(Items.dye, 1, 3),
+                'Y', new ItemStack(ItemsAether.skyroot_milk_bucket),
+                'Z', new ItemStack(ItemsAether.aechor_petal));
+
+//        // Jelly Pumpkin
+//        registerShapedRecipe(new ItemStack(ItemsAether.cocoatrice), "XY", "Z ",
+//                'X', ItemsAether.swet_jelly,
+//                'Y', new ItemStack(ItemsAether.orange),
+//                'Z', new ItemStack(Items.sugar));
+//
+//        // Stomper Pop
+//        registerShapedRecipe(new ItemStack(ItemsAether.stomper_pop), " X", " Z",
+//                'X', new ItemStack(ItemsAether.skyroot_stick),
+//                'Y', new ItemStack(ItemsAether.baby_pink_swet),
+
+        // Blueberry Lollipop
+        registerShapedRecipe(new ItemStack(ItemsAether.blueberry_lollipop), "XY", "Z ",
+                'X', new ItemStack(Items.sugar),
+                'Y', new ItemStack(ItemsAether.blueberry),
+                'Z', new ItemStack(ItemsAether.skyroot_stick));
+
+        // Orange Lollipop
+        registerShapedRecipe(new ItemStack(ItemsAether.orange), "XY", "Z ",
+                'X', new ItemStack(Items.sugar),
+                'Y', new ItemStack(ItemsAether.blueberry),
+                'Z', new ItemStack(ItemsAether.skyroot_stick));
+
+//        // Icestone Poprocks
+//        registerShapelessRecipe(new ItemStack(ItemsAether.icestone_poprocks), "X", "Y",
+//                'X', new ItemStack(Items.sugar),
+//                'Y', new ItemStack(ItemsAether.icestone));
+    }
 
 	private static void registerAltarRecipes()
 	{
-		// Healing Stone
+        // Quicksoil Glass
+        registerAltarRecipe(new AltarEnchantRecipe(1, new ItemStack(BlocksAether.quicksoil),
+                new ItemStack(BlocksAether.quicksoil_glass)));
+
+        // Healing Stone
 		registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(BlocksAether.holystone),
 				new ItemStack(ItemsAether.healing_stone)));
 
 		// Enchanted Gravitite
-		registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(BlocksAether.gravitite_ore),
-				new ItemStack(BlocksAether.enchanted_gravitite)));
+        registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(BlocksAether.gravitite_ore),
+                new ItemStack(BlocksAether.enchanted_gravitite)));
 
 		// Enchanted Dart Shooter
 		registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.GOLDEN.ordinal()),
@@ -219,6 +349,14 @@ public class RecipesAether
 		// Enchanted Darts
 		registerAltarRecipe(new AltarEnchantRecipe(1, new ItemStack(ItemsAether.dart, 1, ItemDartType.GOLDEN.ordinal()),
 				new ItemStack(ItemsAether.dart, 1, ItemDartType.ENCHANTED.ordinal())));
+
+        // Enchanted Strawberry
+        registerAltarRecipe(new AltarEnchantRecipe(2, new ItemStack(ItemsAether.blueberry),
+                new ItemStack(ItemsAether.enchanted_blueberry)));
+
+        // Rainbow Strawberry
+        registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(ItemsAether.wyndberry),
+                new ItemStack(ItemsAether.rainbow_strawberry)));
 
 		// Tool Repair Recipes
 		registerAltarRecipe(new AltarRepairRecipe());

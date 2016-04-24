@@ -193,7 +193,9 @@ public class AetherItemModels
 
 		registerItemModels(new ItemModelList(ItemsAether.sentry_boots).add(0, "armor/sentry_boots"));
 
+		registerItemModels(new ItemModelList(ItemsAether.aechor_petal).add(0, "aechor_petal"));
 		registerItemModels(new ItemModelList(ItemsAether.blueberry).add(0, "blueberry"));
+		registerItemModels(new ItemModelList(ItemsAether.enchanted_blueberry).add(0, "enchanted_blueberry"));
 		registerItemModels(new ItemModelList(ItemsAether.orange).add(0, "orange"));
 		registerItemModels(new ItemModelList(ItemsAether.healing_stone).add(0, "healing_stone"));
 		registerItemModels(new ItemModelList(ItemsAether.wyndberry).add(0, "wyndberry"));
