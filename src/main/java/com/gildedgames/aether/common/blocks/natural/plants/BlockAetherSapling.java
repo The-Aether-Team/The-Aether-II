@@ -106,6 +106,12 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	}
 
 	@Override
+	public int damageDropped(IBlockState state)
+	{
+		return state.getValue(PROPERTY_VARIANT).getMeta();
+	}
+
+	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
 		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta & 7))
