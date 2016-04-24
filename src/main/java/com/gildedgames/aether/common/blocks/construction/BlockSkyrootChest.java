@@ -92,7 +92,7 @@ public class BlockSkyrootChest extends BlockChest
 
 		EntityOcelot ocelot;
 
-		while (!iterator.hasNext())
+		while (iterator.hasNext())
 		{
 			ocelot = iterator.next();
 
