@@ -19,7 +19,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 {
 	public final static int sizeID = 13;
 
-	private float maxSproutSize;
+	private int maxSproutSize;
 
 	@SideOnly(Side.CLIENT)
 	public float sinage, prevSinage;
@@ -28,8 +28,6 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	{
 		super(world);
 
-		this.setSproutSize(0.5F);
-		this.setMaxSproutSize(0.5F + (this.rand.nextFloat() * 0.9F));
 		this.setSize(0.5F, 1.4F);
 
 		this.tasks.addTask(0, new EntityAIWatchClosest(this, EntityPlayer.class, 8));
@@ -41,6 +39,9 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 		super.applyEntityAttributes();
 
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10);
+
+		this.setSproutSize(1);
+		this.setMaxSproutSize(9);
 	}
 
 	@Override
@@ -48,7 +49,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	{
 		super.entityInit();
 
-		this.dataWatcher.addObject(sizeID, 0.0F);
+		this.dataWatcher.addObject(sizeID, new Integer(0));
 	}
 
 	@Override
@@ -56,8 +57,8 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	{
 		super.writeToNBT(nbt);
 
-		nbt.setFloat("size", this.getSproutSize());
-		nbt.setFloat("maxSize", this.getMaxSproutSize());
+		nbt.setInteger("size", this.getSproutSize());
+		nbt.setInteger("maxSize", this.getMaxSproutSize());
 	}
 
 	@Override
@@ -65,8 +66,8 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	{
 		super.readFromNBT(nbt);
 
-		this.setSproutSize(nbt.getFloat("size"));
-		this.setMaxSproutSize(nbt.getFloat("maxSize"));
+		this.setSproutSize(nbt.getInteger("size"));
+		this.setMaxSproutSize(nbt.getInteger("maxSize"));
 	}
 
 	@Override
@@ -93,16 +94,16 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	@Override
 	public void onLivingUpdate()
 	{
-		if (this.getSproutSize() < this.getMaxSproutSize())
+		if (!this.isFullyGrown() && this.ticksExisted % 800 == 0)
 		{
-			this.setSproutSize(this.getSproutSize() + 0.0001f);
+			this.setSproutSize(this.getSproutSize() + 1);
 		}
 	}
 
 	@Override
 	protected int getItemQuantityDropped()
 	{
-		return this.rand.nextInt((int) Math.ceil(this.getSproutSize() / 0.5f)) + 1;
+		return this.rand.nextInt((int) (this.getSproutSize() / 0.5f)) + 1;
 	}
 
 	@Override
@@ -116,24 +117,26 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 		return (this.getSproutSize() >= this.getMaxSproutSize());
 	}
 
-	public float getMaxSproutSize()
+	public int getMaxSproutSize()
 	{
 		return this.maxSproutSize;
 	}
 
-	public void setMaxSproutSize(float x)
+	public void setMaxSproutSize(int x)
 	{
 		this.maxSproutSize = x;
 	}
 
-	public float getSproutSize()
+	public int getSproutSize()
 	{
-		return this.getDataWatcher().getWatchableObjectFloat(sizeID);
+		return this.getDataWatcher().getWatchableObjectInt(sizeID);
 	}
 
-	public void setSproutSize(float newSize)
+	public void setSproutSize(int newSize)
 	{
 		this.getDataWatcher().updateObject(sizeID, newSize);
+
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8f + (this.getSproutSize() * 1.5f));
 	}
 
 	@SideOnly(Side.CLIENT)

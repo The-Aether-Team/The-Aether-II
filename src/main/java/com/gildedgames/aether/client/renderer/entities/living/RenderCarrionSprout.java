@@ -24,7 +24,9 @@ public class RenderCarrionSprout extends RenderLiving<EntityCarrionSprout>
 	protected void preRenderCallback(EntityCarrionSprout sprout, float partialTicks)
 	{
 		//GL11.glColor3f(sprout.getSproutSize(), 1.0f, sprout.getSproutSize());
-		GL11.glScalef(sprout.getSproutSize(), sprout.getSproutSize(), sprout.getSproutSize());
+		float scale = 0.5f + (sprout.getSproutSize() * 0.1f);
+
+		GL11.glScalef(scale, scale, scale);
 
 		float sinage = (float) Math.sin(sprout.sinage - 1), sinage2;
 
