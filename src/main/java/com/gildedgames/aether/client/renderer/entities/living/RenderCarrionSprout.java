@@ -23,7 +23,6 @@ public class RenderCarrionSprout extends RenderLiving<EntityCarrionSprout>
 	@Override
 	protected void preRenderCallback(EntityCarrionSprout sprout, float partialTicks)
 	{
-		//GL11.glColor3f(sprout.getSproutSize(), 1.0f, sprout.getSproutSize());
 		float scale = 0.5f + (sprout.getSproutSize() * 0.1f);
 
 		GL11.glScalef(scale, scale, scale);
@@ -46,12 +45,8 @@ public class RenderCarrionSprout extends RenderLiving<EntityCarrionSprout>
 		this.plantModel.sinage = sinage;
 		this.plantModel.sinage2 = sinage2;
 
-		this.shadowSize = sprout.getSproutSize() / 1.5F;
+		this.shadowSize = sprout.getSproutSize() / 9F;
 	}
-
-	/*protected int shouldRenderPass(EntityLiving entityliving, int i, float f) {
-		return a((EntityAechorPlant)entityliving, i, f);
-	}*/
 
 	@Override
 	protected ResourceLocation getEntityTexture(EntityCarrionSprout entity)

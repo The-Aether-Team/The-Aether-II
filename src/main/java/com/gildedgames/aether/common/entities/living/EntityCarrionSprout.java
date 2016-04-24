@@ -103,7 +103,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	@Override
 	protected int getItemQuantityDropped()
 	{
-		return this.rand.nextInt((int) (this.getSproutSize() / 0.5f)) + 1;
+		return this.rand.nextInt((int) (this.getSproutSize() / 2f)) + 1;
 	}
 
 	@Override
