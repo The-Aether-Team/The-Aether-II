@@ -26,7 +26,10 @@ public class BlockDungeon extends Block implements IAetherBlockWithVariants
 
 	public BlockDungeon(Material material)
 	{
-		super(material);
+		super(Material.rock);
+		this.setHardness(2.0F);
+		this.setHarvestLevel("pickaxe", 2);
+		this.setResistance(10.0F);
 	}
 
 	@Override

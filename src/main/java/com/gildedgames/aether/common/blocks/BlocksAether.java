@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks;
 
-import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiController;
 import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummy;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -55,6 +54,8 @@ public class BlocksAether
 
 	public static BlockHolystone holystone;
 
+    public static Block holystone_brick;
+
 	public static BlockAercloud aercloud;
 
 	public static BlockAmbrosiumOre ambrosium_ore;
@@ -101,8 +102,6 @@ public class BlocksAether
 	public static BlockDungeon carved_stone;
 
 	public static BlockDungeon sentry_stone;
-
-	public static Block holystone_brick;
 
 	public static BlockHolystoneFurnace holystone_furnace;
 
@@ -198,7 +197,7 @@ public class BlocksAether
 
 		sentry_stone = registerBlockWithItem("sentry_stone", new BlockDungeon(Material.rock).setGlows(true), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
 
-		holystone_brick = registerBlock("holystone_brick", new Block(Material.rock), AetherCreativeTabs.tabBlocks);
+		holystone_brick = registerBlock("holystone_brick", new Block(Material.rock).setHardness(2f).setStepSound(Block.soundTypeStone), AetherCreativeTabs.tabBlocks);
 
 		holystone_furnace = registerBlock("holystone_furnace", new BlockHolystoneFurnace(), AetherCreativeTabs.tabBlocks);
 
@@ -244,6 +243,7 @@ public class BlocksAether
 		aether_dirt.setHarvestLevel("shovel", 0);
 		aether_grass.setHarvestLevel("shovel", 0);
 		holystone.setHarvestLevel("pickaxe", 0);
+		holystone_brick.setHarvestLevel("pickaxe", 0);
 		quicksoil.setHarvestLevel("shovel", 0);
 		aercloud.setHarvestLevel("shovel", 0);
 
