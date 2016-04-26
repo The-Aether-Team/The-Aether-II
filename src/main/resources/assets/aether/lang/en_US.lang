@@ -191,6 +191,17 @@ item.aether.bolt.zanite.name=Zanite Bolt
 item.aether.skyroot_door_item.name=Skyroot Door
 item.aether.skyroot_sign.name=Skyroot Sign
 item.aether.aether_portal_frame.name=Aether Portal Frame
+item.aether.zanite_gloves.name=Zanite Gloves
+item.aether.gravitite_gloves.name=Gravitite Gloves
+item.aether.valkyrie_gloves.name=Valkyrie Gloves
+item.aether.neptune_gloves.name=Neptune Gloves
+item.aether.phoenix_gloves.name=Phoenix Gloves
+item.aether.obsidian_gloves.name=Obsidian Gloves
+item.aether.leather_gloves.name=Leather Gloves
+item.aether.iron_gloves.name=Iron Gloves
+item.aether.gold_gloves.name=Gold Gloves
+item.aether.chain_gloves.name=Chain Gloves
+item.aether.diamond_gloves.name=Diamond Gloves
 
 # Item Rarities
 item.rarity.common.name=§7§oCommon

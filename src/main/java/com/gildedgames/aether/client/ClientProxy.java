@@ -50,6 +50,8 @@ public class ClientProxy extends CommonProxy
 		TabModule.api().getInventoryGroup().registerClientTab(new TabEquipment.Client());
 
 		((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(AetherLanguageManager.INSTANCE);
+
+		ClientRenderHandler.init();
 	}
 
 	@Override

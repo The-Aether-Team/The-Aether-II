@@ -96,14 +96,14 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	{
 		if (!this.isFullyGrown() && this.ticksExisted % 800 == 0)
 		{
-			this.setSproutSize(this.getSproutSize() + 1);
+			this.setSproutSize(this.getSproutSize() + 2);
 		}
 	}
 
 	@Override
 	protected int getItemQuantityDropped()
 	{
-		return this.rand.nextInt((int) (this.getSproutSize() / 2f)) + 1;
+		return (this.getSproutSize() / 3) + 1;
 	}
 
 	@Override

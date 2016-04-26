@@ -2,6 +2,8 @@ package com.gildedgames.aether.common.items;
 
 import java.util.List;
 
+import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
+import com.gildedgames.aether.common.items.armor.ItemLeatherGloves;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -153,6 +155,10 @@ public class ItemsAether
 	public static Item aether_portal_frame;
 
 	public static Item aechor_petal;
+
+	public static Item zanite_gloves, gravitite_gloves, valkyrie_gloves, neptune_gloves, phoenix_gloves, obsidian_gloves;
+
+	public static Item leather_gloves, iron_gloves, gold_gloves, chain_gloves, diamond_gloves;
 
 	public static void preInit()
 	{
@@ -312,6 +318,19 @@ public class ItemsAether
 		
 		aether_portal_frame = registerItem("aether_portal_frame", new ItemAetherPortalFrame(), AetherCreativeTabs.tabBlocks);
 
+		zanite_gloves = registerItem("zanite_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.ZANITE));
+		gravitite_gloves = registerItem("gravitite_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.GRAVITITE));
+		valkyrie_gloves = registerItem("valkyrie_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.VALKYRIE));
+		neptune_gloves = registerItem("neptune_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.NEPTUNE));
+		phoenix_gloves = registerItem("phoenix_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.PHOENIX));
+		obsidian_gloves = registerItem("obsidian_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.OBSIDIAN));
+
+		leather_gloves = registerItem("leather_gloves", new ItemLeatherGloves());
+		iron_gloves = registerItem("iron_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.IRON));
+		gold_gloves = registerItem("gold_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.GOLD));
+		chain_gloves = registerItem("chain_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.CHAIN));
+		diamond_gloves = registerItem("diamond_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.DIAMOND));
+
 		ItemProperties.register(iron_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
 		ItemProperties.register(gold_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
 		ItemProperties.register(iron_pendant, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
@@ -327,6 +346,17 @@ public class ItemsAether
 		ItemProperties.register(bone_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
 		ItemProperties.register(skyroot_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
 		ItemProperties.register(bolt, ItemRarity.NONE, ItemEquipmentType.AMMUNITION);
+		ItemProperties.register(zanite_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
+		ItemProperties.register(gravitite_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
+		ItemProperties.register(valkyrie_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
+		ItemProperties.register(neptune_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
+		ItemProperties.register(phoenix_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
+		ItemProperties.register(obsidian_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
+		ItemProperties.register(leather_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
+		ItemProperties.register(iron_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
+		ItemProperties.register(gold_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
+		ItemProperties.register(chain_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
+		ItemProperties.register(diamond_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
 		ItemProperties.register(Items.arrow, ItemRarity.NONE, ItemEquipmentType.AMMUNITION);
 
 		class Effects implements ItemEffectsProvider
@@ -382,6 +412,13 @@ public class ItemsAether
 		ItemEffects.register(candy_ring, new Effects().add(EntityEffects.PAUSE_HUNGER));
 		ItemEffects.register(bone_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(2.0F)));
 		ItemEffects.register(skyroot_ring, new Effects().add(EntityEffects.DOUBLE_DROPS, new DoubleDropEffect.Instance(1.5F)));
+		ItemEffects.register(zanite_gloves, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(1.5F)));
+		ItemEffects.register(gravitite_gloves, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(2.0F)));
+		ItemEffects.register(valkyrie_gloves, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(2.5F)));
+		ItemEffects.register(neptune_gloves, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(2.0F)));
+		ItemEffects.register(phoenix_gloves, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(2.0F)));
+		ItemEffects.register(obsidian_gloves, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(3.0F)));
+
 
 		registerItemProperties();
 	}

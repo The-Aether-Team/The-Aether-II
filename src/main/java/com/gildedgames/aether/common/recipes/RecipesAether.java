@@ -7,8 +7,10 @@ import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import com.gildedgames.aether.common.recipes.altar.AltarEnchantRecipe;
 import com.gildedgames.aether.common.recipes.altar.AltarRepairRecipe;
 import com.gildedgames.aether.common.recipes.altar.IAltarRecipe;
+import com.gildedgames.aether.common.recipes.dye.RecipeLeatherGlovesDyes;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class RecipesAether
@@ -17,6 +19,8 @@ public class RecipesAether
 
 	public static void preInit()
 	{
+		CraftingManager.getInstance().addRecipe(new RecipeLeatherGlovesDyes());
+
 		registerCraftingRecipes();
 		registerToolRecipes();
 		registerArmorRecipes();

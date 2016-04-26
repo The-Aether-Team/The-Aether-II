@@ -301,6 +301,18 @@ public class AetherItemModels
 		registerItemModels(new ItemModelList(BlocksAether.labyrinth_totem).add(0, "tesr"));
 		registerItemModels(new ItemModelList(BlocksAether.multiblock_dummy).add(0, "tesr"));
 
+		registerItemModels(new ItemModelList(ItemsAether.zanite_gloves).add(0, "accessories/zanite_gloves"));
+		registerItemModels(new ItemModelList(ItemsAether.gravitite_gloves).add(0, "accessories/gravitite_gloves"));
+		registerItemModels(new ItemModelList(ItemsAether.neptune_gloves).add(0, "accessories/neptune_gloves"));
+		registerItemModels(new ItemModelList(ItemsAether.phoenix_gloves).add(0, "accessories/phoenix_gloves"));
+		registerItemModels(new ItemModelList(ItemsAether.valkyrie_gloves).add(0, "accessories/valkyrie_gloves"));
+		registerItemModels(new ItemModelList(ItemsAether.obsidian_gloves).add(0, "accessories/obsidian_gloves"));
+		registerItemModels(new ItemModelList(ItemsAether.leather_gloves).add(0, "accessories/leather_gloves"));
+		registerItemModels(new ItemModelList(ItemsAether.iron_gloves).add(0, "accessories/iron_gloves"));
+		registerItemModels(new ItemModelList(ItemsAether.gold_gloves).add(0, "accessories/gold_gloves"));
+		registerItemModels(new ItemModelList(ItemsAether.chain_gloves).add(0, "accessories/chain_gloves"));
+		registerItemModels(new ItemModelList(ItemsAether.diamond_gloves).add(0, "accessories/diamond_gloves"));
+
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.skyroot_chest), 0, TileEntitySkyrootChest.class);
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.labyrinth_totem), 0, TileEntityLabyrinthTotem.class);
 	}
