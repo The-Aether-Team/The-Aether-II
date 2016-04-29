@@ -11,6 +11,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -30,7 +31,9 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 {
 	public static class AercloudVariant extends BlockVariant
 	{
-		public AercloudVariant(int meta, String name)
+		private boolean hasSolidBottom;
+
+		public AercloudVariant(int meta, String name, boolean hasSolidBottom)
 		{
 			super(meta, name);
 		}
@@ -43,15 +46,15 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 			}
 		}
 
-		public AxisAlignedBB getBoundingBox(BlockPos pos)
+		public boolean hasSolidBottom()
 		{
-			return new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY(), pos.getZ() + 1);
+			return this.hasSolidBottom;
 		}
 	}
 
 	public static final AercloudVariant
-			COLD_AERCLOUD = new AercloudVariant(0, "cold"),
-			BLUE_AERCLOUD = new AercloudVariant(1, "blue")
+			COLD_AERCLOUD = new AercloudVariant(0, "cold", true),
+			BLUE_AERCLOUD = new AercloudVariant(1, "blue", false)
 			{
 				@Override
 				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
@@ -59,7 +62,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 					entity.motionY = 2.0D;
 				}
 			},
-			GREEN_AERCLOUD = new AercloudVariant(2, "green")
+			GREEN_AERCLOUD = new AercloudVariant(2, "green", false)
 			{
 				@Override
 				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
@@ -70,22 +73,16 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 					entity.motionZ = facing.getFrontOffsetZ() * 2.5D;
 				}
 			},
-			GOLDEN_AERCLOUD = new AercloudVariant(3, "golden")
+			GOLDEN_AERCLOUD = new AercloudVariant(3, "golden", false)
 			{
 				@Override
 				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
 				{
 					entity.motionY = -1.5D;
 				}
-
-				@Override
-				public AxisAlignedBB getBoundingBox(BlockPos pos)
-				{
-					return null;
-				}
 			},
-			STORM_AERCLOUD = new AercloudVariant(4, "storm"),
-			PURPLE_AERCLOUD = new AercloudVariant(5, "purple")
+			STORM_AERCLOUD = new AercloudVariant(4, "storm", true),
+			PURPLE_AERCLOUD = new AercloudVariant(5, "purple", false)
 			{
 				@Override
 				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
@@ -142,9 +139,16 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	@Override
 	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
-		AercloudVariant variant = entity.isSneaking() ? BlockAercloud.COLD_AERCLOUD : (AercloudVariant) state.getValue(PROPERTY_VARIANT);
-
 		entity.fallDistance = 0;
+
+		boolean canCollide = !entity.isSneaking();
+
+		if (canCollide && entity instanceof EntityPlayer)
+		{
+			canCollide = !((EntityPlayer) entity).capabilities.isFlying;
+		}
+
+		AercloudVariant variant = canCollide ? (AercloudVariant) state.getValue(PROPERTY_VARIANT) : BlockAercloud.COLD_AERCLOUD;
 
 		variant.onEntityCollision(world, pos, state, entity);
 	}
@@ -191,7 +195,12 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	{
 		AercloudVariant variant = (AercloudVariant) state.getValue(PROPERTY_VARIANT);
 
-		return variant.getBoundingBox(pos);
+		if (variant.hasSolidBottom())
+		{
+			return new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY(), pos.getZ() + 1);
+		}
+
+		return null;
 	}
 
 	@Override
