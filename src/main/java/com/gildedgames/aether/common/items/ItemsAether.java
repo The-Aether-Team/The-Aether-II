@@ -419,7 +419,6 @@ public class ItemsAether
 		ItemEffects.register(phoenix_gloves, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(2.0F)));
 		ItemEffects.register(obsidian_gloves, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(3.0F)));
 
-
 		registerItemProperties();
 	}
 

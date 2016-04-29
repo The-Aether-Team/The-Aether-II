@@ -60,25 +60,19 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IAetherBlock
 	{
 		IBlockState state = world.getBlockState(pos);
 
-		return !state.getValue(PROPERTY_HARVESTABLE) && world.setBlockToAir(pos);
-	}
-
-	@Override
-	public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity tileEntity)
-	{
 		if (state.getValue(PROPERTY_HARVESTABLE))
 		{
 			world.setBlockState(pos, state.withProperty(PROPERTY_HARVESTABLE, false));
 
-			player.triggerAchievement(StatList.mineBlockStatArray[getIdFromBlock(this)]);
-			player.addExhaustion(0.025F);
+			if (!world.isRemote && !player.capabilities.isCreativeMode)
+			{
+				this.dropBerries(world, pos, world.rand);
+			}
 
-			this.dropBerries(world, pos, world.rand);
+			return false;
 		}
-		else
-		{
-			super.harvestBlock(world, player, pos, state, tileEntity);
-		}
+
+		return super.removedByPlayer(world, pos, player, willHarvest);
 	}
 
 	@Override
@@ -137,13 +131,13 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IAetherBlock
 	@Override
 	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
 	{
-		return state.getValue(PROPERTY_HARVESTABLE) == Boolean.FALSE;
+		return !state.getValue(PROPERTY_HARVESTABLE);
 	}
 
 	@Override
 	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
 	{
-		return state.getValue(PROPERTY_HARVESTABLE) == Boolean.FALSE;
+		return !state.getValue(PROPERTY_HARVESTABLE);
 	}
 
 	@Override

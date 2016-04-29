@@ -71,38 +71,18 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player)
+	protected void invalidateBlock(World world, BlockPos pos, IBlockState state)
 	{
-		BlockPos topPos = state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos : pos.up();
+		BlockPos adjPos = state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos.down() : pos.up();
 
-		BlockPos bottomPos = state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos.down() : pos;
-
-		if (state.getValue(PROPERTY_STAGE) == STAGE_COUNT)
+		if (world.getBlockState(adjPos).getBlock() == this)
 		{
-			this.dropOranges(world, topPos, bottomPos, !player.capabilities.isCreativeMode);
+			this.destroyTree(world, pos, adjPos, true);
 		}
 		else
 		{
-			this.destroyTree(world, topPos, bottomPos, !player.capabilities.isCreativeMode);
+			world.setBlockToAir(pos);
 		}
-	}
-
-	@Override
-	protected void invalidateBlock(World world, BlockPos pos, IBlockState state)
-	{
-		BlockPos topPos = state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos : pos.up();
-
-		BlockPos bottomPos = state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos.down() : pos;
-
-		if (state.getValue(PROPERTY_STAGE) == STAGE_COUNT)
-		{
-			this.dropOranges(world, topPos, bottomPos, true);
-		}
-
-		this.dropBlockAsItem(world, pos, state, 0);
-
-		world.setBlockToAir(topPos);
-		world.setBlockToAir(bottomPos);
 	}
 
 	@Override
@@ -110,12 +90,32 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	{
 		IBlockState state = world.getBlockState(pos);
 
+		boolean isRoot = !state.getValue(PROPERTY_IS_TOP_BLOCK);
+
+		BlockPos adjPos = isRoot ? pos.up() : pos.down();
+
 		if (state.getValue(PROPERTY_STAGE) == STAGE_COUNT)
 		{
-			return state.getBlock() == this && state.getValue(PROPERTY_STAGE) >= STAGE_COUNT;
+			if (!player.capabilities.isCreativeMode)
+			{
+				this.dropOranges(world, pos);
+			}
+
+			IBlockState adjState = world.getBlockState(adjPos);
+
+			if (adjState.getBlock() == this)
+			{
+				world.setBlockState(adjPos, adjState.withProperty(PROPERTY_STAGE, 4));
+			}
+
+			world.setBlockState(pos, world.getBlockState(pos).withProperty(PROPERTY_STAGE, 4));
+
+			return false;
 		}
 
-		return world.setBlockToAir(pos);
+		this.destroyTree(world, pos, adjPos, !player.capabilities.isCreativeMode);
+
+		return true;
 	}
 
 	@Override
@@ -134,15 +134,6 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 		int stage = state.getValue(PROPERTY_STAGE);
 
 		return top + stage;
-	}
-
-	@Override
-	public void dropBlockAsItemWithChance(World world, BlockPos pos, IBlockState state, float chance, int fortune)
-	{
-		if (!state.getValue(PROPERTY_IS_TOP_BLOCK))
-		{
-			super.dropBlockAsItemWithChance(world, pos, state, chance, fortune);
-		}
 	}
 
 	@Override
@@ -173,35 +164,34 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 		return soilBlock == this || super.isSuitableSoilBlock(soilBlock);
 	}
 
-	private void dropOranges(World world, BlockPos topPos, BlockPos bottomPos, boolean doDrops)
+	private void dropOranges(World world, BlockPos pos)
 	{
-		IBlockState state = world.getBlockState(bottomPos.down());
+		IBlockState state = world.getBlockState(pos);
 
-		if (doDrops)
+		int count = world.rand.nextInt(3) + 1;
+
+		if (state.getBlock() == BlocksAether.aether_grass && state.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED_AETHER_GRASS)
 		{
-			int count = world.rand.nextInt(3) + 1;
-
-			if (state.getBlock() == BlocksAether.aether_grass && state.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED_AETHER_GRASS)
-			{
-				count += 1;
-			}
-
-			Block.spawnAsEntity(world, topPos, new ItemStack(ItemsAether.orange, count));
+			count += 1;
 		}
 
-		world.setBlockState(topPos, world.getBlockState(topPos).withProperty(PROPERTY_STAGE, 4));
-		world.setBlockState(bottomPos, world.getBlockState(bottomPos).withProperty(PROPERTY_STAGE, 4));
+		Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.orange, count));
 	}
 
-	private void destroyTree(World world, BlockPos topPos, BlockPos bottomPos, boolean doDrops)
+	private void destroyTree(World world, BlockPos pos, BlockPos adjPos, boolean doDrops)
 	{
 		if (doDrops)
 		{
-			Block.spawnAsEntity(world, topPos, new ItemStack(BlocksAether.orange_tree));
+			Block.spawnAsEntity(world, pos, new ItemStack(BlocksAether.orange_tree));
+
+			if (world.getBlockState(pos).getValue(PROPERTY_STAGE) >= STAGE_COUNT)
+			{
+				this.dropOranges(world, pos);
+			}
 		}
 
-		world.setBlockToAir(topPos);
-		world.setBlockToAir(bottomPos);
+		world.setBlockToAir(pos);
+		world.setBlockToAir(adjPos);
 	}
 
 	@Override
