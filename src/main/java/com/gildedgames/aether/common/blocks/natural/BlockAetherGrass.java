@@ -1,10 +1,8 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
-import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
@@ -18,8 +16,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
-import java.util.Random;
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
+import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
+import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
+import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
+import com.gildedgames.aether.common.world.features.trees.WorldGenOrangeTree;
 
 public class BlockAetherGrass extends Block implements IAetherBlockWithVariants, IGrowable
 {
@@ -153,7 +156,20 @@ public class BlockAetherGrass extends Block implements IAetherBlockWithVariants,
 				}
 				else if (worldIn.isAirBlock(nextPos))
 				{
-					if (rand.nextInt(8) == 0 && BlocksAether.aether_flower.canPlaceBlockAt(worldIn, nextPos))
+					if (rand.nextInt(50) == 0)
+					{
+						if (rand.nextInt(2) == 0 && BlocksAether.orange_tree.canPlaceBlockAt(worldIn, nextPos))
+						{
+							WorldGenOrangeTree orangeTree = new WorldGenOrangeTree();
+							
+							orangeTree.generate(worldIn, rand, nextPos);
+						}
+						else if (BlocksAether.blueberry_bush.canPlaceBlockAt(worldIn, nextPos))
+						{
+							worldIn.setBlockState(nextPos, BlocksAether.blueberry_bush.getDefaultState().withProperty(BlockBlueberryBush.PROPERTY_HARVESTABLE, rand.nextInt(3) == 0));
+						}
+					}
+					else if (rand.nextInt(8) == 0 && BlocksAether.aether_flower.canPlaceBlockAt(worldIn, nextPos))
 					{
 						int randFlower = rand.nextInt(3);
 
