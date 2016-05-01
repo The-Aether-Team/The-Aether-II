@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
+import com.gildedgames.util.core.nbt.NBTHelper;
 import com.gildedgames.util.modules.instances.Instance;
 import com.gildedgames.util.modules.instances.InstanceHandler;
 import com.gildedgames.util.modules.world.common.BlockPosDimension;
@@ -54,12 +55,14 @@ public class DungeonInstance implements Instance
 	public void write(NBTTagCompound output)
 	{
 		output.setBoolean("generated", this.generated);
+		NBTHelper.setBlockPosDimension(output, this.entrance, "entrance");
 	}
 
 	@Override
 	public void read(NBTTagCompound input)
 	{
 		this.generated = input.getBoolean("generated");
+		this.entrance = NBTHelper.getBlockPosDimension(input, "entrance");
 	}
 
 	@Override

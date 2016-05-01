@@ -39,14 +39,11 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 	@Override
 	public void onInteract(EntityPlayer interactingPlayer)
 	{
-		AetherCore.LOGGER.info("Hi!");
-
 		if (!this.worldObj.isRemote)
 		{
 			EntityPlayerMP player = (EntityPlayerMP) interactingPlayer;
 
-			DungeonInstanceHandler handler = AetherCore.locate().getDungeonInstanceHandler();
-			DungeonInstance inst = handler.get(new BlockPosDimension(pos, this.worldObj.provider.getDimensionId()));
+			DungeonInstanceHandler handler = AetherCore.INSTANCE.getDungeonInstanceHandler();
 
 			PlayerInstances hook = InstanceModule.INSTANCE.getPlayer(player);
 
@@ -56,6 +53,7 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 			}
 			else
 			{
+				DungeonInstance inst = handler.get(new BlockPosDimension(pos, this.worldObj.provider.getDimensionId()));
 				handler.teleportToInst(player, inst);
 			}
 		}

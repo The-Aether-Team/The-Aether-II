@@ -11,7 +11,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
-import net.minecraftforge.fml.relauncher.Side;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,7 +20,6 @@ import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstanceFactory;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstanceHandler;
 import com.gildedgames.aether.common.world.dungeon.WorldProviderSliderLabyrinth;
-import com.gildedgames.util.core.SidedObject;
 import com.gildedgames.util.io.ClassSerializer;
 import com.gildedgames.util.modules.instances.InstanceHandler;
 import com.gildedgames.util.modules.instances.InstanceModule;
@@ -45,19 +43,19 @@ public class AetherCore
 	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.common.CommonProxy")
 	public static CommonProxy PROXY;
 
-	private final SidedObject<AetherServices> serviceLocator = new SidedObject<>(new AetherServices(Side.CLIENT), new AetherServices(Side.SERVER));
-
 	public static AetherConfig CONFIG;
 
 	private static TeleporterAether teleporter;
 	
 	private ClassSerializer srl;
-
-	public static AetherServices locate()
-	{
-		return AetherCore.INSTANCE.serviceLocator.instance();
-	}
 	
+	private DungeonInstanceHandler dungeonInstanceHandler;
+	
+	public DungeonInstanceHandler getDungeonInstanceHandler()
+	{
+		return this.dungeonInstanceHandler;
+	}
+
 	public static ClassSerializer srl()
 	{
 		if (AetherCore.INSTANCE.srl == null)
@@ -83,11 +81,9 @@ public class AetherCore
 		
 		final DungeonInstanceFactory factory = new DungeonInstanceFactory(6, WorldProviderSliderLabyrinth.class);
 
-		final InstanceHandler<DungeonInstance> client = InstanceModule.INSTANCE.createClientInstanceHandler(factory);
-		final InstanceHandler<DungeonInstance> server = InstanceModule.INSTANCE.createServerInstanceHandler(factory);
+		final InstanceHandler<DungeonInstance> instanceHandler = InstanceModule.INSTANCE.createInstanceHandler(factory);
 
-		this.serviceLocator.client().setDungeonInstanceHandler(new DungeonInstanceHandler(client));
-		this.serviceLocator.server().setDungeonInstanceHandler(new DungeonInstanceHandler(server));
+		this.dungeonInstanceHandler = new DungeonInstanceHandler(instanceHandler);
 	}
 
 	@EventHandler
