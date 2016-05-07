@@ -76,7 +76,7 @@ public class ChunkProviderSliderLabyrinth implements IChunkProvider
 		
 		DungeonInstance inst = handler.getFromDimId(this.world.provider.getDimensionId());
 		
-		inst.getGenerator().populateChunk(world, chunkProvider, chunkX, chunkZ);
+		inst.getGenerator().populateChunk(this.world, inst, chunkProvider, chunkX, chunkZ);
 	}
 	
 	public void genHolystoneEverywhere(ChunkPrimer primer, int chunkX, int chunkZ)
@@ -114,9 +114,9 @@ public class ChunkProviderSliderLabyrinth implements IChunkProvider
 
 		ChunkPrimer primer = new ChunkPrimer();
 		
-		inst.getGenerator().generateChunk(this.world, primer, chunkX, chunkZ);
-
-		//this.genHolystoneEverywhere(primer, chunkX, chunkZ);
+		this.genHolystoneEverywhere(primer, chunkX, chunkZ);
+		
+		inst.getGenerator().generateChunk(this.world, inst, primer, chunkX, chunkZ);
 
 		Chunk chunk = new Chunk(this.world, primer, chunkX, chunkZ);
 		//chunk.func_150809_p();

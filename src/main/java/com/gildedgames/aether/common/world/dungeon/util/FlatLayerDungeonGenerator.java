@@ -10,6 +10,7 @@ import java.util.Random;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -116,7 +117,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 	}
 
 	@Override
-	public void generateChunk(World world, ChunkPrimer primer, int chunkX, int chunkZ)
+	public void generateChunk(World world, DungeonInstance inst, ChunkPrimer primer, int chunkX, int chunkZ)
 	{
 		if (!this.isLayoutReady())
 		{
@@ -148,7 +149,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 						{
 							case SMALL_ROOM:
 							{
-								this.generateTile(layer, x, 11, z, BlocksAether.carved_stone.getDefaultState(), primer);
+								this.generateTile(layer, x, 2, z, BlocksAether.carved_stone.getDefaultState(), primer);
 								break;
 							}
 							case END_ROOM:
@@ -158,7 +159,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 							}
 							case BIG_ROOM:
 							{
-								this.generateTile(layer, x, 20, z, Blocks.stonebrick.getDefaultState(), primer);
+								this.generateTile(layer, x, 2, z, Blocks.stonebrick.getDefaultState(), primer);
 								break;
 							}
 							case PATH:
@@ -212,8 +213,11 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 	}
 	
 	@Override
-	public void populateChunk(World world, IChunkProvider chunkProvider, int chunkX, int chunkZ)
+	public void populateChunk(World world, DungeonInstance inst, IChunkProvider chunkProvider, int chunkX, int chunkZ)
 	{
+		int posX = chunkX * 16;
+		int posZ = chunkZ * 16;
+		
 		for (DungeonLayer layer : this.layers)
 		{
 			for (DungeonRoom room : layer.getRooms())
@@ -224,6 +228,34 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 				}
 			}
 		}
+		
+		for (int x = 0; x < 16; x++)
+		{
+			for (int z = 0; z < 16; z++)
+			{
+				if (posX + x == inst.getInsideEntrance().getX() + 1 && posZ + z == inst.getInsideEntrance().getZ() + 1)
+				{
+					world.setBlockState(new BlockPos(posX + x, inst.getInsideEntrance().getY(), posZ + z), BlocksAether.labyrinth_totem.getDefaultState());
+				}
+				
+				/*BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+				
+				yloop:
+				for (int y = 0; y < 256; y++)
+				{
+					pos.set(posX + x, y, posZ + z);
+					
+					IBlockState state = world.getBlockState(pos);
+					
+					if (state.getBlock().getLightValue() > 0)
+					{
+						world.markBlockForUpdate(pos);
+						world.markBlockRangeForRenderUpdate(new BlockPos(posX + x, 0, posZ + z), new BlockPos(posX + x, 256, posZ + z));
+						break yloop;
+					}
+				}*/
+			}
+		}
 	}
 	
 	private void generateTile(DungeonLayer layer, int x, int height, int z, IBlockState block, ChunkPrimer primer)
@@ -231,6 +263,11 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 		for (int i = layer.minY(); i <= layer.minY() + 5; i++)
 		{
 			primer.setBlockState(x, i, z, block);
+		}
+		
+		for (int i = layer.minY() + 6; i <= layer.minY() + height; i++)
+		{
+			primer.setBlockState(x, i, z, Blocks.air.getDefaultState());
 		}
 		
 		for (int i = layer.minY() + height; i <= layer.minY() + layer.getHeight(); i++)
@@ -810,7 +847,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 				}
 			}
 
-			instance.setInsideEntrance(new BlockPosDimension((int) start.getCenterX(), newLayer.minY() + 6, (int) start.getCenterZ(), instance.getDimIdInside()));
+			instance.setInsideEntrance(new BlockPosDimension((int) start.getMinX() + 1, newLayer.minY() + 6, (int) start.getMinZ() + 1, instance.getDimIdInside()));
 		}
 		else
 		{

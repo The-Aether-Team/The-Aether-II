@@ -15,10 +15,10 @@ public interface DungeonGenerator
 	
 	boolean isLayoutReady();
 	
-	void generateLayout(DungeonInstance instance, DungeonRoomProvider provider, Random rand);
+	void generateLayout(DungeonInstance inst, DungeonRoomProvider provider, Random rand);
 
-	void generateChunk(World world, ChunkPrimer primer, int chunkX, int chunkZ);
+	void generateChunk(World world, DungeonInstance inst, ChunkPrimer primer, int chunkX, int chunkZ);
 	
-	void populateChunk(World world, IChunkProvider chunkProvider, int chunkX, int chunkZ);
+	void populateChunk(World world, DungeonInstance inst, IChunkProvider chunkProvider, int chunkX, int chunkZ);
 	
 }
