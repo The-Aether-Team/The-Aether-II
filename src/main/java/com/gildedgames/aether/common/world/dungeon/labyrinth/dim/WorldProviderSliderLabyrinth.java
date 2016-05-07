@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.world.dungeon;
+package com.gildedgames.aether.common.world.dungeon.labyrinth.dim;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;

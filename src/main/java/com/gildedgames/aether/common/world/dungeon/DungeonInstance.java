@@ -14,11 +14,19 @@ import com.google.common.collect.Lists;
 public class DungeonInstance implements Instance
 {
 	
+	private DungeonDefinition def;
+	
+	private DungeonGenerator generator;
+	
+	private DungeonRoomProvider roomProvider;
+	
 	private List<EntityPlayer> players = Lists.newArrayList();
 
-	private BlockPosDimension entrance;
+	private BlockPosDimension outsideEntrance, insideEntrance;
 	
 	private boolean generated = false;
+	
+	private int dimIdInside;
 	
 	@SuppressWarnings("unused")
 	private DungeonInstance()
@@ -28,7 +36,34 @@ public class DungeonInstance implements Instance
 	
 	public DungeonInstance(int id, InstanceHandler<DungeonInstance> instanceHandler)
 	{
+		this.dimIdInside = id;
 		
+		this.def = DungeonDefinitions.SLIDERS_LABYRINTH;
+	}
+
+	public DungeonGenerator getGenerator()
+	{
+		if (this.generator == null)
+		{
+			this.generator = this.def.createGenerator();
+		}
+		
+		return this.generator;
+	}
+	
+	public DungeonRoomProvider getRoomProvider()
+	{
+		if (this.roomProvider == null)
+		{
+			this.roomProvider = this.def.createRoomProvider();
+		}
+		
+		return this.roomProvider;
+	}
+	
+	public DungeonDefinition getDefinition()
+	{
+		return this.def;
 	}
 	
 	public void flagGenerated()
@@ -41,28 +76,46 @@ public class DungeonInstance implements Instance
 		return this.generated;
 	}
 	
-	public BlockPosDimension getEntrance()
+	public BlockPosDimension getOutsideEntrance()
 	{
-		return this.entrance;
+		return this.outsideEntrance;
 	}
 	
-	public void setEntrance(BlockPosDimension entrance)
+	public void setOutsideEntrance(BlockPosDimension entrance)
 	{
-		this.entrance = entrance;
+		this.outsideEntrance = entrance;
 	}
-
+	
+	public BlockPosDimension getInsideEntrance()
+	{
+		return this.insideEntrance;
+	}
+	
+	public void setInsideEntrance(BlockPosDimension entrance)
+	{
+		this.insideEntrance = entrance;
+	}
+	
 	@Override
 	public void write(NBTTagCompound output)
 	{
 		output.setBoolean("generated", this.generated);
-		NBTHelper.setBlockPosDimension(output, this.entrance, "entrance");
+		
+		NBTHelper.setBlockPosDimension(output, this.outsideEntrance, "outsideEntrance");
+		NBTHelper.setBlockPosDimension(output, this.insideEntrance, "insideEntrance");
+		
+		output.setInteger("dimIdInside", this.dimIdInside);
 	}
 
 	@Override
 	public void read(NBTTagCompound input)
 	{
 		this.generated = input.getBoolean("generated");
-		this.entrance = NBTHelper.getBlockPosDimension(input, "entrance");
+		
+		this.outsideEntrance = NBTHelper.getBlockPosDimension(input, "outsideEntrance");
+		this.insideEntrance = NBTHelper.getBlockPosDimension(input, "insideEntrance");
+		
+		this.dimIdInside = input.getInteger("dimIdInside");
 	}
 
 	@Override
@@ -81,6 +134,12 @@ public class DungeonInstance implements Instance
 	public List<EntityPlayer> getPlayers()
 	{
 		return this.players;
+	}
+
+	@Override
+	public int getDimIdInside()
+	{
+		return this.dimIdInside;
 	}
 
 }

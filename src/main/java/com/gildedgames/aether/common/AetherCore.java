@@ -19,7 +19,7 @@ import com.gildedgames.aether.common.world.TeleporterAether;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstanceFactory;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstanceHandler;
-import com.gildedgames.aether.common.world.dungeon.WorldProviderSliderLabyrinth;
+import com.gildedgames.aether.common.world.dungeon.labyrinth.dim.WorldProviderSliderLabyrinth;
 import com.gildedgames.util.io.ClassSerializer;
 import com.gildedgames.util.modules.instances.InstanceHandler;
 import com.gildedgames.util.modules.instances.InstanceModule;

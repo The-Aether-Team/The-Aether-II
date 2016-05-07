@@ -1,10 +1,9 @@
-package com.gildedgames.aether.common.world.dungeon;
+package com.gildedgames.aether.common.world.dungeon.labyrinth.dim;
 
 import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
@@ -13,11 +12,15 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.chunk.EmptyChunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.GenUtil;
+import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
+import com.gildedgames.aether.common.world.dungeon.DungeonInstanceHandler;
 
 public class ChunkProviderSliderLabyrinth implements IChunkProvider
 {
@@ -41,7 +44,11 @@ public class ChunkProviderSliderLabyrinth implements IChunkProvider
 	@Override
 	public boolean chunkExists(int chunkX, int chunkZ)
 	{
-		return true;
+		DungeonInstanceHandler handler = AetherCore.INSTANCE.getDungeonInstanceHandler();
+		
+		DungeonInstance inst = handler.getFromDimId(this.world.provider.getDimensionId());
+		
+		return inst.getGenerator().isLayoutReady();
 	}
 
 	@Override
@@ -65,7 +72,11 @@ public class ChunkProviderSliderLabyrinth implements IChunkProvider
 	@Override
 	public void populate(IChunkProvider chunkProvider, int chunkX, int chunkZ)
 	{
+		DungeonInstanceHandler handler = AetherCore.INSTANCE.getDungeonInstanceHandler();
 		
+		DungeonInstance inst = handler.getFromDimId(this.world.provider.getDimensionId());
+		
+		inst.getGenerator().populateChunk(world, chunkProvider, chunkX, chunkZ);
 	}
 	
 	public void genHolystoneEverywhere(ChunkPrimer primer, int chunkX, int chunkZ)
@@ -90,14 +101,26 @@ public class ChunkProviderSliderLabyrinth implements IChunkProvider
 	@Override
 	public Chunk provideChunk(int chunkX, int chunkZ)
 	{
+		DungeonInstanceHandler handler = AetherCore.INSTANCE.getDungeonInstanceHandler();
+		
+		DungeonInstance inst = handler.getFromDimId(this.world.provider.getDimensionId());
+		
+		if (!inst.getGenerator().isLayoutReady())
+		{
+			return new EmptyChunk(this.world, chunkX, chunkZ);
+		}
+		
 		this.random.setSeed(chunkX * 0x4f9939f508L + chunkZ * 0x1ef1565bd5L);
 
 		ChunkPrimer primer = new ChunkPrimer();
+		
+		inst.getGenerator().generateChunk(this.world, primer, chunkX, chunkZ);
 
-		this.genHolystoneEverywhere(primer, chunkX, chunkZ);
+		//this.genHolystoneEverywhere(primer, chunkX, chunkZ);
 
 		Chunk chunk = new Chunk(this.world, primer, chunkX, chunkZ);
-		chunk.generateSkylightMap();
+		//chunk.func_150809_p();
+		//chunk.setChunkModified();
 
 		return chunk;
 	}

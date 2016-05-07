@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.world.dungeon;
+package com.gildedgames.aether.common.world.dungeon.labyrinth.dim;
 
 import java.util.Random;
 
