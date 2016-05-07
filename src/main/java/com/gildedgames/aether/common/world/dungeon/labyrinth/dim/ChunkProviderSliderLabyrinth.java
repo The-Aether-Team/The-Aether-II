@@ -81,7 +81,7 @@ public class ChunkProviderSliderLabyrinth implements IChunkProvider
 	
 	public void genHolystoneEverywhere(ChunkPrimer primer, int chunkX, int chunkZ)
 	{
-		GenUtil.fillArray((short[])ObfuscationReflectionHelper.getPrivateValue(ChunkPrimer.class, primer, 0), (short)Block.BLOCK_STATE_IDS.get(BlocksAether.holystone.getDefaultState()));
+		GenUtil.fillArray((short[])ObfuscationReflectionHelper.getPrivateValue(ChunkPrimer.class, primer, 0), (short)Block.BLOCK_STATE_IDS.get(BlocksAether.carved_stone.getDefaultState()));
 
 		for (int x = 0; x < 16; ++x)
 		{

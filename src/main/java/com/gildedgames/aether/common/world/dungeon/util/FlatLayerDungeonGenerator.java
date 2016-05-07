@@ -164,12 +164,12 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 							}
 							case PATH:
 							{
-								this.generateTile(layer, x, 11, z, BlocksAether.holystone.getDefaultState(), primer);
+								this.generateTile(layer, x, 11, z, BlocksAether.holystone.getDefaultState(), BlocksAether.carved_stone.getDefaultState(), primer);
 								break;
 							}
 							case TRUE_PATH:
 							{
-								this.generateTile(layer, x, 11, z, BlocksAether.holystone.getDefaultState(), primer);
+								this.generateTile(layer, x, 11, z, BlocksAether.holystone.getDefaultState(), BlocksAether.carved_stone.getDefaultState(), primer);
 								break;
 							}
 							case WALL:
@@ -260,6 +260,11 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 	
 	private void generateTile(DungeonLayer layer, int x, int height, int z, IBlockState block, ChunkPrimer primer)
 	{
+		this.generateTile(layer, x, height, z, block, block, primer);
+	}
+	
+	private void generateTile(DungeonLayer layer, int x, int height, int z, IBlockState block, IBlockState block2, ChunkPrimer primer)
+	{
 		for (int i = layer.minY(); i <= layer.minY() + 5; i++)
 		{
 			primer.setBlockState(x, i, z, block);
@@ -272,7 +277,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 		
 		for (int i = layer.minY() + height; i <= layer.minY() + layer.getHeight(); i++)
 		{
-			primer.setBlockState(x, i, z, block);
+			primer.setBlockState(x, i, z, block2);
 		}
 	}
 	
