@@ -57,7 +57,7 @@ public class DungeonDefinitions
 						
 						for (int i = 0; i < amount; i++)
 						{
-							rooms.add(new DungeonRoom(new Schematic("assets/aether/" + file.getName())));
+							rooms.add(new DungeonRoom(new Schematic(file.getName())));
 						}
 					}
 					
