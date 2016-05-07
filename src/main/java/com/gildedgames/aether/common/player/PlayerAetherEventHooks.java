@@ -90,7 +90,10 @@ public class PlayerAetherEventHooks
 		}
 		else
 		{
-			System.out.println("Chunk hook is null, something is going wrong!");
+			/*
+			 * TODO: FIX THIS SHIT FUCK
+			 */
+			//System.out.println("Chunk hook is null, something is going wrong!");
 		}
 	}
 
