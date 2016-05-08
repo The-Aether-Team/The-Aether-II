@@ -53,12 +53,7 @@ public class DungeonDefinitions
 					
 					for (File file : files)
 					{
-						final int amount = rand.nextInt(4) + 1;
-						
-						for (int i = 0; i < amount; i++)
-						{
-							rooms.add(new DungeonRoom(new Schematic(file.getName())));
-						}
+						rooms.add(new DungeonRoom(new Schematic(file.getName())));
 					}
 					
 					return rooms;

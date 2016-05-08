@@ -21,7 +21,7 @@ public class DungeonRoom
 	public DungeonRoom(Schematic schematic)
 	{
 		this.schematic = schematic;
-		this.rectangle = new Rectangle(0, 0, this.schematic.width(), this.schematic.length());
+		this.rectangle = new Rectangle(0, 0, this.schematic.width() - 2, this.schematic.length() - 2);
 	}
 
 	public DungeonRoom(int width, int length)
