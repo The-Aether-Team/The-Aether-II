@@ -4,9 +4,9 @@ import com.gildedgames.aether.common.AetherCapabilities;
 import com.gildedgames.aether.common.entities.effects.EffectInstance;
 import com.gildedgames.aether.common.entities.effects.EffectProcessor;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
-import com.gildedgames.aether.common.items.ItemEffectsBase;
+import com.gildedgames.aether.common.entities.player.PlayerAetherBase;
+import com.gildedgames.aether.common.items.effects.ItemEffectsBase;
 import com.gildedgames.aether.common.items.ItemEquipmentType;
-import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.util.core.nbt.NBT;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -42,11 +42,11 @@ public class InventoryEquipment implements IInventory, NBT
 			ItemEquipmentType.CHARM*/
 			};
 
-	private final PlayerAether aePlayer;
+	private final PlayerAetherBase aePlayer;
 
 	private ItemStack[] inventory = new ItemStack[InventoryEquipment.INVENTORY_SIZE];
 
-	public InventoryEquipment(PlayerAether aePlayer)
+	public InventoryEquipment(PlayerAetherBase aePlayer)
 	{
 		this.aePlayer = aePlayer;
 	}
@@ -169,7 +169,7 @@ public class InventoryEquipment implements IInventory, NBT
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		return !this.aePlayer.getEntity().isDead && player.getDistanceSqToEntity(this.aePlayer.getEntity()) <= 64.0D;
+		return !this.aePlayer.getPlayer().isDead && player.getDistanceSqToEntity(this.aePlayer.getPlayer()) <= 64.0D;
 	}
 
 	@Override
@@ -214,7 +214,7 @@ public class InventoryEquipment implements IInventory, NBT
 
 			if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 			{
-				EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
+				EntityEffects effects = EntityEffects.get(this.aePlayer.getPlayer());
 				ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
 				if (itemEffects != null)
@@ -243,7 +243,7 @@ public class InventoryEquipment implements IInventory, NBT
 
 				if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 				{
-					EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
+					EntityEffects effects = EntityEffects.get(this.aePlayer.getPlayer());
 					ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
 					if (itemEffects != null)
@@ -258,7 +258,7 @@ public class InventoryEquipment implements IInventory, NBT
 					}
 				}
 
-				this.aePlayer.getEntity().dropItem(stack, true, false);
+				this.aePlayer.getPlayer().dropItem(stack, true, false);
 				this.inventory[i] = null;
 			}
 		}

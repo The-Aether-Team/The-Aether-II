@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.containers.slots;
 import com.gildedgames.aether.common.AetherCapabilities;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.items.ItemEquipmentType;
-import com.gildedgames.aether.common.items.ItemPropertiesBase;
+import com.gildedgames.aether.common.items.properties.ItemPropertiesBase;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

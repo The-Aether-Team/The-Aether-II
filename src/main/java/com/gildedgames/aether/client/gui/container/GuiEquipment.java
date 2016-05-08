@@ -2,8 +2,8 @@ package com.gildedgames.aether.client.gui.container;
 
 import com.gildedgames.aether.common.containers.ContainerEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
+import com.gildedgames.aether.common.entities.player.PlayerAetherBase;
 import com.gildedgames.aether.common.items.ItemEquipmentType;
-import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
@@ -31,9 +31,9 @@ public class GuiEquipment extends GuiContainer
 
 //	private static final ResourceLocation TEXTURE_COINBAR = new ResourceLocation("aether", "textures/gui/coinbar.png");
 
-	private final PlayerAether aePlayer;
+	private final PlayerAetherBase aePlayer;
 
-	public GuiEquipment(PlayerAether aePlayer)
+	public GuiEquipment(PlayerAetherBase aePlayer)
 	{
 		super(new ContainerEquipment(aePlayer));
 
@@ -70,11 +70,11 @@ public class GuiEquipment extends GuiContainer
 
 		//this.drawTexturedModalRect(this.width / 2 - 90 - 183 / 2, this.height / 2 - 166 / 2, 0, 0, 183, 171);
 
-		this.mc.renderEngine.bindTexture(aePlayer.getEntity().capabilities.isCreativeMode ? textureBackpackCreative : textureBackpack);
+		this.mc.renderEngine.bindTexture(aePlayer.getPlayer().capabilities.isCreativeMode ? textureBackpackCreative : textureBackpack);
 
 		this.drawTexturedModalRect(this.width / 2 + 90 - 176 / 2, this.height / 2 - 166 / 2, 0, 0, 176, 166);
 
-		this.fontRendererObj.drawString(I18n.format("container.crafting"), this.width / 2 + (this.aePlayer.getEntity().capabilities.isCreativeMode ? 70 : 51), this.height / 2 - 135 / 2, 4210752);
+		this.fontRendererObj.drawString(I18n.format("container.crafting"), this.width / 2 + (this.aePlayer.getPlayer().capabilities.isCreativeMode ? 70 : 51), this.height / 2 - 135 / 2, 4210752);
 
 		//this.mc.renderEngine.bindTexture(aePlayer.getEntity().capabilities.isCreativeMode ? textureBackpackCreativePattern : textureBackpackPattern);
 
@@ -123,7 +123,7 @@ public class GuiEquipment extends GuiContainer
 						unlocalizedTooltip = type.getUnlocalizedName();
 					}
 
-					final int dif = this.aePlayer.getEntity().inventory.getSizeInventory() - 1;
+					final int dif = this.aePlayer.getPlayer().inventory.getSizeInventory() - 1;
 
 					if (slot.getSlotIndex() == dif)
 					{

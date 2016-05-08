@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.network;
 import com.gildedgames.aether.client.gui.container.GuiEquipment;
 import com.gildedgames.aether.common.containers.ContainerEquipment;
 import com.gildedgames.aether.common.containers.ContainerSkyrootWorkbench;
-import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.aether.common.entities.player.PlayerAether;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiCrafting;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,7 +28,7 @@ public class AetherGuiHandler implements IGuiHandler
 		case SKYROOT_WORKBENCH_ID:
 			return new ContainerSkyrootWorkbench(player.inventory, world, new BlockPos(x, y, z));
 		case INVENTORY_ACCESSORIES_ID:
-			return new ContainerEquipment(PlayerAether.get(player));
+			return new ContainerEquipment(PlayerAether.getPlayer(player));
 		default:
 			return null;
 		}
@@ -43,7 +43,7 @@ public class AetherGuiHandler implements IGuiHandler
 		case SKYROOT_WORKBENCH_ID:
 			return new GuiCrafting(player.inventory, world, new BlockPos(x, y, z));
 		case INVENTORY_ACCESSORIES_ID:
-			return new GuiEquipment(PlayerAether.get(player));
+			return new GuiEquipment(PlayerAether.getPlayer(player));
 		default:
 			return null;
 		}

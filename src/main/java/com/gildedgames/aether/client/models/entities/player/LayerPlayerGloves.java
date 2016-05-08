@@ -1,8 +1,9 @@
 package com.gildedgames.aether.client.models.entities.player;
 
+import com.gildedgames.aether.common.entities.player.PlayerAether;
+import com.gildedgames.aether.common.entities.player.PlayerAetherBase;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
 import com.gildedgames.aether.common.items.armor.ItemLeatherGloves;
-import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
@@ -31,9 +32,9 @@ public class LayerPlayerGloves extends LayerBipedArmor
 
 	private void renderGloves(EntityPlayer entity, float p_177182_2_, float p_177182_3_, float partialTicks, float p_177182_5_, float p_177182_6_, float p_177182_7_, float scale)
 	{
-		PlayerAether aePlayer = PlayerAether.get(entity);
+		PlayerAetherBase aePlayer = PlayerAether.getPlayer(entity);
 
-		ItemStack itemstack = aePlayer.getEquipment().getStackInSlot(2);
+		ItemStack itemstack = aePlayer.getEquipmentInventory().getStackInSlot(2);
 
 		if (itemstack != null && itemstack.getItem() instanceof ItemAetherGloves)
 		{

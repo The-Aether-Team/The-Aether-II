@@ -6,10 +6,10 @@ import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import com.gildedgames.aether.common.entities.effects.EffectInstance;
 import com.gildedgames.aether.common.entities.effects.EffectProcessor;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
-import com.gildedgames.aether.common.items.ItemEffectsBase;
+import com.gildedgames.aether.common.entities.player.PlayerAetherBase;
+import com.gildedgames.aether.common.items.effects.ItemEffectsBase;
 import com.gildedgames.aether.common.items.ItemEquipmentType;
-import com.gildedgames.aether.common.items.ItemPropertiesBase;
-import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.aether.common.items.properties.ItemPropertiesBase;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerPlayer;
@@ -24,18 +24,18 @@ public class ContainerEquipment extends ContainerPlayer
 	/** See {@link GuiContainerCreative#field_147060_v} **/
 	private static InventoryBasic dumbInventory = new InventoryBasic("fake", true, 46);
 
-	private final PlayerAether aePlayer;
+	private final PlayerAetherBase aePlayer;
 
 	private final InventoryEquipment inventoryEquipment;
 
 	private Slot binSlot;
 
-	public ContainerEquipment(PlayerAether aePlayer)
+	public ContainerEquipment(PlayerAetherBase aePlayer)
 	{
-		super(aePlayer.getEntity().inventory, false, aePlayer.getEntity());
+		super(aePlayer.getPlayer().inventory, false, aePlayer.getPlayer());
 
 		this.aePlayer = aePlayer;
-		this.inventoryEquipment = aePlayer.getEquipment();
+		this.inventoryEquipment = aePlayer.getEquipmentInventory();
 
 		this.createSlots();
 	}
@@ -77,7 +77,7 @@ public class ContainerEquipment extends ContainerPlayer
 
 		this.binSlot = new Slot(ContainerEquipment.dumbInventory, this.inventorySlots.size(), 213, 26);
 
-		if (this.aePlayer.getEntity().capabilities.isCreativeMode)
+		if (this.aePlayer.getPlayer().capabilities.isCreativeMode)
 		{
 			this.addSlotToContainer(this.binSlot);
 
@@ -131,7 +131,7 @@ public class ContainerEquipment extends ContainerPlayer
 	{
 		if (slotId == this.binSlot.slotNumber && player.capabilities.isCreativeMode)
 		{
-			this.aePlayer.getEntity().inventory.setItemStack(null);
+			this.aePlayer.getPlayer().inventory.setItemStack(null);
 		}
 
 		if (slotId < this.inventorySlots.size() && slotId > 0)
@@ -146,7 +146,7 @@ public class ContainerEquipment extends ContainerPlayer
 
 					if (stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 					{
-						EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
+						EntityEffects effects = EntityEffects.get(this.aePlayer.getPlayer());
 						ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
 						for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
@@ -160,11 +160,11 @@ public class ContainerEquipment extends ContainerPlayer
 				}
 				else
 				{
-					ItemStack stack = this.aePlayer.getEntity().inventory.getItemStack();
+					ItemStack stack = this.aePlayer.getPlayer().inventory.getItemStack();
 					
 					if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 					{
-						EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
+						EntityEffects effects = EntityEffects.get(this.aePlayer.getPlayer());
 						ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
 						for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
@@ -205,10 +205,10 @@ public class ContainerEquipment extends ContainerPlayer
 	{
 		Slot slot = this.inventorySlots.get(slotNumber);
 
-		if (slotNumber == this.binSlot.slotNumber && this.aePlayer.getEntity().capabilities.isCreativeMode)
+		if (slotNumber == this.binSlot.slotNumber && this.aePlayer.getPlayer().capabilities.isCreativeMode)
 		{
-			this.aePlayer.getEntity().inventory.clear();
-			this.aePlayer.getEquipment().clear();
+			this.aePlayer.getPlayer().inventory.clear();
+			this.aePlayer.getEquipmentInventory().clear();
 		}
 
 		if (slot != null && slot.getHasStack())
@@ -235,7 +235,7 @@ public class ContainerEquipment extends ContainerPlayer
 					
 					if (stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 					{
-						EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
+						EntityEffects effects = EntityEffects.get(this.aePlayer.getPlayer());
 						ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
 						if (itemEffects != null)
@@ -255,7 +255,7 @@ public class ContainerEquipment extends ContainerPlayer
 			}
 			else if (slot instanceof SlotEquipment && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 			{
-				EntityEffects effects = EntityEffects.get(this.aePlayer.getEntity());
+				EntityEffects effects = EntityEffects.get(this.aePlayer.getPlayer());
 				ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
 				if (itemEffects != null)
