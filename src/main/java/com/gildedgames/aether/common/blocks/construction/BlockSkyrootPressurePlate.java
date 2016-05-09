@@ -10,7 +10,7 @@ public class BlockSkyrootPressurePlate extends BlockPressurePlate
 	{
 		super(Material.wood, Sensitivity.EVERYTHING);
 
-		this.setStepSound(Block.soundTypeStone);
+		this.setStepSound(Block.soundTypeWood);
 
 		this.setHardness(0.5f);
 
