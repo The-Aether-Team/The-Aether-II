@@ -224,7 +224,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 			{
 				if (room.schematic != null)
 				{
-					room.schematic.applyTileEntityData(world, chunkX, chunkZ);
+					room.schematic.populateExtraChunkData(world, chunkX, chunkZ);
 				}
 			}
 		}

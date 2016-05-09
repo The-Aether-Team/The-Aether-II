@@ -19,12 +19,9 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.registry.GameData;
-
-import com.gildedgames.aether.common.AetherCore;
 
 public class Schematic
 {
@@ -74,10 +71,14 @@ public class Schematic
 		return this.length;
 	}
 	
-	public void applyTileEntityData(World world, int chunkX, int chunkZ)
+	public void populateExtraChunkData(World world, int chunkX, int chunkZ)
 	{
 		int worldXOff = chunkX * 16;
 		int worldZOff = chunkZ * 16;
+		
+		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+		
+		Chunk chunk = world.getChunkFromChunkCoords(chunkX, chunkZ);
 
 		for (BlockPos location : this.scheduledGenerations)
 		{
@@ -102,6 +103,16 @@ public class Schematic
 				{
 					continue;
 				}
+				
+				pos.set(blockData.x + location.getX(), blockData.y + location.getY(), blockData.z + location.getZ());
+
+				if (blockData.state.getBlock().getLightValue() > 0)
+				{
+					world.setBlockState(pos, blockData.state);
+					world.checkLight(pos);
+					
+					world.markAndNotifyBlock(pos, chunk, null, blockData.state, 3);
+				}
 
 				if (blockData.state.getBlock().hasTileEntity(blockData.state))
 				{
@@ -118,11 +129,6 @@ public class Schematic
 							world.setTileEntity(new BlockPos(blockData.x + location.getX(), blockData.y + location.getY(), blockData.z + location.getZ()), TileEntity.createAndLoadEntity(tileEntityData));
 						}
 					}
-				}
-				
-				if (blockData.state.getBlock().getLightValue() > 0)
-				{
-					world.notifyLightSet(new BlockPos(blockData.x + location.getX(), blockData.y + location.getY(), blockData.z + location.getZ()));
 				}
 			}
 		}
@@ -153,8 +159,11 @@ public class Schematic
 	{
 		for (BlockData blockData : this.blocks)
 		{
-			world.setBlockState(new BlockPos(blockData.x + loc.getX(), blockData.y + loc.getY(), blockData.z + loc.getZ()), blockData.state, 2);
-
+			if (blockData.state.getBlock().getLightValue() <= 0)
+			{
+				world.setBlockState(new BlockPos(blockData.x + loc.getX(), blockData.y + loc.getY(), blockData.z + loc.getZ()), blockData.state, 2);
+			}
+				
 			if (blockData.state.getBlock().hasTileEntity(blockData.state))
 			{
 				for (int index = 0; index < this.tileEntities.tagCount(); index++)
@@ -208,7 +217,10 @@ public class Schematic
 				continue;
 			}
 
-			primer.setBlockState((loc.getX() + blockData.x) - worldXOff, blockData.y + loc.getY(), (blockData.z + loc.getZ()) - worldZOff, blockData.state);
+			if (blockData.state.getBlock().getLightValue() <= 0)
+			{
+				primer.setBlockState((loc.getX() + blockData.x) - worldXOff, blockData.y + loc.getY(), (blockData.z + loc.getZ()) - worldZOff, blockData.state);
+			}
 		}
 	}
 
