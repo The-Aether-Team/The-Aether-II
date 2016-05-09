@@ -100,15 +100,24 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 			
 			layer.setRooms(rooms);
 			
+			int maxHeight = 0;
+			
 			for (DungeonRoom room : layer.getRooms())
 			{
 				if (room.schematic != null)
 				{
 					room.schematic.scheduleGenerationAt(room.getMinX(), layer.minY() + 5, room.getMinZ());
 				}
+				
+				if (room.getHeight() > maxHeight)
+				{
+					maxHeight = room.getHeight();
+				}
 			}
 			
 			layer.defineTiles(tiles);
+			
+			layer.defineHeight(maxHeight + 1);
 			
 			prevLayer = layer;
 		}
@@ -404,7 +413,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 	
 	private int[][] createCorridors(DungeonInstance instance, List<DungeonRoom> rooms, DungeonLayer newLayer, DungeonLayer previousLayer, Random rand)
 	{
-		List<DungeonRoom> largeRooms = this.findLargeRooms(rooms, newLayer.desiredLargeRoomCount());
+		List<DungeonRoom> largeRooms = this.findLargeRooms(rooms, rooms.size() / 2);
 
 		List<DungeonRoom> smallRooms = (List<DungeonRoom>) ((ArrayList<DungeonRoom>) rooms).clone();
 

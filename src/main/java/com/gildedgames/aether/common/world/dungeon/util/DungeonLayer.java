@@ -16,15 +16,13 @@ public class DungeonLayer
 	
 	private Rectangle rect;
 	
-	private int height = 60;
+	private int height;
 	
 	private int minY;
 	
 	private int endX, endZ;
 	
 	private int desiredRoomCount = 73;
-
-	private int desiredLargeRoomCount = 12;
 	
 	public DungeonLayer(int diameter)
 	{
@@ -110,11 +108,6 @@ public class DungeonLayer
 	public int desiredRoomCount()
 	{
 		return this.desiredRoomCount;
-	}
-	
-	public int desiredLargeRoomCount()
-	{
-		return this.desiredLargeRoomCount;
 	}
 	
 	protected void defineEnd(int x, int z)

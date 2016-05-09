@@ -18,15 +18,19 @@ public class DungeonRoom
 
 	public int[] position; //used during the triangulation
 	
+	private int height;
+	
 	public DungeonRoom(Schematic schematic)
 	{
 		this.schematic = schematic;
-		this.rectangle = new Rectangle(0, 0, this.schematic.width() - 2, this.schematic.length() - 2);
+		this.rectangle = new Rectangle(0, 0, this.schematic.width() - 1, this.schematic.length() - 1);
 	}
 
-	public DungeonRoom(int width, int length)
+	public DungeonRoom(int width, int height, int length)
 	{
 		this.rectangle = new Rectangle(0, 0, width, length);
+		
+		this.height = height;
 	}
 
 	public int[] getPositionArray()//Used during the triangulation
@@ -85,7 +89,7 @@ public class DungeonRoom
 	
 	public int getHeight()
 	{
-		return this.schematic == null ? 11 : (int) this.schematic.height();
+		return this.schematic == null ? this.height : (int) this.schematic.height();
 	}
 
 	public int getMinX()
