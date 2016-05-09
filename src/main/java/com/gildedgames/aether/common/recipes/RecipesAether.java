@@ -54,8 +54,32 @@ public class RecipesAether
 				'X', new ItemStack(BlocksAether.holystone), 'Y', new ItemStack(ItemsAether.zanite_gemstone));
 
 		// Skyroot Door
-		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_door), "XX", "XX", "XX",
+		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_door, 3), "XX", "XX", "XX",
 				'X', new ItemStack(BlocksAether.skyroot_planks));
+
+		// Skyroot Trap Door
+		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_trapdoor, 2), "XXX", "XXX",
+				'X', new ItemStack(BlocksAether.skyroot_planks));
+
+		// Skyroot Ladder
+		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_ladder, 3), "X X", "XXX", "X X",
+				'X', new ItemStack(ItemsAether.skyroot_stick));
+
+		// Skyroot Pressure Plate
+		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_pressure_plate), "XX ",
+				'X', new ItemStack(BlocksAether.skyroot_planks));
+
+		// Skyroot Button
+		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_button), "X",
+				'X', new ItemStack(BlocksAether.skyroot_planks));
+
+		// Holystone Pressure Plate
+		registerShapedRecipe(new ItemStack(BlocksAether.holystone_pressure_plate), "XX ",
+				'X', new ItemStack(BlocksAether.holystone));
+
+		// Holystone Button
+		registerShapedRecipe(new ItemStack(BlocksAether.holystone_button), "X",
+				'X', new ItemStack(BlocksAether.holystone));
 
 		// Golden Dart Shooter
 		registerShapedRecipe(new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.GOLDEN.ordinal()), "X", "X", "Y",

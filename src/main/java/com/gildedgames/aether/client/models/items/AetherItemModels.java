@@ -257,6 +257,13 @@ public class AetherItemModels
 		registerItemModels(new ItemModelList(ItemsAether.candy_cane_sword).add(0, "weapons/candy_cane_sword"));
 
 		registerItemModels(new ItemModelList(ItemsAether.skyroot_door).add(0, "skyroot_door"));
+		registerItemModels(new ItemModelList(BlocksAether.skyroot_trapdoor).add(0, "skyroot_trapdoor"));
+		registerItemModels(new ItemModelList(BlocksAether.skyroot_ladder).add(0, "skyroot_ladder"));
+		registerItemModels(new ItemModelList(BlocksAether.skyroot_pressure_plate).add(0, "skyroot_pressure_plate"));
+		registerItemModels(new ItemModelList(BlocksAether.skyroot_button).add(0, "skyroot_button"));
+
+		registerItemModels(new ItemModelList(BlocksAether.holystone_pressure_plate).add(0, "holystone_pressure_plate"));
+		registerItemModels(new ItemModelList(BlocksAether.holystone_button).add(0, "holystone_button"));
 
 		registerItemModels(new ItemModelList(ItemsAether.gold_ring).add(0, "accessories/gold_ring"));
 		registerItemModels(new ItemModelList(ItemsAether.iron_ring).add(0, "accessories/iron_ring"));

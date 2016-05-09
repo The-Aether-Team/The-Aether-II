@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks;
 
+import com.gildedgames.aether.common.blocks.construction.*;
 import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummy;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -9,12 +10,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.AetherCreativeTabs;
-import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
-import com.gildedgames.aether.common.blocks.construction.BlockAltar;
-import com.gildedgames.aether.common.blocks.construction.BlockAmbrosiumTorch;
-import com.gildedgames.aether.common.blocks.construction.BlockQuicksoilGlass;
-import com.gildedgames.aether.common.blocks.construction.BlockSkyrootChest;
-import com.gildedgames.aether.common.blocks.construction.BlockSkyrootDoor;
 import com.gildedgames.aether.common.blocks.construction.aether_walls.BlockAerogelWall;
 import com.gildedgames.aether.common.blocks.construction.aether_walls.BlockAetherWall;
 import com.gildedgames.aether.common.blocks.construction.skyroot_fence.BlockSkyrootFence;
@@ -123,6 +118,18 @@ public class BlocksAether
 
 	public static BlockWallSkyrootSign wall_skyroot_sign;
 
+	public static BlockSkyrootTrapDoor skyroot_trapdoor;
+
+	public static BlockSkyrootPressurePlate skyroot_pressure_plate;
+
+	public static BlockSkyrootButton skyroot_button;
+
+	public static BlockHolystonePressurePlate holystone_pressure_plate;
+
+	public static BlockHolystoneButton holystone_button;
+
+	public static BlockSkyrootLadder skyroot_ladder;
+
 	public static BlockAetherWall holystone_wall, holystone_wall_mossy, holystone_brick_wall, carved_stone_wall, icestone_wall, aerogel_wall, skyroot_log_wall,
 									divine_stone_wall, sentry_stone_wall, divine_sentry_stone_wall;
 
@@ -187,7 +194,7 @@ public class BlocksAether
 
 		aerogel = registerBlock("aerogel", new BlockAerogel(), AetherCreativeTabs.tabBlocks);
 
-		zanite_block = registerBlock("zanite_block", new Block(Material.rock).setHardness(5f).setStepSound(Block.soundTypeStone), AetherCreativeTabs.tabBlocks);
+		zanite_block = registerBlock("zanite_block", new Block(Material.iron).setHardness(5f).setStepSound(Block.soundTypeMetal), AetherCreativeTabs.tabBlocks);
 
 		enchanted_gravitite = registerBlock("enchanted_gravitite", new Block(Material.rock).setHardness(5f).setStepSound(Block.soundTypeStone), AetherCreativeTabs.tabBlocks);
 
@@ -216,6 +223,18 @@ public class BlocksAether
 		skyroot_fence_gate = registerBlock("skyroot_fence_gate", new BlockSkyrootFenceGate(), AetherCreativeTabs.tabBlocks);
 
 		standing_skyroot_sign = registerBlock("standing_skyroot_sign", new BlockStandingSkyrootSign());
+
+		skyroot_trapdoor = registerBlock("skyroot_trapdoor", new BlockSkyrootTrapDoor(), AetherCreativeTabs.tabBlocks);
+
+		skyroot_button = registerBlock("skyroot_button", new BlockSkyrootButton(), AetherCreativeTabs.tabBlocks);
+
+		skyroot_pressure_plate = registerBlock("skyroot_pressure_plate", new BlockSkyrootPressurePlate(), AetherCreativeTabs.tabBlocks);
+
+		holystone_pressure_plate = registerBlock("holystone_pressure_plate", new BlockHolystonePressurePlate(), AetherCreativeTabs.tabBlocks);
+
+		holystone_button = registerBlock("holystone_button", new BlockHolystoneButton(), AetherCreativeTabs.tabBlocks);
+
+		skyroot_ladder = registerBlock("skyroot_ladder", new BlockSkyrootLadder(Material.wood), AetherCreativeTabs.tabBlocks);
 
 		wall_skyroot_sign = registerBlock("wall_skyroot_sign", new BlockWallSkyrootSign());
 
@@ -273,6 +292,7 @@ public class BlocksAether
 		holystone_brick.setHarvestLevel("pickaxe", 0);
 
 		skyroot_door.setHarvestLevel("axe", 0);
+		skyroot_trapdoor.setHarvestLevel("axe", 0);
 
 		holystone_wall.setHarvestLevel("pickaxe", 0);
 		holystone_wall_mossy.setHarvestLevel("pickaxe", 0);
