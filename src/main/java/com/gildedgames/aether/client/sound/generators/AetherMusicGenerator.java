@@ -1,22 +1,22 @@
 package com.gildedgames.aether.client.sound.generators;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.aether.common.entities.player.PlayerAetherBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class AetherMusicGenerator implements IMusicGenerator
 {
 	@Override
-	public boolean isPlayable(PlayerAether aePlayer)
+	public boolean isPlayable(PlayerAetherBase aePlayer)
 	{
-		return aePlayer.getEntity().dimension == AetherCore.getAetherDimID();
+		return aePlayer.getPlayer().dimension == AetherCore.getAetherDimID();
 	}
 
 	@Override
-	public ResourceLocation getMusicResource(PlayerAether player)
+	public ResourceLocation getMusicResource(PlayerAetherBase player)
 	{
-		World world = player.getEntity().getEntityWorld();
+		World world = player.getPlayer().getEntityWorld();
 
 		if (world.getWorldTime() > 12800L || world.getWorldTime() < 22300L)
 		{
@@ -29,8 +29,8 @@ public class AetherMusicGenerator implements IMusicGenerator
 	}
 
 	@Override
-	public int getQuietPeriod(PlayerAether player)
+	public int getQuietPeriod(PlayerAetherBase player)
 	{
-		return player.getEntity().getEntityWorld().rand.nextInt(800) + 1800;
+		return player.getPlayer().getEntityWorld().rand.nextInt(800) + 1800;
 	}
 }

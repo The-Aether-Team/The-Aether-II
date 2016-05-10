@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
 import com.gildedgames.aether.common.items.armor.ItemLeatherGloves;
+import com.gildedgames.aether.common.items.effects.ItemEffects;
+import com.gildedgames.aether.common.items.properties.ItemProperties;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -31,9 +33,6 @@ import com.gildedgames.aether.common.entities.effects.processors.FreezeBlocksEff
 import com.gildedgames.aether.common.entities.effects.processors.ModifyDamageEffect;
 import com.gildedgames.aether.common.entities.effects.processors.RegenerateHealthEffect;
 import com.gildedgames.aether.common.entities.effects.rules.OutOfCombatRule;
-import com.gildedgames.aether.common.items.ItemEffectsBase.ItemEffects;
-import com.gildedgames.aether.common.items.ItemEffectsBase.ItemEffects.ItemEffectsProvider;
-import com.gildedgames.aether.common.items.ItemPropertiesBase.ItemProperties;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.items.armor.ItemObsidianArmor;
@@ -359,7 +358,7 @@ public class ItemsAether
 		ItemProperties.register(diamond_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
 		ItemProperties.register(Items.arrow, ItemRarity.NONE, ItemEquipmentType.AMMUNITION);
 
-		class Effects implements ItemEffectsProvider
+		class Effects implements ItemEffects.ItemEffectsProvider
 		{
 
 			private List<Pair<EffectProcessor, EffectInstance>> pairs = Lists.newArrayList();
