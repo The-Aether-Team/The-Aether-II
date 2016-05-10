@@ -2,8 +2,8 @@ package com.gildedgames.aether.client;
 
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
-import com.gildedgames.aether.common.entities.player.PlayerAether;
-import com.gildedgames.aether.common.entities.player.PlayerAetherBase;
+import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.aether.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.items.armor.ItemObsidianArmor;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import net.minecraft.client.Minecraft;
@@ -30,7 +30,7 @@ public class ClientEventHandler
 				KeyBinding.setKeyBindState(Minecraft.getMinecraft().gameSettings.keyBindSprint.getKeyCode(), false);
 			}
 
-			PlayerAetherBase aePlayer = PlayerAether.getPlayer(player);
+			IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(player);
 
 			if (aePlayer != null)
 			{

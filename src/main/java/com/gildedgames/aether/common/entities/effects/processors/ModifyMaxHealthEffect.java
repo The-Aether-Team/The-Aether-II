@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.effects.processors;
 
-import com.gildedgames.aether.common.entities.effects.EffectInstance;
-import com.gildedgames.aether.common.entities.effects.EffectProcessor;
-import com.gildedgames.aether.common.entities.effects.EffectRule;
+import com.gildedgames.aether.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.entities.effects.EntityEffectProcessor;
+import com.gildedgames.aether.entities.effects.EntityEffectRule;
 import com.gildedgames.aether.common.entities.effects.processors.ModifyMaxHealthEffect.Instance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,15 +15,15 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import java.util.List;
 import java.util.UUID;
 
-public class ModifyMaxHealthEffect implements EffectProcessor<Instance>
+public class ModifyMaxHealthEffect implements EntityEffectProcessor<Instance>
 {
 
-	public static class Instance extends EffectInstance
+	public static class Instance extends EntityEffectInstance
 	{
 
 		private AttributeModifier modifier;
 
-		public Instance(float maxHealthMod, EffectRule... rules)
+		public Instance(float maxHealthMod, EntityEffectRule... rules)
 		{
 			super(rules);
 
@@ -37,7 +37,7 @@ public class ModifyMaxHealthEffect implements EffectProcessor<Instance>
 		}
 
 		@Override
-		public EffectInstance cloneInstance()
+		public EntityEffectInstance cloneInstance()
 		{
 			return new Instance(this.getAttributes().getFloat("maxHealthMod"), this.getRules());
 		}

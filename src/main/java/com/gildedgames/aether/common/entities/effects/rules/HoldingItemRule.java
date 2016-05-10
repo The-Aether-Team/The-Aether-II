@@ -1,13 +1,13 @@
 package com.gildedgames.aether.common.entities.effects.rules;
 
-import com.gildedgames.aether.common.entities.effects.EffectRule;
+import com.gildedgames.aether.entities.effects.EntityEffectRule;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-public class HoldingItemRule implements EffectRule
+public class HoldingItemRule implements EntityEffectRule
 {
 
 	private ItemStack stack;

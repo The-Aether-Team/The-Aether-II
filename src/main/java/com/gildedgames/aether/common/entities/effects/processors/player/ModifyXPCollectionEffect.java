@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.effects.processors.player;
 
-import com.gildedgames.aether.common.entities.effects.EffectInstance;
+import com.gildedgames.aether.entities.effects.EntityEffectInstance;
 import com.gildedgames.aether.common.entities.effects.EffectProcessorPlayer;
-import com.gildedgames.aether.common.entities.effects.EffectRule;
+import com.gildedgames.aether.entities.effects.EntityEffectRule;
 import com.gildedgames.aether.common.entities.effects.processors.player.ModifyXPCollectionEffect.Instance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,10 +17,10 @@ import java.util.List;
 public class ModifyXPCollectionEffect implements EffectProcessorPlayer<Instance>
 {
 
-	public static class Instance extends EffectInstance
+	public static class Instance extends EntityEffectInstance
 	{
 
-		public Instance(float percentMod, EffectRule... rules)
+		public Instance(float percentMod, EntityEffectRule... rules)
 		{
 			super(rules);
 
@@ -28,7 +28,7 @@ public class ModifyXPCollectionEffect implements EffectProcessorPlayer<Instance>
 		}
 
 		@Override
-		public EffectInstance cloneInstance()
+		public EntityEffectInstance cloneInstance()
 		{
 			return new Instance(this.getAttributes().getFloat("percentMod"), this.getRules());
 		}

@@ -1,8 +1,9 @@
 package com.gildedgames.aether.common.items.effects;
 
-import com.gildedgames.aether.common.AetherCapabilities;
-import com.gildedgames.aether.common.entities.effects.EffectInstance;
-import com.gildedgames.aether.common.entities.effects.EffectProcessor;
+import com.gildedgames.aether.capabilites.AetherCapabilities;
+import com.gildedgames.aether.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.entities.effects.EntityEffectProcessor;
+import com.gildedgames.aether.items.IItemEffectsCapability;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class ItemEffectsProvider implements ICapabilityProvider
 {
-	private ItemEffectsBase effects;
+	private IItemEffectsCapability effects;
 
 	private ItemStack stack;
 
@@ -41,7 +42,7 @@ public class ItemEffectsProvider implements ICapabilityProvider
 				{
 					if (entry.getItem() == this.stack.getItem())
 					{
-						List<Pair<EffectProcessor, EffectInstance>> emptyList = Collections.emptyList();
+						List<Pair<EntityEffectProcessor, EntityEffectInstance>> emptyList = Collections.emptyList();
 
 						this.effects = new ItemEffects(entry.getEffectsProvider() == null ? emptyList : entry.getEffectsProvider().provide());
 

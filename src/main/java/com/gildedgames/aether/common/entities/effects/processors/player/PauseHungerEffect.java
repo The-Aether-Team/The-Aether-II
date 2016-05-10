@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.effects.processors.player;
 
-import com.gildedgames.aether.common.entities.effects.EffectInstance;
+import com.gildedgames.aether.entities.effects.EntityEffectInstance;
 import com.gildedgames.aether.common.entities.effects.EffectProcessorPlayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,23 +14,23 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import java.util.List;
 
-public class PauseHungerEffect implements EffectProcessorPlayer<EffectInstance>
+public class PauseHungerEffect implements EffectProcessorPlayer<EntityEffectInstance>
 {
 
 	@Override
-	public String getUnlocalizedName(Entity source, EffectInstance instance)
+	public String getUnlocalizedName(Entity source, EntityEffectInstance instance)
 	{
 		return "ability.pauseHunger.name";
 	}
 
 	@Override
-	public String[] getUnlocalizedDesc(Entity source, EffectInstance instance)
+	public String[] getUnlocalizedDesc(Entity source, EntityEffectInstance instance)
 	{
 		return new String[] { "ability.pauseHunger.desc" };
 	}
 
 	@Override
-	public void apply(Entity source, EffectInstance instance, List<EffectInstance> all)
+	public void apply(Entity source, EntityEffectInstance instance, List<EntityEffectInstance> all)
 	{
 		if (!(source instanceof EntityPlayer))
 		{
@@ -44,7 +44,7 @@ public class PauseHungerEffect implements EffectProcessorPlayer<EffectInstance>
 	}
 
 	@Override
-	public void tick(Entity source, List<EffectInstance> all)
+	public void tick(Entity source, List<EntityEffectInstance> all)
 	{
 		if (!(source instanceof EntityPlayer))
 		{
@@ -57,7 +57,7 @@ public class PauseHungerEffect implements EffectProcessorPlayer<EffectInstance>
 
 		if (!world.isRemote)
 		{
-			for (EffectInstance instance : all)
+			for (EntityEffectInstance instance : all)
 			{
 				if (player.getFoodStats().getFoodLevel() > instance.getAttributes().getInteger("foodLevel") || player.getFoodStats().getSaturationLevel() > instance.getAttributes().getFloat("foodSaturation"))
 				{
@@ -72,35 +72,35 @@ public class PauseHungerEffect implements EffectProcessorPlayer<EffectInstance>
 	}
 
 	@Override
-	public void cancel(Entity source, EffectInstance instance, List<EffectInstance> all)
+	public void cancel(Entity source, EntityEffectInstance instance, List<EntityEffectInstance> all)
 	{
 		instance.getAttributes().setInteger("foodLevel", 0);
 		instance.getAttributes().setFloat("foodSaturation", 0);
 	}
 
 	@Override
-	public void onInteract(PlayerInteractEvent event, EntityPlayer source, List<EffectInstance> all)
+	public void onInteract(PlayerInteractEvent event, EntityPlayer source, List<EntityEffectInstance> all)
 	{
 	}
 
 	@Override
-	public void onKill(LivingDropsEvent event, Entity source, List<EffectInstance> all)
+	public void onKill(LivingDropsEvent event, Entity source, List<EntityEffectInstance> all)
 	{
 	}
 
 	@Override
-	public void onAttack(LivingHurtEvent event, Entity source, List<EffectInstance> all)
+	public void onAttack(LivingHurtEvent event, Entity source, List<EntityEffectInstance> all)
 	{
 	}
 
 	@Override
-	public String[] getFormatParameters(Entity source, EffectInstance instance)
+	public String[] getFormatParameters(Entity source, EntityEffectInstance instance)
 	{
 		return new String[] {};
 	}
 
 	@Override
-	public void onPickupXP(PlayerPickupXpEvent event, EntityPlayer source, List<EffectInstance> all)
+	public void onPickupXP(PlayerPickupXpEvent event, EntityPlayer source, List<EntityEffectInstance> all)
 	{
 	}
 

@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.renderer;
 
 import com.gildedgames.aether.client.models.entities.player.LayerPlayerGloves;
 import com.gildedgames.aether.client.renderer.entities.living.RenderPlayerHelper;
-import com.gildedgames.aether.common.entities.player.PlayerAether;
+import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import net.minecraft.client.Minecraft;

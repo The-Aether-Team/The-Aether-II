@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.effects.processors;
 
-import com.gildedgames.aether.common.entities.effects.EffectInstance;
-import com.gildedgames.aether.common.entities.effects.EffectProcessor;
-import com.gildedgames.aether.common.entities.effects.EffectRule;
+import com.gildedgames.aether.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.entities.effects.EntityEffectProcessor;
+import com.gildedgames.aether.entities.effects.EntityEffectRule;
 import com.gildedgames.aether.common.entities.effects.processors.ModifyDamageEffect.Instance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,23 +16,23 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * @author Brandon Pearce
  */
-public class ModifyDamageEffect implements EffectProcessor<Instance>
+public class ModifyDamageEffect implements EntityEffectProcessor<Instance>
 {
 
-	public static class Instance extends EffectInstance
+	public static class Instance extends EntityEffectInstance
 	{
 
-		public Instance(float damage, EffectRule... rules)
+		public Instance(float damage, EntityEffectRule... rules)
 		{
 			this(damage, damage, false, rules);
 		}
 
-		public Instance(int min, int max, EffectRule... rules)
+		public Instance(int min, int max, EntityEffectRule... rules)
 		{
 			this(min, max, false, rules);
 		}
 
-		public Instance(float min, float max, boolean floatRanges, EffectRule... rules)
+		public Instance(float min, float max, boolean floatRanges, EntityEffectRule... rules)
 		{
 			super(rules);
 
@@ -43,7 +43,7 @@ public class ModifyDamageEffect implements EffectProcessor<Instance>
 		}
 
 		@Override
-		public EffectInstance cloneInstance()
+		public EntityEffectInstance cloneInstance()
 		{
 			return new Instance(this.getAttributes().getFloat("min"), this.getAttributes().getFloat("max"), this.getAttributes().getBoolean("floatRanges"), this.getRules());
 		}

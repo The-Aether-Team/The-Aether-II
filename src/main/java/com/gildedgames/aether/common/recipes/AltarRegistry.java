@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.recipes;
 
-import com.gildedgames.aether.common.recipes.altar.IAltarRecipe;
+import com.gildedgames.aether.registry.altar.IAltarRecipe;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;

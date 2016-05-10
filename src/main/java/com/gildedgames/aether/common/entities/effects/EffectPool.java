@@ -1,5 +1,8 @@
 package com.gildedgames.aether.common.entities.effects;
 
+import com.gildedgames.aether.entities.effects.EntityEffectProcessor;
+import com.gildedgames.aether.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.entities.effects.EntityEffectRule;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -9,20 +12,20 @@ import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 
 import java.util.List;
 
-public class EffectPool<I extends EffectInstance>
+public class EffectPool<I extends EntityEffectInstance>
 {
 
-	private EffectProcessor<I> processor;
+	private EntityEffectProcessor<I> processor;
 
 	private List<I> instances;
 
-	public EffectPool(EffectProcessor<I> processor, List<I> instances)
+	public EffectPool(EntityEffectProcessor<I> processor, List<I> instances)
 	{
 		this.processor = processor;
 		this.instances = instances;
 	}
 
-	public EffectProcessor<I> getProcessor()
+	public EntityEffectProcessor<I> getProcessor()
 	{
 		return this.processor;
 	}
@@ -40,7 +43,7 @@ public class EffectPool<I extends EffectInstance>
 		{
 			boolean isMet = true;
 
-			for (EffectRule rule : instance.getRules())
+			for (EntityEffectRule rule : instance.getRules())
 			{
 				if (!rule.isMet(entity))
 				{
@@ -66,7 +69,7 @@ public class EffectPool<I extends EffectInstance>
 		{
 			boolean isMet = true;
 
-			for (EffectRule rule : instance.getRules())
+			for (EntityEffectRule rule : instance.getRules())
 			{
 				if (!rule.isMet(entity))
 				{
@@ -97,7 +100,7 @@ public class EffectPool<I extends EffectInstance>
 		{
 			boolean isMet = true;
 
-			for (EffectRule rule : instance.getRules())
+			for (EntityEffectRule rule : instance.getRules())
 			{
 				if (!rule.isMet(entity))
 				{
@@ -130,7 +133,7 @@ public class EffectPool<I extends EffectInstance>
 		{
 			boolean isMet = true;
 
-			for (EffectRule rule : instance.getRules())
+			for (EntityEffectRule rule : instance.getRules())
 			{
 				if (!rule.isMet(entity))
 				{
@@ -158,7 +161,7 @@ public class EffectPool<I extends EffectInstance>
 		{
 			boolean isMet = true;
 
-			for (EffectRule rule : instance.getRules())
+			for (EntityEffectRule rule : instance.getRules())
 			{
 				if (!rule.isMet(entity))
 				{

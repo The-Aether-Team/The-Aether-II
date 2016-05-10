@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.network;
 import com.gildedgames.aether.client.gui.container.GuiEquipment;
 import com.gildedgames.aether.common.containers.ContainerEquipment;
 import com.gildedgames.aether.common.containers.ContainerSkyrootWorkbench;
-import com.gildedgames.aether.common.entities.player.PlayerAether;
+import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiCrafting;
 import net.minecraft.entity.player.EntityPlayer;

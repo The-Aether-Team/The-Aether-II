@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.entities.effects;
+package com.gildedgames.aether.entities.effects;
 
 import net.minecraft.entity.Entity;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -6,7 +6,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import java.util.List;
 
-public interface EffectProcessor<I extends EffectInstance>
+public interface EntityEffectProcessor<I extends EntityEffectInstance>
 {
 
 	String getUnlocalizedName(Entity source, I instance);

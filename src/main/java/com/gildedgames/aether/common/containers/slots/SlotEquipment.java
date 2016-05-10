@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.containers.slots;
 
-import com.gildedgames.aether.common.AetherCapabilities;
+import com.gildedgames.aether.capabilites.AetherCapabilities;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.items.ItemEquipmentType;
-import com.gildedgames.aether.common.items.properties.ItemPropertiesBase;
+import com.gildedgames.aether.items.properties.ItemEquipmentType;
+import com.gildedgames.aether.items.IItemPropertiesCapability;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -61,7 +61,7 @@ public class SlotEquipment extends Slot
 
 		if (stack.hasCapability(AetherCapabilities.ITEM_PROPERTIES, null))
 		{
-			ItemPropertiesBase props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
+			IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
 
 			if (props.isEquippable())
 			{

@@ -1,12 +1,14 @@
 package com.gildedgames.aether.common.entities.effects;
 
+import com.gildedgames.aether.entities.effects.EntityEffectProcessor;
+import com.gildedgames.aether.entities.effects.EntityEffectInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 
 import java.util.List;
 
-public interface EffectProcessorPlayer<I extends EffectInstance> extends EffectProcessor<I>
+public interface EffectProcessorPlayer<I extends EntityEffectInstance> extends EntityEffectProcessor<I>
 {
 
 	/**

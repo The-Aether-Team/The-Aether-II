@@ -1,6 +1,6 @@
-package com.gildedgames.aether.common.entities.player;
+package com.gildedgames.aether.player;
 
-import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
+import com.gildedgames.aether.player.inventory.IInventoryEquipment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -9,7 +9,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-public interface PlayerAetherBase
+public interface IPlayerAetherCapability
 {
 	void onUpdate(LivingUpdateEvent event);
 
@@ -23,9 +23,15 @@ public interface PlayerAetherBase
 
 	void onJump(LivingJumpEvent event);
 
-	InventoryEquipment getEquipmentInventory();
+	IInventoryEquipment getEquipmentInventory();
 
-	float getMiningSpeedMultiplier();
-
+	/**
+	 * @return The {@link EntityPlayer} this capability is attached to.
+	 */
 	EntityPlayer getPlayer();
+
+	/**
+	 * @return This player's mining speed modifier.
+	 */
+	float getMiningSpeedMultiplier();
 }

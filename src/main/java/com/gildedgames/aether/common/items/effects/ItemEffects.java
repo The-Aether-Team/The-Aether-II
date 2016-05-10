@@ -1,7 +1,8 @@
 package com.gildedgames.aether.common.items.effects;
 
-import com.gildedgames.aether.common.entities.effects.EffectInstance;
-import com.gildedgames.aether.common.entities.effects.EffectProcessor;
+import com.gildedgames.aether.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.entities.effects.EntityEffectProcessor;
+import com.gildedgames.aether.items.IItemEffectsCapability;
 import com.google.common.collect.Lists;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTBase;
@@ -11,11 +12,11 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 
-public class ItemEffects implements ItemEffectsBase
+public class ItemEffects implements IItemEffectsCapability
 {
 	public interface ItemEffectsProvider
 	{
-		List<Pair<EffectProcessor, EffectInstance>> provide();
+		List<Pair<EntityEffectProcessor, EntityEffectInstance>> provide();
 	}
 
 	public static class RegistrationEntry
@@ -43,15 +44,15 @@ public class ItemEffects implements ItemEffectsBase
 
 	private static List<RegistrationEntry> registeredEntries = Lists.newArrayList();
 
-	private List<Pair<EffectProcessor, EffectInstance>> effectPairs = Lists.newArrayList();
+	private List<Pair<EntityEffectProcessor, EntityEffectInstance>> effectPairs = Lists.newArrayList();
 
-	public ItemEffects(List<Pair<EffectProcessor, EffectInstance>> effectPairs)
+	public ItemEffects(List<Pair<EntityEffectProcessor, EntityEffectInstance>> effectPairs)
 	{
 		this.effectPairs = effectPairs;
 	}
 
 	@Override
-	public List<Pair<EffectProcessor, EffectInstance>> getEffectPairs()
+	public List<Pair<EntityEffectProcessor, EntityEffectInstance>> getEffectPairs()
 	{
 		return this.effectPairs;
 	}
@@ -75,15 +76,15 @@ public class ItemEffects implements ItemEffectsBase
 		ItemEffects.register(item, null);
 	}
 
-	public static class Storage implements Capability.IStorage<ItemEffectsBase>
+	public static class Storage implements Capability.IStorage<IItemEffectsCapability>
 	{
 		@Override
-		public NBTBase writeNBT(Capability<ItemEffectsBase> capability, ItemEffectsBase instance, EnumFacing side)
+		public NBTBase writeNBT(Capability<IItemEffectsCapability> capability, IItemEffectsCapability instance, EnumFacing side)
 		{
 			return null;
 		}
 
 		@Override
-		public void readNBT(Capability<ItemEffectsBase> capability, ItemEffectsBase instance, EnumFacing side, NBTBase nbt) { }
+		public void readNBT(Capability<IItemEffectsCapability> capability, IItemEffectsCapability instance, EnumFacing side, NBTBase nbt) { }
 	}
 }

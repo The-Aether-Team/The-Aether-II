@@ -1,11 +1,10 @@
-package com.gildedgames.aether.common.entities.effects;
+package com.gildedgames.aether.entities.effects;
 
 import net.minecraft.entity.Entity;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-public interface EffectRule
+public interface EntityEffectRule
 {
-
 	/**
 	 * @param source The entity that is affected by this ability.
 	 * @return Whether or not the attached ability should be active.
@@ -15,5 +14,4 @@ public interface EffectRule
 	boolean blockLivingAttackAbility(Entity source, LivingHurtEvent event);
 
 	String[] getUnlocalizedDesc();
-
 }

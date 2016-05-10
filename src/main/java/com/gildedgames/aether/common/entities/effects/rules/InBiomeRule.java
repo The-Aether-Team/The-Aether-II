@@ -1,12 +1,12 @@
 package com.gildedgames.aether.common.entities.effects.rules;
 
-import com.gildedgames.aether.common.entities.effects.EffectRule;
+import com.gildedgames.aether.entities.effects.EntityEffectRule;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-public class InBiomeRule implements EffectRule
+public class InBiomeRule implements EntityEffectRule
 {
 
 	private BiomeGenBase biome;

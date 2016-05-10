@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.entities.effects.rules;
 
-import com.gildedgames.aether.common.entities.effects.EffectRule;
+import com.gildedgames.aether.entities.effects.EntityEffectRule;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-public class InDirectMoonlightRule implements EffectRule
+public class InDirectMoonlightRule implements EntityEffectRule
 {
 
 	@Override

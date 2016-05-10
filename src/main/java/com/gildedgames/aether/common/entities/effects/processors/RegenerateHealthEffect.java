@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.effects.processors;
 
 import com.gildedgames.aether.common.entities.effects.AbstractEffectProcessor;
-import com.gildedgames.aether.common.entities.effects.EffectInstance;
-import com.gildedgames.aether.common.entities.effects.EffectRule;
+import com.gildedgames.aether.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.entities.effects.EntityEffectRule;
 import com.gildedgames.aether.common.entities.effects.processors.RegenerateHealthEffect.Instance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,10 +12,10 @@ import java.util.List;
 public class RegenerateHealthEffect extends AbstractEffectProcessor<Instance>
 {
 
-	public static class Instance extends EffectInstance
+	public static class Instance extends EntityEffectInstance
 	{
 
-		public Instance(int ticksBetweenHealing, EffectRule... rules)
+		public Instance(int ticksBetweenHealing, EntityEffectRule... rules)
 		{
 			super(rules);
 
@@ -23,7 +23,7 @@ public class RegenerateHealthEffect extends AbstractEffectProcessor<Instance>
 		}
 
 		@Override
-		public EffectInstance cloneInstance()
+		public EntityEffectInstance cloneInstance()
 		{
 			return new Instance(this.getAttributes().getInteger("ticksBetweenHealing"), this.getRules());
 		}

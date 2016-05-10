@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.items.properties;
 
-import com.gildedgames.aether.common.AetherCapabilities;
+import com.gildedgames.aether.capabilites.AetherCapabilities;
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.items.IItemPropertiesCapability;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -8,7 +10,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 public class ItemPropertiesProvider implements ICapabilityProvider
 {
-	private ItemPropertiesBase properties;
+	private IItemPropertiesCapability properties;
 
 	private ItemStack stack;
 
@@ -23,23 +25,15 @@ public class ItemPropertiesProvider implements ICapabilityProvider
 		return capability == AetherCapabilities.ITEM_PROPERTIES && this.stack != null;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
 	{
 		if (this.hasCapability(capability, facing))
 		{
 			if (this.properties == null)
 			{
-				for (ItemProperties.RegistrationEntry entry : ItemProperties.getRegistrationEntries())
-				{
-					if (entry.getItem() == this.stack.getItem())
-					{
-						this.properties = new ItemProperties(entry.getRarity(), entry.getEquipmentType());
-
-						break;
-					}
-				}
+				this.properties = new ItemProperties(this.stack, AetherCore.INSTANCE.getEquipmentRegistry().getProperties(this.stack.getItem()));
 			}
 
 			return (T) this.properties;

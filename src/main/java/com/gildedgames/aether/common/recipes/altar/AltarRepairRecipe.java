@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.recipes.altar;
 import com.gildedgames.aether.common.AetherMaterials;
 import com.gildedgames.aether.common.items.tools.ItemAetherTool;
 import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
+import com.gildedgames.aether.registry.altar.IAltarRecipe;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;

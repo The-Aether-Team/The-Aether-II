@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.effects.processors.player;
 
-import com.gildedgames.aether.common.entities.effects.EffectInstance;
+import com.gildedgames.aether.entities.effects.EntityEffectInstance;
 import com.gildedgames.aether.common.entities.effects.EffectProcessorPlayer;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
 import net.minecraft.entity.Entity;
@@ -16,28 +16,28 @@ import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 
 import java.util.List;
 
-public class DaggerfrostEffect implements EffectProcessorPlayer<EffectInstance>
+public class DaggerfrostEffect implements EffectProcessorPlayer<EntityEffectInstance>
 {
 
 	@Override
-	public String getUnlocalizedName(Entity source, EffectInstance instance)
+	public String getUnlocalizedName(Entity source, EntityEffectInstance instance)
 	{
 		return "ability.daggerfrost.name";
 	}
 
 	@Override
-	public String[] getUnlocalizedDesc(Entity source, EffectInstance instance)
+	public String[] getUnlocalizedDesc(Entity source, EntityEffectInstance instance)
 	{
 		return new String[] { "ability.daggerfrost.desc" };
 	}
 
 	@Override
-	public void apply(Entity source, EffectInstance instance, List<EffectInstance> all)
+	public void apply(Entity source, EntityEffectInstance instance, List<EntityEffectInstance> all)
 	{
 	}
 
 	@Override
-	public void onInteract(PlayerInteractEvent event, EntityPlayer source, List<EffectInstance> instances)
+	public void onInteract(PlayerInteractEvent event, EntityPlayer source, List<EntityEffectInstance> instances)
 	{
 		World world = source.worldObj;
 		ItemStack currentStack = source.getCurrentEquippedItem();
@@ -62,32 +62,32 @@ public class DaggerfrostEffect implements EffectProcessorPlayer<EffectInstance>
 	}
 
 	@Override
-	public void tick(Entity source, List<EffectInstance> instances)
+	public void tick(Entity source, List<EntityEffectInstance> instances)
 	{
 	}
 
 	@Override
-	public void cancel(Entity source, EffectInstance instance, List<EffectInstance> all)
+	public void cancel(Entity source, EntityEffectInstance instance, List<EntityEffectInstance> all)
 	{
 	}
 
 	@Override
-	public void onKill(LivingDropsEvent event, Entity source, List<EffectInstance> instances)
+	public void onKill(LivingDropsEvent event, Entity source, List<EntityEffectInstance> instances)
 	{
 	}
 
 	@Override
-	public void onAttack(LivingHurtEvent event, Entity source, List<EffectInstance> instances)
+	public void onAttack(LivingHurtEvent event, Entity source, List<EntityEffectInstance> instances)
 	{
 	}
 
 	@Override
-	public void onPickupXP(PlayerPickupXpEvent event, EntityPlayer source, List<EffectInstance> instances)
+	public void onPickupXP(PlayerPickupXpEvent event, EntityPlayer source, List<EntityEffectInstance> instances)
 	{
 	}
 
 	@Override
-	public String[] getFormatParameters(Entity source, EffectInstance instance)
+	public String[] getFormatParameters(Entity source, EntityEffectInstance instance)
 	{
 		return new String[] {};
 	}

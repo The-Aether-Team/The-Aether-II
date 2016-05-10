@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
-import com.gildedgames.aether.common.entities.player.PlayerAetherBase;
+import com.gildedgames.aether.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 
 public class RenderPlayerHelper
 {
-	public static void renderFirstPersonHand(PlayerAetherBase player, float partialTicks)
+	public static void renderFirstPersonHand(IPlayerAetherCapability player, float partialTicks)
 	{
 		ItemStack gloveStack = player.getEquipmentInventory().getStackInSlot(2);
 

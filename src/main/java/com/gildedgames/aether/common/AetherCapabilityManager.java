@@ -1,24 +1,23 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.common.entities.effects.EffectInstance;
-import com.gildedgames.aether.common.entities.effects.EffectProcessor;
-import com.gildedgames.aether.common.entities.effects.EffectRule;
+import com.gildedgames.aether.capabilites.AetherCapabilities;
 import com.gildedgames.aether.common.items.effects.ItemEffects;
 import com.gildedgames.aether.common.items.effects.ItemEffectsProvider;
 import com.gildedgames.aether.common.items.properties.ItemProperties;
 import com.gildedgames.aether.common.items.properties.ItemPropertiesProvider;
-import com.gildedgames.aether.common.entities.player.PlayerAetherBase;
-import com.gildedgames.aether.common.entities.player.PlayerAether;
-import com.gildedgames.aether.common.entities.player.PlayerAetherProvider;
-import com.gildedgames.aether.common.items.effects.ItemEffectsBase;
-import com.gildedgames.aether.common.items.properties.ItemPropertiesBase;
-import com.gildedgames.aether.common.items.ItemRarity;
+import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.aether.common.player.PlayerAetherProvider;
+import com.gildedgames.aether.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.entities.effects.EntityEffectProcessor;
+import com.gildedgames.aether.entities.effects.EntityEffectRule;
+import com.gildedgames.aether.items.properties.ItemRarity;
+import com.gildedgames.aether.items.IItemEffectsCapability;
+import com.gildedgames.aether.items.IItemPropertiesCapability;
+import com.gildedgames.aether.player.IPlayerAetherCapability;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -29,23 +28,13 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AetherCapabilities
+public class AetherCapabilityManager
 {
-
-	@CapabilityInject(ItemEffectsBase.class)
-	public static final Capability<ItemEffectsBase> ITEM_EFFECTS = null;
-
-	@CapabilityInject(ItemPropertiesBase.class)
-	public static final Capability<ItemPropertiesBase> ITEM_PROPERTIES = null;
-
-	@CapabilityInject(PlayerAetherBase.class)
-	public static final Capability<PlayerAetherBase> PLAYER_DATA = null;
-
 	public void init()
 	{
-		CapabilityManager.INSTANCE.register(ItemEffectsBase.class, new ItemEffects.Storage(), ItemEffects.class);
-		CapabilityManager.INSTANCE.register(ItemPropertiesBase.class, new ItemProperties.Storage(), ItemProperties.class);
-		CapabilityManager.INSTANCE.register(PlayerAetherBase.class, new PlayerAether.Storage(), PlayerAether.class);
+		CapabilityManager.INSTANCE.register(IItemEffectsCapability.class, new ItemEffects.Storage(), ItemEffects.class);
+		CapabilityManager.INSTANCE.register(IItemPropertiesCapability.class, new ItemProperties.Storage(), ItemProperties.class);
+		CapabilityManager.INSTANCE.register(IPlayerAetherCapability.class, new PlayerAether.Storage(), PlayerAether.class);
 	}
 
 	@SubscribeEvent
@@ -55,7 +44,7 @@ public class AetherCapabilities
 		{
 			if (event.itemStack.hasCapability(AetherCapabilities.ITEM_PROPERTIES, null))
 			{
-				ItemPropertiesBase props = event.itemStack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
+				IItemPropertiesCapability props = event.itemStack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
 
 				if (props != null && props.getRarity() != ItemRarity.NONE)
 				{
@@ -65,7 +54,7 @@ public class AetherCapabilities
 
 			if (event.itemStack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 			{
-				ItemEffectsBase effects = event.itemStack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
+				IItemEffectsCapability effects = event.itemStack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
 				if (effects != null)
 				{
@@ -75,10 +64,10 @@ public class AetherCapabilities
 					}
 					else
 					{
-						for (Pair<EffectProcessor, EffectInstance> effect : effects.getEffectPairs())
+						for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : effects.getEffectPairs())
 						{
-							EffectProcessor processor = effect.getLeft();
-							EffectInstance instance = effect.getRight();
+							EntityEffectProcessor processor = effect.getLeft();
+							EntityEffectInstance instance = effect.getRight();
 
 							List<String> localizedDesc = new ArrayList<>();
 
@@ -89,7 +78,7 @@ public class AetherCapabilities
 
 							event.toolTip.addAll(localizedDesc);
 
-							for (EffectRule rule : instance.getRules())
+							for (EntityEffectRule rule : instance.getRules())
 							{
 								for (String line : rule.getUnlocalizedDesc())
 								{
@@ -103,9 +92,9 @@ public class AetherCapabilities
 
 			if (event.itemStack.hasCapability(AetherCapabilities.ITEM_PROPERTIES, null))
 			{
-				ItemPropertiesBase props = event.itemStack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
+				IItemPropertiesCapability props = event.itemStack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
 
-				if (props != null)
+				if (props.isEquippable())
 				{
 					if (props.getRarity() != ItemRarity.NONE)
 					{
@@ -125,8 +114,8 @@ public class AetherCapabilities
 
 		if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_PROPERTIES, null))
 		{
-			ItemPropertiesBase props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
-			PlayerAetherBase aePlayer = PlayerAether.getPlayer(event.entityPlayer);
+			IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
+			IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.entityPlayer);
 
 			if (props != null && props.isEquippable())
 			{

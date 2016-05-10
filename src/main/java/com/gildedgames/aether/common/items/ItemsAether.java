@@ -6,6 +6,9 @@ import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
 import com.gildedgames.aether.common.items.armor.ItemLeatherGloves;
 import com.gildedgames.aether.common.items.effects.ItemEffects;
 import com.gildedgames.aether.common.items.properties.ItemProperties;
+import com.gildedgames.aether.items.properties.ItemEquipmentType;
+import com.gildedgames.aether.items.properties.ItemRarity;
+import com.gildedgames.aether.registry.equipment.IEquipmentRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -25,8 +28,8 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.AetherMaterials;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.effects.EffectInstance;
-import com.gildedgames.aether.common.entities.effects.EffectProcessor;
+import com.gildedgames.aether.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.entities.effects.EntityEffectProcessor;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import com.gildedgames.aether.common.entities.effects.processors.DoubleDropEffect;
 import com.gildedgames.aether.common.entities.effects.processors.FreezeBlocksEffect;
@@ -330,64 +333,66 @@ public class ItemsAether
 		chain_gloves = registerItem("chain_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.CHAIN));
 		diamond_gloves = registerItem("diamond_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.DIAMOND));
 
-		ItemProperties.register(iron_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
-		ItemProperties.register(gold_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
-		ItemProperties.register(iron_pendant, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
-		ItemProperties.register(gold_pendant, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
-		ItemProperties.register(zanite_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
-		ItemProperties.register(zanite_pendant, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
-		ItemProperties.register(iron_bubble, ItemRarity.COMMON, ItemEquipmentType.RELIC);
-		ItemProperties.register(regeneration_stone, ItemRarity.COMMON, ItemEquipmentType.RELIC);
-		ItemProperties.register(ice_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
-		ItemProperties.register(ice_pendant, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
-		ItemProperties.register(daggerfrost_locket, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
-		ItemProperties.register(candy_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
-		ItemProperties.register(bone_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
-		ItemProperties.register(skyroot_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
-		ItemProperties.register(bolt, ItemRarity.NONE, ItemEquipmentType.AMMUNITION);
-		ItemProperties.register(zanite_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
-		ItemProperties.register(gravitite_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
-		ItemProperties.register(valkyrie_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
-		ItemProperties.register(neptune_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
-		ItemProperties.register(phoenix_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
-		ItemProperties.register(obsidian_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
-		ItemProperties.register(leather_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
-		ItemProperties.register(iron_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
-		ItemProperties.register(gold_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
-		ItemProperties.register(chain_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
-		ItemProperties.register(diamond_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
-		ItemProperties.register(Items.arrow, ItemRarity.NONE, ItemEquipmentType.AMMUNITION);
+		IEquipmentRegistry equipmentRegistry = AetherCore.INSTANCE.getEquipmentRegistry();
+
+		equipmentRegistry.register(ItemsAether.iron_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.gold_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.iron_pendant, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
+		equipmentRegistry.register(ItemsAether.gold_pendant, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
+		equipmentRegistry.register(ItemsAether.zanite_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.zanite_pendant, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
+		equipmentRegistry.register(ItemsAether.iron_bubble, ItemRarity.COMMON, ItemEquipmentType.RELIC);
+		equipmentRegistry.register(ItemsAether.regeneration_stone, ItemRarity.COMMON, ItemEquipmentType.RELIC);
+		equipmentRegistry.register(ItemsAether.ice_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.ice_pendant, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
+		equipmentRegistry.register(ItemsAether.daggerfrost_locket, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
+		equipmentRegistry.register(ItemsAether.candy_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.bone_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.skyroot_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.bolt, ItemRarity.NONE, ItemEquipmentType.AMMUNITION);
+		equipmentRegistry.register(ItemsAether.zanite_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.gravitite_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.valkyrie_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.neptune_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.phoenix_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.obsidian_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.leather_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.iron_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.gold_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.chain_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.diamond_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(Items.arrow, ItemRarity.NONE, ItemEquipmentType.AMMUNITION);
 
 		class Effects implements ItemEffects.ItemEffectsProvider
 		{
 
-			private List<Pair<EffectProcessor, EffectInstance>> pairs = Lists.newArrayList();
+			private List<Pair<EntityEffectProcessor, EntityEffectInstance>> pairs = Lists.newArrayList();
 
 			public Effects()
 			{
 
 			}
 
-			public <I extends EffectInstance> Effects add(EffectProcessor<I> processor, I instance)
+			public <I extends EntityEffectInstance> Effects add(EntityEffectProcessor<I> processor, I instance)
 			{
-				Pair<EffectProcessor, EffectInstance> effectPair = Pair.of((EffectProcessor) processor, (EffectInstance) instance);
+				Pair<EntityEffectProcessor, EntityEffectInstance> effectPair = Pair.of((EntityEffectProcessor) processor, (EntityEffectInstance) instance);
 
 				this.pairs.add(effectPair);
 
 				return this;
 			}
 
-			public Effects add(EffectProcessor<EffectInstance> processor)
+			public Effects add(EntityEffectProcessor<EntityEffectInstance> processor)
 			{
-				return this.add(processor, new EffectInstance());
+				return this.add(processor, new EntityEffectInstance());
 			}
 
 			@Override
-			public List<Pair<EffectProcessor, EffectInstance>> provide()
+			public List<Pair<EntityEffectProcessor, EntityEffectInstance>> provide()
 			{
-				List<Pair<EffectProcessor, EffectInstance>> clone = Lists.newArrayList();
+				List<Pair<EntityEffectProcessor, EntityEffectInstance>> clone = Lists.newArrayList();
 
-				for (Pair<EffectProcessor, EffectInstance> pair : this.pairs)
+				for (Pair<EntityEffectProcessor, EntityEffectInstance> pair : this.pairs)
 				{
 					clone.add(Pair.of(pair.getLeft(), pair.getRight().cloneInstance()));
 				}
@@ -407,7 +412,7 @@ public class ItemsAether
 		ItemEffects.register(regeneration_stone, new Effects().add(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new OutOfCombatRule(160))));
 		ItemEffects.register(ice_ring, new Effects().add(EntityEffects.FREEZE_BLOCKS, new FreezeBlocksEffect.Instance(3)));
 		ItemEffects.register(ice_pendant, new Effects().add(EntityEffects.FREEZE_BLOCKS, new FreezeBlocksEffect.Instance(3)));
-		ItemEffects.register(daggerfrost_locket, new Effects().add(EntityEffects.DAGGERFROST, new EffectInstance()));
+		ItemEffects.register(daggerfrost_locket, new Effects().add(EntityEffects.DAGGERFROST, new EntityEffectInstance()));
 		ItemEffects.register(candy_ring, new Effects().add(EntityEffects.PAUSE_HUNGER));
 		ItemEffects.register(bone_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(2.0F)));
 		ItemEffects.register(skyroot_ring, new Effects().add(EntityEffects.DOUBLE_DROPS, new DoubleDropEffect.Instance(1.5F)));

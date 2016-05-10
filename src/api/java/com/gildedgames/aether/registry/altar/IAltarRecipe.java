@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.recipes.altar;
+package com.gildedgames.aether.registry.altar;
 
 import net.minecraft.item.ItemStack;
 

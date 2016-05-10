@@ -10,6 +10,8 @@ import com.gildedgames.aether.common.entities.effects.processors.RegenerateHealt
 import com.gildedgames.aether.common.entities.effects.processors.player.DaggerfrostEffect;
 import com.gildedgames.aether.common.entities.effects.processors.player.ModifyXPCollectionEffect;
 import com.gildedgames.aether.common.entities.effects.processors.player.PauseHungerEffect;
+import com.gildedgames.aether.entities.effects.EntityEffectProcessor;
+import com.gildedgames.aether.entities.effects.EntityEffectInstance;
 import com.gildedgames.util.modules.entityhook.api.IEntityHookFactory;
 import com.gildedgames.util.modules.entityhook.impl.hooks.EntityHook;
 import com.gildedgames.util.modules.entityhook.impl.providers.LivingHookProvider;
@@ -26,25 +28,25 @@ import java.util.List;
 public class EntityEffects extends EntityHook<Entity>
 {
 
-	public static final EffectProcessorPlayer<EffectInstance> DAGGERFROST = new DaggerfrostEffect();
+	public static final EffectProcessorPlayer<EntityEffectInstance> DAGGERFROST = new DaggerfrostEffect();
 
 	public static final EffectProcessorPlayer<ModifyXPCollectionEffect.Instance> MODIFY_XP_COLLECTION = new ModifyXPCollectionEffect();
 
-	public static final EffectProcessorPlayer<EffectInstance> PAUSE_HUNGER = new PauseHungerEffect();
+	public static final EffectProcessorPlayer<EntityEffectInstance> PAUSE_HUNGER = new PauseHungerEffect();
 
-	public static final EffectProcessor<EffectInstance> BREATHE_UNDERWATER = new BreatheUnderwaterEffect();
+	public static final EntityEffectProcessor<EntityEffectInstance> BREATHE_UNDERWATER = new BreatheUnderwaterEffect();
 
-	public static final EffectProcessor<DoubleDropEffect.Instance> DOUBLE_DROPS = new DoubleDropEffect();
+	public static final EntityEffectProcessor<DoubleDropEffect.Instance> DOUBLE_DROPS = new DoubleDropEffect();
 
-	public static final EffectProcessor<FreezeBlocksEffect.Instance> FREEZE_BLOCKS = new FreezeBlocksEffect();
+	public static final EntityEffectProcessor<FreezeBlocksEffect.Instance> FREEZE_BLOCKS = new FreezeBlocksEffect();
 
-	public static final EffectProcessor<ModifyDamageEffect.Instance> MODIFY_DAMAGE = new ModifyDamageEffect();
+	public static final EntityEffectProcessor<ModifyDamageEffect.Instance> MODIFY_DAMAGE = new ModifyDamageEffect();
 
-	public static final EffectProcessor<ModifyMaxHealthEffect.Instance> MODIFY_MAX_HEALTH = new ModifyMaxHealthEffect();
+	public static final EntityEffectProcessor<ModifyMaxHealthEffect.Instance> MODIFY_MAX_HEALTH = new ModifyMaxHealthEffect();
 
-	public static final EffectProcessor<ModifySpeedEffect.Instance> MODIFY_SPEED = new ModifySpeedEffect();
+	public static final EntityEffectProcessor<ModifySpeedEffect.Instance> MODIFY_SPEED = new ModifySpeedEffect();
 
-	public static final EffectProcessor<RegenerateHealthEffect.Instance> REGENERATE_HEALTH = new RegenerateHealthEffect();
+	public static final EntityEffectProcessor<RegenerateHealthEffect.Instance> REGENERATE_HEALTH = new RegenerateHealthEffect();
 
 	public static final LivingHookProvider<EntityEffects> PROVIDER = new LivingHookProvider<>("aether:effects", new Factory());
 
@@ -68,7 +70,7 @@ public class EntityEffects extends EntityHook<Entity>
 	}
 
 	@SuppressWarnings("unchecked")
-	private <I extends EffectInstance> EffectPool<I> getPool(EffectProcessor<I> processor)
+	private <I extends EntityEffectInstance> EffectPool<I> getPool(EntityEffectProcessor<I> processor)
 	{
 		for (EffectPool<?> pool : this.effects)
 		{
@@ -85,7 +87,7 @@ public class EntityEffects extends EntityHook<Entity>
 		return pool;
 	}
 
-	public <I extends EffectInstance> void put(EffectProcessor<I> processor, I instance)
+	public <I extends EntityEffectInstance> void put(EntityEffectProcessor<I> processor, I instance)
 	{
 		if (processor == null || instance == null)
 		{
@@ -112,7 +114,7 @@ public class EntityEffects extends EntityHook<Entity>
 	{
 	}
 
-	public <I extends EffectInstance> void removeEntry(EffectProcessor<I> processor)
+	public <I extends EntityEffectInstance> void removeEntry(EntityEffectProcessor<I> processor)
 	{
 		if (processor == null)
 		{
@@ -129,7 +131,7 @@ public class EntityEffects extends EntityHook<Entity>
 		this.effects.remove(pool);
 	}
 
-	public <I extends EffectInstance> void removeInstance(EffectProcessor<I> processor, I instance)
+	public <I extends EntityEffectInstance> void removeInstance(EntityEffectProcessor<I> processor, I instance)
 	{
 		if (processor == null)
 		{

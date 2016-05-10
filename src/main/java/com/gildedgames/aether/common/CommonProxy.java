@@ -1,25 +1,31 @@
 package com.gildedgames.aether.common;
 
+import com.gildedgames.aether.AetherAPI;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.EntitiesAether;
-import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import com.gildedgames.aether.common.entities.effects.EntityEffectsEventHooks;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.properties.EquipmentRegistry;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.player.PlayerAetherEventHooks;
+import com.gildedgames.aether.common.player.PlayerAetherEvents;
 import com.gildedgames.aether.common.recipes.RecipesAether;
 import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
 import com.gildedgames.aether.common.world.WorldProviderAether;
 import com.gildedgames.aether.common.world.chunk.PlacementFlagFactory;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
+import com.gildedgames.aether.items.properties.ItemEquipmentType;
+import com.gildedgames.aether.items.properties.ItemRarity;
+import com.gildedgames.aether.registry.altar.IAltarRecipeRegistry;
 import com.gildedgames.util.io.Instantiator;
 import com.gildedgames.util.modules.chunk.ChunkModule;
-import com.gildedgames.util.modules.entityhook.EntityHookModule;
 import com.gildedgames.util.modules.tab.TabModule;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
@@ -36,6 +42,10 @@ import java.util.Random;
 public class CommonProxy
 {
 	private File storageDir;
+
+	private final RecipesAether recipeManager = new RecipesAether();
+
+	private final EquipmentRegistry equipmentRegistry = new EquipmentRegistry();
 
 	public void construct(FMLConstructionEvent event)
 	{
@@ -67,7 +77,7 @@ public class CommonProxy
 		TileEntitiesAether.preInit();
 		EntitiesAether.preInit();
 
-		RecipesAether.preInit();
+		this.recipeManager.preInit();
 
 		TabModule.api().getInventoryGroup().registerServerTab(new TabEquipment());
 
@@ -76,11 +86,13 @@ public class CommonProxy
 
 	public void init(FMLInitializationEvent event)
 	{
+		AetherAPI.equipmentRegistry().register(Items.apple, ItemRarity.EPIC, ItemEquipmentType.ARTIFACT);
+
 		MinecraftForge.EVENT_BUS.register(new CommonEvents());
-		MinecraftForge.EVENT_BUS.register(new PlayerAetherEventHooks());
+		MinecraftForge.EVENT_BUS.register(new PlayerAetherEvents());
 		MinecraftForge.EVENT_BUS.register(new EntityEffectsEventHooks());
 
-		AetherCapabilities capabilities = new AetherCapabilities();
+		AetherCapabilityManager capabilities = new AetherCapabilityManager();
 		capabilities.init();
 
 		MinecraftForge.EVENT_BUS.register(capabilities);
@@ -112,6 +124,16 @@ public class CommonProxy
 	public File getAetherStorageDir()
 	{
 		return this.storageDir;
+	}
+
+	public RecipesAether getRecipeManager()
+	{
+		return this.recipeManager;
+	}
+
+	public EquipmentRegistry getEquipmentRegistry()
+	{
+		return this.equipmentRegistry;
 	}
 
 	public void setExtendedReachDistance(EntityPlayer entity, float distance)

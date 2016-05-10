@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.sound.generators;
 
-import com.gildedgames.aether.common.entities.player.PlayerAetherBase;
+import com.gildedgames.aether.player.IPlayerAetherCapability;
 import net.minecraft.util.ResourceLocation;
 
 public interface IMusicGenerator
@@ -10,16 +10,16 @@ public interface IMusicGenerator
 	 * @param aePlayer The player
 	 * @return True if this music applies to the environment
 	 */
-	boolean isPlayable(PlayerAetherBase aePlayer);
+	boolean isPlayable(IPlayerAetherCapability aePlayer);
 
 	/**
 	 * @param player The player
 	 * @return The {@link ResourceLocation} based off the environment
 	 */
-	ResourceLocation getMusicResource(PlayerAetherBase player);
+	ResourceLocation getMusicResource(IPlayerAetherCapability player);
 
 	/**
 	 * @return How long the music manager should wait before trying another song.
 	 */
-	int getQuietPeriod(PlayerAetherBase player);
+	int getQuietPeriod(IPlayerAetherCapability player);
 }

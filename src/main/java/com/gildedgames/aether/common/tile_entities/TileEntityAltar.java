@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.tile_entities;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.recipes.RecipesAether;
-import com.gildedgames.aether.common.recipes.altar.IAltarRecipe;
+import com.gildedgames.aether.registry.altar.IAltarRecipe;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -74,7 +74,7 @@ public class TileEntityAltar extends TileEntity implements ITickable
 	{
 		if (this.getStackOnAltar() != null && this.getAmbrosiumCount() > 0)
 		{
-			IAltarRecipe recipe = RecipesAether.ALTAR_REGISTRY.getMatchingRecipe(this.getStackOnAltar());
+			IAltarRecipe recipe = AetherCore.PROXY.getRecipeManager().getAltarRegistry().getMatchingRecipe(this.getStackOnAltar());
 
 			if (recipe != null)
 			{

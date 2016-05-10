@@ -1,15 +1,14 @@
 package com.gildedgames.aether.common.containers.inventory;
 
-import com.gildedgames.aether.common.AetherCapabilities;
-import com.gildedgames.aether.common.entities.effects.EffectInstance;
-import com.gildedgames.aether.common.entities.effects.EffectProcessor;
+import com.gildedgames.aether.capabilites.AetherCapabilities;
+import com.gildedgames.aether.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.entities.effects.EntityEffectProcessor;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
-import com.gildedgames.aether.common.entities.player.PlayerAetherBase;
-import com.gildedgames.aether.common.items.effects.ItemEffectsBase;
-import com.gildedgames.aether.common.items.ItemEquipmentType;
-import com.gildedgames.util.core.nbt.NBT;
+import com.gildedgames.aether.items.properties.ItemEquipmentType;
+import com.gildedgames.aether.items.IItemEffectsCapability;
+import com.gildedgames.aether.player.IPlayerAetherCapability;
+import com.gildedgames.aether.player.inventory.IInventoryEquipment;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,7 +17,7 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import org.apache.commons.lang3.tuple.Pair;
 
-public class InventoryEquipment implements IInventory, NBT
+public class InventoryEquipment implements IInventoryEquipment
 {
 	private static final int INVENTORY_SIZE = 8;
 
@@ -42,11 +41,11 @@ public class InventoryEquipment implements IInventory, NBT
 			ItemEquipmentType.CHARM*/
 			};
 
-	private final PlayerAetherBase aePlayer;
+	private final IPlayerAetherCapability aePlayer;
 
 	private ItemStack[] inventory = new ItemStack[InventoryEquipment.INVENTORY_SIZE];
 
-	public InventoryEquipment(PlayerAetherBase aePlayer)
+	public InventoryEquipment(IPlayerAetherCapability aePlayer)
 	{
 		this.aePlayer = aePlayer;
 	}
@@ -122,6 +121,7 @@ public class InventoryEquipment implements IInventory, NBT
 		this.markDirty();
 	}
 
+	@Override
 	public int getNextEmptySlotForType(ItemEquipmentType type)
 	{
 		for (int i = 0; i < this.inventory.length; i++)
@@ -215,14 +215,14 @@ public class InventoryEquipment implements IInventory, NBT
 			if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 			{
 				EntityEffects effects = EntityEffects.get(this.aePlayer.getPlayer());
-				ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
+				IItemEffectsCapability itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
 				if (itemEffects != null)
 				{
-					for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
+					for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
 					{
-						EffectProcessor processor = effect.getLeft();
-						EffectInstance instance = effect.getRight();
+						EntityEffectProcessor processor = effect.getLeft();
+						EntityEffectInstance instance = effect.getRight();
 
 						effects.removeInstance(processor, instance);
 					}
@@ -244,14 +244,14 @@ public class InventoryEquipment implements IInventory, NBT
 				if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 				{
 					EntityEffects effects = EntityEffects.get(this.aePlayer.getPlayer());
-					ItemEffectsBase itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
+					IItemEffectsCapability itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
 					if (itemEffects != null)
 					{
-						for (Pair<EffectProcessor, EffectInstance> effect : itemEffects.getEffectPairs())
+						for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
 						{
-							EffectProcessor processor = effect.getLeft();
-							EffectInstance instance = effect.getRight();
+							EntityEffectProcessor processor = effect.getLeft();
+							EntityEffectInstance instance = effect.getRight();
 
 							effects.removeInstance(processor, instance);
 						}

@@ -1,5 +1,8 @@
 package com.gildedgames.aether.common;
 
+import com.gildedgames.aether.IAetherServices;
+import com.gildedgames.aether.registry.equipment.IEquipmentRegistry;
+import com.gildedgames.aether.registry.altar.IAltarRecipeRegistry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
@@ -25,7 +28,7 @@ import com.gildedgames.util.modules.instances.InstanceHandler;
 import com.gildedgames.util.modules.instances.InstanceModule;
 
 @Mod(name = AetherCore.MOD_NAME, modid = AetherCore.MOD_ID, version = AetherCore.MOD_VERSION, certificateFingerprint = AetherCore.MOD_FINGERPRINT)
-public class AetherCore
+public class AetherCore implements IAetherServices
 {
 	protected static final String MOD_FINGERPRINT = "b9a9be44fb51751dd1aec1dbb881b6de1a086abc";
 
@@ -123,5 +126,17 @@ public class AetherCore
 	public static TeleporterAether getTeleporter()
 	{
 		return teleporter;
+	}
+
+	@Override
+	public IAltarRecipeRegistry getAltarRecipeRegistry()
+	{
+		return AetherCore.PROXY.getRecipeManager();
+	}
+
+	@Override
+	public IEquipmentRegistry getEquipmentRegistry()
+	{
+		return AetherCore.PROXY.getEquipmentRegistry();
 	}
 }

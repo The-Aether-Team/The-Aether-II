@@ -1,7 +1,7 @@
 package com.gildedgames.aether.client.sound;
 
 import com.gildedgames.aether.client.sound.generators.IMusicGenerator;
-import com.gildedgames.aether.common.entities.player.PlayerAetherBase;
+import com.gildedgames.aether.player.IPlayerAetherCapability;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -25,7 +25,7 @@ public class AetherMusicManager
 		this.generators.add(generator);
 	}
 
-	public void update(PlayerAetherBase aePlayer)
+	public void update(IPlayerAetherCapability aePlayer)
 	{
 		if (this.canPlayMusic() && !this.isPlayingMusic())
 		{
@@ -52,7 +52,7 @@ public class AetherMusicManager
 		}
 	}
 
-	private IMusicGenerator getNextPlayableSong(PlayerAetherBase aePlayer)
+	private IMusicGenerator getNextPlayableSong(IPlayerAetherCapability aePlayer)
 	{
 		for (IMusicGenerator generator : this.generators)
 		{

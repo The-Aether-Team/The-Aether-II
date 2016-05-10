@@ -1,12 +1,14 @@
 package com.gildedgames.aether.common.entities.effects;
 
+import com.gildedgames.aether.entities.effects.EntityEffectProcessor;
+import com.gildedgames.aether.entities.effects.EntityEffectInstance;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import java.util.List;
 
-public abstract class AbstractEffectProcessor<I extends EffectInstance> implements EffectProcessor<I>
+public abstract class AbstractEffectProcessor<I extends EntityEffectInstance> implements EntityEffectProcessor<I>
 {
 
 	private String unlocalizedName;
@@ -32,7 +34,7 @@ public abstract class AbstractEffectProcessor<I extends EffectInstance> implemen
 	}
 
 	@Override
-	public String[] getFormatParameters(Entity source, EffectInstance instance)
+	public String[] getFormatParameters(Entity source, EntityEffectInstance instance)
 	{
 		return new String[] {};
 	}

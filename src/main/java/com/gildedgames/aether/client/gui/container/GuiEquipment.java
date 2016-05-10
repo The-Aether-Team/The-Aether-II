@@ -2,8 +2,8 @@ package com.gildedgames.aether.client.gui.container;
 
 import com.gildedgames.aether.common.containers.ContainerEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
-import com.gildedgames.aether.common.entities.player.PlayerAetherBase;
-import com.gildedgames.aether.common.items.ItemEquipmentType;
+import com.gildedgames.aether.player.IPlayerAetherCapability;
+import com.gildedgames.aether.items.properties.ItemEquipmentType;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
@@ -31,9 +31,9 @@ public class GuiEquipment extends GuiContainer
 
 //	private static final ResourceLocation TEXTURE_COINBAR = new ResourceLocation("aether", "textures/gui/coinbar.png");
 
-	private final PlayerAetherBase aePlayer;
+	private final IPlayerAetherCapability aePlayer;
 
-	public GuiEquipment(PlayerAetherBase aePlayer)
+	public GuiEquipment(IPlayerAetherCapability aePlayer)
 	{
 		super(new ContainerEquipment(aePlayer));
 

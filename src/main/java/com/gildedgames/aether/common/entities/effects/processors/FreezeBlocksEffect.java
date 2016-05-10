@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.effects.processors;
 
-import com.gildedgames.aether.common.entities.effects.EffectInstance;
-import com.gildedgames.aether.common.entities.effects.EffectProcessor;
-import com.gildedgames.aether.common.entities.effects.EffectRule;
+import com.gildedgames.aether.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.entities.effects.EntityEffectProcessor;
+import com.gildedgames.aether.entities.effects.EntityEffectRule;
 import com.gildedgames.aether.common.entities.effects.processors.FreezeBlocksEffect.Instance;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -22,13 +22,13 @@ import java.util.List;
  * Unfreezes frozen locations once the player has moved away from them.
  * @author Brandon Pearce
  */
-public class FreezeBlocksEffect implements EffectProcessor<Instance>
+public class FreezeBlocksEffect implements EntityEffectProcessor<Instance>
 {
 
-	public static class Instance extends EffectInstance
+	public static class Instance extends EntityEffectInstance
 	{
 
-		public Instance(int radius, EffectRule... rules)
+		public Instance(int radius, EntityEffectRule... rules)
 		{
 			super(rules);
 
@@ -36,7 +36,7 @@ public class FreezeBlocksEffect implements EffectProcessor<Instance>
 		}
 
 		@Override
-		public EffectInstance cloneInstance()
+		public EntityEffectInstance cloneInstance()
 		{
 			return new Instance(this.getAttributes().getInteger("radius"), this.getRules());
 		}

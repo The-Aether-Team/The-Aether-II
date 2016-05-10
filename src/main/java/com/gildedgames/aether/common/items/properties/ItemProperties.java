@@ -1,101 +1,73 @@
 package com.gildedgames.aether.common.items.properties;
 
-import com.gildedgames.aether.common.items.ItemEquipmentType;
-import com.gildedgames.aether.common.items.ItemRarity;
+import com.gildedgames.aether.items.properties.ItemEquipmentType;
+import com.gildedgames.aether.items.properties.ItemRarity;
+import com.gildedgames.aether.items.IItemPropertiesCapability;
+import com.gildedgames.aether.registry.equipment.IEquipmentProperties;
 import com.google.common.collect.Lists;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.capabilities.Capability;
 
 import java.util.List;
 
-public class ItemProperties implements ItemPropertiesBase
+public class ItemProperties implements IItemPropertiesCapability
 {
-	public static class RegistrationEntry
+	private final ItemStack stack;
+
+	private IEquipmentProperties properties;
+
+	public ItemProperties(ItemStack stack, IEquipmentProperties properties)
 	{
-		private Item item;
-
-		private ItemRarity rarity;
-
-		private ItemEquipmentType equipmentType;
-
-		public RegistrationEntry(Item item, ItemRarity rarity, ItemEquipmentType equipmentType)
-		{
-			this.item = item;
-			this.rarity = rarity;
-			this.equipmentType = equipmentType;
-		}
-
-		public Item getItem()
-		{
-			return this.item;
-		}
-
-		public ItemRarity getRarity()
-		{
-			return this.rarity;
-		}
-
-		public ItemEquipmentType getEquipmentType()
-		{
-			return this.equipmentType;
-		}
-
-	}
-
-	private static List<RegistrationEntry> registeredEntries = Lists.newArrayList();
-
-	private ItemEquipmentType equipmentType;
-
-	private ItemRarity rarity;
-
-	public ItemProperties(ItemRarity rarity, ItemEquipmentType equipmentType)
-	{
-		this.rarity = rarity;
-		this.equipmentType = equipmentType;
-	}
-
-	public static List<RegistrationEntry> getRegistrationEntries()
-	{
-		return ItemProperties.registeredEntries;
-	}
-
-	public static void register(Item item, ItemRarity rarity)
-	{
-		ItemProperties.register(item, rarity, null);
-	}
-
-	public static void register(Item item, ItemRarity rarity, ItemEquipmentType type)
-	{
-		ItemProperties.registeredEntries.add(new RegistrationEntry(item, rarity, type));
+		this.stack = stack;
+		this.properties = properties;
 	}
 
 	@Override
-	public void setEquipmentType(ItemEquipmentType type)
+	public IEquipmentProperties getProperties()
 	{
-		this.equipmentType = type;
-	}
-
-	@Override
-	public ItemEquipmentType getEquipmentType()
-	{
-		return this.equipmentType;
+		return this.properties;
 	}
 
 	@Override
 	public ItemRarity getRarity()
 	{
-		return this.rarity;
+		return this.properties == null ? ItemRarity.NONE : this.properties.getRarity();
 	}
 
 	@Override
-	public void setRarity(ItemRarity rarity)
+	public ItemEquipmentType getEquipmentType()
 	{
-		this.rarity = rarity;
+		return this.properties == null ? null : this.properties.getEquipmentType();
+	}
+
+	@Override
+	public ItemStack getStack()
+	{
+		return this.stack;
 	}
 
 	@Override
 	public boolean isEquippable()
 	{
-		return this.equipmentType != null;
+		return this.getEquipmentType() != null;
+	}
+
+	public static class Storage implements Capability.IStorage<IItemPropertiesCapability>
+	{
+		@Override
+		public NBTBase writeNBT(Capability<IItemPropertiesCapability> capability, IItemPropertiesCapability instance, EnumFacing side)
+		{
+			return null;
+		}
+
+		@Override
+		public void readNBT(Capability<IItemPropertiesCapability> capability, IItemPropertiesCapability instance, EnumFacing side, NBTBase nbt)
+		{
+
+		}
 	}
 }
 

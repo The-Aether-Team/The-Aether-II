@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.items;
+package com.gildedgames.aether.items.properties;
 
 public enum ItemRarity
 {

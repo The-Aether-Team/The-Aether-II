@@ -6,18 +6,19 @@ import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import com.gildedgames.aether.common.recipes.altar.AltarEnchantRecipe;
 import com.gildedgames.aether.common.recipes.altar.AltarRepairRecipe;
-import com.gildedgames.aether.common.recipes.altar.IAltarRecipe;
+import com.gildedgames.aether.registry.altar.IAltarRecipe;
 import com.gildedgames.aether.common.recipes.dye.RecipeLeatherGlovesDyes;
+import com.gildedgames.aether.registry.altar.IAltarRecipeRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class RecipesAether
+public class RecipesAether implements IAltarRecipeRegistry
 {
-	public static final AltarRegistry ALTAR_REGISTRY = new AltarRegistry();
+	private final AltarRegistry altarRegistry = new AltarRegistry();
 
-	public static void preInit()
+	public void preInit()
 	{
 		CraftingManager.getInstance().addRecipe(new RecipeLeatherGlovesDyes());
 
@@ -31,7 +32,7 @@ public class RecipesAether
 		GameRegistry.registerFuelHandler(new AetherFuelHandler());
 	}
 
-	private static void registerCraftingRecipes()
+	private void registerCraftingRecipes()
 	{
 		// Skyroot Planks
 		registerShapelessRecipe(new ItemStack(BlocksAether.skyroot_planks, 4),
@@ -179,7 +180,7 @@ public class RecipesAether
 				'Y', new ItemStack(ItemsAether.zanite_gemstone));
 	}
 
-	private static void registerToolRecipes()
+	private void registerToolRecipes()
 	{
 		ItemStack skyrootStick = new ItemStack(ItemsAether.skyroot_stick);
 
@@ -241,7 +242,7 @@ public class RecipesAether
 				'X', gravitite, 'Y', skyrootStick);
 	}
 
-	private static void registerArmorRecipes()
+	private void registerArmorRecipes()
 	{
 		ItemStack zanite = new ItemStack(ItemsAether.zanite_gemstone);
 		ItemStack gravitite = new ItemStack(BlocksAether.enchanted_gravitite);
@@ -273,7 +274,7 @@ public class RecipesAether
 				'X', gravitite);
 	}
 
-    private static void registerAccessoryRecipes() {
+    private void registerAccessoryRecipes() {
         // Iron Ring
         registerShapedRecipe(new ItemStack(ItemsAether.iron_ring), " X ", "X X", " X ",
                 'X', new ItemStack(Items.iron_ingot));
@@ -297,7 +298,7 @@ public class RecipesAether
                 'Y', new ItemStack(ItemsAether.zanite_gemstone));
     }
 
-    private static void registerConsumableRecipes()
+    private void registerConsumableRecipes()
     {
         // Blue Gummy Swet
         registerShapedRecipe(new ItemStack(ItemsAether.gummy_swet), "XXX", "XYX", "XXX",
@@ -356,7 +357,7 @@ public class RecipesAether
 //                'Y', new ItemStack(ItemsAether.icestone));
     }
 
-	private static void registerAltarRecipes()
+	private void registerAltarRecipes()
 	{
         // Quicksoil Glass
         registerAltarRecipe(new AltarEnchantRecipe(1, new ItemStack(BlocksAether.quicksoil),
@@ -400,8 +401,20 @@ public class RecipesAether
 		GameRegistry.addShapedRecipe(output, params);
 	}
 
-	private static void registerAltarRecipe(IAltarRecipe recipe)
+	@Override
+	public void registerAltarEnchantment(ItemStack input, ItemStack output, int cost)
 	{
-		RecipesAether.ALTAR_REGISTRY.addRecipe(recipe);
+		this.altarRegistry.addRecipe(new AltarEnchantRecipe(cost, input, output));
+	}
+
+	@Override
+	public void registerAltarRecipe(IAltarRecipe recipe)
+	{
+		this.altarRegistry.addRecipe(recipe);
+	}
+
+	public AltarRegistry getAltarRegistry()
+	{
+		return this.altarRegistry;
 	}
 }

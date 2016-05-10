@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.effects.processors;
 
 import com.gildedgames.aether.common.entities.effects.AbstractEffectProcessor;
-import com.gildedgames.aether.common.entities.effects.EffectInstance;
+import com.gildedgames.aether.entities.effects.EntityEffectInstance;
 import net.minecraft.entity.Entity;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  * them to breathe under water.
  * @author Brandon Pearce
  */
-public class BreatheUnderwaterEffect extends AbstractEffectProcessor<EffectInstance>
+public class BreatheUnderwaterEffect extends AbstractEffectProcessor<EntityEffectInstance>
 {
 
 	public BreatheUnderwaterEffect()
@@ -20,7 +20,7 @@ public class BreatheUnderwaterEffect extends AbstractEffectProcessor<EffectInsta
 	}
 
 	@Override
-	public void tick(Entity source, List<EffectInstance> all)
+	public void tick(Entity source, List<EntityEffectInstance> all)
 	{
 		source.setAir(300);
 	}

@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.effects.processors;
 
-import com.gildedgames.aether.common.entities.effects.EffectInstance;
-import com.gildedgames.aether.common.entities.effects.EffectProcessor;
-import com.gildedgames.aether.common.entities.effects.EffectRule;
+import com.gildedgames.aether.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.entities.effects.EntityEffectProcessor;
+import com.gildedgames.aether.entities.effects.EntityEffectRule;
 import com.gildedgames.aether.common.entities.effects.processors.DoubleDropEffect.Instance;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import net.minecraft.entity.Entity;
@@ -20,13 +20,13 @@ import java.util.List;
 /**
  * @author Brandon Pearce
  */
-public class DoubleDropEffect implements EffectProcessor<Instance>
+public class DoubleDropEffect implements EntityEffectProcessor<Instance>
 {
 
-	public static class Instance extends EffectInstance
+	public static class Instance extends EntityEffectInstance
 	{
 
-		public Instance(float percentChance, EffectRule... rules)
+		public Instance(float percentChance, EntityEffectRule... rules)
 		{
 			super(rules);
 
@@ -34,7 +34,7 @@ public class DoubleDropEffect implements EffectProcessor<Instance>
 		}
 
 		@Override
-		public EffectInstance cloneInstance()
+		public EntityEffectInstance cloneInstance()
 		{
 			return new Instance(this.getAttributes().getFloat("percentChance"), this.getRules());
 		}

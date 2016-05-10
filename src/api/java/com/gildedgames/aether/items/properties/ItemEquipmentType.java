@@ -1,8 +1,7 @@
-package com.gildedgames.aether.common.items;
+package com.gildedgames.aether.items.properties;
 
 public enum ItemEquipmentType
 {
-
 	RING("gui.slot.ring"),
 	NECKWEAR("gui.slot.neckwear"),
 	COMPANION("gui.slot.companion"),
@@ -24,5 +23,4 @@ public enum ItemEquipmentType
 	{
 		return this.unlocalizedName;
 	}
-
 }

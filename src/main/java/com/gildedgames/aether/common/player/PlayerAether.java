@@ -1,6 +1,6 @@
-package com.gildedgames.aether.common.entities.player;
+package com.gildedgames.aether.common.player;
 
-import com.gildedgames.aether.common.AetherCapabilities;
+import com.gildedgames.aether.capabilites.AetherCapabilities;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -9,6 +9,8 @@ import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.items.tools.ItemValkyrieTool;
 import com.gildedgames.aether.common.util.PlayerUtil;
+import com.gildedgames.aether.player.IPlayerAetherCapability;
+import com.gildedgames.aether.player.inventory.IInventoryEquipment;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -26,7 +28,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-public class PlayerAether implements PlayerAetherBase
+public class PlayerAether implements IPlayerAetherCapability
 {
 	private final EntityPlayer player;
 
@@ -38,7 +40,7 @@ public class PlayerAether implements PlayerAetherBase
 		this.equipmentInventory = new InventoryEquipment(this);
 	}
 
-	public static PlayerAetherBase getPlayer(Entity player)
+	public static IPlayerAetherCapability getPlayer(Entity player)
 	{
 		return player.getCapability(AetherCapabilities.PLAYER_DATA, null);
 	}
@@ -118,7 +120,7 @@ public class PlayerAether implements PlayerAetherBase
 	}
 
 	@Override
-	public InventoryEquipment getEquipmentInventory()
+	public IInventoryEquipment getEquipmentInventory()
 	{
 		return this.equipmentInventory;
 	}
@@ -143,10 +145,10 @@ public class PlayerAether implements PlayerAetherBase
 		return this.player;
 	}
 
-	public static class Storage implements IStorage<PlayerAetherBase>
+	public static class Storage implements IStorage<IPlayerAetherCapability>
 	{
 		@Override
-		public NBTBase writeNBT(Capability<PlayerAetherBase> capability, PlayerAetherBase instance, EnumFacing side)
+		public NBTBase writeNBT(Capability<IPlayerAetherCapability> capability, IPlayerAetherCapability instance, EnumFacing side)
 		{
 			NBTTagCompound compound = new NBTTagCompound();
 
@@ -159,7 +161,7 @@ public class PlayerAether implements PlayerAetherBase
 		}
 
 		@Override
-		public void readNBT(Capability<PlayerAetherBase> capability, PlayerAetherBase instance, EnumFacing side, NBTBase nbt)
+		public void readNBT(Capability<IPlayerAetherCapability> capability, IPlayerAetherCapability instance, EnumFacing side, NBTBase nbt)
 		{
 			NBTTagCompound compound = (NBTTagCompound) nbt;
 
