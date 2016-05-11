@@ -1,6 +1,6 @@
-package com.gildedgames.aether.player;
+package com.gildedgames.aether.api.player;
 
-import com.gildedgames.aether.player.inventory.IInventoryEquipment;
+import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -11,6 +11,8 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public interface IPlayerAetherCapability
 {
+	// [--- Event handlers for the entity this capability is attached to. ---]
+
 	void onUpdate(LivingUpdateEvent event);
 
 	void onDeath(LivingDeathEvent event);
@@ -22,6 +24,8 @@ public interface IPlayerAetherCapability
 	void onFall(LivingFallEvent event);
 
 	void onJump(LivingJumpEvent event);
+
+	// [--- End of event handlers. ---]
 
 	IInventoryEquipment getEquipmentInventory();
 

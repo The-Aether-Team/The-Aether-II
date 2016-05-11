@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.AetherAPI;
+import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.EntitiesAether;
@@ -15,17 +15,14 @@ import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
 import com.gildedgames.aether.common.world.WorldProviderAether;
 import com.gildedgames.aether.common.world.chunk.PlacementFlagFactory;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
-import com.gildedgames.aether.items.properties.ItemEquipmentType;
-import com.gildedgames.aether.items.properties.ItemRarity;
-import com.gildedgames.aether.registry.altar.IAltarRecipeRegistry;
+import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
+import com.gildedgames.aether.api.items.properties.ItemRarity;
 import com.gildedgames.util.io.Instantiator;
 import com.gildedgames.util.modules.chunk.ChunkModule;
 import com.gildedgames.util.modules.tab.TabModule;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;

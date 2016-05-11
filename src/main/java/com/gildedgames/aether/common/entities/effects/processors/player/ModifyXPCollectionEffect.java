@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.effects.processors.player;
 
-import com.gildedgames.aether.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
 import com.gildedgames.aether.common.entities.effects.EffectProcessorPlayer;
-import com.gildedgames.aether.entities.effects.EntityEffectRule;
+import com.gildedgames.aether.api.entities.effects.EntityEffectRule;
 import com.gildedgames.aether.common.entities.effects.processors.player.ModifyXPCollectionEffect.Instance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

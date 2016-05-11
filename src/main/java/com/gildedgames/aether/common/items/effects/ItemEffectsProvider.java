@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.items.effects;
 
-import com.gildedgames.aether.capabilites.AetherCapabilities;
-import com.gildedgames.aether.entities.effects.EntityEffectInstance;
-import com.gildedgames.aether.entities.effects.EntityEffectProcessor;
-import com.gildedgames.aether.items.IItemEffectsCapability;
+import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
+import com.gildedgames.aether.api.items.IItemEffectsCapability;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;

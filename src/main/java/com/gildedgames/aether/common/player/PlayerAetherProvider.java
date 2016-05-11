@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.player;
 
-import com.gildedgames.aether.capabilites.AetherCapabilities;
-import com.gildedgames.aether.player.IPlayerAetherCapability;
+import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;

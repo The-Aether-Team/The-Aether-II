@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.recipes.altar;
 
-import com.gildedgames.aether.registry.altar.IAltarRecipe;
+import com.gildedgames.aether.api.registry.altar.IAltarRecipe;
 import net.minecraft.item.ItemStack;
 
 public class AltarEnchantRecipe implements IAltarRecipe
@@ -20,7 +20,7 @@ public class AltarEnchantRecipe implements IAltarRecipe
 	}
 
 	@Override
-	public boolean matchesItem(ItemStack stack)
+	public boolean matchesRecipe(ItemStack stack)
 	{
 		return this.input.isItemEqual(stack);
 	}

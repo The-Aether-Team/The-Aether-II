@@ -1,8 +1,8 @@
-package com.gildedgames.aether.capabilites;
+package com.gildedgames.aether.api.capabilites;
 
-import com.gildedgames.aether.items.IItemEffectsCapability;
-import com.gildedgames.aether.items.IItemPropertiesCapability;
-import com.gildedgames.aether.player.IPlayerAetherCapability;
+import com.gildedgames.aether.api.items.IItemEffectsCapability;
+import com.gildedgames.aether.api.items.IItemPropertiesCapability;
+import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 

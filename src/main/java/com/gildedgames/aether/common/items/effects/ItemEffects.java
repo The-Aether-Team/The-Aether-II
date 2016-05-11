@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.items.effects;
 
-import com.gildedgames.aether.entities.effects.EntityEffectInstance;
-import com.gildedgames.aether.entities.effects.EntityEffectProcessor;
-import com.gildedgames.aether.items.IItemEffectsCapability;
+import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
+import com.gildedgames.aether.api.items.IItemEffectsCapability;
 import com.google.common.collect.Lists;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTBase;

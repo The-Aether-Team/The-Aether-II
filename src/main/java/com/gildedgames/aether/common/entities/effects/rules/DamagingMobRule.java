@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.effects.rules;
 
-import com.gildedgames.aether.entities.effects.EntityEffectRule;
+import com.gildedgames.aether.api.entities.effects.EntityEffectRule;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;

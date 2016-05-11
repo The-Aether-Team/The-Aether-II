@@ -1,15 +1,15 @@
 package com.gildedgames.aether.common.containers;
 
-import com.gildedgames.aether.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
-import com.gildedgames.aether.entities.effects.EntityEffectInstance;
-import com.gildedgames.aether.entities.effects.EntityEffectProcessor;
+import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
-import com.gildedgames.aether.items.properties.ItemEquipmentType;
-import com.gildedgames.aether.items.IItemEffectsCapability;
-import com.gildedgames.aether.items.IItemPropertiesCapability;
-import com.gildedgames.aether.player.IPlayerAetherCapability;
-import com.gildedgames.aether.player.inventory.IInventoryEquipment;
+import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
+import com.gildedgames.aether.api.items.IItemEffectsCapability;
+import com.gildedgames.aether.api.items.IItemPropertiesCapability;
+import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerPlayer;

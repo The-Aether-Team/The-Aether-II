@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.recipes.altar;
 import com.gildedgames.aether.common.AetherMaterials;
 import com.gildedgames.aether.common.items.tools.ItemAetherTool;
 import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
-import com.gildedgames.aether.registry.altar.IAltarRecipe;
+import com.gildedgames.aether.api.registry.altar.IAltarRecipe;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -12,7 +12,7 @@ import net.minecraft.item.ItemTool;
 public class AltarRepairRecipe implements IAltarRecipe
 {
 	@Override
-	public boolean matchesItem(ItemStack stack)
+	public boolean matchesRecipe(ItemStack stack)
 	{
 		return (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemTool || stack.getItem() instanceof ItemArmor) && stack.isItemDamaged();
 	}

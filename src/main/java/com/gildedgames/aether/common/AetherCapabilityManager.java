@@ -1,19 +1,19 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.common.items.effects.ItemEffects;
 import com.gildedgames.aether.common.items.effects.ItemEffectsProvider;
 import com.gildedgames.aether.common.items.properties.ItemProperties;
 import com.gildedgames.aether.common.items.properties.ItemPropertiesProvider;
 import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.aether.common.player.PlayerAetherProvider;
-import com.gildedgames.aether.entities.effects.EntityEffectInstance;
-import com.gildedgames.aether.entities.effects.EntityEffectProcessor;
-import com.gildedgames.aether.entities.effects.EntityEffectRule;
-import com.gildedgames.aether.items.properties.ItemRarity;
-import com.gildedgames.aether.items.IItemEffectsCapability;
-import com.gildedgames.aether.items.IItemPropertiesCapability;
-import com.gildedgames.aether.player.IPlayerAetherCapability;
+import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
+import com.gildedgames.aether.api.entities.effects.EntityEffectRule;
+import com.gildedgames.aether.api.items.properties.ItemRarity;
+import com.gildedgames.aether.api.items.IItemEffectsCapability;
+import com.gildedgames.aether.api.items.IItemPropertiesCapability;
+import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.sound.generators;
 
-import com.gildedgames.aether.player.IPlayerAetherCapability;
+import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import net.minecraft.util.ResourceLocation;
 
 public interface IMusicGenerator

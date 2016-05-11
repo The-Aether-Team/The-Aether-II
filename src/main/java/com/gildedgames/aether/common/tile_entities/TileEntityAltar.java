@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.tile_entities;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.registry.altar.IAltarRecipe;
+import com.gildedgames.aether.api.registry.altar.IAltarRecipe;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

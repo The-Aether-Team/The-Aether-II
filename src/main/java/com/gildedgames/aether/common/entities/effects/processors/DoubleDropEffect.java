@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.effects.processors;
 
-import com.gildedgames.aether.entities.effects.EntityEffectInstance;
-import com.gildedgames.aether.entities.effects.EntityEffectProcessor;
-import com.gildedgames.aether.entities.effects.EntityEffectRule;
+import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
+import com.gildedgames.aether.api.entities.effects.EntityEffectRule;
 import com.gildedgames.aether.common.entities.effects.processors.DoubleDropEffect.Instance;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import net.minecraft.entity.Entity;

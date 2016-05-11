@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.effects.processors.player;
 
-import com.gildedgames.aether.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
 import com.gildedgames.aether.common.entities.effects.EffectProcessorPlayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

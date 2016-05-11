@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.items.properties;
 
-import com.gildedgames.aether.items.properties.ItemEquipmentType;
-import com.gildedgames.aether.items.properties.ItemRarity;
-import com.gildedgames.aether.registry.equipment.IEquipmentProperties;
-import com.gildedgames.aether.registry.equipment.IEquipmentRegistry;
+import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
+import com.gildedgames.aether.api.items.properties.ItemRarity;
+import com.gildedgames.aether.api.registry.equipment.IEquipmentProperties;
+import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
 import net.minecraft.item.Item;
 
 import java.util.HashMap;
@@ -15,7 +15,7 @@ public class EquipmentRegistry implements IEquipmentRegistry
 	@Override
 	public void register(Item item, ItemRarity rarity, ItemEquipmentType type)
 	{
-		this.registeredEntries.put(item.getRegistryName(), new EquipmentProperties(item, rarity, type));
+		this.registeredEntries.put(item.getRegistryName(), new EquipmentProperties(rarity, type));
 	}
 
 	@Override
@@ -26,23 +26,14 @@ public class EquipmentRegistry implements IEquipmentRegistry
 
 	public static class EquipmentProperties implements IEquipmentProperties
 	{
-		private Item item;
-
 		private ItemRarity rarity;
 
 		private ItemEquipmentType equipmentType;
 
-		public EquipmentProperties(Item item, ItemRarity rarity, ItemEquipmentType equipmentType)
+		public EquipmentProperties(ItemRarity rarity, ItemEquipmentType equipmentType)
 		{
-			this.item = item;
 			this.rarity = rarity;
 			this.equipmentType = equipmentType;
-		}
-
-		@Override
-		public Item getItem()
-		{
-			return this.item;
 		}
 
 		@Override

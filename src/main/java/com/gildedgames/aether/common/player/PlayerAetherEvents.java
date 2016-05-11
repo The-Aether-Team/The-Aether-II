@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.player;
 
 import com.gildedgames.aether.common.world.chunk.AetherPlaceFlagChunkHook;
-import com.gildedgames.aether.player.IPlayerAetherCapability;
+import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.util.modules.chunk.ChunkModule;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;

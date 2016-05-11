@@ -1,4 +1,4 @@
-package com.gildedgames.aether.entities.effects;
+package com.gildedgames.aether.api.entities.effects;
 
 import net.minecraft.entity.Entity;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;

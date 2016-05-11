@@ -2,8 +2,8 @@ package com.gildedgames.aether.client.gui.container;
 
 import com.gildedgames.aether.common.containers.ContainerEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
-import com.gildedgames.aether.player.IPlayerAetherCapability;
-import com.gildedgames.aether.items.properties.ItemEquipmentType;
+import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;

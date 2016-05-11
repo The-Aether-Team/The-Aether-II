@@ -1,7 +1,7 @@
-package com.gildedgames.aether;
+package com.gildedgames.aether.api;
 
-import com.gildedgames.aether.registry.altar.IAltarRecipeRegistry;
-import com.gildedgames.aether.registry.equipment.IEquipmentRegistry;
+import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
+import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
 
 public class AetherAPI
 {

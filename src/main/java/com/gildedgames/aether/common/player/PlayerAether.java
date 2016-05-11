@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.player;
 
-import com.gildedgames.aether.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -9,8 +9,8 @@ import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.items.tools.ItemValkyrieTool;
 import com.gildedgames.aether.common.util.PlayerUtil;
-import com.gildedgames.aether.player.IPlayerAetherCapability;
-import com.gildedgames.aether.player.inventory.IInventoryEquipment;
+import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;

@@ -35,8 +35,19 @@ if (ciVersion != null) {
 	version = "${config.mod_version}.git-${gitVersion}"
 }
 
+sourceSets {
+	api {
+		java { srcDir "src/api/java" }
+	}
+}
+
 dependencies {
-	compile project(":Gilded-Games-Util")
+	compile project(":gilded-games-util")
+}
+
+jar {
+	from sourceSets.api.output
+	from sourceSets.main.output
 }
 
 minecraft {

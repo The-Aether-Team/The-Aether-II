@@ -1,4 +1,4 @@
-package com.gildedgames.aether.items.properties;
+package com.gildedgames.aether.api.items.properties;
 
 public enum ItemEquipmentType
 {

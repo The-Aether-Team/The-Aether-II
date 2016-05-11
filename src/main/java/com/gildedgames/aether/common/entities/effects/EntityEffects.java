@@ -10,8 +10,8 @@ import com.gildedgames.aether.common.entities.effects.processors.RegenerateHealt
 import com.gildedgames.aether.common.entities.effects.processors.player.DaggerfrostEffect;
 import com.gildedgames.aether.common.entities.effects.processors.player.ModifyXPCollectionEffect;
 import com.gildedgames.aether.common.entities.effects.processors.player.PauseHungerEffect;
-import com.gildedgames.aether.entities.effects.EntityEffectProcessor;
-import com.gildedgames.aether.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
+import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
 import com.gildedgames.util.modules.entityhook.api.IEntityHookFactory;
 import com.gildedgames.util.modules.entityhook.impl.hooks.EntityHook;
 import com.gildedgames.util.modules.entityhook.impl.providers.LivingHookProvider;
