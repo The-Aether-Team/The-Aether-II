@@ -1,15 +1,16 @@
 package com.gildedgames.aether.common.entities.blocks;
 
+import com.gildedgames.util.core.nbt.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -23,7 +24,7 @@ public class EntityFloatingBlock extends Entity
 
 	private final List<ItemStack> drops = new ArrayList<>();
 
-	private int inAirTicks;
+	private boolean hasActivated = false;
 
 	public EntityFloatingBlock(World world)
 	{
@@ -63,7 +64,7 @@ public class EntityFloatingBlock extends Entity
 		// Destroys the source block, since deleting a neighboring block in the actual block class
 		// causes a infinite loop of updates.
 
-		if (!this.worldObj.isRemote && this.inAirTicks++ == 0)
+		if (!this.worldObj.isRemote && !this.hasActivated)
 		{
 			BlockPos pos = new BlockPos(this);
 
@@ -75,9 +76,11 @@ public class EntityFloatingBlock extends Entity
 			{
 				this.setDead();
 			}
+
+			this.hasActivated = true;
 		}
 
-		if (this.inAirTicks > 200)
+		if (this.ticksExisted > 200)
 		{
 			this.setDead();
 
@@ -171,18 +174,42 @@ public class EntityFloatingBlock extends Entity
 
 		this.setBlockState(block.getStateFromMeta(compound.getByte("BlockState")));
 		this.ticksExisted = compound.getInteger("TicksExisted");
+
+		this.hasActivated = this.ticksExisted > 1;
+
+		if (compound.hasKey("Drops"))
+		{
+			NBTTagList drops = compound.getTagList("Drops", 10);
+
+			for (NBTTagCompound item : NBTHelper.getIterator(drops))
+			{
+				this.drops.add(ItemStack.loadItemStackFromNBT(item));
+			}
+		}
 	}
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound compound)
 	{
 		IBlockState state = this.getBlockState();
-		Block block = state.getBlock();
-		ResourceLocation resourceLocation = Block.blockRegistry.getNameForObject(block);
 
-		compound.setString("Block", resourceLocation.toString());
+		Block block = state.getBlock();
+
+		compound.setString("Block", Block.blockRegistry.getNameForObject(block).toString());
 		compound.setByte("BlockState", (byte) block.getMetaFromState(state));
 		compound.setInteger("TicksExisted", this.ticksExisted);
+
+		if (this.drops.size() > 0)
+		{
+			NBTTagList drops = new NBTTagList();
+
+			for (ItemStack stack : this.drops)
+			{
+				drops.appendTag(stack.writeToNBT(new NBTTagCompound()));
+			}
+
+			compound.setTag("Drops", drops);
+		}
 	}
 
 	public IBlockState getBlockState()
