@@ -235,33 +235,15 @@ public class InventoryEquipment implements IInventoryEquipment
 
 	public void dropAllItems()
 	{
-		for (int i = 0; i < this.inventory.length; ++i)
+		for (ItemStack stack : this.inventory)
 		{
-			if (this.inventory[i] != null)
+			if (stack != null)
 			{
-				ItemStack stack = this.inventory[i];
-
-				if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
-				{
-					EntityEffects effects = EntityEffects.get(this.aePlayer.getPlayer());
-					IItemEffectsCapability itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
-
-					if (itemEffects != null)
-					{
-						for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
-						{
-							EntityEffectProcessor processor = effect.getLeft();
-							EntityEffectInstance instance = effect.getRight();
-
-							effects.removeInstance(processor, instance);
-						}
-					}
-				}
-
 				this.aePlayer.getPlayer().dropItem(stack, true, false);
-				this.inventory[i] = null;
 			}
 		}
+
+		this.clear();
 	}
 
 	@Override

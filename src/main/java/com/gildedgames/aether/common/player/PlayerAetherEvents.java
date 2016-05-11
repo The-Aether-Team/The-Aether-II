@@ -1,8 +1,11 @@
 package com.gildedgames.aether.common.player;
 
+import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.common.world.chunk.AetherPlaceFlagChunkHook;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.util.modules.chunk.ChunkModule;
+import net.minecraft.nbt.NBTBase;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
@@ -89,6 +92,23 @@ public class PlayerAetherEvents
 		if (aePlayer != null)
 		{
 			aePlayer.onHurt(event);
+		}
+	}
+
+	@SubscribeEvent
+	public void onPlayerClone(PlayerEvent.Clone event)
+	{
+		IPlayerAetherCapability oldPlayer = PlayerAether.getPlayer(event.original);
+
+		if (oldPlayer != null)
+		{
+			IPlayerAetherCapability newPlayer = PlayerAether.getPlayer(event.entity);
+
+			Capability.IStorage<IPlayerAetherCapability> storage = AetherCapabilities.PLAYER_DATA.getStorage();
+
+			NBTBase state = storage.writeNBT(AetherCapabilities.PLAYER_DATA, oldPlayer, null);
+
+			storage.readNBT(AetherCapabilities.PLAYER_DATA, newPlayer, null, state);
 		}
 	}
 

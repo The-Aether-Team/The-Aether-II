@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.player;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -9,8 +11,6 @@ import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.items.tools.ItemValkyrieTool;
 import com.gildedgames.aether.common.util.PlayerUtil;
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -24,7 +24,8 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
@@ -46,7 +47,7 @@ public class PlayerAether implements IPlayerAetherCapability
 	}
 
 	@Override
-	public void onUpdate(LivingEvent.LivingUpdateEvent event)
+	public void onUpdate(LivingUpdateEvent event)
 	{
 		float extendedReach = 0.0f;
 
@@ -111,7 +112,7 @@ public class PlayerAether implements IPlayerAetherCapability
 	}
 
 	@Override
-	public void onJump(LivingEvent.LivingJumpEvent event)
+	public void onJump(LivingJumpEvent event)
 	{
 		if (PlayerUtil.wearingArmor(player, 0, ItemsAether.sentry_boots) || PlayerUtil.isWearingFullSet(player, ItemGravititeArmor.class))
 		{
