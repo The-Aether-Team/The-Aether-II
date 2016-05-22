@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 
 public class BlockAetherLog extends Block
 {
-	public static final PropertyEnum PROPERTY_AXIS = PropertyEnum.create("axis", BlockLog.EnumAxis.class);
+	public static final PropertyEnum<BlockLog.EnumAxis> PROPERTY_AXIS = PropertyEnum.create("axis", BlockLog.EnumAxis.class);
 
 	public BlockAetherLog()
 	{
@@ -80,7 +80,7 @@ public class BlockAetherLog extends Block
 	{
 		int meta = 0;
 
-		switch (((BlockLog.EnumAxis) state.getValue(PROPERTY_AXIS)))
+		switch (state.getValue(PROPERTY_AXIS))
 		{
 		case Y:
 			meta |= 1;

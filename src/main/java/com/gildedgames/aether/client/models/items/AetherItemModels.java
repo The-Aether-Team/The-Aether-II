@@ -14,7 +14,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import com.gildedgames.aether.client.util.ItemModelList;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
-import com.gildedgames.aether.common.blocks.dungeon.BlockDungeon;
+import com.gildedgames.aether.common.blocks.dungeon.BlockDivine;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
@@ -86,12 +86,14 @@ public class AetherItemModels
 				.add(BlockAetherSapling.PURPLE_CRYSTAL_SAPLING.getMeta(), "purple_crystal_sapling"));
 
 		registerItemModels(new ItemModelList(BlocksAether.carved_stone).root("carved_stone/")
-				.add(BlockDungeon.NORMAL, "carved_stone")
-				.add(BlockDungeon.DIVINE, "divine_carved_stone"));
+				.add(BlockDivine.NORMAL, "carved_stone")
+				.add(BlockDivine.DIVINE, "divine_carved_stone"));
 
 		registerItemModels(new ItemModelList(BlocksAether.sentry_stone).root("sentry_stone/")
-				.add(BlockDungeon.NORMAL, "sentry_stone")
-				.add(BlockDungeon.DIVINE, "divine_sentry_stone"));
+				.add(BlockDivine.NORMAL, "sentry_stone")
+				.add(BlockDivine.DIVINE, "divine_sentry_stone"));
+
+		registerItemModels(new ItemModelList(BlocksAether.labyrinth_lightstone).add(BlockDivine.NORMAL, "labyrinth_lightstone"));
 
 		registerItemModels(new ItemModelList(BlocksAether.holystone_furnace).root("holystone_furnace/")
 				.add(BlockHolystoneFurnace.LIT_META, "holystone_furnace_lit")
@@ -319,6 +321,14 @@ public class AetherItemModels
 		registerItemModels(new ItemModelList(ItemsAether.gold_gloves).add(0, "accessories/gold_gloves"));
 		registerItemModels(new ItemModelList(ItemsAether.chain_gloves).add(0, "accessories/chain_gloves"));
 		registerItemModels(new ItemModelList(ItemsAether.diamond_gloves).add(0, "accessories/diamond_gloves"));
+
+		registerItemModels(new ItemModelList(BlocksAether.carved_capstone).add(0, "carved_capstone"));
+		registerItemModels(new ItemModelList(BlocksAether.labyrinth_pillar).add(0, "labyrinth_pillar"));
+		registerItemModels(new ItemModelList(BlocksAether.labyrinth_wall).add(0, "labyrinth_wall"));
+		registerItemModels(new ItemModelList(BlocksAether.labyrinth_lightstone).add(0, "labyrinth_lightstone"));
+		registerItemModels(new ItemModelList(BlocksAether.labyrinth_base).add(0, "labyrinth_base"));
+		registerItemModels(new ItemModelList(BlocksAether.labyrinth_headstone).add(0, "labyrinth_headstone"));
+
 
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.skyroot_chest), 0, TileEntitySkyrootChest.class);
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.labyrinth_totem), 0, TileEntityLabyrinthTotem.class);

@@ -1,0 +1,9 @@
+{
+	"parent": "aether:block/glowing_rotatable",
+	"textures": {
+		"end": "aether:blocks/dungeon/labyrinth_base_top",
+		"side": "aether:blocks/dungeon/labyrinth_base_side",
+		"end_overlay": "aether:blocks/dungeon/labyrinth_base_top_highlight",
+		"side_overlay": "aether:blocks/dungeon/labyrinth_base_side_highlight"
+	}
+}

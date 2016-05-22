@@ -1,15 +1,19 @@
 package com.gildedgames.aether.common.blocks;
 
-import com.gildedgames.aether.common.blocks.construction.*;
-import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummy;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemBlock;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.AetherCreativeTabs;
+import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
+import com.gildedgames.aether.common.blocks.construction.BlockAltar;
+import com.gildedgames.aether.common.blocks.construction.BlockAmbrosiumTorch;
+import com.gildedgames.aether.common.blocks.construction.BlockHolystoneButton;
+import com.gildedgames.aether.common.blocks.construction.BlockHolystonePressurePlate;
+import com.gildedgames.aether.common.blocks.construction.BlockQuicksoilGlass;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootButton;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootChest;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootDoor;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootLadder;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootPressurePlate;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootTrapDoor;
 import com.gildedgames.aether.common.blocks.construction.aether_walls.BlockAerogelWall;
 import com.gildedgames.aether.common.blocks.construction.aether_walls.BlockAetherWall;
 import com.gildedgames.aether.common.blocks.construction.skyroot_fence.BlockSkyrootFence;
@@ -18,7 +22,9 @@ import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockStand
 import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockWallSkyrootSign;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockSkyrootWorkbench;
-import com.gildedgames.aether.common.blocks.dungeon.BlockDungeon;
+import com.gildedgames.aether.common.blocks.dungeon.BlockDivine;
+import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinth;
+import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthPillar;
 import com.gildedgames.aether.common.blocks.dungeon.BlockTeleporter;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAerogel;
@@ -39,7 +45,13 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
+import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummy;
 import com.gildedgames.aether.common.items.itemblocks.ItemBlockAetherVariants;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemBlock;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class BlocksAether
 {
@@ -94,9 +106,7 @@ public class BlocksAether
 
 	public static BlockAetherSapling aether_sapling;
 
-	public static BlockDungeon carved_stone;
-
-	public static BlockDungeon sentry_stone;
+	public static BlockLabyrinth carved_stone, sentry_stone;
 
 	public static BlockHolystoneFurnace holystone_furnace;
 
@@ -136,7 +146,13 @@ public class BlocksAether
 	public static BlockTeleporter labyrinth_totem;
 
 	public static Block multiblock_dummy;
-	
+
+	public static BlockLabyrinth carved_capstone;
+
+	public static Block labyrinth_pillar;
+
+	public static BlockLabyrinth labyrinth_wall, labyrinth_lightstone, labyrinth_base, labyrinth_headstone;
+
 	public static void preInit()
 	{
 		aether_dirt = registerBlock("aether_dirt", new Block(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f), AetherCreativeTabs.tabBlocks);
@@ -200,9 +216,9 @@ public class BlocksAether
 
 		aether_sapling = registerBlockWithItem("aether_sapling", new BlockAetherSapling(), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
 
-		carved_stone = registerBlockWithItem("carved_stone", new BlockDungeon(Material.rock), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
+		carved_stone = registerBlockWithItem("carved_stone", new BlockDivine(), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
 
-		sentry_stone = registerBlockWithItem("sentry_stone", new BlockDungeon(Material.rock).setGlows(true), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
+		sentry_stone = registerBlockWithItem("sentry_stone", new BlockDivine().setGlows(true), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
 
 		holystone_brick = registerBlock("holystone_brick", new Block(Material.rock).setHardness(2f).setStepSound(Block.soundTypeStone), AetherCreativeTabs.tabBlocks);
 
@@ -246,13 +262,20 @@ public class BlocksAether
 		skyroot_log_wall = registerBlock("skyroot_log_wall", new BlockAetherWall(BlocksAether.skyroot_log, 2.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		aerogel_wall = registerBlock("aerogel_wall", new BlockAerogelWall(BlocksAether.aerogel, 1.0f, 10.f), AetherCreativeTabs.tabBlocks);
 
-		sentry_stone_wall = registerBlock("sentry_stone_wall", new BlockAetherWall(BlocksAether.sentry_stone, 1.0f, 10.0f).setGlows(true), AetherCreativeTabs.tabBlocks);
-		divine_sentry_stone_wall = registerBlock("divine_sentry_stone_wall", new BlockAetherWall(BlocksAether.holystone, 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
-		divine_stone_wall = registerBlock("divine_stone_wall", new BlockAetherWall(BlocksAether.holystone, 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
-
 		labyrinth_totem = registerBlock("labyrinth_totem", new BlockTeleporter(Material.iron), AetherCreativeTabs.tabBlocks);
 
 		multiblock_dummy = registerBlock("multiblock_dummy", new BlockMultiDummy().setBlockUnbreakable());
+
+		carved_capstone = registerBlock("carved_capstone", new BlockLabyrinth(), AetherCreativeTabs.tabBlocks);
+		labyrinth_pillar = registerBlock("labyrinth_pillar", new BlockLabyrinthPillar().setGlows(true), AetherCreativeTabs.tabBlocks);
+		labyrinth_wall = registerBlock("labyrinth_wall", new BlockLabyrinth(), AetherCreativeTabs.tabBlocks);
+		labyrinth_lightstone = registerBlock("labyrinth_lightstone", new BlockLabyrinth().setGlows(true), AetherCreativeTabs.tabBlocks);
+		labyrinth_base = registerBlock("labyrinth_base", new BlockLabyrinth().setGlows(true), AetherCreativeTabs.tabBlocks);
+		labyrinth_headstone = registerBlock("labyrinth_headstone", new BlockLabyrinth(), AetherCreativeTabs.tabBlocks);
+
+		sentry_stone_wall = registerBlock("sentry_stone_wall", new BlockAetherWall(BlocksAether.labyrinth_lightstone, 1.0f, 10.0f).setGlows(true), AetherCreativeTabs.tabBlocks);
+		divine_sentry_stone_wall = registerBlock("divine_sentry_stone_wall", new BlockAetherWall(BlocksAether.holystone, 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
+		divine_stone_wall = registerBlock("divine_stone_wall", new BlockAetherWall(BlocksAether.holystone, 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 
 		registerHarvestLevels();
 	}
@@ -287,7 +310,7 @@ public class BlocksAether
 		enchanted_gravitite.setHarvestLevel("pickaxe", 2);
 
 		carved_stone.setHarvestLevel("pickaxe", 0);
-		sentry_stone.setHarvestLevel("pickaxe", 0);
+		labyrinth_lightstone.setHarvestLevel("pickaxe", 0);
 
 		holystone_brick.setHarvestLevel("pickaxe", 0);
 
@@ -300,7 +323,6 @@ public class BlocksAether
 		skyroot_log_wall.setHarvestLevel("axe", 0);
 		icestone_wall.setHarvestLevel("pickaxe", 1);
 		aerogel_wall.setHarvestLevel("pickaxe", 1);
-
 	}
 
 	private static <T extends Block> T registerBlock(String name, T block, CreativeTabs tab)

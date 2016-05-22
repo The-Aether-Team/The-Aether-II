@@ -1,0 +1,7 @@
+{
+	"parent": "aether:block/glowing",
+	"textures": {
+		"all": "aether:blocks/dungeon/labyrinth_lightstone",
+		"overlay": "aether:blocks/dungeon/labyrinth_lightstone_highlight"
+	}
+}

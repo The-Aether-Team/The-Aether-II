@@ -1,0 +1,7 @@
+{
+	"parent": "block/cube_column",
+	"textures": {
+		"end": "aether:blocks/dungeon/carved_capstone_top",
+		"side": "aether:blocks/dungeon/carved_capstone_side"
+	}
+}

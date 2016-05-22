@@ -1,8 +1,6 @@
 package com.gildedgames.aether.common.blocks.dungeon;
 
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
@@ -16,21 +14,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class BlockDungeon extends Block implements IAetherBlockWithVariants
+public class BlockDivine extends BlockLabyrinth implements IAetherBlockWithVariants
 {
 	public static final int
 			NORMAL = 0,
 			DIVINE = 1;
 
 	public static final PropertyBool PROPERTY_IS_DIVINE = PropertyBool.create("is_divine");
-
-	public BlockDungeon(Material material)
-	{
-		super(Material.rock);
-		this.setHardness(2.0F);
-		this.setHarvestLevel("pickaxe", 2);
-		this.setResistance(10.0F);
-	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -78,12 +68,5 @@ public class BlockDungeon extends Block implements IAetherBlockWithVariants
 		default:
 			return "missingno";
 		}
-	}
-
-	public BlockDungeon setGlows(boolean glows)
-	{
-		this.setLightLevel(glows ? 0.75f : 0.0f);
-
-		return this;
 	}
 }
