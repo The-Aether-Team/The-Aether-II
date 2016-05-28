@@ -1,5 +1,11 @@
 package com.gildedgames.aether.common.entities.effects;
 
+import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
+import com.gildedgames.aether.api.entities.effects.IEffectPool;
+import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
+import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.entities.effects.processors.BreatheUnderwaterEffect;
 import com.gildedgames.aether.common.entities.effects.processors.DoubleDropEffect;
 import com.gildedgames.aether.common.entities.effects.processors.FreezeBlocksEffect;
@@ -10,24 +16,21 @@ import com.gildedgames.aether.common.entities.effects.processors.RegenerateHealt
 import com.gildedgames.aether.common.entities.effects.processors.player.DaggerfrostEffect;
 import com.gildedgames.aether.common.entities.effects.processors.player.ModifyXPCollectionEffect;
 import com.gildedgames.aether.common.entities.effects.processors.player.PauseHungerEffect;
-import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
-import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
-import com.gildedgames.util.modules.entityhook.api.IEntityHookFactory;
-import com.gildedgames.util.modules.entityhook.impl.hooks.EntityHook;
-import com.gildedgames.util.modules.entityhook.impl.providers.LivingHookProvider;
 import com.google.common.collect.Lists;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntityEffects extends EntityHook<Entity>
+public class EntityEffects implements IEntityEffectsCapability
 {
-
 	public static final EffectProcessorPlayer<EntityEffectInstance> DAGGERFROST = new DaggerfrostEffect();
 
 	public static final EffectProcessorPlayer<ModifyXPCollectionEffect.Instance> MODIFY_XP_COLLECTION = new ModifyXPCollectionEffect();
@@ -48,23 +51,24 @@ public class EntityEffects extends EntityHook<Entity>
 
 	public static final EntityEffectProcessor<RegenerateHealthEffect.Instance> REGENERATE_HEALTH = new RegenerateHealthEffect();
 
-	public static final LivingHookProvider<EntityEffects> PROVIDER = new LivingHookProvider<>("aether:effects", new Factory());
+	private final EntityPlayer player;
 
-	private List<EffectPool<?>> effects = Lists.newArrayList();
+	private final List<IEffectPool<?>> effects = Lists.newArrayList();
 
 	private int ticksSinceAttacked;
 
-	private EntityEffects()
+	public static IEntityEffectsCapability get(Entity entity)
 	{
-
+		return entity.getCapability(AetherCapabilities.ENTITY_EFFECTS, null);
 	}
 
-	public static EntityEffects get(Entity entity)
+	public EntityEffects(EntityPlayer player)
 	{
-		return EntityEffects.PROVIDER.getHook(entity);
+		this.player = player;
 	}
 
-	public List<EffectPool<?>> getEffectPools()
+	@Override
+	public List<IEffectPool<?>> getEffectPools()
 	{
 		return this.effects;
 	}
@@ -72,7 +76,7 @@ public class EntityEffects extends EntityHook<Entity>
 	@SuppressWarnings("unchecked")
 	private <I extends EntityEffectInstance> EffectPool<I> getPool(EntityEffectProcessor<I> processor)
 	{
-		for (EffectPool<?> pool : this.effects)
+		for (IEffectPool<?> pool : this.effects)
 		{
 			if (pool.equals(processor))
 			{
@@ -87,6 +91,7 @@ public class EntityEffects extends EntityHook<Entity>
 		return pool;
 	}
 
+	@Override
 	public <I extends EntityEffectInstance> void put(EntityEffectProcessor<I> processor, I instance)
 	{
 		if (processor == null || instance == null)
@@ -101,19 +106,10 @@ public class EntityEffects extends EntityHook<Entity>
 			pool.getInstances().add(instance);
 		}
 
-		processor.apply(this.getEntity(), instance, pool.getInstances());
+		processor.apply(this.player, instance, pool.getInstances());
 	}
 
 	@Override
-	public void onLoaded()
-	{
-	}
-
-	@Override
-	public void onUnloaded()
-	{
-	}
-
 	public <I extends EntityEffectInstance> void removeEntry(EntityEffectProcessor<I> processor)
 	{
 		if (processor == null)
@@ -125,12 +121,13 @@ public class EntityEffects extends EntityHook<Entity>
 
 		for (I instance : pool.getInstances())
 		{
-			processor.cancel(this.getEntity(), instance, pool.getInstances());
+			processor.cancel(this.player, instance, pool.getInstances());
 		}
 
 		this.effects.remove(pool);
 	}
 
+	@Override
 	public <I extends EntityEffectInstance> void removeInstance(EntityEffectProcessor<I> processor, I instance)
 	{
 		if (processor == null)
@@ -140,34 +137,23 @@ public class EntityEffects extends EntityHook<Entity>
 
 		EffectPool<I> pool = this.getPool(processor);
 
-		processor.cancel(this.getEntity(), instance, pool.getInstances());
+		processor.cancel(this.player, instance, pool.getInstances());
 
 		pool.getInstances().remove(instance);
 	}
 
 	@Override
-	public void saveNBTData(NBTTagCompound compound)
+	public void onUpdate(LivingUpdateEvent event)
 	{
-
-	}
-
-	@Override
-	public void loadNBTData(NBTTagCompound compound)
-	{
-
-	}
-
-	@Override
-	public void onUpdate()
-	{
-		for (EffectPool<?> pool : this.getEffectPools())
+		for (IEffectPool<?> pool : this.getEffectPools())
 		{
-			pool.tick(this.getEntity());
+			pool.tick(this.player);
 		}
 
 		this.ticksSinceAttacked++;
 	}
 
+	@Override
 	public void onHurt(LivingHurtEvent event)
 	{
 		if (event.source.getSourceOfDamage() instanceof IMob)
@@ -176,35 +162,30 @@ public class EntityEffects extends EntityHook<Entity>
 		}
 	}
 
-	public void clearEffects()
+	@Override
+	public EntityPlayer getPlayer()
 	{
-		for (EffectPool<?> pool : this.effects)
-		{
-			this.removeEntry(pool.getProcessor());
-		}
+		return this.player;
 	}
 
+	@Override
 	public int getTicksSinceAttacked()
 	{
 		return this.ticksSinceAttacked;
 	}
 
-	public static class Factory implements IEntityHookFactory<EntityEffects>
+	public static class Storage implements Capability.IStorage<IEntityEffectsCapability>
 	{
 		@Override
-		public EntityEffects createHook()
+		public NBTBase writeNBT(Capability<IEntityEffectsCapability> capability, IEntityEffectsCapability instance, EnumFacing side)
 		{
-			return new EntityEffects();
+			return null;
 		}
 
 		@Override
-		public void writeFull(ByteBuf buf, EntityEffects hook)
+		public void readNBT(Capability<IEntityEffectsCapability> capability, IEntityEffectsCapability instance, EnumFacing side, NBTBase nbt)
 		{
-		}
 
-		@Override
-		public void readFull(ByteBuf buf, EntityEffects hook)
-		{
 		}
 	}
 }

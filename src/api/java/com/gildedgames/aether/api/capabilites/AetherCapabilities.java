@@ -1,5 +1,6 @@
 package com.gildedgames.aether.api.capabilites;
 
+import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.api.items.IItemEffectsCapability;
 import com.gildedgames.aether.api.items.IItemPropertiesCapability;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
@@ -16,4 +17,7 @@ public class AetherCapabilities
 
 	@CapabilityInject(IPlayerAetherCapability.class)
 	public static final Capability<IPlayerAetherCapability> PLAYER_DATA = null;
+
+	@CapabilityInject(IEntityEffectsCapability.class)
+	public static final Capability<IEntityEffectsCapability> ENTITY_EFFECTS = null;
 }

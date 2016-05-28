@@ -119,12 +119,7 @@ public class PlayerAether implements IPlayerAetherCapability
 
 		if (fullSet == ItemGravititeArmor.class)
 		{
-			if (player.isSneaking())
-			{
-				player.motionY += 0.55F;
-
-				AetherCore.PROXY.spawnJumpParticles(player.worldObj, player.posX, player.posY, player.posZ, 1.2D, 12);
-			}
+			event.setResult(Result.DENY);
 		}
 	}
 
@@ -133,7 +128,12 @@ public class PlayerAether implements IPlayerAetherCapability
 	{
 		if (PlayerUtil.wearingArmor(player, 0, ItemsAether.sentry_boots) || PlayerUtil.isWearingFullSet(player, ItemGravititeArmor.class))
 		{
-			event.setResult(Result.DENY);
+			if (player.isSneaking())
+			{
+				player.motionY += 0.55F;
+
+				AetherCore.PROXY.spawnJumpParticles(player.worldObj, player.posX, player.posY, player.posZ, 1.2D, 12);
+			}
 		}
 	}
 

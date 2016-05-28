@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.containers.inventory;
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
+import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
 import com.gildedgames.aether.api.items.IItemEffectsCapability;
@@ -214,7 +215,7 @@ public class InventoryEquipment implements IInventoryEquipment
 
 			if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 			{
-				EntityEffects effects = EntityEffects.get(this.aePlayer.getPlayer());
+				IEntityEffectsCapability effects = EntityEffects.get(this.aePlayer.getPlayer());
 				IItemEffectsCapability itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
 				if (itemEffects != null)

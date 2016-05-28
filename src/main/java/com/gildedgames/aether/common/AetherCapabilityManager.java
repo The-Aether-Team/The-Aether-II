@@ -1,6 +1,9 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
+import com.gildedgames.aether.common.entities.effects.EntityEffects;
+import com.gildedgames.aether.common.entities.effects.EntityEffectsProvider;
 import com.gildedgames.aether.common.items.effects.ItemEffects;
 import com.gildedgames.aether.common.items.effects.ItemEffectsProvider;
 import com.gildedgames.aether.common.items.properties.ItemProperties;
@@ -35,6 +38,7 @@ public class AetherCapabilityManager
 		CapabilityManager.INSTANCE.register(IItemEffectsCapability.class, new ItemEffects.Storage(), ItemEffects.class);
 		CapabilityManager.INSTANCE.register(IItemPropertiesCapability.class, new ItemProperties.Storage(), ItemProperties.class);
 		CapabilityManager.INSTANCE.register(IPlayerAetherCapability.class, new PlayerAether.Storage(), PlayerAether.class);
+		CapabilityManager.INSTANCE.register(IEntityEffectsCapability.class, new EntityEffects.Storage(), EntityEffects.class);
 	}
 
 	@SubscribeEvent
@@ -140,11 +144,12 @@ public class AetherCapabilityManager
 		if (event.getEntity() instanceof EntityPlayer)
 		{
 			event.addCapability(AetherCore.getResource("PlayerData"), new PlayerAetherProvider(new PlayerAether((EntityPlayer) event.getEntity())));
+			event.addCapability(AetherCore.getResource("EntityEffects"), new EntityEffectsProvider(new EntityEffects((EntityPlayer) event.getEntity())));
 		}
 	}
 
 	@SubscribeEvent
-    public void onTELoad(AttachCapabilitiesEvent.Item event)
+    public void onItemLoad(AttachCapabilitiesEvent.Item event)
     {
         event.addCapability(AetherCore.getResource("ItemStackEffects"), new ItemEffectsProvider(event.getItemStack()));
         event.addCapability(AetherCore.getResource("ItemStackProperties"), new ItemPropertiesProvider(event.getItemStack()));

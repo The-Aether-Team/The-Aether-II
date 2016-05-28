@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.containers;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
@@ -146,7 +147,7 @@ public class ContainerEquipment extends ContainerPlayer
 
 					if (stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 					{
-						EntityEffects effects = EntityEffects.get(this.aePlayer.getPlayer());
+						IEntityEffectsCapability effects = EntityEffects.get(this.aePlayer.getPlayer());
 						IItemEffectsCapability itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
 						for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
@@ -164,7 +165,7 @@ public class ContainerEquipment extends ContainerPlayer
 					
 					if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 					{
-						EntityEffects effects = EntityEffects.get(this.aePlayer.getPlayer());
+						IEntityEffectsCapability effects = EntityEffects.get(this.aePlayer.getPlayer());
 						IItemEffectsCapability itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
 						for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
@@ -235,7 +236,7 @@ public class ContainerEquipment extends ContainerPlayer
 					
 					if (stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 					{
-						EntityEffects effects = EntityEffects.get(this.aePlayer.getPlayer());
+						IEntityEffectsCapability effects = EntityEffects.get(this.aePlayer.getPlayer());
 						IItemEffectsCapability itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
 						if (itemEffects != null)
@@ -255,7 +256,7 @@ public class ContainerEquipment extends ContainerPlayer
 			}
 			else if (slot instanceof SlotEquipment && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 			{
-				EntityEffects effects = EntityEffects.get(this.aePlayer.getPlayer());
+				IEntityEffectsCapability effects = EntityEffects.get(this.aePlayer.getPlayer());
 				IItemEffectsCapability itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
 				if (itemEffects != null)

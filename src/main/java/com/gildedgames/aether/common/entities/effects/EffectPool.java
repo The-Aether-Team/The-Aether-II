@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.entities.effects;
 import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.entities.effects.EntityEffectRule;
+import com.gildedgames.aether.api.entities.effects.IEffectPool;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -12,9 +13,8 @@ import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 
 import java.util.List;
 
-public class EffectPool<I extends EntityEffectInstance>
+public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I>
 {
-
 	private EntityEffectProcessor<I> processor;
 
 	private List<I> instances;
@@ -35,6 +35,7 @@ public class EffectPool<I extends EntityEffectInstance>
 		return this.instances;
 	}
 
+	@Override
 	public <S extends Entity> void tick(S entity)
 	{
 		List<I> instancesRulesMet = Lists.newArrayList();
@@ -61,6 +62,7 @@ public class EffectPool<I extends EntityEffectInstance>
 		this.getProcessor().tick(entity, instancesRulesMet);
 	}
 
+	@Override
 	public <S extends Entity> void onKill(LivingDropsEvent event, S entity)
 	{
 		List<I> instancesRulesMet = Lists.newArrayList();
@@ -87,6 +89,7 @@ public class EffectPool<I extends EntityEffectInstance>
 		this.getProcessor().onKill(event, entity, instancesRulesMet);
 	}
 
+	@Override
 	public <S extends Entity> void onPlayerInteract(PlayerInteractEvent event, S entity)
 	{
 		if (!(this.getProcessor() instanceof EffectProcessorPlayer))
@@ -120,6 +123,7 @@ public class EffectPool<I extends EntityEffectInstance>
 		pability.onInteract(event, event.entityPlayer, instancesRulesMet);
 	}
 
+	@Override
 	public <S extends Entity> void onPickupXP(PlayerPickupXpEvent event, S entity)
 	{
 		if (!(this.getProcessor() instanceof EffectProcessorPlayer))
@@ -153,6 +157,7 @@ public class EffectPool<I extends EntityEffectInstance>
 		pability.onPickupXP(event, event.entityPlayer, instancesRulesMet);
 	}
 
+	@Override
 	public <S extends Entity> void onLivingAttack(LivingHurtEvent event, S entity)
 	{
 		List<I> instancesRulesMet = Lists.newArrayList();
@@ -192,5 +197,4 @@ public class EffectPool<I extends EntityEffectInstance>
 
 		return obj == this.processor;
 	}
-
 }

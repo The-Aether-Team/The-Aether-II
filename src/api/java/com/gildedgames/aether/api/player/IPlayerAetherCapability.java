@@ -44,5 +44,4 @@ public interface IPlayerAetherCapability
 	BlockPos getLinkingSchematicBoundary();
 	
 	void setLinkingSchematicBoundary(BlockPos pos);
-	
 }

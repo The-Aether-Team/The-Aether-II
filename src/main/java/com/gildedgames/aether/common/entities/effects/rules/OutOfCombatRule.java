@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.effects.rules;
 
 import com.gildedgames.aether.api.entities.effects.EntityEffectRule;
+import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -18,7 +19,7 @@ public class OutOfCombatRule implements EntityEffectRule
 	@Override
 	public boolean isMet(Entity source)
 	{
-		EntityEffects effects = EntityEffects.get(source);
+		IEntityEffectsCapability effects = EntityEffects.get(source);
 
 		return effects.getTicksSinceAttacked() > this.minimumTime;
 	}

@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.entities.effects;
 
+import com.gildedgames.aether.api.entities.effects.IEffectPool;
+import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -15,7 +17,7 @@ public class EntityEffectsEventHooks
 	@SubscribeEvent
 	public void onLivingEntityHurt(LivingHurtEvent event)
 	{
-		EntityEffects effects = EntityEffects.get(event.entityLiving);
+		IEntityEffectsCapability effects = EntityEffects.get(event.entityLiving);
 
 		if (effects != null)
 		{
@@ -33,11 +35,11 @@ public class EntityEffectsEventHooks
 			return;
 		}
 
-		EntityEffects effects = EntityEffects.get(entity);
+		IEntityEffectsCapability effects = EntityEffects.get(entity);
 
 		if (effects != null)
 		{
-			for (EffectPool<?> pool : effects.getEffectPools())
+			for (IEffectPool<?> pool : effects.getEffectPools())
 			{
 				pool.onKill(event, entity);
 			}
@@ -48,11 +50,12 @@ public class EntityEffectsEventHooks
 	public void onPlayerInteract(PlayerInteractEvent event)
 	{
 		EntityPlayer entity = event.entityPlayer;
-		EntityEffects effects = EntityEffects.get(entity);
+
+		IEntityEffectsCapability effects = EntityEffects.get(entity);
 
 		if (effects != null)
 		{
-			for (EffectPool<?> pool : effects.getEffectPools())
+			for (IEffectPool<?> pool : effects.getEffectPools())
 			{
 				pool.onPlayerInteract(event, entity);
 			}
@@ -63,11 +66,12 @@ public class EntityEffectsEventHooks
 	public void onPickupXP(PlayerPickupXpEvent event)
 	{
 		EntityPlayer entity = event.entityPlayer;
-		EntityEffects effects = EntityEffects.get(entity);
+
+		IEntityEffectsCapability effects = EntityEffects.get(entity);
 
 		if (effects != null)
 		{
-			for (EffectPool<?> pool : effects.getEffectPools())
+			for (IEffectPool<?> pool : effects.getEffectPools())
 			{
 				pool.onPickupXP(event, entity);
 			}
@@ -84,11 +88,11 @@ public class EntityEffectsEventHooks
 			return;
 		}
 
-		EntityEffects effects = EntityEffects.get(entity);
+		IEntityEffectsCapability effects = EntityEffects.get(entity);
 
 		if (effects != null)
 		{
-			for (EffectPool<?> pool : effects.getEffectPools())
+			for (IEffectPool<?> pool : effects.getEffectPools())
 			{
 				pool.onLivingAttack(event, entity);
 			}
