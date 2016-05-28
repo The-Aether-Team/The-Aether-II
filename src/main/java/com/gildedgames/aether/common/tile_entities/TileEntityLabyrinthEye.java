@@ -49,10 +49,7 @@ public class TileEntityLabyrinthEye extends TileEntitySchematicBlock implements 
 			{
 				scheduledToRemove.add(player);
 				
-				//if (player.item)
-				{
-					player.setGameType(GameType.CREATIVE);
-				}
+				player.setGameType(GameType.SURVIVAL);
 				
 				player.addChatComponentMessage(new ChatComponentTranslation("You feel the eye's focus drift away..", new Object[0]));
 			}
