@@ -12,6 +12,7 @@ import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.WorldSettings.GameType;
 
+import com.gildedgames.aether.common.util.BlockPosUtil;
 import com.gildedgames.util.core.nbt.NBTHelper;
 import com.google.common.collect.Lists;
 
@@ -94,7 +95,7 @@ public class TileEntityLabyrinthEye extends TileEntitySchematicBlock implements 
 		
 		if (this.startOffset != null && this.endOffset != null)
 		{
-			this.protectedRegion = new AxisAlignedBB(this.getPos().subtract(this.startOffset), this.getPos().subtract(this.endOffset));
+			this.protectedRegion = BlockPosUtil.bounds(this.getPos().subtract(this.startOffset), this.getPos().subtract(this.endOffset));
 		}
 	}
 	
@@ -110,7 +111,7 @@ public class TileEntityLabyrinthEye extends TileEntitySchematicBlock implements 
 		this.startOffset = this.getPos().subtract(start);
 		this.endOffset = this.getPos().subtract(end);
 		
-		this.protectedRegion = new AxisAlignedBB(this.getPos().subtract(this.startOffset), this.getPos().subtract(this.endOffset));
+		this.protectedRegion = BlockPosUtil.bounds(this.getPos().subtract(this.startOffset), this.getPos().subtract(this.endOffset));
 	}
 
 	@Override

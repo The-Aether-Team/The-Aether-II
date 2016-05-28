@@ -1,10 +1,17 @@
 package com.gildedgames.aether.common.util;
 
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.BlockPos.MutableBlockPos;
 
 public class BlockPosUtil
 {
+	
+	public static AxisAlignedBB bounds(BlockPos start, BlockPos end)
+	{
+		return AxisAlignedBB.fromBounds(start.getX(), start.getY(), start.getZ(), end.getX(), end.getY(), end.getZ());
+	}
+	
 	public static MutableBlockPos add(MutableBlockPos pos, BlockPos add)
 	{
 		return BlockPosUtil.add(pos, add.getX(), add.getY(), add.getZ());

@@ -15,6 +15,7 @@ import net.minecraft.util.BlockPos.MutableBlockPos;
 import net.minecraft.util.MathHelper;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.util.BlockPosUtil;
 import com.gildedgames.util.core.nbt.NBT;
 import com.gildedgames.util.core.nbt.NBTHelper;
 import com.google.common.collect.Lists;
@@ -165,7 +166,7 @@ public class TileEntitySchematicBoundary extends TileEntitySchematicBlock
 
 		if (this.bounds == null)
 		{
-			this.bounds = new AxisAlignedBB(this.getPos(), this.linkedPos);
+			this.bounds = BlockPosUtil.bounds(this.getPos(), this.linkedPos);
 		}
 	
 		if (this.shouldFetch)
