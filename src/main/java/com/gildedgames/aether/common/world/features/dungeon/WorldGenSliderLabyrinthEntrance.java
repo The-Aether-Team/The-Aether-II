@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.dungeon.BlockDungeon;
+import com.gildedgames.aether.common.blocks.dungeon.BlockDivine;
 import com.gildedgames.aether.common.world.GenUtil;
 
 public class WorldGenSliderLabyrinthEntrance extends WorldGenerator
@@ -71,7 +71,7 @@ public class WorldGenSliderLabyrinthEntrance extends WorldGenerator
 		{
 			iterPos.set(pos.getX() + 6, pos.getY() + height, pos.getZ() + 6);
 			
-			GenUtil.cuboidVaried(world, pos, iterPos, BlocksAether.carved_stone.getStateFromMeta(BlockDungeon.DIVINE), BlocksAether.sentry_stone.getStateFromMeta(BlockDungeon.DIVINE), 8, rand, true);
+			GenUtil.cuboidVaried(world, pos, iterPos, BlocksAether.carved_stone.getStateFromMeta(BlockDivine.DIVINE), BlocksAether.sentry_stone.getStateFromMeta(BlockDivine.DIVINE), 8, rand, true);
 		}
 		else	
 		{
@@ -111,7 +111,7 @@ public class WorldGenSliderLabyrinthEntrance extends WorldGenerator
 		
 		iterPos.set(pos.getX() + 3, pos.getY() + 4, pos.getZ() + 3);
 
-		world.setBlockState(iterPos, BlocksAether.carved_stone.getStateFromMeta(BlockDungeon.DIVINE));
+		world.setBlockState(iterPos, BlocksAether.carved_stone.getStateFromMeta(BlockDivine.DIVINE));
 		
 		iterPos.set(pos.getX() + 3, pos.getY() + 4, pos.getZ() + 3);
 		
