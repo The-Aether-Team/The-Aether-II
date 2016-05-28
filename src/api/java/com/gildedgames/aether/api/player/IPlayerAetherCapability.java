@@ -1,13 +1,15 @@
 package com.gildedgames.aether.api.player;
 
-import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+
+import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 
 public interface IPlayerAetherCapability
 {
@@ -38,4 +40,9 @@ public interface IPlayerAetherCapability
 	 * @return This player's mining speed modifier.
 	 */
 	float getMiningSpeedMultiplier();
+
+	BlockPos getLinkingSchematicBoundary();
+	
+	void setLinkingSchematicBoundary(BlockPos pos);
+	
 }

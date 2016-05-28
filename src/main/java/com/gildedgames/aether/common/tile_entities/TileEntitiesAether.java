@@ -1,17 +1,23 @@
 package com.gildedgames.aether.common.tile_entities;
 
-import com.gildedgames.aether.common.tile_entities.multiblock.TileEntityMultiblockDummy;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import com.gildedgames.aether.common.tile_entities.multiblock.TileEntityMultiblockDummy;
 
 public class TileEntitiesAether
 {
+	
 	public static final String
 			ALTAR_ID = "aether.altar",
 			HOLYSTONE_FURNACE_ID = "aether.holystone_furnace",
 			SKYROOT_CHEST_ID = "aether.skyroot_chest",
 			SKYROOT_SIGN_ID = "aether.skyroot_sign",
 			MULTIBLOCK_DUMMY = "aether.multiblock_dummy",
-			LABYRINTH_TOTEM = "aether.labyrinth_totem";
+			LABYRINTH_TOTEM = "aether.labyrinth_totem",
+			LABYRINTH_EYE = "aether.labyrinth_eye",
+			WILDCARD = "aether.wildcard",
+			SCHEMATIC_BOUNDARY = "aether.schematicBoundary",
+			LINKED_SCHEMATIC_BOUNDARY = "aether.linkedSchematicBoundary";
 
 	public static void preInit()
 	{
@@ -21,5 +27,10 @@ public class TileEntitiesAether
 		GameRegistry.registerTileEntity(TileEntitySkyrootSign.class, SKYROOT_SIGN_ID);
 		GameRegistry.registerTileEntity(TileEntityMultiblockDummy.class, MULTIBLOCK_DUMMY);
 		GameRegistry.registerTileEntity(TileEntityLabyrinthTotem.class, LABYRINTH_TOTEM);
+		GameRegistry.registerTileEntity(TileEntityLabyrinthEye.class, LABYRINTH_EYE);
+		GameRegistry.registerTileEntity(TileEntityWildcard.class, WILDCARD);
+		GameRegistry.registerTileEntity(TileEntitySchematicBoundary.class, SCHEMATIC_BOUNDARY);
+		GameRegistry.registerTileEntity(TileEntityLinkedSchematicBoundary.class, LINKED_SCHEMATIC_BOUNDARY);
 	}
+	
 }

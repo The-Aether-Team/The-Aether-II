@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"normal": [
+			{ "model": "aether:linkedSchematicBoundary" },
+			{ "model": "aether:linkedSchematicBoundary", "y": 90 },
+			{ "model": "aether:linkedSchematicBoundary", "y": 180 },
+			{ "model": "aether:linkedSchematicBoundary", "y": 270 }
+		]
+	}
+}

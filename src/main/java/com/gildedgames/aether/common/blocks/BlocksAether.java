@@ -1,5 +1,11 @@
 package com.gildedgames.aether.common.blocks;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemBlock;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
@@ -24,8 +30,12 @@ import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockSkyrootWorkbench;
 import com.gildedgames.aether.common.blocks.dungeon.BlockDivine;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinth;
+import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthEye;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthPillar;
+import com.gildedgames.aether.common.blocks.dungeon.BlockLinkedSchematicBoundary;
+import com.gildedgames.aether.common.blocks.dungeon.BlockSchematicBoundary;
 import com.gildedgames.aether.common.blocks.dungeon.BlockTeleporter;
+import com.gildedgames.aether.common.blocks.dungeon.BlockWildcard;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAerogel;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
@@ -47,11 +57,6 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummy;
 import com.gildedgames.aether.common.items.itemblocks.ItemBlockAetherVariants;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemBlock;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class BlocksAether
 {
@@ -152,6 +157,8 @@ public class BlocksAether
 	public static Block labyrinth_pillar;
 
 	public static BlockLabyrinth labyrinth_wall, labyrinth_lightstone, labyrinth_base, labyrinth_headstone;
+	
+	public static Block labyrinth_eye, wildcard, schematicBoundary, linkedSchematicBoundary;
 
 	public static void preInit()
 	{
@@ -277,6 +284,13 @@ public class BlocksAether
 		divine_sentry_stone_wall = registerBlock("divine_sentry_stone_wall", new BlockAetherWall(BlocksAether.holystone, 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		divine_stone_wall = registerBlock("divine_stone_wall", new BlockAetherWall(BlocksAether.holystone, 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 
+		labyrinth_eye = registerBlock("labyrinth_eye", new BlockLabyrinthEye(), AetherCreativeTabs.tabBlocks);
+
+		wildcard = registerBlock("wildcard", new BlockWildcard(), AetherCreativeTabs.tabBlocks);
+		
+		schematicBoundary = registerBlock("schematicBoundary", new BlockSchematicBoundary(), AetherCreativeTabs.tabBlocks);
+		linkedSchematicBoundary = registerBlock("linkedSchematicBoundary", new BlockLinkedSchematicBoundary());
+		
 		registerHarvestLevels();
 	}
 

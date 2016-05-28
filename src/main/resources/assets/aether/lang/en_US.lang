@@ -78,6 +78,10 @@ tile.aether.labyrinth_wall.name=Labyrinth Wall
 tile.aether.labyrinth_lightstone.name=Labyrinth Lightstone
 tile.aether.labyrinth_base.name=Labyrinth Base
 tile.aether.labyrinth_headstone.name=Labyrinth Headstone
+tile.aether.labyrinth_eye.name=Labyrinth Eye
+tile.aether.wildcard.name=Wildcard
+tile.aether.schematicBoundary.name=Schematic Boundary
+tile.aether.linkedSchematicBoundary.name=Linked Schematic Boundary
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick

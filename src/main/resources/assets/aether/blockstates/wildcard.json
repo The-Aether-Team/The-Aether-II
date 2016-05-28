@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"normal": [
+			{ "model": "aether:wildcard" },
+			{ "model": "aether:wildcard", "y": 90 },
+			{ "model": "aether:wildcard", "y": 180 },
+			{ "model": "aether:wildcard", "y": 270 }
+		]
+	}
+}

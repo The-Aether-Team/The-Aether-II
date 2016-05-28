@@ -3,7 +3,6 @@ package com.gildedgames.aether.client.models.items;
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthTotem;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -26,6 +25,7 @@ import com.gildedgames.aether.common.items.consumables.ItemGummySwet;
 import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
+import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthTotem;
 import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootChest;
 
 public class AetherItemModels
@@ -329,7 +329,11 @@ public class AetherItemModels
 		registerItemModels(new ItemModelList(BlocksAether.labyrinth_base).add(0, "labyrinth_base"));
 		registerItemModels(new ItemModelList(BlocksAether.labyrinth_headstone).add(0, "labyrinth_headstone"));
 
-
+		registerItemModels(new ItemModelList(BlocksAether.labyrinth_eye).add(0, "labyrinth_eye"));
+		registerItemModels(new ItemModelList(BlocksAether.wildcard).add(0, "wildcard"));
+		registerItemModels(new ItemModelList(BlocksAether.schematicBoundary).add(0, "schematicBoundary"));
+		registerItemModels(new ItemModelList(BlocksAether.linkedSchematicBoundary).add(0, "linkedSchematicBoundary"));
+		
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.skyroot_chest), 0, TileEntitySkyrootChest.class);
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.labyrinth_totem), 0, TileEntityLabyrinthTotem.class);
 	}
