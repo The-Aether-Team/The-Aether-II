@@ -39,7 +39,7 @@ public class TileEntityLabyrinthEye extends TileEntitySchematicBlock implements 
 			return;
 		}
 		
-		List<EntityPlayer> players = this.getWorld().getEntitiesWithinAABB(EntityPlayer.class, this.protectedRegion, EntitySelectors.selectAnything);
+		List<EntityPlayer> players = this.getWorld().getEntitiesWithinAABB(EntityPlayer.class, this.protectedRegion);
 		List<EntityPlayer> scheduledToRemove = Lists.newArrayList();
 
 		for (EntityPlayer player : this.protectedPlayers)
