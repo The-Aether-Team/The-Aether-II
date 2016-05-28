@@ -35,7 +35,7 @@ public class TileEntityLabyrinthEye extends TileEntitySchematicBlock implements 
 	{
 		super.update();
 		
-		if (this.protectedRegion == null)
+		if (this.protectedRegion == null || this.getWorld().isRemote)
 		{
 			return;
 		}

@@ -169,7 +169,7 @@ public class TileEntitySchematicBoundary extends TileEntitySchematicBlock
 			this.bounds = BlockPosUtil.bounds(this.getPos(), this.linkedPos);
 		}
 	
-		if (this.shouldFetch)
+		if (this.shouldFetch && !this.getWorld().isRemote)
 		{
 			List<Entity> entities = this.worldObj.getEntitiesWithinAABB(Entity.class, this.bounds);
 			
@@ -187,6 +187,11 @@ public class TileEntitySchematicBoundary extends TileEntitySchematicBlock
 	
 	private void recreateFetchedEntities()
 	{
+		if (this.getWorld().isRemote)
+		{
+			return;
+		}
+		
 		this.shouldFetch = false;
 		
 		for (FetchedEntity entity : this.fetchedEntities)
