@@ -28,7 +28,7 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 	@Override
 	public String getName()
 	{
-		return "container.skyroot_chest";
+		return "container.schematicBlock";
 	}
 
 	@Override

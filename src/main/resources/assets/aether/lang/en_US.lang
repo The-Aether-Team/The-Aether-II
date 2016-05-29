@@ -291,6 +291,7 @@ itemGroup.aetherAccessories=Equipment
 container.holystone_furnace=Holystone Furnace
 container.skyroot_chest=Skyroot Chest
 container.skyroot_double_chest=Large Skyroot Chest
+container.schematicBlock=Replace With (Chosen Randomly)
 
 # Accessory slot names
 gui.slot.neckwear=Neckwear

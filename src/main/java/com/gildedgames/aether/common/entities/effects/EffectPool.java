@@ -53,7 +53,7 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 				}
 			}
 
-			if (isMet)
+			if (isMet || instance.getRules().length <= 0)
 			{
 				instancesRulesMet.add(instance);
 			}
@@ -80,7 +80,7 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 				}
 			}
 
-			if (isMet)
+			if (isMet || instance.getRules().length <= 0)
 			{
 				instancesRulesMet.add(instance);
 			}
@@ -112,7 +112,7 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 				}
 			}
 
-			if (isMet)
+			if (isMet || instance.getRules().length <= 0)
 			{
 				instancesRulesMet.add(instance);
 			}
@@ -146,7 +146,7 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 				}
 			}
 
-			if (isMet)
+			if (isMet || instance.getRules().length <= 0)
 			{
 				instancesRulesMet.add(instance);
 			}
@@ -175,7 +175,7 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 				}
 			}
 
-			if (isMet)
+			if (isMet || instance.getRules().length <= 0)
 			{
 				instancesRulesMet.add(instance);
 			}

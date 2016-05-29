@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.effects;
 
 import com.gildedgames.aether.api.entities.effects.IEffectPool;
 import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -13,6 +14,17 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EntityEffectsEventHooks
 {
+	
+	@SubscribeEvent
+	public void onLivingUpdate(LivingUpdateEvent event)
+	{
+		IEntityEffectsCapability effects = EntityEffects.get(event.entityLiving);
+
+		if (effects != null)
+		{
+			effects.onUpdate(event);
+		}
+	}
 
 	@SubscribeEvent
 	public void onLivingEntityHurt(LivingHurtEvent event)

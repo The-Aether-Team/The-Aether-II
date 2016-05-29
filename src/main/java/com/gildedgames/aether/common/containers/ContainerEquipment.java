@@ -173,7 +173,7 @@ public class ContainerEquipment extends ContainerPlayer
 							EntityEffectProcessor processor = effect.getLeft();
 							EntityEffectInstance instance = effect.getRight();
 							
-							effects.put(processor, instance);
+							effects.addInstance(processor, instance);
 						}
 					}
 				}

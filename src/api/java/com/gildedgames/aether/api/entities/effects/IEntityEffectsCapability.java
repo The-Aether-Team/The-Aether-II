@@ -1,10 +1,10 @@
 package com.gildedgames.aether.api.entities.effects;
 
-import net.minecraft.entity.player.EntityPlayer;
+import java.util.List;
+
+import net.minecraft.entity.Entity;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-
-import java.util.List;
 
 public interface IEntityEffectsCapability
 {
@@ -12,14 +12,11 @@ public interface IEntityEffectsCapability
 
 	void onHurt(LivingHurtEvent event);
 
-	/**
-	 * @return The {@link EntityPlayer} this capability is attached to.
-	 */
-	EntityPlayer getPlayer();
+	Entity getEntity();
 
 	List<IEffectPool<?>> getEffectPools();
 
-	<I extends EntityEffectInstance> void put(EntityEffectProcessor<I> processor, I instance);
+	<I extends EntityEffectInstance> void addInstance(EntityEffectProcessor<I> processor, I instance);
 
 	<I extends EntityEffectInstance> void removeEntry(EntityEffectProcessor<I> processor);
 

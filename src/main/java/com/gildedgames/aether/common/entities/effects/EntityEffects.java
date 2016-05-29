@@ -1,14 +1,25 @@
 package com.gildedgames.aether.common.entities.effects;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.IMob;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.entities.effects.IEffectPool;
 import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.entities.effects.processors.BreatheUnderwaterEffect;
 import com.gildedgames.aether.common.entities.effects.processors.DoubleDropEffect;
 import com.gildedgames.aether.common.entities.effects.processors.FreezeBlocksEffect;
+import com.gildedgames.aether.common.entities.effects.processors.FrozenInSchematicEffect;
 import com.gildedgames.aether.common.entities.effects.processors.ModifyDamageEffect;
 import com.gildedgames.aether.common.entities.effects.processors.ModifyMaxHealthEffect;
 import com.gildedgames.aether.common.entities.effects.processors.ModifySpeedEffect;
@@ -17,17 +28,6 @@ import com.gildedgames.aether.common.entities.effects.processors.player.Daggerfr
 import com.gildedgames.aether.common.entities.effects.processors.player.ModifyXPCollectionEffect;
 import com.gildedgames.aether.common.entities.effects.processors.player.PauseHungerEffect;
 import com.google.common.collect.Lists;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class EntityEffects implements IEntityEffectsCapability
 {
@@ -50,8 +50,10 @@ public class EntityEffects implements IEntityEffectsCapability
 	public static final EntityEffectProcessor<ModifySpeedEffect.Instance> MODIFY_SPEED = new ModifySpeedEffect();
 
 	public static final EntityEffectProcessor<RegenerateHealthEffect.Instance> REGENERATE_HEALTH = new RegenerateHealthEffect();
+	
+	public static final EntityEffectProcessor<FrozenInSchematicEffect.Instance> FROZEN_IN_SCHEMATIC = new FrozenInSchematicEffect();
 
-	private final EntityPlayer player;
+	private final Entity entity;
 
 	private final List<IEffectPool<?>> effects = Lists.newArrayList();
 
@@ -62,9 +64,9 @@ public class EntityEffects implements IEntityEffectsCapability
 		return entity.getCapability(AetherCapabilities.ENTITY_EFFECTS, null);
 	}
 
-	public EntityEffects(EntityPlayer player)
+	public EntityEffects(Entity entity)
 	{
-		this.player = player;
+		this.entity = entity;
 	}
 
 	@Override
@@ -92,7 +94,7 @@ public class EntityEffects implements IEntityEffectsCapability
 	}
 
 	@Override
-	public <I extends EntityEffectInstance> void put(EntityEffectProcessor<I> processor, I instance)
+	public <I extends EntityEffectInstance> void addInstance(EntityEffectProcessor<I> processor, I instance)
 	{
 		if (processor == null || instance == null)
 		{
@@ -106,7 +108,7 @@ public class EntityEffects implements IEntityEffectsCapability
 			pool.getInstances().add(instance);
 		}
 
-		processor.apply(this.player, instance, pool.getInstances());
+		processor.apply(this.entity, instance, pool.getInstances());
 	}
 
 	@Override
@@ -121,7 +123,7 @@ public class EntityEffects implements IEntityEffectsCapability
 
 		for (I instance : pool.getInstances())
 		{
-			processor.cancel(this.player, instance, pool.getInstances());
+			processor.cancel(this.entity, instance, pool.getInstances());
 		}
 
 		this.effects.remove(pool);
@@ -137,7 +139,7 @@ public class EntityEffects implements IEntityEffectsCapability
 
 		EffectPool<I> pool = this.getPool(processor);
 
-		processor.cancel(this.player, instance, pool.getInstances());
+		processor.cancel(this.entity, instance, pool.getInstances());
 
 		pool.getInstances().remove(instance);
 	}
@@ -147,7 +149,7 @@ public class EntityEffects implements IEntityEffectsCapability
 	{
 		for (IEffectPool<?> pool : this.getEffectPools())
 		{
-			pool.tick(this.player);
+			pool.tick(this.entity);
 		}
 
 		this.ticksSinceAttacked++;
@@ -163,9 +165,9 @@ public class EntityEffects implements IEntityEffectsCapability
 	}
 
 	@Override
-	public EntityPlayer getPlayer()
+	public Entity getEntity()
 	{
-		return this.player;
+		return this.entity;
 	}
 
 	@Override

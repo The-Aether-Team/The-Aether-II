@@ -53,6 +53,38 @@ public class BlockBoundary extends BlockContainer
 	{
 		return EnumWorldBlockLayer.CUTOUT;
 	}
+	
+	@Override
+    public boolean removedByPlayer(World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
+    {
+		TileEntity te = world.getTileEntity(pos);
+		
+		if (te instanceof TileEntityBoundary)
+		{
+			TileEntityBoundary sb = (TileEntityBoundary)te;
+			
+			if (sb.isLinked())
+			{
+				if (sb.isMasterBoundary())
+				{
+					sb.destroyLinkAndContents();
+				}
+				else
+				{
+					te = world.getTileEntity(sb.getLink());
+					
+					if (te instanceof TileEntityBoundary)
+					{
+						sb = (TileEntityBoundary)te;
+						
+						sb.destroyLinkAndContents();
+					}
+				}
+			}
+		}
+		
+		return super.removedByPlayer(world, pos, player, willHarvest);
+    }
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)

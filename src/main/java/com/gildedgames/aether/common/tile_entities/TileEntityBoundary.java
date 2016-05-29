@@ -13,7 +13,12 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.BlockPos.MutableBlockPos;
 import net.minecraft.util.MathHelper;
 
+import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.entities.effects.IEffectPool;
+import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.entities.effects.EntityEffects;
+import com.gildedgames.aether.common.entities.effects.processors.FrozenInSchematicEffect;
 import com.gildedgames.aether.common.util.BlockPosUtil;
 import com.gildedgames.util.core.nbt.NBT;
 import com.gildedgames.util.core.nbt.NBTHelper;
@@ -83,6 +88,11 @@ public class TileEntityBoundary extends TileEntityWildcard
 		
 	}
 	
+	public boolean isMasterBoundary()
+	{
+		return this.masterBoundary;
+	}
+	
 	@Override
 	public void unmarkForGeneration()
 	{
@@ -128,6 +138,11 @@ public class TileEntityBoundary extends TileEntityWildcard
 	public boolean isLinked()
 	{
 		return this.linkedPos != null;
+	}
+	
+	public BlockPos getLink()
+	{
+		return this.linkedPos;
 	}
 	
 	public void linkToPos(BlockPos pos)
@@ -177,11 +192,31 @@ public class TileEntityBoundary extends TileEntityWildcard
 			
 			for (Entity entity : entities)
 			{
-				if (!(entity instanceof EntityPlayer))
+				if (!(entity instanceof EntityPlayer) && entity.hasCapability(AetherCapabilities.ENTITY_EFFECTS, null))
 				{
-					this.fetchedEntities.add(new FetchedEntity(this.getPos(), entity));
+					IEntityEffectsCapability effects = EntityEffects.get(entity);
 					
-					this.worldObj.removeEntity(entity);
+					if (effects != null)
+					{
+						boolean hasProcessor = false;
+						
+						innerloop:
+						for (IEffectPool<?> pool : effects.getEffectPools())
+						{
+							if (pool.getProcessor() == EntityEffects.FROZEN_IN_SCHEMATIC && pool.getInstances().size() > 0)
+							{
+								hasProcessor = true;
+								break innerloop;
+							}
+						}
+						
+						if (!hasProcessor)
+						{
+							this.fetchedEntities.add(new FetchedEntity(this.getPos(), entity));
+		
+							effects.addInstance(EntityEffects.FROZEN_IN_SCHEMATIC, new FrozenInSchematicEffect.Instance());
+						}
+					}
 				}
 			}
 		}
@@ -215,6 +250,9 @@ public class TileEntityBoundary extends TileEntityWildcard
 		
 		NBTHelper.writeBlockPos(compound, "linkedPos", this.linkedPos);
 		NBTHelper.fullySerializeCollection("fetchedEntities", this.fetchedEntities, compound);
+		
+		compound.setBoolean("masterBoundary", this.masterBoundary);
+		compound.setBoolean("shouldFetch", this.shouldFetch);
 	}
 
 	@Override
@@ -227,6 +265,9 @@ public class TileEntityBoundary extends TileEntityWildcard
 		Collection<FetchedEntity> col = NBTHelper.fullyDeserializeCollection("fetchedEntities", compound);
 		
 		this.fetchedEntities.addAll(col);
+		
+		this.masterBoundary = compound.getBoolean("masterBoundary");
+		this.shouldFetch = compound.getBoolean("shouldFetch");
 	}
 
 	@Override
@@ -241,6 +282,52 @@ public class TileEntityBoundary extends TileEntityWildcard
 	public void onMarkedForGeneration(BlockPos start, BlockPos end)
 	{
 		super.onMarkedForGeneration(start, end);
+	}
+	
+	public void destroyLinkAndContents()
+	{
+		if (!this.isLinked() || this.bounds == null)
+		{
+			return;
+		}
+		
+		if (!this.getWorld().isRemote)
+		{
+			List<Entity> entities = this.worldObj.getEntitiesWithinAABB(Entity.class, this.bounds);
+			
+			for (Entity entity : entities)
+			{
+				if (!(entity instanceof EntityPlayer) && entity.hasCapability(AetherCapabilities.ENTITY_EFFECTS, null))
+				{
+					IEntityEffectsCapability effects = EntityEffects.get(entity);
+					
+					if (effects != null)
+					{
+						boolean hasProcessor = false;
+						
+						innerloop:
+						for (IEffectPool<?> pool : effects.getEffectPools())
+						{
+							if (pool.getProcessor() == EntityEffects.FROZEN_IN_SCHEMATIC && pool.getInstances().size() > 0)
+							{
+								hasProcessor = true;
+								break innerloop;
+							}
+						}
+						
+						if (hasProcessor)
+						{
+							this.getWorld().removeEntity(entity);
+						}
+					}
+				}
+			}
+		}
+		
+		this.fetchedEntities.clear();
+		
+		this.getWorld().setBlockToAir(this.getLink());
+		this.getWorld().setBlockToAir(this.getPos());
 	}
 	
 }
