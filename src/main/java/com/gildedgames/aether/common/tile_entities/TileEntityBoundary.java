@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.tile_entities;
 import java.util.Collection;
 import java.util.List;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,14 +19,14 @@ import com.gildedgames.util.core.nbt.NBT;
 import com.gildedgames.util.core.nbt.NBTHelper;
 import com.google.common.collect.Lists;
 
-public class TileEntitySchematicBoundary extends TileEntitySchematicBlock
+public class TileEntityBoundary extends TileEntityWildcard
 {
+	
+	private boolean masterBoundary;
 	
 	private BlockPos linkedPos;
 	
 	private AxisAlignedBB bounds;
-
-	private IBlockState stateToReplace;
 	
 	private List<FetchedEntity> fetchedEntities = Lists.newArrayList();
 	
@@ -133,24 +132,27 @@ public class TileEntitySchematicBoundary extends TileEntitySchematicBlock
 	
 	public void linkToPos(BlockPos pos)
 	{
-		TileEntity te = this.getWorld().getTileEntity(pos);
-		
-		if (te instanceof TileEntitySchematicBoundary)
+		TileEntity ourTE = this.getWorld().getTileEntity(this.getPos());
+		TileEntity theirTE = this.getWorld().getTileEntity(pos);
+
+		if (theirTE instanceof TileEntityBoundary)
 		{
-			TileEntitySchematicBoundary sb = (TileEntitySchematicBoundary)te;
+			TileEntityBoundary sb = (TileEntityBoundary)theirTE;
 			
 			this.linkedPos = pos;
+			sb.linkedPos = this.getPos();
+			
+			this.masterBoundary = true; // set this boundary as the master
+			sb.masterBoundary = false; // make sure other boundary is not the master
+			
+			NBTTagCompound tagOurTE = ourTE.serializeNBT();
+			NBTTagCompound tagTheirTE = theirTE.serializeNBT();
 			
 			this.getWorld().setBlockState(pos, BlocksAether.linkedSchematicBoundary.getDefaultState());
+			this.getWorld().setBlockState(this.getPos(), BlocksAether.linkedSchematicBoundary.getDefaultState());
 			
-			te = this.getWorld().getTileEntity(pos);
-			
-			if (te instanceof TileEntityLinkedSchematicBoundary)
-			{
-				TileEntityLinkedSchematicBoundary link = (TileEntityLinkedSchematicBoundary)te;
-				
-				link.linkToPos(this.getPos());
-			}
+			this.getWorld().getTileEntity(pos).deserializeNBT(tagTheirTE);
+			this.getWorld().getTileEntity(this.getPos()).deserializeNBT(tagOurTE);
 		}
 	}
 
@@ -159,7 +161,7 @@ public class TileEntitySchematicBoundary extends TileEntitySchematicBlock
 	{
 		super.update();
 		
-		if (this.linkedPos == null)
+		if (this.linkedPos == null || !this.masterBoundary)
 		{
 			return;
 		}
@@ -187,7 +189,7 @@ public class TileEntitySchematicBoundary extends TileEntitySchematicBlock
 	
 	private void recreateFetchedEntities()
 	{
-		if (this.getWorld().isRemote)
+		if (this.getWorld().isRemote || !this.masterBoundary)
 		{
 			return;
 		}
@@ -213,9 +215,6 @@ public class TileEntitySchematicBoundary extends TileEntitySchematicBlock
 		
 		NBTHelper.writeBlockPos(compound, "linkedPos", this.linkedPos);
 		NBTHelper.fullySerializeCollection("fetchedEntities", this.fetchedEntities, compound);
-		
-		//compound.setString("state", this.stateToReplace.getBlock().getRegistryName());
-		//compound.setInteger("meta", this.stateToReplace.getBlock().getMetaFromState(this.stateToReplace));
 	}
 
 	@Override
@@ -228,32 +227,20 @@ public class TileEntitySchematicBoundary extends TileEntitySchematicBlock
 		Collection<FetchedEntity> col = NBTHelper.fullyDeserializeCollection("fetchedEntities", compound);
 		
 		this.fetchedEntities.addAll(col);
-	
-		//String state = compound.getString("state");
-		//int meta = compound.getInteger("meta");
-		
-		//IBlockState temp = (IBlockState) GameData.getBlockRegistry().getObject(new ResourceLocation(state));
-		
-		//this.stateToReplace = temp.getBlock().getStateFromMeta(meta);
 	}
 
 	@Override
 	public void onSchematicGeneration()
 	{
 		this.recreateFetchedEntities();
-		this.getWorld().setBlockToAir(this.getPos());
+		
+		super.onSchematicGeneration();
 	}
 
 	@Override
 	public void onMarkedForGeneration(BlockPos start, BlockPos end)
 	{
-		
-	}
-	
-	@Override
-	public boolean shouldInvalidateTEOnGen()
-	{
-		return true;
+		super.onMarkedForGeneration(start, end);
 	}
 	
 }

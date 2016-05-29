@@ -16,8 +16,7 @@ public class TileEntitiesAether
 			LABYRINTH_TOTEM = "aether.labyrinth_totem",
 			LABYRINTH_EYE = "aether.labyrinth_eye",
 			WILDCARD = "aether.wildcard",
-			SCHEMATIC_BOUNDARY = "aether.schematicBoundary",
-			LINKED_SCHEMATIC_BOUNDARY = "aether.linkedSchematicBoundary";
+			BOUNDARY = "aether.boundary";
 
 	public static void preInit()
 	{
@@ -29,8 +28,7 @@ public class TileEntitiesAether
 		GameRegistry.registerTileEntity(TileEntityLabyrinthTotem.class, LABYRINTH_TOTEM);
 		GameRegistry.registerTileEntity(TileEntityLabyrinthEye.class, LABYRINTH_EYE);
 		GameRegistry.registerTileEntity(TileEntityWildcard.class, WILDCARD);
-		GameRegistry.registerTileEntity(TileEntitySchematicBoundary.class, SCHEMATIC_BOUNDARY);
-		GameRegistry.registerTileEntity(TileEntityLinkedSchematicBoundary.class, LINKED_SCHEMATIC_BOUNDARY);
+		GameRegistry.registerTileEntity(TileEntityBoundary.class, BOUNDARY);
 	}
 	
 }

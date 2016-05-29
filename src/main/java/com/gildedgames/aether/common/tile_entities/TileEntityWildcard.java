@@ -1,12 +1,11 @@
 package com.gildedgames.aether.common.tile_entities;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
-import net.minecraftforge.fml.common.registry.GameData;
 
-import com.google.common.collect.Iterators;
+import com.gildedgames.aether.common.util.BlockPosUtil;
 
 public class TileEntityWildcard extends TileEntitySchematicBlock
 {
@@ -14,11 +13,51 @@ public class TileEntityWildcard extends TileEntitySchematicBlock
 	@Override
 	public void onSchematicGeneration()
 	{
-		Random rand = new Random();
+		int contentSize = 0;
 		
-		Block block = Iterators.get(GameData.getBlockRegistry().iterator(), rand.nextInt(Iterators.size(GameData.getBlockRegistry().iterator())));
+		for (ItemStack stack : this.contents)
+		{
+			if (stack != null && stack.getItem() instanceof ItemBlock)
+			{
+				contentSize += stack.stackSize;
+			}
+		}
 		
-		this.getWorld().setBlockState(this.getPos(), block.getDefaultState());
+		if (contentSize == 0)
+		{
+			this.getWorld().setBlockToAir(this.getPos());
+			this.getWorld().markBlockForUpdate(this.getPos());
+			
+			return;
+		}
+		
+		int currentIndex = this.getWorld().rand.nextInt(contentSize);
+		ItemStack chosenStack = null;
+	
+		for (ItemStack stack : this.contents)
+		{
+			if (stack != null && stack.getItem() instanceof ItemBlock)
+			{
+				if (stack.stackSize > currentIndex)
+				{
+					chosenStack = stack;
+					break;
+				}
+				else
+				{
+					currentIndex -= stack.stackSize;
+				}
+			}
+		}
+		
+		ItemBlock itemBlock = (ItemBlock)chosenStack.getItem();
+		
+		Block block = itemBlock.getBlock();
+		int damage = chosenStack.getItemDamage();
+		
+		this.getWorld().setBlockState(this.getPos(), block.getStateFromMeta(damage));
+		BlockPosUtil.setTileEntityNBT(this.getWorld(), this.getPos(), chosenStack);
+		this.getWorld().markBlockForUpdate(this.getPos());
 	}
 	
 	@Override

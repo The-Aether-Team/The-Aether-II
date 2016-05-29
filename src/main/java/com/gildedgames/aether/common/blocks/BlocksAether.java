@@ -28,12 +28,11 @@ import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockStand
 import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockWallSkyrootSign;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockSkyrootWorkbench;
+import com.gildedgames.aether.common.blocks.dungeon.BlockBoundary;
 import com.gildedgames.aether.common.blocks.dungeon.BlockDivine;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinth;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthEye;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthPillar;
-import com.gildedgames.aether.common.blocks.dungeon.BlockLinkedSchematicBoundary;
-import com.gildedgames.aether.common.blocks.dungeon.BlockSchematicBoundary;
 import com.gildedgames.aether.common.blocks.dungeon.BlockTeleporter;
 import com.gildedgames.aether.common.blocks.dungeon.BlockWildcard;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
@@ -288,8 +287,8 @@ public class BlocksAether
 
 		wildcard = registerBlock("wildcard", new BlockWildcard(), AetherCreativeTabs.tabBlocks);
 		
-		schematicBoundary = registerBlock("schematicBoundary", new BlockSchematicBoundary(), AetherCreativeTabs.tabBlocks);
-		linkedSchematicBoundary = registerBlock("linkedSchematicBoundary", new BlockLinkedSchematicBoundary());
+		schematicBoundary = registerBlock("schematicBoundary", new BlockBoundary(), AetherCreativeTabs.tabBlocks);
+		linkedSchematicBoundary = registerBlock("linkedSchematicBoundary", new BlockBoundary());
 		
 		registerHarvestLevels();
 	}

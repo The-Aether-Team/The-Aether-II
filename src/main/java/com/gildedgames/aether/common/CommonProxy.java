@@ -30,7 +30,7 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.player.PlayerAetherEvents;
 import com.gildedgames.aether.common.recipes.RecipesAether;
 import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
-import com.gildedgames.aether.common.tile_entities.TileEntitySchematicBoundary.FetchedEntity;
+import com.gildedgames.aether.common.tile_entities.TileEntityBoundary.FetchedEntity;
 import com.gildedgames.aether.common.world.WorldProviderAether;
 import com.gildedgames.aether.common.world.chunk.PlacementFlagFactory;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstance;

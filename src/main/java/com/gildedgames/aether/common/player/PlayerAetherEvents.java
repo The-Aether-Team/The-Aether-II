@@ -1,9 +1,6 @@
 package com.gildedgames.aether.common.player;
 
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.common.world.chunk.AetherPlaceFlagChunkHook;
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import com.gildedgames.util.modules.chunk.ChunkModule;
+import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTBase;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -13,8 +10,17 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.world.chunk.AetherPlaceFlagChunkHook;
+import com.gildedgames.util.modules.chunk.ChunkModule;
 
 public class PlayerAetherEvents
 {

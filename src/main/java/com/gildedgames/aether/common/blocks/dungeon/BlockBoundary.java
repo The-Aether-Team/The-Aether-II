@@ -10,17 +10,18 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.player.PlayerAether;
-import com.gildedgames.aether.common.tile_entities.TileEntitySchematicBoundary;
+import com.gildedgames.aether.common.tile_entities.TileEntityBoundary;
 
-public class BlockSchematicBoundary extends BlockContainer
+public class BlockBoundary extends BlockContainer
 {
-	public BlockSchematicBoundary()
+	public BlockBoundary()
 	{
 		super(Material.rock);
 
@@ -58,13 +59,30 @@ public class BlockSchematicBoundary extends BlockContainer
 	{
 		if (!world.isRemote)
 		{
+			if (player.isSneaking())
+			{
+				TileEntity tileentity = world.getTileEntity(pos);
+
+	            if (tileentity instanceof ILockableContainer)
+	            {
+	                ILockableContainer ilockablecontainer = (ILockableContainer)tileentity;
+
+			        if (ilockablecontainer != null)
+			        {
+			            player.displayGUIChest(ilockablecontainer);
+			        }
+
+	            	return true;
+	            }
+			}
+			
 			TileEntity te = world.getTileEntity(pos);
 			
-			if (te instanceof TileEntitySchematicBoundary)
+			if (te instanceof TileEntityBoundary)
 			{
 				IPlayerAetherCapability hook = PlayerAether.getPlayer(player);
 				
-				TileEntitySchematicBoundary sb = (TileEntitySchematicBoundary)te;
+				TileEntityBoundary sb = (TileEntityBoundary)te;
 				
 				if (hook.getLinkingSchematicBoundary() != null)
 				{
@@ -107,6 +125,6 @@ public class BlockSchematicBoundary extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{
-		return new TileEntitySchematicBoundary();
+		return new TileEntityBoundary();
 	}
 }
