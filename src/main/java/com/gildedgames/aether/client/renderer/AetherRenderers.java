@@ -16,6 +16,7 @@ import com.gildedgames.aether.client.renderer.tile_entities.TileEntityLabyrinthT
 import com.gildedgames.aether.client.renderer.tile_entities.TileEntitySkyrootChestRenderer;
 import com.gildedgames.aether.client.renderer.tile_entities.TileEntitySkyrootSignRenderer;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
+import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
 import com.gildedgames.aether.common.entities.living.EntityAechorPlant;
 import com.gildedgames.aether.common.entities.living.EntityAerbunny;
 import com.gildedgames.aether.common.entities.living.EntityCarrionSprout;
@@ -29,7 +30,12 @@ import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
 import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthTotem;
 import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootChest;
 import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootSign;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderEntityItem;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class AetherRenderers
@@ -57,6 +63,14 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityAechorPlant.class, new AetherRenderFactory<>(RenderAechorPlant.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityAerbunny.class, new AetherRenderFactory<>(RenderAerbunny.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCarrionSprout.class, new AetherRenderFactory<>(RenderCarrionSprout.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityPhoenixItem.class, new IRenderFactory<EntityPhoenixItem>()
+		{
+			@Override
+			public Render<? super EntityPhoenixItem> createRenderFor(RenderManager manager)
+			{
+				return new RenderEntityItem(manager, Minecraft.getMinecraft().getRenderItem());
+			}
+		});
 	}
 
 	private static void registerTESRs()

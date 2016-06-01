@@ -3,6 +3,8 @@ package com.gildedgames.aether.common;
 import java.io.File;
 import java.util.Random;
 
+import com.gildedgames.aether.common.entities.EntityItemWatcher;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
@@ -86,16 +88,13 @@ public class CommonProxy
 
 	public void init(FMLInitializationEvent event)
 	{
-		AetherAPI.equipmentRegistry().register(Items.apple, ItemRarity.EPIC, ItemEquipmentType.ARTIFACT);
-
 		MinecraftForge.EVENT_BUS.register(new CommonEvents());
 		MinecraftForge.EVENT_BUS.register(new PlayerAetherEvents());
 		MinecraftForge.EVENT_BUS.register(new EntityEffectsEventHooks());
+		MinecraftForge.EVENT_BUS.register(new EntityItemWatcher());
 
 		AetherCapabilityManager capabilities = new AetherCapabilityManager();
 		capabilities.init();
-
-		MinecraftForge.EVENT_BUS.register(capabilities);
 
 		MinecraftForge.EVENT_BUS.register(ItemsAether.skyroot_sword);
 
