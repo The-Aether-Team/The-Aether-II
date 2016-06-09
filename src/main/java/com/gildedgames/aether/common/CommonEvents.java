@@ -115,6 +115,7 @@ public class CommonEvents
 			final double posZ = entity.posZ;
 
 			final WorldServer server = MinecraftServer.getServer().worldServerForDimension(0);
+			final WorldServer aetherServer = MinecraftServer.getServer().worldServerForDimension(AetherCore.getAetherDimID());
 
 			final Entity transferMount = this.cutFromDim(entity.ridingEntity, server);
 			final Entity transferMountedBy = this.cutFromDim(entity.riddenByEntity, server);
@@ -128,7 +129,12 @@ public class CommonEvents
 			}
 			else
 			{
-				scm.transferEntityToWorld(entity, 0, MinecraftServer.getServer().worldServerForDimension(AetherCore.getAetherDimID()), server, teleporter);
+				/*
+				BUG: When an entity (not the player) falls out of the Aether, it teleports to the Minecraft world (correctly)
+				but also teleports to the top of the Aether world. 
+				 */
+
+				scm.transferEntityToWorld(entity, 0, aetherServer, server, teleporter);
 			}
 
 			entity.setPositionAndUpdate(posX, 256, posZ);
