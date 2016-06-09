@@ -16,12 +16,12 @@ public abstract class BlockMultiController extends BlockMultiBase
 		super(material);
 	}
 
-	public abstract Iterable<BlockPos.MutableBlockPos> getMultiblockVolumeIterator(BlockPos pos);
+	public abstract Iterable<BlockPos.MutableBlockPos> getMultiblockVolumeIterator(BlockPos pos, World world);
 
 	@Override
 	public boolean canPlaceBlockAt(World world, BlockPos placePos)
 	{
-		for (BlockPos pos : this.getMultiblockVolumeIterator(placePos))
+		for (BlockPos pos : this.getMultiblockVolumeIterator(placePos, world))
 		{
 			IBlockState state = world.getBlockState(pos);
 

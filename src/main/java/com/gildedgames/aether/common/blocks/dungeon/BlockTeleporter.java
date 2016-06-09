@@ -17,7 +17,7 @@ public class BlockTeleporter extends BlockMultiController
 	}
 
 	@Override
-	public Iterable<BlockPos.MutableBlockPos> getMultiblockVolumeIterator(BlockPos pos)
+	public Iterable<BlockPos.MutableBlockPos> getMultiblockVolumeIterator(BlockPos pos, World world )
 	{
 		return BlockPos.getAllInBoxMutable(pos, pos.up());
 	}

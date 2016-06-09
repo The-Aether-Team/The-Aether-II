@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
 
 public abstract class TileEntityMultiblockController extends TileEntity implements TileEntityMultiblockInterface
 {
@@ -19,7 +20,7 @@ public abstract class TileEntityMultiblockController extends TileEntity implemen
 
 	public void rebuild()
 	{
-		for (BlockPos.MutableBlockPos pos : block.getMultiblockVolumeIterator(this.pos))
+		for (BlockPos.MutableBlockPos pos : block.getMultiblockVolumeIterator(this.pos, this.getWorld()))
 		{
 			if (this.worldObj.getTileEntity(pos) == this)
 			{
@@ -36,7 +37,7 @@ public abstract class TileEntityMultiblockController extends TileEntity implemen
 	@Override
 	public void onDestroyed()
 	{
-		for (BlockPos.MutableBlockPos pos : block.getMultiblockVolumeIterator(this.pos))
+		for (BlockPos.MutableBlockPos pos : block.getMultiblockVolumeIterator(this.pos, this.getWorld()))
 		{
 			if (this.doesControllerOwn(pos))
 			{

@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks;
 
+import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthDoor;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -155,6 +156,8 @@ public class BlocksAether
 
 	public static Block labyrinth_pillar;
 
+	public static BlockLabyrinthDoor labyrinth_door;
+
 	public static BlockLabyrinth labyrinth_wall, labyrinth_lightstone, labyrinth_base, labyrinth_headstone;
 	
 	public static Block labyrinth_eye, wildcard, schematicBoundary, linkedSchematicBoundary;
@@ -269,6 +272,7 @@ public class BlocksAether
 		aerogel_wall = registerBlock("aerogel_wall", new BlockAerogelWall(BlocksAether.aerogel, 1.0f, 10.f), AetherCreativeTabs.tabBlocks);
 
 		labyrinth_totem = registerBlock("labyrinth_totem", new BlockTeleporter(Material.iron), AetherCreativeTabs.tabBlocks);
+		labyrinth_door = registerBlock("labyrinth_door", new  BlockLabyrinthDoor (Material.rock), AetherCreativeTabs.tabBlocks);
 
 		multiblock_dummy = registerBlock("multiblock_dummy", new BlockMultiDummy().setBlockUnbreakable());
 

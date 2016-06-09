@@ -1,0 +1,6 @@
+{
+	"parent": "aether:block/tesr",
+	"textures": {
+		"particle": "aether:blocks/holystone/holystone"
+	}
+}
