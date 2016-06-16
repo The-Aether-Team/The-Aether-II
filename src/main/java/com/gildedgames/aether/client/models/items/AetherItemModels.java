@@ -336,6 +336,7 @@ public class AetherItemModels
 
 		registerItemModels(new ItemModelList(BlocksAether.carved_capstone).add(0, "carved_capstone"));
 		registerItemModels(new ItemModelList(BlocksAether.labyrinth_pillar).add(0, "labyrinth_pillar"));
+		registerItemModels(new ItemModelList(BlocksAether.labyrinth_pillar2).add(0, "labyrinth_pillar2"));
 		registerItemModels(new ItemModelList(BlocksAether.labyrinth_wall).add(0, "labyrinth_wall"));
 		registerItemModels(new ItemModelList(BlocksAether.labyrinth_lightstone).add(0, "labyrinth_lightstone"));
 		registerItemModels(new ItemModelList(BlocksAether.labyrinth_base).add(0, "labyrinth_base"));

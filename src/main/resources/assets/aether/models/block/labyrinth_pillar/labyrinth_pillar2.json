@@ -1,0 +1,7 @@
+{
+	"parent": "block/cube_column",
+	"textures": {
+		"end": "aether:blocks/dungeon/labyrinth_pillar2_top",
+		"side": "aether:blocks/dungeon/labyrinth_pillar2_side"
+	}
+}

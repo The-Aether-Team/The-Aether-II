@@ -154,7 +154,7 @@ public class BlocksAether
 
 	public static BlockLabyrinth carved_capstone;
 
-	public static Block labyrinth_pillar;
+	public static Block labyrinth_pillar, labyrinth_pillar2;
 
 	public static BlockLabyrinthDoor labyrinth_door;
 
@@ -278,6 +278,7 @@ public class BlocksAether
 
 		carved_capstone = registerBlock("carved_capstone", new BlockLabyrinth(), AetherCreativeTabs.tabBlocks);
 		labyrinth_pillar = registerBlock("labyrinth_pillar", new BlockLabyrinthPillar().setGlows(true), AetherCreativeTabs.tabBlocks);
+		labyrinth_pillar2 = registerBlock("labyrinth_pillar2", new BlockLabyrinthPillar(), AetherCreativeTabs.tabBlocks);
 		labyrinth_wall = registerBlock("labyrinth_wall", new BlockLabyrinth(), AetherCreativeTabs.tabBlocks);
 		labyrinth_lightstone = registerBlock("labyrinth_lightstone", new BlockLabyrinth().setGlows(true), AetherCreativeTabs.tabBlocks);
 		labyrinth_base = registerBlock("labyrinth_base", new BlockLabyrinth().setGlows(true), AetherCreativeTabs.tabBlocks);
