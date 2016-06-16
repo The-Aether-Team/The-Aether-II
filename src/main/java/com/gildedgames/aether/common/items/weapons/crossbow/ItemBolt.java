@@ -10,7 +10,15 @@ import java.util.List;
 
 public class ItemBolt extends Item
 {
-	private static final ItemBoltType[] ITEM_VARIANTS = new ItemBoltType[] { ItemBoltType.STONE, ItemBoltType.ZANITE };
+	private static final ItemBoltType[] ITEM_VARIANTS = new ItemBoltType[] {
+			ItemBoltType.SKYROOT,
+			ItemBoltType.STONE,
+			ItemBoltType.ZANITE,
+			ItemBoltType.GRAVITITE,
+			ItemBoltType.POISON,
+			ItemBoltType.ENCHANTED,
+			ItemBoltType.ARKENIUM
+	};
 
 	public ItemBolt()
 	{

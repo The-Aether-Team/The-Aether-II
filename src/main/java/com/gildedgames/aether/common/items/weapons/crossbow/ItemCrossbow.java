@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.player.PlayerAether;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -13,12 +14,18 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-/**
- * Created by Chris on 3/8/2016.
- */
+import java.util.List;
+
 public class ItemCrossbow extends Item
 {
+	private static final ItemCrossbowType[] ITEM_VARIANTS = new ItemCrossbowType[] {
+			ItemCrossbowType.WOOD,
+			ItemCrossbowType.ZANITE,
+			ItemCrossbowType.GRAVITITE
+	};
 
 	private final int AMMOSLOT = 6;
 
@@ -30,6 +37,8 @@ public class ItemCrossbow extends Item
 
 	public ItemCrossbow()
 	{
+		this.setHasSubtypes(true);
+
 		this.maxStackSize = 1;
 		isReadyToFire = false;
 		ammoBoltStack = null;
@@ -172,6 +181,22 @@ public class ItemCrossbow extends Item
 		}
 
 		return -1;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems)
+	{
+		for (ItemCrossbowType type : ITEM_VARIANTS)
+		{
+			subItems.add(new ItemStack(item, 1, type.ordinal()));
+		}
+	}
+
+	@Override
+	public String getUnlocalizedName(ItemStack stack)
+	{
+		return super.getUnlocalizedName(stack) + "." + ItemCrossbowType.fromOrdinal(stack.getMetadata()).getID();
 	}
 
 }

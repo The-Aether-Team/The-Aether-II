@@ -3,6 +3,7 @@ package com.gildedgames.aether.client.models.items;
 import java.util.ArrayList;
 import java.util.Map;
 
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbowType;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -245,10 +246,21 @@ public class AetherItemModels
 				.add(ItemDartType.ENCHANTED.ordinal(), "enchanted_dart")
 				.add(ItemDartType.POISON.ordinal(), "poison_dart"));
 
-		registerItemModels(new ItemModelList(ItemsAether.crossbow).root("crossbow/").add(0, "crossbow"));
+		registerItemModels(new ItemModelList(ItemsAether.crossbow).root("crossbow/")
+				.add(ItemCrossbowType.WOOD.ordinal(), "skyroot_crossbow")
+				.add(ItemCrossbowType.ZANITE.ordinal(), "zanite_crossbow")
+				.add(ItemCrossbowType.GRAVITITE.ordinal(), "gravitite_crossbow")
+		);
+
 		registerItemModels(new ItemModelList(ItemsAether.bolt).root("bolts/")
-				.add(ItemBoltType.STONE.ordinal(), "stone_bolt")
-				.add(ItemBoltType.ZANITE.ordinal(), "zanite_bolt"));
+				.add(ItemBoltType.SKYROOT.ordinal(), "skyroot_bolt")
+				.add(ItemBoltType.STONE.ordinal(), "holystone_bolt")
+				.add(ItemBoltType.ZANITE.ordinal(), "zanite_bolt")
+				.add(ItemBoltType.GRAVITITE.ordinal(), "gravitite_bolt")
+				.add(ItemBoltType.POISON.ordinal(), "poison_bolt")
+				.add(ItemBoltType.ENCHANTED.ordinal(), "enchanted_bolt")
+				.add(ItemBoltType.ARKENIUM.ordinal(), "arkenium_bolt")
+		);
 
 		registerItemModels(new ItemModelList(ItemsAether.flaming_sword).add(0, "weapons/flaming_sword"));
 		registerItemModels(new ItemModelList(ItemsAether.holy_sword).add(0, "weapons/holy_sword"));

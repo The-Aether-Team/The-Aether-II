@@ -1,21 +1,17 @@
 package com.gildedgames.aether.common.items.weapons.crossbow;
 
-public enum ItemBoltType
+public enum ItemCrossbowType
 {
 	/* DAMAGES ARE NOT FINAL */
-	SKYROOT(0.5f, "skyroot"),
-	STONE(1.0f, "holystone"),
-	ZANITE(2.0f, "zanite"),
-	GRAVITITE(3.0f, "gravitite"),
-	POISON(1.0f, "poison"),
-	ENCHANTED(2.0f, "enchanted"),
-	ARKENIUM(4.0f, "arkenium");
+	WOOD(0.5f, "skyroot"),
+	ZANITE(1.0f, "zanite"),
+	GRAVITITE(2.0f, "gravitite");
 
 	private final float damage;
 
 	private final String id;
 
-	ItemBoltType(float damage, String id)
+	ItemCrossbowType(float damage, String id)
 	{
 		this.damage = damage;
 		this.id = id;
@@ -31,14 +27,14 @@ public enum ItemBoltType
 		return this.id;
 	}
 
-	public ItemBoltType getAmmoItem()
+	public ItemCrossbowType getCrossbowItem()
 	{
 		return this;
 	}
 
-	public static ItemBoltType fromOrdinal(int ordinal)
+	public static ItemCrossbowType fromOrdinal(int ordinal)
 	{
-		ItemBoltType[] bolts = values();
+		ItemCrossbowType[] bolts = values();
 
 		return bolts[ordinal > bolts.length || ordinal < 0 ? 0 : ordinal];
 	}

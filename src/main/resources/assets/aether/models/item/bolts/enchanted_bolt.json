@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "aether:items/stone_bolt"
+		"layer0": "aether:items/weapons/crossbow/bolts/enchanted_bolt"
 	},
 	"display": {
 		"thirdperson": {

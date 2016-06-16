@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "aether:items/weapons/crossbow/bolts/zanite_bolt"
+		"layer0": "aether:items/weapons/crossbow/bolts/gravitite_bolt"
 	},
 	"display": {
 		"thirdperson": {
