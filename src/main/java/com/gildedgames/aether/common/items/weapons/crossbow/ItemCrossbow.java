@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.items.weapons.crossbow;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -19,7 +20,7 @@ import net.minecraft.world.World;
 public class ItemCrossbow extends Item
 {
 
-	private final int QUIVERSLOT = 0;
+	private final int AMMOSLOT = 6;
 
 	private boolean isReadyToFire;
 
@@ -44,10 +45,11 @@ public class ItemCrossbow extends Item
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
 	{
 		EntityPlayer player = (EntityPlayer) entityIn;
+		PlayerAether aePlayer = (PlayerAether) PlayerAether.getPlayer(player);
 
 		if (isSelected)
 		{
-			ammoBoltStack = player.inventory.getStackInSlot(QUIVERSLOT);
+			ammoBoltStack = player.inventory.getStackInSlot(AMMOSLOT);
 
 			if (ammoBoltStack != null)
 			{
@@ -57,8 +59,9 @@ public class ItemCrossbow extends Item
 			if (ammoBoltCount <= 0)
 			{
 				isReadyToFire = false;
-				player.inventory.setInventorySlotContents(QUIVERSLOT, null);
+				player.inventory.setInventorySlotContents(AMMOSLOT, null);
 			}
+
 		}
 	}
 
