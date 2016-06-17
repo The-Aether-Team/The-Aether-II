@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "aether:labyrinth_chest"
+		},
+		"facing=west": {
+			"model": "aether:labyrinth_chest",
+			"y": 270
+		},
+		"facing=south": {
+			"model": "aether:labyrinth_chest",
+			"y": 180
+		},
+		"facing=east": {
+			"model": "aether:labyrinth_chest",
+			"y": 90
+		}
+	}
+}
