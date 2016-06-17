@@ -14,19 +14,25 @@ public class TileEntityLabyrinthTotemRenderer extends TileEntitySpecialRenderer<
 	private static final ResourceLocation TEXTURE_TOTEM = AetherCore.getResource("textures/tile_entities/labyrinth_totem.png"),
 				TEXTURE_TOTEM_GLOW = AetherCore.getResource("textures/tile_entities/labyrinth_totem_glow.png");
 
-	private static final ModelLabyrinthTotem MODEL = new ModelLabyrinthTotem();
+	private final ModelLabyrinthTotem model = new ModelLabyrinthTotem();
 
 	@Override
 	public void renderTileEntityAt(TileEntityLabyrinthTotem te, double x, double y, double z, float partialTicks, int destroyStage)
 	{
-		float rotation = te.prevRenderTicks + (te.renderTicks - te.prevRenderTicks) * partialTicks;
+		float rotation = 0;
+
+		if (te != null)
+		{
+			rotation = te.prevRenderTicks + (te.renderTicks - te.prevRenderTicks) * partialTicks;
+		}
+
 		rotation /= 20;
 
-		MODEL.Shape6.rotateAngleY = rotation;
-		MODEL.Shape8.rotateAngleY = rotation;
-		MODEL.Shape9.rotateAngleY = rotation;
-		MODEL.Shape10.rotateAngleY = rotation;
-		MODEL.Shape11.rotateAngleY = rotation;
+		model.Shape6.rotateAngleY = rotation;
+		model.Shape8.rotateAngleY = rotation;
+		model.Shape9.rotateAngleY = rotation;
+		model.Shape10.rotateAngleY = rotation;
+		model.Shape11.rotateAngleY = rotation;
 
 		GlStateManager.pushMatrix();
 		GlStateManager.enableRescaleNormal();
@@ -37,12 +43,13 @@ public class TileEntityLabyrinthTotemRenderer extends TileEntitySpecialRenderer<
 		// Rendering as item... ?
 		if (te == null)
 		{
-			GlStateManager.scale(0.5f, 0.5f, 0.5f);
+			GlStateManager.scale(0.6f, 0.6f, 0.6f);
+			GlStateManager.translate(0.0f, 1.2f, 0.0f);
 		}
 
 		this.bindTexture(TEXTURE_TOTEM);
 
-		MODEL.renderAll(0.0625F);
+		model.renderAll(0.0625F);
 
 		this.bindTexture(TEXTURE_TOTEM_GLOW);
 
@@ -60,7 +67,7 @@ public class TileEntityLabyrinthTotemRenderer extends TileEntitySpecialRenderer<
 
 		GlStateManager.scale(1.01F, 1.01F, 1.01F);
 
-		MODEL.renderAll(0.0625F);
+		model.renderAll(0.0625F);
 
 		GlStateManager.disableBlend();
 

@@ -6,6 +6,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockTeleporter extends BlockMultiController
 {
@@ -17,7 +19,7 @@ public class BlockTeleporter extends BlockMultiController
 	}
 
 	@Override
-	public Iterable<BlockPos.MutableBlockPos> getMultiblockVolumeIterator(BlockPos pos, World world )
+	public Iterable<BlockPos.MutableBlockPos> getMultiblockVolumeIterator(BlockPos pos, World world)
 	{
 		return BlockPos.getAllInBoxMutable(pos, pos.up());
 	}

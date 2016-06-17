@@ -8,6 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class BlockMultiController extends BlockMultiBase
 {
@@ -48,6 +50,7 @@ public abstract class BlockMultiController extends BlockMultiBase
     }
 	
 	@Override
+	@SideOnly(Side.CLIENT)
 	public int getRenderType()
 	{
 		return 2;

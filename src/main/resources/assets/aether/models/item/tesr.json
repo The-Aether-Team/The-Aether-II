@@ -1,5 +1,5 @@
 {
-	"parent": "aether:block/tesr",
+	"parent": "builtin/entity",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

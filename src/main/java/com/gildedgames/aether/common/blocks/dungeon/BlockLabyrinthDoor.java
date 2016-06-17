@@ -1,13 +1,7 @@
 package com.gildedgames.aether.common.blocks.dungeon;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiController;
-import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
-import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
 import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthDoor;
-import jdk.nashorn.internal.ir.Block;
-import jdk.nashorn.internal.ir.Statement;
-import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockState;

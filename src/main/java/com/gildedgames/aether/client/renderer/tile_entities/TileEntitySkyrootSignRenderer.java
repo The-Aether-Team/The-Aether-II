@@ -25,50 +25,57 @@ public class TileEntitySkyrootSignRenderer extends TileEntitySpecialRenderer<Til
 	public void renderTileEntityAt(TileEntitySkyrootSign te, double x, double y, double z, float partialTicks, int destroyStage)
 	{
 		Block block = te.getBlockType();
+
 		GlStateManager.pushMatrix();
-		float f = 0.6666667F;
+
+		float modelScale = 0.6666667F;
 
 		if (block == BlocksAether.standing_skyroot_sign)
 		{
-			GlStateManager.translate((float) x + 0.5F, (float) y + 0.75F * f, (float) z + 0.5F);
-			float f1 = (float) (te.getBlockMetadata() * 360) / 16.0F;
-			GlStateManager.rotate(-f1, 0.0F, 1.0F, 0.0F);
+			float direction = (te.getBlockMetadata() * 360) / 16.0F;
+
+			GlStateManager.translate(x + 0.5F, y + 0.75F * modelScale, z + 0.5F);
+			GlStateManager.rotate(-direction, 0.0F, 1.0F, 0.0F);
+
 			this.model.signStick.showModel = true;
 		}
 		else
 		{
-			int k = te.getBlockMetadata();
-			float f2 = 0.0F;
+			int direction = te.getBlockMetadata();
 
-			if (k == 2)
+			float angle = 0.0F;
+
+			if (direction == 2)
 			{
-				f2 = 180.0F;
+				angle = 180.0F;
 			}
 
-			if (k == 4)
+			if (direction == 4)
 			{
-				f2 = 90.0F;
+				angle = 90.0F;
 			}
 
-			if (k == 5)
+			if (direction == 5)
 			{
-				f2 = -90.0F;
+				angle = -90.0F;
 			}
 
-			GlStateManager.translate((float) x + 0.5F, (float) y + 0.75F * f, (float) z + 0.5F);
-			GlStateManager.rotate(-f2, 0.0F, 1.0F, 0.0F);
+			GlStateManager.translate(x + 0.5F, y + 0.75F * modelScale, z + 0.5F);
+			GlStateManager.rotate(-angle, 0.0F, 1.0F, 0.0F);
 			GlStateManager.translate(0.0F, -0.3125F, -0.4375F);
+
 			this.model.signStick.showModel = false;
 		}
 
 		if (destroyStage >= 0)
 		{
 			this.bindTexture(DESTROY_STAGES[destroyStage]);
-			GlStateManager.matrixMode(5890);
+
+			GlStateManager.matrixMode(GL11.GL_TEXTURE);
 			GlStateManager.pushMatrix();
 			GlStateManager.scale(4.0F, 2.0F, 1.0F);
 			GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
-			GlStateManager.matrixMode(5888);
+			GlStateManager.matrixMode(GL11.GL_MODELVIEW);
 		}
 		else
 		{
@@ -77,39 +84,48 @@ public class TileEntitySkyrootSignRenderer extends TileEntitySpecialRenderer<Til
 
 		GlStateManager.enableRescaleNormal();
 		GlStateManager.pushMatrix();
-		GlStateManager.scale(f, -f, -f);
+		GlStateManager.scale(modelScale, -modelScale, -modelScale);
+
 		this.model.renderSign();
+
 		GlStateManager.popMatrix();
+
 		FontRenderer fontrenderer = this.getFontRenderer();
-		float f3 = 0.015625F * f;
-		GlStateManager.translate(0.0F, 0.5F * f, 0.07F * f);
-		GlStateManager.scale(f3, -f3, f3);
-		GL11.glNormal3f(0.0F, 0.0F, -1.0F * f3);
+
+		float textScale = 0.015625F * modelScale;
+		GlStateManager.translate(0.0F, 0.5F * modelScale, 0.07F * modelScale);
+		GlStateManager.scale(textScale, -textScale, textScale);
+		GL11.glNormal3f(0.0F, 0.0F, -1.0F * textScale);
 		GlStateManager.depthMask(false);
-		int i = 0xFFFFFFFF;
+		int fontColor = 0xFFFFFFFF;
 
 		if (destroyStage < 0)
 		{
 			GlStateManager.disableLighting();
-			for (int j = 0; j < te.signText.length; ++j)
-			{
-				if (te.signText[j] != null)
-				{
-					IChatComponent ichatcomponent = te.signText[j];
-					List<IChatComponent> list = GuiUtilRenderComponents.splitText(ichatcomponent, 90, fontrenderer, false, true);
-					String s = list != null && list.size() > 0 ? list.get(0).getFormattedText() : "";
 
-					if (j == te.lineBeingEdited)
+			for (int i = 0; i < te.signText.length; ++i)
+			{
+				if (te.signText[i] != null)
+				{
+					IChatComponent text = te.signText[i];
+
+					List<IChatComponent> list = GuiUtilRenderComponents.splitText(text, 90, fontrenderer, false, true);
+
+					String line = list != null && list.size() > 0 ? list.get(0).getFormattedText() : "";
+
+					if (i == te.lineBeingEdited)
 					{
-						s = "> " + s + " <";
-						fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, j * 10 - te.signText.length * 5, i);
+						line = "> " + line + " <";
+
+						fontrenderer.drawString(line, -fontrenderer.getStringWidth(line) / 2, i * 10 - te.signText.length * 5, fontColor);
 					}
 					else
 					{
-						fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, j * 10 - te.signText.length * 5, i);
+						fontrenderer.drawString(line, -fontrenderer.getStringWidth(line) / 2, i * 10 - te.signText.length * 5, fontColor);
 					}
 				}
 			}
+
 			GlStateManager.enableLighting();
 		}
 
@@ -119,9 +135,9 @@ public class TileEntitySkyrootSignRenderer extends TileEntitySpecialRenderer<Til
 
 		if (destroyStage >= 0)
 		{
-			GlStateManager.matrixMode(5890);
+			GlStateManager.matrixMode(GL11.GL_TEXTURE);
 			GlStateManager.popMatrix();
-			GlStateManager.matrixMode(5888);
+			GlStateManager.matrixMode(GL11.GL_MODELVIEW);
 		}
 	}
 }

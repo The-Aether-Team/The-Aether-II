@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootChest;
 import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootChest;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockChest;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.model.ModelLargeChest;
 import net.minecraft.client.renderer.GlStateManager;
@@ -43,7 +44,7 @@ public class TileEntitySkyrootChestRenderer extends TileEntitySpecialRenderer<Ti
 
 			if (block instanceof BlockSkyrootChest && metadata == 0)
 			{
-				((BlockSkyrootChest) block).checkForSurroundingChests(chest.getWorld(), chest.getPos(), chest.getWorld().getBlockState(chest.getPos()));
+				((BlockChest) block).checkForSurroundingChests(chest.getWorld(), chest.getPos(), chest.getWorld().getBlockState(chest.getPos()));
 
 				metadata = chest.getBlockMetadata();
 			}
@@ -138,33 +139,33 @@ public class TileEntitySkyrootChestRenderer extends TileEntitySpecialRenderer<Ti
 			GlStateManager.rotate(angle, 0.0F, 1.0F, 0.0F);
 			GlStateManager.translate(-0.5F, -0.5F, -0.5F);
 
-			float f1 = chest.prevLidAngle + (chest.lidAngle - chest.prevLidAngle) * partialTicks;
-			float f2;
+			float lidAngle = chest.prevLidAngle + (chest.lidAngle - chest.prevLidAngle) * partialTicks;
+			float adjacentLidAngle;
 
 			if (chest.adjacentChestZNeg != null)
 			{
-				f2 = chest.adjacentChestZNeg.prevLidAngle + (chest.adjacentChestZNeg.lidAngle - chest.adjacentChestZNeg.prevLidAngle) * partialTicks;
+				adjacentLidAngle = chest.adjacentChestZNeg.prevLidAngle + (chest.adjacentChestZNeg.lidAngle - chest.adjacentChestZNeg.prevLidAngle) * partialTicks;
 
-				if (f2 > f1)
+				if (adjacentLidAngle > lidAngle)
 				{
-					f1 = f2;
+					lidAngle = adjacentLidAngle;
 				}
 			}
 
 			if (chest.adjacentChestXNeg != null)
 			{
-				f2 = chest.adjacentChestXNeg.prevLidAngle + (chest.adjacentChestXNeg.lidAngle - chest.adjacentChestXNeg.prevLidAngle) * partialTicks;
+				adjacentLidAngle = chest.adjacentChestXNeg.prevLidAngle + (chest.adjacentChestXNeg.lidAngle - chest.adjacentChestXNeg.prevLidAngle) * partialTicks;
 
-				if (f2 > f1)
+				if (adjacentLidAngle > lidAngle)
 				{
-					f1 = f2;
+					lidAngle = adjacentLidAngle;
 				}
 			}
 
-			f1 = 1.0F - f1;
-			f1 = 1.0F - f1 * f1 * f1;
+			lidAngle = 1.0F - lidAngle;
+			lidAngle = 1.0F - lidAngle * lidAngle * lidAngle;
 
-			modelchest.chestLid.rotateAngleX = -(f1 * (float) Math.PI / 2.0F);
+			modelchest.chestLid.rotateAngleX = -(lidAngle * (float) Math.PI / 2.0F);
 			modelchest.renderAll();
 
 			GlStateManager.disableRescaleNormal();

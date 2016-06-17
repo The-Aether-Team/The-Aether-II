@@ -11,7 +11,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldProviderAether extends WorldProvider
 {
-
 	private float[] sunriseSunsetColors = new float[4];
 
 	@Override
@@ -41,7 +40,7 @@ public class WorldProviderAether extends WorldProvider
 	@Override
 	public boolean isSurfaceWorld()
 	{
-		return false;
+		return true;
 	}
 
 	@Override

@@ -3,7 +3,6 @@ package com.gildedgames.aether.client.renderer.tile_entities;
 import com.gildedgames.aether.client.models.entities.tile.ModelLabyrinthDoor;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthDoor;
-import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthTotem;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -15,8 +14,7 @@ public class TileEntityLabyrinthDoorRenderer extends TileEntitySpecialRenderer<T
 	private static final ResourceLocation TEXTURE_DOOR = AetherCore.getResource("textures/tile_entities/labyrinth_door.png"),
 				TEXTURE_DOOR_GLOW = AetherCore.getResource("textures/tile_entities/labyrinth_door_glow.png");
 
-	private static final ModelLabyrinthDoor MODEL = new ModelLabyrinthDoor();
-
+	private final ModelLabyrinthDoor model = new ModelLabyrinthDoor();
 
 	@Override
 	public void renderTileEntityAt(TileEntityLabyrinthDoor door, double d, double d1, double d2, float f, int destroyStage)
@@ -26,7 +24,6 @@ public class TileEntityLabyrinthDoorRenderer extends TileEntitySpecialRenderer<T
 
 		GL11.glTranslatef((float) d + 0.5F, (float) d1 + 1.5F, (float) d2 + 0.5F);
 		GL11.glRotatef(180f, 1f, 0f, 1f);
-
 
 		switch (door.getFacing())
 		{
@@ -53,7 +50,7 @@ public class TileEntityLabyrinthDoorRenderer extends TileEntitySpecialRenderer<T
 
 		this.bindTexture(TEXTURE_DOOR);
 
-		this.MODEL.renderAll(0.0625F);
+		this.model.renderAll(0.0625F);
 
 		this.bindTexture(TEXTURE_DOOR_GLOW);
 
@@ -69,7 +66,7 @@ public class TileEntityLabyrinthDoorRenderer extends TileEntitySpecialRenderer<T
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, var4);
 
-		this.MODEL.renderAll(0.0625F);
+		this.model.renderAll(0.0625F);
 
 		GL11.glDisable(GL11.GL_BLEND);
 
