@@ -342,5 +342,3 @@ ability.modifyXPCollection.desc=%s XP Collected
 
 # Tabs
 tab.equipment=Equipment
-tab.chat.name=Chat
-tab.group.name=Party
