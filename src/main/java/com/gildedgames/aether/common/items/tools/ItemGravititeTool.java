@@ -28,7 +28,7 @@ public class ItemGravititeTool extends ItemAetherTool
 		{
 			IBlockState state = world.getBlockState(pos);
 
-			if (ForgeHooks.isToolEffective(world, pos, stack))
+			if (ForgeHooks.canHarvestBlock(state.getBlock(), player, world, pos))
 			{
 				if (!world.getBlockState(pos.up()).getBlock().isOpaqueCube())
 				{

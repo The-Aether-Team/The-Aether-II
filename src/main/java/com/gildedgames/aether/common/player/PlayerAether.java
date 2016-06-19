@@ -40,6 +40,10 @@ public class PlayerAether implements IPlayerAetherCapability
 	
 	private BlockPos linkingSchematicBoundary;
 
+	private boolean hasDoubleJumped;
+
+	private int ticksAirborne;
+
 	public PlayerAether(EntityPlayer player)
 	{
 		this.player = player;
@@ -76,6 +80,16 @@ public class PlayerAether implements IPlayerAetherCapability
 			{
 				extendedReach = 3.5f;
 			}
+		}
+
+		if (this.getPlayer().onGround)
+		{
+			this.hasDoubleJumped = false;
+			this.ticksAirborne = 0;
+		}
+		else
+		{
+			this.ticksAirborne++;
 		}
 
 		AetherCore.PROXY.setExtendedReachDistance(this.player, extendedReach);
@@ -126,15 +140,7 @@ public class PlayerAether implements IPlayerAetherCapability
 	@Override
 	public void onJump(LivingJumpEvent event)
 	{
-		if (PlayerUtil.wearingArmor(player, 0, ItemsAether.sentry_boots) || PlayerUtil.isWearingFullSet(player, ItemGravititeArmor.class))
-		{
-			if (player.isSneaking())
-			{
-				player.motionY += 0.55F;
 
-				AetherCore.PROXY.spawnJumpParticles(player.worldObj, player.posX, player.posY, player.posZ, 1.2D, 12);
-			}
-		}
 	}
 
 	@Override
@@ -161,6 +167,31 @@ public class PlayerAether implements IPlayerAetherCapability
 	public EntityPlayer getPlayer()
 	{
 		return this.player;
+	}
+
+	public boolean performDoubleJump()
+	{
+		if (!this.hasDoubleJumped && this.ticksAirborne > 2)
+		{
+			AetherCore.PROXY.spawnJumpParticles(this.getPlayer().worldObj, this.getPlayer().posX, this.getPlayer().posY, this.getPlayer().posZ, 1.0D, 8);
+
+			this.getPlayer().motionY = 0.4D;
+			this.getPlayer().fallDistance = 0;
+
+			this.getPlayer().motionX *= 1.5D;
+			this.getPlayer().motionZ *= 1.5D;
+
+			this.hasDoubleJumped = true;
+
+			return true;
+		}
+
+		return false;
+	}
+
+	public int getTicksAirborne()
+	{
+		return this.ticksAirborne;
 	}
 
 	public static class Storage implements IStorage<IPlayerAetherCapability>

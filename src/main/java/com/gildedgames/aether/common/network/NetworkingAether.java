@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.network;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.network.packets.AetherMovementPacket;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -17,6 +18,8 @@ public class NetworkingAether
 	public static void preInit()
 	{
 		instance = NetworkRegistry.INSTANCE.newSimpleChannel(AetherCore.MOD_ID);
+
+		instance.registerMessage(AetherMovementPacket.Handler.class, AetherMovementPacket.class, discriminant++, Side.SERVER);
 
 		// TODO :)
 	}
