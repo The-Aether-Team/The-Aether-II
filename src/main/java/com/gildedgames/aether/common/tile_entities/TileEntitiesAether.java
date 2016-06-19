@@ -17,7 +17,8 @@ public class TileEntitiesAether
 			LABYRINTH_EYE = "aether.labyrinth_eye",
 			LABYRINTH_DOOR = "aether.labyrinth_door",
 			WILDCARD = "aether.wildcard",
-			BOUNDARY = "aether.boundary";
+			BOUNDARY = "aether.boundary",
+			LABYRINTH_CHEST_ID = "aether.labyrinth_chest";
 
 	public static void preInit()
 	{
@@ -31,6 +32,7 @@ public class TileEntitiesAether
 		GameRegistry.registerTileEntity(TileEntityLabyrinthEye.class, LABYRINTH_EYE);
 		GameRegistry.registerTileEntity(TileEntityWildcard.class, WILDCARD);
 		GameRegistry.registerTileEntity(TileEntityBoundary.class, BOUNDARY);
+		GameRegistry.registerTileEntity(TileEntityLabyrinthChest.class, LABYRINTH_CHEST_ID);
 	}
 	
 }

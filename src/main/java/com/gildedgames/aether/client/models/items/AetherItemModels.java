@@ -341,6 +341,7 @@ public class AetherItemModels
 		registerItemModels(new ItemModelList(BlocksAether.labyrinth_lightstone).add(0, "labyrinth_lightstone"));
 		registerItemModels(new ItemModelList(BlocksAether.labyrinth_base).add(0, "labyrinth_base"));
 		registerItemModels(new ItemModelList(BlocksAether.labyrinth_headstone).add(0, "labyrinth_headstone"));
+		registerItemModels(new ItemModelList(BlocksAether.labyrinth_chest).add(0, "labyrinth_chest"));
 
 		registerItemModels(new ItemModelList(BlocksAether.labyrinth_eye).add(0, "labyrinth_eye"));
 		registerItemModels(new ItemModelList(BlocksAether.wildcard).add(0, "wildcard"));

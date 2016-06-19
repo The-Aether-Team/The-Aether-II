@@ -83,6 +83,7 @@ tile.aether.labyrinth_eye.name=Labyrinth Eye
 tile.aether.wildcard.name=Wildcard
 tile.aether.schematicBoundary.name=Schematic Boundary
 tile.aether.linkedSchematicBoundary.name=Linked Schematic Boundary
+tile.aether.labyrinth_chest.name=Labyrinth Chest
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
@@ -300,6 +301,7 @@ container.holystone_furnace=Holystone Furnace
 container.skyroot_chest=Skyroot Chest
 container.skyroot_double_chest=Large Skyroot Chest
 container.schematicBlock=Replace With (Chosen Randomly)
+container.labyrinth_chest=Labyrinth Chest
 
 # Accessory slot names
 gui.slot.neckwear=Neckwear

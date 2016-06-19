@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks;
 
+import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthChest;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthDoor;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -162,6 +163,8 @@ public class BlocksAether
 	
 	public static Block labyrinth_eye, wildcard, schematicBoundary, linkedSchematicBoundary;
 
+	public static BlockLabyrinthChest labyrinth_chest;
+
 	public static void preInit()
 	{
 		aether_dirt = registerBlock("aether_dirt", new Block(Material.ground).setStepSound(Block.soundTypeGravel).setHardness(0.5f), AetherCreativeTabs.tabBlocks);
@@ -262,6 +265,8 @@ public class BlocksAether
 		skyroot_ladder = registerBlock("skyroot_ladder", new BlockSkyrootLadder(Material.wood), AetherCreativeTabs.tabBlocks);
 
 		wall_skyroot_sign = registerBlock("wall_skyroot_sign", new BlockWallSkyrootSign());
+
+		labyrinth_chest = registerBlock("labyrinth_chest", new BlockLabyrinthChest(), AetherCreativeTabs.tabBlocks);
 
 		holystone_wall = registerBlock("holystone_wall", new BlockAetherWall(BlocksAether.holystone, 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		holystone_wall_mossy = registerBlock("holystone_wall_mossy", new BlockAetherWall(BlocksAether.holystone, 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
