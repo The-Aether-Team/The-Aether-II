@@ -22,7 +22,7 @@ public class ItemPropertiesProvider implements ICapabilityProvider
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
 	{
-		return capability == AetherCapabilities.ITEM_PROPERTIES && this.stack != null;
+		return capability == AetherCapabilities.ITEM_PROPERTIES;
 	}
 
 	@Override

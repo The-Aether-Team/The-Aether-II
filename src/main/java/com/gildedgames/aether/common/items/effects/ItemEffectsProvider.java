@@ -27,7 +27,7 @@ public class ItemEffectsProvider implements ICapabilityProvider
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
 	{
-		return capability == AetherCapabilities.ITEM_EFFECTS && this.stack != null;
+		return capability == AetherCapabilities.ITEM_EFFECTS && this.effects != null;
 	}
 
 	@Override
