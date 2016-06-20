@@ -49,7 +49,7 @@ public class ClientEventHandler
 			}
 			else if (armorSet == ItemGravititeArmor.class)
 			{
-				if (aePlayer.getTicksAirborne() > 2 && mc.gameSettings.keyBindJump.isPressed() && !this.prevJumpBindState)
+				if (aePlayer.getTicksAirborne() > 2 && mc.gameSettings.keyBindJump.isKeyDown() && !this.prevJumpBindState)
 				{
 					if (aePlayer.performDoubleJump())
 					{
