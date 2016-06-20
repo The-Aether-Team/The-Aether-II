@@ -92,7 +92,7 @@ public class BiomeDecoratorAether
 		int count;
 
 		// Aether Tall Grass Generator
-		for (count = 0; count < 1; count++)
+		for (count = 0; count < 4; count++)
 		{
 			x = random.nextInt(16) + 8;
 			z = random.nextInt(16) + 8;
@@ -125,7 +125,7 @@ public class BiomeDecoratorAether
 		}
 
 		// Tree Generator
-		for (count = 0; count < 3; count++)
+		for (count = 0; count < 4; count++)
 		{
 			x = random.nextInt(16) + 8;
 			z = random.nextInt(16) + 8;

@@ -12,9 +12,9 @@ import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 import java.util.Random;
 
-public class WorldGenGoldenOakTree extends WorldGenAbstractTree
+public class WorldGenLargeTree extends WorldGenAbstractTree
 {
-	public WorldGenGoldenOakTree(IBlockState log, IBlockState leaf)
+	public WorldGenLargeTree(IBlockState log, IBlockState leaf)
 	{
 		super(true);
 

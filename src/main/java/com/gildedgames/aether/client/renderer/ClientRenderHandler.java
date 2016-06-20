@@ -2,6 +2,7 @@ package com.gildedgames.aether.client.renderer;
 
 import com.gildedgames.aether.client.models.entities.player.LayerPlayerGloves;
 import com.gildedgames.aether.client.renderer.entities.living.RenderPlayerHelper;
+import com.gildedgames.aether.common.items.armor.ItemPhoenixArmor;
 import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.util.PlayerUtil;
@@ -44,6 +45,13 @@ public class ClientRenderHandler
 		if (event.overlayType == RenderBlockOverlayEvent.OverlayType.WATER)
 		{
 			if (PlayerUtil.isWearingFullSet(Minecraft.getMinecraft().thePlayer, ItemNeptuneArmor.class))
+			{
+				event.setCanceled(true);
+			}
+		}
+		else if (event.overlayType == RenderBlockOverlayEvent.OverlayType.FIRE)
+		{
+			if (PlayerUtil.isWearingFullSet(Minecraft.getMinecraft().thePlayer, ItemPhoenixArmor.class))
 			{
 				event.setCanceled(true);
 			}

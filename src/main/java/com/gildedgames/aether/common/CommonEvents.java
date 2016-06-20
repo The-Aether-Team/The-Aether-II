@@ -22,12 +22,14 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Random;
@@ -109,70 +111,87 @@ public class CommonEvents
 			}
 		}
 
-		if (entity.dimension == AetherCore.getAetherDimID() && entity.posY < -2 && !entity.worldObj.isRemote)
+		// Checks whether or not an entity is in the Aether's void
+		if (entity.dimension == AetherCore.getAetherDimID() && entity.posY < -4 && !entity.worldObj.isRemote)
 		{
-			final double posX = entity.posX;
-			final double posZ = entity.posZ;
-
-			final WorldServer server = MinecraftServer.getServer().worldServerForDimension(0);
-			final WorldServer aetherServer = MinecraftServer.getServer().worldServerForDimension(AetherCore.getAetherDimID());
-
-			final Entity transferMount = this.cutFromDim(entity.ridingEntity, server);
-			final Entity transferMountedBy = this.cutFromDim(entity.riddenByEntity, server);
-
-			final ServerConfigurationManager scm = MinecraftServer.getServer().getConfigurationManager();
-			final Teleporter teleporter = new TeleporterGeneric(server);
-
-			if (entity instanceof EntityPlayerMP)
-			{
-				scm.transferPlayerToDimension((EntityPlayerMP) entity, 0, teleporter);
-			}
-			else
-			{
-				/*
-				BUG: When an entity (not the player) falls out of the Aether, it teleports to the Minecraft world (correctly)
-				but also teleports to the top of the Aether world. 
-				 */
-
-				scm.transferEntityToWorld(entity, 0, aetherServer, server, teleporter);
-			}
-
-			entity.setPositionAndUpdate(posX, 256, posZ);
-
-			if (transferMount != null)
-			{
-				this.teleportToSurface(transferMount, entity);
-				entity.mountEntity(transferMount);
-			}
-
-			if (transferMountedBy != null)
-			{
-				transferMountedBy.mountEntity(null);
-				this.teleportToSurface(transferMountedBy, entity);
-				transferMountedBy.mountEntity(entity);
-			}
+			this.onFallenFromAether(entity);
 		}
 	}
 
-	private Entity cutFromDim(Entity entity, WorldServer server)
+	private void onFallenFromAether(Entity entity)
+	{
+		// Don't teleport entities which are being ridden.
+		if (entity.riddenByEntity != null)
+		{
+			return;
+		}
+
+		MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+
+		ServerConfigurationManager scm = server.getConfigurationManager();
+
+		WorldServer toWorld = DimensionManager.getWorld(0);
+
+		Teleporter teleporter = new TeleporterGeneric(toWorld);
+
+		Entity mount = entity.ridingEntity;
+
+		if (mount != null)
+		{
+			// Dismounts the entity it's riding first as teleporting will cause updates to the entities
+			entity.mountEntity(null);
+
+			// Teleports entity first, then what it's riding
+			Entity teleportedEntity = this.teleportEntity(scm, entity, toWorld, teleporter);
+
+			Entity teleportedMount= this.teleportEntity(scm, mount, toWorld, teleporter);
+
+			// Re-mount what it was previously riding
+			teleportedEntity.mountEntity(teleportedMount);
+		}
+		else
+		{
+			this.teleportEntity(scm, entity, toWorld, teleporter);
+		}
+	}
+
+	/**
+	 * Teleports any entity by duplicating it and . the old one. If {@param entity} is a player,
+	 * the entity will be transferred instead of duplicated.
+	 *
+	 * @return A new entity if {@param entity} wasn't a player, or the same entity if it was a player
+	 */
+	private Entity teleportEntity(ServerConfigurationManager scm, Entity entity, WorldServer toWorld, Teleporter teleporter)
 	{
 		if (entity == null)
 		{
+			return null;
+		}
+
+		if (entity instanceof EntityPlayer)
+		{
+			// Players require special magic to be teleported correctly, and are not duplicated
+			scm.transferPlayerToDimension((EntityPlayerMP) entity, 0, teleporter);
+			entity.setPositionAndUpdate(entity.posX, 200 + entity.posY, entity.posZ);
+
 			return entity;
 		}
-		final Entity newEntity = EntityList.createEntityByName(EntityList.getEntityString(entity), server);
-		newEntity.copyDataFromOld(entity);
-		entity.worldObj.removeEntity(entity);
-		return newEntity;
-	}
+		else
+		{
+			Entity newEntity = EntityList.createEntityByName(EntityList.getEntityString(entity), toWorld);
+			newEntity.copyDataFromOld(entity);
 
-	private void teleportToSurface(Entity mount, Entity riding)
-	{
-		mount.dimension = riding.dimension;
-		mount.timeUntilPortal = mount.getPortalCooldown();
-		mount.setPosition(riding.posX, 256, riding.posZ);
-		mount.forceSpawn = true;
-		riding.worldObj.spawnEntityInWorld(mount);
+			entity.worldObj.removeEntity(entity);
+
+			// Forces the entity to be sent to clients as early as possible
+			newEntity.forceSpawn = true;
+
+			newEntity.setPositionAndUpdate(entity.posX, 200 + entity.posY, entity.posZ);
+
+			toWorld.spawnEntityInWorld(newEntity);
+
+			return newEntity;
+		}
 	}
 
 	@SubscribeEvent

@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.natural;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
@@ -8,8 +9,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -36,6 +39,8 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 		public AercloudVariant(int meta, String name, boolean hasSolidBottom)
 		{
 			super(meta, name);
+
+			this.hasSolidBottom = hasSolidBottom;
 		}
 
 		public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
@@ -59,6 +64,23 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 				@Override
 				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
 				{
+					if (entity.worldObj.isRemote)
+					{
+						if (!(entity instanceof EntityFX))
+						{
+							world.playSound(pos.getX(), pos.getY(), pos.getZ(), AetherCore.getResourcePath("aeblock.aercloud.bounce"), 0.8f, 0.9f + (world.rand.nextFloat() * 0.2f), false);
+
+							for (int i = 0; i < 50; i++)
+							{
+								double x = pos.getX() + world.rand.nextDouble();
+								double y = pos.getY() + world.rand.nextDouble();
+								double z = pos.getZ() + world.rand.nextDouble();
+
+								world.spawnParticle(EnumParticleTypes.WATER_SPLASH, x, y, z, 0.0D, 0.0D, 0.0D);
+							}
+						}
+					}
+
 					entity.motionY = 2.0D;
 				}
 			},

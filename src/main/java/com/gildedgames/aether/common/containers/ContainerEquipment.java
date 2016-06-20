@@ -148,6 +148,7 @@ public class ContainerEquipment extends ContainerPlayer
 					if (stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 					{
 						IEntityEffectsCapability effects = EntityEffects.get(this.aePlayer.getPlayer());
+
 						IItemEffectsCapability itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
 						for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())

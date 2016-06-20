@@ -53,9 +53,22 @@ public class AetherCapabilityManager
 			{
 				IItemPropertiesCapability props = event.itemStack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
 
-				if (props != null && props.getRarity() != ItemRarity.NONE)
+				if (props != null)
 				{
-					event.toolTip.add(I18n.format(props.getRarity().getUnlocalizedName()));
+					if (props.getRarity() != ItemRarity.NONE)
+					{
+						event.toolTip.add(I18n.format(props.getRarity().getUnlocalizedName()));
+					}
+
+					if (props.isEquippable())
+					{
+						if (props.getRarity() != ItemRarity.NONE)
+						{
+							event.toolTip.add("");
+						}
+
+						event.toolTip.add(EnumChatFormatting.DARK_GRAY + "" + EnumChatFormatting.ITALIC + I18n.format(props.getEquipmentType().getUnlocalizedName()));
+					}
 				}
 			}
 
@@ -101,15 +114,7 @@ public class AetherCapabilityManager
 			{
 				IItemPropertiesCapability props = event.itemStack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
 
-				if (props.isEquippable())
-				{
-					if (props.getRarity() != ItemRarity.NONE)
-					{
-						event.toolTip.add("");
-					}
 
-					event.toolTip.add(EnumChatFormatting.DARK_GRAY + "" + EnumChatFormatting.ITALIC + I18n.format(props.getEquipmentType().getUnlocalizedName()));
-				}
 			}
 		}
 	}

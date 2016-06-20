@@ -49,11 +49,16 @@ public class ClientEventHandler
 			}
 			else if (armorSet == ItemGravititeArmor.class)
 			{
-				if (aePlayer.getTicksAirborne() > 2 && mc.gameSettings.keyBindJump.isPressed() && !this.prevJumpBindState)
+				if (mc.gameSettings.keyBindJump.isKeyDown() && !this.prevJumpBindState)
 				{
-					if (aePlayer.performDoubleJump())
+					if (!aePlayer.getPlayer().isInWater() && aePlayer.getTicksAirborne() > 2 && !aePlayer.getPlayer().capabilities.isCreativeMode)
 					{
-						NetworkingAether.sendPacketToServer(new AetherMovementPacket(AetherMovementPacket.Action.EXTRA_JUMP));
+						if (aePlayer.performDoubleJump())
+						{
+							NetworkingAether.sendPacketToServer(new AetherMovementPacket(AetherMovementPacket.Action.EXTRA_JUMP));
+
+							player.worldObj.playSound(player.posX, player.posY, player.posZ, "mob.enderdragon.wings", 0.4f, 0.8f + (player.worldObj.rand.nextFloat() * 0.6f), false);
+						}
 					}
 				}
 			}

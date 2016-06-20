@@ -116,5 +116,23 @@
 		"sounds": [
 			"aemob/aerbunny/death"
 		]
+	},
+	"aeblock.labyrinth_totem.drone": {
+		"category": "neutral",
+		"sounds": [
+			"aeblock/labyrinth_totem/drone"
+		]
+	},
+	"aeblock.labyrinth_totem.woosh": {
+		"category": "neutral",
+		"sounds": [
+			"aeblock/labyrinth_totem/woosh"
+		]
+	},
+	"aeblock.aercloud.bounce": {
+		"category": "neutral",
+		"sounds": [
+			"aeblock/aercloud/bounce"
+		]
 	}
 }
