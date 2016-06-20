@@ -166,10 +166,20 @@ public class RecipesAether implements IAltarRecipeRegistry
                 'X', new ItemStack(BlocksAether.holystone));
 
 		// Crossbow
-		registerShapedRecipe(new ItemStack(ItemsAether.crossbow), " X ", " Y ", "ZZZ",
+		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_crossbow), " X ", " Y ", "ZZZ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(Items.string),
 				'Z', new ItemStack(BlocksAether.skyroot_planks));
+
+		registerShapedRecipe(new ItemStack(ItemsAether.zanite_crossbow), " X ", " Y ", "ZZZ",
+				'X', new ItemStack(ItemsAether.skyroot_stick),
+				'Y', new ItemStack(Items.string),
+				'Z', new ItemStack(ItemsAether.zanite_gemstone));
+
+		registerShapedRecipe(new ItemStack(ItemsAether.gravitite_crossbow), " X ", " Y ", "ZZZ",
+				'X', new ItemStack(ItemsAether.skyroot_stick),
+				'Y', new ItemStack(Items.string),
+				'Z', new ItemStack(BlocksAether.enchanted_gravitite));
 
 		// Crossbow Bolts
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.STONE.ordinal()), " Y", "X ",

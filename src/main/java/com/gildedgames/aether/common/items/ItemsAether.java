@@ -8,6 +8,9 @@ import com.gildedgames.aether.common.items.effects.ItemEffects;
 import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
 import com.gildedgames.aether.api.items.properties.ItemRarity;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemGravititeCrossbow;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemSkyrootCrossbow;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemZaniteCrossbow;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -125,15 +128,19 @@ public class ItemsAether
 
 	public static ItemDart dart;
 
-	public static ItemCrossbow crossbow;
-
-	public static ItemBolt bolt;
-
 	public static ItemElementalSword flaming_sword, holy_sword, lightning_sword;
 
 	public static ItemSword pig_slayer, vampire_blade, candy_cane_sword;
 
 	public static ItemDoor skyroot_door;
+
+	public static ItemSkyrootCrossbow skyroot_crossbow;
+
+	public static ItemZaniteCrossbow zanite_crossbow;
+
+	public static ItemGravititeCrossbow gravitite_crossbow;
+
+	public static ItemBolt bolt;
 
 	public static Item iron_ring, gold_ring;
 
@@ -280,7 +287,9 @@ public class ItemsAether
 		dart_shooter = registerItem("dart_shooter", new ItemDartShooter(), AetherCreativeTabs.tabWeapons);
 		dart = registerItem("dart", new ItemDart(), AetherCreativeTabs.tabWeapons);
 
-		crossbow = registerItem("crossbow", new ItemCrossbow(), AetherCreativeTabs.tabWeapons);
+		skyroot_crossbow = registerItem("skyroot_crossbow", new ItemSkyrootCrossbow(), AetherCreativeTabs.tabWeapons);
+		zanite_crossbow = registerItem("zanite_crossbow", new ItemZaniteCrossbow(), AetherCreativeTabs.tabWeapons);
+		gravitite_crossbow = registerItem("gravitite_crossbow", new ItemGravititeCrossbow(), AetherCreativeTabs.tabWeapons);
 		bolt = registerItem("bolt", new ItemBolt(), AetherCreativeTabs.tabWeapons);
 
 		flaming_sword = registerItem("flaming_sword", new ItemElementalSword(ItemElementalSword.SwordElement.FIRE));

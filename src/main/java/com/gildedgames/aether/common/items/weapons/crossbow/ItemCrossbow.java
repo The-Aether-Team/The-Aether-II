@@ -1,16 +1,16 @@
 package com.gildedgames.aether.common.items.weapons.crossbow;
 
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -21,182 +21,114 @@ import java.util.List;
 
 public class ItemCrossbow extends Item
 {
-	private static final ItemCrossbowType[] ITEM_VARIANTS = new ItemCrossbowType[] {
-			ItemCrossbowType.WOOD,
-			ItemCrossbowType.ZANITE,
-			ItemCrossbowType.GRAVITITE
-	};
+
+	public static final String[] crossbowIconNameArray = new String[] {"_fired", "_loaded", "_loading1", "_loading2"};
 
 	private final int AMMOSLOT = 6;
-
-	private boolean isReadyToFire;
-
-	private ItemStack ammoBoltStack;
-
-	private int ammoBoltCount;
+	private final int DURATION = 180;
 
 	public ItemCrossbow()
 	{
-		this.setHasSubtypes(true);
-
 		this.maxStackSize = 1;
-		isReadyToFire = false;
-		ammoBoltStack = null;
-		ammoBoltCount = 0;
 	}
 
-	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
+	// Should be adjusted to check for quiver accessory slot, currently checks the first space in players inventory for ammo.
+	private int getBoltType(IPlayerAetherCapability player)
 	{
-		return ammoBoltStack != null && isReadyToFire;
+		ItemStack boltStack = player.getEquipmentInventory().getStackInSlot(AMMOSLOT);
+
+		if (hasAmmo(player))
+			return boltStack.getMetadata();
+
+		return -1;
 	}
 
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	private boolean hasAmmo(IPlayerAetherCapability player)
 	{
-		EntityPlayer player = (EntityPlayer) entityIn;
-		PlayerAether aePlayer = (PlayerAether) PlayerAether.getPlayer(player);
+		ItemStack boltStack = player.getEquipmentInventory().getStackInSlot(AMMOSLOT);
 
-		if (isSelected)
+		if (boltStack != null && boltStack.getItem() == ItemsAether.bolt && boltStack.stackSize > 0)
 		{
-			ammoBoltStack = player.inventory.getStackInSlot(AMMOSLOT);
-
-			if (ammoBoltStack != null)
-			{
-				ammoBoltCount = ammoBoltStack.stackSize;
-			}
-
-			if (ammoBoltCount <= 0)
-			{
-				isReadyToFire = false;
-				player.inventory.setInventorySlotContents(AMMOSLOT, null);
-			}
-
+			return true;
 		}
+
+		return false;
 	}
 
-	// When weapon is being used (right click pressed) it fires
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
+	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
 	{
-
-		if (this.isReadyToFire)
+		if (itemStackIn.getMetadata() < 3 || itemStackIn.getMetadata() == 4)
 		{
-			if (getBoltTypeFromAmmoSlot(player.inventory) == -1)
+			if (this.hasAmmo(PlayerAether.getPlayer(playerIn)))
 			{
-				return stack;
-			}
-
-			ItemBoltType boltType = ItemBoltType.fromOrdinal(getBoltTypeFromAmmoSlot(player.inventory));
-
-			float speed = 1.0f;
-			boolean isInfiniteBolt = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, stack) > 0;
-
-			if (ammoBoltCount > 0 || isInfiniteBolt)
-			{
-				EntityBolt bolt = new EntityBolt(world, player, speed * 2.0F);
-				bolt.setBoltType(boltType);
-				bolt.setDamage(boltType.getAmmoItem().getDamage());
-
-
-				/*
-				* Uploading this even though there is a really weird bug here.
-				* For some reason I cannot for the life of me get the bolt to fire out of the crossbow.
-				* It was essentially working up until I added the isReadyToFire.
-				* The isReadyToFire switches properly, and when it needs to, all the statements run, etc. etc.
-				* but for some reason it won't play the sound effect, and it won't always spawn the bolt.
-				* IF you grab a stack, and fire a shitton of bolts at an entity, one will eventually shoot and hurt the entity
-				* However this is like a 1/32 chance, and I'm not sure what is causing it.
-				*
-				* Really could use some assistance on how to fix this issue!
-				* Thanks
-				*/
-
-				// dummy sound effect
-				world.playSoundAtEntity(player, AetherCore.getResourcePath("aerandom.dart_shooter"), 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + speed * 0.5F);
-
-				if (!world.isRemote)
 				{
-					world.spawnEntityInWorld(bolt);
+					playerIn.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
 				}
-
-				this.isReadyToFire = false;
-
-//   			Pretty sure this if statement isn't needed, but I'm leaving it just in case.
-//				if (!isInfiniteBolt && ammoBoltCount > 0)
-//				{
-//					this.isReadyToFire = false;
-//				}
 			}
 		}
 
-		return stack;
-
+		return itemStackIn;
 	}
 
 	@Override
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
 	{
-
-		// If we have no bolts crossbow can be swung freely.
-		if (ammoBoltStack == null)
+		EntityBolt dart = new EntityBolt(entityLiving.getEntityWorld(), entityLiving, 2.0F);
+		if (stack.getItemDamage() > 0)
 		{
-			return false;
+			entityLiving.getEntityWorld().spawnEntityInWorld(dart);
+			stack.setItemDamage(stack.getItemDamage()-1);
+			return true;
 		}
-
-		if (entityLiving instanceof EntityPlayer)
-		{
-			EntityPlayer player = (EntityPlayer) entityLiving;
-			if (ammoBoltStack != null)
-			{
-				if (entityLiving.getHeldItem().getItem() == ItemsAether.crossbow)
-				{
-					// reloading
-					if (this.isReadyToFire == false)
-					{
-						this.ammoBoltStack.stackSize--;
-						this.isReadyToFire = true;
-
-						// When crossbow has an bolt loaded it can not be swung.
-						return false;
-					}
-				}
-			}
-			if (isReadyToFire)
-			{
-				// Cancel the swing animation/damage when a bolt is loaded.
-				return true;
-			}
-		}
-
-		// Should never reach this point
 		return false;
 	}
 
-	// Should be adjusted to check for quiver accessory slot, currently checks the first space in players inventory for ammo.
-	private int getBoltTypeFromAmmoSlot(InventoryPlayer inventory)
+	@Override
+	public void onUsingTick(ItemStack stack, EntityPlayer player, int count)
 	{
-		if (ammoBoltStack != null && ammoBoltStack.getItem() == ItemsAether.bolt)
+		ItemStack boltStack = PlayerAether.getPlayer(player).getEquipmentInventory().getStackInSlot(AMMOSLOT);
+
+		if (stack.getItemDamage() == 4)
 		{
-			return ammoBoltStack.getMetadata();
+			stack.setItemDamage(0);
+			player.stopUsingItem();
 		}
 
-		return -1;
+		if (this.hasAmmo(PlayerAether.getPlayer(player)))
+		{
+			if (count == DURATION-10 && stack.getItemDamage() == 0)
+			{
+				stack.setItemDamage(1);
+				boltStack.stackSize -= 1;
+			}
+			if (count == (DURATION - (DURATION / 3)) && stack.getItemDamage() == 1)
+			{
+				stack.setItemDamage(2);
+				boltStack.stackSize -= 1;
+			}
+			if (count <= 20 && stack.getItemDamage() == 2)
+			{
+				stack.setItemDamage(3);
+				boltStack.stackSize -=1;
+			}
+		}
+		else
+		{
+			player.stopUsingItem();
+		}
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems)
+	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn)
 	{
-		for (ItemCrossbowType type : ITEM_VARIANTS)
-		{
-			subItems.add(new ItemStack(item, 1, type.ordinal()));
-		}
+		stack.setItemDamage(3);
+		return stack;
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack)
+	public int getMaxItemUseDuration(ItemStack stack)
 	{
-		return super.getUnlocalizedName(stack) + "." + ItemCrossbowType.fromOrdinal(stack.getMetadata()).getID();
+		return DURATION; //80~4 seconds
 	}
-
 }

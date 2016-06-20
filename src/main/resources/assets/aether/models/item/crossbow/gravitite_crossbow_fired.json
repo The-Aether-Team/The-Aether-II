@@ -1,0 +1,18 @@
+{
+	"parent": "builtin/generated",
+	"textures": {
+		"layer0": "aether:items/weapons/crossbow/gravitite/gravititeCrossbow_fired"
+	},
+	"display": {
+		"thirdperson": {
+			"rotation": [ -280, 25, 270 ],
+			"translation": [ 1, 1, -4 ],
+			"scale": [ 0.7, 0.7, 0.7 ]
+		},
+		"firstperson": {
+			"rotation": [ -270, 0, 270 ],
+			"translation": [ 0, 4, 0 ],
+			"scale": [ 1.7, 1.7, 1.7 ]
+		}
+	}
+}

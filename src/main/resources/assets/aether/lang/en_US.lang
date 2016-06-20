@@ -203,16 +203,6 @@ item.aether.candy_ring.name=Candy Ring
 item.aether.bone_ring.name=Bone Ring
 item.aether.skyroot_ring.name=Skyroot Ring
 item.aether.icestone.name=Icestone
-item.aether.crossbow.skyroot.name=Skyroot Crossbow
-item.aether.crossbow.zanite.name=Zanite Crossbow
-item.aether.crossbow.gravitite.name=Gravitite Crossbow
-item.aether.bolt.skyroot.name=Skyroot Bolt
-item.aether.bolt.holystone.name=Holystone Bolt
-item.aether.bolt.zanite.name=Zanite Bolt
-item.aether.bolt.gravitite.name=Gravitite Bolt
-item.aether.bolt.enchanted.name=Enchanted Bolt
-item.aether.bolt.poison.name=Poison Bolt
-item.aether.bolt.arkenium.name=Arkenium Bolt
 item.aether.skyroot_door_item.name=Skyroot Door
 item.aether.skyroot_sign.name=Skyroot Sign
 item.aether.aether_portal_frame.name=Aether Portal Frame
@@ -248,6 +238,16 @@ item.aether.pig_slayer.ability.desc=Slaughters pigs
 item.aether.vampire_blade.ability.desc=Leeches life
 item.aether.candy_cane_sword.ability.desc=Drops edible candy canes
 item.aether.valkyrie_lance.ability.desc=Extended Reach
+item.aether.skyroot_crossbow.name=Skyroot Crossbow
+item.aether.zanite_crossbow.name=Zanite Crossbow
+item.aether.gravitite_crossbow.name=Gravitie Crossbow
+item.aether.bolt.skyroot.name=Skyroot Bolt
+item.aether.bolt.holystone.name=Holystone Bolt
+item.aether.bolt.zanite.name=Zanite Bolt
+item.aether.bolt.gravitite.name=Gravitite Bolt
+item.aether.bolt.enchanted.name=Enchanted Bolt
+item.aether.bolt.poison.name=Poison Bolt
+item.aether.bolt.arkenium.name=Arkenium Bolt
 
 
 # Tool tooltips

@@ -3,7 +3,6 @@ package com.gildedgames.aether.client.models.items;
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbowType;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -246,11 +245,26 @@ public class AetherItemModels
 				.add(ItemDartType.ENCHANTED.ordinal(), "enchanted_dart")
 				.add(ItemDartType.POISON.ordinal(), "poison_dart"));
 
-		registerItemModels(new ItemModelList(ItemsAether.crossbow).root("crossbow/")
-				.add(ItemCrossbowType.WOOD.ordinal(), "skyroot_crossbow")
-				.add(ItemCrossbowType.ZANITE.ordinal(), "zanite_crossbow")
-				.add(ItemCrossbowType.GRAVITITE.ordinal(), "gravitite_crossbow")
-		);
+		registerItemModels(new ItemModelList(ItemsAether.skyroot_crossbow).root("crossbow/")
+				.add(0, "skyroot_crossbow_fired")
+				.add(1, "skyroot_crossbow_loading1")
+				.add(2, "skyroot_crossbow_loading2")
+				.add(3, "skyroot_crossbow_loaded")
+				.add(4, "skyroot_crossbow_fired"));
+
+		registerItemModels(new ItemModelList(ItemsAether.zanite_crossbow).root("crossbow/")
+				.add(0, "zanite_crossbow_fired")
+				.add(1, "zanite_crossbow_loading1")
+				.add(2, "zanite_crossbow_loading2")
+				.add(3, "zanite_crossbow_loaded")
+				.add(4, "zanite_crossbow_fired"));
+
+		registerItemModels(new ItemModelList(ItemsAether.gravitite_crossbow).root("crossbow/")
+				.add(0, "gravitite_crossbow_fired")
+				.add(1, "gravitite_crossbow_loading1")
+				.add(2, "gravitite_crossbow_loading2")
+				.add(3, "gravitite_crossbow_loaded")
+				.add(4, "gravitite_crossbow_fired"));
 
 		registerItemModels(new ItemModelList(ItemsAether.bolt).root("bolts/")
 				.add(ItemBoltType.SKYROOT.ordinal(), "skyroot_bolt")
