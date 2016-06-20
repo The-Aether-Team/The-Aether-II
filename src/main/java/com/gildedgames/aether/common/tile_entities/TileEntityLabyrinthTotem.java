@@ -1,14 +1,17 @@
 package com.gildedgames.aether.common.tile_entities;
 
+import com.gildedgames.aether.client.sound.objects.LabyrinthTotemSound;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiController;
 import com.gildedgames.aether.common.tile_entities.multiblock.TileEntityMultiblockController;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstanceHandler;
 import com.gildedgames.util.modules.instances.InstanceModule;
 import com.gildedgames.util.modules.instances.PlayerInstances;
 import com.gildedgames.util.modules.world.common.BlockPosDimension;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.ISound;
+import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ITickable;
@@ -19,6 +22,9 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 {
 	@SideOnly(Side.CLIENT)
 	public int renderTicks, prevRenderTicks;
+
+	@SideOnly(Side.CLIENT)
+	private ISound ambiance;
 
 	public TileEntityLabyrinthTotem()
 	{
@@ -33,29 +39,33 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 			this.prevRenderTicks = this.renderTicks;
 
 			this.renderTicks++;
+
+			SoundHandler soundHandler = Minecraft.getMinecraft().getSoundHandler();
+
+			if (this.ambiance == null || !soundHandler.isSoundPlaying(this.ambiance))
+			{
+				soundHandler.playSound(this.ambiance = new LabyrinthTotemSound(this.worldObj, this.pos));
+			}
 		}
 	}
 
 	@Override
 	public void onInteract(EntityPlayer interactingPlayer)
 	{
-		if (!this.worldObj.isRemote)
+		EntityPlayerMP player = (EntityPlayerMP) interactingPlayer;
+
+		DungeonInstanceHandler handler = AetherCore.INSTANCE.getDungeonInstanceHandler();
+
+		PlayerInstances hook = InstanceModule.INSTANCE.getPlayer(player);
+
+		if (hook.getInstance() != null)
 		{
-			EntityPlayerMP player = (EntityPlayerMP) interactingPlayer;
-
-			DungeonInstanceHandler handler = AetherCore.INSTANCE.getDungeonInstanceHandler();
-
-			PlayerInstances hook = InstanceModule.INSTANCE.getPlayer(player);
-
-			if (hook.getInstance() != null)
-			{
-				handler.teleportBack(player);
-			}
-			else
-			{
-				DungeonInstance inst = handler.get(new BlockPosDimension(pos, this.worldObj.provider.getDimensionId()));
-				handler.teleportToInst(player, inst);
-			}
+			handler.teleportBack(player);
+		}
+		else
+		{
+			DungeonInstance inst = handler.get(new BlockPosDimension(pos, this.worldObj.provider.getDimensionId()));
+			handler.teleportToInst(player, inst);
 		}
 	}
 }

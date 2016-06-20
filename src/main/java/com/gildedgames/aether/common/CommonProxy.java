@@ -113,7 +113,7 @@ public class CommonProxy
 		for (int i = 0; i < quantity; i++)
 		{
 			double x2 = x + (random.nextDouble() * radius) - (radius * 0.5D);
-			double y2 = y + (random.nextDouble() * 0.2D);
+			double y2 = y + (random.nextDouble() * 0.4D) + 0.5D;
 			double z2 = z + (random.nextDouble() * radius) - (radius * 0.5D);
 
 			world.spawnParticle(EnumParticleTypes.CLOUD, x2, y2, z2, 0.0D, random.nextDouble() * 0.03D, 0.0D);

@@ -173,13 +173,13 @@ public class PlayerAether implements IPlayerAetherCapability
 	{
 		if (!this.hasDoubleJumped && this.ticksAirborne > 2)
 		{
-			AetherCore.PROXY.spawnJumpParticles(this.getPlayer().worldObj, this.getPlayer().posX, this.getPlayer().posY, this.getPlayer().posZ, 1.0D, 8);
+			AetherCore.PROXY.spawnJumpParticles(this.getPlayer().worldObj, this.getPlayer().posX, this.getPlayer().posY, this.getPlayer().posZ, 1.5D, 12);
 
-			this.getPlayer().motionY = 0.4D;
-			this.getPlayer().fallDistance = 0;
+			this.getPlayer().motionY = 0.55D;
+			this.getPlayer().fallDistance = -4;
 
-			this.getPlayer().motionX *= 1.5D;
-			this.getPlayer().motionZ *= 1.5D;
+			this.getPlayer().motionX *= 1.4D;
+			this.getPlayer().motionZ *= 1.4D;
 
 			this.hasDoubleJumped = true;
 

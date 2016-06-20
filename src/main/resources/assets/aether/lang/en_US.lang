@@ -264,8 +264,7 @@ item.aether.tooltip.use=Use
 
 # Armor Tooltips
 item.aether.armor.zanite.ability.desc=Becomes Stronger with Wear
-item.aether.armor.gravitite.ability.desc=Extended Jump
-item.aether.armor.gravitite.use.desc=Sneak while jumping
+item.aether.armor.gravitite.ability.desc=Double Jump
 item.aether.armor.obsidian.ability.desc=Extreme Protection
 item.aether.armor.neptune.ability.desc=Breathe and Walk Underwater
 item.aether.armor.phoenix.ability.desc=Fire Immunity
