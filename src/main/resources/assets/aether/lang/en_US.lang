@@ -287,13 +287,13 @@ entity.aether.aerbunny.name=Aerbunny
 entity.aether.carrion_sprout.name=Carrion Sprout
 
 # Creative Tabs
-itemGroup.aetherBlocks=Aether Blocks
-itemGroup.aetherMaterials=Aether Materials
-itemGroup.aetherTools=Aether Tools
-itemGroup.aetherWeapons=Aether Weapons
-itemGroup.aetherArmor=Aether Armor
-itemGroup.aetherConsumables=Aether Consumables
-itemGroup.aetherAccessories=Equipment
+itemGroup.aether.blocks=Aether Blocks
+itemGroup.aether.materials=Aether Materials
+itemGroup.aether.tools=Aether Tools
+itemGroup.aether.weapons=Aether Weapons
+itemGroup.aether.armor=Aether Armor
+itemGroup.aether.consumables=Aether Consumables
+itemGroup.aether.accessories=Equipment
 
 # Containers
 container.holystone_furnace=Holystone Furnace

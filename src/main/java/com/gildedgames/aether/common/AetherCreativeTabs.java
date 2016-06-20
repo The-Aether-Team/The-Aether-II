@@ -11,19 +11,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class AetherCreativeTabs
 {
-	public static final CreativeTab tabBlocks = new CreativeTab("aetherBlocks");
+	public static final CreativeTab tabBlocks = new CreativeTab("aether.blocks");
 
-	public static final CreativeTab tabMaterials = new CreativeTab("aetherMaterials");
+	public static final CreativeTab tabMaterials = new CreativeTab("aether.materials");
 
-	public static final CreativeTab tabTools = new CreativeTab("aetherTools");
+	public static final CreativeTab tabTools = new CreativeTab("aether.tools");
 
-	public static final CreativeTab tabWeapons = new CreativeTab("aetherWeapons");
+	public static final CreativeTab tabWeapons = new CreativeTab("aether.weapons");
 
-	public static final CreativeTab tabArmor = new CreativeTab("aetherArmor");
+	public static final CreativeTab tabArmor = new CreativeTab("aether.armor");
 
-	public static final CreativeTab tabConsumables = new CreativeTab("aetherConsumables");
+	public static final CreativeTab tabConsumables = new CreativeTab("aether.consumables");
 
-	public static final CreativeTab tabAccessories = new CreativeTab("aetherAccessories");
+	public static final CreativeTab tabAccessories = new CreativeTab("aether.accessories");
 
 	@SideOnly(Side.CLIENT)
 	public static void registerTabIcons()
