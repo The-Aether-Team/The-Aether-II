@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.world.features.trees;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -28,7 +28,7 @@ public class WorldGenOrangeTree extends WorldGenerator
 
 			BlockPos pos = position.add(x, y, z);
 
-			if (world.isAirBlock(pos) && world.isAirBlock(pos.up()) && this.treeBlock.isSuitableSoilBlock(world.getBlockState(pos.down()).getBlock()))
+			if (world.isAirBlock(pos) && world.isAirBlock(pos.up()) && this.treeBlock.isSuitableSoilBlock(world.getBlockState(pos.down())))
 			{
 				int stage = (Integer) stages[rand.nextInt(stages.length)];
 

@@ -8,7 +8,7 @@ public class ItemGravititeSword extends ItemAetherSword
 {
 	public ItemGravititeSword()
 	{
-		super(ToolMaterial.EMERALD, ItemAbilityType.ACTIVE);
+		super(ToolMaterial.DIAMOND, ItemAbilityType.ACTIVE);
 	}
 
 	@Override

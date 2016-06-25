@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowb
 import com.gildedgames.util.core.client.SpriteGeneric;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -42,7 +42,7 @@ public class RenderDaggerfrostSnowball extends Render<EntityDaggerfrostSnowball>
 		this.bindEntityTexture(entity);
 
 		Tessellator tessellator = Tessellator.getInstance();
-		WorldRenderer renderer = tessellator.getWorldRenderer();
+		VertexBuffer renderer = tessellator.getBuffer();
 
 		this.renderEntity(renderer, SPRITE);
 
@@ -54,7 +54,7 @@ public class RenderDaggerfrostSnowball extends Render<EntityDaggerfrostSnowball>
 		super.doRender(entity, posX, posY, posZ, entityYaw, partialTicks);
 	}
 
-	private void renderEntity(WorldRenderer renderer, TextureAtlasSprite icon)
+	private void renderEntity(VertexBuffer renderer, TextureAtlasSprite icon)
 	{
 		float f = icon.getMinU();
 		float f1 = icon.getMaxU();

@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.world.features.dungeon;
 import java.util.Random;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -39,9 +39,9 @@ public class WorldGenSliderLabyrinthEntrance extends WorldGenerator
 			{
 				for (int z1 = pos.getZ() - 3; z1 < pos.getZ() + 3; z1++)
 				{
-					iterPos.set(x1, y1, z1);
+					iterPos.setPos(x1, y1, z1);
 					
-					if (world.getBlockState(iterPos).getBlock() != Blocks.air && world.getBlockState(iterPos).getBlock() != BlocksAether.aether_grass && world.getBlockState(iterPos).getBlock() != BlocksAether.aether_dirt && world.getBlockState(iterPos).getBlock() != BlocksAether.aercloud && world.getBlockState(iterPos).getBlock() != BlocksAether.tall_aether_grass)
+					if (world.getBlockState(iterPos).getBlock() != Blocks.AIR && world.getBlockState(iterPos).getBlock() != BlocksAether.aether_grass && world.getBlockState(iterPos).getBlock() != BlocksAether.aether_dirt && world.getBlockState(iterPos).getBlock() != BlocksAether.aercloud && world.getBlockState(iterPos).getBlock() != BlocksAether.tall_aether_grass)
 					{
 						return false;
 					}
@@ -55,9 +55,9 @@ public class WorldGenSliderLabyrinthEntrance extends WorldGenerator
 			{
 				for (int z1 = pos.getZ() - 3; z1 < pos.getZ() + 3; z1++)
 				{
-					iterPos.set(x1, y1, z1);
+					iterPos.setPos(x1, y1, z1);
 					
-					if (world.getBlockState(iterPos).getBlock() == Blocks.air)
+					if (world.getBlockState(iterPos).getBlock() == Blocks.AIR)
 					{
 						return false;
 					}
@@ -65,11 +65,11 @@ public class WorldGenSliderLabyrinthEntrance extends WorldGenerator
 			}
 		}
 
-		iterPos.set(pos.getX() + 3, pos.getY(), pos.getZ() + 3);
+		iterPos.setPos(pos.getX() + 3, pos.getY(), pos.getZ() + 3);
 		
 		if (pos.getY() + (height + 2) <= world.getHeight() && (world.getBlockState(iterPos).getBlock() == BlocksAether.aether_grass || world.getBlockState(iterPos).getBlock() == BlocksAether.aether_dirt))
 		{
-			iterPos.set(pos.getX() + 6, pos.getY() + height, pos.getZ() + 6);
+			iterPos.setPos(pos.getX() + 6, pos.getY() + height, pos.getZ() + 6);
 			
 			GenUtil.cuboidVaried(world, pos, iterPos, BlocksAether.carved_stone.getStateFromMeta(BlockDivine.DIVINE), BlocksAether.sentry_stone.getStateFromMeta(BlockDivine.DIVINE), 8, rand, true);
 		}
@@ -88,8 +88,8 @@ public class WorldGenSliderLabyrinthEntrance extends WorldGenerator
 		
 		BlockPos.MutableBlockPos iterPos2 = new BlockPos.MutableBlockPos(pos.getX(), pos.getY(), pos.getZ());
 
-		GenUtil.cuboid(world, iterPos.set(gateMinX, gateMinY, gateMinZ - 1), iterPos2.set(gateMaxX, gateMaxY - 1, gateMaxZ + 1), Blocks.air.getDefaultState());
-		GenUtil.cuboid(world, iterPos.set(gateMinX - 1, gateMinY, gateMinZ), iterPos2.set(gateMaxX + 1, gateMaxY - 1, gateMaxZ), Blocks.air.getDefaultState());
+		GenUtil.cuboid(world, iterPos.setPos(gateMinX, gateMinY, gateMinZ - 1), iterPos2.setPos(gateMaxX, gateMaxY - 1, gateMaxZ + 1), Blocks.AIR.getDefaultState());
+		GenUtil.cuboid(world, iterPos.setPos(gateMinX - 1, gateMinY, gateMinZ), iterPos2.setPos(gateMaxX + 1, gateMaxY - 1, gateMaxZ), Blocks.AIR.getDefaultState());
 
 		for (int j = 0; j < 1; j++)
 		{
@@ -109,11 +109,11 @@ public class WorldGenSliderLabyrinthEntrance extends WorldGenerator
 			}
 		}
 		
-		iterPos.set(pos.getX() + 3, pos.getY() + 4, pos.getZ() + 3);
+		iterPos.setPos(pos.getX() + 3, pos.getY() + 4, pos.getZ() + 3);
 
 		world.setBlockState(iterPos, BlocksAether.carved_stone.getStateFromMeta(BlockDivine.DIVINE));
 		
-		iterPos.set(pos.getX() + 3, pos.getY() + 4, pos.getZ() + 3);
+		iterPos.setPos(pos.getX() + 3, pos.getY() + 4, pos.getZ() + 3);
 		
 		world.setBlockState(iterPos, BlocksAether.labyrinth_totem.getDefaultState());
 
@@ -135,7 +135,7 @@ public class WorldGenSliderLabyrinthEntrance extends WorldGenerator
 			}
 		}
 
-		iterPos.set(pos.getX() + 3, height + pos.getY() + 2, pos.getZ() + 3);
+		iterPos.setPos(pos.getX() + 3, height + pos.getY() + 2, pos.getZ() + 3);
 		
 		//world.setBlockState(iterPos, BlocksAether.carved_stone.getStateFromMeta(BlockDungeon.DIVINE));
 

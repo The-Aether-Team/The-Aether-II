@@ -64,7 +64,7 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 		}
 		else
 		{
-			DungeonInstance inst = handler.get(new BlockPosDimension(pos, this.worldObj.provider.getDimensionId()));
+			DungeonInstance inst = handler.get(new BlockPosDimension(pos, this.worldObj.provider.getDimension()));
 			handler.teleportToInst(player, inst);
 		}
 	}

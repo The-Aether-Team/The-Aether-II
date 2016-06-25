@@ -8,8 +8,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -68,7 +68,7 @@ public class FreezeBlocksEffect implements EntityEffectProcessor<Instance>
 	public void tick(Entity source, List<Instance> all)
 	{
 		World world = source.worldObj;
-		IBlockState ice = all.size() > 1 ? Blocks.packed_ice.getDefaultState() : Blocks.ice.getDefaultState();
+		IBlockState ice = all.size() > 1 ? Blocks.PACKED_ICE.getDefaultState() : Blocks.ICE.getDefaultState();
 
 		int maxRadius = 0;
 
@@ -108,17 +108,17 @@ public class FreezeBlocksEffect implements EntityEffectProcessor<Instance>
 						{
 							if (this.frozenLocations.contains(pos))
 							{
-								if (block == Blocks.ice)
+								if (block == Blocks.ICE)
 								{
-									world.setBlockState(pos, Blocks.flowing_water.getDefaultState(), PLACEMENT_FLAG);
+									world.setBlockState(pos, Blocks.FLOWING_WATER.getDefaultState(), PLACEMENT_FLAG);
 								}
-								else if (block == Blocks.packed_ice)
+								else if (block == Blocks.PACKED_ICE)
 								{
-									world.setBlockState(pos, Blocks.flowing_water.getDefaultState(), PLACEMENT_FLAG);
+									world.setBlockState(pos, Blocks.FLOWING_WATER.getDefaultState(), PLACEMENT_FLAG);
 								}
-								else if (block == Blocks.obsidian)
+								else if (block == Blocks.OBSIDIAN)
 								{
-									world.setBlockState(pos, Blocks.flowing_lava.getDefaultState(), PLACEMENT_FLAG);
+									world.setBlockState(pos, Blocks.FLOWING_LAVA.getDefaultState(), PLACEMENT_FLAG);
 								}
 
 								this.frozenLocations.remove(pos);
@@ -127,24 +127,24 @@ public class FreezeBlocksEffect implements EntityEffectProcessor<Instance>
 							continue;
 						}
 
-						if (block == Blocks.flowing_water)
+						if (block == Blocks.FLOWING_WATER)
 						{
 							world.setBlockState(pos, ice, PLACEMENT_FLAG);
 							this.frozenLocations.add(pos);
 						}
-						else if (block == Blocks.water)
+						else if (block == Blocks.WATER)
 						{
 							world.setBlockState(pos, ice, PLACEMENT_FLAG);
 							this.frozenLocations.add(pos);
 						}
-						else if (block == Blocks.flowing_lava)
+						else if (block == Blocks.FLOWING_LAVA)
 						{
-							world.setBlockState(pos, Blocks.obsidian.getDefaultState(), PLACEMENT_FLAG);
+							world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState(), PLACEMENT_FLAG);
 							this.frozenLocations.add(pos);
 						}
-						else if (block == Blocks.lava)
+						else if (block == Blocks.LAVA)
 						{
-							world.setBlockState(pos, Blocks.obsidian.getDefaultState(), PLACEMENT_FLAG);
+							world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState(), PLACEMENT_FLAG);
 							this.frozenLocations.add(pos);
 						}
 						else
@@ -167,17 +167,17 @@ public class FreezeBlocksEffect implements EntityEffectProcessor<Instance>
 			IBlockState state = world.getBlockState(pos);
 			Block block = state.getBlock();
 
-			if (block == Blocks.ice)
+			if (block == Blocks.ICE)
 			{
-				world.setBlockState(pos, Blocks.flowing_water.getDefaultState(), PLACEMENT_FLAG);
+				world.setBlockState(pos, Blocks.FLOWING_WATER.getDefaultState(), PLACEMENT_FLAG);
 			}
-			else if (block == Blocks.packed_ice)
+			else if (block == Blocks.PACKED_ICE)
 			{
-				world.setBlockState(pos, Blocks.flowing_water.getDefaultState(), PLACEMENT_FLAG);
+				world.setBlockState(pos, Blocks.FLOWING_WATER.getDefaultState(), PLACEMENT_FLAG);
 			}
-			else if (block == Blocks.obsidian)
+			else if (block == Blocks.OBSIDIAN)
 			{
-				world.setBlockState(pos, Blocks.flowing_lava.getDefaultState(), PLACEMENT_FLAG);
+				world.setBlockState(pos, Blocks.FLOWING_LAVA.getDefaultState(), PLACEMENT_FLAG);
 			}
 		}
 

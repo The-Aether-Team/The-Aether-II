@@ -1,15 +1,16 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.client.renderer.effects.EntityGoldenFX;
+import com.gildedgames.aether.client.renderer.effects.ParticleGolden;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
@@ -33,20 +34,20 @@ public class BlockAetherLeaves extends Block implements IShearable
 
 	public BlockAetherLeaves(int saplingMeta)
 	{
-		super(Material.leaves);
+		super(Material.LEAVES);
 
 		this.saplingMeta = saplingMeta;
 
 		this.setHardness(0.2f);
 		this.setTickRandomly(true);
 
-		this.setStepSound(Block.soundTypeGrass);
+		this.setSoundType(SoundType.PLANT);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_DECAYABLE, Boolean.TRUE).withProperty(PROPERTY_CHECK_DECAY, Boolean.TRUE));
 	}
 
 	@Override
-	public boolean isOpaqueCube()
+	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
@@ -58,7 +59,7 @@ public class BlockAetherLeaves extends Block implements IShearable
 	}
 
 	@Override
-	public boolean isLeaves(IBlockAccess world, BlockPos pos)
+	public boolean isLeaves(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
 		return true;
 	}
@@ -71,7 +72,7 @@ public class BlockAetherLeaves extends Block implements IShearable
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand)
 	{
 		if (this == BlocksAether.golden_oak_leaves)
 		{
@@ -81,7 +82,8 @@ public class BlockAetherLeaves extends Block implements IShearable
 				double y = pos.getY() + (rand.nextFloat() * 6f) - 3f;
 				double z = pos.getZ() + (rand.nextFloat() * 6f) - 3f;
 
-				EntityGoldenFX effect = new EntityGoldenFX(world, x, y, z, 0, 0, 0);
+				ParticleGolden effect = new ParticleGolden(world, x, y, z, 0, 0, 0);
+
 				FMLClientHandler.instance().getClient().effectRenderer.addEffect(effect);
 			}
 		}
@@ -108,9 +110,9 @@ public class BlockAetherLeaves extends Block implements IShearable
 						BlockPos newPos = pos.add(x2, y2, z2);
 						IBlockState newState = worldIn.getBlockState(newPos);
 
-						if (newState.getBlock().isLeaves(worldIn, newPos))
+						if (newState.getBlock().isLeaves(state, worldIn, newPos))
 						{
-							newState.getBlock().beginLeavesDecay(worldIn, newPos);
+							newState.getBlock().beginLeavesDecay(state, worldIn, newPos);
 						}
 					}
 				}
@@ -119,9 +121,9 @@ public class BlockAetherLeaves extends Block implements IShearable
 	}
 
 	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
-		if (!worldIn.isRemote)
+		if (!world.isRemote)
 		{
 			boolean checkDecay = state.getValue(PROPERTY_CHECK_DECAY);
 			boolean isDecayable = state.getValue(PROPERTY_DECAYABLE);
@@ -145,7 +147,7 @@ public class BlockAetherLeaves extends Block implements IShearable
 
 				int x2;
 
-				if (worldIn.isAreaLoaded(new BlockPos(x - range, y - range, z - range), new BlockPos(x + range, y + range, z + range)))
+				if (world.isAreaLoaded(new BlockPos(x - range, y - range, z - range), new BlockPos(x + range, y + range, z + range)))
 				{
 					int y2;
 					int z2;
@@ -157,11 +159,11 @@ public class BlockAetherLeaves extends Block implements IShearable
 							for (z2 = -start; z2 <= start; ++z2)
 							{
 								BlockPos newPos = new BlockPos(x + x2, y + y2, z + z2);
-								Block block = worldIn.getBlockState(newPos).getBlock();
+								Block block = world.getBlockState(newPos).getBlock();
 
-								if (!block.canSustainLeaves(worldIn, newPos))
+								if (!block.canSustainLeaves(state, world, newPos))
 								{
-									if (block.isLeaves(worldIn, newPos))
+									if (block.isLeaves(state, world, newPos))
 									{
 										this.surroundings[(x2 + j1) * i1 + (y2 + j1) * b1 + z2 + j1] = -2;
 									}
@@ -228,21 +230,19 @@ public class BlockAetherLeaves extends Block implements IShearable
 
 				if (x2 >= 0)
 				{
-					worldIn.setBlockState(pos, state.withProperty(PROPERTY_CHECK_DECAY, false), 4);
+					world.setBlockState(pos, state.withProperty(PROPERTY_CHECK_DECAY, false), 4);
 				}
 				else
 				{
-					this.destroy(worldIn, pos);
+					this.destroy(world, pos);
 				}
 			}
 		}
 	}
 
 	@Override
-	public void beginLeavesDecay(World world, BlockPos pos)
+	public void beginLeavesDecay(IBlockState state, World world, BlockPos pos)
 	{
-		IBlockState state = world.getBlockState(pos);
-
 		if (!state.getValue(PROPERTY_CHECK_DECAY))
 		{
 			world.setBlockState(pos, state.withProperty(PROPERTY_CHECK_DECAY, true), 4);
@@ -251,9 +251,9 @@ public class BlockAetherLeaves extends Block implements IShearable
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.CUTOUT_MIPPED;
+		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 
 	@Override
@@ -325,8 +325,8 @@ public class BlockAetherLeaves extends Block implements IShearable
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, PROPERTY_DECAYABLE, PROPERTY_CHECK_DECAY);
+		return new BlockStateContainer(this, PROPERTY_DECAYABLE, PROPERTY_CHECK_DECAY);
 	}
 }

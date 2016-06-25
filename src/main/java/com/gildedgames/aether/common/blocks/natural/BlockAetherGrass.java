@@ -1,21 +1,5 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import java.util.List;
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.IGrowable;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockState;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
@@ -23,6 +7,22 @@ import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVarian
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import com.gildedgames.aether.common.world.features.trees.WorldGenOrangeTree;
+import net.minecraft.block.Block;
+import net.minecraft.block.IGrowable;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
+import java.util.Random;
 
 public class BlockAetherGrass extends Block implements IAetherBlockWithVariants, IGrowable
 {
@@ -34,9 +34,9 @@ public class BlockAetherGrass extends Block implements IAetherBlockWithVariants,
 
 	public BlockAetherGrass()
 	{
-		super(Material.grass);
+		super(Material.GRASS);
 
-		this.setStepSound(Block.soundTypeGrass);
+		this.setSoundType(SoundType.PLANT);
 
 		this.setHardness(0.5F);
 		this.setTickRandomly(true);
@@ -59,7 +59,7 @@ public class BlockAetherGrass extends Block implements IAetherBlockWithVariants,
 	{
 		if (!world.isRemote && state.getValue(PROPERTY_VARIANT) == AETHER_GRASS)
 		{
-			if (world.getLightFromNeighbors(pos.up()) < 4 && world.getBlockState(pos.up()).getBlock().getLightOpacity(world, pos.up()) > 2)
+			if (world.getLightFromNeighbors(pos.up()) < 4 && world.getBlockState(pos.up()).getLightOpacity(world, pos.up()) > 2)
 			{
 				world.setBlockState(pos, BlocksAether.aether_dirt.getDefaultState());
 			}
@@ -70,11 +70,12 @@ public class BlockAetherGrass extends Block implements IAetherBlockWithVariants,
 					for (int i = 0; i < 4; ++i)
 					{
 						BlockPos randomNeighbor = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
-						Block neighborBlock = world.getBlockState(randomNeighbor.up()).getBlock();
+
+						IBlockState aboveState = world.getBlockState(randomNeighbor.up());
 						IBlockState neighborState = world.getBlockState(randomNeighbor);
 
 						if (neighborState.getBlock() == BlocksAether.aether_dirt &&
-								world.getLightFromNeighbors(randomNeighbor.up()) >= 4 && neighborBlock.getLightOpacity(world, randomNeighbor.up()) <= 2)
+								world.getLightFromNeighbors(randomNeighbor.up()) >= 4 && aboveState.getLightOpacity(world, randomNeighbor.up()) <= 2)
 						{
 							IBlockState grassState = this.getDefaultState().withProperty(PROPERTY_VARIANT, AETHER_GRASS);
 
@@ -107,9 +108,9 @@ public class BlockAetherGrass extends Block implements IAetherBlockWithVariants,
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, PROPERTY_VARIANT);
+		return new BlockStateContainer(this, PROPERTY_VARIANT);
 	}
 
 	@Override
@@ -147,7 +148,7 @@ public class BlockAetherGrass extends Block implements IAetherBlockWithVariants,
 					nextPos = nextPos.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
 
 					if (worldIn.getBlockState(nextPos.down()).getBlock() == BlocksAether.aether_grass &&
-							!worldIn.getBlockState(nextPos).getBlock().isNormalCube())
+							!worldIn.getBlockState(nextPos).isNormalCube())
 					{
 						grassCount++;
 

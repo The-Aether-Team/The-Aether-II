@@ -5,11 +5,11 @@ import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
@@ -43,7 +43,7 @@ public class RenderBolt extends Render<EntityBolt>
 		GlStateManager.rotate(bolt.prevRotationPitch + (bolt.rotationPitch - bolt.prevRotationPitch) * partialTicks, 0.0F, 0.0F, 1.0F);
 
 		Tessellator tessellator = Tessellator.getInstance();
-		WorldRenderer renderer = tessellator.getWorldRenderer();
+		VertexBuffer renderer = tessellator.getBuffer();
 
 		int i = 0;
 		float f = 0.0F;

@@ -1,11 +1,15 @@
 package com.gildedgames.aether.common.world;
 
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.world.biome.BiomeProviderAether;
+import com.gildedgames.aether.common.world.chunk.ChunkProviderAether;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -13,14 +17,16 @@ public class WorldProviderAether extends WorldProvider
 {
 	private float[] sunriseSunsetColors = new float[4];
 
+	private final DimensionType dimensionType = AetherCore.PROXY.getAetherDimensionType();
+
 	@Override
-	protected void registerWorldChunkManager()
+	protected void createBiomeProvider()
 	{
-		this.worldChunkMgr = new WorldChunkManagerAether();
+		this.biomeProvider = new BiomeProviderAether();
 	}
 
 	@Override
-	public IChunkProvider createChunkGenerator()
+	public IChunkGenerator createChunkGenerator()
 	{
 		return new ChunkProviderAether(this.worldObj, this.worldObj.getSeed());
 	}
@@ -50,18 +56,6 @@ public class WorldProviderAether extends WorldProvider
 	}
 
 	@Override
-	public String getDimensionName()
-	{
-		return "Aether";
-	}
-
-	@Override
-	public String getInternalNameSuffix()
-	{
-		return "_aether";
-	}
-
-	@Override
 	public String getSaveFolder()
 	{
 		return "AETHER";
@@ -86,8 +80,14 @@ public class WorldProviderAether extends WorldProvider
 	}
 
 	@Override
+	public DimensionType getDimensionType()
+	{
+		return this.dimensionType;
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
-	public Vec3 getFogColor(float angle, float partialTicks)
+	public Vec3d getFogColor(float angle, float partialTicks)
 	{
 		int color = 0x8080a0;
 
@@ -110,7 +110,7 @@ public class WorldProviderAether extends WorldProvider
 		green *= cos * 0.94F + 0.06F;
 		blue *= cos * 0.91F + 0.09F;
 
-		return new Vec3(red, green, blue);
+		return new Vec3d(red, green, blue);
 	}
 
 	@Override

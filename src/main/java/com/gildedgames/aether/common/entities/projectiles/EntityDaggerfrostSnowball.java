@@ -5,7 +5,7 @@ import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class EntityDaggerfrostSnowball extends EntitySnowball
@@ -26,18 +26,18 @@ public class EntityDaggerfrostSnowball extends EntitySnowball
 		super(world, x, y, z);
 	}
 
-	protected void onImpact(MovingObjectPosition pos)
+	protected void onImpact(RayTraceResult result)
 	{
-		if (pos.entityHit != null)
+		if (result.entityHit != null)
 		{
 			byte b0 = 2;
 
-			if (pos.entityHit instanceof EntityBlaze)
+			if (result.entityHit instanceof EntityBlaze)
 			{
 				b0 += 3;
 			}
 
-			pos.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float) b0);
+			result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float) b0);
 		}
 
 		for (int i = 0; i < 8; ++i)

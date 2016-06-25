@@ -2,16 +2,16 @@ package com.gildedgames.aether.common.entities.effects.rules;
 
 import com.gildedgames.aether.api.entities.effects.EntityEffectRule;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class InBiomeRule implements EntityEffectRule
 {
 
-	private BiomeGenBase biome;
+	private Biome biome;
 
-	public InBiomeRule(BiomeGenBase biome)
+	public InBiomeRule(Biome biome)
 	{
 		this.biome = biome;
 	}
@@ -19,13 +19,13 @@ public class InBiomeRule implements EntityEffectRule
 	@Override
 	public boolean isMet(Entity source)
 	{
-		return source.worldObj.getBiomeGenForCoords(source.getPosition()) == this.biome;
+		return source.worldObj.getBiome(source.getPosition()) == this.biome;
 	}
 
 	@Override
 	public String[] getUnlocalizedDesc()
 	{
-		return new String[] { EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + "In " + this.biome.biomeName + "s" };
+		return new String[] { TextFormatting.GRAY + "" + TextFormatting.ITALIC + "In " + this.biome.getBiomeName() + "s" };
 	}
 
 	@Override

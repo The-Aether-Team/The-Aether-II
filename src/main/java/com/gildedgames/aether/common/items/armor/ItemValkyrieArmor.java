@@ -1,9 +1,11 @@
 package com.gildedgames.aether.common.items.armor;
 
+import net.minecraft.inventory.EntityEquipmentSlot;
+
 public class ItemValkyrieArmor extends ItemAetherArmor
 {
-	public ItemValkyrieArmor(ArmorMaterial material, int armorType)
+	public ItemValkyrieArmor(ArmorMaterial material, EntityEquipmentSlot slot)
 	{
-		super(material, "valkyrie", armorType);
+		super(material, "valkyrie", slot);
 	}
 }

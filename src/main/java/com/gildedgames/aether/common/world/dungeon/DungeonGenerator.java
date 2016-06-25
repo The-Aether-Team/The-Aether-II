@@ -19,6 +19,6 @@ public interface DungeonGenerator
 
 	void generateChunk(World world, DungeonInstance inst, ChunkPrimer primer, int chunkX, int chunkZ);
 	
-	void populateChunk(World world, DungeonInstance inst, IChunkProvider chunkProvider, int chunkX, int chunkZ);
+	void populateChunk(World world, DungeonInstance inst, int chunkX, int chunkZ);
 	
 }

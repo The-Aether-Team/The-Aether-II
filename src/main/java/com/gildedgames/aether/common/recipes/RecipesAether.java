@@ -94,7 +94,7 @@ public class RecipesAether implements IAltarRecipeRegistry
         registerShapedRecipe(new ItemStack(ItemsAether.dart), " X", " Y", " Z",
                 'X', new ItemStack(ItemsAether.golden_amber),
                 'Y', new ItemStack(ItemsAether.skyroot_stick),
-                'Z', new ItemStack(Items.feather));
+                'Z', new ItemStack(Items.FEATHER));
 
         // Poison Dart
         registerShapedRecipe(new ItemStack(ItemsAether.dart, 2), "XXX", "XYX", "XXX",
@@ -168,17 +168,17 @@ public class RecipesAether implements IAltarRecipeRegistry
 		// Crossbow
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_crossbow), " X ", " Y ", "ZZZ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(Items.string),
+				'Y', new ItemStack(Items.STRING),
 				'Z', new ItemStack(BlocksAether.skyroot_planks));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.zanite_crossbow), " X ", " Y ", "ZZZ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(Items.string),
+				'Y', new ItemStack(Items.STRING),
 				'Z', new ItemStack(ItemsAether.zanite_gemstone));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.gravitite_crossbow), " X ", " Y ", "ZZZ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(Items.string),
+				'Y', new ItemStack(Items.STRING),
 				'Z', new ItemStack(BlocksAether.enchanted_gravitite));
 
 		// Crossbow Bolts
@@ -287,24 +287,24 @@ public class RecipesAether implements IAltarRecipeRegistry
     private void registerAccessoryRecipes() {
         // Iron Ring
         registerShapedRecipe(new ItemStack(ItemsAether.iron_ring), " X ", "X X", " X ",
-                'X', new ItemStack(Items.iron_ingot));
+                'X', new ItemStack(Items.IRON_INGOT));
         // Iron Pendant
         registerShapedRecipe(new ItemStack(ItemsAether.iron_pendant), "XXX", "X X", " Y ",
-                'X', new ItemStack(Items.string),
-                'Y', new ItemStack(Items.iron_ingot));
+                'X', new ItemStack(Items.STRING),
+                'Y', new ItemStack(Items.IRON_INGOT));
         // Gold Ring
         registerShapedRecipe(new ItemStack(ItemsAether.gold_ring), " X ", "X X", " X ",
-                'X', new ItemStack(Items.gold_ingot));
+                'X', new ItemStack(Items.GOLD_INGOT));
         // Gold Pendant
         registerShapedRecipe(new ItemStack(ItemsAether.gold_pendant), "XXX", "X X", " Y ",
-                'X', new ItemStack(Items.string),
-                'Y', new ItemStack(Items.gold_ingot));
+                'X', new ItemStack(Items.STRING),
+                'Y', new ItemStack(Items.GOLD_INGOT));
         // Zanite Ring
         registerShapedRecipe(new ItemStack(ItemsAether.zanite_ring), " X ", "X X", " X ",
                 'X', new ItemStack(ItemsAether.zanite_gemstone));
         // Zanite Pendant
         registerShapedRecipe(new ItemStack(ItemsAether.zanite_pendant), "XXX", "X X", " Y ",
-                'X', new ItemStack(Items.string),
+                'X', new ItemStack(Items.STRING),
                 'Y', new ItemStack(ItemsAether.zanite_gemstone));
     }
 
@@ -313,28 +313,28 @@ public class RecipesAether implements IAltarRecipeRegistry
         // Blue Gummy Swet
         registerShapedRecipe(new ItemStack(ItemsAether.gummy_swet), "XXX", "XYX", "XXX",
                 'X', new ItemStack(ItemsAether.swet_jelly),
-                'Y', new ItemStack(Items.sugar));
+                'Y', new ItemStack(Items.SUGAR));
 
         // Gold Gummy Swet
         registerShapedRecipe(new ItemStack(ItemsAether.gummy_swet, 1, 1), "XXX", "XYX", "XXX",
                 'X', new ItemStack(ItemsAether.swet_jelly, 1, 1),
-                'Y', new ItemStack(Items.sugar));
+                'Y', new ItemStack(Items.SUGAR));
 
         // Dark Gummy Swet
         registerShapedRecipe(new ItemStack(ItemsAether.gummy_swet, 1, 2), "XXX", "XYX", "XXX",
                 'X', new ItemStack(ItemsAether.swet_jelly, 1, 2),
-                'Y', new ItemStack(Items.sugar));
+                'Y', new ItemStack(Items.SUGAR));
 
         // Cocoatrice
         registerShapedRecipe(new ItemStack(ItemsAether.cocoatrice), "XY", "Z ",
-                'X', new ItemStack(Items.sugar),
-                'Y', new ItemStack(Items.dye, 1, 3),
+                'X', new ItemStack(Items.SUGAR),
+                'Y', new ItemStack(Items.DYE, 1, 3),
                 'Z', new ItemStack(ItemsAether.skyroot_milk_bucket));
 
         // Wrapped Chocolate
         registerShapedRecipe(new ItemStack(ItemsAether.wrapped_chocolates), "WX", "YZ",
-                'W', new ItemStack(Items.sugar),
-                'X', new ItemStack(Items.dye, 1, 3),
+                'W', new ItemStack(Items.SUGAR),
+                'X', new ItemStack(Items.DYE, 1, 3),
                 'Y', new ItemStack(ItemsAether.skyroot_milk_bucket),
                 'Z', new ItemStack(ItemsAether.aechor_petal));
 
@@ -351,13 +351,13 @@ public class RecipesAether implements IAltarRecipeRegistry
 
         // Blueberry Lollipop
         registerShapedRecipe(new ItemStack(ItemsAether.blueberry_lollipop), "XY", "Z ",
-                'X', new ItemStack(Items.sugar),
+                'X', new ItemStack(Items.SUGAR),
                 'Y', new ItemStack(ItemsAether.blueberry),
                 'Z', new ItemStack(ItemsAether.skyroot_stick));
 
         // Orange Lollipop
         registerShapedRecipe(new ItemStack(ItemsAether.orange), "XY", "Z ",
-                'X', new ItemStack(Items.sugar),
+                'X', new ItemStack(Items.SUGAR),
                 'Y', new ItemStack(ItemsAether.blueberry),
                 'Z', new ItemStack(ItemsAether.skyroot_stick));
 

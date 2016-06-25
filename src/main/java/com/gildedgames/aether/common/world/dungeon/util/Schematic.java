@@ -1,5 +1,18 @@
 package com.gildedgames.aether.common.world.dungeon.util;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
+import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.registry.GameData;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,19 +22,6 @@ import java.util.ArrayList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
-
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraftforge.fml.common.registry.GameData;
 
 public class Schematic
 {
@@ -104,9 +104,9 @@ public class Schematic
 					continue;
 				}
 				
-				pos.set(blockData.x + location.getX(), blockData.y + location.getY(), blockData.z + location.getZ());
+				pos.setPos(blockData.x + location.getX(), blockData.y + location.getY(), blockData.z + location.getZ());
 
-				if (blockData.state.getBlock().getLightValue() > 0)
+				if (blockData.state.getLightValue() > 0)
 				{
 					world.setBlockState(pos, blockData.state);
 					world.checkLight(pos);
@@ -126,7 +126,7 @@ public class Schematic
 							tileEntityData.setInteger("y", blockData.y + location.getY());
 							tileEntityData.setInteger("z", blockData.z + location.getZ());
 
-							world.setTileEntity(new BlockPos(blockData.x + location.getX(), blockData.y + location.getY(), blockData.z + location.getZ()), TileEntity.createAndLoadEntity(tileEntityData));
+							world.setTileEntity(new BlockPos(blockData.x + location.getX(), blockData.y + location.getY(), blockData.z + location.getZ()), TileEntity.func_190200_a(world, tileEntityData));
 						}
 					}
 				}
@@ -159,7 +159,7 @@ public class Schematic
 	{
 		for (BlockData blockData : this.blocks)
 		{
-			if (blockData.state.getBlock().getLightValue() <= 0)
+			if (blockData.state.getLightValue() <= 0)
 			{
 				world.setBlockState(new BlockPos(blockData.x + loc.getX(), blockData.y + loc.getY(), blockData.z + loc.getZ()), blockData.state, 2);
 			}
@@ -176,7 +176,7 @@ public class Schematic
 						tileEntityData.setInteger("y", blockData.y + loc.getY());
 						tileEntityData.setInteger("z", blockData.z + loc.getZ());
 
-						world.setTileEntity(new BlockPos(blockData.x + loc.getX(), blockData.y + loc.getY(), blockData.z + loc.getZ()), TileEntity.createAndLoadEntity(tileEntityData));
+						world.setTileEntity(new BlockPos(blockData.x + loc.getX(), blockData.y + loc.getY(), blockData.z + loc.getZ()), TileEntity.func_190200_a(world, tileEntityData));
 					}
 				}
 			}
@@ -198,7 +198,7 @@ public class Schematic
 					{
 						if (x + worldXOff < loc.getX() + this.width && y < loc.getY() + this.height && z + worldZOff < loc.getZ() + this.length)
 						{
-							primer.setBlockState(x, y, z, Blocks.air.getDefaultState());
+							primer.setBlockState(x, y, z, Blocks.AIR.getDefaultState());
 						}
 					}
 				}
@@ -217,7 +217,7 @@ public class Schematic
 				continue;
 			}
 
-			if (blockData.state.getBlock().getLightValue() <= 0)
+			if (blockData.state.getLightValue() <= 0)
 			{
 				primer.setBlockState((loc.getX() + blockData.x) - worldXOff, blockData.y + loc.getY(), (blockData.z + loc.getZ()) - worldZOff, blockData.state);
 			}
@@ -231,7 +231,7 @@ public class Schematic
 
 	public InputStream readAsset(String asset) throws ZipException, IOException
 	{
-		File source = new File(MinecraftServer.getServer().getDataDirectory(), "/dungeonSchematics/");
+		File source = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getDataDirectory(), "/dungeonSchematics/");
 
 		if (source != null)
 		{

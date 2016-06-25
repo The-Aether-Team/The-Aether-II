@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.entities.living;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public abstract class EntityAetherAnimal extends EntityAnimal

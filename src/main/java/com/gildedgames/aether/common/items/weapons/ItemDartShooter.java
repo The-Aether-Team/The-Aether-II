@@ -1,16 +1,22 @@
 package com.gildedgames.aether.common.items.weapons;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -49,7 +55,7 @@ public class ItemDartShooter extends Item
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
+	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer player, EnumHand hand)
 	{
 		ItemDartType dartType = ItemDartType.fromOrdinal(stack.getMetadata());
 
@@ -57,15 +63,22 @@ public class ItemDartShooter extends Item
 
 		if (ammoSlot > 0 || player.capabilities.isCreativeMode)
 		{
-			player.setItemInUse(stack, this.getMaxItemUseDuration(stack) - 5);
+			player.setActiveHand(EnumHand.MAIN_HAND);
 		}
 
-		return stack;
+		return new ActionResult<>(EnumActionResult.PASS, stack);
 	}
 
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int timeLeft)
+	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase entity, int timeLeft)
 	{
+		if (!(entity instanceof EntityPlayer))
+		{
+			return;
+		}
+
+		EntityPlayer player = (EntityPlayer) entity;
+
 		ItemDartType dartType = ItemDartType.fromOrdinal(stack.getMetadata());
 
 		int inventorySlot = this.getMatchingAmmoSlot(player.inventory, dartType.getAmmoItem());
@@ -75,7 +88,7 @@ public class ItemDartShooter extends Item
 			return;
 		}
 
-		boolean isInfiniteArrow = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, stack) > 0;
+		boolean isInfiniteArrow = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByLocation("infinity"), stack) > 0;
 
 		int duration = this.getMaxItemUseDuration(stack) - timeLeft - 5;
 
@@ -103,7 +116,7 @@ public class ItemDartShooter extends Item
 				dart.setCanPickup(2);
 			}
 
-			world.playSoundAtEntity(player, AetherCore.getResourcePath("aerandom.dart_shooter"), 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + speed * 0.5F);
+			world.playSound(player, player.getPosition(), SoundsAether.shoot_dart, SoundCategory.PLAYERS, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + speed * 0.5F);
 
 			if (!world.isRemote)
 			{

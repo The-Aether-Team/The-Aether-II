@@ -8,7 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
@@ -66,7 +66,7 @@ public class ModifyMaxHealthEffect implements EntityEffectProcessor<Instance>
 	{
 		float maxHealthMod = instance.getAttributes().getFloat("maxHealthMod");
 
-		String prefix = maxHealthMod > 0 ? (EnumChatFormatting.BLUE + "+") : (EnumChatFormatting.RED + "");
+		String prefix = maxHealthMod > 0 ? (TextFormatting.BLUE + "+") : (TextFormatting.RED + "");
 
 		String par = prefix + (maxHealthMod == (int) Math.floor(maxHealthMod) ? String.valueOf((int) Math.floor(maxHealthMod)) : String.valueOf(maxHealthMod));
 
@@ -83,7 +83,7 @@ public class ModifyMaxHealthEffect implements EntityEffectProcessor<Instance>
 
 		EntityLivingBase living = (EntityLivingBase) source;
 
-		living.getEntityAttribute(SharedMonsterAttributes.maxHealth).applyModifier(instance.getModifier());
+		living.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).applyModifier(instance.getModifier());
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class ModifyMaxHealthEffect implements EntityEffectProcessor<Instance>
 
 		EntityLivingBase living = (EntityLivingBase) source;
 
-		living.getEntityAttribute(SharedMonsterAttributes.maxHealth).removeModifier(instance.getModifier());
+		living.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(instance.getModifier());
 	}
 
 	@Override

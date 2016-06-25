@@ -8,13 +8,14 @@ import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.resources.model.IBakedModel;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -32,7 +33,7 @@ public class RenderFloatingBlock extends Render<EntityFloatingBlock>
 	{
 		if (floatingBlock.getBlockState() != null)
 		{
-			this.bindTexture(TextureMap.locationBlocksTexture);
+			this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
 			IBlockState state = floatingBlock.getBlockState();
 			Block block = state.getBlock();
@@ -40,9 +41,9 @@ public class RenderFloatingBlock extends Render<EntityFloatingBlock>
 			BlockPos pos = new BlockPos(floatingBlock);
 			World world = floatingBlock.getEntityWorld();
 
-			if (state != world.getBlockState(pos) && block.getRenderType() != -1)
+			if (state != world.getBlockState(pos))
 			{
-				if (block.getRenderType() == 3)
+				if (block.getRenderType(state) == EnumBlockRenderType.MODEL)
 				{
 					RenderHelper.disableStandardItemLighting();
 
@@ -61,7 +62,7 @@ public class RenderFloatingBlock extends Render<EntityFloatingBlock>
 
 					Tessellator tessellator = Tessellator.getInstance();
 
-					WorldRenderer worldRenderer = tessellator.getWorldRenderer();
+					VertexBuffer worldRenderer = tessellator.getBuffer();
 					worldRenderer.begin(7, DefaultVertexFormats.BLOCK);
 					int i = pos.getX();
 					int j = pos.getY();
@@ -71,7 +72,7 @@ public class RenderFloatingBlock extends Render<EntityFloatingBlock>
 
 					BlockRendererDispatcher blockRendererDispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
 
-					IBakedModel model = blockRendererDispatcher.getModelFromBlockState(state, world, null);
+					IBakedModel model = blockRendererDispatcher.getModelForState(state);
 
 					blockRendererDispatcher.getBlockModelRenderer()
 							.renderModel(world, model, state, pos, worldRenderer, false);
@@ -94,6 +95,6 @@ public class RenderFloatingBlock extends Render<EntityFloatingBlock>
 	@Override
 	protected ResourceLocation getEntityTexture(EntityFloatingBlock entity)
 	{
-		return TextureMap.locationBlocksTexture;
+		return TextureMap.LOCATION_BLOCKS_TEXTURE;
 	}
 }

@@ -4,10 +4,9 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
@@ -32,9 +31,9 @@ public class WorldGenMassiveSkyrootTree extends WorldGenAbstractTree
 
 	public void setBlockAirCheck(World world, int x, int y, int z, IBlockState state)
 	{
-		tmpBlockPos.set(x, y, z);
+		tmpBlockPos.setPos(x, y, z);
 
-		if (world.getBlockState(tmpBlockPos).getBlock() == Blocks.air)
+		if (world.getBlockState(tmpBlockPos).getBlock() == Blocks.AIR)
 		{
 			world.setBlockState(tmpBlockPos, state);
 		}
@@ -57,7 +56,7 @@ public class WorldGenMassiveSkyrootTree extends WorldGenAbstractTree
 			{
 				for (int z1 = z - 3; z1 < z + 3; z1++)
 				{
-					if (world.getBlockState(pos.set(x1, y1, z1)).getBlock() != Blocks.air)
+					if (world.getBlockState(pos.setPos(x1, y1, z1)).getBlock() != Blocks.AIR)
 					{
 						cangen = false;
 					}
@@ -67,7 +66,7 @@ public class WorldGenMassiveSkyrootTree extends WorldGenAbstractTree
 
 		if (y + (height + 2) <= world.getHeight() && cangen)
 		{
-			Block y1 = world.getBlockState(pos.set(x, y - 1, z)).getBlock();
+			Block y1 = world.getBlockState(pos.setPos(x, y - 1, z)).getBlock();
 
 			if (y1 != BlocksAether.aether_grass && y1 != BlocksAether.aether_dirt)
 			{
@@ -78,48 +77,48 @@ public class WorldGenMassiveSkyrootTree extends WorldGenAbstractTree
 					grass = BlocksAether.aether_grass.getDefaultState(),
 					dirt = BlocksAether.aether_dirt.getDefaultState();
 
-			world.setBlockState(pos.set(x, y - 1, z), BlocksAether.aether_dirt.getDefaultState());
+			world.setBlockState(pos.setPos(x, y - 1, z), BlocksAether.aether_dirt.getDefaultState());
 
 			for (int y2 = y; y2 <= y + height; y2++)
 			{
-				world.setBlockState(pos.set(x, y2, z), BlocksAether.skyroot_log.getDefaultState());
+				world.setBlockState(pos.setPos(x, y2, z), BlocksAether.skyroot_log.getDefaultState());
 			}
 
 			if (this.branches)
 			{
-				world.setBlockState(pos.set(x + 1, y, z), wall);
-				world.setBlockState(pos.set(x + 1, y + 1, z), wall);
-				world.setBlockState(pos.set(x + 2, y, z), wall);
+				world.setBlockState(pos.setPos(x + 1, y, z), wall);
+				world.setBlockState(pos.setPos(x + 1, y + 1, z), wall);
+				world.setBlockState(pos.setPos(x + 2, y, z), wall);
 
-				world.setBlockState(pos.set(x - 1, y, z), wall);
-				world.setBlockState(pos.set(x - 1, y + 1, z), wall);
-				world.setBlockState(pos.set(x - 2, y, z), wall);
+				world.setBlockState(pos.setPos(x - 1, y, z), wall);
+				world.setBlockState(pos.setPos(x - 1, y + 1, z), wall);
+				world.setBlockState(pos.setPos(x - 2, y, z), wall);
 
-				world.setBlockState(pos.set(x, y, z + 1), wall);
-				world.setBlockState(pos.set(x, y + 1, z + 1), wall);
-				world.setBlockState(pos.set(x, y, z + 2), wall);
+				world.setBlockState(pos.setPos(x, y, z + 1), wall);
+				world.setBlockState(pos.setPos(x, y + 1, z + 1), wall);
+				world.setBlockState(pos.setPos(x, y, z + 2), wall);
 
-				world.setBlockState(pos.set(x, y, z - 1), wall);
-				world.setBlockState(pos.set(x, y + 1, z - 1), wall);
-				world.setBlockState(pos.set(x, y, z - 2), wall);
+				world.setBlockState(pos.setPos(x, y, z - 1), wall);
+				world.setBlockState(pos.setPos(x, y + 1, z - 1), wall);
+				world.setBlockState(pos.setPos(x, y, z - 2), wall);
 
-				world.setBlockState(pos.set(x + 1, y - 1, z), grass);
-				world.setBlockState(pos.set(x + 2, y - 1, z), grass);
-				world.setBlockState(pos.set(x - 1, y - 1, z), grass);
-				world.setBlockState(pos.set(x - 2, y - 1, z), grass);
-				world.setBlockState(pos.set(x, y - 1, z + 1), grass);
-				world.setBlockState(pos.set(x, y - 1, z + 2), grass);
-				world.setBlockState(pos.set(x, y - 1, z - 1), grass);
-				world.setBlockState(pos.set(x, y - 1, z - 2), grass);
+				world.setBlockState(pos.setPos(x + 1, y - 1, z), grass);
+				world.setBlockState(pos.setPos(x + 2, y - 1, z), grass);
+				world.setBlockState(pos.setPos(x - 1, y - 1, z), grass);
+				world.setBlockState(pos.setPos(x - 2, y - 1, z), grass);
+				world.setBlockState(pos.setPos(x, y - 1, z + 1), grass);
+				world.setBlockState(pos.setPos(x, y - 1, z + 2), grass);
+				world.setBlockState(pos.setPos(x, y - 1, z - 1), grass);
+				world.setBlockState(pos.setPos(x, y - 1, z - 2), grass);
 
-				world.setBlockState(pos.set(x + 1, y - 2, z), dirt);
-				world.setBlockState(pos.set(x + 2, y - 2, z), dirt);
-				world.setBlockState(pos.set(x - 1, y - 2, z), dirt);
-				world.setBlockState(pos.set(x - 2, y - 2, z), dirt);
-				world.setBlockState(pos.set(x, y - 2, z + 1), dirt);
-				world.setBlockState(pos.set(x, y - 2, z + 2), dirt);
-				world.setBlockState(pos.set(x, y - 2, z - 1), dirt);
-				world.setBlockState(pos.set(x, y - 2, z - 2), dirt);
+				world.setBlockState(pos.setPos(x + 1, y - 2, z), dirt);
+				world.setBlockState(pos.setPos(x + 2, y - 2, z), dirt);
+				world.setBlockState(pos.setPos(x - 1, y - 2, z), dirt);
+				world.setBlockState(pos.setPos(x - 2, y - 2, z), dirt);
+				world.setBlockState(pos.setPos(x, y - 2, z + 1), dirt);
+				world.setBlockState(pos.setPos(x, y - 2, z + 2), dirt);
+				world.setBlockState(pos.setPos(x, y - 2, z - 1), dirt);
+				world.setBlockState(pos.setPos(x, y - 2, z - 2), dirt);
 			}
 
 			this.setBlockAirCheck(world, x, y + (height + 1), z, this.leaves);
@@ -161,7 +160,7 @@ public class WorldGenMassiveSkyrootTree extends WorldGenAbstractTree
 					case (0):
 						for (int x2 = x; x2 <= x + branchLength; x2++)
 						{
-							world.setBlockState(pos.set(x2, y2, z), log);
+							world.setBlockState(pos.setPos(x2, y2, z), log);
 
 							this.setBlockAirCheck(world, x2, y2 + 1, z, this.leaves);
 							this.setBlockAirCheck(world, x2, y2 - 1, z, this.leaves);
@@ -169,9 +168,9 @@ public class WorldGenMassiveSkyrootTree extends WorldGenAbstractTree
 							this.setBlockAirCheck(world, x2 - 1, y2, z - 1, this.leaves);
 						}
 
-						world.setBlockState(pos.set(x + (branchLength + 1), y2 + 1, z), log);
-						world.setBlockState(pos.set(x + (branchLength + 2), y2 + 2, z), log);
-						world.setBlockState(pos.set(x + (branchLength + 2), y2 + 3, z), log);
+						world.setBlockState(pos.setPos(x + (branchLength + 1), y2 + 1, z), log);
+						world.setBlockState(pos.setPos(x + (branchLength + 2), y2 + 2, z), log);
+						world.setBlockState(pos.setPos(x + (branchLength + 2), y2 + 3, z), log);
 
 						this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 2, z, this.leaves);
 						this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 3, z, this.leaves);
@@ -213,16 +212,16 @@ public class WorldGenMassiveSkyrootTree extends WorldGenAbstractTree
 					case (1):
 						for (int x3 = x; x3 >= x - branchLength; x3--)
 						{
-							world.setBlockState(pos.set(x3, y2, z), log);
+							world.setBlockState(pos.setPos(x3, y2, z), log);
 							this.setBlockAirCheck(world, x3, y2 + 1, z, this.leaves);
 							this.setBlockAirCheck(world, x3, y2 - 1, z, this.leaves);
 							this.setBlockAirCheck(world, x3 + 1, y2, z + 1, this.leaves);
 							this.setBlockAirCheck(world, x3 - 1, y2, z - 1, this.leaves);
 						}
 
-						world.setBlockState(pos.set(x - (branchLength + 1), y2 + 1, z), log);
-						world.setBlockState(pos.set(x - (branchLength + 2), y2 + 2, z), log);
-						world.setBlockState(pos.set(x - (branchLength + 2), y2 + 3, z), log);
+						world.setBlockState(pos.setPos(x - (branchLength + 1), y2 + 1, z), log);
+						world.setBlockState(pos.setPos(x - (branchLength + 2), y2 + 2, z), log);
+						world.setBlockState(pos.setPos(x - (branchLength + 2), y2 + 3, z), log);
 
 						this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 2, z, this.leaves);
 						this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 3, z, this.leaves);
@@ -264,16 +263,16 @@ public class WorldGenMassiveSkyrootTree extends WorldGenAbstractTree
 					case (2):
 						for (int z2 = z; z2 <= z + branchLength; z2++)
 						{
-							world.setBlockState(pos.set(x, y2, z2), log);
+							world.setBlockState(pos.setPos(x, y2, z2), log);
 							this.setBlockAirCheck(world, x, y2 + 1, z2, this.leaves);
 							this.setBlockAirCheck(world, x, y2 - 1, z2, this.leaves);
 							this.setBlockAirCheck(world, x + 1, y2, z2, this.leaves);
 							this.setBlockAirCheck(world, x - 1, y2, z2, this.leaves);
 						}
 
-						world.setBlockState(pos.set(x, y2 + 1, z + (branchLength + 1)), log);
-						world.setBlockState(pos.set(x, y2 + 2, z + (branchLength + 2)), log);
-						world.setBlockState(pos.set(x, y2 + 3, z + (branchLength + 2)), log);
+						world.setBlockState(pos.setPos(x, y2 + 1, z + (branchLength + 1)), log);
+						world.setBlockState(pos.setPos(x, y2 + 2, z + (branchLength + 2)), log);
+						world.setBlockState(pos.setPos(x, y2 + 3, z + (branchLength + 2)), log);
 
 						this.setBlockAirCheck(world, x, y2 + 2, z + (branchLength + 1), this.leaves);
 						this.setBlockAirCheck(world, x, y2 + 3, z + (branchLength + 1), this.leaves);
@@ -315,16 +314,16 @@ public class WorldGenMassiveSkyrootTree extends WorldGenAbstractTree
 					case (3):
 						for (int z3 = z; z3 >= z - branchLength; z3--)
 						{
-							world.setBlockState(pos.set(x, y2, z3), log);
+							world.setBlockState(pos.setPos(x, y2, z3), log);
 							this.setBlockAirCheck(world, x, y2 + 1, z3, this.leaves);
 							this.setBlockAirCheck(world, x, y2 - 1, z3, this.leaves);
 							this.setBlockAirCheck(world, x + 1, y2, z3, this.leaves);
 							this.setBlockAirCheck(world, x - 1, y2, z3, this.leaves);
 						}
 
-						world.setBlockState(pos.set(x, y2 + 1, z - (branchLength + 1)), log);
-						world.setBlockState(pos.set(x, y2 + 2, z - (branchLength + 2)), log);
-						world.setBlockState(pos.set(x, y2 + 3, z - (branchLength + 2)), log);
+						world.setBlockState(pos.setPos(x, y2 + 1, z - (branchLength + 1)), log);
+						world.setBlockState(pos.setPos(x, y2 + 2, z - (branchLength + 2)), log);
+						world.setBlockState(pos.setPos(x, y2 + 3, z - (branchLength + 2)), log);
 
 						this.setBlockAirCheck(world, x, y2 + 2, z - (branchLength + 1), this.leaves);
 						this.setBlockAirCheck(world, x, y2 + 3, z - (branchLength + 1), this.leaves);

@@ -2,9 +2,11 @@ package com.gildedgames.aether.common.entities.item;
 
 import com.gildedgames.aether.common.items.properties.IPhoenixChillable;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -107,7 +109,7 @@ public class EntityPhoenixItem extends EntityItem
 
 			if (isFreezing)
 			{
-				this.worldObj.playSound(this.posX, this.posY, this.posZ, "random.fizz", 0.2f, 0.2f + (this.worldObj.rand.nextFloat() * 1.7f), false);
+				this.worldObj.playSound(this.posX, this.posY, this.posZ, SoundEvents.ENTITY_GENERIC_BURN, SoundCategory.NEUTRAL, 0.2f, 0.2f + (this.worldObj.rand.nextFloat() * 1.7f), false);
 			}
 		}
 	}

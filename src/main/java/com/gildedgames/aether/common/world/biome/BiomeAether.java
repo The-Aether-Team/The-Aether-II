@@ -11,7 +11,7 @@ import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 import java.util.Random;
 
-public class BiomeGenAether extends BiomeGenAetherBase
+public class BiomeAether extends BiomeAetherBase
 {
 	public static final WorldGenSkyrootTree genGreenSkyrootTree = new WorldGenSkyrootTree(BlocksAether.skyroot_log.getDefaultState().withProperty(BlockAetherLog.PROPERTY_AXIS, BlockLog.EnumAxis.Y),
 			BlocksAether.green_skyroot_leaves.getDefaultState());
@@ -33,7 +33,7 @@ public class BiomeGenAether extends BiomeGenAetherBase
 
 	public static final WorldGenLargeTree genGreenLargeSkyrootTree = new WorldGenLargeTree(BlocksAether.skyroot_log.getDefaultState(), BlocksAether.green_skyroot_leaves.getDefaultState());
 
-	public BiomeGenAether(int id)
+	public BiomeAether(int id)
 	{
 		super(id);
 	}

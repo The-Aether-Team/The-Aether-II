@@ -4,11 +4,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
@@ -72,9 +73,9 @@ public class PlayerAether implements IPlayerAetherCapability
 	{
 		float extendedReach = 0.0f;
 
-		if (this.player.getHeldItem() != null)
+		if (this.player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND) != null)
 		{
-			Item item = this.player.getHeldItem().getItem();
+			Item item = this.player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem();
 
 			if (item instanceof ItemValkyrieTool || item == ItemsAether.valkyrie_lance)
 			{
@@ -114,13 +115,13 @@ public class PlayerAether implements IPlayerAetherCapability
 	@Override
 	public void onHurt(LivingHurtEvent event)
 	{
-		if (!event.source.isUnblockable())
+		if (!event.getSource().isUnblockable())
 		{
 			for (ItemStack stack : this.player.inventory.armorInventory)
 			{
 				if (stack != null && stack.getItem() instanceof ItemAetherArmor)
 				{
-					event.ammount -= ((ItemAetherArmor) stack.getItem()).getExtraDamageReduction(stack);
+					event.setAmount(event.getAmount() - ((ItemAetherArmor) stack.getItem()).getExtraDamageReduction(stack));
 				}
 			}
 		}
@@ -154,7 +155,7 @@ public class PlayerAether implements IPlayerAetherCapability
 	{
 		if (PlayerUtil.isWearingFullSet(this.player, ItemNeptuneArmor.class))
 		{
-			if (!EnchantmentHelper.getAquaAffinityModifier(this.player) && this.player.isInsideOfMaterial(Material.water))
+			if (!EnchantmentHelper.getAquaAffinityModifier(this.player) && this.player.isInsideOfMaterial(Material.WATER))
 			{
 				return 5.0f;
 			}

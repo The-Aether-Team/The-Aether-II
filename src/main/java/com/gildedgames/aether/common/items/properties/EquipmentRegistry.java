@@ -5,12 +5,13 @@ import com.gildedgames.aether.api.items.properties.ItemRarity;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentProperties;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
 
 public class EquipmentRegistry implements IEquipmentRegistry
 {
-	private final HashMap<String, IEquipmentProperties> registeredEntries = new HashMap<>();
+	private final HashMap<ResourceLocation, IEquipmentProperties> registeredEntries = new HashMap<>();
 
 	@Override
 	public void register(Item item, ItemRarity rarity, ItemEquipmentType type)

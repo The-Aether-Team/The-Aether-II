@@ -1,61 +1,63 @@
 package com.gildedgames.aether.common.blocks.dungeon;
 
-import net.minecraft.block.Block;
+import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.aether.common.tile_entities.TileEntityBoundary;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import com.gildedgames.aether.common.player.PlayerAether;
-import com.gildedgames.aether.common.tile_entities.TileEntityBoundary;
-
 public class BlockBoundary extends BlockContainer
 {
 	public BlockBoundary()
 	{
-		super(Material.rock);
+		super(Material.ROCK);
 
 		this.setHardness(2.5f);
 
-		this.setStepSound(Block.soundTypeStone);
+		this.setSoundType(SoundType.STONE);
 	}
 	
 	@Override
-	public int getRenderType()
+	public EnumBlockRenderType getRenderType(IBlockState state)
 	{
-		return 3;
+		return EnumBlockRenderType.MODEL;
 	}
-	
+
 	@Override
-	public boolean isOpaqueCube()
+	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullCube(IBlockState state)
 	{
 		return true;
 	}
 	
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.CUTOUT;
+		return BlockRenderLayer.CUTOUT;
 	}
 	
 	@Override
-    public boolean removedByPlayer(World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
+    public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
     {
 		TileEntity te = world.getTileEntity(pos);
 		
@@ -83,11 +85,11 @@ public class BlockBoundary extends BlockContainer
 			}
 		}
 		
-		return super.removedByPlayer(world, pos, player, willHarvest);
+		return super.removedByPlayer(state, world, pos, player, willHarvest);
     }
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (!world.isRemote)
 		{
@@ -97,12 +99,8 @@ public class BlockBoundary extends BlockContainer
 
 	            if (tileentity instanceof ILockableContainer)
 	            {
-	                ILockableContainer ilockablecontainer = (ILockableContainer)tileentity;
-
-			        if (ilockablecontainer != null)
-			        {
-			            player.displayGUIChest(ilockablecontainer);
-			        }
+	                ILockableContainer container = (ILockableContainer) tileentity;
+					player.displayGUIChest(container);
 
 	            	return true;
 	            }
@@ -120,32 +118,32 @@ public class BlockBoundary extends BlockContainer
 				{
 					if (sb.isLinked())
 					{
-						player.addChatComponentMessage(new ChatComponentTranslation("This boundary has already been linked with something else.", new Object[0]));
+						player.addChatComponentMessage(new TextComponentTranslation("This boundary has already been linked with something else."));
 					}
 					else
 					{
 						sb.linkToPos(hook.getLinkingSchematicBoundary());
 						hook.setLinkingSchematicBoundary(null);
 						
-						player.addChatComponentMessage(new ChatComponentTranslation("Successfully linked.", new Object[0]));
+						player.addChatComponentMessage(new TextComponentTranslation("Successfully linked."));
 					}
 				}
 				else if (!sb.isLinked())
 				{
 					hook.setLinkingSchematicBoundary(pos);
-					player.addChatComponentMessage(new ChatComponentTranslation("Right-click another boundary to link them together.", new Object[0]));
+					player.addChatComponentMessage(new TextComponentTranslation("Right-click another boundary to link them together."));
 				}
 				else
 				{
 					if (sb.isMarkedForGeneration())
 					{
 						sb.unmarkForGeneration();
-						player.addChatComponentMessage(new ChatComponentTranslation("Unmarked for generation.", new Object[0]));
+						player.addChatComponentMessage(new TextComponentTranslation("Unmarked for generation."));
 					}
 					else
 					{
 						sb.markForGeneration();
-						player.addChatComponentMessage(new ChatComponentTranslation("Marked for generation.", new Object[0]));
+						player.addChatComponentMessage(new TextComponentTranslation("Marked for generation."));
 					}
 				}
 			}

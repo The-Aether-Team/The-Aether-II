@@ -6,7 +6,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -32,14 +32,14 @@ public class ItemAetherSword extends ItemSword
 		if (this.abilityType != ItemAbilityType.NONE)
 		{
 			tooltip.add(String.format("%s: %s",
-					EnumChatFormatting.BLUE + I18n.format("item.aether.tooltip.ability"),
-					EnumChatFormatting.WHITE + I18n.format(this.getUnlocalizedName() + ".ability.desc")));
+					TextFormatting.BLUE + I18n.format("item.aether.tooltip.ability"),
+					TextFormatting.WHITE + I18n.format(this.getUnlocalizedName() + ".ability.desc")));
 
 			if (!this.abilityType.isPassive())
 			{
 				tooltip.add(String.format("%s: %s",
-						EnumChatFormatting.DARK_AQUA + I18n.format("item.aether.tooltip.use"),
-						EnumChatFormatting.WHITE + I18n.format(this.getUnlocalizedName() + ".use.desc")));
+						TextFormatting.DARK_AQUA + I18n.format("item.aether.tooltip.use"),
+						TextFormatting.WHITE + I18n.format(this.getUnlocalizedName() + ".use.desc")));
 			}
 		}
 	}

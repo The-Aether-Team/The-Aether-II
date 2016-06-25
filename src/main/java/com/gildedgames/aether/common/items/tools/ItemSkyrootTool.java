@@ -7,47 +7,46 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Collection;
 
 public class ItemSkyrootTool extends ItemAetherTool
 {
-	public ItemSkyrootTool(EnumToolType toolType)
+	public ItemSkyrootTool(EnumToolType toolType, float attackDamage, float attackSpeed)
 	{
-		super(ToolMaterial.WOOD, "skyroot", toolType);
+		super(ToolMaterial.WOOD, "skyroot", toolType, attackDamage, attackSpeed);
 
 		this.setHarvestLevel(toolType.getToolClass(), 0);
 	}
 
 	@Override
-	public boolean onBlockDestroyed(ItemStack heldStack, World world, Block block, BlockPos pos, EntityLivingBase living)
+	public boolean onBlockDestroyed(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityLivingBase entity)
 	{
 		if (!world.isRemote)
 		{
-			IBlockState state = world.getBlockState(pos);
-
 			AetherPlaceFlagChunkHook data = ChunkModule.api().getHook(world, pos, AetherPlaceFlagChunkHook.class);
 
 			boolean wasPlaced = data.getExtendedBlockState(pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15).getValue(AetherPlaceFlagChunkHook.PROPERTY_BLOCK_PLACED);
 
-			if (!wasPlaced && block.isToolEffective(this.toolType.getToolClass(), state))
+			if (!wasPlaced && state.getBlock().isToolEffective(this.toolType.getToolClass(), state))
 			{
-				int fortune = EnchantmentHelper.getFortuneModifier(living);
+				int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
 
 				if (state.getBlock() instanceof ISkyrootMinable)
 				{
-					ISkyrootMinable doubleBlock = (ISkyrootMinable) block;
+					ISkyrootMinable doubleBlock = (ISkyrootMinable) state.getBlock();
 
-					if (doubleBlock.canBlockDropDoubles(living, heldStack, state))
+					if (doubleBlock.canBlockDropDoubles(entity, stack, state))
 					{
-						Collection<ItemStack> stacks = doubleBlock.getAdditionalDrops(world, pos, state, living);
+						Collection<ItemStack> drops = doubleBlock.getAdditionalDrops(world, pos, state, entity);
 
-						for (ItemStack stack : stacks)
+						for (ItemStack drop : drops)
 						{
-							Block.spawnAsEntity(world, pos, stack);
+							Block.spawnAsEntity(world, pos, drop);
 						}
 					}
 				}
@@ -58,6 +57,6 @@ public class ItemSkyrootTool extends ItemAetherTool
 			}
 		}
 
-		return super.onBlockDestroyed(heldStack, world, block, pos, living);
+		return super.onBlockDestroyed(stack, world, state, pos, entity);
 	}
 }

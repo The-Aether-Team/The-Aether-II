@@ -1,17 +1,5 @@
 package com.gildedgames.aether.common.world.biome;
 
-import java.util.Random;
-
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.feature.WorldGenMinable;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
-
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud.AercloudVariant;
@@ -25,6 +13,18 @@ import com.gildedgames.aether.common.world.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenPurpleAercloud;
 import com.gildedgames.aether.common.world.features.dungeon.WorldGenSliderLabyrinthEntrance;
 import com.gildedgames.aether.common.world.features.trees.WorldGenOrangeTree;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.state.pattern.BlockMatcher;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
+
+import java.util.Random;
 
 public class BiomeDecoratorAether
 {
@@ -52,11 +52,13 @@ public class BiomeDecoratorAether
 	{
 		this.genAetherGrass = new WorldGenAetherTallGrass();
 
-		this.genAmbrosium = new WorldGenMinable(BlocksAether.ambrosium_ore.getDefaultState(), 16);
-		this.genZanite = new WorldGenMinable(BlocksAether.zanite_ore.getDefaultState(), 8);
-		this.genGravitite = new WorldGenMinable(BlocksAether.gravitite_ore.getDefaultState(), 4);
-		this.genContinuum = new WorldGenMinable(BlocksAether.continuum_ore.getDefaultState(), 4);
-		this.genIcestone = new WorldGenMinable(BlocksAether.icestone_ore.getDefaultState(), 10);
+		BlockMatcher holystoneMatcher = BlockMatcher.forBlock(BlocksAether.holystone);
+
+		this.genAmbrosium = new WorldGenMinable(BlocksAether.ambrosium_ore.getDefaultState(), 16, holystoneMatcher);
+		this.genZanite = new WorldGenMinable(BlocksAether.zanite_ore.getDefaultState(), 8, holystoneMatcher);
+		this.genGravitite = new WorldGenMinable(BlocksAether.gravitite_ore.getDefaultState(), 4, holystoneMatcher);
+		this.genContinuum = new WorldGenMinable(BlocksAether.continuum_ore.getDefaultState(), 4, holystoneMatcher);
+		this.genIcestone = new WorldGenMinable(BlocksAether.icestone_ore.getDefaultState(), 10, holystoneMatcher);
 
 		this.genPurpleFlowers = new WorldGenAetherFlowers(BlocksAether.aether_flower, BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER), 64);
 		this.genWhiteRoses = new WorldGenAetherFlowers(BlocksAether.aether_flower, BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE), 64);
@@ -66,7 +68,7 @@ public class BiomeDecoratorAether
 		this.genBlueberryBushes = new WorldGenAetherFlowers(BlocksAether.blueberry_bush, BlocksAether.blueberry_bush.getDefaultState().withProperty(BlockBlueberryBush.PROPERTY_HARVESTABLE, true), 32);
 
 		this.genQuicksoil = new WorldGenQuicksoil();
-		this.genAetherLakes = new WorldGenAetherLakes(Blocks.water);
+		this.genAetherLakes = new WorldGenAetherLakes(Blocks.WATER);
 
 		this.genColdFlatAercloud = new WorldGenAercloud(this.getAercloudState(BlockAercloud.COLD_AERCLOUD), 64, true);
 		this.genColdColumbusAercloud = new WorldGenAercloud(this.getAercloudState(BlockAercloud.COLD_AERCLOUD), 16, false);
@@ -81,7 +83,7 @@ public class BiomeDecoratorAether
 		return BlocksAether.aercloud.getDefaultState().withProperty(BlockAercloud.PROPERTY_VARIANT, variant);
 	}
 
-	protected void genDecorations(World world, Random random, BlockPos pos, BiomeGenBase genBase)
+	protected void genDecorations(World world, Random random, BlockPos pos, Biome genBase)
 	{
 		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(world, random, pos));
 

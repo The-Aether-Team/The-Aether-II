@@ -2,10 +2,8 @@ package com.gildedgames.aether.common.world.chunk;
 
 import com.gildedgames.util.modules.chunk.api.hook.ExtendedBlockStateChunkHook;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-
-import java.util.List;
 
 public class AetherPlaceFlagChunkHook extends ExtendedBlockStateChunkHook
 {
@@ -24,9 +22,9 @@ public class AetherPlaceFlagChunkHook extends ExtendedBlockStateChunkHook
 	}
 
 	@Override
-	public BlockState createBlockState()
+	public BlockStateContainer createBlockState()
 	{
-		return new BlockState(null, PROPERTY_BLOCK_PLACED);
+		return new BlockStateContainer(null, PROPERTY_BLOCK_PLACED);
 	}
 
 	@Override

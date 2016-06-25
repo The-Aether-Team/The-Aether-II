@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
@@ -48,6 +49,8 @@ public class CommonProxy
 
 	private final EquipmentRegistry equipmentRegistry = new EquipmentRegistry();
 
+	private DimensionType aetherDimension;
+
 	public void construct(FMLConstructionEvent event)
 	{
 
@@ -64,8 +67,10 @@ public class CommonProxy
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 
 		// Register dimensions and biomes.
-		DimensionManager.registerProviderType(AetherCore.getAetherDimID(), WorldProviderAether.class, true);
-		DimensionManager.registerDimension(AetherCore.getAetherDimID(), AetherCore.getAetherDimID());
+
+		this.aetherDimension = DimensionType.register("Aether", "_aether", AetherCore.getAetherDimID(), WorldProviderAether.class, false);
+
+		DimensionManager.registerDimension(AetherCore.getAetherDimID(), this.aetherDimension);
 
 		// Pre-initialize content.
 		AetherMaterials.preInit();
@@ -98,7 +103,7 @@ public class CommonProxy
 
 		MinecraftForge.EVENT_BUS.register(ItemsAether.skyroot_sword);
 
-		ChunkModule.api().registerHookFactory(new PlacementFlagFactory());
+//		ChunkModule.api().registerHookFactory(new PlacementFlagFactory());
 	}
 
 	public void postInit(FMLPostInitializationEvent event)
@@ -137,6 +142,11 @@ public class CommonProxy
 
 	public void setExtendedReachDistance(EntityPlayer entity, float distance)
 	{
-		((EntityPlayerMP) entity).theItemInWorldManager.setBlockReachDistance(5.0f + distance);
+		((EntityPlayerMP) entity).interactionManager.setBlockReachDistance(5.0f + distance);
+	}
+
+	public DimensionType getAetherDimensionType()
+	{
+		return this.aetherDimension;
 	}
 }

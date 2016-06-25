@@ -1,29 +1,33 @@
 package com.gildedgames.aether.common.blocks.construction;
 
-import com.gildedgames.aether.client.renderer.effects.EntityAetherPortalFX;
+import com.gildedgames.aether.client.renderer.effects.ParticleAetherPortal;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.management.ServerConfigurationManager;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.server.management.PlayerList;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
 public class BlockAetherPortal extends BlockBreakable
@@ -31,11 +35,15 @@ public class BlockAetherPortal extends BlockBreakable
 	public static final PropertyEnum<EnumFacing.Axis> PROPERTY_AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class,
 			EnumFacing.Axis.X, EnumFacing.Axis.Z);
 
+	protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 1.0D, 0.625D),
+			Z_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 1.0D, 1.0D),
+			Y_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 1.0D, 0.625D);
+
 	public BlockAetherPortal()
 	{
-		super(Material.portal, false);
+		super(Material.PORTAL, false);
 
-		this.setStepSound(soundTypeGlass);
+		this.setSoundType(SoundType.GLASS);
 
 		this.setHardness(-1.0F);
 		this.setLightLevel(0.75F);
@@ -46,44 +54,39 @@ public class BlockAetherPortal extends BlockBreakable
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		return null;
+		switch (state.getValue(PROPERTY_AXIS))
+		{
+		case X:
+			return X_AABB;
+		case Y:
+		default:
+			return Y_AABB;
+		case Z:
+			return Z_AABB;
+		}
 	}
 
-	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos)
+	@Nullable
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
 	{
-		final EnumFacing.Axis axis = world.getBlockState(pos).getValue(PROPERTY_AXIS);
-
-		float xThickness = 0.125F, zThickness = 0.125F;
-
-		if (axis == EnumFacing.Axis.X)
-		{
-			xThickness = 0.5F;
-		}
-
-		if (axis == EnumFacing.Axis.Z)
-		{
-			zThickness = 0.5F;
-		}
-
-		this.setBlockBounds(0.5F - xThickness, 0.0F, 0.5F - zThickness, 0.5F + xThickness, 1.0F, 0.5F + zThickness);
+		return NULL_AABB;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand)
 	{
 		if (rand.nextInt(150) == 0)
 		{
-			world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, AetherCore.getResourcePath("aeportal.portal"), 0.2F, (rand.nextFloat() * 0.2F) + 0.9F, false);
+			world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundsAether.aether_portal_hum, SoundCategory.BLOCKS, 0.2F, (rand.nextFloat() * 0.2F) + 0.9F, false);
 		}
 
 		for (int count = 0; count < 4; count++)
@@ -108,14 +111,14 @@ public class BlockAetherPortal extends BlockBreakable
 				motionZ = (rand.nextFloat() * 2.0F * angle);
 			}
 
-			EntityAetherPortalFX effect = new EntityAetherPortalFX(world, posX, posY, posZ, motionX, motionY, motionZ);
+			ParticleAetherPortal effect = new ParticleAetherPortal(world, posX, posY, posZ, motionX, motionY, motionZ);
 			FMLClientHandler.instance().getClient().effectRenderer.addEffect(effect);
 		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side)
+	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
 		EnumFacing.Axis axis = null;
 		final IBlockState state = world.getBlockState(pos);
@@ -156,10 +159,10 @@ public class BlockAetherPortal extends BlockBreakable
 		if (entity instanceof EntityPlayerMP)
 		{
 			final EntityPlayerMP player = (EntityPlayerMP) entity;
-			final ServerConfigurationManager scm = MinecraftServer.getServer().getConfigurationManager();
+			final PlayerList playerList = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList();
 
 			final int transferToID = player.dimension == AetherCore.getAetherDimID() ? 0 : AetherCore.getAetherDimID();
-			scm.transferPlayerToDimension(player, transferToID, AetherCore.getTeleporter());
+			playerList.transferPlayerToDimension(player, transferToID, AetherCore.getTeleporter());
 		}
 	}
 
@@ -178,7 +181,7 @@ public class BlockAetherPortal extends BlockBreakable
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn)
 	{
 		final EnumFacing.Axis axis = state.getValue(PROPERTY_AXIS);
 
@@ -188,7 +191,7 @@ public class BlockAetherPortal extends BlockBreakable
 
 			if (!size.isWithinSizeBounds() || size.portalBlocks < size.height * size.width)
 			{
-				world.setBlockState(pos, Blocks.air.getDefaultState());
+				world.setBlockState(pos, Blocks.AIR.getDefaultState());
 			}
 		}
 	}
@@ -200,16 +203,16 @@ public class BlockAetherPortal extends BlockBreakable
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, PROPERTY_AXIS);
+		return new BlockStateContainer(this, PROPERTY_AXIS);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.TRANSLUCENT;
+		return BlockRenderLayer.TRANSLUCENT;
 	}
 
 	public static class Size
@@ -248,7 +251,7 @@ public class BlockAetherPortal extends BlockBreakable
 
 			final BlockPos offsetPos = pos;
 
-			while (pos.getY() > offsetPos.getY() - 21 && pos.getY() > 0 && this.isBlockSuitable(world.getBlockState(pos.down()).getBlock()))
+			while (pos.getY() > offsetPos.getY() - 21 && pos.getY() > 0 && this.isBlockSuitable(world.getBlockState(pos.down())))
 			{
 				pos = pos.down();
 			}
@@ -281,14 +284,14 @@ public class BlockAetherPortal extends BlockBreakable
 			{
 				final BlockPos offsetPos = pos.offset(facing, x);
 
-				if (!this.isBlockSuitable(this.world.getBlockState(offsetPos).getBlock()) || this.world.getBlockState(offsetPos.down()).getBlock() != Blocks.glowstone)
+				if (!this.isBlockSuitable(this.world.getBlockState(offsetPos)) || this.world.getBlockState(offsetPos.down()).getBlock() != Blocks.GLOWSTONE)
 				{
 					break;
 				}
 			}
 
 			final Block block = this.world.getBlockState(pos.offset(facing, x)).getBlock();
-			return block == Blocks.glowstone ? x : 0;
+			return block == Blocks.GLOWSTONE ? x : 0;
 		}
 
 		protected int func_150858_a()
@@ -301,32 +304,32 @@ public class BlockAetherPortal extends BlockBreakable
 				for (x = 0; x < this.width; ++x)
 				{
 					final BlockPos blockpos = this.portalPos.offset(this.rightSideFacing, x).up(this.height);
-					Block block = this.world.getBlockState(blockpos).getBlock();
+					IBlockState state = this.world.getBlockState(blockpos);
 
-					if (!this.isBlockSuitable(block))
+					if (!this.isBlockSuitable(state))
 					{
 						break loop;
 					}
 
-					if (block == BlocksAether.aether_portal)
+					if (state.getBlock() == BlocksAether.aether_portal)
 					{
 						++this.portalBlocks;
 					}
 
 					if (x == 0)
 					{
-						block = this.world.getBlockState(blockpos.offset(this.leftSideFacing)).getBlock();
+						state = this.world.getBlockState(blockpos.offset(this.leftSideFacing));
 
-						if (block != Blocks.glowstone)
+						if (state.getBlock() != Blocks.GLOWSTONE)
 						{
 							break loop;
 						}
 					}
 					else if (x == this.width - 1)
 					{
-						block = this.world.getBlockState(blockpos.offset(this.rightSideFacing)).getBlock();
+						state = this.world.getBlockState(blockpos.offset(this.rightSideFacing));
 
-						if (block != Blocks.glowstone)
+						if (state != Blocks.GLOWSTONE)
 						{
 							break loop;
 						}
@@ -336,7 +339,7 @@ public class BlockAetherPortal extends BlockBreakable
 
 			for (x = 0; x < this.width; ++x)
 			{
-				if (this.world.getBlockState(this.portalPos.offset(this.rightSideFacing, x).up(this.height)).getBlock() != Blocks.glowstone)
+				if (this.world.getBlockState(this.portalPos.offset(this.rightSideFacing, x).up(this.height)).getBlock() != Blocks.GLOWSTONE)
 				{
 					this.height = 0;
 					break;
@@ -356,9 +359,9 @@ public class BlockAetherPortal extends BlockBreakable
 			}
 		}
 
-		protected boolean isBlockSuitable(Block block)
+		protected boolean isBlockSuitable(IBlockState state)
 		{
-			return block.getMaterial() == Material.air || block == Blocks.water || block == BlocksAether.aether_portal;
+			return state.getMaterial() == Material.AIR || state.getBlock() == Blocks.WATER || state.getBlock() == BlocksAether.aether_portal;
 		}
 
 		public boolean isWithinSizeBounds()

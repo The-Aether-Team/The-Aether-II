@@ -11,9 +11,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityLockable;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ITickable;
 
 public abstract class TileEntitySchematicBlock extends TileEntityLockable implements ITickable, IInventory
@@ -63,7 +63,7 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 	}
 	
 	@Override
-	public void writeToNBT(NBTTagCompound compound)
+	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
 		
@@ -83,6 +83,8 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
         compound.setTag("Items", nbttaglist);
 		
 		compound.setBoolean("markedForGeneration", this.isMarkedForGeneration());
+
+		return compound;
 	}
 
 	@Override
@@ -108,23 +110,23 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 	}
 
 	@Override
-	public Packet getDescriptionPacket()
+	public SPacketUpdateTileEntity getUpdatePacket()
 	{
 		NBTTagCompound compound = new NBTTagCompound();
 		this.writeToNBT(compound);
 
-		return new S35PacketUpdateTileEntity(pos, 1, compound);
+		return new SPacketUpdateTileEntity(pos, 1, compound);
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager networkManager, S35PacketUpdateTileEntity packet)
+	public void onDataPacket(NetworkManager networkManager, SPacketUpdateTileEntity packet)
 	{
 		this.readFromNBT(packet.getNbtCompound());
 	}
 
 	private void sendUpdates()
 	{
-		this.worldObj.markBlockForUpdate(pos);
+		this.worldObj.scheduleUpdate(pos, this.blockType, 0);
 
 		this.markDirty();
 	}

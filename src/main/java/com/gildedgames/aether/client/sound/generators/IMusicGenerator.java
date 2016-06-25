@@ -2,6 +2,7 @@ package com.gildedgames.aether.client.sound.generators;
 
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 
 public interface IMusicGenerator
 {
@@ -16,7 +17,7 @@ public interface IMusicGenerator
 	 * @param player The player
 	 * @return The {@link ResourceLocation} based off the environment
 	 */
-	ResourceLocation getMusicResource(IPlayerAetherCapability player);
+	SoundEvent getMusicResource(IPlayerAetherCapability player);
 
 	/**
 	 * @return How long the music manager should wait before trying another song.

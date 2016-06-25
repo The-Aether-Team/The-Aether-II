@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.util.BlockPosUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -87,7 +87,7 @@ public class WorldGenAetherLakes extends WorldGenerator
 
 					if (flag)
 					{
-						Material material = world.getBlockState(pos.add(x, y, z)).getBlock().getMaterial();
+						Material material = world.getBlockState(pos.add(x, y, z)).getMaterial();
 
 						if (y >= 4 && material.isLiquid())
 						{
@@ -111,7 +111,7 @@ public class WorldGenAetherLakes extends WorldGenerator
 				{
 					if (aboolean[(x * 16 + z) * 8 + y])
 					{
-						world.setBlockState(pos.add(x, y, z), y >= 4 ? Blocks.air.getDefaultState() : this.fillBlock.getDefaultState(), 2);
+						world.setBlockState(pos.add(x, y, z), y >= 4 ? Blocks.AIR.getDefaultState() : this.fillBlock.getDefaultState(), 2);
 					}
 				}
 			}

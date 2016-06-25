@@ -8,10 +8,10 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.BlockPos.MutableBlockPos;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.MutableBlockPos;
+import net.minecraft.util.math.MathHelper;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.entities.effects.IEffectPool;
@@ -237,14 +237,14 @@ public class TileEntityBoundary extends TileEntityWildcard
 
 			ent.readFromNBT(entity.data);
 			
-			ent.setLocationAndAngles(this.getPos().getX() + entity.x, this.getPos().getY() + entity.y, this.getPos().getZ() + entity.z, MathHelper.wrapAngleTo180_float(this.getWorld().rand.nextFloat() * 360.0F), 0.0F);
+			ent.setLocationAndAngles(this.getPos().getX() + entity.x, this.getPos().getY() + entity.y, this.getPos().getZ() + entity.z, MathHelper.wrapDegrees(this.getWorld().rand.nextFloat() * 360.0F), 0.0F);
 		
 			this.getWorld().spawnEntityInWorld(ent);
 		}
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound compound)
+	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
 		
@@ -253,6 +253,8 @@ public class TileEntityBoundary extends TileEntityWildcard
 		
 		compound.setBoolean("masterBoundary", this.masterBoundary);
 		compound.setBoolean("shouldFetch", this.shouldFetch);
+
+		return compound;
 	}
 
 	@Override

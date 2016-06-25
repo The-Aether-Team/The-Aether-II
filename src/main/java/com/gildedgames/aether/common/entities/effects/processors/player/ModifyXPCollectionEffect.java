@@ -6,7 +6,7 @@ import com.gildedgames.aether.api.entities.effects.EntityEffectRule;
 import com.gildedgames.aether.common.entities.effects.processors.player.ModifyXPCollectionEffect.Instance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -62,7 +62,7 @@ public class ModifyXPCollectionEffect implements EffectProcessorPlayer<Instance>
 	{
 		float percentMod = instance.getAttributes().getFloat("percentMod") * 100;
 
-		String prefix = percentMod > 0 ? (EnumChatFormatting.BLUE + "+") : (EnumChatFormatting.RED + "");
+		String prefix = percentMod > 0 ? (TextFormatting.BLUE + "+") : (TextFormatting.RED + "");
 
 		return new String[] { (prefix + this.displayValue(percentMod) + "%") };
 	}
@@ -113,7 +113,7 @@ public class ModifyXPCollectionEffect implements EffectProcessorPlayer<Instance>
 			totalPercent += instance.getAttributes().getFloat("percentMod");
 		}
 
-		event.orb.xpValue += event.orb.xpValue * totalPercent;
+		event.getOrb().xpValue += event.getOrb().xpValue * totalPercent;
 	}
 
 }

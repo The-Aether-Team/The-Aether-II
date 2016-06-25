@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.living;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.SoundsAether;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -12,8 +13,13 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.EntityJumpHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.pathfinding.PathNavigateGround;
-import net.minecraft.util.BlockPos;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -29,8 +35,6 @@ public class EntityAerbunny extends EntityAetherAnimal
 	public EntityAerbunny(World world)
 	{
 		super(world);
-
-		((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
 
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
@@ -48,8 +52,8 @@ public class EntityAerbunny extends EntityAetherAnimal
 	{
 		super.applyEntityAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(5);
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(5);
 	}
 
 	@Override
@@ -80,9 +84,9 @@ public class EntityAerbunny extends EntityAetherAnimal
 			this.prevMotionY = this.motionY;
 		}
 
-		if (this.ridingEntity != null)
+		if (this.isRiding())
 		{
-			Entity entity = this.ridingEntity;
+			Entity entity = this.getRidingEntity();
 
 			if (entity.motionY < 0)
 			{
@@ -103,48 +107,48 @@ public class EntityAerbunny extends EntityAetherAnimal
 	}
 
 	@Override
-	public boolean interact(EntityPlayer player)
+	public EnumActionResult applyPlayerInteraction(EntityPlayer player, Vec3d vec, ItemStack stack, EnumHand hand)
 	{
 		if (!player.worldObj.isRemote)
 		{
-			this.worldObj.playSoundAtEntity(this, AetherCore.getResourcePath("aemob.aerbunny.lift"), 1.0F, 0.8F + (this.rand.nextFloat() * 0.5F));
+			this.worldObj.playSound(player, player.getPosition(), SoundsAether.aerbunny_lift, SoundCategory.NEUTRAL, 1.0F, 0.8F + (this.rand.nextFloat() * 0.5F));
 
-			if (this.ridingEntity != null)
+			if (this.isRiding())
 			{
-				if (this.ridingEntity == player)
+				if (this.getRidingEntity() == player)
 				{
-					this.mountEntity(null);
+					this.startRiding(null, true);
 
-					return true;
+					return EnumActionResult.SUCCESS;
 				}
 			}
 			else
 			{
-				this.mountEntity(player);
+				this.startRiding(player, true);
 
-				return true;
+				return EnumActionResult.SUCCESS;
 			}
 		}
 
-		return super.interact(player);
+		return super.applyPlayerInteraction(player, vec, stack, hand);
 	}
 
 	@Override
 	public double getYOffset()
 	{
-		return this.ridingEntity != null ? 0.45D : 0.0D;
+		return this.getRidingEntity() != null ? 0.45D : 0.0D;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return AetherCore.getResourcePath("aemob.aerbunny.hurt");
+		return SoundsAether.aerbunny_hurt;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return AetherCore.getResourcePath("aemob.aerbunny.death");
+		return SoundsAether.aerbunny_death;
 	}
 
 	@Override

@@ -1,29 +1,27 @@
 package com.gildedgames.aether.common.blocks.dungeon;
 
 import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthChest;
-import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthDoor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -36,7 +34,7 @@ public class BlockLabyrinthChest extends BlockContainer
 
 	public BlockLabyrinthChest()
 	{
-		super(Material.rock);
+		super(Material.ROCK);
 		this.chestType = 1;
 
 	}
@@ -193,14 +191,14 @@ public class BlockLabyrinthChest extends BlockContainer
 
 		if (chest instanceof TileEntityLabyrinthChest)
 		{
-			InventoryHelper.dropInventoryItems(world, pos, (TileEntityLabyrinthChest) chest);
+			InventoryHelper.dropInventoryItems(world, pos, (IInventory) chest);
 		}
 
 		super.breakBlock(world, pos, state);
 	}
 
 	@Override
-	public int getComparatorInputOverride(World worldIn, BlockPos pos)
+	public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos)
 	{
 		return Container.calcRedstoneFromInventory(this.getLockableContainer(worldIn, pos));
 	}
@@ -212,21 +210,21 @@ public class BlockLabyrinthChest extends BlockContainer
 	}
 
 	@Override
-	public boolean isOpaqueCube()
+	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, FACING);
+		return new BlockStateContainer(this, FACING);
 	}
 
 	@Override
@@ -247,9 +245,8 @@ public class BlockLabyrinthChest extends BlockContainer
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getRenderType()
+	public EnumBlockRenderType getRenderType(IBlockState state)
 	{
-		return 3;
+		return EnumBlockRenderType.MODEL;
 	}
-
 }

@@ -1,28 +1,26 @@
 package com.gildedgames.aether.common.world.dungeon.labyrinth.dim;
 
-import java.util.List;
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.IProgressUpdate;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.EmptyChunk;
-import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
-
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.GenUtil;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstanceHandler;
+import net.minecraft.block.Block;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.chunk.EmptyChunk;
+import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
-public class ChunkProviderSliderLabyrinth implements IChunkProvider
+import java.util.List;
+import java.util.Random;
+
+public class ChunkProviderSliderLabyrinth implements IChunkGenerator
 {
 	
 	private final World world;
@@ -34,51 +32,29 @@ public class ChunkProviderSliderLabyrinth implements IChunkProvider
 		this.world = world;
 		this.random = new Random(seed);
 	}
-	
-	@Override
-	public boolean canSave()
-	{
-		return true;
-	}
-
-	@Override
-	public boolean chunkExists(int chunkX, int chunkZ)
-	{
-		DungeonInstanceHandler handler = AetherCore.INSTANCE.getDungeonInstanceHandler();
-		
-		DungeonInstance inst = handler.getFromDimId(this.world.provider.getDimensionId());
-		
-		return inst.getGenerator().isLayoutReady();
-	}
 
 	@Override
 	public BlockPos getStrongholdGen(World world, String structureName, BlockPos pos)
 	{
 		return null;
 	}
-	
-	@Override
-	public int getLoadedChunkCount()
-	{
-		return 0;
-	}
 
 	@Override
-	public String makeString()
-	{
-		return "RandomSliderLabyrinthLevelSource";
-	}
-	
-	@Override
-	public void populate(IChunkProvider chunkProvider, int chunkX, int chunkZ)
+	public void populate(int chunkX, int chunkZ)
 	{
 		DungeonInstanceHandler handler = AetherCore.INSTANCE.getDungeonInstanceHandler();
 		
-		DungeonInstance inst = handler.getFromDimId(this.world.provider.getDimensionId());
+		DungeonInstance inst = handler.getFromDimId(this.world.provider.getDimension());
 		
-		inst.getGenerator().populateChunk(this.world, inst, chunkProvider, chunkX, chunkZ);
+		inst.getGenerator().populateChunk(this.world, inst, chunkX, chunkZ);
 	}
-	
+
+	@Override
+	public boolean generateStructures(Chunk chunkIn, int x, int z)
+	{
+		return false;
+	}
+
 	public void genHolystoneEverywhere(ChunkPrimer primer, int chunkX, int chunkZ)
 	{
 		GenUtil.fillArray((short[])ObfuscationReflectionHelper.getPrivateValue(ChunkPrimer.class, primer, 0), (short)Block.BLOCK_STATE_IDS.get(BlocksAether.carved_stone.getDefaultState()));
@@ -91,7 +67,7 @@ public class ChunkProviderSliderLabyrinth implements IChunkProvider
 				{
 					if (!(y < 255 - this.random.nextInt(5) && y > 0 + this.random.nextInt(5)))
 					{
-						primer.setBlockState(x, y, z, Blocks.bedrock.getDefaultState());
+						primer.setBlockState(x, y, z, Blocks.BEDROCK.getDefaultState());
 					}
 				}
 			}
@@ -103,7 +79,7 @@ public class ChunkProviderSliderLabyrinth implements IChunkProvider
 	{
 		DungeonInstanceHandler handler = AetherCore.INSTANCE.getDungeonInstanceHandler();
 		
-		DungeonInstance inst = handler.getFromDimId(this.world.provider.getDimensionId());
+		DungeonInstance inst = handler.getFromDimId(this.world.provider.getDimension());
 		
 		if (!inst.getGenerator().isLayoutReady())
 		{
@@ -126,47 +102,17 @@ public class ChunkProviderSliderLabyrinth implements IChunkProvider
 	}
 
 	@Override
-	public Chunk provideChunk(BlockPos pos)
+	public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos)
 	{
-		return this.provideChunk(pos.getX() >> 4, pos.getZ() >> 4);
-	}
+		Biome biome = this.world.getBiome(pos);
 
-	@Override
-	public boolean populateChunk(IChunkProvider chunkProvider, Chunk chunk, int chunkX, int chunkZ)
-	{
-		return false;
-	}
-
-	@Override
-	public boolean saveChunks(boolean flag, IProgressUpdate progressUpdate)
-	{
-		return true;
-	}
-	
-	@Override
-	public boolean unloadQueuedChunks()
-	{
-		return false;
-	}
-
-	@Override
-	public void saveExtraData()
-	{
-
-	}
-
-	@Override
-	public List<BiomeGenBase.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos)
-	{
-		BiomeGenBase biomegenbase = this.world.getBiomeGenForCoords(pos);
-
-		if (biomegenbase == null)
+		if (biome == null)
 		{
 			return null;
 		}
 		else
 		{
-			return biomegenbase.getSpawnableList(creatureType);
+			return biome.getSpawnableList(creatureType);
 		}
 	}
 

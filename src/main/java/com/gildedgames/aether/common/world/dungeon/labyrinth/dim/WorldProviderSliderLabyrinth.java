@@ -2,28 +2,30 @@ package com.gildedgames.aether.common.world.dungeon.labyrinth.dim;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.chunk.IChunkGenerator;
 
 public class WorldProviderSliderLabyrinth extends WorldProvider
 {
-	
-	public WorldProviderSliderLabyrinth()
+	private final DimensionType dimensionType;
+
+	public WorldProviderSliderLabyrinth(DimensionType type)
 	{
-		super();
+		this.dimensionType = type;
 		
 		this.hasNoSky = true;
 	}
 
 	@Override
-	protected void registerWorldChunkManager()
+	protected void createBiomeProvider()
 	{
-		this.worldChunkMgr = new WorldChunkManagerSliderLabyrinth();
+		this.biomeProvider = new BiomeProviderSliderLabyrinth();
 	}
 
 	@Override
-	public IChunkProvider createChunkGenerator()
+	public IChunkGenerator createChunkGenerator()
 	{
 		return new ChunkProviderSliderLabyrinth(this.worldObj, this.worldObj.getSeed());
 	}
@@ -53,18 +55,6 @@ public class WorldProviderSliderLabyrinth extends WorldProvider
 	}
 
 	@Override
-	public String getDimensionName()
-	{
-		return "Slider's Labyrinth";
-	}
-
-	@Override
-	public String getInternalNameSuffix()
-	{
-		return "_slider_labyrinth";
-	}
-
-	@Override
 	public String getSaveFolder()
 	{
 		return super.getSaveFolder();
@@ -89,6 +79,12 @@ public class WorldProviderSliderLabyrinth extends WorldProvider
 	}
 
 	@Override
+	public DimensionType getDimensionType()
+	{
+		return this.dimensionType;
+	}
+
+	@Override
 	public double getVoidFogYFactor()
 	{
 		return 100;
@@ -101,9 +97,9 @@ public class WorldProviderSliderLabyrinth extends WorldProvider
 	}
 
 	@Override
-	public Vec3 getSkyColor(Entity par1Entity, float par2)
+	public Vec3d getSkyColor(Entity par1Entity, float par2)
 	{
-		return new Vec3(0.0D, 0.0D, 0.0D);
+		return new Vec3d(0.0D, 0.0D, 0.0D);
 	}
 	
 	@Override

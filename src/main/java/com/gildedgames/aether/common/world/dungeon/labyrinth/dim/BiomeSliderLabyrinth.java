@@ -1,21 +1,19 @@
 package com.gildedgames.aether.common.world.dungeon.labyrinth.dim;
 
+import com.gildedgames.aether.common.AetherCore;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+
 import java.util.Random;
 
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
-
-public class BiomeGenSliderLabyrinth extends BiomeGenBase
+public class BiomeSliderLabyrinth extends Biome
 {
-
-	public BiomeGenSliderLabyrinth(int id)
+	public BiomeSliderLabyrinth()
 	{
-		super(id);
+		super(new BiomeProperties("slider_labyrinth").setRainDisabled().setTemperature(0.5f).setRainfall(0.5f));
 		
-		this.setBiomeName("slider_labyrinth");
-		this.setDisableRain();
-		this.setTemperatureRainfall(0.5f, 0f);
+		this.setRegistryName(AetherCore.getResource("slider_labyrinth"));
 
 		this.spawnableMonsterList.clear();
 		this.spawnableCreatureList.clear();
@@ -46,5 +44,4 @@ public class BiomeGenSliderLabyrinth extends BiomeGenBase
 	{
 		
 	}
-	
 }

@@ -34,7 +34,7 @@ public class RecipeLeatherGlovesDyes implements IRecipe
 				}
 				else
 				{
-					if (invStack.getItem() != Items.dye)
+					if (invStack.getItem() != Items.DYE)
 					{
 						return false;
 					}
@@ -89,7 +89,7 @@ public class RecipeLeatherGlovesDyes implements IRecipe
 				}
 				else
 				{
-					if (invStack.getItem() != Items.dye)
+					if (invStack.getItem() != Items.DYE)
 					{
 						return null;
 					}

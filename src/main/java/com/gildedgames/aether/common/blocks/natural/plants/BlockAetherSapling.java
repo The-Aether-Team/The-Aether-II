@@ -3,17 +3,19 @@ package com.gildedgames.aether.common.blocks.natural.plants;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
-import com.gildedgames.aether.common.world.biome.BiomeGenAether;
-import net.minecraft.block.Block;
+import com.gildedgames.aether.common.world.biome.BiomeAether;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
@@ -37,18 +39,24 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 
 	public static final PropertyInteger PROPERTY_STAGE = PropertyInteger.create("stage", 0, 1);
 
+	private static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);
+
 	public BlockAetherSapling()
 	{
-		super(Material.plants);
+		super(Material.PLANTS);
 
-		this.setStepSound(Block.soundTypeGrass);
-
-		this.setBlockBounds(0.1f, 0.0F, 0.1f, 0.9f, 0.8f, 0.9f);
+		this.setSoundType(SoundType.PLANT);
 
 		this.setTickRandomly(true);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, BLUE_SKYROOT_SAPLING)
 				.withProperty(PROPERTY_STAGE, 0));
+	}
+
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		return SAPLING_AABB;
 	}
 
 	@Override
@@ -85,15 +93,15 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 
 			if (meta == BLUE_SKYROOT_SAPLING.getMeta())
 			{
-				treeGenerator = BiomeGenAether.genBlueSkyrootTree;
+				treeGenerator = BiomeAether.genBlueSkyrootTree;
 			}
 			else if (meta == GREEN_SKYROOT_SAPLING.getMeta())
 			{
-				treeGenerator = BiomeGenAether.genGreenSkyrootTree;
+				treeGenerator = BiomeAether.genGreenSkyrootTree;
 			}
 			else if (meta == GOLDEN_OAK_SAPLING.getMeta())
 			{
-				treeGenerator = BiomeGenAether.genGoldenOakTree;
+				treeGenerator = BiomeAether.genGoldenOakTree;
 			}
 
 			if (treeGenerator != null)
@@ -125,9 +133,9 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, PROPERTY_VARIANT, PROPERTY_STAGE);
+		return new BlockStateContainer(this, PROPERTY_VARIANT, PROPERTY_STAGE);
 	}
 
 	@Override

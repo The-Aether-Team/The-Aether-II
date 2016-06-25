@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.items.armor;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.properties.IPhoenixChillable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -11,7 +12,7 @@ import net.minecraft.world.World;
 
 public class ItemPhoenixArmor extends ItemAetherArmor implements IPhoenixChillable
 {
-	public ItemPhoenixArmor(int armorType)
+	public ItemPhoenixArmor(EntityEquipmentSlot armorType)
 	{
 		super(ArmorMaterial.DIAMOND, "phoenix", armorType);
 	}
@@ -19,7 +20,7 @@ public class ItemPhoenixArmor extends ItemAetherArmor implements IPhoenixChillab
 	@Override
 	protected void applyFullSetBonus(World world, EntityPlayer player)
 	{
-		player.addPotionEffect(new PotionEffect(Potion.fireResistance.getId(), 2, 0, false, false));
+		player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("fire_resistance"), 2, 0, false, false));
 
 		player.extinguish();
 	}

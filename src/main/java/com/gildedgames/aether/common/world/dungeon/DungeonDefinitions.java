@@ -7,6 +7,7 @@ import java.util.Random;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
 
@@ -38,7 +39,7 @@ public class DungeonDefinitions
 				{
 					List<DungeonRoom> rooms = Lists.newArrayList();
 
-					File schemFile = new File(MinecraftServer.getServer().getDataDirectory(), "/dungeonSchematics/");
+					File schemFile = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getDataDirectory(), "/dungeonSchematics/");
 					
 					schemFile.mkdirs();
 

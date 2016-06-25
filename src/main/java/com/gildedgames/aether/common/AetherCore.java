@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -98,7 +99,7 @@ public class AetherCore implements IAetherServices
 	@EventHandler
 	public void onServerStarted(FMLServerStartedEvent event)
 	{
-		teleporter = new TeleporterAether(MinecraftServer.getServer().worldServerForDimension(getAetherDimID()));
+		teleporter = new TeleporterAether(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(getAetherDimID()));
 	}
 
 	@EventHandler

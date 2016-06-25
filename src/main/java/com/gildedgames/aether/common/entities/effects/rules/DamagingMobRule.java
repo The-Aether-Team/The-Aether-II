@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.entities.effects.rules;
 
 import com.gildedgames.aether.api.entities.effects.EntityEffectRule;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class DamagingMobRule implements EntityEffectRule
@@ -27,13 +27,13 @@ public class DamagingMobRule implements EntityEffectRule
 	@Override
 	public boolean blockLivingAttackAbility(Entity source, LivingHurtEvent event)
 	{
-		return !(event.entityLiving != null && this.mobClass.isAssignableFrom(event.entityLiving.getClass()));
+		return !(event.getEntityLiving() != null && this.mobClass.isAssignableFrom(event.getEntityLiving().getClass()));
 	}
 
 	@Override
 	public String[] getUnlocalizedDesc()
 	{
-		return new String[] { EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + "Against " + this.mobDisplayName + "s" };
+		return new String[] { TextFormatting.GRAY + "" + TextFormatting.ITALIC + "Against " + this.mobDisplayName + "s" };
 	}
 
 }

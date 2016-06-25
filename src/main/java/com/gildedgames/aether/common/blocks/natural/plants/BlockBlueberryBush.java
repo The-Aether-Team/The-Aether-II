@@ -4,21 +4,20 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
 import com.gildedgames.aether.common.items.ItemsAether;
-import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.StatList;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -36,15 +35,13 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IAetherBlock
 
 	public BlockBlueberryBush()
 	{
-		super(Material.leaves);
+		super(Material.LEAVES);
 
 		this.setHardness(1f);
 
-		this.setStepSound(Block.soundTypeGrass);
+		this.setSoundType(SoundType.PLANT);
 
 		this.setTickRandomly(true);
-
-		this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
 	}
 
 	@Override
@@ -56,10 +53,8 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IAetherBlock
 	}
 
 	@Override
-	public boolean removedByPlayer(World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
+	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
 	{
-		IBlockState state = world.getBlockState(pos);
-
 		if (state.getValue(PROPERTY_HARVESTABLE))
 		{
 			world.setBlockState(pos, state.withProperty(PROPERTY_HARVESTABLE, false));
@@ -72,7 +67,7 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IAetherBlock
 			return false;
 		}
 
-		return super.removedByPlayer(world, pos, player, willHarvest);
+		return super.removedByPlayer(state, world, pos, player, willHarvest);
 	}
 
 	@Override
@@ -117,12 +112,6 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IAetherBlock
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
-	{
-		return new AxisAlignedBB(pos.getX() + this.minX, pos.getY() + this.minY, pos.getZ() + this.minZ, pos.getX() + this.maxX, pos.getY() + this.maxY, pos.getZ() + this.maxZ);
-	}
-
-	@Override
 	public int damageDropped(IBlockState state)
 	{
 		return BERRY_BUSH_STEM;
@@ -159,9 +148,15 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IAetherBlock
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, PROPERTY_HARVESTABLE);
+		return new BlockStateContainer(this, PROPERTY_HARVESTABLE);
+	}
+
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		return FULL_BLOCK_AABB;
 	}
 
 	@Override

@@ -1,15 +1,14 @@
 package com.gildedgames.aether.common.tile_entities;
 
+import com.gildedgames.aether.api.registry.altar.IAltarRecipe;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.api.registry.altar.IAltarRecipe;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -122,7 +121,7 @@ public class TileEntityAltar extends TileEntity implements ITickable
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound compound)
+	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
 
@@ -135,6 +134,8 @@ public class TileEntityAltar extends TileEntity implements ITickable
 
 		compound.setTag("StackOnAltar", itemCompound);
 		compound.setInteger("AmbrosiumCount", this.ambrosiumCount);
+
+		return compound;
 	}
 
 	@Override
@@ -149,23 +150,23 @@ public class TileEntityAltar extends TileEntity implements ITickable
 	}
 
 	@Override
-	public Packet getDescriptionPacket()
+	public SPacketUpdateTileEntity getUpdatePacket()
 	{
 		NBTTagCompound compound = new NBTTagCompound();
 		this.writeToNBT(compound);
 
-		return new S35PacketUpdateTileEntity(pos, 1, compound);
+		return new SPacketUpdateTileEntity(pos, 1, compound);
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager networkManager, S35PacketUpdateTileEntity packet)
+	public void onDataPacket(NetworkManager networkManager, SPacketUpdateTileEntity packet)
 	{
 		this.readFromNBT(packet.getNbtCompound());
 	}
 
 	private void sendUpdates()
 	{
-		this.worldObj.markBlockForUpdate(pos);
+		this.worldObj.scheduleUpdate(pos, this.blockType, 0);
 
 		this.markDirty();
 	}

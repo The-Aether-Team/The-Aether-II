@@ -19,7 +19,7 @@ public class RenderAerbunny extends RenderLiving<EntityAerbunny>
 
 	protected void rotateAerbunny(EntityAerbunny entity)
 	{
-		if (!entity.onGround && entity.ridingEntity == null)
+		if (!entity.onGround && entity.isRiding())
 		{
 			if (entity.motionY > 0.5D)
 			{

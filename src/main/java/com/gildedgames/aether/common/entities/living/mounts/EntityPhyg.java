@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.entities.living.mounts;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;
@@ -14,9 +13,10 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
-import net.minecraft.pathfinding.PathNavigateGround;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityPhyg extends EntityFlyingAnimal
@@ -25,13 +25,10 @@ public class EntityPhyg extends EntityFlyingAnimal
 	{
 		super(world);
 
-		((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
-
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
-		this.tasks.addTask(2, /*this.aiControlledByPlayer = */new EntityAIControlledByPlayer(this, 0.3F));
 		this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
-		this.tasks.addTask(4, new EntityAITempt(this, 1.2D, Items.carrot, false));
+		this.tasks.addTask(4, new EntityAITempt(this, 1.2D, Items.CARROT, false));
 		this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
 		this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
@@ -45,32 +42,32 @@ public class EntityPhyg extends EntityFlyingAnimal
 	{
 		super.applyEntityAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
 	}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "mob.pig.say";
+		return SoundEvents.ENTITY_PIG_AMBIENT;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "mob.pig.say";
+		return SoundEvents.ENTITY_PIG_HURT;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "mob.pig.death";
+		return SoundEvents.ENTITY_PIG_DEATH;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block blockIn)
 	{
-		this.playSound("mob.pig.step", 0.15F, 1.0F);
+		this.playSound(SoundEvents.ENTITY_PIG_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -82,7 +79,7 @@ public class EntityPhyg extends EntityFlyingAnimal
 	@Override
 	protected Item getDropItem()
 	{
-		return this.isBurning() ? Items.cooked_porkchop : Items.porkchop;
+		return this.isBurning() ? Items.COOKED_PORKCHOP : Items.PORKCHOP;
 	}
 
 	@Override

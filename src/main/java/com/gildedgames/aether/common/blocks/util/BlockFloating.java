@@ -7,7 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -27,7 +27,7 @@ public class BlockFloating extends Block
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn)
 	{
 		world.scheduleUpdate(pos, this, this.tickRate(world));
 	}
@@ -85,10 +85,11 @@ public class BlockFloating extends Block
 			return true;
 		}
 
-		Block block = world.getBlockState(pos).getBlock();
-		Material material = block.getMaterial();
+		IBlockState state = world.getBlockState(pos);
 
-		return block == Blocks.fire || material == Material.air || material == Material.water || material == Material.lava;
+		Material material = state.getMaterial();
+
+		return state.getBlock() == Blocks.FIRE || material == Material.AIR || material == Material.WATER || material == Material.LAVA;
 	}
 
 	@Override

@@ -1,16 +1,15 @@
 package com.gildedgames.aether.common.blocks.construction;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockLadder;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.SoundType;
 
 public class BlockSkyrootLadder extends BlockLadder
 {
-	public BlockSkyrootLadder(Material material)
+	public BlockSkyrootLadder()
 	{
 		super();
 
-		this.setStepSound(Block.soundTypeWood);
+		this.setSoundType(SoundType.WOOD);
 
 		this.setHardness(0.4f);
 

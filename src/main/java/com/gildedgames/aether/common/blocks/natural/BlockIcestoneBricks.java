@@ -2,12 +2,13 @@ package com.gildedgames.aether.common.blocks.natural;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockIcestoneBricks extends Block
@@ -16,11 +17,11 @@ public class BlockIcestoneBricks extends Block
 
 	public BlockIcestoneBricks()
 	{
-		super(Material.rock);
+		super(Material.ROCK);
 
 		this.setHardness(3f);
 
-		this.setStepSound(Block.soundTypeGlass);
+		this.setSoundType(SoundType.GLASS);
 
 		this.setTickRandomly(true);
 	}
@@ -52,17 +53,17 @@ public class BlockIcestoneBricks extends Block
 	{
 		Block block = state.getBlock();
 
-		if (block == Blocks.water)
+		if (block == Blocks.WATER)
 		{
-			return state.getValue(BlockLiquid.LEVEL) == 0 ? Blocks.ice.getDefaultState() : null;
+			return state.getValue(BlockLiquid.LEVEL) == 0 ? Blocks.ICE.getDefaultState() : null;
 		}
-		else if (block == Blocks.lava)
+		else if (block == Blocks.LAVA)
 		{
-			return Blocks.obsidian.getDefaultState();
+			return Blocks.OBSIDIAN.getDefaultState();
 		}
-		else if (block == Blocks.flowing_lava || block == Blocks.flowing_water)
+		else if (block == Blocks.FLOWING_LAVA || block == Blocks.FLOWING_WATER)
 		{
-			return Blocks.air.getDefaultState();
+			return Blocks.AIR.getDefaultState();
 		}
 
 		return null;

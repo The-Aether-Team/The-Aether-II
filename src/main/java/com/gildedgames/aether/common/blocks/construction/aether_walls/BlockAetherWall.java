@@ -4,13 +4,16 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class BlockAetherWall extends Block
 {
@@ -20,15 +23,54 @@ public class BlockAetherWall extends Block
 			SOUTH = PropertyBool.create("south"),
 			WEST = PropertyBool.create("west");
 
-	public BlockAetherWall(Block block, float hardness, float resistance)
+	protected static final AxisAlignedBB[] AABB_BY_INDEX = new AxisAlignedBB[] {
+			new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D),
+			new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 1.0D),
+			new AxisAlignedBB(0.0D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D),
+			new AxisAlignedBB(0.0D, 0.0D, 0.25D, 0.75D, 1.0D, 1.0D),
+			new AxisAlignedBB(0.25D, 0.0D, 0.0D, 0.75D, 1.0D, 0.75D),
+			new AxisAlignedBB(0.3125D, 0.0D, 0.0D, 0.6875D, 0.875D, 1.0D),
+			new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.75D, 1.0D, 0.75D),
+			new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.75D, 1.0D, 1.0D),
+			new AxisAlignedBB(0.25D, 0.0D, 0.25D, 1.0D, 1.0D, 0.75D),
+			new AxisAlignedBB(0.25D, 0.0D, 0.25D, 1.0D, 1.0D, 1.0D),
+			new AxisAlignedBB(0.0D, 0.0D, 0.3125D, 1.0D, 0.875D, 0.6875D),
+			new AxisAlignedBB(0.0D, 0.0D, 0.25D, 1.0D, 1.0D, 1.0D),
+			new AxisAlignedBB(0.25D, 0.0D, 0.0D, 1.0D, 1.0D, 0.75D),
+			new AxisAlignedBB(0.25D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D),
+			new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.75D),
+			new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)
+	};
+
+	protected static final AxisAlignedBB[] CLIP_AABB_BY_INDEX = new AxisAlignedBB[] {
+			AABB_BY_INDEX[0].setMaxY(1.5D),
+			AABB_BY_INDEX[1].setMaxY(1.5D),
+			AABB_BY_INDEX[2].setMaxY(1.5D),
+			AABB_BY_INDEX[3].setMaxY(1.5D),
+			AABB_BY_INDEX[4].setMaxY(1.5D),
+			AABB_BY_INDEX[5].setMaxY(1.5D),
+			AABB_BY_INDEX[6].setMaxY(1.5D),
+			AABB_BY_INDEX[7].setMaxY(1.5D),
+			AABB_BY_INDEX[8].setMaxY(1.5D),
+			AABB_BY_INDEX[9].setMaxY(1.5D),
+			AABB_BY_INDEX[10].setMaxY(1.5D),
+			AABB_BY_INDEX[11].setMaxY(1.5D),
+			AABB_BY_INDEX[12].setMaxY(1.5D),
+			AABB_BY_INDEX[13].setMaxY(1.5D),
+			AABB_BY_INDEX[14].setMaxY(1.5D),
+			AABB_BY_INDEX[15].setMaxY(1.5D)
+	};
+
+
+	public BlockAetherWall(IBlockState state, float hardness, float resistance)
 	{
-		super(block.getMaterial());
+		super(state.getMaterial());
 
 		this.setResistance(resistance / 3.0f);
 
 		this.setHardness(hardness);
 
-		this.setStepSound(block.stepSound);
+		this.setSoundType(state.getBlock().getSoundType());
 	}
 
 	public BlockAetherWall setGlows(boolean glows)
@@ -40,23 +82,57 @@ public class BlockAetherWall extends Block
 
 	public boolean canConnectTo(IBlockAccess world, BlockPos pos)
 	{
-		Block block = world.getBlockState(pos).getBlock();
+		IBlockState state = world.getBlockState(pos);
 
-		return block != Blocks.barrier &&
-				(!(block != this && !(block instanceof BlockFenceGate)) || ((block.getMaterial().isOpaque() && block.isFullCube()) && block.getMaterial() != Material.gourd));
+		return state.getBlock() != Blocks.BARRIER &&
+				(!(state.getBlock() != this && !(state.getBlock() instanceof BlockFenceGate)) || ((state.getMaterial().isOpaque() && state.isFullCube()) && state.getMaterial() != Material.GOURD));
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		this.setBlockBoundsBasedOnState(worldIn, pos);
-		this.maxY = 1.5D;
+		state = this.getActualState(state, source, pos);
 
-		return super.getCollisionBoundingBox(worldIn, pos, state);
+		return AABB_BY_INDEX[getAABBIndex(state)];
+	}
+
+	@Nullable
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, World world, BlockPos pos)
+	{
+		state = this.getActualState(state, world, pos);
+
+		return CLIP_AABB_BY_INDEX[getAABBIndex(state)];
+	}
+
+	private static int getAABBIndex(IBlockState state)
+	{
+		int i = 0;
+
+		if (state.getValue(NORTH))
+		{
+			i |= 1 << EnumFacing.NORTH.getHorizontalIndex();
+		}
+
+		if (state.getValue(EAST))
+		{
+			i |= 1 << EnumFacing.EAST.getHorizontalIndex();
+		}
+
+		if (state.getValue(SOUTH))
+		{
+			i |= 1 << EnumFacing.SOUTH.getHorizontalIndex();
+		}
+
+		if (state.getValue(WEST))
+		{
+			i |= 1 << EnumFacing.WEST.getHorizontalIndex();
+		}
+
+		return i;
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
@@ -68,59 +144,9 @@ public class BlockAetherWall extends Block
 	}
 
 	@Override
-	public boolean isOpaqueCube()
+	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
-	}
-
-	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
-	{
-		boolean connectedToNorth = this.canConnectTo(worldIn, pos.north());
-		boolean connectedToSouth = this.canConnectTo(worldIn, pos.south());
-		boolean connectedToWest = this.canConnectTo(worldIn, pos.west());
-		boolean connectedToEast = this.canConnectTo(worldIn, pos.east());
-
-		float minX = 0.25F;
-		float maxX = 0.75F;
-		float minZ = 0.25F;
-		float maxZ = 0.75F;
-		float maxY = 1.0F;
-
-		if (connectedToNorth)
-		{
-			minZ = 0.0F;
-		}
-
-		if (connectedToSouth)
-		{
-			maxZ = 1.0F;
-		}
-
-		if (connectedToWest)
-		{
-			minX = 0.0F;
-		}
-
-		if (connectedToEast)
-		{
-			maxX = 1.0F;
-		}
-
-		if (connectedToNorth && connectedToSouth && !connectedToWest && !connectedToEast)
-		{
-			maxY = 0.8125F;
-			minX = 0.3125F;
-			maxX = 0.6875F;
-		}
-		else if (!connectedToNorth && !connectedToSouth && connectedToWest && connectedToEast)
-		{
-			maxY = 0.8125F;
-			minZ = 0.3125F;
-			maxZ = 0.6875F;
-		}
-
-		this.setBlockBounds(minX, 0.0F, minZ, maxX, maxY, maxZ);
 	}
 
 	@Override
@@ -146,8 +172,8 @@ public class BlockAetherWall extends Block
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, BlockAetherWall.UP, BlockAetherWall.NORTH, BlockAetherWall.EAST, BlockAetherWall.WEST, BlockAetherWall.SOUTH);
+		return new BlockStateContainer(this, BlockAetherWall.UP, BlockAetherWall.NORTH, BlockAetherWall.EAST, BlockAetherWall.WEST, BlockAetherWall.SOUTH);
 	}
 }

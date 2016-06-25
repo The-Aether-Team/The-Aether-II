@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.world.features;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -21,13 +21,13 @@ public class WorldGenAetherTallGrass extends WorldGenerator
 	@Override
 	public boolean generate(World world, Random rand, BlockPos pos)
 	{
-		Block block;
+		IBlockState state;
 
 		while (pos.getY() > 0)
 		{
-			block = world.getBlockState(pos).getBlock();
+			state = world.getBlockState(pos);
 
-			if (!block.isAir(world, pos) && !block.isLeaves(world, pos))
+			if (!state.getBlock().isAir(this.state, world, pos) && !state.getBlock().isLeaves(this.state, world, pos))
 			{
 				break;
 			}

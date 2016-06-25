@@ -6,14 +6,16 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 public class ItemAmbrosiumShard extends Item
 {
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		IBlockState state = world.getBlockState(pos);
 
@@ -28,10 +30,10 @@ public class ItemAmbrosiumShard extends Item
 					stack.stackSize -= 1;
 				}
 
-				return true;
+				return EnumActionResult.SUCCESS;
 			}
 		}
 
-		return false;
+		return EnumActionResult.FAIL;
 	}
 }

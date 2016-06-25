@@ -3,9 +3,9 @@ package com.gildedgames.aether.common.blocks.natural.plants;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
-import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -25,11 +25,9 @@ public class BlockAetherFlower extends BlockAetherPlant implements IAetherBlockW
 
 	public BlockAetherFlower()
 	{
-		super(Material.leaves);
+		super(Material.LEAVES);
 
-		this.setStepSound(Block.soundTypeGrass);
-
-		this.setBlockBounds(0.3f, 0.0F, 0.3f, 0.7f, 0.6f, 0.7f);
+		this.setSoundType(SoundType.PLANT);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, WHITE_ROSE));
 	}
@@ -63,9 +61,9 @@ public class BlockAetherFlower extends BlockAetherPlant implements IAetherBlockW
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, PROPERTY_VARIANT);
+		return new BlockStateContainer(this, PROPERTY_VARIANT);
 	}
 
 	@Override

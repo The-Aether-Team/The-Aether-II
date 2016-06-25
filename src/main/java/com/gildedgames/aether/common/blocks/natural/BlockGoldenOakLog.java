@@ -9,19 +9,20 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
 public class BlockGoldenOakLog extends BlockAetherLog
 {
 	@Override
-	public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te)
+	public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te, ItemStack stack)
 	{
-		if (player.getHeldItem() != null)
+		if (player.getActiveItemStack() != null)
 		{
-			Item heldItem = player.getHeldItem().getItem();
+			Item heldItem = player.getActiveItemStack().getItem();
 
 			if (heldItem instanceof ItemTool)
 			{
@@ -34,7 +35,7 @@ public class BlockGoldenOakLog extends BlockAetherLog
 			}
 		}
 
-		super.harvestBlock(world, player, pos, state, te);
+		super.harvestBlock(world, player, pos, state, te, stack);
 	}
 
 	private void dropGoldenAmber(World world, BlockPos pos, Random random)

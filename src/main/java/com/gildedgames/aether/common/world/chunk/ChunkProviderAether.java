@@ -1,27 +1,26 @@
-package com.gildedgames.aether.common.world;
+package com.gildedgames.aether.common.world.chunk;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.IProgressUpdate;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.terraingen.ChunkProviderEvent;
+import net.minecraftforge.event.terraingen.ChunkGeneratorEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
 import java.util.List;
 import java.util.Random;
 
-public class ChunkProviderAether implements IChunkProvider
+public class ChunkProviderAether implements IChunkGenerator
 {
 	private final IBlockState air;
 
@@ -39,13 +38,13 @@ public class ChunkProviderAether implements IChunkProvider
 
 	private double[][] noiseFields;
 
-	private BiomeGenBase[] biomesForGeneration;
+	private Biome[] biomesForGeneration;
 
 	public final static int PLACEMENT_FLAG_TYPE = 2;
 
 	public ChunkProviderAether(World world, long seed)
 	{
-		this.air = Blocks.air.getDefaultState();
+		this.air = Blocks.AIR.getDefaultState();
 
 		this.aether_stone = BlocksAether.holystone.getDefaultState();
 
@@ -67,18 +66,6 @@ public class ChunkProviderAether implements IChunkProvider
 		this.octaveNoiseGenerators[6] = new NoiseGeneratorOctaves(this.random, 16);
 
 		this.cloudNoiseGenerator = new NoiseGeneratorOctaves(this.random, 12);
-	}
-
-	@Override
-	public boolean canSave()
-	{
-		return true;
-	}
-
-	@Override
-	public boolean chunkExists(int chunkX, int chunkZ)
-	{
-		return true;
 	}
 
 	@Override
@@ -160,7 +147,7 @@ public class ChunkProviderAether implements IChunkProvider
 		}
 	}
 
-	public void replaceBlocksForBiome(ChunkPrimer primer, int chunkX, int chunkY, BiomeGenBase[] biomes)
+	public void replaceBlocksForBiome(ChunkPrimer primer, int chunkX, int chunkY, Biome[] biomes)
 	{
 		double oneThirtySnd = 0.03125D;
 
@@ -172,7 +159,7 @@ public class ChunkProviderAether implements IChunkProvider
 		{
 			for (int z = 0; z < 16; z++)
 			{
-				BiomeGenBase biome = biomes[z + x * 16];
+				Biome biome = biomes[z + x * 16];
 
 				int sthWithHeightMap = (int) (this.noiseFields[3][x + z * 16] / 3D + 3D + this.random.nextDouble() / 4);
 
@@ -186,7 +173,7 @@ public class ChunkProviderAether implements IChunkProvider
 				{
 					Block block = primer.getBlockState(x, y, z).getBlock();
 
-					if (block == Blocks.air)
+					if (block == Blocks.AIR)
 					{
 						j1 = -1;
 						continue;
@@ -234,12 +221,12 @@ public class ChunkProviderAether implements IChunkProvider
 
 	private double[] initializeNoiseField(double[] inputDoubles, int x, int y, int z, int width, int height, int length)
 	{
-		ChunkProviderEvent.InitNoiseField event = new ChunkProviderEvent.InitNoiseField(this, inputDoubles, x, y, z, width, height, length);
+		ChunkGeneratorEvent.InitNoiseField event = new ChunkGeneratorEvent.InitNoiseField(this, inputDoubles, x, y, z, width, height, length);
 		MinecraftForge.EVENT_BUS.post(event);
 
 		if (event.getResult() == Result.DENY)
 		{
-			return event.noisefield;
+			return event.getNoisefield();
 		}
 
 		if (inputDoubles == null)
@@ -307,18 +294,6 @@ public class ChunkProviderAether implements IChunkProvider
 		return inputDoubles;
 	}
 
-	@Override
-	public int getLoadedChunkCount()
-	{
-		return 0;
-	}
-
-	@Override
-	public String makeString()
-	{
-		return "RandomAetherLevelSource";
-	}
-
 	public void genClouds(ChunkPrimer primer, int chunkX, int chunkZ)
 	{
 		int height = 160;
@@ -343,7 +318,7 @@ public class ChunkProviderAether implements IChunkProvider
 
 					if (sample / 5.0D > 200.0D)
 					{
-						if (primer.getBlockState(x, y, z).getBlock() == Blocks.air)
+						if (primer.getBlockState(x, y, z).getBlock() == Blocks.AIR)
 						{
 							primer.setBlockState(x, 8 + y / sampleSize, z, BlocksAether.aercloud.getDefaultState());
 						}
@@ -351,28 +326,6 @@ public class ChunkProviderAether implements IChunkProvider
 				}
 			}
 		}
-	}
-
-	@Override
-	public void populate(IChunkProvider chunkProvider, int chunkX, int chunkZ)
-	{
-		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(this, this.worldObj, this.random, chunkX, chunkZ, false));
-
-		int x = chunkX * 16;
-		int z = chunkZ * 16;
-
-		BlockPos pos = new BlockPos(x, 0, z);
-
-		BiomeGenBase biome = this.worldObj.getBiomeGenForCoords(pos.add(16, 0, 16));
-
-		this.random.setSeed(this.worldObj.getSeed());
-
-		long i1 = this.random.nextLong() / 2L * 2L + 1L;
-		long j1 = this.random.nextLong() / 2L * 2L + 1L;
-
-		this.random.setSeed(chunkX * i1 + chunkZ * j1 ^ this.worldObj.getSeed());
-
-		biome.decorate(this.worldObj, this.random, pos);
 	}
 
 	@Override
@@ -384,7 +337,7 @@ public class ChunkProviderAether implements IChunkProvider
 
 		this.fillWithBlocks1(primer, chunkX, chunkZ);
 
-		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, chunkX * 16, chunkZ * 16, 16, 16);
+		this.biomesForGeneration = this.worldObj.getBiomeProvider().getBiomesForGeneration(this.biomesForGeneration, chunkX * 16, chunkZ * 16, 16, 16);
 
 		this.replaceBlocksForBiome(primer, chunkX, chunkZ, this.biomesForGeneration);
 
@@ -397,31 +350,29 @@ public class ChunkProviderAether implements IChunkProvider
 	}
 
 	@Override
-	public boolean saveChunks(boolean flag, IProgressUpdate progressUpdate)
+	public void populate(int chunkX, int chunkZ)
 	{
-		return true;
+		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(this, this.worldObj, this.random, chunkX, chunkZ, false));
+
+		int x = chunkX * 16;
+		int z = chunkZ * 16;
+
+		BlockPos pos = new BlockPos(x, 0, z);
+
+		Biome biome = this.worldObj.getBiome(pos.add(16, 0, 16));
+
+		this.random.setSeed(this.worldObj.getSeed());
+
+		long i1 = this.random.nextLong() / 2L * 2L + 1L;
+		long j1 = this.random.nextLong() / 2L * 2L + 1L;
+
+		this.random.setSeed(chunkX * i1 + chunkZ * j1 ^ this.worldObj.getSeed());
+
+		biome.decorate(this.worldObj, this.random, pos);
 	}
 
 	@Override
-	public boolean unloadQueuedChunks()
-	{
-		return false;
-	}
-
-	@Override
-	public void saveExtraData()
-	{
-
-	}
-
-	@Override
-	public Chunk provideChunk(BlockPos pos)
-	{
-		return this.provideChunk(pos.getX() >> 4, pos.getZ() >> 4);
-	}
-
-	@Override
-	public boolean populateChunk(IChunkProvider chunkProvider, Chunk chunk, int chunkX, int chunkZ)
+	public boolean generateStructures(Chunk chunkIn, int x, int z)
 	{
 		return false;
 	}
@@ -433,9 +384,9 @@ public class ChunkProviderAether implements IChunkProvider
 	}
 
 	@Override
-	public List<BiomeGenBase.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos)
+	public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos)
 	{
-		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(pos);
+		Biome biomegenbase = this.worldObj.getBiome(pos);
 
 		if (biomegenbase == null)
 		{

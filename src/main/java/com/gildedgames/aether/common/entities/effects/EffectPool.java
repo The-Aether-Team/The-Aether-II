@@ -120,7 +120,7 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 
 		EffectProcessorPlayer<I> pability = (EffectProcessorPlayer<I>) this.getProcessor();
 
-		pability.onInteract(event, event.entityPlayer, instancesRulesMet);
+		pability.onInteract(event, event.getEntityPlayer(), instancesRulesMet);
 	}
 
 	@Override
@@ -154,7 +154,7 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 
 		EffectProcessorPlayer<I> pability = (EffectProcessorPlayer<I>) this.getProcessor();
 
-		pability.onPickupXP(event, event.entityPlayer, instancesRulesMet);
+		pability.onPickupXP(event, event.getEntityPlayer(), instancesRulesMet);
 	}
 
 	@Override

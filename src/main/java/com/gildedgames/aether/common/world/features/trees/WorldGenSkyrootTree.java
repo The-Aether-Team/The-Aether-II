@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.world.features.trees;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
@@ -55,7 +55,7 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 					{
 						if (y >= 0 && y < 256)
 						{
-							pos.set(k, y, l);
+							pos.setPos(k, y, l);
 
 							if (!worldIn.isAirBlock(pos))
 							{
@@ -74,13 +74,13 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 			{
 				BlockPos rootBlockPos = position.down();
 
-				Block rootBlock = worldIn.getBlockState(rootBlockPos).getBlock();
+				IBlockState rootState = worldIn.getBlockState(rootBlockPos);
 
-				boolean isSoil = BlocksAether.aether_sapling.isSuitableSoilBlock(rootBlock);
+				boolean isSoil = BlocksAether.aether_sapling.isSuitableSoilBlock(rootState);
 
 				if (isSoil && position.getY() < 256 - i - 1)
 				{
-					rootBlock.onPlantGrow(worldIn, rootBlockPos, position);
+					rootState.getBlock().onPlantGrow(rootState, worldIn, rootBlockPos, position);
 
 					b0 = 3;
 					byte b1 = 0;
@@ -106,10 +106,11 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 
 								if (Math.abs(l1) != j1 || Math.abs(j2) != j1 || rand.nextInt(2) != 0 && i1 != 0)
 								{
-									pos.set(k1, l, i2);
-									Block block = worldIn.getBlockState(pos).getBlock();
+									pos.setPos(k1, l, i2);
 
-									if (block.isAir(worldIn, pos) || block.isLeaves(worldIn, pos))
+									IBlockState state = worldIn.getBlockState(pos);
+
+									if (state.getBlock().isAir(state, worldIn, pos) || state.getBlock().isLeaves(state, worldIn, pos))
 									{
 										this.setBlockAndNotifyAdequately(worldIn, pos, this.leavesState);
 									}
@@ -121,9 +122,9 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 					for (l = 0; l < i; ++l)
 					{
 						BlockPos upN = position.up(l);
-						Block block2 = worldIn.getBlockState(upN).getBlock();
+						IBlockState state2 = worldIn.getBlockState(upN);
 
-						if (block2.isAir(worldIn, upN) || block2.isLeaves(worldIn, upN))
+						if (state2.getBlock().isAir(state2, worldIn, upN) || state2.getBlock().isLeaves(state2, worldIn, upN))
 						{
 							this.setBlockAndNotifyAdequately(worldIn, position.up(l), this.logState);
 						}
@@ -138,8 +139,8 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 	}
 
 	@Override
-	protected boolean func_150523_a(Block block)
+	protected boolean canGrowInto(Block block)
 	{
-		return super.func_150523_a(block) || block == BlocksAether.aether_sapling;
+		return super.canGrowInto(block) || block == BlocksAether.aether_sapling;
 	}
 }

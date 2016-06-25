@@ -1,12 +1,12 @@
 package com.gildedgames.aether.client.models.entities.player;
 
-import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
 import com.gildedgames.aether.common.items.armor.ItemLeatherGloves;
+import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RendererLivingEntity;
+import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,9 +14,9 @@ import net.minecraft.item.ItemStack;
 
 public class LayerPlayerGloves extends LayerBipedArmor
 {
-	private final RendererLivingEntity<?> renderer;
+	private final RenderLivingBase<?> renderer;
 
-	public LayerPlayerGloves(RendererLivingEntity<?> rendererIn)
+	public LayerPlayerGloves(RenderLivingBase<?> rendererIn)
 	{
 		super(rendererIn);
 
@@ -52,7 +52,7 @@ public class LayerPlayerGloves extends LayerBipedArmor
 			{
 				ItemLeatherGloves leatherGloves = (ItemLeatherGloves) glove;
 
-				int color = leatherGloves.getColorFromItemStack(itemstack, 0);
+				int color = leatherGloves.getColor(itemstack);
 
 				float r = (float) (color >> 16 & 255) / 255.0F;
 				float g = (float) (color >> 8 & 255) / 255.0F;

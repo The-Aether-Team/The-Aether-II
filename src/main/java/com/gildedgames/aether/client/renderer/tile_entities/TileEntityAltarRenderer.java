@@ -5,10 +5,10 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
@@ -48,7 +48,7 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 			break;
 		}
 
-		this.bindTexture(TextureMap.locationBlocksTexture);
+		this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
 		if (stack != null)
 		{

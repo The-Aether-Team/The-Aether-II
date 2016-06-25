@@ -1,20 +1,17 @@
 package com.gildedgames.aether.common.tile_entities;
 
-import java.util.List;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.EntitySelectors;
-import net.minecraft.util.ITickable;
-import net.minecraft.world.WorldSettings.GameType;
-
 import com.gildedgames.aether.common.util.BlockPosUtil;
 import com.gildedgames.util.core.nbt.NBTHelper;
 import com.google.common.collect.Lists;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.GameType;
+
+import java.util.List;
 
 public class TileEntityLabyrinthEye extends TileEntitySchematicBlock implements ITickable
 {
@@ -54,7 +51,7 @@ public class TileEntityLabyrinthEye extends TileEntitySchematicBlock implements 
 					player.setGameType(GameType.SURVIVAL);
 				}
 					
-				player.addChatComponentMessage(new ChatComponentTranslation("You feel the eye's focus drift away..", new Object[0]));
+				player.addChatComponentMessage(new TextComponentTranslation("You feel the eye's focus drift away..", new Object[0]));
 			}
 		}
 		
@@ -69,7 +66,7 @@ public class TileEntityLabyrinthEye extends TileEntitySchematicBlock implements 
 					player.setGameType(GameType.ADVENTURE);
 				}
 				
-				player.addChatComponentMessage(new ChatComponentTranslation("You feel something watching you...", new Object[0]));
+				player.addChatComponentMessage(new TextComponentTranslation("You feel something watching you...", new Object[0]));
 			}
 		}
 		
@@ -77,12 +74,14 @@ public class TileEntityLabyrinthEye extends TileEntitySchematicBlock implements 
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound compound)
+	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
 		
 		NBTHelper.writeBlockPos(compound, "startOffset", this.startOffset);
 		NBTHelper.writeBlockPos(compound, "endOffset", this.endOffset);
+
+		return compound;
 	}
 
 	@Override

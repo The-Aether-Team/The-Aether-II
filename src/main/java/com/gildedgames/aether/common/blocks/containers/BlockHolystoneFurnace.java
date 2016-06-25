@@ -5,17 +5,20 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -33,7 +36,8 @@ public class BlockHolystoneFurnace extends BlockContainer
 
 	public BlockHolystoneFurnace()
 	{
-		super(Material.rock);
+		super(Material.ROCK);
+
 		this.setHardness(3.5f);
 
 		this.setDefaultState(this.getBlockState().getBaseState()
@@ -48,7 +52,7 @@ public class BlockHolystoneFurnace extends BlockContainer
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (!world.isRemote)
 		{
@@ -56,7 +60,7 @@ public class BlockHolystoneFurnace extends BlockContainer
 
 			if (tileEntity instanceof TileEntityHolystoneFurnace)
 			{
-				player.displayGUIChest((TileEntityHolystoneFurnace) tileEntity);
+				player.displayGUIChest((IInventory) tileEntity);
 			}
 		}
 
@@ -70,7 +74,7 @@ public class BlockHolystoneFurnace extends BlockContainer
 
 		if (tileEntity instanceof TileEntityHolystoneFurnace)
 		{
-			InventoryHelper.dropInventoryItems(world, pos, (TileEntityHolystoneFurnace) tileEntity);
+			InventoryHelper.dropInventoryItems(world, pos, (IInventory) tileEntity);
 		}
 
 		super.breakBlock(world, pos, state);
@@ -78,7 +82,7 @@ public class BlockHolystoneFurnace extends BlockContainer
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand)
 	{
 		if (state.getValue(PROPERTY_IS_LIT))
 		{
@@ -113,27 +117,27 @@ public class BlockHolystoneFurnace extends BlockContainer
 	}
 
 	@Override
-	public int getRenderType()
+	public EnumBlockRenderType getRenderType(IBlockState state)
 	{
-		return 3;
+		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
-	public boolean isOpaqueCube()
+	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public int getLightValue(IBlockAccess world, BlockPos pos)
+	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
-		return world.getBlockState(pos).getValue(PROPERTY_IS_LIT) ? 13 : 0;
+		return state.getValue(PROPERTY_IS_LIT) ? 13 : 0;
 	}
 
 	@Override
@@ -160,20 +164,20 @@ public class BlockHolystoneFurnace extends BlockContainer
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, PROPERTY_IS_LIT, PROPERTY_FACING);
+		return new BlockStateContainer(this, PROPERTY_IS_LIT, PROPERTY_FACING);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.CUTOUT;
+		return BlockRenderLayer.CUTOUT;
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta)
+	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TileEntityHolystoneFurnace();
 	}

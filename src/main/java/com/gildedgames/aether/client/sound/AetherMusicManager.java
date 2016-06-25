@@ -7,6 +7,7 @@ import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 
 import java.util.ArrayList;
 
@@ -40,9 +41,9 @@ public class AetherMusicManager
 				}
 				else
 				{
-					ResourceLocation resource = generator.getMusicResource(aePlayer);
+					SoundEvent event = generator.getMusicResource(aePlayer);
 
-					this.playMusic(resource);
+					this.playMusic(event);
 
 					this.quietPeriod = generator.getQuietPeriod(aePlayer);
 				}
@@ -65,14 +66,14 @@ public class AetherMusicManager
 		return null;
 	}
 
-	private void playMusic(ResourceLocation location)
+	private void playMusic(SoundEvent event)
 	{
 		if (this.isPlayingMusic())
 		{
 			this.stopMusic();
 		}
 
-		this.currentSong = PositionedSoundRecord.create(location);
+		this.currentSong = PositionedSoundRecord.getMusicRecord(event);
 
 		this.getSoundHandler().playSound(this.currentSong);
 	}

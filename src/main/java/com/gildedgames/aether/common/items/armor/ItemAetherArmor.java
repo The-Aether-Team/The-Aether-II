@@ -6,10 +6,11 @@ import com.gildedgames.aether.common.util.PlayerUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -20,7 +21,7 @@ public class ItemAetherArmor extends ItemArmor
 {
 	private final String name;
 
-	public ItemAetherArmor(ArmorMaterial material, String name, int armorType)
+	public ItemAetherArmor(ArmorMaterial material, String name, EntityEquipmentSlot armorType)
 	{
 		super(material, 0, armorType);
 
@@ -41,7 +42,7 @@ public class ItemAetherArmor extends ItemArmor
 		ItemAetherArmor armor = (ItemAetherArmor) stack.getItem();
 
 		// Only the helmet should tick. This prevents the calculations being done 4x times.
-		if (armor.armorType == 0)
+		if (armor.armorType == EntityEquipmentSlot.HEAD)
 		{
 			Class<? extends Item> fullSet = PlayerUtil.findArmorSet(player);
 
@@ -67,21 +68,21 @@ public class ItemAetherArmor extends ItemArmor
 	}
 
 	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
+	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type)
 	{
-		return AetherCore.getResourcePath("textures/armor/" + this.name + "_layer_" + (slot == 2 ? 2 : 1) + ".png");
+		return AetherCore.getResourcePath("textures/armor/" + this.name + "_layer_" + (slot == EntityEquipmentSlot.LEGS ? 2 : 1) + ".png");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
 	{
-		tooltip.add(EnumChatFormatting.BLUE + I18n.format("item.aether.armor." + this.name + ".ability.desc"));
+		tooltip.add(TextFormatting.BLUE + I18n.format("item.aether.armor." + this.name + ".ability.desc"));
 
 		if (!this.isAbilityPassive())
 		{
-			tooltip.add(EnumChatFormatting.DARK_AQUA + I18n.format("item.aether.tooltip.use") + ": " +
-					EnumChatFormatting.WHITE + I18n.format("item.aether.armor." + this.name + ".use.desc"));
+			tooltip.add(TextFormatting.DARK_AQUA + I18n.format("item.aether.tooltip.use") + ": " +
+					TextFormatting.WHITE + I18n.format("item.aether.armor." + this.name + ".use.desc"));
 		}
 	}
 }

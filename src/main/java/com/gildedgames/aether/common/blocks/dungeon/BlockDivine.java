@@ -2,12 +2,12 @@ package com.gildedgames.aether.common.blocks.dungeon;
 
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -31,10 +31,8 @@ public class BlockDivine extends BlockLabyrinth implements IAetherBlockWithVaria
 	}
 
 	@Override
-	public float getBlockHardness(World world, BlockPos pos)
+	public float getBlockHardness(IBlockState state, World world, BlockPos pos)
 	{
-		IBlockState state = world.getBlockState(pos);
-
 		return state.getBlock() == this && state.getValue(PROPERTY_IS_DIVINE) ? -1.0f : this.blockHardness;
 	}
 
@@ -51,9 +49,9 @@ public class BlockDivine extends BlockLabyrinth implements IAetherBlockWithVaria
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, PROPERTY_IS_DIVINE);
+		return new BlockStateContainer(this, PROPERTY_IS_DIVINE);
 	}
 
 	@Override

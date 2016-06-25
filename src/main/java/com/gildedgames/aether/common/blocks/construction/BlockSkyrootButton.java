@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks.construction;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockButtonWood;
+import net.minecraft.block.SoundType;
 
 public class BlockSkyrootButton extends BlockButtonWood
 {
@@ -9,7 +10,7 @@ public class BlockSkyrootButton extends BlockButtonWood
 	{
 		super();
 
-		this.setStepSound(Block.soundTypeWood);
+		this.setSoundType(SoundType.WOOD);
 
 		this.setHardness(0.5f);
 

@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.tile_entities;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 
 import com.gildedgames.aether.common.util.BlockPosUtil;
 
@@ -26,7 +26,7 @@ public class TileEntityWildcard extends TileEntitySchematicBlock
 		if (contentSize == 0)
 		{
 			this.getWorld().setBlockToAir(this.getPos());
-			this.getWorld().markBlockForUpdate(this.getPos());
+			this.getWorld().scheduleUpdate(this.getPos(), this.blockType, 0);
 			
 			return;
 		}
@@ -57,7 +57,7 @@ public class TileEntityWildcard extends TileEntitySchematicBlock
 		
 		this.getWorld().setBlockState(this.getPos(), block.getStateFromMeta(damage));
 		BlockPosUtil.setTileEntityNBT(this.getWorld(), this.getPos(), chosenStack);
-		this.getWorld().markBlockForUpdate(this.getPos());
+		this.getWorld().scheduleUpdate(this.getPos(), this.blockType, 0);
 	}
 	
 	@Override

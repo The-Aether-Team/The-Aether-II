@@ -2,9 +2,9 @@ package com.gildedgames.aether.common.blocks.construction.skyroot_sign;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyInteger;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockStandingSkyrootSign extends BlockSkyrootSign
@@ -18,16 +18,16 @@ public class BlockStandingSkyrootSign extends BlockSkyrootSign
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block neighborBlock)
 	{
-		if (!world.getBlockState(pos.down()).getBlock().getMaterial().isSolid())
+		if (!world.getBlockState(pos.down()).getMaterial().isSolid())
 		{
 			this.dropBlockAsItem(world, pos, state, 0);
 
 			world.setBlockToAir(pos);
 		}
 
-		super.onNeighborBlockChange(world, pos, state, neighborBlock);
+		super.neighborChanged(state, world, pos, neighborBlock);
 	}
 
 	@Override
@@ -43,8 +43,8 @@ public class BlockStandingSkyrootSign extends BlockSkyrootSign
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, BlockStandingSkyrootSign.ROTATION);
+		return new BlockStateContainer(this, BlockStandingSkyrootSign.ROTATION);
 	}
 }

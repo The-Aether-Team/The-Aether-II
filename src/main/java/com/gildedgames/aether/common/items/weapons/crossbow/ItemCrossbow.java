@@ -13,6 +13,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -56,19 +59,17 @@ public class ItemCrossbow extends Item
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
 		if (itemStackIn.getMetadata() < 3 || itemStackIn.getMetadata() == 4)
 		{
 			if (this.hasAmmo(PlayerAether.getPlayer(playerIn)))
 			{
-				{
-					playerIn.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
-				}
+				playerIn.setActiveHand(EnumHand.MAIN_HAND);
 			}
 		}
 
-		return itemStackIn;
+		return new ActionResult(EnumActionResult.PASS, itemStackIn);
 	}
 
 	@Override
@@ -85,14 +86,14 @@ public class ItemCrossbow extends Item
 	}
 
 	@Override
-	public void onUsingTick(ItemStack stack, EntityPlayer player, int count)
+	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
 	{
 		ItemStack boltStack = PlayerAether.getPlayer(player).getEquipmentInventory().getStackInSlot(AMMOSLOT);
 
 		if (stack.getItemDamage() == 4)
 		{
 			stack.setItemDamage(0);
-			player.stopUsingItem();
+			player.stopActiveHand();
 		}
 
 		if (this.hasAmmo(PlayerAether.getPlayer(player)))
@@ -115,14 +116,15 @@ public class ItemCrossbow extends Item
 		}
 		else
 		{
-			player.stopUsingItem();
+			player.stopActiveHand();
 		}
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn)
+	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase playerIn)
 	{
 		stack.setItemDamage(3);
+
 		return stack;
 	}
 

@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks.construction;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockTorch;
+import net.minecraft.block.SoundType;
 
 public class BlockAmbrosiumTorch extends BlockTorch
 {
@@ -12,6 +13,6 @@ public class BlockAmbrosiumTorch extends BlockTorch
 		this.setHardness(0f);
 		this.setLightLevel(0.9375f);
 
-		this.setStepSound(Block.soundTypeWood);
+		this.setSoundType(SoundType.WOOD);
 	}
 }

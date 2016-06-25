@@ -10,14 +10,16 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityCarrionSprout extends EntityAetherAnimal
 {
-	public final static int sizeID = 13;
+	private static final DataParameter<Integer> SIZE = new DataParameter<>(13, DataSerializers.VARINT);
 
 	private int maxSproutSize;
 
@@ -38,7 +40,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	{
 		super.applyEntityAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10);
 
 		this.setSproutSize(1);
 		this.setMaxSproutSize(9);
@@ -49,16 +51,18 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	{
 		super.entityInit();
 
-		this.dataWatcher.addObject(sizeID, new Integer(0));
+		this.dataManager.register(SIZE, 0);
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
 
 		nbt.setInteger("size", this.getSproutSize());
 		nbt.setInteger("maxSize", this.getMaxSproutSize());
+
+		return nbt;
 	}
 
 	@Override
@@ -129,14 +133,14 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 
 	public int getSproutSize()
 	{
-		return this.getDataWatcher().getWatchableObjectInt(sizeID);
+		return this.dataManager.get(SIZE);
 	}
 
 	public void setSproutSize(int newSize)
 	{
-		this.getDataWatcher().updateObject(sizeID, newSize);
+		this.dataManager.set(SIZE, newSize);
 
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8f + (this.getSproutSize() * 1.5f));
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8f + (this.getSproutSize() * 1.5f));
 	}
 
 	@SideOnly(Side.CLIENT)

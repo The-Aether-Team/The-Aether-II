@@ -3,8 +3,6 @@ package com.gildedgames.aether.common.entities.effects.processors;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.EnumParticleTypes;
 
 import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.entities.effects.EntityEffectRule;

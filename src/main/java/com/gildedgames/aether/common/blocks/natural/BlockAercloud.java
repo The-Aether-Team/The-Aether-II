@@ -1,27 +1,28 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.particle.EntityFX;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -57,6 +58,8 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 		}
 	}
 
+	protected static final AxisAlignedBB AERCLOUD_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.2D, 1.0D);
+
 	public static final AercloudVariant
 			COLD_AERCLOUD = new AercloudVariant(0, "cold", true),
 			BLUE_AERCLOUD = new AercloudVariant(1, "blue", false)
@@ -66,18 +69,15 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 				{
 					if (entity.worldObj.isRemote)
 					{
-						if (!(entity instanceof EntityFX))
+						world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundsAether.aercloud_bounce, SoundCategory.BLOCKS, 0.8f, 0.9f + (world.rand.nextFloat() * 0.2f), false);
+
+						for (int i = 0; i < 50; i++)
 						{
-							world.playSound(pos.getX(), pos.getY(), pos.getZ(), AetherCore.getResourcePath("aeblock.aercloud.bounce"), 0.8f, 0.9f + (world.rand.nextFloat() * 0.2f), false);
+							double x = pos.getX() + world.rand.nextDouble();
+							double y = pos.getY() + world.rand.nextDouble();
+							double z = pos.getZ() + world.rand.nextDouble();
 
-							for (int i = 0; i < 50; i++)
-							{
-								double x = pos.getX() + world.rand.nextDouble();
-								double y = pos.getY() + world.rand.nextDouble();
-								double z = pos.getZ() + world.rand.nextDouble();
-
-								world.spawnParticle(EnumParticleTypes.WATER_SPLASH, x, y, z, 0.0D, 0.0D, 0.0D);
-							}
+							world.spawnParticle(EnumParticleTypes.WATER_SPLASH, x, y, z, 0.0D, 0.0D, 0.0D);
 						}
 					}
 
@@ -122,9 +122,9 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 
 	public BlockAercloud()
 	{
-		super(Material.ice);
+		super(Material.ICE);
 
-		this.setStepSound(Block.soundTypeCloth);
+		this.setSoundType(SoundType.CLOTH);
 
 		this.setHardness(0.2f);
 		this.setLightOpacity(1);
@@ -144,18 +144,18 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.TRANSLUCENT;
+		return BlockRenderLayer.TRANSLUCENT;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side)
+	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
 		BlockPos adjacentBlock = pos.offset(side.getOpposite());
 
-		return world.getBlockState(adjacentBlock) != world.getBlockState(pos) && super.shouldSideBeRendered(world, pos, side);
+		return world.getBlockState(adjacentBlock) != state && super.shouldSideBeRendered(state, world, pos, side);
 	}
 
 	@Override
@@ -177,7 +177,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand)
 	{
 		if (state.getValue(PROPERTY_VARIANT) == PURPLE_AERCLOUD)
 		{
@@ -195,13 +195,13 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	}
 
 	@Override
-	public boolean isOpaqueCube()
+	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
@@ -213,13 +213,13 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, World world, BlockPos pos)
 	{
 		AercloudVariant variant = (AercloudVariant) state.getValue(PROPERTY_VARIANT);
 
 		if (variant.hasSolidBottom())
 		{
-			return new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY(), pos.getZ() + 1);
+			return AERCLOUD_AABB;
 		}
 
 		return null;
@@ -254,9 +254,9 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, PROPERTY_VARIANT, PROPERTY_FACING);
+		return new BlockStateContainer(this, PROPERTY_VARIANT, PROPERTY_FACING);
 	}
 
 	@Override

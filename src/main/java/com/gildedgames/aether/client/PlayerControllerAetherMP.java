@@ -7,15 +7,20 @@ import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.StatFileWriter;
-import net.minecraft.util.BlockPos;
+import net.minecraft.stats.StatisticsManager;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.GameType;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldSettings;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+
+import javax.annotation.Nullable;
 
 // Don't look at me...
 public class PlayerControllerAetherMP extends PlayerControllerMP
@@ -38,6 +43,11 @@ public class PlayerControllerAetherMP extends PlayerControllerMP
 		return new PlayerControllerAetherMP(Minecraft.getMinecraft(), netHandler, controller);
 	}
 
+	public static void clickBlockCreative(Minecraft mcIn, PlayerControllerMP playerController, BlockPos pos, EnumFacing facing)
+	{
+		PlayerControllerMP.clickBlockCreative(mcIn, playerController, pos, facing);
+	}
+
 	@Override
 	public void setPlayerCapabilities(EntityPlayer player)
 	{
@@ -51,7 +61,7 @@ public class PlayerControllerAetherMP extends PlayerControllerMP
 	}
 
 	@Override
-	public void setGameType(WorldSettings.GameType type)
+	public void setGameType(GameType type)
 	{
 		baseController.setGameType(type);
 	}
@@ -69,9 +79,9 @@ public class PlayerControllerAetherMP extends PlayerControllerMP
 	}
 
 	@Override
-	public boolean onPlayerDestroyBlock(BlockPos pos, EnumFacing side)
+	public boolean onPlayerDestroyBlock(BlockPos pos)
 	{
-		return baseController.onPlayerDestroyBlock(pos, side);
+		return baseController.onPlayerDestroyBlock(pos);
 	}
 
 	@Override
@@ -98,16 +108,6 @@ public class PlayerControllerAetherMP extends PlayerControllerMP
 		return baseController.getBlockReachDistance() + this.getExtendedBlockReachDistance();
 	}
 
-	public void setExtendedBlockReachDistance(float distance)
-	{
-		this.extendedReachDistance = distance;
-	}
-
-	public float getExtendedBlockReachDistance()
-	{
-		return this.extendedReachDistance;
-	}
-
 	@Override
 	public void updateController()
 	{
@@ -115,21 +115,21 @@ public class PlayerControllerAetherMP extends PlayerControllerMP
 	}
 
 	@Override
-	public boolean onPlayerRightClick(EntityPlayerSP player, WorldClient worldIn, ItemStack heldStack, BlockPos hitPos, EnumFacing side, Vec3 hitVec)
+	public EnumActionResult processRightClickBlock(EntityPlayerSP player, WorldClient worldIn, @Nullable ItemStack stack, BlockPos pos, EnumFacing facing, Vec3d vec, EnumHand hand)
 	{
-		return baseController.onPlayerRightClick(player, worldIn, heldStack, hitPos, side, hitVec);
+		return baseController.processRightClickBlock(player, worldIn, stack, pos, facing, vec, hand);
 	}
 
 	@Override
-	public boolean sendUseItem(EntityPlayer playerIn, World worldIn, ItemStack itemStackIn)
+	public EnumActionResult processRightClick(EntityPlayer player, World worldIn, ItemStack stack, EnumHand hand)
 	{
-		return baseController.sendUseItem(playerIn, worldIn, itemStackIn);
+		return baseController.processRightClick(player, worldIn, stack, hand);
 	}
 
 	@Override
-	public EntityPlayerSP func_178892_a(World worldIn, StatFileWriter statWriter)
+	public EntityPlayerSP createClientPlayer(World worldIn, StatisticsManager statWriter)
 	{
-		return baseController.func_178892_a(worldIn, statWriter);
+		return baseController.createClientPlayer(worldIn, statWriter);
 	}
 
 	@Override
@@ -139,21 +139,21 @@ public class PlayerControllerAetherMP extends PlayerControllerMP
 	}
 
 	@Override
-	public boolean interactWithEntitySendPacket(EntityPlayer playerIn, Entity targetEntity)
+	public EnumActionResult interactWithEntity(EntityPlayer player, Entity target, @Nullable ItemStack heldItem, EnumHand hand)
 	{
-		return baseController.interactWithEntitySendPacket(playerIn, targetEntity);
+		return baseController.interactWithEntity(player, target, heldItem, hand);
 	}
 
 	@Override
-	public boolean isPlayerRightClickingOnEntity(EntityPlayer player, Entity entity, MovingObjectPosition mos)
+	public EnumActionResult interactWithEntity(EntityPlayer player, Entity target, RayTraceResult raytrace, @Nullable ItemStack heldItem, EnumHand hand)
 	{
-		return baseController.isPlayerRightClickingOnEntity(player, entity, mos);
+		return baseController.interactWithEntity(player, target, raytrace, heldItem, hand);
 	}
 
 	@Override
-	public ItemStack windowClick(int windowId, int slotId, int mouseButtonClicked, int mode, EntityPlayer playerIn)
+	public ItemStack windowClick(int windowId, int slotId, int mouseButton, ClickType type, EntityPlayer player)
 	{
-		return baseController.windowClick(windowId, slotId, mouseButtonClicked, mode, playerIn);
+		return baseController.windowClick(windowId, slotId, mouseButton, type, player);
 	}
 
 	@Override
@@ -217,7 +217,7 @@ public class PlayerControllerAetherMP extends PlayerControllerMP
 	}
 
 	@Override
-	public WorldSettings.GameType getCurrentGameType()
+	public GameType getCurrentGameType()
 	{
 		return baseController.getCurrentGameType();
 	}
@@ -228,8 +228,19 @@ public class PlayerControllerAetherMP extends PlayerControllerMP
 		return baseController.getIsHittingBlock();
 	}
 
-	public PlayerControllerMP getBaseController()
+	@Override
+	public void pickItem(int index)
 	{
-		return this.baseController;
+		baseController.pickItem(index);
+	}
+
+	public void setExtendedBlockReachDistance(float distance)
+	{
+		this.extendedReachDistance = distance;
+	}
+
+	public float getExtendedBlockReachDistance()
+	{
+		return this.extendedReachDistance;
 	}
 }

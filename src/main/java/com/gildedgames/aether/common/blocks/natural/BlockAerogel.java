@@ -3,9 +3,9 @@ package com.gildedgames.aether.common.blocks.natural;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -14,7 +14,7 @@ public class BlockAerogel extends Block
 {
 	public BlockAerogel()
 	{
-		super(Material.rock);
+		super(Material.ROCK);
 
 		this.setHardness(1f);
 		this.setResistance(2000f);
@@ -24,29 +24,28 @@ public class BlockAerogel extends Block
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.TRANSLUCENT;
+		return BlockRenderLayer.TRANSLUCENT;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side)
+	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
-		IBlockState state = world.getBlockState(pos);
 		IBlockState neighborState = world.getBlockState(pos.offset(side.getOpposite()));
 
-		return state != neighborState && super.shouldSideBeRendered(world, pos, side);
+		return state != neighborState && super.shouldSideBeRendered(state, world, pos, side);
 	}
 
 	@Override
-	public boolean isOpaqueCube()
+	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}

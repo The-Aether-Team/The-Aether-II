@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.blocks.construction;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -13,9 +14,9 @@ public class BlockSkyrootDoor extends BlockDoor
 {
 	public BlockSkyrootDoor()
 	{
-		super(Material.wood);
+		super(Material.WOOD);
 
-		this.setStepSound(Block.soundTypeWood);
+		this.setSoundType(SoundType.WOOD);
 
 		this.setHardness(3.0f);
 

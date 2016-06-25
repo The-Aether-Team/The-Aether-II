@@ -2,9 +2,9 @@ package com.gildedgames.aether.client.renderer.effects;
 
 import net.minecraft.world.World;
 
-public class EntityGoldenFX extends EntityAetherPortalFX
+public class ParticleGolden extends ParticleAetherPortal
 {
-	public EntityGoldenFX(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
+	public ParticleGolden(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
 		super(world, posX, posY, posZ, motionX, motionY, motionZ);
 

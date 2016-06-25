@@ -27,7 +27,7 @@ public class HoldingItemRule implements EntityEffectRule
 
 		EntityLivingBase living = (EntityLivingBase) source;
 
-		return this.stack.isItemEqual(living.getHeldItem());
+		return this.stack.isItemEqual(living.getActiveItemStack());
 	}
 
 	@Override

@@ -15,11 +15,17 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.pathfinding.PathNavigateGround;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class EntityFlyingCow extends EntityFlyingAnimal
 {
@@ -27,12 +33,10 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 	{
 		super(world);
 
-		((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
-
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIPanic(this, 2.0D));
 		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
-		this.tasks.addTask(3, new EntityAITempt(this, 1.25D, Items.wheat, false));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.25D, Items.WHEAT, false));
 		this.tasks.addTask(4, new EntityAIFollowParent(this, 1.25D));
 		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
@@ -46,32 +50,32 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 	{
 		super.applyEntityAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.2D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
 	}
 
 	@Override
-	protected String getLivingSound()
+	protected SoundEvent getAmbientSound()
 	{
-		return "mob.cow.say";
+		return SoundEvents.ENTITY_COW_AMBIENT;
 	}
 
 	@Override
-	protected String getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
-		return "mob.cow.hurt";
+		return SoundEvents.ENTITY_COW_HURT;
 	}
 
 	@Override
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "mob.cow.hurt";
+		return SoundEvents.ENTITY_COW_DEATH;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, Block blockIn)
 	{
-		this.playSound("mob.cow.step", 0.15F, 1.0F);
+		this.playSound(SoundEvents.ENTITY_COW_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -83,22 +87,26 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 	@Override
 	protected Item getDropItem()
 	{
-		return this.isBurning() ? Items.cooked_beef : Items.beef;
+		return this.isBurning() ? Items.COOKED_BEEF : Items.BEEF;
 	}
 
 	@Override
-	public boolean interact(EntityPlayer player)
+	public EnumActionResult applyPlayerInteraction(EntityPlayer player, Vec3d vec, @Nullable ItemStack stack, EnumHand hand)
 	{
-		super.interact(player);
-		ItemStack stack = player.inventory.getCurrentItem();
+		EnumActionResult result = super.applyPlayerInteraction(player, vec, stack, hand);
+
+		if (result == EnumActionResult.SUCCESS)
+		{
+			return result;
+		}
 
 		if (!this.isChild() && stack != null)
 		{
 			ItemStack fillStack = null;
 
-			if (stack.getItem() == Items.bucket)
+			if (stack.getItem() == Items.BUCKET)
 			{
-				fillStack = new ItemStack(Items.milk_bucket);
+				fillStack = new ItemStack(Items.MILK_BUCKET);
 			}
 			else if (stack.getItem() == ItemsAether.skyroot_bucket)
 			{
@@ -110,10 +118,10 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 				PlayerUtil.fillBucketInHand(player, fillStack);
 			}
 
-			return true;
+			return EnumActionResult.SUCCESS;
 		}
 
-		return super.interact(player);
+		return result;
 	}
 
 	@Override

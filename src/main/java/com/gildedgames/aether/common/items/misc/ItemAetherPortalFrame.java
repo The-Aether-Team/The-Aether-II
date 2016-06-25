@@ -1,20 +1,14 @@
 package com.gildedgames.aether.common.items.misc;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockStandingSkyrootSign;
-import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockWallSkyrootSign;
-import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootSign;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntitySign;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class ItemAetherPortalFrame extends Item
@@ -26,23 +20,23 @@ public class ItemAetherPortalFrame extends Item
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if (side == EnumFacing.DOWN)
+		if (facing == EnumFacing.DOWN)
 		{
-			return false;
+			return EnumActionResult.FAIL;
 		}
 		else
 		{
-			pos = pos.offset(side);
+			pos = pos.offset(facing);
 
-			if (!player.canPlayerEdit(pos, side, stack))
+			if (!player.canPlayerEdit(pos, facing, stack))
 			{
-				return false;
+				return EnumActionResult.FAIL;
 			}
 			else if (world.isRemote)
 			{
-				return true;
+				return EnumActionResult.PASS;
 			}
 			else
 			{
@@ -58,7 +52,7 @@ public class ItemAetherPortalFrame extends Item
 				
 				--stack.stackSize;
 				
-				return true;
+				return EnumActionResult.SUCCESS;
 			}
 		}
 	}

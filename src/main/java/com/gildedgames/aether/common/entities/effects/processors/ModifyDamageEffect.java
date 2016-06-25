@@ -6,7 +6,7 @@ import com.gildedgames.aether.api.entities.effects.EntityEffectRule;
 import com.gildedgames.aether.common.entities.effects.processors.ModifyDamageEffect.Instance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
@@ -78,7 +78,7 @@ public class ModifyDamageEffect implements EntityEffectProcessor<Instance>
 		float min = instance.getAttributes().getFloat("min");
 		float max = instance.getAttributes().getFloat("max");
 
-		String prefix = min > 0 ? (EnumChatFormatting.BLUE + "+") : (EnumChatFormatting.RED + "");
+		String prefix = min > 0 ? (TextFormatting.BLUE + "+") : (TextFormatting.RED + "");
 
 		String par;
 
@@ -108,7 +108,7 @@ public class ModifyDamageEffect implements EntityEffectProcessor<Instance>
 		{
 			living.swingProgressInt = 0;
 
-			Entity entity = event.entityLiving;
+			Entity entity = event.getEntityLiving();
 
 			if (entity != null)
 			{
@@ -133,9 +133,9 @@ public class ModifyDamageEffect implements EntityEffectProcessor<Instance>
 					allDamage += rangeResult;
 				}
 
-				float result = Math.max(0, event.entityLiving.getHealth() - allDamage);
+				float result = Math.max(0, event.getEntityLiving().getHealth() - allDamage);
 
-				event.entityLiving.setHealth(result);
+				event.getEntityLiving().setHealth(result);
 			}
 		}
 	}

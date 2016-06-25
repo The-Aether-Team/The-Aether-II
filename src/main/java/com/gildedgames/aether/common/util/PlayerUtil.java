@@ -39,7 +39,7 @@ public class PlayerUtil
 
 	public static void fillBucketInHand(EntityPlayer player, ItemStack fillBucket)
 	{
-		ItemStack stack = player.getHeldItem();
+		ItemStack stack = player.getActiveItemStack();
 
 		if (stack.stackSize == 1)
 		{
@@ -56,7 +56,7 @@ public class PlayerUtil
 
 			if (!player.inventory.addItemStackToInventory(fillBucket))
 			{
-				player.dropPlayerItemWithRandomChoice(fillBucket, false);
+				player.dropItem(fillBucket, false);
 			}
 		}
 	}

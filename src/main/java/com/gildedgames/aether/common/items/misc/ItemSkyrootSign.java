@@ -10,14 +10,13 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntitySign;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-/**
- * Created by Chris on 3/14/2016.
- */
 public class ItemSkyrootSign extends Item
 {
 	public ItemSkyrootSign()
@@ -26,15 +25,15 @@ public class ItemSkyrootSign extends Item
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (side == EnumFacing.DOWN)
 		{
-			return false;
+			return EnumActionResult.FAIL;
 		}
-		else if (!world.getBlockState(pos).getBlock().getMaterial().isSolid())
+		else if (!world.getBlockState(pos).getMaterial().isSolid())
 		{
-			return false;
+			return EnumActionResult.FAIL;
 		}
 		else
 		{
@@ -42,15 +41,15 @@ public class ItemSkyrootSign extends Item
 
 			if (!player.canPlayerEdit(pos, side, stack))
 			{
-				return false;
+				return EnumActionResult.FAIL;
 			}
 			else if (!BlocksAether.standing_skyroot_sign.canPlaceBlockAt(world, pos))
 			{
-				return false;
+				return EnumActionResult.FAIL;
 			}
 			else if (world.isRemote)
 			{
-				return true;
+				return EnumActionResult.PASS;
 			}
 			else
 			{
@@ -72,7 +71,7 @@ public class ItemSkyrootSign extends Item
 					player.openEditSign((TileEntitySign) tileentity);
 				}
 
-				return true;
+				return EnumActionResult.SUCCESS;
 			}
 		}
 	}

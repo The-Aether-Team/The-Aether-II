@@ -2,13 +2,14 @@ package com.gildedgames.aether.common.blocks.natural;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -18,9 +19,9 @@ public class BlockAetherLog extends Block
 
 	public BlockAetherLog()
 	{
-		super(Material.wood);
+		super(Material.WATER);
 
-		this.setStepSound(Block.soundTypeWood);
+		this.setSoundType(SoundType.WOOD);
 
 		this.setHardness(2.0f);
 
@@ -46,9 +47,9 @@ public class BlockAetherLog extends Block
 			{
 				IBlockState neighborState = world.getBlockState(neighborPos);
 
-				if (neighborState.getBlock().isLeaves(world, neighborPos))
+				if (neighborState.getBlock().isLeaves(state, world, neighborPos))
 				{
-					neighborState.getBlock().beginLeavesDecay(world, neighborPos);
+					neighborState.getBlock().beginLeavesDecay(state, world, neighborPos);
 				}
 			}
 		}
@@ -97,7 +98,7 @@ public class BlockAetherLog extends Block
 	}
 
 	@Override
-	public boolean canSustainLeaves(IBlockAccess world, BlockPos pos)
+	public boolean canSustainLeaves(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
 		return true;
 	}
@@ -115,8 +116,8 @@ public class BlockAetherLog extends Block
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, PROPERTY_AXIS);
+		return new BlockStateContainer(this, PROPERTY_AXIS);
 	}
 }

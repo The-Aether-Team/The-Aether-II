@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.items;
 
 import java.util.List;
 
+import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
 import com.gildedgames.aether.common.items.armor.ItemLeatherGloves;
 import com.gildedgames.aether.common.items.effects.ItemEffects;
@@ -14,12 +15,14 @@ import com.gildedgames.aether.common.items.weapons.crossbow.ItemZaniteCrossbow;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDoor;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -176,62 +179,62 @@ public class ItemsAether
 		zanite_gemstone = registerItem("zanite_gemstone", new Item(), AetherCreativeTabs.tabMaterials);
 		icestone = registerItem("icestone", new Item(), AetherCreativeTabs.tabMaterials);
 
-		skyroot_axe = registerItem("skyroot_axe", new ItemSkyrootTool(EnumToolType.AXE));
-		skyroot_pickaxe = registerItem("skyroot_pickaxe", new ItemSkyrootTool(EnumToolType.PICKAXE));
-		skyroot_shovel = registerItem("skyroot_shovel", new ItemSkyrootTool(EnumToolType.SHOVEL));
+		skyroot_axe = registerItem("skyroot_axe", new ItemSkyrootTool(EnumToolType.AXE, 6.0F, -3.2F));
+		skyroot_pickaxe = registerItem("skyroot_pickaxe", new ItemSkyrootTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
+		skyroot_shovel = registerItem("skyroot_shovel", new ItemSkyrootTool(EnumToolType.SHOVEL, 1.5F, -3.0F));
 		skyroot_sword = registerItem("skyroot_sword", new ItemSkyrootSword());
 
-		holystone_axe = registerItem("holystone_axe", new ItemHolystoneTool(EnumToolType.AXE));
-		holystone_pickaxe = registerItem("holystone_pickaxe", new ItemHolystoneTool(EnumToolType.PICKAXE));
-		holystone_shovel = registerItem("holystone_shovel", new ItemHolystoneTool(EnumToolType.SHOVEL));
+		holystone_axe = registerItem("holystone_axe", new ItemHolystoneTool(EnumToolType.AXE, 8.0F, -3.2F));
+		holystone_pickaxe = registerItem("holystone_pickaxe", new ItemHolystoneTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
+		holystone_shovel = registerItem("holystone_shovel", new ItemHolystoneTool(EnumToolType.SHOVEL, 1.5F, -3.0F));
 		holystone_sword = registerItem("holystone_sword", new ItemHolystoneSword());
 
-		zanite_axe = registerItem("zanite_axe", new ItemZaniteTool(EnumToolType.AXE));
-		zanite_pickaxe = registerItem("zanite_pickaxe", new ItemZaniteTool(EnumToolType.PICKAXE));
-		zanite_shovel = registerItem("zanite_shovel", new ItemZaniteTool(EnumToolType.SHOVEL));
+		zanite_axe = registerItem("zanite_axe", new ItemZaniteTool(EnumToolType.AXE, 8.0F, -3.1F));
+		zanite_pickaxe = registerItem("zanite_pickaxe", new ItemZaniteTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
+		zanite_shovel = registerItem("zanite_shovel", new ItemZaniteTool(EnumToolType.SHOVEL, 1.5F, -3.0F));
 		zanite_sword = registerItem("zanite_sword", new ItemZaniteSword());
 
-		gravitite_axe = registerItem("gravitite_axe", new ItemGravititeTool(EnumToolType.AXE));
-		gravitite_pickaxe = registerItem("gravitite_pickaxe", new ItemGravititeTool(EnumToolType.PICKAXE));
-		gravitite_shovel = registerItem("gravitite_shovel", new ItemGravititeTool(EnumToolType.SHOVEL));
+		gravitite_axe = registerItem("gravitite_axe", new ItemGravititeTool(EnumToolType.AXE, 8.0F, -3.0F));
+		gravitite_pickaxe = registerItem("gravitite_pickaxe", new ItemGravititeTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
+		gravitite_shovel = registerItem("gravitite_shovel", new ItemGravititeTool(EnumToolType.SHOVEL, 1.5F, -3.0F));
 		gravitite_sword = registerItem("gravitite_sword", new ItemGravititeSword());
 
-		valkyrie_axe = registerItem("valkyrie_axe", new ItemValkyrieTool(EnumToolType.AXE));
-		valkyrie_pickaxe = registerItem("valkyrie_pickaxe", new ItemValkyrieTool(EnumToolType.PICKAXE));
-		valkyrie_shovel = registerItem("valkyrie_shovel", new ItemValkyrieTool(EnumToolType.SHOVEL));
+		valkyrie_axe = registerItem("valkyrie_axe", new ItemValkyrieTool(EnumToolType.AXE, 8.0F, -3.0F));
+		valkyrie_pickaxe = registerItem("valkyrie_pickaxe", new ItemValkyrieTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
+		valkyrie_shovel = registerItem("valkyrie_shovel", new ItemValkyrieTool(EnumToolType.SHOVEL,  1.5F, -3.0F));
 		valkyrie_lance = registerItem("valkyrie_lance", new ItemAetherSword(AetherMaterials.LEGENDARY_TOOL, ItemAbilityType.PASSIVE));
 
-		zanite_helmet = registerItem("zanite_helmet", new ItemZaniteArmor(0));
-		zanite_chestplate = registerItem("zanite_chestplate", new ItemZaniteArmor(1));
-		zanite_leggings = registerItem("zanite_leggings", new ItemZaniteArmor(2));
-		zanite_boots = registerItem("zanite_boots", new ItemZaniteArmor(3));
+		zanite_helmet = registerItem("zanite_helmet", new ItemZaniteArmor(EntityEquipmentSlot.HEAD));
+		zanite_chestplate = registerItem("zanite_chestplate", new ItemZaniteArmor(EntityEquipmentSlot.CHEST));
+		zanite_leggings = registerItem("zanite_leggings", new ItemZaniteArmor(EntityEquipmentSlot.LEGS));
+		zanite_boots = registerItem("zanite_boots", new ItemZaniteArmor(EntityEquipmentSlot.FEET));
 
-		gravitite_helmet = registerItem("gravitite_helmet", new ItemGravititeArmor(0));
-		gravitite_chestplate = registerItem("gravitite_chestplate", new ItemGravititeArmor(1));
-		gravitite_leggings = registerItem("gravitite_leggings", new ItemGravititeArmor(2));
-		gravitite_boots = registerItem("gravitite_boots", new ItemGravititeArmor(3));
+		gravitite_helmet = registerItem("gravitite_helmet", new ItemGravititeArmor(EntityEquipmentSlot.HEAD));
+		gravitite_chestplate = registerItem("gravitite_chestplate", new ItemGravititeArmor(EntityEquipmentSlot.CHEST));
+		gravitite_leggings = registerItem("gravitite_leggings", new ItemGravititeArmor(EntityEquipmentSlot.LEGS));
+		gravitite_boots = registerItem("gravitite_boots", new ItemGravititeArmor(EntityEquipmentSlot.FEET));
 
-		obsidian_helmet = registerItem("obsidian_helmet", new ItemObsidianArmor(AetherMaterials.OBSIDIAN_ARMOR, 0));
-		obsidian_chestplate = registerItem("obsidian_chestplate", new ItemObsidianArmor(AetherMaterials.OBSIDIAN_ARMOR, 1));
-		obsidian_leggings = registerItem("obsidian_leggings", new ItemObsidianArmor(AetherMaterials.OBSIDIAN_ARMOR, 2));
-		obsidian_boots = registerItem("obsidian_boots", new ItemObsidianArmor(AetherMaterials.OBSIDIAN_ARMOR, 3));
+		obsidian_helmet = registerItem("obsidian_helmet", new ItemObsidianArmor(AetherMaterials.OBSIDIAN_ARMOR, EntityEquipmentSlot.HEAD));
+		obsidian_chestplate = registerItem("obsidian_chestplate", new ItemObsidianArmor(AetherMaterials.OBSIDIAN_ARMOR, EntityEquipmentSlot.CHEST));
+		obsidian_leggings = registerItem("obsidian_leggings", new ItemObsidianArmor(AetherMaterials.OBSIDIAN_ARMOR, EntityEquipmentSlot.LEGS));
+		obsidian_boots = registerItem("obsidian_boots", new ItemObsidianArmor(AetherMaterials.OBSIDIAN_ARMOR, EntityEquipmentSlot.FEET));
 
-		neptune_helmet = registerItem("neptune_helmet", new ItemNeptuneArmor(0));
-		neptune_chestplate = registerItem("neptune_chestplate", new ItemNeptuneArmor(1));
-		neptune_leggings = registerItem("neptune_leggings", new ItemNeptuneArmor(2));
-		neptune_boots = registerItem("neptune_boots", new ItemNeptuneArmor(3));
+		neptune_helmet = registerItem("neptune_helmet", new ItemNeptuneArmor(EntityEquipmentSlot.HEAD));
+		neptune_chestplate = registerItem("neptune_chestplate", new ItemNeptuneArmor(EntityEquipmentSlot.CHEST));
+		neptune_leggings = registerItem("neptune_leggings", new ItemNeptuneArmor(EntityEquipmentSlot.LEGS));
+		neptune_boots = registerItem("neptune_boots", new ItemNeptuneArmor(EntityEquipmentSlot.FEET));
 
-		phoenix_helmet = registerItem("phoenix_helmet", new ItemPhoenixArmor(0));
-		phoenix_chestplate = registerItem("phoenix_chestplate", new ItemPhoenixArmor(1));
-		phoenix_leggings = registerItem("phoenix_leggings", new ItemPhoenixArmor(2));
-		phoenix_boots = registerItem("phoenix_boots", new ItemPhoenixArmor(3));
+		phoenix_helmet = registerItem("phoenix_helmet", new ItemPhoenixArmor(EntityEquipmentSlot.HEAD));
+		phoenix_chestplate = registerItem("phoenix_chestplate", new ItemPhoenixArmor(EntityEquipmentSlot.CHEST));
+		phoenix_leggings = registerItem("phoenix_leggings", new ItemPhoenixArmor(EntityEquipmentSlot.LEGS));
+		phoenix_boots = registerItem("phoenix_boots", new ItemPhoenixArmor(EntityEquipmentSlot.FEET));
 
-		valkyrie_helmet = registerItem("valkyrie_helmet", new ItemValkyrieArmor(AetherMaterials.VALKYRIE_ARMOR, 0));
-		valkyrie_chestplate = registerItem("valkyrie_chestplate", new ItemValkyrieArmor(AetherMaterials.VALKYRIE_ARMOR, 1));
-		valkyrie_leggings = registerItem("valkyrie_leggings", new ItemValkyrieArmor(AetherMaterials.VALKYRIE_ARMOR, 2));
-		valkyrie_boots = registerItem("valkyrie_boots", new ItemValkyrieArmor(AetherMaterials.VALKYRIE_ARMOR, 3));
+		valkyrie_helmet = registerItem("valkyrie_helmet", new ItemValkyrieArmor(AetherMaterials.VALKYRIE_ARMOR, EntityEquipmentSlot.HEAD));
+		valkyrie_chestplate = registerItem("valkyrie_chestplate", new ItemValkyrieArmor(AetherMaterials.VALKYRIE_ARMOR, EntityEquipmentSlot.CHEST));
+		valkyrie_leggings = registerItem("valkyrie_leggings", new ItemValkyrieArmor(AetherMaterials.VALKYRIE_ARMOR, EntityEquipmentSlot.LEGS));
+		valkyrie_boots = registerItem("valkyrie_boots", new ItemValkyrieArmor(AetherMaterials.VALKYRIE_ARMOR, EntityEquipmentSlot.FEET));
 
-		sentry_boots = registerItem("sentry_boots", new ItemSentryBoots(AetherMaterials.LEGENDARY_ARMOR, 3));
+		sentry_boots = registerItem("sentry_boots", new ItemSentryBoots(AetherMaterials.LEGENDARY_ARMOR));
 
 		golden_amber = registerItem("golden_amber", new Item(), AetherCreativeTabs.tabMaterials);
 
@@ -271,18 +274,18 @@ public class ItemsAether
 
 		candy_cane = registerItem("candy_cane", new ItemFood(2, false), AetherCreativeTabs.tabConsumables);
 
-		skyroot_bucket = registerItem("skyroot_bucket", new ItemSkyrootBucket(Blocks.air), AetherCreativeTabs.tabTools);
-		skyroot_water_bucket = registerItem("skyroot_water_bucket", new ItemSkyrootBucket(Blocks.flowing_water), AetherCreativeTabs.tabTools);
+		skyroot_bucket = registerItem("skyroot_bucket", new ItemSkyrootBucket(Blocks.AIR), AetherCreativeTabs.tabTools);
+		skyroot_water_bucket = registerItem("skyroot_water_bucket", new ItemSkyrootBucket(Blocks.FLOWING_WATER), AetherCreativeTabs.tabTools);
 		skyroot_milk_bucket = registerItem("skyroot_milk_bucket", new ItemSkyrootConsumableBucket(), AetherCreativeTabs.tabConsumables);
 		skyroot_poison_bucket = registerItem("skyroot_poison_bucket", new ItemSkyrootConsumableBucket(), AetherCreativeTabs.tabConsumables);
 
-		valkyrie_music_disc = registerItem("valkyrie_music_disc", new ItemAetherRecord("valkyrie"), AetherCreativeTabs.tabTools);
-		labyrinth_music_disc = registerItem("labyrinth_music_disc", new ItemAetherRecord("labyrinth"), AetherCreativeTabs.tabTools);
-		moa_music_disc = registerItem("moa_music_disc", new ItemAetherRecord("moa"), AetherCreativeTabs.tabTools);
-		aerwhale_music_disc = registerItem("aerwhale_music_disc", new ItemAetherRecord("aerwhale"), AetherCreativeTabs.tabTools);
-		recording_892 = registerItem("recording_892", new ItemAetherRecord("recording_892"), AetherCreativeTabs.tabTools);
+		valkyrie_music_disc = registerItem("valkyrie_music_disc", new ItemAetherRecord("valkyrie", SoundsAether.record_valkyrie), AetherCreativeTabs.tabTools);
+		labyrinth_music_disc = registerItem("labyrinth_music_disc", new ItemAetherRecord("labyrinth", SoundsAether.record_labyrinth), AetherCreativeTabs.tabTools);
+		moa_music_disc = registerItem("moa_music_disc", new ItemAetherRecord("moa", SoundsAether.record_moa), AetherCreativeTabs.tabTools);
+		aerwhale_music_disc = registerItem("aerwhale_music_disc", new ItemAetherRecord("aerwhale", SoundsAether.record_aerwhale), AetherCreativeTabs.tabTools);
+		recording_892 = registerItem("recording_892", new ItemAetherRecord("recording_892", SoundsAether.record_recording_892), AetherCreativeTabs.tabTools);
 
-		healing_stone = registerItem("healing_stone", new ItemFood(0, 1.2f, false).setAlwaysEdible().setPotionEffect(Potion.regeneration.getId(), 30, 0, 1.0f), AetherCreativeTabs.tabConsumables);
+		healing_stone = registerItem("healing_stone", new ItemFood(0, 1.2f, false).setAlwaysEdible().setPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("regeneration"), 30, 0), 1.0f), AetherCreativeTabs.tabConsumables);
 
 		dart_shooter = registerItem("dart_shooter", new ItemDartShooter(), AetherCreativeTabs.tabWeapons);
 		dart = registerItem("dart", new ItemDart(), AetherCreativeTabs.tabWeapons);
@@ -369,7 +372,7 @@ public class ItemsAether
 		equipmentRegistry.register(ItemsAether.gold_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.chain_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.diamond_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(Items.arrow, ItemRarity.NONE, ItemEquipmentType.AMMUNITION);
+		equipmentRegistry.register(Items.ARROW, ItemRarity.NONE, ItemEquipmentType.AMMUNITION);
 
 		class Effects implements ItemEffects.ItemEffectsProvider
 		{

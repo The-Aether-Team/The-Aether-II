@@ -4,17 +4,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.BlockPos.MutableBlockPos;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class BlockPosUtil
 {
 	
     public static boolean setTileEntityNBT(World worldIn, BlockPos pos, ItemStack stack)
     {
-        MinecraftServer minecraftserver = MinecraftServer.getServer();
+        MinecraftServer minecraftserver = FMLCommonHandler.instance().getMinecraftServerInstance();
 
         if (minecraftserver == null)
         {
@@ -28,7 +29,8 @@ public class BlockPosUtil
 
                 if (tileentity != null)
                 {
-                    if (!worldIn.isRemote && tileentity.func_183000_F())
+					// TODO: fix?
+                    if (!worldIn.isRemote /*&& tileentity.func_183000_F()*/)
                     {
                         return false;
                     }
@@ -57,7 +59,7 @@ public class BlockPosUtil
 	
 	public static AxisAlignedBB bounds(BlockPos start, BlockPos end)
 	{
-		return AxisAlignedBB.fromBounds(start.getX(), start.getY(), start.getZ(), end.getX(), end.getY(), end.getZ());
+		return new AxisAlignedBB(start.getX(), start.getY(), start.getZ(), end.getX(), end.getY(), end.getZ());
 	}
 	
 	public static MutableBlockPos add(MutableBlockPos pos, BlockPos add)
@@ -67,21 +69,21 @@ public class BlockPosUtil
 
 	public static MutableBlockPos add(MutableBlockPos pos, int x, int y, int z)
 	{
-		pos.set(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
+		pos.setPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
 
 		return pos;
 	}
 
 	public static MutableBlockPos down(MutableBlockPos pos, int n)
 	{
-		pos.set(pos.getX(), pos.getY() - n, pos.getZ());
+		pos.setPos(pos.getX(), pos.getY() - n, pos.getZ());
 
 		return pos;
 	}
 
 	public static MutableBlockPos set(MutableBlockPos pos, int x, int y, int z)
 	{
-		pos.set(x, y, z);
+		pos.setPos(x, y, z);
 
 		return pos;
 	}

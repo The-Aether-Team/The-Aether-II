@@ -36,7 +36,7 @@ public class AltarRepairRecipe implements IAltarRecipe
 				return 3;
 			case IRON:
 				return 4;
-			case EMERALD:
+			case DIAMOND:
 				return 5;
 			case GOLD:
 				return 3;

@@ -1,8 +1,8 @@
 package com.gildedgames.aether.client.sound.generators;
 
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import net.minecraft.util.ResourceLocation;
+import com.gildedgames.aether.common.AetherCore;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 public class AetherMusicGenerator implements IMusicGenerator
@@ -14,17 +14,17 @@ public class AetherMusicGenerator implements IMusicGenerator
 	}
 
 	@Override
-	public ResourceLocation getMusicResource(IPlayerAetherCapability player)
+	public SoundEvent getMusicResource(IPlayerAetherCapability player)
 	{
 		World world = player.getPlayer().getEntityWorld();
 
 		if (world.getWorldTime() > 12800L || world.getWorldTime() < 22300L)
 		{
-			return new ResourceLocation("aether:aemusic.day");
+			return new SoundEvent(AetherCore.getResource("aether:aemusic.day"));
 		}
 		else
 		{
-			return new ResourceLocation("aether:aemusic.night");
+			return new SoundEvent(AetherCore.getResource("aether:aemusic.night"));
 		}
 	}
 

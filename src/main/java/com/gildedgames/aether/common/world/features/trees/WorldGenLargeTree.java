@@ -2,11 +2,11 @@ package com.gildedgames.aether.common.world.features.trees;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.util.BlockPosUtil;
-import com.gildedgames.aether.common.world.ChunkProviderAether;
+import com.gildedgames.aether.common.world.chunk.ChunkProviderAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
@@ -77,11 +77,11 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 				{
 					if (i1 >= 0 && i1 < 128)
 					{
-						nPos.set(i2, i1, l2);
+						nPos.setPos(i2, i1, l2);
 
 						Block block = world.getBlockState(nPos).getBlock();
 
-						if (block != Blocks.air && block != this.leafBlock)
+						if (block != Blocks.AIR && block != this.leafBlock)
 						{
 							flag = false;
 						}
@@ -103,7 +103,7 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 
 		for (int y = pos.getY(); y < pos.getY() + height; y++)
 		{
-			nPos.set(pos.getX(), y, pos.getZ());
+			nPos.setPos(pos.getX(), y, pos.getZ());
 
 			if (!this.isReplaceable(world, nPos))
 			{
@@ -112,7 +112,7 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 		}
 
 		//Can plant here check, not on clouds etc...
-		nPos.set(pos.getX(), pos.getY() - 1, pos.getZ());
+		nPos.setPos(pos.getX(), pos.getY() - 1, pos.getZ());
 
 		if (world.getBlockState(nPos).getBlock() != BlocksAether.aether_grass &&
 				world.getBlockState(nPos).getBlock() != BlocksAether.aether_dirt)
@@ -127,9 +127,9 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 			{
 				for (int z = pos.getZ() - 3; z < pos.getZ() + 5; z++)
 				{
-					nPos.set(x, y, z);
+					nPos.setPos(x, y, z);
 
-					if ((x - pos.getX()) * (x - pos.getX()) + (y - pos.getY() - 8) * (y - pos.getY() - 8) + (z - pos.getZ()) * (z - pos.getZ()) < 12 + random.nextInt(5) && world.getBlockState(nPos).getBlock() == Blocks.air)
+					if ((x - pos.getX()) * (x - pos.getX()) + (y - pos.getY() - 8) * (y - pos.getY() - 8) + (z - pos.getZ()) * (z - pos.getZ()) < 12 + random.nextInt(5) && world.getBlockState(nPos).getBlock() == Blocks.AIR)
 					{
 						world.setBlockState(nPos, this.leafBlock);
 					}
@@ -138,7 +138,7 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 		}
 		for (int n = 0; n < (height - 2); n++)
 		{
-			nPos.set(pos.getX(), pos.getY() + n, pos.getZ());
+			nPos.setPos(pos.getX(), pos.getY() + n, pos.getZ());
 
 			if (n > 4)
 			{

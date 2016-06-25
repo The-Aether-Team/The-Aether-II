@@ -4,18 +4,18 @@ import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
-import com.gildedgames.aether.common.entities.effects.EntityEffects;
-import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
 import com.gildedgames.aether.api.items.IItemEffectsCapability;
+import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
+import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.text.TextComponentBase;
+import net.minecraft.util.text.TextComponentTranslation;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class InventoryEquipment implements IInventoryEquipment
@@ -260,9 +260,9 @@ public class InventoryEquipment implements IInventoryEquipment
 	}
 
 	@Override
-	public IChatComponent getDisplayName()
+	public TextComponentBase getDisplayName()
 	{
-		return new ChatComponentTranslation(this.getName());
+		return new TextComponentTranslation(this.getName());
 	}
 
 	@Override

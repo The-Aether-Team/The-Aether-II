@@ -7,6 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -22,9 +23,9 @@ public class ItemSkyrootSword extends ItemAetherSword
 
 	static
 	{
-		blacklistedItems.add(Items.saddle);
-		blacklistedItems.add(Items.skull);
-		blacklistedItems.add(Item.getItemFromBlock(Blocks.chest));
+		blacklistedItems.add(Items.SADDLE);
+		blacklistedItems.add(Items.SKULL);
+		blacklistedItems.add(Item.getItemFromBlock(Blocks.CHEST));
 	}
 
 	public ItemSkyrootSword()
@@ -35,24 +36,24 @@ public class ItemSkyrootSword extends ItemAetherSword
 	@SubscribeEvent
 	public void dropLoot(LivingDropsEvent event)
 	{
-		if (event.source.getSourceOfDamage() instanceof EntityPlayer)
+		if (event.getSource().getSourceOfDamage() instanceof EntityPlayer)
 		{
-			EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
+			EntityPlayer player = (EntityPlayer) event.getSource().getSourceOfDamage();
 
-			if (player.getHeldItem() != null && player.getHeldItem().getItem() == this)
+			if (player.getHeldItem(EnumHand.MAIN_HAND) != null && player.getHeldItem(EnumHand.MAIN_HAND).getItem() == this)
 			{
 				List<ItemStack> stacks = new ArrayList<>();
 
-				for (EntityItem item : event.drops)
+				for (EntityItem item : event.getDrops())
 				{
 					stacks.add(item.getEntityItem());
 				}
 
 				for (ItemStack stack : stacks)
 				{
-					EntityItem item = new EntityItem(event.entityLiving.getEntityWorld(), event.entity.posX, event.entity.posY, event.entity.posZ, stack);
+					EntityItem item = new EntityItem(event.getEntity().getEntityWorld(), event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, stack);
 
-					event.entityLiving.getEntityWorld().spawnEntityInWorld(item);
+					event.getEntity().getEntityWorld().spawnEntityInWorld(item);
 				}
 			}
 		}

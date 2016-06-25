@@ -1,18 +1,21 @@
 package com.gildedgames.aether.common.blocks.natural;
 
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import com.google.common.base.Predicate;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -30,23 +33,21 @@ public class BlockHolystone extends Block implements IAetherBlockWithVariants
 
 	public BlockHolystone()
 	{
-		super(Material.rock);
+		super(Material.ROCK);
 
 		this.setHardness(2.0F);
 		this.setResistance(10.0F);
 
-		this.setStepSound(Block.soundTypeStone);
+		this.setSoundType(SoundType.STONE);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, NORMAL_HOLYSTONE));
 	}
 
 	@Override
-	public boolean isReplaceableOreGen(World world, BlockPos pos, Predicate<IBlockState> target)
+	public boolean isReplaceableOreGen(IBlockState state, IBlockAccess world, BlockPos pos, Predicate<IBlockState> target)
 	{
-		if (target.apply(Blocks.stone.getDefaultState()))
+		if (target.apply(BlocksAether.holystone.getDefaultState()))
 		{
-			IBlockState state = world.getBlockState(pos);
-
 			if (state.getBlock() == this && state.getValue(PROPERTY_VARIANT) == NORMAL_HOLYSTONE)
 			{
 				return true;
@@ -70,7 +71,7 @@ public class BlockHolystone extends Block implements IAetherBlockWithVariants
 	}
 
 	@Override
-	public float getBlockHardness(World world, BlockPos pos)
+	public float getBlockHardness(IBlockState blockState, World world, BlockPos pos)
 	{
 		IBlockState state = world.getBlockState(pos);
 
@@ -90,9 +91,9 @@ public class BlockHolystone extends Block implements IAetherBlockWithVariants
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, PROPERTY_VARIANT);
+		return new BlockStateContainer(this, PROPERTY_VARIANT);
 	}
 
 	@Override

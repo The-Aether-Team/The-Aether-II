@@ -1,11 +1,13 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
@@ -17,13 +19,13 @@ import java.util.Random;
 
 public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 {
+	private static final AxisAlignedBB GRASS_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);
+
 	public BlockTallAetherGrass()
 	{
-		super(Material.plants);
+		super(Material.PLANTS);
 
-		this.setBlockBounds(0.1f, 0.0f, 0.1f, 0.9f, 0.8f, 0.9f);
-
-		this.setStepSound(Block.soundTypeGrass);
+		this.setSoundType(SoundType.PLANT);
 	}
 
 	@Override
@@ -55,7 +57,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	}
 
 	@Override
-	public boolean isReplaceable(World worldIn, BlockPos pos)
+	public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos)
 	{
 		return true;
 	}

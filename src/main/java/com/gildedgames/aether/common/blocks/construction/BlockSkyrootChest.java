@@ -3,12 +3,15 @@ package com.gildedgames.aether.common.blocks.construction;
 import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
@@ -19,15 +22,16 @@ import java.util.Iterator;
 
 public class BlockSkyrootChest extends BlockChest
 {
+	// TODO: fuck
 	public static final int CHEST_TYPE_ID = 2;
 
 	public BlockSkyrootChest()
 	{
-		super(CHEST_TYPE_ID);
+		super(Type.BASIC);
 
 		this.setHardness(2.5f);
 
-		this.setStepSound(Block.soundTypeWood);
+		this.setSoundType(SoundType.WOOD);
 	}
 
 	@Override
@@ -112,9 +116,8 @@ public class BlockSkyrootChest extends BlockChest
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public int getRenderType()
+	public EnumBlockRenderType getRenderType(IBlockState state)
 	{
-		return 2;
+		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
 	}
 }

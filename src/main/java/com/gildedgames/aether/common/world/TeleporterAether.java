@@ -9,22 +9,22 @@ import com.gildedgames.util.modules.world.common.BlockPosDimension;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import net.minecraft.block.BlockFlower;
-import net.minecraft.block.BlockLeavesBase;
+import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.ChunkCoordIntPair;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.event.world.ChunkEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.HashMap;
@@ -38,7 +38,7 @@ public class TeleporterAether extends Teleporter implements NBT
 	/**
 	 * Boolean here contains if the chunk is solid.
 	 */
-	public static Map<ChunkCoordIntPair, Boolean> chunksMarkedForPortal = new HashMap<>();
+	public static Map<ChunkPos, Boolean> chunksMarkedForPortal = new HashMap<>();
 
 	private final Random random;
 
@@ -65,9 +65,9 @@ public class TeleporterAether extends Teleporter implements NBT
 	{
 		this.previousWorld = entity.worldObj;
 
-		if (entity.dimension != this.worldServerInstance.provider.getDimensionId())
+		if (entity.dimension != this.worldServerInstance.provider.getDimension())
 		{
-			this.worldServerInstance = MinecraftServer.getServer().worldServerForDimension(entity.dimension);
+			this.worldServerInstance = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(entity.dimension);
 
 			boolean teleporterRegistered = false;
 
@@ -100,7 +100,7 @@ public class TeleporterAether extends Teleporter implements NBT
 		final int x = chunkX << 4;
 		final int z = chunkZ << 4;
 
-		final ChunkCoordIntPair chunkPosition = new ChunkCoordIntPair(chunkX, chunkZ);
+		final ChunkPos chunkPosition = new ChunkPos(chunkX, chunkZ);
 
 		boolean isSolid = false;
 
@@ -129,7 +129,7 @@ public class TeleporterAether extends Teleporter implements NBT
 	@SubscribeEvent
 	public void onChunkUnload(ChunkEvent.Unload event)
 	{
-		final ChunkCoordIntPair chunkPosition = new ChunkCoordIntPair(event.getChunk().xPosition,
+		final ChunkPos chunkPosition = new ChunkPos(event.getChunk().xPosition,
 				event.getChunk().zPosition);
 
 		chunksMarkedForPortal.remove(chunkPosition);
@@ -138,7 +138,7 @@ public class TeleporterAether extends Teleporter implements NBT
 	public BlockPosDimension getPortalPosition(World world, int x, int y, int z, boolean findPortalBlock)
 	{
 		final int radius = 2;
-		final BlockPosDimension check = new BlockPosDimension(x, y, z, world.provider.getDimensionId());
+		final BlockPosDimension check = new BlockPosDimension(x, y, z, world.provider.getDimension());
 
 		for (int x2 = x - radius; x2 < x + radius; ++x2)
 		{
@@ -146,7 +146,7 @@ public class TeleporterAether extends Teleporter implements NBT
 			{
 				for (int z2 = y - radius; z2 < y + radius; ++z2)
 				{
-					final BlockPosDimension pos = new BlockPosDimension(x2, z2, y2, world.provider.getDimensionId());
+					final BlockPosDimension pos = new BlockPosDimension(x2, z2, y2, world.provider.getDimension());
 
 					if (!findPortalBlock && (this.portalPairs.containsKey(pos) || this.portalPairs.containsValue(pos))
 							|| findPortalBlock && world.getBlockState(new BlockPos(x2, z2, y2))
@@ -178,13 +178,13 @@ public class TeleporterAether extends Teleporter implements NBT
 			if (entity instanceof EntityPlayerMP)
 			{
 				final EntityPlayerMP player = (EntityPlayerMP) entity;
-				final World world = MinecraftServer.getServer().worldServerForDimension(linkedPortal.dimId());
+				final World world = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(linkedPortal.dimId());
 				player.setPositionAndUpdate(linkedPortal.getX() + 1.5D, linkedPortal.getY(),
 						linkedPortal.getZ() + 1.5D);
 
 				this.worldServerInstance.updateEntityWithOptionalForce(player, true);
 
-				while (!world.getCollidingBoundingBoxes(player, player.getEntityBoundingBox()).isEmpty())
+				while (!world.getCollisionBoxes(player, player.getEntityBoundingBox()).isEmpty())
 				{
 					player.setPosition(player.posX, player.posY + 0.2D, player.posZ);
 				}
@@ -229,9 +229,9 @@ public class TeleporterAether extends Teleporter implements NBT
 		final int maxAttempts = 250;
 
 		final EnumFacing outerDirection = EnumFacing.HORIZONTALS[entity.worldObj.rand.nextInt(4)];
-		ChunkCoordIntPair outerPosition = new ChunkCoordIntPair(chunkX, chunkZ);
+		ChunkPos outerPosition = new ChunkPos(chunkX, chunkZ);
 
-		final boolean isWorldAether = this.worldServerInstance.provider.getDimensionId() == AetherCore.getAetherDimID();
+		final boolean isWorldAether = this.worldServerInstance.provider.getDimension() == AetherCore.getAetherDimID();
 
 		while (attempts < maxAttempts)
 		{
@@ -241,7 +241,7 @@ public class TeleporterAether extends Teleporter implements NBT
 			chunkX = outerPosition.chunkXPos + outerPosFacing.getFrontOffsetX();
 			chunkZ = outerPosition.chunkZPos + outerPosFacing.getFrontOffsetZ();
 
-			outerPosition = new ChunkCoordIntPair(chunkX, chunkZ);
+			outerPosition = new ChunkPos(chunkX, chunkZ);
 
 			if (isWorldAether)
 			{
@@ -297,7 +297,7 @@ public class TeleporterAether extends Teleporter implements NBT
 							final BlockPosDimension oldPortal = this.getPortalPosition(this.previousWorld, posX, posY,
 									posZ, true);
 							final BlockPosDimension linkedPortal = new BlockPosDimension(xInner, y1 + 1, zInner,
-									world.provider.getDimensionId());
+									world.provider.getDimension());
 
 							this.portalPairs.put(oldPortal, linkedPortal);
 
@@ -332,7 +332,7 @@ public class TeleporterAether extends Teleporter implements NBT
 		final int posY = y + 1;
 		final int posZ = z;
 
-		final IBlockState frameBlock = Blocks.glowstone.getDefaultState();
+		final IBlockState frameBlock = Blocks.GLOWSTONE.getDefaultState();
 		final IBlockState portalBlock = BlocksAether.aether_portal.getDefaultState()
 				.withProperty(BlockAetherPortal.PROPERTY_AXIS, EnumFacing.Axis.Z);
 
@@ -346,7 +346,7 @@ public class TeleporterAether extends Teleporter implements NBT
 					final int blockY = posY + yi;
 					final int blockZ = posZ + zi - 1;
 					world.setBlockState(new BlockPos(blockX, blockY, blockZ),
-							yi < 0 ? frameBlock : Blocks.air.getDefaultState());
+							yi < 0 ? frameBlock : Blocks.AIR.getDefaultState());
 				}
 			}
 		}
@@ -411,7 +411,7 @@ public class TeleporterAether extends Teleporter implements NBT
 
 			BlockPosDimension ourPortal;
 
-			if (portal1.dimId() == this.worldServerInstance.provider.getDimensionId())
+			if (portal1.dimId() == this.worldServerInstance.provider.getDimension())
 			{
 				ourPortal = portal1;
 			}
@@ -439,7 +439,7 @@ public class TeleporterAether extends Teleporter implements NBT
 		for (int i = world.getHeight(); i > 0; i--)
 		{
 			final IBlockState state = world.getBlockState(new BlockPos(x, i, z));
-			if (!GGHelper.isAir(state) && !(state.getBlock() instanceof BlockLeavesBase)
+			if (!GGHelper.isAir(state) && !(state.getBlock() instanceof BlockLeaves)
 					&& !(state.getBlock() instanceof BlockFlower))
 			{
 				return i - 1;

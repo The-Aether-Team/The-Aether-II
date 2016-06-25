@@ -12,9 +12,9 @@ public class EntityItemWatcher
 	@SubscribeEvent
 	public void onEntityJoinedWorld(EntityJoinWorldEvent event)
 	{
-		if (!event.world.isRemote && event.entity.getClass() == EntityItem.class)
+		if (!event.getWorld().isRemote && event.getEntity().getClass() == EntityItem.class)
 		{
-			EntityItem entity = (EntityItem) event.entity;
+			EntityItem entity = (EntityItem) event.getEntity();
 
 			ItemStack stack = entity.getEntityItem();
 
@@ -25,7 +25,7 @@ public class EntityItemWatcher
 				if (chillable.canChillItemstack(stack))
 				{
 					EntityPhoenixItem phoenixItem = new EntityPhoenixItem(entity);
-					event.world.spawnEntityInWorld(phoenixItem);
+					event.getWorld().spawnEntityInWorld(phoenixItem);
 
 					// We replace the entity in the world
 					event.setCanceled(true);

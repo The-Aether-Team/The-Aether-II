@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.entities.effects.rules;
 
 import com.gildedgames.aether.api.entities.effects.EntityEffectRule;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class InCombatRule implements EntityEffectRule
@@ -17,7 +17,7 @@ public class InCombatRule implements EntityEffectRule
 	@Override
 	public String[] getUnlocalizedDesc()
 	{
-		return new String[] { EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + "In Combat" };
+		return new String[] { TextFormatting.GRAY + "" + TextFormatting.ITALIC + "In Combat" };
 	}
 
 	@Override

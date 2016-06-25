@@ -1,12 +1,16 @@
 package com.gildedgames.aether.common.items.consumables;
 
 import com.gildedgames.aether.common.items.ItemsAether;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 public class ItemSkyrootConsumableBucket extends Item
@@ -17,36 +21,41 @@ public class ItemSkyrootConsumableBucket extends Item
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
+	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
-		player.setItemInUse(itemStack, this.getMaxItemUseDuration(itemStack));
+		playerIn.setActiveHand(hand);
 
-		return itemStack;
+		return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer player)
+	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase living)
 	{
-		if (!player.capabilities.isCreativeMode)
+		if (living instanceof EntityPlayer)
 		{
-			--stack.stackSize;
+			EntityPlayer player = (EntityPlayer) living;
+
+			if (!((EntityPlayer) living).capabilities.isCreativeMode)
+			{
+				--stack.stackSize;
+			}
+
+			player.addStat(StatList.getObjectUseStats(this));
 		}
 
 		if (!world.isRemote)
 		{
-			this.applyEffect(stack, world, player);
+			this.applyEffect(stack, world, living);
 		}
-
-		player.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
 
 		return stack.stackSize <= 0 ? new ItemStack(ItemsAether.skyroot_bucket) : stack;
 	}
 
-	private void applyEffect(ItemStack stack, World world, EntityPlayer player)
+	private void applyEffect(ItemStack stack, World world, EntityLivingBase player)
 	{
 		if (stack.getItem() == ItemsAether.skyroot_milk_bucket)
 		{
-			player.curePotionEffects(new ItemStack(Items.milk_bucket));
+			player.curePotionEffects(new ItemStack(Items.MILK_BUCKET));
 		}
 		else if (stack.getItem() == ItemsAether.skyroot_poison_bucket)
 		{

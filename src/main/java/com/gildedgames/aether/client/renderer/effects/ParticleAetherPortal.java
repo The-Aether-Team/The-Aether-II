@@ -1,11 +1,11 @@
 package com.gildedgames.aether.client.renderer.effects;
 
-import net.minecraft.client.particle.EntityPortalFX;
+import net.minecraft.client.particle.ParticlePortal;
 import net.minecraft.world.World;
 
-public class EntityAetherPortalFX extends EntityPortalFX
+public class ParticleAetherPortal extends ParticlePortal
 {
-	public EntityAetherPortalFX(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
+	public ParticleAetherPortal(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
 		super(world, posX, posY, posZ, motionX, motionY, motionZ);
 

@@ -20,7 +20,7 @@ public class ItemElementalSword extends ItemAetherSword
 					@Override
 					public void onEntityAttacked(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
 					{
-						int fireMultiplier = EnchantmentHelper.getEnchantmentLevel(Enchantment.fireAspect.effectId, stack);
+						int fireMultiplier = EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByLocation("fire_aspect"), stack);
 
 						target.setFire(6 + (fireMultiplier * 4));
 					}
@@ -32,7 +32,7 @@ public class ItemElementalSword extends ItemAetherSword
 					{
 						if (!target.worldObj.isRemote)
 						{
-							target.worldObj.addWeatherEffect(new EntityLightningBolt(target.worldObj, target.posX, target.posY, target.posZ));
+							target.worldObj.addWeatherEffect(new EntityLightningBolt(target.worldObj, target.posX, target.posY, target.posZ, false));
 						}
 					}
 				},

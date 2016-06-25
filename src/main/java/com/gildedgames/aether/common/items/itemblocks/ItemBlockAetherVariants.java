@@ -1,15 +1,17 @@
 package com.gildedgames.aether.common.items.itemblocks;
 
 import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
+import com.sun.deploy.model.Resource;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 public class ItemBlockAetherVariants extends ItemBlock
 {
 	private final IAetherBlockWithVariants blockWithVariants;
 
-	public ItemBlockAetherVariants(Block block)
+	public ItemBlockAetherVariants(Block block, ResourceLocation location)
 	{
 		super(block);
 		this.blockWithVariants = (IAetherBlockWithVariants) block;

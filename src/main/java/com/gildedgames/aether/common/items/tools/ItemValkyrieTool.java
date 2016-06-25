@@ -4,9 +4,9 @@ import com.gildedgames.aether.common.AetherMaterials;
 
 public class ItemValkyrieTool extends ItemAetherTool
 {
-	public ItemValkyrieTool(EnumToolType toolType)
+	public ItemValkyrieTool(EnumToolType toolType, float attackDamage, float attackSpeed)
 	{
-		super(AetherMaterials.LEGENDARY_TOOL, "valkyrie", toolType);
+		super(AetherMaterials.LEGENDARY_TOOL, "valkyrie", toolType, attackDamage, attackSpeed);
 
 		this.setHarvestLevel(toolType.getToolClass(), 3);
 	}

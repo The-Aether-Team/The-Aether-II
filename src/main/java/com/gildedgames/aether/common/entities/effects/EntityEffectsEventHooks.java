@@ -18,7 +18,7 @@ public class EntityEffectsEventHooks
 	@SubscribeEvent
 	public void onLivingUpdate(LivingUpdateEvent event)
 	{
-		IEntityEffectsCapability effects = EntityEffects.get(event.entityLiving);
+		IEntityEffectsCapability effects = EntityEffects.get(event.getEntityLiving());
 
 		if (effects != null)
 		{
@@ -29,7 +29,7 @@ public class EntityEffectsEventHooks
 	@SubscribeEvent
 	public void onLivingEntityHurt(LivingHurtEvent event)
 	{
-		IEntityEffectsCapability effects = EntityEffects.get(event.entityLiving);
+		IEntityEffectsCapability effects = EntityEffects.get(event.getEntityLiving());
 
 		if (effects != null)
 		{
@@ -40,7 +40,7 @@ public class EntityEffectsEventHooks
 	@SubscribeEvent
 	public void onLivingDropsEvent(LivingDropsEvent event)
 	{
-		Entity entity = event.source.getSourceOfDamage();
+		Entity entity = event.getSource().getSourceOfDamage();
 
 		if (entity == null)
 		{
@@ -61,7 +61,7 @@ public class EntityEffectsEventHooks
 	@SubscribeEvent
 	public void onPlayerInteract(PlayerInteractEvent event)
 	{
-		EntityPlayer entity = event.entityPlayer;
+		EntityPlayer entity = event.getEntityPlayer();
 
 		IEntityEffectsCapability effects = EntityEffects.get(entity);
 
@@ -77,7 +77,7 @@ public class EntityEffectsEventHooks
 	@SubscribeEvent
 	public void onPickupXP(PlayerPickupXpEvent event)
 	{
-		EntityPlayer entity = event.entityPlayer;
+		EntityPlayer entity = event.getEntityPlayer();
 
 		IEntityEffectsCapability effects = EntityEffects.get(entity);
 
@@ -93,7 +93,7 @@ public class EntityEffectsEventHooks
 	@SubscribeEvent
 	public void onLivingAttack(LivingHurtEvent event)
 	{
-		Entity entity = event.source.getSourceOfDamage();
+		Entity entity = event.getSource().getSourceOfDamage();
 
 		if (entity == null)
 		{

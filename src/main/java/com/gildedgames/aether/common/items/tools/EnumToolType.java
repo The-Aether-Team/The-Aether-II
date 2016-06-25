@@ -8,27 +8,25 @@ import java.util.Set;
 
 public enum EnumToolType
 {
+	// TODO: 1.10
 	// It might be a good idea to look into using reflection instead of
 	// copying the lists out of the respective tool classes.
 
-	PICKAXE("pickaxe", 2f, Sets.newHashSet(Blocks.activator_rail, Blocks.coal_ore, Blocks.cobblestone, Blocks.detector_rail, Blocks.diamond_block, Blocks.diamond_ore, Blocks.double_stone_slab,
-			Blocks.golden_rail, Blocks.gold_block, Blocks.gold_ore, Blocks.ice, Blocks.iron_block, Blocks.iron_ore, Blocks.lapis_block, Blocks.lapis_ore, Blocks.lit_redstone_ore,
-			Blocks.mossy_cobblestone, Blocks.netherrack, Blocks.packed_ice, Blocks.rail, Blocks.redstone_ore, Blocks.sandstone, Blocks.red_sandstone, Blocks.stone, Blocks.stone_slab)),
+	PICKAXE("pickaxe", Sets.newHashSet(Blocks.ACTIVATOR_RAIL, Blocks.COAL_ORE, Blocks.COBBLESTONE, Blocks.DETECTOR_RAIL, Blocks.DIAMOND_BLOCK, Blocks.DIAMOND_ORE, Blocks.DOUBLE_STONE_SLAB,
+			Blocks.GOLDEN_RAIL, Blocks.GOLD_BLOCK, Blocks.GOLD_ORE, Blocks.ICE, Blocks.IRON_BLOCK, Blocks.IRON_ORE, Blocks.LAPIS_BLOCK, Blocks.LAPIS_ORE, Blocks.LIT_REDSTONE_ORE,
+			Blocks.MOSSY_COBBLESTONE, Blocks.NETHERRACK, Blocks.PACKED_ICE, Blocks.RAIL, Blocks.REDSTONE_ORE, Blocks.SANDSTONE, Blocks.RED_SANDSTONE, Blocks.STONE, Blocks.STONE_SLAB)),
 
-	AXE("axe", 3f, Sets.newHashSet(Blocks.planks, Blocks.bookshelf, Blocks.log, Blocks.log2, Blocks.chest, Blocks.pumpkin, Blocks.lit_pumpkin, Blocks.melon_block, Blocks.ladder)),
+	AXE("axe", Sets.newHashSet(Blocks.PLANKS, Blocks.BOOKSHELF, Blocks.LOG, Blocks.LOG2, Blocks.CHEST, Blocks.PUMPKIN, Blocks.LIT_PUMPKIN, Blocks.MELON_BLOCK, Blocks.LADDER)),
 
-	SHOVEL("shovel", 1f, Sets.newHashSet(Blocks.clay, Blocks.dirt, Blocks.farmland, Blocks.grass, Blocks.gravel, Blocks.mycelium, Blocks.sand, Blocks.snow, Blocks.snow_layer, Blocks.soul_sand));
+	SHOVEL("shovel", Sets.newHashSet(Blocks.CLAY, Blocks.DIRT, Blocks.FARMLAND, Blocks.GRASS, Blocks.GRAVEL, Blocks.MYCELIUM, Blocks.SAND, Blocks.SNOW, Blocks.SNOW_LAYER, Blocks.SOUL_SAND));
 
 	private final String toolClass;
 
-	private final float baseDamage;
-
 	private final Set<Block> effectiveBlocks;
 
-	EnumToolType(String toolClass, float baseDamage, Set<Block> effectiveBlocks)
+	EnumToolType(String toolClass, Set<Block> effectiveBlocks)
 	{
 		this.toolClass = toolClass;
-		this.baseDamage = baseDamage;
 		this.effectiveBlocks = effectiveBlocks;
 	}
 
@@ -40,10 +38,5 @@ public enum EnumToolType
 	public Set<Block> getEffectiveBlocks()
 	{
 		return this.effectiveBlocks;
-	}
-
-	public float getBaseDamage()
-	{
-		return this.baseDamage;
 	}
 }

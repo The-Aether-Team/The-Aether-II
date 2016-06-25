@@ -19,7 +19,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 
 public class TileEntityHolystoneFurnace extends TileEntityLockable implements ITickable, ISidedInventory
 {
@@ -159,7 +159,7 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 		}
 	}
 
-	public void writeToNBT(NBTTagCompound compound)
+	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
 
@@ -189,6 +189,8 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 		{
 			compound.setString("CustomName", this.customName);
 		}
+
+		return compound;
 	}
 
 	public int getInventoryStackLimit()
@@ -338,11 +340,11 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 				this.containedItemStacks[2].stackSize += itemstack.stackSize;
 			}
 
-			if (this.containedItemStacks[0].getItem() == Item.getItemFromBlock(Blocks.sponge)
+			if (this.containedItemStacks[0].getItem() == Item.getItemFromBlock(Blocks.SPONGE)
 					&& this.containedItemStacks[0].getMetadata() == 1 && this.containedItemStacks[1] != null
-					&& this.containedItemStacks[1].getItem() == Items.bucket)
+					&& this.containedItemStacks[1].getItem() == Items.BUCKET)
 			{
-				this.containedItemStacks[1] = new ItemStack(Items.water_bucket);
+				this.containedItemStacks[1] = new ItemStack(Items.WATER_BUCKET);
 			}
 
 			--this.containedItemStacks[0].stackSize;
@@ -393,7 +395,7 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 		{
 			Item item = stack.getItem();
 
-			if (item != Items.water_bucket && item != Items.bucket)
+			if (item != Items.WATER_BUCKET && item != Items.BUCKET)
 			{
 				return false;
 			}

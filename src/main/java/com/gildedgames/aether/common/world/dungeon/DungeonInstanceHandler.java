@@ -6,6 +6,7 @@ import net.minecraft.world.World;
 
 import com.gildedgames.util.modules.instances.InstanceHandler;
 import com.gildedgames.util.modules.world.common.BlockPosDimension;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class DungeonInstanceHandler
 {
@@ -49,12 +50,12 @@ public class DungeonInstanceHandler
 			
 			inst.flagGenerated();*/
 
-			inst.getGenerator().generateLayout(inst, inst.getRoomProvider(), MinecraftServer.getServer().worldServerForDimension(inst.getDimIdInside()).rand);
+			inst.getGenerator().generateLayout(inst, inst.getRoomProvider(), FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(inst.getDimIdInside()).rand);
 		}
 		
 		World world = this.handler.teleportPlayerToDimension(inst, player);
 		
-		player.playerNetServerHandler.setPlayerLocation(inst.getInsideEntrance().getX(), inst.getInsideEntrance().getY(), inst.getInsideEntrance().getZ(), 0, 0);
+		player.connection.setPlayerLocation(inst.getInsideEntrance().getX(), inst.getInsideEntrance().getY(), inst.getInsideEntrance().getZ(), 0, 0);
 	}
 
 	public void teleportBack(EntityPlayerMP player)

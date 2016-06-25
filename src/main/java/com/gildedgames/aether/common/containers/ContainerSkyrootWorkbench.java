@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ContainerWorkbench;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class ContainerSkyrootWorkbench extends ContainerWorkbench

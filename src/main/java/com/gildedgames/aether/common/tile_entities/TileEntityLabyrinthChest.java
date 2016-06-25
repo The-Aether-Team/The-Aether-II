@@ -3,9 +3,9 @@ package com.gildedgames.aether.common.tile_entities;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
-import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
@@ -13,12 +13,11 @@ import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityLockable;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -30,7 +29,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 	public float prevLidAngle;
 	public int numPlayersUsing;
 	private int ticksSinceSync;
-	private int cachedChestType;
+	private BlockChest.Type cachedChestType;
 	private String customName;
 
 	// Chest can only be single.
@@ -41,7 +40,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 
 	public TileEntityLabyrinthChest()
 	{
-		this.cachedChestType = -1;
+		this.cachedChestType = BlockChest.Type.BASIC;
 	}
 
 	public void updateContainingBlockInfo()
@@ -93,7 +92,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 				d1 += 0.5D;
 			}
 
-			this.worldObj.playSoundEffect(d1, (double)j + 0.5D, d2, "random.chestopen", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+			this.worldObj.playSound(d1, (double)j + 0.5D, d2, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F, false);
 		}
 
 		if (this.numPlayersUsing == 0 && this.lidAngle > 0.0F || this.numPlayersUsing > 0 && this.lidAngle < 1.0F)
@@ -131,7 +130,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 					d3 += 0.5D;
 				}
 
-				this.worldObj.playSoundEffect(d3, (double)j + 0.5D, d0, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+				this.worldObj.playSound(d3, (double)j + 0.5D, d0, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F, false);
 			}
 
 			if (this.lidAngle < 0.0F)
@@ -141,21 +140,20 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 		}
 	}
 
-	public int getChestType()
+	public BlockChest.Type getChestType()
 	{
-		if (this.cachedChestType == -1)
+		if (this.cachedChestType == null)
 		{
-			if (this.worldObj == null || !(this.getBlockType() instanceof BlockLabyrinthChest))
+			if (this.worldObj == null || !(this.getBlockType() instanceof BlockChest))
 			{
-				return 0;
+				return BlockChest.Type.BASIC;
 			}
 
-			this.cachedChestType = ((BlockLabyrinthChest)this.getBlockType()).chestType;
+			this.cachedChestType = ((BlockChest)this.getBlockType()).chestType;
 		}
 
 		return this.cachedChestType;
 	}
-
 
 	private boolean isChestAt(BlockPos posIn)
 	{
@@ -370,7 +368,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 		}
 	}
 
-	public void writeToNBT(NBTTagCompound compound)
+	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
 		NBTTagList nbttaglist = new NBTTagList();
@@ -392,12 +390,8 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 		{
 			compound.setString("CustomName", this.customName);
 		}
-	}
 
-	@SideOnly(Side.CLIENT)
-	public TileEntityLabyrinthChest(int chestType)
-	{
-		this.cachedChestType = chestType;
+		return compound;
 	}
 
 	public net.minecraftforge.items.IItemHandler getSingleChestHandler()

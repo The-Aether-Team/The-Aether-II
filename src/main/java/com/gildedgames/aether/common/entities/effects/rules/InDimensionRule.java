@@ -24,7 +24,7 @@ public class InDimensionRule implements EntityEffectRule
 	@Override
 	public String[] getUnlocalizedDesc()
 	{
-		return new String[] { "In the " + DimensionManager.getProvider(this.dimID).getDimensionName() };
+		return new String[] { "In the " + DimensionManager.getProvider(this.dimID).getDimensionType().getName() };
 	}
 
 	@Override

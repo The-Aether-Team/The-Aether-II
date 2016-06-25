@@ -8,7 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
@@ -66,9 +66,9 @@ public class ModifySpeedEffect implements EntityEffectProcessor<Instance>
 	{
 		float movementSpeedMod = instance.getAttributes().getFloat("movementSpeedMod");
 
-		String prefix = movementSpeedMod > 0 ? (EnumChatFormatting.BLUE + "+") : (EnumChatFormatting.RED + "");
+		String prefix = movementSpeedMod > 0 ? (TextFormatting.BLUE + "+") : (TextFormatting.RED + "");
 
-		float value = (float) (movementSpeedMod / SharedMonsterAttributes.movementSpeed.getDefaultValue()) * 100;
+		float value = (float) (movementSpeedMod / SharedMonsterAttributes.MOVEMENT_SPEED.getDefaultValue()) * 100;
 
 		String par = prefix + (int) (value) + "%";
 
@@ -85,7 +85,7 @@ public class ModifySpeedEffect implements EntityEffectProcessor<Instance>
 
 		EntityLivingBase living = (EntityLivingBase) source;
 
-		living.getEntityAttribute(SharedMonsterAttributes.movementSpeed).applyModifier(instance.getModifier());
+		living.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).applyModifier(instance.getModifier());
 	}
 
 	@Override
@@ -104,7 +104,7 @@ public class ModifySpeedEffect implements EntityEffectProcessor<Instance>
 
 		EntityLivingBase living = (EntityLivingBase) source;
 
-		living.getEntityAttribute(SharedMonsterAttributes.movementSpeed).removeModifier(instance.getModifier());
+		living.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(instance.getModifier());
 	}
 
 	@Override

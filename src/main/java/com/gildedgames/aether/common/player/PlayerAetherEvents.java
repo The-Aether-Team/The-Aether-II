@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.player;
 
-import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTBase;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -10,15 +9,11 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.chunk.AetherPlaceFlagChunkHook;
 import com.gildedgames.util.modules.chunk.ChunkModule;
 
@@ -27,7 +22,7 @@ public class PlayerAetherEvents
 	@SubscribeEvent
 	public void onDeath(LivingDeathEvent event)
 	{
-		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.entity);
+		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.getEntity());
 
 		if (aePlayer != null)
 		{
@@ -38,7 +33,7 @@ public class PlayerAetherEvents
 	@SubscribeEvent
 	public void onDrops(LivingDropsEvent event)
 	{
-		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.entity);
+		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.getEntity());
 
 		if (aePlayer != null)
 		{
@@ -49,7 +44,7 @@ public class PlayerAetherEvents
 	@SubscribeEvent
 	public void onUpdate(LivingUpdateEvent event)
 	{
-		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.entity);
+		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.getEntity());
 
 		if (aePlayer != null)
 		{
@@ -60,7 +55,7 @@ public class PlayerAetherEvents
 	@SubscribeEvent
 	public void onFall(LivingFallEvent event)
 	{
-		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.entity);
+		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.getEntity());
 
 		if (aePlayer != null)
 		{
@@ -71,7 +66,7 @@ public class PlayerAetherEvents
 	@SubscribeEvent
 	public void onJump(LivingJumpEvent event)
 	{
-		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.entity);
+		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.getEntity());
 
 		if (aePlayer != null)
 		{
@@ -82,18 +77,18 @@ public class PlayerAetherEvents
 	@SubscribeEvent
 	public void onCalculateBreakSpeed(PlayerEvent.BreakSpeed event)
 	{
-		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.entity);
+		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.getEntity());
 
 		if (aePlayer != null)
 		{
-			event.newSpeed = event.originalSpeed * aePlayer.getMiningSpeedMultiplier();
+			event.setNewSpeed(event.getOriginalSpeed() * aePlayer.getMiningSpeedMultiplier());
 		}
 	}
 
 	@SubscribeEvent
 	public void onLivingEntityHurt(LivingHurtEvent event)
 	{
-		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.entity);
+		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.getEntity());
 
 		if (aePlayer != null)
 		{
@@ -104,11 +99,11 @@ public class PlayerAetherEvents
 	@SubscribeEvent
 	public void onPlayerClone(PlayerEvent.Clone event)
 	{
-		IPlayerAetherCapability oldPlayer = PlayerAether.getPlayer(event.original);
+		IPlayerAetherCapability oldPlayer = PlayerAether.getPlayer(event.getOriginal());
 
 		if (oldPlayer != null)
 		{
-			IPlayerAetherCapability newPlayer = PlayerAether.getPlayer(event.entity);
+			IPlayerAetherCapability newPlayer = PlayerAether.getPlayer(event.getEntity());
 
 			Capability.IStorage<IPlayerAetherCapability> storage = AetherCapabilities.PLAYER_DATA.getStorage();
 
@@ -121,9 +116,9 @@ public class PlayerAetherEvents
 	@SubscribeEvent
 	public void onPlaceBlockEvent(BlockEvent.PlaceEvent event)
 	{
-		AetherPlaceFlagChunkHook data = ChunkModule.api().getHook(event.world, event.pos, AetherPlaceFlagChunkHook.class);
+		AetherPlaceFlagChunkHook data = ChunkModule.api().getHook(event.getWorld(), event.getPos(), AetherPlaceFlagChunkHook.class);
 
-		int x = event.pos.getX(), y = event.pos.getY(), z = event.pos.getZ();
+		int x = event.getPos().getX(), y = event.getPos().getY(), z = event.getPos().getZ();
 
 		if (data != null)
 		{

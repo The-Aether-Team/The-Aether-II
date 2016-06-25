@@ -4,10 +4,8 @@ import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiController
 import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthTotem;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockTeleporter extends BlockMultiController
 {

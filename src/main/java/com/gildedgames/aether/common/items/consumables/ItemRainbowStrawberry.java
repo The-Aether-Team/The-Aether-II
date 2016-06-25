@@ -19,8 +19,8 @@ public class ItemRainbowStrawberry extends ItemFood
 	{
 		if (!worldIn.isRemote)
 		{
-			player.addPotionEffect(new PotionEffect(Potion.resistance.id, 200, 1));
-			player.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 200, 1));
+			player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("resistance"), 200, 1));
+			player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("dig_speed"), 200, 1));
 		}
 
 		super.onFoodEaten(stack, worldIn, player);

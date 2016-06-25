@@ -5,7 +5,7 @@ import com.gildedgames.util.core.nbt.NBTHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 
 public class TileEntityMultiblockDummy extends TileEntity implements TileEntityMultiblockInterface
 {
@@ -58,10 +58,12 @@ public class TileEntityMultiblockDummy extends TileEntity implements TileEntityM
 		this.controllerPos = NBTHelper.readBlockPos(compound, "controller");
 	}
 
-	public void writeToNBT(NBTTagCompound compound)
+	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
 
 		NBTHelper.writeBlockPos(compound, "controller", this.controllerPos);
+
+		return compound;
 	}
 }

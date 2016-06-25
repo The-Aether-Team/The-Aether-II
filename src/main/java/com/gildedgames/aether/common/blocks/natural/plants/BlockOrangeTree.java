@@ -5,16 +5,17 @@ import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -29,15 +30,13 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 
 	public BlockOrangeTree()
 	{
-		super(Material.leaves);
+		super(Material.LEAVES);
 
 		this.setHardness(1f);
 
 		this.setTickRandomly(true);
 
-		this.setBlockBounds(0.3f, 0.0F, 0.3f, 0.7f, 0.6f, 0.7f);
-
-		this.setStepSound(Block.soundTypeGrass);
+		this.setSoundType(SoundType.PLANT);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_IS_TOP_BLOCK, false).withProperty(PROPERTY_STAGE, 1));
 	}
@@ -64,9 +63,9 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te)
+	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te, ItemStack stack)
 	{
-		player.triggerAchievement(StatList.mineBlockStatArray[getIdFromBlock(this)]);
+		player.addStat(StatList.getBlockStats(this));
 		player.addExhaustion(0.025F);
 	}
 
@@ -86,10 +85,8 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public boolean removedByPlayer(World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
+	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
 	{
-		IBlockState state = world.getBlockState(pos);
-
 		boolean isRoot = !state.getValue(PROPERTY_IS_TOP_BLOCK);
 
 		BlockPos adjPos = isRoot ? pos.up() : pos.down();
@@ -137,9 +134,9 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, PROPERTY_IS_TOP_BLOCK, PROPERTY_STAGE);
+		return new BlockStateContainer(this, PROPERTY_IS_TOP_BLOCK, PROPERTY_STAGE);
 	}
 
 	@Override
@@ -159,9 +156,9 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public boolean isSuitableSoilBlock(Block soilBlock)
+	public boolean isSuitableSoilBlock(IBlockState state)
 	{
-		return soilBlock == this || super.isSuitableSoilBlock(soilBlock);
+		return state.getBlock() == this || super.isSuitableSoilBlock(state);
 	}
 
 	private void dropOranges(World world, BlockPos pos)

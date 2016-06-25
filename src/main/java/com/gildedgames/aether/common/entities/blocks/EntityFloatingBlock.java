@@ -8,9 +8,11 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.BlockPos;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -20,7 +22,9 @@ import java.util.List;
 
 public class EntityFloatingBlock extends Entity
 {
-	private static final int BLOCK_NAME_ID = 20, BLOCK_STATE_ID = 21;
+	private static final DataParameter<Integer> BLOCK_NAME = new DataParameter<>(20, DataSerializers.VARINT);
+
+	private static final DataParameter<Byte> BLOCK_METADATA = new DataParameter<>(21, DataSerializers.BYTE);
 
 	private final List<ItemStack> drops = new ArrayList<>();
 
@@ -54,8 +58,8 @@ public class EntityFloatingBlock extends Entity
 	@Override
 	protected void entityInit()
 	{
-		this.dataWatcher.addObjectByDataType(BLOCK_STATE_ID, 2);
-		this.dataWatcher.addObjectByDataType(BLOCK_NAME_ID, 4);
+		this.dataManager.register(BLOCK_NAME, 2);
+		this.dataManager.register(BLOCK_METADATA, (byte) 4);
 	}
 
 	@Override
@@ -195,7 +199,7 @@ public class EntityFloatingBlock extends Entity
 
 		Block block = state.getBlock();
 
-		compound.setString("Block", Block.blockRegistry.getNameForObject(block).toString());
+		compound.setString("Block", Block.REGISTRY.getNameForObject(block).toString());
 		compound.setByte("BlockState", (byte) block.getMetaFromState(state));
 		compound.setInteger("TicksExisted", this.ticksExisted);
 
@@ -214,8 +218,8 @@ public class EntityFloatingBlock extends Entity
 
 	public IBlockState getBlockState()
 	{
-		Block block = Block.getBlockFromName(this.dataWatcher.getWatchableObjectString(BLOCK_NAME_ID));
-		int meta = this.dataWatcher.getWatchableObjectInt(BLOCK_STATE_ID);
+		Block block = Block.getBlockById(this.dataManager.get(BLOCK_NAME));
+		int meta = this.dataManager.get(BLOCK_METADATA);
 
 		return block.getStateFromMeta(meta);
 	}
@@ -224,7 +228,7 @@ public class EntityFloatingBlock extends Entity
 	{
 		Block block = state.getBlock();
 
-		this.dataWatcher.updateObject(BLOCK_NAME_ID, Block.blockRegistry.getNameForObject(block).toString());
-		this.dataWatcher.updateObject(BLOCK_STATE_ID, block.getMetaFromState(state));
+		this.dataManager.set(BLOCK_NAME, Block.REGISTRY.getIDForObject(block));
+		this.dataManager.set(BLOCK_METADATA, (byte) block.getMetaFromState(state));
 	}
 }

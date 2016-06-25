@@ -5,15 +5,15 @@ import net.minecraft.item.ItemStack;
 
 public class ItemZaniteTool extends ItemAetherTool
 {
-	public ItemZaniteTool(EnumToolType toolType)
+	public ItemZaniteTool(EnumToolType toolType, float attackDamage, float attackSpeed)
 	{
-		super(ToolMaterial.IRON, "zanite", toolType);
+		super(ToolMaterial.IRON, "zanite", toolType, attackDamage, attackSpeed);
 
 		this.setHarvestLevel(toolType.getToolClass(), 2);
 	}
 
 	@Override
-	public float getDigSpeed(ItemStack stack, IBlockState state)
+	public float getStrVsBlock(ItemStack stack, IBlockState state)
 	{
 		for (String type : this.getToolClasses(stack))
 		{
@@ -23,6 +23,6 @@ public class ItemZaniteTool extends ItemAetherTool
 			}
 		}
 
-		return super.getDigSpeed(stack, state);
+		return super.getStrVsBlock(stack, state);
 	}
 }

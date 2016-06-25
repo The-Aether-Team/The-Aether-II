@@ -1,19 +1,21 @@
 package com.gildedgames.aether.client;
 
+import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
+import com.gildedgames.aether.common.items.armor.ItemObsidianArmor;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.AetherMovementPacket;
 import com.gildedgames.aether.common.player.PlayerAether;
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import com.gildedgames.aether.common.items.armor.ItemObsidianArmor;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
+import net.minecraft.util.SoundCategory;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
@@ -57,7 +59,7 @@ public class ClientEventHandler
 						{
 							NetworkingAether.sendPacketToServer(new AetherMovementPacket(AetherMovementPacket.Action.EXTRA_JUMP));
 
-							player.worldObj.playSound(player.posX, player.posY, player.posZ, "mob.enderdragon.wings", 0.4f, 0.8f + (player.worldObj.rand.nextFloat() * 0.6f), false);
+							player.worldObj.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ENDERDRAGON_FLAP, SoundCategory.PLAYERS, 0.4f, 0.8f + (player.worldObj.rand.nextFloat() * 0.6f), false);
 						}
 					}
 				}
@@ -75,7 +77,7 @@ public class ClientEventHandler
 	@SubscribeEvent
 	public void onWorldLoad(WorldEvent.Load event)
 	{
-		if (event.world instanceof WorldClient)
+		if (event.getWorld() instanceof WorldClient)
 		{
 			Minecraft mc = Minecraft.getMinecraft();
 

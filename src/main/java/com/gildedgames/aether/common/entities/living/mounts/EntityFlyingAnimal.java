@@ -3,13 +3,23 @@ package com.gildedgames.aether.common.entities.living.mounts;
 import com.gildedgames.aether.common.entities.living.EntityAetherAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+
 public abstract class EntityFlyingAnimal extends EntityAetherAnimal
 {
+	private static final DataParameter<Boolean> SADDLED = new DataParameter<>(16, DataSerializers.BOOLEAN);
+
 	@SideOnly(Side.CLIENT)
 	public float wingFold, wingAngle;
 
@@ -23,7 +33,7 @@ public abstract class EntityFlyingAnimal extends EntityAetherAnimal
 	{
 		super.entityInit();
 
-		this.dataWatcher.addObject(16, (byte) 0);
+		this.dataManager.register(SADDLED, false);
 	}
 
 	@Override
@@ -52,33 +62,35 @@ public abstract class EntityFlyingAnimal extends EntityAetherAnimal
 	}
 
 	@Override
-	public boolean interact(EntityPlayer player)
+	public EnumActionResult applyPlayerInteraction(EntityPlayer player, Vec3d vec, ItemStack stack, EnumHand hand)
 	{
-		if (super.interact(player))
+		EnumActionResult result = super.applyPlayerInteraction(player, vec, stack, hand);
+
+		if (result == EnumActionResult.SUCCESS)
 		{
-			return true;
+			return EnumActionResult.SUCCESS;
 		}
 
 		if (!this.worldObj.isRemote)
 		{
-			if (this.isSaddled() && this.riddenByEntity == null)
+			if (this.isSaddled() && this.isBeingRidden())
 			{
-				player.mountEntity(this);
+				player.startRiding(this, true);
 
-				return true;
+				return EnumActionResult.SUCCESS;
 			}
-			else if (player.getHeldItem() != null && player.getHeldItem().getItem() == Items.saddle)
+			else if (player.getActiveItemStack() != null && player.getActiveItemStack().getItem() == Items.SADDLE)
 			{
 				this.setIsSaddled(true);
 
 				if (!player.capabilities.isCreativeMode)
 				{
-					player.getHeldItem().stackSize--;
+					player.getActiveItemStack().stackSize--;
 				}
 			}
 		}
 
-		return false;
+		return EnumActionResult.FAIL;
 	}
 
 	@Override
@@ -109,17 +121,17 @@ public abstract class EntityFlyingAnimal extends EntityAetherAnimal
 	{
 		if (this.isSaddled())
 		{
-			this.dropItem(Items.saddle, 1);
+			this.dropItem(Items.SADDLE, 1);
 		}
 	}
 
 	public boolean isSaddled()
 	{
-		return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
+		return this.dataManager.get(SADDLED);
 	}
 
 	public void setIsSaddled(boolean isSaddled)
 	{
-		this.dataWatcher.updateObject(16, (byte) (isSaddled ? 1 : 0));
+		this.dataManager.set(SADDLED, isSaddled);
 	}
 }

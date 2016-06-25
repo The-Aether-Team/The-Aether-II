@@ -12,14 +12,23 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+
 public class EntityAechorPlant extends EntityMob
 {
-	private static final int canSeePreyID = 16, plantSizeID = 17;
+	private static final DataParameter<Boolean> CAN_SEE_PREY = new DataParameter<>(16, DataSerializers.BOOLEAN);
+
+	private static final DataParameter<Byte> PLANT_SIZE = new DataParameter<>(16, DataSerializers.BYTE);
 
 	@SideOnly(Side.CLIENT)
 	public float sinage;
@@ -47,8 +56,8 @@ public class EntityAechorPlant extends EntityMob
 	{
 		super.entityInit();
 
-		this.dataWatcher.addObject(EntityAechorPlant.canSeePreyID, (byte) 0);
-		this.dataWatcher.addObject(EntityAechorPlant.plantSizeID, 0);
+		this.dataManager.register(EntityAechorPlant.CAN_SEE_PREY, Boolean.FALSE);
+		this.dataManager.register(EntityAechorPlant.PLANT_SIZE, (byte) 0);
 
 		this.setPlantSize(this.rand.nextInt(3));
 	}
@@ -57,8 +66,8 @@ public class EntityAechorPlant extends EntityMob
 	{
 		super.applyEntityAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(3.5F);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20);
+		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(3.5F);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20);
 	}
 
 	@Override
@@ -103,14 +112,12 @@ public class EntityAechorPlant extends EntityMob
 	}
 
 	@Override
-	protected boolean interact(EntityPlayer player)
+	public EnumActionResult applyPlayerInteraction(EntityPlayer player, Vec3d vec, ItemStack stack, EnumHand hand)
 	{
 		if (this.getPoisonLeft() <= 0)
 		{
-			return false;
+			return EnumActionResult.FAIL;
 		}
-
-		ItemStack stack = player.getHeldItem();
 
 		if (stack != null && stack.getItem() == ItemsAether.skyroot_bucket)
 		{
@@ -119,7 +126,7 @@ public class EntityAechorPlant extends EntityMob
 			this.setPoisonLeft(this.getPoisonLeft() - 1);
 		}
 
-		return false;
+		return EnumActionResult.SUCCESS;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -162,22 +169,22 @@ public class EntityAechorPlant extends EntityMob
 
 	public boolean canSeePrey()
 	{
-		return this.dataWatcher.getWatchableObjectByte(EntityAechorPlant.canSeePreyID) == 1;
+		return this.dataManager.get(EntityAechorPlant.CAN_SEE_PREY);
 	}
 
 	public void setCanSeePrey(boolean canSee)
 	{
-		this.dataWatcher.updateObject(EntityAechorPlant.canSeePreyID, (byte) (canSee ? 1 : 0));
+		this.dataManager.set(EntityAechorPlant.CAN_SEE_PREY, canSee);
 	}
 
 	public int getPlantSize()
 	{
-		return this.dataWatcher.getWatchableObjectInt(EntityAechorPlant.plantSizeID);
+		return this.dataManager.get(EntityAechorPlant.PLANT_SIZE);
 	}
 
 	public void setPlantSize(int size)
 	{
-		this.dataWatcher.updateObject(EntityAechorPlant.plantSizeID, size);
+		this.dataManager.set(EntityAechorPlant.PLANT_SIZE, (byte) size);
 	}
 
 	public int getPoisonLeft()

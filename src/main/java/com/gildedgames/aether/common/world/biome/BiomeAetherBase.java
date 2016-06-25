@@ -1,23 +1,22 @@
 package com.gildedgames.aether.common.world.biome;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 
 import java.util.Random;
 
-public abstract class BiomeGenAetherBase extends BiomeGenBase
+public abstract class BiomeAetherBase extends Biome
 {
 	private final BiomeDecoratorAether biomeDecorator = new BiomeDecoratorAether();
 
-	public BiomeGenAetherBase(int id)
+	public BiomeAetherBase(int id)
 	{
-		super(id);
+		super(new BiomeProperties("aether_generic").setRainDisabled().setTemperature(0.5f));
 
-		this.setBiomeName("Aether");
-		this.setDisableRain();
-		this.setTemperatureRainfall(0.5f, 0f);
+		this.setRegistryName(AetherCore.getResource("aether_generic"));
 
 		this.topBlock = BlocksAether.aether_grass.getDefaultState();
 		this.fillerBlock = BlocksAether.aether_dirt.getDefaultState();
@@ -45,4 +44,5 @@ public abstract class BiomeGenAetherBase extends BiomeGenBase
 	{
 		this.biomeDecorator.genDecorations(world, random, pos, this);
 	}
+
 }

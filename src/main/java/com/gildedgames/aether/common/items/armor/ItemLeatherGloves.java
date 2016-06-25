@@ -16,26 +16,6 @@ public class ItemLeatherGloves extends ItemAetherGloves
 		super(GloveType.LEATHER);
 	}
 
-	@Override
-	public int getColorFromItemStack(ItemStack stack, int renderPass)
-	{
-		if (renderPass > 0)
-		{
-			return 16777215;
-		}
-		else
-		{
-			int color = this.getColor(stack);
-
-			if (color < 0)
-			{
-				color = 16777215;
-			}
-
-			return color;
-		}
-	}
-
 	public boolean hasColor(ItemStack stack)
 	{
 		return stack.hasTagCompound() && (stack.getTagCompound().hasKey("display", 10) && stack.getTagCompound().getCompoundTag("display").hasKey("color", 3));

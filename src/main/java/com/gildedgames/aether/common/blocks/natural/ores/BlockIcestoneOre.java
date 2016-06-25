@@ -2,10 +2,11 @@ package com.gildedgames.aether.common.blocks.natural.ores;
 
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 
 import java.util.Random;
 
@@ -13,11 +14,11 @@ public class BlockIcestoneOre extends BlockAetherOre
 {
 	public BlockIcestoneOre()
 	{
-		super(Material.rock);
+		super(Material.ROCK);
 
 		this.setHardness(3f);
 
-		this.setStepSound(Block.soundTypeStone);
+		this.setSoundType(SoundType.STONE);
 	}
 
 	@Override

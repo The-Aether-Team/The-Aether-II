@@ -8,8 +8,8 @@ import net.minecraft.client.gui.GuiUtilRenderComponents;
 import net.minecraft.client.model.ModelSign;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
 import org.lwjgl.opengl.GL11;
 
 import java.util.List;
@@ -107,9 +107,9 @@ public class TileEntitySkyrootSignRenderer extends TileEntitySpecialRenderer<Til
 			{
 				if (te.signText[i] != null)
 				{
-					IChatComponent text = te.signText[i];
+					ITextComponent text = te.signText[i];
 
-					List<IChatComponent> list = GuiUtilRenderComponents.splitText(text, 90, fontrenderer, false, true);
+					List<ITextComponent> list = GuiUtilRenderComponents.splitText(text, 90, fontrenderer, false, true);
 
 					String line = list != null && list.size() > 0 ? list.get(0).getFormattedText() : "";
 

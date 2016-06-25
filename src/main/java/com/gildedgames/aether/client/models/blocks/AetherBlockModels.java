@@ -14,9 +14,9 @@ import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 
@@ -57,14 +57,14 @@ public class AetherBlockModels
 			@Override
 			protected ModelResourceLocation getModelResourceLocation(IBlockState state)
 			{
-				LinkedHashMap<IProperty, Comparable> mappings = Maps.newLinkedHashMap(state.getProperties());
+				LinkedHashMap<IProperty<?>, Comparable<?>> mappings = Maps.newLinkedHashMap(state.getProperties());
 
 				if (state.getValue(BlockAercloud.PROPERTY_VARIANT) != BlockAercloud.PURPLE_AERCLOUD)
 				{
 					mappings.remove(BlockAercloud.PROPERTY_FACING);
 				}
 
-				ResourceLocation resource = Block.blockRegistry.getNameForObject(state.getBlock());
+				ResourceLocation resource = Block.REGISTRY.getNameForObject(state.getBlock());
 
 				return new ModelResourceLocation(resource, this.getPropertyString(mappings));
 			}
@@ -75,7 +75,7 @@ public class AetherBlockModels
 			@Override
 			protected ModelResourceLocation getModelResourceLocation(IBlockState state)
 			{
-				LinkedHashMap<IProperty, Comparable> mappings = Maps.newLinkedHashMap(state.getProperties());
+				LinkedHashMap<IProperty<?>, Comparable<?>> mappings = Maps.newLinkedHashMap(state.getProperties());
 
 				if (state.getValue(BlockOrangeTree.PROPERTY_IS_TOP_BLOCK))
 				{
@@ -86,7 +86,7 @@ public class AetherBlockModels
 					}
 				}
 
-				ResourceLocation resourceLocation = Block.blockRegistry.getNameForObject(state.getBlock());
+				ResourceLocation resourceLocation = Block.REGISTRY.getNameForObject(state.getBlock());
 
 				return new ModelResourceLocation(resourceLocation, this.getPropertyString(mappings));
 			}

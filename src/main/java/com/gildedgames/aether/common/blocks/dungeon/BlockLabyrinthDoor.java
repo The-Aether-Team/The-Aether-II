@@ -4,13 +4,13 @@ import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiController
 import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthDoor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockLabyrinthDoor extends BlockMultiController
@@ -60,8 +60,8 @@ public class BlockLabyrinthDoor extends BlockMultiController
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, PROPERTY_FACING);
+		return new BlockStateContainer(this, PROPERTY_FACING);
 	}
 }

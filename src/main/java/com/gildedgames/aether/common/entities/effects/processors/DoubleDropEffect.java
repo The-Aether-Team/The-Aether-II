@@ -67,7 +67,7 @@ public class DoubleDropEffect implements EntityEffectProcessor<Instance>
 	@Override
 	public void onKill(LivingDropsEvent event, Entity source, List<Instance> all)
 	{
-		EntityLivingBase target = event.entityLiving;
+		EntityLivingBase target = event.getEntityLiving();
 
 		if (target instanceof EntityPlayer)
 		{
@@ -93,7 +93,7 @@ public class DoubleDropEffect implements EntityEffectProcessor<Instance>
 		{
 			List<ItemStack> stacks = new ArrayList<>();
 
-			for (EntityItem item : event.drops)
+			for (EntityItem item : event.getDrops())
 			{
 				if (!ItemSkyrootSword.blacklistedItems.contains(item.getEntityItem().getItem()))
 				{

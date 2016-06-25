@@ -32,7 +32,7 @@ public class ItemContinuumOrb extends Item
 
 			if (!player.inventory.addItemStackToInventory(randStack))
 			{
-				player.dropPlayerItemWithRandomChoice(randStack, false);
+				player.dropItem(randStack, false);
 			}
 
 			return stack;

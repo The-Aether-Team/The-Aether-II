@@ -11,7 +11,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 
 import java.util.List;
@@ -40,22 +39,20 @@ public class DaggerfrostEffect implements EffectProcessorPlayer<EntityEffectInst
 	public void onInteract(PlayerInteractEvent event, EntityPlayer source, List<EntityEffectInstance> instances)
 	{
 		World world = source.worldObj;
-		ItemStack currentStack = source.getCurrentEquippedItem();
+
+		ItemStack currentStack = source.getActiveItemStack();
 
 		if (currentStack != null && currentStack.getItem() instanceof ItemSnowball)
 		{
-			if (event.action == Action.RIGHT_CLICK_AIR || event.action == Action.RIGHT_CLICK_BLOCK)
+			if (!world.isRemote)
 			{
-				if (!world.isRemote)
+				world.spawnEntityInWorld(new EntityDaggerfrostSnowball(world, source));
+
+				event.setCanceled(true);
+
+				if (!source.capabilities.isCreativeMode)
 				{
-					world.spawnEntityInWorld(new EntityDaggerfrostSnowball(world, source));
-
-					event.setCanceled(true);
-
-					if (!source.capabilities.isCreativeMode)
-					{
-						--currentStack.stackSize;
-					}
+					--currentStack.stackSize;
 				}
 			}
 		}

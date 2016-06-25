@@ -12,18 +12,22 @@ import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.play.server.S2BPacketChangeGameState;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.network.play.server.SPacketChangeGameState;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -32,15 +36,17 @@ import java.util.List;
 
 public class EntityBolt extends Entity implements IProjectile
 {
+	private static final DataParameter<Boolean> CRITICAL = EntityDataManager.createKey(EntityBolt.class, DataSerializers.BOOLEAN);
+
+	private static final DataParameter<Byte> BOLT_TYPE = EntityDataManager.createKey(EntityBolt.class, DataSerializers.BYTE);
+
 	private int ticksInAir, ticksInGround;
 
 	private boolean inGround;
 
 	private int xTile, yTile, zTile;
 
-	private Block inBlock;
-
-	private int inMeta;
+	private IBlockState inBlock;
 
 	private Entity shootingEntity;
 
@@ -56,8 +62,6 @@ public class EntityBolt extends Entity implements IProjectile
 	{
 		super(world);
 
-		this.renderDistanceWeight = 10.0D;
-
 		this.setSize(0.5F, 0.5F);
 	}
 
@@ -65,7 +69,6 @@ public class EntityBolt extends Entity implements IProjectile
 	{
 		super(world);
 
-		this.renderDistanceWeight = 10.0D;
 		this.shootingEntity = shooter;
 
 		if (shooter instanceof EntityPlayer)
@@ -123,8 +126,8 @@ public class EntityBolt extends Entity implements IProjectile
 	@Override
 	protected void entityInit()
 	{
-		this.dataWatcher.addObject(16, (byte) 0);
-		this.dataWatcher.addObject(17, (byte) 0);
+		this.dataManager.register(CRITICAL, Boolean.FALSE);
+		this.dataManager.register(BOLT_TYPE, (byte) 0);
 	}
 
 	public void setThrowableHeading(double x, double y, double z, float velocity, float inaccuracy)
@@ -191,15 +194,12 @@ public class EntityBolt extends Entity implements IProjectile
 		BlockPos pos = new BlockPos(this.xTile, this.yTile, this.zTile);
 
 		IBlockState state = this.worldObj.getBlockState(pos);
-		Block block = state.getBlock();
 
-		if (block.getMaterial() != Material.air)
+		if (state.getMaterial() != Material.AIR)
 		{
-			block.setBlockBoundsBasedOnState(this.worldObj, pos);
+			AxisAlignedBB boundingBox = state.getCollisionBoundingBox(this.worldObj, pos);
 
-			AxisAlignedBB boundingBox = block.getCollisionBoundingBox(this.worldObj, pos, state);
-
-			if (boundingBox != null && boundingBox.isVecInside(new Vec3(this.posX, this.posY, this.posZ)))
+			if (boundingBox != null && boundingBox.isVecInside(new Vec3d(this.posX, this.posY, this.posZ)))
 			{
 				this.inGround = true;
 			}
@@ -212,9 +212,7 @@ public class EntityBolt extends Entity implements IProjectile
 
 		if (this.inGround)
 		{
-			int meta = block.getMetaFromState(state);
-
-			if (block == this.inBlock && meta == this.inMeta)
+			if (state.equals(this.inBlock))
 			{
 				++this.ticksInGround;
 
@@ -239,16 +237,16 @@ public class EntityBolt extends Entity implements IProjectile
 		{
 			this.ticksInAir++;
 
-			Vec3 posVec = new Vec3(this.posX, this.posY, this.posZ);
-			Vec3 nextPosVec = new Vec3(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-			MovingObjectPosition raytrace = this.worldObj.rayTraceBlocks(posVec, nextPosVec, false, true, false);
+			Vec3d posVec = new Vec3d(this.posX, this.posY, this.posZ);
+			Vec3d nextPosVec = new Vec3d(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+			RayTraceResult raytrace = this.worldObj.rayTraceBlocks(posVec, nextPosVec, false, true, false);
 
-			posVec = new Vec3(this.posX, this.posY, this.posZ);
-			nextPosVec = new Vec3(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+			posVec = new Vec3d(this.posX, this.posY, this.posZ);
+			nextPosVec = new Vec3d(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
 			if (raytrace != null)
 			{
-				nextPosVec = new Vec3(raytrace.hitVec.xCoord, raytrace.hitVec.yCoord, raytrace.hitVec.zCoord);
+				nextPosVec = new Vec3d(raytrace.hitVec.xCoord, raytrace.hitVec.yCoord, raytrace.hitVec.zCoord);
 			}
 
 			Entity closestEntity = null;
@@ -266,7 +264,7 @@ public class EntityBolt extends Entity implements IProjectile
 					boundaries = 0.3F;
 
 					AxisAlignedBB boundingBox = entity.getEntityBoundingBox().expand((double) boundaries, (double) boundaries, (double) boundaries);
-					MovingObjectPosition intercept = boundingBox.calculateIntercept(posVec, nextPosVec);
+					RayTraceResult intercept = boundingBox.calculateIntercept(posVec, nextPosVec);
 
 					if (intercept != null)
 					{
@@ -283,7 +281,7 @@ public class EntityBolt extends Entity implements IProjectile
 
 			if (closestEntity != null)
 			{
-				raytrace = new MovingObjectPosition(closestEntity);
+				raytrace = new RayTraceResult(closestEntity);
 			}
 
 			if (raytrace != null && raytrace.entityHit != null && raytrace.entityHit instanceof EntityPlayer)
@@ -348,11 +346,11 @@ public class EntityBolt extends Entity implements IProjectile
 
 							if (this.shootingEntity != null && raytrace.entityHit != this.shootingEntity && raytrace.entityHit instanceof EntityPlayer && this.shootingEntity instanceof EntityPlayerMP)
 							{
-								((EntityPlayerMP) this.shootingEntity).playerNetServerHandler.sendPacket(new S2BPacketChangeGameState(6, 0.0F));
+								((EntityPlayerMP) this.shootingEntity).connection.sendPacket(new SPacketChangeGameState(6, 0.0F));
 							}
 						}
 
-						this.playSound("random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+						this.playSound(SoundEvents.ENTITY_ARROW_HIT_PLAYER, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
 
 						if (!(raytrace.entityHit instanceof EntityEnderman))
 						{
@@ -381,8 +379,7 @@ public class EntityBolt extends Entity implements IProjectile
 
 					state = this.worldObj.getBlockState(raytracePos);
 
-					this.inBlock = state.getBlock();
-					this.inMeta = this.inBlock.getMetaFromState(state);
+					this.inBlock = state;
 
 					this.motionX = (double) ((float) (raytrace.hitVec.xCoord - this.posX));
 					this.motionY = (double) ((float) (raytrace.hitVec.yCoord - this.posY));
@@ -394,16 +391,16 @@ public class EntityBolt extends Entity implements IProjectile
 					this.posY -= this.motionY / (double) speed * 0.05D;
 					this.posZ -= this.motionZ / (double) speed * 0.05D;
 
-					this.playSound("random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+					this.playSound(SoundEvents.ENTITY_ARROW_HIT, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
 
 					this.inGround = true;
 					this.boltShake = 7;
 
 					this.setIsCritical(false);
 
-					if (this.inBlock.getMaterial() != Material.air)
+					if (this.inBlock.getMaterial() != Material.AIR)
 					{
-						this.inBlock.onEntityCollidedWithBlock(this.worldObj, raytracePos, state, this);
+						this.inBlock.getBlock().onEntityCollidedWithBlock(this.worldObj, raytracePos, state, this);
 					}
 				}
 			}
@@ -489,7 +486,7 @@ public class EntityBolt extends Entity implements IProjectile
 
 			if (canPickup)
 			{
-				this.playSound("random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+				this.playSound(SoundEvents.ENTITY_ITEM_PICKUP, 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 
 				player.onItemPickup(this, 1);
 
@@ -506,16 +503,21 @@ public class EntityBolt extends Entity implements IProjectile
 		this.zTile = tagCompund.getShort("zTile");
 		this.ticksInGround = tagCompund.getShort("life");
 
+		Block block;
+
 		if (tagCompund.hasKey("inBlock", 8))
 		{
-			this.inBlock = Block.getBlockFromName(tagCompund.getString("inBlock"));
+			block = Block.getBlockFromName(tagCompund.getString("inBlock"));
 		}
 		else
 		{
-			this.inBlock = Block.getBlockById(tagCompund.getByte("inBlock") & 255);
+			block = Block.getBlockById(tagCompund.getByte("inBlock") & 255);
 		}
 
-		this.inMeta = tagCompund.getByte("inMeta") & 255;
+		int meta = tagCompund.getByte("inMeta") & 255;
+
+		this.inBlock = block.getStateFromMeta(meta);
+
 		this.boltShake = tagCompund.getByte("shake") & 255;
 		this.inGround = tagCompund.getBoolean("inGround");
 
@@ -537,14 +539,14 @@ public class EntityBolt extends Entity implements IProjectile
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound tagCompound)
 	{
-		ResourceLocation blockName = Block.blockRegistry.getNameForObject(this.inBlock);
+		ResourceLocation blockName = Block.REGISTRY.getNameForObject(this.inBlock.getBlock());
 
 		tagCompound.setShort("xTile", (short) this.xTile);
 		tagCompound.setShort("yTile", (short) this.yTile);
 		tagCompound.setShort("zTile", (short) this.zTile);
 		tagCompound.setShort("life", (short) this.ticksInGround);
 		tagCompound.setString("inTile", blockName == null ? "" : blockName.toString());
-		tagCompound.setByte("inData", (byte) this.inMeta);
+		tagCompound.setByte("inData", (byte) this.inBlock.getBlock().getMetaFromState(this.inBlock));
 		tagCompound.setByte("shake", (byte) this.boltShake);
 		tagCompound.setBoolean("inGround", this.inGround);
 		tagCompound.setByte("pickup", (byte) this.canPickup);
@@ -563,22 +565,22 @@ public class EntityBolt extends Entity implements IProjectile
 
 	public boolean isCritical()
 	{
-		return this.dataWatcher.getWatchableObjectByte(16) == 1;
+		return this.dataManager.get(CRITICAL);
 	}
 
 	public void setIsCritical(boolean isCritical)
 	{
-		this.dataWatcher.updateObject(16, (byte) (isCritical ? 1 : 0));
+		this.dataManager.set(CRITICAL, isCritical);
 	}
 
 	public ItemBoltType getBoltType()
 	{
-		return ItemBoltType.fromOrdinal(this.dataWatcher.getWatchableObjectByte(17));
+		return ItemBoltType.fromOrdinal(this.dataManager.get(BOLT_TYPE));
 	}
 
 	public void setBoltType(ItemBoltType type)
 	{
-		this.dataWatcher.updateObject(17, (byte) type.ordinal());
+		this.dataManager.set(BOLT_TYPE, (byte) type.ordinal());
 	}
 
 	public void setDamage(double damage)

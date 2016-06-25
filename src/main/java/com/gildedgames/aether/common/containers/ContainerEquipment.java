@@ -1,18 +1,19 @@
 package com.gildedgames.aether.common.containers;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
-import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
-import com.gildedgames.aether.common.entities.effects.EntityEffects;
-import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
+import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.api.items.IItemEffectsCapability;
 import com.gildedgames.aether.api.items.IItemPropertiesCapability;
+import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
+import com.gildedgames.aether.common.containers.slots.SlotEquipment;
+import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
@@ -22,7 +23,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class ContainerEquipment extends ContainerPlayer
 {
-	/** See {@link GuiContainerCreative#field_147060_v} **/
+	/** See {@link GuiContainerCreative#basicInventory} **/
 	private static InventoryBasic dumbInventory = new InventoryBasic("fake", true, 46);
 
 	private final IPlayerAetherCapability aePlayer;
@@ -128,7 +129,7 @@ public class ContainerEquipment extends ContainerPlayer
 	}
 
 	@Override
-	public ItemStack slotClick(int slotId, int clickedButton, int mode, EntityPlayer player)
+	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player)
 	{
 		if (slotId == this.binSlot.slotNumber && player.capabilities.isCreativeMode)
 		{
@@ -181,7 +182,7 @@ public class ContainerEquipment extends ContainerPlayer
 			}
 		}
 
-		return super.slotClick(slotId, clickedButton, mode, player);
+		return super.slotClick(slotId, dragType, clickTypeIn, player);
 	}
 
 	private int getNextEmptySlot(ItemEquipmentType type)

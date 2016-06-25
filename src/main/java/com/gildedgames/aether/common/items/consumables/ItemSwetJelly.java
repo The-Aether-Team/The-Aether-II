@@ -9,7 +9,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -24,7 +26,7 @@ public class ItemSwetJelly extends ItemFood
 
 	static
 	{
-		ItemSwetJelly.growables.put(Blocks.dirt, Blocks.grass.getDefaultState());
+		ItemSwetJelly.growables.put(Blocks.DIRT, Blocks.GRASS.getDefaultState());
 		ItemSwetJelly.growables.put(BlocksAether.aether_dirt, BlocksAether.aether_grass.getDefaultState());
 	}
 
@@ -65,7 +67,7 @@ public class ItemSwetJelly extends ItemFood
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		IBlockState state = world.getBlockState(pos);
 
@@ -81,17 +83,17 @@ public class ItemSwetJelly extends ItemFood
 				{
 					BlockPos nPos = new BlockPos(x, pos.getY(), z);
 
-					if (world.getBlockState(nPos).getBlock() == state.getBlock() && !world.getBlockState(nPos.up()).getBlock().isNormalCube())
+					if (world.getBlockState(nPos).getBlock() == state.getBlock() && !world.getBlockState(nPos.up()).isNormalCube())
 					{
 						world.setBlockState(nPos, nState);
 					}
 				}
 			}
 
-			return true;
+			return EnumActionResult.SUCCESS;
 		}
 
-		return false;
+		return EnumActionResult.FAIL;
 	}
 
 	@Override

@@ -1,17 +1,18 @@
 package com.gildedgames.aether.common.blocks.construction.skyroot_fence;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 
 public class BlockSkyrootFence extends BlockFence
 {
-	public BlockSkyrootFence(Material material)
+	public BlockSkyrootFence()
 	{
-		super(material);
+		super(Material.WOOD, MapColor.WOOD);
 
 		this.setHardness(2.0F);
 		this.setResistance(5.0F);
-		this.setStepSound(Block.soundTypeWood);
+		this.setSoundType(SoundType.WOOD);
 	}
 }
