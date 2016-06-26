@@ -1,4 +1,5 @@
 {
+	"parent": "block/block",
 	"textures": {
 		"inside": "aether:blocks/holystone_furnace/holystone_furnace_inside",
 		"inside_dark": "aether:blocks/holystone_furnace/holystone_furnace_inside_dark",

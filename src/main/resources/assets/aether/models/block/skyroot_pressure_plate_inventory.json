@@ -1,6 +1,6 @@
 {
-  "parent": "block/pressure_plate_inventory",
-  "textures": {
-    "texture": "aether:blocks/skyroot_planks"
-  }
+	"parent": "block/pressure_plate_inventory",
+	"textures": {
+		"texture": "aether:blocks/skyroot_planks"
+	}
 }

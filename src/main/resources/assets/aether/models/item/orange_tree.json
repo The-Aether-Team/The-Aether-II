@@ -1,5 +1,5 @@
 {
-	"parent": "builtin/generated",
+	"parent": "item/generated",
 	"textures": {
 		"layer0": "aether:blocks/orange_tree/orange_tree_bottom_stage_1"
 	}

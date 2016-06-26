@@ -1,6 +1,6 @@
 {
-  "parent": "block/trapdoor_top",
-  "textures": {
-    "texture": "aether:blocks/skyroot_trapdoor"
-  }
+	"parent": "block/trapdoor_top",
+	"textures": {
+		"texture": "aether:blocks/skyroot_trapdoor"
+	}
 }

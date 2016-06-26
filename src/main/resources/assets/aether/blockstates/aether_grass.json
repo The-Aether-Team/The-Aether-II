@@ -6,7 +6,7 @@
 			{ "model": "aether:aether_grass/aether_grass", "y": 180 },
 			{ "model": "aether:aether_grass/aether_grass", "y": 270 }
 		],
-		"variant=enchanted": [ 
+		"variant=enchanted": [
 			{ "model": "aether:aether_grass/enchanted_aether_grass" },
 			{ "model": "aether:aether_grass/enchanted_aether_grass", "y": 90 },
 			{ "model": "aether:aether_grass/enchanted_aether_grass", "y": 180 },

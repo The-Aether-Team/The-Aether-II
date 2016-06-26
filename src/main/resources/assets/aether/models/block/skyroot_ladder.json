@@ -1,6 +1,6 @@
 {
-  "parent": "block/ladder",
-  "textures": {
-    "texture": "aether:blocks/skyroot_ladder"
-  }
+	"parent": "block/ladder",
+	"textures": {
+		"texture": "aether:blocks/skyroot_ladder"
+	}
 }
