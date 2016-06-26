@@ -1,43 +1,19 @@
 {
-	"forge_marker": 1,
-	"defaults": {
-		"textures": {
-			"wall": "aether:blocks/aether_log/skyroot_log_side",
-			"top": "aether:blocks/aether_log/skyroot_log_top"
+	"multipart": [
+		{   "when": { "up": "true" },
+			"apply": { "model": "aether:aether_wall/skyroot_log_wall_post" }
+		},
+		{   "when": { "north": "true" },
+			"apply": { "model": "aether:aether_wall/skyroot_log_wall_side", "uvlock": true }
+		},
+		{   "when": { "east": "true" },
+			"apply": { "model": "aether:aether_wall/skyroot_log_wall_side", "y": 90, "uvlock": true }
+		},
+		{   "when": { "south": "true" },
+			"apply": { "model": "aether:aether_wall/skyroot_log_wall_side", "y": 180, "uvlock": true }
+		},
+		{   "when": { "west": "true" },
+			"apply": { "model": "aether:aether_wall/skyroot_log_wall_side", "y": 270, "uvlock": true }
 		}
-	},
-	"variants": {
-		"east=false,north=false,south=false,up=false,west=false": { "model": "aether:aether_wall/special_models/wall_post_special_top" },
-		"east=false,north=true,south=false,up=false,west=false":  { "model": "aether:aether_wall/special_models/wall_n_special_top" },
-		"east=true,north=false,south=false,up=false,west=false":  { "model": "aether:aether_wall/special_models/wall_n_special_top", "y": 90, "uvlock": true },
-		"east=false,north=false,south=true,up=false,west=false":  { "model": "aether:aether_wall/special_models/wall_n_special_top", "y": 180, "uvlock": true },
-		"east=false,north=false,south=false,up=false,west=true":  { "model": "aether:aether_wall/special_models/wall_n_special_top", "y": 270, "uvlock": true },
-		"east=true,north=true,south=false,up=false,west=false":   { "model": "aether:aether_wall/special_models/wall_ne_special_top" },
-		"east=true,north=false,south=true,up=false,west=false":   { "model": "aether:aether_wall/special_models/wall_ne_special_top", "y": 90, "uvlock": true },
-		"east=false,north=false,south=true,up=false,west=true":   { "model": "aether:aether_wall/special_models/wall_ne_special_top", "y": 180, "uvlock": true },
-		"east=false,north=true,south=false,up=false,west=true":   { "model": "aether:aether_wall/special_models/wall_ne_special_top", "y": 270, "uvlock": true },
-		"east=false,north=true,south=true,up=false,west=false":   { "model": "wall_ns" },
-		"east=true,north=false,south=false,up=false,west=true":   { "model": "wall_ns", "y": 90, "uvlock": true },
-		"east=true,north=true,south=true,up=false,west=false":    { "model": "aether:aether_wall/special_models/wall_nse_special_top" },
-		"east=true,north=false,south=true,up=false,west=true":    { "model": "aether:aether_wall/special_models/wall_nse_special_top", "y": 90, "uvlock": true },
-		"east=false,north=true,south=true,up=false,west=true":    { "model": "aether:aether_wall/special_models/wall_nse_special_top", "y": 180, "uvlock": true },
-		"east=true,north=true,south=false,up=false,west=true":    { "model": "aether:aether_wall/special_models/wall_nse_special_top", "y": 270, "uvlock": true },
-		"east=true,north=true,south=true,up=false,west=true":     { "model": "aether:aether_wall/special_models/wall_nsew_special_top" },
-		"east=false,north=false,south=false,up=true,west=false":  { "model": "aether:aether_wall/special_models/wall_post_special_top" },
-		"east=false,north=true,south=false,up=true,west=false":   { "model": "aether:aether_wall/special_models/wall_n_special_top" },
-		"east=true,north=false,south=false,up=true,west=false":   { "model": "aether:aether_wall/special_models/wall_n_special_top", "y": 90, "uvlock": true },
-		"east=false,north=false,south=true,up=true,west=false":   { "model": "aether:aether_wall/special_models/wall_n_special_top", "y": 180, "uvlock": true },
-		"east=false,north=false,south=false,up=true,west=true":   { "model": "aether:aether_wall/special_models/wall_n_special_top", "y": 270, "uvlock": true },
-		"east=true,north=true,south=false,up=true,west=false":    { "model": "aether:aether_wall/special_models/wall_ne_special_top" },
-		"east=true,north=false,south=true,up=true,west=false":    { "model": "aether:aether_wall/special_models/wall_ne_special_top", "y": 90, "uvlock": true },
-		"east=false,north=false,south=true,up=true,west=true":    { "model": "aether:aether_wall/special_models/wall_ne_special_top", "y": 180, "uvlock": true },
-		"east=false,north=true,south=false,up=true,west=true":    { "model": "aether:aether_wall/special_models/wall_ne_special_top", "y": 270, "uvlock": true },
-		"east=false,north=true,south=true,up=true,west=false":    { "model": "wall_ns_above" },
-		"east=true,north=false,south=false,up=true,west=true":    { "model": "wall_ns_above", "y": 90, "uvlock": true },
-		"east=true,north=true,south=true,up=true,west=false":     { "model": "aether:aether_wall/special_models/wall_nse_special_top" },
-		"east=true,north=false,south=true,up=true,west=true":     { "model": "aether:aether_wall/special_models/wall_nse_special_top", "y": 90, "uvlock": true },
-		"east=false,north=true,south=true,up=true,west=true":     { "model": "aether:aether_wall/special_models/wall_nse_special_top", "y": 180, "uvlock": true },
-		"east=true,north=true,south=false,up=true,west=true":     { "model": "aether:aether_wall/special_models/wall_nse_special_top", "y": 270, "uvlock": true },
-		"east=true,north=true,south=true,up=true,west=true":      { "model": "aether:aether_wall/special_models/wall_nsew_special_top" }
-	}
+	]
 }

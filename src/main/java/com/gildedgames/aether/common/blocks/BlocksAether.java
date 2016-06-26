@@ -148,7 +148,7 @@ public class BlocksAether
 
 	public static BlockSkyrootLadder skyroot_ladder;
 
-	public static BlockAetherWall holystone_wall, holystone_wall_mossy, holystone_brick_wall, carved_stone_wall, icestone_wall, aerogel_wall, skyroot_log_wall,
+	public static BlockAetherWall holystone_wall, holystone_wall_mossy, holystone_brick_wall, carved_wall, icestone_wall, aerogel_wall, skyroot_log_wall,
 									divine_stone_wall, sentry_stone_wall, divine_sentry_stone_wall;
 
 	public static BlockTeleporter labyrinth_totem;
@@ -273,7 +273,7 @@ public class BlocksAether
 		holystone_wall = registerBlock("holystone_wall", new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		holystone_wall_mossy = registerBlock("holystone_wall_mossy", new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		holystone_brick_wall = registerBlock("holystone_brick_wall", new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
-		carved_stone_wall = registerBlock("carved_stone_wall", new BlockAetherWall(BlocksAether.carved_stone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
+		carved_wall = registerBlock("carved_wall", new BlockAetherWall(BlocksAether.carved_stone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		icestone_wall = registerBlock("icestone_wall", new BlockAetherWall(BlocksAether.icestone_bricks.getDefaultState(), 3.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		skyroot_log_wall = registerBlock("skyroot_log_wall", new BlockAetherWall(BlocksAether.skyroot_log.getDefaultState(), 2.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		aerogel_wall = registerBlock("aerogel_wall", new BlockAerogelWall(BlocksAether.aerogel.getDefaultState(), 1.0f, 10.f), AetherCreativeTabs.tabBlocks);
@@ -344,7 +344,7 @@ public class BlocksAether
 
 		holystone_wall.setHarvestLevel("pickaxe", 0);
 		holystone_wall_mossy.setHarvestLevel("pickaxe", 0);
-		carved_stone_wall.setHarvestLevel("pickaxe", 0);
+		carved_wall.setHarvestLevel("pickaxe", 0);
 		skyroot_log_wall.setHarvestLevel("axe", 0);
 		icestone_wall.setHarvestLevel("pickaxe", 1);
 		aerogel_wall.setHarvestLevel("pickaxe", 1);

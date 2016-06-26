@@ -136,7 +136,7 @@ public class RecipesAether implements IAltarRecipeRegistry
 				'X', new ItemStack(BlocksAether.skyroot_log));
 		registerShapedRecipe(new ItemStack(BlocksAether.icestone_wall, 6), "XXX", "XXX",
 				'X', new ItemStack(BlocksAether.icestone_bricks));
-		registerShapedRecipe(new ItemStack(BlocksAether.carved_stone_wall, 6), "XXX", "XXX",
+		registerShapedRecipe(new ItemStack(BlocksAether.carved_wall, 6), "XXX", "XXX",
 				'X', new ItemStack(BlocksAether.carved_stone));
 		registerShapedRecipe(new ItemStack(BlocksAether.aerogel_wall, 6), "XXX", "XXX",
 				'X', new ItemStack(BlocksAether.aerogel));

@@ -323,7 +323,7 @@ public class AetherItemModels
 		registerItemModels(new ItemModelList(BlocksAether.holystone_wall).add(0, "aether_wall/holystone_wall"));
 		registerItemModels(new ItemModelList(BlocksAether.holystone_wall_mossy).add(0, "aether_wall/mossy_wall"));
 		registerItemModels(new ItemModelList(BlocksAether.holystone_brick_wall).add(0, "aether_wall/holystone_brick_wall"));
-		registerItemModels(new ItemModelList(BlocksAether.carved_stone_wall).add(0, "aether_wall/carved_wall"));
+		registerItemModels(new ItemModelList(BlocksAether.carved_wall).add(0, "aether_wall/carved_wall"));
 		registerItemModels(new ItemModelList(BlocksAether.skyroot_log_wall).add(0, "aether_wall/skyroot_log_wall"));
 		registerItemModels(new ItemModelList(BlocksAether.icestone_wall).add(0, "aether_wall/icestone_wall"));
 		registerItemModels(new ItemModelList(BlocksAether.aerogel_wall).add(0, "aether_wall/aerogel_wall"));

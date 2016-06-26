@@ -1,0 +1,6 @@
+{
+	"parent": "block/wall_side",
+	"textures": {
+		"wall": "aether:blocks/icestone_bricks"
+	}
+}

@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.blocks.construction.aether_walls;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -164,11 +165,12 @@ public class BlockAetherWall extends Block
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
-		return state.withProperty(BlockAetherWall.UP, !worldIn.isAirBlock(pos.up()))
-				.withProperty(BlockAetherWall.NORTH, this.canConnectTo(worldIn, pos.north()))
-				.withProperty(BlockAetherWall.EAST, this.canConnectTo(worldIn, pos.east()))
-				.withProperty(BlockAetherWall.SOUTH, this.canConnectTo(worldIn, pos.south()))
-				.withProperty(BlockAetherWall.WEST, this.canConnectTo(worldIn, pos.west()));
+		boolean flag = this.canConnectTo(worldIn, pos.north());
+		boolean flag1 = this.canConnectTo(worldIn, pos.east());
+		boolean flag2 = this.canConnectTo(worldIn, pos.south());
+		boolean flag3 = this.canConnectTo(worldIn, pos.west());
+		boolean flag4 = flag && !flag1 && flag2 && !flag3 || !flag && flag1 && !flag2 && flag3;
+		return state.withProperty(UP, !flag4 || !worldIn.isAirBlock(pos.up())).withProperty(NORTH, flag).withProperty(EAST, flag1).withProperty(SOUTH, flag2).withProperty(WEST, flag3);
 	}
 
 	@Override
