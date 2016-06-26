@@ -12,7 +12,7 @@ public abstract class BiomeAetherBase extends Biome
 {
 	private final BiomeDecoratorAether biomeDecorator = new BiomeDecoratorAether();
 
-	public BiomeAetherBase(int id)
+	public BiomeAetherBase()
 	{
 		super(new BiomeProperties("aether_generic").setRainDisabled().setTemperature(0.5f));
 
@@ -44,5 +44,4 @@ public abstract class BiomeAetherBase extends Biome
 	{
 		this.biomeDecorator.genDecorations(world, random, pos, this);
 	}
-
 }

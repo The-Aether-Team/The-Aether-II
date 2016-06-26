@@ -2,34 +2,34 @@
 	"aeportal.portal": {
 		"category": "block",
 		"sounds": [
-			"aeportal/portal"
+			"aether:aeportal/portal"
 		]
 	},
 	"aemusic.day": {
 		"category": "music",
 		"sounds": [
 			{
-				"name": "aemusic/day1",
+				"name": "aether:aemusic/day1",
 				"stream": true
 			},
 			{
-				"name": "aemusic/day2",
+				"name": "aether:aemusic/day2",
 				"stream": true
 			},
 			{
-				"name": "aemusic/day3",
+				"name": "aether:aemusic/day3",
 				"stream": true
 			},
 			{
-				"name": "aemusic/day4",
+				"name": "aether:aemusic/day4",
 				"stream": true
 			},
 			{
-				"name": "aemusic/day5",
+				"name": "aether:aemusic/day5",
 				"stream": true
 			},
 			{
-				"name": "aemusic/day6",
+				"name": "aether:aemusic/day6",
 				"stream": true
 			}
 		]
@@ -38,11 +38,11 @@
 		"category": "music",
 		"sounds": [
 			{
-				"name": "aemusic/night1",
+				"name": "aether:aemusic/night1",
 				"stream": true
 			},
 			{
-				"name": "aemusic/night2",
+				"name": "aether:aemusic/night2",
 				"stream": true
 			}
 		]
@@ -51,7 +51,7 @@
 		"category": "record",
 		"sounds": [
 			{
-				"name": "aerecord/aerwhale",
+				"name": "aether:aerecord/aerwhale",
 				"stream": true
 			}
 		]
@@ -60,7 +60,7 @@
 		"category": "record",
 		"sounds": [
 			{
-				"name": "aerecord/approaches",
+				"name": "aether:aerecord/approaches",
 				"stream": true
 			}
 		]
@@ -69,7 +69,7 @@
 		"category": "record",
 		"sounds": [
 			{
-				"name": "aerecord/ascending_dawn",
+				"name": "aether:aerecord/ascending_dawn",
 				"stream": true
 			}
 		]
@@ -78,7 +78,7 @@
 		"category": "record",
 		"sounds": [
 			{
-				"name": "aerecord/demise",
+				"name": "aether:aerecord/demise",
 				"stream": true
 			}
 		]
@@ -87,7 +87,7 @@
 		"category": "record",
 		"sounds": [
 			{
-				"name": "aerecord/chase",
+				"name": "aether:aerecord/chase",
 				"stream": true
 			}
 		]
@@ -95,44 +95,44 @@
 	"aerandom.dart_shooter": {
 		"category": "neutral",
 		"sounds": [
-			"aerandom/dart_shooter"
+			"aether:aerandom/dart_shooter"
 		]
 	},
 	"aemob.aerbunny.lift": {
 		"category": "neutral",
 		"sounds": [
-			"aemob/aerbunny/lift"
+			"aether:aemob/aerbunny/lift"
 		]
 	},
 	"aemob.aerbunny.hurt": {
 		"category": "neutral",
 		"sounds": [
-			"aemob/aerbunny/hurt1",
-			"aemob/aerbunny/hurt2"
+			"aether:aemob/aerbunny/hurt1",
+			"aether:aemob/aerbunny/hurt2"
 		]
 	},
 	"aemob.aerbunny.death": {
 		"category": "neutral",
 		"sounds": [
-			"aemob/aerbunny/death"
+			"aether:aemob/aerbunny/death"
 		]
 	},
 	"aeblock.labyrinth_totem.drone": {
 		"category": "neutral",
 		"sounds": [
-			"aeblock/labyrinth_totem/drone"
+			"aether:aeblock/labyrinth_totem/drone"
 		]
 	},
 	"aeblock.labyrinth_totem.woosh": {
 		"category": "neutral",
 		"sounds": [
-			"aeblock/labyrinth_totem/woosh"
+			"aether:aeblock/labyrinth_totem/woosh"
 		]
 	},
 	"aeblock.aercloud.bounce": {
 		"category": "neutral",
 		"sounds": [
-			"aeblock/aercloud/bounce"
+			"aether:aeblock/aercloud/bounce"
 		]
 	}
 }

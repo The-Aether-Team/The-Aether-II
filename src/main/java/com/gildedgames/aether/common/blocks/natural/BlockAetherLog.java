@@ -9,29 +9,53 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockAetherLog extends Block
 {
-	public static final PropertyEnum<BlockLog.EnumAxis> PROPERTY_AXIS = PropertyEnum.create("axis", BlockLog.EnumAxis.class);
+	public static final PropertyEnum<BlockLog.EnumAxis> PROPERTY_LOG_AXIS = PropertyEnum.create("axis", BlockLog.EnumAxis.class);
 
 	public BlockAetherLog()
 	{
-		super(Material.WATER);
+		super(Material.WOOD);
 
 		this.setSoundType(SoundType.WOOD);
 
 		this.setHardness(2.0f);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.Y));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_LOG_AXIS, BlockLog.EnumAxis.Y));
 	}
 
 	@Override
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
-		return super.onBlockPlaced(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(PROPERTY_AXIS, BlockLog.EnumAxis.fromFacingAxis(facing.getAxis()));
+		return this.getStateFromMeta(meta).withProperty(PROPERTY_LOG_AXIS, BlockLog.EnumAxis.fromFacingAxis(facing.getAxis()));
+	}
+
+	@Override
+	public IBlockState withRotation(IBlockState state, Rotation rot)
+	{
+		switch (rot)
+		{
+		case COUNTERCLOCKWISE_90:
+		case CLOCKWISE_90:
+
+			switch (state.getValue(PROPERTY_LOG_AXIS))
+			{
+			case X:
+				return state.withProperty(PROPERTY_LOG_AXIS, BlockLog.EnumAxis.Z);
+			case Z:
+				return state.withProperty(PROPERTY_LOG_AXIS, BlockLog.EnumAxis.X);
+			default:
+				return state;
+			}
+
+		default:
+			return state;
+		}
 	}
 
 	@Override
@@ -73,7 +97,7 @@ public class BlockAetherLog extends Block
 			break;
 		}
 
-		return this.getDefaultState().withProperty(PROPERTY_AXIS, axis);
+		return this.getDefaultState().withProperty(PROPERTY_LOG_AXIS, axis);
 	}
 
 	@Override
@@ -81,7 +105,7 @@ public class BlockAetherLog extends Block
 	{
 		int meta = 0;
 
-		switch (state.getValue(PROPERTY_AXIS))
+		switch (state.getValue(PROPERTY_LOG_AXIS))
 		{
 		case Y:
 			meta |= 1;
@@ -118,6 +142,6 @@ public class BlockAetherLog extends Block
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, PROPERTY_AXIS);
+		return new BlockStateContainer(this, PROPERTY_LOG_AXIS);
 	}
 }

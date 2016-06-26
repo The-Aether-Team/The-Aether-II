@@ -153,9 +153,9 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
-		BlockPos adjacentBlock = pos.offset(side.getOpposite());
+		IBlockState adjacentState = world.getBlockState(pos.offset(side));
 
-		return world.getBlockState(adjacentBlock) != state && super.shouldSideBeRendered(state, world, pos, side);
+		return adjacentState.getBlock() != this || adjacentState != state;
 	}
 
 	@Override

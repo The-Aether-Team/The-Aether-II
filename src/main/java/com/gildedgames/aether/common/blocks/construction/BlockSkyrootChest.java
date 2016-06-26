@@ -15,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -22,12 +23,11 @@ import java.util.Iterator;
 
 public class BlockSkyrootChest extends BlockChest
 {
-	// TODO: fuck
-	public static final int CHEST_TYPE_ID = 2;
+	private static final BlockChest.Type TYPE = EnumHelper.addEnum(BlockChest.Type.class, "AETHER_SKYROOT", new Class<?>[0]);
 
 	public BlockSkyrootChest()
 	{
-		super(Type.BASIC);
+		super(BlockSkyrootChest.TYPE);
 
 		this.setHardness(2.5f);
 

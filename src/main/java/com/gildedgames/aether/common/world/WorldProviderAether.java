@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.world.biome.BiomeProviderAether;
+import com.gildedgames.aether.common.world.biome.BiomeAether;
 import com.gildedgames.aether.common.world.chunk.ChunkProviderAether;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
@@ -9,6 +9,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -22,7 +24,13 @@ public class WorldProviderAether extends WorldProvider
 	@Override
 	protected void createBiomeProvider()
 	{
-		this.biomeProvider = new BiomeProviderAether();
+		this.biomeProvider = new BiomeProviderSingle(new BiomeAether());
+	}
+
+	@Override
+	public Biome getBiomeForCoords(BlockPos pos)
+	{
+		return this.biomeProvider.getBiome(pos);
 	}
 
 	@Override
