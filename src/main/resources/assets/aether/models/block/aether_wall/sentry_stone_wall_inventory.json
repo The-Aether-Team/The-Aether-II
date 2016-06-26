@@ -1,6 +1,6 @@
 {
-    "parent": "block/wall_inventory",
-    "textures": {
-        "wall": "aether:blocks/dungeon/sentry_stone"
-    }
+	"parent": "block/wall_inventory",
+	"textures": {
+		"wall": "aether:blocks/dungeon/sentry_stone"
+	}
 }

@@ -1,6 +1,6 @@
 {
-  "parent": "block/button_pressed",
-  "textures": {
-    "texture": "aether:blocks/skyroot_planks"
-  }
+	"parent": "block/button_pressed",
+	"textures": {
+		"texture": "aether:blocks/skyroot_planks"
+	}
 }

@@ -3,7 +3,7 @@
 		"facing=up": {
 			"model": "aether:ambrosium_torch/ambrosium_torch"
 		},
-		"facing=east":{
+		"facing=east": {
 			"model": "aether:ambrosium_torch/ambrosium_torch_wall"
 		},
 		"facing=south": {

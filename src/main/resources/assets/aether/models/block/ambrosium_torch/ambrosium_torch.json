@@ -1,6 +1,6 @@
 {
-    "parent": "block/torch",
-    "textures": {
-        "torch": "aether:blocks/ambrosium_torch"
-    }
+	"parent": "block/torch",
+	"textures": {
+		"torch": "aether:blocks/ambrosium_torch"
+	}
 }

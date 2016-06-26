@@ -1,5 +1,5 @@
 {
-	"parent": "builtin/generated",
+	"parent": "item/generated",
 	"textures": {
 		"layer0": "aether:blocks/blueberry_bush/blueberry_bush_stem"
 	}

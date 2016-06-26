@@ -1,5 +1,5 @@
 {
-	"__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
+	"parent": "block/block",
 	"textures": {
 		"particle": "aether:blocks/labyrinth_chest/Labyrinth Chest Main Front",
 		"0": "aether:blocks/labyrinth_chest/Labyrinth Chest Main Side",
