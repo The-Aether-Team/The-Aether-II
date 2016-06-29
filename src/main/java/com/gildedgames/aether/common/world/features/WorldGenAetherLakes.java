@@ -2,8 +2,8 @@ package com.gildedgames.aether.common.world.features;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.util.BlockPosUtil;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
@@ -14,11 +14,15 @@ import java.util.Random;
 
 public class WorldGenAetherLakes extends WorldGenerator
 {
-	private Block fillBlock;
+	private final IBlockState grass;
 
-	public WorldGenAetherLakes(Block block)
+	private final IBlockState liquid;
+
+	public WorldGenAetherLakes(IBlockState block)
 	{
-		this.fillBlock = block;
+		this.grass = BlocksAether.aether_grass.getDefaultState();
+
+		this.liquid = block;
 	}
 
 	@Override
@@ -94,7 +98,7 @@ public class WorldGenAetherLakes extends WorldGenerator
 							return false;
 						}
 
-						if (y < 4 && !material.isSolid() && world.getBlockState(pos.add(x, y, z)).getBlock() != this.fillBlock)
+						if (y < 4 && !material.isSolid() && world.getBlockState(pos.add(x, y, z)).getBlock() != this.liquid)
 						{
 							return false;
 						}
@@ -111,7 +115,7 @@ public class WorldGenAetherLakes extends WorldGenerator
 				{
 					if (aboolean[(x * 16 + z) * 8 + y])
 					{
-						world.setBlockState(pos.add(x, y, z), y >= 4 ? Blocks.AIR.getDefaultState() : this.fillBlock.getDefaultState(), 2);
+						world.setBlockState(pos.add(x, y, z), y >= 4 ? Blocks.AIR.getDefaultState() : this.liquid, 2);
 					}
 				}
 			}
@@ -129,7 +133,7 @@ public class WorldGenAetherLakes extends WorldGenerator
 
 						if (world.getBlockState(nextPos).getBlock() == BlocksAether.aether_dirt && world.getLightFor(EnumSkyBlock.SKY, pos.add(x, y, z)) > 0)
 						{
-							world.setBlockState(nextPos, BlocksAether.aether_grass.getDefaultState(), 2);
+							world.setBlockState(nextPos, this.grass, 2);
 						}
 					}
 				}

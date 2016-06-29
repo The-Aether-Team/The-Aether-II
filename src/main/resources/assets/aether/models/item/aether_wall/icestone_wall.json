@@ -1,3 +1,6 @@
 {
-	"parent": "aether:block/aether_wall/icestone_wall_inventory"
+	"parent": "block/wall_inventory",
+	"textures": {
+		"wall": "aether:blocks/icestone_bricks"
+	}
 }

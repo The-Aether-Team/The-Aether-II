@@ -35,6 +35,11 @@ public class BiomeAether extends BiomeAetherBase
 
 	public static final WorldGenLargeTree genGreenLargeSkyrootTree = new WorldGenLargeTree(BlocksAether.skyroot_log.getDefaultState(), BlocksAether.green_skyroot_leaves.getDefaultState());
 
+	public BiomeAether()
+	{
+		super(new BiomeProperties("aether").setRainDisabled().setTemperature(0.5f));
+	}
+
 	@Override
 	public WorldGenAbstractTree genBigTreeChance(Random random)
 	{

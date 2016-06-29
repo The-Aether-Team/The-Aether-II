@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.features.aerclouds;
 
-import com.gildedgames.aether.common.world.chunk.ChunkProviderAether;
+import com.gildedgames.aether.common.world.chunk.ChunkGeneratorAether;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -59,7 +59,7 @@ public class WorldGenAercloud extends WorldGenerator
 						if (worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos) &&
 								Math.abs(x1 - x) + Math.abs(y1 - y) + Math.abs(z1 - z) < 4 * (this.isFlat ? 3 : 1) + rand.nextInt(2))
 						{
-							worldIn.setBlockState(pos, state, ChunkProviderAether.PLACEMENT_FLAG_TYPE);
+							worldIn.setBlockState(pos, state, ChunkGeneratorAether.PLACEMENT_FLAG_TYPE);
 						}
 					}
 				}

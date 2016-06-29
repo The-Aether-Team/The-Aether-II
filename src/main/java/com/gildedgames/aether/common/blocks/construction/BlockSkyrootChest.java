@@ -35,7 +35,7 @@ public class BlockSkyrootChest extends BlockChest
 	}
 
 	@Override
-	public ILockableContainer getLockableContainer(World worldIn, BlockPos pos)
+	public ILockableContainer getContainer(World worldIn, BlockPos pos, boolean isPlayer)
 	{
 		TileEntity tileentity = worldIn.getTileEntity(pos);
 
@@ -52,7 +52,7 @@ public class BlockSkyrootChest extends BlockChest
 
 					if (adjBlock == this)
 					{
-						if (this.isBlocked(worldIn, adjPos))
+						if (!isPlayer && this.isBlocked(worldIn, adjPos))
 						{
 							return null;
 						}
@@ -113,11 +113,5 @@ public class BlockSkyrootChest extends BlockChest
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TileEntitySkyrootChest();
-	}
-
-	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state)
-	{
-		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
 	}
 }

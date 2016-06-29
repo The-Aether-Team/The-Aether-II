@@ -1,0 +1,7 @@
+{
+	"parent": "aether:block/aether_wall/special_models/wall_special_post",
+	"textures": {
+		"wall": "aether:blocks/dungeon/sentry_stone",
+		"top": "aether:blocks/dungeon/carved_stone"
+	}
+}

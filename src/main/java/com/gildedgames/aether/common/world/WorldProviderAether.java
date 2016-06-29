@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.world.biome.BiomeAether;
-import com.gildedgames.aether.common.world.chunk.ChunkProviderAether;
+import com.gildedgames.aether.common.world.chunk.ChunkGeneratorAether;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -36,7 +36,7 @@ public class WorldProviderAether extends WorldProvider
 	@Override
 	public IChunkGenerator createChunkGenerator()
 	{
-		return new ChunkProviderAether(this.worldObj, this.worldObj.getSeed());
+		return new ChunkGeneratorAether(this.worldObj, this.worldObj.getSeed());
 	}
 
 	@Override

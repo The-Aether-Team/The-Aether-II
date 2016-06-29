@@ -1,40 +1,32 @@
 package com.gildedgames.aether.common.blocks;
 
-import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthChest;
-import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthDoor;
-import com.gildedgames.aether.common.blocks.util.BlockCustom;
-import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemBlock;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.blocks.construction.BlockAmbrosiumTorch;
-import com.gildedgames.aether.common.blocks.construction.BlockHolystoneButton;
-import com.gildedgames.aether.common.blocks.construction.BlockHolystonePressurePlate;
+import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystoneButton;
+import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystonePressurePlate;
 import com.gildedgames.aether.common.blocks.construction.BlockQuicksoilGlass;
-import com.gildedgames.aether.common.blocks.construction.BlockSkyrootButton;
+import com.gildedgames.aether.common.blocks.construction.redstone.BlockSkyrootButton;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootChest;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootDoor;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootFence;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootFenceGate;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootLadder;
-import com.gildedgames.aether.common.blocks.construction.BlockSkyrootPressurePlate;
+import com.gildedgames.aether.common.blocks.construction.redstone.BlockSkyrootPressurePlate;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootTrapDoor;
-import com.gildedgames.aether.common.blocks.construction.aether_walls.BlockAerogelWall;
-import com.gildedgames.aether.common.blocks.construction.aether_walls.BlockAetherWall;
-import com.gildedgames.aether.common.blocks.construction.skyroot_fence.BlockSkyrootFence;
-import com.gildedgames.aether.common.blocks.construction.skyroot_fence.BlockSkyrootFenceGate;
-import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockStandingSkyrootSign;
-import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockWallSkyrootSign;
+import com.gildedgames.aether.common.blocks.construction.signs.BlockStandingSkyrootSign;
+import com.gildedgames.aether.common.blocks.construction.signs.BlockWallSkyrootSign;
+import com.gildedgames.aether.common.blocks.construction.walls.BlockAerogelWall;
+import com.gildedgames.aether.common.blocks.construction.walls.BlockAetherWall;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockSkyrootWorkbench;
 import com.gildedgames.aether.common.blocks.dungeon.BlockBoundary;
 import com.gildedgames.aether.common.blocks.dungeon.BlockDivine;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinth;
+import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthChest;
+import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthDoor;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthEye;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthPillar;
 import com.gildedgames.aether.common.blocks.dungeon.BlockTeleporter;
@@ -58,16 +50,25 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
+import com.gildedgames.aether.common.blocks.util.BlockCustom;
 import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummy;
-import com.gildedgames.aether.common.items.itemblocks.ItemBlockAetherVariants;
+import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
+import com.gildedgames.aether.common.items.blocks.ItemBlockVariants;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockButtonStone;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemBlock;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class BlocksAether
 {
-	public static Block aether_dirt;
+	public static Block aether_dirt = new BlockCustom(Material.GROUND).setSoundType(SoundType.GROUND).setHardness(0.5f);
 
-	public static BlockAetherGrass aether_grass;
+	public static BlockAetherGrass aether_grass = new BlockAetherGrass();
 
-	public static BlockHolystone holystone;
+	public static BlockHolystone holystone = new BlockHolystone();
 
     public static Block holystone_brick;
 
@@ -140,16 +141,16 @@ public class BlocksAether
 
 	public static BlockSkyrootPressurePlate skyroot_pressure_plate;
 
-	public static BlockSkyrootButton skyroot_button;
-
 	public static BlockHolystonePressurePlate holystone_pressure_plate;
 
-	public static BlockHolystoneButton holystone_button;
+	public static BlockSkyrootButton skyroot_button;
+
+	public static BlockButtonStone holystone_button;
 
 	public static BlockSkyrootLadder skyroot_ladder;
 
-	public static BlockAetherWall holystone_wall, holystone_wall_mossy, holystone_brick_wall, carved_wall, icestone_wall, aerogel_wall, skyroot_log_wall,
-									divine_stone_wall, sentry_stone_wall, divine_sentry_stone_wall;
+	public static BlockAetherWall holystone_wall, mossy_holystone_wall, holystone_brick_wall, carved_stone_wall, icestone_wall, aerogel_wall, skyroot_log_wall,
+									divine_stone_wall, sentry_stone_wall, divine_sentry_wall;
 
 	public static BlockTeleporter labyrinth_totem;
 
@@ -157,7 +158,7 @@ public class BlocksAether
 
 	public static BlockLabyrinth carved_capstone;
 
-	public static Block labyrinth_pillar, labyrinth_pillar2;
+	public static Block labyrinth_glowing_pillar, labyrinth_pillar;
 
 	public static BlockLabyrinthDoor labyrinth_door;
 
@@ -171,11 +172,11 @@ public class BlocksAether
 	{
 		aether_dirt = registerBlock("aether_dirt", new BlockCustom(Material.GROUND).setSoundType(SoundType.GROUND).setHardness(0.5f), AetherCreativeTabs.tabBlocks);
 
-		aether_grass = registerBlockWithItem("aether_grass", new BlockAetherGrass(), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
+		aether_grass = registerBlock("aether_grass", new BlockAetherGrass(), AetherCreativeTabs.tabBlocks);
 
-		holystone = registerBlockWithItem("holystone", new BlockHolystone(), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
+		holystone = registerBlock("holystone", new BlockHolystone(), AetherCreativeTabs.tabBlocks);
 
-		aercloud = registerBlockWithItem("aercloud", new BlockAercloud(), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
+		aercloud = registerBlock("aercloud", new BlockAercloud(), AetherCreativeTabs.tabBlocks);
 
 		skyroot_planks = registerBlock("skyroot_planks", new BlockCustom(Material.WOOD)
 				.setSoundType(SoundType.WOOD).setHardness(2.0f).setResistance(5.0f), AetherCreativeTabs.tabBlocks);
@@ -212,11 +213,11 @@ public class BlocksAether
 
 		skyroot_crafting_table = registerBlock("skyroot_crafting_table", new BlockSkyrootWorkbench(), AetherCreativeTabs.tabBlocks);
 
-		blueberry_bush = registerBlockWithItem("blueberry_bush", new BlockBlueberryBush(), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
+		blueberry_bush = registerBlock("blueberry_bush", new BlockBlueberryBush(), AetherCreativeTabs.tabBlocks);
 
 		orange_tree = registerBlock("orange_tree", new BlockOrangeTree(), AetherCreativeTabs.tabBlocks);
 
-		aether_flower = registerBlockWithItem("aether_flower", new BlockAetherFlower(), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
+		aether_flower = registerBlock("aether_flower", new BlockAetherFlower(), AetherCreativeTabs.tabBlocks);
 
 		altar = registerBlock("altar", new BlockAltar(), AetherCreativeTabs.tabBlocks);
 
@@ -228,11 +229,11 @@ public class BlocksAether
 
 		enchanted_gravitite = registerBlock("enchanted_gravitite", new BlockCustom(Material.ROCK).setSoundType(SoundType.STONE).setHardness(5f), AetherCreativeTabs.tabBlocks);
 
-		aether_sapling = registerBlockWithItem("aether_sapling", new BlockAetherSapling(), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
+		aether_sapling = registerBlock("aether_sapling", new BlockAetherSapling(), AetherCreativeTabs.tabBlocks);
 
-		carved_stone = registerBlockWithItem("carved_stone", new BlockDivine(), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
+		carved_stone = registerBlock("carved_stone", new BlockDivine(), AetherCreativeTabs.tabBlocks);
 
-		sentry_stone = registerBlockWithItem("sentry_stone", new BlockDivine().setGlows(true), ItemBlockAetherVariants.class, AetherCreativeTabs.tabBlocks);
+		sentry_stone = registerBlock("sentry_stone", new BlockDivine().setGlows(true), AetherCreativeTabs.tabBlocks);
 
 		holystone_brick = registerBlock("holystone_brick", new BlockCustom(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2f), AetherCreativeTabs.tabBlocks);
 
@@ -271,9 +272,9 @@ public class BlocksAether
 		labyrinth_chest = registerBlock("labyrinth_chest", new BlockLabyrinthChest(), AetherCreativeTabs.tabBlocks);
 
 		holystone_wall = registerBlock("holystone_wall", new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
-		holystone_wall_mossy = registerBlock("holystone_wall_mossy", new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
+		mossy_holystone_wall = registerBlock("mossy_holystone_wall", new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		holystone_brick_wall = registerBlock("holystone_brick_wall", new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
-		carved_wall = registerBlock("carved_wall", new BlockAetherWall(BlocksAether.carved_stone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
+		carved_stone_wall = registerBlock("carved_stone_wall", new BlockAetherWall(BlocksAether.carved_stone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		icestone_wall = registerBlock("icestone_wall", new BlockAetherWall(BlocksAether.icestone_bricks.getDefaultState(), 3.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		skyroot_log_wall = registerBlock("skyroot_log_wall", new BlockAetherWall(BlocksAether.skyroot_log.getDefaultState(), 2.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		aerogel_wall = registerBlock("aerogel_wall", new BlockAerogelWall(BlocksAether.aerogel.getDefaultState(), 1.0f, 10.f), AetherCreativeTabs.tabBlocks);
@@ -284,15 +285,15 @@ public class BlocksAether
 		multiblock_dummy = registerBlock("multiblock_dummy", new BlockMultiDummy().setBlockUnbreakable());
 
 		carved_capstone = registerBlock("carved_capstone", new BlockLabyrinth(), AetherCreativeTabs.tabBlocks);
-		labyrinth_pillar = registerBlock("labyrinth_pillar", new BlockLabyrinthPillar().setGlows(true), AetherCreativeTabs.tabBlocks);
-		labyrinth_pillar2 = registerBlock("labyrinth_pillar2", new BlockLabyrinthPillar(), AetherCreativeTabs.tabBlocks);
+		labyrinth_glowing_pillar = registerBlock("labyrinth_glowing_pillar", new BlockLabyrinthPillar().setGlows(true), AetherCreativeTabs.tabBlocks);
+		labyrinth_pillar = registerBlock("labyrinth_pillar", new BlockLabyrinthPillar(), AetherCreativeTabs.tabBlocks);
 		labyrinth_wall = registerBlock("labyrinth_wall", new BlockLabyrinth(), AetherCreativeTabs.tabBlocks);
 		labyrinth_lightstone = registerBlock("labyrinth_lightstone", new BlockLabyrinth().setGlows(true), AetherCreativeTabs.tabBlocks);
 		labyrinth_base = registerBlock("labyrinth_base", new BlockLabyrinth().setGlows(true), AetherCreativeTabs.tabBlocks);
 		labyrinth_headstone = registerBlock("labyrinth_headstone", new BlockLabyrinth(), AetherCreativeTabs.tabBlocks);
 
 		sentry_stone_wall = registerBlock("sentry_stone_wall", new BlockAetherWall(BlocksAether.labyrinth_lightstone.getDefaultState(), 1.0f, 10.0f).setGlows(true), AetherCreativeTabs.tabBlocks);
-		divine_sentry_stone_wall = registerBlock("divine_sentry_stone_wall", new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
+		divine_sentry_wall = registerBlock("divine_sentry_wall", new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		divine_stone_wall = registerBlock("divine_stone_wall", new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 
 		labyrinth_eye = registerBlock("labyrinth_eye", new BlockLabyrinthEye(), AetherCreativeTabs.tabBlocks);
@@ -301,7 +302,7 @@ public class BlocksAether
 		
 		schematicBoundary = registerBlock("schematicBoundary", new BlockBoundary(), AetherCreativeTabs.tabBlocks);
 		linkedSchematicBoundary = registerBlock("linkedSchematicBoundary", new BlockBoundary());
-		
+
 		registerHarvestLevels();
 	}
 
@@ -343,8 +344,8 @@ public class BlocksAether
 		skyroot_trapdoor.setHarvestLevel("axe", 0);
 
 		holystone_wall.setHarvestLevel("pickaxe", 0);
-		holystone_wall_mossy.setHarvestLevel("pickaxe", 0);
-		carved_wall.setHarvestLevel("pickaxe", 0);
+		mossy_holystone_wall.setHarvestLevel("pickaxe", 0);
+		carved_stone_wall.setHarvestLevel("pickaxe", 0);
 		skyroot_log_wall.setHarvestLevel("axe", 0);
 		icestone_wall.setHarvestLevel("pickaxe", 1);
 		aerogel_wall.setHarvestLevel("pickaxe", 1);
@@ -362,27 +363,24 @@ public class BlocksAether
 		block.setUnlocalizedName(AetherCore.MOD_ID + "." + name);
 		block.setRegistryName(name);
 
-		GameRegistry.registerBlock(block);
+		GameRegistry.register(block);
 
-//		registerBlockWithItem(name, block, ItemBlock.class);
+		if (block instanceof IBlockVariants)
+		{
+			registerItemBlock(new ItemBlockVariants(block));
+		}
+		else
+		{
+			registerItemBlock(new ItemBlock(block));
+		}
 
 		return block;
 	}
 
-	private static <T extends Block> T registerBlockWithItem(String name, T block, Class<? extends ItemBlock> item, CreativeTabs tab)
+	private static void registerItemBlock(ItemBlock item)
 	{
-		registerBlockWithItem(name, block.setCreativeTab(tab), item);
+		item.setRegistryName(item.getBlock().getRegistryName());
 
-		return block;
-	}
-
-	private static <T extends Block> T registerBlockWithItem(String name, T block, Class<? extends ItemBlock> item)
-	{
-		block.setUnlocalizedName(AetherCore.MOD_ID + "." + name);
-		block.setRegistryName(name);
-
-		GameRegistry.registerBlock(block, item);
-
-		return block;
+		GameRegistry.register(item);
 	}
 }

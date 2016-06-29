@@ -1,8 +1,7 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.SoundsAether;
-import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
+import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import net.minecraft.block.Block;
@@ -31,7 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
-public class BlockAercloud extends Block implements IAetherBlockWithVariants
+public class BlockAercloud extends Block implements IBlockVariants
 {
 	public static class AercloudVariant extends BlockVariant
 	{
@@ -272,7 +271,7 @@ public class BlockAercloud extends Block implements IAetherBlockWithVariants
 	}
 
 	@Override
-	public String getSubtypeUnlocalizedName(ItemStack stack)
+	public String getUnlocalizedName(ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}

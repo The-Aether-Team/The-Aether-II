@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world.features.trees;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.util.BlockPosUtil;
-import com.gildedgames.aether.common.world.chunk.ChunkProviderAether;
+import com.gildedgames.aether.common.world.chunk.ChunkGeneratorAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -41,8 +41,8 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 
 			if (world.getBlockState(nPos).getBlock() == this.leafBlock.getBlock())
 			{
-				world.setBlockState(nPos, this.logBlock, ChunkProviderAether.PLACEMENT_FLAG_TYPE);
-				world.setBlockState(new BlockPos(x, pos.getY(), z), this.logBlock, ChunkProviderAether.PLACEMENT_FLAG_TYPE);
+				world.setBlockState(nPos, this.logBlock, ChunkGeneratorAether.PLACEMENT_FLAG_TYPE);
+				world.setBlockState(new BlockPos(x, pos.getY(), z), this.logBlock, ChunkGeneratorAether.PLACEMENT_FLAG_TYPE);
 			}
 		}
 		return true;
@@ -148,7 +148,7 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 
 			if (this.isReplaceable(world, nPos))
 			{
-				world.setBlockState(nPos, this.logBlock, ChunkProviderAether.PLACEMENT_FLAG_TYPE);
+				world.setBlockState(nPos, this.logBlock, ChunkGeneratorAether.PLACEMENT_FLAG_TYPE);
 			}
 		}
 		return true;

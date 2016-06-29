@@ -4,10 +4,8 @@ import java.io.File;
 import java.util.Random;
 
 import com.gildedgames.aether.common.entities.EntityItemWatcher;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
@@ -19,9 +17,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
-import com.gildedgames.aether.api.items.properties.ItemRarity;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.EntitiesAether;
@@ -31,14 +26,12 @@ import com.gildedgames.aether.common.items.properties.EquipmentRegistry;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.player.PlayerAetherEvents;
-import com.gildedgames.aether.common.recipes.RecipesAether;
+import com.gildedgames.aether.common.crafting.RecipesAether;
 import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
 import com.gildedgames.aether.common.tile_entities.TileEntityBoundary.FetchedEntity;
 import com.gildedgames.aether.common.world.WorldProviderAether;
-import com.gildedgames.aether.common.world.chunk.PlacementFlagFactory;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
 import com.gildedgames.util.io.Instantiator;
-import com.gildedgames.util.modules.chunk.ChunkModule;
 import com.gildedgames.util.modules.tab.TabModule;
 
 public class CommonProxy
@@ -66,10 +59,10 @@ public class CommonProxy
 		// Register with NetworkRegistry.
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 
-		// Register dimensions and biomes.
-
+		// Register dimension type
 		this.aetherDimension = DimensionType.register("Aether", "_aether", AetherCore.getAetherDimID(), WorldProviderAether.class, false);
 
+		// Register dimension world
 		DimensionManager.registerDimension(AetherCore.getAetherDimID(), this.aetherDimension);
 
 		// Pre-initialize content.

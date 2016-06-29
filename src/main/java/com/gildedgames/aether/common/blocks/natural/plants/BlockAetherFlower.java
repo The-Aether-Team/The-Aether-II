@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
-import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
+import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import net.minecraft.block.SoundType;
@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class BlockAetherFlower extends BlockAetherPlant implements IAetherBlockWithVariants
+public class BlockAetherFlower extends BlockAetherPlant implements IBlockVariants
 {
 	public static final BlockVariant
 			WHITE_ROSE = new BlockVariant(0, "white_rose"),
@@ -67,7 +67,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IAetherBlockW
 	}
 
 	@Override
-	public String getSubtypeUnlocalizedName(ItemStack stack)
+	public String getUnlocalizedName(ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}

@@ -10,11 +10,11 @@ import java.util.Random;
 
 public abstract class BiomeAetherBase extends Biome
 {
-	private final BiomeDecoratorAether biomeDecorator = new BiomeDecoratorAether();
+	private final BiomeAetherDecorator biomeDecorator = new BiomeAetherDecorator();
 
-	public BiomeAetherBase()
+	public BiomeAetherBase(BiomeProperties properties)
 	{
-		super(new BiomeProperties("aether_generic").setRainDisabled().setTemperature(0.5f));
+		super(properties);
 
 		this.setRegistryName(AetherCore.getResource("aether_generic"));
 

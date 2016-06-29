@@ -55,8 +55,6 @@ import com.gildedgames.aether.common.items.consumables.ItemRainbowStrawberry;
 import com.gildedgames.aether.common.items.consumables.ItemSkyrootConsumableBucket;
 import com.gildedgames.aether.common.items.consumables.ItemStomperPop;
 import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
-import com.gildedgames.aether.common.items.misc.ItemAetherPortalFrame;
-import com.gildedgames.aether.common.items.misc.ItemSkyrootSign;
 import com.gildedgames.aether.common.items.tools.EnumToolType;
 import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
 import com.gildedgames.aether.common.items.tools.ItemHolystoneTool;
@@ -69,7 +67,6 @@ import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
 import com.gildedgames.aether.common.items.weapons.ItemPigSlayer;
 import com.gildedgames.aether.common.items.weapons.ItemVampireBlade;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBolt;
-import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
 import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemCandyCaneSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemElementalSword;
@@ -214,10 +211,10 @@ public class ItemsAether
 		gravitite_leggings = registerItem("gravitite_leggings", new ItemGravititeArmor(EntityEquipmentSlot.LEGS));
 		gravitite_boots = registerItem("gravitite_boots", new ItemGravititeArmor(EntityEquipmentSlot.FEET));
 
-		obsidian_helmet = registerItem("obsidian_helmet", new ItemObsidianArmor(AetherMaterials.OBSIDIAN_ARMOR, EntityEquipmentSlot.HEAD));
-		obsidian_chestplate = registerItem("obsidian_chestplate", new ItemObsidianArmor(AetherMaterials.OBSIDIAN_ARMOR, EntityEquipmentSlot.CHEST));
-		obsidian_leggings = registerItem("obsidian_leggings", new ItemObsidianArmor(AetherMaterials.OBSIDIAN_ARMOR, EntityEquipmentSlot.LEGS));
-		obsidian_boots = registerItem("obsidian_boots", new ItemObsidianArmor(AetherMaterials.OBSIDIAN_ARMOR, EntityEquipmentSlot.FEET));
+		obsidian_helmet = registerItem("obsidian_helmet", new ItemObsidianArmor(EntityEquipmentSlot.HEAD));
+		obsidian_chestplate = registerItem("obsidian_chestplate", new ItemObsidianArmor(EntityEquipmentSlot.CHEST));
+		obsidian_leggings = registerItem("obsidian_leggings", new ItemObsidianArmor(EntityEquipmentSlot.LEGS));
+		obsidian_boots = registerItem("obsidian_boots", new ItemObsidianArmor(EntityEquipmentSlot.FEET));
 
 		neptune_helmet = registerItem("neptune_helmet", new ItemNeptuneArmor(EntityEquipmentSlot.HEAD));
 		neptune_chestplate = registerItem("neptune_chestplate", new ItemNeptuneArmor(EntityEquipmentSlot.CHEST));
@@ -229,10 +226,10 @@ public class ItemsAether
 		phoenix_leggings = registerItem("phoenix_leggings", new ItemPhoenixArmor(EntityEquipmentSlot.LEGS));
 		phoenix_boots = registerItem("phoenix_boots", new ItemPhoenixArmor(EntityEquipmentSlot.FEET));
 
-		valkyrie_helmet = registerItem("valkyrie_helmet", new ItemValkyrieArmor(AetherMaterials.VALKYRIE_ARMOR, EntityEquipmentSlot.HEAD));
-		valkyrie_chestplate = registerItem("valkyrie_chestplate", new ItemValkyrieArmor(AetherMaterials.VALKYRIE_ARMOR, EntityEquipmentSlot.CHEST));
-		valkyrie_leggings = registerItem("valkyrie_leggings", new ItemValkyrieArmor(AetherMaterials.VALKYRIE_ARMOR, EntityEquipmentSlot.LEGS));
-		valkyrie_boots = registerItem("valkyrie_boots", new ItemValkyrieArmor(AetherMaterials.VALKYRIE_ARMOR, EntityEquipmentSlot.FEET));
+		valkyrie_helmet = registerItem("valkyrie_helmet", new ItemValkyrieArmor(EntityEquipmentSlot.HEAD));
+		valkyrie_chestplate = registerItem("valkyrie_chestplate", new ItemValkyrieArmor(EntityEquipmentSlot.CHEST));
+		valkyrie_leggings = registerItem("valkyrie_leggings", new ItemValkyrieArmor(EntityEquipmentSlot.LEGS));
+		valkyrie_boots = registerItem("valkyrie_boots", new ItemValkyrieArmor(EntityEquipmentSlot.FEET));
 
 		sentry_boots = registerItem("sentry_boots", new ItemSentryBoots(AetherMaterials.LEGENDARY_ARMOR));
 
@@ -372,6 +369,7 @@ public class ItemsAether
 		equipmentRegistry.register(ItemsAether.gold_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.chain_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.diamond_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
+
 		equipmentRegistry.register(Items.ARROW, ItemRarity.NONE, ItemEquipmentType.AMMUNITION);
 
 		class Effects implements ItemEffects.ItemEffectsProvider
@@ -456,7 +454,7 @@ public class ItemsAether
 		item.setUnlocalizedName(AetherCore.MOD_ID + "." + name);
 		item.setRegistryName(name);
 
-		GameRegistry.registerItem(item);
+		GameRegistry.register(item);
 
 		return item;
 	}

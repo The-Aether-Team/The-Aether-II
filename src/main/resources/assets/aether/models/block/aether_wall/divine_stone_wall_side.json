@@ -1,0 +1,6 @@
+{
+    "parent": "block/wall_side",
+    "textures": {
+		"wall": "aether:blocks/dungeon/divine_carved_stone"
+    }
+}

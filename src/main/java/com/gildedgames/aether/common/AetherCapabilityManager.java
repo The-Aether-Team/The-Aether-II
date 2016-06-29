@@ -45,87 +45,17 @@ public class AetherCapabilityManager
 	}
 
 	@SubscribeEvent
-	public void onTooltipConstruction(ItemTooltipEvent event)
-	{
-		if (event.getItemStack() != null)
-		{
-			if (event.getItemStack().hasCapability(AetherCapabilities.ITEM_PROPERTIES, null))
-			{
-				IItemPropertiesCapability props = event.getItemStack().getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
-
-				if (props != null)
-				{
-					if (props.getRarity() != ItemRarity.NONE)
-					{
-						event.getToolTip().add(I18n.format(props.getRarity().getUnlocalizedName()));
-					}
-
-					if (props.isEquippable())
-					{
-						if (props.getRarity() != ItemRarity.NONE)
-						{
-							event.getToolTip().add("");
-						}
-
-						event.getToolTip().add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + I18n.format(props.getEquipmentType().getUnlocalizedName()));
-					}
-				}
-			}
-
-			if (event.getItemStack().hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
-			{
-				IItemEffectsCapability effects = event.getItemStack().getCapability(AetherCapabilities.ITEM_EFFECTS, null);
-
-				if (effects != null)
-				{
-					if (effects.getEffectPairs() == null || effects.getEffectPairs().size() <= 0)
-					{
-						event.getToolTip().add(I18n.format("ability.cosmetic"));
-					}
-					else
-					{
-						for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : effects.getEffectPairs())
-						{
-							EntityEffectProcessor processor = effect.getLeft();
-							EntityEffectInstance instance = effect.getRight();
-
-							List<String> localizedDesc = new ArrayList<>();
-
-							for (String line : processor.getUnlocalizedDesc(event.getEntityPlayer(), instance))
-							{
-								localizedDesc.add(I18n.format(line, (Object[]) processor.getFormatParameters(event.getEntityPlayer(), instance)));
-							}
-
-							event.getToolTip().addAll(localizedDesc);
-
-							for (EntityEffectRule rule : instance.getRules())
-							{
-								for (String line : rule.getUnlocalizedDesc())
-								{
-									event.getToolTip().add(TextFormatting.GRAY + "\u2022 " + I18n.format(line));
-								}
-							}
-						}
-					}
-				}
-			}
-
-			if (event.getItemStack().hasCapability(AetherCapabilities.ITEM_PROPERTIES, null))
-			{
-				IItemPropertiesCapability props = event.getItemStack().getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
-			}
-		}
-	}
-
-	@SubscribeEvent
 	public void onPlayerInteract(PlayerInteractEvent event)
 	{
-		ItemStack stack = event.getEntityPlayer().getActiveItemStack();
+		EntityPlayer player = event.getEntityPlayer();
+
+		ItemStack stack = player.getActiveItemStack();
 
 		if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_PROPERTIES, null))
 		{
 			IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
-			IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.getEntityPlayer());
+
+			IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(player);
 
 			if (props != null && props.isEquippable())
 			{
@@ -135,9 +65,9 @@ public class AetherCapabilityManager
 				{
 					aePlayer.getEquipmentInventory().setInventorySlotContents(nextEmptySlot, stack.copy());
 
-					if (!event.getEntityPlayer().capabilities.isCreativeMode)
+					if (!player.capabilities.isCreativeMode)
 					{
-						event.getEntityPlayer().inventory.setInventorySlotContents(event.getEntityPlayer().inventory.currentItem, null);
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 					}
 				}
 			}

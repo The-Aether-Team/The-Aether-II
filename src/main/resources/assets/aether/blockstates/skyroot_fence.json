@@ -1,26 +1,17 @@
 {
-	"forge_marker": 1,
-	"defaults": {
-		"textures": {
-			"texture": "aether:blocks/skyroot_planks"
+	"multipart": [
+		{   "apply": { "model": "aether:skyroot_fence/skyroot_fence_post" }},
+		{   "when": { "north": "true" },
+			"apply": { "model": "aether:skyroot_fence/skyroot_fence_side", "uvlock": true }
+		},
+		{   "when": { "east": "true" },
+			"apply": { "model": "aether:skyroot_fence/skyroot_fence_side", "y": 90, "uvlock": true }
+		},
+		{   "when": { "south": "true" },
+			"apply": { "model": "aether:skyroot_fence/skyroot_fence_side", "y": 180, "uvlock": true }
+		},
+		{   "when": { "west": "true" },
+			"apply": { "model": "aether:skyroot_fence/skyroot_fence_side", "y": 270, "uvlock": true }
 		}
-	},
-	"variants": {
-		"east=false,north=false,south=false,west=false": { "model": "fence_post" },
-		"east=false,north=true,south=false,west=false": { "model": "fence_n", "uvlock": true },
-		"east=true,north=false,south=false,west=false": { "model": "fence_n", "y": 90, "uvlock": true },
-		"east=false,north=false,south=true,west=false": { "model": "fence_n", "y": 180, "uvlock": true },
-		"east=false,north=false,south=false,west=true": { "model": "fence_n", "y": 270, "uvlock": true },
-		"east=true,north=true,south=false,west=false": { "model": "fence_ne", "uvlock": true },
-		"east=true,north=false,south=true,west=false": { "model": "fence_ne", "y": 90, "uvlock": true },
-		"east=false,north=false,south=true,west=true": { "model": "fence_ne", "y": 180, "uvlock": true },
-		"east=false,north=true,south=false,west=true": { "model": "fence_ne", "y": 270, "uvlock": true },
-		"east=false,north=true,south=true,west=false": { "model": "fence_ns", "uvlock": true },
-		"east=true,north=false,south=false,west=true": { "model": "fence_ns", "y": 90, "uvlock": true },
-		"east=true,north=true,south=true,west=false": { "model": "fence_nse", "uvlock": true },
-		"east=true,north=false,south=true,west=true": { "model": "fence_nse", "y": 90, "uvlock": true },
-		"east=false,north=true,south=true,west=true": { "model": "fence_nse", "y": 180, "uvlock": true },
-		"east=true,north=true,south=false,west=true": { "model": "fence_nse", "y": 270, "uvlock": true },
-		"east=true,north=true,south=true,west=true": { "model": "fence_nsew", "uvlock": true }
-	}
+	]
 }

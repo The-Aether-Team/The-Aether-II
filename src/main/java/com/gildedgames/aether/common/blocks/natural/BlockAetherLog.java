@@ -71,9 +71,9 @@ public class BlockAetherLog extends Block
 			{
 				IBlockState neighborState = world.getBlockState(neighborPos);
 
-				if (neighborState.getBlock().isLeaves(state, world, neighborPos))
+				if (neighborState.getBlock().isLeaves(neighborState, world, neighborPos))
 				{
-					neighborState.getBlock().beginLeavesDecay(state, world, neighborPos);
+					neighborState.getBlock().beginLeavesDecay(neighborState, world, neighborPos);
 				}
 			}
 		}

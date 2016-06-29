@@ -1,6 +1,6 @@
 {
 	"variants": {
-		"powered=false": { "model": "aether:skyroot_pressure_plate_up" },
-		"powered=true": { "model": "aether:skyroot_pressure_plate_down" }
+		"powered=false": { "model": "aether:skyroot_pressure_plate/skyroot_pressure_plate_up" },
+		"powered=true": { "model": "aether:skyroot_pressure_plate/skyroot_pressure_plate_down" }
 	}
 }

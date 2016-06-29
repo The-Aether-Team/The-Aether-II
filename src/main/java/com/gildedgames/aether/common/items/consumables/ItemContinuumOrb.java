@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.consumables;
 
-import com.gildedgames.aether.common.recipes.loot.IItemSelector;
+import com.gildedgames.aether.common.crafting.loot.IItemSelector;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

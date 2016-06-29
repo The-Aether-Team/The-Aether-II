@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
+import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import com.google.common.base.Predicate;
@@ -11,7 +11,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -22,7 +21,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class BlockHolystone extends Block implements IAetherBlockWithVariants
+public class BlockHolystone extends Block implements IBlockVariants
 {
 	public static final BlockVariant
 			NORMAL_HOLYSTONE = new BlockVariant(0, "normal"),
@@ -103,7 +102,7 @@ public class BlockHolystone extends Block implements IAetherBlockWithVariants
 	}
 
 	@Override
-	public String getSubtypeUnlocalizedName(ItemStack stack)
+	public String getUnlocalizedName(ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}

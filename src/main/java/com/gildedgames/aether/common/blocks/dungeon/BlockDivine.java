@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.dungeon;
 
-import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
+import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class BlockDivine extends BlockLabyrinth implements IAetherBlockWithVariants
+public class BlockDivine extends BlockLabyrinth implements IBlockVariants
 {
 	public static final int
 			NORMAL = 0,
@@ -55,7 +55,7 @@ public class BlockDivine extends BlockLabyrinth implements IAetherBlockWithVaria
 	}
 
 	@Override
-	public String getSubtypeUnlocalizedName(ItemStack stack)
+	public String getUnlocalizedName(ItemStack stack)
 	{
 		switch (stack.getMetadata())
 		{

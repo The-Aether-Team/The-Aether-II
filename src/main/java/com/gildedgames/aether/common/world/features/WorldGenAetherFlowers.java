@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.world.features;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -10,15 +9,12 @@ import java.util.Random;
 
 public class WorldGenAetherFlowers extends WorldGenerator
 {
-	private final Block block;
-
 	private final IBlockState state;
 
 	private final int max;
 
-	public WorldGenAetherFlowers(Block block, IBlockState state, int max)
+	public WorldGenAetherFlowers(IBlockState state, int max)
 	{
-		this.block = block;
 		this.state = state;
 		this.max = max;
 	}
@@ -30,7 +26,7 @@ public class WorldGenAetherFlowers extends WorldGenerator
 		{
 			BlockPos randomPos = pos.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
 
-			if (world.isAirBlock(randomPos) && (randomPos.getY() < 255) && this.block.canPlaceBlockAt(world, randomPos))
+			if (world.isAirBlock(randomPos) && (randomPos.getY() < 255) && this.state.getBlock().canPlaceBlockAt(world, randomPos))
 			{
 				world.setBlockState(randomPos, this.state, 2);
 			}

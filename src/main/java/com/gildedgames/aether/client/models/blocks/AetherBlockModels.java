@@ -2,8 +2,8 @@ package com.gildedgames.aether.client.models.blocks;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootDoor;
-import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockStandingSkyrootSign;
-import com.gildedgames.aether.common.blocks.construction.skyroot_sign.BlockWallSkyrootSign;
+import com.gildedgames.aether.common.blocks.construction.signs.BlockStandingSkyrootSign;
+import com.gildedgames.aether.common.blocks.construction.signs.BlockWallSkyrootSign;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
@@ -29,14 +29,8 @@ public class AetherBlockModels
 		registerStateMappers();
 	}
 
-	/**
-	 * Creates the state mappers for certain blockstates.
-	 */
 	private static void registerStateMappers()
 	{
-		StateMap skyrootDoorMapper = new StateMap.Builder().ignore(BlockSkyrootDoor.POWERED).build();
-		StateMap skyrootChestMapper = new StateMap.Builder().ignore(BlockChest.FACING).build();
-		StateMap aetherSaplingMapper = new StateMap.Builder().ignore(BlockAetherSapling.PROPERTY_STAGE).build();
 		StateMap leavesMapper = new StateMap.Builder().ignore(BlockAetherLeaves.PROPERTY_CHECK_DECAY, BlockAetherLeaves.PROPERTY_DECAYABLE).build();
 
 		ModelLoader.setCustomStateMapper(BlocksAether.blue_skyroot_leaves, leavesMapper);
@@ -46,11 +40,11 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.purple_crystal_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.purple_fruit_leaves, leavesMapper);
 
-		ModelLoader.setCustomStateMapper(BlocksAether.aether_sapling, aetherSaplingMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.aether_sapling, new StateMap.Builder().ignore(BlockAetherSapling.PROPERTY_STAGE).build());
 
-		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_door, skyrootDoorMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_door, new StateMap.Builder().ignore(BlockSkyrootDoor.POWERED).build());
 
-		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_chest, skyrootChestMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_chest, new StateMap.Builder().ignore(BlockChest.FACING).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.aercloud, new StateMapperBase()
 		{

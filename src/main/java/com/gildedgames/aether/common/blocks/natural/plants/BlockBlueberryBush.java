@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.blocks.natural.plants;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
-import com.gildedgames.aether.common.blocks.util.variants.IAetherBlockWithVariants;
+import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -25,7 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
-public class BlockBlueberryBush extends BlockAetherPlant implements IAetherBlockWithVariants, IGrowable
+public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVariants, IGrowable
 {
 	public static final int
 			BERRY_BUSH_STEM = 0,
@@ -160,7 +160,7 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IAetherBlock
 	}
 
 	@Override
-	public String getSubtypeUnlocalizedName(ItemStack stack)
+	public String getUnlocalizedName(ItemStack stack)
 	{
 		switch (stack.getMetadata())
 		{

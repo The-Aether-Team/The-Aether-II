@@ -1,14 +1,15 @@
 package com.gildedgames.aether.common.items.armor;
 
+import com.gildedgames.aether.common.AetherMaterials;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.world.World;
 
 public class ItemObsidianArmor extends ItemAetherArmor
 {
-	public ItemObsidianArmor(ArmorMaterial material, EntityEquipmentSlot armorType)
+	public ItemObsidianArmor(EntityEquipmentSlot armorType)
 	{
-		super(material, "obsidian", armorType);
+		super(AetherMaterials.OBSIDIAN_ARMOR, "obsidian", armorType);
 	}
 
 	@Override

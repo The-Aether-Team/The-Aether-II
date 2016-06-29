@@ -1,3 +1,6 @@
 {
-	"parent": "aether:block/aether_wall/divine_stone_wall_inventory"
+	"parent": "block/wall_inventory",
+	"textures": {
+		"wall": "aether:blocks/dungeon/divine_carved_stone"
+	}
 }

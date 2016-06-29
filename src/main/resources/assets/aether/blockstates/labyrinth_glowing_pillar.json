@@ -1,0 +1,14 @@
+{
+	"variants": {
+		"axis=y": {
+			"model": "aether:labyrinth_pillar/labyrinth_glowing_pillar"
+		},
+		"axis=z": {
+			"model": "aether:labyrinth_pillar/labyrinth_glowing_pillar_side"
+		},
+		"axis=x": {
+			"model": "aether:labyrinth_pillar/labyrinth_glowing_pillar_side",
+			"y": 90
+		}
+	}
+}
