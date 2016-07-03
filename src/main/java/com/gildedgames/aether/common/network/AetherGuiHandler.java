@@ -18,7 +18,7 @@ public class AetherGuiHandler implements IGuiHandler
 {
 	public static final int SKYROOT_WORKBENCH_ID = 1;
 
-	public static final int INVENTORY_ACCESSORIES_ID = 2;
+	public static final int INVENTORY_EQUIPMENT_ID = 2;
 
 	@Override
 	public Container getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
@@ -27,7 +27,7 @@ public class AetherGuiHandler implements IGuiHandler
 		{
 		case SKYROOT_WORKBENCH_ID:
 			return new ContainerSkyrootWorkbench(player.inventory, world, new BlockPos(x, y, z));
-		case INVENTORY_ACCESSORIES_ID:
+		case INVENTORY_EQUIPMENT_ID:
 			return new ContainerEquipment(PlayerAether.getPlayer(player));
 		default:
 			return null;
@@ -42,7 +42,7 @@ public class AetherGuiHandler implements IGuiHandler
 		{
 		case SKYROOT_WORKBENCH_ID:
 			return new GuiCrafting(player.inventory, world, new BlockPos(x, y, z));
-		case INVENTORY_ACCESSORIES_ID:
+		case INVENTORY_EQUIPMENT_ID:
 			return new GuiEquipment(PlayerAether.getPlayer(player));
 		default:
 			return null;

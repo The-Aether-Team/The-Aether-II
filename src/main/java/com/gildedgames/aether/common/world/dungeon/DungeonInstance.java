@@ -101,8 +101,8 @@ public class DungeonInstance implements Instance
 	{
 		output.setBoolean("generated", this.generated);
 		
-		NBTHelper.setBlockPosDimension(output, this.outsideEntrance, "outsideEntrance");
-		NBTHelper.setBlockPosDimension(output, this.insideEntrance, "insideEntrance");
+		output.setTag("outsideEntrance", NBTHelper.serializeBlockPosDimension(this.outsideEntrance));
+		output.setTag("insideEntrance", NBTHelper.serializeBlockPosDimension(this.insideEntrance));
 		
 		output.setInteger("dimIdInside", this.dimIdInside);
 	}
@@ -112,8 +112,8 @@ public class DungeonInstance implements Instance
 	{
 		this.generated = input.getBoolean("generated");
 		
-		this.outsideEntrance = NBTHelper.getBlockPosDimension(input, "outsideEntrance");
-		this.insideEntrance = NBTHelper.getBlockPosDimension(input, "insideEntrance");
+		this.outsideEntrance = NBTHelper.getBlockPosDimension(input.getCompoundTag("outsideEntrance"));
+		this.insideEntrance = NBTHelper.getBlockPosDimension(input.getCompoundTag("insideEntrance"));
 		
 		this.dimIdInside = input.getInteger("dimIdInside");
 	}

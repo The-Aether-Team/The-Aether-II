@@ -78,8 +78,8 @@ public class TileEntityLabyrinthEye extends TileEntitySchematicBlock implements 
 	{
 		super.writeToNBT(compound);
 		
-		NBTHelper.writeBlockPos(compound, "startOffset", this.startOffset);
-		NBTHelper.writeBlockPos(compound, "endOffset", this.endOffset);
+		compound.setTag("startOffset", NBTHelper.serializeBlockPos(this.startOffset));
+		compound.setTag("endOffset", NBTHelper.serializeBlockPos(this.endOffset));
 
 		return compound;
 	}
@@ -89,8 +89,8 @@ public class TileEntityLabyrinthEye extends TileEntitySchematicBlock implements 
 	{
 		super.readFromNBT(compound);
 		
-		this.startOffset = NBTHelper.readBlockPos(compound, "startOffset");
-		this.endOffset = NBTHelper.readBlockPos(compound, "endOffset");
+		this.startOffset = NBTHelper.readBlockPos(compound.getCompoundTag("startOffset"));
+		this.endOffset = NBTHelper.readBlockPos(compound.getCompoundTag("endOffset"));
 		
 		if (this.startOffset != null && this.endOffset != null)
 		{

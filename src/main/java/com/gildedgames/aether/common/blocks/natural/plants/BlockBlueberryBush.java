@@ -22,6 +22,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
@@ -90,7 +91,7 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVarian
 
 		int count = random.nextInt(2) + (applyBonus ? 2 : 1);
 
-		ItemStack itemStack = new ItemStack(ItemsAether.blueberry, count);
+		ItemStack itemStack = new ItemStack(ItemsAether.blueberries, count);
 		EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), itemStack);
 
 		world.spawnEntityInWorld(entityItem);
@@ -155,6 +156,13 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVarian
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		return FULL_BLOCK_AABB;
+	}
+
+	@Override
+	@Nullable
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
 	{
 		return FULL_BLOCK_AABB;
 	}

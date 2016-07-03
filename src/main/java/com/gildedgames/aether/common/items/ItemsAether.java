@@ -110,7 +110,7 @@ public class ItemsAether
 
 	public static Item golden_amber;
 
-	public static ItemFood blueberry, enchanted_blueberry, orange, wyndberry, rainbow_strawberry, swet_jelly, gummy_swet;
+	public static ItemFood blueberries, enchanted_blueberry, orange, wyndberry, rainbow_strawberry, swet_jelly, gummy_swet;
 
 	public static ItemFood candy_corn, cocoatrice, wrapped_chocolates, jelly_pumpkin, stomper_pop, blueberry_lollipop, orange_lollipop, icestone_poprocks;
 
@@ -237,7 +237,7 @@ public class ItemsAether
 
 		aechor_petal = registerItem("aechor_petal", new Item(), AetherCreativeTabs.tabConsumables);
 
-		blueberry = registerItem("blueberry", new ItemFood(2, false), AetherCreativeTabs.tabConsumables);
+		blueberries = registerItem("blueberries", new ItemFood(2, false), AetherCreativeTabs.tabConsumables);
 
 		enchanted_blueberry = registerItem("enchanted_blueberry", new ItemFood(6, false), AetherCreativeTabs.tabConsumables);
 

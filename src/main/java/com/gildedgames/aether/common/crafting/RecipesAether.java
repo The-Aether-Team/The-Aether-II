@@ -352,13 +352,13 @@ public class RecipesAether implements IAltarRecipeRegistry
         // Blueberry Lollipop
         registerShapedRecipe(new ItemStack(ItemsAether.blueberry_lollipop), "XY", "Z ",
                 'X', new ItemStack(Items.SUGAR),
-                'Y', new ItemStack(ItemsAether.blueberry),
+                'Y', new ItemStack(ItemsAether.blueberries),
                 'Z', new ItemStack(ItemsAether.skyroot_stick));
 
         // Orange Lollipop
         registerShapedRecipe(new ItemStack(ItemsAether.orange), "XY", "Z ",
                 'X', new ItemStack(Items.SUGAR),
-                'Y', new ItemStack(ItemsAether.blueberry),
+                'Y', new ItemStack(ItemsAether.blueberries),
                 'Z', new ItemStack(ItemsAether.skyroot_stick));
 
 //        // Icestone Poprocks
@@ -390,7 +390,7 @@ public class RecipesAether implements IAltarRecipeRegistry
 				new ItemStack(ItemsAether.dart, 1, ItemDartType.ENCHANTED.ordinal())));
 
         // Enchanted Strawberry
-        registerAltarRecipe(new AltarEnchantRecipe(2, new ItemStack(ItemsAether.blueberry),
+        registerAltarRecipe(new AltarEnchantRecipe(2, new ItemStack(ItemsAether.blueberries),
                 new ItemStack(ItemsAether.enchanted_blueberry)));
 
         // Rainbow Strawberry

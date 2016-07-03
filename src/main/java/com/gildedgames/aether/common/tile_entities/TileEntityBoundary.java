@@ -248,9 +248,9 @@ public class TileEntityBoundary extends TileEntityWildcard
 	{
 		super.writeToNBT(compound);
 		
-		NBTHelper.writeBlockPos(compound, "linkedPos", this.linkedPos);
 		NBTHelper.fullySerializeCollection("fetchedEntities", this.fetchedEntities, compound);
-		
+
+		compound.setTag("linkedPos", NBTHelper.serializeBlockPos(this.linkedPos));
 		compound.setBoolean("masterBoundary", this.masterBoundary);
 		compound.setBoolean("shouldFetch", this.shouldFetch);
 
@@ -262,7 +262,7 @@ public class TileEntityBoundary extends TileEntityWildcard
 	{
 		super.readFromNBT(compound);
 		
-		this.linkedPos = NBTHelper.readBlockPos(compound, "linkedPos");
+		this.linkedPos = NBTHelper.readBlockPos(compound.getCompoundTag("linkedPos"));
 		
 		Collection<FetchedEntity> col = NBTHelper.fullyDeserializeCollection("fetchedEntities", compound);
 		

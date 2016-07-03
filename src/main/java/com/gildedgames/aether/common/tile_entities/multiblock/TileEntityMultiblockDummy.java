@@ -55,14 +55,17 @@ public class TileEntityMultiblockDummy extends TileEntity implements TileEntityM
 	{
 		super.readFromNBT(compound);
 
-		this.controllerPos = NBTHelper.readBlockPos(compound, "controller");
+		if (compound.hasKey("controller"))
+		{
+			this.controllerPos = NBTHelper.readBlockPos(compound.getCompoundTag("controller"));
+		}
 	}
 
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
 
-		NBTHelper.writeBlockPos(compound, "controller", this.controllerPos);
+		compound.setTag("controller", NBTHelper.serializeBlockPos(this.controllerPos));
 
 		return compound;
 	}

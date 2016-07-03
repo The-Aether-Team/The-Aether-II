@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 {
-	private static final AxisAlignedBB GRASS_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);
+	private static final AxisAlignedBB GRASS_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.4D, 0.9D);
 
 	public BlockTallAetherGrass()
 	{
@@ -53,7 +53,13 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	@SideOnly(Side.CLIENT)
 	public Block.EnumOffsetType getOffsetType()
 	{
-		return Block.EnumOffsetType.XYZ;
+		return EnumOffsetType.XZ;
+	}
+
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		return  new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
 	}
 
 	@Override

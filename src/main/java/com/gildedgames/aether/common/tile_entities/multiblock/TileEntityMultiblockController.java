@@ -37,6 +37,7 @@ public abstract class TileEntityMultiblockController extends TileEntity implemen
 		{
 			if (this.doesControllerOwn(pos))
 			{
+				this.worldObj.removeTileEntity(pos);
 				this.worldObj.setBlockToAir(pos);
 			}
 		}
