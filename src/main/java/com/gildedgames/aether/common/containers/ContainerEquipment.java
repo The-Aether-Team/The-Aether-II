@@ -84,7 +84,8 @@ public class ContainerEquipment extends ContainerPlayer
 
 			for (Slot slot : matrix)
 			{
-				slot.xDisplayPosition -= 17;
+				slot.xDisplayPosition -= 27;
+				slot.yDisplayPosition += 8;
 			}
 		}
 		else
