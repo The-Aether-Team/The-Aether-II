@@ -2,15 +2,13 @@ package com.gildedgames.aether.api.items.properties;
 
 public enum ItemEquipmentType
 {
-	RING("gui.slot.ring"),
-	NECKWEAR("gui.slot.neckwear"),
-	COMPANION("gui.slot.companion"),
-	SHIELD("gui.slot.shield"),
-	HANDWEAR("gui.slot.handwear"),
-	RELIC("gui.slot.relic"),
-	CHARM("gui.slot.charm"),
-	ARTIFACT("gui.slot.artifact"),
-	AMMUNITION("gui.slot.ammunition");
+	RING("gui.aether.slot.ring"),
+	NECKWEAR("gui.aether.slot.neckwear"),
+	COMPANION("gui.aether.slot.companion"),
+	HANDWEAR("gui.aether.slot.handwear"),
+	RELIC("gui.aether.slot.relic"),
+	CHARM("gui.aether.slot.charm"),
+	ARTIFACT("gui.aether.slot.artifact");
 
 	private final String unlocalizedName;
 

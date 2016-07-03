@@ -24,7 +24,7 @@ import org.apache.commons.lang3.tuple.Pair;
 public class ContainerEquipment extends ContainerPlayer
 {
 	/** See {@link GuiContainerCreative#basicInventory} **/
-	private static InventoryBasic dumbInventory = new InventoryBasic("fake", true, 46);
+	private static InventoryBasic dumbInventory = new InventoryBasic("fake", true, 52);
 
 	private final IPlayerAetherCapability aePlayer;
 
@@ -57,6 +57,7 @@ public class ContainerEquipment extends ContainerPlayer
 		Slot chestplate = this.inventorySlots.get(6);
 		Slot leggings = this.inventorySlots.get(7);
 		Slot boots = this.inventorySlots.get(8);
+		Slot shield = this.inventorySlots.get(45);
 
 		helmet.xDisplayPosition = 43;
 		helmet.yDisplayPosition = 33;
@@ -70,12 +71,10 @@ public class ContainerEquipment extends ContainerPlayer
 		boots.xDisplayPosition = 43;
 		boots.yDisplayPosition = 96;
 
-		Slot craftResult = this.inventorySlots.get(0);
+		shield.xDisplayPosition = 68;
+		shield.yDisplayPosition = 96;
 
-		Slot craft1 = this.inventorySlots.get(1);
-		Slot craft2 = this.inventorySlots.get(2);
-		Slot craft3 = this.inventorySlots.get(3);
-		Slot craft4 = this.inventorySlots.get(4);
+		Slot[] matrix = new Slot[] { this.inventorySlots.get(0), this.inventorySlots.get(1), this.inventorySlots.get(2), this.inventorySlots.get(3), this.inventorySlots.get(4) };
 
 		this.binSlot = new Slot(ContainerEquipment.dumbInventory, this.inventorySlots.size(), 213, 26);
 
@@ -83,21 +82,18 @@ public class ContainerEquipment extends ContainerPlayer
 		{
 			this.addSlotToContainer(this.binSlot);
 
-			craftResult.xDisplayPosition -= 17;
-
-			craft1.xDisplayPosition -= 17;
-			craft2.xDisplayPosition -= 17;
-			craft3.xDisplayPosition -= 17;
-			craft4.xDisplayPosition -= 17;
+			for (Slot slot : matrix)
+			{
+				slot.xDisplayPosition -= 17;
+			}
 		}
 		else
 		{
-			craftResult.xDisplayPosition -= 36;
-
-			craft1.xDisplayPosition -= 36;
-			craft2.xDisplayPosition -= 36;
-			craft3.xDisplayPosition -= 36;
-			craft4.xDisplayPosition -= 36;
+			for (Slot slot : matrix)
+			{
+				slot.xDisplayPosition -= 46;
+				slot.yDisplayPosition += 8;
+			}
 		}
 
 		int inventorySlotId = 0;
@@ -112,8 +108,6 @@ public class ContainerEquipment extends ContainerPlayer
 		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RING, inventorySlotId++, 18, 75));
 		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RING, inventorySlotId++, 18, 96));
 		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.NECKWEAR, inventorySlotId++, 18, 54));
-
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.AMMUNITION, inventorySlotId++, 68, 96));
 
 		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.COMPANION, inventorySlotId++, 68, 75));
 		//this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.ARTIFACT, inventorySlotId++, 55, 101));

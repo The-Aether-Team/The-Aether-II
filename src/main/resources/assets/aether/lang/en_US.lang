@@ -303,15 +303,19 @@ container.schematicBlock=Replace With (Chosen Randomly)
 container.labyrinth_chest=Labyrinth Chest
 
 # Accessory slot names
-gui.slot.neckwear=Neckwear
-gui.slot.companion=Companion
-gui.slot.shield=Shield
-gui.slot.relic=Relic
-gui.slot.ring=Ring
-gui.slot.handwear=Handwear
-gui.slot.charm=Charm
-gui.slot.artifact=Artifact
-gui.slot.ammunition=Ammunition
+gui.aether.slot.neckwear=Neckwear
+gui.aether.slot.companion=Companion
+gui.aether.slot.shield=Shield
+gui.aether.slot.relic=Relic
+gui.aether.slot.ring=Ring
+gui.aether.slot.handwear=Handwear
+gui.aether.slot.charm=Charm
+gui.aether.slot.artifact=Artifact
+gui.aether.slot.helmet=Helmet
+gui.aether.slot.chestplate=Chestplate
+gui.aether.slot.leggings=Leggings
+gui.aether.slot.boots=Boots
+gui.aether.slot.offhand=Off-hand
 
 #Ability Tooltips
 ability.breatheUnderwater.name=Underwater Breathing

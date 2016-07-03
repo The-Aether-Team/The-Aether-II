@@ -108,51 +108,47 @@ public class GuiEquipment extends GuiContainer
 
 	private void drawSlotName(int mouseX, int mouseY)
 	{
-		String unlocalizedTooltip = null;
-
 		for (Slot slot : this.inventorySlots.inventorySlots)
 		{
 			if (slot.canBeHovered() && !slot.getHasStack())
 			{
 				if (this.isMouseOverSlot(slot, mouseX, mouseY))
 				{
-					if (slot instanceof SlotEquipment)
+					String unlocalizedName = this.getSlotUnlocalizedName(slot);
+
+					if (unlocalizedName != null)
 					{
-						ItemEquipmentType type = ((SlotEquipment) slot).getEquipmentType();
-
-						unlocalizedTooltip = type.getUnlocalizedName();
+						this.drawHoveringText(Collections.singletonList(I18n.format(unlocalizedName)), mouseX, mouseY, this.mc.fontRendererObj);
 					}
-
-					final int dif = this.aePlayer.getPlayer().inventory.getSizeInventory() - 1;
-
-					if (slot.getSlotIndex() == dif)
-					{
-						unlocalizedTooltip = "Helmet";
-					}
-
-					if (slot.getSlotIndex() == dif - 1)
-					{
-						unlocalizedTooltip = "Chestplate";
-					}
-
-					if (slot.getSlotIndex() == dif - 2)
-					{
-						unlocalizedTooltip = "Leggings";
-					}
-
-					if (slot.getSlotIndex() == dif - 3)
-					{
-						unlocalizedTooltip = "Boots";
-					}
-
-					break;
 				}
 			}
 		}
 
-		if (unlocalizedTooltip != null)
+	}
+
+	private String getSlotUnlocalizedName(Slot slot)
+	{
+		if (slot instanceof SlotEquipment)
 		{
-			this.drawHoveringText(Collections.singletonList(I18n.format(unlocalizedTooltip)), mouseX, mouseY, this.mc.fontRendererObj);
+			ItemEquipmentType type = ((SlotEquipment) slot).getEquipmentType();
+
+			return type.getUnlocalizedName();
+		}
+
+		switch (slot.getSlotIndex())
+		{
+		case 40:
+			return "gui.aether.slot.offhand";
+		case 39:
+			return "gui.aether.slot.helmet";
+		case 38:
+			return "gui.aether.slot.chestplate";
+		case 37:
+			return "gui.aether.slot.leggings";
+		case 36:
+			return "gui.aether.slot.boots";
+		default:
+			return null;
 		}
 	}
 

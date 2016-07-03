@@ -357,7 +357,6 @@ public class ItemsAether
 		equipmentRegistry.register(ItemsAether.candy_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
 		equipmentRegistry.register(ItemsAether.bone_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
 		equipmentRegistry.register(ItemsAether.skyroot_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.bolt, ItemRarity.NONE, ItemEquipmentType.AMMUNITION);
 		equipmentRegistry.register(ItemsAether.zanite_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.gravitite_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.valkyrie_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
@@ -369,8 +368,6 @@ public class ItemsAether
 		equipmentRegistry.register(ItemsAether.gold_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.chain_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.diamond_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
-
-		equipmentRegistry.register(Items.ARROW, ItemRarity.NONE, ItemEquipmentType.AMMUNITION);
 
 		class Effects implements ItemEffects.ItemEffectsProvider
 		{

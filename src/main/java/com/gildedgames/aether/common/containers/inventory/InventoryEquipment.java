@@ -10,6 +10,7 @@ import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,7 +21,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class InventoryEquipment implements IInventoryEquipment
 {
-	private static final int INVENTORY_SIZE = 8;
+	private static final int INVENTORY_SIZE = 7;
 
 	public static final ItemEquipmentType[] slotTypes = new ItemEquipmentType[]
 			{
@@ -31,7 +32,6 @@ public class InventoryEquipment implements IInventoryEquipment
 					ItemEquipmentType.RING,
 					ItemEquipmentType.RING,
 					ItemEquipmentType.NECKWEAR,
-					ItemEquipmentType.AMMUNITION,
 					ItemEquipmentType.COMPANION,
 			/*ItemEquipmentType.ARTIFACT,
 			ItemEquipmentType.CHARM,
@@ -159,7 +159,7 @@ public class InventoryEquipment implements IInventoryEquipment
 	@Override
 	public int getInventoryStackLimit()
 	{
-		return 999;
+		return 64;
 	}
 
 	@Override
