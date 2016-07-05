@@ -9,12 +9,13 @@ import com.gildedgames.aether.common.items.effects.ItemEffects;
 import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
 import com.gildedgames.aether.api.items.properties.ItemRarity;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
+import com.gildedgames.aether.common.items.tools.ItemArkeniumTool;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemGravititeCrossbow;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemSkyrootCrossbow;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemZaniteCrossbow;
+import com.gildedgames.aether.common.items.weapons.swords.ItemArkeniumSword;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDoor;
@@ -31,7 +32,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.AetherCreativeTabs;
-import com.gildedgames.aether.common.AetherMaterials;
+import com.gildedgames.aether.common.MaterialsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
@@ -92,7 +93,9 @@ public class ItemsAether
 
 	public static ItemValkyrieTool valkyrie_axe, valkyrie_pickaxe, valkyrie_shovel;
 
-	public static ItemAetherSword skyroot_sword, holystone_sword, zanite_sword, gravitite_sword, valkyrie_lance;
+	public static ItemArkeniumTool arkenium_axe, arkenium_pickaxe, arkenium_shovel;
+
+	public static ItemAetherSword skyroot_sword, holystone_sword, zanite_sword, gravitite_sword, arkenium_sword, valkyrie_lance;
 
 	public static ItemZaniteArmor zanite_helmet, zanite_chestplate, zanite_leggings, zanite_boots;
 
@@ -196,10 +199,15 @@ public class ItemsAether
 		gravitite_shovel = registerItem("gravitite_shovel", new ItemGravititeTool(EnumToolType.SHOVEL, 1.5F, -3.0F));
 		gravitite_sword = registerItem("gravitite_sword", new ItemGravititeSword());
 
+		arkenium_axe = registerItem("arkenium_axe", new ItemArkeniumTool(EnumToolType.AXE, 8.0F, -3.3F));
+		arkenium_pickaxe = registerItem("arkenium_pickaxe", new ItemArkeniumTool(EnumToolType.PICKAXE, 4.0F, -3.2F));
+		arkenium_shovel = registerItem("arkenium_shovel", new ItemArkeniumTool(EnumToolType.SHOVEL, 4.5F, -3.3F));
+		arkenium_sword = registerItem("arkenium_sword", new ItemArkeniumSword());
+
 		valkyrie_axe = registerItem("valkyrie_axe", new ItemValkyrieTool(EnumToolType.AXE, 8.0F, -3.0F));
 		valkyrie_pickaxe = registerItem("valkyrie_pickaxe", new ItemValkyrieTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
 		valkyrie_shovel = registerItem("valkyrie_shovel", new ItemValkyrieTool(EnumToolType.SHOVEL,  1.5F, -3.0F));
-		valkyrie_lance = registerItem("valkyrie_lance", new ItemAetherSword(AetherMaterials.LEGENDARY_TOOL, ItemAbilityType.PASSIVE));
+		valkyrie_lance = registerItem("valkyrie_lance", new ItemAetherSword(MaterialsAether.LEGENDARY_TOOL, ItemAbilityType.PASSIVE));
 
 		zanite_helmet = registerItem("zanite_helmet", new ItemZaniteArmor(EntityEquipmentSlot.HEAD));
 		zanite_chestplate = registerItem("zanite_chestplate", new ItemZaniteArmor(EntityEquipmentSlot.CHEST));
@@ -231,7 +239,7 @@ public class ItemsAether
 		valkyrie_leggings = registerItem("valkyrie_leggings", new ItemValkyrieArmor(EntityEquipmentSlot.LEGS));
 		valkyrie_boots = registerItem("valkyrie_boots", new ItemValkyrieArmor(EntityEquipmentSlot.FEET));
 
-		sentry_boots = registerItem("sentry_boots", new ItemSentryBoots(AetherMaterials.LEGENDARY_ARMOR));
+		sentry_boots = registerItem("sentry_boots", new ItemSentryBoots(MaterialsAether.LEGENDARY_ARMOR));
 
 		golden_amber = registerItem("golden_amber", new Item(), AetherCreativeTabs.tabMaterials);
 

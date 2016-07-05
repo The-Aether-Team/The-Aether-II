@@ -162,14 +162,16 @@ public class BlockAetherWall extends Block
 	}
 
 	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
-		boolean flag = this.canConnectTo(worldIn, pos.north());
-		boolean flag1 = this.canConnectTo(worldIn, pos.east());
-		boolean flag2 = this.canConnectTo(worldIn, pos.south());
-		boolean flag3 = this.canConnectTo(worldIn, pos.west());
-		boolean flag4 = flag && !flag1 && flag2 && !flag3 || !flag && flag1 && !flag2 && flag3;
-		return state.withProperty(UP, !flag4 || !worldIn.isAirBlock(pos.up())).withProperty(NORTH, flag).withProperty(EAST, flag1).withProperty(SOUTH, flag2).withProperty(WEST, flag3);
+		boolean north = this.canConnectTo(world, pos.north());
+		boolean east = this.canConnectTo(world, pos.east());
+		boolean south = this.canConnectTo(world, pos.south());
+		boolean west = this.canConnectTo(world, pos.west());
+
+		boolean filled = north && !east && south && !west || !north && east && !south && west;
+
+		return state.withProperty(UP, !filled || !world.isAirBlock(pos.up())).withProperty(NORTH, north).withProperty(EAST, east).withProperty(SOUTH, south).withProperty(WEST, west);
 	}
 
 	@Override

@@ -41,6 +41,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.natural.BlockIcestoneBricks;
 import com.gildedgames.aether.common.blocks.natural.BlockQuicksoil;
 import com.gildedgames.aether.common.blocks.natural.ores.BlockAmbrosiumOre;
+import com.gildedgames.aether.common.blocks.natural.ores.BlockArkeniumOre;
 import com.gildedgames.aether.common.blocks.natural.ores.BlockContinuumOre;
 import com.gildedgames.aether.common.blocks.natural.ores.BlockGravititeOre;
 import com.gildedgames.aether.common.blocks.natural.ores.BlockIcestoneOre;
@@ -81,6 +82,8 @@ public class BlocksAether
 	public static BlockGravititeOre gravitite_ore;
 
 	public static BlockContinuumOre continuum_ore;
+
+	public static BlockArkeniumOre arkenium_ore;
 
 	public static Block skyroot_planks;
 
@@ -188,6 +191,8 @@ public class BlocksAether
 		gravitite_ore = registerBlock("gravitite_ore", new BlockGravititeOre(), AetherCreativeTabs.tabBlocks);
 
 		continuum_ore = registerBlock("continuum_ore", new BlockContinuumOre(), AetherCreativeTabs.tabBlocks);
+
+		arkenium_ore = registerBlock("arkenium_ore", new BlockArkeniumOre(), AetherCreativeTabs.tabBlocks);
 
 		skyroot_log = registerBlock("skyroot_log", new BlockAetherLog(), AetherCreativeTabs.tabBlocks);
 

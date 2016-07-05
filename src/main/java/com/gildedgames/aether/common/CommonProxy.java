@@ -66,7 +66,7 @@ public class CommonProxy
 		DimensionManager.registerDimension(AetherCore.getAetherDimID(), this.aetherDimension);
 
 		// Pre-initialize content.
-		AetherMaterials.preInit();
+		MaterialsAether.preInit();
 
 		BlocksAether.preInit();
 		ItemsAether.preInit();

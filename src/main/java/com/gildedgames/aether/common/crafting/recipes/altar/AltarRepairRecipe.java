@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.crafting.recipes.altar;
 
-import com.gildedgames.aether.common.AetherMaterials;
+import com.gildedgames.aether.common.MaterialsAether;
 import com.gildedgames.aether.common.items.tools.ItemAetherTool;
 import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipe;
@@ -59,7 +59,7 @@ public class AltarRepairRecipe implements IAltarRecipe
 				return 5;
 			}
 
-			if (armor.getArmorMaterial() == AetherMaterials.LEGENDARY_ARMOR || armor.getArmorMaterial() == AetherMaterials.OBSIDIAN_ARMOR || armor.getArmorMaterial() == AetherMaterials.VALKYRIE_ARMOR)
+			if (armor.getArmorMaterial() == MaterialsAether.LEGENDARY_ARMOR || armor.getArmorMaterial() == MaterialsAether.OBSIDIAN_ARMOR || armor.getArmorMaterial() == MaterialsAether.VALKYRIE_ARMOR)
 			{
 				return 6;
 			}

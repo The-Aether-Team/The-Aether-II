@@ -103,6 +103,7 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.zanite_ore, "ores/zanite_ore");
 		registerItemModels(BlocksAether.gravitite_ore, "ores/gravitite_ore");
 		registerItemModels(BlocksAether.continuum_ore, "ores/continuum_ore");
+		registerItemModels(BlocksAether.arkenium_ore, "ores/arkenium_ore");
 
 		registerItemModels(BlocksAether.quicksoil, "quicksoil");
 		registerItemModels(BlocksAether.icestone_ore, "icestone_ore");
@@ -154,6 +155,11 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.gravitite_axe, "tools/gravitite_axe");
 		registerItemModels(ItemsAether.gravitite_shovel, "tools/gravitite_shovel");
 		registerItemModels(ItemsAether.gravitite_sword, "weapons/gravitite_sword");
+
+		registerItemModels(ItemsAether.arkenium_pickaxe, "tools/arkenium_pickaxe");
+		registerItemModels(ItemsAether.arkenium_axe, "tools/arkenium_axe");
+		registerItemModels(ItemsAether.arkenium_shovel, "tools/arkenium_shovel");
+		registerItemModels(ItemsAether.arkenium_sword, "weapons/arkenium_sword");
 
 		registerItemModels(ItemsAether.valkyrie_pickaxe, "tools/valkyrie_pickaxe");
 		registerItemModels(ItemsAether.valkyrie_axe, "tools/valkyrie_axe");

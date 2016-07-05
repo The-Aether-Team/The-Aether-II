@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.weapons;
 
-import com.gildedgames.aether.common.AetherMaterials;
+import com.gildedgames.aether.common.MaterialsAether;
 import com.gildedgames.aether.common.items.ItemAbilityType;
 import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,7 +11,7 @@ public class ItemVampireBlade extends ItemAetherSword
 {
 	public ItemVampireBlade()
 	{
-		super(AetherMaterials.LEGENDARY_TOOL, ItemAbilityType.PASSIVE);
+		super(MaterialsAether.LEGENDARY_TOOL, ItemAbilityType.PASSIVE);
 	}
 
 	@Override

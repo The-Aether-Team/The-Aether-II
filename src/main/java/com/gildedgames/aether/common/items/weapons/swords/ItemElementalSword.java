@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.items.weapons.swords;
 
 import com.gildedgames.aether.common.AetherCreativeTabs;
-import com.gildedgames.aether.common.AetherMaterials;
+import com.gildedgames.aether.common.MaterialsAether;
 import com.gildedgames.aether.common.items.ItemAbilityType;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -41,7 +41,7 @@ public class ItemElementalSword extends ItemAetherSword
 					@Override
 					public void onEntityAttacked(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
 					{
-						float damage = target.isEntityUndead() ? 12.0f : AetherMaterials.LEGENDARY_TOOL.getDamageVsEntity();
+						float damage = target.isEntityUndead() ? 12.0f : MaterialsAether.LEGENDARY_TOOL.getDamageVsEntity();
 
 						if (attacker instanceof EntityPlayer)
 						{
@@ -61,7 +61,7 @@ public class ItemElementalSword extends ItemAetherSword
 
 	public ItemElementalSword(SwordElement element)
 	{
-		super(AetherMaterials.LEGENDARY_TOOL, ItemAbilityType.PASSIVE);
+		super(MaterialsAether.LEGENDARY_TOOL, ItemAbilityType.PASSIVE);
 
 		this.element = element;
 

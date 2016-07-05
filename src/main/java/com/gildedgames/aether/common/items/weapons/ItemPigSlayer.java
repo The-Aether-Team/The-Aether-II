@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.weapons;
 
-import com.gildedgames.aether.common.AetherMaterials;
+import com.gildedgames.aether.common.MaterialsAether;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
 import com.gildedgames.aether.common.items.ItemAbilityType;
 import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
@@ -15,7 +15,7 @@ public class ItemPigSlayer extends ItemAetherSword
 {
 	public ItemPigSlayer()
 	{
-		super(AetherMaterials.LEGENDARY_TOOL, ItemAbilityType.PASSIVE);
+		super(MaterialsAether.LEGENDARY_TOOL, ItemAbilityType.PASSIVE);
 
 		this.setMaxDamage(200);
 	}

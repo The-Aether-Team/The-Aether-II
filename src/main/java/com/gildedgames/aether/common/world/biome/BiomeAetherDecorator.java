@@ -30,7 +30,7 @@ public class BiomeAetherDecorator
 {
 	protected WorldGenAetherTallGrass genAetherGrass;
 
-	protected WorldGenMinable genAmbrosium, genZanite, genGravitite, genContinuum, genIcestone;
+	protected WorldGenMinable genAmbrosium, genZanite, genGravitite, genContinuum, genIcestone, genArkenium;
 
 	protected WorldGenAetherFlowers genPurpleFlowers, genWhiteRoses;
 
@@ -59,6 +59,7 @@ public class BiomeAetherDecorator
 		this.genGravitite = new WorldGenMinable(BlocksAether.gravitite_ore.getDefaultState(), 4, holystoneMatcher);
 		this.genContinuum = new WorldGenMinable(BlocksAether.continuum_ore.getDefaultState(), 4, holystoneMatcher);
 		this.genIcestone = new WorldGenMinable(BlocksAether.icestone_ore.getDefaultState(), 10, holystoneMatcher);
+		this.genArkenium = new WorldGenMinable(BlocksAether.arkenium_ore.getDefaultState(), 8, holystoneMatcher);
 
 		this.genPurpleFlowers = new WorldGenAetherFlowers(BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER), 64);
 		this.genWhiteRoses = new WorldGenAetherFlowers(BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE), 64);
@@ -240,13 +241,14 @@ public class BiomeAetherDecorator
 		this.generateMineable(this.genGravitite, world, random, pos, 0, 32, 6);
 		this.generateMineable(this.genContinuum, world, random, pos, 0, 128, 4);
 		this.generateMineable(this.genIcestone, world, random, pos, 0, 128, 10);
+		this.generateMineable(this.genArkenium, world, random, pos, 0, 128, 20);
 	}
 
 	protected void generateClouds(World world, Random random, BlockPos pos)
 	{
 		this.generateCloud(this.genBlueAercloud, world, pos, random, 15, 16, 65);
-		//this.generateCloud(this.genColdFlatAercloud, world, pos, random, 10, 16, 32);
-		//this.generateCloud(this.genColdColumbusAercloud, world, pos, random, 30, 16, 65);
+//		this.generateCloud(this.genColdFlatAercloud, world, pos, random, 10, 16, 32);
+		this.generateCloud(this.genColdColumbusAercloud, world, pos, random, 30, 16, 65);
 
 		this.generateCloud(this.genPurpleAercloud, world, pos, random, 50, 4, 32);
 	}
