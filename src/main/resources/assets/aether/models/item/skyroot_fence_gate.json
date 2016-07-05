@@ -1,5 +1,5 @@
 {
-	"parent": "block/fence_inventory",
+	"parent": "aether:block/skyroot_fence_gate/skyroot_fence_gate_closed",
 	"textures": {
 		"texture": "aether:blocks/skyroot_planks"
 	}
