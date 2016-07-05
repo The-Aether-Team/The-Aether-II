@@ -81,7 +81,7 @@ public class ItemsAether
 {
 	public static Item skyroot_stick;
 
-	public static Item ambrosium_shard, continuum_orb, zanite_gemstone;
+	public static Item ambrosium_shard, continuum_orb, zanite_gemstone, arkenium;
 
 	public static ItemSkyrootTool skyroot_axe, skyroot_pickaxe, skyroot_shovel;
 
@@ -177,6 +177,7 @@ public class ItemsAether
 		ambrosium_shard = registerItem("ambrosium_shard", new ItemAmbrosiumShard(), AetherCreativeTabs.tabMaterials);
 		continuum_orb = registerItem("continuum_orb", new ItemContinuumOrb(), AetherCreativeTabs.tabMaterials);
 		zanite_gemstone = registerItem("zanite_gemstone", new Item(), AetherCreativeTabs.tabMaterials);
+		arkenium = registerItem("arkenium", new Item(), AetherCreativeTabs.tabMaterials);
 		icestone = registerItem("icestone", new Item(), AetherCreativeTabs.tabMaterials);
 
 		skyroot_axe = registerItem("skyroot_axe", new ItemSkyrootTool(EnumToolType.AXE, 6.0F, -3.2F));

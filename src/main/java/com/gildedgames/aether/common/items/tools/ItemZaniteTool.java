@@ -19,7 +19,7 @@ public class ItemZaniteTool extends ItemAetherTool
 		{
 			if (state.getBlock().isToolEffective(type, state))
 			{
-				return this.efficiencyOnProperMaterial * (2.0F * stack.getItemDamage() / stack.getItem().getMaxDamage() + 0.5F);
+				return this.efficiencyOnProperMaterial * (2.0F * stack.getItemDamage() / stack.getItem().getMaxDamage() + 1.0F);
 			}
 		}
 

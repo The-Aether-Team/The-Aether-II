@@ -328,6 +328,7 @@ public class BlocksAether
 		zanite_ore.setHarvestLevel("pickaxe", 1);
 		gravitite_ore.setHarvestLevel("pickaxe", 2);
 		continuum_ore.setHarvestLevel("pickaxe", 3);
+		arkenium_ore.setHarvestLevel("pickaxe", 2);
 
 		icestone_ore.setHarvestLevel("pickaxe", 1);
 		icestone_bricks.setHarvestLevel("pickaxe", 1);

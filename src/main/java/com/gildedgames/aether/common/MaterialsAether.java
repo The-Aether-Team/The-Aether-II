@@ -27,6 +27,6 @@ public class MaterialsAether
 
 		LEGENDARY_TOOL = EnumHelper.addToolMaterial("aether_legendary", 3, 1000, 8.0F, 2.0F, 14);
 
-		ARKENIUM_TOOL = EnumHelper.addToolMaterial("aether_arkenium", 2, 3192, 6.0F, 4.0F, 14);
+		ARKENIUM_TOOL = EnumHelper.addToolMaterial("aether_arkenium", 2, 3192, 5.5F, 4.0F, 14);
 	}
 }

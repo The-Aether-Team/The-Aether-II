@@ -20,8 +20,7 @@ public class RecipesAether implements IAltarRecipeRegistry
 
 	public void preInit()
 	{
-		CraftingManager.getInstance().addRecipe(new RecipeLeatherGlovesDyes());
-
+		registerFurnaceRecipes();
 		registerCraftingRecipes();
 		registerToolRecipes();
 		registerArmorRecipes();
@@ -32,8 +31,15 @@ public class RecipesAether implements IAltarRecipeRegistry
 		GameRegistry.registerFuelHandler(new AetherFuelHandler());
 	}
 
+	private void registerFurnaceRecipes()
+	{
+		registerSmeltingRecipe(new ItemStack(BlocksAether.arkenium_ore), new ItemStack(ItemsAether.arkenium), 0.85f);
+	}
+
 	private void registerCraftingRecipes()
 	{
+		CraftingManager.getInstance().addRecipe(new RecipeLeatherGlovesDyes());
+
 		// Skyroot Planks
 		registerShapelessRecipe(new ItemStack(BlocksAether.skyroot_planks, 4),
 				new ItemStack(BlocksAether.skyroot_log));
@@ -198,6 +204,7 @@ public class RecipesAether implements IAltarRecipeRegistry
 		ItemStack holystone = new ItemStack(BlocksAether.holystone);
 		ItemStack zanite = new ItemStack(ItemsAether.zanite_gemstone);
 		ItemStack gravitite = new ItemStack(BlocksAether.enchanted_gravitite);
+		ItemStack arkenium = new ItemStack(ItemsAether.arkenium);
 
 		// Skyroot Tools
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_axe), "XX ", "XY ", " Y ",
@@ -250,6 +257,19 @@ public class RecipesAether implements IAltarRecipeRegistry
 
 		registerShapedRecipe(new ItemStack(ItemsAether.gravitite_sword), "X", "X", "Y",
 				'X', gravitite, 'Y', skyrootStick);
+
+		// Arkenium Tools
+		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_axe), "XX ", "XY ", " Y ",
+				'X', arkenium, 'Y', skyrootStick);
+
+		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_pickaxe), "XXX", " Y ", " Y ",
+				'X', arkenium, 'Y', skyrootStick);
+
+		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_shovel), "X", "Y", "Y",
+				'X', arkenium, 'Y', skyrootStick);
+
+		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_sword), "X", "X", "Y",
+				'X', arkenium, 'Y', skyrootStick);
 	}
 
 	private void registerArmorRecipes()
@@ -409,6 +429,11 @@ public class RecipesAether implements IAltarRecipeRegistry
 	private static void registerShapedRecipe(ItemStack output, Object... params)
 	{
 		GameRegistry.addShapedRecipe(output, params);
+	}
+
+	private static void registerSmeltingRecipe(ItemStack input, ItemStack output, float xp)
+	{
+		GameRegistry.addSmelting(input, output, xp);
 	}
 
 	@Override

@@ -135,6 +135,7 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.ambrosium_shard, "ambrosium_shard");
 		registerItemModels(ItemsAether.continuum_orb, "continuum_orb");
 		registerItemModels(ItemsAether.zanite_gemstone, "zanite_gemstone");
+		registerItemModels(ItemsAether.arkenium, "arkenium");
 
 		registerItemModels(ItemsAether.skyroot_pickaxe, "tools/skyroot_pickaxe");
 		registerItemModels(ItemsAether.skyroot_axe, "tools/skyroot_axe");
