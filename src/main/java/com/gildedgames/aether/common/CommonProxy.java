@@ -1,9 +1,24 @@
 package com.gildedgames.aether.common;
 
-import java.io.File;
-import java.util.Random;
-
+import com.gildedgames.aether.client.gui.tab.TabEquipment;
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.crafting.RecipesAether;
+import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.entities.EntityItemWatcher;
+import com.gildedgames.aether.common.entities.effects.EntityEffectsEventHooks;
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.properties.EquipmentRegistry;
+import com.gildedgames.aether.common.network.AetherGuiHandler;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.player.PlayerAetherEvents;
+import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
+import com.gildedgames.aether.common.tile_entities.TileEntityBoundary.FetchedEntity;
+import com.gildedgames.aether.common.world.WorldProviderAether;
+import com.gildedgames.aether.common.world.chunk.PlacementFlagProvider;
+import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
+import com.gildedgames.util.io.Instantiator;
+import com.gildedgames.util.modules.chunk.ChunkModule;
+import com.gildedgames.util.modules.tab.TabModule;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.EnumParticleTypes;
@@ -17,22 +32,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-import com.gildedgames.aether.client.gui.tab.TabEquipment;
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.EntitiesAether;
-import com.gildedgames.aether.common.entities.effects.EntityEffectsEventHooks;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.properties.EquipmentRegistry;
-import com.gildedgames.aether.common.network.AetherGuiHandler;
-import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.player.PlayerAetherEvents;
-import com.gildedgames.aether.common.crafting.RecipesAether;
-import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
-import com.gildedgames.aether.common.tile_entities.TileEntityBoundary.FetchedEntity;
-import com.gildedgames.aether.common.world.WorldProviderAether;
-import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
-import com.gildedgames.util.io.Instantiator;
-import com.gildedgames.util.modules.tab.TabModule;
+import java.io.File;
+import java.util.Random;
 
 public class CommonProxy
 {
@@ -41,6 +42,8 @@ public class CommonProxy
 	private final RecipesAether recipeManager = new RecipesAether();
 
 	private final EquipmentRegistry equipmentRegistry = new EquipmentRegistry();
+
+	private final PlacementFlagProvider placementFlagProvider = new PlacementFlagProvider();
 
 	private DimensionType aetherDimension;
 
@@ -96,7 +99,7 @@ public class CommonProxy
 
 		MinecraftForge.EVENT_BUS.register(ItemsAether.skyroot_sword);
 
-//		ChunkModule.api().registerHookFactory(new PlacementFlagFactory());
+		ChunkModule.api().registerHookFactory(this.placementFlagProvider);
 	}
 
 	public void postInit(FMLPostInitializationEvent event)
@@ -141,5 +144,10 @@ public class CommonProxy
 	public DimensionType getAetherDimensionType()
 	{
 		return this.aetherDimension;
+	}
+
+	public PlacementFlagProvider getPlacementFlagProvider()
+	{
+		return this.placementFlagProvider;
 	}
 }

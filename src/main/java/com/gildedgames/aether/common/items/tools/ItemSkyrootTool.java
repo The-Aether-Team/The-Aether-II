@@ -1,8 +1,9 @@
 package com.gildedgames.aether.common.items.tools;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.util.ISkyrootMinable;
-import com.gildedgames.aether.common.world.chunk.AetherPlaceFlagChunkHook;
 import com.gildedgames.util.modules.chunk.ChunkModule;
+import com.gildedgames.util.modules.chunk.api.hook.BlockBitFlagChunkHook;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -28,9 +29,9 @@ public class ItemSkyrootTool extends ItemAetherTool
 	{
 		if (!world.isRemote)
 		{
-			AetherPlaceFlagChunkHook data = ChunkModule.api().getHook(world, pos, AetherPlaceFlagChunkHook.class);
+			BlockBitFlagChunkHook data = ChunkModule.api().getHook(world, pos, AetherCore.PROXY.getPlacementFlagProvider());
 
-			boolean wasPlaced = data.getExtendedBlockState(pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15).getValue(AetherPlaceFlagChunkHook.PROPERTY_BLOCK_PLACED);
+			boolean wasPlaced = data.isMarked(pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15);
 
 			if (!wasPlaced && state.getBlock().isToolEffective(this.toolType.getToolClass(), state))
 			{

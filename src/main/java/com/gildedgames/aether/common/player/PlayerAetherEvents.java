@@ -1,5 +1,10 @@
 package com.gildedgames.aether.common.player;
 
+import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.util.modules.chunk.ChunkModule;
+import com.gildedgames.util.modules.chunk.api.hook.BlockBitFlagChunkHook;
 import net.minecraft.nbt.NBTBase;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -11,11 +16,6 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import com.gildedgames.aether.common.world.chunk.AetherPlaceFlagChunkHook;
-import com.gildedgames.util.modules.chunk.ChunkModule;
 
 public class PlayerAetherEvents
 {
@@ -116,20 +116,13 @@ public class PlayerAetherEvents
 	@SubscribeEvent
 	public void onPlaceBlockEvent(BlockEvent.PlaceEvent event)
 	{
-		AetherPlaceFlagChunkHook data = ChunkModule.api().getHook(event.getWorld(), event.getPos(), AetherPlaceFlagChunkHook.class);
+		BlockBitFlagChunkHook data = ChunkModule.api().getHook(event.getWorld(), event.getPos(), AetherCore.PROXY.getPlacementFlagProvider());
 
 		int x = event.getPos().getX(), y = event.getPos().getY(), z = event.getPos().getZ();
 
 		if (data != null)
 		{
-			data.setExtendedBlockState(x, y, z, data.getExtendedBlockState(x, y, z).withProperty(AetherPlaceFlagChunkHook.PROPERTY_BLOCK_PLACED, true));
-		}
-		else
-		{
-			/*
-			 * TODO: FIX THIS SHIT FUCK
-			 */
-			//System.out.println("Chunk hook is null, something is going wrong!");
+			data.mark(x, y, z);
 		}
 	}
 }

@@ -2,8 +2,8 @@
 	"parent": "block/block",
 	"textures": {
 		"inside": "aether:blocks/holystone_furnace/holystone_furnace_inside",
-		"inside_dark": "aether:blocks/holystone_furnace/holystone_furnace_inside_lit",
-		"fire": "aether:blocks/holystone_furnace/holystone_furnace_fire_on",
+		"inside_dark": "aether:blocks/holystone_furnace/holystone_furnace_inside_dark",
+		"fire": "aether:blocks/holystone_furnace/holystone_furnace_fire_off",
 		"particle": "aether:blocks/holystone/holystone"
 	},
 	"elements": [
