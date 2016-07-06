@@ -20,6 +20,12 @@ public class LabyrinthTotemSound extends PositionedSound implements ITickableSou
 
 		this.world = world;
 		this.pos = pos;
+
+		this.xPosF = pos.getX();
+		this.yPosF = pos.getY();
+		this.zPosF = pos.getZ();
+
+		this.repeat = true;
 	}
 
 	@Override

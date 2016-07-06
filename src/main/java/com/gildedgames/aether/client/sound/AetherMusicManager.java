@@ -43,6 +43,13 @@ public class AetherMusicManager
 				{
 					SoundEvent event = generator.getMusicResource(aePlayer);
 
+					if (event == null)
+					{
+						this.quietPeriod += 200;
+
+						return;
+					}
+
 					this.playMusic(event);
 
 					this.quietPeriod = generator.getQuietPeriod(aePlayer);

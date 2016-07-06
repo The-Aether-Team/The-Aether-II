@@ -10,7 +10,14 @@ public class AetherMusicGenerator implements IMusicGenerator
 	@Override
 	public boolean isPlayable(IPlayerAetherCapability aePlayer)
 	{
-		return aePlayer.getPlayer().dimension == AetherCore.getAetherDimID();
+		long time = aePlayer.getPlayer().worldObj.getWorldTime();
+
+		if ((time > 1000L && time < 8000L) || (time > 13000L && time < 20000L))
+		{
+			return aePlayer.getPlayer().dimension == AetherCore.getAetherDimID();
+		}
+
+		return false;
 	}
 
 	@Override
@@ -18,14 +25,18 @@ public class AetherMusicGenerator implements IMusicGenerator
 	{
 		World world = player.getPlayer().getEntityWorld();
 
-		if (world.getWorldTime() > 12800L || world.getWorldTime() < 22300L)
+		long time = world.getWorldTime();
+
+		if (time > 1000L && time < 9000L)
 		{
-			return new SoundEvent(AetherCore.getResource("aether:aemusic.day"));
+			return new SoundEvent(AetherCore.getResource("aemusic.day"));
 		}
-		else
+		else if (time > 13000L && time < 20000L)
 		{
-			return new SoundEvent(AetherCore.getResource("aether:aemusic.night"));
+			return new SoundEvent(AetherCore.getResource("aemusic.night"));
 		}
+
+		return null;
 	}
 
 	@Override
