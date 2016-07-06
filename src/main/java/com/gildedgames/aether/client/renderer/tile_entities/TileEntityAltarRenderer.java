@@ -57,12 +57,12 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 
 			if (stack.getItem() instanceof ItemBlock)
 			{
-				GlStateManager.scale(0.5F, 0.5F, 0.5F);
+				GlStateManager.scale(0.25F, 0.25F, 0.25F);
 				GlStateManager.translate(0.0f, -0.05f, 0.0f);
 			}
 			else
 			{
-				GlStateManager.scale(1.0F, 1.0F, 1.0F);
+				GlStateManager.scale(0.5F, 0.5F, 0.5F);
 				GlStateManager.translate(0.0f, -0.13f, 0.0f);
 				GlStateManager.rotate(90.0f, 90.0f, 0.0f, 0.0f);
 				GlStateManager.rotate(90.0f, 0.0f, 0.0f, 90.0f);
@@ -117,7 +117,7 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 
 			GlStateManager.translate(deltaX, 0, deltaZ);
 
-			GlStateManager.scale(0.5f, 0.5f, 0.5f);
+			GlStateManager.scale(0.25f, 0.25f, 0.25f);
 			GlStateManager.rotate(90.0f, 0.0f, -90.0f, 0.0f);
 
 			this.renderItem(new ItemStack(ItemsAether.ambrosium_shard));

@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.registry.altar.IAltarRecipe;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.items.ItemsAether;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -166,7 +167,9 @@ public class TileEntityAltar extends TileEntity implements ITickable
 
 	private void sendUpdates()
 	{
-		this.worldObj.scheduleUpdate(pos, this.blockType, 0);
+		IBlockState state = this.worldObj.getBlockState(this.pos);
+
+		this.worldObj.notifyBlockUpdate(pos, state, state, 3);
 
 		this.markDirty();
 	}
