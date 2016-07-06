@@ -126,7 +126,7 @@ public class Schematic
 							tileEntityData.setInteger("y", blockData.y + location.getY());
 							tileEntityData.setInteger("z", blockData.z + location.getZ());
 
-							world.setTileEntity(new BlockPos(blockData.x + location.getX(), blockData.y + location.getY(), blockData.z + location.getZ()), TileEntity.func_190200_a(world, tileEntityData));
+							world.setTileEntity(new BlockPos(blockData.x + location.getX(), blockData.y + location.getY(), blockData.z + location.getZ()), TileEntity.create(world, tileEntityData));
 						}
 					}
 				}
@@ -176,7 +176,7 @@ public class Schematic
 						tileEntityData.setInteger("y", blockData.y + loc.getY());
 						tileEntityData.setInteger("z", blockData.z + loc.getZ());
 
-						world.setTileEntity(new BlockPos(blockData.x + loc.getX(), blockData.y + loc.getY(), blockData.z + loc.getZ()), TileEntity.func_190200_a(world, tileEntityData));
+						world.setTileEntity(new BlockPos(blockData.x + loc.getX(), blockData.y + loc.getY(), blockData.z + loc.getZ()), TileEntity.create(world, tileEntityData));
 					}
 				}
 			}

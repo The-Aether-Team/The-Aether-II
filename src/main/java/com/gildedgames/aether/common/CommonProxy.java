@@ -99,7 +99,7 @@ public class CommonProxy
 
 		MinecraftForge.EVENT_BUS.register(ItemsAether.skyroot_sword);
 
-		ChunkModule.api().registerHookFactory(this.placementFlagProvider);
+		ChunkModule.api().registerChunkHookProvider(this.placementFlagProvider);
 	}
 
 	public void postInit(FMLPostInitializationEvent event)

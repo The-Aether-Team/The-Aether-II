@@ -20,8 +20,6 @@ public class NetworkingAether
 		instance = NetworkRegistry.INSTANCE.newSimpleChannel(AetherCore.MOD_ID);
 
 		instance.registerMessage(AetherMovementPacket.Handler.class, AetherMovementPacket.class, discriminant++, Side.SERVER);
-
-		// TODO :)
 	}
 
 	public static void sendPacketToPlayer(IMessage message, EntityPlayerMP player)

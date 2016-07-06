@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.util.modules.chunk.ChunkModule;
-import com.gildedgames.util.modules.chunk.api.hook.BlockBitFlagChunkHook;
+import com.gildedgames.util.modules.chunk.impl.hooks.BlockBitFlagChunkHook;
 import net.minecraft.nbt.NBTBase;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -118,11 +118,9 @@ public class PlayerAetherEvents
 	{
 		BlockBitFlagChunkHook data = ChunkModule.api().getHook(event.getWorld(), event.getPos(), AetherCore.PROXY.getPlacementFlagProvider());
 
-		int x = event.getPos().getX(), y = event.getPos().getY(), z = event.getPos().getZ();
-
 		if (data != null)
 		{
-			data.mark(x, y, z);
+			data.mark(event.getPos());
 		}
 	}
 }
