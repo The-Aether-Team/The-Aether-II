@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.world.biome;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud.AercloudVariant;
+import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.world.features.WorldGenAetherFlowers;
@@ -17,6 +18,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -31,6 +33,8 @@ public class BiomeAetherDecorator
 	protected WorldGenAetherTallGrass genAetherGrass;
 
 	protected WorldGenMinable genAmbrosium, genZanite, genGravitite, genContinuum, genIcestone, genArkenium;
+
+	protected WorldGenMinable genMossyHolystone;
 
 	protected WorldGenAetherFlowers genPurpleFlowers, genWhiteRoses;
 
@@ -60,6 +64,8 @@ public class BiomeAetherDecorator
 		this.genContinuum = new WorldGenMinable(BlocksAether.continuum_ore.getDefaultState(), 4, holystoneMatcher);
 		this.genIcestone = new WorldGenMinable(BlocksAether.icestone_ore.getDefaultState(), 10, holystoneMatcher);
 		this.genArkenium = new WorldGenMinable(BlocksAether.arkenium_ore.getDefaultState(), 8, holystoneMatcher);
+
+		this.genMossyHolystone = new WorldGenMinable(BlocksAether.holystone.getDefaultState().withProperty(BlockHolystone.PROPERTY_VARIANT, BlockHolystone.MOSSY_HOLYSTONE), 20, holystoneMatcher);
 
 		this.genPurpleFlowers = new WorldGenAetherFlowers(BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER), 64);
 		this.genWhiteRoses = new WorldGenAetherFlowers(BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE), 64);
@@ -214,6 +220,20 @@ public class BiomeAetherDecorator
 		}
 	}
 
+	private void generateCaveMineable(WorldGenMinable minable, World world, Random random, BlockPos pos, int minY, int maxY, int attempts)
+	{
+		for (int count = 0; count < attempts; count++)
+		{
+			BlockPos randomPos = pos.add(random.nextInt(16), random.nextInt(maxY - minY) + minY, random.nextInt(16));
+//			randomPos = world.getTopSolidOrLiquidBlock(randomPos);
+
+			if (world.getLightFor(EnumSkyBlock.SKY, randomPos) <= 7)
+			{
+				minable.generate(world, random, randomPos);
+			}
+		}
+	}
+
 	private void generateCloud(WorldGenAercloud gen, World world, BlockPos pos, Random rand, int rarity, int width, int height)
 	{
 		if (rand.nextInt(rarity) == 0)
@@ -242,6 +262,7 @@ public class BiomeAetherDecorator
 		this.generateMineable(this.genContinuum, world, random, pos, 0, 128, 4);
 		this.generateMineable(this.genIcestone, world, random, pos, 0, 128, 10);
 		this.generateMineable(this.genArkenium, world, random, pos, 0, 128, 20);
+		this.generateCaveMineable(this.genMossyHolystone, world, random, pos, 0, 90, 45);
 	}
 
 	protected void generateClouds(World world, Random random, BlockPos pos)

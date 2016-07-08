@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.world.chunk;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.world.features.WorldGenAetherCaves;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
@@ -11,6 +12,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.MapGenBase;
+import net.minecraft.world.gen.MapGenCaves;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkGeneratorEvent;
@@ -22,17 +25,17 @@ import java.util.Random;
 
 public class ChunkGeneratorAether implements IChunkGenerator
 {
-	private final IBlockState air;
+	private final IBlockState air, aether_stone, cold_aercloud;
 
 	private final World worldObj;
-
-	private final IBlockState aether_stone;
 
 	private final Random random;
 
 	private NoiseGeneratorOctaves[] octaveNoiseGenerators;
 
 	private NoiseGeneratorOctaves cloudNoiseGenerator;
+
+	private WorldGenAetherCaves caveGenerator = new WorldGenAetherCaves();
 
 	private double[] cloudNoise;
 
@@ -45,8 +48,8 @@ public class ChunkGeneratorAether implements IChunkGenerator
 	public ChunkGeneratorAether(World world, long seed)
 	{
 		this.air = Blocks.AIR.getDefaultState();
-
 		this.aether_stone = BlocksAether.holystone.getDefaultState();
+		this.cold_aercloud = BlocksAether.aercloud.getDefaultState();
 
 		this.worldObj = world;
 		this.random = new Random(seed);
@@ -74,7 +77,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		return null;
 	}
 
-	public void fillWithBlocks1(ChunkPrimer primer, int chunkX, int chunkZ)
+	public void setBlocksInChunk(ChunkPrimer primer, int chunkX, int chunkZ)
 	{
 		final int dimXZ = 2;
 		final int dimXZPlusOne = dimXZ + 1;
@@ -147,7 +150,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		}
 	}
 
-	public void replaceBlocksForBiome(ChunkPrimer primer, int chunkX, int chunkY, Biome[] biomes)
+	public void replaceBiomeBlocks(ChunkPrimer primer, int chunkX, int chunkY, Biome[] biomes)
 	{
 		double oneThirtySnd = 0.03125D;
 
@@ -318,9 +321,9 @@ public class ChunkGeneratorAether implements IChunkGenerator
 
 					if (sample / 5.0D > 200.0D)
 					{
-						if (primer.getBlockState(x, y, z).getBlock() == Blocks.AIR)
+						if (primer.getBlockState(x, y, z) == this.air)
 						{
-							primer.setBlockState(x, 8 + y / sampleSize, z, BlocksAether.aercloud.getDefaultState());
+							primer.setBlockState(x, 8 + y / sampleSize, z, this.cold_aercloud);
 						}
 					}
 				}
@@ -335,11 +338,12 @@ public class ChunkGeneratorAether implements IChunkGenerator
 
 		ChunkPrimer primer = new ChunkPrimer();
 
-		this.fillWithBlocks1(primer, chunkX, chunkZ);
-
 		this.biomesForGeneration = this.worldObj.getBiomeProvider().getBiomesForGeneration(this.biomesForGeneration, chunkX * 16, chunkZ * 16, 16, 16);
 
-		this.replaceBlocksForBiome(primer, chunkX, chunkZ, this.biomesForGeneration);
+		this.setBlocksInChunk(primer, chunkX, chunkZ);
+		this.replaceBiomeBlocks(primer, chunkX, chunkZ, this.biomesForGeneration);
+
+		this.caveGenerator.generate(this.worldObj, chunkX, chunkZ, primer);
 
 		this.genClouds(primer, chunkX, chunkZ);
 
