@@ -1,19 +1,7 @@
 {
 	"variants": {
-		"facing=north": {
-			"model": "aether:altar"
-		},
-		"facing=west": {
-			"model": "aether:altar",
-			"y": 270
-		},
-		"facing=south": {
-			"model": "aether:altar",
-			"y": 180
-		},
-		"facing=east": {
-			"model": "aether:altar",
-			"y": 90
-		}
+		"normal": [
+			{ "model": "aether:altar" }
+		]
 	}
 }

@@ -57,8 +57,8 @@ public class RecipesAether implements IAltarRecipeRegistry
 				'X', new ItemStack(BlocksAether.skyroot_planks));
 
 		// Altar
-        registerShapedRecipe(new ItemStack(BlocksAether.altar), "XXX", "XYX", "XXX",
-				'X', new ItemStack(BlocksAether.holystone), 'Y', new ItemStack(ItemsAether.zanite_gemstone));
+        registerShapedRecipe(new ItemStack(BlocksAether.altar), "AZA", " H ", "HHH",
+				'H', new ItemStack(BlocksAether.holystone), 'Z', new ItemStack(ItemsAether.zanite_gemstone), 'A', new ItemStack(ItemsAether.arkenium));
 
 		// Skyroot Door
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_door, 3), "XX", "XX", "XX",
@@ -116,8 +116,8 @@ public class RecipesAether implements IAltarRecipeRegistry
 				'X', new ItemStack(ItemsAether.zanite_gemstone));
 
         // Zanite Uncraft
-        registerShapedRecipe(new ItemStack(BlocksAether.zanite_block), "X",
-                'X', new ItemStack(ItemsAether.zanite_gemstone, 9));
+        registerShapedRecipe(new ItemStack(ItemsAether.zanite_gemstone), "X",
+                'X', new ItemStack(BlocksAether.zanite_block, 9));
 
 		// Holystone Brick
 		registerShapedRecipe(new ItemStack(BlocksAether.holystone_brick, 4), "XX", "XX",

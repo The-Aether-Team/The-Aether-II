@@ -16,6 +16,7 @@ import com.gildedgames.aether.common.items.consumables.ItemGummySwet;
 import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
+import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
 import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthTotem;
 import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootChest;
 import net.minecraft.block.Block;
@@ -34,6 +35,7 @@ public class AetherItemModels
 
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.skyroot_chest), 0, TileEntitySkyrootChest.class);
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.labyrinth_totem), 0, TileEntityLabyrinthTotem.class);
+		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.altar), 0, TileEntityAltar.class);
 	}
 
 	private static void registerModels()
@@ -110,7 +112,6 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.icestone_bricks, "icestone_bricks");
 		registerItemModels(BlocksAether.aerogel, "aerogel");
 
-		registerItemModels(BlocksAether.altar, "altar");
 		registerItemModels(BlocksAether.skyroot_crafting_table, "skyroot_crafting_table");
 
 		registerItemModels(BlocksAether.tall_aether_grass, "tall_aether_grass");
@@ -334,6 +335,7 @@ public class AetherItemModels
 
 		registerItemModels(ItemsAether.aether_portal_frame, "aether_portal_frame");
 
+		registerItemModels(BlocksAether.altar, "tesr");
 		registerItemModels(BlocksAether.labyrinth_totem, "tesr");
 		registerItemModels(BlocksAether.multiblock_dummy, "tesr");
 
@@ -366,6 +368,8 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.pink_baby_swet, "companions/pink_baby_swet");
 
 		registerItemModels(ItemsAether.shard_of_life, "miscellaneous/shard_of_life");
+
+		registerItemModels(ItemsAether.skyroot_shield, "skyroot_shield");
 	}
 
 	private static void registerItemModels(Block block, String path)
