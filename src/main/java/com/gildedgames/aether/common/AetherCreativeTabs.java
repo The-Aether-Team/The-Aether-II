@@ -13,17 +13,17 @@ public class AetherCreativeTabs
 {
 	public static final CreativeTab tabBlocks = new CreativeTab("aether.blocks");
 
-	public static final CreativeTab tabMaterials = new CreativeTab("aether.materials");
-
-	public static final CreativeTab tabTools = new CreativeTab("aether.tools");
+    public static final CreativeTab tabTools = new CreativeTab("aether.tools");
 
 	public static final CreativeTab tabWeapons = new CreativeTab("aether.weapons");
 
 	public static final CreativeTab tabArmor = new CreativeTab("aether.armor");
 
+	public static final CreativeTab tabAccessories = new CreativeTab("aether.accessories");
+
 	public static final CreativeTab tabConsumables = new CreativeTab("aether.consumables");
 
-	public static final CreativeTab tabAccessories = new CreativeTab("aether.accessories");
+	public static final CreativeTab tabMaterials = new CreativeTab("aether.materials");
 
 	@SideOnly(Side.CLIENT)
 	public static void registerTabIcons()
