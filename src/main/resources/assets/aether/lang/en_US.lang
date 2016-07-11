@@ -223,6 +223,8 @@ item.aether.iron_gloves.name=Iron Gloves
 item.aether.gold_gloves.name=Gold Gloves
 item.aether.chain_gloves.name=Chain Gloves
 item.aether.diamond_gloves.name=Diamond Gloves
+item.aether.pink_baby_swet.name=Pink Baby Swet
+item.aether.shard_of_life.name=Shard of Life
 
 # Item Rarities
 item.rarity.common.name=§7§oCommon
@@ -302,6 +304,8 @@ itemGroup.aether.weapons=Aether Weapons
 itemGroup.aether.armor=Aether Armor
 itemGroup.aether.consumables=Aether Consumables
 itemGroup.aether.accessories=Equipment
+itemGroup.aether.companions=Companions
+itemGroup.aether.miscellaneous=Aether Miscellaneous
 
 # Containers
 container.holystone_furnace=Holystone Furnace

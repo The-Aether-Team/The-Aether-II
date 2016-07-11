@@ -6,10 +6,8 @@ public enum ItemBoltType
 	SKYROOT(0.5f, "skyroot"),
 	STONE(1.0f, "holystone"),
 	ZANITE(2.0f, "zanite"),
-	GRAVITITE(3.0f, "gravitite"),
-	POISON(1.0f, "poison"),
-	ENCHANTED(2.0f, "enchanted"),
-	ARKENIUM(4.0f, "arkenium");
+	ARKENIUM(4.0f, "arkenium"),
+	GRAVITITE(3.0f, "gravitite");
 
 	private final float damage;
 

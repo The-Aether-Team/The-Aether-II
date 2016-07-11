@@ -1,5 +1,7 @@
 package com.gildedgames.aether.client.renderer.tile_entities;
 
+import com.gildedgames.aether.client.models.entities.tile.ModelAltar;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
@@ -11,70 +13,85 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntityAltar>
 {
 	private double radius = 0.5D, theta = 5.0D;
 
+	private final ModelAltar model = new ModelAltar();
+
+	private final ResourceLocation texture = AetherCore.getResource("textures/tile_entities/altar.png");
+
 	@Override
 	public void renderTileEntityAt(TileEntityAltar altar, double x, double y, double z, float partialTicks, int destroyStage)
 	{
-		if (altar.getWorld().getBlockState(altar.getPos()).getBlock() != BlocksAether.altar)
-		{
-			return;
-		}
-
-		ItemStack stack = altar.getStackOnAltar();
-
 		GlStateManager.pushMatrix();
 		GlStateManager.enableRescaleNormal();
 
-		GlStateManager.translate(x + 0.5f, y + 1.18f, z + 0.5f);
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.translate((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+		GlStateManager.rotate(180f, 1f, 0f, 1f);
 
-		switch (altar.getFacing())
+		if (altar != null)
 		{
-		case NORTH:
-			GlStateManager.rotate(270.0f, 0.0f, 1.0f, 0.0f);
-			break;
-		case WEST:
-			GlStateManager.rotate(0.0f, 0.0f, 1.0f, 0.0f);
-			break;
-		case SOUTH:
-			GlStateManager.rotate(90.0f, 0.0f, 1.0f, 0.0f);
-			break;
-		case EAST:
-			GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f);
-			break;
+			switch (altar.getFacing())
+			{
+			case NORTH:
+				GlStateManager.rotate(270.0f, 0.0f, 1.0f, 0.0f);
+				break;
+			case WEST:
+				GlStateManager.rotate(0.0f, 0.0f, 1.0f, 0.0f);
+				break;
+			case SOUTH:
+				GlStateManager.rotate(90.0f, 0.0f, 1.0f, 0.0f);
+				break;
+			case EAST:
+				GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f);
+				break;
+			}
 		}
 
-		this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+		this.bindTexture(this.texture);
 
-		if (stack != null)
+		this.model.render(0.0625F);
+
+		if (altar != null)
 		{
-			GlStateManager.pushMatrix();
-			GlStateManager.pushAttrib();
+			ItemStack stack = altar.getStackOnAltar();
 
-			if (stack.getItem() instanceof ItemBlock)
+			GlStateManager.rotate(180f, 1f, 0f, 1f);
+
+			GlStateManager.translate(0.0f, -0.32f, 0.0f);
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
+			this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+
+			if (stack != null)
 			{
-				GlStateManager.scale(0.25F, 0.25F, 0.25F);
-				GlStateManager.translate(0.0f, -0.05f, 0.0f);
-			}
-			else
-			{
-				GlStateManager.scale(0.5F, 0.5F, 0.5F);
-				GlStateManager.translate(0.0f, -0.13f, 0.0f);
-				GlStateManager.rotate(90.0f, 90.0f, 0.0f, 0.0f);
-				GlStateManager.rotate(90.0f, 0.0f, 0.0f, 90.0f);
+				GlStateManager.pushMatrix();
+				GlStateManager.pushAttrib();
+
+				if (stack.getItem() instanceof ItemBlock)
+				{
+					GlStateManager.scale(0.25F, 0.25F, 0.25F);
+					GlStateManager.translate(0.0f, -0.05f, 0.0f);
+				}
+				else
+				{
+					GlStateManager.scale(0.5F, 0.5F, 0.5F);
+					GlStateManager.translate(0.0f, -0.13f, 0.0f);
+					GlStateManager.rotate(90.0f, 90.0f, 0.0f, 0.0f);
+					GlStateManager.rotate(90.0f, 0.0f, 0.0f, 90.0f);
+				}
+
+				this.renderItem(stack);
+
+				GlStateManager.popAttrib();
+				GlStateManager.popMatrix();
 			}
 
-			this.renderItem(stack);
-
-			GlStateManager.popAttrib();
-			GlStateManager.popMatrix();
+			this.renderOrbitingItems(altar.getAmbrosiumCount(), altar.prevAnimationTicks + (altar.animationTicks - altar.prevAnimationTicks) * partialTicks);
 		}
-
-		this.renderOrbitingItems(altar.getAmbrosiumCount(), altar.prevAnimationTicks + (altar.animationTicks - altar.prevAnimationTicks) * partialTicks);
 
 		GlStateManager.disableRescaleNormal();
 

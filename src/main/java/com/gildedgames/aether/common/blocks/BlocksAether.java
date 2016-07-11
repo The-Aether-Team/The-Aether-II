@@ -66,17 +66,17 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class BlocksAether
 {
-	public static Block aether_dirt = new BlockCustom(Material.GROUND).setSoundType(SoundType.GROUND).setHardness(0.5f);
+	public static Block aether_dirt;
 
-	public static BlockAetherGrass aether_grass = new BlockAetherGrass();
+	public static BlockAetherGrass aether_grass;
 
-	public static BlockHolystone holystone = new BlockHolystone();
+	public static BlockHolystone holystone;
 
     public static Block holystone_brick;
 
 	public static BlockAercloud aercloud;
 
-	public static BlockAmbrosiumOre ambrosium_ore;
+	public static Block ambrosium_ore;
 
 	public static BlockZaniteOre zanite_ore;
 
@@ -186,7 +186,7 @@ public class BlocksAether
 		skyroot_planks = registerBlock("skyroot_planks", new BlockCustom(Material.WOOD)
 				.setSoundType(SoundType.WOOD).setHardness(2.0f).setResistance(5.0f), AetherCreativeTabs.tabBlocks);
 
-		ambrosium_ore = registerBlock("ambrosium_ore", new BlockAmbrosiumOre(), AetherCreativeTabs.tabBlocks);
+		ambrosium_ore = registerBlock("ambrosium_ore", new BlockAmbrosiumOre().setLightLevel(0.4f), AetherCreativeTabs.tabBlocks);
 
 		zanite_ore = registerBlock("zanite_ore", new BlockZaniteOre(), AetherCreativeTabs.tabBlocks);
 

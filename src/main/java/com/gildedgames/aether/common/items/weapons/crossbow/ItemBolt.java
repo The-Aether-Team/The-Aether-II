@@ -14,10 +14,8 @@ public class ItemBolt extends Item
 			ItemBoltType.SKYROOT,
 			ItemBoltType.STONE,
 			ItemBoltType.ZANITE,
-			ItemBoltType.GRAVITITE,
-			ItemBoltType.POISON,
-			ItemBoltType.ENCHANTED,
-			ItemBoltType.ARKENIUM
+			ItemBoltType.ARKENIUM,
+			ItemBoltType.GRAVITITE
 	};
 
 	public ItemBolt()
