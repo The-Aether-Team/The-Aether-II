@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.world.features.trees;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.construction.walls.BlockSkyrootWall;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -8,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
+import javax.annotation.Generated;
 import java.util.Random;
 
 public class WorldGenMassiveSkyrootTree extends WorldGenAbstractTree
@@ -73,7 +75,7 @@ public class WorldGenMassiveSkyrootTree extends WorldGenAbstractTree
 				return false;
 			}
 
-			IBlockState wall = BlocksAether.skyroot_log_wall.getDefaultState(),
+			IBlockState wall = BlocksAether.skyroot_log_wall.getDefaultState().withProperty(BlockSkyrootWall.PROPERTY_GENERATED, true),
 					grass = BlocksAether.aether_grass.getDefaultState(),
 					dirt = BlocksAether.aether_dirt.getDefaultState();
 

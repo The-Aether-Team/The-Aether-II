@@ -20,6 +20,7 @@ import com.gildedgames.aether.common.blocks.construction.signs.BlockStandingSkyr
 import com.gildedgames.aether.common.blocks.construction.signs.BlockWallSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockAerogelWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockAetherWall;
+import com.gildedgames.aether.common.blocks.construction.walls.BlockSkyrootWall;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockSkyrootWorkbench;
 import com.gildedgames.aether.common.blocks.dungeon.BlockBoundary;
@@ -155,6 +156,7 @@ public class BlocksAether
 	public static BlockAetherWall holystone_wall, mossy_holystone_wall, holystone_brick_wall, carved_stone_wall, icestone_wall, aerogel_wall, skyroot_log_wall,
 									divine_stone_wall, sentry_stone_wall, divine_sentry_wall;
 
+
 	public static BlockTeleporter labyrinth_totem;
 
 	public static Block multiblock_dummy;
@@ -281,7 +283,7 @@ public class BlocksAether
 		holystone_brick_wall = registerBlock("holystone_brick_wall", new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		carved_stone_wall = registerBlock("carved_stone_wall", new BlockAetherWall(BlocksAether.carved_stone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		icestone_wall = registerBlock("icestone_wall", new BlockAetherWall(BlocksAether.icestone_bricks.getDefaultState(), 3.0f, 10.0f), AetherCreativeTabs.tabBlocks);
-		skyroot_log_wall = registerBlock("skyroot_log_wall", new BlockAetherWall(BlocksAether.skyroot_log.getDefaultState(), 2.0f, 10.0f), AetherCreativeTabs.tabBlocks);
+		skyroot_log_wall = registerBlock("skyroot_log_wall", new BlockSkyrootWall(BlocksAether.skyroot_log.getDefaultState(), 2.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		aerogel_wall = registerBlock("aerogel_wall", new BlockAerogelWall(BlocksAether.aerogel.getDefaultState(), 1.0f, 10.f), AetherCreativeTabs.tabBlocks);
 
 		labyrinth_totem = registerBlock("labyrinth_totem", new BlockTeleporter(Material.IRON), AetherCreativeTabs.tabBlocks);
