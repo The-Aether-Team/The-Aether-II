@@ -46,7 +46,7 @@ public class ItemAetherGloves extends Item implements IPhoenixChillable
 
 		this.setMaxStackSize(1);
 
-		this.setCreativeTab(AetherCreativeTabs.tabAccessories);
+		this.setCreativeTab(AetherCreativeTabs.tabArmor);
 	}
 
 	@Override

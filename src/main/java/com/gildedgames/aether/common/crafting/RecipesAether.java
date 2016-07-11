@@ -172,26 +172,29 @@ public class RecipesAether implements IAltarRecipeRegistry
                 'X', new ItemStack(BlocksAether.holystone));
 
 		// Crossbow
-		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_crossbow), " X ", " Y ", "ZZZ",
-				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(Items.STRING),
-				'Z', new ItemStack(BlocksAether.skyroot_planks));
+		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_crossbow), "ZZY", "XYZ", "WXZ",
+				'W', new ItemStack(ItemsAether.skyroot_stick),
+				'X', new ItemStack(Items.STRING),
+				'Y', new ItemStack(BlocksAether.skyroot_planks),
+				'Z', new ItemStack(ItemsAether.arkenium));
 
-		registerShapedRecipe(new ItemStack(ItemsAether.zanite_crossbow), " X ", " Y ", "ZZZ",
-				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(Items.STRING),
-				'Z', new ItemStack(ItemsAether.zanite_gemstone));
+		registerShapedRecipe(new ItemStack(ItemsAether.zanite_crossbow), "ZZY", "XYZ", "WXZ",
+				'W', new ItemStack(ItemsAether.skyroot_stick),
+				'X', new ItemStack(Items.STRING),
+				'Y', new ItemStack(ItemsAether.zanite_gemstone),
+				'Z', new ItemStack(ItemsAether.arkenium));
 
-		registerShapedRecipe(new ItemStack(ItemsAether.gravitite_crossbow), " X ", " Y ", "ZZZ",
-				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(Items.STRING),
-				'Z', new ItemStack(BlocksAether.enchanted_gravitite));
+		registerShapedRecipe(new ItemStack(ItemsAether.gravitite_crossbow), "ZZY", "XYZ", "WXZ",
+				'W', new ItemStack(ItemsAether.skyroot_stick),
+				'X', new ItemStack(Items.STRING),
+				'Y', new ItemStack(BlocksAether.enchanted_gravitite),
+				'Z', new ItemStack(ItemsAether.arkenium));
 
 		// Crossbow Bolts
-		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.STONE.ordinal()), " Y", "X ",
+		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.STONE.ordinal()), " Y", "X ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(BlocksAether.holystone));
-		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.ZANITE.ordinal()), " Y", "X ",
+		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.ZANITE.ordinal()), " Y", "X ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(ItemsAether.zanite_gemstone));
 	}
