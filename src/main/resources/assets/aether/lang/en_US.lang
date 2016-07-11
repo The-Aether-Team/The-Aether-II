@@ -305,7 +305,7 @@ itemGroup.aether.armor=Aether Armor
 itemGroup.aether.consumables=Aether Consumables
 itemGroup.aether.accessories=Equipment
 itemGroup.aether.companions=Companions
-itemGroup.aether.miscellaneous=Miscellaneous
+itemGroup.aether.miscellaneous=Aether Miscellaneous
 
 # Containers
 container.holystone_furnace=Holystone Furnace
