@@ -275,8 +275,6 @@ public class AetherItemModels
 				.add(ItemBoltType.STONE.ordinal(), "holystone_bolt")
 				.add(ItemBoltType.ZANITE.ordinal(), "zanite_bolt")
 				.add(ItemBoltType.GRAVITITE.ordinal(), "gravitite_bolt")
-				.add(ItemBoltType.POISON.ordinal(), "poison_bolt")
-				.add(ItemBoltType.ENCHANTED.ordinal(), "enchanted_bolt")
 				.add(ItemBoltType.ARKENIUM.ordinal(), "arkenium_bolt"));
 
 		registerItemModels(ItemsAether.flaming_sword, "weapons/flaming_sword");
