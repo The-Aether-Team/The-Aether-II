@@ -19,13 +19,17 @@ public class AetherCreativeTabs
 
 	public static final CreativeTab tabArmor = new CreativeTab("aether.armor");
 
+    public static final CreativeTab tabCompanions = new CreativeTab("aether.companions");
+
 	public static final CreativeTab tabAccessories = new CreativeTab("aether.accessories");
 
-	public static final CreativeTab tabConsumables = new CreativeTab("aether.consumables");
+    public static final CreativeTab tabConsumables = new CreativeTab("aether.consumables");
 
-	public static final CreativeTab tabMaterials = new CreativeTab("aether.materials");
+    public static final CreativeTab tabMiscellaneous = new CreativeTab("aether.miscellaneous");
 
-	@SideOnly(Side.CLIENT)
+    public static final CreativeTab tabMaterials = new CreativeTab("aether.materials");
+
+    @SideOnly(Side.CLIENT)
 	public static void registerTabIcons()
 	{
 		tabBlocks.setDisplayStack(new ItemStack(BlocksAether.aether_grass, BlockAetherGrass.AETHER_GRASS.getMeta()));
@@ -35,6 +39,8 @@ public class AetherCreativeTabs
 		tabArmor.setDisplayStack(new ItemStack(ItemsAether.zanite_helmet));
 		tabConsumables.setDisplayStack(new ItemStack(ItemsAether.orange));
 		tabAccessories.setDisplayStack(new ItemStack(ItemsAether.zanite_ring));
+        tabCompanions.setDisplayStack(new ItemStack(ItemsAether.pink_baby_swet));
+        tabMiscellaneous.setDisplayStack(new ItemStack(ItemsAether.shard_of_life));
 	}
 
 	public static class CreativeTab extends CreativeTabs

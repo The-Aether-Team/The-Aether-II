@@ -362,6 +362,10 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.wildcard, "wildcard");
 		registerItemModels(BlocksAether.schematicBoundary, "schematicBoundary");
 		registerItemModels(BlocksAether.linkedSchematicBoundary, "linkedSchematicBoundary");
+
+		registerItemModels(ItemsAether.pink_baby_swet, "companions/pink_baby_swet");
+
+		registerItemModels(ItemsAether.shard_of_life, "miscellaneous/shard_of_life");
 	}
 
 	private static void registerItemModels(Block block, String path)

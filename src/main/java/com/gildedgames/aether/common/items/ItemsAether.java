@@ -5,10 +5,12 @@ import java.util.List;
 import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
 import com.gildedgames.aether.common.items.armor.ItemLeatherGloves;
+import com.gildedgames.aether.common.items.companions.ItemPinkBabySwet;
 import com.gildedgames.aether.common.items.effects.ItemEffects;
 import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
 import com.gildedgames.aether.api.items.properties.ItemRarity;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
+import com.gildedgames.aether.common.items.miscellaneous.ItemShardOfLife;
 import com.gildedgames.aether.common.items.tools.ItemArkeniumTool;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemGravititeCrossbow;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemSkyrootCrossbow;
@@ -170,6 +172,10 @@ public class ItemsAether
 	public static Item zanite_gloves, gravitite_gloves, valkyrie_gloves, neptune_gloves, phoenix_gloves, obsidian_gloves;
 
 	public static Item leather_gloves, iron_gloves, gold_gloves, chain_gloves, diamond_gloves;
+
+    public static Item pink_baby_swet;
+
+    public static Item shard_of_life;
 
 	public static void preInit()
 	{
@@ -342,6 +348,10 @@ public class ItemsAether
 		skyroot_sign = registerItem("skyroot_sign", new ItemSkyrootSign(), AetherCreativeTabs.tabBlocks);
 		
 		aether_portal_frame = registerItem("aether_portal_frame", new ItemAetherPortalFrame(), AetherCreativeTabs.tabBlocks);
+
+        pink_baby_swet = registerItem("pink_baby_swet", new ItemPinkBabySwet().setMaxStackSize(1), AetherCreativeTabs.tabCompanions);
+
+        shard_of_life = registerItem("shard_of_life", new ItemShardOfLife().setMaxStackSize(4), AetherCreativeTabs.tabMiscellaneous);
 
 		leather_gloves = registerItem("leather_gloves", new ItemLeatherGloves());
 		iron_gloves = registerItem("iron_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.IRON));
