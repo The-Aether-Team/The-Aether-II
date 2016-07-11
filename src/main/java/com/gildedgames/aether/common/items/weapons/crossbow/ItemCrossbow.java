@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -27,7 +28,6 @@ public class ItemCrossbow extends Item
 
 	public static final String[] crossbowIconNameArray = new String[] {"_fired", "_loaded", "_loading1", "_loading2"};
 
-	private final int AMMOSLOT = 6;
 	private final int DURATION = 180;
 
 	public ItemCrossbow()
@@ -36,9 +36,9 @@ public class ItemCrossbow extends Item
 	}
 
 	// Should be adjusted to check for quiver accessory slot, currently checks the first space in players inventory for ammo.
-	private int getBoltType(IPlayerAetherCapability player)
+	private int getBoltType(EntityPlayer player)
 	{
-		ItemStack boltStack = player.getEquipmentInventory().getStackInSlot(AMMOSLOT);
+		ItemStack boltStack = player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
 
 		if (hasAmmo(player))
 			return boltStack.getMetadata();
@@ -46,9 +46,10 @@ public class ItemCrossbow extends Item
 		return -1;
 	}
 
-	private boolean hasAmmo(IPlayerAetherCapability player)
+	private boolean hasAmmo(EntityPlayer player)
 	{
-		ItemStack boltStack = player.getEquipmentInventory().getStackInSlot(AMMOSLOT);
+		//ItemStack boltStack = player.getEquipmentInventory().getStackInSlot(5);
+		ItemStack boltStack = player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
 
 		if (boltStack != null && boltStack.getItem() == ItemsAether.bolt && boltStack.stackSize > 0)
 		{
@@ -63,7 +64,7 @@ public class ItemCrossbow extends Item
 	{
 		if (itemStackIn.getMetadata() < 3 || itemStackIn.getMetadata() == 4)
 		{
-			if (this.hasAmmo(PlayerAether.getPlayer(playerIn)))
+			if (this.hasAmmo(playerIn))
 			{
 				playerIn.setActiveHand(EnumHand.MAIN_HAND);
 			}
@@ -88,35 +89,38 @@ public class ItemCrossbow extends Item
 	@Override
 	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
 	{
-		ItemStack boltStack = PlayerAether.getPlayer(player).getEquipmentInventory().getStackInSlot(AMMOSLOT);
+		if (player instanceof EntityPlayer) {
+			EntityPlayer entityPlayer = (EntityPlayer) player;
+			ItemStack boltStack = entityPlayer.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
 
-		if (stack.getItemDamage() == 4)
-		{
-			stack.setItemDamage(0);
-			player.stopActiveHand();
-		}
+			if (stack.getItemDamage() == 4)
+			{
+				stack.setItemDamage(0);
+				player.stopActiveHand();
+			}
 
-		if (this.hasAmmo(PlayerAether.getPlayer(player)))
-		{
-			if (count == DURATION-10 && stack.getItemDamage() == 0)
+			if (this.hasAmmo(entityPlayer))
 			{
-				stack.setItemDamage(1);
-				boltStack.stackSize -= 1;
+				if (count == DURATION-10 && stack.getItemDamage() == 0)
+				{
+					stack.setItemDamage(1);
+					boltStack.stackSize -= 1;
+				}
+				if (count == (DURATION - (DURATION / 3)) && stack.getItemDamage() == 1)
+				{
+					stack.setItemDamage(2);
+					boltStack.stackSize -= 1;
+				}
+				if (count <= 20 && stack.getItemDamage() == 2)
+				{
+					stack.setItemDamage(3);
+					boltStack.stackSize -=1;
+				}
 			}
-			if (count == (DURATION - (DURATION / 3)) && stack.getItemDamage() == 1)
+			else
 			{
-				stack.setItemDamage(2);
-				boltStack.stackSize -= 1;
+				player.stopActiveHand();
 			}
-			if (count <= 20 && stack.getItemDamage() == 2)
-			{
-				stack.setItemDamage(3);
-				boltStack.stackSize -=1;
-			}
-		}
-		else
-		{
-			player.stopActiveHand();
 		}
 	}
 
