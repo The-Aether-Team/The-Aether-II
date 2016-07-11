@@ -2,5 +2,27 @@
 	"parent": "item/generated",
 	"textures": {
 		"layer0": "aether:items/weapons/crossbow/bolts/arkenium_bolt"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [ -190, 0, 55 ],
+			"translation": [ 0, 2, 0 ],
+			"scale": [ 0.4, 0.4, 0.4 ]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [ -190, 0, -40 ],
+			"translation": [ 0, 2, 0 ],
+			"scale": [ 0.4, 0.4, 0.4 ]
+		},
+		"firstperson_righthand": {
+			"rotation": [ -230, -125, 45 ],
+			"translation": [ 0, 2, 4 ],
+			"scale": [ 0.5, 0.5, 0.5 ]
+		},
+		"firstperson_lefthand": {
+			"rotation": [ -230, 45, -45 ],
+			"translation": [ 0, 2, 4 ],
+			"scale": [ 0.5, 0.5, 0.5 ]
+		}
 	}
 }
