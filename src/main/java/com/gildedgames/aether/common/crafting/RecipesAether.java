@@ -197,6 +197,11 @@ public class RecipesAether implements IAltarRecipeRegistry
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.ZANITE.ordinal()), " Y", "X ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(ItemsAether.zanite_gemstone));
+
+		// Skyroot Shield
+		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_shield), "YXY", "YYY", " Y ",
+				'X', new ItemStack(ItemsAether.skyroot_stick),
+				'Y', new ItemStack(BlocksAether.skyroot_planks));
 	}
 
 	private void registerToolRecipes()
