@@ -3,11 +3,11 @@ package com.gildedgames.aether.common.items.weapons.crossbow;
 public enum ItemBoltType
 {
 	/* DAMAGES ARE NOT FINAL */
-	SKYROOT(0.5f, "skyroot"),
-	STONE(1.0f, "holystone"),
-	ZANITE(2.0f, "zanite"),
-	ARKENIUM(4.0f, "arkenium"),
-	GRAVITITE(3.0f, "gravitite");
+	SKYROOT(1.0f, "skyroot"),
+	STONE(2.0f, "holystone"),
+	ZANITE(3.5f, "zanite"),
+	ARKENIUM(5.0f, "arkenium"),
+	GRAVITITE(7.0f, "gravitite");
 
 	private final float damage;
 

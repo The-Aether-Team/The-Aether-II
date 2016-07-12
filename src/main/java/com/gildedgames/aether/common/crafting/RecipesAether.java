@@ -178,10 +178,22 @@ public class RecipesAether implements IAltarRecipeRegistry
 				'Y', new ItemStack(BlocksAether.skyroot_planks),
 				'Z', new ItemStack(ItemsAether.arkenium));
 
+		registerShapedRecipe(new ItemStack(ItemsAether.holystone_crossbow), "ZZY", "XYZ", "WXZ",
+				'W', new ItemStack(ItemsAether.skyroot_stick),
+				'X', new ItemStack(Items.STRING),
+				'Y', new ItemStack(BlocksAether.holystone),
+				'Z', new ItemStack(ItemsAether.arkenium));
+
 		registerShapedRecipe(new ItemStack(ItemsAether.zanite_crossbow), "ZZY", "XYZ", "WXZ",
 				'W', new ItemStack(ItemsAether.skyroot_stick),
 				'X', new ItemStack(Items.STRING),
 				'Y', new ItemStack(ItemsAether.zanite_gemstone),
+				'Z', new ItemStack(ItemsAether.arkenium));
+
+		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_crossbow), "ZZY", "XYZ", "WXZ",
+				'W', new ItemStack(ItemsAether.skyroot_stick),
+				'X', new ItemStack(Items.STRING),
+				'Y', new ItemStack(ItemsAether.arkenium),
 				'Z', new ItemStack(ItemsAether.arkenium));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.gravitite_crossbow), "ZZY", "XYZ", "WXZ",

@@ -48,10 +48,7 @@ import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
 import com.gildedgames.aether.common.items.weapons.ItemPigSlayer;
 import com.gildedgames.aether.common.items.weapons.ItemVampireBlade;
-import com.gildedgames.aether.common.items.weapons.crossbow.ItemBolt;
-import com.gildedgames.aether.common.items.weapons.crossbow.ItemGravititeCrossbow;
-import com.gildedgames.aether.common.items.weapons.crossbow.ItemSkyrootCrossbow;
-import com.gildedgames.aether.common.items.weapons.crossbow.ItemZaniteCrossbow;
+import com.gildedgames.aether.common.items.weapons.crossbow.*;
 import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemArkeniumSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemCandyCaneSword;
@@ -141,7 +138,11 @@ public class ItemsAether
 
 	public static ItemSkyrootCrossbow skyroot_crossbow;
 
+	public static ItemHolystoneCrossbow holystone_crossbow;
+
 	public static ItemZaniteCrossbow zanite_crossbow;
+
+	public static ItemArkeniumCrossbow arkenium_crossbow;
 
 	public static ItemGravititeCrossbow gravitite_crossbow;
 
@@ -312,7 +313,9 @@ public class ItemsAether
 		dart = registerItem("dart", new ItemDart(), AetherCreativeTabs.tabWeapons);
 
 		skyroot_crossbow = registerItem("skyroot_crossbow", new ItemSkyrootCrossbow(), AetherCreativeTabs.tabWeapons);
+		holystone_crossbow = registerItem("holystone_crossbow", new ItemHolystoneCrossbow(), AetherCreativeTabs.tabWeapons);
 		zanite_crossbow = registerItem("zanite_crossbow", new ItemZaniteCrossbow(), AetherCreativeTabs.tabWeapons);
+		arkenium_crossbow = registerItem("arkenium_crossbow", new ItemArkeniumCrossbow(), AetherCreativeTabs.tabWeapons);
 		gravitite_crossbow = registerItem("gravitite_crossbow", new ItemGravititeCrossbow(), AetherCreativeTabs.tabWeapons);
 		bolt = registerItem("bolt", new ItemBolt(), AetherCreativeTabs.tabWeapons);
 

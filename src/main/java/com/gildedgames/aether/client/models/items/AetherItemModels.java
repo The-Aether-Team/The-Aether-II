@@ -257,12 +257,26 @@ public class AetherItemModels
 				.add(3, "skyroot_crossbow_loaded")
 				.add(4, "skyroot_crossbow_fired"));
 
+		registerItemModels(ItemsAether.holystone_crossbow, new ItemModelBuilder("crossbow/")
+				.add(0, "holystone_crossbow_fired")
+				.add(1, "holystone_crossbow_loading1")
+				.add(2, "holystone_crossbow_loading2")
+				.add(3, "holystone_crossbow_loaded")
+				.add(4, "holystone_crossbow_fired"));
+
 		registerItemModels(ItemsAether.zanite_crossbow, new ItemModelBuilder("crossbow/")
 				.add(0, "zanite_crossbow_fired")
 				.add(1, "zanite_crossbow_loading1")
 				.add(2, "zanite_crossbow_loading2")
 				.add(3, "zanite_crossbow_loaded")
 				.add(4, "zanite_crossbow_fired"));
+
+		registerItemModels(ItemsAether.arkenium_crossbow, new ItemModelBuilder("crossbow/")
+				.add(0, "arkenium_crossbow_fired")
+				.add(1, "arkenium_crossbow_loading1")
+				.add(2, "arkenium_crossbow_loading2")
+				.add(3, "arkenium_crossbow_loaded")
+				.add(4, "arkenium_crossbow_fired"));
 
 		registerItemModels(ItemsAether.gravitite_crossbow, new ItemModelBuilder("crossbow/")
 				.add(0, "gravitite_crossbow_fired")

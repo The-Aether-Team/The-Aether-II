@@ -248,15 +248,15 @@ item.aether.pig_slayer.ability.desc=Slaughters pigs
 item.aether.vampire_blade.ability.desc=Leeches life
 item.aether.candy_cane_sword.ability.desc=Drops edible candy canes
 item.aether.valkyrie_lance.ability.desc=Extended Reach
-item.aether.skyroot_crossbow.name=Crossbow
+item.aether.skyroot_crossbow.name=Skyroot Crossbow
+item.aether.holystone_crossbow.name=Holystone Crossbow
 item.aether.zanite_crossbow.name=Zanite Crossbow
-item.aether.gravitite_crossbow.name=Gravitie Crossbow
+item.aether.arkenium_crossbow.name=Arkenium Crossbow
+item.aether.gravitite_crossbow.name=Gravitite Crossbow
 item.aether.bolt.skyroot.name=Skyroot Bolt
 item.aether.bolt.holystone.name=Holystone Bolt
 item.aether.bolt.zanite.name=Zanite Bolt
 item.aether.bolt.gravitite.name=Gravitite Bolt
-item.aether.bolt.enchanted.name=Enchanted Bolt
-item.aether.bolt.poison.name=Poison Bolt
 item.aether.bolt.arkenium.name=Arkenium Bolt
 
 
