@@ -7,6 +7,8 @@ public class ItemArkeniumTool extends ItemAetherTool
 	public ItemArkeniumTool(EnumToolType toolType, float attackDamage, float attackSpeed)
 	{
 		super(MaterialsAether.ARKENIUM_TOOL, "arkenium", toolType, attackDamage, attackSpeed);
+
+		this.setHarvestLevel(toolType.getToolClass(), 2);
 	}
 
 	@Override
