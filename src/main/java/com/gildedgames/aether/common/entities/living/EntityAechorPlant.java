@@ -29,7 +29,7 @@ public class EntityAechorPlant extends EntityMob
 {
 	private static final DataParameter<Boolean> CAN_SEE_PREY = new DataParameter<>(16, DataSerializers.BOOLEAN);
 
-	private static final DataParameter<Byte> PLANT_SIZE = new DataParameter<>(16, DataSerializers.BYTE);
+	private static final DataParameter<Byte> PLANT_SIZE = new DataParameter<>(17, DataSerializers.BYTE);
 
 	@SideOnly(Side.CLIENT)
 	public float sinage;
@@ -171,7 +171,7 @@ public class EntityAechorPlant extends EntityMob
 	@Override
 	public boolean getCanSpawnHere()
 	{
-		return this.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL && super.getCanSpawnHere();
+		return this.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL;
 	}
 
 	public boolean canSeePrey()
