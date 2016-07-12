@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.living.mounts;
 
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.living.EntityAetherAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -26,6 +27,8 @@ public abstract class EntityFlyingAnimal extends EntityAetherAnimal
 	public EntityFlyingAnimal(World world)
 	{
 		super(world);
+
+		this.spawnableBlock = BlocksAether.aether_grass;
 	}
 
 	@Override
@@ -41,7 +44,10 @@ public abstract class EntityFlyingAnimal extends EntityAetherAnimal
 	{
 		this.fallDistance = 0;
 
-		this.motionY *= 0.6D;
+		if (this.motionY < 0.0D)
+		{
+			this.motionY *= 0.6D;
+		}
 
 		if (this.worldObj.isRemote)
 		{

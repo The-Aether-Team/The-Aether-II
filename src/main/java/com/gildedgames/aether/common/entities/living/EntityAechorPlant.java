@@ -18,6 +18,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -165,6 +166,12 @@ public class EntityAechorPlant extends EntityMob
 
 		this.setPlantSize(tagCompound.getInteger("plantSize"));
 		this.setPoisonLeft(tagCompound.getInteger("poisonLeft"));
+	}
+
+	@Override
+	public boolean getCanSpawnHere()
+	{
+		return this.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL && super.getCanSpawnHere();
 	}
 
 	public boolean canSeePrey()

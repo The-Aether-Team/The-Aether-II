@@ -79,7 +79,7 @@
 		},
 		{
 			"name": "CenterMid",
-			"from": [ 6, 5, 11 ],
+			"from": [ 6, 5, 12 ],
 			"to": [ 10, 15, 13 ],
 			"faces": {
 				"north": { "texture": "#5", "uv": [ 8, 2, 12, 12 ] },

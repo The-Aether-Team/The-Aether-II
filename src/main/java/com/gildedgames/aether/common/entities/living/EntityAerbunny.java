@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.living;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.SoundsAether;
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -14,6 +15,8 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.EntityJumpHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
@@ -39,10 +42,12 @@ public class EntityAerbunny extends EntityAetherAnimal
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
 		this.tasks.addTask(4, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 12.0F, 1.2F, 1.8F));
-		this.tasks.addTask(5, new EntityAIWander(this, 0.5D));
+		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(11, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
 
 		this.jumpHelper = new AerbunnyJumpHelper(this);
+
+		this.spawnableBlock = BlocksAether.aether_grass;
 
 		this.setSize(0.45F, 0.45F);
 	}
@@ -152,6 +157,12 @@ public class EntityAerbunny extends EntityAetherAnimal
 	}
 
 	@Override
+	protected PathNavigate getNewNavigator(World worldIn)
+	{
+		return new AerbunnyNavigator(this, worldIn);
+	}
+
+	@Override
 	public EntityAgeable createChild(EntityAgeable ageable)
 	{
 		return new EntityAerbunny(this.worldObj);
@@ -171,6 +182,20 @@ public class EntityAerbunny extends EntityAetherAnimal
 		public void doJump()
 		{
 			this.entity.setJumping(true);
+		}
+	}
+
+	private class AerbunnyNavigator extends PathNavigateGround
+	{
+		public AerbunnyNavigator(EntityLiving entity, World world)
+		{
+			super(entity, world);
+		}
+
+		@Override
+		protected boolean canNavigate()
+		{
+			return !this.theEntity.isRiding();
 		}
 	}
 

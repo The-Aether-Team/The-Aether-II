@@ -32,6 +32,8 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 
 		this.setSize(0.5F, 1.4F);
 
+		this.spawnableBlock = BlocksAether.aether_grass;
+
 		this.tasks.addTask(0, new EntityAIWatchClosest(this, EntityPlayer.class, 8));
 	}
 
@@ -42,7 +44,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10);
 
-		this.setSproutSize(1);
+		this.setSproutSize(1 + this.rand.nextInt());
 		this.setMaxSproutSize(9);
 	}
 

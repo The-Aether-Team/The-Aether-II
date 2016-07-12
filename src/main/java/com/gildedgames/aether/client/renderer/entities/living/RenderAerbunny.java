@@ -14,7 +14,7 @@ public class RenderAerbunny extends RenderLiving<EntityAerbunny>
 
 	public RenderAerbunny(RenderManager renderManager)
 	{
-		super(renderManager, new ModelAerbunny(), 0.75f);
+		super(renderManager, new ModelAerbunny(), 0.4f);
 	}
 
 	protected void rotateAerbunny(EntityAerbunny entity)

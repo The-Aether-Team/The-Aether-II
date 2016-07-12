@@ -12,7 +12,11 @@ import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
+import com.gildedgames.util.modules.spawning.SpawnEntry;
+import com.gildedgames.util.modules.spawning.SpawnManager;
+import com.gildedgames.util.modules.spawning.SpawningModule;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class EntitiesAether
@@ -33,6 +37,15 @@ public class EntitiesAether
 		EntityRegistry.registerModEntity(EntityDaggerfrostSnowball.class, "daggerfrost_snowball", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityPhoenixItem.class, "special_item", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityBolt.class, "bolt", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
+
+		SpawnManager manager = SpawningModule.createAndRegisterSpawnManager(AetherCore.PROXY.getAetherDimensionType().getId());
+		manager.registerPerTickEntry(new SpawnEntry(EntityAerbunny.class, 2, 5, 0.3f));
+		manager.registerPerTickEntry(new SpawnEntry(EntityFlyingCow.class, 1, 4, 0.65f));
+		manager.registerPerTickEntry(new SpawnEntry(EntityPhyg.class, 1, 4, 0.35f));
+		manager.registerPerTickEntry(new SpawnEntry(EntityCarrionSprout.class, 2, 3, 0.4f));
+		manager.registerPerTickEntry(new SpawnEntry(EntitySheepuff.class, 3, 5, 0.5f));
+
+		manager.registerPerTickEntry(new SpawnEntry(EntityAechorPlant.class, 2, 4, 0.4f));
 	}
 
 	private static void registerLivingEntity(Class<? extends Entity> entity, String id, int eggPrimaryColor, int eggSecondaryColor)
