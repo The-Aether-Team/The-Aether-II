@@ -3,6 +3,7 @@ package com.gildedgames.aether.common;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.armor.ItemAetherShield;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import com.gildedgames.util.modules.universe.common.util.TeleporterGeneric;
 import net.minecraft.block.Block;
@@ -12,18 +13,24 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -34,6 +41,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Random;
+
 
 public class CommonEvents
 {
@@ -253,4 +261,59 @@ public class CommonEvents
 		}
 	}
 
+	@SubscribeEvent
+	public void onEntityAttacked(LivingAttackEvent event)
+	{
+		if (!(event.getEntityLiving() instanceof EntityPlayer))
+		{
+			return;
+		}
+
+		EntityPlayer player = (EntityPlayer) event.getEntityLiving();
+
+		if (!event.getSource().isUnblockable() && player.isActiveItemStackBlocking())
+		{
+			Vec3d vec3d = event.getSource().getDamageLocation();
+
+			if (vec3d != null)
+			{
+				Vec3d look = player.getLook(1.0F);
+
+				Vec3d reverse = vec3d.subtractReverse(new Vec3d(player.posX, player.posY, player.posZ)).normalize();
+				reverse = new Vec3d(reverse.xCoord, 0.0D, reverse.zCoord);
+
+				if (reverse.dotProduct(look) < 0.0D)
+				{
+					float damage = event.getAmount();
+
+					if (damage >= 3.0F && player.getActiveItemStack() != null && player.getActiveItemStack().getItem() instanceof ItemAetherShield)
+					{
+						int itemDamage = 1 + MathHelper.floor_float(damage);
+
+						player.getActiveItemStack().damageItem(itemDamage, player);
+
+						if (player.getActiveItemStack().stackSize <= 0)
+						{
+							EnumHand hand = player.getActiveHand();
+
+							ForgeEventFactory.onPlayerDestroyItem(player, player.getActiveItemStack(), hand);
+
+							if (hand == EnumHand.MAIN_HAND)
+							{
+								player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, null);
+							}
+							else
+							{
+								player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, null);
+							}
+
+							player.setHeldItem(player.getActiveHand(), null);
+
+							player.playSound(SoundEvents.ITEM_SHIELD_BREAK, 0.8F, 0.8F + player.worldObj.rand.nextFloat() * 0.4F);
+						}
+					}
+				}
+			}
+		}
+	}
 }
