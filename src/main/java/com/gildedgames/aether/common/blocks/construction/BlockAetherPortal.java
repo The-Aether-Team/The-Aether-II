@@ -329,7 +329,7 @@ public class BlockAetherPortal extends BlockBreakable
 					{
 						state = this.world.getBlockState(blockpos.offset(this.rightSideFacing));
 
-						if (state != Blocks.GLOWSTONE)
+						if (state.getBlock() != Blocks.GLOWSTONE)
 						{
 							break loop;
 						}
