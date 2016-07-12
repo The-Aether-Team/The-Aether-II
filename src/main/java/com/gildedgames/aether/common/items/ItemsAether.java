@@ -83,7 +83,7 @@ public class ItemsAether
 {
 	public static Item skyroot_stick;
 
-	public static Item ambrosium_shard, continuum_orb, zanite_gemstone, arkenium;
+	public static Item ambrosium_shard, zanite_gemstone, arkenium;
 
 	public static ItemSkyrootTool skyroot_axe, skyroot_pickaxe, skyroot_shovel;
 
@@ -103,11 +103,11 @@ public class ItemsAether
 
 	public static ItemGravititeArmor gravitite_helmet, gravitite_chestplate, gravitite_leggings, gravitite_boots;
 
-	public static ItemObsidianArmor obsidian_helmet, obsidian_chestplate, obsidian_leggings, obsidian_boots;
-
 	public static ItemNeptuneArmor neptune_helmet, neptune_chestplate, neptune_leggings, neptune_boots;
 
 	public static ItemPhoenixArmor phoenix_helmet, phoenix_chestplate, phoenix_leggings, phoenix_boots;
+
+	public static ItemObsidianArmor obsidian_helmet, obsidian_chestplate, obsidian_leggings, obsidian_boots;
 
 	public static ItemValkyrieArmor valkyrie_helmet, valkyrie_chestplate, valkyrie_leggings, valkyrie_boots;
 
@@ -161,7 +161,7 @@ public class ItemsAether
 
 	public static Item candy_ring, bone_ring, skyroot_ring;
 
-	public static Item icestone;
+	public static Item icestone, continuum_orb;
 
 	public static Item skyroot_sign;
 	
@@ -183,10 +183,10 @@ public class ItemsAether
 	{
 		skyroot_stick = registerItem("skyroot_stick", new Item(), AetherCreativeTabs.tabMaterials);
 		ambrosium_shard = registerItem("ambrosium_shard", new ItemAmbrosiumShard(), AetherCreativeTabs.tabMaterials);
-		continuum_orb = registerItem("continuum_orb", new ItemContinuumOrb(), AetherCreativeTabs.tabMaterials);
 		zanite_gemstone = registerItem("zanite_gemstone", new Item(), AetherCreativeTabs.tabMaterials);
 		arkenium = registerItem("arkenium", new Item(), AetherCreativeTabs.tabMaterials);
 		icestone = registerItem("icestone", new Item(), AetherCreativeTabs.tabMaterials);
+		continuum_orb = registerItem("continuum_orb", new ItemContinuumOrb(), AetherCreativeTabs.tabMaterials);
 
 		skyroot_axe = registerItem("skyroot_axe", new ItemSkyrootTool(EnumToolType.AXE, 6.0F, -3.2F));
 		skyroot_pickaxe = registerItem("skyroot_pickaxe", new ItemSkyrootTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
@@ -231,12 +231,6 @@ public class ItemsAether
 		gravitite_boots = registerItem("gravitite_boots", new ItemGravititeArmor(EntityEquipmentSlot.FEET));
         gravitite_gloves = registerItem("gravitite_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.GRAVITITE));
 
-		obsidian_helmet = registerItem("obsidian_helmet", new ItemObsidianArmor(EntityEquipmentSlot.HEAD));
-		obsidian_chestplate = registerItem("obsidian_chestplate", new ItemObsidianArmor(EntityEquipmentSlot.CHEST));
-		obsidian_leggings = registerItem("obsidian_leggings", new ItemObsidianArmor(EntityEquipmentSlot.LEGS));
-		obsidian_boots = registerItem("obsidian_boots", new ItemObsidianArmor(EntityEquipmentSlot.FEET));
-        obsidian_gloves = registerItem("obsidian_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.OBSIDIAN));
-
 		neptune_helmet = registerItem("neptune_helmet", new ItemNeptuneArmor(EntityEquipmentSlot.HEAD));
 		neptune_chestplate = registerItem("neptune_chestplate", new ItemNeptuneArmor(EntityEquipmentSlot.CHEST));
 		neptune_leggings = registerItem("neptune_leggings", new ItemNeptuneArmor(EntityEquipmentSlot.LEGS));
@@ -249,6 +243,12 @@ public class ItemsAether
 		phoenix_boots = registerItem("phoenix_boots", new ItemPhoenixArmor(EntityEquipmentSlot.FEET));
         phoenix_gloves = registerItem("phoenix_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.PHOENIX));
 
+		obsidian_helmet = registerItem("obsidian_helmet", new ItemObsidianArmor(EntityEquipmentSlot.HEAD));
+		obsidian_chestplate = registerItem("obsidian_chestplate", new ItemObsidianArmor(EntityEquipmentSlot.CHEST));
+		obsidian_leggings = registerItem("obsidian_leggings", new ItemObsidianArmor(EntityEquipmentSlot.LEGS));
+		obsidian_boots = registerItem("obsidian_boots", new ItemObsidianArmor(EntityEquipmentSlot.FEET));
+		obsidian_gloves = registerItem("obsidian_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.OBSIDIAN));
+
 		valkyrie_helmet = registerItem("valkyrie_helmet", new ItemValkyrieArmor(EntityEquipmentSlot.HEAD));
 		valkyrie_chestplate = registerItem("valkyrie_chestplate", new ItemValkyrieArmor(EntityEquipmentSlot.CHEST));
 		valkyrie_leggings = registerItem("valkyrie_leggings", new ItemValkyrieArmor(EntityEquipmentSlot.LEGS));
@@ -259,7 +259,7 @@ public class ItemsAether
 
 		golden_amber = registerItem("golden_amber", new Item(), AetherCreativeTabs.tabMaterials);
 
-		aechor_petal = registerItem("aechor_petal", new Item(), AetherCreativeTabs.tabConsumables);
+		aechor_petal = registerItem("aechor_petal", new Item(), AetherCreativeTabs.tabMiscellaneous);
 
 		blueberries = registerItem("blueberries", new ItemFood(2, false), AetherCreativeTabs.tabConsumables);
 
@@ -295,16 +295,16 @@ public class ItemsAether
 
 		candy_cane = registerItem("candy_cane", new ItemFood(2, false), AetherCreativeTabs.tabConsumables);
 
-		skyroot_bucket = registerItem("skyroot_bucket", new ItemSkyrootBucket(Blocks.AIR), AetherCreativeTabs.tabTools);
-		skyroot_water_bucket = registerItem("skyroot_water_bucket", new ItemSkyrootBucket(Blocks.FLOWING_WATER), AetherCreativeTabs.tabTools);
-		skyroot_milk_bucket = registerItem("skyroot_milk_bucket", new ItemSkyrootConsumableBucket(), AetherCreativeTabs.tabConsumables);
-		skyroot_poison_bucket = registerItem("skyroot_poison_bucket", new ItemSkyrootConsumableBucket(), AetherCreativeTabs.tabConsumables);
+		skyroot_bucket = registerItem("skyroot_bucket", new ItemSkyrootBucket(Blocks.AIR), AetherCreativeTabs.tabMiscellaneous);
+		skyroot_water_bucket = registerItem("skyroot_water_bucket", new ItemSkyrootBucket(Blocks.FLOWING_WATER), AetherCreativeTabs.tabMiscellaneous);
+		skyroot_milk_bucket = registerItem("skyroot_milk_bucket", new ItemSkyrootConsumableBucket(), AetherCreativeTabs.tabMiscellaneous);
+		skyroot_poison_bucket = registerItem("skyroot_poison_bucket", new ItemSkyrootConsumableBucket(), AetherCreativeTabs.tabMiscellaneous);
 
-		valkyrie_music_disc = registerItem("valkyrie_music_disc", new ItemAetherRecord("valkyrie", SoundsAether.record_valkyrie), AetherCreativeTabs.tabTools);
-		labyrinth_music_disc = registerItem("labyrinth_music_disc", new ItemAetherRecord("labyrinth", SoundsAether.record_labyrinth), AetherCreativeTabs.tabTools);
-		moa_music_disc = registerItem("moa_music_disc", new ItemAetherRecord("moa", SoundsAether.record_moa), AetherCreativeTabs.tabTools);
-		aerwhale_music_disc = registerItem("aerwhale_music_disc", new ItemAetherRecord("aerwhale", SoundsAether.record_aerwhale), AetherCreativeTabs.tabTools);
-		recording_892 = registerItem("recording_892", new ItemAetherRecord("recording_892", SoundsAether.record_recording_892), AetherCreativeTabs.tabTools);
+		valkyrie_music_disc = registerItem("valkyrie_music_disc", new ItemAetherRecord("valkyrie", SoundsAether.record_valkyrie), AetherCreativeTabs.tabMiscellaneous);
+		labyrinth_music_disc = registerItem("labyrinth_music_disc", new ItemAetherRecord("labyrinth", SoundsAether.record_labyrinth), AetherCreativeTabs.tabMiscellaneous);
+		moa_music_disc = registerItem("moa_music_disc", new ItemAetherRecord("moa", SoundsAether.record_moa), AetherCreativeTabs.tabMiscellaneous);
+		aerwhale_music_disc = registerItem("aerwhale_music_disc", new ItemAetherRecord("aerwhale", SoundsAether.record_aerwhale), AetherCreativeTabs.tabMiscellaneous);
+		recording_892 = registerItem("recording_892", new ItemAetherRecord("recording_892", SoundsAether.record_recording_892), AetherCreativeTabs.tabMiscellaneous);
 
 		healing_stone = registerItem("healing_stone", new ItemFood(0, 1.2f, false).setAlwaysEdible().setPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("regeneration"), 200, 0), 1.0f), AetherCreativeTabs.tabConsumables);
 
@@ -354,7 +354,7 @@ public class ItemsAether
 
         pink_baby_swet = registerItem("pink_baby_swet", new ItemPinkBabySwet().setMaxStackSize(1), AetherCreativeTabs.tabCompanions);
 
-        shard_of_life = registerItem("shard_of_life", new ItemShardOfLife().setMaxStackSize(4), AetherCreativeTabs.tabMiscellaneous);
+        shard_of_life = registerItem("shard_of_life", new ItemShardOfLife().setMaxStackSize(4), AetherCreativeTabs.tabConsumables);
 
 		leather_gloves = registerItem("leather_gloves", new ItemLeatherGloves());
 		iron_gloves = registerItem("iron_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.IRON));

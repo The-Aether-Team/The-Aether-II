@@ -33,14 +33,14 @@ public class AetherCreativeTabs
 	public static void registerTabIcons()
 	{
 		tabBlocks.setDisplayStack(new ItemStack(BlocksAether.aether_grass, BlockAetherGrass.AETHER_GRASS.getMeta()));
-		tabMaterials.setDisplayStack(new ItemStack(ItemsAether.skyroot_stick));
-		tabTools.setDisplayStack(new ItemStack(ItemsAether.gravitite_pickaxe));
-		tabWeapons.setDisplayStack(new ItemStack(ItemsAether.gravitite_sword));
+		tabMaterials.setDisplayStack(new ItemStack(ItemsAether.ambrosium_shard));
+		tabTools.setDisplayStack(new ItemStack(ItemsAether.zanite_pickaxe));
+		tabWeapons.setDisplayStack(new ItemStack(ItemsAether.zanite_sword));
 		tabArmor.setDisplayStack(new ItemStack(ItemsAether.zanite_helmet));
 		tabConsumables.setDisplayStack(new ItemStack(ItemsAether.orange));
 		tabAccessories.setDisplayStack(new ItemStack(ItemsAether.zanite_ring));
         tabCompanions.setDisplayStack(new ItemStack(ItemsAether.pink_baby_swet));
-        tabMiscellaneous.setDisplayStack(new ItemStack(ItemsAether.shard_of_life));
+        tabMiscellaneous.setDisplayStack(new ItemStack(ItemsAether.aechor_petal));
 	}
 
 	public static class CreativeTab extends CreativeTabs
