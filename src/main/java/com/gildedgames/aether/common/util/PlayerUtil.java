@@ -1,6 +1,9 @@
 package com.gildedgames.aether.common.util;
 
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -34,7 +37,20 @@ public class PlayerUtil
 			}
 		}
 
-		return armorClass;
+		PlayerAether aePlayer = (PlayerAether) PlayerAether.getPlayer(player);
+		ItemStack gloveStack = aePlayer.getEquipmentInventory().getStackInSlot(2);
+
+		if (aePlayer.getEquipmentInventory().getStackInSlot(2) != null)
+		{
+			if (gloveStack.getItem() == ItemsAether.obsidian_gloves || gloveStack.getItem() == ItemsAether.gravitite_gloves
+					|| gloveStack.getItem() == ItemsAether.phoenix_gloves || gloveStack.getItem() == ItemsAether.neptune_gloves
+					|| gloveStack.getItem() == ItemsAether.valkyrie_gloves || gloveStack.getItem() == ItemsAether.zanite_gloves)
+			{
+				return armorClass;
+			}
+		}
+
+		return null;
 	}
 
 	public static void fillBucketInHand(EntityPlayer player, ItemStack fillBucket)
