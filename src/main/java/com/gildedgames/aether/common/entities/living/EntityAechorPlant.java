@@ -23,8 +23,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
-
 public class EntityAechorPlant extends EntityMob
 {
 	private static final DataParameter<Boolean> CAN_SEE_PREY = new DataParameter<>(16, DataSerializers.BOOLEAN);
@@ -43,7 +41,7 @@ public class EntityAechorPlant extends EntityMob
 		this.tasks.addTask(0, new AechorPlantAI(this));
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
-		this.setSize(0.75F + (this.getPlantSize() * 0.125F), 0.5F + (this.getPlantSize() * 0.075F));
+		this.setSize(0.8F, 0.6F);
 
 		this.setPoisonLeft(2);
 
@@ -59,16 +57,16 @@ public class EntityAechorPlant extends EntityMob
 
 		this.dataManager.register(EntityAechorPlant.CAN_SEE_PREY, Boolean.FALSE);
 		this.dataManager.register(EntityAechorPlant.PLANT_SIZE, (byte) 0);
-
-		this.setPlantSize(this.rand.nextInt(3));
 	}
 
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(3.5F);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20);
+		this.setPlantSize(this.rand.nextInt(3) + 1);
+
+		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(3.0F);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0F + (this.rand.nextInt(this.getPlantSize()) * 5.0F));
 	}
 
 	@Override
@@ -113,21 +111,34 @@ public class EntityAechorPlant extends EntityMob
 	}
 
 	@Override
+	protected void dropFewItems(boolean wasRecentlyHit, int lootingModifier)
+	{
+		int amount = this.getPlantSize();
+
+		if (lootingModifier > 0)
+		{
+			amount += this.rand.nextInt(lootingModifier + 1);
+		}
+
+		this.dropItem(ItemsAether.aechor_petal, amount);
+	}
+
+	@Override
 	public EnumActionResult applyPlayerInteraction(EntityPlayer player, Vec3d vec, ItemStack stack, EnumHand hand)
 	{
-		if (this.getPoisonLeft() <= 0)
-		{
-			return EnumActionResult.FAIL;
-		}
-
 		if (stack != null && stack.getItem() == ItemsAether.skyroot_bucket)
 		{
-			PlayerUtil.fillBucketInHand(player, new ItemStack(ItemsAether.skyroot_poison_bucket));
+			if (this.getPoisonLeft() > 0)
+			{
+				PlayerUtil.fillBucketInHand(player, new ItemStack(ItemsAether.skyroot_poison_bucket));
 
-			this.setPoisonLeft(this.getPoisonLeft() - 1);
+				this.setPoisonLeft(this.getPoisonLeft() - 1);
+
+				return EnumActionResult.SUCCESS;
+			}
 		}
 
-		return EnumActionResult.SUCCESS;
+		return EnumActionResult.PASS;
 	}
 
 	@SideOnly(Side.CLIENT)

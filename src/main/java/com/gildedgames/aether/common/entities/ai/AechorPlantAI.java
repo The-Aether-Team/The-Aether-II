@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.ai;
 
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
+import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
@@ -27,7 +28,7 @@ public class AechorPlantAI extends EntityAITarget
 
 		if (target == null || !target.isEntityAlive())
 		{
-			this.ticksUntilAttack = 3;
+			this.ticksUntilAttack = 20;
 
 			return false;
 		}
@@ -40,14 +41,15 @@ public class AechorPlantAI extends EntityAITarget
 	{
 		if (this.ticksUntilAttack <= 0)
 		{
-			this.ticksUntilAttack = 30;
+			this.ticksUntilAttack = 45;
 
 			EntityLivingBase target = this.taskOwner.getAttackTarget();
 			EntityCreature predator = this.taskOwner;
 
 			if (!predator.worldObj.isRemote)
 			{
-				EntityDart dart = new EntityDart(predator.worldObj, predator, target, 0.6F, 3.0F);
+				EntityDart dart = new EntityDart(predator.worldObj, predator, target, 0.6F, 0.5F);
+				dart.setDartType(ItemDartType.POISON);
 
 				dart.worldObj.spawnEntityInWorld(dart);
 			}

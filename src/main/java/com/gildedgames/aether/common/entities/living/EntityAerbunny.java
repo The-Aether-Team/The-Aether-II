@@ -14,6 +14,8 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.EntityJumpHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateGround;
@@ -49,7 +51,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 
 		this.spawnableBlock = BlocksAether.aether_grass;
 
-		this.setSize(0.45F, 0.45F);
+		this.setSize(0.65F, 0.65F);
 	}
 
 	@Override
@@ -142,6 +144,12 @@ public class EntityAerbunny extends EntityAetherAnimal
 	public double getYOffset()
 	{
 		return this.getRidingEntity() != null ? 0.45D : 0.0D;
+	}
+
+	@Override
+	public Item getDropItem()
+	{
+		return Items.STRING;
 	}
 
 	@Override

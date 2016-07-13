@@ -19,6 +19,8 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.network.play.server.SPacketChangeGameState;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.EnumParticleTypes;
@@ -333,6 +335,11 @@ public class EntityDart extends Entity implements IProjectile
 								entity.setArrowCountInEntity(entity.getArrowCountInEntity() + 1);
 							}
 
+							if (this.getDartType() == ItemDartType.POISON)
+							{
+								entity.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("poison"), 80, 0));
+							}
+
 							if (this.knockbackStrength > 0)
 							{
 								f4 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
@@ -355,7 +362,7 @@ public class EntityDart extends Entity implements IProjectile
 							}
 						}
 
-						this.playSound(SoundEvents.ENTITY_ARROW_HIT_PLAYER, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+						this.playSound(SoundEvents.ENTITY_ARROW_HIT, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
 
 						if (!(raytrace.entityHit instanceof EntityEnderman))
 						{
