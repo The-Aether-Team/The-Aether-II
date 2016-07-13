@@ -310,6 +310,9 @@ public class RecipesAether implements IAltarRecipeRegistry
 		registerShapedRecipe(new ItemStack(ItemsAether.zanite_boots), "X X", "X X",
 				'X', zanite);
 
+		registerShapedRecipe(new ItemStack(ItemsAether.zanite_gloves), "X X",
+				'X', zanite);
+
 		// Gravitite Armor
 		registerShapedRecipe(new ItemStack(ItemsAether.gravitite_helmet), "XXX", "X X",
 				'X', gravitite);
@@ -321,6 +324,9 @@ public class RecipesAether implements IAltarRecipeRegistry
 				'X', gravitite);
 
 		registerShapedRecipe(new ItemStack(ItemsAether.gravitite_boots), "X X", "X X",
+				'X', gravitite);
+
+		registerShapedRecipe(new ItemStack(ItemsAether.gravitite_gloves), "X X",
 				'X', gravitite);
 	}
 
