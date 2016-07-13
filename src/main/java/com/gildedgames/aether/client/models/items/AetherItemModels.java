@@ -285,6 +285,13 @@ public class AetherItemModels
 				.add(3, "gravitite_crossbow_loaded")
 				.add(4, "gravitite_crossbow_fired"));
 
+		registerItemModels(ItemsAether.vampire_crossbow, new ItemModelBuilder("crossbow/")
+				.add(0, "vampire_crossbow_fired")
+				.add(1, "vampire_crossbow_loading1")
+				.add(2, "vampire_crossbow_loading2")
+				.add(3, "vampire_crossbow_loaded")
+				.add(4, "vampire_crossbow_fired"));
+
 		registerItemModels(ItemsAether.bolt, new ItemModelBuilder("bolts/")
 				.add(ItemBoltType.SKYROOT.ordinal(), "skyroot_bolt")
 				.add(ItemBoltType.STONE.ordinal(), "holystone_bolt")

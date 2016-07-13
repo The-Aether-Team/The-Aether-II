@@ -146,6 +146,8 @@ public class ItemsAether
 
 	public static ItemGravititeCrossbow gravitite_crossbow;
 
+	public static ItemVampireCrossbow vampire_crossbow;
+
 	public static ItemBolt bolt;
 
 	public static Item iron_ring, gold_ring;
@@ -317,6 +319,7 @@ public class ItemsAether
 		zanite_crossbow = registerItem("zanite_crossbow", new ItemZaniteCrossbow(), AetherCreativeTabs.tabWeapons);
 		arkenium_crossbow = registerItem("arkenium_crossbow", new ItemArkeniumCrossbow(), AetherCreativeTabs.tabWeapons);
 		gravitite_crossbow = registerItem("gravitite_crossbow", new ItemGravititeCrossbow(), AetherCreativeTabs.tabWeapons);
+		vampire_crossbow = registerItem("vampire_crossbow",new ItemVampireCrossbow(), AetherCreativeTabs.tabWeapons);
 		bolt = registerItem("bolt", new ItemBolt(), AetherCreativeTabs.tabWeapons);
 
 		flaming_sword = registerItem("flaming_sword", new ItemElementalSword(ItemElementalSword.SwordElement.FIRE));
