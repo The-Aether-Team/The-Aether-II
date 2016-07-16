@@ -45,7 +45,7 @@ public class RenderCarrionSprout extends RenderLiving<EntityCarrionSprout>
 		this.plantModel.sinage = sinage;
 		this.plantModel.sinage2 = sinage2;
 
-		this.shadowSize = sprout.getSproutSize() / 9F;
+		this.shadowSize = 0.10f * sprout.getSproutSize();
 	}
 
 	@Override
