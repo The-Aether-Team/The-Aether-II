@@ -441,7 +441,7 @@ public class RecipesAether implements IAltarRecipeRegistry
 
         // Rainbow Strawberry
         registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(ItemsAether.wyndberry),
-                new ItemStack(ItemsAether.rainbow_strawberry)));
+                new ItemStack(ItemsAether.enchanted_wyndberry)));
 
 		// Tool Repair Recipes
 		registerAltarRecipe(new AltarRepairRecipe());

@@ -7,9 +7,9 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class ItemRainbowStrawberry extends ItemFood
+public class ItemEnchantedWyndberry extends ItemFood
 {
-	public ItemRainbowStrawberry()
+	public ItemEnchantedWyndberry()
 	{
 		super(8, false);
 	}

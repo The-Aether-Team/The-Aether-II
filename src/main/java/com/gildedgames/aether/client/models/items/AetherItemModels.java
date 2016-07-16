@@ -206,7 +206,7 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.orange, "orange");
 		registerItemModels(ItemsAether.healing_stone, "healing_stone");
 		registerItemModels(ItemsAether.wyndberry, "wyndberry");
-		registerItemModels(ItemsAether.rainbow_strawberry, "rainbow_strawberry");
+		registerItemModels(ItemsAether.enchanted_wyndberry, "enchanted_wyndberry");
 		registerItemModels(ItemsAether.candy_corn, "candy_corn");
 		registerItemModels(ItemsAether.cocoatrice, "cocoatrice");
 		registerItemModels(ItemsAether.wrapped_chocolates, "wrapped_chocolates");

@@ -27,13 +27,8 @@ import com.gildedgames.aether.common.items.armor.ItemSentryBoots;
 import com.gildedgames.aether.common.items.armor.ItemValkyrieArmor;
 import com.gildedgames.aether.common.items.armor.ItemZaniteArmor;
 import com.gildedgames.aether.common.items.companions.ItemPinkBabySwet;
-import com.gildedgames.aether.common.items.consumables.ItemAmbrosiumShard;
-import com.gildedgames.aether.common.items.consumables.ItemContinuumOrb;
-import com.gildedgames.aether.common.items.consumables.ItemGummySwet;
-import com.gildedgames.aether.common.items.consumables.ItemRainbowStrawberry;
-import com.gildedgames.aether.common.items.consumables.ItemSkyrootConsumableBucket;
-import com.gildedgames.aether.common.items.consumables.ItemStomperPop;
-import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
+import com.gildedgames.aether.common.items.consumables.*;
+import com.gildedgames.aether.common.items.consumables.ItemEnchantedWyndberry;
 import com.gildedgames.aether.common.items.effects.ItemEffects;
 import com.gildedgames.aether.common.items.miscellaneous.ItemShardOfLife;
 import com.gildedgames.aether.common.items.tools.EnumToolType;
@@ -112,7 +107,7 @@ public class ItemsAether
 
 	public static Item golden_amber;
 
-	public static ItemFood blueberries, enchanted_blueberry, orange, wyndberry, rainbow_strawberry, swet_jelly, gummy_swet;
+	public static ItemFood blueberries, enchanted_blueberry, orange, wyndberry, enchanted_wyndberry, swet_jelly, gummy_swet;
 
 	public static ItemFood candy_corn, cocoatrice, wrapped_chocolates, jelly_pumpkin, stomper_pop, blueberry_lollipop, orange_lollipop, icestone_poprocks;
 
@@ -272,7 +267,7 @@ public class ItemsAether
 
 		wyndberry = registerItem("wyndberry", new ItemFood(4, false), AetherCreativeTabs.tabConsumables);
 
-		rainbow_strawberry = registerItem("rainbow_strawberry", new ItemRainbowStrawberry(), AetherCreativeTabs.tabConsumables);
+		enchanted_wyndberry = registerItem("enchanted_wyndberry", new ItemEnchantedWyndberry(), AetherCreativeTabs.tabConsumables);
 
 		swet_jelly = registerItem("swet_jelly", new ItemSwetJelly(), AetherCreativeTabs.tabConsumables);
 
