@@ -29,17 +29,17 @@ public class RenderMovingBlock extends Render<EntityMovingBlock>
 	}
 
 	@Override
-	public void doRender(EntityMovingBlock floatingBlock, double x, double y, double z, float entityYaw, float partialTicks)
+	public void doRender(EntityMovingBlock entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
-		if (floatingBlock.getBlockState() != null)
+		if (entity.getBlockState() != null)
 		{
 			this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
-			IBlockState state = floatingBlock.getBlockState();
+			IBlockState state = entity.getBlockState();
 			Block block = state.getBlock();
 
-			BlockPos pos = new BlockPos(0, 0, 0);
-			World world = floatingBlock.getEntityWorld();
+			BlockPos pos = new BlockPos(entity);
+			World world = entity.getEntityWorld();
 
 			if (state != world.getBlockState(pos))
 			{
@@ -49,19 +49,17 @@ public class RenderMovingBlock extends Render<EntityMovingBlock>
 
 					GlStateManager.pushMatrix();
 
-					double x2 = x - ((x - floatingBlock.renderPosX) * partialTicks);
-					double y2 = y - ((y - floatingBlock.renderPosY) * partialTicks);
-					double z2 = z - ((z - floatingBlock.renderPosZ) * partialTicks);
-
-					floatingBlock.renderPosX = x2;
-					floatingBlock.renderPosY = y2;
-					floatingBlock.renderPosZ = z2;
-
 					GlStateManager.translate(x, y, z);
 
-					float scale = 1.0f;
+					float scale = 0.9f;
 
 					GlStateManager.scale(scale, scale, scale);
+
+					float f1 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks;
+					float f2 = entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks;
+
+					GlStateManager.rotate(f1, 0.0f, 0.0f, 1.0f);
+					GlStateManager.rotate(f2, 1.0f, 0.0f, 0.0f);
 
 					GlStateManager.disableLighting();
 
@@ -100,7 +98,7 @@ public class RenderMovingBlock extends Render<EntityMovingBlock>
 					GlStateManager.enableLighting();
 					GlStateManager.popMatrix();
 
-					super.doRender(floatingBlock, x, y, z, entityYaw, partialTicks);
+					super.doRender(entity, x, y, z, entityYaw, partialTicks);
 				}
 			}
 		}

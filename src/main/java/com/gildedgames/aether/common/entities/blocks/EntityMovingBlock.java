@@ -27,14 +27,11 @@ public class EntityMovingBlock extends Entity
 
 	private boolean isFalling;
 
-	@SideOnly(Side.CLIENT)
-	public double renderPosX, renderPosY, renderPosZ;
-
 	public EntityMovingBlock(World world)
 	{
 		super(world);
 
-		this.setSize(1.0f, 1.0f);
+		this.setSize(0.9f, 0.9f);
 
 		this.motionX = 0.0D;
 		this.motionY = 0.0D;
@@ -66,6 +63,8 @@ public class EntityMovingBlock extends Entity
 	@Override
 	public void onUpdate()
 	{
+		super.onUpdate();
+
 		if (!this.worldObj.isRemote && !this.hasActivated)
 		{
 			BlockPos pos = new BlockPos(this);
@@ -90,9 +89,9 @@ public class EntityMovingBlock extends Entity
 
 		if (!this.worldObj.isRemote)
 		{
-			if (this.holdingPlayer == null || this.ticksExisted > 600)
+			if (this.holdingPlayer == null)
 			{
-				this.setDead();
+				this.drop();
 
 				return;
 			}
@@ -120,6 +119,17 @@ public class EntityMovingBlock extends Entity
 
 	public void updatePosition()
 	{
+		if (this.rotationYaw > 360f)
+		{
+			this.rotationYaw -= 360f;
+		}
+
+		this.rotationYaw += this.motionZ * 10f;
+		this.rotationPitch += -this.motionX * 10f;
+
+		this.rotationYaw *= 0.9f;
+		this.rotationPitch *= 0.9f;
+
 		if (this.isFalling)
 		{
 			this.motionY -= 0.04D;
@@ -141,6 +151,7 @@ public class EntityMovingBlock extends Entity
 				}
 				else
 				{
+					// Try to move towards
 					// Apply friction
 					this.motionX *= 0.8D;
 					this.motionZ *= 0.8D;
@@ -176,6 +187,11 @@ public class EntityMovingBlock extends Entity
 			this.motionY += (toY - this.posY) * 0.1D;
 			this.motionZ += (toZ - this.posZ) * 0.1D;
 		}
+	}
+
+	private void moveTowards(Vec3d vec)
+	{
+
 	}
 
 	public void drop()

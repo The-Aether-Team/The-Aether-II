@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.player;
 
+import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
+import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -42,14 +44,14 @@ public class PlayerAether implements IPlayerAetherCapability
 	private final EntityPlayer player;
 
 	private InventoryEquipment equipmentInventory;
-	
+
+	private EntityMovingBlock pickedEntity;
+
 	private BlockPos linkingSchematicBoundary;
 
 	private boolean hasDoubleJumped;
 
 	private int ticksAirborne;
-	
-	private EntityMovingBlock pickedBlock;
 
 	public PlayerAether(EntityPlayer player)
 	{
@@ -97,6 +99,33 @@ public class PlayerAether implements IPlayerAetherCapability
 		else
 		{
 			this.ticksAirborne++;
+		}
+
+		if (this.pickedEntity != null)
+		{
+			if (this.pickedEntity.isDead || this.pickedEntity.isFalling())
+			{
+				this.pickedEntity = null;
+			}
+			else
+			{
+				ItemStack stack = this.player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
+
+				// Check if the player is still using a gravitite tool
+				if (!(stack != null && stack.getItem() instanceof ItemGravititeTool))
+				{
+					this.pickedEntity.drop();
+				}
+				else if (this.pickedEntity.ticksExisted % 20 == 0)
+				{
+					// Does damage 2 damage/sec, increasing the amount of damage by 1 every 3 seconds,
+					// for a maximum of 8 damage/sec
+
+					int extra = (int) Math.floor(Math.min(6, this.pickedEntity.ticksExisted / 60));
+
+					stack.damageItem(2 + extra, this.player);
+				}
+			}
 		}
 
 		AetherCore.PROXY.setExtendedReachDistance(this.player, extendedReach);
@@ -196,45 +225,40 @@ public class PlayerAether implements IPlayerAetherCapability
 		return false;
 	}
 
+	@Override
 	public int getTicksAirborne()
 	{
 		return this.ticksAirborne;
 	}
 	
-	public EntityMovingBlock getPickedBlock()
-	{
-		return this.pickedBlock;
-	}
-	
-	public void dropBlock()
-	{
-		if (this.pickedBlock != null)
-		{
-			this.pickedBlock.drop();
-			
-			this.pickedBlock = null;
-		}
-	}
-	
 	public boolean pickupBlock(BlockPos pos, World world)
 	{
-		if (world.isRemote)
+		if (this.pickedEntity == null)
 		{
-			return false;
+			if (world.canMineBlockBody(this.player, pos))
+			{
+				IBlockState state = world.getBlockState(pos);
+
+				EntityMovingBlock floatingBlock = new EntityMovingBlock(world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, state, this.player);
+				world.spawnEntityInWorld(floatingBlock);
+
+				this.pickedEntity = floatingBlock;
+
+				return true;
+			}
 		}
-		
-		IBlockState state = world.getBlockState(pos);
-		
-		if (state != Blocks.AIR.getDefaultState())
-		{
-			this.pickedBlock = new EntityMovingBlock(world, pos.getX(), pos.getY(), pos.getZ(), state, this.player);
-			
-			world.spawnEntityInWorld(this.pickedBlock);
-			
-			return true;
-		}
-		
+
 		return false;
+	}
+
+	public void dropBlock()
+	{
+		this.pickedEntity.drop();
+	}
+
+	public EntityMovingBlock getPickedBlock()
+	{
+		return this.pickedEntity;
 	}
 
 	public static class Storage implements IStorage<IPlayerAetherCapability>
