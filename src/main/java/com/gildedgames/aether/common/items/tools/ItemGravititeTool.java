@@ -10,7 +10,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeHooks;
 
 public class ItemGravititeTool extends ItemAetherTool
 {
@@ -29,9 +28,9 @@ public class ItemGravititeTool extends ItemAetherTool
 		{
 			PlayerAether aePlayer = (PlayerAether) PlayerAether.getPlayer(player);
 
-			if (aePlayer.getPickedBlock() != null && aePlayer.getPickedBlock().ticksExisted > 1)
+			if (aePlayer.getHeldBlock() != null && aePlayer.getHeldBlock().ticksExisted > 1)
 			{
-				aePlayer.dropBlock();
+				aePlayer.dropHeldBlock();
 			}
 		}
 
@@ -45,7 +44,7 @@ public class ItemGravititeTool extends ItemAetherTool
 		{
 			PlayerAether aePlayer = (PlayerAether) PlayerAether.getPlayer(player);
 
-			if (aePlayer.getPickedBlock() == null)
+			if (aePlayer.getHeldBlock() == null)
 			{
 				IBlockState state = world.getBlockState(pos);
 

@@ -7,7 +7,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -31,7 +30,6 @@ import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
-import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
@@ -45,7 +43,7 @@ public class PlayerAether implements IPlayerAetherCapability
 
 	private InventoryEquipment equipmentInventory;
 
-	private EntityMovingBlock pickedEntity;
+	private EntityMovingBlock heldBlock;
 
 	private BlockPos linkingSchematicBoundary;
 
@@ -101,11 +99,11 @@ public class PlayerAether implements IPlayerAetherCapability
 			this.ticksAirborne++;
 		}
 
-		if (this.pickedEntity != null)
+		if (this.heldBlock != null)
 		{
-			if (this.pickedEntity.isDead || this.pickedEntity.isFalling())
+			if (this.heldBlock.isDead || this.heldBlock.isFalling())
 			{
-				this.pickedEntity = null;
+				this.heldBlock = null;
 			}
 			else
 			{
@@ -114,14 +112,14 @@ public class PlayerAether implements IPlayerAetherCapability
 				// Check if the player is still using a gravitite tool
 				if (!(stack != null && stack.getItem() instanceof ItemGravititeTool))
 				{
-					this.pickedEntity.drop();
+					this.heldBlock.setHoldingPlayer(null);
 				}
-				else if (this.pickedEntity.ticksExisted % 20 == 0)
+				else if (this.heldBlock.ticksExisted % 20 == 0)
 				{
 					// Does damage 2 damage/sec, increasing the amount of damage by 1 every 3 seconds,
 					// for a maximum of 8 damage/sec
 
-					int extra = (int) Math.floor(Math.min(6, this.pickedEntity.ticksExisted / 60));
+					int extra = (int) Math.floor(Math.min(6, this.heldBlock.ticksExisted / 60));
 
 					stack.damageItem(2 + extra, this.player);
 				}
@@ -132,7 +130,10 @@ public class PlayerAether implements IPlayerAetherCapability
 	}
 
 	@Override
-	public void onDeath(LivingDeathEvent event) { }
+	public void onDeath(LivingDeathEvent event)
+	{
+		this.dropHeldBlock();
+	}
 
 	@Override
 	public void onDrops(LivingDropsEvent event)
@@ -233,16 +234,16 @@ public class PlayerAether implements IPlayerAetherCapability
 
 	public boolean pickupBlock(BlockPos pos, World world)
 	{
-		if (this.pickedEntity == null)
+		if (this.heldBlock == null)
 		{
-			if (world.canMineBlockBody(this.player, pos))
+			if (world.isBlockModifiable(this.player, pos))
 			{
 				IBlockState state = world.getBlockState(pos);
 
-				EntityMovingBlock floatingBlock = new EntityMovingBlock(world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, state, this.player);
-				world.spawnEntityInWorld(floatingBlock);
+				EntityMovingBlock movingBlock = new EntityMovingBlock(world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, state);
+				world.spawnEntityInWorld(movingBlock);
 
-				this.pickedEntity = floatingBlock;
+				this.holdBlock(movingBlock);
 
 				return true;
 			}
@@ -251,14 +252,25 @@ public class PlayerAether implements IPlayerAetherCapability
 		return false;
 	}
 
-	public void dropBlock()
+	private void holdBlock(EntityMovingBlock entity)
 	{
-		this.pickedEntity.drop();
+		this.dropHeldBlock();
+
+		this.heldBlock = entity;
+		this.heldBlock.setHoldingPlayer(this.player);
 	}
 
-	public EntityMovingBlock getPickedBlock()
+	public void dropHeldBlock()
 	{
-		return this.pickedEntity;
+		if (this.getHeldBlock() != null)
+		{
+			this.getHeldBlock().setHoldingPlayer(null);
+		}
+	}
+
+	public EntityMovingBlock getHeldBlock()
+	{
+		return this.heldBlock;
 	}
 
 	public static class Storage implements IStorage<IPlayerAetherCapability>

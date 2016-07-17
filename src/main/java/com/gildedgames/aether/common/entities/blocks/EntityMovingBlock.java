@@ -36,7 +36,7 @@ public class EntityMovingBlock extends Entity
 		this.motionZ = 0.0D;
 	}
 
-	public EntityMovingBlock(World world, double x, double y, double z, IBlockState state, EntityPlayer picker)
+	public EntityMovingBlock(World world, double x, double y, double z, IBlockState state)
 	{
 		this(world);
 
@@ -47,8 +47,6 @@ public class EntityMovingBlock extends Entity
 		this.prevPosX = x;
 		this.prevPosY = y;
 		this.prevPosZ = z;
-
-		this.holdingPlayer = picker;
 	}
 
 	@Override
@@ -91,7 +89,7 @@ public class EntityMovingBlock extends Entity
 			{
 				if (this.invalidTicks > 30 || this.getDistance(this.holdingPlayer.posX, this.holdingPlayer.posY, this.holdingPlayer.posZ) > 6.0D)
 				{
-					this.drop();
+					this.setHoldingPlayer(null);
 				}
 
 				if (this.isCollided)
@@ -106,6 +104,11 @@ public class EntityMovingBlock extends Entity
 
 			this.updatePosition();
 		}
+	}
+
+	public void setHoldingPlayer(EntityPlayer player)
+	{
+		this.holdingPlayer = player;
 	}
 
 	public void updatePosition()
@@ -135,15 +138,16 @@ public class EntityMovingBlock extends Entity
 
 					if (!this.worldObj.isRemote)
 					{
+						this.worldObj.destroyBlock(pos, true);
+
 						this.worldObj.setBlockState(pos, this.getBlockState());
+						this.worldObj.notifyNeighborsOfStateChange(pos, this.getBlockState().getBlock());
 
 						this.setDead();
 					}
 				}
 				else
 				{
-					// Try to move towards
-					// Apply friction
 					this.motionX *= 0.8D;
 					this.motionZ *= 0.8D;
 				}
@@ -178,16 +182,6 @@ public class EntityMovingBlock extends Entity
 			this.motionY += (toY - this.posY) * 0.1D;
 			this.motionZ += (toZ - this.posZ) * 0.1D;
 		}
-	}
-
-	private void moveTowards(Vec3d vec)
-	{
-
-	}
-
-	public void drop()
-	{
-		this.holdingPlayer = null;
 	}
 
 	public boolean isFalling()

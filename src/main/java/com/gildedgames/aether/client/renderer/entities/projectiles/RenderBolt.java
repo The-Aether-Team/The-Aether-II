@@ -55,7 +55,7 @@ public class RenderBolt extends Render<EntityBolt>
 		float f6 = (float) (5 + i * 10) / 32.0F;
 		float f7 = (float) (10 + i * 10) / 32.0F;
 		float f8 = 0.05625F;
-		float f9 = (float) bolt.getBoltShake() - partialTicks;
+		float f9 = (float) bolt.arrowShake - partialTicks;
 
 		GlStateManager.enableRescaleNormal();
 

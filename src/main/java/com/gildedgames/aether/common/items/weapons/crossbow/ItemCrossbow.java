@@ -70,19 +70,27 @@ public class ItemCrossbow extends Item
 			}
 		}
 
-		return new ActionResult(EnumActionResult.PASS, itemStackIn);
+		return new ActionResult<>(EnumActionResult.PASS, itemStackIn);
 	}
 
 	@Override
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
 	{
-		EntityBolt dart = new EntityBolt(entityLiving.getEntityWorld(), entityLiving, 2.0F);
+		if (entityLiving.worldObj.isRemote)
+		{
+			return false;
+		}
+
+		EntityBolt dart = new EntityBolt(entityLiving.getEntityWorld(), entityLiving);
+//		dart.setAim();
+
 		if (stack.getItemDamage() > 0)
 		{
 			entityLiving.getEntityWorld().spawnEntityInWorld(dart);
 			stack.setItemDamage(stack.getItemDamage()-1);
 			return true;
 		}
+
 		return false;
 	}
 

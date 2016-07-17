@@ -10,6 +10,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -102,7 +103,8 @@ public class ItemDartShooter extends Item
 				speed = 1f;
 			}
 
-			EntityDart dart = new EntityDart(world, player, speed * 2.0F);
+			EntityDart dart = new EntityDart(world, player);
+			dart.setAim(player, player.rotationPitch, player.rotationYaw, 0.0F, speed * 2.0F, 1.0F);
 			dart.setDartType(dartType);
 			dart.setDamage(dartType.getAmmoItem().getDamage());
 
@@ -113,7 +115,7 @@ public class ItemDartShooter extends Item
 
 			if (isInfiniteArrow)
 			{
-				dart.setCanPickup(2);
+				dart.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
 			}
 
 			world.playSound(player, player.getPosition(), SoundsAether.shoot_dart, SoundCategory.PLAYERS, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + speed * 0.5F);

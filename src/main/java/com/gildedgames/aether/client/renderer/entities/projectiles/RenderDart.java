@@ -57,7 +57,7 @@ public class RenderDart extends Render<EntityDart>
 		float f6 = (float) (5 + i * 10) / 32.0F;
 		float f7 = (float) (10 + i * 10) / 32.0F;
 		float f8 = 0.05625F;
-		float f9 = (float) dart.getDartShake() - partialTicks;
+		float f9 = (float) dart.arrowShake - partialTicks;
 
 		GlStateManager.enableRescaleNormal();
 

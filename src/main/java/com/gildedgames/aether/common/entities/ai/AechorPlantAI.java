@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
+import net.minecraft.util.math.MathHelper;
 
 public class AechorPlantAI extends EntityAITarget
 {
@@ -43,12 +44,29 @@ public class AechorPlantAI extends EntityAITarget
 		{
 			this.ticksUntilAttack = 45;
 
-			EntityLivingBase target = this.taskOwner.getAttackTarget();
+			EntityLivingBase prey = this.taskOwner.getAttackTarget();
+
+			if (prey == null)
+			{
+				return;
+			}
+
 			EntityCreature predator = this.taskOwner;
 
 			if (!predator.worldObj.isRemote)
 			{
-				EntityDart dart = new EntityDart(predator.worldObj, predator, target, 0.6F, 0.5F);
+				EntityDart dart = new EntityDart(predator.worldObj, predator);
+				dart.setThrowableHeading(prey.posX, prey.posY, prey.posZ, 0.6F, 1.0F);
+
+				double motionX = prey.posX - predator.posX;
+				double motionY = prey.getEntityBoundingBox().minY + (double) (prey.height / 3.0F) - dart.posY;
+				double motionZ = prey.posZ - predator.posZ;
+
+				double accel = (double) MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
+
+				dart.setThrowableHeading(motionX, motionY + accel * 0.2D, motionZ, 1.6F, 0.5f);
+				dart.setDamage(0.5f);
+
 				dart.setDartType(ItemDartType.POISON);
 
 				dart.worldObj.spawnEntityInWorld(dart);
