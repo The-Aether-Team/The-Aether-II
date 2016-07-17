@@ -25,8 +25,6 @@ public class EntityMovingBlock extends Entity
 
 	private int invalidTicks = 0;
 
-	private boolean isFalling;
-
 	public EntityMovingBlock(World world)
 	{
 		super(world);
@@ -89,15 +87,13 @@ public class EntityMovingBlock extends Entity
 
 		if (!this.worldObj.isRemote)
 		{
-			if (this.holdingPlayer == null)
+			if (this.holdingPlayer != null)
 			{
-				this.drop();
+				if (this.invalidTicks > 30 || this.getDistance(this.holdingPlayer.posX, this.holdingPlayer.posY, this.holdingPlayer.posZ) > 6.0D)
+				{
+					this.drop();
+				}
 
-				return;
-			}
-
-			if (!this.isFalling)
-			{
 				if (this.isCollided)
 				{
 					this.invalidTicks++;
@@ -105,11 +101,6 @@ public class EntityMovingBlock extends Entity
 				else
 				{
 					this.invalidTicks = 0;
-				}
-
-				if (this.invalidTicks > 30 || this.getDistance(this.holdingPlayer.posX, this.holdingPlayer.posY, this.holdingPlayer.posZ) > 6.0D)
-				{
-					this.drop();
 				}
 			}
 
@@ -130,7 +121,7 @@ public class EntityMovingBlock extends Entity
 		this.rotationYaw *= 0.9f;
 		this.rotationPitch *= 0.9f;
 
-		if (this.isFalling)
+		if (this.holdingPlayer == null)
 		{
 			this.motionY -= 0.04D;
 
@@ -196,12 +187,12 @@ public class EntityMovingBlock extends Entity
 
 	public void drop()
 	{
-		this.isFalling = true;
+		this.holdingPlayer = null;
 	}
 
 	public boolean isFalling()
 	{
-		return this.isFalling;
+		return this.holdingPlayer == null;
 	}
 
 	@Override

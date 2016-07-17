@@ -230,7 +230,7 @@ public class PlayerAether implements IPlayerAetherCapability
 	{
 		return this.ticksAirborne;
 	}
-	
+
 	public boolean pickupBlock(BlockPos pos, World world)
 	{
 		if (this.pickedEntity == null)
