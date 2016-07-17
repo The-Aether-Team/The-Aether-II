@@ -1,19 +1,16 @@
 package com.gildedgames.aether.common.items.tools;
 
-import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
+import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-
-import java.util.List;
 
 public class ItemGravititeTool extends ItemAetherTool
 {
@@ -24,26 +21,45 @@ public class ItemGravititeTool extends ItemAetherTool
 		this.setHarvestLevel(toolType.getToolClass(), 3);
 	}
 
+
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand)
+	{
+		if (!world.isRemote)
+		{
+			PlayerAether aePlayer = (PlayerAether) PlayerAether.getPlayer(player);
+
+			if (aePlayer.getPickedBlock() != null && aePlayer.getPickedBlock().ticksExisted > 1)
+			{
+				aePlayer.dropBlock();
+			}
+		}
+
+		return new ActionResult<>(EnumActionResult.PASS, stack);
+	}
+
 	@Override
 	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		if (!world.isRemote)
 		{
-			IBlockState state = world.getBlockState(pos);
+			PlayerAether aePlayer = (PlayerAether) PlayerAether.getPlayer(player);
 
-			if (ForgeHooks.canHarvestBlock(state.getBlock(), player, world, pos))
+			if (aePlayer.getPickedBlock() == null)
 			{
-				if (!world.getBlockState(pos.up()).isOpaqueCube())
+				IBlockState state = world.getBlockState(pos);
+
+				if (!state.isNormalCube() || !state.getBlock().getHarvestTool(state).equals(this.toolType.getToolClass()))
 				{
-					List<ItemStack> drops = state.getBlock().getDrops(world, pos, state, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack));
-
-					EntityFloatingBlock floatingBlock = new EntityFloatingBlock(world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, state, drops);
-					world.spawnEntityInWorld(floatingBlock);
-
-					stack.damageItem(5, player);
+					return EnumActionResult.PASS;
 				}
 
-				return EnumActionResult.SUCCESS;
+				if (aePlayer.pickupBlock(pos, world))
+				{
+					stack.damageItem(2, player);
+
+					return EnumActionResult.SUCCESS;
+				}
 			}
 		}
 

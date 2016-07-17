@@ -1,6 +1,5 @@
 package com.gildedgames.aether.client.renderer.entities;
 
-import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -16,13 +15,13 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class RenderFloatingBlock extends Render<EntityFloatingBlock>
+public class RenderMovingBlock extends Render<EntityMovingBlock>
 {
-	public RenderFloatingBlock(RenderManager renderManager)
+	public RenderMovingBlock(RenderManager renderManager)
 	{
 		super(renderManager);
 
@@ -30,7 +29,7 @@ public class RenderFloatingBlock extends Render<EntityFloatingBlock>
 	}
 
 	@Override
-	public void doRender(EntityFloatingBlock floatingBlock, double x, double y, double z, float entityYaw, float partialTicks)
+	public void doRender(EntityMovingBlock floatingBlock, double x, double y, double z, float entityYaw, float partialTicks)
 	{
 		if (floatingBlock.getBlockState() != null)
 		{
@@ -50,7 +49,20 @@ public class RenderFloatingBlock extends Render<EntityFloatingBlock>
 
 					GlStateManager.pushMatrix();
 
+					double x2 = x - ((x - floatingBlock.renderPosX) * partialTicks);
+					double y2 = y - ((y - floatingBlock.renderPosY) * partialTicks);
+					double z2 = z - ((z - floatingBlock.renderPosZ) * partialTicks);
+
+					floatingBlock.renderPosX = x2;
+					floatingBlock.renderPosY = y2;
+					floatingBlock.renderPosZ = z2;
+
 					GlStateManager.translate(x, y, z);
+
+					float scale = 1.0f;
+
+					GlStateManager.scale(scale, scale, scale);
+
 					GlStateManager.disableLighting();
 
 					if (Minecraft.isAmbientOcclusionEnabled())
@@ -95,7 +107,7 @@ public class RenderFloatingBlock extends Render<EntityFloatingBlock>
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityFloatingBlock entity)
+	protected ResourceLocation getEntityTexture(EntityMovingBlock entity)
 	{
 		return TextureMap.LOCATION_BLOCKS_TEXTURE;
 	}
