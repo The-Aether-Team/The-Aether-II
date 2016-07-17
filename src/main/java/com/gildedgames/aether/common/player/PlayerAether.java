@@ -1,16 +1,19 @@
 package com.gildedgames.aether.common.player;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -26,6 +29,7 @@ import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
+import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
@@ -44,6 +48,8 @@ public class PlayerAether implements IPlayerAetherCapability
 	private boolean hasDoubleJumped;
 
 	private int ticksAirborne;
+	
+	private EntityMovingBlock pickedBlock;
 
 	public PlayerAether(EntityPlayer player)
 	{
@@ -193,6 +199,42 @@ public class PlayerAether implements IPlayerAetherCapability
 	public int getTicksAirborne()
 	{
 		return this.ticksAirborne;
+	}
+	
+	public EntityMovingBlock getPickedBlock()
+	{
+		return this.pickedBlock;
+	}
+	
+	public void dropBlock()
+	{
+		if (this.pickedBlock != null)
+		{
+			this.pickedBlock.drop();
+			
+			this.pickedBlock = null;
+		}
+	}
+	
+	public boolean pickupBlock(BlockPos pos, World world)
+	{
+		if (world.isRemote)
+		{
+			return false;
+		}
+		
+		IBlockState state = world.getBlockState(pos);
+		
+		if (state != Blocks.AIR.getDefaultState())
+		{
+			this.pickedBlock = new EntityMovingBlock(world, pos.getX(), pos.getY(), pos.getZ(), state, this.player);
+			
+			world.spawnEntityInWorld(this.pickedBlock);
+			
+			return true;
+		}
+		
+		return false;
 	}
 
 	public static class Storage implements IStorage<IPlayerAetherCapability>

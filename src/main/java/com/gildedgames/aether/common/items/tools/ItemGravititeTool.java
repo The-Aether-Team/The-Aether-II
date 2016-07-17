@@ -14,13 +14,13 @@ import net.minecraftforge.common.ForgeHooks;
 
 public class ItemGravititeTool extends ItemAetherTool
 {
+	
 	public ItemGravititeTool(EnumToolType toolType, float attackDamage, float attackSpeed)
 	{
 		super(ToolMaterial.DIAMOND, "gravitite", toolType, attackDamage, attackSpeed);
 
 		this.setHarvestLevel(toolType.getToolClass(), 3);
 	}
-
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand)
