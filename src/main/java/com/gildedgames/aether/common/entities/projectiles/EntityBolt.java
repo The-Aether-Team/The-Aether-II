@@ -1,18 +1,31 @@
 package com.gildedgames.aether.common.entities.projectiles;
 
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.weapons.ItemDartType;
-import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 
 public class EntityBolt extends EntityArrow
 {
 	private static final DataParameter<Byte> TYPE = new DataParameter<>(20, DataSerializers.BYTE);
+	private static final DataParameter<Byte> ABILITY = new DataParameter<>(21, DataSerializers.BYTE);
+	
+	public static enum BoltAbility
+	{
+		NORMAL, DESTROY_BLOCKS;
+	}
+	
+	private int blocksCanDestroy = 4;
 
 	public EntityBolt(World worldIn)
 	{
@@ -23,6 +36,45 @@ public class EntityBolt extends EntityArrow
 	{
 		super(worldIn, shooter);
 	}
+	
+	@Override
+    public void onUpdate()
+    {
+		if (this.getBoltAbility() == BoltAbility.DESTROY_BLOCKS)
+		{
+			Vec3d vec3d1 = new Vec3d(this.posX, this.posY, this.posZ);
+	        Vec3d vec3d = new Vec3d(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+			RayTraceResult raytraceresult = this.worldObj.rayTraceBlocks(vec3d1, vec3d, false, true, false);
+			
+			if (raytraceresult != null)
+			{
+				BlockPos blockpos = raytraceresult.getBlockPos();
+		        IBlockState iblockstate = this.worldObj.getBlockState(blockpos);
+
+		        if (iblockstate.getMaterial() != Material.AIR)
+		        {
+		        	if (this.blocksCanDestroy > 0)
+		    		{
+		    			this.worldObj.destroyBlock(blockpos, true);
+		    			
+		    			this.blocksCanDestroy--;
+		    		}
+		        	else
+		        	{
+		        		this.inGround = true;
+		        	}
+		        }
+			}
+		}
+
+		super.onUpdate();
+    }
+	
+	@Override
+    protected void onHit(RayTraceResult raytraceResultIn)
+    {
+		super.onHit(raytraceResultIn);
+    }
 
 	@Override
 	protected ItemStack getArrowStack()
@@ -42,6 +94,17 @@ public class EntityBolt extends EntityArrow
 		super.entityInit();
 
 		this.dataManager.register(TYPE, (byte) 0);
+		this.dataManager.register(ABILITY, (byte) 0);
+	}
+	
+	public void setBoltAbility(BoltAbility ability)
+	{
+		this.dataManager.set(ABILITY, (byte) ability.ordinal());
+	}
+	
+	public BoltAbility getBoltAbility()
+	{
+		return BoltAbility.values()[this.dataManager.get(ABILITY)];
 	}
 
 	public void setBoltType(ItemBoltType type)

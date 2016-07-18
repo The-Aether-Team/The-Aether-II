@@ -7,7 +7,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-// Blame Hugo
 public class ItemEnchantedWyndberry extends ItemFood
 {
 	public ItemEnchantedWyndberry()

@@ -1,5 +1,23 @@
 package com.gildedgames.aether.common.items;
 
+import java.util.List;
+
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemDoor;
+import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
@@ -27,7 +45,13 @@ import com.gildedgames.aether.common.items.armor.ItemSentryBoots;
 import com.gildedgames.aether.common.items.armor.ItemValkyrieArmor;
 import com.gildedgames.aether.common.items.armor.ItemZaniteArmor;
 import com.gildedgames.aether.common.items.companions.ItemPinkBabySwet;
-import com.gildedgames.aether.common.items.consumables.*;
+import com.gildedgames.aether.common.items.consumables.ItemAmbrosiumShard;
+import com.gildedgames.aether.common.items.consumables.ItemContinuumOrb;
+import com.gildedgames.aether.common.items.consumables.ItemEnchantedWyndberry;
+import com.gildedgames.aether.common.items.consumables.ItemGummySwet;
+import com.gildedgames.aether.common.items.consumables.ItemSkyrootConsumableBucket;
+import com.gildedgames.aether.common.items.consumables.ItemStomperPop;
+import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
 import com.gildedgames.aether.common.items.effects.ItemEffects;
 import com.gildedgames.aether.common.items.miscellaneous.ItemShardOfLife;
 import com.gildedgames.aether.common.items.tools.EnumToolType;
@@ -42,7 +66,13 @@ import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
 import com.gildedgames.aether.common.items.weapons.ItemPigSlayer;
 import com.gildedgames.aether.common.items.weapons.ItemVampireBlade;
-import com.gildedgames.aether.common.items.weapons.crossbow.*;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemArkeniumCrossbow;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemBolt;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemGravititeCrossbow;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemHolystoneCrossbow;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemSkyrootCrossbow;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemVampireCrossbow;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemZaniteCrossbow;
 import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemArkeniumSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemCandyCaneSword;
@@ -52,22 +82,6 @@ import com.gildedgames.aether.common.items.weapons.swords.ItemHolystoneSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemZaniteSword;
 import com.google.common.collect.Lists;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemDoor;
-import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.List;
 
 public class ItemsAether
 {

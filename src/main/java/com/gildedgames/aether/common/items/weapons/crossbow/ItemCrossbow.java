@@ -2,8 +2,10 @@ package com.gildedgames.aether.common.items.weapons.crossbow;
 
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
+import com.gildedgames.aether.common.entities.projectiles.EntityBolt.BoltAbility;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.player.PlayerAether;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -80,10 +82,17 @@ public class ItemCrossbow extends Item
 		{
 			return false;
 		}
+		
+		float speed = 1.0f;
 
 		EntityBolt dart = new EntityBolt(entityLiving.getEntityWorld(), entityLiving);
-//		dart.setAim();
-
+		dart.setAim(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, speed * 2.0F, 1.0F);
+		
+		if (this instanceof ItemArkeniumCrossbow)
+		{
+			dart.setBoltAbility(BoltAbility.DESTROY_BLOCKS);
+		}
+		
 		if (stack.getItemDamage() > 0)
 		{
 			entityLiving.getEntityWorld().spawnEntityInWorld(dart);
