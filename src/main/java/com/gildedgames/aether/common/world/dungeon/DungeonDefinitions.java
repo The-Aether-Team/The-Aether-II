@@ -5,13 +5,8 @@ import java.io.FilenameFilter;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.ModContainer;
 
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.world.dungeon.util.FlatLayerDungeonGenerator;
 import com.gildedgames.aether.common.world.dungeon.util.Schematic;
 import com.google.common.collect.Lists;

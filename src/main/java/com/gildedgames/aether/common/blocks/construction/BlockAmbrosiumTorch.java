@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.construction;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockTorch;
 import net.minecraft.block.SoundType;
 

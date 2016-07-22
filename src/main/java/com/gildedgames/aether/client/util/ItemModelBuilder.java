@@ -2,7 +2,6 @@ package com.gildedgames.aether.client.util;
 
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
 

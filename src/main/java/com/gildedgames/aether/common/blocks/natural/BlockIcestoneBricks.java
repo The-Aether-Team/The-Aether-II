@@ -38,7 +38,7 @@ public class BlockIcestoneBricks extends Block
 					BlockPos newPos = new BlockPos(x, y, z);
 					IBlockState newState = world.getBlockState(newPos);
 
-					IBlockState frozenState = getFrozenBlock(newState);
+					IBlockState frozenState = this.getFrozenBlock(newState);
 
 					if (frozenState != null)
 					{

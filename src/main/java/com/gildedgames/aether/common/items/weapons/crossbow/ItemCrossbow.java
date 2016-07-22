@@ -1,29 +1,18 @@
 package com.gildedgames.aether.common.items.weapons.crossbow;
 
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt.BoltAbility;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.player.PlayerAether;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
 
 public class ItemCrossbow extends Item
 {
@@ -42,7 +31,7 @@ public class ItemCrossbow extends Item
 	{
 		ItemStack boltStack = player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
 
-		if (hasAmmo(player))
+		if (this.hasAmmo(player))
 			return boltStack.getMetadata();
 
 		return -1;
@@ -118,12 +107,12 @@ public class ItemCrossbow extends Item
 
 			if (this.hasAmmo(entityPlayer))
 			{
-				if (count == DURATION-10 && stack.getItemDamage() == 0)
+				if (count == this.DURATION -10 && stack.getItemDamage() == 0)
 				{
 					stack.setItemDamage(1);
 					boltStack.stackSize -= 1;
 				}
-				if (count == (DURATION - (DURATION / 3)) && stack.getItemDamage() == 1)
+				if (count == (this.DURATION - (this.DURATION / 3)) && stack.getItemDamage() == 1)
 				{
 					stack.setItemDamage(2);
 					boltStack.stackSize -= 1;
@@ -152,6 +141,6 @@ public class ItemCrossbow extends Item
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack)
 	{
-		return DURATION; //80~4 seconds
+		return this.DURATION; //80~4 seconds
 	}
 }

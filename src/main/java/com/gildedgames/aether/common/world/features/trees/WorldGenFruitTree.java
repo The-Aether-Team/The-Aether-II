@@ -35,27 +35,27 @@ public class WorldGenFruitTree extends WorldGenAbstractTree
 
 	public void setBlockAirCheck(World world, int x, int y, int z, IBlockState block)
 	{
-		tmpPos.setPos(x, y, z);
+		this.tmpPos.setPos(x, y, z);
 
-		if (world.getBlockState(tmpPos).getBlock() == Blocks.AIR)
+		if (world.getBlockState(this.tmpPos).getBlock() == Blocks.AIR)
 		{
-			world.setBlockState(tmpPos, block);
+			world.setBlockState(this.tmpPos, block);
 		}
 	}
 
 	public void setBlockAirCheck(World world, int x, int y, int z, IBlockState log, IBlockState leaves)
 	{
-		tmpPos.setPos(x, y, z);
+		this.tmpPos.setPos(x, y, z);
 
-		if (world.getBlockState(tmpPos).getBlock() == Blocks.AIR)
+		if (world.getBlockState(this.tmpPos).getBlock() == Blocks.AIR)
 		{
 			if (leaves.getBlock() == Blocks.AIR)
 			{
-				world.setBlockState(tmpPos, log);
+				world.setBlockState(this.tmpPos, log);
 			}
 			else
 			{
-				world.setBlockState(tmpPos, leaves);
+				world.setBlockState(this.tmpPos, leaves);
 			}
 		}
 	}

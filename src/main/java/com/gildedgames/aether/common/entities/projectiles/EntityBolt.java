@@ -20,9 +20,9 @@ public class EntityBolt extends EntityArrow
 	private static final DataParameter<Byte> TYPE = new DataParameter<>(20, DataSerializers.BYTE);
 	private static final DataParameter<Byte> ABILITY = new DataParameter<>(21, DataSerializers.BYTE);
 	
-	public static enum BoltAbility
+	public enum BoltAbility
 	{
-		NORMAL, DESTROY_BLOCKS;
+		NORMAL, DESTROY_BLOCKS
 	}
 	
 	private int blocksCanDestroy = 4;

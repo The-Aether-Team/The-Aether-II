@@ -118,7 +118,7 @@ public class Schematic
 				{
 					for (int index = 0; index < this.tileEntities.tagCount(); index++)
 					{
-						NBTTagCompound tileEntityData = (NBTTagCompound) this.tileEntities.getCompoundTagAt(index);
+						NBTTagCompound tileEntityData = this.tileEntities.getCompoundTagAt(index);
 
 						if ((tileEntityData.getInteger("x") == blockData.x) && (tileEntityData.getInteger("y") == blockData.y) && (tileEntityData.getInteger("z") == blockData.z))
 						{
@@ -168,7 +168,7 @@ public class Schematic
 			{
 				for (int index = 0; index < this.tileEntities.tagCount(); index++)
 				{
-					NBTTagCompound tileEntityData = (NBTTagCompound) this.tileEntities.getCompoundTagAt(index);
+					NBTTagCompound tileEntityData = this.tileEntities.getCompoundTagAt(index);
 
 					if ((tileEntityData.getInteger("x") == blockData.x) && (tileEntityData.getInteger("y") == blockData.y) && (tileEntityData.getInteger("z") == blockData.z))
 					{
@@ -291,10 +291,6 @@ public class Schematic
 			this.tileEntities = nbt.getTagList("TileEntities", 10);
 
 			return true;
-		}
-		catch (FileNotFoundException e)
-		{
-			e.printStackTrace();
 		}
 		catch (IOException e)
 		{

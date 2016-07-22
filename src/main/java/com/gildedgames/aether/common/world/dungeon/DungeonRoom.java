@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.world.dungeon;
 
 import java.awt.Rectangle;
-import java.util.Random;
 
 import com.gildedgames.aether.common.world.dungeon.util.Schematic;
 
@@ -89,7 +88,7 @@ public class DungeonRoom
 	
 	public int getHeight()
 	{
-		return this.schematic == null ? this.height : (int) this.schematic.height();
+		return this.schematic == null ? this.height : this.schematic.height();
 	}
 
 	public int getMinX()

@@ -156,7 +156,7 @@ public class TileEntityAltar extends TileEntity implements ITickable
 		NBTTagCompound compound = new NBTTagCompound();
 		this.writeToNBT(compound);
 
-		return new SPacketUpdateTileEntity(pos, 1, compound);
+		return new SPacketUpdateTileEntity(this.pos, 1, compound);
 	}
 
 	@Override
@@ -169,7 +169,7 @@ public class TileEntityAltar extends TileEntity implements ITickable
 	{
 		IBlockState state = this.worldObj.getBlockState(this.pos);
 
-		this.worldObj.notifyBlockUpdate(pos, state, state, 3);
+		this.worldObj.notifyBlockUpdate(this.pos, state, state, 3);
 
 		this.markDirty();
 	}

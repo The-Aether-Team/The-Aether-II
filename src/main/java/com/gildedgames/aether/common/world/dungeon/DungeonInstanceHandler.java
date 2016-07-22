@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.world.dungeon;
 
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
 import com.gildedgames.util.modules.instances.InstanceHandler;

@@ -7,7 +7,7 @@ public class FaceList
 
     public ConvexFace getFirst()
     {
-    	return first;
+    	return this.first;
     }
 
 
@@ -25,15 +25,15 @@ public class FaceList
         {
             if (this.first.verticesBeyond.size() < face.verticesBeyond.size())
             {
-                remove(face);
-                addFirst(face);
+				this.remove(face);
+				this.addFirst(face);
             }
             return;
         }
 
         face.inList = true;
 
-        if (first != null && first.verticesBeyond.size() < face.verticesBeyond.size())
+        if (this.first != null && this.first.verticesBeyond.size() < face.verticesBeyond.size())
         {
             this.first.previous = face;
             face.next = this.first;

@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.items.weapons;
 
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.items.ItemsAether;

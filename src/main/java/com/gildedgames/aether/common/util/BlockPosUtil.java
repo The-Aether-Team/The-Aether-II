@@ -36,7 +36,7 @@ public class BlockPosUtil
                     }
 
                     NBTTagCompound nbttagcompound = new NBTTagCompound();
-                    NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttagcompound.copy();
+                    NBTTagCompound nbttagcompound1 = nbttagcompound.copy();
                     tileentity.writeToNBT(nbttagcompound);
                     NBTTagCompound nbttagcompound2 = (NBTTagCompound)stack.getTagCompound().getTag("BlockEntityTag");
                     nbttagcompound.merge(nbttagcompound2);

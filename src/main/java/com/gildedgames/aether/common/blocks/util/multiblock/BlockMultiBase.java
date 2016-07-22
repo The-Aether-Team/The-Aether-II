@@ -12,8 +12,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
-
 public abstract class BlockMultiBase extends BlockContainer
 {
 	public BlockMultiBase(Material material)

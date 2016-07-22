@@ -1,7 +1,6 @@
 package com.gildedgames.aether.client.renderer.entities;
 
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
-import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

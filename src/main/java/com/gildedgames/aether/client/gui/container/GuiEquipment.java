@@ -70,7 +70,7 @@ public class GuiEquipment extends GuiContainer
 
 		//this.drawTexturedModalRect(this.width / 2 - 90 - 183 / 2, this.height / 2 - 166 / 2, 0, 0, 183, 171);
 
-		this.mc.renderEngine.bindTexture(aePlayer.getPlayer().capabilities.isCreativeMode ? textureBackpackCreative : textureBackpack);
+		this.mc.renderEngine.bindTexture(this.aePlayer.getPlayer().capabilities.isCreativeMode ? textureBackpackCreative : textureBackpack);
 
 		this.drawTexturedModalRect(this.width / 2 + 90 - 176 / 2, this.height / 2 - 166 / 2, 0, 0, 176, 166);
 

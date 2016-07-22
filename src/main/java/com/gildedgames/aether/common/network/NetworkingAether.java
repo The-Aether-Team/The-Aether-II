@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.network;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.packets.AetherMovementPacket;
 import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityTracker;
 import net.minecraft.entity.player.EntityPlayer;

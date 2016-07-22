@@ -13,7 +13,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunkProvider;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.dungeon.DungeonGenerator;
@@ -61,8 +60,8 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 			DungeonLayer layer = new DungeonLayer(40);
 			
 			layer.defineMinY(prevLayer != null ? prevLayer.minY() : 160);
-			
-			layers.add(layer);
+
+			this.layers.add(layer);
 		
 			prevLayer = layer;
 		}
@@ -294,12 +293,9 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 	{
 		for (int iter = 0; iter < SEPARATION_ITERATIONS; iter++)//This part uses separation behavior to separate intersecting rooms.
 		{
-			Iterator<DungeonRoom> iterator1 = rooms.iterator();
 
-			while (iterator1.hasNext())
+			for (DungeonRoom room1 : rooms)
 			{
-				DungeonRoom room1 = (DungeonRoom) iterator1.next();
-
 				if (room1.asleep)
 				{
 					continue;
@@ -312,12 +308,8 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 				double room1z = room1.getCenterZ();
 				double largestOverlap = 0;
 
-				Iterator<DungeonRoom> iterator2 = rooms.iterator();
-
-				while (iterator2.hasNext())
+				for (DungeonRoom room2 : rooms)
 				{
-					DungeonRoom room2 = (DungeonRoom) iterator2.next();
-
 					if (room1 == room2)
 					{
 						continue;
@@ -344,7 +336,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 				if (overlaps == 0)
 				{
 					room1.asleep = true;
-					
+
 					continue;
 				}
 
@@ -357,7 +349,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 				vz *= -1;
 
 				double length = Math.sqrt(vx * vx + vz * vz);//Normalizes the vector
-				
+
 				vx /= length;
 				vz /= length;
 
@@ -368,18 +360,10 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 			}
 		}
 
-		Iterator<DungeonRoom> iterator1 = rooms.iterator();
-		
-		while (iterator1.hasNext())
+		for (DungeonRoom room1 : rooms)
 		{
-			DungeonRoom room1 = (DungeonRoom) iterator1.next();
-
-			Iterator<DungeonRoom> iterator2 = rooms.iterator();
-			
-			while (iterator2.hasNext())
+			for (DungeonRoom room2 : rooms)
 			{
-				DungeonRoom room2 = (DungeonRoom) iterator2.next();
-
 				if (room1 == room2 || room2.toRemove)
 				{
 					continue;
@@ -388,7 +372,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 				if (room1.fullRectangle().intersects(room2.rectangle))
 				{
 					room1.toRemove = true;
-					
+
 					break;
 				}
 			}
@@ -571,11 +555,10 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 	private List<Connection> createConnections(List<DungeonRoom> rooms, Random random)
 	{
 		List<int[]> points = new ArrayList<int[]>();
-		Iterator<DungeonRoom> iter = rooms.iterator();
-		
-		while (iter.hasNext())//Store the positions in this list of points
+
+		for (DungeonRoom room : rooms)
 		{
-			points.add(((DungeonRoom) iter.next()).getPositionArray());
+			points.add((room).getPositionArray());
 		}
 
 		//Find Delaunay triangulation from the centers of the large rooms
@@ -861,7 +844,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 				}
 			}
 
-			instance.setInsideEntrance(new BlockPosDimension((int) start.getMinX() + 1, newLayer.minY() + 6, (int) start.getMinZ() + 1, instance.getDimIdInside()));
+			instance.setInsideEntrance(new BlockPosDimension(start.getMinX() + 1, newLayer.minY() + 6, start.getMinZ() + 1, instance.getDimIdInside()));
 		}
 		else
 		{
@@ -871,17 +854,13 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 			DungeonRoom room = null;
 			
 			int smallestDistance = Integer.MAX_VALUE;
-			
-			Iterator<DungeonRoom> iter = largeRooms.iterator();
-			
-			while (iter.hasNext())//Find the room closest to where you entered
+
+			for (DungeonRoom curIter : largeRooms)
 			{
-				DungeonRoom curIter = iter.next();
-				
 				int disX = (int) curIter.getCenterX() - startX;
 				int disY = (int) curIter.getCenterZ() - startZ;
 				int distance = disX * disX + disY * disY;
-				
+
 				if (distance < smallestDistance)
 				{
 					smallestDistance = distance;

@@ -51,7 +51,7 @@ public class TileEntityLabyrinthEye extends TileEntitySchematicBlock implements 
 					player.setGameType(GameType.SURVIVAL);
 				}
 					
-				player.addChatComponentMessage(new TextComponentTranslation("You feel the eye's focus drift away..", new Object[0]));
+				player.addChatComponentMessage(new TextComponentTranslation("You feel the eye's focus drift away.."));
 			}
 		}
 		
@@ -66,7 +66,7 @@ public class TileEntityLabyrinthEye extends TileEntitySchematicBlock implements 
 					player.setGameType(GameType.ADVENTURE);
 				}
 				
-				player.addChatComponentMessage(new TextComponentTranslation("You feel something watching you...", new Object[0]));
+				player.addChatComponentMessage(new TextComponentTranslation("You feel something watching you..."));
 			}
 		}
 		

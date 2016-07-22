@@ -17,7 +17,7 @@ public class ItemVampireBlade extends ItemAetherSword
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
 	{
-		int healPlayer = (int) (Math.min(target.getHealth(), 20) / getDamageVsEntity());
+		int healPlayer = (int) (Math.min(target.getHealth(), 20) / this.getDamageVsEntity());
 
 		if (attacker instanceof EntityPlayer)
 		{

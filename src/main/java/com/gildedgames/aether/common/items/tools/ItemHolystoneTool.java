@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.items.tools;
 
 import com.gildedgames.aether.common.items.ItemsAether;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;

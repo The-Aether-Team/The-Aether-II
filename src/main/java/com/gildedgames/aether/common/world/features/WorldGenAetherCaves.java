@@ -171,12 +171,12 @@ public class WorldGenAetherCaves extends MapGenBase
 											IBlockState state = primer.getBlockState(x2, y2, z2);
 											IBlockState above = Objects.firstNonNull(primer.getBlockState(x2, y2 + 1, z2), BLK_AIR);
 
-											if (isTopBlock(primer, x2, y2, z2, chunkX, chunkZ))
+											if (this.isTopBlock(primer, x2, y2, z2, chunkX, chunkZ))
 											{
 												foundTop = true;
 											}
 
-											digBlock(primer, x2, y2, z2, chunkX, chunkZ, foundTop, state, above);
+											this.digBlock(primer, x2, y2, z2, chunkX, chunkZ, foundTop, state, above);
 										}
 									}
 								}
@@ -246,7 +246,7 @@ public class WorldGenAetherCaves extends MapGenBase
 
 	protected void digBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop, IBlockState state, IBlockState up)
 	{
-		Biome biome = worldObj.getBiome(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
+		Biome biome = this.worldObj.getBiome(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
 		IBlockState top = biome.topBlock;
 		IBlockState filler = biome.fillerBlock;
 

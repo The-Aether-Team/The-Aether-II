@@ -14,7 +14,7 @@ public class TileEntityMultiblockDummy extends TileEntity implements TileEntityM
 	@Override
 	public void onInteract(EntityPlayer player)
 	{
-		TileEntity entity = this.worldObj.getTileEntity(controllerPos);
+		TileEntity entity = this.worldObj.getTileEntity(this.controllerPos);
 
 		if (entity instanceof TileEntityMultiblockController)
 		{
@@ -29,7 +29,7 @@ public class TileEntityMultiblockDummy extends TileEntity implements TileEntityM
 	@Override
 	public void onDestroyed()
 	{
-		TileEntity entity = this.worldObj.getTileEntity(controllerPos);
+		TileEntity entity = this.worldObj.getTileEntity(this.controllerPos);
 
 		if (entity instanceof TileEntityMultiblockInterface)
 		{

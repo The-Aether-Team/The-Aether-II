@@ -20,13 +20,13 @@ public class RecipesAether implements IAltarRecipeRegistry
 
 	public void preInit()
 	{
-		registerFurnaceRecipes();
-		registerCraftingRecipes();
-		registerToolRecipes();
-		registerArmorRecipes();
-        registerAccessoryRecipes();
-        registerConsumableRecipes();
-		registerAltarRecipes();
+		this.registerFurnaceRecipes();
+		this.registerCraftingRecipes();
+		this.registerToolRecipes();
+		this.registerArmorRecipes();
+		this.registerAccessoryRecipes();
+		this.registerConsumableRecipes();
+		this.registerAltarRecipes();
 
 		GameRegistry.registerFuelHandler(new AetherFuelHandler());
 	}
@@ -416,35 +416,35 @@ public class RecipesAether implements IAltarRecipeRegistry
 	private void registerAltarRecipes()
 	{
         // Quicksoil Glass
-        registerAltarRecipe(new AltarEnchantRecipe(1, new ItemStack(BlocksAether.quicksoil),
+		this.registerAltarRecipe(new AltarEnchantRecipe(1, new ItemStack(BlocksAether.quicksoil),
                 new ItemStack(BlocksAether.quicksoil_glass)));
 
         // Healing Stone
-		registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(BlocksAether.holystone),
+		this.registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(BlocksAether.holystone),
 				new ItemStack(ItemsAether.healing_stone)));
 
 		// Enchanted Gravitite
-        registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(BlocksAether.gravitite_ore),
+		this.registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(BlocksAether.gravitite_ore),
                 new ItemStack(BlocksAether.enchanted_gravitite)));
 
 		// Enchanted Dart Shooter
-		registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.GOLDEN.ordinal()),
+		this.registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.GOLDEN.ordinal()),
 				new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.ENCHANTED.ordinal())));
 
 		// Enchanted Darts
-		registerAltarRecipe(new AltarEnchantRecipe(1, new ItemStack(ItemsAether.dart, 1, ItemDartType.GOLDEN.ordinal()),
+		this.registerAltarRecipe(new AltarEnchantRecipe(1, new ItemStack(ItemsAether.dart, 1, ItemDartType.GOLDEN.ordinal()),
 				new ItemStack(ItemsAether.dart, 1, ItemDartType.ENCHANTED.ordinal())));
 
         // Enchanted Strawberry
-        registerAltarRecipe(new AltarEnchantRecipe(2, new ItemStack(ItemsAether.blueberries),
+		this.registerAltarRecipe(new AltarEnchantRecipe(2, new ItemStack(ItemsAether.blueberries),
                 new ItemStack(ItemsAether.enchanted_blueberry)));
 
         // Rainbow Strawberry
-        registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(ItemsAether.wyndberry),
+		this.registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(ItemsAether.wyndberry),
                 new ItemStack(ItemsAether.enchanted_wyndberry)));
 
 		// Tool Repair Recipes
-		registerAltarRecipe(new AltarRepairRecipe());
+		this.registerAltarRecipe(new AltarRepairRecipe());
 	}
 
 	private static void registerShapelessRecipe(ItemStack output, Object... stacks)

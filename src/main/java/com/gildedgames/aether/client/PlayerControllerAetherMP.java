@@ -51,187 +51,187 @@ public class PlayerControllerAetherMP extends PlayerControllerMP
 	@Override
 	public void setPlayerCapabilities(EntityPlayer player)
 	{
-		baseController.setPlayerCapabilities(player);
+		this.baseController.setPlayerCapabilities(player);
 	}
 
 	@Override
 	public boolean isSpectator()
 	{
-		return baseController.isSpectator();
+		return this.baseController.isSpectator();
 	}
 
 	@Override
 	public void setGameType(GameType type)
 	{
-		baseController.setGameType(type);
+		this.baseController.setGameType(type);
 	}
 
 	@Override
 	public void flipPlayer(EntityPlayer playerIn)
 	{
-		baseController.flipPlayer(playerIn);
+		this.baseController.flipPlayer(playerIn);
 	}
 
 	@Override
 	public boolean shouldDrawHUD()
 	{
-		return baseController.shouldDrawHUD();
+		return this.baseController.shouldDrawHUD();
 	}
 
 	@Override
 	public boolean onPlayerDestroyBlock(BlockPos pos)
 	{
-		return baseController.onPlayerDestroyBlock(pos);
+		return this.baseController.onPlayerDestroyBlock(pos);
 	}
 
 	@Override
 	public boolean clickBlock(BlockPos loc, EnumFacing face)
 	{
-		return baseController.clickBlock(loc, face);
+		return this.baseController.clickBlock(loc, face);
 	}
 
 	@Override
 	public void resetBlockRemoving()
 	{
-		baseController.resetBlockRemoving();
+		this.baseController.resetBlockRemoving();
 	}
 
 	@Override
 	public boolean onPlayerDamageBlock(BlockPos posBlock, EnumFacing directionFacing)
 	{
-		return baseController.onPlayerDamageBlock(posBlock, directionFacing);
+		return this.baseController.onPlayerDamageBlock(posBlock, directionFacing);
 	}
 
 	@Override
 	public float getBlockReachDistance()
 	{
-		return baseController.getBlockReachDistance() + this.getExtendedBlockReachDistance();
+		return this.baseController.getBlockReachDistance() + this.getExtendedBlockReachDistance();
 	}
 
 	@Override
 	public void updateController()
 	{
-		baseController.updateController();
+		this.baseController.updateController();
 	}
 
 	@Override
 	public EnumActionResult processRightClickBlock(EntityPlayerSP player, WorldClient worldIn, @Nullable ItemStack stack, BlockPos pos, EnumFacing facing, Vec3d vec, EnumHand hand)
 	{
-		return baseController.processRightClickBlock(player, worldIn, stack, pos, facing, vec, hand);
+		return this.baseController.processRightClickBlock(player, worldIn, stack, pos, facing, vec, hand);
 	}
 
 	@Override
 	public EnumActionResult processRightClick(EntityPlayer player, World worldIn, ItemStack stack, EnumHand hand)
 	{
-		return baseController.processRightClick(player, worldIn, stack, hand);
+		return this.baseController.processRightClick(player, worldIn, stack, hand);
 	}
 
 	@Override
 	public EntityPlayerSP createClientPlayer(World worldIn, StatisticsManager statWriter)
 	{
-		return baseController.createClientPlayer(worldIn, statWriter);
+		return this.baseController.createClientPlayer(worldIn, statWriter);
 	}
 
 	@Override
 	public void attackEntity(EntityPlayer playerIn, Entity targetEntity)
 	{
-		baseController.attackEntity(playerIn, targetEntity);
+		this.baseController.attackEntity(playerIn, targetEntity);
 	}
 
 	@Override
 	public EnumActionResult interactWithEntity(EntityPlayer player, Entity target, @Nullable ItemStack heldItem, EnumHand hand)
 	{
-		return baseController.interactWithEntity(player, target, heldItem, hand);
+		return this.baseController.interactWithEntity(player, target, heldItem, hand);
 	}
 
 	@Override
 	public EnumActionResult interactWithEntity(EntityPlayer player, Entity target, RayTraceResult raytrace, @Nullable ItemStack heldItem, EnumHand hand)
 	{
-		return baseController.interactWithEntity(player, target, raytrace, heldItem, hand);
+		return this.baseController.interactWithEntity(player, target, raytrace, heldItem, hand);
 	}
 
 	@Override
 	public ItemStack windowClick(int windowId, int slotId, int mouseButton, ClickType type, EntityPlayer player)
 	{
-		return baseController.windowClick(windowId, slotId, mouseButton, type, player);
+		return this.baseController.windowClick(windowId, slotId, mouseButton, type, player);
 	}
 
 	@Override
 	public void sendEnchantPacket(int windowID, int button)
 	{
-		baseController.sendEnchantPacket(windowID, button);
+		this.baseController.sendEnchantPacket(windowID, button);
 	}
 
 	@Override
 	public void sendSlotPacket(ItemStack itemStackIn, int slotId)
 	{
-		baseController.sendSlotPacket(itemStackIn, slotId);
+		this.baseController.sendSlotPacket(itemStackIn, slotId);
 	}
 
 	@Override
 	public void sendPacketDropItem(ItemStack itemStackIn)
 	{
-		baseController.sendPacketDropItem(itemStackIn);
+		this.baseController.sendPacketDropItem(itemStackIn);
 	}
 
 	@Override
 	public void onStoppedUsingItem(EntityPlayer playerIn)
 	{
-		baseController.onStoppedUsingItem(playerIn);
+		this.baseController.onStoppedUsingItem(playerIn);
 	}
 
 	@Override
 	public boolean gameIsSurvivalOrAdventure()
 	{
-		return baseController.gameIsSurvivalOrAdventure();
+		return this.baseController.gameIsSurvivalOrAdventure();
 	}
 
 	@Override
 	public boolean isNotCreative()
 	{
-		return baseController.isNotCreative();
+		return this.baseController.isNotCreative();
 	}
 
 	@Override
 	public boolean isInCreativeMode()
 	{
-		return baseController.isInCreativeMode();
+		return this.baseController.isInCreativeMode();
 	}
 
 	@Override
 	public boolean extendedReach()
 	{
-		return baseController.extendedReach();
+		return this.baseController.extendedReach();
 	}
 
 	@Override
 	public boolean isRidingHorse()
 	{
-		return baseController.isRidingHorse();
+		return this.baseController.isRidingHorse();
 	}
 
 	@Override
 	public boolean isSpectatorMode()
 	{
-		return baseController.isSpectatorMode();
+		return this.baseController.isSpectatorMode();
 	}
 
 	@Override
 	public GameType getCurrentGameType()
 	{
-		return baseController.getCurrentGameType();
+		return this.baseController.getCurrentGameType();
 	}
 
 	@Override
 	public boolean getIsHittingBlock()
 	{
-		return baseController.getIsHittingBlock();
+		return this.baseController.getIsHittingBlock();
 	}
 
 	@Override
 	public void pickItem(int index)
 	{
-		baseController.pickItem(index);
+		this.baseController.pickItem(index);
 	}
 
 	public void setExtendedBlockReachDistance(float distance)

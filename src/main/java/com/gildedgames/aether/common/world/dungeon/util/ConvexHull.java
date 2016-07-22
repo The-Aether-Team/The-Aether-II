@@ -131,9 +131,9 @@ public class ConvexHull
 		List<int[]> initialPoints = this.findInitialPoints(extremes);
 		double[] center = new double[3];
 
-		for (int i = 0; i < initialPoints.size(); i++)
+		for (int[] initialPoint : initialPoints)
 		{
-			this.currentVertex = initialPoints.get(i);
+			this.currentVertex = initialPoint;
 			this.updateCenter(center);
 			this.convexHull.add(this.currentVertex);
 			this.currentInput.remove(this.currentVertex);
@@ -165,8 +165,8 @@ public class ConvexHull
 			else
 				this.handleSingular(center);
 			int count = this.affectedFaceBuffer.size();
-			for (int i = 0; i < count; i++)
-				this.affectedFaceBuffer.get(i).tag = 0;
+			for (ConvexFace anAffectedFaceBuffer : this.affectedFaceBuffer)
+				anAffectedFaceBuffer.tag = 0;
 		}
 
 		return this.convexFaces;
@@ -241,16 +241,16 @@ public class ConvexHull
 		{
 			double maximum = 0.000001;
 			int[] maxPoint = null;
-			for (int j = 0; j < extremes.size(); j++)
+			for (int[] extreme : extremes)
 			{
-				int[] extreme = extremes.get(j);
 				if (initialPoints.contains(extreme))
+				{
 					continue;
+				}
 
 				int val = 0;
-				for (int k = 0; k < initialPoints.size(); k++)
+				for (int[] initPt : initialPoints)
 				{
-					int[] initPt = initialPoints.get(k);
 					for (int l = 0; l < 3; l++)
 					{
 						int t = initPt[l] - extreme[l];//Check nullpointer crash :(
@@ -268,15 +268,15 @@ public class ConvexHull
 				initialPoints.add(maxPoint);
 			else
 			{
-				for (int j = 0; j < this.currentInput.size(); j++)
+				for (int[] point : this.currentInput)
 				{
-					int[] point = this.currentInput.get(j);
 					if (initialPoints.contains(point))
-						continue;
-					int val = 0;
-					for (int k = 0; k < initialPoints.size(); k++)
 					{
-						int[] initPt = initialPoints.get(k);
+						continue;
+					}
+					int val = 0;
+					for (int[] initPt : initialPoints)
+					{
 						for (int l = 0; l < 3; l++)
 						{
 							int t = initPt[l] - point[l];
@@ -462,8 +462,8 @@ public class ConvexHull
 		this.maxDistance = Double.NEGATIVE_INFINITY;
 		this.furthestVertex = null;
 
-		for (int i = 0; i < this.currentInput.size(); i++)
-			this.isBeyond(face, beyondVertices, this.currentInput.get(i));
+		for (int[] aCurrentInput : this.currentInput)
+			this.isBeyond(face, beyondVertices, aCurrentInput);
 		face.furthestVertex = this.furthestVertex;
 	}
 
@@ -525,10 +525,8 @@ public class ConvexHull
 		int currentVertexIndex = this.getIndex(this.currentVertex);
 		this.coneFaceBuffer.clear();
 
-		for (int fIndex = 0; fIndex < this.affectedFaceBuffer.size(); fIndex++)
+		for (ConvexFace oldFace : this.affectedFaceBuffer)
 		{
-			ConvexFace oldFace = this.affectedFaceBuffer.get(fIndex);
-
 			int updateCount = 0;
 			for (int i = 0; i < 3; i++)
 			{
@@ -584,7 +582,9 @@ public class ConvexHull
 					for (int j = forbidden - 1; j >= 0; j--)
 					{
 						if (this.getIndex(vertices.get(j)) > currentVertexIndex)
+						{
 							vertices.set(j + 1, vertices.get(j));
+						}
 						else
 						{
 							orderedPivotIndex = j + 1;
@@ -598,7 +598,9 @@ public class ConvexHull
 					for (int j = forbidden + 1; j < 3; j++)
 					{
 						if (this.getIndex(vertices.get(j)) < currentVertexIndex)
+						{
 							vertices.set(j - 1, vertices.get(j));
+						}
 						else
 						{
 							orderedPivotIndex = j - 1;
@@ -636,10 +638,8 @@ public class ConvexHull
 	{
 		this.convexHull.add(this.currentVertex);
 
-		for (int i = 0; i < this.coneFaceBuffer.size(); i++)
+		for (DeferredFace face : this.coneFaceBuffer)
 		{
-			DeferredFace face = this.coneFaceBuffer.get(i);
-
 			ConvexFace newFace = face.face;
 			ConvexFace adjacentFace = face.pivot;
 			ConvexFace oldFace = face.oldFace;
@@ -651,7 +651,9 @@ public class ConvexHull
 			for (int j = 0; j < 3; j++)
 			{
 				if (j == orderedPivotIndex)
+				{
 					continue;
+				}
 				FaceConnector connector = this.objectManager.getConnector();
 				connector.update(newFace, j, this.fullInput);
 				this.connectFace(connector);
@@ -681,9 +683,8 @@ public class ConvexHull
 			this.objectManager.depositDeferredFace(face);
 		}
 
-		for (int fIndex = 0; fIndex < this.affectedFaceBuffer.size(); fIndex++)
+		for (ConvexFace face : this.affectedFaceBuffer)
 		{
-			ConvexFace face = this.affectedFaceBuffer.get(fIndex);
 			this.unprocessedFaces.remove(face);
 			this.objectManager.depositFace(face);
 		}
@@ -754,9 +755,8 @@ public class ConvexHull
 		this.rollbackCenter(center);
 		this.singularVertices.add(this.currentVertex);
 
-		for (int fIndex = 0; fIndex < this.affectedFaceBuffer.size(); fIndex++)
+		for (ConvexFace face : this.affectedFaceBuffer)
 		{
-			ConvexFace face = this.affectedFaceBuffer.get(fIndex);
 			VertexBuffer vb = face.verticesBeyond;
 			for (int i = 0; i < vb.size(); i++)
 			{

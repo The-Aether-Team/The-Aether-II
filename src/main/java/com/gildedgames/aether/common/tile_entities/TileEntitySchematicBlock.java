@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.math.BlockPos;
@@ -115,7 +114,7 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 		NBTTagCompound compound = new NBTTagCompound();
 		this.writeToNBT(compound);
 
-		return new SPacketUpdateTileEntity(pos, 1, compound);
+		return new SPacketUpdateTileEntity(this.pos, 1, compound);
 	}
 
 	@Override
@@ -126,7 +125,7 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 
 	private void sendUpdates()
 	{
-		this.worldObj.scheduleUpdate(pos, this.blockType, 0);
+		this.worldObj.scheduleUpdate(this.pos, this.blockType, 0);
 
 		this.markDirty();
 	}

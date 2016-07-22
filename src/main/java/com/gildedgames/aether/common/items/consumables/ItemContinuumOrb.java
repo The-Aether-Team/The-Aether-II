@@ -24,7 +24,7 @@ public class ItemContinuumOrb extends Item
 			return stack;
 		}
 
-		ItemStack randStack = selector.getRandomItem(world.rand);
+		ItemStack randStack = this.selector.getRandomItem(world.rand);
 
 		if (stack.stackSize > 1)
 		{
@@ -56,7 +56,7 @@ public class ItemContinuumOrb extends Item
 				{
 					if (recipe instanceof ShapedRecipes || recipe instanceof ShapelessRecipes)
 					{
-						validRecipeCache.add(recipe);
+						this.validRecipeCache.add(recipe);
 					}
 				}
 			}

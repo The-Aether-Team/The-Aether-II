@@ -7,8 +7,6 @@ import com.gildedgames.aether.common.world.features.trees.WorldGenMassiveSkyroot
 import com.gildedgames.aether.common.world.features.trees.WorldGenLargeTree;
 import com.gildedgames.aether.common.world.features.trees.WorldGenSkyrootTree;
 import net.minecraft.block.BlockLog;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 import java.util.Random;

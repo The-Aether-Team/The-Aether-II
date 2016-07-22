@@ -15,8 +15,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
-
 public abstract class EntityFlyingAnimal extends EntityAetherAnimal
 {
 	private static final DataParameter<Boolean> SADDLED = new DataParameter<>(16, DataSerializers.BOOLEAN);

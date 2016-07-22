@@ -10,27 +10,16 @@ import com.gildedgames.aether.common.items.properties.ItemProperties;
 import com.gildedgames.aether.common.items.properties.ItemPropertiesProvider;
 import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.aether.common.player.PlayerAetherProvider;
-import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
-import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
-import com.gildedgames.aether.api.entities.effects.EntityEffectRule;
-import com.gildedgames.aether.api.items.properties.ItemRarity;
 import com.gildedgames.aether.api.items.IItemEffectsCapability;
 import com.gildedgames.aether.api.items.IItemPropertiesCapability;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AetherCapabilityManager
 {

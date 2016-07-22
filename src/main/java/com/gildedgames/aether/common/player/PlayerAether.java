@@ -188,7 +188,7 @@ public class PlayerAether implements IPlayerAetherCapability
 	@Override
 	public void onFall(LivingFallEvent event)
 	{
-		Class<? extends Item> fullSet = PlayerUtil.findArmorSet(player);
+		Class<? extends Item> fullSet = PlayerUtil.findArmorSet(this.player);
 
 		if (fullSet == ItemGravititeArmor.class)
 		{

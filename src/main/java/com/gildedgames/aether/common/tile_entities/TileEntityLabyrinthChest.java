@@ -18,13 +18,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityLabyrinthChest extends TileEntityLockable implements net.minecraft.util.ITickable, IInventory
 {
 	final private int CHEST_SIZE = 27;
-	private ItemStack[] chestContents = new ItemStack[CHEST_SIZE];
+	private ItemStack[] chestContents = new ItemStack[this.CHEST_SIZE];
 	public float lidAngle;
 	public float prevLidAngle;
 	public int numPlayersUsing;
@@ -190,7 +188,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 	@Override
 	public int getSizeInventory()
 	{
-		return CHEST_SIZE;
+		return this.CHEST_SIZE;
 	}
 
 	@Override

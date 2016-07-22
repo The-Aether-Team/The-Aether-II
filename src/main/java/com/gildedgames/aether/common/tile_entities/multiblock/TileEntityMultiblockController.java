@@ -16,7 +16,7 @@ public abstract class TileEntityMultiblockController extends TileEntity implemen
 
 	public void rebuild()
 	{
-		for (BlockPos.MutableBlockPos pos : block.getMultiblockVolumeIterator(this.pos, this.getWorld()))
+		for (BlockPos.MutableBlockPos pos : this.block.getMultiblockVolumeIterator(this.pos, this.getWorld()))
 		{
 			if (this.worldObj.getTileEntity(pos) == this)
 			{
@@ -33,7 +33,7 @@ public abstract class TileEntityMultiblockController extends TileEntity implemen
 	@Override
 	public void onDestroyed()
 	{
-		for (BlockPos.MutableBlockPos pos : block.getMultiblockVolumeIterator(this.pos, this.getWorld()))
+		for (BlockPos.MutableBlockPos pos : this.block.getMultiblockVolumeIterator(this.pos, this.getWorld()))
 		{
 			if (this.doesControllerOwn(pos))
 			{

@@ -34,6 +34,6 @@ public class AltarRegistry
 
 	public ArrayList<IAltarRecipe> getAltarRecipes()
 	{
-		return altarRecipes;
+		return this.altarRecipes;
 	}
 }

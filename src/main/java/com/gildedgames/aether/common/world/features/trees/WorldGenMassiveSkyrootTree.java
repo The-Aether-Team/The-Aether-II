@@ -9,7 +9,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
-import javax.annotation.Generated;
 import java.util.Random;
 
 public class WorldGenMassiveSkyrootTree extends WorldGenAbstractTree
@@ -33,11 +32,11 @@ public class WorldGenMassiveSkyrootTree extends WorldGenAbstractTree
 
 	public void setBlockAirCheck(World world, int x, int y, int z, IBlockState state)
 	{
-		tmpBlockPos.setPos(x, y, z);
+		this.tmpBlockPos.setPos(x, y, z);
 
-		if (world.getBlockState(tmpBlockPos).getBlock() == Blocks.AIR)
+		if (world.getBlockState(this.tmpBlockPos).getBlock() == Blocks.AIR)
 		{
-			world.setBlockState(tmpBlockPos, state);
+			world.setBlockState(this.tmpBlockPos, state);
 		}
 	}
 

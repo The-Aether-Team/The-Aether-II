@@ -28,11 +28,11 @@ public class TileEntityLabyrinthTotemRenderer extends TileEntitySpecialRenderer<
 
 		rotation /= 20;
 
-		model.Shape6.rotateAngleY = rotation;
-		model.Shape8.rotateAngleY = rotation;
-		model.Shape9.rotateAngleY = rotation;
-		model.Shape10.rotateAngleY = rotation;
-		model.Shape11.rotateAngleY = rotation;
+		this.model.Shape6.rotateAngleY = rotation;
+		this.model.Shape8.rotateAngleY = rotation;
+		this.model.Shape9.rotateAngleY = rotation;
+		this.model.Shape10.rotateAngleY = rotation;
+		this.model.Shape11.rotateAngleY = rotation;
 
 		GlStateManager.pushMatrix();
 		GlStateManager.enableRescaleNormal();
@@ -49,7 +49,7 @@ public class TileEntityLabyrinthTotemRenderer extends TileEntitySpecialRenderer<
 
 		this.bindTexture(TEXTURE_TOTEM);
 
-		model.renderAll(0.0625F);
+		this.model.renderAll(0.0625F);
 
 		this.bindTexture(TEXTURE_TOTEM_GLOW);
 
@@ -67,7 +67,7 @@ public class TileEntityLabyrinthTotemRenderer extends TileEntitySpecialRenderer<
 
 		GlStateManager.scale(1.01F, 1.01F, 1.01F);
 
-		model.renderAll(0.0625F);
+		this.model.renderAll(0.0625F);
 
 		GlStateManager.disableBlend();
 

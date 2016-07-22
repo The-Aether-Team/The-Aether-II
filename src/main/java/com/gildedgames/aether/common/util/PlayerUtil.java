@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.util;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
