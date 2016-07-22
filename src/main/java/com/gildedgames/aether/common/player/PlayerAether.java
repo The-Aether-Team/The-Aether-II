@@ -2,6 +2,8 @@ package com.gildedgames.aether.common.player;
 
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -36,6 +38,10 @@ import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.items.tools.ItemValkyrieTool;
 import com.gildedgames.aether.common.util.PlayerUtil;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerAether implements IPlayerAetherCapability
 {
@@ -124,6 +130,22 @@ public class PlayerAether implements IPlayerAetherCapability
 					stack.damageItem(2 + extra, this.player);
 				}
 			}
+		}
+
+		if (!this.player.worldObj.isRemote && this.equipmentInventory.getDirties().size() > 0)
+		{
+			List<Pair<Integer, ItemStack>> changes = new ArrayList<>();
+
+			for (int i : this.equipmentInventory.getDirties())
+			{
+				ItemStack stack = this.equipmentInventory.getStackInSlot(i);
+
+				changes.add(Pair.of(i, stack));
+			}
+
+			NetworkingAether.sendPacketToWatching(new EquipmentChangedPacket(changes), this.player);
+
+			this.equipmentInventory.getDirties().clear();
 		}
 
 		AetherCore.PROXY.setExtendedReachDistance(this.player, extendedReach);

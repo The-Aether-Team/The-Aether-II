@@ -1,5 +1,8 @@
 package com.gildedgames.aether.common;
 
+import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
+import com.gildedgames.aether.api.registry.equipment.IEquipmentProperties;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.crafting.RecipesAether;
@@ -10,6 +13,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.properties.EquipmentRegistry;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.aether.common.player.PlayerAetherEvents;
 import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
 import com.gildedgames.aether.common.tile_entities.TileEntityBoundary.FetchedEntity;
@@ -19,9 +23,14 @@ import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
 import com.gildedgames.util.io.Instantiator;
 import com.gildedgames.util.modules.chunk.ChunkModule;
 import com.gildedgames.util.modules.tab.TabModule;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
@@ -119,6 +128,47 @@ public class CommonProxy
 
 			world.spawnParticle(EnumParticleTypes.CLOUD, x2, y2, z2, 0.0D, random.nextDouble() * 0.03D, 0.0D);
 		}
+	}
+
+	public boolean tryEquipEquipment(EntityPlayer player, ItemStack stack, EnumHand hand)
+	{
+		if (stack == null)
+		{
+			return false;
+		}
+
+		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(player);
+
+		if (aePlayer == null)
+		{
+			return false;
+		}
+
+		IInventoryEquipment equipment = aePlayer.getEquipmentInventory();
+
+		IEquipmentProperties props = AetherCore.INSTANCE.getEquipmentRegistry().getProperties(stack.getItem());
+
+		if (props != null)
+		{
+			int slot = equipment.getNextEmptySlotForType(props.getEquipmentType());
+
+			if (slot < 0)
+			{
+				return false;
+			}
+
+			equipment.setInventorySlotContents(slot, stack.copy());
+
+			if (!player.capabilities.isCreativeMode)
+			{
+				// Technically, there should never be STACKABLE equipment, but in case there is, we need to handle it.
+				stack.stackSize--;
+			}
+
+			player.setHeldItem(hand, stack.stackSize <= 0 ? null : stack);
+		}
+
+		return true;
 	}
 
 	public File getAetherStorageDir()

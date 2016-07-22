@@ -2,7 +2,13 @@ package com.gildedgames.aether.common.network;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.packets.AetherMovementPacket;
+import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityTracker;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -20,11 +26,24 @@ public class NetworkingAether
 		instance = NetworkRegistry.INSTANCE.newSimpleChannel(AetherCore.MOD_ID);
 
 		instance.registerMessage(AetherMovementPacket.Handler.class, AetherMovementPacket.class, discriminant++, Side.SERVER);
+		instance.registerMessage(EquipmentChangedPacket.Handler.class, EquipmentChangedPacket.class, discriminant++, Side.CLIENT);
 	}
 
 	public static void sendPacketToPlayer(IMessage message, EntityPlayerMP player)
 	{
 		NetworkingAether.instance.sendTo(message, player);
+	}
+
+	public static void sendPacketToWatching(IMessage message, EntityLivingBase entity)
+	{
+		WorldServer world = (WorldServer) entity.worldObj;
+
+		EntityTracker tracker = world.getEntityTracker();
+
+		for (EntityPlayer player : tracker.getTrackingPlayers(entity))
+		{
+			NetworkingAether.sendPacketToPlayer(message, (EntityPlayerMP) player);
+		}
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -10,7 +10,6 @@ import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,6 +17,9 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.text.TextComponentBase;
 import net.minecraft.util.text.TextComponentTranslation;
 import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class InventoryEquipment implements IInventoryEquipment
 {
@@ -28,23 +30,17 @@ public class InventoryEquipment implements IInventoryEquipment
 					ItemEquipmentType.RELIC,
 					ItemEquipmentType.RELIC,
 					ItemEquipmentType.HANDWEAR,
-					//ItemEquipmentType.SHIELD,
 					ItemEquipmentType.RING,
 					ItemEquipmentType.RING,
 					ItemEquipmentType.NECKWEAR,
 					ItemEquipmentType.COMPANION,
-			/*ItemEquipmentType.ARTIFACT,
-			ItemEquipmentType.CHARM,
-			ItemEquipmentType.CHARM,
-			ItemEquipmentType.CHARM,
-			ItemEquipmentType.CHARM,
-			ItemEquipmentType.CHARM,
-			ItemEquipmentType.CHARM*/
 			};
 
 	private final IPlayerAetherCapability aePlayer;
 
 	private ItemStack[] inventory = new ItemStack[InventoryEquipment.INVENTORY_SIZE];
+
+	private Set<Integer> dirties = new HashSet<>();
 
 	public InventoryEquipment(IPlayerAetherCapability aePlayer)
 	{
@@ -53,7 +49,7 @@ public class InventoryEquipment implements IInventoryEquipment
 
 	public ItemStack[] getInventory()
 	{
-		return inventory;
+		return this.inventory;
 	}
 
 	@Override
@@ -91,6 +87,8 @@ public class InventoryEquipment implements IInventoryEquipment
 				}
 			}
 
+			this.dirties.add(index);
+
 			this.markDirty();
 
 			return stack;
@@ -106,7 +104,7 @@ public class InventoryEquipment implements IInventoryEquipment
 		{
 			ItemStack stack = this.inventory[index];
 
-			this.inventory[index] = null;
+			this.setInventorySlotContents(index, null);
 
 			return stack;
 		}
@@ -118,6 +116,7 @@ public class InventoryEquipment implements IInventoryEquipment
 	public void setInventorySlotContents(int index, ItemStack stack)
 	{
 		this.inventory[index] = stack;
+		this.dirties.add(index);
 
 		this.markDirty();
 	}
@@ -230,7 +229,7 @@ public class InventoryEquipment implements IInventoryEquipment
 				}
 			}
 
-			this.inventory[i] = null;
+			this.setInventorySlotContents(i, null);
 		}
 	}
 
@@ -245,6 +244,11 @@ public class InventoryEquipment implements IInventoryEquipment
 		}
 
 		this.clear();
+	}
+
+	public Set<Integer> getDirties()
+	{
+		return this.dirties;
 	}
 
 	@Override

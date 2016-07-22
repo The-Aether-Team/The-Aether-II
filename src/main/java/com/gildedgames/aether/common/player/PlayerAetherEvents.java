@@ -2,11 +2,18 @@ package com.gildedgames.aether.common.player;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import com.gildedgames.util.modules.chunk.ChunkModule;
 import com.gildedgames.util.modules.chunk.impl.hooks.BlockBitFlagChunkHook;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
@@ -16,9 +23,45 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerAetherEvents
 {
+	@SubscribeEvent
+	public void onEntityJoinWorld(PlayerEvent.StartTracking event)
+	{
+		if (event.getEntity().worldObj.isRemote || !(event.getEntity() instanceof EntityPlayer))
+		{
+			return;
+		}
+
+		EntityPlayer player = (EntityPlayer) event.getEntity();
+
+		IPlayerAetherCapability capability = PlayerAether.getPlayer(player);
+
+		if (capability != null)
+		{
+			IInventoryEquipment equipment = capability.getEquipmentInventory();
+
+			List<Pair<Integer, ItemStack>> items = new ArrayList<>();
+
+			for (int i = 0; i < equipment.getSizeInventory(); i++)
+			{
+				ItemStack stack = equipment.getStackInSlot(i);
+
+				if (stack != null)
+				{
+					items.add(Pair.of(i, stack));
+				}
+			}
+
+			NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(items), (EntityPlayerMP) player);
+		}
+	}
+
 	@SubscribeEvent
 	public void onDeath(LivingDeathEvent event)
 	{

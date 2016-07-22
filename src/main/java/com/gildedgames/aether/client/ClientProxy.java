@@ -10,8 +10,13 @@ import com.gildedgames.aether.client.sound.SoundEventHandler;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.CommonProxy;
 import com.gildedgames.util.modules.tab.TabModule;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -47,6 +52,25 @@ public class ClientProxy extends CommonProxy
 		TabModule.api().getInventoryGroup().registerClientTab(new TabEquipment.Client());
 
 		ClientRenderHandler.init();
+	}
+
+	@Override
+	public boolean tryEquipEquipment(EntityPlayer player, ItemStack stack, EnumHand hand)
+	{
+		boolean result = super.tryEquipEquipment(player, stack, hand);
+
+		if (result)
+		{
+			// Unfortunately we have to play the equip animation manually...
+			if (player.worldObj.isRemote)
+			{
+				Minecraft.getMinecraft().getItemRenderer().resetEquippedProgress(EnumHand.MAIN_HAND);
+			}
+
+			player.worldObj.playSound(player, player.getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+		}
+
+		return result;
 	}
 
 	@Override

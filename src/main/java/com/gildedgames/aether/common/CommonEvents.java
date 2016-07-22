@@ -38,6 +38,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Random;
@@ -195,6 +196,24 @@ public class CommonEvents
 			newEntity.setPositionAndUpdate(entity.posX, 200 + entity.posY, entity.posZ);
 
 			return newEntity;
+		}
+	}
+
+	@SubscribeEvent
+	public void onPlayerRightClickBLock(PlayerInteractEvent.RightClickBlock event)
+	{
+		if (AetherCore.PROXY.tryEquipEquipment(event.getEntityPlayer(), event.getItemStack(), event.getHand()))
+		{
+			event.setUseItem(Event.Result.ALLOW);
+		}
+	}
+
+	@SubscribeEvent
+	public void onPlayerRightClickItem(PlayerInteractEvent.RightClickItem event)
+	{
+		if (AetherCore.PROXY.tryEquipEquipment(event.getEntityPlayer(), event.getItemStack(), event.getHand()))
+		{
+			event.setCanceled(true);
 		}
 	}
 
