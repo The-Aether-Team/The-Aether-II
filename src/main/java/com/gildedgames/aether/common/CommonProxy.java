@@ -163,9 +163,11 @@ public class CommonProxy
 			}
 
 			player.setHeldItem(hand, stack.stackSize <= 0 ? null : stack);
+
+			return true;
 		}
 
-		return true;
+		return false;
 	}
 
 	public File getAetherStorageDir()
