@@ -30,14 +30,17 @@ public class EntityAICompanionFollow extends EntityAIBase
 	@Override
 	public boolean shouldExecute()
 	{
-		double distance = this.entity.getDistanceSqToEntity(this.entity.getOwner());
-
-		return this.entity.getOwner() != null && distance > 18.0D;
+		return this.entity.getOwner() != null && this.entity.getDistanceSqToEntity(this.entity.getOwner()) > 18.0D;
 	}
 
 	@Override
 	public boolean continueExecuting()
 	{
+		if (this.entity.getOwner() == null)
+		{
+			return false;
+		}
+
 		double distance = this.entity.getDistanceSqToEntity(this.entity.getOwner());
 
 		return !this.navigator.noPath() && this.entity.hurtTime <= 0 && distance > 5.0D;
@@ -97,6 +100,7 @@ public class EntityAICompanionFollow extends EntityAIBase
 						if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && this.entity.worldObj.getBlockState(new BlockPos(i + l, k - 1, j + i1)).isFullyOpaque() && this.isEmptyBlock(new BlockPos(i + l, k, j + i1)) && this.isEmptyBlock(new BlockPos(i + l, k + 1, j + i1)))
 						{
 							this.entity.setLocationAndAngles((double)((float)(i + l) + 0.5F), (double)k, (double)((float)(j + i1) + 0.5F), this.entity.rotationYaw, this.entity.rotationPitch);
+
 							this.navigator.clearPathEntity();
 
 							return;
