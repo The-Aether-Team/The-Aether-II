@@ -391,6 +391,8 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.shard_of_life, "miscellaneous/shard_of_life");
 
 		registerItemModels(ItemsAether.skyroot_shield, "skyroot_shield");
+
+		registerItemModels(ItemsAether.frostpine_totem, "companions/frostpine_totem");
 	}
 
 	private static void registerItemModels(Block block, String path)

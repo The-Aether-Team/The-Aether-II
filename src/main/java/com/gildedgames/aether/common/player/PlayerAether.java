@@ -1,6 +1,9 @@
 package com.gildedgames.aether.common.player;
 
+import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
+import com.gildedgames.aether.common.entities.companions.EntityCompanion;
+import com.gildedgames.aether.common.items.ItemCompanion;
 import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
@@ -52,6 +55,8 @@ public class PlayerAether implements IPlayerAetherCapability
 	private EntityMovingBlock heldBlock;
 
 	private BlockPos linkingSchematicBoundary;
+
+	private EntityCompanion companion;
 
 	private boolean hasDoubleJumped;
 
@@ -128,6 +133,47 @@ public class PlayerAether implements IPlayerAetherCapability
 					int extra = (int) Math.floor(Math.min(6, this.heldBlock.ticksExisted / 60));
 
 					stack.damageItem(2 + extra, this.player);
+				}
+			}
+		}
+
+		if (!this.player.worldObj.isRemote)
+		{
+			ItemStack companionStack = this.equipmentInventory.getStackInSlot(6);
+
+			if (companionStack != null && companionStack.getItem() instanceof ItemCompanion)
+			{
+				if (this.companion == null)
+				{
+					long respawnTimer = ItemCompanion.getTicksUntilRespawn(companionStack, this.player.worldObj);
+
+					if (respawnTimer <= 0)
+					{
+						this.companion = ((ItemCompanion) companionStack.getItem()).spawnAndLink(this);
+
+						this.companion.setPosition(this.getPlayer().posX, this.getPlayer().posY, this.getPlayer().posZ);
+
+						this.player.worldObj.spawnEntityInWorld(this.companion);
+					}
+				}
+				else if (this.companion.isDead)
+				{
+					this.companion = null;
+
+					ItemCompanion.setRespawnTimer(companionStack, this.player.worldObj, 20 * 120);
+				}
+				else
+				{
+					this.companion.tickEffects(this);
+				}
+			}
+			else
+			{
+				if (this.companion != null)
+				{
+					this.companion.setDead();
+
+					this.companion = null;
 				}
 			}
 		}

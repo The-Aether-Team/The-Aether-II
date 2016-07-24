@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.items;
 
 import java.util.List;
 
+import com.gildedgames.aether.common.entities.companions.EntityFrostpineTotem;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -189,6 +190,8 @@ public class ItemsAether
     
 	public static ItemAetherShield skyroot_shield;
 
+	public static ItemCompanion frostpine_totem;
+
 	public static void preInit()
 	{
 		skyroot_stick = registerItem("skyroot_stick", new Item(), AetherCreativeTabs.tabMaterials);
@@ -375,6 +378,7 @@ public class ItemsAether
 		chain_gloves = registerItem("chain_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.CHAIN));
 		diamond_gloves = registerItem("diamond_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.DIAMOND));
 
+		frostpine_totem = registerItem("frostpine_totem", new ItemCompanion(EntityFrostpineTotem.class));
 
 		IEquipmentRegistry equipmentRegistry = AetherCore.INSTANCE.getEquipmentRegistry();
 
@@ -403,6 +407,7 @@ public class ItemsAether
 		equipmentRegistry.register(ItemsAether.gold_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.chain_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.diamond_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.frostpine_totem, ItemRarity.RARE, ItemEquipmentType.COMPANION);
 
 		class Effects implements ItemEffects.ItemEffectsProvider
 		{

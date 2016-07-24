@@ -226,6 +226,7 @@ item.aether.diamond_gloves.name=Diamond Gloves
 item.aether.pink_baby_swet.name=Pink Baby Swet
 item.aether.shard_of_life.name=Shard of Life
 item.aether.skyroot_shield.name=Skyroot Shield
+item.aether.frostpine_totem.name=Frostpine Totem
 
 # Item Rarities
 item.rarity.common.name=§7§oCommon

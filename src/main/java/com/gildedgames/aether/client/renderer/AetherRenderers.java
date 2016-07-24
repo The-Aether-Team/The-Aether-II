@@ -3,6 +3,7 @@ package com.gildedgames.aether.client.renderer;
 import com.gildedgames.aether.client.renderer.entities.AetherRenderFactory;
 import com.gildedgames.aether.client.renderer.entities.RenderFloatingBlock;
 import com.gildedgames.aether.client.renderer.entities.RenderMovingBlock;
+import com.gildedgames.aether.client.renderer.entities.companions.RenderFrostpineTotem;
 import com.gildedgames.aether.client.renderer.entities.living.RenderAechorPlant;
 import com.gildedgames.aether.client.renderer.entities.living.RenderAerbunny;
 import com.gildedgames.aether.client.renderer.entities.living.RenderCarrionSprout;
@@ -19,6 +20,7 @@ import com.gildedgames.aether.client.renderer.tile_entities.TileEntitySkyrootChe
 import com.gildedgames.aether.client.renderer.tile_entities.TileEntitySkyrootSignRenderer;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
+import com.gildedgames.aether.common.entities.companions.EntityFrostpineTotem;
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
 import com.gildedgames.aether.common.entities.living.EntityAechorPlant;
 import com.gildedgames.aether.common.entities.living.EntityAerbunny;
@@ -76,6 +78,7 @@ public class AetherRenderers
 				return new RenderEntityItem(manager, Minecraft.getMinecraft().getRenderItem());
 			}
 		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityFrostpineTotem.class, new AetherRenderFactory<>(RenderFrostpineTotem.class));
 	}
 
 	private static void registerTESRs()

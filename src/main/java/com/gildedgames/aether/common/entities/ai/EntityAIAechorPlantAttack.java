@@ -7,11 +7,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
 import net.minecraft.util.math.MathHelper;
 
-public class AechorPlantAI extends EntityAITarget
+public class EntityAIAechorPlantAttack extends EntityAITarget
 {
 	private int ticksUntilAttack = 3;
 
-	public AechorPlantAI(EntityCreature creature)
+	public EntityAIAechorPlantAttack(EntityCreature creature)
 	{
 		super(creature, true);
 	}

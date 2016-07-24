@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.living;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.ai.AechorPlantAI;
+import com.gildedgames.aether.common.entities.ai.EntityAIAechorPlantAttack;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import net.minecraft.block.Block;
@@ -38,7 +38,7 @@ public class EntityAechorPlant extends EntityMob
 	{
 		super(world);
 
-		this.tasks.addTask(0, new AechorPlantAI(this));
+		this.tasks.addTask(0, new EntityAIAechorPlantAttack(this));
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
 		this.setSize(0.8F, 0.6F);
@@ -51,6 +51,7 @@ public class EntityAechorPlant extends EntityMob
 		}
 	}
 
+	@Override
 	protected void entityInit()
 	{
 		super.entityInit();
@@ -59,6 +60,7 @@ public class EntityAechorPlant extends EntityMob
 		this.dataManager.register(EntityAechorPlant.PLANT_SIZE, (byte) 0);
 	}
 
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();

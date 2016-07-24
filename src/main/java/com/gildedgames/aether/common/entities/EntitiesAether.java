@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.entities;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
+import com.gildedgames.aether.common.entities.companions.EntityFrostpineTotem;
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
 import com.gildedgames.aether.common.entities.living.EntityAechorPlant;
 import com.gildedgames.aether.common.entities.living.EntityAerbunny;
@@ -31,6 +32,8 @@ public class EntitiesAether
 		registerLivingEntity(EntityAechorPlant.class, "aechor_plant", 0xCCFFFF, 0xC88FE3);
 		registerLivingEntity(EntityAerbunny.class, "aerbunny", 0xCCFFFF, 0x0066CC);
 		registerLivingEntity(EntityCarrionSprout.class, "carrion_sprout", 0xCCFFFF, 0x5D8BBB);
+
+		registerLivingEntity(EntityFrostpineTotem.class, "frostpine_totem");
 
 		EntityRegistry.registerModEntity(EntityFloatingBlock.class, "floating_block", NEXT_ID++, AetherCore.INSTANCE, 80, 1, true);
 		EntityRegistry.registerModEntity(EntityMovingBlock.class, "moving_block", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
