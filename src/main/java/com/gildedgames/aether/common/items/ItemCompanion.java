@@ -55,14 +55,13 @@ public class ItemCompanion extends Item
 		return compound.getLong("respawnTimer") - world.getTotalWorldTime();
 	}
 
-	public EntityCompanion spawnAndLink(PlayerAether aePlayer)
+	public EntityCompanion createCompanionEntity(PlayerAether aePlayer)
 	{
 		EntityCompanion companion = null;
 
 		try
 		{
 			companion = this.companionClass.getConstructor(World.class).newInstance(aePlayer.getPlayer().worldObj);
-			companion.setOwner(aePlayer.getPlayer());
 		}
 		catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e)
 		{

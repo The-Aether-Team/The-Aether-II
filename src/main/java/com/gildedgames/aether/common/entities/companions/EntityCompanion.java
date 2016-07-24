@@ -88,6 +88,10 @@ public abstract class EntityCompanion extends EntityLiving
 
 	public abstract void tickEffects(PlayerAether aePlayer);
 
+	public abstract void addEffects(PlayerAether aePlayer);
+
+	public abstract void removeEffects(PlayerAether aePlayer);
+
 	public void setOwner(EntityPlayer owner)
 	{
 		this.dataManager.set(OWNER_UUID, Optional.of(owner.getUniqueID()));

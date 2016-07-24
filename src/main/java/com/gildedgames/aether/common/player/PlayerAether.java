@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.player;
 
-import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import com.gildedgames.aether.common.entities.companions.EntityCompanion;
 import com.gildedgames.aether.common.items.ItemCompanion;
@@ -88,18 +87,36 @@ public class PlayerAether implements IPlayerAetherCapability
 	@Override
 	public void onUpdate(LivingUpdateEvent event)
 	{
-		float extendedReach = 0.0f;
+		this.updateAbilities();
 
+		if (!this.player.worldObj.isRemote)
+		{
+			this.sendEquipmentChanges();
+
+			this.updatePickedBlock();
+			this.updateCompanion();
+		}
+
+		AetherCore.PROXY.setExtendedReachDistance(this.player, this.calculateExtendedReach());
+	}
+
+	private float calculateExtendedReach()
+	{
 		if (this.player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND) != null)
 		{
 			Item item = this.player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem();
 
 			if (item instanceof ItemValkyrieTool || item == ItemsAether.valkyrie_lance)
 			{
-				extendedReach = 3.5f;
+				return 3.5f;
 			}
 		}
 
+		return 0.0f;
+	}
+
+	private void updateAbilities()
+	{
 		if (this.getPlayer().onGround)
 		{
 			this.hasDoubleJumped = false;
@@ -109,7 +126,48 @@ public class PlayerAether implements IPlayerAetherCapability
 		{
 			this.ticksAirborne++;
 		}
+	}
 
+	private void updateCompanion()
+	{
+		ItemStack companionStack = this.equipmentInventory.getStackInSlot(6);
+
+		if (companionStack != null && companionStack.getItem() instanceof ItemCompanion)
+		{
+			if (this.companion == null)
+			{
+				long respawnTimer = ItemCompanion.getTicksUntilRespawn(companionStack, this.player.worldObj);
+
+				if (respawnTimer <= 0)
+				{
+					this.spawnCompanion((ItemCompanion) companionStack.getItem());
+				}
+			}
+			else
+			{
+				if (!this.companion.isDead)
+				{
+					this.companion.tickEffects(this);
+				}
+				else
+				{
+					if (!this.companion.wasDespawned())
+					{
+						ItemCompanion.setRespawnTimer(companionStack, this.player.worldObj, 20 * 240);
+					}
+
+					this.removeCompanion();
+				}
+			}
+		}
+		else if (this.companion != null)
+		{
+			this.removeCompanion();
+		}
+	}
+
+	private void updatePickedBlock()
+	{
 		if (this.heldBlock != null)
 		{
 			if (this.heldBlock.isDead || this.heldBlock.isFalling())
@@ -136,52 +194,32 @@ public class PlayerAether implements IPlayerAetherCapability
 				}
 			}
 		}
+	}
 
-		if (!this.player.worldObj.isRemote)
-		{
-			ItemStack companionStack = this.equipmentInventory.getStackInSlot(6);
+	private void spawnCompanion(ItemCompanion item)
+	{
+		this.companion = item.createCompanionEntity(this);
 
-			if (companionStack != null && companionStack.getItem() instanceof ItemCompanion)
-			{
-				if (this.companion == null)
-				{
-					long respawnTimer = ItemCompanion.getTicksUntilRespawn(companionStack, this.player.worldObj);
+		this.companion.setOwner(this.getPlayer());
+		this.companion.setPosition(this.getPlayer().posX, this.getPlayer().posY, this.getPlayer().posZ);
 
-					if (respawnTimer <= 0)
-					{
-						this.companion = ((ItemCompanion) companionStack.getItem()).spawnAndLink(this);
+		this.player.worldObj.spawnEntityInWorld(this.companion);
 
-						this.companion.setPosition(this.getPlayer().posX, this.getPlayer().posY, this.getPlayer().posZ);
+		this.companion.addEffects(this);
+	}
 
-						this.player.worldObj.spawnEntityInWorld(this.companion);
-					}
-				}
-				else if (this.companion.isDead)
-				{
-					if (!this.companion.wasDespawned())
-					{
-						ItemCompanion.setRespawnTimer(companionStack, this.player.worldObj, 20 * 240);
-					}
+	private void removeCompanion()
+	{
+		this.companion.setDead();
 
-					this.companion = null;
-				}
-				else
-				{
-					this.companion.tickEffects(this);
-				}
-			}
-			else
-			{
-				if (this.companion != null)
-				{
-					this.companion.setDead();
+		this.companion.removeEffects(this);
 
-					this.companion = null;
-				}
-			}
-		}
+		this.companion = null;
+	}
 
-		if (!this.player.worldObj.isRemote && this.equipmentInventory.getDirties().size() > 0)
+	private void sendEquipmentChanges()
+	{
+		if (this.equipmentInventory.getDirties().size() > 0)
 		{
 			List<Pair<Integer, ItemStack>> changes = new ArrayList<>();
 
@@ -196,8 +234,6 @@ public class PlayerAether implements IPlayerAetherCapability
 
 			this.equipmentInventory.getDirties().clear();
 		}
-
-		AetherCore.PROXY.setExtendedReachDistance(this.player, extendedReach);
 	}
 
 	@Override
@@ -243,12 +279,6 @@ public class PlayerAether implements IPlayerAetherCapability
 		{
 			event.setResult(Result.DENY);
 		}
-	}
-
-	@Override
-	public void onJump(LivingJumpEvent event)
-	{
-
 	}
 
 	@Override

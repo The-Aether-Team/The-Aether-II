@@ -106,17 +106,6 @@ public class PlayerAetherEvents
 	}
 
 	@SubscribeEvent
-	public void onJump(LivingJumpEvent event)
-	{
-		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.getEntity());
-
-		if (aePlayer != null)
-		{
-			aePlayer.onJump(event);
-		}
-	}
-
-	@SubscribeEvent
 	public void onCalculateBreakSpeed(PlayerEvent.BreakSpeed event)
 	{
 		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.getEntity());

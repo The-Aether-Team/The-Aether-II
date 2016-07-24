@@ -25,8 +25,6 @@ public interface IPlayerAetherCapability
 
 	void onFall(LivingFallEvent event);
 
-	void onJump(LivingJumpEvent event);
-
 	// [--- End of event handlers. ---]
 
 	IInventoryEquipment getEquipmentInventory();
