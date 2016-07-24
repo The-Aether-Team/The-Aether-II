@@ -30,18 +30,17 @@ public class EntityAICompanionFollow extends EntityAIBase
 	@Override
 	public boolean shouldExecute()
 	{
-		if (this.entity.getOwner() != null)
-		{
-			return this.entity.getDistanceSqToEntity(this.entity.getOwner()) > 12.0D;
-		}
+		double distance = this.entity.getDistanceSqToEntity(this.entity.getOwner());
 
-		return false;
+		return this.entity.getOwner() != null && distance > 18.0D;
 	}
 
 	@Override
 	public boolean continueExecuting()
 	{
-		return !this.navigator.noPath();
+		double distance = this.entity.getDistanceSqToEntity(this.entity.getOwner());
+
+		return !this.navigator.noPath() && this.entity.hurtTime <= 0 && distance > 5.0D;
 	}
 
 	@Override
@@ -58,6 +57,8 @@ public class EntityAICompanionFollow extends EntityAIBase
 	public void resetTask()
 	{
 		this.entity.setPathPriority(PathNodeType.WATER, this.oldWaterCost);
+
+		this.navigator.clearPathEntity();
 	}
 
 	private boolean isEmptyBlock(BlockPos pos)

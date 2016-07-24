@@ -158,9 +158,12 @@ public class PlayerAether implements IPlayerAetherCapability
 				}
 				else if (this.companion.isDead)
 				{
-					this.companion = null;
+					if (!this.companion.wasDespawned())
+					{
+						ItemCompanion.setRespawnTimer(companionStack, this.player.worldObj, 20 * 240);
+					}
 
-					ItemCompanion.setRespawnTimer(companionStack, this.player.worldObj, 20 * 120);
+					this.companion = null;
 				}
 				else
 				{

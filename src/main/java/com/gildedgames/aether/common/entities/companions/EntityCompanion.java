@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.world.World;
 
 import java.util.UUID;
@@ -19,6 +20,8 @@ import java.util.UUID;
 public abstract class EntityCompanion extends EntityLiving
 {
 	private static final DataParameter<Optional<UUID>> OWNER_UUID = new DataParameter<>(20, DataSerializers.OPTIONAL_UNIQUE_ID);
+
+	private boolean wasDespawned = false;
 
 	public EntityCompanion(World worldIn)
 	{
@@ -52,13 +55,15 @@ public abstract class EntityCompanion extends EntityLiving
 		if (!this.worldObj.isRemote && (this.getOwner() == null || this.getOwner().isDead))
 		{
 			this.setDead();
+
+			this.wasDespawned = true;
 		}
 	}
 
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount)
 	{
-		Entity attacker = source.getSourceOfDamage();
+		Entity attacker = source.getEntity();
 
 		if (attacker != null && attacker == this.getOwner())
 		{
@@ -73,7 +78,7 @@ public abstract class EntityCompanion extends EntityLiving
 				motionZ = (Math.random() - Math.random()) * 0.01D;
 			}
 
-			this.knockBack(this.getOwner(), 0.3F, motionX, motionZ);
+			this.knockBack(this.getOwner(), 0.5F, motionX, motionZ);
 
 			return false;
 		}
@@ -98,5 +103,10 @@ public abstract class EntityCompanion extends EntityLiving
 		}
 
 		return this.worldObj.getPlayerEntityByUUID(uuid.get());
+	}
+
+	public boolean wasDespawned()
+	{
+		return this.wasDespawned;
 	}
 }
