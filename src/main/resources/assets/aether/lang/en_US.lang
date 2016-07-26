@@ -227,6 +227,13 @@ item.aether.pink_baby_swet.name=Pink Baby Swet
 item.aether.shard_of_life.name=Shard of Life
 item.aether.skyroot_shield.name=Skyroot Shield
 item.aether.frostpine_totem.name=Frostpine Totem
+item.aether.ethereal_stone.name=Ethereal Stone
+item.aether.fleeting_stone.name=Fleeting Stone
+item.aether.soaring_stone.name=Soaring Stone
+item.aether.kraisith_capsule.name=Kraisith Capsule
+item.aether.orb_of_arkenzus.name=Orb of Arkenzus
+item.aether.fangrin_capsule.name=Fangrin Capsule
+item.aether.death_seal.name=Death Seal
 
 # Item Rarities
 item.rarity.common.name=§7§oCommon
@@ -360,3 +367,6 @@ ability.modifyXPCollection.desc=%s XP Collected
 
 # Tabs
 tab.equipment=Equipment
+
+# Chat Messages
+chat.aether.resurrected=%s was resurrected by their Nex Spirit

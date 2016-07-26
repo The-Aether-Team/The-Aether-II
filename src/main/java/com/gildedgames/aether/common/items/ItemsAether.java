@@ -2,7 +2,16 @@ package com.gildedgames.aether.common.items;
 
 import java.util.List;
 
+import com.gildedgames.aether.common.entities.companions.EntityFangrin;
+import com.gildedgames.aether.common.entities.companions.EntityFleetingWisp;
 import com.gildedgames.aether.common.entities.companions.EntityFrostpineTotem;
+import com.gildedgames.aether.common.entities.companions.EntityKraisith;
+import com.gildedgames.aether.common.entities.companions.EntityNexSpirit;
+import com.gildedgames.aether.common.entities.companions.EntityShadeOfArkenzus;
+import com.gildedgames.aether.common.entities.companions.EntityEtheralWisp;
+import com.gildedgames.aether.common.entities.companions.EntitySoaringWisp;
+import com.gildedgames.aether.common.items.companions.ItemCompanion;
+import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -190,7 +199,9 @@ public class ItemsAether
     
 	public static ItemAetherShield skyroot_shield;
 
-	public static ItemCompanion frostpine_totem;
+	public static ItemCompanion ethereal_stone, fleeting_stone, soaring_stone;
+
+	public static ItemCompanion frostpine_totem, kraisith_capsule, orb_of_arkenzus, fangrin_capsule, death_seal;
 
 	public static void preInit()
 	{
@@ -378,7 +389,15 @@ public class ItemsAether
 		chain_gloves = registerItem("chain_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.CHAIN));
 		diamond_gloves = registerItem("diamond_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.DIAMOND));
 
+		ethereal_stone = registerItem("ethereal_stone", new ItemCompanion(EntityEtheralWisp.class));
+		fleeting_stone = registerItem("fleeting_stone", new ItemCompanion(EntityFleetingWisp.class));
+		soaring_stone = registerItem("soaring_stone", new ItemCompanion(EntitySoaringWisp.class));
+
 		frostpine_totem = registerItem("frostpine_totem", new ItemCompanion(EntityFrostpineTotem.class));
+		kraisith_capsule = registerItem("kraisith_capsule", new ItemCompanion(EntityKraisith.class));
+		orb_of_arkenzus = registerItem("orb_of_arkenzus", new ItemCompanion(EntityShadeOfArkenzus.class));
+		fangrin_capsule = registerItem("fangrin_capsule", new ItemCompanion(EntityFangrin.class));
+		death_seal = registerItem("death_seal", new ItemDeathSeal(EntityNexSpirit.class));
 
 		IEquipmentRegistry equipmentRegistry = AetherCore.INSTANCE.getEquipmentRegistry();
 
@@ -408,6 +427,13 @@ public class ItemsAether
 		equipmentRegistry.register(ItemsAether.chain_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.diamond_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.frostpine_totem, ItemRarity.RARE, ItemEquipmentType.COMPANION);
+		equipmentRegistry.register(ItemsAether.kraisith_capsule, ItemRarity.RARE, ItemEquipmentType.COMPANION);
+		equipmentRegistry.register(ItemsAether.orb_of_arkenzus, ItemRarity.RARE, ItemEquipmentType.COMPANION);
+		equipmentRegistry.register(ItemsAether.fangrin_capsule, ItemRarity.RARE, ItemEquipmentType.COMPANION);
+		equipmentRegistry.register(ItemsAether.ethereal_stone, ItemRarity.RARE, ItemEquipmentType.COMPANION);
+		equipmentRegistry.register(ItemsAether.fleeting_stone, ItemRarity.RARE, ItemEquipmentType.COMPANION);
+		equipmentRegistry.register(ItemsAether.soaring_stone, ItemRarity.RARE, ItemEquipmentType.COMPANION);
+		equipmentRegistry.register(ItemsAether.death_seal, ItemRarity.RARE, ItemEquipmentType.COMPANION);
 
 		class Effects implements ItemEffects.ItemEffectsProvider
 		{

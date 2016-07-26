@@ -19,7 +19,7 @@ public class EntityFrostpineTotem extends EntityCompanion
 	public void tickEffects(PlayerAether aePlayer)
 	{
 		// Avoid sending potion packets every tick
-		if (this.ticksExisted % 60 == 0)
+		if (this.ticksExisted % 100 == 0)
 		{
 			this.giveNightVision(aePlayer.getPlayer());
 		}
@@ -39,7 +39,7 @@ public class EntityFrostpineTotem extends EntityCompanion
 
 	private void giveNightVision(EntityPlayer player)
 	{
-		player.addPotionEffect(new PotionEffect(this.potion, 300, 0, true, false));
+		player.addPotionEffect(new PotionEffect(this.potion, 600, 0, true, false));
 	}
 
 	private void removeNightVision(EntityPlayer player)

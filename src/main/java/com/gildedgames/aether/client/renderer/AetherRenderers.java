@@ -3,7 +3,14 @@ package com.gildedgames.aether.client.renderer;
 import com.gildedgames.aether.client.renderer.entities.AetherRenderFactory;
 import com.gildedgames.aether.client.renderer.entities.RenderFloatingBlock;
 import com.gildedgames.aether.client.renderer.entities.RenderMovingBlock;
+import com.gildedgames.aether.client.renderer.entities.companions.RenderFangrin;
+import com.gildedgames.aether.client.renderer.entities.companions.RenderFleetingWisp;
 import com.gildedgames.aether.client.renderer.entities.companions.RenderFrostpineTotem;
+import com.gildedgames.aether.client.renderer.entities.companions.RenderKraisith;
+import com.gildedgames.aether.client.renderer.entities.companions.RenderNexSpirit;
+import com.gildedgames.aether.client.renderer.entities.companions.RenderShadeOfArkenzus;
+import com.gildedgames.aether.client.renderer.entities.companions.RenderEtherealWisp;
+import com.gildedgames.aether.client.renderer.entities.companions.RenderSoaringWisp;
 import com.gildedgames.aether.client.renderer.entities.living.RenderAechorPlant;
 import com.gildedgames.aether.client.renderer.entities.living.RenderAerbunny;
 import com.gildedgames.aether.client.renderer.entities.living.RenderCarrionSprout;
@@ -20,7 +27,14 @@ import com.gildedgames.aether.client.renderer.tile_entities.TileEntitySkyrootChe
 import com.gildedgames.aether.client.renderer.tile_entities.TileEntitySkyrootSignRenderer;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
+import com.gildedgames.aether.common.entities.companions.EntityFangrin;
+import com.gildedgames.aether.common.entities.companions.EntityFleetingWisp;
 import com.gildedgames.aether.common.entities.companions.EntityFrostpineTotem;
+import com.gildedgames.aether.common.entities.companions.EntityKraisith;
+import com.gildedgames.aether.common.entities.companions.EntityNexSpirit;
+import com.gildedgames.aether.common.entities.companions.EntityShadeOfArkenzus;
+import com.gildedgames.aether.common.entities.companions.EntityEtheralWisp;
+import com.gildedgames.aether.common.entities.companions.EntitySoaringWisp;
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
 import com.gildedgames.aether.common.entities.living.EntityAechorPlant;
 import com.gildedgames.aether.common.entities.living.EntityAerbunny;
@@ -79,6 +93,13 @@ public class AetherRenderers
 			}
 		});
 		RenderingRegistry.registerEntityRenderingHandler(EntityFrostpineTotem.class, new AetherRenderFactory<>(RenderFrostpineTotem.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityKraisith.class, new AetherRenderFactory<>(RenderKraisith.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityShadeOfArkenzus.class, new AetherRenderFactory<>(RenderShadeOfArkenzus.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityEtheralWisp.class, new AetherRenderFactory<>(RenderEtherealWisp.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityFleetingWisp.class, new AetherRenderFactory<>(RenderFleetingWisp.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySoaringWisp.class, new AetherRenderFactory<>(RenderSoaringWisp.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityFangrin.class, new AetherRenderFactory<>(RenderFangrin.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityNexSpirit.class, new AetherRenderFactory<>(RenderNexSpirit.class));
 	}
 
 	private static void registerTESRs()

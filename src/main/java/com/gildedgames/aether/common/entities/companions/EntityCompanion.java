@@ -12,7 +12,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.world.World;
 
 import java.util.UUID;
@@ -52,11 +51,25 @@ public abstract class EntityCompanion extends EntityLiving
 
 		this.fallDistance = 0.0f;
 
-		if (!this.worldObj.isRemote && (this.getOwner() == null || this.getOwner().isDead))
+		if (!this.worldObj.isRemote)
 		{
-			this.setDead();
+			if (this.getOwner() == null || this.getOwner().isDead)
+			{
+				this.setDead();
 
-			this.wasDespawned = true;
+				this.wasDespawned = true;
+			}
+			else
+			{
+				PlayerAether aePlayer = (PlayerAether) PlayerAether.getPlayer(this.getOwner());
+
+				if (aePlayer.getCompanionEntity() != this)
+				{
+					this.setDead();
+
+					this.wasDespawned = true;
+				}
+			}
 		}
 	}
 
@@ -94,7 +107,7 @@ public abstract class EntityCompanion extends EntityLiving
 
 	public void setOwner(EntityPlayer owner)
 	{
-		this.dataManager.set(OWNER_UUID, Optional.of(owner.getUniqueID()));
+		this.dataManager.set(OWNER_UUID, owner == null ? Optional.<UUID>absent() : Optional.of(owner.getUniqueID()));
 	}
 
 	public EntityPlayer getOwner()

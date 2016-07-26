@@ -1,13 +1,26 @@
 package com.gildedgames.aether.common.player;
 
+import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import com.gildedgames.aether.common.entities.companions.EntityCompanion;
-import com.gildedgames.aether.common.items.ItemCompanion;
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
+import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
+import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
+import com.gildedgames.aether.common.items.companions.ItemCompanion;
+import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
+import com.gildedgames.aether.common.items.tools.ItemValkyrieTool;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
+import com.gildedgames.aether.common.util.PlayerUtil;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,30 +29,21 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
-
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
-import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
-import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
-import com.gildedgames.aether.common.items.tools.ItemValkyrieTool;
-import com.gildedgames.aether.common.util.PlayerUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -93,8 +97,11 @@ public class PlayerAether implements IPlayerAetherCapability
 		{
 			this.sendEquipmentChanges();
 
-			this.updatePickedBlock();
-			this.updateCompanion();
+			if (!this.player.isDead)
+			{
+				this.updatePickedBlock();
+				this.updateCompanion();
+			}
 		}
 
 		AetherCore.PROXY.setExtendedReachDistance(this.player, this.calculateExtendedReach());
@@ -130,26 +137,13 @@ public class PlayerAether implements IPlayerAetherCapability
 
 	private void updateCompanion()
 	{
-		ItemStack companionStack = this.equipmentInventory.getStackInSlot(6);
+		ItemStack companionStack = this.getCompanionItem();
 
-		if (companionStack != null && companionStack.getItem() instanceof ItemCompanion)
+		if (companionStack != null)
 		{
-			if (this.companion == null)
+			if (this.companion != null)
 			{
-				long respawnTimer = ItemCompanion.getTicksUntilRespawn(companionStack, this.player.worldObj);
-
-				if (respawnTimer <= 0)
-				{
-					this.spawnCompanion((ItemCompanion) companionStack.getItem());
-				}
-			}
-			else
-			{
-				if (!this.companion.isDead)
-				{
-					this.companion.tickEffects(this);
-				}
-				else
+				if (this.companion.isDead)
 				{
 					if (!this.companion.wasDespawned())
 					{
@@ -157,6 +151,24 @@ public class PlayerAether implements IPlayerAetherCapability
 					}
 
 					this.removeCompanion();
+				}
+				else if (((ItemCompanion) companionStack.getItem()).getCompanionClass() != this.companion.getClass())
+				{
+					this.removeCompanion();
+				}
+				else
+				{
+					this.companion.tickEffects(this);
+				}
+			}
+
+			if (this.companion == null)
+			{
+				long respawnTimer = ItemCompanion.getTicksUntilRespawn(companionStack, this.player.worldObj);
+
+				if (respawnTimer <= 0)
+				{
+					this.spawnCompanion((ItemCompanion) companionStack.getItem());
 				}
 			}
 		}
@@ -210,9 +222,10 @@ public class PlayerAether implements IPlayerAetherCapability
 
 	private void removeCompanion()
 	{
-		this.companion.setDead();
-
 		this.companion.removeEffects(this);
+
+		this.companion.setOwner(null);
+		this.companion.setDead();
 
 		this.companion = null;
 	}
@@ -239,6 +252,34 @@ public class PlayerAether implements IPlayerAetherCapability
 	@Override
 	public void onDeath(LivingDeathEvent event)
 	{
+		ItemStack companionItem = this.getCompanionItem();
+
+		if (companionItem != null && companionItem.getItem() instanceof ItemDeathSeal)
+		{
+			long ticksUntilUsable = ItemDeathSeal.getTicksUntilEnabled(companionItem, this.getPlayer().worldObj);
+
+			if (ticksUntilUsable <= 0)
+			{
+				event.setCanceled(true);
+
+				this.player.setHealth(0.5f);
+
+				this.player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("resistance"), 20 * 7, 4));
+				this.player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("regeneration"), 20 * 7, 3));
+
+				ItemDeathSeal.setDisabledTimer(companionItem, this.player.worldObj, 20 * 60 * 15);
+
+				FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().sendChatMsg(new TextComponentTranslation("chat.aether.resurrected", this.player.getDisplayName()));
+
+				return;
+			}
+		}
+
+		if (this.companion != null)
+		{
+			this.removeCompanion();
+		}
+
 		this.dropHeldBlock();
 	}
 
@@ -305,6 +346,23 @@ public class PlayerAether implements IPlayerAetherCapability
 	public EntityPlayer getPlayer()
 	{
 		return this.player;
+	}
+
+	public EntityCompanion getCompanionEntity()
+	{
+		return this.companion;
+	}
+
+	public ItemStack getCompanionItem()
+	{
+		ItemStack companionStack = this.equipmentInventory.getStackInSlot(6);
+
+		if (companionStack != null && companionStack.getItem() instanceof ItemCompanion)
+		{
+			return companionStack;
+		}
+
+		return null;
 	}
 
 	public boolean performDoubleJump()

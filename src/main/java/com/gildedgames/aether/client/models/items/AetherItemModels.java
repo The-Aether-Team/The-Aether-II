@@ -392,7 +392,14 @@ public class AetherItemModels
 
 		registerItemModels(ItemsAether.skyroot_shield, "skyroot_shield");
 
+		registerItemModels(ItemsAether.ethereal_stone, "companions/ethereal_stone");
+		registerItemModels(ItemsAether.fleeting_stone, "companions/fleeting_stone");
+		registerItemModels(ItemsAether.soaring_stone, "companions/soaring_stone");
 		registerItemModels(ItemsAether.frostpine_totem, "companions/frostpine_totem");
+		registerItemModels(ItemsAether.kraisith_capsule, "companions/kraisith_capsule");
+		registerItemModels(ItemsAether.orb_of_arkenzus, "companions/orb_of_arkenzus");
+		registerItemModels(ItemsAether.fangrin_capsule, "companions/fangrin_capsule");
+		registerItemModels(ItemsAether.death_seal, "companions/death_seal");
 	}
 
 	private static void registerItemModels(Block block, String path)

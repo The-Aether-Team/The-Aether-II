@@ -28,6 +28,8 @@ import java.util.Random;
 
 public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVariants, IGrowable
 {
+	private static final AxisAlignedBB BUSH_AABB = new AxisAlignedBB(0.2D, 0.0D, 0.2D, 0.8D, 0.8D, 0.8D);
+
 	public static final int
 			BERRY_BUSH_STEM = 0,
 			BERRY_BUSH_RIPE = 1;
@@ -157,14 +159,14 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVarian
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		return FULL_BLOCK_AABB;
+		return state.getValue(PROPERTY_HARVESTABLE) ? FULL_BLOCK_AABB : BUSH_AABB;
 	}
 
 	@Override
 	@Nullable
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, World worldIn, BlockPos pos)
 	{
-		return FULL_BLOCK_AABB;
+		return state.getValue(PROPERTY_HARVESTABLE) ? FULL_BLOCK_AABB : NULL_AABB;
 	}
 
 	@Override

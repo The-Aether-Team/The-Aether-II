@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.items;
+package com.gildedgames.aether.common.items.companions;
 
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.entities.companions.EntityCompanion;
@@ -20,7 +20,7 @@ public class ItemCompanion extends Item
 {
 	private final Class<? extends EntityCompanion> companionClass;
 
-	private final DecimalFormat respawnFormat = new DecimalFormat("0.0");
+	protected final DecimalFormat timeFormat = new DecimalFormat("0.0");
 
 	public ItemCompanion(Class<? extends EntityCompanion> companionClass)
 	{
@@ -83,9 +83,16 @@ public class ItemCompanion extends Item
 
 		if (respawn > 0)
 		{
-			boolean useMinutes = respawn > (20 * 60);
-
-			tooltip.add(TextFormatting.RED + "Respawns in " + this.respawnFormat.format(respawn / (useMinutes ? 20f * 60 : 20f)) + " " + (useMinutes ? "minutes" : "seconds"));
+			tooltip.add(TextFormatting.RED + "Respawns in " + this.parseTicks(respawn));
 		}
+
+		super.addInformation(stack, player, tooltip, advanced);
+	}
+
+	protected String parseTicks(long ticks)
+	{
+		boolean useMinutes = ticks > (20 * 60);
+
+		return this.timeFormat.format(ticks / (useMinutes ? 20f * 60 : 20f)) + " " + (useMinutes ? "minutes" : "seconds");
 	}
 }

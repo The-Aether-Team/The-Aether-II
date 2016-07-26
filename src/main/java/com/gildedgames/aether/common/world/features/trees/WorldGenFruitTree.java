@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.world.features.trees;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.construction.walls.BlockSkyrootWall;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -97,7 +98,7 @@ public class WorldGenFruitTree extends WorldGenAbstractTree
 			world.setBlockState(pos.setPos(x, y - 1, z), BlocksAether.aether_dirt.getDefaultState());
 
 			IBlockState air = Blocks.AIR.getDefaultState(),
-					wall = BlocksAether.skyroot_log_wall.getDefaultState(),
+					wall = BlocksAether.skyroot_log_wall.getDefaultState().withProperty(BlockSkyrootWall.PROPERTY_GENERATED, true),
 					log = BlocksAether.skyroot_log.getDefaultState();
 
 			for (int y2 = y; y2 <= y + height; y2++)
