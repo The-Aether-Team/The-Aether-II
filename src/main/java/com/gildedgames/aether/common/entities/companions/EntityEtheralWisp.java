@@ -1,32 +1,15 @@
 package com.gildedgames.aether.common.entities.companions;
 
-import com.gildedgames.aether.common.player.PlayerAether;
+import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
 
-public class EntityEtheralWisp extends EntityCompanion
+public class EntityEtheralWisp extends EntityBasicCompanion
 {
 	public EntityEtheralWisp(World worldIn)
 	{
 		super(worldIn);
 
-		this.setSize(1.0F, 1.55F);
-	}
-
-	@Override
-	public void tickEffects(PlayerAether aePlayer)
-	{
-
-	}
-
-	@Override
-	public void addEffects(PlayerAether aePlayer)
-	{
-
-	}
-
-	@Override
-	public void removeEffects(PlayerAether aePlayer)
-	{
-
+		this.setSize(0.75f, 2.0f);
+		this.setPotion(Potion.getPotionFromResourceLocation("invisibility"), 0);
 	}
 }

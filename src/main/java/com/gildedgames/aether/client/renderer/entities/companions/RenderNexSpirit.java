@@ -2,7 +2,6 @@ package com.gildedgames.aether.client.renderer.entities.companions;
 
 import com.gildedgames.aether.client.models.entities.companions.ModelNexSpirit;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.companions.EntityFrostpineTotem;
 import com.gildedgames.aether.common.entities.companions.EntityNexSpirit;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -18,13 +17,14 @@ public class RenderNexSpirit extends RenderCompanion<EntityNexSpirit>
 
 	public RenderNexSpirit(RenderManager renderManager)
 	{
-		super(renderManager, new ModelNexSpirit(), 0.35f, 2.0D);
+		super(renderManager, new ModelNexSpirit(), 0.2f, 1.5D);
 	}
 
 	@Override
 	protected void preRenderCallback(EntityNexSpirit entity, float partialTicks)
 	{
-//		GL11.glScalef(0.5f, 0.5f, 0.5f);
+		GL11.glScalef(0.5f, 0.5f, 0.5f);
+		GL11.glTranslatef(0.0f, -1.0f, 0.0f);
 
 		GL11.glTranslatef(0.0f, MathHelper.cos((entity.ticksExisted + partialTicks) / 10f) / 10f, -0.4f);
 	}

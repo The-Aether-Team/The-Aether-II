@@ -11,6 +11,8 @@ public class EntityShadeOfArkenzus extends EntityCompanion
 	public EntityShadeOfArkenzus(World worldIn)
 	{
 		super(worldIn);
+
+		this.setSize(0.5f, 1.1f);
 	}
 
 	@Override

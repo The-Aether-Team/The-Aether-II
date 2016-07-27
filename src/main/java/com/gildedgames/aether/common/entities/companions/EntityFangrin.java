@@ -9,7 +9,7 @@ public class EntityFangrin extends EntityCompanion
 	{
 		super(worldIn);
 
-		this.setSize(1.0F, 0.8F);
+		this.setSize(1.0F, 0.9F);
 	}
 
 	@Override

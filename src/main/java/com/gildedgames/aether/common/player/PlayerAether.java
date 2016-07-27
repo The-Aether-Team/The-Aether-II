@@ -16,14 +16,15 @@ import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
 import com.gildedgames.aether.common.items.tools.ItemValkyrieTool;
 import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.CompanionChangedPacket;
 import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -44,6 +45,9 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -59,7 +63,7 @@ public class PlayerAether implements IPlayerAetherCapability
 
 	private BlockPos linkingSchematicBoundary;
 
-	private EntityCompanion companion;
+	private int companionId = -1;
 
 	private boolean hasDoubleJumped;
 
@@ -71,9 +75,9 @@ public class PlayerAether implements IPlayerAetherCapability
 		this.equipmentInventory = new InventoryEquipment(this);
 	}
 
-	public static IPlayerAetherCapability getPlayer(Entity player)
+	public static PlayerAether getPlayer(Entity player)
 	{
-		return player.getCapability(AetherCapabilities.PLAYER_DATA, null);
+		return (PlayerAether) player.getCapability(AetherCapabilities.PLAYER_DATA, null);
 	}
 	
 	@Override
@@ -139,30 +143,32 @@ public class PlayerAether implements IPlayerAetherCapability
 	{
 		ItemStack companionStack = this.getCompanionItem();
 
+		EntityCompanion companion = this.getCompanionEntity();
+
 		if (companionStack != null)
 		{
-			if (this.companion != null)
+			if (companion != null)
 			{
-				if (this.companion.isDead)
+				if (companion.isDead)
 				{
-					if (!this.companion.wasDespawned())
+					if (!companion.wasDespawned())
 					{
 						ItemCompanion.setRespawnTimer(companionStack, this.player.worldObj, 20 * 240);
 					}
 
-					this.removeCompanion();
+					this.removeCompanion(true);
 				}
-				else if (((ItemCompanion) companionStack.getItem()).getCompanionClass() != this.companion.getClass())
+				else if (((ItemCompanion) companionStack.getItem()).getCompanionClass() != companion.getClass())
 				{
-					this.removeCompanion();
+					this.removeCompanion(true);
 				}
 				else
 				{
-					this.companion.tickEffects(this);
+					companion.tickEffects(this);
 				}
 			}
 
-			if (this.companion == null)
+			if (companion == null)
 			{
 				long respawnTimer = ItemCompanion.getTicksUntilRespawn(companionStack, this.player.worldObj);
 
@@ -172,9 +178,9 @@ public class PlayerAether implements IPlayerAetherCapability
 				}
 			}
 		}
-		else if (this.companion != null)
+		else if (companion != null)
 		{
-			this.removeCompanion();
+			this.removeCompanion(true);
 		}
 	}
 
@@ -210,24 +216,43 @@ public class PlayerAether implements IPlayerAetherCapability
 
 	private void spawnCompanion(ItemCompanion item)
 	{
-		this.companion = item.createCompanionEntity(this);
+		EntityCompanion companion = item.createCompanionEntity(this);
 
-		this.companion.setOwner(this.getPlayer());
-		this.companion.setPosition(this.getPlayer().posX, this.getPlayer().posY, this.getPlayer().posZ);
+		companion.setOwner(this.getPlayer());
+		companion.setPosition(this.getPlayer().posX, this.getPlayer().posY, this.getPlayer().posZ);
 
-		this.player.worldObj.spawnEntityInWorld(this.companion);
+		this.player.worldObj.spawnEntityInWorld(companion);
+		this.companionId = companion.getEntityId();
 
-		this.companion.addEffects(this);
+		NetworkingAether.sendPacketToPlayer(new CompanionChangedPacket(this.companionId), (EntityPlayerMP) this.player);
+
+		companion.addEffects(this);
 	}
 
-	private void removeCompanion()
+	private void removeCompanion(boolean notifyClient)
 	{
-		this.companion.removeEffects(this);
+		EntityCompanion companion = this.getCompanionEntity();
 
-		this.companion.setOwner(null);
-		this.companion.setDead();
+		if (companion != null)
+		{
+			companion.removeEffects(this);
 
-		this.companion = null;
+			companion.setOwner(null);
+			companion.setDead();
+
+			this.companionId = -1;
+
+			if (notifyClient)
+			{
+				NetworkingAether.sendPacketToWatching(new CompanionChangedPacket(this.companionId), this.getPlayer());
+			}
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void handleCompanionChange(int id)
+	{
+		this.companionId = id;
 	}
 
 	private void sendEquipmentChanges()
@@ -275,10 +300,7 @@ public class PlayerAether implements IPlayerAetherCapability
 			}
 		}
 
-		if (this.companion != null)
-		{
-			this.removeCompanion();
-		}
+		this.removeCompanion(true);
 
 		this.dropHeldBlock();
 	}
@@ -323,6 +345,26 @@ public class PlayerAether implements IPlayerAetherCapability
 	}
 
 	@Override
+	public void onTeleport(PlayerEvent.PlayerChangedDimensionEvent event)
+	{
+		this.removeCompanion(true);
+
+		this.updateCompanion();
+	}
+
+	@Override
+	public void onSpawned(PlayerEvent.PlayerLoggedInEvent event)
+	{
+		this.updateCompanion();
+	}
+
+	@Override
+	public void onDespawn(PlayerEvent.PlayerLoggedOutEvent event)
+	{
+		this.removeCompanion(false);
+	}
+
+	@Override
 	public IInventoryEquipment getEquipmentInventory()
 	{
 		return this.equipmentInventory;
@@ -350,7 +392,14 @@ public class PlayerAether implements IPlayerAetherCapability
 
 	public EntityCompanion getCompanionEntity()
 	{
-		return this.companion;
+		Entity entity = this.player.worldObj.getEntityByID(this.companionId);
+
+		if (entity != null && entity instanceof EntityCompanion)
+		{
+			return (EntityCompanion) entity;
+		}
+
+		return null;
 	}
 
 	public ItemStack getCompanionItem()

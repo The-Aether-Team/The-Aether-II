@@ -17,7 +17,7 @@ public class RenderFrostpineTotem extends RenderCompanion<EntityFrostpineTotem>
 
 	public RenderFrostpineTotem(RenderManager renderManager)
 	{
-		super(renderManager, new ModelFrostpineTotem(), 0.5f, 3.0D);
+		super(renderManager, new ModelFrostpineTotem(), 0.5f, 2.5D);
 	}
 
 	@Override

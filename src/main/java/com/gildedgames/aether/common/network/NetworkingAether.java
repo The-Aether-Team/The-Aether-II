@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.network;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.packets.AetherMovementPacket;
+import com.gildedgames.aether.common.network.packets.CompanionChangedPacket;
 import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityTracker;
@@ -26,6 +27,7 @@ public class NetworkingAether
 
 		instance.registerMessage(AetherMovementPacket.Handler.class, AetherMovementPacket.class, discriminant++, Side.SERVER);
 		instance.registerMessage(EquipmentChangedPacket.Handler.class, EquipmentChangedPacket.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(CompanionChangedPacket.Handler.class, CompanionChangedPacket.class, discriminant++, Side.CLIENT);
 	}
 
 	public static void sendPacketToPlayer(IMessage message, EntityPlayerMP player)
@@ -42,6 +44,12 @@ public class NetworkingAether
 		for (EntityPlayer player : tracker.getTrackingPlayers(entity))
 		{
 			NetworkingAether.sendPacketToPlayer(message, (EntityPlayerMP) player);
+		}
+
+		// Entities don't watch themselves, take special care here
+		if (entity instanceof EntityPlayer)
+		{
+			NetworkingAether.sendPacketToPlayer(message, (EntityPlayerMP) entity);
 		}
 	}
 

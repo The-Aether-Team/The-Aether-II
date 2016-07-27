@@ -8,6 +8,8 @@ public class EntityFleetingWisp extends EntityCompanion
 	public EntityFleetingWisp(World worldIn)
 	{
 		super(worldIn);
+
+		this.setSize(0.75f, 2.0f);
 	}
 
 	@Override

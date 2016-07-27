@@ -30,7 +30,7 @@ public class EntityAICompanionFollow extends EntityAIBase
 	@Override
 	public boolean shouldExecute()
 	{
-		return this.entity.getOwner() != null && this.entity.getDistanceSqToEntity(this.entity.getOwner()) > 18.0D;
+		return this.entity.getOwner() != null && this.entity.getDistanceSqToEntity(this.entity.getOwner()) > 12.0D;
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class EntityAICompanionFollow extends EntityAIBase
 		{
 			this.timeToRecalcPath = 10;
 
-			if (this.entity.getDistanceSqToEntity(this.entity.getOwner()) > 96.0D)
+			if (this.entity.getDistanceSqToEntity(this.entity.getOwner()) > 144.0D)
 			{
 				int i = MathHelper.floor_double(owner.posX) - 2;
 				int j = MathHelper.floor_double(owner.posZ) - 2;
@@ -110,7 +110,7 @@ public class EntityAICompanionFollow extends EntityAIBase
 			}
 			else
 			{
-				this.navigator.tryMoveToEntityLiving(owner, 0.4D);
+				this.navigator.tryMoveToEntityLiving(owner, 0.5D);
 			}
 		}
 	}

@@ -1,15 +1,19 @@
 package com.gildedgames.aether.client.gui.container;
 
+import com.gildedgames.aether.client.renderer.entities.companions.RenderCompanion;
 import com.gildedgames.aether.common.containers.ContainerEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
+import com.gildedgames.aether.common.entities.companions.EntityCompanion;
+import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 import java.util.Collections;
 
@@ -31,9 +35,9 @@ public class GuiEquipment extends GuiContainer
 
 //	private static final ResourceLocation TEXTURE_COINBAR = new ResourceLocation("aether", "textures/gui/coinbar.png");
 
-	private final IPlayerAetherCapability aePlayer;
+	private final PlayerAether aePlayer;
 
-	public GuiEquipment(IPlayerAetherCapability aePlayer)
+	public GuiEquipment(PlayerAether aePlayer)
 	{
 		super(new ContainerEquipment(aePlayer));
 
@@ -154,12 +158,25 @@ public class GuiEquipment extends GuiContainer
 
 	private void drawPlayer(int mouseX, int mouseY)
 	{
-//		boolean hasCompanion = player.currentCompanion != null;
-//		GuiInventory.drawEntityOnScreen(this.width / 2 - (hasCompanion ? 100 : 90), this.height / 2 + 40, 45, (this.guiLeft + 88) - mouseX, (this.guiTop + 42) - mouseY, this.mc.thePlayer);
+		EntityCompanion companion = this.aePlayer.getCompanionEntity();
 
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
-		GuiInventory.drawEntityOnScreen(this.width / 2 - 48, this.height / 2 + 25, 35, (this.guiLeft + 88) - mouseX, (this.guiTop + 42) - mouseY, this.mc.thePlayer);
+		GuiInventory.drawEntityOnScreen(this.width / 2 - (companion != null ? 55 : 48), this.height / 2 + 25, 35, (this.guiLeft + 88) - mouseX, (this.guiTop + 42) - mouseY, this.mc.thePlayer);
+
+		if (companion != null)
+		{
+			RenderCompanion.RENDER_FADE_ON_NEAR = false;
+
+			GL11.glPushMatrix();
+			GL11.glTranslatef(0.0f, 0.0f, 50.0f);
+
+			GuiInventory.drawEntityOnScreen(this.width / 2 - 40, this.height / 2 + 25, 20, (this.guiLeft + 145) - mouseX, (this.guiTop + 70) - mouseY, companion);
+
+			GL11.glPopMatrix();
+
+			RenderCompanion.RENDER_FADE_ON_NEAR = true;
+		}
 
 //		if (player.currentCompanion != null)
 //		{

@@ -14,6 +14,8 @@ public class EntityNexSpirit extends EntityCompanion
 	public EntityNexSpirit(World worldIn)
 	{
 		super(worldIn);
+
+		this.setSize(0.6f, 1.85f);
 	}
 
 	@Override

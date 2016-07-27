@@ -6,44 +6,13 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class EntityFrostpineTotem extends EntityCompanion
+public class EntityFrostpineTotem extends EntityBasicCompanion
 {
-	private final Potion potion = Potion.getPotionFromResourceLocation("night_vision");
-
 	public EntityFrostpineTotem(World worldIn)
 	{
 		super(worldIn);
-	}
 
-	@Override
-	public void tickEffects(PlayerAether aePlayer)
-	{
-		// Avoid sending potion packets every tick
-		if (this.ticksExisted % 100 == 0)
-		{
-			this.giveNightVision(aePlayer.getPlayer());
-		}
-	}
-
-	@Override
-	public void addEffects(PlayerAether aePlayer)
-	{
-		this.giveNightVision(aePlayer.getPlayer());
-	}
-
-	@Override
-	public void removeEffects(PlayerAether aePlayer)
-	{
-		this.removeNightVision(aePlayer.getPlayer());
-	}
-
-	private void giveNightVision(EntityPlayer player)
-	{
-		player.addPotionEffect(new PotionEffect(this.potion, 600, 0, true, false));
-	}
-
-	private void removeNightVision(EntityPlayer player)
-	{
-		player.removePotionEffect(this.potion);
+		this.setSize(0.9f, 2.1f);
+		this.setPotion(Potion.getPotionFromResourceLocation("night_vision"), 0);
 	}
 }

@@ -11,6 +11,8 @@ import org.lwjgl.opengl.GL11;
 
 public abstract class RenderCompanion<T extends EntityCompanion> extends RenderLiving<T>
 {
+	public static boolean RENDER_FADE_ON_NEAR = true;
+
 	private final double distanceLimit;
 
 	public RenderCompanion(RenderManager renderManager, ModelBase model, float shadowSize, double distanceLimit)
@@ -42,7 +44,7 @@ public abstract class RenderCompanion<T extends EntityCompanion> extends RenderL
 
 			float opacity = 1.0f;
 
-			if (owner != null)
+			if (owner != null && RenderCompanion.RENDER_FADE_ON_NEAR)
 			{
 				double distance = entity.getDistanceSqToEntity(owner);
 
@@ -51,6 +53,8 @@ public abstract class RenderCompanion<T extends EntityCompanion> extends RenderL
 
 			if (opacity < 1.0f)
 			{
+				GL11.glPushMatrix();
+
 				GlStateManager.enableBlend();
 
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -64,6 +68,10 @@ public abstract class RenderCompanion<T extends EntityCompanion> extends RenderL
 			if (opacity < 1.0f)
 			{
 				GlStateManager.disableBlend();
+
+				GL11.glPopMatrix();
+
+				GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 			}
 
 			if (isInvisible)

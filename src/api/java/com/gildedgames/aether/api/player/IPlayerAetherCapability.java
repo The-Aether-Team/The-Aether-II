@@ -10,6 +10,10 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 
 public interface IPlayerAetherCapability
 {
@@ -24,6 +28,12 @@ public interface IPlayerAetherCapability
 	void onHurt(LivingHurtEvent event);
 
 	void onFall(LivingFallEvent event);
+
+	void onTeleport(PlayerChangedDimensionEvent event);
+
+	void onSpawned(PlayerLoggedInEvent event);
+
+	void onDespawn(PlayerLoggedOutEvent event);
 
 	// [--- End of event handlers. ---]
 

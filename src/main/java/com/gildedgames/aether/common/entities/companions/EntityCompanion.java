@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.player.PlayerAether;
 import com.google.common.base.Optional;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
@@ -34,6 +35,14 @@ public abstract class EntityCompanion extends EntityLiving
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, new EntityAILookIdle(this));
 		this.tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
+	}
+
+	@Override
+	protected void applyEntityAttributes()
+	{
+		super.applyEntityAttributes();
+
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
 	}
 
 	@Override

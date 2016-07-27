@@ -15,13 +15,13 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -30,20 +30,15 @@ import java.util.List;
 public class PlayerAetherEvents
 {
 	@SubscribeEvent
-	public void onEntityJoinWorld(PlayerEvent.StartTracking event)
+	public void onPlayerStartTracking(PlayerEvent.StartTracking event)
 	{
-		if (event.getEntity().worldObj.isRemote || !(event.getEntity() instanceof EntityPlayer))
+		EntityPlayerMP player = (EntityPlayerMP) event.getEntity();
+
+		PlayerAether aePlayer = PlayerAether.getPlayer(player);
+
+		if (event.getTarget() instanceof EntityPlayer)
 		{
-			return;
-		}
-
-		EntityPlayer player = (EntityPlayer) event.getEntity();
-
-		IPlayerAetherCapability capability = PlayerAether.getPlayer(player);
-
-		if (capability != null)
-		{
-			IInventoryEquipment equipment = capability.getEquipmentInventory();
+			IInventoryEquipment equipment = aePlayer.getEquipmentInventory();
 
 			List<Pair<Integer, ItemStack>> items = new ArrayList<>();
 
@@ -57,7 +52,7 @@ public class PlayerAetherEvents
 				}
 			}
 
-			NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(items), (EntityPlayerMP) player);
+			NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(items), player);
 		}
 	}
 
@@ -124,6 +119,18 @@ public class PlayerAetherEvents
 		if (aePlayer != null)
 		{
 			aePlayer.onHurt(event);
+		}
+	}
+
+
+	@SubscribeEvent
+	public void onPlayerTeleported(PlayerChangedDimensionEvent event)
+	{
+		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.player);
+
+		if (aePlayer != null)
+		{
+			aePlayer.onTeleport(event);
 		}
 	}
 
