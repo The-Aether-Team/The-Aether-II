@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -69,18 +70,15 @@ public class ItemCrossbow extends Item
 	{
 		if (entityLiving.worldObj.isRemote)
 		{
-			return false;
+			return true;
 		}
 		
 		float speed = 1.0f;
 
 		EntityBolt dart = new EntityBolt(entityLiving.getEntityWorld(), entityLiving);
 		dart.setAim(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, speed * 2.0F, 1.0F);
-		
-		if (this instanceof ItemArkeniumCrossbow)
-		{
-			dart.setBoltAbility(BoltAbility.DESTROY_BLOCKS);
-		}
+		dart.setBoltAbility(stack.getItem() instanceof ItemArkeniumCrossbow ? BoltAbility.DESTROY_BLOCKS : BoltAbility.NORMAL);
+		dart.pickupStatus = EntityArrow.PickupStatus.ALLOWED;
 		
 		if (stack.getItemDamage() > 0)
 		{

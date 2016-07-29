@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.entities.projectiles;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
@@ -25,7 +26,7 @@ public class EntityBolt extends EntityArrow
 		NORMAL, DESTROY_BLOCKS
 	}
 	
-	private int blocksCanDestroy = 4;
+	private int blocksCanDestroy = 1;
 
 	public EntityBolt(World worldIn)
 	{
@@ -44,26 +45,31 @@ public class EntityBolt extends EntityArrow
 		{
 			Vec3d vec3d1 = new Vec3d(this.posX, this.posY, this.posZ);
 	        Vec3d vec3d = new Vec3d(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+
 			RayTraceResult raytraceresult = this.worldObj.rayTraceBlocks(vec3d1, vec3d, false, true, false);
 			
 			if (raytraceresult != null)
 			{
 				BlockPos blockpos = raytraceresult.getBlockPos();
-		        IBlockState iblockstate = this.worldObj.getBlockState(blockpos);
 
-		        if (iblockstate.getMaterial() != Material.AIR)
-		        {
-		        	if (this.blocksCanDestroy > 0)
-		    		{
-		    			this.worldObj.destroyBlock(blockpos, true);
-		    			
-		    			this.blocksCanDestroy--;
-		    		}
-		        	else
-		        	{
-		        		this.inGround = true;
-		        	}
-		        }
+		        IBlockState state = this.worldObj.getBlockState(blockpos);
+
+				if (this.shootingEntity instanceof EntityPlayer)
+				{
+					if (state.getMaterial() != Material.AIR && state.getMaterial().isToolNotRequired())
+					{
+						if (this.blocksCanDestroy > 0)
+						{
+							this.worldObj.destroyBlock(blockpos, true);
+
+							this.blocksCanDestroy--;
+						}
+						else
+						{
+							this.inGround = true;
+						}
+					}
+				}
 			}
 		}
 
