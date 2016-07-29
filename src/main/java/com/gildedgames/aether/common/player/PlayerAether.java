@@ -268,7 +268,7 @@ public class PlayerAether implements IPlayerAetherCapability
 				changes.add(Pair.of(i, stack));
 			}
 
-			NetworkingAether.sendPacketToWatching(new EquipmentChangedPacket(changes), this.player);
+			NetworkingAether.sendPacketToWatching(new EquipmentChangedPacket(this.player, changes), this.player);
 
 			this.equipmentInventory.getDirties().clear();
 		}

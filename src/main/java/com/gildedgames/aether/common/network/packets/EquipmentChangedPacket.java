@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.util.core.io.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
@@ -18,18 +19,24 @@ public class EquipmentChangedPacket implements IMessage
 {
 	private final List<Pair<Integer, ItemStack>> changes = new ArrayList<>();
 
+	private int entityId;
+
 	public EquipmentChangedPacket()
 	{
 
 	}
 
-	public EquipmentChangedPacket(int slot, ItemStack stack)
+	public EquipmentChangedPacket(Entity entity, int slot, ItemStack stack)
 	{
+		this.entityId = entity.getEntityId();
+
 		this.changes.add(Pair.of(slot, stack));
 	}
 
-	public EquipmentChangedPacket(List<Pair<Integer, ItemStack>> changes)
+	public EquipmentChangedPacket(Entity entity, List<Pair<Integer, ItemStack>> changes)
 	{
+		this.entityId = entity.getEntityId();
+		
 		this.changes.addAll(changes);
 	}
 
@@ -37,6 +44,8 @@ public class EquipmentChangedPacket implements IMessage
 	public void fromBytes(ByteBuf buf)
 	{
 		PacketBuffer pBuf = new PacketBuffer(buf);
+
+		this.entityId = pBuf.readInt();
 
 		int count = pBuf.readByte();
 
@@ -62,6 +71,7 @@ public class EquipmentChangedPacket implements IMessage
 	{
 		PacketBuffer pBuf = new PacketBuffer(buf);
 
+		pBuf.writeInt(this.entityId);
 		pBuf.writeByte(this.changes.size());
 
 		for (Pair<Integer, ItemStack> pair : this.changes)
@@ -76,11 +86,16 @@ public class EquipmentChangedPacket implements IMessage
 		@Override
 		public IMessage onMessage(EquipmentChangedPacket message, EntityPlayer player)
 		{
-			IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(player);
+			Entity entity = player.worldObj.getEntityByID(message.entityId);
 
-			for (Pair<Integer, ItemStack> pair : message.changes)
+			if (entity != null)
 			{
-				aePlayer.getEquipmentInventory().setInventorySlotContents(pair.getKey(), pair.getValue());
+				IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(player);
+
+				for (Pair<Integer, ItemStack> pair : message.changes)
+				{
+					aePlayer.getEquipmentInventory().setInventorySlotContents(pair.getKey(), pair.getValue());
+				}
 			}
 
 			return null;

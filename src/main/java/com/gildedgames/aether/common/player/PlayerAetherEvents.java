@@ -52,7 +52,7 @@ public class PlayerAetherEvents
 				}
 			}
 
-			NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(items), player);
+			NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(player, items), player);
 		}
 	}
 
