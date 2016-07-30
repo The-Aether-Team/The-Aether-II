@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.tile_entities;
 
 import com.gildedgames.aether.api.registry.altar.IAltarRecipe;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.state.IBlockState;
@@ -118,7 +119,14 @@ public class TileEntityAltar extends TileEntity implements ITickable
 
 	public EnumFacing getFacing()
 	{
-		return this.worldObj.getBlockState(this.pos).getValue(BlockAltar.PROPERTY_FACING);
+		IBlockState state = this.worldObj.getBlockState(this.pos);
+
+		if (state.getBlock() == BlocksAether.altar)
+		{
+			return state.getValue(BlockAltar.PROPERTY_FACING);
+		}
+
+		return EnumFacing.NORTH;
 	}
 
 	@Override
