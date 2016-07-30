@@ -124,7 +124,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 			{
 				if (this.getRidingEntity() == player)
 				{
-					this.startRiding(null, true);
+					this.dismountRidingEntity();
 
 					return EnumActionResult.SUCCESS;
 				}

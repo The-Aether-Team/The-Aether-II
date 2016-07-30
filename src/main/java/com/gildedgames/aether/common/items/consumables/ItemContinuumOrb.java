@@ -8,6 +8,9 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -17,11 +20,12 @@ public class ItemContinuumOrb extends Item
 {
 	private final ContinuumItemSelector selector = new ContinuumItemSelector();
 
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand)
 	{
 		if (world.isRemote)
 		{
-			return stack;
+			return new ActionResult<>(EnumActionResult.PASS, stack);
 		}
 
 		ItemStack randStack = this.selector.getRandomItem(world.rand);
@@ -35,10 +39,10 @@ public class ItemContinuumOrb extends Item
 				player.dropItem(randStack, false);
 			}
 
-			return stack;
+			return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 		}
 
-		return randStack;
+		return new ActionResult<>(EnumActionResult.SUCCESS, randStack);
 	}
 
 	public class ContinuumItemSelector implements IItemSelector
