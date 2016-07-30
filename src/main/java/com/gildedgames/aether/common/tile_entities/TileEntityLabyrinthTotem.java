@@ -36,16 +36,22 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 	{
 		if (this.worldObj.isRemote)
 		{
-			this.prevRenderTicks = this.renderTicks;
+			this.onClientUpdate();
+		}
+	}
 
-			this.renderTicks++;
+	@SideOnly(Side.CLIENT)
+	public void onClientUpdate()
+	{
+		this.prevRenderTicks = this.renderTicks;
 
-			SoundHandler soundHandler = Minecraft.getMinecraft().getSoundHandler();
+		this.renderTicks++;
 
-			if (this.ambiance == null || !soundHandler.isSoundPlaying(this.ambiance))
-			{
-				soundHandler.playSound(this.ambiance = new LabyrinthTotemSound(this.worldObj, this.pos));
-			}
+		SoundHandler soundHandler = Minecraft.getMinecraft().getSoundHandler();
+
+		if (this.ambiance == null || !soundHandler.isSoundPlaying(this.ambiance))
+		{
+			soundHandler.playSound(this.ambiance = new LabyrinthTotemSound(this.worldObj, this.pos));
 		}
 	}
 
