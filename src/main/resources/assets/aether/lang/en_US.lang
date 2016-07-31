@@ -89,6 +89,7 @@ tile.aether.labyrinth_chest.name=Labyrinth Chest
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
 item.aether.ambrosium_shard.name=Ambrosium Shard
+item.aether.ambrosium_chunk.name=Ambrosium Chunk
 item.aether.zanite_gemstone.name=Zanite Gemstone
 item.aether.continuum_orb.name=Continuum Orb
 item.aether.arkenium.name=Arkenium
@@ -174,6 +175,7 @@ item.aether.moa_music_disc.name=Moa Music Disc
 item.aether.aerwhale_music_disc.name=Aerwhale Music Disc
 item.aether.recording_892.name=Recording #892
 item.aether.healing_stone.name=Healing Stone
+item.aether.healing_stone_depleted.name=Depleted Healing Stone
 item.aether.dart_shooter.golden.name=Golden Dart Shooter
 item.aether.dart_shooter.enchanted.name=Enchanted Dart Shooter
 item.aether.dart_shooter.poison.name=Poison Dart Shooter

@@ -134,6 +134,7 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.golden_amber, "golden_amber");
 
 		registerItemModels(ItemsAether.ambrosium_shard, "ambrosium_shard");
+		registerItemModels(ItemsAether.ambrosium_chunk, "ambrosium_chunk");
 		registerItemModels(ItemsAether.continuum_orb, "continuum_orb");
 		registerItemModels(ItemsAether.zanite_gemstone, "zanite_gemstone");
 		registerItemModels(ItemsAether.arkenium, "arkenium");
@@ -205,6 +206,7 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.enchanted_blueberry, "enchanted_blueberry");
 		registerItemModels(ItemsAether.orange, "orange");
 		registerItemModels(ItemsAether.healing_stone, "healing_stone");
+		registerItemModels(ItemsAether.healing_stone_depleted, "healing_stone_depleted");
 		registerItemModels(ItemsAether.wyndberry, "wyndberry");
 		registerItemModels(ItemsAether.enchanted_wyndberry, "enchanted_wyndberry");
 		registerItemModels(ItemsAether.candy_corn, "candy_corn");

@@ -12,6 +12,7 @@ import com.gildedgames.aether.common.entities.companions.EntityEtheralWisp;
 import com.gildedgames.aether.common.entities.companions.EntitySoaringWisp;
 import com.gildedgames.aether.common.items.companions.ItemCompanion;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
+import com.gildedgames.aether.common.items.consumables.*;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -55,13 +56,6 @@ import com.gildedgames.aether.common.items.armor.ItemSentryBoots;
 import com.gildedgames.aether.common.items.armor.ItemValkyrieArmor;
 import com.gildedgames.aether.common.items.armor.ItemZaniteArmor;
 import com.gildedgames.aether.common.items.companions.ItemPinkBabySwet;
-import com.gildedgames.aether.common.items.consumables.ItemAmbrosiumShard;
-import com.gildedgames.aether.common.items.consumables.ItemContinuumOrb;
-import com.gildedgames.aether.common.items.consumables.ItemEnchantedWyndberry;
-import com.gildedgames.aether.common.items.consumables.ItemGummySwet;
-import com.gildedgames.aether.common.items.consumables.ItemSkyrootConsumableBucket;
-import com.gildedgames.aether.common.items.consumables.ItemStomperPop;
-import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
 import com.gildedgames.aether.common.items.effects.ItemEffects;
 import com.gildedgames.aether.common.items.miscellaneous.ItemShardOfLife;
 import com.gildedgames.aether.common.items.tools.EnumToolType;
@@ -97,7 +91,7 @@ public class ItemsAether
 {
 	public static Item skyroot_stick;
 
-	public static Item ambrosium_shard, zanite_gemstone, arkenium;
+	public static Item ambrosium_shard, ambrosium_chunk, zanite_gemstone, arkenium;
 
 	public static ItemSkyrootTool skyroot_axe, skyroot_pickaxe, skyroot_shovel;
 
@@ -142,6 +136,8 @@ public class ItemsAether
 	public static ItemAetherRecord valkyrie_music_disc, labyrinth_music_disc, moa_music_disc, aerwhale_music_disc, recording_892;
 
 	public static ItemFood healing_stone;
+
+	public static Item healing_stone_depleted;
 
 	public static ItemDartShooter dart_shooter;
 
@@ -207,6 +203,7 @@ public class ItemsAether
 	{
 		skyroot_stick = registerItem("skyroot_stick", new Item(), AetherCreativeTabs.tabMaterials);
 		ambrosium_shard = registerItem("ambrosium_shard", new ItemAmbrosiumShard(), AetherCreativeTabs.tabMaterials);
+		ambrosium_chunk = registerItem("ambrosium_chunk", new ItemAmbrosiumChunk(), AetherCreativeTabs.tabMaterials);
 		zanite_gemstone = registerItem("zanite_gemstone", new Item(), AetherCreativeTabs.tabMaterials);
 		arkenium = registerItem("arkenium", new Item(), AetherCreativeTabs.tabMaterials);
 		icestone = registerItem("icestone", new Item(), AetherCreativeTabs.tabMaterials);
@@ -330,6 +327,7 @@ public class ItemsAether
 		aerwhale_music_disc = registerItem("aerwhale_music_disc", new ItemAetherRecord("aerwhale", SoundsAether.record_aerwhale), AetherCreativeTabs.tabMiscellaneous);
 		recording_892 = registerItem("recording_892", new ItemAetherRecord("recording_892", SoundsAether.record_recording_892), AetherCreativeTabs.tabMiscellaneous);
 
+		healing_stone_depleted = registerItem("healing_stone_depleted", new Item(), AetherCreativeTabs.tabConsumables);
 		healing_stone = registerItem("healing_stone", new ItemFood(0, 1.2f, false).setAlwaysEdible().setPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("regeneration"), 200, 0), 1.0f), AetherCreativeTabs.tabConsumables);
 
 		dart_shooter = registerItem("dart_shooter", new ItemDartShooter(), AetherCreativeTabs.tabWeapons);

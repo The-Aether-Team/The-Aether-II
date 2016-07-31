@@ -116,8 +116,8 @@ public class RecipesAether implements IAltarRecipeRegistry
 				'X', new ItemStack(ItemsAether.zanite_gemstone));
 
         // Zanite Uncraft
-        registerShapedRecipe(new ItemStack(ItemsAether.zanite_gemstone), "X",
-                'X', new ItemStack(BlocksAether.zanite_block, 9));
+        registerShapedRecipe(new ItemStack(ItemsAether.zanite_gemstone, 9), "X",
+                'X', new ItemStack(BlocksAether.zanite_block));
 
 		// Holystone Brick
 		registerShapedRecipe(new ItemStack(BlocksAether.holystone_brick, 4), "XX", "XX",
@@ -166,6 +166,20 @@ public class RecipesAether implements IAltarRecipeRegistry
         registerShapedRecipe(new ItemStack(BlocksAether.ambrosium_torch, 8), " Y", " X",
                 'X', new ItemStack(ItemsAether.skyroot_stick),
                 'Y', new ItemStack(ItemsAether.ambrosium_shard));
+
+		// Ambrosium Chunk
+		registerShapedRecipe(new ItemStack(ItemsAether.ambrosium_chunk, 1), "XX", "XX",
+				'X', new ItemStack(ItemsAether.ambrosium_shard));
+
+		// Ambrosium Chunk Uncraft
+		registerShapedRecipe(new ItemStack(ItemsAether.ambrosium_shard, 4), "X",
+				'X', new ItemStack(ItemsAether.ambrosium_chunk));
+
+		// Depleted Healing Stone
+		registerShapedRecipe(new ItemStack(ItemsAether.healing_stone_depleted, 1), "ZXZ", " X ", " Y ",
+				'X', new ItemStack(ItemsAether.ambrosium_chunk),
+				'Y', new ItemStack(ItemsAether.ambrosium_shard),
+				'Z', new ItemStack(BlocksAether.holystone));
 
         // Holystone Furnace
         registerShapedRecipe(new ItemStack(BlocksAether.holystone_furnace, 1), "XXX", "X X", "XXX",
@@ -419,10 +433,6 @@ public class RecipesAether implements IAltarRecipeRegistry
 		this.registerAltarRecipe(new AltarEnchantRecipe(1, new ItemStack(BlocksAether.quicksoil),
                 new ItemStack(BlocksAether.quicksoil_glass)));
 
-        // Healing Stone
-		this.registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(BlocksAether.holystone),
-				new ItemStack(ItemsAether.healing_stone)));
-
 		// Enchanted Gravitite
 		this.registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(BlocksAether.gravitite_ore),
                 new ItemStack(BlocksAether.enchanted_gravitite)));
@@ -445,6 +455,10 @@ public class RecipesAether implements IAltarRecipeRegistry
 
 		// Tool Repair Recipes
 		this.registerAltarRecipe(new AltarRepairRecipe());
+
+		// Healing Stone
+		this.registerAltarRecipe(new AltarEnchantRecipe(5, new ItemStack(ItemsAether.healing_stone_depleted),
+				new ItemStack(ItemsAether.healing_stone)));
 	}
 
 	private static void registerShapelessRecipe(ItemStack output, Object... stacks)
