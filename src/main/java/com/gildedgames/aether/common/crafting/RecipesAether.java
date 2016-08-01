@@ -127,10 +127,7 @@ public class RecipesAether implements IAltarRecipeRegistry
 		registerShapedRecipe(new ItemStack(BlocksAether.icestone_bricks, 4), "XX", "XX",
 				'X', new ItemStack(ItemsAether.icestone));
 
-		// Fences and Walls
-		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_fence, 3), "XYX", "XYX",
-				'X', new ItemStack(BlocksAether.skyroot_planks),
-				'Y', new ItemStack(ItemsAether.skyroot_stick));
+		// Walls
 
 		registerShapedRecipe(new ItemStack(BlocksAether.holystone_wall, 6), "XXX", "XXX",
 				'X', new ItemStack(BlocksAether.holystone));
@@ -154,8 +151,8 @@ public class RecipesAether implements IAltarRecipeRegistry
 
         // Gates
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_fence_gate, 1), "YXY", "YXY",
-				'Y', new ItemStack(ItemsAether.skyroot_stick),
-				'X', new ItemStack(BlocksAether.skyroot_planks));
+				'X', new ItemStack(ItemsAether.skyroot_stick),
+				'Y', new ItemStack(BlocksAether.skyroot_planks));
 
 		// Sign
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_sign, 3), "XXX", "XXX", " Y ",
