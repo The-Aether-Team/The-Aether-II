@@ -128,11 +128,11 @@ public class EntityAechorPlant extends EntityMob
 	@Override
 	public EnumActionResult applyPlayerInteraction(EntityPlayer player, Vec3d vec, ItemStack stack, EnumHand hand)
 	{
-		if (stack != null && stack.getItem() == ItemsAether.skyroot_bucket)
+		if (!player.capabilities.isCreativeMode && stack != null && stack.getItem() == ItemsAether.skyroot_bucket)
 		{
 			if (this.getPoisonLeft() > 0)
 			{
-				PlayerUtil.fillBucketInHand(player, new ItemStack(ItemsAether.skyroot_poison_bucket));
+				PlayerUtil.fillBucketInHand(player, stack, new ItemStack(ItemsAether.skyroot_poison_bucket));
 
 				this.setPoisonLeft(this.getPoisonLeft() - 1);
 

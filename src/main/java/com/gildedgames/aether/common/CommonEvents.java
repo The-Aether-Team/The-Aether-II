@@ -50,7 +50,7 @@ public class CommonEvents
 	@SubscribeEvent
 	public void onPlayerUseBucket(FillBucketEvent event)
 	{
-		if (event.getTarget().typeOfHit == RayTraceResult.Type.BLOCK)
+		if (event.getTarget() != null && event.getTarget().typeOfHit == RayTraceResult.Type.BLOCK)
 		{
 			if (FluidContainerRegistry.isFilledContainer(event.getEmptyBucket()))
 			{
@@ -226,7 +226,7 @@ public class CommonEvents
 
 			if (stack != null && stack.getItem() == ItemsAether.skyroot_bucket)
 			{
-				PlayerUtil.fillBucketInHand(event.getEntityPlayer(), new ItemStack(ItemsAether.skyroot_milk_bucket));
+				PlayerUtil.fillBucketInHand(event.getEntityPlayer(), event.getItemStack(), new ItemStack(ItemsAether.skyroot_milk_bucket));
 			}
 		}
 	}

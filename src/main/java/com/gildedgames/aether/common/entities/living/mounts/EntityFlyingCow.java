@@ -95,7 +95,7 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 	{
 		EnumActionResult result = super.applyPlayerInteraction(player, vec, stack, hand);
 
-		if (result == EnumActionResult.SUCCESS)
+		if (player.capabilities.isCreativeMode || result == EnumActionResult.SUCCESS)
 		{
 			return result;
 		}
@@ -115,7 +115,7 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 
 			if (fillStack != null)
 			{
-				PlayerUtil.fillBucketInHand(player, fillStack);
+				PlayerUtil.fillBucketInHand(player, stack, fillStack);
 			}
 
 			return EnumActionResult.SUCCESS;

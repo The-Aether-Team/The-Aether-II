@@ -52,23 +52,18 @@ public class PlayerUtil
 		return null;
 	}
 
-	public static void fillBucketInHand(EntityPlayer player, ItemStack fillBucket)
+	public static void fillBucketInHand(EntityPlayer player, ItemStack emptyBucket, ItemStack fillBucket)
 	{
-		ItemStack stack = player.getActiveItemStack();
-
-		if (stack.stackSize == 1)
+		if (emptyBucket.stackSize == 1)
 		{
 			player.inventory.setInventorySlotContents(player.inventory.currentItem, fillBucket);
 		}
 		else
 		{
-			if (!player.capabilities.isCreativeMode)
-			{
-				stack.stackSize--;
+			emptyBucket.stackSize--;
 
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, stack);
-			}
-
+			player.inventory.setInventorySlotContents(player.inventory.currentItem, emptyBucket);
+			
 			if (!player.inventory.addItemStackToInventory(fillBucket))
 			{
 				player.dropItem(fillBucket, false);
