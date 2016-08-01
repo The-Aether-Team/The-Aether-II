@@ -13,6 +13,7 @@ import com.gildedgames.aether.common.entities.companions.EntitySoaringWisp;
 import com.gildedgames.aether.common.items.companions.ItemCompanion;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import com.gildedgames.aether.common.items.consumables.*;
+import com.gildedgames.aether.common.items.weapons.swords.*;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -77,21 +78,13 @@ import com.gildedgames.aether.common.items.weapons.crossbow.ItemHolystoneCrossbo
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemSkyrootCrossbow;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemVampireCrossbow;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemZaniteCrossbow;
-import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
-import com.gildedgames.aether.common.items.weapons.swords.ItemArkeniumSword;
-import com.gildedgames.aether.common.items.weapons.swords.ItemCandyCaneSword;
-import com.gildedgames.aether.common.items.weapons.swords.ItemElementalSword;
-import com.gildedgames.aether.common.items.weapons.swords.ItemGravititeSword;
-import com.gildedgames.aether.common.items.weapons.swords.ItemHolystoneSword;
-import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
-import com.gildedgames.aether.common.items.weapons.swords.ItemZaniteSword;
 import com.google.common.collect.Lists;
 
 public class ItemsAether
 {
 	public static Item skyroot_stick;
 
-	public static Item ambrosium_shard, ambrosium_chunk, zanite_gemstone, arkenium;
+	public static Item ambrosium_shard, ambrosium_chunk, zanite_gemstone, arkenium, arkenium_strip;
 
 	public static ItemSkyrootTool skyroot_axe, skyroot_pickaxe, skyroot_shovel;
 
@@ -193,7 +186,7 @@ public class ItemsAether
 
     public static Item shard_of_life;
     
-	public static ItemAetherShield skyroot_shield;
+	public static ItemAetherShield skyroot_shield, holystone_shield, zanite_shield, arkenium_shield, gravitite_shield;
 
 	public static ItemCompanion ethereal_stone, fleeting_stone, soaring_stone;
 
@@ -206,6 +199,7 @@ public class ItemsAether
 		ambrosium_chunk = registerItem("ambrosium_chunk", new ItemAmbrosiumChunk(), AetherCreativeTabs.tabMaterials);
 		zanite_gemstone = registerItem("zanite_gemstone", new Item(), AetherCreativeTabs.tabMaterials);
 		arkenium = registerItem("arkenium", new Item(), AetherCreativeTabs.tabMaterials);
+        arkenium_strip = registerItem("arkenium_strip", new Item(), AetherCreativeTabs.tabMaterials);
 		icestone = registerItem("icestone", new Item(), AetherCreativeTabs.tabMaterials);
 		continuum_orb = registerItem("continuum_orb", new ItemContinuumOrb(), AetherCreativeTabs.tabMaterials);
 
@@ -219,21 +213,25 @@ public class ItemsAether
 		holystone_pickaxe = registerItem("holystone_pickaxe", new ItemHolystoneTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
 		holystone_shovel = registerItem("holystone_shovel", new ItemHolystoneTool(EnumToolType.SHOVEL, 1.5F, -3.0F));
 		holystone_sword = registerItem("holystone_sword", new ItemHolystoneSword());
+        holystone_shield = registerItem("holystone_shield", new ItemAetherShield(), AetherCreativeTabs.tabWeapons);
 
 		zanite_axe = registerItem("zanite_axe", new ItemZaniteTool(EnumToolType.AXE, 8.0F, -3.1F));
 		zanite_pickaxe = registerItem("zanite_pickaxe", new ItemZaniteTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
 		zanite_shovel = registerItem("zanite_shovel", new ItemZaniteTool(EnumToolType.SHOVEL, 1.5F, -3.0F));
 		zanite_sword = registerItem("zanite_sword", new ItemZaniteSword());
+        zanite_shield = registerItem("zanite_shield", new ItemAetherShield(), AetherCreativeTabs.tabWeapons);
 
         arkenium_axe = registerItem("arkenium_axe", new ItemArkeniumTool(EnumToolType.AXE, 8.0F, -3.3F));
         arkenium_pickaxe = registerItem("arkenium_pickaxe", new ItemArkeniumTool(EnumToolType.PICKAXE, 4.0F, -3.2F));
         arkenium_shovel = registerItem("arkenium_shovel", new ItemArkeniumTool(EnumToolType.SHOVEL, 4.5F, -3.3F));
         arkenium_sword = registerItem("arkenium_sword", new ItemArkeniumSword());
+        arkenium_shield = registerItem("arkenium_shield", new ItemAetherShield(), AetherCreativeTabs.tabWeapons);
 
 		gravitite_axe = registerItem("gravitite_axe", new ItemGravititeTool(EnumToolType.AXE, 8.0F, -3.0F));
 		gravitite_pickaxe = registerItem("gravitite_pickaxe", new ItemGravititeTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
 		gravitite_shovel = registerItem("gravitite_shovel", new ItemGravititeTool(EnumToolType.SHOVEL, 1.5F, -3.0F));
 		gravitite_sword = registerItem("gravitite_sword", new ItemGravititeSword());
+        gravitite_shield = registerItem("gravitite_shield", new ItemAetherShield(), AetherCreativeTabs.tabWeapons);
 
 		valkyrie_axe = registerItem("valkyrie_axe", new ItemValkyrieTool(EnumToolType.AXE, 8.0F, -3.0F));
 		valkyrie_pickaxe = registerItem("valkyrie_pickaxe", new ItemValkyrieTool(EnumToolType.PICKAXE, 1.0F, -2.8F));

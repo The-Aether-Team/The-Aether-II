@@ -60,6 +60,10 @@ public class RecipesAether implements IAltarRecipeRegistry
         registerShapedRecipe(new ItemStack(BlocksAether.altar), "AZA", " H ", "HHH",
 				'H', new ItemStack(BlocksAether.holystone), 'Z', new ItemStack(ItemsAether.zanite_gemstone), 'A', new ItemStack(ItemsAether.arkenium));
 
+		// Arkenium Strip
+		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_strip, 4), "X", "X",
+				'X', new ItemStack(ItemsAether.arkenium));
+
 		// Skyroot Door
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_door, 3), "XX", "XX", "XX",
 				'X', new ItemStack(BlocksAether.skyroot_planks));
@@ -187,31 +191,31 @@ public class RecipesAether implements IAltarRecipeRegistry
 				'W', new ItemStack(ItemsAether.skyroot_stick),
 				'X', new ItemStack(Items.STRING),
 				'Y', new ItemStack(BlocksAether.skyroot_planks),
-				'Z', new ItemStack(ItemsAether.arkenium));
+				'Z', new ItemStack(ItemsAether.arkenium_strip));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.holystone_crossbow), "ZZY", "XYZ", "WXZ",
 				'W', new ItemStack(ItemsAether.skyroot_stick),
 				'X', new ItemStack(Items.STRING),
 				'Y', new ItemStack(BlocksAether.holystone),
-				'Z', new ItemStack(ItemsAether.arkenium));
+				'Z', new ItemStack(ItemsAether.arkenium_strip));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.zanite_crossbow), "ZZY", "XYZ", "WXZ",
 				'W', new ItemStack(ItemsAether.skyroot_stick),
 				'X', new ItemStack(Items.STRING),
 				'Y', new ItemStack(ItemsAether.zanite_gemstone),
-				'Z', new ItemStack(ItemsAether.arkenium));
+				'Z', new ItemStack(ItemsAether.arkenium_strip));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_crossbow), "ZZY", "XYZ", "WXZ",
 				'W', new ItemStack(ItemsAether.skyroot_stick),
 				'X', new ItemStack(Items.STRING),
 				'Y', new ItemStack(ItemsAether.arkenium),
-				'Z', new ItemStack(ItemsAether.arkenium));
+				'Z', new ItemStack(ItemsAether.arkenium_strip));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.gravitite_crossbow), "ZZY", "XYZ", "WXZ",
 				'W', new ItemStack(ItemsAether.skyroot_stick),
 				'X', new ItemStack(Items.STRING),
 				'Y', new ItemStack(BlocksAether.enchanted_gravitite),
-				'Z', new ItemStack(ItemsAether.arkenium));
+				'Z', new ItemStack(ItemsAether.arkenium_strip));
 
 		// Crossbow Bolts
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.STONE.ordinal()), " Y", "X ",
@@ -221,10 +225,26 @@ public class RecipesAether implements IAltarRecipeRegistry
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(ItemsAether.zanite_gemstone));
 
-		// Skyroot Shield
+		// Shields
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_shield), "YXY", "YYY", " Y ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(BlocksAether.skyroot_planks));
+
+		registerShapedRecipe(new ItemStack(ItemsAether.holystone_shield), "YXY", "YYY", " Y ",
+				'X', new ItemStack(ItemsAether.skyroot_stick),
+				'Y', new ItemStack(BlocksAether.holystone));
+
+		registerShapedRecipe(new ItemStack(ItemsAether.zanite_shield), "YXY", "YYY", " Y ",
+				'X', new ItemStack(ItemsAether.skyroot_stick),
+				'Y', new ItemStack(ItemsAether.zanite_gemstone));
+
+		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_shield), "YXY", "YYY", " Y ",
+				'X', new ItemStack(ItemsAether.arkenium_strip),
+				'Y', new ItemStack(ItemsAether.arkenium));
+
+		registerShapedRecipe(new ItemStack(ItemsAether.gravitite_shield), "YXY", "YYY", " Y ",
+				'X', new ItemStack(ItemsAether.arkenium_strip),
+				'Y', new ItemStack(BlocksAether.enchanted_gravitite));
 	}
 
 	private void registerToolRecipes()
@@ -236,6 +256,7 @@ public class RecipesAether implements IAltarRecipeRegistry
 		ItemStack zanite = new ItemStack(ItemsAether.zanite_gemstone);
 		ItemStack gravitite = new ItemStack(BlocksAether.enchanted_gravitite);
 		ItemStack arkenium = new ItemStack(ItemsAether.arkenium);
+		ItemStack ark_strip = new ItemStack(ItemsAether.arkenium_strip);
 
 		// Skyroot Tools
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_axe), "XX ", "XY ", " Y ",
@@ -301,6 +322,7 @@ public class RecipesAether implements IAltarRecipeRegistry
 
 		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_sword), "X", "X", "Y",
 				'X', arkenium, 'Y', skyrootStick);
+
 	}
 
 	private void registerArmorRecipes()

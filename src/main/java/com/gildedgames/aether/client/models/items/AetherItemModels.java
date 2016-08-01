@@ -138,6 +138,7 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.continuum_orb, "continuum_orb");
 		registerItemModels(ItemsAether.zanite_gemstone, "zanite_gemstone");
 		registerItemModels(ItemsAether.arkenium, "arkenium");
+		registerItemModels(ItemsAether.arkenium_strip, "arkenium_strip");
 
 		registerItemModels(ItemsAether.skyroot_pickaxe, "tools/skyroot_pickaxe");
 		registerItemModels(ItemsAether.skyroot_axe, "tools/skyroot_axe");
@@ -393,6 +394,10 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.shard_of_life, "miscellaneous/shard_of_life");
 
 		registerItemModels(ItemsAether.skyroot_shield, "skyroot_shield");
+		registerItemModels(ItemsAether.holystone_shield, "holystone_shield");
+		registerItemModels(ItemsAether.zanite_shield, "zanite_shield");
+		registerItemModels(ItemsAether.arkenium_shield, "arkenium_shield");
+		registerItemModels(ItemsAether.gravitite_shield, "gravitite_shield");
 
 		registerItemModels(ItemsAether.ethereal_stone, "companions/ethereal_stone");
 		registerItemModels(ItemsAether.fleeting_stone, "companions/fleeting_stone");

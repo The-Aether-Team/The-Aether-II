@@ -1,0 +1,30 @@
+{
+	"parent": "aether:item/zanite_shield_base",
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [ 45, 135, 0 ],
+			"translation": [ 2, -4, 3 ],
+			"scale": [ 1, 1, 1 ]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [ 45, 135, 0 ],
+			"translation": [ 2, -4, 3 ],
+			"scale": [ 1, 1, 1 ]
+		},
+		"firstperson_righthand": {
+			"rotation": [ 0, 180, -5 ],
+			"translation": [ -3, -5, 1 ],
+			"scale": [ 1.25, 1.25, 1.25 ]
+		},
+		"firstperson_lefthand": {
+			"rotation": [ 0, 180, -5 ],
+			"translation": [ -3, -5, 1 ],
+			"scale": [ 1.25, 1.25, 1.25 ]
+		},
+		"gui": {
+			"rotation": [ 15, -25, -5 ],
+			"translation": [ 0, 0, 0 ],
+			"scale": [ 0.65, 0.65, 0.65 ]
+		}
+	}
+}
