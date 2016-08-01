@@ -20,6 +20,7 @@ import com.gildedgames.aether.common.blocks.construction.signs.BlockStandingSkyr
 import com.gildedgames.aether.common.blocks.construction.signs.BlockWallSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockAerogelWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockAetherWall;
+import com.gildedgames.aether.common.blocks.construction.walls.BlockDivineWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockSkyrootWall;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockSkyrootWorkbench;
@@ -155,7 +156,6 @@ public class BlocksAether
 
 	public static BlockAetherWall holystone_wall, mossy_holystone_wall, holystone_brick_wall, carved_stone_wall, icestone_wall, aerogel_wall, skyroot_log_wall,
 									divine_stone_wall, sentry_stone_wall, divine_sentry_wall;
-
 
 	public static BlockTeleporter labyrinth_totem;
 
@@ -300,8 +300,8 @@ public class BlocksAether
 		labyrinth_headstone = registerBlock("labyrinth_headstone", new BlockLabyrinth(), AetherCreativeTabs.tabBlocks);
 
 		sentry_stone_wall = registerBlock("sentry_stone_wall", new BlockAetherWall(BlocksAether.labyrinth_lightstone.getDefaultState(), 1.0f, 10.0f).setGlows(true), AetherCreativeTabs.tabBlocks);
-		divine_sentry_wall = registerBlock("divine_sentry_wall", new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
-		divine_stone_wall = registerBlock("divine_stone_wall", new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
+		divine_sentry_wall = registerBlock("divine_sentry_wall", new BlockDivineWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
+		divine_stone_wall = registerBlock("divine_stone_wall", new BlockDivineWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 
 		labyrinth_eye = registerBlock("labyrinth_eye", new BlockLabyrinthEye(), AetherCreativeTabs.tabBlocks);
 
