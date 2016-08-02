@@ -384,11 +384,6 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.labyrinth_headstone, "labyrinth_headstone");
 		registerItemModels(BlocksAether.labyrinth_chest, "labyrinth_chest");
 
-		registerItemModels(BlocksAether.labyrinth_eye, "labyrinth_eye");
-		registerItemModels(BlocksAether.wildcard, "wildcard");
-		registerItemModels(BlocksAether.schematicBoundary, "schematicBoundary");
-		registerItemModels(BlocksAether.linkedSchematicBoundary, "linkedSchematicBoundary");
-
 		registerItemModels(ItemsAether.pink_baby_swet, "companions/pink_baby_swet");
 
 		registerItemModels(ItemsAether.shard_of_life, "miscellaneous/shard_of_life");

@@ -16,7 +16,6 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.aether.common.player.PlayerAetherEvents;
 import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
-import com.gildedgames.aether.common.tile_entities.TileEntityBoundary.FetchedEntity;
 import com.gildedgames.aether.common.world.WorldProviderAether;
 import com.gildedgames.aether.common.world.chunk.PlacementFlagProvider;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
@@ -90,7 +89,6 @@ public class CommonProxy
 		TabModule.api().getInventoryGroup().registerServerTab(new TabEquipment());
 
 		AetherCore.srl().registerSerialization(0, DungeonInstance.class, new Instantiator(DungeonInstance.class));
-		AetherCore.srl().registerSerialization(1, FetchedEntity.class, new Instantiator(FetchedEntity.class));
 	}
 
 	public void init(FMLInitializationEvent event)

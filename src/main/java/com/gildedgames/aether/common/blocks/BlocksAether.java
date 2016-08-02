@@ -5,17 +5,17 @@ import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.blocks.construction.BlockAmbrosiumTorch;
-import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystoneButton;
-import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystonePressurePlate;
 import com.gildedgames.aether.common.blocks.construction.BlockQuicksoilGlass;
-import com.gildedgames.aether.common.blocks.construction.redstone.BlockSkyrootButton;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootChest;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootDoor;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootFence;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootFenceGate;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootLadder;
-import com.gildedgames.aether.common.blocks.construction.redstone.BlockSkyrootPressurePlate;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootTrapDoor;
+import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystoneButton;
+import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystonePressurePlate;
+import com.gildedgames.aether.common.blocks.construction.redstone.BlockSkyrootButton;
+import com.gildedgames.aether.common.blocks.construction.redstone.BlockSkyrootPressurePlate;
 import com.gildedgames.aether.common.blocks.construction.signs.BlockStandingSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.signs.BlockWallSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockAerogelWall;
@@ -24,15 +24,12 @@ import com.gildedgames.aether.common.blocks.construction.walls.BlockDivineWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockSkyrootWall;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockSkyrootWorkbench;
-import com.gildedgames.aether.common.blocks.dungeon.BlockBoundary;
 import com.gildedgames.aether.common.blocks.dungeon.BlockDivine;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinth;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthChest;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthDoor;
-import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthEye;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthPillar;
 import com.gildedgames.aether.common.blocks.dungeon.BlockTeleporter;
-import com.gildedgames.aether.common.blocks.dungeon.BlockWildcard;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAerogel;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
@@ -302,14 +299,7 @@ public class BlocksAether
 		sentry_stone_wall = registerBlock("sentry_stone_wall", new BlockAetherWall(BlocksAether.labyrinth_lightstone.getDefaultState(), 1.0f, 10.0f).setGlows(true), AetherCreativeTabs.tabBlocks);
 		divine_sentry_wall = registerBlock("divine_sentry_wall", new BlockDivineWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		divine_stone_wall = registerBlock("divine_stone_wall", new BlockDivineWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
-
-		labyrinth_eye = registerBlock("labyrinth_eye", new BlockLabyrinthEye(), AetherCreativeTabs.tabBlocks);
-
-		wildcard = registerBlock("wildcard", new BlockWildcard(), AetherCreativeTabs.tabBlocks);
 		
-		schematicBoundary = registerBlock("schematicBoundary", new BlockBoundary(), AetherCreativeTabs.tabBlocks);
-		linkedSchematicBoundary = registerBlock("linkedSchematicBoundary", new BlockBoundary());
-
 		registerHarvestLevels();
 	}
 
