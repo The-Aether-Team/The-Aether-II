@@ -4,6 +4,9 @@ import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt.BoltAbility;
 import com.gildedgames.aether.common.items.ItemsAether;
 
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentKnockback;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -14,6 +17,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemCrossbow extends Item
 {
@@ -49,6 +54,15 @@ public class ItemCrossbow extends Item
 		}
 
 		return false;
+	}
+
+	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	{
+		if (!this.hasEffect(stack))
+		{
+			stack.addEnchantment(Enchantment.getEnchantmentByID(19), 2);
+		}
 	}
 
 	@Override
@@ -140,5 +154,17 @@ public class ItemCrossbow extends Item
 	public int getMaxItemUseDuration(ItemStack stack)
 	{
 		return this.DURATION; //80~4 seconds
+	}
+
+	@SideOnly(Side.CLIENT)
+	public boolean hasEffect(ItemStack stack)
+	{
+		return stack.isItemEnchanted();
+	}
+
+	@Override
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
+	{
+		return false;
 	}
 }
