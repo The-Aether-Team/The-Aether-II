@@ -4,7 +4,7 @@ public class ItemZaniteCrossbow extends ItemCrossbow
 {
 	public ItemZaniteCrossbow()
 	{
-		this.setDamageValue(0);
-		this.setKnockBackValue(0);
+		this.setDamageValue(1.5F);
+		this.setKnockBackValue(0.5F);
 	}
 }

@@ -4,7 +4,7 @@ public class ItemVampireCrossbow extends ItemCrossbow
 {
 	public ItemVampireCrossbow()
 	{
-		this.setDamageValue(0);
-		this.setKnockBackValue(0);
+		this.setDamageValue(2.5F);
+		this.setKnockBackValue(0.7F);
 	}
 }

@@ -4,7 +4,7 @@ public class ItemHolystoneCrossbow extends ItemCrossbow
 {
 	public ItemHolystoneCrossbow()
 	{
-		this.setDamageValue(0);
-		this.setKnockBackValue(0);
+		this.setDamageValue(1);
+		this.setKnockBackValue(0.7F);
 	}
 }

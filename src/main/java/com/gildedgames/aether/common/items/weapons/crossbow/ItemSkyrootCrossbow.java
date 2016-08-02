@@ -6,7 +6,7 @@ public class ItemSkyrootCrossbow extends ItemCrossbow
 
 	public ItemSkyrootCrossbow()
 	{
-		this.setDamageValue(0);
-		this.setKnockBackValue(0);
+		this.setDamageValue(1);
+		this.setKnockBackValue(0.5F);
 	}
 }
