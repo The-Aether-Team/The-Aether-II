@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.player;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
@@ -22,9 +21,9 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerAetherEvents
@@ -38,22 +37,22 @@ public class PlayerAetherEvents
 
 		if (event.getTarget() instanceof EntityPlayer)
 		{
-			IInventoryEquipment equipment = aePlayer.getEquipmentInventory();
-
-			List<Pair<Integer, ItemStack>> items = new ArrayList<>();
-
-			for (int i = 0; i < equipment.getSizeInventory(); i++)
-			{
-				ItemStack stack = equipment.getStackInSlot(i);
-
-				if (stack != null)
-				{
-					items.add(Pair.of(i, stack));
-				}
-			}
+			List<Pair<Integer, ItemStack>> items = aePlayer.getEquipmentChanges(false);
 
 			NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(player, items), player);
 		}
+	}
+
+	@SubscribeEvent
+	public void onPlayerJoined(PlayerLoggedInEvent event)
+	{
+		EntityPlayerMP player = (EntityPlayerMP) event.player;
+
+		PlayerAether aePlayer = PlayerAether.getPlayer(player);
+
+		List<Pair<Integer, ItemStack>> items = aePlayer.getEquipmentChanges(false);
+
+		NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(player, items), player);
 	}
 
 	@SubscribeEvent

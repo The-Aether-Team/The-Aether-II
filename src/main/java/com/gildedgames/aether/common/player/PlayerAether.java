@@ -259,14 +259,7 @@ public class PlayerAether implements IPlayerAetherCapability
 	{
 		if (this.equipmentInventory.getDirties().size() > 0)
 		{
-			List<Pair<Integer, ItemStack>> changes = new ArrayList<>();
-
-			for (int i : this.equipmentInventory.getDirties())
-			{
-				ItemStack stack = this.equipmentInventory.getStackInSlot(i);
-
-				changes.add(Pair.of(i, stack));
-			}
+			List<Pair<Integer, ItemStack>> changes = this.getEquipmentChanges(true);
 
 			NetworkingAether.sendPacketToWatching(new EquipmentChangedPacket(this.player, changes), this.player);
 
@@ -479,6 +472,30 @@ public class PlayerAether implements IPlayerAetherCapability
 	public EntityMovingBlock getHeldBlock()
 	{
 		return this.heldBlock;
+	}
+
+	public List<Pair<Integer, ItemStack>> getEquipmentChanges(boolean onlyDirty)
+	{
+		List<Pair<Integer, ItemStack>> changes = new ArrayList<>();
+
+		if (onlyDirty)
+		{
+			for (int i : this.equipmentInventory.getDirties())
+			{
+				ItemStack stack = this.equipmentInventory.getStackInSlot(i);
+
+				changes.add(Pair.of(i, stack));
+			}
+		}
+		else
+		{
+			for (int i = 0; i < this.equipmentInventory.getSizeInventory(); i++)
+			{
+				changes.add(Pair.of(i, this.equipmentInventory.getStackInSlot(i)));
+			}
+		}
+
+		return changes;
 	}
 
 	public static class Storage implements IStorage<IPlayerAetherCapability>

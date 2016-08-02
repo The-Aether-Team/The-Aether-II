@@ -72,6 +72,7 @@ public class EquipmentChangedPacket implements IMessage
 		PacketBuffer pBuf = new PacketBuffer(buf);
 
 		pBuf.writeInt(this.entityId);
+
 		pBuf.writeByte(this.changes.size());
 
 		for (Pair<Integer, ItemStack> pair : this.changes)
