@@ -96,10 +96,12 @@ public class ItemCrossbow extends Item
 	@Override
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
 	{
-		if (entityLiving.worldObj.isRemote)
-		{
-			return true;
-		}
+		// Not sure why this is necessary to be honest. But I'll wait to remove it completely.
+
+		//if (entityLiving.worldObj.isRemote)
+		//{
+		//	return true;
+		//}
 		
 		float speed = 1.0f;
 
@@ -115,7 +117,14 @@ public class ItemCrossbow extends Item
 			return true;
 		}
 
-		return false;
+		if (stack.getItemDamage() == 0)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 
 	@Override
@@ -173,6 +182,11 @@ public class ItemCrossbow extends Item
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
 	{
+		if (stack.getItemDamage() > 0)
+		{
+			return false;
+		}
+
 		if (entity != null)
 		{
 			EntityLivingBase entityBase = (EntityLivingBase) entity;
