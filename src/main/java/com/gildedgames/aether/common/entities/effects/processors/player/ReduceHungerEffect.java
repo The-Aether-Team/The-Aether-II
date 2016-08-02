@@ -14,19 +14,19 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import java.util.List;
 
-public class PauseHungerEffect implements EffectProcessorPlayer<EntityEffectInstance>
+public class ReduceHungerEffect implements EffectProcessorPlayer<EntityEffectInstance>
 {
 
 	@Override
 	public String getUnlocalizedName(Entity source, EntityEffectInstance instance)
 	{
-		return "ability.pauseHunger.name";
+		return "ability.reduceHunger.name";
 	}
 
 	@Override
 	public String[] getUnlocalizedDesc(Entity source, EntityEffectInstance instance)
 	{
-		return new String[] { "ability.pauseHunger.desc" };
+		return new String[] { "ability.reduceHunger.desc" };
 	}
 
 	@Override
@@ -40,7 +40,6 @@ public class PauseHungerEffect implements EffectProcessorPlayer<EntityEffectInst
 		EntityPlayer player = (EntityPlayer) source;
 
 		instance.getAttributes().setInteger("foodLevel", player.getFoodStats().getFoodLevel());
-		instance.getAttributes().setFloat("foodSaturation", player.getFoodStats().getSaturationLevel());
 	}
 
 	@Override
@@ -59,18 +58,22 @@ public class PauseHungerEffect implements EffectProcessorPlayer<EntityEffectInst
 		{
 			for (EntityEffectInstance instance : all)
 			{
-				float saturation = player.getFoodStats().getSaturationLevel();
+				FoodStats stats = player.getFoodStats();
 
-				if (player.getFoodStats().getFoodLevel() < instance.getAttributes().getFloat("foodLevel"))
+				if (stats.getFoodLevel() < instance.getAttributes().getFloat("foodLevel"))
 				{
-					ObfuscationReflectionHelper.setPrivateValue(FoodStats.class, player.getFoodStats(), 0.0f, "field_75126_c", "foodExhaustionLevel");
+					instance.getAttributes().setInteger("foodLevel", stats.getFoodLevel());
 
-					instance.getAttributes().setInteger("foodLevel", player.getFoodStats().getFoodLevel());
+					float exhaustion = ObfuscationReflectionHelper.getPrivateValue(FoodStats.class, stats, "field_75126_c", "foodExhaustionLevel");;
 
-					saturation += 20.0f;
+					ObfuscationReflectionHelper.setPrivateValue(FoodStats.class, stats, Math.max(0, exhaustion - 0.7f), "field_75126_c", "foodExhaustionLevel");
+					ObfuscationReflectionHelper.setPrivateValue(FoodStats.class, player.getFoodStats(), stats.getSaturationLevel() + 2.0f, "field_75125_b", "foodSaturationLevel");
+				}
+				else if (stats.getFoodLevel() > instance.getAttributes().getFloat("foodLevel"))
+				{
+					instance.getAttributes().setInteger("foodLevel", stats.getFoodLevel());
 				}
 
-				ObfuscationReflectionHelper.setPrivateValue(FoodStats.class, player.getFoodStats(), saturation, "field_75125_b", "foodSaturationLevel");
 			}
 		}
 	}

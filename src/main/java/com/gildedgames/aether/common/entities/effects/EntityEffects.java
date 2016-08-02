@@ -26,7 +26,7 @@ import com.gildedgames.aether.common.entities.effects.processors.ModifySpeedEffe
 import com.gildedgames.aether.common.entities.effects.processors.RegenerateHealthEffect;
 import com.gildedgames.aether.common.entities.effects.processors.player.DaggerfrostEffect;
 import com.gildedgames.aether.common.entities.effects.processors.player.ModifyXPCollectionEffect;
-import com.gildedgames.aether.common.entities.effects.processors.player.PauseHungerEffect;
+import com.gildedgames.aether.common.entities.effects.processors.player.ReduceHungerEffect;
 import com.google.common.collect.Lists;
 
 public class EntityEffects implements IEntityEffectsCapability
@@ -35,7 +35,7 @@ public class EntityEffects implements IEntityEffectsCapability
 
 	public static final EffectProcessorPlayer<ModifyXPCollectionEffect.Instance> MODIFY_XP_COLLECTION = new ModifyXPCollectionEffect();
 
-	public static final EffectProcessorPlayer<EntityEffectInstance> PAUSE_HUNGER = new PauseHungerEffect();
+	public static final EffectProcessorPlayer<EntityEffectInstance> PAUSE_HUNGER = new ReduceHungerEffect();
 
 	public static final EntityEffectProcessor<EntityEffectInstance> BREATHE_UNDERWATER = new BreatheUnderwaterEffect();
 
