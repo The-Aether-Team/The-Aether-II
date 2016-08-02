@@ -476,7 +476,6 @@ public class ItemsAether
 		ItemEffects.register(gold_pendant);
 		ItemEffects.register(zanite_ring);
 		ItemEffects.register(zanite_pendant);
-		ItemEffects.register(bolt);
 		ItemEffects.register(iron_bubble, new Effects().add(EntityEffects.BREATHE_UNDERWATER));
 		ItemEffects.register(regeneration_stone, new Effects().add(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new OutOfCombatRule(160))));
 		ItemEffects.register(ice_ring, new Effects().add(EntityEffects.FREEZE_BLOCKS, new FreezeBlocksEffect.Instance(3)));

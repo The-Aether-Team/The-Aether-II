@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt.BoltAbility;
 import com.gildedgames.aether.common.items.ItemsAether;
 
+import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentKnockback;
 import net.minecraft.entity.Entity;
@@ -14,6 +15,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
@@ -27,9 +29,17 @@ public class ItemCrossbow extends Item
 
 	private final int DURATION = 180;
 
+	// How far a mob gets knock-backed by attacking with a crossbow.
+	private float knockBackValue;
+
+	// How much damage is done to an entity attacked by the crossbow.
+	private float damageValue;
+
 	public ItemCrossbow()
 	{
 		this.maxStackSize = 1;
+		knockBackValue = 0;
+		damageValue = 0;
 	}
 
 	// Should be adjusted to check for quiver accessory slot, currently checks the first space in players inventory for ammo.
@@ -56,13 +66,17 @@ public class ItemCrossbow extends Item
 		return false;
 	}
 
+	public float getKnockBackValue() { return knockBackValue; }
+
+	public void setKnockBackValue(float x)  { knockBackValue = x; }
+
+	public float getDamageValue() { return damageValue; }
+
+	public void setDamageValue(float x) { damageValue = x; }
+
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
 	{
-		if (!this.hasEffect(stack))
-		{
-			stack.addEnchantment(Enchantment.getEnchantmentByID(19), 2);
-		}
 	}
 
 	@Override
@@ -156,15 +170,21 @@ public class ItemCrossbow extends Item
 		return this.DURATION; //80~4 seconds
 	}
 
-	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack stack)
-	{
-		return stack.isItemEnchanted();
-	}
-
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
 	{
-		return false;
+		if (entity != null)
+		{
+			EntityLivingBase entityBase = (EntityLivingBase) entity;
+			DamageSource source = DamageSource.causePlayerDamage(player);
+
+			entityBase.attackEntityFrom(source, damageValue);
+
+			if (source.getSourceOfDamage() instanceof EntityLivingBase)
+			{
+				entityBase.knockBack(entity, knockBackValue, -(entity.posX - source.getSourceOfDamage().posX), -(entity.posZ - source.getSourceOfDamage().posZ));
+			}
+		}
+		return true;
 	}
 }
