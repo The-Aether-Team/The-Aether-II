@@ -1,13 +1,13 @@
 package com.gildedgames.aether.common.world.dungeon;
 
-import java.awt.Rectangle;
+import net.minecraft.world.gen.structure.template.Template;
 
-import com.gildedgames.aether.common.world.dungeon.util.Schematic;
+import java.awt.Rectangle;
 
 public class DungeonRoom
 {
 	
-	public Schematic schematic;
+	public Template template;
 
 	public Rectangle rectangle;
 
@@ -19,10 +19,10 @@ public class DungeonRoom
 	
 	private int height;
 	
-	public DungeonRoom(Schematic schematic)
+	public DungeonRoom(Template template)
 	{
-		this.schematic = schematic;
-		this.rectangle = new Rectangle(0, 0, this.schematic.width() - 1, this.schematic.length() - 1);
+		this.template = template;
+		this.rectangle = new Rectangle(0, 0, this.template.getSize().getX(), this.template.getSize().getZ());
 	}
 
 	public DungeonRoom(int width, int height, int length)
@@ -68,7 +68,7 @@ public class DungeonRoom
 
 	public Rectangle fullRectangle()
 	{
-		return new Rectangle((int) this.rectangle.getX() - 1, (int) this.rectangle.getY() - 1, (int) this.rectangle.getWidth() + 2, (int) this.rectangle.getHeight() + 2);
+		return new Rectangle((int) this.rectangle.getX(), (int) this.rectangle.getY(), (int) this.rectangle.getWidth() + 2, (int) this.rectangle.getHeight() + 2);
 	}
 
 	public boolean contains(int[] position)
@@ -88,7 +88,7 @@ public class DungeonRoom
 	
 	public int getHeight()
 	{
-		return this.schematic == null ? this.height : this.schematic.height();
+		return this.template == null ? this.height : (int) this.template.getSize().getY();
 	}
 
 	public int getMinX()

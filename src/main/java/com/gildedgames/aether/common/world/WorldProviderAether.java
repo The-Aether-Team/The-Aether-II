@@ -21,6 +21,11 @@ public class WorldProviderAether extends WorldProvider
 
 	private final DimensionType dimensionType = AetherCore.PROXY.getAetherDimensionType();
 
+	public WorldProviderAether()
+	{
+		this.hasNoSky = false;
+	}
+
 	@Override
 	protected void createBiomeProvider()
 	{

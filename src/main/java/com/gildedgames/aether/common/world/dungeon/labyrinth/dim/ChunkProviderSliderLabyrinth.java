@@ -2,10 +2,9 @@ package com.gildedgames.aether.common.world.dungeon.labyrinth.dim;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.world.GenUtil;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstanceHandler;
-import net.minecraft.block.Block;
+import com.gildedgames.util.core.util.ChunkPrimerDefaultState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -15,7 +14,6 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.EmptyChunk;
 import net.minecraft.world.chunk.IChunkGenerator;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import java.util.List;
 import java.util.Random;
@@ -46,7 +44,7 @@ public class ChunkProviderSliderLabyrinth implements IChunkGenerator
 		
 		DungeonInstance inst = handler.getFromDimId(this.world.provider.getDimension());
 		
-		inst.getGenerator().populateChunk(this.world, inst, chunkX, chunkZ);
+		inst.getGenerator().populateChunk(this.world, this.random, inst, chunkX, chunkZ);
 	}
 
 	@Override
@@ -55,10 +53,8 @@ public class ChunkProviderSliderLabyrinth implements IChunkGenerator
 		return false;
 	}
 
-	public void genHolystoneEverywhere(ChunkPrimer primer, int chunkX, int chunkZ)
+	public void generateBedrock(ChunkPrimer primer, int chunkX, int chunkZ)
 	{
-		GenUtil.fillArray((short[]) ObfuscationReflectionHelper.getPrivateValue(ChunkPrimer.class, primer, 0), (short) Block.getIdFromBlock(BlocksAether.carved_stone));
-
 		for (int x = 0; x < 16; ++x)
 		{
 			for (int z = 0; z < 16; ++z)
@@ -88,15 +84,16 @@ public class ChunkProviderSliderLabyrinth implements IChunkGenerator
 		
 		this.random.setSeed(chunkX * 0x4f9939f508L + chunkZ * 0x1ef1565bd5L);
 
-		ChunkPrimer primer = new ChunkPrimer();
+		ChunkPrimer primer = new ChunkPrimerDefaultState(BlocksAether.labyrinth_wall.getDefaultState());
 		
-		this.genHolystoneEverywhere(primer, chunkX, chunkZ);
+		//this.generateBedrock(primer, chunkX, chunkZ);
 		
-		inst.getGenerator().generateChunk(this.world, inst, primer, chunkX, chunkZ);
+		inst.getGenerator().generateChunk(this.world, this.random, inst, primer, chunkX, chunkZ);
 
 		Chunk chunk = new Chunk(this.world, primer, chunkX, chunkZ);
 		//chunk.func_150809_p();
 		//chunk.setChunkModified();
+		//chunk.generateSkylightMap();
 
 		return chunk;
 	}

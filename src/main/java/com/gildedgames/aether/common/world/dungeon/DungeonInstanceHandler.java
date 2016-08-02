@@ -49,11 +49,11 @@ public class DungeonInstanceHandler
 			
 			inst.flagGenerated();*/
 
-			inst.getGenerator().generateLayout(inst, inst.getRoomProvider(), FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(inst.getDimIdInside()).rand);
+			inst.getGenerator().generateLayout(player.getServer(), FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(inst.getDimIdInside()).rand, inst, inst.getRoomProvider());
 		}
 		
 		World world = this.handler.teleportPlayerToDimension(inst, player);
-		
+
 		player.connection.setPlayerLocation(inst.getInsideEntrance().getX(), inst.getInsideEntrance().getY(), inst.getInsideEntrance().getZ(), 0, 0);
 	}
 

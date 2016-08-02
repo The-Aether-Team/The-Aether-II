@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.IAetherServices;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.DimensionType;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -53,7 +54,9 @@ public class AetherCore implements IAetherServices
 	private ClassSerializer srl;
 	
 	private DungeonInstanceHandler dungeonInstanceHandler;
-	
+
+	public static DimensionType SLIDER_LABYRINTH;
+
 	public DungeonInstanceHandler getDungeonInstanceHandler()
 	{
 		return this.dungeonInstanceHandler;
@@ -81,8 +84,10 @@ public class AetherCore implements IAetherServices
 	public void onFMLInit(FMLInitializationEvent event)
 	{
 		AetherCore.PROXY.init(event);
-		
-		final DungeonInstanceFactory factory = new DungeonInstanceFactory(6, WorldProviderSliderLabyrinth.class);
+
+		SLIDER_LABYRINTH = DimensionType.register("Slider Labyrinth", "_sliderLabyrinth", 6, WorldProviderSliderLabyrinth.class, false);
+
+		final DungeonInstanceFactory factory = new DungeonInstanceFactory(SLIDER_LABYRINTH);
 
 		final InstanceHandler<DungeonInstance> instanceHandler = InstanceModule.INSTANCE.createInstanceHandler(factory);
 

@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.entities.blocks;
 
-import com.gildedgames.util.core.nbt.NBTHelper;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -17,8 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.gildedgames.util.core.nbt.NBTHelper;
 
 public class EntityFloatingBlock extends Entity
 {
@@ -219,7 +220,7 @@ public class EntityFloatingBlock extends Entity
 	public IBlockState getBlockState()
 	{
 		Block block = Block.getBlockById(this.dataManager.get(BLOCK_NAME));
-		int meta = this.dataManager.get(BLOCK_METADATA);
+		int meta = (int) this.dataManager.get(BLOCK_METADATA);
 
 		return block.getStateFromMeta(meta);
 	}

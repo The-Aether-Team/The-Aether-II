@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.dungeon;
 
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.Teleporter;
-import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
 
 import com.gildedgames.util.modules.instances.InstanceFactory;
@@ -11,14 +11,11 @@ import com.gildedgames.util.modules.universe.common.util.TeleporterGeneric;
 public class DungeonInstanceFactory implements InstanceFactory<DungeonInstance>
 {
 	
-	private int providerId;
-	
-	private Class<? extends WorldProvider> provider;
-	
-	public DungeonInstanceFactory(int providerId, Class<? extends WorldProvider> provider)
+	private DimensionType dimensionType;
+
+	public DungeonInstanceFactory(DimensionType dimensionType)
 	{
-		this.providerId = providerId;
-		this.provider = provider;
+		this.dimensionType = dimensionType;
 	}
 
 	@Override
@@ -28,15 +25,9 @@ public class DungeonInstanceFactory implements InstanceFactory<DungeonInstance>
 	}
 
 	@Override
-	public int providerId()
+	public DimensionType dimensionType()
 	{
-		return this.providerId;
-	}
-
-	@Override
-	public Class<? extends WorldProvider> getProviderType()
-	{
-		return this.provider;
+		return this.dimensionType;
 	}
 
 	@Override

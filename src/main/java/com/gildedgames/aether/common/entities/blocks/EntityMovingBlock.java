@@ -234,7 +234,7 @@ public class EntityMovingBlock extends Entity
 	public IBlockState getBlockState()
 	{
 		Block block = Block.getBlockById(this.dataManager.get(BLOCK_NAME));
-		int meta = this.dataManager.get(BLOCK_METADATA);
+		int meta = (int) this.dataManager.get(BLOCK_METADATA);
 
 		return block.getStateFromMeta(meta);
 	}

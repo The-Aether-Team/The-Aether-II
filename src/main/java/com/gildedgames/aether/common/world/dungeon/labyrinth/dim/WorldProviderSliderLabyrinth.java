@@ -1,27 +1,27 @@
 package com.gildedgames.aether.common.world.dungeon.labyrinth.dim;
 
+import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
+import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.chunk.IChunkGenerator;
+import com.gildedgames.aether.common.world.dungeon.labyrinth.dim.ChunkProviderSliderLabyrinth;
 
 public class WorldProviderSliderLabyrinth extends WorldProvider
 {
-	private final DimensionType dimensionType;
 
-	public WorldProviderSliderLabyrinth(DimensionType type)
+	public WorldProviderSliderLabyrinth()
 	{
-		this.dimensionType = type;
-		
 		this.hasNoSky = true;
 	}
 
 	@Override
 	protected void createBiomeProvider()
 	{
-		this.biomeProvider = new BiomeProviderSliderLabyrinth();
+		this.biomeProvider = new BiomeProviderSingle(new BiomeSliderLabyrinth());
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class WorldProviderSliderLabyrinth extends WorldProvider
 	@Override
 	public DimensionType getDimensionType()
 	{
-		return this.dimensionType;
+		return AetherCore.SLIDER_LABYRINTH;
 	}
 
 	@Override

@@ -1,18 +1,38 @@
 package com.gildedgames.aether.common.world.dungeon;
 
-import java.io.File;
-import java.io.FilenameFilter;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.gen.structure.template.Template;
+import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.ModContainer;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.world.dungeon.util.FlatLayerDungeonGenerator;
 import com.gildedgames.aether.common.world.dungeon.util.Schematic;
 import com.google.common.collect.Lists;
+import org.apache.commons.io.IOUtils;
+
+import static com.google.common.io.Files.isFile;
+import static com.ibm.icu.impl.PluralRulesLoader.loader;
 
 public class DungeonDefinitions
 {
+
+	public static final TemplateManager MANAGER = new TemplateManager("structures");
 
 	public static final DungeonDefinition SLIDERS_LABYRINTH = new DungeonDefinition()
 	{
@@ -20,7 +40,7 @@ public class DungeonDefinitions
 		@Override
 		public DungeonGenerator createGenerator()
 		{
-			return new FlatLayerDungeonGenerator(1);
+			return new FlatLayerDungeonGenerator(3);
 		}
 
 		@Override
@@ -30,28 +50,37 @@ public class DungeonDefinitions
 			{
 
 				@Override
-				public List<DungeonRoom> createRooms(Random rand)
+				public List<DungeonRoom> createRooms(MinecraftServer server, Random rand)
 				{
 					List<DungeonRoom> rooms = Lists.newArrayList();
 
-					File schemFile = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getDataDirectory(), "/dungeonSchematics/");
-					
-					schemFile.mkdirs();
+					Template pillarRoom = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "PillarRoom"));
+					Template pillarRoomVar = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "PillarRoomVar"));
+					Template corridor = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Corridor"));
 
-					File[] files = schemFile.listFiles(new FilenameFilter()
-					{
-					    @Override
-					    public boolean accept(File dir, String name)
-					    {
-					        return name.endsWith(".schematic");
-					    }
-					});
-					
-					for (File file : files)
-					{
-						rooms.add(new DungeonRoom(new Schematic(file.getName())));
+					rooms.add(new DungeonRoom(pillarRoom));
+					rooms.add(new DungeonRoom(pillarRoomVar));
+					rooms.add(new DungeonRoom(pillarRoom));
+					rooms.add(new DungeonRoom(pillarRoomVar));
+					rooms.add(new DungeonRoom(pillarRoom));
+					rooms.add(new DungeonRoom(corridor));
+					rooms.add(new DungeonRoom(corridor));
+					rooms.add(new DungeonRoom(corridor));
+					rooms.add(new DungeonRoom(corridor));
+					rooms.add(new DungeonRoom(corridor));
+
+					/*for (int count = 0; count < 3; count++){
+						rooms.add(new DungeonRoom(5, 5, 5));
 					}
-					
+
+					for (int count = 0; count < 3; count++){
+						rooms.add(new DungeonRoom(10, 5, 5));
+					}
+
+					for (int count = 0; count < 3; count++){
+						rooms.add(new DungeonRoom(15, 5, 15));
+					}*/
+
 					return rooms;
 				}
 				
