@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import com.gildedgames.aether.common.entities.effects.EntityEffectsProvider;
@@ -20,6 +22,10 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.Collections;
+import java.util.List;
 
 public class AetherCapabilityManager
 {
@@ -77,7 +83,20 @@ public class AetherCapabilityManager
 	@SubscribeEvent
     public void onItemLoad(AttachCapabilitiesEvent.Item event)
     {
-        event.addCapability(AetherCore.getResource("ItemStackEffects"), new ItemEffectsProvider(event.getItemStack()));
+    	// TOOD: Stop iterating-- do lookups
+		for (ItemEffects.RegistrationEntry entry : ItemEffects.getRegistrationEntries())
+		{
+			if (entry.getItem() == event.getItem())
+			{
+				List<Pair<EntityEffectProcessor, EntityEffectInstance>> emptyList = Collections.emptyList();
+
+				ItemEffects effects = new ItemEffects(entry.getEffectsProvider() == null ? emptyList : entry.getEffectsProvider().provide());
+				event.addCapability(AetherCore.getResource("ItemStackEffects"), new ItemEffectsProvider(effects));
+
+				break;
+			}
+		}
+
         event.addCapability(AetherCore.getResource("ItemStackProperties"), new ItemPropertiesProvider(event.getItemStack()));
     }
 }

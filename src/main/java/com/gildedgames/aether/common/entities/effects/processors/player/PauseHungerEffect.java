@@ -59,14 +59,18 @@ public class PauseHungerEffect implements EffectProcessorPlayer<EntityEffectInst
 		{
 			for (EntityEffectInstance instance : all)
 			{
-				if (player.getFoodStats().getFoodLevel() > instance.getAttributes().getInteger("foodLevel") || player.getFoodStats().getSaturationLevel() > instance.getAttributes().getFloat("foodSaturation"))
+				float saturation = player.getFoodStats().getSaturationLevel();
+
+				if (player.getFoodStats().getFoodLevel() < instance.getAttributes().getFloat("foodLevel"))
 				{
+					ObfuscationReflectionHelper.setPrivateValue(FoodStats.class, player.getFoodStats(), 0.0f, "field_75126_c", "foodExhaustionLevel");
+
 					instance.getAttributes().setInteger("foodLevel", player.getFoodStats().getFoodLevel());
-					instance.getAttributes().setFloat("foodSaturation", player.getFoodStats().getSaturationLevel());
+
+					saturation += 20.0f;
 				}
 
-				ObfuscationReflectionHelper.setPrivateValue(FoodStats.class, player.getFoodStats(), instance.getAttributes().getInteger("foodLevel"), "field_75127_a", "foodLevel");
-				ObfuscationReflectionHelper.setPrivateValue(FoodStats.class, player.getFoodStats(), instance.getAttributes().getFloat("foodSaturation"), "field_75125_b", "foodSaturationLevel");
+				ObfuscationReflectionHelper.setPrivateValue(FoodStats.class, player.getFoodStats(), saturation, "field_75125_b", "foodSaturationLevel");
 			}
 		}
 	}
@@ -75,7 +79,6 @@ public class PauseHungerEffect implements EffectProcessorPlayer<EntityEffectInst
 	public void cancel(Entity source, EntityEffectInstance instance, List<EntityEffectInstance> all)
 	{
 		instance.getAttributes().setInteger("foodLevel", 0);
-		instance.getAttributes().setFloat("foodSaturation", 0);
 	}
 
 	@Override

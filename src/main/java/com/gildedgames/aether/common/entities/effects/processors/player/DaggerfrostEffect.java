@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemSnowball;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -40,7 +41,7 @@ public class DaggerfrostEffect implements EffectProcessorPlayer<EntityEffectInst
 	{
 		World world = source.worldObj;
 
-		ItemStack currentStack = source.getActiveItemStack();
+		ItemStack currentStack = source.getHeldItem(EnumHand.MAIN_HAND);
 
 		if (currentStack != null && currentStack.getItem() instanceof ItemSnowball)
 		{

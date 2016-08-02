@@ -104,10 +104,8 @@ public class ModifyDamageEffect implements EntityEffectProcessor<Instance>
 
 		EntityLivingBase living = (EntityLivingBase) source;
 
-		if (living.swingProgressInt == -1)
+		if (living.swingProgressInt == 0)
 		{
-			living.swingProgressInt = 0;
-
 			Entity entity = event.getEntityLiving();
 
 			if (entity != null)

@@ -5,9 +5,12 @@ import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.entities.effects.EntityEffectRule;
 import com.gildedgames.aether.common.entities.effects.processors.FreezeBlocksEffect.Instance;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -43,10 +46,6 @@ public class FreezeBlocksEffect implements EntityEffectProcessor<Instance>
 
 	}
 
-	private List<BlockPos> frozenLocations = new ArrayList<>();
-
-	private static final int PLACEMENT_FLAG = 7;
-
 	@Override
 	public String getUnlocalizedName(Entity source, Instance instance)
 	{
@@ -68,7 +67,6 @@ public class FreezeBlocksEffect implements EntityEffectProcessor<Instance>
 	public void tick(Entity source, List<Instance> all)
 	{
 		World world = source.worldObj;
-		IBlockState ice = all.size() > 1 ? Blocks.PACKED_ICE.getDefaultState() : Blocks.ICE.getDefaultState();
 
 		int maxRadius = 0;
 
@@ -82,74 +80,31 @@ public class FreezeBlocksEffect implements EntityEffectProcessor<Instance>
 			}
 		}
 
-		if (!world.isRemote)
+		BlockPos pos = source.getPosition();
+
+		if (source.onGround)
 		{
-			int x1 = MathHelper.floor_double(source.posX);
-			int y1 = MathHelper.floor_double(source.getEntityBoundingBox().minY);
-			int z1 = MathHelper.floor_double(source.posZ);
+			float radius = (float) Math.min(16, maxRadius);
 
-			for (int x = x1 - maxRadius; x <= x1 + maxRadius; x++)
+			BlockPos.MutableBlockPos above = new BlockPos.MutableBlockPos(0, 0, 0);
+
+			for (BlockPos.MutableBlockPos iPos : BlockPos.getAllInBoxMutable(pos.add(-radius, -1.0D, (double) (-radius)), pos.add((double) radius, -1.0D, (double) radius)))
 			{
-				for (int y = y1 - maxRadius; y <= y1 + maxRadius; y++)
+				if (iPos.distanceSqToCenter(source.posX, source.posY, source.posZ) <= (double) (radius * radius))
 				{
-					for (int z = z1 - maxRadius; z <= z1 + maxRadius; z++)
+					above.setPos(iPos.getX(), iPos.getY() + 1, iPos.getZ());
+
+					IBlockState aboveState = source.worldObj.getBlockState(above);
+
+					if (aboveState.getMaterial() == Material.AIR)
 					{
-						BlockPos pos = new BlockPos(x, y, z);
+						IBlockState iState = source.worldObj.getBlockState(iPos);
 
-						IBlockState state = world.getBlockState(pos);
-						Block block = state.getBlock();
-
-						if (block.getMetaFromState(state) != 0)
+						if (iState.getMaterial() == Material.WATER && iState.getValue(BlockLiquid.LEVEL) == 0 &&
+								source.worldObj.canBlockBePlaced(Blocks.FROSTED_ICE, iPos, false, EnumFacing.DOWN, null, null))
 						{
-							continue;
-						}
-
-						if (x == x1 - maxRadius || y == y1 - maxRadius || z == z1 - maxRadius || x == x1 + maxRadius || y == y1 + maxRadius || z == z1 + maxRadius)
-						{
-							if (this.frozenLocations.contains(pos))
-							{
-								if (block == Blocks.ICE)
-								{
-									world.setBlockState(pos, Blocks.FLOWING_WATER.getDefaultState(), PLACEMENT_FLAG);
-								}
-								else if (block == Blocks.PACKED_ICE)
-								{
-									world.setBlockState(pos, Blocks.FLOWING_WATER.getDefaultState(), PLACEMENT_FLAG);
-								}
-								else if (block == Blocks.OBSIDIAN)
-								{
-									world.setBlockState(pos, Blocks.FLOWING_LAVA.getDefaultState(), PLACEMENT_FLAG);
-								}
-
-								this.frozenLocations.remove(pos);
-							}
-
-							continue;
-						}
-
-						if (block == Blocks.FLOWING_WATER)
-						{
-							world.setBlockState(pos, ice, PLACEMENT_FLAG);
-							this.frozenLocations.add(pos);
-						}
-						else if (block == Blocks.WATER)
-						{
-							world.setBlockState(pos, ice, PLACEMENT_FLAG);
-							this.frozenLocations.add(pos);
-						}
-						else if (block == Blocks.FLOWING_LAVA)
-						{
-							world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState(), PLACEMENT_FLAG);
-							this.frozenLocations.add(pos);
-						}
-						else if (block == Blocks.LAVA)
-						{
-							world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState(), PLACEMENT_FLAG);
-							this.frozenLocations.add(pos);
-						}
-						else
-						{
-							continue;
+							source.worldObj.setBlockState(iPos, Blocks.FROSTED_ICE.getDefaultState());
+							source.worldObj.scheduleUpdate(iPos.toImmutable(), Blocks.FROSTED_ICE, MathHelper.getRandomIntegerInRange(world.rand, 60, 120));
 						}
 					}
 				}
@@ -160,28 +115,7 @@ public class FreezeBlocksEffect implements EntityEffectProcessor<Instance>
 	@Override
 	public void cancel(Entity source, Instance instance, List<Instance> all)
 	{
-		World world = source.worldObj;
 
-		for (BlockPos pos : this.frozenLocations)
-		{
-			IBlockState state = world.getBlockState(pos);
-			Block block = state.getBlock();
-
-			if (block == Blocks.ICE)
-			{
-				world.setBlockState(pos, Blocks.FLOWING_WATER.getDefaultState(), PLACEMENT_FLAG);
-			}
-			else if (block == Blocks.PACKED_ICE)
-			{
-				world.setBlockState(pos, Blocks.FLOWING_WATER.getDefaultState(), PLACEMENT_FLAG);
-			}
-			else if (block == Blocks.OBSIDIAN)
-			{
-				world.setBlockState(pos, Blocks.FLOWING_LAVA.getDefaultState(), PLACEMENT_FLAG);
-			}
-		}
-
-		this.frozenLocations.clear();
 	}
 
 	@Override

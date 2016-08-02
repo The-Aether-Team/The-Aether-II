@@ -61,7 +61,7 @@ public class DoubleDropEffect implements EntityEffectProcessor<Instance>
 	@Override
 	public String[] getFormatParameters(Entity source, Instance instance)
 	{
-		return new String[] { String.valueOf(((int) instance.getAttributes().getFloat("percentChance") * 10)) };
+		return new String[] { String.valueOf((int) (instance.getAttributes().getFloat("percentChance") * 10.0f)) };
 	}
 
 	@Override
@@ -89,7 +89,9 @@ public class DoubleDropEffect implements EntityEffectProcessor<Instance>
 			totalPercent += instance.getAttributes().getFloat("percentChance");
 		}
 
-		if ((float) target.getRNG().nextInt(10) < totalPercent)
+		float chance = (float) target.getRNG().nextInt(10);
+
+		if (chance < totalPercent)
 		{
 			List<ItemStack> stacks = new ArrayList<>();
 
