@@ -44,12 +44,14 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.blocks.util.BlockCustom;
 import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummy;
 import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
+import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.blocks.ItemAetherSlab;
 import com.gildedgames.aether.common.items.blocks.ItemBlockVariants;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockButtonStone;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.audio.Sound;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -115,9 +117,9 @@ public class BlocksAether
 
 	public static BlockQuicksoilGlass quicksoil_glass;
 
-	public static BlockSkyrootDoor skyroot_door;
+	public static BlockCustomDoor skyroot_door;
 
-	public static BlockArkeniumDoor arkenium_door;
+	public static BlockCustomDoor arkenium_door;
 
 	public static BlockSkyrootChest skyroot_chest;
 
@@ -241,9 +243,9 @@ public class BlocksAether
 
 		quicksoil_glass = registerBlock("quicksoil_glass", new BlockQuicksoilGlass(), AetherCreativeTabs.tabBlocks);
 
-		skyroot_door = registerBlock("skyroot_door", new BlockSkyrootDoor());
+		skyroot_door = registerBlock("skyroot_door", new BlockCustomDoor(Material.WOOD, ItemsAether.skyroot_door, SoundType.WOOD));
 
-		arkenium_door = registerBlock("arkenium_door", new BlockArkeniumDoor());
+		arkenium_door = registerBlock("arkenium_door", new BlockCustomDoor(Material.IRON, ItemsAether.arkenium_door, SoundType.METAL));
 
 		skyroot_chest = registerBlock("skyroot_chest", new BlockSkyrootChest(), AetherCreativeTabs.tabBlocks);
 

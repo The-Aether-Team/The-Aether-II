@@ -12,14 +12,18 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockSkyrootDoor extends BlockDoor
+public class BlockCustomDoor extends BlockDoor
 {
 
-	public BlockSkyrootDoor()
-	{
-		super(Material.WOOD);
+	private Item doorItem;
 
-		this.setSoundType(SoundType.WOOD);
+	public BlockCustomDoor(Material material, Item doorItem, SoundType soundType)
+	{
+		super(material);
+
+		this.doorItem = doorItem;
+
+		this.setSoundType(soundType);
 
 		this.setHardness(3.0f);
 
@@ -29,13 +33,13 @@ public class BlockSkyrootDoor extends BlockDoor
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER ? null : ItemsAether.skyroot_door;
+		return state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER ? null : this.doorItem;
 	}
 
 	@Override
 	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
 	{
-		return new ItemStack(ItemsAether.skyroot_door);
+		return new ItemStack(this.doorItem);
 	}
 
 }
