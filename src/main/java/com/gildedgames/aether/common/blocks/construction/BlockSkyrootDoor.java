@@ -6,11 +6,15 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import java.util.Random;
 
 public class BlockSkyrootDoor extends BlockDoor
 {
+
 	public BlockSkyrootDoor()
 	{
 		super(Material.WOOD);
@@ -27,4 +31,11 @@ public class BlockSkyrootDoor extends BlockDoor
 	{
 		return state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER ? null : ItemsAether.skyroot_door;
 	}
+
+	@Override
+	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
+	{
+		return new ItemStack(ItemsAether.skyroot_door);
+	}
+
 }
