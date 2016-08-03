@@ -1,14 +1,8 @@
 package com.gildedgames.aether.common.containers.inventory;
 
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
-import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
-import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
-import com.gildedgames.aether.api.items.IItemEffectsCapability;
 import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
-import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,7 +10,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.text.TextComponentBase;
 import net.minecraft.util.text.TextComponentTranslation;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -40,7 +33,7 @@ public class InventoryEquipment implements IInventoryEquipment
 
 	private ItemStack[] inventory = new ItemStack[InventoryEquipment.INVENTORY_SIZE];
 
-	private Set<Integer> dirties = new HashSet<>();
+	private Set<PendingItemChange> dirties = new HashSet<>();
 
 	public InventoryEquipment(IPlayerAetherCapability aePlayer)
 	{
@@ -87,7 +80,7 @@ public class InventoryEquipment implements IInventoryEquipment
 				}
 			}
 
-			this.dirties.add(index);
+			this.dirties.add(new PendingItemChange(index, stack, this.inventory[index]));
 
 			this.markDirty();
 
@@ -115,8 +108,9 @@ public class InventoryEquipment implements IInventoryEquipment
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack)
 	{
+		this.dirties.add(new PendingItemChange(index, this.inventory[index], stack));
+
 		this.inventory[index] = stack;
-		this.dirties.add(index);
 
 		this.markDirty();
 	}
@@ -210,25 +204,6 @@ public class InventoryEquipment implements IInventoryEquipment
 	{
 		for (int i = 0; i < this.inventory.length; i++)
 		{
-			ItemStack stack = this.inventory[i];
-
-			if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
-			{
-				IEntityEffectsCapability effects = EntityEffects.get(this.aePlayer.getPlayer());
-				IItemEffectsCapability itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
-
-				if (itemEffects != null)
-				{
-					for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
-					{
-						EntityEffectProcessor processor = effect.getLeft();
-						EntityEffectInstance instance = effect.getRight();
-
-						effects.removeInstance(processor, instance);
-					}
-				}
-			}
-
 			this.setInventorySlotContents(i, null);
 		}
 	}
@@ -246,7 +221,7 @@ public class InventoryEquipment implements IInventoryEquipment
 		this.clear();
 	}
 
-	public Set<Integer> getDirties()
+	public Set<PendingItemChange> getDirties()
 	{
 		return this.dirties;
 	}
@@ -312,6 +287,35 @@ public class InventoryEquipment implements IInventoryEquipment
 					this.inventory[slot] = stack;
 				}
 			}
+		}
+	}
+
+	public static class PendingItemChange
+	{
+		private final int slot;
+
+		private final ItemStack before, after;
+
+		public PendingItemChange(int slot, ItemStack before, ItemStack after)
+		{
+			this.slot = slot;
+			this.before = before;
+			this.after = after;
+		}
+
+		public int getSlot()
+		{
+			return this.slot;
+		}
+
+		public ItemStack getBefore()
+		{
+			return this.before;
+		}
+
+		public ItemStack getAfter()
+		{
+			return this.after;
 		}
 	}
 }

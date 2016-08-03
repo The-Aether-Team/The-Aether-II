@@ -131,52 +131,6 @@ public class ContainerEquipment extends ContainerPlayer
 			this.aePlayer.getPlayer().inventory.setItemStack(null);
 		}
 
-		if (slotId < this.inventorySlots.size() && slotId > 0)
-		{
-			Slot slot = this.inventorySlots.get(slotId);
-			
-			if (slot instanceof SlotEquipment)
-			{
-				if (slot.getHasStack())
-				{
-					ItemStack stack = slot.getStack();
-
-					if (stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
-					{
-						IEntityEffectsCapability effects = EntityEffects.get(this.aePlayer.getPlayer());
-
-						IItemEffectsCapability itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
-
-						for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
-						{
-							EntityEffectProcessor processor = effect.getLeft();
-							EntityEffectInstance instance = effect.getRight();
-
-							effects.removeInstance(processor, instance);
-						}
-					}
-				}
-				else
-				{
-					ItemStack stack = this.aePlayer.getPlayer().inventory.getItemStack();
-					
-					if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
-					{
-						IEntityEffectsCapability effects = EntityEffects.get(this.aePlayer.getPlayer());
-						IItemEffectsCapability itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
-
-						for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
-						{
-							EntityEffectProcessor processor = effect.getLeft();
-							EntityEffectInstance instance = effect.getRight();
-							
-							effects.addInstance(processor, instance);
-						}
-					}
-				}
-			}
-		}
-
 		return super.slotClick(slotId, dragType, clickTypeIn, player);
 	}
 
@@ -230,41 +184,8 @@ public class ContainerEquipment extends ContainerPlayer
 					accessorySlot.putStack(stack);
 
 					slot.putStack(null);
-					
-					if (stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
-					{
-						IEntityEffectsCapability effects = EntityEffects.get(this.aePlayer.getPlayer());
-						IItemEffectsCapability itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
-
-						if (itemEffects != null)
-						{
-							for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
-							{
-								EntityEffectProcessor processor = effect.getLeft();
-								EntityEffectInstance instance = effect.getRight();
-								
-								effects.removeInstance(processor, instance);
-							}
-						}
-					}
 
 					return stack;
-				}
-			}
-			else if (slot instanceof SlotEquipment && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
-			{
-				IEntityEffectsCapability effects = EntityEffects.get(this.aePlayer.getPlayer());
-				IItemEffectsCapability itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
-
-				if (itemEffects != null)
-				{
-					for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
-					{
-						EntityEffectProcessor processor = effect.getLeft();
-						EntityEffectInstance instance = effect.getRight();
-
-						effects.removeInstance(processor, instance);
-					}
 				}
 			}
 		}

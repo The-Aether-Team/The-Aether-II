@@ -1,12 +1,18 @@
 package com.gildedgames.aether.common.player;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
+import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
+import com.gildedgames.aether.api.items.IItemEffectsCapability;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
+import com.gildedgames.aether.common.containers.inventory.InventoryEquipment.PendingItemChange;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import com.gildedgames.aether.common.entities.companions.EntityCompanion;
+import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
@@ -52,6 +58,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class PlayerAether implements IPlayerAetherCapability
 {
@@ -99,7 +106,7 @@ public class PlayerAether implements IPlayerAetherCapability
 
 		if (!this.player.worldObj.isRemote)
 		{
-			this.sendEquipmentChanges();
+			this.handleEquipmentChanges();
 
 			if (!this.player.isDead)
 			{
@@ -255,15 +262,62 @@ public class PlayerAether implements IPlayerAetherCapability
 		this.companionId = id;
 	}
 
-	private void sendEquipmentChanges()
+	private void sendEquipmentChanges(Set<PendingItemChange> dirties)
+	{
+		List<Pair<Integer, ItemStack>> updates = new ArrayList<>();
+
+		for (PendingItemChange change : dirties)
+		{
+			updates.add(Pair.of(change.getSlot(), change.getAfter()));
+		}
+
+		NetworkingAether.sendPacketToWatching(new EquipmentChangedPacket(this.player, updates), this.player);
+	}
+
+	private void handleEquipmentChanges()
 	{
 		if (this.equipmentInventory.getDirties().size() > 0)
 		{
-			List<Pair<Integer, ItemStack>> changes = this.getEquipmentChanges(true);
+			Set<PendingItemChange> changes = this.equipmentInventory.getDirties();
 
-			NetworkingAether.sendPacketToWatching(new EquipmentChangedPacket(this.player, changes), this.player);
+			this.sendEquipmentChanges(changes);
 
-			this.equipmentInventory.getDirties().clear();
+			IEntityEffectsCapability effects = EntityEffects.get(this.getPlayer());
+
+			for (PendingItemChange change : changes)
+			{
+				ItemStack beforeStack = change.getBefore();
+
+				if (beforeStack != null && beforeStack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
+				{
+					IItemEffectsCapability itemEffects = beforeStack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
+
+					for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
+					{
+						EntityEffectProcessor processor = effect.getLeft();
+						EntityEffectInstance instance = effect.getRight();
+
+						effects.removeInstance(processor, instance);
+					}
+				}
+
+				ItemStack afterStack = change.getAfter();
+
+				if (afterStack != null && afterStack != beforeStack && afterStack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
+				{
+					IItemEffectsCapability itemEffects = afterStack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
+
+					for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
+					{
+						EntityEffectProcessor processor = effect.getLeft();
+						EntityEffectInstance instance = effect.getRight();
+
+						effects.addInstance(processor, instance);
+					}
+				}
+			}
+
+			changes.clear();
 		}
 	}
 
@@ -472,30 +526,6 @@ public class PlayerAether implements IPlayerAetherCapability
 	public EntityMovingBlock getHeldBlock()
 	{
 		return this.heldBlock;
-	}
-
-	public List<Pair<Integer, ItemStack>> getEquipmentChanges(boolean onlyDirty)
-	{
-		List<Pair<Integer, ItemStack>> changes = new ArrayList<>();
-
-		if (onlyDirty)
-		{
-			for (int i : this.equipmentInventory.getDirties())
-			{
-				ItemStack stack = this.equipmentInventory.getStackInSlot(i);
-
-				changes.add(Pair.of(i, stack));
-			}
-		}
-		else
-		{
-			for (int i = 0; i < this.equipmentInventory.getSizeInventory(); i++)
-			{
-				changes.add(Pair.of(i, this.equipmentInventory.getStackInSlot(i)));
-			}
-		}
-
-		return changes;
 	}
 
 	public static class Storage implements IStorage<IPlayerAetherCapability>

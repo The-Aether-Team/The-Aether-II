@@ -72,12 +72,12 @@ public class AetherCapabilityManager
 	@SubscribeEvent
 	public void onEntityLoad(AttachCapabilitiesEvent.Entity event)
 	{
+		event.addCapability(AetherCore.getResource("EntityEffects"), new EntityEffectsProvider(new EntityEffects(event.getEntity())));
+
 		if (event.getEntity() instanceof EntityPlayer)
 		{
 			event.addCapability(AetherCore.getResource("PlayerData"), new PlayerAetherProvider(new PlayerAether((EntityPlayer) event.getEntity())));
 		}
-		
-		event.addCapability(AetherCore.getResource("EntityEffects"), new EntityEffectsProvider(new EntityEffects(event.getEntity())));
 	}
 
 	@SubscribeEvent
