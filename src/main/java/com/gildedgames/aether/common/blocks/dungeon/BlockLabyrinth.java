@@ -24,9 +24,10 @@ public class BlockLabyrinth extends Block
 		return BlockRenderLayer.CUTOUT;
 	}
 
-	public BlockLabyrinth setGlows(boolean glows)
+	@Override
+	public BlockLabyrinth setLightLevel(float lightLevel)
 	{
-		this.setLightLevel(glows ? 0.75f : 0.0f);
+		super.setLightLevel(lightLevel);
 
 		return this;
 	}

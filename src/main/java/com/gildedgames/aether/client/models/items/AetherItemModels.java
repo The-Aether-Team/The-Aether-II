@@ -402,6 +402,11 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.orb_of_arkenzus, "companions/orb_of_arkenzus");
 		registerItemModels(ItemsAether.fangrin_capsule, "companions/fangrin_capsule");
 		registerItemModels(ItemsAether.death_seal, "companions/death_seal");
+
+		registerItemModels(BlocksAether.skyroot_slab, "aether_slab/skyroot_slab");
+		registerItemModels(BlocksAether.holystone_slab, "aether_slab/holystone_slab");
+		registerItemModels(BlocksAether.holystone_brick_slab, "aether_slab/holystone_brick_slab");
+
 	}
 
 	private static void registerItemModels(Block block, String path)

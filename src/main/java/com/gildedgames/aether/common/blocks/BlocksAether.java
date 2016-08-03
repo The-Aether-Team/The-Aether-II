@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.blocks;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
+import com.gildedgames.aether.common.blocks.construction.BlockAetherSlab;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.blocks.construction.BlockAmbrosiumTorch;
 import com.gildedgames.aether.common.blocks.construction.BlockQuicksoilGlass;
@@ -53,6 +54,7 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.blocks.util.BlockCustom;
 import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummy;
 import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
+import com.gildedgames.aether.common.items.blocks.ItemAetherSlab;
 import com.gildedgames.aether.common.items.blocks.ItemBlockVariants;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockButtonStone;
@@ -170,6 +172,8 @@ public class BlocksAether
 
 	public static BlockLabyrinthChest labyrinth_chest;
 
+	public static BlockAetherSlab skyroot_slab, holystone_slab, holystone_brick_slab;
+
 	public static void preInit()
 	{
 		aether_dirt = registerBlock("aether_dirt", new BlockCustom(Material.GROUND).setSoundType(SoundType.GROUND).setHardness(0.5f), AetherCreativeTabs.tabBlocks);
@@ -237,7 +241,7 @@ public class BlocksAether
 
 		carved_stone = registerBlock("carved_stone", new BlockDivine(), AetherCreativeTabs.tabBlocks);
 
-		sentry_stone = registerBlock("sentry_stone", new BlockDivine().setGlows(true), AetherCreativeTabs.tabBlocks);
+		sentry_stone = registerBlock("sentry_stone", new BlockDivine().setLightLevel(0.50f), AetherCreativeTabs.tabBlocks);
 
 		holystone_brick = registerBlock("holystone_brick", new BlockCustom(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2f), AetherCreativeTabs.tabBlocks);
 
@@ -292,14 +296,18 @@ public class BlocksAether
 		labyrinth_glowing_pillar = registerBlock("labyrinth_glowing_pillar", new BlockLabyrinthPillar().setGlows(true), AetherCreativeTabs.tabBlocks);
 		labyrinth_pillar = registerBlock("labyrinth_pillar", new BlockLabyrinthPillar(), AetherCreativeTabs.tabBlocks);
 		labyrinth_wall = registerBlock("labyrinth_wall", new BlockLabyrinth(), AetherCreativeTabs.tabBlocks);
-		labyrinth_lightstone = registerBlock("labyrinth_lightstone", new BlockLabyrinth().setGlows(true), AetherCreativeTabs.tabBlocks);
-		labyrinth_base = registerBlock("labyrinth_base", new BlockLabyrinth().setGlows(true), AetherCreativeTabs.tabBlocks);
+		labyrinth_lightstone = registerBlock("labyrinth_lightstone", new BlockLabyrinth().setLightLevel(1.0f), AetherCreativeTabs.tabBlocks);
+		labyrinth_base = registerBlock("labyrinth_base", new BlockLabyrinth().setLightLevel(0.50f), AetherCreativeTabs.tabBlocks);
 		labyrinth_headstone = registerBlock("labyrinth_headstone", new BlockLabyrinth(), AetherCreativeTabs.tabBlocks);
 
 		sentry_stone_wall = registerBlock("sentry_stone_wall", new BlockAetherWall(BlocksAether.labyrinth_lightstone.getDefaultState(), 1.0f, 10.0f).setGlows(true), AetherCreativeTabs.tabBlocks);
 		divine_sentry_wall = registerBlock("divine_sentry_wall", new BlockDivineWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		divine_stone_wall = registerBlock("divine_stone_wall", new BlockDivineWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
-		
+
+		skyroot_slab = registerBlock("skyroot_slab", new BlockAetherSlab(Material.WOOD, SoundType.WOOD, 2.0f));
+		holystone_slab = registerBlock("holystone_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f));
+		holystone_brick_slab = registerBlock("holystone_brick_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f));
+
 		registerHarvestLevels();
 	}
 
@@ -363,7 +371,11 @@ public class BlocksAether
 
 		GameRegistry.register(block);
 
-		if (block instanceof IBlockVariants)
+		if (block instanceof BlockAetherSlab)
+		{
+			registerItemBlock(new ItemAetherSlab(block));
+		}
+		else if (block instanceof IBlockVariants)
 		{
 			registerItemBlock(new ItemBlockVariants(block));
 		}

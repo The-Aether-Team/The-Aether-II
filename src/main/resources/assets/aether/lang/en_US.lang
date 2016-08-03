@@ -85,6 +85,9 @@ tile.aether.wildcard.name=Wildcard
 tile.aether.schematicBoundary.name=Schematic Boundary
 tile.aether.linkedSchematicBoundary.name=Linked Schematic Boundary
 tile.aether.labyrinth_chest.name=Labyrinth Chest
+tile.aether.skyroot_slab.name=Skyroot Slab
+tile.aether.holystone_slab.name=Holystone Slab
+tile.aether.holystone_brick_slab.name=Holystone Brick Slab
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
