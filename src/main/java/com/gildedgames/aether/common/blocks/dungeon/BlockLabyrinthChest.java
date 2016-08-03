@@ -16,7 +16,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -127,7 +126,7 @@ public class BlockLabyrinthChest extends BlockContainer
 	@Override
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
-		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
+		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 
 	@Override
@@ -181,9 +180,9 @@ public class BlockLabyrinthChest extends BlockContainer
 		{
 			TileEntity tileentity = worldIn.getTileEntity(pos);
 
-			if (tileentity instanceof TileEntityChest)
+			if (tileentity instanceof TileEntityLabyrinthChest)
 			{
-				((TileEntityChest)tileentity).setCustomName(stack.getDisplayName());
+				((TileEntityLabyrinthChest)tileentity).setCustomName(stack.getDisplayName());
 			}
 		}
 	}
@@ -251,6 +250,6 @@ public class BlockLabyrinthChest extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public EnumBlockRenderType getRenderType(IBlockState state)
 	{
-		return EnumBlockRenderType.MODEL;
+		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
 	}
 }

@@ -21,6 +21,7 @@ import com.gildedgames.aether.client.renderer.entities.projectiles.RenderBolt;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDaggerfrostSnowball;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDart;
 import com.gildedgames.aether.client.renderer.tile_entities.TileEntityAltarRenderer;
+import com.gildedgames.aether.client.renderer.tile_entities.TileEntityLabyrinthChestRenderer;
 import com.gildedgames.aether.client.renderer.tile_entities.TileEntityLabyrinthDoorRenderer;
 import com.gildedgames.aether.client.renderer.tile_entities.TileEntityLabyrinthTotemRenderer;
 import com.gildedgames.aether.client.renderer.tile_entities.TileEntitySkyrootChestRenderer;
@@ -46,6 +47,7 @@ import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
+import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthChest;
 import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthDoor;
 import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthTotem;
 import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootChest;
@@ -109,5 +111,6 @@ public class AetherRenderers
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySkyrootSign.class, new TileEntitySkyrootSignRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLabyrinthTotem.class, new TileEntityLabyrinthTotemRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLabyrinthDoor.class, new TileEntityLabyrinthDoorRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLabyrinthChest.class, new TileEntityLabyrinthChestRenderer());
 	}
 }

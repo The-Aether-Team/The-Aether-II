@@ -31,16 +31,18 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 	private String customName;
 
 	// Chest can only be single.
-	public TileEntityLabyrinthChest adjacentChestZNeg = null;
-	public TileEntityLabyrinthChest adjacentChestXPos = null;
-	public TileEntityLabyrinthChest adjacentChestXNeg = null;
-	public TileEntityLabyrinthChest adjacentChestZPos = null;
 
 	public TileEntityLabyrinthChest()
 	{
-		this.cachedChestType = BlockChest.Type.BASIC;
+		//this.cachedChestType = BlockChest.Type.BASIC;
 	}
 
+	public void setCustomName(String name)
+	{
+		this.customName = name;
+	}
+
+	@Override
 	public void updateContainingBlockInfo()
 	{
 		super.updateContainingBlockInfo();
@@ -64,7 +66,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 				{
 					IInventory iinventory = ((ContainerChest)entityplayer.openContainer).getLowerChestInventory();
 
-					if (iinventory == this || iinventory instanceof InventoryLargeChest && ((InventoryLargeChest)iinventory).isPartOfLargeChest(this))
+					if (iinventory == this)
 					{
 						++this.numPlayersUsing;
 					}
@@ -75,20 +77,11 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 		this.prevLidAngle = this.lidAngle;
 		float f1 = 0.1F;
 
-		if (this.numPlayersUsing > 0 && this.lidAngle == 0.0F && this.adjacentChestZNeg == null && this.adjacentChestXNeg == null)
+		if (this.numPlayersUsing > 0 && this.lidAngle == 0.0F)
 		{
 			double d1 = (double)i + 0.5D;
 			double d2 = (double)k + 0.5D;
 
-			if (this.adjacentChestZPos != null)
-			{
-				d2 += 0.5D;
-			}
-
-			if (this.adjacentChestXPos != null)
-			{
-				d1 += 0.5D;
-			}
 
 			this.worldObj.playSound(d1, (double)j + 0.5D, d2, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F, false);
 		}
@@ -113,20 +106,10 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 
 			float f3 = 0.5F;
 
-			if (this.lidAngle < f3 && f2 >= f3 && this.adjacentChestZNeg == null && this.adjacentChestXNeg == null)
+			if (this.lidAngle < f3 && f2 >= f3)
 			{
 				double d3 = (double)i + 0.5D;
 				double d0 = (double)k + 0.5D;
-
-				if (this.adjacentChestZPos != null)
-				{
-					d0 += 0.5D;
-				}
-
-				if (this.adjacentChestXPos != null)
-				{
-					d3 += 0.5D;
-				}
 
 				this.worldObj.playSound(d3, (double)j + 0.5D, d0, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F, false);
 			}
@@ -137,7 +120,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 			}
 		}
 	}
-
+/*
 	public BlockChest.Type getChestType()
 	{
 		if (this.cachedChestType == null)
@@ -151,9 +134,9 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 		}
 
 		return this.cachedChestType;
-	}
+	}*/
 
-	private boolean isChestAt(BlockPos posIn)
+/*	private boolean isChestAt(BlockPos posIn)
 	{
 		if (this.worldObj == null)
 		{
@@ -164,12 +147,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 			Block block = this.worldObj.getBlockState(posIn).getBlock();
 			return block instanceof BlockChest && ((BlockChest)block).chestType == this.getChestType();
 		}
-	}
-
-	protected TileEntityLabyrinthChest getAdjacentChest(EnumFacing side)
-	{
-		return null;
-	}
+	}*/
 
 
 
@@ -280,8 +258,6 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 
 			++this.numPlayersUsing;
 			this.worldObj.addBlockEvent(this.pos, this.getBlockType(), 1, this.numPlayersUsing);
-			this.worldObj.notifyNeighborsOfStateChange(this.pos, this.getBlockType());
-			this.worldObj.notifyNeighborsOfStateChange(this.pos.down(), this.getBlockType());
 		}
 	}
 
@@ -292,8 +268,6 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 		{
 			--this.numPlayersUsing;
 			this.worldObj.addBlockEvent(this.pos, this.getBlockType(), 1, this.numPlayersUsing);
-			this.worldObj.notifyNeighborsOfStateChange(this.pos, this.getBlockType());
-			this.worldObj.notifyNeighborsOfStateChange(this.pos.down(), this.getBlockType());
 		}
 	}
 
