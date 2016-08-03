@@ -98,7 +98,7 @@ public class ItemsAether
 
 	public static ItemArkeniumTool arkenium_axe, arkenium_pickaxe, arkenium_shovel;
 
-	public static ItemAetherSword skyroot_sword, holystone_sword, zanite_sword, gravitite_sword, arkenium_sword, valkyrie_lance;
+	public static ItemAetherSword skyroot_sword, holystone_sword, zanite_sword, gravitite_sword, arkenium_sword;
 
 	public static ItemZaniteArmor zanite_helmet, zanite_chestplate, zanite_leggings, zanite_boots;
 
@@ -138,7 +138,7 @@ public class ItemsAether
 
 	public static ItemElementalSword flaming_sword, holy_sword, lightning_sword;
 
-	public static ItemSword pig_slayer, vampire_blade, candy_cane_sword;
+	public static ItemSword pig_slayer, vampire_blade, candy_cane_sword, valkyrie_lance;
 
 	public static ItemDoor skyroot_door;
 
@@ -236,7 +236,6 @@ public class ItemsAether
 		valkyrie_axe = registerItem("valkyrie_axe", new ItemValkyrieTool(EnumToolType.AXE, 8.0F, -3.0F));
 		valkyrie_pickaxe = registerItem("valkyrie_pickaxe", new ItemValkyrieTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
 		valkyrie_shovel = registerItem("valkyrie_shovel", new ItemValkyrieTool(EnumToolType.SHOVEL,  1.5F, -3.0F));
-		valkyrie_lance = registerItem("valkyrie_lance", new ItemAetherSword(MaterialsAether.LEGENDARY_TOOL, ItemAbilityType.PASSIVE));
 
 		zanite_helmet = registerItem("zanite_helmet", new ItemZaniteArmor(EntityEquipmentSlot.HEAD));
 		zanite_chestplate = registerItem("zanite_chestplate", new ItemZaniteArmor(EntityEquipmentSlot.CHEST));
@@ -346,6 +345,7 @@ public class ItemsAether
 		pig_slayer = registerItem("pig_slayer", new ItemPigSlayer(), AetherCreativeTabs.tabWeapons);
 		vampire_blade = registerItem("vampire_blade", new ItemVampireBlade(), AetherCreativeTabs.tabWeapons);
 		candy_cane_sword = registerItem("candy_cane_sword", new ItemCandyCaneSword(), AetherCreativeTabs.tabWeapons);
+		valkyrie_lance = registerItem("valkyrie_lance", new ItemAetherSword(MaterialsAether.LEGENDARY_TOOL, ItemAbilityType.PASSIVE));
 
 		skyroot_door = registerItem("skyroot_door_item", new ItemDoor(BlocksAether.skyroot_door), AetherCreativeTabs.tabBlocks);
 
