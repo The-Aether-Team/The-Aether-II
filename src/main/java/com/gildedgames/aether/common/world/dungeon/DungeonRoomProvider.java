@@ -10,5 +10,9 @@ public interface DungeonRoomProvider
 {
 
 	List<DungeonRoom> createRooms(MinecraftServer server, Random rand);
+
+	DungeonRoom createEntranceRoom(MinecraftServer server, Random rand);
+
+	DungeonRoom createLayerConnectionRoom(MinecraftServer server, Random rand);
 	
 }

@@ -58,6 +58,16 @@ public class DungeonDefinitions
 					Template pillarRoomVar = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "PillarRoomVar"));
 					Template corridor = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Corridor"));
 
+					Template labCorridor = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Corridor"));
+					Template labLootLarge2 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_LootLarge_2"));
+					Template labLootLarge4 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_LootLarge_4"));
+					Template labLootMed1 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_LootMed_1"));
+					Template labLootMed2 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_LootMed_2"));
+
+					//Template labTunnel = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel"));
+					//Template labTunnelLeft = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel_Left"));
+					//Template labTunnelRight = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel_Right"));
+
 					rooms.add(new DungeonRoom(pillarRoom));
 					rooms.add(new DungeonRoom(pillarRoomVar));
 					rooms.add(new DungeonRoom(pillarRoom));
@@ -68,6 +78,15 @@ public class DungeonDefinitions
 					rooms.add(new DungeonRoom(corridor));
 					rooms.add(new DungeonRoom(corridor));
 					rooms.add(new DungeonRoom(corridor));
+
+					rooms.add(new DungeonRoom(labCorridor));
+					rooms.add(new DungeonRoom(labLootLarge2));
+					rooms.add(new DungeonRoom(labLootLarge4));
+					rooms.add(new DungeonRoom(labLootMed1));
+					rooms.add(new DungeonRoom(labLootMed2));
+					//rooms.add(new DungeonRoom(labTunnel));
+					//rooms.add(new DungeonRoom(labTunnelLeft));
+					//rooms.add(new DungeonRoom(labTunnelRight));
 
 					/*for (int count = 0; count < 3; count++){
 						rooms.add(new DungeonRoom(5, 5, 5));
@@ -83,7 +102,21 @@ public class DungeonDefinitions
 
 					return rooms;
 				}
-				
+
+				@Override public DungeonRoom createEntranceRoom(MinecraftServer server, Random rand)
+				{
+					Template labEntrance = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Entrance"));
+
+					return new DungeonRoom(labEntrance);
+				}
+
+				@Override public DungeonRoom createLayerConnectionRoom(MinecraftServer server, Random rand)
+				{
+					Template labStairs = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Stairs"));
+
+					return new DungeonRoom(labStairs);
+				}
+
 			};
 		}
 		

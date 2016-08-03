@@ -17,6 +17,7 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkProvider;
 
@@ -91,14 +92,26 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 
 			List<DungeonRoom> rooms = provider.createRooms(server, rand);
 
+			DungeonRoom entrance = provider.createEntranceRoom(server, rand);
+			DungeonRoom stairway = provider.createLayerConnectionRoom(server, rand);
+
 			for (DungeonRoom room : rooms)
 			{
 				room.setPos(rand.nextInt(layer.getDiameter()), rand.nextInt(layer.getDiameter()));
 			}
 
+			entrance.setPos(layer.getDiameter(), layer.getDiameter());
+			stairway.setPos(0, 0);
+
+			rooms.add(entrance);
+			rooms.add(stairway);
+
 			rooms = this.separateRooms(rooms);
 
-			int[][] tiles = this.createCorridors(instance, rooms, layer, prevLayer, rand);
+			int[][] tiles = this.createCorridors(instance, rooms, layer, prevLayer, rand, entrance, stairway);
+
+			rooms.add(entrance);
+			rooms.add(stairway);
 
 			layer.setRooms(rooms);
 
@@ -227,7 +240,26 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 				if (room.template != null)
 				{
 					PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk(new ChunkPos(chunkX, chunkZ)).setReplacedBlock((Block) null).setIgnoreStructureBlock(false);
-					room.template.addBlocksToWorld(world, new BlockPos(room.getMinX(), layer.minY(), room.getMinZ()), placementsettings);
+					room.template.addBlocksToWorldChunk(world, new BlockPos(room.getMinX(), layer.minY(), room.getMinZ()), placementsettings);
+
+					BlockPos roomMin = new BlockPos(posX, layer.minY() + 1, posZ);
+
+					Iterable<BlockPos.MutableBlockPos> blocks = BlockPos.getAllInBoxMutable(roomMin, roomMin.add(16, room.template.getSize().getY(), 16));
+
+					for (BlockPos.MutableBlockPos pos : blocks)
+					{
+						IBlockState state = world.getBlockState(pos);
+
+						if (state.getLightValue(world, pos) > 0)
+						{
+							world.setBlockState(pos, state);
+							world.checkLight(pos);
+
+							Chunk chunk = world.getChunkFromChunkCoords(chunkX, chunkZ);
+
+							world.markAndNotifyBlock(pos, chunk, Blocks.AIR.getDefaultState(), state, 3);
+						}
+					}
 				}
 			}
 		}
@@ -405,13 +437,19 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 		return rooms;
 	}
 
-	private int[][] createCorridors(DungeonInstance instance, List<DungeonRoom> rooms, DungeonLayer newLayer, DungeonLayer previousLayer, Random rand)
+	private int[][] createCorridors(DungeonInstance instance, List<DungeonRoom> rooms, DungeonLayer newLayer, DungeonLayer previousLayer, Random rand, DungeonRoom entrance, DungeonRoom stairway)
 	{
+		rooms.remove(entrance);
+		rooms.remove(stairway);
+
 		List<DungeonRoom> largeRooms = this.findLargeRooms(rooms, rooms.size() / 2);
 
 		List<DungeonRoom> smallRooms = (List<DungeonRoom>) ((ArrayList<DungeonRoom>) rooms).clone();
 
 		smallRooms.removeAll(largeRooms);
+
+		largeRooms.add(entrance);
+		largeRooms.add(stairway);
 
 		int[][] tiles = this.getTiles(largeRooms, smallRooms, newLayer, previousLayer);
 
@@ -472,7 +510,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 			}
 		}
 
-		this.findStartAndEnd(instance, tiles, largeRooms, smallRooms, newLayer, previousLayer, rand);
+		this.findStartAndEnd(instance, tiles, largeRooms, smallRooms, newLayer, previousLayer, rand, entrance, stairway);
 
 		return tiles;
 	}
@@ -821,13 +859,13 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 		}
 	}
 
-	private void findStartAndEnd(DungeonInstance instance, int[][] tiles, List<DungeonRoom> largeRooms, List<DungeonRoom> smallRooms, DungeonLayer newLayer, DungeonLayer previousLayer,  Random rand)
+	private void findStartAndEnd(DungeonInstance instance, int[][] tiles, List<DungeonRoom> largeRooms, List<DungeonRoom> smallRooms, DungeonLayer newLayer, DungeonLayer previousLayer,  Random rand, DungeonRoom entrance, DungeonRoom stairway)
 	{
-		DungeonRoom end = null;
+		DungeonRoom end = stairway;
 
 		if (previousLayer == null)//If this is the first generated layer
 		{
-			int largestDistance = 0;
+			/*int largestDistance = 0;
 			DungeonRoom start = null;
 
 			for (int i = 0; i < largeRooms.size() - 1; i++)
@@ -853,9 +891,9 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 						largestDistance = distance;
 					}
 				}
-			}
+			}*/
 
-			instance.setInsideEntrance(new BlockPosDimension((int) start.getMinX() + 1, newLayer.minY() + 1, (int) start.getMinZ() + 1, instance.getDimIdInside()));
+			instance.setInsideEntrance(new BlockPosDimension((int) entrance.getCenterX(), newLayer.minY() + 1, (int) entrance.getCenterZ(), instance.getDimIdInside()));
 		}
 		else
 		{
