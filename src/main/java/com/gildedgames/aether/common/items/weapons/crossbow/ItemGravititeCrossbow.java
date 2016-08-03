@@ -6,5 +6,6 @@ public class ItemGravititeCrossbow extends ItemCrossbow
 	{
 		this.setDamageValue(1);
 		this.setKnockBackValue(1.2F);
+		this.setDuration(60);
 	}
 }

@@ -6,5 +6,6 @@ public class ItemZaniteCrossbow extends ItemCrossbow
 	{
 		this.setDamageValue(1.5F);
 		this.setKnockBackValue(0.5F);
+		this.setDuration(60);
 	}
 }

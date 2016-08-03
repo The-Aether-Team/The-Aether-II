@@ -17,7 +17,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -27,7 +29,8 @@ public class ItemCrossbow extends Item
 
 	public static final String[] crossbowIconNameArray = new String[] {"_fired", "_loaded", "_loading1", "_loading2"};
 
-	private final int DURATION = 80;
+	// How long it takes for crossbow to "pull back"
+	private int duration;
 
 	// How far a mob gets knock-backed by attacking with a crossbow.
 	private float knockBackValue;
@@ -40,6 +43,7 @@ public class ItemCrossbow extends Item
 		this.maxStackSize = 1;
 		knockBackValue = 0;
 		damageValue = 0;
+		duration = 60; // default duration, roughly 3 seconds.
 	}
 
 	// Should be adjusted to check for quiver accessory slot, currently checks the first space in players inventory for ammo.
@@ -68,13 +72,17 @@ public class ItemCrossbow extends Item
 		return false;
 	}
 
-	public float getKnockBackValue() { return knockBackValue; }
+	public float getKnockBackValue() { return this.knockBackValue; }
 
-	public void setKnockBackValue(float x)  { knockBackValue = x; }
+	public void setKnockBackValue(float x)  { this.knockBackValue = x; }
 
-	public float getDamageValue() { return damageValue; }
+	public float getDamageValue() { return this.damageValue; }
 
-	public void setDamageValue(float x) { damageValue = x; }
+	public void setDamageValue(float x) { this.damageValue = x; }
+
+	public int getDuration() { return duration; }
+
+	public void setDuration(int x) { this.duration = x; }
 
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
@@ -114,8 +122,8 @@ public class ItemCrossbow extends Item
 		
 		if (stack.getItemDamage() == 3)
 		{
-			entityLiving.getEntityWorld().spawnEntityInWorld(dart);
 			stack.setItemDamage(0);
+			entityLiving.getEntityWorld().spawnEntityInWorld(dart);
 			return true;
 		}
 
@@ -144,15 +152,15 @@ public class ItemCrossbow extends Item
 
 			if (this.hasAmmo(entityPlayer))
 			{
-				if (count == this.DURATION -10 && stack.getItemDamage() == 0)
+				if (count == (this.duration-(this.duration/3)) && stack.getItemDamage() == 0)
 				{
 					stack.setItemDamage(1);
 				}
-				if (count == (this.DURATION - (this.DURATION / 3)) && stack.getItemDamage() == 1)
+				if (count == (this.duration/2) && stack.getItemDamage() == 1)
 				{
 					stack.setItemDamage(2);
 				}
-				if (count <= 20 && stack.getItemDamage() == 2)
+				if (count == (this.duration/3) && stack.getItemDamage() == 2)
 				{
 					stack.setItemDamage(3);
 					boltStack.stackSize -=1;
@@ -168,15 +176,13 @@ public class ItemCrossbow extends Item
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase playerIn)
 	{
-		stack.setItemDamage(3);
-
 		return stack;
 	}
 
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack)
 	{
-		return this.DURATION; //80~4 seconds
+		return this.getDuration();
 	}
 
 	@Override
@@ -206,5 +212,23 @@ public class ItemCrossbow extends Item
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
 	{
 		stack.setItemDamage(0);
+	}
+
+	@Override
+	public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, EntityPlayer player)
+	{
+		return true;
+	}
+
+	@Override
+	public EnumActionResult onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand)
+	{
+		return EnumActionResult.FAIL;
+	}
+
+	@Override
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	{
+		return EnumActionResult.FAIL;
 	}
 }

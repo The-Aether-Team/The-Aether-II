@@ -6,5 +6,6 @@ public class ItemHolystoneCrossbow extends ItemCrossbow
 	{
 		this.setDamageValue(1);
 		this.setKnockBackValue(0.7F);
+		this.setDuration(60);
 	}
 }

@@ -6,5 +6,6 @@ public class ItemVampireCrossbow extends ItemCrossbow
 	{
 		this.setDamageValue(2.5F);
 		this.setKnockBackValue(0.7F);
+		this.setDuration(60);
 	}
 }

@@ -6,5 +6,6 @@ public class ItemArkeniumCrossbow extends ItemCrossbow
 	{
 		this.setDamageValue(3.5F);
 		this.setKnockBackValue(0.5F);
+		this.setDuration(60);
 	}
 }
