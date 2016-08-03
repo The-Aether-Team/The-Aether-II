@@ -2,17 +2,7 @@ package com.gildedgames.aether.common.blocks;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.AetherCreativeTabs;
-import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
-import com.gildedgames.aether.common.blocks.construction.BlockAetherSlab;
-import com.gildedgames.aether.common.blocks.construction.BlockAltar;
-import com.gildedgames.aether.common.blocks.construction.BlockAmbrosiumTorch;
-import com.gildedgames.aether.common.blocks.construction.BlockQuicksoilGlass;
-import com.gildedgames.aether.common.blocks.construction.BlockSkyrootChest;
-import com.gildedgames.aether.common.blocks.construction.BlockSkyrootDoor;
-import com.gildedgames.aether.common.blocks.construction.BlockSkyrootFence;
-import com.gildedgames.aether.common.blocks.construction.BlockSkyrootFenceGate;
-import com.gildedgames.aether.common.blocks.construction.BlockSkyrootLadder;
-import com.gildedgames.aether.common.blocks.construction.BlockSkyrootTrapDoor;
+import com.gildedgames.aether.common.blocks.construction.*;
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystoneButton;
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystonePressurePlate;
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockSkyrootButton;
@@ -126,6 +116,8 @@ public class BlocksAether
 	public static BlockQuicksoilGlass quicksoil_glass;
 
 	public static BlockSkyrootDoor skyroot_door;
+
+	public static BlockArkeniumDoor arkenium_door;
 
 	public static BlockSkyrootChest skyroot_chest;
 
@@ -250,6 +242,8 @@ public class BlocksAether
 		quicksoil_glass = registerBlock("quicksoil_glass", new BlockQuicksoilGlass(), AetherCreativeTabs.tabBlocks);
 
 		skyroot_door = registerBlock("skyroot_door", new BlockSkyrootDoor());
+
+		arkenium_door = registerBlock("arkenium_door", new BlockArkeniumDoor());
 
 		skyroot_chest = registerBlock("skyroot_chest", new BlockSkyrootChest(), AetherCreativeTabs.tabBlocks);
 

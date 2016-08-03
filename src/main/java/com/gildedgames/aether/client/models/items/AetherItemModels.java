@@ -311,6 +311,7 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.candy_cane_sword, "weapons/candy_cane_sword");
 
 		registerItemModels(ItemsAether.skyroot_door, "skyroot_door");
+		registerItemModels(ItemsAether.arkenium_door, "arkenium_door");
 		registerItemModels(BlocksAether.skyroot_trapdoor, "skyroot_trapdoor");
 		registerItemModels(BlocksAether.skyroot_ladder, "skyroot_ladder");
 		registerItemModels(BlocksAether.skyroot_pressure_plate, "skyroot_pressure_plate");

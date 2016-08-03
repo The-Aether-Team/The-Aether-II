@@ -140,7 +140,7 @@ public class ItemsAether
 
 	public static ItemSword pig_slayer, vampire_blade, candy_cane_sword, valkyrie_lance;
 
-	public static ItemDoor skyroot_door;
+	public static ItemDoor skyroot_door, arkenium_door;
 
 	public static ItemSkyrootCrossbow skyroot_crossbow;
 
@@ -348,6 +348,7 @@ public class ItemsAether
 		valkyrie_lance = registerItem("valkyrie_lance", new ItemAetherSword(MaterialsAether.LEGENDARY_TOOL, ItemAbilityType.PASSIVE));
 
 		skyroot_door = registerItem("skyroot_door_item", new ItemDoor(BlocksAether.skyroot_door), AetherCreativeTabs.tabBlocks);
+		arkenium_door = registerItem("arkenium_door_item", new ItemDoor(BlocksAether.arkenium_door), AetherCreativeTabs.tabBlocks);
 
 		iron_ring = registerItem("iron_ring", new Item().setMaxStackSize(1), AetherCreativeTabs.tabAccessories);
 		gold_ring = registerItem("gold_ring", new Item().setMaxStackSize(1), AetherCreativeTabs.tabAccessories);
