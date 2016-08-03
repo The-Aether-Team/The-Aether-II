@@ -11,13 +11,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
+import java.util.concurrent.Callable;
 
 public class BlockCustomDoor extends BlockDoor
 {
 
-	private Item doorItem;
+	private Callable<Item> doorItem;
 
-	public BlockCustomDoor(Material material, Item doorItem, SoundType soundType)
+	public BlockCustomDoor(Material material, Callable<Item> doorItem, SoundType soundType)
 	{
 		super(material);
 
@@ -33,13 +34,31 @@ public class BlockCustomDoor extends BlockDoor
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER ? null : this.doorItem;
+		try
+		{
+			return state.getValue(HALF) == EnumDoorHalf.UPPER ? null : this.doorItem.call();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 	@Override
 	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
 	{
-		return new ItemStack(this.doorItem);
+		try
+		{
+			return new ItemStack(this.doorItem.call());
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 }

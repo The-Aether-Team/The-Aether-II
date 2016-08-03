@@ -53,8 +53,11 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.audio.Sound;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import java.util.concurrent.Callable;
 
 public class BlocksAether
 {
@@ -243,9 +246,9 @@ public class BlocksAether
 
 		quicksoil_glass = registerBlock("quicksoil_glass", new BlockQuicksoilGlass(), AetherCreativeTabs.tabBlocks);
 
-		skyroot_door = registerBlock("skyroot_door", new BlockCustomDoor(Material.WOOD, ItemsAether.skyroot_door, SoundType.WOOD));
+		skyroot_door = registerBlock("skyroot_door", new BlockCustomDoor(Material.WOOD, new Callable<Item>() { public Item call() { return ItemsAether.skyroot_door; } }, SoundType.WOOD));
 
-		arkenium_door = registerBlock("arkenium_door", new BlockCustomDoor(Material.IRON, ItemsAether.arkenium_door, SoundType.METAL));
+		arkenium_door = registerBlock("arkenium_door", new BlockCustomDoor(Material.IRON, new Callable<Item>() { public Item call() { return ItemsAether.arkenium_door; } }, SoundType.METAL));
 
 		skyroot_chest = registerBlock("skyroot_chest", new BlockSkyrootChest(), AetherCreativeTabs.tabBlocks);
 
