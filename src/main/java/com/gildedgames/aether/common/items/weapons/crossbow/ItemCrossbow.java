@@ -27,7 +27,7 @@ public class ItemCrossbow extends Item
 
 	public static final String[] crossbowIconNameArray = new String[] {"_fired", "_loaded", "_loading1", "_loading2"};
 
-	private final int DURATION = 180;
+	private final int DURATION = 80;
 
 	// How far a mob gets knock-backed by attacking with a crossbow.
 	private float knockBackValue;
@@ -48,7 +48,9 @@ public class ItemCrossbow extends Item
 		ItemStack boltStack = player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
 
 		if (this.hasAmmo(player))
+		{
 			return boltStack.getMetadata();
+		}
 
 		return -1;
 	}
@@ -110,10 +112,10 @@ public class ItemCrossbow extends Item
 		dart.setBoltAbility(stack.getItem() instanceof ItemArkeniumCrossbow ? BoltAbility.DESTROY_BLOCKS : BoltAbility.NORMAL);
 		dart.pickupStatus = EntityArrow.PickupStatus.ALLOWED;
 		
-		if (stack.getItemDamage() > 0)
+		if (stack.getItemDamage() == 3)
 		{
 			entityLiving.getEntityWorld().spawnEntityInWorld(dart);
-			stack.setItemDamage(stack.getItemDamage()-1);
+			stack.setItemDamage(0);
 			return true;
 		}
 
@@ -145,12 +147,10 @@ public class ItemCrossbow extends Item
 				if (count == this.DURATION -10 && stack.getItemDamage() == 0)
 				{
 					stack.setItemDamage(1);
-					boltStack.stackSize -= 1;
 				}
 				if (count == (this.DURATION - (this.DURATION / 3)) && stack.getItemDamage() == 1)
 				{
 					stack.setItemDamage(2);
-					boltStack.stackSize -= 1;
 				}
 				if (count <= 20 && stack.getItemDamage() == 2)
 				{
@@ -200,5 +200,11 @@ public class ItemCrossbow extends Item
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
+	{
+		stack.setItemDamage(0);
 	}
 }
