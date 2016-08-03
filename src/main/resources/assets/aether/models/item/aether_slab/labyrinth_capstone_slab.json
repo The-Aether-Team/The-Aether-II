@@ -1,0 +1,8 @@
+{
+	"parent": "block/half_slab",
+	"textures": {
+		"bottom": "aether:blocks/dungeon/carved_capstone_top",
+		"top": "aether:blocks/dungeon/carved_capstone_top",
+		"side": "aether:blocks/dungeon/carved_capstone_side"
+	}
+}

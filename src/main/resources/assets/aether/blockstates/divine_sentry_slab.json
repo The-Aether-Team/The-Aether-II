@@ -1,0 +1,27 @@
+{
+	"forge_marker": 1,
+	"variants": {
+		"state=bottom": [{
+			"textures": {
+				"bottom": "aether:blocks/dungeon/divine_sentry_stone",
+				"top": "aether:blocks/dungeon/divine_sentry_stone",
+				"side": "aether:blocks/dungeon/divine_sentry_stone"
+			},
+			"model": "half_slab"
+		}],
+		"state=top": [{
+			"textures": {
+				"bottom": "aether:blocks/dungeon/divine_sentry_stone",
+				"top": "aether:blocks/dungeon/divine_sentry_stone",
+				"side": "aether:blocks/dungeon/divine_sentry_stone"
+			},
+			"model": "upper_slab"
+		}],
+		"state=full": [{
+			"textures": {
+				"all": "aether:blocks/dungeon/divine_sentry_stone"
+			},
+			"model": "cube_all"
+		}]
+	}
+}

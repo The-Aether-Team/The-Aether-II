@@ -1,0 +1,8 @@
+{
+	"parent": "block/half_slab",
+	"textures": {
+		"bottom": "aether:blocks/dungeon/divine_carved_stone",
+		"top": "aether:blocks/dungeon/divine_carved_stone",
+		"side": "aether:blocks/dungeon/divine_carved_stone"
+	}
+}

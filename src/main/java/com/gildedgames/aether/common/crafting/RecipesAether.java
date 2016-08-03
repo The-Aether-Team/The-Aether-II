@@ -148,6 +148,29 @@ public class RecipesAether implements IAltarRecipeRegistry
 		registerShapedRecipe(new ItemStack(BlocksAether.aerogel_wall, 6), "XXX", "XXX",
 				'X', new ItemStack(BlocksAether.aerogel));
 
+		// Slabs
+
+		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_slab, 6), "XXX",
+				'X', new ItemStack(BlocksAether.skyroot_planks));
+		registerShapedRecipe(new ItemStack(BlocksAether.holystone_slab, 6), "XXX",
+			    'X', new ItemStack(BlocksAether.holystone));
+		registerShapedRecipe(new ItemStack(BlocksAether.holystone_brick_slab, 6), "XXX",
+				'X', new ItemStack(BlocksAether.holystone_brick));
+		registerShapedRecipe(new ItemStack(BlocksAether.carved_stone_slab, 6), "XXX",
+				'X', new ItemStack(BlocksAether.carved_stone));
+		registerShapedRecipe(new ItemStack(BlocksAether.divine_carved_stone_slab, 6), "XXX",
+				'X', new ItemStack(BlocksAether.divine_carved_stone));
+		registerShapedRecipe(new ItemStack(BlocksAether.sentry_stone_slab, 6), "XXX",
+				'X', new ItemStack(BlocksAether.sentry_stone));
+		registerShapedRecipe(new ItemStack(BlocksAether.divine_sentry_slab, 6), "XXX",
+				'X', new ItemStack(BlocksAether.divine_sentry_stone));
+		registerShapedRecipe(new ItemStack(BlocksAether.icestone_slab, 6), "XXX",
+				'X', new ItemStack(BlocksAether.icestone_bricks));
+		registerShapedRecipe(new ItemStack(BlocksAether.labyrinth_capstone_slab, 6), "XXX",
+				'X', new ItemStack(BlocksAether.carved_capstone));
+		registerShapedRecipe(new ItemStack(BlocksAether.labyrinth_wall_slab, 6), "XXX",
+				'X', new ItemStack(BlocksAether.labyrinth_wall));
+
 		// Fences
         registerShapedRecipe(new ItemStack(BlocksAether.skyroot_fence, 3), "XYX", "XYX",
                 'X', new ItemStack(ItemsAether.skyroot_stick),

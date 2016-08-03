@@ -1,0 +1,27 @@
+{
+	"forge_marker": 1,
+	"variants": {
+		"state=bottom": [{
+			"textures": {
+				"bottom": "aether:blocks/dungeon/carved_capstone_top",
+				"top": "aether:blocks/dungeon/carved_capstone_top",
+				"side": "aether:blocks/dungeon/carved_capstone_side"
+			},
+			"model": "half_slab"
+		}],
+		"state=top": [{
+			"textures": {
+				"bottom": "aether:blocks/dungeon/carved_capstone_top",
+				"top": "aether:blocks/dungeon/carved_capstone_top",
+				"side": "aether:blocks/dungeon/carved_capstone_side"
+			},
+			"model": "upper_slab"
+		}],
+		"state=full": [{
+			"textures": {
+				"all": "aether:blocks/dungeon/carved_capstone_top"
+			},
+			"model": "cube_all"
+		}]
+	}
+}

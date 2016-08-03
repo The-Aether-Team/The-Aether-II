@@ -406,6 +406,13 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.skyroot_slab, "aether_slab/skyroot_slab");
 		registerItemModels(BlocksAether.holystone_slab, "aether_slab/holystone_slab");
 		registerItemModels(BlocksAether.holystone_brick_slab, "aether_slab/holystone_brick_slab");
+		registerItemModels(BlocksAether.carved_stone_slab, "aether_slab/carved_stone_slab");
+		registerItemModels(BlocksAether.divine_carved_stone_slab, "aether_slab/divine_carved_stone_slab");
+		registerItemModels(BlocksAether.sentry_stone_slab, "aether_slab/sentry_stone_slab");
+		registerItemModels(BlocksAether.divine_sentry_slab, "aether_slab/divine_sentry_slab");
+		registerItemModels(BlocksAether.icestone_slab, "aether_slab/icestone_slab");
+		registerItemModels(BlocksAether.labyrinth_capstone_slab, "aether_slab/labyrinth_capstone_slab");
+		registerItemModels(BlocksAether.labyrinth_wall_slab, "aether_slab/labyrinth_wall_slab");
 
 	}
 

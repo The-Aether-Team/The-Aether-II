@@ -119,7 +119,7 @@ public class BlocksAether
 
 	public static BlockAetherSapling aether_sapling;
 
-	public static BlockLabyrinth carved_stone, sentry_stone;
+	public static BlockLabyrinth carved_stone, sentry_stone, divine_carved_stone, divine_sentry_stone;
 
 	public static BlockHolystoneFurnace holystone_furnace;
 
@@ -167,12 +167,12 @@ public class BlocksAether
 	public static BlockLabyrinthDoor labyrinth_door;
 
 	public static BlockLabyrinth labyrinth_wall, labyrinth_lightstone, labyrinth_base, labyrinth_headstone;
-	
+
 	public static Block labyrinth_eye, wildcard, schematicBoundary, linkedSchematicBoundary;
 
 	public static BlockLabyrinthChest labyrinth_chest;
 
-	public static BlockAetherSlab skyroot_slab, holystone_slab, holystone_brick_slab;
+	public static BlockAetherSlab skyroot_slab, holystone_slab, holystone_brick_slab, carved_stone_slab, divine_carved_stone_slab, sentry_stone_slab, divine_sentry_slab, icestone_slab, labyrinth_capstone_slab, labyrinth_wall_slab;
 
 	public static void preInit()
 	{
@@ -304,9 +304,17 @@ public class BlocksAether
 		divine_sentry_wall = registerBlock("divine_sentry_wall", new BlockDivineWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 		divine_stone_wall = registerBlock("divine_stone_wall", new BlockDivineWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
 
-		skyroot_slab = registerBlock("skyroot_slab", new BlockAetherSlab(Material.WOOD, SoundType.WOOD, 2.0f));
-		holystone_slab = registerBlock("holystone_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f));
-		holystone_brick_slab = registerBlock("holystone_brick_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f));
+		skyroot_slab = registerBlock("skyroot_slab", new BlockAetherSlab(Material.WOOD, SoundType.WOOD, 2.0f), AetherCreativeTabs.tabBlocks);
+		holystone_slab = registerBlock("holystone_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f), AetherCreativeTabs.tabBlocks);
+		holystone_brick_slab = registerBlock("holystone_brick_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f), AetherCreativeTabs.tabBlocks);
+		carved_stone_slab = registerBlock("carved_stone_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f), AetherCreativeTabs.tabBlocks);
+		divine_carved_stone_slab = registerBlock("divine_carved_stone_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f), AetherCreativeTabs.tabBlocks);
+		sentry_stone_slab = registerBlock("sentry_stone_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f), AetherCreativeTabs.tabBlocks);
+		divine_sentry_slab = registerBlock("divine_sentry_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f), AetherCreativeTabs.tabBlocks);
+		icestone_slab = registerBlock("icestone_slab", new BlockAetherSlab(Material.ROCK, SoundType.GLASS, 2.0f), AetherCreativeTabs.tabBlocks);
+		labyrinth_capstone_slab = registerBlock("labyrinth_capstone_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f), AetherCreativeTabs.tabBlocks);
+		labyrinth_wall_slab = registerBlock("labyrinth_wall_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f), AetherCreativeTabs.tabBlocks);
+
 
 		registerHarvestLevels();
 	}
@@ -355,6 +363,18 @@ public class BlocksAether
 		skyroot_log_wall.setHarvestLevel("axe", 0);
 		icestone_wall.setHarvestLevel("pickaxe", 1);
 		aerogel_wall.setHarvestLevel("pickaxe", 1);
+
+		skyroot_slab.setHarvestLevel("axe", 0);
+		holystone_slab.setHarvestLevel("pickaxe", 0);
+		holystone_brick_slab.setHarvestLevel("pickaxe", 0);
+		carved_stone_slab.setHarvestLevel("pickaxe", 0);
+		divine_carved_stone_slab.setHarvestLevel("pickaxe", 0);
+		sentry_stone_slab.setHarvestLevel("pickaxe", 0);
+		divine_sentry_slab.setHarvestLevel("pickaxe", 0);
+		icestone_slab.setHarvestLevel("pickaxe", 0);
+		labyrinth_capstone_slab.setHarvestLevel("pickaxe", 0);
+		labyrinth_wall_slab.setHarvestLevel("pickaxe", 0);
+
 	}
 
 	private static <T extends Block> T registerBlock(String name, T block, CreativeTabs tab)
