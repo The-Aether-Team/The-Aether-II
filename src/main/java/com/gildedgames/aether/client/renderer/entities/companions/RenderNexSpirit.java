@@ -17,14 +17,14 @@ public class RenderNexSpirit extends RenderCompanion<EntityNexSpirit>
 
 	public RenderNexSpirit(RenderManager renderManager)
 	{
-		super(renderManager, new ModelNexSpirit(), 0.2f, 1.5D);
+		super(renderManager, new ModelNexSpirit(), 0.2f, 1.2D);
 	}
 
 	@Override
 	protected void preRenderCallback(EntityNexSpirit entity, float partialTicks)
 	{
-		GL11.glScalef(0.5f, 0.5f, 0.5f);
-		GL11.glTranslatef(0.0f, -1.0f, 0.0f);
+		GL11.glScalef(0.65f, 0.65f, 0.65f);
+		GL11.glTranslatef(0.0f, -0.7f, 0.0f);
 
 		GL11.glTranslatef(0.0f, MathHelper.cos((entity.ticksExisted + partialTicks) / 10f) / 10f, -0.4f);
 	}
@@ -135,8 +135,11 @@ public class RenderNexSpirit extends RenderCompanion<EntityNexSpirit>
 		GL11.glVertex3f(0 + wave2, 8, 2);
 		GL11.glVertex3f(-2.5f + wave1, 0, 3);
 		GL11.glEnd();
+
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glPopMatrix();
+
+		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
 	@Override

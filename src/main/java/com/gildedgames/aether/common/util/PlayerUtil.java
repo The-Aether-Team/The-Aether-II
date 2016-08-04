@@ -1,56 +1,52 @@
 package com.gildedgames.aether.common.util;
 
-import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import java.util.Set;
+
 public class PlayerUtil
 {
-	public static boolean isWearingFullSet(EntityPlayer player, Class<? extends Item> cls)
+	public static boolean isWearingEquipment(PlayerAether aePlayer, Item... items)
 	{
-		return findArmorSet(player) == cls;
-	}
-
-	public static Class<? extends Item> findArmorSet(EntityPlayer player)
-	{
-		Class<? extends Item> armorClass = null;
-
-		for (ItemStack stack : player.inventory.armorInventory)
+		for (Item item : items)
 		{
-			if (stack == null)
+			boolean found = false;
+
+			for (int i = 0; i < aePlayer.getEquipmentInventory().getSizeInventory(); i++)
 			{
-				return null;
+				ItemStack stack = aePlayer.getEquipmentInventory().getStackInSlot(i);
+
+				if (stack != null && stack.getItem() == item)
+				{
+					found = true;
+
+					break;
+				}
 			}
 
-			Class<? extends Item> stackClass = stack.getItem().getClass();
+			for (ItemStack stack : aePlayer.getPlayer().inventory.armorInventory)
+			{
+				if (stack != null && stack.getItem() == item)
+				{
+					found = true;
 
-			if (armorClass == null)
-			{
-				armorClass = stackClass;
+					break;
+				}
 			}
-			else if (!stackClass.isAssignableFrom(stackClass))
+
+			if (!found)
 			{
-				return null;
+				return false;
 			}
 		}
 
-		PlayerAether aePlayer = (PlayerAether) PlayerAether.getPlayer(player);
-		ItemStack gloveStack = aePlayer.getEquipmentInventory().getStackInSlot(2);
-
-		if (aePlayer.getEquipmentInventory().getStackInSlot(2) != null)
-		{
-			if (gloveStack.getItem() == ItemsAether.obsidian_gloves || gloveStack.getItem() == ItemsAether.gravitite_gloves
-					|| gloveStack.getItem() == ItemsAether.phoenix_gloves || gloveStack.getItem() == ItemsAether.neptune_gloves
-					|| gloveStack.getItem() == ItemsAether.valkyrie_gloves || gloveStack.getItem() == ItemsAether.zanite_gloves)
-			{
-				return armorClass;
-			}
-		}
-
-		return null;
+		return true;
 	}
+
+
 
 	public static void fillBucketInHand(EntityPlayer player, ItemStack emptyBucket, ItemStack fillBucket)
 	{
@@ -69,20 +65,5 @@ public class PlayerUtil
 				player.dropItem(fillBucket, false);
 			}
 		}
-	}
-
-	public static boolean wearingArmor(EntityPlayer player, int slot, Item item)
-	{
-		ItemStack stack = player.inventory.armorInventory[slot];
-
-		if (stack != null)
-		{
-			if (stack.getItem() == item)
-			{
-				return true;
-			}
-		}
-
-		return false;
 	}
 }

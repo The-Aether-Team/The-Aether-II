@@ -36,27 +36,6 @@ public class ItemAetherArmor extends ItemArmor
 		return false;
 	}
 
-	@Override
-	public void onArmorTick(World world, EntityPlayer player, ItemStack stack)
-	{
-		ItemAetherArmor armor = (ItemAetherArmor) stack.getItem();
-
-		// Only the helmet should tick. This prevents the calculations being done 4x times.
-		if (armor.armorType == EntityEquipmentSlot.HEAD)
-		{
-			Class<? extends Item> fullSet = PlayerUtil.findArmorSet(player);
-
-			if (fullSet != null && fullSet.isAssignableFrom(this.getClass()))
-			{
-				this.applyFullSetBonus(world, player);
-			}
-		}
-	}
-
-	protected void applyFullSetBonus(World world, EntityPlayer player)
-	{
-	}
-
 	protected boolean isAbilityPassive()
 	{
 		return true;

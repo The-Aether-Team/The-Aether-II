@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.companions;
 
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.aether.common.player.PlayerCompanionManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -25,13 +26,15 @@ public class EntityNexSpirit extends EntityCompanion
 
 		if (this.getOwner() != null)
 		{
-			PlayerAether aePlayer = (PlayerAether) PlayerAether.getPlayer(this.getOwner());
+			PlayerAether aePlayer = PlayerAether.getPlayer(this.getOwner());
 
-			if (aePlayer.getCompanionItem() != null && aePlayer.getCompanionItem().getItem() instanceof ItemDeathSeal)
+			PlayerCompanionManager companionManager = aePlayer.getCompanionManager();
+
+			ItemStack equippedCompanion = companionManager.getEquippedCompanionItem();
+
+			if (equippedCompanion != null && equippedCompanion.getItem() instanceof ItemDeathSeal)
 			{
-				ItemStack stack = aePlayer.getCompanionItem();
-
-				long ticks = ItemDeathSeal.getTicksUntilEnabled(stack, this.worldObj);
+				long ticks = ItemDeathSeal.getTicksUntilEnabled(equippedCompanion, this.worldObj);
 
 				this.setBroken(ticks > 0);
 			}

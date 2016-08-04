@@ -42,7 +42,7 @@ public abstract class EntityCompanion extends EntityLiving
 	{
 		super.applyEntityAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
 	}
 
 	@Override
@@ -70,9 +70,9 @@ public abstract class EntityCompanion extends EntityLiving
 			}
 			else
 			{
-				PlayerAether aePlayer = (PlayerAether) PlayerAether.getPlayer(this.getOwner());
+				PlayerAether aePlayer = PlayerAether.getPlayer(this.getOwner());
 
-				if (aePlayer.getCompanionEntity() != this)
+				if (aePlayer.getCompanionManager().getCompanionEntity() != this)
 				{
 					this.setDead();
 

@@ -1,16 +1,13 @@
 package com.gildedgames.aether.api.player;
 
+import com.gildedgames.aether.api.player.companions.IPlayerCompanionManager;
+import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-
-import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
@@ -39,6 +36,8 @@ public interface IPlayerAetherCapability
 
 	IInventoryEquipment getEquipmentInventory();
 
+	IPlayerCompanionManager getCompanionManager();
+
 	/**
 	 * @return The {@link EntityPlayer} this capability is attached to.
 	 */
@@ -48,10 +47,6 @@ public interface IPlayerAetherCapability
 	 * @return This player's mining speed modifier.
 	 */
 	float getMiningSpeedMultiplier();
-
-	BlockPos getLinkingSchematicBoundary();
-	
-	void setLinkingSchematicBoundary(BlockPos pos);
 
 	int getTicksAirborne();
 

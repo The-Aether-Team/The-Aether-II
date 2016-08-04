@@ -1,35 +1,5 @@
 package com.gildedgames.aether.common.items;
 
-import java.util.List;
-
-import com.gildedgames.aether.common.entities.companions.EntityFangrin;
-import com.gildedgames.aether.common.entities.companions.EntityFleetingWisp;
-import com.gildedgames.aether.common.entities.companions.EntityFrostpineTotem;
-import com.gildedgames.aether.common.entities.companions.EntityKraisith;
-import com.gildedgames.aether.common.entities.companions.EntityNexSpirit;
-import com.gildedgames.aether.common.entities.companions.EntityShadeOfArkenzus;
-import com.gildedgames.aether.common.entities.companions.EntityEtheralWisp;
-import com.gildedgames.aether.common.entities.companions.EntitySoaringWisp;
-import com.gildedgames.aether.common.items.companions.ItemCompanion;
-import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
-import com.gildedgames.aether.common.items.consumables.*;
-import com.gildedgames.aether.common.items.weapons.swords.*;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemDoor;
-import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
@@ -40,6 +10,14 @@ import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.MaterialsAether;
 import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.entities.companions.EntityEtheralWisp;
+import com.gildedgames.aether.common.entities.companions.EntityFangrin;
+import com.gildedgames.aether.common.entities.companions.EntityFleetingWisp;
+import com.gildedgames.aether.common.entities.companions.EntityFrostpineTotem;
+import com.gildedgames.aether.common.entities.companions.EntityKraisith;
+import com.gildedgames.aether.common.entities.companions.EntityNexSpirit;
+import com.gildedgames.aether.common.entities.companions.EntityShadeOfArkenzus;
+import com.gildedgames.aether.common.entities.companions.EntitySoaringWisp;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import com.gildedgames.aether.common.entities.effects.processors.DoubleDropEffect;
 import com.gildedgames.aether.common.entities.effects.processors.FreezeBlocksEffect;
@@ -56,7 +34,16 @@ import com.gildedgames.aether.common.items.armor.ItemPhoenixArmor;
 import com.gildedgames.aether.common.items.armor.ItemSentryBoots;
 import com.gildedgames.aether.common.items.armor.ItemValkyrieArmor;
 import com.gildedgames.aether.common.items.armor.ItemZaniteArmor;
+import com.gildedgames.aether.common.items.companions.ItemCompanion;
+import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import com.gildedgames.aether.common.items.companions.ItemPinkBabySwet;
+import com.gildedgames.aether.common.items.consumables.ItemAmbrosiumShard;
+import com.gildedgames.aether.common.items.consumables.ItemContinuumOrb;
+import com.gildedgames.aether.common.items.consumables.ItemEnchantedWyndberry;
+import com.gildedgames.aether.common.items.consumables.ItemGummySwet;
+import com.gildedgames.aether.common.items.consumables.ItemSkyrootConsumableBucket;
+import com.gildedgames.aether.common.items.consumables.ItemStomperPop;
+import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
 import com.gildedgames.aether.common.items.effects.ItemEffects;
 import com.gildedgames.aether.common.items.miscellaneous.ItemShardOfLife;
 import com.gildedgames.aether.common.items.tools.EnumToolType;
@@ -78,7 +65,33 @@ import com.gildedgames.aether.common.items.weapons.crossbow.ItemHolystoneCrossbo
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemSkyrootCrossbow;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemVampireCrossbow;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemZaniteCrossbow;
+import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
+import com.gildedgames.aether.common.items.weapons.swords.ItemArkeniumSword;
+import com.gildedgames.aether.common.items.weapons.swords.ItemCandyCaneSword;
+import com.gildedgames.aether.common.items.weapons.swords.ItemElementalSword;
+import com.gildedgames.aether.common.items.weapons.swords.ItemGravititeSword;
+import com.gildedgames.aether.common.items.weapons.swords.ItemHolystoneSword;
+import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
+import com.gildedgames.aether.common.items.weapons.swords.ItemZaniteSword;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemDoor;
+import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.List;
+import java.util.Set;
 
 public class ItemsAether
 {
@@ -191,6 +204,18 @@ public class ItemsAether
 	public static ItemCompanion ethereal_stone, fleeting_stone, soaring_stone;
 
 	public static ItemCompanion frostpine_totem, kraisith_capsule, orb_of_arkenzus, fangrin_capsule, death_seal;
+
+	public static Item[] zanite_armor_set;
+
+	public static Item[] gravitite_armor_set;
+
+	public static Item[] valkyrie_armor_set;
+
+	public static Item[] phoenix_armor_set;
+
+	public static Item[] neptune_armor_set;
+
+	public static Item[] obsidian_armor_set;
 
 	public static void preInit()
 	{
@@ -491,6 +516,18 @@ public class ItemsAether
 		ItemEffects.register(neptune_gloves, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(2.0F)));
 		ItemEffects.register(phoenix_gloves, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(2.0F)));
 		ItemEffects.register(obsidian_gloves, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(3.0F)));
+
+		zanite_armor_set = new Item[] { zanite_helmet, zanite_chestplate, zanite_leggings, zanite_boots, zanite_gloves };
+
+		gravitite_armor_set = new Item[] { gravitite_helmet, gravitite_chestplate, gravitite_leggings, gravitite_boots, gravitite_gloves };
+
+		valkyrie_armor_set = new Item[] { valkyrie_helmet, valkyrie_chestplate, valkyrie_leggings, valkyrie_boots, valkyrie_gloves };
+
+		phoenix_armor_set = new Item[] { phoenix_helmet, phoenix_chestplate, phoenix_leggings, phoenix_boots, phoenix_gloves };
+
+		neptune_armor_set = new Item[] { neptune_helmet, neptune_chestplate, neptune_leggings, neptune_boots, neptune_gloves };
+
+		obsidian_armor_set = new Item[] { obsidian_helmet, obsidian_chestplate, obsidian_leggings, obsidian_boots, obsidian_gloves };
 
 		registerItemProperties();
 	}

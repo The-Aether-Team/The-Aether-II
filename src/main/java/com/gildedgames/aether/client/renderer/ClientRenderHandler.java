@@ -2,6 +2,7 @@ package com.gildedgames.aether.client.renderer;
 
 import com.gildedgames.aether.client.models.entities.player.LayerPlayerGloves;
 import com.gildedgames.aether.client.renderer.entities.living.RenderPlayerHelper;
+import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
 import com.gildedgames.aether.common.items.armor.ItemPhoenixArmor;
 import com.gildedgames.aether.common.player.PlayerAether;
@@ -32,7 +33,9 @@ public class ClientRenderHandler
 		{
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 
-			if (player.getAir() >= 295 && PlayerUtil.isWearingFullSet(Minecraft.getMinecraft().thePlayer, ItemNeptuneArmor.class))
+			PlayerAether aePlayer = PlayerAether.getPlayer(player);
+
+			if (player.getAir() >= 295 && PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.neptune_armor_set))
 			{
 				event.setCanceled(true);
 			}
@@ -42,16 +45,18 @@ public class ClientRenderHandler
 	@SubscribeEvent
 	public void onRenderBlockOverlay(RenderBlockOverlayEvent event)
 	{
+		PlayerAether aePlayer = PlayerAether.getPlayer(event.getPlayer());
+
 		if (event.getOverlayType() == RenderBlockOverlayEvent.OverlayType.WATER)
 		{
-			if (PlayerUtil.isWearingFullSet(Minecraft.getMinecraft().thePlayer, ItemNeptuneArmor.class))
+			if (PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.neptune_armor_set))
 			{
 				event.setCanceled(true);
 			}
 		}
 		else if (event.getOverlayType() == RenderBlockOverlayEvent.OverlayType.FIRE)
 		{
-			if (PlayerUtil.isWearingFullSet(Minecraft.getMinecraft().thePlayer, ItemPhoenixArmor.class))
+			if (PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.phoenix_armor_set))
 			{
 				event.setCanceled(true);
 			}

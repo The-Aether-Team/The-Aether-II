@@ -9,6 +9,7 @@ import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
+import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import com.gildedgames.util.modules.chunk.ChunkModule;
@@ -17,6 +18,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -25,6 +29,7 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
@@ -97,6 +102,31 @@ public class PlayerAetherEvents
 
 		if (aePlayer != null)
 		{
+			EntityPlayer player = aePlayer.getPlayer();
+
+			ItemStack companionItem = aePlayer.getCompanionManager().getEquippedCompanionItem();
+
+			if (companionItem != null && companionItem.getItem() instanceof ItemDeathSeal)
+			{
+				long ticksUntilUsable = ItemDeathSeal.getTicksUntilEnabled(companionItem, player.worldObj);
+
+				if (ticksUntilUsable <= 0)
+				{
+					event.setCanceled(true);
+
+					player.setHealth(0.5f);
+
+					player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("regeneration"), 20 * 7, 3));
+					player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("resistance"), 20 * 7, 4));
+
+					ItemDeathSeal.setDisabledTimer(companionItem, player.worldObj, 20 * 60 * 15);
+
+					FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().sendChatMsg(new TextComponentTranslation("chat.aether.resurrected", player.getDisplayName()));
+
+					return;
+				}
+			}
+
 			aePlayer.onDeath(event);
 		}
 	}

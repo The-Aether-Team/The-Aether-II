@@ -7,9 +7,9 @@ import com.gildedgames.aether.api.entities.effects.EntityEffectRule;
 import com.gildedgames.aether.api.items.IItemEffectsCapability;
 import com.gildedgames.aether.api.items.IItemPropertiesCapability;
 import com.gildedgames.aether.api.items.properties.ItemRarity;
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
+import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
 import com.gildedgames.aether.common.items.armor.ItemObsidianArmor;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -121,17 +121,15 @@ public class ClientEventHandler
 
 		if (player != null)
 		{
-			IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(player);
+			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
 			Minecraft mc = Minecraft.getMinecraft();
 
-			Class<? extends Item> armorSet = PlayerUtil.findArmorSet(player);
-
-			if (armorSet == ItemObsidianArmor.class)
+			if (PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.obsidian_armor_set))
 			{
 				KeyBinding.setKeyBindState(mc.gameSettings.keyBindSprint.getKeyCode(), false);
 			}
-			else if (armorSet == ItemGravititeArmor.class)
+			else if (PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.gravitite_armor_set))
 			{
 				if (mc.gameSettings.keyBindJump.isKeyDown() && !this.prevJumpBindState)
 				{

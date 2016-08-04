@@ -39,7 +39,7 @@ public class CompanionChangedPacket implements IMessage
 		public IMessage onMessage(CompanionChangedPacket message, EntityPlayer player)
 		{
 			PlayerAether aePlayer = PlayerAether.getPlayer(player);
-			aePlayer.handleCompanionChange(message.entityId);
+			aePlayer.getCompanionManager().handleCompanionChange(message.entityId);
 
 			return null;
 		}

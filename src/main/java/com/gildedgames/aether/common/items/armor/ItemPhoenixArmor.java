@@ -18,14 +18,6 @@ public class ItemPhoenixArmor extends ItemAetherArmor implements IPhoenixChillab
 	}
 
 	@Override
-	protected void applyFullSetBonus(World world, EntityPlayer player)
-	{
-		player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("fire_resistance"), 2, 0, false, false));
-
-		player.extinguish();
-	}
-
-	@Override
 	public boolean canChillItemstack(ItemStack stack)
 	{
 		return this.getChilledItemstack(stack) != null;

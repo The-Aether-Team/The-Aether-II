@@ -11,10 +11,4 @@ public class ItemObsidianArmor extends ItemAetherArmor
 	{
 		super(MaterialsAether.OBSIDIAN_ARMOR, "obsidian", armorType);
 	}
-
-	@Override
-	protected void applyFullSetBonus(World world, EntityPlayer player)
-	{
-		player.setSprinting(false);
-	}
 }

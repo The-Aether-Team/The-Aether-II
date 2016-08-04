@@ -6,23 +6,16 @@ import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.api.items.IItemEffectsCapability;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment.PendingItemChange;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
-import com.gildedgames.aether.common.entities.companions.EntityCompanion;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
-import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
-import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
-import com.gildedgames.aether.common.items.companions.ItemCompanion;
-import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
 import com.gildedgames.aether.common.items.tools.ItemValkyrieTool;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.CompanionChangedPacket;
 import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import net.minecraft.block.material.Material;
@@ -30,7 +23,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -40,7 +32,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
@@ -49,11 +40,8 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -64,13 +52,11 @@ public class PlayerAether implements IPlayerAetherCapability
 {
 	private final EntityPlayer player;
 
-	private InventoryEquipment equipmentInventory;
+	private final InventoryEquipment equipmentInventory;
+
+	private final PlayerCompanionManager companionManager;
 
 	private EntityMovingBlock heldBlock;
-
-	private BlockPos linkingSchematicBoundary;
-
-	private int companionId = -1;
 
 	private boolean hasDoubleJumped;
 
@@ -79,24 +65,14 @@ public class PlayerAether implements IPlayerAetherCapability
 	public PlayerAether(EntityPlayer player)
 	{
 		this.player = player;
+
 		this.equipmentInventory = new InventoryEquipment(this);
+		this.companionManager = new PlayerCompanionManager(this);
 	}
 
 	public static PlayerAether getPlayer(Entity player)
 	{
 		return (PlayerAether) player.getCapability(AetherCapabilities.PLAYER_DATA, null);
-	}
-	
-	@Override
-	public void setLinkingSchematicBoundary(BlockPos pos)
-	{
-		this.linkingSchematicBoundary = pos;
-	}
-	
-	@Override
-	public BlockPos getLinkingSchematicBoundary()
-	{
-		return this.linkingSchematicBoundary;
 	}
 
 	@Override
@@ -111,7 +87,8 @@ public class PlayerAether implements IPlayerAetherCapability
 			if (!this.player.isDead)
 			{
 				this.updatePickedBlock();
-				this.updateCompanion();
+
+				this.companionManager.update();
 			}
 		}
 
@@ -120,9 +97,11 @@ public class PlayerAether implements IPlayerAetherCapability
 
 	private float calculateExtendedReach()
 	{
-		if (this.player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND) != null)
+		ItemStack stack = this.player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
+
+		if (stack != null)
 		{
-			Item item = this.player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem();
+			Item item = stack.getItem();
 
 			if (item instanceof ItemValkyrieTool || item == ItemsAether.valkyrie_lance)
 			{
@@ -144,50 +123,23 @@ public class PlayerAether implements IPlayerAetherCapability
 		{
 			this.ticksAirborne++;
 		}
-	}
 
-	private void updateCompanion()
-	{
-		ItemStack companionStack = this.getCompanionItem();
-
-		EntityCompanion companion = this.getCompanionEntity();
-
-		if (companionStack != null)
+		if (PlayerUtil.isWearingEquipment(this, ItemsAether.obsidian_armor_set))
 		{
-			if (companion != null)
-			{
-				if (companion.isDead)
-				{
-					if (!companion.wasDespawned())
-					{
-						ItemCompanion.setRespawnTimer(companionStack, this.player.worldObj, 20 * 240);
-					}
-
-					this.removeCompanion(true);
-				}
-				else if (((ItemCompanion) companionStack.getItem()).getCompanionClass() != companion.getClass())
-				{
-					this.removeCompanion(true);
-				}
-				else
-				{
-					companion.tickEffects(this);
-				}
-			}
-
-			if (companion == null)
-			{
-				long respawnTimer = ItemCompanion.getTicksUntilRespawn(companionStack, this.player.worldObj);
-
-				if (respawnTimer <= 0)
-				{
-					this.spawnCompanion((ItemCompanion) companionStack.getItem());
-				}
-			}
+			this.player.setSprinting(false);
 		}
-		else if (companion != null)
+		else if (PlayerUtil.isWearingEquipment(this, ItemsAether.phoenix_armor_set))
 		{
-			this.removeCompanion(true);
+			this.player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("fire_resistance"), 2, 0, false, false));
+
+			this.player.extinguish();
+		}
+		else if (PlayerUtil.isWearingEquipment(this, ItemsAether.neptune_armor_set))
+		{
+			if (this.player.isInsideOfMaterial(Material.WATER))
+			{
+				this.player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("water_breathing"), 2, 0, false, false));
+			}
 		}
 	}
 
@@ -219,47 +171,6 @@ public class PlayerAether implements IPlayerAetherCapability
 				}
 			}
 		}
-	}
-
-	private void spawnCompanion(ItemCompanion item)
-	{
-		EntityCompanion companion = item.createCompanionEntity(this);
-
-		companion.setOwner(this.getPlayer());
-		companion.setPosition(this.getPlayer().posX, this.getPlayer().posY, this.getPlayer().posZ);
-
-		this.player.worldObj.spawnEntityInWorld(companion);
-		this.companionId = companion.getEntityId();
-
-		NetworkingAether.sendPacketToPlayer(new CompanionChangedPacket(this.companionId), (EntityPlayerMP) this.player);
-
-		companion.addEffects(this);
-	}
-
-	private void removeCompanion(boolean notifyClient)
-	{
-		EntityCompanion companion = this.getCompanionEntity();
-
-		if (companion != null)
-		{
-			companion.removeEffects(this);
-
-			companion.setOwner(null);
-			companion.setDead();
-
-			this.companionId = -1;
-
-			if (notifyClient)
-			{
-				NetworkingAether.sendPacketToWatching(new CompanionChangedPacket(this.companionId), this.getPlayer());
-			}
-		}
-	}
-
-	@SideOnly(Side.CLIENT)
-	public void handleCompanionChange(int id)
-	{
-		this.companionId = id;
 	}
 
 	private void sendEquipmentChanges(Set<PendingItemChange> dirties)
@@ -324,30 +235,7 @@ public class PlayerAether implements IPlayerAetherCapability
 	@Override
 	public void onDeath(LivingDeathEvent event)
 	{
-		ItemStack companionItem = this.getCompanionItem();
-
-		if (companionItem != null && companionItem.getItem() instanceof ItemDeathSeal)
-		{
-			long ticksUntilUsable = ItemDeathSeal.getTicksUntilEnabled(companionItem, this.getPlayer().worldObj);
-
-			if (ticksUntilUsable <= 0)
-			{
-				event.setCanceled(true);
-
-				this.player.setHealth(0.5f);
-
-				this.player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("resistance"), 20 * 7, 4));
-				this.player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("regeneration"), 20 * 7, 3));
-
-				ItemDeathSeal.setDisabledTimer(companionItem, this.player.worldObj, 20 * 60 * 15);
-
-				FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().sendChatMsg(new TextComponentTranslation("chat.aether.resurrected", this.player.getDisplayName()));
-
-				return;
-			}
-		}
-
-		this.removeCompanion(true);
+		this.companionManager.onDeath(event);
 
 		this.dropHeldBlock();
 	}
@@ -383,9 +271,7 @@ public class PlayerAether implements IPlayerAetherCapability
 	@Override
 	public void onFall(LivingFallEvent event)
 	{
-		Class<? extends Item> fullSet = PlayerUtil.findArmorSet(this.player);
-
-		if (fullSet == ItemGravititeArmor.class)
+		if (PlayerUtil.isWearingEquipment(this, ItemsAether.gravitite_armor_set))
 		{
 			event.setResult(Result.DENY);
 		}
@@ -394,33 +280,37 @@ public class PlayerAether implements IPlayerAetherCapability
 	@Override
 	public void onTeleport(PlayerEvent.PlayerChangedDimensionEvent event)
 	{
-		this.removeCompanion(true);
-
-		this.updateCompanion();
+		this.companionManager.onTeleport(event);
 	}
 
 	@Override
 	public void onSpawned(PlayerEvent.PlayerLoggedInEvent event)
 	{
-		this.updateCompanion();
+		this.companionManager.onSpawned(event);
 	}
 
 	@Override
 	public void onDespawn(PlayerEvent.PlayerLoggedOutEvent event)
 	{
-		this.removeCompanion(false);
+		this.companionManager.onDespawned(event);
 	}
 
 	@Override
-	public IInventoryEquipment getEquipmentInventory()
+	public InventoryEquipment getEquipmentInventory()
 	{
 		return this.equipmentInventory;
 	}
 
 	@Override
+	public PlayerCompanionManager getCompanionManager()
+	{
+		return this.companionManager;
+	}
+
+	@Override
 	public float getMiningSpeedMultiplier()
 	{
-		if (PlayerUtil.isWearingFullSet(this.player, ItemNeptuneArmor.class))
+		if (PlayerUtil.isWearingEquipment(this, ItemsAether.neptune_armor_set))
 		{
 			if (!EnchantmentHelper.getAquaAffinityModifier(this.player) && this.player.isInsideOfMaterial(Material.WATER))
 			{
@@ -435,30 +325,6 @@ public class PlayerAether implements IPlayerAetherCapability
 	public EntityPlayer getPlayer()
 	{
 		return this.player;
-	}
-
-	public EntityCompanion getCompanionEntity()
-	{
-		Entity entity = this.player.worldObj.getEntityByID(this.companionId);
-
-		if (entity != null && entity instanceof EntityCompanion)
-		{
-			return (EntityCompanion) entity;
-		}
-
-		return null;
-	}
-
-	public ItemStack getCompanionItem()
-	{
-		ItemStack companionStack = this.equipmentInventory.getStackInSlot(6);
-
-		if (companionStack != null && companionStack.getItem() instanceof ItemCompanion)
-		{
-			return companionStack;
-		}
-
-		return null;
 	}
 
 	public boolean performDoubleJump()

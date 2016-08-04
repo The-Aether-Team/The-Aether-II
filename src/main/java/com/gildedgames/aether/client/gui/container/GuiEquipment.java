@@ -158,7 +158,7 @@ public class GuiEquipment extends GuiContainer
 
 	private void drawPlayer(int mouseX, int mouseY)
 	{
-		EntityCompanion companion = this.aePlayer.getCompanionEntity();
+		EntityCompanion companion = this.aePlayer.getCompanionManager().getCompanionEntity();
 
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 

@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.items.companions;
 
+import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.entities.companions.EntityCompanion;
-import com.gildedgames.aether.common.player.PlayerAether;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -55,7 +55,7 @@ public class ItemCompanion extends Item
 		return compound.getLong("respawnTimer") - world.getTotalWorldTime();
 	}
 
-	public EntityCompanion createCompanionEntity(PlayerAether aePlayer)
+	public EntityCompanion createCompanionEntity(IPlayerAetherCapability aePlayer)
 	{
 		EntityCompanion companion = null;
 
@@ -71,7 +71,7 @@ public class ItemCompanion extends Item
 		return companion;
 	}
 
-	public Class<? extends EntityCompanion> getCompanionClass()
+	public Class<? extends EntityCompanion> getCompanionEntityClass()
 	{
 		return this.companionClass;
 	}
