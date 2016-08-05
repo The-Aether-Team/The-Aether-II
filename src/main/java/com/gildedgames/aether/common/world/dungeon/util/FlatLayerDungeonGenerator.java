@@ -44,6 +44,8 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 
 	private static final int PATH = 3;
 
+	private static final int PATH_WALL = 9;
+
 	private static final int GOAL_ROOM = 4;
 
 	private static final int START_ROOM = 5;
@@ -241,12 +243,38 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 						}
 						case PATH:
 						{
-							this.generateTile(layer, x, 4, z, x % 2 == z % 2 ? BlocksAether.labyrinth_base.getDefaultState() : BlocksAether.labyrinth_headstone.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
+							boolean createPillar = x % 4 == z % 4;
+
+							this.generateTile(layer, x, 4, z, BlocksAether.labyrinth_base.getDefaultState(), BlocksAether.labyrinth_base.getDefaultState(), primer);
+
+							if (createPillar)
+							{
+								for (int i = layer.minY() + 1; i <= layer.minY() + 4; i++)
+								{
+									primer.setBlockState(x, i, z, BlocksAether.labyrinth_glowing_pillar.getDefaultState());
+								}
+
+								primer.setBlockState(x, layer.minY() + 1, z, BlocksAether.labyrinth_base.getDefaultState());
+								primer.setBlockState(x, layer.minY() + 4, z, BlocksAether.carved_capstone.getDefaultState());
+							}
+
 							break;
 						}
 						case TRUE_PATH:
 						{
-							this.generateTile(layer, x, 4, z, BlocksAether.labyrinth_wall.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
+							this.generateTile(layer, x, 4, z, BlocksAether.carved_capstone.getDefaultState(), BlocksAether.carved_capstone.getDefaultState(), primer);
+							break;
+						}
+						case PATH_WALL:
+						{
+							for (int i = layer.minY(); i <= layer.minY() + 4; i++)
+							{
+								primer.setBlockState(x, i, z, BlocksAether.labyrinth_wall.getDefaultState());
+							}
+
+							primer.setBlockState(x, layer.minY() + 1, z, BlocksAether.labyrinth_base.getDefaultState());
+							primer.setBlockState(x, layer.minY() + 4, z, BlocksAether.carved_capstone.getDefaultState());
+
 							break;
 						}
 						case WALL:
@@ -870,22 +898,39 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 			if (tiles[pos[0]][pos[1]] == WALL || tiles[pos[0]][pos[1]] == PATH)
 			{
 				tiles[pos[0]][pos[1]] = TRUE_PATH;
-				if (tiles[pos[0] + 1][pos[1]] == WALL)
-					tiles[pos[0] + 1][pos[1]] = PATH;
-				if (tiles[pos[0] - 1][pos[1]] == WALL)
-					tiles[pos[0] - 1][pos[1]] = PATH;
-				if (tiles[pos[0] + 1][pos[1] + 1] == WALL)
-					tiles[pos[0] + 1][pos[1] + 1] = PATH;
-				if (tiles[pos[0] + 1][pos[1] - 1] == WALL)
-					tiles[pos[0] + 1][pos[1] - 1] = PATH;
-				if (tiles[pos[0] - 1][pos[1] + 1] == WALL)
-					tiles[pos[0] - 1][pos[1] + 1] = PATH;
-				if (tiles[pos[0] - 1][pos[1] - 1] == WALL)
-					tiles[pos[0] - 1][pos[1] - 1] = PATH;
-				if (tiles[pos[0]][pos[1] + 1] == WALL)
-					tiles[pos[0]][pos[1] + 1] = PATH;
-				if (tiles[pos[0]][pos[1] - 1] == WALL)
-					tiles[pos[0]][pos[1] - 1] = PATH;
+
+				for (int x = pos[0] - 3; x <= pos[0] + 3; x++)
+				{
+					for (int z = pos[1] - 3; z <= pos[1] + 3; z++)
+					{
+						if (tiles[x][z] == WALL)
+						{
+							tiles[x][z] = PATH_WALL;
+						}
+					}
+				}
+
+				for (int x = pos[0] - 2; x <= pos[0] + 2; x++)
+				{
+					for (int z = pos[1] - 2; z <= pos[1] + 2; z++)
+					{
+						if (tiles[x][z] == PATH_WALL)
+						{
+							tiles[x][z] = PATH;
+						}
+					}
+				}
+
+				for (int x = pos[0] - 1; x <= pos[0] + 1; x++)
+				{
+					for (int z = pos[1] - 1; z <= pos[1] + 1; z++)
+					{
+						if (tiles[x][z] == PATH)
+						{
+							tiles[x][z] = TRUE_PATH;
+						}
+					}
+				}
 			}
 		}
 	}
