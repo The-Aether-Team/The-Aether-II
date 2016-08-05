@@ -57,6 +57,11 @@ public class CommonProxy
 
 	}
 
+	public DimensionType getDimensionType()
+	{
+		return this.aetherDimension;
+	}
+
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		this.storageDir = new File(event.getSourceFile().getParent(), "Aether/");

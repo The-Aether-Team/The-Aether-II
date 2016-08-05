@@ -225,4 +225,16 @@ public class PlayerAetherEvents
 			data.mark(event.getPos());
 		}
 	}
+
+	@SubscribeEvent
+	public void onPlayerRespawn(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent event)
+	{
+		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.player);
+
+		if (aePlayer != null)
+		{
+			aePlayer.onRespawn();
+		}
+	}
+
 }

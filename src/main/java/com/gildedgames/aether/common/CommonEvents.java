@@ -34,6 +34,8 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
+import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -43,9 +45,30 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Random;
 
+import static com.ibm.icu.impl.CurrencyData.provider;
+import static net.minecraft.realms.Tezzelator.t;
 
 public class CommonEvents
 {
+
+	@SubscribeEvent
+	public void onPlayerSleepInBed(PlayerWakeUpEvent event)
+	{
+		World world = event.getEntityPlayer().worldObj;
+
+		if (!world.isRemote && world.provider.getDimensionType() == AetherCore.PROXY.getDimensionType())
+		{
+			MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+
+			WorldServer worldServer = server.worldServerForDimension(0);
+
+			if (world.getGameRules().getBoolean("doDaylightCycle"))
+			{
+				long i = worldServer.getWorldInfo().getWorldTime() + 24000L;
+				worldServer.getWorldInfo().setWorldTime(i - i % 24000L);
+			}
+		}
+	}
 
 	@SubscribeEvent
 	public void onPlayerUseBucket(FillBucketEvent event)

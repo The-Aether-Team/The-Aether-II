@@ -16,6 +16,8 @@ public interface IPlayerAetherCapability
 {
 	// [--- Event handlers for the entity this capability is attached to. ---]
 
+	void onRespawn();
+
 	void onUpdate(LivingUpdateEvent event);
 
 	void onDeath(LivingDeathEvent event);
@@ -27,6 +29,14 @@ public interface IPlayerAetherCapability
 	void onFall(LivingFallEvent event);
 
 	void onTeleport(PlayerChangedDimensionEvent event);
+
+	int lastBedDimension();
+
+	boolean sleptInBed();
+
+	void setLastBedDimension(int lastBedDimension);
+
+	void setSleptInBed(boolean sleptInBed);
 
 	void onSpawned(PlayerLoggedInEvent event);
 

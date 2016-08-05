@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.world.biome.BiomeAether;
 import com.gildedgames.aether.common.world.chunk.ChunkGeneratorAether;
 import com.gildedgames.aether.common.world.chunk.ChunkGeneratorAetherOld;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -45,16 +46,28 @@ public class WorldProviderAether extends WorldProvider
 		return new ChunkGeneratorAetherOld(this.worldObj, this.worldObj.getSeed());
 	}
 
+	public IBlockState getTopBlock(BlockPos pos)
+	{
+		BlockPos blockpos;
+
+		for (blockpos = new BlockPos(pos.getX(), 0, pos.getZ()); !this.worldObj.isAirBlock(blockpos.up()); blockpos = blockpos.up())
+		{
+			;
+		}
+
+		return this.worldObj.getBlockState(blockpos);
+	}
+
 	@Override
 	public boolean canCoordinateBeSpawn(int x, int z)
 	{
-		return this.worldObj.getGroundAboveSeaLevel(new BlockPos(x, 0, z)).getMaterial().isSolid();
+		return this.getTopBlock(new BlockPos(x, 0, z)).getMaterial().isSolid();
 	}
 
 	@Override
 	public boolean canRespawnHere()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
