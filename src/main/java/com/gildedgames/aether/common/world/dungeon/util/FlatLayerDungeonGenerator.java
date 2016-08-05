@@ -284,6 +284,9 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 								primer.setBlockState(x, i, z, BlocksAether.labyrinth_wall.getDefaultState());
 							}
 
+							primer.setBlockState(x, layer.minY() + 1, z, BlocksAether.labyrinth_base.getDefaultState());
+							primer.setBlockState(x, layer.minY() + 4, z, BlocksAether.carved_capstone.getDefaultState());
+
 							break;
 						}
 						default:
