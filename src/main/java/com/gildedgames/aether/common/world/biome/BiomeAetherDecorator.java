@@ -1,35 +1,42 @@
 package com.gildedgames.aether.common.world.biome;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud.AercloudVariant;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
-import com.gildedgames.aether.common.world.features.WorldGenAetherFlowers;
-import com.gildedgames.aether.common.world.features.WorldGenAetherLakes;
-import com.gildedgames.aether.common.world.features.WorldGenAetherTallGrass;
-import com.gildedgames.aether.common.world.features.WorldGenQuicksoil;
+import com.gildedgames.aether.common.world.features.*;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenPurpleAercloud;
-import com.gildedgames.aether.common.world.features.dungeon.WorldGenSliderLabyrinthEntrance;
 import com.gildedgames.aether.common.world.features.trees.WorldGenOrangeTree;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.structure.template.Template;
+import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 
 import java.util.Random;
 
+import static net.minecraft.realms.Tezzelator.t;
+
 public class BiomeAetherDecorator
 {
+
+	public static final TemplateManager MANAGER = new TemplateManager("structures");
+
 	protected WorldGenAetherTallGrass genAetherGrass;
 
 	protected WorldGenMinable genAmbrosium, genZanite, genGravitite, genContinuum, genIcestone, genArkenium;
@@ -50,7 +57,9 @@ public class BiomeAetherDecorator
 
 	protected WorldGenPurpleAercloud genPurpleAercloud;
 	
-	protected WorldGenSliderLabyrinthEntrance genSliderLabyrinthEntrance;
+	protected WorldGenTemplate genSliderLabyrinthEntrance;
+
+	protected TemplatePipeline templatePipeline;
 
 	public BiomeAetherDecorator()
 	{
@@ -82,7 +91,8 @@ public class BiomeAetherDecorator
 		this.genBlueAercloud = new WorldGenAercloud(this.getAercloudState(BlockAercloud.BLUE_AERCLOUD), 8, false);
 
 		this.genPurpleAercloud = new WorldGenPurpleAercloud(this.getAercloudState(BlockAercloud.PURPLE_AERCLOUD), 4, false);
-		this.genSliderLabyrinthEntrance = new WorldGenSliderLabyrinthEntrance(10);
+
+		this.templatePipeline = new TemplatePipeline();
 	}
 
 	protected IBlockState getAercloudState(AercloudVariant variant)
@@ -90,9 +100,20 @@ public class BiomeAetherDecorator
 		return BlocksAether.aercloud.getDefaultState().withProperty(BlockAercloud.PROPERTY_VARIANT, variant);
 	}
 
-	protected void genDecorations(World world, Random random, BlockPos pos, Biome genBase)
+	protected void genDecorations(final World world, Random random, BlockPos pos, Biome genBase)
 	{
+		if (world instanceof WorldServer)
+		{
+			WorldServer worldServer = (WorldServer)world;
+			MinecraftServer server = worldServer.getMinecraftServer();
+
+			this.genSliderLabyrinthEntrance = new WorldGenTemplate(this.templatePipeline, MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Entrance")));
+		}
+
 		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(world, random, pos));
+
+		int chunkX = pos.getX() >> 4;
+		int chunkZ = pos.getZ() >> 4;
 
 		this.generateOres(world, random, pos);
 
@@ -198,16 +219,40 @@ public class BiomeAetherDecorator
 		}
 
 		//Entrance Generator
-		for (int n = 0; n < 3; n++)
+		for (int n = 0; n < 60; n++)
 		{
 			x = random.nextInt(16) + 8;
 			y = random.nextInt(128);
 			z = random.nextInt(16) + 8;
-			
-			this.genSliderLabyrinthEntrance.generate(world, random, pos.add(x, y, z));
+
+			final BlockPos totemPos = pos.add(x + 3, y + 1, z + 3);
+
+			this.genSliderLabyrinthEntrance.generate(world, random, pos.add(x, y, z), new Runnable()
+			{
+
+				@Override public void run()
+				{
+					world.setBlockState(totemPos, BlocksAether.labyrinth_totem.getDefaultState());
+				}
+
+			});
 		}
 		
 		this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));
+
+		this.templatePipeline.constructChunk(world, chunkX, chunkZ);
+	}
+
+	public BlockPos getTopBlock(World world, BlockPos pos)
+	{
+		BlockPos blockpos;
+
+		for (blockpos = new BlockPos(pos.getX(), world.getActualHeight(), pos.getZ()); !world.isAirBlock(blockpos.down()); blockpos = blockpos.down())
+		{
+			;
+		}
+
+		return blockpos;
 	}
 
 	private void generateMineable(WorldGenMinable minable, World world, Random random, BlockPos pos, int minY, int maxY, int attempts)
