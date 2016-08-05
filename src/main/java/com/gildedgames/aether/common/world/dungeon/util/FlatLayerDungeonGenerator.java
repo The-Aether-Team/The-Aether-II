@@ -320,7 +320,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 					PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk(new ChunkPos(chunkX, chunkZ)).setReplacedBlock((Block) null).setIgnoreStructureBlock(false);
 					room.template.addBlocksToWorldChunk(world, new BlockPos(room.getMinX(), layer.minY(), room.getMinZ()), placementsettings);
 
-					/*BlockPos roomMin = new BlockPos(posX, layer.minY() + 1, posZ);
+					BlockPos roomMin = new BlockPos(posX, layer.minY() + 1, posZ);
 
 					Iterable<BlockPos.MutableBlockPos> blocks = BlockPos.getAllInBoxMutable(roomMin, roomMin.add(16, room.template.getSize().getY(), 16));
 
@@ -337,7 +337,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 
 							world.markAndNotifyBlock(pos, chunk, Blocks.AIR.getDefaultState(), state, 3);
 						}
-					}*/
+					}
 				}
 			}
 		}
