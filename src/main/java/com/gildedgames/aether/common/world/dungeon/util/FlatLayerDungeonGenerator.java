@@ -330,9 +330,6 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 
 						if (state.getLightValue(world, pos) > 0)
 						{
-							world.setBlockState(pos, state);
-							world.checkLight(pos);
-
 							Chunk chunk = world.getChunkFromChunkCoords(chunkX, chunkZ);
 
 							world.markAndNotifyBlock(pos, chunk, Blocks.AIR.getDefaultState(), state, 3);
