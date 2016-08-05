@@ -69,9 +69,8 @@ public class TileEntityLabyrinthChestRenderer extends TileEntitySpecialRenderer<
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		}
 
-		GlStateManager.translate((float) x, (float) y + 1.0F, (float) z + 1.0F);
+		GlStateManager.translate((float) x, (float) y, (float) z);
 		GlStateManager.scale(1.0F, -1.0F, -1.0F);
-		GlStateManager.translate(0.5F, 0.5F, 0.5F);
 
 		float angle = 0;
 
@@ -91,8 +90,8 @@ public class TileEntityLabyrinthChestRenderer extends TileEntitySpecialRenderer<
 			break;
 		}
 
+		GlStateManager.translate(0.5F, -0.5F, -0.5F);
 		GlStateManager.rotate(angle, 0.0F, 1.0F, 0.0F);
-		GlStateManager.translate(-0.5F, -0.5F, -0.5F);
 
 		float lidAngle = chest.prevLidAngle + (chest.lidAngle - chest.prevLidAngle) * partialTicks;
 
