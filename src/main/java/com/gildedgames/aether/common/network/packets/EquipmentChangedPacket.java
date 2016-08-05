@@ -87,6 +87,11 @@ public class EquipmentChangedPacket implements IMessage
 		@Override
 		public IMessage onMessage(EquipmentChangedPacket message, EntityPlayer player)
 		{
+			if (player == null || player.worldObj == null)
+			{
+				return null;
+			}
+
 			Entity entity = player.worldObj.getEntityByID(message.entityId);
 
 			if (entity != null)
