@@ -60,6 +60,10 @@ public class DungeonDefinitions
 					Template labLootS = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_LootS"));
 					Template labWFeature1 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_WFeature_1"));
 					Template labWFeature2 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_WFeature_2"));
+					Template labPillars1F = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Pillars_1F"));
+					Template labPillars2F = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Pillars_2F"));
+					Template labPillarsLoot1F = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_PillarsLoot_1F"));
+					Template labPillarsLoot2F = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_PillarsLoot_2F"));
 
 					//Template labTunnel = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel"));
 					//Template labTunnelLeft = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel_Left"));
@@ -68,12 +72,17 @@ public class DungeonDefinitions
 					rooms.add(new DungeonRoom(labLootL2));
 					rooms.add(new DungeonRoom(labLootL2));
 					rooms.add(new DungeonRoom(labLootL4));
+					rooms.add(new DungeonRoom(labPillars1F));
+					rooms.add(new DungeonRoom(labPillars1F));
+					rooms.add(new DungeonRoom(labPillars2F));
+					rooms.add(new DungeonRoom(labPillars2F));
+					rooms.add(new DungeonRoom(labPillarsLoot1F));
+					rooms.add(new DungeonRoom(labPillarsLoot1F));
+					rooms.add(new DungeonRoom(labPillars2F));
 					rooms.add(new DungeonRoom(labWFeature1));
 					rooms.add(new DungeonRoom(labWFeature2));
 					rooms.add(new DungeonRoom(labLootM));
 					rooms.add(new DungeonRoom(labLootM));
-					rooms.add(new DungeonRoom(labLootM));
-					rooms.add(new DungeonRoom(labLootS));
 					rooms.add(new DungeonRoom(labLootS));
 					rooms.add(new DungeonRoom(labLootS));
 					rooms.add(new DungeonRoom(labLootS));
