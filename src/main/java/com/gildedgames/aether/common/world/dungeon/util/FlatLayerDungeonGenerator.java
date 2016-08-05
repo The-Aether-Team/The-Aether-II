@@ -19,7 +19,6 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunkProvider;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.dungeon.DungeonGenerator;
@@ -51,7 +50,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 
 	private static final int END_ROOM = 6;
 
-	private static final int ENTRANCE = 7;
+	private static final int ENTRANCE_ROOM = 7;
 
 	private static final int TRUE_PATH = 8;
 
@@ -86,34 +85,68 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 	{
 		DungeonLayer prevLayer = null;
 
+		int layerNum = 0;
+
 		for (DungeonLayer layer : this.layers)
 		{
-			layer.defineMinY(prevLayer != null ? prevLayer.maxY() : 150);
+			layerNum++;
+
+			layer.defineMinY(prevLayer != null ? prevLayer.maxY() : 0);
 
 			List<DungeonRoom> rooms = provider.createRooms(server, rand);
 
-			DungeonRoom entrance = provider.createEntranceRoom(server, rand);
-			DungeonRoom stairway = provider.createLayerConnectionRoom(server, rand);
+			DungeonRoom entrance;
+			DungeonRoom end;
+
+			if (layerNum == this.layers.size())
+			{
+				entrance = provider.createConnectionTop(server, rand);
+				end = provider.createEntranceRoom(server, rand);
+			}
+			else
+			{
+				entrance = provider.createConnectionTop(server, rand);
+				end = provider.createConnectionBottom(server, rand);
+			}
+
+			rooms.add(entrance);
+			rooms.add(end);
+
+			layer.defineEntranceRoom(entrance);
+			layer.defineEndRoom(end);
 
 			for (DungeonRoom room : rooms)
 			{
-				room.setPos(rand.nextInt(layer.getDiameter()), rand.nextInt(layer.getDiameter()));
+				room.setPos(layer.minX() + rand.nextInt(layer.getDiameter()), layer.minX() + rand.nextInt(layer.getDiameter()));
 			}
 
-			entrance.setPos(layer.getDiameter(), layer.getDiameter());
-			stairway.setPos(0, 0);
+			if (prevLayer != null)
+			{
+				//layer.defineMinX(layer.entranceRoom().getMinX()prevLayer.endRoom().getMinX());
+				//layer.defineMinZ(prevLayer.endRoom().getMinZ());
 
-			rooms.add(entrance);
-			rooms.add(stairway);
+				//entrance.setPos(prevLayer.endRoom().getMinX(), prevLayer.endRoom().getMinZ());
+				//end.setPos(layer.minX() + layer.getDiameter(), layer.minX() + layer.getDiameter());
+			}
+			else
+			{
+				//end.setPos(layer.minX(), layer.minZ());
+				//entrance.setPos(layer.minX() + layer.getDiameter(), layer.minX() + layer.getDiameter());
+			}
 
 			rooms = this.separateRooms(rooms);
 
-			int[][] tiles = this.createCorridors(instance, rooms, layer, prevLayer, rand, entrance, stairway);
-
-			rooms.add(entrance);
-			rooms.add(stairway);
+			int[][] tiles = this.createCorridors(instance, rooms, layer, prevLayer, rand);
 
 			layer.setRooms(rooms);
+
+			if (prevLayer != null)
+			{
+				int offsetX = prevLayer.endRoom().getMinX() - layer.entranceRoom().getMinX();
+				int offsetZ = prevLayer.endRoom().getMinZ() - layer.entranceRoom().getMinZ();
+
+				layer.definePos(offsetX, offsetZ);
+			}
 
 			int maxHeight = 0;
 
@@ -127,7 +160,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 
 			layer.defineTiles(tiles);
 
-			layer.defineHeight(maxHeight + 6);
+			layer.defineHeight(maxHeight);
 
 			int minHeight = maxHeight;
 
@@ -142,6 +175,11 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 			layer.setSmallestRoomHeight(minHeight);
 
 			prevLayer = layer;
+
+			if (layerNum == this.layers.size())
+			{
+				instance.setInsideEntrance(new BlockPosDimension((int) end.getCenterX(), layer.minY() + 1, (int) end.getCenterZ(), instance.getDimIdInside()));
+			}
 		}
 
 		this.layoutReady = true;
@@ -160,67 +198,68 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 
 		for (DungeonLayer layer : this.layers)
 		{
-			int startX = posX - layer.minX();
-			int startZ = posZ - layer.minZ();
-
-			if (layer.getWidth() < startX || layer.getLength() < startZ || startX < 0 || startZ < 0)
+			/*if (posX < layer.minX() || posZ < layer.minZ() || posX > layer.maxX() || posZ > layer.maxZ())
 			{
 				continue;
-			}
+			}*/
 
 			for (int x = 0; x < 16; x++)
 			{
 				for (int z = 0; z < 16; z++)
 				{
-					if (layer.getWidth() > startX + x && layer.getLength() > startZ + z && startX + x >= 0 && startZ + z >= 0)
+					int stepX = posX - layer.minX() + x;
+					int stepZ = posZ - layer.minZ() + z;
+
+					if (stepX < 0 || stepZ < 0 || stepX > layer.getWidth() - 1 || stepZ > layer.getLength() - 1)
 					{
-						int tile = layer.tiles()[startX + x][startZ + z];
+						continue;
+					}
 
-						switch (tile)
+					int tile = layer.tiles()[stepX][stepZ];
+
+					switch (tile)
+					{
+						case SMALL_ROOM:
 						{
-							case SMALL_ROOM:
-							{
-								this.generateTile(layer, x, layer.smallestRoomHeight(), z, BlocksAether.labyrinth_wall.getDefaultState(), primer);
-								break;
-							}
-							case END_ROOM:
-							{
-								this.generateTile(layer, x, layer.smallestRoomHeight(), z, Blocks.STRUCTURE_VOID.getDefaultState(), primer);
-								break;
-							}
-							case BIG_ROOM:
-							{
-								this.generateTile(layer, x, layer.smallestRoomHeight(), z, BlocksAether.labyrinth_wall.getDefaultState(), primer);
-								break;
-							}
-							case PATH:
-							{
-								this.generateTile(layer, x, layer.smallestRoomHeight(), z, x % 2 == z % 2 ? BlocksAether.labyrinth_base.getDefaultState() : BlocksAether.labyrinth_headstone.getDefaultState(), BlocksAether.labyrinth_wall.getDefaultState(), primer);
-								break;
-							}
-							case TRUE_PATH:
-							{
-								this.generateTile(layer, x, layer.smallestRoomHeight(), z, BlocksAether.labyrinth_wall.getDefaultState(), BlocksAether.labyrinth_wall.getDefaultState(), primer);
-								break;
-							}
-							case WALL:
-							{
-								for (int i = layer.minY(); i <= layer.maxY(); i++)
-								{
-									primer.setBlockState(x, i, z, BlocksAether.labyrinth_wall.getDefaultState());
-								}
-
-								break;
-							}
-							case ENTRANCE:
-							{
-								this.generateTile(layer, x, layer.smallestRoomHeight(), z, Blocks.STRUCTURE_VOID.getDefaultState(), BlocksAether.labyrinth_wall.getDefaultState(), primer);
-
-								break;
-							}
-							default:
-								break;
+							this.generateTile(layer, x, layer.smallestRoomHeight(), z, BlocksAether.labyrinth_wall.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
+							break;
 						}
+						case END_ROOM:
+						{
+							this.generateTile(layer, x, layer.smallestRoomHeight(), z, Blocks.GLOWSTONE.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
+							break;
+						}
+						case ENTRANCE_ROOM:
+						{
+							this.generateTile(layer, x, layer.smallestRoomHeight(), z, Blocks.DIAMOND_BLOCK.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
+							break;
+						}
+						case BIG_ROOM:
+						{
+							this.generateTile(layer, x, layer.smallestRoomHeight(), z, BlocksAether.labyrinth_wall.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
+							break;
+						}
+						case PATH:
+						{
+							this.generateTile(layer, x, 3, z, x % 2 == z % 2 ? BlocksAether.labyrinth_base.getDefaultState() : BlocksAether.labyrinth_headstone.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
+							break;
+						}
+						case TRUE_PATH:
+						{
+							this.generateTile(layer, x, 3, z, BlocksAether.labyrinth_wall.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
+							break;
+						}
+						case WALL:
+						{
+							for (int i = layer.minY(); i <= layer.minY() + 4; i++)
+							{
+								primer.setBlockState(x, i, z, BlocksAether.labyrinth_wall.getDefaultState());
+							}
+
+							break;
+						}
+						default:
+							break;
 					}
 				}
 			}
@@ -242,7 +281,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 					PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk(new ChunkPos(chunkX, chunkZ)).setReplacedBlock((Block) null).setIgnoreStructureBlock(false);
 					room.template.addBlocksToWorldChunk(world, new BlockPos(room.getMinX(), layer.minY(), room.getMinZ()), placementsettings);
 
-					BlockPos roomMin = new BlockPos(posX, layer.minY() + 1, posZ);
+					/*BlockPos roomMin = new BlockPos(posX, layer.minY() + 1, posZ);
 
 					Iterable<BlockPos.MutableBlockPos> blocks = BlockPos.getAllInBoxMutable(roomMin, roomMin.add(16, room.template.getSize().getY(), 16));
 
@@ -259,7 +298,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 
 							world.markAndNotifyBlock(pos, chunk, Blocks.AIR.getDefaultState(), state, 3);
 						}
-					}
+					}*/
 				}
 			}
 		}
@@ -272,23 +311,6 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 				{
 					world.setBlockState(new BlockPos(posX + x, inst.getInsideEntrance().getY(), posZ + z), BlocksAether.labyrinth_totem.getDefaultState());
 				}
-
-				/*BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
-
-				yloop:
-				for (int y = 0; y < 256; y++)
-				{
-					pos.set(posX + x, y, posZ + z);
-
-					IBlockState state = world.getBlockState(pos);
-
-					if (state.getBlock().getLightValue() > 0)
-					{
-						world.markBlockForUpdate(pos);
-						world.markBlockRangeForRenderUpdate(new BlockPos(posX + x, 0, posZ + z), new BlockPos(posX + x, 256, posZ + z));
-						break yloop;
-					}
-				}*/
 			}
 		}
 	}
@@ -300,10 +322,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 
 	private void generateTile(DungeonLayer layer, int x, int height, int z, IBlockState block, IBlockState block2, ChunkPrimer primer)
 	{
-		//for (int i = layer.minY(); i <= layer.minY(); i++)
-		//{
-			primer.setBlockState(x, layer.minY(), z, block);
-		//}
+		primer.setBlockState(x, layer.minY(), z, block);
 
 		for (int i = layer.minY() + 1; i <= layer.minY() + height; i++)
 		{
@@ -437,19 +456,23 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 		return rooms;
 	}
 
-	private int[][] createCorridors(DungeonInstance instance, List<DungeonRoom> rooms, DungeonLayer newLayer, DungeonLayer previousLayer, Random rand, DungeonRoom entrance, DungeonRoom stairway)
+	private int[][] createCorridors(DungeonInstance instance, List<DungeonRoom> rooms, DungeonLayer newLayer, DungeonLayer previousLayer, Random rand)
 	{
-		rooms.remove(entrance);
-		rooms.remove(stairway);
-
 		List<DungeonRoom> largeRooms = this.findLargeRooms(rooms, rooms.size() / 2);
 
 		List<DungeonRoom> smallRooms = (List<DungeonRoom>) ((ArrayList<DungeonRoom>) rooms).clone();
 
-		smallRooms.removeAll(largeRooms);
+		if (!largeRooms.contains(newLayer.endRoom()))
+		{
+			largeRooms.add(newLayer.endRoom());
+		}
 
-		largeRooms.add(entrance);
-		largeRooms.add(stairway);
+		if (!largeRooms.contains(newLayer.entranceRoom()))
+		{
+			largeRooms.add(newLayer.entranceRoom());
+		}
+
+		smallRooms.removeAll(largeRooms);
 
 		int[][] tiles = this.getTiles(largeRooms, smallRooms, newLayer, previousLayer);
 
@@ -510,7 +533,21 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 			}
 		}
 
-		this.findStartAndEnd(instance, tiles, largeRooms, smallRooms, newLayer, previousLayer, rand, entrance, stairway);
+		for (int i =  newLayer.endRoom().getMinX(); i < newLayer.endRoom().getMaxX(); i++)
+		{
+			for (int j = newLayer.endRoom().getMinZ(); j < newLayer.endRoom().getMaxZ(); j++)
+			{
+				tiles[i][j] = END_ROOM;
+			}
+		}
+
+		for (int i =  newLayer.entranceRoom().getMinX(); i < newLayer.entranceRoom().getMaxX(); i++)
+		{
+			for (int j = newLayer.entranceRoom().getMinZ(); j < newLayer.entranceRoom().getMaxZ(); j++)
+			{
+				tiles[i][j] = ENTRANCE_ROOM;
+			}
+		}
 
 		return tiles;
 	}
@@ -538,12 +575,18 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 
 		if (previousLayer != null)//Ensure the entrance from the other layer is in the tiles
 		{
-			maxVector[0] = Math.max(maxVector[0], previousLayer.endX());
-			maxVector[1] = Math.max(maxVector[1], previousLayer.endZ());
+			maxVector[0] = Math.max(maxVector[0], previousLayer.endRoom().getMinX());
+			maxVector[1] = Math.max(maxVector[1], previousLayer.endRoom().getMinZ());
 		}
 
 		newLayer.defineWidth(maxVector[0] - minVector[0]);
 		newLayer.defineLength(maxVector[1] - minVector[1]);
+
+		//newLayer.defineMinX(minVector[0]);
+		//newLayer.defineMinZ(minVector[1]);
+
+		//int offsetX = newLayer.entranceRoom().getMinX();
+		//int offsetZ = newLayer.entranceRoom().getMinZ();
 
 		int[][] tiles = new int[newLayer.getWidth()][newLayer.getLength()];
 
@@ -824,18 +867,6 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 	{
 		for (int[] pos : path)
 		{
-			/*if (tiles[pos[0]][pos[1]] == EnumAbyssTileType.SmallRoom)
-			{
-				for (DungeonAbyssGenRoom room : smallRooms)
-				{
-					if (room.contains(pos))
-					{
-						for (int x = room.getMinX(); x <= room.getMaxX(); x++)
-							for (int z = room.getMinZ(); z <= room.getMaxZ(); z++)
-								tiles[x][z] = EnumAbyssTileType.ChosenSmallRoom;
-					}
-				}
-			}*///Use this for the chosen room system
 			if (tiles[pos[0]][pos[1]] == WALL || tiles[pos[0]][pos[1]] == PATH)
 			{
 				tiles[pos[0]][pos[1]] = TRUE_PATH;
@@ -857,123 +888,6 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 					tiles[pos[0]][pos[1] - 1] = PATH;
 			}
 		}
-	}
-
-	private void findStartAndEnd(DungeonInstance instance, int[][] tiles, List<DungeonRoom> largeRooms, List<DungeonRoom> smallRooms, DungeonLayer newLayer, DungeonLayer previousLayer,  Random rand, DungeonRoom entrance, DungeonRoom stairway)
-	{
-		DungeonRoom end = stairway;
-
-		if (previousLayer == null)//If this is the first generated layer
-		{
-			/*int largestDistance = 0;
-			DungeonRoom start = null;
-
-			for (int i = 0; i < largeRooms.size() - 1; i++)
-			{
-				DungeonRoom room1 = largeRooms.get(i);
-				DungeonRoom room2 = null;
-
-				int posX1 = (int) room1.getCenterX();
-				int posZ1 = (int) room1.getCenterZ();
-
-				for (int j = i + 1; j < largeRooms.size(); j++)
-				{
-					room2 = largeRooms.get(j);
-
-					int disX = (int) room2.getCenterX() - posX1;
-					int disZ = (int) room2.getCenterZ() - posZ1;
-					int distance = disX * disX + disZ * disZ;
-
-					if (distance > largestDistance)
-					{
-						start = room1;
-						end = room2;
-						largestDistance = distance;
-					}
-				}
-			}*/
-
-			instance.setInsideEntrance(new BlockPosDimension((int) entrance.getCenterX(), newLayer.minY() + 1, (int) entrance.getCenterZ(), instance.getDimIdInside()));
-		}
-		else
-		{
-			int startX = previousLayer.endX();
-			int startZ = previousLayer.endZ();
-
-			DungeonRoom room = null;
-
-			int smallestDistance = Integer.MAX_VALUE;
-
-			Iterator<DungeonRoom> iter = largeRooms.iterator();
-
-			while (iter.hasNext())//Find the room closest to where you entered
-			{
-				DungeonRoom curIter = iter.next();
-
-				int disX = (int) curIter.getCenterX() - startX;
-				int disY = (int) curIter.getCenterZ() - startZ;
-				int distance = disX * disX + disY * disY;
-
-				if (distance < smallestDistance)
-				{
-					smallestDistance = distance;
-					room = curIter;
-				}
-			}
-
-			if (tiles[startX][startZ] == WALL || tiles[startX][startZ] == SMALL_ROOM)
-			{//If the entrance is at a position that isn't guarenteed to be connected to the full dungeon
-				for (int x = room.getMinX(); x < room.getMaxX(); x++)
-				{
-					//Connect it to the closest large room
-					for (int z = room.getMinZ(); z < room.getMaxZ(); z++)
-					{
-						tiles[x][z] = GOAL_ROOM;
-					}
-				}
-
-				List<int[]> path = this.connect(startX, startZ, (int) room.getCenterX(), (int) room.getCenterZ(), tiles, rand);
-
-				this.walkPath(path, smallRooms, tiles);
-
-				for (int x = room.getMinX(); x < room.getMaxX(); x++)
-				{
-					for (int z = room.getMinZ(); z < room.getMaxZ(); z++)
-					{
-						tiles[x][z] = BIG_ROOM;
-					}
-				}
-			}
-
-			int largestDistance = 0;//Find the large room furthest away from the room closest to the entrance
-
-			for (int i = 0; i < largeRooms.size() - 1; i++)
-			{
-				DungeonRoom room2 = largeRooms.get(i);
-
-				int disX = (int) room2.getCenterX() - (int) room.getCenterX();
-				int disZ = (int) room2.getCenterZ() - (int) room.getCenterZ();
-				int distance = disX * disX + disZ * disZ;
-
-				if (distance > largestDistance)
-				{
-					end = room2;
-					largestDistance = distance;
-				}
-			}
-
-			tiles[startX][startZ] = ENTRANCE;
-		}
-
-		for (int i = end.getMinX(); i < end.getMaxX(); i++)
-		{
-			for (int j = end.getMinZ(); j < end.getMaxZ(); j++)
-			{
-				tiles[i][j] = END_ROOM;
-			}
-		}
-
-		newLayer.defineEnd((int) end.getCenterX(), (int) end.getCenterZ());
 	}
 
 }

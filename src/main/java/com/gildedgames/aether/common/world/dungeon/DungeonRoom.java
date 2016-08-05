@@ -25,13 +25,6 @@ public class DungeonRoom
 		this.rectangle = new Rectangle(0, 0, this.template.getSize().getX(), this.template.getSize().getZ());
 	}
 
-	public DungeonRoom(int width, int height, int length)
-	{
-		this.rectangle = new Rectangle(0, 0, width, length);
-		
-		this.height = height;
-	}
-
 	public int[] getPositionArray()//Used during the triangulation
 	{
 		this.position = new int[3];
@@ -68,7 +61,7 @@ public class DungeonRoom
 
 	public Rectangle fullRectangle()
 	{
-		return new Rectangle((int) this.rectangle.getX(), (int) this.rectangle.getY(), (int) this.rectangle.getWidth() + 2, (int) this.rectangle.getHeight() + 2);
+		return new Rectangle((int) this.rectangle.getX(), (int) this.rectangle.getY(), (int) this.rectangle.getWidth(), (int) this.rectangle.getHeight());
 	}
 
 	public boolean contains(int[] position)

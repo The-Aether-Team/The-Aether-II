@@ -40,7 +40,7 @@ public class DungeonDefinitions
 		@Override
 		public DungeonGenerator createGenerator()
 		{
-			return new FlatLayerDungeonGenerator(3);
+			return new FlatLayerDungeonGenerator(4);
 		}
 
 		@Override
@@ -54,36 +54,19 @@ public class DungeonDefinitions
 				{
 					List<DungeonRoom> rooms = Lists.newArrayList();
 
-					Template pillarRoom = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "PillarRoom"));
-					Template pillarRoomVar = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "PillarRoomVar"));
-					Template corridor = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Corridor"));
-
-					Template labCorridor = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Corridor"));
-					Template labLootLarge2 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_LootLarge_2"));
-					Template labLootLarge4 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_LootLarge_4"));
-					Template labLootMed1 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_LootMed_1"));
-					Template labLootMed2 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_LootMed_2"));
+					Template labLootL2 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_LootL_2"));
+					Template labLootL4 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_LootL_4"));
+					Template labLootM1 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_LootM"));
+					Template labLootM2 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_LootS"));
 
 					//Template labTunnel = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel"));
 					//Template labTunnelLeft = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel_Left"));
 					//Template labTunnelRight = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel_Right"));
 
-					rooms.add(new DungeonRoom(pillarRoom));
-					rooms.add(new DungeonRoom(pillarRoomVar));
-					rooms.add(new DungeonRoom(pillarRoom));
-					rooms.add(new DungeonRoom(pillarRoomVar));
-					rooms.add(new DungeonRoom(pillarRoom));
-					rooms.add(new DungeonRoom(corridor));
-					rooms.add(new DungeonRoom(corridor));
-					rooms.add(new DungeonRoom(corridor));
-					rooms.add(new DungeonRoom(corridor));
-					rooms.add(new DungeonRoom(corridor));
-
-					rooms.add(new DungeonRoom(labCorridor));
-					rooms.add(new DungeonRoom(labLootLarge2));
-					rooms.add(new DungeonRoom(labLootLarge4));
-					rooms.add(new DungeonRoom(labLootMed1));
-					rooms.add(new DungeonRoom(labLootMed2));
+					rooms.add(new DungeonRoom(labLootL2));
+					rooms.add(new DungeonRoom(labLootL4));
+					rooms.add(new DungeonRoom(labLootM1));
+					rooms.add(new DungeonRoom(labLootM2));
 					//rooms.add(new DungeonRoom(labTunnel));
 					//rooms.add(new DungeonRoom(labTunnelLeft));
 					//rooms.add(new DungeonRoom(labTunnelRight));
@@ -110,9 +93,16 @@ public class DungeonDefinitions
 					return new DungeonRoom(labEntrance);
 				}
 
-				@Override public DungeonRoom createLayerConnectionRoom(MinecraftServer server, Random rand)
+				@Override public DungeonRoom createConnectionBottom(MinecraftServer server, Random rand)
 				{
-					Template labStairs = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Stairs"));
+					Template labStairs = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Stairs_Bottom"));
+
+					return new DungeonRoom(labStairs);
+				}
+
+				@Override public DungeonRoom createConnectionTop(MinecraftServer server, Random rand)
+				{
+					Template labStairs = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Stairs_Top"));
 
 					return new DungeonRoom(labStairs);
 				}

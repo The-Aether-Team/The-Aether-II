@@ -13,6 +13,8 @@ public interface DungeonRoomProvider
 
 	DungeonRoom createEntranceRoom(MinecraftServer server, Random rand);
 
-	DungeonRoom createLayerConnectionRoom(MinecraftServer server, Random rand);
+	DungeonRoom createConnectionBottom(MinecraftServer server, Random rand);
+
+	DungeonRoom createConnectionTop(MinecraftServer server, Random rand);
 	
 }

@@ -19,11 +19,9 @@ public class DungeonLayer
 
 	private int minY;
 
-	private int endX, endZ;
-
-	private int desiredRoomCount = 73;
-
 	private int smallestRoomHeight;
+
+	private DungeonRoom endRoom, entranceRoom;
 
 	public DungeonLayer(int diameter)
 	{
@@ -95,30 +93,9 @@ public class DungeonLayer
 		return (int) this.rect.getMaxY();
 	}
 
-	public int endX()
-	{
-		return this.endX;
-	}
-
-	public int endZ()
-	{
-		return this.endZ;
-	}
-
 	public int[][] tiles()
 	{
 		return this.tiles;
-	}
-
-	public int desiredRoomCount()
-	{
-		return this.desiredRoomCount;
-	}
-
-	protected void defineEnd(int x, int z)
-	{
-		this.endX = x;
-		this.endZ = z;
 	}
 
 	protected void defineWidth(int width)
@@ -141,9 +118,36 @@ public class DungeonLayer
 		this.minY = minY;
 	}
 
+	protected void definePos(int minX, int minZ)
+	{
+		this.rect.setLocation(minX, minZ);
+
+		for (DungeonRoom room : this.rooms)
+		{
+			room.setPositionOffset(minX, minZ);
+		}
+	}
+
 	protected void defineTiles(int[][] tiles)
 	{
 		this.tiles = tiles;
 	}
+
+	protected void defineEndRoom(DungeonRoom room)
+	{
+		this.endRoom = room;
+	}
+
+	protected DungeonRoom endRoom()
+	{
+		return this.endRoom;
+	}
+
+	protected void defineEntranceRoom(DungeonRoom room)
+	{
+		this.entranceRoom = room;
+	}
+
+	protected DungeonRoom entranceRoom() { return this.entranceRoom; }
 
 }
