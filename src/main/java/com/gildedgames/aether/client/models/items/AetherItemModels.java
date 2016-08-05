@@ -415,6 +415,8 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.labyrinth_capstone_slab, "aether_slab/labyrinth_capstone_slab");
 		registerItemModels(BlocksAether.labyrinth_wall_slab, "aether_slab/labyrinth_wall_slab");
 
+		registerItemModels(BlocksAether.labyrinth_strongblock, "labyrinth_strongblock");
+
 	}
 
 	private static void registerItemModels(Block block, String path)

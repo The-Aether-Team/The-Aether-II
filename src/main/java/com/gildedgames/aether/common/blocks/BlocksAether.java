@@ -171,6 +171,8 @@ public class BlocksAether
 
 	public static BlockAetherSlab skyroot_slab, holystone_slab, holystone_brick_slab, carved_stone_slab, divine_carved_stone_slab, sentry_stone_slab, divine_sentry_slab, icestone_slab, labyrinth_capstone_slab, labyrinth_wall_slab;
 
+	public static Block labyrinth_strongblock;
+
 	public static void preInit()
 	{
 		aether_dirt = registerBlock("aether_dirt", new BlockCustom(Material.GROUND).setSoundType(SoundType.GROUND).setHardness(0.5f), AetherCreativeTabs.tabBlocks);
@@ -314,6 +316,7 @@ public class BlocksAether
 		labyrinth_capstone_slab = registerBlock("labyrinth_capstone_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f), AetherCreativeTabs.tabBlocks);
 		labyrinth_wall_slab = registerBlock("labyrinth_wall_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f), AetherCreativeTabs.tabBlocks);
 
+		labyrinth_strongblock = registerBlock("labyrinth_strongblock", new BlockLabyrinth().setBlockUnbreakable(), AetherCreativeTabs.tabBlocks);
 
 		registerHarvestLevels();
 	}

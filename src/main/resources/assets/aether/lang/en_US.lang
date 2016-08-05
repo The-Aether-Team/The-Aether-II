@@ -95,6 +95,7 @@ tile.aether.divine_sentry_stone_slab.name=Divine Sentry Stone Slab
 tile.aether.icestone_slab.name=Icestone Brick Slab
 tile.aether.labyrinth_capstone_slab.name=Labyrinth Capstone Slab
 tile.aether.labyrinth_wall_slab.name=Labyrinth Wall Slab
+tile.aether.labyrinth_strongblock.name=Labyrinth Strongblock
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick

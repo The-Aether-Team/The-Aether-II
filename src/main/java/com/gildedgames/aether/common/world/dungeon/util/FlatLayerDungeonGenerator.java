@@ -29,6 +29,8 @@ import com.gildedgames.util.modules.world.common.BlockPosDimension;
 import com.google.common.collect.Lists;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 
+import static com.ibm.icu.lang.UCharacter.GraphemeClusterBreak.T;
+
 public class FlatLayerDungeonGenerator implements DungeonGenerator
 {
 
@@ -245,7 +247,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 						{
 							boolean createPillar = x % 4 == z % 4;
 
-							this.generateTile(layer, x, 4, z, BlocksAether.labyrinth_base.getDefaultState(), BlocksAether.labyrinth_base.getDefaultState(), primer);
+							this.generateTile(layer, x, 4, z, BlocksAether.labyrinth_base.getDefaultState(), BlocksAether.labyrinth_wall.getDefaultState(), primer);
 
 							if (createPillar)
 							{
@@ -258,11 +260,15 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 								primer.setBlockState(x, layer.minY() + 4, z, BlocksAether.carved_capstone.getDefaultState());
 							}
 
+							primer.setBlockState(x, layer.minY() + 5, z, BlocksAether.labyrinth_base.getDefaultState());
+
 							break;
 						}
 						case TRUE_PATH:
 						{
-							this.generateTile(layer, x, 4, z, BlocksAether.carved_capstone.getDefaultState(), BlocksAether.carved_capstone.getDefaultState(), primer);
+							this.generateTile(layer, x, 4, z, BlocksAether.carved_capstone.getDefaultState(), BlocksAether.labyrinth_wall.getDefaultState(), primer);
+							primer.setBlockState(x, layer.minY() + 5, z, BlocksAether.carved_capstone.getDefaultState());
+
 							break;
 						}
 						case PATH_WALL:
@@ -279,6 +285,8 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 						}
 						case WALL:
 						{
+							this.generateTile(layer, x, 4, z, BlocksAether.labyrinth_wall.getDefaultState(), primer);
+
 							for (int i = layer.minY(); i <= layer.minY() + 4; i++)
 							{
 								primer.setBlockState(x, i, z, BlocksAether.labyrinth_wall.getDefaultState());
@@ -610,8 +618,8 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 			maxVector[1] = Math.max(maxVector[1], previousLayer.endRoom().getMinZ());
 		}
 
-		newLayer.defineWidth(maxVector[0] - minVector[0]);
-		newLayer.defineLength(maxVector[1] - minVector[1]);
+		newLayer.defineWidth(maxVector[0] - minVector[0] + 2);
+		newLayer.defineLength(maxVector[1] - minVector[1] + 2);
 
 		//newLayer.defineMinX(minVector[0]);
 		//newLayer.defineMinZ(minVector[1]);
@@ -631,7 +639,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 
 		for (DungeonRoom r : largeRooms)
 		{
-			r.setPositionOffset(-minVector[0], -minVector[1]);
+			r.setPositionOffset(-minVector[0] + 1, -minVector[1] + 1);
 
 			for (int x = r.getMinX(); x < r.getMaxX(); x++)
 			{
@@ -644,7 +652,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 
 		for (DungeonRoom r : smallRooms)
 		{
-			r.setPositionOffset(-minVector[0], -minVector[1]);
+			r.setPositionOffset(-minVector[0] + 1, -minVector[1] + 1);
 
 			for (int x = r.getMinX(); x < r.getMaxX(); x++)
 			{
