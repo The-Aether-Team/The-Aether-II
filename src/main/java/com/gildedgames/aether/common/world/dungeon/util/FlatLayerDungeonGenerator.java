@@ -178,7 +178,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 
 			if (layerNum == this.layers.size())
 			{
-				instance.setInsideEntrance(new BlockPosDimension((int) end.getCenterX(), layer.minY() + 1, (int) end.getCenterZ(), instance.getDimIdInside()));
+				instance.setInsideEntrance(new BlockPosDimension((int) end.getCenterX() - 1, layer.minY() + 1, (int) end.getCenterZ() - 1, instance.getDimIdInside()));
 			}
 		}
 
@@ -241,12 +241,12 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 						}
 						case PATH:
 						{
-							this.generateTile(layer, x, 3, z, x % 2 == z % 2 ? BlocksAether.labyrinth_base.getDefaultState() : BlocksAether.labyrinth_headstone.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
+							this.generateTile(layer, x, 4, z, x % 2 == z % 2 ? BlocksAether.labyrinth_base.getDefaultState() : BlocksAether.labyrinth_headstone.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
 							break;
 						}
 						case TRUE_PATH:
 						{
-							this.generateTile(layer, x, 3, z, BlocksAether.labyrinth_wall.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
+							this.generateTile(layer, x, 4, z, BlocksAether.labyrinth_wall.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
 							break;
 						}
 						case WALL:
