@@ -58,6 +58,8 @@ public class DungeonDefinitions
 					Template labLootL4 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_LootL_4"));
 					Template labLootM = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_LootM"));
 					Template labLootS = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_LootS"));
+					Template labWFeature1 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_WFeature_1"));
+					Template labWFeature2 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_WFeature_2"));
 
 					//Template labTunnel = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel"));
 					//Template labTunnelLeft = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel_Left"));
@@ -66,6 +68,8 @@ public class DungeonDefinitions
 					rooms.add(new DungeonRoom(labLootL2));
 					rooms.add(new DungeonRoom(labLootL2));
 					rooms.add(new DungeonRoom(labLootL4));
+					rooms.add(new DungeonRoom(labWFeature1));
+					rooms.add(new DungeonRoom(labWFeature2));
 					rooms.add(new DungeonRoom(labLootM));
 					rooms.add(new DungeonRoom(labLootM));
 					rooms.add(new DungeonRoom(labLootM));
@@ -73,6 +77,7 @@ public class DungeonDefinitions
 					rooms.add(new DungeonRoom(labLootS));
 					rooms.add(new DungeonRoom(labLootS));
 					rooms.add(new DungeonRoom(labLootS));
+
 					//rooms.add(new DungeonRoom(labTunnel));
 					//rooms.add(new DungeonRoom(labTunnelLeft));
 					//rooms.add(new DungeonRoom(labTunnelRight));
