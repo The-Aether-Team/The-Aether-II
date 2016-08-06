@@ -225,7 +225,7 @@ public class BiomeAetherDecorator
 			y = random.nextInt(128);
 			z = random.nextInt(16) + 8;
 
-			final BlockPos totemPos = pos.add(x + 3, y + 1, z + 3);
+			final BlockPos totemPos = pos.add(x + 4, y + 3, z + 4);
 
 			this.genSliderLabyrinthEntrance.generate(world, random, pos.add(x, y, z), new Runnable()
 			{

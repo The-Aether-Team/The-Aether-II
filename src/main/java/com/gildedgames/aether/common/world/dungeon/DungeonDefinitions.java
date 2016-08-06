@@ -70,20 +70,15 @@ public class DungeonDefinitions
 					//Template labTunnelRight = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel_Right"));
 
 					rooms.add(new DungeonRoom(labLootL2));
-					rooms.add(new DungeonRoom(labLootL2));
 					rooms.add(new DungeonRoom(labLootL4));
 					rooms.add(new DungeonRoom(labPillars1F));
-					rooms.add(new DungeonRoom(labPillars1F));
-					rooms.add(new DungeonRoom(labPillars2F));
 					rooms.add(new DungeonRoom(labPillars2F));
 					rooms.add(new DungeonRoom(labPillarsLoot1F));
-					rooms.add(new DungeonRoom(labPillarsLoot1F));
-					rooms.add(new DungeonRoom(labPillars2F));
+					rooms.add(new DungeonRoom(labPillarsLoot2F));
 					rooms.add(new DungeonRoom(labWFeature1));
 					rooms.add(new DungeonRoom(labWFeature2));
 					rooms.add(new DungeonRoom(labLootM));
 					rooms.add(new DungeonRoom(labLootM));
-					rooms.add(new DungeonRoom(labLootS));
 					rooms.add(new DungeonRoom(labLootS));
 					rooms.add(new DungeonRoom(labLootS));
 
