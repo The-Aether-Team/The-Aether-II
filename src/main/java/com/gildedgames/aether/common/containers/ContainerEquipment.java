@@ -18,6 +18,7 @@ import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -40,6 +41,22 @@ public class ContainerEquipment extends ContainerPlayer
 		this.inventoryEquipment = aePlayer.getEquipmentInventory();
 
 		this.createSlots();
+	}
+
+	@Override
+	public void detectAndSendChanges()
+	{
+		super.detectAndSendChanges();
+
+		for (int i = 0; i < this.inventorySlots.size(); ++i)
+		{
+			ItemStack itemstack = ((Slot) this.inventorySlots.get(i)).getStack();
+
+			if (itemstack != null)
+			{
+				itemstack.getItem().onUpdate(itemstack, this.aePlayer.getPlayer().getEntityWorld(), this.aePlayer.getPlayer(), i, false);
+			}
+		}
 	}
 
 	private void createSlots()
