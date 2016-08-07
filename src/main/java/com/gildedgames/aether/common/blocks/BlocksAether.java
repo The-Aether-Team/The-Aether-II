@@ -49,12 +49,17 @@ import com.gildedgames.aether.common.items.blocks.ItemAetherSlab;
 import com.gildedgames.aether.common.items.blocks.ItemBlockVariants;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockButtonStone;
+import net.minecraft.block.BlockDynamicLiquid;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.audio.Sound;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.BlockFluidClassic;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.concurrent.Callable;
@@ -172,6 +177,10 @@ public class BlocksAether
 	public static BlockAetherSlab skyroot_slab, holystone_slab, holystone_brick_slab, carved_stone_slab, divine_carved_stone_slab, sentry_stone_slab, divine_sentry_slab, icestone_slab, labyrinth_capstone_slab, labyrinth_wall_slab;
 
 	public static Block labyrinth_strongblock;
+
+	public static Block sentry_gel;
+
+	public static Fluid sentry_gel_fluid;
 
 	public static void preInit()
 	{
@@ -317,6 +326,12 @@ public class BlocksAether
 		labyrinth_wall_slab = registerBlock("labyrinth_wall_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f), AetherCreativeTabs.tabBlocks);
 
 		labyrinth_strongblock = registerBlock("labyrinth_strongblock", new BlockLabyrinth().setBlockUnbreakable(), AetherCreativeTabs.tabBlocks);
+
+		sentry_gel_fluid = new Fluid("sentry_gel", new ResourceLocation(AetherCore.MOD_ID, "blocks/sentry_gel"), new ResourceLocation(AetherCore.MOD_ID, "blocks/flowing_sentry_gel"));
+
+		FluidRegistry.registerFluid(sentry_gel_fluid);
+
+		sentry_gel = registerBlock("sentry_gel", new BlockFluidClassic(sentry_gel_fluid, Material.WATER), AetherCreativeTabs.tabBlocks);
 
 		registerHarvestLevels();
 	}

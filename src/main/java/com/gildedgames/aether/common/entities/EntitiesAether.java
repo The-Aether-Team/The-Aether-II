@@ -16,6 +16,7 @@ import com.gildedgames.aether.common.entities.living.EntityAechorPlant;
 import com.gildedgames.aether.common.entities.living.EntityAerbunny;
 import com.gildedgames.aether.common.entities.living.EntityCarrionSprout;
 import com.gildedgames.aether.common.entities.living.EntitySheepuff;
+import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
@@ -39,6 +40,7 @@ public class EntitiesAether
 		registerLivingEntity(EntityAechorPlant.class, "aechor_plant", 0xCCFFFF, 0xC88FE3);
 		registerLivingEntity(EntityAerbunny.class, "aerbunny", 0xCCFFFF, 0x0066CC);
 		registerLivingEntity(EntityCarrionSprout.class, "carrion_sprout", 0xCCFFFF, 0x5D8BBB);
+		registerLivingEntity(EntityCockatrice.class, "cockatrice", 0xCCFFFF, 0x6b519c);
 
 		registerLivingEntity(EntityFrostpineTotem.class, "frostpine_totem");
 		registerLivingEntity(EntityKraisith.class, "kraisith");
@@ -57,6 +59,7 @@ public class EntitiesAether
 		EntityRegistry.registerModEntity(EntityBolt.class, "bolt", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 
 		SpawnManager manager = SpawningModule.createAndRegisterSpawnManager(AetherCore.PROXY.getAetherDimensionType().getId());
+
 		manager.registerPerTickEntry(new SpawnEntry(EntityAerbunny.class, 2, 5, 0.3f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityFlyingCow.class, 1, 4, 0.65f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityPhyg.class, 1, 4, 0.35f));
@@ -64,6 +67,7 @@ public class EntitiesAether
 		manager.registerPerTickEntry(new SpawnEntry(EntitySheepuff.class, 3, 5, 0.5f));
 
 		manager.registerPerTickEntry(new SpawnEntry(EntityAechorPlant.class, 2, 4, 0.4f));
+		manager.registerPerTickEntry(new SpawnEntry(EntityCockatrice.class, 3, 5, 0.5f));
 	}
 
 	private static void registerLivingEntity(Class<? extends Entity> entity, String id, int eggPrimaryColor, int eggSecondaryColor)

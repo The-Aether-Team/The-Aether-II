@@ -117,6 +117,20 @@
 			"aether:aemob/aerbunny/death"
 		]
 	},
+	"aemob.cockatrice.hurt": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/cockatrice/hurt1",
+			"aether:aemob/cockatrice/hurt2"
+		]
+	},
+	"aemob.cockatrice.death": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/cockatrice/hurt1",
+			"aether:aemob/cockatrice/hurt2"
+		]
+	},
 	"aeblock.labyrinth_totem.drone": {
 		"category": "neutral",
 		"sounds": [

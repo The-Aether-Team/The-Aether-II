@@ -30,4 +30,8 @@ public class SoundsAether
 
 	public static SoundEvent shoot_dart = new SoundEvent(AetherCore.getResource("aerandom.dart_shooter"));
 
+	public static SoundEvent cockatrice_hurt = new SoundEvent(AetherCore.getResource("aemob.cockatrice.hurt"));
+
+	public static SoundEvent cockatrice_death = new SoundEvent(AetherCore.getResource("aemob.cockatrice.death"));
+
 }

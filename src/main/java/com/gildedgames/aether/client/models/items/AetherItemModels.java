@@ -417,6 +417,36 @@ public class AetherItemModels
 
 		registerItemModels(BlocksAether.labyrinth_strongblock, "labyrinth_strongblock");
 
+		registerItemModels(ItemsAether.barbed_iron_ring, "accessories/barbed_iron_ring");
+		registerItemModels(ItemsAether.barbed_gold_ring, "accessories/barbed_gold_ring");
+
+		registerItemModels(ItemsAether.solar_band, "accessories/solar_band");
+		registerItemModels(ItemsAether.lunar_band, "accessories/lunar_band");
+
+		registerItemModels(ItemsAether.ring_of_growth, "accessories/ring_of_growth");
+		registerItemModels(ItemsAether.plague_coil, "accessories/plague_coil");
+
+		registerItemModels(ItemsAether.fleeting_ring, "accessories/fleeting_ring");
+		registerItemModels(ItemsAether.lesser_ring_of_growth, "accessories/lesser_ring_of_growth");
+		registerItemModels(ItemsAether.winged_ring, "accessories/winged_ring");
+		registerItemModels(ItemsAether.life_coil, "accessories/life_coil");
+
+		registerItemModels(ItemsAether.iron_barbed_wire, "accessories/iron_barbed_wire");
+		registerItemModels(ItemsAether.wisdom_bauble, "accessories/wisdom_bauble");
+		registerItemModels(ItemsAether.bone_shard, "accessories/bone_shard");
+		registerItemModels(ItemsAether.moa_feather, "accessories/moa_feather");
+		registerItemModels(ItemsAether.blight_ward, "accessories/blight_ward");
+		registerItemModels(ItemsAether.skyroot_twig, "accessories/skyroot_twig");
+		registerItemModels(ItemsAether.gold_barbed_wire, "accessories/gold_barbed_wire");
+		registerItemModels(ItemsAether.ambrosium_talisman, "accessories/ambrosium_talisman");
+		registerItemModels(ItemsAether.carrion_petal, "accessories/carrion_petal");
+		registerItemModels(ItemsAether.moonlit_petal, "accessories/moonlit_petal");
+		registerItemModels(ItemsAether.cockatrice_heart, "accessories/cockatrice_heart");
+		registerItemModels(ItemsAether.damaged_moa_feather, "accessories/damaged_moa_feather");
+		registerItemModels(ItemsAether.osseous_bane, "accessories/osseous_bane");
+		registerItemModels(ItemsAether.rot_bane, "accessories/rot_bane");
+		registerItemModels(ItemsAether.continuum_talisman, "accessories/continuum_talisman");
+		registerItemModels(ItemsAether.labyrinth_plans, "accessories/labyrinth_plans");
 	}
 
 	private static void registerItemModels(Block block, String path)

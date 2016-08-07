@@ -11,12 +11,7 @@ import com.gildedgames.aether.client.renderer.entities.companions.RenderNexSpiri
 import com.gildedgames.aether.client.renderer.entities.companions.RenderShadeOfArkenzus;
 import com.gildedgames.aether.client.renderer.entities.companions.RenderEtherealWisp;
 import com.gildedgames.aether.client.renderer.entities.companions.RenderSoaringWisp;
-import com.gildedgames.aether.client.renderer.entities.living.RenderAechorPlant;
-import com.gildedgames.aether.client.renderer.entities.living.RenderAerbunny;
-import com.gildedgames.aether.client.renderer.entities.living.RenderCarrionSprout;
-import com.gildedgames.aether.client.renderer.entities.living.RenderFlyingCow;
-import com.gildedgames.aether.client.renderer.entities.living.RenderPhyg;
-import com.gildedgames.aether.client.renderer.entities.living.RenderSheepuff;
+import com.gildedgames.aether.client.renderer.entities.living.*;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderBolt;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDaggerfrostSnowball;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDart;
@@ -41,6 +36,7 @@ import com.gildedgames.aether.common.entities.living.EntityAechorPlant;
 import com.gildedgames.aether.common.entities.living.EntityAerbunny;
 import com.gildedgames.aether.common.entities.living.EntityCarrionSprout;
 import com.gildedgames.aether.common.entities.living.EntitySheepuff;
+import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
@@ -102,6 +98,7 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntitySoaringWisp.class, new AetherRenderFactory<>(RenderSoaringWisp.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityFangrin.class, new AetherRenderFactory<>(RenderFangrin.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityNexSpirit.class, new AetherRenderFactory<>(RenderNexSpirit.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityCockatrice.class, new AetherRenderFactory<>(RenderCockatrice.class));
 	}
 
 	private static void registerTESRs()

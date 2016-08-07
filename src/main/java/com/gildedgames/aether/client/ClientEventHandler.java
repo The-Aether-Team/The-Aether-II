@@ -38,6 +38,8 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.ibm.icu.util.LocalePriorityList.add;
+
 public class ClientEventHandler
 {
 	private boolean prevJumpBindState;
@@ -58,16 +60,6 @@ public class ClientEventHandler
 					if (props.getRarity() != ItemRarity.NONE)
 					{
 						event.getToolTip().add(I18n.format(props.getRarity().getUnlocalizedName()));
-					}
-
-					if (props.isEquippable())
-					{
-						if (props.getRarity() != ItemRarity.NONE)
-						{
-							event.getToolTip().add("");
-						}
-
-						event.getToolTip().add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + I18n.format(props.getEquipmentType().getUnlocalizedName()));
 					}
 				}
 			}
@@ -103,6 +95,24 @@ public class ClientEventHandler
 								event.getToolTip().add(TextFormatting.GRAY + "\u2022 " + I18n.format(line));
 							}
 						}
+					}
+				}
+			}
+
+			if (stack.hasCapability(AetherCapabilities.ITEM_PROPERTIES, null))
+			{
+				IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
+
+				if (props != null)
+				{
+					if (props.isEquippable())
+					{
+						if (props.getRarity() != ItemRarity.NONE)
+						{
+							event.getToolTip().add("");
+						}
+
+						event.getToolTip().add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + I18n.format(props.getEquipmentType().getUnlocalizedName()));
 					}
 				}
 			}
