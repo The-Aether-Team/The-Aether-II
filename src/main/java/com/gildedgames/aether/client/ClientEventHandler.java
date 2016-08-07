@@ -26,6 +26,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.world.WorldEvent;
@@ -127,37 +128,42 @@ public class ClientEventHandler
 			return;
 		}
 
+		Minecraft mc = FMLClientHandler.instance().getClient();
+
+		World world = FMLClientHandler.instance().getWorldClient();
+
 		EntityPlayerSP player = FMLClientHandler.instance().getClientPlayerEntity();
 
-		if (player != null)
+		if (world != null && player != null)
 		{
 			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
-			Minecraft mc = Minecraft.getMinecraft();
-
-			if (PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.obsidian_armor_set))
+			if (aePlayer != null)
 			{
-				KeyBinding.setKeyBindState(mc.gameSettings.keyBindSprint.getKeyCode(), false);
-			}
-			else if (PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.gravitite_armor_set))
-			{
-				if (mc.gameSettings.keyBindJump.isKeyDown() && !this.prevJumpBindState)
+				if (PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.obsidian_armor_set))
 				{
-					if (!aePlayer.getPlayer().isInWater() && aePlayer.getTicksAirborne() > 2 && !aePlayer.getPlayer().capabilities.isCreativeMode)
+					KeyBinding.setKeyBindState(mc.gameSettings.keyBindSprint.getKeyCode(), false);
+				}
+				else if (PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.gravitite_armor_set))
+				{
+					if (mc.gameSettings.keyBindJump.isKeyDown() && !this.prevJumpBindState)
 					{
-						if (aePlayer.performDoubleJump())
+						if (!player.isInWater() && aePlayer.getTicksAirborne() > 2 && !player.capabilities.isCreativeMode)
 						{
-							NetworkingAether.sendPacketToServer(new AetherMovementPacket(AetherMovementPacket.Action.EXTRA_JUMP));
+							if (aePlayer.performDoubleJump())
+							{
+								NetworkingAether.sendPacketToServer(new AetherMovementPacket(AetherMovementPacket.Action.EXTRA_JUMP));
 
-							player.worldObj.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ENDERDRAGON_FLAP, SoundCategory.PLAYERS, 0.4f, 0.8f + (player.worldObj.rand.nextFloat() * 0.6f), false);
+								world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ENDERDRAGON_FLAP, SoundCategory.PLAYERS, 0.4f, 0.8f + (world.rand.nextFloat() * 0.6f), false);
+							}
 						}
 					}
 				}
+
+				this.prevJumpBindState = mc.gameSettings.keyBindJump.isKeyDown();
+
+				AetherMusicManager.INSTANCE.update(aePlayer);
 			}
-
-			this.prevJumpBindState = mc.gameSettings.keyBindJump.isKeyDown();
-
-			AetherMusicManager.INSTANCE.update(aePlayer);
 		}
 	}
 

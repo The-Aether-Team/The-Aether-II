@@ -12,6 +12,7 @@ import com.gildedgames.aether.common.entities.effects.EntityEffectsEventHooks;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.properties.EquipmentRegistry;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
+import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.aether.common.player.PlayerAetherEvents;
@@ -35,6 +36,7 @@ import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import java.io.File;
 import java.util.Random;
