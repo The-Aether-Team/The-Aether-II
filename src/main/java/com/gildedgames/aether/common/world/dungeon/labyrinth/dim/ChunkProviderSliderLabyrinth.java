@@ -40,7 +40,7 @@ public class ChunkProviderSliderLabyrinth implements IChunkGenerator
 	@Override
 	public void populate(int chunkX, int chunkZ)
 	{
-		DungeonInstanceHandler handler = AetherCore.INSTANCE.getDungeonInstanceHandler();
+		DungeonInstanceHandler handler = AetherCore.PROXY.getDungeonInstanceHandler();
 		
 		DungeonInstance inst = handler.getFromDimId(this.world.provider.getDimension());
 		
@@ -73,7 +73,7 @@ public class ChunkProviderSliderLabyrinth implements IChunkGenerator
 	@Override
 	public Chunk provideChunk(int chunkX, int chunkZ)
 	{
-		DungeonInstanceHandler handler = AetherCore.INSTANCE.getDungeonInstanceHandler();
+		DungeonInstanceHandler handler = AetherCore.PROXY.getDungeonInstanceHandler();
 		
 		DungeonInstance inst = handler.getFromDimId(this.world.provider.getDimension());
 		

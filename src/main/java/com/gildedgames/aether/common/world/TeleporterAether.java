@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.world;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.DimensionsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.util.core.nbt.NBT;
@@ -50,13 +51,13 @@ public class TeleporterAether extends Teleporter implements NBT
 
 	public boolean createPortal = true;
 
-	public TeleporterAether(WorldServer worldServer)
+	public TeleporterAether(WorldServer world)
 	{
-		super(worldServer);
+		super(world);
 
-		this.random = new Random(worldServer.getSeed());
+		this.random = new Random(world.getSeed());
 
-		this.worldServerInstance = worldServer;
+		this.worldServerInstance = world;
 		this.worldServerInstance.customTeleporters.add(this);
 	}
 
@@ -129,8 +130,7 @@ public class TeleporterAether extends Teleporter implements NBT
 	@SubscribeEvent
 	public void onChunkUnload(ChunkEvent.Unload event)
 	{
-		final ChunkPos chunkPosition = new ChunkPos(event.getChunk().xPosition,
-				event.getChunk().zPosition);
+		final ChunkPos chunkPosition = new ChunkPos(event.getChunk().xPosition, event.getChunk().zPosition);
 
 		chunksMarkedForPortal.remove(chunkPosition);
 	}
@@ -231,7 +231,7 @@ public class TeleporterAether extends Teleporter implements NBT
 		final EnumFacing outerDirection = EnumFacing.HORIZONTALS[entity.worldObj.rand.nextInt(4)];
 		ChunkPos outerPosition = new ChunkPos(chunkX, chunkZ);
 
-		final boolean isWorldAether = this.worldServerInstance.provider.getDimension() == AetherCore.getAetherDimID();
+		final boolean isWorldAether = this.worldServerInstance.provider.getDimensionType() == DimensionsAether.AETHER;
 
 		while (attempts < maxAttempts)
 		{

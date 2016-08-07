@@ -1,11 +1,11 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.IAetherServices;
-import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
+import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
+import com.gildedgames.aether.common.world.TeleporterAether;
+import com.gildedgames.util.io.ClassSerializer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.DimensionType;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -14,19 +14,8 @@ import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import com.gildedgames.aether.common.world.TeleporterAether;
-import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
-import com.gildedgames.aether.common.world.dungeon.DungeonInstanceFactory;
-import com.gildedgames.aether.common.world.dungeon.DungeonInstanceHandler;
-import com.gildedgames.aether.common.world.dungeon.labyrinth.dim.WorldProviderSliderLabyrinth;
-import com.gildedgames.util.io.ClassSerializer;
-import com.gildedgames.util.modules.instances.InstanceHandler;
-import com.gildedgames.util.modules.instances.InstanceModule;
 
 @Mod(name = AetherCore.MOD_NAME, modid = AetherCore.MOD_ID, version = AetherCore.MOD_VERSION, certificateFingerprint = AetherCore.MOD_FINGERPRINT)
 public class AetherCore implements IAetherServices
@@ -37,7 +26,7 @@ public class AetherCore implements IAetherServices
 
 	public static final String MOD_ID = "aether";
 
-	public static final String MOD_VERSION = "1.8.9-r1";
+	public static final String MOD_VERSION = "1.10.2-r1";
 
 	public static final Logger LOGGER = LogManager.getLogger("AetherII");
 
@@ -49,26 +38,12 @@ public class AetherCore implements IAetherServices
 
 	public static AetherConfig CONFIG;
 
-	private static TeleporterAether teleporter;
-	
-	private ClassSerializer srl;
-	
-	private DungeonInstanceHandler dungeonInstanceHandler;
+	public static TeleporterAether TELEPORTER;
 
-	public static DimensionType SLIDER_LABYRINTH;
-
-	public DungeonInstanceHandler getDungeonInstanceHandler()
-	{
-		return this.dungeonInstanceHandler;
-	}
+	private final ClassSerializer srl = new ClassSerializer(AetherCore.MOD_ID + "Srl");
 
 	public static ClassSerializer srl()
 	{
-		if (AetherCore.INSTANCE.srl == null)
-		{
-			AetherCore.INSTANCE.srl = new ClassSerializer(AetherCore.MOD_ID + "Srl");
-		}
-		
 		return AetherCore.INSTANCE.srl;
 	}
 
@@ -76,6 +51,7 @@ public class AetherCore implements IAetherServices
 	public void onFMLPreInit(FMLPreInitializationEvent event)
 	{
 		AetherCore.CONFIG = new AetherConfig(event.getSuggestedConfigurationFile());
+		AetherCore.CONFIG.load();
 
 		AetherCore.PROXY.preInit(event);
 	}
@@ -84,26 +60,12 @@ public class AetherCore implements IAetherServices
 	public void onFMLInit(FMLInitializationEvent event)
 	{
 		AetherCore.PROXY.init(event);
-
-		SLIDER_LABYRINTH = DimensionType.register("Slider Labyrinth", "_sliderLabyrinth", 6, WorldProviderSliderLabyrinth.class, false);
-
-		final DungeonInstanceFactory factory = new DungeonInstanceFactory(SLIDER_LABYRINTH);
-
-		final InstanceHandler<DungeonInstance> instanceHandler = InstanceModule.INSTANCE.createInstanceHandler(factory);
-
-		this.dungeonInstanceHandler = new DungeonInstanceHandler(instanceHandler);
 	}
 
 	@EventHandler
 	public void onFMLPostInit(FMLPostInitializationEvent event)
 	{
 		AetherCore.PROXY.postInit(event);
-	}
-
-	@EventHandler
-	public void onServerStarted(FMLServerStartedEvent event)
-	{
-		teleporter = new TeleporterAether(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(getAetherDimID()));
 	}
 
 	@EventHandler
@@ -121,16 +83,6 @@ public class AetherCore implements IAetherServices
 	public static String getResourcePath(String name)
 	{
 		return (AetherCore.MOD_ID + ":") + name;
-	}
-
-	public static int getAetherDimID()
-	{
-		return AetherCore.CONFIG.getAetherDimID();
-	}
-
-	public static TeleporterAether getTeleporter()
-	{
-		return teleporter;
 	}
 
 	@Override

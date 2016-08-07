@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -36,7 +37,7 @@ public class EntityDart extends EntityArrow
 	{
 		if (this.getDartType() == ItemDartType.POISON)
 		{
-			entity.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("poison"), 80, 0));
+			entity.addPotionEffect(new PotionEffect(MobEffects.POISON, 80, 0));
 		}
 	}
 

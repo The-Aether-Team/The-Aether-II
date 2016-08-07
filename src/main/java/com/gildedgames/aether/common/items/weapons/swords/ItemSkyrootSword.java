@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.items.weapons.swords;
 
 import com.gildedgames.aether.common.items.ItemAbilityType;
+import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -34,13 +35,15 @@ public class ItemSkyrootSword extends ItemAetherSword
 	}
 
 	@SubscribeEvent
-	public void dropLoot(LivingDropsEvent event)
+	public static void dropLoot(LivingDropsEvent event)
 	{
 		if (event.getSource().getSourceOfDamage() instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) event.getSource().getSourceOfDamage();
 
-			if (player.getHeldItem(EnumHand.MAIN_HAND) != null && player.getHeldItem(EnumHand.MAIN_HAND).getItem() == this)
+			ItemStack held = player.getHeldItem(EnumHand.MAIN_HAND);
+
+			if (held != null && held.getItem() == ItemsAether.skyroot_sword)
 			{
 				List<ItemStack> stacks = new ArrayList<>();
 
@@ -51,9 +54,9 @@ public class ItemSkyrootSword extends ItemAetherSword
 
 				for (ItemStack stack : stacks)
 				{
-					EntityItem item = new EntityItem(event.getEntity().getEntityWorld(), event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, stack);
+					EntityItem item = new EntityItem(player.getEntityWorld(), player.posX, player.posY, player.posZ, stack);
 
-					event.getEntity().getEntityWorld().spawnEntityInWorld(item);
+					player.getEntityWorld().spawnEntityInWorld(item);
 				}
 			}
 		}

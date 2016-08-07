@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ClientRenderHandler
 {
-	public static void init()
+	public ClientRenderHandler()
 	{
 		RenderLivingBase<?> playerRender = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
 		playerRender.addLayer(new LayerPlayerGloves(playerRender));

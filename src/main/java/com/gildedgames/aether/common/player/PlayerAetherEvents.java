@@ -16,6 +16,7 @@ import com.gildedgames.util.modules.chunk.ChunkModule;
 import com.gildedgames.util.modules.chunk.impl.hooks.BlockBitFlagChunkHook;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.potion.Potion;
@@ -41,7 +42,7 @@ import java.util.List;
 public class PlayerAetherEvents
 {
 	@SubscribeEvent
-	public void onPlayerStartTracking(PlayerEvent.StartTracking event)
+	public static void onPlayerStartTracking(PlayerEvent.StartTracking event)
 	{
 		EntityPlayerMP player = (EntityPlayerMP) event.getEntity();
 
@@ -49,18 +50,18 @@ public class PlayerAetherEvents
 
 		if (event.getTarget() instanceof EntityPlayer)
 		{
-			NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(player, this.getAllEquipment(aePlayer.getEquipmentInventory())), player);
+			NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(player, PlayerAetherEvents.getAllEquipment(aePlayer.getEquipmentInventory())), player);
 		}
 	}
 
 	@SubscribeEvent
-	public void onPlayerJoined(PlayerLoggedInEvent event)
+	public static void onPlayerJoined(PlayerLoggedInEvent event)
 	{
 		EntityPlayerMP player = (EntityPlayerMP) event.player;
 
 		PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
-		NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(player, this.getAllEquipment(aePlayer.getEquipmentInventory())), player);
+		NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(player, PlayerAetherEvents.getAllEquipment(aePlayer.getEquipmentInventory())), player);
 
 		IEntityEffectsCapability effects = EntityEffects.get(player);
 
@@ -83,7 +84,7 @@ public class PlayerAetherEvents
 		}
 	}
 
-	private List<Pair<Integer, ItemStack>> getAllEquipment(IInventoryEquipment equipment)
+	private static List<Pair<Integer, ItemStack>> getAllEquipment(IInventoryEquipment equipment)
 	{
 		List<Pair<Integer, ItemStack>> stacks = new ArrayList<>();
 
@@ -96,7 +97,7 @@ public class PlayerAetherEvents
 	}
 
 	@SubscribeEvent
-	public void onDeath(LivingDeathEvent event)
+	public static void onDeath(LivingDeathEvent event)
 	{
 		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.getEntity());
 
@@ -116,8 +117,8 @@ public class PlayerAetherEvents
 
 					player.setHealth(0.5f);
 
-					player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("regeneration"), 20 * 7, 3));
-					player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("resistance"), 20 * 7, 4));
+					player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 20 * 7, 3));
+					player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20 * 7, 4));
 
 					ItemDeathSeal.setDisabledTimer(companionItem, player.worldObj, 20 * 60 * 15);
 
@@ -132,7 +133,7 @@ public class PlayerAetherEvents
 	}
 
 	@SubscribeEvent
-	public void onDrops(LivingDropsEvent event)
+	public static void onDrops(LivingDropsEvent event)
 	{
 		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.getEntity());
 
@@ -143,7 +144,7 @@ public class PlayerAetherEvents
 	}
 
 	@SubscribeEvent
-	public void onUpdate(LivingUpdateEvent event)
+	public static void onUpdate(LivingUpdateEvent event)
 	{
 		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.getEntity());
 
@@ -154,7 +155,7 @@ public class PlayerAetherEvents
 	}
 
 	@SubscribeEvent
-	public void onFall(LivingFallEvent event)
+	public static void onFall(LivingFallEvent event)
 	{
 		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.getEntity());
 
@@ -165,7 +166,7 @@ public class PlayerAetherEvents
 	}
 
 	@SubscribeEvent
-	public void onCalculateBreakSpeed(PlayerEvent.BreakSpeed event)
+	public static void onCalculateBreakSpeed(PlayerEvent.BreakSpeed event)
 	{
 		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.getEntity());
 
@@ -176,7 +177,7 @@ public class PlayerAetherEvents
 	}
 
 	@SubscribeEvent
-	public void onLivingEntityHurt(LivingHurtEvent event)
+	public static void onLivingEntityHurt(LivingHurtEvent event)
 	{
 		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.getEntity());
 
@@ -188,7 +189,7 @@ public class PlayerAetherEvents
 
 
 	@SubscribeEvent
-	public void onPlayerTeleported(PlayerChangedDimensionEvent event)
+	public static void onPlayerTeleported(PlayerChangedDimensionEvent event)
 	{
 		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.player);
 
@@ -199,7 +200,7 @@ public class PlayerAetherEvents
 	}
 
 	@SubscribeEvent
-	public void onPlayerClone(PlayerEvent.Clone event)
+	public static void onPlayerClone(PlayerEvent.Clone event)
 	{
 		IPlayerAetherCapability oldPlayer = PlayerAether.getPlayer(event.getOriginal());
 
@@ -216,7 +217,7 @@ public class PlayerAetherEvents
 	}
 
 	@SubscribeEvent
-	public void onPlaceBlockEvent(BlockEvent.PlaceEvent event)
+	public static void onPlaceBlockEvent(BlockEvent.PlaceEvent event)
 	{
 		BlockBitFlagChunkHook data = ChunkModule.api().getHook(event.getWorld(), event.getPos(), AetherCore.PROXY.getPlacementFlagProvider());
 
@@ -227,7 +228,7 @@ public class PlayerAetherEvents
 	}
 
 	@SubscribeEvent
-	public void onPlayerRespawn(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent event)
+	public static void onPlayerRespawn(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent event)
 	{
 		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.player);
 

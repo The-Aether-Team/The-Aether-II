@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherShield;
 import com.gildedgames.aether.common.util.PlayerUtil;
+import com.gildedgames.aether.common.world.TeleporterAether;
 import com.gildedgames.util.modules.universe.common.util.TeleporterGeneric;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -34,8 +35,8 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -45,18 +46,26 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Random;
 
-import static com.ibm.icu.impl.CurrencyData.provider;
-import static net.minecraft.realms.Tezzelator.t;
-
 public class CommonEvents
 {
+	@SubscribeEvent
+	public void onWorldLoaded(WorldEvent.Load event)
+	{
+		if (event.getWorld() instanceof WorldServer)
+		{
+			if (event.getWorld().provider.getDimensionType() == DimensionsAether.AETHER)
+			{
+				AetherCore.TELEPORTER = new TeleporterAether((WorldServer) event.getWorld());
+			}
+		}
+	}
 
 	@SubscribeEvent
 	public void onPlayerSleepInBed(PlayerWakeUpEvent event)
 	{
 		World world = event.getEntityPlayer().worldObj;
 
-		if (!world.isRemote && world.provider.getDimensionType() == AetherCore.PROXY.getDimensionType())
+		if (!world.isRemote && world.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
 			MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 
@@ -145,7 +154,7 @@ public class CommonEvents
 		}
 
 		// Checks whether or not an entity is in the Aether's void
-		if (entity.dimension == AetherCore.getAetherDimID() && entity.posY < -4 && !entity.worldObj.isRemote)
+		if (entity.worldObj.provider.getDimensionType() == DimensionsAether.AETHER && entity.posY < -4 && !entity.worldObj.isRemote)
 		{
 			this.onFallenFromAether(entity);
 		}
@@ -272,7 +281,7 @@ public class CommonEvents
 
 	private void onLavaPlaced(FillBucketEvent event, EntityPlayer player, BlockPos pos)
 	{
-		if (player.dimension == AetherCore.getAetherDimID())
+		if (player.worldObj.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
 			player.worldObj.setBlockState(pos, BlocksAether.aerogel.getDefaultState());
 

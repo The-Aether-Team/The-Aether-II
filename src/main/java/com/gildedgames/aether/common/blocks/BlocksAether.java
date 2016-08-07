@@ -2,7 +2,17 @@ package com.gildedgames.aether.common.blocks;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.AetherCreativeTabs;
-import com.gildedgames.aether.common.blocks.construction.*;
+import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
+import com.gildedgames.aether.common.blocks.construction.BlockAetherSlab;
+import com.gildedgames.aether.common.blocks.construction.BlockAltar;
+import com.gildedgames.aether.common.blocks.construction.BlockAmbrosiumTorch;
+import com.gildedgames.aether.common.blocks.construction.BlockCustomDoor;
+import com.gildedgames.aether.common.blocks.construction.BlockQuicksoilGlass;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootChest;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootFence;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootFenceGate;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootLadder;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootTrapDoor;
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystoneButton;
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystonePressurePlate;
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockSkyrootButton;
@@ -43,17 +53,15 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.blocks.util.BlockCustom;
 import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummy;
-import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.blocks.ItemAetherSlab;
 import com.gildedgames.aether.common.items.blocks.ItemBlockVariants;
+import com.google.common.base.Supplier;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockButtonStone;
 import net.minecraft.block.BlockDynamicLiquid;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.audio.Sound;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
@@ -62,276 +70,288 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import java.util.concurrent.Callable;
-
 public class BlocksAether
 {
-	public static Block aether_dirt;
+	public static final Block aether_dirt = new BlockCustom(Material.GROUND).setSoundType(SoundType.GROUND).setHardness(0.5f);
 
-	public static BlockAetherGrass aether_grass;
+	public static final BlockAetherGrass aether_grass = new BlockAetherGrass();
 
-	public static BlockHolystone holystone;
+	public static final BlockHolystone holystone = new BlockHolystone();
 
-    public static Block holystone_brick;
+	public static final Block holystone_brick = new BlockCustom(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2f);
 
-	public static BlockAercloud aercloud;
+	public static final BlockAercloud aercloud = new BlockAercloud();
 
-	public static Block ambrosium_ore;
+	public static final BlockAmbrosiumOre ambrosium_ore = new BlockAmbrosiumOre();
 
-	public static BlockZaniteOre zanite_ore;
+	public static final BlockZaniteOre zanite_ore = new BlockZaniteOre();
 
-	public static BlockGravititeOre gravitite_ore;
+	public static final BlockGravititeOre gravitite_ore = new BlockGravititeOre();
 
-	public static BlockContinuumOre continuum_ore;
+	public static final BlockContinuumOre continuum_ore = new BlockContinuumOre();
 
-	public static BlockArkeniumOre arkenium_ore;
+	public static final BlockArkeniumOre arkenium_ore = new BlockArkeniumOre();
 
-	public static Block skyroot_planks;
+	public static final Block skyroot_planks = new BlockCustom(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f).setResistance(5.0f);
 
-	public static BlockAetherLog skyroot_log, golden_oak_log;
+	public static final BlockAetherLog skyroot_log = new BlockAetherLog(),
+			golden_oak_log = new BlockGoldenOakLog();
 
-	public static BlockAetherLeaves blue_skyroot_leaves, green_skyroot_leaves, dark_blue_skyroot_leaves,
-			golden_oak_leaves, purple_crystal_leaves, purple_fruit_leaves;
+	public static final BlockAetherLeaves blue_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.BLUE_SKYROOT_SAPLING.getMeta()),
+			green_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.GREEN_SKYROOT_SAPLING.getMeta()),
+			dark_blue_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.DARK_BLUE_SKYROOT_SAPLING.getMeta()),
+			golden_oak_leaves = new BlockAetherLeaves(BlockAetherSapling.GOLDEN_OAK_SAPLING.getMeta()),
+			purple_crystal_leaves = new BlockAetherLeaves(BlockAetherSapling.PURPLE_CRYSTAL_SAPLING.getMeta()),
+			purple_fruit_leaves = new BlockAetherLeaves(BlockAetherSapling.PURPLE_CRYSTAL_SAPLING.getMeta());
 
-	public static BlockAetherPortal aether_portal;
+	public static final BlockAetherPortal aether_portal = new BlockAetherPortal();
 
-	public static BlockTallAetherGrass tall_aether_grass;
+	public static final BlockTallAetherGrass tall_aether_grass = new BlockTallAetherGrass();
 
-	public static BlockQuicksoil quicksoil;
+	public static final BlockQuicksoil quicksoil = new BlockQuicksoil();
 
-	public static BlockSkyrootWorkbench skyroot_crafting_table;
+	public static final BlockSkyrootWorkbench skyroot_crafting_table = new BlockSkyrootWorkbench();
 
-	public static BlockBlueberryBush blueberry_bush;
+	public static final BlockBlueberryBush blueberry_bush = new BlockBlueberryBush();
 
-	public static BlockOrangeTree orange_tree;
+	public static final BlockOrangeTree orange_tree = new BlockOrangeTree();
 
-	public static BlockAetherFlower aether_flower;
+	public static final BlockAetherFlower aether_flower = new BlockAetherFlower();
 
-	public static BlockAltar altar;
+	public static final BlockAltar altar = new BlockAltar();
 
-	public static BlockIcestoneOre icestone_ore;
+	public static final BlockIcestoneOre icestone_ore = new BlockIcestoneOre();
 
-	public static BlockAerogel aerogel;
+	public static final BlockAerogel aerogel = new BlockAerogel();
 
-	public static Block zanite_block;
+	public static final Block zanite_block = new BlockCustom(Material.IRON).setSoundType(SoundType.METAL).setHardness(5f);
 
-	public static Block enchanted_gravitite;
+	public static final Block enchanted_gravitite = new BlockCustom(Material.ROCK).setSoundType(SoundType.STONE).setHardness(5f);
 
-	public static BlockAetherSapling aether_sapling;
+	public static final BlockAetherSapling aether_sapling = new BlockAetherSapling();
 
-	public static BlockLabyrinth carved_stone, sentry_stone, divine_carved_stone, divine_sentry_stone;
+	public static final BlockLabyrinth
+			carved_stone = new BlockDivine(),
+			sentry_stone = new BlockDivine().setLightLevel(0.50f);
 
-	public static BlockHolystoneFurnace holystone_furnace;
+	public static final BlockHolystoneFurnace holystone_furnace = new BlockHolystoneFurnace();
 
-	public static BlockQuicksoilGlass quicksoil_glass;
+	public static final BlockQuicksoilGlass quicksoil_glass = new BlockQuicksoilGlass();
 
-	public static BlockCustomDoor skyroot_door;
+	public static final BlockCustomDoor skyroot_door = new BlockCustomDoor(Material.WOOD, new Supplier<Item>()
+	{
+		@Override
+		public Item get()
+		{
+			return ItemsAether.skyroot_door;
+		}
+	}, SoundType.WOOD);
 
-	public static BlockCustomDoor arkenium_door;
+	public static final BlockCustomDoor arkenium_door = new BlockCustomDoor(Material.WOOD, new Supplier<Item>()
+	{
+		@Override
+		public Item get()
+		{
+			return ItemsAether.skyroot_door;
+		}
+	}, SoundType.WOOD);
 
-	public static BlockSkyrootChest skyroot_chest;
+	public static final BlockSkyrootChest skyroot_chest = new BlockSkyrootChest();
 
-	public static BlockAmbrosiumTorch ambrosium_torch;
+	public static final BlockAmbrosiumTorch ambrosium_torch = new BlockAmbrosiumTorch();
 
-	public static BlockIcestoneBricks icestone_bricks;
+	public static final BlockIcestoneBricks icestone_bricks = new BlockIcestoneBricks();
 
-	public static BlockSkyrootFence skyroot_fence;
+	public static final BlockSkyrootFence skyroot_fence = new BlockSkyrootFence();
 
-	public static BlockSkyrootFenceGate skyroot_fence_gate;
+	public static final BlockSkyrootFenceGate skyroot_fence_gate = new BlockSkyrootFenceGate();
 
-	public static BlockStandingSkyrootSign standing_skyroot_sign;
+	public static final BlockStandingSkyrootSign standing_skyroot_sign = new BlockStandingSkyrootSign();
 
-	public static BlockWallSkyrootSign wall_skyroot_sign;
+	public static final BlockWallSkyrootSign wall_skyroot_sign = new BlockWallSkyrootSign();
 
-	public static BlockSkyrootTrapDoor skyroot_trapdoor;
+	public static final BlockSkyrootTrapDoor skyroot_trapdoor = new BlockSkyrootTrapDoor();
 
-	public static BlockSkyrootPressurePlate skyroot_pressure_plate;
+	public static final BlockSkyrootPressurePlate skyroot_pressure_plate = new BlockSkyrootPressurePlate();
 
-	public static BlockHolystonePressurePlate holystone_pressure_plate;
+	public static final BlockHolystonePressurePlate holystone_pressure_plate = new BlockHolystonePressurePlate();
 
-	public static BlockSkyrootButton skyroot_button;
+	public static final BlockSkyrootButton skyroot_button = new BlockSkyrootButton();
 
-	public static BlockButtonStone holystone_button;
+	public static final BlockButtonStone holystone_button = new BlockHolystoneButton();
 
-	public static BlockSkyrootLadder skyroot_ladder;
+	public static final BlockSkyrootLadder skyroot_ladder = new BlockSkyrootLadder();
 
-	public static BlockAetherWall holystone_wall, mossy_holystone_wall, holystone_brick_wall, carved_stone_wall, icestone_wall, aerogel_wall, skyroot_log_wall,
-									divine_stone_wall, sentry_stone_wall, divine_sentry_wall;
+	public static final BlockTeleporter labyrinth_totem = new BlockTeleporter(Material.IRON);
 
-	public static BlockTeleporter labyrinth_totem;
+	public static final Block multiblock_dummy = new BlockMultiDummy().setBlockUnbreakable();
 
-	public static Block multiblock_dummy;
+	public static final BlockLabyrinth carved_capstone = new BlockLabyrinth();
 
-	public static BlockLabyrinth carved_capstone;
+	public static final Block
+			labyrinth_glowing_pillar = new BlockLabyrinthPillar().setGlows(true),
+			labyrinth_pillar = new BlockLabyrinthPillar();
 
-	public static Block labyrinth_glowing_pillar, labyrinth_pillar;
+	public static final BlockLabyrinthDoor labyrinth_door = new BlockLabyrinthDoor(Material.ROCK);
 
-	public static BlockLabyrinthDoor labyrinth_door;
+	public static final BlockLabyrinthChest labyrinth_chest = new BlockLabyrinthChest();
 
-	public static BlockLabyrinth labyrinth_wall, labyrinth_lightstone, labyrinth_base, labyrinth_headstone;
+	public static final BlockLabyrinth
+			labyrinth_wall = new BlockLabyrinth(),
+			labyrinth_lightstone = new BlockLabyrinth().setLightLevel(1.0f),
+			labyrinth_base = new BlockLabyrinth().setLightLevel(0.50f),
+			labyrinth_headstone =  new BlockLabyrinth();
 
-	public static Block labyrinth_eye, wildcard, schematicBoundary, linkedSchematicBoundary;
+	public static final BlockAetherWall
+			holystone_wall = new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f),
+			mossy_holystone_wall = new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f),
+			holystone_brick_wall = new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f),
+			carved_stone_wall = new BlockAetherWall(BlocksAether.carved_stone.getDefaultState(), 1.0f, 10.0f),
+			icestone_wall = new BlockAetherWall(BlocksAether.icestone_bricks.getDefaultState(), 3.0f, 10.0f),
+			aerogel_wall = new BlockAerogelWall(BlocksAether.aerogel.getDefaultState(), 1.0f, 10.0f),
+			skyroot_log_wall = new BlockSkyrootWall(BlocksAether.skyroot_log.getDefaultState(), 2.0f, 10.0f),
+			divine_stone_wall = new BlockDivineWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f),
+			sentry_stone_wall = new BlockAetherWall(BlocksAether.labyrinth_lightstone.getDefaultState(), 1.0f, 10.0f).setGlows(true),
+			divine_sentry_wall = new BlockDivineWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f);
 
-	public static BlockLabyrinthChest labyrinth_chest;
+	public static final BlockAetherSlab
+			skyroot_slab = new BlockAetherSlab(Material.WOOD, SoundType.WOOD, 2.0f),
+			holystone_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f),
+			holystone_brick_slab =  new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f),
+			carved_stone_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f),
+			divine_carved_stone_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f),
+			sentry_stone_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f),
+			divine_sentry_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f),
+			icestone_slab = new BlockAetherSlab(Material.ROCK, SoundType.GLASS, 2.0f),
+			labyrinth_capstone_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f),
+			labyrinth_wall_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f);
 
-	public static BlockAetherSlab skyroot_slab, holystone_slab, holystone_brick_slab, carved_stone_slab, divine_carved_stone_slab, sentry_stone_slab, divine_sentry_slab, icestone_slab, labyrinth_capstone_slab, labyrinth_wall_slab;
-
-	public static Block labyrinth_strongblock;
-
-	public static Block sentry_gel;
-
-	public static Fluid sentry_gel_fluid;
+	public static final Block labyrinth_strongblock = new BlockLabyrinth().setBlockUnbreakable();
 
 	public static void preInit()
 	{
-		aether_dirt = registerBlock("aether_dirt", new BlockCustom(Material.GROUND).setSoundType(SoundType.GROUND).setHardness(0.5f), AetherCreativeTabs.tabBlocks);
+		registerBlock("aether_dirt", BlocksAether.aether_dirt.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("aether_grass", BlocksAether.aether_grass.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemBlockVariants(BlocksAether.aether_grass));
+		registerBlock("holystone", BlocksAether.holystone.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemBlockVariants(BlocksAether.holystone));
 
-		aether_grass = registerBlock("aether_grass", new BlockAetherGrass(), AetherCreativeTabs.tabBlocks);
+		registerBlock("aercloud", BlocksAether.aercloud.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemBlockVariants(BlocksAether.aercloud));
 
-		holystone = registerBlock("holystone", new BlockHolystone(), AetherCreativeTabs.tabBlocks);
+		registerBlock("skyroot_planks", BlocksAether.skyroot_planks.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		aercloud = registerBlock("aercloud", new BlockAercloud(), AetherCreativeTabs.tabBlocks);
+		registerBlock("ambrosium_ore", BlocksAether.ambrosium_ore.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("zanite_ore", BlocksAether.zanite_ore.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("gravitite_ore", BlocksAether.gravitite_ore.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("continuum_ore", BlocksAether.continuum_ore.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("arkenium_ore", BlocksAether.arkenium_ore.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("icestone_ore", BlocksAether.icestone_ore.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		skyroot_planks = registerBlock("skyroot_planks", new BlockCustom(Material.WOOD)
-				.setSoundType(SoundType.WOOD).setHardness(2.0f).setResistance(5.0f), AetherCreativeTabs.tabBlocks);
+		registerBlock("skyroot_log", BlocksAether.skyroot_log.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("golden_oak_log", BlocksAether.golden_oak_log.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		ambrosium_ore = registerBlock("ambrosium_ore", new BlockAmbrosiumOre().setLightLevel(0.4f), AetherCreativeTabs.tabBlocks);
+		registerBlock("blue_skyroot_leaves", BlocksAether.blue_skyroot_leaves.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("green_skyroot_leaves", BlocksAether.green_skyroot_leaves.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("dark_blue_skyroot_leaves", BlocksAether.dark_blue_skyroot_leaves.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("golden_oak_leaves", BlocksAether.golden_oak_leaves.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("purple_crystal_leaves", BlocksAether.purple_crystal_leaves.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("purple_fruit_leaves", BlocksAether.purple_fruit_leaves.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		zanite_ore = registerBlock("zanite_ore", new BlockZaniteOre(), AetherCreativeTabs.tabBlocks);
+		registerBlock("aether_sapling", BlocksAether.aether_sapling.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemBlockVariants(BlocksAether.aether_sapling));
 
-		gravitite_ore = registerBlock("gravitite_ore", new BlockGravititeOre(), AetherCreativeTabs.tabBlocks);
+		registerBlock("aether_portal", BlocksAether.aether_portal);
 
-		continuum_ore = registerBlock("continuum_ore", new BlockContinuumOre(), AetherCreativeTabs.tabBlocks);
+		registerBlock("tall_aether_grass", BlocksAether.tall_aether_grass.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		arkenium_ore = registerBlock("arkenium_ore", new BlockArkeniumOre(), AetherCreativeTabs.tabBlocks);
+		registerBlock("quicksoil", BlocksAether.quicksoil.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		skyroot_log = registerBlock("skyroot_log", new BlockAetherLog(), AetherCreativeTabs.tabBlocks);
+		registerBlock("skyroot_crafting_table", BlocksAether.skyroot_crafting_table.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		golden_oak_log = registerBlock("golden_oak_log", new BlockGoldenOakLog(), AetherCreativeTabs.tabBlocks);
+		registerBlock("blueberry_bush", BlocksAether.blueberry_bush.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemBlockVariants(BlocksAether.blueberry_bush));
+		registerBlock("orange_tree", BlocksAether.orange_tree.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		blue_skyroot_leaves = registerBlock("blue_skyroot_leaves", new BlockAetherLeaves(BlockAetherSapling.BLUE_SKYROOT_SAPLING.getMeta()), AetherCreativeTabs.tabBlocks);
+		registerBlock("aether_flower", BlocksAether.aether_flower.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemBlockVariants(BlocksAether.aether_flower));
 
-		green_skyroot_leaves = registerBlock("green_skyroot_leaves", new BlockAetherLeaves(BlockAetherSapling.GREEN_SKYROOT_SAPLING.getMeta()), AetherCreativeTabs.tabBlocks);
+		registerBlock("altar", BlocksAether.altar.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		dark_blue_skyroot_leaves = registerBlock("dark_blue_skyroot_leaves", new BlockAetherLeaves(BlockAetherSapling.DARK_BLUE_SKYROOT_SAPLING.getMeta()), AetherCreativeTabs.tabBlocks);
+		registerBlock("aerogel", BlocksAether.aerogel.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		golden_oak_leaves = registerBlock("golden_oak_leaves", new BlockAetherLeaves(BlockAetherSapling.GOLDEN_OAK_SAPLING.getMeta()), AetherCreativeTabs.tabBlocks);
+		registerBlock("zanite_block", BlocksAether.zanite_block.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		purple_crystal_leaves = registerBlock("purple_crystal_leaves", new BlockAetherLeaves(BlockAetherSapling.PURPLE_CRYSTAL_SAPLING.getMeta()), AetherCreativeTabs.tabBlocks);
+		registerBlock("enchanted_gravitite", BlocksAether.enchanted_gravitite.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		purple_fruit_leaves = registerBlock("purple_fruit_leaves", new BlockAetherLeaves(BlockAetherSapling.PURPLE_CRYSTAL_SAPLING.getMeta()), AetherCreativeTabs.tabBlocks);
+		registerBlock("carved_stone", BlocksAether.carved_stone.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemBlockVariants(BlocksAether.carved_stone));
 
-		aether_portal = registerBlock("aether_portal", new BlockAetherPortal());
+		registerBlock("sentry_stone", BlocksAether.sentry_stone.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemBlockVariants(BlocksAether.sentry_stone));
 
-		tall_aether_grass = registerBlock("tall_aether_grass", new BlockTallAetherGrass(), AetherCreativeTabs.tabBlocks);
+		registerBlock("holystone_brick", BlocksAether.holystone_brick.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		quicksoil = registerBlock("quicksoil", new BlockQuicksoil(), AetherCreativeTabs.tabBlocks);
+		registerBlock("holystone_furnace", BlocksAether.holystone_furnace.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		skyroot_crafting_table = registerBlock("skyroot_crafting_table", new BlockSkyrootWorkbench(), AetherCreativeTabs.tabBlocks);
+		registerBlock("quicksoil_glass", BlocksAether.quicksoil_glass.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		blueberry_bush = registerBlock("blueberry_bush", new BlockBlueberryBush(), AetherCreativeTabs.tabBlocks);
+		registerBlock("skyroot_door", BlocksAether.skyroot_door);
+		registerBlock("arkenium_door", BlocksAether.arkenium_door);
 
-		orange_tree = registerBlock("orange_tree", new BlockOrangeTree(), AetherCreativeTabs.tabBlocks);
+		registerBlock("skyroot_chest", BlocksAether.skyroot_chest.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		aether_flower = registerBlock("aether_flower", new BlockAetherFlower(), AetherCreativeTabs.tabBlocks);
+		registerBlock("ambrosium_torch", BlocksAether.ambrosium_torch.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		altar = registerBlock("altar", new BlockAltar(), AetherCreativeTabs.tabBlocks);
+		registerBlock("icestone_bricks", BlocksAether.icestone_bricks.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		icestone_ore = registerBlock("icestone_ore", new BlockIcestoneOre(), AetherCreativeTabs.tabBlocks);
+		registerBlock("skyroot_fence", BlocksAether.skyroot_fence.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		aerogel = registerBlock("aerogel", new BlockAerogel(), AetherCreativeTabs.tabBlocks);
+		registerBlock("skyroot_fence_gate", BlocksAether.skyroot_fence_gate.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		zanite_block = registerBlock("zanite_block", new BlockCustom(Material.IRON).setSoundType(SoundType.METAL).setHardness(5f), AetherCreativeTabs.tabBlocks);
+		registerBlock("standing_skyroot_sign", BlocksAether.standing_skyroot_sign);
 
-		enchanted_gravitite = registerBlock("enchanted_gravitite", new BlockCustom(Material.ROCK).setSoundType(SoundType.STONE).setHardness(5f), AetherCreativeTabs.tabBlocks);
+		registerBlock("skyroot_trapdoor", BlocksAether.skyroot_trapdoor.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("skyroot_ladder", BlocksAether.skyroot_ladder.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		aether_sapling = registerBlock("aether_sapling", new BlockAetherSapling(), AetherCreativeTabs.tabBlocks);
+		registerBlock("skyroot_button", BlocksAether.skyroot_button.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("holystone_button", BlocksAether.holystone_button.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		carved_stone = registerBlock("carved_stone", new BlockDivine(), AetherCreativeTabs.tabBlocks);
+		registerBlock("skyroot_pressure_plate", BlocksAether.skyroot_pressure_plate.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("holystone_pressure_plate", BlocksAether.holystone_pressure_plate.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		sentry_stone = registerBlock("sentry_stone", new BlockDivine().setLightLevel(0.50f), AetherCreativeTabs.tabBlocks);
+		registerBlock("wall_skyroot_sign", BlocksAether.wall_skyroot_sign);
 
-		holystone_brick = registerBlock("holystone_brick", new BlockCustom(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2f), AetherCreativeTabs.tabBlocks);
+		registerBlock("labyrinth_chest", BlocksAether.labyrinth_chest.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		holystone_furnace = registerBlock("holystone_furnace", new BlockHolystoneFurnace(), AetherCreativeTabs.tabBlocks);
+		registerBlock("holystone_wall", BlocksAether.holystone_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("mossy_holystone_wall", BlocksAether.mossy_holystone_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("holystone_brick_wall", BlocksAether.holystone_brick_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("carved_stone_wall", BlocksAether.carved_stone_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("icestone_wall", BlocksAether.icestone_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("skyroot_log_wall", BlocksAether.skyroot_log_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("aerogel_wall", BlocksAether.aerogel_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("sentry_stone_wall", BlocksAether.sentry_stone_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("divine_sentry_wall", BlocksAether.divine_sentry_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("divine_stone_wall", BlocksAether.divine_stone_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		quicksoil_glass = registerBlock("quicksoil_glass", new BlockQuicksoilGlass(), AetherCreativeTabs.tabBlocks);
+		registerBlock("labyrinth_totem", BlocksAether.labyrinth_totem.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("labyrinth_door", BlocksAether.labyrinth_door.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		skyroot_door = registerBlock("skyroot_door", new BlockCustomDoor(Material.WOOD, new Callable<Item>() { public Item call() { return ItemsAether.skyroot_door; } }, SoundType.WOOD));
+		registerBlock("multiblock_dummy", BlocksAether.multiblock_dummy);
 
-		arkenium_door = registerBlock("arkenium_door", new BlockCustomDoor(Material.IRON, new Callable<Item>() { public Item call() { return ItemsAether.arkenium_door; } }, SoundType.METAL));
+		registerBlock("carved_capstone", BlocksAether.carved_capstone.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("labyrinth_glowing_pillar", BlocksAether.labyrinth_glowing_pillar.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("labyrinth_pillar", BlocksAether.labyrinth_pillar.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("labyrinth_wall", BlocksAether.labyrinth_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("labyrinth_lightstone", BlocksAether.labyrinth_lightstone.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("labyrinth_base", BlocksAether.labyrinth_base.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("labyrinth_headstone", BlocksAether.labyrinth_headstone.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
-		skyroot_chest = registerBlock("skyroot_chest", new BlockSkyrootChest(), AetherCreativeTabs.tabBlocks);
+		registerBlock("skyroot_slab", BlocksAether.skyroot_slab.setCreativeTab(AetherCreativeTabs.tabBlocks),new ItemAetherSlab(BlocksAether.skyroot_slab));
+		registerBlock("holystone_slab", BlocksAether.holystone_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.holystone_slab));
+		registerBlock("holystone_brick_slab", BlocksAether.holystone_brick_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.holystone_brick_slab));
+		registerBlock("carved_stone_slab", BlocksAether.carved_stone_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.carved_stone_slab));
+		registerBlock("divine_carved_stone_slab", BlocksAether.divine_carved_stone_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.divine_carved_stone_slab));
+		registerBlock("sentry_stone_slab", BlocksAether.sentry_stone_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.sentry_stone_slab));
+		registerBlock("divine_sentry_slab", BlocksAether.divine_sentry_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.divine_sentry_slab));
+		registerBlock("icestone_slab", BlocksAether.icestone_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.icestone_slab));
+		registerBlock("labyrinth_capstone_slab", BlocksAether.labyrinth_capstone_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.labyrinth_capstone_slab));
+		registerBlock("labyrinth_wall_slab", BlocksAether.labyrinth_wall_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.labyrinth_wall_slab));
 
-		ambrosium_torch = registerBlock("ambrosium_torch", new BlockAmbrosiumTorch(), AetherCreativeTabs.tabBlocks);
-
-		icestone_bricks = registerBlock("icestone_bricks", new BlockIcestoneBricks(), AetherCreativeTabs.tabBlocks);
-
-		skyroot_fence = registerBlock("skyroot_fence", new BlockSkyrootFence(), AetherCreativeTabs.tabBlocks);
-
-		skyroot_fence_gate = registerBlock("skyroot_fence_gate", new BlockSkyrootFenceGate(), AetherCreativeTabs.tabBlocks);
-
-		standing_skyroot_sign = registerBlock("standing_skyroot_sign", new BlockStandingSkyrootSign());
-
-		skyroot_trapdoor = registerBlock("skyroot_trapdoor", new BlockSkyrootTrapDoor(), AetherCreativeTabs.tabBlocks);
-
-		skyroot_button = registerBlock("skyroot_button", new BlockSkyrootButton(), AetherCreativeTabs.tabBlocks);
-
-		skyroot_pressure_plate = registerBlock("skyroot_pressure_plate", new BlockSkyrootPressurePlate(), AetherCreativeTabs.tabBlocks);
-
-		holystone_pressure_plate = registerBlock("holystone_pressure_plate", new BlockHolystonePressurePlate(), AetherCreativeTabs.tabBlocks);
-
-		holystone_button = registerBlock("holystone_button", new BlockHolystoneButton(), AetherCreativeTabs.tabBlocks);
-
-		skyroot_ladder = registerBlock("skyroot_ladder", new BlockSkyrootLadder(), AetherCreativeTabs.tabBlocks);
-
-		wall_skyroot_sign = registerBlock("wall_skyroot_sign", new BlockWallSkyrootSign());
-
-		labyrinth_chest = registerBlock("labyrinth_chest", new BlockLabyrinthChest(), AetherCreativeTabs.tabBlocks);
-
-		holystone_wall = registerBlock("holystone_wall", new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
-		mossy_holystone_wall = registerBlock("mossy_holystone_wall", new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
-		holystone_brick_wall = registerBlock("holystone_brick_wall", new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
-		carved_stone_wall = registerBlock("carved_stone_wall", new BlockAetherWall(BlocksAether.carved_stone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
-		icestone_wall = registerBlock("icestone_wall", new BlockAetherWall(BlocksAether.icestone_bricks.getDefaultState(), 3.0f, 10.0f), AetherCreativeTabs.tabBlocks);
-		skyroot_log_wall = registerBlock("skyroot_log_wall", new BlockSkyrootWall(BlocksAether.skyroot_log.getDefaultState(), 2.0f, 10.0f), AetherCreativeTabs.tabBlocks);
-		aerogel_wall = registerBlock("aerogel_wall", new BlockAerogelWall(BlocksAether.aerogel.getDefaultState(), 1.0f, 10.f), AetherCreativeTabs.tabBlocks);
-
-		labyrinth_totem = registerBlock("labyrinth_totem", new BlockTeleporter(Material.IRON), AetherCreativeTabs.tabBlocks);
-		labyrinth_door = registerBlock("labyrinth_door", new  BlockLabyrinthDoor (Material.ROCK), AetherCreativeTabs.tabBlocks);
-
-		multiblock_dummy = registerBlock("multiblock_dummy", new BlockMultiDummy().setBlockUnbreakable());
-
-		carved_capstone = registerBlock("carved_capstone", new BlockLabyrinth(), AetherCreativeTabs.tabBlocks);
-		labyrinth_glowing_pillar = registerBlock("labyrinth_glowing_pillar", new BlockLabyrinthPillar().setGlows(true), AetherCreativeTabs.tabBlocks);
-		labyrinth_pillar = registerBlock("labyrinth_pillar", new BlockLabyrinthPillar(), AetherCreativeTabs.tabBlocks);
-		labyrinth_wall = registerBlock("labyrinth_wall", new BlockLabyrinth(), AetherCreativeTabs.tabBlocks);
-		labyrinth_lightstone = registerBlock("labyrinth_lightstone", new BlockLabyrinth().setLightLevel(1.0f), AetherCreativeTabs.tabBlocks);
-		labyrinth_base = registerBlock("labyrinth_base", new BlockLabyrinth().setLightLevel(0.50f), AetherCreativeTabs.tabBlocks);
-		labyrinth_headstone = registerBlock("labyrinth_headstone", new BlockLabyrinth(), AetherCreativeTabs.tabBlocks);
-
-		sentry_stone_wall = registerBlock("sentry_stone_wall", new BlockAetherWall(BlocksAether.labyrinth_lightstone.getDefaultState(), 1.0f, 10.0f).setGlows(true), AetherCreativeTabs.tabBlocks);
-		divine_sentry_wall = registerBlock("divine_sentry_wall", new BlockDivineWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
-		divine_stone_wall = registerBlock("divine_stone_wall", new BlockDivineWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f), AetherCreativeTabs.tabBlocks);
-
-		skyroot_slab = registerBlock("skyroot_slab", new BlockAetherSlab(Material.WOOD, SoundType.WOOD, 2.0f), AetherCreativeTabs.tabBlocks);
-		holystone_slab = registerBlock("holystone_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f), AetherCreativeTabs.tabBlocks);
-		holystone_brick_slab = registerBlock("holystone_brick_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f), AetherCreativeTabs.tabBlocks);
-		carved_stone_slab = registerBlock("carved_stone_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f), AetherCreativeTabs.tabBlocks);
-		divine_carved_stone_slab = registerBlock("divine_carved_stone_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f), AetherCreativeTabs.tabBlocks);
-		sentry_stone_slab = registerBlock("sentry_stone_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f), AetherCreativeTabs.tabBlocks);
-		divine_sentry_slab = registerBlock("divine_sentry_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f), AetherCreativeTabs.tabBlocks);
-		icestone_slab = registerBlock("icestone_slab", new BlockAetherSlab(Material.ROCK, SoundType.GLASS, 2.0f), AetherCreativeTabs.tabBlocks);
-		labyrinth_capstone_slab = registerBlock("labyrinth_capstone_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f), AetherCreativeTabs.tabBlocks);
-		labyrinth_wall_slab = registerBlock("labyrinth_wall_slab", new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f), AetherCreativeTabs.tabBlocks);
-
-		labyrinth_strongblock = registerBlock("labyrinth_strongblock", new BlockLabyrinth().setBlockUnbreakable(), AetherCreativeTabs.tabBlocks);
-
-		sentry_gel_fluid = new Fluid("sentry_gel", new ResourceLocation(AetherCore.MOD_ID, "blocks/sentry_gel"), new ResourceLocation(AetherCore.MOD_ID, "blocks/flowing_sentry_gel"));
-
-		FluidRegistry.registerFluid(sentry_gel_fluid);
-
-		sentry_gel = registerBlock("sentry_gel", new BlockFluidClassic(sentry_gel_fluid, Material.WATER), AetherCreativeTabs.tabBlocks);
+		registerBlock("labyrinth_strongblock", BlocksAether.labyrinth_strongblock.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
 		registerHarvestLevels();
 	}
@@ -394,34 +414,22 @@ public class BlocksAether
 
 	}
 
-	private static <T extends Block> T registerBlock(String name, T block, CreativeTabs tab)
-	{
-		registerBlock(name, block.setCreativeTab(tab));
-
-		return block;
-	}
-
-	private static <T extends Block> T registerBlock(String name, T block)
+	private static void registerBlock(String name, Block block, ItemBlock item)
 	{
 		block.setUnlocalizedName(AetherCore.MOD_ID + "." + name);
 		block.setRegistryName(name);
 
 		GameRegistry.register(block);
 
-		if (block instanceof BlockAetherSlab)
+		if (item != null)
 		{
-			registerItemBlock(new ItemAetherSlab(block));
+			registerItemBlock(item);
 		}
-		else if (block instanceof IBlockVariants)
-		{
-			registerItemBlock(new ItemBlockVariants(block));
-		}
-		else
-		{
-			registerItemBlock(new ItemBlock(block));
-		}
+	}
 
-		return block;
+	private static void registerBlock(String name, Block block)
+	{
+		registerBlock(name, block, new ItemBlock(block));
 	}
 
 	private static void registerItemBlock(ItemBlock item)

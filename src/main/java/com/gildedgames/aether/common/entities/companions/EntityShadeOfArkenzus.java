@@ -6,8 +6,6 @@ import net.minecraft.world.World;
 
 public class EntityShadeOfArkenzus extends EntityCompanion
 {
-	private final Potion potion = Potion.getPotionFromResourceLocation("slowfall");
-
 	public EntityShadeOfArkenzus(World worldIn)
 	{
 		super(worldIn);

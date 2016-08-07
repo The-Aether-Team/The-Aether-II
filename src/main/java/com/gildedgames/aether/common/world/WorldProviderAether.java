@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.world;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.DimensionsAether;
 import com.gildedgames.aether.common.world.biome.BiomeAether;
 import com.gildedgames.aether.common.world.chunk.ChunkGeneratorAether;
 import com.gildedgames.aether.common.world.chunk.ChunkGeneratorAetherOld;
@@ -21,7 +22,7 @@ public class WorldProviderAether extends WorldProvider
 {
 	private float[] sunriseSunsetColors = new float[4];
 
-	private final DimensionType dimensionType = AetherCore.PROXY.getAetherDimensionType();
+	private final DimensionType dimensionType = DimensionsAether.AETHER;
 
 	public WorldProviderAether()
 	{

@@ -2,6 +2,7 @@ package com.gildedgames.aether.client.sound.generators;
 
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.DimensionsAether;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
@@ -14,7 +15,7 @@ public class AetherMusicGenerator implements IMusicGenerator
 
 		if ((time > 1000L && time < 8000L) || (time > 13000L && time < 20000L))
 		{
-			return aePlayer.getPlayer().dimension == AetherCore.getAetherDimID();
+			return aePlayer.getPlayer().worldObj.provider.getDimensionType() == DimensionsAether.AETHER;
 		}
 
 		return false;

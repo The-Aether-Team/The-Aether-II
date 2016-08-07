@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class EntityItemWatcher
 {
 	@SubscribeEvent
-	public void onEntityJoinedWorld(EntityJoinWorldEvent event)
+	public static void onEntityJoinedWorld(EntityJoinWorldEvent event)
 	{
 		if (!event.getWorld().isRemote && event.getEntity().getClass() == EntityItem.class)
 		{

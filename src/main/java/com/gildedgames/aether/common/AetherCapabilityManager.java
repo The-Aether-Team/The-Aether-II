@@ -29,9 +29,9 @@ import java.util.List;
 
 public class AetherCapabilityManager
 {
-	public void init()
+	public static void init()
 	{
-		MinecraftForge.EVENT_BUS.register(this);
+		MinecraftForge.EVENT_BUS.register(AetherCapabilityManager.class);
 
 		CapabilityManager.INSTANCE.register(IItemEffectsCapability.class, new ItemEffects.Storage(), ItemEffects.class);
 		CapabilityManager.INSTANCE.register(IItemPropertiesCapability.class, new ItemProperties.Storage(), ItemProperties.class);
@@ -40,7 +40,7 @@ public class AetherCapabilityManager
 	}
 
 	@SubscribeEvent
-	public void onPlayerInteract(PlayerInteractEvent event)
+	public static void onPlayerInteract(PlayerInteractEvent event)
 	{
 		EntityPlayer player = event.getEntityPlayer();
 
@@ -70,7 +70,7 @@ public class AetherCapabilityManager
 	}
 
 	@SubscribeEvent
-	public void onEntityLoad(AttachCapabilitiesEvent.Entity event)
+	public static void onEntityLoad(AttachCapabilitiesEvent.Entity event)
 	{
 		event.addCapability(AetherCore.getResource("EntityEffects"), new EntityEffectsProvider(new EntityEffects(event.getEntity())));
 
@@ -81,7 +81,7 @@ public class AetherCapabilityManager
 	}
 
 	@SubscribeEvent
-    public void onItemLoad(AttachCapabilitiesEvent.Item event)
+    public static void onItemLoad(AttachCapabilitiesEvent.Item event)
     {
     	// TOOD: Stop iterating-- do lookups
 		for (ItemEffects.RegistrationEntry entry : ItemEffects.getRegistrationEntries())

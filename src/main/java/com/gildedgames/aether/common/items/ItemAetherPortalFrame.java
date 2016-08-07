@@ -16,7 +16,7 @@ public class ItemAetherPortalFrame extends Item
 	
 	public ItemAetherPortalFrame()
 	{
-		this.maxStackSize = 64;
+		this.maxStackSize = 1;
 	}
 
 	@Override
@@ -42,13 +42,13 @@ public class ItemAetherPortalFrame extends Item
 			{
 				//int rotation = MathHelper.floor_double((double) ((player.rotationYaw + 180.0F) * 16.0F / 360.0F) + 0.5D) & 15;
 				
-				boolean old = AetherCore.getTeleporter().createPortal;
-				
-				AetherCore.getTeleporter().createPortal = true;
-				
-				AetherCore.getTeleporter().createPortalFrame(world, pos.getX(), pos.getY(), pos.getZ());
+				boolean old = AetherCore.TELEPORTER.createPortal;
 
-				AetherCore.getTeleporter().createPortal = old;
+				AetherCore.TELEPORTER.createPortal = true;
+
+				AetherCore.TELEPORTER.createPortalFrame(world, pos.getX(), pos.getY(), pos.getZ());
+
+				AetherCore.TELEPORTER.createPortal = old;
 				
 				--stack.stackSize;
 				

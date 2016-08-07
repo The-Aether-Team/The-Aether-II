@@ -100,7 +100,5 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.wall_skyroot_sign, new StateMap.Builder().ignore(BlockWallSkyrootSign.FACING).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_fence_gate, new StateMap.Builder().ignore(BlockFenceGate.POWERED).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.labyrinth_door, new StateMap.Builder().ignore(BlockLabyrinthDoor.PROPERTY_FACING).build());
-
-		ModelLoader.setCustomStateMapper(BlocksAether.sentry_gel, (new StateMap.Builder()).ignore(BlockFluidBase.LEVEL).build());
 	}
 }

@@ -1,12 +1,20 @@
 package com.gildedgames.aether.client.sound;
 
-import com.gildedgames.aether.client.sound.generators.IMusicGenerator;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.client.sound.generators.AetherMusicGenerator;
+import com.gildedgames.aether.client.sound.generators.IMusicGenerator;
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.DimensionsAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.client.event.sound.PlaySoundEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.ArrayList;
 
@@ -19,6 +27,11 @@ public class AetherMusicManager
 	private ISound currentSong, currentRecord;
 
 	private int quietPeriod;
+
+	public AetherMusicManager()
+	{
+		this.addGenerator(new AetherMusicGenerator());
+	}
 
 	public void addGenerator(IMusicGenerator generator)
 	{
@@ -117,5 +130,27 @@ public class AetherMusicManager
 	private SoundHandler getSoundHandler()
 	{
 		return Minecraft.getMinecraft().getSoundHandler();
+	}
+
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	// Lowest priority is important, so we can ensure the sound will actually be played
+	public void onPlaySound(PlaySoundEvent event)
+	{
+		if (event.getSound().getCategory() == SoundCategory.MUSIC)
+		{
+			if (!event.getSound().getSoundLocation().getResourceDomain().equals(AetherCore.MOD_ID))
+			{
+				EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+
+				if (player != null && player.worldObj.provider.getDimensionType() == DimensionsAether.AETHER)
+				{
+					event.setResultSound(null);
+				}
+			}
+		}
+		else if (event.getSound().getCategory() == SoundCategory.RECORDS)
+		{
+			AetherMusicManager.INSTANCE.onRecordPlayed(event.getSound());
+		}
 	}
 }

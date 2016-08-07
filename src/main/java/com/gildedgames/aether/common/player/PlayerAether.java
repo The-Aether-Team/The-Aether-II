@@ -7,6 +7,7 @@ import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.api.items.IItemEffectsCapability;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.DimensionsAether;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment.PendingItemChange;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
@@ -25,6 +26,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -36,7 +38,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -160,7 +161,7 @@ public class PlayerAether implements IPlayerAetherCapability
 			}
 		}
 
-		if (this.getPlayer().worldObj.provider.getDimensionType() == AetherCore.PROXY.getDimensionType())
+		if (this.getPlayer().worldObj.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
 			world = server.worldServerForDimension(0);
 
@@ -243,7 +244,7 @@ public class PlayerAether implements IPlayerAetherCapability
 		}
 		else if (PlayerUtil.isWearingEquipment(this, ItemsAether.phoenix_armor_set))
 		{
-			this.player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("fire_resistance"), 2, 0, false, false));
+			this.player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 2, 0, false, false));
 
 			this.player.extinguish();
 		}
@@ -251,7 +252,7 @@ public class PlayerAether implements IPlayerAetherCapability
 		{
 			if (this.player.isInsideOfMaterial(Material.WATER))
 			{
-				this.player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("water_breathing"), 2, 0, false, false));
+				this.player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 2, 0, false, false));
 			}
 		}
 	}

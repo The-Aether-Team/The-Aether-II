@@ -11,31 +11,30 @@ import com.gildedgames.aether.common.entities.EntityItemWatcher;
 import com.gildedgames.aether.common.entities.effects.EntityEffectsEventHooks;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.properties.EquipmentRegistry;
-import com.gildedgames.aether.common.network.AetherGuiHandler;
+import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.aether.common.player.PlayerAetherEvents;
 import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
-import com.gildedgames.aether.common.world.WorldProviderAether;
 import com.gildedgames.aether.common.world.chunk.PlacementFlagProvider;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
+import com.gildedgames.aether.common.world.dungeon.DungeonInstanceFactory;
+import com.gildedgames.aether.common.world.dungeon.DungeonInstanceHandler;
 import com.gildedgames.util.io.Instantiator;
 import com.gildedgames.util.modules.chunk.ChunkModule;
+import com.gildedgames.util.modules.instances.InstanceModule;
 import com.gildedgames.util.modules.tab.TabModule;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import java.io.File;
 import java.util.Random;
@@ -50,35 +49,19 @@ public class CommonProxy
 
 	private final PlacementFlagProvider placementFlagProvider = new PlacementFlagProvider();
 
-	private DimensionType aetherDimension;
+	private DungeonInstanceHandler dungeonInstanceHandler;
 
 	public void construct(FMLConstructionEvent event)
 	{
 
 	}
 
-	public DimensionType getDimensionType()
-	{
-		return this.aetherDimension;
-	}
-
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		this.storageDir = new File(event.getSourceFile().getParent(), "Aether/");
 
-		// Load the configuration file.
-		AetherCore.CONFIG.load();
-
-		// Register with NetworkRegistry.
-		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
-
-		// Register dimension type
-		this.aetherDimension = DimensionType.register("Aether", "_aether", AetherCore.getAetherDimID(), WorldProviderAether.class, false);
-
-		// Register dimension world
-		DimensionManager.registerDimension(AetherCore.getAetherDimID(), this.aetherDimension);
-
-		// Pre-initialize content.
+		// Pre-initialize content
+		DimensionsAether.preInit();
 		MaterialsAether.preInit();
 
 		BlocksAether.preInit();
@@ -98,17 +81,20 @@ public class CommonProxy
 
 	public void init(FMLInitializationEvent event)
 	{
-		MinecraftForge.EVENT_BUS.register(new CommonEvents());
-		MinecraftForge.EVENT_BUS.register(new PlayerAetherEvents());
-		MinecraftForge.EVENT_BUS.register(new EntityEffectsEventHooks());
-		MinecraftForge.EVENT_BUS.register(new EntityItemWatcher());
+		MinecraftForge.EVENT_BUS.register(CommonEvents.class);
+		MinecraftForge.EVENT_BUS.register(PlayerAetherEvents.class);
+		MinecraftForge.EVENT_BUS.register(EntityEffectsEventHooks.class);
+		MinecraftForge.EVENT_BUS.register(EntityItemWatcher.class);
 
-		AetherCapabilityManager capabilities = new AetherCapabilityManager();
-		capabilities.init();
+		MinecraftForge.EVENT_BUS.register(ItemSkyrootSword.class);
 
-		MinecraftForge.EVENT_BUS.register(ItemsAether.skyroot_sword);
+		AetherCapabilityManager.init();
 
 		ChunkModule.api().registerChunkHookProvider(this.placementFlagProvider);
+
+		DungeonInstanceFactory factory = new DungeonInstanceFactory(DimensionsAether.SLIDER_LABYRINTH);
+
+		this.dungeonInstanceHandler = new DungeonInstanceHandler(InstanceModule.INSTANCE.createInstanceHandler(factory));
 	}
 
 	public void postInit(FMLPostInitializationEvent event)
@@ -193,13 +179,13 @@ public class CommonProxy
 		((EntityPlayerMP) entity).interactionManager.setBlockReachDistance(5.0f + distance);
 	}
 
-	public DimensionType getAetherDimensionType()
-	{
-		return this.aetherDimension;
-	}
-
 	public PlacementFlagProvider getPlacementFlagProvider()
 	{
 		return this.placementFlagProvider;
+	}
+
+	public DungeonInstanceHandler getDungeonInstanceHandler()
+	{
+		return this.dungeonInstanceHandler;
 	}
 }

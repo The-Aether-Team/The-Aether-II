@@ -58,8 +58,7 @@ public class EntitiesAether
 		EntityRegistry.registerModEntity(EntityPhoenixItem.class, "special_item", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityBolt.class, "bolt", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 
-		SpawnManager manager = SpawningModule.createAndRegisterSpawnManager(AetherCore.PROXY.getAetherDimensionType().getId());
-
+		SpawnManager manager = SpawningModule.createAndRegisterSpawnManager(AetherCore.CONFIG.getAetherDimID());
 		manager.registerPerTickEntry(new SpawnEntry(EntityAerbunny.class, 2, 5, 0.3f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityFlyingCow.class, 1, 4, 0.65f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityPhyg.class, 1, 4, 0.35f));

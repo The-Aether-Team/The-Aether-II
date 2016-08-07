@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.companions;
 
-import net.minecraft.potion.Potion;
+import net.minecraft.init.MobEffects;
 import net.minecraft.world.World;
 
 public class EntitySoaringWisp extends EntityBasicCompanion
@@ -10,6 +10,6 @@ public class EntitySoaringWisp extends EntityBasicCompanion
 		super(worldIn);
 
 		this.setSize(0.75f, 2.0f);
-		this.setPotion(Potion.getPotionFromResourceLocation("speed"), 0);
+		this.setPotion(MobEffects.SPEED, 0);
 	}
 }

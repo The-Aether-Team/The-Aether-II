@@ -18,6 +18,7 @@ public class BlockAmbrosiumOre extends BlockAetherOre
 		this.setHardness(3.0f);
 		this.setResistance(5.0f);
 		this.setHarvestLevel("pickaxe", 0);
+		this.setLightLevel(0.4f);
 
 		this.setSoundType(SoundType.STONE);
 	}

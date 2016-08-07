@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks.construction;
 
 import com.gildedgames.aether.client.renderer.effects.ParticleAetherPortal;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.DimensionsAether;
 import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
@@ -159,10 +160,11 @@ public class BlockAetherPortal extends BlockBreakable
 		if (entity instanceof EntityPlayerMP)
 		{
 			final EntityPlayerMP player = (EntityPlayerMP) entity;
+
 			final PlayerList playerList = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList();
 
-			final int transferToID = player.dimension == AetherCore.getAetherDimID() ? 0 : AetherCore.getAetherDimID();
-			playerList.transferPlayerToDimension(player, transferToID, AetherCore.getTeleporter());
+			final int transferToID = player.worldObj.provider.getDimensionType() == DimensionsAether.AETHER ? 0 : AetherCore.CONFIG.getAetherDimID();
+			playerList.transferPlayerToDimension(player, transferToID, AetherCore.TELEPORTER);
 		}
 	}
 

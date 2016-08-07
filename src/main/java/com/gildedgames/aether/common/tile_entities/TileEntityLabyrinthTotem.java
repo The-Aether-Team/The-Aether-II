@@ -60,7 +60,7 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 	{
 		EntityPlayerMP player = (EntityPlayerMP) interactingPlayer;
 
-		DungeonInstanceHandler handler = AetherCore.INSTANCE.getDungeonInstanceHandler();
+		DungeonInstanceHandler handler = AetherCore.PROXY.getDungeonInstanceHandler();
 
 		PlayerInstances hook = InstanceModule.INSTANCE.getPlayer(player);
 

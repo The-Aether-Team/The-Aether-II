@@ -11,6 +11,8 @@ public class AetherConfig
 
 	private int aetherDimID;
 
+	private int sliderLabyrinthDimID;
+
 	private int aetherBiomeID;
 	
 	private int sliderLabyrinthBiomeID;
@@ -30,6 +32,7 @@ public class AetherConfig
 
 		ConfigCategory dimIDs = this.configuration.getCategory("Dimension IDs");
 		this.aetherDimID = this.getInt(dimIDs, "Aether Dimension ID", 3);
+		this.sliderLabyrinthDimID = this.getInt(dimIDs, "Slider's Labyrinth Dimension ID", 4);
 
 		this.configuration.save();
 	}
@@ -42,6 +45,11 @@ public class AetherConfig
 	public int getAetherDimID()
 	{
 		return this.aetherDimID;
+	}
+
+	public int getSliderLabyrinthDimID()
+	{
+		return this.sliderLabyrinthDimID;
 	}
 
 	public int getAetherBiomeID()

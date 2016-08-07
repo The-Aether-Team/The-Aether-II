@@ -79,6 +79,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDoor;
@@ -374,7 +375,7 @@ public class ItemsAether
 		recording_892 = registerItem("recording_892", new ItemAetherRecord("recording_892", SoundsAether.record_recording_892), AetherCreativeTabs.tabMiscellaneous);
 
 		healing_stone_depleted = registerItem("healing_stone_depleted", new Item(), AetherCreativeTabs.tabConsumables);
-		healing_stone = registerItem("healing_stone", new ItemFood(0, 1.2f, false).setAlwaysEdible().setPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("regeneration"), 200, 0), 1.0f), AetherCreativeTabs.tabConsumables);
+		healing_stone = registerItem("healing_stone", new ItemFood(0, 1.2f, false).setAlwaysEdible().setPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200, 0), 1.0f), AetherCreativeTabs.tabConsumables);
 
 		dart_shooter = registerItem("dart_shooter", new ItemDartShooter(), AetherCreativeTabs.tabWeapons);
 		dart = registerItem("dart", new ItemDart(), AetherCreativeTabs.tabWeapons);
