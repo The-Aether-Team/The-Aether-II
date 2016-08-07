@@ -131,6 +131,13 @@
 			"aether:aemob/cockatrice/hurt2"
 		]
 	},
+		"aemob.cockatrice.ambient": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/cockatrice/say1",
+			"aether:aemob/cockatrice/say2"
+		]
+	},
 	"aeblock.labyrinth_totem.drone": {
 		"category": "neutral",
 		"sounds": [

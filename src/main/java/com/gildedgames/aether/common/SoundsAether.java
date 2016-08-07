@@ -34,4 +34,6 @@ public class SoundsAether
 
 	public static SoundEvent cockatrice_death = new SoundEvent(AetherCore.getResource("aemob.cockatrice.death"));
 
+	public static SoundEvent cockatrice_ambient = new SoundEvent(AetherCore.getResource("aemob.cockatrice.ambient"));
+
 }

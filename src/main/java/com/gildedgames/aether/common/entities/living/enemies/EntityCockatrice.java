@@ -14,6 +14,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.potion.Potion;
@@ -109,6 +110,11 @@ public class EntityCockatrice extends EntityMob
 		{
 			this.motionY *= 0.63749999999999996D;
 		}
+	}
+	@Override
+	protected net.minecraft.util.SoundEvent getAmbientSound()
+	{
+		return SoundsAether.cockatrice_ambient;
 	}
 
 	@Override
