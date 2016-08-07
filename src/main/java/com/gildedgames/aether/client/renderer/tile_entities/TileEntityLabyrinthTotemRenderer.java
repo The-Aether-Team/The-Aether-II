@@ -26,7 +26,7 @@ public class TileEntityLabyrinthTotemRenderer extends TileEntitySpecialRenderer<
 			rotation = te.prevRenderTicks + (te.renderTicks - te.prevRenderTicks) * partialTicks;
 		}
 
-		rotation /= 20;
+		rotation /= 40;
 
 		this.model.Shape6.rotateAngleY = rotation;
 		this.model.Shape8.rotateAngleY = rotation;
