@@ -402,7 +402,7 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.kraisith_capsule, "companions/kraisith_capsule");
 		registerItemModels(ItemsAether.orb_of_arkenzus, "companions/orb_of_arkenzus");
 		registerItemModels(ItemsAether.fangrin_capsule, "companions/fangrin_capsule");
-		registerItemModels(ItemsAether.death_seal, "companions/death_seal");
+		registerItemModels(ItemsAether.death_seal, new ItemModelBuilder("companions/").add(0, "death_seal").add(1, "death_seal_broken"));
 
 		registerItemModels(BlocksAether.skyroot_slab, "aether_slab/skyroot_slab");
 		registerItemModels(BlocksAether.holystone_slab, "aether_slab/holystone_slab");

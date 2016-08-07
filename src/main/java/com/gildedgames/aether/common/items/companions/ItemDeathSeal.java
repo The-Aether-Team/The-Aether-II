@@ -1,21 +1,43 @@
 package com.gildedgames.aether.common.items.companions;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.companions.EntityCompanion;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
+
+import static sun.audio.AudioPlayer.player;
 
 public class ItemDeathSeal extends ItemCompanion
 {
 	public ItemDeathSeal(Class<? extends EntityCompanion> companionClass)
 	{
 		super(companionClass);
+	}
+
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	{
+		long disabledTime = ItemDeathSeal.getTicksUntilEnabled(stack, worldIn);
+
+		if (disabledTime <= 0)
+		{
+			stack.setItemDamage(0);
+		}
+		else
+		{
+			stack.setItemDamage(1);
+		}
 	}
 
 	public static void setDisabledTimer(ItemStack stack, World world, int timer)
@@ -28,6 +50,8 @@ public class ItemDeathSeal extends ItemCompanion
 		}
 
 		compound.setLong("disabledTimer", world.getTotalWorldTime() + timer);
+
+		stack.setItemDamage(1);
 	}
 
 	public static long getTicksUntilEnabled(ItemStack stack, World world)
