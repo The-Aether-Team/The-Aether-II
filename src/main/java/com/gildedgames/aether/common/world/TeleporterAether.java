@@ -311,7 +311,7 @@ public class TeleporterAether extends Teleporter implements NBT
 
 							this.portalPairs.put(oldPortal, linkedPortal);
 
-							this.createPortalFrame(world, xInner, y1, zInner);
+							this.createPortalFrame(world, xInner, y1, zInner + 1);
 
 							AetherCore.LOGGER.debug("Created portal using " + (attempts + 1) + " attempts.");
 
