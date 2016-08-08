@@ -12,10 +12,7 @@ import com.gildedgames.aether.common.entities.companions.EntityShadeOfArkenzus;
 import com.gildedgames.aether.common.entities.companions.EntityEtheralWisp;
 import com.gildedgames.aether.common.entities.companions.EntitySoaringWisp;
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
-import com.gildedgames.aether.common.entities.living.EntityAechorPlant;
-import com.gildedgames.aether.common.entities.living.EntityAerbunny;
-import com.gildedgames.aether.common.entities.living.EntityCarrionSprout;
-import com.gildedgames.aether.common.entities.living.EntitySheepuff;
+import com.gildedgames.aether.common.entities.living.*;
 import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
@@ -41,6 +38,7 @@ public class EntitiesAether
 		registerLivingEntity(EntityAerbunny.class, "aerbunny", 0xCCFFFF, 0x0066CC);
 		registerLivingEntity(EntityCarrionSprout.class, "carrion_sprout", 0xCCFFFF, 0x5D8BBB);
 		registerLivingEntity(EntityCockatrice.class, "cockatrice", 0xCCFFFF, 0x6b519c);
+		registerLivingEntity(EntityRam.class, "ram", 0xCCFFFF, 0xCCCCFF);
 
 		registerLivingEntity(EntityFrostpineTotem.class, "frostpine_totem");
 		registerLivingEntity(EntityKraisith.class, "kraisith");
@@ -64,6 +62,7 @@ public class EntitiesAether
 		manager.registerPerTickEntry(new SpawnEntry(EntityPhyg.class, 1, 4, 0.35f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityCarrionSprout.class, 2, 3, 0.4f));
 		manager.registerPerTickEntry(new SpawnEntry(EntitySheepuff.class, 3, 5, 0.5f));
+		manager.registerPerTickEntry(new SpawnEntry(EntityRam.class, 3, 5, 0.5f));
 
 		manager.registerPerTickEntry(new SpawnEntry(EntityAechorPlant.class, 2, 4, 0.4f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityCockatrice.class, 3, 5, 0.5f));
