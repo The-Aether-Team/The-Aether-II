@@ -11,9 +11,15 @@ public class EntityRam extends EntitySheep
 	{
 		super(world);
 
-		this.setSize(2.0F, 1.6F);
+		this.setSize(1.1F, 1.6F);
 
 		this.spawnableBlock = BlocksAether.aether_grass;
+	}
+
+	@Override
+	protected float getSoundPitch()
+	{
+		return (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 0.55F;
 	}
 
 	@Override
