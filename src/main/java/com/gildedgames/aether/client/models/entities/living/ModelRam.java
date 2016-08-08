@@ -2,8 +2,11 @@ package com.gildedgames.aether.client.models.entities.living;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
+
+import static net.minecraft.realms.Tezzelator.t;
 
 public class ModelRam extends ModelBase
 {
@@ -38,6 +41,9 @@ public class ModelRam extends ModelBase
 	ModelRenderer HeadTop;
 	ModelRenderer HeadEarLeft;
 	ModelRenderer HeadEarRight;
+
+	protected float childYOffset = 8.0F;
+	protected float childZOffset = 4.0F;
 
 	public ModelRam()
 	{
@@ -226,40 +232,84 @@ public class ModelRam extends ModelBase
 		setRotation(HeadEarRight, 0F, 0F, 0.4363323F);
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float scale)
 	{
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		BodyMain.render(f5);
-		BodyBack.render(f5);
-		BodyBottom.render(f5);
-		LegFrontLeft1.render(f5);
-		LegFrontLeft2.render(f5);
-		LegFrontLeft3.render(f5);
-		LegFrontRight1.render(f5);
-		LegFrontRight2.render(f5);
-		LegFrontRight3.render(f5);
-		LegBackLeft1.render(f5);
-		LegBackLeft2.render(f5);
-		LegBackLeft3.render(f5);
-		LegBackRight1.render(f5);
-		LegBackRight2.render(f5);
-		LegBackRight3.render(f5);
-		Tail.render(f5);
-		HeadNeck.render(f5);
-		HeadMain.render(f5);
-		HeadSnout.render(f5);
-		HeadCheekLeft.render(f5);
-		HeadCheekRight.render(f5);
-		HeadJaw.render(f5);
-		HeadEyeRight.render(f5);
-		HeadBrowRight.render(f5);
-		HeadEyeLeft.render(f5);
-		HeadBrowLeft.render(f5);
-		HeadPlate.render(f5);
-		HeadTop.render(f5);
-		HeadEarLeft.render(f5);
-		HeadEarRight.render(f5);
+		super.render(entity, f, f1, f2, f3, f4, scale);
+		setRotationAngles(f, f1, f2, f3, f4, scale, entity);
+
+		if (this.isChild)
+		{
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(0.0F, this.childYOffset * scale, this.childZOffset * scale);
+			HeadNeck.render(scale);
+			HeadMain.render(scale);
+			HeadSnout.render(scale);
+			HeadCheekLeft.render(scale);
+			HeadCheekRight.render(scale);
+			HeadJaw.render(scale);
+			HeadEyeRight.render(scale);
+			HeadBrowRight.render(scale);
+			HeadEyeLeft.render(scale);
+			HeadBrowLeft.render(scale);
+			HeadPlate.render(scale);
+			HeadTop.render(scale);
+			HeadEarLeft.render(scale);
+			HeadEarRight.render(scale);
+			GlStateManager.popMatrix();
+			GlStateManager.pushMatrix();
+			GlStateManager.scale(0.5F, 0.5F, 0.5F);
+			GlStateManager.translate(0.0F, 24.0F * scale, 0.0F);
+			BodyMain.render(scale);
+			BodyBack.render(scale);
+			BodyBottom.render(scale);
+			LegFrontLeft1.render(scale);
+			LegFrontLeft2.render(scale);
+			LegFrontLeft3.render(scale);
+			LegFrontRight1.render(scale);
+			LegFrontRight2.render(scale);
+			LegFrontRight3.render(scale);
+			LegBackLeft1.render(scale);
+			LegBackLeft2.render(scale);
+			LegBackLeft3.render(scale);
+			LegBackRight1.render(scale);
+			LegBackRight2.render(scale);
+			LegBackRight3.render(scale);
+			Tail.render(scale);
+			GlStateManager.popMatrix();
+		}
+		else
+		{
+			BodyMain.render(scale);
+			BodyBack.render(scale);
+			BodyBottom.render(scale);
+			LegFrontLeft1.render(scale);
+			LegFrontLeft2.render(scale);
+			LegFrontLeft3.render(scale);
+			LegFrontRight1.render(scale);
+			LegFrontRight2.render(scale);
+			LegFrontRight3.render(scale);
+			LegBackLeft1.render(scale);
+			LegBackLeft2.render(scale);
+			LegBackLeft3.render(scale);
+			LegBackRight1.render(scale);
+			LegBackRight2.render(scale);
+			LegBackRight3.render(scale);
+			Tail.render(scale);
+			HeadNeck.render(scale);
+			HeadMain.render(scale);
+			HeadSnout.render(scale);
+			HeadCheekLeft.render(scale);
+			HeadCheekRight.render(scale);
+			HeadJaw.render(scale);
+			HeadEyeRight.render(scale);
+			HeadBrowRight.render(scale);
+			HeadEyeLeft.render(scale);
+			HeadBrowLeft.render(scale);
+			HeadPlate.render(scale);
+			HeadTop.render(scale);
+			HeadEarLeft.render(scale);
+			HeadEarRight.render(scale);
+		}
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)

@@ -2,6 +2,7 @@ package com.gildedgames.aether.client.models.entities.living;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
@@ -86,20 +87,41 @@ public class ModelRamWool extends ModelBase
       setRotation(Tail, 0.1745329F, 0F, 0F);
   }
   
-  public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor)
+  public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
   {
-    super.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
-    setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entity);
-    BodyMain.render(scaleFactor);
-    BodyBack.render(scaleFactor);
-    BodyBottom.render(scaleFactor);
-    LegFrontLeft1.render(scaleFactor);
-    LegFrontRight1.render(scaleFactor);
-    LegBackLeft1.render(scaleFactor);
-    LegBackLeft2.render(scaleFactor);
-    LegBackRight1.render(scaleFactor);
-    LegBackRight2.render(scaleFactor);
-    Tail.render(scaleFactor);
+    super.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+    setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
+
+    if (this.isChild)
+    {
+      GlStateManager.pushMatrix();
+      GlStateManager.scale(0.5F, 0.5F, 0.5F);
+      GlStateManager.translate(0.0F, 24.0F * scale, 0.0F);
+      BodyMain.render(scale);
+      BodyBack.render(scale);
+      BodyBottom.render(scale);
+      LegFrontLeft1.render(scale);
+      LegFrontRight1.render(scale);
+      LegBackLeft1.render(scale);
+      LegBackLeft2.render(scale);
+      LegBackRight1.render(scale);
+      LegBackRight2.render(scale);
+      Tail.render(scale);
+      GlStateManager.popMatrix();
+    }
+    else
+    {
+      BodyMain.render(scale);
+      BodyBack.render(scale);
+      BodyBottom.render(scale);
+      LegFrontLeft1.render(scale);
+      LegFrontRight1.render(scale);
+      LegBackLeft1.render(scale);
+      LegBackLeft2.render(scale);
+      LegBackRight1.render(scale);
+      LegBackRight2.render(scale);
+      Tail.render(scale);
+    }
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -112,19 +134,6 @@ public class ModelRamWool extends ModelBase
   public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entity)
   {
     super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entity);
-
-    //this.BodyBack.rotateAngleX = ((float)Math.PI / 2F);
-    //this.BodyBottom.rotateAngleX = ((float)Math.PI / 2F);
-    //this.BodyMain.rotateAngleX = ((float)Math.PI / 2F);
-
-    this.BodyMain.offsetX = (float)(Math.sin(ageInTicks * 10 / 87.2957795) * 1 * 0.5F) / 40;
-    this.BodyMain.offsetZ = (float)(Math.sin(ageInTicks * 10 / 37.2957795) * 1 * 0.5F) / 40;
-
-    this.BodyBottom.offsetX = (float)(Math.sin(ageInTicks * 10 / 87.2957795) * 1 * 0.25F) / 40;
-    this.BodyBottom.offsetZ = (float)(Math.sin(ageInTicks * 10 / 37.2957795) * 1 * 0.25F) / 40;
-
-    this.BodyBack.offsetX = (float)(Math.sin(ageInTicks * 10 / 87.2957795) * 1 * 0.25F) / 40;
-    this.BodyBack.offsetZ = (float)(Math.sin(ageInTicks * 10 / 37.2957795) * 1 * 0.25F) / 40;
 
     this.Tail.rotateAngleZ = (MathHelper.cos(ageInTicks * 0.1662F) * 0.2F);
 
