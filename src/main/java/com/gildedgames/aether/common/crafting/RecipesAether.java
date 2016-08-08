@@ -346,6 +346,9 @@ public class RecipesAether implements IAltarRecipeRegistry
 		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_sword), "X", "X", "Y",
 				'X', arkenium, 'Y', skyrootStick);
 
+		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_shears), "X ", " X",
+				'X', ark_strip);
+
 	}
 
 	private void registerArmorRecipes()

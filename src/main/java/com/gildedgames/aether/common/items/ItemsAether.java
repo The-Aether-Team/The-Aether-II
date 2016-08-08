@@ -45,14 +45,7 @@ import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
 import com.gildedgames.aether.common.items.effects.ItemEffects;
 import com.gildedgames.aether.common.items.miscellaneous.ItemShardOfLife;
 import com.gildedgames.aether.common.items.properties.ItemProperties;
-import com.gildedgames.aether.common.items.tools.EnumToolType;
-import com.gildedgames.aether.common.items.tools.ItemArkeniumTool;
-import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
-import com.gildedgames.aether.common.items.tools.ItemHolystoneTool;
-import com.gildedgames.aether.common.items.tools.ItemSkyrootBucket;
-import com.gildedgames.aether.common.items.tools.ItemSkyrootTool;
-import com.gildedgames.aether.common.items.tools.ItemValkyrieTool;
-import com.gildedgames.aether.common.items.tools.ItemZaniteTool;
+import com.gildedgames.aether.common.items.tools.*;
 import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
 import com.gildedgames.aether.common.items.weapons.ItemPigSlayer;
@@ -113,6 +106,8 @@ public class ItemsAether
 	public static ItemValkyrieTool valkyrie_axe, valkyrie_pickaxe, valkyrie_shovel;
 
 	public static ItemArkeniumTool arkenium_axe, arkenium_pickaxe, arkenium_shovel;
+
+	public static ItemArkeniumShears arkenium_shears;
 
 	public static ItemAetherSword skyroot_sword, holystone_sword, zanite_sword, gravitite_sword, arkenium_sword;
 
@@ -286,6 +281,8 @@ public class ItemsAether
 		valkyrie_axe = registerItem("valkyrie_axe", new ItemValkyrieTool(EnumToolType.AXE, 8.0F, -3.0F));
 		valkyrie_pickaxe = registerItem("valkyrie_pickaxe", new ItemValkyrieTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
 		valkyrie_shovel = registerItem("valkyrie_shovel", new ItemValkyrieTool(EnumToolType.SHOVEL,  1.5F, -3.0F));
+
+		arkenium_shears = registerItem("arkenium_shears", new ItemArkeniumShears(), AetherCreativeTabs.tabTools);
 
 		zanite_helmet = registerItem("zanite_helmet", new ItemZaniteArmor(EntityEquipmentSlot.HEAD));
 		zanite_chestplate = registerItem("zanite_chestplate", new ItemZaniteArmor(EntityEquipmentSlot.CHEST));
