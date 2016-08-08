@@ -89,20 +89,7 @@ public abstract class EntityCompanion extends EntityLiving
 
 		if (attacker != null && attacker == this.getOwner())
 		{
-			double motionX = attacker.posX - this.posX;
-			double motionZ;
-
-			motionZ = attacker.posZ - this.posZ;
-
-			while (motionX * motionX + motionZ * motionZ < 1.0E-4D)
-			{
-				motionX = (Math.random() - Math.random()) * 0.01D;
-				motionZ = (Math.random() - Math.random()) * 0.01D;
-			}
-
-			this.knockBack(this.getOwner(), 0.5F, motionX, motionZ);
-
-			return false;
+			return super.attackEntityFrom(source, 0.0f);
 		}
 
 		return super.attackEntityFrom(source, amount);

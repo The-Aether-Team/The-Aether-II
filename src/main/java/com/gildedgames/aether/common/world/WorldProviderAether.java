@@ -1,9 +1,7 @@
 package com.gildedgames.aether.common.world;
 
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.DimensionsAether;
 import com.gildedgames.aether.common.world.biome.BiomeAether;
-import com.gildedgames.aether.common.world.chunk.ChunkGeneratorAether;
 import com.gildedgames.aether.common.world.chunk.ChunkGeneratorAetherOld;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayerMP;

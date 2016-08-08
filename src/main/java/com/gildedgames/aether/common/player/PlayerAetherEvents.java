@@ -19,7 +19,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.Capability;
@@ -99,7 +98,7 @@ public class PlayerAetherEvents
 	@SubscribeEvent
 	public static void onDeath(LivingDeathEvent event)
 	{
-		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(event.getEntity());
+		PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
 
 		if (aePlayer != null)
 		{
@@ -121,6 +120,8 @@ public class PlayerAetherEvents
 					player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20 * 7, 4));
 
 					ItemDeathSeal.setDisabledTimer(companionItem, player.worldObj, 20 * 60 * 15);
+
+					aePlayer.getCompanionManager().syncCompanionItem();
 
 					FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().sendChatMsg(new TextComponentTranslation("chat.aether.resurrected", player.getDisplayName()));
 

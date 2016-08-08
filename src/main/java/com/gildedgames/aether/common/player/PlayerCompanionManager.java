@@ -44,6 +44,8 @@ public class PlayerCompanionManager implements IPlayerCompanionManager
 					if (!companion.wasDespawned())
 					{
 						ItemCompanion.setRespawnTimer(companionStack, this.player.worldObj, 20 * 240);
+
+						this.syncCompanionItem();
 					}
 
 					this.removeCompanion(true);
@@ -170,5 +172,10 @@ public class PlayerCompanionManager implements IPlayerCompanionManager
 		}
 
 		return null;
+	}
+
+	public void syncCompanionItem()
+	{
+		this.aePlayer.getEquipmentInventory().markDirty(6);
 	}
 }

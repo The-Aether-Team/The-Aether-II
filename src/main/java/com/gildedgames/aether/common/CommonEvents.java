@@ -49,7 +49,7 @@ import java.util.Random;
 public class CommonEvents
 {
 	@SubscribeEvent
-	public void onWorldLoaded(WorldEvent.Load event)
+	public static void onWorldLoaded(WorldEvent.Load event)
 	{
 		if (event.getWorld() instanceof WorldServer)
 		{
@@ -61,7 +61,7 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public void onPlayerSleepInBed(PlayerWakeUpEvent event)
+	public static void onPlayerSleepInBed(PlayerWakeUpEvent event)
 	{
 		World world = event.getEntityPlayer().worldObj;
 
@@ -80,7 +80,7 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public void onPlayerUseBucket(FillBucketEvent event)
+	public static void onPlayerUseBucket(FillBucketEvent event)
 	{
 		if (event.getTarget() != null && event.getTarget().typeOfHit == RayTraceResult.Type.BLOCK)
 		{
@@ -94,17 +94,17 @@ public class CommonEvents
 
 				if (fluidStack.getFluid().getName().equals(FluidRegistry.WATER.getName()))
 				{
-					this.onWaterPlaced(event, player, pos);
+					CommonEvents.onWaterPlaced(event, player, pos);
 				}
 				else if (fluidStack.getFluid().getName().equals(FluidRegistry.LAVA.getName()))
 				{
-					this.onLavaPlaced(event, player, pos);
+					CommonEvents.onLavaPlaced(event, player, pos);
 				}
 			}
 		}
 	}
 
-	private boolean tryToCreatePortal(World world, BlockPos pos)
+	private static boolean tryToCreatePortal(World world, BlockPos pos)
 	{
 		if (world.getBlockState(pos.down()).getBlock() == Blocks.GLOWSTONE)
 		{
@@ -133,7 +133,7 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public void onLivingEntityUpdate(LivingEvent.LivingUpdateEvent event)
+	public static void onLivingEntityUpdate(LivingEvent.LivingUpdateEvent event)
 	{
 		final Entity entity = event.getEntity();
 		final Block blockBeneath = entity.worldObj.getBlockState(entity.getPosition().down()).getBlock();
@@ -156,11 +156,11 @@ public class CommonEvents
 		// Checks whether or not an entity is in the Aether's void
 		if (entity.worldObj.provider.getDimensionType() == DimensionsAether.AETHER && entity.posY < -4 && !entity.worldObj.isRemote)
 		{
-			this.onFallenFromAether(entity);
+			CommonEvents.onFallenFromAether(entity);
 		}
 	}
 
-	private void onFallenFromAether(Entity entity)
+	private static void onFallenFromAether(Entity entity)
 	{
 		// Don't teleport entities which are being ridden.
 		if (entity.getRidingEntity() != null)
@@ -185,16 +185,16 @@ public class CommonEvents
 			entity.startRiding(null, true);
 
 			// Teleports entity first, then what it's riding
-			Entity teleportedEntity = this.teleportEntity(playerList, entity, toWorld, teleporter);
+			Entity teleportedEntity = CommonEvents.teleportEntity(playerList, entity, toWorld, teleporter);
 
-			Entity teleportedMount= this.teleportEntity(playerList, mount, toWorld, teleporter);
+			Entity teleportedMount= CommonEvents.teleportEntity(playerList, mount, toWorld, teleporter);
 
 			// Re-mount what it was previously riding
 			teleportedEntity.startRiding(teleportedMount, true);
 		}
 		else
 		{
-			this.teleportEntity(playerList, entity, toWorld, teleporter);
+			CommonEvents.teleportEntity(playerList, entity, toWorld, teleporter);
 		}
 	}
 
@@ -204,7 +204,7 @@ public class CommonEvents
 	 *
 	 * @return A new entity if {@param entity} wasn't a player, or the same entity if it was a player
 	 */
-	private Entity teleportEntity(PlayerList playerList, Entity entity, WorldServer toWorld, Teleporter teleporter)
+	private static Entity teleportEntity(PlayerList playerList, Entity entity, WorldServer toWorld, Teleporter teleporter)
 	{
 		if (entity == null)
 		{
@@ -232,7 +232,7 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public void onPlayerRightClickBLock(PlayerInteractEvent.RightClickBlock event)
+	public static void onPlayerRightClickBLock(PlayerInteractEvent.RightClickBlock event)
 	{
 		if (AetherCore.PROXY.tryEquipEquipment(event.getEntityPlayer(), event.getItemStack(), event.getHand()))
 		{
@@ -241,7 +241,7 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public void onPlayerRightClickItem(PlayerInteractEvent.RightClickItem event)
+	public static void onPlayerRightClickItem(PlayerInteractEvent.RightClickItem event)
 	{
 		if (AetherCore.PROXY.tryEquipEquipment(event.getEntityPlayer(), event.getItemStack(), event.getHand()))
 		{
@@ -250,7 +250,7 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public void onPlayerInteract(PlayerInteractEvent.EntityInteract event)
+	public static void onPlayerInteract(PlayerInteractEvent.EntityInteract event)
 	{
 		if (event.getTarget() instanceof EntityCow && !((EntityCow) event.getTarget()).isChild())
 		{
@@ -263,11 +263,11 @@ public class CommonEvents
 		}
 	}
 
-	private void onWaterPlaced(FillBucketEvent event, EntityPlayer player, BlockPos pos)
+	private static void onWaterPlaced(FillBucketEvent event, EntityPlayer player, BlockPos pos)
 	{
 		if (event.getWorld().getBlockState(event.getTarget().getBlockPos()).getBlock() == Blocks.GLOWSTONE)
 		{
-			if (this.tryToCreatePortal(event.getWorld(), pos))
+			if (CommonEvents.tryToCreatePortal(event.getWorld(), pos))
 			{
 				if (!event.getEntityPlayer().capabilities.isCreativeMode)
 				{
@@ -279,7 +279,7 @@ public class CommonEvents
 		}
 	}
 
-	private void onLavaPlaced(FillBucketEvent event, EntityPlayer player, BlockPos pos)
+	private static void onLavaPlaced(FillBucketEvent event, EntityPlayer player, BlockPos pos)
 	{
 		if (player.worldObj.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
@@ -313,7 +313,7 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public void onEntityAttacked(LivingAttackEvent event)
+	public static void onEntityAttacked(LivingAttackEvent event)
 	{
 		if (!(event.getEntityLiving() instanceof EntityPlayer))
 		{

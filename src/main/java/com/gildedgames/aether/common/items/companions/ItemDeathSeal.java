@@ -1,23 +1,16 @@
 package com.gildedgames.aether.common.items.companions;
 
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.companions.EntityCompanion;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
 import java.util.List;
-
-import static sun.audio.AudioPlayer.player;
 
 public class ItemDeathSeal extends ItemCompanion
 {

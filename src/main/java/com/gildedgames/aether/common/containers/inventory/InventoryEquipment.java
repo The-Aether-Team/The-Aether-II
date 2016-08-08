@@ -167,6 +167,11 @@ public class InventoryEquipment implements IInventoryEquipment
 	{
 	}
 
+	public void markDirty(int slot)
+	{
+		this.dirties.add(new PendingItemChange(slot, this.getStackInSlot(slot), this.getStackInSlot(slot)));
+	}
+
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
