@@ -273,7 +273,7 @@ public class ModelRam extends ModelBase
 	{
 		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entity);
 
-		this.Tail.rotateAngleZ = (MathHelper.cos(ageInTicks * 0.1662F) * 0.6F);
+		this.Tail.rotateAngleZ = (MathHelper.cos(ageInTicks * 0.1662F) * 0.2F);
 
 		this.HeadNeck.rotateAngleX = headPitch * 0.017453292F;
 		this.HeadNeck.rotateAngleY = netHeadYaw * 0.017453292F;
@@ -303,10 +303,6 @@ public class ModelRam extends ModelBase
 		this.HeadEarLeft.rotateAngleY = netHeadYaw * 0.017453292F;
 		this.HeadEarRight.rotateAngleX = headPitch * 0.017453292F;
 		this.HeadEarRight.rotateAngleY = netHeadYaw * 0.017453292F;
-
-		//this.BodyBack.rotateAngleX = ((float)Math.PI / 2F);
-		//this.BodyBottom.rotateAngleX = ((float)Math.PI / 2F);
-		//this.BodyMain.rotateAngleX = ((float)Math.PI / 2F);
 
 		this.LegFrontLeft1.rotateAngleX = 0.0872665F + (MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);
 		this.LegFrontLeft2.rotateAngleX = 0.0872665F + (MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);

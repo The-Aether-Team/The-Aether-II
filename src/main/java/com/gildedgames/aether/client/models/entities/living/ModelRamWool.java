@@ -86,20 +86,20 @@ public class ModelRamWool extends ModelBase
       setRotation(Tail, 0.1745329F, 0F, 0F);
   }
   
-  public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+  public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor)
   {
-    super.render(entity, f, f1, f2, f3, f4, f5);
-    setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-    BodyMain.render(f5);
-    BodyBack.render(f5);
-    BodyBottom.render(f5);
-    LegFrontLeft1.render(f5);
-    LegFrontRight1.render(f5);
-    LegBackLeft1.render(f5);
-    LegBackLeft2.render(f5);
-    LegBackRight1.render(f5);
-    LegBackRight2.render(f5);
-    Tail.render(f5);
+    super.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
+    setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entity);
+    BodyMain.render(scaleFactor);
+    BodyBack.render(scaleFactor);
+    BodyBottom.render(scaleFactor);
+    LegFrontLeft1.render(scaleFactor);
+    LegFrontRight1.render(scaleFactor);
+    LegBackLeft1.render(scaleFactor);
+    LegBackLeft2.render(scaleFactor);
+    LegBackRight1.render(scaleFactor);
+    LegBackRight2.render(scaleFactor);
+    Tail.render(scaleFactor);
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -117,7 +117,16 @@ public class ModelRamWool extends ModelBase
     //this.BodyBottom.rotateAngleX = ((float)Math.PI / 2F);
     //this.BodyMain.rotateAngleX = ((float)Math.PI / 2F);
 
-    this.Tail.rotateAngleZ = (MathHelper.cos(ageInTicks * 0.1662F) * 0.6F);
+    this.BodyMain.offsetX = (float)(Math.sin(ageInTicks * 10 / 87.2957795) * 1 * 0.5F) / 40;
+    this.BodyMain.offsetZ = (float)(Math.sin(ageInTicks * 10 / 37.2957795) * 1 * 0.5F) / 40;
+
+    this.BodyBottom.offsetX = (float)(Math.sin(ageInTicks * 10 / 87.2957795) * 1 * 0.25F) / 40;
+    this.BodyBottom.offsetZ = (float)(Math.sin(ageInTicks * 10 / 37.2957795) * 1 * 0.25F) / 40;
+
+    this.BodyBack.offsetX = (float)(Math.sin(ageInTicks * 10 / 87.2957795) * 1 * 0.25F) / 40;
+    this.BodyBack.offsetZ = (float)(Math.sin(ageInTicks * 10 / 37.2957795) * 1 * 0.25F) / 40;
+
+    this.Tail.rotateAngleZ = (MathHelper.cos(ageInTicks * 0.1662F) * 0.2F);
 
     this.LegFrontLeft1.rotateAngleX = 0.0872665F + (MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);
 
