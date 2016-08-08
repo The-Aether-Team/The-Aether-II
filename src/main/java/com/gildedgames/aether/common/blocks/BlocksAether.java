@@ -147,14 +147,14 @@ public class BlocksAether
 		}
 	}, SoundType.WOOD);
 
-	public static final BlockCustomDoor arkenium_door = new BlockCustomDoor(Material.WOOD, new Supplier<Item>()
+	public static final BlockCustomDoor arkenium_door = new BlockCustomDoor(Material.IRON, new Supplier<Item>()
 	{
 		@Override
 		public Item get()
 		{
-			return ItemsAether.skyroot_door;
+			return ItemsAether.arkenium_door;
 		}
-	}, SoundType.WOOD);
+	}, SoundType.METAL);
 
 	public static final BlockSkyrootChest skyroot_chest = new BlockSkyrootChest();
 
