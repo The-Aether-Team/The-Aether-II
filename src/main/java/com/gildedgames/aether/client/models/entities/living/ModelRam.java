@@ -240,7 +240,7 @@ public class ModelRam extends ModelBase
 		if (this.isChild)
 		{
 			GlStateManager.pushMatrix();
-			GlStateManager.translate(0.0F, this.childYOffset * scale, this.childZOffset * scale);
+			GlStateManager.translate(0.0F, 8.75F * scale, this.childZOffset * scale);
 			HeadNeck.render(scale);
 			HeadMain.render(scale);
 			HeadSnout.render(scale);
