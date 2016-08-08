@@ -16,7 +16,7 @@ import java.util.Set;
 
 public class InventoryEquipment implements IInventoryEquipment
 {
-	private static final int INVENTORY_SIZE = 7;
+	private static final int INVENTORY_SIZE = 14;
 
 	public static final ItemEquipmentType[] slotTypes = new ItemEquipmentType[]
 			{
@@ -27,6 +27,13 @@ public class InventoryEquipment implements IInventoryEquipment
 					ItemEquipmentType.RING,
 					ItemEquipmentType.NECKWEAR,
 					ItemEquipmentType.COMPANION,
+					ItemEquipmentType.ARTIFACT,
+					ItemEquipmentType.CHARM,
+					ItemEquipmentType.CHARM,
+					ItemEquipmentType.CHARM,
+					ItemEquipmentType.CHARM,
+					ItemEquipmentType.CHARM,
+					ItemEquipmentType.CHARM
 			};
 
 	private final IPlayerAetherCapability aePlayer;
