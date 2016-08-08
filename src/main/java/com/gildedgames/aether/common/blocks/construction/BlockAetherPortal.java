@@ -17,6 +17,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -168,11 +169,36 @@ public class BlockAetherPortal extends BlockBreakable
 		}
 	}
 
+	public IBlockState withRotation(IBlockState state, Rotation rot)
+	{
+		switch (rot)
+		{
+			case COUNTERCLOCKWISE_90:
+			case CLOCKWISE_90:
+
+				switch ((EnumFacing.Axis)state.getValue(PROPERTY_AXIS))
+				{
+				case X:
+					return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.Z);
+				case Z:
+					return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.X);
+				default:
+					return state;
+				}
+
+			default:
+				return state;
+		}
+	}
+
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		final EnumFacing.Axis axis = state.getValue(PROPERTY_AXIS);
+		return getMetaForAxis((EnumFacing.Axis)state.getValue(PROPERTY_AXIS));
+	}
 
+	public static int getMetaForAxis(EnumFacing.Axis axis)
+	{
 		return axis == EnumFacing.Axis.X ? 1 : (axis == EnumFacing.Axis.Z ? 2 : 0);
 	}
 

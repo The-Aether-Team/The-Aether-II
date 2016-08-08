@@ -9,6 +9,7 @@ import com.gildedgames.util.core.util.GGHelper;
 import com.gildedgames.util.modules.world.common.BlockPosDimension;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.state.IBlockState;
@@ -17,6 +18,9 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
@@ -24,6 +28,9 @@ import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.structure.template.PlacementSettings;
+import net.minecraft.world.gen.structure.template.Template;
+import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -36,6 +43,9 @@ import java.util.Random;
 
 public class TeleporterAether extends Teleporter implements NBT
 {
+
+	public static final TemplateManager MANAGER = new TemplateManager("structures");
+
 	/**
 	 * Boolean here contains if the chunk is solid.
 	 */
@@ -323,77 +333,45 @@ public class TeleporterAether extends Teleporter implements NBT
 
 	public boolean createPortalFrame(World world, int x, int y, int z)
 	{
+		return this.createPortalFrame(world, x, y, z, Rotation.NONE);
+	}
+
+	public boolean createPortalFrame(World world, int x, int y, int z, Rotation rotation)
+	{
 		if (!this.createPortal)
 		{
 			return false;
 		}
 
 		final int posX = x;
-		final int posY = y + 1;
+		final int posY = y;
 		final int posZ = z;
 
-		final IBlockState frameBlock = Blocks.GLOWSTONE.getDefaultState();
-		final IBlockState portalBlock = BlocksAether.aether_portal.getDefaultState()
-				.withProperty(BlockAetherPortal.PROPERTY_AXIS, EnumFacing.Axis.Z);
+		Template portalFrame = MANAGER.func_189942_b(this.worldServerInstance.getMinecraftServer(), new ResourceLocation(AetherCore.MOD_ID, "aether_portal"));
 
-		for (int xi = -1; xi <= 1; ++xi)
+		PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(rotation).setIgnoreEntities(false).setChunk(null).setReplacedBlock(Blocks.AIR).setIgnoreStructureBlock(false);
+
+		BlockPos size = portalFrame.transformedSize(rotation);
+		BlockPos pos = new BlockPos(posX, posY, posZ);
+
+		switch (rotation)
 		{
-			for (int zi = 1; zi < 3; ++zi)
-			{
-				for (int yi = -1; yi < 3; ++yi)
-				{
-					final int blockX = posX + xi;
-					final int blockY = posY + yi;
-					final int blockZ = posZ + zi - 1;
-					world.setBlockState(new BlockPos(blockX, blockY, blockZ),
-							yi < 0 ? frameBlock : Blocks.AIR.getDefaultState());
-				}
-			}
+			case NONE:
+				pos = pos.add(-size.getX() / 2, 0, -size.getZ() / 2);
+				break;
+			default:
+				break;
+			case CLOCKWISE_90:
+				pos = pos.add(size.getX() / 2, 0, -size.getZ() / 2);
+				break;
+			case COUNTERCLOCKWISE_90:
+				pos = pos.add(-size.getX() / 2, 0, size.getZ() / 2);
+				break;
+			case CLOCKWISE_180:
+				pos = pos.add(size.getX() / 2, 0, size.getZ() / 2);
 		}
 
-		for (int zi = 0; zi < 4; ++zi)
-		{
-			for (int yi = -1; yi < 4; ++yi)
-			{
-				final int blockX = posX;
-				final int blockY = posY + yi;
-				final int blockZ = posZ + zi - 1;
-
-				final boolean border = zi == 0 || zi == 3 || yi == -1 || yi == 3;
-
-				if (border)
-				{
-					world.setBlockState(new BlockPos(blockX, blockY, blockZ), frameBlock, 2);
-				}
-			}
-		}
-
-		for (int zi = 1; zi < 3; ++zi)
-		{
-			for (int yi = 0; yi < 3; ++yi)
-			{
-				final int blockX = posX;
-				final int blockY = posY + yi;
-				final int blockZ = posZ + zi - 1;
-
-				world.setBlockState(new BlockPos(blockX, blockY, blockZ), portalBlock, 2);
-			}
-		}
-
-		for (int zi = 0; zi < 4; ++zi)
-		{
-			for (int yi = -1; yi < 4; ++yi)
-			{
-				final int blockX = posX;
-				final int blockY = posY + yi;
-				final int blockZ = posZ + zi - 1;
-
-				final BlockPos pos = new BlockPos(blockX, blockY, blockZ);
-
-				// this.worldServerInstance.notifyNeighborsOfStateChange(pos,
-				// this.worldServerInstance.getBlockState(pos).getBlock());
-			}
-		}
+		portalFrame.addBlocksToWorld(world, pos, placementsettings);
 
 		return true;
 	}

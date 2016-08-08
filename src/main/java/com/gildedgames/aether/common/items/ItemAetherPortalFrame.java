@@ -7,8 +7,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class ItemAetherPortalFrame extends Item
@@ -40,13 +42,30 @@ public class ItemAetherPortalFrame extends Item
 			}
 			else
 			{
-				//int rotation = MathHelper.floor_double((double) ((player.rotationYaw + 180.0F) * 16.0F / 360.0F) + 0.5D) & 15;
+				Rotation rotation;
+
+				if (player.getHorizontalFacing() == EnumFacing.NORTH)
+				{
+					rotation = Rotation.CLOCKWISE_90;
+				}
+				else if (player.getHorizontalFacing() == EnumFacing.EAST)
+				{
+					rotation = Rotation.CLOCKWISE_180;
+				}
+				else if (player.getHorizontalFacing() == EnumFacing.SOUTH)
+				{
+					rotation = Rotation.COUNTERCLOCKWISE_90;
+				}
+				else
+				{
+					rotation = Rotation.NONE;
+				}
 				
 				boolean old = AetherCore.TELEPORTER.createPortal;
 
 				AetherCore.TELEPORTER.createPortal = true;
 
-				AetherCore.TELEPORTER.createPortalFrame(world, pos.getX(), pos.getY(), pos.getZ());
+				AetherCore.TELEPORTER.createPortalFrame(world, pos.getX(), pos.getY(), pos.getZ(), rotation);
 
 				AetherCore.TELEPORTER.createPortal = old;
 				
