@@ -68,11 +68,11 @@ public class GuiEquipment extends GuiContainer
 
 		this.drawTexturedModalRect(this.width / 2 - 90 - 179 / 2, this.height / 2 - 150 / 2, 0, 0, 179, 150);
 
-		this.mc.renderEngine.bindTexture(textureAccessoriesPattern);
+		//this.mc.renderEngine.bindTexture(textureAccessoriesPattern);
 
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+		//GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
-		this.drawTexturedModalRect(this.width / 2 - 90 - 179 / 2, this.height / 2 - 150 / 2, 0, 0, 179, 150);
+		//this.drawTexturedModalRect(this.width / 2 - 90 - 179 / 2, this.height / 2 - 150 / 2, 0, 0, 179, 150);
 
 		this.mc.renderEngine.bindTexture(aePlayer.getPlayer().capabilities.isCreativeMode ? textureBackpackCreative : textureBackpack);
 
@@ -80,11 +80,11 @@ public class GuiEquipment extends GuiContainer
 
 		this.fontRendererObj.drawString(I18n.format("container.crafting"), this.width / 2 + (this.aePlayer.getPlayer().capabilities.isCreativeMode ? 70 : 51), this.height / 2 - 135 / 2, 4210752);
 
-		this.mc.renderEngine.bindTexture(aePlayer.getPlayer().capabilities.isCreativeMode ? textureBackpackCreativePattern : textureBackpackPattern);
+		//this.mc.renderEngine.bindTexture(aePlayer.getPlayer().capabilities.isCreativeMode ? textureBackpackCreativePattern : textureBackpackPattern);
 
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+		//GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
-		this.drawTexturedModalRect(this.width / 2 + 90 - 176 / 2, this.height / 2 - 166 / 2, 0, 0, 176, 166);
+		//this.drawTexturedModalRect(this.width / 2 + 90 - 176 / 2, this.height / 2 - 166 / 2, 0, 0, 176, 166);
 
 		this.drawPlayer(mouseX, mouseY);
 
