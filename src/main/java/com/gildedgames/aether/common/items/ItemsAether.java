@@ -233,6 +233,10 @@ public class ItemsAether
 
 	public static Item continuum_talisman, labyrinth_plans;
 
+	public static ItemSkyrootBed skyroot_bed;
+
+
+
 	public static void preInit()
 	{
 		skyroot_stick = registerItem("skyroot_stick", new Item(), AetherCreativeTabs.tabMaterials);
@@ -465,6 +469,8 @@ public class ItemsAether
 		rot_bane = registerItem("rot_bane", new Item().setMaxStackSize(1), AetherCreativeTabs.tabAccessories);
 		continuum_talisman = registerItem("continuum_talisman", new Item().setMaxStackSize(1), AetherCreativeTabs.tabAccessories);
 		labyrinth_plans = registerItem("labyrinth_plans", new Item().setMaxStackSize(1), AetherCreativeTabs.tabAccessories);
+		skyroot_bed = registerItem("skyroot_bed", new ItemSkyrootBed(), AetherCreativeTabs.tabMiscellaneous);
+
 
 		IEquipmentRegistry equipmentRegistry = AetherCore.INSTANCE.getEquipmentRegistry();
 
