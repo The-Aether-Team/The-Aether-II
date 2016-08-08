@@ -33,7 +33,6 @@ public class EntitiesAether
 	{
 		registerLivingEntity(EntityPhyg.class, "phyg", 0xCCFFFF, 0xFF9999);
 		registerLivingEntity(EntityFlyingCow.class, "flying_cow", 0xCCFFFF, 0x0066CC);
-		registerLivingEntity(EntitySheepuff.class, "sheepuff", 0xCCFFFF, 0xCCCCFF);
 		registerLivingEntity(EntityAechorPlant.class, "aechor_plant", 0xCCFFFF, 0xC88FE3);
 		registerLivingEntity(EntityAerbunny.class, "aerbunny", 0xCCFFFF, 0x0066CC);
 		registerLivingEntity(EntityCarrionSprout.class, "carrion_sprout", 0xCCFFFF, 0x5D8BBB);
@@ -61,7 +60,6 @@ public class EntitiesAether
 		manager.registerPerTickEntry(new SpawnEntry(EntityFlyingCow.class, 1, 4, 0.65f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityPhyg.class, 1, 4, 0.35f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityCarrionSprout.class, 2, 3, 0.4f));
-		manager.registerPerTickEntry(new SpawnEntry(EntitySheepuff.class, 3, 5, 0.5f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityRam.class, 3, 5, 0.5f));
 
 		manager.registerPerTickEntry(new SpawnEntry(EntityAechorPlant.class, 2, 4, 0.4f));
