@@ -11,6 +11,8 @@ public class EntityRam extends EntitySheep
 	{
 		super(world);
 
+		this.setSize(2.0F, 1.6F);
+
 		this.spawnableBlock = BlocksAether.aether_grass;
 	}
 
