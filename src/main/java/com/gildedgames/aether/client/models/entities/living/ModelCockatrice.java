@@ -370,30 +370,24 @@ public class ModelCockatrice extends ModelBase
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entity)
 	{
 		//super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		EntityCockatrice cockatrice = (EntityCockatrice) entity;
 		
 		float f6 = 3.141593F;
 		
-		this.Head.rotateAngleX = f4 / 57.29578F;
-		this.Head.rotateAngleY = f3 / 57.29578F;
+		this.Head.rotateAngleX = headPitch / 57.29578F;
+		this.Head.rotateAngleY = netHeadYaw / 57.29578F;
 		
 		float rightLegRotation;
 		float leftLegRotation;
 		
 		float legSwingSpeed = 0.7F;
 		float legSwingLength = 0.8F;
-		
-		if (cockatrice.onGround)
-		{
-			rightLegRotation = MathHelper.cos(f * legSwingSpeed) * legSwingLength * f1;
-			leftLegRotation = MathHelper.cos(f * legSwingSpeed + 3.141593F) * legSwingLength * f1;
-		} else {
-			rightLegRotation = 0.0F;
-			leftLegRotation = 0.0F;
-		}
+
+		rightLegRotation = MathHelper.cos(limbSwing * legSwingSpeed) * legSwingLength * limbSwingAmount;
+		leftLegRotation = MathHelper.cos(limbSwing * legSwingSpeed + 3.141593F) * legSwingLength * limbSwingAmount;
 
 		this.LegFeatheredRight.rotateAngleX = -0.2094395F + rightLegRotation;
 		this.LegTopRight.rotateAngleX = -0.2094395F + rightLegRotation;
@@ -412,31 +406,6 @@ public class ModelCockatrice extends ModelBase
 		this.ToeMidLeft.rotateAngleX = leftLegRotation;
 		this.ToeRightLeft.rotateAngleX = leftLegRotation;
 		this.FootLeft.rotateAngleX = leftLegRotation;
-		
-		if (f2 > 0F)
-		{
-			this.LegFeatheredRight.rotateAngleX += 0.8F;
-			this.LegTopRight.rotateAngleX += 0.8F;
-			this.LegMidRight.rotateAngleX += 0.8F;
-			this.LegBottomRight.rotateAngleX += 0.8F;
-			this.ToeLeftRight.rotateAngleX += 0.8F;
-			this.ToeMidRight.rotateAngleX += 0.8F;
-			this.ToeRightRight.rotateAngleX += 0.8F;
-			this.FootRight.rotateAngleX += 0.8F;
-			
-			this.LegFeatheredLeft.rotateAngleX += 0.8F;
-			this.LegTopLeft.rotateAngleX += 0.8F;
-			this.LegMidLeft.rotateAngleX += 0.8F;
-			this.LegBottomLeft.rotateAngleX += 0.8F;
-			this.ToeLeftLeft.rotateAngleX += 0.8F;
-			this.ToeMidLeft.rotateAngleX += 0.8F;
-			this.ToeRightLeft.rotateAngleX += 0.8F;
-			this.FootLeft.rotateAngleX += 0.8F;
-		}
-		else
-		{
-			
-		}
 
 		/*this.Neck1.rotateAngleX = 0.0F;
 		this.Neck2.rotateAngleX = 0.0F;

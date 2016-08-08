@@ -99,7 +99,7 @@ public class EntityCockatrice extends EntityMob
 	{
 		super.onUpdate();
 
-		this.fallSlowly();
+		//this.fallSlowly();
 	}
 
 	private void fallSlowly()
