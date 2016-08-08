@@ -6,7 +6,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 
-import com.gildedgames.util.modules.world.common.BlockPosDimension;
+import com.gildedgames.util.core.util.BlockPosDimension;
 
 public interface DungeonGenerator
 {

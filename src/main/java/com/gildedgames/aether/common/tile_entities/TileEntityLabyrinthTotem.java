@@ -8,7 +8,7 @@ import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstanceHandler;
 import com.gildedgames.util.modules.instances.InstanceModule;
 import com.gildedgames.util.modules.instances.PlayerInstances;
-import com.gildedgames.util.modules.world.common.BlockPosDimension;
+import com.gildedgames.util.core.util.BlockPosDimension;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.SoundHandler;

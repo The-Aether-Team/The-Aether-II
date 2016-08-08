@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import com.gildedgames.util.core.nbt.NBTHelper;
 import com.gildedgames.util.modules.instances.Instance;
 import com.gildedgames.util.modules.instances.InstanceHandler;
-import com.gildedgames.util.modules.world.common.BlockPosDimension;
+import com.gildedgames.util.core.util.BlockPosDimension;
 import com.google.common.collect.Lists;
 
 public class DungeonInstance implements Instance

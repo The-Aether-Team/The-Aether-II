@@ -6,7 +6,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherShield;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import com.gildedgames.aether.common.world.TeleporterAether;
-import com.gildedgames.util.modules.universe.common.util.TeleporterGeneric;
+import com.gildedgames.util.core.util.TeleporterGeneric;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityCow;

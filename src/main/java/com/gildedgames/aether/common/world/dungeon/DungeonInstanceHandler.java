@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
 import com.gildedgames.util.modules.instances.InstanceHandler;
-import com.gildedgames.util.modules.world.common.BlockPosDimension;
+import com.gildedgames.util.core.util.BlockPosDimension;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class DungeonInstanceHandler

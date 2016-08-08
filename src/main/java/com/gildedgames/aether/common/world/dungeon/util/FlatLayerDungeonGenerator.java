@@ -25,11 +25,9 @@ import com.gildedgames.aether.common.world.dungeon.DungeonGenerator;
 import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.DungeonRoom;
 import com.gildedgames.aether.common.world.dungeon.DungeonRoomProvider;
-import com.gildedgames.util.modules.world.common.BlockPosDimension;
+import com.gildedgames.util.core.util.BlockPosDimension;
 import com.google.common.collect.Lists;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
-
-import static com.ibm.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 public class FlatLayerDungeonGenerator implements DungeonGenerator
 {
