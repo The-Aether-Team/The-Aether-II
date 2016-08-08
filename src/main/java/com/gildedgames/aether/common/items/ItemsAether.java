@@ -74,11 +74,7 @@ import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemDoor;
-import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
+import net.minecraft.item.*;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -107,7 +103,7 @@ public class ItemsAether
 
 	public static ItemArkeniumTool arkenium_axe, arkenium_pickaxe, arkenium_shovel;
 
-	public static ItemArkeniumShears arkenium_shears;
+	public static ItemShears arkenium_shears;
 
 	public static ItemAetherSword skyroot_sword, holystone_sword, zanite_sword, gravitite_sword, arkenium_sword;
 
@@ -282,7 +278,7 @@ public class ItemsAether
 		valkyrie_pickaxe = registerItem("valkyrie_pickaxe", new ItemValkyrieTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
 		valkyrie_shovel = registerItem("valkyrie_shovel", new ItemValkyrieTool(EnumToolType.SHOVEL,  1.5F, -3.0F));
 
-		arkenium_shears = registerItem("arkenium_shears", new ItemArkeniumShears(), AetherCreativeTabs.tabTools);
+		arkenium_shears = registerItem("arkenium_shears", new ItemShears(), AetherCreativeTabs.tabTools);
 
 		zanite_helmet = registerItem("zanite_helmet", new ItemZaniteArmor(EntityEquipmentSlot.HEAD));
 		zanite_chestplate = registerItem("zanite_chestplate", new ItemZaniteArmor(EntityEquipmentSlot.CHEST));
