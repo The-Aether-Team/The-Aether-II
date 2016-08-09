@@ -54,7 +54,7 @@ public class GuiEquipment extends GuiContainer
 		this.guiTop = this.height / 2 - (147 / 2);
 
 		this.xSize = 179 * 2;
-		this.ySize = 150;
+		this.ySize = 169;
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class GuiEquipment extends GuiContainer
 
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
-		this.drawTexturedModalRect(this.width / 2 - 90 - 179 / 2, this.height / 2 - 150 / 2, 0, 0, 179, 150);
+		this.drawTexturedModalRect(this.width / 2 - 90 - 179 / 2, this.height / 2 - 169 / 2, 0, 0, 179, 169);
 
 		//this.mc.renderEngine.bindTexture(textureAccessoriesPattern);
 

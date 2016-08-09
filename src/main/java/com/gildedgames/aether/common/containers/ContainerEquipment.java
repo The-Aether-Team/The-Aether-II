@@ -76,20 +76,23 @@ public class ContainerEquipment extends ContainerPlayer
 		Slot boots = this.inventorySlots.get(8);
 		Slot shield = this.inventorySlots.get(45);
 
-		shield.xDisplayPosition = 64;
-		shield.yDisplayPosition = 91;
+		int offsetX = -1;
+		int offsetY = -25;
 
-		helmet.xDisplayPosition = 39;
-		helmet.yDisplayPosition = 28;
+		shield.xDisplayPosition = 64 + offsetX;
+		shield.yDisplayPosition = 91 + offsetY;
 
-		chestplate.xDisplayPosition = 39;
-		chestplate.yDisplayPosition = 49;
+		helmet.xDisplayPosition = 39 + offsetX;
+		helmet.yDisplayPosition = 28 + offsetY;
 
-		leggings.xDisplayPosition = 39;
-		leggings.yDisplayPosition = 70;
+		chestplate.xDisplayPosition = 39 + offsetX;
+		chestplate.yDisplayPosition = 49 + offsetY;
 
-		boots.xDisplayPosition = 39;
-		boots.yDisplayPosition = 91;
+		leggings.xDisplayPosition = 39 + offsetX;
+		leggings.yDisplayPosition = 70 + offsetY;
+
+		boots.xDisplayPosition = 39 + offsetX;
+		boots.yDisplayPosition = 91 + offsetY;
 
 		Slot craftResult = this.inventorySlots.get(0);
 
@@ -137,22 +140,22 @@ public class ContainerEquipment extends ContainerPlayer
 
 		int inventorySlotId = 0;
 
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RELIC, inventorySlotId++, 14, 28));
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RELIC, inventorySlotId++, 64, 28));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RELIC, inventorySlotId++, 14 + offsetX, 28 + offsetY));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RELIC, inventorySlotId++, 64 + offsetX, 28 + offsetY));
 
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.HANDWEAR, inventorySlotId++, 64, 49));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.HANDWEAR, inventorySlotId++, 64 + offsetX, 49 + offsetY));
 
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RING, inventorySlotId++, 14, 70));
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RING, inventorySlotId++, 14, 91));
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.NECKWEAR, inventorySlotId++, 14, 49));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RING, inventorySlotId++, 14 + offsetX, 70 + offsetY));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RING, inventorySlotId++, 14 + offsetX, 91 + offsetY));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.NECKWEAR, inventorySlotId++, 14 + offsetX, 49 + offsetY));
 
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.COMPANION, inventorySlotId++, 64, 70));
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.ARTIFACT, inventorySlotId++, 24, 120));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.COMPANION, inventorySlotId++, 64 + offsetX, 70 + offsetY));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.ARTIFACT, inventorySlotId++, 39 + offsetX, 122 + offsetY));
 
 		for (int x = 0; x < 6; x++)
 		{
-			int x1 = 47 + (x * 18);
-			int y1 = 120;
+			int x1 = 35 + (x * 18);
+			int y1 = 128;
 
 			this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.CHARM, inventorySlotId, x1, y1));
 			inventorySlotId++;
