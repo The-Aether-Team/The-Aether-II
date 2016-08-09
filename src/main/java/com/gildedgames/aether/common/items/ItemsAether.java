@@ -469,7 +469,7 @@ public class ItemsAether
 		rot_bane = registerItem("rot_bane", new Item().setMaxStackSize(1), AetherCreativeTabs.tabAccessories);
 		continuum_talisman = registerItem("continuum_talisman", new Item().setMaxStackSize(1), AetherCreativeTabs.tabAccessories);
 		labyrinth_plans = registerItem("labyrinth_plans", new Item().setMaxStackSize(1), AetherCreativeTabs.tabAccessories);
-		skyroot_bed = registerItem("skyroot_bed", new ItemSkyrootBed(), AetherCreativeTabs.tabBlocks);
+		skyroot_bed = registerItem("skyroot_bed_item", new ItemSkyrootBed(), AetherCreativeTabs.tabBlocks);
 
 
 		IEquipmentRegistry equipmentRegistry = AetherCore.INSTANCE.getEquipmentRegistry();

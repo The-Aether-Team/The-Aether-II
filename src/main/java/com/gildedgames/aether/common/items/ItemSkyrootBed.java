@@ -1,14 +1,12 @@
 package com.gildedgames.aether.common.items;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.construction.BlockSkyrootBed;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBed;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -57,11 +55,11 @@ public class ItemSkyrootBed extends Item {
 
 				if (flag2 && flag3 && worldIn.getBlockState(pos.down()).isFullyOpaque() && worldIn.getBlockState(blockpos.down()).isFullyOpaque())
 				{
-					IBlockState iblockstate1 = BlocksAether.block_skyroot_bed.getDefaultState().withProperty(BlockSkyrootBed.OCCUPIED, Boolean.valueOf(false)).withProperty(BlockSkyrootBed.FACING, enumfacing).withProperty(BlockSkyrootBed.PART, BlockSkyrootBed.EnumPartType.FOOT);
+					IBlockState iblockstate1 = BlocksAether.skyroot_bed.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.valueOf(false)).withProperty(BlockBed.FACING, enumfacing).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
 
 					if (worldIn.setBlockState(pos, iblockstate1, 11))
 					{
-						IBlockState iblockstate2 = iblockstate1.withProperty(BlockSkyrootBed.PART, BlockSkyrootBed.EnumPartType.HEAD);
+						IBlockState iblockstate2 = iblockstate1.withProperty(BlockBed.PART, BlockBed.EnumPartType.HEAD);
 						worldIn.setBlockState(blockpos, iblockstate2, 11);
 					}
 

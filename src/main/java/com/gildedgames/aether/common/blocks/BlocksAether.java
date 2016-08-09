@@ -9,7 +9,6 @@ import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.blocks.construction.BlockAmbrosiumTorch;
 import com.gildedgames.aether.common.blocks.construction.BlockCustomDoor;
 import com.gildedgames.aether.common.blocks.construction.BlockQuicksoilGlass;
-import com.gildedgames.aether.common.blocks.construction.BlockSkyrootBed;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootChest;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootFence;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootFenceGate;
@@ -55,12 +54,12 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.blocks.util.BlockCustom;
 import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummy;
-import com.gildedgames.aether.common.items.ItemSkyrootBed;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.blocks.ItemAetherSlab;
 import com.gildedgames.aether.common.items.blocks.ItemBlockVariants;
 import com.google.common.base.Supplier;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockButtonStone;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -186,7 +185,7 @@ public class BlocksAether
 
 	public static final BlockLabyrinth carved_capstone = new BlockLabyrinth();
 
-	public static final BlockSkyrootBed block_skyroot_bed = new BlockSkyrootBed();
+	public static final BlockBed skyroot_bed = new BlockBed();
 
 	public static final Block
 			labyrinth_glowing_pillar = new BlockLabyrinthPillar().setGlows(true),
@@ -243,7 +242,7 @@ public class BlocksAether
 		registerBlock("aether_grass", BlocksAether.aether_grass.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemBlockVariants(BlocksAether.aether_grass));
 		registerBlock("holystone", BlocksAether.holystone.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemBlockVariants(BlocksAether.holystone));
 
-		registerBlock("block_skyroot_bed", BlocksAether.block_skyroot_bed);
+		registerBlock("skyroot_bed", BlocksAether.skyroot_bed);
 
 		registerBlock("aercloud", BlocksAether.aercloud.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemBlockVariants(BlocksAether.aercloud));
 
