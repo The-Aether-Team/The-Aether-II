@@ -48,6 +48,11 @@ public class LayerPlayerGloves extends LayerBipedArmor
 			t.setModelAttributes(this.renderer.getMainModel());
 			t.setLivingAnimations(entity, p_177182_2_, p_177182_3_, partialTicks);
 
+			GlStateManager.pushMatrix();
+
+			GlStateManager.scale(0.92F, 0.92F, 0.92F);
+			GlStateManager.translate(0, 0.01F, 0);
+
 			if (glove instanceof ItemLeatherGloves)
 			{
 				ItemLeatherGloves leatherGloves = (ItemLeatherGloves) glove;
@@ -74,6 +79,8 @@ public class LayerPlayerGloves extends LayerBipedArmor
 
 				t.render(entity, p_177182_2_, p_177182_3_, p_177182_5_, p_177182_6_, p_177182_7_, scale);
 			}
+
+			GlStateManager.popMatrix();
 		}
 	}
 }
