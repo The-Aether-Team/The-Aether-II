@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.blocks.construction.BlockAetherSlab;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherStairs;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.blocks.construction.BlockAmbrosiumTorch;
+import com.gildedgames.aether.common.blocks.util.BlockCustomBed;
 import com.gildedgames.aether.common.blocks.construction.BlockCustomDoor;
 import com.gildedgames.aether.common.blocks.construction.BlockQuicksoilGlass;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootChest;
@@ -185,7 +186,13 @@ public class BlocksAether
 
 	public static final BlockLabyrinth carved_capstone = new BlockLabyrinth();
 
-	public static final BlockBed skyroot_bed = new BlockBed();
+	public static final BlockBed skyroot_bed = new BlockCustomBed(new Supplier<Item>()
+	{
+		@Override public Item get()
+		{
+			return ItemsAether.skyroot_bed;
+		}
+	}, SoundType.WOOD);
 
 	public static final Block
 			labyrinth_glowing_pillar = new BlockLabyrinthPillar().setGlows(true),
