@@ -266,7 +266,7 @@ public class ItemsAether
 		zanite_sword = registerItem("zanite_sword", new ItemZaniteSword());
         zanite_shield = registerItem("zanite_shield", new ItemAetherShield(), AetherCreativeTabs.tabWeapons);
 
-        arkenium_axe = registerItem("arkenium_axe", new ItemArkeniumTool(EnumToolType.AXE, 8.0F, -3.3F));
+        arkenium_axe = registerItem("arkenium_axe", new ItemArkeniumTool(EnumToolType.AXE, 7.0F, -3.3F));
         arkenium_pickaxe = registerItem("arkenium_pickaxe", new ItemArkeniumTool(EnumToolType.PICKAXE, 4.0F, -3.2F));
         arkenium_shovel = registerItem("arkenium_shovel", new ItemArkeniumTool(EnumToolType.SHOVEL, 4.5F, -3.3F));
         arkenium_sword = registerItem("arkenium_sword", new ItemArkeniumSword());
