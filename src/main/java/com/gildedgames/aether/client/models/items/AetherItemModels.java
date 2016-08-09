@@ -113,6 +113,7 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.aerogel, "aerogel");
 
 		registerItemModels(BlocksAether.skyroot_crafting_table, "skyroot_crafting_table");
+		registerItemModels(ItemsAether.skyroot_bed, "skyroot_bed");
 
 		registerItemModels(BlocksAether.tall_aether_grass, "tall_aether_grass");
 		registerItemModels(BlocksAether.orange_tree, "orange_tree");
@@ -456,7 +457,7 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.sentry_stone_stairs, "aether_stairs/sentry_stone_stairs");
 		registerItemModels(BlocksAether.divine_sentry_stone_stairs, "aether_stairs/divine_sentry_stone_stairs");
 		registerItemModels(BlocksAether.carved_stone_stairs, "aether_stairs/divine_carved_stone_stairs");
-		registerItemModels(BlocksAether.divine_carved_stone_stairs, "aether_stairs/divine_carved_stone_stairs");
+		registerItemModels(BlocksAether.divine_carved_stone_stairs, "aether_stairs/carved_stone_stairs");
 
 	}
 

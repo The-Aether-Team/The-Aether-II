@@ -288,6 +288,7 @@ item.aether.osseous_bane.name=Osseous Bane
 item.aether.rot_bane.name=Rot Bane
 item.aether.continuum_talisman.name=Continuum Talisman
 item.aether.labyrinth_plans.name=Labyrinth Plans
+item.aether.skyroot_bed.name=Skyroot Bed
 
 # Item Rarities
 item.rarity.common.name=§7§oCommon
