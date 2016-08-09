@@ -139,6 +139,12 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVarian
 	}
 
 	@Override
+	public boolean isFullBlock(IBlockState state)
+	{
+		return state.getValue(PROPERTY_HARVESTABLE);
+	}
+
+	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
 		return this.getDefaultState().withProperty(PROPERTY_HARVESTABLE, meta == BERRY_BUSH_RIPE);

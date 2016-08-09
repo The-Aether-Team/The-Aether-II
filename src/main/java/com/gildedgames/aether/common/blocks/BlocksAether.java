@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherSlab;
+import com.gildedgames.aether.common.blocks.construction.BlockAetherStairs;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.blocks.construction.BlockAmbrosiumTorch;
 import com.gildedgames.aether.common.blocks.construction.BlockCustomDoor;
@@ -61,15 +62,10 @@ import com.gildedgames.aether.common.items.blocks.ItemBlockVariants;
 import com.google.common.base.Supplier;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockButtonStone;
-import net.minecraft.block.BlockDynamicLiquid;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.BlockFluidClassic;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class BlocksAether
@@ -225,12 +221,21 @@ public class BlocksAether
 			carved_stone_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f),
 			divine_carved_stone_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f),
 			sentry_stone_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f),
-			divine_sentry_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f),
+			divine_sentry_stone_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f),
 			icestone_slab = new BlockAetherSlab(Material.ROCK, SoundType.GLASS, 2.0f),
 			labyrinth_capstone_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f),
 			labyrinth_wall_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f);
 
 	public static final Block labyrinth_strongblock = new BlockLabyrinth().setBlockUnbreakable();
+
+	public static final Block skyroot_stairs = new BlockAetherStairs(BlocksAether.skyroot_planks.getDefaultState()),
+			holystone_stairs = new BlockAetherStairs(BlocksAether.holystone.getDefaultState()),
+			mossy_holystone_stairs = new BlockAetherStairs(BlocksAether.holystone.getDefaultState().withProperty(BlockHolystone.PROPERTY_VARIANT, BlockHolystone.MOSSY_HOLYSTONE)),
+			holystone_brick_stairs = new BlockAetherStairs(BlocksAether.holystone_brick.getDefaultState()),
+			sentry_stone_stairs = new BlockAetherStairs(BlocksAether.sentry_stone.getDefaultState()),
+			divine_sentry_stone_stairs = new BlockAetherStairs(BlocksAether.sentry_stone.getDefaultState().withProperty(BlockDivine.PROPERTY_IS_DIVINE, true)),
+			carved_stone_stairs = new BlockAetherStairs(BlocksAether.carved_stone.getDefaultState().withProperty(BlockDivine.PROPERTY_IS_DIVINE, true)),
+			divine_carved_stone_stairs = new BlockAetherStairs(BlocksAether.carved_stone.getDefaultState().withProperty(BlockDivine.PROPERTY_IS_DIVINE, true));
 
 	public static void preInit()
 	{
@@ -352,12 +357,21 @@ public class BlocksAether
 		registerBlock("carved_stone_slab", BlocksAether.carved_stone_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.carved_stone_slab));
 		registerBlock("divine_carved_stone_slab", BlocksAether.divine_carved_stone_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.divine_carved_stone_slab));
 		registerBlock("sentry_stone_slab", BlocksAether.sentry_stone_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.sentry_stone_slab));
-		registerBlock("divine_sentry_slab", BlocksAether.divine_sentry_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.divine_sentry_slab));
+		registerBlock("divine_sentry_stone_slab", BlocksAether.divine_sentry_stone_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.divine_sentry_stone_slab));
 		registerBlock("icestone_slab", BlocksAether.icestone_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.icestone_slab));
 		registerBlock("labyrinth_capstone_slab", BlocksAether.labyrinth_capstone_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.labyrinth_capstone_slab));
 		registerBlock("labyrinth_wall_slab", BlocksAether.labyrinth_wall_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.labyrinth_wall_slab));
 
 		registerBlock("labyrinth_strongblock", BlocksAether.labyrinth_strongblock.setCreativeTab(AetherCreativeTabs.tabBlocks));
+
+		registerBlock("skyroot_stairs", BlocksAether.skyroot_stairs.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("holystone_stairs", BlocksAether.holystone_stairs.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("mossy_holystone_stairs", BlocksAether.mossy_holystone_stairs.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("holystone_brick_stairs", BlocksAether.holystone_brick_stairs.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("sentry_stone_stairs", BlocksAether.sentry_stone_stairs.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("divine_sentry_stone_stairs", BlocksAether.divine_sentry_stone_stairs.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("carved_stone_stairs", BlocksAether.carved_stone_stairs.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("divine_carved_stone_stairs", BlocksAether.divine_carved_stone_stairs.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
 		registerHarvestLevels();
 	}
@@ -413,7 +427,7 @@ public class BlocksAether
 		carved_stone_slab.setHarvestLevel("pickaxe", 0);
 		divine_carved_stone_slab.setHarvestLevel("pickaxe", 0);
 		sentry_stone_slab.setHarvestLevel("pickaxe", 0);
-		divine_sentry_slab.setHarvestLevel("pickaxe", 0);
+		divine_sentry_stone_slab.setHarvestLevel("pickaxe", 0);
 		icestone_slab.setHarvestLevel("pickaxe", 0);
 		labyrinth_capstone_slab.setHarvestLevel("pickaxe", 0);
 		labyrinth_wall_slab.setHarvestLevel("pickaxe", 0);

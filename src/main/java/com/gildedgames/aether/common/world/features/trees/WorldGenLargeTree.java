@@ -24,7 +24,7 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 
 	public boolean branch(World world, Random random, BlockPos pos, int slant)
 	{
-		BlockPos.MutableBlockPos nPos = BlockPosUtil.convert(pos);
+		BlockPos.MutableBlockPos nPos = BlockPosUtil.toMutable(pos);
 
 		int directionX = random.nextInt(3) - 1;
 		int directionZ = random.nextInt(3) - 1;
@@ -51,7 +51,7 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 	@Override
 	public boolean generate(World world, Random random, BlockPos pos)
 	{
-		BlockPos.MutableBlockPos nPos = BlockPosUtil.convert(pos);
+		BlockPos.MutableBlockPos nPos = BlockPosUtil.toMutable(pos);
 
 		int height = 11;
 		boolean flag = true;

@@ -411,7 +411,7 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.carved_stone_slab, "aether_slab/carved_stone_slab");
 		registerItemModels(BlocksAether.divine_carved_stone_slab, "aether_slab/divine_carved_stone_slab");
 		registerItemModels(BlocksAether.sentry_stone_slab, "aether_slab/sentry_stone_slab");
-		registerItemModels(BlocksAether.divine_sentry_slab, "aether_slab/divine_sentry_slab");
+		registerItemModels(BlocksAether.divine_sentry_stone_slab, "aether_slab/divine_sentry_stone_slab");
 		registerItemModels(BlocksAether.icestone_slab, "aether_slab/icestone_slab");
 		registerItemModels(BlocksAether.labyrinth_capstone_slab, "aether_slab/labyrinth_capstone_slab");
 		registerItemModels(BlocksAether.labyrinth_wall_slab, "aether_slab/labyrinth_wall_slab");
@@ -448,6 +448,16 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.rot_bane, "accessories/rot_bane");
 		registerItemModels(ItemsAether.continuum_talisman, "accessories/continuum_talisman");
 		registerItemModels(ItemsAether.labyrinth_plans, "accessories/labyrinth_plans");
+
+		registerItemModels(BlocksAether.skyroot_stairs, "aether_stairs/skyroot_stairs");
+		registerItemModels(BlocksAether.holystone_stairs, "aether_stairs/holystone_stairs");
+		registerItemModels(BlocksAether.mossy_holystone_stairs, "aether_stairs/mossy_holystone_stairs");
+		registerItemModels(BlocksAether.holystone_brick_stairs, "aether_stairs/holystone_brick_stairs");
+		registerItemModels(BlocksAether.sentry_stone_stairs, "aether_stairs/sentry_stone_stairs");
+		registerItemModels(BlocksAether.divine_sentry_stone_stairs, "aether_stairs/divine_sentry_stone_stairs");
+		registerItemModels(BlocksAether.carved_stone_stairs, "aether_stairs/divine_carved_stone_stairs");
+		registerItemModels(BlocksAether.divine_carved_stone_stairs, "aether_stairs/divine_carved_stone_stairs");
+
 	}
 
 	private static void registerItemModels(Block block, String path)

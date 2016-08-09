@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.network.packets;
 
-import com.gildedgames.aether.common.entities.companions.EntityCompanion;
 import com.gildedgames.aether.common.player.PlayerAether;
 import com.gildedgames.util.core.io.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;

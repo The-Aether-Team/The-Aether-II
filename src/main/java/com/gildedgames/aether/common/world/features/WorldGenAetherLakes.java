@@ -28,9 +28,7 @@ public class WorldGenAetherLakes extends WorldGenerator
 	@Override
 	public boolean generate(World world, Random rand, BlockPos position)
 	{
-		BlockPos.MutableBlockPos pos = BlockPosUtil.convert(position);
-
-		BlockPosUtil.add(pos, -8, 0, -8);
+		BlockPos.MutableBlockPos pos = BlockPosUtil.toMutable(position.add(-8, 0, -8));
 
 		while (pos.getY() > 5 && world.isAirBlock(pos))
 		{
