@@ -8,7 +8,7 @@ import com.gildedgames.aether.common.blocks.construction.BlockAetherStairs;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.blocks.construction.BlockAmbrosiumTorch;
 import com.gildedgames.aether.common.blocks.util.BlockCustomBed;
-import com.gildedgames.aether.common.blocks.construction.BlockCustomDoor;
+import com.gildedgames.aether.common.blocks.util.BlockCustomDoor;
 import com.gildedgames.aether.common.blocks.construction.BlockQuicksoilGlass;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootChest;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootFence;

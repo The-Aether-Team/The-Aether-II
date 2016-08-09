@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.blocks.construction;
+package com.gildedgames.aether.common.blocks.util;
 
 import com.google.common.base.Supplier;
 import net.minecraft.block.BlockDoor;

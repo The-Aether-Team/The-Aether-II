@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.models.blocks;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
-import com.gildedgames.aether.common.blocks.construction.BlockCustomDoor;
+import com.gildedgames.aether.common.blocks.util.BlockCustomDoor;
 import com.gildedgames.aether.common.blocks.construction.signs.BlockStandingSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.signs.BlockWallSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockSkyrootWall;
