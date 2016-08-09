@@ -9,6 +9,8 @@ import com.gildedgames.aether.common.crafting.recipes.altar.AltarRepairRecipe;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
@@ -51,6 +53,11 @@ public class RecipesAether implements IAltarRecipeRegistry
 		// Skyroot Crafting Table
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_crafting_table), "XX", "XX",
 				'X', new ItemStack(BlocksAether.skyroot_planks));
+
+		// Skyroot Bed
+		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_bed), "XXX", "YYY",
+				'X', new ItemStack(Blocks.WOOL),
+				'Y', new ItemStack(BlocksAether.skyroot_planks));
 
 		// Skyroot Chest
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_chest), "XXX", "X X", "XXX",

@@ -456,8 +456,8 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.holystone_brick_stairs, "aether_stairs/holystone_brick_stairs");
 		registerItemModels(BlocksAether.sentry_stone_stairs, "aether_stairs/sentry_stone_stairs");
 		registerItemModels(BlocksAether.divine_sentry_stone_stairs, "aether_stairs/divine_sentry_stone_stairs");
-		registerItemModels(BlocksAether.carved_stone_stairs, "aether_stairs/divine_carved_stone_stairs");
-		registerItemModels(BlocksAether.divine_carved_stone_stairs, "aether_stairs/carved_stone_stairs");
+		registerItemModels(BlocksAether.carved_stone_stairs, "aether_stairs/carved_stone_stairs");
+		registerItemModels(BlocksAether.divine_carved_stone_stairs, "aether_stairs/divine_carved_stone_stairs");
 
 	}
 
