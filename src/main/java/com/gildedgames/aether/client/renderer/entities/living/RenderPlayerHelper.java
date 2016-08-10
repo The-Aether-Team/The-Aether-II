@@ -55,12 +55,12 @@ public class RenderPlayerHelper
 
 		if (ring1 != null)
 		{
-			RenderPlayerHelper.renderItem(ring1, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress(), 0.11F, 0.132F, -0.25F);
+			RenderPlayerHelper.renderItem(ring1, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress(), 0.11F, 0.112F, -0.25F);
 		}
 
 		if (ring2 != null)
 		{
-			RenderPlayerHelper.renderItem(ring2, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress(), 0.22F, 0.072F, -0.24F);
+			RenderPlayerHelper.renderItem(ring2, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress(), 0.22F, 0.052F, -0.24F);
 		}
 	}
 
