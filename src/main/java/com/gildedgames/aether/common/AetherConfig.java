@@ -7,32 +7,23 @@ import java.io.File;
 
 public class AetherConfig
 {
-	private final Configuration configuration;
 
-	private int aetherDimID;
+	public final Configuration configuration;
 
-	private int sliderLabyrinthDimID;
-
-	private int aetherBiomeID;
-	
-	private int sliderLabyrinthBiomeID;
+	private final ConfigCategory GENERAL, BIOMES, DIMENSIONS;
 
 	public AetherConfig(File file)
 	{
 		this.configuration = new Configuration(file, true);
-	}
 
-	public void load()
-	{
 		this.configuration.load();
 
-		ConfigCategory biomeIDs = this.configuration.getCategory("Biome IDs");
-		this.aetherBiomeID = this.getInt(biomeIDs, "Aether Biome ID", 237);
-		this.sliderLabyrinthBiomeID = this.getInt(biomeIDs, "Slider Labyrinth Biome ID", 238);
+		this.GENERAL = this.configuration.getCategory(Configuration.CATEGORY_GENERAL);
+		this.BIOMES = this.configuration.getCategory("Biome IDs");
+		this.DIMENSIONS = this.configuration.getCategory("Dimension IDs");
 
-		ConfigCategory dimIDs = this.configuration.getCategory("Dimension IDs");
-		this.aetherDimID = this.getInt(dimIDs, "Aether Dimension ID", 3);
-		this.sliderLabyrinthDimID = this.getInt(dimIDs, "Slider's Labyrinth Dimension ID", 4);
+		this.BIOMES.setRequiresMcRestart(true);
+		this.DIMENSIONS.setRequiresMcRestart(true);
 
 		this.configuration.save();
 	}
@@ -42,23 +33,31 @@ public class AetherConfig
 		return this.configuration.get(category.getName(), name, defaultValue).getInt();
 	}
 
+	private boolean getBoolean(ConfigCategory category, String name, boolean defaultValue)
+	{
+		return this.configuration.get(category.getName(), name, defaultValue).getBoolean();
+	}
+
 	public int getAetherDimID()
 	{
-		return this.aetherDimID;
+		return this.getInt(this.DIMENSIONS, "Aether Dimension ID", 3);
 	}
 
 	public int getSliderLabyrinthDimID()
 	{
-		return this.sliderLabyrinthDimID;
+		return this.getInt(this.DIMENSIONS, "Slider's Labyrinth Dimension ID", 4);
 	}
 
 	public int getAetherBiomeID()
 	{
-		return this.aetherBiomeID;
+		return this.getInt(this.BIOMES, "Aether Biome ID", 237);
 	}
 
 	public int getSliderLabyrinthBiomeID()
 	{
-		return this.sliderLabyrinthBiomeID;
+		return this.getInt(this.BIOMES, "Slider Labyrinth Biome ID", 238);
 	}
+
+	public boolean getDisplayInventoryPattern() { return this.getBoolean(this.GENERAL, "Display Inventory Pattern", true); }
+
 }

@@ -17,9 +17,12 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(name = AetherCore.MOD_NAME, modid = AetherCore.MOD_ID, version = AetherCore.MOD_VERSION, certificateFingerprint = AetherCore.MOD_FINGERPRINT)
+@Mod(name = AetherCore.MOD_NAME, modid = AetherCore.MOD_ID, version = AetherCore.MOD_VERSION, certificateFingerprint = AetherCore.MOD_FINGERPRINT, guiFactory = AetherCore.MOD_GUI_FACTORY)
 public class AetherCore implements IAetherServices
 {
+
+	protected static final String MOD_GUI_FACTORY = "com.gildedgames.aether.common.GuiFactoryAether";
+
 	protected static final String MOD_FINGERPRINT = "b9a9be44fb51751dd1aec1dbb881b6de1a086abc";
 
 	public static final String MOD_NAME = "Aether II";
@@ -51,7 +54,6 @@ public class AetherCore implements IAetherServices
 	public void onFMLPreInit(FMLPreInitializationEvent event)
 	{
 		AetherCore.CONFIG = new AetherConfig(event.getSuggestedConfigurationFile());
-		AetherCore.CONFIG.load();
 
 		AetherCore.PROXY.preInit(event);
 	}
