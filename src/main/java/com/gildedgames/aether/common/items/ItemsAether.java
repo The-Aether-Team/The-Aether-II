@@ -517,7 +517,7 @@ public class ItemsAether
 		equipmentRegistry.register(lesser_ring_of_growth, ItemRarity.COMMON, ItemEquipmentType.RING);
 		equipmentRegistry.register(winged_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
 		equipmentRegistry.register(life_coil, ItemRarity.COMMON, ItemEquipmentType.RING);
-		equipmentRegistry.register(iron_barbed_wire, ItemRarity.COMMON, ItemEquipmentType.RING);
+		equipmentRegistry.register(iron_barbed_wire, ItemRarity.COMMON, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(wisdom_bauble, ItemRarity.COMMON, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(bone_shard, ItemRarity.COMMON, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(moa_feather, ItemRarity.COMMON, ItemEquipmentType.CHARM);
