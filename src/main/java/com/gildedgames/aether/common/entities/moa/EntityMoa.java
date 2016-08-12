@@ -237,6 +237,16 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 	@Override
 	public boolean attackEntityAsMob(Entity entity)
 	{
+		if (entity instanceof EntityPlayer)
+		{
+			EntityPlayer player = (EntityPlayer) entity;
+
+			if (player.capabilities.isCreativeMode)
+			{
+				return super.attackEntityAsMob(entity);
+			}
+		}
+
 		entity.motionY = 0.8F;
 		entity.motionZ = this.getLookVec().zCoord;
 		entity.motionX = this.getLookVec().xCoord;
