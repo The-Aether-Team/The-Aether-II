@@ -76,6 +76,9 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 		this(world);
 
 		this.setGeneticSeed(geneticSeed);
+
+		this.setFatherSeed(geneticSeed);
+		this.setMotherSeed(geneticSeed);
 	}
 
 	public EntityMoa(World world, MoaNest familyNest)
@@ -106,7 +109,7 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 		this.tasks.addTask(10, new AIStayNearNest(this, 8, 0.25F));
 		this.tasks.addTask(12, new AIAvoidEntityAsChild(this, EntityPlayer.class, 5.0F, 0.3D, 0.3D));
 		this.tasks.addTask(13, new EntityAITempt(this, 0.25F, Items.WHEAT, false));
-		this.tasks.addTask(14, new EntityAIAttackMelee(this, 1.0D, true));
+		this.tasks.addTask(14, new EntityAIAttackMelee(this, 0.7D, true));
 		this.targetTasks.addTask(1, new AIProtectPack(this));
 	}
 
