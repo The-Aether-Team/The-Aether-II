@@ -15,7 +15,8 @@ public class TileEntitiesAether
 			MULTIBLOCK_DUMMY = "aether.multiblock_dummy",
 			LABYRINTH_TOTEM = "aether.labyrinth_totem",
 			LABYRINTH_DOOR = "aether.labyrinth_door",
-			LABYRINTH_CHEST_ID = "aether.labyrinth_chest";
+			LABYRINTH_CHEST_ID = "aether.labyrinth_chest",
+			MOA_EGG_ID = "aether.moa_egg";
 
 	public static void preInit()
 	{
@@ -27,6 +28,7 @@ public class TileEntitiesAether
 		GameRegistry.registerTileEntity(TileEntityLabyrinthTotem.class, LABYRINTH_TOTEM);
 		GameRegistry.registerTileEntity(TileEntityLabyrinthDoor.class, LABYRINTH_DOOR);
 		GameRegistry.registerTileEntity(TileEntityLabyrinthChest.class, LABYRINTH_CHEST_ID);
+		GameRegistry.registerTileEntity(TileEntityMoaEgg.class, MOA_EGG_ID);
 	}
 	
 }

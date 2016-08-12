@@ -19,7 +19,7 @@ public class GuiConfigAether extends GuiConfig
 
 	public GuiConfigAether(GuiScreen parent)
 	{
-		super(parent, GuiConfigAether.getConfigElements(), AetherCore.MOD_ID, false, false, GuiConfig.getAbridgedConfigPath(AetherCore.CONFIG.configuration.toString()));
+		super(parent, GuiConfigAether.getConfigElements(), AetherCore.MOD_ID, false, false, "Aether II Options");
 	}
 
 	private static List<IConfigElement> getConfigElements()

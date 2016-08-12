@@ -6,6 +6,8 @@ import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
 import com.gildedgames.aether.common.world.TeleporterAether;
 import com.gildedgames.util.io.ClassSerializer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -54,6 +56,8 @@ public class AetherCore implements IAetherServices
 	public void onFMLPreInit(FMLPreInitializationEvent event)
 	{
 		AetherCore.CONFIG = new AetherConfig(event.getSuggestedConfigurationFile());
+
+		MinecraftForge.EVENT_BUS.register(AetherCore.CONFIG);
 
 		AetherCore.PROXY.preInit(event);
 	}

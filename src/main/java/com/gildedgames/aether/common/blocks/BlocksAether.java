@@ -7,6 +7,8 @@ import com.gildedgames.aether.common.blocks.construction.BlockAetherSlab;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherStairs;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.blocks.construction.BlockAmbrosiumTorch;
+import com.gildedgames.aether.common.blocks.misc.BlockMoaEgg;
+import com.gildedgames.aether.common.blocks.natural.plants.*;
 import com.gildedgames.aether.common.blocks.util.BlockCustomBed;
 import com.gildedgames.aether.common.blocks.util.BlockCustomDoor;
 import com.gildedgames.aether.common.blocks.construction.BlockQuicksoilGlass;
@@ -48,11 +50,6 @@ import com.gildedgames.aether.common.blocks.natural.ores.BlockContinuumOre;
 import com.gildedgames.aether.common.blocks.natural.ores.BlockGravititeOre;
 import com.gildedgames.aether.common.blocks.natural.ores.BlockIcestoneOre;
 import com.gildedgames.aether.common.blocks.natural.ores.BlockZaniteOre;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.blocks.util.BlockCustom;
 import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummy;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -243,6 +240,10 @@ public class BlocksAether
 			carved_stone_stairs = new BlockAetherStairs(BlocksAether.carved_stone.getDefaultState().withProperty(BlockDivine.PROPERTY_IS_DIVINE, true)),
 			divine_carved_stone_stairs = new BlockAetherStairs(BlocksAether.carved_stone.getDefaultState().withProperty(BlockDivine.PROPERTY_IS_DIVINE, true));
 
+	public static final Block woven_skyroot_sticks = new BlockWovenSticks();
+
+	public static final BlockMoaEgg moa_egg = new BlockMoaEgg();
+
 	public static void preInit()
 	{
 		registerBlock("aether_dirt", BlocksAether.aether_dirt.setCreativeTab(AetherCreativeTabs.tabBlocks));
@@ -379,6 +380,9 @@ public class BlocksAether
 		registerBlock("carved_stone_stairs", BlocksAether.carved_stone_stairs.setCreativeTab(AetherCreativeTabs.tabBlocks));
 		registerBlock("divine_carved_stone_stairs", BlocksAether.divine_carved_stone_stairs.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
+		registerBlock("woven_skyroot_sticks", BlocksAether.woven_skyroot_sticks.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("moa_egg", BlocksAether.moa_egg.setCreativeTab(AetherCreativeTabs.tabBlocks));
+
 		registerHarvestLevels();
 	}
 
@@ -394,6 +398,7 @@ public class BlocksAether
 		skyroot_log.setHarvestLevel("axe", 0);
 		golden_oak_log.setHarvestLevel("axe", 0);
 		skyroot_planks.setHarvestLevel("axe", 0);
+		woven_skyroot_sticks.setHarvestLevel("axe", 0);
 
 		ambrosium_ore.setHarvestLevel("pickaxe", 0);
 		zanite_ore.setHarvestLevel("pickaxe", 1);
@@ -437,7 +442,6 @@ public class BlocksAether
 		icestone_slab.setHarvestLevel("pickaxe", 0);
 		labyrinth_capstone_slab.setHarvestLevel("pickaxe", 0);
 		labyrinth_wall_slab.setHarvestLevel("pickaxe", 0);
-
 	}
 
 	private static void registerBlock(String name, Block block, ItemBlock item)

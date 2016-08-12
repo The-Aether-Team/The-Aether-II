@@ -16,6 +16,7 @@ import com.gildedgames.aether.common.entities.living.*;
 import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
+import com.gildedgames.aether.common.entities.moa.EntityMoa;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
@@ -38,6 +39,7 @@ public class EntitiesAether
 		registerLivingEntity(EntityCarrionSprout.class, "carrion_sprout", 0xCCFFFF, 0x5D8BBB);
 		registerLivingEntity(EntityCockatrice.class, "cockatrice", 0xCCFFFF, 0x6b519c);
 		registerLivingEntity(EntityRam.class, "ram", 0xCCFFFF, 0xCCCCFF);
+		registerLivingEntity(EntityMoa.class, "moa", 0xCCFFFF, 0xCCCCFF);
 
 		registerLivingEntity(EntityFrostpineTotem.class, "frostpine_totem");
 		registerLivingEntity(EntityKraisith.class, "kraisith");

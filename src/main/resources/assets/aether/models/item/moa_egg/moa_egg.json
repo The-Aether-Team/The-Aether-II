@@ -1,0 +1,40 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "aether:items/moa_egg/base",
+		"layer1": "aether:items/moa_egg/beak",
+		"layer2": "aether:items/moa_egg/legs"
+	},
+	"overrides": [
+        {
+            "predicate": {
+                "curves": 1
+            },
+            "model": "aether:item/moa_egg/moa_egg_curves"
+        },
+        {
+            "predicate": {
+                "circles": 1
+            },
+            "model": "aether:item/moa_egg/moa_egg_circles"
+        },
+        {
+            "predicate": {
+                "ladder": 1
+            },
+            "model": "aether:item/moa_egg/moa_egg_ladder"
+        },
+        {
+            "predicate": {
+                "lines": 1
+            },
+            "model": "aether:item/moa_egg/moa_egg_lines"
+        },
+        {
+            "predicate": {
+                "spots": 1
+            },
+            "model": "aether:item/moa_egg/moa_egg_spots"
+        }
+    ]
+}

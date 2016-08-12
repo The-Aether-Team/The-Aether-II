@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"normal": [
+			{ "model": "aether:woven_skyroot_sticks" },
+			{ "model": "aether:woven_skyroot_sticks", "y": 90 },
+			{ "model": "aether:woven_skyroot_sticks", "y": 180 },
+			{ "model": "aether:woven_skyroot_sticks", "y": 270 }
+		]
+	}
+}

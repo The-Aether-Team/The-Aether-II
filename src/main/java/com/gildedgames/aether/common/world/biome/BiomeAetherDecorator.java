@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockAercloud.AercloudVarian
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
+import com.gildedgames.aether.common.entities.moa.MoaNest;
 import com.gildedgames.aether.common.world.features.*;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenPurpleAercloud;
@@ -120,6 +121,15 @@ public class BiomeAetherDecorator
 		int x, y, z;
 
 		int count;
+
+		for (count = 0; count < 5; count++)
+		{
+			x = random.nextInt(16) + 8;
+			y = random.nextInt(128);
+			z = random.nextInt(16) + 8;
+
+			new MoaNest(world, pos.add(x, y, z)).generate(world, random, 1 + random.nextInt(2), BlocksAether.woven_skyroot_sticks.getDefaultState());
+		}
 
 		// Lake Generator
 		if (random.nextInt(4) == 0)

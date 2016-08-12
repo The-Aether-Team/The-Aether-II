@@ -104,6 +104,8 @@ tile.aether.sentry_stone_stairs.name=Sentry Stone Stairs
 tile.aether.divine_sentry_stone_stairs.name=Divine Sentry Stone Stairs
 tile.aether.carved_stone_stairs.name=Carved Stone Stairs
 tile.aether.divine_carved_stone_stairs.name=Divine Carved Stone Stairs
+tile.aether.woven_skyroot_sticks.name=Woven Skyroot Sticks
+tile.aether.moa_egg.name=Moa Egg
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
@@ -289,6 +291,41 @@ item.aether.rot_bane.name=Rot Bane
 item.aether.continuum_talisman.name=Continuum Talisman
 item.aether.labyrinth_plans.name=Labyrinth Plans
 item.aether.skyroot_bed_item.name=Skyroot Bed
+item.aether.moa_egg_item.name=Moa Egg
+item.aether.rainbow_moa_egg.name=Rainbow Moa Egg
+
+moaColor.orange=Orange
+moaColor.gold=Gold
+moaColor.dullBrown=Dull Brown
+moaColor.orange=Orange
+moaColor.earth=Earth
+moaColor.darkEarth=Dark Earth
+moaColor.tan=Tan
+moaColor.darkTan=Dark Tan
+moaColor.purple=Purple
+moaColor.darkBrown=Dark Brown
+moaColor.darkPurple=Dark Purple
+moaColor.gray=Gray
+moaColor.swamp=Swamp
+moaColor.lightPink=Light Pink
+moaColor.lightPurple=Light Purple
+moaColor.lightSwamp=Light Swamp
+moaColor.dullYellow=Dull Yellow
+moaColor.yellow=Yellow
+moaColor.darkAqua=Dark Aqua
+moaColor.lightGray=Light Gray
+moaColor.lightTan=Light Tan
+moaColor.burgundy=Burgundy
+moaColor.dullSwamp=Dull Swamp
+moaColor.dullBlue=Dull Blue
+moaColor.blueGray=Blue Gray
+moaColor.yellowTan=Yellow Tan
+moaColor.aqua=Aqua
+moaColor.lightAqua=Light Aqua
+moaColor.blue=Blue
+moaColor.highTan=High Tan
+moaColor.jungle=Jungle
+moaColor.dullPurple=Dull Purple
 
 # Item Rarities
 item.rarity.common.name=§7§oCommon
@@ -361,6 +398,7 @@ entity.aether.aerbunny.name=Aerbunny
 entity.aether.carrion_sprout.name=Carrion Sprout
 entity.aether.cockatrice.name=Cockatrice
 entity.aether.ram.name=Ram
+entity.aether.moa.name=Moa
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether Blocks
@@ -393,7 +431,7 @@ gui.aether.slot.helmet=Helmet
 gui.aether.slot.chestplate=Chestplate
 gui.aether.slot.leggings=Leggings
 gui.aether.slot.boots=Boots
-gui.aether.slot.offhand=Off-hand
+gui.aether.slot.offhand=Off-Hand
 
 #Ability Tooltips
 ability.breatheUnderwater.name=Underwater Breathing

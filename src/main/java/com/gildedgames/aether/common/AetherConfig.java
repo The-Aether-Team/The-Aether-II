@@ -2,6 +2,8 @@ package com.gildedgames.aether.common;
 
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.io.File;
 
@@ -12,11 +14,15 @@ public class AetherConfig
 
 	private final ConfigCategory GENERAL, BIOMES, DIMENSIONS;
 
+	private int sliderLabyrinthDimID, aetherDimID;
+
+	private int aetherBiomeID, sliderLabyrinthBiomeID;
+
+	private boolean displayInventoryPattern;
+
 	public AetherConfig(File file)
 	{
 		this.configuration = new Configuration(file, true);
-
-		this.configuration.load();
 
 		this.GENERAL = this.configuration.getCategory(Configuration.CATEGORY_GENERAL);
 		this.BIOMES = this.configuration.getCategory("Biome IDs");
@@ -25,7 +31,32 @@ public class AetherConfig
 		this.BIOMES.setRequiresMcRestart(true);
 		this.DIMENSIONS.setRequiresMcRestart(true);
 
-		this.configuration.save();
+		this.loadAndSync();
+	}
+
+	private void loadAndSync()
+	{
+		this.aetherDimID = this.getInt(this.DIMENSIONS, "Aether Dimension ID", 3);
+		this.sliderLabyrinthDimID = this.getInt(this.DIMENSIONS, "Slider's Labyrinth Dimension ID", 4);
+
+		this.aetherBiomeID = this.getInt(this.BIOMES, "Aether Biome ID", 237);
+		this.sliderLabyrinthBiomeID = this.getInt(this.BIOMES, "Slider Labyrinth Biome ID", 238);
+
+		this.displayInventoryPattern = this.getBoolean(this.GENERAL, "Display Inventory Pattern", true);
+
+		if (this.configuration.hasChanged())
+		{
+			this.configuration.save();
+		}
+	}
+
+	@SubscribeEvent
+	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs)
+	{
+		if(eventArgs.getModID().equals(AetherCore.MOD_ID))
+		{
+			this.loadAndSync();
+		}
 	}
 
 	private int getInt(ConfigCategory category, String name, int defaultValue)
@@ -40,24 +71,24 @@ public class AetherConfig
 
 	public int getAetherDimID()
 	{
-		return this.getInt(this.DIMENSIONS, "Aether Dimension ID", 3);
+		return this.aetherDimID;
 	}
 
 	public int getSliderLabyrinthDimID()
 	{
-		return this.getInt(this.DIMENSIONS, "Slider's Labyrinth Dimension ID", 4);
+		return this.sliderLabyrinthDimID;
 	}
 
 	public int getAetherBiomeID()
 	{
-		return this.getInt(this.BIOMES, "Aether Biome ID", 237);
+		return this.aetherBiomeID;
 	}
 
 	public int getSliderLabyrinthBiomeID()
 	{
-		return this.getInt(this.BIOMES, "Slider Labyrinth Biome ID", 238);
+		return this.sliderLabyrinthBiomeID;
 	}
 
-	public boolean getDisplayInventoryPattern() { return this.getBoolean(this.GENERAL, "Display Inventory Pattern", true); }
+	public boolean getDisplayInventoryPattern() { return this.displayInventoryPattern; }
 
 }

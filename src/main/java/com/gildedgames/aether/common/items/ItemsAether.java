@@ -43,6 +43,7 @@ import com.gildedgames.aether.common.items.consumables.ItemSkyrootConsumableBuck
 import com.gildedgames.aether.common.items.consumables.ItemStomperPop;
 import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
 import com.gildedgames.aether.common.items.effects.ItemEffects;
+import com.gildedgames.aether.common.items.miscellaneous.ItemMoaEgg;
 import com.gildedgames.aether.common.items.miscellaneous.ItemShardOfLife;
 import com.gildedgames.aether.common.items.properties.ItemProperties;
 import com.gildedgames.aether.common.items.tools.*;
@@ -235,7 +236,7 @@ public class ItemsAether
 
 	public static ItemSkyrootBed skyroot_bed;
 
-
+	public static ItemMoaEgg moa_egg, rainbow_moa_egg;
 
 	public static void preInit()
 	{
@@ -471,6 +472,8 @@ public class ItemsAether
 		labyrinth_plans = registerItem("labyrinth_plans", new Item().setMaxStackSize(1), AetherCreativeTabs.tabAccessories);
 		skyroot_bed = registerItem("skyroot_bed_item", new ItemSkyrootBed(), AetherCreativeTabs.tabBlocks);
 
+		moa_egg = registerItem("moa_egg_item", new ItemMoaEgg(false));
+		rainbow_moa_egg = registerItem("rainbow_moa_egg", new ItemMoaEgg(true), CreativeTabs.MISC);
 
 		IEquipmentRegistry equipmentRegistry = AetherCore.INSTANCE.getEquipmentRegistry();
 

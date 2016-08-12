@@ -459,6 +459,10 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.carved_stone_stairs, "aether_stairs/carved_stone_stairs");
 		registerItemModels(BlocksAether.divine_carved_stone_stairs, "aether_stairs/divine_carved_stone_stairs");
 
+		registerItemModels(BlocksAether.woven_skyroot_sticks, "woven_skyroot_sticks");
+
+		registerItemModels(ItemsAether.moa_egg, "moa_egg/moa_egg");
+		registerItemModels(ItemsAether.rainbow_moa_egg, "rainbow_moa_egg");
 	}
 
 	private static void registerItemModels(Block block, String path)

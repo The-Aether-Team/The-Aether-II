@@ -8,6 +8,7 @@ import com.gildedgames.aether.client.renderer.ClientRenderHandler;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.AetherCreativeTabs;
 import com.gildedgames.aether.common.CommonProxy;
+import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.util.modules.tab.TabModule;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -49,6 +50,8 @@ public class ClientProxy extends CommonProxy
 		MinecraftForge.EVENT_BUS.register(new ClientRenderHandler());
 
 		TabModule.api().getInventoryGroup().registerClientTab(new TabEquipment.Client());
+
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemMoaEggColorHandler(), ItemsAether.moa_egg);
 	}
 
 	@Override

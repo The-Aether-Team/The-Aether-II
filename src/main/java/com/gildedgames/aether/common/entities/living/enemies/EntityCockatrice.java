@@ -111,6 +111,7 @@ public class EntityCockatrice extends EntityMob
 			this.motionY *= 0.63749999999999996D;
 		}
 	}
+
 	@Override
 	protected net.minecraft.util.SoundEvent getAmbientSound()
 	{

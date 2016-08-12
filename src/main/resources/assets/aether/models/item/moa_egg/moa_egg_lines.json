@@ -1,0 +1,9 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "aether:items/moa_egg/base",
+		"layer1": "aether:items/moa_egg/beak",
+		"layer2": "aether:items/moa_egg/legs",
+		"layer3": "aether:items/moa_egg/lines"
+	}
+}

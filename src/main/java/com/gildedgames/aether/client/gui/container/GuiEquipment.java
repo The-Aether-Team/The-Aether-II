@@ -138,27 +138,27 @@ public class GuiEquipment extends GuiContainer
 
 					if (slot.getSlotIndex() == dif + 1)
 					{
-						unlocalizedTooltip = "Off-Hand";
+						unlocalizedTooltip = "gui.aether.slot.offhand";
 					}
 
 					if (slot.getSlotIndex() == dif)
 					{
-						unlocalizedTooltip = "Helmet";
+						unlocalizedTooltip = "gui.aether.slot.helmet";
 					}
 
 					if (slot.getSlotIndex() == dif - 1)
 					{
-						unlocalizedTooltip = "Chestplate";
+						unlocalizedTooltip = "gui.aether.slot.chestplate";
 					}
 
 					if (slot.getSlotIndex() == dif - 2)
 					{
-						unlocalizedTooltip = "Leggings";
+						unlocalizedTooltip = "gui.aether.slot.leggings";
 					}
 
 					if (slot.getSlotIndex() == dif - 3)
 					{
-						unlocalizedTooltip = "Boots";
+						unlocalizedTooltip = "gui.aether.slot.boots";
 					}
 
 					break;
