@@ -110,7 +110,17 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 		this.tasks.addTask(12, new AIAvoidEntityAsChild(this, EntityPlayer.class, 5.0F, 0.3D, 0.3D));
 		this.tasks.addTask(13, new EntityAITempt(this, 0.25F, Items.WHEAT, false));
 		this.tasks.addTask(14, new EntityAIAttackMelee(this, 0.7D, true));
+
 		this.targetTasks.addTask(1, new AIProtectPack(this));
+	}
+
+	@Override
+	protected void applyEntityAttributes()
+	{
+		super.applyEntityAttributes();
+
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20);
 	}
 
 	@Override
@@ -128,15 +138,6 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 		this.dataManager.register(EntityMoa.FATHER_GENETIC_SEED, 0);
 		this.dataManager.register(EntityMoa.HAS_PARENTS, Boolean.FALSE);
 		this.dataManager.register(EntityMoa.SHOULD_RESET_GENETICS, Boolean.FALSE);
-	}
-
-	@Override
-	protected void applyEntityAttributes()
-	{
-		super.applyEntityAttributes();
-
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(1.0D);
 	}
 
 	public void initGenetics()
