@@ -381,7 +381,7 @@ public class BlocksAether
 		registerBlock("divine_carved_stone_stairs", BlocksAether.divine_carved_stone_stairs.setCreativeTab(AetherCreativeTabs.tabBlocks));
 
 		registerBlock("woven_skyroot_sticks", BlocksAether.woven_skyroot_sticks.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("moa_egg", BlocksAether.moa_egg.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("moa_egg", BlocksAether.moa_egg);
 
 		registerHarvestLevels();
 	}
