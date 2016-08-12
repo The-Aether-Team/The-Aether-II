@@ -13,6 +13,7 @@ import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -42,8 +43,8 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	@Override
 	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
 	{
-		List<ItemStack> drops = new java.util.ArrayList<>();
-		drops.add(item);
+		List<ItemStack> drops = new ArrayList<>();
+		drops.add(new ItemStack(this));
 
 		return drops;
 	}

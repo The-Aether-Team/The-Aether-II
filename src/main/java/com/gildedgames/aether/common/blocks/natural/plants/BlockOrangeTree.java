@@ -42,6 +42,19 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
+	public boolean canPlaceBlockAt(World world, BlockPos pos)
+	{
+		IBlockState soilBlock = world.getBlockState(pos.down());
+
+		if (soilBlock.getBlock() == this && soilBlock.getValue(PROPERTY_IS_TOP_BLOCK))
+		{
+			return false;
+		}
+
+		return this.isSuitableSoilBlock(soilBlock);
+	}
+
+	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
 	{
 		BlockPos topBlock = state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos : pos.up();
@@ -158,7 +171,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	@Override
 	public boolean isSuitableSoilBlock(IBlockState state)
 	{
-		return state.getBlock() == this || super.isSuitableSoilBlock(state);
+		return (state.getBlock() == this && !state.getValue(PROPERTY_IS_TOP_BLOCK)) || super.isSuitableSoilBlock(state);
 	}
 
 	private void dropOranges(World world, BlockPos pos)
