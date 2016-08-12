@@ -463,6 +463,8 @@ public class AetherItemModels
 
 		registerItemModels(ItemsAether.moa_egg, "moa_egg/moa_egg");
 		registerItemModels(ItemsAether.rainbow_moa_egg, "rainbow_moa_egg");
+
+		registerItemModels(BlocksAether.moa_egg, "moa_egg");
 	}
 
 	private static void registerItemModels(Block block, String path)

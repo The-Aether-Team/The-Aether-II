@@ -9,6 +9,7 @@ import com.gildedgames.aether.common.items.miscellaneous.ItemMoaEgg;
 import com.gildedgames.aether.common.tile_entities.TileEntityHolystoneFurnace;
 import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
 import com.google.common.collect.Lists;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -24,8 +25,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
+import static sun.audio.AudioPlayer.player;
 
 public class BlockMoaEgg extends BlockContainer
 {
@@ -61,7 +65,7 @@ public class BlockMoaEgg extends BlockContainer
 	}
 
 	@Override
-	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
+	public void onBlockClicked(World world, BlockPos pos, EntityPlayer player)
 	{
 		if (!player.capabilities.isCreativeMode)
 		{
@@ -82,8 +86,32 @@ public class BlockMoaEgg extends BlockContainer
 						moa1.setEggStolen(true);
 					}
 				}
+
+				ItemStack eggStack = new ItemStack(ItemsAether.moa_egg, 1, 0);
+
+				if (egg != null)
+				{
+					MoaGenetics genetics = MoaGenetics.getMixedResult(null, egg.fatherGeneticSeed, egg.motherGeneticSeed);
+					NBTTagCompound nbtTag = ItemMoaEgg.getNBTFromGenetics(genetics);
+					nbtTag.setInteger("geneticSeed", egg.fatherGeneticSeed);
+
+					nbtTag.setInteger("fatherGeneticSeed", egg.fatherGeneticSeed);
+					nbtTag.setInteger("motherGeneticSeed", egg.motherGeneticSeed);
+
+					eggStack.setTagCompound(nbtTag);
+				}
+
+				world.setBlockToAir(pos);
+
+				Block.spawnAsEntity(world, pos, eggStack);
 			}
 		}
+	}
+
+	@Override
+	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
+	{
+		this.onBlockClicked(world, pos, player);
 
 		return super.removedByPlayer(state, world, pos, player, willHarvest);
 	}
@@ -91,26 +119,7 @@ public class BlockMoaEgg extends BlockContainer
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		List<ItemStack> drops = Lists.newArrayList();
-
-		ItemStack eggStack = new ItemStack(ItemsAether.moa_egg, 1, 0);
-		TileEntityMoaEgg egg = (TileEntityMoaEgg) world.getTileEntity(pos);
-
-		if (egg != null)
-		{
-			MoaGenetics genetics = MoaGenetics.getMixedResult(null, egg.fatherGeneticSeed, egg.motherGeneticSeed);
-			NBTTagCompound nbtTag = ItemMoaEgg.getNBTFromGenetics(genetics);
-			nbtTag.setInteger("geneticSeed", egg.fatherGeneticSeed);
-
-			nbtTag.setInteger("fatherGeneticSeed", egg.fatherGeneticSeed);
-			nbtTag.setInteger("motherGeneticSeed", egg.motherGeneticSeed);
-
-			eggStack.setTagCompound(nbtTag);
-		}
-
-		drops.add(eggStack);
-
-		return drops;
+		return Collections.emptyList();
 	}
 
 	@Override

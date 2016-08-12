@@ -101,5 +101,7 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_fence_gate, new StateMap.Builder().ignore(BlockFenceGate.POWERED).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.labyrinth_door, new StateMap.Builder().ignore(BlockLabyrinthDoor.PROPERTY_FACING).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_bed, new StateMap.Builder().ignore(BlockBed.OCCUPIED).build());
+
+		ModelLoader.setCustomStateMapper(BlocksAether.moa_egg, new StateMap.Builder().build());
 	}
 }
