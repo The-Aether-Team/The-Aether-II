@@ -100,13 +100,13 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 	private void initAI()
 	{
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new AIPanicPack(this, 0.35F));
-		this.tasks.addTask(2, new EntityAIWander(this, 0.30F));
+		this.tasks.addTask(1, new AIPanicPack(this, 0.55F));
+		this.tasks.addTask(2, new EntityAIWander(this, 0.50F));
 		this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(5, new EntityAILookIdle(this));
-		this.tasks.addTask(6, new EntityAIMate(this, 0.25F));
-		this.tasks.addTask(8, new AIAnimalPack(this, 0.25F));
-		this.tasks.addTask(10, new AIStayNearNest(this, 8, 0.25F));
+		this.tasks.addTask(6, new EntityAIMate(this, 0.65F));
+		this.tasks.addTask(8, new AIAnimalPack(this, 0.55F));
+		this.tasks.addTask(10, new AIStayNearNest(this, 8, 0.55F));
 		this.tasks.addTask(12, new AIAvoidEntityAsChild(this, EntityPlayer.class, 5.0F, 0.3D, 0.3D));
 		this.tasks.addTask(13, new EntityAITempt(this, 0.25F, Items.WHEAT, false));
 		this.tasks.addTask(14, new EntityAIAttackMelee(this, 0.7D, true));
