@@ -1,36 +1,26 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.models.entities.living.ModelMoa;
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.biology.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.moa.EntityMoa;
+import com.gildedgames.aether.common.entities.moa.MoaGenetics;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
+import com.gildedgames.aether.common.player.PlayerAether;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import org.lwjgl.opengl.GL11;
 
-import java.awt.*;
-
 public class RenderMoa extends RenderLiving<EntityMoa>
 {
 
-	public static ResourceLocation FEATHERS = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/feathers.png");
-
-	public static ResourceLocation BODY = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/body.png");
-
-	public static ResourceLocation LEGS = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/legs.png");
-
-	public static ResourceLocation BEAK = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/beak.png");
-
-	public static ResourceLocation EYES = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/eyes.png");
-
-	public static ResourceLocation TEETH = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/teeth.png");
-
-	public static ResourceLocation TONGUE = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/tongue.png");
+	public static ResourceLocation FEATHER_TEXTURE = new ResourceLocation("aether", "textures/entities/moa/feathers.png");
 	
 	public RenderMoa(RenderManager manager)
 	{
@@ -74,6 +64,16 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		
 		GL11.glColor3f(red, green, blue);
 
+		/*if (entity.riddenByEntity != null && entity.riddenByEntity instanceof EntityPlayer)
+		{
+			PlayerAether playerInfo = PlayerAether.get((EntityPlayer) entity.riddenByEntity);
+
+			if (playerInfo.isDonator() && playerInfo.getDonatorChoice().getMoa() != DonatorMoa.OFF)
+			{
+				GL11.glColor3f(1.0F, 1.0F, 1.0F);
+			}
+		}*/
+
 		this.renderManager.renderEngine.bindTexture(texture);
 
 		for (ModelRenderer model : models)
@@ -91,6 +91,16 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		float blue = (color & 0xff) / 255F;
 		GL11.glColor3f(red, green, blue);
 
+		/*if (entity.riddenByEntity != null && entity.riddenByEntity instanceof EntityPlayer)
+		{
+			PlayerAether playerInfo = PlayerAether.get((EntityPlayer) entity.riddenByEntity);
+
+			if (playerInfo.isDonator() && playerInfo.getDonatorChoice().getMoa() != DonatorMoa.OFF)
+			{
+				GL11.glColor3f(1.0F, 1.0F, 1.0F);
+			}
+		}*/
+
 		this.renderManager.renderEngine.bindTexture(texture);
 		
 		model.LeftLeg2.isHidden = true;
@@ -104,77 +114,86 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		model.RightLeg2.isHidden = false;
 	}
 
-	private Color blend(Color c1, Color c2, float ratio)
-	{
-		if ( ratio > 1f ) ratio = 1f;
-		else if ( ratio < 0f ) ratio = 0f;
-		float iRatio = 1.0f - ratio;
-
-		int i1 = c1.getRGB();
-		int i2 = c2.getRGB();
-
-		int a1 = (i1 >> 24 & 0xff);
-		int r1 = ((i1 & 0xff0000) >> 16);
-		int g1 = ((i1 & 0xff00) >> 8);
-		int b1 = (i1 & 0xff);
-
-		int a2 = (i2 >> 24 & 0xff);
-		int r2 = ((i2 & 0xff0000) >> 16);
-		int g2 = ((i2 & 0xff00) >> 8);
-		int b2 = (i2 & 0xff);
-
-		int a = (int)((a1 * iRatio) + (a2 * ratio));
-		int r = (int)((r1 * iRatio) + (r2 * ratio));
-		int g = (int)((g1 * iRatio) + (g2 * ratio));
-		int b = (int)((b1 * iRatio) + (b2 * ratio));
-
-		return new Color( a << 24 | r << 16 | g << 8 | b );
-	}
-
 	protected void renderMoa(EntityLivingBase entity, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
 		EntityMoa moa = ((EntityMoa) entity);
-		MoaGenePool genePool = moa.getGenePool();
+		MoaGenetics genetics = moa.getGenetics();
 		ModelMoa model = ((ModelMoa) this.mainModel);
-
-		if (genePool == null || genePool.getFeathers() == null)
+		
+		if (genetics == null)
 		{
-			return;
+			MoaGenetics defaultGenetics = new MoaGenetics();
+
+			defaultGenetics.setBaseGenetics(new MoaGenetics.BaseGenetics("Default", 0x93C5ED, 0, 0));
+			
+			int beakLegColor = 0x898A81;
+			
+			defaultGenetics.legColor = beakLegColor;
+			defaultGenetics.beakColor = beakLegColor;
+			defaultGenetics.eyeColor = 0xffffff;
+			defaultGenetics.markColor = 0x3A4F5E;
+			
+			defaultGenetics.markBack = MoaGenetics.backMarks[0];
+			defaultGenetics.markHead = MoaGenetics.headMarks[0];
+			defaultGenetics.markTail = MoaGenetics.tailMarks[0];
+			defaultGenetics.markWing = MoaGenetics.wingMarks[0];
+			
+			genetics = defaultGenetics;
 		}
 		
 		GL11.glPushMatrix();
+		
+		//GL11.glRotatef((float)Math.toDegrees(moa.rotationYaw), 0, 0.5F, 0);
 
 		GL11.glDepthMask(true);
+		
+		PlayerAether playerInfo = null;
 
-		this.renderMoa(genePool.getFeathers().gene().data().getRGB(), BODY, entity, par2, par3, par4, par5, par6, par7);
+		/*if (moa.riddenByEntity != null && moa.riddenByEntity instanceof EntityPlayer)
+		{
+			playerInfo = PlayerAether.get((EntityPlayer) moa.riddenByEntity);
+			
+			if (playerInfo.isDonator() && playerInfo.getDonatorChoice().getMoa() != DonatorMoa.OFF)
+			{
+				genetics.body = playerInfo.getDonatorChoice().getMoa().resourceLocation;
+				genetics.legs = playerInfo.getDonatorChoice().getMoa().resourceLocation;
+			}
+		}*/
 
-		this.renderMoa(genePool.getKeratin().gene().data().getRGB(), LEGS, entity, par7, model.LeftLeg1, model.RightLeg1, model.LeftLeg2, model.RightLeg2, model.FootLeft, model.FootRight, model.Toe1Left, model.Toe1Right, model.Toe2Left, model.Toe2Right);
+		this.renderMoa(genetics.bodyColor, genetics.body, entity, par2, par3, par4, par5, par6, par7);
 
-		this.renderMoa(genePool.getKeratin().gene().data().getRGB(), BEAK, entity, par7, model.Jaw, model.Head);
-		this.renderMoa(genePool.getEyes().gene().data().getRGB(), EYES, entity, par7, model.Head);
+		this.renderMoa(genetics.legColor, genetics.legs, entity, par7, model.LeftLeg1, model.RightLeg1, model.LeftLeg2, model.RightLeg2, model.FootLeft, model.FootRight, model.Toe1Left, model.Toe1Right, model.Toe2Left, model.Toe2Right);
+		
+		/*if (playerInfo != null && playerInfo.isDonator() && playerInfo.getDonatorChoice().getMoa() != DonatorMoa.OFF)
+		{
+			return;
+		}*/
+
+		this.renderMoa(genetics.beakColor, genetics.beak, entity, par7, model.Jaw, model.Head);
+		this.renderMoa(genetics.eyeColor, genetics.eye, entity, par7, model.Head);
 
 		GL11.glScalef(1.001f, 1.001f, 1.001f);
 		GL11.glTranslatef(0.0f, -0.001f, 0.001f);
 		
-		Color patternColor = this.blend(genePool.getPatterns().gene().data(), genePool.getFeathers().gene().data(), 0.5F);
-
-		this.renderMoa(patternColor.getRGB(), genePool.getMarks().gene().getHead(), entity, par7, model.Head);
-
+		this.renderMoa(genetics.markColor, genetics.markHead, entity, par7, model.Head);
+		
 		GL11.glTranslatef(0.0f, 0.0f, -0.001f);
+		
+		this.renderMoa(genetics.markColor, genetics.markBack, entity, par7, model.Body, model.Chest);
+		this.renderMoa(genetics.markColor, genetics.markWing, entity, par7, model.LeftWing, model.RightWing);
 
-		this.renderMoa(patternColor.getRGB(), genePool.getMarks().gene().getBack(), entity, par7, model.Body, model.Chest);
-		this.renderMoa(patternColor.getRGB(), genePool.getMarks().gene().getWing(), entity, par7, model.LeftWing, model.RightWing);
+		this.renderMoa(genetics.markColor, genetics.markTail, entity, par7, model.TailLeft, model.TailMiddle, model.TailRight);
 		
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
-		this.renderManager.renderEngine.bindTexture(TONGUE);
+		this.renderManager.renderEngine.bindTexture(genetics.tongue);
 		model.Jaw.render(par7);
 		
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
-		this.renderManager.renderEngine.bindTexture(TEETH);
+		this.renderManager.renderEngine.bindTexture(genetics.teeth);
 		model.Teeth.render(par7);
 		
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
-		this.renderManager.renderEngine.bindTexture(LEGS);
+		this.renderManager.renderEngine.bindTexture(genetics.legs);
 		model.Claw1Left.render(par7);
 		model.Claw2Left.render(par7);
 		model.Claw3Left.render(par7);
@@ -185,21 +204,17 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		/*if (moa.getSaddled())
 		{
 			GL11.glColor3f(1.0f, 1.0f, 1.0f);
-			this.renderManager.renderEngine.bindTexture(genePool.saddle);
+			this.renderManager.renderEngine.bindTexture(genetics.saddle);
 			model.Body.render(par7);
 			model.Chest.render(par7);
 		}*/
 		
 		if (moa.getGender() == AnimalGender.MALE)
 		{
-			this.renderMoa(genePool.getFeathers().gene().data().getRGB(), FEATHERS, entity, par7, model.feather1, model.feather2, model.feather3, model.feather4);
+			this.renderMoa(genetics.bodyColor, RenderMoa.FEATHER_TEXTURE, entity, par7, model.feather1, model.feather2, model.feather3, model.feather4);
 		}
 
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
-
-		//GL11.glTranslatef(0.0f, -0.1f, 0.0f);
-
-		//this.renderMoa(patternColor.getRGB(), genePool.getMarks().gene().getTail(), entity, par7, model.TailLeft, model.TailRight);
 
 		GL11.glPopMatrix();
 	}

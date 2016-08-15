@@ -1,9 +1,7 @@
 package com.gildedgames.aether.common.entities.ai.moa;
 
-import com.gildedgames.aether.api.biology.BiologyUtil;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockWovenSticks;
-import com.gildedgames.aether.common.entities.biology.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.moa.EntityMoa;
 import com.gildedgames.aether.common.entities.moa.MoaNest;
 import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
@@ -17,16 +15,19 @@ public class AIMoaLayEgg extends EntityAIBase
 	public World world;
 	
 	public EntityMoa mother;
-
+	
+	public int motherGeneticSeed, fatherGeneticSeed;
+	
 	public float moveSpeed;
 	
 	public boolean hasLayedEgg;
 
-	public AIMoaLayEgg(EntityMoa mother, float moveSpeed)
+	public AIMoaLayEgg(EntityMoa mother, int motherGeneticSeed, int fatherGeneticSeed, float moveSpeed)
 	{
 		this.world = mother.worldObj;
 		this.mother = mother;
-
+		this.motherGeneticSeed = motherGeneticSeed;
+		this.fatherGeneticSeed = fatherGeneticSeed;
 		this.moveSpeed = moveSpeed;
 	}
 
@@ -84,10 +85,8 @@ public class AIMoaLayEgg extends EntityAIBase
 			
 			if (egg != null)
 			{
-				MoaGenePool teGenes = MoaGenePool.get(egg);
-				MoaGenePool entityGenes = this.mother.getGenePool();
-
-				teGenes.transformFromParents(BiologyUtil.getRandomSeed(this.mother.getEntityWorld()), entityGenes.getFatherSeed(), entityGenes.getMotherSeed());
+				egg.setMotherSeed(this.motherGeneticSeed);
+				egg.setFatherSeed(this.fatherGeneticSeed);
 			}
 
 			this.mother.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.mother.getRNG().nextFloat() - this.mother.getRNG().nextFloat()) * 0.2F + 1.0F);

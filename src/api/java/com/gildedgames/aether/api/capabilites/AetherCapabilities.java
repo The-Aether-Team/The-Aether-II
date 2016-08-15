@@ -1,6 +1,5 @@
 package com.gildedgames.aether.api.capabilites;
 
-import com.gildedgames.aether.api.biology.GenePool;
 import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.api.items.IItemEffectsCapability;
 import com.gildedgames.aether.api.items.IItemPropertiesCapability;
@@ -10,7 +9,6 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 
 public class AetherCapabilities
 {
-
 	@CapabilityInject(IItemEffectsCapability.class)
 	public static final Capability<IItemEffectsCapability> ITEM_EFFECTS = null;
 
@@ -22,8 +20,4 @@ public class AetherCapabilities
 
 	@CapabilityInject(IEntityEffectsCapability.class)
 	public static final Capability<IEntityEffectsCapability> ENTITY_EFFECTS = null;
-
-	@CapabilityInject(GenePool.class)
-	public static final Capability<GenePool> GENE_POOL = null;
-
 }

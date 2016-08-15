@@ -1,8 +1,7 @@
 package com.gildedgames.aether.common.entities.moa;
 
-import com.gildedgames.aether.api.biology.BiologyUtil;
 import com.gildedgames.aether.common.entities.ai.moa.*;
-import com.gildedgames.aether.common.entities.biology.moa.MoaGenePool;
+import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
 import com.gildedgames.aether.common.entities.util.EntityGroup;
 import com.gildedgames.aether.common.entities.util.EntityGroupMember;
@@ -17,21 +16,36 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class EntityMoa extends EntityAnimal implements EntityGroupMember
 {
 
-	private static final DataParameter<Integer> REMAINING_JUMPS = EntityDataManager.<Integer>createKey(EntityMoa.class, DataSerializers.VARINT);
+	private MoaGenetics genetics;
 
-	private static final DataParameter<Boolean> EGG_STOLEN = EntityDataManager.<Boolean>createKey(EntityMoa.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Integer> MAX_JUMPS = new DataParameter<>(16, DataSerializers.VARINT);
 
-	private static final DataParameter<Boolean> RAISED_BY_PLAYER = EntityDataManager.<Boolean>createKey(EntityMoa.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Integer> REMAINING_JUMPS = new DataParameter<>(17, DataSerializers.VARINT);
 
-	private static final DataParameter<Boolean> GENDER = EntityDataManager.<Boolean>createKey(EntityMoa.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> EGG_STOLEN = new DataParameter<>(18, DataSerializers.BOOLEAN);
+
+	private static final DataParameter<Boolean> RAISED_BY_PLAYER = new DataParameter<>(19, DataSerializers.BOOLEAN);
+
+	private static final DataParameter<Boolean> GENDER = new DataParameter<>(20, DataSerializers.BOOLEAN);
+
+	private static final DataParameter<Integer> GENETIC_SEED = new DataParameter<>(21, DataSerializers.VARINT);
+
+	private static final DataParameter<Integer> MOTHER_GENETIC_SEED = new DataParameter<>(22, DataSerializers.VARINT);
+
+	private static final DataParameter<Integer> FATHER_GENETIC_SEED = new DataParameter<>(23, DataSerializers.VARINT);
+
+	private static final DataParameter<Boolean> HAS_PARENTS = new DataParameter<>(24, DataSerializers.BOOLEAN);
+
+	private static final DataParameter<Boolean> SHOULD_RESET_GENETICS = new DataParameter<>(25, DataSerializers.BOOLEAN);
 
 	public float wingRotation, destPos, prevDestPos, prevWingRotation;
 
@@ -51,6 +65,8 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 
 		this.familyNest = new MoaNest(world);
 
+		this.setGeneticSeed(MoaGenetics.getRandomGeneticSeed(world));
+
 		this.setSize(1.0F, 2.0F);
 		this.stepHeight = 1.0F;
 	}
@@ -59,7 +75,10 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 	{
 		this(world);
 
-		this.getGenePool().transformFromSeed(geneticSeed);
+		this.setGeneticSeed(geneticSeed);
+
+		this.setFatherSeed(geneticSeed);
+		this.setMotherSeed(geneticSeed);
 	}
 
 	public EntityMoa(World world, MoaNest familyNest)
@@ -74,12 +93,8 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 	{
 		this(world, familyNest);
 
-		this.getGenePool().transformFromParents(BiologyUtil.getRandomSeed(world), fatherSeed, motherSeed);
-	}
-
-	public MoaGenePool getGenePool()
-	{
-		return MoaGenePool.get(this);
+		this.setFatherSeed(fatherSeed);
+		this.setMotherSeed(motherSeed);
 	}
 
 	private void initAI()
@@ -113,10 +128,33 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 	{
 		super.entityInit();
 
+		this.dataManager.register(EntityMoa.MAX_JUMPS, 0);
 		this.dataManager.register(EntityMoa.REMAINING_JUMPS, 0);
 		this.dataManager.register(EntityMoa.EGG_STOLEN, Boolean.FALSE);
 		this.dataManager.register(EntityMoa.RAISED_BY_PLAYER, Boolean.FALSE);
 		this.dataManager.register(EntityMoa.GENDER, Boolean.FALSE);
+		this.dataManager.register(EntityMoa.GENETIC_SEED, 0);
+		this.dataManager.register(EntityMoa.MOTHER_GENETIC_SEED, 0);
+		this.dataManager.register(EntityMoa.FATHER_GENETIC_SEED, 0);
+		this.dataManager.register(EntityMoa.HAS_PARENTS, Boolean.FALSE);
+		this.dataManager.register(EntityMoa.SHOULD_RESET_GENETICS, Boolean.FALSE);
+	}
+
+	public void initGenetics()
+	{
+		if (this.hasParents())
+		{
+			MoaGenetics fatherGenetics = MoaGenetics.getFromSeed(this.worldObj, this.getFatherSeed());
+			MoaGenetics motherGenetics = MoaGenetics.getFromSeed(this.worldObj, this.getMotherSeed());
+
+			this.genetics = MoaGenetics.getMixedResult(this.worldObj, fatherGenetics, motherGenetics);
+		}
+		else
+		{
+			this.genetics = MoaGenetics.getFromSeed(this.worldObj, this.getGeneticSeed());
+		}
+
+		this.setMaxJumps(this.genetics.jumps);
 	}
 
 	@Override
@@ -124,10 +162,21 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 	{
 		super.onUpdate();
 
-		if (!this.addedBreedingTask)
+		if (this.genetics == null || this.shouldResetGenetics())
 		{
-			this.tasks.addTask(9, new AIMoaPackBreeding(this, 0.25F));
+			this.initGenetics();
+		}
+
+		if (this.hasParents() && this.genetics == null)
+		{
+			this.initGenetics();
+		}
+
+		if (!this.addedBreedingTask || this.shouldResetGenetics())
+		{
+			this.tasks.addTask(9, new AIMoaPackBreeding(this, this.getGeneticSeed(), this.getGeneticSeed(), 0.25F));
 			this.addedBreedingTask = true;
+			this.setResetGenetics(false);
 		}
 
 		if (this.isJumping)
@@ -213,7 +262,17 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 	{
 		super.writeEntityToNBT(nbt);
 
+		nbt.setInteger("geneticSeed", this.getGeneticSeed());
+
+		nbt.setBoolean("hasParents", this.hasParents());
+		nbt.setBoolean("refreshGenetics", this.shouldResetGenetics());
 		nbt.setBoolean("playerGrown", this.isRaisedByPlayer());
+
+		if (this.hasParents())
+		{
+			nbt.setInteger("fatherSeed", this.getFatherSeed());
+			nbt.setInteger("motherSeed", this.getMotherSeed());
+		}
 
 		if (this.getGender() != null)
 		{
@@ -229,6 +288,16 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 	public void readEntityFromNBT(NBTTagCompound nbt)
 	{
 		super.readEntityFromNBT(nbt);
+
+		this.setGeneticSeed(nbt.getInteger("geneticSeed"));
+
+		if (nbt.getBoolean("hasParents"))
+		{
+			this.setFatherSeed(nbt.getInteger("fatherSeed"));
+			this.setMotherSeed(nbt.getInteger("motherSeed"));
+		}
+
+		this.setResetGenetics(nbt.getBoolean("refreshGenetics"));
 
 		this.setRaisedByPlayer(nbt.getBoolean("playerGrown"));
 
@@ -270,6 +339,21 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 		this.dataManager.set(EntityMoa.EGG_STOLEN, flag);
 	}
 
+	public boolean shouldResetGenetics()
+	{
+		return this.dataManager.get(EntityMoa.SHOULD_RESET_GENETICS);
+	}
+
+	public void resetGenetics()
+	{
+		this.setResetGenetics(true);
+	}
+
+	private void setResetGenetics(boolean flag)
+	{
+		this.dataManager.set(EntityMoa.SHOULD_RESET_GENETICS, flag);
+	}
+
 	public boolean isRaisedByPlayer()
 	{
 		return this.dataManager.get(EntityMoa.RAISED_BY_PLAYER);
@@ -290,6 +374,54 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 		this.dataManager.set(EntityMoa.GENDER, gender == AnimalGender.MALE ? true : false);
 	}
 
+	public int getGeneticSeed()
+	{
+		return this.dataManager.get(EntityMoa.GENETIC_SEED);
+	}
+
+	public void setGeneticSeed(int seed)
+	{
+		this.dataManager.set(EntityMoa.GENETIC_SEED, seed);
+	}
+
+	public int getFatherSeed()
+	{
+		return this.dataManager.get(EntityMoa.FATHER_GENETIC_SEED);
+	}
+
+	public void setFatherSeed(int seed)
+	{
+		this.dataManager.set(EntityMoa.FATHER_GENETIC_SEED, seed);
+
+		this.setHasParents(true);
+
+		this.resetGenetics();
+	}
+
+	public int getMotherSeed()
+	{
+		return this.dataManager.get(EntityMoa.MOTHER_GENETIC_SEED);
+	}
+
+	public void setMotherSeed(int seed)
+	{
+		this.dataManager.set(EntityMoa.MOTHER_GENETIC_SEED, seed);
+
+		this.setHasParents(true);
+
+		this.resetGenetics();
+	}
+
+	public boolean hasParents()
+	{
+		return this.dataManager.get(EntityMoa.HAS_PARENTS);
+	}
+
+	private void setHasParents(boolean flag)
+	{
+		this.dataManager.set(EntityMoa.HAS_PARENTS, flag);
+	}
+
 	public int getRemainingJumps()
 	{
 		return this.dataManager.get(EntityMoa.REMAINING_JUMPS);
@@ -298,6 +430,21 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 	private void setRemainingJumps(int jumps)
 	{
 		this.dataManager.set(EntityMoa.REMAINING_JUMPS, jumps);
+	}
+
+	public int getMaxJumps()
+	{
+		return this.dataManager.get(EntityMoa.MAX_JUMPS);
+	}
+
+	public void setMaxJumps(int maxJumps)
+	{
+		this.dataManager.set(EntityMoa.MAX_JUMPS, maxJumps);
+	}
+
+	public MoaGenetics getGenetics()
+	{
+		return this.genetics;
 	}
 
 	public MoaNest getFamilyNest()
@@ -345,7 +492,7 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 		{
 			EntityMoa mate = (EntityMoa) matingAnimal;
 
-			this.tasks.addTask(7, new AIMoaLayEgg(this, 0.35F));
+			this.tasks.addTask(7, new AIMoaLayEgg(this, this.getGeneticSeed(), mate.getGeneticSeed(), 0.35F));
 
 			this.setGrowingAge(6000);
 			mate.setGrowingAge(6000);
@@ -365,9 +512,14 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 	{
 		ItemStack moaEgg = new ItemStack(ItemsAether.moa_egg);
 
-		MoaGenePool stackGenes = MoaGenePool.get(moaEgg);
+		MoaGenetics genetics = MoaGenetics.getMixedResult(this.worldObj, this.getFatherSeed(), this.getMotherSeed());
+		NBTTagCompound nbtTag = ItemMoaEgg.getNBTFromGenetics(genetics);
+		nbtTag.setInteger("geneticSeed", this.getGeneticSeed());
 
-		stackGenes.transformFromParents(this.getGenePool().getSeed(), this.getGenePool().getFatherSeed(), this.getGenePool().getMotherSeed());
+		nbtTag.setInteger("fatherGeneticSeed", this.getFatherSeed());
+		nbtTag.setInteger("motherGeneticSeed", this.getMotherSeed());
+
+		moaEgg.setTagCompound(nbtTag);
 
 		return moaEgg;
 	}

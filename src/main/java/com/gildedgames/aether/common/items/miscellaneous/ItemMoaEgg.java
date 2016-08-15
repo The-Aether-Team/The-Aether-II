@@ -1,9 +1,8 @@
 package com.gildedgames.aether.common.items.miscellaneous;
 
-import com.gildedgames.aether.api.biology.BiologyUtil;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.biology.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.moa.EntityMoa;
+import com.gildedgames.aether.common.entities.moa.MoaGenetics;
 import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -45,13 +44,16 @@ public class ItemMoaEgg extends Item
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List creativeList, boolean par4)
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List creativeList, boolean par4)
 	{
-		MoaGenePool genePool = MoaGenePool.get(stack);
+		NBTTagCompound tag = par1ItemStack.getTagCompound();
 
-		if (genePool != null && genePool.getFeathers() != null)
+		if (tag != null)
 		{
-			creativeList.add(genePool.getWingStrength().gene().data() + " Jumps");
+			if (tag.hasKey("jumps"))
+			{
+				creativeList.add(tag.getInteger("jumps") + " Jumps");
+			}
 		}
 	}
 
@@ -78,25 +80,19 @@ public class ItemMoaEgg extends Item
 			{
 				if (!world.isRemote)
 				{
-					EntityMoa moa = new EntityMoa(world, BiologyUtil.getRandomSeed(world));
+					EntityMoa moa = new EntityMoa(world);
 					moa.setPosition(pos.getX() + 0.5F, pos.getY() + (moa.height / 2), pos.getZ() + 0.5F);
 
-					MoaGenePool stackGenePool = MoaGenePool.get(stack);
+					if (stack.getTagCompound() != null)
+					{
+						moa.setGeneticSeed(stack.getTagCompound().getInteger("fatherGeneticSeed"));
 
-					moa.setRaisedByPlayer(true);
+						moa.setFatherSeed(stack.getTagCompound().getInteger("fatherGeneticSeed"));
+						moa.setMotherSeed(stack.getTagCompound().getInteger("motherGeneticSeed"));
+						moa.setRaisedByPlayer(true);
+					}
 
 					world.spawnEntityInWorld(moa);
-
-					MoaGenePool genePool = moa.getGenePool();
-
-					if (this.creativeEgg)
-					{
-						genePool.transformFromSeed(BiologyUtil.getRandomSeed(world));
-					}
-					else
-					{
-						genePool.transformFromParents(stackGenePool.getSeed(), stackGenePool.getFatherSeed(), stackGenePool.getMotherSeed());
-					}
 				}
 
 				--stack.stackSize;
@@ -110,13 +106,10 @@ public class ItemMoaEgg extends Item
 
 				TileEntityMoaEgg egg = (TileEntityMoaEgg) world.getTileEntity(pos.add(0, yOffset, 0));
 
-				if (egg != null)
+				if (egg != null && stack.getTagCompound() != null)
 				{
-					MoaGenePool stackGenes = MoaGenePool.get(stack);
-					MoaGenePool teGenes = MoaGenePool.get(egg);
-
-					teGenes.transformFromParents(stackGenes.getSeed(), stackGenes.getFatherSeed(), stackGenes.getMotherSeed());
-
+					egg.setFatherSeed(stack.getTagCompound().getInteger("fatherGeneticSeed"));
+					egg.setMotherSeed(stack.getTagCompound().getInteger("motherGeneticSeed"));
 					egg.setPlayerPlaced();
 				}
 
@@ -127,6 +120,17 @@ public class ItemMoaEgg extends Item
 		}
 
 		return EnumActionResult.PASS;
+	}
+
+	public static NBTTagCompound getNBTFromGenetics(MoaGenetics genetics)
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+
+		genetics.writeToNBT(nbt);
+
+		nbt.setBoolean("genericDisplay", false);
+
+		return nbt;
 	}
 
 	@Override
@@ -167,22 +171,22 @@ public class ItemMoaEgg extends Item
 		@SideOnly(Side.CLIENT)
 		public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
 		{
-			if (stack != null)
+			if (stack != null && stack.getTagCompound() != null)
 			{
-				MoaGenePool genePool = MoaGenePool.get(stack);
+				String mark = this.formatToGetName(stack.getTagCompound().getString("markBack"));
 
-				if (genePool.getMarks() != null)
+				if (mark.equals(this.propertyName))
 				{
-					String mark = genePool.getMarks().gene().getResourceName();
-
-					if (mark.equals(this.propertyName))
-					{
-						return 1.0F;
-					}
+					return 1.0F;
 				}
 			}
 
 			return 0.0F;
+		}
+
+		private final String formatToGetName(String resourcePath)
+		{
+			return resourcePath.substring(resourcePath.lastIndexOf("/") + 1, resourcePath.length()).replace(".png", "");
 		}
 
 	}
