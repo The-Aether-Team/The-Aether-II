@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.items.miscellaneous;
 
-import com.gildedgames.aether.api.biology.BiologyUtil;
+import com.gildedgames.aether.api.genes.BiologyUtil;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.biology.moa.MoaGenePool;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.moa.EntityMoa;
 import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
 import net.minecraft.block.SoundType;
@@ -13,9 +13,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -51,7 +51,13 @@ public class ItemMoaEgg extends Item
 
 		if (genePool != null && genePool.getFeathers() != null)
 		{
-			creativeList.add(genePool.getWingStrength().gene().data() + " Jumps");
+			creativeList.add("\u2022 " + genePool.getFeathers().gene().localizedName() + " " + I18n.format("moa.feathers"));
+			creativeList.add("\u2022 " + genePool.getKeratin().gene().localizedName() + " " + I18n.format("moa.keratin"));
+			creativeList.add("\u2022 " + genePool.getEyes().gene().localizedName() + " " + I18n.format("moa.eyes"));
+
+			creativeList.add("");
+
+			creativeList.add( TextFormatting.YELLOW + "" + TextFormatting.ITALIC + "" + genePool.getWingStrength().gene().data() + " " + I18n.format("moa.jumps"));
 		}
 	}
 
@@ -132,11 +138,11 @@ public class ItemMoaEgg extends Item
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		NBTTagCompound tag = stack.getTagCompound();
+		MoaGenePool genePool = MoaGenePool.get(stack);
 
-		if (tag != null && stack.getTagCompound().hasKey("name") && !this.creativeEgg)
+		if (genePool.getMarks() != null && !this.creativeEgg)
 		{
-			return I18n.format(tag.getString("name")) + " " + I18n.format(super.getUnlocalizedName(stack) + ".name");
+			return genePool.getMarks().gene().localizedName() + " " + I18n.format(super.getUnlocalizedName(stack) + ".name");
 		}
 
 		return super.getUnlocalizedName();

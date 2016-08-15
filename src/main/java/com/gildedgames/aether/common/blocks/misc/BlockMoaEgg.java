@@ -1,11 +1,10 @@
 package com.gildedgames.aether.common.blocks.misc;
 
-import com.gildedgames.aether.common.entities.biology.moa.MoaGenePool;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.moa.EntityMoa;
 import com.gildedgames.aether.common.entities.moa.MoaNest;
 import com.gildedgames.aether.common.entities.util.EntityGroup;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.miscellaneous.ItemMoaEgg;
 import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -15,7 +14,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;

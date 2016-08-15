@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.tile_entities;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.biology.moa.MoaGenePool;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.moa.EntityMoa;
 import com.gildedgames.aether.common.entities.moa.MoaNest;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
@@ -35,6 +35,11 @@ public class TileEntityMoaEgg extends TileEntity implements ITickable
 		if (this.worldObj.isRemote)
 		{
 			return;
+		}
+
+		if (this.ticksExisted <= 0)
+		{
+			this.sendUpdates();
 		}
 
 		if (this.secondsUntilHatch <= -1)

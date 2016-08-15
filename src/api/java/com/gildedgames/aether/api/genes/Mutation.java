@@ -1,4 +1,4 @@
-package com.gildedgames.aether.api.biology;
+package com.gildedgames.aether.api.genes;
 
 import com.google.common.base.Supplier;
 

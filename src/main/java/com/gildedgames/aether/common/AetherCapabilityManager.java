@@ -1,14 +1,14 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.api.biology.GenePool;
-import com.gildedgames.aether.api.biology.GenePoolStorage;
+import com.gildedgames.aether.api.genes.GenePool;
+import com.gildedgames.aether.api.genes.GenePoolStorage;
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
-import com.gildedgames.aether.api.biology.GenePoolProvider;
-import com.gildedgames.aether.common.entities.biology.moa.MoaGenePool;
-import com.gildedgames.aether.common.entities.biology.moa.UntrackedMoaGenePool;
+import com.gildedgames.aether.api.genes.GenePoolProvider;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
+import com.gildedgames.aether.common.entities.genes.moa.UntrackedMoaGenePool;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import com.gildedgames.aether.common.entities.effects.EntityEffectsProvider;
 import com.gildedgames.aether.common.entities.moa.EntityMoa;
@@ -25,7 +25,6 @@ import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -36,8 +35,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Collections;
 import java.util.List;
-
-import static com.gildedgames.aether.common.entities.effects.EntityEffects.get;
 
 public class AetherCapabilityManager
 {

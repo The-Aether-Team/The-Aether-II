@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.capabilites;
 
-import com.gildedgames.aether.api.biology.GenePool;
+import com.gildedgames.aether.api.genes.GenePool;
 import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.api.items.IItemEffectsCapability;
 import com.gildedgames.aether.api.items.IItemPropertiesCapability;

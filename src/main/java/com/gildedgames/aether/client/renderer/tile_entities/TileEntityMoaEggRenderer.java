@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.renderer.tile_entities;
 
 import com.gildedgames.aether.client.models.entities.tile.ModelMoaEgg;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.biology.moa.MoaGenePool;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -52,7 +52,7 @@ public class TileEntityMoaEggRenderer extends TileEntitySpecialRenderer<TileEnti
 		
 		model.renderAll(0.0625F);
 		
-		this.renderColor(genePool.getPatterns().gene().data().getRGB());
+		this.renderColor(genePool.getFeathers().gene().data().darker().getRGB());
 		
 		this.bindTexture(HEAD_MARKING);
 		

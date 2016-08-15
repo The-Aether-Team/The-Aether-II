@@ -1,9 +1,8 @@
 package com.gildedgames.aether.client;
 
-import com.gildedgames.aether.common.entities.biology.moa.MoaGenePool;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 
 public class ItemMoaEggColorHandler implements IItemColor
 {
@@ -25,11 +24,11 @@ public class ItemMoaEggColorHandler implements IItemColor
 			}
 			else if (tintIndex == 2)
 			{
-				return genePool.getKeratin().gene().data().getRGB();
+				return genePool.getEyes().gene().data().getRGB();
 			}
 			else if (tintIndex == 3)
 			{
-				return genePool.getPatterns().gene().data().getRGB();
+				return genePool.getFeathers().gene().data().darker().getRGB();
 			}
 		}
 

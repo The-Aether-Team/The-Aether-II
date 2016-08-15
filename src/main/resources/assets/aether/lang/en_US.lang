@@ -294,38 +294,38 @@ item.aether.skyroot_bed_item.name=Skyroot Bed
 item.aether.moa_egg_item.name=Moa Egg
 item.aether.rainbow_moa_egg.name=Rainbow Moa Egg
 
-moaColor.orange=Orange
-moaColor.gold=Gold
-moaColor.dullBrown=Dull Brown
-moaColor.orange=Orange
-moaColor.earth=Earth
-moaColor.darkEarth=Dark Earth
-moaColor.tan=Tan
-moaColor.darkTan=Dark Tan
-moaColor.purple=Purple
-moaColor.darkBrown=Dark Brown
-moaColor.darkPurple=Dark Purple
-moaColor.gray=Gray
-moaColor.swamp=Swamp
-moaColor.lightPink=Light Pink
-moaColor.lightPurple=Light Purple
-moaColor.lightSwamp=Light Swamp
-moaColor.dullYellow=Dull Yellow
-moaColor.yellow=Yellow
-moaColor.darkAqua=Dark Aqua
-moaColor.lightGray=Light Gray
-moaColor.lightTan=Light Tan
-moaColor.burgundy=Burgundy
-moaColor.dullSwamp=Dull Swamp
-moaColor.dullBlue=Dull Blue
-moaColor.blueGray=Blue Gray
-moaColor.yellowTan=Yellow Tan
-moaColor.aqua=Aqua
-moaColor.lightAqua=Light Aqua
-moaColor.blue=Blue
-moaColor.highTan=High Tan
-moaColor.jungle=Jungle
-moaColor.dullPurple=Dull Purple
+moa.feathers=Feathers
+moa.keratin=Keratin
+moa.eyes=Eyes
+moa.jumps=Mid-air Jumps
+
+moa.keratin.skyBlue=Sky-Blue
+moa.keratin.deepSky=Deep-Sky
+moa.keratin.sand=Sand
+moa.keratin.midnightSky=Midnight-Sky
+moa.keratin.swamp=Swamp
+moa.keratin.royal=Royal
+moa.keratin.tempest=Tempest
+
+moa.eyes.enchanted=Enchanted
+moa.eyes.navy=Navy
+moa.eyes.crimson=Crimson
+moa.eyes.cream=Cream
+moa.eyes.emerald=Emerald
+
+moa.feathers.cream=Cream
+moa.feathers.midnightSky=Midnight-Sky
+moa.feathers.dawn=Dawn
+moa.feathers.nightsPeak=Night-Peaked
+moa.feathers.sakura=Sakura
+moa.feathers.mud=Mud
+moa.feathers.enchanted=Enchanted
+
+moa.marks.spots=Spotted
+moa.marks.circles=Radial
+moa.marks.curves=Branching
+moa.marks.ladder=Zipline
+moa.marks.lines=Lined
 
 # Item Rarities
 item.rarity.common.name=§7§oCommon

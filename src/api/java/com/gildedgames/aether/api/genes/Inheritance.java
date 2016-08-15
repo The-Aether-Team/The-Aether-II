@@ -1,4 +1,4 @@
-package com.gildedgames.aether.api.biology;
+package com.gildedgames.aether.api.genes;
 
 import java.util.Random;
 

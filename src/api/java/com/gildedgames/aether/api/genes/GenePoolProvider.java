@@ -1,4 +1,4 @@
-package com.gildedgames.aether.api.biology;
+package com.gildedgames.aether.api.genes;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import net.minecraft.nbt.NBTBase;

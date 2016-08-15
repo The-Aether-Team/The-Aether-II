@@ -16,7 +16,7 @@ public class BreatheUnderwaterEffect extends AbstractEffectProcessor<EntityEffec
 
 	public BreatheUnderwaterEffect()
 	{
-		super("ability.breatheUnderwater.name", "ability.breatheUnderwater.desc");
+		super("ability.breatheUnderwater.localizedName", "ability.breatheUnderwater.desc");
 	}
 
 	@Override

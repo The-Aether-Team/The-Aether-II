@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.models.entities.living.ModelMoa;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.biology.moa.MoaGenePool;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.moa.EntityMoa;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
 import net.minecraft.client.model.ModelRenderer;
@@ -104,6 +104,11 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		model.RightLeg2.isHidden = false;
 	}
 
+	public Color darker(Color c, float factor)
+	{
+		return new Color(Math.max((int)(c.getRed()  * factor), 0), Math.max((int)(c.getGreen()* factor), 0), Math.max((int)(c.getBlue() * factor), 0), c.getAlpha());
+	}
+
 	private Color blend(Color c1, Color c2, float ratio)
 	{
 		if ( ratio > 1f ) ratio = 1f;
@@ -155,8 +160,8 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 
 		GL11.glScalef(1.001f, 1.001f, 1.001f);
 		GL11.glTranslatef(0.0f, -0.001f, 0.001f);
-		
-		Color patternColor = this.blend(genePool.getPatterns().gene().data(), genePool.getFeathers().gene().data(), 0.5F);
+
+		Color patternColor = genePool.getFeathers().gene().data().darker();
 
 		this.renderMoa(patternColor.getRGB(), genePool.getMarks().gene().getHead(), entity, par7, model.Head);
 

@@ -30,7 +30,7 @@ public class FrozenInSchematicEffect extends AbstractEffectProcessor<Instance>
 
 	public FrozenInSchematicEffect()
 	{
-		super("ability.frozenInSchematic.name", "ability.frozenInSchematic.desc");
+		super("ability.frozenInSchematic.localizedName", "ability.frozenInSchematic.desc");
 	}
 
 	@Override

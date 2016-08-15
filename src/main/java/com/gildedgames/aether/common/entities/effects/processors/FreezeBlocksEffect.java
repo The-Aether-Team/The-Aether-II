@@ -49,7 +49,7 @@ public class FreezeBlocksEffect implements EntityEffectProcessor<Instance>
 	@Override
 	public String getUnlocalizedName(Entity source, Instance instance)
 	{
-		return "ability.freezeBlocks.name";
+		return "ability.freezeBlocks.localizedName";
 	}
 
 	@Override

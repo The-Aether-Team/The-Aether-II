@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.entities;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.biology.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import com.gildedgames.aether.common.entities.companions.EntityFangrin;
@@ -24,7 +23,6 @@ import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.util.modules.spawning.SpawnEntry;
 import com.gildedgames.util.modules.spawning.SpawnManager;
 import com.gildedgames.util.modules.spawning.SpawningModule;
-import com.google.common.base.Supplier;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 

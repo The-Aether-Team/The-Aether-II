@@ -1,13 +1,12 @@
 package com.gildedgames.aether.common.entities.moa;
 
-import com.gildedgames.aether.api.biology.BiologyUtil;
+import com.gildedgames.aether.api.genes.BiologyUtil;
 import com.gildedgames.aether.common.entities.ai.moa.*;
-import com.gildedgames.aether.common.entities.biology.moa.MoaGenePool;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
 import com.gildedgames.aether.common.entities.util.EntityGroup;
 import com.gildedgames.aether.common.entities.util.EntityGroupMember;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.miscellaneous.ItemMoaEgg;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;

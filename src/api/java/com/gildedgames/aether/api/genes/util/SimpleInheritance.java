@@ -1,6 +1,6 @@
-package com.gildedgames.aether.common.entities.biology.util;
+package com.gildedgames.aether.api.genes.util;
 
-import com.gildedgames.aether.api.biology.Inheritance;
+import com.gildedgames.aether.api.genes.Inheritance;
 
 import java.util.Random;
 

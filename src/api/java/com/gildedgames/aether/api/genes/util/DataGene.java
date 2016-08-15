@@ -1,8 +1,9 @@
-package com.gildedgames.aether.common.entities.biology.util;
+package com.gildedgames.aether.api.genes.util;
 
-import com.gildedgames.aether.api.biology.Gene;
-import com.gildedgames.aether.api.biology.Inheritance;
-import com.gildedgames.aether.api.biology.Mutation;
+import com.gildedgames.aether.api.genes.Gene;
+import com.gildedgames.aether.api.genes.Inheritance;
+import com.gildedgames.aether.api.genes.Mutation;
+import net.minecraft.client.resources.I18n;
 
 public class DataGene<T> implements Gene
 {
@@ -26,7 +27,13 @@ public class DataGene<T> implements Gene
 	}
 
 	@Override
-	public String name()
+	public String localizedName()
+	{
+		return I18n.format(this.name);
+	}
+
+	@Override
+	public String unlocalizedName()
 	{
 		return this.name;
 	}

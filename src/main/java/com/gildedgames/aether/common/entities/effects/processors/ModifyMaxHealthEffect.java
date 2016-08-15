@@ -52,7 +52,7 @@ public class ModifyMaxHealthEffect implements EntityEffectProcessor<Instance>
 	@Override
 	public String getUnlocalizedName(Entity source, Instance instance)
 	{
-		return "ability.maxHealthMod.name";
+		return "ability.maxHealthMod.localizedName";
 	}
 
 	@Override
