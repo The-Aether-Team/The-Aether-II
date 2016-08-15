@@ -323,7 +323,7 @@ moa.feathers.enchanted=Enchanted
 
 moa.marks.spots=Spotted
 moa.marks.circles=Radial
-moa.marks.curves=Branching
+moa.marks.curves=Branched
 moa.marks.ladder=Zipline
 moa.marks.lines=Lined
 
