@@ -15,6 +15,7 @@ import com.gildedgames.aether.client.renderer.entities.living.*;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderBolt;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDaggerfrostSnowball;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDart;
+import com.gildedgames.aether.client.renderer.entities.util.RenderTestEntity;
 import com.gildedgames.aether.client.renderer.tile_entities.*;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
@@ -26,6 +27,7 @@ import com.gildedgames.aether.common.entities.companions.EntityNexSpirit;
 import com.gildedgames.aether.common.entities.companions.EntityShadeOfArkenzus;
 import com.gildedgames.aether.common.entities.companions.EntityEtheralWisp;
 import com.gildedgames.aether.common.entities.companions.EntitySoaringWisp;
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityDetonationSentry;
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
 import com.gildedgames.aether.common.entities.living.*;
 import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
@@ -88,6 +90,8 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityCockatrice.class, new AetherRenderFactory<>(RenderCockatrice.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityRam.class, new AetherRenderFactory<>(RenderRam.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMoa.class, new AetherRenderFactory<>(RenderMoa.class));
+
+		RenderingRegistry.registerEntityRenderingHandler(EntityDetonationSentry.class, new AetherRenderFactory<>(RenderTestEntity.class));
 	}
 
 	private static void registerTESRs()

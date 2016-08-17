@@ -155,5 +155,17 @@
 		"sounds": [
 			"aether:aeblock/aercloud/bounce"
 		]
+	},
+	"aerandom.detonating": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aerandom/detonating"
+		]
+	},
+	"aerandom.detonate": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aerandom/detonate"
+		]
 	}
 }

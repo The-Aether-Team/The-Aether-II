@@ -36,4 +36,8 @@ public class SoundsAether
 
 	public static SoundEvent cockatrice_ambient = new SoundEvent(AetherCore.getResource("aemob.cockatrice.ambient"));
 
+	public static SoundEvent detonating = new SoundEvent(AetherCore.getResource("aerandom.detonating"));
+
+	public static SoundEvent detonate = new SoundEvent(AetherCore.getResource("aerandom.detonate"));
+
 }
