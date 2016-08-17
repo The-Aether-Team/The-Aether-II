@@ -7,7 +7,7 @@ import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.init.MobEffects;
 import net.minecraft.pathfinding.PathNavigateGround;
 
-public class AIHopFaceRandom extends EntityAI<EntityLiving>
+public class AIHopWander extends EntityAI<EntityLiving>
 {
 
     private HoppingMoveHelper hoppingMoveHelper;
@@ -16,7 +16,7 @@ public class AIHopFaceRandom extends EntityAI<EntityLiving>
 
     private int nextRandomizeTime;
 
-    public AIHopFaceRandom(EntityLiving entity, HoppingMoveHelper hoppingMoveHelper)
+    public AIHopWander(EntityLiving entity, HoppingMoveHelper hoppingMoveHelper)
     {
         super(entity);
 
@@ -44,6 +44,7 @@ public class AIHopFaceRandom extends EntityAI<EntityLiving>
             this.chosenDegrees = (float)this.entity().getRNG().nextInt(360);
         }
 
+        this.hoppingMoveHelper.setSpeed(1.0D);
         this.hoppingMoveHelper.setDirection(this.chosenDegrees);
     }
 }
