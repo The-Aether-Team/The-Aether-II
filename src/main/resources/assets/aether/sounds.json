@@ -131,7 +131,7 @@
 			"aether:aemob/cockatrice/hurt2"
 		]
 	},
-		"aemob.cockatrice.ambient": {
+	"aemob.cockatrice.ambient": {
 		"category": "neutral",
 		"sounds": [
 			"aether:aemob/cockatrice/say1",
@@ -166,6 +166,27 @@
 		"category": "neutral",
 		"sounds": [
 			"aether:aerandom/detonate"
+		]
+	},
+	"aemob.sentry.ambient": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/sentry/say1",
+			"aether:aemob/sentry/say2",
+			"aether:aemob/sentry/say3"
+		]
+	},
+	"aemob.sentry.hurt": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/sentry/hurt1",
+			"aether:aemob/sentry/hurt2"
+		]
+	},
+	"aemob.sentry.death": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/sentry/death1"
 		]
 	}
 }

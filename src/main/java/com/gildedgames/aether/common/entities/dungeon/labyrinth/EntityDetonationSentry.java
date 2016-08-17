@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.dungeon.labyrinth;
 
+import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AIDetonateClose;
 import com.gildedgames.aether.common.entities.ai.hopping.*;
 import net.minecraft.entity.EntityCreature;
@@ -13,6 +14,8 @@ import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
+import static com.gildedgames.aether.common.SoundsAether.sentry_ambient;
 
 public class EntityDetonationSentry extends EntityCreature
 {
@@ -49,6 +52,24 @@ public class EntityDetonationSentry extends EntityCreature
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10);
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16);
+	}
+
+	@Override
+	protected net.minecraft.util.SoundEvent getAmbientSound()
+	{
+		return SoundsAether.sentry_ambient;
+	}
+
+	@Override
+	protected net.minecraft.util.SoundEvent getHurtSound()
+	{
+		return SoundsAether.sentry_hurt;
+	}
+
+	@Override
+	protected net.minecraft.util.SoundEvent getDeathSound()
+	{
+		return SoundsAether.sentry_death;
 	}
 
 }

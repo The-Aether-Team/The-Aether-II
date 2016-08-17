@@ -40,4 +40,10 @@ public class SoundsAether
 
 	public static SoundEvent detonate = new SoundEvent(AetherCore.getResource("aerandom.detonate"));
 
+	public static SoundEvent sentry_ambient = new SoundEvent(AetherCore.getResource("aemob.sentry.ambient"));
+
+	public static SoundEvent sentry_hurt = new SoundEvent(AetherCore.getResource("aemob.sentry.hurt"));
+
+	public static SoundEvent sentry_death = new SoundEvent(AetherCore.getResource("aemob.sentry.death"));
+
 }
