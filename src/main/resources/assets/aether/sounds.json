@@ -186,7 +186,7 @@
 	"aemob.sentry.death": {
 		"category": "neutral",
 		"sounds": [
-			"aether:aemob/sentry/death1"
+			"aether:aemob/sentry/death"
 		]
 	},
 	"aerandom.stone_thud": {

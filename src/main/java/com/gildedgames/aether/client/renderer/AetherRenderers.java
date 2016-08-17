@@ -27,6 +27,7 @@ import com.gildedgames.aether.common.entities.companions.EntityNexSpirit;
 import com.gildedgames.aether.common.entities.companions.EntityShadeOfArkenzus;
 import com.gildedgames.aether.common.entities.companions.EntityEtheralWisp;
 import com.gildedgames.aether.common.entities.companions.EntitySoaringWisp;
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityBattleSentry;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityDetonationSentry;
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
 import com.gildedgames.aether.common.entities.living.*;
@@ -92,6 +93,7 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityMoa.class, new AetherRenderFactory<>(RenderMoa.class));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityDetonationSentry.class, new AetherRenderFactory<>(RenderDetonationSentry.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityBattleSentry.class, new AetherRenderFactory<>(RenderBattleSentry.class));
 	}
 
 	private static void registerTESRs()

@@ -24,13 +24,13 @@ public class EntityDetonationSentry extends EntityCreature
 	{
 		super(worldIn);
 
-		HoppingMoveHelper hoppingMoveHelper = new HoppingMoveHelper(this);
+		HoppingMoveHelper hoppingMoveHelper = new HoppingMoveHelper(this, SoundsAether.stone_thud);
 
 		this.moveHelper = hoppingMoveHelper;
 
-		this.tasks.addTask(0, new AIDetonateClose(this, EntityPlayer.class, 0.5D));
+		this.tasks.addTask(0, new AIDetonateClose(this, 0.5D));
 		this.tasks.addTask(1, new AIHopFloat(this, hoppingMoveHelper));
-		this.tasks.addTask(2, new AIHopFollowAttackTarget(this, hoppingMoveHelper));
+		this.tasks.addTask(2, new AIHopFollowAttackTarget(this, hoppingMoveHelper, 1.0D));
 
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
@@ -70,6 +70,11 @@ public class EntityDetonationSentry extends EntityCreature
 	protected net.minecraft.util.SoundEvent getDeathSound()
 	{
 		return SoundsAether.sentry_death;
+	}
+
+	public int getVerticalFaceSpeed()
+	{
+		return 0;
 	}
 
 }

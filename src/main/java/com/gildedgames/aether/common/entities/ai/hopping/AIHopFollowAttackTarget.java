@@ -12,11 +12,14 @@ public class AIHopFollowAttackTarget extends EntityAI<EntityLiving>
 
     private int growTieredTimer;
 
-    public AIHopFollowAttackTarget(EntityLiving entity, HoppingMoveHelper hoppingMoveHelper)
+    private double speed;
+
+    public AIHopFollowAttackTarget(EntityLiving entity, HoppingMoveHelper hoppingMoveHelper, double speed)
     {
         super(entity);
 
         this.hoppingMoveHelper = hoppingMoveHelper;
+        this.speed = speed;
 
         this.setMutexBits(2);
     }
@@ -54,7 +57,7 @@ public class AIHopFollowAttackTarget extends EntityAI<EntityLiving>
     public void updateTask()
     {
         this.entity().faceEntity(this.entity().getAttackTarget(), 10.0F, 10.0F);
-        this.hoppingMoveHelper.setSpeed(1.0D);
+        this.hoppingMoveHelper.setSpeed(this.speed);
         this.hoppingMoveHelper.setDirection(this.entity().rotationYaw);
     }
 

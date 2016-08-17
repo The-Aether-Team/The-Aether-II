@@ -400,6 +400,7 @@ entity.aether.cockatrice.name=Cockatrice
 entity.aether.ram.name=Ram
 entity.aether.moa.name=Moa
 entity.aether.detonationSentry.name=Detonation Sentry
+entity.aether.battleSentry.name=Battle Sentry
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether Blocks

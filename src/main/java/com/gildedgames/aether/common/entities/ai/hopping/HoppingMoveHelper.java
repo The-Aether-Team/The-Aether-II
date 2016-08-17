@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.entities.ai.hopping;
 
-import com.gildedgames.aether.common.SoundsAether;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityMoveHelper;
+import net.minecraft.util.SoundEvent;
 
 public class HoppingMoveHelper extends EntityMoveHelper
 {
@@ -11,12 +11,30 @@ public class HoppingMoveHelper extends EntityMoveHelper
 	private float yRot;
 	private int jumpDelay;
 	private final EntityLiving entity;
+	private SoundEvent hoppingSound;
+	private HopTimer hopTimer;
 
-	public HoppingMoveHelper(EntityLiving entity)
+	public HoppingMoveHelper(EntityLiving entity, SoundEvent hoppingSound, HopTimer hopTimer)
 	{
 		super(entity);
+
+		this.hopTimer = hopTimer;
+		this.hoppingSound = hoppingSound;
 		this.entity = entity;
 		this.yRot = 180.0F * entity.rotationYaw / (float)Math.PI;
+	}
+
+	public HoppingMoveHelper(final EntityLiving entity, SoundEvent hoppingSound)
+	{
+		this(entity, hoppingSound, new HopTimer()
+		{
+
+			@Override public int jumpDelay()
+			{
+				return entity.getRNG().nextInt(20) + 10;
+			}
+
+		});
 	}
 
 	public void setDirection(float p_179920_1_)
@@ -50,11 +68,11 @@ public class HoppingMoveHelper extends EntityMoveHelper
 
 				if (this.jumpDelay-- <= 0)
 				{
-					this.jumpDelay = this.entity.getRNG().nextInt(20) + 10;
+					this.jumpDelay = this.hopTimer.jumpDelay();
 
 					this.entity.getJumpHelper().setJumping();
 
-					this.entity.playSound(SoundsAether.stone_thud, 0.5F, ((this.entity.getRNG().nextFloat() - this.entity.getRNG().nextFloat()) * 0.2F + 1.0F) * 0.8F);
+					this.entity.playSound(this.hoppingSound, 0.5F, ((this.entity.getRNG().nextFloat() - this.entity.getRNG().nextFloat()) * 0.2F + 1.0F) * 0.8F);
 				}
 				else
 				{
@@ -68,6 +86,13 @@ public class HoppingMoveHelper extends EntityMoveHelper
 				this.entity.setAIMoveSpeed((float)(this.speed * this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
 			}
 		}
+	}
+
+	public interface HopTimer
+	{
+
+		int jumpDelay();
+
 	}
 
 }
