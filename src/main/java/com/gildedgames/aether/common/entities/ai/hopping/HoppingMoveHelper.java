@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.ai.hopping;
 
+import com.gildedgames.aether.common.SoundsAether;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityMoveHelper;
@@ -52,6 +53,8 @@ public class HoppingMoveHelper extends EntityMoveHelper
 					this.jumpDelay = this.entity.getRNG().nextInt(20) + 10;
 
 					this.entity.getJumpHelper().setJumping();
+
+					this.entity.playSound(SoundsAether.stone_thud, 0.5F, ((this.entity.getRNG().nextFloat() - this.entity.getRNG().nextFloat()) * 0.2F + 1.0F) * 0.8F);
 				}
 				else
 				{

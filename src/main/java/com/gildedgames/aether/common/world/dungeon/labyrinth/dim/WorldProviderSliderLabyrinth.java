@@ -4,9 +4,11 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.DimensionsAether;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.chunk.IChunkGenerator;
 
@@ -22,6 +24,12 @@ public class WorldProviderSliderLabyrinth extends WorldProvider
 	protected void createBiomeProvider()
 	{
 		this.biomeProvider = new BiomeProviderSingle(new BiomeSliderLabyrinth());
+	}
+
+	@Override
+	public Biome getBiomeForCoords(BlockPos pos)
+	{
+		return this.biomeProvider.getBiome(pos);
 	}
 
 	@Override

@@ -91,7 +91,7 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityRam.class, new AetherRenderFactory<>(RenderRam.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMoa.class, new AetherRenderFactory<>(RenderMoa.class));
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityDetonationSentry.class, new AetherRenderFactory<>(RenderTestEntity.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDetonationSentry.class, new AetherRenderFactory<>(RenderDetonationSentry.class));
 	}
 
 	private static void registerTESRs()

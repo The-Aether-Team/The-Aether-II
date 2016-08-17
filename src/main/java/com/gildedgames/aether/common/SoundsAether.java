@@ -46,4 +46,6 @@ public class SoundsAether
 
 	public static SoundEvent sentry_death = new SoundEvent(AetherCore.getResource("aemob.sentry.death"));
 
+	public static SoundEvent stone_thud = new SoundEvent(AetherCore.getResource("aerandom.stone_thud"));
+
 }
