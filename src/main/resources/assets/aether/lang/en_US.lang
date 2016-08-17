@@ -399,7 +399,7 @@ entity.aether.carrion_sprout.name=Carrion Sprout
 entity.aether.cockatrice.name=Cockatrice
 entity.aether.ram.name=Ram
 entity.aether.moa.name=Moa
-entity.aether.detonationSentry=Detonation Sentry
+entity.aether.detonationSentry.name=Detonation Sentry
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether Blocks
