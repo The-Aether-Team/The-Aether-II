@@ -58,7 +58,7 @@ public class EntityBattleSentry extends EntityMob
 
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
-		this.setSize(1.0F, 1.0F);
+		this.setSize(0.8F, 0.8F);
 	}
 
 	@Override
