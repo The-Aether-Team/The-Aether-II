@@ -81,7 +81,7 @@ public class EntityBattleSentry extends EntityMob
 	@Override
 	public void onCollideWithPlayer(EntityPlayer entityIn)
 	{
-		if (!this.isDead && this.getHealth() > 0)
+		if (!this.isDead && this.getHealth() > 0 && ((HoppingMoveHelper)this.getMoveHelper()).getSpeed() >= 4.0D)
 		{
 			this.dealDamage(entityIn);
 		}
@@ -89,7 +89,7 @@ public class EntityBattleSentry extends EntityMob
 
 	protected void dealDamage(EntityLivingBase entityIn)
 	{
-		if (entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 2.0F))
+		if (entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 3.0F))
 		{
 			this.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
 			this.applyEnchantments(this, entityIn);
