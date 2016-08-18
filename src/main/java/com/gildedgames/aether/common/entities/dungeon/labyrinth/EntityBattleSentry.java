@@ -67,6 +67,7 @@ public class EntityBattleSentry extends EntityMob
 		if (((HoppingMoveHelper)this.getMoveHelper()).getSpeed() >= 4.0D)
 		{
 			this.playSound(SoundsAether.battle_sentry_pounce, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+			this.playSound(SoundsAether.sentry_hurt, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
 		}
 
 		this.motionY = 0.41999998688697815D;
