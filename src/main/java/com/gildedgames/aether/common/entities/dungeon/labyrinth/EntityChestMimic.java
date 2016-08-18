@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AISavageAttac
 import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
 import com.gildedgames.aether.common.util.TickTimer;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
@@ -23,6 +24,8 @@ public class EntityChestMimic extends EntityMob
 {
 
 	private static final DataParameter<Boolean> OVERHEATING = EntityDataManager.createKey(EntityChestMimic.class, DataSerializers.BOOLEAN);
+
+	private static final DataParameter<Boolean> ATTACKED = EntityDataManager.createKey(EntityChestMimic.class, DataSerializers.BOOLEAN);
 
 	public EntityChestMimic(World worldIn)
 	{
@@ -47,6 +50,7 @@ public class EntityChestMimic extends EntityMob
 		super.entityInit();
 
 		this.dataManager.register(EntityChestMimic.OVERHEATING, Boolean.FALSE);
+		this.dataManager.register(EntityChestMimic.ATTACKED, Boolean.FALSE);
 	}
 
 	@Override
@@ -60,30 +64,41 @@ public class EntityChestMimic extends EntityMob
 	}
 
 	@Override
+	public boolean attackEntityAsMob(Entity entity)
+	{
+		this.setAttacked(true);
+
+		return super.attackEntityAsMob(entity);
+	}
+
+	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
 
-		if (this.isOverheating())
+		if (this.hasAttacked() && this.worldObj.isRemote)
 		{
-			World world = this.worldObj;
-
 			for (int k = 0; k < 2; ++k)
 			{
 				double motionX = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 				double motionY = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 				double motionZ = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 
-				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX + motionX, this.posY + 0.5D + motionY, this.posZ + motionZ, 0.1D, 0.1D, 0.1D, new int[0]);
+				this.worldObj.spawnParticle(EnumParticleTypes.SWEEP_ATTACK, this.posX + motionX, this.posY + 0.75D + motionY, this.posZ + motionZ, motionX, motionY, motionZ, new int[0]);
 			}
 
-			for (int k = 0; k < 1; ++k)
+			this.setAttacked(false);
+		}
+
+		if (this.isOverheating())
+		{
+			for (int k = 0; k < 2; ++k)
 			{
 				double motionX = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 				double motionY = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 				double motionZ = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 
-				world.spawnParticle(EnumParticleTypes.SWEEP_ATTACK, this.posX + motionX, this.posY + 0.75D + motionY, this.posZ + motionZ, motionX, motionY, motionZ, new int[0]);
+				this.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX + motionX, this.posY + 0.5D + motionY, this.posZ + motionZ, 0.1D, 0.1D, 0.1D, new int[0]);
 			}
 		}
 	}
@@ -114,6 +129,16 @@ public class EntityChestMimic extends EntityMob
 	public boolean isOverheating()
 	{
 		return this.dataManager.get(EntityChestMimic.OVERHEATING);
+	}
+
+	public void setAttacked(boolean flag)
+	{
+		this.dataManager.set(EntityChestMimic.ATTACKED, flag);
+	}
+
+	public boolean hasAttacked()
+	{
+		return this.dataManager.get(EntityChestMimic.ATTACKED);
 	}
 
 }

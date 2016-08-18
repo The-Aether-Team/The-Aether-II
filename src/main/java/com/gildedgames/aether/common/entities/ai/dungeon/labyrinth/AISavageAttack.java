@@ -79,6 +79,7 @@ public class AISavageAttack extends EntityAI<EntityChestMimic>
             {
                 if (this.entity().getDistanceSqToEntity(this.entity().getAttackTarget()) <= 1.5D * 1.5D)
                 {
+                    this.entity().setAttacked(false);
                     this.entity().attackEntityAsMob(this.entity().getAttackTarget());
                 }
             }
