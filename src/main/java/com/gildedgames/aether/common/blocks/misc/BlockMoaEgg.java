@@ -6,15 +6,12 @@ import com.gildedgames.aether.common.entities.moa.MoaNest;
 import com.gildedgames.aether.common.entities.util.EntityGroup;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.miscellaneous.ItemMoaEgg;
-import com.gildedgames.aether.common.tile_entities.TileEntityHolystoneFurnace;
 import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
-import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -28,8 +25,6 @@ import net.minecraft.world.World;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-import static sun.audio.AudioPlayer.player;
 
 public class BlockMoaEgg extends BlockContainer
 {
