@@ -12,6 +12,7 @@ import com.gildedgames.aether.common.entities.companions.EntityShadeOfArkenzus;
 import com.gildedgames.aether.common.entities.companions.EntityEtheralWisp;
 import com.gildedgames.aether.common.entities.companions.EntitySoaringWisp;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityBattleSentry;
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityChestMimic;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityDetonationSentry;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityTrackingSentry;
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
@@ -46,6 +47,7 @@ public class EntitiesAether
 		registerLivingEntity(EntityDetonationSentry.class, "detonationSentry", 0x414141, 0x4e9af7);
 		registerLivingEntity(EntityBattleSentry.class, "battleSentry", 0x414141, 0x4e9af7);
 		registerLivingEntity(EntityTrackingSentry.class, "trackingSentry", 0x414141, 0x4e9af7);
+		registerLivingEntity(EntityChestMimic.class, "chestMimic", 0x414141, 0x4e9af7);
 
 		registerLivingEntity(EntityFrostpineTotem.class, "frostpine_totem");
 		registerLivingEntity(EntityKraisith.class, "kraisith");

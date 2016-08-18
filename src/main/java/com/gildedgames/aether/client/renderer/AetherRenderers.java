@@ -15,7 +15,6 @@ import com.gildedgames.aether.client.renderer.entities.living.*;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderBolt;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDaggerfrostSnowball;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDart;
-import com.gildedgames.aether.client.renderer.entities.util.RenderTestEntity;
 import com.gildedgames.aether.client.renderer.tile_entities.*;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;

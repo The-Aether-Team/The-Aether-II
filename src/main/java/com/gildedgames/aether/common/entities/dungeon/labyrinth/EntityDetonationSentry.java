@@ -11,13 +11,14 @@ import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityIronGolem;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 import static com.gildedgames.aether.common.SoundsAether.sentry_ambient;
 
-public class EntityDetonationSentry extends EntityCreature
+public class EntityDetonationSentry extends EntityMob
 {
 
 	public EntityDetonationSentry(World worldIn)
