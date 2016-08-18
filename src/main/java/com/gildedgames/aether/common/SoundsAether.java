@@ -48,4 +48,10 @@ public class SoundsAether
 
 	public static SoundEvent stone_thud = new SoundEvent(AetherCore.getResource("aerandom.stone_thud"));
 
+	public static SoundEvent battle_golem_ambient = new SoundEvent(AetherCore.getResource("aemob.battle_golem.ambient"));
+
+	public static SoundEvent battle_golem_hurt = new SoundEvent(AetherCore.getResource("aemob.battle_golem.hurt"));
+
+	public static SoundEvent tracking_sentry_alarm = new SoundEvent(AetherCore.getResource("aemob.tracking_sentry.alarm"));
+
 }

@@ -38,7 +38,7 @@ public class AIDetonateClose extends EntityAI<EntityLiving>
     @Override
     public boolean shouldExecute()
     {
-        return this.entity().getAttackTarget() != null && this.entity().getAttackTarget().getDistanceSqToEntity(this.entity()) <= this.distanceRequired;
+        return this.entity().getAttackTarget() != null && this.entity().getAttackTarget().getDistanceToEntity(this.entity()) <= this.distanceRequired;
     }
 
     @Override

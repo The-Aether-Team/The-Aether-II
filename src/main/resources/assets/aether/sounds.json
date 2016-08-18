@@ -194,5 +194,28 @@
 		"sounds": [
 			"aether:aerandom/stone_thud"
 		]
+	},
+	"aemob.battle_golem.ambient": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/battle_golem/say1",
+			"aether:aemob/battle_golem/say2",
+			"aether:aemob/battle_golem/say3",
+			"aether:aemob/battle_golem/say4"
+		]
+	},
+	"aemob.battle_golem.hurt": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/battle_golem/hurt1",
+			"aether:aemob/battle_golem/hurt2",
+			"aether:aemob/battle_golem/hurt3"
+		]
+	},
+	"aemob.tracking_sentry.alarm": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/tracking_sentry/alarm"
+		]
 	}
 }

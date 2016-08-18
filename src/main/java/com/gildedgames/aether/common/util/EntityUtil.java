@@ -1,8 +1,11 @@
 package com.gildedgames.aether.common.util;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
 
 public class EntityUtil
 {
@@ -10,6 +13,46 @@ public class EntityUtil
 	private EntityUtil()
 	{
 
+	}
+
+	public static void copyDataFromOld(Entity clone, Entity oldEntity)
+	{
+		NBTTagCompound nbttagcompound = oldEntity.writeToNBT(new NBTTagCompound());
+		nbttagcompound.removeTag("Dimension");
+		clone.readFromNBT(nbttagcompound);
+		clone.timeUntilPortal = oldEntity.timeUntilPortal;
+	}
+
+	public static void teleport(Entity entity, BlockPos pos)
+	{
+		World world = entity.worldObj;
+
+		entity.isDead = false;
+
+		world.updateEntityWithOptionalForce(entity, false);
+		Entity clone = EntityList.createEntityByName(EntityList.getEntityString(entity), world);
+
+		if (clone != null)
+		{
+			EntityUtil.copyDataFromOld(clone, entity);
+		}
+
+		world.removeEntityDangerously(entity);
+
+		clone.prevPosX = pos.getX();
+		clone.prevPosY = pos.getY();
+		clone.prevPosZ = pos.getZ();
+
+		clone.lastTickPosX = pos.getX();
+		clone.lastTickPosY = pos.getY();
+		clone.lastTickPosZ = pos.getZ();
+
+		clone.setPositionAndUpdate(pos.getX(), pos.getY(), pos.getZ());
+
+		world.spawnEntityInWorld(clone);
+		world.updateEntityWithOptionalForce(clone, false);
+
+		entity.isDead = true;
 	}
 
 	public static void facePos(Entity entity, BlockPos pos, float maxYawIncrease, float maxPitchIncrease)

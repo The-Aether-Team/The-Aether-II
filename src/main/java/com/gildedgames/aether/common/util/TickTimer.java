@@ -32,7 +32,7 @@ public class TickTimer
 
 	public int getSecondsPassed()
 	{
-		return this.ticksPassed % 20;
+		return this.ticksPassed / 20;
 	}
 
 }

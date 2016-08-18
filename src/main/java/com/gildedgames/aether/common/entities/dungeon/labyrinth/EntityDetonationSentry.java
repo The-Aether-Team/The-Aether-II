@@ -28,7 +28,7 @@ public class EntityDetonationSentry extends EntityCreature
 
 		this.moveHelper = hoppingMoveHelper;
 
-		this.tasks.addTask(0, new AIDetonateClose(this, 0.5D));
+		this.tasks.addTask(0, new AIDetonateClose(this, 1.5D));
 		this.tasks.addTask(1, new AIHopFloat(this, hoppingMoveHelper));
 		this.tasks.addTask(2, new AIHopFollowAttackTarget(this, hoppingMoveHelper, 1.0D));
 
