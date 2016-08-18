@@ -36,6 +36,7 @@ public class EntityChestMimic extends EntityMob
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
 		this.setSize(1.0F, 1.5F);
+		this.stepHeight = 1.0F;
 	}
 
 	@Override

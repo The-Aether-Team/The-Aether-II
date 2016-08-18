@@ -403,6 +403,7 @@ entity.aether.detonationSentry.name=Detonation Sentry
 entity.aether.battleSentry.name=Battle Sentry
 entity.aether.trackingSentry.name=Tracking Sentry
 entity.aether.chestMimic.name=Chest Mimic
+entity.aether.battleGolem.name=Battle Golem
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether Blocks

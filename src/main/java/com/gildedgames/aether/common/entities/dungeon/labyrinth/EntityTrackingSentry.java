@@ -66,11 +66,19 @@ public class EntityTrackingSentry extends EntityMob
 
 		if (this.getAttackTarget() != null && this.timer.getTicksPassed() >= 10)
 		{
-			this.faceEntity(this.getAttackTarget(), 10.0F, 10.0F);
-
 			this.playSound(SoundsAether.tracking_sentry_alarm, 0.5F, (this.getRNG().nextFloat() * 0.1F) + 0.9F);
 
 			this.timer.reset();
+		}
+
+		if (this.worldObj.isRemote)
+		{
+			this.targetTasks.onUpdateTasks();
+
+			if (this.getAttackTarget() != null)
+			{
+				this.faceEntity(this.getAttackTarget(), 10.0F, 10.0F);
+			}
 		}
 	}
 
