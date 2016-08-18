@@ -217,5 +217,13 @@
 		"sounds": [
 			"aether:aemob/tracking_sentry/alarm"
 		]
+	},
+	"aemob.battle_sentry.pounce": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/battle_sentry/pounce1",
+			"aether:aemob/battle_sentry/pounce2",
+			"aether:aemob/battle_sentry/pounce3"
+		]
 	}
 }

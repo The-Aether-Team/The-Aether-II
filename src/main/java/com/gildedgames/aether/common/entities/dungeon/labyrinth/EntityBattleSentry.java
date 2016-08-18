@@ -64,6 +64,11 @@ public class EntityBattleSentry extends EntityMob
 	@Override
 	protected void jump()
 	{
+		if (((HoppingMoveHelper)this.getMoveHelper()).getSpeed() >= 4.0D)
+		{
+			this.playSound(SoundsAether.battle_sentry_pounce, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+		}
+
 		this.motionY = 0.41999998688697815D;
 		this.isAirBorne = true;
 	}
@@ -91,7 +96,7 @@ public class EntityBattleSentry extends EntityMob
 	{
 		if (entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 3.0F))
 		{
-			this.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+			this.playSound(SoundEvents.ENTITY_GENERIC_BIG_FALL, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
 			this.applyEnchantments(this, entityIn);
 		}
 	}

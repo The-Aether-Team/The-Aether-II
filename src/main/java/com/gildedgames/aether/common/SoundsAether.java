@@ -54,4 +54,6 @@ public class SoundsAether
 
 	public static SoundEvent tracking_sentry_alarm = new SoundEvent(AetherCore.getResource("aemob.tracking_sentry.alarm"));
 
+	public static SoundEvent battle_sentry_pounce = new SoundEvent(AetherCore.getResource("aemob.battle_sentry.pounce"));
+
 }
