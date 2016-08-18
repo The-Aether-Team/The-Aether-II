@@ -58,6 +58,8 @@ public class BlockLabyrinthChest extends BlockContainer
 
 				if (chest.isMimic())
 				{
+					chest.clear();
+
 					EntityChestMimic mimic = new EntityChestMimic(world);
 
 					mimic.setPositionAndUpdate(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D);
@@ -198,13 +200,24 @@ public class BlockLabyrinthChest extends BlockContainer
 			worldIn.setBlockState(pos, state, 3);
 		}
 
-		if (stack.hasDisplayName())
-		{
-			TileEntity tileentity = worldIn.getTileEntity(pos);
 
-			if (tileentity instanceof TileEntityLabyrinthChest)
+		TileEntity tileentity = worldIn.getTileEntity(pos);
+
+		if (tileentity instanceof TileEntityLabyrinthChest)
+		{
+			TileEntityLabyrinthChest chest = (TileEntityLabyrinthChest)tileentity;
+
+			if (stack.hasDisplayName())
 			{
-				((TileEntityLabyrinthChest)tileentity).setCustomName(stack.getDisplayName());
+				chest.setCustomName(stack.getDisplayName());
+			}
+
+			chest.setIsMimic(false);
+
+			if (chest.generatesLoot())
+			{
+				chest.clear();
+				chest.setDoesntGenLoot(true);
 			}
 		}
 	}

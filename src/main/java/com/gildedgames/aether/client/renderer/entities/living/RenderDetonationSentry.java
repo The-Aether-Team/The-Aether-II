@@ -1,9 +1,7 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.models.entities.living.ModelDetonationSentry;
-import com.gildedgames.aether.client.models.entities.util.ModelTestEntity;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.moa.EntityMoa;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;
