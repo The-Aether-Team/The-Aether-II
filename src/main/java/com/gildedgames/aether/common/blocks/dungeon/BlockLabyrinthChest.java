@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.dungeon;
 
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityChestMimic;
 import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -38,19 +39,40 @@ public class BlockLabyrinthChest extends BlockContainer
 	{
 		super(Material.ROCK);
 		this.chestType = 1;
-
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
-		if (worldIn.isRemote)
+		if (world.isRemote)
 		{
 			return true;
 		}
 		else
 		{
-			ILockableContainer ilockablecontainer = this.getLockableContainer(worldIn, pos);
+			TileEntity te = world.getTileEntity(pos);
+
+			if (te instanceof TileEntityLabyrinthChest)
+			{
+				TileEntityLabyrinthChest chest = (TileEntityLabyrinthChest)te;
+
+				if (chest.isMimic())
+				{
+					EntityChestMimic mimic = new EntityChestMimic(world);
+
+					mimic.setPositionAndUpdate(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D);
+
+					mimic.motionY = 0.5D;
+
+					world.spawnEntityInWorld(mimic);
+
+					world.setBlockToAir(pos);
+
+					return true;
+				}
+			}
+
+			ILockableContainer ilockablecontainer = this.getLockableContainer(world, pos);
 
 			if (ilockablecontainer != null)
 			{
