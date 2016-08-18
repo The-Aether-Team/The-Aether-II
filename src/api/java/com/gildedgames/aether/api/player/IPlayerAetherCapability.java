@@ -30,14 +30,6 @@ public interface IPlayerAetherCapability
 
 	void onTeleport(PlayerChangedDimensionEvent event);
 
-	int lastBedDimension();
-
-	boolean sleptInBed();
-
-	void setLastBedDimension(int lastBedDimension);
-
-	void setSleptInBed(boolean sleptInBed);
-
 	void onSpawned(PlayerLoggedInEvent event);
 
 	void onDespawn(PlayerLoggedOutEvent event);

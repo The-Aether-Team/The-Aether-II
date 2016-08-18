@@ -5,9 +5,11 @@ import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -42,4 +44,9 @@ public class BlockCustomBed extends BlockBed
 		return new ItemStack(this.bedItem.get());
 	}
 
+	@Override
+	public boolean isBed(IBlockState state, IBlockAccess world, BlockPos pos, Entity player)
+	{
+		return true;
+	}
 }

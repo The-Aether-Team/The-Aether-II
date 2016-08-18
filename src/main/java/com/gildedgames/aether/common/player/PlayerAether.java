@@ -19,6 +19,7 @@ import com.gildedgames.aether.common.items.tools.ItemValkyrieTool;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import com.gildedgames.aether.common.util.PlayerUtil;
+import com.gildedgames.util.core.util.BlockPosDimension;
 import com.gildedgames.util.core.util.TeleporterGeneric;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -70,9 +71,7 @@ public class PlayerAether implements IPlayerAetherCapability
 
 	private int ticksAirborne;
 
-	private int lastBedDimension = 0;
-
-	private boolean sleptInBed = false;
+	private BlockPosDimension bedSpawnpoint;
 
 	public PlayerAether(EntityPlayer player)
 	{
@@ -90,14 +89,6 @@ public class PlayerAether implements IPlayerAetherCapability
 	@Override
 	public void onUpdate(LivingUpdateEvent event)
 	{
-		if (this.getPlayer().isPlayerSleeping())
-		{
-			this.getPlayer().setSpawnChunk(this.getPlayer().getBedLocation(this.getPlayer().dimension), false, this.getPlayer().dimension);
-
-			this.setLastBedDimension(this.getPlayer().dimension);
-			this.setSleptInBed(true);
-		}
-
 		this.updateAbilities();
 
 		if (!this.player.worldObj.isRemote)
@@ -118,94 +109,7 @@ public class PlayerAether implements IPlayerAetherCapability
 	@Override
 	public void onRespawn()
 	{
-		MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 
-		WorldServer world;
-
-		BlockPos spawn;
-
-		if (this.sleptInBed())
-		{
-			int bedDimension = this.lastBedDimension();
-
-			world = server.worldServerForDimension(bedDimension);
-			spawn = this.getPlayer().getBedLocation(bedDimension);
-
-			if (spawn != null)
-			{
-				spawn = EntityPlayer.getBedSpawnLocation(world, spawn, false);
-
-				if (spawn != null)
-				{
-					if (this.getPlayer().dimension != bedDimension)
-					{
-						Teleporter teleporter = new TeleporterGeneric(world);
-
-						PlayerList playerList = server.getPlayerList();
-						playerList.transferPlayerToDimension((EntityPlayerMP)this.getPlayer(), bedDimension, teleporter);
-					}
-
-					this.getPlayer().setLocationAndAngles(spawn.getX() + 0.5F, spawn.getY() + 0.1F, spawn.getZ() + 0.5F, 0.0F, 0.0F);
-
-					world.getChunkProvider().loadChunk((int) this.getPlayer().posX >> 4, (int) this.getPlayer().posZ >> 4);
-
-					((EntityPlayerMP) this.getPlayer()).connection.setPlayerLocation(this.getPlayer().posX, this.getPlayer().posY, this.getPlayer().posZ, this.getPlayer().rotationYaw, this.getPlayer().rotationPitch);
-
-					return;
-				}
-				else
-				{
-					this.setSleptInBed(false);
-				}
-			}
-		}
-
-		if (this.getPlayer().worldObj.provider.getDimensionType() == DimensionsAether.AETHER)
-		{
-			world = server.worldServerForDimension(0);
-
-			Teleporter teleporter = new TeleporterGeneric(world);
-
-			PlayerList playerList = server.getPlayerList();
-			playerList.transferPlayerToDimension((EntityPlayerMP)this.getPlayer(), 0, teleporter);
-
-			spawn = world.getSpawnPoint();
-
-			this.getPlayer().setLocationAndAngles(spawn.getX() + 0.5F, spawn.getY() + 0.1F, spawn.getZ() + 0.5F, 0.0F, 0.0F);
-
-			world.getChunkProvider().loadChunk((int) this.getPlayer().posX >> 4, (int) this.getPlayer().posZ >> 4);
-
-			while (!world.getCollisionBoxes(this.getPlayer(), this.getPlayer().getCollisionBoundingBox()).isEmpty())
-			{
-				this.getPlayer().setPosition(this.getPlayer().posX, this.getPlayer().posY + 1.0D, this.getPlayer().posZ);
-			}
-
-			((EntityPlayerMP) this.getPlayer()).connection.setPlayerLocation(this.getPlayer().posX, this.getPlayer().posY, this.getPlayer().posZ, this.getPlayer().rotationYaw, this.getPlayer().rotationPitch);
-		}
-	}
-
-	@Override
-	public void setLastBedDimension(int dimension)
-	{
-		this.lastBedDimension = dimension;
-	}
-
-	@Override
-	public int lastBedDimension()
-	{
-		return this.lastBedDimension;
-	}
-
-	@Override
-	public boolean sleptInBed()
-	{
-		return this.sleptInBed;
-	}
-
-	@Override
-	public void setSleptInBed(boolean sleptInBed)
-	{
-		this.sleptInBed = sleptInBed;
 	}
 
 	private float calculateExtendedReach()
@@ -518,8 +422,6 @@ public class PlayerAether implements IPlayerAetherCapability
 			instance.getEquipmentInventory().write(equipment);
 
 			compound.setTag("equipment", equipment);
-			compound.setInteger("lastBedDimension", instance.lastBedDimension());
-			compound.setBoolean("sleptInBed", instance.sleptInBed());
 
 			return compound;
 		}
@@ -533,9 +435,6 @@ public class PlayerAether implements IPlayerAetherCapability
 			{
 				instance.getEquipmentInventory().read(compound.getCompoundTag("equipment"));
 			}
-
-			instance.setLastBedDimension(compound.getInteger("lastBedDimension"));
-			instance.setSleptInBed(compound.getBoolean("sleptInBed"));
 		}
 	}
 }
