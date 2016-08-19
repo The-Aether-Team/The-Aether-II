@@ -12,6 +12,7 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -28,6 +29,7 @@ public class EntityTrackingSentry extends EntityMob
 
 		this.tasks.addTask(0, new AIAlarmClose(this, 80.0D));
 		this.tasks.addTask(1, new EntityAIMoveTowardsTarget(this, 0.9D, 25.0F));
+		this.tasks.addTask(2, new EntityAIWander(this, 0.6D));
 
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 

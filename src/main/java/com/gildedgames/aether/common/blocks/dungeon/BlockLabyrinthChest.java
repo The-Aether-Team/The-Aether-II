@@ -213,12 +213,6 @@ public class BlockLabyrinthChest extends BlockContainer
 			}
 
 			chest.setIsMimic(false);
-
-			if (chest.generatesLoot())
-			{
-				chest.clear();
-				chest.setDoesntGenLoot(true);
-			}
 		}
 	}
 

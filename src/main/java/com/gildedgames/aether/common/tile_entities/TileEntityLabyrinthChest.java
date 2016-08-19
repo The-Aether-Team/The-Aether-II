@@ -33,7 +33,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 	private int ticksSinceSync;
 	private String customName;
 
-	private boolean isMimic, doesntGenLoot, hasInit;
+	private boolean isMimic, generateLoot, hasInit;
 
 	public TileEntityLabyrinthChest()
 	{
@@ -59,9 +59,9 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 		return this.isMimic;
 	}
 
-	public boolean generatesLoot() { return !this.doesntGenLoot; }
+	public boolean generatesLoot() { return this.generateLoot; }
 
-	public void setDoesntGenLoot(boolean flag) { this.doesntGenLoot = flag; }
+	public void setGenerateLoot(boolean flag) { this.generateLoot = flag; }
 
 	public void setCustomName(String name)
 	{
@@ -78,7 +78,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 	{
 		if (!this.hasInit)
 		{
-			if (!this.doesntGenLoot)
+			if (this.generateLoot)
 			{
 				int commonCount = 3 + this.worldObj.rand.nextInt(2);
 				int rareCount = 1 + this.worldObj.rand.nextInt(2);
@@ -105,70 +105,8 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 					this.setInventorySlotContentsWithoutMarking(commonCount + rareCount + i, stack);
 				}
 
-				final int type = this.worldObj.rand.nextInt(4);
-
-				Entity[] mobs = null;
-
-				switch(type)
-				{
-					case(0):
-					{
-						mobs = new Entity[]
-						{
-							new EntityBattleSentry(this.worldObj),
-							new EntityBattleSentry(this.worldObj),
-							new EntityBattleSentry(this.worldObj)
-						};
-
-						break;
-					}
-					case(1):
-					{
-						mobs = new Entity[]
-						{
-							new EntityBattleGolem(this.worldObj),
-							new EntityTrackingSentry(this.worldObj),
-							new EntityBattleGolem(this.worldObj)
-						};
-
-						break;
-					}
-					case(2):
-					{
-						mobs = new Entity[]
-						{
-							new EntityDetonationSentry(this.worldObj),
-							new EntityDetonationSentry(this.worldObj),
-							new EntityDetonationSentry(this.worldObj)
-						};
-
-						break;
-					}
-					case(3):
-					{
-						mobs = new Entity[]
-						{
-							new EntityDetonationSentry(this.worldObj),
-							new EntityBattleGolem(this.worldObj),
-							new EntityDetonationSentry(this.worldObj)
-						};
-
-						break;
-					}
-				}
-
-				if (!this.worldObj.isRemote)
-				{
-					for (Entity entity : mobs)
-					{
-						entity.setPositionAndUpdate(this.getPos().getX(), this.getPos().getY() + 1, this.getPos().getZ());
-
-						this.worldObj.spawnEntityInWorld(entity);
-					}
-				}
+				this.markDirty();
 			}
-
-			this.markDirty();
 
 			this.hasInit = true;
 		}
@@ -444,7 +382,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 
 		this.isMimic = compound.getBoolean("isMimic");
 		this.hasInit = compound.getBoolean("hasInit");
-		this.doesntGenLoot = compound.getBoolean("doesntGenLoot");
+		this.generateLoot = compound.getBoolean("generateLoot");
 	}
 
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
@@ -472,7 +410,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 
 		compound.setBoolean("isMimic", this.isMimic);
 		compound.setBoolean("hasInit", this.hasInit);
-		compound.setBoolean("doesntGenLoot", this.doesntGenLoot);
+		compound.setBoolean("generateLoot", this.generateLoot);
 
 		return compound;
 	}
