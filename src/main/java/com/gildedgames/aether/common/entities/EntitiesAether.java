@@ -65,7 +65,7 @@ public class EntitiesAether
 		manager.registerPerTickEntry(new SpawnEntry(EntityPhyg.class, 1, 4, 0.35f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityCarrionSprout.class, 2, 3, 0.4f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityRam.class, 3, 5, 0.5f));
-		manager.registerPerTickEntry(new SpawnEntry(EntityAerwhale.class, 2, 5, 0.7f));
+		manager.registerPerTickEntry(new SpawnEntry(EntityAerwhale.class, 2, 5, 0.7f, false));
 
 		manager.registerPerTickEntry(new SpawnEntry(EntityAechorPlant.class, 2, 4, 0.4f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityCockatrice.class, 6, 8, 0.5f));
