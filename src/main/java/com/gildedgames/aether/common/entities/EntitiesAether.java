@@ -40,6 +40,7 @@ public class EntitiesAether
 		registerLivingEntity(EntityCockatrice.class, "cockatrice", 0xCCFFFF, 0x6b519c);
 		registerLivingEntity(EntityRam.class, "ram", 0xCCFFFF, 0xCCCCFF);
 		registerLivingEntity(EntityMoa.class, "moa", 0xCCFFFF, 0xCCCCFF);
+		registerLivingEntity(EntityAerwhale.class, "aerwhale", 0xCCFFFF, 0xCCCCFF);
 
 		registerLivingEntity(EntityFrostpineTotem.class, "frostpine_totem");
 		registerLivingEntity(EntityKraisith.class, "kraisith");

@@ -6,6 +6,8 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
+import static com.ibm.icu.impl.duration.impl.DataRecord.EGender.F;
+
 public class ModelAerwhale extends ModelBase
 {
 
@@ -142,18 +144,57 @@ public class ModelAerwhale extends ModelBase
 
 		float tailAnimation = flying.getTailAnimation(deltaTime);
 
-		this.BackfinLeft.rotateAngleY = 0.7330383F + (MathHelper.sin(ageInTicks * 0.152F) * 0.02F * (float)Math.PI);
+/*		this.BackfinLeft.rotateAngleY = 0.7330383F + (MathHelper.sin(ageInTicks * 0.152F) * 0.02F * (float)Math.PI);
 		this.BackfinRight.rotateAngleY = -0.7330383F + (MathHelper.sin(ageInTicks * 0.152F) * 0.02F * (float)Math.PI);
 
 		this.BackfinLeft.rotateAngleZ = (MathHelper.sin(ageInTicks * 0.152F) * 0.02F * (float)Math.PI);
 		this.BackfinRight.rotateAngleZ = (MathHelper.sin(ageInTicks * 0.152F) * 0.02F * (float)Math.PI);
 
 		this.BackBody.rotateAngleY = MathHelper.sin(ageInTicks * 0.1662F) * 0.02F * (float)Math.PI;
-		this.FrontBody.rotateAngleY = MathHelper.sin(ageInTicks * 0.1662F) * 0.02F * (float)Math.PI;
+		this.FrontBody.rotateAngleY = MathHelper.sin(ageInTicks * 0.1662F) * 0.02F * (float)Math.PI;*/
 
-		this.Middlebody.rotateAngleY = MathHelper.sin(ageInTicks * 0.1762F) * 0.02F * (float)Math.PI;
+		/*this.Middlebody.rotateAngleY = MathHelper.sin(ageInTicks * 0.1762F) * 0.02F * (float)Math.PI;
 		this.BottomPartMiddlebody.rotateAngleY = MathHelper.sin(ageInTicks * 0.1762F) * 0.02F * (float)Math.PI;
-		this.MiddleFin.rotateAngleY = MathHelper.sin(ageInTicks * 0.1762F) * 0.02F * (float)Math.PI;
+		this.MiddleFin.rotateAngleY = MathHelper.sin(ageInTicks * 0.1762F) * 0.02F * (float)Math.PI;*/
+
+		/*float angle = -0.1047198F + (float) ((float) flying.motionX * Math.PI);
+
+		this.BackBody.rotateAngleY = (float) Math.toRadians(this.limitAngle((float)Math.toDegrees(this.BackBody.rotateAngleY), (float)Math.toDegrees(angle), 2.0F));
+		this.FrontBody.rotateAngleY = this.BackBody.rotateAngleY;
+
+		this.BackfinLeft.rotateAngleY = 0.7330383F + this.BackBody.rotateAngleY;
+		this.BackfinRight.rotateAngleY = -0.7330383F + this.BackBody.rotateAngleY;
+
+		this.BackfinLeft.offsetX = this.BackBody.rotateAngleY;
+		this.BackfinRight.offsetX = this.BackBody.rotateAngleY;*/
+	}
+
+	protected float limitAngle(float p_75639_1_, float p_75639_2_, float p_75639_3_)
+	{
+		float f = MathHelper.wrapDegrees(p_75639_2_ - p_75639_1_);
+
+		if (f > p_75639_3_)
+		{
+			f = p_75639_3_;
+		}
+
+		if (f < -p_75639_3_)
+		{
+			f = -p_75639_3_;
+		}
+
+		float f1 = p_75639_1_ + f;
+
+		if (f1 < 0.0F)
+		{
+			f1 += 360.0F;
+		}
+		else if (f1 > 360.0F)
+		{
+			f1 -= 360.0F;
+		}
+
+		return f1;
 	}
 
 }

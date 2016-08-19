@@ -88,6 +88,8 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityCockatrice.class, new AetherRenderFactory<>(RenderCockatrice.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityRam.class, new AetherRenderFactory<>(RenderRam.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMoa.class, new AetherRenderFactory<>(RenderMoa.class));
+
+		RenderingRegistry.registerEntityRenderingHandler(EntityAerwhale.class, new AetherRenderFactory<>(RenderAerwhale.class));
 	}
 
 	private static void registerTESRs()
