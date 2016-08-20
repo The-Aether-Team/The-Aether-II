@@ -1,11 +1,11 @@
 package com.gildedgames.aether.common.entities.util.flying;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityBodyHelper;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.init.Blocks;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityFlying extends EntityMob
+public class EntityFlying extends EntityCreature
 {
 
 	private static final DataParameter<Boolean> IS_MOVING = EntityDataManager.<Boolean>createKey(EntityFlying.class, DataSerializers.BOOLEAN);
@@ -65,6 +65,20 @@ public class EntityFlying extends EntityMob
 	public boolean isOnLadder()
 	{
 		return false;
+	}
+
+	@Override
+	public float getBlockPathWeight(BlockPos pos)
+	{
+		return this.worldObj.getBlockState(pos.down()).getBlock() == Blocks.AIR ? 10.0F : this.worldObj.getLightBrightness(pos) - 0.5F;
+	}
+
+	@Override
+	public boolean getCanSpawnHere()
+	{
+		IBlockState state = this.worldObj.getBlockState((new BlockPos(this)).down());
+
+		return state.canEntitySpawn(this) && this.getBlockPathWeight(new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ)) >= 0.0F;
 	}
 
 	@Override
@@ -159,11 +173,6 @@ public class EntityFlying extends EntityMob
 	protected boolean canTriggerWalking()
 	{
 		return false;
-	}
-
-	public float getBlockPathWeight(BlockPos pos)
-	{
-		return this.worldObj.getBlockState(pos).getMaterial() == Material.AIR ? 10.0F + this.worldObj.getLightBrightness(pos) - 0.5F : super.getBlockPathWeight(pos);
 	}
 
 	public boolean isNotColliding()

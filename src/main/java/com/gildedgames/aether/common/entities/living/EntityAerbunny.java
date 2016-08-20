@@ -153,6 +153,12 @@ public class EntityAerbunny extends EntityAetherAnimal
 	}
 
 	@Override
+	protected SoundEvent getAmbientSound()
+	{
+		return SoundsAether.aerbunny_ambient;
+	}
+
+	@Override
 	protected SoundEvent getHurtSound()
 	{
 		return SoundsAether.aerbunny_hurt;

@@ -98,18 +98,6 @@ public class EntityCockatrice extends EntityMob
 	public void onUpdate()
 	{
 		super.onUpdate();
-
-		//this.fallSlowly();
-	}
-
-	private void fallSlowly()
-	{
-		this.fallDistance = 0;
-
-		if (!this.onGround && this.motionY < 0.0D)
-		{
-			this.motionY *= 0.63749999999999996D;
-		}
 	}
 
 	@Override
