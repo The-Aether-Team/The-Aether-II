@@ -71,10 +71,10 @@ public class EntitiesAether
 		manager.registerPerTickEntry(new SpawnEntry(EntityRam.class, 3, 5, 0.5f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityAerwhale.class, 1, 1, 0.2f, false));
 
-		manager.registerPerTickEntry(new SpawnEntry(EntityZephyr.class, 1, 2, 0.3f, false));
+		manager.registerPerTickEntry(new SpawnEntry(EntityZephyr.class, 2, 3, 0.4f, false));
 		manager.registerPerTickEntry(new SpawnEntry(EntityAechorPlant.class, 2, 4, 0.4f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityCockatrice.class, 6, 8, 0.5f));
-		manager.registerPerTickEntry(new SpawnEntry(EntityTempest.class, 2, 5, 0.3f, false));
+		manager.registerPerTickEntry(new SpawnEntry(EntityTempest.class, 2, 3, 0.4f, false));
 	}
 
 	private static void registerLivingEntity(Class<? extends Entity> entity, String id, int eggPrimaryColor, int eggSecondaryColor)
