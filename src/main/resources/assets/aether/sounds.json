@@ -204,5 +204,23 @@
 		"sounds": [
 			"aether:aemob/aerwhale/death"
 		]
+	},
+	"aemob.tempest.electric_shock": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/tempest/electric_shock"
+		]
+	},
+	"aemob.tempest.angry": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/tempest/angry"
+		]
+	},
+	"aemob.zephyr.puff": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/zephyr/puff"
+		]
 	}
 }

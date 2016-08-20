@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.util.flying;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityBodyHelper;
 import net.minecraft.entity.EntityCreature;
@@ -82,6 +83,12 @@ public class EntityFlying extends EntityCreature
 	}
 
 	@Override
+	protected void playStepSound(BlockPos pos, Block blockIn)
+	{
+
+	}
+
+	@Override
 	protected void jump()
 	{
 
@@ -113,7 +120,6 @@ public class EntityFlying extends EntityCreature
 		super.applyEntityAttributes();
 
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10);
 	}
 
 	@Override
@@ -125,9 +131,9 @@ public class EntityFlying extends EntityCreature
 
 		if (this.onGround)
 		{
-			this.motionY += 0.5D;
-			this.motionX += (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.4F);
-			this.motionZ += (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.4F);
+			this.motionY += 0.10D;
+			//this.motionX += (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.4F);
+			//this.motionZ += (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.4F);
 			this.rotationYaw = this.rand.nextFloat() * 360.0F;
 			this.onGround = false;
 			this.isAirBorne = true;

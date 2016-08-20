@@ -50,4 +50,10 @@ public class SoundsAether
 
 	public static SoundEvent aerwhale_death = new SoundEvent(AetherCore.getResource("aemob.aerwhale.death"));
 
+	public static SoundEvent tempest_electric_shock = new SoundEvent(AetherCore.getResource("aemob.tempest.electric_shock"));
+
+	public static SoundEvent tempest_angry = new SoundEvent(AetherCore.getResource("aemob.tempest.angry"));
+
+	public static SoundEvent zephyr_puff = new SoundEvent(AetherCore.getResource("aemob.zephyr.puff"));
+
 }

@@ -11,6 +11,12 @@ public class EntityFlyingDayMob extends EntityFlyingMob
 	}
 
 	@Override
+	protected void ageInSunlight()
+	{
+
+	}
+
+	@Override
 	protected boolean isValidLightLevel()
 	{
 		return true;
