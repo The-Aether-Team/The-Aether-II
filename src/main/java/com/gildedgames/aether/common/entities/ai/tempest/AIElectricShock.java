@@ -55,7 +55,7 @@ public class AIElectricShock extends EntityAI<EntityLiving>
 
 		this.cooldownTimer.tick();
 
-		if (distanceToAttackTarget < 2.0D)
+		if (distanceToAttackTarget < 7.0D)
 		{
 			if (this.cooldownTimer.getSecondsPassed() >= 3)
 			{
@@ -79,7 +79,7 @@ public class AIElectricShock extends EntityAI<EntityLiving>
 
 					this.entity().attackEntityAsMob(this.entity().getAttackTarget());
 
-					this.entity().getAttackTarget().addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 40, 3));
+					this.entity().getAttackTarget().addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 80, 3));
 
 					this.attackTimer.reset();
 					this.cooldownTimer.reset();
