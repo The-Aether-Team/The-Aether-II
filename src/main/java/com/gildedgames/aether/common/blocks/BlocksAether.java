@@ -192,7 +192,7 @@ public class BlocksAether
 	}, SoundType.WOOD);
 
 	public static final Block
-			labyrinth_glowing_pillar = new BlockLabyrinthPillar().setGlows(true),
+			labyrinth_glowing_pillar = new BlockLabyrinthPillar(),
 			labyrinth_pillar = new BlockLabyrinthPillar();
 
 	public static final BlockLabyrinthDoor labyrinth_door = new BlockLabyrinthDoor(Material.ROCK);
@@ -201,8 +201,8 @@ public class BlocksAether
 
 	public static final BlockLabyrinth
 			labyrinth_wall = new BlockLabyrinth(),
-			labyrinth_lightstone = new BlockLabyrinth().setLightLevel(1.0f),
-			labyrinth_base = new BlockLabyrinth().setLightLevel(0.50f),
+			labyrinth_lightstone = new BlockLabyrinth(),
+			labyrinth_base = new BlockLabyrinth(),
 			labyrinth_headstone =  new BlockLabyrinth();
 
 	public static final BlockAetherWall

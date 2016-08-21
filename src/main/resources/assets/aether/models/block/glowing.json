@@ -7,6 +7,7 @@
 		{
 			"from": [ 0, 0, 0 ],
 			"to": [ 16, 16, 16 ],
+			"shade": true,
 			"faces": {
 				"down": { "texture": "#all", "cullface": "down" },
 				"up": { "texture": "#all", "cullface": "up" },
@@ -19,6 +20,7 @@
 		{
 			"from": [ 0, 0, 0 ],
 			"to": [ 16, 16, 16 ],
+			"shade": false,
 			"faces": {
 				"down": { "texture": "#overlay", "cullface": "down" },
 				"up": { "texture": "#overlay", "cullface": "up" },
@@ -26,8 +28,7 @@
 				"south": { "texture": "#overlay", "cullface": "south" },
 				"west": { "texture": "#overlay", "cullface": "west" },
 				"east": { "texture": "#overlay", "cullface": "east" }
-			},
-			"shade": false
+			}
 		}
 	]
 }
