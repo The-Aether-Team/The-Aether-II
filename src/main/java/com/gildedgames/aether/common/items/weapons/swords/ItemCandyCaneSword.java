@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.weapons.swords;
 
+import com.gildedgames.aether.common.entities.companions.EntityCompanion;
 import com.gildedgames.aether.common.items.ItemAbilityType;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,11 +19,15 @@ public class ItemCandyCaneSword extends ItemAetherSword
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
 	{
+		if (target instanceof EntityCompanion)
+		{
+			return true;
+		}
+
 		if (!attacker.worldObj.isRemote && target != null && attacker instanceof EntityPlayer)
 		{
 			if (attacker.worldObj.rand.nextInt(3) == 0)
 			{
-				// TODO: When companions are added we need to add a check to make sure player isn't hitting companion
 
 				target.dropItemWithOffset(ItemsAether.candy_cane, 1, 0F);
 			}
