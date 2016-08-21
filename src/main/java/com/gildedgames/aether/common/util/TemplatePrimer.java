@@ -117,26 +117,21 @@ public class TemplatePrimer
 								{
 									((IInventory)tileentity).clear();
 								}
-
-								world.setBlockState(blockpos, Blocks.BARRIER.getDefaultState(), 4);
 							}
 						}
 
 						if (template$blockinfo1.tileentityData != null)
 						{
-							if (world.setBlockState(blockpos, iblockstate1, placementFlags))
-							{
-								TileEntity tileentity2 = world.getTileEntity(blockpos);
+							TileEntity tileentity2 = world.getTileEntity(blockpos);
 
-								if (tileentity2 != null)
-								{
-									template$blockinfo1.tileentityData.setInteger("x", blockpos.getX());
-									template$blockinfo1.tileentityData.setInteger("y", blockpos.getY());
-									template$blockinfo1.tileentityData.setInteger("z", blockpos.getZ());
-									tileentity2.readFromNBT(template$blockinfo1.tileentityData);
-									tileentity2.func_189668_a(settings.getMirror());
-									tileentity2.func_189667_a(settings.getRotation());
-								}
+							if (tileentity2 != null)
+							{
+								template$blockinfo1.tileentityData.setInteger("x", blockpos.getX());
+								template$blockinfo1.tileentityData.setInteger("y", blockpos.getY());
+								template$blockinfo1.tileentityData.setInteger("z", blockpos.getZ());
+								tileentity2.readFromNBT(template$blockinfo1.tileentityData);
+								tileentity2.func_189668_a(settings.getMirror());
+								tileentity2.func_189667_a(settings.getRotation());
 							}
 						}
 					}
