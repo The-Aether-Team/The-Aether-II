@@ -40,15 +40,6 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 
 	}
 
-	@Override
-	public void onLoad()
-	{
-		if (!this.hasInit)
-		{
-			this.isMimic = this.worldObj.rand.nextBoolean();
-		}
-	}
-
 	public void setIsMimic(boolean flag)
 	{
 		this.isMimic = flag;
@@ -80,6 +71,8 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 		{
 			if (this.generateLoot)
 			{
+				this.isMimic = this.worldObj.rand.nextBoolean();
+
 				int commonCount = 3 + this.worldObj.rand.nextInt(2);
 				int rareCount = 1 + this.worldObj.rand.nextInt(2);
 				int epicCount = this.worldObj.rand.nextInt(2);
