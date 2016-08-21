@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import com.gildedgames.aether.common.util.TemplatePrimer;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -27,6 +28,8 @@ import com.gildedgames.aether.common.world.dungeon.DungeonRoom;
 import com.gildedgames.aether.common.world.dungeon.DungeonRoomProvider;
 import com.gildedgames.util.core.util.BlockPosDimension;
 import com.google.common.collect.Lists;
+import net.minecraft.world.gen.structure.template.BlockRotationProcessor;
+import net.minecraft.world.gen.structure.template.ITemplateProcessor;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 
 public class FlatLayerDungeonGenerator implements DungeonGenerator
@@ -301,6 +304,23 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 				}
 			}
 		}
+
+		for (DungeonLayer layer : this.layers)
+		{
+			for (DungeonRoom room : layer.getRooms())
+			{
+				if (room.template != null)
+				{
+					PlacementSettings settings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk(new ChunkPos(chunkX, chunkZ)).setReplacedBlock((Block) null).setIgnoreStructureBlock(false);
+
+					BlockPos pos = new BlockPos(room.getMinX(), layer.minY(), room.getMinZ());
+
+					ITemplateProcessor processor = new BlockRotationProcessor(pos, settings);
+
+					TemplatePrimer.primeChunk(room.template, world, new ChunkPos(chunkX, chunkZ), primer, pos, processor, settings);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -315,27 +335,32 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 			{
 				if (room.template != null)
 				{
-					PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk(new ChunkPos(chunkX, chunkZ)).setReplacedBlock((Block) null).setIgnoreStructureBlock(false);
-					room.template.addBlocksToWorldChunk(world, new BlockPos(room.getMinX(), layer.minY(), room.getMinZ()), placementsettings);
+					PlacementSettings settings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk(new ChunkPos(chunkX, chunkZ)).setReplacedBlock((Block) null).setIgnoreStructureBlock(false);
 
-					BlockPos roomMin = new BlockPos(posX, layer.minY() + 1, posZ);
+					BlockPos pos = new BlockPos(room.getMinX(), layer.minY(), room.getMinZ());
 
-					Iterable<BlockPos.MutableBlockPos> blocks = BlockPos.getAllInBoxMutable(roomMin, roomMin.add(16, room.template.getSize().getY(), 16));
+					ITemplateProcessor processor = new BlockRotationProcessor(pos, settings);
 
-					for (BlockPos.MutableBlockPos pos : blocks)
-					{
-						IBlockState state = world.getBlockState(pos);
-
-						if (state.getLightValue(world, pos) > 0)
-						{
-							Chunk chunk = world.getChunkFromChunkCoords(chunkX, chunkZ);
-
-							world.markAndNotifyBlock(pos, chunk, Blocks.AIR.getDefaultState(), state, 3);
-						}
-					}
+					TemplatePrimer.populateChunk(room.template, world, new ChunkPos(chunkX, chunkZ), pos, processor, settings, 2);
 				}
 			}
 		}
+
+		/*BlockPos roomMin = new BlockPos(posX, layer.minY() + 1, posZ);
+
+		Iterable<BlockPos.MutableBlockPos> blocks = BlockPos.getAllInBoxMutable(roomMin, roomMin.add(16, room.template.getSize().getY(), 16));
+
+		for (BlockPos.MutableBlockPos pos : blocks)
+		{
+			IBlockState state = world.getBlockState(pos);
+
+			if (state.getLightValue(world, pos) > 0)
+			{
+				Chunk chunk = world.getChunkFromChunkCoords(chunkX, chunkZ);
+
+				world.markAndNotifyBlock(pos, chunk, Blocks.AIR.getDefaultState(), state, 3);
+			}
+		}*/
 
 		for (int x = 0; x < 16; x++)
 		{
@@ -360,7 +385,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 
 		for (int i = layer.minY() + 1; i <= layer.minY() + height; i++)
 		{
-			primer.setBlockState(x, i, z, Blocks.STRUCTURE_VOID.getDefaultState());
+			//primer.setBlockState(x, i, z, Blocks.STRUCTURE_VOID.getDefaultState());
 		}
 
 		for (int i = layer.minY() + 1 + height; i <= layer.minY() + layer.getHeight(); i++)
