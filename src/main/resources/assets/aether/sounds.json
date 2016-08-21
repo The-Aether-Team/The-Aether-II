@@ -138,7 +138,7 @@
 			"aether:aemob/cockatrice/hurt2"
 		]
 	},
-		"aemob.cockatrice.ambient": {
+	"aemob.cockatrice.ambient": {
 		"category": "neutral",
 		"sounds": [
 			"aether:aemob/cockatrice/say1",
@@ -221,6 +221,76 @@
 		"category": "neutral",
 		"sounds": [
 			"aether:aemob/zephyr/puff"
+		]
+	},
+	"aerandom.detonating": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aerandom/detonating"
+		]
+	},
+	"aerandom.detonate": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aerandom/detonate"
+		]
+	},
+	"aemob.sentry.ambient": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/sentry/say1",
+			"aether:aemob/sentry/say2",
+			"aether:aemob/sentry/say3"
+		]
+	},
+	"aemob.sentry.hurt": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/sentry/hurt1",
+			"aether:aemob/sentry/hurt2"
+		]
+	},
+	"aemob.sentry.death": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/sentry/death"
+		]
+	},
+	"aerandom.stone_thud": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aerandom/stone_thud"
+		]
+	},
+	"aemob.battle_golem.ambient": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/battle_golem/say1",
+			"aether:aemob/battle_golem/say2",
+			"aether:aemob/battle_golem/say3",
+			"aether:aemob/battle_golem/say4"
+		]
+	},
+	"aemob.battle_golem.hurt": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/battle_golem/hurt1",
+			"aether:aemob/battle_golem/hurt2",
+			"aether:aemob/battle_golem/hurt3"
+		]
+	},
+	"aemob.tracking_sentry.alarm": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/tracking_sentry/alarm"
+		]
+	},
+	"aemob.battle_sentry.pounce": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/battle_sentry/pounce1",
+			"aether:aemob/battle_sentry/pounce2",
+			"aether:aemob/battle_sentry/pounce3"
 		]
 	}
 }

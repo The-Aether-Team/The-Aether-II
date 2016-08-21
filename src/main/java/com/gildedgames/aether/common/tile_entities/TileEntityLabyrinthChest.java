@@ -1,41 +1,67 @@
 package com.gildedgames.aether.common.tile_entities;
 
+import com.gildedgames.aether.api.items.properties.ItemRarity;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthChest;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityBattleGolem;
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityBattleSentry;
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityDetonationSentry;
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityTrackingSentry;
+import com.gildedgames.aether.common.world.dungeon.LootDefinitions;
+import com.gildedgames.aether.common.world.dungeon.LootGenerator;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityLockable;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 
 public class TileEntityLabyrinthChest extends TileEntityLockable implements net.minecraft.util.ITickable, IInventory
 {
+
 	final private int CHEST_SIZE = 27;
 	private ItemStack[] chestContents = new ItemStack[this.CHEST_SIZE];
 	public float lidAngle;
 	public float prevLidAngle;
 	public int numPlayersUsing;
 	private int ticksSinceSync;
-	private BlockChest.Type cachedChestType;
 	private String customName;
 
-	// Chest can only be single.
+	private boolean isMimic, generateLoot, hasInit;
 
 	public TileEntityLabyrinthChest()
 	{
-		//this.cachedChestType = BlockChest.Type.BASIC;
+
 	}
+
+	@Override
+	public void onLoad()
+	{
+		if (!this.hasInit)
+		{
+			this.isMimic = this.worldObj.rand.nextBoolean();
+		}
+	}
+
+	public void setIsMimic(boolean flag)
+	{
+		this.isMimic = flag;
+	}
+
+	public boolean isMimic()
+	{
+		return this.isMimic;
+	}
+
+	public boolean generatesLoot() { return this.generateLoot; }
+
+	public void setGenerateLoot(boolean flag) { this.generateLoot = flag; }
 
 	public void setCustomName(String name)
 	{
@@ -50,6 +76,41 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 
 	public void update()
 	{
+		if (!this.hasInit)
+		{
+			if (this.generateLoot)
+			{
+				int commonCount = 3 + this.worldObj.rand.nextInt(2);
+				int rareCount = 1 + this.worldObj.rand.nextInt(2);
+				int epicCount = this.worldObj.rand.nextInt(2);
+
+				for (int i = 0; i < commonCount; i++)
+				{
+					ItemStack stack = LootGenerator.generate(LootDefinitions.SLIDERS_LABYRINTH, ItemRarity.COMMON, this.worldObj.rand);
+
+					this.setInventorySlotContentsWithoutMarking(i, stack);
+				}
+
+				for (int i = 0; i < rareCount; i++)
+				{
+					ItemStack stack = LootGenerator.generate(LootDefinitions.SLIDERS_LABYRINTH, ItemRarity.RARE, this.worldObj.rand);
+
+					this.setInventorySlotContentsWithoutMarking(commonCount + i, stack);
+				}
+
+				for (int i = 0; i < epicCount; i++)
+				{
+					ItemStack stack = LootGenerator.generate(LootDefinitions.SLIDERS_LABYRINTH, ItemRarity.EPIC, this.worldObj.rand);
+
+					this.setInventorySlotContentsWithoutMarking(commonCount + rareCount + i, stack);
+				}
+
+				this.markDirty();
+			}
+
+			this.hasInit = true;
+		}
+
 		int i = this.pos.getX();
 		int j = this.pos.getY();
 		int k = this.pos.getZ();
@@ -81,7 +142,6 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 		{
 			double d1 = (double)i + 0.5D;
 			double d2 = (double)k + 0.5D;
-
 
 			this.worldObj.playSound(d1, (double)j + 0.5D, d2, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F, false);
 		}
@@ -120,36 +180,6 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 			}
 		}
 	}
-/*
-	public BlockChest.Type getChestType()
-	{
-		if (this.cachedChestType == null)
-		{
-			if (this.worldObj == null || !(this.getBlockType() instanceof BlockChest))
-			{
-				return BlockChest.Type.BASIC;
-			}
-
-			this.cachedChestType = ((BlockChest)this.getBlockType()).chestType;
-		}
-
-		return this.cachedChestType;
-	}*/
-
-/*	private boolean isChestAt(BlockPos posIn)
-	{
-		if (this.worldObj == null)
-		{
-			return false;
-		}
-		else
-		{
-			Block block = this.worldObj.getBlockState(posIn).getBlock();
-			return block instanceof BlockChest && ((BlockChest)block).chestType == this.getChestType();
-		}
-	}*/
-
-
 
 	@Override
 	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
@@ -232,6 +262,16 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 		}
 
 		this.markDirty();
+	}
+
+	public void setInventorySlotContentsWithoutMarking(int index, ItemStack stack)
+	{
+		this.chestContents[index] = stack;
+
+		if (stack != null && stack.stackSize > this.getInventoryStackLimit())
+		{
+			stack.stackSize = this.getInventoryStackLimit();
+		}
 	}
 
 	@Override
@@ -320,6 +360,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 	public void readFromNBT(NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
+
 		NBTTagList nbttaglist = compound.getTagList("Items", 10);
 		this.chestContents = new ItemStack[this.getSizeInventory()];
 
@@ -338,6 +379,10 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 				this.chestContents[j] = ItemStack.loadItemStackFromNBT(nbttagcompound);
 			}
 		}
+
+		this.isMimic = compound.getBoolean("isMimic");
+		this.hasInit = compound.getBoolean("hasInit");
+		this.generateLoot = compound.getBoolean("generateLoot");
 	}
 
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
@@ -363,11 +408,11 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 			compound.setString("CustomName", this.customName);
 		}
 
+		compound.setBoolean("isMimic", this.isMimic);
+		compound.setBoolean("hasInit", this.hasInit);
+		compound.setBoolean("generateLoot", this.generateLoot);
+
 		return compound;
 	}
 
-	public net.minecraftforge.items.IItemHandler getSingleChestHandler()
-	{
-		return super.getCapability(net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-	}
 }

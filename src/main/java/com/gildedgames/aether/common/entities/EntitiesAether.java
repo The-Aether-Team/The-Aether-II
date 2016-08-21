@@ -11,6 +11,7 @@ import com.gildedgames.aether.common.entities.companions.EntityNexSpirit;
 import com.gildedgames.aether.common.entities.companions.EntityShadeOfArkenzus;
 import com.gildedgames.aether.common.entities.companions.EntityEtheralWisp;
 import com.gildedgames.aether.common.entities.companions.EntitySoaringWisp;
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.*;
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
 import com.gildedgames.aether.common.entities.living.*;
 import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
@@ -19,6 +20,7 @@ import com.gildedgames.aether.common.entities.living.enemies.EntityZephyr;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
 import com.gildedgames.aether.common.entities.moa.EntityMoa;
+import com.gildedgames.aether.common.entities.projectiles.EntityBattleBomb;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
@@ -41,10 +43,15 @@ public class EntitiesAether
 		registerLivingEntity(EntityCarrionSprout.class, "carrion_sprout", 0xCCFFFF, 0x5D8BBB);
 		registerLivingEntity(EntityCockatrice.class, "cockatrice", 0xCCFFFF, 0x6b519c);
 		registerLivingEntity(EntityRam.class, "ram", 0xCCFFFF, 0xCCCCFF);
-		registerLivingEntity(EntityMoa.class, "moa", 0xCCFFFF, 0xCCCCFF);
+		registerLivingEntity(EntityMoa.class, "moa");
 		registerLivingEntity(EntityAerwhale.class, "aerwhale", 0xCCFFFF, 0xCCCCFF);
 		registerLivingEntity(EntityZephyr.class, "zephyr", 0xCCFFFF, 0xCCCCFF);
 		registerLivingEntity(EntityTempest.class, "tempest", 0xCCFFFF, 0xCCCCFF);
+		registerLivingEntity(EntityDetonationSentry.class, "detonationSentry", 0x414141, 0x4e9af7);
+		registerLivingEntity(EntityBattleSentry.class, "battleSentry", 0x414141, 0x4e9af7);
+		registerLivingEntity(EntityTrackingSentry.class, "trackingSentry", 0x414141, 0x4e9af7);
+		registerLivingEntity(EntityChestMimic.class, "chestMimic", 0x414141, 0x4e9af7);
+		registerLivingEntity(EntityBattleGolem.class, "battleGolem", 0x414141, 0x4e9af7);
 
 		registerLivingEntity(EntityFrostpineTotem.class, "frostpine_totem");
 		registerLivingEntity(EntityKraisith.class, "kraisith");
@@ -61,6 +68,7 @@ public class EntitiesAether
 		EntityRegistry.registerModEntity(EntityDaggerfrostSnowball.class, "daggerfrost_snowball", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityPhoenixItem.class, "special_item", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityBolt.class, "bolt", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBattleBomb.class, "battle_bomb", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 
 		SpawnManager manager = SpawningModule.createAndRegisterSpawnManager(AetherCore.CONFIG.getAetherDimID());
 

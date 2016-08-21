@@ -11,7 +11,7 @@ public class BiomeSliderLabyrinth extends Biome
 {
 	public BiomeSliderLabyrinth()
 	{
-		super(new BiomeProperties("slider_labyrinth").setRainDisabled().setTemperature(0.5f).setRainfall(0.5f));
+		super(new BiomeProperties("slider_labyrinth").setRainDisabled().setTemperature(0.5f).setRainfall(0.0f));
 		
 		this.setRegistryName(AetherCore.getResource("slider_labyrinth"));
 

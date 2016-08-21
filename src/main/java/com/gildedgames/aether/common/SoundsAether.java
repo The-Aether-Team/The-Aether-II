@@ -6,6 +6,7 @@ import net.minecraft.util.SoundEvent;
 // This isn't a client-side only class.
 public class SoundsAether
 {
+
 	public static SoundEvent aether_portal_hum = new SoundEvent(AetherCore.getResource("aeportal.portal"));
 
 	public static SoundEvent labyrinth_totem_hum = new SoundEvent(AetherCore.getResource("aeblock.labyrinth_totem.drone"));
@@ -55,5 +56,25 @@ public class SoundsAether
 	public static SoundEvent tempest_angry = new SoundEvent(AetherCore.getResource("aemob.tempest.angry"));
 
 	public static SoundEvent zephyr_puff = new SoundEvent(AetherCore.getResource("aemob.zephyr.puff"));
+
+	public static SoundEvent detonating = new SoundEvent(AetherCore.getResource("aerandom.detonating"));
+
+	public static SoundEvent detonate = new SoundEvent(AetherCore.getResource("aerandom.detonate"));
+
+	public static SoundEvent sentry_ambient = new SoundEvent(AetherCore.getResource("aemob.sentry.ambient"));
+
+	public static SoundEvent sentry_hurt = new SoundEvent(AetherCore.getResource("aemob.sentry.hurt"));
+
+	public static SoundEvent sentry_death = new SoundEvent(AetherCore.getResource("aemob.sentry.death"));
+
+	public static SoundEvent stone_thud = new SoundEvent(AetherCore.getResource("aerandom.stone_thud"));
+
+	public static SoundEvent battle_golem_ambient = new SoundEvent(AetherCore.getResource("aemob.battle_golem.ambient"));
+
+	public static SoundEvent battle_golem_hurt = new SoundEvent(AetherCore.getResource("aemob.battle_golem.hurt"));
+
+	public static SoundEvent tracking_sentry_alarm = new SoundEvent(AetherCore.getResource("aemob.tracking_sentry.alarm"));
+
+	public static SoundEvent battle_sentry_pounce = new SoundEvent(AetherCore.getResource("aemob.battle_sentry.pounce"));
 
 }
