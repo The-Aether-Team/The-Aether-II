@@ -32,8 +32,8 @@ public class TileEntityMoaEggRenderer extends TileEntitySpecialRenderer<TileEnti
 		/**
 		 * TODO: Should not be constantly recreating resource locations.
 		 */
-		ResourceLocation BACK_MARKING = new ResourceLocation(AetherCore.MOD_ID, "textures/tile_entities/moa_egg/back/" + egg.genetics.markBack.getResourcePath().replace("textures/entities/moa/back/", ""));
-		ResourceLocation HEAD_MARKING = new ResourceLocation(AetherCore.MOD_ID, "textures/tile_entities/moa_egg/head/" + egg.genetics.markHead.getResourcePath().replace("textures/entities/moa/head/", ""));
+		ResourceLocation BACK_MARKING = new ResourceLocation(AetherCore.MOD_ID, "textures/tile_entities/moa_egg/back/" + genePool.getMarks().gene().getBack().getResourcePath().replace("textures/entities/moa/back/", ""));
+		ResourceLocation HEAD_MARKING = new ResourceLocation(AetherCore.MOD_ID, "textures/tile_entities/moa_egg/head/" + genePool.getMarks().gene().getHead().getResourcePath().replace("textures/entities/moa/head/", ""));
 
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
