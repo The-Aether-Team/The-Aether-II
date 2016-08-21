@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.EmptyChunk;
 import net.minecraft.world.chunk.IChunkGenerator;
 
 import java.util.List;
@@ -76,10 +75,10 @@ public class ChunkProviderSliderLabyrinth implements IChunkGenerator
 		DungeonInstanceHandler handler = AetherCore.PROXY.getDungeonInstanceHandler();
 		
 		DungeonInstance inst = handler.getFromDimId(this.world.provider.getDimension());
-		
+
 		if (!inst.getGenerator().isLayoutReady())
 		{
-			return new EmptyChunk(this.world, chunkX, chunkZ);
+			return new Chunk(this.world, new ChunkPrimer(), chunkX, chunkZ);
 		}
 		
 		this.random.setSeed(chunkX * 0x4f9939f508L + chunkZ * 0x1ef1565bd5L);

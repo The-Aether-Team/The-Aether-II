@@ -47,14 +47,14 @@ public class WorldProviderAether extends WorldProvider
 
 	public IBlockState getTopBlock(BlockPos pos)
 	{
-		BlockPos blockpos;
+		BlockPos testPos = new BlockPos(pos.getX(), 0, pos.getZ());
 
-		for (blockpos = new BlockPos(pos.getX(), 0, pos.getZ()); !this.worldObj.isAirBlock(blockpos.up()); blockpos = blockpos.up())
+		while (!this.worldObj.isAirBlock(testPos.up()))
 		{
-			;
+			testPos = testPos.up();
 		}
 
-		return this.worldObj.getBlockState(blockpos);
+		return this.worldObj.getBlockState(testPos);
 	}
 
 	@Override
