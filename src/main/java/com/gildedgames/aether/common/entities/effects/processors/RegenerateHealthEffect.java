@@ -32,7 +32,7 @@ public class RegenerateHealthEffect extends AbstractEffectProcessor<Instance>
 
 	public RegenerateHealthEffect()
 	{
-		super("ability.regenerateHealth.name", "ability.regenerateHealth.desc");
+		super("ability.regenerateHealth.localizedName", "ability.regenerateHealth.desc");
 	}
 
 	@Override

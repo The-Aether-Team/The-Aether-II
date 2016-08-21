@@ -52,7 +52,7 @@ public class ModifySpeedEffect implements EntityEffectProcessor<Instance>
 	@Override
 	public String getUnlocalizedName(Entity source, Instance instance)
 	{
-		return "ability.movementSpeedMod.name";
+		return "ability.movementSpeedMod.localizedName";
 	}
 
 	@Override

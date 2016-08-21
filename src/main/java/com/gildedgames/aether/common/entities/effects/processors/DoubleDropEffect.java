@@ -49,7 +49,7 @@ public class DoubleDropEffect implements EntityEffectProcessor<Instance>
 	@Override
 	public String getUnlocalizedName(Entity source, Instance instance)
 	{
-		return "ability.doubleDrops.name";
+		return "ability.doubleDrops.localizedName";
 	}
 
 	@Override

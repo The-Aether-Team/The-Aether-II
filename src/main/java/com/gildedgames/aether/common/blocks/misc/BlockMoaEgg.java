@@ -1,24 +1,19 @@
 package com.gildedgames.aether.common.blocks.misc;
 
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.moa.EntityMoa;
-import com.gildedgames.aether.common.entities.moa.MoaGenetics;
 import com.gildedgames.aether.common.entities.moa.MoaNest;
 import com.gildedgames.aether.common.entities.util.EntityGroup;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.miscellaneous.ItemMoaEgg;
-import com.gildedgames.aether.common.tile_entities.TileEntityHolystoneFurnace;
 import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
-import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -28,8 +23,6 @@ import net.minecraft.world.World;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-import static sun.audio.AudioPlayer.player;
 
 public class BlockMoaEgg extends BlockContainer
 {
@@ -91,14 +84,10 @@ public class BlockMoaEgg extends BlockContainer
 
 				if (egg != null)
 				{
-					MoaGenetics genetics = MoaGenetics.getMixedResult(null, egg.fatherGeneticSeed, egg.motherGeneticSeed);
-					NBTTagCompound nbtTag = ItemMoaEgg.getNBTFromGenetics(genetics);
-					nbtTag.setInteger("geneticSeed", egg.fatherGeneticSeed);
+					MoaGenePool teGenes = MoaGenePool.get(egg);
+					MoaGenePool stackGenes = MoaGenePool.get(eggStack);
 
-					nbtTag.setInteger("fatherGeneticSeed", egg.fatherGeneticSeed);
-					nbtTag.setInteger("motherGeneticSeed", egg.motherGeneticSeed);
-
-					eggStack.setTagCompound(nbtTag);
+					stackGenes.transformFromParents(teGenes.getSeed(), teGenes.getFatherSeed(), teGenes.getMotherSeed());
 				}
 
 				world.setBlockToAir(pos);
@@ -154,14 +143,10 @@ public class BlockMoaEgg extends BlockContainer
 
 		if (egg != null)
 		{
-			MoaGenetics genetics = MoaGenetics.getMixedResult(world, egg.fatherGeneticSeed, egg.motherGeneticSeed);
-			NBTTagCompound nbtTag = ItemMoaEgg.getNBTFromGenetics(genetics);
-			nbtTag.setInteger("geneticSeed", egg.fatherGeneticSeed);
+			MoaGenePool teGenes = MoaGenePool.get(egg);
+			MoaGenePool stackGenes = MoaGenePool.get(eggStack);
 
-			nbtTag.setInteger("fatherGeneticSeed", egg.fatherGeneticSeed);
-			nbtTag.setInteger("motherGeneticSeed", egg.motherGeneticSeed);
-
-			eggStack.setTagCompound(nbtTag);
+			stackGenes.transformFromParents(teGenes.getSeed(), teGenes.getFatherSeed(), teGenes.getMotherSeed());
 		}
 
 		return eggStack;

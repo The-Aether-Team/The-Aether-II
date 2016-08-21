@@ -1,5 +1,6 @@
 package com.gildedgames.aether.api.capabilites;
 
+import com.gildedgames.aether.api.genes.GenePool;
 import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.api.items.IItemEffectsCapability;
 import com.gildedgames.aether.api.items.IItemPropertiesCapability;
@@ -20,4 +21,8 @@ public class AetherCapabilities
 
 	@CapabilityInject(IEntityEffectsCapability.class)
 	public static final Capability<IEntityEffectsCapability> ENTITY_EFFECTS = null;
+
+	@CapabilityInject(GenePool.class)
+	public static final Capability<GenePool> GENE_POOL = null;
+
 }

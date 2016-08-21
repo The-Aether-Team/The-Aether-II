@@ -1,26 +1,22 @@
 package com.gildedgames.aether.common.tile_entities;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.moa.EntityMoa;
-import com.gildedgames.aether.common.entities.moa.MoaGenetics;
 import com.gildedgames.aether.common.entities.moa.MoaNest;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class TileEntityMoaEgg extends TileEntity implements ITickable
 {
 
-	public int ticksExisted, secondsUntilHatch = -1, motherGeneticSeed, fatherGeneticSeed;
-
-	public MoaGenetics genetics;
+	public int ticksExisted, secondsUntilHatch = -1;
 
 	public MoaNest familyNest;
 
@@ -36,20 +32,19 @@ public class TileEntityMoaEgg extends TileEntity implements ITickable
 	@Override
 	public void update()
 	{
-		if (this.secondsUntilHatch <= -1)
-		{
-			this.secondsUntilHatch = 100 + this.worldObj.rand.nextInt(100);
-		}
-		
-		if (this.genetics == null)
-		{
-			this.secondsUntilHatch = 100 + this.worldObj.rand.nextInt(100);
-			this.genetics = MoaGenetics.getMixedResult(this.worldObj, this.motherGeneticSeed, this.fatherGeneticSeed);
-		}
-
 		if (this.worldObj.isRemote)
 		{
 			return;
+		}
+
+		if (this.ticksExisted <= 0)
+		{
+			this.sendUpdates();
+		}
+
+		if (this.secondsUntilHatch <= -1)
+		{
+			this.secondsUntilHatch = 100 + this.worldObj.rand.nextInt(100);
 		}
 
 		this.ticksExisted++;
@@ -81,12 +76,15 @@ public class TileEntityMoaEgg extends TileEntity implements ITickable
 			}
 		}
 
-		return this.genetics != null && hasWarmth && onWovenSticks;
+		return hasWarmth && onWovenSticks;
 	}
 
 	public void hatchEgg()
 	{
-		EntityMoa babyMoa = new EntityMoa(this.worldObj, this.familyNest, this.motherGeneticSeed, this.fatherGeneticSeed);
+		MoaGenePool genePool = MoaGenePool.get(this);
+
+		EntityMoa babyMoa = new EntityMoa(this.worldObj, this.familyNest, genePool.getFatherSeed(), genePool.getMotherSeed());
+
 		babyMoa.setGrowingAge(-24000);
 		babyMoa.setPosition(this.getPos().getX() + 0.5D, this.getPos().getY(), this.getPos().getZ() + 0.5D);
 		babyMoa.setGender(this.gender);
@@ -108,30 +106,6 @@ public class TileEntityMoaEgg extends TileEntity implements ITickable
 		return this.gender;
 	}
 
-	public void setMotherSeed(int seed)
-	{
-		this.motherGeneticSeed = seed;
-
-		if (!this.worldObj.isRemote)
-		{
-			this.sendUpdates();
-		}
-
-		this.genetics = MoaGenetics.getMixedResult(this.worldObj, this.motherGeneticSeed, this.fatherGeneticSeed);
-	}
-
-	public void setFatherSeed(int seed)
-	{
-		this.fatherGeneticSeed = seed;
-
-		if (!this.worldObj.isRemote)
-		{
-			this.sendUpdates();
-		}
-
-		this.genetics = MoaGenetics.getMixedResult(this.worldObj, this.motherGeneticSeed, this.fatherGeneticSeed);
-	}
-
 	public void setFamilyNest(MoaNest familyNest)
 	{
 		this.familyNest = familyNest;
@@ -148,13 +122,6 @@ public class TileEntityMoaEgg extends TileEntity implements ITickable
 		super.readFromNBT(nbt);
 
 		this.secondsUntilHatch = nbt.getInteger("secondsUntilHatch");
-		this.motherGeneticSeed = nbt.getInteger("motherGeneticSeed");
-		this.fatherGeneticSeed = nbt.getInteger("fatherGeneticSeed");
-
-		if (this.worldObj != null)
-		{
-			this.genetics = MoaGenetics.getMixedResult(this.worldObj, this.motherGeneticSeed, this.fatherGeneticSeed);
-		}
 
 		this.gender = AnimalGender.get(nbt.getString("creatureGender"));
 
@@ -167,8 +134,6 @@ public class TileEntityMoaEgg extends TileEntity implements ITickable
 		super.writeToNBT(nbt);
 
 		nbt.setInteger("secondsUntilHatch", this.secondsUntilHatch);
-		nbt.setInteger("motherGeneticSeed", this.motherGeneticSeed);
-		nbt.setInteger("fatherGeneticSeed", this.fatherGeneticSeed);
 
 		if (this.gender != null)
 		{
@@ -195,7 +160,7 @@ public class TileEntityMoaEgg extends TileEntity implements ITickable
 		this.readFromNBT(packet.getNbtCompound());
 	}
 
-	private void sendUpdates()
+	public void sendUpdates()
 	{
 		IBlockState state = this.worldObj.getBlockState(this.pos);
 

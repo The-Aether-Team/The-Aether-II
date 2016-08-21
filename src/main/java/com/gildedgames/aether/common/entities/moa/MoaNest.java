@@ -1,19 +1,17 @@
 package com.gildedgames.aether.common.entities.moa;
 
+import com.gildedgames.aether.api.genes.BiologyUtil;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
 import com.gildedgames.aether.common.entities.util.EntityGroup;
-import com.gildedgames.aether.common.world.biome.BiomeAether;
 import com.gildedgames.util.core.nbt.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class MoaNest
@@ -37,7 +35,7 @@ public class MoaNest
 
 	public MoaNest(World world, BlockPos pos)
 	{
-		this(world, pos, MoaGenetics.getRandomGeneticSeed(world));
+		this(world, pos, BiologyUtil.getRandomSeed(world));
 	}
 	
 	public MoaNest(World world, BlockPos pos, int familyGeneticSeed)

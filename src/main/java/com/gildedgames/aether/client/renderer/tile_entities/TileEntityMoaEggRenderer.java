@@ -2,6 +2,7 @@ package com.gildedgames.aether.client.renderer.tile_entities;
 
 import com.gildedgames.aether.client.models.entities.tile.ModelMoaEgg;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -21,11 +22,16 @@ public class TileEntityMoaEggRenderer extends TileEntitySpecialRenderer<TileEnti
 	@Override
 	public void renderTileEntityAt(TileEntityMoaEgg egg, double x, double y, double z, float partialTicks, int destroyStage)
 	{
-		if (egg.genetics == null)
+		MoaGenePool genePool = MoaGenePool.get(egg);
+
+		if (genePool == null || genePool.getFeathers() == null)
 		{
 			return;
 		}
-		
+
+		/**
+		 * TODO: Should not be constantly recreating resource locations.
+		 */
 		ResourceLocation BACK_MARKING = new ResourceLocation(AetherCore.MOD_ID, "textures/tile_entities/moa_egg/back/" + egg.genetics.markBack.getResourcePath().replace("textures/entities/moa/back/", ""));
 		ResourceLocation HEAD_MARKING = new ResourceLocation(AetherCore.MOD_ID, "textures/tile_entities/moa_egg/head/" + egg.genetics.markHead.getResourcePath().replace("textures/entities/moa/head/", ""));
 
@@ -35,19 +41,19 @@ public class TileEntityMoaEggRenderer extends TileEntitySpecialRenderer<TileEnti
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glRotatef(180f, 1f, 0f, 1f);
 		
-		this.renderColor(egg.genetics.bodyColor);
+		this.renderColor(genePool.getFeathers().gene().data().getRGB());
 
 		this.bindTexture(TEXTURE_BASE);
 		
 		model.renderAll(0.0625F);
 		
-		this.renderColor(egg.genetics.beakColor);
+		this.renderColor(genePool.getKeratin().gene().data().getRGB());
 		
 		this.bindTexture(TEXTURE_BEAK);
 		
 		model.renderAll(0.0625F);
 		
-		this.renderColor(egg.genetics.markColor);
+		this.renderColor(genePool.getFeathers().gene().data().darker().getRGB());
 		
 		this.bindTexture(HEAD_MARKING);
 		

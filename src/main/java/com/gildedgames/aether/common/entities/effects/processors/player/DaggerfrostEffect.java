@@ -22,7 +22,7 @@ public class DaggerfrostEffect implements EffectProcessorPlayer<EntityEffectInst
 	@Override
 	public String getUnlocalizedName(Entity source, EntityEffectInstance instance)
 	{
-		return "ability.daggerfrost.name";
+		return "ability.daggerfrost.localizedName";
 	}
 
 	@Override

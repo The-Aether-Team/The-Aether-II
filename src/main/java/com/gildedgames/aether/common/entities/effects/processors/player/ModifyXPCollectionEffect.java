@@ -43,7 +43,7 @@ public class ModifyXPCollectionEffect implements EffectProcessorPlayer<Instance>
 	@Override
 	public String getUnlocalizedName(Entity source, Instance instance)
 	{
-		return "ability.modifyXPCollection.name";
+		return "ability.modifyXPCollection.localizedName";
 	}
 
 	@Override

@@ -20,7 +20,7 @@ public class ReduceHungerEffect implements EffectProcessorPlayer<EntityEffectIns
 	@Override
 	public String getUnlocalizedName(Entity source, EntityEffectInstance instance)
 	{
-		return "ability.reduceHunger.name";
+		return "ability.reduceHunger.localizedName";
 	}
 
 	@Override

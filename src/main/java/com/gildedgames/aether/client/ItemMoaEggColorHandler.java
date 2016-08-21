@@ -1,8 +1,8 @@
 package com.gildedgames.aether.client;
 
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 
 public class ItemMoaEggColorHandler implements IItemColor
 {
@@ -10,29 +10,25 @@ public class ItemMoaEggColorHandler implements IItemColor
 	@Override
 	public int getColorFromItemstack(ItemStack stack, int tintIndex)
 	{
-		NBTTagCompound tag = stack.getTagCompound();
+		MoaGenePool genePool = MoaGenePool.get(stack);
 
-		if (tag != null)
+		if (genePool != null && genePool.getFeathers() != null)
 		{
-			if (tag.getBoolean("genericDisplay"))
+			if (tintIndex == 0)
 			{
-				return -1;
-			}
-			else if (tintIndex == 0)
-			{
-				return tag.getInteger("bodyColor");
+				return genePool.getFeathers().gene().data().getRGB();
 			}
 			else if (tintIndex == 1)
 			{
-				return tag.getInteger("legColor");
+				return genePool.getKeratin().gene().data().getRGB();
 			}
 			else if (tintIndex == 2)
 			{
-				return tag.getInteger("beakColor");
+				return genePool.getEyes().gene().data().getRGB();
 			}
 			else if (tintIndex == 3)
 			{
-				return tag.getInteger("markColor");
+				return genePool.getFeathers().gene().data().darker().getRGB();
 			}
 		}
 

@@ -1,9 +1,10 @@
 package com.gildedgames.aether.common.entities.ai.moa;
 
+import com.gildedgames.aether.api.genes.BiologyUtil;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockWovenSticks;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.moa.EntityMoa;
-import com.gildedgames.aether.common.entities.moa.MoaNest;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
 import com.gildedgames.aether.common.entities.util.EntityGroupMember;
 import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
@@ -26,15 +27,13 @@ public class AIMoaPackBreeding extends EntityAIBase
 
 	public BlockPos eggPos;
 
-	public int motherGeneticSeed, fatherGeneticSeed, timeUntilLay;
+	public int timeUntilLay;
 
-	public AIMoaPackBreeding(EntityMoa moa, int motherGeneticSeed, int fatherGeneticSeed, float moveSpeed)
+	public AIMoaPackBreeding(EntityMoa moa, float moveSpeed)
 	{
 		this.world = moa.worldObj;
 		this.moveSpeed = moveSpeed;
 
-		this.motherGeneticSeed = motherGeneticSeed;
-		this.fatherGeneticSeed = fatherGeneticSeed;
 		this.moa = moa;
 		
 		if (!moa.isGroupLeader())
@@ -117,8 +116,11 @@ public class AIMoaPackBreeding extends EntityAIBase
 
 			if (egg != null)
 			{
-				egg.setMotherSeed(this.motherGeneticSeed);
-				egg.setFatherSeed(this.fatherGeneticSeed);
+				MoaGenePool teGenes = MoaGenePool.get(egg);
+				MoaGenePool entityGenes = this.moa.getGenePool();
+
+				teGenes.transformFromParents(BiologyUtil.getRandomSeed(this.moa.getEntityWorld()), entityGenes.getFatherSeed(), entityGenes.getMotherSeed());
+
 				egg.setFamilyNest(this.moa.getFamilyNest());
 
 				if (!this.moa.getAnimalPack().hasLeader())

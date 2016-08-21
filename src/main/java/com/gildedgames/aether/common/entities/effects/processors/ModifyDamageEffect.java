@@ -58,7 +58,7 @@ public class ModifyDamageEffect implements EntityEffectProcessor<Instance>
 	@Override
 	public String getUnlocalizedName(Entity source, Instance instance)
 	{
-		return "ability.extraDamage.name";
+		return "ability.extraDamage.localizedName";
 	}
 
 	@Override
