@@ -29,6 +29,8 @@ import com.gildedgames.aether.common.entities.companions.EntitySoaringWisp;
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
 import com.gildedgames.aether.common.entities.living.*;
 import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
+import com.gildedgames.aether.common.entities.living.enemies.EntityTempest;
+import com.gildedgames.aether.common.entities.living.enemies.EntityZephyr;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
 import com.gildedgames.aether.common.entities.moa.EntityMoa;
@@ -88,6 +90,10 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityCockatrice.class, new AetherRenderFactory<>(RenderCockatrice.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityRam.class, new AetherRenderFactory<>(RenderRam.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMoa.class, new AetherRenderFactory<>(RenderMoa.class));
+
+		RenderingRegistry.registerEntityRenderingHandler(EntityAerwhale.class, new AetherRenderFactory<>(RenderAerwhale.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityZephyr.class, new AetherRenderFactory<>(RenderZephyr.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTempest.class, new AetherRenderFactory<>(RenderTempest.class));
 	}
 
 	private static void registerTESRs()

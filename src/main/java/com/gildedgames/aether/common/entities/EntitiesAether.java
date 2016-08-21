@@ -14,6 +14,8 @@ import com.gildedgames.aether.common.entities.companions.EntitySoaringWisp;
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
 import com.gildedgames.aether.common.entities.living.*;
 import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
+import com.gildedgames.aether.common.entities.living.enemies.EntityTempest;
+import com.gildedgames.aether.common.entities.living.enemies.EntityZephyr;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
 import com.gildedgames.aether.common.entities.moa.EntityMoa;
@@ -40,6 +42,9 @@ public class EntitiesAether
 		registerLivingEntity(EntityCockatrice.class, "cockatrice", 0xCCFFFF, 0x6b519c);
 		registerLivingEntity(EntityRam.class, "ram", 0xCCFFFF, 0xCCCCFF);
 		registerLivingEntity(EntityMoa.class, "moa", 0xCCFFFF, 0xCCCCFF);
+		registerLivingEntity(EntityAerwhale.class, "aerwhale", 0xCCFFFF, 0xCCCCFF);
+		registerLivingEntity(EntityZephyr.class, "zephyr", 0xCCFFFF, 0xCCCCFF);
+		registerLivingEntity(EntityTempest.class, "tempest", 0xCCFFFF, 0xCCCCFF);
 
 		registerLivingEntity(EntityFrostpineTotem.class, "frostpine_totem");
 		registerLivingEntity(EntityKraisith.class, "kraisith");
@@ -58,14 +63,18 @@ public class EntitiesAether
 		EntityRegistry.registerModEntity(EntityBolt.class, "bolt", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 
 		SpawnManager manager = SpawningModule.createAndRegisterSpawnManager(AetherCore.CONFIG.getAetherDimID());
+
 		manager.registerPerTickEntry(new SpawnEntry(EntityAerbunny.class, 2, 5, 0.3f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityFlyingCow.class, 1, 4, 0.65f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityPhyg.class, 1, 4, 0.35f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityCarrionSprout.class, 2, 3, 0.4f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityRam.class, 3, 5, 0.5f));
+		manager.registerPerTickEntry(new SpawnEntry(EntityAerwhale.class, 1, 1, 0.2f, false));
 
+		manager.registerPerTickEntry(new SpawnEntry(EntityZephyr.class, 2, 3, 0.4f, false));
 		manager.registerPerTickEntry(new SpawnEntry(EntityAechorPlant.class, 2, 4, 0.4f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityCockatrice.class, 6, 8, 0.5f));
+		manager.registerPerTickEntry(new SpawnEntry(EntityTempest.class, 2, 3, 0.4f, false));
 	}
 
 	private static void registerLivingEntity(Class<? extends Entity> entity, String id, int eggPrimaryColor, int eggSecondaryColor)

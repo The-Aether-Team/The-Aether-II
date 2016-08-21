@@ -12,6 +12,8 @@ public class SoundsAether
 
 	public static SoundEvent aercloud_bounce = new SoundEvent(AetherCore.getResource("aeblock.aercloud.bounce"));
 
+	public static SoundEvent aerbunny_ambient = new SoundEvent(AetherCore.getResource("aemob.aerbunny.ambient"));
+
 	public static SoundEvent aerbunny_hurt = new SoundEvent(AetherCore.getResource("aemob.aerbunny.hurt"));
 
 	public static SoundEvent aerbunny_death = new SoundEvent(AetherCore.getResource("aemob.aerbunny.death"));
@@ -35,5 +37,23 @@ public class SoundsAether
 	public static SoundEvent cockatrice_death = new SoundEvent(AetherCore.getResource("aemob.cockatrice.death"));
 
 	public static SoundEvent cockatrice_ambient = new SoundEvent(AetherCore.getResource("aemob.cockatrice.ambient"));
+
+	public static SoundEvent zephyr_ambient = new SoundEvent(AetherCore.getResource("aemob.zephyr.ambient"));
+
+	public static SoundEvent tempest_ambient = new SoundEvent(AetherCore.getResource("aemob.tempest.ambient"));
+
+	public static SoundEvent tempest_hurt = new SoundEvent(AetherCore.getResource("aemob.tempest.hurt"));
+
+	public static SoundEvent tempest_death = new SoundEvent(AetherCore.getResource("aemob.tempest.death"));
+
+	public static SoundEvent aerwhale_ambient = new SoundEvent(AetherCore.getResource("aemob.aerwhale.ambient"));
+
+	public static SoundEvent aerwhale_death = new SoundEvent(AetherCore.getResource("aemob.aerwhale.death"));
+
+	public static SoundEvent tempest_electric_shock = new SoundEvent(AetherCore.getResource("aemob.tempest.electric_shock"));
+
+	public static SoundEvent tempest_angry = new SoundEvent(AetherCore.getResource("aemob.tempest.angry"));
+
+	public static SoundEvent zephyr_puff = new SoundEvent(AetherCore.getResource("aemob.zephyr.puff"));
 
 }

@@ -104,6 +104,13 @@
 			"aether:aemob/aerbunny/lift"
 		]
 	},
+	"aemob.aerbunny.ambient": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/aerbunny/say1",
+			"aether:aemob/aerbunny/say2"
+		]
+	},
 	"aemob.aerbunny.hurt": {
 		"category": "neutral",
 		"sounds": [
@@ -154,6 +161,66 @@
 		"category": "neutral",
 		"sounds": [
 			"aether:aeblock/aercloud/bounce"
+		]
+	},
+	"aemob.tempest.ambient": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/tempest/say1",
+			"aether:aemob/tempest/say2",
+			"aether:aemob/tempest/say3",
+			"aether:aemob/tempest/say4",
+			"aether:aemob/tempest/say5"
+		]
+	},
+	"aemob.tempest.death": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/tempest/death1",
+			"aether:aemob/tempest/death2"
+		]
+	},
+	"aemob.tempest.hurt": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/tempest/hurt1"
+		]
+	},
+	"aemob.zephyr.ambient": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/zephyr/say1",
+			"aether:aemob/zephyr/say2"
+		]
+	},
+	"aemob.aerwhale.ambient": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/aerwhale/say"
+		]
+	},
+	"aemob.aerwhale.death": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/aerwhale/death"
+		]
+	},
+	"aemob.tempest.electric_shock": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/tempest/electric_shock"
+		]
+	},
+	"aemob.tempest.angry": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/tempest/angry"
+		]
+	},
+	"aemob.zephyr.puff": {
+		"category": "neutral",
+		"sounds": [
+			"aether:aemob/zephyr/puff"
 		]
 	}
 }
