@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.renderer.entities.living.layers;
 
+import com.google.common.base.Supplier;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -12,10 +13,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class LayerGlowing<T extends EntityLiving> implements LayerRenderer<T>
 {
-	private final ResourceLocation glowingLayer;
+	private final Supplier<ResourceLocation> glowingLayer;
     private final RenderLiving<T> renderer;
 
-    public LayerGlowing(RenderLiving<T> renderer, ResourceLocation glowingLayer)
+    public LayerGlowing(RenderLiving<T> renderer, final ResourceLocation glowingLayer)
+    {
+        this(renderer, new Supplier<ResourceLocation>()
+        {
+            @Override public ResourceLocation get()
+            {
+                return glowingLayer;
+            }
+        });
+    }
+
+    public LayerGlowing(RenderLiving<T> renderer, Supplier<ResourceLocation> glowingLayer)
     {
         this.renderer = renderer;
         this.glowingLayer = glowingLayer;
@@ -23,7 +35,7 @@ public class LayerGlowing<T extends EntityLiving> implements LayerRenderer<T>
 
     public void doRenderLayer(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)
     {
-        this.renderer.bindTexture(this.glowingLayer);
+        this.renderer.bindTexture(this.glowingLayer.get());
         GlStateManager.enableBlend();
         GlStateManager.disableAlpha();
         GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
