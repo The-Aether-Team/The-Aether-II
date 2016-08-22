@@ -17,7 +17,7 @@ import org.ajoberstar.grgit.*
 apply plugin: 'net.minecraftforge.gradle.forge'
 
 ext.config = loadConfig(file('build.properties'))
-ext.repo = Grgit.open(project.file('.'))
+ext.repo = Grgit.open()
 
 allprojects {
 	sourceCompatibility = 1.7
@@ -86,7 +86,7 @@ minecraft {
 	makeObfSourceJar = false
 }
 
-def loadConfig(File config) {
+static def loadConfig(File config) {
 	def props = new Properties()
 	config.withInputStream {
 		stream -> props.load(stream)
@@ -103,4 +103,15 @@ task signJar(type: SignJar, dependsOn: reobfJar) {
 		inputFile = jar.archivePath
 		outputFile = jar.archivePath
 	}
+}
+
+task apiJar(type: Jar) {
+	classifier = "api"
+
+	from sourceSets.api.output
+}
+
+artifacts {
+	archives jar
+	archives apiJar
 }
