@@ -23,7 +23,7 @@ public class AISavageAttack extends EntityAI<EntityChestMimic>
         this.secsOverheating = secsOverheating;
         this.secsAttacking = secsAttacking;
 
-        this.setMutexBits(6);
+        this.setMutexBits(1);
     }
 
     @Override
