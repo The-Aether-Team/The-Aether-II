@@ -16,7 +16,7 @@ public class LabyrinthTotemSound extends PositionedSound implements ITickableSou
 
 	public LabyrinthTotemSound(World world, BlockPos pos)
 	{
-		super(SoundsAether.labyrinth_totem_hum, SoundCategory.AMBIENT);
+		super(SoundsAether.labyrinth_totem_drone, SoundCategory.AMBIENT);
 
 		this.world = world;
 		this.pos = pos;

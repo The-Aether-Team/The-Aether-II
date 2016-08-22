@@ -1,80 +1,128 @@
 package com.gildedgames.aether.common;
 
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
-// Welcome to the super-giant retarded class. It hates you.
-// This isn't a client-side only class.
 public class SoundsAether
 {
+	public static final SoundEvent glowstone_portal_hum = new SoundEvent(AetherCore.getResource("portal.glowstone.hum"));
 
-	public static SoundEvent aether_portal_hum = new SoundEvent(AetherCore.getResource("aeportal.portal"));
+	public static final SoundEvent labyrinth_totem_drone = new SoundEvent(AetherCore.getResource("portal.labyrinth_totem.drone"));
 
-	public static SoundEvent labyrinth_totem_hum = new SoundEvent(AetherCore.getResource("aeblock.labyrinth_totem.drone"));
+	public static final SoundEvent aercloud_bounce = new SoundEvent(AetherCore.getResource("block.aercloud.bounce"));
 
-	public static SoundEvent aercloud_bounce = new SoundEvent(AetherCore.getResource("aeblock.aercloud.bounce"));
+	public static final SoundEvent aerbunny_ambient = new SoundEvent(AetherCore.getResource("mob.aerbunny.ambient"));
 
-	public static SoundEvent aerbunny_ambient = new SoundEvent(AetherCore.getResource("aemob.aerbunny.ambient"));
+	public static final SoundEvent aerbunny_hurt = new SoundEvent(AetherCore.getResource("mob.aerbunny.hurt"));
 
-	public static SoundEvent aerbunny_hurt = new SoundEvent(AetherCore.getResource("aemob.aerbunny.hurt"));
+	public static final SoundEvent aerbunny_death = new SoundEvent(AetherCore.getResource("mob.aerbunny.death"));
 
-	public static SoundEvent aerbunny_death = new SoundEvent(AetherCore.getResource("aemob.aerbunny.death"));
+	public static final SoundEvent aerbunny_lift = new SoundEvent(AetherCore.getResource("mob.aerbunny.lift"));
 
-	public static SoundEvent aerbunny_lift = new SoundEvent(AetherCore.getResource("aemob.aerbunny.lift"));
+	public static final SoundEvent record_aerwhale = new SoundEvent(AetherCore.getResource("records.aerwhale"));
 
-	public static SoundEvent record_aerwhale = new SoundEvent(AetherCore.getResource("records.aerwhale"));
+	public static final SoundEvent record_moa = new SoundEvent(AetherCore.getResource("records.moa"));
 
-	public static SoundEvent record_moa = new SoundEvent(AetherCore.getResource("records.moa"));
+	public static final SoundEvent record_valkyrie = new SoundEvent(AetherCore.getResource("records.valkyrie"));
 
-	public static SoundEvent record_valkyrie = new SoundEvent(AetherCore.getResource("records.valkyrie"));
+	public static final SoundEvent record_labyrinth = new SoundEvent(AetherCore.getResource("records.labyrinth"));
 
-	public static SoundEvent record_labyrinth = new SoundEvent(AetherCore.getResource("records.labyrinth"));
+	public static final SoundEvent record_recording_892 = new SoundEvent(AetherCore.getResource("records.recording_892"));
 
-	public static SoundEvent record_recording_892 = new SoundEvent(AetherCore.getResource("records.recording_892"));
+	public static final SoundEvent dart_shooter_fire = new SoundEvent(AetherCore.getResource("random.dart_shooter"));
 
-	public static SoundEvent shoot_dart = new SoundEvent(AetherCore.getResource("aerandom.dart_shooter"));
+	public static final SoundEvent cockatrice_hurt = new SoundEvent(AetherCore.getResource("mob.cockatrice.hurt"));
 
-	public static SoundEvent cockatrice_hurt = new SoundEvent(AetherCore.getResource("aemob.cockatrice.hurt"));
+	public static final SoundEvent cockatrice_death = new SoundEvent(AetherCore.getResource("mob.cockatrice.death"));
 
-	public static SoundEvent cockatrice_death = new SoundEvent(AetherCore.getResource("aemob.cockatrice.death"));
+	public static final SoundEvent cockatrice_ambient = new SoundEvent(AetherCore.getResource("mob.cockatrice.ambient"));
 
-	public static SoundEvent cockatrice_ambient = new SoundEvent(AetherCore.getResource("aemob.cockatrice.ambient"));
+	public static final SoundEvent zephyr_ambient = new SoundEvent(AetherCore.getResource("mob.zephyr.ambient"));
 
-	public static SoundEvent zephyr_ambient = new SoundEvent(AetherCore.getResource("aemob.zephyr.ambient"));
+	public static final SoundEvent tempest_ambient = new SoundEvent(AetherCore.getResource("mob.tempest.ambient"));
 
-	public static SoundEvent tempest_ambient = new SoundEvent(AetherCore.getResource("aemob.tempest.ambient"));
+	public static final SoundEvent tempest_hurt = new SoundEvent(AetherCore.getResource("mob.tempest.hurt"));
 
-	public static SoundEvent tempest_hurt = new SoundEvent(AetherCore.getResource("aemob.tempest.hurt"));
+	public static final SoundEvent tempest_death = new SoundEvent(AetherCore.getResource("mob.tempest.death"));
 
-	public static SoundEvent tempest_death = new SoundEvent(AetherCore.getResource("aemob.tempest.death"));
+	public static final SoundEvent aerwhale_ambient = new SoundEvent(AetherCore.getResource("mob.aerwhale.ambient"));
 
-	public static SoundEvent aerwhale_ambient = new SoundEvent(AetherCore.getResource("aemob.aerwhale.ambient"));
+	public static final SoundEvent aerwhale_death = new SoundEvent(AetherCore.getResource("mob.aerwhale.death"));
 
-	public static SoundEvent aerwhale_death = new SoundEvent(AetherCore.getResource("aemob.aerwhale.death"));
+	public static final SoundEvent tempest_electric_shock = new SoundEvent(AetherCore.getResource("mob.tempest.electric_shock"));
 
-	public static SoundEvent tempest_electric_shock = new SoundEvent(AetherCore.getResource("aemob.tempest.electric_shock"));
+	public static final SoundEvent tempest_angry = new SoundEvent(AetherCore.getResource("mob.tempest.angry"));
 
-	public static SoundEvent tempest_angry = new SoundEvent(AetherCore.getResource("aemob.tempest.angry"));
+	public static final SoundEvent zephyr_puff = new SoundEvent(AetherCore.getResource("mob.zephyr.puff"));
 
-	public static SoundEvent zephyr_puff = new SoundEvent(AetherCore.getResource("aemob.zephyr.puff"));
+	public static final SoundEvent detonating = new SoundEvent(AetherCore.getResource("random.detonating"));
 
-	public static SoundEvent detonating = new SoundEvent(AetherCore.getResource("aerandom.detonating"));
+	public static final SoundEvent detonate = new SoundEvent(AetherCore.getResource("random.detonate"));
 
-	public static SoundEvent detonate = new SoundEvent(AetherCore.getResource("aerandom.detonate"));
+	public static final SoundEvent sentry_ambient = new SoundEvent(AetherCore.getResource("mob.sentry.ambient"));
 
-	public static SoundEvent sentry_ambient = new SoundEvent(AetherCore.getResource("aemob.sentry.ambient"));
+	public static final SoundEvent sentry_hurt = new SoundEvent(AetherCore.getResource("mob.sentry.hurt"));
 
-	public static SoundEvent sentry_hurt = new SoundEvent(AetherCore.getResource("aemob.sentry.hurt"));
+	public static final SoundEvent sentry_death = new SoundEvent(AetherCore.getResource("mob.sentry.death"));
 
-	public static SoundEvent sentry_death = new SoundEvent(AetherCore.getResource("aemob.sentry.death"));
+	public static final SoundEvent stone_thud = new SoundEvent(AetherCore.getResource("random.stone_thud"));
 
-	public static SoundEvent stone_thud = new SoundEvent(AetherCore.getResource("aerandom.stone_thud"));
+	public static final SoundEvent battle_golem_ambient = new SoundEvent(AetherCore.getResource("mob.battle_golem.ambient"));
 
-	public static SoundEvent battle_golem_ambient = new SoundEvent(AetherCore.getResource("aemob.battle_golem.ambient"));
+	public static final SoundEvent battle_golem_hurt = new SoundEvent(AetherCore.getResource("mob.battle_golem.hurt"));
 
-	public static SoundEvent battle_golem_hurt = new SoundEvent(AetherCore.getResource("aemob.battle_golem.hurt"));
+	public static final SoundEvent tracking_sentry_alarm = new SoundEvent(AetherCore.getResource("mob.tracking_sentry.alarm"));
 
-	public static SoundEvent tracking_sentry_alarm = new SoundEvent(AetherCore.getResource("aemob.tracking_sentry.alarm"));
+	public static final SoundEvent battle_sentry_pounce = new SoundEvent(AetherCore.getResource("mob.battle_sentry.pounce"));
 
-	public static SoundEvent battle_sentry_pounce = new SoundEvent(AetherCore.getResource("aemob.battle_sentry.pounce"));
+	public static void preInit() {
+		registerSound("portal.glowstone.drone", glowstone_portal_hum);
+		registerSound("portal.labyrinth_totem.hum", labyrinth_totem_drone);
 
+		registerSound("block.aercloud.bounce", aercloud_bounce);
+
+		registerSound("mob.aerbunny.ambient", aerbunny_ambient);
+		registerSound("mob.aerbunny.hurt", aerbunny_hurt);
+		registerSound("mob.aerbunny.death", aerbunny_death);
+		registerSound("mob.aerbunny.lift", aerbunny_lift);
+
+		registerSound("mob.cockatrice.ambient", cockatrice_ambient);
+		registerSound("mob.cockatrice.hurt", cockatrice_hurt);
+		registerSound("mob.cockatrice.death", cockatrice_death);
+
+		registerSound("mob.zephyr.ambient", zephyr_ambient);
+		registerSound("mob.zephyr.puff", zephyr_puff);
+
+		registerSound("mob.tempest.ambient", tempest_ambient);
+		registerSound("mob.tempest.hurt", tempest_hurt);
+		registerSound("mob.tempest.death", tempest_death);
+		registerSound("mob.tempest.angry", tempest_angry);
+		registerSound("mob.tempest.shock", tempest_electric_shock);
+
+		registerSound("mob.aerwhale.ambient", aerwhale_ambient);
+		registerSound("mob.aerwhale.death", aerwhale_death);
+
+		registerSound("mob.battle_golem.ambient", battle_golem_ambient);
+		registerSound("mob.battle_golem.hurt", battle_golem_hurt);
+
+		registerSound("mob.tracking_sentry.alarm", tracking_sentry_alarm);
+
+		registerSound("mob.battle_sentry.pounce", battle_sentry_pounce);
+
+		registerSound("random.stone.thud", stone_thud);
+		registerSound("random.detonating", detonating);
+		registerSound("random.detonate", detonate);
+
+		registerSound("record.aerwhale", record_aerwhale);
+		registerSound("record.labyrinth", record_labyrinth);
+		registerSound("record.moa", record_moa);
+		registerSound("record.recording_892", record_recording_892);
+		registerSound("record.valkyrie", record_valkyrie);
+
+		registerSound("weapon.dart_shooter.fire", dart_shooter_fire);
+	}
+
+	private static void registerSound(String resource, SoundEvent event) {
+		GameRegistry.register(event, AetherCore.getResource(resource));
+	}
 }

@@ -30,11 +30,11 @@ public class AetherMusicGenerator implements IMusicGenerator
 
 		if (time > 1000L && time < 9000L)
 		{
-			return new SoundEvent(AetherCore.getResource("aemusic.day"));
+			return new SoundEvent(AetherCore.getResource("music.day"));
 		}
 		else if (time > 13000L && time < 20000L)
 		{
-			return new SoundEvent(AetherCore.getResource("aemusic.night"));
+			return new SoundEvent(AetherCore.getResource("music.night"));
 		}
 
 		return null;

@@ -48,7 +48,7 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 
 		if (flag)
 		{
-			if (i > 0 && entityIn instanceof EntityLivingBase)
+			if (i > 0)
 			{
 				((EntityLivingBase)entityIn).knockBack(this, (float)i * 0.5F, (double) MathHelper.sin(this.rotationYaw * 0.017453292F), (double)(-MathHelper.cos(this.rotationYaw * 0.017453292F)));
 				this.motionX *= 0.6D;

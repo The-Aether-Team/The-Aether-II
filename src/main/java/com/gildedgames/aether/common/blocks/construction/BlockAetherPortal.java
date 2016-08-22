@@ -88,7 +88,7 @@ public class BlockAetherPortal extends BlockBreakable
 	{
 		if (rand.nextInt(150) == 0)
 		{
-			world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundsAether.aether_portal_hum, SoundCategory.BLOCKS, 0.2F, (rand.nextFloat() * 0.2F) + 0.9F, false);
+			world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundsAether.glowstone_portal_hum, SoundCategory.BLOCKS, 0.2F, (rand.nextFloat() * 0.2F) + 0.9F, false);
 		}
 
 		for (int count = 0; count < 4; count++)

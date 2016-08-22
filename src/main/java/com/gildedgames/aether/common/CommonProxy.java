@@ -63,6 +63,7 @@ public class CommonProxy
 		// Pre-initialize content
 		DimensionsAether.preInit();
 		MaterialsAether.preInit();
+		SoundsAether.preInit();
 
 		BlocksAether.preInit();
 		ItemsAether.preInit();
