@@ -69,16 +69,16 @@ public class RenderLabyrinthChestMimic extends RenderLiving<EntityChestMimic>
 	@Override
 	protected ResourceLocation getEntityTexture(EntityChestMimic entity)
 	{
-		if (entity.getAttackTarget() != null)
-		{
-			this.glowingLayer.setResourceLocation(TEXTURE_ANGRY_GLOW);
-		}
-		else
+		if (entity.isOverheating())
 		{
 			this.glowingLayer.setResourceLocation(TEXTURE_GLOW);
 		}
+		else
+		{
+			this.glowingLayer.setResourceLocation(TEXTURE_ANGRY_GLOW);
+		}
 
-		return entity.getAttackTarget() != null ? TEXTURE_ANGRY : TEXTURE;
+		return entity.isOverheating() ? TEXTURE : TEXTURE_ANGRY;
 	}
 
 	private static class GlowingLayer implements Supplier<ResourceLocation>
