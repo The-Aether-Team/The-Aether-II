@@ -24,14 +24,11 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 
 import java.util.Random;
-
-import static net.minecraft.realms.Tezzelator.t;
 
 public class BiomeAetherDecorator
 {
@@ -255,14 +252,14 @@ public class BiomeAetherDecorator
 
 	public BlockPos getTopBlock(World world, BlockPos pos)
 	{
-		BlockPos blockpos;
+		BlockPos searchPos = new BlockPos(pos.getX(), world.getActualHeight(), pos.getZ());
 
-		for (blockpos = new BlockPos(pos.getX(), world.getActualHeight(), pos.getZ()); !world.isAirBlock(blockpos.down()); blockpos = blockpos.down())
+		while (!world.isAirBlock(searchPos.down()))
 		{
-			;
+			searchPos = searchPos.down();
 		}
 
-		return blockpos;
+		return searchPos;
 	}
 
 	private void generateMineable(WorldGenMinable minable, World world, Random random, BlockPos pos, int minY, int maxY, int attempts)

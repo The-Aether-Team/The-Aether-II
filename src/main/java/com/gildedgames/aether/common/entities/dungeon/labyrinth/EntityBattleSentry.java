@@ -5,19 +5,14 @@ import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AIPounceClose
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFloat;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFollowAttackTarget;
 import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-
-import static jdk.nashorn.internal.runtime.regexp.joni.encoding.CharacterType.D;
 
 public class EntityBattleSentry extends EntityMob
 {
@@ -64,7 +59,7 @@ public class EntityBattleSentry extends EntityMob
 	@Override
 	protected void jump()
 	{
-		if (((HoppingMoveHelper)this.getMoveHelper()).getSpeed() >= 4.0D)
+		if (this.getMoveHelper().getSpeed() >= 4.0D)
 		{
 			this.playSound(SoundsAether.battle_sentry_pounce, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
 			this.playSound(SoundsAether.sentry_hurt, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
@@ -87,7 +82,7 @@ public class EntityBattleSentry extends EntityMob
 	@Override
 	public void onCollideWithPlayer(EntityPlayer entityIn)
 	{
-		if (!this.isDead && this.getHealth() > 0 && ((HoppingMoveHelper)this.getMoveHelper()).getSpeed() >= 4.0D)
+		if (!this.isDead && this.getHealth() > 0 && this.getMoveHelper().getSpeed() >= 4.0D)
 		{
 			this.dealDamage(entityIn);
 		}

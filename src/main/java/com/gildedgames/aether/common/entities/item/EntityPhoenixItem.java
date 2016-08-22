@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.item;
 
-import com.gildedgames.aether.common.items.properties.IPhoenixChillable;
+import com.gildedgames.aether.common.capabilities.item.properties.IPhoenixChillable;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;

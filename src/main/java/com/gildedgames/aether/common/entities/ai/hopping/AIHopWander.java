@@ -2,10 +2,7 @@ package com.gildedgames.aether.common.entities.ai.hopping;
 
 import com.gildedgames.aether.common.entities.ai.EntityAI;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.init.MobEffects;
-import net.minecraft.pathfinding.PathNavigateGround;
 
 public class AIHopWander extends EntityAI<EntityLiving>
 {

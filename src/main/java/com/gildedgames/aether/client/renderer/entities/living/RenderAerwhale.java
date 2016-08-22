@@ -1,14 +1,11 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.models.entities.living.ModelAerwhale;
-import com.gildedgames.aether.client.models.entities.living.ModelRam;
-import com.gildedgames.aether.client.renderer.entities.living.layers.LayerRamWool;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderAerwhale extends RenderLiving<EntityLiving>

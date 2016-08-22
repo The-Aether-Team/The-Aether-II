@@ -18,7 +18,7 @@ public class EntityGroup
 
 	private boolean hasLeader;
 
-	List<EntityGroupAggressor> agressors = new ArrayList<EntityGroupAggressor>();
+	List<EntityGroupAggressor> agressors = new ArrayList<>();
 
 	int tickCounter = 0;
 
@@ -127,9 +127,8 @@ public class EntityGroup
 		double d0 = Double.MAX_VALUE;
 		EntityGroupAggressor agressor = null;
 
-		for (int i = 0; i < this.agressors.size(); ++i)
+		for (EntityGroupAggressor agressor1 : this.agressors)
 		{
-			EntityGroupAggressor agressor1 = this.agressors.get(i);
 			double d1 = agressor1.agressor.getDistanceSqToEntity(entity);
 
 			if (d1 <= d0)

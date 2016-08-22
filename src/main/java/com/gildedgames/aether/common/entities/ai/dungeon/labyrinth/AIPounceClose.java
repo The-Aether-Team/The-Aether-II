@@ -1,16 +1,11 @@
 package com.gildedgames.aether.common.entities.ai.dungeon.labyrinth;
 
-import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.EntityAI;
 import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
 import com.gildedgames.aether.common.util.EntityUtil;
 import com.gildedgames.aether.common.util.TickTimer;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
-
-import java.util.List;
 
 public class AIPounceClose extends EntityAI<EntityLiving>
 {

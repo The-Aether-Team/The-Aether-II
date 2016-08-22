@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.genes.moa;
 
-import com.gildedgames.aether.api.genes.GenePool;
+import com.gildedgames.aether.api.genes.IGenePool;
 import com.gildedgames.aether.api.genes.BiologyUtil;
 import com.gildedgames.aether.api.genes.GeneRegion;
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
@@ -18,16 +18,16 @@ import java.awt.*;
 import java.util.List;
 import java.util.Random;
 
-public class MoaGenePool implements GenePool
+public class MoaGenePool implements IGenePool
 {
 
-	private static final DataParameter<Integer> SEED = EntityDataManager.<Integer>createKey(EntityMoa.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> SEED = EntityDataManager.createKey(EntityMoa.class, DataSerializers.VARINT);
 
-	private static final DataParameter<Integer> FATHER_SEED = EntityDataManager.<Integer>createKey(EntityMoa.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> FATHER_SEED = EntityDataManager.createKey(EntityMoa.class, DataSerializers.VARINT);
 
-	private static final DataParameter<Integer> MOTHER_SEED = EntityDataManager.<Integer>createKey(EntityMoa.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> MOTHER_SEED = EntityDataManager.createKey(EntityMoa.class, DataSerializers.VARINT);
 
-	private static final DataParameter<Boolean> SHOULD_RETRANSFORM = EntityDataManager.<Boolean>createKey(EntityMoa.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> SHOULD_RETRANSFORM = EntityDataManager.createKey(EntityMoa.class, DataSerializers.BOOLEAN);
 
 	private GeneRegion<DataGene<Color>> keratin, feathers, eyes;
 

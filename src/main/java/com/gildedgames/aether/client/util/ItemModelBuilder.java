@@ -11,11 +11,6 @@ public class ItemModelBuilder
 
 	private final String rootFolder;
 
-	public ItemModelBuilder()
-	{
-		this.rootFolder = null;
-	}
-
 	public ItemModelBuilder(String root)
 	{
 		if (!root.endsWith("/"))

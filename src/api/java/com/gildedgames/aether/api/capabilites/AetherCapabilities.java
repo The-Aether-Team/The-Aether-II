@@ -1,9 +1,9 @@
 package com.gildedgames.aether.api.capabilites;
 
-import com.gildedgames.aether.api.genes.GenePool;
-import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
-import com.gildedgames.aether.api.items.IItemEffectsCapability;
-import com.gildedgames.aether.api.items.IItemPropertiesCapability;
+import com.gildedgames.aether.api.genes.IGenePool;
+import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
+import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
+import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
@@ -22,7 +22,7 @@ public class AetherCapabilities
 	@CapabilityInject(IEntityEffectsCapability.class)
 	public static final Capability<IEntityEffectsCapability> ENTITY_EFFECTS = null;
 
-	@CapabilityInject(GenePool.class)
-	public static final Capability<GenePool> GENE_POOL = null;
+	@CapabilityInject(IGenePool.class)
+	public static final Capability<IGenePool> GENE_POOL = null;
 
 }

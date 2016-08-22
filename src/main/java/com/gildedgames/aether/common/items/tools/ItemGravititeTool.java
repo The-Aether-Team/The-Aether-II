@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.tools;
 
-import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -26,7 +26,7 @@ public class ItemGravititeTool extends ItemAetherTool
 	{
 		if (!world.isRemote)
 		{
-			PlayerAether aePlayer = (PlayerAether) PlayerAether.getPlayer(player);
+			PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
 
 			if (aePlayer.getHeldBlock() != null && aePlayer.getHeldBlock().ticksExisted > 1)
 			{
@@ -42,7 +42,7 @@ public class ItemGravititeTool extends ItemAetherTool
 	{
 		if (!world.isRemote)
 		{
-			PlayerAether aePlayer = (PlayerAether) PlayerAether.getPlayer(player);
+			PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
 
 			if (aePlayer.getHeldBlock() == null)
 			{

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.effects.rules;
 
-import com.gildedgames.aether.api.entities.effects.EntityEffectRule;
-import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
+import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.items.companions;
 
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import com.gildedgames.aether.common.AetherCreativeTabs;
+import com.gildedgames.aether.common.CreativeTabsAether;
 import com.gildedgames.aether.common.entities.companions.EntityCompanion;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -28,7 +28,7 @@ public class ItemCompanion extends Item
 
 		this.setMaxStackSize(1);
 
-		this.setCreativeTab(AetherCreativeTabs.tabCompanions);
+		this.setCreativeTab(CreativeTabsAether.tabCompanions);
 	}
 
 	public static void setRespawnTimer(ItemStack stack, World world, int timer)

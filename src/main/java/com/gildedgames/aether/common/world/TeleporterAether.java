@@ -341,16 +341,12 @@ public class TeleporterAether extends Teleporter implements NBT
 			return false;
 		}
 
-		final int posX = x;
-		final int posY = y;
-		final int posZ = z;
-
 		Template portalFrame = MANAGER.func_189942_b(this.worldServerInstance.getMinecraftServer(), new ResourceLocation(AetherCore.MOD_ID, "aether_portal"));
 
 		PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(rotation).setIgnoreEntities(false).setChunk(null).setReplacedBlock(Blocks.AIR).setIgnoreStructureBlock(false);
 
 		BlockPos size = portalFrame.transformedSize(rotation);
-		BlockPos pos = new BlockPos(posX, posY, posZ);
+		BlockPos pos = new BlockPos(x, y, z);
 
 		switch (rotation)
 		{

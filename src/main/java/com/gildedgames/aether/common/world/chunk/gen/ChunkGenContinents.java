@@ -77,7 +77,7 @@ public class ChunkGenContinents implements ChunkGen
 					{
 						IBlockState state = this.GEN_PROPS.state(noiseValue, posX + x, posZ + z);
 
-						primer.setBlockState(x, this.GEN_PROPS.yLevel() + (int) (y), z, state);
+						primer.setBlockState(x, this.GEN_PROPS.yLevel() + y, z, state);
 					}
 
 					evalHeight = MathHelper.floor_double((noiseValue) * this.GEN_PROPS.bottomHeightFactor());

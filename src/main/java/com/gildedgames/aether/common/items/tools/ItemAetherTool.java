@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.tools;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
+import com.gildedgames.aether.common.CreativeTabsAether;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -25,7 +25,7 @@ public class ItemAetherTool extends ItemTool
 		this.toolType = toolType;
 		this.name = name;
 
-		this.setCreativeTab(AetherCreativeTabs.tabTools);
+		this.setCreativeTab(CreativeTabsAether.tabTools);
 	}
 
 	protected boolean isAbilityPassive()

@@ -1,26 +1,26 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.api.genes.GenePool;
+import com.gildedgames.aether.api.genes.IGenePool;
 import com.gildedgames.aether.api.genes.GenePoolStorage;
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
-import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
-import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
+import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.api.genes.GenePoolProvider;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.genes.moa.UntrackedMoaGenePool;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import com.gildedgames.aether.common.entities.effects.EntityEffectsProvider;
 import com.gildedgames.aether.common.entities.moa.EntityMoa;
-import com.gildedgames.aether.common.items.effects.ItemEffects;
-import com.gildedgames.aether.common.items.effects.ItemEffectsProvider;
-import com.gildedgames.aether.common.items.miscellaneous.ItemMoaEgg;
-import com.gildedgames.aether.common.items.properties.ItemProperties;
-import com.gildedgames.aether.common.items.properties.ItemPropertiesProvider;
-import com.gildedgames.aether.common.player.PlayerAether;
-import com.gildedgames.aether.common.player.PlayerAetherProvider;
-import com.gildedgames.aether.api.items.IItemEffectsCapability;
-import com.gildedgames.aether.api.items.IItemPropertiesCapability;
+import com.gildedgames.aether.common.capabilities.item.effects.ItemEffects;
+import com.gildedgames.aether.common.capabilities.item.effects.ItemEffectsProvider;
+import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
+import com.gildedgames.aether.common.capabilities.item.properties.ItemPropertiesImpl;
+import com.gildedgames.aether.common.capabilities.item.properties.ItemPropertiesProvider;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherProvider;
+import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
+import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,10 +44,10 @@ public class AetherCapabilityManager
 		MinecraftForge.EVENT_BUS.register(AetherCapabilityManager.class);
 
 		CapabilityManager.INSTANCE.register(IItemEffectsCapability.class, new ItemEffects.Storage(), ItemEffects.class);
-		CapabilityManager.INSTANCE.register(IItemPropertiesCapability.class, new ItemProperties.Storage(), ItemProperties.class);
-		CapabilityManager.INSTANCE.register(IPlayerAetherCapability.class, new PlayerAether.Storage(), PlayerAether.class);
+		CapabilityManager.INSTANCE.register(IItemPropertiesCapability.class, new ItemPropertiesImpl.Storage(), ItemPropertiesImpl.class);
+		CapabilityManager.INSTANCE.register(IPlayerAetherCapability.class, new PlayerAetherImpl.Storage(), PlayerAetherImpl.class);
 		CapabilityManager.INSTANCE.register(IEntityEffectsCapability.class, new EntityEffects.Storage(), EntityEffects.class);
-		CapabilityManager.INSTANCE.register(GenePool.class, new GenePoolStorage(), MoaGenePool.class);
+		CapabilityManager.INSTANCE.register(IGenePool.class, new GenePoolStorage(), MoaGenePool.class);
 	}
 
 	@SubscribeEvent
@@ -75,7 +75,7 @@ public class AetherCapabilityManager
 		{
 			IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
 
-			IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(player);
+			IPlayerAetherCapability aePlayer = PlayerAetherImpl.getPlayer(player);
 
 			if (props != null && props.isEquippable())
 			{
@@ -111,7 +111,7 @@ public class AetherCapabilityManager
 
 		if (event.getEntity() instanceof EntityPlayer)
 		{
-			event.addCapability(AetherCore.getResource("PlayerData"), new PlayerAetherProvider(new PlayerAether((EntityPlayer) event.getEntity())));
+			event.addCapability(AetherCore.getResource("PlayerData"), new PlayerAetherProvider(new PlayerAetherImpl((EntityPlayer) event.getEntity())));
 		}
 	}
 

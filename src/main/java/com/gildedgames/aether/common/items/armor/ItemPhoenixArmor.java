@@ -1,14 +1,10 @@
 package com.gildedgames.aether.common.items.armor;
 
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.properties.IPhoenixChillable;
-import net.minecraft.entity.player.EntityPlayer;
+import com.gildedgames.aether.common.capabilities.item.properties.IPhoenixChillable;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.world.World;
 
 public class ItemPhoenixArmor extends ItemAetherArmor implements IPhoenixChillable
 {
@@ -33,10 +29,7 @@ public class ItemPhoenixArmor extends ItemAetherArmor implements IPhoenixChillab
 			return null;
 		}
 
-		ItemStack newStack = stack.copy();
-		newStack.setItem(this.getChilledItem(stack.getItem()));
-
-		return newStack;
+		return new ItemStack(chilledItem, stack.stackSize, stack.getItemDamage());
 	}
 
 	private Item getChilledItem(Item item)

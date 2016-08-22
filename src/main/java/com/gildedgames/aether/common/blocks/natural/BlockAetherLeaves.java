@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.client.renderer.effects.ParticleGolden;
+import com.gildedgames.aether.client.renderer.particles.ParticleGolden;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

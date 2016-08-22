@@ -5,14 +5,11 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.client.config.ConfigGuiType;
-import net.minecraftforge.fml.client.config.DummyConfigElement;
 import net.minecraftforge.fml.client.config.GuiConfig;
 import net.minecraftforge.fml.client.config.IConfigElement;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class GuiConfigAether extends GuiConfig
 {
@@ -24,7 +21,7 @@ public class GuiConfigAether extends GuiConfig
 
 	private static List<IConfigElement> getConfigElements()
 	{
-		List<IConfigElement> list = new ArrayList<IConfigElement>();
+		List<IConfigElement> list = new ArrayList<>();
 
 		List<IConfigElement> general = new ConfigElement(AetherCore.CONFIG.configuration.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements();
 		List<IConfigElement> biomeIDs = new ConfigElement(AetherCore.CONFIG.configuration.getCategory("Biome IDs")).getChildElements();

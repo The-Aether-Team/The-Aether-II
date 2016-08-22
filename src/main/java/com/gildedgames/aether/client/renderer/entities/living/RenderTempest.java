@@ -20,7 +20,7 @@ public class RenderTempest extends RenderLiving<EntityLiving>
 	{
 		super(manager, new ModelTempest(), 1.0F);
 
-		this.addLayer(new LayerGlowing<EntityLiving>(this, TEXTURE_MARKINGS));
+		this.addLayer(new LayerGlowing<>(this, TEXTURE_MARKINGS));
 	}
 
 	@Override

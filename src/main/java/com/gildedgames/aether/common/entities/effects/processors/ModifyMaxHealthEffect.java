@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.effects.processors;
 
-import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
-import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
-import com.gildedgames.aether.api.entities.effects.EntityEffectRule;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
 import com.gildedgames.aether.common.entities.effects.processors.ModifyMaxHealthEffect.Instance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

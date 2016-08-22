@@ -3,10 +3,6 @@ package com.gildedgames.aether.common.entities.ai.dungeon.labyrinth;
 import com.gildedgames.aether.common.entities.ai.EntityAI;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityChestMimic;
 import com.gildedgames.aether.common.util.TickTimer;
-import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.world.World;
 
 public class AISavageAttack extends EntityAI<EntityChestMimic>
 {

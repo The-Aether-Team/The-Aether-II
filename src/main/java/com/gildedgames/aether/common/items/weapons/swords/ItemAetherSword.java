@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.weapons.swords;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
+import com.gildedgames.aether.common.CreativeTabsAether;
 import com.gildedgames.aether.common.items.ItemAbilityType;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +22,7 @@ public class ItemAetherSword extends ItemSword
 
 		this.abilityType = abilityType;
 
-		this.setCreativeTab(AetherCreativeTabs.tabWeapons);
+		this.setCreativeTab(CreativeTabsAether.tabWeapons);
 	}
 
 	@Override

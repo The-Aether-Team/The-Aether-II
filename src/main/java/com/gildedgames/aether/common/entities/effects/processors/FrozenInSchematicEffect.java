@@ -4,8 +4,8 @@ import java.util.List;
 
 import net.minecraft.entity.Entity;
 
-import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
-import com.gildedgames.aether.api.entities.effects.EntityEffectRule;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
 import com.gildedgames.aether.common.entities.effects.AbstractEffectProcessor;
 import com.gildedgames.aether.common.entities.effects.processors.FrozenInSchematicEffect.Instance;
 
@@ -36,8 +36,6 @@ public class FrozenInSchematicEffect extends AbstractEffectProcessor<Instance>
 	@Override
 	public void tick(Entity source, List<Instance> all)
 	{
-		source.ticksExisted = source.ticksExisted;
-		
 		source.velocityChanged = false;
 		
 		source.posX = source.prevPosX;

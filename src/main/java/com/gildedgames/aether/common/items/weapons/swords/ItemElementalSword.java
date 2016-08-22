@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.weapons.swords;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
+import com.gildedgames.aether.common.CreativeTabsAether;
 import com.gildedgames.aether.common.MaterialsAether;
 import com.gildedgames.aether.common.items.ItemAbilityType;
 import net.minecraft.enchantment.Enchantment;
@@ -67,7 +67,7 @@ public class ItemElementalSword extends ItemAetherSword
 
 		this.setMaxDamage(500);
 
-		this.setCreativeTab(AetherCreativeTabs.tabWeapons);
+		this.setCreativeTab(CreativeTabsAether.tabWeapons);
 	}
 
 	@Override

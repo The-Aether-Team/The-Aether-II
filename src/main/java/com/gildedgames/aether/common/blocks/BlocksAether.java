@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.blocks;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.AetherCreativeTabs;
+import com.gildedgames.aether.common.CreativeTabsAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
-import com.gildedgames.aether.common.blocks.construction.BlockAetherSlab;
+import com.gildedgames.aether.common.blocks.util.BlockCustomSlab;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherStairs;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.blocks.construction.BlockAmbrosiumTorch;
@@ -12,7 +12,7 @@ import com.gildedgames.aether.common.blocks.natural.plants.*;
 import com.gildedgames.aether.common.blocks.util.BlockCustomBed;
 import com.gildedgames.aether.common.blocks.util.BlockCustomDoor;
 import com.gildedgames.aether.common.blocks.construction.BlockQuicksoilGlass;
-import com.gildedgames.aether.common.blocks.construction.BlockSkyrootChest;
+import com.gildedgames.aether.common.blocks.containers.BlockSkyrootChest;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootFence;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootFenceGate;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootLadder;
@@ -31,10 +31,10 @@ import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockSkyrootWorkbench;
 import com.gildedgames.aether.common.blocks.dungeon.BlockDivine;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinth;
-import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthChest;
+import com.gildedgames.aether.common.blocks.containers.BlockLabyrinthChest;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthDoor;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthPillar;
-import com.gildedgames.aether.common.blocks.dungeon.BlockTeleporter;
+import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthtotem;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAerogel;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
@@ -177,7 +177,7 @@ public class BlocksAether
 
 	public static final BlockSkyrootLadder skyroot_ladder = new BlockSkyrootLadder();
 
-	public static final BlockTeleporter labyrinth_totem = new BlockTeleporter(Material.IRON);
+	public static final BlockLabyrinthtotem labyrinth_totem = new BlockLabyrinthtotem(Material.IRON);
 
 	public static final Block multiblock_dummy = new BlockMultiDummy().setBlockUnbreakable();
 
@@ -217,17 +217,17 @@ public class BlocksAether
 			sentry_stone_wall = new BlockAetherWall(BlocksAether.labyrinth_lightstone.getDefaultState(), 1.0f, 10.0f).setGlows(true),
 			divine_sentry_wall = new BlockDivineWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f);
 
-	public static final BlockAetherSlab
-			skyroot_slab = new BlockAetherSlab(Material.WOOD, SoundType.WOOD, 2.0f),
-			holystone_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f),
-			holystone_brick_slab =  new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f),
-			carved_stone_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f),
-			divine_carved_stone_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f),
-			sentry_stone_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f),
-			divine_sentry_stone_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f),
-			icestone_slab = new BlockAetherSlab(Material.ROCK, SoundType.GLASS, 2.0f),
-			labyrinth_capstone_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f),
-			labyrinth_wall_slab = new BlockAetherSlab(Material.ROCK, SoundType.STONE, 2.0f);
+	public static final BlockCustomSlab
+			skyroot_slab = new BlockCustomSlab(Material.WOOD, SoundType.WOOD, 2.0f),
+			holystone_slab = new BlockCustomSlab(Material.ROCK, SoundType.STONE, 2.0f),
+			holystone_brick_slab =  new BlockCustomSlab(Material.ROCK, SoundType.STONE, 2.0f),
+			carved_stone_slab = new BlockCustomSlab(Material.ROCK, SoundType.STONE, 2.0f),
+			divine_carved_stone_slab = new BlockCustomSlab(Material.ROCK, SoundType.STONE, 2.0f),
+			sentry_stone_slab = new BlockCustomSlab(Material.ROCK, SoundType.STONE, 2.0f),
+			divine_sentry_stone_slab = new BlockCustomSlab(Material.ROCK, SoundType.STONE, 2.0f),
+			icestone_slab = new BlockCustomSlab(Material.ROCK, SoundType.GLASS, 2.0f),
+			labyrinth_capstone_slab = new BlockCustomSlab(Material.ROCK, SoundType.STONE, 2.0f),
+			labyrinth_wall_slab = new BlockCustomSlab(Material.ROCK, SoundType.STONE, 2.0f);
 
 	public static final Block labyrinth_strongblock = new BlockLabyrinth().setBlockUnbreakable();
 
@@ -246,141 +246,141 @@ public class BlocksAether
 
 	public static void preInit()
 	{
-		registerBlock("aether_dirt", BlocksAether.aether_dirt.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("aether_grass", BlocksAether.aether_grass.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemBlockVariants(BlocksAether.aether_grass));
-		registerBlock("holystone", BlocksAether.holystone.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemBlockVariants(BlocksAether.holystone));
+		registerBlock("aether_dirt", BlocksAether.aether_dirt.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("aether_grass", BlocksAether.aether_grass.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.aether_grass));
+		registerBlock("holystone", BlocksAether.holystone.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.holystone));
 
 		registerBlock("skyroot_bed", BlocksAether.skyroot_bed);
 
-		registerBlock("aercloud", BlocksAether.aercloud.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemBlockVariants(BlocksAether.aercloud));
+		registerBlock("aercloud", BlocksAether.aercloud.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.aercloud));
 
-		registerBlock("skyroot_planks", BlocksAether.skyroot_planks.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("skyroot_planks", BlocksAether.skyroot_planks.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("ambrosium_ore", BlocksAether.ambrosium_ore.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("zanite_ore", BlocksAether.zanite_ore.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("gravitite_ore", BlocksAether.gravitite_ore.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("continuum_ore", BlocksAether.continuum_ore.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("arkenium_ore", BlocksAether.arkenium_ore.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("icestone_ore", BlocksAether.icestone_ore.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("ambrosium_ore", BlocksAether.ambrosium_ore.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("zanite_ore", BlocksAether.zanite_ore.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("gravitite_ore", BlocksAether.gravitite_ore.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("continuum_ore", BlocksAether.continuum_ore.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("arkenium_ore", BlocksAether.arkenium_ore.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("icestone_ore", BlocksAether.icestone_ore.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("skyroot_log", BlocksAether.skyroot_log.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("golden_oak_log", BlocksAether.golden_oak_log.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("skyroot_log", BlocksAether.skyroot_log.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("golden_oak_log", BlocksAether.golden_oak_log.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("blue_skyroot_leaves", BlocksAether.blue_skyroot_leaves.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("green_skyroot_leaves", BlocksAether.green_skyroot_leaves.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("dark_blue_skyroot_leaves", BlocksAether.dark_blue_skyroot_leaves.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("golden_oak_leaves", BlocksAether.golden_oak_leaves.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("purple_crystal_leaves", BlocksAether.purple_crystal_leaves.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("purple_fruit_leaves", BlocksAether.purple_fruit_leaves.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("blue_skyroot_leaves", BlocksAether.blue_skyroot_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("green_skyroot_leaves", BlocksAether.green_skyroot_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("dark_blue_skyroot_leaves", BlocksAether.dark_blue_skyroot_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("golden_oak_leaves", BlocksAether.golden_oak_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("purple_crystal_leaves", BlocksAether.purple_crystal_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("purple_fruit_leaves", BlocksAether.purple_fruit_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("aether_sapling", BlocksAether.aether_sapling.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemBlockVariants(BlocksAether.aether_sapling));
+		registerBlock("aether_sapling", BlocksAether.aether_sapling.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.aether_sapling));
 
 		registerBlock("aether_portal", BlocksAether.aether_portal);
 
-		registerBlock("tall_aether_grass", BlocksAether.tall_aether_grass.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("tall_aether_grass", BlocksAether.tall_aether_grass.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("quicksoil", BlocksAether.quicksoil.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("quicksoil", BlocksAether.quicksoil.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("skyroot_crafting_table", BlocksAether.skyroot_crafting_table.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("skyroot_crafting_table", BlocksAether.skyroot_crafting_table.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("blueberry_bush", BlocksAether.blueberry_bush.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemBlockVariants(BlocksAether.blueberry_bush));
-		registerBlock("orange_tree", BlocksAether.orange_tree.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("blueberry_bush", BlocksAether.blueberry_bush.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.blueberry_bush));
+		registerBlock("orange_tree", BlocksAether.orange_tree.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("aether_flower", BlocksAether.aether_flower.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemBlockVariants(BlocksAether.aether_flower));
+		registerBlock("aether_flower", BlocksAether.aether_flower.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.aether_flower));
 
-		registerBlock("altar", BlocksAether.altar.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("altar", BlocksAether.altar.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("aerogel", BlocksAether.aerogel.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("aerogel", BlocksAether.aerogel.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("zanite_block", BlocksAether.zanite_block.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("zanite_block", BlocksAether.zanite_block.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("enchanted_gravitite", BlocksAether.enchanted_gravitite.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("enchanted_gravitite", BlocksAether.enchanted_gravitite.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("carved_stone", BlocksAether.carved_stone.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemBlockVariants(BlocksAether.carved_stone));
+		registerBlock("carved_stone", BlocksAether.carved_stone.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.carved_stone));
 
-		registerBlock("sentry_stone", BlocksAether.sentry_stone.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemBlockVariants(BlocksAether.sentry_stone));
+		registerBlock("sentry_stone", BlocksAether.sentry_stone.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.sentry_stone));
 
-		registerBlock("holystone_brick", BlocksAether.holystone_brick.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("holystone_brick", BlocksAether.holystone_brick.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("holystone_furnace", BlocksAether.holystone_furnace.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("holystone_furnace", BlocksAether.holystone_furnace.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("quicksoil_glass", BlocksAether.quicksoil_glass.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("quicksoil_glass", BlocksAether.quicksoil_glass.setCreativeTab(CreativeTabsAether.tabBlocks));
 
 		registerBlock("skyroot_door", BlocksAether.skyroot_door);
 		registerBlock("arkenium_door", BlocksAether.arkenium_door);
 
-		registerBlock("skyroot_chest", BlocksAether.skyroot_chest.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("skyroot_chest", BlocksAether.skyroot_chest.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("ambrosium_torch", BlocksAether.ambrosium_torch.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("ambrosium_torch", BlocksAether.ambrosium_torch.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("icestone_bricks", BlocksAether.icestone_bricks.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("icestone_bricks", BlocksAether.icestone_bricks.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("skyroot_fence", BlocksAether.skyroot_fence.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("skyroot_fence", BlocksAether.skyroot_fence.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("skyroot_fence_gate", BlocksAether.skyroot_fence_gate.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("skyroot_fence_gate", BlocksAether.skyroot_fence_gate.setCreativeTab(CreativeTabsAether.tabBlocks));
 
 		registerBlock("standing_skyroot_sign", BlocksAether.standing_skyroot_sign);
 
-		registerBlock("skyroot_trapdoor", BlocksAether.skyroot_trapdoor.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("skyroot_ladder", BlocksAether.skyroot_ladder.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("skyroot_trapdoor", BlocksAether.skyroot_trapdoor.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("skyroot_ladder", BlocksAether.skyroot_ladder.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("skyroot_button", BlocksAether.skyroot_button.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("holystone_button", BlocksAether.holystone_button.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("skyroot_button", BlocksAether.skyroot_button.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("holystone_button", BlocksAether.holystone_button.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("skyroot_pressure_plate", BlocksAether.skyroot_pressure_plate.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("holystone_pressure_plate", BlocksAether.holystone_pressure_plate.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("skyroot_pressure_plate", BlocksAether.skyroot_pressure_plate.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("holystone_pressure_plate", BlocksAether.holystone_pressure_plate.setCreativeTab(CreativeTabsAether.tabBlocks));
 
 		registerBlock("wall_skyroot_sign", BlocksAether.wall_skyroot_sign);
 
-		registerBlock("labyrinth_chest", BlocksAether.labyrinth_chest.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("labyrinth_chest", BlocksAether.labyrinth_chest.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("holystone_wall", BlocksAether.holystone_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("mossy_holystone_wall", BlocksAether.mossy_holystone_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("holystone_brick_wall", BlocksAether.holystone_brick_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("carved_stone_wall", BlocksAether.carved_stone_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("icestone_wall", BlocksAether.icestone_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("skyroot_log_wall", BlocksAether.skyroot_log_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("aerogel_wall", BlocksAether.aerogel_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("sentry_stone_wall", BlocksAether.sentry_stone_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("divine_sentry_wall", BlocksAether.divine_sentry_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("divine_stone_wall", BlocksAether.divine_stone_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("holystone_wall", BlocksAether.holystone_wall.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("mossy_holystone_wall", BlocksAether.mossy_holystone_wall.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("holystone_brick_wall", BlocksAether.holystone_brick_wall.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("carved_stone_wall", BlocksAether.carved_stone_wall.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("icestone_wall", BlocksAether.icestone_wall.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("skyroot_log_wall", BlocksAether.skyroot_log_wall.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("aerogel_wall", BlocksAether.aerogel_wall.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("sentry_stone_wall", BlocksAether.sentry_stone_wall.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("divine_sentry_wall", BlocksAether.divine_sentry_wall.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("divine_stone_wall", BlocksAether.divine_stone_wall.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("labyrinth_totem", BlocksAether.labyrinth_totem.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("labyrinth_door", BlocksAether.labyrinth_door.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("labyrinth_totem", BlocksAether.labyrinth_totem.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("labyrinth_door", BlocksAether.labyrinth_door.setCreativeTab(CreativeTabsAether.tabBlocks));
 
 		registerBlock("multiblock_dummy", BlocksAether.multiblock_dummy);
 
-		registerBlock("carved_capstone", BlocksAether.carved_capstone.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("labyrinth_glowing_pillar", BlocksAether.labyrinth_glowing_pillar.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("labyrinth_pillar", BlocksAether.labyrinth_pillar.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("labyrinth_wall", BlocksAether.labyrinth_wall.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("labyrinth_lightstone", BlocksAether.labyrinth_lightstone.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("labyrinth_base", BlocksAether.labyrinth_base.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("labyrinth_headstone", BlocksAether.labyrinth_headstone.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("carved_capstone", BlocksAether.carved_capstone.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("labyrinth_glowing_pillar", BlocksAether.labyrinth_glowing_pillar.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("labyrinth_pillar", BlocksAether.labyrinth_pillar.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("labyrinth_wall", BlocksAether.labyrinth_wall.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("labyrinth_lightstone", BlocksAether.labyrinth_lightstone.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("labyrinth_base", BlocksAether.labyrinth_base.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("labyrinth_headstone", BlocksAether.labyrinth_headstone.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("skyroot_slab", BlocksAether.skyroot_slab.setCreativeTab(AetherCreativeTabs.tabBlocks),new ItemAetherSlab(BlocksAether.skyroot_slab));
-		registerBlock("holystone_slab", BlocksAether.holystone_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.holystone_slab));
-		registerBlock("holystone_brick_slab", BlocksAether.holystone_brick_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.holystone_brick_slab));
-		registerBlock("carved_stone_slab", BlocksAether.carved_stone_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.carved_stone_slab));
-		registerBlock("divine_carved_stone_slab", BlocksAether.divine_carved_stone_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.divine_carved_stone_slab));
-		registerBlock("sentry_stone_slab", BlocksAether.sentry_stone_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.sentry_stone_slab));
-		registerBlock("divine_sentry_stone_slab", BlocksAether.divine_sentry_stone_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.divine_sentry_stone_slab));
-		registerBlock("icestone_slab", BlocksAether.icestone_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.icestone_slab));
-		registerBlock("labyrinth_capstone_slab", BlocksAether.labyrinth_capstone_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.labyrinth_capstone_slab));
-		registerBlock("labyrinth_wall_slab", BlocksAether.labyrinth_wall_slab.setCreativeTab(AetherCreativeTabs.tabBlocks), new ItemAetherSlab(BlocksAether.labyrinth_wall_slab));
+		registerBlock("skyroot_slab", BlocksAether.skyroot_slab.setCreativeTab(CreativeTabsAether.tabBlocks),new ItemAetherSlab(BlocksAether.skyroot_slab));
+		registerBlock("holystone_slab", BlocksAether.holystone_slab.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemAetherSlab(BlocksAether.holystone_slab));
+		registerBlock("holystone_brick_slab", BlocksAether.holystone_brick_slab.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemAetherSlab(BlocksAether.holystone_brick_slab));
+		registerBlock("carved_stone_slab", BlocksAether.carved_stone_slab.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemAetherSlab(BlocksAether.carved_stone_slab));
+		registerBlock("divine_carved_stone_slab", BlocksAether.divine_carved_stone_slab.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemAetherSlab(BlocksAether.divine_carved_stone_slab));
+		registerBlock("sentry_stone_slab", BlocksAether.sentry_stone_slab.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemAetherSlab(BlocksAether.sentry_stone_slab));
+		registerBlock("divine_sentry_stone_slab", BlocksAether.divine_sentry_stone_slab.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemAetherSlab(BlocksAether.divine_sentry_stone_slab));
+		registerBlock("icestone_slab", BlocksAether.icestone_slab.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemAetherSlab(BlocksAether.icestone_slab));
+		registerBlock("labyrinth_capstone_slab", BlocksAether.labyrinth_capstone_slab.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemAetherSlab(BlocksAether.labyrinth_capstone_slab));
+		registerBlock("labyrinth_wall_slab", BlocksAether.labyrinth_wall_slab.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemAetherSlab(BlocksAether.labyrinth_wall_slab));
 
-		registerBlock("labyrinth_strongblock", BlocksAether.labyrinth_strongblock.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("labyrinth_strongblock", BlocksAether.labyrinth_strongblock.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("skyroot_stairs", BlocksAether.skyroot_stairs.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("holystone_stairs", BlocksAether.holystone_stairs.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("mossy_holystone_stairs", BlocksAether.mossy_holystone_stairs.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("holystone_brick_stairs", BlocksAether.holystone_brick_stairs.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("sentry_stone_stairs", BlocksAether.sentry_stone_stairs.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("divine_sentry_stone_stairs", BlocksAether.divine_sentry_stone_stairs.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("carved_stone_stairs", BlocksAether.carved_stone_stairs.setCreativeTab(AetherCreativeTabs.tabBlocks));
-		registerBlock("divine_carved_stone_stairs", BlocksAether.divine_carved_stone_stairs.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("skyroot_stairs", BlocksAether.skyroot_stairs.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("holystone_stairs", BlocksAether.holystone_stairs.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("mossy_holystone_stairs", BlocksAether.mossy_holystone_stairs.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("holystone_brick_stairs", BlocksAether.holystone_brick_stairs.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("sentry_stone_stairs", BlocksAether.sentry_stone_stairs.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("divine_sentry_stone_stairs", BlocksAether.divine_sentry_stone_stairs.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("carved_stone_stairs", BlocksAether.carved_stone_stairs.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("divine_carved_stone_stairs", BlocksAether.divine_carved_stone_stairs.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("woven_skyroot_sticks", BlocksAether.woven_skyroot_sticks.setCreativeTab(AetherCreativeTabs.tabBlocks));
+		registerBlock("woven_skyroot_sticks", BlocksAether.woven_skyroot_sticks.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("moa_egg", BlocksAether.moa_egg);
 
 		registerHarvestLevels();

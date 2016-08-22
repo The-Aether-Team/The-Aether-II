@@ -43,11 +43,6 @@ public class PlayerControllerAetherMP extends PlayerControllerMP
 		return new PlayerControllerAetherMP(Minecraft.getMinecraft(), netHandler, controller);
 	}
 
-	public static void clickBlockCreative(Minecraft mcIn, PlayerControllerMP playerController, BlockPos pos, EnumFacing facing)
-	{
-		PlayerControllerMP.clickBlockCreative(mcIn, playerController, pos, facing);
-	}
-
 	@Override
 	public void setPlayerCapabilities(EntityPlayer player)
 	{

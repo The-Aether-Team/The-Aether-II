@@ -1,20 +1,18 @@
 package com.gildedgames.aether.client;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
-import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
-import com.gildedgames.aether.api.entities.effects.EntityEffectRule;
-import com.gildedgames.aether.api.items.IItemEffectsCapability;
-import com.gildedgames.aether.api.items.IItemPropertiesCapability;
-import com.gildedgames.aether.api.items.properties.ItemRarity;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
+import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
+import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
+import com.gildedgames.aether.api.capabilites.items.properties.ItemRarity;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
-import com.gildedgames.aether.common.items.armor.ItemObsidianArmor;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.AetherMovementPacket;
-import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -22,7 +20,6 @@ import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
@@ -38,8 +35,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.ibm.icu.util.LocalePriorityList.add;
 
 public class ClientEventHandler
 {
@@ -136,7 +131,7 @@ public class ClientEventHandler
 
 		if (world != null && player != null)
 		{
-			PlayerAether aePlayer = PlayerAether.getPlayer(player);
+			PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
 
 			if (aePlayer != null)
 			{

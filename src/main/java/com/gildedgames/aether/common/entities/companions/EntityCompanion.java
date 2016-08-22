@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.companions;
 
 import com.gildedgames.aether.common.entities.ai.EntityAICompanionFollow;
-import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.google.common.base.Optional;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -70,7 +70,7 @@ public abstract class EntityCompanion extends EntityLiving
 			}
 			else
 			{
-				PlayerAether aePlayer = PlayerAether.getPlayer(this.getOwner());
+				PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(this.getOwner());
 
 				if (aePlayer.getCompanionManager().getCompanionEntity() != this)
 				{
@@ -95,11 +95,11 @@ public abstract class EntityCompanion extends EntityLiving
 		return super.attackEntityFrom(source, amount);
 	}
 
-	public abstract void tickEffects(PlayerAether aePlayer);
+	public abstract void tickEffects(PlayerAetherImpl aePlayer);
 
-	public abstract void addEffects(PlayerAether aePlayer);
+	public abstract void addEffects(PlayerAetherImpl aePlayer);
 
-	public abstract void removeEffects(PlayerAether aePlayer);
+	public abstract void removeEffects(PlayerAetherImpl aePlayer);
 
 	public void setOwner(EntityPlayer owner)
 	{

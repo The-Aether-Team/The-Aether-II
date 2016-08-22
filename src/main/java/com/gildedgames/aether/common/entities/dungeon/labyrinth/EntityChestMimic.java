@@ -1,15 +1,10 @@
 package com.gildedgames.aether.common.entities.dungeon.labyrinth;
 
 import com.gildedgames.aether.common.SoundsAether;
-import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AIAlarmClose;
 import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AISavageAttack;
-import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
-import com.gildedgames.aether.common.util.TickTimer;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -86,7 +81,7 @@ public class EntityChestMimic extends EntityMob
 				double motionY = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 				double motionZ = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 
-				this.worldObj.spawnParticle(EnumParticleTypes.SWEEP_ATTACK, this.posX + motionX, this.posY + 0.75D + motionY, this.posZ + motionZ, motionX, motionY, motionZ, new int[0]);
+				this.worldObj.spawnParticle(EnumParticleTypes.SWEEP_ATTACK, this.posX + motionX, this.posY + 0.75D + motionY, this.posZ + motionZ, motionX, motionY, motionZ);
 			}
 
 			this.setAttacked(false);
@@ -100,7 +95,7 @@ public class EntityChestMimic extends EntityMob
 				double motionY = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 				double motionZ = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 
-				this.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX + motionX, this.posY + 0.5D + motionY, this.posZ + motionZ, 0.1D, 0.1D, 0.1D, new int[0]);
+				this.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX + motionX, this.posY + 0.5D + motionY, this.posZ + motionZ, 0.1D, 0.1D, 0.1D);
 			}
 		}
 	}

@@ -24,13 +24,13 @@ import net.minecraft.world.World;
 public class EntityMoa extends EntityAnimal implements EntityGroupMember
 {
 
-	private static final DataParameter<Integer> REMAINING_JUMPS = EntityDataManager.<Integer>createKey(EntityMoa.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> REMAINING_JUMPS = EntityDataManager.createKey(EntityMoa.class, DataSerializers.VARINT);
 
-	private static final DataParameter<Boolean> EGG_STOLEN = EntityDataManager.<Boolean>createKey(EntityMoa.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> EGG_STOLEN = EntityDataManager.createKey(EntityMoa.class, DataSerializers.BOOLEAN);
 
-	private static final DataParameter<Boolean> RAISED_BY_PLAYER = EntityDataManager.<Boolean>createKey(EntityMoa.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> RAISED_BY_PLAYER = EntityDataManager.createKey(EntityMoa.class, DataSerializers.BOOLEAN);
 
-	private static final DataParameter<Boolean> GENDER = EntityDataManager.<Boolean>createKey(EntityMoa.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(EntityMoa.class, DataSerializers.BOOLEAN);
 
 	public float wingRotation, destPos, prevDestPos, prevWingRotation;
 
@@ -286,7 +286,7 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 
 	public void setGender(AnimalGender gender)
 	{
-		this.dataManager.set(EntityMoa.GENDER, gender == AnimalGender.MALE ? true : false);
+		this.dataManager.set(EntityMoa.GENDER, gender == AnimalGender.MALE);
 	}
 
 	public int getRemainingJumps()

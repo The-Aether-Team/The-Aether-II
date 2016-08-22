@@ -8,9 +8,6 @@ import net.minecraft.util.EnumHand;
 
 import java.util.List;
 
-/**
- * Created by PC on 8/7/2016.
- */
 public class EntityAICockatriceSneakAttack extends EntityAIBase
 {
 

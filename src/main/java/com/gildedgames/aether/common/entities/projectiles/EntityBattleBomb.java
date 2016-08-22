@@ -41,7 +41,7 @@ public class EntityBattleBomb extends EntityThrowable
 
 		for (int j = 0; j < 8; ++j)
 		{
-			this.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY, this.posZ, 0.1D + (this.rand.nextDouble() * 0.1D), 0.1D + (this.rand.nextDouble() * 0.1D), 0.1D + (this.rand.nextDouble() * 0.1D), new int[0]);
+			this.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY, this.posZ, 0.1D + (this.rand.nextDouble() * 0.1D), 0.1D + (this.rand.nextDouble() * 0.1D), 0.1D + (this.rand.nextDouble() * 0.1D));
 		}
 
 		this.playSound(SoundsAether.detonate, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);

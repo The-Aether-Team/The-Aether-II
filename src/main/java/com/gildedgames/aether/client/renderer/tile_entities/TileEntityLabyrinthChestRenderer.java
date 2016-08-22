@@ -2,12 +2,9 @@ package com.gildedgames.aether.client.renderer.tile_entities;
 
 import com.gildedgames.aether.client.models.entities.tile.ModelLabyrinthChest;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthChest;
+import com.gildedgames.aether.common.blocks.containers.BlockLabyrinthChest;
 import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthChest;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
-import net.minecraft.client.model.ModelChest;
-import net.minecraft.client.model.ModelLargeChest;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;

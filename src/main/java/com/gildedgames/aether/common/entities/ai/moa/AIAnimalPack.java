@@ -7,7 +7,6 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.world.World;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class AIAnimalPack extends EntityAIBase
@@ -43,11 +42,10 @@ public class AIAnimalPack extends EntityAIBase
 		List list = this.animal.worldObj.getEntitiesWithinAABB(this.animal.getClass(), this.animal.getEntityBoundingBox().expand(12.0D, 4.0D, 12.0D));
 		EntityAnimal potentialLeader = null;
 		double d0 = Double.MAX_VALUE;
-		Iterator iterator = list.iterator();
 
-		while (iterator.hasNext())
+		for (Object aList : list)
 		{
-			EntityAnimal animal = (EntityAnimal) iterator.next();
+			EntityAnimal animal = (EntityAnimal) aList;
 
 			if (animal instanceof EntityGroupMember)
 			{

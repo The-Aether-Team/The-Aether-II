@@ -1,17 +1,14 @@
 package com.gildedgames.aether.common.items.armor;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.AetherCreativeTabs;
-import com.gildedgames.aether.common.util.PlayerUtil;
+import com.gildedgames.aether.common.CreativeTabsAether;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -27,7 +24,7 @@ public class ItemAetherArmor extends ItemArmor
 
 		this.name = name;
 
-		this.setCreativeTab(AetherCreativeTabs.tabArmor);
+		this.setCreativeTab(CreativeTabsAether.tabArmor);
 	}
 
 	@Override

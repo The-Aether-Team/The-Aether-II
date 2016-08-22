@@ -48,7 +48,7 @@ public abstract class RenderCompanion<T extends EntityCompanion> extends RenderL
 			{
 				double distance = entity.getDistanceSqToEntity(owner);
 
-				opacity = (float) Math.min(0.1f + (1.0f * (distance / distanceLimit)), 1.0f);
+				opacity = (float) Math.min(0.1f + (1.0f * (distance / this.distanceLimit)), 1.0f);
 			}
 
 			if (opacity < 1.0f)

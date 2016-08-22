@@ -30,7 +30,7 @@ public class AIHopFollowAttackTarget extends EntityAI<EntityLiving>
     public boolean shouldExecute()
     {
         EntityLivingBase entitylivingbase = this.entity().getAttackTarget();
-        return entitylivingbase == null ? false : (!entitylivingbase.isEntityAlive() ? false : !(entitylivingbase instanceof EntityPlayer) || !((EntityPlayer) entitylivingbase).capabilities.disableDamage);
+        return entitylivingbase != null && (entitylivingbase.isEntityAlive() && (!(entitylivingbase instanceof EntityPlayer) || !((EntityPlayer) entitylivingbase).capabilities.disableDamage));
     }
 
     /**
@@ -48,7 +48,7 @@ public class AIHopFollowAttackTarget extends EntityAI<EntityLiving>
     public boolean continueExecuting()
     {
         EntityLivingBase entitylivingbase = this.entity().getAttackTarget();
-        return entitylivingbase == null ? false : (!entitylivingbase.isEntityAlive() ? false : (entitylivingbase instanceof EntityPlayer && ((EntityPlayer) entitylivingbase).capabilities.disableDamage ? false : --this.growTieredTimer > 0));
+        return entitylivingbase != null && (entitylivingbase.isEntityAlive() && (!(entitylivingbase instanceof EntityPlayer && ((EntityPlayer) entitylivingbase).capabilities.disableDamage) && --this.growTieredTimer > 0));
     }
 
     /**

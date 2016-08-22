@@ -3,10 +3,10 @@ package com.gildedgames.aether.common.entities.util;
 public interface EntityGroupMember
 {
 
-	public boolean isGroupLeader();
+	boolean isGroupLeader();
 
-	public EntityGroup getGroup();
+	EntityGroup getGroup();
 
-	public boolean isProtective();
+	boolean isProtective();
 
 }

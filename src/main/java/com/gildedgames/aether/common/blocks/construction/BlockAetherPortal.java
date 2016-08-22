@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.construction;
 
-import com.gildedgames.aether.client.renderer.effects.ParticleAetherPortal;
+import com.gildedgames.aether.client.renderer.particles.ParticleAetherPortal;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.DimensionsAether;
 import com.gildedgames.aether.common.SoundsAether;
@@ -175,8 +175,7 @@ public class BlockAetherPortal extends BlockBreakable
 		{
 			case COUNTERCLOCKWISE_90:
 			case CLOCKWISE_90:
-
-				switch ((EnumFacing.Axis)state.getValue(PROPERTY_AXIS))
+				switch (state.getValue(PROPERTY_AXIS))
 				{
 				case X:
 					return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.Z);
@@ -194,7 +193,7 @@ public class BlockAetherPortal extends BlockBreakable
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return getMetaForAxis((EnumFacing.Axis)state.getValue(PROPERTY_AXIS));
+		return getMetaForAxis(state.getValue(PROPERTY_AXIS));
 	}
 
 	public static int getMetaForAxis(EnumFacing.Axis axis)

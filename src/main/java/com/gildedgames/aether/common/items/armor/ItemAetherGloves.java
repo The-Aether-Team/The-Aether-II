@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.items.armor;
 
-import com.gildedgames.aether.common.AetherCreativeTabs;
+import com.gildedgames.aether.common.CreativeTabsAether;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.properties.IPhoenixChillable;
+import com.gildedgames.aether.common.capabilities.item.properties.IPhoenixChillable;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -46,7 +46,7 @@ public class ItemAetherGloves extends Item implements IPhoenixChillable
 
 		this.setMaxStackSize(1);
 
-		this.setCreativeTab(AetherCreativeTabs.tabArmor);
+		this.setCreativeTab(CreativeTabsAether.tabArmor);
 	}
 
 	@Override

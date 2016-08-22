@@ -5,7 +5,6 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -44,24 +43,24 @@ public class TileEntityMoaEggRenderer extends TileEntitySpecialRenderer<TileEnti
 		this.renderColor(genePool.getFeathers().gene().data().getRGB());
 
 		this.bindTexture(TEXTURE_BASE);
-		
-		model.renderAll(0.0625F);
+
+		this.model.renderAll(0.0625F);
 		
 		this.renderColor(genePool.getKeratin().gene().data().getRGB());
 		
 		this.bindTexture(TEXTURE_BEAK);
-		
-		model.renderAll(0.0625F);
+
+		this.model.renderAll(0.0625F);
 		
 		this.renderColor(genePool.getFeathers().gene().data().darker().getRGB());
 		
 		this.bindTexture(HEAD_MARKING);
-		
-		model.renderAll(0.0625F);
+
+		this.model.renderAll(0.0625F);
 		
 		this.bindTexture(BACK_MARKING);
-		
-		model.renderAll(0.0625F);
+
+		this.model.renderAll(0.0625F);
 
 		GL11.glPopMatrix();
 	}

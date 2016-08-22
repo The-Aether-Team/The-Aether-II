@@ -53,7 +53,7 @@ public class MoaNest
 	{
 		this.nestSize = nestSize;
 
-		if (world.getBlockState(pos) != BlocksAether.aether_dirt && world.getBlockState(pos) != BlocksAether.aether_grass.getDefaultState())
+		if (world.getBlockState(this.pos) != BlocksAether.aether_dirt && world.getBlockState(this.pos) != BlocksAether.aether_grass.getDefaultState())
 		{
 			return;
 		}

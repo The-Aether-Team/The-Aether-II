@@ -1,22 +1,16 @@
 package com.gildedgames.aether.common.world.features;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import com.google.common.util.concurrent.Runnables;
-import net.minecraft.block.Block;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 
 import java.util.Collections;
 import java.util.List;
-
-import static net.minecraft.realms.Tezzelator.t;
 
 public class TemplatePipeline
 {
@@ -56,11 +50,11 @@ public class TemplatePipeline
 		{
 			if (!this.chunksDone.contains(pos))
 			{
-				PlacementSettings settings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk(null).setReplacedBlock((Block) null).setIgnoreStructureBlock(false);
+				PlacementSettings settings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk(null).setReplacedBlock(null).setIgnoreStructureBlock(false);
 
 				this.template.addBlocksToWorld(world, this.pos, settings);
 
-				chunksDone.add(pos);
+				this.chunksDone.add(pos);
 
 				this.chunksLeft--;
 
@@ -78,7 +72,7 @@ public class TemplatePipeline
 
 	}
 
-	private List<TemplateProgress> scheduledTemplates = Collections.synchronizedList(Lists.<TemplateProgress>newArrayList());
+	private final List<TemplateProgress> scheduledTemplates = Collections.synchronizedList(Lists.<TemplateProgress>newArrayList());
 
 	public TemplatePipeline()
 	{
@@ -89,7 +83,7 @@ public class TemplatePipeline
 	{
 		List<TemplateProgress> toRemove = Lists.newArrayList();
 
-		synchronized (scheduledTemplates)
+		synchronized (this.scheduledTemplates)
 		{
 			ChunkPos pos = new ChunkPos(chunkX, chunkZ);
 

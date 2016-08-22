@@ -40,11 +40,11 @@ public class AIStayNearNest extends EntityAIBase
 			return false;
 		}
 		
-		this.nestX = moa.getFamilyNest().pos.getX();
-		this.nestY = moa.getFamilyNest().pos.getY() + 1;
-		this.nestZ = moa.getFamilyNest().pos.getZ();
+		this.nestX = this.moa.getFamilyNest().pos.getX();
+		this.nestY = this.moa.getFamilyNest().pos.getY() + 1;
+		this.nestZ = this.moa.getFamilyNest().pos.getZ();
 
-		if (this.moa.getDistance(nestX, nestY, nestZ) < this.stayCloseDist)
+		if (this.moa.getDistance(this.nestX, this.nestY, this.nestZ) < this.stayCloseDist)
 		{
 			return false;
 		}

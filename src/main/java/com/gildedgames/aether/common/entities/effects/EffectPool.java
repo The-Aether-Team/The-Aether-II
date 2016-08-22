@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.entities.effects;
 
-import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
-import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
-import com.gildedgames.aether.api.entities.effects.EntityEffectRule;
-import com.gildedgames.aether.api.entities.effects.IEffectPool;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
+import com.gildedgames.aether.api.capabilites.entity.effects.IEffectPool;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;

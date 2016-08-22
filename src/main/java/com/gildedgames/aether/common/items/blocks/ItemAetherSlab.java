@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.blocks;
 
-import com.gildedgames.aether.common.blocks.construction.BlockAetherSlab;
+import com.gildedgames.aether.common.blocks.util.BlockCustomSlab;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -33,11 +33,11 @@ public class ItemAetherSlab extends ItemBlock
 
 			if (state.getBlock() == this.block)
 			{
-				BlockAetherSlab.SlabState slabState = state.getValue(BlockAetherSlab.PROPERTY_SLAB_STATE);
+				BlockCustomSlab.SlabState slabState = state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE);
 
-				if ((facing == EnumFacing.UP && slabState == BlockAetherSlab.SlabState.BOTTOM_HALF || facing == EnumFacing.DOWN && slabState == BlockAetherSlab.SlabState.TOP_HALF))
+				if ((facing == EnumFacing.UP && slabState == BlockCustomSlab.SlabState.BOTTOM_HALF || facing == EnumFacing.DOWN && slabState == BlockCustomSlab.SlabState.TOP_HALF))
 				{
-					IBlockState placeState = this.block.getDefaultState().withProperty(BlockAetherSlab.PROPERTY_SLAB_STATE, BlockAetherSlab.SlabState.FULL_BLOCK);
+					IBlockState placeState = this.block.getDefaultState().withProperty(BlockCustomSlab.PROPERTY_SLAB_STATE, BlockCustomSlab.SlabState.FULL_BLOCK);
 
 					AxisAlignedBB bounds = placeState.getCollisionBoundingBox(worldIn, pos);
 
@@ -64,13 +64,11 @@ public class ItemAetherSlab extends ItemBlock
 	@SideOnly(Side.CLIENT)
 	public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side, EntityPlayer player, ItemStack stack)
 	{
-		BlockPos blockpos = pos;
-
 		IBlockState state = worldIn.getBlockState(pos);
 
-		if (state.getBlock() == this.block && state.getValue(BlockAetherSlab.PROPERTY_SLAB_STATE) != BlockAetherSlab.SlabState.FULL_BLOCK)
+		if (state.getBlock() == this.block && state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE) != BlockCustomSlab.SlabState.FULL_BLOCK)
 		{
-			boolean flag = state.getValue(BlockAetherSlab.PROPERTY_SLAB_STATE) == BlockAetherSlab.SlabState.TOP_HALF;
+			boolean flag = state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE) == BlockCustomSlab.SlabState.TOP_HALF;
 
 			if ((side == EnumFacing.UP && !flag || side == EnumFacing.DOWN && flag))
 			{
@@ -78,7 +76,7 @@ public class ItemAetherSlab extends ItemBlock
 			}
 		}
 
-		return state.getBlock() == this.block || super.canPlaceBlockOnSide(worldIn, blockpos, side, player, stack);
+		return state.getBlock() == this.block || super.canPlaceBlockOnSide(worldIn, pos, side, player, stack);
 	}
 
 	private boolean tryPlace(EntityPlayer player, ItemStack stack, World worldIn, BlockPos pos)

@@ -2,10 +2,7 @@ package com.gildedgames.aether.common.entities.ai.cockatrice;
 
 import com.gildedgames.aether.common.entities.ai.EntityAIHideFromTarget;
 import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
 
 public class EntityAICockatriceHide extends EntityAIHideFromTarget
 {

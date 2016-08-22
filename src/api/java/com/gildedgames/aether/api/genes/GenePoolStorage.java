@@ -5,11 +5,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 
-public class GenePoolStorage implements Capability.IStorage<GenePool>
+public class GenePoolStorage implements Capability.IStorage<IGenePool>
 {
 
 	@Override
-	public NBTBase writeNBT(Capability<GenePool> capability, GenePool instance, EnumFacing side)
+	public NBTBase writeNBT(Capability<IGenePool> capability, IGenePool instance, EnumFacing side)
 	{
 		NBTTagCompound tag = new NBTTagCompound();
 
@@ -21,7 +21,7 @@ public class GenePoolStorage implements Capability.IStorage<GenePool>
 	}
 
 	@Override
-	public void readNBT(Capability<GenePool> capability, GenePool instance, EnumFacing side, NBTBase nbt)
+	public void readNBT(Capability<IGenePool> capability, IGenePool instance, EnumFacing side, NBTBase nbt)
 	{
 		NBTTagCompound tag = (NBTTagCompound)nbt;
 

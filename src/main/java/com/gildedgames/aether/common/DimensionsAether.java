@@ -2,7 +2,7 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.common.world.TeleporterAether;
 import com.gildedgames.aether.common.world.WorldProviderAether;
-import com.gildedgames.aether.common.world.dungeon.labyrinth.dim.WorldProviderSliderLabyrinth;
+import com.gildedgames.aether.common.world.labyrinth.dim.WorldProviderSliderLabyrinth;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;

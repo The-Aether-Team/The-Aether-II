@@ -10,17 +10,16 @@ import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.entities.EntityItemWatcher;
 import com.gildedgames.aether.common.entities.effects.EntityEffectsEventHooks;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.properties.EquipmentRegistry;
+import com.gildedgames.aether.common.registry.EquipmentRegistry;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
-import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.player.PlayerAether;
-import com.gildedgames.aether.common.player.PlayerAetherEvents;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherEvents;
 import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
 import com.gildedgames.aether.common.world.chunk.PlacementFlagProvider;
-import com.gildedgames.aether.common.world.dungeon.DungeonInstance;
-import com.gildedgames.aether.common.world.dungeon.DungeonInstanceFactory;
-import com.gildedgames.aether.common.world.dungeon.DungeonInstanceHandler;
+import com.gildedgames.aether.common.world.labyrinth.instance.DungeonInstance;
+import com.gildedgames.aether.common.world.labyrinth.instance.DungeonInstanceFactory;
+import com.gildedgames.aether.common.world.labyrinth.instance.DungeonInstanceHandler;
 import com.gildedgames.util.io.Instantiator;
 import com.gildedgames.util.modules.chunk.ChunkModule;
 import com.gildedgames.util.modules.instances.InstanceModule;
@@ -36,7 +35,6 @@ import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import java.io.File;
 import java.util.Random;
@@ -125,7 +123,7 @@ public class CommonProxy
 			return false;
 		}
 
-		IPlayerAetherCapability aePlayer = PlayerAether.getPlayer(player);
+		IPlayerAetherCapability aePlayer = PlayerAetherImpl.getPlayer(player);
 
 		if (aePlayer == null)
 		{

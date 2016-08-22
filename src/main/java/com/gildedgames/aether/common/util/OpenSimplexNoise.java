@@ -51,12 +51,12 @@ public class OpenSimplexNoise
 	public OpenSimplexNoise(short[] perm)
 	{
 		this.perm = perm;
-		permGradIndex3D = new short[256];
+		this.permGradIndex3D = new short[256];
 
 		for (int i = 0; i < 256; i++)
 		{
 			//Since 3D has 24 gradients, simple bitmask won't work, so precompute modulo array.
-			permGradIndex3D[i] = (short) ((perm[i] % (gradients3D.length / 3)) * 3);
+			this.permGradIndex3D[i] = (short) ((perm[i] % (gradients3D.length / 3)) * 3);
 		}
 	}
 
@@ -65,22 +65,22 @@ public class OpenSimplexNoise
 	//Uses a simple 64-bit LCG.
 	public OpenSimplexNoise(long seed)
 	{
-		perm = new short[256];
-		permGradIndex3D = new short[256];
+		this.perm = new short[256];
+		this.permGradIndex3D = new short[256];
 		short[] source = new short[256];
 		for (short i = 0; i < 256; i++)
 			source[i] = i;
-		seed = seed * 6364136223846793005l + 1442695040888963407l;
-		seed = seed * 6364136223846793005l + 1442695040888963407l;
-		seed = seed * 6364136223846793005l + 1442695040888963407l;
+		seed = seed * 6364136223846793005L + 1442695040888963407L;
+		seed = seed * 6364136223846793005L + 1442695040888963407L;
+		seed = seed * 6364136223846793005L + 1442695040888963407L;
 		for (int i = 255; i >= 0; i--)
 		{
-			seed = seed * 6364136223846793005l + 1442695040888963407l;
+			seed = seed * 6364136223846793005L + 1442695040888963407L;
 			int r = (int) ((seed + 31) % (i + 1));
 			if (r < 0)
 				r += (i + 1);
-			perm[i] = source[r];
-			permGradIndex3D[i] = (short) ((perm[i] % (gradients3D.length / 3)) * 3);
+			this.perm[i] = source[r];
+			this.permGradIndex3D[i] = (short) ((this.perm[i] % (gradients3D.length / 3)) * 3);
 			source[r] = source[i];
 		}
 	}
@@ -127,7 +127,7 @@ public class OpenSimplexNoise
 		if (attn1 > 0)
 		{
 			attn1 *= attn1;
-			value += attn1 * attn1 * extrapolate(xsb + 1, ysb + 0, dx1, dy1);
+			value += attn1 * attn1 * this.extrapolate(xsb + 1, ysb, dx1, dy1);
 		}
 
 		//Contribution (0,1)
@@ -137,7 +137,7 @@ public class OpenSimplexNoise
 		if (attn2 > 0)
 		{
 			attn2 *= attn2;
-			value += attn2 * attn2 * extrapolate(xsb + 0, ysb + 1, dx2, dy2);
+			value += attn2 * attn2 * this.extrapolate(xsb, ysb + 1, dx2, dy2);
 		}
 
 		if (inSum <= 1)
@@ -176,13 +176,13 @@ public class OpenSimplexNoise
 				if (xins > yins)
 				{
 					xsv_ext = xsb + 2;
-					ysv_ext = ysb + 0;
+					ysv_ext = ysb;
 					dx_ext = dx0 - 2 - 2 * SQUISH_CONSTANT_2D;
 					dy_ext = dy0 + 0 - 2 * SQUISH_CONSTANT_2D;
 				}
 				else
 				{
-					xsv_ext = xsb + 0;
+					xsv_ext = xsb;
 					ysv_ext = ysb + 2;
 					dx_ext = dx0 + 0 - 2 * SQUISH_CONSTANT_2D;
 					dy_ext = dy0 - 2 - 2 * SQUISH_CONSTANT_2D;
@@ -206,7 +206,7 @@ public class OpenSimplexNoise
 		if (attn0 > 0)
 		{
 			attn0 *= attn0;
-			value += attn0 * attn0 * extrapolate(xsb, ysb, dx0, dy0);
+			value += attn0 * attn0 * this.extrapolate(xsb, ysb, dx0, dy0);
 		}
 
 		//Extra Vertex
@@ -214,7 +214,7 @@ public class OpenSimplexNoise
 		if (attn_ext > 0)
 		{
 			attn_ext *= attn_ext;
-			value += attn_ext * attn_ext * extrapolate(xsv_ext, ysv_ext, dx_ext, dy_ext);
+			value += attn_ext * attn_ext * this.extrapolate(xsv_ext, ysv_ext, dx_ext, dy_ext);
 		}
 
 		return value / NORM_CONSTANT_2D;
@@ -386,7 +386,7 @@ public class OpenSimplexNoise
 			if (attn0 > 0)
 			{
 				attn0 *= attn0;
-				value += attn0 * attn0 * extrapolate(xsb + 0, ysb + 0, zsb + 0, dx0, dy0, dz0);
+				value += attn0 * attn0 * this.extrapolate(xsb, ysb, zsb, dx0, dy0, dz0);
 			}
 
 			//Contribution (1,0,0)
@@ -397,7 +397,7 @@ public class OpenSimplexNoise
 			if (attn1 > 0)
 			{
 				attn1 *= attn1;
-				value += attn1 * attn1 * extrapolate(xsb + 1, ysb + 0, zsb + 0, dx1, dy1, dz1);
+				value += attn1 * attn1 * this.extrapolate(xsb + 1, ysb, zsb, dx1, dy1, dz1);
 			}
 
 			//Contribution (0,1,0)
@@ -408,7 +408,7 @@ public class OpenSimplexNoise
 			if (attn2 > 0)
 			{
 				attn2 *= attn2;
-				value += attn2 * attn2 * extrapolate(xsb + 0, ysb + 1, zsb + 0, dx2, dy2, dz2);
+				value += attn2 * attn2 * this.extrapolate(xsb, ysb + 1, zsb, dx2, dy2, dz2);
 			}
 
 			//Contribution (0,0,1)
@@ -419,7 +419,7 @@ public class OpenSimplexNoise
 			if (attn3 > 0)
 			{
 				attn3 *= attn3;
-				value += attn3 * attn3 * extrapolate(xsb + 0, ysb + 0, zsb + 1, dx3, dy3, dz3);
+				value += attn3 * attn3 * this.extrapolate(xsb, ysb, zsb + 1, dx3, dy3, dz3);
 			}
 		}
 		else if (inSum >= 2)
@@ -550,7 +550,7 @@ public class OpenSimplexNoise
 			if (attn3 > 0)
 			{
 				attn3 *= attn3;
-				value += attn3 * attn3 * extrapolate(xsb + 1, ysb + 1, zsb + 0, dx3, dy3, dz3);
+				value += attn3 * attn3 * this.extrapolate(xsb + 1, ysb + 1, zsb, dx3, dy3, dz3);
 			}
 
 			//Contribution (1,0,1)
@@ -561,7 +561,7 @@ public class OpenSimplexNoise
 			if (attn2 > 0)
 			{
 				attn2 *= attn2;
-				value += attn2 * attn2 * extrapolate(xsb + 1, ysb + 0, zsb + 1, dx2, dy2, dz2);
+				value += attn2 * attn2 * this.extrapolate(xsb + 1, ysb, zsb + 1, dx2, dy2, dz2);
 			}
 
 			//Contribution (0,1,1)
@@ -572,7 +572,7 @@ public class OpenSimplexNoise
 			if (attn1 > 0)
 			{
 				attn1 *= attn1;
-				value += attn1 * attn1 * extrapolate(xsb + 0, ysb + 1, zsb + 1, dx1, dy1, dz1);
+				value += attn1 * attn1 * this.extrapolate(xsb, ysb + 1, zsb + 1, dx1, dy1, dz1);
 			}
 
 			//Contribution (1,1,1)
@@ -583,7 +583,7 @@ public class OpenSimplexNoise
 			if (attn0 > 0)
 			{
 				attn0 *= attn0;
-				value += attn0 * attn0 * extrapolate(xsb + 1, ysb + 1, zsb + 1, dx0, dy0, dz0);
+				value += attn0 * attn0 * this.extrapolate(xsb + 1, ysb + 1, zsb + 1, dx0, dy0, dz0);
 			}
 		}
 		else
@@ -821,7 +821,7 @@ public class OpenSimplexNoise
 			if (attn1 > 0)
 			{
 				attn1 *= attn1;
-				value += attn1 * attn1 * extrapolate(xsb + 1, ysb + 0, zsb + 0, dx1, dy1, dz1);
+				value += attn1 * attn1 * this.extrapolate(xsb + 1, ysb, zsb, dx1, dy1, dz1);
 			}
 
 			//Contribution (0,1,0)
@@ -832,7 +832,7 @@ public class OpenSimplexNoise
 			if (attn2 > 0)
 			{
 				attn2 *= attn2;
-				value += attn2 * attn2 * extrapolate(xsb + 0, ysb + 1, zsb + 0, dx2, dy2, dz2);
+				value += attn2 * attn2 * this.extrapolate(xsb, ysb + 1, zsb, dx2, dy2, dz2);
 			}
 
 			//Contribution (0,0,1)
@@ -843,7 +843,7 @@ public class OpenSimplexNoise
 			if (attn3 > 0)
 			{
 				attn3 *= attn3;
-				value += attn3 * attn3 * extrapolate(xsb + 0, ysb + 0, zsb + 1, dx3, dy3, dz3);
+				value += attn3 * attn3 * this.extrapolate(xsb, ysb, zsb + 1, dx3, dy3, dz3);
 			}
 
 			//Contribution (1,1,0)
@@ -854,7 +854,7 @@ public class OpenSimplexNoise
 			if (attn4 > 0)
 			{
 				attn4 *= attn4;
-				value += attn4 * attn4 * extrapolate(xsb + 1, ysb + 1, zsb + 0, dx4, dy4, dz4);
+				value += attn4 * attn4 * this.extrapolate(xsb + 1, ysb + 1, zsb, dx4, dy4, dz4);
 			}
 
 			//Contribution (1,0,1)
@@ -865,7 +865,7 @@ public class OpenSimplexNoise
 			if (attn5 > 0)
 			{
 				attn5 *= attn5;
-				value += attn5 * attn5 * extrapolate(xsb + 1, ysb + 0, zsb + 1, dx5, dy5, dz5);
+				value += attn5 * attn5 * this.extrapolate(xsb + 1, ysb, zsb + 1, dx5, dy5, dz5);
 			}
 
 			//Contribution (0,1,1)
@@ -876,7 +876,7 @@ public class OpenSimplexNoise
 			if (attn6 > 0)
 			{
 				attn6 *= attn6;
-				value += attn6 * attn6 * extrapolate(xsb + 0, ysb + 1, zsb + 1, dx6, dy6, dz6);
+				value += attn6 * attn6 * this.extrapolate(xsb, ysb + 1, zsb + 1, dx6, dy6, dz6);
 			}
 		}
 
@@ -885,7 +885,7 @@ public class OpenSimplexNoise
 		if (attn_ext0 > 0)
 		{
 			attn_ext0 *= attn_ext0;
-			value += attn_ext0 * attn_ext0 * extrapolate(xsv_ext0, ysv_ext0, zsv_ext0, dx_ext0, dy_ext0, dz_ext0);
+			value += attn_ext0 * attn_ext0 * this.extrapolate(xsv_ext0, ysv_ext0, zsv_ext0, dx_ext0, dy_ext0, dz_ext0);
 		}
 
 		//Second extra vertex
@@ -893,7 +893,7 @@ public class OpenSimplexNoise
 		if (attn_ext1 > 0)
 		{
 			attn_ext1 *= attn_ext1;
-			value += attn_ext1 * attn_ext1 * extrapolate(xsv_ext1, ysv_ext1, zsv_ext1, dx_ext1, dy_ext1, dz_ext1);
+			value += attn_ext1 * attn_ext1 * this.extrapolate(xsv_ext1, ysv_ext1, zsv_ext1, dx_ext1, dy_ext1, dz_ext1);
 		}
 
 		return value / NORM_CONSTANT_3D;
@@ -1144,7 +1144,7 @@ public class OpenSimplexNoise
 			if (attn0 > 0)
 			{
 				attn0 *= attn0;
-				value += attn0 * attn0 * extrapolate(xsb + 0, ysb + 0, zsb + 0, wsb + 0, dx0, dy0, dz0, dw0);
+				value += attn0 * attn0 * this.extrapolate(xsb, ysb, zsb, wsb, dx0, dy0, dz0, dw0);
 			}
 
 			//Contribution (1,0,0,0)
@@ -1156,7 +1156,7 @@ public class OpenSimplexNoise
 			if (attn1 > 0)
 			{
 				attn1 *= attn1;
-				value += attn1 * attn1 * extrapolate(xsb + 1, ysb + 0, zsb + 0, wsb + 0, dx1, dy1, dz1, dw1);
+				value += attn1 * attn1 * this.extrapolate(xsb + 1, ysb, zsb, wsb, dx1, dy1, dz1, dw1);
 			}
 
 			//Contribution (0,1,0,0)
@@ -1168,7 +1168,7 @@ public class OpenSimplexNoise
 			if (attn2 > 0)
 			{
 				attn2 *= attn2;
-				value += attn2 * attn2 * extrapolate(xsb + 0, ysb + 1, zsb + 0, wsb + 0, dx2, dy2, dz2, dw2);
+				value += attn2 * attn2 * this.extrapolate(xsb, ysb + 1, zsb, wsb, dx2, dy2, dz2, dw2);
 			}
 
 			//Contribution (0,0,1,0)
@@ -1180,7 +1180,7 @@ public class OpenSimplexNoise
 			if (attn3 > 0)
 			{
 				attn3 *= attn3;
-				value += attn3 * attn3 * extrapolate(xsb + 0, ysb + 0, zsb + 1, wsb + 0, dx3, dy3, dz3, dw3);
+				value += attn3 * attn3 * this.extrapolate(xsb, ysb, zsb + 1, wsb, dx3, dy3, dz3, dw3);
 			}
 
 			//Contribution (0,0,0,1)
@@ -1192,7 +1192,7 @@ public class OpenSimplexNoise
 			if (attn4 > 0)
 			{
 				attn4 *= attn4;
-				value += attn4 * attn4 * extrapolate(xsb + 0, ysb + 0, zsb + 0, wsb + 1, dx4, dy4, dz4, dw4);
+				value += attn4 * attn4 * this.extrapolate(xsb, ysb, zsb, wsb + 1, dx4, dy4, dz4, dw4);
 			}
 		}
 		else if (inSum >= 3)
@@ -1396,7 +1396,7 @@ public class OpenSimplexNoise
 			if (attn4 > 0)
 			{
 				attn4 *= attn4;
-				value += attn4 * attn4 * extrapolate(xsb + 1, ysb + 1, zsb + 1, wsb + 0, dx4, dy4, dz4, dw4);
+				value += attn4 * attn4 * this.extrapolate(xsb + 1, ysb + 1, zsb + 1, wsb, dx4, dy4, dz4, dw4);
 			}
 
 			//Contribution (1,1,0,1)
@@ -1408,7 +1408,7 @@ public class OpenSimplexNoise
 			if (attn3 > 0)
 			{
 				attn3 *= attn3;
-				value += attn3 * attn3 * extrapolate(xsb + 1, ysb + 1, zsb + 0, wsb + 1, dx3, dy3, dz3, dw3);
+				value += attn3 * attn3 * this.extrapolate(xsb + 1, ysb + 1, zsb, wsb + 1, dx3, dy3, dz3, dw3);
 			}
 
 			//Contribution (1,0,1,1)
@@ -1420,7 +1420,7 @@ public class OpenSimplexNoise
 			if (attn2 > 0)
 			{
 				attn2 *= attn2;
-				value += attn2 * attn2 * extrapolate(xsb + 1, ysb + 0, zsb + 1, wsb + 1, dx2, dy2, dz2, dw2);
+				value += attn2 * attn2 * this.extrapolate(xsb + 1, ysb, zsb + 1, wsb + 1, dx2, dy2, dz2, dw2);
 			}
 
 			//Contribution (0,1,1,1)
@@ -1432,7 +1432,7 @@ public class OpenSimplexNoise
 			if (attn1 > 0)
 			{
 				attn1 *= attn1;
-				value += attn1 * attn1 * extrapolate(xsb + 0, ysb + 1, zsb + 1, wsb + 1, dx1, dy1, dz1, dw1);
+				value += attn1 * attn1 * this.extrapolate(xsb, ysb + 1, zsb + 1, wsb + 1, dx1, dy1, dz1, dw1);
 			}
 
 			//Contribution (1,1,1,1)
@@ -1444,7 +1444,7 @@ public class OpenSimplexNoise
 			if (attn0 > 0)
 			{
 				attn0 *= attn0;
-				value += attn0 * attn0 * extrapolate(xsb + 1, ysb + 1, zsb + 1, wsb + 1, dx0, dy0, dz0, dw0);
+				value += attn0 * attn0 * this.extrapolate(xsb + 1, ysb + 1, zsb + 1, wsb + 1, dx0, dy0, dz0, dw0);
 			}
 		}
 		else if (inSum <= 2)
@@ -1872,7 +1872,7 @@ public class OpenSimplexNoise
 			if (attn1 > 0)
 			{
 				attn1 *= attn1;
-				value += attn1 * attn1 * extrapolate(xsb + 1, ysb + 0, zsb + 0, wsb + 0, dx1, dy1, dz1, dw1);
+				value += attn1 * attn1 * this.extrapolate(xsb + 1, ysb, zsb, wsb, dx1, dy1, dz1, dw1);
 			}
 
 			//Contribution (0,1,0,0)
@@ -1884,7 +1884,7 @@ public class OpenSimplexNoise
 			if (attn2 > 0)
 			{
 				attn2 *= attn2;
-				value += attn2 * attn2 * extrapolate(xsb + 0, ysb + 1, zsb + 0, wsb + 0, dx2, dy2, dz2, dw2);
+				value += attn2 * attn2 * this.extrapolate(xsb, ysb + 1, zsb, wsb, dx2, dy2, dz2, dw2);
 			}
 
 			//Contribution (0,0,1,0)
@@ -1896,7 +1896,7 @@ public class OpenSimplexNoise
 			if (attn3 > 0)
 			{
 				attn3 *= attn3;
-				value += attn3 * attn3 * extrapolate(xsb + 0, ysb + 0, zsb + 1, wsb + 0, dx3, dy3, dz3, dw3);
+				value += attn3 * attn3 * this.extrapolate(xsb, ysb, zsb + 1, wsb, dx3, dy3, dz3, dw3);
 			}
 
 			//Contribution (0,0,0,1)
@@ -1908,7 +1908,7 @@ public class OpenSimplexNoise
 			if (attn4 > 0)
 			{
 				attn4 *= attn4;
-				value += attn4 * attn4 * extrapolate(xsb + 0, ysb + 0, zsb + 0, wsb + 1, dx4, dy4, dz4, dw4);
+				value += attn4 * attn4 * this.extrapolate(xsb, ysb, zsb, wsb + 1, dx4, dy4, dz4, dw4);
 			}
 
 			//Contribution (1,1,0,0)
@@ -1920,7 +1920,7 @@ public class OpenSimplexNoise
 			if (attn5 > 0)
 			{
 				attn5 *= attn5;
-				value += attn5 * attn5 * extrapolate(xsb + 1, ysb + 1, zsb + 0, wsb + 0, dx5, dy5, dz5, dw5);
+				value += attn5 * attn5 * this.extrapolate(xsb + 1, ysb + 1, zsb, wsb, dx5, dy5, dz5, dw5);
 			}
 
 			//Contribution (1,0,1,0)
@@ -1932,7 +1932,7 @@ public class OpenSimplexNoise
 			if (attn6 > 0)
 			{
 				attn6 *= attn6;
-				value += attn6 * attn6 * extrapolate(xsb + 1, ysb + 0, zsb + 1, wsb + 0, dx6, dy6, dz6, dw6);
+				value += attn6 * attn6 * this.extrapolate(xsb + 1, ysb, zsb + 1, wsb, dx6, dy6, dz6, dw6);
 			}
 
 			//Contribution (1,0,0,1)
@@ -1944,7 +1944,7 @@ public class OpenSimplexNoise
 			if (attn7 > 0)
 			{
 				attn7 *= attn7;
-				value += attn7 * attn7 * extrapolate(xsb + 1, ysb + 0, zsb + 0, wsb + 1, dx7, dy7, dz7, dw7);
+				value += attn7 * attn7 * this.extrapolate(xsb + 1, ysb, zsb, wsb + 1, dx7, dy7, dz7, dw7);
 			}
 
 			//Contribution (0,1,1,0)
@@ -1956,7 +1956,7 @@ public class OpenSimplexNoise
 			if (attn8 > 0)
 			{
 				attn8 *= attn8;
-				value += attn8 * attn8 * extrapolate(xsb + 0, ysb + 1, zsb + 1, wsb + 0, dx8, dy8, dz8, dw8);
+				value += attn8 * attn8 * this.extrapolate(xsb, ysb + 1, zsb + 1, wsb, dx8, dy8, dz8, dw8);
 			}
 
 			//Contribution (0,1,0,1)
@@ -1968,7 +1968,7 @@ public class OpenSimplexNoise
 			if (attn9 > 0)
 			{
 				attn9 *= attn9;
-				value += attn9 * attn9 * extrapolate(xsb + 0, ysb + 1, zsb + 0, wsb + 1, dx9, dy9, dz9, dw9);
+				value += attn9 * attn9 * this.extrapolate(xsb, ysb + 1, zsb, wsb + 1, dx9, dy9, dz9, dw9);
 			}
 
 			//Contribution (0,0,1,1)
@@ -1980,7 +1980,7 @@ public class OpenSimplexNoise
 			if (attn10 > 0)
 			{
 				attn10 *= attn10;
-				value += attn10 * attn10 * extrapolate(xsb + 0, ysb + 0, zsb + 1, wsb + 1, dx10, dy10, dz10, dw10);
+				value += attn10 * attn10 * this.extrapolate(xsb, ysb, zsb + 1, wsb + 1, dx10, dy10, dz10, dw10);
 			}
 		}
 		else
@@ -2393,7 +2393,7 @@ public class OpenSimplexNoise
 			if (attn4 > 0)
 			{
 				attn4 *= attn4;
-				value += attn4 * attn4 * extrapolate(xsb + 1, ysb + 1, zsb + 1, wsb + 0, dx4, dy4, dz4, dw4);
+				value += attn4 * attn4 * this.extrapolate(xsb + 1, ysb + 1, zsb + 1, wsb, dx4, dy4, dz4, dw4);
 			}
 
 			//Contribution (1,1,0,1)
@@ -2405,7 +2405,7 @@ public class OpenSimplexNoise
 			if (attn3 > 0)
 			{
 				attn3 *= attn3;
-				value += attn3 * attn3 * extrapolate(xsb + 1, ysb + 1, zsb + 0, wsb + 1, dx3, dy3, dz3, dw3);
+				value += attn3 * attn3 * this.extrapolate(xsb + 1, ysb + 1, zsb, wsb + 1, dx3, dy3, dz3, dw3);
 			}
 
 			//Contribution (1,0,1,1)
@@ -2417,7 +2417,7 @@ public class OpenSimplexNoise
 			if (attn2 > 0)
 			{
 				attn2 *= attn2;
-				value += attn2 * attn2 * extrapolate(xsb + 1, ysb + 0, zsb + 1, wsb + 1, dx2, dy2, dz2, dw2);
+				value += attn2 * attn2 * this.extrapolate(xsb + 1, ysb, zsb + 1, wsb + 1, dx2, dy2, dz2, dw2);
 			}
 
 			//Contribution (0,1,1,1)
@@ -2429,7 +2429,7 @@ public class OpenSimplexNoise
 			if (attn1 > 0)
 			{
 				attn1 *= attn1;
-				value += attn1 * attn1 * extrapolate(xsb + 0, ysb + 1, zsb + 1, wsb + 1, dx1, dy1, dz1, dw1);
+				value += attn1 * attn1 * this.extrapolate(xsb, ysb + 1, zsb + 1, wsb + 1, dx1, dy1, dz1, dw1);
 			}
 
 			//Contribution (1,1,0,0)
@@ -2441,7 +2441,7 @@ public class OpenSimplexNoise
 			if (attn5 > 0)
 			{
 				attn5 *= attn5;
-				value += attn5 * attn5 * extrapolate(xsb + 1, ysb + 1, zsb + 0, wsb + 0, dx5, dy5, dz5, dw5);
+				value += attn5 * attn5 * this.extrapolate(xsb + 1, ysb + 1, zsb, wsb, dx5, dy5, dz5, dw5);
 			}
 
 			//Contribution (1,0,1,0)
@@ -2453,7 +2453,7 @@ public class OpenSimplexNoise
 			if (attn6 > 0)
 			{
 				attn6 *= attn6;
-				value += attn6 * attn6 * extrapolate(xsb + 1, ysb + 0, zsb + 1, wsb + 0, dx6, dy6, dz6, dw6);
+				value += attn6 * attn6 * this.extrapolate(xsb + 1, ysb, zsb + 1, wsb, dx6, dy6, dz6, dw6);
 			}
 
 			//Contribution (1,0,0,1)
@@ -2465,7 +2465,7 @@ public class OpenSimplexNoise
 			if (attn7 > 0)
 			{
 				attn7 *= attn7;
-				value += attn7 * attn7 * extrapolate(xsb + 1, ysb + 0, zsb + 0, wsb + 1, dx7, dy7, dz7, dw7);
+				value += attn7 * attn7 * this.extrapolate(xsb + 1, ysb, zsb, wsb + 1, dx7, dy7, dz7, dw7);
 			}
 
 			//Contribution (0,1,1,0)
@@ -2477,7 +2477,7 @@ public class OpenSimplexNoise
 			if (attn8 > 0)
 			{
 				attn8 *= attn8;
-				value += attn8 * attn8 * extrapolate(xsb + 0, ysb + 1, zsb + 1, wsb + 0, dx8, dy8, dz8, dw8);
+				value += attn8 * attn8 * this.extrapolate(xsb, ysb + 1, zsb + 1, wsb, dx8, dy8, dz8, dw8);
 			}
 
 			//Contribution (0,1,0,1)
@@ -2489,7 +2489,7 @@ public class OpenSimplexNoise
 			if (attn9 > 0)
 			{
 				attn9 *= attn9;
-				value += attn9 * attn9 * extrapolate(xsb + 0, ysb + 1, zsb + 0, wsb + 1, dx9, dy9, dz9, dw9);
+				value += attn9 * attn9 * this.extrapolate(xsb, ysb + 1, zsb, wsb + 1, dx9, dy9, dz9, dw9);
 			}
 
 			//Contribution (0,0,1,1)
@@ -2501,7 +2501,7 @@ public class OpenSimplexNoise
 			if (attn10 > 0)
 			{
 				attn10 *= attn10;
-				value += attn10 * attn10 * extrapolate(xsb + 0, ysb + 0, zsb + 1, wsb + 1, dx10, dy10, dz10, dw10);
+				value += attn10 * attn10 * this.extrapolate(xsb, ysb, zsb + 1, wsb + 1, dx10, dy10, dz10, dw10);
 			}
 		}
 
@@ -2510,7 +2510,7 @@ public class OpenSimplexNoise
 		if (attn_ext0 > 0)
 		{
 			attn_ext0 *= attn_ext0;
-			value += attn_ext0 * attn_ext0 * extrapolate(xsv_ext0, ysv_ext0, zsv_ext0, wsv_ext0, dx_ext0, dy_ext0, dz_ext0, dw_ext0);
+			value += attn_ext0 * attn_ext0 * this.extrapolate(xsv_ext0, ysv_ext0, zsv_ext0, wsv_ext0, dx_ext0, dy_ext0, dz_ext0, dw_ext0);
 		}
 
 		//Second extra vertex
@@ -2518,7 +2518,7 @@ public class OpenSimplexNoise
 		if (attn_ext1 > 0)
 		{
 			attn_ext1 *= attn_ext1;
-			value += attn_ext1 * attn_ext1 * extrapolate(xsv_ext1, ysv_ext1, zsv_ext1, wsv_ext1, dx_ext1, dy_ext1, dz_ext1, dw_ext1);
+			value += attn_ext1 * attn_ext1 * this.extrapolate(xsv_ext1, ysv_ext1, zsv_ext1, wsv_ext1, dx_ext1, dy_ext1, dz_ext1, dw_ext1);
 		}
 
 		//Third extra vertex
@@ -2526,7 +2526,7 @@ public class OpenSimplexNoise
 		if (attn_ext2 > 0)
 		{
 			attn_ext2 *= attn_ext2;
-			value += attn_ext2 * attn_ext2 * extrapolate(xsv_ext2, ysv_ext2, zsv_ext2, wsv_ext2, dx_ext2, dy_ext2, dz_ext2, dw_ext2);
+			value += attn_ext2 * attn_ext2 * this.extrapolate(xsv_ext2, ysv_ext2, zsv_ext2, wsv_ext2, dx_ext2, dy_ext2, dz_ext2, dw_ext2);
 		}
 
 		return value / NORM_CONSTANT_4D;
@@ -2534,14 +2534,14 @@ public class OpenSimplexNoise
 
 	private double extrapolate(int xsb, int ysb, double dx, double dy)
 	{
-		int index = perm[(perm[xsb & 0xFF] + ysb) & 0xFF] & 0x0E;
+		int index = this.perm[(this.perm[xsb & 0xFF] + ysb) & 0xFF] & 0x0E;
 		return gradients2D[index] * dx
 				+ gradients2D[index + 1] * dy;
 	}
 
 	private double extrapolate(int xsb, int ysb, int zsb, double dx, double dy, double dz)
 	{
-		int index = permGradIndex3D[(perm[(perm[xsb & 0xFF] + ysb) & 0xFF] + zsb) & 0xFF];
+		int index = this.permGradIndex3D[(this.perm[(this.perm[xsb & 0xFF] + ysb) & 0xFF] + zsb) & 0xFF];
 		return gradients3D[index] * dx
 				+ gradients3D[index + 1] * dy
 				+ gradients3D[index + 2] * dz;
@@ -2549,7 +2549,7 @@ public class OpenSimplexNoise
 
 	private double extrapolate(int xsb, int ysb, int zsb, int wsb, double dx, double dy, double dz, double dw)
 	{
-		int index = perm[(perm[(perm[(perm[xsb & 0xFF] + ysb) & 0xFF] + zsb) & 0xFF] + wsb) & 0xFF] & 0xFC;
+		int index = this.perm[(this.perm[(this.perm[(this.perm[xsb & 0xFF] + ysb) & 0xFF] + zsb) & 0xFF] + wsb) & 0xFF] & 0xFC;
 		return gradients4D[index] * dx
 				+ gradients4D[index + 1] * dy
 				+ gradients4D[index + 2] * dz

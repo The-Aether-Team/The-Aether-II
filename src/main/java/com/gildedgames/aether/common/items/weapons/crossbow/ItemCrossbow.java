@@ -4,9 +4,6 @@ import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt.BoltAbility;
 import com.gildedgames.aether.common.items.ItemsAether;
 
-import com.gildedgames.aether.common.player.PlayerAether;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentKnockback;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,8 +18,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemCrossbow extends Item
 {
@@ -41,9 +36,9 @@ public class ItemCrossbow extends Item
 	public ItemCrossbow()
 	{
 		this.maxStackSize = 1;
-		knockBackValue = 0;
-		damageValue = 0;
-		duration = 60; // default duration, roughly 3 seconds.
+		this.knockBackValue = 0;
+		this.damageValue = 0;
+		this.duration = 60; // default duration, roughly 3 seconds.
 	}
 
 	// Should be adjusted to check for quiver accessory slot, currently checks the first space in players inventory for ammo.
@@ -80,7 +75,7 @@ public class ItemCrossbow extends Item
 
 	public void setDamageValue(float x) { this.damageValue = x; }
 
-	public int getDuration() { return duration; }
+	public int getDuration() { return this.duration; }
 
 	public void setDuration(int x) { this.duration = x; }
 
@@ -198,11 +193,11 @@ public class ItemCrossbow extends Item
 			EntityLivingBase entityBase = (EntityLivingBase) entity;
 			DamageSource source = DamageSource.causePlayerDamage(player);
 
-			entityBase.attackEntityFrom(source, damageValue);
+			entityBase.attackEntityFrom(source, this.damageValue);
 
 			if (source.getSourceOfDamage() instanceof EntityLivingBase)
 			{
-				entityBase.knockBack(entity, knockBackValue, -(entity.posX - source.getSourceOfDamage().posX), -(entity.posZ - source.getSourceOfDamage().posZ));
+				entityBase.knockBack(entity, this.knockBackValue, -(entity.posX - source.getSourceOfDamage().posX), -(entity.posZ - source.getSourceOfDamage().posZ));
 			}
 		}
 		return true;

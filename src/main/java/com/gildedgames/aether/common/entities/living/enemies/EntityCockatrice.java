@@ -4,24 +4,18 @@ import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceHide;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceSneakAttack;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceWander;
-import com.gildedgames.aether.common.entities.living.EntityAechorPlant;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.sound.SoundEvent;
 
 public class EntityCockatrice extends EntityMob
 {
@@ -76,7 +70,7 @@ public class EntityCockatrice extends EntityMob
 	@Override
 	public boolean isPotionApplicable(PotionEffect potionEffect)
 	{
-		return potionEffect.getPotion() == MobEffects.POISON ? false : super.isPotionApplicable(potionEffect);
+		return potionEffect.getPotion() != MobEffects.POISON && super.isPotionApplicable(potionEffect);
 	}
 
 	@Override

@@ -34,9 +34,7 @@ public class GenPropsMainLand implements GenProps
 		double nx = x / this.FEATURE_SIZE;
 		double nz = z / this.FEATURE_SIZE;
 
-		double finalNoise = GenUtil.octavedNoise(noise, 10, 120, 1, nx, nz);
-
-		return finalNoise;
+		return GenUtil.octavedNoise(noise, 10, 120, 1, nx, nz);
 	}
 
 	@Override

@@ -3,20 +3,11 @@ package com.gildedgames.aether.common.entities.dungeon.labyrinth;
 import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AIDetonateClose;
 import com.gildedgames.aether.common.entities.ai.hopping.*;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIFindEntityNearest;
-import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-
-import static com.gildedgames.aether.common.SoundsAether.sentry_ambient;
 
 public class EntityDetonationSentry extends EntityMob
 {

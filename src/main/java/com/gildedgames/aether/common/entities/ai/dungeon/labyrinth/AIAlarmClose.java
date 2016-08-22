@@ -1,14 +1,8 @@
 package com.gildedgames.aether.common.entities.ai.dungeon.labyrinth;
 
-import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.EntityAI;
 import com.gildedgames.aether.common.util.TickTimer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.math.BlockPos;
 
 import java.util.List;
 

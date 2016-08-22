@@ -3,9 +3,7 @@ package com.gildedgames.aether.client.renderer;
 import com.gildedgames.aether.client.models.entities.player.LayerPlayerGloves;
 import com.gildedgames.aether.client.renderer.entities.living.RenderPlayerHelper;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
-import com.gildedgames.aether.common.items.armor.ItemPhoenixArmor;
-import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -36,7 +34,7 @@ public class ClientRenderHandler
 		{
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 
-			PlayerAether aePlayer = PlayerAether.getPlayer(player);
+			PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
 
 			if (player.getAir() >= 295 && PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.neptune_armor_set))
 			{
@@ -48,7 +46,7 @@ public class ClientRenderHandler
 	@SubscribeEvent
 	public void onRenderBlockOverlay(RenderBlockOverlayEvent event)
 	{
-		PlayerAether aePlayer = PlayerAether.getPlayer(event.getPlayer());
+		PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(event.getPlayer());
 
 		if (event.getOverlayType() == RenderBlockOverlayEvent.OverlayType.WATER)
 		{
@@ -81,7 +79,7 @@ public class ClientRenderHandler
 
 			//GlStateManager.rotate(event.getInterpolatedPitch(), 1f, 0f, 0f);
 
-			RenderPlayerHelper.renderFirstPersonHand(event, PlayerAether.getPlayer(Minecraft.getMinecraft().thePlayer));
+			RenderPlayerHelper.renderFirstPersonHand(event, PlayerAetherImpl.getPlayer(Minecraft.getMinecraft().thePlayer));
 
 			GlStateManager.popMatrix();
 		}

@@ -1,24 +1,16 @@
 package com.gildedgames.aether.client.gui.container;
 
-import com.gildedgames.aether.client.renderer.entities.companions.RenderCompanion;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.ContainerEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
-import com.gildedgames.aether.common.entities.companions.EntityCompanion;
-import com.gildedgames.aether.common.player.PlayerAether;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiButton;
+import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentType;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 
 import java.util.Collections;
 
@@ -40,9 +32,9 @@ public class GuiEquipment extends GuiContainer
 
 	//	private static final ResourceLocation TEXTURE_COINBAR = new ResourceLocation("aether", "textures/gui/coinbar.png");
 
-	private final PlayerAether aePlayer;
+	private final PlayerAetherImpl aePlayer;
 
-	public GuiEquipment(PlayerAether aePlayer)
+	public GuiEquipment(PlayerAetherImpl aePlayer)
 	{
 		super(new ContainerEquipment(aePlayer));
 
@@ -82,7 +74,7 @@ public class GuiEquipment extends GuiContainer
 			this.drawTexturedModalRect(this.width / 2 - 90 - 179 / 2, this.height / 2 - 169 / 2, 0, 0, 179, 169);
 		}
 
-		this.mc.renderEngine.bindTexture(aePlayer.getPlayer().capabilities.isCreativeMode ? textureBackpackCreative : textureBackpack);
+		this.mc.renderEngine.bindTexture(this.aePlayer.getPlayer().capabilities.isCreativeMode ? textureBackpackCreative : textureBackpack);
 
 		this.drawTexturedModalRect(this.width / 2 + 90 - 176 / 2, this.height / 2 - 166 / 2, 0, 0, 176, 166);
 
@@ -90,7 +82,7 @@ public class GuiEquipment extends GuiContainer
 
 		if (AetherCore.CONFIG.getDisplayInventoryPattern())
 		{
-			this.mc.renderEngine.bindTexture(aePlayer.getPlayer().capabilities.isCreativeMode ? textureBackpackCreativePattern : textureBackpackPattern);
+			this.mc.renderEngine.bindTexture(this.aePlayer.getPlayer().capabilities.isCreativeMode ? textureBackpackCreativePattern : textureBackpackPattern);
 
 			GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 

@@ -7,7 +7,6 @@ import com.gildedgames.aether.common.world.TeleporterAether;
 import com.gildedgames.util.io.ClassSerializer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -23,7 +22,7 @@ import org.apache.logging.log4j.Logger;
 public class AetherCore implements IAetherServices
 {
 
-	protected static final String MOD_GUI_FACTORY = "com.gildedgames.aether.common.GuiFactoryAether";
+	protected static final String MOD_GUI_FACTORY = "com.gildedgames.aether.client.gui.GuiFactoryAether";
 
 	protected static final String MOD_FINGERPRINT = "b9a9be44fb51751dd1aec1dbb881b6de1a086abc";
 
@@ -41,7 +40,7 @@ public class AetherCore implements IAetherServices
 	@SidedProxy(clientSide = "com.gildedgames.aether.client.ClientProxy", serverSide = "com.gildedgames.aether.common.CommonProxy")
 	public static CommonProxy PROXY;
 
-	public static AetherConfig CONFIG;
+	public static ConfigAether CONFIG;
 
 	public static TeleporterAether TELEPORTER;
 
@@ -55,7 +54,7 @@ public class AetherCore implements IAetherServices
 	@EventHandler
 	public void onFMLPreInit(FMLPreInitializationEvent event)
 	{
-		AetherCore.CONFIG = new AetherConfig(event.getSuggestedConfigurationFile());
+		AetherCore.CONFIG = new ConfigAether(event.getSuggestedConfigurationFile());
 
 		MinecraftForge.EVENT_BUS.register(AetherCore.CONFIG);
 

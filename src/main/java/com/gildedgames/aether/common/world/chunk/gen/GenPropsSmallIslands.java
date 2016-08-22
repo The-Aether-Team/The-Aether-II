@@ -38,9 +38,7 @@ public class GenPropsSmallIslands implements GenProps
 		double noise3 = 0.25D * noise.getValue(4.0D * nx, 2.0D * nz);
 		double noise4 = 0.1D * noise.getValue(4.0D * nx, 4.0D * nz);
 
-		double finalNoise = noise1 + noise2 + noise3 + noise4;
-
-		return finalNoise;
+		return noise1 + noise2 + noise3 + noise4;
 	}
 
 	@Override

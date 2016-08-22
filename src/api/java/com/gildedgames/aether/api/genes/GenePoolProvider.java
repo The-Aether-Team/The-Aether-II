@@ -11,9 +11,9 @@ public class GenePoolProvider implements ICapabilitySerializable<NBTBase>
 
 	private final GenePoolStorage storage = new GenePoolStorage();
 
-	private final GenePool capability;
+	private final IGenePool capability;
 
-	public GenePoolProvider(GenePool capability)
+	public GenePoolProvider(IGenePool capability)
 	{
 		this.capability = capability;
 	}

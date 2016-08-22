@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.effects.processors;
 
 import com.gildedgames.aether.common.entities.effects.AbstractEffectProcessor;
-import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import net.minecraft.entity.Entity;
 
 import java.util.List;

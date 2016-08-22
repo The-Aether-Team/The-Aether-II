@@ -31,9 +31,7 @@ public class LabyrinthTotemSound extends PositionedSound implements ITickableSou
 	@Override
 	public boolean isDonePlaying()
 	{
-		boolean missing = this.world.getBlockState(this.pos).getBlock() != BlocksAether.labyrinth_totem;
-
-		return missing;
+		return this.world.getBlockState(this.pos).getBlock() != BlocksAether.labyrinth_totem;
 	}
 
 	@Override

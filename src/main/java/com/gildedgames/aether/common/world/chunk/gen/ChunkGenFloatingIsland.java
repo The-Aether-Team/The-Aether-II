@@ -21,7 +21,7 @@ public class ChunkGenFloatingIsland implements ChunkGen
 
 	private final GenProps GEN_PROPS;
 
-	public static interface GenProps
+	public interface GenProps
 	{
 
 		int yLevel();
@@ -80,7 +80,7 @@ public class ChunkGenFloatingIsland implements ChunkGen
 					{
 						IBlockState state = this.GEN_PROPS.state(noiseValue, posX + x, posZ + z);
 
-						primer.setBlockState(x, this.GEN_PROPS.yLevel() + (int) (y), z, state);
+						primer.setBlockState(x, this.GEN_PROPS.yLevel() + y, z, state);
 					}
 
 					evalHeight = MathHelper.floor_double((noiseValue - this.GEN_PROPS.noiseOffset()) * this.GEN_PROPS.bottomHeightFactor());

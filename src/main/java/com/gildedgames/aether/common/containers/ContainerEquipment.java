@@ -1,16 +1,11 @@
 package com.gildedgames.aether.common.containers;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.entities.effects.EntityEffectInstance;
-import com.gildedgames.aether.api.entities.effects.EntityEffectProcessor;
-import com.gildedgames.aether.api.entities.effects.IEntityEffectsCapability;
-import com.gildedgames.aether.api.items.IItemEffectsCapability;
-import com.gildedgames.aether.api.items.IItemPropertiesCapability;
-import com.gildedgames.aether.api.items.properties.ItemEquipmentType;
+import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
+import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentType;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
-import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ClickType;
@@ -18,9 +13,7 @@ import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import org.apache.commons.lang3.tuple.Pair;
 
 public class ContainerEquipment extends ContainerPlayer
 {
@@ -50,7 +43,7 @@ public class ContainerEquipment extends ContainerPlayer
 
 		for (int i = 0; i < this.inventorySlots.size(); ++i)
 		{
-			ItemStack itemstack = ((Slot) this.inventorySlots.get(i)).getStack();
+			ItemStack itemstack = this.inventorySlots.get(i).getStack();
 
 			if (itemstack != null)
 			{

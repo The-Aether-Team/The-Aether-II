@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class EntityFlying extends EntityCreature
 {
 
-	private static final DataParameter<Boolean> IS_MOVING = EntityDataManager.<Boolean>createKey(EntityFlying.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> IS_MOVING = EntityDataManager.createKey(EntityFlying.class, DataSerializers.BOOLEAN);
 
 	private float clientSideTailAnimationSpeed;
 

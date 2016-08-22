@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.companions;
 
-import com.gildedgames.aether.common.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import net.minecraft.world.World;
 
 public class EntityKraisith extends EntityCompanion
@@ -11,19 +11,19 @@ public class EntityKraisith extends EntityCompanion
 	}
 
 	@Override
-	public void tickEffects(PlayerAether aePlayer)
+	public void tickEffects(PlayerAetherImpl aePlayer)
 	{
 		// I'm useless!
 	}
 
 	@Override
-	public void addEffects(PlayerAether aePlayer)
+	public void addEffects(PlayerAetherImpl aePlayer)
 	{
 
 	}
 
 	@Override
-	public void removeEffects(PlayerAether aePlayer)
+	public void removeEffects(PlayerAetherImpl aePlayer)
 	{
 
 	}
