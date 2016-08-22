@@ -2,8 +2,8 @@ package com.gildedgames.aether.common.tile_entities;
 
 import com.gildedgames.aether.api.capabilites.items.properties.ItemRarity;
 import com.gildedgames.aether.common.blocks.containers.BlockLabyrinthChest;
-import com.gildedgames.aether.common.world.labyrinth.LootDefinitions;
-import com.gildedgames.aether.common.world.labyrinth.LootGenerator;
+import com.gildedgames.aether.common.world.dungeon.LootDefinitions;
+import com.gildedgames.aether.common.world.dungeon.LootGenerator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;

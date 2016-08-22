@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.world.labyrinth.util;
+package com.gildedgames.aether.common.world.dungeon.util;
 
 import java.util.Stack;
 

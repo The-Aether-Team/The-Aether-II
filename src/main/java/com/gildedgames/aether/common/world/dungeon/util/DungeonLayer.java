@@ -1,6 +1,6 @@
-package com.gildedgames.aether.common.world.labyrinth.util;
+package com.gildedgames.aether.common.world.dungeon.util;
 
-import com.gildedgames.aether.common.world.labyrinth.DungeonRoom;
+import com.gildedgames.aether.common.world.dungeon.DungeonRoom;
 import java.awt.*;
 import java.util.List;
 

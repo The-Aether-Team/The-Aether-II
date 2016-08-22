@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.world.labyrinth;
+package com.gildedgames.aether.common.world.dungeon;
 
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.google.common.base.Supplier;

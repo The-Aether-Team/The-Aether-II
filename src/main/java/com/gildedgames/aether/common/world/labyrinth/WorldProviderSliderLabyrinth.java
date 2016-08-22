@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.world.labyrinth.dim;
+package com.gildedgames.aether.common.world.labyrinth;
 
 import com.gildedgames.aether.common.DimensionsAether;
 import net.minecraft.entity.Entity;

@@ -1,7 +1,7 @@
-package com.gildedgames.aether.common.world.labyrinth;
+package com.gildedgames.aether.common.world.dungeon;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.world.labyrinth.util.FlatLayerDungeonGenerator;
+import com.gildedgames.aether.common.world.dungeon.util.FlatLayerDungeonGenerator;
 import com.google.common.collect.Lists;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;

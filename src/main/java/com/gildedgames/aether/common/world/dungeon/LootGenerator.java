@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.world.labyrinth;
+package com.gildedgames.aether.common.world.dungeon;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;

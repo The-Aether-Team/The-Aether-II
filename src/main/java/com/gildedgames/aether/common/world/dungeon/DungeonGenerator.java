@@ -1,8 +1,8 @@
-package com.gildedgames.aether.common.world.labyrinth;
+package com.gildedgames.aether.common.world.dungeon;
 
 import java.util.Random;
 
-import com.gildedgames.aether.common.world.labyrinth.instance.DungeonInstance;
+import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;

@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.world.labyrinth.util;
+package com.gildedgames.aether.common.world.dungeon.util;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -19,10 +19,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.world.labyrinth.DungeonGenerator;
-import com.gildedgames.aether.common.world.labyrinth.instance.DungeonInstance;
-import com.gildedgames.aether.common.world.labyrinth.DungeonRoom;
-import com.gildedgames.aether.common.world.labyrinth.DungeonRoomProvider;
+import com.gildedgames.aether.common.world.dungeon.DungeonGenerator;
+import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
+import com.gildedgames.aether.common.world.dungeon.DungeonRoom;
+import com.gildedgames.aether.common.world.dungeon.DungeonRoomProvider;
 import com.gildedgames.util.core.util.BlockPosDimension;
 import com.google.common.collect.Lists;
 import net.minecraft.world.gen.structure.template.BlockRotationProcessor;

@@ -1,8 +1,8 @@
-package com.gildedgames.aether.common.world.labyrinth.dim;
+package com.gildedgames.aether.common.world.labyrinth;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.world.labyrinth.instance.DungeonInstance;
-import com.gildedgames.aether.common.world.labyrinth.instance.DungeonInstanceHandler;
+import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
+import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceHandler;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;

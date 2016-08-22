@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.world.labyrinth.instance;
+package com.gildedgames.aether.common.world.dungeon.instance;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;

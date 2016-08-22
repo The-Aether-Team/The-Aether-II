@@ -1,11 +1,11 @@
-package com.gildedgames.aether.common.world.labyrinth.instance;
+package com.gildedgames.aether.common.world.dungeon.instance;
 
 import java.util.List;
 
-import com.gildedgames.aether.common.world.labyrinth.DungeonDefinition;
-import com.gildedgames.aether.common.world.labyrinth.DungeonDefinitions;
-import com.gildedgames.aether.common.world.labyrinth.DungeonGenerator;
-import com.gildedgames.aether.common.world.labyrinth.DungeonRoomProvider;
+import com.gildedgames.aether.common.world.dungeon.DungeonDefinition;
+import com.gildedgames.aether.common.world.dungeon.DungeonDefinitions;
+import com.gildedgames.aether.common.world.dungeon.DungeonGenerator;
+import com.gildedgames.aether.common.world.dungeon.DungeonRoomProvider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 

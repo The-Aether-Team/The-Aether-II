@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.world.labyrinth.dim;
+package com.gildedgames.aether.common.world.labyrinth;
 
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.util.math.BlockPos;

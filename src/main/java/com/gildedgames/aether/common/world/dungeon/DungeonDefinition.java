@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.world.labyrinth;
+package com.gildedgames.aether.common.world.dungeon;
 
 public interface DungeonDefinition
 {
