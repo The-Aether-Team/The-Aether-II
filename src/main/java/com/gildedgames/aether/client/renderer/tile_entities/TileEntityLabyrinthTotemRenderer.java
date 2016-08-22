@@ -54,20 +54,20 @@ public class TileEntityLabyrinthTotemRenderer extends TileEntitySpecialRenderer<
 		this.bindTexture(TEXTURE_TOTEM_GLOW);
 
 		GlStateManager.enableBlend();
-		GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
 
 		GlStateManager.depthMask(true);
 
-		char var5 = 61680;
+		float var5 = 61680;
 
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) var5 % 65536 / 1.0F, (float) var5 / 65536 / 1.0F);
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, var5 % 65536 / 1.0F, var5 / 65536 / 1.0F);
 
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-
 		GlStateManager.scale(1.01F, 1.01F, 1.01F);
 
 		this.model.renderAll(0.0625F);
+
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
 		GlStateManager.disableBlend();
 
