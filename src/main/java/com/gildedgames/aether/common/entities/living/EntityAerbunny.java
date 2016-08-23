@@ -29,6 +29,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import static sun.audio.AudioPlayer.player;
+
 public class EntityAerbunny extends EntityAetherAnimal
 {
 	@SideOnly(Side.CLIENT)
@@ -95,6 +97,11 @@ public class EntityAerbunny extends EntityAetherAnimal
 		{
 			Entity entity = this.getRidingEntity();
 
+			if (entity.isSneaking() && entity.onGround)
+			{
+				this.dismountRidingEntity();
+			}
+
 			if (entity.motionY < 0)
 			{
 				entity.motionY *= entity.isSneaking() ? 0.9D : 0.7D;
@@ -116,25 +123,13 @@ public class EntityAerbunny extends EntityAetherAnimal
 	@Override
 	public EnumActionResult applyPlayerInteraction(EntityPlayer player, Vec3d vec, ItemStack stack, EnumHand hand)
 	{
-		if (!player.worldObj.isRemote)
+		this.worldObj.playSound(player, player.getPosition(), SoundsAether.aerbunny_lift, SoundCategory.NEUTRAL, 1.0F, 0.8F + (this.rand.nextFloat() * 0.5F));
+
+		if (!this.isRiding())
 		{
-			this.worldObj.playSound(player, player.getPosition(), SoundsAether.aerbunny_lift, SoundCategory.NEUTRAL, 1.0F, 0.8F + (this.rand.nextFloat() * 0.5F));
+			this.startRiding(player, true);
 
-			if (this.isRiding())
-			{
-				if (this.getRidingEntity() == player)
-				{
-					this.dismountRidingEntity();
-
-					return EnumActionResult.SUCCESS;
-				}
-			}
-			else
-			{
-				this.startRiding(player, true);
-
-				return EnumActionResult.SUCCESS;
-			}
+			return EnumActionResult.SUCCESS;
 		}
 
 		return super.applyPlayerInteraction(player, vec, stack, hand);
