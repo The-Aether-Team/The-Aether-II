@@ -16,7 +16,7 @@ public interface DungeonGenerator
 	
 	boolean isLayoutReady();
 	
-	void generateLayout(MinecraftServer server, Random rand, DungeonInstance inst, DungeonRoomProvider provider);
+	void generateLayout(MinecraftServer server, long seed, DungeonInstance inst, DungeonRoomProvider provider);
 
 	void generateChunk(World world, Random rand, DungeonInstance inst, ChunkPrimer primer, int chunkX, int chunkZ);
 	

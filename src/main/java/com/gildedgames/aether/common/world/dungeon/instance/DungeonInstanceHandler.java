@@ -40,10 +40,9 @@ public class DungeonInstanceHandler
 
 	public void teleportToInst(EntityPlayerMP player, DungeonInstance inst)
 	{
-		if (!inst.hasGenerated())
+		if (!inst.getGenerator().isLayoutReady())
 		{
-			inst.getGenerator().generateLayout(player.getServer(), FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(inst.getDimIdInside()).rand, inst, inst.getRoomProvider());
-			inst.flagGenerated();
+			inst.getGenerator().generateLayout(player.getServer(), inst.getLayoutSeed(), inst, inst.getRoomProvider());
 		}
 		
 		World world = this.handler.teleportPlayerToDimension(inst, player);

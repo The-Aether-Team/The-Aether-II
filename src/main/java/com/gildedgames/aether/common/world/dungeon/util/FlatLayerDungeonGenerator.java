@@ -83,8 +83,10 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 	}
 
 	@Override
-	public void generateLayout(MinecraftServer server, Random rand, DungeonInstance instance, DungeonRoomProvider provider)
+	public void generateLayout(MinecraftServer server, long seed, DungeonInstance instance, DungeonRoomProvider provider)
 	{
+		Random rand = new Random(seed);
+
 		DungeonLayer prevLayer = null;
 
 		int layerNum = 0;
@@ -342,22 +344,6 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 				}
 			}
 		}
-
-		/*BlockPos roomMin = new BlockPos(posX, layer.minY() + 1, posZ);
-
-		Iterable<BlockPos.MutableBlockPos> blocks = BlockPos.getAllInBoxMutable(roomMin, roomMin.add(16, room.template.getSize().getY(), 16));
-
-		for (BlockPos.MutableBlockPos pos : blocks)
-		{
-			IBlockState state = world.getBlockState(pos);
-
-			if (state.getLightValue(world, pos) > 0)
-			{
-				Chunk chunk = world.getChunkFromChunkCoords(chunkX, chunkZ);
-
-				world.markAndNotifyBlock(pos, chunk, Blocks.AIR.getDefaultState(), state, 3);
-			}
-		}*/
 
 		for (int x = 0; x < 16; x++)
 		{

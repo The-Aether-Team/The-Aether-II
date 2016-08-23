@@ -27,10 +27,10 @@ public class DungeonInstance implements Instance
 	private List<EntityPlayer> players = Lists.newArrayList();
 
 	private BlockPosDimension outsideEntrance, insideEntrance;
-	
-	private boolean generated = false;
-	
+
 	private int dimIdInside;
+
+	private long layoutSeed;
 	
 	@SuppressWarnings("unused")
 	private DungeonInstance()
@@ -41,6 +41,7 @@ public class DungeonInstance implements Instance
 	public DungeonInstance(int id, InstanceHandler<DungeonInstance> instanceHandler)
 	{
 		this.dimIdInside = id;
+		this.layoutSeed = System.currentTimeMillis();
 		
 		this.def = DungeonDefinitions.SLIDERS_LABYRINTH;
 	}
@@ -69,17 +70,12 @@ public class DungeonInstance implements Instance
 	{
 		return this.def;
 	}
-	
-	public void flagGenerated()
+
+	public long getLayoutSeed()
 	{
-		this.generated = true;
+		return this.layoutSeed;
 	}
-	
-	public boolean hasGenerated()
-	{
-		return this.generated;
-	}
-	
+
 	public BlockPosDimension getOutsideEntrance()
 	{
 		return this.outsideEntrance;
@@ -103,7 +99,7 @@ public class DungeonInstance implements Instance
 	@Override
 	public void write(NBTTagCompound output)
 	{
-		output.setBoolean("generated", this.generated);
+		output.setLong("layoutSeed", this.layoutSeed);
 		
 		output.setTag("outsideEntrance", NBTHelper.serializeBlockPosDimension(this.outsideEntrance));
 		output.setTag("insideEntrance", NBTHelper.serializeBlockPosDimension(this.insideEntrance));
@@ -114,7 +110,7 @@ public class DungeonInstance implements Instance
 	@Override
 	public void read(NBTTagCompound input)
 	{
-		this.generated = input.getBoolean("generated");
+		this.layoutSeed = input.getLong("layoutSeed");
 		
 		this.outsideEntrance = NBTHelper.getBlockPosDimension(input.getCompoundTag("outsideEntrance"));
 		this.insideEntrance = NBTHelper.getBlockPosDimension(input.getCompoundTag("insideEntrance"));

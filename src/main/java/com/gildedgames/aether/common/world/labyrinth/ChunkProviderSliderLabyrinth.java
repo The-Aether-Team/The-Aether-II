@@ -76,7 +76,7 @@ public class ChunkProviderSliderLabyrinth implements IChunkGenerator
 
 		if (!inst.getGenerator().isLayoutReady())
 		{
-			return new Chunk(this.world, new ChunkPrimer(), chunkX, chunkZ);
+			inst.getGenerator().generateLayout(this.world.getMinecraftServer(), inst.getLayoutSeed(), inst, inst.getRoomProvider());
 		}
 		
 		this.random.setSeed(chunkX * 0x4f9939f508L + chunkZ * 0x1ef1565bd5L);
