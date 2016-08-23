@@ -465,6 +465,7 @@ ability.doubleDrops.desc2=§7• +%s%% Chance
 ability.extraDamage.desc=%s Attack Damage
 ability.freezeBlocks.desc=§2Freezes Nearby Blocks
 ability.pauseHunger.desc=§2Stops Hunger
+ability.reduceHunger.desc=§2Reduces Hunger
 ability.regenerateHealth.desc=§2Regenerates Health
 ability.maxHealthMod.desc=%s Max Health
 ability.movementSpeedMod.desc=%s Movement Speed

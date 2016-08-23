@@ -564,7 +564,7 @@ public class ItemsAether
 		ItemEffects.register(ItemsAether.ice_ring, new Effects().add(EntityEffects.FREEZE_BLOCKS, new FreezeBlocksEffect.Instance(2)));
 		ItemEffects.register(ItemsAether.ice_pendant, new Effects().add(EntityEffects.FREEZE_BLOCKS, new FreezeBlocksEffect.Instance(2)));
 		ItemEffects.register(ItemsAether.daggerfrost_locket, new Effects().add(EntityEffects.DAGGERFROST, new EntityEffectInstance()));
-		ItemEffects.register(ItemsAether.candy_ring, new Effects().add(EntityEffects.PAUSE_HUNGER));
+		ItemEffects.register(ItemsAether.candy_ring, new Effects().add(EntityEffects.REDUCE_HUNGER));
 		ItemEffects.register(ItemsAether.bone_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(2.0F)));
 		ItemEffects.register(ItemsAether.skyroot_ring, new Effects().add(EntityEffects.DOUBLE_DROPS, new DoubleDropEffect.Instance(1.5F)));
 		ItemEffects.register(ItemsAether.zanite_gloves, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(1.5F)));

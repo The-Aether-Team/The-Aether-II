@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.entities.effects;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gildedgames.aether.common.entities.effects.processors.player.PauseHungerEffect;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.nbt.NBTBase;
@@ -35,7 +36,9 @@ public class EntityEffects implements IEntityEffectsCapability
 
 	public static final EffectProcessorPlayer<ModifyXPCollectionEffect.Instance> MODIFY_XP_COLLECTION = new ModifyXPCollectionEffect();
 
-	public static final EffectProcessorPlayer<EntityEffectInstance> PAUSE_HUNGER = new ReduceHungerEffect();
+	public static final EffectProcessorPlayer<EntityEffectInstance> REDUCE_HUNGER = new ReduceHungerEffect();
+
+	public static final EffectProcessorPlayer<EntityEffectInstance> PAUSE_HUNGER = new PauseHungerEffect();
 
 	public static final EntityEffectProcessor<EntityEffectInstance> BREATHE_UNDERWATER = new BreatheUnderwaterEffect();
 
