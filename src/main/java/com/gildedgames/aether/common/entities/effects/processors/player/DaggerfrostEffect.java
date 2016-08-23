@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.entities.effects.EffectProcessorPlayer;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.item.ItemSnowball;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
@@ -47,7 +48,10 @@ public class DaggerfrostEffect implements EffectProcessorPlayer<EntityEffectInst
 		{
 			if (!world.isRemote)
 			{
-				world.spawnEntityInWorld(new EntityDaggerfrostSnowball(world, source));
+				EntityDaggerfrostSnowball snowball = new EntityDaggerfrostSnowball(world, source);
+				snowball.setHeadingFromThrower(source, source.rotationPitch, source.rotationYaw, 0.0F, 1.5F, 1.0F);
+
+				world.spawnEntityInWorld(snowball);
 
 				event.setCanceled(true);
 
