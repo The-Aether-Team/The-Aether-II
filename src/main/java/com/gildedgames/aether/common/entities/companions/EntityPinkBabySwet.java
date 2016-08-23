@@ -32,7 +32,11 @@ public class EntityPinkBabySwet extends EntityCompanion
 	@Override
 	public void onUpdate()
 	{
-		this.faceEntity(this.getOwner(), 10.0F, 10.0F);
+		if (this.getOwner() != null)
+		{
+			this.faceEntity(this.getOwner(), 10.0F, 10.0F);
+		}
+
 		((HoppingMoveHelper)this.moveHelper).setDirection(this.rotationYaw);
 
 		this.squishFactor += (this.squishAmount - this.squishFactor) * 0.5F;
