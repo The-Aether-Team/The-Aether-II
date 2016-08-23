@@ -6,6 +6,7 @@ import com.gildedgames.aether.client.models.items.AetherItemModels;
 import com.gildedgames.aether.client.renderer.AetherRenderers;
 import com.gildedgames.aether.client.renderer.ClientRenderHandler;
 import com.gildedgames.aether.client.renderer.items.ItemMoaEggColorHandler;
+import com.gildedgames.aether.client.renderer.items.LeatherGlovesColorHandler;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.CreativeTabsAether;
 import com.gildedgames.aether.common.CommonProxy;
@@ -53,6 +54,7 @@ public class ClientProxy extends CommonProxy
 		TabModule.api().getInventoryGroup().registerClientTab(new TabEquipment.Client());
 
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemMoaEggColorHandler(), ItemsAether.moa_egg);
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new LeatherGlovesColorHandler(), ItemsAether.leather_gloves);
 	}
 
 	@Override

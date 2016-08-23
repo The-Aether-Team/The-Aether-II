@@ -2,6 +2,7 @@ package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
+import com.gildedgames.aether.common.items.armor.ItemLeatherGloves;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
@@ -18,6 +19,8 @@ import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
 
+import static net.minecraft.realms.Tezzelator.t;
+
 public class RenderPlayerHelper
 {
 
@@ -27,7 +30,7 @@ public class RenderPlayerHelper
 
 		if (gloveStack != null && gloveStack.getItem() instanceof ItemAetherGloves)
 		{
-			RenderPlayerHelper.renderGloves(player.getPlayer(), (ItemAetherGloves) gloveStack.getItem(), event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress());
+			RenderPlayerHelper.renderGloves(player.getPlayer(), (ItemAetherGloves) gloveStack.getItem(), gloveStack, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress());
 		}
 
 		ItemStack ring1 = player.getEquipmentInventory().getStackInSlot(3);
@@ -55,7 +58,7 @@ public class RenderPlayerHelper
 		}
 	}
 
-	private static void renderGloves(EntityPlayer player, ItemAetherGloves glove, float partialTicks, float pitch, float swingProgress, float equipProgress)
+	private static void renderGloves(EntityPlayer player, ItemAetherGloves glove, ItemStack stack, float partialTicks, float pitch, float swingProgress, float equipProgress)
 	{
 		RenderManager manager = Minecraft.getMinecraft().getRenderManager();
 
@@ -63,9 +66,7 @@ public class RenderPlayerHelper
 
 		Minecraft.getMinecraft().getTextureManager().bindTexture(glove.getGloveTexture(0));
 
-
-
-		RenderPlayerHelper.renderArmFirstPerson(equipProgress, swingProgress, EnumHandSide.RIGHT);
+		RenderPlayerHelper.renderArmFirstPerson(stack, equipProgress, swingProgress, EnumHandSide.RIGHT);
 
 		GlStateManager.popMatrix();
 	}
@@ -104,7 +105,7 @@ public class RenderPlayerHelper
 		GlStateManager.popMatrix();
 	}
 
-	private static void renderArmFirstPerson(float p_187456_1_, float p_187456_2_, EnumHandSide p_187456_3_)
+	private static void renderArmFirstPerson(ItemStack glove, float p_187456_1_, float p_187456_2_, EnumHandSide p_187456_3_)
 	{
 		boolean flag = p_187456_3_ != EnumHandSide.LEFT;
 		float f = flag ? 1.0F : -1.0F;
@@ -114,7 +115,6 @@ public class RenderPlayerHelper
 		float f4 = -0.4F * MathHelper.sin(p_187456_2_ * (float)Math.PI);
 
 		GlStateManager.translate(f * (f2 + 0.64000005F), f3 + -0.6F + p_187456_1_ * -0.6F, f4 + -0.71999997F);
-
 
 		GlStateManager.rotate(f * 45.0F, 0.0F, 1.0F, 0.0F);
 		float f5 = MathHelper.sin(p_187456_2_ * p_187456_2_ * (float)Math.PI);
@@ -133,7 +133,6 @@ public class RenderPlayerHelper
 		GlStateManager.rotate(200.0F, 1.0F, 0.0F, 0.0F);
 		GlStateManager.rotate(f * -135.0F, 0.0F, 1.0F, 0.0F);
 
-
 		GlStateManager.translate(f * 5.6F, 0.0F, 0.0F);
 		RenderPlayer renderplayer = (RenderPlayer)Minecraft.getMinecraft().getRenderManager().getEntityRenderObject(abstractclientplayer);
 		GlStateManager.disableCull();
@@ -142,7 +141,20 @@ public class RenderPlayerHelper
 		{
 			RenderLivingBase<?> playerRender = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
 
-			GlStateManager.color(1.0F, 1.0F, 1.0F);
+			if (glove.getItem() instanceof ItemLeatherGloves)
+			{
+				int color = ItemLeatherGloves.getColor(glove);
+
+				float r = (float) (color >> 16 & 255) / 255.0F;
+				float g = (float) (color >> 8 & 255) / 255.0F;
+				float b = (float) (color & 255) / 255.0F;
+
+				GlStateManager.color(1.0f * r, 1.0f * g, 1.0f * b, 1.0f);
+			}
+			else
+			{
+				GlStateManager.color(1.0F, 1.0F, 1.0F);
+			}
 
 			ModelBiped t = new ModelBiped(1.0f);
 			t.bipedBody.showModel = true;
@@ -155,7 +167,6 @@ public class RenderPlayerHelper
 			t.swingProgress = 0.0F;
 			t.isSneak = false;
 
-
 			t.setRotationAngles(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F, abstractclientplayer);
 			t.bipedRightArm.rotateAngleX = 0.0F;
 
@@ -164,6 +175,8 @@ public class RenderPlayerHelper
 			//t.bipedRightArmwear.rotateAngleX = 0.0F;
 			//t.bipedRightArmwear.render(0.0625F);
 			GlStateManager.disableBlend();
+
+			GlStateManager.color(1.0F, 1.0F, 1.0F);
 		}
 		else
 		{

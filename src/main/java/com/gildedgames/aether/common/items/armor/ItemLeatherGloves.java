@@ -6,6 +6,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class ItemLeatherGloves extends ItemAetherGloves
 {
+
 	private static final ResourceLocation OVERLAY_TEXTURE = new ResourceLocation("aether:textures/armor/leather_gloves_overlay.png");
 
 	public ItemLeatherGloves()
@@ -13,12 +14,12 @@ public class ItemLeatherGloves extends ItemAetherGloves
 		super(GloveType.LEATHER);
 	}
 
-	public boolean hasColor(ItemStack stack)
+	public static boolean hasColor(ItemStack stack)
 	{
 		return stack.hasTagCompound() && (stack.getTagCompound().hasKey("display", 10) && stack.getTagCompound().getCompoundTag("display").hasKey("color", 3));
 	}
 
-	public int getColor(ItemStack stack)
+	public static int getColor(ItemStack stack)
 	{
 		NBTTagCompound compound = stack.getTagCompound();
 
@@ -32,10 +33,10 @@ public class ItemLeatherGloves extends ItemAetherGloves
 			}
 		}
 
-		return 0xA06540;
+		return 10511680;
 	}
 
-	public void setColor(ItemStack stack, int color)
+	public static void setColor(ItemStack stack, int color)
 	{
 		NBTTagCompound itemTag = stack.getTagCompound();
 
@@ -54,7 +55,7 @@ public class ItemLeatherGloves extends ItemAetherGloves
 		displayTag.setInteger("color", color);
 	}
 
-	public void removeColor(ItemStack stack)
+	public static void removeColor(ItemStack stack)
 	{
 		NBTTagCompound nbttagcompound = stack.getTagCompound();
 
@@ -78,4 +79,5 @@ public class ItemLeatherGloves extends ItemAetherGloves
 
 		return super.getGloveTexture(layer);
 	}
+
 }
