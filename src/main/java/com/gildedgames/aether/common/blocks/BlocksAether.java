@@ -438,6 +438,7 @@ public class BlocksAether
 		icestone_slab.setHarvestLevel("pickaxe", 0);
 		labyrinth_capstone_slab.setHarvestLevel("pickaxe", 0);
 		labyrinth_wall_slab.setHarvestLevel("pickaxe", 0);
+		labyrinth_chest.setHarvestLevel("pickaxe", 0);
 	}
 
 	private static void registerBlock(String name, Block block, ItemBlock item)
