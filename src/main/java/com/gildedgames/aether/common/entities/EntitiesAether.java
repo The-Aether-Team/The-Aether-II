@@ -3,14 +3,7 @@ package com.gildedgames.aether.common.entities;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
-import com.gildedgames.aether.common.entities.companions.EntityFangrin;
-import com.gildedgames.aether.common.entities.companions.EntityFleetingWisp;
-import com.gildedgames.aether.common.entities.companions.EntityFrostpineTotem;
-import com.gildedgames.aether.common.entities.companions.EntityKraisith;
-import com.gildedgames.aether.common.entities.companions.EntityNexSpirit;
-import com.gildedgames.aether.common.entities.companions.EntityShadeOfArkenzus;
-import com.gildedgames.aether.common.entities.companions.EntityEtheralWisp;
-import com.gildedgames.aether.common.entities.companions.EntitySoaringWisp;
+import com.gildedgames.aether.common.entities.companions.*;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.*;
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
 import com.gildedgames.aether.common.entities.living.*;
@@ -63,6 +56,7 @@ public class EntitiesAether
 		registerLivingEntity(EntitySoaringWisp.class, "soaring_wisp");
 		registerLivingEntity(EntityFangrin.class, "fangrin");
 		registerLivingEntity(EntityNexSpirit.class, "nex_spirit");
+		registerLivingEntity(EntityPinkBabySwet.class, "pink_baby_swet");
 
 		EntityRegistry.registerModEntity(EntityFloatingBlock.class, "floating_block", NEXT_ID++, AetherCore.INSTANCE, 80, 1, true);
 		EntityRegistry.registerModEntity(EntityMovingBlock.class, "moving_block", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);

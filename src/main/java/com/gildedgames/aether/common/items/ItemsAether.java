@@ -18,7 +18,6 @@ import com.gildedgames.aether.common.entities.effects.rules.*;
 import com.gildedgames.aether.common.items.armor.*;
 import com.gildedgames.aether.common.items.companions.ItemCompanion;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
-import com.gildedgames.aether.common.items.companions.ItemPinkBabySwet;
 import com.gildedgames.aether.common.items.consumables.*;
 import com.gildedgames.aether.common.items.misc.*;
 import com.gildedgames.aether.common.capabilities.item.effects.ItemEffects;
@@ -381,8 +380,6 @@ public class ItemsAether
 		
 		aether_portal_frame = registerItem("aether_portal_frame", new ItemAetherPortalFrame(), CreativeTabsAether.tabBlocks);
 
-        pink_baby_swet = registerItem("pink_baby_swet", new ItemPinkBabySwet().setMaxStackSize(1), CreativeTabsAether.tabCompanions);
-
         shard_of_life = registerItem("shard_of_life", new ItemShardOfLife().setMaxStackSize(4), CreativeTabsAether.tabConsumables);
 
 		leather_gloves = registerItem("leather_gloves", new ItemLeatherGloves(), CreativeTabs.COMBAT);
@@ -395,6 +392,7 @@ public class ItemsAether
 		fleeting_stone = registerItem("fleeting_stone", new ItemCompanion(EntityFleetingWisp.class));
 		soaring_stone = registerItem("soaring_stone", new ItemCompanion(EntitySoaringWisp.class));
 
+		pink_baby_swet = registerItem("pink_baby_swet", new ItemCompanion(EntityPinkBabySwet.class));
 		frostpine_totem = registerItem("frostpine_totem", new ItemCompanion(EntityFrostpineTotem.class));
 		kraisith_capsule = registerItem("kraisith_capsule", new ItemCompanion(EntityKraisith.class));
 		orb_of_arkenzus = registerItem("orb_of_arkenzus", new ItemCompanion(EntityShadeOfArkenzus.class));
@@ -459,6 +457,7 @@ public class ItemsAether
 
 		/** COMPANIONS **/
 
+		equipmentRegistry.register(ItemsAether.pink_baby_swet, ItemRarity.COMMON, ItemEquipmentType.COMPANION);
 		equipmentRegistry.register(ItemsAether.kraisith_capsule, ItemRarity.COMMON, ItemEquipmentType.COMPANION);
 		equipmentRegistry.register(ItemsAether.fangrin_capsule, ItemRarity.COMMON, ItemEquipmentType.COMPANION);
 

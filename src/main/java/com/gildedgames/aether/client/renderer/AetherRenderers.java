@@ -3,14 +3,7 @@ package com.gildedgames.aether.client.renderer;
 import com.gildedgames.aether.client.renderer.entities.AetherRenderFactory;
 import com.gildedgames.aether.client.renderer.entities.RenderFloatingBlock;
 import com.gildedgames.aether.client.renderer.entities.RenderMovingBlock;
-import com.gildedgames.aether.client.renderer.entities.companions.RenderFangrin;
-import com.gildedgames.aether.client.renderer.entities.companions.RenderFleetingWisp;
-import com.gildedgames.aether.client.renderer.entities.companions.RenderFrostpineTotem;
-import com.gildedgames.aether.client.renderer.entities.companions.RenderKraisith;
-import com.gildedgames.aether.client.renderer.entities.companions.RenderNexSpirit;
-import com.gildedgames.aether.client.renderer.entities.companions.RenderShadeOfArkenzus;
-import com.gildedgames.aether.client.renderer.entities.companions.RenderEtherealWisp;
-import com.gildedgames.aether.client.renderer.entities.companions.RenderSoaringWisp;
+import com.gildedgames.aether.client.renderer.entities.companions.*;
 import com.gildedgames.aether.client.renderer.entities.living.*;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderBolt;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDaggerfrostSnowball;
@@ -18,14 +11,7 @@ import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDart;
 import com.gildedgames.aether.client.renderer.tile_entities.*;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
-import com.gildedgames.aether.common.entities.companions.EntityFangrin;
-import com.gildedgames.aether.common.entities.companions.EntityFleetingWisp;
-import com.gildedgames.aether.common.entities.companions.EntityFrostpineTotem;
-import com.gildedgames.aether.common.entities.companions.EntityKraisith;
-import com.gildedgames.aether.common.entities.companions.EntityNexSpirit;
-import com.gildedgames.aether.common.entities.companions.EntityShadeOfArkenzus;
-import com.gildedgames.aether.common.entities.companions.EntityEtheralWisp;
-import com.gildedgames.aether.common.entities.companions.EntitySoaringWisp;
+import com.gildedgames.aether.common.entities.companions.*;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityBattleSentry;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityChestMimic;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityDetonationSentry;
@@ -103,6 +89,7 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityTrackingSentry.class, new AetherRenderFactory<>(RenderTrackingSentry.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityChestMimic.class, new AetherRenderFactory<>(RenderLabyrinthChestMimic.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySwet.class, new AetherRenderFactory<>(RenderSwet.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityPinkBabySwet.class, new AetherRenderFactory<>(RenderPinkBabySwet.class));
 	}
 
 	private static void registerTESRs()
