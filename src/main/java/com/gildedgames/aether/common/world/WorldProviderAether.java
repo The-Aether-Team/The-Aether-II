@@ -1,16 +1,19 @@
 package com.gildedgames.aether.common.world;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.DimensionsAether;
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.biome.BiomeAether;
 import com.gildedgames.aether.common.world.chunk.ChunkGeneratorAetherOld;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
+import net.minecraft.world.GameType;
 import net.minecraft.world.WorldProvider;
+import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.chunk.IChunkGenerator;
@@ -46,7 +49,7 @@ public class WorldProviderAether extends WorldProvider
 		return new ChunkGeneratorAetherOld(this.worldObj, this.worldObj.getSeed());
 	}
 
-	public IBlockState getTopBlock(BlockPos pos)
+	public BlockPos getTopBlockPos(BlockPos pos)
 	{
 		BlockPos.MutableBlockPos testPos = new BlockPos.MutableBlockPos(pos.getX(), 0, pos.getZ());
 
@@ -55,13 +58,51 @@ public class WorldProviderAether extends WorldProvider
 			testPos = testPos.move(EnumFacing.UP);
 		}
 
-		return this.worldObj.getBlockState(testPos);
+		return testPos;
+	}
+
+	@Override
+	public void calculateInitialWeather()
+	{
+
+	}
+
+	@Override
+	public void updateWeather()
+	{
+
+	}
+
+	@Override
+	public boolean canSnowAt(BlockPos pos, boolean checkLight)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean canDoLightning(net.minecraft.world.chunk.Chunk chunk)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean canDoRainSnowIce(net.minecraft.world.chunk.Chunk chunk)
+	{
+		return false;
+	}
+
+	@Override
+	public int getRespawnDimension(EntityPlayerMP player)
+	{
+		return 0;
 	}
 
 	@Override
 	public boolean canCoordinateBeSpawn(int x, int z)
 	{
-		return this.getTopBlock(new BlockPos(x, 0, z)).getMaterial().isSolid();
+		BlockPos top = this.getTopBlockPos(new BlockPos(x, 0, z));
+
+		return !this.worldObj.isAirBlock(top) && this.worldObj.getBlockState(top) == BlocksAether.aether_grass.getDefaultState();
 	}
 
 	@Override
@@ -74,12 +115,6 @@ public class WorldProviderAether extends WorldProvider
 	public boolean isSurfaceWorld()
 	{
 		return true;
-	}
-
-	@Override
-	public int getRespawnDimension(EntityPlayerMP player)
-	{
-		return 0;
 	}
 
 	@Override
