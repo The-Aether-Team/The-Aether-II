@@ -42,14 +42,8 @@ public class DungeonInstanceHandler
 	{
 		if (!inst.hasGenerated())
 		{
-			/*GenUtil.cuboidVaried(world, new BlockPos(10, 10, 10), new BlockPos(20, 20, 20), BlocksAether.carved_stone.getDefaultState(), BlocksAether.sentry_stone.getDefaultState(), 8, world.rand, true);
-			GenUtil.cuboid(world, new BlockPos(11, 11, 11), new BlockPos(19, 19, 19), Blocks.air.getDefaultState());
-			
-			world.setBlockState(new BlockPos(15, 11, 15), BlocksAether.labyrinth_totem.getDefaultState());
-			
-			inst.flagGenerated();*/
-
 			inst.getGenerator().generateLayout(player.getServer(), FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(inst.getDimIdInside()).rand, inst, inst.getRoomProvider());
+			inst.flagGenerated();
 		}
 		
 		World world = this.handler.teleportPlayerToDimension(inst, player);
