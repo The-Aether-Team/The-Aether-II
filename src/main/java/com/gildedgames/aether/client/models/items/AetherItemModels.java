@@ -203,8 +203,6 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.valkyrie_leggings, "armor/valkyrie_leggings");
 		registerItemModels(ItemsAether.valkyrie_boots, "armor/valkyrie_boots");
 
-		registerItemModels(ItemsAether.sentry_boots, "armor/sentry_boots");
-
 		registerItemModels(ItemsAether.aechor_petal, "aechor_petal");
 		registerItemModels(ItemsAether.blueberries, "blueberries");
 		registerItemModels(ItemsAether.enchanted_blueberry, "enchanted_blueberry");

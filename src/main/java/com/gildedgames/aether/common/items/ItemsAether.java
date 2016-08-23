@@ -81,8 +81,6 @@ public class ItemsAether
 
 	public static ItemValkyrieArmor valkyrie_helmet, valkyrie_chestplate, valkyrie_leggings, valkyrie_boots;
 
-	public static ItemSentryBoots sentry_boots;
-
 	public static Item golden_amber;
 
 	public static ItemFood blueberries, enchanted_blueberry, orange, wyndberry, enchanted_wyndberry, swet_jelly, gummy_swet;
@@ -281,8 +279,6 @@ public class ItemsAether
 		valkyrie_leggings = registerItem("valkyrie_leggings", new ItemValkyrieArmor(EntityEquipmentSlot.LEGS));
 		valkyrie_boots = registerItem("valkyrie_boots", new ItemValkyrieArmor(EntityEquipmentSlot.FEET));
         valkyrie_gloves = registerItem("valkyrie_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.VALKYRIE));
-
-		sentry_boots = registerItem("sentry_boots", new ItemSentryBoots(MaterialsAether.LEGENDARY_ARMOR));
 
 		golden_amber = registerItem("golden_amber", new Item(), CreativeTabsAether.tabMaterials);
 
