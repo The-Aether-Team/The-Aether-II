@@ -63,7 +63,7 @@
 		"category": "record",
 		"sounds": [
 			{
-				"name": "aether:aerecord/aerwhale",
+				"name": "aether:record/aerwhale",
 				"stream": true
 			}
 		]
@@ -72,7 +72,7 @@
 		"category": "record",
 		"sounds": [
 			{
-				"name": "aether:aerecord/approaches",
+				"name": "aether:record/approaches",
 				"stream": true
 			}
 		]
@@ -81,7 +81,7 @@
 		"category": "record",
 		"sounds": [
 			{
-				"name": "aether:aerecord/ascending_dawn",
+				"name": "aether:record/ascending_dawn",
 				"stream": true
 			}
 		]
@@ -90,7 +90,7 @@
 		"category": "record",
 		"sounds": [
 			{
-				"name": "aether:aerecord/demise",
+				"name": "aether:record/demise",
 				"stream": true
 			}
 		]
@@ -99,7 +99,7 @@
 		"category": "record",
 		"sounds": [
 			{
-				"name": "aether:aerecord/chase",
+				"name": "aether:record/chase",
 				"stream": true
 			}
 		]
@@ -220,7 +220,7 @@
 	"mob.zephyr.puff": {
 		"category": "neutral",
 		"sounds": [
-			"aether:aemob/zephyr/puff"
+			"aether:mob/zephyr/puff"
 		]
 	},
 	"random.detonating": {
@@ -235,10 +235,10 @@
 			"aether:random/detonate"
 		]
 	},
-	"aemob.sentry.ambient": {
+	"mob.sentry.ambient": {
 		"category": "neutral",
 		"sounds": [
-			"aether:aemob/sentry/say1",
+			"aether:mob/sentry/say1",
 			"aether:mob/sentry/say2",
 			"aether:mob/sentry/say3"
 		]
