@@ -27,7 +27,7 @@ public class EntitySwet extends EntityExtendedMob
 
 	public enum Type
 	{
-		BLUE("blue"), GOLDEN("golden"), DARK("dark"), CREAM("cream");
+		BLUE("blue"), GOLDEN("golden"), DARK("dark"), LIGHT("light");
 
 		public final String name;
 

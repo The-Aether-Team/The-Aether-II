@@ -13,8 +13,6 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.entities.living.enemies.EntitySwet;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.consumables.ItemGummySwet;
-import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
@@ -226,13 +224,13 @@ public class AetherItemModels
 				.add(EntitySwet.Type.BLUE.ordinal(), "blue_swet_jelly")
 				.add(EntitySwet.Type.GOLDEN.ordinal(), "golden_swet_jelly")
 				.add(EntitySwet.Type.DARK.ordinal(), "dark_swet_jelly")
-				.add(EntitySwet.Type.CREAM.ordinal(), "cream_swet_jelly"));
+				.add(EntitySwet.Type.LIGHT.ordinal(), "cream_swet_jelly"));
 
 		registerItemModels(ItemsAether.gummy_swet, new ItemModelBuilder("gummy_swet/")
 				.add(EntitySwet.Type.BLUE.ordinal(), "blue_gummy_swet")
 				.add(EntitySwet.Type.GOLDEN.ordinal(), "golden_gummy_swet")
 				.add(EntitySwet.Type.DARK.ordinal(), "dark_gummy_swet")
-				.add(EntitySwet.Type.CREAM.ordinal(), "cream_gummy_swet"));
+				.add(EntitySwet.Type.LIGHT.ordinal(), "cream_gummy_swet"));
 
 		registerItemModels(ItemsAether.skyroot_bucket, "skyroot_bucket/skyroot_bucket");
 		registerItemModels(ItemsAether.skyroot_water_bucket, "skyroot_bucket/skyroot_water_bucket");
