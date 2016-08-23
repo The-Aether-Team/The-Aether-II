@@ -14,7 +14,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -184,6 +183,12 @@ public class EntitySwet extends EntityExtendedMob
 		tag.setInteger("type", this.getType().ordinal());
 
 		return tag;
+	}
+
+	@Override
+	protected boolean isValidLightLevel()
+	{
+		return true;
 	}
 
 }
