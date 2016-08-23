@@ -204,7 +204,7 @@ public class CommonEvents
 	 *
 	 * @return A new entity if {@param entity} wasn't a player, or the same entity if it was a player
 	 */
-	private static Entity teleportEntity(PlayerList playerList, Entity entity, WorldServer toWorld, Teleporter teleporter)
+	public static Entity teleportEntity(PlayerList playerList, Entity entity, WorldServer toWorld, Teleporter teleporter)
 	{
 		if (entity == null)
 		{

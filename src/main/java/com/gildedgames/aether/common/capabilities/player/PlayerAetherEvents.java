@@ -8,10 +8,13 @@ import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapabili
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.CommonEvents;
+import com.gildedgames.aether.common.DimensionsAether;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
+import com.gildedgames.util.core.util.TeleporterGeneric;
 import com.gildedgames.util.modules.chunk.ChunkModule;
 import com.gildedgames.util.modules.chunk.impl.hooks.BlockBitFlagChunkHook;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +23,12 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.management.PlayerList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.Teleporter;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -38,6 +46,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static sun.audio.AudioPlayer.player;
 
 public class PlayerAetherEvents
 {
@@ -237,6 +247,34 @@ public class PlayerAetherEvents
 		if (aePlayer != null)
 		{
 			aePlayer.onRespawn();
+		}
+
+		if (event.player instanceof EntityPlayerMP && ((EntityPlayerMP) event.player).worldObj.provider.getDimensionType() == DimensionsAether.AETHER)
+		{
+			BlockPos bedPos = event.player.getBedLocation(event.player.dimension);
+
+			EntityPlayerMP mp = (EntityPlayerMP)event.player;
+
+			PlayerList playerList = mp.getServer().getPlayerList();
+			WorldServer toWorld = DimensionManager.getWorld(0);
+
+			if (bedPos != null)
+			{
+				bedPos = EntityPlayer.getBedSpawnLocation(mp.getServerWorld(), bedPos, mp.isSpawnForced(mp.dimension));
+			}
+
+			if (bedPos == null)
+			{
+				Teleporter teleporter = new TeleporterGeneric(toWorld);
+
+				CommonEvents.teleportEntity(playerList, mp, toWorld, teleporter);
+
+				BlockPos pos = toWorld.provider.getRandomizedSpawnPoint();
+
+				mp.connection.setPlayerLocation(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
+
+				mp.getServerWorld().updateEntityWithOptionalForce(mp, true);
+			}
 		}
 	}
 

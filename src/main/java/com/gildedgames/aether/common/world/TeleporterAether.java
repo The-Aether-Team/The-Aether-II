@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.world;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.DimensionsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.util.core.nbt.NBTHelper;
 import com.gildedgames.util.io_manager.io.NBT;
 import com.gildedgames.util.core.util.GGHelper;
 import com.gildedgames.util.core.util.BlockPosDimension;
@@ -466,6 +467,7 @@ public class TeleporterAether extends Teleporter implements NBT
 	@Override
 	public void read(NBTTagCompound input)
 	{
+		/**TODO: Looks like this is never called**/
 		final int amount = input.getInteger("amtPortals");
 
 		this.portalPairs.clear();
