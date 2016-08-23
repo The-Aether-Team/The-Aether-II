@@ -32,7 +32,6 @@ import com.gildedgames.aether.common.blocks.containers.BlockSkyrootWorkbench;
 import com.gildedgames.aether.common.blocks.dungeon.BlockDivine;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinth;
 import com.gildedgames.aether.common.blocks.containers.BlockLabyrinthChest;
-import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthDoor;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthPillar;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthtotem;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
@@ -195,8 +194,6 @@ public class BlocksAether
 			labyrinth_glowing_pillar = new BlockLabyrinthPillar(),
 			labyrinth_pillar = new BlockLabyrinthPillar();
 
-	public static final BlockLabyrinthDoor labyrinth_door = new BlockLabyrinthDoor(Material.ROCK);
-
 	public static final BlockLabyrinthChest labyrinth_chest = new BlockLabyrinthChest();
 
 	public static final BlockLabyrinth
@@ -346,7 +343,6 @@ public class BlocksAether
 		registerBlock("divine_stone_wall", BlocksAether.divine_stone_wall.setCreativeTab(CreativeTabsAether.tabBlocks));
 
 		registerBlock("labyrinth_totem", BlocksAether.labyrinth_totem.setCreativeTab(CreativeTabsAether.tabBlocks));
-		registerBlock("labyrinth_door", BlocksAether.labyrinth_door.setCreativeTab(CreativeTabsAether.tabBlocks));
 
 		registerBlock("multiblock_dummy", BlocksAether.multiblock_dummy);
 

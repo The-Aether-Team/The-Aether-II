@@ -14,7 +14,6 @@ public class TileEntitiesAether
 			SKYROOT_SIGN_ID = "aether.skyroot_sign",
 			MULTIBLOCK_DUMMY = "aether.multiblock_dummy",
 			LABYRINTH_TOTEM = "aether.labyrinth_totem",
-			LABYRINTH_DOOR = "aether.labyrinth_door",
 			LABYRINTH_CHEST_ID = "aether.labyrinth_chest",
 			MOA_EGG_ID = "aether.moa_egg";
 
@@ -26,7 +25,6 @@ public class TileEntitiesAether
 		GameRegistry.registerTileEntity(TileEntitySkyrootSign.class, SKYROOT_SIGN_ID);
 		GameRegistry.registerTileEntity(TileEntityMultiblockDummy.class, MULTIBLOCK_DUMMY);
 		GameRegistry.registerTileEntity(TileEntityLabyrinthTotem.class, LABYRINTH_TOTEM);
-		GameRegistry.registerTileEntity(TileEntityLabyrinthDoor.class, LABYRINTH_DOOR);
 		GameRegistry.registerTileEntity(TileEntityLabyrinthChest.class, LABYRINTH_CHEST_ID);
 		GameRegistry.registerTileEntity(TileEntityMoaEgg.class, MOA_EGG_ID);
 	}

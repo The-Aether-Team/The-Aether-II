@@ -1,7 +1,7 @@
 {
 	"variants": {
 		"normal": [
-			{ "model": "aether:labyrinth_door" }
+			{ "model": "aether:moa_egg" }
 		]
 	}
 }
