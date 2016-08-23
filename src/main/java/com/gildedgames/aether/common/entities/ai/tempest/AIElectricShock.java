@@ -2,6 +2,9 @@ package com.gildedgames.aether.common.entities.ai.tempest;
 
 import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.EntityAI;
+import com.gildedgames.aether.common.entities.living.enemies.EntityTempest;
+import com.gildedgames.aether.common.entities.util.EntityExtendedMob;
+import com.gildedgames.aether.common.entities.util.flying.EntityFlyingMob;
 import com.gildedgames.aether.common.util.TickTimer;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -9,14 +12,14 @@ import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 
-public class AIElectricShock extends EntityAI<EntityLiving>
+public class AIElectricShock extends EntityAI<EntityTempest>
 {
 
 	private TickTimer attackTimer = new TickTimer();
 
 	private TickTimer cooldownTimer = new TickTimer();
 
-	public AIElectricShock(EntityLiving entity)
+	public AIElectricShock(EntityTempest entity)
 	{
 		super(entity);
 	}
@@ -77,6 +80,7 @@ public class AIElectricShock extends EntityAI<EntityLiving>
 						this.entity().playSound(SoundsAether.tempest_angry, 1.0F, (this.entity().getRNG().nextFloat() - this.entity().getRNG().nextFloat()) * 0.2F + 1.0F);
 					}
 
+					this.entity().setAttacked(false);
 					this.entity().attackEntityAsMob(this.entity().getAttackTarget());
 
 					this.entity().getAttackTarget().addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 80, 3));

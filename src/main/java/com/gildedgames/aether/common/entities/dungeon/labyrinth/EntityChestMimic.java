@@ -2,11 +2,11 @@ package com.gildedgames.aether.common.entities.dungeon.labyrinth;
 
 import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AISavageAttack;
+import com.gildedgames.aether.common.entities.util.EntityExtendedMob;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -15,12 +15,10 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntityChestMimic extends EntityMob
+public class EntityChestMimic extends EntityExtendedMob
 {
 
 	private static final DataParameter<Boolean> OVERHEATING = EntityDataManager.createKey(EntityChestMimic.class, DataSerializers.BOOLEAN);
-
-	private static final DataParameter<Boolean> ATTACKED = EntityDataManager.createKey(EntityChestMimic.class, DataSerializers.BOOLEAN);
 
 	public EntityChestMimic(World worldIn)
 	{
@@ -46,7 +44,6 @@ public class EntityChestMimic extends EntityMob
 		super.entityInit();
 
 		this.dataManager.register(EntityChestMimic.OVERHEATING, Boolean.FALSE);
-		this.dataManager.register(EntityChestMimic.ATTACKED, Boolean.FALSE);
 	}
 
 	@Override
@@ -63,31 +60,28 @@ public class EntityChestMimic extends EntityMob
 	@Override
 	public boolean attackEntityAsMob(Entity entity)
 	{
-		this.setAttacked(true);
-
 		this.worldObj.spawnParticle(EnumParticleTypes.MOB_APPEARANCE, this.posX + motionX, this.posY + 0.5D + motionY, this.posZ + motionZ, 0.1D, 0.1D, 0.1D);
 
 		return super.attackEntityAsMob(entity);
 	}
 
 	@Override
+	protected void handleClientAttack()
+	{
+		for (int k = 0; k < 2; ++k)
+		{
+			double motionX = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
+			double motionY = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
+			double motionZ = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
+
+			this.worldObj.spawnParticle(EnumParticleTypes.SWEEP_ATTACK, this.posX + motionX, this.posY + 0.75D + motionY, this.posZ + motionZ, motionX, motionY, motionZ);
+		}
+	}
+
+	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
-
-		if (this.hasAttacked() && this.worldObj.isRemote)
-		{
-			for (int k = 0; k < 2; ++k)
-			{
-				double motionX = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
-				double motionY = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
-				double motionZ = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
-
-				this.worldObj.spawnParticle(EnumParticleTypes.SWEEP_ATTACK, this.posX + motionX, this.posY + 0.75D + motionY, this.posZ + motionZ, motionX, motionY, motionZ);
-			}
-
-			this.setAttacked(false);
-		}
 
 		if (this.isOverheating())
 		{
@@ -128,16 +122,6 @@ public class EntityChestMimic extends EntityMob
 	public boolean isOverheating()
 	{
 		return this.dataManager.get(EntityChestMimic.OVERHEATING);
-	}
-
-	public void setAttacked(boolean flag)
-	{
-		this.dataManager.set(EntityChestMimic.ATTACKED, flag);
-	}
-
-	public boolean hasAttacked()
-	{
-		return this.dataManager.get(EntityChestMimic.ATTACKED);
 	}
 
 }

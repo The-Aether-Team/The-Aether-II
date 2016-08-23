@@ -41,7 +41,7 @@ public class AISavageAttack extends EntityAI<EntityChestMimic>
     @Override
     public boolean continueExecuting()
     {
-        return this.entity().getAttackTarget() != null && this.entity().canEntityBeSeen(this.entity().getAttackTarget());
+        return this.shouldExecute();
     }
 
     @Override

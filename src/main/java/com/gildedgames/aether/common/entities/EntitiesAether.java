@@ -15,6 +15,7 @@ import com.gildedgames.aether.common.entities.dungeon.labyrinth.*;
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
 import com.gildedgames.aether.common.entities.living.*;
 import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
+import com.gildedgames.aether.common.entities.living.enemies.EntitySwet;
 import com.gildedgames.aether.common.entities.living.enemies.EntityTempest;
 import com.gildedgames.aether.common.entities.living.enemies.EntityZephyr;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
@@ -47,6 +48,7 @@ public class EntitiesAether
 		registerLivingEntity(EntityAerwhale.class, "aerwhale", 0xCCFFFF, 0xCCCCFF);
 		registerLivingEntity(EntityZephyr.class, "zephyr", 0xCCFFFF, 0xCCCCFF);
 		registerLivingEntity(EntityTempest.class, "tempest", 0xCCFFFF, 0xCCCCFF);
+		registerLivingEntity(EntitySwet.class, "swet", 0xCCFFFF, 0xCCCCFF);
 		registerLivingEntity(EntityDetonationSentry.class, "detonationSentry", 0x414141, 0x4e9af7);
 		registerLivingEntity(EntityBattleSentry.class, "battleSentry", 0x414141, 0x4e9af7);
 		registerLivingEntity(EntityTrackingSentry.class, "trackingSentry", 0x414141, 0x4e9af7);
@@ -79,6 +81,7 @@ public class EntitiesAether
 		manager.registerPerTickEntry(new SpawnEntry(EntityRam.class, 3, 5, 0.5f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityAerwhale.class, 1, 1, 0.2f, false));
 
+		manager.registerPerTickEntry(new SpawnEntry(EntitySwet.class, 2, 3, 0.5f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityZephyr.class, 2, 3, 0.4f, false));
 		manager.registerPerTickEntry(new SpawnEntry(EntityAechorPlant.class, 2, 4, 0.4f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityCockatrice.class, 6, 8, 0.5f));

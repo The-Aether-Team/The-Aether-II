@@ -9,6 +9,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -19,9 +22,52 @@ import net.minecraft.world.World;
 public class EntityFlyingMob extends EntityFlying implements IMob
 {
 
+	private static final DataParameter<Boolean> ATTACKED = EntityDataManager.createKey(EntityFlyingMob.class, DataSerializers.BOOLEAN);
+
 	public EntityFlyingMob(World world)
 	{
 		super(world);
+	}
+
+	protected void handleClientAttack()
+	{
+
+	}
+
+	@Override
+	public void onUpdate()
+	{
+		super.onUpdate();
+
+		if (this.hasAttacked() && this.worldObj.isRemote)
+		{
+			this.handleClientAttack();
+
+			this.setAttacked(false);
+		}
+
+		if (!this.worldObj.isRemote && this.worldObj.getDifficulty() == EnumDifficulty.PEACEFUL)
+		{
+			this.setDead();
+		}
+	}
+
+	@Override
+	protected void entityInit()
+	{
+		super.entityInit();
+
+		this.dataManager.register(EntityFlyingMob.ATTACKED, Boolean.FALSE);
+	}
+
+	public void setAttacked(boolean flag)
+	{
+		this.dataManager.set(EntityFlyingMob.ATTACKED, flag);
+	}
+
+	public boolean hasAttacked()
+	{
+		return this.dataManager.get(EntityFlyingMob.ATTACKED);
 	}
 
 	@Override
@@ -35,6 +81,8 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 
 	public boolean attackEntityAsMob(Entity entityIn)
 	{
+		this.setAttacked(true);
+
 		float f = (float)this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
 		int i = 0;
 
@@ -100,17 +148,6 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 		if (f > 0.5F)
 		{
 			this.entityAge += 2;
-		}
-	}
-
-	@Override
-	public void onUpdate()
-	{
-		super.onUpdate();
-
-		if (!this.worldObj.isRemote && this.worldObj.getDifficulty() == EnumDifficulty.PEACEFUL)
-		{
-			this.setDead();
 		}
 	}
 

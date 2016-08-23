@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.items.consumables;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.entities.living.enemies.EntitySwet;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -30,25 +31,6 @@ public class ItemSwetJelly extends ItemFood
 		ItemSwetJelly.growables.put(BlocksAether.aether_dirt, BlocksAether.aether_grass.getDefaultState());
 	}
 
-	public enum JellyType
-	{
-		BLUE("blue"), GOLDEN("golden"), DARK("dark");
-
-		public final String name;
-
-		JellyType(String name)
-		{
-			this.name = name;
-		}
-
-		public static JellyType fromOrdinal(int ordinal)
-		{
-			JellyType[] jelly = values();
-
-			return jelly[ordinal > jelly.length || ordinal < 0 ? 0 : ordinal];
-		}
-	}
-
 	public ItemSwetJelly()
 	{
 		super(5, false);
@@ -60,7 +42,7 @@ public class ItemSwetJelly extends ItemFood
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems)
 	{
-		for (JellyType types : JellyType.values())
+		for (EntitySwet.Type types : EntitySwet.Type.values())
 		{
 			subItems.add(new ItemStack(item, 1, types.ordinal()));
 		}
@@ -99,6 +81,6 @@ public class ItemSwetJelly extends ItemFood
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		return "item.aether.swet_jelly." + JellyType.fromOrdinal(stack.getMetadata()).name;
+		return "item.aether.swet_jelly." + EntitySwet.Type.fromOrdinal(stack.getMetadata()).name;
 	}
 }

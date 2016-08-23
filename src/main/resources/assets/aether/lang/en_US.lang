@@ -185,9 +185,11 @@ item.aether.enchanted_wyndberry.name=Enchanted Wyndberry
 item.aether.swet_jelly.blue.name=Blue Swet Jelly
 item.aether.swet_jelly.golden.name=Golden Swet Jelly
 item.aether.swet_jelly.dark.name=Dark Swet Jelly
+item.aether.swet_jelly.cream.name=Cream Swet Jelly
 item.aether.gummy_swet.blue.name=Blue Gummy Swet
 item.aether.gummy_swet.golden.name=Golden Gummy Swet
 item.aether.gummy_swet.dark.name=Dark Gummy Swet
+item.aether.gummy_swet.cream.name=Cream Gummy Swet
 item.aether.skyroot_bucket.name=Skyroot Bucket
 item.aether.skyroot_water_bucket.name=Skyroot Water Bucket
 item.aether.skyroot_milk_bucket.name=Skyroot Milk Bucket
@@ -407,6 +409,7 @@ entity.aether.battleSentry.name=Battle Sentry
 entity.aether.trackingSentry.name=Tracking Sentry
 entity.aether.chestMimic.name=Chest Mimic
 entity.aether.battleGolem.name=Battle Golem
+entity.aether.swet.name=Swet
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether Blocks

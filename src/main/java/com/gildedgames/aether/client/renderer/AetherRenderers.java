@@ -33,6 +33,7 @@ import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityTrackingSe
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
 import com.gildedgames.aether.common.entities.living.*;
 import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
+import com.gildedgames.aether.common.entities.living.enemies.EntitySwet;
 import com.gildedgames.aether.common.entities.living.enemies.EntityTempest;
 import com.gildedgames.aether.common.entities.living.enemies.EntityZephyr;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
@@ -101,6 +102,7 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityBattleSentry.class, new AetherRenderFactory<>(RenderBattleSentry.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTrackingSentry.class, new AetherRenderFactory<>(RenderTrackingSentry.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityChestMimic.class, new AetherRenderFactory<>(RenderLabyrinthChestMimic.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySwet.class, new AetherRenderFactory<>(RenderSwet.class));
 	}
 
 	private static void registerTESRs()
