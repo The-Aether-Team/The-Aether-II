@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.genes.BiologyUtil;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFloat;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFollowAttackTarget;
+import com.gildedgames.aether.common.entities.ai.hopping.AIHopWander;
 import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
 import com.gildedgames.aether.common.entities.ai.swet.AILeech;
 import com.gildedgames.aether.common.entities.util.EntityExtendedMob;
@@ -66,8 +67,9 @@ public class EntitySwet extends EntityExtendedMob
 		this.moveHelper = hoppingMoveHelper;
 
 		this.tasks.addTask(0, new AILeech(this, hoppingMoveHelper, 4.0D));
-		this.tasks.addTask(1, new AIHopFloat(this, hoppingMoveHelper));
-		this.tasks.addTask(2, new AIHopFollowAttackTarget(this, hoppingMoveHelper, 1.0D));
+		this.tasks.addTask(1, new AIHopWander(this, hoppingMoveHelper));
+		this.tasks.addTask(2, new AIHopFloat(this, hoppingMoveHelper));
+		this.tasks.addTask(3, new AIHopFollowAttackTarget(this, hoppingMoveHelper, 1.0D));
 
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
