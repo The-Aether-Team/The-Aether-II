@@ -48,7 +48,7 @@ public class ItemGravititeTool extends ItemAetherTool
 			{
 				IBlockState state = world.getBlockState(pos);
 
-				if (!state.isNormalCube() || !state.getBlock().getHarvestTool(state).equals(this.toolType.getToolClass()))
+				if (!state.isNormalCube() || !state.getBlock().getHarvestTool(state).equals(this.toolType.getToolClass()) || state.getBlockHardness(world, pos) < 0)
 				{
 					return EnumActionResult.PASS;
 				}
