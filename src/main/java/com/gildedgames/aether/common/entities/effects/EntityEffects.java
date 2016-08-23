@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.entities.effects;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gildedgames.aether.common.entities.effects.processors.player.PauseHungerEffect;
+import com.gildedgames.aether.common.entities.effects.processors.player.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.nbt.NBTBase;
@@ -20,18 +20,17 @@ import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapab
 import com.gildedgames.aether.common.entities.effects.processors.BreatheUnderwaterEffect;
 import com.gildedgames.aether.common.entities.effects.processors.DoubleDropEffect;
 import com.gildedgames.aether.common.entities.effects.processors.FreezeBlocksEffect;
-import com.gildedgames.aether.common.entities.effects.processors.FrozenInSchematicEffect;
 import com.gildedgames.aether.common.entities.effects.processors.ModifyDamageEffect;
 import com.gildedgames.aether.common.entities.effects.processors.ModifyMaxHealthEffect;
 import com.gildedgames.aether.common.entities.effects.processors.ModifySpeedEffect;
 import com.gildedgames.aether.common.entities.effects.processors.RegenerateHealthEffect;
-import com.gildedgames.aether.common.entities.effects.processors.player.DaggerfrostEffect;
-import com.gildedgames.aether.common.entities.effects.processors.player.ModifyXPCollectionEffect;
-import com.gildedgames.aether.common.entities.effects.processors.player.ReduceHungerEffect;
 import com.google.common.collect.Lists;
 
 public class EntityEffects implements IEntityEffectsCapability
 {
+
+	public static final EntityEffectProcessor<ModifyDamageEffect.Instance> PUNCHING_DAMAGE = new ModifyPunchingDamageEffect();
+
 	public static final EffectProcessorPlayer<EntityEffectInstance> DAGGERFROST = new DaggerfrostEffect();
 
 	public static final EffectProcessorPlayer<ModifyXPCollectionEffect.Instance> MODIFY_XP_COLLECTION = new ModifyXPCollectionEffect();
@@ -53,8 +52,6 @@ public class EntityEffects implements IEntityEffectsCapability
 	public static final EntityEffectProcessor<ModifySpeedEffect.Instance> MODIFY_SPEED = new ModifySpeedEffect();
 
 	public static final EntityEffectProcessor<RegenerateHealthEffect.Instance> REGENERATE_HEALTH = new RegenerateHealthEffect();
-	
-	public static final EntityEffectProcessor<FrozenInSchematicEffect.Instance> FROZEN_IN_SCHEMATIC = new FrozenInSchematicEffect();
 
 	private final Entity entity;
 

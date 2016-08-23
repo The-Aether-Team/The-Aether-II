@@ -567,12 +567,12 @@ public class ItemsAether
 		ItemEffects.register(ItemsAether.candy_ring, new Effects().add(EntityEffects.REDUCE_HUNGER));
 		ItemEffects.register(ItemsAether.bone_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(2.0F)));
 		ItemEffects.register(ItemsAether.skyroot_ring, new Effects().add(EntityEffects.DOUBLE_DROPS, new DoubleDropEffect.Instance(1.5F)));
-		ItemEffects.register(ItemsAether.zanite_gloves, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(1.5F)));
-		ItemEffects.register(ItemsAether.gravitite_gloves, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(2.0F)));
-		ItemEffects.register(ItemsAether.valkyrie_gloves, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(2.5F)));
-		ItemEffects.register(ItemsAether.neptune_gloves, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(2.0F)));
-		ItemEffects.register(ItemsAether.phoenix_gloves, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(2.0F)));
-		ItemEffects.register(ItemsAether.obsidian_gloves, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(3.0F)));
+		ItemEffects.register(ItemsAether.zanite_gloves, new Effects().add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(1.5F)));
+		ItemEffects.register(ItemsAether.gravitite_gloves, new Effects().add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(2.0F)));
+		ItemEffects.register(ItemsAether.valkyrie_gloves, new Effects().add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(2.5F)));
+		ItemEffects.register(ItemsAether.neptune_gloves, new Effects().add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(2.0F)));
+		ItemEffects.register(ItemsAether.phoenix_gloves, new Effects().add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(2.0F)));
+		ItemEffects.register(ItemsAether.obsidian_gloves, new Effects().add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(3.0F)));
 		ItemEffects.register(ItemsAether.barbed_iron_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(1.0F)));
 		ItemEffects.register(ItemsAether.barbed_gold_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(1.0F, 3.0F, false)));
 		ItemEffects.register(ItemsAether.solar_band, new Effects().add(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new InDirectSunlightRule())));
