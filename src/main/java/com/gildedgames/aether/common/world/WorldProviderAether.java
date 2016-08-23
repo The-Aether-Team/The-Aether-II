@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.world.biome.BiomeAether;
 import com.gildedgames.aether.common.world.chunk.ChunkGeneratorAetherOld;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -47,11 +48,11 @@ public class WorldProviderAether extends WorldProvider
 
 	public IBlockState getTopBlock(BlockPos pos)
 	{
-		BlockPos testPos = new BlockPos(pos.getX(), 0, pos.getZ());
+		BlockPos.MutableBlockPos testPos = new BlockPos.MutableBlockPos(pos.getX(), 0, pos.getZ());
 
 		while (!this.worldObj.isAirBlock(testPos.up()))
 		{
-			testPos = testPos.up();
+			testPos = testPos.move(EnumFacing.UP);
 		}
 
 		return this.worldObj.getBlockState(testPos);
