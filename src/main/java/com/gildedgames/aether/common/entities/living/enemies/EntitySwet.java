@@ -7,12 +7,16 @@ import com.gildedgames.aether.common.entities.ai.hopping.AIHopWander;
 import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
 import com.gildedgames.aether.common.entities.ai.swet.AILeech;
 import com.gildedgames.aether.common.entities.util.EntityExtendedMob;
+import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.util.EntityUtil;
+import com.google.common.base.Supplier;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -60,7 +64,7 @@ public class EntitySwet extends EntityExtendedMob
 	{
 		super(worldIn);
 
-		HoppingMoveHelper hoppingMoveHelper = new HoppingMoveHelper(this, SoundEvents.ENTITY_SMALL_SLIME_JUMP);
+		HoppingMoveHelper hoppingMoveHelper = new HoppingMoveHelper(this, SoundEvents.ENTITY_SLIME_JUMP);
 
 		this.moveHelper = hoppingMoveHelper;
 
@@ -188,6 +192,16 @@ public class EntitySwet extends EntityExtendedMob
 	protected boolean isValidLightLevel()
 	{
 		return true;
+	}
+
+	@Override
+	protected void dropFewItems(boolean var1, int var2)
+	{
+		ItemStack stack = new ItemStack(ItemsAether.swet_jelly, this.rand.nextInt(4) + 1, this.getType().ordinal());
+		this.entityDropItem(stack, 0f);
+
+		ItemStack sugar = new ItemStack(Items.SUGAR, this.rand.nextInt(4), 0);
+		this.entityDropItem(sugar, 0f);
 	}
 
 }
