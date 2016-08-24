@@ -2,13 +2,16 @@ package com.gildedgames.aether.common.tile_entities;
 
 import com.gildedgames.aether.client.sound.objects.LabyrinthTotemSound;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.DimensionsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.tile_entities.multiblock.TileEntityMultiblockController;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceHandler;
+import com.gildedgames.util.core.UtilModule;
 import com.gildedgames.util.modules.instances.InstanceModule;
 import com.gildedgames.util.modules.instances.PlayerInstances;
 import com.gildedgames.util.core.util.BlockPosDimension;
+import com.gildedgames.util.modules.instances.networking.packet.PacketRegisterInstance;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.SoundHandler;
@@ -71,6 +74,12 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 		else
 		{
 			DungeonInstance inst = handler.get(new BlockPosDimension(this.pos, this.worldObj.provider.getDimension()));
+
+			if (interactingPlayer instanceof EntityPlayerMP)
+			{
+				UtilModule.NETWORK.sendTo(new PacketRegisterInstance(DimensionsAether.SLIDER_LABYRINTH, inst.getDimIdInside()), (EntityPlayerMP)interactingPlayer);
+			}
+
 			handler.teleportToInst(player, inst);
 		}
 	}
