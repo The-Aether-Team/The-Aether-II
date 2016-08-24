@@ -189,4 +189,10 @@ public class CommonProxy
 	{
 		return this.dungeonInstanceHandler;
 	}
+
+	public void displayDismountMessage()
+	{
+
+	}
+
 }

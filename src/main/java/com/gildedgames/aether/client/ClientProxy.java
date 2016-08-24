@@ -14,6 +14,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.util.modules.tab.TabModule;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -88,4 +89,11 @@ public class ClientProxy extends CommonProxy
 
 		super.setExtendedReachDistance(entity, distance);
 	}
+
+	@Override
+	public void displayDismountMessage()
+	{
+		Minecraft.getMinecraft().ingameGUI.setRecordPlaying(I18n.format("mount.onboard", new Object[] {Minecraft.getMinecraft().gameSettings.keyBindSneak.getDisplayName()}), false);
+	}
+
 }

@@ -128,6 +128,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 		if (!this.isRiding())
 		{
 			this.startRiding(player, true);
+			AetherCore.PROXY.displayDismountMessage();
 
 			return EnumActionResult.SUCCESS;
 		}
@@ -213,4 +214,11 @@ public class EntityAerbunny extends EntityAetherAnimal
 	{
 		return this.puffiness;
 	}
+
+	@Override
+	public boolean canRiderInteract()
+	{
+		return true;
+	}
+
 }
