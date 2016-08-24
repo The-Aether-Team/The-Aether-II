@@ -48,15 +48,17 @@ public class RenderLabyrinthChestMimic extends RenderLiving<EntityChestMimic>
 	@Override
 	protected void preRenderCallback(EntityChestMimic entity, float f)
 	{
-		if (entity.ticksExisted < 20)
+		if (entity.ticksExisted < 10)
 		{
+			GlStateManager.translate(0.0D, -0.5D + (1.0D / (double)entity.ticksExisted), 0.0D);
+
 			this.mainModel = this.spawnModel;
 		}
 		else
 		{
 			this.mainModel = this.activeModel;
 
-			GlStateManager.translate(0.0D, 0.8D, 0.0D);
+			GlStateManager.translate(0.0D, Math.min(0.8D, 0.8D * ((entity.ticksExisted - 10) / 3.5D)), 0.0D);
 		}
 	}
 

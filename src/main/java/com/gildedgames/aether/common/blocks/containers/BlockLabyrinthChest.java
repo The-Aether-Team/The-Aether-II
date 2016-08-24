@@ -69,8 +69,6 @@ public class BlockLabyrinthChest extends BlockContainer
 
 					mimic.setPositionAndUpdate(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D);
 
-					mimic.motionY = 0.5D;
-
 					world.spawnEntityInWorld(mimic);
 
 					world.setBlockToAir(pos);
