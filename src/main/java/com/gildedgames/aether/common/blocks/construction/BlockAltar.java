@@ -103,7 +103,7 @@ public class BlockAltar extends Block implements ITileEntityProvider
 					heldStack.stackSize--;
 				}
 			}
-			else if (player.isSneaking())
+			else
 			{
 				this.dropNextItem(altar, world);
 			}
