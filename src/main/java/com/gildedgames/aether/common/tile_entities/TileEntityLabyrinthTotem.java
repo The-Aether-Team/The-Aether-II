@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.tile_entities.multiblock.TileEntityMultiblo
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceHandler;
 import com.gildedgames.util.core.UtilModule;
+import com.gildedgames.util.modules.instances.Instance;
 import com.gildedgames.util.modules.instances.InstanceModule;
 import com.gildedgames.util.modules.instances.PlayerInstances;
 import com.gildedgames.util.core.util.BlockPosDimension;
@@ -67,9 +68,27 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 
 		PlayerInstances hook = InstanceModule.INSTANCE.getPlayer(player);
 
-		if (hook.getInstance() != null)
+		if (hook.getInstance() instanceof Instance)
 		{
-			handler.teleportBack(player);
+			Instance instance = (Instance) hook.getInstance();
+
+			if (interactingPlayer.dimension == instance.getDimIdInside())
+			{
+				handler.teleportBack(player);
+			}
+			else
+			{
+				hook.setInstance(null);
+
+				DungeonInstance inst = handler.get(new BlockPosDimension(this.pos, this.worldObj.provider.getDimension()));
+
+				if (interactingPlayer instanceof EntityPlayerMP)
+				{
+					UtilModule.NETWORK.sendTo(new PacketRegisterInstance(DimensionsAether.SLIDER_LABYRINTH, inst.getDimIdInside()), (EntityPlayerMP)interactingPlayer);
+				}
+
+				handler.teleportToInst(player, inst);
+			}
 		}
 		else
 		{
