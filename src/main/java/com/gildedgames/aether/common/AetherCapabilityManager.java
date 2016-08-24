@@ -162,7 +162,7 @@ public class AetherCapabilityManager
 		@Override
 		public void setShouldRetransform(boolean flag)
 		{
-			if (flag && !this.te.getWorld().isRemote)
+			if (flag && this.te.getWorld() != null && !this.te.getWorld().isRemote)
 			{
 				this.te.sendUpdates();
 			}
