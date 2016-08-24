@@ -102,15 +102,6 @@ public class SoundsAether
 		registerSound("mob.zephyr.ambient", zephyr_ambient);
 		registerSound("mob.zephyr.puff", zephyr_puff);
 
-		registerSound("mob.tempest.ambient", tempest_ambient);
-		registerSound("mob.tempest.hurt", tempest_hurt);
-		registerSound("mob.tempest.death", tempest_death);
-		registerSound("mob.tempest.angry", tempest_angry);
-		registerSound("mob.tempest.shock", tempest_electric_shock);
-
-		registerSound("mob.aerwhale.ambient", aerwhale_ambient);
-		registerSound("mob.aerwhale.death", aerwhale_death);
-
 		registerSound("mob.battle_golem.ambient", battle_golem_ambient);
 		registerSound("mob.battle_golem.hurt", battle_golem_hurt);
 
