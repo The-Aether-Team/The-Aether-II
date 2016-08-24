@@ -226,7 +226,7 @@ public class BlocksAether
 			labyrinth_capstone_slab = new BlockCustomSlab(Material.ROCK, SoundType.STONE, 2.0f),
 			labyrinth_wall_slab = new BlockCustomSlab(Material.ROCK, SoundType.STONE, 2.0f);
 
-	public static final Block labyrinth_strongblock = new BlockLabyrinth().setBlockUnbreakable();
+	public static final Block labyrinth_strongblock = new BlockLabyrinth().setBlockUnbreakable().setResistance(6000000.0F);
 
 	public static final Block skyroot_stairs = new BlockAetherStairs(BlocksAether.skyroot_planks.getDefaultState()),
 			holystone_stairs = new BlockAetherStairs(BlocksAether.holystone.getDefaultState()),
