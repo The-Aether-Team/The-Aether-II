@@ -4,6 +4,7 @@ import com.gildedgames.aether.client.models.entities.tile.ModelMoaEgg;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -63,6 +64,8 @@ public class TileEntityMoaEggRenderer extends TileEntitySpecialRenderer<TileEnti
 		this.model.renderAll(0.0625F);
 
 		GL11.glPopMatrix();
+
+		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 	}
 	
 	public void renderColor(int color)
