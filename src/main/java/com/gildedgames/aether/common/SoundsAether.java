@@ -86,9 +86,18 @@ public class SoundsAether
 		registerSound("mob.aerbunny.death", aerbunny_death);
 		registerSound("mob.aerbunny.lift", aerbunny_lift);
 
+		registerSound("mob.aerwhale.ambient", aerwhale_ambient);
+		registerSound("mob.aerwhale.death", aerwhale_death);
+
 		registerSound("mob.cockatrice.ambient", cockatrice_ambient);
 		registerSound("mob.cockatrice.hurt", cockatrice_hurt);
 		registerSound("mob.cockatrice.death", cockatrice_death);
+
+		registerSound("mob.tempest.ambient", tempest_ambient);
+		registerSound("mob.tempest.hurt", tempest_hurt);
+		registerSound("mob.tempest.death", tempest_death);
+		registerSound("mob.tempest.angry", tempest_angry);
+		registerSound("mob.tempest.electric_shock", tempest_electric_shock);
 
 		registerSound("mob.zephyr.ambient", zephyr_ambient);
 		registerSound("mob.zephyr.puff", zephyr_puff);
@@ -106,6 +115,10 @@ public class SoundsAether
 		registerSound("mob.battle_golem.hurt", battle_golem_hurt);
 
 		registerSound("mob.tracking_sentry.alarm", tracking_sentry_alarm);
+
+		registerSound("mob.sentry.ambient", sentry_ambient);
+		registerSound("mob.sentry.hurt", sentry_hurt);
+		registerSound("mob.sentry.death", sentry_death);
 
 		registerSound("mob.battle_sentry.pounce", battle_sentry_pounce);
 
