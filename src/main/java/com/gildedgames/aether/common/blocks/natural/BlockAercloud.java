@@ -66,7 +66,7 @@ public class BlockAercloud extends Block implements IBlockVariants
 				@Override
 				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
 				{
-					if (entity.motionY <= -0.2D)
+					if (entity.motionY <= -0.1D)
 					{
 						if (entity.worldObj.isRemote)
 						{
