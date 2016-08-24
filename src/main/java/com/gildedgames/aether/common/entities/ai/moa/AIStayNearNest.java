@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.ai.moa;
 
-import com.gildedgames.aether.common.entities.moa.EntityMoa;
+import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.world.World;
 

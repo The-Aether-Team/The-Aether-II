@@ -1,10 +1,13 @@
 package com.gildedgames.aether.common.tile_entities;
 
+import com.gildedgames.aether.api.genes.GeneUtil;
+import com.gildedgames.aether.api.genes.util.SimpleGeneStorage;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
-import com.gildedgames.aether.common.entities.moa.EntityMoa;
-import com.gildedgames.aether.common.entities.moa.MoaNest;
+import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
+import com.gildedgames.aether.common.entities.util.MoaNest;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
+import com.gildedgames.util.core.UtilModule;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -24,9 +27,16 @@ public class TileEntityMoaEgg extends TileEntity implements ITickable
 
 	public AnimalGender gender = AnimalGender.FEMALE;
 
+	private MoaGenePool genePool = new MoaGenePool(new SimpleGeneStorage());
+
 	public TileEntityMoaEgg()
 	{
 		this.familyNest = new MoaNest(this.worldObj);
+	}
+
+	public MoaGenePool getGenePool()
+	{
+		return this.genePool;
 	}
 
 	@Override
@@ -35,11 +45,6 @@ public class TileEntityMoaEgg extends TileEntity implements ITickable
 		if (this.worldObj.isRemote)
 		{
 			return;
-		}
-
-		if (this.ticksExisted <= 0)
-		{
-			this.sendUpdates();
 		}
 
 		if (this.secondsUntilHatch <= -1)
@@ -81,9 +86,7 @@ public class TileEntityMoaEgg extends TileEntity implements ITickable
 
 	public void hatchEgg()
 	{
-		MoaGenePool genePool = MoaGenePool.get(this);
-
-		EntityMoa babyMoa = new EntityMoa(this.worldObj, this.familyNest, genePool.getFatherSeed(), genePool.getMotherSeed());
+		EntityMoa babyMoa = new EntityMoa(this.worldObj, this.familyNest, this.genePool.getStorage().getFatherSeed(), this.genePool.getStorage().getMotherSeed());
 
 		babyMoa.setGrowingAge(-24000);
 		babyMoa.setPosition(this.getPos().getX() + 0.5D, this.getPos().getY(), this.getPos().getZ() + 0.5D);
@@ -121,6 +124,8 @@ public class TileEntityMoaEgg extends TileEntity implements ITickable
 	{
 		super.readFromNBT(nbt);
 
+		this.genePool.read(nbt.getCompoundTag("genePool"));
+
 		this.secondsUntilHatch = nbt.getInteger("secondsUntilHatch");
 
 		this.gender = AnimalGender.get(nbt.getString("creatureGender"));
@@ -132,6 +137,12 @@ public class TileEntityMoaEgg extends TileEntity implements ITickable
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
+
+		NBTTagCompound genePoolTag = new NBTTagCompound();
+
+		this.genePool.write(genePoolTag);
+
+		nbt.setTag("genePool", genePoolTag);
 
 		nbt.setInteger("secondsUntilHatch", this.secondsUntilHatch);
 
@@ -146,10 +157,19 @@ public class TileEntityMoaEgg extends TileEntity implements ITickable
 	}
 
 	@Override
+	public NBTTagCompound getUpdateTag()
+	{
+		NBTTagCompound tag = super.getUpdateTag();
+
+		this.writeToNBT(tag);
+
+		return tag;
+	}
+
+	@Override
 	public SPacketUpdateTileEntity getUpdatePacket()
 	{
-		NBTTagCompound compound = new NBTTagCompound();
-		this.writeToNBT(compound);
+		NBTTagCompound compound = this.getUpdateTag();
 
 		return new SPacketUpdateTileEntity(this.pos, 1, compound);
 	}

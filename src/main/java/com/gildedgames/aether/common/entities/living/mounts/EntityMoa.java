@@ -1,15 +1,13 @@
-package com.gildedgames.aether.common.entities.moa;
+package com.gildedgames.aether.common.entities.living.mounts;
 
-import com.gildedgames.aether.api.genes.BiologyUtil;
+import com.gildedgames.aether.api.genes.GeneUtil;
 import com.gildedgames.aether.common.entities.ai.moa.*;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
-import com.gildedgames.aether.common.entities.util.AnimalGender;
-import com.gildedgames.aether.common.entities.util.EntityGroup;
-import com.gildedgames.aether.common.entities.util.EntityGroupMember;
+import com.gildedgames.aether.common.entities.util.*;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -21,7 +19,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class EntityMoa extends EntityAnimal implements EntityGroupMember
+public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements EntityGroupMember
 {
 
 	private static final DataParameter<Integer> REMAINING_JUMPS = EntityDataManager.createKey(EntityMoa.class, DataSerializers.VARINT);
@@ -73,12 +71,7 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 	{
 		this(world, familyNest);
 
-		this.getGenePool().transformFromParents(BiologyUtil.getRandomSeed(world), fatherSeed, motherSeed);
-	}
-
-	public MoaGenePool getGenePool()
-	{
-		return MoaGenePool.get(this);
+		this.getGenePool().transformFromParents(GeneUtil.getRandomSeed(world), fatherSeed, motherSeed);
 	}
 
 	private void initAI()
@@ -99,6 +92,12 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 	}
 
 	@Override
+	public MoaGenePool createNewGenePool()
+	{
+		return new MoaGenePool(new EntityGeneStorage(this));
+	}
+
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
@@ -108,7 +107,7 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 	}
 
 	@Override
-	protected void entityInit()
+	public void entityInit()
 	{
 		super.entityInit();
 
@@ -136,7 +135,7 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 
 		if (this.pack == null)
 		{
-			this.pack = this.familyNest.pack;
+			this.pack = this.familyNest.getAnimalPack();
 		}
 
 		this.updateWingRotation();
@@ -250,7 +249,7 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 	@Override
 	public EntityGroup getGroup()
 	{
-		return this.familyNest != null ? this.familyNest.pack : null;
+		return this.familyNest != null ? this.familyNest.getAnimalPack() : null;
 	}
 
 	@Override
@@ -364,9 +363,9 @@ public class EntityMoa extends EntityAnimal implements EntityGroupMember
 	{
 		ItemStack moaEgg = new ItemStack(ItemsAether.moa_egg);
 
-		MoaGenePool stackGenes = MoaGenePool.get(moaEgg);
+		MoaGenePool stackGenes = ItemMoaEgg.getGenePool(moaEgg);
 
-		stackGenes.transformFromParents(this.getGenePool().getSeed(), this.getGenePool().getFatherSeed(), this.getGenePool().getMotherSeed());
+		stackGenes.transformFromParents(this.getGenePool().getStorage().getSeed(), this.getGenePool().getStorage().getFatherSeed(), this.getGenePool().getStorage().getMotherSeed());
 
 		return moaEgg;
 	}

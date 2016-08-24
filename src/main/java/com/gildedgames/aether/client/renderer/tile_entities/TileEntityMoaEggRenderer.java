@@ -22,7 +22,7 @@ public class TileEntityMoaEggRenderer extends TileEntitySpecialRenderer<TileEnti
 	@Override
 	public void renderTileEntityAt(TileEntityMoaEgg egg, double x, double y, double z, float partialTicks, int destroyStage)
 	{
-		MoaGenePool genePool = MoaGenePool.get(egg);
+		MoaGenePool genePool = egg.getGenePool();
 
 		if (genePool == null || genePool.getFeathers() == null)
 		{

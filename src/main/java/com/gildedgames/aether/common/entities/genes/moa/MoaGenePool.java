@@ -1,33 +1,21 @@
 package com.gildedgames.aether.common.entities.genes.moa;
 
-import com.gildedgames.aether.api.genes.IGenePool;
-import com.gildedgames.aether.api.genes.BiologyUtil;
+import com.gildedgames.aether.api.genes.GeneUtil;
 import com.gildedgames.aether.api.genes.GeneRegion;
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.genes.IGeneStorage;
 import com.gildedgames.aether.api.genes.util.DataGene;
-import com.gildedgames.aether.common.entities.moa.EntityMoa;
+import com.gildedgames.aether.api.genes.util.GenePool;
+import com.gildedgames.aether.api.genes.util.SimpleGeneStorage;
+import com.gildedgames.util.io_manager.io.NBT;
 import com.google.common.collect.Lists;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.nbt.NBTTagCompound;
 
 import java.awt.*;
 import java.util.List;
 import java.util.Random;
 
-public class MoaGenePool implements IGenePool
+public class MoaGenePool extends GenePool implements NBT
 {
-
-	private static final DataParameter<Integer> SEED = EntityDataManager.createKey(EntityMoa.class, DataSerializers.VARINT);
-
-	private static final DataParameter<Integer> FATHER_SEED = EntityDataManager.createKey(EntityMoa.class, DataSerializers.VARINT);
-
-	private static final DataParameter<Integer> MOTHER_SEED = EntityDataManager.createKey(EntityMoa.class, DataSerializers.VARINT);
-
-	private static final DataParameter<Boolean> SHOULD_RETRANSFORM = EntityDataManager.createKey(EntityMoa.class, DataSerializers.BOOLEAN);
 
 	private GeneRegion<DataGene<Color>> keratin, feathers, eyes;
 
@@ -35,74 +23,24 @@ public class MoaGenePool implements IGenePool
 
 	private GeneRegion<DataGene<Integer>> wingStrength;
 
-	private List<GeneRegion> geneRegions;
-
-	private Entity entity;
-
-	public static MoaGenePool get(EntityMoa entity)
+	private MoaGenePool()
 	{
-		return (MoaGenePool) entity.getCapability(AetherCapabilities.GENE_POOL, null);
+		this(new SimpleGeneStorage());
 	}
 
-	public static MoaGenePool get(ItemStack stack)
+	public MoaGenePool(IGeneStorage storage)
 	{
-		return (MoaGenePool) stack.getCapability(AetherCapabilities.GENE_POOL, null);
-	}
-
-	public static MoaGenePool get(TileEntity te)
-	{
-		return (MoaGenePool) te.getCapability(AetherCapabilities.GENE_POOL, null);
-	}
-
-	protected MoaGenePool()
-	{
-
-	}
-
-	public MoaGenePool(Entity entity)
-	{
-		this.entity = entity;
-
-		EntityDataManager dataManager = this.entity.getDataManager();
-
-		dataManager.register(SEED, 0);
-		dataManager.register(FATHER_SEED, 0);
-		dataManager.register(MOTHER_SEED, 0);
-		dataManager.register(SHOULD_RETRANSFORM, false);
-	}
-
-	@Override
-	public void onUpdate()
-	{
-		if (this.shouldRetransform() && this.getEntity().worldObj.isRemote)
-		{
-			if (this.getSeed() == this.getFatherSeed() && this.getSeed() == this.getMotherSeed())
-			{
-				this.transformFromSeed(this.getSeed());
-			}
-			else
-			{
-				this.transformFromParents(this.getSeed(), this.getFatherSeed(), this.getMotherSeed());
-			}
-
-			this.setShouldRetransform(false);
-		}
-	}
-
-	@Override
-	public Entity getEntity()
-	{
-		return this.entity;
+		super(storage);
 	}
 
 	@Override
 	public void transformFromSeed(int seed)
 	{
-		this.setSeed(seed);
-		this.setFatherSeed(seed);
-		this.setMotherSeed(seed);
+		this.getStorage().setSeed(seed);
+		this.getStorage().setFatherSeed(seed);
+		this.getStorage().setMotherSeed(seed);
 
-		Random r = new Random(this.getSeed());
+		Random r = new Random(this.getStorage().getSeed());
 
 		this.keratin = new GeneRegion<>("moaBiology.keratin", MoaGenePoolDataSet.KERATIN.pickRandom(r));
 		this.feathers = new GeneRegion<>("moaBiology.feathers", MoaGenePoolDataSet.FEATHERS.pickRandom(r));
@@ -111,48 +49,46 @@ public class MoaGenePool implements IGenePool
 
 		this.wingStrength = new GeneRegion<>("moaBiology.wingStrength", MoaGenePoolDataSet.WING_STRENGTH.pickRandom(r));
 
-		this.setShouldRetransform(true);
-	}
-
-	public List<GeneRegion> getGeneRegions()
-	{
-		if (this.geneRegions == null)
-		{
-			this.geneRegions = Lists.newArrayList();
-
-			this.geneRegions.add(this.keratin);
-			this.geneRegions.add(this.feathers);
-			this.geneRegions.add(this.eyes);
-			this.geneRegions.add(this.marks);
-			this.geneRegions.add(this.wingStrength);
-		}
-
-		return this.geneRegions;
+		this.getStorage().setShouldRetransform(true);
 	}
 
 	@Override
 	public void transformFromParents(int seed, int fatherSeed, int motherSeed)
 	{
-		this.setSeed(seed);
-		this.setFatherSeed(fatherSeed);
-		this.setMotherSeed(motherSeed);
+		this.getStorage().setSeed(seed);
+		this.getStorage().setFatherSeed(fatherSeed);
+		this.getStorage().setMotherSeed(motherSeed);
 
-		MoaGenePool father = new UntrackedMoaGenePool();
-		MoaGenePool mother = new UntrackedMoaGenePool();
+		MoaGenePool father = new MoaGenePool(new SimpleGeneStorage());
+		MoaGenePool mother = new MoaGenePool(new SimpleGeneStorage());
 
-		father.transformFromSeed(this.getFatherSeed());
-		mother.transformFromSeed(this.getMotherSeed());
+		father.transformFromSeed(this.getStorage().getFatherSeed());
+		mother.transformFromSeed(this.getStorage().getMotherSeed());
 
-		Random r = new Random(this.getSeed());
+		Random r = new Random(this.getStorage().getSeed());
 
-		this.keratin = new GeneRegion<>("moaBiology.keratin", BiologyUtil.evaluateInheritedGene(r, father.keratin, mother.keratin));
-		this.feathers = new GeneRegion<>("moaBiology.feathers", BiologyUtil.evaluateInheritedGene(r, father.feathers, mother.feathers));
-		this.eyes = new GeneRegion<>("moaBiology.eyes", BiologyUtil.evaluateInheritedGene(r, father.eyes, mother.eyes));
-		this.marks = new GeneRegion<>("moaBiology.marks", BiologyUtil.evaluateInheritedGene(r, father.marks, mother.marks));
+		this.keratin = new GeneRegion<>("moaBiology.keratin", GeneUtil.evaluateInheritedGene(r, father.keratin, mother.keratin));
+		this.feathers = new GeneRegion<>("moaBiology.feathers", GeneUtil.evaluateInheritedGene(r, father.feathers, mother.feathers));
+		this.eyes = new GeneRegion<>("moaBiology.eyes", GeneUtil.evaluateInheritedGene(r, father.eyes, mother.eyes));
+		this.marks = new GeneRegion<>("moaBiology.marks", GeneUtil.evaluateInheritedGene(r, father.marks, mother.marks));
 
-		this.wingStrength = new GeneRegion<>("moaBiology.wingStrength", BiologyUtil.evaluateInheritedGene(r, father.wingStrength, mother.wingStrength));
+		this.wingStrength = new GeneRegion<>("moaBiology.wingStrength", GeneUtil.evaluateInheritedGene(r, father.wingStrength, mother.wingStrength));
 
-		this.setShouldRetransform(true);
+		this.getStorage().setShouldRetransform(true);
+	}
+
+	@Override
+	public List<GeneRegion> createGeneRegions()
+	{
+		List<GeneRegion> gr = Lists.newArrayList();
+
+		gr.add(this.keratin);
+		gr.add(this.feathers);
+		gr.add(this.eyes);
+		gr.add(this.marks);
+		gr.add(this.wingStrength);
+
+		return gr;
 	}
 
 	public GeneRegion<DataGene<Color>> getKeratin()
@@ -178,46 +114,16 @@ public class MoaGenePool implements IGenePool
 	public GeneRegion<DataGene<Integer>> getWingStrength() { return this.wingStrength; }
 
 	@Override
-	public int getSeed()
+	public void write(NBTTagCompound output)
 	{
-		return this.entity.getDataManager().get(MoaGenePool.SEED);
+		this.getStorage().write(output);
 	}
 
 	@Override
-	public int getFatherSeed()
+	public void read(NBTTagCompound input)
 	{
-		return this.entity.getDataManager().get(MoaGenePool.FATHER_SEED);
-	}
+		this.getStorage().read(input);
 
-	@Override
-	public int getMotherSeed()
-	{
-		return this.entity.getDataManager().get(MoaGenePool.MOTHER_SEED);
+		GeneUtil.transformFromStorage(this, this.getStorage());
 	}
-
-	protected void setSeed(int seed)
-	{
-		this.entity.getDataManager().set(MoaGenePool.SEED, seed);
-	}
-
-	protected void setFatherSeed(int seed)
-	{
-		this.entity.getDataManager().set(MoaGenePool.FATHER_SEED, seed);
-	}
-
-	protected void setMotherSeed(int seed)
-	{
-		this.entity.getDataManager().set(MoaGenePool.MOTHER_SEED, seed);
-	}
-
-	protected boolean shouldRetransform()
-	{
-		return this.entity.getDataManager().get(MoaGenePool.SHOULD_RETRANSFORM);
-	}
-
-	protected void setShouldRetransform(boolean flag)
-	{
-		this.entity.getDataManager().set(MoaGenePool.SHOULD_RETRANSFORM, flag);
-	}
-	
 }

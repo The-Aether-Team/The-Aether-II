@@ -9,6 +9,7 @@ import com.gildedgames.aether.common.crafting.RecipesAether;
 import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.entities.EntityItemWatcher;
 import com.gildedgames.aether.common.entities.effects.EntityEffectsEventHooks;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.EquipmentRegistry;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
@@ -78,6 +79,7 @@ public class CommonProxy
 		TabModule.api().getInventoryGroup().registerServerTab(new TabEquipment());
 
 		AetherCore.srl().registerSerialization(0, DungeonInstance.class, new Instantiator(DungeonInstance.class));
+		AetherCore.srl().registerSerialization(1, MoaGenePool.class, new Instantiator(MoaGenePool.class));
 	}
 
 	public void init(FMLInitializationEvent event)

@@ -1,10 +1,15 @@
 package com.gildedgames.aether.common.items.misc;
 
-import com.gildedgames.aether.api.genes.BiologyUtil;
+import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.capabilites.items.extra_data.IItemExtraDataCapability;
+import com.gildedgames.aether.api.genes.GeneUtil;
+import com.gildedgames.aether.api.genes.util.SimpleGeneStorage;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.capabilities.item.extra_data.ItemExtraDataImpl;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
-import com.gildedgames.aether.common.entities.moa.EntityMoa;
+import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
+import com.google.common.base.Supplier;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -44,10 +49,27 @@ public class ItemMoaEgg extends Item
 		this.addPropertyOverride(new ResourceLocation("spots"), new ModelProperty("spots"));
 	}
 
+	public static MoaGenePool getGenePool(ItemStack stack)
+	{
+		IItemExtraDataCapability extraData = stack.getCapability(AetherCapabilities.ITEM_EXTRA_DATA, null);
+
+		if (extraData != null)
+		{
+			if (!extraData.has("genePool"))
+			{
+				extraData.set("genePool", new MoaGenePool(new SimpleGeneStorage()));
+			}
+
+			return extraData.get("genePool");
+		}
+
+		return null;
+	}
+
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List<String> creativeList, boolean par4)
 	{
-		MoaGenePool genePool = MoaGenePool.get(stack);
+		MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);
 
 		if (genePool.getFeathers() != null)
 		{
@@ -84,10 +106,10 @@ public class ItemMoaEgg extends Item
 			{
 				if (!world.isRemote)
 				{
-					EntityMoa moa = new EntityMoa(world, BiologyUtil.getRandomSeed(world));
+					EntityMoa moa = new EntityMoa(world, GeneUtil.getRandomSeed(world));
 					moa.setPosition(pos.getX() + 0.5F, pos.getY() + (moa.height / 2), pos.getZ() + 0.5F);
 
-					MoaGenePool stackGenePool = MoaGenePool.get(stack);
+					MoaGenePool stackGenePool = ItemMoaEgg.getGenePool(stack);
 
 					moa.setRaisedByPlayer(true);
 
@@ -97,11 +119,11 @@ public class ItemMoaEgg extends Item
 
 					if (this.creativeEgg)
 					{
-						genePool.transformFromSeed(BiologyUtil.getRandomSeed(world));
+						genePool.transformFromSeed(GeneUtil.getRandomSeed(world));
 					}
 					else
 					{
-						genePool.transformFromParents(stackGenePool.getSeed(), stackGenePool.getFatherSeed(), stackGenePool.getMotherSeed());
+						genePool.transformFromParents(stackGenePool.getStorage().getSeed(), stackGenePool.getStorage().getFatherSeed(), stackGenePool.getStorage().getMotherSeed());
 					}
 				}
 
@@ -118,10 +140,10 @@ public class ItemMoaEgg extends Item
 
 				if (egg != null)
 				{
-					MoaGenePool stackGenes = MoaGenePool.get(stack);
-					MoaGenePool teGenes = MoaGenePool.get(egg);
+					MoaGenePool stackGenes = ItemMoaEgg.getGenePool(stack);
+					MoaGenePool teGenes = egg.getGenePool();
 
-					teGenes.transformFromParents(stackGenes.getSeed(), stackGenes.getFatherSeed(), stackGenes.getMotherSeed());
+					teGenes.transformFromParents(stackGenes.getStorage().getSeed(), stackGenes.getStorage().getFatherSeed(), stackGenes.getStorage().getMotherSeed());
 
 					egg.setPlayerPlaced();
 				}
@@ -138,7 +160,7 @@ public class ItemMoaEgg extends Item
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		MoaGenePool genePool = MoaGenePool.get(stack);
+		MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);
 
 		if (genePool.getMarks() != null && !this.creativeEgg)
 		{
@@ -175,7 +197,7 @@ public class ItemMoaEgg extends Item
 		{
 			if (stack != null)
 			{
-				MoaGenePool genePool = MoaGenePool.get(stack);
+				MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);
 
 				if (genePool.getMarks() != null)
 				{

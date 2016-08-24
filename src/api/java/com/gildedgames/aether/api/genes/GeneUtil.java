@@ -4,12 +4,24 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BiologyUtil
+public class GeneUtil
 {
 
-	private BiologyUtil()
+	private GeneUtil()
 	{
 
+	}
+
+	public static void transformFromStorage(IGenePool pool, IGeneStorage storage)
+	{
+		if (storage.getSeed() == storage.getFatherSeed() && storage.getSeed() == storage.getMotherSeed())
+		{
+			pool.transformFromSeed(storage.getSeed());
+		}
+		else
+		{
+			pool.transformFromParents(storage.getSeed(), storage.getFatherSeed(), storage.getMotherSeed());
+		}
 	}
 
 	public static <T extends GeneRegion<G>, G extends Gene> G evaluateInheritedGene(Random r, T geneRegion1, T geneRegion2)

@@ -1,20 +1,16 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.api.genes.IGenePool;
-import com.gildedgames.aether.api.genes.GenePoolStorage;
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
-import com.gildedgames.aether.api.genes.GenePoolProvider;
-import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
-import com.gildedgames.aether.common.entities.genes.moa.UntrackedMoaGenePool;
+import com.gildedgames.aether.api.capabilites.items.extra_data.IItemExtraDataCapability;
+import com.gildedgames.aether.common.capabilities.item.extra_data.ItemExtraDataImpl;
+import com.gildedgames.aether.common.capabilities.item.extra_data.ItemExtraDataProvider;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import com.gildedgames.aether.common.entities.effects.EntityEffectsProvider;
-import com.gildedgames.aether.common.entities.moa.EntityMoa;
 import com.gildedgames.aether.common.capabilities.item.effects.ItemEffects;
 import com.gildedgames.aether.common.capabilities.item.effects.ItemEffectsProvider;
-import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import com.gildedgames.aether.common.capabilities.item.properties.ItemPropertiesImpl;
 import com.gildedgames.aether.common.capabilities.item.properties.ItemPropertiesProvider;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
@@ -22,7 +18,6 @@ import com.gildedgames.aether.common.capabilities.player.PlayerAetherProvider;
 import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
 import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -47,21 +42,13 @@ public class AetherCapabilityManager
 		CapabilityManager.INSTANCE.register(IItemPropertiesCapability.class, new ItemPropertiesImpl.Storage(), ItemPropertiesImpl.class);
 		CapabilityManager.INSTANCE.register(IPlayerAetherCapability.class, new PlayerAetherImpl.Storage(), PlayerAetherImpl.class);
 		CapabilityManager.INSTANCE.register(IEntityEffectsCapability.class, new EntityEffects.Storage(), EntityEffects.class);
-		CapabilityManager.INSTANCE.register(IGenePool.class, new GenePoolStorage(), MoaGenePool.class);
+		CapabilityManager.INSTANCE.register(IItemExtraDataCapability.class, new ItemExtraDataImpl.Storage(), ItemExtraDataImpl.class);
 	}
 
 	@SubscribeEvent
 	public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event)
 	{
-		if (event.getEntity() instanceof EntityMoa)
-		{
-			MoaGenePool genePool = MoaGenePool.get((EntityMoa) event.getEntity());
 
-			if (genePool != null)
-			{
-				genePool.onUpdate();
-			}
-		}
 	}
 
 	@SubscribeEvent
@@ -102,11 +89,6 @@ public class AetherCapabilityManager
 			return;
 		}
 
-		if (event.getEntity() instanceof EntityMoa)
-		{
-			event.addCapability(AetherCore.getResource("MoaGenePool"), new GenePoolProvider(new MoaGenePool(event.getEntity())));
-		}
-
 		event.addCapability(AetherCore.getResource("EntityEffects"), new EntityEffectsProvider(new EntityEffects(event.getEntity())));
 
 		if (event.getEntity() instanceof EntityPlayer)
@@ -133,41 +115,7 @@ public class AetherCapabilityManager
 		}
 
         event.addCapability(AetherCore.getResource("ItemStackProperties"), new ItemPropertiesProvider(event.getItemStack()));
-
-		if (event.getItem() instanceof ItemMoaEgg)
-		{
-			event.addCapability(AetherCore.getResource("MoaEggGenePool"), new GenePoolProvider(new UntrackedMoaGenePool()));
-		}
+		event.addCapability(AetherCore.getResource("ItemExtraData"), new ItemExtraDataProvider());
     }
-
-	@SubscribeEvent
-	public static void onTileEntityLoad(AttachCapabilitiesEvent.TileEntity event)
-	{
-		if (event.getTileEntity() instanceof TileEntityMoaEgg)
-		{
-			event.addCapability(AetherCore.getResource("MoaEggTileGenePool"), new GenePoolProvider(new TEMoaGenePool((TileEntityMoaEgg) event.getTileEntity())));
-		}
-	}
-
-	private static class TEMoaGenePool extends UntrackedMoaGenePool
-	{
-
-		private TileEntityMoaEgg te;
-
-		public TEMoaGenePool(TileEntityMoaEgg te)
-		{
-			this.te = te;
-		}
-
-		@Override
-		public void setShouldRetransform(boolean flag)
-		{
-			if (flag && this.te.getWorld() != null && !this.te.getWorld().isRemote)
-			{
-				this.te.sendUpdates();
-			}
-		}
-
-	}
 
 }

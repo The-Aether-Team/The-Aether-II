@@ -159,6 +159,16 @@ public class TileEntityAltar extends TileEntity implements ITickable
 	}
 
 	@Override
+	public NBTTagCompound getUpdateTag()
+	{
+		NBTTagCompound tag = super.getUpdateTag();
+
+		this.writeToNBT(tag);
+
+		return tag;
+	}
+
+	@Override
 	public SPacketUpdateTileEntity getUpdatePacket()
 	{
 		NBTTagCompound compound = new NBTTagCompound();

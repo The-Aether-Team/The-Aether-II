@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.entities.ai.moa;
 
-import com.gildedgames.aether.api.genes.BiologyUtil;
+import com.gildedgames.aether.api.genes.GeneUtil;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockWovenSticks;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
-import com.gildedgames.aether.common.entities.moa.EntityMoa;
+import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
 import com.gildedgames.aether.common.entities.util.EntityGroupMember;
 import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
@@ -116,10 +116,10 @@ public class AIMoaPackBreeding extends EntityAIBase
 
 			if (egg != null)
 			{
-				MoaGenePool teGenes = MoaGenePool.get(egg);
+				MoaGenePool teGenes = egg.getGenePool();
 				MoaGenePool entityGenes = this.moa.getGenePool();
 
-				teGenes.transformFromParents(BiologyUtil.getRandomSeed(this.moa.getEntityWorld()), entityGenes.getFatherSeed(), entityGenes.getMotherSeed());
+				teGenes.transformFromParents(GeneUtil.getRandomSeed(this.moa.getEntityWorld()), entityGenes.getStorage().getFatherSeed(), entityGenes.getStorage().getMotherSeed());
 
 				egg.setFamilyNest(this.moa.getFamilyNest());
 

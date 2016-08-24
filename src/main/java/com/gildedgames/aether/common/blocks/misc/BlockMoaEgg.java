@@ -1,10 +1,11 @@
 package com.gildedgames.aether.common.blocks.misc;
 
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
-import com.gildedgames.aether.common.entities.moa.EntityMoa;
-import com.gildedgames.aether.common.entities.moa.MoaNest;
+import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
+import com.gildedgames.aether.common.entities.util.MoaNest;
 import com.gildedgames.aether.common.entities.util.EntityGroup;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -84,10 +85,9 @@ public class BlockMoaEgg extends BlockContainer
 
 				if (egg != null)
 				{
-					MoaGenePool teGenes = MoaGenePool.get(egg);
-					MoaGenePool stackGenes = MoaGenePool.get(eggStack);
+					MoaGenePool stackGenes = ItemMoaEgg.getGenePool(eggStack);
 
-					stackGenes.transformFromParents(teGenes.getSeed(), teGenes.getFatherSeed(), teGenes.getMotherSeed());
+					stackGenes.transformFromParents(egg.getGenePool().getStorage().getSeed(), egg.getGenePool().getStorage().getFatherSeed(), egg.getGenePool().getStorage().getMotherSeed());
 				}
 
 				world.setBlockToAir(pos);
@@ -143,10 +143,10 @@ public class BlockMoaEgg extends BlockContainer
 
 		if (egg != null)
 		{
-			MoaGenePool teGenes = MoaGenePool.get(egg);
-			MoaGenePool stackGenes = MoaGenePool.get(eggStack);
+			MoaGenePool teGenes = egg.getGenePool();
+			MoaGenePool stackGenes = ItemMoaEgg.getGenePool(eggStack);
 
-			stackGenes.transformFromParents(teGenes.getSeed(), teGenes.getFatherSeed(), teGenes.getMotherSeed());
+			stackGenes.transformFromParents(teGenes.getStorage().getSeed(), teGenes.getStorage().getFatherSeed(), teGenes.getStorage().getMotherSeed());
 		}
 
 		return eggStack;

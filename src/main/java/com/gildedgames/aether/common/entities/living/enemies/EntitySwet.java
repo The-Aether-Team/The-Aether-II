@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.entities.living.enemies;
 
-import com.gildedgames.aether.api.genes.BiologyUtil;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFloat;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFollowAttackTarget;
