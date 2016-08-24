@@ -9,7 +9,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 // Only exists because Aerogel walls are translucent.
-public class BlockAerogelWall extends BlockAetherWall
+public class BlockAerogelWall extends BlockCustomWall
 {
 	public BlockAerogelWall(IBlockState state, float hardness, float resistance)
 	{

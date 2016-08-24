@@ -24,7 +24,7 @@ import com.gildedgames.aether.common.blocks.construction.redstone.BlockSkyrootPr
 import com.gildedgames.aether.common.blocks.construction.signs.BlockStandingSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.signs.BlockWallSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockAerogelWall;
-import com.gildedgames.aether.common.blocks.construction.walls.BlockAetherWall;
+import com.gildedgames.aether.common.blocks.construction.walls.BlockCustomWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockDivineWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockSkyrootWall;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
@@ -202,16 +202,16 @@ public class BlocksAether
 			labyrinth_base = new BlockLabyrinth(),
 			labyrinth_headstone =  new BlockLabyrinth();
 
-	public static final BlockAetherWall
-			holystone_wall = new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f),
-			mossy_holystone_wall = new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f),
-			holystone_brick_wall = new BlockAetherWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f),
-			carved_stone_wall = new BlockAetherWall(BlocksAether.carved_stone.getDefaultState(), 1.0f, 10.0f),
-			icestone_wall = new BlockAetherWall(BlocksAether.icestone_bricks.getDefaultState(), 3.0f, 10.0f),
+	public static final BlockCustomWall
+			holystone_wall = new BlockCustomWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f),
+			mossy_holystone_wall = new BlockCustomWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f),
+			holystone_brick_wall = new BlockCustomWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f),
+			carved_stone_wall = new BlockCustomWall(BlocksAether.carved_stone.getDefaultState(), 1.0f, 10.0f),
+			icestone_wall = new BlockCustomWall(BlocksAether.icestone_bricks.getDefaultState(), 3.0f, 10.0f),
 			aerogel_wall = new BlockAerogelWall(BlocksAether.aerogel.getDefaultState(), 1.0f, 10.0f),
 			skyroot_log_wall = new BlockSkyrootWall(BlocksAether.skyroot_log.getDefaultState(), 2.0f, 10.0f),
 			divine_stone_wall = new BlockDivineWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f),
-			sentry_stone_wall = new BlockAetherWall(BlocksAether.labyrinth_lightstone.getDefaultState(), 1.0f, 10.0f).setGlows(true),
+			sentry_stone_wall = new BlockCustomWall(BlocksAether.labyrinth_lightstone.getDefaultState(), 1.0f, 10.0f).setGlows(true),
 			divine_sentry_wall = new BlockDivineWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f);
 
 	public static final BlockCustomSlab

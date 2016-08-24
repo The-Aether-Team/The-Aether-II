@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.blocks.construction.walls;
 
 import net.minecraft.block.state.IBlockState;
 
-public class BlockDivineWall extends BlockAetherWall
+public class BlockDivineWall extends BlockCustomWall
 {
 	public BlockDivineWall(IBlockState state, float hardness, float resistance)
 	{

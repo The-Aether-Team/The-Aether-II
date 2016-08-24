@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.blocks.construction.walls;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import net.minecraft.block.BlockWall;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -13,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockSkyrootWall extends BlockAetherWall
+public class BlockSkyrootWall extends BlockCustomWall
 {
 
 	public static final PropertyBool PROPERTY_GENERATED = PropertyBool.create("is_generated");
@@ -64,6 +65,6 @@ public class BlockSkyrootWall extends BlockAetherWall
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, BlockAetherWall.UP, BlockAetherWall.NORTH, BlockAetherWall.EAST, BlockAetherWall.WEST, BlockAetherWall.SOUTH, BlockSkyrootWall.PROPERTY_GENERATED);
+		return new BlockStateContainer(this, BlockCustomWall.UP, BlockCustomWall.NORTH, BlockCustomWall.EAST, BlockCustomWall.WEST, BlockCustomWall.SOUTH, BlockWall.VARIANT, BlockSkyrootWall.PROPERTY_GENERATED);
 	}
 }
