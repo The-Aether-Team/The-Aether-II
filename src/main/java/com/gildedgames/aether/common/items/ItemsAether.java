@@ -432,28 +432,28 @@ public class ItemsAether
 
 		IEquipmentRegistry equipmentRegistry = AetherCore.INSTANCE.getEquipmentRegistry();
 
-		equipmentRegistry.register(ItemsAether.iron_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.gold_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.iron_pendant, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.gold_pendant, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.zanite_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.zanite_pendant, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
+		equipmentRegistry.register(ItemsAether.iron_ring, ItemRarity.BASIC, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.gold_ring, ItemRarity.BASIC, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.iron_pendant, ItemRarity.BASIC, ItemEquipmentType.NECKWEAR);
+		equipmentRegistry.register(ItemsAether.gold_pendant, ItemRarity.BASIC, ItemEquipmentType.NECKWEAR);
+		equipmentRegistry.register(ItemsAether.zanite_ring, ItemRarity.BASIC, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.zanite_pendant, ItemRarity.BASIC, ItemEquipmentType.NECKWEAR);
 		equipmentRegistry.register(ItemsAether.iron_bubble, ItemRarity.COMMON, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.regeneration_stone, ItemRarity.RARE, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.ice_pendant, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
 		equipmentRegistry.register(ItemsAether.daggerfrost_locket, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
 
-		equipmentRegistry.register(ItemsAether.zanite_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.gravitite_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.zanite_gloves, ItemRarity.BASIC, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.gravitite_gloves, ItemRarity.BASIC, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.valkyrie_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.neptune_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.phoenix_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.obsidian_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.leather_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.iron_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.gold_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.chain_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.diamond_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.leather_gloves, ItemRarity.BASIC, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.iron_gloves, ItemRarity.BASIC, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.gold_gloves, ItemRarity.BASIC, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.chain_gloves, ItemRarity.BASIC, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.diamond_gloves, ItemRarity.BASIC, ItemEquipmentType.HANDWEAR);
 
 		/** COMPANIONS **/
 
