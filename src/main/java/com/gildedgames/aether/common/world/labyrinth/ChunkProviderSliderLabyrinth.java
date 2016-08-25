@@ -83,14 +83,11 @@ public class ChunkProviderSliderLabyrinth implements IChunkGenerator
 
 		ChunkPrimer primer = new ChunkPrimer();//new ChunkPrimerDefaultState(BlocksAether.labyrinth_strongblock.getDefaultState());
 		
-		//this.generateBedrock(primer, chunkX, chunkZ);
-		
 		inst.getGenerator().generateChunk(this.world, this.random, inst, primer, chunkX, chunkZ);
 
 		Chunk chunk = new Chunk(this.world, primer, chunkX, chunkZ);
-		//chunk.func_150809_p();
-		//chunk.setChunkModified();
-		chunk.generateSkylightMap();
+
+		chunk.resetRelightChecks();
 
 		return chunk;
 	}

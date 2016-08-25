@@ -114,5 +114,11 @@ public class WorldProviderSliderLabyrinth extends WorldProvider
 	{
 		return null;
 	}
+
+	@Override
+	protected void generateLightBrightnessTable()
+	{
+		super.generateLightBrightnessTable();
+	}
 	
 }
