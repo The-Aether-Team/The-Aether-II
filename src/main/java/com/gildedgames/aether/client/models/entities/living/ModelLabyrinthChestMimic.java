@@ -2,8 +2,11 @@ package com.gildedgames.aether.client.models.entities.living;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
+
+import static com.ibm.icu.impl.duration.impl.DataRecord.EGender.F;
 
 public class ModelLabyrinthChestMimic extends ModelBase
 {
@@ -260,10 +263,47 @@ public class ModelLabyrinthChestMimic extends ModelBase
     Leg_Front_Left.render(f5);
     Leg_Back_Right.render(f5);
     Leg_Back_Left.render(f5);
+
+    GlStateManager.pushMatrix();
+
+    GlStateManager.translate(3F * f5, 7F * f5, -3F * f5);
+    GlStateManager.rotate(0.7853982F * (180F / (float)Math.PI), 0, 1, 0);
+    GlStateManager.rotate(0.6981317F * (180F / (float)Math.PI), 0, 0, 1);
+
     Leg_2_Front_Left.render(f5);
+
+    GlStateManager.popMatrix();
+
+    GlStateManager.pushMatrix();
+
+    GlStateManager.translate(-3F * f5, 7F * f5, -3F * f5);
+    GlStateManager.rotate(-0.7853982F * (180F / (float)Math.PI), 0, 1, 0);
+    GlStateManager.rotate(-0.6981317F * (180F / (float)Math.PI), 0, 0, 1);
+
     Leg_2_Front_Right.render(f5);
+
+    GlStateManager.popMatrix();
+
+    GlStateManager.pushMatrix();
+
+    GlStateManager.translate(3F * f5, 7F * f5, 3F * f5);
+    GlStateManager.rotate(-0.7853982F * (180F / (float)Math.PI), 0, 1, 0);
+    GlStateManager.rotate(0.6981317F * (180F / (float)Math.PI), 0, 0, 1);
+
     Leg_2_Back_Left.render(f5);
+
+    GlStateManager.popMatrix();
+
+    GlStateManager.pushMatrix();
+
+    GlStateManager.translate(-3F * f5, 7F * f5, 3F * f5);
+    GlStateManager.rotate(0.7853982F * (180F / (float)Math.PI), 0, 1, 0);
+    GlStateManager.rotate(-0.6981317F * (180F / (float)Math.PI), 0, 0, 1);
+
     Leg_2_Back_Right.render(f5);
+
+    GlStateManager.popMatrix();
+
     Foot_Front_Left.render(f5);
     Foot_Front_Right.render(f5);
     Foot_Back_Right.render(f5);
@@ -287,14 +327,24 @@ public class ModelLabyrinthChestMimic extends ModelBase
     float leg3 = Math.abs(MathHelper.sin(limbSwing * 0.6662F + 0.0F) * 0.4F) * limbSwingAmount;
     float leg4 = Math.abs(MathHelper.sin(limbSwing * 0.6662F + (float)Math.PI) * 0.4F) * limbSwingAmount;
 
-    Leg_2_Front_Left.rotateAngleY = 0.7853982F;
-    Leg_2_Front_Left.rotateAngleZ = 0.6981317F;
+    Leg_2_Front_Left.rotateAngleY = 0.0F;
+    Leg_2_Front_Left.rotateAngleZ = 0.0F;
+
+    Leg_2_Front_Left.rotationPointX = 0.0F;
+    Leg_2_Front_Left.rotationPointY = 0.0F;
+    Leg_2_Front_Left.rotationPointZ = 0.0F;
+
     Foot_Front_Left.rotateAngleY = 0.7853982F;
     Leg_Front_Left.rotateAngleY = -0.7853982F;
     Leg_Joint_Front_Left.rotateAngleY = 0.7853982F;
 
-    Leg_2_Front_Right.rotateAngleZ = -0.6981317F;
-    Leg_2_Front_Right.rotateAngleY = -0.7853982F;
+    Leg_2_Front_Right.rotateAngleZ = 0.0F;
+    Leg_2_Front_Right.rotateAngleY = 0.0F;
+
+    Leg_2_Front_Right.rotationPointX = 0.0F;
+    Leg_2_Front_Right.rotationPointY = 0.0F;
+    Leg_2_Front_Right.rotationPointZ = 0.0F;
+
     Foot_Front_Right.rotateAngleY = -0.7853982F;
     Leg_Front_Right.rotateAngleY = 0.7853982F;
     Leg_Joint_Front_Right.rotateAngleY = -0.7853982F;
@@ -303,14 +353,23 @@ public class ModelLabyrinthChestMimic extends ModelBase
     Leg_Front_Right.rotateAngleZ = 0.0F;
     Leg_Joint_Front_Right.rotateAngleZ = 0.0F;
 
-    Leg_2_Back_Left.rotateAngleY = -0.7853982F;
-    Leg_2_Back_Left.rotateAngleZ = 0.6981317F;
+    Leg_2_Back_Left.rotateAngleY = 0.0F;
+    Leg_2_Back_Left.rotateAngleZ = 0.0F;
+
+    Leg_2_Back_Left.rotationPointX = 0.0F;
+    Leg_2_Back_Left.rotationPointY = 0.0F;
+    Leg_2_Back_Left.rotationPointZ = 0.0F;
+
     Foot_Back_Left.rotateAngleY = -0.7853982F;
     Leg_Back_Left.rotateAngleY = 0.7853982F;
     Leg_Joint_Back_Left.rotateAngleY = -0.7853982F;
 
-    Leg_2_Back_Right.rotateAngleY = 0.7853982F;
-    Leg_2_Back_Right.rotateAngleZ = -0.6981317F;
+    Leg_2_Back_Right.rotateAngleY = 0.0F;
+    Leg_2_Back_Right.rotateAngleZ = 0.0F;
+
+    Leg_2_Back_Right.rotationPointX = 0.0F;
+    Leg_2_Back_Right.rotationPointY = 0.0F;
+    Leg_2_Back_Right.rotationPointZ = 0.0F;
 
     Foot_Back_Right.rotateAngleZ = 0.0F;
     Leg_Back_Right.rotateAngleZ = 0.0F;
