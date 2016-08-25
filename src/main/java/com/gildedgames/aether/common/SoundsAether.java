@@ -75,6 +75,10 @@ public class SoundsAether
 
 	public static final SoundEvent battle_sentry_pounce = new SoundEvent(AetherCore.getResource("mob.battle_sentry.pounce"));
 
+	public static final SoundEvent moa_ambient = new SoundEvent(AetherCore.getResource("mob.moa.ambient"));
+
+	public static final SoundEvent moa_hurt = new SoundEvent(AetherCore.getResource("mob.moa.hurt"));
+
 	public static void preInit() {
 		registerSound("portal.glowstone.drone", glowstone_portal_hum);
 		registerSound("portal.labyrinth_totem.hum", labyrinth_totem_drone);
@@ -124,6 +128,9 @@ public class SoundsAether
 		registerSound("record.valkyrie", record_valkyrie);
 
 		registerSound("weapon.dart_shooter.fire", dart_shooter_fire);
+
+		registerSound("mob.moa.ambient", moa_ambient);
+		registerSound("mob.moa.hurt", moa_hurt);
 	}
 
 	private static void registerSound(String resource, SoundEvent event) {

@@ -292,5 +292,18 @@
 			"aether:mob/battle_sentry/pounce2",
 			"aether:mob/battle_sentry/pounce3"
 		]
+	},
+	"mob.moa.ambient": {
+		"category": "neutral",
+		"sounds": [
+			"aether:mob/moa/say1",
+			"aether:mob/moa/say2"
+		]
+	},
+	"mob.moa.hurt": {
+		"category": "neutral",
+		"sounds": [
+			"aether:mob/moa/hurt1"
+		]
 	}
 }

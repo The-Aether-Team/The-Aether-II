@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.living.mounts;
 
+import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.genes.util.GeneUtil;
 import com.gildedgames.aether.common.entities.ai.moa.*;
 import com.gildedgames.aether.common.genes.moa.MoaGenePool;
@@ -368,6 +369,24 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		stackGenes.transformFromParents(this.getGenePool().getStorage().getSeed(), this.getGenePool().getStorage().getFatherSeed(), this.getGenePool().getStorage().getMotherSeed());
 
 		return moaEgg;
+	}
+
+	@Override
+	protected net.minecraft.util.SoundEvent getAmbientSound()
+	{
+		return SoundsAether.moa_ambient;
+	}
+
+	@Override
+	protected net.minecraft.util.SoundEvent getHurtSound()
+	{
+		return SoundsAether.moa_hurt;
+	}
+
+	@Override
+	protected net.minecraft.util.SoundEvent getDeathSound()
+	{
+		return SoundsAether.moa_hurt;
 	}
 
 }
