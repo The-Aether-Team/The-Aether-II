@@ -87,6 +87,7 @@ public class ChunkProviderSliderLabyrinth implements IChunkGenerator
 
 		Chunk chunk = new Chunk(this.world, primer, chunkX, chunkZ);
 
+		chunk.generateSkylightMap();
 		chunk.resetRelightChecks();
 
 		return chunk;

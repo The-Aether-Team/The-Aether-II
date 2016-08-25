@@ -13,12 +13,16 @@ import com.gildedgames.util.modules.instances.InstanceModule;
 import com.gildedgames.util.modules.instances.PlayerInstances;
 import com.gildedgames.util.core.util.BlockPosDimension;
 import com.gildedgames.util.modules.instances.networking.packet.PacketRegisterInstance;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -102,4 +106,11 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 			handler.teleportToInst(player, inst);
 		}
 	}
+
+	@Override
+	public ItemStack getPickedStack(World world, BlockPos pos, IBlockState state)
+	{
+		return new ItemStack(BlocksAether.labyrinth_totem);
+	}
+
 }

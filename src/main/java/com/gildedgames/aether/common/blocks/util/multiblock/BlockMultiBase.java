@@ -60,4 +60,20 @@ public abstract class BlockMultiBase extends BlockContainer
 
 	@Override
 	public abstract TileEntity createNewTileEntity(World worldIn, int meta);
+
+	@Override
+	public ItemStack getItem(World world, BlockPos pos, IBlockState state)
+	{
+		TileEntity te = world.getTileEntity(pos);
+
+		if (te instanceof TileEntityMultiblockInterface)
+		{
+			TileEntityMultiblockInterface controller = (TileEntityMultiblockInterface) te;
+
+			return controller.getPickedStack(world, pos, state);
+		}
+
+		return super.getItem(world, pos, state);
+	}
+
 }

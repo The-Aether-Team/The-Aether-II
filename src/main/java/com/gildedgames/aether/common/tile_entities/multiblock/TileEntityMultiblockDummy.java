@@ -1,13 +1,19 @@
 package com.gildedgames.aether.common.tile_entities.multiblock;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.tile_entities.util.TileEntitySynced;
 import com.gildedgames.util.core.nbt.NBTHelper;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
-public class TileEntityMultiblockDummy extends TileEntity implements TileEntityMultiblockInterface
+public class TileEntityMultiblockDummy extends TileEntitySynced implements TileEntityMultiblockInterface
 {
 	private BlockPos controllerPos;
 
@@ -41,6 +47,23 @@ public class TileEntityMultiblockDummy extends TileEntity implements TileEntityM
 		}
 	}
 
+	@Override
+	public ItemStack getPickedStack(World world, BlockPos pos, IBlockState state)
+	{
+		TileEntity entity = this.worldObj.getTileEntity(this.controllerPos);
+
+		if (entity instanceof TileEntityMultiblockInterface)
+		{
+			return ((TileEntityMultiblockInterface) entity).getPickedStack(world, pos, state);
+		}
+		else
+		{
+			AetherCore.LOGGER.warn("TileEntityMultiblockDummy at " + this.pos.toString() + ", is missing it's linked controller at " + this.controllerPos.toString());
+		}
+
+		return null;
+	}
+
 	public void linkController(BlockPos controllerPos)
 	{
 		this.controllerPos = controllerPos;
@@ -69,4 +92,5 @@ public class TileEntityMultiblockDummy extends TileEntity implements TileEntityM
 
 		return compound;
 	}
+
 }

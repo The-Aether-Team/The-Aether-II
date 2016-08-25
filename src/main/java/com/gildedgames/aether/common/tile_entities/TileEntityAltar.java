@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.tile_entities.util.TileEntitySynced;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -17,7 +18,7 @@ import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityAltar extends TileEntity implements ITickable
+public class TileEntityAltar extends TileEntitySynced implements ITickable
 {
 	@SideOnly(Side.CLIENT)
 	public double animationTicks, prevAnimationTicks;
@@ -46,7 +47,7 @@ public class TileEntityAltar extends TileEntity implements ITickable
 	{
 		this.stackOnAltar = stack;
 
-		this.sendUpdates();
+		this.sync();
 	}
 
 	public int getAmbrosiumCount()
@@ -58,7 +59,7 @@ public class TileEntityAltar extends TileEntity implements ITickable
 	{
 		this.ambrosiumCount = count;
 
-		this.sendUpdates();
+		this.sync();
 	}
 
 	public void removeAmbrosiumShard()
@@ -158,37 +159,4 @@ public class TileEntityAltar extends TileEntity implements ITickable
 		this.ambrosiumCount = compound.getInteger("AmbrosiumCount");
 	}
 
-	@Override
-	public NBTTagCompound getUpdateTag()
-	{
-		NBTTagCompound tag = super.getUpdateTag();
-
-		this.writeToNBT(tag);
-
-		return tag;
-	}
-
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket()
-	{
-		NBTTagCompound compound = new NBTTagCompound();
-		this.writeToNBT(compound);
-
-		return new SPacketUpdateTileEntity(this.pos, 1, compound);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager networkManager, SPacketUpdateTileEntity packet)
-	{
-		this.readFromNBT(packet.getNbtCompound());
-	}
-
-	private void sendUpdates()
-	{
-		IBlockState state = this.worldObj.getBlockState(this.pos);
-
-		this.worldObj.notifyBlockUpdate(this.pos, state, state, 3);
-
-		this.markDirty();
-	}
 }

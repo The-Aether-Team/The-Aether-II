@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.util.MoaNest;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
+import com.gildedgames.aether.common.tile_entities.util.TileEntitySynced;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -14,7 +15,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 
-public class TileEntityMoaEgg extends TileEntity implements ITickable
+public class TileEntityMoaEgg extends TileEntitySynced implements ITickable
 {
 
 	public int ticksExisted, secondsUntilHatch = -1;
@@ -152,39 +153,6 @@ public class TileEntityMoaEgg extends TileEntity implements ITickable
 		this.familyNest.writeToNBT(nbt);
 
 		return nbt;
-	}
-
-	@Override
-	public NBTTagCompound getUpdateTag()
-	{
-		NBTTagCompound tag = super.getUpdateTag();
-
-		this.writeToNBT(tag);
-
-		return tag;
-	}
-
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket()
-	{
-		NBTTagCompound compound = this.getUpdateTag();
-
-		return new SPacketUpdateTileEntity(this.pos, 1, compound);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager networkManager, SPacketUpdateTileEntity packet)
-	{
-		this.readFromNBT(packet.getNbtCompound());
-	}
-
-	public void sendUpdates()
-	{
-		IBlockState state = this.worldObj.getBlockState(this.pos);
-
-		this.worldObj.notifyBlockUpdate(this.pos, state, state, 3);
-
-		this.markDirty();
 	}
 
 }
