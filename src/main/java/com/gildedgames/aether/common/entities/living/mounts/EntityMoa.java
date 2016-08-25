@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.living.mounts;
 
-import com.gildedgames.aether.api.genes.GeneUtil;
+import com.gildedgames.aether.common.genes.util.GeneUtil;
 import com.gildedgames.aether.common.entities.ai.moa.*;
-import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
+import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.util.*;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;

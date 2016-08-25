@@ -1,9 +1,9 @@
-package com.gildedgames.aether.api.genes.util;
+package com.gildedgames.aether.common.genes.util;
 
 import com.gildedgames.aether.api.genes.IGeneStorage;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class SimpleGeneStorage implements IGeneStorage
+public class SimpleGeneStorage implements IGeneStorage<NBTTagCompound, NBTTagCompound>
 {
 
 	private int seed, fatherSeed, motherSeed;

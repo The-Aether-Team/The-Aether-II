@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.entities.genes.moa;
+package com.gildedgames.aether.common.genes.moa;
 
 import com.gildedgames.aether.api.genes.Gene;
 import com.gildedgames.aether.api.genes.Inheritance;

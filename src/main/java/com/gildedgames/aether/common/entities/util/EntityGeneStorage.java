@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.entities.util;
 import com.gildedgames.aether.api.genes.IGeneStorage;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class EntityGeneStorage implements IGeneStorage
+public class EntityGeneStorage implements IGeneStorage<NBTTagCompound, NBTTagCompound>
 {
 
 	private EntityGeneticAnimal entity;
@@ -61,6 +61,7 @@ public class EntityGeneStorage implements IGeneStorage
 		this.entity.setShouldRetransform(flag);
 	}
 
+	@Override
 	public void write(NBTTagCompound tag)
 	{
 		tag.setInteger("seed", this.getSeed());
@@ -68,6 +69,7 @@ public class EntityGeneStorage implements IGeneStorage
 		tag.setInteger("motherSeed", this.getMotherSeed());
 	}
 
+	@Override
 	public void read(NBTTagCompound tag)
 	{
 		this.setSeed(tag.getInteger("seed"));

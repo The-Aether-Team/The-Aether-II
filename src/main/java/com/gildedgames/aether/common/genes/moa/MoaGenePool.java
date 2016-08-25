@@ -1,11 +1,11 @@
-package com.gildedgames.aether.common.entities.genes.moa;
+package com.gildedgames.aether.common.genes.moa;
 
-import com.gildedgames.aether.api.genes.GeneUtil;
+import com.gildedgames.aether.common.genes.util.GeneUtil;
 import com.gildedgames.aether.api.genes.GeneRegion;
 import com.gildedgames.aether.api.genes.IGeneStorage;
-import com.gildedgames.aether.api.genes.util.DataGene;
-import com.gildedgames.aether.api.genes.util.GenePool;
-import com.gildedgames.aether.api.genes.util.SimpleGeneStorage;
+import com.gildedgames.aether.common.genes.util.DataGene;
+import com.gildedgames.aether.common.genes.util.GenePool;
+import com.gildedgames.aether.common.genes.util.SimpleGeneStorage;
 import com.gildedgames.util.io_manager.io.NBT;
 import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,7 +14,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.Random;
 
-public class MoaGenePool extends GenePool implements NBT
+public class MoaGenePool extends GenePool<NBTTagCompound, NBTTagCompound> implements NBT
 {
 
 	private GeneRegion<DataGene<Color>> keratin, feathers, eyes;
@@ -28,7 +28,7 @@ public class MoaGenePool extends GenePool implements NBT
 		this(new SimpleGeneStorage());
 	}
 
-	public MoaGenePool(IGeneStorage storage)
+	public MoaGenePool(IGeneStorage<NBTTagCompound, NBTTagCompound> storage)
 	{
 		super(storage);
 	}

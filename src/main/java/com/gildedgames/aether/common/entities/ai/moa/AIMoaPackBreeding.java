@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.entities.ai.moa;
 
-import com.gildedgames.aether.api.genes.GeneUtil;
+import com.gildedgames.aether.common.genes.util.GeneUtil;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockWovenSticks;
-import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
+import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
 import com.gildedgames.aether.common.entities.util.EntityGroupMember;
