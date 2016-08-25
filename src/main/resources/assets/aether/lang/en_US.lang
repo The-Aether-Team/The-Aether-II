@@ -329,6 +329,7 @@ moa.marks.ladder=Zipline
 moa.marks.lines=Lined
 
 # Item Rarities
+item.rarity.basic.name=§7§oBasic
 item.rarity.common.name=§7§oCommon
 item.rarity.rare.name=§b§oRare
 item.rarity.epic.name=§5§oEpic

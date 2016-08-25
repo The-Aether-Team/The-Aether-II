@@ -26,7 +26,7 @@ public class ItemPropertiesImpl implements IItemPropertiesCapability
 	@Override
 	public ItemRarity getRarity()
 	{
-		return this.properties == null ? ItemRarity.NONE : this.properties.getRarity();
+		return this.properties == null ? ItemRarity.BASIC : this.properties.getRarity();
 	}
 
 	@Override

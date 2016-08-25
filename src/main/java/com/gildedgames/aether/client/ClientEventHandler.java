@@ -34,6 +34,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ClientEventHandler
@@ -47,16 +48,22 @@ public class ClientEventHandler
 
 		if (stack != null)
 		{
+			List<String> oldTooltip = new LinkedList<>(event.getToolTip());
+			oldTooltip.remove(0);
+
+			String name = event.getToolTip().get(0);
+
+			event.getToolTip().clear();
+
+			event.getToolTip().add(name);
+
 			if (stack.hasCapability(AetherCapabilities.ITEM_PROPERTIES, null))
 			{
 				IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
 
 				if (props != null)
 				{
-					if (props.getRarity() != ItemRarity.NONE)
-					{
-						event.getToolTip().add(I18n.format(props.getRarity().getUnlocalizedName()));
-					}
+					event.getToolTip().add(I18n.format(props.getRarity().getUnlocalizedName()));
 				}
 			}
 
@@ -103,15 +110,14 @@ public class ClientEventHandler
 				{
 					if (props.isEquippable())
 					{
-						if (props.getRarity() != ItemRarity.NONE)
-						{
-							event.getToolTip().add("");
-						}
+						event.getToolTip().add("");
 
 						event.getToolTip().add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + I18n.format(props.getEquipmentType().getUnlocalizedName()));
 					}
 				}
 			}
+
+			event.getToolTip().addAll(oldTooltip);
 		}
 	}
 
