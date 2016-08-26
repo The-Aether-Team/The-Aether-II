@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.crafting;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipe;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.crafting.recipes.RecipeLeatherGlovesDyes;
 import com.gildedgames.aether.common.crafting.recipes.altar.AltarEnchantRecipe;
 import com.gildedgames.aether.common.crafting.recipes.altar.AltarRepairRecipe;
@@ -146,9 +147,9 @@ public class RecipesAether implements IAltarRecipeRegistry
 		registerShapedRecipe(new ItemStack(BlocksAether.holystone_wall, 6), "XXX", "XXX",
 				'X', new ItemStack(BlocksAether.holystone));
         registerShapedRecipe(new ItemStack(BlocksAether.mossy_holystone_wall, 6), "XXX", "XXX",
-                'X', new ItemStack(BlocksAether.holystone));
+                'X', new ItemStack(BlocksAether.holystone, 1, BlockHolystone.MOSSY_HOLYSTONE.getMeta()));
         registerShapedRecipe(new ItemStack(BlocksAether.holystone_brick_wall, 6), "XXX", "XXX",
-                'X', new ItemStack(BlocksAether.holystone));
+                'X', new ItemStack(BlocksAether.holystone_brick));
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_log_wall, 6), "XXX", "XXX",
 				'X', new ItemStack(BlocksAether.skyroot_log));
 		registerShapedRecipe(new ItemStack(BlocksAether.icestone_wall, 6), "XXX", "XXX",
@@ -278,10 +279,10 @@ public class RecipesAether implements IAltarRecipeRegistry
 		// Stairs
 
 		registerShapedRecipe(new ItemStack(BlocksAether.holystone_stairs, 4), "U  ", "UU ", "UUU",
-				'U', new ItemStack(BlocksAether.holystone, 1, 1));
+				'U', new ItemStack(BlocksAether.holystone));
 
 		registerShapedRecipe(new ItemStack(BlocksAether.mossy_holystone_stairs, 4), "U  ", "UU ", "UUU",
-				'U', new ItemStack(BlocksAether.holystone, 1, 3));
+				'U', new ItemStack(BlocksAether.holystone, 1, BlockHolystone.MOSSY_HOLYSTONE.getMeta()));
 
 		registerShapedRecipe(new ItemStack(BlocksAether.icestone_brick_stairs, 4), "U  ", "UU ", "UUU",
 				'U', ItemsAether.icestone);
