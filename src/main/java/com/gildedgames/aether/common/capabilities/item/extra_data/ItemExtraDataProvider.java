@@ -20,6 +20,11 @@ public class ItemExtraDataProvider implements ICapabilitySerializable<NBTBase>
 
 	}
 
+	public ItemExtraDataProvider(IItemExtraDataCapability capability)
+	{
+		this.capability = capability;
+	}
+
 	private IItemExtraDataCapability fetchCapability()
 	{
 		if (this.capability == null)

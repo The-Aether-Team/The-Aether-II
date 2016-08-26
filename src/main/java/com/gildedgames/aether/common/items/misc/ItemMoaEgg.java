@@ -2,6 +2,8 @@ package com.gildedgames.aether.common.items.misc;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.items.extra_data.IItemExtraDataCapability;
+import com.gildedgames.aether.common.capabilities.item.extra_data.ItemExtraDataImpl;
+import com.gildedgames.aether.common.capabilities.item.extra_data.ItemExtraDataProvider;
 import com.gildedgames.aether.common.genes.util.GeneUtil;
 import com.gildedgames.aether.common.genes.util.SimpleGeneStorage;
 import com.gildedgames.aether.common.blocks.BlocksAether;
@@ -16,6 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -177,6 +180,12 @@ public class ItemMoaEgg extends Item
 	public boolean getShareTag()
 	{
 		return true;
+	}
+
+	@Override
+	public net.minecraftforge.common.capabilities.ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt)
+	{
+		return super.initCapabilities(stack, nbt);
 	}
 
 	private static class ModelProperty implements IItemPropertyGetter

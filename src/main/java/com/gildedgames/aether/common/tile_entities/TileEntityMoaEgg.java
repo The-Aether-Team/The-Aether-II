@@ -35,6 +35,8 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickable
 
 	public MoaGenePool getGenePool()
 	{
+		this.sync();
+
 		return this.genePool;
 	}
 

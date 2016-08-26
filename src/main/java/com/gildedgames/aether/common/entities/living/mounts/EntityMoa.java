@@ -79,7 +79,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	{
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new AIPanicPack(this, 0.55F));
-		this.tasks.addTask(2, new EntityAIWander(this, 0.50F));
+		this.tasks.addTask(3, new EntityAIWander(this, 0.50F));
 		this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(5, new EntityAILookIdle(this));
 		this.tasks.addTask(6, new EntityAIMate(this, 0.65F));
@@ -344,7 +344,10 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		{
 			EntityMoa mate = (EntityMoa) matingAnimal;
 
-			this.tasks.addTask(7, new AIMoaLayEgg(this, 0.35F));
+			if (this.getGender() == AnimalGender.FEMALE)
+			{
+				this.tasks.addTask(2, new AIMoaLayEgg(this, this.getSeed(), mate.getSeed(), 0.35F));
+			}
 
 			this.setGrowingAge(6000);
 			mate.setGrowingAge(6000);
@@ -363,6 +366,8 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	public ItemStack getPickedResult(RayTraceResult target)
 	{
 		ItemStack moaEgg = new ItemStack(ItemsAether.moa_egg);
+
+		System.out.println(this.worldObj.isRemote);
 
 		MoaGenePool stackGenes = ItemMoaEgg.getGenePool(moaEgg);
 

@@ -119,7 +119,7 @@ public class AIMoaPackBreeding extends EntityAIBase
 				MoaGenePool teGenes = egg.getGenePool();
 				MoaGenePool entityGenes = this.moa.getGenePool();
 
-				teGenes.transformFromParents(GeneUtil.getRandomSeed(this.moa.getEntityWorld()), entityGenes.getStorage().getFatherSeed(), entityGenes.getStorage().getMotherSeed());
+				teGenes.transformFromParents(entityGenes.getStorage().getSeed(), entityGenes.getStorage().getFatherSeed(), entityGenes.getStorage().getMotherSeed());
 
 				egg.setFamilyNest(this.moa.getFamilyNest());
 

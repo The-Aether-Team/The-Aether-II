@@ -18,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -136,10 +137,12 @@ public class BlockMoaEgg extends BlockContainer
 	}
 
 	@Override
-	public ItemStack getItem(World world, BlockPos pos, IBlockState state)
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
 	{
-		ItemStack eggStack = new ItemStack(ItemsAether.moa_egg, 1, 0);
+		ItemStack eggStack = new ItemStack(ItemsAether.moa_egg);
 		TileEntityMoaEgg egg = (TileEntityMoaEgg) world.getTileEntity(pos);
+
+		System.out.println(world.isRemote);
 
 		if (egg != null)
 		{

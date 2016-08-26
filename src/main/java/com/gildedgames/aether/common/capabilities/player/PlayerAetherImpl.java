@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstanc
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
+import com.gildedgames.aether.api.capabilites.items.extra_data.IItemExtraDataCapability;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
@@ -182,6 +183,8 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		}
 	}
 
+
+
 	private void sendEquipmentChanges(Set<PendingItemChange> dirties)
 	{
 		List<Pair<Integer, ItemStack>> updates = new ArrayList<>();
@@ -202,42 +205,47 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 
 			this.sendEquipmentChanges(changes);
 
-			IEntityEffectsCapability effects = EntityEffects.get(this.getPlayer());
-
 			for (PendingItemChange change : changes)
 			{
 				ItemStack beforeStack = change.getBefore();
 
-				if (beforeStack != null && beforeStack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
-				{
-					IItemEffectsCapability itemEffects = beforeStack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
-
-					for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
-					{
-						EntityEffectProcessor processor = effect.getLeft();
-						EntityEffectInstance instance = effect.getRight();
-
-						effects.removeInstance(processor, instance);
-					}
-				}
-
-				ItemStack afterStack = change.getAfter();
-
-				if (afterStack != null && afterStack != beforeStack && afterStack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
-				{
-					IItemEffectsCapability itemEffects = afterStack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
-
-					for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
-					{
-						EntityEffectProcessor processor = effect.getLeft();
-						EntityEffectInstance instance = effect.getRight();
-
-						effects.addInstance(processor, instance);
-					}
-				}
+				this.handleEffectChanges(beforeStack, change);
 			}
 
 			changes.clear();
+		}
+	}
+
+	private void handleEffectChanges(ItemStack before, PendingItemChange change)
+	{
+		IEntityEffectsCapability effects = EntityEffects.get(this.getPlayer());
+
+		if (before != null && before.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
+		{
+			IItemEffectsCapability itemEffects = before.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
+
+			for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
+			{
+				EntityEffectProcessor processor = effect.getLeft();
+				EntityEffectInstance instance = effect.getRight();
+
+				effects.removeInstance(processor, instance);
+			}
+		}
+
+		ItemStack afterStack = change.getAfter();
+
+		if (afterStack != null && afterStack != before && afterStack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
+		{
+			IItemEffectsCapability itemEffects = afterStack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
+
+			for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
+			{
+				EntityEffectProcessor processor = effect.getLeft();
+				EntityEffectInstance instance = effect.getRight();
+
+				effects.addInstance(processor, instance);
+			}
 		}
 	}
 

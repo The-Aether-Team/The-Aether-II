@@ -10,7 +10,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+
+import static sun.audio.AudioPlayer.player;
 
 public abstract class BlockMultiBase extends BlockContainer
 {
@@ -62,7 +65,7 @@ public abstract class BlockMultiBase extends BlockContainer
 	public abstract TileEntity createNewTileEntity(World worldIn, int meta);
 
 	@Override
-	public ItemStack getItem(World world, BlockPos pos, IBlockState state)
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
 	{
 		TileEntity te = world.getTileEntity(pos);
 
@@ -73,7 +76,7 @@ public abstract class BlockMultiBase extends BlockContainer
 			return controller.getPickedStack(world, pos, state);
 		}
 
-		return super.getItem(world, pos, state);
+		return super.getPickBlock(state, target, world, pos, player);
 	}
 
 }
