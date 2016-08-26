@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks.construction;
 
 import com.gildedgames.aether.client.renderer.particles.ParticleAetherPortal;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.CommonEvents;
 import com.gildedgames.aether.common.DimensionsAether;
 import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
@@ -24,6 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -31,6 +33,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.Random;
+
+import static sun.audio.AudioPlayer.player;
 
 public class BlockAetherPortal extends BlockBreakable
 {
@@ -158,14 +162,13 @@ public class BlockAetherPortal extends BlockBreakable
 	@Override
 	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
-		if (entity instanceof EntityPlayerMP)
+		if (world instanceof WorldServer)
 		{
-			final EntityPlayerMP player = (EntityPlayerMP) entity;
+			WorldServer worldServer = (WorldServer)world;
 
-			final PlayerList playerList = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList();
+			final int transferToID = entity.worldObj.provider.getDimensionType() == DimensionsAether.AETHER ? 0 : AetherCore.CONFIG.getAetherDimID();
 
-			final int transferToID = player.worldObj.provider.getDimensionType() == DimensionsAether.AETHER ? 0 : AetherCore.CONFIG.getAetherDimID();
-			playerList.transferPlayerToDimension(player, transferToID, AetherCore.TELEPORTER);
+			CommonEvents.teleportEntity(entity, worldServer, AetherCore.TELEPORTER, transferToID);
 		}
 	}
 

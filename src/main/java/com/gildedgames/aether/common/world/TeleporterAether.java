@@ -188,14 +188,13 @@ public class TeleporterAether extends Teleporter implements NBT
 			{
 				final EntityPlayerMP player = (EntityPlayerMP) entity;
 				final World world = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(linkedPortal.dimId());
-				player.setPositionAndUpdate(linkedPortal.getX() + 1.5D, linkedPortal.getY(),
-						linkedPortal.getZ() + 1.5D);
+				player.setPositionAndUpdate(linkedPortal.getX() + 1.5D, linkedPortal.getY(), linkedPortal.getZ() + 1.5D);
 
-				this.worldServerInstance.updateEntityWithOptionalForce(player, true);
+				//this.worldServerInstance.updateEntityWithOptionalForce(player, true);
 
 				while (!world.getCollisionBoxes(player, player.getEntityBoundingBox()).isEmpty())
 				{
-					player.setPosition(player.posX, player.posY + 0.2D, player.posZ);
+					player.setPositionAndUpdate(player.posX, player.posY + 0.2D, player.posZ);
 				}
 			}
 
@@ -244,8 +243,7 @@ public class TeleporterAether extends Teleporter implements NBT
 
 		while (attempts < maxAttempts)
 		{
-			final EnumFacing outerPosFacing = entity.worldObj.rand.nextBoolean() ? outerDirection.rotateY()
-					: outerDirection;
+			final EnumFacing outerPosFacing = entity.worldObj.rand.nextBoolean() ? outerDirection.rotateY() : outerDirection;
 
 			chunkX = outerPosition.chunkXPos + outerPosFacing.getFrontOffsetX();
 			chunkZ = outerPosition.chunkZPos + outerPosFacing.getFrontOffsetZ();
@@ -446,7 +444,9 @@ public class TeleporterAether extends Teleporter implements NBT
 	public void write(NBTTagCompound output)
 	{
 		output.setInteger("amtPortals", this.portalPairs.size());
+
 		int i = 0;
+
 		for (final Entry<BlockPosDimension, BlockPosDimension> entry : this.portalPairs.entrySet())
 		{
 			final BlockPosDimension pos1 = entry.getKey();
@@ -467,7 +467,6 @@ public class TeleporterAether extends Teleporter implements NBT
 	@Override
 	public void read(NBTTagCompound input)
 	{
-		/**TODO: Looks like this is never called**/
 		final int amount = input.getInteger("amtPortals");
 
 		this.portalPairs.clear();

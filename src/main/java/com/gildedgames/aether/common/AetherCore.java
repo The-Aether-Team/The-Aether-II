@@ -11,10 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -59,6 +56,12 @@ public class AetherCore implements IAetherServices
 		MinecraftForge.EVENT_BUS.register(AetherCore.CONFIG);
 
 		AetherCore.PROXY.preInit(event);
+	}
+
+	@EventHandler
+	public void onServerStopping(FMLServerStoppingEvent event)
+	{
+		DimensionsAether.onServerStopping(event);
 	}
 
 	@EventHandler

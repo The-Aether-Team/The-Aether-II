@@ -255,7 +255,6 @@ public class PlayerAetherEvents
 
 			EntityPlayerMP mp = (EntityPlayerMP)event.player;
 
-			PlayerList playerList = mp.getServer().getPlayerList();
 			WorldServer toWorld = DimensionManager.getWorld(0);
 
 			if (bedPos != null)
@@ -267,7 +266,7 @@ public class PlayerAetherEvents
 			{
 				Teleporter teleporter = new TeleporterGeneric(toWorld);
 
-				CommonEvents.teleportEntity(playerList, mp, toWorld, teleporter);
+				CommonEvents.teleportEntity(mp, toWorld, teleporter, 0);
 
 				BlockPos pos = toWorld.provider.getRandomizedSpawnPoint();
 

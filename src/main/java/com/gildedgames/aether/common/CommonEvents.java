@@ -41,6 +41,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -170,8 +171,6 @@ public class CommonEvents
 
 		MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 
-		PlayerList playerList = server.getPlayerList();
-
 		WorldServer toWorld = DimensionManager.getWorld(0);
 
 		Teleporter teleporter = new TeleporterGeneric(toWorld);
@@ -185,16 +184,21 @@ public class CommonEvents
 			entity.startRiding(null, true);
 
 			// Teleports entity first, then what it's riding
-			Entity teleportedEntity = CommonEvents.teleportEntity(playerList, entity, toWorld, teleporter);
+			Entity teleportedEntity = CommonEvents.teleportEntity(entity, toWorld, teleporter, 0);
 
-			Entity teleportedMount= CommonEvents.teleportEntity(playerList, mount, toWorld, teleporter);
+			Entity teleportedMount = CommonEvents.teleportEntity(mount, toWorld, teleporter, 0);
+
+			teleportedEntity.setPositionAndUpdate(entity.posX, 200 + entity.posY, entity.posZ);
+			teleportedMount.setPositionAndUpdate(entity.posX, 200 + entity.posY, entity.posZ);
 
 			// Re-mount what it was previously riding
 			teleportedEntity.startRiding(teleportedMount, true);
 		}
 		else
 		{
-			CommonEvents.teleportEntity(playerList, entity, toWorld, teleporter);
+			Entity newEntity = CommonEvents.teleportEntity(entity, toWorld, teleporter, 0);
+
+			newEntity.setPositionAndUpdate(entity.posX, 200 + entity.posY, entity.posZ);
 		}
 	}
 
@@ -204,28 +208,35 @@ public class CommonEvents
 	 *
 	 * @return A new entity if {@param entity} wasn't a player, or the same entity if it was a player
 	 */
-	public static Entity teleportEntity(PlayerList playerList, Entity entity, WorldServer toWorld, Teleporter teleporter)
+	public static Entity teleportEntity(Entity entity, WorldServer toWorld, Teleporter teleporter, int dimension)
 	{
 		if (entity == null)
 		{
 			return null;
 		}
 
-		if (entity instanceof EntityPlayer)
+		if (entity instanceof EntityPlayerMP)
 		{
+			EntityPlayerMP player = (EntityPlayerMP)entity;
+
+			final PlayerList playerList = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList();
+
 			// Players require special magic to be teleported correctly, and are not duplicated
-			playerList.transferPlayerToDimension((EntityPlayerMP) entity, 0, teleporter);
-			entity.setPositionAndUpdate(entity.posX, 200 + entity.posY, entity.posZ);
+			playerList.transferPlayerToDimension((EntityPlayerMP) entity, dimension, teleporter);
+			player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, 0, 0);
+
+			/** Strange flag that needs to be set to prevent the NetHandlerPlayServer instance from resetting your position **/
+			ObfuscationReflectionHelper.setPrivateValue(EntityPlayerMP.class, player, true, "field_184851_cj", "invulnerableDimensionChange");
 
 			return entity;
 		}
 		else
 		{
-			Entity newEntity = entity.changeDimension(toWorld.provider.getDimension());
+			Entity newEntity = entity.changeDimension(dimension);
 
 			// Forces the entity to be sent to clients as early as possible
 			newEntity.forceSpawn = true;
-			newEntity.setPositionAndUpdate(entity.posX, 200 + entity.posY, entity.posZ);
+			newEntity.setPositionAndUpdate(entity.posX, entity.posY, entity.posZ);
 
 			return newEntity;
 		}
