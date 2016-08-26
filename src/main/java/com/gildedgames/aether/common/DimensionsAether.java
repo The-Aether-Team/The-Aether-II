@@ -49,13 +49,6 @@ public class DimensionsAether
 		if (event.getWorld().provider.getDimensionType() == DimensionsAether.AETHER)
 		{
 			AetherCore.TELEPORTER = new TeleporterAether((WorldServer) event.getWorld());
-
-			NBTTagCompound tag = GGHelper.readNBTFromFile("//data//teleporter.dat");
-
-			if (tag != null)
-			{
-				AetherCore.TELEPORTER.read(tag);
-			}
 		}
 	}
 

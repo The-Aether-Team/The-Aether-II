@@ -58,7 +58,7 @@ public class TeleporterAether extends Teleporter implements NBT
 
 	private World previousWorld;
 
-	public boolean createPortal = true;
+	public boolean createPortal = true, hasLoadedPortalPairs = false;
 
 	public TeleporterAether(WorldServer world)
 	{
@@ -93,6 +93,18 @@ public class TeleporterAether extends Teleporter implements NBT
 			{
 				this.worldServerInstance.customTeleporters.add(this);
 			}
+		}
+
+		if (!this.hasLoadedPortalPairs)
+		{
+			NBTTagCompound tag = GGHelper.readNBTFromFile("//data//teleporter.dat");
+
+			if (tag != null)
+			{
+				this.read(tag);
+			}
+
+			this.hasLoadedPortalPairs = true;
 		}
 
 		entity.setWorld(this.worldServerInstance);

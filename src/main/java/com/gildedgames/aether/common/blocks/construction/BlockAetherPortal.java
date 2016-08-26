@@ -14,6 +14,7 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.server.management.PlayerList;
@@ -162,7 +163,7 @@ public class BlockAetherPortal extends BlockBreakable
 	@Override
 	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
-		if (world instanceof WorldServer)
+		if (world instanceof WorldServer && entity instanceof EntityPlayer)
 		{
 			WorldServer worldServer = (WorldServer)world;
 
