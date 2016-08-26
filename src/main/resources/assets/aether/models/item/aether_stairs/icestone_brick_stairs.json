@@ -1,0 +1,8 @@
+{
+	"parent": "block/stairs",
+	"textures": {
+		"bottom": "aether:blocks/icestone_bricks",
+		"side": "aether:blocks/icestone_bricks",
+		"top": "aether:blocks/icestone_bricks"
+	}
+}

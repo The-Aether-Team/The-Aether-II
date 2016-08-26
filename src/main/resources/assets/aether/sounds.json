@@ -305,5 +305,11 @@
 		"sounds": [
 			"aether:mob/moa/hurt1"
 		]
+	},
+	"mob.chest_mimic.awake": {
+		"category": "neutral",
+		"sounds": [
+			"aether:mob/chest_mimic/awake"
+		]
 	}
 }

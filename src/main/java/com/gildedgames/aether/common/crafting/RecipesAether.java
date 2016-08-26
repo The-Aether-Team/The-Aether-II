@@ -173,7 +173,7 @@ public class RecipesAether implements IAltarRecipeRegistry
 		registerShapedRecipe(new ItemStack(BlocksAether.icestone_slab, 6), "XXX",
 				'X', new ItemStack(BlocksAether.icestone_bricks));
 		registerShapedRecipe(new ItemStack(BlocksAether.labyrinth_capstone_slab, 6), "XXX",
-				'X', new ItemStack(BlocksAether.carved_capstone));
+				'X', new ItemStack(BlocksAether.labyrinth_capstone));
 		registerShapedRecipe(new ItemStack(BlocksAether.labyrinth_wall_slab, 6), "XXX",
 				'X', new ItemStack(BlocksAether.labyrinth_wall));
 
@@ -274,6 +274,32 @@ public class RecipesAether implements IAltarRecipeRegistry
 		registerShapedRecipe(new ItemStack(ItemsAether.gravitite_shield), "YXY", "YYY", " Y ",
 				'X', new ItemStack(ItemsAether.arkenium_strip),
 				'Y', new ItemStack(BlocksAether.enchanted_gravitite));
+
+		// Stairs
+
+		registerShapedRecipe(new ItemStack(BlocksAether.holystone_stairs, 4), "U  ", "UU ", "UUU",
+				'U', new ItemStack(BlocksAether.holystone, 1, 1));
+
+		registerShapedRecipe(new ItemStack(BlocksAether.mossy_holystone_stairs, 4), "U  ", "UU ", "UUU",
+				'U', new ItemStack(BlocksAether.holystone, 1, 3));
+
+		registerShapedRecipe(new ItemStack(BlocksAether.icestone_brick_stairs, 4), "U  ", "UU ", "UUU",
+				'U', ItemsAether.icestone);
+
+		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_stairs, 4), "U  ", "UU ", "UUU",
+				'U', BlocksAether.skyroot_planks);
+
+		registerShapedRecipe(new ItemStack(BlocksAether.carved_stone_stairs, 4), "U  ", "UU ", "UUU",
+				'U', BlocksAether.carved_stone);
+
+		registerShapedRecipe(new ItemStack(BlocksAether.sentry_stone_stairs, 4), "U  ", "UU ", "UUU",
+				'U', new ItemStack(BlocksAether.sentry_stone));
+
+		registerShapedRecipe(new ItemStack(BlocksAether.holystone_brick_stairs, 4), "U  ", "UU ", "UUU",
+				'U', new ItemStack(BlocksAether.holystone_brick));
+
+		registerShapedRecipe(new ItemStack(BlocksAether.aerogel_stairs, 4), "U  ", "UU ", "UUU",
+				'U', new ItemStack(BlocksAether.aerogel));
 	}
 
 	private void registerToolRecipes()
@@ -449,16 +475,16 @@ public class RecipesAether implements IAltarRecipeRegistry
                 'Y', new ItemStack(ItemsAether.skyroot_milk_bucket),
                 'Z', new ItemStack(ItemsAether.aechor_petal));
 
-//        // Jelly Pumpkin
-//        registerShapedRecipe(new ItemStack(ItemsAether.cocoatrice), "XY", "Z ",
-//                'X', ItemsAether.swet_jelly,
-//                'Y', new ItemStack(ItemsAether.orange),
-//                'Z', new ItemStack(Items.sugar));
-//
-//        // Stomper Pop
-//        registerShapedRecipe(new ItemStack(ItemsAether.stomper_pop), " X", " Z",
-//                'X', new ItemStack(ItemsAether.skyroot_stick),
-//                'Y', new ItemStack(ItemsAether.baby_pink_swet),
+        // Jelly Pumpkin
+        registerShapedRecipe(new ItemStack(ItemsAether.jelly_pumpkin), "XY", "Z ",
+                'X', ItemsAether.swet_jelly,
+                'Y', new ItemStack(ItemsAether.orange),
+ 	            'Z', new ItemStack(Items.SUGAR));
+
+        // Stomper Pop
+        registerShapedRecipe(new ItemStack(ItemsAether.stomper_pop), " X", " Z",
+                'X', new ItemStack(ItemsAether.skyroot_stick),
+                'Y', new ItemStack(ItemsAether.pink_baby_swet));
 
         // Blueberry Lollipop
         registerShapedRecipe(new ItemStack(ItemsAether.blueberry_lollipop), "XY", "Z ",
@@ -472,10 +498,9 @@ public class RecipesAether implements IAltarRecipeRegistry
                 'Y', new ItemStack(ItemsAether.blueberries),
                 'Z', new ItemStack(ItemsAether.skyroot_stick));
 
-//        // Icestone Poprocks
-//        registerShapelessRecipe(new ItemStack(ItemsAether.icestone_poprocks), "X", "Y",
-//                'X', new ItemStack(Items.sugar),
-//                'Y', new ItemStack(ItemsAether.icestone));
+        // Icestone Poprocks
+        registerShapelessRecipe(new ItemStack(ItemsAether.icestone_poprocks, 1),
+				new ItemStack(Items.SUGAR), new ItemStack(ItemsAether.icestone));
     }
 
 	private void registerAltarRecipes()

@@ -7,9 +7,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockLabyrinthtotem extends BlockMultiController
+public class BlockLabyrinthTotem extends BlockMultiController
 {
-	public BlockLabyrinthtotem(Material materialIn)
+	public BlockLabyrinthTotem(Material materialIn)
 	{
 		super(materialIn);
 

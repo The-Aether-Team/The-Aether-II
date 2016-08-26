@@ -377,7 +377,7 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.chain_gloves, "accessories/chain_gloves");
 		registerItemModels(ItemsAether.diamond_gloves, "accessories/diamond_gloves");
 
-		registerItemModels(BlocksAether.carved_capstone, "carved_capstone");
+		registerItemModels(BlocksAether.labyrinth_capstone, "labyrinth_capstone");
 		registerItemModels(BlocksAether.labyrinth_glowing_pillar, "labyrinth_glowing_pillar");
 		registerItemModels(BlocksAether.labyrinth_pillar, "labyrinth_pillar");
 		registerItemModels(BlocksAether.labyrinth_wall, "labyrinth_wall");
@@ -457,6 +457,8 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.divine_sentry_stone_stairs, "aether_stairs/divine_sentry_stone_stairs");
 		registerItemModels(BlocksAether.carved_stone_stairs, "aether_stairs/carved_stone_stairs");
 		registerItemModels(BlocksAether.divine_carved_stone_stairs, "aether_stairs/divine_carved_stone_stairs");
+		registerItemModels(BlocksAether.icestone_brick_stairs, "aether_stairs/icestone_brick_stairs");
+		registerItemModels(BlocksAether.aerogel_stairs, "aether_stairs/aerogel_stairs");
 
 		registerItemModels(BlocksAether.woven_skyroot_sticks, "woven_skyroot_sticks");
 

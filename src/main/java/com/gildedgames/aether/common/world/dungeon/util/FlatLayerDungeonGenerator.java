@@ -257,7 +257,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 								}
 
 								primer.setBlockState(x, layer.minY() + 1, z, BlocksAether.labyrinth_base.getDefaultState());
-								primer.setBlockState(x, layer.minY() + 4, z, BlocksAether.carved_capstone.getDefaultState());
+								primer.setBlockState(x, layer.minY() + 4, z, BlocksAether.labyrinth_capstone.getDefaultState());
 							}
 
 							primer.setBlockState(x, layer.minY() + 5, z, BlocksAether.labyrinth_base.getDefaultState());
@@ -266,8 +266,8 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 						}
 						case TRUE_PATH:
 						{
-							this.generateTile(layer, x, 4, z, BlocksAether.carved_capstone.getDefaultState(), BlocksAether.labyrinth_wall.getDefaultState(), primer);
-							primer.setBlockState(x, layer.minY() + 5, z, BlocksAether.carved_capstone.getDefaultState());
+							this.generateTile(layer, x, 4, z, BlocksAether.labyrinth_capstone.getDefaultState(), BlocksAether.labyrinth_wall.getDefaultState(), primer);
+							primer.setBlockState(x, layer.minY() + 5, z, BlocksAether.labyrinth_capstone.getDefaultState());
 
 							break;
 						}
@@ -279,7 +279,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 							}
 
 							primer.setBlockState(x, layer.minY() + 1, z, BlocksAether.labyrinth_base.getDefaultState());
-							primer.setBlockState(x, layer.minY() + 4, z, BlocksAether.carved_capstone.getDefaultState());
+							primer.setBlockState(x, layer.minY() + 4, z, BlocksAether.labyrinth_capstone.getDefaultState());
 
 							break;
 						}
@@ -293,7 +293,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 							}
 
 							primer.setBlockState(x, layer.minY() + 1, z, BlocksAether.labyrinth_base.getDefaultState());
-							primer.setBlockState(x, layer.minY() + 4, z, BlocksAether.carved_capstone.getDefaultState());
+							primer.setBlockState(x, layer.minY() + 4, z, BlocksAether.labyrinth_capstone.getDefaultState());
 
 							break;
 						}

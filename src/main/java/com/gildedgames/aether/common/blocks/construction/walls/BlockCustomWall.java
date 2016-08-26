@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.construction.walls;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -20,6 +21,10 @@ public class BlockCustomWall extends BlockWall
 	public BlockCustomWall(IBlockState state, float hardness, float resistance)
 	{
 		super(state.getBlock());
+
+		Block block = state.getBlock();
+
+		this.setHarvestLevel(block.getHarvestTool(state), block.getHarvestLevel(state));
 
 		this.setDefaultState(this.blockState.getBaseState().withProperty(UP, Boolean.valueOf(false)).withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)));
 		this.setResistance(resistance / 3.0f);

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.blocks.util;
 
 import com.gildedgames.aether.common.CreativeTabsAether;
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -14,6 +15,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import java.util.Random;
 
@@ -25,17 +27,30 @@ public class BlockCustomSlab extends Block
 
 	public static final PropertyEnum<SlabState> PROPERTY_SLAB_STATE = PropertyEnum.create("state", SlabState.class);
 
-	public BlockCustomSlab(Material material, SoundType soundType, float hardness)
+	public BlockCustomSlab(final IBlockState state)
 	{
-		super(material);
+		super(state.getMaterial());
 
 		this.setCreativeTab(CreativeTabsAether.tabBlocks);
 
+		final Block block = state.getBlock();
+
+		BlocksAether.applyPostRegistration(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				BlockCustomSlab.this.setHarvestLevel(block.getHarvestTool(state), block.getHarvestLevel(state));
+			}
+		});
+
 		this.setLightOpacity(0);
 
-		this.setSoundType(soundType);
+		this.setSoundType(block.getSoundType());
 
-		this.setHardness(hardness);
+		float blockHardness = ObfuscationReflectionHelper.getPrivateValue(Block.class, block, "field_149782_v", "blockHardness");
+
+		this.setHardness(blockHardness);
 	}
 
 	@Override

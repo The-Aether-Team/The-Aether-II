@@ -2,6 +2,6 @@
 	"parent": "block/cube_column",
 	"textures": {
 		"end": "aether:blocks/dungeon/labyrinth_capstone_top",
-		"side": "aether:blocks/dungeon/labyrinth_headstone_side"
+		"side": "aether:blocks/dungeon/labyrinth_capstone_side"
 	}
 }

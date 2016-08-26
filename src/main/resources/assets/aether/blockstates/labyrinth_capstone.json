@@ -1,7 +1,7 @@
 {
 	"variants": {
 		"normal": {
-			"model": "aether:carved_capstone"
+			"model": "aether:labyrinth_capstone"
 		}
 	}
 }

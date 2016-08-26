@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CreativeTabsAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.blocks.util.BlockCustomSlab;
-import com.gildedgames.aether.common.blocks.construction.BlockAetherStairs;
+import com.gildedgames.aether.common.blocks.util.BlockCustomStairs;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.blocks.construction.BlockAmbrosiumTorch;
 import com.gildedgames.aether.common.blocks.misc.BlockMoaEgg;
@@ -33,7 +33,7 @@ import com.gildedgames.aether.common.blocks.dungeon.BlockDivine;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinth;
 import com.gildedgames.aether.common.blocks.containers.BlockLabyrinthChest;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthPillar;
-import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthtotem;
+import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthTotem;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAerogel;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
@@ -55,6 +55,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.blocks.ItemAetherSlab;
 import com.gildedgames.aether.common.items.blocks.ItemBlockVariants;
 import com.google.common.base.Supplier;
+import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockButtonStone;
@@ -64,8 +65,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import java.util.List;
+
 public class BlocksAether
 {
+
+	private static final List<Runnable> postRegistration = Lists.newArrayList();
+
 	public static final Block aether_dirt = new BlockCustom(Material.GROUND).setSoundType(SoundType.GROUND).setHardness(0.5f);
 
 	public static final BlockAetherGrass aether_grass = new BlockAetherGrass();
@@ -176,11 +182,11 @@ public class BlocksAether
 
 	public static final BlockSkyrootLadder skyroot_ladder = new BlockSkyrootLadder();
 
-	public static final BlockLabyrinthtotem labyrinth_totem = new BlockLabyrinthtotem(Material.IRON);
+	public static final BlockLabyrinthTotem labyrinth_totem = new BlockLabyrinthTotem(Material.IRON);
 
 	public static final Block multiblock_dummy = new BlockMultiDummy().setBlockUnbreakable();
 
-	public static final BlockLabyrinth carved_capstone = new BlockLabyrinth();
+	public static final BlockLabyrinth labyrinth_capstone = new BlockLabyrinth();
 
 	public static final BlockBed skyroot_bed = new BlockCustomBed(new Supplier<Item>()
 	{
@@ -215,27 +221,29 @@ public class BlocksAether
 			divine_sentry_wall = new BlockDivineWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f);
 
 	public static final BlockCustomSlab
-			skyroot_slab = new BlockCustomSlab(Material.WOOD, SoundType.WOOD, 2.0f),
-			holystone_slab = new BlockCustomSlab(Material.ROCK, SoundType.STONE, 2.0f),
-			holystone_brick_slab =  new BlockCustomSlab(Material.ROCK, SoundType.STONE, 2.0f),
-			carved_stone_slab = new BlockCustomSlab(Material.ROCK, SoundType.STONE, 2.0f),
-			divine_carved_stone_slab = new BlockCustomSlab(Material.ROCK, SoundType.STONE, 2.0f),
-			sentry_stone_slab = new BlockCustomSlab(Material.ROCK, SoundType.STONE, 2.0f),
-			divine_sentry_stone_slab = new BlockCustomSlab(Material.ROCK, SoundType.STONE, 2.0f),
-			icestone_slab = new BlockCustomSlab(Material.ROCK, SoundType.GLASS, 2.0f),
-			labyrinth_capstone_slab = new BlockCustomSlab(Material.ROCK, SoundType.STONE, 2.0f),
-			labyrinth_wall_slab = new BlockCustomSlab(Material.ROCK, SoundType.STONE, 2.0f);
+			skyroot_slab = new BlockCustomSlab(BlocksAether.skyroot_planks.getDefaultState()),
+			holystone_slab = new BlockCustomSlab(BlocksAether.holystone.getDefaultState()),
+			holystone_brick_slab =  new BlockCustomSlab(BlocksAether.holystone_brick.getDefaultState()),
+			carved_stone_slab = new BlockCustomSlab(BlocksAether.carved_stone.getDefaultState()),
+			divine_carved_stone_slab = new BlockCustomSlab(BlocksAether.carved_stone.getDefaultState().withProperty(BlockDivine.PROPERTY_IS_DIVINE, true)),
+			sentry_stone_slab = new BlockCustomSlab(BlocksAether.sentry_stone.getDefaultState()),
+			divine_sentry_stone_slab = new BlockCustomSlab(BlocksAether.sentry_stone.getDefaultState().withProperty(BlockDivine.PROPERTY_IS_DIVINE, true)),
+			icestone_slab = new BlockCustomSlab(BlocksAether.icestone_bricks.getDefaultState()),
+			labyrinth_capstone_slab = new BlockCustomSlab(BlocksAether.labyrinth_capstone.getDefaultState()),
+			labyrinth_wall_slab = new BlockCustomSlab(BlocksAether.labyrinth_wall.getDefaultState());
 
 	public static final Block labyrinth_strongblock = new BlockLabyrinth().setBlockUnbreakable().setResistance(6000000.0F);
 
-	public static final Block skyroot_stairs = new BlockAetherStairs(BlocksAether.skyroot_planks.getDefaultState()),
-			holystone_stairs = new BlockAetherStairs(BlocksAether.holystone.getDefaultState()),
-			mossy_holystone_stairs = new BlockAetherStairs(BlocksAether.holystone.getDefaultState().withProperty(BlockHolystone.PROPERTY_VARIANT, BlockHolystone.MOSSY_HOLYSTONE)),
-			holystone_brick_stairs = new BlockAetherStairs(BlocksAether.holystone_brick.getDefaultState()),
-			sentry_stone_stairs = new BlockAetherStairs(BlocksAether.sentry_stone.getDefaultState()),
-			divine_sentry_stone_stairs = new BlockAetherStairs(BlocksAether.sentry_stone.getDefaultState().withProperty(BlockDivine.PROPERTY_IS_DIVINE, true)),
-			carved_stone_stairs = new BlockAetherStairs(BlocksAether.carved_stone.getDefaultState().withProperty(BlockDivine.PROPERTY_IS_DIVINE, true)),
-			divine_carved_stone_stairs = new BlockAetherStairs(BlocksAether.carved_stone.getDefaultState().withProperty(BlockDivine.PROPERTY_IS_DIVINE, true));
+	public static final Block skyroot_stairs = new BlockCustomStairs(BlocksAether.skyroot_planks.getDefaultState()),
+			holystone_stairs = new BlockCustomStairs(BlocksAether.holystone.getDefaultState()),
+			mossy_holystone_stairs = new BlockCustomStairs(BlocksAether.holystone.getDefaultState().withProperty(BlockHolystone.PROPERTY_VARIANT, BlockHolystone.MOSSY_HOLYSTONE)),
+			holystone_brick_stairs = new BlockCustomStairs(BlocksAether.holystone_brick.getDefaultState()),
+			sentry_stone_stairs = new BlockCustomStairs(BlocksAether.sentry_stone.getDefaultState()),
+			divine_sentry_stone_stairs = new BlockCustomStairs(BlocksAether.sentry_stone.getDefaultState().withProperty(BlockDivine.PROPERTY_IS_DIVINE, true)),
+			carved_stone_stairs = new BlockCustomStairs(BlocksAether.carved_stone.getDefaultState().withProperty(BlockDivine.PROPERTY_IS_DIVINE, true)),
+			divine_carved_stone_stairs = new BlockCustomStairs(BlocksAether.carved_stone.getDefaultState().withProperty(BlockDivine.PROPERTY_IS_DIVINE, true)),
+			icestone_brick_stairs = new BlockCustomStairs(BlocksAether.icestone_bricks.getDefaultState()),
+			aerogel_stairs = new BlockCustomStairs(BlocksAether.aerogel.getDefaultState());
 
 	public static final Block woven_skyroot_sticks = new BlockWovenSticks();
 
@@ -346,7 +354,7 @@ public class BlocksAether
 
 		registerBlock("multiblock_dummy", BlocksAether.multiblock_dummy);
 
-		registerBlock("carved_capstone", BlocksAether.carved_capstone.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("labyrinth_capstone", BlocksAether.labyrinth_capstone.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("labyrinth_glowing_pillar", BlocksAether.labyrinth_glowing_pillar.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("labyrinth_pillar", BlocksAether.labyrinth_pillar.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("labyrinth_wall", BlocksAether.labyrinth_wall.setCreativeTab(CreativeTabsAether.tabBlocks));
@@ -375,11 +383,20 @@ public class BlocksAether
 		registerBlock("divine_sentry_stone_stairs", BlocksAether.divine_sentry_stone_stairs.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("carved_stone_stairs", BlocksAether.carved_stone_stairs.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("divine_carved_stone_stairs", BlocksAether.divine_carved_stone_stairs.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("icestone_brick_stairs", BlocksAether.icestone_brick_stairs.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("aerogel_stairs", BlocksAether.aerogel_stairs.setCreativeTab(CreativeTabsAether.tabBlocks));
 
 		registerBlock("woven_skyroot_sticks", BlocksAether.woven_skyroot_sticks.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("moa_egg", BlocksAether.moa_egg);
 
 		registerHarvestLevels();
+
+		for (Runnable runnable : BlocksAether.postRegistration)
+		{
+			runnable.run();
+		}
+
+		BlocksAether.postRegistration.clear();
 	}
 
 	private static void registerHarvestLevels()
@@ -465,4 +482,10 @@ public class BlocksAether
 
 		GameRegistry.register(item);
 	}
+
+	public static void applyPostRegistration(Runnable runnable)
+	{
+		BlocksAether.postRegistration.add(runnable);
+	}
+
 }

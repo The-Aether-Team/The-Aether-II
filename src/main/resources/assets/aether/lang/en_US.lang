@@ -73,7 +73,7 @@ tile.aether.sentry_stone_wall.name=Sentry Stone Wall
 tile.aether.divine_sentry_wall.name=Divine Sentry Stone Wall
 tile.aether.divine_stone_wall.name=Divine Stone Wall
 tile.aether.labyrinth_totem.name=Labyrinth Totem
-tile.aether.carved_capstone.name=Labyrinth Capstone
+tile.aether.labyrinth_capstone.name=Labyrinth Capstone
 tile.aether.labyrinth_glowing_pillar.name=Glowing Labyrinth Pillar
 tile.aether.labyrinth_pillar.name=Labyrinth Pillar
 tile.aether.labyrinth_wall.name=Labyrinth Wall
@@ -106,6 +106,8 @@ tile.aether.carved_stone_stairs.name=Carved Stone Stairs
 tile.aether.divine_carved_stone_stairs.name=Divine Carved Stone Stairs
 tile.aether.woven_skyroot_sticks.name=Woven Skyroot Sticks
 tile.aether.moa_egg.name=Moa Egg
+tile.aether.icestone_brick_stairs.name=Icestone Brick Stairs
+tile.aether.aerogel_stairs.name=Aerogel Stairs
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick

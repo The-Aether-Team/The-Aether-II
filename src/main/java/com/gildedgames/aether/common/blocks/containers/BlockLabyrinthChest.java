@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.blocks.containers;
 
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityChestMimic;
 import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthChest;
 import net.minecraft.block.Block;
@@ -21,6 +23,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -72,6 +75,8 @@ public class BlockLabyrinthChest extends BlockContainer
 					world.spawnEntityInWorld(mimic);
 
 					world.setBlockToAir(pos);
+
+					mimic.playSound(SoundsAether.chest_mimic_awake, 1.0F, (mimic.getRNG().nextFloat() - mimic.getRNG().nextFloat()) * 0.2F + 1.0F);
 
 					return true;
 				}
