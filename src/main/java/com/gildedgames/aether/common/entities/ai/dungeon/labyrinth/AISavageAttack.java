@@ -71,7 +71,7 @@ public class AISavageAttack extends EntityAI<EntityChestMimic>
                 this.entity().getNavigator().tryMoveToEntityLiving(this.entity().getAttackTarget(), this.chargeSpeed);
             }
 
-            if (this.attackTimer.getTicksPassed() % 10 == 0)
+            if (this.attackTimer.isMultipleOfTicks(10))
             {
                 if (this.entity().getDistanceSqToEntity(this.entity().getAttackTarget()) <= 1.5D * 1.5D)
                 {

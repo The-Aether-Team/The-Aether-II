@@ -90,7 +90,7 @@ public class EntityBattleGolem extends EntityMob implements IRangedAttackMob
 		{
 			this.resupplyBombTimer.tick();
 
-			if (this.resupplyBombTimer.getTicksPassed() % 20 == 0)
+			if (this.resupplyBombTimer.isMultipleOfSeconds())
 			{
 				this.addBomb();
 			}
