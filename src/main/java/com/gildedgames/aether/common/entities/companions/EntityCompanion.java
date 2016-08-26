@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.companions;
 
-import com.gildedgames.aether.common.entities.ai.EntityAICompanionFollow;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.entities.ai.EntityAICompanionFollow;
 import com.google.common.base.Optional;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;

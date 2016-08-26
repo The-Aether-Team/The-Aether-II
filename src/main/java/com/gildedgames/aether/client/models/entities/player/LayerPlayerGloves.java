@@ -1,9 +1,9 @@
 package com.gildedgames.aether.client.models.entities.player;
 
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
 import com.gildedgames.aether.common.items.armor.ItemLeatherGloves;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;

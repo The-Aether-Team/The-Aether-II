@@ -5,7 +5,6 @@ import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstanc
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
-import com.gildedgames.aether.api.capabilites.items.extra_data.IItemExtraDataCapability;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;

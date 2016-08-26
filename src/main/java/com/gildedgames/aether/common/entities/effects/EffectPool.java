@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.effects;
 
-import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
 import com.gildedgames.aether.api.capabilites.entity.effects.IEffectPool;
 import com.google.common.collect.Lists;

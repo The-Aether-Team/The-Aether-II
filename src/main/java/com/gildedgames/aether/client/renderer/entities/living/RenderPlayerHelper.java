@@ -19,8 +19,6 @@ import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
 
-import static net.minecraft.realms.Tezzelator.t;
-
 public class RenderPlayerHelper
 {
 

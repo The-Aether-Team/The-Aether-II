@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.world.features;
 
-import java.util.Random;
-
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -11,10 +10,10 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
+
+import java.util.Random;
 
 public class WorldGenTemplate extends WorldGenerator
 {

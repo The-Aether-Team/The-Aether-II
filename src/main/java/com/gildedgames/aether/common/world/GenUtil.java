@@ -1,11 +1,11 @@
 package com.gildedgames.aether.common.world;
 
-import java.util.Random;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.NoiseGeneratorSimplex;
+
+import java.util.Random;
 
 public class GenUtil
 {

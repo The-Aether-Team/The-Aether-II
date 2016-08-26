@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.entities.effects;
 
 import com.gildedgames.aether.api.capabilites.entity.effects.IEffectPool;
 import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;

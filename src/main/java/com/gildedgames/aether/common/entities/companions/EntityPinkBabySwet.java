@@ -5,8 +5,6 @@ import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.world.World;
 
-import static com.ibm.icu.impl.duration.impl.DataRecord.EGender.F;
-
 public class EntityPinkBabySwet extends EntityCompanion
 {
 

@@ -1,14 +1,13 @@
 package com.gildedgames.aether.common.world.chunk.gen;
 
-import java.util.Random;
-
+import com.gildedgames.aether.common.util.XORShiftRandom;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.NoiseGeneratorSimplex;
 
-import com.gildedgames.aether.common.util.XORShiftRandom;
+import java.util.Random;
 
 public class ChunkGenFloatingIsland implements ChunkGen
 {

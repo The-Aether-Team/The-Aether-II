@@ -1,9 +1,13 @@
 package com.gildedgames.aether.common.entities.effects;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
+import com.gildedgames.aether.api.capabilites.entity.effects.IEffectPool;
+import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
+import com.gildedgames.aether.common.entities.effects.processors.*;
 import com.gildedgames.aether.common.entities.effects.processors.player.*;
+import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.nbt.NBTBase;
@@ -12,19 +16,8 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
-import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
-import com.gildedgames.aether.api.capabilites.entity.effects.IEffectPool;
-import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
-import com.gildedgames.aether.common.entities.effects.processors.BreatheUnderwaterEffect;
-import com.gildedgames.aether.common.entities.effects.processors.DoubleDropEffect;
-import com.gildedgames.aether.common.entities.effects.processors.FreezeBlocksEffect;
-import com.gildedgames.aether.common.entities.effects.processors.ModifyDamageEffect;
-import com.gildedgames.aether.common.entities.effects.processors.ModifyMaxHealthEffect;
-import com.gildedgames.aether.common.entities.effects.processors.ModifySpeedEffect;
-import com.gildedgames.aether.common.entities.effects.processors.RegenerateHealthEffect;
-import com.google.common.collect.Lists;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EntityEffects implements IEntityEffectsCapability
 {

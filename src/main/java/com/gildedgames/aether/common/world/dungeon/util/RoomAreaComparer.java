@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world.dungeon.util;
 
-import java.util.Comparator;
-
 import com.gildedgames.aether.common.world.dungeon.DungeonRoom;
+
+import java.util.Comparator;
 
 public class RoomAreaComparer implements Comparator<DungeonRoom>
 {

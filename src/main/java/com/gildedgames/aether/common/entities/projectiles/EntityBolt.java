@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.entities.projectiles;
 
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,9 +14,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 
 public class EntityBolt extends EntityArrow
 {

@@ -1,11 +1,9 @@
 package com.gildedgames.aether.common.world.dungeon.instance;
 
+import com.gildedgames.util.core.util.BlockPosDimension;
+import com.gildedgames.util.modules.instances.InstanceHandler;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
-
-import com.gildedgames.util.modules.instances.InstanceHandler;
-import com.gildedgames.util.core.util.BlockPosDimension;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class DungeonInstanceHandler
 {

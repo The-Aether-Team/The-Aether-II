@@ -8,10 +8,10 @@ import com.gildedgames.aether.common.tile_entities.multiblock.TileEntityMultiblo
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceHandler;
 import com.gildedgames.util.core.UtilModule;
+import com.gildedgames.util.core.util.BlockPosDimension;
 import com.gildedgames.util.modules.instances.Instance;
 import com.gildedgames.util.modules.instances.InstanceModule;
 import com.gildedgames.util.modules.instances.PlayerInstances;
-import com.gildedgames.util.core.util.BlockPosDimension;
 import com.gildedgames.util.modules.instances.networking.packet.PacketRegisterInstance;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

@@ -1,13 +1,13 @@
 package com.gildedgames.aether.common.world.dungeon.util;
 
-import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.util.TemplatePrimer;
+import com.gildedgames.aether.common.world.dungeon.DungeonGenerator;
+import com.gildedgames.aether.common.world.dungeon.DungeonRoom;
+import com.gildedgames.aether.common.world.dungeon.DungeonRoomProvider;
+import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
+import com.gildedgames.util.core.util.BlockPosDimension;
+import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
@@ -17,17 +17,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
-
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.world.dungeon.DungeonGenerator;
-import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
-import com.gildedgames.aether.common.world.dungeon.DungeonRoom;
-import com.gildedgames.aether.common.world.dungeon.DungeonRoomProvider;
-import com.gildedgames.util.core.util.BlockPosDimension;
-import com.google.common.collect.Lists;
 import net.minecraft.world.gen.structure.template.BlockRotationProcessor;
 import net.minecraft.world.gen.structure.template.ITemplateProcessor;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
+
+import java.awt.*;
+import java.util.*;
+import java.util.List;
 
 public class FlatLayerDungeonGenerator implements DungeonGenerator
 {

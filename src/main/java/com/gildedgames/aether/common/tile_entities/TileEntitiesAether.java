@@ -1,8 +1,7 @@
 package com.gildedgames.aether.common.tile_entities;
 
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
 import com.gildedgames.aether.common.tile_entities.multiblock.TileEntityMultiblockDummy;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class TileEntitiesAether
 {

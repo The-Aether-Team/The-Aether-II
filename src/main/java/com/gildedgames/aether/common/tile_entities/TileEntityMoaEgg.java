@@ -1,17 +1,13 @@
 package com.gildedgames.aether.common.tile_entities;
 
-import com.gildedgames.aether.common.genes.util.SimpleGeneStorage;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
-import com.gildedgames.aether.common.entities.util.MoaNest;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
+import com.gildedgames.aether.common.entities.util.MoaNest;
+import com.gildedgames.aether.common.genes.moa.MoaGenePool;
+import com.gildedgames.aether.common.genes.util.SimpleGeneStorage;
 import com.gildedgames.aether.common.tile_entities.util.TileEntitySynced;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 

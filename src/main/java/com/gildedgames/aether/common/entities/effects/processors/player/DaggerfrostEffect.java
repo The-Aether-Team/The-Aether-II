@@ -5,7 +5,6 @@ import com.gildedgames.aether.common.entities.effects.EffectProcessorPlayer;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.item.ItemSnowball;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;

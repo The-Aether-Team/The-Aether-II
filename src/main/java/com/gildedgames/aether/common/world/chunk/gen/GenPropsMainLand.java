@@ -1,10 +1,9 @@
 package com.gildedgames.aether.common.world.chunk.gen;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.world.gen.NoiseGeneratorSimplex;
-
 import com.gildedgames.aether.common.world.GenUtil;
 import com.gildedgames.aether.common.world.chunk.gen.ChunkGenFloatingIsland.GenProps;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.world.gen.NoiseGeneratorSimplex;
 
 public class GenPropsMainLand implements GenProps
 {

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities;
 
-import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
 import com.gildedgames.aether.common.capabilities.item.properties.IPhoenixChillable;
+import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;

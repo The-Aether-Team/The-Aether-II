@@ -6,8 +6,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
-import static com.ibm.icu.impl.duration.impl.DataRecord.EGender.F;
-
 public class ModelLabyrinthChestMimic extends ModelBase
 {
 

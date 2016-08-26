@@ -2,16 +2,12 @@ package com.gildedgames.aether.common.entities.living.enemies;
 
 import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.tempest.AIElectricShock;
-import com.gildedgames.aether.common.entities.util.EntityExtendedMob;
 import com.gildedgames.aether.common.entities.util.flying.EntityFlyingMob;
 import com.gildedgames.aether.common.util.EntityUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 

@@ -1,6 +1,5 @@
 package com.gildedgames.aether.client.gui;
 
-import com.gildedgames.aether.client.gui.GuiConfigAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.client.IModGuiFactory;

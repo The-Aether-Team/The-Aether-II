@@ -1,13 +1,16 @@
 package com.gildedgames.aether.common.entities.living.mounts;
 
 import com.gildedgames.aether.common.SoundsAether;
-import com.gildedgames.aether.common.genes.util.GeneUtil;
 import com.gildedgames.aether.common.entities.ai.moa.*;
-import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.util.*;
+import com.gildedgames.aether.common.genes.moa.MoaGenePool;
+import com.gildedgames.aether.common.genes.util.GeneUtil;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;

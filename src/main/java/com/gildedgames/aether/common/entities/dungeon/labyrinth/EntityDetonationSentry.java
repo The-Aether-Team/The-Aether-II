@@ -2,7 +2,9 @@ package com.gildedgames.aether.common.entities.dungeon.labyrinth;
 
 import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AIDetonateClose;
-import com.gildedgames.aether.common.entities.ai.hopping.*;
+import com.gildedgames.aether.common.entities.ai.hopping.AIHopFloat;
+import com.gildedgames.aether.common.entities.ai.hopping.AIHopFollowAttackTarget;
+import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.EntityMob;

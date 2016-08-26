@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world.chunk;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.util.modules.chunk.impl.hooks.BlockBitFlagChunkHook;
 import com.gildedgames.util.modules.chunk.api.hook.IChunkHookProvider;
+import com.gildedgames.util.modules.chunk.impl.hooks.BlockBitFlagChunkHook;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.ChunkPos;
 

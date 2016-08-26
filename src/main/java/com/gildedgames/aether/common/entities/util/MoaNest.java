@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.util;
 
-import com.gildedgames.aether.common.genes.util.GeneUtil;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
+import com.gildedgames.aether.common.genes.util.GeneUtil;
 import com.gildedgames.util.core.nbt.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

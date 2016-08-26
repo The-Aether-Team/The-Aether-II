@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.blocks.misc;
 
-import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
-import com.gildedgames.aether.common.entities.util.MoaNest;
 import com.gildedgames.aether.common.entities.util.EntityGroup;
+import com.gildedgames.aether.common.entities.util.MoaNest;
+import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;

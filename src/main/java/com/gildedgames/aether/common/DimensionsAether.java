@@ -3,7 +3,6 @@ package com.gildedgames.aether.common;
 import com.gildedgames.aether.common.world.TeleporterAether;
 import com.gildedgames.aether.common.world.WorldProviderAether;
 import com.gildedgames.aether.common.world.labyrinth.WorldProviderSliderLabyrinth;
-import com.gildedgames.util.core.UtilModule;
 import com.gildedgames.util.core.util.GGHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.DimensionType;
@@ -11,11 +10,8 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import java.io.File;
 
 public class DimensionsAether
 {

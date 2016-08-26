@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.effects.processors;
 
-import com.gildedgames.aether.common.entities.effects.AbstractEffectProcessor;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
+import com.gildedgames.aether.common.entities.effects.AbstractEffectProcessor;
 import com.gildedgames.aether.common.entities.effects.processors.RegenerateHealthEffect.Instance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

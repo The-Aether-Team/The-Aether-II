@@ -3,9 +3,6 @@ package com.gildedgames.aether.common.tile_entities.multiblock;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiController;
 import com.gildedgames.aether.common.tile_entities.util.TileEntitySynced;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 

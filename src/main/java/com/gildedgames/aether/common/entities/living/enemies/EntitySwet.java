@@ -9,7 +9,6 @@ import com.gildedgames.aether.common.entities.ai.swet.AILeech;
 import com.gildedgames.aether.common.entities.util.EntityExtendedMob;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.util.EntityUtil;
-import com.google.common.base.Supplier;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;

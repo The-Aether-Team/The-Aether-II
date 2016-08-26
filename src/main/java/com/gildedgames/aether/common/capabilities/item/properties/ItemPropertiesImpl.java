@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.capabilities.item.properties;
 
+import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
 import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentType;
 import com.gildedgames.aether.api.capabilites.items.properties.ItemRarity;
-import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentProperties;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;

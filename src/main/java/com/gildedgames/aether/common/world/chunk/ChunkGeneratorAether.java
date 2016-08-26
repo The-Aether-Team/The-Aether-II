@@ -1,8 +1,9 @@
 package com.gildedgames.aether.common.world.chunk;
 
-import java.util.List;
-import java.util.Random;
-
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.util.OpenSimplexNoise;
+import com.gildedgames.aether.common.world.chunk.gen.*;
+import com.gildedgames.aether.common.world.features.WorldGenAetherCaves;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
@@ -19,14 +20,8 @@ import net.minecraftforge.event.terraingen.ChunkGeneratorEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.util.OpenSimplexNoise;
-import com.gildedgames.aether.common.world.chunk.gen.ChunkGen;
-import com.gildedgames.aether.common.world.chunk.gen.ChunkGenContinents;
-import com.gildedgames.aether.common.world.chunk.gen.ChunkGenFloatingIsland;
-import com.gildedgames.aether.common.world.chunk.gen.GenPropsMainLand;
-import com.gildedgames.aether.common.world.chunk.gen.GenPropsSmallIslands;
-import com.gildedgames.aether.common.world.features.WorldGenAetherCaves;
+import java.util.List;
+import java.util.Random;
 
 public class ChunkGeneratorAether implements IChunkGenerator
 {

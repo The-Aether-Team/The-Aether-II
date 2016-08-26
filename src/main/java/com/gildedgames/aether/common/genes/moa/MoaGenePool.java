@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.genes.moa;
 
-import com.gildedgames.aether.common.genes.util.GeneUtil;
 import com.gildedgames.aether.api.genes.GeneRegion;
 import com.gildedgames.aether.api.genes.IGeneStorage;
 import com.gildedgames.aether.common.genes.util.DataGene;
 import com.gildedgames.aether.common.genes.util.GenePool;
+import com.gildedgames.aether.common.genes.util.GeneUtil;
 import com.gildedgames.aether.common.genes.util.SimpleGeneStorage;
 import com.gildedgames.util.io_manager.io.NBT;
 import com.google.common.collect.Lists;

@@ -1,9 +1,8 @@
 package com.gildedgames.aether.common.world.chunk.gen;
 
+import com.gildedgames.aether.common.world.chunk.gen.ChunkGenFloatingIsland.GenProps;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.gen.NoiseGeneratorSimplex;
-
-import com.gildedgames.aether.common.world.chunk.gen.ChunkGenFloatingIsland.GenProps;
 
 public class GenPropsSmallIslands implements GenProps
 {
