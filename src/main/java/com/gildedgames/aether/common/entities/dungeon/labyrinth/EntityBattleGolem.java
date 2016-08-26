@@ -165,4 +165,10 @@ public class EntityBattleGolem extends EntityMob implements IRangedAttackMob
 		this.removeBomb();
 	}
 
+	@Override
+	public boolean canDespawn()
+	{
+		return false;
+	}
+
 }

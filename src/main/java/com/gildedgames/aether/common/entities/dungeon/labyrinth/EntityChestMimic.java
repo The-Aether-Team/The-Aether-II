@@ -124,4 +124,10 @@ public class EntityChestMimic extends EntityExtendedMob
 		return this.dataManager.get(EntityChestMimic.OVERHEATING);
 	}
 
+	@Override
+	public boolean canDespawn()
+	{
+		return false;
+	}
+
 }

@@ -97,4 +97,10 @@ public class EntityTrackingSentry extends EntityMob
 		return SoundsAether.sentry_death;
 	}
 
+	@Override
+	public boolean canDespawn()
+	{
+		return false;
+	}
+
 }

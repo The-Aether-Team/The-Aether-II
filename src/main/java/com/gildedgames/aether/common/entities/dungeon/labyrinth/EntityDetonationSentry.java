@@ -69,4 +69,10 @@ public class EntityDetonationSentry extends EntityMob
 		return 0;
 	}
 
+	@Override
+	public boolean canDespawn()
+	{
+		return false;
+	}
+
 }
