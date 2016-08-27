@@ -86,7 +86,7 @@ public class BlockAetherPlant extends Block
 	@Override
 	public boolean isPassable(IBlockAccess world, BlockPos pos)
 	{
-		return true;
+		return super.isPassable(world, pos);
 	}
 
 	public boolean isSuitableSoilBlock(IBlockState state)

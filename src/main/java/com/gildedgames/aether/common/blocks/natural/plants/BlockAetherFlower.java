@@ -25,7 +25,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockVariant
 
 	public BlockAetherFlower()
 	{
-		super(Material.LEAVES);
+		super(Material.PLANTS);
 
 		this.setSoundType(SoundType.PLANT);
 
