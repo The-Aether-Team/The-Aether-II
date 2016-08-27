@@ -7,7 +7,9 @@ import com.gildedgames.aether.common.items.armor.ItemAetherShield;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import com.gildedgames.aether.common.world.TeleporterAether;
 import com.gildedgames.util.core.util.TeleporterGeneric;
+import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
@@ -45,7 +47,11 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.List;
 import java.util.Random;
+import java.util.UUID;
+
+import static sun.audio.AudioPlayer.player;
 
 public class CommonEvents
 {
@@ -155,20 +161,37 @@ public class CommonEvents
 		}
 
 		// Checks whether or not an entity is in the Aether's void
-		if (entity.worldObj.provider.getDimensionType() == DimensionsAether.AETHER && entity.posY < -4 && !entity.worldObj.isRemote)
+		if (entity.worldObj.provider.getDimensionType() == DimensionsAether.AETHER && entity.posY < -4)
 		{
-			CommonEvents.onFallenFromAether(entity);
+			List<UUID> uniquePassengerIDs = Lists.newArrayList();
+
+			for (Entity passenger : entity.getPassengers())
+			{
+				uniquePassengerIDs.add(passenger.getUniqueID());
+			}
+
+			if (!entity.worldObj.isRemote)
+			{
+				CommonEvents.onFallenFromAether(entity);
+			}
+
+			if (entity != null)
+			{
+				List<Entity> entities = entity.worldObj.getEntitiesWithinAABB(Entity.class, entity.getEntityBoundingBox().expand(16.0D, 16.0D, 16.0D));
+
+				for (Entity passenger : entities)
+				{
+					if (uniquePassengerIDs.contains(passenger.getUniqueID()))
+					{
+						passenger.startRiding(entity, true);
+					}
+				}
+			}
 		}
 	}
 
 	private static void onFallenFromAether(Entity entity)
 	{
-		// Don't teleport entities which are being ridden.
-		if (entity.getRidingEntity() != null)
-		{
-			return;
-		}
-
 		MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 
 		WorldServer toWorld = DimensionManager.getWorld(0);
@@ -178,27 +201,56 @@ public class CommonEvents
 		// TODO: Recrusive teleporting, new in 1.9/1.10
 		Entity mount = entity.getRidingEntity();
 
+		boolean hasPassengers = !entity.getPassengers().isEmpty();
+
+		List<Entity> teleportedPassengers = Lists.newLinkedList();
+
+		Entity teleportedEntity = null;
+
+		BlockPos teleportPos = new BlockPos(entity.posX, 200 + entity.posY, entity.posZ);
+
+		if (hasPassengers)
+		{
+			for (Entity passenger : entity.getPassengers())
+			{
+				passenger.dismountRidingEntity();
+
+				teleportedPassengers.add(CommonEvents.teleportEntity(passenger, toWorld, teleporter, 0));
+
+				passenger.setPositionAndUpdate(teleportPos.getX(), teleportPos.getY(), teleportPos.getZ());
+			}
+		}
+
 		if (mount != null)
 		{
 			// Dismounts the entity it's riding first as teleporting will cause updates to the entities
-			entity.startRiding(null, true);
+			entity.dismountRidingEntity();
 
 			// Teleports entity first, then what it's riding
-			Entity teleportedEntity = CommonEvents.teleportEntity(entity, toWorld, teleporter, 0);
+
+			teleportedEntity = CommonEvents.teleportEntity(entity, toWorld, teleporter, 0);
 
 			Entity teleportedMount = CommonEvents.teleportEntity(mount, toWorld, teleporter, 0);
 
-			teleportedEntity.setPositionAndUpdate(entity.posX, 200 + entity.posY, entity.posZ);
-			teleportedMount.setPositionAndUpdate(entity.posX, 200 + entity.posY, entity.posZ);
+			teleportedEntity.setPositionAndUpdate(teleportPos.getX(), teleportPos.getY(), teleportPos.getZ());
+			teleportedMount.setPositionAndUpdate(teleportPos.getX(), teleportPos.getY(), teleportPos.getZ());
 
 			// Re-mount what it was previously riding
 			teleportedEntity.startRiding(teleportedMount, true);
 		}
 		else
 		{
-			Entity newEntity = CommonEvents.teleportEntity(entity, toWorld, teleporter, 0);
+			teleportedEntity = CommonEvents.teleportEntity(entity, toWorld, teleporter, 0);
 
-			newEntity.setPositionAndUpdate(entity.posX, 200 + entity.posY, entity.posZ);
+			teleportedEntity.setPositionAndUpdate(teleportPos.getX(), teleportPos.getY(), teleportPos.getZ());
+		}
+
+		if (hasPassengers)
+		{
+			for (Entity passenger : teleportedPassengers)
+			{
+				passenger.startRiding(teleportedEntity, true);
+			}
 		}
 	}
 
@@ -215,18 +267,22 @@ public class CommonEvents
 			return null;
 		}
 
-		if (entity instanceof EntityPlayerMP)
+		if (entity instanceof EntityPlayer)
 		{
-			EntityPlayerMP player = (EntityPlayerMP)entity;
-
 			final PlayerList playerList = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList();
 
 			// Players require special magic to be teleported correctly, and are not duplicated
-			playerList.transferPlayerToDimension((EntityPlayerMP) entity, dimension, teleporter);
-			player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, 0, 0);
 
-			/** Strange flag that needs to be set to prevent the NetHandlerPlayServer instance from resetting your position **/
-			ObfuscationReflectionHelper.setPrivateValue(EntityPlayerMP.class, player, true, "field_184851_cj", "invulnerableDimensionChange");
+			if (!toWorld.isRemote)
+			{
+				EntityPlayerMP player = (EntityPlayerMP)entity;
+
+				playerList.transferPlayerToDimension((EntityPlayerMP) entity, dimension, teleporter);
+				player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, 0, 0);
+
+				/** Strange flag that needs to be set to prevent the NetHandlerPlayServer instance from resetting your position **/
+				ObfuscationReflectionHelper.setPrivateValue(EntityPlayerMP.class, player, true, "field_184851_cj", "invulnerableDimensionChange");
+			}
 
 			return entity;
 		}
