@@ -66,24 +66,29 @@ public class BlockAercloud extends Block implements IBlockVariants
 				@Override
 				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
 				{
-					if (entity.motionY <= -0.1D)
+					if (!(entity instanceof EntityPlayer))
 					{
-						if (entity.worldObj.isRemote)
+						if (entity.motionY > -0.2D)
 						{
-							world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundsAether.aercloud_bounce, SoundCategory.BLOCKS, 0.8f, 0.9f + (world.rand.nextFloat() * 0.2f), false);
-
-							for (int i = 0; i < 50; i++)
-							{
-								double x = pos.getX() + world.rand.nextDouble();
-								double y = pos.getY() + 1.0D;
-								double z = pos.getZ() + world.rand.nextDouble();
-
-								world.spawnParticle(EnumParticleTypes.WATER_SPLASH, x, y, z, 0.0D, 0.0D, 0.0D);
-							}
+							return;
 						}
-
-						entity.motionY = 2.0D;
 					}
+
+					if (entity.worldObj.isRemote)
+					{
+						world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundsAether.aercloud_bounce, SoundCategory.BLOCKS, 0.8f, 0.9f + (world.rand.nextFloat() * 0.2f), false);
+
+						for (int i = 0; i < 50; i++)
+						{
+							double x = pos.getX() + world.rand.nextDouble();
+							double y = pos.getY() + 1.0D;
+							double z = pos.getZ() + world.rand.nextDouble();
+
+							world.spawnParticle(EnumParticleTypes.WATER_SPLASH, x, y, z, 0.0D, 0.0D, 0.0D);
+						}
+					}
+
+					entity.motionY = 2.0D;
 				}
 			},
 			GREEN_AERCLOUD = new AercloudVariant(2, "green", false)
@@ -204,6 +209,12 @@ public class BlockAercloud extends Block implements IBlockVariants
 
 	@Override
 	public boolean isFullCube(IBlockState state)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isFullBlock(IBlockState state)
 	{
 		return false;
 	}
