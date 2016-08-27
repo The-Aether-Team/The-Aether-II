@@ -60,6 +60,12 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVarian
 	{
 		if (state.getValue(PROPERTY_HARVESTABLE))
 		{
+			if (player.capabilities.isCreativeMode)
+			{
+				world.setBlockToAir(pos);
+				return false;
+			}
+
 			world.setBlockState(pos, state.withProperty(PROPERTY_HARVESTABLE, false));
 
 			if (!world.isRemote && !player.capabilities.isCreativeMode)
