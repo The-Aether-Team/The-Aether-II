@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -28,7 +29,7 @@ public class ModifyMaxHealthEffect implements EntityEffectProcessor<Instance>
 			super(rules);
 
 			this.getAttributes().setFloat("maxHealthMod", maxHealthMod);
-			this.modifier = new AttributeModifier(UUID.randomUUID(), "Extra Max Health", maxHealthMod / 10, 2).setSaved(false);
+			this.modifier = new AttributeModifier("Extra Max Health", maxHealthMod * 2, 0).setSaved(false);
 		}
 
 		public AttributeModifier getModifier()
@@ -103,6 +104,11 @@ public class ModifyMaxHealthEffect implements EntityEffectProcessor<Instance>
 		EntityLivingBase living = (EntityLivingBase) source;
 
 		living.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(instance.getModifier());
+
+		if (living.getHealth() > living.getMaxHealth())
+		{
+			living.setHealth(living.getMaxHealth());
+		}
 	}
 
 	@Override
