@@ -84,17 +84,7 @@ public class BlockLabyrinthChest extends BlockContainer
 
 				if (chest.isMimic())
 				{
-					chest.clear();
-
-					EntityChestMimic mimic = new EntityChestMimic(world);
-
-					mimic.setPositionAndUpdate(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D);
-
-					world.spawnEntityInWorld(mimic);
-
 					world.setBlockToAir(pos);
-
-					mimic.playSound(SoundsAether.chest_mimic_awake, 1.0F, (mimic.getRNG().nextFloat() - mimic.getRNG().nextFloat()) * 0.2F + 1.0F);
 
 					return true;
 				}
@@ -264,11 +254,13 @@ public class BlockLabyrinthChest extends BlockContainer
 				world.setBlockToAir(pos);
 
 				mimic.playSound(SoundsAether.chest_mimic_awake, 1.0F, (mimic.getRNG().nextFloat() - mimic.getRNG().nextFloat()) * 0.2F + 1.0F);
+
+				super.breakBlock(world, pos, state);
+
+				return;
 			}
-			else
-			{
-				InventoryHelper.dropInventoryItems(world, pos, (IInventory) chest);
-			}
+
+			InventoryHelper.dropInventoryItems(world, pos, (IInventory) chest);
 		}
 
 		super.breakBlock(world, pos, state);
