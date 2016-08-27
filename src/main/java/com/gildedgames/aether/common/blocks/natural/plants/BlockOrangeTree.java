@@ -106,7 +106,13 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 
 		if (state.getValue(PROPERTY_STAGE) == STAGE_COUNT)
 		{
-			if (!player.capabilities.isCreativeMode)
+			if (player.capabilities.isCreativeMode)
+			{
+				world.setBlockToAir(pos);
+				world.setBlockToAir(adjPos);
+				return false;
+			}
+			else
 			{
 				this.dropOranges(world, pos);
 			}
