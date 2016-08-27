@@ -28,7 +28,7 @@ public class ModifySpeedEffect implements EntityEffectProcessor<Instance>
 			super(rules);
 
 			this.getAttributes().setFloat("movementSpeedMod", movementSpeedMod);
-			this.modifier = new AttributeModifier(UUID.randomUUID(), "Extra Movement Speed", movementSpeedMod, 2).setSaved(false);
+			this.modifier = new AttributeModifier("Extra Movement Speed", movementSpeedMod, 2).setSaved(false);
 		}
 
 		public AttributeModifier getModifier()
