@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.util;
 
+import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -7,7 +8,7 @@ import net.minecraft.item.ItemStack;
 
 public class PlayerUtil
 {
-	public static boolean isWearingEquipment(PlayerAetherImpl aePlayer, Item... items)
+	public static boolean isWearingEquipment(IPlayerAetherCapability aePlayer, Item... items)
 	{
 		for (Item item : items)
 		{

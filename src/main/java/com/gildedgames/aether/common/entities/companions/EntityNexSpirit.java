@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.companions;
 
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
-import com.gildedgames.aether.common.capabilities.player.PlayerCompanionManager;
+import com.gildedgames.aether.common.capabilities.player.modules.PlayerCompanionModule;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -31,7 +31,7 @@ public class EntityNexSpirit extends EntityCompanion
 		{
 			PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(this.getOwner());
 
-			PlayerCompanionManager companionManager = aePlayer.getCompanionManager();
+			PlayerCompanionModule companionManager = aePlayer.getCompanionModule();
 
 			ItemStack equippedCompanion = companionManager.getEquippedCompanionItem();
 

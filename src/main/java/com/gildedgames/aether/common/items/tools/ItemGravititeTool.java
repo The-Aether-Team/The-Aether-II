@@ -28,9 +28,9 @@ public class ItemGravititeTool extends ItemAetherTool
 		{
 			PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
 
-			if (aePlayer.getHeldBlock() != null && aePlayer.getHeldBlock().ticksExisted > 1)
+			if (aePlayer.getGravititeAbility().getHeldBlock() != null && aePlayer.getGravititeAbility().getHeldBlock().ticksExisted > 1)
 			{
-				aePlayer.dropHeldBlock();
+				aePlayer.getGravititeAbility().dropHeldBlock();
 			}
 		}
 
@@ -44,7 +44,7 @@ public class ItemGravititeTool extends ItemAetherTool
 		{
 			PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
 
-			if (aePlayer.getHeldBlock() == null)
+			if (aePlayer.getGravititeAbility().getHeldBlock() == null)
 			{
 				IBlockState state = world.getBlockState(pos);
 
@@ -53,7 +53,7 @@ public class ItemGravititeTool extends ItemAetherTool
 					return EnumActionResult.PASS;
 				}
 
-				if (aePlayer.pickupBlock(pos, world))
+				if (aePlayer.getGravititeAbility().pickupBlock(pos, world))
 				{
 					stack.damageItem(2, player);
 

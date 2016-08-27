@@ -72,7 +72,7 @@ public abstract class EntityCompanion extends EntityLiving
 			{
 				PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(this.getOwner());
 
-				if (aePlayer.getCompanionManager().getCompanionEntity() != this)
+				if (aePlayer.getCompanionModule().getCompanionEntity() != this)
 				{
 					this.setDead();
 

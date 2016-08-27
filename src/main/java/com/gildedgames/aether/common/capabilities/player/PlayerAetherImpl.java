@@ -1,39 +1,19 @@
 package com.gildedgames.aether.common.capabilities.player;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
-import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
-import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
-import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.capabilities.player.modules.*;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
-import com.gildedgames.aether.common.containers.inventory.InventoryEquipment.PendingItemChange;
-import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
-import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
-import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
-import com.gildedgames.aether.common.items.tools.ItemValkyrieTool;
-import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import com.gildedgames.aether.common.util.PlayerUtil;
-import com.gildedgames.util.core.util.BlockPosDimension;
+import com.google.common.collect.Lists;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -41,36 +21,41 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
-import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.LinkedList;
 
 public class PlayerAetherImpl implements IPlayerAetherCapability
 {
+
+	private LinkedList<PlayerAetherModule> modules = Lists.newLinkedList();
+
 	private final EntityPlayer player;
 
 	private final InventoryEquipment equipmentInventory;
 
-	private final PlayerCompanionManager companionManager;
+	private final PlayerCompanionModule companionModule;
 
-	private EntityMovingBlock heldBlock;
+	private final AbilitiesModule abilitiesModule;
 
-	private boolean hasDoubleJumped;
-
-	private int ticksAirborne;
-
-	private BlockPosDimension bedSpawnpoint;
+	private final GravititeAbilityModule gravititeAbilityModule;
 
 	public PlayerAetherImpl(EntityPlayer player)
 	{
 		this.player = player;
 
 		this.equipmentInventory = new InventoryEquipment(this);
-		this.companionManager = new PlayerCompanionManager(this);
+
+		this.companionModule = new PlayerCompanionModule(this);
+		this.abilitiesModule = new AbilitiesModule(this);
+		this.gravititeAbilityModule = new GravititeAbilityModule(this);
+
+		this.modules.add(this.companionModule);
+		this.modules.add(this.abilitiesModule);
+		this.modules.add(this.gravititeAbilityModule);
+
+		this.modules.add(new EquipmentModule(this, this.equipmentInventory));
+		this.modules.add(new ExtendedReachModule(this));
 	}
 
 	public static PlayerAetherImpl getPlayer(Entity player)
@@ -81,246 +66,88 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 	@Override
 	public void onUpdate(LivingUpdateEvent event)
 	{
-		this.updateAbilities();
-
-		if (!this.player.worldObj.isRemote)
+		for (PlayerAetherModule module : this.modules)
 		{
-			this.handleEquipmentChanges();
-
-			if (!this.player.isDead)
-			{
-				this.updatePickedBlock();
-
-				this.companionManager.update();
-			}
+			module.onUpdate(event);
 		}
-
-		AetherCore.PROXY.setExtendedReachDistance(this.player, this.calculateExtendedReach());
 	}
 
 	@Override
 	public void onRespawn()
 	{
-
-	}
-
-	private float calculateExtendedReach()
-	{
-		ItemStack stack = this.player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
-
-		if (stack != null)
+		for (PlayerAetherModule module : this.modules)
 		{
-			Item item = stack.getItem();
-
-			if (item instanceof ItemValkyrieTool || item == ItemsAether.valkyrie_lance)
-			{
-				return 3.5f;
-			}
-		}
-
-		return 0.0f;
-	}
-
-	private void updateAbilities()
-	{
-		if (this.getPlayer().onGround)
-		{
-			this.hasDoubleJumped = false;
-			this.ticksAirborne = 0;
-		}
-		else
-		{
-			this.ticksAirborne++;
-		}
-
-		if (PlayerUtil.isWearingEquipment(this, ItemsAether.obsidian_armor_set))
-		{
-			this.player.setSprinting(false);
-		}
-		else if (PlayerUtil.isWearingEquipment(this, ItemsAether.phoenix_armor_set))
-		{
-			this.player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 2, 0, false, false));
-
-			this.player.extinguish();
-		}
-		else if (PlayerUtil.isWearingEquipment(this, ItemsAether.neptune_armor_set))
-		{
-			if (this.player.isInsideOfMaterial(Material.WATER))
-			{
-				this.player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 2, 0, false, false));
-			}
-		}
-	}
-
-	private void updatePickedBlock()
-	{
-		if (this.heldBlock != null)
-		{
-			if (this.heldBlock.isDead || this.heldBlock.isFalling())
-			{
-				this.heldBlock = null;
-			}
-			else
-			{
-				ItemStack stack = this.player.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
-
-				// Check if the player is still using a gravitite tool
-				if (!(stack != null && stack.getItem() instanceof ItemGravititeTool))
-				{
-					this.heldBlock.setHoldingPlayer(null);
-				}
-				else if (this.heldBlock.ticksExisted % 20 == 0)
-				{
-					// Does damage 2 damage/sec, increasing the amount of damage by 1 every 3 seconds,
-					// for a maximum of 8 damage/sec
-
-					int extra = (int) Math.floor(Math.min(6, this.heldBlock.ticksExisted / 60));
-
-					stack.damageItem(2 + extra, this.player);
-				}
-			}
-		}
-	}
-
-
-
-	private void sendEquipmentChanges(Set<PendingItemChange> dirties)
-	{
-		List<Pair<Integer, ItemStack>> updates = new ArrayList<>();
-
-		for (PendingItemChange change : dirties)
-		{
-			updates.add(Pair.of(change.getSlot(), change.getAfter()));
-		}
-
-		NetworkingAether.sendPacketToWatching(new EquipmentChangedPacket(this.player, updates), this.player);
-	}
-
-	private void handleEquipmentChanges()
-	{
-		if (this.equipmentInventory.getDirties().size() > 0)
-		{
-			Set<PendingItemChange> changes = this.equipmentInventory.getDirties();
-
-			this.sendEquipmentChanges(changes);
-
-			for (PendingItemChange change : changes)
-			{
-				ItemStack beforeStack = change.getBefore();
-
-				this.handleEffectChanges(beforeStack, change);
-			}
-
-			changes.clear();
-		}
-	}
-
-	private void handleEffectChanges(ItemStack before, PendingItemChange change)
-	{
-		IEntityEffectsCapability effects = EntityEffects.get(this.getPlayer());
-
-		if (before != null && before.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
-		{
-			IItemEffectsCapability itemEffects = before.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
-
-			for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
-			{
-				EntityEffectProcessor processor = effect.getLeft();
-				EntityEffectInstance instance = effect.getRight();
-
-				effects.removeInstance(processor, instance);
-			}
-		}
-
-		ItemStack afterStack = change.getAfter();
-
-		if (afterStack != null && afterStack != before && afterStack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
-		{
-			IItemEffectsCapability itemEffects = afterStack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
-
-			for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
-			{
-				EntityEffectProcessor processor = effect.getLeft();
-				EntityEffectInstance instance = effect.getRight();
-
-				effects.addInstance(processor, instance);
-			}
+			module.onRespawn();
 		}
 	}
 
 	@Override
 	public void onDeath(LivingDeathEvent event)
 	{
-		this.companionManager.onDeath(event);
-
-		this.dropHeldBlock();
+		for (PlayerAetherModule module : this.modules)
+		{
+			module.onDeath(event);
+		}
 	}
 
 	@Override
 	public void onDrops(LivingDropsEvent event)
 	{
-		if (!this.player.getEntityWorld().getGameRules().getBoolean("keepInventory"))
+		for (PlayerAetherModule module : this.modules)
 		{
-			this.player.captureDrops = true;
-
-			this.equipmentInventory.dropAllItems();
-
-			this.player.captureDrops = false;
+			module.onDrops(event);
 		}
 	}
 
 	@Override
 	public void onHurt(LivingHurtEvent event)
 	{
-		if (!event.getSource().isUnblockable())
+		for (PlayerAetherModule module : this.modules)
 		{
-			for (ItemStack stack : this.player.inventory.armorInventory)
-			{
-				if (stack != null && stack.getItem() instanceof ItemAetherArmor)
-				{
-					event.setAmount(event.getAmount() - ((ItemAetherArmor) stack.getItem()).getExtraDamageReduction(stack));
-				}
-			}
+			module.onHurt(event);
 		}
 	}
 
 	@Override
 	public void onFall(LivingFallEvent event)
 	{
-		if (PlayerUtil.isWearingEquipment(this, ItemsAether.gravitite_armor_set))
+		for (PlayerAetherModule module : this.modules)
 		{
-			event.setResult(Result.DENY);
+			module.onFall(event);
 		}
 	}
 
 	@Override
 	public void onTeleport(PlayerEvent.PlayerChangedDimensionEvent event)
 	{
-		this.companionManager.onTeleport(event);
+		for (PlayerAetherModule module : this.modules)
+		{
+			module.onTeleport(event);
+		}
 	}
 
 	@Override
 	public void onSpawned(PlayerEvent.PlayerLoggedInEvent event)
 	{
-		this.companionManager.onSpawned(event);
+		for (PlayerAetherModule module : this.modules)
+		{
+			module.onSpawned(event);
+		}
 	}
 
 	@Override
 	public void onDespawn(PlayerEvent.PlayerLoggedOutEvent event)
 	{
-		this.companionManager.onDespawned(event);
+		for (PlayerAetherModule module : this.modules)
+		{
+			module.onDespawn(event);
+		}
 	}
 
 	@Override
 	public InventoryEquipment getEquipmentInventory()
 	{
 		return this.equipmentInventory;
-	}
-
-	@Override
-	public PlayerCompanionManager getCompanionManager()
-	{
-		return this.companionManager;
 	}
 
 	@Override
@@ -338,76 +165,31 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 	}
 
 	@Override
+	public int getTicksAirborne()
+	{
+		return this.abilitiesModule.getTicksAirborne();
+	}
+
+	@Override
+	public boolean performDoubleJump()
+	{
+		return this.abilitiesModule.performDoubleJump();
+	}
+
+	@Override
 	public EntityPlayer getPlayer()
 	{
 		return this.player;
 	}
 
-	public boolean performDoubleJump()
+	public PlayerCompanionModule getCompanionModule()
 	{
-		if (!this.hasDoubleJumped && this.ticksAirborne > 2)
-		{
-			AetherCore.PROXY.spawnJumpParticles(this.getPlayer().worldObj, this.getPlayer().posX, this.getPlayer().posY, this.getPlayer().posZ, 1.5D, 12);
-
-			this.getPlayer().motionY = 0.55D;
-			this.getPlayer().fallDistance = -4;
-
-			this.getPlayer().motionX *= 1.4D;
-			this.getPlayer().motionZ *= 1.4D;
-
-			this.hasDoubleJumped = true;
-
-			return true;
-		}
-
-		return false;
+		return this.companionModule;
 	}
 
-	@Override
-	public int getTicksAirborne()
+	public GravititeAbilityModule getGravititeAbility()
 	{
-		return this.ticksAirborne;
-	}
-
-	public boolean pickupBlock(BlockPos pos, World world)
-	{
-		if (this.heldBlock == null)
-		{
-			if (world.isBlockModifiable(this.player, pos))
-			{
-				IBlockState state = world.getBlockState(pos);
-
-				EntityMovingBlock movingBlock = new EntityMovingBlock(world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, state);
-				world.spawnEntityInWorld(movingBlock);
-
-				this.holdBlock(movingBlock);
-
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	private void holdBlock(EntityMovingBlock entity)
-	{
-		this.dropHeldBlock();
-
-		this.heldBlock = entity;
-		this.heldBlock.setHoldingPlayer(this.player);
-	}
-
-	public void dropHeldBlock()
-	{
-		if (this.getHeldBlock() != null)
-		{
-			this.getHeldBlock().setHoldingPlayer(null);
-		}
-	}
-
-	public EntityMovingBlock getHeldBlock()
-	{
-		return this.heldBlock;
+		return this.gravititeAbilityModule;
 	}
 
 	public static class Storage implements IStorage<IPlayerAetherCapability>

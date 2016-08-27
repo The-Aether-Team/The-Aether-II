@@ -112,7 +112,7 @@ public class PlayerAetherEvents
 		{
 			EntityPlayer player = aePlayer.getPlayer();
 
-			ItemStack companionItem = aePlayer.getCompanionManager().getEquippedCompanionItem();
+			ItemStack companionItem = aePlayer.getCompanionModule().getEquippedCompanionItem();
 
 			if (companionItem != null && companionItem.getItem() instanceof ItemDeathSeal)
 			{
@@ -129,7 +129,7 @@ public class PlayerAetherEvents
 
 					ItemDeathSeal.setDisabledTimer(companionItem, player.worldObj, 20 * 60 * 15);
 
-					aePlayer.getCompanionManager().syncCompanionItem();
+					aePlayer.getCompanionModule().syncCompanionItem();
 
 					FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().sendChatMsg(new TextComponentTranslation("chat.aether.resurrected", player.getDisplayName()));
 

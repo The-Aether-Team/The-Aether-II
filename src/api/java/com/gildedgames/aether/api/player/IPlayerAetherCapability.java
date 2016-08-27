@@ -38,7 +38,7 @@ public interface IPlayerAetherCapability
 
 	IInventoryEquipment getEquipmentInventory();
 
-	IPlayerCompanionManager getCompanionManager();
+	IPlayerCompanionManager getCompanionModule();
 
 	/**
 	 * @return The {@link EntityPlayer} this capability is attached to.

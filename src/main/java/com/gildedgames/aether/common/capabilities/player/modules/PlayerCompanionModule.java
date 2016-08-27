@@ -1,6 +1,9 @@
-package com.gildedgames.aether.common.capabilities.player;
+package com.gildedgames.aether.common.capabilities.player.modules;
 
+import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.companions.IPlayerCompanionManager;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.entities.companions.EntityCompanion;
 import com.gildedgames.aether.common.items.companions.ItemCompanion;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -11,11 +14,12 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class PlayerCompanionManager implements IPlayerCompanionManager
+public class PlayerCompanionModule extends PlayerAetherModule implements IPlayerCompanionManager
 {
 	private final PlayerAetherImpl aePlayer;
 
@@ -23,10 +27,23 @@ public class PlayerCompanionManager implements IPlayerCompanionManager
 
 	private int companionId;
 
-	public PlayerCompanionManager(PlayerAetherImpl aePlayer)
+	public PlayerCompanionModule(PlayerAetherImpl aePlayer)
 	{
+		super(aePlayer);
+
 		this.aePlayer = aePlayer;
 		this.player = aePlayer.getPlayer();
+	}
+
+	@Override
+	public void onUpdate(LivingEvent.LivingUpdateEvent event)
+	{
+		if (this.getPlayer().worldObj.isRemote || this.getPlayer().isDead)
+		{
+			return;
+		}
+
+		this.update();
 	}
 
 	public void update()
@@ -114,6 +131,7 @@ public class PlayerCompanionManager implements IPlayerCompanionManager
 		}
 	}
 
+	@Override
 	public void onDeath(LivingDeathEvent event)
 	{
 		if (!event.isCanceled())
@@ -122,6 +140,7 @@ public class PlayerCompanionManager implements IPlayerCompanionManager
 		}
 	}
 
+	@Override
 	public void onTeleport(PlayerEvent.PlayerChangedDimensionEvent event)
 	{
 		if (!event.isCanceled())
@@ -132,12 +151,14 @@ public class PlayerCompanionManager implements IPlayerCompanionManager
 		}
 	}
 
+	@Override
 	public void onSpawned(PlayerEvent.PlayerLoggedInEvent event)
 	{
 		this.update();
 	}
 
-	public void onDespawned(PlayerEvent.PlayerLoggedOutEvent event)
+	@Override
+	public void onDespawn(PlayerEvent.PlayerLoggedOutEvent event)
 	{
 		this.removeCompanion(false);
 	}
