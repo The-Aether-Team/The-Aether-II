@@ -2,7 +2,9 @@ package com.gildedgames.aether.api.player;
 
 import com.gildedgames.aether.api.player.companions.IPlayerCompanionManager;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
+import com.gildedgames.util.io_manager.io.NBT;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -53,4 +55,9 @@ public interface IPlayerAetherCapability
 	int getTicksAirborne();
 
 	boolean performDoubleJump();
+
+	void write(NBTTagCompound tag);
+
+	void read(NBTTagCompound tag);
+
 }

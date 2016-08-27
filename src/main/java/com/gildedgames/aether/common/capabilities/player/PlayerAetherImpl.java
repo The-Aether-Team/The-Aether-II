@@ -40,6 +40,8 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 
 	private final GravititeAbilityModule gravititeAbilityModule;
 
+	private final TeleportingModule teleportingModule;
+
 	public PlayerAetherImpl(EntityPlayer player)
 	{
 		this.player = player;
@@ -49,10 +51,12 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		this.companionModule = new PlayerCompanionModule(this);
 		this.abilitiesModule = new AbilitiesModule(this);
 		this.gravititeAbilityModule = new GravititeAbilityModule(this);
+		this.teleportingModule = new TeleportingModule(this);
 
 		this.modules.add(this.companionModule);
 		this.modules.add(this.abilitiesModule);
 		this.modules.add(this.gravititeAbilityModule);
+		this.modules.add(this.teleportingModule);
 
 		this.modules.add(new EquipmentModule(this, this.equipmentInventory));
 		this.modules.add(new ExtendedReachModule(this));
@@ -177,6 +181,18 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 	}
 
 	@Override
+	public void write(NBTTagCompound tag)
+	{
+		this.getTeleportingModule().write(tag);
+	}
+
+	@Override
+	public void read(NBTTagCompound tag)
+	{
+		this.getTeleportingModule().read(tag);
+	}
+
+	@Override
 	public EntityPlayer getPlayer()
 	{
 		return this.player;
@@ -192,6 +208,8 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		return this.gravititeAbilityModule;
 	}
 
+	public TeleportingModule getTeleportingModule() { return this.teleportingModule; }
+
 	public static class Storage implements IStorage<IPlayerAetherCapability>
 	{
 		@Override
@@ -203,6 +221,8 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 			instance.getEquipmentInventory().write(equipment);
 
 			compound.setTag("equipment", equipment);
+
+			instance.write(compound);
 
 			return compound;
 		}

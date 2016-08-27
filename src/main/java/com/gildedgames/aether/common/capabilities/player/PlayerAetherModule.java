@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.companions.IPlayerCompanionManager;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
@@ -80,6 +81,18 @@ public abstract class PlayerAetherModule implements IPlayerAetherCapability
 	public boolean performDoubleJump()
 	{
 		return false;
+	}
+
+	@Override
+	public void write(NBTTagCompound tag)
+	{
+
+	}
+
+	@Override
+	public void read(NBTTagCompound tag)
+	{
+
 	}
 
 	@Override

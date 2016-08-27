@@ -7,6 +7,10 @@ public class SoundsAether
 {
 	public static final SoundEvent glowstone_portal_hum = new SoundEvent(AetherCore.getResource("portal.glowstone.hum"));
 
+	public static final SoundEvent glowstone_portal_trigger = new SoundEvent(AetherCore.getResource("portal.glowstone.trigger"));
+
+	public static final SoundEvent glowstone_portal_travel = new SoundEvent(AetherCore.getResource("portal.glowstone.travel"));
+
 	public static final SoundEvent labyrinth_totem_drone = new SoundEvent(AetherCore.getResource("portal.labyrinth_totem.drone"));
 
 	public static final SoundEvent aercloud_bounce = new SoundEvent(AetherCore.getResource("block.aercloud.bounce"));
@@ -82,7 +86,10 @@ public class SoundsAether
 	public static final SoundEvent chest_mimic_awake = new SoundEvent(AetherCore.getResource("mob.chest_mimic.awake"));
 
 	public static void preInit() {
-		registerSound("portal.glowstone.drone", glowstone_portal_hum);
+		registerSound("portal.glowstone.hum", glowstone_portal_hum);
+		registerSound("portal.glowstone.trigger", glowstone_portal_trigger);
+		registerSound("portal.glowstone.travel", glowstone_portal_travel);
+
 		registerSound("portal.labyrinth_totem.hum", labyrinth_totem_drone);
 
 		registerSound("block.aercloud.bounce", aercloud_bounce);

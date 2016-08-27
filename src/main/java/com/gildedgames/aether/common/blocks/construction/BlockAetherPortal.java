@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.CommonEvents;
 import com.gildedgames.aether.common.DimensionsAether;
 import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.SoundType;
@@ -158,13 +159,11 @@ public class BlockAetherPortal extends BlockBreakable
 	@Override
 	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
-		if (world instanceof WorldServer && entity instanceof EntityPlayer)
+		if (entity instanceof EntityPlayer)
 		{
-			WorldServer worldServer = (WorldServer)world;
+			PlayerAetherImpl playerAether = PlayerAetherImpl.getPlayer(entity);
 
-			final int transferToID = entity.worldObj.provider.getDimensionType() == DimensionsAether.AETHER ? 0 : AetherCore.CONFIG.getAetherDimID();
-
-			CommonEvents.teleportEntity(entity, worldServer, AetherCore.TELEPORTER, transferToID);
+			playerAether.getTeleportingModule().processTeleporting();
 		}
 	}
 

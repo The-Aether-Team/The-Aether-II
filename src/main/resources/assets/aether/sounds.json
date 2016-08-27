@@ -5,6 +5,18 @@
 			"aether:portal/glowstone/hum"
 		]
 	},
+	"portal.glowstone.trigger": {
+		"category": "block",
+		"sounds": [
+			"aether:portal/glowstone/trigger"
+		]
+	},
+	"portal.glowstone.travel": {
+		"category": "block",
+		"sounds": [
+			"aether:portal/glowstone/travel"
+		]
+	},
 	"portal.labyrinth_totem.drone": {
 		"category": "neutral",
 		"sounds": [
