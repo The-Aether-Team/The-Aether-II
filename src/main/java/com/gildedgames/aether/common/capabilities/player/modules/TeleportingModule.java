@@ -25,6 +25,16 @@ public class TeleportingModule extends PlayerAetherModule
 		super(playerAether);
 	}
 
+	public float getPrevTimeInPortal()
+	{
+		return this.prevTimeInPortal;
+	}
+
+	public float getTimeInPortal()
+	{
+		return this.timeInPortal;
+	}
+
 	@Override
 	public void onUpdate(LivingEvent.LivingUpdateEvent event)
 	{

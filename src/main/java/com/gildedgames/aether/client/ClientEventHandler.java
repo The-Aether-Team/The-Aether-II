@@ -7,7 +7,9 @@ import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
 import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
 import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.modules.TeleportingModule;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -15,22 +17,38 @@ import com.gildedgames.aether.common.network.packets.AetherMovementPacket;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.Timer;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.tuple.Pair;
+import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -38,7 +56,73 @@ import java.util.List;
 
 public class ClientEventHandler
 {
+
 	private boolean prevJumpBindState;
+
+	private Timer timer = new Timer(20.0F);
+
+	@SideOnly(Side.CLIENT)
+	public void renderAetherPortalHUD(float timeInPortal, ScaledResolution scaledRes)
+	{
+		if (timeInPortal < 1.0F)
+		{
+			timeInPortal = timeInPortal * timeInPortal;
+			timeInPortal = timeInPortal * timeInPortal;
+			timeInPortal = timeInPortal * 0.8F + 0.2F;
+		}
+
+		Minecraft mc = Minecraft.getMinecraft();
+
+		GlStateManager.disableAlpha();
+		GlStateManager.disableDepth();
+		GlStateManager.depthMask(false);
+		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+		GlStateManager.color(1.0F, 1.0F, 1.0F, timeInPortal);
+		mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+		TextureAtlasSprite textureatlassprite = mc.getBlockRendererDispatcher().getBlockModelShapes().getTexture(BlocksAether.aether_portal.getDefaultState());
+		float f = textureatlassprite.getMinU();
+		float f1 = textureatlassprite.getMinV();
+		float f2 = textureatlassprite.getMaxU();
+		float f3 = textureatlassprite.getMaxV();
+		Tessellator tessellator = Tessellator.getInstance();
+		VertexBuffer vertexbuffer = tessellator.getBuffer();
+		vertexbuffer.begin(7, DefaultVertexFormats.POSITION_TEX);
+		vertexbuffer.pos(0.0D, (double)scaledRes.getScaledHeight(), -90.0D).tex((double)f, (double)f3).endVertex();
+		vertexbuffer.pos((double)scaledRes.getScaledWidth(), (double)scaledRes.getScaledHeight(), -90.0D).tex((double)f2, (double)f3).endVertex();
+		vertexbuffer.pos((double)scaledRes.getScaledWidth(), 0.0D, -90.0D).tex((double)f2, (double)f1).endVertex();
+		vertexbuffer.pos(0.0D, 0.0D, -90.0D).tex((double)f, (double)f1).endVertex();
+		tessellator.draw();
+		GlStateManager.depthMask(true);
+		GlStateManager.enableDepth();
+		GlStateManager.enableAlpha();
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+	}
+
+	@SubscribeEvent(priority = EventPriority.NORMAL)
+	public void onRenderGui(RenderGameOverlayEvent event)
+	{
+		if (event.isCancelable() || event.getType() != RenderGameOverlayEvent.ElementType.ALL)
+		{
+			return;
+		}
+
+		Minecraft mc = Minecraft.getMinecraft();
+
+		ScaledResolution scaledRes = new ScaledResolution(mc);
+
+		if (!mc.thePlayer.isPotionActive(MobEffects.NAUSEA))
+		{
+			PlayerAetherImpl playerAether = PlayerAetherImpl.getPlayer(mc.thePlayer);
+			TeleportingModule teleporter = playerAether.getTeleportingModule();
+
+			float timeInPortal = teleporter.getPrevTimeInPortal() + (teleporter.getTimeInPortal() - teleporter.getPrevTimeInPortal()) * this.timer.renderPartialTicks;
+
+			if (timeInPortal > 0.0F)
+			{
+				this.renderAetherPortalHUD(timeInPortal, scaledRes);
+			}
+		}
+	}
 
 	@SubscribeEvent
 	public void onTooltipConstruction(ItemTooltipEvent event)
