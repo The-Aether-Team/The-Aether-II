@@ -195,6 +195,8 @@ public class ItemsAether
 
 	public static ItemMoaEgg moa_egg, rainbow_moa_egg;
 
+	public static Item aether_developer_wand;
+
 	public static void preInit()
 	{
 		skyroot_stick = registerItem("skyroot_stick", new Item(), CreativeTabsAether.tabMaterials);
@@ -428,6 +430,8 @@ public class ItemsAether
 
 		moa_egg = registerItem("moa_egg_item", new ItemMoaEgg(false));
 		rainbow_moa_egg = registerItem("rainbow_moa_egg", new ItemMoaEgg(true), CreativeTabs.MISC);
+
+		aether_developer_wand = registerItem("aether_developer_wand", new ItemAetherDeveloperWand());
 
 		IEquipmentRegistry equipmentRegistry = AetherCore.INSTANCE.getEquipmentRegistry();
 

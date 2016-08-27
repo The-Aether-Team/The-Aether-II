@@ -17,6 +17,7 @@ import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.registry.EquipmentRegistry;
 import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
+import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.aether.common.world.chunk.PlacementFlagProvider;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceFactory;
@@ -80,6 +81,7 @@ public class CommonProxy
 
 		AetherCore.srl().registerSerialization(0, DungeonInstance.class, new Instantiator(DungeonInstance.class));
 		AetherCore.srl().registerSerialization(1, MoaGenePool.class, new Instantiator(MoaGenePool.class));
+		AetherCore.srl().registerSerialization(2, TickTimer.class, new Instantiator(TickTimer.class));
 	}
 
 	public void init(FMLInitializationEvent event)

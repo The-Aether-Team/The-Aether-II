@@ -1,11 +1,14 @@
 package com.gildedgames.aether.common.util;
 
-public class TickTimer
+import com.gildedgames.util.io_manager.io.NBT;
+import net.minecraft.nbt.NBTTagCompound;
+
+public class TickTimer implements NBT
 {
 
 	private int ticksPassed;
 
-	private final int ticksPerSecond;
+	private int ticksPerSecond;
 
 	public static final int TICKS_PER_SECOND_DEFAULT = 20;
 
@@ -64,4 +67,17 @@ public class TickTimer
 		return this.ticksPassed / 20;
 	}
 
+	@Override
+	public void write(NBTTagCompound output)
+	{
+		output.setInteger("ticksPassed", this.ticksPassed);
+		output.setInteger("ticksPerSecond", this.ticksPerSecond);
+	}
+
+	@Override
+	public void read(NBTTagCompound input)
+	{
+		this.ticksPassed = input.getInteger("ticksPassed");
+		this.ticksPerSecond = input.getInteger("ticksPerSecond");
+	}
 }

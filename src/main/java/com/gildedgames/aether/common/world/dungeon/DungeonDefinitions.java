@@ -1,10 +1,16 @@
 package com.gildedgames.aether.common.world.dungeon;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityBattleGolem;
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityBattleSentry;
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityDetonationSentry;
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityTrackingSentry;
 import com.gildedgames.aether.common.world.dungeon.util.FlatLayerDungeonGenerator;
 import com.google.common.collect.Lists;
+import net.minecraft.entity.Entity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
@@ -33,33 +39,33 @@ public class DungeonDefinitions
 				{
 					List<DungeonRoom> rooms = Lists.newArrayList();
 
-					Template labLootL2 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_LootL_2"));
-					Template labLootL4 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_LootL_4"));
-					Template labLootM = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_LootM"));
-					Template labLootS = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_LootS"));
-					Template labWFeature1 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_WFeature_1"));
-					Template labWFeature2 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_WFeature_2"));
-					Template labPillars1F = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Pillars_1F"));
-					Template labPillars2F = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Pillars_2F"));
-					Template labPillarsLoot1F = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_PillarsLoot_1F"));
-					Template labPillarsLoot2F = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_PillarsLoot_2F"));
+					Template loot_large_2 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "/labyrinth/loot_large_2"));
+					Template loot_large_4 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "/labyrinth/loot_large_4"));
+					Template loot_medium = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "/labyrinth/loot_medium"));
+					Template loot_small = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "/labyrinth/loot_small"));
+					Template feature_water_1 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "/labyrinth/feature_water_1"));
+					Template feature_water_2 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "/labyrinth/feature_water_2"));
+					Template feature_pillars_1 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "/labyrinth/feature_pillars_1"));
+					Template feature_pillars_2 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "/labyrinth/feature_pillars_2"));
+					Template loot_pillars_1 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "/labyrinth/loot_pillars_1"));
+					Template loot_pillars_2 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "/labyrinth/loot_pillars_2"));
 
 					//Template labTunnel = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel"));
 					//Template labTunnelLeft = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel_Left"));
 					//Template labTunnelRight = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel_Right"));
 
-					rooms.add(new DungeonRoom(labLootL2));
-					rooms.add(new DungeonRoom(labLootL4));
-					rooms.add(new DungeonRoom(labPillars1F));
-					rooms.add(new DungeonRoom(labPillars2F));
-					rooms.add(new DungeonRoom(labPillarsLoot1F));
-					rooms.add(new DungeonRoom(labPillarsLoot2F));
-					rooms.add(new DungeonRoom(labWFeature1));
-					rooms.add(new DungeonRoom(labWFeature2));
-					rooms.add(new DungeonRoom(labLootM));
-					rooms.add(new DungeonRoom(labLootM));
-					rooms.add(new DungeonRoom(labLootS));
-					rooms.add(new DungeonRoom(labLootS));
+					rooms.add(new DungeonRoom(loot_large_2));
+					rooms.add(new DungeonRoom(loot_large_4));
+					rooms.add(new DungeonRoom(feature_pillars_1));
+					rooms.add(new DungeonRoom(feature_pillars_2));
+					rooms.add(new DungeonRoom(loot_pillars_1));
+					rooms.add(new DungeonRoom(loot_pillars_2));
+					rooms.add(new DungeonRoom(feature_water_1));
+					rooms.add(new DungeonRoom(feature_water_2));
+					rooms.add(new DungeonRoom(loot_medium));
+					rooms.add(new DungeonRoom(loot_medium));
+					rooms.add(new DungeonRoom(loot_small));
+					rooms.add(new DungeonRoom(loot_small));
 
 					//rooms.add(new DungeonRoom(labTunnel));
 					//rooms.add(new DungeonRoom(labTunnelLeft));
@@ -82,28 +88,46 @@ public class DungeonDefinitions
 
 				@Override public DungeonRoom createEntranceRoom(MinecraftServer server, Random rand)
 				{
-					Template labEntrance = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Entrance"));
+					Template labEntrance = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "/labyrinth/entrance"));
 
 					return new DungeonRoom(labEntrance);
 				}
 
 				@Override public DungeonRoom createConnectionBottom(MinecraftServer server, Random rand)
 				{
-					Template labStairs = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Stairs_Bottom"));
+					Template labStairs = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "/labyrinth/stairs_bottom"));
 
 					return new DungeonRoom(labStairs);
 				}
 
 				@Override public DungeonRoom createConnectionTop(MinecraftServer server, Random rand)
 				{
-					Template labStairs = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Stairs_Top"));
+					Template labStairs = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "/labyrinth/stairs_top"));
 
 					return new DungeonRoom(labStairs);
 				}
 
 			};
 		}
-		
+
+		@Override
+		public Entity createRandomMob(World world, Random rand)
+		{
+			int range = rand.nextInt(100);
+
+			if (range < 60)
+			{
+				return rand.nextBoolean() ? new EntityBattleSentry(world) : new EntityDetonationSentry(world);
+			}
+
+			if (range < 80)
+			{
+				return new EntityBattleGolem(world);
+			}
+
+			return new EntityTrackingSentry(world);
+		}
+
 	};
 	
 	public static final DungeonDefinition VALKYRIE_TEMPLE = new DungeonDefinition()
@@ -117,6 +141,12 @@ public class DungeonDefinitions
 
 		@Override
 		public DungeonRoomProvider createRoomProvider()
+		{
+			return null;
+		}
+
+		@Override
+		public Entity createRandomMob(World world, Random rand)
 		{
 			return null;
 		}
@@ -134,6 +164,12 @@ public class DungeonDefinitions
 
 		@Override
 		public DungeonRoomProvider createRoomProvider()
+		{
+			return null;
+		}
+
+		@Override
+		public Entity createRandomMob(World world, Random rand)
 		{
 			return null;
 		}

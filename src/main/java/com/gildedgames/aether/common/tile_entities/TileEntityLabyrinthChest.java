@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityLockable;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 
@@ -47,7 +48,11 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 
 	public boolean generatesLoot() { return this.generateLoot; }
 
-	public void setGenerateLoot(boolean flag) { this.generateLoot = flag; }
+	public void setGenerateLoot(boolean flag)
+	{
+		this.generateLoot = flag;
+		this.hasInit = false;
+	}
 
 	public void setCustomName(String name)
 	{
@@ -165,6 +170,18 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 			if (this.lidAngle < 0.0F)
 			{
 				this.lidAngle = 0.0F;
+			}
+		}
+
+		if (this.generatesLoot())
+		{
+			for (int u = 0; u < 2; ++u)
+			{
+				double motionX = (this.worldObj.rand.nextBoolean() ? 1.0D : -1.0D) * this.worldObj.rand.nextFloat();
+				double motionY = (this.worldObj.rand.nextBoolean() ? 1.0D : -1.0D) * this.worldObj.rand.nextFloat();
+				double motionZ = (this.worldObj.rand.nextBoolean() ? 1.0D : -1.0D) * this.worldObj.rand.nextFloat();
+
+				this.worldObj.spawnParticle(EnumParticleTypes.SPELL_MOB, this.getPos().getX() + motionX, this.getPos().getY() + 0.5D + motionY, this.getPos().getZ() + motionZ, 0.1D, 0.1D, 0.1D);
 			}
 		}
 	}

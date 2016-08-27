@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks.containers;
 
 import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityChestMimic;
+import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -22,6 +23,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -31,6 +33,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+
+import static sun.audio.AudioPlayer.player;
 
 public class BlockLabyrinthChest extends BlockContainer
 {
@@ -50,13 +54,29 @@ public class BlockLabyrinthChest extends BlockContainer
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
+		TileEntity te = world.getTileEntity(pos);
+
+		if (te instanceof TileEntityLabyrinthChest)
+		{
+			TileEntityLabyrinthChest chest = (TileEntityLabyrinthChest) te;
+
+			if (heldItem != null && heldItem.getItem() == ItemsAether.aether_developer_wand)
+			{
+				world.playSound(playerIn, pos, SoundsAether.tempest_electric_shock, SoundCategory.NEUTRAL, 1.0F, 0.8F + (world.rand.nextFloat() * 0.5F));
+
+				chest.setGenerateLoot(!chest.generatesLoot());
+
+				return true;
+			}
+		}
+
 		if (world.isRemote)
 		{
 			return true;
 		}
 		else
 		{
-			TileEntity te = world.getTileEntity(pos);
+			te = world.getTileEntity(pos);
 
 			if (te instanceof TileEntityLabyrinthChest)
 			{
@@ -225,11 +245,30 @@ public class BlockLabyrinthChest extends BlockContainer
 	@Override
 	public void breakBlock(World world, BlockPos pos, IBlockState state)
 	{
-		TileEntity chest = world.getTileEntity(pos);
+		TileEntity te = world.getTileEntity(pos);
 
-		if (chest instanceof TileEntityLabyrinthChest)
+		if (te instanceof TileEntityLabyrinthChest)
 		{
-			InventoryHelper.dropInventoryItems(world, pos, (IInventory) chest);
+			TileEntityLabyrinthChest chest = (TileEntityLabyrinthChest)te;
+
+			if (chest.isMimic())
+			{
+				chest.clear();
+
+				EntityChestMimic mimic = new EntityChestMimic(world);
+
+				mimic.setPositionAndUpdate(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D);
+
+				world.spawnEntityInWorld(mimic);
+
+				world.setBlockToAir(pos);
+
+				mimic.playSound(SoundsAether.chest_mimic_awake, 1.0F, (mimic.getRNG().nextFloat() - mimic.getRNG().nextFloat()) * 0.2F + 1.0F);
+			}
+			else
+			{
+				InventoryHelper.dropInventoryItems(world, pos, (IInventory) chest);
+			}
 		}
 
 		super.breakBlock(world, pos, state);

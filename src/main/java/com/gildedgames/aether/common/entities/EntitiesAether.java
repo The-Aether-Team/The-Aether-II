@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import com.gildedgames.aether.common.entities.companions.*;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.*;
+import com.gildedgames.aether.common.entities.dungeon.util.EntityGenerator;
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
 import com.gildedgames.aether.common.entities.living.*;
 import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
@@ -57,6 +58,7 @@ public class EntitiesAether
 		registerLivingEntity(EntityFangrin.class, "fangrin");
 		registerLivingEntity(EntityNexSpirit.class, "nex_spirit");
 		registerLivingEntity(EntityPinkBabySwet.class, "pink_baby_swet");
+		registerLivingEntity(EntityGenerator.class, "generator");
 
 		EntityRegistry.registerModEntity(EntityFloatingBlock.class, "floating_block", NEXT_ID++, AetherCore.INSTANCE, 80, 1, true);
 		EntityRegistry.registerModEntity(EntityMovingBlock.class, "moving_block", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);

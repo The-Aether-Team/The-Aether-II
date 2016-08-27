@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.entities.dungeon.labyrinth;
 import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.entities.projectiles.EntityBattleBomb;
 import com.gildedgames.aether.common.util.TickTimer;
+import com.gildedgames.util.core.nbt.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,6 +15,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -100,6 +102,24 @@ public class EntityBattleGolem extends EntityMob implements IRangedAttackMob
 				this.resupplyBombTimer.reset();
 			}
 		}
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound tag)
+	{
+		super.writeEntityToNBT(tag);
+
+		tag.setInteger("bombCount", this.getBombCount());
+		NBTHelper.fullySerialize("resupplyBombTimer", this.resupplyBombTimer, tag);
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound tag)
+	{
+		super.readEntityFromNBT(tag);
+
+		this.setBombCount(tag.getInteger("bombCount"));
+		this.resupplyBombTimer = NBTHelper.fullyDeserialize("resupplyBombTimer", tag);
 	}
 
 	@Override

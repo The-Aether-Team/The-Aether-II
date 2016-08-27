@@ -3,11 +3,14 @@ package com.gildedgames.aether.common.entities.dungeon.labyrinth;
 import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AISavageAttack;
 import com.gildedgames.aether.common.entities.util.EntityExtendedMob;
+import com.gildedgames.aether.common.util.TickTimer;
+import com.gildedgames.util.core.nbt.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -20,6 +23,8 @@ public class EntityChestMimic extends EntityExtendedMob
 
 	private static final DataParameter<Boolean> OVERHEATING = EntityDataManager.createKey(EntityChestMimic.class, DataSerializers.BOOLEAN);
 
+	private TickTimer attackTimer = new TickTimer();
+
 	public EntityChestMimic(World worldIn)
 	{
 		super(worldIn);
@@ -30,6 +35,11 @@ public class EntityChestMimic extends EntityExtendedMob
 
 		this.setSize(1.0F, 1.5F);
 		this.stepHeight = 1.0F;
+	}
+
+	public TickTimer getAttackTimer()
+	{
+		return this.attackTimer;
 	}
 
 	@Override
@@ -94,6 +104,24 @@ public class EntityChestMimic extends EntityExtendedMob
 				this.worldObj.spawnParticle(EnumParticleTypes.CLOUD, this.posX + motionX, this.posY + 0.5D + motionY, this.posZ + motionZ, 0.1D, 0.1D, 0.1D);
 			}
 		}
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound tag)
+	{
+		super.writeEntityToNBT(tag);
+
+		tag.setBoolean("overheating", this.isOverheating());
+		NBTHelper.fullySerialize("attackTimer", this.attackTimer, tag);
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound tag)
+	{
+		super.readEntityFromNBT(tag);
+
+		this.setOverheating(tag.getBoolean("overheating"));
+		this.attackTimer = NBTHelper.fullyDeserialize("attackTimer", tag);
 	}
 
 	@Override

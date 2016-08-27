@@ -466,6 +466,8 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.rainbow_moa_egg, "rainbow_moa_egg");
 
 		registerItemModels(BlocksAether.moa_egg, "moa_egg/moa_egg");
+
+		registerItemModels(ItemsAether.aether_developer_wand, "aether_developer_wand");
 	}
 
 	private static void registerItemModels(Block block, String path)

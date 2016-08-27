@@ -7,8 +7,6 @@ import com.gildedgames.aether.common.util.TickTimer;
 public class AISavageAttack extends EntityAI<EntityChestMimic>
 {
 
-    private TickTimer attackTimer;
-
     private double chargeSpeed;
 
     private int secsOverheating, secsAttacking;
@@ -16,7 +14,6 @@ public class AISavageAttack extends EntityAI<EntityChestMimic>
     public AISavageAttack(EntityChestMimic entity, double chargeSpeed, int secsOverheating, int secsAttacking)
     {
         super(entity);
-        this.attackTimer = new TickTimer();
 
         this.chargeSpeed = chargeSpeed;
 
@@ -53,16 +50,16 @@ public class AISavageAttack extends EntityAI<EntityChestMimic>
     @Override
     public void resetTask()
     {
-        this.attackTimer.reset();
+        this.entity().getAttackTimer().reset();
         this.entity().setOverheating(false);
     }
 
     @Override
     public void updateTask()
     {
-        this.attackTimer.tick();
+        this.entity().getAttackTimer().tick();
 
-        if (this.attackTimer.getSecondsPassed() <= this.secsAttacking)
+        if (this.entity().getAttackTimer().getSecondsPassed() <= this.secsAttacking)
         {
             this.entity().setOverheating(false);
 
@@ -71,7 +68,7 @@ public class AISavageAttack extends EntityAI<EntityChestMimic>
                 this.entity().getNavigator().tryMoveToEntityLiving(this.entity().getAttackTarget(), this.chargeSpeed);
             }
 
-            if (this.attackTimer.isMultipleOfTicks(10))
+            if (this.entity().getAttackTimer().isMultipleOfTicks(10))
             {
                 if (this.entity().getDistanceSqToEntity(this.entity().getAttackTarget()) <= 1.5D * 1.5D)
                 {
@@ -80,7 +77,7 @@ public class AISavageAttack extends EntityAI<EntityChestMimic>
                 }
             }
         }
-        else if (this.attackTimer.getSecondsPassed() <= this.secsAttacking + this.secsOverheating)
+        else if (this.entity().getAttackTimer().getSecondsPassed() <= this.secsAttacking + this.secsOverheating)
         {
             this.entity().setOverheating(true);
 
@@ -89,7 +86,7 @@ public class AISavageAttack extends EntityAI<EntityChestMimic>
         }
         else
         {
-            this.attackTimer.reset();
+            this.entity().getAttackTimer().reset();
         }
     }
 

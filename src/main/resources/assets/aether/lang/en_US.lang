@@ -296,6 +296,7 @@ item.aether.labyrinth_plans.name=Labyrinth Plans
 item.aether.skyroot_bed_item.name=Skyroot Bed
 item.aether.moa_egg_item.name=Moa Egg
 item.aether.rainbow_moa_egg.name=Rainbow Moa Egg
+item.aether.aether_developer_wand.name=Aether Developer Wand
 
 moa.feathers=Feathers
 moa.keratin=Keratin
@@ -412,6 +413,7 @@ entity.aether.trackingSentry.name=Tracking Sentry
 entity.aether.chestMimic.name=Chest Mimic
 entity.aether.battleGolem.name=Battle Golem
 entity.aether.swet.name=Swet
+entity.aether.generator.name=Entity Generator
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether Blocks
