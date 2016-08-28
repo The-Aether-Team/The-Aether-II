@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -96,6 +97,19 @@ public class MountProcessor
 		}
 	}
 
+	@SubscribeEvent
+	public static void onMountEvent(EntityMountEvent event)
+	{
+		if (event.isDismounting() && event.getEntityBeingMounted() instanceof IMount)
+		{
+			if (!event.getEntityBeingMounted().onGround)
+			{
+				event.setCanceled(true);
+				event.getEntityMounting().startRiding(event.getEntityBeingMounted(), true);
+			}
+		}
+	}
+
 	private static void processSteering(IMount mountImpl, EntityLivingBase mount, EntityPlayer rider)
 	{
 		IMountProcessor processor = mountImpl.getMountProcessor();
@@ -144,10 +158,6 @@ public class MountProcessor
 		{
 			mount.motionX = 0.0F;
 			mount.motionZ = 0.0F;
-		}
-		else
-		{
-
 		}
 
 		float oldLimbSwingAmount = mount.limbSwingAmount;
