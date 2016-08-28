@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcess
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
 import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
 import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
+import com.gildedgames.aether.api.capabilites.items.properties.ItemRarity;
 import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
@@ -166,7 +167,7 @@ public class ClientEventHandler
 			{
 				IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
 
-				if (props != null)
+				if (props != null && props.getRarity() != ItemRarity.BASIC)
 				{
 					event.getToolTip().add(I18n.format(props.getRarity().getUnlocalizedName()));
 				}
