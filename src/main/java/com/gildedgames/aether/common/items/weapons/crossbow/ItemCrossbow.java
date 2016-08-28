@@ -1,8 +1,11 @@
 package com.gildedgames.aether.common.items.weapons.crossbow;
 
+import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt.BoltAbility;
 import com.gildedgames.aether.common.items.ItemsAether;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +19,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -126,6 +130,26 @@ public class ItemCrossbow extends Item
 	}
 
 	@Override
+	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
+	{
+		if (ItemCrossbow.isReadyToShoot(stack))
+		{
+			if (entityLiving.worldObj.isRemote)
+			{
+				ItemRenderer renderer = Minecraft.getMinecraft().getItemRenderer();
+
+				ObfuscationReflectionHelper.setPrivateValue(ItemRenderer.class, renderer, 1.5F, ReflectionAether.EQUIPPED_PROGRESS_MAIN_HAND.getMappings());
+			}
+
+			this.shootBolt(entityLiving, stack);
+
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
 		if (!ItemCrossbow.isLoaded(stack) || !ItemCrossbow.isReadyToShoot(stack))
@@ -134,11 +158,6 @@ public class ItemCrossbow extends Item
 			{
 				playerIn.setActiveHand(EnumHand.MAIN_HAND);
 			}
-		}
-
-		if (ItemCrossbow.isReadyToShoot(stack))
-		{
-			this.shootBolt(playerIn, stack);
 		}
 
 		return new ActionResult<>(EnumActionResult.PASS, stack);

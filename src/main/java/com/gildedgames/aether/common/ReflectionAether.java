@@ -18,6 +18,8 @@ public class ReflectionAether
 		}
 	}
 
+	public static final ReflectionEntry EQUIPPED_PROGRESS_MAIN_HAND = new ReflectionEntry("field_187469_f", "equippedProgressMainHand");
+
 	public static final ReflectionEntry NET_CLIENT_HANDLER = new ReflectionEntry("field_78774_b", "netClientHandler");
 
 	public static final ReflectionEntry INVULNERABLE_DIMENSION_CHANGE = new ReflectionEntry("field_184851_cj", "invulnerableDimensionChange");

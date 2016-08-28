@@ -11,9 +11,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityBolt extends EntityArrow
 {
@@ -100,6 +103,23 @@ public class EntityBolt extends EntityArrow
 
 		this.dataManager.register(TYPE, (byte) 0);
 		this.dataManager.register(ABILITY, (byte) 0);
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public int getBrightnessForRender(float partialTicks)
+	{
+		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos(MathHelper.floor_double(this.posX), 0, MathHelper.floor_double(this.posZ));
+
+		if (this.worldObj.isBlockLoaded(blockpos$mutableblockpos))
+		{
+			blockpos$mutableblockpos.setY(MathHelper.floor_double(this.posY + (double)this.getEyeHeight()));
+			return this.worldObj.getCombinedLight(blockpos$mutableblockpos, 0);
+		}
+		else
+		{
+			return 0;
+		}
 	}
 	
 	public void setBoltAbility(BoltAbility ability)
