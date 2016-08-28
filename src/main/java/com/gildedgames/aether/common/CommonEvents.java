@@ -235,7 +235,7 @@ public class CommonEvents
 			teleportedEntity.setPositionAndUpdate(teleportPos.getX(), teleportPos.getY(), teleportPos.getZ());
 			teleportedMount.setPositionAndUpdate(teleportPos.getX(), teleportPos.getY(), teleportPos.getZ());
 
-			// Re-mount what it was previously riding
+			// Re-onMounted what it was previously riding
 			teleportedEntity.startRiding(teleportedMount, true);
 		}
 		else

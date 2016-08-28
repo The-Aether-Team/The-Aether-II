@@ -1,7 +1,6 @@
 package com.gildedgames.aether.api.capabilites;
 
 import com.gildedgames.aether.api.capabilites.items.extra_data.IItemExtraDataCapability;
-import com.gildedgames.aether.api.genes.IGenePool;
 import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
 import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;

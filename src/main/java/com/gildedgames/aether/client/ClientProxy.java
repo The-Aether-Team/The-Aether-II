@@ -93,7 +93,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void displayDismountMessage()
 	{
-		Minecraft.getMinecraft().ingameGUI.setRecordPlaying(I18n.format("mount.onboard", new Object[] {Minecraft.getMinecraft().gameSettings.keyBindSneak.getDisplayName()}), false);
+		Minecraft.getMinecraft().ingameGUI.setRecordPlaying(I18n.format("onMounted.onboard", new Object[] {Minecraft.getMinecraft().gameSettings.keyBindSneak.getDisplayName()}), false);
 	}
 
 }

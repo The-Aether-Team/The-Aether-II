@@ -1,5 +1,10 @@
 package com.gildedgames.aether.common.entities.living.mounts;
 
+import com.gildedgames.aether.api.entity.IMount;
+import com.gildedgames.aether.api.entity.IMountProcessor;
+import com.gildedgames.aether.common.entities.util.flying.EntityFlying;
+import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
+import com.gildedgames.aether.common.entities.util.mounts.IFlyingMountData;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import net.minecraft.block.Block;
@@ -11,6 +16,9 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
@@ -20,8 +28,13 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class EntityFlyingCow extends EntityFlyingAnimal
+public class EntityFlyingCow extends EntityFlyingAnimal implements IMount, IFlyingMountData
 {
+
+	private static final DataParameter<Float> AIRBORNE_TIME = EntityDataManager.createKey(EntityFlyingCow.class, DataSerializers.FLOAT);
+
+	private IMountProcessor mountProcessor = new FlyingMount(this);
+
 	public EntityFlyingCow(World world)
 	{
 		super(world);
@@ -36,6 +49,14 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 		this.tasks.addTask(7, new EntityAILookIdle(this));
 
 		this.setSize(0.9F, 1.3F);
+	}
+
+	@Override
+	protected void entityInit()
+	{
+		super.entityInit();
+
+		this.dataManager.register(EntityFlyingCow.AIRBORNE_TIME, 5.0F);
 	}
 
 	@Override
@@ -121,5 +142,41 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 	public EntityAgeable createChild(EntityAgeable ageable)
 	{
 		return new EntityFlyingCow(this.worldObj);
+	}
+
+	@Override
+	public IMountProcessor getMountProcessor()
+	{
+		return this.mountProcessor;
+	}
+
+	@Override
+	public void resetRemainingAirborneTime()
+	{
+		this.dataManager.set(EntityFlyingCow.AIRBORNE_TIME, 10.0F);
+	}
+
+	@Override
+	public float getRemainingAirborneTime()
+	{
+		return this.dataManager.get(EntityFlyingCow.AIRBORNE_TIME);
+	}
+
+	@Override
+	public void setRemainingAirborneTime(float set)
+	{
+		this.dataManager.set(EntityFlyingCow.AIRBORNE_TIME, set);
+	}
+
+	@Override
+	public void addRemainingAirborneTime(float add)
+	{
+		this.setRemainingAirborneTime(this.getRemainingAirborneTime() + add);
+	}
+
+	@Override
+	public double getMountedYOffset()
+	{
+		return 1.15D;
 	}
 }

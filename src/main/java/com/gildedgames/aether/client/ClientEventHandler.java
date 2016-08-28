@@ -6,17 +6,21 @@ import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcess
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
 import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
 import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
+import com.gildedgames.aether.api.entity.IMount;
+import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.modules.TeleportingModule;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
+import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.AetherMovementPacket;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.GlStateManager;
@@ -60,6 +64,8 @@ public class ClientEventHandler
 	private boolean prevJumpBindState;
 
 	private Timer timer = new Timer(20.0F);
+
+	private final Gui DUMMY_GUI = new Gui();
 
 	@SideOnly(Side.CLIENT)
 	public void renderAetherPortalHUD(float timeInPortal, ScaledResolution scaledRes)
@@ -120,6 +126,22 @@ public class ClientEventHandler
 			if (timeInPortal > 0.0F)
 			{
 				this.renderAetherPortalHUD(timeInPortal, scaledRes);
+			}
+		}
+
+		if (mc.thePlayer.isRiding())
+		{
+			if (mc.thePlayer.getRidingEntity() instanceof IMount)
+			{
+				IMount mount = (IMount)mc.thePlayer.getRidingEntity();
+				IMountProcessor processor = mount.getMountProcessor();
+
+				if (processor instanceof FlyingMount)
+				{
+					FlyingMount flyingMount = (FlyingMount)processor;
+
+					DUMMY_GUI.drawCenteredString(mc.fontRendererObj, String.valueOf((int)(flyingMount.getData().getRemainingAirborneTime())), scaledRes.getScaledWidth() / 2, scaledRes.getScaledHeight() - 30, 0xFFFFFF);
+				}
 			}
 		}
 	}

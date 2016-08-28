@@ -10,6 +10,7 @@ import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.crafting.RecipesAether;
 import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.entities.EntityItemWatcher;
+import com.gildedgames.aether.common.entities.MountProcessor;
 import com.gildedgames.aether.common.entities.effects.EntityEffectsEventHooks;
 import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -90,6 +91,7 @@ public class CommonProxy
 		MinecraftForge.EVENT_BUS.register(PlayerAetherEvents.class);
 		MinecraftForge.EVENT_BUS.register(EntityEffectsEventHooks.class);
 		MinecraftForge.EVENT_BUS.register(EntityItemWatcher.class);
+		MinecraftForge.EVENT_BUS.register(MountProcessor.class);
 
 		MinecraftForge.EVENT_BUS.register(ItemSkyrootSword.class);
 
