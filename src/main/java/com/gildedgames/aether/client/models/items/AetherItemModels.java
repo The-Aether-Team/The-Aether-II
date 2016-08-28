@@ -11,6 +11,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
+import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.entities.living.enemies.EntitySwet;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
@@ -468,6 +469,13 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.moa_egg, "moa_egg/moa_egg");
 
 		registerItemModels(ItemsAether.aether_developer_wand, "aether_developer_wand");
+
+		registerItemModels(ItemsAether.cloud_parachute, new ItemModelBuilder("cloud_parachute/")
+				.add(EntityParachute.Type.COLD.ordinal(), "cold_cloud_parachute")
+				.add(EntityParachute.Type.GOLDEN.ordinal(), "golden_cloud_parachute")
+				.add(EntityParachute.Type.PURPLE.ordinal(), "purple_cloud_parachute")
+				.add(EntityParachute.Type.GREEN.ordinal(), "green_cloud_parachute")
+				.add(EntityParachute.Type.BLUE.ordinal(), "blue_cloud_parachute"));
 	}
 
 	private static void registerItemModels(Block block, String path)

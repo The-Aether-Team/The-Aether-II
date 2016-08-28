@@ -3,6 +3,7 @@ package com.gildedgames.aether.client.renderer;
 import com.gildedgames.aether.client.renderer.entities.AetherRenderFactory;
 import com.gildedgames.aether.client.renderer.entities.RenderFloatingBlock;
 import com.gildedgames.aether.client.renderer.entities.RenderMovingBlock;
+import com.gildedgames.aether.client.renderer.entities.attachments.RenderParachute;
 import com.gildedgames.aether.client.renderer.entities.companions.*;
 import com.gildedgames.aether.client.renderer.entities.living.*;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderBolt;
@@ -11,6 +12,7 @@ import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDart;
 import com.gildedgames.aether.client.renderer.tile_entities.*;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
+import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.entities.companions.*;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityBattleSentry;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityChestMimic;
@@ -56,6 +58,7 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityDart.class, new AetherRenderFactory<>(RenderDart.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBolt.class, new AetherRenderFactory<>(RenderBolt.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDaggerfrostSnowball.class, new AetherRenderFactory<>(RenderDaggerfrostSnowball.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityParachute.class, new AetherRenderFactory<>(RenderParachute.class));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityPhyg.class, new AetherRenderFactory<>(RenderPhyg.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityFlyingCow.class, new AetherRenderFactory<>(RenderFlyingCow.class));

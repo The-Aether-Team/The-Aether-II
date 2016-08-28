@@ -25,6 +25,8 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import java.util.LinkedList;
 
+import static net.minecraft.realms.Tezzelator.t;
+
 public class PlayerAetherImpl implements IPlayerAetherCapability
 {
 
@@ -42,6 +44,8 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 
 	private final TeleportingModule teleportingModule;
 
+	private final ParachuteModule parachuteModule;
+
 	public PlayerAetherImpl(EntityPlayer player)
 	{
 		this.player = player;
@@ -52,11 +56,13 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		this.abilitiesModule = new AbilitiesModule(this);
 		this.gravititeAbilityModule = new GravititeAbilityModule(this);
 		this.teleportingModule = new TeleportingModule(this);
+		this.parachuteModule = new ParachuteModule(this);
 
 		this.modules.add(this.companionModule);
 		this.modules.add(this.abilitiesModule);
 		this.modules.add(this.gravititeAbilityModule);
 		this.modules.add(this.teleportingModule);
+		this.modules.add(this.parachuteModule);
 
 		this.modules.add(new EquipmentModule(this, this.equipmentInventory));
 		this.modules.add(new ExtendedReachModule(this));
@@ -183,13 +189,24 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 	@Override
 	public void write(NBTTagCompound tag)
 	{
-		this.getTeleportingModule().write(tag);
+		NBTTagCompound teleportingModule = new NBTTagCompound();
+		NBTTagCompound parachuteModule = new NBTTagCompound();
+
+		this.getTeleportingModule().write(teleportingModule);
+		this.getParachuteModule().write(parachuteModule);
+
+		tag.setTag("teleportingModule", teleportingModule);
+		tag.setTag("parachuteModule", parachuteModule);
 	}
 
 	@Override
 	public void read(NBTTagCompound tag)
 	{
-		this.getTeleportingModule().read(tag);
+		NBTTagCompound teleportingModule = tag.getCompoundTag("teleportingModule");
+		NBTTagCompound parachuteModule = tag.getCompoundTag("parachuteModule");
+
+		this.getTeleportingModule().read(teleportingModule);
+		this.getParachuteModule().read(parachuteModule);
 	}
 
 	@Override
@@ -209,6 +226,8 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 	}
 
 	public TeleportingModule getTeleportingModule() { return this.teleportingModule; }
+
+	public ParachuteModule getParachuteModule() { return this.parachuteModule; }
 
 	public static class Storage implements IStorage<IPlayerAetherCapability>
 	{

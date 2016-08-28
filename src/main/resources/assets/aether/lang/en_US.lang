@@ -297,6 +297,19 @@ item.aether.skyroot_bed_item.name=Skyroot Bed
 item.aether.moa_egg_item.name=Moa Egg
 item.aether.rainbow_moa_egg.name=Rainbow Moa Egg
 item.aether.aether_developer_wand.name=Aether Developer Wand
+item.aether.cold_cloud_parachute.name=Cold Cloud Parachute
+item.aether.golden_cloud_parachute.name=Golden Cloud Parachute
+item.aether.purple_cloud_parachute.name=Purple Cloud Parachute
+item.aether.green_cloud_parachute.name=Green Cloud Parachute
+item.aether.blue_cloud_parachute.name=Blue Cloud Parachute
+
+cloudParachute.ability.rightClick=§3Use:§r Right-Click
+cloudParachute.ability=§9Ability: 
+cloudParachute.ability.cold=Slow Descent
+cloudParachute.ability.golden=Fast Descent
+cloudParachute.ability.purple=Directional Descent
+cloudParachute.ability.green=Slow Descent
+cloudParachute.ability.blue=Fast Elevation
 
 moa.feathers=Feathers
 moa.keratin=Keratin
@@ -364,7 +377,6 @@ item.aether.bolt.holystone.name=Holystone Bolt
 item.aether.bolt.zanite.name=Zanite Bolt
 item.aether.bolt.gravitite.name=Gravitite Bolt
 item.aether.bolt.arkenium.name=Arkenium Bolt
-
 
 # Tool tooltips
 item.aether.tool.skyroot.ability.desc=Doubles drops from blocks
