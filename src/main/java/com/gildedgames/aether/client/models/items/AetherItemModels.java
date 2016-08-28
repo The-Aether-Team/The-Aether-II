@@ -255,47 +255,12 @@ public class AetherItemModels
 				.add(ItemDartType.ENCHANTED.ordinal(), "enchanted_dart")
 				.add(ItemDartType.POISON.ordinal(), "poison_dart"));
 
-		registerItemModels(ItemsAether.skyroot_crossbow, new ItemModelBuilder("crossbow/")
-				.add(0, "skyroot_crossbow_fired")
-				.add(1, "skyroot_crossbow_loading1")
-				.add(2, "skyroot_crossbow_loading2")
-				.add(3, "skyroot_crossbow_loaded")
-				.add(4, "skyroot_crossbow_fired"));
-
-		registerItemModels(ItemsAether.holystone_crossbow, new ItemModelBuilder("crossbow/")
-				.add(0, "holystone_crossbow_fired")
-				.add(1, "holystone_crossbow_loading1")
-				.add(2, "holystone_crossbow_loading2")
-				.add(3, "holystone_crossbow_loaded")
-				.add(4, "holystone_crossbow_fired"));
-
-		registerItemModels(ItemsAether.zanite_crossbow, new ItemModelBuilder("crossbow/")
-				.add(0, "zanite_crossbow_fired")
-				.add(1, "zanite_crossbow_loading1")
-				.add(2, "zanite_crossbow_loading2")
-				.add(3, "zanite_crossbow_loaded")
-				.add(4, "zanite_crossbow_fired"));
-
-		registerItemModels(ItemsAether.arkenium_crossbow, new ItemModelBuilder("crossbow/")
-				.add(0, "arkenium_crossbow_fired")
-				.add(1, "arkenium_crossbow_loading1")
-				.add(2, "arkenium_crossbow_loading2")
-				.add(3, "arkenium_crossbow_loaded")
-				.add(4, "arkenium_crossbow_fired"));
-
-		registerItemModels(ItemsAether.gravitite_crossbow, new ItemModelBuilder("crossbow/")
-				.add(0, "gravitite_crossbow_fired")
-				.add(1, "gravitite_crossbow_loading1")
-				.add(2, "gravitite_crossbow_loading2")
-				.add(3, "gravitite_crossbow_loaded")
-				.add(4, "gravitite_crossbow_fired"));
-
-		registerItemModels(ItemsAether.vampire_crossbow, new ItemModelBuilder("crossbow/")
-				.add(0, "vampire_crossbow_fired")
-				.add(1, "vampire_crossbow_loading1")
-				.add(2, "vampire_crossbow_loading2")
-				.add(3, "vampire_crossbow_loaded")
-				.add(4, "vampire_crossbow_fired"));
+		registerItemModels(ItemsAether.skyroot_crossbow, "crossbow/skyroot_crossbow");
+		registerItemModels(ItemsAether.holystone_crossbow, "crossbow/holystone_crossbow");
+		registerItemModels(ItemsAether.zanite_crossbow, "crossbow/zanite_crossbow");
+		registerItemModels(ItemsAether.arkenium_crossbow, "crossbow/arkenium_crossbow");
+		registerItemModels(ItemsAether.gravitite_crossbow, "crossbow/gravitite_crossbow");
+		registerItemModels(ItemsAether.vampire_crossbow, "crossbow/vampire_crossbow");
 
 		registerItemModels(ItemsAether.bolt, new ItemModelBuilder("bolts/")
 				.add(ItemBoltType.SKYROOT.ordinal(), "skyroot_bolt")

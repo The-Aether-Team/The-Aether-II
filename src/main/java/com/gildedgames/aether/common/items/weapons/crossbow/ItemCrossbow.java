@@ -8,50 +8,69 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+
+import static sun.audio.AudioPlayer.player;
 
 public class ItemCrossbow extends Item
 {
 
-	public static final String[] crossbowIconNameArray = new String[] {"_fired", "_loaded", "_loading1", "_loading2"};
-
-	// How long it takes for crossbow to "pull back"
-	private int duration;
-
-	// How far a mob gets knock-backed by attacking with a crossbow.
+	private float durationInTicks;
 	private float knockBackValue;
-
-	// How much damage is done to an entity attacked by the crossbow.
-	private float damageValue;
 
 	public ItemCrossbow()
 	{
 		this.maxStackSize = 1;
+
 		this.knockBackValue = 0;
-		this.damageValue = 0;
-		this.duration = 60; // default duration, roughly 3 seconds.
-	}
+		this.durationInTicks = 60.0F;
 
-	// Should be adjusted to check for quiver accessory slot, currently checks the first space in players inventory for ammo.
-	private int getBoltType(EntityPlayer player)
-	{
-		ItemStack boltStack = player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
-
-		if (this.hasAmmo(player))
+		this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter()
 		{
-			return boltStack.getMetadata();
-		}
+			@SideOnly(Side.CLIENT)
+			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
+			{
+				if (entityIn == null)
+				{
+					return 0.0F;
+				}
+				else
+				{
+					ItemStack itemstack = entityIn.getActiveItemStack();
 
-		return -1;
+					if (ItemCrossbow.isLoaded(stack))
+					{
+						return 1.0F;
+					}
+
+					return itemstack != null && itemstack.getItem() == ItemCrossbow.this ? ((float)(stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / ItemCrossbow.this.durationInTicks) : 0.0F;
+				}
+			}
+		});
+
+		this.addPropertyOverride(new ResourceLocation("pulling"), new IItemPropertyGetter()
+		{
+			@SideOnly(Side.CLIENT)
+			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
+			{
+				return entityIn != null && (entityIn.isHandActive() && entityIn.getActiveItemStack() == stack) || ItemCrossbow.isLoaded(stack) ? 1.0F : 0.0F;
+			}
+		});
 	}
 
 	private boolean hasAmmo(EntityPlayer player)
 	{
-		//ItemStack boltStack = player.getEquipmentInventory().getStackInSlot(5);
 		ItemStack boltStack = player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
 
 		if (boltStack != null && boltStack.getItem() == ItemsAether.bolt && boltStack.stackSize > 0)
@@ -62,27 +81,54 @@ public class ItemCrossbow extends Item
 		return false;
 	}
 
-	public float getKnockBackValue() { return this.knockBackValue; }
-
-	public void setKnockBackValue(float x)  { this.knockBackValue = x; }
-
-	public float getDamageValue() { return this.damageValue; }
-
-	public void setDamageValue(float x) { this.damageValue = x; }
-
-	public int getDuration() { return this.duration; }
-
-	public void setDuration(int x) { this.duration = x; }
-
-	@Override
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	private static void checkTag(ItemStack stack)
 	{
+		if (stack.getTagCompound() == null)
+		{
+			stack.setTagCompound(new NBTTagCompound());
+		}
+	}
+
+	public static boolean isLoaded(ItemStack stack)
+	{
+		if (stack == null) return false;
+
+		checkTag(stack);
+
+		return stack.getTagCompound().getBoolean("loaded");
+	}
+
+	public static void setLoaded(ItemStack stack, boolean loaded)
+	{
+		if (stack == null) return;
+
+		checkTag(stack);
+
+		stack.getTagCompound().setBoolean("loaded", loaded);
+	}
+
+	public static boolean isReadyToShoot(ItemStack stack)
+	{
+		if (stack == null) return false;
+
+		checkTag(stack);
+
+		return stack.getTagCompound().getBoolean("readyToShoot");
+	}
+
+	public static void setReadyToShoot(ItemStack stack, boolean readyToShoot)
+	{
+		if (stack == null) return;
+
+		checkTag(stack);
+
+		stack.getTagCompound().setBoolean("readyToShoot", readyToShoot);
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
-		if (itemStackIn.getMetadata() < 3 || itemStackIn.getMetadata() == 4)
+		if (!ItemCrossbow.isLoaded(stack) || !ItemCrossbow.isReadyToShoot(stack))
 		{
 			if (this.hasAmmo(playerIn))
 			{
@@ -90,135 +136,86 @@ public class ItemCrossbow extends Item
 			}
 		}
 
-		return new ActionResult<>(EnumActionResult.PASS, itemStackIn);
+		if (ItemCrossbow.isReadyToShoot(stack))
+		{
+			this.shootBolt(playerIn, stack);
+		}
+
+		return new ActionResult<>(EnumActionResult.PASS, stack);
 	}
 
-	@Override
-	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
+	private void shootBolt(EntityLivingBase entityLiving, ItemStack stack)
 	{
-		// Not sure why this is necessary to be honest. But I'll wait to remove it completely.
-
-		//if (entityLiving.worldObj.isRemote)
-		//{
-		//	return true;
-		//}
-		
-		float speed = 1.0f;
-
-		EntityBolt dart = new EntityBolt(entityLiving.getEntityWorld(), entityLiving);
-		dart.setAim(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, speed * 2.0F, 1.0F);
-		dart.setBoltAbility(stack.getItem() instanceof ItemArkeniumCrossbow ? BoltAbility.DESTROY_BLOCKS : BoltAbility.NORMAL);
-		dart.pickupStatus = EntityArrow.PickupStatus.ALLOWED;
-		
-		if (stack.getItemDamage() == 3)
+		if (ItemCrossbow.isLoaded(stack))
 		{
-			stack.setItemDamage(0);
+			float speed = 1.0f;
+
+			EntityBolt dart = new EntityBolt(entityLiving.getEntityWorld(), entityLiving);
+			dart.setAim(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, speed * 2.0F, 1.0F);
+			dart.setBoltAbility(stack.getItem() instanceof ItemArkeniumCrossbow ? BoltAbility.DESTROY_BLOCKS : BoltAbility.NORMAL);
+			dart.pickupStatus = EntityArrow.PickupStatus.ALLOWED;
+
 			entityLiving.getEntityWorld().spawnEntityInWorld(dart);
-			return true;
-		}
 
-		if (stack.getItemDamage() == 0)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
+			ItemCrossbow.setLoaded(stack, false);
+			ItemCrossbow.setReadyToShoot(stack, false);
 		}
 	}
 
 	@Override
 	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
 	{
-		if (player instanceof EntityPlayer) {
+		if (player instanceof EntityPlayer)
+		{
 			EntityPlayer entityPlayer = (EntityPlayer) player;
 			ItemStack boltStack = entityPlayer.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
 
-			if (stack.getItemDamage() == 4)
-			{
-				stack.setItemDamage(0);
-				player.stopActiveHand();
-			}
-
 			if (this.hasAmmo(entityPlayer))
 			{
-				if (count == (this.duration-(this.duration/3)) && stack.getItemDamage() == 0)
+				float use = (float)(stack.getMaxItemUseDuration() - player.getItemInUseCount()) / 20.0F;
+
+				if (use == (this.durationInTicks / 20.0F))
 				{
-					stack.setItemDamage(1);
-				}
-				if (count == (this.duration/2) && stack.getItemDamage() == 1)
-				{
-					stack.setItemDamage(2);
-				}
-				if (count == (this.duration/3) && stack.getItemDamage() == 2)
-				{
-					stack.setItemDamage(3);
-					boltStack.stackSize -=1;
+					boltStack.stackSize--;
 				}
 			}
-			else
-			{
-				player.stopActiveHand();
-			}
 		}
-	}
-
-	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase playerIn)
-	{
-		return stack;
-	}
-
-	@Override
-	public int getMaxItemUseDuration(ItemStack stack)
-	{
-		return this.getDuration();
-	}
-
-	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
-	{
-		if (stack.getItemDamage() > 0)
-		{
-			return false;
-		}
-
-		if (entity != null)
-		{
-			EntityLivingBase entityBase = (EntityLivingBase) entity;
-			DamageSource source = DamageSource.causePlayerDamage(player);
-
-			entityBase.attackEntityFrom(source, this.damageValue);
-
-			if (source.getSourceOfDamage() instanceof EntityLivingBase)
-			{
-				entityBase.knockBack(entity, this.knockBackValue, -(entity.posX - source.getSourceOfDamage().posX), -(entity.posZ - source.getSourceOfDamage().posZ));
-			}
-		}
-		return true;
 	}
 
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
 	{
-		stack.setItemDamage(0);
+		float use = (float)(stack.getMaxItemUseDuration() - entityLiving.getItemInUseCount()) / 20.0F;
+
+		if (use >= (this.durationInTicks / 20.0F))
+		{
+			ItemCrossbow.setLoaded(stack, true);
+		}
+
+		if (ItemCrossbow.isLoaded(stack))
+		{
+			ItemCrossbow.setReadyToShoot(stack, true);
+		}
 	}
 
 	@Override
-	public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, EntityPlayer player)
+	public int getMaxItemUseDuration(ItemStack stack)
+	{
+		return 72000;
+	}
+
+	@Override
+	public boolean getShareTag()
 	{
 		return true;
 	}
 
-	@Override
-	public EnumActionResult onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand)
-	{
-		return EnumActionResult.FAIL;
-	}
+	public float getKnockBackValue() { return this.knockBackValue; }
 
-	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
-		return EnumActionResult.FAIL;
-	}
+	public void setKnockBackValue(float x)  { this.knockBackValue = x; }
+
+	public float getDurationInTicks() { return this.durationInTicks; }
+
+	public void setDurationInTicks(int x) { this.durationInTicks = x; }
+
 }

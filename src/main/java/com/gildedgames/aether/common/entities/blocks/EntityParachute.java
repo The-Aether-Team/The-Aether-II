@@ -115,16 +115,6 @@ public class EntityParachute extends Entity
 				player.motionX *= 0.6;
 				player.motionY = 1.08;
 				player.motionZ *= 0.6;
-
-				/*if (!this.worldObj.isRemote)
-				{
-					MinecraftServer server = this.getServer();
-
-					if (server != null && !server.isFlightAllowed())
-					{
-						server.setAllowFlight(true);
-					}
-				}*/
 			}
 
 			PlayerAetherImpl playerAether = PlayerAetherImpl.getPlayer(player);

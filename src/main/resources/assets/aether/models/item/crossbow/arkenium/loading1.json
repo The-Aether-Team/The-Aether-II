@@ -1,0 +1,6 @@
+{
+	"parent": "aether:item/crossbow/arkenium_crossbow",
+	"textures": {
+		"layer0": "aether:items/weapons/crossbow/arkenium/loading1"
+	}
+}
