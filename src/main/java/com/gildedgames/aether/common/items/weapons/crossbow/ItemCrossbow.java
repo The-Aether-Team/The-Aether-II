@@ -146,7 +146,7 @@ public class ItemCrossbow extends Item
 
 	private void shootBolt(EntityLivingBase entityLiving, ItemStack stack)
 	{
-		if (ItemCrossbow.isLoaded(stack))
+		if (ItemCrossbow.isLoaded(stack) && !entityLiving.worldObj.isRemote)
 		{
 			float speed = 1.0f;
 

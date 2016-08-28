@@ -21,8 +21,11 @@ public class RenderBolt extends Render<EntityBolt>
 
 	static
 	{
+		boltTextures.put(ItemBoltType.SKYROOT, AetherCore.getResource("textures/entities/bolts/skyroot_bolt.png"));
 		boltTextures.put(ItemBoltType.STONE, AetherCore.getResource("textures/entities/bolts/stone_bolt.png"));
 		boltTextures.put(ItemBoltType.ZANITE, AetherCore.getResource("textures/entities/bolts/zanite_bolt.png"));
+		boltTextures.put(ItemBoltType.ARKENIUM, AetherCore.getResource("textures/entities/bolts/arkenium_bolt.png"));
+		boltTextures.put(ItemBoltType.GRAVITITE, AetherCore.getResource("textures/entities/bolts/gravitite_bolt.png"));
 	}
 
 	public RenderBolt(RenderManager renderManager)
@@ -33,11 +36,11 @@ public class RenderBolt extends Render<EntityBolt>
 	@Override
 	public void doRender(EntityBolt bolt, double posX, double posY, double posZ, float entityYaw, float partialTicks)
 	{
-		this.bindEntityTexture(bolt);
-
+		this.bindTexture(boltTextures.get(bolt.getBoltType()));
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-		GlStateManager.pushMatrix();
 
+		GlStateManager.pushMatrix();
+		GlStateManager.disableLighting();
 		GlStateManager.translate((float) posX, (float) posY, (float) posZ);
 		GlStateManager.rotate(bolt.prevRotationYaw + (bolt.rotationYaw - bolt.prevRotationYaw) * partialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(bolt.prevRotationPitch + (bolt.rotationPitch - bolt.prevRotationPitch) * partialTicks, 0.0F, 0.0F, 1.0F);
@@ -70,6 +73,12 @@ public class RenderBolt extends Render<EntityBolt>
 		GlStateManager.scale(f8, f8, f8);
 		GlStateManager.translate(-4.0F, 0.0F, 0.0F);
 
+		if (this.renderOutlines)
+		{
+			GlStateManager.enableColorMaterial();
+			GlStateManager.enableOutlineMode(this.getTeamColor(bolt));
+		}
+
 		GL11.glNormal3f(f8, 0.0F, 0.0F);
 		renderer.begin(7, DefaultVertexFormats.POSITION_TEX);
 		renderer.pos(-7.0D, -2.0D, -2.0D).tex((double) f4, (double) f6).endVertex();
@@ -101,7 +110,14 @@ public class RenderBolt extends Render<EntityBolt>
 			tessellator.draw();
 		}
 
+		if (this.renderOutlines)
+		{
+			GlStateManager.disableOutlineMode();
+			GlStateManager.disableColorMaterial();
+		}
+
 		GlStateManager.disableRescaleNormal();
+		GlStateManager.enableLighting();
 		GlStateManager.popMatrix();
 
 		super.doRender(bolt, posX, posY, posZ, entityYaw, partialTicks);

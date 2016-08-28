@@ -28,21 +28,22 @@
     "overrides": [
         {
             "predicate": {
-                "pulling": 1
+                "pulling": 1,
+                 "pull": 0.25
             },
             "model": "aether:item/crossbow/holystone/loading1"
         },
         {
             "predicate": {
                 "pulling": 1,
-                "pull": 0.65
+                "pull": 0.5
             },
             "model": "aether:item/crossbow/holystone/loading2"
         },
         {
             "predicate": {
                 "pulling": 1,
-                "pull": 0.95
+                "pull": 1
             },
             "model": "aether:item/crossbow/holystone/loaded"
         }
