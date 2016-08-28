@@ -1,8 +1,12 @@
 package com.gildedgames.aether.common.entities.living.mounts;
 
+import com.gildedgames.aether.api.entity.IMount;
+import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.common.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.moa.*;
 import com.gildedgames.aether.common.entities.util.*;
+import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
+import com.gildedgames.aether.common.entities.util.mounts.IFlyingMountData;
 import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.genes.util.GeneUtil;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -20,10 +24,13 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements EntityGroupMember
+public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements EntityGroupMember, IMount, IFlyingMountData
 {
 
 	private static final DataParameter<Integer> REMAINING_JUMPS = EntityDataManager.createKey(EntityMoa.class, DataSerializers.VARINT);
@@ -33,6 +40,12 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	private static final DataParameter<Boolean> RAISED_BY_PLAYER = EntityDataManager.createKey(EntityMoa.class, DataSerializers.BOOLEAN);
 
 	private static final DataParameter<Boolean> GENDER = EntityDataManager.createKey(EntityMoa.class, DataSerializers.BOOLEAN);
+
+	private static final DataParameter<Boolean> SADDLED = EntityDataManager.createKey(EntityMoa.class, DataSerializers.BOOLEAN);
+
+	private static final DataParameter<Float> AIRBORNE_TIME = EntityDataManager.createKey(EntityMoa.class, DataSerializers.FLOAT);
+
+	private IMountProcessor mountProcessor = new FlyingMount(this);
 
 	public float wingRotation, destPos, prevDestPos, prevWingRotation;
 
@@ -119,6 +132,36 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		this.dataManager.register(EntityMoa.EGG_STOLEN, Boolean.FALSE);
 		this.dataManager.register(EntityMoa.RAISED_BY_PLAYER, Boolean.FALSE);
 		this.dataManager.register(EntityMoa.GENDER, Boolean.FALSE);
+		this.dataManager.register(EntityMoa.SADDLED, false);
+		this.dataManager.register(EntityMoa.AIRBORNE_TIME, this.maxAirborneTime());
+	}
+
+	@Override
+	public EnumActionResult applyPlayerInteraction(EntityPlayer player, Vec3d vec, ItemStack stack, EnumHand hand)
+	{
+		EnumActionResult result = super.applyPlayerInteraction(player, vec, stack, hand);
+
+		if (result == EnumActionResult.SUCCESS)
+		{
+			return EnumActionResult.SUCCESS;
+		}
+
+		if (!player.worldObj.isRemote)
+		{
+			if (!this.isSaddled() && stack != null && stack.getItem() == Items.SADDLE)
+			{
+				this.setIsSaddled(true);
+
+				if (!player.capabilities.isCreativeMode)
+				{
+					player.getActiveItemStack().stackSize--;
+				}
+
+				return EnumActionResult.SUCCESS;
+			}
+		}
+
+		return EnumActionResult.FAIL;
 	}
 
 	@Override
@@ -225,6 +268,8 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		nbt.setInteger("remainingJumps", this.getRemainingJumps());
 
 		this.familyNest.writeToNBT(nbt);
+
+		nbt.setBoolean("isSaddled", this.isSaddled());
 	}
 
 	@Override
@@ -242,6 +287,24 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		this.setRemainingJumps(nbt.getInteger("remainingJumps"));
 
 		this.familyNest.readFromNBT(nbt);
+
+		this.setIsSaddled(nbt.getBoolean("isSaddled"));
+	}
+
+	@Override
+	protected void dropFewItems(boolean p_70628_1_, int looting)
+	{
+		super.dropFewItems(p_70628_1_, looting);
+
+		this.dropSaddle();
+	}
+
+	protected void dropSaddle()
+	{
+		if (this.isSaddled())
+		{
+			this.dropItem(Items.SADDLE, 1);
+		}
 	}
 
 	@Override
@@ -395,6 +458,63 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	protected net.minecraft.util.SoundEvent getDeathSound()
 	{
 		return SoundsAether.moa_hurt;
+	}
+
+	public boolean isSaddled()
+	{
+		return this.dataManager.get(SADDLED);
+	}
+
+	public void setIsSaddled(boolean isSaddled)
+	{
+		this.dataManager.set(SADDLED, isSaddled);
+	}
+
+	@Override
+	public IMountProcessor getMountProcessor()
+	{
+		return this.mountProcessor;
+	}
+
+	@Override
+	public void resetRemainingAirborneTime()
+	{
+		this.dataManager.set(EntityMoa.AIRBORNE_TIME, this.maxAirborneTime());
+	}
+
+	@Override
+	public float getRemainingAirborneTime()
+	{
+		return this.dataManager.get(EntityMoa.AIRBORNE_TIME);
+	}
+
+	@Override
+	public void setRemainingAirborneTime(float set)
+	{
+		this.dataManager.set(EntityMoa.AIRBORNE_TIME, set);
+	}
+
+	@Override
+	public void addRemainingAirborneTime(float add)
+	{
+		this.setRemainingAirborneTime(this.getRemainingAirborneTime() + add);
+	}
+
+	@Override
+	public boolean canBeMounted()
+	{
+		return this.isSaddled();
+	}
+
+	@Override
+	public double getMountedYOffset()
+	{
+		return 1.15D;
+	}
+
+	public float maxAirborneTime()
+	{
+		return 20.0F;
 	}
 
 }

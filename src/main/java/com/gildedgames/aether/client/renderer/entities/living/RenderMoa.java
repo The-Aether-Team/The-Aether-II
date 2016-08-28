@@ -31,6 +31,8 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 	public static ResourceLocation TEETH = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/teeth.png");
 
 	public static ResourceLocation TONGUE = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/tongue.png");
+
+	public static ResourceLocation SADDLE = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/saddle.png");
 	
 	public RenderMoa(RenderManager manager)
 	{
@@ -187,13 +189,18 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		model.Claw2Right.render(par7);
 		model.Claw3Right.render(par7);
 		
-		/*if (moa.getSaddled())
+		if (moa.isSaddled())
 		{
 			GL11.glColor3f(1.0f, 1.0f, 1.0f);
-			this.renderManager.renderEngine.bindTexture(genePool.saddle);
+
+			this.renderManager.renderEngine.bindTexture(SADDLE);
+
+			GL11.glScalef(1.0001F, 1.0001F, 1.0001F);
+			GL11.glTranslatef(0.0F, -0.001F, 0.0F);
+
 			model.Body.render(par7);
 			model.Chest.render(par7);
-		}*/
+		}
 		
 		if (moa.getGender() == AnimalGender.MALE)
 		{
