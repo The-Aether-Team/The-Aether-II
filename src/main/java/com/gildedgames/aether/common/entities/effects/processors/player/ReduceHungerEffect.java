@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.entities.effects.processors.player;
 
+import akka.util.Reflect;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
+import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.entities.effects.EffectProcessorPlayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -66,8 +68,8 @@ public class ReduceHungerEffect implements EffectProcessorPlayer<EntityEffectIns
 
 					float exhaustion = ObfuscationReflectionHelper.getPrivateValue(FoodStats.class, stats, "field_75126_c", "foodExhaustionLevel");
 
-					ObfuscationReflectionHelper.setPrivateValue(FoodStats.class, stats, Math.max(0, exhaustion - 0.7f), "field_75126_c", "foodExhaustionLevel");
-					ObfuscationReflectionHelper.setPrivateValue(FoodStats.class, player.getFoodStats(), stats.getSaturationLevel() + 2.0f, "field_75125_b", "foodSaturationLevel");
+					ObfuscationReflectionHelper.setPrivateValue(FoodStats.class, stats, Math.max(0, exhaustion - 0.7f), ReflectionAether.FOOD_EXHAUSTION_LEVEL.getMappings());
+					ObfuscationReflectionHelper.setPrivateValue(FoodStats.class, player.getFoodStats(), stats.getSaturationLevel() + 2.0f, ReflectionAether.FOOD_SATURATION_LEVEL.getMappings());
 				}
 				else if (stats.getFoodLevel() > instance.getAttributes().getFloat("foodLevel"))
 				{

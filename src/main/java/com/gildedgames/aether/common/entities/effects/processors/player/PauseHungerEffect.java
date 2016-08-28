@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.entities.effects.processors.player;
 
+import akka.util.Reflect;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
+import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.entities.effects.EffectProcessorPlayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -66,8 +68,8 @@ public class PauseHungerEffect implements EffectProcessorPlayer<EntityEffectInst
 					instance.getAttributes().setFloat("foodSaturation", stats.getSaturationLevel());
 				}
 
-				ObfuscationReflectionHelper.setPrivateValue(FoodStats.class, stats, instance.getAttributes().getInteger("foodLevel"), "field_75127_a", "foodLevel");
-				ObfuscationReflectionHelper.setPrivateValue(FoodStats.class, stats, instance.getAttributes().getFloat("foodSaturation"), "field_75125_b", "foodSaturationLevel");
+				ObfuscationReflectionHelper.setPrivateValue(FoodStats.class, stats, instance.getAttributes().getInteger("foodLevel"), ReflectionAether.FOOD_LEVEL.getMappings());
+				ObfuscationReflectionHelper.setPrivateValue(FoodStats.class, stats, instance.getAttributes().getFloat("foodSaturation"), ReflectionAether.FOOD_SATURATION_LEVEL.getMappings());
 			}
 		}
 	}

@@ -2,6 +2,8 @@ package com.gildedgames.aether.common.entities.util.mounts;
 
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 
 public class FlyingMount implements IMountProcessor
 {
@@ -53,6 +55,20 @@ public class FlyingMount implements IMountProcessor
 	public boolean canBeMounted(Entity mount)
 	{
 		return this.data.canBeMounted();
+	}
+
+	@Override
+	public boolean canProcessMountInteraction(Entity mount, Entity rider)
+	{
+		if (rider instanceof EntityPlayer)
+		{
+			EntityPlayer player = (EntityPlayer)rider;
+			ItemStack stack = player.getHeldItemMainhand();
+
+			return this.data.canProcessMountInteraction(player, stack);
+		}
+
+		return false;
 	}
 
 	@Override

@@ -281,7 +281,7 @@ public class CommonEvents
 				player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, 0, 0);
 
 				/** Strange flag that needs to be set to prevent the NetHandlerPlayServer instance from resetting your position **/
-				ObfuscationReflectionHelper.setPrivateValue(EntityPlayerMP.class, player, true, "field_184851_cj", "invulnerableDimensionChange");
+				ObfuscationReflectionHelper.setPrivateValue(EntityPlayerMP.class, player, true, ReflectionAether.INVULNERABLE_DIMENSION_CHANGE.getMappings());
 			}
 
 			return entity;

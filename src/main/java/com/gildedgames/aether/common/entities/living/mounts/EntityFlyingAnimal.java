@@ -32,6 +32,8 @@ public abstract class EntityFlyingAnimal extends EntityAetherAnimal implements I
 	@SideOnly(Side.CLIENT)
 	public float wingFold, wingAngle;
 
+	private EnumActionResult prevInteractResult;
+
 	public EntityFlyingAnimal(World world)
 	{
 		super(world);
@@ -81,6 +83,8 @@ public abstract class EntityFlyingAnimal extends EntityAetherAnimal implements I
 	{
 		EnumActionResult result = super.applyPlayerInteraction(player, vec, stack, hand);
 
+		this.prevInteractResult = result;
+
 		if (result == EnumActionResult.SUCCESS)
 		{
 			return EnumActionResult.SUCCESS;
@@ -97,9 +101,13 @@ public abstract class EntityFlyingAnimal extends EntityAetherAnimal implements I
 					player.getActiveItemStack().stackSize--;
 				}
 
+				this.prevInteractResult = EnumActionResult.SUCCESS;
+
 				return EnumActionResult.SUCCESS;
 			}
 		}
+
+		this.prevInteractResult = EnumActionResult.FAIL;
 
 		return EnumActionResult.FAIL;
 	}
@@ -180,6 +188,12 @@ public abstract class EntityFlyingAnimal extends EntityAetherAnimal implements I
 	public boolean canBeMounted()
 	{
 		return this.isSaddled();
+	}
+
+	@Override
+	public boolean canProcessMountInteraction(EntityPlayer rider, ItemStack stack)
+	{
+		return this.prevInteractResult != EnumActionResult.SUCCESS && (stack == null || stack.getItem() != Items.LEAD);
 	}
 
 	public abstract float maxAirborneTime();

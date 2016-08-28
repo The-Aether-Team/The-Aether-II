@@ -3,11 +3,14 @@ package com.gildedgames.aether.common.entities;
 import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.ReflectionAether;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -30,7 +33,7 @@ public class MountProcessor
 			IMount mount = (IMount)target;
 			IMountProcessor processor = mount.getMountProcessor();
 
-			if (processor.canBeMounted(target) && !event.getEntityPlayer().isRiding())
+			if (processor.canBeMounted(target) && !event.getEntityPlayer().isRiding() && processor.canProcessMountInteraction(event.getTarget(), event.getEntityPlayer()))
 			{
 				if (target.getPassengers().contains(event.getEntityPlayer()))
 				{
@@ -137,7 +140,7 @@ public class MountProcessor
 			forward *= 0.25F;
 		}
 
-		boolean riderIsJumping = ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, rider, "isJumping");
+		boolean riderIsJumping = ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, rider, ReflectionAether.IS_JUMPING.getMappings());
 
 		if (riderIsJumping)
 		{

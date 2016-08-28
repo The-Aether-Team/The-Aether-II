@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client;
 
+import com.gildedgames.aether.common.ReflectionAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
@@ -38,7 +39,7 @@ public class PlayerControllerAetherMP extends PlayerControllerMP
 
 	public static PlayerControllerAetherMP create(PlayerControllerMP controller)
 	{
-		NetHandlerPlayClient netHandler = ObfuscationReflectionHelper.getPrivateValue(PlayerControllerMP.class, controller, "field_78774_b", "netClientHandler");
+		NetHandlerPlayClient netHandler = ObfuscationReflectionHelper.getPrivateValue(PlayerControllerMP.class, controller, ReflectionAether.NET_CLIENT_HANDLER.getMappings());
 
 		return new PlayerControllerAetherMP(Minecraft.getMinecraft(), netHandler, controller);
 	}

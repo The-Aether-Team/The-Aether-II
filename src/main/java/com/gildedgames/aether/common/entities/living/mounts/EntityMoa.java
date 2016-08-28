@@ -57,6 +57,8 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 	private boolean addedBreedingTask;
 
+	private EnumActionResult prevInteractResult;
+
 	public EntityMoa(World world)
 	{
 		super(world);
@@ -141,6 +143,8 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	{
 		EnumActionResult result = super.applyPlayerInteraction(player, vec, stack, hand);
 
+		this.prevInteractResult = result;
+
 		if (result == EnumActionResult.SUCCESS)
 		{
 			return EnumActionResult.SUCCESS;
@@ -157,9 +161,13 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 					player.getActiveItemStack().stackSize--;
 				}
 
+				this.prevInteractResult = EnumActionResult.SUCCESS;
+
 				return EnumActionResult.SUCCESS;
 			}
 		}
+
+		this.prevInteractResult = EnumActionResult.FAIL;
 
 		return EnumActionResult.FAIL;
 	}
@@ -433,8 +441,6 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	{
 		ItemStack moaEgg = new ItemStack(ItemsAether.moa_egg);
 
-		System.out.println(this.worldObj.isRemote);
-
 		MoaGenePool stackGenes = ItemMoaEgg.getGenePool(moaEgg);
 
 		stackGenes.transformFromParents(this.getGenePool().getStorage().getSeed(), this.getGenePool().getStorage().getFatherSeed(), this.getGenePool().getStorage().getMotherSeed());
@@ -504,6 +510,12 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	public boolean canBeMounted()
 	{
 		return this.isSaddled();
+	}
+
+	@Override
+	public boolean canProcessMountInteraction(EntityPlayer rider, ItemStack stack)
+	{
+		return this.prevInteractResult != EnumActionResult.SUCCESS && (stack == null || stack.getItem() != Items.LEAD);
 	}
 
 	@Override
