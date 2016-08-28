@@ -52,7 +52,7 @@ public class FlyingMount implements IMountProcessor
 	@Override
 	public boolean canBeMounted(Entity mount)
 	{
-		return true;
+		return this.data.canBeMounted();
 	}
 
 	@Override

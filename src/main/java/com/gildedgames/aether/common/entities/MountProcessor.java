@@ -21,7 +21,7 @@ public class MountProcessor
 {
 
 	@SubscribeEvent
-	public static void onPlayerInteract(PlayerInteractEvent.EntityInteract event)
+	public static void onPlayerInteract(PlayerInteractEvent.EntityInteractSpecific event)
 	{
 		Entity target = event.getTarget();
 
@@ -30,7 +30,7 @@ public class MountProcessor
 			IMount mount = (IMount)target;
 			IMountProcessor processor = mount.getMountProcessor();
 
-			if (processor.canBeMounted(target))
+			if (processor.canBeMounted(target) && !event.getEntityPlayer().isRiding())
 			{
 				if (target.getPassengers().contains(event.getEntityPlayer()))
 				{

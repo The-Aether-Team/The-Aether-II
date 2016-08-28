@@ -22,12 +22,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntityPhyg extends EntityFlyingAnimal implements IMount, IFlyingMountData
+public class EntityPhyg extends EntityFlyingAnimal
 {
-
-	private static final DataParameter<Float> AIRBORNE_TIME = EntityDataManager.createKey(EntityPhyg.class, DataSerializers.FLOAT);
-
-	private IMountProcessor mountProcessor = new FlyingMount(this);
 
 	public EntityPhyg(World world)
 	{
@@ -52,14 +48,6 @@ public class EntityPhyg extends EntityFlyingAnimal implements IMount, IFlyingMou
 
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-	}
-
-	@Override
-	protected void entityInit()
-	{
-		super.entityInit();
-
-		this.dataManager.register(EntityPhyg.AIRBORNE_TIME, 5.0F);
 	}
 
 	@Override
@@ -105,39 +93,15 @@ public class EntityPhyg extends EntityFlyingAnimal implements IMount, IFlyingMou
 	}
 
 	@Override
-	public IMountProcessor getMountProcessor()
-	{
-		return this.mountProcessor;
-	}
-
-	@Override
-	public void resetRemainingAirborneTime()
-	{
-		this.dataManager.set(EntityPhyg.AIRBORNE_TIME, 5.0F);
-	}
-
-	@Override
-	public float getRemainingAirborneTime()
-	{
-		return this.dataManager.get(EntityPhyg.AIRBORNE_TIME);
-	}
-
-	@Override
-	public void setRemainingAirborneTime(float set)
-	{
-		this.dataManager.set(EntityPhyg.AIRBORNE_TIME, set);
-	}
-
-	@Override
-	public void addRemainingAirborneTime(float add)
-	{
-		this.setRemainingAirborneTime(this.getRemainingAirborneTime() + add);
-	}
-
-	@Override
 	public double getMountedYOffset()
 	{
 		return 0.65D;
+	}
+
+	@Override
+	public float maxAirborneTime()
+	{
+		return 5.0F;
 	}
 
 }

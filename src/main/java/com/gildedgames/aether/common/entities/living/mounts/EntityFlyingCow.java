@@ -28,12 +28,8 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class EntityFlyingCow extends EntityFlyingAnimal implements IMount, IFlyingMountData
+public class EntityFlyingCow extends EntityFlyingAnimal
 {
-
-	private static final DataParameter<Float> AIRBORNE_TIME = EntityDataManager.createKey(EntityFlyingCow.class, DataSerializers.FLOAT);
-
-	private IMountProcessor mountProcessor = new FlyingMount(this);
 
 	public EntityFlyingCow(World world)
 	{
@@ -49,14 +45,6 @@ public class EntityFlyingCow extends EntityFlyingAnimal implements IMount, IFlyi
 		this.tasks.addTask(7, new EntityAILookIdle(this));
 
 		this.setSize(0.9F, 1.3F);
-	}
-
-	@Override
-	protected void entityInit()
-	{
-		super.entityInit();
-
-		this.dataManager.register(EntityFlyingCow.AIRBORNE_TIME, 5.0F);
 	}
 
 	@Override
@@ -145,38 +133,15 @@ public class EntityFlyingCow extends EntityFlyingAnimal implements IMount, IFlyi
 	}
 
 	@Override
-	public IMountProcessor getMountProcessor()
-	{
-		return this.mountProcessor;
-	}
-
-	@Override
-	public void resetRemainingAirborneTime()
-	{
-		this.dataManager.set(EntityFlyingCow.AIRBORNE_TIME, 10.0F);
-	}
-
-	@Override
-	public float getRemainingAirborneTime()
-	{
-		return this.dataManager.get(EntityFlyingCow.AIRBORNE_TIME);
-	}
-
-	@Override
-	public void setRemainingAirborneTime(float set)
-	{
-		this.dataManager.set(EntityFlyingCow.AIRBORNE_TIME, set);
-	}
-
-	@Override
-	public void addRemainingAirborneTime(float add)
-	{
-		this.setRemainingAirborneTime(this.getRemainingAirborneTime() + add);
-	}
-
-	@Override
 	public double getMountedYOffset()
 	{
 		return 1.15D;
 	}
+
+	@Override
+	public float maxAirborneTime()
+	{
+		return 5.0F;
+	}
+
 }
