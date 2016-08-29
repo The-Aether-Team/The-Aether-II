@@ -26,7 +26,7 @@ public class ReflectionAether
 
 	public static final ReflectionEntry BLOCK_HARDNESS = new ReflectionEntry("field_149782_v", "blockHardness");
 
-	public static final ReflectionEntry IS_JUMPING = new ReflectionEntry("field_75662_b", "isJumping");
+	public static final ReflectionEntry IS_JUMPING = new ReflectionEntry("field_70703_bu", "isJumping");
 
 	public static final ReflectionEntry FOOD_LEVEL = new ReflectionEntry("field_75127_a", "foodLevel");
 
