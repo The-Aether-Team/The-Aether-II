@@ -15,6 +15,7 @@ import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -39,9 +40,10 @@ import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.*;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.Event;
@@ -51,6 +53,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import static jline.console.internal.ConsoleRunner.property;
 import static sun.audio.AudioPlayer.player;
 
 public class CommonEvents
@@ -91,22 +94,22 @@ public class CommonEvents
 	{
 		if (event.getTarget() != null && event.getTarget().typeOfHit == RayTraceResult.Type.BLOCK)
 		{
-			if (FluidContainerRegistry.isFilledContainer(event.getEmptyBucket()))
+			FluidStack fluidStack = FluidContainerRegistry.getFluidForFilledItem(event.getEmptyBucket());
+
+			final EntityPlayer player = event.getEntityPlayer();
+
+			final BlockPos pos = event.getTarget().getBlockPos().offset(event.getTarget().sideHit);
+
+			boolean hasWaterFluid = fluidStack != null && fluidStack.getFluid().getName().equals(FluidRegistry.WATER.getName());
+			boolean hasLavaFluid = fluidStack != null && fluidStack.getFluid().getName().equals(FluidRegistry.LAVA.getName());
+
+			if (hasWaterFluid || event.getEmptyBucket().getItem() == Items.WATER_BUCKET)
 			{
-				final EntityPlayer player = event.getEntityPlayer();
-
-				final BlockPos pos = event.getTarget().getBlockPos().offset(event.getTarget().sideHit);
-
-				FluidStack fluidStack = FluidContainerRegistry.getFluidForFilledItem(event.getEmptyBucket());
-
-				if (fluidStack.getFluid().getName().equals(FluidRegistry.WATER.getName()))
-				{
-					CommonEvents.onWaterPlaced(event, player, pos);
-				}
-				else if (fluidStack.getFluid().getName().equals(FluidRegistry.LAVA.getName()))
-				{
-					CommonEvents.onLavaPlaced(event, player, pos);
-				}
+				CommonEvents.onWaterPlaced(event, player, pos);
+			}
+			else if (hasLavaFluid || event.getEmptyBucket().getItem() == Items.LAVA_BUCKET)
+			{
+				CommonEvents.onLavaPlaced(event, player, pos);
 			}
 		}
 	}
