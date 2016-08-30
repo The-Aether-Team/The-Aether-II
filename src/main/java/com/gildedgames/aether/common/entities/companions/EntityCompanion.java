@@ -1,11 +1,13 @@
 package com.gildedgames.aether.common.entities.companions;
 
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
-import com.gildedgames.aether.common.entities.ai.EntityAICompanionFollow;
+import com.gildedgames.aether.common.entities.ai.companion.EntityAICompanionFollow;
 import com.google.common.base.Optional;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
@@ -17,7 +19,7 @@ import net.minecraft.world.World;
 
 import java.util.UUID;
 
-public abstract class EntityCompanion extends EntityLiving
+public abstract class EntityCompanion extends EntityCreature
 {
 	private static final DataParameter<Optional<UUID>> OWNER_UUID = new DataParameter<>(20, DataSerializers.OPTIONAL_UNIQUE_ID);
 
@@ -31,10 +33,14 @@ public abstract class EntityCompanion extends EntityLiving
 	@Override
 	protected void initEntityAI()
 	{
-		this.tasks.addTask(0, new EntityAICompanionFollow(this));
-		this.tasks.addTask(1, new EntityAISwimming(this));
-		this.tasks.addTask(2, new EntityAILookIdle(this));
-		this.tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
+		EntityAIBase follow = new EntityAICompanionFollow(this);
+
+		follow.setMutexBits(1);
+
+		this.tasks.addTask(1, follow);
+		this.tasks.addTask(2, new EntityAISwimming(this));
+		this.tasks.addTask(3, new EntityAILookIdle(this));
+		this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
 	}
 
 	@Override

@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.items.companions;
 
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.common.entities.companions.EntityCombatCompanion;
+import com.gildedgames.aether.common.items.InformationProvider;
 import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import com.gildedgames.aether.common.entities.companions.EntityCompanion;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,15 +22,30 @@ public class ItemCompanion extends Item
 {
 	private final Class<? extends EntityCompanion> companionClass;
 
+	private final InformationProvider informationProvider;
+
 	protected final DecimalFormat timeFormat = new DecimalFormat("0.0");
 
-	public ItemCompanion(Class<? extends EntityCompanion> companionClass)
+	public ItemCompanion(Class<? extends EntityCompanion> companionClass, InformationProvider informationProvider)
 	{
 		this.companionClass = companionClass;
+		this.informationProvider = informationProvider;
 
 		this.setMaxStackSize(1);
 
 		this.setCreativeTab(CreativeTabsAether.tabCompanions);
+	}
+
+	public ItemCompanion(Class<? extends EntityCompanion> companionClass)
+	{
+		this(companionClass, new InformationProvider()
+		{
+			@Override
+			public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
+			{
+
+			}
+		});
 	}
 
 	public static void setRespawnTimer(ItemStack stack, World world, int timer)
@@ -85,6 +102,8 @@ public class ItemCompanion extends Item
 		{
 			tooltip.add(TextFormatting.RED + "Respawns in " + this.parseTicks(respawn));
 		}
+
+		this.informationProvider.addInformation(stack, player, tooltip, advanced);
 
 		super.addInformation(stack, player, tooltip, advanced);
 	}

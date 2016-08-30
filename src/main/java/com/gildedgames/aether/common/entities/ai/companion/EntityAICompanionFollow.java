@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.entities.ai;
+package com.gildedgames.aether.common.entities.ai.companion;
 
 import com.gildedgames.aether.common.entities.companions.EntityCompanion;
 import net.minecraft.block.material.Material;

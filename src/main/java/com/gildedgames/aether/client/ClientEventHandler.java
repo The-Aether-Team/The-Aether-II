@@ -173,6 +173,8 @@ public class ClientEventHandler
 				}
 			}
 
+			event.getToolTip().addAll(oldTooltip);
+
 			if (stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 			{
 				IItemEffectsCapability effects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
@@ -222,8 +224,6 @@ public class ClientEventHandler
 					}
 				}
 			}
-
-			event.getToolTip().addAll(oldTooltip);
 		}
 	}
 

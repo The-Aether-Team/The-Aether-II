@@ -32,12 +32,14 @@ import com.google.common.collect.Lists;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -397,9 +399,26 @@ public class ItemsAether
 
 		pink_baby_swet = registerItem("pink_baby_swet", new ItemCompanion(EntityPinkBabySwet.class));
 		frostpine_totem = registerItem("frostpine_totem", new ItemCompanion(EntityFrostpineTotem.class));
-		kraisith_capsule = registerItem("kraisith_capsule", new ItemCompanion(EntityKraisith.class));
+		kraisith_capsule = registerItem("kraisith_capsule", new ItemCompanion(EntityKraisith.class, new InformationProvider()
+		{
+			@Override
+			public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
+			{
+				tooltip.add(TextFormatting.RED + "\u2022 " + "10 Health");
+				tooltip.add(TextFormatting.BLUE + "\u2022 " + "0.5 Attack Damage");
+				tooltip.add(TextFormatting.BLUE + "\u2022 " + "Slows Enemies");
+			}
+		}));
 		orb_of_arkenzus = registerItem("orb_of_arkenzus", new ItemCompanion(EntityShadeOfArkenzus.class));
-		fangrin_capsule = registerItem("fangrin_capsule", new ItemCompanion(EntityFangrin.class));
+		fangrin_capsule = registerItem("fangrin_capsule", new ItemCompanion(EntityFangrin.class, new InformationProvider()
+		{
+			@Override
+			public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
+			{
+				tooltip.add(TextFormatting.RED + "\u2022 " + "10 Health");
+				tooltip.add(TextFormatting.BLUE + "\u2022 " + "1.5 Attack Damage");
+			}
+		}));
 		death_seal = registerItem("death_seal", new ItemDeathSeal(EntityNexSpirit.class));
 
 		barbed_iron_ring = registerItem("barbed_iron_ring", new Item().setMaxStackSize(1), CreativeTabsAether.tabAccessories);
