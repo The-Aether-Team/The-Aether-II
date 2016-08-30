@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.natural;
 
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
@@ -14,6 +15,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -160,9 +162,19 @@ public class BlockAercloud extends Block implements IBlockVariants
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
-		IBlockState adjacentState = world.getBlockState(pos.offset(side));
+		IBlockState offsetState = world.getBlockState(pos.offset(side));
 
-		return adjacentState.getBlock() != this || adjacentState != state;
+		Block block = offsetState.getBlock();
+
+		if (block == this)
+		{
+			if (state.getValue(PROPERTY_VARIANT) != offsetState.getValue(PROPERTY_VARIANT))
+			{
+				return true;
+			}
+		}
+
+		return block != this && super.shouldSideBeRendered(state, world, pos, side);
 	}
 
 	@Override
