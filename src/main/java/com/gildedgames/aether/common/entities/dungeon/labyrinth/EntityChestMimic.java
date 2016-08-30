@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.dungeon.labyrinth;
 
-import com.gildedgames.aether.common.SoundsAether;
+import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AISavageAttack;
 import com.gildedgames.aether.common.entities.util.EntityExtendedMob;
 import com.gildedgames.aether.common.util.TickTimer;

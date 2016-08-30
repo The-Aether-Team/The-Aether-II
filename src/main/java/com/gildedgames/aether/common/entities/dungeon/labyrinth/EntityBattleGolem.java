@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.dungeon.labyrinth;
 
-import com.gildedgames.aether.common.SoundsAether;
+import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.projectiles.EntityBattleBomb;
 import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.util.core.nbt.NBTHelper;

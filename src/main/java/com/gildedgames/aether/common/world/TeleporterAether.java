@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.DimensionsAether;
+import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.util.core.util.BlockPosDimension;
 import com.gildedgames.util.core.util.GGHelper;

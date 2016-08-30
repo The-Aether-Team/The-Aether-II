@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common;
+package com.gildedgames.aether.common.registry.minecraft;
 
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item.ToolMaterial;

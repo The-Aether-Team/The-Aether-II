@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.weapons.swords;
 
-import com.gildedgames.aether.common.CreativeTabsAether;
+import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import com.gildedgames.aether.common.items.ItemAbilityType;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;

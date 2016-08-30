@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.misc;
 
-import com.gildedgames.aether.common.SoundsAether;
+import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.*;

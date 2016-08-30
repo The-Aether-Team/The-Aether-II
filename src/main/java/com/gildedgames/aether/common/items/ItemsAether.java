@@ -6,9 +6,9 @@ import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentType
 import com.gildedgames.aether.api.capabilites.items.properties.ItemRarity;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.CreativeTabsAether;
-import com.gildedgames.aether.common.MaterialsAether;
-import com.gildedgames.aether.common.SoundsAether;
+import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
+import com.gildedgames.aether.common.registry.minecraft.MaterialsAether;
+import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.item.effects.ItemEffects;
 import com.gildedgames.aether.common.entities.companions.*;

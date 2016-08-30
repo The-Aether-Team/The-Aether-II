@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.tile_entities;
 
 import com.gildedgames.aether.client.sound.objects.LabyrinthTotemSound;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.DimensionsAether;
+import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.tile_entities.multiblock.TileEntityMultiblockController;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;

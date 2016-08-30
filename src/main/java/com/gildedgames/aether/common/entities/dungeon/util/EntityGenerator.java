@@ -1,13 +1,11 @@
 package com.gildedgames.aether.common.entities.dungeon.util;
 
-import com.gildedgames.aether.common.SoundsAether;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityBattleSentry;
+import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.world.dungeon.DungeonDefinitions;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

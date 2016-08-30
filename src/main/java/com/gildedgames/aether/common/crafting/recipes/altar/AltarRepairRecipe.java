@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.crafting.recipes.altar;
 
 import com.gildedgames.aether.api.registry.altar.IAltarRecipe;
-import com.gildedgames.aether.common.MaterialsAether;
+import com.gildedgames.aether.common.registry.minecraft.MaterialsAether;
 import com.gildedgames.aether.common.items.tools.ItemAetherTool;
 import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
 import net.minecraft.item.ItemArmor;

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.living.enemies;
 
-import com.gildedgames.aether.common.SoundsAether;
+import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.util.flying.EntityFlyingDayMob;
 import net.minecraft.world.World;
 

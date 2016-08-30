@@ -1,10 +1,7 @@
 package com.gildedgames.aether.common.blocks.construction;
 
 import com.gildedgames.aether.client.renderer.particles.ParticleAetherPortal;
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.CommonEvents;
-import com.gildedgames.aether.common.DimensionsAether;
-import com.gildedgames.aether.common.SoundsAether;
+import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import net.minecraft.block.Block;
@@ -25,7 +22,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

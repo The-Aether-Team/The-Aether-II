@@ -9,7 +9,7 @@ import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
-import com.gildedgames.aether.common.DimensionsAether;
+import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.entities.effects.EntityEffects;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import com.gildedgames.aether.common.network.NetworkingAether;

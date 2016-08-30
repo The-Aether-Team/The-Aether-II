@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world;
 
-import com.gildedgames.aether.common.DimensionsAether;
+import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
+import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.world.biome.BiomeAether;
 import com.gildedgames.aether.common.world.chunk.ChunkGeneratorAetherOld;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.EnumFacing;
@@ -31,7 +31,7 @@ public class WorldProviderAether extends WorldProvider
 	@Override
 	protected void createBiomeProvider()
 	{
-		this.biomeProvider = new BiomeProviderSingle(new BiomeAether());
+		this.biomeProvider = new BiomeProviderSingle(BiomesAether.BIOME_AETHER);
 	}
 
 	@Override

@@ -4,12 +4,12 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherShield;
+import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import com.gildedgames.aether.common.world.TeleporterAether;
 import com.gildedgames.util.core.util.TeleporterGeneric;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,9 +41,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fluids.*;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.Event;
@@ -52,9 +49,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
-
-import static jline.console.internal.ConsoleRunner.property;
-import static sun.audio.AudioPlayer.player;
 
 public class CommonEvents
 {

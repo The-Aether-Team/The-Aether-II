@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.util;
 
-import com.gildedgames.aether.common.CreativeTabsAether;
+import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.blocks;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.CreativeTabsAether;
+import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import com.gildedgames.aether.common.blocks.construction.*;
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystoneButton;
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystonePressurePlate;

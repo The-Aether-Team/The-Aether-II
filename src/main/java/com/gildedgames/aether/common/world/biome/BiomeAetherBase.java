@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.world.biome;
 
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -15,8 +14,6 @@ public abstract class BiomeAetherBase extends Biome
 	public BiomeAetherBase(BiomeProperties properties)
 	{
 		super(properties);
-
-		this.setRegistryName(AetherCore.getResource("aether_generic"));
 
 		this.topBlock = BlocksAether.aether_grass.getDefaultState();
 		this.fillerBlock = BlocksAether.aether_dirt.getDefaultState();

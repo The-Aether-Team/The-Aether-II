@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.items.companions;
 
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import com.gildedgames.aether.common.CreativeTabsAether;
+import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import com.gildedgames.aether.common.entities.companions.EntityCompanion;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

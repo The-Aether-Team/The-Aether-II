@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.world.labyrinth;
 
-import com.gildedgames.aether.common.DimensionsAether;
+import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
+import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
@@ -22,7 +23,7 @@ public class WorldProviderSliderLabyrinth extends WorldProvider
 	@Override
 	protected void createBiomeProvider()
 	{
-		this.biomeProvider = new BiomeProviderSingle(new BiomeSliderLabyrinth());
+		this.biomeProvider = new BiomeProviderSingle(BiomesAether.BIOME_SLIDER_LABYRINTH);
 	}
 
 	@Override

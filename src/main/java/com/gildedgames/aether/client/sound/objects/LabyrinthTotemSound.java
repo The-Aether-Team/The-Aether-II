@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.sound.objects;
 
-import com.gildedgames.aether.common.SoundsAether;
+import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.client.audio.ITickableSound;
 import net.minecraft.client.audio.PositionedSound;

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.living.enemies;
 
-import com.gildedgames.aether.common.SoundsAether;
+import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceHide;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceSneakAttack;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceWander;

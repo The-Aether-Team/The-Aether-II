@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common;
+package com.gildedgames.aether.common.registry.minecraft;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;

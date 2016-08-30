@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.tools;
 
-import com.gildedgames.aether.common.MaterialsAether;
+import com.gildedgames.aether.common.registry.minecraft.MaterialsAether;
 
 public class ItemValkyrieTool extends ItemAetherTool
 {

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.armor;
 
-import com.gildedgames.aether.common.CreativeTabsAether;
+import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import com.gildedgames.aether.common.capabilities.item.properties.IPhoenixChillable;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.item.Item;

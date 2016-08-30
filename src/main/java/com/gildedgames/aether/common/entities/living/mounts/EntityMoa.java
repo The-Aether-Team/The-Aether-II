@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.entities.living.mounts;
 
 import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
-import com.gildedgames.aether.common.SoundsAether;
+import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.moa.*;
 import com.gildedgames.aether.common.entities.util.*;
 import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;

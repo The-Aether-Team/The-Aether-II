@@ -17,6 +17,10 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.registry.EquipmentRegistry;
+import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
+import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
+import com.gildedgames.aether.common.registry.minecraft.MaterialsAether;
+import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
 import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.aether.common.world.chunk.PlacementFlagProvider;
@@ -64,7 +68,7 @@ public class CommonProxy
 		this.storageDir = new File(event.getSourceFile().getParent(), "Aether/");
 
 		// Pre-initialize content
-		DimensionsAether.preInit();
+		BiomesAether.preInit();
 		MaterialsAether.preInit();
 		SoundsAether.preInit();
 
@@ -72,6 +76,8 @@ public class CommonProxy
 		ItemsAether.preInit();
 
 		NetworkingAether.preInit();
+
+		DimensionsAether.preInit();
 
 		TileEntitiesAether.preInit();
 		EntitiesAether.preInit();

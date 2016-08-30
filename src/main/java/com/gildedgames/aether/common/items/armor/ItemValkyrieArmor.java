@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.armor;
 
-import com.gildedgames.aether.common.MaterialsAether;
+import com.gildedgames.aether.common.registry.minecraft.MaterialsAether;
 import net.minecraft.inventory.EntityEquipmentSlot;
 
 public class ItemValkyrieArmor extends ItemAetherArmor

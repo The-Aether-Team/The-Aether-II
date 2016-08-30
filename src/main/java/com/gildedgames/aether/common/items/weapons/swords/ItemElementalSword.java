@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.items.weapons.swords;
 
-import com.gildedgames.aether.common.CreativeTabsAether;
-import com.gildedgames.aether.common.MaterialsAether;
+import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
+import com.gildedgames.aether.common.registry.minecraft.MaterialsAether;
 import com.gildedgames.aether.common.items.ItemAbilityType;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;

@@ -1,5 +1,6 @@
-package com.gildedgames.aether.common;
+package com.gildedgames.aether.common.registry.minecraft;
 
+import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 

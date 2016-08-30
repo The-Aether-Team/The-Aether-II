@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.world.biome;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.common.world.features.trees.WorldGenFruitTree;
@@ -35,7 +36,9 @@ public class BiomeAether extends BiomeAetherBase
 
 	public BiomeAether()
 	{
-		super(new BiomeProperties("aether").setRainDisabled().setTemperature(0.5f));
+		super(new BiomeProperties("Aether").setRainDisabled().setTemperature(0.5f));
+
+		this.setRegistryName(AetherCore.getResource("aether_generic"));
 	}
 
 	@Override

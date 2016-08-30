@@ -9,7 +9,7 @@ import com.gildedgames.aether.client.renderer.items.ItemMoaEggColorHandler;
 import com.gildedgames.aether.client.renderer.items.LeatherGlovesColorHandler;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.CommonProxy;
-import com.gildedgames.aether.common.CreativeTabsAether;
+import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.util.modules.tab.TabModule;
 import net.minecraft.client.Minecraft;

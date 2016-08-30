@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.containers;
 
-import com.gildedgames.aether.common.SoundsAether;
+import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityChestMimic;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthChest;
@@ -33,8 +33,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
-
-import static sun.audio.AudioPlayer.player;
 
 public class BlockLabyrinthChest extends BlockContainer
 {
