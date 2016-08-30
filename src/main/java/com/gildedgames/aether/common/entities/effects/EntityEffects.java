@@ -13,6 +13,7 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
@@ -25,6 +26,8 @@ public class EntityEffects implements IEntityEffectsCapability
 	public static final EntityEffectProcessor<ModifyDamageEffect.Instance> PUNCHING_DAMAGE = new ModifyPunchingDamageEffect();
 
 	public static final EffectProcessorPlayer<EntityEffectInstance> DAGGERFROST = new DaggerfrostEffect();
+
+	public static final EffectProcessorPlayer<EntityEffectInstance> WEIGHT_TOLERANCE = new WeightToleranceEffect();
 
 	public static final EffectProcessorPlayer<ModifyXPCollectionEffect.Instance> MODIFY_XP_COLLECTION = new ModifyXPCollectionEffect();
 
@@ -40,11 +43,15 @@ public class EntityEffects implements IEntityEffectsCapability
 
 	public static final EntityEffectProcessor<ModifyDamageEffect.Instance> MODIFY_DAMAGE = new ModifyDamageEffect();
 
+	public static final EntityEffectProcessor<ModifyDefenseEffect.Instance> MODIFY_DEFENSE = new ModifyDefenseEffect();
+
 	public static final EntityEffectProcessor<ModifyMaxHealthEffect.Instance> MODIFY_MAX_HEALTH = new ModifyMaxHealthEffect();
 
 	public static final EntityEffectProcessor<ModifySpeedEffect.Instance> MODIFY_SPEED = new ModifySpeedEffect();
 
 	public static final EntityEffectProcessor<RegenerateHealthEffect.Instance> REGENERATE_HEALTH = new RegenerateHealthEffect();
+
+	public static final EntityEffectProcessor<EntityEffectInstance> INVISIBILITY = new InvisibilityEffect();
 
 	private final Entity entity;
 
@@ -158,6 +165,20 @@ public class EntityEffects implements IEntityEffectsCapability
 	}
 
 	@Override
+	public void onAttack(LivingAttackEvent event)
+	{
+		if (event.getSource().getSourceOfDamage() != null)
+		{
+			if (event.getSource().getSourceOfDamage().hasCapability(AetherCapabilities.ENTITY_EFFECTS, null))
+			{
+				IEntityEffectsCapability effects = event.getSource().getSourceOfDamage().getCapability(AetherCapabilities.ENTITY_EFFECTS, null);
+
+				effects.setTicksSinceAttacked(0);
+			}
+		}
+	}
+
+	@Override
 	public Entity getEntity()
 	{
 		return this.entity;
@@ -167,6 +188,12 @@ public class EntityEffects implements IEntityEffectsCapability
 	public int getTicksSinceAttacked()
 	{
 		return this.ticksSinceAttacked;
+	}
+
+	@Override
+	public void setTicksSinceAttacked(int ticks)
+	{
+		this.ticksSinceAttacked = ticks;
 	}
 
 	public static class Storage implements Capability.IStorage<IEntityEffectsCapability>

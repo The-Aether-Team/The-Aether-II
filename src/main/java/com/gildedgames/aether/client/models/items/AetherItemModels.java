@@ -441,6 +441,17 @@ public class AetherItemModels
 				.add(EntityParachute.Type.PURPLE.ordinal(), "purple_cloud_parachute")
 				.add(EntityParachute.Type.GREEN.ordinal(), "green_cloud_parachute")
 				.add(EntityParachute.Type.BLUE.ordinal(), "blue_cloud_parachute"));
+
+		registerItemModels(ItemsAether.zanite_studded_choker, "accessories/zanite_studded_choker");
+		registerItemModels(ItemsAether.lesser_amulet_of_growth, "accessories/lesser_amulet_of_growth");
+		registerItemModels(ItemsAether.hide_gorget, "accessories/hide_gorget");
+		registerItemModels(ItemsAether.amulet_of_growth, "accessories/amulet_of_growth");
+		registerItemModels(ItemsAether.arkenium_studded_choker, "accessories/arkenium_studded_choker");
+		registerItemModels(ItemsAether.raegorite_gorget, "accessories/raegorite_gorget");
+		registerItemModels(ItemsAether.gruegar_scarf, "accessories/gruegar_scarf");
+		registerItemModels(ItemsAether.moon_sect_warden_gorget, "accessories/moon_sect_warden_gorget");
+		registerItemModels(ItemsAether.thiefs_gorget, "accessories/thiefs_gorget");
+		registerItemModels(ItemsAether.frostward_scarf, "accessories/frostward_scarf");
 	}
 
 	private static void registerItemModels(Block block, String path)

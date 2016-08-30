@@ -59,7 +59,10 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 			}
 		}
 
-		this.getProcessor().tick(entity, instancesRulesMet);
+		if (!instancesRulesMet.isEmpty())
+		{
+			this.getProcessor().tick(entity, instancesRulesMet);
+		}
 	}
 
 	@Override
@@ -86,7 +89,10 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 			}
 		}
 
-		this.getProcessor().onKill(event, entity, instancesRulesMet);
+		if (!instancesRulesMet.isEmpty())
+		{
+			this.getProcessor().onKill(event, entity, instancesRulesMet);
+		}
 	}
 
 	@Override
@@ -120,7 +126,10 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 
 		EffectProcessorPlayer<I> pability = (EffectProcessorPlayer<I>) this.getProcessor();
 
-		pability.onInteract(event, event.getEntityPlayer(), instancesRulesMet);
+		if (!instancesRulesMet.isEmpty())
+		{
+			pability.onInteract(event, event.getEntityPlayer(), instancesRulesMet);
+		}
 	}
 
 	@Override
@@ -154,7 +163,10 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 
 		EffectProcessorPlayer<I> pability = (EffectProcessorPlayer<I>) this.getProcessor();
 
-		pability.onPickupXP(event, event.getEntityPlayer(), instancesRulesMet);
+		if (!instancesRulesMet.isEmpty())
+		{
+			pability.onPickupXP(event, event.getEntityPlayer(), instancesRulesMet);
+		}
 	}
 
 	@Override
@@ -181,7 +193,10 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 			}
 		}
 
-		this.getProcessor().onAttack(event, entity, instancesRulesMet);
+		if (!instancesRulesMet.isEmpty())
+		{
+			this.getProcessor().onAttack(event, entity, instancesRulesMet);
+		}
 	}
 
 	@Override

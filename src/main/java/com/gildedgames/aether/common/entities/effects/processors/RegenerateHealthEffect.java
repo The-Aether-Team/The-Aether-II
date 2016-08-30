@@ -43,11 +43,6 @@ public class RegenerateHealthEffect extends AbstractEffectProcessor<Instance>
 			return;
 		}
 
-		if (all.isEmpty())
-		{
-			return;
-		}
-
 		EntityLivingBase living = (EntityLivingBase) source;
 
 		int ticksBetween = -20;

@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.capabilites.entity.effects.IEffectPool;
 import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -33,6 +34,17 @@ public class EntityEffectsEventHooks
 		if (effects != null)
 		{
 			effects.onHurt(event);
+		}
+	}
+
+	@SubscribeEvent
+	public static void onLivingAttack(LivingAttackEvent event)
+	{
+		IEntityEffectsCapability effects = EntityEffects.get(event.getEntityLiving());
+
+		if (effects != null)
+		{
+			effects.onAttack(event);
 		}
 	}
 

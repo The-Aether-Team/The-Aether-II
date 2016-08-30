@@ -78,7 +78,7 @@ public class ModifyDamageEffect implements EntityEffectProcessor<Instance>
 		float min = instance.getAttributes().getFloat("min");
 		float max = instance.getAttributes().getFloat("max");
 
-		String prefix = min > 0 ? (TextFormatting.BLUE + "+") : (TextFormatting.RED + "");
+		String prefix = min >= 0 ? (TextFormatting.BLUE + "+") : (TextFormatting.RED + "");
 
 		String par;
 

@@ -3,6 +3,7 @@ package com.gildedgames.aether.api.capabilites.entity.effects;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
@@ -11,6 +12,8 @@ public interface IEntityEffectsCapability
 	void onUpdate(LivingUpdateEvent event);
 
 	void onHurt(LivingHurtEvent event);
+
+	void onAttack(LivingAttackEvent event);
 
 	Entity getEntity();
 
@@ -23,4 +26,7 @@ public interface IEntityEffectsCapability
 	<I extends EntityEffectInstance> void removeInstance(EntityEffectProcessor<I> processor, I instance);
 
 	int getTicksSinceAttacked();
+
+	void setTicksSinceAttacked(int ticks);
+
 }

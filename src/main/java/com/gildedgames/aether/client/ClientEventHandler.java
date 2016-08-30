@@ -181,7 +181,7 @@ public class ClientEventHandler
 
 				if (effects.getEffectPairs() == null || effects.getEffectPairs().size() <= 0)
 				{
-					event.getToolTip().add(I18n.format("ability.cosmetic"));
+
 				}
 				else
 				{

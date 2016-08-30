@@ -302,6 +302,17 @@ item.aether.golden_cloud_parachute.name=Golden Cloud Parachute
 item.aether.purple_cloud_parachute.name=Purple Cloud Parachute
 item.aether.green_cloud_parachute.name=Green Cloud Parachute
 item.aether.blue_cloud_parachute.name=Blue Cloud Parachute
+item.aether.zanite_studded_choker.name=Zanite-Studded Choker
+item.aether.lesser_amulet_of_growth.name=Lesser Amulet of Growth
+item.aether.hide_gorget.name=Hide Gorget
+item.aether.amulet_of_growth.name=Amulet of Growth
+item.aether.arkenium_studded_choker.name=Arkenium-Studded Choker
+item.aether.raegorite_gorget.name=Raegorite Gorget
+item.aether.gruegar_scarf.name=Gruegar Scarf
+item.aether.moon_sect_warden_gorget.name=Moon-Sect Warden Gorget
+item.aether.thiefs_gorget.name=Thief's Gorget
+item.aether.frostward_scarf.name=Frostward Scarf
+item.aether.angel_scarf.name=Angel Scarf
 
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability: 
@@ -473,6 +484,9 @@ ability.regenerateHealth.name=Health Regeneration
 ability.maxHealthMod.name=Max Health Modifier
 ability.movementSpeedMod.name=Movement Speed Modifier
 ability.modifyXPCollection=XP Collection Modifier
+ability.modifyDefense=Defense Modifier
+ability.weightTolerance=Weight Tolerance
+ability.invisibility=Invisibility
 
 ability.active=§5Only Active:
 ability.cosmetic=§eCosmetic
@@ -489,6 +503,9 @@ ability.regenerateHealth.desc=§2Regenerates Health
 ability.maxHealthMod.desc=%s Max Health
 ability.movementSpeedMod.desc=%s Movement Speed
 ability.modifyXPCollection.desc=%s XP Collected
+ability.defenseMod.desc=%s Defense
+ability.weightTolerance.desc=§2Weight Tolerance
+ability.invisibility.desc=§2Invisibility
 
 # Tabs
 tab.equipment=Equipment
