@@ -90,7 +90,7 @@ public class BlockAercloud extends Block implements IBlockVariants
 						}
 					}
 
-					entity.motionY = 2.0D;
+					entity.motionY = 1.2D;
 				}
 			},
 			GREEN_AERCLOUD = new AercloudVariant(2, "green", false)
@@ -109,7 +109,7 @@ public class BlockAercloud extends Block implements IBlockVariants
 				@Override
 				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
 				{
-					entity.motionY = -1.5D;
+					entity.motionY = -1.2D;
 				}
 			},
 			STORM_AERCLOUD = new AercloudVariant(4, "storm", true),
@@ -120,8 +120,8 @@ public class BlockAercloud extends Block implements IBlockVariants
 				{
 					EnumFacing side = (EnumFacing) state.getValue(PROPERTY_FACING);
 
-					entity.motionX = side.getFrontOffsetX() * 2.5D;
-					entity.motionZ = side.getFrontOffsetZ() * 2.5D;
+					entity.motionX = side.getFrontOffsetX() * 1.2D;
+					entity.motionZ = side.getFrontOffsetZ() * 1.2D;
 				}
 			};
 
