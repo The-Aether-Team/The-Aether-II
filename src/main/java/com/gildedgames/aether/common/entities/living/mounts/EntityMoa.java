@@ -202,7 +202,9 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	{
 		this.fallDistance = 0;
 
-		if (!this.onGround && this.motionY < 0.0D)
+		boolean riderSneaking = !this.getPassengers().isEmpty() && this.getPassengers().get(0) != null && this.getPassengers().get(0).isSneaking();
+
+		if (!this.onGround && this.motionY < 0.0D && !riderSneaking)
 		{
 			this.motionY *= 0.63749999999999996D;
 		}
