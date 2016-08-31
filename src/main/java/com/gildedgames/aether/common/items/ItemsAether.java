@@ -649,7 +649,7 @@ public class ItemsAether
 		ItemEffects.register(ItemsAether.ambrosium_talisman, new Effects().add(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new HoldingItemRule(new ItemStack(ItemsAether.ambrosium_shard)))));
 		ItemEffects.register(ItemsAether.carrion_petal, new Effects().add(EntityEffects.PAUSE_HUNGER, new EntityEffectInstance(new InDirectSunlightRule())));
 		ItemEffects.register(ItemsAether.moonlit_petal, new Effects().add(EntityEffects.PAUSE_HUNGER, new EntityEffectInstance(new InDirectMoonlightRule())));
-		ItemEffects.register(ItemsAether.cockatrice_heart, new Effects().add(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new InBiomeRule(Biomes.BEACH))));
+		ItemEffects.register(ItemsAether.cockatrice_heart, new Effects().add(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new WhenPoisonedRule())));
 		ItemEffects.register(ItemsAether.damaged_moa_feather, new Effects().add(EntityEffects.MODIFY_SPEED, new ModifySpeedEffect.Instance((float) SharedMonsterAttributes.MOVEMENT_SPEED.getDefaultValue() * 0.10F, new OutOfCombatRule(160))));
 		ItemEffects.register(ItemsAether.osseous_bane, new Effects().add(EntityEffects.MODIFY_DAMAGE2, new ModifyDamageEffect.Instance(2.0F, new DamagingMobRule(EntitySkeleton.class, "Skeleton"))));
 		ItemEffects.register(ItemsAether.rot_bane, new Effects().add(EntityEffects.MODIFY_DAMAGE2, new ModifyDamageEffect.Instance(1.0F, new DamagingUndeadRule())));
