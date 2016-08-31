@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.entities.effects.processors.ModifyDamageEff
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
@@ -95,7 +96,7 @@ public class ModifyDamageEffect implements EntityEffectProcessor<Instance>
 	}
 
 	@Override
-	public void onAttack(LivingHurtEvent event, Entity source, List<Instance> all)
+	public void onHurt(LivingHurtEvent event, Entity source, List<Instance> all)
 	{
 		if (!(source instanceof EntityLivingBase))
 		{
@@ -136,6 +137,12 @@ public class ModifyDamageEffect implements EntityEffectProcessor<Instance>
 				event.getEntityLiving().setHealth(result);
 			}
 		}
+	}
+
+	@Override
+	public void onAttacked(LivingAttackEvent event, Entity source, List<Instance> all)
+	{
+
 	}
 
 	@Override

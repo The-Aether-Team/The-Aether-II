@@ -2,7 +2,9 @@ package com.gildedgames.aether.common.entities.effects;
 
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
+import com.gildedgames.aether.common.entities.effects.processors.ModifyDamageEffect;
 import net.minecraft.entity.Entity;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
@@ -60,8 +62,14 @@ public abstract class AbstractEffectProcessor<I extends EntityEffectInstance> im
 	}
 
 	@Override
-	public void onAttack(LivingHurtEvent event, Entity source, List<I> all)
+	public void onHurt(LivingHurtEvent event, Entity source, List<I> all)
 	{
+	}
+
+	@Override
+	public void onAttacked(LivingAttackEvent event, Entity source, List<I> all)
+	{
+
 	}
 
 }

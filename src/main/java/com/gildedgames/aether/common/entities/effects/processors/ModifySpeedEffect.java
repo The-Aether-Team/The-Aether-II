@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
@@ -114,7 +115,13 @@ public class ModifySpeedEffect implements EntityEffectProcessor<Instance>
 	}
 
 	@Override
-	public void onAttack(LivingHurtEvent event, Entity source, List<Instance> all)
+	public void onHurt(LivingHurtEvent event, Entity source, List<Instance> all)
+	{
+
+	}
+
+	@Override
+	public void onAttacked(LivingAttackEvent event, Entity source, List<Instance> all)
 	{
 
 	}

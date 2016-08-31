@@ -11,6 +11,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
@@ -128,8 +129,14 @@ public class DoubleDropEffect implements EntityEffectProcessor<Instance>
 	}
 
 	@Override
-	public void onAttack(LivingHurtEvent event, Entity source, List<Instance> all)
+	public void onHurt(LivingHurtEvent event, Entity source, List<Instance> all)
 	{
+	}
+
+	@Override
+	public void onAttacked(LivingAttackEvent event, Entity source, List<Instance> all)
+	{
+
 	}
 
 }

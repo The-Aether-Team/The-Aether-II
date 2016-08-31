@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
@@ -22,6 +23,11 @@ public class ModifyDefenseEffect implements EntityEffectProcessor<ModifyDefenseE
 			super(rules);
 
 			this.getAttributes().setFloat("defenseMod", defenseMod);
+		}
+
+		public float getDefense()
+		{
+			return this.getAttributes().getFloat("defenseMod");
 		}
 
 		@Override
@@ -52,11 +58,11 @@ public class ModifyDefenseEffect implements EntityEffectProcessor<ModifyDefenseE
 	@Override
 	public String[] getFormatParameters(Entity source, Instance instance)
 	{
-		float maxHealthMod = instance.getAttributes().getFloat("defenseMod");
+		float defense = instance.getDefense();
 
-		String prefix = maxHealthMod > 0 ? (TextFormatting.BLUE + "+") : (TextFormatting.RED + "");
+		String prefix = defense > 0 ? (TextFormatting.BLUE + "+") : (TextFormatting.RED + "");
 
-		String par = prefix + (maxHealthMod == (int) Math.floor(maxHealthMod) ? String.valueOf((int) Math.floor(maxHealthMod)) : String.valueOf(maxHealthMod));
+		String par = prefix + (defense == (int) Math.floor(defense) ? String.valueOf((int) Math.floor(defense)) : String.valueOf(defense));
 
 		return new String[] { par };
 	}
@@ -92,7 +98,31 @@ public class ModifyDefenseEffect implements EntityEffectProcessor<ModifyDefenseE
 	}
 
 	@Override
-	public void onAttack(LivingHurtEvent event, Entity source, List<Instance> all)
+	public void onHurt(LivingHurtEvent event, Entity source, List<Instance> all)
+	{
+		if (!(source instanceof EntityLivingBase))
+		{
+			return;
+		}
+
+		float allDefense = 0.0F;
+
+		for (Instance instance : all)
+		{
+			allDefense += instance.getDefense();
+		}
+
+		float defense = Math.min(event.getAmount(), allDefense * 2);
+
+		defense = Math.max(1.0F, defense - 1.0F);
+
+		EntityLivingBase living = (EntityLivingBase) source;
+
+		living.setHealth(living.getHealth() + defense);
+	}
+
+	@Override
+	public void onAttacked(LivingAttackEvent event, Entity source, List<Instance> all)
 	{
 
 	}

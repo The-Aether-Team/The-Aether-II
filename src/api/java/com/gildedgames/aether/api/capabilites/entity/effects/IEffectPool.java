@@ -1,6 +1,7 @@
 package com.gildedgames.aether.api.capabilites.entity.effects;
 
 import net.minecraft.entity.Entity;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -22,5 +23,8 @@ public interface IEffectPool<I extends EntityEffectInstance>
 
 	<S extends Entity> void onPickupXP(PlayerPickupXpEvent event, S entity);
 
-	<S extends Entity> void onLivingAttack(LivingHurtEvent event, S entity);
+	<S extends Entity> void onLivingHurt(LivingHurtEvent event, S entity);
+
+	<S extends Entity> void onLivingAttacked(LivingAttackEvent event, S entity);
+
 }

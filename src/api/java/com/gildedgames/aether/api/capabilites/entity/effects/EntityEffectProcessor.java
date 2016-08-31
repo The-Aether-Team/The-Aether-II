@@ -1,6 +1,7 @@
 package com.gildedgames.aether.api.capabilites.entity.effects;
 
 import net.minecraft.entity.Entity;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
@@ -18,8 +19,7 @@ public interface EntityEffectProcessor<I extends EntityEffectInstance>
 	/**
 	 * Called once when this ability is added to an entity.
 	 * @param source The entity that is affected by this ability. 
-	 * @param holder The instances of this ability that are attached to the source.
-	 * @param attributes TODO
+	 * @param all The instances of this ability that are attached to the source.
 	 */
 	void apply(Entity source, I instance, List<I> all);
 
@@ -28,8 +28,7 @@ public interface EntityEffectProcessor<I extends EntityEffectInstance>
 	/**
 	 * Called once when this ability is removed from an entity.
 	 * @param source The entity that is affected by this ability. 
-	 * @param holder The instances of this ability that are attached to the source.
-	 * @param attributes TODO
+	 * @param all The instances of this ability that are attached to the source.
 	 */
 	void cancel(Entity source, I instance, List<I> all);
 
@@ -37,18 +36,24 @@ public interface EntityEffectProcessor<I extends EntityEffectInstance>
 	 * Called when the source kills a living entity while they have this ability.
 	 * @param event The event that is fired.
 	 * @param source The entity that is affected by this ability. 
-	 * @param holder The instances of this ability that are attached to the source.
-	 * @param attributes TODO
+	 * @param all The instances of this ability that are attached to the source.
 	 */
 	void onKill(LivingDropsEvent event, Entity source, List<I> all);
 
 	/**
-	 * Called when the source attacks a living entity while they have this ability.
+	 * Called when the source is hurt while they have this ability.
 	 * @param event The event that is fired.
 	 * @param source The entity that is affected by this ability. 
-	 * @param holder The instances of this ability that are attached to the source.
-	 * @param attributes TODO
+	 * @param all The instances of this ability that are attached to the source.
 	 */
-	void onAttack(LivingHurtEvent event, Entity source, List<I> all);
+	void onHurt(LivingHurtEvent event, Entity source, List<I> all);
+
+	/**
+	 * Called when the source is hurt while they have this ability.
+	 * @param event The event that is fired.
+	 * @param source The entity that is affected by this ability.
+	 * @param all The instances of this ability that are attached to the source.
+	 */
+	void onAttacked(LivingAttackEvent event, Entity source, List<I> all);
 
 }

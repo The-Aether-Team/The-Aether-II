@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.entities.effects.processors.player.ModifyXP
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -92,13 +93,19 @@ public class ModifyXPCollectionEffect implements EffectProcessorPlayer<Instance>
 	}
 
 	@Override
-	public void onAttack(LivingHurtEvent event, Entity source, List<Instance> all)
+	public void onHurt(LivingHurtEvent event, Entity source, List<Instance> all)
 	{
 
 	}
 
 	@Override
 	public void onInteract(PlayerInteractEvent event, EntityPlayer source, List<Instance> all)
+	{
+
+	}
+
+	@Override
+	public void onAttacked(LivingAttackEvent event, Entity source, List<Instance> all)
 	{
 
 	}

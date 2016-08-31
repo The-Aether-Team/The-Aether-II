@@ -102,9 +102,9 @@ public class EntityEffectsEventHooks
 	}
 
 	@SubscribeEvent
-	public static void onLivingAttack(LivingHurtEvent event)
+	public static void onLivingHurt(LivingHurtEvent event)
 	{
-		Entity entity = event.getSource().getSourceOfDamage();
+		Entity entity = event.getEntity();
 
 		if (entity == null)
 		{
@@ -117,7 +117,28 @@ public class EntityEffectsEventHooks
 		{
 			for (IEffectPool<?> pool : effects.getEffectPools())
 			{
-				pool.onLivingAttack(event, entity);
+				pool.onLivingHurt(event, entity);
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onLivingAttacked(LivingAttackEvent event)
+	{
+		Entity entity = event.getEntity();
+
+		if (entity == null)
+		{
+			return;
+		}
+
+		IEntityEffectsCapability effects = EntityEffects.get(entity);
+
+		if (effects != null)
+		{
+			for (IEffectPool<?> pool : effects.getEffectPools())
+			{
+				pool.onLivingAttacked(event, entity);
 			}
 		}
 	}

@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
 import com.gildedgames.aether.api.capabilites.entity.effects.IEffectPool;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -170,7 +171,7 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 	}
 
 	@Override
-	public <S extends Entity> void onLivingAttack(LivingHurtEvent event, S entity)
+	public <S extends Entity> void onLivingHurt(LivingHurtEvent event, S entity)
 	{
 		List<I> instancesRulesMet = Lists.newArrayList();
 
@@ -195,7 +196,37 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 
 		if (!instancesRulesMet.isEmpty())
 		{
-			this.getProcessor().onAttack(event, entity, instancesRulesMet);
+			this.getProcessor().onHurt(event, entity, instancesRulesMet);
+		}
+	}
+
+	@Override
+	public <S extends Entity> void onLivingAttacked(LivingAttackEvent event, S entity)
+	{
+		List<I> instancesRulesMet = Lists.newArrayList();
+
+		for (I instance : this.getInstances())
+		{
+			boolean isMet = true;
+
+			for (EntityEffectRule rule : instance.getRules())
+			{
+				if (!rule.isMet(entity))
+				{
+					isMet = false;
+					break;
+				}
+			}
+
+			if (isMet || instance.getRules().length <= 0)
+			{
+				instancesRulesMet.add(instance);
+			}
+		}
+
+		if (!instancesRulesMet.isEmpty())
+		{
+			this.getProcessor().onAttacked(event, entity, instancesRulesMet);
 		}
 	}
 
