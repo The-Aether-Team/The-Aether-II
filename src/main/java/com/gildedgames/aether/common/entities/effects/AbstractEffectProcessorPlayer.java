@@ -2,23 +2,24 @@ package com.gildedgames.aether.common.entities.effects;
 
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
-import com.gildedgames.aether.common.entities.effects.processors.ModifyDamageEffect;
-import com.gildedgames.aether.common.entities.effects.processors.ModifyDefenseEffect;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 
 import java.util.List;
 
-public abstract class AbstractEffectProcessor<I extends EntityEffectInstance> implements EntityEffectProcessor<I>
+public abstract class AbstractEffectProcessorPlayer<I extends EntityEffectInstance> implements EffectProcessorPlayer<I>
 {
 
 	private String unlocalizedName;
 
 	private String[] desc;
 
-	public AbstractEffectProcessor(String unlocalizedName, String... desc)
+	public AbstractEffectProcessorPlayer(String unlocalizedName, String... desc)
 	{
 		this.unlocalizedName = unlocalizedName;
 		this.desc = desc;
@@ -79,4 +80,15 @@ public abstract class AbstractEffectProcessor<I extends EntityEffectInstance> im
 
 	}
 
+	@Override
+	public void onInteract(PlayerInteractEvent event, EntityPlayer source, List<I> instances)
+	{
+
+	}
+
+	@Override
+	public void onPickupXP(PlayerPickupXpEvent event, EntityPlayer source, List<I> instances)
+	{
+
+	}
 }

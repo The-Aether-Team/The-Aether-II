@@ -49,11 +49,19 @@ public interface EntityEffectProcessor<I extends EntityEffectInstance>
 	void onHurt(LivingHurtEvent event, Entity source, List<I> all);
 
 	/**
-	 * Called when the source is hurt while they have this ability.
+	 * Called when the source is attacked while they have this ability.
 	 * @param event The event that is fired.
 	 * @param source The entity that is affected by this ability.
 	 * @param all The instances of this ability that are attached to the source.
 	 */
 	void onAttacked(LivingAttackEvent event, Entity source, List<I> all);
+
+	/**
+	 * Called when the source attacks an entity while they have this ability.
+	 * @param event The event that is fired.
+	 * @param source The entity that is affected by this ability.
+	 * @param all The instances of this ability that are attached to the source.
+	 */
+	void onAttack(LivingAttackEvent event, Entity source, List<I> all);
 
 }

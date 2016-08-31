@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.entities.effects.processors;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
+import com.gildedgames.aether.common.entities.effects.AbstractEffectProcessor;
 import com.gildedgames.aether.common.entities.effects.processors.FreezeBlocksEffect.Instance;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -24,7 +25,7 @@ import java.util.List;
  * Unfreezes frozen locations once the player has moved away from them.
  * @author Brandon Pearce
  */
-public class FreezeBlocksEffect implements EntityEffectProcessor<Instance>
+public class FreezeBlocksEffect extends AbstractEffectProcessor<Instance>
 {
 
 	public static class Instance extends EntityEffectInstance
@@ -45,16 +46,9 @@ public class FreezeBlocksEffect implements EntityEffectProcessor<Instance>
 
 	}
 
-	@Override
-	public String getUnlocalizedName(Entity source, Instance instance)
+	public FreezeBlocksEffect()
 	{
-		return "ability.freezeBlocks.localizedName";
-	}
-
-	@Override
-	public String[] getUnlocalizedDesc(Entity source, Instance instance)
-	{
-		return new String[] { "ability.freezeBlocks.desc" };
+		super("ability.freezeBlocks.localizedName", "ability.freezeBlocks.desc");
 	}
 
 	@Override
@@ -109,34 +103,6 @@ public class FreezeBlocksEffect implements EntityEffectProcessor<Instance>
 				}
 			}
 		}
-	}
-
-	@Override
-	public void cancel(Entity source, Instance instance, List<Instance> all)
-	{
-
-	}
-
-	@Override
-	public void onKill(LivingDropsEvent event, Entity source, List<Instance> all)
-	{
-	}
-
-	@Override
-	public void onHurt(LivingHurtEvent event, Entity source, List<Instance> all)
-	{
-	}
-
-	@Override
-	public String[] getFormatParameters(Entity source, Instance instance)
-	{
-		return new String[] {};
-	}
-
-	@Override
-	public void onAttacked(LivingAttackEvent event, Entity source, List<Instance> all)
-	{
-
 	}
 
 }

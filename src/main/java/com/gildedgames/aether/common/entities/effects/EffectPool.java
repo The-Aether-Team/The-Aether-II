@@ -196,7 +196,7 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 
 			for (EntityEffectRule rule : instance.getRules())
 			{
-				if (!rule.isMet(entity))
+				if (!rule.isMet(entity) || rule.blockLivingHurt(entity, event))
 				{
 					isMet = false;
 					break;
@@ -226,7 +226,7 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 
 			for (EntityEffectRule rule : instance.getRules())
 			{
-				if (!rule.isMet(entity))
+				if (!rule.isMet(entity) || rule.blockLivingAttack(entity, event))
 				{
 					isMet = false;
 					break;
@@ -242,6 +242,36 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 		if (!instancesRulesMet.isEmpty())
 		{
 			this.getProcessor().onAttacked(event, entity, instancesRulesMet);
+		}
+	}
+
+	@Override
+	public <S extends Entity> void onLivingAttack(LivingAttackEvent event, S entity)
+	{
+		List<I> instancesRulesMet = Lists.newArrayList();
+
+		for (I instance : this.getInstances())
+		{
+			boolean isMet = true;
+
+			for (EntityEffectRule rule : instance.getRules())
+			{
+				if (!rule.isMet(entity) || rule.blockLivingAttack(entity, event))
+				{
+					isMet = false;
+					break;
+				}
+			}
+
+			if (isMet || instance.getRules().length <= 0)
+			{
+				instancesRulesMet.add(instance);
+			}
+		}
+
+		if (!instancesRulesMet.isEmpty())
+		{
+			this.getProcessor().onAttack(event, entity, instancesRulesMet);
 		}
 	}
 

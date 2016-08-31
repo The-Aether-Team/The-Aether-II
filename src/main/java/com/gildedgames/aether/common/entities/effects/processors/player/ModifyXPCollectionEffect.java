@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.effects.processors.player;
 
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
+import com.gildedgames.aether.common.entities.effects.AbstractEffectProcessorPlayer;
 import com.gildedgames.aether.common.entities.effects.EffectProcessorPlayer;
 import com.gildedgames.aether.common.entities.effects.processors.player.ModifyXPCollectionEffect.Instance;
 import net.minecraft.entity.Entity;
@@ -15,7 +16,7 @@ import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 
 import java.util.List;
 
-public class ModifyXPCollectionEffect implements EffectProcessorPlayer<Instance>
+public class ModifyXPCollectionEffect extends AbstractEffectProcessorPlayer<Instance>
 {
 
 	public static class Instance extends EntityEffectInstance
@@ -38,19 +39,7 @@ public class ModifyXPCollectionEffect implements EffectProcessorPlayer<Instance>
 
 	public ModifyXPCollectionEffect()
 	{
-
-	}
-
-	@Override
-	public String getUnlocalizedName(Entity source, Instance instance)
-	{
-		return "ability.modifyXPCollection.localizedName";
-	}
-
-	@Override
-	public String[] getUnlocalizedDesc(Entity source, Instance instance)
-	{
-		return new String[] { "ability.modifyXPCollection.desc" };
+		super("ability.modifyXPCollection.localizedName", "ability.modifyXPCollection.desc");
 	}
 
 	private String displayValue(float value)
@@ -66,48 +55,6 @@ public class ModifyXPCollectionEffect implements EffectProcessorPlayer<Instance>
 		String prefix = percentMod > 0 ? (TextFormatting.BLUE + "+") : (TextFormatting.RED + "");
 
 		return new String[] { (prefix + this.displayValue(percentMod) + "%") };
-	}
-
-	@Override
-	public void apply(Entity source, Instance instance, List<Instance> all)
-	{
-
-	}
-
-	@Override
-	public void tick(Entity source, List<Instance> all)
-	{
-
-	}
-
-	@Override
-	public void cancel(Entity source, Instance instance, List<Instance> all)
-	{
-
-	}
-
-	@Override
-	public void onKill(LivingDropsEvent event, Entity source, List<Instance> all)
-	{
-
-	}
-
-	@Override
-	public void onHurt(LivingHurtEvent event, Entity source, List<Instance> all)
-	{
-
-	}
-
-	@Override
-	public void onInteract(PlayerInteractEvent event, EntityPlayer source, List<Instance> all)
-	{
-
-	}
-
-	@Override
-	public void onAttacked(LivingAttackEvent event, Entity source, List<Instance> all)
-	{
-
 	}
 
 	@Override

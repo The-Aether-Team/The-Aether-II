@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.entities.effects.rules;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class DamagingMobRule implements EntityEffectRule
@@ -25,7 +26,13 @@ public class DamagingMobRule implements EntityEffectRule
 	}
 
 	@Override
-	public boolean blockLivingAttackAbility(Entity source, LivingHurtEvent event)
+	public boolean blockLivingAttack(Entity source, LivingAttackEvent event)
+	{
+		return !(event.getEntityLiving() != null && this.mobClass.isAssignableFrom(event.getEntityLiving().getClass()));
+	}
+
+	@Override
+	public boolean blockLivingHurt(Entity source, LivingHurtEvent event)
 	{
 		return !(event.getEntityLiving() != null && this.mobClass.isAssignableFrom(event.getEntityLiving().getClass()));
 	}

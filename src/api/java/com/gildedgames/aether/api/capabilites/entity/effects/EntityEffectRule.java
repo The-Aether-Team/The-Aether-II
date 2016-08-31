@@ -1,6 +1,7 @@
 package com.gildedgames.aether.api.capabilites.entity.effects;
 
 import net.minecraft.entity.Entity;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public interface EntityEffectRule
@@ -11,7 +12,9 @@ public interface EntityEffectRule
 	 */
 	boolean isMet(Entity source);
 
-	boolean blockLivingAttackAbility(Entity source, LivingHurtEvent event);
+	boolean blockLivingAttack(Entity source, LivingAttackEvent event);
+
+	boolean blockLivingHurt(Entity source, LivingHurtEvent event);
 
 	String[] getUnlocalizedDesc();
 }

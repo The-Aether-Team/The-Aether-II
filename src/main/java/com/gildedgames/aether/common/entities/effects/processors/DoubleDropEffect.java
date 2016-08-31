@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.entities.effects.processors;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
+import com.gildedgames.aether.common.entities.effects.AbstractEffectProcessor;
 import com.gildedgames.aether.common.entities.effects.processors.DoubleDropEffect.Instance;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import net.minecraft.entity.Entity;
@@ -21,7 +22,7 @@ import java.util.List;
 /**
  * @author Brandon Pearce
  */
-public class DoubleDropEffect implements EntityEffectProcessor<Instance>
+public class DoubleDropEffect extends AbstractEffectProcessor<Instance>
 {
 
 	public static class Instance extends EntityEffectInstance
@@ -44,19 +45,7 @@ public class DoubleDropEffect implements EntityEffectProcessor<Instance>
 
 	public DoubleDropEffect()
 	{
-
-	}
-
-	@Override
-	public String getUnlocalizedName(Entity source, Instance instance)
-	{
-		return "ability.doubleDrops.localizedName";
-	}
-
-	@Override
-	public String[] getUnlocalizedDesc(Entity source, Instance instance)
-	{
-		return new String[] { "ability.doubleDrops.desc1", "ability.doubleDrops.desc2" };
+		super("ability.doubleDrops.localizedName", "ability.doubleDrops.desc1", "ability.doubleDrops.desc2");
 	}
 
 	@Override
@@ -111,32 +100,6 @@ public class DoubleDropEffect implements EntityEffectProcessor<Instance>
 				target.worldObj.spawnEntityInWorld(item);
 			}
 		}
-	}
-
-	@Override
-	public void apply(Entity source, Instance instance, List<Instance> all)
-	{
-	}
-
-	@Override
-	public void tick(Entity source, List<Instance> all)
-	{
-	}
-
-	@Override
-	public void cancel(Entity source, Instance instance, List<Instance> all)
-	{
-	}
-
-	@Override
-	public void onHurt(LivingHurtEvent event, Entity source, List<Instance> all)
-	{
-	}
-
-	@Override
-	public void onAttacked(LivingAttackEvent event, Entity source, List<Instance> all)
-	{
-
 	}
 
 }

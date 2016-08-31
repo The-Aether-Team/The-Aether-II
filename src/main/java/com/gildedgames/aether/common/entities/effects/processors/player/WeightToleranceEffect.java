@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.effects.processors.player;
 
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
+import com.gildedgames.aether.common.entities.effects.AbstractEffectProcessorPlayer;
 import com.gildedgames.aether.common.entities.effects.EffectProcessorPlayer;
 import com.gildedgames.aether.common.entities.effects.processors.ModifyDamageEffect;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
@@ -18,67 +19,12 @@ import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 
 import java.util.List;
 
-public class WeightToleranceEffect implements EffectProcessorPlayer<EntityEffectInstance>
+public class WeightToleranceEffect extends AbstractEffectProcessorPlayer<EntityEffectInstance>
 {
 
-	@Override
-	public String getUnlocalizedName(Entity source, EntityEffectInstance instance)
+	public WeightToleranceEffect()
 	{
-		return "ability.weightTolerance.localizedName";
-	}
-
-	@Override
-	public String[] getUnlocalizedDesc(Entity source, EntityEffectInstance instance)
-	{
-		return new String[] { "ability.weightTolerance.desc" };
-	}
-
-	@Override
-	public void apply(Entity source, EntityEffectInstance instance, List<EntityEffectInstance> all)
-	{
-	}
-
-	@Override
-	public void onInteract(PlayerInteractEvent event, EntityPlayer source, List<EntityEffectInstance> instances)
-	{
-
-	}
-
-	@Override
-	public void tick(Entity source, List<EntityEffectInstance> instances)
-	{
-	}
-
-	@Override
-	public void cancel(Entity source, EntityEffectInstance instance, List<EntityEffectInstance> all)
-	{
-	}
-
-	@Override
-	public void onKill(LivingDropsEvent event, Entity source, List<EntityEffectInstance> instances)
-	{
-	}
-
-	@Override
-	public void onHurt(LivingHurtEvent event, Entity source, List<EntityEffectInstance> instances)
-	{
-	}
-
-	@Override
-	public void onPickupXP(PlayerPickupXpEvent event, EntityPlayer source, List<EntityEffectInstance> instances)
-	{
-	}
-
-	@Override
-	public void onAttacked(LivingAttackEvent event, Entity source, List<EntityEffectInstance> all)
-	{
-
-	}
-
-	@Override
-	public String[] getFormatParameters(Entity source, EntityEffectInstance instance)
-	{
-		return new String[] {};
+		super("ability.weightTolerance.localizedName", "ability.weightTolerance.desc");
 	}
 
 }

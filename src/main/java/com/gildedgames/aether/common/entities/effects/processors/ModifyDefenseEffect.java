@@ -1,18 +1,16 @@
 package com.gildedgames.aether.common.entities.effects.processors;
 
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
-import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
+import com.gildedgames.aether.common.entities.effects.AbstractEffectProcessor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import java.util.List;
 
-public class ModifyDefenseEffect implements EntityEffectProcessor<ModifyDefenseEffect.Instance>
+public class ModifyDefenseEffect extends AbstractEffectProcessor<ModifyDefenseEffect.Instance>
 {
 
 	public static class Instance extends EntityEffectInstance
@@ -40,19 +38,7 @@ public class ModifyDefenseEffect implements EntityEffectProcessor<ModifyDefenseE
 
 	public ModifyDefenseEffect()
 	{
-
-	}
-
-	@Override
-	public String getUnlocalizedName(Entity source, Instance instance)
-	{
-		return "ability.defenseMod.localizedName";
-	}
-
-	@Override
-	public String[] getUnlocalizedDesc(Entity source, Instance instance)
-	{
-		return new String[] { "ability.defenseMod.desc" };
+		super("ability.defenseMod.localizedName", "ability.defenseMod.desc");
 	}
 
 	@Override
@@ -65,36 +51,6 @@ public class ModifyDefenseEffect implements EntityEffectProcessor<ModifyDefenseE
 		String par = prefix + (defense == (int) Math.floor(defense) ? String.valueOf((int) Math.floor(defense)) : String.valueOf(defense));
 
 		return new String[] { par };
-	}
-
-	@Override
-	public void apply(Entity source, Instance instance, List<Instance> all)
-	{
-		if (!(source instanceof EntityLivingBase))
-		{
-			return;
-		}
-	}
-
-	@Override
-	public void tick(Entity source, List<Instance> all)
-	{
-
-	}
-
-	@Override
-	public void cancel(Entity source, Instance instance, List<Instance> all)
-	{
-		if (!(source instanceof EntityLivingBase))
-		{
-			return;
-		}
-	}
-
-	@Override
-	public void onKill(LivingDropsEvent event, Entity source, List<Instance> all)
-	{
-
 	}
 
 	@Override
@@ -119,12 +75,6 @@ public class ModifyDefenseEffect implements EntityEffectProcessor<ModifyDefenseE
 		EntityLivingBase living = (EntityLivingBase) source;
 
 		living.setHealth(living.getHealth() + defense);
-	}
-
-	@Override
-	public void onAttacked(LivingAttackEvent event, Entity source, List<Instance> all)
-	{
-
 	}
 
 }

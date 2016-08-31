@@ -125,6 +125,21 @@ public class EntityEffectsEventHooks
 	@SubscribeEvent
 	public static void onLivingAttacked(LivingAttackEvent event)
 	{
+		Entity attacker = event.getSource().getSourceOfDamage();
+
+		if (attacker != null)
+		{
+			IEntityEffectsCapability effects = EntityEffects.get(attacker);
+
+			if (effects != null)
+			{
+				for (IEffectPool<?> pool : effects.getEffectPools())
+				{
+					pool.onLivingAttack(event, attacker);
+				}
+			}
+		}
+
 		Entity entity = event.getEntity();
 
 		if (entity == null)

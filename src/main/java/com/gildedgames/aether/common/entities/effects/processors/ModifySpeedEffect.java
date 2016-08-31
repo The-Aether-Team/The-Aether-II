@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.entities.effects.processors;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
+import com.gildedgames.aether.common.entities.effects.AbstractEffectProcessor;
 import com.gildedgames.aether.common.entities.effects.processors.ModifySpeedEffect.Instance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,7 +18,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import java.util.List;
 import java.util.UUID;
 
-public class ModifySpeedEffect implements EntityEffectProcessor<Instance>
+public class ModifySpeedEffect extends AbstractEffectProcessor<Instance>
 {
 
 	public static class Instance extends EntityEffectInstance
@@ -48,19 +49,7 @@ public class ModifySpeedEffect implements EntityEffectProcessor<Instance>
 
 	public ModifySpeedEffect()
 	{
-
-	}
-
-	@Override
-	public String getUnlocalizedName(Entity source, Instance instance)
-	{
-		return "ability.movementSpeedMod.localizedName";
-	}
-
-	@Override
-	public String[] getUnlocalizedDesc(Entity source, Instance instance)
-	{
-		return new String[] { "ability.movementSpeedMod.desc" };
+		super("ability.movementSpeedMod.localizedName", "ability.movementSpeedMod.desc");
 	}
 
 	@Override
@@ -96,12 +85,6 @@ public class ModifySpeedEffect implements EntityEffectProcessor<Instance>
 	}
 
 	@Override
-	public void tick(Entity source, List<Instance> all)
-	{
-
-	}
-
-	@Override
 	public void cancel(Entity source, Instance instance, List<Instance> all)
 	{
 		if (!(source instanceof EntityLivingBase))
@@ -117,24 +100,6 @@ public class ModifySpeedEffect implements EntityEffectProcessor<Instance>
 		{
 			attribute.removeModifier(instance.getModifier());
 		}
-	}
-
-	@Override
-	public void onKill(LivingDropsEvent event, Entity source, List<Instance> all)
-	{
-
-	}
-
-	@Override
-	public void onHurt(LivingHurtEvent event, Entity source, List<Instance> all)
-	{
-
-	}
-
-	@Override
-	public void onAttacked(LivingAttackEvent event, Entity source, List<Instance> all)
-	{
-
 	}
 
 }

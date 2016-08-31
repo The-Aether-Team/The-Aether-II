@@ -5,6 +5,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class HoldingItemRule implements EntityEffectRule
@@ -37,7 +38,13 @@ public class HoldingItemRule implements EntityEffectRule
 	}
 
 	@Override
-	public boolean blockLivingAttackAbility(Entity source, LivingHurtEvent event)
+	public boolean blockLivingAttack(Entity source, LivingAttackEvent event)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean blockLivingHurt(Entity source, LivingHurtEvent event)
 	{
 		return false;
 	}

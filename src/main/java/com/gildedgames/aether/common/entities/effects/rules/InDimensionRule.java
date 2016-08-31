@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.entities.effects.rules;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class InDimensionRule implements EntityEffectRule
@@ -28,7 +29,13 @@ public class InDimensionRule implements EntityEffectRule
 	}
 
 	@Override
-	public boolean blockLivingAttackAbility(Entity source, LivingHurtEvent event)
+	public boolean blockLivingAttack(Entity source, LivingAttackEvent event)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean blockLivingHurt(Entity source, LivingHurtEvent event)
 	{
 		return false;
 	}

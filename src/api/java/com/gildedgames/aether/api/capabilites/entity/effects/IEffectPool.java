@@ -27,4 +27,6 @@ public interface IEffectPool<I extends EntityEffectInstance>
 
 	<S extends Entity> void onLivingAttacked(LivingAttackEvent event, S entity);
 
+	<S extends Entity> void onLivingAttack(LivingAttackEvent event, S entity);
+
 }

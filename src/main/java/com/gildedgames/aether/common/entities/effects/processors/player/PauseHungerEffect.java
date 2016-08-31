@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.entities.effects.processors.player;
 import akka.util.Reflect;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.common.ReflectionAether;
+import com.gildedgames.aether.common.entities.effects.AbstractEffectProcessorPlayer;
 import com.gildedgames.aether.common.entities.effects.EffectProcessorPlayer;
 import com.gildedgames.aether.common.entities.effects.processors.ModifyDamageEffect;
 import net.minecraft.entity.Entity;
@@ -18,19 +19,12 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import java.util.List;
 
-public class PauseHungerEffect implements EffectProcessorPlayer<EntityEffectInstance>
+public class PauseHungerEffect extends AbstractEffectProcessorPlayer<EntityEffectInstance>
 {
 
-	@Override
-	public String getUnlocalizedName(Entity source, EntityEffectInstance instance)
+	public PauseHungerEffect()
 	{
-		return "ability.pauseHunger.localizedName";
-	}
-
-	@Override
-	public String[] getUnlocalizedDesc(Entity source, EntityEffectInstance instance)
-	{
-		return new String[] { "ability.pauseHunger.desc" };
+		super("ability.pauseHunger.localizedName", "ability.pauseHunger.desc");
 	}
 
 	@Override
@@ -80,38 +74,6 @@ public class PauseHungerEffect implements EffectProcessorPlayer<EntityEffectInst
 	public void cancel(Entity source, EntityEffectInstance instance, List<EntityEffectInstance> all)
 	{
 		instance.getAttributes().setInteger("foodLevel", 0);
-	}
-
-	@Override
-	public void onInteract(PlayerInteractEvent event, EntityPlayer source, List<EntityEffectInstance> all)
-	{
-	}
-
-	@Override
-	public void onKill(LivingDropsEvent event, Entity source, List<EntityEffectInstance> all)
-	{
-	}
-
-	@Override
-	public void onHurt(LivingHurtEvent event, Entity source, List<EntityEffectInstance> all)
-	{
-	}
-
-	@Override
-	public void onAttacked(LivingAttackEvent event, Entity source, List<EntityEffectInstance> all)
-	{
-
-	}
-
-	@Override
-	public String[] getFormatParameters(Entity source, EntityEffectInstance instance)
-	{
-		return new String[] {};
-	}
-
-	@Override
-	public void onPickupXP(PlayerPickupXpEvent event, EntityPlayer source, List<EntityEffectInstance> all)
-	{
 	}
 
 }

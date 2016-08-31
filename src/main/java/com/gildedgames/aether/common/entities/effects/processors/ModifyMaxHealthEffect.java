@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.entities.effects.processors;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
+import com.gildedgames.aether.common.entities.effects.AbstractEffectProcessor;
 import com.gildedgames.aether.common.entities.effects.processors.ModifyMaxHealthEffect.Instance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,7 +19,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import java.util.List;
 import java.util.UUID;
 
-public class ModifyMaxHealthEffect implements EntityEffectProcessor<Instance>
+public class ModifyMaxHealthEffect extends AbstractEffectProcessor<Instance>
 {
 
 	public static class Instance extends EntityEffectInstance
@@ -49,19 +50,7 @@ public class ModifyMaxHealthEffect implements EntityEffectProcessor<Instance>
 
 	public ModifyMaxHealthEffect()
 	{
-
-	}
-
-	@Override
-	public String getUnlocalizedName(Entity source, Instance instance)
-	{
-		return "ability.maxHealthMod.localizedName";
-	}
-
-	@Override
-	public String[] getUnlocalizedDesc(Entity source, Instance instance)
-	{
-		return new String[] { "ability.maxHealthMod.desc" };
+		super("ability.maxHealthMod.localizedName", "ability.maxHealthMod.desc");
 	}
 
 	@Override
@@ -95,12 +84,6 @@ public class ModifyMaxHealthEffect implements EntityEffectProcessor<Instance>
 	}
 
 	@Override
-	public void tick(Entity source, List<Instance> all)
-	{
-
-	}
-
-	@Override
 	public void cancel(Entity source, Instance instance, List<Instance> all)
 	{
 		if (!(source instanceof EntityLivingBase))
@@ -121,24 +104,6 @@ public class ModifyMaxHealthEffect implements EntityEffectProcessor<Instance>
 				living.setHealth(living.getMaxHealth());
 			}
 		}
-	}
-
-	@Override
-	public void onKill(LivingDropsEvent event, Entity source, List<Instance> all)
-	{
-
-	}
-
-	@Override
-	public void onHurt(LivingHurtEvent event, Entity source, List<Instance> all)
-	{
-
-	}
-
-	@Override
-	public void onAttacked(LivingAttackEvent event, Entity source, List<Instance> all)
-	{
-
 	}
 
 }

@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.entities.effects.processors;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
+import com.gildedgames.aether.common.entities.effects.AbstractEffectProcessor;
 import com.gildedgames.aether.common.entities.effects.processors.ModifyDamageEffect.Instance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,7 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * @author Brandon Pearce
  */
-public class ModifyDamageEffect implements EntityEffectProcessor<Instance>
+public class ModifyDamageEffect extends AbstractEffectProcessor<Instance>
 {
 
 	public static class Instance extends EntityEffectInstance
@@ -53,19 +54,7 @@ public class ModifyDamageEffect implements EntityEffectProcessor<Instance>
 
 	public ModifyDamageEffect()
 	{
-
-	}
-
-	@Override
-	public String getUnlocalizedName(Entity source, Instance instance)
-	{
-		return "ability.extraDamage.localizedName";
-	}
-
-	@Override
-	public String[] getUnlocalizedDesc(Entity source, Instance instance)
-	{
-		return new String[] { "ability.extraDamage.desc" };
+		super("ability.extraDamage.localizedName", "ability.extraDamage.desc");
 	}
 
 	private String displayValue(float value)
@@ -96,7 +85,7 @@ public class ModifyDamageEffect implements EntityEffectProcessor<Instance>
 	}
 
 	@Override
-	public void onHurt(LivingHurtEvent event, Entity source, List<Instance> all)
+	public void onAttack(LivingAttackEvent event, Entity source, List<Instance> all)
 	{
 		if (!(source instanceof EntityLivingBase))
 		{
@@ -132,37 +121,19 @@ public class ModifyDamageEffect implements EntityEffectProcessor<Instance>
 					allDamage += rangeResult;
 				}
 
-				float result = Math.max(0, event.getEntityLiving().getHealth() - allDamage);
+				float result = Math.max(0, event.getEntityLiving().getHealth() - (allDamage * 2));
+
+				/*if (allDamage < 0)
+				{
+					System.out.println(event.getEntityLiving().getHealth());
+					System.out.println(event.getEntityLiving().getHealth() + (event.getAmount() - 1.0F));
+
+					result = Math.max(0, event.getEntityLiving().gethea + (event.getAmount() - 1.0F));
+				}*/
 
 				event.getEntityLiving().setHealth(result);
 			}
 		}
-	}
-
-	@Override
-	public void onAttacked(LivingAttackEvent event, Entity source, List<Instance> all)
-	{
-
-	}
-
-	@Override
-	public void apply(Entity source, Instance instance, List<Instance> all)
-	{
-	}
-
-	@Override
-	public void tick(Entity source, List<Instance> all)
-	{
-	}
-
-	@Override
-	public void cancel(Entity source, Instance instance, List<Instance> all)
-	{
-	}
-
-	@Override
-	public void onKill(LivingDropsEvent event, Entity source, List<Instance> all)
-	{
 	}
 
 }
