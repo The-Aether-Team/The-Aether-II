@@ -21,13 +21,19 @@ public class CreativeTabsAether
 
     public static final CreativeTab tabCompanions = new CreativeTab("aether.companions");
 
-	public static final CreativeTab tabAccessories = new CreativeTab("aether.accessories");
-
     public static final CreativeTab tabConsumables = new CreativeTab("aether.consumables");
 
     public static final CreativeTab tabMiscellaneous = new CreativeTab("aether.miscellaneous");
 
     public static final CreativeTab tabMaterials = new CreativeTab("aether.materials");
+
+	public static final CreativeTab tabRings = new CreativeTab("aether.rings");
+
+	public static final CreativeTab tabNeckwear = new CreativeTab("aether.neckwear");
+
+	public static final CreativeTab tabRelics = new CreativeTab("aether.relics");
+
+	public static final CreativeTab tabCharms = new CreativeTab("aether.charms");
 
     @SideOnly(Side.CLIENT)
 	public static void registerTabIcons()
@@ -38,9 +44,13 @@ public class CreativeTabsAether
 		tabWeapons.setDisplayStack(new ItemStack(ItemsAether.zanite_sword));
 		tabArmor.setDisplayStack(new ItemStack(ItemsAether.zanite_helmet));
 		tabConsumables.setDisplayStack(new ItemStack(ItemsAether.orange));
-		tabAccessories.setDisplayStack(new ItemStack(ItemsAether.zanite_ring));
         tabCompanions.setDisplayStack(new ItemStack(ItemsAether.pink_baby_swet));
         tabMiscellaneous.setDisplayStack(new ItemStack(ItemsAether.aechor_petal));
+
+		tabRings.setDisplayStack(new ItemStack(ItemsAether.zanite_ring));
+		tabNeckwear.setDisplayStack(new ItemStack(ItemsAether.amulet_of_growth));
+		tabRelics.setDisplayStack(new ItemStack(ItemsAether.regeneration_stone));
+		tabCharms.setDisplayStack(new ItemStack(ItemsAether.bone_shard));
 	}
 
 	public static class CreativeTab extends CreativeTabs

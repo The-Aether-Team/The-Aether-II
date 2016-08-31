@@ -233,7 +233,7 @@ item.aether.iron_bubble.name=Iron Bubble
 item.aether.regeneration_stone.name=Regeneration Stone
 item.aether.ice_ring.name=Ice Ring
 item.aether.ice_pendant.name=Ice Pendant
-item.aether.daggerfrost_locket.name=Daggerfrost Locket
+item.aether.daggerfrost_rune.name=Daggerfrost Rune
 item.aether.candy_ring.name=Candy Ring
 item.aether.bone_ring.name=Bone Ring
 item.aether.skyroot_ring.name=Skyroot Ring
@@ -445,9 +445,12 @@ itemGroup.aether.tools=Aether Tools
 itemGroup.aether.weapons=Aether Weapons
 itemGroup.aether.armor=Aether Armor
 itemGroup.aether.consumables=Aether Consumables
-itemGroup.aether.accessories=Equipment
 itemGroup.aether.companions=Companions
 itemGroup.aether.miscellaneous=Aether Miscellaneous
+itemGroup.aether.rings=Rings
+itemGroup.aether.neckwear=Neckwear
+itemGroup.aether.relics=Relics
+itemGroup.aether.charms=Charms
 
 # Containers
 container.holystone_furnace=Holystone Furnace

@@ -56,7 +56,7 @@ public class LootDefinitions
 				new ItemStack(ItemsAether.candy_ring),
 				new ItemStack(ItemsAether.bone_ring),
 				new ItemStack(ItemsAether.skyroot_ring),
-				new ItemStack(ItemsAether.daggerfrost_locket),
+				new ItemStack(ItemsAether.daggerfrost_rune),
 				new ItemStack(ItemsAether.ice_ring),
 				new ItemStack(ItemsAether.ice_pendant),
 				new ItemStack(ItemsAether.iron_bubble),

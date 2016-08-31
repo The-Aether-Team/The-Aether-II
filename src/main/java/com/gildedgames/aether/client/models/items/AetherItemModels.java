@@ -304,7 +304,7 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.ice_ring, "accessories/ice_ring");
 		registerItemModels(ItemsAether.ice_pendant, "accessories/ice_pendant");
 
-		registerItemModels(ItemsAether.daggerfrost_locket, "accessories/daggerfrost_locket");
+		registerItemModels(ItemsAether.daggerfrost_rune, "accessories/daggerfrost_rune");
 
 		registerItemModels(ItemsAether.candy_ring, "accessories/candy_ring");
 		registerItemModels(ItemsAether.bone_ring, "accessories/bone_ring");
