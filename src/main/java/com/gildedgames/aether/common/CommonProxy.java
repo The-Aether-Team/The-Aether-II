@@ -5,13 +5,14 @@ import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentProperties;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.capabilities.entity.properties.EntityProperties;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherEvents;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.crafting.RecipesAether;
 import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.entities.EntityItemWatcher;
 import com.gildedgames.aether.common.entities.MountProcessor;
-import com.gildedgames.aether.common.entities.effects.EntityEffectsEventHooks;
+import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffectsEventHooks;
 import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
@@ -98,6 +99,7 @@ public class CommonProxy
 		MinecraftForge.EVENT_BUS.register(EntityEffectsEventHooks.class);
 		MinecraftForge.EVENT_BUS.register(EntityItemWatcher.class);
 		MinecraftForge.EVENT_BUS.register(MountProcessor.class);
+		MinecraftForge.EVENT_BUS.register(EntityProperties.class);
 
 		MinecraftForge.EVENT_BUS.register(ItemSkyrootSword.class);
 

@@ -8,7 +8,7 @@ import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapabili
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
-import com.gildedgames.aether.common.entities.effects.EntityEffects;
+import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffects;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;

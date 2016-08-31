@@ -1,5 +1,6 @@
 package com.gildedgames.aether.api.capabilites;
 
+import com.gildedgames.aether.api.capabilites.entity.properties.IEntityPropertiesCapability;
 import com.gildedgames.aether.api.capabilites.items.extra_data.IItemExtraDataCapability;
 import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
@@ -24,4 +25,7 @@ public class AetherCapabilities
 
 	@CapabilityInject(IItemExtraDataCapability.class)
 	public static final Capability<IItemExtraDataCapability> ITEM_EXTRA_DATA = null;
+
+	@CapabilityInject(IEntityPropertiesCapability.class)
+	public static final Capability<IEntityPropertiesCapability> ENTITY_PROPERTIES = null;
 }

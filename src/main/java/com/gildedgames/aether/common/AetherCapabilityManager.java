@@ -4,10 +4,14 @@ import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
+import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
+import com.gildedgames.aether.api.capabilites.entity.properties.IEntityPropertiesCapability;
 import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
 import com.gildedgames.aether.api.capabilites.items.extra_data.IItemExtraDataCapability;
 import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.common.capabilities.entity.properties.EntityProperties;
+import com.gildedgames.aether.common.capabilities.entity.properties.EntityPropertiesProvider;
 import com.gildedgames.aether.common.capabilities.item.effects.ItemEffects;
 import com.gildedgames.aether.common.capabilities.item.effects.ItemEffectsProvider;
 import com.gildedgames.aether.common.capabilities.item.extra_data.ItemExtraDataImpl;
@@ -16,8 +20,8 @@ import com.gildedgames.aether.common.capabilities.item.properties.ItemProperties
 import com.gildedgames.aether.common.capabilities.item.properties.ItemPropertiesProvider;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherProvider;
-import com.gildedgames.aether.common.entities.effects.EntityEffects;
-import com.gildedgames.aether.common.entities.effects.EntityEffectsProvider;
+import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffects;
+import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffectsProvider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -43,6 +47,7 @@ public class AetherCapabilityManager
 		CapabilityManager.INSTANCE.register(IPlayerAetherCapability.class, new PlayerAetherImpl.Storage(), PlayerAetherImpl.class);
 		CapabilityManager.INSTANCE.register(IEntityEffectsCapability.class, new EntityEffects.Storage(), EntityEffects.class);
 		CapabilityManager.INSTANCE.register(IItemExtraDataCapability.class, new ItemExtraDataImpl.Storage(), ItemExtraDataImpl.class);
+		CapabilityManager.INSTANCE.register(IEntityPropertiesCapability.class, new EntityProperties.Storage(), EntityProperties.class);
 	}
 
 	@SubscribeEvent
@@ -90,6 +95,7 @@ public class AetherCapabilityManager
 		}
 
 		event.addCapability(AetherCore.getResource("EntityEffects"), new EntityEffectsProvider(new EntityEffects(event.getEntity())));
+		event.addCapability(AetherCore.getResource("EntityProperties"), new EntityPropertiesProvider(new EntityProperties(event.getEntity())));
 
 		if (event.getEntity() instanceof EntityPlayer)
 		{

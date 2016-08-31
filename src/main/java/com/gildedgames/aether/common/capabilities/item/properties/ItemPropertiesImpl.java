@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.capabilities.item.properties;
 
+import com.gildedgames.aether.api.capabilites.entity.properties.ElementalDamageSource;
 import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
 import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentType;
 import com.gildedgames.aether.api.capabilites.items.properties.ItemRarity;
@@ -7,6 +8,8 @@ import com.gildedgames.aether.api.registry.equipment.IEquipmentProperties;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+
+import java.util.List;
 
 public class ItemPropertiesImpl implements IItemPropertiesCapability
 {

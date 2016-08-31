@@ -491,13 +491,21 @@ ability.modifyDefense=Defense Modifier
 ability.weightTolerance=Weight Tolerance
 ability.invisibility=Invisibility
 
+elementalState.biological=Biological
+elementalState.fire=Fire
+elementalState.water=Water
+elementalState.earth=Earth
+elementalState.air=Air
+elementalState.blight=Blight
+
+ability.extraDamage.attack=Attack
+ability.extraDamage.desc=%s %s Damage
 ability.active=§5Only Active:
 ability.cosmetic=§eCosmetic
 ability.breatheUnderwater.desc=§2Water Breathing
 ability.daggerfrost.desc=§2Snowballs Cause Damage
 ability.doubleDrops.desc1=§2Double Mob Drops
 ability.doubleDrops.desc2=§7• +%s%% Chance
-ability.extraDamage.desc=%s Attack Damage
 ability.punchingDamage.desc=%s Punching Damage
 ability.freezeBlocks.desc=§2Freezes Nearby Blocks
 ability.pauseHunger.desc=§2Stops Hunger

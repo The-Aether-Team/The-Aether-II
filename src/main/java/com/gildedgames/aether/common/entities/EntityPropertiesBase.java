@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities;
 
+import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
 
