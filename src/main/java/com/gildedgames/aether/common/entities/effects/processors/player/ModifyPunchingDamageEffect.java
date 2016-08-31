@@ -31,7 +31,7 @@ public class ModifyPunchingDamageEffect extends ModifyDamageEffect
 	}
 
 	@Override
-	public void onHurt(LivingHurtEvent event, Entity source, List<Instance> all)
+	public void apply(Entity source, Instance instance, List<Instance> all)
 	{
 		if (!(source instanceof EntityPlayer))
 		{
@@ -42,7 +42,7 @@ public class ModifyPunchingDamageEffect extends ModifyDamageEffect
 
 		if (player.getHeldItemMainhand() == null)
 		{
-			super.onHurt(event, source, all);
+			super.apply(source, instance, all);
 		}
 	}
 

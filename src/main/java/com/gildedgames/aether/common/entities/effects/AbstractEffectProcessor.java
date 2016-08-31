@@ -2,8 +2,6 @@ package com.gildedgames.aether.common.entities.effects;
 
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
-import com.gildedgames.aether.common.entities.effects.processors.ModifyDamageEffect;
-import com.gildedgames.aether.common.entities.effects.processors.ModifyDefenseEffect;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;

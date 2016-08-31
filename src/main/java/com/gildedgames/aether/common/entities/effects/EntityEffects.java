@@ -9,7 +9,6 @@ import com.gildedgames.aether.common.entities.effects.processors.*;
 import com.gildedgames.aether.common.entities.effects.processors.player.*;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -42,6 +41,8 @@ public class EntityEffects implements IEntityEffectsCapability
 	public static final EntityEffectProcessor<FreezeBlocksEffect.Instance> FREEZE_BLOCKS = new FreezeBlocksEffect();
 
 	public static final EntityEffectProcessor<ModifyDamageEffect.Instance> MODIFY_DAMAGE = new ModifyDamageEffect();
+
+	public static final EntityEffectProcessor<ModifyDamageEffect.Instance> MODIFY_DAMAGE2 = new ModifyDamageEffect();
 
 	public static final EntityEffectProcessor<ModifyDefenseEffect.Instance> MODIFY_DEFENSE = new ModifyDefenseEffect();
 

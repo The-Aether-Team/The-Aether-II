@@ -1,30 +1,28 @@
 package com.gildedgames.aether.common.entities.effects.processors;
 
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
-import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
 import com.gildedgames.aether.common.entities.effects.AbstractEffectProcessor;
-import com.gildedgames.aether.common.entities.effects.processors.ModifyDamageEffect.Instance;
+import com.gildedgames.aether.common.entities.effects.RangedAttributeModifier;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 
-/**
- * @author Brandon Pearce
- */
-public class ModifyDamageEffect extends AbstractEffectProcessor<Instance>
+public class ModifyDamageEffect extends AbstractEffectProcessor<ModifyDamageEffect.Instance>
 {
 
 	public static class Instance extends EntityEffectInstance
 	{
 
-		public Instance(float damage, EntityEffectRule... rules)
+		private AttributeModifier modifier;
+
+		public Instance(double damage, EntityEffectRule... rules)
 		{
 			this(damage, damage, false, rules);
 		}
@@ -34,14 +32,21 @@ public class ModifyDamageEffect extends AbstractEffectProcessor<Instance>
 			this(min, max, false, rules);
 		}
 
-		public Instance(float min, float max, boolean floatRanges, EntityEffectRule... rules)
+		public Instance(double min, double max, boolean floatRanges, EntityEffectRule... rules)
 		{
 			super(rules);
 
-			this.getAttributes().setFloat("min", min);
-			this.getAttributes().setFloat("max", max);
+			this.getAttributes().setDouble("min", min);
+			this.getAttributes().setDouble("max", max);
 
 			this.getAttributes().setBoolean("floatRanges", floatRanges);
+
+			this.modifier = new RangedAttributeModifier("Extra Attack Damage", min, max, floatRanges, new Random(), 0).setSaved(false);
+		}
+
+		public AttributeModifier getModifier()
+		{
+			return this.modifier;
 		}
 
 		@Override
@@ -85,7 +90,7 @@ public class ModifyDamageEffect extends AbstractEffectProcessor<Instance>
 	}
 
 	@Override
-	public void onAttack(LivingAttackEvent event, Entity source, List<Instance> all)
+	public void apply(Entity source, Instance instance, List<Instance> all)
 	{
 		if (!(source instanceof EntityLivingBase))
 		{
@@ -94,45 +99,29 @@ public class ModifyDamageEffect extends AbstractEffectProcessor<Instance>
 
 		EntityLivingBase living = (EntityLivingBase) source;
 
-		if (living.swingProgressInt == 0)
+		IAttributeInstance attribute = living.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+
+		if (!attribute.hasModifier(instance.getModifier()))
 		{
-			Entity entity = event.getEntityLiving();
+			attribute.applyModifier(instance.getModifier());
+		}
+	}
 
-			if (entity != null)
-			{
-				float allDamage = 0.0F;
+	@Override
+	public void cancel(Entity source, Instance instance, List<Instance> all)
+	{
+		if (!(source instanceof EntityLivingBase))
+		{
+			return;
+		}
 
-				for (Instance instance : all)
-				{
-					float min = instance.getAttributes().getFloat("min");
-					float max = instance.getAttributes().getFloat("max");
+		EntityLivingBase living = (EntityLivingBase) source;
 
-					float rangeResult = 0.0F;
+		IAttributeInstance attribute = living.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 
-					if (instance.getAttributes().getBoolean("floatRanges"))
-					{
-						rangeResult = min + (max - min) * living.getRNG().nextFloat();
-					}
-					else
-					{
-						rangeResult = ThreadLocalRandom.current().nextInt((int) min, (int) max + 1);
-					}
-
-					allDamage += rangeResult;
-				}
-
-				float result = Math.max(0, event.getEntityLiving().getHealth() - (allDamage * 2));
-
-				/*if (allDamage < 0)
-				{
-					System.out.println(event.getEntityLiving().getHealth());
-					System.out.println(event.getEntityLiving().getHealth() + (event.getAmount() - 1.0F));
-
-					result = Math.max(0, event.getEntityLiving().gethea + (event.getAmount() - 1.0F));
-				}*/
-
-				event.getEntityLiving().setHealth(result);
-			}
+		if (attribute.hasModifier(instance.getModifier()))
+		{
+			attribute.removeModifier(instance.getModifier());
 		}
 	}
 

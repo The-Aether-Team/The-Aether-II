@@ -1,20 +1,12 @@
 package com.gildedgames.aether.common.entities.effects.processors.player;
 
-import akka.util.Reflect;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.entities.effects.AbstractEffectProcessorPlayer;
-import com.gildedgames.aether.common.entities.effects.EffectProcessorPlayer;
-import com.gildedgames.aether.common.entities.effects.processors.ModifyDamageEffect;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.FoodStats;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import java.util.List;
