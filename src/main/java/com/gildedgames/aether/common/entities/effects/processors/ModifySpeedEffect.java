@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -86,7 +87,12 @@ public class ModifySpeedEffect implements EntityEffectProcessor<Instance>
 
 		EntityLivingBase living = (EntityLivingBase) source;
 
-		living.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).applyModifier(instance.getModifier());
+		IAttributeInstance attribute = living.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+
+		if (!attribute.hasModifier(instance.getModifier()))
+		{
+			attribute.applyModifier(instance.getModifier());
+		}
 	}
 
 	@Override
@@ -105,7 +111,12 @@ public class ModifySpeedEffect implements EntityEffectProcessor<Instance>
 
 		EntityLivingBase living = (EntityLivingBase) source;
 
-		living.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(instance.getModifier());
+		IAttributeInstance attribute = living.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+
+		if (attribute.hasModifier(instance.getModifier()))
+		{
+			attribute.removeModifier(instance.getModifier());
+		}
 	}
 
 	@Override

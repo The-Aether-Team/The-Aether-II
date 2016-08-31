@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -85,7 +86,12 @@ public class ModifyMaxHealthEffect implements EntityEffectProcessor<Instance>
 
 		EntityLivingBase living = (EntityLivingBase) source;
 
-		living.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).applyModifier(instance.getModifier());
+		IAttributeInstance attribute = living.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
+
+		if (!attribute.hasModifier(instance.getModifier()))
+		{
+			attribute.applyModifier(instance.getModifier());
+		}
 	}
 
 	@Override
@@ -104,11 +110,16 @@ public class ModifyMaxHealthEffect implements EntityEffectProcessor<Instance>
 
 		EntityLivingBase living = (EntityLivingBase) source;
 
-		living.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(instance.getModifier());
+		IAttributeInstance attribute = living.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
 
-		if (living.getHealth() > living.getMaxHealth())
+		if (attribute.hasModifier(instance.getModifier()))
 		{
-			living.setHealth(living.getMaxHealth());
+			attribute.removeModifier(instance.getModifier());
+
+			if (living.getHealth() > living.getMaxHealth())
+			{
+				living.setHealth(living.getMaxHealth());
+			}
 		}
 	}
 

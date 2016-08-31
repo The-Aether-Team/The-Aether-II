@@ -158,7 +158,7 @@ public class EntityEffects implements IEntityEffectsCapability
 	@Override
 	public void onHurt(LivingHurtEvent event)
 	{
-		if (event.getSource().getSourceOfDamage() instanceof IMob)
+		if (event.getSource().getSourceOfDamage() != null)
 		{
 			this.ticksSinceAttacked = 0;
 		}

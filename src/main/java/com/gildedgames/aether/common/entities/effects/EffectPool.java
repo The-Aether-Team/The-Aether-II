@@ -40,6 +40,7 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 	public <S extends Entity> void tick(S entity)
 	{
 		List<I> instancesRulesMet = Lists.newArrayList();
+		List<I> cancelledInstances = Lists.newArrayList();
 
 		for (I instance : this.getInstances())
 		{
@@ -58,11 +59,25 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 			{
 				instancesRulesMet.add(instance);
 			}
+			else
+			{
+				cancelledInstances.add(instance);
+			}
+		}
+
+		for (I instance : instancesRulesMet)
+		{
+			this.getProcessor().apply(entity, instance, instancesRulesMet);
 		}
 
 		if (!instancesRulesMet.isEmpty())
 		{
 			this.getProcessor().tick(entity, instancesRulesMet);
+		}
+
+		for (I instance : cancelledInstances)
+		{
+			this.getProcessor().cancel(entity, instance, instancesRulesMet);
 		}
 	}
 
