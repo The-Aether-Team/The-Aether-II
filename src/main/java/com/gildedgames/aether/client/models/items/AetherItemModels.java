@@ -465,6 +465,9 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.typhoon_ring, "accessories/typhoon_ring");
 		registerItemModels(ItemsAether.sporing_ring, "accessories/sporing_ring");
 		registerItemModels(ItemsAether.ember_ring, "accessories/ember_ring");
+
+		registerItemModels(ItemsAether.white_moa_feather, "accessories/white_moa_feather");
+		registerItemModels(ItemsAether.sakura_moa_feather, "accessories/sakura_moa_feather");
 	}
 
 	private static void registerItemModels(Block block, String path)

@@ -324,6 +324,8 @@ item.aether.gust_ring.name=Gust Ring
 item.aether.typhoon_ring.name=Typhoon Ring
 item.aether.sporing_ring.name=Sporing Ring
 item.aether.ember_ring.name=Ember Ring
+item.aether.white_moa_feather.name=White Moa Feather
+item.aether.sakura_moa_feather.name=Sakura Moa Feather
 
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability: 
