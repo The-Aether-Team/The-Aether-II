@@ -11,6 +11,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -24,8 +25,6 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import java.util.LinkedList;
-
-import static net.minecraft.realms.Tezzelator.t;
 
 public class PlayerAetherImpl implements IPlayerAetherCapability
 {
@@ -163,7 +162,7 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 	@Override
 	public float getMiningSpeedMultiplier()
 	{
-		if (PlayerUtil.isWearingEquipment(this, ItemsAether.neptune_armor_set))
+		if (this.getPlayer().getAir() == 300 && this.getPlayer().isPotionActive(MobEffects.WATER_BREATHING))
 		{
 			if (!EnchantmentHelper.getAquaAffinityModifier(this.player) && this.player.isInsideOfMaterial(Material.WATER))
 			{
@@ -181,9 +180,9 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 	}
 
 	@Override
-	public boolean performDoubleJump()
+	public boolean performMidAirJump()
 	{
-		return this.abilitiesModule.performDoubleJump();
+		return this.abilitiesModule.performMidAirJump();
 	}
 
 	@Override
@@ -191,12 +190,15 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 	{
 		NBTTagCompound teleportingModule = new NBTTagCompound();
 		NBTTagCompound parachuteModule = new NBTTagCompound();
+		NBTTagCompound abilitiesModule = new NBTTagCompound();
 
 		this.getTeleportingModule().write(teleportingModule);
 		this.getParachuteModule().write(parachuteModule);
+		this.getAbilitiesModule().write(abilitiesModule);
 
 		tag.setTag("teleportingModule", teleportingModule);
 		tag.setTag("parachuteModule", parachuteModule);
+		tag.setTag("abilitiesModule", abilitiesModule);
 	}
 
 	@Override
@@ -204,9 +206,11 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 	{
 		NBTTagCompound teleportingModule = tag.getCompoundTag("teleportingModule");
 		NBTTagCompound parachuteModule = tag.getCompoundTag("parachuteModule");
+		NBTTagCompound abilitiesModule = tag.getCompoundTag("abilitiesModule");
 
 		this.getTeleportingModule().read(teleportingModule);
 		this.getParachuteModule().read(parachuteModule);
+		this.getAbilitiesModule().read(abilitiesModule);
 	}
 
 	@Override
@@ -228,6 +232,8 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 	public TeleportingModule getTeleportingModule() { return this.teleportingModule; }
 
 	public ParachuteModule getParachuteModule() { return this.parachuteModule; }
+
+	public AbilitiesModule getAbilitiesModule() { return this.abilitiesModule; }
 
 	public static class Storage implements IStorage<IPlayerAetherCapability>
 	{

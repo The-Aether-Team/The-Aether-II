@@ -15,4 +15,8 @@ public interface IEntityPropertiesCapability
 
 	void removeElementalDamageSource(ElementalDamageSource source);
 
+	void setElementalStateOverride(ElementalState override);
+
+	ElementalState getElementalStateOverride();
+
 }

@@ -54,7 +54,7 @@ public interface IPlayerAetherCapability
 
 	int getTicksAirborne();
 
-	boolean performDoubleJump();
+	boolean performMidAirJump();
 
 	void write(NBTTagCompound tag);
 

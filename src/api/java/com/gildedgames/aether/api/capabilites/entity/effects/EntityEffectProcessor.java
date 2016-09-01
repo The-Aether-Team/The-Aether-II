@@ -10,11 +10,20 @@ import java.util.List;
 public interface EntityEffectProcessor<I extends EntityEffectInstance>
 {
 
+	enum State
+	{
+		APPLIED, CANCELLED;
+	}
+
 	String getUnlocalizedName(Entity source, I instance);
 
 	String[] getUnlocalizedDesc(Entity source, I instance);
 
 	String[] getFormatParameters(Entity source, I instance);
+
+	State getState();
+
+	void setState(State state);
 
 	/**
 	 * Called once when this ability is added to an entity.

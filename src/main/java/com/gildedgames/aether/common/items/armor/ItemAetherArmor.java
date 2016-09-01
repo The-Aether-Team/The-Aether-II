@@ -53,12 +53,6 @@ public class ItemAetherArmor extends ItemArmor
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
 	{
-		tooltip.add(TextFormatting.BLUE + I18n.format("item.aether.armor." + this.name + ".ability.desc"));
 
-		if (!this.isAbilityPassive())
-		{
-			tooltip.add(TextFormatting.DARK_AQUA + I18n.format("item.aether.tooltip.use") + ": " +
-					TextFormatting.WHITE + I18n.format("item.aether.armor." + this.name + ".use.desc"));
-		}
 	}
 }

@@ -38,7 +38,7 @@ public class ItemCrossbow extends Item
 		this.maxStackSize = 1;
 
 		this.knockBackValue = 0;
-		this.durationInTicks = 60.0F;
+		this.durationInTicks = 20.0F;
 
 		this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter()
 		{
@@ -171,7 +171,7 @@ public class ItemCrossbow extends Item
 
 			EntityBolt dart = new EntityBolt(entityLiving.getEntityWorld(), entityLiving);
 			dart.setAim(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, speed * 2.0F, 1.0F);
-			dart.setBoltAbility(stack.getItem() instanceof ItemArkeniumCrossbow ? BoltAbility.DESTROY_BLOCKS : BoltAbility.NORMAL);
+			dart.setBoltAbility(stack.getItem() == ItemsAether.arkenium_crossbow ? BoltAbility.DESTROY_BLOCKS : BoltAbility.NORMAL);
 			dart.pickupStatus = EntityArrow.PickupStatus.ALLOWED;
 
 			entityLiving.getEntityWorld().spawnEntityInWorld(dart);
@@ -231,10 +231,20 @@ public class ItemCrossbow extends Item
 
 	public float getKnockBackValue() { return this.knockBackValue; }
 
-	public void setKnockBackValue(float x)  { this.knockBackValue = x; }
+	public ItemCrossbow setKnockBackValue(float x)
+	{
+		this.knockBackValue = x;
+
+		return this;
+	}
 
 	public float getDurationInTicks() { return this.durationInTicks; }
 
-	public void setDurationInTicks(int x) { this.durationInTicks = x; }
+	public ItemCrossbow setDurationInTicks(int x)
+	{
+		this.durationInTicks = x;
+
+		return this;
+	}
 
 }

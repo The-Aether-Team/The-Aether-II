@@ -78,7 +78,7 @@ public abstract class PlayerAetherModule implements IPlayerAetherCapability
 	}
 
 	@Override
-	public boolean performDoubleJump()
+	public boolean performMidAirJump()
 	{
 		return false;
 	}

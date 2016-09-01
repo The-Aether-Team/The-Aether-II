@@ -32,11 +32,9 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.Timer;
 import net.minecraft.util.text.TextFormatting;
@@ -53,7 +51,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.tuple.Pair;
-import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -251,13 +248,13 @@ public class ClientEventHandler
 				{
 					KeyBinding.setKeyBindState(mc.gameSettings.keyBindSprint.getKeyCode(), false);
 				}
-				else if (PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.gravitite_armor_set))
+				else if (aePlayer.getAbilitiesModule().getMidAirJumpsAllowed() > 0)
 				{
 					if (mc.gameSettings.keyBindJump.isKeyDown() && !this.prevJumpBindState)
 					{
 						if (!player.isInWater() && aePlayer.getTicksAirborne() > 2 && !player.capabilities.isCreativeMode)
 						{
-							if (aePlayer.performDoubleJump())
+							if (aePlayer.performMidAirJump())
 							{
 								NetworkingAether.sendPacketToServer(new AetherMovementPacket(AetherMovementPacket.Action.EXTRA_JUMP));
 

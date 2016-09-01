@@ -26,6 +26,8 @@ public class EntityEffects implements IEntityEffectsCapability
 
 	public static final EffectProcessorPlayer<EntityEffectInstance> DAGGERFROST = new DaggerfrostEffect();
 
+	public static final EffectProcessorPlayer<EntityEffectInstance> EXTRA_JUMPS = new ExtraJumpEffect();
+
 	public static final EffectProcessorPlayer<EntityEffectInstance> WEIGHT_TOLERANCE = new WeightToleranceEffect();
 
 	public static final EffectProcessorPlayer<ModifyXPCollectionEffect.Instance> MODIFY_XP_COLLECTION = new ModifyXPCollectionEffect();
@@ -51,6 +53,18 @@ public class EntityEffects implements IEntityEffectsCapability
 	public static final EntityEffectProcessor<RegenerateHealthEffect.Instance> REGENERATE_HEALTH = new RegenerateHealthEffect();
 
 	public static final EntityEffectProcessor<EntityEffectInstance> INVISIBILITY = new InvisibilityEffect();
+
+	public static final EntityEffectProcessor<EntityEffectInstance> SET_ENEMIES_ON_FIRE = new SetEnemiesOnFireEffect();
+
+	public static final EntityEffectProcessor<ChangeAttackElementEffect.Instance> CHANGE_ATTACK_ELEMENT = new ChangeAttackElementEffect();
+
+	public static final EntityEffectProcessor<EntityEffectInstance> FIRE_IMMUNITY = new FireImmunityEffect();
+
+	public static final EntityEffectProcessor<LeechLifeEffect.Instance> LEECH_LIFE = new LeechLifeEffect();
+
+	public static final EntityEffectProcessor<ModifyMaxHealthEffect.Instance> MODIFY_COMPANION_MAX_HEALTH = new ModifyCompanionMaxHealthEffect();
+
+	public static final EntityEffectProcessor<ModifyDamageEffect.Instance> MODIFY_COMPANION_DAMAGE = new ModifyCompanionDamageEffect();
 
 	private final Entity entity;
 

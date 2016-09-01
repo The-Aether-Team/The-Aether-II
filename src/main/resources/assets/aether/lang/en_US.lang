@@ -326,6 +326,15 @@ item.aether.sporing_ring.name=Sporing Ring
 item.aether.ember_ring.name=Ember Ring
 item.aether.white_moa_feather.name=White Moa Feather
 item.aether.sakura_moa_feather.name=Sakura Moa Feather
+item.aether.gravitite_core.name=Gravitite Core
+item.aether.carrion_bloom.name=Carrion Bloom
+item.aether.moonlit_bloom.name=Moonlit Bloom
+item.aether.companion_armor.name=Companion Armor
+item.aether.spiked_collar.name=Spiked Collar
+item.aether.valkyrie_wings.name=Valkyrie Wings
+item.aether.divine_beacon.name=Divine Beacon
+item.aether.phoenix_rune.name=Phoenix Rune
+item.aether.vampire_fang.name=Vampire Fang
 
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability: 
@@ -499,10 +508,14 @@ ability.reduceHunger.name=Well Fed
 ability.regenerateHealth.name=Health Regeneration
 ability.maxHealthMod.name=Max Health Modifier
 ability.movementSpeedMod.name=Movement Speed Modifier
-ability.modifyXPCollection=XP Collection Modifier
-ability.modifyDefense=Defense Modifier
-ability.weightTolerance=Weight Tolerance
-ability.invisibility=Invisibility
+ability.modifyXPCollection.name=XP Collection Modifier
+ability.modifyDefense.name=Defense Modifier
+ability.weightTolerance.name=Weight Tolerance
+ability.invisibility.name=Invisibility
+ability.changeAttackElement.name=Change Attack Element
+ability.setEnemiesOnFire.name=Sparking Touch
+ability.fireImmunity.name=Fire Immunity
+ability.companionMaxHealthMod.name=Companion Max Health Modifier
 
 elementalState.biological=Biological
 elementalState.frost=Frost
@@ -531,6 +544,12 @@ ability.modifyXPCollection.desc=%s XP Collected
 ability.defenseMod.desc=%s Defense
 ability.weightTolerance.desc=§2Weight Tolerance
 ability.invisibility.desc=§2Invisibility
+ability.changeAttackElement.desc=§2All Attacks Become:
+ability.setEnemiesOnFire.desc=§2Sets Enemies On Fire
+ability.fireImmunity.desc=§2Fire Immunity
+ability.tripleJump.desc=§2Triple Jump
+ability.companion.desc=For Companion
+ability.leechLife.desc=%s Life Leech
 
 # Tabs
 tab.equipment=Equipment

@@ -1,7 +1,9 @@
 package com.gildedgames.aether.client.renderer;
 
+import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.client.models.entities.player.LayerPlayerGloves;
 import com.gildedgames.aether.client.renderer.entities.living.RenderPlayerHelper;
+import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffects;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.util.PlayerUtil;
@@ -9,12 +11,15 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.client.event.RenderBlockOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import static sun.audio.AudioPlayer.player;
 
 public class ClientRenderHandler
 {
@@ -35,8 +40,9 @@ public class ClientRenderHandler
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 
 			PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
+			IEntityEffectsCapability effects = EntityEffects.get(player);
 
-			if (player.getAir() >= 295 && PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.neptune_armor_set))
+			if (player.getAir() == 300 && player.isPotionActive(MobEffects.WATER_BREATHING))
 			{
 				event.setCanceled(true);
 			}
@@ -46,18 +52,19 @@ public class ClientRenderHandler
 	@SubscribeEvent
 	public void onRenderBlockOverlay(RenderBlockOverlayEvent event)
 	{
+		EntityPlayer player = event.getPlayer();
 		PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(event.getPlayer());
 
 		if (event.getOverlayType() == RenderBlockOverlayEvent.OverlayType.WATER)
 		{
-			if (PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.neptune_armor_set))
+			if (player.getAir() >= 295 && PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.iron_bubble))
 			{
 				event.setCanceled(true);
 			}
 		}
 		else if (event.getOverlayType() == RenderBlockOverlayEvent.OverlayType.FIRE)
 		{
-			if (PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.phoenix_armor_set))
+			if (PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.phoenix_rune))
 			{
 				event.setCanceled(true);
 			}

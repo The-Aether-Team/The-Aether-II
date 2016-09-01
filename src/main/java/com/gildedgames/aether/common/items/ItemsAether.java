@@ -109,17 +109,17 @@ public class ItemsAether
 
 	public static ItemDoor skyroot_door, arkenium_door;
 
-	public static ItemSkyrootCrossbow skyroot_crossbow;
+	public static ItemCrossbow skyroot_crossbow;
 
-	public static ItemHolystoneCrossbow holystone_crossbow;
+	public static ItemCrossbow holystone_crossbow;
 
-	public static ItemZaniteCrossbow zanite_crossbow;
+	public static ItemCrossbow zanite_crossbow;
 
-	public static ItemArkeniumCrossbow arkenium_crossbow;
+	public static ItemCrossbow arkenium_crossbow;
 
-	public static ItemGravititeCrossbow gravitite_crossbow;
+	public static ItemCrossbow gravitite_crossbow;
 
-	public static ItemVampireCrossbow vampire_crossbow;
+	public static ItemCrossbow vampire_crossbow;
 
 	public static ItemBolt bolt;
 
@@ -214,6 +214,8 @@ public class ItemsAether
 	public static Item granite_ring, gust_ring, typhoon_ring, sporing_ring, ember_ring;
 
 	public static Item white_moa_feather, sakura_moa_feather;
+
+	public static Item gravitite_core, carrion_bloom, moonlit_bloom, phoenix_rune, valkyrie_wings, companion_armor, spiked_collar, vampire_fang, divine_beacon;
 
 	public static void preInit()
 	{
@@ -353,12 +355,12 @@ public class ItemsAether
 		dart_shooter = registerItem("dart_shooter", new ItemDartShooter(), CreativeTabsAether.tabWeapons);
 		dart = registerItem("dart", new ItemDart(), CreativeTabsAether.tabWeapons);
 
-		skyroot_crossbow = registerItem("skyroot_crossbow", new ItemSkyrootCrossbow(), CreativeTabsAether.tabWeapons);
-		holystone_crossbow = registerItem("holystone_crossbow", new ItemHolystoneCrossbow(), CreativeTabsAether.tabWeapons);
-		zanite_crossbow = registerItem("zanite_crossbow", new ItemZaniteCrossbow(), CreativeTabsAether.tabWeapons);
-		arkenium_crossbow = registerItem("arkenium_crossbow", new ItemArkeniumCrossbow(), CreativeTabsAether.tabWeapons);
-		gravitite_crossbow = registerItem("gravitite_crossbow", new ItemGravititeCrossbow(), CreativeTabsAether.tabWeapons);
-		vampire_crossbow = registerItem("vampire_crossbow",new ItemVampireCrossbow(), CreativeTabsAether.tabWeapons);
+		skyroot_crossbow = registerItem("skyroot_crossbow", new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F), CreativeTabsAether.tabWeapons);
+		holystone_crossbow = registerItem("holystone_crossbow", new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.7F), CreativeTabsAether.tabWeapons);
+		zanite_crossbow = registerItem("zanite_crossbow", new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F), CreativeTabsAether.tabWeapons);
+		arkenium_crossbow = registerItem("arkenium_crossbow", new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F), CreativeTabsAether.tabWeapons);
+		gravitite_crossbow = registerItem("gravitite_crossbow", new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(1.2F), CreativeTabsAether.tabWeapons);
+		vampire_crossbow = registerItem("vampire_crossbow",new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.7F), CreativeTabsAether.tabWeapons);
 		bolt = registerItem("bolt", new ItemBolt(), CreativeTabsAether.tabWeapons);
 
 		flaming_sword = registerItem("flaming_sword", new ItemElementalSword(ItemElementalSword.SwordElement.FIRE));
@@ -497,6 +499,16 @@ public class ItemsAether
 		white_moa_feather = registerItem("white_moa_feather", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
 		sakura_moa_feather = registerItem("sakura_moa_feather", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
 
+		gravitite_core = registerItem("gravitite_core", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
+		carrion_bloom = registerItem("carrion_bloom", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
+		moonlit_bloom = registerItem("moonlit_bloom", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
+		companion_armor = registerItem("companion_armor", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
+		spiked_collar = registerItem("spiked_collar", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
+		valkyrie_wings = registerItem("valkyrie_wings", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
+		divine_beacon = registerItem("divine_beacon", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
+		phoenix_rune = registerItem("phoenix_rune", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
+		vampire_fang = registerItem("vampire_fang", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
+
 		IEquipmentRegistry equipmentRegistry = AetherCore.INSTANCE.getEquipmentRegistry();
 
 		equipmentRegistry.register(ItemsAether.iron_ring, ItemRarity.BASIC, ItemEquipmentType.RING);
@@ -518,6 +530,15 @@ public class ItemsAether
 		/** RELICS **/
 
 		equipmentRegistry.register(ItemsAether.iron_bubble, ItemRarity.COMMON, ItemEquipmentType.RELIC);
+		equipmentRegistry.register(ItemsAether.carrion_bloom, ItemRarity.RARE, ItemEquipmentType.RELIC);
+		equipmentRegistry.register(ItemsAether.moonlit_bloom, ItemRarity.RARE, ItemEquipmentType.RELIC);
+		equipmentRegistry.register(ItemsAether.gravitite_core, ItemRarity.RARE, ItemEquipmentType.RELIC);
+		equipmentRegistry.register(ItemsAether.companion_armor, ItemRarity.RARE, ItemEquipmentType.RELIC);
+		equipmentRegistry.register(ItemsAether.spiked_collar, ItemRarity.RARE, ItemEquipmentType.RELIC);
+		equipmentRegistry.register(ItemsAether.divine_beacon, ItemRarity.RARE, ItemEquipmentType.RELIC);
+		equipmentRegistry.register(ItemsAether.vampire_fang, ItemRarity.EPIC, ItemEquipmentType.RELIC);
+		equipmentRegistry.register(ItemsAether.phoenix_rune, ItemRarity.EPIC, ItemEquipmentType.RELIC);
+		equipmentRegistry.register(ItemsAether.valkyrie_wings, ItemRarity.EPIC, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.regeneration_stone, ItemRarity.RARE, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.daggerfrost_rune, ItemRarity.EPIC, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.carrion_petal, ItemRarity.EPIC, ItemEquipmentType.RELIC);
@@ -716,6 +737,14 @@ public class ItemsAether
 		ItemEffects.register(ItemsAether.typhoon_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.WATER, 2.0D)));
 		ItemEffects.register(ItemsAether.sporing_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BLIGHT, 2.0D)));
 		ItemEffects.register(ItemsAether.ember_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.FIRE, 2.0D)));
+
+		ItemEffects.register(ItemsAether.gravitite_core, new Effects().add(EntityEffects.EXTRA_JUMPS));
+		ItemEffects.register(ItemsAether.carrion_bloom, new Effects().add(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new InDirectSunlightRule())));
+		ItemEffects.register(ItemsAether.moonlit_bloom, new Effects().add(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new InDirectMoonlightRule())));
+		ItemEffects.register(ItemsAether.phoenix_rune, new Effects().add(EntityEffects.CHANGE_ATTACK_ELEMENT, new ChangeAttackElementEffect.Instance(ElementalState.FIRE)).add(EntityEffects.FIRE_IMMUNITY).add(EntityEffects.SET_ENEMIES_ON_FIRE));
+		ItemEffects.register(ItemsAether.vampire_fang, new Effects().add(EntityEffects.LEECH_LIFE, new LeechLifeEffect.Instance(0.5D)));
+		ItemEffects.register(ItemsAether.companion_armor, new Effects().add(EntityEffects.MODIFY_COMPANION_MAX_HEALTH, new ModifyMaxHealthEffect.Instance(10.0D)));
+		ItemEffects.register(ItemsAether.spiked_collar, new Effects().add(EntityEffects.MODIFY_COMPANION_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 2.0D)));
 
 		zanite_armor_set = new Item[] { zanite_helmet, zanite_chestplate, zanite_leggings, zanite_boots, zanite_gloves };
 

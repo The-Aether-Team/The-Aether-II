@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.capabilities.entity.effects;
 
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -17,6 +18,8 @@ public abstract class AbstractEffectProcessorPlayer<I extends EntityEffectInstan
 	private String unlocalizedName;
 
 	private String[] desc;
+
+	private State state;
 
 	public AbstractEffectProcessorPlayer(String unlocalizedName, String... desc)
 	{
@@ -40,6 +43,18 @@ public abstract class AbstractEffectProcessorPlayer<I extends EntityEffectInstan
 	public String[] getFormatParameters(Entity source, I instance)
 	{
 		return new String[] {};
+	}
+
+	@Override
+	public State getState()
+	{
+		return this.state;
+	}
+
+	@Override
+	public void setState(State state)
+	{
+		this.state = state;
 	}
 
 	@Override

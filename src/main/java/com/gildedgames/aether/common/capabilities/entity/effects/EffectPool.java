@@ -67,7 +67,11 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 
 		for (I instance : instancesRulesMet)
 		{
-			this.getProcessor().apply(entity, instance, instancesRulesMet);
+			if (this.getProcessor().getState() == EntityEffectProcessor.State.CANCELLED)
+			{
+				this.getProcessor().apply(entity, instance, instancesRulesMet);
+				this.getProcessor().setState(EntityEffectProcessor.State.APPLIED);
+			}
 		}
 
 		if (!instancesRulesMet.isEmpty())
@@ -77,7 +81,11 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 
 		for (I instance : cancelledInstances)
 		{
-			this.getProcessor().cancel(entity, instance, instancesRulesMet);
+			if (this.getProcessor().getState() == EntityEffectProcessor.State.APPLIED)
+			{
+				this.getProcessor().cancel(entity, instance, instancesRulesMet);
+				this.getProcessor().setState(EntityEffectProcessor.State.CANCELLED);
+			}
 		}
 	}
 

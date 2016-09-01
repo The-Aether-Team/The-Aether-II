@@ -16,6 +16,8 @@ public abstract class AbstractEffectProcessor<I extends EntityEffectInstance> im
 
 	private String[] desc;
 
+	private State state;
+
 	public AbstractEffectProcessor(String unlocalizedName, String... desc)
 	{
 		this.unlocalizedName = unlocalizedName;
@@ -38,6 +40,18 @@ public abstract class AbstractEffectProcessor<I extends EntityEffectInstance> im
 	public String[] getFormatParameters(Entity source, I instance)
 	{
 		return new String[] {};
+	}
+
+	@Override
+	public State getState()
+	{
+		return this.state;
+	}
+
+	@Override
+	public void setState(State state)
+	{
+		this.state = state;
 	}
 
 	@Override

@@ -468,6 +468,16 @@ public class AetherItemModels
 
 		registerItemModels(ItemsAether.white_moa_feather, "accessories/white_moa_feather");
 		registerItemModels(ItemsAether.sakura_moa_feather, "accessories/sakura_moa_feather");
+
+		registerItemModels(ItemsAether.gravitite_core, "accessories/gravitite_core");
+		registerItemModels(ItemsAether.carrion_bloom, "accessories/carrion_bloom");
+		registerItemModels(ItemsAether.moonlit_bloom, "accessories/moonlit_bloom");
+		registerItemModels(ItemsAether.companion_armor, "accessories/companion_armor");
+		registerItemModels(ItemsAether.spiked_collar, "accessories/spiked_collar");
+		registerItemModels(ItemsAether.valkyrie_wings, "accessories/valkyrie_wings");
+		registerItemModels(ItemsAether.divine_beacon, "accessories/divine_beacon");
+		registerItemModels(ItemsAether.phoenix_rune, "accessories/phoenix_rune");
+		registerItemModels(ItemsAether.vampire_fang, "accessories/vampire_fang");
 	}
 
 	private static void registerItemModels(Block block, String path)

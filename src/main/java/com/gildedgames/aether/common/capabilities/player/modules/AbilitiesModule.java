@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.MobEffects;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
@@ -15,7 +16,9 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 public class AbilitiesModule extends PlayerAetherModule
 {
 
-	private boolean hasDoubleJumped;
+	private int jumpsSoFar;
+
+	private int midAirJumpsAllowed;
 
 	private int ticksAirborne;
 
@@ -24,12 +27,22 @@ public class AbilitiesModule extends PlayerAetherModule
 		super(playerAether);
 	}
 
+	public int getMidAirJumpsAllowed()
+	{
+		return this.midAirJumpsAllowed;
+	}
+
+	public void setMidAirJumpsAllowed(int midAirJumpsAllowed)
+	{
+		this.midAirJumpsAllowed = midAirJumpsAllowed;
+	}
+
 	@Override
 	public void onUpdate(LivingEvent.LivingUpdateEvent event)
 	{
 		if (this.getPlayer().onGround)
 		{
-			this.hasDoubleJumped = false;
+			this.jumpsSoFar = 0;
 			this.ticksAirborne = 0;
 		}
 		else
@@ -41,25 +54,12 @@ public class AbilitiesModule extends PlayerAetherModule
 		{
 			this.getPlayer().setSprinting(false);
 		}
-		else if (PlayerUtil.isWearingEquipment(this.getPlayerAether(), ItemsAether.phoenix_armor_set))
-		{
-			this.getPlayer().addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 2, 0, false, false));
-
-			this.getPlayer().extinguish();
-		}
-		else if (PlayerUtil.isWearingEquipment(this.getPlayerAether(), ItemsAether.neptune_armor_set))
-		{
-			if (this.getPlayer().isInsideOfMaterial(Material.WATER))
-			{
-				this.getPlayer().addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 2, 0, false, false));
-			}
-		}
 	}
 
 	@Override
 	public void onFall(LivingFallEvent event)
 	{
-		if (PlayerUtil.isWearingEquipment(this.getPlayerAether(), ItemsAether.gravitite_armor_set))
+		if (this.getMidAirJumpsAllowed() > 0)
 		{
 			event.setResult(Event.Result.DENY);
 		}
@@ -72,9 +72,9 @@ public class AbilitiesModule extends PlayerAetherModule
 	}
 
 	@Override
-	public boolean performDoubleJump()
+	public boolean performMidAirJump()
 	{
-		if (!this.hasDoubleJumped && this.ticksAirborne > 2)
+		if (this.jumpsSoFar < this.midAirJumpsAllowed && this.ticksAirborne > 2)
 		{
 			AetherCore.PROXY.spawnJumpParticles(this.getPlayer().worldObj, this.getPlayer().posX, this.getPlayer().posY, this.getPlayer().posZ, 1.5D, 12);
 
@@ -84,12 +84,26 @@ public class AbilitiesModule extends PlayerAetherModule
 			this.getPlayer().motionX *= 1.4D;
 			this.getPlayer().motionZ *= 1.4D;
 
-			this.hasDoubleJumped = true;
+			this.jumpsSoFar++;
 
 			return true;
 		}
 
 		return false;
+	}
+
+	@Override
+	public void write(NBTTagCompound tag)
+	{
+		tag.setInteger("midAirJumpsAllowed", this.midAirJumpsAllowed);
+		tag.setInteger("jumpsSoFar", this.jumpsSoFar);
+	}
+
+	@Override
+	public void read(NBTTagCompound tag)
+	{
+		this.midAirJumpsAllowed = tag.getInteger("midAirJumpsAllowed");
+		this.jumpsSoFar = tag.getInteger("jumpsSoFar");
 	}
 
 }

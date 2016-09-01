@@ -22,6 +22,8 @@ public class EntityProperties implements IEntityPropertiesCapability
 
 	private List<ElementalDamageSource> damageSources = Lists.newArrayList();
 
+	private ElementalState override;
+
 	public EntityProperties(Entity entity)
 	{
 		this.entity = entity;
@@ -64,6 +66,18 @@ public class EntityProperties implements IEntityPropertiesCapability
 		this.getElementalDamageSources().remove(source);
 	}
 
+	@Override
+	public void setElementalStateOverride(ElementalState override)
+	{
+		this.override = override;
+	}
+
+	@Override
+	public ElementalState getElementalStateOverride()
+	{
+		return this.override;
+	}
+
 	public static IEntityPropertiesCapability get(Entity entity)
 	{
 		return entity.getCapability(AetherCapabilities.ENTITY_PROPERTIES, null);
@@ -82,6 +96,13 @@ public class EntityProperties implements IEntityPropertiesCapability
 
 		IEntityPropertiesCapability victimProperties = EntityProperties.get(victim);
 		IEntityPropertiesCapability sourceProperties = EntityProperties.get(source);
+
+		if (sourceProperties.getElementalStateOverride() != null)
+		{
+			event.setAmount(event.getAmount() * sourceProperties.getElementalStateOverride().getModifierAgainst(victimProperties.getElementalState()));
+
+			return;
+		}
 
 		double overallDamage = 0.0D;
 

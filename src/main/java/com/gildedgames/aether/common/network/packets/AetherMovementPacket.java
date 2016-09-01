@@ -56,7 +56,7 @@ public class AetherMovementPacket implements IMessage
 
 		private void performExtraJump(IPlayerAetherCapability player)
 		{
-			player.performDoubleJump();
+			player.performMidAirJump();
 		}
 	}
 }
