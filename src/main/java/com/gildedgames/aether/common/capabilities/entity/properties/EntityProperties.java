@@ -101,9 +101,6 @@ public class EntityProperties implements IEntityPropertiesCapability
 
 		double finalResult = minusDamageSources + withModifiers;
 
-		System.out.println(overallDamage);
-		System.out.println(withModifiers);
-
 		event.setAmount((float) finalResult);
 	}
 
