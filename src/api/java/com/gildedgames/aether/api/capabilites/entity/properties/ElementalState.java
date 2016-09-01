@@ -120,17 +120,12 @@ public enum ElementalState
 		@Override
 		public float getModifierAgainst(ElementalState element)
 		{
-			if (element == ElementalState.EARTH)
+			if (element == ElementalState.EARTH || element == this)
 			{
 				return 2.0F;
 			}
 
-			if (element == this)
-			{
-				return 0.5F;
-			}
-
-			return 1.0F;
+			return 0.5F;
 		}
 
 		@Override
