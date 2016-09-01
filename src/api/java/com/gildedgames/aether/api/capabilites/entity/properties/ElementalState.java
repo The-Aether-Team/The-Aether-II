@@ -112,7 +112,7 @@ public enum ElementalState
 		@Override
 		public TextFormatting getNameFormatting()
 		{
-			return TextFormatting.GOLD;
+			return TextFormatting.GRAY;
 		}
 	},
 	AIR
