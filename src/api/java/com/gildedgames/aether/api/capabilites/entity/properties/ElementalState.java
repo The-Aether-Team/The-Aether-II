@@ -82,7 +82,7 @@ public enum ElementalState
 		@Override
 		public TextFormatting getNameFormatting()
 		{
-			return TextFormatting.DARK_AQUA;
+			return TextFormatting.BLUE;
 		}
 	},
 	EARTH
@@ -172,7 +172,7 @@ public enum ElementalState
 		@Override
 		public TextFormatting getNameFormatting()
 		{
-			return TextFormatting.AQUA;
+			return TextFormatting.DARK_AQUA;
 		}
 	},
 	BLIGHT

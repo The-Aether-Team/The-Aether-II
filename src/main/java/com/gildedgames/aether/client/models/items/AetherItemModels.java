@@ -452,6 +452,19 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.moon_sect_warden_gorget, "accessories/moon_sect_warden_gorget");
 		registerItemModels(ItemsAether.thiefs_gorget, "accessories/thiefs_gorget");
 		registerItemModels(ItemsAether.frostward_scarf, "accessories/frostward_scarf");
+
+		registerItemModels(ItemsAether.granite_chip, "accessories/granite_chip");
+		registerItemModels(ItemsAether.gust_bauble, "accessories/gust_bauble");
+		registerItemModels(ItemsAether.ice_shard, "accessories/ice_shard");
+		registerItemModels(ItemsAether.typhoon_bauble, "accessories/typhoon_bauble");
+		registerItemModels(ItemsAether.blight_spore, "accessories/blight_spore");
+		registerItemModels(ItemsAether.coal_ember, "accessories/coal_ember");
+
+		registerItemModels(ItemsAether.granite_ring, "accessories/granite_ring");
+		registerItemModels(ItemsAether.gust_ring, "accessories/gust_ring");
+		registerItemModels(ItemsAether.typhoon_ring, "accessories/typhoon_ring");
+		registerItemModels(ItemsAether.sporing_ring, "accessories/sporing_ring");
+		registerItemModels(ItemsAether.ember_ring, "accessories/ember_ring");
 	}
 
 	private static void registerItemModels(Block block, String path)

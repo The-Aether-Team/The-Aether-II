@@ -313,6 +313,17 @@ item.aether.moon_sect_warden_gorget.name=Moon-Sect Warden Gorget
 item.aether.thiefs_gorget.name=Thief's Gorget
 item.aether.frostward_scarf.name=Frostward Scarf
 item.aether.angel_scarf.name=Angel Scarf
+item.aether.granite_chip.name=Granite Chip
+item.aether.gust_bauble.name=Gust Bauble
+item.aether.ice_shard.name=Ice Shard
+item.aether.typhoon_bauble.name=Typhoon Bauble
+item.aether.blight_spore.name=Blight Spore
+item.aether.coal_ember.name=Coal Ember
+item.aether.granite_ring.name=Granite Ring
+item.aether.gust_ring.name=Gust Ring
+item.aether.typhoon_ring.name=Typhoon Ring
+item.aether.sporing_ring.name=Sporing Ring
+item.aether.ember_ring.name=Ember Ring
 
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability: 
@@ -492,6 +503,7 @@ ability.weightTolerance=Weight Tolerance
 ability.invisibility=Invisibility
 
 elementalState.biological=Biological
+elementalState.frost=Frost
 elementalState.fire=Fire
 elementalState.water=Water
 elementalState.earth=Earth

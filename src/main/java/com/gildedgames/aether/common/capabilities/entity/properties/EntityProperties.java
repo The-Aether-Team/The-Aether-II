@@ -75,6 +75,11 @@ public class EntityProperties implements IEntityPropertiesCapability
 		Entity source = event.getSource().getSourceOfDamage();
 		Entity victim = event.getEntityLiving();
 
+		if (source == null)
+		{
+			return;
+		}
+
 		IEntityPropertiesCapability victimProperties = EntityProperties.get(victim);
 		IEntityPropertiesCapability sourceProperties = EntityProperties.get(source);
 
@@ -95,6 +100,9 @@ public class EntityProperties implements IEntityPropertiesCapability
 		}
 
 		double finalResult = minusDamageSources + withModifiers;
+
+		System.out.println(overallDamage);
+		System.out.println(withModifiers);
 
 		event.setAmount((float) finalResult);
 	}
