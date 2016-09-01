@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.capabilities.entity.effects.rules;
 
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
@@ -17,7 +18,7 @@ public class InDirectMoonlightRule implements EntityEffectRule
 	@Override
 	public String[] getUnlocalizedDesc()
 	{
-		return new String[] { "In Direct Moonlight" };
+		return new String[] { TextFormatting.GRAY + "" + TextFormatting.ITALIC + "In Direct Moonlight" };
 	}
 
 	@Override
