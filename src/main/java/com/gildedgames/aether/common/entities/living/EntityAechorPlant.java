@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.entities.living;
 
+import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
+import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.ai.EntityAIAechorPlantAttack;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -23,7 +25,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityAechorPlant extends EntityMob
+public class EntityAechorPlant extends EntityMob implements IEntityProperties
 {
 	private static final DataParameter<Boolean> CAN_SEE_PREY = new DataParameter<>(16, DataSerializers.BOOLEAN);
 
@@ -216,4 +218,11 @@ public class EntityAechorPlant extends EntityMob
 	{
 		this.poisonLeft = poisonLeft;
 	}
+
+	@Override
+	public ElementalState getElementalState()
+	{
+		return ElementalState.BLIGHT;
+	}
+
 }

@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.entities.living.enemies;
 
+import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
+import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceHide;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceSneakAttack;
@@ -18,7 +20,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class EntityCockatrice extends EntityMob
+public class EntityCockatrice extends EntityMob implements IEntityProperties
 {
 
 	private static final DataParameter<Boolean> IS_HIDING = new DataParameter<>(16, DataSerializers.BOOLEAN);
@@ -136,6 +138,12 @@ public class EntityCockatrice extends EntityMob
 	public boolean isAttacking() { return this.dataManager.get(EntityCockatrice.IS_ATTACKING); }
 
 	public void setAttacking(boolean isAttacking) { this.dataManager.set(EntityCockatrice.IS_ATTACKING, isAttacking); }
+
+	@Override
+	public ElementalState getElementalState()
+	{
+		return ElementalState.BLIGHT;
+	}
 
 	public static class JumpHelperDisable extends EntityJumpHelper
 	{
