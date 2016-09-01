@@ -217,6 +217,8 @@ public class ItemsAether
 
 	public static Item gravitite_core, carrion_bloom, moonlit_bloom, phoenix_rune, valkyrie_wings, companion_armor, spiked_collar, vampire_fang, divine_beacon;
 
+	public static Item dust_ring, mud_ring, steam_ring, storm_ring;
+
 	public static void preInit()
 	{
 		skyroot_stick = registerItem("skyroot_stick", new Item(), CreativeTabsAether.tabMaterials);
@@ -495,6 +497,10 @@ public class ItemsAether
 		typhoon_ring = registerItem("typhoon_ring", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
 		sporing_ring = registerItem("sporing_ring", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
 		ember_ring = registerItem("ember_ring", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
+		dust_ring = registerItem("dust_ring", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
+		mud_ring = registerItem("mud_ring", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
+		storm_ring = registerItem("storm_ring", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
+		steam_ring = registerItem("steam_ring", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
 
 		white_moa_feather = registerItem("white_moa_feather", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
 		sakura_moa_feather = registerItem("sakura_moa_feather", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
@@ -595,6 +601,10 @@ public class ItemsAether
 		equipmentRegistry.register(ItemsAether.lunar_band, ItemRarity.EPIC, ItemEquipmentType.RING);
 		equipmentRegistry.register(ItemsAether.skyroot_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
 		equipmentRegistry.register(ItemsAether.candy_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.dust_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.mud_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.storm_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.steam_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
 
 		equipmentRegistry.register(ItemsAether.plague_coil, ItemRarity.MYTHIC, ItemEquipmentType.RING);
 		equipmentRegistry.register(ItemsAether.life_coil, ItemRarity.MYTHIC, ItemEquipmentType.RING);
@@ -737,6 +747,10 @@ public class ItemsAether
 		ItemEffects.register(ItemsAether.typhoon_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.WATER, 2.0D)));
 		ItemEffects.register(ItemsAether.sporing_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BLIGHT, 2.0D)));
 		ItemEffects.register(ItemsAether.ember_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.FIRE, 2.0D)));
+		ItemEffects.register(ItemsAether.dust_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.EARTH, 1.0D)).add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.AIR, 1.0D)));
+		ItemEffects.register(ItemsAether.mud_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.EARTH, 1.0D)).add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.WATER, 1.0D)));
+		ItemEffects.register(ItemsAether.storm_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.AIR, 1.0D)).add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.WATER, 1.0D)));
+		ItemEffects.register(ItemsAether.steam_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.FIRE, 1.0D)).add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.WATER, 1.0D)));
 
 		ItemEffects.register(ItemsAether.gravitite_core, new Effects().add(EntityEffects.EXTRA_JUMPS));
 		ItemEffects.register(ItemsAether.carrion_bloom, new Effects().add(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new InDirectSunlightRule())));

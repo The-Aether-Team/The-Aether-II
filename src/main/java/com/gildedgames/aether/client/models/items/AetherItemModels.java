@@ -478,6 +478,11 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.divine_beacon, "accessories/divine_beacon");
 		registerItemModels(ItemsAether.phoenix_rune, "accessories/phoenix_rune");
 		registerItemModels(ItemsAether.vampire_fang, "accessories/vampire_fang");
+
+		registerItemModels(ItemsAether.dust_ring, "accessories/dust_ring");
+		registerItemModels(ItemsAether.mud_ring, "accessories/mud_ring");
+		registerItemModels(ItemsAether.storm_ring, "accessories/storm_ring");
+		registerItemModels(ItemsAether.steam_ring, "accessories/steam_ring");
 	}
 
 	private static void registerItemModels(Block block, String path)

@@ -335,6 +335,10 @@ item.aether.valkyrie_wings.name=Valkyrie Wings
 item.aether.divine_beacon.name=Divine Beacon
 item.aether.phoenix_rune.name=Phoenix Rune
 item.aether.vampire_fang.name=Vampire Fang
+item.aether.dust_ring.name=Dust Ring
+item.aether.mud_ring.name=Mud Ring
+item.aether.steam_ring.name=Steam Ring
+item.aether.storm_ring.name=Storm Ring
 
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability: 
