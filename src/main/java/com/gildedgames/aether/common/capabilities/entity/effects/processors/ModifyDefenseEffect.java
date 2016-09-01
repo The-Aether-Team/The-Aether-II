@@ -16,22 +16,22 @@ public class ModifyDefenseEffect extends AbstractEffectProcessor<ModifyDefenseEf
 	public static class Instance extends EntityEffectInstance
 	{
 
-		public Instance(float defenseMod, EntityEffectRule... rules)
+		public Instance(double defenseMod, EntityEffectRule... rules)
 		{
 			super(rules);
 
-			this.getAttributes().setFloat("defenseMod", defenseMod);
+			this.getAttributes().setDouble("defenseMod", defenseMod);
 		}
 
-		public float getDefense()
+		public double getDefense()
 		{
-			return this.getAttributes().getFloat("defenseMod");
+			return this.getAttributes().getDouble("defenseMod");
 		}
 
 		@Override
 		public EntityEffectInstance cloneInstance()
 		{
-			return new Instance(this.getAttributes().getFloat("defenseMod"), this.getRules());
+			return new Instance(this.getDefense(), this.getRules());
 		}
 
 	}
@@ -44,7 +44,7 @@ public class ModifyDefenseEffect extends AbstractEffectProcessor<ModifyDefenseEf
 	@Override
 	public String[] getFormatParameters(Entity source, Instance instance)
 	{
-		float defense = instance.getDefense();
+		double defense = instance.getDefense();
 
 		String prefix = defense > 0 ? (TextFormatting.BLUE + "+") : (TextFormatting.RED + "");
 

@@ -25,17 +25,17 @@ public class DoubleDropEffect extends AbstractEffectProcessor<Instance>
 	public static class Instance extends EntityEffectInstance
 	{
 
-		public Instance(float percentChance, EntityEffectRule... rules)
+		public Instance(double percentChance, EntityEffectRule... rules)
 		{
 			super(rules);
 
-			this.getAttributes().setFloat("percentChance", percentChance);
+			this.getAttributes().setDouble("percentChance", percentChance);
 		}
 
 		@Override
 		public EntityEffectInstance cloneInstance()
 		{
-			return new Instance(this.getAttributes().getFloat("percentChance"), this.getRules());
+			return new Instance(this.getAttributes().getDouble("percentChance"), this.getRules());
 		}
 
 	}
@@ -69,11 +69,11 @@ public class DoubleDropEffect extends AbstractEffectProcessor<Instance>
 			}
 		}
 
-		float totalPercent = 0.0F;
+		double totalPercent = 0.0D;
 
 		for (Instance instance : all)
 		{
-			totalPercent += instance.getAttributes().getFloat("percentChance");
+			totalPercent += instance.getAttributes().getDouble("percentChance");
 		}
 
 		float chance = (float) target.getRNG().nextInt(10);

@@ -17,17 +17,17 @@ public class ModifyXPCollectionEffect extends AbstractEffectProcessorPlayer<Inst
 	public static class Instance extends EntityEffectInstance
 	{
 
-		public Instance(float percentMod, EntityEffectRule... rules)
+		public Instance(double percentMod, EntityEffectRule... rules)
 		{
 			super(rules);
 
-			this.getAttributes().setFloat("percentMod", percentMod);
+			this.getAttributes().setDouble("percentMod", percentMod);
 		}
 
 		@Override
 		public EntityEffectInstance cloneInstance()
 		{
-			return new Instance(this.getAttributes().getFloat("percentMod"), this.getRules());
+			return new Instance(this.getAttributes().getDouble("percentMod"), this.getRules());
 		}
 
 	}
@@ -37,7 +37,7 @@ public class ModifyXPCollectionEffect extends AbstractEffectProcessorPlayer<Inst
 		super("ability.modifyXPCollection.localizedName", "ability.modifyXPCollection.desc");
 	}
 
-	private String displayValue(float value)
+	private String displayValue(double value)
 	{
 		return value == (int) Math.floor(value) ? String.valueOf((int) Math.floor(value)) : String.valueOf(value);
 	}
@@ -45,7 +45,7 @@ public class ModifyXPCollectionEffect extends AbstractEffectProcessorPlayer<Inst
 	@Override
 	public String[] getFormatParameters(Entity source, Instance instance)
 	{
-		float percentMod = instance.getAttributes().getFloat("percentMod") * 100;
+		double percentMod = instance.getAttributes().getDouble("percentMod") * 100.0D;
 
 		String prefix = percentMod > 0 ? (TextFormatting.BLUE + "+") : (TextFormatting.RED + "");
 

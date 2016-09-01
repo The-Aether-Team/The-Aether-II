@@ -21,11 +21,11 @@ public class ModifySpeedEffect extends AbstractEffectProcessor<Instance>
 
 		private AttributeModifier modifier;
 
-		public Instance(float movementSpeedMod, EntityEffectRule... rules)
+		public Instance(double movementSpeedMod, EntityEffectRule... rules)
 		{
 			super(rules);
 
-			this.getAttributes().setFloat("movementSpeedMod", movementSpeedMod);
+			this.getAttributes().setDouble("movementSpeedMod", movementSpeedMod);
 			this.modifier = new AttributeModifier("Extra Movement Speed", movementSpeedMod, 2).setSaved(false);
 		}
 
@@ -37,7 +37,7 @@ public class ModifySpeedEffect extends AbstractEffectProcessor<Instance>
 		@Override
 		public EntityEffectInstance cloneInstance()
 		{
-			return new Instance(this.getAttributes().getFloat("movementSpeedMod"), this.getRules());
+			return new Instance(this.getAttributes().getDouble("movementSpeedMod"), this.getRules());
 		}
 		
 	}
@@ -50,17 +50,27 @@ public class ModifySpeedEffect extends AbstractEffectProcessor<Instance>
 	@Override
 	public String[] getFormatParameters(Entity source, Instance instance)
 	{
-		float movementSpeedMod = instance.getAttributes().getFloat("movementSpeedMod");
+		double movementSpeedMod = instance.getAttributes().getDouble("movementSpeedMod");
 
 		String prefix = movementSpeedMod > 0 ? (TextFormatting.BLUE + "+") : (TextFormatting.RED + "");
 
-		float value = (float) (movementSpeedMod / SharedMonsterAttributes.MOVEMENT_SPEED.getDefaultValue()) * 100.0F;
+		double value = (float) (movementSpeedMod / SharedMonsterAttributes.MOVEMENT_SPEED.getDefaultValue()) * 100.0D;
 
 		String valueString = value == (int) Math.floor(value) ? String.valueOf((int) Math.floor(value)) : String.valueOf(value);
 
 		if (value != (int) Math.floor(value))
 		{
-			valueString = String.format("%.1f", Float.valueOf(valueString));
+			double floor = Math.floor(value);
+			double dif = value - floor;
+
+			if (dif < 0.1D)
+			{
+				valueString = String.valueOf((int) Math.floor(value));
+			}
+			else
+			{
+				valueString = String.format("%.1f", Double.valueOf(valueString));
+			}
 		}
 
 		String par = prefix + (valueString) + "%";

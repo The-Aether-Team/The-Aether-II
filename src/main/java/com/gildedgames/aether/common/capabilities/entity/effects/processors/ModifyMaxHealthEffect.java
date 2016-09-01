@@ -21,11 +21,11 @@ public class ModifyMaxHealthEffect extends AbstractEffectProcessor<Instance>
 
 		private AttributeModifier modifier;
 
-		public Instance(float maxHealthMod, EntityEffectRule... rules)
+		public Instance(double maxHealthMod, EntityEffectRule... rules)
 		{
 			super(rules);
 
-			this.getAttributes().setFloat("maxHealthMod", maxHealthMod);
+			this.getAttributes().setDouble("maxHealthMod", maxHealthMod);
 			this.modifier = new AttributeModifier("Extra Max Health", maxHealthMod * 2, 0).setSaved(false);
 		}
 
@@ -37,7 +37,7 @@ public class ModifyMaxHealthEffect extends AbstractEffectProcessor<Instance>
 		@Override
 		public EntityEffectInstance cloneInstance()
 		{
-			return new Instance(this.getAttributes().getFloat("maxHealthMod"), this.getRules());
+			return new Instance(this.getAttributes().getDouble("maxHealthMod"), this.getRules());
 		}
 
 	}
@@ -50,7 +50,7 @@ public class ModifyMaxHealthEffect extends AbstractEffectProcessor<Instance>
 	@Override
 	public String[] getFormatParameters(Entity source, Instance instance)
 	{
-		float maxHealthMod = instance.getAttributes().getFloat("maxHealthMod");
+		double maxHealthMod = instance.getAttributes().getDouble("maxHealthMod");
 
 		String prefix = maxHealthMod > 0 ? (TextFormatting.BLUE + "+") : (TextFormatting.RED + "");
 
