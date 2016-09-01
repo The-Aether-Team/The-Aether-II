@@ -71,7 +71,9 @@ public class LeechLifeEffect extends AbstractEffectProcessor<LeechLifeEffect.Ins
 			leechTotal += instance.getLeechAmount();
 		}
 
-		if (living.swingProgressInt == 0)
+		EntityLivingBase target = event.getEntityLiving();
+
+		if (((EntityLivingBase) source).swingProgressInt <= 2)
 		{
 			((EntityLivingBase) source).heal((float) leechTotal * 2);
 		}
