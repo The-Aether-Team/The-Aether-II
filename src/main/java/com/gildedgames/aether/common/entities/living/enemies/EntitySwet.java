@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.entities.living.enemies;
 
+import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
+import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFloat;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFollowAttackTarget;
@@ -24,7 +26,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class EntitySwet extends EntityExtendedMob
+public class EntitySwet extends EntityExtendedMob implements IEntityProperties
 {
 
 	public enum Type
@@ -201,6 +203,12 @@ public class EntitySwet extends EntityExtendedMob
 
 		ItemStack sugar = new ItemStack(Items.SUGAR, this.rand.nextInt(4), 0);
 		this.entityDropItem(sugar, 0f);
+	}
+
+	@Override
+	public ElementalState getElementalState()
+	{
+		return ElementalState.WATER;
 	}
 
 }

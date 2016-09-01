@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.entities.living;
 
+import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
+import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
@@ -24,7 +26,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityAerbunny extends EntityAetherAnimal
+public class EntityAerbunny extends EntityAetherAnimal implements IEntityProperties
 {
 	@SideOnly(Side.CLIENT)
 	private double prevMotionY;
@@ -212,6 +214,12 @@ public class EntityAerbunny extends EntityAetherAnimal
 	public boolean canRiderInteract()
 	{
 		return true;
+	}
+
+	@Override
+	public ElementalState getElementalState()
+	{
+		return ElementalState.AIR;
 	}
 
 }

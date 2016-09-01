@@ -1,10 +1,12 @@
 package com.gildedgames.aether.common.entities.living.enemies;
 
+import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
+import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.util.flying.EntityFlyingDayMob;
 import net.minecraft.world.World;
 
-public class EntityZephyr extends EntityFlyingDayMob
+public class EntityZephyr extends EntityFlyingDayMob implements IEntityProperties
 {
 
 	public EntityZephyr(World world)
@@ -32,4 +34,9 @@ public class EntityZephyr extends EntityFlyingDayMob
 		return SoundsAether.zephyr_ambient;
 	}
 
+	@Override
+	public ElementalState getElementalState()
+	{
+		return ElementalState.AIR;
+	}
 }
