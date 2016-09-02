@@ -521,6 +521,7 @@ ability.changeAttackElement.name=Change Attack Element
 ability.setEnemiesOnFire.name=Sparking Touch
 ability.fireImmunity.name=Fire Immunity
 ability.companionMaxHealthMod.name=Companion Max Health Modifier
+ability.slowfall.name=Slowfall
 
 elementalState.biological=Biological
 elementalState.frost=Frost
@@ -552,9 +553,10 @@ ability.invisibility.desc=§2Invisibility
 ability.changeAttackElement.desc=§2All Attacks Become:
 ability.setEnemiesOnFire.desc=§2Sets Enemies On Fire
 ability.fireImmunity.desc=§2Fire Immunity
-ability.doubleJump.desc=§2Double Jump
+ability.doubleeJump.desc=§2Double Jump
 ability.companion.desc=For Companion
 ability.leechLife.desc=%s Life Leech
+ability.slowfall.desc=§2Slowfall
 
 # Tabs
 tab.equipment=Equipment

@@ -29,4 +29,6 @@ public interface IEntityEffectsCapability
 
 	void setTicksSinceAttacked(int ticks);
 
+	int getTicksExistedSinceRelog();
+
 }

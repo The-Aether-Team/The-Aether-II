@@ -66,11 +66,13 @@ public class EntityEffects implements IEntityEffectsCapability
 
 	public static final EntityEffectProcessor<ModifyDamageEffect.Instance> MODIFY_COMPANION_DAMAGE = new ModifyCompanionDamageEffect();
 
+	public static final EntityEffectProcessor<EntityEffectInstance> SLOWFALL = new SlowfallEffect();
+
 	private final Entity entity;
 
 	private final List<IEffectPool<?>> effects = Lists.newArrayList();
 
-	private int ticksSinceAttacked;
+	private int ticksSinceAttacked, ticksExistedSinceRelog;
 
 	public static IEntityEffectsCapability get(Entity entity)
 	{
@@ -166,6 +168,7 @@ public class EntityEffects implements IEntityEffectsCapability
 		}
 
 		this.ticksSinceAttacked++;
+		this.ticksExistedSinceRelog++;
 	}
 
 	@Override
@@ -207,6 +210,12 @@ public class EntityEffects implements IEntityEffectsCapability
 	public void setTicksSinceAttacked(int ticks)
 	{
 		this.ticksSinceAttacked = ticks;
+	}
+
+	@Override
+	public int getTicksExistedSinceRelog()
+	{
+		return this.ticksExistedSinceRelog;
 	}
 
 	public static class Storage implements Capability.IStorage<IEntityEffectsCapability>
