@@ -155,33 +155,10 @@ public class PlayerAetherEvents
 	@SubscribeEvent
 	public static void onUpdate(LivingUpdateEvent event)
 	{
-		IPlayerAetherCapability aePlayer = PlayerAetherImpl.getPlayer(event.getEntity());
+		PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(event.getEntity());
 
 		if (aePlayer != null)
 		{
-			IEntityEffectsCapability effects = EntityEffects.get(event.getEntity());
-
-			if (effects.getTicksExistedSinceRelog() == 0 && event.getEntity().getEntityWorld().isRemote)
-			{
-				for (int i = 0; i < aePlayer.getEquipmentInventory().getSizeInventory(); i++)
-				{
-					ItemStack stack = aePlayer.getEquipmentInventory().getStackInSlot(i);
-
-					if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
-					{
-						IItemEffectsCapability itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
-
-						for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
-						{
-							EntityEffectProcessor processor = effect.getLeft();
-							EntityEffectInstance instance = effect.getRight();
-
-							effects.addInstance(processor, instance);
-						}
-					}
-				}
-			}
-
 			aePlayer.onUpdate(event);
 		}
 	}

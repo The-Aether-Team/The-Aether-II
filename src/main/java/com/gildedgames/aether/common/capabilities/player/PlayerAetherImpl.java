@@ -45,6 +45,8 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 
 	private final ParachuteModule parachuteModule;
 
+	private final EquipmentModule equipmentModule;
+
 	public PlayerAetherImpl(EntityPlayer player)
 	{
 		this.player = player;
@@ -56,6 +58,7 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		this.gravititeAbilityModule = new GravititeAbilityModule(this);
 		this.teleportingModule = new TeleportingModule(this);
 		this.parachuteModule = new ParachuteModule(this);
+		this.equipmentModule = new EquipmentModule(this, this.equipmentInventory);
 
 		this.modules.add(this.companionModule);
 		this.modules.add(this.abilitiesModule);
@@ -63,7 +66,7 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		this.modules.add(this.teleportingModule);
 		this.modules.add(this.parachuteModule);
 
-		this.modules.add(new EquipmentModule(this, this.equipmentInventory));
+		this.modules.add(this.equipmentModule);
 		this.modules.add(new ExtendedReachModule(this));
 	}
 
@@ -234,6 +237,8 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 	public ParachuteModule getParachuteModule() { return this.parachuteModule; }
 
 	public AbilitiesModule getAbilitiesModule() { return this.abilitiesModule; }
+
+	public EquipmentModule getEquipmentModule() { return this.equipmentModule; }
 
 	public static class Storage implements IStorage<IPlayerAetherCapability>
 	{

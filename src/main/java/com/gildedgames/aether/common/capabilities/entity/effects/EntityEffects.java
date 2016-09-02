@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.capabilities.entity.effects.processors.play
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -69,7 +70,7 @@ public class EntityEffects implements IEntityEffectsCapability
 
 	private final List<IEffectPool<?>> effects = Lists.newArrayList();
 
-	private int ticksSinceAttacked, ticksExistedSinceRelog;
+	private int ticksSinceAttacked = 1000, ticksExistedSinceRelog;
 
 	public static IEntityEffectsCapability get(Entity entity)
 	{
@@ -241,13 +242,19 @@ public class EntityEffects implements IEntityEffectsCapability
 		@Override
 		public NBTBase writeNBT(Capability<IEntityEffectsCapability> capability, IEntityEffectsCapability instance, EnumFacing side)
 		{
-			return null;
+			NBTTagCompound tag = new NBTTagCompound();
+
+			tag.setInteger("ticksSinceAttacked", instance.getTicksSinceAttacked());
+
+			return tag;
 		}
 
 		@Override
 		public void readNBT(Capability<IEntityEffectsCapability> capability, IEntityEffectsCapability instance, EnumFacing side, NBTBase nbt)
 		{
+			NBTTagCompound tag = (NBTTagCompound)nbt;
 
+			instance.setTicksSinceAttacked(tag.getInteger("ticksSinceAttacked"));
 		}
 	}
 }

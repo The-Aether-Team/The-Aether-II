@@ -37,10 +37,7 @@ public class EquipmentModule extends PlayerAetherModule
 	@Override
 	public void onUpdate(LivingEvent.LivingUpdateEvent event)
 	{
-		//if (!this.getPlayer().worldObj.isRemote)
-		{
-			this.handleEquipmentChanges();
-		}
+		this.handleEquipmentChanges();
 	}
 
 	@Override
@@ -71,7 +68,7 @@ public class EquipmentModule extends PlayerAetherModule
 		}
 	}
 
-	private void sendEquipmentChanges(Set<InventoryEquipment.PendingItemChange> dirties)
+	public void sendEquipmentChanges(Set<InventoryEquipment.PendingItemChange> dirties)
 	{
 		List<Pair<Integer, ItemStack>> updates = new ArrayList<>();
 
@@ -83,7 +80,7 @@ public class EquipmentModule extends PlayerAetherModule
 		NetworkingAether.sendPacketToWatching(new EquipmentChangedPacket(this.getPlayer(), updates), this.getPlayer());
 	}
 
-	private void handleEquipmentChanges()
+	public void handleEquipmentChanges()
 	{
 		if (this.equipment.getDirties().size() > 0)
 		{
