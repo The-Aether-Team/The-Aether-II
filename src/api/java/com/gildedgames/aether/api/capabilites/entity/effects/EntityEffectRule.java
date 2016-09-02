@@ -12,7 +12,7 @@ public interface EntityEffectRule
 	 */
 	boolean isMet(Entity source);
 
-	boolean blockLivingAttack(Entity source, LivingAttackEvent event);
+	boolean blockLivingAttack(Entity source, float amount, Entity target);
 
 	boolean blockLivingHurt(Entity source, LivingHurtEvent event);
 

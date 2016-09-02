@@ -25,8 +25,8 @@ public interface IEffectPool<I extends EntityEffectInstance>
 
 	<S extends Entity> void onLivingHurt(LivingHurtEvent event, S entity);
 
-	<S extends Entity> void onLivingAttacked(LivingAttackEvent event, S entity);
+	<S extends Entity> void onLivingAttacked(float amount, Entity attacker, S entity);
 
-	<S extends Entity> void onLivingAttack(LivingAttackEvent event, S entity);
+	<S extends Entity> void onLivingAttack(float amount, Entity target, S entity);
 
 }

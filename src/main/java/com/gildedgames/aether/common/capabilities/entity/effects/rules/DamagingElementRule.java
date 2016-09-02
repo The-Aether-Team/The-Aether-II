@@ -27,9 +27,9 @@ public class DamagingElementRule implements EntityEffectRule
 	}
 
 	@Override
-	public boolean blockLivingAttack(Entity source, LivingAttackEvent event)
+	public boolean blockLivingAttack(Entity source, float amount, Entity target)
 	{
-		IEntityPropertiesCapability properties = EntityProperties.get(event.getEntityLiving());
+		IEntityPropertiesCapability properties = EntityProperties.get(target);
 
 		return !(properties != null && properties.getElementalState() == this.elementalState);
 	}

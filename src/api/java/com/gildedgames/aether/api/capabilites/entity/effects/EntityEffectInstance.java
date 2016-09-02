@@ -7,14 +7,32 @@ import net.minecraft.nbt.NBTTagCompound;
  */
 public class EntityEffectInstance
 {
+
+	public enum State
+	{
+		APPLIED, CANCELLED;
+	}
+
 	private final EntityEffectRule[] rules;
 
 	private final NBTTagCompound attributes;
+
+	private State state;
 
 	public EntityEffectInstance(EntityEffectRule... rules)
 	{
 		this.rules = rules;
 		this.attributes = new NBTTagCompound();
+	}
+
+	public State getState()
+	{
+		return this.state;
+	}
+
+	public void setState(State state)
+	{
+		this.state = state;
 	}
 
 	/**

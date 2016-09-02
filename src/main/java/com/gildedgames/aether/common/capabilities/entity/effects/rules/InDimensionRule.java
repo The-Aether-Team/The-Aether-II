@@ -30,7 +30,7 @@ public class InDimensionRule implements EntityEffectRule
 	}
 
 	@Override
-	public boolean blockLivingAttack(Entity source, LivingAttackEvent event)
+	public boolean blockLivingAttack(Entity source, float amount, Entity target)
 	{
 		return false;
 	}

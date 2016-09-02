@@ -26,9 +26,9 @@ public class DamagingMobRule implements EntityEffectRule
 	}
 
 	@Override
-	public boolean blockLivingAttack(Entity source, LivingAttackEvent event)
+	public boolean blockLivingAttack(Entity source, float amount, Entity target)
 	{
-		return !(event.getEntityLiving() != null && this.mobClass.isAssignableFrom(event.getEntityLiving().getClass()));
+		return !(target != null && this.mobClass.isAssignableFrom(target.getClass()));
 	}
 
 	@Override

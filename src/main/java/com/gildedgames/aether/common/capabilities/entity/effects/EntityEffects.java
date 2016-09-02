@@ -1,10 +1,7 @@
 package com.gildedgames.aether.common.capabilities.entity.effects;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
-import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
-import com.gildedgames.aether.api.capabilites.entity.effects.IEffectPool;
-import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
+import com.gildedgames.aether.api.capabilites.entity.effects.*;
 import com.gildedgames.aether.common.capabilities.entity.effects.processors.*;
 import com.gildedgames.aether.common.capabilities.entity.effects.processors.player.*;
 import com.google.common.collect.Lists;
@@ -123,7 +120,26 @@ public class EntityEffects implements IEntityEffectsCapability
 			pool.getInstances().add(instance);
 		}
 
-		processor.apply(this.entity, instance, pool.getInstances());
+		boolean isMet = true;
+
+		for (EntityEffectRule rule : instance.getRules())
+		{
+			if (!rule.isMet(entity))
+			{
+				isMet = false;
+				break;
+			}
+		}
+
+		if (isMet)
+		{
+			processor.apply(this.entity, instance, pool.getInstances());
+			instance.setState(EntityEffectInstance.State.APPLIED);
+		}
+		else
+		{
+			instance.setState(EntityEffectInstance.State.CANCELLED);
+		}
 	}
 
 	@Override
@@ -139,6 +155,7 @@ public class EntityEffects implements IEntityEffectsCapability
 		for (I instance : pool.getInstances())
 		{
 			processor.cancel(this.entity, instance, pool.getInstances());
+			instance.setState(EntityEffectInstance.State.CANCELLED);
 		}
 
 		this.effects.remove(pool);
@@ -155,6 +172,7 @@ public class EntityEffects implements IEntityEffectsCapability
 		EffectPool<I> pool = this.getPool(processor);
 
 		processor.cancel(this.entity, instance, pool.getInstances());
+		instance.setState(EntityEffectInstance.State.CANCELLED);
 
 		pool.getInstances().remove(instance);
 	}

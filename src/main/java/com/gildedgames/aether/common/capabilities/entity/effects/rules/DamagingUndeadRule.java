@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.capabilities.entity.effects.rules;
 
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -21,9 +22,9 @@ public class DamagingUndeadRule implements EntityEffectRule
 	}
 
 	@Override
-	public boolean blockLivingAttack(Entity source, LivingAttackEvent event)
+	public boolean blockLivingAttack(Entity source, float amount, Entity target)
 	{
-		return !(event.getEntityLiving() != null && event.getEntityLiving().isEntityUndead());
+		return !(target instanceof EntityLivingBase && ((EntityLivingBase)target).isEntityUndead());
 	}
 
 	@Override

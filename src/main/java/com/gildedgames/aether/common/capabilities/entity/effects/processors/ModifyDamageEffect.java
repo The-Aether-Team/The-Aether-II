@@ -125,7 +125,7 @@ public class ModifyDamageEffect extends AbstractEffectProcessor<ModifyDamageEffe
 	@Override
 	public void apply(Entity source, Instance instance, List<Instance> all)
 	{
-		if (!(source instanceof EntityLivingBase))
+		if (!(source instanceof EntityLivingBase) || source.getEntityWorld().isRemote)
 		{
 			return;
 		}
@@ -150,7 +150,7 @@ public class ModifyDamageEffect extends AbstractEffectProcessor<ModifyDamageEffe
 	@Override
 	public void cancel(Entity source, Instance instance, List<Instance> all)
 	{
-		if (!(source instanceof EntityLivingBase))
+		if (!(source instanceof EntityLivingBase) || source.getEntityWorld().isRemote)
 		{
 			return;
 		}

@@ -8,6 +8,7 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -123,6 +124,20 @@ public class EntityEffectsEventHooks
 	}
 
 	@SubscribeEvent
+	public static void onPlayerAttacked(AttackEntityEvent event)
+	{
+		IEntityEffectsCapability effects = EntityEffects.get(event.getEntityPlayer());
+
+		if (effects != null)
+		{
+			for (IEffectPool<?> pool : effects.getEffectPools())
+			{
+				pool.onLivingAttack(0, event.getTarget(), event.getEntityPlayer());
+			}
+		}
+	}
+
+	@SubscribeEvent
 	public static void onLivingAttacked(LivingAttackEvent event)
 	{
 		Entity attacker = event.getSource().getSourceOfDamage();
@@ -135,7 +150,7 @@ public class EntityEffectsEventHooks
 			{
 				for (IEffectPool<?> pool : effects.getEffectPools())
 				{
-					pool.onLivingAttack(event, attacker);
+					pool.onLivingAttack(event.getAmount(), event.getEntity(), attacker);
 				}
 			}
 		}
@@ -153,7 +168,7 @@ public class EntityEffectsEventHooks
 		{
 			for (IEffectPool<?> pool : effects.getEffectPools())
 			{
-				pool.onLivingAttacked(event, entity);
+				pool.onLivingAttacked(event.getAmount(), attacker, entity);
 			}
 		}
 	}

@@ -5,10 +5,17 @@ import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcess
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
 import com.gildedgames.aether.api.capabilites.entity.effects.IEffectPool;
 import com.google.common.collect.Lists;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 
@@ -67,10 +74,10 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 
 		for (I instance : instancesRulesMet)
 		{
-			if (this.getProcessor().getState() == EntityEffectProcessor.State.CANCELLED)
+			if (instance.getState() == EntityEffectInstance.State.CANCELLED)
 			{
 				this.getProcessor().apply(entity, instance, instancesRulesMet);
-				this.getProcessor().setState(EntityEffectProcessor.State.APPLIED);
+				instance.setState(EntityEffectInstance.State.APPLIED);
 			}
 		}
 
@@ -81,10 +88,10 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 
 		for (I instance : cancelledInstances)
 		{
-			if (this.getProcessor().getState() == EntityEffectProcessor.State.APPLIED)
+			if (instance.getState() == EntityEffectInstance.State.APPLIED)
 			{
 				this.getProcessor().cancel(entity, instance, instancesRulesMet);
-				this.getProcessor().setState(EntityEffectProcessor.State.CANCELLED);
+				instance.setState(EntityEffectInstance.State.CANCELLED);
 			}
 		}
 	}
@@ -197,6 +204,7 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 	public <S extends Entity> void onLivingHurt(LivingHurtEvent event, S entity)
 	{
 		List<I> instancesRulesMet = Lists.newArrayList();
+		List<I> cancelledInstances = Lists.newArrayList();
 
 		for (I instance : this.getInstances())
 		{
@@ -207,6 +215,8 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 				if (!rule.isMet(entity) || rule.blockLivingHurt(entity, event))
 				{
 					isMet = false;
+
+					cancelledInstances.add(instance);
 					break;
 				}
 			}
@@ -214,6 +224,24 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 			if (isMet || instance.getRules().length <= 0)
 			{
 				instancesRulesMet.add(instance);
+			}
+		}
+
+		for (I instance : instancesRulesMet)
+		{
+			if (instance.getState() == EntityEffectInstance.State.CANCELLED)
+			{
+				this.getProcessor().apply(entity, instance, instancesRulesMet);
+				instance.setState(EntityEffectInstance.State.APPLIED);
+			}
+		}
+
+		for (I instance : cancelledInstances)
+		{
+			if (instance.getState() == EntityEffectInstance.State.APPLIED)
+			{
+				this.getProcessor().cancel(entity, instance, instancesRulesMet);
+				instance.setState(EntityEffectInstance.State.CANCELLED);
 			}
 		}
 
@@ -224,9 +252,10 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 	}
 
 	@Override
-	public <S extends Entity> void onLivingAttacked(LivingAttackEvent event, S entity)
+	public <S extends Entity> void onLivingAttacked(float amount, Entity target, S entity)
 	{
 		List<I> instancesRulesMet = Lists.newArrayList();
+		List<I> instancesToCancel = Lists.newArrayList();
 
 		for (I instance : this.getInstances())
 		{
@@ -234,9 +263,13 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 
 			for (EntityEffectRule rule : instance.getRules())
 			{
-				if (!rule.isMet(entity) || rule.blockLivingAttack(entity, event))
+				boolean blocked = rule.blockLivingAttack(entity, amount, target);
+
+				if (!rule.isMet(entity) || blocked)
 				{
 					isMet = false;
+
+					instancesToCancel.add(instance);
 					break;
 				}
 			}
@@ -247,16 +280,35 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 			}
 		}
 
+		for (I instance : instancesRulesMet)
+		{
+			if (instance.getState() == EntityEffectInstance.State.CANCELLED)
+			{
+				this.getProcessor().apply(entity, instance, instancesRulesMet);
+				instance.setState(EntityEffectInstance.State.APPLIED);
+			}
+		}
+
+		for (I instance : instancesToCancel)
+		{
+			if (instance.getState() == EntityEffectInstance.State.APPLIED)
+			{
+				this.getProcessor().cancel(entity, instance, instancesRulesMet);
+				instance.setState(EntityEffectInstance.State.CANCELLED);
+			}
+		}
+
 		if (!instancesRulesMet.isEmpty())
 		{
-			this.getProcessor().onAttacked(event, entity, instancesRulesMet);
+			this.getProcessor().onAttacked(amount, target, entity, instancesRulesMet);
 		}
 	}
 
 	@Override
-	public <S extends Entity> void onLivingAttack(LivingAttackEvent event, S entity)
+	public <S extends Entity> void onLivingAttack(float amount, Entity target, S entity)
 	{
 		List<I> instancesRulesMet = Lists.newArrayList();
+		List<I> instancesToCancel = Lists.newArrayList();
 
 		for (I instance : this.getInstances())
 		{
@@ -264,9 +316,11 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 
 			for (EntityEffectRule rule : instance.getRules())
 			{
-				if (!rule.isMet(entity) || rule.blockLivingAttack(entity, event))
+				if (!rule.isMet(entity) || rule.blockLivingAttack(entity, amount, target))
 				{
 					isMet = false;
+
+					instancesToCancel.add(instance);
 					break;
 				}
 			}
@@ -277,9 +331,27 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 			}
 		}
 
+		for (I instance : instancesRulesMet)
+		{
+			if (instance.getState() == EntityEffectInstance.State.CANCELLED)
+			{
+				this.getProcessor().apply(entity, instance, instancesRulesMet);
+				instance.setState(EntityEffectInstance.State.APPLIED);
+			}
+		}
+
+		for (I instance : instancesToCancel)
+		{
+			if (instance.getState() == EntityEffectInstance.State.APPLIED)
+			{
+				this.getProcessor().cancel(entity, instance, instancesRulesMet);
+				instance.setState(EntityEffectInstance.State.CANCELLED);
+			}
+		}
+
 		if (!instancesRulesMet.isEmpty())
 		{
-			this.getProcessor().onAttack(event, entity, instancesRulesMet);
+			this.getProcessor().onAttack(amount, target, entity, instancesRulesMet);
 		}
 	}
 

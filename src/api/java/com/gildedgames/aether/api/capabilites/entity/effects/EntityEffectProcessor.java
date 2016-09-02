@@ -10,20 +10,13 @@ import java.util.List;
 public interface EntityEffectProcessor<I extends EntityEffectInstance>
 {
 
-	enum State
-	{
-		APPLIED, CANCELLED;
-	}
-
 	String getUnlocalizedName(Entity source, I instance);
 
 	String[] getUnlocalizedDesc(Entity source, I instance);
 
 	String[] getFormatParameters(Entity source, I instance);
 
-	State getState();
 
-	void setState(State state);
 
 	/**
 	 * Called once when this ability is added to an entity.
@@ -59,18 +52,16 @@ public interface EntityEffectProcessor<I extends EntityEffectInstance>
 
 	/**
 	 * Called when the source is attacked while they have this ability.
-	 * @param event The event that is fired.
 	 * @param source The entity that is affected by this ability.
 	 * @param all The instances of this ability that are attached to the source.
 	 */
-	void onAttacked(LivingAttackEvent event, Entity source, List<I> all);
+	void onAttacked(float amount, Entity attacker, Entity source, List<I> all);
 
 	/**
 	 * Called when the source attacks an entity while they have this ability.
-	 * @param event The event that is fired.
 	 * @param source The entity that is affected by this ability.
 	 * @param all The instances of this ability that are attached to the source.
 	 */
-	void onAttack(LivingAttackEvent event, Entity source, List<I> all);
+	void onAttack(float amount, Entity target, Entity source, List<I> all);
 
 }

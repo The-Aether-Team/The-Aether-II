@@ -55,7 +55,7 @@ public class LeechLifeEffect extends AbstractEffectProcessor<LeechLifeEffect.Ins
 	}
 
 	@Override
-	public void onAttack(LivingAttackEvent event, Entity source, List<Instance> all)
+	public void onAttack(float amount, Entity target, Entity source, List<Instance> all)
 	{
 		if (!(source instanceof EntityLivingBase))
 		{
@@ -70,8 +70,6 @@ public class LeechLifeEffect extends AbstractEffectProcessor<LeechLifeEffect.Ins
 		{
 			leechTotal += instance.getLeechAmount();
 		}
-
-		EntityLivingBase target = event.getEntityLiving();
 
 		if (((EntityLivingBase) source).swingProgressInt <= 2)
 		{

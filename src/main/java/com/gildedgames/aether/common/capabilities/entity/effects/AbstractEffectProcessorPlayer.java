@@ -19,8 +19,6 @@ public abstract class AbstractEffectProcessorPlayer<I extends EntityEffectInstan
 
 	private String[] desc;
 
-	private State state;
-
 	public AbstractEffectProcessorPlayer(String unlocalizedName, String... desc)
 	{
 		this.unlocalizedName = unlocalizedName;
@@ -43,18 +41,6 @@ public abstract class AbstractEffectProcessorPlayer<I extends EntityEffectInstan
 	public String[] getFormatParameters(Entity source, I instance)
 	{
 		return new String[] {};
-	}
-
-	@Override
-	public State getState()
-	{
-		return this.state;
-	}
-
-	@Override
-	public void setState(State state)
-	{
-		this.state = state;
 	}
 
 	@Override
@@ -83,13 +69,13 @@ public abstract class AbstractEffectProcessorPlayer<I extends EntityEffectInstan
 	}
 
 	@Override
-	public void onAttacked(LivingAttackEvent event, Entity source, List<I> all)
+	public void onAttacked(float amount, Entity attacker, Entity source, List<I> all)
 	{
 
 	}
 
 	@Override
-	public void onAttack(LivingAttackEvent event, Entity source, List<I> all)
+	public void onAttack(float amount, Entity target, Entity source, List<I> all)
 	{
 
 	}

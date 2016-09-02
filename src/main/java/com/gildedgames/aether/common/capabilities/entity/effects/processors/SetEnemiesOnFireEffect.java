@@ -20,11 +20,11 @@ public class SetEnemiesOnFireEffect extends AbstractEffectProcessor<EntityEffect
 	}
 
 	@Override
-	public void onAttack(LivingAttackEvent event, Entity source, List<EntityEffectInstance> all)
+	public void onAttack(float amount, Entity target, Entity source, List<EntityEffectInstance> all)
 	{
-		if (event.getEntityLiving() != null)
+		if (target != null)
 		{
-			event.getEntityLiving().setFire(2);
+			target.setFire(2);
 		}
 	}
 

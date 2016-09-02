@@ -2,6 +2,8 @@ package com.gildedgames.aether.common.capabilities.entity.effects.rules;
 
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -22,15 +24,15 @@ public class DamagingPassiveAnimalsRule implements EntityEffectRule
 	}
 
 	@Override
-	public boolean blockLivingAttack(Entity source, LivingAttackEvent event)
+	public boolean blockLivingAttack(Entity source, float amount, Entity target)
 	{
-		return !(event.getEntityLiving() != null && event.getEntityLiving() instanceof EntityAnimal);
+		return (target instanceof IMob);
 	}
 
 	@Override
 	public boolean blockLivingHurt(Entity source, LivingHurtEvent event)
 	{
-		return !(event.getEntityLiving() != null && event.getEntityLiving() instanceof EntityAnimal);
+		return (event.getEntityLiving() != null && event.getEntityLiving() instanceof IMob);
 	}
 
 	@Override

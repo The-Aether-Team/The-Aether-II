@@ -122,18 +122,21 @@ public class EquipmentModule extends PlayerAetherModule
 			}
 		}
 
-		ItemStack afterStack = change.getAfter();
-
-		if (afterStack != null && afterStack != before && afterStack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
+		if (!this.getPlayer().worldObj.isRemote)
 		{
-			IItemEffectsCapability itemEffects = afterStack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
+			ItemStack afterStack = change.getAfter();
 
-			for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
+			if (afterStack != null && afterStack != before && afterStack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 			{
-				EntityEffectProcessor processor = effect.getLeft();
-				EntityEffectInstance instance = effect.getRight();
+				IItemEffectsCapability itemEffects = afterStack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
-				effects.addInstance(processor, instance);
+				for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
+				{
+					EntityEffectProcessor processor = effect.getLeft();
+					EntityEffectInstance instance = effect.getRight();
+
+					effects.addInstance(processor, instance);
+				}
 			}
 		}
 	}
