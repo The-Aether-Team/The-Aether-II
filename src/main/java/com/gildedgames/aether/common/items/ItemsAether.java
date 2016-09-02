@@ -25,7 +25,6 @@ import com.gildedgames.aether.common.items.misc.*;
 import com.gildedgames.aether.common.items.tools.*;
 import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
-import com.gildedgames.aether.common.items.weapons.ItemPigSlayer;
 import com.gildedgames.aether.common.items.weapons.ItemVampireBlade;
 import com.gildedgames.aether.common.items.weapons.crossbow.*;
 import com.gildedgames.aether.common.items.weapons.swords.*;
@@ -103,7 +102,7 @@ public class ItemsAether
 
 	public static ItemElementalSword flaming_sword, holy_sword, lightning_sword;
 
-	public static ItemSword pig_slayer, vampire_blade, candy_cane_sword, valkyrie_lance;
+	public static ItemSword vampire_blade, candy_cane_sword, valkyrie_lance;
 
 	public static ItemDoor skyroot_door, arkenium_door;
 
@@ -214,6 +213,8 @@ public class ItemsAether
 	public static Item gravitite_core, carrion_bloom, moonlit_bloom, phoenix_rune, valkyrie_wings, companion_armor, spiked_collar, vampire_fang, divine_beacon;
 
 	public static Item dust_ring, mud_ring, steam_ring, storm_ring;
+
+	public static Item butchers_knife;
 
 	public static void preInit()
 	{
@@ -359,7 +360,6 @@ public class ItemsAether
 		holy_sword = registerItem("holy_sword", new ItemElementalSword(ItemElementalSword.SwordElement.HOLY));
 		lightning_sword = registerItem("lightning_sword", new ItemElementalSword(ItemElementalSword.SwordElement.LIGHTNING));
 
-		pig_slayer = registerItem("pig_slayer", new ItemPigSlayer(), CreativeTabsAether.tabWeapons);
 		vampire_blade = registerItem("vampire_blade", new ItemVampireBlade(), CreativeTabsAether.tabWeapons);
 		candy_cane_sword = registerItem("candy_cane_sword", new ItemCandyCaneSword(), CreativeTabsAether.tabWeapons);
 		valkyrie_lance = registerItem("valkyrie_lance", new ItemAetherSword(MaterialsAether.LEGENDARY_TOOL, ItemAbilityType.PASSIVE));
@@ -506,6 +506,8 @@ public class ItemsAether
 		gravitite_core = registerItem("gravitite_core", new Item().setMaxStackSize(1), CreativeTabsAether.tabArtifacts);
 		valkyrie_wings = registerItem("valkyrie_wings", new Item().setMaxStackSize(1), CreativeTabsAether.tabArtifacts);
 
+		butchers_knife = registerItem("butchers_knife", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
+
 		IEquipmentRegistry equipmentRegistry = AetherCore.INSTANCE.getEquipmentRegistry();
 
 		equipmentRegistry.register(ItemsAether.iron_ring, ItemRarity.BASIC, ItemEquipmentType.RING);
@@ -625,6 +627,7 @@ public class ItemsAether
 		equipmentRegistry.register(ItemsAether.sakura_moa_feather, ItemRarity.EPIC, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(ItemsAether.osseous_bane, ItemRarity.EPIC, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(ItemsAether.rot_bane, ItemRarity.EPIC, ItemEquipmentType.CHARM);
+		equipmentRegistry.register(ItemsAether.butchers_knife, ItemRarity.EPIC, ItemEquipmentType.CHARM);
 
 		equipmentRegistry.register(ItemsAether.continuum_talisman, ItemRarity.MYTHIC, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(ItemsAether.labyrinth_plans, ItemRarity.MYTHIC, ItemEquipmentType.CHARM);
@@ -715,6 +718,7 @@ public class ItemsAether
 		ItemEffects.register(ItemsAether.rot_bane, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 1.0D, new DamagingUndeadRule())));
 		ItemEffects.register(ItemsAether.continuum_talisman);
 		ItemEffects.register(ItemsAether.labyrinth_plans);
+		ItemEffects.register(ItemsAether.butchers_knife, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 2.0D, new DamagingPassiveAnimalsRule())));
 
 		ItemEffects.register(ItemsAether.zanite_studded_choker, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 4.0D)));
 		ItemEffects.register(ItemsAether.lesser_amulet_of_growth, new Effects().add(EntityEffects.MODIFY_MAX_HEALTH, new ModifyMaxHealthEffect.Instance(2.0D)));

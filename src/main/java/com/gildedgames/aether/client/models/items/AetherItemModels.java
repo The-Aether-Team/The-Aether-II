@@ -268,7 +268,6 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.holy_sword, "weapons/holy_sword");
 		registerItemModels(ItemsAether.lightning_sword, "weapons/lightning_sword");
 
-		registerItemModels(ItemsAether.pig_slayer, "weapons/pig_slayer");
 		registerItemModels(ItemsAether.vampire_blade, "weapons/vampire_blade");
 		registerItemModels(ItemsAether.candy_cane_sword, "weapons/candy_cane_sword");
 
@@ -477,6 +476,8 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.mud_ring, "accessories/mud_ring");
 		registerItemModels(ItemsAether.storm_ring, "accessories/storm_ring");
 		registerItemModels(ItemsAether.steam_ring, "accessories/steam_ring");
+
+		registerItemModels(ItemsAether.butchers_knife, "accessories/butchers_knife");
 	}
 
 	private static void registerItemModels(Block block, String path)

@@ -214,7 +214,6 @@ item.aether.cloud_parachute.purple.name=Purple Cloud Parachute
 item.aether.flaming_sword.name=Flaming Sword
 item.aether.holy_sword.name=Holy Sword
 item.aether.lightning_sword.name=Lightning Sword
-item.aether.pig_slayer.name=Pig Slayer
 item.aether.vampire_blade.name=Vampire Blade
 item.aether.candy_cane_sword.name=Candy Cane Sword
 item.aether.skyroot_door_item.name=Skyroot Door
@@ -334,6 +333,7 @@ item.aether.dust_ring.name=Dust Ring
 item.aether.mud_ring.name=Mud Ring
 item.aether.steam_ring.name=Steam Ring
 item.aether.storm_ring.name=Storm Ring
+item.aether.butchers_knife.name=Butcher's Knife
 
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability: 

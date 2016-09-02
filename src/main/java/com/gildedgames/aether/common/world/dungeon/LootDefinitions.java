@@ -63,7 +63,6 @@ public class LootDefinitions
 				new ItemStack(ItemsAether.regeneration_stone),
 				new ItemStack(ItemsAether.vampire_crossbow),
 				new ItemStack(ItemsAether.vampire_blade),
-				new ItemStack(ItemsAether.pig_slayer),
 				new ItemStack(ItemsAether.flaming_sword),
 				new ItemStack(ItemsAether.holy_sword),
 				new ItemStack(ItemsAether.lightning_sword)
