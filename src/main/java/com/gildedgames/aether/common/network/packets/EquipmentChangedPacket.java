@@ -1,6 +1,12 @@
 package com.gildedgames.aether.common.network.packets;
 
+import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
+import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
+import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
+import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffects;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.util.core.io.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
@@ -97,10 +103,26 @@ public class EquipmentChangedPacket implements IMessage
 			if (entity != null)
 			{
 				IPlayerAetherCapability aePlayer = PlayerAetherImpl.getPlayer(player);
+				IEntityEffectsCapability effects = EntityEffects.get(player);
 
 				for (Pair<Integer, ItemStack> pair : message.changes)
 				{
 					aePlayer.getEquipmentInventory().setInventorySlotContents(pair.getKey(), pair.getValue());
+
+					ItemStack afterStack = pair.getValue();
+
+					if (afterStack != null && afterStack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
+					{
+						IItemEffectsCapability itemEffects = afterStack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
+
+						for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
+						{
+							EntityEffectProcessor processor = effect.getLeft();
+							EntityEffectInstance instance = effect.getRight();
+
+							effects.addInstance(processor, instance);
+						}
+					}
 				}
 			}
 
