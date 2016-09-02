@@ -709,7 +709,7 @@ public class ItemsAether
 		ItemEffects.register(ItemsAether.wisdom_bauble, new Effects().add(EntityEffects.MODIFY_XP_COLLECTION, new ModifyXPCollectionEffect.Instance(0.10D)));
 		ItemEffects.register(ItemsAether.bone_shard, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 0.3D)));
 		ItemEffects.register(ItemsAether.moa_feather, new Effects().add(EntityEffects.MODIFY_SPEED, new ModifySpeedEffect.Instance((float) SharedMonsterAttributes.MOVEMENT_SPEED.getDefaultValue() * 0.05D)));
-		ItemEffects.register(ItemsAether.blight_ward);
+		ItemEffects.register(ItemsAether.blight_ward, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 1D, new DamagingElementRule(ElementalState.BLIGHT))));
 		ItemEffects.register(ItemsAether.skyroot_twig);
 		ItemEffects.register(ItemsAether.gold_barbed_wire, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 0.1D, 0.5D, true)));
 		ItemEffects.register(ItemsAether.ambrosium_talisman, new Effects().add(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new HoldingItemRule(new ItemStack(ItemsAether.ambrosium_shard)))));
