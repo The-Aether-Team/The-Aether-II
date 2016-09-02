@@ -35,6 +35,8 @@ public class CreativeTabsAether
 
 	public static final CreativeTab tabCharms = new CreativeTab("aether.charms");
 
+	public static final CreativeTab tabArtifacts = new CreativeTab("aether.artifacts");
+
     @SideOnly(Side.CLIENT)
 	public static void registerTabIcons()
 	{
@@ -51,6 +53,7 @@ public class CreativeTabsAether
 		tabNeckwear.setDisplayStack(new ItemStack(ItemsAether.amulet_of_growth));
 		tabRelics.setDisplayStack(new ItemStack(ItemsAether.regeneration_stone));
 		tabCharms.setDisplayStack(new ItemStack(ItemsAether.bone_shard));
+		tabArtifacts.setDisplayStack(new ItemStack(ItemsAether.gravitite_core));
 	}
 
 	public static class CreativeTab extends CreativeTabs

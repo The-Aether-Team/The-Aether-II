@@ -505,7 +505,7 @@ public class ItemsAether
 		white_moa_feather = registerItem("white_moa_feather", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
 		sakura_moa_feather = registerItem("sakura_moa_feather", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
 
-		gravitite_core = registerItem("gravitite_core", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
+		gravitite_core = registerItem("gravitite_core", new Item().setMaxStackSize(1), CreativeTabsAether.tabArtifacts);
 		carrion_bloom = registerItem("carrion_bloom", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
 		moonlit_bloom = registerItem("moonlit_bloom", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
 		companion_armor = registerItem("companion_armor", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
@@ -533,12 +533,15 @@ public class ItemsAether
 		equipmentRegistry.register(ItemsAether.chain_gloves, ItemRarity.BASIC, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.diamond_gloves, ItemRarity.BASIC, ItemEquipmentType.HANDWEAR);
 
+		/** ARTIFACTS **/
+
+		equipmentRegistry.register(ItemsAether.gravitite_core, ItemRarity.MYTHIC, ItemEquipmentType.ARTIFACT);
+
 		/** RELICS **/
 
 		equipmentRegistry.register(ItemsAether.iron_bubble, ItemRarity.COMMON, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.carrion_bloom, ItemRarity.RARE, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.moonlit_bloom, ItemRarity.RARE, ItemEquipmentType.RELIC);
-		equipmentRegistry.register(ItemsAether.gravitite_core, ItemRarity.RARE, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.companion_armor, ItemRarity.RARE, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.spiked_collar, ItemRarity.RARE, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.divine_beacon, ItemRarity.RARE, ItemEquipmentType.RELIC);
@@ -752,13 +755,14 @@ public class ItemsAether
 		ItemEffects.register(ItemsAether.storm_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.AIR, 1.0D)).add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.WATER, 1.0D)));
 		ItemEffects.register(ItemsAether.steam_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.FIRE, 1.0D)).add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.WATER, 1.0D)));
 
-		ItemEffects.register(ItemsAether.gravitite_core, new Effects().add(EntityEffects.EXTRA_JUMPS));
 		ItemEffects.register(ItemsAether.carrion_bloom, new Effects().add(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new InDirectSunlightRule())));
 		ItemEffects.register(ItemsAether.moonlit_bloom, new Effects().add(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new InDirectMoonlightRule())));
 		ItemEffects.register(ItemsAether.phoenix_rune, new Effects().add(EntityEffects.CHANGE_ATTACK_ELEMENT, new ChangeAttackElementEffect.Instance(ElementalState.FIRE)).add(EntityEffects.FIRE_IMMUNITY).add(EntityEffects.SET_ENEMIES_ON_FIRE));
 		ItemEffects.register(ItemsAether.vampire_fang, new Effects().add(EntityEffects.LEECH_LIFE, new LeechLifeEffect.Instance(0.5D)));
 		ItemEffects.register(ItemsAether.companion_armor, new Effects().add(EntityEffects.MODIFY_COMPANION_MAX_HEALTH, new ModifyMaxHealthEffect.Instance(10.0D)));
 		ItemEffects.register(ItemsAether.spiked_collar, new Effects().add(EntityEffects.MODIFY_COMPANION_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 2.0D)));
+
+		ItemEffects.register(ItemsAether.gravitite_core, new Effects().add(EntityEffects.EXTRA_JUMPS));
 
 		zanite_armor_set = new Item[] { zanite_helmet, zanite_chestplate, zanite_leggings, zanite_boots, zanite_gloves };
 

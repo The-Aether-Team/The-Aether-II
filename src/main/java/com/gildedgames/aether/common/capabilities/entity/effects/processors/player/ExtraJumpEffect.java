@@ -23,7 +23,7 @@ public class ExtraJumpEffect extends AbstractEffectProcessorPlayer<EntityEffectI
 
 	public ExtraJumpEffect()
 	{
-		super("ability.tripleJump.localizedName", "ability.tripleJump.desc");
+		super("ability.doubleJump.name", "ability.doubleJump.desc");
 	}
 
 	@Override
@@ -36,9 +36,9 @@ public class ExtraJumpEffect extends AbstractEffectProcessorPlayer<EntityEffectI
 
 		PlayerAetherImpl playerAether = PlayerAetherImpl.getPlayer(source);
 
-		playerAether.getAbilitiesModule().setMidAirJumpsAllowed(2);
+		playerAether.getAbilitiesModule().setMidAirJumpsAllowed(1);
 
-		NetworkingAether.sendPacketToPlayer(new MidAirJumpsChangedPacket(2), (EntityPlayerMP) source);
+		NetworkingAether.sendPacketToPlayer(new MidAirJumpsChangedPacket(1), (EntityPlayerMP) source);
 	}
 
 	@Override

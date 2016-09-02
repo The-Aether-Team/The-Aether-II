@@ -477,6 +477,7 @@ itemGroup.aether.rings=Rings
 itemGroup.aether.neckwear=Neckwear
 itemGroup.aether.relics=Relics
 itemGroup.aether.charms=Charms
+itemGroup.aether.artifacts=Artifacts
 
 # Containers
 container.holystone_furnace=Holystone Furnace
@@ -551,7 +552,7 @@ ability.invisibility.desc=§2Invisibility
 ability.changeAttackElement.desc=§2All Attacks Become:
 ability.setEnemiesOnFire.desc=§2Sets Enemies On Fire
 ability.fireImmunity.desc=§2Fire Immunity
-ability.tripleJump.desc=§2Triple Jump
+ability.doubleJump.desc=§2Double Jump
 ability.companion.desc=For Companion
 ability.leechLife.desc=%s Life Leech
 
