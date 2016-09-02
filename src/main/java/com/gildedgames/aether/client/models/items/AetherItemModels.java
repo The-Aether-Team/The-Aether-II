@@ -182,11 +182,6 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.gravitite_leggings, "armor/gravitite_leggings");
 		registerItemModels(ItemsAether.gravitite_boots, "armor/gravitite_boots");
 
-		registerItemModels(ItemsAether.obsidian_helmet, "armor/obsidian_helmet");
-		registerItemModels(ItemsAether.obsidian_chestplate, "armor/obsidian_chestplate");
-		registerItemModels(ItemsAether.obsidian_leggings, "armor/obsidian_leggings");
-		registerItemModels(ItemsAether.obsidian_boots, "armor/obsidian_boots");
-
 		registerItemModels(ItemsAether.neptune_helmet, "armor/neptune_helmet");
 		registerItemModels(ItemsAether.neptune_chestplate, "armor/neptune_chestplate");
 		registerItemModels(ItemsAether.neptune_leggings, "armor/neptune_leggings");
@@ -336,7 +331,6 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.neptune_gloves, "accessories/neptune_gloves");
 		registerItemModels(ItemsAether.phoenix_gloves, "accessories/phoenix_gloves");
 		registerItemModels(ItemsAether.valkyrie_gloves, "accessories/valkyrie_gloves");
-		registerItemModels(ItemsAether.obsidian_gloves, "accessories/obsidian_gloves");
 		registerItemModels(ItemsAether.leather_gloves, "accessories/leather_gloves");
 		registerItemModels(ItemsAether.iron_gloves, "accessories/iron_gloves");
 		registerItemModels(ItemsAether.gold_gloves, "accessories/gold_gloves");

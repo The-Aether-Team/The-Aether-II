@@ -244,11 +244,7 @@ public class ClientEventHandler
 
 			if (aePlayer != null)
 			{
-				if (PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.obsidian_armor_set))
-				{
-					KeyBinding.setKeyBindState(mc.gameSettings.keyBindSprint.getKeyCode(), false);
-				}
-				else if (aePlayer.getAbilitiesModule().getMidAirJumpsAllowed() > 0)
+				if (aePlayer.getAbilitiesModule().getMidAirJumpsAllowed() > 0)
 				{
 					if (mc.gameSettings.keyBindJump.isKeyDown() && !this.prevJumpBindState)
 					{

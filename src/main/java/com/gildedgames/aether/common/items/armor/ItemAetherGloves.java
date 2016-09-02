@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemAetherGloves extends Item implements IPhoenixChillable
+public class ItemAetherGloves extends Item
 {
 	public enum GloveType
 	{
@@ -47,26 +47,6 @@ public class ItemAetherGloves extends Item implements IPhoenixChillable
 		this.setMaxStackSize(1);
 
 		this.setCreativeTab(CreativeTabsAether.tabArmor);
-	}
-
-	@Override
-	public boolean canChillItemstack(ItemStack stack)
-	{
-		return this.getChilledItemstack(stack) != null;
-	}
-
-	@Override
-	public ItemStack getChilledItemstack(ItemStack stack)
-	{
-		if (stack.getItem() == ItemsAether.phoenix_gloves)
-		{
-			ItemStack newStack = stack.copy();
-			newStack.setItem(ItemsAether.obsidian_gloves);
-
-			return newStack;
-		}
-
-		return null;
 	}
 
 	@SideOnly(Side.CLIENT)

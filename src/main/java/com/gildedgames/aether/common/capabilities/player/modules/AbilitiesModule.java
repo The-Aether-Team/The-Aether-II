@@ -49,11 +49,6 @@ public class AbilitiesModule extends PlayerAetherModule
 		{
 			this.ticksAirborne++;
 		}
-
-		if (PlayerUtil.isWearingEquipment(this.getPlayerAether(), ItemsAether.obsidian_armor_set))
-		{
-			this.getPlayer().setSprinting(false);
-		}
 	}
 
 	@Override

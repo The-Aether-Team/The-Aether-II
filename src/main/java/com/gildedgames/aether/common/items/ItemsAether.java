@@ -77,8 +77,6 @@ public class ItemsAether
 
 	public static ItemPhoenixArmor phoenix_helmet, phoenix_chestplate, phoenix_leggings, phoenix_boots;
 
-	public static ItemObsidianArmor obsidian_helmet, obsidian_chestplate, obsidian_leggings, obsidian_boots;
-
 	public static ItemValkyrieArmor valkyrie_helmet, valkyrie_chestplate, valkyrie_leggings, valkyrie_boots;
 
 	public static Item golden_amber;
@@ -145,7 +143,7 @@ public class ItemsAether
 
 	public static Item aechor_petal;
 
-	public static Item zanite_gloves, gravitite_gloves, valkyrie_gloves, neptune_gloves, phoenix_gloves, obsidian_gloves;
+	public static Item zanite_gloves, gravitite_gloves, valkyrie_gloves, neptune_gloves, phoenix_gloves;
 
 	public static Item leather_gloves, iron_gloves, gold_gloves, chain_gloves, diamond_gloves;
 
@@ -168,8 +166,6 @@ public class ItemsAether
 	public static Item[] phoenix_armor_set;
 
 	public static Item[] neptune_armor_set;
-
-	public static Item[] obsidian_armor_set;
 
 	public static Item barbed_iron_ring, barbed_gold_ring;
 
@@ -289,12 +285,6 @@ public class ItemsAether
 		phoenix_leggings = registerItem("phoenix_leggings", new ItemPhoenixArmor(EntityEquipmentSlot.LEGS));
 		phoenix_boots = registerItem("phoenix_boots", new ItemPhoenixArmor(EntityEquipmentSlot.FEET));
         phoenix_gloves = registerItem("phoenix_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.PHOENIX));
-
-		obsidian_helmet = registerItem("obsidian_helmet", new ItemObsidianArmor(EntityEquipmentSlot.HEAD));
-		obsidian_chestplate = registerItem("obsidian_chestplate", new ItemObsidianArmor(EntityEquipmentSlot.CHEST));
-		obsidian_leggings = registerItem("obsidian_leggings", new ItemObsidianArmor(EntityEquipmentSlot.LEGS));
-		obsidian_boots = registerItem("obsidian_boots", new ItemObsidianArmor(EntityEquipmentSlot.FEET));
-		obsidian_gloves = registerItem("obsidian_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.OBSIDIAN));
 
 		valkyrie_helmet = registerItem("valkyrie_helmet", new ItemValkyrieArmor(EntityEquipmentSlot.HEAD));
 		valkyrie_chestplate = registerItem("valkyrie_chestplate", new ItemValkyrieArmor(EntityEquipmentSlot.CHEST));
@@ -527,7 +517,6 @@ public class ItemsAether
 		equipmentRegistry.register(ItemsAether.valkyrie_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.neptune_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.phoenix_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.obsidian_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.leather_gloves, ItemRarity.BASIC, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.iron_gloves, ItemRarity.BASIC, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.gold_gloves, ItemRarity.BASIC, ItemEquipmentType.HANDWEAR);
@@ -698,7 +687,6 @@ public class ItemsAether
 		ItemEffects.register(ItemsAether.valkyrie_gloves, new Effects().add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 2.5D)));
 		ItemEffects.register(ItemsAether.neptune_gloves, new Effects().add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 2.0D)));
 		ItemEffects.register(ItemsAether.phoenix_gloves, new Effects().add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 2.0D)));
-		ItemEffects.register(ItemsAether.obsidian_gloves, new Effects().add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 3.0D)));
 		ItemEffects.register(ItemsAether.barbed_iron_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 1.0D)));
 		ItemEffects.register(ItemsAether.barbed_gold_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 1.0D, 3.0D, false)));
 		ItemEffects.register(ItemsAether.solar_band, new Effects().add(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new InDirectSunlightRule())));
@@ -775,8 +763,6 @@ public class ItemsAether
 		phoenix_armor_set = new Item[] { phoenix_helmet, phoenix_chestplate, phoenix_leggings, phoenix_boots, phoenix_gloves };
 
 		neptune_armor_set = new Item[] { neptune_helmet, neptune_chestplate, neptune_leggings, neptune_boots, neptune_gloves };
-
-		obsidian_armor_set = new Item[] { obsidian_helmet, obsidian_chestplate, obsidian_leggings, obsidian_boots, obsidian_gloves };
 
 		registerItemProperties();
 	}
