@@ -46,6 +46,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 
+import static jdk.nashorn.internal.runtime.regexp.joni.encoding.CharacterType.D;
+
 public class ItemsAether
 {
 	public static Item skyroot_stick;
@@ -671,6 +673,110 @@ public class ItemsAether
 
 		}
 
+		/** ARMOR **/
+
+		ItemEffects.register(ItemsAether.gravitite_helmet, new Effects()
+				.add(EntityEffects.LEVITATE_ATTACKERS, new LevitateAttackersEffect.Instance(0.01D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(5D)));
+
+		ItemEffects.register(ItemsAether.gravitite_chestplate, new Effects()
+				.add(EntityEffects.LEVITATE_ATTACKERS, new LevitateAttackersEffect.Instance(0.05D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(15D)));
+
+		ItemEffects.register(ItemsAether.gravitite_leggings, new Effects()
+				.add(EntityEffects.LEVITATE_ATTACKERS, new LevitateAttackersEffect.Instance(0.02D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(7.5D)));
+
+		ItemEffects.register(ItemsAether.gravitite_boots, new Effects()
+				.add(EntityEffects.LEVITATE_ATTACKERS, new LevitateAttackersEffect.Instance(0.01D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(ItemsAether.gravitite_gloves, new Effects()
+				.add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 2.0D))
+				.add(EntityEffects.LEVITATE_ATTACKERS, new LevitateAttackersEffect.Instance(0.01D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(ItemsAether.phoenix_helmet, new Effects()
+				.add(EntityEffects.SET_ATTACKERS_ON_FIRE, new SetAttackersOnFireEffect.Instance(0.01D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(5D)));
+
+		ItemEffects.register(ItemsAether.phoenix_chestplate, new Effects()
+				.add(EntityEffects.SET_ATTACKERS_ON_FIRE, new SetAttackersOnFireEffect.Instance(0.05D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(15D)));
+
+		ItemEffects.register(ItemsAether.phoenix_leggings, new Effects()
+				.add(EntityEffects.SET_ATTACKERS_ON_FIRE, new SetAttackersOnFireEffect.Instance(0.02D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(7.5D)));
+
+		ItemEffects.register(ItemsAether.phoenix_boots, new Effects()
+				.add(EntityEffects.SET_ATTACKERS_ON_FIRE, new SetAttackersOnFireEffect.Instance(0.01D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(ItemsAether.phoenix_gloves, new Effects()
+				.add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.FIRE, 2.0D))
+				.add(EntityEffects.SET_ATTACKERS_ON_FIRE, new SetAttackersOnFireEffect.Instance(0.01D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(ItemsAether.neptune_helmet, new Effects()
+				.add(EntityEffects.MODIFY_DEFENSE, new ModifyDefenseEffect.Instance(ElementalState.WATER, 0.25D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(ItemsAether.neptune_chestplate, new Effects()
+				.add(EntityEffects.MODIFY_DEFENSE, new ModifyDefenseEffect.Instance(ElementalState.WATER, 0.75D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(5D)));
+
+		ItemEffects.register(ItemsAether.neptune_leggings, new Effects()
+				.add(EntityEffects.MODIFY_DEFENSE, new ModifyDefenseEffect.Instance(ElementalState.WATER, 0.5D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(ItemsAether.neptune_boots, new Effects()
+				.add(EntityEffects.MODIFY_DEFENSE, new ModifyDefenseEffect.Instance(ElementalState.WATER, 0.25D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(ItemsAether.neptune_gloves, new Effects()
+				.add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.WATER, 2.0D))
+				.add(EntityEffects.MODIFY_DEFENSE, new ModifyDefenseEffect.Instance(ElementalState.WATER, 0.25D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(ItemsAether.zanite_helmet, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(ItemsAether.zanite_chestplate, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(5D)));
+
+		ItemEffects.register(ItemsAether.zanite_leggings, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(ItemsAether.zanite_boots, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(ItemsAether.zanite_gloves, new Effects()
+				.add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 1.5D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(ItemsAether.valkyrie_helmet, new Effects()
+				.add(EntityEffects.MODIFY_DEFENSE, new ModifyDefenseEffect.Instance(ElementalState.AIR, 0.25D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(ItemsAether.valkyrie_chestplate, new Effects()
+				.add(EntityEffects.MODIFY_DEFENSE, new ModifyDefenseEffect.Instance(ElementalState.AIR, 0.75D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(5D)));
+
+		ItemEffects.register(ItemsAether.valkyrie_leggings, new Effects()
+				.add(EntityEffects.MODIFY_DEFENSE, new ModifyDefenseEffect.Instance(ElementalState.AIR, 0.5D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(ItemsAether.valkyrie_boots, new Effects()
+				.add(EntityEffects.MODIFY_DEFENSE, new ModifyDefenseEffect.Instance(ElementalState.AIR, 0.25D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(ItemsAether.valkyrie_gloves, new Effects()
+				.add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.AIR, 2.5D))
+				.add(EntityEffects.MODIFY_DEFENSE, new ModifyDefenseEffect.Instance(ElementalState.AIR, 0.25D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		/** OTHERS **/
+
 		ItemEffects.register(ItemsAether.iron_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 0.5D)));
 		ItemEffects.register(ItemsAether.gold_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 0.0D, 1.0D, false)));
 		ItemEffects.register(ItemsAether.iron_pendant, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 3.0D)));
@@ -685,11 +791,7 @@ public class ItemsAether
 		ItemEffects.register(ItemsAether.candy_ring, new Effects().add(EntityEffects.REDUCE_HUNGER));
 		ItemEffects.register(ItemsAether.bone_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 2.0D)));
 		ItemEffects.register(ItemsAether.skyroot_ring, new Effects().add(EntityEffects.DOUBLE_DROPS, new DoubleDropEffect.Instance(1.5D)));
-		ItemEffects.register(ItemsAether.zanite_gloves, new Effects().add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 1.5D)));
-		ItemEffects.register(ItemsAether.gravitite_gloves, new Effects().add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 2.0D)));
-		ItemEffects.register(ItemsAether.valkyrie_gloves, new Effects().add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 2.5D)));
-		ItemEffects.register(ItemsAether.neptune_gloves, new Effects().add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 2.0D)));
-		ItemEffects.register(ItemsAether.phoenix_gloves, new Effects().add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 2.0D)));
+
 		ItemEffects.register(ItemsAether.barbed_iron_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 1.0D)));
 		ItemEffects.register(ItemsAether.barbed_gold_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 1.0D, 3.0D, false)));
 		ItemEffects.register(ItemsAether.solar_band, new Effects().add(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new InDirectSunlightRule())));
@@ -726,7 +828,7 @@ public class ItemsAether
 		ItemEffects.register(ItemsAether.amulet_of_growth, new Effects().add(EntityEffects.MODIFY_MAX_HEALTH, new ModifyMaxHealthEffect.Instance(3.0D)));
 		ItemEffects.register(ItemsAether.arkenium_studded_choker, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 5.0D)));
 		ItemEffects.register(ItemsAether.raegorite_gorget, new Effects().add(EntityEffects.MODIFY_DEFENSE, new ModifyDefenseEffect.Instance(2.0D)));
-		ItemEffects.register(ItemsAether.gruegar_scarf, new Effects().add(EntityEffects.WEIGHT_TOLERANCE, new EntityEffectInstance()));
+		ItemEffects.register(ItemsAether.gruegar_scarf, new Effects().add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(-15D)));
 		ItemEffects.register(ItemsAether.moon_sect_warden_gorget, new Effects().add(EntityEffects.MODIFY_MAX_HEALTH, new ModifyMaxHealthEffect.Instance(1.5D)).add(EntityEffects.MODIFY_DEFENSE, new ModifyDefenseEffect.Instance(1.0D)));
 		ItemEffects.register(ItemsAether.thiefs_gorget, new Effects().add(EntityEffects.MODIFY_SPEED, new ModifySpeedEffect.Instance((float) SharedMonsterAttributes.MOVEMENT_SPEED.getDefaultValue() * 0.3D)).add(EntityEffects.INVISIBILITY, new EntityEffectInstance(new OutOfCombatRule(160))));
 		ItemEffects.register(ItemsAether.frostward_scarf, new Effects().add(EntityEffects.MODIFY_SPEED, new ModifySpeedEffect.Instance((float) SharedMonsterAttributes.MOVEMENT_SPEED.getDefaultValue() * 0.4D)).add(EntityEffects.MODIFY_DEFENSE, new ModifyDefenseEffect.Instance(ElementalState.FROST, 1.0D)));

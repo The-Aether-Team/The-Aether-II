@@ -19,6 +19,8 @@ public interface IEntityEffectsCapability
 
 	List<IEffectPool<?>> getEffectPools();
 
+	<I extends EntityEffectInstance> boolean hasInstance(EntityEffectProcessor<I> processor, I instance);
+
 	<I extends EntityEffectInstance> void addInstance(EntityEffectProcessor<I> processor, I instance);
 
 	<I extends EntityEffectInstance> void removeEntry(EntityEffectProcessor<I> processor);

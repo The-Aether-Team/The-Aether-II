@@ -252,7 +252,7 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 	}
 
 	@Override
-	public <S extends Entity> void onLivingAttacked(float amount, Entity target, S entity)
+	public <S extends Entity> void onLivingAttacked(float amount, Entity attacker, S entity)
 	{
 		List<I> instancesRulesMet = Lists.newArrayList();
 		List<I> instancesToCancel = Lists.newArrayList();
@@ -263,7 +263,7 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 
 			for (EntityEffectRule rule : instance.getRules())
 			{
-				boolean blocked = rule.blockLivingAttack(entity, amount, target);
+				boolean blocked = rule.blockLivingAttack(entity, amount, attacker);
 
 				if (!rule.isMet(entity) || blocked)
 				{
@@ -300,7 +300,7 @@ public class EffectPool<I extends EntityEffectInstance> implements IEffectPool<I
 
 		if (!instancesRulesMet.isEmpty())
 		{
-			this.getProcessor().onAttacked(amount, target, entity, instancesRulesMet);
+			this.getProcessor().onAttacked(amount, attacker, entity, instancesRulesMet);
 		}
 	}
 

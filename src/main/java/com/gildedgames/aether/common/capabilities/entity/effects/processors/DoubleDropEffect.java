@@ -11,6 +11,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class DoubleDropEffect extends AbstractEffectProcessor<Instance>
 	@Override
 	public String[] getFormatParameters(Entity source, Instance instance)
 	{
-		return new String[] { String.valueOf((int) (instance.getAttributes().getFloat("percentChance") * 10.0f)) };
+		return new String[] { "\u2022" + TextFormatting.ITALIC + " +" + String.valueOf((int) (instance.getAttributes().getFloat("percentChance") * 10.0f)) };
 	}
 
 	@Override

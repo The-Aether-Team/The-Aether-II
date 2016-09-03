@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.capabilities.entity.effects.processors.player;
 
+import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
 import com.gildedgames.aether.common.capabilities.entity.effects.processors.ModifyDamageEffect;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,7 +27,7 @@ public class ModifyPunchingDamageEffect extends ModifyDamageEffect
 	@Override
 	public String[] getUnlocalizedDesc(Entity source, Instance instance)
 	{
-		return new String[] { "ability.punchingDamage.desc" };
+		return new String[] { instance.getElementalDamageSource().getElementalState() == ElementalState.BIOLOGICAL ? "ability.punchingDamage.desc1" : "ability.punchingDamage.desc2"};
 	}
 
 	@Override

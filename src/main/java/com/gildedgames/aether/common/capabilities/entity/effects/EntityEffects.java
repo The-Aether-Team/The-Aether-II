@@ -26,8 +26,6 @@ public class EntityEffects implements IEntityEffectsCapability
 
 	public static final EffectProcessorPlayer<EntityEffectInstance> EXTRA_JUMPS = new ExtraJumpEffect();
 
-	public static final EffectProcessorPlayer<EntityEffectInstance> WEIGHT_TOLERANCE = new WeightToleranceEffect();
-
 	public static final EffectProcessorPlayer<ModifyXPCollectionEffect.Instance> MODIFY_XP_COLLECTION = new ModifyXPCollectionEffect();
 
 	public static final EffectProcessorPlayer<EntityEffectInstance> REDUCE_HUNGER = new ReduceHungerEffect();
@@ -65,6 +63,12 @@ public class EntityEffects implements IEntityEffectsCapability
 	public static final EntityEffectProcessor<ModifyDamageEffect.Instance> MODIFY_COMPANION_DAMAGE = new ModifyCompanionDamageEffect();
 
 	public static final EntityEffectProcessor<EntityEffectInstance> SLOWFALL = new SlowfallEffect();
+
+	public static final EntityEffectProcessor<ModifyWeightEffect.Instance> MODIFY_WEIGHT = new ModifyWeightEffect();
+
+	public static final EntityEffectProcessor<SetAttackersOnFireEffect.Instance> SET_ATTACKERS_ON_FIRE = new SetAttackersOnFireEffect();
+
+	public static final EntityEffectProcessor<LevitateAttackersEffect.Instance> LEVITATE_ATTACKERS = new LevitateAttackersEffect();
 
 	private final Entity entity;
 
@@ -104,6 +108,19 @@ public class EntityEffects implements IEntityEffectsCapability
 		this.effects.add(pool);
 
 		return pool;
+	}
+
+	@Override
+	public <I extends EntityEffectInstance> boolean hasInstance(EntityEffectProcessor<I> processor, I instance)
+	{
+		if (processor == null || instance == null)
+		{
+			return false;
+		}
+
+		EffectPool<I> pool = this.getPool(processor);
+
+		return pool != null && pool.getInstances().contains(instance);
 	}
 
 	@Override
