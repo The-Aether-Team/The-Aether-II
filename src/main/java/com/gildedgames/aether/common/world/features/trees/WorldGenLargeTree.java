@@ -24,8 +24,6 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 
 	public boolean branch(World world, Random random, BlockPos pos, int slant)
 	{
-		BlockPos.MutableBlockPos nPos = BlockPosUtil.toMutable(pos);
-
 		int directionX = random.nextInt(3) - 1;
 		int directionZ = random.nextInt(3) - 1;
 
@@ -34,7 +32,7 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 
 		for (int n = 0; n < 2; n++)
 		{
-			nPos.add(directionX, slant, directionZ);
+			BlockPos nPos = pos.add(directionX, slant, directionZ);
 
 			x -= directionX;
 			z -= directionZ;
@@ -42,9 +40,11 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 			if (world.getBlockState(nPos).getBlock() == this.leafBlock.getBlock())
 			{
 				world.setBlockState(nPos, this.logBlock, ChunkGeneratorAether.PLACEMENT_FLAG_TYPE);
-				world.setBlockState(new BlockPos(x, pos.getY(), z), this.logBlock, ChunkGeneratorAether.PLACEMENT_FLAG_TYPE);
+
+				world.setBlockState(new BlockPos(x, pos.getY() + slant, z), this.logBlock, ChunkGeneratorAether.PLACEMENT_FLAG_TYPE);
 			}
 		}
+
 		return true;
 	}
 
@@ -136,21 +136,28 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 				}
 			}
 		}
-		for (int n = 0; n < (height - 2); n++)
-		{
-			nPos.setPos(pos.getX(), pos.getY() + n, pos.getZ());
 
-			if (n > 4)
+		for (int y = 0; y < height; y++)
+		{
+			nPos.setPos(pos.getX(), pos.getY() + y, pos.getZ());
+
+			if (y < (height - 2))
 			{
-				//randomly branch
-				this.branch(world, random, pos, n / 4 - 1);
+				if (this.isReplaceable(world, nPos))
+				{
+					world.setBlockState(nPos, this.logBlock, ChunkGeneratorAether.PLACEMENT_FLAG_TYPE);
+				}
 			}
 
-			if (this.isReplaceable(world, nPos))
+			if (y > 4)
 			{
-				world.setBlockState(nPos, this.logBlock, ChunkGeneratorAether.PLACEMENT_FLAG_TYPE);
+				for (int i = 0; i < 3; i++)
+				{
+					this.branch(world, random, nPos, 0);
+				}
 			}
 		}
+
 		return true;
 	}
 
