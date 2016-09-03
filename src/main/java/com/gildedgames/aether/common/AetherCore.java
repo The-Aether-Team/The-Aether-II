@@ -80,8 +80,8 @@ public class AetherCore implements IAetherServices
 	@EventHandler
 	public void onFingerprintViolation(FMLFingerprintViolationEvent event)
 	{
-		AetherCore.LOGGER.warn("The Aether's signature is invalid and as such, this version will not receive support. Either you're running in a development environment, your JAR is corrupted, " +
-				"or you've downloaded an unofficial version of the Aether II. Proceed at your own risk.");
+		AetherCore.LOGGER.warn("Heads up! Forge has failed to validate the integrity of the Aether.");
+		AetherCore.LOGGER.warn("This Aether mod could be running in a development workspace, corrupted, or packaged as an unofficial build. Proceed at your own risk.");
 	}
 
 	public static ResourceLocation getResource(String name)
