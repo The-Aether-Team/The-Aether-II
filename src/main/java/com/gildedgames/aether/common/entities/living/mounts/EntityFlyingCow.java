@@ -83,13 +83,13 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 	@Override
 	protected int getItemQuantityDropped()
 	{
-		return this.rand.nextInt(3);
+		return 0;
 	}
 
 	@Override
 	protected Item getDropItem()
 	{
-		return this.isBurning() ? Items.COOKED_BEEF : Items.BEEF;
+		return null;
 	}
 
 	@Override
@@ -142,6 +142,34 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 	public float maxAirborneTime()
 	{
 		return 5.0F;
+	}
+
+	@Override
+	protected void dropFewItems(boolean p_70628_1_, int looting)
+	{
+		super.dropFewItems(p_70628_1_, looting);
+
+		int j = this.rand.nextInt(3) + this.rand.nextInt(1 + looting);
+		int k;
+
+		for (k = 0; k < j; ++k)
+		{
+			this.dropItem(Items.LEATHER, 1);
+		}
+
+		j = this.rand.nextInt(3) + 1 + this.rand.nextInt(1 + looting);
+
+		for (k = 0; k < j; ++k)
+		{
+			if (this.isBurning())
+			{
+				this.dropItem(Items.COOKED_BEEF, 1);
+			}
+			else
+			{
+				this.dropItem(Items.BEEF, 1);
+			}
+		}
 	}
 
 }
