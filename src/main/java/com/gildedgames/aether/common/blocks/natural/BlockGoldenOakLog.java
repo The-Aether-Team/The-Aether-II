@@ -45,7 +45,7 @@ public class BlockGoldenOakLog extends BlockAetherLog implements ISkyrootMinable
 	{
 		List<ItemStack> drops = Lists.newArrayList();
 
-		drops.add(new ItemStack(state.getBlock()));
+		drops.add(new ItemStack(state.getBlock().getItemDropped(state, living.getRNG(), 0)));
 		drops.add(new ItemStack(ItemsAether.golden_amber, world.rand.nextInt(3) + 1));
 
 		return drops;
