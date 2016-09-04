@@ -105,40 +105,40 @@ public class ClientEventHandler
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRenderGui(RenderGameOverlayEvent event)
 	{
-		if (event.isCancelable() || event.getType() != RenderGameOverlayEvent.ElementType.ALL)
-		{
-			return;
-		}
-
 		Minecraft mc = Minecraft.getMinecraft();
 
 		ScaledResolution scaledRes = new ScaledResolution(mc);
 
-		if (!mc.thePlayer.isPotionActive(MobEffects.NAUSEA))
+		if (event.getType() == RenderGameOverlayEvent.ElementType.PORTAL)
 		{
-			PlayerAetherImpl playerAether = PlayerAetherImpl.getPlayer(mc.thePlayer);
-			TeleportingModule teleporter = playerAether.getTeleportingModule();
-
-			float timeInPortal = teleporter.getPrevTimeInPortal() + (teleporter.getTimeInPortal() - teleporter.getPrevTimeInPortal()) * this.timer.renderPartialTicks;
-
-			if (timeInPortal > 0.0F)
+			if (!mc.thePlayer.isPotionActive(MobEffects.NAUSEA))
 			{
-				this.renderAetherPortalHUD(timeInPortal, scaledRes);
+				PlayerAetherImpl playerAether = PlayerAetherImpl.getPlayer(mc.thePlayer);
+				TeleportingModule teleporter = playerAether.getTeleportingModule();
+
+				float timeInPortal = teleporter.getPrevTimeInPortal() + (teleporter.getTimeInPortal() - teleporter.getPrevTimeInPortal()) * this.timer.renderPartialTicks;
+
+				if (timeInPortal > 0.0F)
+				{
+					this.renderAetherPortalHUD(timeInPortal, scaledRes);
+				}
 			}
 		}
-
-		if (mc.thePlayer.isRiding())
+		else if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR)
 		{
-			if (mc.thePlayer.getRidingEntity() instanceof IMount)
+			if (mc.thePlayer.isRiding())
 			{
-				IMount mount = (IMount)mc.thePlayer.getRidingEntity();
-				IMountProcessor processor = mount.getMountProcessor();
-
-				if (processor instanceof FlyingMount)
+				if (mc.thePlayer.getRidingEntity() instanceof IMount)
 				{
-					FlyingMount flyingMount = (FlyingMount)processor;
+					IMount mount = (IMount)mc.thePlayer.getRidingEntity();
+					IMountProcessor processor = mount.getMountProcessor();
 
-					DUMMY_GUI.drawCenteredString(mc.fontRendererObj, String.valueOf((int)(flyingMount.getData().getRemainingAirborneTime())), scaledRes.getScaledWidth() / 2, scaledRes.getScaledHeight() - 30, 0xFFFFFF);
+					if (processor instanceof FlyingMount)
+					{
+						FlyingMount flyingMount = (FlyingMount)processor;
+
+						DUMMY_GUI.drawCenteredString(mc.fontRendererObj, String.valueOf((int)(flyingMount.getData().getRemainingAirborneTime())), scaledRes.getScaledWidth() / 2, scaledRes.getScaledHeight() - 30, 0xFFFFFF);
+					}
 				}
 			}
 		}
