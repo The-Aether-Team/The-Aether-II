@@ -8,6 +8,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
@@ -53,13 +55,35 @@ public class LevitateAttackersEffect extends AbstractEffectProcessor<LevitateAtt
 	@Override
 	public void onHurt(LivingHurtEvent event, Entity source, List<Instance> all)
 	{
-		if (!(source instanceof EntityLivingBase) || !(event.getSource().getSourceOfDamage() instanceof EntityLivingBase))
+		if (!(source instanceof EntityLivingBase) || (!(event.getSource().getSourceOfDamage() instanceof EntityLivingBase) && !(event.getSource() instanceof EntityDamageSource)))
 		{
 			return;
 		}
 
 		EntityLivingBase living = (EntityLivingBase)source;
-		EntityLivingBase attackerLiving = (EntityLivingBase)event.getSource().getSourceOfDamage();
+		EntityLivingBase attackerLiving = null;
+
+		if (event.getSource() instanceof EntityDamageSource)
+		{
+			EntityDamageSource damageSource = (EntityDamageSource)event.getSource();
+
+			if (damageSource.getEntity() instanceof EntityLivingBase)
+			{
+				attackerLiving = (EntityLivingBase) damageSource.getEntity();
+			}
+		}
+
+		if (attackerLiving == null)
+		{
+			if (!(event.getSource().getSourceOfDamage() instanceof EntityLivingBase))
+			{
+				return;
+			}
+			else
+			{
+				attackerLiving = (EntityLivingBase)event.getSource().getSourceOfDamage();
+			}
+		}
 
 		double overallChance = 0.0D;
 
