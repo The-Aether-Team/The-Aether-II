@@ -34,6 +34,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
@@ -774,6 +775,86 @@ public class ItemsAether
 				.add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.AIR, 2.5D))
 				.add(EntityEffects.MODIFY_DEFENSE, new ModifyDefenseEffect.Instance(ElementalState.AIR, 0.25D))
 				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(Items.LEATHER_HELMET, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(1D)));
+
+		ItemEffects.register(Items.LEATHER_CHESTPLATE, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(3D)));
+
+		ItemEffects.register(Items.LEATHER_LEGGINGS, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2D)));
+
+		ItemEffects.register(Items.LEATHER_BOOTS, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(1D)));
+
+		ItemEffects.register(ItemsAether.leather_gloves, new Effects()
+				.add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 0.5D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(1D)));
+
+		ItemEffects.register(Items.IRON_HELMET, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(Items.IRON_CHESTPLATE, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(5D)));
+
+		ItemEffects.register(Items.IRON_LEGGINGS, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(Items.IRON_BOOTS, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(ItemsAether.iron_gloves, new Effects()
+				.add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 1.0D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(Items.DIAMOND_HELMET, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(5D)));
+
+		ItemEffects.register(Items.DIAMOND_CHESTPLATE, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(15D)));
+
+		ItemEffects.register(Items.DIAMOND_LEGGINGS, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(5D)));
+
+		ItemEffects.register(Items.DIAMOND_BOOTS, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(5D)));
+
+		ItemEffects.register(ItemsAether.diamond_gloves, new Effects()
+				.add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 1.5D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(5D)));
+
+		ItemEffects.register(Items.GOLDEN_HELMET, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(1D)));
+
+		ItemEffects.register(Items.GOLDEN_CHESTPLATE, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(3D)));
+
+		ItemEffects.register(Items.GOLDEN_LEGGINGS, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2D)));
+
+		ItemEffects.register(Items.GOLDEN_BOOTS, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(1D)));
+
+		ItemEffects.register(ItemsAether.gold_gloves, new Effects()
+				.add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 0.5D, 1.0D, true))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(1D)));
+
+		ItemEffects.register(Items.CHAINMAIL_HELMET, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(1.5D)));
+
+		ItemEffects.register(Items.CHAINMAIL_CHESTPLATE, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(3D)));
+
+		ItemEffects.register(Items.CHAINMAIL_LEGGINGS, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2D)));
+
+		ItemEffects.register(Items.CHAINMAIL_BOOTS, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(1.5D)));
+
+		ItemEffects.register(ItemsAether.chain_gloves, new Effects()
+				.add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 1.0D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(1.5D)));
 
 		/** OTHERS **/
 
