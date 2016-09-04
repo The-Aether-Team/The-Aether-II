@@ -20,6 +20,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+
 public abstract class EntityFlyingAnimal extends EntityAetherAnimal implements IMount, IFlyingMountData
 {
 
@@ -31,8 +33,6 @@ public abstract class EntityFlyingAnimal extends EntityAetherAnimal implements I
 
 	@SideOnly(Side.CLIENT)
 	public float wingFold, wingAngle;
-
-	private EnumActionResult prevInteractResult;
 
 	public EntityFlyingAnimal(World world)
 	{
@@ -81,37 +81,31 @@ public abstract class EntityFlyingAnimal extends EntityAetherAnimal implements I
 	}
 
 	@Override
-	public EnumActionResult applyPlayerInteraction(EntityPlayer player, Vec3d vec, ItemStack stack, EnumHand hand)
+	public boolean processInteract(EntityPlayer player, EnumHand hand, @Nullable ItemStack stack)
 	{
-		EnumActionResult result = super.applyPlayerInteraction(player, vec, stack, hand);
-
-		this.prevInteractResult = result;
-
-		if (result == EnumActionResult.SUCCESS)
+		if (!super.processInteract(player, hand, stack))
 		{
-			return EnumActionResult.SUCCESS;
-		}
-
-		if (!player.worldObj.isRemote)
-		{
-			if (!this.isSaddled() && stack != null && stack.getItem() == Items.SADDLE)
+			if (!player.worldObj.isRemote)
 			{
-				this.setIsSaddled(true);
-
-				if (!player.capabilities.isCreativeMode)
+				if (!this.isSaddled() && stack != null && stack.getItem() == Items.SADDLE)
 				{
-					player.getActiveItemStack().stackSize--;
+					this.setIsSaddled(true);
+
+					if (!player.capabilities.isCreativeMode)
+					{
+						player.getActiveItemStack().stackSize--;
+					}
+
+					return true;
 				}
-
-				this.prevInteractResult = EnumActionResult.SUCCESS;
-
-				return EnumActionResult.SUCCESS;
+				else
+				{
+					return false;
+				}
 			}
 		}
 
-		this.prevInteractResult = EnumActionResult.FAIL;
-
-		return EnumActionResult.FAIL;
+		return true;
 	}
 
 	@Override
@@ -195,7 +189,7 @@ public abstract class EntityFlyingAnimal extends EntityAetherAnimal implements I
 	@Override
 	public boolean canProcessMountInteraction(EntityPlayer rider, ItemStack stack)
 	{
-		return this.prevInteractResult != EnumActionResult.SUCCESS && (stack == null || stack.getItem() != Items.LEAD);
+		return (stack == null || stack.getItem() != Items.LEAD);
 	}
 
 	public abstract float maxAirborneTime();

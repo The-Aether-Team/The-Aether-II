@@ -31,6 +31,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.Set;
 
+import static sun.audio.AudioPlayer.player;
+
 public class EntityAerbunny extends EntityAetherAnimal implements IEntityProperties
 {
 
@@ -125,19 +127,26 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 	}
 
 	@Override
-	public EnumActionResult applyPlayerInteraction(EntityPlayer player, Vec3d vec, ItemStack stack, EnumHand hand)
+	public boolean processInteract(EntityPlayer player, EnumHand hand, @Nullable ItemStack stack)
 	{
-		this.worldObj.playSound(player, player.getPosition(), SoundsAether.aerbunny_lift, SoundCategory.NEUTRAL, 1.0F, 0.8F + (this.rand.nextFloat() * 0.5F));
-
-		if (!this.isRiding() && player.getPassengers().size() <= 0)
+		if (!super.processInteract(player, hand, stack) && !this.isBreedingItem(stack))
 		{
-			this.startRiding(player, true);
-			AetherCore.PROXY.displayDismountMessage();
+			if (!this.isRiding() && player.getPassengers().size() <= 0)
+			{
+				this.worldObj.playSound(player, player.getPosition(), SoundsAether.aerbunny_lift, SoundCategory.NEUTRAL, 1.0F, 0.8F + (this.rand.nextFloat() * 0.5F));
 
-			return EnumActionResult.SUCCESS;
+				this.startRiding(player, true);
+				AetherCore.PROXY.displayDismountMessage();
+
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
-		return super.applyPlayerInteraction(player, vec, stack, hand);
+		return true;
 	}
 
 	@Override
@@ -234,7 +243,9 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 	@Override
 	public boolean isBreedingItem(@Nullable ItemStack stack)
 	{
-		return stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
+		boolean flag = stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
+
+		return flag;
 	}
 
 }
