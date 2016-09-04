@@ -117,7 +117,7 @@ public class ItemDartShooter extends Item
 				dart.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
 			}
 
-			world.playSound(player, player.getPosition(), SoundsAether.dart_shooter_fire, SoundCategory.PLAYERS, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + speed * 0.5F);
+			player.playSound(SoundsAether.dart_shooter_fire, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + speed * 0.5F);
 
 			if (!world.isRemote)
 			{

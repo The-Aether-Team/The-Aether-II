@@ -34,7 +34,7 @@ public class SoundsAether
 
 	public static final SoundEvent record_recording_892 = new SoundEvent(AetherCore.getResource("records.recording_892"));
 
-	public static final SoundEvent dart_shooter_fire = new SoundEvent(AetherCore.getResource("random.dart_shooter"));
+	public static final SoundEvent dart_shooter_fire = new SoundEvent(AetherCore.getResource("random.dart_shooter.fire"));
 
 	public static final SoundEvent cockatrice_hurt = new SoundEvent(AetherCore.getResource("mob.cockatrice.hurt"));
 
@@ -137,7 +137,7 @@ public class SoundsAether
 		registerSound("record.recording_892", record_recording_892);
 		registerSound("record.valkyrie", record_valkyrie);
 
-		registerSound("weapon.dart_shooter.fire", dart_shooter_fire);
+		registerSound("random.dart_shooter.fire", dart_shooter_fire);
 
 		registerSound("mob.moa.ambient", moa_ambient);
 		registerSound("mob.moa.hurt", moa_hurt);
