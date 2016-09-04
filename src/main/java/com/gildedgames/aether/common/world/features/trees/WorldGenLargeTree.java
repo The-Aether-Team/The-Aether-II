@@ -29,15 +29,9 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 		int directionX = random.nextInt(3) - 1;
 		int directionZ = random.nextInt(3) - 1;
 
-		int x = pos.getX();
-		int z = pos.getY();
-
 		for (int n = 0; n < 2; n++)
 		{
 			BlockPosUtil.add(nPos, directionX, slant, directionZ);
-
-			x -= directionX;
-			z -= directionZ;
 
 			if (world.getBlockState(nPos).getBlock() == this.leafBlock.getBlock())
 			{
@@ -121,15 +115,15 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 		}
 
 		//make a big ball of leaves
-		for (int x = pos.getX() - 3; x < pos.getX() + 5; x++)
+		for (int x = pos.getX() - 4; x < pos.getX() + 6; x++)
 		{
 			for (int y = pos.getY() + 5; y < pos.getY() + 13; y++)
 			{
-				for (int z = pos.getZ() - 3; z < pos.getZ() + 5; z++)
+				for (int z = pos.getZ() - 4; z < pos.getZ() + 6; z++)
 				{
 					nPos.setPos(x, y, z);
 
-					if ((x - pos.getX()) * (x - pos.getX()) + (y - pos.getY() - 8) * (y - pos.getY() - 8) + (z - pos.getZ()) * (z - pos.getZ()) < 12 + random.nextInt(5) && world.getBlockState(nPos).getBlock() == Blocks.AIR)
+					if ((x - pos.getX()) * (x - pos.getX()) + (y - pos.getY() - 8) * (y - pos.getY() - 8) + (z - pos.getZ()) * (z - pos.getZ()) < 16 + random.nextInt(5) && world.getBlockState(nPos).getBlock() == Blocks.AIR)
 					{
 						world.setBlockState(nPos, this.leafBlock);
 					}
