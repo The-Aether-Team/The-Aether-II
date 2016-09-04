@@ -37,6 +37,7 @@ import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockButtonStone;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -364,6 +365,21 @@ public class BlocksAether
 
 		registerBlock("woven_skyroot_sticks", BlocksAether.woven_skyroot_sticks.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("moa_egg", BlocksAether.moa_egg);
+
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_log_wall, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_planks, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_chest, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_crafting_table, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_door, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_fence, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_fence_gate, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_ladder, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_pressure_plate, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_bed, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_slab, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_trapdoor, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_stairs, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_button, 5, 5);
 
 		registerHarvestLevels();
 
