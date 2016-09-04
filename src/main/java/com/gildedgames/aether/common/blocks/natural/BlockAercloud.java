@@ -68,7 +68,7 @@ public class BlockAercloud extends Block implements IBlockVariants
 				@Override
 				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
 				{
-					if (!(entity instanceof EntityPlayer))
+					if (!(entity instanceof EntityPlayer) && entity.getPassengers().isEmpty())
 					{
 						if (entity.motionY > -0.2D)
 						{

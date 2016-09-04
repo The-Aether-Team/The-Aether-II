@@ -132,7 +132,7 @@ public class MountProcessor
 		mount.rotationYawHead = mount.renderYawOffset;
 
 		float strafe = rider.moveStrafing * 0.5F;
-		float forward = rider.moveForward;
+		float forward = rider.moveForward * (mount.onGround ? 0.5F : 1.0F);
 
 		if (forward <= 0.0F)
 		{
@@ -156,12 +156,6 @@ public class MountProcessor
 
 		mount.motionY = 0.0F;
 
-		if (mount.onGround)
-		{
-			mount.motionX = 0.0F;
-			mount.motionZ = 0.0F;
-		}
-
 		float oldLimbSwingAmount = mount.limbSwingAmount;
 		float oldPrevLimbSwingAmount = mount.prevLimbSwingAmount;
 		float oldLimbSwing = mount.limbSwing;
@@ -178,7 +172,7 @@ public class MountProcessor
 
 		mount.motionY = oldMotionY;
 
-		mount.prevLimbSwingAmount = mount.limbSwingAmount;
+		/*mount.prevLimbSwingAmount = mount.limbSwingAmount;
 		double d1 = mount.posX - mount.prevPosX;
 		double d0 = mount.posZ - mount.prevPosZ;
 		float f2 = MathHelper.sqrt_double(d1 * d1 + d0 * d0) * 4.0F;
@@ -189,7 +183,7 @@ public class MountProcessor
 		}
 
 		mount.limbSwingAmount += (f2 - mount.limbSwingAmount) * 0.4F;
-		mount.limbSwing += mount.limbSwingAmount;
+		mount.limbSwing += mount.limbSwingAmount;*/
 	}
 
 }
