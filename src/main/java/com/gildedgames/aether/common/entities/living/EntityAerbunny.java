@@ -120,7 +120,7 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 	{
 		this.worldObj.playSound(player, player.getPosition(), SoundsAether.aerbunny_lift, SoundCategory.NEUTRAL, 1.0F, 0.8F + (this.rand.nextFloat() * 0.5F));
 
-		if (!this.isRiding())
+		if (!this.isRiding() && player.getPassengers().size() <= 0)
 		{
 			this.startRiding(player, true);
 			AetherCore.PROXY.displayDismountMessage();
