@@ -221,22 +221,22 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 					{
 						case SMALL_ROOM:
 						{
-							this.generateTile(layer, x, layer.smallestRoomHeight(), z, BlocksAether.labyrinth_wall.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
+							//this.generateTile(layer, x, layer.smallestRoomHeight(), z, BlocksAether.labyrinth_wall.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
 							break;
 						}
 						case END_ROOM:
 						{
-							this.generateTile(layer, x, layer.smallestRoomHeight(), z, Blocks.GLOWSTONE.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
+							//this.generateTile(layer, x, layer.smallestRoomHeight(), z, Blocks.GLOWSTONE.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
 							break;
 						}
 						case ENTRANCE_ROOM:
 						{
-							this.generateTile(layer, x, layer.smallestRoomHeight(), z, Blocks.DIAMOND_BLOCK.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
+							//this.generateTile(layer, x, layer.smallestRoomHeight(), z, Blocks.DIAMOND_BLOCK.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
 							break;
 						}
 						case BIG_ROOM:
 						{
-							this.generateTile(layer, x, layer.smallestRoomHeight(), z, BlocksAether.labyrinth_wall.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
+							//this.generateTile(layer, x, layer.smallestRoomHeight(), z, BlocksAether.labyrinth_wall.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
 							break;
 						}
 						case PATH:
