@@ -80,11 +80,9 @@ public class ParachuteModule extends PlayerAetherModule
 
 		if (!isParachuting && !this.getPlayer().getEntityWorld().isRemote)
 		{
-			EntityItem item = new EntityItem(this.getPlayer().getEntityWorld(), this.getPlayer().posX, this.getPlayer().posY, this.getPlayer().posZ, new ItemStack(Items.STRING, 1));
 			EntityItem block = new EntityItem(this.getPlayer().getEntityWorld(), this.getPlayer().posX, this.getPlayer().posY, this.getPlayer().posZ, new ItemStack(ItemsAether.cloud_parachute, 1, type.ordinal()));
 
 			this.getPlayer().getEntityWorld().spawnEntityInWorld(block);
-			this.getPlayer().getEntityWorld().spawnEntityInWorld(item);
 		}
 	}
 
