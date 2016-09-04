@@ -326,7 +326,7 @@ public class BlocksAether
 		registerBlock("divine_sentry_wall", BlocksAether.divine_sentry_wall.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("divine_stone_wall", BlocksAether.divine_stone_wall.setCreativeTab(CreativeTabsAether.tabBlocks));
 
-		registerBlock("labyrinth_totem", BlocksAether.labyrinth_totem.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("labyrinth_totem", BlocksAether.labyrinth_totem.setBlockUnbreakable().setResistance(6000000.0F).setCreativeTab(CreativeTabsAether.tabBlocks));
 
 		registerBlock("multiblock_dummy", BlocksAether.multiblock_dummy);
 
