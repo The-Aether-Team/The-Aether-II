@@ -3,8 +3,10 @@ package com.gildedgames.aether.common.entities.living;
 import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.google.common.collect.Sets;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -26,8 +28,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.Set;
+
 public class EntityAerbunny extends EntityAetherAnimal implements IEntityProperties
 {
+
+	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(new Item[] {Items.CARROT, Items.POTATO, Items.BEETROOT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry});
+
 	@SideOnly(Side.CLIENT)
 	private double prevMotionY;
 
@@ -39,7 +47,8 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 		super(world);
 
 		this.tasks.addTask(1, new EntityAISwimming(this));
-		this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
+		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
 		this.tasks.addTask(4, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 12.0F, 1.2F, 1.8F));
 		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(11, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
@@ -220,6 +229,12 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 	public ElementalState getElementalState()
 	{
 		return ElementalState.AIR;
+	}
+
+	@Override
+	public boolean isBreedingItem(@Nullable ItemStack stack)
+	{
+		return stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
 	}
 
 }

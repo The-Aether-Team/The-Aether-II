@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
 import com.gildedgames.aether.common.entities.util.mounts.IFlyingMountData;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.util.PlayerUtil;
+import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -27,9 +28,12 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.Set;
 
 public class EntityFlyingCow extends EntityFlyingAnimal
 {
+
+	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(new Item[] {Items.WHEAT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry});
 
 	public EntityFlyingCow(World world)
 	{
@@ -38,7 +42,7 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIPanic(this, 2.0D));
 		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
-		this.tasks.addTask(3, new EntityAITempt(this, 1.25D, Items.WHEAT, false));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
 		this.tasks.addTask(4, new EntityAIFollowParent(this, 1.25D));
 		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
@@ -170,6 +174,12 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 				this.dropItem(Items.BEEF, 1);
 			}
 		}
+	}
+
+	@Override
+	public boolean isBreedingItem(@Nullable ItemStack stack)
+	{
+		return stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
 	}
 
 }

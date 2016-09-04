@@ -11,6 +11,7 @@ import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.genes.util.GeneUtil;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
+import com.google.common.collect.Sets;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,6 +20,7 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -32,10 +34,15 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+import java.util.Set;
+
 import static sun.audio.AudioPlayer.player;
 
 public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements EntityGroupMember, IMount, IFlyingMountData
 {
+
+	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(new Item[] {Items.WHEAT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry});
 
 	private static final DataParameter<Integer> REMAINING_JUMPS = EntityDataManager.createKey(EntityMoa.class, DataSerializers.VARINT);
 
@@ -108,7 +115,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		this.tasks.addTask(8, new AIAnimalPack(this, 0.55F));
 		this.tasks.addTask(10, new AIStayNearNest(this, 8, 0.55F));
 		this.tasks.addTask(12, new AIAvoidEntityAsChild(this, EntityPlayer.class, 5.0F, 0.3D, 0.3D));
-		this.tasks.addTask(13, new EntityAITempt(this, 0.25F, Items.WHEAT, false));
+		this.tasks.addTask(13, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
 		this.tasks.addTask(14, new EntityAIAttackMelee(this, 0.7D, true));
 
 		this.targetTasks.addTask(1, new AIProtectPack(this));
@@ -533,6 +540,12 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	public float maxAirborneTime()
 	{
 		return 20.0F;
+	}
+
+	@Override
+	public boolean isBreedingItem(@Nullable ItemStack stack)
+	{
+		return stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
 	}
 
 }
