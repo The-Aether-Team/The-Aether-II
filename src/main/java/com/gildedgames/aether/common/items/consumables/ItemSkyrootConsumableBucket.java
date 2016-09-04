@@ -4,9 +4,11 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -59,7 +61,7 @@ public class ItemSkyrootConsumableBucket extends Item
 		}
 		else if (stack.getItem() == ItemsAether.skyroot_poison_bucket)
 		{
-			// TODO: Poison player.
+			player.addPotionEffect(new PotionEffect(MobEffects.POISON, 100, 3));
 		}
 	}
 
