@@ -97,7 +97,7 @@ public class CommonEvents
 			boolean hasWaterFluid = fluidStack != null && fluidStack.getFluid().getName().equals(FluidRegistry.WATER.getName());
 			boolean hasLavaFluid = fluidStack != null && fluidStack.getFluid().getName().equals(FluidRegistry.LAVA.getName());
 
-			if (hasWaterFluid || event.getEmptyBucket().getItem() == Items.WATER_BUCKET)
+			if (hasWaterFluid || event.getEmptyBucket().getItem() == Items.WATER_BUCKET || event.getEmptyBucket().getItem() == ItemsAether.skyroot_water_bucket)
 			{
 				CommonEvents.onWaterPlaced(event, player, pos);
 			}
