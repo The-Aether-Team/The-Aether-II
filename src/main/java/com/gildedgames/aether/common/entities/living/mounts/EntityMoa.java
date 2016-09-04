@@ -517,7 +517,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	@Override
 	public boolean canProcessMountInteraction(EntityPlayer rider, ItemStack stack)
 	{
-		return (stack == null || stack.getItem() != Items.LEAD);
+		return !this.isBreedingItem(stack) && (stack == null || stack.getItem() != Items.LEAD);
 	}
 
 	@Override
