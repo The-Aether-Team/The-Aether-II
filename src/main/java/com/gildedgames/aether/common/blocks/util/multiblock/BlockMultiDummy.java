@@ -14,6 +14,9 @@ public class BlockMultiDummy extends BlockMultiBase
 	public BlockMultiDummy()
 	{
 		super(Material.ROCK);
+
+		this.setBlockUnbreakable();
+		this.setResistance(6000000.0F);
 	}
 
 	@Override
