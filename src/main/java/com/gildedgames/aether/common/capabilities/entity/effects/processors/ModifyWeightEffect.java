@@ -2,20 +2,13 @@ package com.gildedgames.aether.common.capabilities.entity.effects.processors;
 
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
-import com.gildedgames.aether.api.capabilites.entity.properties.ElementalDamageSource;
-import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
-import com.gildedgames.aether.api.capabilites.entity.properties.IEntityPropertiesCapability;
 import com.gildedgames.aether.common.capabilities.entity.effects.AbstractEffectProcessor;
-import com.gildedgames.aether.common.capabilities.entity.properties.EntityProperties;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import java.util.List;
 
@@ -25,7 +18,7 @@ public class ModifyWeightEffect extends AbstractEffectProcessor<ModifyWeightEffe
 	public static class Instance extends EntityEffectInstance
 	{
 
-		private AttributeModifier modifier;
+		private AttributeModifier movementSpeedMod, attackSpeedMod;
 
 		public Instance(double weightKg, EntityEffectRule... rules)
 		{
@@ -35,7 +28,8 @@ public class ModifyWeightEffect extends AbstractEffectProcessor<ModifyWeightEffe
 
 			double percent = (-weightKg / 3.0D) * 0.01D;
 
-			this.modifier = new AttributeModifier("Negative Weight Speed", percent * SharedMonsterAttributes.MOVEMENT_SPEED.getDefaultValue(), 2).setSaved(false);
+			this.movementSpeedMod = new AttributeModifier("Negative Weight Speed", percent * SharedMonsterAttributes.MOVEMENT_SPEED.getDefaultValue(), 2).setSaved(false);
+			this.attackSpeedMod = new AttributeModifier("Negative Weight Attack Speed", percent * SharedMonsterAttributes.ATTACK_SPEED.getDefaultValue(), 2).setSaved(false);
 		}
 
 		public double getWeightInKg()
@@ -43,9 +37,14 @@ public class ModifyWeightEffect extends AbstractEffectProcessor<ModifyWeightEffe
 			return this.getAttributes().getDouble("weightKg");
 		}
 
-		public AttributeModifier getModifier()
+		public AttributeModifier getMovementSpeedModifier()
 		{
-			return this.modifier;
+			return this.movementSpeedMod;
+		}
+
+		public AttributeModifier getAttackSpeedModifier()
+		{
+			return this.attackSpeedMod;
 		}
 
 		@Override
@@ -101,11 +100,17 @@ public class ModifyWeightEffect extends AbstractEffectProcessor<ModifyWeightEffe
 
 		EntityLivingBase living = (EntityLivingBase) source;
 
-		IAttributeInstance attribute = living.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+		IAttributeInstance movement = living.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+		IAttributeInstance attack = living.getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED);
 
-		if (!attribute.hasModifier(instance.getModifier()))
+		if (!movement.hasModifier(instance.getMovementSpeedModifier()))
 		{
-			attribute.applyModifier(instance.getModifier());
+			movement.applyModifier(instance.getMovementSpeedModifier());
+		}
+
+		if (!attack.hasModifier(instance.getAttackSpeedModifier()))
+		{
+			attack.applyModifier(instance.getAttackSpeedModifier());
 		}
 	}
 
@@ -119,11 +124,17 @@ public class ModifyWeightEffect extends AbstractEffectProcessor<ModifyWeightEffe
 
 		EntityLivingBase living = (EntityLivingBase) source;
 
-		IAttributeInstance attribute = living.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+		IAttributeInstance movement = living.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+		IAttributeInstance attack = living.getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED);
 
-		if (attribute.hasModifier(instance.getModifier()))
+		if (movement.hasModifier(instance.getMovementSpeedModifier()))
 		{
-			attribute.removeModifier(instance.getModifier());
+			movement.removeModifier(instance.getMovementSpeedModifier());
+		}
+
+		if (attack.hasModifier(instance.getAttackSpeedModifier()))
+		{
+			attack.removeModifier(instance.getAttackSpeedModifier());
 		}
 	}
 
