@@ -87,7 +87,7 @@ public abstract class EntityFlyingAnimal extends EntityAetherAnimal implements I
 		{
 			if (!player.worldObj.isRemote)
 			{
-				if (!this.isSaddled() && stack != null && stack.getItem() == Items.SADDLE)
+				if (!this.isSaddled() && stack != null && stack.getItem() == Items.SADDLE && !this.isChild())
 				{
 					this.setIsSaddled(true);
 
