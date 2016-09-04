@@ -380,6 +380,7 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_trapdoor, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_stairs, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_button, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.woven_skyroot_sticks, 5, 5);
 
 		registerHarvestLevels();
 
