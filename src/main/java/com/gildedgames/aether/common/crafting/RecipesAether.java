@@ -3,11 +3,14 @@ package com.gildedgames.aether.common.crafting;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipe;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.crafting.recipes.RecipeLeatherGlovesDyes;
 import com.gildedgames.aether.common.crafting.recipes.altar.AltarEnchantRecipe;
 import com.gildedgames.aether.common.crafting.recipes.altar.AltarRepairRecipe;
+import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.consumables.ItemCloudParachute;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import net.minecraft.init.Blocks;
@@ -41,6 +44,27 @@ public class RecipesAether implements IAltarRecipeRegistry
 	private void registerCraftingRecipes()
 	{
 		CraftingManager.getInstance().addRecipe(new RecipeLeatherGlovesDyes());
+
+		// Parachutes
+
+		registerShapedRecipe(new ItemStack(ItemsAether.cloud_parachute, 1, EntityParachute.Type.COLD.ordinal()), "XXX", " S ",
+				'X', new ItemStack(BlocksAether.aercloud, 1, BlockAercloud.COLD_AERCLOUD.getMeta()), 'S', Items.STRING);
+
+		registerShapedRecipe(new ItemStack(ItemsAether.cloud_parachute, 1, EntityParachute.Type.BLUE.ordinal()), "XXX", " S ",
+				'X', new ItemStack(BlocksAether.aercloud, 1, BlockAercloud.BLUE_AERCLOUD.getMeta()), 'S', Items.STRING);
+
+		registerShapedRecipe(new ItemStack(ItemsAether.cloud_parachute, 1, EntityParachute.Type.GOLDEN.ordinal()), "XXX", " S ",
+				'X', new ItemStack(BlocksAether.aercloud, 1, BlockAercloud.GOLDEN_AERCLOUD.getMeta()), 'S', Items.STRING);
+
+		registerShapedRecipe(new ItemStack(ItemsAether.cloud_parachute, 1, EntityParachute.Type.PURPLE.ordinal()), "XXX", " S ",
+				'X', new ItemStack(BlocksAether.aercloud, 1, BlockAercloud.PURPLE_AERCLOUD.getMeta()), 'S', Items.STRING);
+
+		registerShapedRecipe(new ItemStack(ItemsAether.cloud_parachute, 1, EntityParachute.Type.GREEN.ordinal()), "XXX", " S ",
+				'X', new ItemStack(BlocksAether.aercloud, 1, BlockAercloud.GREEN_AERCLOUD.getMeta()), 'S', Items.STRING);
+
+		// Saddle
+		registerShapedRecipe(new ItemStack(Items.SADDLE, 1), "XXX", "XZX",
+				'X', Items.LEATHER, 'Z', Items.STRING);
 
 		// Skyroot Planks
 		registerShapelessRecipe(new ItemStack(BlocksAether.skyroot_planks, 4),
@@ -485,7 +509,11 @@ public class RecipesAether implements IAltarRecipeRegistry
         // Stomper Pop
         registerShapedRecipe(new ItemStack(ItemsAether.stomper_pop), " X", " Z",
                 'X', new ItemStack(ItemsAether.skyroot_stick),
-                'Y', new ItemStack(ItemsAether.pink_baby_swet));
+                'Z', new ItemStack(ItemsAether.pink_baby_swet));
+
+		registerShapedRecipe(new ItemStack(ItemsAether.stomper_pop), " Z", " X",
+				'X', new ItemStack(ItemsAether.skyroot_stick),
+				'Z', new ItemStack(ItemsAether.pink_baby_swet));
 
         // Blueberry Lollipop
         registerShapedRecipe(new ItemStack(ItemsAether.blueberry_lollipop), "XY", "Z ",
