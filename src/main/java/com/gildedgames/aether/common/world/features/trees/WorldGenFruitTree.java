@@ -13,6 +13,7 @@ import java.util.Random;
 
 public class WorldGenFruitTree extends WorldGenAbstractTree
 {
+
 	private final IBlockState leaves, fruit;
 
 	private final int fruitChance, randHeight;
@@ -32,31 +33,29 @@ public class WorldGenFruitTree extends WorldGenAbstractTree
 		this.branches = branchFlag;
 	}
 
-	private BlockPos.MutableBlockPos tmpPos = new BlockPos.MutableBlockPos();
-
 	public void setBlockAirCheck(World world, int x, int y, int z, IBlockState block)
 	{
-		this.tmpPos.setPos(x, y, z);
+		BlockPos pos = new BlockPos(x, y, z);
 
-		if (world.getBlockState(this.tmpPos).getBlock() == Blocks.AIR)
+		if (world.getBlockState(pos).getBlock() == Blocks.AIR)
 		{
-			world.setBlockState(this.tmpPos, block);
+			world.setBlockState(pos, block);
 		}
 	}
 
 	public void setBlockAirCheck(World world, int x, int y, int z, IBlockState log, IBlockState leaves)
 	{
-		this.tmpPos.setPos(x, y, z);
+		BlockPos pos = new BlockPos(x, y, z);
 
-		if (world.getBlockState(this.tmpPos).getBlock() == Blocks.AIR)
+		if (world.getBlockState(pos).getBlock() == Blocks.AIR)
 		{
 			if (leaves.getBlock() == Blocks.AIR)
 			{
-				world.setBlockState(this.tmpPos, log);
+				world.setBlockState(pos, log);
 			}
 			else
 			{
-				world.setBlockState(this.tmpPos, leaves);
+				world.setBlockState(pos, leaves);
 			}
 		}
 	}
@@ -70,7 +69,7 @@ public class WorldGenFruitTree extends WorldGenAbstractTree
 
 		int x = position.getX(), y = position.getY(), z = position.getZ();
 
-		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+		BlockPos pos;
 
 		for (int x1 = x - 3; x1 < x + 3; x1++)
 		{
@@ -78,7 +77,9 @@ public class WorldGenFruitTree extends WorldGenAbstractTree
 			{
 				for (int z1 = z - 3; z1 < z + 3; z1++)
 				{
-					if (world.getBlockState(pos.setPos(x1, y1, z1)).getBlock() != Blocks.AIR)
+					pos = new BlockPos(x1, y1, z1);
+
+					if (world.getBlockState(pos).getBlock() != Blocks.AIR)
 					{
 						cangen = false;
 					}
@@ -88,14 +89,18 @@ public class WorldGenFruitTree extends WorldGenAbstractTree
 
 		if (y + (height + 2) <= world.getHeight() && cangen)
 		{
-			Block y1 = world.getBlockState(pos.setPos(x, y - 1, z)).getBlock();
+			pos = new BlockPos(x, y - 1, z);
+
+			Block y1 = world.getBlockState(pos).getBlock();
 
 			if (y1 != BlocksAether.aether_grass && y1 != BlocksAether.aether_dirt)
 			{
 				return false;
 			}
 
-			world.setBlockState(pos.setPos(x, y - 1, z), BlocksAether.aether_dirt.getDefaultState());
+			pos = new BlockPos(x, y - 1, z);
+
+			world.setBlockState(pos, BlocksAether.aether_dirt.getDefaultState());
 
 			IBlockState air = Blocks.AIR.getDefaultState(),
 					wall = BlocksAether.skyroot_log_wall.getDefaultState().withProperty(BlockSkyrootWall.PROPERTY_GENERATED, true),
@@ -103,7 +108,9 @@ public class WorldGenFruitTree extends WorldGenAbstractTree
 
 			for (int y2 = y; y2 <= y + height; y2++)
 			{
-				world.setBlockState(pos.setPos(x, y2, z), wall);
+				pos = new BlockPos(x, y2, z);
+
+				world.setBlockState(pos, wall);
 			}
 
 			this.setBlockAirCheck(world, x, y + (height + 1), z, this.leaves, random.nextInt(this.fruitChance) == 0 ? this.fruit : air);
@@ -144,16 +151,23 @@ public class WorldGenFruitTree extends WorldGenAbstractTree
 					case (0):
 						for (int x2 = x; x2 <= x + branchLength; x2++)
 						{
-							world.setBlockState(pos.setPos(x2, y2, z), log);
+							pos = new BlockPos(x2, y2, z);
+
+							world.setBlockState(pos, log);
 							this.setBlockAirCheck(world, x2, y2 + 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 							this.setBlockAirCheck(world, x2, y2 - 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 							this.setBlockAirCheck(world, x2 + 1, y2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 							this.setBlockAirCheck(world, x2 - 1, y2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 						}
 
-						world.setBlockState(pos.setPos(x + (branchLength + 1), y2 + 1, z), log);
-						world.setBlockState(pos.setPos(x + (branchLength + 2), y2 + 2, z), log);
-						world.setBlockState(pos.setPos(x + (branchLength + 2), y2 + 3, z), log);
+						pos = new BlockPos(x + (branchLength + 1), y2 + 1, z);
+						world.setBlockState(pos, log);
+
+						pos = new BlockPos(x + (branchLength + 2), y2 + 2, z);
+						world.setBlockState(pos, log);
+
+						pos = new BlockPos(x + (branchLength + 2), y2 + 3, z);
+						world.setBlockState(pos, log);
 
 						this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 2, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 						this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 3, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
@@ -195,16 +209,23 @@ public class WorldGenFruitTree extends WorldGenAbstractTree
 					case (1):
 						for (int x3 = x; x3 >= x - branchLength; x3--)
 						{
-							world.setBlockState(pos.setPos(x3, y2, z), log);
+							pos = new BlockPos(x3, y2, z);
+
+							world.setBlockState(pos, log);
 							this.setBlockAirCheck(world, x3, y2 + 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 							this.setBlockAirCheck(world, x3, y2 - 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 							this.setBlockAirCheck(world, x3 + 1, y2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 							this.setBlockAirCheck(world, x3 - 1, y2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 						}
 
-						world.setBlockState(pos.setPos(x - (branchLength + 1), y2 + 1, z), log);
-						world.setBlockState(pos.setPos(x - (branchLength + 2), y2 + 2, z), log);
-						world.setBlockState(pos.setPos(x - (branchLength + 2), y2 + 3, z), log);
+						pos = new BlockPos(x - (branchLength + 1), y2 + 1, z);
+						world.setBlockState(pos, log);
+
+						pos = new BlockPos(x - (branchLength + 2), y2 + 2, z);
+						world.setBlockState(pos, log);
+
+						pos = new BlockPos(x - (branchLength + 2), y2 + 3, z);
+						world.setBlockState(pos, log);
 
 						this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 2, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 						this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 3, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
@@ -246,16 +267,23 @@ public class WorldGenFruitTree extends WorldGenAbstractTree
 					case (2):
 						for (int z2 = z; z2 <= z + branchLength; z2++)
 						{
-							world.setBlockState(pos.setPos(x, y2, z2), log);
+							pos = new BlockPos(x, y2, z2);
+
+							world.setBlockState(pos, log);
 							this.setBlockAirCheck(world, x, y2 + 1, z2, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 							this.setBlockAirCheck(world, x, y2 - 1, z2, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 							this.setBlockAirCheck(world, x + 1, y2, z2, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 							this.setBlockAirCheck(world, x - 1, y2, z2, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 						}
 
-						world.setBlockState(pos.setPos(x, y2 + 1, z + (branchLength + 1)), log);
-						world.setBlockState(pos.setPos(x, y2 + 2, z + (branchLength + 2)), log);
-						world.setBlockState(pos.setPos(x, y2 + 3, z + (branchLength + 2)), log);
+						pos = new BlockPos(x, y2 + 1, z + (branchLength + 1));
+						world.setBlockState(pos, log);
+
+						pos = new BlockPos(x, y2 + 2, z + (branchLength + 2));
+						world.setBlockState(pos, log);
+
+						pos = new BlockPos(x, y2 + 3, z + (branchLength + 2));
+						world.setBlockState(pos, log);
 
 						this.setBlockAirCheck(world, x, y2 + 2, z + (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 						this.setBlockAirCheck(world, x, y2 + 3, z + (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
@@ -297,16 +325,23 @@ public class WorldGenFruitTree extends WorldGenAbstractTree
 					case (3):
 						for (int z3 = z; z3 >= z - branchLength; z3--)
 						{
-							world.setBlockState(pos.setPos(x, y2, z3), log);
+							pos = new BlockPos(x, y2, z3);
+
+							world.setBlockState(pos, log);
 							this.setBlockAirCheck(world, x, y2 + 1, z3, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 							this.setBlockAirCheck(world, x, y2 - 1, z3, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 							this.setBlockAirCheck(world, x + 1, y2, z3, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 							this.setBlockAirCheck(world, x - 1, y2, z3, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 						}
 
-						world.setBlockState(pos.setPos(x, y2 + 1, z - (branchLength + 1)), log);
-						world.setBlockState(pos.setPos(x, y2 + 2, z - (branchLength + 2)), log);
-						world.setBlockState(pos.setPos(x, y2 + 3, z - (branchLength + 2)), log);
+						pos = new BlockPos(x, y2 + 1, z - (branchLength + 1));
+						world.setBlockState(pos, log);
+
+						pos = new BlockPos(x, y2 + 2, z - (branchLength + 2));
+						world.setBlockState(pos, log);
+
+						pos = new BlockPos(x, y2 + 3, z - (branchLength + 2));
+						world.setBlockState(pos, log);
 
 						this.setBlockAirCheck(world, x, y2 + 2, z - (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 						this.setBlockAirCheck(world, x, y2 + 3, z - (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);

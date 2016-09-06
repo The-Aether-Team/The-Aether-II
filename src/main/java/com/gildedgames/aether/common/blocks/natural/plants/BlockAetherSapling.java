@@ -1,9 +1,13 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import com.gildedgames.aether.common.world.biome.BiomeAether;
+import com.gildedgames.aether.common.world.features.trees.WorldGenSkyrootTree;
+import net.minecraft.block.BlockLog;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -11,12 +15,14 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.relauncher.Side;
@@ -103,12 +109,23 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 			{
 				treeGenerator = BiomeAether.genGoldenOakTree;
 			}
+			else if (meta == PURPLE_CRYSTAL_SAPLING.getMeta())
+			{
+				treeGenerator = BiomeAether.genPurpleFruitTree;
+			}
+			else if (meta == DARK_BLUE_SKYROOT_SAPLING.getMeta())
+			{
+				treeGenerator = BiomeAether.genDarkBlueMassiveSkyrootTree;
+			}
 
 			if (treeGenerator != null)
 			{
-				world.setBlockToAir(pos);
+				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
 
-				treeGenerator.generate(world, random, pos);
+				if (!treeGenerator.generate(world, random, pos))
+				{
+					world.setBlockState(pos, state, 4);
+				}
 			}
 		}
 	}

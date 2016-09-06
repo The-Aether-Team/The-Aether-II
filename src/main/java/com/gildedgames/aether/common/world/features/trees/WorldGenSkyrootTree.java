@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.world.features.trees;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -78,41 +79,33 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 
 				boolean isSoil = BlocksAether.aether_sapling.isSuitableSoilBlock(rootState);
 
+				IBlockState state = worldIn.getBlockState(position.down());
+
 				if (isSoil && position.getY() < 256 - i - 1)
 				{
 					rootState.getBlock().onPlantGrow(rootState, worldIn, rootBlockPos, position);
 
-					b0 = 3;
-					byte b1 = 0;
-					int i1;
-					int j1;
-					int k1;
-					int l1;
-
-					pos = new BlockPos.MutableBlockPos(position.getX(), position.getY(), position.getZ());
-
-					for (l = position.getY() - b0 + i; l <= position.getY() + i; ++l)
+					for (int i3 = position.getY() - 3 + i; i3 <= position.getY() + i; ++i3)
 					{
-						i1 = l - (position.getY() + i);
-						j1 = b1 + 1 - i1 / 2;
+						int i4 = i3 - (position.getY() + i);
+						int j1 = 1 - i4 / 2;
 
-						for (k1 = position.getX() - j1; k1 <= position.getX() + j1; ++k1)
+						for (int k1 = position.getX() - j1; k1 <= position.getX() + j1; ++k1)
 						{
-							l1 = k1 - position.getX();
+							int l1 = k1 - position.getX();
 
 							for (int i2 = position.getZ() - j1; i2 <= position.getZ() + j1; ++i2)
 							{
 								int j2 = i2 - position.getZ();
 
-								if (Math.abs(l1) != j1 || Math.abs(j2) != j1 || rand.nextInt(2) != 0 && i1 != 0)
+								if (Math.abs(l1) != j1 || Math.abs(j2) != j1 || rand.nextInt(2) != 0 && i4 != 0)
 								{
-									pos.setPos(k1, l, i2);
+									BlockPos blockpos = new BlockPos(k1, i3, i2);
+									state = worldIn.getBlockState(blockpos);
 
-									IBlockState state = worldIn.getBlockState(pos);
-
-									if (state.getBlock().isAir(state, worldIn, pos) || state.getBlock().isLeaves(state, worldIn, pos))
+									if (state.getBlock().isAir(state, worldIn, blockpos) || state.getBlock().isLeaves(state, worldIn, blockpos) || state.getMaterial() == Material.VINE)
 									{
-										this.setBlockAndNotifyAdequately(worldIn, pos, this.leavesState);
+										this.setBlockAndNotifyAdequately(worldIn, blockpos, this.leavesState);
 									}
 								}
 							}

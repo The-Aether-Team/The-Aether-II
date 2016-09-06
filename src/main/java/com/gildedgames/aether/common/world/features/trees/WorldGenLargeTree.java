@@ -24,18 +24,18 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 
 	public boolean branch(World world, Random random, BlockPos pos, int slant)
 	{
-		BlockPos.MutableBlockPos nPos = BlockPosUtil.toMutable(pos);
+		BlockPos nPos = new BlockPos(pos);
 
 		int directionX = random.nextInt(3) - 1;
 		int directionZ = random.nextInt(3) - 1;
 
 		for (int n = 0; n < 2; n++)
 		{
-			BlockPosUtil.add(nPos, directionX, slant, directionZ);
+			nPos = nPos.add(directionX, slant, directionZ);
 
 			if (world.getBlockState(nPos).getBlock() == this.leafBlock.getBlock())
 			{
-				world.setBlockState(nPos, this.logBlock, ChunkGeneratorAether.PLACEMENT_FLAG_TYPE);
+				this.setBlockAndNotifyAdequately(world, nPos, this.logBlock);
 			}
 		}
 
@@ -45,7 +45,7 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 	@Override
 	public boolean generate(World world, Random random, BlockPos pos)
 	{
-		BlockPos.MutableBlockPos nPos = BlockPosUtil.toMutable(pos);
+		BlockPos nPos;
 
 		int height = 11;
 		boolean flag = true;
@@ -71,7 +71,7 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 				{
 					if (i1 >= 0 && i1 < 128)
 					{
-						nPos.setPos(i2, i1, l2);
+						nPos = new BlockPos(i2, i1, l2);
 
 						Block block = world.getBlockState(nPos).getBlock();
 
@@ -97,7 +97,7 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 
 		for (int y = pos.getY(); y < pos.getY() + height; y++)
 		{
-			nPos.setPos(pos.getX(), y, pos.getZ());
+			nPos = new BlockPos(pos.getX(), y, pos.getZ());
 
 			if (!this.isReplaceable(world, nPos))
 			{
@@ -106,10 +106,9 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 		}
 
 		//Can plant here check, not on clouds etc...
-		nPos.setPos(pos.getX(), pos.getY() - 1, pos.getZ());
+		nPos = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ());
 
-		if (world.getBlockState(nPos).getBlock() != BlocksAether.aether_grass &&
-				world.getBlockState(nPos).getBlock() != BlocksAether.aether_dirt)
+		if (world.getBlockState(nPos).getBlock() != BlocksAether.aether_grass && world.getBlockState(nPos).getBlock() != BlocksAether.aether_dirt)
 		{
 			return false;
 		}
@@ -121,11 +120,11 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 			{
 				for (int z = pos.getZ() - 4; z < pos.getZ() + 6; z++)
 				{
-					nPos.setPos(x, y, z);
+					nPos = new BlockPos(x, y, z);
 
 					if ((x - pos.getX()) * (x - pos.getX()) + (y - pos.getY() - 8) * (y - pos.getY() - 8) + (z - pos.getZ()) * (z - pos.getZ()) < 16 + random.nextInt(5) && world.getBlockState(nPos).getBlock() == Blocks.AIR)
 					{
-						world.setBlockState(nPos, this.leafBlock);
+						this.setBlockAndNotifyAdequately(world, nPos, this.leafBlock);
 					}
 				}
 			}
@@ -133,13 +132,13 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 
 		for (int y = 0; y < height; y++)
 		{
-			nPos.setPos(pos.getX(), pos.getY() + y, pos.getZ());
+			nPos = new BlockPos(pos.getX(), pos.getY() + y, pos.getZ());
 
 			if (y < (height - 2))
 			{
 				if (this.isReplaceable(world, nPos))
 				{
-					world.setBlockState(nPos, this.logBlock, ChunkGeneratorAether.PLACEMENT_FLAG_TYPE);
+					this.setBlockAndNotifyAdequately(world, nPos, this.logBlock);
 				}
 			}
 
