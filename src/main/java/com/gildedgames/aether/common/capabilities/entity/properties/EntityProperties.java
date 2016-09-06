@@ -20,6 +20,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.List;
 
+import static net.minecraft.realms.Tezzelator.t;
+
 public class EntityProperties implements IEntityPropertiesCapability
 {
 
@@ -113,6 +115,12 @@ public class EntityProperties implements IEntityPropertiesCapability
 		{
 			event.setAmount(event.getAmount() * sourceProperties.getAttackElementOverride().getModifierAgainst(victimProperties.getElementalState()));
 
+			List<ElementalState> elements = Lists.newArrayList();
+
+			elements.add(sourceProperties.getAttackElementOverride());
+
+			EntityProperties.spawnElementAttackParticles(victim.getEntityWorld(), elements, victim);
+
 			return;
 		}
 
@@ -142,8 +150,11 @@ public class EntityProperties implements IEntityPropertiesCapability
 
 		event.setAmount((float) finalResult);
 
-		World world = victim.getEntityWorld();
+		EntityProperties.spawnElementAttackParticles(victim.getEntityWorld(), elements, victim);
+	}
 
+	public static void spawnElementAttackParticles(World world, List<ElementalState> elements, Entity victim)
+	{
 		if (world instanceof WorldServer)
 		{
 			WorldServer worldServer = (WorldServer)world;
