@@ -234,31 +234,31 @@ public class ItemsAether
 		skyroot_pickaxe = registerItem("skyroot_pickaxe", new ItemSkyrootTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
 		skyroot_shovel = registerItem("skyroot_shovel", new ItemSkyrootTool(EnumToolType.SHOVEL, 1.5F, -3.0F));
 		skyroot_sword = registerItem("skyroot_sword", new ItemSkyrootSword());
-        skyroot_shield = registerItem("skyroot_shield", new ItemAetherShield(), CreativeTabsAether.tabWeapons);
+        skyroot_shield = registerItem("skyroot_shield", new ItemAetherShield(), CreativeTabsAether.tabArmor);
 
         holystone_axe = registerItem("holystone_axe", new ItemHolystoneTool(EnumToolType.AXE, 8.0F, -3.2F));
 		holystone_pickaxe = registerItem("holystone_pickaxe", new ItemHolystoneTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
 		holystone_shovel = registerItem("holystone_shovel", new ItemHolystoneTool(EnumToolType.SHOVEL, 1.5F, -3.0F));
 		holystone_sword = registerItem("holystone_sword", new ItemHolystoneSword());
-        holystone_shield = registerItem("holystone_shield", new ItemAetherShield(), CreativeTabsAether.tabWeapons);
+        holystone_shield = registerItem("holystone_shield", new ItemAetherShield(), CreativeTabsAether.tabArmor);
 
 		zanite_axe = registerItem("zanite_axe", new ItemZaniteTool(EnumToolType.AXE, 8.0F, -3.1F));
 		zanite_pickaxe = registerItem("zanite_pickaxe", new ItemZaniteTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
 		zanite_shovel = registerItem("zanite_shovel", new ItemZaniteTool(EnumToolType.SHOVEL, 1.5F, -3.0F));
 		zanite_sword = registerItem("zanite_sword", new ItemZaniteSword());
-        zanite_shield = registerItem("zanite_shield", new ItemAetherShield(), CreativeTabsAether.tabWeapons);
+        zanite_shield = registerItem("zanite_shield", new ItemAetherShield(), CreativeTabsAether.tabArmor);
 
         arkenium_axe = registerItem("arkenium_axe", new ItemArkeniumTool(EnumToolType.AXE, 7.0F, -3.3F));
         arkenium_pickaxe = registerItem("arkenium_pickaxe", new ItemArkeniumTool(EnumToolType.PICKAXE, 4.0F, -3.2F));
         arkenium_shovel = registerItem("arkenium_shovel", new ItemArkeniumTool(EnumToolType.SHOVEL, 4.5F, -3.3F));
         arkenium_sword = registerItem("arkenium_sword", new ItemArkeniumSword());
-        arkenium_shield = registerItem("arkenium_shield", new ItemAetherShield(), CreativeTabsAether.tabWeapons);
+        arkenium_shield = registerItem("arkenium_shield", new ItemAetherShield(), CreativeTabsAether.tabArmor);
 
 		gravitite_axe = registerItem("gravitite_axe", new ItemGravititeTool(EnumToolType.AXE, 8.0F, -3.0F));
 		gravitite_pickaxe = registerItem("gravitite_pickaxe", new ItemGravititeTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
 		gravitite_shovel = registerItem("gravitite_shovel", new ItemGravititeTool(EnumToolType.SHOVEL, 1.5F, -3.0F));
 		gravitite_sword = registerItem("gravitite_sword", new ItemGravititeSword());
-        gravitite_shield = registerItem("gravitite_shield", new ItemAetherShield(), CreativeTabsAether.tabWeapons);
+        gravitite_shield = registerItem("gravitite_shield", new ItemAetherShield(), CreativeTabsAether.tabArmor);
 
 		valkyrie_axe = registerItem("valkyrie_axe", new ItemValkyrieTool(EnumToolType.AXE, 8.0F, -3.0F));
 		valkyrie_pickaxe = registerItem("valkyrie_pickaxe", new ItemValkyrieTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
@@ -697,6 +697,10 @@ public class ItemsAether
 				.add(EntityEffects.LEVITATE_ATTACKERS, new LevitateAttackersEffect.Instance(0.01D))
 				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
 
+		ItemEffects.register(ItemsAether.gravitite_shield, new Effects()
+				.add(EntityEffects.LEVITATE_ATTACKERS, new LevitateAttackersEffect.Instance(0.02D))
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(10D)));
+
 		ItemEffects.register(ItemsAether.phoenix_helmet, new Effects()
 				.add(EntityEffects.SET_ATTACKERS_ON_FIRE, new SetAttackersOnFireEffect.Instance(0.01D))
 				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(5D)));
@@ -754,6 +758,9 @@ public class ItemsAether
 		ItemEffects.register(ItemsAether.zanite_gloves, new Effects()
 				.add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 1.5D))
 				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(ItemsAether.zanite_shield, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(3.5D)));
 
 		ItemEffects.register(ItemsAether.valkyrie_helmet, new Effects()
 				.add(EntityEffects.MODIFY_DEFENSE, new ModifyDefenseEffect.Instance(ElementalState.AIR, 0.25D))
@@ -855,6 +862,18 @@ public class ItemsAether
 		ItemEffects.register(ItemsAether.chain_gloves, new Effects()
 				.add(EntityEffects.PUNCHING_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 1.0D))
 				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(1.5D)));
+
+		ItemEffects.register(Items.SHIELD, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(3.5D)));
+
+		ItemEffects.register(ItemsAether.skyroot_shield, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
+
+		ItemEffects.register(ItemsAether.holystone_shield, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(3D)));
+
+		ItemEffects.register(ItemsAether.arkenium_shield, new Effects()
+				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(15D)));
 
 		/** OTHERS **/
 

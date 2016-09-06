@@ -13,16 +13,14 @@ import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class EquipmentModule extends PlayerAetherModule
 {
@@ -52,18 +50,13 @@ public class EquipmentModule extends PlayerAetherModule
 
 	private InventoryEquipment equipment;
 
-	private Set<ItemSlot> dirties = new HashSet<>();
+	private Map<ItemStack[], ItemSlot[]> trackedSlots = Maps.newHashMap();
 
 	public EquipmentModule(IPlayerAetherCapability playerAether, InventoryEquipment equipment)
 	{
 		super(playerAether);
 
 		this.equipment = equipment;
-
-		this.dirties.add(new ItemSlot(0, null));
-		this.dirties.add(new ItemSlot(1, null));
-		this.dirties.add(new ItemSlot(2, null));
-		this.dirties.add(new ItemSlot(3, null));
 	}
 
 	@Override
@@ -71,14 +64,31 @@ public class EquipmentModule extends PlayerAetherModule
 	{
 		this.handleEquipmentChanges();
 
+		this.processEffects(this.getPlayer().inventory.armorInventory);
+		this.processEffects(this.getPlayer().inventory.offHandInventory);
+	}
+
+	private void processEffects(ItemStack[] inventory)
+	{
 		IEntityEffectsCapability effects = EntityEffects.get(this.getPlayer());
 
 		List<ItemSlot> slotsToAdd = Lists.newArrayList();
-		List<ItemSlot> slotsToRemove = Lists.newArrayList();
 
-		for (int index = 0; index < this.getPlayer().inventory.armorInventory.length; index++)
+		if (!this.trackedSlots.containsKey(inventory))
 		{
-			ItemStack stack = this.getPlayer().inventory.armorInventory[index];
+			ItemSlot[] slots = new ItemSlot[inventory.length];
+
+			for (int index = 0; index < inventory.length; index++)
+			{
+				slots[index] = new ItemSlot(index, null);
+			}
+
+			this.trackedSlots.put(inventory, slots);
+		}
+
+		for (int index = 0; index < inventory.length; index++)
+		{
+			ItemStack stack = inventory[index];
 
 			if (stack != null && !stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
 			{
@@ -87,26 +97,22 @@ public class EquipmentModule extends PlayerAetherModule
 
 			if (stack == null)
 			{
-				for (ItemSlot slot : this.dirties)
+				for (ItemSlot slot : this.trackedSlots.get(inventory))
 				{
-					if (slot != null)
+					if (slot != null && slot.getSlot() == index && slot.getStack() != stack)
 					{
-						if (slot.getSlot() == index && slot.getStack() != null)
+						IItemEffectsCapability slotEffects = slot.getStack().getCapability(AetherCapabilities.ITEM_EFFECTS, null);
+
+						for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : slotEffects.getEffectPairs())
 						{
-							IItemEffectsCapability slotEffects = slot.getStack().getCapability(AetherCapabilities.ITEM_EFFECTS, null);
+							EntityEffectProcessor processor = effect.getLeft();
+							EntityEffectInstance instance = effect.getRight();
 
-							for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : slotEffects.getEffectPairs())
+							if (effects.hasInstance(processor, instance))
 							{
-								EntityEffectProcessor processor = effect.getLeft();
-								EntityEffectInstance instance = effect.getRight();
+								effects.removeInstance(processor, instance);
 
-								if (effects.hasInstance(processor, instance))
-								{
-									effects.removeInstance(processor, instance);
-
-									slotsToRemove.add(slot);
-									slotsToAdd.add(new ItemSlot(index, null));
-								}
+								slotsToAdd.add(new ItemSlot(index, null));
 							}
 						}
 					}
@@ -115,50 +121,50 @@ public class EquipmentModule extends PlayerAetherModule
 				continue;
 			}
 
-			IItemEffectsCapability itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
-
-			for (ItemSlot slot : this.dirties)
+			for (ItemSlot slot : this.trackedSlots.get(inventory))
 			{
-				if (slot != null)
+				if (slot != null && slot.getSlot() == index)
 				{
-					if (slot.getSlot() == index && slot.getStack() != stack)
+					IItemEffectsCapability itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
+
+					if (slot.getStack() != null)
 					{
-						if (slot.getStack() != null)
-						{
-							IItemEffectsCapability slotEffects = slot.getStack().getCapability(AetherCapabilities.ITEM_EFFECTS, null);
+						IItemEffectsCapability slotEffects = slot.getStack().getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
-							for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : slotEffects.getEffectPairs())
-							{
-								EntityEffectProcessor processor = effect.getLeft();
-								EntityEffectInstance instance = effect.getRight();
-
-								if (effects.hasInstance(processor, instance))
-								{
-									effects.removeInstance(processor, instance);
-								}
-							}
-						}
-
-						for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
+						for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : slotEffects.getEffectPairs())
 						{
 							EntityEffectProcessor processor = effect.getLeft();
 							EntityEffectInstance instance = effect.getRight();
 
-							if (!effects.hasInstance(processor, instance))
+							if (effects.hasInstance(processor, instance))
 							{
-								effects.addInstance(processor, instance);
+								effects.removeInstance(processor, instance);
 							}
 						}
-
-						slotsToRemove.add(slot);
-						slotsToAdd.add(new ItemSlot(index, stack));
 					}
+
+					for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
+					{
+						EntityEffectProcessor processor = effect.getLeft();
+						EntityEffectInstance instance = effect.getRight();
+
+						if (!effects.hasInstance(processor, instance))
+						{
+							effects.addInstance(processor, instance);
+						}
+					}
+
+					slotsToAdd.add(new ItemSlot(index, stack));
 				}
 			}
 		}
 
-		this.dirties.removeAll(slotsToRemove);
-		this.dirties.addAll(slotsToAdd);
+		for (ItemSlot slot : slotsToAdd)
+		{
+			int index = slot.getSlot();
+
+			this.trackedSlots.get(inventory)[index] = slot;
+		}
 	}
 
 	@Override
