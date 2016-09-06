@@ -10,8 +10,6 @@ import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
 import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffects;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
-import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import net.minecraft.item.ItemStack;
@@ -62,10 +60,9 @@ public class EquipmentModule extends PlayerAetherModule
 	@Override
 	public void onUpdate(LivingEvent.LivingUpdateEvent event)
 	{
-		this.handleEquipmentChanges();
-
 		this.processEffects(this.getPlayer().inventory.armorInventory);
 		this.processEffects(this.getPlayer().inventory.offHandInventory);
+		this.processEffects(this.equipment.getInventory());
 	}
 
 	private void processEffects(ItemStack[] inventory)
@@ -127,22 +124,6 @@ public class EquipmentModule extends PlayerAetherModule
 				{
 					IItemEffectsCapability itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
 
-					if (slot.getStack() != null)
-					{
-						IItemEffectsCapability slotEffects = slot.getStack().getCapability(AetherCapabilities.ITEM_EFFECTS, null);
-
-						for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : slotEffects.getEffectPairs())
-						{
-							EntityEffectProcessor processor = effect.getLeft();
-							EntityEffectInstance instance = effect.getRight();
-
-							if (effects.hasInstance(processor, instance))
-							{
-								effects.removeInstance(processor, instance);
-							}
-						}
-					}
-
 					for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
 					{
 						EntityEffectProcessor processor = effect.getLeft();
@@ -190,76 +171,6 @@ public class EquipmentModule extends PlayerAetherModule
 				if (stack != null && stack.getItem() instanceof ItemAetherArmor)
 				{
 					event.setAmount(event.getAmount() - ((ItemAetherArmor) stack.getItem()).getExtraDamageReduction(stack));
-				}
-			}
-		}
-	}
-
-	public void sendEquipmentChanges(Set<InventoryEquipment.PendingItemChange> dirties)
-	{
-		List<Pair<Integer, ItemStack>> updates = new ArrayList<>();
-
-		for (InventoryEquipment.PendingItemChange change : dirties)
-		{
-			updates.add(Pair.of(change.getSlot(), change.getAfter()));
-		}
-
-		NetworkingAether.sendPacketToWatching(new EquipmentChangedPacket(this.getPlayer(), updates), this.getPlayer());
-	}
-
-	public void handleEquipmentChanges()
-	{
-		if (this.equipment.getDirties().size() > 0)
-		{
-			Set<InventoryEquipment.PendingItemChange> changes = this.equipment.getDirties();
-
-			if (!this.getPlayer().worldObj.isRemote)
-			{
-				this.sendEquipmentChanges(changes);
-			}
-
-			for (InventoryEquipment.PendingItemChange change : changes)
-			{
-				ItemStack beforeStack = change.getBefore();
-
-				this.handleEffectChanges(beforeStack, change);
-			}
-
-			changes.clear();
-		}
-	}
-
-	private void handleEffectChanges(ItemStack before, InventoryEquipment.PendingItemChange change)
-	{
-		IEntityEffectsCapability effects = EntityEffects.get(this.getPlayer());
-
-		if (before != null && before.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
-		{
-			IItemEffectsCapability itemEffects = before.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
-
-			for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
-			{
-				EntityEffectProcessor processor = effect.getLeft();
-				EntityEffectInstance instance = effect.getRight();
-
-				effects.removeInstance(processor, instance);
-			}
-		}
-
-		if (!this.getPlayer().worldObj.isRemote)
-		{
-			ItemStack afterStack = change.getAfter();
-
-			if (afterStack != null && afterStack != before && afterStack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
-			{
-				IItemEffectsCapability itemEffects = afterStack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
-
-				for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
-				{
-					EntityEffectProcessor processor = effect.getLeft();
-					EntityEffectInstance instance = effect.getRight();
-
-					effects.addInstance(processor, instance);
 				}
 			}
 		}

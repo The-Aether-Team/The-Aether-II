@@ -12,6 +12,7 @@ import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.List;
+import java.util.UUID;
 
 public class ModifyMaxHealthEffect extends AbstractEffectProcessor<Instance>
 {
@@ -26,7 +27,7 @@ public class ModifyMaxHealthEffect extends AbstractEffectProcessor<Instance>
 			super(rules);
 
 			this.getAttributes().setDouble("maxHealthMod", maxHealthMod);
-			this.modifier = new AttributeModifier("Extra Max Health", maxHealthMod * 2, 0).setSaved(false);
+			this.modifier = new AttributeModifier(UUID.fromString("a41be083-875f-4d16-8264-d84f11fda9c5"), "Extra Max Health", maxHealthMod * 2, 0).setSaved(false);
 		}
 
 		public AttributeModifier getModifier()

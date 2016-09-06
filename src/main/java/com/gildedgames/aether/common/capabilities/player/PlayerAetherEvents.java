@@ -1,19 +1,13 @@
 package com.gildedgames.aether.common.capabilities.player;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
-import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
-import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
-import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
-import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffects;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import com.gildedgames.util.core.util.TeleporterGeneric;
 import com.gildedgames.util.modules.chunk.ChunkModule;
 import com.gildedgames.util.modules.chunk.impl.hooks.BlockBitFlagChunkHook;
@@ -54,11 +48,6 @@ public class PlayerAetherEvents
 		EntityPlayerMP player = (EntityPlayerMP) event.getEntity();
 
 		PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
-
-		if (event.getTarget() instanceof EntityPlayer)
-		{
-			NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(player, PlayerAetherEvents.getAllEquipment(aePlayer.getEquipmentInventory())), player);
-		}
 	}
 
 	@SubscribeEvent
@@ -67,28 +56,6 @@ public class PlayerAetherEvents
 		EntityPlayerMP player = (EntityPlayerMP) event.player;
 
 		PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
-
-		NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(player, PlayerAetherEvents.getAllEquipment(aePlayer.getEquipmentInventory())), player);
-
-		IEntityEffectsCapability effects = EntityEffects.get(player);
-
-		for (int i = 0; i < aePlayer.getEquipmentInventory().getSizeInventory(); i++)
-		{
-			ItemStack stack = aePlayer.getEquipmentInventory().getStackInSlot(i);
-
-			if (stack != null && stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
-			{
-				IItemEffectsCapability itemEffects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
-
-				for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
-				{
-					EntityEffectProcessor processor = effect.getLeft();
-					EntityEffectInstance instance = effect.getRight();
-
-					effects.addInstance(processor, instance);
-				}
-			}
-		}
 	}
 
 	private static List<Pair<Integer, ItemStack>> getAllEquipment(IInventoryEquipment equipment)
@@ -215,7 +182,7 @@ public class PlayerAetherEvents
 
 		if (oldPlayer != null)
 		{
-			IPlayerAetherCapability newPlayer = PlayerAetherImpl.getPlayer(event.getEntity());
+			PlayerAetherImpl newPlayer = PlayerAetherImpl.getPlayer(event.getEntity());
 
 			Capability.IStorage<IPlayerAetherCapability> storage = AetherCapabilities.PLAYER_DATA.getStorage();
 

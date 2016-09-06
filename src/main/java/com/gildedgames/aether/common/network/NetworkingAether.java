@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.network;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.packets.AetherMovementPacket;
 import com.gildedgames.aether.common.network.packets.CompanionChangedPacket;
-import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import com.gildedgames.aether.common.network.packets.MidAirJumpsChangedPacket;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityTracker;
@@ -27,7 +26,6 @@ public class NetworkingAether
 		instance = NetworkRegistry.INSTANCE.newSimpleChannel(AetherCore.MOD_ID);
 
 		instance.registerMessage(AetherMovementPacket.Handler.class, AetherMovementPacket.class, discriminant++, Side.SERVER);
-		instance.registerMessage(EquipmentChangedPacket.Handler.class, EquipmentChangedPacket.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(CompanionChangedPacket.Handler.class, CompanionChangedPacket.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(MidAirJumpsChangedPacket.Handler.class, MidAirJumpsChangedPacket.class, discriminant++, Side.CLIENT);
 
