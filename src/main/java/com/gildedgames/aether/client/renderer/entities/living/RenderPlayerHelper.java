@@ -84,10 +84,17 @@ public class RenderPlayerHelper
 
 		if (stack != null)
 		{
+			float f = -0.4F * MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float)Math.PI);
+			float f1 = 0.2F * MathHelper.sin(MathHelper.sqrt_float(swingProgress) * ((float)Math.PI * 2F));
+			float f2 = -0.2F * MathHelper.sin(swingProgress * (float)Math.PI);
+			int i = 2;
+
 			GlStateManager.translate(x, y, z);
 
 			RenderPlayerHelper.transformSideFirstPerson(Minecraft.getMinecraft().gameSettings.mainHand, equipProgress);
 			RenderPlayerHelper.transformFirstPerson(Minecraft.getMinecraft().gameSettings.mainHand, swingProgress);
+
+			GlStateManager.translate((float)i * f, f1, f2);
 
 			GlStateManager.scale(0.2F, 0.2F, 0.2F);
 			//GlStateManager.rotate(15F, 1F, 0F, 0F);
