@@ -10,6 +10,7 @@ import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
 import com.gildedgames.aether.common.entities.ai.swet.AILeech;
 import com.gildedgames.aether.common.entities.util.EntityExtendedMob;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
 import com.gildedgames.aether.common.util.EntityUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -17,6 +18,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -114,8 +116,8 @@ public class EntitySwet extends EntityExtendedMob implements IEntityProperties
 
 		this.faceEntity(target, 10.0F, 10.0F);
 
-		EntityUtil.spawnParticleLineBetween(this, target, EnumParticleTypes.SLIME, 2D);
-		EntityUtil.spawnParticleLineBetween(this, target, EnumParticleTypes.SPELL_MOB_AMBIENT, 7.4D);
+		EntityUtil.spawnParticleLineBetween(this, target, 2D, EnumParticleTypes.ITEM_CRACK, Item.getIdFromItem(ItemsAether.swet_jelly), this.getType().ordinal());
+		EntityUtil.spawnParticleLineBetween(this, target, 7.4D, EnumParticleTypes.SPELL_MOB_AMBIENT);
 	}
 
 	@Override

@@ -87,7 +87,7 @@ public class EntityUtil
 		return angle + f;
 	}
 	
-	public static void spawnParticleLineBetween(Entity e1, Entity e2, EnumParticleTypes type, double density)
+	public static void spawnParticleLineBetween(Entity e1, Entity e2, double density, EnumParticleTypes type, int... parameters)
 	{
 		for (int k = 0; k < 1; ++k)
 		{
@@ -126,7 +126,7 @@ public class EntityUtil
 				double motionY = e2.motionY * velcur;
 				double motionZ = e2.motionZ * velcur;
 
-				e1.worldObj.spawnParticle(type, currentX + randX, currentY, currentZ + randZ, motionX, motionY, motionZ);
+				e1.worldObj.spawnParticle(type, currentX + randX, currentY, currentZ + randZ, motionX, motionY, motionZ, parameters);
 
 				currentX += difX;
 				currentY += difY;

@@ -35,7 +35,7 @@ public class EntityTempest extends EntityFlyingMob implements IEntityProperties
 
 		this.faceEntity(target, 10.0F, 10.0F);
 
-		EntityUtil.spawnParticleLineBetween(this, target, EnumParticleTypes.SPELL_INSTANT, 4D);
+		EntityUtil.spawnParticleLineBetween(this, target, 4D, EnumParticleTypes.SPELL_INSTANT);
 	}
 
 	@Override
