@@ -2,23 +2,16 @@ package com.gildedgames.aether.common.capabilities.entity.effects.processors;
 
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
-import com.gildedgames.aether.api.capabilites.entity.properties.ElementalDamageSource;
 import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityPropertiesCapability;
 import com.gildedgames.aether.common.capabilities.entity.effects.AbstractEffectProcessor;
-import com.gildedgames.aether.common.capabilities.entity.effects.RangedAttributeModifier;
 import com.gildedgames.aether.common.capabilities.entity.properties.EntityProperties;
-import com.google.common.base.Supplier;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.List;
-import java.util.Random;
 
 public class ChangeAttackElementEffect extends AbstractEffectProcessor<ChangeAttackElementEffect.Instance>
 {
@@ -69,7 +62,7 @@ public class ChangeAttackElementEffect extends AbstractEffectProcessor<ChangeAtt
 
 		IEntityPropertiesCapability properties = EntityProperties.get(source);
 
-		properties.setElementalStateOverride(instance.getElementalState());
+		properties.setAttackElementOverride(instance.getElementalState());
 	}
 
 	@Override
@@ -82,7 +75,7 @@ public class ChangeAttackElementEffect extends AbstractEffectProcessor<ChangeAtt
 
 		IEntityPropertiesCapability properties = EntityProperties.get(source);
 
-		properties.setElementalStateOverride(null);
+		properties.setAttackElementOverride(null);
 	}
 
 }

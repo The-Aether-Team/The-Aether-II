@@ -20,8 +20,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.List;
 
-import static net.minecraft.realms.Tezzelator.t;
-
 public class EntityProperties implements IEntityPropertiesCapability
 {
 
@@ -74,14 +72,21 @@ public class EntityProperties implements IEntityPropertiesCapability
 	}
 
 	@Override
-	public void setElementalStateOverride(ElementalState override)
+	public void setAttackElementOverride(ElementalState override)
 	{
 		this.override = override;
 	}
 
 	@Override
-	public ElementalState getElementalStateOverride()
+	public ElementalState getAttackElementOverride()
 	{
+		if (this.entity instanceof IEntityProperties)
+		{
+			IEntityProperties properties = (IEntityProperties)this.entity;
+
+			return properties.getElementalState();
+		}
+
 		return this.override;
 	}
 
@@ -104,9 +109,9 @@ public class EntityProperties implements IEntityPropertiesCapability
 		IEntityPropertiesCapability victimProperties = EntityProperties.get(victim);
 		IEntityPropertiesCapability sourceProperties = EntityProperties.get(source);
 
-		if (sourceProperties.getElementalStateOverride() != null)
+		if (sourceProperties.getAttackElementOverride() != null)
 		{
-			event.setAmount(event.getAmount() * sourceProperties.getElementalStateOverride().getModifierAgainst(victimProperties.getElementalState()));
+			event.setAmount(event.getAmount() * sourceProperties.getAttackElementOverride().getModifierAgainst(victimProperties.getElementalState()));
 
 			return;
 		}
