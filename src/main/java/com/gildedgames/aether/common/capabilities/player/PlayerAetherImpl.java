@@ -6,6 +6,9 @@ import com.gildedgames.aether.common.capabilities.player.modules.*;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.util.PlayerUtil;
+import com.gildedgames.util.io_manager.io.NBT;
+import com.gildedgames.util.modules.instances.InstanceModule;
+import com.gildedgames.util.modules.instances.PlayerInstances;
 import com.google.common.collect.Lists;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -68,6 +71,7 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 
 		this.modules.add(this.equipmentModule);
 		this.modules.add(new ExtendedReachModule(this));
+		this.modules.add(new DungeonModule(this));
 	}
 
 	public static PlayerAetherImpl getPlayer(Entity player)

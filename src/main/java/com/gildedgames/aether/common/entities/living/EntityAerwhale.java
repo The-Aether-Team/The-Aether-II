@@ -58,4 +58,10 @@ public class EntityAerwhale extends EntityFlying implements IEntityProperties
 		return ElementalState.AIR;
 	}
 
+	@Override
+	public ElementalState getAttackElement()
+	{
+		return ElementalState.AIR;
+	}
+
 }

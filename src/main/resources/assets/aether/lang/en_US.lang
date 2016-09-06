@@ -524,6 +524,7 @@ elementalState.water=Water
 elementalState.earth=Earth
 elementalState.air=Air
 elementalState.blight=Blight
+elementalState.lightning=Lightning
 
 ability.extraDamage.attack=Attack
 ability.extraDamage.desc=%s %s Damage

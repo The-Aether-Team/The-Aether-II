@@ -81,4 +81,10 @@ public class EntityTempest extends EntityFlyingMob implements IEntityProperties
 	{
 		return ElementalState.AIR;
 	}
+
+	@Override
+	public ElementalState getAttackElement()
+	{
+		return ElementalState.LIGHTNING;
+	}
 }

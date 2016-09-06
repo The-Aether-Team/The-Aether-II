@@ -241,6 +241,12 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 	}
 
 	@Override
+	public ElementalState getAttackElement()
+	{
+		return ElementalState.AIR;
+	}
+
+	@Override
 	public boolean isBreedingItem(@Nullable ItemStack stack)
 	{
 		boolean flag = stack != null && TEMPTATION_ITEMS.contains(stack.getItem());

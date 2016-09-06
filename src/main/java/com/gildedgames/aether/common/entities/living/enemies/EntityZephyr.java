@@ -39,4 +39,10 @@ public class EntityZephyr extends EntityFlyingDayMob implements IEntityPropertie
 	{
 		return ElementalState.AIR;
 	}
+
+	@Override
+	public ElementalState getAttackElement()
+	{
+		return ElementalState.AIR;
+	}
 }

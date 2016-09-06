@@ -12,7 +12,7 @@ import com.gildedgames.util.core.util.BlockPosDimension;
 import com.gildedgames.util.modules.instances.Instance;
 import com.gildedgames.util.modules.instances.InstanceModule;
 import com.gildedgames.util.modules.instances.PlayerInstances;
-import com.gildedgames.util.modules.instances.networking.packet.PacketRegisterInstance;
+import com.gildedgames.util.modules.instances.networking.packet.PacketRegisterDimension;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
@@ -79,16 +79,16 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 			if (interactingPlayer.dimension == instance.getDimIdInside())
 			{
 				handler.teleportBack(player);
+
+				hook.setInstance(null);
 			}
 			else
 			{
-				hook.setInstance(null);
-
 				DungeonInstance inst = handler.get(new BlockPosDimension(this.pos, this.worldObj.provider.getDimension()));
 
 				if (interactingPlayer instanceof EntityPlayerMP)
 				{
-					UtilModule.NETWORK.sendTo(new PacketRegisterInstance(DimensionsAether.SLIDER_LABYRINTH, inst.getDimIdInside()), (EntityPlayerMP)interactingPlayer);
+					UtilModule.NETWORK.sendTo(new PacketRegisterDimension(DimensionsAether.SLIDER_LABYRINTH, inst.getDimIdInside()), (EntityPlayerMP)interactingPlayer);
 				}
 
 				handler.teleportToInst(player, inst);
@@ -100,7 +100,7 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 
 			if (interactingPlayer instanceof EntityPlayerMP)
 			{
-				UtilModule.NETWORK.sendTo(new PacketRegisterInstance(DimensionsAether.SLIDER_LABYRINTH, inst.getDimIdInside()), (EntityPlayerMP)interactingPlayer);
+				UtilModule.NETWORK.sendTo(new PacketRegisterDimension(DimensionsAether.SLIDER_LABYRINTH, inst.getDimIdInside()), (EntityPlayerMP)interactingPlayer);
 			}
 
 			handler.teleportToInst(player, inst);

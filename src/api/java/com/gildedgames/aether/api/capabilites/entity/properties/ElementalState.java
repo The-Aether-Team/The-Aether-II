@@ -85,6 +85,36 @@ public enum ElementalState
 			return TextFormatting.BLUE;
 		}
 	},
+	LIGHTNING
+	{
+		@Override
+		public float getModifierAgainst(ElementalState element)
+		{
+			if (element == ElementalState.WATER)
+			{
+				return 2.0F;
+			}
+
+			if (element == this)
+			{
+				return 0.5F;
+			}
+
+			return 1.0F;
+		}
+
+		@Override
+		public String getUnlocalizedName()
+		{
+			return "elementalState.lightning";
+		}
+
+		@Override
+		public TextFormatting getNameFormatting()
+		{
+			return TextFormatting.DARK_GRAY;
+		}
+	},
 	EARTH
 	{
 		@Override
@@ -120,7 +150,7 @@ public enum ElementalState
 		@Override
 		public float getModifierAgainst(ElementalState element)
 		{
-			if (element == ElementalState.EARTH || element == this)
+			if (element == this)
 			{
 				return 2.0F;
 			}
@@ -145,7 +175,7 @@ public enum ElementalState
 		@Override
 		public float getModifierAgainst(ElementalState element)
 		{
-			if (element == ElementalState.WATER)
+			if (element == ElementalState.EARTH)
 			{
 				return 2.0F;
 			}

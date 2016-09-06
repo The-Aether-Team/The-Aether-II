@@ -5,4 +5,6 @@ public interface IEntityProperties
 
 	ElementalState getElementalState();
 
+	ElementalState getAttackElement();
+
 }

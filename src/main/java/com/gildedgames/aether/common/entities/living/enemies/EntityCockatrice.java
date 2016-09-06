@@ -145,6 +145,12 @@ public class EntityCockatrice extends EntityMob implements IEntityProperties
 		return ElementalState.BLIGHT;
 	}
 
+	@Override
+	public ElementalState getAttackElement()
+	{
+		return ElementalState.BLIGHT;
+	}
+
 	public static class JumpHelperDisable extends EntityJumpHelper
 	{
 

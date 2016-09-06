@@ -86,7 +86,7 @@ public class EntityProperties implements IEntityPropertiesCapability
 		{
 			IEntityProperties properties = (IEntityProperties)this.entity;
 
-			return properties.getElementalState();
+			return properties.getAttackElement();
 		}
 
 		return this.override;

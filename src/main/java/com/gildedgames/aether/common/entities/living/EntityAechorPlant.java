@@ -225,4 +225,10 @@ public class EntityAechorPlant extends EntityMob implements IEntityProperties
 		return ElementalState.BLIGHT;
 	}
 
+	@Override
+	public ElementalState getAttackElement()
+	{
+		return ElementalState.BLIGHT;
+	}
+
 }

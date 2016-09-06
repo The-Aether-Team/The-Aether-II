@@ -211,4 +211,10 @@ public class EntitySwet extends EntityExtendedMob implements IEntityProperties
 		return ElementalState.WATER;
 	}
 
+	@Override
+	public ElementalState getAttackElement()
+	{
+		return ElementalState.WATER;
+	}
+
 }
