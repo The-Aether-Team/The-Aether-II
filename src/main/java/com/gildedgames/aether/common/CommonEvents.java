@@ -117,9 +117,9 @@ public class CommonEvents
 		}
 	}
 
-	private static boolean tryToCreatePortal(World world, BlockPos pos)
+	private static boolean tryToCreatePortal(World world, BlockPos target, BlockPos pos)
 	{
-		if (world.getBlockState(pos.down()).getBlock() == Blocks.GLOWSTONE)
+		if (world.getBlockState(target).getBlock() == Blocks.GLOWSTONE)
 		{
 			BlockAetherPortal.Size size = new BlockAetherPortal.Size(world, pos, EnumFacing.Axis.X);
 
@@ -340,7 +340,7 @@ public class CommonEvents
 	{
 		if (event.getWorld().getBlockState(event.getTarget().getBlockPos()).getBlock() == Blocks.GLOWSTONE)
 		{
-			if (CommonEvents.tryToCreatePortal(event.getWorld(), pos))
+			if (CommonEvents.tryToCreatePortal(event.getWorld(), event.getTarget().getBlockPos(), pos))
 			{
 				if (!event.getEntityPlayer().capabilities.isCreativeMode)
 				{
