@@ -8,7 +8,8 @@ public enum ItemEquipmentType
 	HANDWEAR("gui.aether.slot.handwear"),
 	RELIC("gui.aether.slot.relic"),
 	CHARM("gui.aether.slot.charm"),
-	ARTIFACT("gui.aether.slot.artifact");
+	ARTIFACT("gui.aether.slot.artifact"),
+	OFFHAND("gui.aether.slot.offhand");
 
 	private final String unlocalizedName;
 

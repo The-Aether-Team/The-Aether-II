@@ -47,8 +47,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 
-import static jdk.nashorn.internal.runtime.regexp.joni.encoding.CharacterType.D;
-
 public class ItemsAether
 {
 	public static Item skyroot_stick;
@@ -513,20 +511,20 @@ public class ItemsAether
 
 		IEquipmentRegistry equipmentRegistry = AetherCore.INSTANCE.getEquipmentRegistry();
 
-		equipmentRegistry.register(ItemsAether.iron_ring, ItemRarity.BASIC, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.gold_ring, ItemRarity.BASIC, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.zanite_ring, ItemRarity.BASIC, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.iron_ring, ItemRarity.NONE, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.gold_ring, ItemRarity.NONE, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.zanite_ring, ItemRarity.NONE, ItemEquipmentType.RING);
 
-		equipmentRegistry.register(ItemsAether.zanite_gloves, ItemRarity.BASIC, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.gravitite_gloves, ItemRarity.BASIC, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.zanite_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.gravitite_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.valkyrie_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.neptune_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
 		equipmentRegistry.register(ItemsAether.phoenix_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.leather_gloves, ItemRarity.BASIC, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.iron_gloves, ItemRarity.BASIC, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.gold_gloves, ItemRarity.BASIC, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.chain_gloves, ItemRarity.BASIC, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.diamond_gloves, ItemRarity.BASIC, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.leather_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.iron_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.gold_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.chain_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
+		equipmentRegistry.register(ItemsAether.diamond_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
 
 		/** ARTIFACTS **/
 
@@ -550,9 +548,9 @@ public class ItemsAether
 
 		/** NECKWEAR **/
 
-		equipmentRegistry.register(ItemsAether.iron_pendant, ItemRarity.BASIC, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.gold_pendant, ItemRarity.BASIC, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.zanite_pendant, ItemRarity.BASIC, ItemEquipmentType.NECKWEAR);
+		equipmentRegistry.register(ItemsAether.iron_pendant, ItemRarity.NONE, ItemEquipmentType.NECKWEAR);
+		equipmentRegistry.register(ItemsAether.gold_pendant, ItemRarity.NONE, ItemEquipmentType.NECKWEAR);
+		equipmentRegistry.register(ItemsAether.zanite_pendant, ItemRarity.NONE, ItemEquipmentType.NECKWEAR);
 		equipmentRegistry.register(ItemsAether.ice_pendant, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
 		equipmentRegistry.register(ItemsAether.zanite_studded_choker, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
 		equipmentRegistry.register(ItemsAether.lesser_amulet_of_growth, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
@@ -634,6 +632,16 @@ public class ItemsAether
 
 		equipmentRegistry.register(ItemsAether.continuum_talisman, ItemRarity.MYTHIC, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(ItemsAether.labyrinth_plans, ItemRarity.MYTHIC, ItemEquipmentType.CHARM);
+
+		equipmentRegistry.register(Items.SHIELD, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
+		equipmentRegistry.register(ItemsAether.skyroot_shield, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
+		equipmentRegistry.register(ItemsAether.holystone_shield, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
+		equipmentRegistry.register(ItemsAether.zanite_shield, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
+		equipmentRegistry.register(ItemsAether.arkenium_shield, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
+		equipmentRegistry.register(ItemsAether.gravitite_shield, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
+
+		equipmentRegistry.register(ItemsAether.bolt, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
+		equipmentRegistry.register(ItemsAether.dart, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
 
 		class Effects implements ItemEffects.ItemEffectsProvider
 		{

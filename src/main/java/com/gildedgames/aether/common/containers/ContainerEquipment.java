@@ -175,6 +175,11 @@ public class ContainerEquipment extends ContainerPlayer
 					return i;
 				}
 			}
+
+			if (type == ItemEquipmentType.OFFHAND && slot.getStack() == null && slot.getSlotIndex() == 40)
+			{
+				return i;
+			}
 		}
 
 		return -1;
