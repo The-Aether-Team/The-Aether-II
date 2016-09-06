@@ -5,16 +5,23 @@ import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
 import com.gildedgames.aether.common.items.armor.ItemLeatherGloves;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
+import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+
+import static sun.audio.AudioPlayer.player;
 
 public class LayerPlayerGloves extends LayerBipedArmor
 {
 	private final RenderLivingBase<?> renderer;
+
+	private final ModelPlayer slim, normal;
 
 	public LayerPlayerGloves(RenderLivingBase<?> rendererIn)
 	{
@@ -22,6 +29,9 @@ public class LayerPlayerGloves extends LayerBipedArmor
 
 		this.renderer = rendererIn;
 		this.modelArmor = new ModelBiped(1.0f);
+
+		this.slim = new ModelPlayer(1.0F, true);
+		this.normal = new ModelPlayer(1.0F, false);
 	}
 
 	@Override
@@ -40,7 +50,10 @@ public class LayerPlayerGloves extends LayerBipedArmor
 		{
 			ItemAetherGloves glove = (ItemAetherGloves) itemstack.getItem();
 
+			String skinType = DefaultPlayerSkin.getSkinType(entity.getUniqueID());
+
 			ModelBiped t = this.modelArmor;
+
 			t.bipedBody.showModel = true;
 			t.bipedRightLeg.showModel = true;
 			t.bipedLeftLeg.showModel = true;
@@ -52,6 +65,11 @@ public class LayerPlayerGloves extends LayerBipedArmor
 
 			GlStateManager.scale(0.92F, 0.92F, 0.92F);
 			GlStateManager.translate(0, 0.01F, 0);
+
+			if (skinType == "slim")
+			{
+				GlStateManager.translate(0, 0.05F, 0);
+			}
 
 			if (glove instanceof ItemLeatherGloves)
 			{

@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.items.armor.ItemLeatherGloves;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -13,6 +14,7 @@ import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHandSide;
@@ -44,15 +46,18 @@ public class RenderPlayerHelper
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+		String skinType = DefaultPlayerSkin.getSkinType(player.getUniqueID());
+
+		EnumHandSide hand = Minecraft.getMinecraft().gameSettings.mainHand;
 
 		if (ring1 != null)
 		{
-			RenderPlayerHelper.renderItem(ring1, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress(), 0.11F, 0.112F, -0.25F);
+			RenderPlayerHelper.renderItem(ring1, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress(), skinType == "slim" ? 0.075F : 0.11F, skinType == "slim" ? 0.0752F : 0.112F, -0.25F);
 		}
 
 		if (ring2 != null)
 		{
-			RenderPlayerHelper.renderItem(ring2, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress(), 0.22F, 0.052F, -0.24F);
+			RenderPlayerHelper.renderItem(ring2, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress(), skinType == "slim" ? 0.18F : 0.22F, skinType == "slim" ? 0.017F : 0.052F, -0.24F);
 		}
 	}
 
@@ -64,7 +69,7 @@ public class RenderPlayerHelper
 
 		Minecraft.getMinecraft().getTextureManager().bindTexture(glove.getGloveTexture(0));
 
-		RenderPlayerHelper.renderArmFirstPerson(stack, equipProgress, swingProgress, EnumHandSide.RIGHT);
+		RenderPlayerHelper.renderArmFirstPerson(stack, equipProgress, swingProgress, Minecraft.getMinecraft().gameSettings.mainHand);
 
 		GlStateManager.popMatrix();
 	}
@@ -79,15 +84,10 @@ public class RenderPlayerHelper
 
 		if (stack != null)
 		{
-			float f = -0.4F * MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float)Math.PI);
-			float f1 = 0.2F * MathHelper.sin(MathHelper.sqrt_float(swingProgress) * ((float)Math.PI * 2F));
-			float f2 = -0.2F * MathHelper.sin(swingProgress * (float)Math.PI);
-			int i = 1;
-
 			GlStateManager.translate(x, y, z);
-			GlStateManager.translate((float)i * f, f1, f2);
-			RenderPlayerHelper.transformSideFirstPerson(EnumHandSide.RIGHT, equipProgress);
-			RenderPlayerHelper.transformFirstPerson(EnumHandSide.RIGHT, swingProgress);
+
+			RenderPlayerHelper.transformSideFirstPerson(Minecraft.getMinecraft().gameSettings.mainHand, equipProgress);
+			RenderPlayerHelper.transformFirstPerson(Minecraft.getMinecraft().gameSettings.mainHand, swingProgress);
 
 			GlStateManager.scale(0.2F, 0.2F, 0.2F);
 			//GlStateManager.rotate(15F, 1F, 0F, 0F);
@@ -97,7 +97,7 @@ public class RenderPlayerHelper
 			GlStateManager.rotate(40F, 1F, 0F, 0F);
 			//GlStateManager.rotate(pitch, 1F, 0F, 0F);
 
-			itemRenderer.renderItemSide(Minecraft.getMinecraft().thePlayer, stack, ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND, true);
+			itemRenderer.renderItemSide(Minecraft.getMinecraft().thePlayer, stack, Minecraft.getMinecraft().gameSettings.mainHand == EnumHandSide.LEFT ? ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND : ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND, Minecraft.getMinecraft().gameSettings.mainHand == EnumHandSide.LEFT);
 		}
 
 		GlStateManager.popMatrix();
@@ -127,11 +127,19 @@ public class RenderPlayerHelper
 
 		GlStateManager.translate(0.07F, -0.018F, -0.035F);
 
+		String skinType = DefaultPlayerSkin.getSkinType(Minecraft.getMinecraft().thePlayer.getUniqueID());
+
 		GlStateManager.rotate(f * 120.0F, 0.0F, 0.0F, 1.0F);
 		GlStateManager.rotate(200.0F, 1.0F, 0.0F, 0.0F);
 		GlStateManager.rotate(f * -135.0F, 0.0F, 1.0F, 0.0F);
 
 		GlStateManager.translate(f * 5.6F, 0.0F, 0.0F);
+
+		if (skinType == "slim")
+		{
+			GlStateManager.translate(0.08F, 0.06F, 0.0F);
+		}
+
 		RenderPlayer renderplayer = (RenderPlayer)Minecraft.getMinecraft().getRenderManager().getEntityRenderObject(abstractclientplayer);
 		GlStateManager.disableCull();
 
@@ -154,7 +162,7 @@ public class RenderPlayerHelper
 				GlStateManager.color(1.0F, 1.0F, 1.0F);
 			}
 
-			ModelBiped t = new ModelBiped(1.0f);
+			ModelBiped t = new ModelBiped(1.0F);
 			t.bipedBody.showModel = true;
 			t.bipedRightLeg.showModel = true;
 			t.bipedLeftLeg.showModel = true;
