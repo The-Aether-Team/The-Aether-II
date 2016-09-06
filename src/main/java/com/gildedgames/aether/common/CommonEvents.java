@@ -41,6 +41,8 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fluids.*;
+import net.minecraftforge.fluids.capability.*;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.Event;
@@ -88,7 +90,14 @@ public class CommonEvents
 	{
 		if (event.getTarget() != null && event.getTarget().typeOfHit == RayTraceResult.Type.BLOCK)
 		{
-			FluidStack fluidStack = FluidContainerRegistry.getFluidForFilledItem(event.getEmptyBucket());
+			FluidStack fluidStack = null;
+
+			if (event.getEmptyBucket().hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null))
+			{
+				IFluidHandler fluidHandler = FluidUtil.getFluidHandler(event.getEmptyBucket());
+
+				fluidStack = FluidUtil.getFluidContained(event.getEmptyBucket());
+			}
 
 			final EntityPlayer player = event.getEntityPlayer();
 
@@ -335,7 +344,25 @@ public class CommonEvents
 			{
 				if (!event.getEntityPlayer().capabilities.isCreativeMode)
 				{
-					event.getEntityPlayer().inventory.setInventorySlotContents(event.getEntityPlayer().inventory.currentItem, FluidContainerRegistry.drainFluidContainer(event.getEmptyBucket()));
+					IFluidHandler fluidHandler = FluidUtil.getFluidHandler(event.getEmptyBucket());
+					ItemStack stack = null;
+
+					if (fluidHandler != null)
+					{
+						stack = FluidUtil.tryEmptyContainer(event.getEmptyBucket(), fluidHandler, Integer.MAX_VALUE, player, true);
+					}
+
+					if (event.getEmptyBucket().getItem() == Items.WATER_BUCKET)
+					{
+						stack = new ItemStack(Items.BUCKET);
+					}
+
+					if (event.getEmptyBucket().getItem() == ItemsAether.skyroot_water_bucket)
+					{
+						stack = new ItemStack(ItemsAether.skyroot_bucket);
+					}
+
+					event.getEntityPlayer().inventory.setInventorySlotContents(event.getEntityPlayer().inventory.currentItem, stack);
 				}
 
 				event.setCanceled(true);
@@ -351,9 +378,20 @@ public class CommonEvents
 
 			if (!player.capabilities.isCreativeMode)
 			{
-				final ItemStack newStack = FluidContainerRegistry.drainFluidContainer(event.getEmptyBucket());
+				IFluidHandler fluidHandler = FluidUtil.getFluidHandler(event.getEmptyBucket());
+				ItemStack stack = null;
 
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, newStack);
+				if (fluidHandler != null)
+				{
+					stack = FluidUtil.tryEmptyContainer(event.getEmptyBucket(), fluidHandler, Integer.MAX_VALUE, player, true);
+				}
+
+				if (event.getEmptyBucket().getItem() == Items.LAVA_BUCKET)
+				{
+					stack = new ItemStack(Items.BUCKET);
+				}
+
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, stack);
 			}
 
 			if (event.getWorld().isRemote)
