@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
+import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -48,6 +49,11 @@ public class PlayerAetherEvents
 		EntityPlayerMP player = (EntityPlayerMP) event.getEntity();
 
 		PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
+
+		if (event.getTarget() instanceof EntityPlayer)
+		{
+			NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(player, PlayerAetherEvents.getAllEquipment(aePlayer.getEquipmentInventory())), player);
+		}
 	}
 
 	@SubscribeEvent
@@ -56,6 +62,8 @@ public class PlayerAetherEvents
 		EntityPlayerMP player = (EntityPlayerMP) event.player;
 
 		PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
+
+		NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(player, PlayerAetherEvents.getAllEquipment(aePlayer.getEquipmentInventory())), player);
 	}
 
 	private static List<Pair<Integer, ItemStack>> getAllEquipment(IInventoryEquipment equipment)
