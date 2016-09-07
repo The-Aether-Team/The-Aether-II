@@ -208,7 +208,11 @@
 	"mob.aerwhale.ambient": {
 		"category": "neutral",
 		"sounds": [
-			"aether:mob/aerwhale/say"
+			"aether:mob/aerwhale/say1",
+			"aether:mob/aerwhale/say2",
+			"aether:mob/aerwhale/say3",
+			"aether:mob/aerwhale/say4",
+			"aether:mob/aerwhale/say5"
 		]
 	},
 	"mob.aerwhale.death": {
