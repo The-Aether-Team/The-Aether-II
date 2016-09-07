@@ -52,12 +52,12 @@ public class RenderPlayerHelper
 
 		if (ring1 != null)
 		{
-			RenderPlayerHelper.renderItem(ring1, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress(), skinType == "slim" ? 0.075F : 0.11F, skinType == "slim" ? 0.0752F : 0.112F, -0.25F);
+			RenderPlayerHelper.renderItem(ring1, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress(), skinType == "slim" ? 0.075F : 0.09F, skinType == "slim" ? 0.0752F : 0.112F, -0.20F);
 		}
 
 		if (ring2 != null)
 		{
-			RenderPlayerHelper.renderItem(ring2, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress(), skinType == "slim" ? 0.18F : 0.22F, skinType == "slim" ? 0.017F : 0.052F, -0.24F);
+			RenderPlayerHelper.renderItem(ring2, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress(), skinType == "slim" ? 0.18F : 0.195F, skinType == "slim" ? 0.017F : 0.0552F, -0.19F);
 		}
 	}
 
