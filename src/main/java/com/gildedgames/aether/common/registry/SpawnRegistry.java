@@ -75,7 +75,7 @@ public class SpawnRegistry
 		animals.addEntry(aerbunny);
 		animals.addEntry(phyg);
 		animals.addEntry(carrion_sprout);
-		animals.addEntry(aerwhale);
+		//animals.addEntry(aerwhale);
 
 		/** HOSTILES **/
 		SpawnHandler hostiles = new SpawnHandler("aether_hostiles").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(1200);
@@ -89,7 +89,7 @@ public class SpawnRegistry
 		SpawnEntry swet = new SpawnEntry(EntitySwet.class, 2, 4).conditiion(groundCheck);
 		SpawnEntry aechor_plant = new SpawnEntry(EntityAechorPlant.class, 2, 3).conditiion(grassCheck);
 
-		hostiles.addEntry(zephyr);
+		//hostiles.addEntry(zephyr);
 		hostiles.addEntry(tempest);
 		hostiles.addEntry(cockatrice);
 		hostiles.addEntry(swet);
