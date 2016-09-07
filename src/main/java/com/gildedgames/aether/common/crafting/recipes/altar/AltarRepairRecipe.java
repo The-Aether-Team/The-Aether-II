@@ -59,7 +59,7 @@ public class AltarRepairRecipe implements IAltarRecipe
 				return 5;
 			}
 
-			if (armor.getArmorMaterial() == MaterialsAether.LEGENDARY_ARMOR || armor.getArmorMaterial() == MaterialsAether.OBSIDIAN_ARMOR || armor.getArmorMaterial() == MaterialsAether.VALKYRIE_ARMOR)
+			if (armor.getArmorMaterial() == MaterialsAether.LEGENDARY_ARMOR || armor.getArmorMaterial() == MaterialsAether.VALKYRIE_ARMOR)
 			{
 				return 6;
 			}
