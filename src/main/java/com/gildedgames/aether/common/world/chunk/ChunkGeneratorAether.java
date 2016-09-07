@@ -76,7 +76,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		this.cloudNoiseGenerator = new NoiseGeneratorOctaves(this.rand, 12);
 
 		this.mainLand = new ChunkGenContinents(world, seed, new GenPropsMainLand(this.aether_stone, 250.0D, 100));
-		//this.mainLandOverhangs = new ChunkGenFloatingIsland(world, seed + 50L, new GenPropsMainLand(aether_stone, 100.0D, 30));
+		//this.mainLandOverhangs = newsystem ChunkGenFloatingIsland(world, seed + 50L, newsystem GenPropsMainLand(aether_stone, 100.0D, 30));
 
 		this.smallLayer1 = new ChunkGenFloatingIsland(world, seed + 100L, new GenPropsSmallIslands(this.aether_stone, 100.0D, 50));
 		this.smallLayer2 = new ChunkGenFloatingIsland(world, seed + 200L, new GenPropsSmallIslands(this.aether_stone, 100.0D, 60));
@@ -425,7 +425,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 	@Override
 	public Chunk provideChunk(int chunkX, int chunkZ)
 	{
-		//this.mainLand = new ChunkGenContinents(this.worldObj, this.worldObj.getSeed(), new GenPropsMainLand(aether_stone, 250.0D, 100));
+		//this.mainLand = newsystem ChunkGenContinents(this.worldObj, this.worldObj.getSeed(), newsystem GenPropsMainLand(aether_stone, 250.0D, 100));
 
 		this.rand.setSeed((long) chunkX * 341873128712L + (long) chunkZ * 132897987541L);
 

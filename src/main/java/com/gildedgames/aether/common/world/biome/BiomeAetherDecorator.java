@@ -277,7 +277,7 @@ public class BiomeAetherDecorator
 		for (int count = 0; count < attempts; count++)
 		{
 			BlockPos randomPos = pos.add(random.nextInt(16), random.nextInt(maxY - minY) + minY, random.nextInt(16));
-//			randomPos = world.getTopSolidOrLiquidBlock(randomPos);
+//			randomPos = world.getTopBlockHeight(randomPos);
 
 			if (world.getLightFor(EnumSkyBlock.SKY, randomPos) <= 7)
 			{

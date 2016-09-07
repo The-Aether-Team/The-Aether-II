@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.world.TeleporterAether;
+import com.gildedgames.aether.common.registry.SpawnRegistry;
 import com.gildedgames.util.io.ClassSerializer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -42,6 +43,8 @@ public class AetherCore implements IAetherServices
 
 	public static TeleporterAether TELEPORTER;
 
+	private static final SpawnRegistry SPAWN_REGISTRY = new SpawnRegistry();
+
 	private final ClassSerializer srl = new ClassSerializer(AetherCore.MOD_ID + "Srl");
 
 	public static ClassSerializer srl()
@@ -57,18 +60,29 @@ public class AetherCore implements IAetherServices
 		MinecraftForge.EVENT_BUS.register(AetherCore.CONFIG);
 
 		AetherCore.PROXY.preInit(event);
+
+		AetherCore.SPAWN_REGISTRY.registerAetherSpawnHandlers();
 	}
 
 	@EventHandler
 	public void onServerStopping(FMLServerStoppingEvent event)
 	{
 		DimensionsAether.onServerStopping(event);
+
+		AetherCore.SPAWN_REGISTRY.write();
+	}
+
+	@EventHandler
+	public void serverStarted(FMLServerStartedEvent event)
+	{
+		AetherCore.SPAWN_REGISTRY.read();
 	}
 
 	@EventHandler
 	public void onFMLInit(FMLInitializationEvent event)
 	{
 		AetherCore.PROXY.init(event);
+		MinecraftForge.EVENT_BUS.register(this.SPAWN_REGISTRY);
 	}
 
 	@EventHandler

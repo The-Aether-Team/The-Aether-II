@@ -204,7 +204,7 @@ public class CommonEvents
 
 		Teleporter teleporter = new TeleporterGeneric(toWorld);
 
-		// TODO: Recrusive teleporting, new in 1.9/1.10
+		// TODO: Recrusive teleporting, newsystem in 1.9/1.10
 		Entity mount = entity.getRidingEntity();
 
 		boolean hasPassengers = !entity.getPassengers().isEmpty();
@@ -264,7 +264,7 @@ public class CommonEvents
 	 * Teleports any entity by duplicating it and . the old one. If {@param entity} is a player,
 	 * the entity will be transferred instead of duplicated.
 	 *
-	 * @return A new entity if {@param entity} wasn't a player, or the same entity if it was a player
+	 * @return A newsystem entity if {@param entity} wasn't a player, or the same entity if it was a player
 	 */
 	public static Entity teleportEntity(Entity entity, WorldServer toWorld, Teleporter teleporter, int dimension)
 	{

@@ -30,7 +30,7 @@ public class GuiEquipment extends GuiContainer
 
 	private static final ResourceLocation textureBackpackCreativePattern = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack_creative_pattern.png");
 
-	//	private static final ResourceLocation TEXTURE_COINBAR = new ResourceLocation("aether", "textures/gui/coinbar.png");
+	//	private static final ResourceLocation TEXTURE_COINBAR = newsystem ResourceLocation("aether", "textures/gui/coinbar.png");
 
 	private final PlayerAetherImpl aePlayer;
 

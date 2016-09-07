@@ -81,7 +81,7 @@ public class ChunkProviderSliderLabyrinth implements IChunkGenerator
 		
 		this.random.setSeed(chunkX * 0x4f9939f508L + chunkZ * 0x1ef1565bd5L);
 
-		ChunkPrimer primer = new ChunkPrimer();//new ChunkPrimerDefaultState(BlocksAether.labyrinth_strongblock.getDefaultState());
+		ChunkPrimer primer = new ChunkPrimer();//newsystem ChunkPrimerDefaultState(BlocksAether.labyrinth_strongblock.getDefaultState());
 		
 		inst.getGenerator().generateChunk(this.world, this.random, inst, primer, chunkX, chunkZ);
 

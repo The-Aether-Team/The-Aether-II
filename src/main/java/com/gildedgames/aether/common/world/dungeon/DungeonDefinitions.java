@@ -50,9 +50,9 @@ public class DungeonDefinitions
 					Template loot_pillars_1 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/loot_pillars_1"));
 					Template loot_pillars_2 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/loot_pillars_2"));
 
-					//Template labTunnel = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel"));
-					//Template labTunnelLeft = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel_Left"));
-					//Template labTunnelRight = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel_Right"));
+					//Template labTunnel = MANAGER.func_189942_b(server, newsystem ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel"));
+					//Template labTunnelLeft = MANAGER.func_189942_b(server, newsystem ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel_Left"));
+					//Template labTunnelRight = MANAGER.func_189942_b(server, newsystem ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel_Right"));
 
 					rooms.add(new DungeonRoom(loot_large_2));
 					rooms.add(new DungeonRoom(loot_large_4));
@@ -67,20 +67,20 @@ public class DungeonDefinitions
 					rooms.add(new DungeonRoom(loot_small));
 					rooms.add(new DungeonRoom(loot_small));
 
-					//rooms.add(new DungeonRoom(labTunnel));
-					//rooms.add(new DungeonRoom(labTunnelLeft));
-					//rooms.add(new DungeonRoom(labTunnelRight));
+					//rooms.add(newsystem DungeonRoom(labTunnel));
+					//rooms.add(newsystem DungeonRoom(labTunnelLeft));
+					//rooms.add(newsystem DungeonRoom(labTunnelRight));
 
 					/*for (int count = 0; count < 3; count++){
-						rooms.add(new DungeonRoom(5, 5, 5));
+						rooms.add(newsystem DungeonRoom(5, 5, 5));
 					}
 
 					for (int count = 0; count < 3; count++){
-						rooms.add(new DungeonRoom(10, 5, 5));
+						rooms.add(newsystem DungeonRoom(10, 5, 5));
 					}
 
 					for (int count = 0; count < 3; count++){
-						rooms.add(new DungeonRoom(15, 5, 15));
+						rooms.add(newsystem DungeonRoom(15, 5, 15));
 					}*/
 
 					return rooms;

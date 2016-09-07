@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcess
 import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityPropertiesCapability;
+import com.gildedgames.aether.api.capabilites.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.capabilites.items.IItemBreakable;
 import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
 import com.gildedgames.aether.api.capabilites.items.extra_data.IItemExtraDataCapability;
@@ -14,6 +15,8 @@ import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.client.renderer.AetherRenderers;
 import com.gildedgames.aether.common.capabilities.entity.properties.EntityProperties;
 import com.gildedgames.aether.common.capabilities.entity.properties.EntityPropertiesProvider;
+import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfo;
+import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfoProvider;
 import com.gildedgames.aether.common.capabilities.item.ItemBreakable;
 import com.gildedgames.aether.common.capabilities.item.ItemBreakableProvider;
 import com.gildedgames.aether.common.capabilities.item.effects.ItemEffects;
@@ -54,6 +57,7 @@ public class AetherCapabilityManager
 		CapabilityManager.INSTANCE.register(IItemExtraDataCapability.class, new ItemExtraDataImpl.Storage(), ItemExtraDataImpl.class);
 		CapabilityManager.INSTANCE.register(IEntityPropertiesCapability.class, new EntityProperties.Storage(), EntityProperties.class);
 		CapabilityManager.INSTANCE.register(IItemBreakable.class, new ItemBreakable.Storage(), ItemBreakable.class);
+		CapabilityManager.INSTANCE.register(ISpawningInfo.class, new EntitySpawningInfo.Storage(), EntitySpawningInfo.class);
 	}
 
 	@SubscribeEvent
@@ -129,6 +133,7 @@ public class AetherCapabilityManager
 
 		event.addCapability(AetherCore.getResource("EntityEffects"), new EntityEffectsProvider(new EntityEffects(event.getEntity())));
 		event.addCapability(AetherCore.getResource("EntityProperties"), new EntityPropertiesProvider(new EntityProperties(event.getEntity())));
+		event.addCapability(AetherCore.getResource("EntitySpawningInfo"), new EntitySpawningInfoProvider());
 
 		if (event.getEntity() instanceof EntityPlayer)
 		{

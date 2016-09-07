@@ -757,7 +757,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 		{
 			branches.get(c).add(connection.getPointA());
 		}
-		else //Create a new branch containing the points of the connection
+		else //Create a newsystem branch containing the points of the connection
 		{
 			List<int[]> newBranch = new ArrayList<>();
 
