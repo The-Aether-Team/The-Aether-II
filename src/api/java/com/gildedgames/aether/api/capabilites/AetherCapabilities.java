@@ -1,6 +1,7 @@
 package com.gildedgames.aether.api.capabilites;
 
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityPropertiesCapability;
+import com.gildedgames.aether.api.capabilites.items.IItemBreakable;
 import com.gildedgames.aether.api.capabilites.items.extra_data.IItemExtraDataCapability;
 import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
@@ -28,4 +29,7 @@ public class AetherCapabilities
 
 	@CapabilityInject(IEntityPropertiesCapability.class)
 	public static final Capability<IEntityPropertiesCapability> ENTITY_PROPERTIES = null;
+
+	@CapabilityInject(IItemBreakable.class)
+	public static final Capability<IItemBreakable> ITEM_BREAKABLE = null;
 }
