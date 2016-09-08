@@ -142,14 +142,14 @@ public class SpawnHandler implements NBT
 	{
 		ChunkMap<SpawnArea> areas = this.activeAreas.get(dim);
 
-		return areas.containsKey(areaX, areaZ);
+		return areas != null && areas.containsKey(areaX, areaZ);
 	}
 
 	public SpawnArea getAreaReadOnly(int dim, int areaX, int areaZ)
 	{
 		ChunkMap<SpawnArea> areas = this.activeAreas.get(dim);
 
-		if (areas.containsKey(areaX, areaZ))
+		if (areas != null && areas.containsKey(areaX, areaZ))
 		{
 			return areas.get(areaX, areaZ);
 		}
