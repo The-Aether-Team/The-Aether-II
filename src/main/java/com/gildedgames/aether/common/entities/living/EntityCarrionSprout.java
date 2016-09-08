@@ -36,8 +36,6 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 		this.spawnableBlock = BlocksAether.aether_grass;
 
 		this.tasks.addTask(0, new EntityAIWatchClosest(this, EntityPlayer.class, 8));
-
-		this.setRotation(world.rand.nextFloat() * 360F, 0.0F);
 	}
 
 	@Override
@@ -103,6 +101,14 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	@Override
 	public void onLivingUpdate()
 	{
+		if (this.ticksExisted == 0)
+		{
+			this.setRotation(this.worldObj.rand.nextFloat() * 360F, 0.0F);
+			this.renderYawOffset = this.rotationYaw;
+		}
+
+		super.onLivingUpdate();
+
 		if (!this.isFullyGrown() && this.ticksExisted % 800 == 0)
 		{
 			this.setSproutSize(this.getSproutSize() + 2);
