@@ -1,9 +1,8 @@
 package com.gildedgames.aether.common.world.spawning;
 
-import com.gildedgames.aether.common.world.spawning.util.GroundHeightSelector;
+import com.gildedgames.aether.common.world.spawning.util.GroundPositionSelector;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
-import net.minecraft.world.World;
 
 import java.util.List;
 
@@ -12,29 +11,26 @@ public class SpawnEntry
 
 	private Class<? extends Entity> clazz;
 
-	private int minGroupSize, maxGroupSize, scatterSize;
+	private int minGroupSize, maxGroupSize;
+
+	private float rarityWeight;
 
 	private List<PosCondition> conditions = Lists.newArrayList();
 
-	private final HeightSelector heightSelector;
+	private final PositionSelector positionSelector;
 
-	public SpawnEntry(Class<? extends Entity> clazz, int minGroupSize, int maxGroupSize)
+	public SpawnEntry(Class<? extends Entity> clazz, float rarityWeight, int minGroupSize, int maxGroupSize)
 	{
-		this(clazz, minGroupSize, maxGroupSize, 4);
+		this(clazz, rarityWeight, minGroupSize, maxGroupSize, new GroundPositionSelector());
 	}
 
-	public SpawnEntry(Class<? extends Entity> clazz, int minGroupSize, int maxGroupSize, int scatterSize)
-	{
-		this(clazz, minGroupSize, maxGroupSize, scatterSize, new GroundHeightSelector());
-	}
-
-	public SpawnEntry(Class<? extends Entity> clazz, int minGroupSize, int maxGroupSize, int scatterSize, HeightSelector heightSelector)
+	public SpawnEntry(Class<? extends Entity> clazz, float rarityWeight, int minGroupSize, int maxGroupSize, PositionSelector heightSelector)
 	{
 		this.clazz = clazz;
+		this.rarityWeight = rarityWeight;
 		this.minGroupSize = minGroupSize;
 		this.maxGroupSize = maxGroupSize;
-		this.scatterSize = scatterSize;
-		this.heightSelector = heightSelector;
+		this.positionSelector = heightSelector;
 	}
 
 	public SpawnEntry conditiion(PosCondition condition)
@@ -61,14 +57,11 @@ public class SpawnEntry
 		return this.maxGroupSize;
 	}
 
-	public int getScatterSize()
-	{
-		return this.scatterSize;
-	}
+	public float getRarityWeight() { return this.rarityWeight; }
 
-	public HeightSelector getHeightSelector()
+	public PositionSelector getPositionSelector()
 	{
-		return this.heightSelector;
+		return this.positionSelector;
 	}
 
 }

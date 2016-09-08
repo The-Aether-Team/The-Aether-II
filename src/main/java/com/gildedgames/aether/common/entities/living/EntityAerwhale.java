@@ -19,7 +19,7 @@ public class EntityAerwhale extends EntityFlying implements IEntityProperties
 	@Override
 	public int getTalkInterval()
 	{
-		return 800;
+		return 2000;
 	}
 
 	@Override

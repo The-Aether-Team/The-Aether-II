@@ -1,14 +1,19 @@
 package com.gildedgames.aether.common.world.spawning.util;
 
-import com.gildedgames.aether.common.world.spawning.HeightSelector;
-import com.gildedgames.util.core.util.GGHelper;
+import com.gildedgames.aether.common.world.spawning.PositionSelector;
 import net.minecraft.world.World;
 
-public class FlyingHeightSelector implements HeightSelector
+public class FlyingPositionSelector implements PositionSelector
 {
 	@Override
 	public int getPosY(World world, int posX, int posZ)
 	{
 		return world.rand.nextInt(world.getActualHeight());
+	}
+
+	@Override
+	public int getScatter(World world)
+	{
+		return 4;
 	}
 }

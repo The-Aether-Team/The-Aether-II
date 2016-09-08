@@ -3,16 +3,19 @@ package com.gildedgames.aether.common.world.spawning;
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.capabilites.entity.spawning.EntitySpawn;
+import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
 import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.util.core.UtilModule;
 import com.gildedgames.util.core.util.GGHelper;
 import com.gildedgames.util.io_manager.io.NBT;
 import com.gildedgames.util.core.util.ChunkMap;
+import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -257,20 +260,62 @@ public class SpawnHandler implements NBT
 		}
 	}
 
+	private SpawnEntry getWeightedEntry()
+	{
+		int maxRoll = 0;
+		int roll;
+
+		List<SpawnEntry> table = Lists.newArrayList();
+
+		for (SpawnEntry entry : this.entries)
+		{
+			table.add(entry);
+
+			maxRoll += entry.getRarityWeight();
+		}
+
+		if(table.size() == 0)
+		{
+			return null;
+		}
+
+		roll = (int)(Math.random() * maxRoll);
+
+		for (SpawnEntry entry : table)
+		{
+			// return element if roll < weight
+			if(roll < entry.getRarityWeight())
+			{
+				return entry;
+			}
+
+			// otherwise, subtract weight before moving on
+			roll -= entry.getRarityWeight();
+		}
+
+		return null;
+	}
+
 	private void checkAndSpawnEntries(World world, ChunkMap<SpawnArea> areas) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException
 	{
 		int areaInBlocks = this.chunkArea * 16;
 
 		for (SpawnArea area : areas.getValues())
 		{
-			outer: for (final SpawnEntry entry : this.entries)
+			outer: while (area.getEntityCount() < this.targetEntityCountPerArea)
 			{
-				if (area.getEntityCount() >= this.targetEntityCountPerArea)
+				SpawnEntry entry = this.getWeightedEntry();
+
+				if (entry == null)
 				{
 					break;
 				}
 
-				int groupSize = entry.getMinGroupSize() + world.rand.nextInt(entry.getMaxGroupSize() - entry.getMinGroupSize());
+				int dif = entry.getMaxGroupSize() - entry.getMinGroupSize();
+
+				int randSize = dif > 0 ? world.rand.nextInt(dif) : 0;
+
+				int groupSize = entry.getMinGroupSize() + randSize;
 
 				if (area.getEntityCount() + groupSize > this.targetEntityCountPerArea)
 				{
@@ -289,15 +334,26 @@ public class SpawnHandler implements NBT
 
 				inner: for (int count = 0; count < groupSize; count++)
 				{
-					int scatterX = (world.rand.nextBoolean() ? 1 : -1) * world.rand.nextInt(entry.getScatterSize());
-					int scatterZ = (world.rand.nextBoolean() ? 1 : -1) * world.rand.nextInt(entry.getScatterSize());
+					int scatterX = (world.rand.nextBoolean() ? 1 : -1) * world.rand.nextInt(entry.getPositionSelector().getScatter(world));
+					int scatterZ = (world.rand.nextBoolean() ? 1 : -1) * world.rand.nextInt(entry.getPositionSelector().getScatter(world));
 
 					float posX = groupPosX + scatterX;
 					float posZ = groupPosZ + scatterZ;
 
-					int posY = entry.getHeightSelector().getPosY(world, MathHelper.floor_float(posX), MathHelper.floor_float(posZ));
+					int posY = entry.getPositionSelector().getPosY(world, MathHelper.floor_float(posX), MathHelper.floor_float(posZ));
 
 					BlockPos spawnAt = new BlockPos(posX, posY, posZ);
+
+					if (!world.isBlockLoaded(spawnAt, true))
+					{
+						if (attempts < MAX_ATTEMPTS)
+						{
+							attempts++;
+							count--;
+						}
+
+						continue;
+					}
 
 					if (world.isAnyPlayerWithinRangeAt(posX, posY, posZ, 24.0D))
 					{
@@ -359,6 +415,11 @@ public class SpawnHandler implements NBT
 
 						entity.setDead();
 					}
+				}
+
+				if (attempts >= MAX_ATTEMPTS)
+				{
+					break;
 				}
 			}
 		}
