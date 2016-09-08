@@ -9,6 +9,7 @@ import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceHandler;
 import com.gildedgames.util.core.UtilModule;
 import com.gildedgames.util.core.util.BlockPosDimension;
+import com.gildedgames.util.modules.instances.IPlayerInstances;
 import com.gildedgames.util.modules.instances.Instance;
 import com.gildedgames.util.modules.instances.InstanceModule;
 import com.gildedgames.util.modules.instances.PlayerInstances;
@@ -70,7 +71,7 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 
 		DungeonInstanceHandler handler = AetherCore.PROXY.getDungeonInstanceHandler();
 
-		PlayerInstances hook = InstanceModule.INSTANCE.getPlayer(player);
+		IPlayerInstances hook = InstanceModule.INSTANCE.getPlayer(player);
 
 		if (hook.getInstance() instanceof Instance)
 		{
