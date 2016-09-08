@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.util.flying;
 
+import com.gildedgames.aether.common.entities.ai.EntityAIForcedWander;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityBodyHelper;
@@ -43,7 +44,7 @@ public class EntityFlying extends EntityCreature
 	protected void initEntityAI()
 	{
 		EntityAIMoveTowardsRestriction moveTowardsRestriction = new EntityAIMoveTowardsRestriction(this, 0.4D);
-		EntityAIWander wander = new EntityAIWander(this, 0.4D, 3);
+		EntityAIWander wander = new EntityAIForcedWander(this, 0.4D, 3);
 
 		wander.setMutexBits(3);
 		moveTowardsRestriction.setMutexBits(3);
