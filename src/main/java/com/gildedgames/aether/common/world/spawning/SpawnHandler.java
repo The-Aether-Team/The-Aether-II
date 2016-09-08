@@ -334,8 +334,8 @@ public class SpawnHandler implements NBT
 
 				inner: for (int count = 0; count < groupSize; count++)
 				{
-					int scatterX = (world.rand.nextBoolean() ? 1 : -1) * world.rand.nextInt(entry.getPositionSelector().getScatter(world));
-					int scatterZ = (world.rand.nextBoolean() ? 1 : -1) * world.rand.nextInt(entry.getPositionSelector().getScatter(world));
+					int scatterX = (world.rand.nextBoolean() ? 1 : -1) * (1 + world.rand.nextInt(entry.getPositionSelector().getScatter(world)));
+					int scatterZ = (world.rand.nextBoolean() ? 1 : -1) * (1 + world.rand.nextInt(entry.getPositionSelector().getScatter(world)));
 
 					float posX = groupPosX + scatterX;
 					float posZ = groupPosZ + scatterZ;
