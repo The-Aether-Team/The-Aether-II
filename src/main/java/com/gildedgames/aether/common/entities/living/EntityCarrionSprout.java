@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -35,6 +36,8 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 		this.spawnableBlock = BlocksAether.aether_grass;
 
 		this.tasks.addTask(0, new EntityAIWatchClosest(this, EntityPlayer.class, 8));
+
+		this.setRotation(world.rand.nextFloat() * 360F, 0.0F);
 	}
 
 	@Override
