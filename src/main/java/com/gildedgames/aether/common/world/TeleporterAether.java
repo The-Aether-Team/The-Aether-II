@@ -403,7 +403,7 @@ public class TeleporterAether extends Teleporter implements NBT
 			}
 
 			final BlockPosDimension checkPosition = this.getPortalPosition(this.worldServerInstance, ourPortal.getX(),
-					ourPortal.getY(), ourPortal.getZ(), false);
+					ourPortal.getY(), ourPortal.getZ(), true);
 
 			if (this.worldServerInstance.getBlockState(checkPosition).getBlock() != BlocksAether.aether_portal)
 			{
