@@ -13,7 +13,7 @@ public class RenderSwet extends RenderLiving<EntitySwet>
 
     public RenderSwet(RenderManager renderManagerIn)
     {
-        super(renderManagerIn, new ModelSlime(2), 1.0F);
+        super(renderManagerIn, new ModelSlime(16), 1.0F);
 
         this.addLayer(new LayerSwetGel(this));
     }
