@@ -10,6 +10,7 @@ import com.gildedgames.aether.common.world.TeleporterAether;
 import com.gildedgames.util.core.util.TeleporterGeneric;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,10 +26,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -149,20 +147,35 @@ public class CommonEvents
 	public static void onLivingEntityUpdate(LivingEvent.LivingUpdateEvent event)
 	{
 		final Entity entity = event.getEntity();
-		final Block blockBeneath = entity.worldObj.getBlockState(entity.getPosition().down()).getBlock();
 
-		if (blockBeneath == BlocksAether.quicksoil)
+		if (entity != null && entity.worldObj != null)
 		{
-			// This doesn't work all the time, because it's only called when the player is
-			// directly on top of Quicksoil. If you go slow enough, during the next player update, it
-			// will see the player is on top of an air block instead, and this won't be called.
+			List<AxisAlignedBB> boxes = entity.worldObj.getCollisionBoxes(entity.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
 
-			if (entity.isSneaking())
+			for (AxisAlignedBB box : boxes)
 			{
-				entity.onGround = false;
+				if (box != null)
+				{
+					if (entity instanceof EntityPlayer)
+					{
+						BlockPos pos = new BlockPos(MathHelper.floor_double(box.minX + 0.5D), MathHelper.floor_double(box.minY + 0.5D), MathHelper.floor_double(box.minZ + 0.5D));
 
-				entity.motionX *= 1.03D;
-				entity.motionZ *= 1.03D;
+						Block block = entity.worldObj.getBlockState(pos).getBlock();
+
+						if (block == BlocksAether.quicksoil)
+						{
+							if (entity.isSneaking())
+							{
+								entity.onGround = false;
+
+								entity.motionX *= 1.25D;
+								entity.motionZ *= 1.25D;
+
+								break;
+							}
+						}
+					}
+				}
 			}
 		}
 
