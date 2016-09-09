@@ -61,6 +61,8 @@ public class BlockAercloud extends Block implements IBlockVariants
 
 	protected static final AxisAlignedBB AERCLOUD_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.2D, 1.0D);
 
+	protected static final AxisAlignedBB EMPTY_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
+
 	public static final AercloudVariant
 			COLD_AERCLOUD = new AercloudVariant(0, "cold", true),
 			BLUE_AERCLOUD = new AercloudVariant(1, "blue", false)
@@ -247,7 +249,7 @@ public class BlockAercloud extends Block implements IBlockVariants
 			return AERCLOUD_AABB;
 		}
 
-		return null;
+		return EMPTY_AABB;
 	}
 
 	@Override
