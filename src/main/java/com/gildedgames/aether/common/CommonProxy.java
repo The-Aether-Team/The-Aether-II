@@ -209,4 +209,9 @@ public class CommonProxy
 
 	}
 
+	public EntityPlayer getPlayer()
+	{
+		return null;
+	}
+
 }

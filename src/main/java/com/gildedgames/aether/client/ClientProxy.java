@@ -12,6 +12,7 @@ import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.CommonProxy;
 import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.util.core.gui.util.decorators.MinecraftGui;
 import com.gildedgames.util.core.gui.viewing.MinecraftGuiViewer;
 import com.gildedgames.util.modules.tab.TabModule;
 import com.gildedgames.util.modules.ui.UiModule;
@@ -35,6 +36,12 @@ public class ClientProxy extends CommonProxy
 	public static PlayerControllerAetherMP clientPlayerController;
 
 	public static final String MAIN_MENU_OVERLAY_ID = "aetherMainMenuOverlay";
+
+	@Override
+	public EntityPlayer getPlayer()
+	{
+		return Minecraft.getMinecraft().thePlayer;
+	}
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event)

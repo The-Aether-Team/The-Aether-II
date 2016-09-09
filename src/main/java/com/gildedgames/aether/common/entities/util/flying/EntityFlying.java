@@ -141,6 +141,12 @@ public class EntityFlying extends EntityCreature
 			this.isAirBorne = true;
 		}
 
+		if (this.isCollidedHorizontally || this.isCollidedVertically || !this.isNotColliding())
+		{
+			this.motionX += (this.rand.nextBoolean() ? 1.0F : -1.0F) * (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F);
+			this.motionZ += (this.rand.nextBoolean() ? 1.0F : -1.0F) * (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F);
+		}
+
 		if (this.worldObj.isRemote)
 		{
 			if (this.isMoving())
