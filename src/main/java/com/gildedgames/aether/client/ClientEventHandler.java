@@ -11,6 +11,7 @@ import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.modules.TeleportingModule;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
@@ -61,6 +62,8 @@ public class ClientEventHandler
 	private Timer timer = new Timer(20.0F);
 
 	private final Gui DUMMY_GUI = new Gui();
+
+	private boolean prevFancyGraphics;
 
 	@SideOnly(Side.CLIENT)
 	public void renderAetherPortalHUD(float timeInPortal, ScaledResolution scaledRes)
@@ -235,8 +238,15 @@ public class ClientEventHandler
 
 		EntityPlayerSP player = FMLClientHandler.instance().getClientPlayerEntity();
 
+		boolean fancyGraphics = Minecraft.getMinecraft().gameSettings.fancyGraphics;
+
 		if (world != null && player != null)
 		{
+			if (this.prevFancyGraphics != fancyGraphics)
+			{
+				BlockAetherLeaves.setGraphicsLevel(fancyGraphics);
+			}
+
 			PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
 
 			if (aePlayer != null)
@@ -262,6 +272,8 @@ public class ClientEventHandler
 				AetherMusicManager.INSTANCE.update(aePlayer);
 			}
 		}
+
+		this.prevFancyGraphics = fancyGraphics;
 	}
 
 	@SubscribeEvent

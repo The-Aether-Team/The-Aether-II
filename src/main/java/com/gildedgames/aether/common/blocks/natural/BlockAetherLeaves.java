@@ -11,6 +11,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -33,6 +34,8 @@ public class BlockAetherLeaves extends Block implements IShearable
 
 	private int[] surroundings;
 
+	protected static boolean leavesFancy;
+
 	public BlockAetherLeaves(int saplingMeta)
 	{
 		super(Material.LEAVES);
@@ -50,12 +53,6 @@ public class BlockAetherLeaves extends Block implements IShearable
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
-	{
-		return false;
-	}
-
-	@Override
 	public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos)
 	{
 		return true;
@@ -68,9 +65,32 @@ public class BlockAetherLeaves extends Block implements IShearable
 	}
 
 	@Override
+	public boolean isOpaqueCube(IBlockState state)
+	{
+		return !this.leavesFancy;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public static void setGraphicsLevel(boolean fancy)
+	{
+		BlockAetherLeaves.leavesFancy = fancy;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getBlockLayer()
+	{
+		return this.leavesFancy ? BlockRenderLayer.CUTOUT_MIPPED : BlockRenderLayer.SOLID;
+	}
+
 	public boolean isVisuallyOpaque()
 	{
 		return false;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+	{
+		return !this.leavesFancy && blockAccess.getBlockState(pos.offset(side)).getBlock() == this ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);
 	}
 
 	@Override
@@ -250,13 +270,6 @@ public class BlockAetherLeaves extends Block implements IShearable
 		{
 			world.setBlockState(pos, state.withProperty(PROPERTY_CHECK_DECAY, true), 4);
 		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
-	{
-		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 
 	@Override
