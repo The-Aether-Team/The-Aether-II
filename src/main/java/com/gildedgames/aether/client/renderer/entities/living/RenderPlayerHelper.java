@@ -36,6 +36,8 @@ public class RenderPlayerHelper
 		ItemStack ring1 = player.getEquipmentInventory().getStackInSlot(3);
 		ItemStack ring2 = player.getEquipmentInventory().getStackInSlot(4);
 
+		//
+
 		RenderPlayerHelper.renderRings(player.getPlayer(), ring1, ring2, event);
 	}
 
@@ -45,10 +47,15 @@ public class RenderPlayerHelper
 	{
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
+		EnumHandSide hand = Minecraft.getMinecraft().gameSettings.mainHand;
+
+		if (hand == EnumHandSide.LEFT)
+		{
+			GlStateManager.scale(-1.0f, 1.0f, 1.0f);
+		}
+
 		Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 		String skinType = DefaultPlayerSkin.getSkinType(player.getUniqueID());
-
-		EnumHandSide hand = Minecraft.getMinecraft().gameSettings.mainHand;
 
 		if (ring1 != null)
 		{
@@ -69,7 +76,14 @@ public class RenderPlayerHelper
 
 		Minecraft.getMinecraft().getTextureManager().bindTexture(glove.getGloveTexture(0));
 
-		RenderPlayerHelper.renderArmFirstPerson(stack, equipProgress, swingProgress, Minecraft.getMinecraft().gameSettings.mainHand);
+		EnumHandSide hand = Minecraft.getMinecraft().gameSettings.mainHand;
+
+		if (hand == EnumHandSide.LEFT)
+		{
+			GlStateManager.scale(-1.0f, 1.0f, 1.0f);
+		}
+
+		RenderPlayerHelper.renderArmFirstPerson(stack, equipProgress, swingProgress, EnumHandSide.RIGHT);
 
 		GlStateManager.popMatrix();
 	}
@@ -91,8 +105,8 @@ public class RenderPlayerHelper
 
 			GlStateManager.translate(x, y, z);
 
-			RenderPlayerHelper.transformSideFirstPerson(Minecraft.getMinecraft().gameSettings.mainHand, equipProgress);
-			RenderPlayerHelper.transformFirstPerson(Minecraft.getMinecraft().gameSettings.mainHand, swingProgress);
+			RenderPlayerHelper.transformSideFirstPerson(EnumHandSide.RIGHT, equipProgress);
+			RenderPlayerHelper.transformFirstPerson(EnumHandSide.RIGHT, swingProgress);
 
 			GlStateManager.translate((float)i * f, f1, f2);
 
@@ -104,7 +118,7 @@ public class RenderPlayerHelper
 			GlStateManager.rotate(40F, 1F, 0F, 0F);
 			//GlStateManager.rotate(pitch, 1F, 0F, 0F);
 
-			itemRenderer.renderItemSide(Minecraft.getMinecraft().thePlayer, stack, Minecraft.getMinecraft().gameSettings.mainHand == EnumHandSide.LEFT ? ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND : ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND, Minecraft.getMinecraft().gameSettings.mainHand == EnumHandSide.LEFT);
+			itemRenderer.renderItemSide(Minecraft.getMinecraft().thePlayer, stack, ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND, false);
 		}
 
 		GlStateManager.popMatrix();
