@@ -148,7 +148,7 @@ public class CommonEvents
 	{
 		final Entity entity = event.getEntity();
 
-		if (entity != null && entity.worldObj != null)
+		if (entity instanceof EntityPlayer)
 		{
 			List<AxisAlignedBB> boxes = entity.worldObj.getCollisionBoxes(entity.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
 
@@ -156,23 +156,20 @@ public class CommonEvents
 			{
 				if (box != null)
 				{
-					if (entity instanceof EntityPlayer)
+					BlockPos pos = new BlockPos(MathHelper.floor_double(box.minX + 0.5D), MathHelper.floor_double(box.minY + 0.5D), MathHelper.floor_double(box.minZ + 0.5D));
+
+					Block block = entity.worldObj.getBlockState(pos).getBlock();
+
+					if (block == BlocksAether.quicksoil)
 					{
-						BlockPos pos = new BlockPos(MathHelper.floor_double(box.minX + 0.5D), MathHelper.floor_double(box.minY + 0.5D), MathHelper.floor_double(box.minZ + 0.5D));
-
-						Block block = entity.worldObj.getBlockState(pos).getBlock();
-
-						if (block == BlocksAether.quicksoil)
+						if (entity.isSneaking())
 						{
-							if (entity.isSneaking())
-							{
-								entity.onGround = false;
+							entity.onGround = false;
 
-								entity.motionX *= 1.25D;
-								entity.motionZ *= 1.25D;
+							entity.motionX *= 1.25D;
+							entity.motionZ *= 1.25D;
 
-								break;
-							}
+							break;
 						}
 					}
 				}
