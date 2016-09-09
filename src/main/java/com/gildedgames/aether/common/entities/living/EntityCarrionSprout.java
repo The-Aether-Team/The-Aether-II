@@ -101,6 +101,9 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	@Override
 	public void onLivingUpdate()
 	{
+		this.motionX = 0.0F;
+		this.motionZ = 0.0F;
+
 		if (this.ticksExisted == 0)
 		{
 			this.setRotation(this.worldObj.rand.nextFloat() * 360F, 0.0F);
