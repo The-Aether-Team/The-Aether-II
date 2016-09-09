@@ -366,6 +366,20 @@ public class SpawnHandler implements NBT
 						continue;
 					}
 
+					for (PosCondition condition : this.posConditions)
+					{
+						if (!condition.isMet(world, spawnAt, spawnAt.down()))
+						{
+							if (attempts < MAX_ATTEMPTS)
+							{
+								attempts++;
+								count--;
+							}
+
+							continue inner;
+						}
+					}
+
 					for (PosCondition condition : entry.getConditions())
 					{
 						if (!condition.isMet(world, spawnAt, spawnAt.down()))
