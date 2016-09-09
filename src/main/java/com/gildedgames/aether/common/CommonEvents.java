@@ -12,6 +12,7 @@ import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -164,7 +165,12 @@ public class CommonEvents
 					{
 						if (entity.isSneaking())
 						{
-							entity.onGround = false;
+							boolean jumping = ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, (EntityLivingBase)entity, ReflectionAether.IS_JUMPING.getMappings());
+
+							if (!jumping)
+							{
+								entity.onGround = false;
+							}
 
 							entity.motionX *= 1.25D;
 							entity.motionZ *= 1.25D;
