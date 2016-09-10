@@ -40,7 +40,7 @@ public class BlockAetherLeaves extends BlockLeaves
 
 	private int[] surroundings;
 
-	protected static boolean graphicsFancy;
+	public static boolean graphicsFancy;
 
 	public BlockAetherLeaves(int saplingMeta)
 	{

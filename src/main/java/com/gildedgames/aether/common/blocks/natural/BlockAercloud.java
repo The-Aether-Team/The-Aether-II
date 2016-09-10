@@ -157,7 +157,7 @@ public class BlockAercloud extends Block implements IBlockVariants
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer()
 	{
-		return BlockRenderLayer.TRANSLUCENT;
+		return BlockAetherLeaves.graphicsFancy ? BlockRenderLayer.TRANSLUCENT : BlockRenderLayer.SOLID;
 	}
 
 	@Override
@@ -167,6 +167,11 @@ public class BlockAercloud extends Block implements IBlockVariants
 		IBlockState offsetState = world.getBlockState(pos.offset(side));
 
 		Block block = offsetState.getBlock();
+
+		if (!BlockAetherLeaves.graphicsFancy && block == this)
+		{
+			return false;
+		}
 
 		if (block == this)
 		{
@@ -216,9 +221,15 @@ public class BlockAercloud extends Block implements IBlockVariants
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isVisuallyOpaque()
 	{
 		return false;
+	}
+
+	@Override
+	public boolean isOpaqueCube(IBlockState state)
+	{
+		return !BlockAetherLeaves.graphicsFancy;
 	}
 
 	@Override
