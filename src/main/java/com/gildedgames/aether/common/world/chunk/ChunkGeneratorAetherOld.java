@@ -12,6 +12,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkGeneratorEvent;
@@ -346,7 +347,15 @@ public class ChunkGeneratorAetherOld implements IChunkGenerator
         this.genClouds(primer, chunkX, chunkZ);
 
         Chunk chunk = new Chunk(this.worldObj, primer, chunkX, chunkZ);
-        chunk.generateSkylightMap();
+
+        for (ExtendedBlockStorage storage : chunk.getBlockStorageArray())
+        {
+            if (storage != Chunk.NULL_BLOCK_STORAGE)
+            {
+                chunk.generateSkylightMap();
+                break;
+            }
+        }
 
         return chunk;
     }
