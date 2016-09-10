@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.capabilities.player.modules;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
@@ -19,7 +20,7 @@ public class TeleportingModule extends PlayerAetherModule
 
 	private boolean teleported, teleporting;
 
-	public TeleportingModule(IPlayerAetherCapability playerAether)
+	public TeleportingModule(PlayerAetherImpl playerAether)
 	{
 		super(playerAether);
 	}

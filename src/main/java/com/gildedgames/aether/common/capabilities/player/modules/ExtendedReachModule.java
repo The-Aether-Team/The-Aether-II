@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.capabilities.player.modules;
 
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.tools.ItemValkyrieTool;
@@ -13,7 +14,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 public class ExtendedReachModule extends PlayerAetherModule
 {
 
-	public ExtendedReachModule(IPlayerAetherCapability playerAether)
+	public ExtendedReachModule(PlayerAetherImpl playerAether)
 	{
 		super(playerAether);
 	}

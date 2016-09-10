@@ -11,14 +11,14 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 public abstract class PlayerAetherModule implements IPlayerAetherCapability
 {
 
-	private IPlayerAetherCapability playerAether;
+	private PlayerAetherImpl playerAether;
 
-	public PlayerAetherModule(IPlayerAetherCapability playerAether)
+	public PlayerAetherModule(PlayerAetherImpl playerAether)
 	{
 		this.playerAether = playerAether;
 	}
 
-	public IPlayerAetherCapability getPlayerAether()
+	public PlayerAetherImpl getPlayerAether()
 	{
 		return this.playerAether;
 	}

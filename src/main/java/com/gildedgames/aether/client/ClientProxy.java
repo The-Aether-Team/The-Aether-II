@@ -1,7 +1,7 @@
 package com.gildedgames.aether.client;
 
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
-import com.gildedgames.aether.client.main_menu.MainMenuOverlay;
+import com.gildedgames.aether.client.main_menu.WorldAetherOptionsOverlay;
 import com.gildedgames.aether.client.models.blocks.AetherBlockModels;
 import com.gildedgames.aether.client.models.items.AetherItemModels;
 import com.gildedgames.aether.client.renderer.AetherRenderers;
@@ -12,7 +12,6 @@ import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.CommonProxy;
 import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.util.core.gui.util.decorators.MinecraftGui;
 import com.gildedgames.util.core.gui.viewing.MinecraftGuiViewer;
 import com.gildedgames.util.modules.tab.TabModule;
 import com.gildedgames.util.modules.ui.UiModule;
@@ -53,6 +52,17 @@ public class ClientProxy extends CommonProxy
 		AetherRenderers.preInit();
 
 		CreativeTabsAether.registerTabIcons();
+
+		UiModule.locate().registerOverlay("worldAetherOptionsOverlay", new Factory<GuiFrame>()
+		{
+
+			@Override
+			public GuiFrame create()
+			{
+				return new WorldAetherOptionsOverlay();
+			}
+
+		}, MinecraftGuiViewer.instance());
 
 		/*UiModule.locate().registerOverlay(MAIN_MENU_OVERLAY_ID, new Factory<GuiFrame>()
 		{

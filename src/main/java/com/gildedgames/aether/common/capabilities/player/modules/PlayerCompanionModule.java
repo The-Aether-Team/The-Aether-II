@@ -61,8 +61,6 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 					if (!companion.wasDespawned())
 					{
 						ItemCompanion.setRespawnTimer(companionStack, this.player.worldObj, 20 * 240);
-
-						this.syncCompanionItem();
 					}
 
 					this.removeCompanion(true);
@@ -195,8 +193,4 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 		return null;
 	}
 
-	public void syncCompanionItem()
-	{
-		this.aePlayer.getEquipmentInventory().markDirty(6);
-	}
 }

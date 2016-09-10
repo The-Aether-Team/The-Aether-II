@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.capabilities.player.modules;
 
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.util.PlayerUtil;
@@ -22,7 +23,7 @@ public class AbilitiesModule extends PlayerAetherModule
 
 	private int ticksAirborne;
 
-	public AbilitiesModule(IPlayerAetherCapability playerAether)
+	public AbilitiesModule(PlayerAetherImpl playerAether)
 	{
 		super(playerAether);
 	}

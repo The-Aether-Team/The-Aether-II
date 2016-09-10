@@ -40,8 +40,6 @@ public class InventoryEquipment implements IInventoryEquipment
 
 	private ItemStack[] inventory = new ItemStack[InventoryEquipment.INVENTORY_SIZE];
 
-	private Set<PendingItemChange> dirties = new HashSet<>();
-
 	public InventoryEquipment(IPlayerAetherCapability aePlayer)
 	{
 		this.aePlayer = aePlayer;
@@ -87,8 +85,6 @@ public class InventoryEquipment implements IInventoryEquipment
 				}
 			}
 
-			this.dirties.add(new PendingItemChange(index, stack, this.inventory[index]));
-
 			this.markDirty();
 
 			return stack;
@@ -115,8 +111,6 @@ public class InventoryEquipment implements IInventoryEquipment
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack)
 	{
-		this.dirties.add(new PendingItemChange(index, this.inventory[index], stack));
-
 		this.inventory[index] = stack;
 
 		this.markDirty();
@@ -165,11 +159,6 @@ public class InventoryEquipment implements IInventoryEquipment
 	@Override
 	public void markDirty()
 	{
-	}
-
-	public void markDirty(int slot)
-	{
-		this.dirties.add(new PendingItemChange(slot, this.getStackInSlot(slot), this.getStackInSlot(slot)));
 	}
 
 	@Override
@@ -231,11 +220,6 @@ public class InventoryEquipment implements IInventoryEquipment
 		}
 
 		this.clear();
-	}
-
-	public Set<PendingItemChange> getDirties()
-	{
-		return this.dirties;
 	}
 
 	@Override

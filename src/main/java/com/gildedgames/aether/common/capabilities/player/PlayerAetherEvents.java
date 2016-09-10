@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
+import com.gildedgames.aether.common.capabilities.player.modules.EquipmentModule;
 import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
@@ -52,7 +53,7 @@ public class PlayerAetherEvents
 
 		if (event.getTarget() instanceof EntityPlayer)
 		{
-			NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(player, PlayerAetherEvents.getAllEquipment(aePlayer.getEquipmentInventory())), player);
+			NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(player, EquipmentModule.getAllEquipment(aePlayer.getEquipmentInventory())), player);
 		}
 	}
 
@@ -63,19 +64,7 @@ public class PlayerAetherEvents
 
 		PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
 
-		NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(player, PlayerAetherEvents.getAllEquipment(aePlayer.getEquipmentInventory())), player);
-	}
-
-	private static List<Pair<Integer, ItemStack>> getAllEquipment(IInventoryEquipment equipment)
-	{
-		List<Pair<Integer, ItemStack>> stacks = new ArrayList<>();
-
-		for (int i = 0; i < equipment.getSizeInventory(); i++)
-		{
-			stacks.add(Pair.of(i, equipment.getStackInSlot(i)));
-		}
-
-		return stacks;
+		NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(player, EquipmentModule.getAllEquipment(aePlayer.getEquipmentInventory())), player);
 	}
 
 	@SubscribeEvent
@@ -103,8 +92,6 @@ public class PlayerAetherEvents
 					player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20 * 7, 4));
 
 					ItemDeathSeal.setDisabledTimer(companionItem, player.worldObj, 20 * 60 * 15);
-
-					aePlayer.getCompanionModule().syncCompanionItem();
 
 					FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().sendChatMsg(new TextComponentTranslation("chat.aether.resurrected", player.getDisplayName()));
 

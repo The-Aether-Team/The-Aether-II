@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.capabilities.player.modules;
 
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
@@ -17,7 +18,7 @@ public class GravititeAbilityModule extends PlayerAetherModule
 
 	private EntityMovingBlock heldBlock;
 
-	public GravititeAbilityModule(IPlayerAetherCapability playerAether)
+	public GravititeAbilityModule(PlayerAetherImpl playerAether)
 	{
 		super(playerAether);
 	}

@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common;
 
+import com.gildedgames.aether.client.main_menu.WorldAetherOptionsOverlay;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -7,10 +8,10 @@ import com.gildedgames.aether.common.items.armor.ItemAetherShield;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import com.gildedgames.aether.common.world.TeleporterAether;
+import com.gildedgames.util.core.UtilModule;
 import com.gildedgames.util.core.util.TeleporterGeneric;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityCow;
@@ -47,12 +48,15 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
 public class CommonEvents
 {
+
 	@SubscribeEvent
 	public static void onWorldLoaded(WorldEvent.Load event)
 	{
@@ -151,6 +155,29 @@ public class CommonEvents
 
 		if (entity instanceof EntityPlayer)
 		{
+			EntityPlayer player = (EntityPlayer)entity;
+
+			if (WorldAetherOptionsOverlay.toggle)
+			{
+				File areaFile = new File(UtilModule.getWorldDirectory(), "//data/world_options_created.dat");
+
+				if (!areaFile.exists())
+				{
+					player.inventory.addItemStackToInventory(new ItemStack(ItemsAether.aether_portal_frame));
+
+					try
+					{
+						areaFile.createNewFile();
+					}
+					catch (IOException e)
+					{
+						e.printStackTrace();
+					}
+				}
+
+				WorldAetherOptionsOverlay.toggle = false;
+			}
+
 			List<AxisAlignedBB> boxes = entity.worldObj.getCollisionBoxes(entity.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
 
 			for (AxisAlignedBB box : boxes)

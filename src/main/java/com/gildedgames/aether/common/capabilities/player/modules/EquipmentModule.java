@@ -6,6 +6,8 @@ import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcess
 import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
 import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffects;
@@ -50,7 +52,7 @@ public class EquipmentModule extends PlayerAetherModule
 
 	private Map<ItemStack[], ItemSlot[]> trackedSlots = Maps.newHashMap();
 
-	public EquipmentModule(IPlayerAetherCapability playerAether, InventoryEquipment equipment)
+	public EquipmentModule(PlayerAetherImpl playerAether, InventoryEquipment equipment)
 	{
 		super(playerAether);
 
@@ -63,6 +65,18 @@ public class EquipmentModule extends PlayerAetherModule
 		this.processEffects(this.getPlayer().inventory.armorInventory);
 		this.processEffects(this.getPlayer().inventory.offHandInventory);
 		this.processEffects(this.equipment.getInventory());
+	}
+
+	public static List<Pair<Integer, ItemStack>> getAllEquipment(IInventoryEquipment equipment)
+	{
+		List<Pair<Integer, ItemStack>> stacks = new ArrayList<>();
+
+		for (int i = 0; i < equipment.getSizeInventory(); i++)
+		{
+			stacks.add(Pair.of(i, equipment.getStackInSlot(i)));
+		}
+
+		return stacks;
 	}
 
 	private void processEffects(ItemStack[] inventory)

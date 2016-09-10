@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.capabilities.player.modules;
 
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
 import com.gildedgames.util.io_manager.io.NBT;
@@ -12,7 +13,7 @@ import static sun.audio.AudioPlayer.player;
 public class DungeonModule extends PlayerAetherModule
 {
 
-	public DungeonModule(IPlayerAetherCapability playerAether)
+	public DungeonModule(PlayerAetherImpl playerAether)
 	{
 		super(playerAether);
 	}

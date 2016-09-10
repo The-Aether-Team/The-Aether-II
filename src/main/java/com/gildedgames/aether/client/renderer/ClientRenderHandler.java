@@ -39,9 +39,6 @@ public class ClientRenderHandler
 		{
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 
-			PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
-			IEntityEffectsCapability effects = EntityEffects.get(player);
-
 			if (player.getAir() == 300 && player.isPotionActive(MobEffects.WATER_BREATHING))
 			{
 				event.setCanceled(true);
