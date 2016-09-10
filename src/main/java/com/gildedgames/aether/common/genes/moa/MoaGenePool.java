@@ -23,7 +23,7 @@ public class MoaGenePool extends GenePool<NBTTagCompound, NBTTagCompound> implem
 
 	private GeneRegion<DataGene<Integer>> wingStrength;
 
-	private MoaGenePool()
+	public MoaGenePool()
 	{
 		this(new SimpleGeneStorage());
 	}

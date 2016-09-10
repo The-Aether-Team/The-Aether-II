@@ -447,6 +447,8 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 		stackGenes.transformFromParents(this.getGenePool().getStorage().getSeed(), this.getGenePool().getStorage().getFatherSeed(), this.getGenePool().getStorage().getMotherSeed());
 
+		ItemMoaEgg.setGenePool(moaEgg, stackGenes);
+
 		return moaEgg;
 	}
 

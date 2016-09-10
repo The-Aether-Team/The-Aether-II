@@ -8,9 +8,11 @@ import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.genes.util.GeneUtil;
 import com.gildedgames.aether.common.genes.util.SimpleGeneStorage;
 import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
+import com.gildedgames.util.core.UtilModule;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.IItemPropertyGetter;
@@ -47,9 +49,23 @@ public class ItemMoaEgg extends Item
 		this.addPropertyOverride(new ResourceLocation("spots"), new ModelProperty("spots"));
 	}
 
+	public static void setGenePool(ItemStack stack, MoaGenePool pool)
+	{
+		if (stack.getTagCompound() == null)
+		{
+			stack.setTagCompound(new NBTTagCompound());
+		}
+
+		NBTTagCompound poolTag = new NBTTagCompound();
+
+		pool.write(poolTag);
+
+		stack.getTagCompound().setTag("pool", poolTag);
+	}
+
 	public static MoaGenePool getGenePool(ItemStack stack)
 	{
-		IItemExtraDataCapability extraData = stack.getCapability(AetherCapabilities.ITEM_EXTRA_DATA, null);
+		/*IItemExtraDataCapability extraData = stack.getCapability(AetherCapabilities.ITEM_EXTRA_DATA, null);
 
 		if (extraData != null)
 		{
@@ -59,9 +75,19 @@ public class ItemMoaEgg extends Item
 			}
 
 			return extraData.get("genePool");
+		}*/
+		if (stack.getTagCompound() == null)
+		{
+			ItemMoaEgg.setGenePool(stack, new MoaGenePool());
 		}
 
-		return null;
+		NBTTagCompound poolTag = stack.getTagCompound().getCompoundTag("pool");
+
+		MoaGenePool pool = new MoaGenePool();
+
+		pool.read(poolTag);
+
+		return pool;
 	}
 
 	@Override
@@ -160,7 +186,7 @@ public class ItemMoaEgg extends Item
 	{
 		MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);
 
-		if (genePool.getMarks() != null && !this.creativeEgg)
+		if (genePool.getMarks() != null && !this.creativeEgg && UtilModule.isClient())
 		{
 			return genePool.getMarks().gene().localizedName() + " " + I18n.format(super.getUnlocalizedName(stack) + ".name");
 		}
@@ -178,6 +204,12 @@ public class ItemMoaEgg extends Item
 	public boolean getShareTag()
 	{
 		return true;
+	}
+
+	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	{
+
 	}
 
 	@Override

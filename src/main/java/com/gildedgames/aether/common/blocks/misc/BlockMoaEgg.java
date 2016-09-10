@@ -89,6 +89,8 @@ public class BlockMoaEgg extends BlockContainer
 					MoaGenePool stackGenes = ItemMoaEgg.getGenePool(eggStack);
 
 					stackGenes.transformFromParents(egg.getGenePool().getStorage().getSeed(), egg.getGenePool().getStorage().getFatherSeed(), egg.getGenePool().getStorage().getMotherSeed());
+
+					ItemMoaEgg.setGenePool(eggStack, stackGenes);
 				}
 
 				world.setBlockToAir(pos);
@@ -150,6 +152,8 @@ public class BlockMoaEgg extends BlockContainer
 			MoaGenePool stackGenes = ItemMoaEgg.getGenePool(eggStack);
 
 			stackGenes.transformFromParents(teGenes.getStorage().getSeed(), teGenes.getStorage().getFatherSeed(), teGenes.getStorage().getMotherSeed());
+
+			ItemMoaEgg.setGenePool(eggStack, stackGenes);
 		}
 
 		return eggStack;
