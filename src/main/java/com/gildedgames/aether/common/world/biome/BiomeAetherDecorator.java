@@ -120,7 +120,7 @@ public class BiomeAetherDecorator
 		int count;
 
 		// Moa Nests
-		for (count = 0; count < 2; count++)
+		for (count = 0; count < 3; count++)
 		{
 			x = random.nextInt(16) + 8;
 			y = random.nextInt(128);
