@@ -1,7 +1,6 @@
 {
 	"variants": {
-		"normal": {
-			"model": "aether:aether_leaves/purple_crystal_leaves"
-		}
+		"opaque=false": { "model": "aether:aether_leaves/purple_crystal_leaves" },
+        "opaque=true":  { "model": "aether:aether_leaves/purple_crystal_leaves_opaque" }
 	}
 }

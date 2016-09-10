@@ -7,6 +7,7 @@ import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -33,6 +34,8 @@ public class BlockAetherLeaves extends BlockLeaves
 
 	public static final PropertyBool PROPERTY_CHECK_DECAY = PropertyBool.create("check_decay");
 
+	public static final PropertyBool PROPERTY_OPAQUE = PropertyBool.create("opaque");
+
 	private final int saplingMeta;
 
 	private int[] surroundings;
@@ -50,9 +53,14 @@ public class BlockAetherLeaves extends BlockLeaves
 
 		this.setSoundType(SoundType.PLANT);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_DECAYABLE, Boolean.TRUE).withProperty(PROPERTY_CHECK_DECAY, Boolean.TRUE));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_DECAYABLE, Boolean.TRUE).withProperty(PROPERTY_CHECK_DECAY, Boolean.TRUE).withProperty(PROPERTY_OPAQUE, Boolean.valueOf(!BlockAetherLeaves.graphicsFancy)));
 
 		Blocks.FIRE.setFireInfo(this, 30, 60);
+	}
+
+	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	{
+		return state.withProperty(PROPERTY_OPAQUE, Boolean.valueOf(!BlockAetherLeaves.graphicsFancy));
 	}
 
 	@Override
@@ -412,6 +420,6 @@ public class BlockAetherLeaves extends BlockLeaves
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, PROPERTY_DECAYABLE, PROPERTY_CHECK_DECAY);
+		return new BlockStateContainer(this, new IProperty[] {PROPERTY_DECAYABLE, PROPERTY_CHECK_DECAY, PROPERTY_OPAQUE});
 	}
 }
