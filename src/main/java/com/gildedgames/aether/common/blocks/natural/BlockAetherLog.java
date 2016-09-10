@@ -15,13 +15,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockAetherLog extends Block
+public class BlockAetherLog extends BlockLog
 {
 	public static final PropertyEnum<BlockLog.EnumAxis> PROPERTY_LOG_AXIS = PropertyEnum.create("axis", BlockLog.EnumAxis.class);
 
 	public BlockAetherLog()
 	{
-		super(Material.WOOD);
+		super();
 
 		this.setSoundType(SoundType.WOOD);
 
