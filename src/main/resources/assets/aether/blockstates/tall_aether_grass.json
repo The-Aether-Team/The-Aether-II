@@ -1,5 +1,6 @@
 {
 	"variants": {
-		"normal": { "model": "aether:tall_aether_grass" }
-	}
+        "enchanted=false": { "model": "aether:tall_aether_grass/normal" },
+        "enchanted=true":  { "model": "aether:tall_aether_grass/enchanted" }
+    }
 }

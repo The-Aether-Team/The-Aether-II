@@ -11,6 +11,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.entities.living.enemies.EntitySwet;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -116,6 +117,7 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.skyroot_bed, "skyroot_bed");
 
 		registerItemModels(BlocksAether.tall_aether_grass, "tall_aether_grass");
+
 		registerItemModels(BlocksAether.orange_tree, "orange_tree");
 
 		registerItemModels(BlocksAether.zanite_block, "zanite_block");

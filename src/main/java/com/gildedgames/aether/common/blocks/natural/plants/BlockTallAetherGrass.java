@@ -1,9 +1,19 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
+import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
+import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
+import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -19,13 +29,24 @@ import java.util.Random;
 
 public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 {
-	private static final AxisAlignedBB GRASS_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.4D, 0.9D);
+
+	private static final AxisAlignedBB GRASS_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
+
+	public static final PropertyBool ENCHANTED = PropertyBool.create("enchanted");
 
 	public BlockTallAetherGrass()
 	{
 		super(Material.PLANTS);
 
 		this.setSoundType(SoundType.PLANT);
+
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(ENCHANTED, Boolean.valueOf(false)));
+	}
+
+	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	{
+		IBlockState block = worldIn.getBlockState(pos.down());
+		return state.withProperty(ENCHANTED, Boolean.valueOf(block == BlocksAether.aether_grass.getStateFromMeta(BlockAetherGrass.ENCHANTED_AETHER_GRASS.getMeta())));
 	}
 
 	@Override
@@ -59,7 +80,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		return  new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
+		return GRASS_AABB;
 	}
 
 	@Override
@@ -67,4 +88,17 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	{
 		return true;
 	}
+
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return 0;
+	}
+
+	@Override
+	protected BlockStateContainer createBlockState()
+	{
+		return new BlockStateContainer(this, new IProperty[] {ENCHANTED});
+	}
+
 }

@@ -45,6 +45,8 @@ public class AetherBlockModels
 
 		ModelLoader.setCustomStateMapper(BlocksAether.aether_sapling, new StateMap.Builder().ignore(BlockAetherSapling.PROPERTY_STAGE).build());
 
+		ModelLoader.setCustomStateMapper(BlocksAether.tall_aether_grass, new StateMap.Builder().ignore().build());
+
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.arkenium_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
