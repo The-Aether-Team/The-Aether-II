@@ -3,6 +3,8 @@ package com.gildedgames.aether.common.blocks.natural;
 import com.gildedgames.aether.client.renderer.particles.ParticleGolden;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -12,6 +14,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -24,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BlockAetherLeaves extends Block implements IShearable
+public class BlockAetherLeaves extends BlockLeaves
 {
 	public static final PropertyBool PROPERTY_DECAYABLE = PropertyBool.create("decayable");
 
@@ -34,11 +37,11 @@ public class BlockAetherLeaves extends Block implements IShearable
 
 	private int[] surroundings;
 
-	protected static boolean leavesFancy;
+	protected static boolean graphicsFancy;
 
 	public BlockAetherLeaves(int saplingMeta)
 	{
-		super(Material.LEAVES);
+		super();
 
 		this.saplingMeta = saplingMeta;
 
@@ -67,30 +70,97 @@ public class BlockAetherLeaves extends Block implements IShearable
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
 	{
-		return !this.leavesFancy;
+		return !BlockAetherLeaves.graphicsFancy;
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static void setGraphicsLevel(boolean fancy)
+	public static void setGraphics(boolean fancy)
 	{
-		BlockAetherLeaves.leavesFancy = fancy;
+		BlockAetherLeaves.graphicsFancy = fancy;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer()
 	{
-		return this.leavesFancy ? BlockRenderLayer.CUTOUT_MIPPED : BlockRenderLayer.SOLID;
+		return BlockAetherLeaves.graphicsFancy ? BlockRenderLayer.CUTOUT_MIPPED : BlockRenderLayer.SOLID;
 	}
 
+	@Override
 	public boolean isVisuallyOpaque()
 	{
 		return false;
 	}
 
+	@Override
+	public BlockPlanks.EnumType getWoodType(int meta)
+	{
+		return null;
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
 	{
-		return !this.leavesFancy && blockAccess.getBlockState(pos.offset(side)).getBlock() == this ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+		return !BlockAetherLeaves.graphicsFancy && blockAccess.getBlockState(pos.offset(side)).getBlock() == this ? false : this.superShouldSideBeRendered(blockState, blockAccess, pos, side);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public boolean superShouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+	{
+		AxisAlignedBB axisalignedbb = blockState.getBoundingBox(blockAccess, pos);
+
+		switch (side)
+		{
+		case DOWN:
+
+			if (axisalignedbb.minY > 0.0D)
+			{
+				return true;
+			}
+
+			break;
+		case UP:
+
+			if (axisalignedbb.maxY < 1.0D)
+			{
+				return true;
+			}
+
+			break;
+		case NORTH:
+
+			if (axisalignedbb.minZ > 0.0D)
+			{
+				return true;
+			}
+
+			break;
+		case SOUTH:
+
+			if (axisalignedbb.maxZ < 1.0D)
+			{
+				return true;
+			}
+
+			break;
+		case WEST:
+
+			if (axisalignedbb.minX > 0.0D)
+			{
+				return true;
+			}
+
+			break;
+		case EAST:
+
+			if (axisalignedbb.maxX < 1.0D)
+			{
+				return true;
+			}
+		}
+
+		return !blockAccess.getBlockState(pos.offset(side)).doesSideBlockRendering(blockAccess, pos.offset(side), side.getOpposite());
 	}
 
 	@Override
@@ -318,8 +388,7 @@ public class BlockAetherLeaves extends Block implements IShearable
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_DECAYABLE, (meta & 4) == 4)
-				.withProperty(PROPERTY_CHECK_DECAY, (meta & 8) == 8);
+		return this.getDefaultState().withProperty(PROPERTY_DECAYABLE, (meta & 4) == 4).withProperty(PROPERTY_CHECK_DECAY, (meta & 8) == 8);
 	}
 
 	@Override

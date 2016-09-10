@@ -63,7 +63,7 @@ public class ClientEventHandler
 
 	private final Gui DUMMY_GUI = new Gui();
 
-	private boolean prevFancyGraphics;
+	private boolean prevFancyGraphics, setInitialSettings;
 
 	@SideOnly(Side.CLIENT)
 	public void renderAetherPortalHUD(float timeInPortal, ScaledResolution scaledRes)
@@ -240,11 +240,19 @@ public class ClientEventHandler
 
 		boolean fancyGraphics = Minecraft.getMinecraft().gameSettings.fancyGraphics;
 
+		if (!this.setInitialSettings)
+		{
+			this.prevFancyGraphics = fancyGraphics;
+			BlockAetherLeaves.setGraphics(fancyGraphics);
+
+			this.setInitialSettings = true;
+		}
+
 		if (world != null && player != null)
 		{
 			if (this.prevFancyGraphics != fancyGraphics)
 			{
-				BlockAetherLeaves.setGraphicsLevel(fancyGraphics);
+				BlockAetherLeaves.setGraphics(fancyGraphics);
 			}
 
 			PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
