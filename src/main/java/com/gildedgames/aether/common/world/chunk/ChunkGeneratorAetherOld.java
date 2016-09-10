@@ -348,14 +348,16 @@ public class ChunkGeneratorAetherOld implements IChunkGenerator
 
         Chunk chunk = new Chunk(this.worldObj, primer, chunkX, chunkZ);
 
-        for (ExtendedBlockStorage storage : chunk.getBlockStorageArray())
+        /*for (ExtendedBlockStorage storage : chunk.getBlockStorageArray())
         {
             if (storage != Chunk.NULL_BLOCK_STORAGE)
             {
-                chunk.generateSkylightMap();
+
                 break;
             }
-        }
+        }*/
+
+        chunk.generateSkylightMap();
 
         return chunk;
     }
