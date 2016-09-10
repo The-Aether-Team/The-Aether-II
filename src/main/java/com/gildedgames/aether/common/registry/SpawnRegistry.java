@@ -69,13 +69,11 @@ public class SpawnRegistry
 		SpawnEntry phyg = new SpawnEntry(EntityPhyg.class, 13F, 2, 3).conditiion(grassCheck);
 		SpawnEntry carrion_sprout = new SpawnEntry(EntityCarrionSprout.class, 10F, 2, 3).conditiion(grassCheck);
 
-
 		animals.addEntry(flying_cow);
 		animals.addEntry(ram);
 		animals.addEntry(aerbunny);
 		animals.addEntry(phyg);
 		animals.addEntry(carrion_sprout);
-
 
 		/** HOSTILES **/
 		SpawnHandler hostiles = new SpawnHandler("aether_hostiles").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(1200);
@@ -85,7 +83,7 @@ public class SpawnRegistry
 
 		SpawnEntry zephyr = new SpawnEntry(EntityZephyr.class, 3F, 2, 3, new FlyingPositionSelector()).conditiion(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState()));
 		SpawnEntry tempest = new SpawnEntry(EntityTempest.class, 10F, 2, 3, new FlyingPositionSelector()).conditiion(new CheckTime(CheckTime.Time.NIGHT)).conditiion(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState()));
-		SpawnEntry cockatrice = new SpawnEntry(EntityCockatrice.class, 12F, 3, 5).conditiion(new CheckTime(CheckTime.Time.NIGHT)).conditiion(groundCheck);
+		SpawnEntry cockatrice = new SpawnEntry(EntityCockatrice.class, 12F, 1, 1).conditiion(new CheckTime(CheckTime.Time.NIGHT)).conditiion(groundCheck);
 		SpawnEntry swet = new SpawnEntry(EntitySwet.class, 10F, 2, 4).conditiion(groundCheck);
 		SpawnEntry aechor_plant = new SpawnEntry(EntityAechorPlant.class, 10F, 2, 3).conditiion(grassCheck);
 
