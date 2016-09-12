@@ -162,11 +162,18 @@ public class PlayerAetherEvents
 	@SubscribeEvent
 	public static void onPlayerTeleported(PlayerChangedDimensionEvent event)
 	{
-		IPlayerAetherCapability aePlayer = PlayerAetherImpl.getPlayer(event.player);
+		PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(event.player);
 
 		if (aePlayer != null)
 		{
 			aePlayer.onTeleport(event);
+
+			if (!event.player.getEntityWorld().isRemote)
+			{
+				NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(event.player, EquipmentModule.getAllEquipment(aePlayer.getEquipmentInventory())), (EntityPlayerMP) event.player);
+			}
+
+			aePlayer.getEquipmentModule().resetEffects();
 		}
 	}
 
@@ -184,6 +191,8 @@ public class PlayerAetherEvents
 			NBTBase state = storage.writeNBT(AetherCapabilities.PLAYER_DATA, oldPlayer, null);
 
 			storage.readNBT(AetherCapabilities.PLAYER_DATA, newPlayer, null, state);
+
+			newPlayer.getEquipmentModule().resetEffects();
 		}
 	}
 

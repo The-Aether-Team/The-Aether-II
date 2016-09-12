@@ -74,7 +74,14 @@ public class ModifyMaxHealthEffect extends AbstractEffectProcessor<Instance>
 
 		if (!attribute.hasModifier(instance.getModifier()))
 		{
+			float prevMaxHealth = living.getMaxHealth();
+
 			attribute.applyModifier(instance.getModifier());
+
+			if (living.getHealth() == prevMaxHealth)
+			{
+				living.setHealth(living.getMaxHealth());
+			}
 		}
 	}
 

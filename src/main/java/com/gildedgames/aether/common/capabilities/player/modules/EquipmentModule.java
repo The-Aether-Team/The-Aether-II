@@ -22,6 +22,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
+import static net.minecraft.realms.Tezzelator.t;
+
 public class EquipmentModule extends PlayerAetherModule
 {
 
@@ -57,6 +59,39 @@ public class EquipmentModule extends PlayerAetherModule
 		super(playerAether);
 
 		this.equipment = equipment;
+	}
+
+	public void resetEffects()
+	{
+		this.removeEffects(this.getPlayer().inventory.armorInventory);
+		this.removeEffects(this.getPlayer().inventory.offHandInventory);
+		this.removeEffects(this.equipment.getInventory());
+
+		this.trackedSlots.clear();
+	}
+
+	private void removeEffects(ItemStack[] inventory)
+	{
+		IEntityEffectsCapability effects = EntityEffects.get(this.getPlayer());
+
+		for (ItemSlot slot : this.trackedSlots.get(inventory))
+		{
+			if (slot != null && slot.getStack() != null)
+			{
+				IItemEffectsCapability itemEffects = slot.getStack().getCapability(AetherCapabilities.ITEM_EFFECTS, null);
+
+				for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : itemEffects.getEffectPairs())
+				{
+					EntityEffectProcessor processor = effect.getLeft();
+					EntityEffectInstance instance = effect.getRight();
+
+					if (effects.hasInstance(processor, instance))
+					{
+						effects.removeInstance(processor, instance);
+					}
+				}
+			}
+		}
 	}
 
 	@Override
