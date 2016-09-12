@@ -49,6 +49,11 @@ public class EntityAICompanionTargetEnemy extends EntityAITarget
 	@Override
 	public void startExecuting()
 	{
+		if (this.target == this.entity.getOwner())
+		{
+			return;
+		}
+
 		this.taskOwner.setAttackTarget(this.target);
 		EntityLivingBase owner = this.entity.getOwner();
 

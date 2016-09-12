@@ -3,10 +3,7 @@ package com.gildedgames.aether.common.entities.companions;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.entities.ai.companion.EntityAICompanionFollow;
 import com.google.common.base.Optional;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -17,6 +14,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.UUID;
 
 public abstract class EntityCompanion extends EntityCreature
@@ -28,6 +26,17 @@ public abstract class EntityCompanion extends EntityCreature
 	public EntityCompanion(World worldIn)
 	{
 		super(worldIn);
+	}
+
+	@Override
+	public void setAttackTarget(@Nullable EntityLivingBase target)
+	{
+		if (target == this.getOwner())
+		{
+			return;
+		}
+
+		super.setAttackTarget(target);
 	}
 
 	@Override
