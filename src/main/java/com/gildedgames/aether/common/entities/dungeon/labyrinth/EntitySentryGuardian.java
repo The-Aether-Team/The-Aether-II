@@ -202,8 +202,25 @@ public class EntitySentryGuardian extends EntityFlyingMob implements IRangedAtta
 		NBTHelper.fullySerialize("overheatingTimer", this.overheatingTimer, tag);
 		NBTHelper.fullySerialize("spawnRepairSentriesTimer", this.spawnRepairSentriesTimer, tag);
 
-		tag.setUniqueId("repairSentry1", this.repairSentry1);
-		tag.setUniqueId("repairSentry2", this.repairSentry2);
+		if (this.repairSentry1 == null)
+		{
+			tag.setBoolean("repairSentry1Null", true);
+		}
+		else
+		{
+			tag.setBoolean("repairSentry1Null", false);
+			tag.setUniqueId("repairSentry1", this.repairSentry1);
+		}
+
+		if (this.repairSentry2 == null)
+		{
+			tag.setBoolean("repairSentry2Null", true);
+		}
+		else
+		{
+			tag.setBoolean("repairSentry2Null", false);
+			tag.setUniqueId("repairSentry2", this.repairSentry2);
+		}
 	}
 
 	@Override
@@ -217,8 +234,15 @@ public class EntitySentryGuardian extends EntityFlyingMob implements IRangedAtta
 		this.overheatingTimer = NBTHelper.fullyDeserialize("overheatingTimer", tag);
 		this.spawnRepairSentriesTimer = NBTHelper.fullyDeserialize("spawnRepairSentriesTimer", tag);
 
-		this.repairSentry1 = tag.getUniqueId("repairSentry1");
-		this.repairSentry2 = tag.getUniqueId("repairSentry2");
+		if (!tag.getBoolean("repairSentry1Null"))
+		{
+			this.repairSentry1 = tag.getUniqueId("repairSentry1");
+		}
+
+		if (!tag.getBoolean("repairSentry2Null"))
+		{
+			this.repairSentry2 = tag.getUniqueId("repairSentry2");
+		}
 	}
 
 	@Override

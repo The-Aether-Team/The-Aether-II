@@ -49,6 +49,7 @@ public class DungeonDefinitions
 					Template feature_pillars_2 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/feature_pillars_2"));
 					Template loot_pillars_1 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/loot_pillars_1"));
 					Template loot_pillars_2 = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/loot_pillars_2"));
+					Template sentry_production = MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/sentry_production"));
 
 					//Template labTunnel = MANAGER.func_189942_b(server, newsystem ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel"));
 					//Template labTunnelLeft = MANAGER.func_189942_b(server, newsystem ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel_Left"));
@@ -66,6 +67,7 @@ public class DungeonDefinitions
 					rooms.add(new DungeonRoom(loot_medium));
 					rooms.add(new DungeonRoom(loot_small));
 					rooms.add(new DungeonRoom(loot_small));
+					rooms.add(new DungeonRoom(sentry_production));
 
 					//rooms.add(newsystem DungeonRoom(labTunnel));
 					//rooms.add(newsystem DungeonRoom(labTunnelLeft));
