@@ -334,6 +334,29 @@ item.aether.mud_ring.name=Mud Ring
 item.aether.steam_ring.name=Steam Ring
 item.aether.storm_ring.name=Storm Ring
 item.aether.butchers_knife.name=Butcher's Knife
+item.aether.fleeting_scarf.name=Fleeting Scarf
+item.aether.winged_necklace.name=Winged Necklace
+item.aether.gust_amulet.name=Gust Amulet
+item.aether.typhoon_amulet.name=Typhoon Amulet
+item.aether.chain_of_sporing_bones.name=Chain of Sporing Bones
+item.aether.molten_amulet.name=Molten Amulet
+item.aether.granite_studded_choker.name=Granite-Studded Choker
+item.aether.muggers_cloak.name=Mugger's Cloak
+item.aether.bandit_shawl.name=Bandit Shawl
+item.aether.hide_pouch.name=Hide Pouch
+item.aether.gruegar_pouch.name=Gruegar Pouch
+item.aether.soul_shard.name=Soul Shard
+item.aether.angel_bandage.name=Angel Bandage
+item.aether.swift_rune.name=Swift Rune
+item.aether.wynd_crystal.name=Wynd Crystal
+item.aether.wisdom_rune.name=Wisdom Rune
+item.aether.aerogel_chip.name=Aerogel Chip
+item.aether.gruegar_ring.name=Gruegar Ring
+item.aether.ring_of_strength.name=Ring of Strength
+item.aether.arkenium_ring.name=Arkenium Ring
+item.aether.swift_ribbon.name=Swift Ribbon
+item.aether.wynd_band.name=Wynd Band
+item.aether.ring_of_wisdom.name=Ring of Wisdom
 
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability: 
@@ -519,6 +542,7 @@ ability.setEnemiesOnFire.name=Sparking Touch
 ability.fireImmunity.name=Fire Immunity
 ability.companionMaxHealthMod.name=Companion Max Health Modifier
 ability.slowfall.name=Slowfall
+ability.attackSpeedMod.name=Attack Speed Modifier
 
 elementalState.biological=Biological
 elementalState.frost=Frost
@@ -563,6 +587,7 @@ ability.levitateAttackers.desc1=§9Levitate Attackers
 ability.levitateAttackers.desc2=%s%% Chance
 ability.setAttackersOnFire.desc1=§9Burns Attackers
 ability.setAttackersOnFire.desc2=%s%% Chance
+ability.attackSpeedMod.desc=%s Attack Speed
 
 # Tabs
 tab.equipment=Equipment

@@ -70,6 +70,8 @@ public class EntityEffects implements IEntityEffectsCapability
 
 	public static final EntityEffectProcessor<LevitateAttackersEffect.Instance> LEVITATE_ATTACKERS = new LevitateAttackersEffect();
 
+	public static final EntityEffectProcessor<ModifyAttackSpeedEffect.Instance> MODIFY_ATTACK_SPEED = new ModifyAttackSpeedEffect();
+
 	private final Entity entity;
 
 	private final List<IEffectPool<?>> effects = Lists.newArrayList();

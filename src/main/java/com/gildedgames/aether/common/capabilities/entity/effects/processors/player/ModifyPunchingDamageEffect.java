@@ -21,7 +21,7 @@ public class ModifyPunchingDamageEffect extends ModifyDamageEffect
 	@Override
 	public String getUnlocalizedName(Entity source, Instance instance)
 	{
-		return "ability.punchingDamage.localizedName";
+		return "ability.punchingDamage.name";
 	}
 
 	@Override

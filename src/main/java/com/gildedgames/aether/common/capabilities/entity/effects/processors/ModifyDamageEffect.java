@@ -20,6 +20,7 @@ import net.minecraft.util.text.TextFormatting;
 
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 public class ModifyDamageEffect extends AbstractEffectProcessor<ModifyDamageEffect.Instance>
 {

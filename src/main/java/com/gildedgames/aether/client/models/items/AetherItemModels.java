@@ -480,6 +480,32 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.steam_ring, "accessories/steam_ring");
 
 		registerItemModels(ItemsAether.butchers_knife, "accessories/butchers_knife");
+
+		registerItemModels(ItemsAether.gruegar_ring, "accessories/gruegar_ring");
+		registerItemModels(ItemsAether.ring_of_strength, "accessories/ring_of_strength");
+		registerItemModels(ItemsAether.arkenium_ring, "accessories/arkenium_ring");
+		registerItemModels(ItemsAether.swift_ribbon, "accessories/swift_ribbon");
+		registerItemModels(ItemsAether.wynd_band, "accessories/wynd_band");
+		registerItemModels(ItemsAether.ring_of_wisdom, "accessories/ring_of_wisdom");
+
+		registerItemModels(ItemsAether.hide_pouch, "accessories/hide_pouch");
+		registerItemModels(ItemsAether.gruegar_pouch, "accessories/gruegar_pouch");
+		registerItemModels(ItemsAether.soul_shard, "accessories/soul_shard");
+		registerItemModels(ItemsAether.angel_bandage, "accessories/angel_bandage");
+		registerItemModels(ItemsAether.swift_rune, "accessories/swift_rune");
+		registerItemModels(ItemsAether.wynd_crystal, "accessories/wynd_crystal");
+		registerItemModels(ItemsAether.wisdom_rune, "accessories/wisdom_rune");
+		registerItemModels(ItemsAether.aerogel_chip, "accessories/aerogel_chip");
+
+		registerItemModels(ItemsAether.fleeting_scarf, "accessories/fleeting_scarf");
+		registerItemModels(ItemsAether.winged_necklace, "accessories/winged_necklace");
+		registerItemModels(ItemsAether.gust_amulet, "accessories/gust_amulet");
+		registerItemModels(ItemsAether.typhoon_amulet, "accessories/typhoon_amulet");
+		registerItemModels(ItemsAether.chain_of_sporing_bones, "accessories/chain_of_sporing_bones");
+		registerItemModels(ItemsAether.molten_amulet, "accessories/molten_amulet");
+		registerItemModels(ItemsAether.granite_studded_choker, "accessories/granite_studded_choker");
+		registerItemModels(ItemsAether.muggers_cloak, "accessories/muggers_cloak");
+		registerItemModels(ItemsAether.bandit_shawl, "accessories/bandit_shawl");
 	}
 
 	private static void registerItemModels(Block block, String path)

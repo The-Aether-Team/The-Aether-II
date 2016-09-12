@@ -217,6 +217,12 @@ public class ItemsAether
 
 	public static Item butchers_knife;
 
+	public static Item fleeting_scarf, winged_necklace, gust_amulet, typhoon_amulet, chain_of_sporing_bones, molten_amulet, granite_studded_choker;
+
+	public static Item muggers_cloak, bandit_shawl, hide_pouch, gruegar_pouch, soul_shard, angel_bandage, swift_rune, wynd_crystal, wisdom_rune, aerogel_chip;
+
+	public static Item ring_of_strength, gruegar_ring, arkenium_ring, swift_ribbon, wynd_band, ring_of_wisdom;
+
 	public static void preInit()
 	{
 		skyroot_stick = registerItem("skyroot_stick", new Item(), CreativeTabsAether.tabMaterials);
@@ -509,6 +515,32 @@ public class ItemsAether
 
 		butchers_knife = registerItem("butchers_knife", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
 
+		fleeting_scarf = registerItem("fleeting_scarf", new Item().setMaxStackSize(1), CreativeTabsAether.tabNeckwear);
+		winged_necklace = registerItem("winged_necklace", new Item().setMaxStackSize(1), CreativeTabsAether.tabNeckwear);
+		gust_amulet = registerItem("gust_amulet", new Item().setMaxStackSize(1), CreativeTabsAether.tabNeckwear);
+		typhoon_amulet = registerItem("typhoon_amulet", new Item().setMaxStackSize(1), CreativeTabsAether.tabNeckwear);
+		chain_of_sporing_bones = registerItem("chain_of_sporing_bones", new Item().setMaxStackSize(1), CreativeTabsAether.tabNeckwear);
+		molten_amulet = registerItem("molten_amulet", new Item().setMaxStackSize(1), CreativeTabsAether.tabNeckwear);
+		granite_studded_choker = registerItem("granite_studded_choker", new Item().setMaxStackSize(1), CreativeTabsAether.tabNeckwear);
+		muggers_cloak = registerItem("muggers_cloak", new Item().setMaxStackSize(1), CreativeTabsAether.tabNeckwear);
+		bandit_shawl = registerItem("bandit_shawl", new Item().setMaxStackSize(1), CreativeTabsAether.tabNeckwear);
+
+		hide_pouch = registerItem("hide_pouch", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
+		gruegar_pouch = registerItem("gruegar_pouch", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
+		soul_shard = registerItem("soul_shard", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
+		angel_bandage = registerItem("angel_bandage", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
+		swift_rune = registerItem("swift_rune", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
+		wynd_crystal = registerItem("wynd_crystal", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
+		wisdom_rune = registerItem("wisdom_rune", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
+		aerogel_chip = registerItem("aerogel_chip", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
+
+		ring_of_strength = registerItem("ring_of_strength", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
+		gruegar_ring = registerItem("gruegar_ring", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
+		arkenium_ring = registerItem("arkenium_ring", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
+		swift_ribbon = registerItem("swift_ribbon", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
+		wynd_band = registerItem("wynd_band", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
+		ring_of_wisdom = registerItem("ring_of_wisdom", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
+
 		IEquipmentRegistry equipmentRegistry = AetherCore.INSTANCE.getEquipmentRegistry();
 
 		equipmentRegistry.register(ItemsAether.iron_ring, ItemRarity.NONE, ItemEquipmentType.RING);
@@ -534,14 +566,16 @@ public class ItemsAether
 		/** RELICS **/
 
 		equipmentRegistry.register(ItemsAether.iron_bubble, ItemRarity.COMMON, ItemEquipmentType.RELIC);
+
 		equipmentRegistry.register(ItemsAether.carrion_bloom, ItemRarity.RARE, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.moonlit_bloom, ItemRarity.RARE, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.companion_armor, ItemRarity.RARE, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.spiked_collar, ItemRarity.RARE, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.divine_beacon, ItemRarity.RARE, ItemEquipmentType.RELIC);
+		equipmentRegistry.register(ItemsAether.regeneration_stone, ItemRarity.RARE, ItemEquipmentType.RELIC);
+
 		equipmentRegistry.register(ItemsAether.vampire_fang, ItemRarity.EPIC, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.phoenix_rune, ItemRarity.EPIC, ItemEquipmentType.RELIC);
-		equipmentRegistry.register(ItemsAether.regeneration_stone, ItemRarity.RARE, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.daggerfrost_rune, ItemRarity.EPIC, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.carrion_petal, ItemRarity.EPIC, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.moonlit_petal, ItemRarity.EPIC, ItemEquipmentType.RELIC);
@@ -551,16 +585,29 @@ public class ItemsAether
 		equipmentRegistry.register(ItemsAether.iron_pendant, ItemRarity.NONE, ItemEquipmentType.NECKWEAR);
 		equipmentRegistry.register(ItemsAether.gold_pendant, ItemRarity.NONE, ItemEquipmentType.NECKWEAR);
 		equipmentRegistry.register(ItemsAether.zanite_pendant, ItemRarity.NONE, ItemEquipmentType.NECKWEAR);
+
 		equipmentRegistry.register(ItemsAether.ice_pendant, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
 		equipmentRegistry.register(ItemsAether.zanite_studded_choker, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
 		equipmentRegistry.register(ItemsAether.lesser_amulet_of_growth, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
 		equipmentRegistry.register(ItemsAether.hide_gorget, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
+		equipmentRegistry.register(ItemsAether.fleeting_scarf, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
+		equipmentRegistry.register(ItemsAether.muggers_cloak, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
+
 		equipmentRegistry.register(ItemsAether.amulet_of_growth, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
 		equipmentRegistry.register(ItemsAether.arkenium_studded_choker, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
 		equipmentRegistry.register(ItemsAether.raegorite_gorget, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
 		equipmentRegistry.register(ItemsAether.gruegar_scarf, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
+		equipmentRegistry.register(ItemsAether.winged_necklace, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
+		equipmentRegistry.register(ItemsAether.gust_amulet, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
+		equipmentRegistry.register(ItemsAether.typhoon_amulet, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
+		equipmentRegistry.register(ItemsAether.chain_of_sporing_bones, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
+		equipmentRegistry.register(ItemsAether.molten_amulet, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
+		equipmentRegistry.register(ItemsAether.granite_studded_choker, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
+		equipmentRegistry.register(ItemsAether.bandit_shawl, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
+
 		equipmentRegistry.register(ItemsAether.moon_sect_warden_gorget, ItemRarity.EPIC, ItemEquipmentType.NECKWEAR);
 		equipmentRegistry.register(ItemsAether.thiefs_gorget, ItemRarity.EPIC, ItemEquipmentType.NECKWEAR);
+
 		equipmentRegistry.register(ItemsAether.frostward_scarf, ItemRarity.MYTHIC, ItemEquipmentType.NECKWEAR);
 
 		/** COMPANIONS **/
@@ -581,6 +628,9 @@ public class ItemsAether
 		equipmentRegistry.register(ItemsAether.barbed_iron_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
 		equipmentRegistry.register(ItemsAether.fleeting_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
 		equipmentRegistry.register(ItemsAether.lesser_ring_of_growth, ItemRarity.COMMON, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.ring_of_strength, ItemRarity.COMMON, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.swift_ribbon, ItemRarity.COMMON, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.ring_of_wisdom, ItemRarity.COMMON, ItemEquipmentType.RING);
 
 		equipmentRegistry.register(ItemsAether.bone_ring, ItemRarity.RARE, ItemEquipmentType.RING);
 		equipmentRegistry.register(ItemsAether.ice_ring, ItemRarity.RARE, ItemEquipmentType.RING);
@@ -592,6 +642,8 @@ public class ItemsAether
 		equipmentRegistry.register(ItemsAether.ring_of_growth, ItemRarity.RARE, ItemEquipmentType.RING);
 		equipmentRegistry.register(ItemsAether.barbed_gold_ring, ItemRarity.RARE, ItemEquipmentType.RING);
 		equipmentRegistry.register(ItemsAether.winged_ring, ItemRarity.RARE, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.gruegar_ring, ItemRarity.RARE, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.wynd_band, ItemRarity.RARE, ItemEquipmentType.RING);
 
 		equipmentRegistry.register(ItemsAether.solar_band, ItemRarity.EPIC, ItemEquipmentType.RING);
 		equipmentRegistry.register(ItemsAether.lunar_band, ItemRarity.EPIC, ItemEquipmentType.RING);
@@ -601,6 +653,7 @@ public class ItemsAether
 		equipmentRegistry.register(ItemsAether.mud_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
 		equipmentRegistry.register(ItemsAether.storm_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
 		equipmentRegistry.register(ItemsAether.steam_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.arkenium_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
 
 		equipmentRegistry.register(ItemsAether.plague_coil, ItemRarity.MYTHIC, ItemEquipmentType.RING);
 		equipmentRegistry.register(ItemsAether.life_coil, ItemRarity.MYTHIC, ItemEquipmentType.RING);
@@ -608,8 +661,12 @@ public class ItemsAether
 		/** CHARMS **/
 		equipmentRegistry.register(ItemsAether.iron_barbed_wire, ItemRarity.COMMON, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(ItemsAether.white_moa_feather, ItemRarity.COMMON, ItemEquipmentType.CHARM);
+		equipmentRegistry.register(ItemsAether.hide_pouch, ItemRarity.COMMON, ItemEquipmentType.CHARM);
+		equipmentRegistry.register(ItemsAether.angel_bandage, ItemRarity.COMMON, ItemEquipmentType.CHARM);
+		equipmentRegistry.register(ItemsAether.wisdom_bauble, ItemRarity.COMMON, ItemEquipmentType.CHARM);
+		equipmentRegistry.register(ItemsAether.swift_rune, ItemRarity.COMMON, ItemEquipmentType.CHARM);
 
-		equipmentRegistry.register(ItemsAether.wisdom_bauble, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		equipmentRegistry.register(ItemsAether.wisdom_rune, ItemRarity.RARE, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(ItemsAether.bone_shard, ItemRarity.RARE, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(ItemsAether.granite_chip, ItemRarity.RARE, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(ItemsAether.gust_bauble, ItemRarity.RARE, ItemEquipmentType.CHARM);
@@ -622,6 +679,9 @@ public class ItemsAether
 		equipmentRegistry.register(ItemsAether.skyroot_twig, ItemRarity.RARE, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(ItemsAether.gold_barbed_wire, ItemRarity.RARE, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(ItemsAether.ambrosium_talisman, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		equipmentRegistry.register(ItemsAether.gruegar_pouch, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		equipmentRegistry.register(ItemsAether.soul_shard, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		equipmentRegistry.register(ItemsAether.wynd_crystal, ItemRarity.RARE, ItemEquipmentType.CHARM);
 
 		equipmentRegistry.register(ItemsAether.cockatrice_heart, ItemRarity.EPIC, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(ItemsAether.damaged_moa_feather, ItemRarity.EPIC, ItemEquipmentType.CHARM);
@@ -629,9 +689,12 @@ public class ItemsAether
 		equipmentRegistry.register(ItemsAether.osseous_bane, ItemRarity.EPIC, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(ItemsAether.rot_bane, ItemRarity.EPIC, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(ItemsAether.butchers_knife, ItemRarity.EPIC, ItemEquipmentType.CHARM);
+		equipmentRegistry.register(ItemsAether.aerogel_chip, ItemRarity.EPIC, ItemEquipmentType.CHARM);
 
 		equipmentRegistry.register(ItemsAether.continuum_talisman, ItemRarity.MYTHIC, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(ItemsAether.labyrinth_plans, ItemRarity.MYTHIC, ItemEquipmentType.CHARM);
+
+		/** OFF-HAND **/
 
 		equipmentRegistry.register(Items.SHIELD, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
 		equipmentRegistry.register(ItemsAether.skyroot_shield, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
@@ -967,6 +1030,32 @@ public class ItemsAether
 
 		ItemEffects.register(ItemsAether.gravitite_core, new Effects().add(EntityEffects.EXTRA_JUMPS));
 		ItemEffects.register(ItemsAether.valkyrie_wings, new Effects().add(EntityEffects.SLOWFALL));
+
+		ItemEffects.register(ItemsAether.fleeting_scarf, new Effects().add(EntityEffects.MODIFY_SPEED, new ModifySpeedEffect.Instance((float) SharedMonsterAttributes.MOVEMENT_SPEED.getDefaultValue() * 0.2D)));
+		ItemEffects.register(ItemsAether.winged_necklace, new Effects().add(EntityEffects.MODIFY_SPEED, new ModifySpeedEffect.Instance((float) SharedMonsterAttributes.MOVEMENT_SPEED.getDefaultValue() * 0.4D)));
+		ItemEffects.register(ItemsAether.gust_amulet, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.AIR, 5.0D)));
+		ItemEffects.register(ItemsAether.typhoon_amulet, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.WATER, 5.0D)));
+		ItemEffects.register(ItemsAether.chain_of_sporing_bones, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BLIGHT, 5.0D)));
+		ItemEffects.register(ItemsAether.molten_amulet, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.FIRE, 5.0D)));
+		ItemEffects.register(ItemsAether.granite_studded_choker, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.EARTH, 5.0D)));
+		ItemEffects.register(ItemsAether.muggers_cloak, new Effects().add(EntityEffects.MODIFY_ATTACK_SPEED, new ModifyAttackSpeedEffect.Instance((float) SharedMonsterAttributes.ATTACK_SPEED.getDefaultValue() * 0.1D)));
+		ItemEffects.register(ItemsAether.bandit_shawl, new Effects().add(EntityEffects.MODIFY_ATTACK_SPEED, new ModifyAttackSpeedEffect.Instance((float) SharedMonsterAttributes.ATTACK_SPEED.getDefaultValue() * 0.2D)));
+
+		ItemEffects.register(ItemsAether.hide_pouch, new Effects().add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(-3.0D)));
+		ItemEffects.register(ItemsAether.gruegar_pouch, new Effects().add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(-5.0D)));
+		ItemEffects.register(ItemsAether.soul_shard, new Effects().add(EntityEffects.MODIFY_MAX_HEALTH, new ModifyMaxHealthEffect.Instance(0.5D)));
+		ItemEffects.register(ItemsAether.angel_bandage, new Effects().add(EntityEffects.MODIFY_MAX_HEALTH, new ModifyMaxHealthEffect.Instance(0.25D)));
+		ItemEffects.register(ItemsAether.swift_rune, new Effects().add(EntityEffects.MODIFY_ATTACK_SPEED, new ModifyAttackSpeedEffect.Instance((float) SharedMonsterAttributes.ATTACK_SPEED.getDefaultValue() * 0.01D)));
+		ItemEffects.register(ItemsAether.wynd_crystal, new Effects().add(EntityEffects.MODIFY_ATTACK_SPEED, new ModifyAttackSpeedEffect.Instance((float) SharedMonsterAttributes.ATTACK_SPEED.getDefaultValue() * 0.02D)));
+		ItemEffects.register(ItemsAether.wisdom_rune, new Effects().add(EntityEffects.MODIFY_XP_COLLECTION, new ModifyXPCollectionEffect.Instance(0.20D)));
+		ItemEffects.register(ItemsAether.aerogel_chip, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.AIR, 0.1D)).add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.FIRE, 0.2D)));
+
+		ItemEffects.register(ItemsAether.gruegar_ring, new Effects().add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(-10.0D)));
+		ItemEffects.register(ItemsAether.ring_of_strength, new Effects().add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(-7.5D)));
+		ItemEffects.register(ItemsAether.arkenium_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 3.0D)).add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(10.0D)));
+		ItemEffects.register(ItemsAether.swift_ribbon, new Effects().add(EntityEffects.MODIFY_ATTACK_SPEED, new ModifyAttackSpeedEffect.Instance((float) SharedMonsterAttributes.ATTACK_SPEED.getDefaultValue() * 0.05D)));
+		ItemEffects.register(ItemsAether.wynd_band, new Effects().add(EntityEffects.MODIFY_ATTACK_SPEED, new ModifyAttackSpeedEffect.Instance((float) SharedMonsterAttributes.ATTACK_SPEED.getDefaultValue() * 0.1D)));
+		ItemEffects.register(ItemsAether.ring_of_wisdom, new Effects().add(EntityEffects.MODIFY_XP_COLLECTION, new ModifyXPCollectionEffect.Instance(0.30D)));
 
 		zanite_armor_set = new Item[] { zanite_helmet, zanite_chestplate, zanite_leggings, zanite_boots, zanite_gloves };
 

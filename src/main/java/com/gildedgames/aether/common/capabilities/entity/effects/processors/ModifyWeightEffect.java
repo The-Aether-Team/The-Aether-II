@@ -11,6 +11,7 @@ import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.List;
+import java.util.UUID;
 
 public class ModifyWeightEffect extends AbstractEffectProcessor<ModifyWeightEffect.Instance>
 {
@@ -28,8 +29,8 @@ public class ModifyWeightEffect extends AbstractEffectProcessor<ModifyWeightEffe
 
 			double percent = (-weightKg / 3.0D) * 0.01D;
 
-			this.movementSpeedMod = new AttributeModifier("Negative Weight Speed", percent * SharedMonsterAttributes.MOVEMENT_SPEED.getDefaultValue(), 2).setSaved(false);
-			this.attackSpeedMod = new AttributeModifier("Negative Weight Attack Speed", percent * SharedMonsterAttributes.ATTACK_SPEED.getDefaultValue(), 2).setSaved(false);
+			this.movementSpeedMod = new AttributeModifier(UUID.randomUUID(), "Negative Weight Speed", percent * SharedMonsterAttributes.MOVEMENT_SPEED.getDefaultValue(), 2).setSaved(false);
+			this.attackSpeedMod = new AttributeModifier(UUID.randomUUID(), "Negative Weight Attack Speed", percent * SharedMonsterAttributes.ATTACK_SPEED.getDefaultValue(), 2).setSaved(false);
 		}
 
 		public double getWeightInKg()

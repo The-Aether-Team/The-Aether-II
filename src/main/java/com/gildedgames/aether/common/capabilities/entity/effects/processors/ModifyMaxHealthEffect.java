@@ -27,7 +27,7 @@ public class ModifyMaxHealthEffect extends AbstractEffectProcessor<Instance>
 			super(rules);
 
 			this.getAttributes().setDouble("maxHealthMod", maxHealthMod);
-			this.modifier = new AttributeModifier(UUID.fromString("a41be083-875f-4d16-8264-d84f11fda9c5"), "Extra Max Health", maxHealthMod * 2, 0).setSaved(false);
+			this.modifier = new AttributeModifier(UUID.randomUUID(), "Extra Max Health", maxHealthMod * 2, 0).setSaved(false);
 		}
 
 		public AttributeModifier getModifier()
@@ -45,7 +45,7 @@ public class ModifyMaxHealthEffect extends AbstractEffectProcessor<Instance>
 
 	public ModifyMaxHealthEffect()
 	{
-		super("ability.maxHealthMod.localizedName", "ability.maxHealthMod.desc");
+		super("ability.maxHealthMod.name", "ability.maxHealthMod.desc");
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class ModifyMaxHealthEffect extends AbstractEffectProcessor<Instance>
 	@Override
 	public void apply(Entity source, Instance instance, List<Instance> all)
 	{
-		if (!(source instanceof EntityLivingBase))
+		if (!(source instanceof EntityLivingBase) || source.worldObj.isRemote)
 		{
 			return;
 		}
@@ -81,7 +81,7 @@ public class ModifyMaxHealthEffect extends AbstractEffectProcessor<Instance>
 	@Override
 	public void cancel(Entity source, Instance instance, List<Instance> all)
 	{
-		if (!(source instanceof EntityLivingBase))
+		if (!(source instanceof EntityLivingBase) || source.worldObj.isRemote)
 		{
 			return;
 		}

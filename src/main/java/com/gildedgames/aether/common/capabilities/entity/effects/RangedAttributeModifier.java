@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.capabilities.entity.effects;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 
 import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class RangedAttributeModifier extends AttributeModifier
@@ -18,7 +19,7 @@ public class RangedAttributeModifier extends AttributeModifier
 
 	public RangedAttributeModifier(String nameIn, double min, double max, boolean floatRanges, Random rand, int operationIn)
 	{
-		super(nameIn, 0, operationIn);
+		super(UUID.randomUUID(), nameIn, 0, operationIn);
 
 		this.min = min;
 		this.max = max;
