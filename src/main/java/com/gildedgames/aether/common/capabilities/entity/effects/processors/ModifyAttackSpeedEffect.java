@@ -54,18 +54,18 @@ public class ModifyAttackSpeedEffect extends AbstractEffectProcessor<ModifyAttac
 
 		String prefix = attackSpeedMod > 0 ? (TextFormatting.BLUE + "+") : (TextFormatting.RED + "");
 
-		double value = (float) (attackSpeedMod / SharedMonsterAttributes.ATTACK_SPEED.getDefaultValue()) * 100.0D;
+		double value = (attackSpeedMod / SharedMonsterAttributes.ATTACK_SPEED.getDefaultValue()) * 100.0D;
 
 		String valueString = value == (int) Math.floor(value) ? String.valueOf((int) Math.floor(value)) : String.valueOf(value);
 
 		if (value != (int) Math.floor(value))
 		{
-			double floor = Math.floor(value);
+			int floor = (int)Math.floor(value);
 			double dif = value - floor;
 
 			if (dif < 0.1D)
 			{
-				valueString = String.valueOf((int) Math.floor(value));
+				valueString = String.valueOf(floor);
 			}
 			else
 			{

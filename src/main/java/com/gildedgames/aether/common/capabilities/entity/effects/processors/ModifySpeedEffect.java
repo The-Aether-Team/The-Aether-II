@@ -54,7 +54,7 @@ public class ModifySpeedEffect extends AbstractEffectProcessor<Instance>
 
 		String prefix = movementSpeedMod > 0 ? (TextFormatting.BLUE + "+") : (TextFormatting.RED + "");
 
-		double value = (float) (movementSpeedMod / SharedMonsterAttributes.MOVEMENT_SPEED.getDefaultValue()) * 100.0D;
+		double value = (movementSpeedMod / SharedMonsterAttributes.MOVEMENT_SPEED.getDefaultValue()) * 100.0D;
 
 		String valueString = value == (int) Math.floor(value) ? String.valueOf((int) Math.floor(value)) : String.valueOf(value);
 
