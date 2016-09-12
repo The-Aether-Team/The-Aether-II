@@ -96,6 +96,11 @@ public class EntityProperties implements IEntityPropertiesCapability
 
 	public static IEntityPropertiesCapability get(Entity entity)
 	{
+		if (entity == null)
+		{
+			return null;
+		}
+
 		return entity.getCapability(AetherCapabilities.ENTITY_PROPERTIES, null);
 	}
 
