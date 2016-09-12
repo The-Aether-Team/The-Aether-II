@@ -45,24 +45,4 @@ public abstract class EntityCombatCompanion extends EntityCompanion
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(10.0D);
 	}
 
-	@Override
-	public boolean attackEntityAsMob(Entity entityIn)
-	{
-		boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), (float)((int)this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue()));
-
-		if (flag)
-		{
-			this.applyEnchantments(this, entityIn);
-
-			if (entityIn instanceof EntityLivingBase)
-			{
-				EntityLivingBase living = (EntityLivingBase)entityIn;
-
-				living.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20, 3));
-			}
-		}
-
-		return flag;
-	}
-
 }
