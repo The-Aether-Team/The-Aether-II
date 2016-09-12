@@ -44,11 +44,14 @@ public class EntitiesAether
 		registerLivingEntity(EntityZephyr.class, "zephyr", 0xCCFFFF, 0xCCCCFF);
 		registerLivingEntity(EntityTempest.class, "tempest", 0xCCFFFF, 0xCCCCFF);
 		registerLivingEntity(EntitySwet.class, "swet", 0xCCFFFF, 0xCCCCFF);
-		registerLivingEntity(EntityDetonationSentry.class, "detonationSentry", 0x414141, 0x4e9af7);
-		registerLivingEntity(EntityBattleSentry.class, "battleSentry", 0x414141, 0x4e9af7);
-		registerLivingEntity(EntityTrackingSentry.class, "trackingSentry", 0x414141, 0x4e9af7);
-		registerLivingEntity(EntityChestMimic.class, "chestMimic", 0x414141, 0x4e9af7);
-		registerLivingEntity(EntityBattleGolem.class, "battleGolem", 0x414141, 0x4e9af7);
+		registerLivingEntity(EntityDetonationSentry.class, "detonation_sentry", 0x414141, 0x4e9af7);
+		registerLivingEntity(EntityBattleSentry.class, "battle_sentry", 0x414141, 0x4e9af7);
+		registerLivingEntity(EntityTrackingSentry.class, "tracking_sentry", 0x414141, 0x4e9af7);
+		registerLivingEntity(EntityChestMimic.class, "chest_mimic", 0x414141, 0x4e9af7);
+		registerLivingEntity(EntityBattleGolem.class, "battle_golem", 0x414141, 0x4e9af7);
+		registerLivingEntity(EntitySentryGuardian.class, "sentry_guardian", 0x414141, 0x4e9af7);
+		registerLivingEntity(EntityProductionLine.class, "production_line", 0x414141, 0x4e9af7);
+		registerLivingEntity(EntityRepairSentry.class, "repair_sentry", 0x414141, 0x4e9af7);
 
 		registerLivingEntity(EntityFrostpineTotem.class, "frostpine_totem");
 		registerLivingEntity(EntityKraisith.class, "kraisith");

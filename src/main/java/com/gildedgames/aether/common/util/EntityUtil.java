@@ -2,11 +2,15 @@ package com.gildedgames.aether.common.util;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+
+import java.util.UUID;
 
 public class EntityUtil
 {
@@ -14,6 +18,21 @@ public class EntityUtil
 	private EntityUtil()
 	{
 
+	}
+
+	public static Entity getEntityFromUUID(World world, UUID uuid)
+	{
+		for (int i = 0; i < world.loadedEntityList.size(); ++i)
+		{
+			Entity entity = world.loadedEntityList.get(i);
+
+			if (uuid.equals(entity.getUniqueID()))
+			{
+				return entity;
+			}
+		}
+
+		return null;
 	}
 
 	public static void copyDataFromOld(Entity clone, Entity oldEntity)
@@ -126,7 +145,15 @@ public class EntityUtil
 				double motionY = e2.motionY * velcur;
 				double motionZ = e2.motionZ * velcur;
 
-				e1.worldObj.spawnParticle(type, currentX + randX, currentY, currentZ + randZ, motionX, motionY, motionZ, parameters);
+				if (e1.worldObj.isRemote)
+				{
+					e1.worldObj.spawnParticle(type, currentX + randX, currentY, currentZ + randZ, motionX, motionY, motionZ, parameters);
+				}
+				else if (e1.worldObj instanceof WorldServer)
+				{
+					WorldServer worldServer = (WorldServer)e1.worldObj;
+					worldServer.spawnParticle(type, currentX + randX, currentY, currentZ + randZ, 1, motionX, motionY, motionZ, (world.rand.nextBoolean() ? 0.01D : -0.01D), parameters);
+				}
 
 				currentX += difX;
 				currentY += difY;

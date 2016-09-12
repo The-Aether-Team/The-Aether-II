@@ -70,8 +70,6 @@ public class EntityChestMimic extends EntityExtendedMob
 	@Override
 	public boolean attackEntityAsMob(Entity entity)
 	{
-		this.worldObj.spawnParticle(EnumParticleTypes.MOB_APPEARANCE, this.posX + motionX, this.posY + 0.5D + motionY, this.posZ + motionZ, 0.1D, 0.1D, 0.1D);
-
 		return super.attackEntityAsMob(entity);
 	}
 

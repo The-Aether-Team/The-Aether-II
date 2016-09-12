@@ -450,13 +450,16 @@ entity.aether.moa.name=Moa
 entity.aether.aerwhale.name=Aerwhale
 entity.aether.zephyr.name=Zephyr
 entity.aether.tempest.name=Tempest
-entity.aether.detonationSentry.name=Detonation Sentry
-entity.aether.battleSentry.name=Battle Sentry
-entity.aether.trackingSentry.name=Tracking Sentry
-entity.aether.chestMimic.name=Chest Mimic
-entity.aether.battleGolem.name=Battle Golem
+entity.aether.detonation_sentry.name=Detonation Sentry
+entity.aether.battle_sentry.name=Battle Sentry
+entity.aether.tracking_sentry.name=Tracking Sentry
+entity.aether.chest_mimic.name=Chest Mimic
+entity.aether.battle_golem.name=Battle Golem
 entity.aether.swet.name=Swet
 entity.aether.generator.name=Entity Generator
+entity.aether.sentry_guardian.name=Sentry Guardian
+entity.aether.production_line.name=Production Line
+entity.aether.repair_sentry.name=Repair Sentry
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether Blocks
