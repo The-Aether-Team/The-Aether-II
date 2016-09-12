@@ -42,7 +42,7 @@ public class EntityAICompanionTargetEnemy extends EntityAITarget
 		{
 			this.target = owner.getLastAttacker();
 			int i = owner.getLastAttackerTime();
-			return i != this.timestamp && this.isSuitableTarget(this.target, false);
+			return i != this.timestamp && this.isSuitableTarget(this.target, false) && this.target != owner;
 		}
 	}
 

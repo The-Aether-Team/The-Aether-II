@@ -35,7 +35,7 @@ public class EntityAICompanionOwnerHurt extends EntityAITarget
 		{
 			this.target = owner.getAITarget();
 			int i = owner.getRevengeTimer();
-			return i != this.timestamp && this.isSuitableTarget(this.target, false);
+			return i != this.timestamp && this.isSuitableTarget(this.target, false) && this.target != owner;
 		}
 	}
 
