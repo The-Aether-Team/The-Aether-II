@@ -225,7 +225,7 @@ public class SpawnRegistry
 		@Override
 		public void onEntityRemoved(Entity entity)
 		{
-			if (entity.isDead && entity.hasCapability(AetherCapabilities.ENTITY_SPAWNING_INFO, null) && !entity.getEntityWorld().isRemote)
+			if (!entity.worldObj.isRemote && entity.isDead && entity.hasCapability(AetherCapabilities.ENTITY_SPAWNING_INFO, null) && !entity.getEntityWorld().isRemote)
 			{
 				ISpawningInfo spawningInfo = entity.getCapability(AetherCapabilities.ENTITY_SPAWNING_INFO, null);
 

@@ -51,6 +51,8 @@ public class SpawnArea
 	public void addToEntityCount(int count)
 	{
 		this.entityCount += count;
+
+		this.entityCount = Math.max(0, this.entityCount);
 	}
 
 	public int getEntityCount()
