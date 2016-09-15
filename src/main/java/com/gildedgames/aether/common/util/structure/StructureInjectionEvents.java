@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.util.structure;
 
 import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.StructureInjectionPacket;
 import com.gildedgames.aether.common.tile_entities.TileEntityStructureExtended;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

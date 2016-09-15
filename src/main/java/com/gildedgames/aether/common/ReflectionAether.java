@@ -36,7 +36,7 @@ public class ReflectionAether
 
 	public static final ReflectionEntry FOOD_EXHAUSTION_LEVEL = new ReflectionEntry("field_75126_c", "foodExhaustionLevel");
 
-	public static final ReflectionEntry TILE_STRUCTURE = new ReflectionEntry("tileStructure");
+	public static final ReflectionEntry TILE_STRUCTURE = new ReflectionEntry("field_189846_f", "tileStructure");
 
 	public static final ReflectionEntry NAME_INPUT = new ReflectionEntry("field_189853_u");
 
@@ -57,7 +57,5 @@ public class ReflectionAether
 	public static final ReflectionEntry INTEGRITY_INPUT = new ReflectionEntry("field_189826_B");
 
 	public static final ReflectionEntry SEED_INPUT = new ReflectionEntry("field_189827_C");
-
-	public static final ReflectionEntry SIZE = new ReflectionEntry("size");
 
 }

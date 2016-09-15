@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.network;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.packets.*;
+import com.gildedgames.aether.common.util.structure.StructureInjectionPacket;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityTracker;
 import net.minecraft.entity.player.EntityPlayer;
