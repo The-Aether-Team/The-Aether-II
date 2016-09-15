@@ -33,7 +33,7 @@ public class StructureInjectionEvents
 
 			if (!(structure instanceof TileEntityStructureExtended))
 			{
-				//return;
+				return;
 			}
 
 			if (event.getButton().id == 0)
