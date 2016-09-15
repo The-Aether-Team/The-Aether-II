@@ -32,10 +32,7 @@ import com.gildedgames.aether.common.items.blocks.ItemAetherSlab;
 import com.gildedgames.aether.common.items.blocks.ItemBlockVariants;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockBed;
-import net.minecraft.block.BlockButtonStone;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -226,6 +223,8 @@ public class BlocksAether
 
 	public static final BlockMoaEgg moa_egg = new BlockMoaEgg();
 
+	public static final Block structure_extended = new BlockStructureExtended().setBlockUnbreakable().setResistance(6000000.0F);
+
 	public static void preInit()
 	{
 		registerBlock("aether_dirt", BlocksAether.aether_dirt.setCreativeTab(CreativeTabsAether.tabBlocks));
@@ -365,6 +364,8 @@ public class BlocksAether
 
 		registerBlock("woven_skyroot_sticks", BlocksAether.woven_skyroot_sticks.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("moa_egg", BlocksAether.moa_egg);
+
+		registerBlock("structure_extended", BlocksAether.structure_extended);
 
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_log_wall, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_planks, 5, 5);

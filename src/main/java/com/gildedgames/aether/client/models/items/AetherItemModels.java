@@ -506,6 +506,8 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.granite_studded_choker, "accessories/granite_studded_choker");
 		registerItemModels(ItemsAether.muggers_cloak, "accessories/muggers_cloak");
 		registerItemModels(ItemsAether.bandit_shawl, "accessories/bandit_shawl");
+
+		ModelLoader.setCustomModelResourceLocation(getItem(BlocksAether.structure_extended), 0, new ModelResourceLocation("structure_block", "inventory"));
 	}
 
 	private static void registerItemModels(Block block, String path)

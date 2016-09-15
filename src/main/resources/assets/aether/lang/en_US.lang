@@ -108,6 +108,7 @@ tile.aether.woven_skyroot_sticks.name=Woven Skyroot Sticks
 tile.aether.moa_egg.name=Moa Egg
 tile.aether.icestone_brick_stairs.name=Icestone Brick Stairs
 tile.aether.aerogel_stairs.name=Aerogel Stairs
+tile.aether.structure_extended.name=Extended Structure Block
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick

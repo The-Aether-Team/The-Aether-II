@@ -1,10 +1,7 @@
 package com.gildedgames.aether.common.network;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.network.packets.AetherMovementPacket;
-import com.gildedgames.aether.common.network.packets.CompanionChangedPacket;
-import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
-import com.gildedgames.aether.common.network.packets.MidAirJumpsChangedPacket;
+import com.gildedgames.aether.common.network.packets.*;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityTracker;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,6 +27,7 @@ public class NetworkingAether
 		instance.registerMessage(EquipmentChangedPacket.Handler.class, EquipmentChangedPacket.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(CompanionChangedPacket.Handler.class, CompanionChangedPacket.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(MidAirJumpsChangedPacket.Handler.class, MidAirJumpsChangedPacket.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(StructureInjectionPacket.Handler.class, StructureInjectionPacket.class, discriminant++, Side.SERVER);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 	}

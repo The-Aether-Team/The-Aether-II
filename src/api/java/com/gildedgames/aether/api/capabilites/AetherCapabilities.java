@@ -36,4 +36,5 @@ public class AetherCapabilities
 
 	@CapabilityInject(ISpawningInfo.class)
 	public static final Capability<ISpawningInfo> ENTITY_SPAWNING_INFO = null;
+
 }
