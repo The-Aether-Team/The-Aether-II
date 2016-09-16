@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.world.spawning;
 
+import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.util.math.ChunkPos;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -51,6 +52,11 @@ public class SpawnArea
 	public void addToEntityCount(int count)
 	{
 		this.entityCount += count;
+
+		if (this.entityCount < 0)
+		{
+			AetherCore.LOGGER.warn("Something has gone horribly wrong! The entity count in a SpawnArea object has become negative. Please warn the devs so they can fix this bug.");
+		}
 
 		this.entityCount = Math.max(0, this.entityCount);
 	}
