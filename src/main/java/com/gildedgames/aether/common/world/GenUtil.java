@@ -48,6 +48,24 @@ public class GenUtil
 		return noiseSum / weightSum;
 	}
 
+	public static double octavedNoise3D(OpenSimplexNoise noise, int octaves, double roughness, double scale, double x, double y, double z)
+	{
+		double noiseSum = 0;
+		double layerFrequency = scale;
+		double layerWeight = 1;
+		double weightSum = 0;
+
+		for (int octave = 0; octave < octaves; octave++)
+		{
+			noiseSum += noise.eval(x * layerFrequency, y * layerFrequency, z * layerFrequency) * layerWeight;
+			layerFrequency *= 2;
+			weightSum += layerWeight;
+			layerWeight *= roughness;
+		}
+
+		return noiseSum / weightSum;
+	}
+
 	public static double octavedNoise(OpenSimplexNoise noise, int octaves, double roughness, double scale, double x, double z)
 	{
 		double noiseSum = 0;
