@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.capabilites.entity.spawning.EntitySpawn;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.entities.living.*;
 import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
 import com.gildedgames.aether.common.entities.living.enemies.EntitySwet;
@@ -59,9 +60,9 @@ public class SpawnRegistry
 	{
 		/** PASSIVE **/
 		SpawnHandler animals = new SpawnHandler("aether_animals").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(200);
-		animals.worldCondition(new CheckDimension(DimensionsAether.AETHER)).condition(new CheckBiome(BiomesAether.BIOME_AETHER));
+		animals.worldCondition(new CheckDimension(DimensionsAether.AETHER));
 
-		PosCondition grassCheck = new CheckBlockStateUnderneath(BlocksAether.aether_grass.getDefaultState());
+		PosCondition grassCheck = new CheckBlockStateUnderneath(BlocksAether.aether_grass.getDefaultState(), BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED_AETHER_GRASS));
 
 		SpawnEntry flying_cow = new SpawnEntry(EntityFlyingCow.class, 10F, 2, 3).conditiion(grassCheck);
 		SpawnEntry ram = new SpawnEntry(EntityRam.class, 10F, 2, 3).conditiion(grassCheck);
@@ -77,9 +78,9 @@ public class SpawnRegistry
 
 		/** HOSTILES **/
 		SpawnHandler hostiles = new SpawnHandler("aether_hostiles").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(1200);
-		hostiles.worldCondition(new CheckDimension(DimensionsAether.AETHER)).condition(new CheckBiome(BiomesAether.BIOME_AETHER));
+		hostiles.worldCondition(new CheckDimension(DimensionsAether.AETHER));
 
-		PosCondition groundCheck = new CheckBlockStateUnderneath(BlocksAether.aether_grass.getDefaultState(), BlocksAether.holystone.getDefaultState());
+		PosCondition groundCheck = new CheckBlockStateUnderneath(BlocksAether.aether_grass.getDefaultState(), BlocksAether.holystone.getDefaultState(), BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED_AETHER_GRASS));
 
 		SpawnEntry zephyr = new SpawnEntry(EntityZephyr.class, 3F, 2, 3, new FlyingPositionSelector()).conditiion(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState()));
 		SpawnEntry tempest = new SpawnEntry(EntityTempest.class, 10F, 2, 3, new FlyingPositionSelector()).conditiion(new CheckTime(CheckTime.Time.NIGHT)).conditiion(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState()));
