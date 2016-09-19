@@ -51,6 +51,8 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 	public ChunkGeneratorIsland(World world, long seed)
 	{
+		world.setSeaLevel(255);
+
 		this.worldObj = world;
 		this.rand = new Random(seed);
 
