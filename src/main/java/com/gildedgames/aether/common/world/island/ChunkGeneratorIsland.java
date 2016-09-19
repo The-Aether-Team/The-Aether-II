@@ -254,9 +254,10 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 		ChunkPrimer primer = new ChunkPrimer();
 
+		this.setBlocksInChunk(primer, chunkX, chunkZ);
+
 		this.biomes = this.worldObj.getBiomeProvider().getBiomesForGeneration(this.biomes, chunkX * 16, chunkZ * 16, 16, 16);
 
-		this.setBlocksInChunk(primer, chunkX, chunkZ);
 		this.replaceBiomeBlocks(primer, chunkX, chunkZ, this.biomes);
 
 		this.caveGenerator.generate(this.worldObj, chunkX, chunkZ, primer);

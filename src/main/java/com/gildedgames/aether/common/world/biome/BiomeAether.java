@@ -8,12 +8,14 @@ import com.gildedgames.aether.common.world.features.trees.WorldGenLargeTree;
 import com.gildedgames.aether.common.world.features.trees.WorldGenMassiveSkyrootTree;
 import com.gildedgames.aether.common.world.features.trees.WorldGenSkyrootTree;
 import net.minecraft.block.BlockLog;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 import java.util.Random;
 
 public class BiomeAether extends BiomeAetherBase
 {
+
 	public static final WorldGenSkyrootTree genGreenSkyrootTree = new WorldGenSkyrootTree(BlocksAether.skyroot_log.getDefaultState().withProperty(BlockAetherLog.PROPERTY_LOG_AXIS, BlockLog.EnumAxis.Y),
 			BlocksAether.green_skyroot_leaves.getDefaultState());
 
@@ -36,7 +38,7 @@ public class BiomeAether extends BiomeAetherBase
 
 	public BiomeAether()
 	{
-		super(new BiomeProperties("Aether").setRainDisabled().setTemperature(0.5f));
+		super(new Biome.BiomeProperties("Aether").setRainDisabled().setTemperature(0.5f));
 
 		this.setRegistryName(AetherCore.getResource("aether_generic"));
 	}

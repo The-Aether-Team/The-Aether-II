@@ -1,5 +1,8 @@
 package com.gildedgames.aether.common.world.island.logic;
 
+import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
+import net.minecraft.world.biome.Biome;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -28,7 +31,7 @@ public class IslandSectorFactory
 
 			Rectangle bounds = new Rectangle(x, y, width, height);
 
-			IslandData islandData = new IslandData(bounds);
+			IslandData islandData = new IslandData(bounds, rand.nextBoolean() ? BiomesAether.BIOME_AETHER : BiomesAether.BIOME_AETHER_ENCHANTED);
 
 			data[i] = islandData;
 		}

@@ -7,6 +7,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 import java.util.Random;
@@ -76,9 +77,11 @@ public class WorldGenMassiveSkyrootTree extends WorldGenAbstractTree
 				return false;
 			}
 
+			Biome biome = world.getBiome(new BlockPos(pos.getX(), 0, pos.getZ()));
+
 			IBlockState wall = BlocksAether.skyroot_log_wall.getDefaultState().withProperty(BlockSkyrootWall.PROPERTY_GENERATED, true),
-					grass = BlocksAether.aether_grass.getDefaultState(),
-					dirt = BlocksAether.aether_dirt.getDefaultState();
+					grass = biome.topBlock,
+					dirt = biome.fillerBlock;
 
 			pos = new BlockPos(x, y - 1, z);
 

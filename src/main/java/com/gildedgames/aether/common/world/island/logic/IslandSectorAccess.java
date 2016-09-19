@@ -56,6 +56,25 @@ public class IslandSectorAccess
 		return chunkCoord / IslandSector.CHUNK_WIDTH_PER_SECTOR;
 	}
 
+	public IslandSector attemptToLoadSector(int sectorX, int sectorY)
+	{
+		if (this.isSectorLoadedInMemory(sectorX, sectorY))
+		{
+			return this.loadSectorFromMemory(sectorX, sectorY);
+		}
+
+		if (!this.wasSectorEverCreated(sectorX, sectorY))
+		{
+			return null;
+		}
+
+		IslandSector sector = this.loadSectorFromDisk(sectorX, sectorY);
+
+		this.addSectorToMemory(sector);
+
+		return sector;
+	}
+
 	public IslandSector attemptToLoadSector(int sectorX, int sectorY, long seedForNewSector)
 	{
 		if (this.isSectorLoadedInMemory(sectorX, sectorY))

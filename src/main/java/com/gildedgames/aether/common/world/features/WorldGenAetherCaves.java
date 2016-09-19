@@ -241,7 +241,9 @@ public class WorldGenAetherCaves extends MapGenBase
 
 	private boolean isTopBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ)
 	{
-		return data.getBlockState(x, y, z).getBlock() == BlocksAether.aether_grass;
+		Biome biome = this.worldObj.getBiome(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
+
+		return data.getBlockState(x, y, z) == biome.topBlock;
 	}
 
 	protected void digBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop, IBlockState state, IBlockState up)
@@ -256,7 +258,7 @@ public class WorldGenAetherCaves extends MapGenBase
 
 			if (foundTop && data.getBlockState(x, y - 1, z).getBlock() == filler.getBlock())
 			{
-				data.setBlockState(x, y - 1, z, top.getBlock().getDefaultState());
+				data.setBlockState(x, y - 1, z, top);
 			}
 		}
 	}

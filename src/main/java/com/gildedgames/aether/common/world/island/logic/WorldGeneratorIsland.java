@@ -49,11 +49,22 @@ public class WorldGeneratorIsland
 		double height = 100;
 		double length = (double)data.getBounds().height;
 
+		for (int x = 0; x < 16; x++)
+		{
+			for (int z = 0; z < 16; z++)
+			{
+				for (int y = 100; y < 256; y++)
+				{
+					heightMap[this.to1D(x, y, z)] = -1.0D;
+				}
+			}
+		}
+
 		for (double x = 0; x < 16; x++)
 		{
 			for (double z = 0; z < 16; z++)
 			{
-				for (double y = 0; y < 256; y++)
+				for (double y = 0; y < 100; y++)
 				{
 					double stepX = (double) posX - data.getBounds().getMinX() + x;
 					double stepY = y;
