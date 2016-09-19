@@ -1,15 +1,12 @@
-package com.gildedgames.aether.common.world.dungeon.util;
+package com.gildedgames.aether.common.world.dungeon;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.util.TemplatePrimer;
-import com.gildedgames.aether.common.world.dungeon.DungeonGenerator;
-import com.gildedgames.aether.common.world.dungeon.DungeonRoom;
-import com.gildedgames.aether.common.world.dungeon.DungeonRoomProvider;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
+import com.gildedgames.aether.common.world.util.*;
 import com.gildedgames.util.core.util.BlockPosDimension;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;

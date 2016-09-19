@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.world.dungeon.util;
+package com.gildedgames.aether.common.world.util;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,7 +5,6 @@ import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityBattleGole
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityBattleSentry;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityDetonationSentry;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityTrackingSentry;
-import com.gildedgames.aether.common.world.dungeon.util.FlatLayerDungeonGenerator;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.MinecraftServer;

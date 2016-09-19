@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.world.dungeon.util;
+package com.gildedgames.aether.common.world.util;
 
 import com.gildedgames.aether.common.world.dungeon.DungeonRoom;
 
