@@ -82,12 +82,12 @@ public class BiomeProviderAether extends BiomeProvider
 				}
 				else
 				{
-					biomes[i] = Biomes.DEFAULT;
+					biomes[i] = BiomesAether.BIOME_AETHER_VOID;
 				}
 			}
 			else
 			{
-				biomes[i] = Biomes.DEFAULT;
+				biomes[i] = BiomesAether.BIOME_AETHER_VOID;
 			}
 		}
 
@@ -141,12 +141,12 @@ public class BiomeProviderAether extends BiomeProvider
 					}
 					else
 					{
-						listToReuse[i] = Biomes.DEFAULT;
+						listToReuse[i] = BiomesAether.BIOME_AETHER_VOID;
 					}
 				}
 				else
 				{
-					listToReuse[i] = Biomes.DEFAULT;
+					listToReuse[i] = BiomesAether.BIOME_AETHER_VOID;
 				}
 			}
 
