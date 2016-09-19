@@ -19,7 +19,7 @@ import java.util.Random;
 public class BiomeProviderAether extends BiomeProvider
 {
 
-	public static List<Biome> allowedBiomes = Lists.newArrayList(BiomesAether.BIOME_AETHER, BiomesAether.BIOME_AETHER_ENCHANTED);
+	public static List<Biome> allowedBiomes = Lists.newArrayList(BiomesAether.BIOME_AETHER_VOID, BiomesAether.BIOME_AETHER, BiomesAether.BIOME_AETHER_ENCHANTED);
 
 	private final BiomeCache cache;
 
@@ -42,13 +42,13 @@ public class BiomeProviderAether extends BiomeProvider
 	@Override
 	public Biome getBiome(BlockPos pos)
 	{
-		return this.getBiome(pos, (Biome)null);
+		return this.getBiome(pos, BiomesAether.BIOME_AETHER_VOID);
 	}
 
 	@Override
 	public Biome getBiome(BlockPos pos, Biome defaultBiome)
 	{
-		return this.cache.getBiome(pos.getX(), pos.getZ(), defaultBiome);
+		return this.cache.getBiome(pos.getX(), pos.getZ(), BiomesAether.BIOME_AETHER_VOID);
 	}
 
 	/**
@@ -65,8 +65,6 @@ public class BiomeProviderAether extends BiomeProvider
 
 		for (int i = 0; i < width * height; ++i)
 		{
-			//int posX = x +
-
 			int sectorX = IslandSectorAccess.inst().getSectorCoord(x / 16);
 			int sectorY = IslandSectorAccess.inst().getSectorCoord(z / 16);
 

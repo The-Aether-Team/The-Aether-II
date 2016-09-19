@@ -4,7 +4,6 @@ import com.gildedgames.aether.common.world.biome.BiomeAether;
 import com.gildedgames.aether.common.world.biome.BiomeAetherEnchanted;
 import com.gildedgames.aether.common.world.biome.BiomeVoid;
 import com.gildedgames.aether.common.world.labyrinth.BiomeSliderLabyrinth;
-import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class BiomesAether
@@ -20,6 +19,7 @@ public class BiomesAether
 	public static void preInit()
 	{
 		GameRegistry.register(BIOME_AETHER);
+		GameRegistry.register(BIOME_AETHER_VOID);
 		GameRegistry.register(BIOME_AETHER_ENCHANTED);
 		GameRegistry.register(BIOME_SLIDER_LABYRINTH);
 	}
