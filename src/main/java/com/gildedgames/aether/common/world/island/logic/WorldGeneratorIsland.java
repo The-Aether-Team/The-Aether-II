@@ -65,7 +65,7 @@ public class WorldGeneratorIsland
 					double ny = (stepY) / height - 0.5;
 					double nz = (stepZ) / length - 0.5 + (double) sector.getSectorY();
 
-					double value = GenUtil.octavedNoise3D(this.simplex, 8, 0.35D, 4.5D, freq * nx, freq * ny, freq * nz);
+					double value = GenUtil.octavedNoise3D(this.simplex, 2, 1D, 6.5D, freq * nx, freq * ny, freq * nz);
 
 					double distNX = nx - (double) sector.getSectorX(); // Subtract sector coords from nx/ny so that the noise is within range of the island center
 					double distNZ = nz - (double) sector.getSectorY();

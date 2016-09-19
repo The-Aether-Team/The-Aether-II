@@ -134,8 +134,6 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 					if (height > -0.3)
 					{
-						double heightMod = Math.abs((height + 1.0D) / 2.0D);
-
 						primer.setBlockState(x, y, z, BlocksAether.holystone.getDefaultState());
 					}
 				}
