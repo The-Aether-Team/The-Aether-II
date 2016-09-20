@@ -258,9 +258,9 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 		this.replaceBiomeBlocks(primer, chunkX, chunkZ, this.biomes);
 
-		this.caveGenerator.generate(this.worldObj, chunkX, chunkZ, primer);
+		//this.caveGenerator.generate(this.worldObj, chunkX, chunkZ, primer);
 
-		this.genClouds(primer, chunkX, chunkZ);
+		//this.genClouds(primer, chunkX, chunkZ);
 
 		/*for (int x = 0; x < 16; x++)
 		{

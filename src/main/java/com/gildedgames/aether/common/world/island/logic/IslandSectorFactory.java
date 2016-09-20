@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.island.logic;
 
+import com.gildedgames.aether.common.registry.IslandBiomeSets;
 import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
-import net.minecraft.world.biome.Biome;
 
 import java.awt.*;
 import java.util.Random;
@@ -23,15 +23,15 @@ public class IslandSectorFactory
 		{
 			final int sectorArea = IslandSector.CHUNK_WIDTH_PER_SECTOR * 16;
 
-			int width = 400 + rand.nextInt(70);
-			int height = 400 + rand.nextInt(70);
+			int width = 300 + rand.nextInt(170);
+			int height = 200 + rand.nextInt(270);
 
 			int x = (sectorArea * sectorX) + Math.max(0, rand.nextInt(sectorArea) - width);
 			int y = (sectorArea * sectorY) + Math.max(0, rand.nextInt(sectorArea) - height);
 
 			Rectangle bounds = new Rectangle(x, y, width, height);
 
-			IslandData islandData = new IslandData(bounds, rand.nextBoolean() ? BiomesAether.BIOME_AETHER : BiomesAether.BIOME_AETHER_ENCHANTED);
+			IslandData islandData = new IslandData(bounds, 40, rand.nextBoolean() ? IslandBiomeSets.HIGHLANDS : IslandBiomeSets.ENCHANTED_HIGHLANDS);
 
 			data[i] = islandData;
 		}

@@ -1,13 +1,9 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
-import com.gildedgames.aether.common.world.biome.BiomeAether;
-import com.gildedgames.aether.common.world.features.trees.WorldGenSkyrootTree;
-import net.minecraft.block.BlockLog;
+import com.gildedgames.aether.common.world.biome.highlands.BiomeHighlands;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -22,7 +18,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.relauncher.Side;
@@ -99,23 +94,23 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 
 			if (meta == BLUE_SKYROOT_SAPLING.getMeta())
 			{
-				treeGenerator = BiomeAether.genBlueSkyrootTree;
+				treeGenerator = BiomeHighlands.genBlueSkyrootTree;
 			}
 			else if (meta == GREEN_SKYROOT_SAPLING.getMeta())
 			{
-				treeGenerator = BiomeAether.genGreenSkyrootTree;
+				treeGenerator = BiomeHighlands.genGreenSkyrootTree;
 			}
 			else if (meta == GOLDEN_OAK_SAPLING.getMeta())
 			{
-				treeGenerator = BiomeAether.genGoldenOakTree;
+				treeGenerator = BiomeHighlands.genGoldenOakTree;
 			}
 			else if (meta == PURPLE_CRYSTAL_SAPLING.getMeta())
 			{
-				treeGenerator = BiomeAether.genPurpleFruitTree;
+				treeGenerator = BiomeHighlands.genPurpleFruitTree;
 			}
 			else if (meta == DARK_BLUE_SKYROOT_SAPLING.getMeta())
 			{
-				treeGenerator = BiomeAether.genDarkBlueMassiveSkyrootTree;
+				treeGenerator = BiomeHighlands.genDarkBlueMassiveSkyrootTree;
 			}
 
 			if (treeGenerator != null)

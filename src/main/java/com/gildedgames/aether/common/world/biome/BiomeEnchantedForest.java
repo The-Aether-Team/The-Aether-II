@@ -13,7 +13,7 @@ import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 import java.util.Random;
 
-public class BiomeAetherEnchanted extends BiomeAetherBase
+public class BiomeEnchantedForest extends BiomeAetherBase
 {
 
 	public static final WorldGenSkyrootTree genSkyrootTree = new WorldGenSkyrootTree(BlocksAether.skyroot_log.getDefaultState().withProperty(BlockAetherLog.PROPERTY_LOG_AXIS, BlockLog.EnumAxis.Y),
@@ -25,11 +25,11 @@ public class BiomeAetherEnchanted extends BiomeAetherBase
 
 	public static final WorldGenLargeTree genLargeSkyrootTree = new WorldGenLargeTree(BlocksAether.skyroot_log.getDefaultState(), BlocksAether.golden_oak_leaves.getDefaultState());
 
-	public BiomeAetherEnchanted()
+	public BiomeEnchantedForest()
 	{
-		super(new Biome.BiomeProperties("Aether Enchanted").setRainDisabled().setTemperature(0.5f));
+		super(new Biome.BiomeProperties("Enchanted Forest").setRainDisabled().setTemperature(0.5f));
 
-		this.setRegistryName(AetherCore.getResource("aether_enchanted"));
+		this.setRegistryName(AetherCore.getResource("aether_enchanted_forest"));
 
 		this.topBlock = BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED_AETHER_GRASS);
 	}

@@ -22,13 +22,13 @@ import java.util.Random;
 public class BiomeProviderAether extends BiomeProvider
 {
 
-	public static ArrayList<Biome> allowedBiomes = Lists.newArrayList(BiomesAether.BIOME_AETHER_VOID, BiomesAether.BIOME_AETHER, BiomesAether.BIOME_AETHER_ENCHANTED);
+	public static ArrayList<Biome> allowedBiomes = Lists.newArrayList(BiomesAether.VOID, BiomesAether.HIGHLANDS, BiomesAether.ENCHANTED_FOREST);
 
 	private final BiomeCache cache;
 
 	private final World world;
 
-	private final OpenSimplexNoise temperature, moisture;
+	private final OpenSimplexNoise tempNoise, moistureNoise;
 
 	public BiomeProviderAether(World world)
 	{
@@ -37,8 +37,8 @@ public class BiomeProviderAether extends BiomeProvider
 
 		Random rand = new Random(world.getSeed());
 
-		this.temperature = new OpenSimplexNoise(rand.nextLong());
-		this.moisture = new OpenSimplexNoise(rand.nextLong());
+		this.tempNoise = new OpenSimplexNoise(rand.nextLong());
+		this.moistureNoise = new OpenSimplexNoise(rand.nextLong() + 100L);
 	}
 
 	public List<Biome> getBiomesToSpawnIn()
@@ -55,13 +55,13 @@ public class BiomeProviderAether extends BiomeProvider
 	@Override
 	public Biome getBiome(BlockPos pos)
 	{
-		return this.getBiome(pos, BiomesAether.BIOME_AETHER_VOID);
+		return this.getBiome(pos, BiomesAether.VOID);
 	}
 
 	@Override
 	public Biome getBiome(BlockPos pos, Biome defaultBiome)
 	{
-		return this.cache.getBiome(pos.getX(), pos.getZ(), BiomesAether.BIOME_AETHER_VOID);
+		return this.cache.getBiome(pos.getX(), pos.getZ(), BiomesAether.VOID);
 	}
 
 	private Biome[] generateBiomes(Biome[] biomes, int x, int z, int width, int height)
@@ -80,7 +80,7 @@ public class BiomeProviderAether extends BiomeProvider
 
 				IslandSector sector = IslandSectorAccess.inst().attemptToLoadSector(sectorX, sectorY);
 
-				biomes[index] = BiomesAether.BIOME_AETHER_VOID;
+				biomes[index] = BiomesAether.VOID;
 
 				if (sector != null)
 				{
@@ -88,11 +88,12 @@ public class BiomeProviderAether extends BiomeProvider
 
 					if (island != null)
 					{
-						//double scale = 100D;
+						double scale = 100D;
 
-						//double temperatureValue = GenUtil.octavedNoise(this.temperature, 4, 1D, 0.6D, (double)posX / scale, (double)posZ / scale);
+						double temperatureValue = GenUtil.octavedNoise(this.tempNoise, 4, 0D, 1D, (double)posX / scale, (double)posZ / scale);
+						double moistureValue = GenUtil.octavedNoise(this.moistureNoise, 4, 0D, 1D, (double)posX / scale, (double)posZ / scale);
 
-						biomes[index] = island.getBiome();//temperatureValue > 0.0D ? BiomesAether.BIOME_AETHER : BiomesAether.BIOME_AETHER_ENCHANTED;
+						biomes[index] = island.getBiomeSet().provide(temperatureValue, moistureValue);
 					}
 				}
 			}
@@ -119,7 +120,7 @@ public class BiomeProviderAether extends BiomeProvider
 	}
 
 	/**
-	 * Gets biomes to use for the blocks and loads the other data like temperature and humidity onto the
+	 * Gets biomes to use for the blocks and loads the other data like tempNoise and humidity onto the
 	 * WorldChunkManager.
 	 */
 	public Biome[] getBiomes(@Nullable Biome[] listToReuse, int x, int z, int width, int length)

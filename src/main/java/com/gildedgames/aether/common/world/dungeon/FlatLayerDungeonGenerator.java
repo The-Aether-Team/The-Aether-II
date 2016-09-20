@@ -684,9 +684,9 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 			new Connection(vertices.get(1), vertices.get(2), connections);
 		}
 
-		//Create minimal spanning tree from the delaunay triangulation
+		//Create minimal spanning trees from the delaunay triangulation
 		Collections.sort(connections, new ConnectionComparer());//Sort by the length of the connection
-		List<List<int[]>> branches = new ArrayList<>();//Contains branches of the minimal spanning tree while generating it
+		List<List<int[]>> branches = new ArrayList<>();//Contains branches of the minimal spanning trees while generating it
 		List<Connection> chosenConnections = new ArrayList<>();
 
 		for (Connection c : connections)

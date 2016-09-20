@@ -197,7 +197,6 @@ public class WorldProviderAether extends WorldProvider
 			return null;
 		}
 	}
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public double getVoidFogYFactor()
@@ -211,4 +210,5 @@ public class WorldProviderAether extends WorldProvider
 	{
 		return -128;
 	}
+
 }

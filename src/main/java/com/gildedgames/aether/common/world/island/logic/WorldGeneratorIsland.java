@@ -36,7 +36,7 @@ public class WorldGeneratorIsland
 		int posZ = chunkZ * 16;
 
 		double width = (double)data.getBounds().width;
-		double height = 100;
+		double height = data.getHeight();
 		double length = (double)data.getBounds().height;
 
 		double minY = 10;
@@ -51,24 +51,24 @@ public class WorldGeneratorIsland
 					double stepY = y - minY;
 					double stepZ = (double) posZ - data.getBounds().getMinY() + z;
 
-					double freq = 1D; // changing this value will zoom noise in or out
-
 					double nx = (stepX) / width - 0.5 + (double) sector.getSectorX(); // normalize coords
 					double ny = (stepY) / height - 0.5;
 					double nz = (stepZ) / length - 0.5 + (double) sector.getSectorY();
 
-					double value = GenUtil.octavedNoise3D(this.simplex, 2, 1D, 6.5D, freq * nx, freq * ny, freq * nz);
+					double value = GenUtil.octavedNoise3D(this.simplex, 4, 0.7D, 2.5D, nx, ny / 1.8D, nz);
 
 					double distNX = nx - (double) sector.getSectorX(); // Subtract sector coords from nx/ny so that the noise is within range of the island center
 					double distNZ = nz - (double) sector.getSectorY();
 
 					double dist = 2.0 * Math.sqrt((distNX * distNX) + (ny * ny) + (distNZ * distNZ)); // Get distance from center of Island
 
-					value = (value + 0.05) - (1.40 * Math.pow(dist, 4.00)); // Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
+					value = (value + 0.10) - (2.00 * Math.pow(dist, 1.50)); // Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
 
 					value = Math.max(-1.0D, value); // Prevents noise from dropping below its minimum value
 
-					if (value > -0.3)
+					//value = Math.pow(value, 0.5);
+
+					if (value > -0.8)
 					{
 						primer.setBlockState((int)x, (int)y, (int)z, BlocksAether.holystone.getDefaultState());
 					}

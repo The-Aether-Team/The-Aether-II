@@ -1,8 +1,9 @@
-package com.gildedgames.aether.common.world.biome;
+package com.gildedgames.aether.common.world.biome.highlands;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
+import com.gildedgames.aether.common.world.biome.BiomeAetherBase;
 import com.gildedgames.aether.common.world.features.trees.WorldGenFruitTree;
 import com.gildedgames.aether.common.world.features.trees.WorldGenLargeTree;
 import com.gildedgames.aether.common.world.features.trees.WorldGenMassiveSkyrootTree;
@@ -13,7 +14,7 @@ import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 import java.util.Random;
 
-public class BiomeAether extends BiomeAetherBase
+public class BiomeHighlands extends BiomeAetherBase
 {
 
 	public static final WorldGenSkyrootTree genGreenSkyrootTree = new WorldGenSkyrootTree(BlocksAether.skyroot_log.getDefaultState().withProperty(BlockAetherLog.PROPERTY_LOG_AXIS, BlockLog.EnumAxis.Y),
@@ -36,11 +37,13 @@ public class BiomeAether extends BiomeAetherBase
 
 	public static final WorldGenLargeTree genGreenLargeSkyrootTree = new WorldGenLargeTree(BlocksAether.skyroot_log.getDefaultState(), BlocksAether.green_skyroot_leaves.getDefaultState());
 
-	public BiomeAether()
+	public BiomeHighlands()
 	{
-		super(new Biome.BiomeProperties("Aether").setRainDisabled().setTemperature(0.5f));
+		super(new Biome.BiomeProperties("Highlands").setRainDisabled().setTemperature(0.5f));
 
-		this.setRegistryName(AetherCore.getResource("aether_generic"));
+		//this.topBlock = BlocksAether.holystone.getDefaultState();
+
+		this.setRegistryName(AetherCore.getResource("aether_highlands"));
 	}
 
 	@Override

@@ -138,7 +138,10 @@ public class BiomeAetherDecorator
 			WorldGenerator treeGen = genBase.genBigTreeChance(random);
 			BlockPos randPos = world.getHeight(pos.add(x, 0, z));
 
-			treeGen.generate(world, random, randPos);
+			if (treeGen != null)
+			{
+				treeGen.generate(world, random, randPos);
+			}
 		}
 
 		// Orange Tree Generator
