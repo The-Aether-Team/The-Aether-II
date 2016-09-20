@@ -23,8 +23,8 @@ public class IslandSectorFactory
 		{
 			final int sectorArea = IslandSector.CHUNK_WIDTH_PER_SECTOR * 16;
 
-			int width = 200 + rand.nextInt(200);
-			int height = 200 + rand.nextInt(200);
+			int width = 400 + rand.nextInt(70);
+			int height = 400 + rand.nextInt(70);
 
 			int x = (sectorArea * sectorX) + Math.max(0, rand.nextInt(sectorArea) - width);
 			int y = (sectorArea * sectorY) + Math.max(0, rand.nextInt(sectorArea) - height);

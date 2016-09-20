@@ -53,7 +53,7 @@ public class IslandSectorAccess
 
 	public int getSectorCoord(int chunkCoord)
 	{
-		return chunkCoord / IslandSector.CHUNK_WIDTH_PER_SECTOR;
+		return (chunkCoord / IslandSector.CHUNK_WIDTH_PER_SECTOR) - (chunkCoord < 0 ? 1 : 0);
 	}
 
 	public IslandSector attemptToLoadSector(int sectorX, int sectorY)
