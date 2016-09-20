@@ -45,28 +45,37 @@ public class WorldGeneratorIsland
 		{
 			for (double z = 0; z < 16; z++)
 			{
+				double stepX = (double) posX - data.getBounds().getMinX() + x;
+				double stepZ = (double) posZ - data.getBounds().getMinY() + z;
+
+				double nx = (stepX) / width - 0.5 + (double) sector.getSectorX(); // normalize coords
+				double nz = (stepZ) / length - 0.5 + (double) sector.getSectorY();
+
+				double flat = GenUtil.octavedNoise(this.simplex, 4, 0.7D, 2.5D, nx, nz);
+
+				double distNX = nx - (double) sector.getSectorX(); // Subtract sector coords from nx/ny so that the noise is within range of the island center
+				double distNZ = nz - (double) sector.getSectorY();
+
 				for (double y = minY; y < minY + height; y++)
 				{
-					double stepX = (double) posX - data.getBounds().getMinX() + x;
 					double stepY = y - minY;
-					double stepZ = (double) posZ - data.getBounds().getMinY() + z;
 
-					double nx = (stepX) / width - 0.5 + (double) sector.getSectorX(); // normalize coords
 					double ny = (stepY) / height - 0.5;
-					double nz = (stepZ) / length - 0.5 + (double) sector.getSectorY();
 
 					double value = GenUtil.octavedNoise3D(this.simplex, 4, 0.7D, 2.5D, nx, ny / 1.8D, nz);
-
-					double distNX = nx - (double) sector.getSectorX(); // Subtract sector coords from nx/ny so that the noise is within range of the island center
-					double distNZ = nz - (double) sector.getSectorY();
 
 					double dist = 2.0 * Math.sqrt((distNX * distNX) + (ny * ny) + (distNZ * distNZ)); // Get distance from center of Island
 
 					value = (value + 0.10) - (2.00 * Math.pow(dist, 1.50)); // Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
 
-					value = Math.max(-1.0D, value); // Prevents noise from dropping below its minimum value
+					value = Math.min(1.0D, Math.max(-1.0D, value)); // Prevents noise from dropping below its minimum value
 
-					//value = Math.pow(value, 0.5);
+					if (flat < 0.0)
+					{
+						value += flat * 4;
+					}
+
+					value = Math.min(1.0D, Math.max(-1.0D, value));
 
 					if (value > -0.8)
 					{
@@ -75,11 +84,6 @@ public class WorldGeneratorIsland
 				}
 			}
 		}
-	}
-
-	public static int to1D(int x, int y, int z)
-	{
-		return x << 12 | z << 8 | y;
 	}
 
 }
