@@ -31,7 +31,7 @@ public class IslandSectorFactory
 
 			Rectangle bounds = new Rectangle(x, y, width, height);
 
-			IslandData islandData = new IslandData(bounds, 40, rand.nextBoolean() ? IslandBiomeSets.HIGHLANDS : IslandBiomeSets.ENCHANTED_HIGHLANDS);
+			IslandData islandData = new IslandData(bounds, 40 + rand.nextInt(60), rand.nextBoolean() ? IslandBiomeSets.HIGHLANDS : IslandBiomeSets.ENCHANTED_HIGHLANDS);
 
 			data[i] = islandData;
 		}
