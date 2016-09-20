@@ -4,17 +4,18 @@ import com.gildedgames.aether.common.world.biome.BiomeAether;
 import com.gildedgames.aether.common.world.biome.BiomeAetherEnchanted;
 import com.gildedgames.aether.common.world.biome.BiomeVoid;
 import com.gildedgames.aether.common.world.labyrinth.BiomeSliderLabyrinth;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class BiomesAether
 {
-	public static final BiomeAether BIOME_AETHER = new BiomeAether();
+	public static final Biome BIOME_AETHER = new BiomeAether();
 
-	public static final BiomeAetherEnchanted BIOME_AETHER_ENCHANTED = new BiomeAetherEnchanted();
+	public static final Biome BIOME_AETHER_ENCHANTED = new BiomeAetherEnchanted();
 
-	public static final BiomeVoid BIOME_AETHER_VOID = new BiomeVoid();
+	public static final Biome BIOME_AETHER_VOID = new BiomeVoid();
 
-	public static final BiomeSliderLabyrinth BIOME_SLIDER_LABYRINTH = new BiomeSliderLabyrinth();
+	public static final Biome BIOME_SLIDER_LABYRINTH = new BiomeSliderLabyrinth();
 
 	public static void preInit()
 	{

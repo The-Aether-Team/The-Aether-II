@@ -15,13 +15,14 @@ import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.layer.IntCache;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class BiomeProviderAether extends BiomeProvider
 {
 
-	public static List<Biome> allowedBiomes = Lists.newArrayList(BiomesAether.BIOME_AETHER_VOID, BiomesAether.BIOME_AETHER, BiomesAether.BIOME_AETHER_ENCHANTED);
+	public static ArrayList<Biome> allowedBiomes = Lists.newArrayList(BiomesAether.BIOME_AETHER_VOID, BiomesAether.BIOME_AETHER, BiomesAether.BIOME_AETHER_ENCHANTED);
 
 	private final BiomeCache cache;
 
