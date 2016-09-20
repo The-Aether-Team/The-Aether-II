@@ -30,7 +30,7 @@ public class WorldProviderAether extends WorldProvider
 	@Override
 	protected void createBiomeProvider()
 	{
-		this.biomeProvider = new BiomeProviderAether();
+		this.biomeProvider = new BiomeProviderAether(this.worldObj);
 	}
 
 	@Override

@@ -1,8 +1,10 @@
 package com.gildedgames.aether.common.world.island.logic;
 
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.util.OpenSimplexNoise;
 import com.gildedgames.aether.common.world.GenUtil;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 
 import java.util.Random;
@@ -28,20 +30,8 @@ public class WorldGeneratorIsland
 		this.simplex = new OpenSimplexNoise(world.getSeed());
 	}
 
-	public double[] genHeightMapForChunk(IslandData data, IslandSector sector, int chunkX, int chunkZ, double[] heightMap)
+	public void genIslandForChunk(ChunkPrimer primer, IslandData data, IslandSector sector, int chunkX, int chunkZ)
 	{
-		if (heightMap != null && heightMap.length >= 65536)
-		{
-			for (int i = 0; i < heightMap.length; ++i)
-			{
-				heightMap[i] = 0.0D;
-			}
-		}
-		else
-		{
-			heightMap = new double[65536];
-		}
-
 		int posX = chunkX * 16;
 		int posZ = chunkZ * 16;
 
@@ -49,25 +39,16 @@ public class WorldGeneratorIsland
 		double height = 100;
 		double length = (double)data.getBounds().height;
 
-		for (int x = 0; x < 16; x++)
-		{
-			for (int z = 0; z < 16; z++)
-			{
-				for (int y = 100; y < 256; y++)
-				{
-					heightMap[this.to1D(x, y, z)] = -1.0D;
-				}
-			}
-		}
+		double minY = 10;
 
 		for (double x = 0; x < 16; x++)
 		{
 			for (double z = 0; z < 16; z++)
 			{
-				for (double y = 0; y < 100; y++)
+				for (double y = minY; y < minY + height; y++)
 				{
 					double stepX = (double) posX - data.getBounds().getMinX() + x;
-					double stepY = y;
+					double stepY = y - minY;
 					double stepZ = (double) posZ - data.getBounds().getMinY() + z;
 
 					double freq = 1D; // changing this value will zoom noise in or out
@@ -87,12 +68,13 @@ public class WorldGeneratorIsland
 
 					value = Math.max(-1.0D, value); // Prevents noise from dropping below its minimum value
 
-					heightMap[this.to1D((int)x, (int)y, (int)z)] = value;
+					if (value > -0.3)
+					{
+						primer.setBlockState((int)x, (int)y, (int)z, BlocksAether.holystone.getDefaultState());
+					}
 				}
 			}
 		}
-
-		return heightMap;
 	}
 
 	public static int to1D(int x, int y, int z)

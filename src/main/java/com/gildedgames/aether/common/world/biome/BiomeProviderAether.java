@@ -1,12 +1,14 @@
 package com.gildedgames.aether.common.world.biome;
 
 import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
+import com.gildedgames.aether.common.util.OpenSimplexNoise;
+import com.gildedgames.aether.common.world.GenUtil;
 import com.gildedgames.aether.common.world.island.logic.IslandData;
 import com.gildedgames.aether.common.world.island.logic.IslandSector;
 import com.gildedgames.aether.common.world.island.logic.IslandSectorAccess;
 import com.google.common.collect.Lists;
-import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeCache;
 import net.minecraft.world.biome.BiomeProvider;
@@ -23,9 +25,19 @@ public class BiomeProviderAether extends BiomeProvider
 
 	private final BiomeCache cache;
 
-	public BiomeProviderAether()
+	private final World world;
+
+	private final OpenSimplexNoise temperature, moisture;
+
+	public BiomeProviderAether(World world)
 	{
+		this.world = world;
 		this.cache = new BiomeCache(this);
+
+		Random rand = new Random(world.getSeed());
+
+		this.temperature = new OpenSimplexNoise(rand.nextLong());
+		this.moisture = new OpenSimplexNoise(rand.nextLong());
 	}
 
 	public List<Biome> getBiomesToSpawnIn()
@@ -51,6 +63,43 @@ public class BiomeProviderAether extends BiomeProvider
 		return this.cache.getBiome(pos.getX(), pos.getZ(), BiomesAether.BIOME_AETHER_VOID);
 	}
 
+	private Biome[] generateBiomes(Biome[] biomes, int x, int z, int width, int height)
+	{
+		for (int i = 0; i < width; i++)
+		{
+			for (int j = 0; j < height; j++)
+			{
+				int index = j + (i * width);
+
+				int posX = i + x;
+				int posZ = j + z;
+
+				int sectorX = IslandSectorAccess.inst().getSectorCoord(posX / 16);
+				int sectorY = IslandSectorAccess.inst().getSectorCoord(posZ / 16);
+
+				IslandSector sector = IslandSectorAccess.inst().attemptToLoadSector(sectorX, sectorY);
+
+				biomes[index] = BiomesAether.BIOME_AETHER_VOID;
+
+				if (sector != null)
+				{
+					IslandData island = sector.getIslandDataAtBlockPos(posX, posZ);
+
+					if (island != null)
+					{
+						//double scale = 100D;
+
+						//double temperatureValue = GenUtil.octavedNoise(this.temperature, 4, 1D, 0.6D, (double)posX / scale, (double)posZ / scale);
+
+						biomes[index] = island.getBiome();//temperatureValue > 0.0D ? BiomesAether.BIOME_AETHER : BiomesAether.BIOME_AETHER_ENCHANTED;
+					}
+				}
+			}
+		}
+
+		return biomes;
+	}
+
 	/**
 	 * Returns an array of biomes for the location input.
 	 */
@@ -63,31 +112,7 @@ public class BiomeProviderAether extends BiomeProvider
 			biomes = new Biome[width * height];
 		}
 
-		for (int i = 0; i < width * height; ++i)
-		{
-			int sectorX = IslandSectorAccess.inst().getSectorCoord(x / 16);
-			int sectorY = IslandSectorAccess.inst().getSectorCoord(z / 16);
-
-			IslandSector sector = IslandSectorAccess.inst().attemptToLoadSector(sectorX, sectorY);
-
-			if (sector != null)
-			{
-				IslandData island = sector.getIslandDataAtBlockPos(x, z);
-
-				if (island != null)
-				{
-					biomes[i] = island.getBiome();
-				}
-				else
-				{
-					biomes[i] = BiomesAether.BIOME_AETHER_VOID;
-				}
-			}
-			else
-			{
-				biomes[i] = BiomesAether.BIOME_AETHER_VOID;
-			}
-		}
+		this.generateBiomes(biomes, x, z, width, height);
 
 		return biomes;
 	}
@@ -122,31 +147,7 @@ public class BiomeProviderAether extends BiomeProvider
 		}
 		else
 		{
-			for (int i = 0; i < width * length; ++i)
-			{
-				int sectorX = IslandSectorAccess.inst().getSectorCoord(x / 16);
-				int sectorY = IslandSectorAccess.inst().getSectorCoord(z / 16);
-
-				IslandSector sector = IslandSectorAccess.inst().attemptToLoadSector(sectorX, sectorY);
-
-				if (sector != null)
-				{
-					IslandData island = sector.getIslandDataAtBlockPos(x, z);
-
-					if (island != null)
-					{
-						listToReuse[i] = island.getBiome();
-					}
-					else
-					{
-						listToReuse[i] = BiomesAether.BIOME_AETHER_VOID;
-					}
-				}
-				else
-				{
-					listToReuse[i] = BiomesAether.BIOME_AETHER_VOID;
-				}
-			}
+			this.generateBiomes(listToReuse, x, z, width, length);
 
 			return listToReuse;
 		}

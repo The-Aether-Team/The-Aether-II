@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.world.island.logic.IslandData;
 import com.gildedgames.aether.common.world.island.logic.IslandSector;
 import com.gildedgames.aether.common.world.island.logic.IslandSectorAccess;
 import com.gildedgames.aether.common.world.island.logic.WorldGeneratorIsland;
+import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
@@ -20,11 +21,8 @@ import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import static org.apache.http.HttpHeaders.DEPTH;
 
 public class ChunkGeneratorIsland implements IChunkGenerator
 {
@@ -34,8 +32,6 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 	private final Random rand;
 
 	private double[][] noiseFields;
-
-	private double[] heightMap;
 
 	private double[] cloudNoise;
 
@@ -60,8 +56,6 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 		this.noiseFields[0] = new double[256];
 		this.noiseFields[1] = new double[256];
 		this.noiseFields[2] = new double[256];
-
-		this.heightMap = new double[65536];
 
 		this.islandGenerator = new WorldGeneratorIsland(world, this.rand);
 
@@ -106,20 +100,22 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 		IslandSector sector = IslandSectorAccess.inst().attemptToLoadSector(sectorX, sectorY, sectorSeed);
 
-		IslandData island = sector.getIslandDataAtBlockPos(posX, posZ);
-
-		if (island == null)
-		{
-			return;
-		}
-
-		this.heightMap = this.islandGenerator.genHeightMapForChunk(island, sector, chunkX, chunkZ, this.heightMap);
+		final List<IslandData> islandsToGenerate = Lists.newArrayList();
 
 		for(int x = 0; x < 16; x++)
 		{
 			for(int z = 0; z < 16; z++)
 			{
-				int islandWidth = (int)island.getBounds().getMinX();
+				IslandData island = sector.getIslandDataAtBlockPos(posX + x, posZ + z);
+
+				if (island == null || islandsToGenerate.contains(island))
+				{
+					continue;
+				}
+
+				islandsToGenerate.add(island);
+
+				/*int islandWidth = (int)island.getBounds().getMinX();
 				int islandHeight = (int)island.getBounds().getMinY();
 
 				int stepX = posX - islandWidth + x;
@@ -130,16 +126,16 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 					continue;
 				}
 
-				for (int y = 0; y < 256; y++)
+				if (!islandsToGenerate.contains(island))
 				{
-					double height = this.heightMap[WorldGeneratorIsland.to1D(x, y, z)];
 
-					if (height > -0.3)
-					{
-						primer.setBlockState(x, y, z, BlocksAether.holystone.getDefaultState());
-					}
-				}
+				}*/
 			}
+		}
+
+		for (IslandData island : islandsToGenerate)
+		{
+			this.islandGenerator.genIslandForChunk(primer, island, sector, chunkX, chunkZ);
 		}
 	}
 
@@ -265,6 +261,17 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 		this.caveGenerator.generate(this.worldObj, chunkX, chunkZ, primer);
 
 		this.genClouds(primer, chunkX, chunkZ);
+
+		/*for (int x = 0; x < 16; x++)
+		{
+			for (int z = 0; z< 16; z++)
+			{
+				for (int y = 0; y < 80; y++)
+				{
+					primer.setBlockState(x, y, z, Blocks.DIRT.getDefaultState());
+				}
+			}
+		}*/
 
 		Chunk chunk = new Chunk(this.worldObj, primer, chunkX, chunkZ);
 
