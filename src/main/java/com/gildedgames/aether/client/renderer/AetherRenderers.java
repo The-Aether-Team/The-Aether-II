@@ -6,6 +6,7 @@ import com.gildedgames.aether.client.renderer.entities.RenderMovingBlock;
 import com.gildedgames.aether.client.renderer.entities.attachments.RenderParachute;
 import com.gildedgames.aether.client.renderer.entities.companions.*;
 import com.gildedgames.aether.client.renderer.entities.living.*;
+import com.gildedgames.aether.client.renderer.entities.projectiles.RenderBattleBomb;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderBolt;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDaggerfrostSnowball;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDart;
@@ -14,10 +15,7 @@ import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.entities.companions.*;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityBattleSentry;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityChestMimic;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityDetonationSentry;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityTrackingSentry;
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.*;
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
 import com.gildedgames.aether.common.entities.living.*;
 import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
@@ -27,6 +25,7 @@ import com.gildedgames.aether.common.entities.living.enemies.EntityZephyr;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
+import com.gildedgames.aether.common.entities.projectiles.EntityBattleBomb;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
@@ -93,6 +92,8 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityChestMimic.class, new AetherRenderFactory<>(RenderLabyrinthChestMimic.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySwet.class, new AetherRenderFactory<>(RenderSwet.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPinkBabySwet.class, new AetherRenderFactory<>(RenderPinkBabySwet.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityBattleGolem.class, new AetherRenderFactory<>(RenderBattleGolem.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityBattleBomb.class, new AetherRenderFactory<>(RenderBattleBomb.class));
 	}
 
 	private static void registerTESRs()

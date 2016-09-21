@@ -28,6 +28,13 @@ public class EntityBattleGolem extends EntityMob implements IRangedAttackMob
 
 	private static final DataParameter<Integer> BOMB_COUNT = EntityDataManager.createKey(EntityBattleGolem.class, DataSerializers.VARINT);
 
+	private static final DataParameter<Boolean> THROWING_SIDE = EntityDataManager.createKey(EntityBattleGolem.class, DataSerializers.BOOLEAN);
+
+	public enum ThrowingSide
+	{
+		LEFT, RIGHT;
+	}
+
 	private TickTimer resupplyBombTimer = new TickTimer();
 
 	public EntityBattleGolem(World worldIn)
@@ -39,7 +46,20 @@ public class EntityBattleGolem extends EntityMob implements IRangedAttackMob
 
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
-		this.setSize(1.0F, 2.0F);
+		this.setSize(2.0F, 2.4F);
+
+		this.stepHeight = 1.0F;
+	}
+
+	public boolean isOnLadder()
+	{
+		return false;
+	}
+
+	@Override
+	protected void jump()
+	{
+
 	}
 
 	@Override
@@ -54,6 +74,7 @@ public class EntityBattleGolem extends EntityMob implements IRangedAttackMob
 		super.entityInit();
 
 		this.dataManager.register(EntityBattleGolem.BOMB_COUNT, 4);
+		this.dataManager.register(EntityBattleGolem.THROWING_SIDE, Boolean.TRUE);
 	}
 
 	@Override
@@ -101,6 +122,8 @@ public class EntityBattleGolem extends EntityMob implements IRangedAttackMob
 			{
 				this.resupplyBombTimer.reset();
 			}
+
+			this.setCurrentThrowingSide(ThrowingSide.LEFT);
 		}
 	}
 
@@ -110,6 +133,7 @@ public class EntityBattleGolem extends EntityMob implements IRangedAttackMob
 		super.writeEntityToNBT(tag);
 
 		tag.setInteger("bombCount", this.getBombCount());
+		tag.setBoolean("throwingSide", this.getCurrentThrowingSide() == ThrowingSide.LEFT);
 		NBTHelper.fullySerialize("resupplyBombTimer", this.resupplyBombTimer, tag);
 	}
 
@@ -119,6 +143,7 @@ public class EntityBattleGolem extends EntityMob implements IRangedAttackMob
 		super.readEntityFromNBT(tag);
 
 		this.setBombCount(tag.getInteger("bombCount"));
+		this.setCurrentThrowingSide(tag.getBoolean("throwingSide") ? ThrowingSide.LEFT : ThrowingSide.RIGHT);
 		this.resupplyBombTimer = NBTHelper.fullyDeserialize("resupplyBombTimer", tag);
 	}
 
@@ -138,6 +163,21 @@ public class EntityBattleGolem extends EntityMob implements IRangedAttackMob
 	protected net.minecraft.util.SoundEvent getDeathSound()
 	{
 		return SoundsAether.sentry_death;
+	}
+
+	public ThrowingSide getCurrentThrowingSide()
+	{
+		return this.dataManager.get(EntityBattleGolem.THROWING_SIDE) ? ThrowingSide.LEFT : ThrowingSide.RIGHT;
+	}
+
+	public void setCurrentThrowingSide(ThrowingSide side)
+	{
+		this.dataManager.set(EntityBattleGolem.THROWING_SIDE, side == ThrowingSide.LEFT);
+	}
+
+	public void switchThrowingSide()
+	{
+		this.setCurrentThrowingSide(this.getCurrentThrowingSide() == ThrowingSide.LEFT ? ThrowingSide.RIGHT : ThrowingSide.LEFT);
 	}
 
 	public void removeBomb()
@@ -169,12 +209,39 @@ public class EntityBattleGolem extends EntityMob implements IRangedAttackMob
 		}
 
 		double d0 = target.posY + (double)target.getEyeHeight() - 1.100000023841858D;
-		double d1 = target.posX + target.motionX - this.posX;
-		double d2 = d0 - this.posY;
-		double d3 = target.posZ + target.motionZ - this.posZ;
-		float f = MathHelper.sqrt_double(d1 * d1 + d3 * d3);
+		double d1, d2, d3;
 
 		EntityBattleBomb bomb = new EntityBattleBomb(this.worldObj, this);
+
+		double yaw = Math.toRadians(this.renderYawOffset);
+
+		if (this.getCurrentThrowingSide() == ThrowingSide.LEFT)
+		{
+			double x = this.posX + Math.cos(yaw) * 1.65;
+			double y = this.posY + 1.85;
+			double z = this.posZ + Math.sin(yaw) * 1.65;
+
+			d1 = target.posX + target.motionX - x;
+			d2 = d0 - y;
+			d3 = target.posZ + target.motionZ - z;
+
+			bomb.setPosition(x, y, z);
+		}
+		else
+		{
+			double x = this.posX + Math.cos(yaw) * -1.65;
+			double y = this.posY + 1.85;
+			double z = this.posZ + Math.sin(yaw) * -1.65;
+
+			d1 = target.posX + target.motionX - x;
+			d2 = d0 - y;
+			d3 = target.posZ + target.motionZ - z;
+
+			bomb.setPosition(x, y, z);
+		}
+
+		float f = MathHelper.sqrt_double(d1 * d1 + d3 * d3);
+
 		bomb.rotationPitch -= -20.0F;
 		bomb.setThrowableHeading(d1, d2 + (double)(f * 0.2F), d3, 0.75F, 8.0F);
 
@@ -183,6 +250,7 @@ public class EntityBattleGolem extends EntityMob implements IRangedAttackMob
 		this.worldObj.spawnEntityInWorld(bomb);
 
 		this.removeBomb();
+		this.switchThrowingSide();
 	}
 
 	@Override
