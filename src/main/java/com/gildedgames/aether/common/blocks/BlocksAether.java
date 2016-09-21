@@ -46,7 +46,7 @@ public class BlocksAether
 
 	private static final List<Runnable> postRegistration = Lists.newArrayList();
 
-	public static final Block aether_dirt = new BlockCustom(Material.GROUND).setSoundType(SoundType.GROUND).setHardness(0.5f);
+	public static final Block aether_dirt = new BlockAetherDirt();
 
 	public static final BlockAetherGrass aether_grass = new BlockAetherGrass();
 
@@ -69,14 +69,16 @@ public class BlocksAether
 	public static final Block skyroot_planks = new BlockCustom(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f).setResistance(5.0f);
 
 	public static final BlockAetherLog skyroot_log = new BlockAetherLog(),
-			golden_oak_log = new BlockGoldenOakLog();
+			golden_oak_log = new BlockGoldenOakLog(),
+			frostpine_log = new BlockAetherLog();
 
 	public static final BlockAetherLeaves blue_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.BLUE_SKYROOT_SAPLING.getMeta()),
 			green_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.GREEN_SKYROOT_SAPLING.getMeta()),
 			dark_blue_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.DARK_BLUE_SKYROOT_SAPLING.getMeta()),
 			golden_oak_leaves = new BlockAetherLeaves(BlockAetherSapling.GOLDEN_OAK_SAPLING.getMeta()),
 			purple_crystal_leaves = new BlockAetherLeaves(BlockAetherSapling.PURPLE_CRYSTAL_SAPLING.getMeta()),
-			purple_fruit_leaves = new BlockAetherLeaves(BlockAetherSapling.PURPLE_CRYSTAL_SAPLING.getMeta());
+			purple_fruit_leaves = new BlockAetherLeaves(BlockAetherSapling.PURPLE_CRYSTAL_SAPLING.getMeta()),
+			frostpine_leaves = new BlockAetherLeaves(BlockAetherSapling.GREEN_SKYROOT_SAPLING.getMeta());
 
 	public static final BlockAetherPortal aether_portal = new BlockAetherPortal();
 
@@ -227,7 +229,7 @@ public class BlocksAether
 
 	public static void preInit()
 	{
-		registerBlock("aether_dirt", BlocksAether.aether_dirt.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("aether_dirt", BlocksAether.aether_dirt.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.aether_dirt));
 		registerBlock("aether_grass", BlocksAether.aether_grass.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.aether_grass));
 		registerBlock("holystone", BlocksAether.holystone.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.holystone));
 
@@ -246,6 +248,7 @@ public class BlocksAether
 
 		registerBlock("skyroot_log", BlocksAether.skyroot_log.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("golden_oak_log", BlocksAether.golden_oak_log.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("frostpine_log", BlocksAether.frostpine_log.setCreativeTab(CreativeTabsAether.tabBlocks));
 
 		registerBlock("blue_skyroot_leaves", BlocksAether.blue_skyroot_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("green_skyroot_leaves", BlocksAether.green_skyroot_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
@@ -253,6 +256,7 @@ public class BlocksAether
 		registerBlock("golden_oak_leaves", BlocksAether.golden_oak_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("purple_crystal_leaves", BlocksAether.purple_crystal_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("purple_fruit_leaves", BlocksAether.purple_fruit_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("frostpine_leaves", BlocksAether.frostpine_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
 
 		registerBlock("aether_sapling", BlocksAether.aether_sapling.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.aether_sapling));
 

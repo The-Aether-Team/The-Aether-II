@@ -31,20 +31,35 @@ public class IslandSectorFactory
 
 			Rectangle bounds = new Rectangle(x, y, width, height);
 
-			IslandData islandData = new IslandData(bounds, 40 + rand.nextInt(60), rand.nextBoolean() ? IslandBiomeSets.HIGHLANDS : IslandBiomeSets.ENCHANTED_HIGHLANDS);
+			int type = rand.nextInt(3);
+
+			IslandBiomeSet set = IslandBiomeSets.HIGHLANDS;
+
+			switch(type)
+			{
+				case 0:
+				{
+					set = IslandBiomeSets.HIGHLANDS;
+					break;
+				}
+				case 1:
+				{
+					set = IslandBiomeSets.ENCHANTED_HIGHLANDS;
+					break;
+				}
+				case 2:
+				{
+					set = IslandBiomeSets.FROSTPINE;
+					break;
+				}
+			}
+
+			IslandData islandData = new IslandData(bounds, 40 + rand.nextInt(60), set);
 
 			data[i] = islandData;
 		}
 
 		IslandSectorFactory.separate(data, sectorX, sectorY, 40);
-
-		/*for (IslandData island : data)
-		{
-			if (island != null)
-			{
-				System.out.println(island.getBounds());
-			}
-		}*/
 
 		IslandSector sector = new IslandSector(sectorX, sectorY, seed, data);
 

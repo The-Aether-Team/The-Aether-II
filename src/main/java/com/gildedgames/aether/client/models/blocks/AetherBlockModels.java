@@ -42,6 +42,7 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.golden_oak_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.purple_crystal_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.purple_fruit_leaves, leavesMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.frostpine_leaves, leavesMapper);
 
 		ModelLoader.setCustomStateMapper(BlocksAether.aether_sapling, new StateMap.Builder().ignore(BlockAetherSapling.PROPERTY_STAGE).build());
 

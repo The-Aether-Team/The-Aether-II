@@ -12,6 +12,23 @@ import java.util.Random;
 public class GenUtil
 {
 
+	public static BlockPos getTopBlock(World world, BlockPos pos)
+	{
+		BlockPos searchPos = new BlockPos(pos.getX(), world.getActualHeight(), pos.getZ());
+
+		while (world.isAirBlock(searchPos))
+		{
+			if (searchPos.getY() <= 0)
+			{
+				break;
+			}
+
+			searchPos = searchPos.down();
+		}
+
+		return searchPos;
+	}
+
 	public static double octavedNoise(NoiseGeneratorPerlin noise, int octaves, double roughness, double scale, double x, double z)
 	{
 		double noiseSum = 0;

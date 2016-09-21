@@ -30,9 +30,10 @@ public class BlockAetherGrass extends Block implements IBlockVariants, IGrowable
 {
 	public static final BlockVariant
 			AETHER_GRASS = new BlockVariant(0, "normal"),
-			ENCHANTED_AETHER_GRASS = new BlockVariant(1, "enchanted");
+			ENCHANTED_AETHER_GRASS = new BlockVariant(1, "enchanted"),
+			FROSTROOT = new BlockVariant(2, "frostroot");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", AETHER_GRASS, ENCHANTED_AETHER_GRASS);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", AETHER_GRASS, ENCHANTED_AETHER_GRASS, FROSTROOT);
 
 	public BlockAetherGrass()
 	{
@@ -93,6 +94,29 @@ public class BlockAetherGrass extends Block implements IBlockVariants, IGrowable
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
 		return Item.getItemFromBlock(BlocksAether.aether_dirt);
+	}
+
+	@Override
+	public int damageDropped(IBlockState state)
+	{
+		int damage = 0;
+
+		if (state.getValue(PROPERTY_VARIANT).getMeta() == AETHER_GRASS.getMeta())
+		{
+			damage = BlockAetherDirt.DIRT.getMeta();
+		}
+
+		if (state.getValue(PROPERTY_VARIANT).getMeta() == ENCHANTED_AETHER_GRASS.getMeta())
+		{
+			damage = BlockAetherDirt.DIRT.getMeta();
+		}
+
+		if (state.getValue(PROPERTY_VARIANT).getMeta() == FROSTROOT.getMeta())
+		{
+			damage = BlockAetherDirt.PERMAFROST.getMeta();
+		}
+
+		return damage;
 	}
 
 	@Override

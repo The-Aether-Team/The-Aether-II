@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.entities.util.MoaNest;
+import com.gildedgames.aether.common.world.GenUtil;
 import com.gildedgames.aether.common.world.features.*;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenPurpleAercloud;
@@ -129,6 +130,27 @@ public class BiomeAetherDecorator
 			new MoaNest(world, pos.add(x, y, z)).generate(world, random, 1 + random.nextInt(2), BlocksAether.woven_skyroot_sticks.getDefaultState());
 		}
 
+		//Entrance Generator
+		if (random.nextInt(5) == 0)
+		{
+			x = random.nextInt(16) + 8;
+			z = random.nextInt(16) + 8;
+
+			y = GenUtil.getTopBlock(world, new BlockPos(pos.getX() + x, 0, pos.getZ() + z)).getY() + 1;
+
+			final BlockPos totemPos = pos.add(x + 4, y + 2, z + 4);
+
+			this.genSliderLabyrinthEntrance.generate(world, random, pos.add(x, y, z), new Runnable()
+			{
+
+				@Override public void run()
+				{
+					world.setBlockState(totemPos, BlocksAether.labyrinth_totem.getDefaultState());
+				}
+
+			});
+		}
+
 		// Tree Generator
 		for (count = 0; count < 4; count++)
 		{
@@ -218,26 +240,6 @@ public class BiomeAetherDecorator
 				}
 			}
 		}
-
-		//Entrance Generator
-		for (int n = 0; n < 60; n++)
-		{
-			x = random.nextInt(16) + 8;
-			y = random.nextInt(128);
-			z = random.nextInt(16) + 8;
-
-			final BlockPos totemPos = pos.add(x + 4, y + 3, z + 4);
-
-			this.genSliderLabyrinthEntrance.generate(world, random, pos.add(x, y, z), new Runnable()
-			{
-
-				@Override public void run()
-				{
-					world.setBlockState(totemPos, BlocksAether.labyrinth_totem.getDefaultState());
-				}
-
-			});
-		}
 		
 		this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));
 
@@ -252,18 +254,6 @@ public class BiomeAetherDecorator
 
 			this.genAetherLakes.generate(world, random, pos.add(x, y, z));
 		}
-	}
-
-	public BlockPos getTopBlock(World world, BlockPos pos)
-	{
-		BlockPos searchPos = new BlockPos(pos.getX(), world.getActualHeight(), pos.getZ());
-
-		while (!world.isAirBlock(searchPos.down()))
-		{
-			searchPos = searchPos.down();
-		}
-
-		return searchPos;
 	}
 
 	private void generateMineable(WorldGenMinable minable, World world, Random random, BlockPos pos, int minY, int maxY, int attempts)

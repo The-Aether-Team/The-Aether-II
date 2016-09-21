@@ -1,7 +1,10 @@
 # Aether Blocks
-tile.aether.aether_dirt.name=Aether Dirt
+tile.aether.aether_dirt.dirt.name=Aether Dirt
+tile.aether.aether_dirt.permafrost.name=Permafrost
 tile.aether.aether_grass.normal.name=Aether Grass
 tile.aether.aether_grass.enchanted.name=Enchanted Aether Grass
+tile.aether.aether_grass.frostroot.name=Frostroot
+tile.aether.frostpine_leaves.name=Frostpine Leaves
 tile.aether.holystone.normal.name=Holystone
 tile.aether.holystone.mossy.name=Mossy Holystone
 tile.aether.holystone.blood_moss.name=Blood Moss Holystone
@@ -13,6 +16,7 @@ tile.aether.aercloud.storm.name=Storm Aercloud
 tile.aether.aercloud.purple.name=Purple Aercloud
 tile.aether.skyroot_log.name=Skyroot Log
 tile.aether.golden_oak_log.name=Golden Oak Log
+tile.aether.frostpine_log.name=Frostpine Log
 tile.aether.skyroot_planks.name=Skyroot Planks
 tile.aether.ambrosium_ore.name=Ambrosium Ore
 tile.aether.zanite_ore.name=Zanite Ore

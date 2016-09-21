@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.util;
 
+import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -27,14 +28,53 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
+import static java.awt.SystemColor.info;
 import static net.minecraft.world.gen.structure.template.Template.transformedBlockPos;
 
 public class TemplatePrimer
 {
 
-	private static List<Template.BlockInfo> getBlocks(Template template)
+	public static List<Template.BlockInfo> getBlocks(Template template)
 	{
 		return ObfuscationReflectionHelper.getPrivateValue(Template.class, template, 0);
+	}
+
+	public static List<Template.BlockInfo> getBlocks(BlockPos pos, PlacementSettings settings, Template template)
+	{
+		return TemplatePrimer.getBlocks(TemplatePrimer.getBlocks(template), pos, settings, template);
+	}
+
+	public static List<Template.BlockInfo> getBlocks(List<Template.BlockInfo> blockInfo, BlockPos pos, PlacementSettings settings, Template template)
+	{
+		List<Template.BlockInfo> newInfo = Lists.newArrayList();
+
+		for (Template.BlockInfo info : blockInfo)
+		{
+			BlockPos blockpos = Template.transformedBlockPos(settings, info.pos).add(pos);
+
+			newInfo.add(new Template.BlockInfo(blockpos, info.blockState, info.tileentityData));
+		}
+
+		return newInfo;
+	}
+
+	public static List<BlockPos> getBlockPos(BlockPos pos, PlacementSettings settings, Template template)
+	{
+		return TemplatePrimer.getBlockPos(TemplatePrimer.getBlocks(template), pos, settings, template);
+	}
+
+	public static List<BlockPos> getBlockPos(List<Template.BlockInfo> blockInfo, BlockPos pos, PlacementSettings settings, Template template)
+	{
+		List<BlockPos> blockPos = Lists.newArrayList();
+
+		for (Template.BlockInfo info : blockInfo)
+		{
+			BlockPos blockpos = Template.transformedBlockPos(settings, info.pos).add(pos);
+
+			blockPos.add(blockpos);
+		}
+
+		return blockPos;
 	}
 
 	private static List<Template.EntityInfo> getEntities(Template template)

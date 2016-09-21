@@ -11,6 +11,12 @@
 			{ "model": "aether:aether_grass/enchanted_aether_grass", "y": 90 },
 			{ "model": "aether:aether_grass/enchanted_aether_grass", "y": 180 },
 			{ "model": "aether:aether_grass/enchanted_aether_grass", "y": 270 }
+		],
+		"variant=frostroot": [
+			{ "model": "aether:aether_grass/frostroot" },
+			{ "model": "aether:aether_grass/frostroot", "y": 90 },
+			{ "model": "aether:aether_grass/frostroot", "y": 180 },
+			{ "model": "aether:aether_grass/frostroot", "y": 270 }
 		]
 	}
 }

@@ -10,6 +10,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -32,7 +33,9 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 
 	private static final AxisAlignedBB GRASS_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
 
-	public static final PropertyBool ENCHANTED = PropertyBool.create("enchanted");
+	public static final PropertyInteger TYPE = PropertyInteger.create("type", 0, 2);
+
+	public static final int NORMAL = 0, ENCHANTED = 1, FROSTROOT = 2;
 
 	public BlockTallAetherGrass()
 	{
@@ -40,13 +43,26 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 
 		this.setSoundType(SoundType.PLANT);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(ENCHANTED, Boolean.valueOf(false)));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(TYPE, Integer.valueOf(0)));
 	}
 
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
 		IBlockState block = worldIn.getBlockState(pos.down());
-		return state.withProperty(ENCHANTED, Boolean.valueOf(block == BlocksAether.aether_grass.getStateFromMeta(BlockAetherGrass.ENCHANTED_AETHER_GRASS.getMeta())));
+
+		int type = NORMAL;
+
+		if (block == BlocksAether.aether_grass.getStateFromMeta(BlockAetherGrass.ENCHANTED_AETHER_GRASS.getMeta()))
+		{
+			type = ENCHANTED;
+		}
+
+		if (block == BlocksAether.aether_grass.getStateFromMeta(BlockAetherGrass.FROSTROOT.getMeta()))
+		{
+			type = FROSTROOT;
+		}
+
+		return state.withProperty(TYPE, Integer.valueOf(type));
 	}
 
 	@Override
@@ -98,7 +114,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] {ENCHANTED});
+		return new BlockStateContainer(this, new IProperty[] {TYPE});
 	}
 
 }

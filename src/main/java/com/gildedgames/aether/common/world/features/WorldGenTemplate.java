@@ -1,9 +1,11 @@
 package com.gildedgames.aether.common.world.features;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.util.TemplatePrimer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
@@ -13,7 +15,10 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 
+import java.util.List;
 import java.util.Random;
+
+import static java.awt.SystemColor.info;
 
 public class WorldGenTemplate extends WorldGenerator
 {
@@ -28,7 +33,7 @@ public class WorldGenTemplate extends WorldGenerator
 		this.template = template;
 	}
 
-	public boolean canGenerate(World world, Random rand, BlockPos pos)
+	public boolean canGenerate(World world, Random rand, BlockPos pos, PlacementSettings settings)
 	{
 		final BlockPos max = pos.add(this.template.getSize().getX(), this.template.getSize().getY(), this.template.getSize().getZ());
 
@@ -37,29 +42,32 @@ public class WorldGenTemplate extends WorldGenerator
 			return false;
 		}
 
-		for (BlockPos itPos : BlockPos.getAllInBoxMutable(pos, new BlockPos(max.getX(), pos.getY(), max.getZ())))
-		{
-			IBlockState state = world.getBlockState(itPos);
+		List<Template.BlockInfo> info = TemplatePrimer.getBlocks(this.template);
 
-			if (!this.isReplaceable(world, itPos) || !state.isSideSolid(world, itPos, EnumFacing.UP))
+		List<Template.BlockInfo> infoTransformed = TemplatePrimer.getBlocks(info, pos, settings, this.template);
+
+		for (Template.BlockInfo block : infoTransformed)
+		{
+			if (block.pos.getY() == pos.getY() && block.blockState != Blocks.AIR.getDefaultState() && block.blockState != Blocks.STRUCTURE_VOID.getDefaultState())
 			{
-				return false;
+				BlockPos down = block.pos.down();
+				IBlockState state = world.getBlockState(down);
+
+				if (state.getBlock() != BlocksAether.aether_grass)
+				{
+					return false;
+				}
 			}
 		}
 
-		/*for (BlockPos itPos : BlockPos.getAllInBoxMutable(min, max))
+		for (Template.BlockInfo block : infoTransformed)
 		{
-			if (!this.isReplaceable(world, itPos))
+			if (block.blockState != Blocks.AIR.getDefaultState())
 			{
-				return false;
-			}
-		}*/
-
-		for (BlockPos itPos : BlockPos.getAllInBoxMutable(pos.add(0, Math.min(max.getY(), 2), 0), max))
-		{
-			if (!world.isAirBlock(itPos))
-			{
-				return false;
+				if (!this.isReplaceable(world, block.pos))// || !state.isSideSolid(world, itPos, EnumFacing.UP))
+				{
+					return false;
+				}
 			}
 		}
 
@@ -68,11 +76,10 @@ public class WorldGenTemplate extends WorldGenerator
 
 	public boolean generate(World world, Random rand, BlockPos pos, Runnable postConstruction)
 	{
-		if (this.canGenerate(world, rand, pos))
-		{
-			//this.pipeline.scheduleTemplate(this.template, pos, postConstruction);
-			PlacementSettings settings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk(null).setReplacedBlock(null).setIgnoreStructureBlock(false);
+		PlacementSettings settings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk(null).setReplacedBlock(null).setIgnoreStructureBlock(false);
 
+		if (this.canGenerate(world, rand, pos, settings))
+		{
 			this.template.addBlocksToWorld(world, pos, settings);
 
 			postConstruction.run();
@@ -83,20 +90,24 @@ public class WorldGenTemplate extends WorldGenerator
 		return false;
 	}
 
-	@Override
-	public boolean generate(World world, Random rand, BlockPos pos)
+	public boolean generate(World world, Random rand, BlockPos pos, Rotation rotation)
 	{
-		if (this.canGenerate(world, rand, pos))
-		{
-			//this.pipeline.scheduleTemplate(this.template, pos);
-			PlacementSettings settings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk(null).setReplacedBlock(null).setIgnoreStructureBlock(false);
+		PlacementSettings settings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(rotation).setIgnoreEntities(false).setChunk(null).setReplacedBlock(null).setIgnoreStructureBlock(false);
 
+		if (this.canGenerate(world, rand, pos, settings))
+		{
 			this.template.addBlocksToWorld(world, pos, settings);
 
 			return true;
 		}
 
 		return false;
+	}
+
+	@Override
+	public boolean generate(World world, Random rand, BlockPos pos)
+	{
+		return this.generate(world, rand, pos, Rotation.NONE);
 	}
 
 	protected boolean canGrowInto(Block blockType)
@@ -108,7 +119,7 @@ public class WorldGenTemplate extends WorldGenerator
 	public boolean isReplaceable(World world, BlockPos pos)
 	{
 		net.minecraft.block.state.IBlockState state = world.getBlockState(pos);
-		return state.getBlock().isAir(state, world, pos) || state.getBlock().isLeaves(state, world, pos) || state.getBlock().isWood(world, pos) || this.canGrowInto(state.getBlock());
+		return state.getBlock().isAir(state, world, pos) || state.getBlock().isLeaves(state, world, pos) || this.canGrowInto(state.getBlock());
 	}
 	
 }

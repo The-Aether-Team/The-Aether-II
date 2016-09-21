@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.dungeon.BlockDivine;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
@@ -41,11 +42,14 @@ public class AetherItemModels
 
 	private static void registerModels()
 	{
-		registerItemModels(BlocksAether.aether_dirt, "aether_dirt");
+		registerItemModels(BlocksAether.aether_dirt, new ItemModelBuilder("aether_dirt/")
+				.add(BlockAetherDirt.DIRT.getMeta(), "dirt")
+				.add(BlockAetherDirt.PERMAFROST.getMeta(), "permafrost"));
 
 		registerItemModels(BlocksAether.aether_grass, new ItemModelBuilder("aether_grass/")
 				.add(BlockAetherGrass.AETHER_GRASS.getMeta(), "aether_grass")
-				.add(BlockAetherGrass.ENCHANTED_AETHER_GRASS.getMeta(), "enchanted_aether_grass"));
+				.add(BlockAetherGrass.ENCHANTED_AETHER_GRASS.getMeta(), "enchanted_aether_grass")
+				.add(BlockAetherGrass.FROSTROOT.getMeta(), "frostroot"));
 
 		registerItemModels(BlocksAether.holystone, new ItemModelBuilder("holystone/")
 				.add(BlockHolystone.NORMAL_HOLYSTONE.getMeta(), "holystone")
@@ -60,8 +64,8 @@ public class AetherItemModels
 				.add(BlockAercloud.PURPLE_AERCLOUD.getMeta(), "purple_aercloud"));
 
 		registerItemModels(BlocksAether.skyroot_log, "aether_log/skyroot_log");
-
 		registerItemModels(BlocksAether.golden_oak_log, "aether_log/golden_oak_log");
+		registerItemModels(BlocksAether.frostpine_log, "aether_log/frostpine_log");
 
 		registerItemModels(BlocksAether.blue_skyroot_leaves, "aether_leaves/blue_skyroot_leaves");
 		registerItemModels(BlocksAether.green_skyroot_leaves, "aether_leaves/green_skyroot_leaves");
@@ -69,6 +73,7 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.golden_oak_leaves, "aether_leaves/golden_oak_leaves");
 		registerItemModels(BlocksAether.purple_crystal_leaves, "aether_leaves/purple_crystal_leaves");
 		registerItemModels(BlocksAether.purple_fruit_leaves, "aether_leaves/purple_fruit_leaves");
+		registerItemModels(BlocksAether.frostpine_leaves, "aether_leaves/frostpine_leaves");
 
 		registerItemModels(BlocksAether.blueberry_bush, new ItemModelBuilder("blueberry_bush/")
 				.add(BlockBlueberryBush.BERRY_BUSH_STEM, "blueberry_bush_stem")

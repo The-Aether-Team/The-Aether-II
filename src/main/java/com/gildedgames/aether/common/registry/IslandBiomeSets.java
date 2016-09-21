@@ -46,4 +46,15 @@ public class IslandBiomeSets
 
 	};
 
+	public static final IslandBiomeSet FROSTPINE = new IslandBiomeSet()
+	{
+
+		@Override
+		public Biome provide(double temperature, double moisture)
+		{
+			return BiomesAether.FROSTPINE;
+		}
+
+	};
+
 }
