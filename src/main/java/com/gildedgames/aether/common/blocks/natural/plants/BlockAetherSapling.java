@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.blocks.natural.plants;
 import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
+import com.gildedgames.aether.common.world.biome.blighted.BiomeBlightedHighlands;
 import com.gildedgames.aether.common.world.biome.highlands.BiomeHighlands;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -116,11 +117,11 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 			}
 			else if (meta == BLIGHTED.getMeta())
 			{
-				treeGenerator = BiomeHighlands.genBlightedTree;
+				treeGenerator = BiomeBlightedHighlands.blighted_tree;
 			}
 			else if (meta == DARK_BLUE_SKYROOT.getMeta())
 			{
-				treeGenerator = BiomeHighlands.genDarkBlueMassiveSkyrootTree;
+				treeGenerator = BiomeBlightedHighlands.dark_blue_tree;
 			}
 
 			if (treeGenerator != null)
