@@ -34,14 +34,13 @@ public class BiomeFrostpine extends BiomeAetherBase
 
 	public static final TemplateManager MANAGER = new TemplateManager("structures");
 
-	protected WorldGenTemplate tree1, tree2, tree3, tree4, tree5, tree6;
+	protected WorldGenTemplate tree1, tree2, tree3, tree4, tree5, tree6, pine1, pine2;
 
 	protected TemplatePipeline templatePipeline;
 
 	protected WorldGenAetherFlowers genMoonlitBlooms = new WorldGenAetherFlowers(BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.MOONLIT_BLOOM), 64);
 
-	public BiomeFrostpine()
-	{
+	public BiomeFrostpine()	{
 		super(new BiomeProperties("Frostpine").setRainDisabled().setTemperature(0.5f));
 
 		this.topBlock = BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.FROSTROOT);
@@ -66,6 +65,9 @@ public class BiomeFrostpine extends BiomeAetherBase
 			this.tree4 = new WorldGenTemplate(this.templatePipeline, MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak4")));
 			this.tree5 = new WorldGenTemplate(this.templatePipeline, MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak5")));
 			this.tree6 = new WorldGenTemplate(this.templatePipeline, MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak6")));
+
+			this.pine1 = new WorldGenTemplate(this.templatePipeline, MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/pine1")));
+			this.pine2 = new WorldGenTemplate(this.templatePipeline, MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/pine2")));
 		}
 
 		super.decorate(world, random, pos);
@@ -74,6 +76,26 @@ public class BiomeFrostpine extends BiomeAetherBase
 		int chunkZ = pos.getZ() >> 4;
 
 		int x, y, z;
+
+		for (int n = 0; n < 15; n++)
+		{
+			x = random.nextInt(16) + 8;
+			z = random.nextInt(16) + 8;
+
+			y = GenUtil.getTopBlock(world, new BlockPos(pos.getX() + x, 0, pos.getZ() + z)).getY() + 1;
+
+			Rotation[] arotation = Rotation.values();
+			Rotation rotation = arotation[random.nextInt(arotation.length)];
+
+			if (random.nextBoolean())
+			{
+				this.pine1.generate(world, random, pos.add(x, y, z), rotation);
+			}
+			else
+			{
+				this.pine2.generate(world, random, pos.add(x, y, z), rotation);
+			}
+		}
 
 		for (int n = 0; n < 10; n++)
 		{
