@@ -1,0 +1,7 @@
+{
+	"parent": "block/cube_column",
+	"textures": {
+		"end": "aether:blocks/logs/blightwillow_log_top",
+		"side": "aether:blocks/logs/blightwillow_log_side"
+	}
+}

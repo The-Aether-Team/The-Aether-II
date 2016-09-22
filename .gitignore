@@ -8,7 +8,7 @@
 bin
 config
 crash-reports
-logs
+/logs/
 mod-config
 mods
 saves
