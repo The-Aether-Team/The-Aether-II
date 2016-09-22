@@ -373,7 +373,7 @@ public class BlocksAether
 		registerBlock("skyroot_ladder", BlocksAether.skyroot_ladder.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("blightwillow_ladder", BlocksAether.blightwillow_ladder.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("earthshifter_ladder", BlocksAether.earthshifter_ladder.setCreativeTab(CreativeTabsAether.tabBlocks));
-		registerBlock("emberoot_ladder", BlocksAether.emberoot_ladder.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("emberoot_ladder", BlocksAether.emberoot_ladder.setCreativeTab(CreativeTabsAether.tabBlocks).setLightLevel(0.6F));
 		registerBlock("frostpine_ladder", BlocksAether.frostpine_ladder.setCreativeTab(CreativeTabsAether.tabBlocks));
 
 		registerBlock("skyroot_button", BlocksAether.skyroot_button.setCreativeTab(CreativeTabsAether.tabBlocks));
