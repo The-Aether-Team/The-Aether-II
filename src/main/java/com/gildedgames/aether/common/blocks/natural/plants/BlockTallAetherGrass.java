@@ -33,9 +33,9 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 
 	private static final AxisAlignedBB GRASS_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
 
-	public static final PropertyInteger TYPE = PropertyInteger.create("type", 0, 2);
+	public static final PropertyInteger TYPE = PropertyInteger.create("type", 0, 3);
 
-	public static final int NORMAL = 0, ENCHANTED = 1, FROSTROOT = 2;
+	public static final int NORMAL = 0, ENCHANTED = 1, FROSTROOT = 2, BLIGHTED = 3;
 
 	public BlockTallAetherGrass()
 	{
@@ -60,6 +60,11 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 		if (block == BlocksAether.aether_grass.getStateFromMeta(BlockAetherGrass.FROSTROOT.getMeta()))
 		{
 			type = FROSTROOT;
+		}
+
+		if (block == BlocksAether.aether_grass.getStateFromMeta(BlockAetherGrass.BLIGHTED.getMeta()))
+		{
+			type = BLIGHTED;
 		}
 
 		return state.withProperty(TYPE, Integer.valueOf(type));

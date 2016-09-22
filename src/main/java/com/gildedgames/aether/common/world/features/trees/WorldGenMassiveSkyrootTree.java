@@ -16,9 +16,18 @@ public class WorldGenMassiveSkyrootTree extends WorldGenAbstractTree
 {
 	private final IBlockState leaves;
 
+	private IBlockState log = null;
+
 	private final int randHeight;
 
 	private final boolean branches;
+
+	public WorldGenMassiveSkyrootTree(IBlockState leaves, IBlockState log, int heightWeight, boolean branchFlag)
+	{
+		this(leaves, heightWeight, branchFlag);
+
+		this.log = log;
+	}
 
 	public WorldGenMassiveSkyrootTree(IBlockState leaves, int heightWeight, boolean branchFlag)
 	{
@@ -90,26 +99,29 @@ public class WorldGenMassiveSkyrootTree extends WorldGenAbstractTree
 			for (int y2 = y; y2 <= y + height; y2++)
 			{
 				pos = new BlockPos(x, y2, z);
-				world.setBlockState(pos, BlocksAether.skyroot_log.getDefaultState());
+				world.setBlockState(pos, this.log != null ? log : BlocksAether.skyroot_log.getDefaultState());
 			}
 
 			if (this.branches)
 			{
-				world.setBlockState(new BlockPos(x + 1, y, z), wall);
-				world.setBlockState(new BlockPos(x + 1, y + 1, z), wall);
-				world.setBlockState(new BlockPos(x + 2, y, z), wall);
+				if (this.log == null)
+				{
+					world.setBlockState(new BlockPos(x + 1, y, z), wall);
+					world.setBlockState(new BlockPos(x + 1, y + 1, z), wall);
+					world.setBlockState(new BlockPos(x + 2, y, z), wall);
 
-				world.setBlockState(new BlockPos(x - 1, y, z), wall);
-				world.setBlockState(new BlockPos(x - 1, y + 1, z), wall);
-				world.setBlockState(new BlockPos(x - 2, y, z), wall);
+					world.setBlockState(new BlockPos(x - 1, y, z), wall);
+					world.setBlockState(new BlockPos(x - 1, y + 1, z), wall);
+					world.setBlockState(new BlockPos(x - 2, y, z), wall);
 
-				world.setBlockState(new BlockPos(x, y, z + 1), wall);
-				world.setBlockState(new BlockPos(x, y + 1, z + 1), wall);
-				world.setBlockState(new BlockPos(x, y, z + 2), wall);
+					world.setBlockState(new BlockPos(x, y, z + 1), wall);
+					world.setBlockState(new BlockPos(x, y + 1, z + 1), wall);
+					world.setBlockState(new BlockPos(x, y, z + 2), wall);
 
-				world.setBlockState(new BlockPos(x, y, z - 1), wall);
-				world.setBlockState(new BlockPos(x, y + 1, z - 1), wall);
-				world.setBlockState(new BlockPos(x, y, z - 2), wall);
+					world.setBlockState(new BlockPos(x, y, z - 1), wall);
+					world.setBlockState(new BlockPos(x, y + 1, z - 1), wall);
+					world.setBlockState(new BlockPos(x, y, z - 2), wall);
+				}
 
 				world.setBlockState(new BlockPos(x + 1, y - 1, z), grass);
 				world.setBlockState(new BlockPos(x + 2, y - 1, z), grass);
@@ -156,7 +168,7 @@ public class WorldGenMassiveSkyrootTree extends WorldGenAbstractTree
 
 			if (this.branches)
 			{
-				IBlockState log = BlocksAether.skyroot_log.getDefaultState();
+				IBlockState log = this.log != null ? this.log : BlocksAether.skyroot_log.getDefaultState();
 
 				int side = rand.nextInt(3);
 

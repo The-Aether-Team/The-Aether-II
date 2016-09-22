@@ -1,0 +1,7 @@
+{
+	"parent": "block/door_top_rh",
+	"textures": {
+		"bottom": "aether:blocks/doors/emberoot_door_lower",
+		"top": "aether:blocks/doors/emberoot_door_upper"
+	}
+}

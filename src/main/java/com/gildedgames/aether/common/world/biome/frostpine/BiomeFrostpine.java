@@ -5,9 +5,11 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.world.GenUtil;
 import com.gildedgames.aether.common.world.biome.BiomeAetherBase;
 import com.gildedgames.aether.common.world.features.TemplatePipeline;
+import com.gildedgames.aether.common.world.features.WorldGenAetherFlowers;
 import com.gildedgames.aether.common.world.features.WorldGenTemplate;
 import com.gildedgames.aether.common.world.features.trees.WorldGenMassiveSkyrootTree;
 import com.gildedgames.aether.common.world.features.trees.WorldGenSkyrootTree;
@@ -35,6 +37,8 @@ public class BiomeFrostpine extends BiomeAetherBase
 	protected WorldGenTemplate tree1, tree2, tree3, tree4, tree5, tree6;
 
 	protected TemplatePipeline templatePipeline;
+
+	protected WorldGenAetherFlowers genMoonlitBlooms = new WorldGenAetherFlowers(BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.MOONLIT_BLOOM), 64);
 
 	public BiomeFrostpine()
 	{
@@ -119,6 +123,16 @@ public class BiomeFrostpine extends BiomeAetherBase
 		}
 
 		this.templatePipeline.constructChunk(world, chunkX, chunkZ);
+
+		// Burstblossom Generator
+		for (int count = 0; count < 2; count++)
+		{
+			x = random.nextInt(16) + 8;
+			y = random.nextInt(128);
+			z = random.nextInt(16) + 8;
+
+			this.genMoonlitBlooms.generate(world, random, pos.add(x, y, z));
+		}
 	}
 
 	@Override

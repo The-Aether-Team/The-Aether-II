@@ -1,0 +1,7 @@
+{
+	"parent": "block/door_bottom",
+	"textures": {
+		"bottom": "aether:blocks/doors/arkenium_door_lower",
+		"top": "aether:blocks/doors/arkenium_door_upper"
+	}
+}

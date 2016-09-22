@@ -1,6 +1,6 @@
 {
 	"variants": {
-		"opaque=false": { "model": "aether:aether_leaves/golden_oak_leaves" },
-        "opaque=true":  { "model": "aether:aether_leaves/golden_oak_leaves_opaque" }
+		"opaque=false": { "model": "aether:leaves/golden_oak_leaves" },
+        "opaque=true":  { "model": "aether:leaves/golden_oak_leaves_opaque" }
 	}
 }

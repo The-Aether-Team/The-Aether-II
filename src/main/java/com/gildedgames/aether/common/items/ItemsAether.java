@@ -105,7 +105,7 @@ public class ItemsAether
 
 	public static ItemSword vampire_blade, candy_cane_sword, valkyrie_lance;
 
-	public static ItemDoor skyroot_door, arkenium_door;
+	public static ItemDoor skyroot_door, arkenium_door, blightwillow_door, earthshifter_door, emberoot_door, frostpine_door;
 
 	public static ItemCrossbow skyroot_crossbow;
 
@@ -373,6 +373,10 @@ public class ItemsAether
 
 		skyroot_door = registerItem("skyroot_door_item", new ItemDoor(BlocksAether.skyroot_door), CreativeTabsAether.tabBlocks);
 		arkenium_door = registerItem("arkenium_door_item", new ItemDoor(BlocksAether.arkenium_door), CreativeTabsAether.tabBlocks);
+		blightwillow_door = registerItem("blightwillow_door_item", new ItemDoor(BlocksAether.blightwillow_door), CreativeTabsAether.tabBlocks);
+		earthshifter_door = registerItem("earthshifter_door_item", new ItemDoor(BlocksAether.earthshifter_door), CreativeTabsAether.tabBlocks);
+		emberoot_door = registerItem("emberoot_door_item", new ItemDoor(BlocksAether.emberoot_door), CreativeTabsAether.tabBlocks);
+		frostpine_door = registerItem("frostpine_door_item", new ItemDoor(BlocksAether.frostpine_door), CreativeTabsAether.tabBlocks);
 
 		iron_ring = registerItem("iron_ring", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
 		gold_ring = registerItem("gold_ring", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);

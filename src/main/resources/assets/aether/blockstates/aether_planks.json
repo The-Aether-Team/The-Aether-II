@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"variant=skyroot": {
+			"model": "aether:planks/skyroot_planks"
+		},
+		"variant=blightwillow": {
+			"model": "aether:planks/blightwillow_planks"
+		},
+		"variant=earthshifter": {
+			"model": "aether:planks/earthshifter_planks"
+		},
+		"variant=emberoot": {
+			"model": "aether:planks/emberoot_planks"
+		},
+		"variant=frostpine": {
+			"model": "aether:planks/frostpine_planks"
+		}
+	}
+}

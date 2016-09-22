@@ -9,7 +9,8 @@ import java.util.Random;
 
 public abstract class BiomeAetherBase extends Biome
 {
-	private final BiomeAetherDecorator biomeDecorator = new BiomeAetherDecorator();
+
+	protected final BiomeAetherDecorator biomeDecorator = new BiomeAetherDecorator();
 
 	public BiomeAetherBase(BiomeProperties properties)
 	{

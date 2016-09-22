@@ -1,17 +1,17 @@
 {
 	"variants": {
 		"axis=y": {
-			"model": "aether:aether_log/frostpine_log"
+			"model": "aether:logs/frostpine_log"
 		},
 		"axis=z": {
-			"model": "aether:aether_log/frostpine_log_side"
+			"model": "aether:logs/frostpine_log_side"
 		},
 		"axis=x": {
-			"model": "aether:aether_log/frostpine_log_side",
+			"model": "aether:logs/frostpine_log_side",
 			"y": 90
 		},
 		"axis=none": {
-			"model": "aether:aether_log/frostpine_log_bark"
+			"model": "aether:logs/frostpine_log_bark"
 		}
 	}
 }

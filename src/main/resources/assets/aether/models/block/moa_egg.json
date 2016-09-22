@@ -1,6 +1,6 @@
 {
 	"parent": "aether:block/tesr",
 	"textures": {
-		"particle": "aether:blocks/woven_skyroot_sticks"
+		"particle": "aether:blocks/woven_sticks/woven_skyroot_sticks"
 	}
 }

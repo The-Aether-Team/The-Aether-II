@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"variant=skyroot": {
+			"model": "aether:crafting_tables/skyroot_crafting_table"
+		},
+		"variant=blightwillow": {
+			"model": "aether:crafting_tables/blightwillow_crafting_table"
+		},
+		"variant=earthshifter": {
+			"model": "aether:crafting_tables/earthshifter_crafting_table"
+		},
+		"variant=emberoot": {
+			"model": "aether:crafting_tables/emberoot_crafting_table"
+		},
+		"variant=frostpine": {
+			"model": "aether:crafting_tables/frostpine_crafting_table"
+		}
+	}
+}

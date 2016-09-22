@@ -29,14 +29,17 @@ import java.util.Random;
 public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, IBlockVariants
 {
 	public static final BlockVariant
-			BLUE_SKYROOT_SAPLING = new BlockVariant(0, "blue_skyroot"),
-			GREEN_SKYROOT_SAPLING = new BlockVariant(1, "green_skyroot"),
-			DARK_BLUE_SKYROOT_SAPLING = new BlockVariant(2, "dark_blue_skyroot"),
-			GOLDEN_OAK_SAPLING = new BlockVariant(3, "golden_oak"),
-			PURPLE_CRYSTAL_SAPLING = new BlockVariant(4, "purple_crystal");
+			BLUE_SKYROOT = new BlockVariant(0, "blue_skyroot"),
+			GREEN_SKYROOT = new BlockVariant(1, "green_skyroot"),
+			DARK_BLUE_SKYROOT = new BlockVariant(2, "dark_blue_skyroot"),
+			GOLDEN_OAK = new BlockVariant(3, "golden_oak"),
+			BLIGHTED = new BlockVariant(4, "blighted"),
+			BLIGHTWILLOW = new BlockVariant(5, "blightwillow"),
+			EARTHSHIFTER = new BlockVariant(6, "earthshifter"),
+			EMBEROOT = new BlockVariant(7, "emberoot"),
+			FROSTPINE = new BlockVariant(8, "frostpine");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BLUE_SKYROOT_SAPLING, GREEN_SKYROOT_SAPLING, DARK_BLUE_SKYROOT_SAPLING,
-			GOLDEN_OAK_SAPLING, PURPLE_CRYSTAL_SAPLING);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BLUE_SKYROOT, GREEN_SKYROOT, DARK_BLUE_SKYROOT, GOLDEN_OAK, BLIGHTED, BLIGHTWILLOW, EARTHSHIFTER, EMBEROOT, FROSTPINE);
 
 	public static final PropertyInteger PROPERTY_STAGE = PropertyInteger.create("stage", 0, 1);
 
@@ -50,8 +53,15 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 
 		this.setTickRandomly(true);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, BLUE_SKYROOT_SAPLING)
-				.withProperty(PROPERTY_STAGE, 0));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, BLUE_SKYROOT).withProperty(PROPERTY_STAGE, 0));
+	}
+
+	@Override
+	public int getLightValue(IBlockState state)
+	{
+		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
+
+		return (variant == EMBEROOT ? (int)(0.6F * 15.0F) : this.lightValue);
 	}
 
 	@Override
@@ -92,23 +102,23 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 
 			WorldGenerator treeGenerator = null;
 
-			if (meta == BLUE_SKYROOT_SAPLING.getMeta())
+			if (meta == BLUE_SKYROOT.getMeta())
 			{
 				treeGenerator = BiomeHighlands.genBlueSkyrootTree;
 			}
-			else if (meta == GREEN_SKYROOT_SAPLING.getMeta())
+			else if (meta == GREEN_SKYROOT.getMeta())
 			{
 				treeGenerator = BiomeHighlands.genGreenSkyrootTree;
 			}
-			else if (meta == GOLDEN_OAK_SAPLING.getMeta())
+			else if (meta == GOLDEN_OAK.getMeta())
 			{
 				treeGenerator = BiomeHighlands.genGoldenOakTree;
 			}
-			else if (meta == PURPLE_CRYSTAL_SAPLING.getMeta())
+			else if (meta == BLIGHTED.getMeta())
 			{
-				treeGenerator = BiomeHighlands.genPurpleFruitTree;
+				treeGenerator = BiomeHighlands.genBlightedTree;
 			}
-			else if (meta == DARK_BLUE_SKYROOT_SAPLING.getMeta())
+			else if (meta == DARK_BLUE_SKYROOT.getMeta())
 			{
 				treeGenerator = BiomeHighlands.genDarkBlueMassiveSkyrootTree;
 			}
@@ -134,8 +144,7 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta & 7))
-				.withProperty(PROPERTY_STAGE, (meta & 8) >> 3);
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta & 7)).withProperty(PROPERTY_STAGE, (meta & 8) >> 3);
 	}
 
 	@Override

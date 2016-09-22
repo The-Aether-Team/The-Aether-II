@@ -7,14 +7,12 @@ import com.gildedgames.aether.common.blocks.construction.signs.BlockWallSkyrootS
 import com.gildedgames.aether.common.blocks.construction.walls.BlockSkyrootWall;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
+import com.gildedgames.aether.common.blocks.natural.BlockVineNoGrowth;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.util.BlockCustomDoor;
 import com.google.common.collect.Maps;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockBed;
-import net.minecraft.block.BlockChest;
-import net.minecraft.block.BlockFenceGate;
+import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -40,17 +38,23 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.green_skyroot_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.dark_blue_skyroot_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.golden_oak_leaves, leavesMapper);
-		ModelLoader.setCustomStateMapper(BlocksAether.purple_crystal_leaves, leavesMapper);
-		ModelLoader.setCustomStateMapper(BlocksAether.purple_fruit_leaves, leavesMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.blighted_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.frostpine_leaves, leavesMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.blightwillow_leaves, leavesMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.earthshifter_leaves, leavesMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.vined_earthshifter_leaves, leavesMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.emberoot_leaves, leavesMapper);
 
 		ModelLoader.setCustomStateMapper(BlocksAether.aether_sapling, new StateMap.Builder().ignore(BlockAetherSapling.PROPERTY_STAGE).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.tall_aether_grass, new StateMap.Builder().ignore().build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
-
 		ModelLoader.setCustomStateMapper(BlocksAether.arkenium_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.blightwillow_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.earthshifter_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.emberoot_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.frostpine_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_chest, new StateMap.Builder().ignore(BlockChest.FACING).build());
 

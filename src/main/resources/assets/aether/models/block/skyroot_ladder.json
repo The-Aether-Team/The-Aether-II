@@ -1,6 +1,0 @@
-{
-	"parent": "block/ladder",
-	"textures": {
-		"texture": "aether:blocks/skyroot_ladder"
-	}
-}

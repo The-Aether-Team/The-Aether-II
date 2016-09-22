@@ -1,10 +1,16 @@
 {
 	"variants": {
 		"variant=white_rose": {
-			"model": "aether:aether_flower/white_rose"
+			"model": "aether:flowers/white_rose"
 		},
 		"variant=purple_flower": {
-			"model": "aether:aether_flower/purple_flower"
+			"model": "aether:flowers/purple_flower"
+		},
+		"variant=burstblossom": {
+			"model": "aether:flowers/burstblossom"
+		},
+		"variant=moonlit_bloom": {
+			"model": "aether:flowers/moonlit_bloom"
 		}
 	}
 }

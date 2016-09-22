@@ -42,7 +42,7 @@ public class BiomeAetherDecorator
 
 	protected WorldGenMinable genMossyHolystone;
 
-	protected WorldGenAetherFlowers genPurpleFlowers, genWhiteRoses;
+	protected WorldGenAetherFlowers genPurpleFlowers, genWhiteRoses, genBurstblossom;
 
 	protected WorldGenOrangeTree genOrangeTree;
 
@@ -59,6 +59,8 @@ public class BiomeAetherDecorator
 	protected WorldGenTemplate genSliderLabyrinthEntrance;
 
 	protected TemplatePipeline templatePipeline;
+
+	public boolean generateBushes = true;
 
 	public BiomeAetherDecorator()
 	{
@@ -77,6 +79,7 @@ public class BiomeAetherDecorator
 
 		this.genPurpleFlowers = new WorldGenAetherFlowers(BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER), 64);
 		this.genWhiteRoses = new WorldGenAetherFlowers(BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE), 64);
+		this.genBurstblossom = new WorldGenAetherFlowers(BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.BURSTBLOSSOM), 64);
 
 		this.genOrangeTree = new WorldGenOrangeTree();
 
@@ -127,7 +130,7 @@ public class BiomeAetherDecorator
 			y = random.nextInt(128);
 			z = random.nextInt(16) + 8;
 
-			new MoaNest(world, pos.add(x, y, z)).generate(world, random, 1 + random.nextInt(2), BlocksAether.woven_skyroot_sticks.getDefaultState());
+			new MoaNest(world, pos.add(x, y, z)).generate(world, random, 1 + random.nextInt(2), BlocksAether.woven_sticks.getDefaultState());
 		}
 
 		//Entrance Generator
@@ -177,13 +180,16 @@ public class BiomeAetherDecorator
 		}
 
 		// Blueberry Bush Generator
-		for (count = 0; count < 2; count++)
+		if (this.generateBushes)
 		{
-			x = random.nextInt(16) + 8;
-			y = random.nextInt(128);
-			z = random.nextInt(16) + 8;
+			for (count = 0; count < 2; count++)
+			{
+				x = random.nextInt(16) + 8;
+				y = random.nextInt(128);
+				z = random.nextInt(16) + 8;
 
-			this.genBlueberryBushes.generate(world, random, pos.add(x, y, z));
+				this.genBlueberryBushes.generate(world, random, pos.add(x, y, z));
+			}
 		}
 
 		// Aether Tall Grass Generator
@@ -217,6 +223,16 @@ public class BiomeAetherDecorator
 			z = random.nextInt(16) + 8;
 
 			this.genWhiteRoses.generate(world, random, pos.add(x, y, z));
+		}
+
+		// Burstblossom Generator
+		for (count = 0; count < 2; count++)
+		{
+			x = random.nextInt(16) + 8;
+			y = random.nextInt(128);
+			z = random.nextInt(16) + 8;
+
+			this.genBurstblossom.generate(world, random, pos.add(x, y, z));
 		}
 
 		// Quicksoil Generator

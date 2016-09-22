@@ -57,4 +57,15 @@ public class IslandBiomeSets
 
 	};
 
+	public static final IslandBiomeSet BLIGHTED_HIGHLANDS = new IslandBiomeSet()
+	{
+
+		@Override
+		public Biome provide(double temperature, double moisture)
+		{
+			return BiomesAether.BLIGHTED_HIGHLANDS;
+		}
+
+	};
+
 }

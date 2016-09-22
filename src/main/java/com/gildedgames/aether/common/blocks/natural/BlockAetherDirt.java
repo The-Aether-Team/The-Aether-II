@@ -46,7 +46,7 @@ public class BlockAetherDirt extends BlockCustom implements IBlockVariants
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		BlockVariant variant = PROPERTY_VARIANT.fromMeta(meta & 7);
+		BlockVariant variant = PROPERTY_VARIANT.fromMeta(meta);
 
 		return this.getDefaultState().withProperty(PROPERTY_VARIANT, variant);
 	}

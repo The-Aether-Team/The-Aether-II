@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"opaque=false": { "model": "aether:leaves/blightwillow_leaves" },
+        "opaque=true":  { "model": "aether:leaves/blightwillow_leaves_opaque" }
+	}
+}

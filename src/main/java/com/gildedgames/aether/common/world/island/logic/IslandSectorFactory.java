@@ -31,7 +31,7 @@ public class IslandSectorFactory
 
 			Rectangle bounds = new Rectangle(x, y, width, height);
 
-			int type = rand.nextInt(3);
+			int type = rand.nextInt(4);
 
 			IslandBiomeSet set = IslandBiomeSets.HIGHLANDS;
 
@@ -50,6 +50,11 @@ public class IslandSectorFactory
 				case 2:
 				{
 					set = IslandBiomeSets.FROSTPINE;
+					break;
+				}
+				case 3:
+				{
+					set = IslandBiomeSets.BLIGHTED_HIGHLANDS;
 					break;
 				}
 			}

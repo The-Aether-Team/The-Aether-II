@@ -1,28 +1,24 @@
 {
 	"variants": {
 		"variant=blue_skyroot": {
-			"opaque=false": { "model": "aether:aether_leaves/blue_skyroot_leaves" },
-        	"opaque=true":  { "model": "aether:aether_leaves/blue_skyroot_leaves_opaque" }
+			"opaque=false": { "model": "aether:leaves/blue_skyroot_leaves" },
+        	"opaque=true":  { "model": "aether:leaves/blue_skyroot_leaves_opaque" }
 		},
 		"variant=green_skyroot": {
-			"opaque=false": { "model": "aether:aether_leaves/green_skyroot_leaves" },
-        	"opaque=true":  { "model": "aether:aether_leaves/green_skyroot_leaves_opaque" }
+			"opaque=false": { "model": "aether:leaves/green_skyroot_leaves" },
+        	"opaque=true":  { "model": "aether:leaves/green_skyroot_leaves_opaque" }
 		},
 		"variant=dark_blue_skyroot": {
-			"opaque=false": { "model": "aether:aether_leaves/dark_blue_skyroot_leaves" },
-        	"opaque=true":  { "model": "aether:aether_leaves/dark_blue_skyroot_leaves_opaque" }
+			"opaque=false": { "model": "aether:leaves/dark_blue_skyroot_leaves" },
+        	"opaque=true":  { "model": "aether:leaves/dark_blue_skyroot_leaves_opaque" }
 		},
 		"variant=golden_oak": {
-			"opaque=false": { "model": "aether:aether_leaves/golden_oak_leaves" },
-        	"opaque=true":  { "model": "aether:aether_leaves/golden_oak_leaves_opaque" }
+			"opaque=false": { "model": "aether:leaves/golden_oak_leaves" },
+        	"opaque=true":  { "model": "aether:leaves/golden_oak_leaves_opaque" }
 		},
-		"variant=purple_crystal": {
-			"opaque=false": { "model": "aether:aether_leaves/purple_crystal_leaves" },
-        	"opaque=true":  { "model": "aether:aether_leaves/purple_crystal_leaves_opaque" }
-		},
-		"variant=purple_fruit": {
-			"opaque=false": { "model": "aether:aether_leaves/purple_fruit_leaves" },
-        	"opaque=true":  { "model": "aether:aether_leaves/purple_fruit_leaves_opaque" }
+		"variant=blighted": {
+			"opaque=false": { "model": "aether:leaves/blighted_leaves" },
+        	"opaque=true":  { "model": "aether:leaves/blighted_leaves_opaque" }
 		}
 	}
 }

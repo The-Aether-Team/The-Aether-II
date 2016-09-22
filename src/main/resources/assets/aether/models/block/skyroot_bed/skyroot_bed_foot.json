@@ -6,8 +6,8 @@
         "3": "aether:blocks/skyroot_bed/skyroot_bed_foot_cover_u",
         "4": "aether:blocks/skyroot_bed/skyroot_bed_legs_w_e",
         "5": "aether:blocks/skyroot_bed/skyroot_bed_legs_d_s_n",
-        "6": "aether:blocks/skyroot_planks",
-        "particle": "aether:blocks/skyroot_planks"
+        "6": "aether:blocks/planks/skyroot_planks",
+        "particle": "aether:blocks/planks/skyroot_planks"
     },
     "elements": [
         {

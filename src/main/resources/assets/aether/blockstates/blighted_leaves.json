@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"opaque=false": { "model": "aether:leaves/blighted_leaves" },
+        "opaque=true":  { "model": "aether:leaves/blighted_leaves_opaque" }
+	}
+}

@@ -1,6 +1,0 @@
-{
-	"variants": {
-		"opaque=false": { "model": "aether:aether_leaves/purple_fruit_leaves" },
-    	"opaque=true":  { "model": "aether:aether_leaves/purple_fruit_leaves_opaque" }
-	}
-}

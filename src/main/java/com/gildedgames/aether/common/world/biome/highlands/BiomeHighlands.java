@@ -29,10 +29,6 @@ public class BiomeHighlands extends BiomeAetherBase
 
 	public static final WorldGenMassiveSkyrootTree genGreenMassiveSkyrootTree2 = new WorldGenMassiveSkyrootTree(BlocksAether.green_skyroot_leaves.getDefaultState(), 20, false);
 
-	public static final WorldGenMassiveSkyrootTree genDarkBlueMassiveSkyrootTree = new WorldGenMassiveSkyrootTree(BlocksAether.dark_blue_skyroot_leaves.getDefaultState(), 35, true);
-
-	public static final WorldGenFruitTree genPurpleFruitTree = new WorldGenFruitTree(BlocksAether.purple_crystal_leaves.getDefaultState(), BlocksAether.purple_fruit_leaves.getDefaultState(), 50, 5, true);
-
 	public static final WorldGenLargeTree genGoldenOakTree = new WorldGenLargeTree(BlocksAether.golden_oak_log.getDefaultState(), BlocksAether.golden_oak_leaves.getDefaultState());
 
 	public static final WorldGenLargeTree genGreenLargeSkyrootTree = new WorldGenLargeTree(BlocksAether.skyroot_log.getDefaultState(), BlocksAether.green_skyroot_leaves.getDefaultState());
@@ -79,12 +75,8 @@ public class BiomeHighlands extends BiomeAetherBase
 		{
 			return genGreenMassiveSkyrootTree2;
 		}
-		else if (ratio > 90 && ratio <= 95)
-		{
-			return genPurpleFruitTree;
-		}
 
-		return genDarkBlueMassiveSkyrootTree;
+		return genGreenMassiveSkyrootTree2;
 	}
 
 }

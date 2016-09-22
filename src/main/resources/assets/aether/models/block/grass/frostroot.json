@@ -1,0 +1,8 @@
+{
+	"parent": "block/cube_bottom_top",
+	"textures": {
+		"bottom": "aether:blocks/permafrost",
+		"top": "aether:blocks/grass/frostroot_top",
+		"side": "aether:blocks/grass/frostroot_side"
+	}
+}

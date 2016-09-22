@@ -31,9 +31,10 @@ public class BlockAetherGrass extends Block implements IBlockVariants, IGrowable
 	public static final BlockVariant
 			AETHER_GRASS = new BlockVariant(0, "normal"),
 			ENCHANTED_AETHER_GRASS = new BlockVariant(1, "enchanted"),
-			FROSTROOT = new BlockVariant(2, "frostroot");
+			FROSTROOT = new BlockVariant(2, "frostroot"),
+			BLIGHTED = new BlockVariant(3, "blighted");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", AETHER_GRASS, ENCHANTED_AETHER_GRASS, FROSTROOT);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", AETHER_GRASS, ENCHANTED_AETHER_GRASS, FROSTROOT, BLIGHTED);
 
 	public BlockAetherGrass()
 	{
@@ -99,17 +100,7 @@ public class BlockAetherGrass extends Block implements IBlockVariants, IGrowable
 	@Override
 	public int damageDropped(IBlockState state)
 	{
-		int damage = 0;
-
-		if (state.getValue(PROPERTY_VARIANT).getMeta() == AETHER_GRASS.getMeta())
-		{
-			damage = BlockAetherDirt.DIRT.getMeta();
-		}
-
-		if (state.getValue(PROPERTY_VARIANT).getMeta() == ENCHANTED_AETHER_GRASS.getMeta())
-		{
-			damage = BlockAetherDirt.DIRT.getMeta();
-		}
+		int damage = BlockAetherDirt.DIRT.getMeta();
 
 		if (state.getValue(PROPERTY_VARIANT).getMeta() == FROSTROOT.getMeta())
 		{
@@ -122,7 +113,7 @@ public class BlockAetherGrass extends Block implements IBlockVariants, IGrowable
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		BlockVariant variant = PROPERTY_VARIANT.fromMeta(meta & 7);
+		BlockVariant variant = PROPERTY_VARIANT.fromMeta(meta);
 
 		return this.getDefaultState().withProperty(PROPERTY_VARIANT, variant);
 	}

@@ -1,0 +1,6 @@
+{
+	"parent": "block/ladder",
+	"textures": {
+		"texture": "aether:blocks/ladders/frostpine_ladder"
+	}
+}

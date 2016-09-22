@@ -1,6 +1,0 @@
-{
-	"parent": "block/cube_all",
-	"textures": {
-		"all": "aether:blocks/aether_leaves/dark_blue_skyroot_leaves"
-	}
-}

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.registry.minecraft;
 
-import com.gildedgames.aether.common.world.biome.BiomeEnchantedForest;
+import com.gildedgames.aether.common.world.biome.blighted.BiomeBlightedHighlands;
+import com.gildedgames.aether.common.world.biome.enchanted.BiomeEnchantedForest;
 import com.gildedgames.aether.common.world.biome.frostpine.BiomeFrostpine;
 import com.gildedgames.aether.common.world.biome.highlands.BiomeHighlandForest;
 import com.gildedgames.aether.common.world.biome.highlands.BiomeHighlandPlains;
@@ -26,6 +27,8 @@ public class BiomesAether
 
 	public static final Biome FROSTPINE = new BiomeFrostpine();
 
+	public static final Biome BLIGHTED_HIGHLANDS = new BiomeBlightedHighlands();
+
 	public static final Biome VOID = new BiomeVoid();
 
 	public static final Biome BIOME_SLIDER_LABYRINTH = new BiomeSliderLabyrinth();
@@ -37,6 +40,7 @@ public class BiomesAether
 		GameRegistry.register(HIGHLANDS_PLAINS);
 		GameRegistry.register(HIGHLANDS_FOREST);
 		GameRegistry.register(FROSTPINE);
+		GameRegistry.register(BLIGHTED_HIGHLANDS);
 
 		GameRegistry.register(VOID);
 		GameRegistry.register(ENCHANTED_FOREST);

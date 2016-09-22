@@ -19,9 +19,11 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockVariant
 {
 	public static final BlockVariant
 			WHITE_ROSE = new BlockVariant(0, "white_rose"),
-			PURPLE_FLOWER = new BlockVariant(1, "purple_flower");
+			PURPLE_FLOWER = new BlockVariant(1, "purple_flower"),
+			BURSTBLOSSOM = new BlockVariant(2, "burstblossom"),
+			MOONLIT_BLOOM = new BlockVariant(3, "moonlit_bloom");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", WHITE_ROSE, PURPLE_FLOWER);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", WHITE_ROSE, PURPLE_FLOWER, BURSTBLOSSOM, MOONLIT_BLOOM);
 
 	public BlockAetherFlower()
 	{
@@ -30,6 +32,14 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockVariant
 		this.setSoundType(SoundType.PLANT);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, WHITE_ROSE));
+	}
+
+	@Override
+	public int getLightValue(IBlockState state)
+	{
+		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
+
+		return (variant == MOONLIT_BLOOM ? (int)(0.6F * 15.0F) : this.lightValue);
 	}
 
 	@Override
