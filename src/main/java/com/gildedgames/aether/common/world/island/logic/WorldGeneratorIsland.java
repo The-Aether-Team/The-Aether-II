@@ -66,13 +66,13 @@ public class WorldGeneratorIsland
 
 					double dist = 2.0 * Math.sqrt((distNX * distNX) + (ny * ny) + (distNZ * distNZ)); // Get distance from center of Island
 
-					value = (value + 0.10) - (2.00 * Math.pow(dist, 1.50)); // Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
+					value = (value + 0.10) - (1.65 * Math.pow(dist, 1.50)); // Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
 
 					value = Math.min(1.0D, Math.max(-1.0D, value)); // Prevents noise from dropping below its minimum value
 
 					if (flat < 0.0)
 					{
-						value += flat * 4;
+						//value += flat * 4;
 					}
 
 					value = Math.min(1.0D, Math.max(-1.0D, value));

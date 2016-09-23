@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.world.island.logic;
 public class IslandSector
 {
 
-	public final static int CHUNK_WIDTH_PER_SECTOR = 30;
+	public final static int CHUNK_WIDTH_PER_SECTOR = 20;
 
 	private final int sectorX, sectorY;
 
