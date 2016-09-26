@@ -517,6 +517,7 @@ entity.aether.moa.name=Moa
 entity.aether.aerwhale.name=Aerwhale
 entity.aether.zephyr.name=Zephyr
 entity.aether.tempest.name=Tempest
+entity.aether.taegore.name=Taegore
 entity.aether.detonation_sentry.name=Detonation Sentry
 entity.aether.battle_sentry.name=Battle Sentry
 entity.aether.tracking_sentry.name=Tracking Sentry

@@ -1,8 +1,6 @@
 package com.gildedgames.aether.client.renderer;
 
-import com.gildedgames.aether.client.renderer.entities.AetherRenderFactory;
-import com.gildedgames.aether.client.renderer.entities.RenderFloatingBlock;
-import com.gildedgames.aether.client.renderer.entities.RenderMovingBlock;
+import com.gildedgames.aether.client.renderer.entities.*;
 import com.gildedgames.aether.client.renderer.entities.attachments.RenderParachute;
 import com.gildedgames.aether.client.renderer.entities.companions.*;
 import com.gildedgames.aether.client.renderer.entities.living.*;
@@ -11,6 +9,7 @@ import com.gildedgames.aether.client.renderer.entities.projectiles.RenderBolt;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDaggerfrostSnowball;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDart;
 import com.gildedgames.aether.client.renderer.tile_entities.*;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
@@ -34,6 +33,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderEntityItem;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -94,6 +94,8 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityPinkBabySwet.class, new AetherRenderFactory<>(RenderPinkBabySwet.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBattleGolem.class, new AetherRenderFactory<>(RenderBattleGolem.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBattleBomb.class, new AetherRenderFactory<>(RenderBattleBomb.class));
+
+		RenderingRegistry.registerEntityRenderingHandler(EntityTaegore.class, new TabulaRenderFactory<>(RenderTabula.class, new ResourceLocation(AetherCore.MOD_ID, "textures/entities/taegore/taegore.png"), new ResourceLocation(AetherCore.MOD_ID, "models/entities/taegore.tbl")));
 	}
 
 	private static void registerTESRs()

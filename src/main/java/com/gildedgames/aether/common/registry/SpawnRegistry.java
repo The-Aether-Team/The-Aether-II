@@ -67,13 +67,13 @@ public class SpawnRegistry
 		SpawnEntry flying_cow = new SpawnEntry(EntityFlyingCow.class, 10F, 2, 3).conditiion(grassCheck);
 		SpawnEntry ram = new SpawnEntry(EntityRam.class, 10F, 2, 3).conditiion(grassCheck);
 		SpawnEntry aerbunny = new SpawnEntry(EntityAerbunny.class, 13F, 3, 5).conditiion(grassCheck);
-		SpawnEntry phyg = new SpawnEntry(EntityPhyg.class, 13F, 2, 3).conditiion(grassCheck);
+		SpawnEntry taegore = new SpawnEntry(EntityTaegore.class, 13F, 2, 3).conditiion(grassCheck);
 		SpawnEntry carrion_sprout = new SpawnEntry(EntityCarrionSprout.class, 10F, 2, 3).conditiion(grassCheck);
 
 		animals.addEntry(flying_cow);
 		animals.addEntry(ram);
 		animals.addEntry(aerbunny);
-		animals.addEntry(phyg);
+		animals.addEntry(taegore);
 		animals.addEntry(carrion_sprout);
 
 		/** HOSTILES **/

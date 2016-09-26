@@ -58,4 +58,6 @@ public class ReflectionAether
 
 	public static final ReflectionEntry SEED_INPUT = new ReflectionEntry("field_189827_C");
 
+	public static final ReflectionEntry MAIN_MODEL = new ReflectionEntry("mainModel");
+
 }
