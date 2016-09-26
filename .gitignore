@@ -5,29 +5,20 @@
 .classpath
 .project
 .settings
-bin
-config
-crash-reports
-/logs/
-mod-config
-mods
-saves
-*.txt
-usernamecache.json
 
 # IntelliJ IDEA
 *.iml
 *.ipr
 *.iws
 .idea
-/out/
-classes
+/out
+/classes
 
 # Gradle
 .gradle
-/build/
-/bin/
-/run/
+/build
+/bin
+/run
 
 # Gradle Wrapper
 /gradle/wrapper/dists
