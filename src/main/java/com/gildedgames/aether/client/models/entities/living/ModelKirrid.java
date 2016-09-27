@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelRam extends ModelBase
+public class ModelKirrid extends ModelBase
 {
 	//fields
 	ModelRenderer BodyMain;
@@ -43,7 +43,7 @@ public class ModelRam extends ModelBase
 	protected float childYOffset = 8.0F;
 	protected float childZOffset = 4.0F;
 
-	public ModelRam()
+	public ModelKirrid()
 	{
 		this.textureWidth = 128;
 		this.textureHeight = 256;

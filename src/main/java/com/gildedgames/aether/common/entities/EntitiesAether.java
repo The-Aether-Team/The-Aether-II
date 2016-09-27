@@ -38,7 +38,7 @@ public class EntitiesAether
 		registerLivingEntity(EntityAerbunny.class, "aerbunny", 0xcbe1e6, 0xe08c8c);
 		registerLivingEntity(EntityCarrionSprout.class, "carrion_sprout", 0xcad9e9, 0x93b1d1);
 		registerLivingEntity(EntityCockatrice.class, "cockatrice", 0x6b519c, 0x8ae390);
-		registerLivingEntity(EntityRam.class, "ram", 0xf3efd8, 0x50575d);
+		registerLivingEntity(EntityKirrid.class, "kirrid", 0xf3efd8, 0x50575d);
 		registerLivingEntity(EntityMoa.class, "moa");
 		registerLivingEntity(EntityAerwhale.class, "aerwhale", 0x86b1c9, 0x8095a1);
 		registerLivingEntity(EntityZephyr.class, "zephyr", 0xb8b5ab, 0x988c65);
@@ -80,7 +80,7 @@ public class EntitiesAether
 		manager.registerPerTickEntry(new SpawnEntry(EntityFlyingCow.class, 1, 4, 0.65f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityPhyg.class, 1, 4, 0.35f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityCarrionSprout.class, 2, 3, 0.4f));
-		manager.registerPerTickEntry(new SpawnEntry(EntityRam.class, 3, 5, 0.5f));
+		manager.registerPerTickEntry(new SpawnEntry(EntityKirrid.class, 3, 5, 0.5f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityAerwhale.class, 1, 1, 0.2f, false));
 
 		manager.registerPerTickEntry(new SpawnEntry(EntitySwet.class, 2, 3, 0.5f));

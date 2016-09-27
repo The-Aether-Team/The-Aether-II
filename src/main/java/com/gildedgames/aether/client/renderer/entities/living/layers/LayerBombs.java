@@ -1,17 +1,12 @@
 package com.gildedgames.aether.client.renderer.entities.living.layers;
 
 import com.gildedgames.aether.client.models.entities.attachments.*;
-import com.gildedgames.aether.client.models.entities.living.ModelRamWool;
 import com.gildedgames.aether.client.renderer.entities.living.RenderBattleGolem;
-import com.gildedgames.aether.client.renderer.entities.living.RenderRam;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityBattleGolem;
-import com.gildedgames.aether.common.entities.living.EntityRam;
-import com.gildedgames.aether.common.entities.projectiles.EntityBattleBomb;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.util.ResourceLocation;
 
 public class LayerBombs implements LayerRenderer

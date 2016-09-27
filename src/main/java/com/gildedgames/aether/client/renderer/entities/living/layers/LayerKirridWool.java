@@ -1,24 +1,24 @@
 package com.gildedgames.aether.client.renderer.entities.living.layers;
 
 import com.gildedgames.aether.client.models.entities.living.ModelRamWool;
-import com.gildedgames.aether.client.renderer.entities.living.RenderRam;
+import com.gildedgames.aether.client.renderer.entities.living.RenderKirrid;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.living.EntityRam;
+import com.gildedgames.aether.common.entities.living.EntityKirrid;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.util.ResourceLocation;
 
-public class LayerRamWool implements LayerRenderer
+public class LayerKirridWool implements LayerRenderer
 {
-	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/ram/ram_wool.png");
+	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/kirrid/kirrid_wool.png");
 
 	private final ModelRamWool woolModel = new ModelRamWool();
 
-	private final RenderRam render;
+	private final RenderKirrid render;
 
-	public LayerRamWool(RenderRam render)
+	public LayerKirridWool(RenderKirrid render)
 	{
 		this.render = render;
 	}
@@ -26,7 +26,7 @@ public class LayerRamWool implements LayerRenderer
 	@Override
 	public void doRenderLayer(EntityLivingBase entity, float p_177141_2_, float p_177141_3_, float p_177141_4_, float p_177141_5_, float p_177141_6_, float p_177141_7_, float p_177141_8_)
 	{
-		EntityRam ram = (EntityRam) entity;
+		EntityKirrid ram = (EntityKirrid) entity;
 
 		if (!ram.getSheared() && !ram.isInvisible())
 		{

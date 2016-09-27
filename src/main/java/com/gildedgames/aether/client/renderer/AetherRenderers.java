@@ -81,7 +81,7 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityFangrin.class, new AetherRenderFactory<>(RenderFangrin.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityNexSpirit.class, new AetherRenderFactory<>(RenderNexSpirit.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCockatrice.class, new AetherRenderFactory<>(RenderCockatrice.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityRam.class, new AetherRenderFactory<>(RenderRam.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityKirrid.class, new AetherRenderFactory<>(RenderKirrid.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMoa.class, new AetherRenderFactory<>(RenderMoa.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityAerwhale.class, new AetherRenderFactory<>(RenderAerwhale.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityZephyr.class, new AetherRenderFactory<>(RenderZephyr.class));

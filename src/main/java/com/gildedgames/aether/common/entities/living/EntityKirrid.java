@@ -14,12 +14,12 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Set;
 
-public class EntityRam extends EntitySheep
+public class EntityKirrid extends EntitySheep
 {
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(new Item[] { Items.WHEAT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry});
 
-	public EntityRam(World world)
+	public EntityKirrid(World world)
 	{
 		super(world);
 
@@ -37,9 +37,9 @@ public class EntityRam extends EntitySheep
 	}
 
 	@Override
-	public EntityRam createChild(EntityAgeable ageable)
+	public EntityKirrid createChild(EntityAgeable ageable)
 	{
-		return new EntityRam(this.worldObj);
+		return new EntityKirrid(this.worldObj);
 	}
 
 	@Override

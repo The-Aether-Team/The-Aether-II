@@ -11,7 +11,6 @@ import com.gildedgames.aether.common.entities.living.enemies.EntitySwet;
 import com.gildedgames.aether.common.entities.living.enemies.EntityTempest;
 import com.gildedgames.aether.common.entities.living.enemies.EntityZephyr;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
-import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
 import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.world.spawning.PosCondition;
@@ -65,7 +64,7 @@ public class SpawnRegistry
 		PosCondition grassCheck = new CheckBlockStateUnderneath(BlocksAether.aether_grass.getDefaultState(), BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED_AETHER_GRASS));
 
 		SpawnEntry flying_cow = new SpawnEntry(EntityFlyingCow.class, 10F, 2, 3).conditiion(grassCheck);
-		SpawnEntry ram = new SpawnEntry(EntityRam.class, 10F, 2, 3).conditiion(grassCheck);
+		SpawnEntry ram = new SpawnEntry(EntityKirrid.class, 10F, 2, 3).conditiion(grassCheck);
 		SpawnEntry aerbunny = new SpawnEntry(EntityAerbunny.class, 13F, 3, 5).conditiion(grassCheck);
 		SpawnEntry taegore = new SpawnEntry(EntityTaegore.class, 13F, 2, 3).conditiion(grassCheck);
 		SpawnEntry carrion_sprout = new SpawnEntry(EntityCarrionSprout.class, 10F, 2, 3).conditiion(grassCheck);

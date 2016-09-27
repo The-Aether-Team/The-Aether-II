@@ -1,9 +1,7 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.models.entities.living.ModelBattleGolem;
-import com.gildedgames.aether.client.models.entities.living.ModelBattleSentry;
 import com.gildedgames.aether.client.renderer.entities.living.layers.LayerBombs;
-import com.gildedgames.aether.client.renderer.entities.living.layers.LayerRamWool;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
