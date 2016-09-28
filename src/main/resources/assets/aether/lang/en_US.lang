@@ -396,11 +396,12 @@ item.aether.ring_of_strength.name=Ring of Strength
 item.aether.arkenium_ring.name=Arkenium Ring
 item.aether.swift_ribbon.name=Swift Ribbon
 item.aether.wynd_cluster_ring.name=Wynd-Cluster Ring
-item.aether.ring_of_wisdom.name=Ring of Wisdom
+item.aether.lesser_ring_of_wisdom.name=Lesser Ring of Wisdom
 item.aether.blightwillow_door_item.name=Blightwillow Door
 item.aether.earthshifter_door_item.name=Earthshifter Door
 item.aether.emberoot_door_item.name=Emberoot Door
 item.aether.frostpine_door_item.name=Frostpine Door
+item.aether.ring_of_wisdom.name=Ring of Wisdom
 
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability: 

@@ -221,7 +221,7 @@ public class ItemsAether
 
 	public static Item muggers_cloak, bandit_shawl, hide_pouch, gruegar_pouch, soul_shard, angel_bandage, swift_rune, wynd_cluster, wisdom_rune, aerogel_chip;
 
-	public static Item ring_of_strength, gruegar_ring, arkenium_ring, swift_ribbon, wynd_cluster_ring, ring_of_wisdom;
+	public static Item ring_of_strength, gruegar_ring, arkenium_ring, swift_ribbon, wynd_cluster_ring, lesser_ring_of_wisdom, ring_of_wisdom;
 
 	public static void preInit()
 	{
@@ -543,6 +543,7 @@ public class ItemsAether
 		arkenium_ring = registerItem("arkenium_ring", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
 		swift_ribbon = registerItem("swift_ribbon", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
 		wynd_cluster_ring = registerItem("wynd_cluster_ring", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
+		lesser_ring_of_wisdom = registerItem("lesser_ring_of_wisdom", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
 		ring_of_wisdom = registerItem("ring_of_wisdom", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
 
 		IEquipmentRegistry equipmentRegistry = AetherCore.INSTANCE.getEquipmentRegistry();
@@ -634,7 +635,7 @@ public class ItemsAether
 		equipmentRegistry.register(ItemsAether.lesser_ring_of_growth, ItemRarity.COMMON, ItemEquipmentType.RING);
 		equipmentRegistry.register(ItemsAether.ring_of_strength, ItemRarity.COMMON, ItemEquipmentType.RING);
 		equipmentRegistry.register(ItemsAether.swift_ribbon, ItemRarity.COMMON, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.ring_of_wisdom, ItemRarity.COMMON, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.lesser_ring_of_wisdom, ItemRarity.COMMON, ItemEquipmentType.RING);
 
 		equipmentRegistry.register(ItemsAether.bone_ring, ItemRarity.RARE, ItemEquipmentType.RING);
 		equipmentRegistry.register(ItemsAether.ice_ring, ItemRarity.RARE, ItemEquipmentType.RING);
@@ -648,6 +649,7 @@ public class ItemsAether
 		equipmentRegistry.register(ItemsAether.winged_ring, ItemRarity.RARE, ItemEquipmentType.RING);
 		equipmentRegistry.register(ItemsAether.gruegar_ring, ItemRarity.RARE, ItemEquipmentType.RING);
 		equipmentRegistry.register(ItemsAether.wynd_cluster_ring, ItemRarity.RARE, ItemEquipmentType.RING);
+		equipmentRegistry.register(ItemsAether.ring_of_wisdom, ItemRarity.RARE, ItemEquipmentType.RING);
 
 		equipmentRegistry.register(ItemsAether.solar_band, ItemRarity.EPIC, ItemEquipmentType.RING);
 		equipmentRegistry.register(ItemsAether.lunar_band, ItemRarity.EPIC, ItemEquipmentType.RING);
@@ -1059,7 +1061,8 @@ public class ItemsAether
 		ItemEffects.register(ItemsAether.arkenium_ring, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 3.0D)).add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(10.0D)));
 		ItemEffects.register(ItemsAether.swift_ribbon, new Effects().add(EntityEffects.MODIFY_ATTACK_SPEED, new ModifyAttackSpeedEffect.Instance((float) SharedMonsterAttributes.ATTACK_SPEED.getDefaultValue() * 0.05D)));
 		ItemEffects.register(ItemsAether.wynd_cluster_ring, new Effects().add(EntityEffects.MODIFY_ATTACK_SPEED, new ModifyAttackSpeedEffect.Instance((float) SharedMonsterAttributes.ATTACK_SPEED.getDefaultValue() * 0.1D)));
-		ItemEffects.register(ItemsAether.ring_of_wisdom, new Effects().add(EntityEffects.MODIFY_XP_COLLECTION, new ModifyXPCollectionEffect.Instance(0.30D)));
+		ItemEffects.register(ItemsAether.lesser_ring_of_wisdom, new Effects().add(EntityEffects.MODIFY_XP_COLLECTION, new ModifyXPCollectionEffect.Instance(0.20D)));
+		ItemEffects.register(ItemsAether.ring_of_wisdom, new Effects().add(EntityEffects.MODIFY_XP_COLLECTION, new ModifyXPCollectionEffect.Instance(0.40D)));
 
 		zanite_armor_set = new Item[] { zanite_helmet, zanite_chestplate, zanite_leggings, zanite_boots, zanite_gloves };
 

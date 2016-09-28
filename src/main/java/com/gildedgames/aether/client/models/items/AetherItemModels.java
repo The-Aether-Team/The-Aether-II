@@ -538,6 +538,7 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.arkenium_ring, "accessories/arkenium_ring");
 		registerItemModels(ItemsAether.swift_ribbon, "accessories/swift_ribbon");
 		registerItemModels(ItemsAether.wynd_cluster_ring, "accessories/wynd_cluster_ring");
+		registerItemModels(ItemsAether.lesser_ring_of_wisdom, "accessories/lesser_ring_of_wisdom");
 		registerItemModels(ItemsAether.ring_of_wisdom, "accessories/ring_of_wisdom");
 
 		registerItemModels(ItemsAether.hide_pouch, "accessories/hide_pouch");
