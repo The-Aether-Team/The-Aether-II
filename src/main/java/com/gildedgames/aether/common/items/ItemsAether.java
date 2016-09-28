@@ -219,7 +219,7 @@ public class ItemsAether
 
 	public static Item fleeting_scarf, winged_necklace, gust_amulet, typhoon_amulet, chain_of_sporing_bones, molten_amulet, granite_studded_choker;
 
-	public static Item muggers_cloak, bandit_shawl, hide_pouch, gruegar_pouch, soul_shard, angel_bandage, swift_rune, wynd_crystal, wisdom_rune, aerogel_chip;
+	public static Item muggers_cloak, bandit_shawl, hide_pouch, gruegar_pouch, soul_shard, angel_bandage, swift_rune, wynd_cluster, wisdom_rune, aerogel_chip;
 
 	public static Item ring_of_strength, gruegar_ring, arkenium_ring, swift_ribbon, wynd_cluster_ring, ring_of_wisdom;
 
@@ -534,7 +534,7 @@ public class ItemsAether
 		soul_shard = registerItem("soul_shard", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
 		angel_bandage = registerItem("angel_bandage", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
 		swift_rune = registerItem("swift_rune", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
-		wynd_crystal = registerItem("wynd_crystal", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
+		wynd_cluster = registerItem("wynd_cluster", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
 		wisdom_rune = registerItem("wisdom_rune", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
 		aerogel_chip = registerItem("aerogel_chip", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
 
@@ -685,7 +685,7 @@ public class ItemsAether
 		equipmentRegistry.register(ItemsAether.ambrosium_talisman, ItemRarity.RARE, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(ItemsAether.gruegar_pouch, ItemRarity.RARE, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(ItemsAether.soul_shard, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.wynd_crystal, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		equipmentRegistry.register(ItemsAether.wynd_cluster, ItemRarity.RARE, ItemEquipmentType.CHARM);
 
 		equipmentRegistry.register(ItemsAether.cockatrice_heart, ItemRarity.EPIC, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(ItemsAether.damaged_moa_feather, ItemRarity.EPIC, ItemEquipmentType.CHARM);
@@ -1050,7 +1050,7 @@ public class ItemsAether
 		ItemEffects.register(ItemsAether.soul_shard, new Effects().add(EntityEffects.MODIFY_MAX_HEALTH, new ModifyMaxHealthEffect.Instance(0.5D)));
 		ItemEffects.register(ItemsAether.angel_bandage, new Effects().add(EntityEffects.MODIFY_MAX_HEALTH, new ModifyMaxHealthEffect.Instance(0.25D)));
 		ItemEffects.register(ItemsAether.swift_rune, new Effects().add(EntityEffects.MODIFY_ATTACK_SPEED, new ModifyAttackSpeedEffect.Instance((float) SharedMonsterAttributes.ATTACK_SPEED.getDefaultValue() * 0.01D)));
-		ItemEffects.register(ItemsAether.wynd_crystal, new Effects().add(EntityEffects.MODIFY_ATTACK_SPEED, new ModifyAttackSpeedEffect.Instance((float) SharedMonsterAttributes.ATTACK_SPEED.getDefaultValue() * 0.02D)));
+		ItemEffects.register(ItemsAether.wynd_cluster, new Effects().add(EntityEffects.MODIFY_ATTACK_SPEED, new ModifyAttackSpeedEffect.Instance((float) SharedMonsterAttributes.ATTACK_SPEED.getDefaultValue() * 0.02D)));
 		ItemEffects.register(ItemsAether.wisdom_rune, new Effects().add(EntityEffects.MODIFY_XP_COLLECTION, new ModifyXPCollectionEffect.Instance(0.20D)));
 		ItemEffects.register(ItemsAether.aerogel_chip, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.AIR, 0.1D)).add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.FIRE, 0.2D)));
 

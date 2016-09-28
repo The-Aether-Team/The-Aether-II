@@ -545,7 +545,7 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.soul_shard, "accessories/soul_shard");
 		registerItemModels(ItemsAether.angel_bandage, "accessories/angel_bandage");
 		registerItemModels(ItemsAether.swift_rune, "accessories/swift_rune");
-		registerItemModels(ItemsAether.wynd_crystal, "accessories/wynd_crystal");
+		registerItemModels(ItemsAether.wynd_cluster, "accessories/wynd_cluster");
 		registerItemModels(ItemsAether.wisdom_rune, "accessories/wisdom_rune");
 		registerItemModels(ItemsAether.aerogel_chip, "accessories/aerogel_chip");
 
