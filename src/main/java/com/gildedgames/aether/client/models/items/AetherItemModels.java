@@ -519,12 +519,12 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.gravitite_core, "accessories/gravitite_core");
 		registerItemModels(ItemsAether.carrion_bloom, "accessories/carrion_bloom");
 		registerItemModels(ItemsAether.moonlit_bloom, "accessories/moonlit_bloom");
-		registerItemModels(ItemsAether.companion_armor, "accessories/companion_armor");
-		registerItemModels(ItemsAether.spiked_collar, "accessories/spiked_collar");
+		registerItemModels(ItemsAether.cockatrice_keratin, "accessories/cockatrice_keratin");
+		registerItemModels(ItemsAether.cockatrice_talons, "accessories/cockatrice_talons");
 		registerItemModels(ItemsAether.valkyrie_wings, "accessories/valkyrie_wings");
 		registerItemModels(ItemsAether.divine_beacon, "accessories/divine_beacon");
 		registerItemModels(ItemsAether.phoenix_rune, "accessories/phoenix_rune");
-		registerItemModels(ItemsAether.vampire_fang, "accessories/vampire_fang");
+		registerItemModels(ItemsAether.taegore_tusk, "accessories/taegore_tusk");
 
 		registerItemModels(ItemsAether.dust_ring, "accessories/dust_ring");
 		registerItemModels(ItemsAether.mud_ring, "accessories/mud_ring");

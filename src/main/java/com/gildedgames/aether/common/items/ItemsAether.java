@@ -211,7 +211,7 @@ public class ItemsAether
 
 	public static Item white_moa_feather, sakura_moa_feather;
 
-	public static Item gravitite_core, carrion_bloom, moonlit_bloom, phoenix_rune, valkyrie_wings, companion_armor, spiked_collar, vampire_fang, divine_beacon;
+	public static Item gravitite_core, carrion_bloom, moonlit_bloom, phoenix_rune, valkyrie_wings, cockatrice_keratin, cockatrice_talons, taegore_tusk, divine_beacon;
 
 	public static Item dust_ring, mud_ring, steam_ring, storm_ring;
 
@@ -508,11 +508,11 @@ public class ItemsAether
 
 		carrion_bloom = registerItem("carrion_bloom", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
 		moonlit_bloom = registerItem("moonlit_bloom", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
-		companion_armor = registerItem("companion_armor", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
-		spiked_collar = registerItem("spiked_collar", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
+		cockatrice_keratin = registerItem("cockatrice_keratin", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
+		cockatrice_talons = registerItem("cockatrice_talons", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
 		divine_beacon = registerItem("divine_beacon", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
 		phoenix_rune = registerItem("phoenix_rune", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
-		vampire_fang = registerItem("vampire_fang", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
+		taegore_tusk = registerItem("taegore_tusk", new Item().setMaxStackSize(1), CreativeTabsAether.tabRelics);
 
 		gravitite_core = registerItem("gravitite_core", new Item().setMaxStackSize(1), CreativeTabsAether.tabArtifacts);
 		valkyrie_wings = registerItem("valkyrie_wings", new Item().setMaxStackSize(1), CreativeTabsAether.tabArtifacts);
@@ -574,12 +574,12 @@ public class ItemsAether
 
 		equipmentRegistry.register(ItemsAether.carrion_bloom, ItemRarity.RARE, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.moonlit_bloom, ItemRarity.RARE, ItemEquipmentType.RELIC);
-		equipmentRegistry.register(ItemsAether.companion_armor, ItemRarity.RARE, ItemEquipmentType.RELIC);
-		equipmentRegistry.register(ItemsAether.spiked_collar, ItemRarity.RARE, ItemEquipmentType.RELIC);
+		equipmentRegistry.register(ItemsAether.cockatrice_keratin, ItemRarity.RARE, ItemEquipmentType.RELIC);
+		equipmentRegistry.register(ItemsAether.cockatrice_talons, ItemRarity.RARE, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.divine_beacon, ItemRarity.RARE, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.regeneration_stone, ItemRarity.RARE, ItemEquipmentType.RELIC);
 
-		equipmentRegistry.register(ItemsAether.vampire_fang, ItemRarity.EPIC, ItemEquipmentType.RELIC);
+		equipmentRegistry.register(ItemsAether.taegore_tusk, ItemRarity.EPIC, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.phoenix_rune, ItemRarity.EPIC, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.daggerfrost_rune, ItemRarity.EPIC, ItemEquipmentType.RELIC);
 		equipmentRegistry.register(ItemsAether.carrion_petal, ItemRarity.EPIC, ItemEquipmentType.RELIC);
@@ -1030,9 +1030,9 @@ public class ItemsAether
 		ItemEffects.register(ItemsAether.carrion_bloom, new Effects().add(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new InDirectSunlightRule())));
 		ItemEffects.register(ItemsAether.moonlit_bloom, new Effects().add(EntityEffects.REGENERATE_HEALTH, new RegenerateHealthEffect.Instance(4, new InDirectMoonlightRule())));
 		ItemEffects.register(ItemsAether.phoenix_rune, new Effects().add(EntityEffects.CHANGE_ATTACK_ELEMENT, new ChangeAttackElementEffect.Instance(ElementalState.FIRE)).add(EntityEffects.FIRE_IMMUNITY));
-		ItemEffects.register(ItemsAether.vampire_fang, new Effects().add(EntityEffects.LEECH_LIFE, new LeechLifeEffect.Instance(0.5D)));
-		ItemEffects.register(ItemsAether.companion_armor, new Effects().add(EntityEffects.MODIFY_COMPANION_MAX_HEALTH, new ModifyMaxHealthEffect.Instance(10.0D)));
-		ItemEffects.register(ItemsAether.spiked_collar, new Effects().add(EntityEffects.MODIFY_COMPANION_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 2.0D)));
+		ItemEffects.register(ItemsAether.taegore_tusk, new Effects().add(EntityEffects.LEECH_LIFE, new LeechLifeEffect.Instance(0.5D)));
+		ItemEffects.register(ItemsAether.cockatrice_keratin, new Effects().add(EntityEffects.MODIFY_COMPANION_MAX_HEALTH, new ModifyMaxHealthEffect.Instance(10.0D)));
+		ItemEffects.register(ItemsAether.cockatrice_talons, new Effects().add(EntityEffects.MODIFY_COMPANION_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 2.0D)));
 
 		ItemEffects.register(ItemsAether.gravitite_core, new Effects().add(EntityEffects.EXTRA_JUMPS));
 		ItemEffects.register(ItemsAether.valkyrie_wings, new Effects().add(EntityEffects.SLOWFALL));
