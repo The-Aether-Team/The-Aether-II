@@ -46,8 +46,6 @@ public class ChunkGeneratorAetherOld implements IChunkGenerator
 
     public ChunkGeneratorAetherOld(World world, long seed)
     {
-        world.setSeaLevel(255);
-
         this.air = Blocks.AIR.getDefaultState();
         this.aether_stone = BlocksAether.holystone.getDefaultState();
         this.cold_aercloud = BlocksAether.aercloud.getDefaultState();
@@ -358,6 +356,7 @@ public class ChunkGeneratorAetherOld implements IChunkGenerator
                 break;
             }
         }*/
+        //
 
         chunk.generateSkylightMap();
 

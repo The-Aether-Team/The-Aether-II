@@ -68,6 +68,10 @@ public class ClientEventHandler
 	@SideOnly(Side.CLIENT)
 	public void renderAetherPortalHUD(float timeInPortal, ScaledResolution scaledRes)
 	{
+		if (timeInPortal <= 0.0f) {
+			return;
+		}
+
 		if (timeInPortal < 1.0F)
 		{
 			timeInPortal = timeInPortal * timeInPortal;
@@ -238,23 +242,8 @@ public class ClientEventHandler
 
 		EntityPlayerSP player = FMLClientHandler.instance().getClientPlayerEntity();
 
-		boolean fancyGraphics = Minecraft.getMinecraft().gameSettings.fancyGraphics;
-
-		if (!this.setInitialSettings)
-		{
-			this.prevFancyGraphics = fancyGraphics;
-			BlockAetherLeaves.setGraphics(fancyGraphics);
-
-			this.setInitialSettings = true;
-		}
-
 		if (world != null && player != null)
 		{
-			if (this.prevFancyGraphics != fancyGraphics)
-			{
-				BlockAetherLeaves.setGraphics(fancyGraphics);
-			}
-
 			PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
 
 			if (aePlayer != null)
@@ -280,8 +269,6 @@ public class ClientEventHandler
 				AetherMusicManager.INSTANCE.update(aePlayer);
 			}
 		}
-
-		this.prevFancyGraphics = fancyGraphics;
 	}
 
 	@SubscribeEvent

@@ -3,19 +3,14 @@ package com.gildedgames.aether.common.blocks.natural;
 import com.gildedgames.aether.client.renderer.particles.ParticleGolden;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -28,23 +23,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BlockAetherLeaves extends BlockLeaves
+public class BlockAetherLeaves extends Block implements IShearable
 {
 	public static final PropertyBool PROPERTY_DECAYABLE = PropertyBool.create("decayable");
 
 	public static final PropertyBool PROPERTY_CHECK_DECAY = PropertyBool.create("check_decay");
 
-	public static final PropertyBool PROPERTY_OPAQUE = PropertyBool.create("opaque");
-
 	private final int saplingMeta;
 
 	private int[] surroundings;
 
-	public static boolean graphicsFancy;
-
 	public BlockAetherLeaves(int saplingMeta)
 	{
-		super();
+		super(Material.LEAVES);
 
 		this.saplingMeta = saplingMeta;
 
@@ -53,14 +44,15 @@ public class BlockAetherLeaves extends BlockLeaves
 
 		this.setSoundType(SoundType.PLANT);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_DECAYABLE, Boolean.TRUE).withProperty(PROPERTY_CHECK_DECAY, Boolean.TRUE).withProperty(PROPERTY_OPAQUE, Boolean.valueOf(!BlockAetherLeaves.graphicsFancy)));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_DECAYABLE, Boolean.TRUE).withProperty(PROPERTY_CHECK_DECAY, Boolean.TRUE));
 
 		Blocks.FIRE.setFireInfo(this, 30, 60);
 	}
 
-	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	@Override
+	public boolean isOpaqueCube(IBlockState state)
 	{
-		return state.withProperty(PROPERTY_OPAQUE, Boolean.valueOf(!BlockAetherLeaves.graphicsFancy));
+		return false;
 	}
 
 	@Override
@@ -76,99 +68,9 @@ public class BlockAetherLeaves extends BlockLeaves
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
-	{
-		return !BlockAetherLeaves.graphicsFancy;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static void setGraphics(boolean fancy)
-	{
-		BlockAetherLeaves.graphicsFancy = fancy;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
-	{
-		return BlockAetherLeaves.graphicsFancy ? BlockRenderLayer.CUTOUT_MIPPED : BlockRenderLayer.SOLID;
-	}
-
-	@Override
 	public boolean isVisuallyOpaque()
 	{
 		return false;
-	}
-
-	@Override
-	public BlockPlanks.EnumType getWoodType(int meta)
-	{
-		return null;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
-	{
-		return !BlockAetherLeaves.graphicsFancy && blockAccess.getBlockState(pos.offset(side)).getBlock() == this ? false : this.superShouldSideBeRendered(blockState, blockAccess, pos, side);
-	}
-
-	@SideOnly(Side.CLIENT)
-	public boolean superShouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
-	{
-		AxisAlignedBB axisalignedbb = blockState.getBoundingBox(blockAccess, pos);
-
-		switch (side)
-		{
-		case DOWN:
-
-			if (axisalignedbb.minY > 0.0D)
-			{
-				return true;
-			}
-
-			break;
-		case UP:
-
-			if (axisalignedbb.maxY < 1.0D)
-			{
-				return true;
-			}
-
-			break;
-		case NORTH:
-
-			if (axisalignedbb.minZ > 0.0D)
-			{
-				return true;
-			}
-
-			break;
-		case SOUTH:
-
-			if (axisalignedbb.maxZ < 1.0D)
-			{
-				return true;
-			}
-
-			break;
-		case WEST:
-
-			if (axisalignedbb.minX > 0.0D)
-			{
-				return true;
-			}
-
-			break;
-		case EAST:
-
-			if (axisalignedbb.maxX < 1.0D)
-			{
-				return true;
-			}
-		}
-
-		return !blockAccess.getBlockState(pos.offset(side)).doesSideBlockRendering(blockAccess, pos.offset(side), side.getOpposite());
 	}
 
 	@Override
@@ -351,6 +253,13 @@ public class BlockAetherLeaves extends BlockLeaves
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getBlockLayer()
+	{
+		return BlockRenderLayer.CUTOUT_MIPPED;
+	}
+
+	@Override
 	public int quantityDropped(Random random)
 	{
 		return random.nextInt(20) == 0 ? 1 : 0;
@@ -396,7 +305,8 @@ public class BlockAetherLeaves extends BlockLeaves
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_DECAYABLE, (meta & 4) == 4).withProperty(PROPERTY_CHECK_DECAY, (meta & 8) == 8);
+		return this.getDefaultState().withProperty(PROPERTY_DECAYABLE, (meta & 4) == 4)
+				.withProperty(PROPERTY_CHECK_DECAY, (meta & 8) == 8);
 	}
 
 	@Override
@@ -420,6 +330,6 @@ public class BlockAetherLeaves extends BlockLeaves
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] {PROPERTY_DECAYABLE, PROPERTY_CHECK_DECAY, PROPERTY_OPAQUE});
+		return new BlockStateContainer(this, PROPERTY_DECAYABLE, PROPERTY_CHECK_DECAY);
 	}
 }

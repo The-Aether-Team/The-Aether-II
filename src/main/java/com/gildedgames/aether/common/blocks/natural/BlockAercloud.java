@@ -1,10 +1,9 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
+import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -15,7 +14,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -157,7 +155,7 @@ public class BlockAercloud extends Block implements IBlockVariants
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer()
 	{
-		return BlockAetherLeaves.graphicsFancy ? BlockRenderLayer.TRANSLUCENT : BlockRenderLayer.SOLID;
+		return BlockRenderLayer.TRANSLUCENT;
 	}
 
 	@Override
@@ -167,11 +165,6 @@ public class BlockAercloud extends Block implements IBlockVariants
 		IBlockState offsetState = world.getBlockState(pos.offset(side));
 
 		Block block = offsetState.getBlock();
-
-		if (!BlockAetherLeaves.graphicsFancy && block == this)
-		{
-			return false;
-		}
 
 		if (block == this)
 		{
@@ -221,15 +214,9 @@ public class BlockAercloud extends Block implements IBlockVariants
 	}
 
 	@Override
-	public boolean isVisuallyOpaque()
-	{
-		return false;
-	}
-
-	@Override
 	public boolean isOpaqueCube(IBlockState state)
 	{
-		return !BlockAetherLeaves.graphicsFancy;
+		return false;
 	}
 
 	@Override

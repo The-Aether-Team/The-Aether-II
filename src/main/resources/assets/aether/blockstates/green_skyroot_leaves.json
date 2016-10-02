@@ -1,6 +1,7 @@
 {
 	"variants": {
-		"opaque=false": { "model": "aether:aether_leaves/green_skyroot_leaves" },
-        "opaque=true":  { "model": "aether:aether_leaves/green_skyroot_leaves_opaque" }
+		"normal": {
+			"model": "aether:aether_leaves/green_skyroot_leaves"
+		}
 	}
 }
