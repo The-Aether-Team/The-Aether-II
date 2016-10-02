@@ -90,7 +90,7 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 				// Make sure we only spawn particles when it's jumping off a block
 				if (this.worldObj.isBlockFullCube(pos.down()))
 				{
-					AetherCore.PROXY.spawnJumpParticles(this.worldObj, this.posX, pos.getY() + 0.1D, this.posZ, 0.6D, 6);
+					AetherCore.PROXY.spawnJumpParticles(this.worldObj, this.posX, pos.getY(), this.posZ, 0.6D, 6);
 				}
 
 				this.puffiness = 10;

@@ -83,6 +83,7 @@ public class CommonEvents
 			if (world.getGameRules().getBoolean("doDaylightCycle"))
 			{
 				long i = worldServer.getWorldInfo().getWorldTime() + 24000L;
+
 				worldServer.getWorldInfo().setWorldTime(i - i % 24000L);
 			}
 		}
@@ -97,8 +98,6 @@ public class CommonEvents
 
 			if (event.getEmptyBucket().hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null))
 			{
-				IFluidHandler fluidHandler = FluidUtil.getFluidHandler(event.getEmptyBucket());
-
 				fluidStack = FluidUtil.getFluidContained(event.getEmptyBucket());
 			}
 
@@ -224,16 +223,13 @@ public class CommonEvents
 				CommonEvents.onFallenFromAether(entity);
 			}
 
-			if (entity != null)
-			{
-				List<Entity> entities = entity.worldObj.getEntitiesWithinAABB(Entity.class, entity.getEntityBoundingBox().expand(16.0D, 16.0D, 16.0D));
+			List<Entity> entities = entity.worldObj.getEntitiesWithinAABB(Entity.class, entity.getEntityBoundingBox().expand(16.0D, 16.0D, 16.0D));
 
-				for (Entity passenger : entities)
+			for (Entity passenger : entities)
+			{
+				if (uniquePassengerIDs.contains(passenger.getUniqueID()))
 				{
-					if (uniquePassengerIDs.contains(passenger.getUniqueID()))
-					{
-						passenger.startRiding(entity, true);
-					}
+					passenger.startRiding(entity, true);
 				}
 			}
 		}

@@ -50,8 +50,6 @@ public class ChunkGeneratorAether implements IChunkGenerator
 
 	public ChunkGeneratorAether(World world, long seed)
 	{
-		world.setSeaLevel(30);
-
 		this.air = Blocks.AIR.getDefaultState();
 		this.aether_stone = BlocksAether.holystone.getDefaultState();
 		this.cold_aercloud = BlocksAether.aercloud.getDefaultState();
