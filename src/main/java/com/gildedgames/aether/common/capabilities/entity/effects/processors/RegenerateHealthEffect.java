@@ -52,7 +52,7 @@ public class RegenerateHealthEffect extends AbstractEffectProcessor<Instance>
 			ticksBetween += instance.getAttributes().getInteger("ticksBetweenHealing");
 		}
 
-		if (source.ticksExisted % ticksBetween == 0)
+		if (source.ticksExisted != 0 && ticksBetween != 0 && source.ticksExisted % ticksBetween == 0)
 		{
 			living.heal(0.5F);
 		}
