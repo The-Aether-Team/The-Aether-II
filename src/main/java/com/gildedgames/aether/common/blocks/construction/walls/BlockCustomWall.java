@@ -26,11 +26,10 @@ public class BlockCustomWall extends BlockWall
 
 		this.setHarvestLevel(block.getHarvestTool(state), block.getHarvestLevel(state));
 
-		this.setDefaultState(this.blockState.getBaseState().withProperty(UP, Boolean.valueOf(false)).withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(UP, Boolean.FALSE).withProperty(NORTH, Boolean.FALSE).withProperty(EAST, Boolean.FALSE).withProperty(SOUTH, Boolean.FALSE).withProperty(WEST, Boolean.FALSE));
 		this.setResistance(resistance / 3.0f);
 		this.setHardness(hardness);
 		this.setSoundType(state.getBlock().getSoundType());
-		this.setCreativeTab(null);
 	}
 
 	public BlockCustomWall setGlows(boolean glows)

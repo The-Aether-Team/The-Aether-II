@@ -63,7 +63,7 @@ public class TemplatePrimer
 			for (Template.BlockInfo template$blockinfo : blocks)
 			{
 				BlockPos blockpos = Template.transformedBlockPos(settings, template$blockinfo.pos).add(pos);
-				Template.BlockInfo template$blockinfo1 = processor != null ? processor.func_189943_a(world, blockpos, template$blockinfo) : template$blockinfo;
+				Template.BlockInfo template$blockinfo1 = processor != null ? processor.processBlock(world, blockpos, template$blockinfo) : template$blockinfo;
 
 				if (template$blockinfo1 != null)
 				{
@@ -110,7 +110,7 @@ public class TemplatePrimer
 			for (Template.BlockInfo template$blockinfo : blocks)
 			{
 				BlockPos blockpos = Template.transformedBlockPos(settings, template$blockinfo.pos).add(pos);
-				Template.BlockInfo template$blockinfo1 = processor != null ? processor.func_189943_a(world, blockpos, template$blockinfo) : template$blockinfo;
+				Template.BlockInfo template$blockinfo1 = processor != null ? processor.processBlock(world, blockpos, template$blockinfo) : template$blockinfo;
 
 				if (template$blockinfo1 != null)
 				{
@@ -144,8 +144,8 @@ public class TemplatePrimer
 								template$blockinfo1.tileentityData.setInteger("y", blockpos.getY());
 								template$blockinfo1.tileentityData.setInteger("z", blockpos.getZ());
 								tileentity2.readFromNBT(template$blockinfo1.tileentityData);
-								tileentity2.func_189668_a(settings.getMirror());
-								tileentity2.func_189667_a(settings.getRotation());
+								tileentity2.mirror(settings.getMirror());
+								tileentity2.rotate(settings.getRotation());
 
 								tileentity2.markDirty();
 							}

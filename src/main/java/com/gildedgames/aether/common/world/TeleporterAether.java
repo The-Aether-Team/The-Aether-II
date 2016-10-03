@@ -351,7 +351,7 @@ public class TeleporterAether extends Teleporter implements NBT
 			return false;
 		}
 
-		Template portalFrame = MANAGER.func_189942_b(this.worldServerInstance.getMinecraftServer(), new ResourceLocation(AetherCore.MOD_ID, "aether_portal"));
+		Template portalFrame = MANAGER.getTemplate(this.worldServerInstance.getMinecraftServer(), new ResourceLocation(AetherCore.MOD_ID, "aether_portal"));
 
 		PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(rotation).setIgnoreEntities(false).setChunk(null).setReplacedBlock(Blocks.AIR).setIgnoreStructureBlock(false);
 

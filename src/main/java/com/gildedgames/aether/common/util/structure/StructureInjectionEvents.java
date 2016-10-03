@@ -103,7 +103,7 @@ public class StructureInjectionEvents
 
 		ByteBuf buf = Unpooled.buffer();
 
-		structure.func_189705_a(buf);
+		structure.writeCoordinates(buf);
 
 		BlockPos pos = new BlockPos(buf.readInt(), buf.readInt(), buf.readInt());
 

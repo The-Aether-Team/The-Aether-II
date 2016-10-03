@@ -105,7 +105,7 @@ public class BiomeAetherDecorator
 			WorldServer worldServer = (WorldServer)world;
 			MinecraftServer server = worldServer.getMinecraftServer();
 
-			this.genSliderLabyrinthEntrance = new WorldGenTemplate(this.templatePipeline, MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_entrance")));
+			this.genSliderLabyrinthEntrance = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_entrance")));
 		}
 
 		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(world, random, pos));

@@ -181,7 +181,7 @@ public class StructureInjectionPacket implements IMessage
 				}
 				else if (message.action == 3)
 				{
-					if (!tileentitystructure.func_189709_F())
+					if (!tileentitystructure.isStructureLoadable())
 					{
 						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.load_not_found", new Object[] {s4}));
 					}
