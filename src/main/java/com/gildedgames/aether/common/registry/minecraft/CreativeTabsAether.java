@@ -52,7 +52,7 @@ public class CreativeTabsAether
 		tabRings.setDisplayStack(new ItemStack(ItemsAether.zanite_ring));
 		tabNeckwear.setDisplayStack(new ItemStack(ItemsAether.amulet_of_growth));
 		tabRelics.setDisplayStack(new ItemStack(ItemsAether.regeneration_stone));
-		tabCharms.setDisplayStack(new ItemStack(ItemsAether.bone_shard));
+		tabCharms.setDisplayStack(new ItemStack(ItemsAether.glamoured_bone_shard));
 		tabArtifacts.setDisplayStack(new ItemStack(ItemsAether.gravitite_core));
 	}
 

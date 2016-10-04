@@ -22,8 +22,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.List;
 
-import static net.minecraft.realms.Tezzelator.t;
-
 public class EntityProperties implements IEntityPropertiesCapability
 {
 
@@ -198,7 +196,7 @@ public class EntityProperties implements IEntityPropertiesCapability
 					double motionY = (world.rand.nextBoolean() ? 0.25D : -0.25D) * world.rand.nextFloat();
 					double motionZ = (world.rand.nextBoolean() ? 0.25D : -0.25D) * world.rand.nextFloat();
 
-					worldServer.spawnParticle(EnumParticleTypes.ITEM_CRACK, victim.posX + motionX, victim.posY + (victim.height / 2) + motionY, victim.posZ + motionZ, 1, motionX, motionY, motionZ, (world.rand.nextBoolean() ? 0.05D : -0.05D), Item.getIdFromItem(ItemsAether.granite_chip));
+					worldServer.spawnParticle(EnumParticleTypes.ITEM_CRACK, victim.posX + motionX, victim.posY + (victim.height / 2) + motionY, victim.posZ + motionZ, 1, motionX, motionY, motionZ, (world.rand.nextBoolean() ? 0.05D : -0.05D), Item.getIdFromItem(ItemsAether.glamoured_holystone_chip));
 				}
 			}
 
