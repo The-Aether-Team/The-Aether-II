@@ -584,6 +584,8 @@ public class AetherItemModels
 
 		registerItemModels(ItemsAether.glamoured_cockatrice_keratin, "cockatrice_keratin");
 
+		registerItemModels(ItemsAether.irradiated_item, "irradiated_item");
+
 		ModelLoader.setCustomModelResourceLocation(getItem(BlocksAether.structure_extended), 0, new ModelResourceLocation("structure_block", "inventory"));
 	}
 

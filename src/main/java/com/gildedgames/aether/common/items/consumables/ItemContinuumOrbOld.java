@@ -45,7 +45,7 @@ public class ItemContinuumOrbOld extends Item
 		return new ActionResult<>(EnumActionResult.SUCCESS, randStack);
 	}
 
-	public class ContinuumItemSelector implements IItemSelector
+	public static class ContinuumItemSelector implements IItemSelector
 	{
 		private ArrayList<IRecipe> validRecipeCache;
 

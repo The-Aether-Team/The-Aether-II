@@ -229,6 +229,8 @@ public class ItemsAether
 
 	public static Item cockatrice_talons, cockatrice_keratin, taegore_tusk, glamoured_cockatrice_keratin;
 
+	public static Item irradiated_item;
+
 	public static void preInit()
 	{
 		skyroot_stick = registerItem("skyroot_stick", new Item(), CreativeTabsAether.tabMaterials);
@@ -568,6 +570,8 @@ public class ItemsAether
 		cockatrice_keratin = registerItem("cockatrice_keratin", new Item(), CreativeTabsAether.tabMaterials);
 		cockatrice_talons = registerItem("cockatrice_talons", new Item(), CreativeTabsAether.tabMaterials);
 		taegore_tusk = registerItem("taegore_tusk", new Item(), CreativeTabsAether.tabMaterials);
+
+		irradiated_item = registerItem("irradiated_item", new ItemIrradiated(), CreativeTabsAether.tabMaterials);
 
 		glamoured_cockatrice_keratin = registerItem("glamoured_cockatrice_keratin", new ItemGlamoured().setMaxStackSize(1), CreativeTabsAether.tabCharms);
 
