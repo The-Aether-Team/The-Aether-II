@@ -126,7 +126,6 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.ambrosium_ore, "ores/ambrosium_ore");
 		registerItemModels(BlocksAether.zanite_ore, "ores/zanite_ore");
 		registerItemModels(BlocksAether.gravitite_ore, "ores/gravitite_ore");
-		registerItemModels(BlocksAether.continuum_ore, "ores/continuum_ore");
 		registerItemModels(BlocksAether.arkenium_ore, "ores/arkenium_ore");
 
 		registerItemModels(BlocksAether.quicksoil, "quicksoil");
@@ -169,7 +168,6 @@ public class AetherItemModels
 
 		registerItemModels(ItemsAether.ambrosium_shard, "ambrosium_shard");
 		registerItemModels(ItemsAether.ambrosium_chunk, "ambrosium_chunk");
-		registerItemModels(ItemsAether.continuum_orb, "continuum_orb");
 		registerItemModels(ItemsAether.zanite_gemstone, "zanite_gemstone");
 		registerItemModels(ItemsAether.arkenium, "arkenium");
 		registerItemModels(ItemsAether.arkenium_strip, "arkenium_strip");
@@ -447,7 +445,6 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.damaged_moa_feather, "accessories/damaged_moa_feather");
 		registerItemModels(ItemsAether.osseous_bane, "accessories/osseous_bane");
 		registerItemModels(ItemsAether.rot_bane, "accessories/rot_bane");
-		registerItemModels(ItemsAether.continuum_talisman, "accessories/continuum_talisman");
 
 		registerItemModels(BlocksAether.skyroot_stairs, "aether_stairs/skyroot_stairs");
 		registerItemModels(BlocksAether.holystone_stairs, "aether_stairs/holystone_stairs");

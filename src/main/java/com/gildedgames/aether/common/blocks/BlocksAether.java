@@ -62,8 +62,6 @@ public class BlocksAether
 
 	public static final BlockGravititeOre gravitite_ore = new BlockGravititeOre();
 
-	public static final BlockContinuumOre continuum_ore = new BlockContinuumOre();
-
 	public static final BlockArkeniumOre arkenium_ore = new BlockArkeniumOre();
 
 	public static final Block aether_planks = new BlockAetherPlanks();
@@ -280,7 +278,6 @@ public class BlocksAether
 		registerBlock("ambrosium_ore", BlocksAether.ambrosium_ore.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("zanite_ore", BlocksAether.zanite_ore.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("gravitite_ore", BlocksAether.gravitite_ore.setCreativeTab(CreativeTabsAether.tabBlocks));
-		registerBlock("continuum_ore", BlocksAether.continuum_ore.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("arkenium_ore", BlocksAether.arkenium_ore.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("icestone_ore", BlocksAether.icestone_ore.setCreativeTab(CreativeTabsAether.tabBlocks));
 
@@ -478,7 +475,6 @@ public class BlocksAether
 		ambrosium_ore.setHarvestLevel("pickaxe", 0);
 		zanite_ore.setHarvestLevel("pickaxe", 1);
 		gravitite_ore.setHarvestLevel("pickaxe", 2);
-		continuum_ore.setHarvestLevel("pickaxe", 3);
 		arkenium_ore.setHarvestLevel("pickaxe", 2);
 
 		icestone_ore.setHarvestLevel("pickaxe", 1);

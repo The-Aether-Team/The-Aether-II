@@ -135,7 +135,7 @@ public class ItemsAether
 
 	public static Item candy_ring, bone_ring, skyroot_ring;
 
-	public static Item icestone, continuum_orb;
+	public static Item icestone;
 
 	public static Item skyroot_sign;
 	
@@ -186,8 +186,6 @@ public class ItemsAether
 	public static Item moonlit_scroll, glamoured_cockatrice_heart;
 
 	public static Item damaged_moa_feather, osseous_bane, rot_bane;
-
-	public static Item continuum_talisman;
 
 	public static ItemSkyrootBed skyroot_bed;
 
@@ -240,7 +238,6 @@ public class ItemsAether
 		arkenium = registerItem("arkenium", new Item(), CreativeTabsAether.tabMaterials);
         arkenium_strip = registerItem("arkenium_strip", new Item(), CreativeTabsAether.tabMaterials);
 		icestone = registerItem("icestone", new Item(), CreativeTabsAether.tabMaterials);
-		continuum_orb = registerItem("continuum_orb", new ItemContinuumOrb(), CreativeTabsAether.tabMaterials);
 
 		skyroot_axe = registerItem("skyroot_axe", new ItemSkyrootTool(EnumToolType.AXE, 6.0F, -3.2F));
 		skyroot_pickaxe = registerItem("skyroot_pickaxe", new ItemSkyrootTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
@@ -471,7 +468,6 @@ public class ItemsAether
 		damaged_moa_feather = registerItem("damaged_moa_feather", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
 		osseous_bane = registerItem("osseous_bane", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
 		rot_bane = registerItem("rot_bane", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
-		continuum_talisman = registerItem("continuum_talisman", new Item().setMaxStackSize(1), CreativeTabsAether.tabCharms);
 		skyroot_bed = registerItem("skyroot_bed_item", new ItemSkyrootBed(), CreativeTabsAether.tabBlocks);
 
 		moa_egg = registerItem("moa_egg_item", new ItemMoaEgg(false));
@@ -725,8 +721,6 @@ public class ItemsAether
 		equipmentRegistry.register(ItemsAether.rot_bane, ItemRarity.EPIC, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(ItemsAether.butchers_knife, ItemRarity.EPIC, ItemEquipmentType.CHARM);
 		equipmentRegistry.register(ItemsAether.glamoured_aerogel_chip, ItemRarity.EPIC, ItemEquipmentType.CHARM);
-
-		equipmentRegistry.register(ItemsAether.continuum_talisman, ItemRarity.MYTHIC, ItemEquipmentType.CHARM);
 
 		/** OFF-HAND **/
 
@@ -1023,7 +1017,6 @@ public class ItemsAether
 		ItemEffects.register(ItemsAether.sakura_moa_feather, new Effects().add(EntityEffects.MODIFY_SPEED, new ModifySpeedEffect.Instance((float) SharedMonsterAttributes.MOVEMENT_SPEED.getDefaultValue() * 0.10D, new OutOfCombatRule(160))));
 		ItemEffects.register(ItemsAether.osseous_bane, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 2.0D, new DamagingMobRule(EntitySkeleton.class, "Skeleton"))));
 		ItemEffects.register(ItemsAether.rot_bane, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 1.0D, new DamagingUndeadRule())));
-		ItemEffects.register(ItemsAether.continuum_talisman);
 		ItemEffects.register(ItemsAether.butchers_knife, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 2.0D, new DamagingPassiveAnimalsRule())));
 
 		ItemEffects.register(ItemsAether.zanite_studded_choker, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 4.0D)));

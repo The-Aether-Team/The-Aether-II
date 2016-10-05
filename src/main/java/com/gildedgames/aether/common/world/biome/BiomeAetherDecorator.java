@@ -38,7 +38,7 @@ public class BiomeAetherDecorator
 
 	protected WorldGenAetherTallGrass genAetherGrass;
 
-	protected WorldGenMinable genAmbrosium, genZanite, genGravitite, genContinuum, genIcestone, genArkenium;
+	protected WorldGenMinable genAmbrosium, genZanite, genGravitite, genIcestone, genArkenium;
 
 	protected WorldGenMinable genMossyHolystone;
 
@@ -71,7 +71,6 @@ public class BiomeAetherDecorator
 		this.genAmbrosium = new WorldGenMinable(BlocksAether.ambrosium_ore.getDefaultState(), 16, holystoneMatcher);
 		this.genZanite = new WorldGenMinable(BlocksAether.zanite_ore.getDefaultState(), 8, holystoneMatcher);
 		this.genGravitite = new WorldGenMinable(BlocksAether.gravitite_ore.getDefaultState(), 4, holystoneMatcher);
-		this.genContinuum = new WorldGenMinable(BlocksAether.continuum_ore.getDefaultState(), 4, holystoneMatcher);
 		this.genIcestone = new WorldGenMinable(BlocksAether.icestone_ore.getDefaultState(), 10, holystoneMatcher);
 		this.genArkenium = new WorldGenMinable(BlocksAether.arkenium_ore.getDefaultState(), 8, holystoneMatcher);
 
@@ -321,7 +320,6 @@ public class BiomeAetherDecorator
 		this.generateMineable(this.genAmbrosium, world, random, pos, 0, 128, 20);
 		this.generateMineable(this.genZanite, world, random, pos, 0, 64, 15);
 		this.generateMineable(this.genGravitite, world, random, pos, 0, 32, 6);
-		this.generateMineable(this.genContinuum, world, random, pos, 0, 128, 4);
 		this.generateMineable(this.genIcestone, world, random, pos, 0, 128, 10);
 		this.generateMineable(this.genArkenium, world, random, pos, 0, 128, 20);
 		this.generateCaveMineable(this.genMossyHolystone, world, random, pos, 0, 90, 45);

@@ -8,6 +8,7 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,8 +18,16 @@ import net.minecraftforge.common.ForgeHooks;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeContinuum implements IRecipe
+public class RecipeUnbreakable implements IRecipe
 {
+
+	private Item itemToCraftWith;
+
+	public RecipeUnbreakable(Item itemToCraftWith)
+	{
+		this.itemToCraftWith = itemToCraftWith;
+	}
+
 	@Override
 	public boolean matches(InventoryCrafting inventory, World world)
 	{
@@ -38,7 +47,7 @@ public class RecipeContinuum implements IRecipe
 				}
 				else
 				{
-					if (invStack.getItem() != ItemsAether.continuum_orb)
+					if (invStack.getItem() != this.itemToCraftWith)
 					{
 						return false;
 					}
@@ -116,7 +125,7 @@ public class RecipeContinuum implements IRecipe
 
 			if (invStack != null)
 			{
-				if (invStack.getItem() == ItemsAether.continuum_orb)
+				if (invStack.getItem() == this.itemToCraftWith)
 				{
 					list[i] = invStack.copy();
 					list[i].stackSize = 1;

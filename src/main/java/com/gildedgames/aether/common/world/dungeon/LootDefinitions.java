@@ -49,7 +49,6 @@ public class LootDefinitions
 				new ItemStack(ItemsAether.damaged_moa_feather),
 				new ItemStack(ItemsAether.osseous_bane),
 				new ItemStack(ItemsAether.rot_bane),
-				new ItemStack(ItemsAether.continuum_talisman),
 				new ItemStack(ItemsAether.shard_of_life),
 				new ItemStack(ItemsAether.pink_baby_swet),
 				new ItemStack(ItemsAether.candy_ring),
