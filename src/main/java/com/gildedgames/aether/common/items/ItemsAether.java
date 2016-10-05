@@ -310,7 +310,7 @@ public class ItemsAether
 
 		golden_amber = registerItem("golden_amber", new Item(), CreativeTabsAether.tabMaterials);
 
-		aechor_petal = registerItem("aechor_petal", new Item(), CreativeTabsAether.tabMiscellaneous);
+		aechor_petal = registerItem("aechor_petal", new Item(), CreativeTabsAether.tabMaterials);
 
 		blueberries = registerItem("blueberries", new ItemFood(2, false), CreativeTabsAether.tabConsumables);
 
