@@ -47,7 +47,7 @@ public class CreativeTabsAether
 		tabArmor.setDisplayStack(new ItemStack(ItemsAether.zanite_helmet));
 		tabConsumables.setDisplayStack(new ItemStack(ItemsAether.orange));
         tabCompanions.setDisplayStack(new ItemStack(ItemsAether.pink_baby_swet));
-        tabMiscellaneous.setDisplayStack(new ItemStack(ItemsAether.aechor_petal));
+        tabMiscellaneous.setDisplayStack(new ItemStack(ItemsAether.recording_892));
 
 		tabRings.setDisplayStack(new ItemStack(ItemsAether.zanite_ring));
 		tabNeckwear.setDisplayStack(new ItemStack(ItemsAether.amulet_of_growth));
