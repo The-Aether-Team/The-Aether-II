@@ -41,22 +41,7 @@ public class BiomeBlightedHighlands extends BiomeAetherBase
 	@Override
 	public WorldGenAbstractTree genBigTreeChance(Random random)
 	{
-		int ratio = random.nextInt(100);
-
-		if (ratio <= 40)
-		{
-			return blightwillow_tree;
-		}
-		else if (ratio > 40 && ratio <= 60)
-		{
-			return blighted_tree;
-		}
-		else if (ratio > 60 && ratio <= 80)
-		{
-			return tree;
-		}
-
-		return dark_blue_tree;
+		return blightwillow_tree;
 	}
 
 }

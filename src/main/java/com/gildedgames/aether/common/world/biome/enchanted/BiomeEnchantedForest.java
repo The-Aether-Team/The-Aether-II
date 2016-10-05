@@ -25,9 +25,6 @@ public class BiomeEnchantedForest extends BiomeAetherBase
 	public static final WorldGenSkyrootTree golden_tree = new WorldGenSkyrootTree(BlocksAether.skyroot_log.getDefaultState().withProperty(BlockAetherLog.PROPERTY_LOG_AXIS, BlockLog.EnumAxis.Y),
 			BlocksAether.golden_oak_leaves.getDefaultState());
 
-	public static final WorldGenSkyrootTree emberoot_tree = new WorldGenSkyrootTree(BlocksAether.emberoot_log.getDefaultState().withProperty(BlockAetherLog.PROPERTY_LOG_AXIS, BlockLog.EnumAxis.Y),
-			BlocksAether.emberoot_leaves.getDefaultState());
-
 	public static final WorldGenMassiveSkyrootTree earthshifter_tree = new WorldGenMassiveSkyrootTree(BlocksAether.earthshifter_leaves.getDefaultState(), BlocksAether.earthshifter_log.getDefaultState().withProperty(BlockAetherLog.PROPERTY_LOG_AXIS, BlockLog.EnumAxis.Y), 35, true);
 
 	public static final WorldGenLargeTree golden_oak = new WorldGenLargeTree(BlocksAether.golden_oak_log.getDefaultState(), BlocksAether.golden_oak_leaves.getDefaultState());
@@ -79,11 +76,7 @@ public class BiomeEnchantedForest extends BiomeAetherBase
 	{
 		int ratio = random.nextInt(100);
 
-		if (ratio <= 40)
-		{
-			return random.nextBoolean() ? golden_tree : emberoot_tree;
-		}
-		else if (ratio > 40 && ratio <= 60)
+		if (ratio <= 60)
 		{
 			return golden_oak;
 		}

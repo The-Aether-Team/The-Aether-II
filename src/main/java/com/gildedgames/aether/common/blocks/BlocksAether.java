@@ -72,8 +72,7 @@ public class BlocksAether
 			golden_oak_log = new BlockGoldenOakLog(),
 			frostpine_log = new BlockAetherLog(),
 			blightwillow_log = new BlockAetherLog(),
-			earthshifter_log = new BlockAetherLog(),
-			emberoot_log = new BlockAetherLog();
+			earthshifter_log = new BlockAetherLog();
 
 	public static final BlockAetherLeaves blue_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.BLUE_SKYROOT.getMeta()),
 			green_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.GREEN_SKYROOT.getMeta()),
@@ -83,8 +82,7 @@ public class BlocksAether
 			frostpine_leaves = new BlockAetherLeaves(BlockAetherSapling.FROSTPINE.getMeta()),
 			blightwillow_leaves = new BlockAetherLeaves(BlockAetherSapling.BLIGHTWILLOW.getMeta()),
 			earthshifter_leaves = new BlockAetherLeaves(BlockAetherSapling.EARTHSHIFTER.getMeta()),
-			vined_earthshifter_leaves = new BlockAetherLeaves(BlockAetherSapling.EARTHSHIFTER.getMeta()),
-			emberoot_leaves = new BlockAetherLeaves(BlockAetherSapling.EMBEROOT.getMeta());
+			vined_earthshifter_leaves = new BlockAetherLeaves(BlockAetherSapling.EARTHSHIFTER.getMeta());
 
 	public static final BlockAetherPortal aether_portal = new BlockAetherPortal();
 
@@ -140,14 +138,14 @@ public class BlocksAether
 		}
 	}, SoundType.METAL);
 
-	public static final BlockCustomDoor blightwillow_door = new BlockCustomDoor(Material.WOOD, new Supplier<Item>()
+	public static final Block blightwillow_door = new BlockCustomDoor(Material.WOOD, new Supplier<Item>()
 	{
 		@Override
 		public Item get()
 		{
 			return ItemsAether.blightwillow_door;
 		}
-	}, SoundType.WOOD);
+	}, SoundType.WOOD).setLightLevel(0.6F);
 
 	public static final BlockCustomDoor earthshifter_door = new BlockCustomDoor(Material.WOOD, new Supplier<Item>()
 	{
@@ -157,15 +155,6 @@ public class BlocksAether
 			return ItemsAether.earthshifter_door;
 		}
 	}, SoundType.WOOD);
-
-	public static final Block emberoot_door = new BlockCustomDoor(Material.WOOD, new Supplier<Item>()
-	{
-		@Override
-		public Item get()
-		{
-			return ItemsAether.emberoot_door;
-		}
-	}, SoundType.WOOD).setLightLevel(0.6F);
 
 	public static final BlockCustomDoor frostpine_door = new BlockCustomDoor(Material.WOOD, new Supplier<Item>()
 	{
@@ -203,7 +192,6 @@ public class BlocksAether
 	public static final BlockCustomLadder skyroot_ladder = new BlockCustomLadder(),
 										blightwillow_ladder = new BlockCustomLadder(),
 										earthshifter_ladder = new BlockCustomLadder(),
-										emberoot_ladder = new BlockCustomLadder(),
 										frostpine_ladder = new BlockCustomLadder();
 
 	public static final BlockLabyrinthTotem labyrinth_totem = new BlockLabyrinthTotem(Material.IRON);
@@ -299,9 +287,8 @@ public class BlocksAether
 		registerBlock("skyroot_log", BlocksAether.skyroot_log.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("golden_oak_log", BlocksAether.golden_oak_log.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("frostpine_log", BlocksAether.frostpine_log.setCreativeTab(CreativeTabsAether.tabBlocks));
-		registerBlock("blightwillow_log", BlocksAether.blightwillow_log.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("blightwillow_log", BlocksAether.blightwillow_log.setCreativeTab(CreativeTabsAether.tabBlocks).setLightLevel(0.6F));
 		registerBlock("earthshifter_log", BlocksAether.earthshifter_log.setCreativeTab(CreativeTabsAether.tabBlocks));
-		registerBlock("emberoot_log", BlocksAether.emberoot_log.setCreativeTab(CreativeTabsAether.tabBlocks).setLightLevel(0.6F));
 
 		registerBlock("blue_skyroot_leaves", BlocksAether.blue_skyroot_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("green_skyroot_leaves", BlocksAether.green_skyroot_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
@@ -312,7 +299,6 @@ public class BlocksAether
 		registerBlock("blightwillow_leaves", BlocksAether.blightwillow_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("earthshifter_leaves", BlocksAether.earthshifter_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("vined_earthshifter_leaves", BlocksAether.vined_earthshifter_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
-		registerBlock("emberoot_leaves", BlocksAether.emberoot_leaves.setCreativeTab(CreativeTabsAether.tabBlocks).setLightLevel(0.6F));
 
 		registerBlock("aether_sapling", BlocksAether.aether_sapling.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.aether_sapling));
 
@@ -353,7 +339,6 @@ public class BlocksAether
 		registerBlock("arkenium_door", BlocksAether.arkenium_door);
 		registerBlock("blightwillow_door", BlocksAether.blightwillow_door);
 		registerBlock("earthshifter_door", BlocksAether.earthshifter_door);
-		registerBlock("emberoot_door", BlocksAether.emberoot_door);
 		registerBlock("frostpine_door", BlocksAether.frostpine_door);
 
 		registerBlock("skyroot_chest", BlocksAether.skyroot_chest.setCreativeTab(CreativeTabsAether.tabBlocks));
@@ -371,9 +356,8 @@ public class BlocksAether
 		registerBlock("skyroot_trapdoor", BlocksAether.skyroot_trapdoor.setCreativeTab(CreativeTabsAether.tabBlocks));
 
 		registerBlock("skyroot_ladder", BlocksAether.skyroot_ladder.setCreativeTab(CreativeTabsAether.tabBlocks));
-		registerBlock("blightwillow_ladder", BlocksAether.blightwillow_ladder.setCreativeTab(CreativeTabsAether.tabBlocks));
+		registerBlock("blightwillow_ladder", BlocksAether.blightwillow_ladder.setCreativeTab(CreativeTabsAether.tabBlocks).setLightLevel(0.6F));
 		registerBlock("earthshifter_ladder", BlocksAether.earthshifter_ladder.setCreativeTab(CreativeTabsAether.tabBlocks));
-		registerBlock("emberoot_ladder", BlocksAether.emberoot_ladder.setCreativeTab(CreativeTabsAether.tabBlocks).setLightLevel(0.6F));
 		registerBlock("frostpine_ladder", BlocksAether.frostpine_ladder.setCreativeTab(CreativeTabsAether.tabBlocks));
 
 		registerBlock("skyroot_button", BlocksAether.skyroot_button.setCreativeTab(CreativeTabsAether.tabBlocks));
@@ -449,7 +433,6 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_door, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.blightwillow_door, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.earthshifter_door, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.emberoot_door, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.frostpine_door, 5, 5);
 
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_fence, 5, 5);
@@ -458,7 +441,6 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_ladder, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.blightwillow_ladder, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.earthshifter_ladder, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.emberoot_ladder, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.frostpine_ladder, 5, 5);
 
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_pressure_plate, 5, 5);

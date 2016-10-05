@@ -43,7 +43,6 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.blightwillow_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.earthshifter_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.vined_earthshifter_leaves, leavesMapper);
-		ModelLoader.setCustomStateMapper(BlocksAether.emberoot_leaves, leavesMapper);
 
 		ModelLoader.setCustomStateMapper(BlocksAether.aether_sapling, new StateMap.Builder().ignore(BlockAetherSapling.PROPERTY_STAGE).build());
 
@@ -53,7 +52,6 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.arkenium_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.blightwillow_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.earthshifter_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
-		ModelLoader.setCustomStateMapper(BlocksAether.emberoot_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.frostpine_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_chest, new StateMap.Builder().ignore(BlockChest.FACING).build());

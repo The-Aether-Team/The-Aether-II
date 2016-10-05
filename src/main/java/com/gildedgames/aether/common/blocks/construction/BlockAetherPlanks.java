@@ -23,10 +23,9 @@ public class BlockAetherPlanks extends Block implements IBlockVariants
 			SKYROOT = new BlockVariant(0, "skyroot"),
 			BLIGHTWILLOW = new BlockVariant(1, "blightwillow"),
 			EARTHSHIFTER = new BlockVariant(2, "earthshifter"),
-			EMBEROOT = new BlockVariant(3, "emberoot"),
-			FROSTPINE = new BlockVariant(4, "frostpine");
+			FROSTPINE = new BlockVariant(3, "frostpine");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", SKYROOT, BLIGHTWILLOW, EARTHSHIFTER, EMBEROOT, FROSTPINE);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", SKYROOT, BLIGHTWILLOW, EARTHSHIFTER, FROSTPINE);
 
 	public BlockAetherPlanks()
 	{
@@ -45,7 +44,7 @@ public class BlockAetherPlanks extends Block implements IBlockVariants
 	{
 		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
 
-		return (variant == EMBEROOT ? (int)(0.6F * 15.0F) : this.lightValue);
+		return (variant == BLIGHTWILLOW ? (int)(0.6F * 15.0F) : this.lightValue);
 	}
 
 	@Override

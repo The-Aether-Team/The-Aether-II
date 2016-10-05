@@ -37,10 +37,9 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 			BLIGHTED = new BlockVariant(4, "blighted"),
 			BLIGHTWILLOW = new BlockVariant(5, "blightwillow"),
 			EARTHSHIFTER = new BlockVariant(6, "earthshifter"),
-			EMBEROOT = new BlockVariant(7, "emberoot"),
-			FROSTPINE = new BlockVariant(8, "frostpine");
+			FROSTPINE = new BlockVariant(7, "frostpine");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BLUE_SKYROOT, GREEN_SKYROOT, DARK_BLUE_SKYROOT, GOLDEN_OAK, BLIGHTED, BLIGHTWILLOW, EARTHSHIFTER, EMBEROOT, FROSTPINE);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BLUE_SKYROOT, GREEN_SKYROOT, DARK_BLUE_SKYROOT, GOLDEN_OAK, BLIGHTED, BLIGHTWILLOW, EARTHSHIFTER, FROSTPINE);
 
 	public static final PropertyInteger PROPERTY_STAGE = PropertyInteger.create("stage", 0, 1);
 
@@ -62,7 +61,7 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	{
 		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
 
-		return (variant == EMBEROOT ? (int)(0.6F * 15.0F) : this.lightValue);
+		return (variant == BLIGHTWILLOW ? (int)(0.6F * 15.0F) : this.lightValue);
 	}
 
 	@Override

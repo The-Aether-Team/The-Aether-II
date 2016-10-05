@@ -1,6 +1,0 @@
-{
-	"variants": {
-		"opaque=false": { "model": "aether:leaves/emberoot_leaves" },
-        "opaque=true":  { "model": "aether:leaves/emberoot_leaves_opaque" }
-	}
-}

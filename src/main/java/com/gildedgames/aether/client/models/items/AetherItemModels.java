@@ -71,7 +71,6 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.frostpine_log, "logs/frostpine_log");
 		registerItemModels(BlocksAether.blightwillow_log, "logs/blightwillow_log");
 		registerItemModels(BlocksAether.earthshifter_log, "logs/earthshifter_log");
-		registerItemModels(BlocksAether.emberoot_log, "logs/emberoot_log");
 
 		registerItemModels(BlocksAether.blue_skyroot_leaves, "leaves/blue_skyroot_leaves");
 		registerItemModels(BlocksAether.green_skyroot_leaves, "leaves/green_skyroot_leaves");
@@ -82,7 +81,6 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.blightwillow_leaves, "leaves/blightwillow_leaves");
 		registerItemModels(BlocksAether.earthshifter_leaves, "leaves/earthshifter_leaves");
 		registerItemModels(BlocksAether.vined_earthshifter_leaves, "leaves/vined_earthshifter_leaves");
-		registerItemModels(BlocksAether.emberoot_leaves, "leaves/emberoot_leaves");
 
 		registerItemModels(BlocksAether.blueberry_bush, new ItemModelBuilder("bushes/")
 				.add(BlockBlueberryBush.BERRY_BUSH_STEM, "blueberry_bush_stem")
@@ -106,7 +104,6 @@ public class AetherItemModels
 				.add(BlockAetherSapling.BLIGHTED.getMeta(), "blighted_sapling")
 				.add(BlockAetherSapling.BLIGHTWILLOW.getMeta(), "blightwillow_sapling")
 				.add(BlockAetherSapling.EARTHSHIFTER.getMeta(), "earthshifter_sapling")
-				.add(BlockAetherSapling.EMBEROOT.getMeta(), "emberoot_sapling")
 				.add(BlockAetherSapling.FROSTPINE.getMeta(), "frostpine_sapling"));
 
 		registerItemModels(BlocksAether.carved_stone, new ItemModelBuilder("carved_stone/")
@@ -141,7 +138,6 @@ public class AetherItemModels
 				.add(BlockAetherCraftingTable.SKYROOT.getMeta(), "skyroot_crafting_table")
 				.add(BlockAetherCraftingTable.BLIGHTWILLOW.getMeta(), "blightwillow_crafting_table")
 				.add(BlockAetherCraftingTable.EARTHSHIFTER.getMeta(), "earthshifter_crafting_table")
-				.add(BlockAetherCraftingTable.EMBEROOT.getMeta(), "emberoot_crafting_table")
 				.add(BlockAetherCraftingTable.FROSTPINE.getMeta(), "frostpine_crafting_table"));
 
 		registerItemModels(ItemsAether.skyroot_bed, "skyroot_bed");
@@ -157,7 +153,6 @@ public class AetherItemModels
 				.add(BlockAetherPlanks.SKYROOT.getMeta(), "skyroot_planks")
 				.add(BlockAetherPlanks.BLIGHTWILLOW.getMeta(), "blightwillow_planks")
 				.add(BlockAetherPlanks.EARTHSHIFTER.getMeta(), "earthshifter_planks")
-				.add(BlockAetherPlanks.EMBEROOT.getMeta(), "emberoot_planks")
 				.add(BlockAetherPlanks.FROSTPINE.getMeta(), "frostpine_planks"));
 
 		registerItemModels(BlocksAether.holystone_brick, "holystone_brick");
@@ -313,7 +308,6 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.arkenium_door, "arkenium_door");
 		registerItemModels(ItemsAether.blightwillow_door, "blightwillow_door");
 		registerItemModels(ItemsAether.earthshifter_door, "earthshifter_door");
-		registerItemModels(ItemsAether.emberoot_door, "emberoot_door");
 		registerItemModels(ItemsAether.frostpine_door, "frostpine_door");
 
 		registerItemModels(BlocksAether.skyroot_trapdoor, "skyroot_trapdoor");
@@ -321,7 +315,6 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.skyroot_ladder, "ladders/skyroot_ladder");
 		registerItemModels(BlocksAether.blightwillow_ladder, "ladders/blightwillow_ladder");
 		registerItemModels(BlocksAether.earthshifter_ladder, "ladders/earthshifter_ladder");
-		registerItemModels(BlocksAether.emberoot_ladder, "ladders/emberoot_ladder");
 		registerItemModels(BlocksAether.frostpine_ladder, "ladders/frostpine_ladder");
 
 		registerItemModels(BlocksAether.skyroot_pressure_plate, "skyroot_pressure_plate");
@@ -471,7 +464,6 @@ public class AetherItemModels
 				.add(BlockWovenSticks.SKYROOT.getMeta(), "woven_skyroot_sticks")
 				.add(BlockWovenSticks.BLIGHTWILLOW.getMeta(), "woven_blightwillow_sticks")
 				.add(BlockWovenSticks.EARTHSHIFTER.getMeta(), "woven_earthshifter_sticks")
-				.add(BlockWovenSticks.EMBEROOT.getMeta(), "woven_emberoot_sticks")
 				.add(BlockWovenSticks.FROSTPINE.getMeta(), "woven_frostpine_sticks"));
 
 		registerItemModels(ItemsAether.moa_egg, "moa_egg/moa_egg");
