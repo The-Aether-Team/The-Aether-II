@@ -1,8 +1,11 @@
 package com.gildedgames.aether.common;
 
+import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
+import com.gildedgames.aether.api.registry.cooler.ICoolerRegistry;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentProperties;
+import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.properties.EntityProperties;
@@ -17,6 +20,7 @@ import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.registry.CoolerRegistry;
 import com.gildedgames.aether.common.registry.EquipmentRegistry;
 import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
@@ -53,7 +57,9 @@ public class CommonProxy
 
 	private final RecipesAether recipeManager = new RecipesAether();
 
-	private final EquipmentRegistry equipmentRegistry = new EquipmentRegistry();
+	private final IEquipmentRegistry equipmentRegistry = new EquipmentRegistry();
+
+	private final ICoolerRegistry coolerRegistry = new CoolerRegistry();
 
 	private final PlacementFlagProvider placementFlagProvider = new PlacementFlagProvider();
 
@@ -147,7 +153,7 @@ public class CommonProxy
 
 		IInventoryEquipment equipment = aePlayer.getEquipmentInventory();
 
-		IEquipmentProperties props = AetherCore.INSTANCE.getEquipmentRegistry().getProperties(stack.getItem());
+		IEquipmentProperties props = AetherAPI.equipment().getProperties(stack.getItem());
 
 		if (props != null)
 		{
@@ -184,9 +190,14 @@ public class CommonProxy
 		return this.recipeManager;
 	}
 
-	public EquipmentRegistry getEquipmentRegistry()
+	public IEquipmentRegistry getEquipmentRegistry()
 	{
 		return this.equipmentRegistry;
+	}
+
+	public ICoolerRegistry getCoolerRegistry()
+	{
+		return this.coolerRegistry;
 	}
 
 	public void setExtendedReachDistance(EntityPlayer entity, float distance)

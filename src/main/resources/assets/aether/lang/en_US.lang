@@ -141,6 +141,7 @@ tile.aether.aether_planks.earthshifter.name=Earthshifter Planks
 tile.aether.aether_planks.frostpine.name=Frostpine Planks
 tile.aether.skyroot_vines.name=Skyroot Vines
 tile.aether.enchanted_skyroot_vines.name=Enchanted Skyroot Vines
+tile.aether.frostpine_cooler.name=Frostpine Cooler
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
@@ -413,6 +414,13 @@ item.aether.glamoured_cockatrice_talons.name=Glamoured Cockatrice Talons
 item.aether.glamoured_taegore_tusk.name=Glamoured Taegore Tusk
 item.aether.glamoured_cockatrice_keratin.name=Glamoured Cockatrice Keratin
 item.aether.irradiated_item.name=Irradiated Item
+item.aether.irradiated_sword.name=Irradiated Sword
+item.aether.irradiated_armor.name=Irradiated Armor
+item.aether.irradiated_tool.name=Irradiated Tool
+item.aether.irradiated_ring.name=Irradiated Ring
+item.aether.irradiated_neckwear.name=Irradiated Neckwear
+item.aether.irradiated_charm.name=Irradiated Charm
+item.aether.irradiated_dust.name=Irradiated Dust
 
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability: 
@@ -562,6 +570,7 @@ container.skyroot_chest=Skyroot Chest
 container.skyroot_double_chest=Large Skyroot Chest
 container.schematicBlock=Replace With (Chosen Randomly)
 container.labyrinth_chest=Labyrinth Chest
+container.frostpine_cooler=Frostpine Cooler
 
 # Accessory slot names
 gui.aether.slot.neckwear=Neckwear
@@ -577,6 +586,15 @@ gui.aether.slot.chestplate=Chestplate
 gui.aether.slot.leggings=Leggings
 gui.aether.slot.boots=Boots
 gui.aether.slot.offhand=Off-Hand
+gui.aether.cooling_strength=Cooling Strength:
+gui.aether.cools_into=Cools Into:
+gui.aether.random_item=Random Item
+gui.aether.random_armor=Random Armor
+gui.aether.random_sword=Random Sword
+gui.aether.random_tool=Random Tool
+gui.aether.random_ring=Random Ring
+gui.aether.random_neckwear=Random Neckwear
+gui.aether.random_charm=Random Charm
 
 #Ability Tooltips
 ability.breatheUnderwater.name=Underwater Breathing

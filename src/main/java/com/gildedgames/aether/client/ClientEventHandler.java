@@ -14,6 +14,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.modules.TeleportingModule;
+import com.gildedgames.aether.common.containers.slots.SlotAmbrosium;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -164,9 +165,28 @@ public class ClientEventHandler
 			{
 				IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
 
-				if (props != null && props.getRarity() != ItemRarity.NONE)
+				if (props != null)
 				{
-					event.getToolTip().add(I18n.format(props.getRarity().getUnlocalizedName()));
+					if (props.getRarity() != ItemRarity.NONE)
+					{
+						event.getToolTip().add(I18n.format(props.getRarity().getUnlocalizedName()));
+					}
+
+					if (props.getCoolingProperties() != null)
+					{
+						int coolingStrength = props.getCoolingProperties().getCoolingStrength(stack);
+						String resultName = props.getCoolingProperties().getResultName(stack);
+
+						if (coolingStrength > 0)
+						{
+							event.getToolTip().add(TextFormatting.DARK_AQUA + I18n.format("gui.aether.cooling_strength") + TextFormatting.RESET + " " + coolingStrength);
+						}
+
+						if (resultName != null)
+						{
+							event.getToolTip().add(TextFormatting.DARK_RED + I18n.format("gui.aether.cools_into") + TextFormatting.RESET + " " + I18n.format(resultName));
+						}
+					}
 				}
 			}
 
@@ -304,5 +324,6 @@ public class ClientEventHandler
 	public void onTextureStitchPre(TextureStitchEvent.Pre event)
 	{
 		SlotEquipment.registerIcons(event);
+		SlotAmbrosium.registerIcons(event);
 	}
 }

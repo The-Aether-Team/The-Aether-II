@@ -11,7 +11,10 @@ import java.util.List;
  */
 public interface IItemPropertiesCapability
 {
+
 	IEquipmentProperties getProperties();
+
+	CoolingProperties getCoolingProperties();
 
 	/**
 	 * Helper method for {@link IEquipmentProperties#getRarity()}

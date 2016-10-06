@@ -2,6 +2,7 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.IAetherServices;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
+import com.gildedgames.aether.api.registry.cooler.ICoolerRegistry;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.world.TeleporterAether;
@@ -122,4 +123,11 @@ public class AetherCore implements IAetherServices
 	{
 		return AetherCore.PROXY.getEquipmentRegistry();
 	}
+
+	@Override
+	public ICoolerRegistry getCoolerRegistry()
+	{
+		return AetherCore.PROXY.getCoolerRegistry();
+	}
+
 }

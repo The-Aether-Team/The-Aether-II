@@ -1,14 +1,18 @@
 package com.gildedgames.aether.common.items;
 
+import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
+import com.gildedgames.aether.api.capabilites.items.properties.CoolingProperties;
+import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
 import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentType;
 import com.gildedgames.aether.api.capabilites.items.properties.ItemRarity;
-import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.effects.processors.*;
 import com.gildedgames.aether.common.capabilities.entity.effects.rules.*;
+import com.gildedgames.aether.common.crafting.loot.IItemSelector;
 import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import com.gildedgames.aether.common.registry.minecraft.MaterialsAether;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
@@ -28,6 +32,9 @@ import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
 import com.gildedgames.aether.common.items.weapons.ItemVampireBlade;
 import com.gildedgames.aether.common.items.weapons.crossbow.*;
 import com.gildedgames.aether.common.items.weapons.swords.*;
+import com.gildedgames.aether.common.util.Constraint;
+import com.gildedgames.aether.common.util.RandomCraftedItemSelector;
+import com.gildedgames.aether.common.util.RandomItemSelector;
 import com.google.common.collect.Lists;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -46,6 +53,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
+import java.util.Random;
 
 public class ItemsAether
 {
@@ -227,7 +235,7 @@ public class ItemsAether
 
 	public static Item cockatrice_talons, cockatrice_keratin, taegore_tusk, glamoured_cockatrice_keratin;
 
-	public static Item irradiated_item;
+	public static Item irradiated_item, irradiated_sword, irradiated_armor, irradiated_tool, irradiated_ring, irradiated_neckwear, irradiated_charm, irradiated_dust;
 
 	public static void preInit()
 	{
@@ -566,173 +574,344 @@ public class ItemsAether
 		cockatrice_talons = registerItem("cockatrice_talons", new Item(), CreativeTabsAether.tabMaterials);
 		taegore_tusk = registerItem("taegore_tusk", new Item(), CreativeTabsAether.tabMaterials);
 
-		irradiated_item = registerItem("irradiated_item", new ItemIrradiated(), CreativeTabsAether.tabMaterials);
+		irradiated_item = registerItem("irradiated_item", new ItemIrradiated(new RandomItemSelector(new Constraint()
+		{
+			@Override
+			public boolean accept(ItemStack stack)
+			{
+				return !(stack.getItem() instanceof ItemIrradiated);
+			}
+		})).setMaxStackSize(1), CreativeTabsAether.tabMaterials);
+
+		irradiated_sword = registerItem("irradiated_sword", new ItemIrradiated(new RandomItemSelector(new Constraint()
+		{
+			@Override
+			public boolean accept(ItemStack stack)
+			{
+				return stack.getUnlocalizedName().contains("sword") && !(stack.getItem() instanceof ItemIrradiated);
+			}
+		})).setMaxStackSize(1), CreativeTabsAether.tabMaterials);
+
+		irradiated_armor = registerItem("irradiated_armor", new ItemIrradiated(new RandomItemSelector(new Constraint()
+		{
+			@Override
+			public boolean accept(ItemStack stack)
+			{
+				return stack.getItem() instanceof ItemArmor;
+			}
+		})).setMaxStackSize(1), CreativeTabsAether.tabMaterials);
+
+		irradiated_tool = registerItem("irradiated_tool", new ItemIrradiated(new RandomItemSelector(new Constraint()
+		{
+			@Override
+			public boolean accept(ItemStack stack)
+			{
+				return stack.getItem() instanceof ItemTool;
+			}
+		})).setMaxStackSize(1), CreativeTabsAether.tabMaterials);
+
+		irradiated_ring = registerItem("irradiated_ring", new ItemIrradiated(new RandomItemSelector(new Constraint()
+		{
+			@Override
+			public boolean accept(ItemStack stack)
+			{
+				IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
+
+				return props != null && props.getEquipmentType() == ItemEquipmentType.RING;
+			}
+		})).setMaxStackSize(1), CreativeTabsAether.tabMaterials);
+
+		irradiated_neckwear = registerItem("irradiated_neckwear", new ItemIrradiated(new RandomItemSelector(new Constraint()
+		{
+			@Override
+			public boolean accept(ItemStack stack)
+			{
+				IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
+
+				return props != null && props.getEquipmentType() == ItemEquipmentType.NECKWEAR;
+			}
+		})).setMaxStackSize(1), CreativeTabsAether.tabMaterials);
+
+		irradiated_charm = registerItem("irradiated_charm", new ItemIrradiated(new RandomItemSelector(new Constraint()
+		{
+			@Override
+			public boolean accept(ItemStack stack)
+			{
+				IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
+
+				return props != null && props.getEquipmentType() == ItemEquipmentType.CHARM;
+			}
+		})).setMaxStackSize(1), CreativeTabsAether.tabMaterials);
+
+		irradiated_dust = registerItem("irradiated_dust", new Item(), CreativeTabsAether.tabMaterials);
 
 		glamoured_cockatrice_keratin = registerItem("glamoured_cockatrice_keratin", new ItemGlamoured().setMaxStackSize(1), CreativeTabsAether.tabCharms);
 
-		IEquipmentRegistry equipmentRegistry = AetherCore.INSTANCE.getEquipmentRegistry();
+		final IItemSelector selector = new RandomCraftedItemSelector();
 
-		equipmentRegistry.register(ItemsAether.iron_ring, ItemRarity.NONE, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.gold_ring, ItemRarity.NONE, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.zanite_ring, ItemRarity.NONE, ItemEquipmentType.RING);
+		class CoolingProps implements CoolingProperties
+		{
+			@Override
+			public int getCoolingStrength(ItemStack stack)
+			{
+				if (stack != null)
+				{
+					if (stack.getItem() == ItemsAether.icestone)
+					{
+						return 3;
+					}
+				}
 
-		equipmentRegistry.register(ItemsAether.zanite_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.gravitite_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.valkyrie_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.neptune_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.phoenix_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.leather_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.iron_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.gold_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.chain_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
-		equipmentRegistry.register(ItemsAether.diamond_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
+				return 0;
+			}
+
+			@Override
+			public int getCoolingThreshold(ItemStack stack)
+			{
+				if (stack != null)
+				{
+					if (stack.getItem() instanceof ItemIrradiated)
+					{
+						return 4000;
+					}
+				}
+
+				return 0;
+			}
+
+			@Override
+			public ItemStack getResultWhenCooled(ItemStack stack, Random rand)
+			{
+				if (stack != null)
+				{
+					if (stack.getItem() instanceof ItemIrradiated)
+					{
+						ItemIrradiated irradiated = (ItemIrradiated)stack.getItem();
+
+						return irradiated.getItemSelector().getRandomItem(rand);
+					}
+				}
+
+				return null;
+			}
+
+			@Override
+			public String getResultName(ItemStack stack)
+			{
+				if (stack != null)
+				{
+					if (stack.getItem() == ItemsAether.irradiated_item)
+					{
+						return "gui.aether.random_item";
+					}
+
+					if (stack.getItem() == ItemsAether.irradiated_sword)
+					{
+						return "gui.aether.random_sword";
+					}
+
+					if (stack.getItem() == ItemsAether.irradiated_armor)
+					{
+						return "gui.aether.random_armor";
+					}
+
+					if (stack.getItem() == ItemsAether.irradiated_tool)
+					{
+						return "gui.aether.random_tool";
+					}
+
+					if (stack.getItem() == ItemsAether.irradiated_ring)
+					{
+						return "gui.aether.random_ring";
+					}
+
+					if (stack.getItem() == ItemsAether.irradiated_neckwear)
+					{
+						return "gui.aether.random_neckwear";
+					}
+
+					if (stack.getItem() == ItemsAether.irradiated_charm)
+					{
+						return "gui.aether.random_charm";
+					}
+				}
+
+				return null;
+			}
+		};
+
+		final CoolingProps coolingProps = new CoolingProps();
+
+		AetherAPI.cooler().register(ItemsAether.icestone, coolingProps);
+		AetherAPI.cooler().register(ItemsAether.irradiated_item, coolingProps);
+		AetherAPI.cooler().register(ItemsAether.irradiated_sword, coolingProps);
+		AetherAPI.cooler().register(ItemsAether.irradiated_armor, coolingProps);
+		AetherAPI.cooler().register(ItemsAether.irradiated_tool, coolingProps);
+		AetherAPI.cooler().register(ItemsAether.irradiated_ring, coolingProps);
+		AetherAPI.cooler().register(ItemsAether.irradiated_neckwear, coolingProps);
+		AetherAPI.cooler().register(ItemsAether.irradiated_charm, coolingProps);
+
+		AetherAPI.equipment().register(ItemsAether.iron_ring, ItemRarity.NONE, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.gold_ring, ItemRarity.NONE, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.zanite_ring, ItemRarity.NONE, ItemEquipmentType.RING);
+
+		AetherAPI.equipment().register(ItemsAether.zanite_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
+		AetherAPI.equipment().register(ItemsAether.gravitite_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
+		AetherAPI.equipment().register(ItemsAether.valkyrie_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
+		AetherAPI.equipment().register(ItemsAether.neptune_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
+		AetherAPI.equipment().register(ItemsAether.phoenix_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
+		AetherAPI.equipment().register(ItemsAether.leather_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
+		AetherAPI.equipment().register(ItemsAether.iron_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
+		AetherAPI.equipment().register(ItemsAether.gold_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
+		AetherAPI.equipment().register(ItemsAether.chain_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
+		AetherAPI.equipment().register(ItemsAether.diamond_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
 
 		/** ARTIFACTS **/
 
-		equipmentRegistry.register(ItemsAether.gravitite_core, ItemRarity.MYTHIC, ItemEquipmentType.ARTIFACT);
-		equipmentRegistry.register(ItemsAether.valkyrie_wings, ItemRarity.MYTHIC, ItemEquipmentType.ARTIFACT);
+		AetherAPI.equipment().register(ItemsAether.gravitite_core, ItemRarity.MYTHIC, ItemEquipmentType.ARTIFACT);
+		AetherAPI.equipment().register(ItemsAether.valkyrie_wings, ItemRarity.MYTHIC, ItemEquipmentType.ARTIFACT);
 
 		/** RELICS **/
 
-		equipmentRegistry.register(ItemsAether.iron_bubble, ItemRarity.COMMON, ItemEquipmentType.RELIC);
+		AetherAPI.equipment().register(ItemsAether.iron_bubble, ItemRarity.COMMON, ItemEquipmentType.RELIC);
 
-		equipmentRegistry.register(ItemsAether.sunlit_tome, ItemRarity.RARE, ItemEquipmentType.RELIC);
-		equipmentRegistry.register(ItemsAether.moonlit_tome, ItemRarity.RARE, ItemEquipmentType.RELIC);
-		equipmentRegistry.register(ItemsAether.primal_totem_of_survival, ItemRarity.RARE, ItemEquipmentType.RELIC);
-		equipmentRegistry.register(ItemsAether.primal_totem_of_rage, ItemRarity.RARE, ItemEquipmentType.RELIC);
-		equipmentRegistry.register(ItemsAether.divine_beacon, ItemRarity.RARE, ItemEquipmentType.RELIC);
-		equipmentRegistry.register(ItemsAether.regeneration_stone, ItemRarity.RARE, ItemEquipmentType.RELIC);
+		AetherAPI.equipment().register(ItemsAether.sunlit_tome, ItemRarity.RARE, ItemEquipmentType.RELIC);
+		AetherAPI.equipment().register(ItemsAether.moonlit_tome, ItemRarity.RARE, ItemEquipmentType.RELIC);
+		AetherAPI.equipment().register(ItemsAether.primal_totem_of_survival, ItemRarity.RARE, ItemEquipmentType.RELIC);
+		AetherAPI.equipment().register(ItemsAether.primal_totem_of_rage, ItemRarity.RARE, ItemEquipmentType.RELIC);
+		AetherAPI.equipment().register(ItemsAether.divine_beacon, ItemRarity.RARE, ItemEquipmentType.RELIC);
+		AetherAPI.equipment().register(ItemsAether.regeneration_stone, ItemRarity.RARE, ItemEquipmentType.RELIC);
 
-		equipmentRegistry.register(ItemsAether.phoenix_rune, ItemRarity.EPIC, ItemEquipmentType.RELIC);
-		equipmentRegistry.register(ItemsAether.daggerfrost_rune, ItemRarity.EPIC, ItemEquipmentType.RELIC);
-		equipmentRegistry.register(ItemsAether.sunlit_scroll, ItemRarity.EPIC, ItemEquipmentType.RELIC);
-		equipmentRegistry.register(ItemsAether.moonlit_scroll, ItemRarity.EPIC, ItemEquipmentType.RELIC);
+		AetherAPI.equipment().register(ItemsAether.phoenix_rune, ItemRarity.EPIC, ItemEquipmentType.RELIC);
+		AetherAPI.equipment().register(ItemsAether.daggerfrost_rune, ItemRarity.EPIC, ItemEquipmentType.RELIC);
+		AetherAPI.equipment().register(ItemsAether.sunlit_scroll, ItemRarity.EPIC, ItemEquipmentType.RELIC);
+		AetherAPI.equipment().register(ItemsAether.moonlit_scroll, ItemRarity.EPIC, ItemEquipmentType.RELIC);
 
 		/** NECKWEAR **/
 
-		equipmentRegistry.register(ItemsAether.iron_pendant, ItemRarity.NONE, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.gold_pendant, ItemRarity.NONE, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.zanite_pendant, ItemRarity.NONE, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.iron_pendant, ItemRarity.NONE, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.gold_pendant, ItemRarity.NONE, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.zanite_pendant, ItemRarity.NONE, ItemEquipmentType.NECKWEAR);
 
-		equipmentRegistry.register(ItemsAether.ice_pendant, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.zanite_studded_choker, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.lesser_amulet_of_growth, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.hide_gorget, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.fleeting_scarf, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.muggers_cloak, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.ice_pendant, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.zanite_studded_choker, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.lesser_amulet_of_growth, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.hide_gorget, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.fleeting_scarf, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.muggers_cloak, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
 
-		equipmentRegistry.register(ItemsAether.amulet_of_growth, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.arkenium_studded_choker, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.raegorite_gorget, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.gruegar_scarf, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.winged_necklace, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.gust_amulet, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.typhoon_amulet, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.chain_of_sporing_bones, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.molten_amulet, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.granite_studded_choker, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.bandit_shawl, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.amulet_of_growth, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.arkenium_studded_choker, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.raegorite_gorget, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.gruegar_scarf, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.winged_necklace, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.gust_amulet, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.typhoon_amulet, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.chain_of_sporing_bones, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.molten_amulet, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.granite_studded_choker, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.bandit_shawl, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
 
-		equipmentRegistry.register(ItemsAether.moon_sect_warden_gorget, ItemRarity.EPIC, ItemEquipmentType.NECKWEAR);
-		equipmentRegistry.register(ItemsAether.thiefs_gorget, ItemRarity.EPIC, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.moon_sect_warden_gorget, ItemRarity.EPIC, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.thiefs_gorget, ItemRarity.EPIC, ItemEquipmentType.NECKWEAR);
 
-		equipmentRegistry.register(ItemsAether.frostward_scarf, ItemRarity.MYTHIC, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.frostward_scarf, ItemRarity.MYTHIC, ItemEquipmentType.NECKWEAR);
 
 		/** COMPANIONS **/
 
-		equipmentRegistry.register(ItemsAether.pink_baby_swet, ItemRarity.COMMON, ItemEquipmentType.COMPANION);
-		equipmentRegistry.register(ItemsAether.kraisith_capsule, ItemRarity.COMMON, ItemEquipmentType.COMPANION);
-		equipmentRegistry.register(ItemsAether.fangrin_capsule, ItemRarity.COMMON, ItemEquipmentType.COMPANION);
+		AetherAPI.equipment().register(ItemsAether.pink_baby_swet, ItemRarity.COMMON, ItemEquipmentType.COMPANION);
+		AetherAPI.equipment().register(ItemsAether.kraisith_capsule, ItemRarity.COMMON, ItemEquipmentType.COMPANION);
+		AetherAPI.equipment().register(ItemsAether.fangrin_capsule, ItemRarity.COMMON, ItemEquipmentType.COMPANION);
 
-		equipmentRegistry.register(ItemsAether.orb_of_arkenzus, ItemRarity.RARE, ItemEquipmentType.COMPANION);
-		equipmentRegistry.register(ItemsAether.ethereal_stone, ItemRarity.RARE, ItemEquipmentType.COMPANION);
-		equipmentRegistry.register(ItemsAether.fleeting_stone, ItemRarity.RARE, ItemEquipmentType.COMPANION);
-		equipmentRegistry.register(ItemsAether.soaring_stone, ItemRarity.RARE, ItemEquipmentType.COMPANION);
-		equipmentRegistry.register(ItemsAether.frostpine_totem, ItemRarity.RARE, ItemEquipmentType.COMPANION);
+		AetherAPI.equipment().register(ItemsAether.orb_of_arkenzus, ItemRarity.RARE, ItemEquipmentType.COMPANION);
+		AetherAPI.equipment().register(ItemsAether.ethereal_stone, ItemRarity.RARE, ItemEquipmentType.COMPANION);
+		AetherAPI.equipment().register(ItemsAether.fleeting_stone, ItemRarity.RARE, ItemEquipmentType.COMPANION);
+		AetherAPI.equipment().register(ItemsAether.soaring_stone, ItemRarity.RARE, ItemEquipmentType.COMPANION);
+		AetherAPI.equipment().register(ItemsAether.frostpine_totem, ItemRarity.RARE, ItemEquipmentType.COMPANION);
 
-		equipmentRegistry.register(ItemsAether.death_seal, ItemRarity.EPIC, ItemEquipmentType.COMPANION);
+		AetherAPI.equipment().register(ItemsAether.death_seal, ItemRarity.EPIC, ItemEquipmentType.COMPANION);
 
 		/** RINGS **/
-		equipmentRegistry.register(ItemsAether.barbed_iron_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.fleeting_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.lesser_ring_of_growth, ItemRarity.COMMON, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.ring_of_strength, ItemRarity.COMMON, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.swift_ribbon, ItemRarity.COMMON, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.lesser_ring_of_wisdom, ItemRarity.COMMON, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.barbed_iron_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.fleeting_ring, ItemRarity.COMMON, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.lesser_ring_of_growth, ItemRarity.COMMON, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.ring_of_strength, ItemRarity.COMMON, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.swift_ribbon, ItemRarity.COMMON, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.lesser_ring_of_wisdom, ItemRarity.COMMON, ItemEquipmentType.RING);
 
-		equipmentRegistry.register(ItemsAether.bone_ring, ItemRarity.RARE, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.ice_ring, ItemRarity.RARE, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.granite_ring, ItemRarity.RARE, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.gust_ring, ItemRarity.RARE, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.typhoon_ring, ItemRarity.RARE, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.sporing_ring, ItemRarity.RARE, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.ember_ring, ItemRarity.RARE, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.ring_of_growth, ItemRarity.RARE, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.barbed_gold_ring, ItemRarity.RARE, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.winged_ring, ItemRarity.RARE, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.gruegar_ring, ItemRarity.RARE, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.wynd_cluster_ring, ItemRarity.RARE, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.ring_of_wisdom, ItemRarity.RARE, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.bone_ring, ItemRarity.RARE, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.ice_ring, ItemRarity.RARE, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.granite_ring, ItemRarity.RARE, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.gust_ring, ItemRarity.RARE, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.typhoon_ring, ItemRarity.RARE, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.sporing_ring, ItemRarity.RARE, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.ember_ring, ItemRarity.RARE, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.ring_of_growth, ItemRarity.RARE, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.barbed_gold_ring, ItemRarity.RARE, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.winged_ring, ItemRarity.RARE, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.gruegar_ring, ItemRarity.RARE, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.wynd_cluster_ring, ItemRarity.RARE, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.ring_of_wisdom, ItemRarity.RARE, ItemEquipmentType.RING);
 
-		equipmentRegistry.register(ItemsAether.solar_band, ItemRarity.EPIC, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.lunar_band, ItemRarity.EPIC, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.skyroot_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.candy_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.dust_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.mud_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.storm_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.steam_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.arkenium_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.solar_band, ItemRarity.EPIC, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.lunar_band, ItemRarity.EPIC, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.skyroot_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.candy_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.dust_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.mud_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.storm_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.steam_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.arkenium_ring, ItemRarity.EPIC, ItemEquipmentType.RING);
 
-		equipmentRegistry.register(ItemsAether.plague_coil, ItemRarity.MYTHIC, ItemEquipmentType.RING);
-		equipmentRegistry.register(ItemsAether.life_coil, ItemRarity.MYTHIC, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.plague_coil, ItemRarity.MYTHIC, ItemEquipmentType.RING);
+		AetherAPI.equipment().register(ItemsAether.life_coil, ItemRarity.MYTHIC, ItemEquipmentType.RING);
 
 		/** CHARMS **/
-		equipmentRegistry.register(ItemsAether.glamoured_iron_screw, ItemRarity.COMMON, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.white_moa_feather, ItemRarity.COMMON, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.hide_pouch, ItemRarity.COMMON, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.angel_bandage, ItemRarity.COMMON, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.wisdom_bauble, ItemRarity.COMMON, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.swift_rune, ItemRarity.COMMON, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.glamoured_iron_screw, ItemRarity.COMMON, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.white_moa_feather, ItemRarity.COMMON, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.hide_pouch, ItemRarity.COMMON, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.angel_bandage, ItemRarity.COMMON, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.wisdom_bauble, ItemRarity.COMMON, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.swift_rune, ItemRarity.COMMON, ItemEquipmentType.CHARM);
 
-		equipmentRegistry.register(ItemsAether.wisdom_rune, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.glamoured_bone_shard, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.glamoured_holystone_chip, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.glamoured_zephyr_husk, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.glamoured_ice_shard, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.glamoured_blue_swet_jelly, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.glamoured_cockatrice_talons, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.glamoured_coal_ember, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.moa_feather, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.blight_ward, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.glamoured_skyroot_twig, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.glamoured_gold_screw, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.ambrosium_talisman, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.gruegar_pouch, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.soul_shard, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.wynd_cluster, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.glamoured_cockatrice_keratin, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.wisdom_rune, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.glamoured_bone_shard, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.glamoured_holystone_chip, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.glamoured_zephyr_husk, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.glamoured_ice_shard, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.glamoured_blue_swet_jelly, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.glamoured_cockatrice_talons, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.glamoured_coal_ember, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.moa_feather, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.blight_ward, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.glamoured_skyroot_twig, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.glamoured_gold_screw, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.ambrosium_talisman, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.gruegar_pouch, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.soul_shard, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.wynd_cluster, ItemRarity.RARE, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.glamoured_cockatrice_keratin, ItemRarity.RARE, ItemEquipmentType.CHARM);
 
-		equipmentRegistry.register(ItemsAether.glamoured_taegore_tusk, ItemRarity.EPIC, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.glamoured_cockatrice_heart, ItemRarity.EPIC, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.damaged_moa_feather, ItemRarity.EPIC, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.sakura_moa_feather, ItemRarity.EPIC, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.osseous_bane, ItemRarity.EPIC, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.rot_bane, ItemRarity.EPIC, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.butchers_knife, ItemRarity.EPIC, ItemEquipmentType.CHARM);
-		equipmentRegistry.register(ItemsAether.glamoured_aerogel_chip, ItemRarity.EPIC, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.glamoured_taegore_tusk, ItemRarity.EPIC, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.glamoured_cockatrice_heart, ItemRarity.EPIC, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.damaged_moa_feather, ItemRarity.EPIC, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.sakura_moa_feather, ItemRarity.EPIC, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.osseous_bane, ItemRarity.EPIC, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.rot_bane, ItemRarity.EPIC, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.butchers_knife, ItemRarity.EPIC, ItemEquipmentType.CHARM);
+		AetherAPI.equipment().register(ItemsAether.glamoured_aerogel_chip, ItemRarity.EPIC, ItemEquipmentType.CHARM);
 
 		/** OFF-HAND **/
 
-		equipmentRegistry.register(Items.SHIELD, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
-		equipmentRegistry.register(ItemsAether.skyroot_shield, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
-		equipmentRegistry.register(ItemsAether.holystone_shield, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
-		equipmentRegistry.register(ItemsAether.zanite_shield, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
-		equipmentRegistry.register(ItemsAether.arkenium_shield, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
-		equipmentRegistry.register(ItemsAether.gravitite_shield, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
+		AetherAPI.equipment().register(Items.SHIELD, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
+		AetherAPI.equipment().register(ItemsAether.skyroot_shield, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
+		AetherAPI.equipment().register(ItemsAether.holystone_shield, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
+		AetherAPI.equipment().register(ItemsAether.zanite_shield, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
+		AetherAPI.equipment().register(ItemsAether.arkenium_shield, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
+		AetherAPI.equipment().register(ItemsAether.gravitite_shield, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
 
-		equipmentRegistry.register(ItemsAether.bolt, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
-		equipmentRegistry.register(ItemsAether.dart, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
+		AetherAPI.equipment().register(ItemsAether.bolt, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
+		AetherAPI.equipment().register(ItemsAether.dart, ItemRarity.NONE, ItemEquipmentType.OFFHAND);
 
 		class Effects implements ItemEffects.ItemEffectsProvider
 		{

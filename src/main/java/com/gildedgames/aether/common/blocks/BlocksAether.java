@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.blocks;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.blocks.containers.*;
 import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import com.gildedgames.aether.common.blocks.construction.*;
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystoneButton;
@@ -13,10 +14,6 @@ import com.gildedgames.aether.common.blocks.construction.walls.BlockAerogelWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockCustomWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockDivineWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockSkyrootWall;
-import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
-import com.gildedgames.aether.common.blocks.containers.BlockLabyrinthChest;
-import com.gildedgames.aether.common.blocks.containers.BlockSkyrootChest;
-import com.gildedgames.aether.common.blocks.containers.BlockAetherCraftingTable;
 import com.gildedgames.aether.common.blocks.dungeon.BlockDivine;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinth;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthPillar;
@@ -263,6 +260,8 @@ public class BlocksAether
 
 	public static final BlockVine skyroot_vines = new BlockVineNoGrowth(), enchanted_skyroot_vines = new BlockVineNoGrowth();
 
+	public static final Block frostpine_cooler = new BlockFrostpineCooler();
+
 	public static void preInit()
 	{
 		registerBlock("aether_dirt", BlocksAether.aether_dirt.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.aether_dirt));
@@ -422,6 +421,8 @@ public class BlocksAether
 		registerBlock("skyroot_vines", BlocksAether.skyroot_vines.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("enchanted_skyroot_vines", BlocksAether.enchanted_skyroot_vines.setCreativeTab(CreativeTabsAether.tabBlocks));
 
+		registerBlock("frostpine_cooler", BlocksAether.frostpine_cooler.setCreativeTab(CreativeTabsAether.tabBlocks));
+
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_log_wall, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.aether_planks, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_chest, 5, 5);
@@ -447,6 +448,8 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_stairs, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_button, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.woven_sticks, 5, 5);
+
+		Blocks.FIRE.setFireInfo(BlocksAether.frostpine_cooler, 5, 5);
 
 		registerHarvestLevels();
 

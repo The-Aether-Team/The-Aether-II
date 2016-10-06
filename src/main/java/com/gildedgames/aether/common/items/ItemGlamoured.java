@@ -20,7 +20,9 @@ public class ItemGlamoured extends Item
         final RenderItem itemRenderer = Minecraft.getMinecraft().getRenderItem();
         IBakedModel model = itemRenderer.getItemModelMesher().getItemModel(stack);
 
+        GlStateManager.pushMatrix();
         this.renderEffect(model);
+        GlStateManager.popMatrix();
 
         return false;
     }

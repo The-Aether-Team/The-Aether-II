@@ -574,6 +574,16 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.glamoured_cockatrice_keratin, "cockatrice_keratin");
 
 		registerItemModels(ItemsAether.irradiated_item, "irradiated_item");
+		registerItemModels(ItemsAether.irradiated_sword, "irradiated_item");
+		registerItemModels(ItemsAether.irradiated_armor, "irradiated_item");
+		registerItemModels(ItemsAether.irradiated_tool, "irradiated_item");
+		registerItemModels(ItemsAether.irradiated_ring, "irradiated_item");
+		registerItemModels(ItemsAether.irradiated_neckwear, "irradiated_item");
+		registerItemModels(ItemsAether.irradiated_charm, "irradiated_item");
+
+		registerItemModels(ItemsAether.irradiated_dust, "irradiated_dust");
+
+		registerItemModels(BlocksAether.frostpine_cooler, "holystone_furnace/holystone_furnace_unlit");
 
 		ModelLoader.setCustomModelResourceLocation(getItem(BlocksAether.structure_extended), 0, new ModelResourceLocation("structure_block", "inventory"));
 	}

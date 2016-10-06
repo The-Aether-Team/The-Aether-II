@@ -1,69 +1,99 @@
 package com.gildedgames.aether.common.items;
 
-import com.gildedgames.aether.common.items.consumables.ItemContinuumOrbOld;
-import com.gildedgames.aether.common.util.TickTimer;
+import com.gildedgames.aether.common.crafting.loot.IItemSelector;
+import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.List;
 import java.util.Random;
 
 public class ItemIrradiated extends Item
 {
 
+    private static final List<RenderInfo> renders = Lists.newArrayList();
+
     private static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
 
-    private static ItemStack lastStackToRender;
+    private IItemSelector itemSelector;
 
-    private static IBakedModel lastModelToRender;
+    public ItemIrradiated(IItemSelector itemSelector)
+    {
+        this.itemSelector = itemSelector;
+    }
 
-    private static long lastTime = System.currentTimeMillis();
+    public IItemSelector getItemSelector()
+    {
+        return this.itemSelector;
+    }
 
     @Override
     public boolean hasEffect(ItemStack stack)
     {
         final RenderItem itemRenderer = Minecraft.getMinecraft().getRenderItem();
-        final ItemContinuumOrbOld.ContinuumItemSelector selector = new ItemContinuumOrbOld.ContinuumItemSelector();
 
-        long timeDif = System.currentTimeMillis() - lastTime;
-        if (lastStackToRender == null || timeDif >= 500L)
+        RenderInfo renderInfo = null;
+
+        for (RenderInfo render : renders)
+        {
+            if (render.getActualStack() == stack)
+            {
+                renderInfo = render;
+                break;
+            }
+        }
+
+        if (renderInfo == null)
+        {
+            renderInfo = new RenderInfo(stack);
+
+            renderInfo.setLastTime(System.currentTimeMillis());
+
+            renders.add(renderInfo);
+        }
+
+        long timeDif = System.currentTimeMillis() - renderInfo.getLastTime();
+
+        if (renderInfo.getLastStackToRender() == null || timeDif >= 500L)
         {
             Random rand = new Random();
 
             while(true)
             {
-                lastStackToRender = selector.getRandomItem(rand);
+                renderInfo.setLastStackToRender(this.getItemSelector().getRandomItem(rand));
 
-                lastModelToRender = itemRenderer.getItemModelMesher().getItemModel(lastStackToRender);
+                renderInfo.setLastModelToRender(itemRenderer.getItemModelMesher().getItemModel(renderInfo.getLastStackToRender()));
 
-                if (!(lastStackToRender != null && lastStackToRender.getItem() instanceof ItemBlock) && !lastModelToRender.isGui3d())
+                if (!renderInfo.getLastModelToRender().isGui3d())
                 {
                     break;
                 }
             }
 
-            lastTime = System.currentTimeMillis();
+            renderInfo.setLastTime(System.currentTimeMillis());
         }
 
         Minecraft mc = Minecraft.getMinecraft();
+
+        GlStateManager.pushMatrix();
 
         GlStateManager.disableLighting();
 
         mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
-        GlStateManager.pushMatrix();
+        mc.getRenderItem().renderModel(renderInfo.getLastModelToRender(), -0xE0E0E0, stack);
 
-        mc.getRenderItem().renderModel(lastModelToRender, -0xE0E0E0, stack);
+        this.renderEffect(renderInfo.getLastModelToRender(), stack);
+
+        GlStateManager.enableLighting();
 
         GlStateManager.popMatrix();
-
-        this.renderEffect(lastModelToRender, stack);
 
         return false;
     }
@@ -98,6 +128,57 @@ public class ItemIrradiated extends Item
         GlStateManager.depthFunc(515);
         GlStateManager.depthMask(true);
         mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+    }
+
+    private class RenderInfo
+    {
+
+        private ItemStack actualStack, lastStackToRender;
+
+        private IBakedModel lastModelToRender;
+
+        private long lastTime;
+
+        public RenderInfo(ItemStack actualStack)
+        {
+            this.actualStack = actualStack;
+        }
+
+        public long getLastTime()
+        {
+            return this.lastTime;
+        }
+
+        public void setLastTime(long lastTime)
+        {
+            this.lastTime = lastTime;
+        }
+
+        public ItemStack getActualStack()
+        {
+            return this.actualStack;
+        }
+
+        public ItemStack getLastStackToRender()
+        {
+            return lastStackToRender;
+        }
+
+        public IBakedModel getLastModelToRender()
+        {
+            return this.lastModelToRender;
+        }
+
+        public void setLastStackToRender(ItemStack stack)
+        {
+            this.lastStackToRender = stack;
+        }
+
+        public void setLastModelToRender(IBakedModel model)
+        {
+            this.lastModelToRender = model;
+        }
+
     }
 
 }
