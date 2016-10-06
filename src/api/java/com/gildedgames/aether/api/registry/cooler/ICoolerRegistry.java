@@ -1,7 +1,7 @@
 package com.gildedgames.aether.api.registry.cooler;
 
 import com.gildedgames.aether.api.capabilites.items.properties.CoolingProperties;
-import com.sun.istack.internal.Nullable;
+import javax.annotation.Nullable;
 import net.minecraft.item.Item;
 
 public interface ICoolerRegistry
