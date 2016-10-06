@@ -235,7 +235,7 @@ public class ItemsAether
 
 	public static Item cockatrice_talons, cockatrice_keratin, taegore_tusk, glamoured_cockatrice_keratin;
 
-	public static Item irradiated_item, irradiated_sword, irradiated_armor, irradiated_tool, irradiated_ring, irradiated_neckwear, irradiated_charm, irradiated_dust;
+	public static Item irradiated_chunk, irradiated_sword, irradiated_armor, irradiated_tool, irradiated_ring, irradiated_neckwear, irradiated_charm, irradiated_dust;
 
 	public static void preInit()
 	{
@@ -574,7 +574,7 @@ public class ItemsAether
 		cockatrice_talons = registerItem("cockatrice_talons", new Item(), CreativeTabsAether.tabMaterials);
 		taegore_tusk = registerItem("taegore_tusk", new Item(), CreativeTabsAether.tabMaterials);
 
-		irradiated_item = registerItem("irradiated_item", new ItemIrradiated(new RandomItemSelector(new Constraint()
+		irradiated_chunk = registerItem("irradiated_chunk", new ItemIrradiated(new RandomItemSelector(new Constraint()
 		{
 			@Override
 			public boolean accept(ItemStack stack)
@@ -643,11 +643,9 @@ public class ItemsAether
 			}
 		})).setMaxStackSize(1), CreativeTabsAether.tabMaterials);
 
-		irradiated_dust = registerItem("irradiated_dust", new Item(), CreativeTabsAether.tabMaterials);
+		irradiated_dust = registerItem("irradiated_dust", new ItemIrradiatedVisuals(), CreativeTabsAether.tabMaterials);
 
 		glamoured_cockatrice_keratin = registerItem("glamoured_cockatrice_keratin", new ItemGlamoured().setMaxStackSize(1), CreativeTabsAether.tabCharms);
-
-		final IItemSelector selector = new RandomCraftedItemSelector();
 
 		class CoolingProps implements CoolingProperties
 		{
@@ -700,7 +698,7 @@ public class ItemsAether
 			{
 				if (stack != null)
 				{
-					if (stack.getItem() == ItemsAether.irradiated_item)
+					if (stack.getItem() == ItemsAether.irradiated_chunk)
 					{
 						return "gui.aether.random_item";
 					}
@@ -743,7 +741,7 @@ public class ItemsAether
 		final CoolingProps coolingProps = new CoolingProps();
 
 		AetherAPI.cooler().register(ItemsAether.icestone, coolingProps);
-		AetherAPI.cooler().register(ItemsAether.irradiated_item, coolingProps);
+		AetherAPI.cooler().register(ItemsAether.irradiated_chunk, coolingProps);
 		AetherAPI.cooler().register(ItemsAether.irradiated_sword, coolingProps);
 		AetherAPI.cooler().register(ItemsAether.irradiated_armor, coolingProps);
 		AetherAPI.cooler().register(ItemsAether.irradiated_tool, coolingProps);

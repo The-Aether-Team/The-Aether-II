@@ -573,13 +573,13 @@ public class AetherItemModels
 
 		registerItemModels(ItemsAether.glamoured_cockatrice_keratin, "cockatrice_keratin");
 
-		registerItemModels(ItemsAether.irradiated_item, "irradiated_item");
-		registerItemModels(ItemsAether.irradiated_sword, "irradiated_item");
-		registerItemModels(ItemsAether.irradiated_armor, "irradiated_item");
-		registerItemModels(ItemsAether.irradiated_tool, "irradiated_item");
-		registerItemModels(ItemsAether.irradiated_ring, "irradiated_item");
-		registerItemModels(ItemsAether.irradiated_neckwear, "irradiated_item");
-		registerItemModels(ItemsAether.irradiated_charm, "irradiated_item");
+		registerItemModels(ItemsAether.irradiated_chunk, "irradiated_chunk");
+		registerItemModels(ItemsAether.irradiated_sword, "irradiated_sword");
+		registerItemModels(ItemsAether.irradiated_armor, "irradiated_armor");
+		registerItemModels(ItemsAether.irradiated_tool, "irradiated_tool");
+		registerItemModels(ItemsAether.irradiated_ring, "irradiated_ring");
+		registerItemModels(ItemsAether.irradiated_neckwear, "irradiated_neckwear");
+		registerItemModels(ItemsAether.irradiated_charm, "irradiated_charm");
 
 		registerItemModels(ItemsAether.irradiated_dust, "irradiated_dust");
 
