@@ -9,18 +9,18 @@ import com.gildedgames.util.modules.ui.data.AssetLocation;
 import com.gildedgames.util.modules.ui.data.rect.Dim2D;
 import com.gildedgames.util.modules.ui.event.view.MouseEventGui;
 import com.gildedgames.util.modules.ui.graphics.Graphics2D;
-import com.gildedgames.util.modules.ui.input.*;
-import com.gildedgames.util.modules.ui.util.*;
+import com.gildedgames.util.modules.ui.input.ButtonState;
+import com.gildedgames.util.modules.ui.input.InputProvider;
+import com.gildedgames.util.modules.ui.input.MouseButton;
+import com.gildedgames.util.modules.ui.input.MouseInput;
+import com.gildedgames.util.modules.ui.input.MouseInputPool;
 import com.gildedgames.util.modules.ui.util.Button;
-import com.gildedgames.util.modules.ui.util.decorators.ScrollableGui;
+import com.gildedgames.util.modules.ui.util.InputHelper;
+import com.gildedgames.util.modules.ui.util.Text;
+import com.gildedgames.util.modules.ui.util.TextureElement;
 import com.gildedgames.util.modules.ui.util.decorators.ScrollingGui;
-import com.sun.corba.se.spi.orbutil.fsm.Input;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiMainMenu;
 
 import java.awt.*;
-
-import static java.awt.SystemColor.text;
 
 public class AetherMenu extends GuiFrame
 {
