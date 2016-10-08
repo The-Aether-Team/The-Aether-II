@@ -122,9 +122,11 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 			if (fillStack != null)
 			{
 				PlayerUtil.fillBucketInHand(player, stack, fillStack);
+
+				return EnumActionResult.SUCCESS;
 			}
 
-			return EnumActionResult.SUCCESS;
+			return result;
 		}
 
 		return result;
