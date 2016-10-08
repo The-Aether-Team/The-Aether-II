@@ -156,7 +156,7 @@ public class CommonEvents
 
 		if (entity instanceof IAnimatedEntity)
 		{
-			IAnimatedEntity animated = (IAnimatedEntity)entity;
+			IAnimatedEntity animated = (IAnimatedEntity) entity;
 
 			for (Animation anim : animated.getProjectInfo().anims)
 			{

@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common;
 
+import java.lang.reflect.Field;
+
 public class ReflectionAether
 {
 
@@ -60,4 +62,33 @@ public class ReflectionAether
 
 	public static final ReflectionEntry MAIN_MODEL = new ReflectionEntry("mainModel");
 
+	public static Field getField(Class clazz, String... names)
+	{
+		for (Field field : clazz.getFields())
+		{
+			for (String name : names)
+			{
+				if (field.getName().equals(name))
+				{
+					return field;
+				}
+			}
+		}
+
+		return null;
+	}
+
+	public static Object getValue(Field field, Object obj)
+	{
+		try
+		{
+			return field.get(obj);
+		}
+		catch (IllegalAccessException e)
+		{
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 }

@@ -14,7 +14,7 @@ public class RenderTabula extends RenderLiving<EntityLiving>
 
 	public RenderTabula(RenderManager renderManager, ResourceLocation texture, ResourceLocation model)
 	{
-		super(renderManager, new ModelTabula(ImportList.createProjectFromFile(ImportList.getFile(model))), 1f);
+		super(renderManager, new ModelTabula(ImportList.createProjectFromResource(model)), 1f);
 
 		this.texture = texture;
 		this.model = model;

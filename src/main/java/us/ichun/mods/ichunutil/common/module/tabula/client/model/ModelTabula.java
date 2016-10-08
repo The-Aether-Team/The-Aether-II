@@ -1,14 +1,14 @@
 package us.ichun.mods.ichunutil.common.module.tabula.client.model;
 
-import us.ichun.mods.ichunutil.common.module.tabula.common.project.ProjectInfo;
-import us.ichun.mods.ichunutil.common.module.tabula.common.project.components.AnimationComponent;
-import us.ichun.mods.ichunutil.common.module.tabula.common.project.components.CubeGroup;
-import us.ichun.mods.ichunutil.common.module.tabula.common.project.components.CubeInfo;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.entity.Entity;
+import us.ichun.mods.ichunutil.common.module.tabula.common.project.ProjectInfo;
 import us.ichun.mods.ichunutil.common.module.tabula.common.project.components.Animation;
+import us.ichun.mods.ichunutil.common.module.tabula.common.project.components.AnimationComponent;
+import us.ichun.mods.ichunutil.common.module.tabula.common.project.components.CubeGroup;
+import us.ichun.mods.ichunutil.common.module.tabula.common.project.components.CubeInfo;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,182 +23,184 @@ import java.util.Map;
 public class ModelTabula extends ModelBase
 {
 
-    public ArrayList<CubeInfo> cubes;
+	public ArrayList<CubeInfo> cubes;
 
-    public ModelTabula(ProjectInfo projectInfo)
-    {
-        this.textureHeight = projectInfo.textureHeight;
-        this.textureWidth = projectInfo.textureWidth;
+	public ModelTabula(ProjectInfo projectInfo)
+	{
+		this.textureHeight = projectInfo.textureHeight;
+		this.textureWidth = projectInfo.textureWidth;
 
-        this.cubes = new ArrayList<CubeInfo>();
+		this.cubes = new ArrayList<>();
 
-        for(int i = 0; i < projectInfo.cubeGroups.size(); i++)
-        {
-            createGroupCubes(projectInfo.cubeGroups.get(i));
-        }
+		for (int i = 0; i < projectInfo.cubeGroups.size(); i++)
+		{
+			this.createGroupCubes(projectInfo.cubeGroups.get(i));
+		}
 
-        for(int i = 0 ; i < projectInfo.cubes.size(); i++)
-        {
-            projectInfo.cubes.get(i).createModel(this);
-            cubes.add(projectInfo.cubes.get(i));
-        }
-    }
+		for (int i = 0; i < projectInfo.cubes.size(); i++)
+		{
+			projectInfo.cubes.get(i).createModel(this);
+			this.cubes.add(projectInfo.cubes.get(i));
+		}
+	}
 
-    private CubeInfo getFromName(String name)
-    {
-        for (CubeInfo info : this.cubes)
-        {
-            if (info.name.equals(name))
-            {
-                return info;
-            }
-        }
+	private CubeInfo getFromName(String name)
+	{
+		for (CubeInfo info : this.cubes)
+		{
+			if (info.name.equals(name))
+			{
+				return info;
+			}
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    @Override
-    public void render(Entity ent, float f, float f1, float f2, float f3, float f4, float f5)
-    {
-        IAnimatedEntity animated = (IAnimatedEntity)ent;
+	@Override
+	public void render(Entity ent, float f, float f1, float f2, float f3, float f4, float f5)
+	{
+		IAnimatedEntity animated = (IAnimatedEntity) ent;
 
-        for(Animation anim : animated.getProjectInfo().anims)
-        {
-            for(Map.Entry<String, ArrayList<AnimationComponent>> e : anim.sets.entrySet())
-            {
-                for(CubeInfo cube : this.cubes)
-                {
-                    if(cube.identifier.equals(e.getKey()))
-                    {
-                        ArrayList<AnimationComponent> components = e.getValue();
-                        Collections.sort(components);
+		for (Animation anim : animated.getProjectInfo().anims)
+		{
+			for (Map.Entry<String, ArrayList<AnimationComponent>> e : anim.sets.entrySet())
+			{
+				for (CubeInfo cube : this.cubes)
+				{
+					if (cube.identifier.equals(e.getKey()))
+					{
+						ArrayList<AnimationComponent> components = e.getValue();
 
-                        for(AnimationComponent comp : components)
-                        {
-                            if(!comp.hidden)
-                            {
-                                comp.animate(cube, anim.playTime);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+						Collections.sort(components);
 
-        render(f5, false, false, 1F, 1F, 1F, 1F, animated.getProjectInfo());
+						for (AnimationComponent comp : components)
+						{
+							if (!comp.hidden)
+							{
+								comp.animate(cube, anim.playTime);
+							}
+						}
+					}
+				}
+			}
+		}
 
-        for(Animation anim : animated.getProjectInfo().anims)
-        {
-            for (Map.Entry<String, ArrayList<AnimationComponent>> e : anim.sets.entrySet())
-            {
-                for (CubeInfo cube : this.cubes)
-                {
-                    if (cube.identifier.equals(e.getKey()))
-                    {
-                        ArrayList<AnimationComponent> components = e.getValue();
-                        Collections.sort(components);
+		this.render(f5, false, false, 1F, 1F, 1F, 1F, animated.getProjectInfo());
 
-                        for (AnimationComponent comp : components)
-                        {
-                            if (!comp.hidden)
-                            {
-                                comp.reset(cube, anim.playTime);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+		for (Animation anim : animated.getProjectInfo().anims)
+		{
+			for (Map.Entry<String, ArrayList<AnimationComponent>> e : anim.sets.entrySet())
+			{
+				for (CubeInfo cube : this.cubes)
+				{
+					if (cube.identifier.equals(e.getKey()))
+					{
+						ArrayList<AnimationComponent> components = e.getValue();
 
-    public void render(float f5, boolean useTexture, boolean useOpacity, ProjectInfo projectInfo)
-    {
-        render(f5, useTexture, useOpacity, 1F, 1F, 1F, 1F, projectInfo);
-    }
+						Collections.sort(components);
 
-    public void render(float f5, boolean useTexture, boolean useOpacity, float r, float g, float b, float alpha, ProjectInfo projectInfo)
-    {
-        if(useTexture && projectInfo.bufferedTexture != null)
-        {
-            if(projectInfo.bufferedTextureId == -1)
-            {
-                projectInfo.bufferedTextureId = TextureUtil.uploadTextureImage(TextureUtil.glGenTextures(), projectInfo.bufferedTexture);
-            }
-            GlStateManager.bindTexture(projectInfo.bufferedTextureId);
-        }
+						for (AnimationComponent comp : components)
+						{
+							if (!comp.hidden)
+							{
+								comp.reset(cube, anim.playTime);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 
-        GlStateManager.pushMatrix();
+	public void render(float f5, boolean useTexture, boolean useOpacity, ProjectInfo projectInfo)
+	{
+		this.render(f5, useTexture, useOpacity, 1F, 1F, 1F, 1F, projectInfo);
+	}
 
-        GlStateManager.scale(1D / projectInfo.scale[0], 1D / projectInfo.scale[1], 1D / projectInfo.scale[2]);
+	public void render(float f5, boolean useTexture, boolean useOpacity, float r, float g, float b, float alpha, ProjectInfo projectInfo)
+	{
+		if (useTexture && projectInfo.bufferedTexture != null)
+		{
+			if (projectInfo.bufferedTextureId == -1)
+			{
+				projectInfo.bufferedTextureId = TextureUtil.uploadTextureImage(TextureUtil.glGenTextures(), projectInfo.bufferedTexture);
+			}
+			GlStateManager.bindTexture(projectInfo.bufferedTextureId);
+		}
 
-        for(CubeInfo info : cubes)
-        {
-            if(info.modelCube != null && !info.hidden)
-            {
-                GlStateManager.pushMatrix();
+		GlStateManager.pushMatrix();
 
-                if(useOpacity)
-                {
-                    GlStateManager.color(r, g, b, alpha * (float)(info.opacity / 100D));
-                }
+		GlStateManager.scale(1D / projectInfo.scale[0], 1D / projectInfo.scale[1], 1D / projectInfo.scale[2]);
 
-                GlStateManager.disableCull();
-                GlStateManager.enableLighting();
+		for (CubeInfo info : this.cubes)
+		{
+			if (info.modelCube != null && !info.hidden)
+			{
+				GlStateManager.pushMatrix();
 
-                GlStateManager.translate(info.modelCube.offsetX, info.modelCube.offsetY, info.modelCube.offsetZ);
-                GlStateManager.translate(info.modelCube.rotationPointX * f5, info.modelCube.rotationPointY * f5, info.modelCube.rotationPointZ * f5);
-                GlStateManager.scale(info.scale[0], info.scale[1], info.scale[2]);
-                GlStateManager.translate(-info.modelCube.offsetX, -info.modelCube.offsetY, -info.modelCube.offsetZ);
-                GlStateManager.translate(-info.modelCube.rotationPointX * f5, -info.modelCube.rotationPointY * f5, -info.modelCube.rotationPointZ * f5);
+				if (useOpacity)
+				{
+					GlStateManager.color(r, g, b, alpha * (float) (info.opacity / 100D));
+				}
 
-                info.modelCube.render(f5);
+				GlStateManager.disableCull();
+				GlStateManager.enableLighting();
 
-                GlStateManager.disableLighting();
+				GlStateManager.translate(info.modelCube.offsetX, info.modelCube.offsetY, info.modelCube.offsetZ);
+				GlStateManager.translate(info.modelCube.rotationPointX * f5, info.modelCube.rotationPointY * f5, info.modelCube.rotationPointZ * f5);
+				GlStateManager.scale(info.scale[0], info.scale[1], info.scale[2]);
+				GlStateManager.translate(-info.modelCube.offsetX, -info.modelCube.offsetY, -info.modelCube.offsetZ);
+				GlStateManager.translate(-info.modelCube.rotationPointX * f5, -info.modelCube.rotationPointY * f5, -info.modelCube.rotationPointZ * f5);
 
-                GlStateManager.enableLighting();
+				info.modelCube.render(f5);
 
-                GlStateManager.popMatrix();
-            }
-        }
+				GlStateManager.disableLighting();
 
-        GlStateManager.popMatrix();
-    }
+				GlStateManager.enableLighting();
 
-    private void createGroupCubes(CubeGroup group)
-    {
-        for(int i = 0; i < group.cubeGroups.size(); i++)
-        {
-            createGroupCubes(group.cubeGroups.get(i));
-        }
-        for(int i = 0; i < group.cubes.size(); i++)
-        {
-            group.cubes.get(i).createModel(this);
-            cubes.add(group.cubes.get(i));
-        }
-    }
+				GlStateManager.popMatrix();
+			}
+		}
 
-    public ArrayList<CubeInfo> getParents(CubeInfo info) // in reverse order.
-    {
-        ArrayList<CubeInfo> parents = new ArrayList<CubeInfo>();
+		GlStateManager.popMatrix();
+	}
 
-        for(CubeInfo cube : cubes)
-        {
-            addIfParent(parents, cube, info);
-        }
+	private void createGroupCubes(CubeGroup group)
+	{
+		for (int i = 0; i < group.cubeGroups.size(); i++)
+		{
+			this.createGroupCubes(group.cubeGroups.get(i));
+		}
+		for (int i = 0; i < group.cubes.size(); i++)
+		{
+			group.cubes.get(i).createModel(this);
+			this.cubes.add(group.cubes.get(i));
+		}
+	}
 
-        return parents;
-    }
+	public ArrayList<CubeInfo> getParents(CubeInfo info) // in reverse order.
+	{
+		ArrayList<CubeInfo> parents = new ArrayList<>();
 
-    public void addIfParent(List<CubeInfo> parents, CubeInfo parent, CubeInfo cube)
-    {
-        for(CubeInfo children : parent.getChildren())
-        {
-            addIfParent(parents, children, cube);
-        }
-        if(parent.getChildren().contains(cube) || !parents.isEmpty() && parent.getChildren().contains(parents.get(parents.size() - 1)))
-        {
-            parents.add(parent);
-        }
-    }
+		for (CubeInfo cube : this.cubes)
+		{
+			this.addIfParent(parents, cube, info);
+		}
+
+		return parents;
+	}
+
+	public void addIfParent(List<CubeInfo> parents, CubeInfo parent, CubeInfo cube)
+	{
+		for (CubeInfo children : parent.getChildren())
+		{
+			this.addIfParent(parents, children, cube);
+		}
+		if (parent.getChildren().contains(cube) || !parents.isEmpty() && parent.getChildren().contains(parents.get(parents.size() - 1)))
+		{
+			parents.add(parent);
+		}
+	}
 
 }
