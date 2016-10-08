@@ -96,16 +96,42 @@ public class ContainerFrostpineCooler extends Container
                 {
                     if (props.getCoolingStrength(itemstack1) > 0)
                     {
-                        if (!this.mergeItemStack(itemstack1, 0, 3, false))
+                        if (!this.mergeItemStack(itemstack1, 0, 4, false))
                         {
-                            return null;
+                            if (index < 34)
+                            {
+                                if (!this.mergeItemStack(itemstack1, 34, 43, false))
+                                {
+                                    return null;
+                                }
+                            }
+                            else
+                            {
+                                if (!this.mergeItemStack(itemstack1, 6, 34, false))
+                                {
+                                    return null;
+                                }
+                            }
                         }
                     }
                     else if (props.getCoolingThreshold(itemstack1) > 0)
                     {
                         if (!this.mergeItemStack(itemstack1, 5, 6, false))
                         {
-                            return null;
+                            if (index < 34)
+                            {
+                                if (!this.mergeItemStack(itemstack1, 34, 43, false))
+                                {
+                                    return null;
+                                }
+                            }
+                            else
+                            {
+                                if (!this.mergeItemStack(itemstack1, 6, 34, false))
+                                {
+                                    return null;
+                                }
+                            }
                         }
                     }
                 }
@@ -113,7 +139,20 @@ public class ContainerFrostpineCooler extends Container
                 {
                     if (!this.mergeItemStack(itemstack1, 4, 5, true))
                     {
-                        return null;
+                        if (index < 34)
+                        {
+                            if (!this.mergeItemStack(itemstack1, 34, 43, false))
+                            {
+                                return null;
+                            }
+                        }
+                        else
+                        {
+                            if (!this.mergeItemStack(itemstack1, 6, 34, false))
+                            {
+                                return null;
+                            }
+                        }
                     }
                 }
                 else
