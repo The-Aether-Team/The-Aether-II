@@ -93,7 +93,7 @@ public abstract class EntityFlyingAnimal extends EntityAetherAnimal implements I
 
 					if (!player.capabilities.isCreativeMode)
 					{
-						player.getActiveItemStack().stackSize--;
+						stack.stackSize--;
 					}
 
 					return true;
