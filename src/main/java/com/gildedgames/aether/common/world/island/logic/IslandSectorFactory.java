@@ -31,11 +31,11 @@ public class IslandSectorFactory
 
 			Rectangle bounds = new Rectangle(x, y, width, height);
 
-			int type = rand.nextInt(4);
+			//int type = rand.nextInt(4);
 
 			IslandBiomeSet set = IslandBiomeSets.HIGHLANDS;
 
-			switch(type)
+			/*switch(type)
 			{
 				case 0:
 				{
@@ -57,7 +57,7 @@ public class IslandSectorFactory
 					set = IslandBiomeSets.BLIGHTED_HIGHLANDS;
 					break;
 				}
-			}
+			}*/
 
 			IslandData islandData = new IslandData(bounds, 40 + rand.nextInt(60), set);
 

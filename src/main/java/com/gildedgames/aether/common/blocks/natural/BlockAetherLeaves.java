@@ -3,6 +3,8 @@ package com.gildedgames.aether.common.blocks.natural;
 import com.gildedgames.aether.client.renderer.particles.ParticleGolden;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -11,6 +13,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -23,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BlockAetherLeaves extends Block implements IShearable
+public class BlockAetherLeaves extends BlockLeaves
 {
 
 	public static final PropertyBool PROPERTY_DECAYABLE = PropertyBool.create("decayable");
@@ -36,7 +40,7 @@ public class BlockAetherLeaves extends Block implements IShearable
 
 	public BlockAetherLeaves(int saplingMeta)
 	{
-		super(Material.LEAVES);
+		super();
 
 		this.saplingMeta = saplingMeta;
 
@@ -282,6 +286,71 @@ public class BlockAetherLeaves extends Block implements IShearable
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+	{
+		return this.superShouldSideBeRendered(blockState, blockAccess, pos, side);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public boolean superShouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+	{
+		AxisAlignedBB axisalignedbb = blockState.getBoundingBox(blockAccess, pos);
+
+		switch (side)
+		{
+			case DOWN:
+
+				if (axisalignedbb.minY > 0.0D)
+				{
+					return true;
+				}
+
+				break;
+			case UP:
+
+				if (axisalignedbb.maxY < 1.0D)
+				{
+					return true;
+				}
+
+				break;
+			case NORTH:
+
+				if (axisalignedbb.minZ > 0.0D)
+				{
+					return true;
+				}
+
+				break;
+			case SOUTH:
+
+				if (axisalignedbb.maxZ < 1.0D)
+				{
+					return true;
+				}
+
+				break;
+			case WEST:
+
+				if (axisalignedbb.minX > 0.0D)
+				{
+					return true;
+				}
+
+				break;
+			case EAST:
+
+				if (axisalignedbb.maxX < 1.0D)
+				{
+					return true;
+				}
+		}
+
+		return !blockAccess.getBlockState(pos.offset(side)).doesSideBlockRendering(blockAccess, pos.offset(side), side.getOpposite());
+	}
+
+	@Override
 	public int damageDropped(IBlockState state)
 	{
 		return 0;
@@ -332,4 +401,11 @@ public class BlockAetherLeaves extends Block implements IShearable
 	{
 		return new BlockStateContainer(this, PROPERTY_DECAYABLE, PROPERTY_CHECK_DECAY);
 	}
+
+	@Override
+	public BlockPlanks.EnumType getWoodType(int meta)
+	{
+		return null;
+	}
+
 }

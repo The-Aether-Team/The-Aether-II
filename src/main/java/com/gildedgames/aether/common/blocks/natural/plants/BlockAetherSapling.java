@@ -39,7 +39,7 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 			EARTHSHIFTER = new BlockVariant(6, "earthshifter"),
 			FROSTPINE = new BlockVariant(7, "frostpine");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BLUE_SKYROOT, GREEN_SKYROOT, DARK_BLUE_SKYROOT, GOLDEN_OAK, BLIGHTED, BLIGHTWILLOW, EARTHSHIFTER, FROSTPINE);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BLUE_SKYROOT, GREEN_SKYROOT, DARK_BLUE_SKYROOT, GOLDEN_OAK);
 
 	public static final PropertyInteger PROPERTY_STAGE = PropertyInteger.create("stage", 0, 1);
 

@@ -48,11 +48,11 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
-		IBlockState block = worldIn.getBlockState(pos.down());
+		//IBlockState block = worldIn.getBlockState(pos.down());
 
 		int type = NORMAL;
 
-		if (block == BlocksAether.aether_grass.getStateFromMeta(BlockAetherGrass.ENCHANTED_AETHER_GRASS.getMeta()))
+		/*if (block == BlocksAether.aether_grass.getStateFromMeta(BlockAetherGrass.ENCHANTED_AETHER_GRASS.getMeta()))
 		{
 			type = ENCHANTED;
 		}
@@ -65,7 +65,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 		if (block == BlocksAether.aether_grass.getStateFromMeta(BlockAetherGrass.BLIGHTED.getMeta()))
 		{
 			type = BLIGHTED;
-		}
+		}*/
 
 		return state.withProperty(TYPE, Integer.valueOf(type));
 	}

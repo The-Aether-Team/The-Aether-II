@@ -59,15 +59,15 @@ public class BiomeFrostpine extends BiomeAetherBase
 			WorldServer worldServer = (WorldServer)world;
 			MinecraftServer server = worldServer.getMinecraftServer();
 
-			this.tree1 = new WorldGenTemplate(this.templatePipeline, MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak1")));
-			this.tree2 = new WorldGenTemplate(this.templatePipeline, MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak2")));
-			this.tree3 = new WorldGenTemplate(this.templatePipeline, MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak3")));
-			this.tree4 = new WorldGenTemplate(this.templatePipeline, MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak4")));
-			this.tree5 = new WorldGenTemplate(this.templatePipeline, MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak5")));
-			this.tree6 = new WorldGenTemplate(this.templatePipeline, MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak6")));
+			this.tree1 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak1")));
+			this.tree2 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak2")));
+			this.tree3 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak3")));
+			this.tree4 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak4")));
+			this.tree5 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak5")));
+			this.tree6 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak6")));
 
-			this.pine1 = new WorldGenTemplate(this.templatePipeline, MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/pine1")));
-			this.pine2 = new WorldGenTemplate(this.templatePipeline, MANAGER.func_189942_b(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/pine2")));
+			this.pine1 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/pine1")));
+			this.pine2 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/pine2")));
 		}
 
 		super.decorate(world, random, pos);

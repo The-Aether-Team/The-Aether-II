@@ -23,11 +23,11 @@ public class BiomesAether
 
 	public static final Biome HIGHLANDS_FOREST = new BiomeHighlandForest();
 
-	public static final Biome ENCHANTED_FOREST = new BiomeEnchantedForest();
+	/*public static final Biome ENCHANTED_FOREST = new BiomeEnchantedForest();
 
 	public static final Biome FROSTPINE = new BiomeFrostpine();
 
-	public static final Biome BLIGHTED_HIGHLANDS = new BiomeBlightedHighlands();
+	public static final Biome BLIGHTED_HIGHLANDS = new BiomeBlightedHighlands();*/
 
 	public static final Biome VOID = new BiomeVoid();
 
@@ -39,11 +39,11 @@ public class BiomesAether
 		GameRegistry.register(HIGHLANDS_CRYSTAL);
 		GameRegistry.register(HIGHLANDS_PLAINS);
 		GameRegistry.register(HIGHLANDS_FOREST);
-		GameRegistry.register(FROSTPINE);
-		GameRegistry.register(BLIGHTED_HIGHLANDS);
+		//GameRegistry.register(FROSTPINE);
+		//GameRegistry.register(BLIGHTED_HIGHLANDS);
 
 		GameRegistry.register(VOID);
-		GameRegistry.register(ENCHANTED_FOREST);
+		//GameRegistry.register(ENCHANTED_FOREST);
 		GameRegistry.register(BIOME_SLIDER_LABYRINTH);
 	}
 }

@@ -110,7 +110,7 @@ public class ItemsAether
 
 	public static ItemSword vampire_blade, candy_cane_sword, valkyrie_lance;
 
-	public static ItemDoor skyroot_door, arkenium_door, blightwillow_door, earthshifter_door, emberoot_door, frostpine_door;
+	public static ItemDoor skyroot_door, arkenium_door, blightwillow_door, earthshifter_door, frostpine_door;
 
 	public static ItemCrossbow skyroot_crossbow;
 
@@ -383,9 +383,9 @@ public class ItemsAether
 
 		skyroot_door = registerItem("skyroot_door_item", new ItemDoor(BlocksAether.skyroot_door), CreativeTabsAether.tabBlocks);
 		arkenium_door = registerItem("arkenium_door_item", new ItemDoor(BlocksAether.arkenium_door), CreativeTabsAether.tabBlocks);
-		blightwillow_door = registerItem("blightwillow_door_item", new ItemDoor(BlocksAether.blightwillow_door), CreativeTabsAether.tabBlocks);
-		earthshifter_door = registerItem("earthshifter_door_item", new ItemDoor(BlocksAether.earthshifter_door), CreativeTabsAether.tabBlocks);
-		frostpine_door = registerItem("frostpine_door_item", new ItemDoor(BlocksAether.frostpine_door), CreativeTabsAether.tabBlocks);
+		//blightwillow_door = registerItem("blightwillow_door_item", new ItemDoor(BlocksAether.blightwillow_door), CreativeTabsAether.tabBlocks);
+		//earthshifter_door = registerItem("earthshifter_door_item", new ItemDoor(BlocksAether.earthshifter_door), CreativeTabsAether.tabBlocks);
+		//frostpine_door = registerItem("frostpine_door_item", new ItemDoor(BlocksAether.frostpine_door), CreativeTabsAether.tabBlocks);
 
 		iron_ring = registerItem("iron_ring", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
 		gold_ring = registerItem("gold_ring", new Item().setMaxStackSize(1), CreativeTabsAether.tabRings);
@@ -559,7 +559,7 @@ public class ItemsAether
 		skyroot_twig = registerItem("skyroot_twig", new Item(), CreativeTabsAether.tabMaterials);
 		blue_skyroot_twig = registerItem("blue_skyroot_twig", new Item(), CreativeTabsAether.tabMaterials);
 		dark_blue_skyroot_twig = registerItem("dark_blue_skyroot_twig", new Item(), CreativeTabsAether.tabMaterials);
-		blighted_twig = registerItem("blighted_twig", new Item(), CreativeTabsAether.tabMaterials);
+		//blighted_twig = registerItem("blighted_twig", new Item(), CreativeTabsAether.tabMaterials);
 		enchanted_skyroot_twig = registerItem("enchanted_skyroot_twig", new Item(), CreativeTabsAether.tabMaterials);
 		cockatrice_heart = registerItem("cockatrice_heart", new Item(), CreativeTabsAether.tabMaterials);
 		holystone_chip = registerItem("holystone_chip", new Item(), CreativeTabsAether.tabMaterials);

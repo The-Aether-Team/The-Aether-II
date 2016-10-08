@@ -284,19 +284,19 @@ public class BlocksAether
 
 		registerBlock("skyroot_log", BlocksAether.skyroot_log.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("golden_oak_log", BlocksAether.golden_oak_log.setCreativeTab(CreativeTabsAether.tabBlocks));
-		registerBlock("frostpine_log", BlocksAether.frostpine_log.setCreativeTab(CreativeTabsAether.tabBlocks));
-		registerBlock("blightwillow_log", BlocksAether.blightwillow_log.setCreativeTab(CreativeTabsAether.tabBlocks).setLightLevel(0.6F));
-		registerBlock("earthshifter_log", BlocksAether.earthshifter_log.setCreativeTab(CreativeTabsAether.tabBlocks));
+		//registerBlock("frostpine_log", BlocksAether.frostpine_log.setCreativeTab(CreativeTabsAether.tabBlocks));
+		//registerBlock("blightwillow_log", BlocksAether.blightwillow_log.setCreativeTab(CreativeTabsAether.tabBlocks).setLightLevel(0.6F));
+		//registerBlock("earthshifter_log", BlocksAether.earthshifter_log.setCreativeTab(CreativeTabsAether.tabBlocks));
 
 		registerBlock("blue_skyroot_leaves", BlocksAether.blue_skyroot_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("green_skyroot_leaves", BlocksAether.green_skyroot_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("dark_blue_skyroot_leaves", BlocksAether.dark_blue_skyroot_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("golden_oak_leaves", BlocksAether.golden_oak_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
-		registerBlock("blighted_leaves", BlocksAether.blighted_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
-		registerBlock("frostpine_leaves", BlocksAether.frostpine_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
-		registerBlock("blightwillow_leaves", BlocksAether.blightwillow_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
-		registerBlock("earthshifter_leaves", BlocksAether.earthshifter_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
-		registerBlock("vined_earthshifter_leaves", BlocksAether.vined_earthshifter_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
+		//registerBlock("blighted_leaves", BlocksAether.blighted_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
+		//registerBlock("frostpine_leaves", BlocksAether.frostpine_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
+		//registerBlock("blightwillow_leaves", BlocksAether.blightwillow_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
+		//registerBlock("earthshifter_leaves", BlocksAether.earthshifter_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
+		//registerBlock("vined_earthshifter_leaves", BlocksAether.vined_earthshifter_leaves.setCreativeTab(CreativeTabsAether.tabBlocks));
 
 		registerBlock("aether_sapling", BlocksAether.aether_sapling.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.aether_sapling));
 
@@ -309,7 +309,7 @@ public class BlocksAether
 		registerBlock("aether_crafting_table", BlocksAether.aether_crafting_table.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.aether_crafting_table));
 
 		registerBlock("blueberry_bush", BlocksAether.blueberry_bush.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.blueberry_bush));
-		registerBlock("enchanted_blueberry_bush", BlocksAether.enchanted_blueberry_bush.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.enchanted_blueberry_bush));
+		//registerBlock("enchanted_blueberry_bush", BlocksAether.enchanted_blueberry_bush.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.enchanted_blueberry_bush));
 
 		registerBlock("orange_tree", BlocksAether.orange_tree.setCreativeTab(CreativeTabsAether.tabBlocks));
 
@@ -335,9 +335,9 @@ public class BlocksAether
 
 		registerBlock("skyroot_door", BlocksAether.skyroot_door);
 		registerBlock("arkenium_door", BlocksAether.arkenium_door);
-		registerBlock("blightwillow_door", BlocksAether.blightwillow_door);
-		registerBlock("earthshifter_door", BlocksAether.earthshifter_door);
-		registerBlock("frostpine_door", BlocksAether.frostpine_door);
+		//registerBlock("blightwillow_door", BlocksAether.blightwillow_door);
+		//registerBlock("earthshifter_door", BlocksAether.earthshifter_door);
+		//registerBlock("frostpine_door", BlocksAether.frostpine_door);
 
 		registerBlock("skyroot_chest", BlocksAether.skyroot_chest.setCreativeTab(CreativeTabsAether.tabBlocks));
 
@@ -354,9 +354,9 @@ public class BlocksAether
 		registerBlock("skyroot_trapdoor", BlocksAether.skyroot_trapdoor.setCreativeTab(CreativeTabsAether.tabBlocks));
 
 		registerBlock("skyroot_ladder", BlocksAether.skyroot_ladder.setCreativeTab(CreativeTabsAether.tabBlocks));
-		registerBlock("blightwillow_ladder", BlocksAether.blightwillow_ladder.setCreativeTab(CreativeTabsAether.tabBlocks).setLightLevel(0.6F));
-		registerBlock("earthshifter_ladder", BlocksAether.earthshifter_ladder.setCreativeTab(CreativeTabsAether.tabBlocks));
-		registerBlock("frostpine_ladder", BlocksAether.frostpine_ladder.setCreativeTab(CreativeTabsAether.tabBlocks));
+		//registerBlock("blightwillow_ladder", BlocksAether.blightwillow_ladder.setCreativeTab(CreativeTabsAether.tabBlocks).setLightLevel(0.6F));
+		//registerBlock("earthshifter_ladder", BlocksAether.earthshifter_ladder.setCreativeTab(CreativeTabsAether.tabBlocks));
+		//registerBlock("frostpine_ladder", BlocksAether.frostpine_ladder.setCreativeTab(CreativeTabsAether.tabBlocks));
 
 		registerBlock("skyroot_button", BlocksAether.skyroot_button.setCreativeTab(CreativeTabsAether.tabBlocks));
 		registerBlock("holystone_button", BlocksAether.holystone_button.setCreativeTab(CreativeTabsAether.tabBlocks));
@@ -420,8 +420,8 @@ public class BlocksAether
 
 		registerBlock("structure_extended", BlocksAether.structure_extended);
 
-		registerBlock("skyroot_vines", BlocksAether.skyroot_vines.setCreativeTab(CreativeTabsAether.tabBlocks));
-		registerBlock("enchanted_skyroot_vines", BlocksAether.enchanted_skyroot_vines.setCreativeTab(CreativeTabsAether.tabBlocks));
+		//registerBlock("skyroot_vines", BlocksAether.skyroot_vines.setCreativeTab(CreativeTabsAether.tabBlocks));
+		//registerBlock("enchanted_skyroot_vines", BlocksAether.enchanted_skyroot_vines.setCreativeTab(CreativeTabsAether.tabBlocks));
 
 		registerBlock("frostpine_cooler", BlocksAether.frostpine_cooler.setCreativeTab(CreativeTabsAether.tabBlocks));
 

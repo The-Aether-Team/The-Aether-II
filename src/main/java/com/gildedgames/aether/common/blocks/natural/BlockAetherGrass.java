@@ -36,7 +36,7 @@ public class BlockAetherGrass extends Block implements IBlockVariants, IGrowable
 			FROSTROOT = new BlockVariant(2, "frostroot"),
 			BLIGHTED = new BlockVariant(3, "blighted");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", AETHER_GRASS, ENCHANTED_AETHER_GRASS, FROSTROOT, BLIGHTED);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", AETHER_GRASS, ENCHANTED_AETHER_GRASS);
 
 	public BlockAetherGrass()
 	{

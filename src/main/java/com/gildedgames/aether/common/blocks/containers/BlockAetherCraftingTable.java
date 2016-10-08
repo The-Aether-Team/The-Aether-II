@@ -32,7 +32,7 @@ public class BlockAetherCraftingTable extends Block implements IBlockVariants
 			EARTHSHIFTER = new BlockVariant(2, "earthshifter"),
 			FROSTPINE = new BlockVariant(3, "frostpine");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", SKYROOT, BLIGHTWILLOW, EARTHSHIFTER, FROSTPINE);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", SKYROOT);
 
 	public BlockAetherCraftingTable()
 	{

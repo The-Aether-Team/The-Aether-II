@@ -25,7 +25,7 @@ public class BlockAetherDirt extends BlockCustom implements IBlockVariants
 
 	public static final BlockVariant DIRT = new BlockVariant(0, "dirt"), PERMAFROST = new BlockVariant(1, "permafrost");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", DIRT, PERMAFROST);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", DIRT);
 
 	public BlockAetherDirt()
 	{

@@ -23,7 +23,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockVariant
 			BURSTBLOSSOM = new BlockVariant(2, "burstblossom"),
 			MOONLIT_BLOOM = new BlockVariant(3, "moonlit_bloom");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", WHITE_ROSE, PURPLE_FLOWER, BURSTBLOSSOM, MOONLIT_BLOOM);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", WHITE_ROSE, PURPLE_FLOWER, BURSTBLOSSOM);
 
 	public BlockAetherFlower()
 	{

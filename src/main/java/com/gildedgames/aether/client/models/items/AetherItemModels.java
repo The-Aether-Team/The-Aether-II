@@ -68,27 +68,27 @@ public class AetherItemModels
 
 		registerItemModels(BlocksAether.skyroot_log, "logs/skyroot_log");
 		registerItemModels(BlocksAether.golden_oak_log, "logs/golden_oak_log");
-		registerItemModels(BlocksAether.frostpine_log, "logs/frostpine_log");
+		/*registerItemModels(BlocksAether.frostpine_log, "logs/frostpine_log");
 		registerItemModels(BlocksAether.blightwillow_log, "logs/blightwillow_log");
-		registerItemModels(BlocksAether.earthshifter_log, "logs/earthshifter_log");
+		registerItemModels(BlocksAether.earthshifter_log, "logs/earthshifter_log");*/
 
 		registerItemModels(BlocksAether.blue_skyroot_leaves, "leaves/blue_skyroot_leaves");
 		registerItemModels(BlocksAether.green_skyroot_leaves, "leaves/green_skyroot_leaves");
 		registerItemModels(BlocksAether.dark_blue_skyroot_leaves, "leaves/dark_blue_skyroot_leaves");
 		registerItemModels(BlocksAether.golden_oak_leaves, "leaves/golden_oak_leaves");
-		registerItemModels(BlocksAether.blighted_leaves, "leaves/blighted_leaves");
+		/*registerItemModels(BlocksAether.blighted_leaves, "leaves/blighted_leaves");
 		registerItemModels(BlocksAether.frostpine_leaves, "leaves/frostpine_leaves");
 		registerItemModels(BlocksAether.blightwillow_leaves, "leaves/blightwillow_leaves");
 		registerItemModels(BlocksAether.earthshifter_leaves, "leaves/earthshifter_leaves");
-		registerItemModels(BlocksAether.vined_earthshifter_leaves, "leaves/vined_earthshifter_leaves");
+		registerItemModels(BlocksAether.vined_earthshifter_leaves, "leaves/vined_earthshifter_leaves");*/
 
 		registerItemModels(BlocksAether.blueberry_bush, new ItemModelBuilder("bushes/")
 				.add(BlockBlueberryBush.BERRY_BUSH_STEM, "blueberry_bush_stem")
 				.add(BlockBlueberryBush.BERRY_BUSH_RIPE, "blueberry_bush_ripe"));
 
-		registerItemModels(BlocksAether.enchanted_blueberry_bush, new ItemModelBuilder("bushes/")
+		/*registerItemModels(BlocksAether.enchanted_blueberry_bush, new ItemModelBuilder("bushes/")
 				.add(BlockBlueberryBush.BERRY_BUSH_STEM, "enchanted_blueberry_bush_stem")
-				.add(BlockBlueberryBush.BERRY_BUSH_RIPE, "enchanted_blueberry_bush_ripe"));
+				.add(BlockBlueberryBush.BERRY_BUSH_RIPE, "enchanted_blueberry_bush_ripe"));*/
 
 		registerItemModels(BlocksAether.aether_flower, new ItemModelBuilder("flowers/")
 				.add(BlockAetherFlower.WHITE_ROSE.getMeta(), "white_rose")
@@ -304,16 +304,16 @@ public class AetherItemModels
 
 		registerItemModels(ItemsAether.skyroot_door, "skyroot_door");
 		registerItemModels(ItemsAether.arkenium_door, "arkenium_door");
-		registerItemModels(ItemsAether.blightwillow_door, "blightwillow_door");
+		/*registerItemModels(ItemsAether.blightwillow_door, "blightwillow_door");
 		registerItemModels(ItemsAether.earthshifter_door, "earthshifter_door");
-		registerItemModels(ItemsAether.frostpine_door, "frostpine_door");
+		registerItemModels(ItemsAether.frostpine_door, "frostpine_door");*/
 
 		registerItemModels(BlocksAether.skyroot_trapdoor, "skyroot_trapdoor");
 
 		registerItemModels(BlocksAether.skyroot_ladder, "ladders/skyroot_ladder");
-		registerItemModels(BlocksAether.blightwillow_ladder, "ladders/blightwillow_ladder");
+		/*registerItemModels(BlocksAether.blightwillow_ladder, "ladders/blightwillow_ladder");
 		registerItemModels(BlocksAether.earthshifter_ladder, "ladders/earthshifter_ladder");
-		registerItemModels(BlocksAether.frostpine_ladder, "ladders/frostpine_ladder");
+		registerItemModels(BlocksAether.frostpine_ladder, "ladders/frostpine_ladder");*/
 
 		registerItemModels(BlocksAether.skyroot_pressure_plate, "skyroot_pressure_plate");
 		registerItemModels(BlocksAether.skyroot_button, "skyroot_button");
@@ -548,8 +548,8 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.muggers_cloak, "accessories/muggers_cloak");
 		registerItemModels(ItemsAether.bandit_shawl, "accessories/bandit_shawl");
 
-		registerItemModels(BlocksAether.skyroot_vines, "vines/skyroot_vines");
-		registerItemModels(BlocksAether.enchanted_skyroot_vines, "vines/enchanted_skyroot_vines");
+		/*registerItemModels(BlocksAether.skyroot_vines, "vines/skyroot_vines");
+		registerItemModels(BlocksAether.enchanted_skyroot_vines, "vines/enchanted_skyroot_vines");*/
 
 		registerItemModels(ItemsAether.iron_screw, "iron_screw");
 		registerItemModels(ItemsAether.gold_screw, "gold_screw");
@@ -557,7 +557,7 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.skyroot_twig, "skyroot_twig");
 		registerItemModels(ItemsAether.blue_skyroot_twig, "blue_skyroot_twig");
 		registerItemModels(ItemsAether.dark_blue_skyroot_twig, "dark_blue_skyroot_twig");
-		registerItemModels(ItemsAether.blighted_twig, "blighted_twig");
+		/*registerItemModels(ItemsAether.blighted_twig, "blighted_twig");*/
 		registerItemModels(ItemsAether.enchanted_skyroot_twig, "enchanted_skyroot_twig");
 		registerItemModels(ItemsAether.cockatrice_heart, "cockatrice_heart");
 		registerItemModels(ItemsAether.holystone_chip, "holystone_chip");

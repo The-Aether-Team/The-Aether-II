@@ -35,7 +35,7 @@ public class IslandBiomeSets
 
 	};
 
-	public static final IslandBiomeSet ENCHANTED_HIGHLANDS = new IslandBiomeSet()
+/*	public static final IslandBiomeSet ENCHANTED_HIGHLANDS = new IslandBiomeSet()
 	{
 
 		@Override
@@ -66,6 +66,6 @@ public class IslandBiomeSets
 			return BiomesAether.BLIGHTED_HIGHLANDS;
 		}
 
-	};
+	};*/
 
 }
