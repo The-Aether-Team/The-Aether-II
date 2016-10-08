@@ -1,6 +1,6 @@
 {
 	"parent": "block/wall_side",
 	"textures": {
-		"wall": "aether:blocks/aether_log/skyroot_log_side"
+		"wall": "aether:blocks/logs/skyroot_log_side"
 	}
 }

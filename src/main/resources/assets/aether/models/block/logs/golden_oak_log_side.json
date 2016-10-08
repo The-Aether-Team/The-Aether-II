@@ -1,0 +1,7 @@
+{
+	"parent": "block/column_side",
+	"textures": {
+		"end": "aether:blocks/logs/golden_oak_log_top",
+		"side": "aether:blocks/logs/golden_oak_log_side"
+	}
+}

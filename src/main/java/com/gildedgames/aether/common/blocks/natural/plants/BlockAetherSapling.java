@@ -1,13 +1,10 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
-import com.gildedgames.aether.common.world.biome.BiomeAether;
-import com.gildedgames.aether.common.world.features.trees.WorldGenSkyrootTree;
-import net.minecraft.block.BlockLog;
+import com.gildedgames.aether.common.world.biome.blighted.BiomeBlightedHighlands;
+import com.gildedgames.aether.common.world.biome.highlands.BiomeHighlands;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -22,7 +19,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.relauncher.Side;
@@ -34,14 +30,16 @@ import java.util.Random;
 public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, IBlockVariants
 {
 	public static final BlockVariant
-			BLUE_SKYROOT_SAPLING = new BlockVariant(0, "blue_skyroot"),
-			GREEN_SKYROOT_SAPLING = new BlockVariant(1, "green_skyroot"),
-			DARK_BLUE_SKYROOT_SAPLING = new BlockVariant(2, "dark_blue_skyroot"),
-			GOLDEN_OAK_SAPLING = new BlockVariant(3, "golden_oak"),
-			PURPLE_CRYSTAL_SAPLING = new BlockVariant(4, "purple_crystal");
+			BLUE_SKYROOT = new BlockVariant(0, "blue_skyroot"),
+			GREEN_SKYROOT = new BlockVariant(1, "green_skyroot"),
+			DARK_BLUE_SKYROOT = new BlockVariant(2, "dark_blue_skyroot"),
+			GOLDEN_OAK = new BlockVariant(3, "golden_oak"),
+			BLIGHTED = new BlockVariant(4, "blighted"),
+			BLIGHTWILLOW = new BlockVariant(5, "blightwillow"),
+			EARTHSHIFTER = new BlockVariant(6, "earthshifter"),
+			FROSTPINE = new BlockVariant(7, "frostpine");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BLUE_SKYROOT_SAPLING, GREEN_SKYROOT_SAPLING, DARK_BLUE_SKYROOT_SAPLING,
-			GOLDEN_OAK_SAPLING, PURPLE_CRYSTAL_SAPLING);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BLUE_SKYROOT, GREEN_SKYROOT, DARK_BLUE_SKYROOT, GOLDEN_OAK, BLIGHTED, BLIGHTWILLOW, EARTHSHIFTER, FROSTPINE);
 
 	public static final PropertyInteger PROPERTY_STAGE = PropertyInteger.create("stage", 0, 1);
 
@@ -55,8 +53,15 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 
 		this.setTickRandomly(true);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, BLUE_SKYROOT_SAPLING)
-				.withProperty(PROPERTY_STAGE, 0));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, BLUE_SKYROOT).withProperty(PROPERTY_STAGE, 0));
+	}
+
+	@Override
+	public int getLightValue(IBlockState state)
+	{
+		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
+
+		return (variant == BLIGHTWILLOW ? (int)(0.6F * 15.0F) : this.lightValue);
 	}
 
 	@Override
@@ -97,25 +102,25 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 
 			WorldGenerator treeGenerator = null;
 
-			if (meta == BLUE_SKYROOT_SAPLING.getMeta())
+			if (meta == BLUE_SKYROOT.getMeta())
 			{
-				treeGenerator = BiomeAether.genBlueSkyrootTree;
+				treeGenerator = BiomeHighlands.genBlueSkyrootTree;
 			}
-			else if (meta == GREEN_SKYROOT_SAPLING.getMeta())
+			else if (meta == GREEN_SKYROOT.getMeta())
 			{
-				treeGenerator = BiomeAether.genGreenSkyrootTree;
+				treeGenerator = BiomeHighlands.genGreenSkyrootTree;
 			}
-			else if (meta == GOLDEN_OAK_SAPLING.getMeta())
+			else if (meta == GOLDEN_OAK.getMeta())
 			{
-				treeGenerator = BiomeAether.genGoldenOakTree;
+				treeGenerator = BiomeHighlands.genGoldenOakTree;
 			}
-			else if (meta == PURPLE_CRYSTAL_SAPLING.getMeta())
+			else if (meta == BLIGHTED.getMeta())
 			{
-				treeGenerator = BiomeAether.genPurpleFruitTree;
+				treeGenerator = BiomeBlightedHighlands.blighted_tree;
 			}
-			else if (meta == DARK_BLUE_SKYROOT_SAPLING.getMeta())
+			else if (meta == DARK_BLUE_SKYROOT.getMeta())
 			{
-				treeGenerator = BiomeAether.genDarkBlueMassiveSkyrootTree;
+				treeGenerator = BiomeBlightedHighlands.dark_blue_tree;
 			}
 
 			if (treeGenerator != null)
@@ -139,8 +144,7 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta & 7))
-				.withProperty(PROPERTY_STAGE, (meta & 8) >> 3);
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta & 7)).withProperty(PROPERTY_STAGE, (meta & 8) >> 3);
 	}
 
 	@Override

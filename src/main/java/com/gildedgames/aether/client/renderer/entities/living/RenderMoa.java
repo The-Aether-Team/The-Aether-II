@@ -5,9 +5,16 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
 import com.gildedgames.aether.common.genes.moa.MoaGenePool;
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.util.core.client.SpriteGeneric;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
@@ -33,10 +40,16 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 	public static ResourceLocation TONGUE = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/tongue.png");
 
 	public static ResourceLocation SADDLE = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/saddle.png");
+
+	public static final ResourceLocation AECHOR_PETAL_TEXTURE = new ResourceLocation("aether", "textures/items/consumables/aechor_petal.png");
+
+	public static final SpriteGeneric SPRITE = new SpriteGeneric("aechor_petal.png", 16, 16);
 	
 	public RenderMoa(RenderManager manager)
 	{
 		super(manager, new ModelMoa(), 1.0F);
+
+		SPRITE.initSprite(16, 16, 0, 0, false);
 	}
 
 	protected float getWingRotation(EntityMoa moa, float f)
@@ -225,6 +238,12 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 	@Override
 	public void doRender(EntityMoa entity, double d, double d1, double d2, float f, float f1)
 	{
+		if (entity.isHungry())
+		{
+			this.renderLivingLabel(entity, "Hungry", d, d1 + 0.15D, d2, 64);
+			this.drawAechorPetal(d, d1 + entity.height + 0.8D, d2, 0.5D);
+		}
+
 		super.doRender(entity, d, d1, d2, f, f1);
 	}
 
@@ -233,4 +252,40 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 	{
 		return null;
 	}
+
+	public void drawAechorPetal(double x, double y, double z, double scale)
+	{
+		GL11.glPushMatrix();
+
+		Tessellator tesselator = Tessellator.getInstance();
+
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glTranslatef((float) x, (float) y, (float) z);
+		GL11.glScaled(scale, scale, scale);
+
+		this.bindTexture(AECHOR_PETAL_TEXTURE);
+		this.renderEntity(tesselator.getBuffer(), SPRITE);
+
+		tesselator.draw();
+
+		GL11.glPopMatrix();
+	}
+
+	private void renderEntity(VertexBuffer renderer, TextureAtlasSprite icon)
+	{
+		float f = icon.getMinU();
+		float f1 = icon.getMaxU();
+		float f2 = icon.getMinV();
+		float f3 = icon.getMaxV();
+
+		GL11.glRotatef(180f + Minecraft.getMinecraft().getRenderManager().playerViewY, 0.0F, -1.0F, 0.0F);
+
+		renderer.begin(7, DefaultVertexFormats.POSITION_TEX_NORMAL);
+
+		renderer.pos(-0.5D, -0.25D, 0.0D).tex((double) f, (double) f3).normal(0.0F, 1.0F, 0.0F).endVertex();
+		renderer.pos(0.5D, -0.25D, 0.0D).tex((double) f1, (double) f3).normal(0.0F, 1.0F, 0.0F).endVertex();
+		renderer.pos(0.5D, 0.75D, 0.0D).tex((double) f1, (double) f2).normal(0.0F, 1.0F, 0.0F).endVertex();
+		renderer.pos(-0.5D, 0.75D, 0.0D).tex((double) f, (double) f2).normal(0.0F, 1.0F, 0.0F).endVertex();
+	}
+
 }

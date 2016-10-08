@@ -1,6 +1,8 @@
 {
 	"variants": {
-        "enchanted=false": { "model": "aether:tall_aether_grass/normal" },
-        "enchanted=true":  { "model": "aether:tall_aether_grass/enchanted" }
+        "type=0": { "model": "aether:tall_aether_grass/normal" },
+        "type=1":  { "model": "aether:tall_aether_grass/enchanted" },
+        "type=2":  { "model": "aether:tall_aether_grass/frostroot" },
+        "type=3":  { "model": "aether:tall_aether_grass/blighted" }
     }
 }

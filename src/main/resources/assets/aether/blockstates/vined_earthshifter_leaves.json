@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"opaque=false": { "model": "aether:leaves/vined_earthshifter_leaves" },
+        "opaque=true":  { "model": "aether:leaves/vined_earthshifter_leaves_opaque" }
+	}
+}

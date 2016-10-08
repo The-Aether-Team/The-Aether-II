@@ -11,6 +11,7 @@ import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.genes.util.GeneUtil;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
+import com.gildedgames.aether.common.util.TickTimer;
 import com.google.common.collect.Sets;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -53,11 +54,19 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 	private static final DataParameter<Float> AIRBORNE_TIME = EntityDataManager.createKey(EntityMoa.class, DataSerializers.FLOAT);
 
+	private static final DataParameter<Integer> FOOD_REQUIRED = EntityDataManager.createKey(EntityMoa.class, DataSerializers.VARINT);
+
+	private static final DataParameter<Integer> FOOD_EATEN = EntityDataManager.createKey(EntityMoa.class, DataSerializers.VARINT);
+
+	private static final DataParameter<Boolean> IS_HUNGRY = EntityDataManager.createKey(EntityMoa.class, DataSerializers.BOOLEAN);
+
 	private IMountProcessor mountProcessor = new FlyingMount(this);
 
 	public float wingRotation, destPos, prevDestPos, prevWingRotation;
 
 	public int ticksUntilFlap;
+
+	private TickTimer hungryTimer = new TickTimer();
 
 	private EntityGroup pack;
 
@@ -73,7 +82,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 		this.familyNest = new MoaNest(world);
 
-		this.setSize(1.0F, 2.0F);
+		this.setSize(1.2F, 2.2F);
 		this.stepHeight = 1.0F;
 	}
 
@@ -96,7 +105,14 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	{
 		this(world, familyNest);
 
-		this.getGenePool().transformFromParents(GeneUtil.getRandomSeed(world), fatherSeed, motherSeed);
+		if (fatherSeed == motherSeed)
+		{
+			this.getGenePool().transformFromSeed(fatherSeed);
+		}
+		else
+		{
+			this.getGenePool().transformFromParents(GeneUtil.getRandomSeed(world), fatherSeed, motherSeed);
+		}
 	}
 
 	private void initAI()
@@ -142,6 +158,9 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		this.dataManager.register(EntityMoa.GENDER, Boolean.FALSE);
 		this.dataManager.register(EntityMoa.SADDLED, false);
 		this.dataManager.register(EntityMoa.AIRBORNE_TIME, this.maxAirborneTime());
+		this.dataManager.register(EntityMoa.FOOD_REQUIRED, 0);
+		this.dataManager.register(EntityMoa.FOOD_EATEN, 0);
+		this.dataManager.register(EntityMoa.IS_HUNGRY, false);
 	}
 
 	@Override
@@ -151,21 +170,41 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		{
 			if (!player.worldObj.isRemote)
 			{
-				if (!this.isSaddled() && stack != null && stack.getItem() == Items.SADDLE && !this.isChild())
+				if (this.isChild())
 				{
-					this.setIsSaddled(true);
-
-					if (!player.capabilities.isCreativeMode)
+					if (this.isRaisedByPlayer() && stack != null && stack.getItem() == ItemsAether.aechor_petal)
 					{
-						player.getActiveItemStack().stackSize--;
-					}
+						if (!player.capabilities.isCreativeMode)
+						{
+							stack.stackSize--;
+						}
 
-					return true;
+						this.setIsHungry(false);
+						this.hungryTimer.reset();
+
+						this.setHealth(this.getMaxHealth());
+
+						this.setFoodEaten(this.getFoodEaten() + 1);
+
+						return true;
+					}
 				}
 				else
 				{
-					return false;
+					if (!this.isSaddled() && stack != null && stack.getItem() == Items.SADDLE)
+					{
+						this.setIsSaddled(true);
+
+						if (!player.capabilities.isCreativeMode)
+						{
+							stack.stackSize--;
+						}
+
+						return true;
+					}
 				}
+
+				return false;
 			}
 		}
 
@@ -196,6 +235,38 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		this.updateWingRotation();
 
 		this.fallSlowly();
+
+		if (!this.worldObj.isRemote)
+		{
+			if (this.isChild() && this.isRaisedByPlayer())
+			{
+				if (this.getFoodEaten() >= this.getFoodRequired())
+				{
+					this.setGrowingAge(-1);
+				}
+
+				this.hungryTimer.tick();
+
+				if (this.isHungry())
+				{
+					if (this.hungryTimer.getSecondsPassed() > 60)
+					{
+						if (this.hungryTimer.isMultipleOfSeconds(10))
+						{
+							this.attackEntityFrom(DamageSource.starve, 1.0F);
+						}
+					}
+				}
+				else
+				{
+					if (this.hungryTimer.getSecondsPassed() > 10)
+					{
+						this.setIsHungry(true);
+						this.hungryTimer.reset();
+					}
+				}
+			}
+		}
 	}
 
 	private void fallSlowly()
@@ -280,6 +351,9 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		this.familyNest.writeToNBT(nbt);
 
 		nbt.setBoolean("isSaddled", this.isSaddled());
+		nbt.setBoolean("isHungry", this.isHungry());
+		nbt.setInteger("foodRequired", this.getFoodRequired());
+		nbt.setInteger("foodEaten", this.getFoodEaten());
 	}
 
 	@Override
@@ -299,6 +373,9 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		this.familyNest.readFromNBT(nbt);
 
 		this.setIsSaddled(nbt.getBoolean("isSaddled"));
+		this.setIsHungry(nbt.getBoolean("isHungry"));
+		this.setFoodRequired(nbt.getInteger("foodRequired"));
+		this.setFoodEaten(nbt.getInteger("foodEaten"));
 	}
 
 	@Override
@@ -375,6 +452,36 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		this.dataManager.set(EntityMoa.REMAINING_JUMPS, jumps);
 	}
 
+	public int getFoodEaten()
+	{
+		return this.dataManager.get(EntityMoa.FOOD_EATEN);
+	}
+
+	public void setFoodEaten(int foodEaten)
+	{
+		this.dataManager.set(EntityMoa.FOOD_EATEN, foodEaten);
+	}
+
+	public int getFoodRequired()
+	{
+		return this.dataManager.get(EntityMoa.FOOD_REQUIRED);
+	}
+
+	public void setFoodRequired(int foodRequired)
+	{
+		this.dataManager.set(EntityMoa.FOOD_REQUIRED, foodRequired);
+	}
+
+	public boolean isHungry()
+	{
+		return this.dataManager.get(EntityMoa.IS_HUNGRY);
+	}
+
+	public void setIsHungry(boolean flag)
+	{
+		this.dataManager.set(EntityMoa.IS_HUNGRY, flag);
+	}
+
 	public MoaNest getFamilyNest()
 	{
 		return this.familyNest;
@@ -420,10 +527,10 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		{
 			EntityMoa mate = (EntityMoa) matingAnimal;
 
-			if (this.getGender() == AnimalGender.FEMALE)
+			/*if (this.getGender() == AnimalGender.FEMALE)
 			{
 				this.tasks.addTask(2, new AIMoaLayEgg(this, this.getSeed(), mate.getSeed(), 0.35F));
-			}
+			}*/
 
 			this.setGrowingAge(6000);
 			mate.setGrowingAge(6000);

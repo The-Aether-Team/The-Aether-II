@@ -1,17 +1,17 @@
 package com.gildedgames.aether.api.capabilites.items.properties;
 
-import com.gildedgames.aether.api.capabilites.entity.properties.ElementalDamageSource;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentProperties;
 import net.minecraft.item.ItemStack;
-
-import java.util.List;
 
 /**
  * A special capability used to add equipment properties to ItemStacks.
  */
 public interface IItemPropertiesCapability
 {
+
 	IEquipmentProperties getProperties();
+
+	TemperatureProperties getTemperatureProperties();
 
 	/**
 	 * Helper method for {@link IEquipmentProperties#getRarity()}

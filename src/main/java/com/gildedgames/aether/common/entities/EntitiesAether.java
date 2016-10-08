@@ -32,18 +32,19 @@ public class EntitiesAether
 
 	public static void preInit()
 	{
-		registerLivingEntity(EntityPhyg.class, "phyg", 0xCCFFFF, 0xFF9999);
-		registerLivingEntity(EntityFlyingCow.class, "flying_cow", 0xCCFFFF, 0x0066CC);
-		registerLivingEntity(EntityAechorPlant.class, "aechor_plant", 0xCCFFFF, 0xC88FE3);
-		registerLivingEntity(EntityAerbunny.class, "aerbunny", 0xCCFFFF, 0x0066CC);
-		registerLivingEntity(EntityCarrionSprout.class, "carrion_sprout", 0xCCFFFF, 0x5D8BBB);
-		registerLivingEntity(EntityCockatrice.class, "cockatrice", 0xCCFFFF, 0x6b519c);
-		registerLivingEntity(EntityRam.class, "ram", 0xCCFFFF, 0xCCCCFF);
+		registerLivingEntity(EntityPhyg.class, "phyg", 0xfcb6bd, 0xfde27a);
+		registerLivingEntity(EntityFlyingCow.class, "flying_cow", 0xbbbbbb, 0xf5db72);
+		registerLivingEntity(EntityAechorPlant.class, "aechor_plant", 0x735190, 0xaed28f);
+		registerLivingEntity(EntityAerbunny.class, "aerbunny", 0xcbe1e6, 0xe08c8c);
+		registerLivingEntity(EntityCarrionSprout.class, "carrion_sprout", 0xcad9e9, 0x93b1d1);
+		registerLivingEntity(EntityCockatrice.class, "cockatrice", 0x6b519c, 0x8ae390);
+		registerLivingEntity(EntityKirrid.class, "kirrid", 0xf3efd8, 0x50575d);
 		registerLivingEntity(EntityMoa.class, "moa");
-		registerLivingEntity(EntityAerwhale.class, "aerwhale", 0xCCFFFF, 0xCCCCFF);
-		registerLivingEntity(EntityZephyr.class, "zephyr", 0xCCFFFF, 0xCCCCFF);
-		registerLivingEntity(EntityTempest.class, "tempest", 0xCCFFFF, 0xCCCCFF);
+		registerLivingEntity(EntityAerwhale.class, "aerwhale", 0x86b1c9, 0x8095a1);
+		registerLivingEntity(EntityZephyr.class, "zephyr", 0xb8b5ab, 0x988c65);
+		registerLivingEntity(EntityTempest.class, "tempest", 0x3c464c, 0xc3e6f0);
 		registerLivingEntity(EntitySwet.class, "swet", 0xCCFFFF, 0xCCCCFF);
+		registerLivingEntity(EntityTaegore.class, "taegore", 0x607075, 0xbda54a);
 		registerLivingEntity(EntityDetonationSentry.class, "detonation_sentry", 0x414141, 0x4e9af7);
 		registerLivingEntity(EntityBattleSentry.class, "battle_sentry", 0x414141, 0x4e9af7);
 		registerLivingEntity(EntityTrackingSentry.class, "tracking_sentry", 0x414141, 0x4e9af7);
@@ -79,7 +80,7 @@ public class EntitiesAether
 		manager.registerPerTickEntry(new SpawnEntry(EntityFlyingCow.class, 1, 4, 0.65f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityPhyg.class, 1, 4, 0.35f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityCarrionSprout.class, 2, 3, 0.4f));
-		manager.registerPerTickEntry(new SpawnEntry(EntityRam.class, 3, 5, 0.5f));
+		manager.registerPerTickEntry(new SpawnEntry(EntityKirrid.class, 3, 5, 0.5f));
 		manager.registerPerTickEntry(new SpawnEntry(EntityAerwhale.class, 1, 1, 0.2f, false));
 
 		manager.registerPerTickEntry(new SpawnEntry(EntitySwet.class, 2, 3, 0.5f));

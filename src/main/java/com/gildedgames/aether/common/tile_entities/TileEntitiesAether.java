@@ -15,7 +15,9 @@ public class TileEntitiesAether
 			LABYRINTH_TOTEM = "aether.labyrinth_totem",
 			LABYRINTH_CHEST_ID = "aether.labyrinth_chest",
 			MOA_EGG_ID = "aether.moa_egg",
-			STRUCTURE_EXTENDED_ID = "aether.structure_extended";
+			STRUCTURE_EXTENDED_ID = "aether.structure_extended",
+			FROSTPINE_COOLER_ID = "aether.frostpine_cooler",
+			INCUBATOR_ID = "aether.incubator";
 
 	public static void preInit()
 	{
@@ -28,6 +30,8 @@ public class TileEntitiesAether
 		GameRegistry.registerTileEntity(TileEntityLabyrinthChest.class, LABYRINTH_CHEST_ID);
 		GameRegistry.registerTileEntity(TileEntityMoaEgg.class, MOA_EGG_ID);
 		GameRegistry.registerTileEntity(TileEntityStructureExtended.class, STRUCTURE_EXTENDED_ID);
+		GameRegistry.registerTileEntity(TileEntityFrostpineCooler.class, FROSTPINE_COOLER_ID);
+		GameRegistry.registerTileEntity(TileEntityIncubator.class, INCUBATOR_ID);
 	}
 	
 }

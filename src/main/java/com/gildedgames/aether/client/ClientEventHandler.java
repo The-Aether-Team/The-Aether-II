@@ -14,7 +14,10 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.modules.TeleportingModule;
+import com.gildedgames.aether.common.containers.slots.SlotAmbrosium;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
+import com.gildedgames.aether.common.containers.slots.SlotFlintAndSteel;
+import com.gildedgames.aether.common.containers.slots.SlotMoaEgg;
 import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.AetherMovementPacket;
@@ -168,9 +171,33 @@ public class ClientEventHandler
 			{
 				IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
 
-				if (props != null && props.getRarity() != ItemRarity.NONE)
+				if (props != null)
 				{
-					event.getToolTip().add(I18n.format(props.getRarity().getUnlocalizedName()));
+					if (props.getRarity() != ItemRarity.NONE)
+					{
+						event.getToolTip().add(I18n.format(props.getRarity().getUnlocalizedName()));
+					}
+
+					if (props.getTemperatureProperties() != null)
+					{
+						int temperature = props.getTemperatureProperties().getTemperature(stack);
+						String resultName = props.getTemperatureProperties().getCooledName(stack);
+
+						if (temperature < 0)
+						{
+							event.getToolTip().add(TextFormatting.DARK_AQUA + I18n.format("gui.aether.cooling_strength") + TextFormatting.RESET + " " + Math.abs(temperature));
+						}
+
+						if (temperature > 0)
+						{
+							event.getToolTip().add(TextFormatting.DARK_RED + I18n.format("gui.aether.heating_strength") + TextFormatting.RESET + " " + temperature);
+						}
+
+						if (resultName != null)
+						{
+							event.getToolTip().add(TextFormatting.DARK_RED + I18n.format("gui.aether.cools_into") + TextFormatting.RESET + " " + I18n.format(resultName));
+						}
+					}
 				}
 			}
 
@@ -291,5 +318,8 @@ public class ClientEventHandler
 	public void onTextureStitchPre(TextureStitchEvent.Pre event)
 	{
 		SlotEquipment.registerIcons(event);
+		SlotAmbrosium.registerIcons(event);
+		SlotMoaEgg.registerIcons(event);
+		SlotFlintAndSteel.registerIcons(event);
 	}
 }

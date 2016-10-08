@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.entities.util.MoaNest;
+import com.gildedgames.aether.common.world.GenUtil;
 import com.gildedgames.aether.common.world.features.*;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenPurpleAercloud;
@@ -37,11 +38,11 @@ public class BiomeAetherDecorator
 
 	protected WorldGenAetherTallGrass genAetherGrass;
 
-	protected WorldGenMinable genAmbrosium, genZanite, genGravitite, genContinuum, genIcestone, genArkenium;
+	protected WorldGenMinable genAmbrosium, genZanite, genGravitite, genIcestone, genArkenium;
 
 	protected WorldGenMinable genMossyHolystone;
 
-	protected WorldGenAetherFlowers genPurpleFlowers, genWhiteRoses;
+	protected WorldGenAetherFlowers genPurpleFlowers, genWhiteRoses, genBurstblossom;
 
 	protected WorldGenOrangeTree genOrangeTree;
 
@@ -59,6 +60,8 @@ public class BiomeAetherDecorator
 
 	protected TemplatePipeline templatePipeline;
 
+	public boolean generateBushes = true;
+
 	public BiomeAetherDecorator()
 	{
 		this.genAetherGrass = new WorldGenAetherTallGrass();
@@ -68,7 +71,6 @@ public class BiomeAetherDecorator
 		this.genAmbrosium = new WorldGenMinable(BlocksAether.ambrosium_ore.getDefaultState(), 16, holystoneMatcher);
 		this.genZanite = new WorldGenMinable(BlocksAether.zanite_ore.getDefaultState(), 8, holystoneMatcher);
 		this.genGravitite = new WorldGenMinable(BlocksAether.gravitite_ore.getDefaultState(), 4, holystoneMatcher);
-		this.genContinuum = new WorldGenMinable(BlocksAether.continuum_ore.getDefaultState(), 4, holystoneMatcher);
 		this.genIcestone = new WorldGenMinable(BlocksAether.icestone_ore.getDefaultState(), 10, holystoneMatcher);
 		this.genArkenium = new WorldGenMinable(BlocksAether.arkenium_ore.getDefaultState(), 8, holystoneMatcher);
 
@@ -76,6 +78,7 @@ public class BiomeAetherDecorator
 
 		this.genPurpleFlowers = new WorldGenAetherFlowers(BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER), 64);
 		this.genWhiteRoses = new WorldGenAetherFlowers(BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE), 64);
+		this.genBurstblossom = new WorldGenAetherFlowers(BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.BURSTBLOSSOM), 64);
 
 		this.genOrangeTree = new WorldGenOrangeTree();
 
@@ -126,7 +129,28 @@ public class BiomeAetherDecorator
 			y = random.nextInt(128);
 			z = random.nextInt(16) + 8;
 
-			new MoaNest(world, pos.add(x, y, z)).generate(world, random, 1 + random.nextInt(2), BlocksAether.woven_skyroot_sticks.getDefaultState());
+			new MoaNest(world, pos.add(x, y, z)).generate(world, random, 1 + random.nextInt(2), BlocksAether.woven_sticks.getDefaultState());
+		}
+
+		//Entrance Generator
+		if (random.nextInt(5) == 0)
+		{
+			x = random.nextInt(16) + 8;
+			z = random.nextInt(16) + 8;
+
+			y = GenUtil.getTopBlock(world, new BlockPos(pos.getX() + x, 0, pos.getZ() + z)).getY() + 1;
+
+			final BlockPos totemPos = pos.add(x + 4, y + 2, z + 4);
+
+			this.genSliderLabyrinthEntrance.generate(world, random, pos.add(x, y, z), new Runnable()
+			{
+
+				@Override public void run()
+				{
+					world.setBlockState(totemPos, BlocksAether.labyrinth_totem.getDefaultState());
+				}
+
+			});
 		}
 
 		// Tree Generator
@@ -138,7 +162,10 @@ public class BiomeAetherDecorator
 			WorldGenerator treeGen = genBase.genBigTreeChance(random);
 			BlockPos randPos = world.getHeight(pos.add(x, 0, z));
 
-			treeGen.generate(world, random, randPos);
+			if (treeGen != null)
+			{
+				treeGen.generate(world, random, randPos);
+			}
 		}
 
 		// Orange Tree Generator
@@ -152,13 +179,16 @@ public class BiomeAetherDecorator
 		}
 
 		// Blueberry Bush Generator
-		for (count = 0; count < 2; count++)
+		if (this.generateBushes)
 		{
-			x = random.nextInt(16) + 8;
-			y = random.nextInt(128);
-			z = random.nextInt(16) + 8;
+			for (count = 0; count < 2; count++)
+			{
+				x = random.nextInt(16) + 8;
+				y = random.nextInt(128);
+				z = random.nextInt(16) + 8;
 
-			this.genBlueberryBushes.generate(world, random, pos.add(x, y, z));
+				this.genBlueberryBushes.generate(world, random, pos.add(x, y, z));
+			}
 		}
 
 		// Aether Tall Grass Generator
@@ -194,6 +224,16 @@ public class BiomeAetherDecorator
 			this.genWhiteRoses.generate(world, random, pos.add(x, y, z));
 		}
 
+		// Burstblossom Generator
+		for (count = 0; count < 2; count++)
+		{
+			x = random.nextInt(16) + 8;
+			y = random.nextInt(128);
+			z = random.nextInt(16) + 8;
+
+			this.genBurstblossom.generate(world, random, pos.add(x, y, z));
+		}
+
 		// Quicksoil Generator
 		if (random.nextInt(5) == 0)
 		{
@@ -215,26 +255,6 @@ public class BiomeAetherDecorator
 				}
 			}
 		}
-
-		//Entrance Generator
-		for (int n = 0; n < 60; n++)
-		{
-			x = random.nextInt(16) + 8;
-			y = random.nextInt(128);
-			z = random.nextInt(16) + 8;
-
-			final BlockPos totemPos = pos.add(x + 4, y + 3, z + 4);
-
-			this.genSliderLabyrinthEntrance.generate(world, random, pos.add(x, y, z), new Runnable()
-			{
-
-				@Override public void run()
-				{
-					world.setBlockState(totemPos, BlocksAether.labyrinth_totem.getDefaultState());
-				}
-
-			});
-		}
 		
 		this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));
 
@@ -249,18 +269,6 @@ public class BiomeAetherDecorator
 
 			this.genAetherLakes.generate(world, random, pos.add(x, y, z));
 		}
-	}
-
-	public BlockPos getTopBlock(World world, BlockPos pos)
-	{
-		BlockPos searchPos = new BlockPos(pos.getX(), world.getActualHeight(), pos.getZ());
-
-		while (!world.isAirBlock(searchPos.down()))
-		{
-			searchPos = searchPos.down();
-		}
-
-		return searchPos;
 	}
 
 	private void generateMineable(WorldGenMinable minable, World world, Random random, BlockPos pos, int minY, int maxY, int attempts)
@@ -312,7 +320,6 @@ public class BiomeAetherDecorator
 		this.generateMineable(this.genAmbrosium, world, random, pos, 0, 128, 20);
 		this.generateMineable(this.genZanite, world, random, pos, 0, 64, 15);
 		this.generateMineable(this.genGravitite, world, random, pos, 0, 32, 6);
-		this.generateMineable(this.genContinuum, world, random, pos, 0, 128, 4);
 		this.generateMineable(this.genIcestone, world, random, pos, 0, 128, 10);
 		this.generateMineable(this.genArkenium, world, random, pos, 0, 128, 20);
 		this.generateCaveMineable(this.genMossyHolystone, world, random, pos, 0, 90, 45);

@@ -6,8 +6,6 @@ import com.gildedgames.aether.common.capabilities.entity.effects.AbstractEffectP
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import java.util.List;
 
@@ -17,41 +15,35 @@ public class LeechLifeEffect extends AbstractEffectProcessor<LeechLifeEffect.Ins
 	public static class Instance extends EntityEffectInstance
 	{
 
-		public Instance(double leechAmount, EntityEffectRule... rules)
+		public Instance(double leechChance, EntityEffectRule... rules)
 		{
 			super(rules);
 
-			this.getAttributes().setDouble("leechAmount", leechAmount);
+			this.getAttributes().setDouble("leechChance", leechChance);
 		}
 
-		public double getLeechAmount()
+		public double getChance()
 		{
-			return this.getAttributes().getDouble("leechAmount");
+			return this.getAttributes().getDouble("leechChance");
 		}
 
 		@Override
 		public EntityEffectInstance cloneInstance()
 		{
-			return new Instance(this.getLeechAmount(), this.getRules());
+			return new Instance(this.getChance(), this.getRules());
 		}
 
 	}
 
 	public LeechLifeEffect()
 	{
-		super("ability.leechLife.localizedName", "ability.leechLife.desc");
+		super("ability.leechLife.name", "ability.leechLife.desc1", "ability.leechLife.desc2");
 	}
 
 	@Override
 	public String[] getFormatParameters(Entity source, Instance instance)
 	{
-		double leechAmount = instance.getLeechAmount();
-
-		String prefix = leechAmount > 0 ? (TextFormatting.BLUE + "+") : (TextFormatting.RED + "");
-
-		String par = prefix + (leechAmount == (int) Math.floor(leechAmount) ? String.valueOf((int) Math.floor(leechAmount)) : String.valueOf(leechAmount));
-
-		return new String[] { par };
+		return new String[] { "\u2022" + TextFormatting.ITALIC + " +" + String.valueOf((int) (instance.getChance() * 10.0f)) };
 	}
 
 	@Override
@@ -64,16 +56,21 @@ public class LeechLifeEffect extends AbstractEffectProcessor<LeechLifeEffect.Ins
 
 		EntityLivingBase living = (EntityLivingBase) source;
 
-		double leechTotal = 0.0D;
+		double totalPercent = 0.0D;
 
 		for (Instance instance : all)
 		{
-			leechTotal += instance.getLeechAmount();
+			totalPercent += instance.getChance();
 		}
 
-		if (((EntityLivingBase) source).swingProgressInt <= 2)
+		float chance = (float) living.getRNG().nextInt(10);
+
+		if (chance < totalPercent)
 		{
-			((EntityLivingBase) source).heal((float) leechTotal * 2);
+			if (((EntityLivingBase) source).swingProgressInt <= 2)
+			{
+				((EntityLivingBase) source).heal(amount);
+			}
 		}
 	}
 

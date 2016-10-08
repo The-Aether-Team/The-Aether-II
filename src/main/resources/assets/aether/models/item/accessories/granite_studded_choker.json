@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:gui/slots/slot_neckwear"
+		"layer0": "aether:items/accessories/granite_studded_choker"
 	}
 }

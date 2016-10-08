@@ -1,0 +1,6 @@
+{
+	"parent": "block/cross",
+	"textures": {
+		"cross": "aether:blocks/saplings/blue_skyroot_sapling"
+	}
+}

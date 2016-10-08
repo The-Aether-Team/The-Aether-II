@@ -4,13 +4,13 @@ import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.capabilites.entity.spawning.EntitySpawn;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.entities.living.*;
 import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
 import com.gildedgames.aether.common.entities.living.enemies.EntitySwet;
 import com.gildedgames.aether.common.entities.living.enemies.EntityTempest;
 import com.gildedgames.aether.common.entities.living.enemies.EntityZephyr;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
-import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
 import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.world.spawning.PosCondition;
@@ -59,27 +59,27 @@ public class SpawnRegistry
 	{
 		/** PASSIVE **/
 		SpawnHandler animals = new SpawnHandler("aether_animals").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(200);
-		animals.worldCondition(new CheckDimension(DimensionsAether.AETHER)).condition(new CheckBiome(BiomesAether.BIOME_AETHER));
+		animals.worldCondition(new CheckDimension(DimensionsAether.AETHER));
 
-		PosCondition grassCheck = new CheckBlockStateUnderneath(BlocksAether.aether_grass.getDefaultState());
+		PosCondition grassCheck = new CheckBlockStateUnderneath(BlocksAether.aether_grass.getDefaultState(), BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED_AETHER_GRASS));
 
 		SpawnEntry flying_cow = new SpawnEntry(EntityFlyingCow.class, 10F, 2, 3).conditiion(grassCheck);
-		SpawnEntry ram = new SpawnEntry(EntityRam.class, 10F, 2, 3).conditiion(grassCheck);
+		SpawnEntry ram = new SpawnEntry(EntityKirrid.class, 10F, 2, 3).conditiion(grassCheck);
 		SpawnEntry aerbunny = new SpawnEntry(EntityAerbunny.class, 13F, 3, 5).conditiion(grassCheck);
-		SpawnEntry phyg = new SpawnEntry(EntityPhyg.class, 13F, 2, 3).conditiion(grassCheck);
+		SpawnEntry taegore = new SpawnEntry(EntityTaegore.class, 13F, 2, 3).conditiion(grassCheck);
 		SpawnEntry carrion_sprout = new SpawnEntry(EntityCarrionSprout.class, 10F, 2, 3).conditiion(grassCheck);
 
 		animals.addEntry(flying_cow);
 		animals.addEntry(ram);
 		animals.addEntry(aerbunny);
-		animals.addEntry(phyg);
+		animals.addEntry(taegore);
 		animals.addEntry(carrion_sprout);
 
 		/** HOSTILES **/
 		SpawnHandler hostiles = new SpawnHandler("aether_hostiles").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(1200);
-		hostiles.worldCondition(new CheckDimension(DimensionsAether.AETHER)).condition(new CheckBiome(BiomesAether.BIOME_AETHER));
+		hostiles.worldCondition(new CheckDimension(DimensionsAether.AETHER));
 
-		PosCondition groundCheck = new CheckBlockStateUnderneath(BlocksAether.aether_grass.getDefaultState(), BlocksAether.holystone.getDefaultState());
+		PosCondition groundCheck = new CheckBlockStateUnderneath(BlocksAether.aether_grass.getDefaultState(), BlocksAether.holystone.getDefaultState(), BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED_AETHER_GRASS));
 
 		SpawnEntry zephyr = new SpawnEntry(EntityZephyr.class, 3F, 2, 3, new FlyingPositionSelector()).conditiion(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState()));
 		SpawnEntry tempest = new SpawnEntry(EntityTempest.class, 10F, 2, 3, new FlyingPositionSelector()).conditiion(new CheckTime(CheckTime.Time.NIGHT)).conditiion(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState()));
@@ -95,7 +95,7 @@ public class SpawnRegistry
 
 		/** FLYING **/
 		SpawnHandler flying = new SpawnHandler("aether_flying").chunkArea(9).targetEntityCountPerArea(1).updateFrequencyInTicks(1200);
-		flying.worldCondition(new CheckDimension(DimensionsAether.AETHER)).condition(new CheckBiome(BiomesAether.BIOME_AETHER));
+		flying.worldCondition(new CheckDimension(DimensionsAether.AETHER)).condition(new CheckBiome(BiomesAether.HIGHLANDS));
 
 		SpawnEntry aerwhale = new SpawnEntry(EntityAerwhale.class, 10F, 1, 1, new FlyingPositionSelector()).conditiion(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState()));
 

@@ -2,10 +2,12 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.IAetherServices;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
+import com.gildedgames.aether.api.registry.cooler.ITemperatureRegistry;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.world.TeleporterAether;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
+import com.gildedgames.aether.common.world.island.logic.IslandSectorAccess;
 import com.gildedgames.util.io.ClassSerializer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -58,6 +60,7 @@ public class AetherCore implements IAetherServices
 		AetherCore.CONFIG = new ConfigAether(event.getSuggestedConfigurationFile());
 
 		MinecraftForge.EVENT_BUS.register(AetherCore.CONFIG);
+		MinecraftForge.EVENT_BUS.register(IslandSectorAccess.inst());
 
 		AetherCore.PROXY.preInit(event);
 
@@ -70,6 +73,7 @@ public class AetherCore implements IAetherServices
 		DimensionsAether.onServerStopping(event);
 
 		AetherCore.SPAWN_REGISTRY.write();
+		IslandSectorAccess.inst().onServerStopping(event);
 	}
 
 	@EventHandler
@@ -119,4 +123,11 @@ public class AetherCore implements IAetherServices
 	{
 		return AetherCore.PROXY.getEquipmentRegistry();
 	}
+
+	@Override
+	public ITemperatureRegistry getTemperatureRegistry()
+	{
+		return AetherCore.PROXY.getCoolerRegistry();
+	}
+
 }

@@ -1,0 +1,7 @@
+{
+	"parent": "block/door_top",
+	"textures": {
+		"bottom": "aether:blocks/doors/earthshifter_door_lower",
+		"top": "aether:blocks/doors/earthshifter_door_upper"
+	}
+}

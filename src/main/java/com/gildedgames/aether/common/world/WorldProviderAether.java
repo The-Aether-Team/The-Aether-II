@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.world;
 
-import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.world.chunk.ChunkGeneratorAetherOld;
+import com.gildedgames.aether.common.world.biome.BiomeProviderAether;
+import com.gildedgames.aether.common.world.island.ChunkGeneratorIsland;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -12,7 +12,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -31,7 +30,7 @@ public class WorldProviderAether extends WorldProvider
 	@Override
 	protected void createBiomeProvider()
 	{
-		this.biomeProvider = new BiomeProviderSingle(BiomesAether.BIOME_AETHER);
+		this.biomeProvider = new BiomeProviderAether(this.worldObj);
 	}
 
 	@Override
@@ -43,7 +42,7 @@ public class WorldProviderAether extends WorldProvider
 	@Override
 	public IChunkGenerator createChunkGenerator()
 	{
-		return new ChunkGeneratorAetherOld(this.worldObj, this.worldObj.getSeed());
+		return new ChunkGeneratorIsland(this.worldObj, this.worldObj.getSeed());
 	}
 
 	public BlockPos getTopBlockPos(BlockPos pos)
@@ -198,7 +197,6 @@ public class WorldProviderAether extends WorldProvider
 			return null;
 		}
 	}
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public double getVoidFogYFactor()
@@ -212,4 +210,5 @@ public class WorldProviderAether extends WorldProvider
 	{
 		return -128;
 	}
+
 }

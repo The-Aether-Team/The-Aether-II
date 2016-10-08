@@ -1,19 +1,31 @@
 {
 	"variants": {
 		"variant=blue_skyroot": {
-			"model": "aether:aether_sapling/blue_skyroot_sapling"
+			"model": "aether:saplings/blue_skyroot_sapling"
 		},
 		"variant=green_skyroot": {
-			"model": "aether:aether_sapling/green_skyroot_sapling"
+			"model": "aether:saplings/green_skyroot_sapling"
 		},
 		"variant=dark_blue_skyroot": {
-			"model": "aether:aether_sapling/dark_blue_skyroot_sapling"
+			"model": "aether:saplings/dark_blue_skyroot_sapling"
 		},
 		"variant=golden_oak": {
-			"model": "aether:aether_sapling/golden_oak_sapling"
+			"model": "aether:saplings/golden_oak_sapling"
 		},
-		"variant=purple_crystal": {
-			"model": "aether:aether_sapling/purple_crystal_sapling"
+		"variant=blighted": {
+			"model": "aether:saplings/blighted_sapling"
+		},
+		"variant=blightwillow": {
+			"model": "aether:saplings/blightwillow_sapling"
+		},
+		"variant=earthshifter": {
+			"model": "aether:saplings/earthshifter_sapling"
+		},
+		"variant=emberoot": {
+			"model": "aether:saplings/emberoot_sapling"
+		},
+		"variant=frostpine": {
+			"model": "aether:saplings/frostpine_sapling"
 		}
 	}
 }

@@ -1,22 +1,29 @@
 package com.gildedgames.aether.api;
 
 import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
+import com.gildedgames.aether.api.registry.cooler.ITemperatureRegistry;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
 
 public class AetherAPI
 {
+
 	private static IAetherServices services;
 
 	private static boolean isInitialized = false;
 
-	public static IAltarRecipeRegistry altarRegistry()
+	public static IAltarRecipeRegistry altar()
 	{
 		return AetherAPI.services().getAltarRecipeRegistry();
 	}
 
-	public static IEquipmentRegistry equipmentRegistry()
+	public static IEquipmentRegistry equipment()
 	{
 		return AetherAPI.services().getEquipmentRegistry();
+	}
+
+	public static ITemperatureRegistry temperature()
+	{
+		return AetherAPI.services().getTemperatureRegistry();
 	}
 
 	public static void init(IAetherServices services)

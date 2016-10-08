@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"harvestable=true": {
+			"model": "aether:bushes/enchanted_blueberry_bush_ripe"
+		},
+		"harvestable=false": {
+			"model": "aether:bushes/enchanted_blueberry_bush_stem"
+		}
+	}
+}

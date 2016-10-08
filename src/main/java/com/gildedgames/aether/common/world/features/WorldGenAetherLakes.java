@@ -8,20 +8,18 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
 public class WorldGenAetherLakes extends WorldGenerator
 {
-	private final IBlockState grass;
 
 	private final IBlockState liquid;
 
 	public WorldGenAetherLakes(IBlockState block)
 	{
-		this.grass = BlocksAether.aether_grass.getDefaultState();
-
 		this.liquid = block;
 	}
 
@@ -131,7 +129,9 @@ public class WorldGenAetherLakes extends WorldGenerator
 
 						if (world.getBlockState(nextPos).getBlock() == BlocksAether.aether_dirt && world.getLightFor(EnumSkyBlock.SKY, pos.add(x, y, z)) > 0)
 						{
-							world.setBlockState(nextPos, this.grass, 2);
+							Biome biome = world.getBiome(new BlockPos(pos.getX(), 0, pos.getZ()));
+
+							world.setBlockState(nextPos, biome.topBlock, 2);
 						}
 					}
 				}

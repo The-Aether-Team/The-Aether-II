@@ -44,6 +44,11 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickable
 			return;
 		}
 
+		if (this.playerPlaced)
+		{
+			return;
+		}
+
 		if (this.secondsUntilHatch <= -1)
 		{
 			this.secondsUntilHatch = 100 + this.worldObj.rand.nextInt(100);
@@ -67,7 +72,7 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickable
 	public boolean hatchConditionsMet()
 	{
 		boolean hasWarmth = false;
-		boolean onWovenSticks = this.worldObj.getBlockState(this.getPos().add(0, -1, 0)) == BlocksAether.woven_skyroot_sticks.getDefaultState();
+		boolean onWovenSticks = this.worldObj.getBlockState(this.getPos().add(0, -1, 0)) == BlocksAether.woven_sticks.getDefaultState();
 
 		for (BlockPos pos : BlockPos.getAllInBoxMutable(this.getPos().add(-1, -1, -1), this.getPos().add(1, 1, 1)))
 		{
@@ -128,6 +133,8 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickable
 		this.gender = AnimalGender.get(nbt.getString("creatureGender"));
 
 		this.familyNest.readFromNBT(nbt);
+
+		this.playerPlaced = nbt.getBoolean("playerPlaced");
 	}
 
 	@Override
@@ -149,6 +156,8 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickable
 		}
 
 		this.familyNest.writeToNBT(nbt);
+
+		nbt.setBoolean("playerPlaced", this.playerPlaced);
 
 		return nbt;
 	}

@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/skyroot_door"
+		"layer0": "aether:items/doors/skyroot_door"
 	}
 }

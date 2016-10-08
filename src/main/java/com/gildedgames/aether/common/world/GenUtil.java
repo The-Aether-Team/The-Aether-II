@@ -1,14 +1,51 @@
 package com.gildedgames.aether.common.world;
 
+import com.gildedgames.aether.common.util.OpenSimplexNoise;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.NoiseGeneratorSimplex;
 
 import java.util.Random;
 
 public class GenUtil
 {
+
+	public static BlockPos getTopBlock(World world, BlockPos pos)
+	{
+		BlockPos searchPos = new BlockPos(pos.getX(), world.getActualHeight(), pos.getZ());
+
+		while (world.isAirBlock(searchPos))
+		{
+			if (searchPos.getY() <= 0)
+			{
+				break;
+			}
+
+			searchPos = searchPos.down();
+		}
+
+		return searchPos;
+	}
+
+	public static double octavedNoise(NoiseGeneratorPerlin noise, int octaves, double roughness, double scale, double x, double z)
+	{
+		double noiseSum = 0;
+		double layerFrequency = scale;
+		double layerWeight = 1;
+		double weightSum = 0;
+
+		for (int octave = 0; octave < octaves; octave++)
+		{
+			noiseSum += noise.getValue(x * layerFrequency, z * layerFrequency) * layerWeight;
+			layerFrequency *= 2;
+			weightSum += layerWeight;
+			layerWeight *= roughness;
+		}
+
+		return noiseSum / weightSum;
+	}
 
 	public static double octavedNoise(NoiseGeneratorSimplex noise, int octaves, double roughness, double scale, double x, double z)
 	{
@@ -20,6 +57,42 @@ public class GenUtil
 		for (int octave = 0; octave < octaves; octave++)
 		{
 			noiseSum += noise.getValue(x * layerFrequency, z * layerFrequency) * layerWeight;
+			layerFrequency *= 2;
+			weightSum += layerWeight;
+			layerWeight *= roughness;
+		}
+
+		return noiseSum / weightSum;
+	}
+
+	public static double octavedNoise3D(OpenSimplexNoise noise, int octaves, double roughness, double scale, double x, double y, double z)
+	{
+		double noiseSum = 0;
+		double layerFrequency = scale;
+		double layerWeight = 1;
+		double weightSum = 0;
+
+		for (int octave = 0; octave < octaves; octave++)
+		{
+			noiseSum += noise.eval(x * layerFrequency, y * layerFrequency, z * layerFrequency) * layerWeight;
+			layerFrequency *= 2;
+			weightSum += layerWeight;
+			layerWeight *= roughness;
+		}
+
+		return noiseSum / weightSum;
+	}
+
+	public static double octavedNoise(OpenSimplexNoise noise, int octaves, double roughness, double scale, double x, double z)
+	{
+		double noiseSum = 0;
+		double layerFrequency = scale;
+		double layerWeight = 1;
+		double weightSum = 0;
+
+		for (int octave = 0; octave < octaves; octave++)
+		{
+			noiseSum += noise.eval(x * layerFrequency, z * layerFrequency) * layerWeight;
 			layerFrequency *= 2;
 			weightSum += layerWeight;
 			layerWeight *= roughness;
