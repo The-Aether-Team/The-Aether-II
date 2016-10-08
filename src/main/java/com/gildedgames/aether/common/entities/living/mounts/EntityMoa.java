@@ -523,7 +523,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	@Override
 	public EntityAgeable createChild(EntityAgeable matingAnimal)
 	{
-		if (matingAnimal instanceof EntityMoa)
+		/*if (matingAnimal instanceof EntityMoa)
 		{
 			EntityMoa mate = (EntityMoa) matingAnimal;
 
@@ -540,7 +540,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 			mate.setAttackTarget(null);
 
 			mate.resetInLove();
-		}
+		}*/
 
 		return null;
 	}
