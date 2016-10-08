@@ -173,7 +173,7 @@ public class PlayerAetherEvents
 				NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(event.player, EquipmentModule.getAllEquipment(aePlayer.getEquipmentInventory())), (EntityPlayerMP) event.player);
 			}
 
-			aePlayer.getEquipmentModule().resetEffects();
+			//aePlayer.getEquipmentModule().resetEffects();
 		}
 	}
 
@@ -192,7 +192,7 @@ public class PlayerAetherEvents
 
 			storage.readNBT(AetherCapabilities.PLAYER_DATA, newPlayer, null, state);
 
-			newPlayer.getEquipmentModule().resetEffects();
+			//newPlayer.getEquipmentModule().resetEffects();
 		}
 	}
 
