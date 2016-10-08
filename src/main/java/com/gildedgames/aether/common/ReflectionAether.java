@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class ReflectionAether
 {
@@ -64,7 +66,7 @@ public class ReflectionAether
 
 	public static Field getField(Class clazz, String... names)
 	{
-		for (Field field : clazz.getFields())
+		for (Field field : clazz.getDeclaredFields())
 		{
 			for (String name : names)
 			{
@@ -76,6 +78,60 @@ public class ReflectionAether
 		}
 
 		return null;
+	}
+
+	public static Method getMethod(Class clazz, Class<?>[] args, String... names)
+	{
+		for (Method method : clazz.getDeclaredMethods())
+		{
+			for (String name : names)
+			{
+				if (method.getName().equals(name))
+				{
+					Class<?>[] matching = method.getParameterTypes();
+
+					boolean matches = true;
+
+					if (matching.length != args.length)
+					{
+						matches = false;
+					}
+					else
+					{
+						for (int i = 0; i < args.length; i++)
+						{
+							if (matching[i] != args[i])
+							{
+								matches = false;
+
+								break;
+							}
+						}
+					}
+
+					if (matches)
+					{
+						method.setAccessible(true);
+
+						return method;
+					}
+				}
+			}
+		}
+
+		return null;
+	}
+
+	public static void invokeMethod(Method method, Object obj, Object... args)
+	{
+		try
+		{
+			method.invoke(obj, args);
+		}
+		catch (IllegalAccessException | InvocationTargetException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	public static Object getValue(Field field, Object obj)

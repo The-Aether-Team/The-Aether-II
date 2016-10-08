@@ -50,9 +50,6 @@ dependencies {
 jar {
 	from sourceSets.api.output
 	from sourceSets.main.output
-	manifest {
-		attributes 'FMLAT' : 'aether_at.cfg'
-	}
 }
 
 minecraft {
