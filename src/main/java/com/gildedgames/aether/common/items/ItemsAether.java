@@ -5,14 +5,13 @@ import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
-import com.gildedgames.aether.api.capabilites.items.properties.CoolingProperties;
 import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
 import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentType;
 import com.gildedgames.aether.api.capabilites.items.properties.ItemRarity;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.effects.processors.*;
 import com.gildedgames.aether.common.capabilities.entity.effects.rules.*;
-import com.gildedgames.aether.common.crafting.loot.IItemSelector;
+import com.gildedgames.aether.common.registry.TemperatureHandler;
 import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import com.gildedgames.aether.common.registry.minecraft.MaterialsAether;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
@@ -33,7 +32,6 @@ import com.gildedgames.aether.common.items.weapons.ItemVampireBlade;
 import com.gildedgames.aether.common.items.weapons.crossbow.*;
 import com.gildedgames.aether.common.items.weapons.swords.*;
 import com.gildedgames.aether.common.util.Constraint;
-import com.gildedgames.aether.common.util.RandomCraftedItemSelector;
 import com.gildedgames.aether.common.util.RandomItemSelector;
 import com.google.common.collect.Lists;
 import net.minecraft.creativetab.CreativeTabs;
@@ -53,7 +51,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
-import java.util.Random;
 
 public class ItemsAether
 {
@@ -647,107 +644,22 @@ public class ItemsAether
 
 		glamoured_cockatrice_keratin = registerItem("glamoured_cockatrice_keratin", new ItemGlamoured().setMaxStackSize(1), CreativeTabsAether.tabCharms);
 
-		class CoolingProps implements CoolingProperties
-		{
-			@Override
-			public int getCoolingStrength(ItemStack stack)
-			{
-				if (stack != null)
-				{
-					if (stack.getItem() == ItemsAether.icestone)
-					{
-						return 3;
-					}
-				}
+		final TemperatureHandler temperatureHandler = new TemperatureHandler();
 
-				return 0;
-			}
+		AetherAPI.temperature().register(ItemBlock.getItemFromBlock(Blocks.TORCH), temperatureHandler);
+		AetherAPI.temperature().register(ItemBlock.getItemFromBlock(BlocksAether.ambrosium_torch), temperatureHandler);
+		AetherAPI.temperature().register(ItemsAether.irradiated_dust, temperatureHandler);
 
-			@Override
-			public int getCoolingThreshold(ItemStack stack)
-			{
-				if (stack != null)
-				{
-					if (stack.getItem() instanceof ItemIrradiated)
-					{
-						return 4000;
-					}
-				}
+		AetherAPI.temperature().register(ItemsAether.moa_egg, temperatureHandler);
 
-				return 0;
-			}
-
-			@Override
-			public ItemStack getResultWhenCooled(ItemStack stack, Random rand)
-			{
-				if (stack != null)
-				{
-					if (stack.getItem() instanceof ItemIrradiated)
-					{
-						ItemIrradiated irradiated = (ItemIrradiated)stack.getItem();
-
-						return irradiated.getItemSelector().getRandomItem(rand);
-					}
-				}
-
-				return null;
-			}
-
-			@Override
-			public String getResultName(ItemStack stack)
-			{
-				if (stack != null)
-				{
-					if (stack.getItem() == ItemsAether.irradiated_chunk)
-					{
-						return "gui.aether.random_item";
-					}
-
-					if (stack.getItem() == ItemsAether.irradiated_sword)
-					{
-						return "gui.aether.random_sword";
-					}
-
-					if (stack.getItem() == ItemsAether.irradiated_armor)
-					{
-						return "gui.aether.random_armor";
-					}
-
-					if (stack.getItem() == ItemsAether.irradiated_tool)
-					{
-						return "gui.aether.random_tool";
-					}
-
-					if (stack.getItem() == ItemsAether.irradiated_ring)
-					{
-						return "gui.aether.random_ring";
-					}
-
-					if (stack.getItem() == ItemsAether.irradiated_neckwear)
-					{
-						return "gui.aether.random_neckwear";
-					}
-
-					if (stack.getItem() == ItemsAether.irradiated_charm)
-					{
-						return "gui.aether.random_charm";
-					}
-				}
-
-				return null;
-			}
-		};
-
-		final CoolingProps coolingProps = new CoolingProps();
-
-		AetherAPI.cooler().register(ItemsAether.icestone, coolingProps);
-		AetherAPI.cooler().register(ItemsAether.irradiated_chunk, coolingProps);
-		AetherAPI.cooler().register(ItemsAether.irradiated_sword, coolingProps);
-		AetherAPI.cooler().register(ItemsAether.irradiated_armor, coolingProps);
-		AetherAPI.cooler().register(ItemsAether.irradiated_tool, coolingProps);
-		AetherAPI.cooler().register(ItemsAether.irradiated_ring, coolingProps);
-		AetherAPI.cooler().register(ItemsAether.irradiated_neckwear, coolingProps);
-		AetherAPI.cooler().register(ItemsAether.irradiated_charm, coolingProps);
+		AetherAPI.temperature().register(ItemsAether.icestone, temperatureHandler);
+		AetherAPI.temperature().register(ItemsAether.irradiated_chunk, temperatureHandler);
+		AetherAPI.temperature().register(ItemsAether.irradiated_sword, temperatureHandler);
+		AetherAPI.temperature().register(ItemsAether.irradiated_armor, temperatureHandler);
+		AetherAPI.temperature().register(ItemsAether.irradiated_tool, temperatureHandler);
+		AetherAPI.temperature().register(ItemsAether.irradiated_ring, temperatureHandler);
+		AetherAPI.temperature().register(ItemsAether.irradiated_neckwear, temperatureHandler);
+		AetherAPI.temperature().register(ItemsAether.irradiated_charm, temperatureHandler);
 
 		AetherAPI.equipment().register(ItemsAether.iron_ring, ItemRarity.NONE, ItemEquipmentType.RING);
 		AetherAPI.equipment().register(ItemsAether.gold_ring, ItemRarity.NONE, ItemEquipmentType.RING);

@@ -96,7 +96,14 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	{
 		this(world, familyNest);
 
-		this.getGenePool().transformFromParents(GeneUtil.getRandomSeed(world), fatherSeed, motherSeed);
+		if (fatherSeed == motherSeed)
+		{
+			this.getGenePool().transformFromSeed(fatherSeed);
+		}
+		else
+		{
+			this.getGenePool().transformFromParents(GeneUtil.getRandomSeed(world), fatherSeed, motherSeed);
+		}
 	}
 
 	private void initAI()

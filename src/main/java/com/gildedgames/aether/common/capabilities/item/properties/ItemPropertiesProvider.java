@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.capabilities.item.properties;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
-import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -34,7 +33,7 @@ public class ItemPropertiesProvider implements ICapabilityProvider
 		{
 			if (this.properties == null)
 			{
-				this.properties = new ItemPropertiesImpl(AetherAPI.equipment().getProperties(this.stack.getItem()), AetherAPI.cooler().getProperties(this.stack.getItem()));
+				this.properties = new ItemPropertiesImpl(AetherAPI.equipment().getProperties(this.stack.getItem()), AetherAPI.temperature().getProperties(this.stack.getItem()));
 			}
 
 			return (T) this.properties;

@@ -3,7 +3,7 @@ package com.gildedgames.aether.common;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
-import com.gildedgames.aether.api.registry.cooler.ICoolerRegistry;
+import com.gildedgames.aether.api.registry.cooler.ITemperatureRegistry;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentProperties;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
@@ -20,7 +20,7 @@ import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.registry.CoolerRegistry;
+import com.gildedgames.aether.common.registry.TemperatureRegistry;
 import com.gildedgames.aether.common.registry.EquipmentRegistry;
 import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
@@ -59,7 +59,7 @@ public class CommonProxy
 
 	private final IEquipmentRegistry equipmentRegistry = new EquipmentRegistry();
 
-	private final ICoolerRegistry coolerRegistry = new CoolerRegistry();
+	private final ITemperatureRegistry coolerRegistry = new TemperatureRegistry();
 
 	private final PlacementFlagProvider placementFlagProvider = new PlacementFlagProvider();
 
@@ -195,7 +195,7 @@ public class CommonProxy
 		return this.equipmentRegistry;
 	}
 
-	public ICoolerRegistry getCoolerRegistry()
+	public ITemperatureRegistry getCoolerRegistry()
 	{
 		return this.coolerRegistry;
 	}

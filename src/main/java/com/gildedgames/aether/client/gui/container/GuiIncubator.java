@@ -1,8 +1,8 @@
 package com.gildedgames.aether.client.gui.container;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.containers.ContainerFrostpineCooler;
-import com.gildedgames.aether.common.tile_entities.TileEntityFrostpineCooler;
+import com.gildedgames.aether.common.containers.ContainerIncubator;
+import com.gildedgames.aether.common.tile_entities.TileEntityIncubator;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -12,16 +12,16 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiFrostpineCooler extends GuiContainer
+public class GuiIncubator extends GuiContainer
 {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(AetherCore.MOD_ID, "textures/gui/inventory/frostpine_cooler.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(AetherCore.MOD_ID, "textures/gui/inventory/incubator.png");
     /** The player inventory bound to this GUI. */
     private final InventoryPlayer playerInventory;
     private final IInventory tile;
 
-    public GuiFrostpineCooler(InventoryPlayer playerInv, IInventory coolerInv)
+    public GuiIncubator(InventoryPlayer playerInv, IInventory coolerInv)
     {
-        super(new ContainerFrostpineCooler(playerInv, coolerInv));
+        super(new ContainerIncubator(playerInv, coolerInv));
         this.playerInventory = playerInv;
         this.tile = coolerInv;
     }
@@ -35,20 +35,20 @@ public class GuiFrostpineCooler extends GuiContainer
         this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
         this.fontRendererObj.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
 
-        if (this.tile instanceof TileEntityFrostpineCooler)
+        if (this.tile instanceof TileEntityIncubator)
         {
-            TileEntityFrostpineCooler te = (TileEntityFrostpineCooler)this.tile;
+            TileEntityIncubator te = (TileEntityIncubator) this.tile;
 
-            if (!te.isCooling())
+            if (!te.hasStartedHeating())
             {
                 return;
             }
 
             float percent = 0.0F;
 
-            if (te.getCurrentCoolingProgress() < 0)
+            if (te.getCurrentHeatingProgress() > 0)
             {
-                float thing = ((float)te.getCurrentCoolingProgress() / (float)te.getRequiredTemperatureThreshold());
+                float thing = ((float)te.getCurrentHeatingProgress() / (float)te.getRequiredTemperatureThreshold());
 
                 percent = thing * 100.0F;
             }
@@ -72,7 +72,7 @@ public class GuiFrostpineCooler extends GuiContainer
 
             valueString += "%";
 
-            this.fontRendererObj.drawString(valueString, 136 - (this.fontRendererObj.getStringWidth(valueString) / 2), this.ySize - 105 + 2, 4210752);
+            this.fontRendererObj.drawString(valueString, 129 - (this.fontRendererObj.getStringWidth(valueString) / 2), this.ySize - 110  + 2, 4210752);
         }
     }
 

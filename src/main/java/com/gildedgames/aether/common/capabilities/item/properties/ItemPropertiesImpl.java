@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.capabilities.item.properties;
 
-import com.gildedgames.aether.api.capabilites.items.properties.CoolingProperties;
+import com.gildedgames.aether.api.capabilites.items.properties.TemperatureProperties;
 import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
 import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentType;
 import com.gildedgames.aether.api.capabilites.items.properties.ItemRarity;
@@ -14,9 +14,9 @@ public class ItemPropertiesImpl implements IItemPropertiesCapability
 
 	private IEquipmentProperties properties;
 
-	private CoolingProperties coolingProperties;
+	private TemperatureProperties coolingProperties;
 
-	public ItemPropertiesImpl(IEquipmentProperties properties, CoolingProperties coolingProperties)
+	public ItemPropertiesImpl(IEquipmentProperties properties, TemperatureProperties coolingProperties)
 	{
 		this.properties = properties;
 		this.coolingProperties = coolingProperties;
@@ -29,7 +29,7 @@ public class ItemPropertiesImpl implements IItemPropertiesCapability
 	}
 
 	@Override
-	public CoolingProperties getCoolingProperties()
+	public TemperatureProperties getTemperatureProperties()
 	{
 		return this.coolingProperties;
 	}

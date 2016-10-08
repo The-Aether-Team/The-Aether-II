@@ -262,6 +262,8 @@ public class BlocksAether
 
 	public static final Block frostpine_cooler = new BlockFrostpineCooler();
 
+	public static final Block incubator = new BlockIncubator();
+
 	public static void preInit()
 	{
 		registerBlock("aether_dirt", BlocksAether.aether_dirt.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.aether_dirt));
@@ -423,6 +425,8 @@ public class BlocksAether
 
 		registerBlock("frostpine_cooler", BlocksAether.frostpine_cooler.setCreativeTab(CreativeTabsAether.tabBlocks));
 
+		registerBlock("incubator", BlocksAether.incubator.setCreativeTab(CreativeTabsAether.tabBlocks));
+
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_log_wall, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.aether_planks, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_chest, 5, 5);
@@ -450,6 +454,7 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(BlocksAether.woven_sticks, 5, 5);
 
 		Blocks.FIRE.setFireInfo(BlocksAether.frostpine_cooler, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.incubator, 5, 5);
 
 		registerHarvestLevels();
 
@@ -487,6 +492,8 @@ public class BlocksAether
 		altar.setHarvestLevel("pickaxe", 0);
 		holystone_furnace.setHarvestLevel("pickaxe", 0);
 		aether_crafting_table.setHarvestLevel("axe", 0);
+		frostpine_cooler.setHarvestLevel("axe", 0);
+		incubator.setHarvestLevel("axe", 0);
 
 		zanite_block.setHarvestLevel("pickaxe", 1);
 		enchanted_gravitite.setHarvestLevel("pickaxe", 2);

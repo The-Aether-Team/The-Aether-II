@@ -16,6 +16,8 @@ import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.modules.TeleportingModule;
 import com.gildedgames.aether.common.containers.slots.SlotAmbrosium;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
+import com.gildedgames.aether.common.containers.slots.SlotFlintAndSteel;
+import com.gildedgames.aether.common.containers.slots.SlotMoaEgg;
 import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.AetherMovementPacket;
@@ -172,14 +174,19 @@ public class ClientEventHandler
 						event.getToolTip().add(I18n.format(props.getRarity().getUnlocalizedName()));
 					}
 
-					if (props.getCoolingProperties() != null)
+					if (props.getTemperatureProperties() != null)
 					{
-						int coolingStrength = props.getCoolingProperties().getCoolingStrength(stack);
-						String resultName = props.getCoolingProperties().getResultName(stack);
+						int temperature = props.getTemperatureProperties().getTemperature(stack);
+						String resultName = props.getTemperatureProperties().getCooledName(stack);
 
-						if (coolingStrength > 0)
+						if (temperature < 0)
 						{
-							event.getToolTip().add(TextFormatting.DARK_AQUA + I18n.format("gui.aether.cooling_strength") + TextFormatting.RESET + " " + coolingStrength);
+							event.getToolTip().add(TextFormatting.DARK_AQUA + I18n.format("gui.aether.cooling_strength") + TextFormatting.RESET + " " + Math.abs(temperature));
+						}
+
+						if (temperature > 0)
+						{
+							event.getToolTip().add(TextFormatting.DARK_RED + I18n.format("gui.aether.heating_strength") + TextFormatting.RESET + " " + temperature);
 						}
 
 						if (resultName != null)
@@ -325,5 +332,7 @@ public class ClientEventHandler
 	{
 		SlotEquipment.registerIcons(event);
 		SlotAmbrosium.registerIcons(event);
+		SlotMoaEgg.registerIcons(event);
+		SlotFlintAndSteel.registerIcons(event);
 	}
 }

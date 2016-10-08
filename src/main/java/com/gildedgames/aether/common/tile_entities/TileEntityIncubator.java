@@ -3,13 +3,14 @@ package com.gildedgames.aether.common.tile_entities;
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.items.properties.TemperatureProperties;
 import com.gildedgames.aether.common.containers.ContainerFrostpineCooler;
-import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.util.ItemUtil;
 import com.gildedgames.aether.common.util.TickTimer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -20,24 +21,22 @@ import net.minecraft.util.ITickable;
 
 import javax.annotation.Nullable;
 
-public class TileEntityFrostpineCooler extends TileEntityLockable implements ITickable, IInventory
+public class TileEntityIncubator extends TileEntityLockable implements ITickable, IInventory
 {
 
-    private static final int INVENTORY_SIZE = 7;
+    private static final int INVENTORY_SIZE = 6;
 
-    private static final int AMBROSIUM_INDEX = 4;
+    private static final int ITEM_TO_HEAT_INDEX = 4;
 
-    private static final int ITEM_TO_COOL_INDEX = 5;
-
-    private static final int IRRADIATED_DUST_INDEX = 6;
+    private static final int FLINT_AND_STEEL_INDEX = 5;
 
     private ItemStack[] inventory;
 
-    private int reqTemperatureThreshold, currentCoolingProgress;
+    private int reqTemperatureThreshold, currentHeatingProgress;
 
     private TickTimer progress = new TickTimer();
 
-    public TileEntityFrostpineCooler()
+    public TileEntityIncubator()
     {
         this.inventory = new ItemStack[INVENTORY_SIZE];
     }
@@ -50,69 +49,76 @@ public class TileEntityFrostpineCooler extends TileEntityLockable implements ITi
             return;
         }
 
-        ItemStack itemToCool = this.getItemToCool();
-        ItemStack ambrosium = this.getStackInSlot(AMBROSIUM_INDEX);
-        ItemStack irradiatedDust = this.getStackInSlot(IRRADIATED_DUST_INDEX);
+        ItemStack itemToHeat = this.getItemToHeat();
+        ItemStack flintAndSteel = this.getFlintAndSteel();
 
-        if (itemToCool != null )
+        if (itemToHeat != null)
         {
-            if (irradiatedDust == null)
+            TemperatureProperties props = itemToHeat.getCapability(AetherCapabilities.ITEM_PROPERTIES, null).getTemperatureProperties();
+
+            if (props != null && props.getTemperatureThreshold(itemToHeat) > 0 && flintAndSteel != null)
             {
-                TemperatureProperties props = itemToCool.getCapability(AetherCapabilities.ITEM_PROPERTIES, null).getTemperatureProperties();
+                this.progress.tick();
 
-                if (props != null && props.getTemperatureThreshold(itemToCool) < 0 && ambrosium != null && ambrosium.stackSize >= 4)
+                if (this.progress.isMultipleOfSeconds())
                 {
-                    this.progress.tick();
+                    this.currentHeatingProgress += this.getTotalTemperature();
+                    this.sync();
+                }
 
-                    if (this.progress.isMultipleOfSeconds())
+                if (this.currentHeatingProgress >= this.reqTemperatureThreshold)
+                {
+                    ItemStack result = props.getResultWhenHeated(this.worldObj, this.getPos(), itemToHeat, this.worldObj.rand);
+
+                    this.setInventorySlotContents(ITEM_TO_HEAT_INDEX, result);
+
+                    if (props.shouldDecreaseStackSize(true))
                     {
-                        this.currentCoolingProgress += this.getTotalTemperature();
-                        this.sync();
+                        this.decrStackSize(ITEM_TO_HEAT_INDEX, 1);
                     }
 
-                    if (this.currentCoolingProgress <= this.reqTemperatureThreshold)
+                    ItemUtil.damageItem(flintAndSteel, 15, this.worldObj.rand);
+
+                    if (flintAndSteel.stackSize <= 0)
                     {
-                        this.setInventorySlotContents(ITEM_TO_COOL_INDEX, props.getResultWhenCooled(this.worldObj, this.getPos(), itemToCool, this.worldObj.rand));
-
-                        if (props.shouldDecreaseStackSize(false))
-                        {
-                            this.decrStackSize(ITEM_TO_COOL_INDEX, 1);
-                        }
-
-                        this.setInventorySlotContents(IRRADIATED_DUST_INDEX, new ItemStack(ItemsAether.irradiated_dust, 3 + this.worldObj.rand.nextInt(3)));
-
-                        this.decrStackSize(AMBROSIUM_INDEX, 4);
-
-                        this.currentCoolingProgress = 0;
-                        this.reqTemperatureThreshold = 0;
-                        this.progress.reset();
-                        this.sync();
+                        this.setInventorySlotContents(FLINT_AND_STEEL_INDEX, null);
                     }
+
+                    this.currentHeatingProgress = 0;
+                    this.progress.reset();
+                    this.sync();
                 }
             }
         }
         else
         {
-            this.currentCoolingProgress = 0;
+            this.currentHeatingProgress = 0;
             this.reqTemperatureThreshold = 0;
             this.progress.reset();
             this.sync();
         }
     }
 
-    public ItemStack getItemToCool()
+    public ItemStack getItemToHeat()
     {
-        return this.getStackInSlot(ITEM_TO_COOL_INDEX);
+        return this.getStackInSlot(ITEM_TO_HEAT_INDEX);
     }
 
-    public boolean isCooling()
+    public ItemStack getFlintAndSteel() { return this.getStackInSlot(FLINT_AND_STEEL_INDEX); }
+
+    public boolean hasStartedHeating()
     {
-        return this.getItemToCool() != null && this.reqTemperatureThreshold < 0 && this.getStackInSlot(IRRADIATED_DUST_INDEX) == null && this.getStackInSlot(AMBROSIUM_INDEX) != null && this.getStackInSlot(AMBROSIUM_INDEX).stackSize >= 4;
+        return this.reqTemperatureThreshold > 0;
     }
 
-    public int getCurrentCoolingProgress()
+    public boolean isHeating()
     {
-        return this.currentCoolingProgress;
+        return this.getItemToHeat() != null && this.reqTemperatureThreshold > 0 && this.getItemToHeat() != null && this.getFlintAndSteel() != null;
+    }
+
+    public int getCurrentHeatingProgress()
+    {
+        return this.currentHeatingProgress;
     }
 
     public int getRequiredTemperatureThreshold()
@@ -124,7 +130,7 @@ public class TileEntityFrostpineCooler extends TileEntityLockable implements ITi
     {
         int total = 0;
 
-        for (int count = 0; count < AMBROSIUM_INDEX; count++)
+        for (int count = 0; count < ITEM_TO_HEAT_INDEX; count++)
         {
             ItemStack stack = this.getStackInSlot(count);
 
@@ -135,7 +141,7 @@ public class TileEntityFrostpineCooler extends TileEntityLockable implements ITi
 
             TemperatureProperties props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null).getTemperatureProperties();
 
-            if (props != null && props.getTemperature(stack) < 0)
+            if (props != null && props.getTemperature(stack) > 0)
             {
                 total += props.getTemperature(stack) * stack.stackSize;
             }
@@ -222,7 +228,7 @@ public class TileEntityFrostpineCooler extends TileEntityLockable implements ITi
 
         this.inventory[index] = stack;
 
-        if (index == ITEM_TO_COOL_INDEX)
+        if (index == ITEM_TO_HEAT_INDEX)
         {
             if (stack == null)
             {
@@ -268,22 +274,22 @@ public class TileEntityFrostpineCooler extends TileEntityLockable implements ITi
 
         TemperatureProperties props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null).getTemperatureProperties();
 
-        if (index < AMBROSIUM_INDEX)
+        if (index < ITEM_TO_HEAT_INDEX)
         {
-            if (props != null && props.getTemperature(stack) < 0)
+            if (props != null && props.getTemperature(stack) > 0)
             {
                 return true;
             }
         }
 
-        if (index == AMBROSIUM_INDEX)
+        if (index == ITEM_TO_HEAT_INDEX)
         {
-            return stack.getItem() == ItemsAether.ambrosium_shard;
+            return props != null && props.getTemperatureThreshold(stack) > 0;
         }
 
-        if (index == ITEM_TO_COOL_INDEX)
+        if (index == FLINT_AND_STEEL_INDEX)
         {
-            return props != null && props.getTemperatureThreshold(stack) < 0;
+            return stack.getItem() instanceof ItemFlintAndSteel;
         }
 
         return false;
@@ -316,7 +322,7 @@ public class TileEntityFrostpineCooler extends TileEntityLockable implements ITi
     @Override
     public String getName()
     {
-        return "container.frostpine_cooler";
+        return "container.incubator";
     }
 
     @Override
@@ -367,7 +373,7 @@ public class TileEntityFrostpineCooler extends TileEntityLockable implements ITi
     @Override
     public String getGuiID()
     {
-        return "aether:frostpine_cooler";
+        return "aether:incubator";
     }
 
     @Override
@@ -394,7 +400,7 @@ public class TileEntityFrostpineCooler extends TileEntityLockable implements ITi
         compound.setTag("inventory", stackList);
 
         compound.setInteger("reqTemperatureThreshold", this.reqTemperatureThreshold);
-        compound.setInteger("currentCoolingProgress", this.currentCoolingProgress);
+        compound.setInteger("currentHeatingProgress", this.currentHeatingProgress);
 
         return compound;
     }
@@ -421,7 +427,7 @@ public class TileEntityFrostpineCooler extends TileEntityLockable implements ITi
         }
 
         this.reqTemperatureThreshold = compound.getInteger("reqTemperatureThreshold");
-        this.currentCoolingProgress = compound.getInteger("currentCoolingProgress");
+        this.currentHeatingProgress = compound.getInteger("currentHeatingProgress");
     }
 
 }
