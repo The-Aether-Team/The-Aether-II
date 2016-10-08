@@ -44,7 +44,7 @@ public class EntitiesAether
 		registerLivingEntity(EntityZephyr.class, "zephyr", 0xb8b5ab, 0x988c65);
 		registerLivingEntity(EntityTempest.class, "tempest", 0x3c464c, 0xc3e6f0);
 		registerLivingEntity(EntitySwet.class, "swet", 0xCCFFFF, 0xCCCCFF);
-		registerLivingEntity(EntityTaegore.class, "taegore", 0x607075, 0xbda54a);
+		//registerLivingEntity(EntityTaegore.class, "taegore", 0x607075, 0xbda54a);
 		registerLivingEntity(EntityDetonationSentry.class, "detonation_sentry", 0x414141, 0x4e9af7);
 		registerLivingEntity(EntityBattleSentry.class, "battle_sentry", 0x414141, 0x4e9af7);
 		registerLivingEntity(EntityTrackingSentry.class, "tracking_sentry", 0x414141, 0x4e9af7);
@@ -73,21 +73,6 @@ public class EntitiesAether
 		EntityRegistry.registerModEntity(EntityBolt.class, "bolt", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityBattleBomb.class, "battle_bomb", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityParachute.class, "parachute", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
-
-		SpawnManager manager = SpawningModule.createAndRegisterSpawnManager(AetherCore.CONFIG.getAetherDimID());
-
-		manager.registerPerTickEntry(new SpawnEntry(EntityAerbunny.class, 2, 5, 0.3f));
-		manager.registerPerTickEntry(new SpawnEntry(EntityFlyingCow.class, 1, 4, 0.65f));
-		manager.registerPerTickEntry(new SpawnEntry(EntityPhyg.class, 1, 4, 0.35f));
-		manager.registerPerTickEntry(new SpawnEntry(EntityCarrionSprout.class, 2, 3, 0.4f));
-		manager.registerPerTickEntry(new SpawnEntry(EntityKirrid.class, 3, 5, 0.5f));
-		manager.registerPerTickEntry(new SpawnEntry(EntityAerwhale.class, 1, 1, 0.2f, false));
-
-		manager.registerPerTickEntry(new SpawnEntry(EntitySwet.class, 2, 3, 0.5f));
-		manager.registerPerTickEntry(new SpawnEntry(EntityZephyr.class, 2, 3, 0.4f, false));
-		manager.registerPerTickEntry(new SpawnEntry(EntityAechorPlant.class, 2, 4, 0.4f));
-		manager.registerPerTickEntry(new SpawnEntry(EntityCockatrice.class, 6, 8, 0.5f));
-		manager.registerPerTickEntry(new SpawnEntry(EntityTempest.class, 2, 3, 0.4f, false));
 	}
 
 	private static void registerLivingEntity(Class<? extends Entity> entity, String id, int eggPrimaryColor, int eggSecondaryColor)
