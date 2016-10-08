@@ -100,6 +100,8 @@ public class TemperatureHandler implements TemperatureProperties
                     babyMoa.setGender(rand.nextBoolean() ? AnimalGender.FEMALE : AnimalGender.MALE);
                     babyMoa.setRaisedByPlayer(true);
                     babyMoa.setAnimalPack(familyNest.getAnimalPack());
+                    babyMoa.setIsHungry(true);
+                    babyMoa.setFoodRequired(3);
 
                     world.spawnEntityInWorld(babyMoa);
                 }
