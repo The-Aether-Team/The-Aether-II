@@ -1,6 +1,7 @@
 {
 	"variants": {
-		"opaque=false": { "model": "aether:leaves/frostpine_leaves" },
-        "opaque=true":  { "model": "aether:leaves/frostpine_leaves_opaque" }
+		"normal": {
+			"model": "aether:leaves/frostpine_leaves"
+		}
 	}
 }
