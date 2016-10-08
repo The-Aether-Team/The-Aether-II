@@ -191,7 +191,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 				}
 				else
 				{
-					if (!this.isSaddled() && stack != null && stack.getItem() == Items.SADDLE)
+					if (this.isRaisedByPlayer() && !this.isSaddled() && stack != null && stack.getItem() == Items.SADDLE)
 					{
 						this.setIsSaddled(true);
 
