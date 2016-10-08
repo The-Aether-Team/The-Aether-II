@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BlockAetherLeaves extends BlockLeaves
+public class BlockAetherLeaves extends Block implements IShearable
 {
 
 	public static final PropertyBool PROPERTY_DECAYABLE = PropertyBool.create("decayable");
@@ -40,7 +40,7 @@ public class BlockAetherLeaves extends BlockLeaves
 
 	public BlockAetherLeaves(int saplingMeta)
 	{
-		super();
+		super(Material.LEAVES);
 
 		this.saplingMeta = saplingMeta;
 
@@ -402,10 +402,10 @@ public class BlockAetherLeaves extends BlockLeaves
 		return new BlockStateContainer(this, PROPERTY_DECAYABLE, PROPERTY_CHECK_DECAY);
 	}
 
-	@Override
+/*	@Override
 	public BlockPlanks.EnumType getWoodType(int meta)
 	{
 		return null;
-	}
+	}*/
 
 }
