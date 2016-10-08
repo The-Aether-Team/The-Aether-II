@@ -164,6 +164,12 @@ public class MountProcessor
 		mount.limbSwingAmount = 0.0F;
 		mount.prevLimbSwingAmount = 0.0F;
 
+		if ((strafe > 0 || strafe < 0) && (forward > 0 || forward < 0))
+		{
+			strafe *= 0.5F;
+			forward *= 0.5F;
+		}
+
 		mount.moveEntityWithHeading(strafe, forward);
 
 		mount.limbSwingAmount = oldLimbSwingAmount;
