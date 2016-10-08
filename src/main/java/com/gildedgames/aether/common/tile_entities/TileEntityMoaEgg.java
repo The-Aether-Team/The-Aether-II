@@ -93,7 +93,6 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickable
 		babyMoa.setGrowingAge(-24000);
 		babyMoa.setPosition(this.getPos().getX() + 0.5D, this.getPos().getY(), this.getPos().getZ() + 0.5D);
 		babyMoa.setGender(this.gender);
-		babyMoa.setRaisedByPlayer(true);
 		babyMoa.setAnimalPack(this.familyNest.getAnimalPack());
 
 		this.worldObj.spawnEntityInWorld(babyMoa);

@@ -68,7 +68,7 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 
 	protected void scaleMoa(EntityMoa entityMoa)
 	{
-		float moaScale = entityMoa.isChild() ? 0.5f : 1.0f;
+		float moaScale = entityMoa.isChild() ? 0.5f : 0.85f;
 		
 		moaScale += entityMoa.isGroupLeader() ? 0.15F : 0.0F;
 		
@@ -240,8 +240,8 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 	{
 		if (entity.isHungry())
 		{
-			this.renderLivingLabel(entity, "Hungry", d, d1 + 0.15D, d2, 64);
-			this.drawAechorPetal(d, d1 + entity.height + 0.8D, d2, 0.5D);
+			this.renderLivingLabel(entity, "Hungry", d, d1 + 0.15D + (entity.getGender() == AnimalGender.MALE ? 0.0D : -0.35D), d2, 64);
+			this.drawAechorPetal(d, d1 + entity.height + 0.8D + (entity.getGender() == AnimalGender.MALE ? 0.0D : -0.35D), d2, 0.5D);
 		}
 
 		super.doRender(entity, d, d1, d2, f, f1);

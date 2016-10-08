@@ -249,7 +249,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 				if (this.isHungry())
 				{
-					if (this.hungryTimer.getSecondsPassed() > 60)
+					if (this.hungryTimer.getSecondsPassed() > 120)
 					{
 						if (this.hungryTimer.isMultipleOfSeconds(10))
 						{
@@ -259,7 +259,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 				}
 				else
 				{
-					if (this.hungryTimer.getSecondsPassed() > 10)
+					if (this.hungryTimer.getSecondsPassed() > 120)
 					{
 						this.setIsHungry(true);
 						this.hungryTimer.reset();
@@ -632,7 +632,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	@Override
 	public double getMountedYOffset()
 	{
-		return 1.15D;
+		return this.getGender() == AnimalGender.MALE ? 1.15D : 0.90F;
 	}
 
 	public float maxAirborneTime()
