@@ -422,7 +422,7 @@ item.aether.irradiated_ring.name=Irradiated Ring
 item.aether.irradiated_neckwear.name=Irradiated Neckwear
 item.aether.irradiated_charm.name=Irradiated Charm
 item.aether.irradiated_dust.name=Irradiated Dust
-item.aether.sentry_vault.name=Sentry Vault
+item.aether.sentry_vaultbox.name=Sentry Vaultbox
 item.aether.skyroot_crossbow.name=Skyroot Crossbow
 item.aether.holystone_crossbow.name=Holystone Crossbow
 item.aether.zanite_crossbow.name=Zanite Crossbow
@@ -497,8 +497,8 @@ item.aether.flaming_sword.ability.desc=Ignites Mobs
 item.aether.vampire_blade.ability.desc=Leeches Life
 item.aether.candy_cane_sword.ability.desc=Drops Candy Canes
 item.aether.valkyrie_lance.ability.desc=Extended Reach
-item.aether.sentry_vault.ability.desc1=§dOutputs: §rRandom Items
-item.aether.sentry_vault.ability.desc2=§3Throw: §rRight-Click
+item.aether.sentry_vaultbox.ability.desc1=§dOutputs: §rRandom Items
+item.aether.sentry_vaultbox.ability.desc2=§3Throw: §rRight-Click
 
 # Tool tooltips
 item.aether.tool.skyroot.ability.desc=Doubles drops from blocks

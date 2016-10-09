@@ -72,7 +72,7 @@ public class EntitiesAether
 		EntityRegistry.registerModEntity(EntityBattleBomb.class, "battle_bomb", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityParachute.class, "parachute", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityRewardItemStack.class, "reward_itemstack", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
-		EntityRegistry.registerModEntity(EntitySentryVault.class, "sentry_vault", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
+		EntityRegistry.registerModEntity(EntitySentryVault.class, "sentry_vaultbox", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 	}
 
 	private static void registerLivingEntity(Class<? extends Entity> entity, String id, int eggPrimaryColor, int eggSecondaryColor)

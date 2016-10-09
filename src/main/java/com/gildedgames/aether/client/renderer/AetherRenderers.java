@@ -113,7 +113,7 @@ public class AetherRenderers
 			@Override
 			public Render<? super Entity> createRenderFor(RenderManager manager)
 			{
-				return new RenderSnowball<>(manager, ItemsAether.sentry_vault, Minecraft.getMinecraft().getRenderItem());
+				return new RenderSnowball<>(manager, ItemsAether.sentry_vaultbox, Minecraft.getMinecraft().getRenderItem());
 			}
 		});
 	}
