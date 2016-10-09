@@ -586,6 +586,8 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.frostpine_cooler, "holystone_furnace/holystone_furnace_unlit");
 		registerItemModels(BlocksAether.incubator, "holystone_furnace/holystone_furnace_unlit");
 
+		registerItemModels(ItemsAether.sentry_vault, "sentry_vault");
+
 		ModelLoader.setCustomModelResourceLocation(getItem(BlocksAether.structure_extended), 0, new ModelResourceLocation("structure_block", "inventory"));
 	}
 

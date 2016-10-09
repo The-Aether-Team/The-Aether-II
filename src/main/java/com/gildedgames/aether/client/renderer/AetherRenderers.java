@@ -8,6 +8,7 @@ import com.gildedgames.aether.client.renderer.entities.projectiles.RenderBattleB
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderBolt;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDaggerfrostSnowball;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDart;
+import com.gildedgames.aether.client.renderer.items.RenderRewardItemStack;
 import com.gildedgames.aether.client.renderer.tile_entities.*;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
@@ -16,6 +17,7 @@ import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.entities.companions.*;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.*;
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
+import com.gildedgames.aether.common.entities.item.EntityRewardItemStack;
 import com.gildedgames.aether.common.entities.living.*;
 import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
 import com.gildedgames.aether.common.entities.living.enemies.EntitySwet;
@@ -24,15 +26,15 @@ import com.gildedgames.aether.common.entities.living.enemies.EntityZephyr;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
-import com.gildedgames.aether.common.entities.projectiles.EntityBattleBomb;
-import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
-import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
-import com.gildedgames.aether.common.entities.projectiles.EntityDart;
+import com.gildedgames.aether.common.entities.projectiles.*;
+import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.tile_entities.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderEntityItem;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
@@ -96,6 +98,24 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityBattleBomb.class, new AetherRenderFactory<>(RenderBattleBomb.class));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityTaegore.class, new TabulaRenderFactory<>(RenderTabula.class, new ResourceLocation(AetherCore.MOD_ID, "textures/entities/taegore/taegore.png"), new ResourceLocation(AetherCore.MOD_ID, "models/entities/taegore.tbl")));
+
+		RenderingRegistry.registerEntityRenderingHandler(EntityRewardItemStack.class, new IRenderFactory<EntityRewardItemStack>()
+		{
+			@Override
+			public Render<? super EntityRewardItemStack> createRenderFor(RenderManager manager)
+			{
+				return new RenderRewardItemStack(manager, Minecraft.getMinecraft().getRenderItem());
+			}
+		});
+
+		RenderingRegistry.registerEntityRenderingHandler(EntitySentryVault.class, new IRenderFactory<Entity>()
+		{
+			@Override
+			public Render<? super Entity> createRenderFor(RenderManager manager)
+			{
+				return new RenderSnowball<>(manager, ItemsAether.sentry_vault, Minecraft.getMinecraft().getRenderItem());
+			}
+		});
 	}
 
 	private static void registerTESRs()

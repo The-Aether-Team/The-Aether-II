@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.entities.companions.*;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.*;
 import com.gildedgames.aether.common.entities.dungeon.util.EntityGenerator;
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
+import com.gildedgames.aether.common.entities.item.EntityRewardItemStack;
 import com.gildedgames.aether.common.entities.living.*;
 import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
 import com.gildedgames.aether.common.entities.living.enemies.EntitySwet;
@@ -16,10 +17,7 @@ import com.gildedgames.aether.common.entities.living.enemies.EntityZephyr;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
-import com.gildedgames.aether.common.entities.projectiles.EntityBattleBomb;
-import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
-import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
-import com.gildedgames.aether.common.entities.projectiles.EntityDart;
+import com.gildedgames.aether.common.entities.projectiles.*;
 import com.gildedgames.util.modules.spawning.SpawnEntry;
 import com.gildedgames.util.modules.spawning.SpawnManager;
 import com.gildedgames.util.modules.spawning.SpawningModule;
@@ -73,6 +71,8 @@ public class EntitiesAether
 		EntityRegistry.registerModEntity(EntityBolt.class, "bolt", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityBattleBomb.class, "battle_bomb", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityParachute.class, "parachute", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityRewardItemStack.class, "reward_itemstack", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
+		EntityRegistry.registerModEntity(EntitySentryVault.class, "sentry_vault", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 	}
 
 	private static void registerLivingEntity(Class<? extends Entity> entity, String id, int eggPrimaryColor, int eggSecondaryColor)
