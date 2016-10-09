@@ -65,7 +65,15 @@ public class MoaNest
 			}
 		}
 
-		for (BlockPos pos : BlockPos.getAllInBoxMutable(this.pos.add(-this.nestSize - 1, 1, -this.nestSize - 1), this.pos.add(this.nestSize + 1, 1, this.nestSize + 1)))
+		for (BlockPos pos : BlockPos.getAllInBoxMutable(this.pos.add(-this.nestSize, 1, -this.nestSize - 1), this.pos.add(this.nestSize, 1, this.nestSize + 1)))
+		{
+			if (this.isReplaceable(world, pos))
+			{
+				world.setBlockState(pos, nestBlock);
+			}
+		}
+
+		for (BlockPos pos : BlockPos.getAllInBoxMutable(this.pos.add(-this.nestSize - 1, 1, -this.nestSize), this.pos.add(this.nestSize + 1, 1, this.nestSize)))
 		{
 			if (this.isReplaceable(world, pos))
 			{
