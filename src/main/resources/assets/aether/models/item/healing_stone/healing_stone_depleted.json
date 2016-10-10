@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/healing_stone/healing_stone_depleted"
+		"layer0": "aether:items/consumables/healing_stone/healing_stone_depleted"
 	}
 }

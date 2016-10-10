@@ -232,8 +232,8 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.blueberries, "blueberries");
 		registerItemModels(ItemsAether.enchanted_blueberry, "enchanted_blueberry");
 		registerItemModels(ItemsAether.orange, "orange");
-		registerItemModels(ItemsAether.healing_stone, "healing_stone");
-		registerItemModels(ItemsAether.healing_stone_depleted, "healing_stone_depleted");
+		registerItemModels(ItemsAether.healing_stone, "healing_stone/healing_stone");
+		registerItemModels(ItemsAether.healing_stone_depleted, "healing_stone/healing_stone_depleted");
 		registerItemModels(ItemsAether.wyndberry, "wyndberry");
 		registerItemModels(ItemsAether.enchanted_wyndberry, "enchanted_wyndberry");
 		registerItemModels(ItemsAether.candy_corn, "candy_corn");

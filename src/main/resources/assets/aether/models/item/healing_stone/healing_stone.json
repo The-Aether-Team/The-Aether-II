@@ -1,38 +1,38 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/healing_stone/healing_stone_5"
+		"layer0": "aether:items/consumables/healing_stone/healing_stone"
 	},
     "overrides": [
         {
             "predicate": {
-                "uses": 1.00
+                "uses": 0.2
             },
-            "model": "aether:item/stages/stage1"
+            "model": "aether:item/healing_stone/stages/stage5"
+        },
+        {
+            "predicate": {
+                "uses": 0.4
+            },
+            "model": "aether:item/healing_stone/stages/stage4"
+        },
+        {
+            "predicate": {
+                "uses": 0.6
+            },
+            "model": "aether:item/healing_stone/stages/stage3"
         },
         {
            "predicate": {
-                "uses": 0.80
+                "uses": 0.8
             },
-            "model": "aether:item/stages/stage2"
+            "model": "aether:item/healing_stone/stages/stage2"
         },
         {
             "predicate": {
-                "uses": 0.60
+                "uses": 1.0
             },
-            "model": "aether:item/stages/stage3"
-        },
-        {
-            "predicate": {
-                "uses": 0.40
-            },
-            "model": "aether:item/stages/stage4"
-        },
-        {
-            "predicate": {
-                "uses": 0.20
-            },
-            "model": "aether:item/stages/stage5"
+            "model": "aether:item/healing_stone/stages/stage1"
         }
     ]
 }

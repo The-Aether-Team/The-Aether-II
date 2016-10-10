@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.items.consumables;
 
+import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,16 +35,12 @@ public class ItemHealingStone extends Item
 			@SideOnly(Side.CLIENT)
 			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
 			{
-				if (entityIn == null)
+				if (stack != null)
 				{
-					return 0.0F;
+					return ItemHealingStone.getUsesLeft(stack) * 0.2F;
 				}
-				else
-				{
-					ItemStack itemstack = entityIn.getActiveItemStack();
 
-					return itemstack != null && itemstack.getItem() == ItemHealingStone.this ? ItemHealingStone.getUsesLeft(stack) * 0.2F : 0.0F;
-				}
+				return 1.0F;
 			}
 		});
 	}
