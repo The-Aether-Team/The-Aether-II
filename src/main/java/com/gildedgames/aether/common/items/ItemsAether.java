@@ -98,7 +98,7 @@ public class ItemsAether
 
 	public static ItemAetherRecord valkyrie_music_disc, labyrinth_music_disc, moa_music_disc, aerwhale_music_disc, recording_892;
 
-	public static ItemFood healing_stone;
+	public static Item healing_stone;
 
 	public static Item healing_stone_depleted;
 
@@ -361,8 +361,8 @@ public class ItemsAether
 		aerwhale_music_disc = registerItem("aerwhale_music_disc", new ItemAetherRecord("aerwhale", SoundsAether.record_aerwhale), CreativeTabsAether.tabMiscellaneous);
 		recording_892 = registerItem("recording_892", new ItemAetherRecord("recording_892", SoundsAether.record_recording_892), CreativeTabsAether.tabMiscellaneous);
 
-		healing_stone_depleted = registerItem("healing_stone_depleted", new Item(), CreativeTabsAether.tabConsumables);
-		healing_stone = registerItem("healing_stone", new ItemFood(0, 1.2f, false).setAlwaysEdible().setPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200, 0), 1.0f), CreativeTabsAether.tabConsumables);
+		healing_stone_depleted = registerItem("healing_stone_depleted", new Item().setMaxStackSize(1), CreativeTabsAether.tabConsumables);
+		healing_stone = registerItem("healing_stone", new ItemHealingStone().setMaxStackSize(1), CreativeTabsAether.tabConsumables);
 
 		dart_shooter = registerItem("dart_shooter", new ItemDartShooter(), CreativeTabsAether.tabWeapons);
 		dart = registerItem("dart", new ItemDart(), CreativeTabsAether.tabWeapons);
