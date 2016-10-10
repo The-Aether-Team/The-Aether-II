@@ -1,16 +1,23 @@
 package com.gildedgames.aether.common.items.consumables;
 
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
 
 public class ItemHealingStone extends Item
 {
@@ -20,6 +27,24 @@ public class ItemHealingStone extends Item
 	public ItemHealingStone()
 	{
 		super();
+
+		this.addPropertyOverride(new ResourceLocation("uses"), new IItemPropertyGetter()
+		{
+			@SideOnly(Side.CLIENT)
+			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
+			{
+				if (entityIn == null)
+				{
+					return 0.0F;
+				}
+				else
+				{
+					ItemStack itemstack = entityIn.getActiveItemStack();
+
+					return itemstack != null && itemstack.getItem() == ItemHealingStone.this ? ItemHealingStone.getUsesLeft(stack) * 0.2F : 0.0F;
+				}
+			}
+		});
 	}
 
 	private static void initTagCompound(ItemStack stack)
