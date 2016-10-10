@@ -100,11 +100,11 @@ public class MoaNest
         return block == null ||
 				world.isAirBlock(pos) ||
 				block.isLeaves(state, world, pos) ||
-				state == BlocksAether.aether_grass.getDefaultState() ||
-				state == BlocksAether.aether_dirt.getDefaultState() ||
+				block == BlocksAether.aether_grass ||
+				block == BlocksAether.aether_dirt ||
 				block.isReplaceable(world, pos) ||
-				block.getMaterial(state) == Material.PLANTS ||
-				block.getMaterial(state) == Material.VINE;
+				state.getMaterial() == Material.PLANTS ||
+				state.getMaterial() == Material.VINE;
 	}
 	
 	private void spawnMoaFamily(World world, int familySize)
