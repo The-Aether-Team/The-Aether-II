@@ -234,7 +234,7 @@ public class RecipesAether implements IAltarRecipeRegistry
 				'X', new ItemStack(ItemsAether.ambrosium_chunk));
 
 		// Depleted Healing Stone
-		registerShapedRecipe(new ItemStack(ItemsAether.healing_stone_depleted, 1), "ZXZ", " X ", " Y ",
+		registerShapedRecipe(new ItemStack(ItemsAether.healing_stone_depleted, 1), " X ", "ZXZ", " Y ",
 				'X', new ItemStack(ItemsAether.ambrosium_chunk),
 				'Y', new ItemStack(ItemsAether.ambrosium_shard),
 				'Z', new ItemStack(BlocksAether.holystone));
