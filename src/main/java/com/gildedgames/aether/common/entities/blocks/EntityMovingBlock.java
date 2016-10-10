@@ -61,6 +61,20 @@ public class EntityMovingBlock extends Entity
 	{
 		super.onUpdate();
 
+		this.prevRotationYaw = this.rotationYaw;
+		this.prevRotationPitch = this.rotationPitch;
+
+		if (this.rotationYaw > 360f)
+		{
+			this.rotationYaw -= 360f;
+		}
+
+		this.rotationYaw += this.motionZ * 14f;
+		this.rotationPitch += -this.motionX * 14f;
+
+		this.rotationYaw *= 0.9f;
+		this.rotationPitch *= 0.9f;
+
 		if (!this.worldObj.isRemote && !this.hasActivated)
 		{
 			BlockPos pos = new BlockPos(this);
@@ -113,29 +127,17 @@ public class EntityMovingBlock extends Entity
 
 	public void updatePosition()
 	{
-		if (this.rotationYaw > 360f)
-		{
-			this.rotationYaw -= 360f;
-		}
-
-		this.rotationYaw += this.motionZ * 10f;
-		this.rotationPitch += -this.motionX * 10f;
-
-		this.rotationYaw *= 0.9f;
-		this.rotationPitch *= 0.9f;
-
 		if (this.holdingPlayer == null)
 		{
 			this.motionY -= 0.04D;
 
 			BlockPos pos = new BlockPos(this);
-
+			
 			if (this.onGround)
 			{
 				if (this.motionX + this.motionZ <= 0.03D)
 				{
 					// We've stopped moving
-
 					if (!this.worldObj.isRemote)
 					{
 						this.worldObj.destroyBlock(pos, true);

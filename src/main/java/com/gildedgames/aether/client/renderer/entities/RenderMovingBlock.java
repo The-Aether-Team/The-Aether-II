@@ -34,7 +34,8 @@ public class RenderMovingBlock extends Render<EntityMovingBlock>
 			IBlockState state = entity.getBlockState();
 			Block block = state.getBlock();
 
-			BlockPos pos = new BlockPos(entity);
+			BlockPos pos = new BlockPos(0, 256, 0);
+
 			World world = entity.getEntityWorld();
 
 			if (state != world.getBlockState(pos))
@@ -82,8 +83,7 @@ public class RenderMovingBlock extends Render<EntityMovingBlock>
 
 					IBakedModel model = blockRendererDispatcher.getModelForState(state);
 
-					blockRendererDispatcher.getBlockModelRenderer()
-							.renderModel(world, model, state, pos, worldRenderer, false);
+					blockRendererDispatcher.getBlockModelRenderer().renderModel(world, model, state, pos, worldRenderer, false);
 
 					worldRenderer.setTranslation(0.0D, 0.0D, 0.0D);
 

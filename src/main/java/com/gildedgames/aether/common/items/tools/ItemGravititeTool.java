@@ -24,7 +24,7 @@ public class ItemGravititeTool extends ItemAetherTool
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand)
 	{
-		if (!world.isRemote)
+		if (!world.isRemote && hand == EnumHand.MAIN_HAND)
 		{
 			PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
 
@@ -40,7 +40,7 @@ public class ItemGravititeTool extends ItemAetherTool
 	@Override
 	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if (!world.isRemote)
+		if (!world.isRemote && hand == EnumHand.MAIN_HAND)
 		{
 			PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
 
