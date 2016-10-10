@@ -1,16 +1,16 @@
 {
 	"variants": {
 		"facing=north": {
-			"model": "aether:holystone_furnace/holystone_furnace_unlit"
+			"model": "aether:incubator/incubator_on"
 		},
 		"facing=east": {
-			"model": "aether:holystone_furnace/holystone_furnace_unlit", "y": 90
+			"model": "aether:incubator/incubator_on", "y": 90
 		},
 		"facing=south": {
-			"model": "aether:holystone_furnace/holystone_furnace_unlit", "y": 180
+			"model": "aether:incubator/incubator_on", "y": 180
 		},
 		"facing=west": {
-			"model": "aether:holystone_furnace/holystone_furnace_unlit", "y": 270
+			"model": "aether:incubator/incubator_on", "y": 270
 		}
 	}
 }

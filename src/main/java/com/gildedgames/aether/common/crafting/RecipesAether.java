@@ -243,6 +243,12 @@ public class RecipesAether implements IAltarRecipeRegistry
         registerShapedRecipe(new ItemStack(BlocksAether.holystone_furnace, 1), "XXX", "X X", "XXX",
                 'X', new ItemStack(BlocksAether.holystone));
 
+		// Incubator
+		registerShapedRecipe(new ItemStack(BlocksAether.incubator), "XXX", "XYX", "ZZZ",
+				'X', new ItemStack(BlocksAether.holystone),
+				'Y', new ItemStack(ItemsAether.ambrosium_chunk),
+				'Z', new ItemStack(BlocksAether.aether_planks));
+
 		// Crossbow
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_crossbow), "ZZY", "XYZ", "WXZ",
 				'W', new ItemStack(ItemsAether.skyroot_stick),
