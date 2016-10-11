@@ -158,22 +158,4 @@ public class BlockIncubator extends BlockContainer
 		return new TileEntityIncubator();
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand)
-	{
-		if (state.getValue(PROPERTY_IS_LIT))
-		{
-			double x = pos.getX() + 0.5D;
-			double y = pos.getY() + 0.3D + rand.nextDouble() * 6.0D / 16.0D + 0.125D;
-			double z = pos.getZ() + 0.5D;
-
-			double xOffset = 0.0D;
-			double zOffset = rand.nextDouble() * 0.6D - 0.3D;
-
-			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x - xOffset, y, z + zOffset, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle(EnumParticleTypes.FLAME, x - xOffset, y, z + zOffset, 0.0D, 0.0D, 0.0D);
-		}
-	}
-
 }
