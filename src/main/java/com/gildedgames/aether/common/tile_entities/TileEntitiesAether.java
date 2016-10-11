@@ -17,7 +17,8 @@ public class TileEntitiesAether
 			MOA_EGG_ID = "aether.moa_egg",
 			STRUCTURE_EXTENDED_ID = "aether.structure_extended",
 			FROSTPINE_COOLER_ID = "aether.frostpine_cooler",
-			INCUBATOR_ID = "aether.incubator";
+			INCUBATOR_ID = "aether.incubator",
+			PRESENT_ID = "aether.present";
 
 	public static void preInit()
 	{
@@ -32,6 +33,7 @@ public class TileEntitiesAether
 		GameRegistry.registerTileEntity(TileEntityStructureExtended.class, STRUCTURE_EXTENDED_ID);
 		GameRegistry.registerTileEntity(TileEntityFrostpineCooler.class, FROSTPINE_COOLER_ID);
 		GameRegistry.registerTileEntity(TileEntityIncubator.class, INCUBATOR_ID);
+		GameRegistry.registerTileEntity(TileEntityPresent.class, PRESENT_ID);
 	}
 	
 }

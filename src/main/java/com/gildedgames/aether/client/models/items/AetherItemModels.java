@@ -22,6 +22,7 @@ import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
 import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthTotem;
+import com.gildedgames.aether.common.tile_entities.TileEntityPresent;
 import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootChest;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -40,6 +41,7 @@ public class AetherItemModels
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.skyroot_chest), 0, TileEntitySkyrootChest.class);
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.labyrinth_totem), 0, TileEntityLabyrinthTotem.class);
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.altar), 0, TileEntityAltar.class);
+		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.present), 0, TileEntityPresent.class);
 	}
 
 	private static void registerModels()
@@ -364,6 +366,7 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.altar, "tesr");
 		registerItemModels(BlocksAether.labyrinth_totem, "tesr");
 		registerItemModels(BlocksAether.multiblock_dummy, "tesr");
+		registerItemModels(BlocksAether.present, "tesr");
 
 		registerItemModels(ItemsAether.zanite_gloves, "accessories/zanite_gloves");
 		registerItemModels(ItemsAether.gravitite_gloves, "accessories/gravitite_gloves");
@@ -587,6 +590,7 @@ public class AetherItemModels
 		registerItemModels(BlocksAether.incubator, "incubator");
 
 		registerItemModels(ItemsAether.sentry_vaultbox, "sentry_vaultbox");
+		registerItemModels(ItemsAether.wrapping_paper, "wrapping_paper");
 
 		ModelLoader.setCustomModelResourceLocation(getItem(BlocksAether.structure_extended), 0, new ModelResourceLocation("structure_block", "inventory"));
 	}

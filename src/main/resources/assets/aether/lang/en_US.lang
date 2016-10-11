@@ -143,6 +143,7 @@ tile.aether.skyroot_vines.name=Skyroot Vines
 tile.aether.enchanted_skyroot_vines.name=Enchanted Skyroot Vines
 tile.aether.frostpine_cooler.name=Frostpine Cooler
 tile.aether.incubator.name=Incubator
+tile.aether.present.name=Present
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
@@ -434,6 +435,7 @@ item.aether.bolt.holystone.name=Holystone Bolt
 item.aether.bolt.zanite.name=Zanite Bolt
 item.aether.bolt.gravitite.name=Gravitite Bolt
 item.aether.bolt.arkenium.name=Arkenium Bolt
+item.aether.wrapping_paper.name=Wrapping Paper
 
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability: 

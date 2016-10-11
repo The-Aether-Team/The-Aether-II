@@ -327,5 +327,11 @@
 		"sounds": [
 			"aether:mob/chest_mimic/awake"
 		]
+	},
+	"random.present_unwrap": {
+		"category": "neutral",
+		"sounds": [
+			"aether:random/present_unwrap"
+		]
 	}
 }

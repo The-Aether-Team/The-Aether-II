@@ -108,7 +108,7 @@ public class AetherRenderers
 			}
 		});
 
-		RenderingRegistry.registerEntityRenderingHandler(EntitySentryVault.class, new IRenderFactory<Entity>()
+		RenderingRegistry.registerEntityRenderingHandler(EntitySentryVaultbox.class, new IRenderFactory<Entity>()
 		{
 			@Override
 			public Render<? super Entity> createRenderFor(RenderManager manager)
@@ -126,5 +126,6 @@ public class AetherRenderers
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLabyrinthTotem.class, new TileEntityLabyrinthTotemRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLabyrinthChest.class, new TileEntityLabyrinthChestRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMoaEgg.class, new TileEntityMoaEggRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPresent.class, new TileEntityPresentRenderer());
 	}
 }

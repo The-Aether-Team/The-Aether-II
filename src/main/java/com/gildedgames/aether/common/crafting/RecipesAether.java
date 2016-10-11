@@ -5,8 +5,10 @@ import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
+import com.gildedgames.aether.common.crafting.recipes.RecipePresentCrafting;
 import com.gildedgames.aether.common.crafting.recipes.RecipeUnbreakable;
 import com.gildedgames.aether.common.crafting.recipes.RecipeLeatherGlovesDyes;
+import com.gildedgames.aether.common.crafting.recipes.RecipeWrappingPaper;
 import com.gildedgames.aether.common.crafting.recipes.altar.AltarEnchantRecipe;
 import com.gildedgames.aether.common.crafting.recipes.altar.AltarRepairRecipe;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
@@ -45,8 +47,12 @@ public class RecipesAether implements IAltarRecipeRegistry
 	private void registerCraftingRecipes()
 	{
 		RecipeSorter.register("aether:leatherGlovesDying", RecipeLeatherGlovesDyes.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
+		RecipeSorter.register("aether:wrappingPaper", RecipeWrappingPaper.class, RecipeSorter.Category.SHAPED, "after:minecraft:shaped");
+		RecipeSorter.register("aether:presentCrafting", RecipePresentCrafting.class, RecipeSorter.Category.SHAPED, "after:minecraft:shaped");
 
 		CraftingManager.getInstance().addRecipe(new RecipeLeatherGlovesDyes());
+		CraftingManager.getInstance().addRecipe(new RecipeWrappingPaper());
+		CraftingManager.getInstance().addRecipe(new RecipePresentCrafting());
 
 		// Parachutes
 

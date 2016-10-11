@@ -234,7 +234,7 @@ public class ItemsAether
 
 	public static Item irradiated_chunk, irradiated_sword, irradiated_armor, irradiated_tool, irradiated_ring, irradiated_neckwear, irradiated_charm, irradiated_dust;
 
-	public static Item sentry_vaultbox;
+	public static Item sentry_vaultbox, wrapping_paper;
 
 	public static void preInit()
 	{
@@ -647,6 +647,7 @@ public class ItemsAether
 		glamoured_cockatrice_keratin = registerItem("glamoured_cockatrice_keratin", new ItemGlamoured().setMaxStackSize(1), CreativeTabsAether.tabCharms);
 
 		sentry_vaultbox = registerItem("sentry_vaultbox", new ItemSentryVault(), CreativeTabsAether.tabMiscellaneous);
+		wrapping_paper = registerItem("wrapping_paper", new ItemWrappingPaper(), CreativeTabsAether.tabMiscellaneous);
 
 		final TemperatureHandler temperatureHandler = new TemperatureHandler();
 

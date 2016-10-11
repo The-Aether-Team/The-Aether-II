@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.consumables;
 
-import com.gildedgames.aether.common.entities.projectiles.EntitySentryVault;
+import com.gildedgames.aether.common.entities.projectiles.EntitySentryVaultbox;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -11,7 +11,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -38,7 +37,7 @@ public class ItemSentryVault extends Item
 
 		if (!world.isRemote)
         {
-			EntitySentryVault sentry_vault = new EntitySentryVault(world, player);
+			EntitySentryVaultbox sentry_vault = new EntitySentryVaultbox(world, player);
 			sentry_vault.setHeadingFromThrower(player, player.rotationPitch, player.rotationYaw, 0.0F, 1.5F, 1.0F);
             world.spawnEntityInWorld(sentry_vault);
         }

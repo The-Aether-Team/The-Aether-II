@@ -86,7 +86,10 @@ public class SoundsAether
 
 	public static final SoundEvent chest_mimic_awake = new SoundEvent(AetherCore.getResource("mob.chest_mimic.awake"));
 
-	public static void preInit() {
+	public static final SoundEvent present_unwrap = new SoundEvent(AetherCore.getResource("random.present_unwrap"));
+
+	public static void preInit()
+	{
 		registerSound("portal.glowstone.hum", glowstone_portal_hum);
 		registerSound("portal.glowstone.trigger", glowstone_portal_trigger);
 		registerSound("portal.glowstone.travel", glowstone_portal_travel);
@@ -143,6 +146,8 @@ public class SoundsAether
 		registerSound("mob.moa.hurt", moa_hurt);
 
 		registerSound("mob.chest_mimic.awake", chest_mimic_awake);
+
+		registerSound("random.present_unwrap", present_unwrap);
 	}
 
 	private static void registerSound(String resource, SoundEvent event) {

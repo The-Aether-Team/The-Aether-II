@@ -13,7 +13,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class EntitySentryVault extends EntityThrowable
+public class EntitySentryVaultbox extends EntityThrowable
 {
 	private boolean hasHit;
 	
@@ -23,17 +23,17 @@ public class EntitySentryVault extends EntityThrowable
 
 	private RandomCraftedItemSelector itemSelector = new RandomCraftedItemSelector();
 
-	public EntitySentryVault(World world)
+	public EntitySentryVaultbox(World world)
     {
         super(world);
     }
 
-    public EntitySentryVault(World world, EntityLivingBase thrower)
+    public EntitySentryVaultbox(World world, EntityLivingBase thrower)
     {
         super(world, thrower);
     }
 
-    public EntitySentryVault(World world, double x, double y, double z)
+    public EntitySentryVaultbox(World world, double x, double y, double z)
     {
         super(world, x, y, z);
     }
