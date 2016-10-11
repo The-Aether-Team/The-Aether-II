@@ -42,6 +42,7 @@ public class RecipesAether implements IAltarRecipeRegistry
 	private void registerFurnaceRecipes()
 	{
 		registerSmeltingRecipe(new ItemStack(BlocksAether.arkenium_ore), new ItemStack(ItemsAether.arkenium), 0.85f);
+		registerSmeltingRecipe(new ItemStack(ItemsAether.moa_egg), new ItemStack(ItemsAether.fried_moa_egg), 0.85f);
 	}
 
 	private void registerCraftingRecipes()

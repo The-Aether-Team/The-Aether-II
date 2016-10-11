@@ -234,7 +234,7 @@ public class ItemsAether
 
 	public static Item irradiated_chunk, irradiated_sword, irradiated_armor, irradiated_tool, irradiated_ring, irradiated_neckwear, irradiated_charm, irradiated_dust;
 
-	public static Item sentry_vaultbox, wrapping_paper;
+	public static Item sentry_vaultbox, wrapping_paper, fried_moa_egg;
 
 	public static void preInit()
 	{
@@ -648,6 +648,8 @@ public class ItemsAether
 
 		sentry_vaultbox = registerItem("sentry_vaultbox", new ItemSentryVault(), CreativeTabsAether.tabMiscellaneous);
 		wrapping_paper = registerItem("wrapping_paper", new ItemWrappingPaper(), CreativeTabsAether.tabMiscellaneous);
+
+		fried_moa_egg = registerItem("fried_moa_egg", new ItemFood(10, false), CreativeTabsAether.tabConsumables);
 
 		final TemperatureHandler temperatureHandler = new TemperatureHandler();
 

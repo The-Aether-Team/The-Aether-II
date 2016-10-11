@@ -436,6 +436,7 @@ item.aether.bolt.zanite.name=Zanite Bolt
 item.aether.bolt.gravitite.name=Gravitite Bolt
 item.aether.bolt.arkenium.name=Arkenium Bolt
 item.aether.wrapping_paper.name=Wrapping Paper
+item.aether.fried_moa_egg.name=Fried Moa Egg
 
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability: 

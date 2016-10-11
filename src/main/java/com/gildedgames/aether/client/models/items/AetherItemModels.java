@@ -595,6 +595,7 @@ public class AetherItemModels
 
 		registerItemModels(ItemsAether.sentry_vaultbox, "sentry_vaultbox");
 		registerItemModels(ItemsAether.wrapping_paper, "wrapping_paper");
+		registerItemModels(ItemsAether.fried_moa_egg, "fried_moa_egg");
 
 		ModelLoader.setCustomModelResourceLocation(getItem(BlocksAether.structure_extended), 0, new ModelResourceLocation("structure_block", "inventory"));
 	}
