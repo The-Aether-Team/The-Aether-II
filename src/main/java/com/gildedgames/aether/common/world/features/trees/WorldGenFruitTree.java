@@ -100,7 +100,7 @@ public class WorldGenFruitTree extends WorldGenAbstractTree
 
 			pos = new BlockPos(x, y - 1, z);
 
-			world.setBlockState(pos, BlocksAether.aether_dirt.getDefaultState());
+			world.setBlockState(pos, BlocksAether.aether_grass.getDefaultState());
 
 			IBlockState air = Blocks.AIR.getDefaultState(),
 					wall = BlocksAether.skyroot_log_wall.getDefaultState().withProperty(BlockSkyrootWall.PROPERTY_GENERATED, true),
