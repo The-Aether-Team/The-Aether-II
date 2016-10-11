@@ -88,7 +88,7 @@ public class BlockHolystoneFurnace extends BlockContainer
 			double y = pos.getY() + rand.nextDouble() * 6.0D / 16.0D + 0.125D;
 			double z = pos.getZ() + 0.5D;
 
-			double xOffset = 0.zD;
+			double xOffset = 0.5D;
 			double zOffset = rand.nextDouble() * 0.6D - 0.3D;
 
 			switch (facing)
