@@ -1,9 +1,14 @@
 package com.gildedgames.aether.common.entities.blocks;
 
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.util.modules.chunk.ChunkModule;
+import com.gildedgames.util.modules.chunk.impl.hooks.BlockBitFlagChunkHook;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -12,6 +17,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class EntityMovingBlock extends Entity
 {
@@ -23,7 +30,9 @@ public class EntityMovingBlock extends Entity
 
 	private boolean hasActivated = false;
 
-	private int invalidTicks = 0;
+	private boolean allowDoubleDrops = true;
+
+	private int ticksStuck = 0, ticksFalling = 0;
 
 	public EntityMovingBlock(World world)
 	{
@@ -81,6 +90,10 @@ public class EntityMovingBlock extends Entity
 
 			if (this.worldObj.getBlockState(pos).getBlock() == this.getBlockState().getBlock())
 			{
+				BlockBitFlagChunkHook data = ChunkModule.api().getHook(this.worldObj, pos, AetherCore.PROXY.getPlacementFlagProvider());
+
+				this.allowDoubleDrops = !data.isMarked(pos);
+
 				this.worldObj.setBlockToAir(pos);
 			}
 			else
@@ -101,18 +114,18 @@ public class EntityMovingBlock extends Entity
 		{
 			if (this.holdingPlayer != null)
 			{
-				if (this.invalidTicks > 30 || this.getDistance(this.holdingPlayer.posX, this.holdingPlayer.posY, this.holdingPlayer.posZ) > 6.0D)
+				if (this.ticksStuck > 30 || this.getDistance(this.holdingPlayer.posX, this.holdingPlayer.posY, this.holdingPlayer.posZ) > 6.0D)
 				{
 					this.setHoldingPlayer(null);
 				}
 
 				if (this.isCollided)
 				{
-					this.invalidTicks++;
+					this.ticksStuck++;
 				}
 				else
 				{
-					this.invalidTicks = 0;
+					this.ticksStuck = 0;
 				}
 			}
 
@@ -129,30 +142,59 @@ public class EntityMovingBlock extends Entity
 	{
 		if (this.holdingPlayer == null)
 		{
-			this.motionY -= 0.04D;
+			this.ticksFalling++;
 
 			BlockPos pos = new BlockPos(this);
-			
+
+			if (this.ticksFalling >= 160)
+			{
+				this.destroy();
+
+				return;
+			}
+
+			this.motionY -= 0.045D;
+
 			if (this.onGround)
 			{
-				if (this.motionX + this.motionZ <= 0.03D)
+				// Try to snap into a coordinate on the ground
+				this.motionX += (pos.getX() - this.posX + 0.45D) * 0.15D;
+				this.motionZ += (pos.getZ() - this.posZ + 0.45D) * 0.15D;
+
+				double distanceFromCenter = pos.distanceSq(this.posX + 0.45D, this.posY, this.posZ + 0.45D);
+
+				if ((this.motionY + this.motionX + this.motionZ) <= 0.04D && distanceFromCenter <= 2.0D)
 				{
 					// We've stopped moving
 					if (!this.worldObj.isRemote)
 					{
+						IBlockState replacingState = this.worldObj.getBlockState(pos);
+
+						if (!replacingState.getBlock().isReplaceable(this.worldObj, pos)) {
+							this.destroy();
+
+							return;
+						}
+
 						this.worldObj.destroyBlock(pos, true);
 
 						this.worldObj.setBlockState(pos, this.getBlockState());
 						this.worldObj.notifyNeighborsOfStateChange(pos, this.getBlockState().getBlock());
 
+						if (!this.allowDoubleDrops)
+						{
+							BlockBitFlagChunkHook data = ChunkModule.api().getHook(this.worldObj, pos, AetherCore.PROXY.getPlacementFlagProvider());
+							data.mark(pos);
+						}
+
 						this.setDead();
+
+						return;
 					}
 				}
-				else
-				{
-					this.motionX *= 0.8D;
-					this.motionZ *= 0.8D;
-				}
+
+				this.motionX *= 0.8D;
+				this.motionZ *= 0.8D;
 			}
 			else
 			{
@@ -164,6 +206,8 @@ public class EntityMovingBlock extends Entity
 		}
 		else
 		{
+			this.ticksFalling = 0;
+
 			// Get where the player is looking at
 			Vec3d look = this.holdingPlayer.getLookVec();
 
@@ -183,6 +227,21 @@ public class EntityMovingBlock extends Entity
 			this.motionX += (toX - this.posX) * 0.1D;
 			this.motionY += (toY - this.posY) * 0.1D;
 			this.motionZ += (toZ - this.posZ) * 0.1D;
+		}
+	}
+
+	private void destroy() {
+		this.setDead();
+
+		BlockPos pos = new BlockPos(this);
+
+		IBlockState state = this.getBlockState();
+
+		List<ItemStack> drops = state.getBlock().getDrops(this.worldObj, pos, state, 0);
+
+		for (ItemStack stack : drops)
+		{
+			Block.spawnAsEntity(this.worldObj, pos, stack);
 		}
 	}
 
@@ -213,10 +272,11 @@ public class EntityMovingBlock extends Entity
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound compound)
 	{
-		Block block = Block.getBlockFromName(compound.getString("Block"));
+		Block block = Block.getBlockById(compound.getInteger("Block"));
 
-		this.setBlockState(block.getStateFromMeta(compound.getByte("BlockState")));
-		this.ticksExisted = compound.getInteger("TicksExisted");
+		this.setBlockState(block.getStateFromMeta(compound.getByte("BlockMeta")));
+		this.ticksFalling = compound.getInteger("TicksFalling");
+		this.allowDoubleDrops = compound.getBoolean("AllowDoubleDrops");
 
 		this.hasActivated = this.ticksExisted > 1;
 	}
@@ -228,14 +288,16 @@ public class EntityMovingBlock extends Entity
 
 		Block block = state.getBlock();
 
-		compound.setString("Block", Block.REGISTRY.getNameForObject(block).toString());
-		compound.setByte("BlockState", (byte) block.getMetaFromState(state));
-		compound.setInteger("TicksExisted", this.ticksExisted);
+		compound.setInteger("Block", Block.REGISTRY.getIDForObject(block));
+		compound.setByte("BlockMeta", (byte) block.getMetaFromState(state));
+		compound.setInteger("TicksFalling", this.ticksFalling);
+		compound.setBoolean("AllowDoubleDrops", this.allowDoubleDrops);
 	}
 
 	public IBlockState getBlockState()
 	{
 		Block block = Block.getBlockById(this.dataManager.get(BLOCK_NAME));
+
 		int meta = (int) this.dataManager.get(BLOCK_METADATA);
 
 		return block.getStateFromMeta(meta);
