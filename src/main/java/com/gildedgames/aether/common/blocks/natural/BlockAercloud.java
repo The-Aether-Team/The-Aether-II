@@ -136,7 +136,7 @@ public class BlockAercloud extends Block implements IBlockVariants
 		this.setSoundType(SoundType.CLOTH);
 
 		this.setHardness(0.2f);
-		this.setLightOpacity(1);
+		this.setLightOpacity(0);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, COLD_AERCLOUD).withProperty(PROPERTY_FACING, EnumFacing.NORTH));
 	}
