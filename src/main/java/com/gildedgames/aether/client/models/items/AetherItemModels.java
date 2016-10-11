@@ -584,7 +584,7 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.irradiated_dust, "irradiated_dust");
 
 		registerItemModels(BlocksAether.frostpine_cooler, "holystone_furnace/holystone_furnace_unlit");
-		registerItemModels(BlocksAether.incubator, "holystone_furnace/holystone_furnace_unlit");
+		registerItemModels(BlocksAether.incubator, "incubator");
 
 		registerItemModels(ItemsAether.sentry_vaultbox, "sentry_vaultbox");
 
