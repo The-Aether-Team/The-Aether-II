@@ -29,17 +29,13 @@ public class TemperatureHandler implements TemperatureProperties
             {
                 return -3;
             }
-            else if (stack.getItem() == ItemBlock.getItemFromBlock(BlocksAether.ambrosium_torch))
-            {
-                return 3;
-            }
-            else if (stack.getItem() == ItemBlock.getItemFromBlock(Blocks.TORCH))
-            {
-                return 3;
-            }
             else if (stack.getItem() == ItemsAether.irradiated_dust)
             {
-                return 10;
+                return 1;
+            }
+            else if (stack.getItem() == ItemsAether.ambrosium_chunk)
+            {
+                return 1;
             }
         }
 

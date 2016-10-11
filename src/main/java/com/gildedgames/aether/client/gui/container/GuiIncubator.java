@@ -72,7 +72,7 @@ public class GuiIncubator extends GuiContainer
 
             valueString += "%";
 
-            this.fontRendererObj.drawString(valueString, 129 - (this.fontRendererObj.getStringWidth(valueString) / 2), this.ySize - 110  + 2, 4210752);
+            this.fontRendererObj.drawString(valueString, 113 - (this.fontRendererObj.getStringWidth(valueString) / 2), this.ySize - 145 + 2, 4210752);
         }
     }
 

@@ -192,7 +192,7 @@ public class ClientEventHandler
 
 						if (temperature > 0)
 						{
-							event.getToolTip().add(TextFormatting.DARK_RED + I18n.format("gui.aether.heating_strength") + TextFormatting.RESET + " " + temperature);
+							event.getToolTip().add(TextFormatting.DARK_RED + I18n.format("gui.aether.incubator_fuel"));
 						}
 
 						if (resultName != null)

@@ -651,9 +651,8 @@ public class ItemsAether
 
 		final TemperatureHandler temperatureHandler = new TemperatureHandler();
 
-		AetherAPI.temperature().register(ItemBlock.getItemFromBlock(Blocks.TORCH), temperatureHandler);
-		AetherAPI.temperature().register(ItemBlock.getItemFromBlock(BlocksAether.ambrosium_torch), temperatureHandler);
 		AetherAPI.temperature().register(ItemsAether.irradiated_dust, temperatureHandler);
+		AetherAPI.temperature().register(ItemsAether.ambrosium_chunk, temperatureHandler);
 
 		AetherAPI.temperature().register(ItemsAether.moa_egg, temperatureHandler);
 

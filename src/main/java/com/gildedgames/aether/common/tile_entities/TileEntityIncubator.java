@@ -2,15 +2,16 @@ package com.gildedgames.aether.common.tile_entities;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.items.properties.TemperatureProperties;
+import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
+import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
 import com.gildedgames.aether.common.containers.ContainerFrostpineCooler;
-import com.gildedgames.aether.common.util.ItemUtil;
+import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import com.gildedgames.aether.common.util.TickTimer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -24,15 +25,15 @@ import javax.annotation.Nullable;
 public class TileEntityIncubator extends TileEntityLockable implements ITickable, IInventory
 {
 
-    private static final int INVENTORY_SIZE = 6;
+    private static final int INVENTORY_SIZE = 5;
 
-    private static final int ITEM_TO_HEAT_INDEX = 4;
-
-    private static final int FLINT_AND_STEEL_INDEX = 5;
+    private static final int MOA_EGG_INDEX = 4;
 
     private ItemStack[] inventory;
 
-    private int reqTemperatureThreshold, currentHeatingProgress;
+    private static final int REQ_TEMPERATURE_THRESHOLD = 5000;
+
+    private int currentHeatingProgress;
 
     private TickTimer progress = new TickTimer();
 
@@ -49,39 +50,65 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
             return;
         }
 
-        ItemStack itemToHeat = this.getItemToHeat();
-        ItemStack flintAndSteel = this.getFlintAndSteel();
+        ItemStack itemToHeat = this.getMoaEgg();
+
+        boolean hasFuelSlotsFilled = true;
+
+        for (int count = 0; count < MOA_EGG_INDEX; count++)
+        {
+            ItemStack stack = this.getStackInSlot(count);
+
+            if (stack == null)
+            {
+                hasFuelSlotsFilled = false;
+                break;
+            }
+        }
 
         if (itemToHeat != null)
         {
             TemperatureProperties props = itemToHeat.getCapability(AetherCapabilities.ITEM_PROPERTIES, null).getTemperatureProperties();
 
-            if (props != null && props.getTemperatureThreshold(itemToHeat) > 0 && flintAndSteel != null)
+            if (props != null && props.getTemperatureThreshold(itemToHeat) > 0 && this.getTotalHeatingItems() >= 4 && hasFuelSlotsFilled)
             {
                 this.progress.tick();
 
                 if (this.progress.isMultipleOfSeconds())
                 {
-                    this.currentHeatingProgress += this.getTotalTemperature();
+                    this.currentHeatingProgress += 5;
                     this.sync();
                 }
 
-                if (this.currentHeatingProgress >= this.reqTemperatureThreshold)
+                if (this.currentHeatingProgress >= TileEntityIncubator.REQ_TEMPERATURE_THRESHOLD)
                 {
                     ItemStack result = props.getResultWhenHeated(this.worldObj, this.getPos(), itemToHeat, this.worldObj.rand);
 
-                    this.setInventorySlotContents(ITEM_TO_HEAT_INDEX, result);
+                    this.setInventorySlotContents(MOA_EGG_INDEX, result);
 
                     if (props.shouldDecreaseStackSize(true))
                     {
-                        this.decrStackSize(ITEM_TO_HEAT_INDEX, 1);
+                        this.decrStackSize(MOA_EGG_INDEX, 1);
                     }
 
-                    ItemUtil.damageItem(flintAndSteel, 15, this.worldObj.rand);
+                    int totalDecreased = 0;
 
-                    if (flintAndSteel.stackSize <= 0)
+                    for (int count = 0; count < MOA_EGG_INDEX; count++)
                     {
-                        this.setInventorySlotContents(FLINT_AND_STEEL_INDEX, null);
+                        ItemStack stack = this.getStackInSlot(count);
+
+                        if (stack == null)
+                        {
+                            continue;
+                        }
+
+                        totalDecreased += 1;
+
+                        this.decrStackSize(count, 1);
+
+                        if (totalDecreased >= 4)
+                        {
+                            break;
+                        }
                     }
 
                     this.currentHeatingProgress = 0;
@@ -93,27 +120,54 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
         else
         {
             this.currentHeatingProgress = 0;
-            this.reqTemperatureThreshold = 0;
             this.progress.reset();
             this.sync();
         }
+
+        final IBlockState state = this.worldObj.getBlockState(this.pos);
+
+        if (state.getBlock() instanceof BlockIncubator && state.getValue(BlockIncubator.PROPERTY_IS_LIT) != this.isHeating())
+        {
+            this.markDirty();
+
+            this.worldObj.setBlockState(this.pos, state.withProperty(BlockIncubator.PROPERTY_IS_LIT, this.isHeating()));
+
+            this.validate();
+            this.worldObj.setTileEntity(this.pos, this);
+        }
     }
 
-    public ItemStack getItemToHeat()
+    public ItemStack getMoaEgg()
     {
-        return this.getStackInSlot(ITEM_TO_HEAT_INDEX);
+        return this.getStackInSlot(MOA_EGG_INDEX);
     }
 
-    public ItemStack getFlintAndSteel() { return this.getStackInSlot(FLINT_AND_STEEL_INDEX); }
+    public boolean areFuelSlotsFilled()
+    {
+        boolean hasFuelSlotsFilled = true;
+
+        for (int count = 0; count < MOA_EGG_INDEX; count++)
+        {
+            ItemStack stack = this.getStackInSlot(count);
+
+            if (stack == null)
+            {
+                hasFuelSlotsFilled = false;
+                break;
+            }
+        }
+
+        return hasFuelSlotsFilled;
+    }
 
     public boolean hasStartedHeating()
     {
-        return this.reqTemperatureThreshold > 0;
+        return (this.currentHeatingProgress > 0 || (this.getTotalHeatingItems() >= 4 && this.areFuelSlotsFilled())) && this.getMoaEgg() != null;
     }
 
     public boolean isHeating()
     {
-        return this.getItemToHeat() != null && this.reqTemperatureThreshold > 0 && this.getItemToHeat() != null && this.getFlintAndSteel() != null;
+        return this.getMoaEgg() != null && this.getTotalHeatingItems() >= 4 && areFuelSlotsFilled();
     }
 
     public int getCurrentHeatingProgress()
@@ -123,14 +177,14 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
     public int getRequiredTemperatureThreshold()
     {
-        return this.reqTemperatureThreshold;
+        return TileEntityIncubator.REQ_TEMPERATURE_THRESHOLD;
     }
 
-    public int getTotalTemperature()
+    public int getTotalHeatingItems()
     {
         int total = 0;
 
-        for (int count = 0; count < ITEM_TO_HEAT_INDEX; count++)
+        for (int count = 0; count < MOA_EGG_INDEX; count++)
         {
             ItemStack stack = this.getStackInSlot(count);
 
@@ -143,7 +197,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
             if (props != null && props.getTemperature(stack) > 0)
             {
-                total += props.getTemperature(stack) * stack.stackSize;
+                total += stack.stackSize;
             }
         }
 
@@ -227,23 +281,6 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
         }
 
         this.inventory[index] = stack;
-
-        if (index == ITEM_TO_HEAT_INDEX)
-        {
-            if (stack == null)
-            {
-                this.reqTemperatureThreshold = 0;
-            }
-            else
-            {
-                TemperatureProperties props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null).getTemperatureProperties();
-
-                if (props != null)
-                {
-                    this.reqTemperatureThreshold = props.getTemperatureThreshold(stack);
-                }
-            }
-        }
     }
 
     @Override
@@ -274,7 +311,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
         TemperatureProperties props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null).getTemperatureProperties();
 
-        if (index < ITEM_TO_HEAT_INDEX)
+        if (index < MOA_EGG_INDEX)
         {
             if (props != null && props.getTemperature(stack) > 0)
             {
@@ -282,14 +319,9 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
             }
         }
 
-        if (index == ITEM_TO_HEAT_INDEX)
+        if (index == MOA_EGG_INDEX)
         {
-            return props != null && props.getTemperatureThreshold(stack) > 0;
-        }
-
-        if (index == FLINT_AND_STEEL_INDEX)
-        {
-            return stack.getItem() instanceof ItemFlintAndSteel;
+            return stack.getItem() instanceof ItemMoaEgg;
         }
 
         return false;
@@ -399,7 +431,6 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
         compound.setTag("inventory", stackList);
 
-        compound.setInteger("reqTemperatureThreshold", this.reqTemperatureThreshold);
         compound.setInteger("currentHeatingProgress", this.currentHeatingProgress);
 
         return compound;
@@ -426,7 +457,6 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
             }
         }
 
-        this.reqTemperatureThreshold = compound.getInteger("reqTemperatureThreshold");
         this.currentHeatingProgress = compound.getInteger("currentHeatingProgress");
     }
 

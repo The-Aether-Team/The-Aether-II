@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.entities.projectiles.EntitySentryVaultbox;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import com.gildedgames.aether.common.items.misc.ItemWrappingPaper;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityTNTPrimed;
@@ -116,6 +117,15 @@ public class TileEntityPresent extends TileEntity
 	{
 		NBTTagCompound nbt = packet.getNbtCompound();
 		this.getPresentData().setDye(ItemWrappingPaper.PresentDyeData.readFromNBT(nbt.getCompoundTag("dye")));
+	}
+
+	public void sync()
+	{
+		IBlockState state = this.worldObj.getBlockState(this.pos);
+
+		this.worldObj.notifyBlockUpdate(this.pos, state, state, 3);
+
+		this.markDirty();
 	}
 
 }

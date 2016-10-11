@@ -29,16 +29,12 @@ public class ContainerIncubator extends Container
     {
         this.tile = coolerInventory;
 
-        for (int i = 0; i < 2; ++i)
+        for (int i = 0; i < 4; ++i)
         {
-            for (int j = 0; j < 2; ++j)
-            {
-                this.addSlotToContainer(new SlotInventory(this.tile, j + i * 2, 71 + j * 18, 26 + i * 18));
-            }
+            this.addSlotToContainer(new SlotInventory(this.tile, i, 53 + (i * 18), 52));
         }
 
-        this.addSlotToContainer(new SlotMoaEgg(this.tile, 4, 120, 36));
-        this.addSlotToContainer(new SlotFlintAndSteel(this.tile, 5, 40, 36));
+        this.addSlotToContainer(new SlotMoaEgg(this.tile, 4, 80, 18));
 
         for (int i = 0; i < 3; ++i)
         {
@@ -93,7 +89,7 @@ public class ContainerIncubator extends Container
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (index > 5)
+            if (index > 4)
             {
                 TemperatureProperties props = itemstack1.getCapability(AetherCapabilities.ITEM_PROPERTIES, null).getTemperatureProperties();
 
@@ -103,16 +99,16 @@ public class ContainerIncubator extends Container
                     {
                         if (!this.mergeItemStack(itemstack1, 0, 4, false))
                         {
-                            if (index < 33)
+                            if (index < 32)
                             {
-                                if (!this.mergeItemStack(itemstack1, 33, 42, false))
+                                if (!this.mergeItemStack(itemstack1, 32, 41, false))
                                 {
                                     return null;
                                 }
                             }
                             else
                             {
-                                if (!this.mergeItemStack(itemstack1, 5, 33, false))
+                                if (!this.mergeItemStack(itemstack1, 5, 32, false))
                                 {
                                     return null;
                                 }
@@ -123,16 +119,16 @@ public class ContainerIncubator extends Container
                     {
                         if (!this.mergeItemStack(itemstack1, 4, 5, false))
                         {
-                            if (index < 33)
+                            if (index < 32)
                             {
-                                if (!this.mergeItemStack(itemstack1, 33, 42, false))
+                                if (!this.mergeItemStack(itemstack1, 32, 41, false))
                                 {
                                     return null;
                                 }
                             }
                             else
                             {
-                                if (!this.mergeItemStack(itemstack1, 5, 33, false))
+                                if (!this.mergeItemStack(itemstack1, 5, 32, false))
                                 {
                                     return null;
                                 }
@@ -140,38 +136,18 @@ public class ContainerIncubator extends Container
                         }
                     }
                 }
-                else if (itemstack1.getItem() instanceof ItemFlintAndSteel)
-                {
-                    if (!this.mergeItemStack(itemstack1, 5, 6, false))
-                    {
-                        if (index < 33)
-                        {
-                            if (!this.mergeItemStack(itemstack1, 33, 42, false))
-                            {
-                                return null;
-                            }
-                        }
-                        else
-                        {
-                            if (!this.mergeItemStack(itemstack1, 5, 33, false))
-                            {
-                                return null;
-                            }
-                        }
-                    }
-                }
                 else
                 {
-                    if (index < 33)
+                    if (index < 32)
                     {
-                        if (!this.mergeItemStack(itemstack1, 33, 42, false))
+                        if (!this.mergeItemStack(itemstack1, 32, 41, false))
                         {
                             return null;
                         }
                     }
                     else
                     {
-                        if (!this.mergeItemStack(itemstack1, 5, 33, false))
+                        if (!this.mergeItemStack(itemstack1, 5, 32, false))
                         {
                             return null;
                         }
@@ -180,7 +156,7 @@ public class ContainerIncubator extends Container
 
                 slot.onSlotChange(itemstack1, itemstack);
             }
-            else if (!this.mergeItemStack(itemstack1, 5, 42, false))
+            else if (!this.mergeItemStack(itemstack1, 5, 41, false))
             {
                 return null;
             }

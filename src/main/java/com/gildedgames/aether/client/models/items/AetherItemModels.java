@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPlanks;
 import com.gildedgames.aether.common.blocks.containers.BlockAetherCraftingTable;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
+import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
 import com.gildedgames.aether.common.blocks.dungeon.BlockDivine;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
@@ -587,7 +588,10 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.irradiated_dust, "irradiated_dust");
 
 		registerItemModels(BlocksAether.frostpine_cooler, "holystone_furnace/holystone_furnace_unlit");
-		registerItemModels(BlocksAether.incubator, "incubator");
+
+		registerItemModels(BlocksAether.incubator, new ItemModelBuilder("incubator/")
+				.add(BlockIncubator.LIT_META, "lit")
+				.add(BlockIncubator.UNLIT_META, "unlit"));
 
 		registerItemModels(ItemsAether.sentry_vaultbox, "sentry_vaultbox");
 		registerItemModels(ItemsAether.wrapping_paper, "wrapping_paper");

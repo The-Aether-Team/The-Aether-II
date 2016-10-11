@@ -601,7 +601,7 @@ gui.aether.random_tool=Random Tool
 gui.aether.random_ring=Random Ring
 gui.aether.random_neckwear=Random Neckwear
 gui.aether.random_charm=Random Charm
-gui.aether.heating_strength=Heating Strength:
+gui.aether.incubator_fuel=Incubator Fuel
 gui.aether.baby_moa=Baby Moa
 
 #Ability Tooltips
