@@ -333,5 +333,11 @@
 		"sounds": [
 			"aether:random/present_unwrap"
 		]
+	},
+	"random.dungeon.container.smash": {
+		"category": "neutral",
+		"sounds": [
+			"aether:random/container_break"
+		]
 	}
 }

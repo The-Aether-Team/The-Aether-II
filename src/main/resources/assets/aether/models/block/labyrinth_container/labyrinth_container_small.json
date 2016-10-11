@@ -1,0 +1,48 @@
+{
+	"parent": "block/block",
+	"textures": {
+		"particle": "aether:blocks/dungeon/labyrinth_wall",
+		"0": "aether:blocks/labyrinth_container/labyrinth_container_small"
+    },
+    "elements": [
+        {
+            "name": "Base",
+            "from": [ 4, 0, 4 ], 
+            "to": [ 12, 6, 12 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0, 3, 8, 9 ] },
+                "east": { "texture": "#0", "uv": [ 0, 3, 8, 9 ] },
+                "south": { "texture": "#0", "uv": [ 0, 3, 8, 9 ] },
+                "west": { "texture": "#0", "uv": [ 0, 3, 8, 9 ] },
+                "up": { "texture": "#0", "uv": [ 8, 0, 16, 8 ] },
+                "down": { "texture": "#0", "uv": [ 8, 8, 16, 16 ] }
+            }
+        },
+        {
+            "name": "Middle",
+            "from": [ 5, 6, 5 ], 
+            "to": [ 11, 7, 11 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 1, 2, 7, 3 ] },
+                "east": { "texture": "#0", "uv": [ 1, 2, 7, 3 ] },
+                "south": { "texture": "#0", "uv": [ 1, 2, 7, 3 ] },
+                "west": { "texture": "#0", "uv": [ 1, 2, 7, 3 ] },
+                "up": { "texture": "#-1", "uv": [ 0, 0, 6, 6 ] },
+                "down": { "texture": "#-1", "uv": [ 0, 0, 6, 6 ] }
+            }
+        },
+        {
+            "name": "Top",
+            "from": [ 4, 7, 4 ], 
+            "to": [ 12, 9, 12 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0, 0, 8, 2 ] },
+                "east": { "texture": "#0", "uv": [ 0, 0, 8, 2 ] },
+                "south": { "texture": "#0", "uv": [ 0, 0, 8, 2 ] },
+                "west": { "texture": "#0", "uv": [ 0, 0, 8, 2 ] },
+                "up": { "texture": "#0", "uv": [ 8, 0, 16, 8 ] },
+                "down": { "texture": "#0", "uv": [ 8, 8, 16, 16 ] }
+            }
+        }
+    ]
+}

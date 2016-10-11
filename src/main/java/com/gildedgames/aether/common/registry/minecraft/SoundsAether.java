@@ -88,6 +88,8 @@ public class SoundsAether
 
 	public static final SoundEvent present_unwrap = new SoundEvent(AetherCore.getResource("random.present_unwrap"));
 
+	public static final SoundEvent break_labyrinth_container = new SoundEvent(AetherCore.getResource("random.dungeon.container.smash"));
+
 	public static void preInit()
 	{
 		registerSound("portal.glowstone.hum", glowstone_portal_hum);
@@ -148,6 +150,7 @@ public class SoundsAether
 		registerSound("mob.chest_mimic.awake", chest_mimic_awake);
 
 		registerSound("random.present_unwrap", present_unwrap);
+		registerSound("random.dungeon.container.smash", break_labyrinth_container);
 	}
 
 	private static void registerSound(String resource, SoundEvent event) {

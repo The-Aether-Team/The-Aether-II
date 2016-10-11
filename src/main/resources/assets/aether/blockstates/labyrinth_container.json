@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "variant=small": {
+      "model": "aether:labyrinth_container/labyrinth_container_small"
+    },
+    "variant=large": {
+      "model": "aether:labyrinth_container/labyrinth_container_large"
+    }
+  }
+}

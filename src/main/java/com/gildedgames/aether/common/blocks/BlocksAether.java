@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.containers.*;
+import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthContainer;
 import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import com.gildedgames.aether.common.blocks.construction.*;
@@ -267,6 +268,8 @@ public class BlocksAether
 
 	public static final Block present = new BlockPresent();
 
+	public static final BlockLabyrinthContainer labyrinth_container = new BlockLabyrinthContainer();
+
 	public static void preInit()
 	{
 		registerBlock("aether_dirt", BlocksAether.aether_dirt.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.aether_dirt));
@@ -431,6 +434,7 @@ public class BlocksAether
 		registerBlock("incubator", BlocksAether.incubator.setCreativeTab(CreativeTabsAether.tabBlocks));
 
 		registerBlock("present", BlocksAether.present.setCreativeTab(CreativeTabsAether.tabMiscellaneous), new ItemBlockPresent(BlocksAether.present));
+		registerBlock("labyrinth_container", BlocksAether.labyrinth_container.setCreativeTab(CreativeTabsAether.tabBlocks), new ItemBlockVariants(BlocksAether.labyrinth_container));
 
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_log_wall, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.aether_planks, 5, 5);

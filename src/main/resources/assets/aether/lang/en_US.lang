@@ -144,6 +144,8 @@ tile.aether.enchanted_skyroot_vines.name=Enchanted Skyroot Vines
 tile.aether.frostpine_cooler.name=Frostpine Cooler
 tile.aether.incubator.name=Incubator
 tile.aether.present.name=Present
+tile.aether.labyrinth_container.small.name=Small Labyrinth Container
+tile.aether.labyrinth_container.large.name=Large Labyrinth Container
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick

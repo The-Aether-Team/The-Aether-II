@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.blocks.containers.BlockAetherCraftingTable;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
 import com.gildedgames.aether.common.blocks.dungeon.BlockDivine;
+import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthContainer;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
@@ -596,6 +597,10 @@ public class AetherItemModels
 		registerItemModels(ItemsAether.sentry_vaultbox, "sentry_vaultbox");
 		registerItemModels(ItemsAether.wrapping_paper, "wrapping_paper");
 		registerItemModels(ItemsAether.fried_moa_egg, "fried_moa_egg");
+
+		registerItemModels(BlocksAether.labyrinth_container, new ItemModelBuilder("labyrinth_container/")
+				.add(BlockLabyrinthContainer.VARIANT_SMALL.getMeta(), "labyrinth_container_small")
+				.add(BlockLabyrinthContainer.VARIANT_LARGE.getMeta(), "labyrinth_container_large"));
 
 		ModelLoader.setCustomModelResourceLocation(getItem(BlocksAether.structure_extended), 0, new ModelResourceLocation("structure_block", "inventory"));
 	}
