@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceHide;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceSneakAttack;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceWander;
+import com.gildedgames.aether.common.util.EntityUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -95,6 +96,8 @@ public class EntityCockatrice extends EntityMob implements IEntityProperties
 	public void onUpdate()
 	{
 		super.onUpdate();
+
+		EntityUtil.despawnEntityDuringDaytime(this);
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class EntityTempest extends EntityFlyingMob implements IEntityProperties
@@ -36,6 +37,14 @@ public class EntityTempest extends EntityFlyingMob implements IEntityProperties
 		this.faceEntity(target, 10.0F, 10.0F);
 
 		EntityUtil.spawnParticleLineBetween(this, target, 4D, EnumParticleTypes.SPELL_INSTANT);
+	}
+
+	@Override
+	public void onUpdate()
+	{
+		super.onUpdate();
+
+		EntityUtil.despawnEntityDuringDaytime(this);
 	}
 
 	@Override

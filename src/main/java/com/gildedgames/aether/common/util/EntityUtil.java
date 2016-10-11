@@ -7,6 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
@@ -18,6 +19,35 @@ public class EntityUtil
 	private EntityUtil()
 	{
 
+	}
+
+	public static void despawnEntityDuringDaytime(Entity entity)
+	{
+		if (!entity.worldObj.isRemote && entity.worldObj.isDaytime())
+		{
+			boolean canSee = false;
+
+			Vec3d vec3d = entity.getPositionVector();
+
+			for (EntityPlayer player : entity.worldObj.playerEntities)
+			{
+				Vec3d look = player.getLook(1.0F);
+
+				Vec3d reverse = vec3d.subtractReverse(new Vec3d(player.posX, player.posY, player.posZ)).normalize();
+				reverse = new Vec3d(reverse.xCoord, 0.0D, reverse.zCoord);
+
+				if (reverse.dotProduct(look) < 0.0D && player.getDistanceToEntity(entity) < 64.0D)
+				{
+					canSee = true;
+					break;
+				}
+			}
+
+			if (!canSee)
+			{
+				entity.setDead();
+			}
+		}
 	}
 
 	public static Entity getEntityFromUUID(World world, UUID uuid)
