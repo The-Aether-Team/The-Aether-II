@@ -76,7 +76,6 @@ public class CommonProxy
 
 		// Pre-initialize content
 		BiomesAether.preInit();
-		MaterialsAether.preInit();
 		SoundsAether.preInit();
 
 		BlocksAether.preInit();

@@ -70,9 +70,9 @@ public class RecipeLeatherGlovesDyes implements IRecipe
 					stack = invStack.copy();
 					stack.stackSize = 1;
 
-					if (leatherGloves.hasColor(invStack))
+					if (ItemLeatherGloves.hasColor(invStack))
 					{
-						int color = leatherGloves.getColor(stack);
+						int color = ItemLeatherGloves.getColor(stack);
 
 						float r = (float)(color >> 16 & 255) / 255.0F;
 						float g = (float)(color >> 8 & 255) / 255.0F;
@@ -131,7 +131,7 @@ public class RecipeLeatherGlovesDyes implements IRecipe
 			int color = (r << 8) + g;
 			color = (color << 8) + b;
 
-			leatherGloves.setColor(stack, color);
+			ItemLeatherGloves.setColor(stack, color);
 
 			return stack;
 		}

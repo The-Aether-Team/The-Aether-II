@@ -9,28 +9,94 @@ import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCa
 import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentType;
 import com.gildedgames.aether.api.capabilites.items.properties.ItemRarity;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.capabilities.entity.effects.processors.*;
-import com.gildedgames.aether.common.capabilities.entity.effects.rules.*;
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffects;
+import com.gildedgames.aether.common.capabilities.entity.effects.processors.ChangeAttackElementEffect;
+import com.gildedgames.aether.common.capabilities.entity.effects.processors.DoubleDropEffect;
+import com.gildedgames.aether.common.capabilities.entity.effects.processors.FreezeBlocksEffect;
+import com.gildedgames.aether.common.capabilities.entity.effects.processors.LeechLifeEffect;
+import com.gildedgames.aether.common.capabilities.entity.effects.processors.LevitateAttackersEffect;
+import com.gildedgames.aether.common.capabilities.entity.effects.processors.ModifyAttackSpeedEffect;
+import com.gildedgames.aether.common.capabilities.entity.effects.processors.ModifyDamageEffect;
+import com.gildedgames.aether.common.capabilities.entity.effects.processors.ModifyDefenseEffect;
+import com.gildedgames.aether.common.capabilities.entity.effects.processors.ModifyMaxHealthEffect;
+import com.gildedgames.aether.common.capabilities.entity.effects.processors.ModifySpeedEffect;
+import com.gildedgames.aether.common.capabilities.entity.effects.processors.ModifyWeightEffect;
+import com.gildedgames.aether.common.capabilities.entity.effects.processors.RegenerateHealthEffect;
+import com.gildedgames.aether.common.capabilities.entity.effects.processors.SetAttackersOnFireEffect;
+import com.gildedgames.aether.common.capabilities.entity.effects.processors.player.ModifyXPCollectionEffect;
+import com.gildedgames.aether.common.capabilities.entity.effects.rules.DamagingElementRule;
+import com.gildedgames.aether.common.capabilities.entity.effects.rules.DamagingMobRule;
+import com.gildedgames.aether.common.capabilities.entity.effects.rules.DamagingPassiveAnimalsRule;
+import com.gildedgames.aether.common.capabilities.entity.effects.rules.DamagingUndeadRule;
+import com.gildedgames.aether.common.capabilities.entity.effects.rules.HoldingItemRule;
+import com.gildedgames.aether.common.capabilities.entity.effects.rules.InCombatRule;
+import com.gildedgames.aether.common.capabilities.entity.effects.rules.InDirectMoonlightRule;
+import com.gildedgames.aether.common.capabilities.entity.effects.rules.InDirectSunlightRule;
+import com.gildedgames.aether.common.capabilities.entity.effects.rules.OutOfCombatRule;
+import com.gildedgames.aether.common.capabilities.entity.effects.rules.WhenPoisonedRule;
+import com.gildedgames.aether.common.capabilities.item.effects.ItemEffects;
+import com.gildedgames.aether.common.entities.companions.EntityEtheralWisp;
+import com.gildedgames.aether.common.entities.companions.EntityFangrin;
+import com.gildedgames.aether.common.entities.companions.EntityFleetingWisp;
+import com.gildedgames.aether.common.entities.companions.EntityFrostpineTotem;
+import com.gildedgames.aether.common.entities.companions.EntityKraisith;
+import com.gildedgames.aether.common.entities.companions.EntityNexSpirit;
+import com.gildedgames.aether.common.entities.companions.EntityPinkBabySwet;
+import com.gildedgames.aether.common.entities.companions.EntityShadeOfArkenzus;
+import com.gildedgames.aether.common.entities.companions.EntitySoaringWisp;
+import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
+import com.gildedgames.aether.common.items.armor.ItemAetherShield;
+import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
+import com.gildedgames.aether.common.items.armor.ItemLeatherGloves;
+import com.gildedgames.aether.common.items.armor.ItemNeptuneArmor;
+import com.gildedgames.aether.common.items.armor.ItemPhoenixArmor;
+import com.gildedgames.aether.common.items.armor.ItemValkyrieArmor;
+import com.gildedgames.aether.common.items.armor.ItemZaniteArmor;
+import com.gildedgames.aether.common.items.companions.ItemCompanion;
+import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
+import com.gildedgames.aether.common.items.consumables.ItemAmbrosiumChunk;
+import com.gildedgames.aether.common.items.consumables.ItemCloudParachute;
+import com.gildedgames.aether.common.items.consumables.ItemEnchantedWyndberry;
+import com.gildedgames.aether.common.items.consumables.ItemGummySwet;
+import com.gildedgames.aether.common.items.consumables.ItemHealingStone;
+import com.gildedgames.aether.common.items.consumables.ItemSentryVault;
+import com.gildedgames.aether.common.items.consumables.ItemShardOfLife;
+import com.gildedgames.aether.common.items.consumables.ItemSkyrootConsumableBucket;
+import com.gildedgames.aether.common.items.consumables.ItemStomperPop;
+import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
+import com.gildedgames.aether.common.items.misc.ItemAetherDeveloperWand;
+import com.gildedgames.aether.common.items.misc.ItemAetherPortalFrame;
+import com.gildedgames.aether.common.items.misc.ItemAetherRecord;
+import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
+import com.gildedgames.aether.common.items.misc.ItemSkyrootBed;
+import com.gildedgames.aether.common.items.misc.ItemSkyrootSign;
+import com.gildedgames.aether.common.items.misc.ItemWrappingPaper;
+import com.gildedgames.aether.common.items.tools.EnumToolType;
+import com.gildedgames.aether.common.items.tools.ItemArkeniumTool;
+import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
+import com.gildedgames.aether.common.items.tools.ItemHolystoneTool;
+import com.gildedgames.aether.common.items.tools.ItemSkyrootBucket;
+import com.gildedgames.aether.common.items.tools.ItemSkyrootTool;
+import com.gildedgames.aether.common.items.tools.ItemValkyrieTool;
+import com.gildedgames.aether.common.items.tools.ItemZaniteTool;
+import com.gildedgames.aether.common.items.weapons.ItemDart;
+import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
+import com.gildedgames.aether.common.items.weapons.ItemVampireBlade;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemBolt;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
+import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
+import com.gildedgames.aether.common.items.weapons.swords.ItemArkeniumSword;
+import com.gildedgames.aether.common.items.weapons.swords.ItemCandyCaneSword;
+import com.gildedgames.aether.common.items.weapons.swords.ItemElementalSword;
+import com.gildedgames.aether.common.items.weapons.swords.ItemGravititeSword;
+import com.gildedgames.aether.common.items.weapons.swords.ItemHolystoneSword;
+import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
+import com.gildedgames.aether.common.items.weapons.swords.ItemZaniteSword;
 import com.gildedgames.aether.common.registry.TemperatureHandler;
 import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import com.gildedgames.aether.common.registry.minecraft.MaterialsAether;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.capabilities.item.effects.ItemEffects;
-import com.gildedgames.aether.common.entities.companions.*;
-import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffects;
-import com.gildedgames.aether.common.capabilities.entity.effects.processors.player.ModifyXPCollectionEffect;
-import com.gildedgames.aether.common.items.armor.*;
-import com.gildedgames.aether.common.items.companions.ItemCompanion;
-import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
-import com.gildedgames.aether.common.items.consumables.*;
-import com.gildedgames.aether.common.items.misc.*;
-import com.gildedgames.aether.common.items.tools.*;
-import com.gildedgames.aether.common.items.weapons.ItemDart;
-import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
-import com.gildedgames.aether.common.items.weapons.ItemVampireBlade;
-import com.gildedgames.aether.common.items.weapons.crossbow.*;
-import com.gildedgames.aether.common.items.weapons.swords.*;
 import com.gildedgames.aether.common.util.Constraint;
 import com.gildedgames.aether.common.util.RandomItemSelector;
 import com.google.common.collect.Lists;
@@ -41,7 +107,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemDoor;
+import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemShears;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemTool;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -52,602 +125,738 @@ import java.util.List;
 
 public class ItemsAether
 {
-	public static Item skyroot_stick;
+	public static final Item skyroot_stick = new Item();
 
-	public static Item ambrosium_shard, ambrosium_chunk, zanite_gemstone, arkenium, arkenium_strip;
+	public static final Item ambrosium_shard = new Item(),
+			ambrosium_chunk = new ItemAmbrosiumChunk(),
+			zanite_gemstone = new Item(),
+			arkenium = new Item(),
+			arkenium_strip = new Item();
 
-	public static ItemSkyrootTool skyroot_axe, skyroot_pickaxe, skyroot_shovel;
+	public static final ItemSkyrootTool skyroot_axe = new ItemSkyrootTool(EnumToolType.AXE, 6.0F, -3.2F),
+			skyroot_pickaxe = new ItemSkyrootTool(EnumToolType.PICKAXE, 1.0F, -2.8F),
+			skyroot_shovel = new ItemSkyrootTool(EnumToolType.SHOVEL, 1.5F, -3.0F);
 
-	public static ItemHolystoneTool holystone_axe, holystone_pickaxe, holystone_shovel;
+	public static final ItemHolystoneTool holystone_axe = new ItemHolystoneTool(EnumToolType.AXE, 8.0F, -3.2F),
+			holystone_pickaxe = new ItemHolystoneTool(EnumToolType.PICKAXE, 1.0F, -2.8F),
+			holystone_shovel = new ItemHolystoneTool(EnumToolType.SHOVEL, 1.5F, -3.0F);
 
-	public static ItemZaniteTool zanite_axe, zanite_pickaxe, zanite_shovel;
+	public static final ItemZaniteTool zanite_axe = new ItemZaniteTool(EnumToolType.AXE, 8.0F, -3.1F),
+			zanite_pickaxe = new ItemZaniteTool(EnumToolType.PICKAXE, 1.0F, -2.8F),
+			zanite_shovel = new ItemZaniteTool(EnumToolType.SHOVEL, 1.5F, -3.0F);
 
-	public static ItemGravititeTool gravitite_axe, gravitite_pickaxe, gravitite_shovel;
+	public static final ItemGravititeTool gravitite_axe = new ItemGravititeTool(EnumToolType.AXE, 8.0F, -3.0F),
+			gravitite_pickaxe = new ItemGravititeTool(EnumToolType.PICKAXE, 1.0F, -2.8F),
+			gravitite_shovel = new ItemGravititeTool(EnumToolType.SHOVEL, 1.5F, -3.0F);
 
-	public static ItemValkyrieTool valkyrie_axe, valkyrie_pickaxe, valkyrie_shovel;
+	public static final ItemValkyrieTool valkyrie_axe = new ItemValkyrieTool(EnumToolType.AXE, 8.0F, -3.0F),
+			valkyrie_pickaxe = new ItemValkyrieTool(EnumToolType.PICKAXE, 1.0F, -2.8F),
+			valkyrie_shovel = new ItemValkyrieTool(EnumToolType.SHOVEL, 1.5F, -3.0F);
 
-	public static ItemArkeniumTool arkenium_axe, arkenium_pickaxe, arkenium_shovel;
+	public static final ItemArkeniumTool arkenium_axe = new ItemArkeniumTool(EnumToolType.AXE, 7.0F, -3.3F),
+			arkenium_pickaxe = new ItemArkeniumTool(EnumToolType.PICKAXE, 4.0F, -3.2F),
+			arkenium_shovel = new ItemArkeniumTool(EnumToolType.SHOVEL, 4.5F, -3.3F);
 
-	public static ItemShears arkenium_shears;
+	public static final ItemShears arkenium_shears = new ItemShears();
 
-	public static ItemAetherSword skyroot_sword, holystone_sword, zanite_sword, gravitite_sword, arkenium_sword;
+	public static final ItemAetherSword skyroot_sword = new ItemSkyrootSword(),
+			holystone_sword = new ItemHolystoneSword(),
+			zanite_sword = new ItemZaniteSword(),
+			gravitite_sword = new ItemGravititeSword(),
+			arkenium_sword = new ItemArkeniumSword();
 
-	public static ItemZaniteArmor zanite_helmet, zanite_chestplate, zanite_leggings, zanite_boots;
+	public static final ItemZaniteArmor zanite_helmet = new ItemZaniteArmor(EntityEquipmentSlot.HEAD),
+			zanite_chestplate = new ItemZaniteArmor(EntityEquipmentSlot.CHEST),
+			zanite_leggings = new ItemZaniteArmor(EntityEquipmentSlot.LEGS),
+			zanite_boots = new ItemZaniteArmor(EntityEquipmentSlot.FEET);
 
-	public static ItemGravititeArmor gravitite_helmet, gravitite_chestplate, gravitite_leggings, gravitite_boots;
+	public static final ItemGravititeArmor gravitite_helmet = new ItemGravititeArmor(EntityEquipmentSlot.HEAD),
+			gravitite_chestplate = new ItemGravititeArmor(EntityEquipmentSlot.CHEST),
+			gravitite_leggings = new ItemGravititeArmor(EntityEquipmentSlot.LEGS),
+			gravitite_boots = new ItemGravititeArmor(EntityEquipmentSlot.FEET);
 
-	public static ItemNeptuneArmor neptune_helmet, neptune_chestplate, neptune_leggings, neptune_boots;
+	public static final ItemNeptuneArmor neptune_helmet = new ItemNeptuneArmor(EntityEquipmentSlot.HEAD),
+			neptune_chestplate = new ItemNeptuneArmor(EntityEquipmentSlot.CHEST),
+			neptune_leggings = new ItemNeptuneArmor(EntityEquipmentSlot.LEGS),
+			neptune_boots = new ItemNeptuneArmor(EntityEquipmentSlot.FEET);
 
-	public static ItemPhoenixArmor phoenix_helmet, phoenix_chestplate, phoenix_leggings, phoenix_boots;
+	public static final ItemPhoenixArmor phoenix_helmet = new ItemPhoenixArmor(EntityEquipmentSlot.HEAD),
+			phoenix_chestplate = new ItemPhoenixArmor(EntityEquipmentSlot.CHEST),
+			phoenix_leggings = new ItemPhoenixArmor(EntityEquipmentSlot.LEGS),
+			phoenix_boots = new ItemPhoenixArmor(EntityEquipmentSlot.FEET);
 
-	public static ItemValkyrieArmor valkyrie_helmet, valkyrie_chestplate, valkyrie_leggings, valkyrie_boots;
+	public static final ItemValkyrieArmor valkyrie_helmet = new ItemValkyrieArmor(EntityEquipmentSlot.HEAD),
+			valkyrie_chestplate = new ItemValkyrieArmor(EntityEquipmentSlot.CHEST),
+			valkyrie_leggings = new ItemValkyrieArmor(EntityEquipmentSlot.LEGS),
+			valkyrie_boots = new ItemValkyrieArmor(EntityEquipmentSlot.FEET);
 
-	public static Item golden_amber;
+	public static final Item golden_amber = new Item();
 
-	public static ItemFood blueberries, enchanted_blueberry, orange, wyndberry, enchanted_wyndberry, swet_jelly, gummy_swet;
+	public static final ItemFood blueberries = new ItemFood(2, false),
+			enchanted_blueberry = new ItemFood(6, false),
+			orange = new ItemFood(4, false),
+			wyndberry = new ItemFood(4, false),
+			enchanted_wyndberry = new ItemEnchantedWyndberry(),
+			swet_jelly = new ItemSwetJelly(),
+			gummy_swet = new ItemGummySwet();
 
-	public static ItemFood candy_corn, cocoatrice, wrapped_chocolates, jelly_pumpkin, stomper_pop, blueberry_lollipop, orange_lollipop, icestone_poprocks;
+	public static final ItemFood candy_corn = new ItemFood(8, false),
+			cocoatrice = new ItemFood(12, false),
+			wrapped_chocolates = new ItemFood(12, false),
+			jelly_pumpkin = new ItemFood(12, false),
+			stomper_pop = new ItemStomperPop(),
+			blueberry_lollipop = new ItemFood(10, false),
+			orange_lollipop = new ItemFood(8, false),
+			icestone_poprocks = new ItemFood(5, false);
 
-	public static ItemFood ginger_bread_man, candy_cane;
+	public static final ItemFood ginger_bread_man = new ItemFood(2, false),
+			candy_cane = new ItemFood(2, false);
 
-	public static ItemSkyrootBucket skyroot_bucket, skyroot_water_bucket;
+	public static final ItemSkyrootBucket skyroot_bucket = new ItemSkyrootBucket(Blocks.AIR),
+			skyroot_water_bucket = new ItemSkyrootBucket(Blocks.FLOWING_WATER);
 
-	public static ItemSkyrootConsumableBucket skyroot_milk_bucket, skyroot_poison_bucket;
+	public static final ItemSkyrootConsumableBucket skyroot_milk_bucket = new ItemSkyrootConsumableBucket(),
+			skyroot_poison_bucket = new ItemSkyrootConsumableBucket();
 
-	public static ItemAetherRecord valkyrie_music_disc, labyrinth_music_disc, moa_music_disc, aerwhale_music_disc, recording_892;
+	public static final ItemAetherRecord valkyrie_music_disc = new ItemAetherRecord("valkyrie", SoundsAether.record_valkyrie),
+			labyrinth_music_disc = new ItemAetherRecord("labyrinth", SoundsAether.record_labyrinth),
+			moa_music_disc = new ItemAetherRecord("moa", SoundsAether.record_moa),
+			aerwhale_music_disc = new ItemAetherRecord("aerwhale", SoundsAether.record_aerwhale),
+			recording_892 = new ItemAetherRecord("recording_892", SoundsAether.record_recording_892);
 
-	public static Item healing_stone;
+	public static final Item healing_stone = new ItemHealingStone();
 
-	public static Item healing_stone_depleted;
+	public static final Item healing_stone_depleted = new Item();
 
-	public static ItemDartShooter dart_shooter;
+	public static final ItemDartShooter dart_shooter = new ItemDartShooter();
 
-	public static ItemDart dart;
+	public static final ItemDart dart = new ItemDart();
 
-	public static ItemElementalSword flaming_sword, holy_sword, lightning_sword;
+	public static final ItemElementalSword flaming_sword = new ItemElementalSword(ItemElementalSword.SwordElement.FIRE),
+			holy_sword = new ItemElementalSword(ItemElementalSword.SwordElement.HOLY),
+			lightning_sword = new ItemElementalSword(ItemElementalSword.SwordElement.LIGHTNING);
 
-	public static ItemSword vampire_blade, candy_cane_sword, valkyrie_lance;
+	public static final ItemSword vampire_blade = new ItemVampireBlade(),
+			candy_cane_sword = new ItemCandyCaneSword(),
+			valkyrie_lance = new ItemAetherSword(MaterialsAether.LEGENDARY_TOOL, ItemAbilityType.PASSIVE);
 
-	public static ItemDoor skyroot_door, arkenium_door, blightwillow_door, earthshifter_door, frostpine_door;
+	public static final ItemDoor skyroot_door = new ItemDoor(BlocksAether.skyroot_door),
+			arkenium_door = new ItemDoor(BlocksAether.arkenium_door),
+			blightwillow_door = new ItemDoor(BlocksAether.blightwillow_door),
+			earthshifter_door = new ItemDoor(BlocksAether.earthshifter_door),
+			frostpine_door = new ItemDoor(BlocksAether.frostpine_door);
 
-	public static ItemCrossbow skyroot_crossbow;
+	public static final ItemCrossbow skyroot_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F),
+			holystone_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.7F),
+			zanite_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F),
+			arkenium_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F),
+			gravitite_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(1.2F),
+			vampire_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.7F);
 
-	public static ItemCrossbow holystone_crossbow;
+	public static final ItemBolt bolt = new ItemBolt();
 
-	public static ItemCrossbow zanite_crossbow;
+	public static final Item iron_ring = new Item(), gold_ring = new Item();
 
-	public static ItemCrossbow arkenium_crossbow;
+	public static final Item zanite_ring = new Item(), zanite_pendant = new Item();
 
-	public static ItemCrossbow gravitite_crossbow;
+	public static final Item iron_pendant = new Item(), gold_pendant = new Item();
 
-	public static ItemCrossbow vampire_crossbow;
+	public static final Item iron_bubble = new Item(), regeneration_stone = new Item();
 
-	public static ItemBolt bolt;
+	public static final Item ice_ring = new Item(), ice_pendant = new Item();
 
-	public static Item iron_ring, gold_ring;
+	public static final Item daggerfrost_rune = new Item();
 
-	public static Item zanite_ring, zanite_pendant;
+	public static final Item candy_ring = new Item(),
+			bone_ring = new Item(),
+			skyroot_ring = new Item();
 
-	public static Item iron_pendant, gold_pendant;
+	public static final Item icestone = new Item();
 
-	public static Item iron_bubble, regeneration_stone;
-
-	public static Item ice_ring, ice_pendant;
-
-	public static Item daggerfrost_rune;
-
-	public static Item candy_ring, bone_ring, skyroot_ring;
-
-	public static Item icestone;
-
-	public static Item skyroot_sign;
+	public static final Item skyroot_sign = new ItemSkyrootSign();
 	
-	public static Item aether_portal_frame;
+	public static final Item aether_portal_frame = new ItemAetherPortalFrame();
 
-	public static Item aechor_petal;
+	public static final Item aechor_petal = new Item();
 
-	public static Item zanite_gloves, gravitite_gloves, valkyrie_gloves, neptune_gloves, phoenix_gloves;
+	public static final Item zanite_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.ZANITE),
+			gravitite_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.GRAVITITE),
+			valkyrie_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.VALKYRIE),
+			neptune_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.NEPTUNE),
+			phoenix_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.PHOENIX);
 
-	public static Item leather_gloves, iron_gloves, gold_gloves, chain_gloves, diamond_gloves;
+	public static final Item leather_gloves = new ItemLeatherGloves(),
+			iron_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.IRON),
+			gold_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.GOLD),
+			chain_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.CHAIN),
+			diamond_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.DIAMOND);
 
-    public static Item pink_baby_swet;
+    public static final Item pink_baby_swet = new ItemCompanion(EntityPinkBabySwet.class);
 
-    public static Item shard_of_life;
+    public static final Item shard_of_life = new ItemShardOfLife();
     
-	public static ItemAetherShield skyroot_shield, holystone_shield, zanite_shield, arkenium_shield, gravitite_shield;
+	public static final ItemAetherShield skyroot_shield = new ItemAetherShield(),
+			holystone_shield = new ItemAetherShield(),
+			zanite_shield = new ItemAetherShield(),
+			arkenium_shield = new ItemAetherShield(),
+			gravitite_shield = new ItemAetherShield();
 
-	public static ItemCompanion ethereal_stone, fleeting_stone, soaring_stone;
+	public static final ItemCompanion ethereal_stone = new ItemCompanion(EntityEtheralWisp.class),
+			fleeting_stone = new ItemCompanion(EntityFleetingWisp.class),
+			soaring_stone = new ItemCompanion(EntitySoaringWisp.class);
 
-	public static ItemCompanion frostpine_totem, kraisith_capsule, orb_of_arkenzus, fangrin_capsule, death_seal;
+	public static final ItemCompanion frostpine_totem = new ItemCompanion(EntityFrostpineTotem.class),
+			kraisith_capsule = new ItemCompanion(EntityKraisith.class, new InformationProvider()
+			{
+				@Override
+				public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
+				{
+					tooltip.add(TextFormatting.RED + "\u2022 " + "10 Health");
+					tooltip.add(TextFormatting.BLUE + "\u2022 " + "0.5 Attack Damage");
+					tooltip.add(TextFormatting.BLUE + "\u2022 " + "Slows Enemies");
+				}
+			}),
+			orb_of_arkenzus = new ItemCompanion(EntityShadeOfArkenzus.class),
+			fangrin_capsule = new ItemCompanion(EntityFangrin.class, new InformationProvider()
+			{
+				@Override
+				public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
+				{
+					tooltip.add(TextFormatting.RED + "\u2022 " + "10 Health");
+					tooltip.add(TextFormatting.BLUE + "\u2022 " + "1.5 Attack Damage");
+				}
+			}),
+			death_seal = new ItemDeathSeal(EntityNexSpirit.class);
 
-	public static Item[] zanite_armor_set;
+	public static final Item barbed_iron_ring = new Item(),
+			barbed_gold_ring = new Item();
 
-	public static Item[] gravitite_armor_set;
+	public static final Item solar_band = new Item(),
+			lunar_band = new Item();
 
-	public static Item[] valkyrie_armor_set;
+	public static final Item ring_of_growth = new Item(),
+			plague_coil = new Item();
 
-	public static Item[] phoenix_armor_set;
+	public static final Item fleeting_ring = new Item(),
+			lesser_ring_of_growth = new Item(),
+			winged_ring = new Item();
 
-	public static Item[] neptune_armor_set;
+	public static final Item life_coil = new Item();
 
-	public static Item barbed_iron_ring, barbed_gold_ring;
+	public static final Item glamoured_iron_screw = new Item(),
+			wisdom_bauble = new Item(),
+			glamoured_bone_shard = new Item();
 
-	public static Item solar_band, lunar_band;
+	public static final Item moa_feather = new Item(),
+			blight_ward = new Item(),
+			glamoured_skyroot_twig = new Item();
 
-	public static Item ring_of_growth, plague_coil;
+	public static final Item glamoured_gold_screw = new Item(),
+			ambrosium_talisman = new Item(),
+			sunlit_scroll = new Item();
 
-	public static Item fleeting_ring, lesser_ring_of_growth, winged_ring;
+	public static final Item moonlit_scroll = new Item(),
+			glamoured_cockatrice_heart = new ItemGlamoured();
 
-	public static Item life_coil;
+	public static final Item damaged_moa_feather = new Item(),
+			osseous_bane = new Item(),
+			rot_bane = new Item();
 
-	public static Item glamoured_iron_screw, wisdom_bauble, glamoured_bone_shard;
+	public static final ItemSkyrootBed skyroot_bed = new ItemSkyrootBed();
 
-	public static Item moa_feather, blight_ward, glamoured_skyroot_twig;
+	public static final ItemMoaEgg moa_egg = new ItemMoaEgg(false),
+			rainbow_moa_egg = new ItemMoaEgg(true);
 
-	public static Item glamoured_gold_screw, ambrosium_talisman, sunlit_scroll;
+	public static final Item aether_developer_wand = new ItemAetherDeveloperWand();
 
-	public static Item moonlit_scroll, glamoured_cockatrice_heart;
+	public static final Item cloud_parachute = new ItemCloudParachute();
 
-	public static Item damaged_moa_feather, osseous_bane, rot_bane;
+	public static final Item amulet_of_growth = new Item(),
+			lesser_amulet_of_growth = new Item();
 
-	public static ItemSkyrootBed skyroot_bed;
+	public static final Item frostward_scarf = new Item(),
+			gruegar_scarf = new Item();
 
-	public static ItemMoaEgg moa_egg, rainbow_moa_egg;
+	public static final Item zanite_studded_choker = new Item(),
+			arkenium_studded_choker = new Item();
 
-	public static Item aether_developer_wand;
+	public static final Item hide_gorget = new Item(),
+			raegorite_gorget = new Item(),
+			thiefs_gorget = new Item(),
+			moon_sect_warden_gorget = new Item();
 
-	public static Item cloud_parachute;
+	public static final Item glamoured_holystone_chip = new ItemGlamoured(),
+			glamoured_zephyr_husk = new ItemGlamoured(),
+			glamoured_ice_shard = new ItemGlamoured(),
+			glamoured_blue_swet_jelly = new ItemGlamoured(),
+			glamoured_cockatrice_talons = new ItemGlamoured(),
+			glamoured_coal_ember = new ItemGlamoured();
 
-	public static Item amulet_of_growth, lesser_amulet_of_growth;
+	public static final Item granite_ring = new Item(),
+			gust_ring = new Item(),
+			typhoon_ring = new Item(),
+			sporing_ring = new Item(),
+			ember_ring = new Item();
 
-	public static Item frostward_scarf, gruegar_scarf;
+	public static final Item white_moa_feather = new Item(),
+			sakura_moa_feather = new Item();
 
-	public static Item zanite_studded_choker, arkenium_studded_choker;
+	public static final Item gravitite_core = new Item(),
+			sunlit_tome = new Item(),
+			moonlit_tome = new Item(),
+			phoenix_rune = new Item(),
+			valkyrie_wings = new Item(),
+			primal_totem_of_survival = new Item(),
+			primal_totem_of_rage = new Item(),
+			glamoured_taegore_tusk = new Item(),
+			divine_beacon = new Item();
 
-	public static Item hide_gorget, raegorite_gorget, thiefs_gorget, moon_sect_warden_gorget;
+	public static final Item dust_ring = new Item(), mud_ring = new Item(),
+			steam_ring = new Item(),
+			storm_ring = new Item();
 
-	public static Item glamoured_holystone_chip, glamoured_zephyr_husk, glamoured_ice_shard, glamoured_blue_swet_jelly, glamoured_cockatrice_talons, glamoured_coal_ember;
+	public static final Item butchers_knife = new Item();
 
-	public static Item granite_ring, gust_ring, typhoon_ring, sporing_ring, ember_ring;
+	public static final Item fleeting_scarf = new Item(),
+			winged_necklace = new Item(),
+			gust_amulet = new Item(),
+			typhoon_amulet = new Item(),
+			chain_of_sporing_bones = new Item(),
+			molten_amulet = new Item(),
+			granite_studded_choker = new Item();
 
-	public static Item white_moa_feather, sakura_moa_feather;
+	public static final Item muggers_cloak = new Item(),
+			bandit_shawl = new Item(),
+			hide_pouch = new Item(),
+			gruegar_pouch = new Item(),
+			soul_shard = new Item(),
+			angel_bandage = new Item(),
+			swift_rune = new Item(),
+			wynd_cluster = new Item(),
+			wisdom_rune = new Item(),
+			glamoured_aerogel_chip = new Item();
 
-	public static Item gravitite_core, sunlit_tome, moonlit_tome, phoenix_rune, valkyrie_wings, primal_totem_of_survival, primal_totem_of_rage, glamoured_taegore_tusk, divine_beacon;
+	public static final Item ring_of_strength = new Item(),
+			gruegar_ring = new Item(),
+			arkenium_ring = new Item(),
+			swift_ribbon = new Item(),
+			wynd_cluster_ring = new Item(),
+			lesser_ring_of_wisdom = new Item(),
+			ring_of_wisdom = new Item();
 
-	public static Item dust_ring, mud_ring, steam_ring, storm_ring;
+	public static final Item iron_screw = new Item(),
+			gold_screw = new Item(),
+			bone_shard = new Item(),
+			skyroot_twig = new Item(),
+			blue_skyroot_twig = new Item(),
+			dark_blue_skyroot_twig = new Item(),
+			blighted_twig = new Item();
 
-	public static Item butchers_knife;
+	public static final Item enchanted_skyroot_twig = new Item(),
+			cockatrice_heart = new Item(),
+			ice_shard = new Item(),
+			holystone_chip = new Item(),
+			zephyr_husk = new Item(),
+			coal_ember = new Item(),
+			aerogel_chip = new Item();
 
-	public static Item fleeting_scarf, winged_necklace, gust_amulet, typhoon_amulet, chain_of_sporing_bones, molten_amulet, granite_studded_choker;
+	public static final Item cockatrice_talons = new Item(),
+			cockatrice_keratin = new Item(),
+			taegore_tusk = new Item(),
+			glamoured_cockatrice_keratin = new ItemGlamoured();
 
-	public static Item muggers_cloak, bandit_shawl, hide_pouch, gruegar_pouch, soul_shard, angel_bandage, swift_rune, wynd_cluster, wisdom_rune, glamoured_aerogel_chip;
+	public static final Item irradiated_chunk = new ItemIrradiated(new RandomItemSelector(new Constraint()
+			{
+				@Override
+				public boolean accept(ItemStack stack)
+				{
+					return !(stack.getItem() instanceof ItemIrradiated);
+				}
+			})),
+			irradiated_sword = new ItemIrradiated(new RandomItemSelector(new Constraint()
+			{
+				@Override
+				public boolean accept(ItemStack stack)
+				{
+					return stack.getUnlocalizedName().contains("sword") && !(stack.getItem() instanceof ItemIrradiated);
+				}
+			})),
+			irradiated_armor = new ItemIrradiated(new RandomItemSelector(new Constraint()
+			{
+				@Override
+				public boolean accept(ItemStack stack)
+				{
+					return stack.getItem() instanceof ItemArmor;
+				}
+			})),
+			irradiated_tool = new ItemIrradiated(new RandomItemSelector(new Constraint()
+			{
+				@Override
+				public boolean accept(ItemStack stack)
+				{
+					return stack.getItem() instanceof ItemTool;
+				}
+			})),
+			irradiated_ring = new ItemIrradiated(new RandomItemSelector(new Constraint()
+			{
+				@Override
+				public boolean accept(ItemStack stack)
+				{
+					IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
 
-	public static Item ring_of_strength, gruegar_ring, arkenium_ring, swift_ribbon, wynd_cluster_ring, lesser_ring_of_wisdom, ring_of_wisdom;
+					return props != null && props.getEquipmentType() == ItemEquipmentType.RING;
+				}
+			})),
+			irradiated_neckwear = new ItemIrradiated(new RandomItemSelector(new Constraint()
+			{
+				@Override
+				public boolean accept(ItemStack stack)
+				{
+					IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
 
-	public static Item iron_screw, gold_screw, bone_shard, skyroot_twig, blue_skyroot_twig, dark_blue_skyroot_twig, blighted_twig;
+					return props != null && props.getEquipmentType() == ItemEquipmentType.NECKWEAR;
+				}
+			})),
+			irradiated_charm = new ItemIrradiated(new RandomItemSelector(new Constraint()
+			{
+				@Override
+				public boolean accept(ItemStack stack)
+				{
+					IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
 
-	public static Item enchanted_skyroot_twig, cockatrice_heart, ice_shard, holystone_chip, zephyr_husk, coal_ember, aerogel_chip;
+					return props != null && props.getEquipmentType() == ItemEquipmentType.CHARM;
+				}
+			})),
+			irradiated_dust = new ItemIrradiatedVisuals();
 
-	public static Item cockatrice_talons, cockatrice_keratin, taegore_tusk, glamoured_cockatrice_keratin;
+	public static final Item sentry_vaultbox = new ItemSentryVault(),
+			wrapping_paper = new ItemWrappingPaper(),
+			fried_moa_egg = new ItemFood(10, false);
 
-	public static Item irradiated_chunk, irradiated_sword, irradiated_armor, irradiated_tool, irradiated_ring, irradiated_neckwear, irradiated_charm, irradiated_dust;
+	public static final Item[] zanite_armor_set = new Item[] { zanite_helmet, zanite_chestplate, zanite_leggings, zanite_boots, zanite_gloves };
 
-	public static Item sentry_vaultbox, wrapping_paper, fried_moa_egg;
+	public static final Item[] gravitite_armor_set = new Item[] { gravitite_helmet, gravitite_chestplate, gravitite_leggings, gravitite_boots, gravitite_gloves };
+
+	public static final Item[] valkyrie_armor_set = new Item[] { valkyrie_helmet, valkyrie_chestplate, valkyrie_leggings, valkyrie_boots, valkyrie_gloves };
+
+	public static final Item[] phoenix_armor_set = new Item[] { phoenix_helmet, phoenix_chestplate, phoenix_leggings, phoenix_boots, phoenix_gloves };
+
+	public static final Item[] neptune_armor_set = new Item[] { neptune_helmet, neptune_chestplate, neptune_leggings, neptune_boots, neptune_gloves };
 
 	public static void preInit()
 	{
-		skyroot_stick = registerItem("skyroot_stick", new Item(), CreativeTabsAether.MATERIALS);
-		ambrosium_shard = registerItem("ambrosium_shard", new Item(), CreativeTabsAether.MATERIALS);
-		ambrosium_chunk = registerItem("ambrosium_chunk", new ItemAmbrosiumChunk(), CreativeTabsAether.MATERIALS);
-		zanite_gemstone = registerItem("zanite_gemstone", new Item(), CreativeTabsAether.MATERIALS);
-		arkenium = registerItem("arkenium", new Item(), CreativeTabsAether.MATERIALS);
-        arkenium_strip = registerItem("arkenium_strip", new Item(), CreativeTabsAether.MATERIALS);
-		icestone = registerItem("icestone", new Item(), CreativeTabsAether.MATERIALS);
+		registerItem("skyroot_stick", skyroot_stick.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("ambrosium_shard", ambrosium_shard.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("ambrosium_chunk", ambrosium_chunk.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("zanite_gemstone", zanite_gemstone.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("arkenium", arkenium.setCreativeTab(CreativeTabsAether.MATERIALS));
+        registerItem("arkenium_strip", arkenium_strip.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("icestone", icestone.setCreativeTab(CreativeTabsAether.MATERIALS));
 
-		skyroot_axe = registerItem("skyroot_axe", new ItemSkyrootTool(EnumToolType.AXE, 6.0F, -3.2F));
-		skyroot_pickaxe = registerItem("skyroot_pickaxe", new ItemSkyrootTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
-		skyroot_shovel = registerItem("skyroot_shovel", new ItemSkyrootTool(EnumToolType.SHOVEL, 1.5F, -3.0F));
-		skyroot_sword = registerItem("skyroot_sword", new ItemSkyrootSword());
-        skyroot_shield = registerItem("skyroot_shield", new ItemAetherShield(), CreativeTabsAether.ARMOR);
+		registerItem("skyroot_axe", skyroot_axe);
+		registerItem("skyroot_pickaxe", skyroot_pickaxe);
+		registerItem("skyroot_shovel", skyroot_shovel);
+		registerItem("skyroot_sword", skyroot_sword);
+        registerItem("skyroot_shield", skyroot_shield.setCreativeTab(CreativeTabsAether.ARMOR));
 
-        holystone_axe = registerItem("holystone_axe", new ItemHolystoneTool(EnumToolType.AXE, 8.0F, -3.2F));
-		holystone_pickaxe = registerItem("holystone_pickaxe", new ItemHolystoneTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
-		holystone_shovel = registerItem("holystone_shovel", new ItemHolystoneTool(EnumToolType.SHOVEL, 1.5F, -3.0F));
-		holystone_sword = registerItem("holystone_sword", new ItemHolystoneSword());
-        holystone_shield = registerItem("holystone_shield", new ItemAetherShield(), CreativeTabsAether.ARMOR);
+		registerItem("holystone_axe", holystone_axe);
+		registerItem("holystone_pickaxe", holystone_pickaxe);
+		registerItem("holystone_shovel", holystone_shovel);
+		registerItem("holystone_sword", holystone_sword);
+		registerItem("holystone_shield", holystone_shield.setCreativeTab(CreativeTabsAether.ARMOR));
 
-		zanite_axe = registerItem("zanite_axe", new ItemZaniteTool(EnumToolType.AXE, 8.0F, -3.1F));
-		zanite_pickaxe = registerItem("zanite_pickaxe", new ItemZaniteTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
-		zanite_shovel = registerItem("zanite_shovel", new ItemZaniteTool(EnumToolType.SHOVEL, 1.5F, -3.0F));
-		zanite_sword = registerItem("zanite_sword", new ItemZaniteSword());
-        zanite_shield = registerItem("zanite_shield", new ItemAetherShield(), CreativeTabsAether.ARMOR);
+		registerItem("zanite_axe", zanite_axe);
+		registerItem("zanite_pickaxe", zanite_pickaxe);
+		registerItem("zanite_shovel", zanite_shovel);
+		registerItem("zanite_sword", zanite_sword);
+		registerItem("zanite_shield", zanite_shield.setCreativeTab(CreativeTabsAether.ARMOR));
 
-        arkenium_axe = registerItem("arkenium_axe", new ItemArkeniumTool(EnumToolType.AXE, 7.0F, -3.3F));
-        arkenium_pickaxe = registerItem("arkenium_pickaxe", new ItemArkeniumTool(EnumToolType.PICKAXE, 4.0F, -3.2F));
-        arkenium_shovel = registerItem("arkenium_shovel", new ItemArkeniumTool(EnumToolType.SHOVEL, 4.5F, -3.3F));
-        arkenium_sword = registerItem("arkenium_sword", new ItemArkeniumSword());
-        arkenium_shield = registerItem("arkenium_shield", new ItemAetherShield(), CreativeTabsAether.ARMOR);
+        registerItem("arkenium_axe", arkenium_axe);
+        registerItem("arkenium_pickaxe", arkenium_pickaxe);
+        registerItem("arkenium_shovel", arkenium_shovel);
+        registerItem("arkenium_sword", arkenium_sword);
+        registerItem("arkenium_shield", arkenium_shield.setCreativeTab(CreativeTabsAether.ARMOR));
 
-		gravitite_axe = registerItem("gravitite_axe", new ItemGravititeTool(EnumToolType.AXE, 8.0F, -3.0F));
-		gravitite_pickaxe = registerItem("gravitite_pickaxe", new ItemGravititeTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
-		gravitite_shovel = registerItem("gravitite_shovel", new ItemGravititeTool(EnumToolType.SHOVEL, 1.5F, -3.0F));
-		gravitite_sword = registerItem("gravitite_sword", new ItemGravititeSword());
-        gravitite_shield = registerItem("gravitite_shield", new ItemAetherShield(), CreativeTabsAether.ARMOR);
+		registerItem("gravitite_axe", gravitite_axe);
+		registerItem("gravitite_pickaxe", gravitite_pickaxe);
+		registerItem("gravitite_shovel", gravitite_shovel);
+		registerItem("gravitite_sword", gravitite_sword);
+        registerItem("gravitite_shield", gravitite_shield.setCreativeTab(CreativeTabsAether.ARMOR));
 
-		valkyrie_axe = registerItem("valkyrie_axe", new ItemValkyrieTool(EnumToolType.AXE, 8.0F, -3.0F));
-		valkyrie_pickaxe = registerItem("valkyrie_pickaxe", new ItemValkyrieTool(EnumToolType.PICKAXE, 1.0F, -2.8F));
-		valkyrie_shovel = registerItem("valkyrie_shovel", new ItemValkyrieTool(EnumToolType.SHOVEL,  1.5F, -3.0F));
+		registerItem("valkyrie_axe", valkyrie_axe);
+		registerItem("valkyrie_pickaxe", valkyrie_pickaxe);
+		registerItem("valkyrie_shovel", valkyrie_shovel);
 
-		arkenium_shears = registerItem("arkenium_shears", new ItemShears(), CreativeTabsAether.TOOLS);
+		registerItem("arkenium_shears", arkenium_shears.setCreativeTab(CreativeTabsAether.TOOLS));
 
-		zanite_helmet = registerItem("zanite_helmet", new ItemZaniteArmor(EntityEquipmentSlot.HEAD));
-		zanite_chestplate = registerItem("zanite_chestplate", new ItemZaniteArmor(EntityEquipmentSlot.CHEST));
-		zanite_leggings = registerItem("zanite_leggings", new ItemZaniteArmor(EntityEquipmentSlot.LEGS));
-		zanite_boots = registerItem("zanite_boots", new ItemZaniteArmor(EntityEquipmentSlot.FEET));
-        zanite_gloves = registerItem("zanite_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.ZANITE));
+		registerItem("zanite_helmet", zanite_helmet);
+		registerItem("zanite_chestplate", zanite_chestplate);
+		registerItem("zanite_leggings", zanite_leggings);
+		registerItem("zanite_boots", zanite_boots);
+        registerItem("zanite_gloves", zanite_gloves);
 
-		gravitite_helmet = registerItem("gravitite_helmet", new ItemGravititeArmor(EntityEquipmentSlot.HEAD));
-		gravitite_chestplate = registerItem("gravitite_chestplate", new ItemGravititeArmor(EntityEquipmentSlot.CHEST));
-		gravitite_leggings = registerItem("gravitite_leggings", new ItemGravititeArmor(EntityEquipmentSlot.LEGS));
-		gravitite_boots = registerItem("gravitite_boots", new ItemGravititeArmor(EntityEquipmentSlot.FEET));
-        gravitite_gloves = registerItem("gravitite_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.GRAVITITE));
+		registerItem("gravitite_helmet", gravitite_helmet);
+		registerItem("gravitite_chestplate", gravitite_chestplate);
+		registerItem("gravitite_leggings", gravitite_leggings);
+		registerItem("gravitite_boots", gravitite_boots);
+        registerItem("gravitite_gloves", gravitite_gloves);
 
-		neptune_helmet = registerItem("neptune_helmet", new ItemNeptuneArmor(EntityEquipmentSlot.HEAD));
-		neptune_chestplate = registerItem("neptune_chestplate", new ItemNeptuneArmor(EntityEquipmentSlot.CHEST));
-		neptune_leggings = registerItem("neptune_leggings", new ItemNeptuneArmor(EntityEquipmentSlot.LEGS));
-		neptune_boots = registerItem("neptune_boots", new ItemNeptuneArmor(EntityEquipmentSlot.FEET));
-        neptune_gloves = registerItem("neptune_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.NEPTUNE));
+		registerItem("neptune_helmet", neptune_helmet);
+		registerItem("neptune_chestplate", neptune_chestplate);
+		registerItem("neptune_leggings", neptune_leggings);
+		registerItem("neptune_boots", neptune_boots);
+        registerItem("neptune_gloves", neptune_gloves);
 
-		phoenix_helmet = registerItem("phoenix_helmet", new ItemPhoenixArmor(EntityEquipmentSlot.HEAD));
-		phoenix_chestplate = registerItem("phoenix_chestplate", new ItemPhoenixArmor(EntityEquipmentSlot.CHEST));
-		phoenix_leggings = registerItem("phoenix_leggings", new ItemPhoenixArmor(EntityEquipmentSlot.LEGS));
-		phoenix_boots = registerItem("phoenix_boots", new ItemPhoenixArmor(EntityEquipmentSlot.FEET));
-        phoenix_gloves = registerItem("phoenix_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.PHOENIX));
+		registerItem("phoenix_helmet", phoenix_helmet);
+		registerItem("phoenix_chestplate", phoenix_chestplate);
+		registerItem("phoenix_leggings", phoenix_leggings);
+		registerItem("phoenix_boots", phoenix_boots);
+        registerItem("phoenix_gloves", phoenix_gloves);
 
-		valkyrie_helmet = registerItem("valkyrie_helmet", new ItemValkyrieArmor(EntityEquipmentSlot.HEAD));
-		valkyrie_chestplate = registerItem("valkyrie_chestplate", new ItemValkyrieArmor(EntityEquipmentSlot.CHEST));
-		valkyrie_leggings = registerItem("valkyrie_leggings", new ItemValkyrieArmor(EntityEquipmentSlot.LEGS));
-		valkyrie_boots = registerItem("valkyrie_boots", new ItemValkyrieArmor(EntityEquipmentSlot.FEET));
-        valkyrie_gloves = registerItem("valkyrie_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.VALKYRIE));
+		registerItem("valkyrie_helmet", valkyrie_helmet);
+		registerItem("valkyrie_chestplate", valkyrie_chestplate);
+		registerItem("valkyrie_leggings", valkyrie_leggings);
+		registerItem("valkyrie_boots", valkyrie_boots);
+        registerItem("valkyrie_gloves", valkyrie_gloves);
 
-		golden_amber = registerItem("golden_amber", new Item(), CreativeTabsAether.MATERIALS);
+		registerItem("golden_amber", golden_amber.setCreativeTab(CreativeTabsAether.MATERIALS));
 
-		aechor_petal = registerItem("aechor_petal", new Item(), CreativeTabsAether.MISCELLANEOUS);
+		registerItem("aechor_petal", aechor_petal.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
-		blueberries = registerItem("blueberries", new ItemFood(2, false), CreativeTabsAether.CONSUMABLES);
+		registerItem("blueberries", blueberries.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		registerItem("enchanted_blueberry", enchanted_blueberry.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		registerItem("orange", orange.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		registerItem("wyndberry", wyndberry.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		registerItem("enchanted_wyndberry", enchanted_wyndberry.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		registerItem("swet_jelly", swet_jelly.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		registerItem("gummy_swet", gummy_swet.setCreativeTab(CreativeTabsAether.CONSUMABLES));
 
-		enchanted_blueberry = registerItem("enchanted_blueberry", new ItemFood(6, false), CreativeTabsAether.CONSUMABLES);
+		registerItem("candy_corn", candy_corn.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		registerItem("cocoatrice", cocoatrice.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		registerItem("wrapped_chocolates", wrapped_chocolates.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		registerItem("jelly_pumpkin", jelly_pumpkin.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		registerItem("stomper_pop", stomper_pop.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		registerItem("blueberry_lollipop", blueberry_lollipop.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		registerItem("orange_lollipop", orange_lollipop.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		registerItem("icestone_poprocks", icestone_poprocks.setCreativeTab(CreativeTabsAether.CONSUMABLES));
 
-		orange = registerItem("orange", new ItemFood(4, false), CreativeTabsAether.CONSUMABLES);
+		registerItem("ginger_bread_man", ginger_bread_man.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		registerItem("candy_cane", candy_cane.setCreativeTab(CreativeTabsAether.CONSUMABLES));
 
-		wyndberry = registerItem("wyndberry", new ItemFood(4, false), CreativeTabsAether.CONSUMABLES);
+		registerItem("skyroot_bucket", skyroot_bucket.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
+		registerItem("skyroot_water_bucket", skyroot_water_bucket.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
+		registerItem("skyroot_milk_bucket", skyroot_milk_bucket.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
+		registerItem("skyroot_poison_bucket", skyroot_poison_bucket.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
-		enchanted_wyndberry = registerItem("enchanted_wyndberry", new ItemEnchantedWyndberry(), CreativeTabsAether.CONSUMABLES);
+		registerItem("valkyrie_music_disc", valkyrie_music_disc.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
+		registerItem("labyrinth_music_disc", labyrinth_music_disc.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
+		registerItem("moa_music_disc", moa_music_disc.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
+		registerItem("aerwhale_music_disc", aerwhale_music_disc.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
+		registerItem("recording_892", recording_892.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
-		swet_jelly = registerItem("swet_jelly", new ItemSwetJelly(), CreativeTabsAether.CONSUMABLES);
+		registerItem("healing_stone_depleted", healing_stone_depleted.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		registerItem("healing_stone", healing_stone.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CONSUMABLES));
 
-		gummy_swet = registerItem("gummy_swet", new ItemGummySwet(), CreativeTabsAether.CONSUMABLES);
+		registerItem("dart_shooter", dart_shooter.setCreativeTab(CreativeTabsAether.WEAPONS));
+		registerItem("dart", dart.setCreativeTab(CreativeTabsAether.WEAPONS));
 
-		candy_corn = registerItem("candy_corn", new ItemFood(8, false), CreativeTabsAether.CONSUMABLES);
+		registerItem("skyroot_crossbow", skyroot_crossbow.setCreativeTab(CreativeTabsAether.WEAPONS));
+		registerItem("holystone_crossbow", holystone_crossbow.setCreativeTab(CreativeTabsAether.WEAPONS));
+		registerItem("zanite_crossbow", zanite_crossbow.setCreativeTab(CreativeTabsAether.WEAPONS));
+		registerItem("arkenium_crossbow", arkenium_crossbow.setCreativeTab(CreativeTabsAether.WEAPONS));
+		registerItem("gravitite_crossbow", gravitite_crossbow.setCreativeTab(CreativeTabsAether.WEAPONS));
+		registerItem("vampire_crossbow", vampire_crossbow.setCreativeTab(CreativeTabsAether.WEAPONS));
+		registerItem("bolt", bolt.setCreativeTab(CreativeTabsAether.WEAPONS));
 
-		cocoatrice = registerItem("cocoatrice", new ItemFood(12, false), CreativeTabsAether.CONSUMABLES);
+		registerItem("flaming_sword", flaming_sword);
+		registerItem("holy_sword", holy_sword);
+		registerItem("lightning_sword", lightning_sword);
 
-		wrapped_chocolates = registerItem("wrapped_chocolates", new ItemFood(12, false), CreativeTabsAether.CONSUMABLES);
+		registerItem("vampire_blade", vampire_blade.setCreativeTab(CreativeTabsAether.WEAPONS));
+		registerItem("candy_cane_sword", candy_cane_sword.setCreativeTab(CreativeTabsAether.WEAPONS));
+		registerItem("valkyrie_lance", valkyrie_lance);
 
-		jelly_pumpkin = registerItem("jelly_pumpkin", new ItemFood(12, false), CreativeTabsAether.CONSUMABLES);
+		registerItem("skyroot_door_item", skyroot_door.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerItem("arkenium_door_item", arkenium_door.setCreativeTab(CreativeTabsAether.BLOCKS));
+		//registerItem("blightwillow_door_item", blightwillow_door_item.setCreativeTab(CreativeTabsAether.BLOCKS));
+		//registerItem("earthshifter_door_item", earthshifter_door_item.setCreativeTab(CreativeTabsAether.BLOCKS));
+		//registerItem("frostpine_door_item", frostpine_door_item.setCreativeTab(CreativeTabsAether.BLOCKS));
 
-		stomper_pop = registerItem("stomper_pop", new ItemStomperPop(), CreativeTabsAether.CONSUMABLES);
-
-		blueberry_lollipop = registerItem("blueberry_lollipop", new ItemFood(10, false), CreativeTabsAether.CONSUMABLES);
-
-		orange_lollipop = registerItem("orange_lollipop", new ItemFood(8, false), CreativeTabsAether.CONSUMABLES);
-
-		icestone_poprocks = registerItem("icestone_poprocks", new ItemFood(5, false), CreativeTabsAether.CONSUMABLES);
-
-		ginger_bread_man = registerItem("ginger_bread_man", new ItemFood(2, false), CreativeTabsAether.CONSUMABLES);
-
-		candy_cane = registerItem("candy_cane", new ItemFood(2, false), CreativeTabsAether.CONSUMABLES);
-
-		skyroot_bucket = registerItem("skyroot_bucket", new ItemSkyrootBucket(Blocks.AIR), CreativeTabsAether.MISCELLANEOUS);
-		skyroot_water_bucket = registerItem("skyroot_water_bucket", new ItemSkyrootBucket(Blocks.FLOWING_WATER), CreativeTabsAether.MISCELLANEOUS);
-		skyroot_milk_bucket = registerItem("skyroot_milk_bucket", new ItemSkyrootConsumableBucket(), CreativeTabsAether.MISCELLANEOUS);
-		skyroot_poison_bucket = registerItem("skyroot_poison_bucket", new ItemSkyrootConsumableBucket(), CreativeTabsAether.MISCELLANEOUS);
-
-		valkyrie_music_disc = registerItem("valkyrie_music_disc", new ItemAetherRecord("valkyrie", SoundsAether.record_valkyrie), CreativeTabsAether.MISCELLANEOUS);
-		labyrinth_music_disc = registerItem("labyrinth_music_disc", new ItemAetherRecord("labyrinth", SoundsAether.record_labyrinth), CreativeTabsAether.MISCELLANEOUS);
-		moa_music_disc = registerItem("moa_music_disc", new ItemAetherRecord("moa", SoundsAether.record_moa), CreativeTabsAether.MISCELLANEOUS);
-		aerwhale_music_disc = registerItem("aerwhale_music_disc", new ItemAetherRecord("aerwhale", SoundsAether.record_aerwhale), CreativeTabsAether.MISCELLANEOUS);
-		recording_892 = registerItem("recording_892", new ItemAetherRecord("recording_892", SoundsAether.record_recording_892), CreativeTabsAether.MISCELLANEOUS);
-
-		healing_stone_depleted = registerItem("healing_stone_depleted", new Item().setMaxStackSize(1), CreativeTabsAether.CONSUMABLES);
-		healing_stone = registerItem("healing_stone", new ItemHealingStone().setMaxStackSize(1), CreativeTabsAether.CONSUMABLES);
-
-		dart_shooter = registerItem("dart_shooter", new ItemDartShooter(), CreativeTabsAether.WEAPONS);
-		dart = registerItem("dart", new ItemDart(), CreativeTabsAether.WEAPONS);
-
-		skyroot_crossbow = registerItem("skyroot_crossbow", new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F), CreativeTabsAether.WEAPONS);
-		holystone_crossbow = registerItem("holystone_crossbow", new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.7F), CreativeTabsAether.WEAPONS);
-		zanite_crossbow = registerItem("zanite_crossbow", new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F), CreativeTabsAether.WEAPONS);
-		arkenium_crossbow = registerItem("arkenium_crossbow", new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F), CreativeTabsAether.WEAPONS);
-		gravitite_crossbow = registerItem("gravitite_crossbow", new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(1.2F), CreativeTabsAether.WEAPONS);
-		vampire_crossbow = registerItem("vampire_crossbow",new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.7F), CreativeTabsAether.WEAPONS);
-		bolt = registerItem("bolt", new ItemBolt(), CreativeTabsAether.WEAPONS);
-
-		flaming_sword = registerItem("flaming_sword", new ItemElementalSword(ItemElementalSword.SwordElement.FIRE));
-		holy_sword = registerItem("holy_sword", new ItemElementalSword(ItemElementalSword.SwordElement.HOLY));
-		lightning_sword = registerItem("lightning_sword", new ItemElementalSword(ItemElementalSword.SwordElement.LIGHTNING));
-
-		vampire_blade = registerItem("vampire_blade", new ItemVampireBlade(), CreativeTabsAether.WEAPONS);
-		candy_cane_sword = registerItem("candy_cane_sword", new ItemCandyCaneSword(), CreativeTabsAether.WEAPONS);
-		valkyrie_lance = registerItem("valkyrie_lance", new ItemAetherSword(MaterialsAether.LEGENDARY_TOOL, ItemAbilityType.PASSIVE));
-
-		skyroot_door = registerItem("skyroot_door_item", new ItemDoor(BlocksAether.skyroot_door), CreativeTabsAether.BLOCKS);
-		arkenium_door = registerItem("arkenium_door_item", new ItemDoor(BlocksAether.arkenium_door), CreativeTabsAether.BLOCKS);
-		//blightwillow_door = registerItem("blightwillow_door_item", new ItemDoor(BlocksAether.blightwillow_door), CreativeTabsAether.BLOCKS);
-		//earthshifter_door = registerItem("earthshifter_door_item", new ItemDoor(BlocksAether.earthshifter_door), CreativeTabsAether.BLOCKS);
-		//frostpine_door = registerItem("frostpine_door_item", new ItemDoor(BlocksAether.frostpine_door), CreativeTabsAether.BLOCKS);
-
-		iron_ring = registerItem("iron_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		gold_ring = registerItem("gold_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		iron_pendant = registerItem("iron_pendant", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-		gold_pendant = registerItem("gold_pendant", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-
-		zanite_ring = registerItem("zanite_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		zanite_pendant = registerItem("zanite_pendant", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-
-		iron_bubble = registerItem("iron_bubble", new Item().setMaxStackSize(1), CreativeTabsAether.RELICS);
-		regeneration_stone = registerItem("regeneration_stone", new Item().setMaxStackSize(1), CreativeTabsAether.RELICS);
-
-		ice_ring = registerItem("ice_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		ice_pendant = registerItem("ice_pendant", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-
-		daggerfrost_rune = registerItem("daggerfrost_rune", new Item().setMaxStackSize(1), CreativeTabsAether.RELICS);
-
-		candy_ring = registerItem("candy_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-
-		bone_ring = registerItem("bone_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-
-		skyroot_ring = registerItem("skyroot_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-
-		skyroot_sign = registerItem("skyroot_sign", new ItemSkyrootSign(), CreativeTabsAether.BLOCKS);
+		registerItem("iron_ring", iron_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("gold_ring", gold_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("iron_pendant", iron_pendant.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("gold_pendant", gold_pendant.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("zanite_ring", zanite_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("zanite_pendant", zanite_pendant.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("iron_bubble", iron_bubble.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
+		registerItem("regeneration_stone", regeneration_stone.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
+		registerItem("ice_ring", ice_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("ice_pendant", ice_pendant.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("daggerfrost_rune", daggerfrost_rune.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
+		registerItem("candy_ring", candy_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("bone_ring", bone_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("skyroot_ring", skyroot_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		
-		aether_portal_frame = registerItem("aether_portal_frame", new ItemAetherPortalFrame(), CreativeTabsAether.BLOCKS);
+		registerItem("skyroot_sign", skyroot_sign.setCreativeTab(CreativeTabsAether.BLOCKS));
+		
+		registerItem("aether_portal_frame", aether_portal_frame.setCreativeTab(CreativeTabsAether.BLOCKS));
 
-        shard_of_life = registerItem("shard_of_life", new ItemShardOfLife().setMaxStackSize(4), CreativeTabsAether.CONSUMABLES);
+        registerItem("shard_of_life", shard_of_life.setMaxStackSize(4).setCreativeTab(CreativeTabsAether.CONSUMABLES));
 
-		leather_gloves = registerItem("leather_gloves", new ItemLeatherGloves(), CreativeTabs.COMBAT);
-		iron_gloves = registerItem("iron_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.IRON), CreativeTabs.COMBAT);
-		gold_gloves = registerItem("gold_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.GOLD), CreativeTabs.COMBAT);
-		chain_gloves = registerItem("chain_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.CHAIN), CreativeTabs.COMBAT);
-		diamond_gloves = registerItem("diamond_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.DIAMOND), CreativeTabs.COMBAT);
+		registerItem("leather_gloves", leather_gloves.setCreativeTab(CreativeTabs.COMBAT));
+		registerItem("iron_gloves", iron_gloves.setCreativeTab(CreativeTabs.COMBAT));
+		registerItem("gold_gloves", gold_gloves.setCreativeTab(CreativeTabs.COMBAT));
+		registerItem("chain_gloves", chain_gloves.setCreativeTab(CreativeTabs.COMBAT));
+		registerItem("diamond_gloves", diamond_gloves.setCreativeTab(CreativeTabs.COMBAT));
 
-		ethereal_stone = registerItem("ethereal_stone", new ItemCompanion(EntityEtheralWisp.class));
-		fleeting_stone = registerItem("fleeting_stone", new ItemCompanion(EntityFleetingWisp.class));
-		soaring_stone = registerItem("soaring_stone", new ItemCompanion(EntitySoaringWisp.class));
+		registerItem("ethereal_stone", ethereal_stone);
+		registerItem("fleeting_stone", fleeting_stone);
+		registerItem("soaring_stone", soaring_stone);
 
-		pink_baby_swet = registerItem("pink_baby_swet", new ItemCompanion(EntityPinkBabySwet.class));
-		frostpine_totem = registerItem("frostpine_totem", new ItemCompanion(EntityFrostpineTotem.class));
-		kraisith_capsule = registerItem("kraisith_capsule", new ItemCompanion(EntityKraisith.class, new InformationProvider()
-		{
-			@Override
-			public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
-			{
-				tooltip.add(TextFormatting.RED + "\u2022 " + "10 Health");
-				tooltip.add(TextFormatting.BLUE + "\u2022 " + "0.5 Attack Damage");
-				tooltip.add(TextFormatting.BLUE + "\u2022 " + "Slows Enemies");
-			}
-		}));
-		orb_of_arkenzus = registerItem("orb_of_arkenzus", new ItemCompanion(EntityShadeOfArkenzus.class));
-		fangrin_capsule = registerItem("fangrin_capsule", new ItemCompanion(EntityFangrin.class, new InformationProvider()
-		{
-			@Override
-			public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
-			{
-				tooltip.add(TextFormatting.RED + "\u2022 " + "10 Health");
-				tooltip.add(TextFormatting.BLUE + "\u2022 " + "1.5 Attack Damage");
-			}
-		}));
-		death_seal = registerItem("death_seal", new ItemDeathSeal(EntityNexSpirit.class));
+		registerItem("pink_baby_swet", pink_baby_swet);
+		registerItem("frostpine_totem", frostpine_totem);
+		registerItem("kraisith_capsule", kraisith_capsule);
+		registerItem("orb_of_arkenzus", orb_of_arkenzus);
+		registerItem("fangrin_capsule", fangrin_capsule);
+		registerItem("death_seal", death_seal);
 
-		barbed_iron_ring = registerItem("barbed_iron_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		barbed_gold_ring = registerItem("barbed_gold_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		solar_band = registerItem("solar_band", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		lunar_band = registerItem("lunar_band", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		ring_of_growth = registerItem("ring_of_growth", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		plague_coil = registerItem("plague_coil", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		fleeting_ring = registerItem("fleeting_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		lesser_ring_of_growth = registerItem("lesser_ring_of_growth", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		winged_ring = registerItem("winged_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		life_coil = registerItem("life_coil", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		glamoured_iron_screw = registerItem("glamoured_iron_screw", new ItemGlamoured().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		wisdom_bauble = registerItem("wisdom_bauble", new Item().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		glamoured_bone_shard = registerItem("glamoured_bone_shard", new ItemGlamoured().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		moa_feather = registerItem("moa_feather", new Item().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		blight_ward = registerItem("blight_ward", new Item().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		glamoured_skyroot_twig = registerItem("glamoured_skyroot_twig", new ItemGlamoured().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		glamoured_gold_screw = registerItem("glamoured_gold_screw", new ItemGlamoured().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		ambrosium_talisman = registerItem("ambrosium_talisman", new Item().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		sunlit_scroll = registerItem("sunlit_scroll", new Item().setMaxStackSize(1), CreativeTabsAether.RELICS);
-		moonlit_scroll = registerItem("moonlit_scroll", new Item().setMaxStackSize(1), CreativeTabsAether.RELICS);
-		glamoured_cockatrice_heart = registerItem("glamoured_cockatrice_heart", new ItemGlamoured().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		damaged_moa_feather = registerItem("damaged_moa_feather", new Item().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		osseous_bane = registerItem("osseous_bane", new Item().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		rot_bane = registerItem("rot_bane", new Item().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		skyroot_bed = registerItem("skyroot_bed_item", new ItemSkyrootBed(), CreativeTabsAether.BLOCKS);
+		registerItem("barbed_iron_ring", barbed_iron_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("barbed_gold_ring", barbed_gold_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("solar_band", solar_band.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("lunar_band", lunar_band.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("ring_of_growth", ring_of_growth.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("plague_coil", plague_coil.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("fleeting_ring", fleeting_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("lesser_ring_of_growth", lesser_ring_of_growth.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("winged_ring", winged_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("life_coil", life_coil.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("glamoured_iron_screw", glamoured_iron_screw.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("wisdom_bauble", wisdom_bauble.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("glamoured_bone_shard", glamoured_bone_shard.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("moa_feather", moa_feather.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("blight_ward", blight_ward.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("glamoured_skyroot_twig", glamoured_skyroot_twig.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("glamoured_gold_screw", glamoured_gold_screw.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("ambrosium_talisman", ambrosium_talisman.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("sunlit_scroll", sunlit_scroll.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
+		registerItem("moonlit_scroll", moonlit_scroll.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
+		registerItem("glamoured_cockatrice_heart", glamoured_cockatrice_heart.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("damaged_moa_feather", damaged_moa_feather.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("osseous_bane", osseous_bane.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("rot_bane", rot_bane.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("skyroot_bed_item", skyroot_bed.setCreativeTab(CreativeTabsAether.BLOCKS));
 
-		moa_egg = registerItem("moa_egg_item", new ItemMoaEgg(false));
-		rainbow_moa_egg = registerItem("rainbow_moa_egg", new ItemMoaEgg(true), CreativeTabs.MISC);
+		registerItem("moa_egg_item", moa_egg);
+		registerItem("rainbow_moa_egg", rainbow_moa_egg.setCreativeTab(CreativeTabs.MISC));
 
-		aether_developer_wand = registerItem("aether_developer_wand", new ItemAetherDeveloperWand());
+		registerItem("aether_developer_wand", aether_developer_wand);
 
-		cloud_parachute = registerItem("cloud_parachute", new ItemCloudParachute(), CreativeTabsAether.CONSUMABLES);
+		registerItem("cloud_parachute", cloud_parachute.setCreativeTab(CreativeTabsAether.CONSUMABLES));
 
-		amulet_of_growth = registerItem("amulet_of_growth", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-		lesser_amulet_of_growth = registerItem("lesser_amulet_of_growth", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-		frostward_scarf = registerItem("frostward_scarf", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-		gruegar_scarf = registerItem("gruegar_scarf", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-		zanite_studded_choker = registerItem("zanite_studded_choker", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-		arkenium_studded_choker = registerItem("arkenium_studded_choker", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-		hide_gorget = registerItem("hide_gorget", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-		raegorite_gorget = registerItem("raegorite_gorget", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-		thiefs_gorget = registerItem("thiefs_gorget", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-		moon_sect_warden_gorget = registerItem("moon_sect_warden_gorget", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
+		registerItem("amulet_of_growth", amulet_of_growth.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("lesser_amulet_of_growth", lesser_amulet_of_growth.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("frostward_scarf", frostward_scarf.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("gruegar_scarf", gruegar_scarf.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("zanite_studded_choker", zanite_studded_choker.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("arkenium_studded_choker", arkenium_studded_choker.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("hide_gorget", hide_gorget.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("raegorite_gorget", raegorite_gorget.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("thiefs_gorget", thiefs_gorget.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("moon_sect_warden_gorget", moon_sect_warden_gorget.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
 
-		glamoured_holystone_chip = registerItem("glamoured_holystone_chip", new ItemGlamoured().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		glamoured_zephyr_husk = registerItem("glamoured_zephyr_husk", new ItemGlamoured().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		glamoured_ice_shard = registerItem("glamoured_ice_shard", new ItemGlamoured().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		glamoured_blue_swet_jelly = registerItem("glamoured_blue_swet_jelly", new ItemGlamoured().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		glamoured_cockatrice_talons = registerItem("glamoured_cockatrice_talons", new ItemGlamoured().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		glamoured_coal_ember = registerItem("glamoured_coal_ember", new ItemGlamoured().setMaxStackSize(1), CreativeTabsAether.CHARMS);
+		registerItem("glamoured_holystone_chip", glamoured_holystone_chip.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("glamoured_zephyr_husk", glamoured_zephyr_husk.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("glamoured_ice_shard", glamoured_ice_shard.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("glamoured_blue_swet_jelly", glamoured_blue_swet_jelly.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("glamoured_cockatrice_talons", glamoured_cockatrice_talons.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("glamoured_coal_ember", glamoured_coal_ember.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 
-		granite_ring = registerItem("granite_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		gust_ring = registerItem("gust_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		typhoon_ring = registerItem("typhoon_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		sporing_ring = registerItem("sporing_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		ember_ring = registerItem("ember_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		dust_ring = registerItem("dust_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		mud_ring = registerItem("mud_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		storm_ring = registerItem("storm_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		steam_ring = registerItem("steam_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
+		registerItem("granite_ring", granite_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("gust_ring", gust_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("typhoon_ring", typhoon_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("sporing_ring", sporing_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("ember_ring", ember_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("dust_ring", dust_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("mud_ring", mud_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("storm_ring", storm_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("steam_ring", steam_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 
-		white_moa_feather = registerItem("white_moa_feather", new Item().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		sakura_moa_feather = registerItem("sakura_moa_feather", new Item().setMaxStackSize(1), CreativeTabsAether.CHARMS);
+		registerItem("white_moa_feather", white_moa_feather.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("sakura_moa_feather", sakura_moa_feather.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 
-		sunlit_tome = registerItem("sunlit_tome", new Item().setMaxStackSize(1), CreativeTabsAether.RELICS);
-		moonlit_tome = registerItem("moonlit_tome", new Item().setMaxStackSize(1), CreativeTabsAether.RELICS);
-		primal_totem_of_survival = registerItem("primal_totem_of_survival", new Item().setMaxStackSize(1), CreativeTabsAether.RELICS);
-		primal_totem_of_rage = registerItem("primal_totem_of_rage", new Item().setMaxStackSize(1), CreativeTabsAether.RELICS);
-		divine_beacon = registerItem("divine_beacon", new Item().setMaxStackSize(1), CreativeTabsAether.RELICS);
-		phoenix_rune = registerItem("phoenix_rune", new Item().setMaxStackSize(1), CreativeTabsAether.RELICS);
-		glamoured_taegore_tusk = registerItem("glamoured_taegore_tusk", new ItemGlamoured().setMaxStackSize(1), CreativeTabsAether.CHARMS);
+		registerItem("sunlit_tome", sunlit_tome.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
+		registerItem("moonlit_tome", moonlit_tome.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
+		registerItem("primal_totem_of_survival", primal_totem_of_survival.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
+		registerItem("primal_totem_of_rage", primal_totem_of_rage.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
+		registerItem("divine_beacon", divine_beacon.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
+		registerItem("phoenix_rune", phoenix_rune.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
+		registerItem("glamoured_taegore_tusk", glamoured_taegore_tusk.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 
-		gravitite_core = registerItem("gravitite_core", new Item().setMaxStackSize(1), CreativeTabsAether.ARTIFACTS);
-		valkyrie_wings = registerItem("valkyrie_wings", new Item().setMaxStackSize(1), CreativeTabsAether.ARTIFACTS);
+		registerItem("gravitite_core", gravitite_core.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.ARTIFACTS));
+		registerItem("valkyrie_wings", valkyrie_wings.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.ARTIFACTS));
 
-		butchers_knife = registerItem("butchers_knife", new Item().setMaxStackSize(1), CreativeTabsAether.CHARMS);
+		registerItem("butchers_knife", butchers_knife.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 
-		fleeting_scarf = registerItem("fleeting_scarf", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-		winged_necklace = registerItem("winged_necklace", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-		gust_amulet = registerItem("gust_amulet", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-		typhoon_amulet = registerItem("typhoon_amulet", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-		chain_of_sporing_bones = registerItem("chain_of_sporing_bones", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-		molten_amulet = registerItem("molten_amulet", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-		granite_studded_choker = registerItem("granite_studded_choker", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-		muggers_cloak = registerItem("muggers_cloak", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
-		bandit_shawl = registerItem("bandit_shawl", new Item().setMaxStackSize(1), CreativeTabsAether.NECKWEAR);
+		registerItem("fleeting_scarf", fleeting_scarf.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("winged_necklace", winged_necklace.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("gust_amulet", gust_amulet.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("typhoon_amulet", typhoon_amulet.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("chain_of_sporing_bones", chain_of_sporing_bones.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("molten_amulet", molten_amulet.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("granite_studded_choker", granite_studded_choker.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("muggers_cloak", muggers_cloak.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
+		registerItem("bandit_shawl", bandit_shawl.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
 
-		hide_pouch = registerItem("hide_pouch", new Item().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		gruegar_pouch = registerItem("gruegar_pouch", new Item().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		soul_shard = registerItem("soul_shard", new Item().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		angel_bandage = registerItem("angel_bandage", new Item().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		swift_rune = registerItem("swift_rune", new Item().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		wynd_cluster = registerItem("wynd_cluster", new Item().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		wisdom_rune = registerItem("wisdom_rune", new Item().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-		glamoured_aerogel_chip = registerItem("glamoured_aerogel_chip", new ItemGlamoured().setMaxStackSize(1), CreativeTabsAether.CHARMS);
+		registerItem("hide_pouch", hide_pouch.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("gruegar_pouch", gruegar_pouch.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("soul_shard", soul_shard.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("angel_bandage", angel_bandage.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("swift_rune", swift_rune.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("wynd_cluster", wynd_cluster.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("wisdom_rune", wisdom_rune.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("glamoured_aerogel_chip", glamoured_aerogel_chip.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 
-		ring_of_strength = registerItem("ring_of_strength", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		gruegar_ring = registerItem("gruegar_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		arkenium_ring = registerItem("arkenium_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		swift_ribbon = registerItem("swift_ribbon", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		wynd_cluster_ring = registerItem("wynd_cluster_ring", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		lesser_ring_of_wisdom = registerItem("lesser_ring_of_wisdom", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
-		ring_of_wisdom = registerItem("ring_of_wisdom", new Item().setMaxStackSize(1), CreativeTabsAether.RINGS);
+		registerItem("ring_of_strength", ring_of_strength.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("gruegar_ring", gruegar_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("arkenium_ring", arkenium_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("swift_ribbon", swift_ribbon.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("wynd_cluster_ring", wynd_cluster_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("lesser_ring_of_wisdom", lesser_ring_of_wisdom.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+		registerItem("ring_of_wisdom", ring_of_wisdom.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 
-		iron_screw = registerItem("iron_screw", new Item(), CreativeTabsAether.MATERIALS);
-		gold_screw = registerItem("gold_screw", new Item(), CreativeTabsAether.MATERIALS);
-		bone_shard = registerItem("bone_shard", new Item(), CreativeTabsAether.MATERIALS);
-		skyroot_twig = registerItem("skyroot_twig", new Item(), CreativeTabsAether.MATERIALS);
-		blue_skyroot_twig = registerItem("blue_skyroot_twig", new Item(), CreativeTabsAether.MATERIALS);
-		dark_blue_skyroot_twig = registerItem("dark_blue_skyroot_twig", new Item(), CreativeTabsAether.MATERIALS);
-		//blighted_twig = registerItem("blighted_twig", new Item(), CreativeTabsAether.MATERIALS);
-		enchanted_skyroot_twig = registerItem("enchanted_skyroot_twig", new Item(), CreativeTabsAether.MATERIALS);
-		cockatrice_heart = registerItem("cockatrice_heart", new Item(), CreativeTabsAether.MATERIALS);
-		holystone_chip = registerItem("holystone_chip", new Item(), CreativeTabsAether.MATERIALS);
-		zephyr_husk = registerItem("zephyr_husk", new Item(), CreativeTabsAether.MATERIALS);
-		ice_shard = registerItem("ice_shard", new Item(), CreativeTabsAether.MATERIALS);
-		coal_ember = registerItem("coal_ember", new Item(), CreativeTabsAether.MATERIALS);
-		aerogel_chip = registerItem("aerogel_chip", new Item(), CreativeTabsAether.MATERIALS);
-		cockatrice_keratin = registerItem("cockatrice_keratin", new Item(), CreativeTabsAether.MATERIALS);
-		cockatrice_talons = registerItem("cockatrice_talons", new Item(), CreativeTabsAether.MATERIALS);
-		taegore_tusk = registerItem("taegore_tusk", new Item(), CreativeTabsAether.MATERIALS);
+		registerItem("iron_screw", iron_screw.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("gold_screw", gold_screw.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("bone_shard", bone_shard.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("skyroot_twig", skyroot_twig.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("blue_skyroot_twig", blue_skyroot_twig.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("dark_blue_skyroot_twig", dark_blue_skyroot_twig.setCreativeTab(CreativeTabsAether.MATERIALS));
+		//registerItem("blighted_twig", blighted_twig.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("enchanted_skyroot_twig", enchanted_skyroot_twig.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("cockatrice_heart", cockatrice_heart.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("holystone_chip", holystone_chip.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("zephyr_husk", zephyr_husk.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("ice_shard", ice_shard.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("coal_ember", coal_ember.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("aerogel_chip", aerogel_chip.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("cockatrice_keratin", cockatrice_keratin.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("cockatrice_talons", cockatrice_talons.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("taegore_tusk", taegore_tusk.setCreativeTab(CreativeTabsAether.MATERIALS));
 
-		irradiated_chunk = registerItem("irradiated_chunk", new ItemIrradiated(new RandomItemSelector(new Constraint()
-		{
-			@Override
-			public boolean accept(ItemStack stack)
-			{
-				return !(stack.getItem() instanceof ItemIrradiated);
-			}
-		})).setMaxStackSize(1), CreativeTabsAether.MATERIALS);
+		registerItem("irradiated_chunk", irradiated_chunk.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("irradiated_sword", irradiated_sword.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("irradiated_armor", irradiated_armor.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("irradiated_tool", irradiated_tool.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("irradiated_ring", irradiated_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("irradiated_neckwear", irradiated_neckwear.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("irradiated_charm", irradiated_charm.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("irradiated_dust", irradiated_dust.setCreativeTab(CreativeTabsAether.MATERIALS));
 
-		irradiated_sword = registerItem("irradiated_sword", new ItemIrradiated(new RandomItemSelector(new Constraint()
-		{
-			@Override
-			public boolean accept(ItemStack stack)
-			{
-				return stack.getUnlocalizedName().contains("sword") && !(stack.getItem() instanceof ItemIrradiated);
-			}
-		})).setMaxStackSize(1), CreativeTabsAether.MATERIALS);
+		registerItem("glamoured_cockatrice_keratin", glamoured_cockatrice_keratin.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 
-		irradiated_armor = registerItem("irradiated_armor", new ItemIrradiated(new RandomItemSelector(new Constraint()
-		{
-			@Override
-			public boolean accept(ItemStack stack)
-			{
-				return stack.getItem() instanceof ItemArmor;
-			}
-		})).setMaxStackSize(1), CreativeTabsAether.MATERIALS);
+		registerItem("sentry_vaultbox", sentry_vaultbox.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
+		registerItem("wrapping_paper", wrapping_paper.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
-		irradiated_tool = registerItem("irradiated_tool", new ItemIrradiated(new RandomItemSelector(new Constraint()
-		{
-			@Override
-			public boolean accept(ItemStack stack)
-			{
-				return stack.getItem() instanceof ItemTool;
-			}
-		})).setMaxStackSize(1), CreativeTabsAether.MATERIALS);
-
-		irradiated_ring = registerItem("irradiated_ring", new ItemIrradiated(new RandomItemSelector(new Constraint()
-		{
-			@Override
-			public boolean accept(ItemStack stack)
-			{
-				IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
-
-				return props != null && props.getEquipmentType() == ItemEquipmentType.RING;
-			}
-		})).setMaxStackSize(1), CreativeTabsAether.MATERIALS);
-
-		irradiated_neckwear = registerItem("irradiated_neckwear", new ItemIrradiated(new RandomItemSelector(new Constraint()
-		{
-			@Override
-			public boolean accept(ItemStack stack)
-			{
-				IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
-
-				return props != null && props.getEquipmentType() == ItemEquipmentType.NECKWEAR;
-			}
-		})).setMaxStackSize(1), CreativeTabsAether.MATERIALS);
-
-		irradiated_charm = registerItem("irradiated_charm", new ItemIrradiated(new RandomItemSelector(new Constraint()
-		{
-			@Override
-			public boolean accept(ItemStack stack)
-			{
-				IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
-
-				return props != null && props.getEquipmentType() == ItemEquipmentType.CHARM;
-			}
-		})).setMaxStackSize(1), CreativeTabsAether.MATERIALS);
-
-		irradiated_dust = registerItem("irradiated_dust", new ItemIrradiatedVisuals(), CreativeTabsAether.MATERIALS);
-
-		glamoured_cockatrice_keratin = registerItem("glamoured_cockatrice_keratin", new ItemGlamoured().setMaxStackSize(1), CreativeTabsAether.CHARMS);
-
-		sentry_vaultbox = registerItem("sentry_vaultbox", new ItemSentryVault(), CreativeTabsAether.MISCELLANEOUS);
-		wrapping_paper = registerItem("wrapping_paper", new ItemWrappingPaper(), CreativeTabsAether.MISCELLANEOUS);
-
-		fried_moa_egg = registerItem("fried_moa_egg", new ItemFood(10, false), CreativeTabsAether.CONSUMABLES);
+		registerItem("fried_moa_egg", fried_moa_egg.setCreativeTab(CreativeTabsAether.CONSUMABLES));
 
 		final TemperatureHandler temperatureHandler = new TemperatureHandler();
 
@@ -1179,16 +1388,6 @@ public class ItemsAether
 
 		ItemEffects.register(ItemsAether.glamoured_cockatrice_keratin, new Effects().add(EntityEffects.MODIFY_DEFENSE, new ModifyDefenseEffect.Instance(ElementalState.BLIGHT, 0.5D)));
 
-		zanite_armor_set = new Item[] { zanite_helmet, zanite_chestplate, zanite_leggings, zanite_boots, zanite_gloves };
-
-		gravitite_armor_set = new Item[] { gravitite_helmet, gravitite_chestplate, gravitite_leggings, gravitite_boots, gravitite_gloves };
-
-		valkyrie_armor_set = new Item[] { valkyrie_helmet, valkyrie_chestplate, valkyrie_leggings, valkyrie_boots, valkyrie_gloves };
-
-		phoenix_armor_set = new Item[] { phoenix_helmet, phoenix_chestplate, phoenix_leggings, phoenix_boots, phoenix_gloves };
-
-		neptune_armor_set = new Item[] { neptune_helmet, neptune_chestplate, neptune_leggings, neptune_boots, neptune_gloves };
-
 		registerItemProperties();
 	}
 
@@ -1196,13 +1395,6 @@ public class ItemsAether
 	{
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER,
 				new ItemStack(ItemsAether.skyroot_water_bucket), new ItemStack(ItemsAether.skyroot_bucket));
-	}
-
-	private static <T extends Item> T registerItem(String name, T item, CreativeTabs tab)
-	{
-		item.setCreativeTab(tab);
-
-		return registerItem(name, item);
 	}
 
 	private static <T extends Item> T registerItem(String name, T item)
