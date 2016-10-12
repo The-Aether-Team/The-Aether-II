@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.items.companions;
 
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import com.gildedgames.aether.common.entities.companions.EntityCombatCompanion;
 import com.gildedgames.aether.common.items.InformationProvider;
 import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import com.gildedgames.aether.common.entities.companions.EntityCompanion;
@@ -33,7 +32,7 @@ public class ItemCompanion extends Item
 
 		this.setMaxStackSize(1);
 
-		this.setCreativeTab(CreativeTabsAether.tabCompanions);
+		this.setCreativeTab(CreativeTabsAether.COMPANIONS);
 	}
 
 	public ItemCompanion(Class<? extends EntityCompanion> companionClass)

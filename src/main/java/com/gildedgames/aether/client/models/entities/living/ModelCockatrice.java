@@ -10,45 +10,85 @@ public class ModelCockatrice extends ModelBase
 {
 
 	ModelRenderer LegTopRight;
+
 	ModelRenderer LegTopLeft;
+
 	ModelRenderer LegMidRight;
+
 	ModelRenderer LegMidLeft;
+
 	ModelRenderer LegBottomRight;
+
 	ModelRenderer LegBottomLeft;
+
 	ModelRenderer FootRight;
+
 	ModelRenderer FootLeft;
+
 	ModelRenderer LegFeatheredRight;
+
 	ModelRenderer LegFeatheredLeft;
+
 	ModelRenderer BodyFront;
+
 	ModelRenderer BodyBack;
+
 	ModelRenderer ShoulderRight;
+
 	ModelRenderer ShoulderLeft;
+
 	ModelRenderer WingBaseRight;
+
 	ModelRenderer WingBaseLeft;
+
 	ModelRenderer WingRight;
+
 	ModelRenderer WingLeft;
+
 	ModelRenderer TailMiddle;
+
 	ModelRenderer TailLeft;
+
 	ModelRenderer TailRight;
+
 	ModelRenderer NeckBase;
+
 	ModelRenderer NeckTop;
+
 	ModelRenderer Head;
+
 	ModelRenderer BeakJaw;
+
 	ModelRenderer Teeth;
+
 	ModelRenderer FeatherRight;
+
 	ModelRenderer FeatherLeft;
+
 	ModelRenderer FeatherTop;
+
 	ModelRenderer ToeLeftRight;
+
 	ModelRenderer ToeMidRight;
+
 	ModelRenderer ToeRightRight;
+
 	ModelRenderer ToeLeftLeft;
+
 	ModelRenderer ToeMidLeft;
+
 	ModelRenderer ToeRightLeft;
+
 	ModelRenderer Dart1;
+
 	ModelRenderer Dart2;
+
 	ModelRenderer Dart3;
+
 	ModelRenderer Dart4;
+
 	ModelRenderer Dart5;
+
 	ModelRenderer Dart6;
 
 	public ModelCockatrice()
@@ -374,15 +414,15 @@ public class ModelCockatrice extends ModelBase
 	{
 		//super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		EntityCockatrice cockatrice = (EntityCockatrice) entity;
-		
+
 		float f6 = 3.141593F;
-		
+
 		this.Head.rotateAngleX = headPitch / 57.29578F;
 		this.Head.rotateAngleY = netHeadYaw / 57.29578F;
-		
+
 		float rightLegRotation;
 		float leftLegRotation;
-		
+
 		float legSwingSpeed = 0.7F;
 		float legSwingLength = 0.8F;
 
@@ -397,7 +437,7 @@ public class ModelCockatrice extends ModelBase
 		this.ToeMidRight.rotateAngleX = rightLegRotation;
 		this.ToeRightRight.rotateAngleX = rightLegRotation;
 		this.FootRight.rotateAngleX = rightLegRotation;
-		
+
 		this.LegFeatheredLeft.rotateAngleX = -0.2094395F + leftLegRotation;
 		this.LegTopLeft.rotateAngleX = -0.2094395F + leftLegRotation;
 		this.LegMidLeft.rotateAngleX = 0.8726646F + leftLegRotation;
@@ -411,14 +451,14 @@ public class ModelCockatrice extends ModelBase
 		this.Neck2.rotateAngleX = 0.0F;
 		this.Neck1.rotateAngleY = this.Head.rotateAngleY;
 		this.Neck2.rotateAngleY = this.Head.rotateAngleY;*/
-		
+
 		this.FeatherTop.rotateAngleY = this.Head.rotateAngleY;
 		this.FeatherTop.rotateAngleX = 0.3490659F + this.Head.rotateAngleX;
 		this.FeatherRight.rotateAngleY = -0.4363323F + this.Head.rotateAngleY;
 		this.FeatherRight.rotateAngleX = this.Head.rotateAngleX;
 		this.FeatherLeft.rotateAngleY = 0.4363323F + this.Head.rotateAngleY;
 		this.FeatherLeft.rotateAngleX = this.Head.rotateAngleX;
-		
+
 		this.BeakJaw.rotateAngleY = this.Head.rotateAngleY;
 		this.BeakJaw.rotateAngleX = 0.1745329F + this.Head.rotateAngleX;
 		this.Teeth.rotateAngleY = this.Head.rotateAngleY;

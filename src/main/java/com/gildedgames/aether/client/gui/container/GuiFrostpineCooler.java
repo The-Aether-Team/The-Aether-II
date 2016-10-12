@@ -14,78 +14,80 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiFrostpineCooler extends GuiContainer
 {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(AetherCore.MOD_ID, "textures/gui/inventory/frostpine_cooler.png");
-    /** The player inventory bound to this GUI. */
-    private final InventoryPlayer playerInventory;
-    private final IInventory tile;
+	private static final ResourceLocation TEXTURE = new ResourceLocation(AetherCore.MOD_ID, "textures/gui/inventory/frostpine_cooler.png");
 
-    public GuiFrostpineCooler(InventoryPlayer playerInv, IInventory coolerInv)
-    {
-        super(new ContainerFrostpineCooler(playerInv, coolerInv));
-        this.playerInventory = playerInv;
-        this.tile = coolerInv;
-    }
+	/** The player inventory bound to this GUI. */
+	private final InventoryPlayer playerInventory;
 
-    /**
-     * Draw the foreground layer for the GuiContainer (everything in front of the items)
-     */
-    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
-    {
-        String s = this.tile.getDisplayName().getUnformattedText();
-        this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
-        this.fontRendererObj.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
+	private final IInventory tile;
 
-        if (this.tile instanceof TileEntityFrostpineCooler)
-        {
-            TileEntityFrostpineCooler te = (TileEntityFrostpineCooler)this.tile;
+	public GuiFrostpineCooler(InventoryPlayer playerInv, IInventory coolerInv)
+	{
+		super(new ContainerFrostpineCooler(playerInv, coolerInv));
+		this.playerInventory = playerInv;
+		this.tile = coolerInv;
+	}
 
-            if (!te.isCooling())
-            {
-                return;
-            }
+	/**
+	 * Draw the foreground layer for the GuiContainer (everything in front of the items)
+	 */
+	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
+	{
+		String s = this.tile.getDisplayName().getUnformattedText();
+		this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
+		this.fontRendererObj.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
 
-            float percent = 0.0F;
+		if (this.tile instanceof TileEntityFrostpineCooler)
+		{
+			TileEntityFrostpineCooler te = (TileEntityFrostpineCooler) this.tile;
 
-            if (te.getCurrentCoolingProgress() < 0)
-            {
-                float thing = ((float)te.getCurrentCoolingProgress() / (float)te.getRequiredTemperatureThreshold());
+			if (!te.isCooling())
+			{
+				return;
+			}
 
-                percent = thing * 100.0F;
-            }
+			float percent = 0.0F;
 
-            String valueString = percent == (int) Math.floor(percent) ? String.valueOf((int) Math.floor(percent)) : String.valueOf(percent);
+			if (te.getCurrentCoolingProgress() < 0)
+			{
+				float thing = ((float) te.getCurrentCoolingProgress() / (float) te.getRequiredTemperatureThreshold());
 
-            if (percent != (int) Math.floor(percent))
-            {
-                double floor = Math.floor(percent);
-                double dif = percent - floor;
+				percent = thing * 100.0F;
+			}
 
-                if (dif < 0.1F)
-                {
-                    valueString = String.valueOf((int) Math.floor(percent));
-                }
-                else
-                {
-                    valueString = String.format("%.1f", Float.valueOf(valueString));
-                }
-            }
+			String valueString = percent == (int) Math.floor(percent) ? String.valueOf((int) Math.floor(percent)) : String.valueOf(percent);
 
-            valueString += "%";
+			if (percent != (int) Math.floor(percent))
+			{
+				double floor = Math.floor(percent);
+				double dif = percent - floor;
 
-            this.fontRendererObj.drawString(valueString, 136 - (this.fontRendererObj.getStringWidth(valueString) / 2), this.ySize - 105 + 2, 4210752);
-        }
-    }
+				if (dif < 0.1F)
+				{
+					valueString = String.valueOf((int) Math.floor(percent));
+				}
+				else
+				{
+					valueString = String.format("%.1f", Float.valueOf(valueString));
+				}
+			}
 
-    /**
-     * Draws the background layer of this container (behind the items).
-     */
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-    {
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(TEXTURE);
-        int i = (this.width - this.xSize) / 2;
-        int j = (this.height - this.ySize) / 2;
-        this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
-    }
+			valueString += "%";
+
+			this.fontRendererObj.drawString(valueString, 136 - (this.fontRendererObj.getStringWidth(valueString) / 2), this.ySize - 105 + 2, 4210752);
+		}
+	}
+
+	/**
+	 * Draws the background layer of this container (behind the items).
+	 */
+	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
+	{
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		this.mc.getTextureManager().bindTexture(TEXTURE);
+		int i = (this.width - this.xSize) / 2;
+		int j = (this.height - this.ySize) / 2;
+		this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
+	}
 
 }

@@ -8,7 +8,9 @@ public class ModelMoaEgg extends ModelBase
 {
 
 	ModelRenderer Shape1;
+
 	ModelRenderer Shape2;
+
 	ModelRenderer Shape3;
 
 	public ModelMoaEgg()

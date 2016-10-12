@@ -25,7 +25,7 @@ public class ItemAetherTool extends ItemTool
 		this.toolType = toolType;
 		this.name = name;
 
-		this.setCreativeTab(CreativeTabsAether.tabTools);
+		this.setCreativeTab(CreativeTabsAether.TOOLS);
 	}
 
 	protected boolean isAbilityPassive()

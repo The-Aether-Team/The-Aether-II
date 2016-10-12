@@ -1,9 +1,9 @@
 package com.gildedgames.aether.client;
 
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
-import com.gildedgames.aether.client.main_menu.WorldAetherOptionsOverlay;
+import com.gildedgames.aether.client.gui.main_menu.WorldAetherOptionsOverlay;
 import com.gildedgames.aether.client.models.blocks.AetherBlockModels;
-import com.gildedgames.aether.client.models.items.AetherItemModels;
+import com.gildedgames.aether.client.models.items.ItemModelsAether;
 import com.gildedgames.aether.client.renderer.AetherRenderers;
 import com.gildedgames.aether.client.renderer.ClientRenderHandler;
 import com.gildedgames.aether.client.renderer.items.ItemMoaEggColorHandler;
@@ -50,7 +50,7 @@ public class ClientProxy extends CommonProxy
 		super.preInit(event);
 
 		AetherBlockModels.preInit();
-		AetherItemModels.preInit();
+		ItemModelsAether.preInit();
 		AetherRenderers.preInit();
 
 		CreativeTabsAether.registerTabIcons();

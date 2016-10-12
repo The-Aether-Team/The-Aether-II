@@ -137,8 +137,8 @@ public class ModelAerwhale extends ModelBase
 	{
 		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entity);
 
-		EntityFlying flying = (EntityFlying)entity;
-		float deltaTime = ageInTicks - (float)flying.ticksExisted;
+		EntityFlying flying = (EntityFlying) entity;
+		float deltaTime = ageInTicks - (float) flying.ticksExisted;
 
 		float tailAnimation = flying.getTailAnimation(deltaTime);
 

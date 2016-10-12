@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.client.main_menu.WorldAetherOptionsOverlay;
+import com.gildedgames.aether.client.gui.main_menu.WorldAetherOptionsOverlay;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.items.ItemsAether;

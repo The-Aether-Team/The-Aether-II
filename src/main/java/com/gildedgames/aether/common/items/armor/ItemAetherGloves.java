@@ -1,10 +1,7 @@
 package com.gildedgames.aether.common.items.armor;
 
 import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
-import com.gildedgames.aether.common.capabilities.item.properties.IPhoenixChillable;
-import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -46,7 +43,7 @@ public class ItemAetherGloves extends Item
 
 		this.setMaxStackSize(1);
 
-		this.setCreativeTab(CreativeTabsAether.tabArmor);
+		this.setCreativeTab(CreativeTabsAether.ARMOR);
 	}
 
 	@SideOnly(Side.CLIENT)

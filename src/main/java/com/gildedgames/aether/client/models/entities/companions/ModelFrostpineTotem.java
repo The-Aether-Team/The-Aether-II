@@ -7,59 +7,113 @@ import net.minecraft.entity.Entity;
 public class ModelFrostpineTotem extends ModelBase
 {
 	ModelRenderer Moa_Body;
+
 	ModelRenderer Moa_Head;
+
 	ModelRenderer Moa_Neck;
+
 	ModelRenderer Moa_Left_Wing_Main_1;
+
 	ModelRenderer Moa_Right_Wing_Main_1;
+
 	ModelRenderer Moa_Left_Wing_Main_2;
+
 	ModelRenderer Moa_Right_Wing_Main_2;
+
 	ModelRenderer Moa_Left_Wing_Sub_Top;
+
 	ModelRenderer Moa_Right_Wing_Sub_Top;
+
 	ModelRenderer Moa_Left_Wing_Sub_Mid;
+
 	ModelRenderer Moa_Right_Wing_Sub_Mid;
+
 	ModelRenderer Moa_Left_Wing_Sub_Bottom;
+
 	ModelRenderer Moa_Right_Wing_Sub_Bottom;
+
 	ModelRenderer Moa_Tail_Main;
+
 	ModelRenderer Moa_Tail_Feather_Left_1;
+
 	ModelRenderer Moa_Tail_Feather_Right_1;
+
 	ModelRenderer Moa_Tail_Feather_Left_2;
+
 	ModelRenderer Moa_Tail_Feather_Right_2;
+
 	ModelRenderer Moa_Leg_Left;
+
 	ModelRenderer Moa_Leg_Right;
+
 	ModelRenderer Moa_Lower_Leg_Left;
+
 	ModelRenderer Moa_Lower_Leg_Right;
+
 	ModelRenderer Gruegar_Head;
+
 	ModelRenderer Gruegar_Ear_Left;
+
 	ModelRenderer Gruegar_Ear_Right;
+
 	ModelRenderer Gruegar_Muzzle;
+
 	ModelRenderer Gruegar_Neck;
+
 	ModelRenderer Gruegar_Shell_Top;
+
 	ModelRenderer Gruegar_Shell_Middle;
+
 	ModelRenderer Gruegar_Shell_Lower;
+
 	ModelRenderer Gruegar_Body;
+
 	ModelRenderer Gruegar_Shoulder_Left;
+
 	ModelRenderer Gruegar_Shoulder_Right;
+
 	ModelRenderer Gruegar_Upper_Arm_Left;
+
 	ModelRenderer Gruegar_Upper_Arm_Right;
+
 	ModelRenderer Gruegar_Forearm_Left;
+
 	ModelRenderer Gruegar_Forearm_Right;
+
 	ModelRenderer Gruegar_Paw_Left;
+
 	ModelRenderer Gruegar_Paw_Right;
+
 	ModelRenderer Gruegar_Leg_Left;
+
 	ModelRenderer Gruegar_Leg_Right;
+
 	ModelRenderer Gruegar_Tail;
+
 	ModelRenderer Zephyr_Body_1;
+
 	ModelRenderer Zephyr_Body_2;
+
 	ModelRenderer Zephyr_Rib_Left_1;
+
 	ModelRenderer Zephyr_Rib_Left_2;
+
 	ModelRenderer Zephyr_Rib_Right_1;
+
 	ModelRenderer Zephyr_Rib_Right_2;
+
 	ModelRenderer Zeohyr_Back_Plate_Left;
+
 	ModelRenderer Zephyr_Back_Plate_Right;
+
 	ModelRenderer Zephyr_Tail_1;
+
 	ModelRenderer Zephyr_Tail_2;
+
 	ModelRenderer Zephyr_Jaw_Right;
+
 	ModelRenderer Zephyr_Jaw_Left;
+
 	ModelRenderer Zephyr_Mouth;
 
 	public ModelFrostpineTotem()

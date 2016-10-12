@@ -1,4 +1,4 @@
-package com.gildedgames.aether.client.models.blocks;
+package com.gildedgames.aether.client.models.entities.tile;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

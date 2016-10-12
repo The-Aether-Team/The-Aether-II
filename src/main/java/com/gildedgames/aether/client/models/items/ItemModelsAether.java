@@ -34,7 +34,7 @@ import net.minecraftforge.client.model.ModelLoader;
 
 import java.util.Map;
 
-public class AetherItemModels
+public class ItemModelsAether
 {
 	public static void preInit()
 	{

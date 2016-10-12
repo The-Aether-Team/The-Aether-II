@@ -1,4 +1,4 @@
-package com.gildedgames.aether.client.main_menu;
+package com.gildedgames.aether.client.gui.main_menu;
 
 import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.util.core.gui.util.GuiFactory;

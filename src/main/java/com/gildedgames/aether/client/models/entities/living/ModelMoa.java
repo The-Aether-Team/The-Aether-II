@@ -9,38 +9,71 @@ import net.minecraft.util.math.MathHelper;
 public class ModelMoa extends ModelBase
 {
 	public ModelRenderer Claw1Left;
+
 	public ModelRenderer Claw2Left;
+
 	public ModelRenderer Claw3Right;
+
 	public ModelRenderer Neck2;
+
 	public ModelRenderer Neck1;
+
 	public ModelRenderer Claw1Right;
+
 	public ModelRenderer RightWing;
+
 	public ModelRenderer Claw2Right;
+
 	public ModelRenderer LeftLeg1;
+
 	public ModelRenderer Claw3Left;
+
 	public ModelRenderer RightThigh;
+
 	public ModelRenderer Jaw;
+
 	public ModelRenderer Toe2Right;
+
 	public ModelRenderer TailLeft;
+
 	public ModelRenderer Chest;
+
 	public ModelRenderer Teeth;
+
 	public ModelRenderer RightLeg1;
+
 	public ModelRenderer FootRight;
+
 	public ModelRenderer Toe1Right;
+
 	public ModelRenderer LeftThigh;
+
 	public ModelRenderer LeftLeg2;
+
 	public ModelRenderer Toe1Left;
+
 	public ModelRenderer FootLeft;
+
 	public ModelRenderer Toe2Left;
+
 	public ModelRenderer LeftWing;
+
 	public ModelRenderer RightLeg2;
+
 	public ModelRenderer Body;
+
 	public ModelRenderer TailMiddle;
+
 	public ModelRenderer TailRight;
+
 	public ModelRenderer Head;
+
 	public ModelRenderer feather4;
+
 	public ModelRenderer feather3;
+
 	public ModelRenderer feather2;
+
 	public ModelRenderer feather1;
 
 	public ModelMoa()
@@ -315,21 +348,23 @@ public class ModelMoa extends ModelBase
 	{
 		EntityMoa moa = (EntityMoa) entity;
 		float f6 = 3.141593F;
-		
+
 		this.Head.rotateAngleX = f4 / 57.29578F;
 		this.Head.rotateAngleY = f3 / 57.29578F;
-		
+
 		float rightLegRotation;
 		float leftLegRotation;
-		
+
 		float legSwingSpeed = 0.7F;
 		float legSwingLength = 0.8F;
-		
+
 		if (moa.onGround)
 		{
 			rightLegRotation = MathHelper.cos(f * legSwingSpeed) * legSwingLength * f1;
 			leftLegRotation = MathHelper.cos(f * legSwingSpeed + 3.141593F) * legSwingLength * f1;
-		} else {
+		}
+		else
+		{
 			rightLegRotation = 0.0F;
 			leftLegRotation = 0.0F;
 		}
@@ -343,7 +378,7 @@ public class ModelMoa extends ModelBase
 		this.Claw2Right.rotateAngleX = rightLegRotation;
 		this.Claw3Right.rotateAngleX = rightLegRotation;
 		this.FootRight.rotateAngleX = rightLegRotation;
-		
+
 		this.LeftThigh.rotateAngleX = -0.4537856F + leftLegRotation;
 		this.LeftLeg1.rotateAngleX = -0.4886922F + leftLegRotation;
 		this.LeftLeg2.rotateAngleX = 0.4886922F + leftLegRotation;
@@ -353,7 +388,7 @@ public class ModelMoa extends ModelBase
 		this.Claw2Left.rotateAngleX = leftLegRotation;
 		this.Claw3Left.rotateAngleX = leftLegRotation;
 		this.FootLeft.rotateAngleX = leftLegRotation;
-		
+
 		if (f2 > 0F)
 		{
 			this.LeftWing.rotationPointZ = -1F;
@@ -364,7 +399,7 @@ public class ModelMoa extends ModelBase
 			this.RightWing.rotateAngleX = f6 / 2.0f;
 			this.LeftWing.rotateAngleZ = f2;
 			this.RightWing.rotateAngleZ = -f2;
-			
+
 			this.RightThigh.rotateAngleX += 0.8F;
 			this.RightLeg1.rotateAngleX += 0.8F;
 			this.RightLeg2.rotateAngleX += 0.8F;
@@ -374,7 +409,7 @@ public class ModelMoa extends ModelBase
 			this.Claw2Right.rotateAngleX += 0.8F;
 			this.Claw3Right.rotateAngleX += 0.8F;
 			this.FootRight.rotateAngleX += 0.8F;
-			
+
 			this.LeftThigh.rotateAngleX += 0.8F;
 			this.LeftLeg1.rotateAngleX += 0.8F;
 			this.LeftLeg2.rotateAngleX += 0.8F;
@@ -401,21 +436,21 @@ public class ModelMoa extends ModelBase
 		this.Neck2.rotateAngleX = 0.0F;
 		this.Neck1.rotateAngleY = this.Head.rotateAngleY;
 		this.Neck2.rotateAngleY = this.Head.rotateAngleY;
-		
+
 		this.Jaw.rotateAngleY = this.Head.rotateAngleY;
 		this.Jaw.rotateAngleX = this.Head.rotateAngleX;
 		this.Teeth.rotateAngleY = this.Head.rotateAngleY;
 		this.Teeth.rotateAngleX = this.Head.rotateAngleX;
-		
+
 		this.feather1.rotateAngleX = 0.1745329F + this.Head.rotateAngleX;
 		this.feather1.rotateAngleY = 0.2268928F + this.Head.rotateAngleY;
-		
+
 		this.feather2.rotateAngleX = -0.1745329F + this.Head.rotateAngleX;
 		this.feather2.rotateAngleY = -0.2268928F + this.Head.rotateAngleY;
 
 		this.feather3.rotateAngleX = 0.1745329F + this.Head.rotateAngleX;
 		this.feather3.rotateAngleY = -0.2268928F + this.Head.rotateAngleY;
-		
+
 		this.feather4.rotateAngleX = -0.1745329F + this.Head.rotateAngleX;
 		this.feather4.rotateAngleY = 0.2268928F + this.Head.rotateAngleY;
 	}

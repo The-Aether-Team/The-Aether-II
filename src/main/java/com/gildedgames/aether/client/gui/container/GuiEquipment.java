@@ -99,10 +99,14 @@ public class GuiEquipment extends GuiContainer
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) { }
+	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
+	{
+	}
 
 	@Override
-	public void drawDefaultBackground() { }
+	public void drawDefaultBackground()
+	{
+	}
 
 	private boolean isMouseOverSlot(Slot slot, int mouseX, int mouseY)
 	{

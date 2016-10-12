@@ -22,7 +22,7 @@ public class ItemAetherSword extends ItemSword
 
 		this.abilityType = abilityType;
 
-		this.setCreativeTab(CreativeTabsAether.tabWeapons);
+		this.setCreativeTab(CreativeTabsAether.WEAPONS);
 	}
 
 	@Override

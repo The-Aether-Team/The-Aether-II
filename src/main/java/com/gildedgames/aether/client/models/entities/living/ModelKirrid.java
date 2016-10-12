@@ -10,37 +10,67 @@ public class ModelKirrid extends ModelBase
 {
 	//fields
 	ModelRenderer BodyMain;
+
 	ModelRenderer BodyBack;
+
 	ModelRenderer BodyBottom;
+
 	ModelRenderer LegFrontLeft1;
+
 	ModelRenderer LegFrontLeft2;
+
 	ModelRenderer LegFrontLeft3;
+
 	ModelRenderer LegFrontRight1;
+
 	ModelRenderer LegFrontRight2;
+
 	ModelRenderer LegFrontRight3;
+
 	ModelRenderer LegBackLeft1;
+
 	ModelRenderer LegBackLeft2;
+
 	ModelRenderer LegBackLeft3;
+
 	ModelRenderer LegBackRight1;
+
 	ModelRenderer LegBackRight2;
+
 	ModelRenderer LegBackRight3;
+
 	ModelRenderer Tail;
+
 	ModelRenderer HeadNeck;
+
 	ModelRenderer HeadMain;
+
 	ModelRenderer HeadSnout;
+
 	ModelRenderer HeadCheekLeft;
+
 	ModelRenderer HeadCheekRight;
+
 	ModelRenderer HeadJaw;
+
 	ModelRenderer HeadEyeRight;
+
 	ModelRenderer HeadBrowRight;
+
 	ModelRenderer HeadEyeLeft;
+
 	ModelRenderer HeadBrowLeft;
+
 	ModelRenderer HeadPlate;
+
 	ModelRenderer HeadTop;
+
 	ModelRenderer HeadEarLeft;
+
 	ModelRenderer HeadEarRight;
 
 	protected float childYOffset = 8.0F;
+
 	protected float childZOffset = 4.0F;
 
 	public ModelKirrid()
@@ -356,13 +386,13 @@ public class ModelKirrid extends ModelBase
 		this.LegFrontLeft2.rotateAngleX = 0.0872665F + (MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);
 		this.LegFrontLeft3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
 
-		this.LegFrontRight1.rotateAngleX = 0.0872665F + (MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount);
-		this.LegFrontRight2.rotateAngleX = 0.0872665F + (MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount);
-		this.LegFrontRight3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+		this.LegFrontRight1.rotateAngleX = 0.0872665F + (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount);
+		this.LegFrontRight2.rotateAngleX = 0.0872665F + (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount);
+		this.LegFrontRight3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
 
-		this.LegBackLeft1.rotateAngleX = 0.6108652F + (MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount);
-		this.LegBackLeft2.rotateAngleX = 0.6108652F + (MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount);
-		this.LegBackLeft3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+		this.LegBackLeft1.rotateAngleX = 0.6108652F + (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount);
+		this.LegBackLeft2.rotateAngleX = 0.6108652F + (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount);
+		this.LegBackLeft3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
 
 		this.LegBackRight1.rotateAngleX = 0.6108652F + (MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);
 		this.LegBackRight2.rotateAngleX = 0.6108652F + (MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);

@@ -12,10 +12,7 @@ import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-
-import static sun.audio.AudioPlayer.player;
 
 public class LayerPlayerGloves extends LayerBipedArmor
 {
@@ -75,7 +72,7 @@ public class LayerPlayerGloves extends LayerBipedArmor
 			{
 				ItemLeatherGloves leatherGloves = (ItemLeatherGloves) glove;
 
-				int color = leatherGloves.getColor(itemstack);
+				int color = ItemLeatherGloves.getColor(itemstack);
 
 				float r = (float) (color >> 16 & 255) / 255.0F;
 				float g = (float) (color >> 8 & 255) / 255.0F;

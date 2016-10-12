@@ -1,12 +1,11 @@
 package com.gildedgames.aether.client.renderer.tile_entities;
 
-import com.gildedgames.aether.client.models.blocks.ModelPresent;
+import com.gildedgames.aether.client.models.entities.tile.ModelPresent;
 import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import com.gildedgames.aether.common.tile_entities.TileEntityPresent;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 
 import java.util.Random;
 

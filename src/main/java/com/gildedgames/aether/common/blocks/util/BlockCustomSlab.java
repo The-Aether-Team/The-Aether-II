@@ -30,7 +30,7 @@ public class BlockCustomSlab extends Block
 	{
 		super(state.getMaterial());
 
-		this.setCreativeTab(CreativeTabsAether.tabBlocks);
+		this.setCreativeTab(CreativeTabsAether.BLOCKS);
 
 		final Block block = state.getBlock();
 

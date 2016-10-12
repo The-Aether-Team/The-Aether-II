@@ -5,16 +5,15 @@ import net.minecraft.item.ItemStack;
 
 public class AltarEnchantRecipe implements IAltarRecipe
 {
-	private final int ambrosiumNeeded;
+	private final int cost;
 
 	private final ItemStack output;
 
 	private final ItemStack input;
 
-	public AltarEnchantRecipe(int ambrosiumNeeded, ItemStack input, ItemStack output)
+	public AltarEnchantRecipe(int cost, ItemStack input, ItemStack output)
 	{
-		this.ambrosiumNeeded = ambrosiumNeeded;
-
+		this.cost = cost;
 		this.input = input;
 		this.output = output;
 	}
@@ -28,7 +27,7 @@ public class AltarEnchantRecipe implements IAltarRecipe
 	@Override
 	public int getAmbrosiumCost(ItemStack stack)
 	{
-		return this.ambrosiumNeeded;
+		return this.cost;
 	}
 
 	@Override

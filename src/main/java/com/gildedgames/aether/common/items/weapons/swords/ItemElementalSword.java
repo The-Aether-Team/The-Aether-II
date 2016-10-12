@@ -67,7 +67,7 @@ public class ItemElementalSword extends ItemAetherSword
 
 		this.setMaxDamage(500);
 
-		this.setCreativeTab(CreativeTabsAether.tabWeapons);
+		this.setCreativeTab(CreativeTabsAether.WEAPONS);
 	}
 
 	@Override
