@@ -210,7 +210,7 @@ public class EntitySlider extends EntitySliding implements IMob
 					}
 				}
 
-				tipPrefix = "My " + equippedItem.getItem().getItemStackDisplayName(equippedItem) + " doesn't seem to hurt it. Maybe I need a pickaxe?";
+				tipPrefix = "My " + equippedItem.getDisplayName() + " doesn't seem to hurt it. Maybe I need a pickaxe?";
 			}
 		}
 		else
