@@ -556,6 +556,7 @@ entity.aether.generator.name=Entity Generator
 entity.aether.sentry_guardian.name=Sentry Guardian
 entity.aether.production_line.name=Production Line
 entity.aether.repair_sentry.name=Repair Sentry
+entity.aether.slider.name=Slider
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether Blocks
