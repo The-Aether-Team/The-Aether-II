@@ -16,6 +16,7 @@ import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.entities.companions.*;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.*;
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.boss.EntitySlider;
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
 import com.gildedgames.aether.common.entities.item.EntityRewardItemStack;
 import com.gildedgames.aether.common.entities.living.*;
@@ -116,6 +117,8 @@ public class AetherRenderers
 				return new RenderSnowball<>(manager, ItemsAether.sentry_vaultbox, Minecraft.getMinecraft().getRenderItem());
 			}
 		});
+
+		RenderingRegistry.registerEntityRenderingHandler(EntitySlider.class, new AetherRenderFactory<>(RenderSlider.class));
 	}
 
 	private static void registerTESRs()

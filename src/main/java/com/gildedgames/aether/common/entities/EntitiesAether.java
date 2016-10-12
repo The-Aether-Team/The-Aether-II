@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.entities.companions.*;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.*;
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.boss.EntitySlider;
 import com.gildedgames.aether.common.entities.dungeon.util.EntityGenerator;
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
 import com.gildedgames.aether.common.entities.item.EntityRewardItemStack;
@@ -34,7 +35,6 @@ public class EntitiesAether
 		registerLivingEntity(EntityCarrionSprout.class, "carrion_sprout", 0xcad9e9, 0x93b1d1);
 		registerLivingEntity(EntityCockatrice.class, "cockatrice", 0x6b519c, 0x8ae390);
 		registerLivingEntity(EntityKirrid.class, "kirrid", 0xf3efd8, 0x50575d);
-		registerLivingEntity(EntityMoa.class, "moa");
 		registerLivingEntity(EntityAerwhale.class, "aerwhale", 0x86b1c9, 0x8095a1);
 		registerLivingEntity(EntityZephyr.class, "zephyr", 0xb8b5ab, 0x988c65);
 		registerLivingEntity(EntityTempest.class, "tempest", 0x3c464c, 0xc3e6f0);
@@ -48,6 +48,7 @@ public class EntitiesAether
 		registerLivingEntity(EntitySentryGuardian.class, "sentry_guardian", 0x414141, 0x4e9af7);
 		registerLivingEntity(EntityProductionLine.class, "production_line", 0x414141, 0x4e9af7);
 		registerLivingEntity(EntityRepairSentry.class, "repair_sentry", 0x414141, 0x4e9af7);
+		registerLivingEntity(EntitySlider.class, "slider", 0x414141, 0x4e9af7);
 
 		registerLivingEntity(EntityFrostpineTotem.class, "frostpine_totem");
 		registerLivingEntity(EntityKraisith.class, "kraisith");
@@ -71,6 +72,7 @@ public class EntitiesAether
 		EntityRegistry.registerModEntity(EntityRewardItemStack.class, "reward_itemstack", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntitySentryVaultbox.class, "sentry_vaultbox", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityTNTPresent.class, "tnt_present", NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityMoa.class, "moa", NEXT_ID++, AetherCore.INSTANCE, 80, 1, true);
 	}
 
 	private static void registerLivingEntity(Class<? extends Entity> entity, String id, int eggPrimaryColor, int eggSecondaryColor)

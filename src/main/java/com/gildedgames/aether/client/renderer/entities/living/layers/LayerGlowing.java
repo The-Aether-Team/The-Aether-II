@@ -35,6 +35,11 @@ public class LayerGlowing<T extends EntityLiving> implements LayerRenderer<T>
 
     public void doRenderLayer(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)
     {
+        if (this.glowingLayer.get() == null)
+        {
+            return;
+        }
+
         this.renderer.bindTexture(this.glowingLayer.get());
         GlStateManager.enableBlend();
         GlStateManager.disableAlpha();

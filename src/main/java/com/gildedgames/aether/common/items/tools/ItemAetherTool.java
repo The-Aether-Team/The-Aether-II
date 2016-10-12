@@ -28,6 +28,11 @@ public class ItemAetherTool extends ItemTool
 		this.setCreativeTab(CreativeTabsAether.TOOLS);
 	}
 
+	public EnumToolType getToolType()
+	{
+		return this.toolType;
+	}
+
 	protected boolean isAbilityPassive()
 	{
 		return true;

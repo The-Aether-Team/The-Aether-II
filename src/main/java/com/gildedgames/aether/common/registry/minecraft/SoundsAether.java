@@ -90,6 +90,14 @@ public class SoundsAether
 
 	public static final SoundEvent break_labyrinth_container = new SoundEvent(AetherCore.getResource("random.dungeon.container.smash"));
 
+	public static final SoundEvent slider_awake = new SoundEvent(AetherCore.getResource("mob.slider.awake"));
+
+	public static final SoundEvent slider_collide = new SoundEvent(AetherCore.getResource("mob.slider.collide"));
+
+	public static final SoundEvent slider_die = new SoundEvent(AetherCore.getResource("mob.slider.die"));
+
+	public static final SoundEvent slider_move = new SoundEvent(AetherCore.getResource("mob.slider.move"));
+
 	public static void preInit()
 	{
 		registerSound("portal.glowstone.hum", glowstone_portal_hum);
@@ -151,6 +159,11 @@ public class SoundsAether
 
 		registerSound("random.present_unwrap", present_unwrap);
 		registerSound("random.dungeon.container.smash", break_labyrinth_container);
+
+		registerSound("mob.slider.awake", slider_awake);
+		registerSound("mob.slider.collide", slider_collide);
+		registerSound("mob.slider.die", slider_die);
+		registerSound("mob.slider.move", slider_move);
 	}
 
 	private static void registerSound(String resource, SoundEvent event) {

@@ -2,6 +2,7 @@ package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.models.entities.living.ModelLabyrinthChestMimic;
 import com.gildedgames.aether.client.models.entities.living.ModelLabyrinthChestMimicSpawning;
+import com.gildedgames.aether.client.renderer.entities.living.layers.GlowingLayer;
 import com.gildedgames.aether.client.renderer.entities.living.layers.LayerGlowing;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityChestMimic;
@@ -77,23 +78,6 @@ public class RenderLabyrinthChestMimic extends RenderLiving<EntityChestMimic>
 		}
 
 		return entity.isOverheating() ? TEXTURE : TEXTURE_ANGRY;
-	}
-
-	private static class GlowingLayer implements Supplier<ResourceLocation>
-	{
-
-		private ResourceLocation resource;
-
-		private void setResourceLocation(ResourceLocation resource)
-		{
-			this.resource = resource;
-		}
-
-		@Override
-		public ResourceLocation get()
-		{
-			return this.resource;
-		}
 	}
 
 }

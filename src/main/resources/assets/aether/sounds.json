@@ -339,5 +339,29 @@
 		"sounds": [
 			"aether:random/container_break"
 		]
+	},
+	"mob.slider.awake": {
+		"category": "neutral",
+		"sounds": [
+			"aether:mob/slider/awake"
+		]
+	},
+	"mob.slider.collide": {
+		"category": "neutral",
+		"sounds": [
+			"aether:mob/slider/collide"
+		]
+	},
+	"mob.slider.die": {
+		"category": "neutral",
+		"sounds": [
+			"aether:mob/slider/die"
+		]
+	},
+	"mob.slider.move": {
+		"category": "neutral",
+		"sounds": [
+			"aether:mob/slider/move"
+		]
 	}
 }
