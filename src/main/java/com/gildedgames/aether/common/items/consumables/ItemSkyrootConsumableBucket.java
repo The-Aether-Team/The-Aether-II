@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.items.consumables;
 
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -20,6 +21,8 @@ public class ItemSkyrootConsumableBucket extends Item
 	public ItemSkyrootConsumableBucket()
 	{
 		this.setMaxStackSize(1);
+
+		this.setCreativeTab(CreativeTabsAether.MISCELLANEOUS);
 	}
 
 	@Override

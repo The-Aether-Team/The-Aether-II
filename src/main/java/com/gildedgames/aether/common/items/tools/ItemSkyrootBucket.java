@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.items.tools;
 
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -31,6 +32,8 @@ public class ItemSkyrootBucket extends ItemBucket
 		{
 			this.setMaxStackSize(16);
 		}
+
+		this.setCreativeTab(CreativeTabsAether.MISCELLANEOUS);
 	}
 
 	@Override

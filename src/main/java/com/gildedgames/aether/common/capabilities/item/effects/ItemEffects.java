@@ -10,7 +10,12 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ItemEffects implements IItemEffectsCapability
 {
@@ -19,36 +24,16 @@ public class ItemEffects implements IItemEffectsCapability
 		List<Pair<EntityEffectProcessor, EntityEffectInstance>> provide();
 	}
 
-	public static class RegistrationEntry
-	{
-		private Item item;
+	private static Map<Item, ItemEffectsProvider> registeredEntries = new HashMap<>();
 
-		private ItemEffectsProvider provider;
-
-		public RegistrationEntry(Item item, ItemEffectsProvider provider)
-		{
-			this.item = item;
-			this.provider = provider;
-		}
-
-		public Item getItem()
-		{
-			return this.item;
-		}
-
-		public ItemEffectsProvider getEffectsProvider()
-		{
-			return this.provider;
-		}
-	}
-
-	private static List<RegistrationEntry> registeredEntries = Lists.newArrayList();
-
-	private List<Pair<EntityEffectProcessor, EntityEffectInstance>> effectPairs = Lists.newArrayList();
+	private final List<Pair<EntityEffectProcessor, EntityEffectInstance>> effectPairs = Lists.newArrayList();
 
 	public ItemEffects(List<Pair<EntityEffectProcessor, EntityEffectInstance>> effectPairs)
 	{
-		this.effectPairs = effectPairs;
+		if (effectPairs != null)
+		{
+			this.effectPairs.addAll(effectPairs);
+		}
 	}
 
 	@Override
@@ -57,14 +42,14 @@ public class ItemEffects implements IItemEffectsCapability
 		return this.effectPairs;
 	}
 
-	public static List<RegistrationEntry> getRegistrationEntries()
+	public static ItemEffectsProvider getProvider(Item item)
 	{
-		return ItemEffects.registeredEntries;
+		return ItemEffects.registeredEntries.get(item);
 	}
 
 	public static void register(Item item, ItemEffectsProvider effectsProvider)
 	{
-		ItemEffects.registeredEntries.add(new RegistrationEntry(item, effectsProvider));
+		ItemEffects.registeredEntries.put(item, effectsProvider);
 	}
 
 	/**

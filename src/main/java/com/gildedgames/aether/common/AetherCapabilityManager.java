@@ -40,6 +40,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -144,19 +145,10 @@ public class AetherCapabilityManager
 	@SubscribeEvent
     public static void onItemLoad(AttachCapabilitiesEvent.Item event)
     {
-    	// TODO: Stop iterating-- do lookups
-		for (ItemEffects.RegistrationEntry entry : ItemEffects.getRegistrationEntries())
-		{
-			if (entry.getItem() == event.getItem())
-			{
-				List<Pair<EntityEffectProcessor, EntityEffectInstance>> emptyList = Collections.emptyList();
+		ItemEffects.ItemEffectsProvider provider = ItemEffects.getProvider(event.getItem());
 
-				ItemEffects effects = new ItemEffects(entry.getEffectsProvider() == null ? emptyList : entry.getEffectsProvider().provide());
-				event.addCapability(AetherCore.getResource("ItemStackEffects"), new ItemEffectsProvider(effects));
-
-				break;
-			}
-		}
+		ItemEffects effects = new ItemEffects(provider == null ? null : provider.provide());
+		event.addCapability(AetherCore.getResource("ItemStackEffects"), new ItemEffectsProvider(effects));
 
         event.addCapability(AetherCore.getResource("ItemStackProperties"), new ItemPropertiesProvider(event.getItemStack()));
 		event.addCapability(AetherCore.getResource("ItemExtraData"), new ItemExtraDataProvider());

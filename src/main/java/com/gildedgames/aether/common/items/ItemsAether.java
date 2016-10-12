@@ -66,6 +66,7 @@ import com.gildedgames.aether.common.items.consumables.ItemSkyrootConsumableBuck
 import com.gildedgames.aether.common.items.consumables.ItemStomperPop;
 import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
 import com.gildedgames.aether.common.items.misc.ItemAetherDeveloperWand;
+import com.gildedgames.aether.common.items.misc.ItemAetherFood;
 import com.gildedgames.aether.common.items.misc.ItemAetherPortalFrame;
 import com.gildedgames.aether.common.items.misc.ItemAetherRecord;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
@@ -192,22 +193,22 @@ public class ItemsAether
 
 	public static final Item golden_amber = new Item();
 
-	public static final ItemFood blueberries = new ItemFood(2, false),
-			enchanted_blueberry = new ItemFood(6, false),
-			orange = new ItemFood(4, false),
-			wyndberry = new ItemFood(4, false),
+	public static final ItemAetherFood blueberries = new ItemAetherFood(2, false),
+			enchanted_blueberry = new ItemAetherFood(6, false),
+			orange = new ItemAetherFood(4, false),
+			wyndberry = new ItemAetherFood(4, false),
 			enchanted_wyndberry = new ItemEnchantedWyndberry(),
 			swet_jelly = new ItemSwetJelly(),
 			gummy_swet = new ItemGummySwet();
 
-	public static final ItemFood candy_corn = new ItemFood(8, false),
-			cocoatrice = new ItemFood(12, false),
-			wrapped_chocolates = new ItemFood(12, false),
-			jelly_pumpkin = new ItemFood(12, false),
+	public static final ItemAetherFood candy_corn = new ItemAetherFood(8, false),
+			cocoatrice = new ItemAetherFood(12, false),
+			wrapped_chocolates = new ItemAetherFood(12, false),
+			jelly_pumpkin = new ItemAetherFood(12, false),
 			stomper_pop = new ItemStomperPop(),
-			blueberry_lollipop = new ItemFood(10, false),
-			orange_lollipop = new ItemFood(8, false),
-			icestone_poprocks = new ItemFood(5, false);
+			blueberry_lollipop = new ItemAetherFood(10, false),
+			orange_lollipop = new ItemAetherFood(8, false),
+			icestone_poprocks = new ItemAetherFood(5, false);
 
 	public static final ItemFood ginger_bread_man = new ItemFood(2, false),
 			candy_cane = new ItemFood(2, false);
@@ -557,31 +558,31 @@ public class ItemsAether
 		registerItem("skyroot_pickaxe", skyroot_pickaxe);
 		registerItem("skyroot_shovel", skyroot_shovel);
 		registerItem("skyroot_sword", skyroot_sword);
-        registerItem("skyroot_shield", skyroot_shield.setCreativeTab(CreativeTabsAether.ARMOR));
+        registerItem("skyroot_shield", skyroot_shield);
 
 		registerItem("holystone_axe", holystone_axe);
 		registerItem("holystone_pickaxe", holystone_pickaxe);
 		registerItem("holystone_shovel", holystone_shovel);
 		registerItem("holystone_sword", holystone_sword);
-		registerItem("holystone_shield", holystone_shield.setCreativeTab(CreativeTabsAether.ARMOR));
+		registerItem("holystone_shield", holystone_shield);
 
 		registerItem("zanite_axe", zanite_axe);
 		registerItem("zanite_pickaxe", zanite_pickaxe);
 		registerItem("zanite_shovel", zanite_shovel);
 		registerItem("zanite_sword", zanite_sword);
-		registerItem("zanite_shield", zanite_shield.setCreativeTab(CreativeTabsAether.ARMOR));
+		registerItem("zanite_shield", zanite_shield);
 
         registerItem("arkenium_axe", arkenium_axe);
         registerItem("arkenium_pickaxe", arkenium_pickaxe);
         registerItem("arkenium_shovel", arkenium_shovel);
         registerItem("arkenium_sword", arkenium_sword);
-        registerItem("arkenium_shield", arkenium_shield.setCreativeTab(CreativeTabsAether.ARMOR));
+        registerItem("arkenium_shield", arkenium_shield);
 
 		registerItem("gravitite_axe", gravitite_axe);
 		registerItem("gravitite_pickaxe", gravitite_pickaxe);
 		registerItem("gravitite_shovel", gravitite_shovel);
 		registerItem("gravitite_sword", gravitite_sword);
-        registerItem("gravitite_shield", gravitite_shield.setCreativeTab(CreativeTabsAether.ARMOR));
+        registerItem("gravitite_shield", gravitite_shield);
 
 		registerItem("valkyrie_axe", valkyrie_axe);
 		registerItem("valkyrie_pickaxe", valkyrie_pickaxe);
@@ -623,36 +624,36 @@ public class ItemsAether
 
 		registerItem("aechor_petal", aechor_petal.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
-		registerItem("blueberries", blueberries.setCreativeTab(CreativeTabsAether.CONSUMABLES));
-		registerItem("enchanted_blueberry", enchanted_blueberry.setCreativeTab(CreativeTabsAether.CONSUMABLES));
-		registerItem("orange", orange.setCreativeTab(CreativeTabsAether.CONSUMABLES));
-		registerItem("wyndberry", wyndberry.setCreativeTab(CreativeTabsAether.CONSUMABLES));
-		registerItem("enchanted_wyndberry", enchanted_wyndberry.setCreativeTab(CreativeTabsAether.CONSUMABLES));
-		registerItem("swet_jelly", swet_jelly.setCreativeTab(CreativeTabsAether.CONSUMABLES));
-		registerItem("gummy_swet", gummy_swet.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		registerItem("blueberries", blueberries);
+		registerItem("enchanted_blueberry", enchanted_blueberry);
+		registerItem("orange", orange);
+		registerItem("wyndberry", wyndberry);
+		registerItem("enchanted_wyndberry", enchanted_wyndberry);
+		registerItem("swet_jelly", swet_jelly);
+		registerItem("gummy_swet", gummy_swet);
 
-		registerItem("candy_corn", candy_corn.setCreativeTab(CreativeTabsAether.CONSUMABLES));
-		registerItem("cocoatrice", cocoatrice.setCreativeTab(CreativeTabsAether.CONSUMABLES));
-		registerItem("wrapped_chocolates", wrapped_chocolates.setCreativeTab(CreativeTabsAether.CONSUMABLES));
-		registerItem("jelly_pumpkin", jelly_pumpkin.setCreativeTab(CreativeTabsAether.CONSUMABLES));
-		registerItem("stomper_pop", stomper_pop.setCreativeTab(CreativeTabsAether.CONSUMABLES));
-		registerItem("blueberry_lollipop", blueberry_lollipop.setCreativeTab(CreativeTabsAether.CONSUMABLES));
-		registerItem("orange_lollipop", orange_lollipop.setCreativeTab(CreativeTabsAether.CONSUMABLES));
-		registerItem("icestone_poprocks", icestone_poprocks.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		registerItem("candy_corn", candy_corn);
+		registerItem("cocoatrice", cocoatrice);
+		registerItem("wrapped_chocolates", wrapped_chocolates);
+		registerItem("jelly_pumpkin", jelly_pumpkin);
+		registerItem("stomper_pop", stomper_pop);
+		registerItem("blueberry_lollipop", blueberry_lollipop);
+		registerItem("orange_lollipop", orange_lollipop);
+		registerItem("icestone_poprocks", icestone_poprocks);
 
-		registerItem("ginger_bread_man", ginger_bread_man.setCreativeTab(CreativeTabsAether.CONSUMABLES));
-		registerItem("candy_cane", candy_cane.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		registerItem("ginger_bread_man", ginger_bread_man);
+		registerItem("candy_cane", candy_cane);
 
-		registerItem("skyroot_bucket", skyroot_bucket.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
-		registerItem("skyroot_water_bucket", skyroot_water_bucket.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
-		registerItem("skyroot_milk_bucket", skyroot_milk_bucket.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
-		registerItem("skyroot_poison_bucket", skyroot_poison_bucket.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
+		registerItem("skyroot_bucket", skyroot_bucket);
+		registerItem("skyroot_water_bucket", skyroot_water_bucket);
+		registerItem("skyroot_milk_bucket", skyroot_milk_bucket);
+		registerItem("skyroot_poison_bucket", skyroot_poison_bucket);
 
-		registerItem("valkyrie_music_disc", valkyrie_music_disc.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
-		registerItem("labyrinth_music_disc", labyrinth_music_disc.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
-		registerItem("moa_music_disc", moa_music_disc.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
-		registerItem("aerwhale_music_disc", aerwhale_music_disc.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
-		registerItem("recording_892", recording_892.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
+		registerItem("valkyrie_music_disc", valkyrie_music_disc);
+		registerItem("labyrinth_music_disc", labyrinth_music_disc);
+		registerItem("moa_music_disc", moa_music_disc);
+		registerItem("aerwhale_music_disc", aerwhale_music_disc);
+		registerItem("recording_892", recording_892);
 
 		registerItem("healing_stone_depleted", healing_stone_depleted.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CONSUMABLES));
 		registerItem("healing_stone", healing_stone.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CONSUMABLES));
@@ -660,20 +661,20 @@ public class ItemsAether
 		registerItem("dart_shooter", dart_shooter.setCreativeTab(CreativeTabsAether.WEAPONS));
 		registerItem("dart", dart.setCreativeTab(CreativeTabsAether.WEAPONS));
 
-		registerItem("skyroot_crossbow", skyroot_crossbow.setCreativeTab(CreativeTabsAether.WEAPONS));
-		registerItem("holystone_crossbow", holystone_crossbow.setCreativeTab(CreativeTabsAether.WEAPONS));
-		registerItem("zanite_crossbow", zanite_crossbow.setCreativeTab(CreativeTabsAether.WEAPONS));
-		registerItem("arkenium_crossbow", arkenium_crossbow.setCreativeTab(CreativeTabsAether.WEAPONS));
-		registerItem("gravitite_crossbow", gravitite_crossbow.setCreativeTab(CreativeTabsAether.WEAPONS));
-		registerItem("vampire_crossbow", vampire_crossbow.setCreativeTab(CreativeTabsAether.WEAPONS));
+		registerItem("skyroot_crossbow", skyroot_crossbow);
+		registerItem("holystone_crossbow", holystone_crossbow);
+		registerItem("zanite_crossbow", zanite_crossbow);
+		registerItem("arkenium_crossbow", arkenium_crossbow);
+		registerItem("gravitite_crossbow", gravitite_crossbow);
+		registerItem("vampire_crossbow", vampire_crossbow);
 		registerItem("bolt", bolt.setCreativeTab(CreativeTabsAether.WEAPONS));
 
 		registerItem("flaming_sword", flaming_sword);
 		registerItem("holy_sword", holy_sword);
 		registerItem("lightning_sword", lightning_sword);
 
-		registerItem("vampire_blade", vampire_blade.setCreativeTab(CreativeTabsAether.WEAPONS));
-		registerItem("candy_cane_sword", candy_cane_sword.setCreativeTab(CreativeTabsAether.WEAPONS));
+		registerItem("vampire_blade", vampire_blade);
+		registerItem("candy_cane_sword", candy_cane_sword);
 		registerItem("valkyrie_lance", valkyrie_lance);
 
 		registerItem("skyroot_door_item", skyroot_door.setCreativeTab(CreativeTabsAether.BLOCKS));

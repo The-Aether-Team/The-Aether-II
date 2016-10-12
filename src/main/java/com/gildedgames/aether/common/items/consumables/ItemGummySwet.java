@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.items.consumables;
 
 import com.gildedgames.aether.common.entities.living.enemies.EntitySwet;
+import com.gildedgames.aether.common.items.misc.ItemAetherFood;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
@@ -10,7 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemGummySwet extends ItemFood
+public class ItemGummySwet extends ItemAetherFood
 {
 
 	public ItemGummySwet()

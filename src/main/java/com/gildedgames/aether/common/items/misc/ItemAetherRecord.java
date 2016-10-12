@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.items.misc;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -13,6 +14,8 @@ public class ItemAetherRecord extends ItemRecord
 	public ItemAetherRecord(String recordName, SoundEvent sound)
 	{
 		super(recordName, sound);
+
+		this.setCreativeTab(CreativeTabsAether.MISCELLANEOUS);
 	}
 
 	@Override

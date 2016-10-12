@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.items.consumables;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.living.enemies.EntitySwet;
+import com.gildedgames.aether.common.items.misc.ItemAetherFood;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -21,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.HashMap;
 import java.util.List;
 
-public class ItemSwetJelly extends ItemFood
+public class ItemSwetJelly extends ItemAetherFood
 {
 	private static final HashMap<Block, IBlockState> growables = new HashMap<>();
 
