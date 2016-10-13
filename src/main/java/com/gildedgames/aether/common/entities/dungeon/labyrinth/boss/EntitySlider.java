@@ -492,16 +492,6 @@ public class EntitySlider extends EntitySliding implements IMob
 	{
 		this.playSound(SoundsAether.slider_signal, 2.5F, 1.0F);
 
-		if (this.secondStage.hasBegun())
-		{
-			if (this.getDirection() != SlidingHorizontalMoveHelper.Direction.NONE)
-			{
-				this.setDirection(SlidingHorizontalMoveHelper.Direction.NONE);
-			}
-
-			return;
-		}
-
 		if (this.getDirection() != direction)
 		{
 			this.setDirection(direction);

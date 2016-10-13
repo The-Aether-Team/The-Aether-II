@@ -51,8 +51,14 @@ public class RenderSlider extends RenderLiving<EntitySlider>
 		{
 			boolean signalling = (entity.getSignalTimer().getTicksPassed() == 0 || entity.getSignalTimer().getTicksPassed() == 5);
 
-			switch(entity.getDirection())
+			if (entity.isCritical())
 			{
+				this.signalLayer.setResourceLocation(signalling  ? GLOW : null);
+			}
+			else
+			{
+				switch(entity.getDirection())
+				{
 				case NONE:
 				{
 					this.signalLayer.setResourceLocation(null);
@@ -77,6 +83,7 @@ public class RenderSlider extends RenderLiving<EntitySlider>
 				{
 					this.signalLayer.setResourceLocation(signalling ? SIGNAL_BACKWARD : null);
 					break;
+				}
 				}
 			}
 
