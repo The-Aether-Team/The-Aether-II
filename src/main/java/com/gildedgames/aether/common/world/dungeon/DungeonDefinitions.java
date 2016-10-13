@@ -34,9 +34,14 @@ public class DungeonDefinitions
 			return new DungeonRoomProvider()
 			{
 				@Override
-				public List<DungeonRoom> createRooms(MinecraftServer server, Random rand)
+				public List<DungeonRoom> createRooms(MinecraftServer server, Random rand, int layer)
 				{
 					List<DungeonRoom> rooms = Lists.newArrayList();
+
+					if (layer == 1)
+					{
+						return rooms;
+					}
 
 					Template loot_large_2 = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/loot_large_2"));
 					Template loot_large_4 = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/loot_large_4"));
@@ -87,22 +92,44 @@ public class DungeonDefinitions
 					return rooms;
 				}
 
-				@Override public DungeonRoom createEntranceRoom(MinecraftServer server, Random rand)
+				@Override
+				public DungeonRoom createEntranceRoom(MinecraftServer server, Random rand)
 				{
 					Template labEntrance = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/entrance"));
 
 					return new DungeonRoom(labEntrance);
 				}
 
-				@Override public DungeonRoom createConnectionBottom(MinecraftServer server, Random rand)
+				@Override
+				public DungeonRoom createConnectionBottom(MinecraftServer server, Random rand, int layer)
 				{
+					if (layer == 1)
+					{
+						Template slider_room = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/slider_room"));
+
+						return new DungeonRoom(slider_room);
+					}
+
 					Template labStairs = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/stairs_bottom"));
 
 					return new DungeonRoom(labStairs);
 				}
 
-				@Override public DungeonRoom createConnectionTop(MinecraftServer server, Random rand)
+				@Override
+				public DungeonRoom createConnectionTop(MinecraftServer server, Random rand, int layer)
 				{
+					if (layer == 2)
+					{
+						Template slider_room_top_connection = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/slider_room_top_connection"));
+
+						return new DungeonRoom(slider_room_top_connection);
+					}
+
+					if (layer == 1)
+					{
+						return null;
+					}
+
 					Template labStairs = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/stairs_top"));
 
 					return new DungeonRoom(labStairs);

@@ -18,6 +18,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
@@ -118,6 +119,10 @@ public class EntitySlider extends EntitySliding implements IMob
 
 		if (!this.isAwake())
 		{
+			this.posX = MathHelper.floor_double(this.posX);
+			this.posY = MathHelper.floor_double(this.posY);
+			this.posZ = MathHelper.floor_double(this.posZ);
+
 			return;
 		}
 

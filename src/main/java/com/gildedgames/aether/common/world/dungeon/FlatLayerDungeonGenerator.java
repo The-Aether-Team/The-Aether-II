@@ -90,31 +90,42 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 
 			layer.defineMinY(prevLayer != null ? prevLayer.maxY() : 0);
 
-			List<DungeonRoom> rooms = provider.createRooms(server, rand);
+			List<DungeonRoom> rooms = provider.createRooms(server, rand, layerNum);
 
 			DungeonRoom entrance;
 			DungeonRoom end;
 
 			if (layerNum == this.layers.size())
 			{
-				entrance = provider.createConnectionTop(server, rand);
+				entrance = provider.createConnectionTop(server, rand, layerNum);
 				end = provider.createEntranceRoom(server, rand);
 			}
 			else
 			{
-				entrance = provider.createConnectionTop(server, rand);
-				end = provider.createConnectionBottom(server, rand);
+				entrance = provider.createConnectionTop(server, rand, layerNum);
+				end = provider.createConnectionBottom(server, rand, layerNum);
 			}
 
-			rooms.add(entrance);
+			if (layerNum != 1)
+			{
+				rooms.add(entrance);
+			}
+
 			rooms.add(end);
 
-			layer.defineEntranceRoom(entrance);
+			if (layerNum != 1)
+			{
+				layer.defineEntranceRoom(entrance);
+			}
+
 			layer.defineEndRoom(end);
 
-			for (DungeonRoom room : rooms)
+			if (layerNum != 1)
 			{
-				room.setPos(layer.minX() + rand.nextInt(layer.getDiameter()), layer.minX() + rand.nextInt(layer.getDiameter()));
+				for (DungeonRoom room : rooms)
+				{
+					room.setPos(layer.minX() + rand.nextInt(layer.getDiameter()), layer.minX() + rand.nextInt(layer.getDiameter()));
+				}
 			}
 
 			if (prevLayer != null)
@@ -131,9 +142,21 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 				//entrance.setPos(layer.minX() + layer.getDiameter(), layer.minX() + layer.getDiameter());
 			}
 
-			rooms = this.separateRooms(rooms);
+			if (layerNum != 1)
+			{
+				rooms = this.separateRooms(rooms);
+			}
 
-			int[][] tiles = this.createCorridors(instance, rooms, layer, prevLayer, rand);
+			int[][] tiles;
+
+			if (layerNum != 1)
+			{
+				tiles = this.createCorridors(instance, rooms, layer, prevLayer, rand);
+			}
+			else
+			{
+				tiles = this.getTiles(rooms, Collections.<DungeonRoom>emptyList(), layer, prevLayer);
+			}
 
 			layer.setRooms(rooms);
 
@@ -142,7 +165,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 				int offsetX = prevLayer.endRoom().getMinX() - layer.entranceRoom().getMinX();
 				int offsetZ = prevLayer.endRoom().getMinZ() - layer.entranceRoom().getMinZ();
 
-				layer.definePos(offsetX, offsetZ);
+				layer.definePos(offsetX, offsetZ + (layerNum == 2 ? 17 : 0));
 			}
 
 			int maxHeight = 0;

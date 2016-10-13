@@ -16,7 +16,7 @@ public class EntitySliding extends EntityCreature
 	{
 		super(worldIn);
 
-		this.moveHelper = new SlidingMoveHelper(this);
+		this.moveHelper = new SlidingHorizontalMoveHelper(this);
 	}
 
 	@Override

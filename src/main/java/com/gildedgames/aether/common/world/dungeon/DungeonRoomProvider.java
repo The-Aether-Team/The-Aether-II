@@ -8,12 +8,12 @@ import java.util.Random;
 public interface DungeonRoomProvider
 {
 
-	List<DungeonRoom> createRooms(MinecraftServer server, Random rand);
+	List<DungeonRoom> createRooms(MinecraftServer server, Random rand, int layer);
 
 	DungeonRoom createEntranceRoom(MinecraftServer server, Random rand);
 
-	DungeonRoom createConnectionBottom(MinecraftServer server, Random rand);
+	DungeonRoom createConnectionBottom(MinecraftServer server, Random rand, int layer);
 
-	DungeonRoom createConnectionTop(MinecraftServer server, Random rand);
+	DungeonRoom createConnectionTop(MinecraftServer server, Random rand, int layer);
 	
 }
