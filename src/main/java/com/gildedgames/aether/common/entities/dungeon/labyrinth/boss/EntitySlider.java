@@ -131,19 +131,6 @@ public class EntitySlider extends EntitySliding implements IMob
 	@Override
 	public void onUpdate()
 	{
-		if (this.startLocation == null)
-		{
-			this.startLocation = this.getPosition();
-		}
-
-		if (!this.worldObj.isRemote)
-		{
-			for (BossStage stage : this.stages)
-			{
-				stage.update();
-			}
-		}
-
 		this.jumpMovementFactor = 0.0F;
 		this.renderYawOffset = this.rotationPitch = this.rotationYaw = 0.0F;
 
@@ -207,6 +194,11 @@ public class EntitySlider extends EntitySliding implements IMob
 			}
 			else
 			{
+				if (this.startLocation == null)
+				{
+					this.startLocation = this.getPosition();
+				}
+
 				if (this.isAIDisabled())
 				{
 					this.setNoAI(false);
@@ -222,6 +214,11 @@ public class EntitySlider extends EntitySliding implements IMob
 					{
 						this.getMoveHelper().setMoveTo(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ, this.firstStage.hasBegun() ? 2.0D : 1.0D);
 					}
+				}
+
+				for (BossStage stage : this.stages)
+				{
+					stage.update();
 				}
 			}
 		}
