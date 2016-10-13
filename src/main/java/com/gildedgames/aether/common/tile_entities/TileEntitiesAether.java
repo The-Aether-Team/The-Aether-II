@@ -18,7 +18,8 @@ public class TileEntitiesAether
 			STRUCTURE_EXTENDED_ID = "aether.structure_extended",
 			FROSTPINE_COOLER_ID = "aether.frostpine_cooler",
 			INCUBATOR_ID = "aether.incubator",
-			PRESENT_ID = "aether.present";
+			PRESENT_ID = "aether.present",
+			LABYRINTH_BRIDGE_ID = "aether.labyrinth_bridge";
 
 	public static void preInit()
 	{
@@ -34,6 +35,7 @@ public class TileEntitiesAether
 		GameRegistry.registerTileEntity(TileEntityFrostpineCooler.class, FROSTPINE_COOLER_ID);
 		GameRegistry.registerTileEntity(TileEntityIncubator.class, INCUBATOR_ID);
 		GameRegistry.registerTileEntity(TileEntityPresent.class, PRESENT_ID);
+		GameRegistry.registerTileEntity(TileEntityLabyrinthBridge.class, LABYRINTH_BRIDGE_ID);
 	}
 	
 }

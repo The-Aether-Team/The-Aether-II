@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.blocks;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.containers.*;
-import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthContainer;
+import com.gildedgames.aether.common.blocks.dungeon.*;
 import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import com.gildedgames.aether.common.blocks.construction.*;
@@ -16,10 +16,6 @@ import com.gildedgames.aether.common.blocks.construction.walls.BlockAerogelWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockCustomWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockDivineWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockSkyrootWall;
-import com.gildedgames.aether.common.blocks.dungeon.BlockDivine;
-import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinth;
-import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthPillar;
-import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthTotem;
 import com.gildedgames.aether.common.blocks.misc.BlockMoaEgg;
 import com.gildedgames.aether.common.blocks.natural.*;
 import com.gildedgames.aether.common.blocks.natural.ores.*;
@@ -197,6 +193,8 @@ public class BlocksAether
 
 	public static final BlockLabyrinth labyrinth_capstone = new BlockLabyrinth(),
 			unstable_labyrinth_capstone = new BlockLabyrinth();
+
+	public static final BlockLabyrinthBridge labyrinth_bridge = new BlockLabyrinthBridge();
 
 	public static final BlockBed skyroot_bed = new BlockCustomBed(new Supplier<Item>()
 	{
@@ -438,6 +436,8 @@ public class BlocksAether
 
 		registerBlock("present", BlocksAether.present.setCreativeTab(CreativeTabsAether.MISCELLANEOUS), new ItemBlockPresent(BlocksAether.present));
 		registerBlock("labyrinth_container", BlocksAether.labyrinth_container.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.labyrinth_container));
+
+		registerBlock("labyrinth_bridge", BlocksAether.labyrinth_bridge);
 
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_log_wall, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.aether_planks, 5, 5);

@@ -146,6 +146,7 @@ tile.aether.incubator.name=Incubator
 tile.aether.present.name=Present
 tile.aether.labyrinth_container.small.name=Small Labyrinth Container
 tile.aether.labyrinth_container.large.name=Large Labyrinth Container
+tile.aether.labyrinth_bridge.name=Labyrinth Bridge
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick

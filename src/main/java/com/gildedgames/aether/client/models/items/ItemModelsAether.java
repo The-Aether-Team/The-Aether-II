@@ -603,6 +603,8 @@ public class ItemModelsAether
 				.add(BlockLabyrinthContainer.VARIANT_SMALL.getMeta(), "labyrinth_container_small")
 				.add(BlockLabyrinthContainer.VARIANT_LARGE.getMeta(), "labyrinth_container_large"));
 
+		registerItemModels(BlocksAether.labyrinth_bridge, "labyrinth_pillar");
+
 		ModelLoader.setCustomModelResourceLocation(getItem(BlocksAether.structure_extended), 0, new ModelResourceLocation("structure_block", "inventory"));
 	}
 

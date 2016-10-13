@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.dungeon.labyrinth.boss;
 
+import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.util.BossStage;
 import com.gildedgames.aether.common.entities.util.sliding.EntitySliding;
@@ -8,10 +9,13 @@ import com.gildedgames.aether.common.entities.util.sliding.SlidingMoveHelper;
 import com.gildedgames.aether.common.items.tools.EnumToolType;
 import com.gildedgames.aether.common.items.tools.ItemAetherTool;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
+import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthBridge;
 import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.util.core.nbt.NBTHelper;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -23,12 +27,16 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+
+import java.util.List;
 
 public class EntitySlider extends EntitySliding implements IMob
 {
@@ -374,7 +382,24 @@ public class EntitySlider extends EntitySliding implements IMob
 	@Override
 	public void onSliding()
 	{
+		List<AxisAlignedBB> boxes = this.worldObj.getCollisionBoxes(this.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
 
+		for (AxisAlignedBB box : boxes)
+		{
+			if (box != null)
+			{
+				BlockPos pos = new BlockPos(MathHelper.floor_double(box.minX + 0.5D), MathHelper.floor_double(box.minY + 0.5D), MathHelper.floor_double(box.minZ + 0.5D));
+
+				TileEntity te = this.worldObj.getTileEntity(pos);
+
+				if (te instanceof TileEntityLabyrinthBridge)
+				{
+					TileEntityLabyrinthBridge bridge = (TileEntityLabyrinthBridge)te;
+
+					bridge.setDamage(bridge.getDamage() + 4);
+				}
+			}
+		}
 	}
 
 	@Override
