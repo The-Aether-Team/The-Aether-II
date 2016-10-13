@@ -55,33 +55,35 @@ public class EntitySlider extends EntitySliding implements IMob
 
 	private BlockPos startLocation;
 
-	private BossStage[] stages = new BossStage[]
+	private BossStage firstStage = new BossStage()
 	{
-			new BossStage()
+		@Override
+		protected boolean conditionsMet()
+		{
+			return EntitySlider.this.getHealth() <= 400;
+		}
+
+		@Override
+		protected void onStageBegin()
+		{
+			BlockPos min = EntitySlider.this.startLocation.add(-50, -1, -50);
+			BlockPos max = EntitySlider.this.startLocation.add(50, -1, 50);
+
+			for (BlockPos pos : BlockPos.getAllInBoxMutable(min, max))
 			{
-				@Override
-				protected boolean conditionsMet()
+				IBlockState state = EntitySlider.this.worldObj.getBlockState(pos);
+
+				if (state != null && state.getBlock() == BlocksAether.unstable_labyrinth_capstone)
 				{
-					return EntitySlider.this.getHealth() <= 400;
-				}
-
-				@Override
-				protected void onStageBegin()
-				{
-					BlockPos min = EntitySlider.this.startLocation.add(-50, -1, -50);
-					BlockPos max = EntitySlider.this.startLocation.add(50, -1, 50);
-
-					for (BlockPos pos : BlockPos.getAllInBoxMutable(min, max))
-					{
-						IBlockState state = EntitySlider.this.worldObj.getBlockState(pos);
-
-						if (state != null && state.getBlock() == BlocksAether.unstable_labyrinth_capstone)
-						{
-							EntitySlider.this.worldObj.setBlockToAir(pos);
-						}
-					}
+					EntitySlider.this.worldObj.setBlockToAir(pos);
 				}
 			}
+		}
+	};
+
+	private BossStage[] stages = new BossStage[]
+	{
+			this.firstStage
 	};
 
 	public EntitySlider(World world)
@@ -385,21 +387,24 @@ public class EntitySlider extends EntitySliding implements IMob
 	@Override
 	public void onSliding()
 	{
-		List<AxisAlignedBB> boxes = this.worldObj.getCollisionBoxes(this.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
-
-		for (AxisAlignedBB box : boxes)
+		if (this.firstStage.hasBegun())
 		{
-			if (box != null)
+			List<AxisAlignedBB> boxes = this.worldObj.getCollisionBoxes(this.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
+
+			for (AxisAlignedBB box : boxes)
 			{
-				BlockPos pos = new BlockPos(MathHelper.floor_double(box.minX + 0.5D), MathHelper.floor_double(box.minY + 0.5D), MathHelper.floor_double(box.minZ + 0.5D));
-
-				TileEntity te = this.worldObj.getTileEntity(pos);
-
-				if (te instanceof TileEntityLabyrinthBridge)
+				if (box != null)
 				{
-					TileEntityLabyrinthBridge bridge = (TileEntityLabyrinthBridge)te;
+					BlockPos pos = new BlockPos(MathHelper.floor_double(box.minX + 0.5D), MathHelper.floor_double(box.minY + 0.5D), MathHelper.floor_double(box.minZ + 0.5D));
 
-					bridge.setDamage(bridge.getDamage() + 4);
+					TileEntity te = this.worldObj.getTileEntity(pos);
+
+					if (te instanceof TileEntityLabyrinthBridge)
+					{
+						TileEntityLabyrinthBridge bridge = (TileEntityLabyrinthBridge)te;
+
+						bridge.setDamage(bridge.getDamage() + 4);
+					}
 				}
 			}
 		}
