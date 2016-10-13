@@ -132,9 +132,12 @@ public class EntitySlider extends EntitySliding implements IMob
 			this.startLocation = this.getPosition();
 		}
 
-		for (BossStage stage : this.stages)
+		if (!this.worldObj.isRemote)
 		{
-			stage.update();
+			for (BossStage stage : this.stages)
+			{
+				stage.update();
+			}
 		}
 
 		this.jumpMovementFactor = 0.0F;
