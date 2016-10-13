@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.entities.dungeon.labyrinth.boss;
 
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.entities.util.BossStage;
 import com.gildedgames.aether.common.entities.util.sliding.EntitySliding;
 import com.gildedgames.aether.common.entities.util.sliding.SlidingHorizontalMoveHelper;
 import com.gildedgames.aether.common.entities.util.sliding.SlidingMoveHelper;
@@ -7,6 +9,8 @@ import com.gildedgames.aether.common.items.tools.EnumToolType;
 import com.gildedgames.aether.common.items.tools.ItemAetherTool;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.util.TickTimer;
+import com.gildedgames.util.core.nbt.NBTHelper;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -21,6 +25,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
@@ -39,6 +44,37 @@ public class EntitySlider extends EntitySliding implements IMob
 	private TickTimer signalTimer = new TickTimer();
 
 	private SlidingHorizontalMoveHelper.Direction prevDirection;
+
+	private BlockPos startLocation;
+
+	private BossStage[] stages = new BossStage[]
+	{
+			new BossStage()
+			{
+				@Override
+				protected boolean conditionsMet()
+				{
+					return EntitySlider.this.getHealth() <= 400;
+				}
+
+				@Override
+				protected void onStageBegin()
+				{
+					BlockPos min = EntitySlider.this.startLocation.add(-50, -1, -50);
+					BlockPos max = EntitySlider.this.startLocation.add(50, -1, 50);
+
+					for (BlockPos pos : BlockPos.getAllInBoxMutable(min, max))
+					{
+						IBlockState state = EntitySlider.this.worldObj.getBlockState(pos);
+
+						if (state != null && state.getBlock() == BlocksAether.unstable_labyrinth_capstone)
+						{
+							EntitySlider.this.worldObj.setBlockToAir(pos);
+						}
+					}
+				}
+			}
+	};
 
 	public EntitySlider(World world)
 	{
@@ -83,6 +119,16 @@ public class EntitySlider extends EntitySliding implements IMob
 	@Override
 	public void onUpdate()
 	{
+		if (this.startLocation == null)
+		{
+			this.startLocation = this.getPosition();
+		}
+
+		for (BossStage stage : this.stages)
+		{
+			stage.update();
+		}
+
 		this.jumpMovementFactor = 0.0F;
 		this.renderYawOffset = this.rotationPitch = this.rotationYaw = 0.0F;
 
@@ -304,6 +350,7 @@ public class EntitySlider extends EntitySliding implements IMob
 
 		tag.setBoolean("isAwake", this.isAwake());
 		tag.setBoolean("isCritical", this.isCritical());
+		tag.setTag("startLocation", NBTHelper.serializeBlockPos(this.startLocation));
 	}
 
 	@Override
@@ -313,6 +360,7 @@ public class EntitySlider extends EntitySliding implements IMob
 
 		this.setAwake(tag.getBoolean("isAwake"));
 		this.setCritical(tag.getBoolean("isCritical"));
+		this.startLocation = NBTHelper.readBlockPos((NBTTagCompound) tag.getTag("startLocation"));
 	}
 
 	@Override

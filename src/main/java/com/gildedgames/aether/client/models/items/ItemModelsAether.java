@@ -382,6 +382,7 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.diamond_gloves, "accessories/diamond_gloves");
 
 		registerItemModels(BlocksAether.labyrinth_capstone, "labyrinth_capstone");
+		registerItemModels(BlocksAether.unstable_labyrinth_capstone, "labyrinth_capstone");
 		registerItemModels(BlocksAether.labyrinth_glowing_pillar, "labyrinth_glowing_pillar");
 		registerItemModels(BlocksAether.labyrinth_pillar, "labyrinth_pillar");
 		registerItemModels(BlocksAether.labyrinth_wall, "labyrinth_wall");

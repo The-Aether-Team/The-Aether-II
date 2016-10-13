@@ -96,6 +96,7 @@ public class RenderSlider extends RenderLiving<EntitySlider>
 		else
 		{
 			this.glowingLayer.setResourceLocation(null);
+			this.signalLayer.setResourceLocation(null);
 		}
 
 		return ASLEEP;

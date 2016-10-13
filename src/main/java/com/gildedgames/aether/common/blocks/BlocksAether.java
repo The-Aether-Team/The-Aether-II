@@ -195,7 +195,8 @@ public class BlocksAether
 
 	public static final Block multiblock_dummy = new BlockMultiDummy().setBlockUnbreakable();
 
-	public static final BlockLabyrinth labyrinth_capstone = new BlockLabyrinth();
+	public static final BlockLabyrinth labyrinth_capstone = new BlockLabyrinth(),
+			unstable_labyrinth_capstone = new BlockLabyrinth();
 
 	public static final BlockBed skyroot_bed = new BlockCustomBed(new Supplier<Item>()
 	{
@@ -396,6 +397,8 @@ public class BlocksAether
 		registerBlock("labyrinth_lightstone", BlocksAether.labyrinth_lightstone.setCreativeTab(CreativeTabsAether.BLOCKS));
 		registerBlock("labyrinth_base", BlocksAether.labyrinth_base.setCreativeTab(CreativeTabsAether.BLOCKS));
 		registerBlock("labyrinth_headstone", BlocksAether.labyrinth_headstone.setCreativeTab(CreativeTabsAether.BLOCKS));
+
+		registerBlock("unstable_labyrinth_capstone", BlocksAether.unstable_labyrinth_capstone);
 
 		registerBlock("skyroot_slab", BlocksAether.skyroot_slab.setCreativeTab(CreativeTabsAether.BLOCKS),new ItemAetherSlab(BlocksAether.skyroot_slab));
 		registerBlock("holystone_slab", BlocksAether.holystone_slab.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemAetherSlab(BlocksAether.holystone_slab));
