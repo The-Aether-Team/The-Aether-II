@@ -214,7 +214,7 @@ public class BlocksAether
 	public static final BlockLabyrinth
 			labyrinth_wall = new BlockLabyrinth(),
 			labyrinth_lightstone = new BlockLabyrinth().setLightLevel(1.0f),
-			labyrinth_base = new BlockLabyrinth(),
+			labyrinth_base = new BlockLabyrinth().setLightLevel(0.50f),
 			labyrinth_headstone =  new BlockLabyrinth().setLightLevel(0.50f);
 
 	public static final BlockCustomWall
