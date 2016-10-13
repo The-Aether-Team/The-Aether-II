@@ -210,7 +210,7 @@ public class SlidingHorizontalMoveHelper extends EntityMoveHelper
 
 			if (this.slideVelocity < 1.0f)
 			{
-				this.slideVelocity += 0.045f;
+				this.slideVelocity += 0.045f * this.speed;
 			}
 			if (this.slideVelocity > 1.0f)
 			{

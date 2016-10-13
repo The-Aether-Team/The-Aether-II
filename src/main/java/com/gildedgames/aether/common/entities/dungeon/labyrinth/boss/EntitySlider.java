@@ -121,7 +121,7 @@ public class EntitySlider extends EntitySliding implements IMob
 	{
 		super.initEntityAI();
 
-		this.tasks.addTask(1, new EntityAIAttackMelee(this, 0.4D, true));
+		//this.tasks.addTask(1, new EntityAIAttackMelee(this, 0.4D, true));
 
 		this.targetTasks.addTask(0, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false));
 	}
@@ -181,6 +181,41 @@ public class EntitySlider extends EntitySliding implements IMob
 			}
 		}
 
+		if (!this.isAwake())
+		{
+			double x = MathHelper.floor_double(this.posX);
+			double y = MathHelper.floor_double(this.posY);
+			double z = MathHelper.floor_double(this.posZ);
+
+			if (this.posX != x || this.posY != y || this.posZ != z)
+			{
+				this.posX = MathHelper.floor_double(this.posX);
+				this.posY = MathHelper.floor_double(this.posY);
+				this.posZ = MathHelper.floor_double(this.posZ);
+
+				this.setPositionAndUpdate(this.posX, this.posY, this.posZ);
+			}
+
+			this.motionX = this.motionY = this.motionZ = 0.0F;
+
+			if (!this.isAIDisabled())
+			{
+				this.setNoAI(true);
+			}
+		}
+		else
+		{
+			if (this.isAIDisabled())
+			{
+				this.setNoAI(false);
+			}
+
+			if (this.getAttackTarget() != null)
+			{
+				this.getMoveHelper().setMoveTo(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ, this.firstStage.hasBegun() ? 2.0D : 1.0D);
+			}
+		}
+
 		super.onUpdate();
 
 		this.jumpMovementFactor = 0.0F;
@@ -194,15 +229,6 @@ public class EntitySlider extends EntitySliding implements IMob
 	{
 		this.jumpMovementFactor = 0.0F;
 		this.renderYawOffset = this.rotationPitch = this.rotationYaw = 0.0F;
-
-		if (!this.isAwake())
-		{
-			this.posX = MathHelper.floor_double(this.posX);
-			this.posY = MathHelper.floor_double(this.posY);
-			this.posZ = MathHelper.floor_double(this.posZ);
-
-			return;
-		}
 
 		if (!this.worldObj.isRemote && this.getAttackTarget() == null)
 		{
