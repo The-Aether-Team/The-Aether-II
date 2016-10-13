@@ -29,6 +29,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -337,13 +338,26 @@ public class EntitySlider extends EntitySliding implements IMob
 	{
 		if (this.attackTime <= 0)
 		{
+			DamageSource source = new EntityDamageSource("mob", this)
+			{
+
+				@Override
+				public boolean isDifficultyScaled()
+				{
+					return false;
+				}
+
+			};
+
+			source.setDamageBypassesArmor();
+
 			if (player.getEntityBoundingBox().minY < this.getEntityBoundingBox().maxY)
 			{
-				return player.attackEntityFrom(DamageSource.causeMobDamage(this), 2);
+				return player.attackEntityFrom(source, 2);
 			}
 			else
 			{
-				return player.attackEntityFrom(DamageSource.causeMobDamage(this), 1);
+				return player.attackEntityFrom(source, 1);
 			}
 		}
 
