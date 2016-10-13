@@ -81,6 +81,36 @@ public class EntitySlider extends EntitySliding implements IMob
 		}
 	};
 
+	private BossStage secondStage = new BossStage()
+	{
+		@Override
+		protected boolean conditionsMet()
+		{
+			return EntitySlider.this.getHealth() <= 250;
+		}
+
+		@Override
+		protected void onStageBegin()
+		{
+			EntitySlider.this.setCritical(true);
+		}
+	};
+
+	private BossStage thirdStage = new BossStage()
+	{
+		@Override
+		protected boolean conditionsMet()
+		{
+			return EntitySlider.this.getHealth() <= 100;
+		}
+
+		@Override
+		protected void onStageBegin()
+		{
+
+		}
+	};
+
 	private BossStage[] stages;
 
 	public EntitySlider(World world)
@@ -91,7 +121,9 @@ public class EntitySlider extends EntitySliding implements IMob
 
 		this.stages = new BossStage[]
 		{
-				this.firstStage
+				this.firstStage,
+				this.secondStage,
+				this.thirdStage
 		};
 	}
 
@@ -212,7 +244,19 @@ public class EntitySlider extends EntitySliding implements IMob
 					}
 					else
 					{
-						this.getMoveHelper().setMoveTo(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ, this.firstStage.hasBegun() ? 2.0D : 1.0D);
+						double speed = 1.0D;
+
+						if (this.firstStage.hasBegun())
+						{
+							speed = 2.0D;
+						}
+
+						if (this.thirdStage.hasBegun())
+						{
+							speed = 3.0D;
+						}
+
+						this.getMoveHelper().setMoveTo(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ, speed);
 					}
 				}
 
@@ -448,6 +492,16 @@ public class EntitySlider extends EntitySliding implements IMob
 	{
 		this.playSound(SoundsAether.slider_signal, 2.5F, 1.0F);
 
+		if (this.secondStage.hasBegun())
+		{
+			if (this.getDirection() != SlidingHorizontalMoveHelper.Direction.NONE)
+			{
+				this.setDirection(SlidingHorizontalMoveHelper.Direction.NONE);
+			}
+
+			return;
+		}
+
 		if (this.getDirection() != direction)
 		{
 			this.setDirection(direction);
@@ -457,6 +511,16 @@ public class EntitySlider extends EntitySliding implements IMob
 	@Override
 	public int getSlideCooldown()
 	{
+		if (this.secondStage.hasBegun())
+		{
+			return 6;
+		}
+
+		if (this.thirdStage.hasBegun())
+		{
+			return 0;
+		}
+
 		return 12;
 	}
 
