@@ -81,16 +81,18 @@ public class EntitySlider extends EntitySliding implements IMob
 		}
 	};
 
-	private BossStage[] stages = new BossStage[]
-	{
-			this.firstStage
-	};
+	private BossStage[] stages;
 
 	public EntitySlider(World world)
 	{
 		super(world);
 
 		this.setSize(2.0F, 2.0F);
+
+		this.stages = new BossStage[]
+		{
+				this.firstStage
+		};
 	}
 
 	@Override
@@ -181,38 +183,46 @@ public class EntitySlider extends EntitySliding implements IMob
 			}
 		}
 
-		if (!this.isAwake())
+		if (!this.worldObj.isRemote)
 		{
-			double x = MathHelper.floor_double(this.posX);
-			double y = MathHelper.floor_double(this.posY);
-			double z = MathHelper.floor_double(this.posZ);
-
-			if (this.posX != x || this.posY != y || this.posZ != z)
+			if (!this.isAwake())
 			{
-				this.posX = MathHelper.floor_double(this.posX);
-				this.posY = MathHelper.floor_double(this.posY);
-				this.posZ = MathHelper.floor_double(this.posZ);
+				double x = MathHelper.floor_double(this.posX);
+				double y = MathHelper.floor_double(this.posY);
+				double z = MathHelper.floor_double(this.posZ);
 
-				this.setPositionAndUpdate(this.posX, this.posY, this.posZ);
+				if (this.posX != x || this.posY != y || this.posZ != z)
+				{
+					this.posX = MathHelper.floor_double(this.posX);
+					this.posY = MathHelper.floor_double(this.posY);
+					this.posZ = MathHelper.floor_double(this.posZ);
+
+					this.setPositionAndUpdate(this.posX, this.posY, this.posZ);
+				}
+
+				if (!this.isAIDisabled())
+				{
+					this.setNoAI(true);
+				}
 			}
-
-			this.motionX = this.motionY = this.motionZ = 0.0F;
-
-			if (!this.isAIDisabled())
+			else
 			{
-				this.setNoAI(true);
-			}
-		}
-		else
-		{
-			if (this.isAIDisabled())
-			{
-				this.setNoAI(false);
-			}
+				if (this.isAIDisabled())
+				{
+					this.setNoAI(false);
+				}
 
-			if (this.getAttackTarget() != null)
-			{
-				this.getMoveHelper().setMoveTo(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ, this.firstStage.hasBegun() ? 2.0D : 1.0D);
+				if (this.getAttackTarget() != null)
+				{
+					if (this.getAttackTarget().posY < this.posY)
+					{
+						this.getMoveHelper().setMoveTo(this.startLocation.getX(), this.startLocation.getY(), this.startLocation.getZ(), 3.0D);
+					}
+					else
+					{
+						this.getMoveHelper().setMoveTo(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ, this.firstStage.hasBegun() ? 2.0D : 1.0D);
+					}
+				}
 			}
 		}
 
@@ -451,6 +461,23 @@ public class EntitySlider extends EntitySliding implements IMob
 	public int getSlideCooldown()
 	{
 		return 12;
+	}
+
+	@Override
+	public boolean shouldSlide()
+	{
+		if (this.getAttackTarget() != null)
+		{
+			if (this.getAttackTarget().posY < this.posY)
+			{
+				if (this.getDistance(this.startLocation.getX(), this.startLocation.getY(), this.startLocation.getZ()) < 1.0D)
+				{
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 
 }

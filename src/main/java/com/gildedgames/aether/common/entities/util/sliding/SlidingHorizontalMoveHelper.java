@@ -190,7 +190,12 @@ public class SlidingHorizontalMoveHelper extends EntityMoveHelper
 			return;
 		}
 
-		Vec3d pos = new Vec3d(this.posX, this.posY, this.posZ);
+		if (!this.slidingEntity.shouldSlide())
+		{
+			return;
+		}
+
+		Vec3d pos = new Vec3d(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ));
 
 		if (this.moving)
 		{
@@ -291,8 +296,8 @@ public class SlidingHorizontalMoveHelper extends EntityMoveHelper
 		}
 		else if (pos.distanceTo(this.entity.getPositionVector()) < this.entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).getAttributeValue())
 		{
-			this.direction = this.calculateDirection(this.posX, this.posY, this.posZ);
-			this.distanceToSlide = this.calculateDistanceToSlide(this.posX, this.posY, this.posZ);
+			this.direction = this.calculateDirection(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ));
+			this.distanceToSlide = this.calculateDistanceToSlide(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ));
 
 			this.moving = true;
 

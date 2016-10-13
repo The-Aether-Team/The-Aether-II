@@ -100,6 +100,12 @@ public class EntitySliding extends EntityCreature implements ISlidingEntity
 	}
 
 	@Override
+	public boolean shouldSlide()
+	{
+		return false;
+	}
+
+	@Override
 	public void onSlide()
 	{
 
