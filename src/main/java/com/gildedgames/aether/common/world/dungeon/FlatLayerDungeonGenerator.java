@@ -165,7 +165,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 				int offsetX = prevLayer.endRoom().getMinX() - layer.entranceRoom().getMinX();
 				int offsetZ = prevLayer.endRoom().getMinZ() - layer.entranceRoom().getMinZ();
 
-				layer.definePos(offsetX, offsetZ + (layerNum == 2 ? 17 : 0));
+				layer.definePos(offsetX + (layerNum == 2 ? -15 : 0), offsetZ + (layerNum == 2 ? 7 : 0));
 			}
 
 			int maxHeight = 0;
