@@ -535,7 +535,7 @@ public class EntitySlider extends EntitySliding implements IMob
 		{
 			if (this.getAttackTarget().posY < this.posY)
 			{
-				if (this.getDistance(this.startLocation.getX(), this.startLocation.getY(), this.startLocation.getZ()) < 1.0D)
+				if (this.getDistance(this.startLocation.getX(), this.startLocation.getY(), this.startLocation.getZ()) < 2.0D)
 				{
 					return false;
 				}
