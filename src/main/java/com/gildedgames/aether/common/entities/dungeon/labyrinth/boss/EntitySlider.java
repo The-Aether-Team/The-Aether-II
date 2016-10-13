@@ -1,9 +1,12 @@
 package com.gildedgames.aether.common.entities.dungeon.labyrinth.boss;
 
 import com.gildedgames.aether.common.entities.util.sliding.EntitySliding;
+import com.gildedgames.aether.common.entities.util.sliding.SlidingHorizontalMoveHelper;
+import com.gildedgames.aether.common.entities.util.sliding.SlidingMoveHelper;
 import com.gildedgames.aether.common.items.tools.EnumToolType;
 import com.gildedgames.aether.common.items.tools.ItemAetherTool;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
+import com.gildedgames.aether.common.util.TickTimer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -29,7 +32,13 @@ public class EntitySlider extends EntitySliding implements IMob
 
 	private static final DataParameter<Boolean> IS_CRITICAL = EntityDataManager.createKey(EntitySlider.class, DataSerializers.BOOLEAN);
 
+	private static final DataParameter<Integer> DIRECTION = EntityDataManager.createKey(EntitySlider.class, DataSerializers.VARINT);
+
 	private int chatCooldown, attackTime;
+
+	private TickTimer signalTimer = new TickTimer();
+
+	private SlidingHorizontalMoveHelper.Direction prevDirection;
 
 	public EntitySlider(World world)
 	{
@@ -45,6 +54,7 @@ public class EntitySlider extends EntitySliding implements IMob
 
 		this.dataManager.register(EntitySlider.IS_AWAKE, Boolean.FALSE);
 		this.dataManager.register(EntitySlider.IS_CRITICAL, Boolean.FALSE);
+		this.dataManager.register(EntitySlider.DIRECTION, 0);
 	}
 
 	@Override
@@ -79,6 +89,13 @@ public class EntitySlider extends EntitySliding implements IMob
 		this.fireResistance = -1;
 		this.extinguish();
 
+		this.signalTimer.tick();
+
+		if (this.prevDirection != this.getDirection())
+		{
+			this.signalTimer.reset();
+		}
+
 		if (this.chatCooldown > 0)
 		{
 			this.chatCooldown--;
@@ -109,6 +126,8 @@ public class EntitySlider extends EntitySliding implements IMob
 
 		this.jumpMovementFactor = 0.0F;
 		this.renderYawOffset = this.rotationPitch = this.rotationYaw = 0.0F;
+
+		this.prevDirection = this.getDirection();
 	}
 
 	@Override
@@ -237,6 +256,11 @@ public class EntitySlider extends EntitySliding implements IMob
 		return true;
 	}
 
+	public TickTimer getSignalTimer()
+	{
+		return this.signalTimer;
+	}
+
 	@Override
 	protected net.minecraft.util.SoundEvent getDeathSound()
 	{
@@ -263,6 +287,16 @@ public class EntitySlider extends EntitySliding implements IMob
 		this.dataManager.set(EntitySlider.IS_CRITICAL, flag);
 	}
 
+	public SlidingHorizontalMoveHelper.Direction getDirection()
+	{
+		return SlidingHorizontalMoveHelper.Direction.values()[this.dataManager.get(EntitySlider.DIRECTION)];
+	}
+
+	public void setDirection(SlidingHorizontalMoveHelper.Direction direction)
+	{
+		this.dataManager.set(EntitySlider.DIRECTION, direction.ordinal());
+	}
+
 	@Override
 	public void writeEntityToNBT(NBTTagCompound tag)
 	{
@@ -279,6 +313,37 @@ public class EntitySlider extends EntitySliding implements IMob
 
 		this.setAwake(tag.getBoolean("isAwake"));
 		this.setCritical(tag.getBoolean("isCritical"));
+	}
+
+	@Override
+	public void onSlide()
+	{
+		this.playSound(SoundsAether.slider_move, 2.5F, 1.0F / (this.getRNG().nextFloat() * 0.2F + 0.9F));
+
+		this.setDirection(SlidingHorizontalMoveHelper.Direction.NONE);
+	}
+
+	@Override
+	public void onSliding()
+	{
+
+	}
+
+	@Override
+	public void onStartSlideCooldown(SlidingHorizontalMoveHelper.Direction direction)
+	{
+		this.playSound(SoundsAether.slider_signal, 2.5F, 1.0F);
+
+		if (this.getDirection() != direction)
+		{
+			this.setDirection(direction);
+		}
+	}
+
+	@Override
+	public int getSlideCooldown()
+	{
+		return 12;
 	}
 
 }

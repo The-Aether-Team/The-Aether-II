@@ -363,5 +363,11 @@
 		"sounds": [
 			"aether:mob/slider/move"
 		]
+	},
+	"mob.slider.signal": {
+		"category": "neutral",
+		"sounds": [
+			"aether:mob/slider/signal"
+		]
 	}
 }

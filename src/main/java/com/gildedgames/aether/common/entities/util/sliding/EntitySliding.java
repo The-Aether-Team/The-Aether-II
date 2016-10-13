@@ -9,14 +9,14 @@ import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntitySliding extends EntityCreature
+public class EntitySliding extends EntityCreature implements ISlidingEntity
 {
 
 	public EntitySliding(World worldIn)
 	{
 		super(worldIn);
 
-		this.moveHelper = new SlidingHorizontalMoveHelper(this);
+		this.moveHelper = new SlidingHorizontalMoveHelper(this, this);
 	}
 
 	@Override
@@ -97,6 +97,30 @@ public class EntitySliding extends EntityCreature
 	protected boolean canTriggerWalking()
 	{
 		return false;
+	}
+
+	@Override
+	public void onSlide()
+	{
+
+	}
+
+	@Override
+	public void onSliding()
+	{
+
+	}
+
+	@Override
+	public void onStartSlideCooldown(SlidingHorizontalMoveHelper.Direction direction)
+	{
+
+	}
+
+	@Override
+	public int getSlideCooldown()
+	{
+		return 0;
 	}
 
 }

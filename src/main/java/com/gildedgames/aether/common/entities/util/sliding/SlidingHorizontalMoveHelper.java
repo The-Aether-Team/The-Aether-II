@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.util.sliding;
 
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
+import com.gildedgames.aether.common.util.TickTimer;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityMoveHelper;
@@ -23,9 +24,15 @@ public class SlidingHorizontalMoveHelper extends EntityMoveHelper
 
 	private boolean missObstacleNextTick = false, missedObstacleLastTick = false, moving;
 
-	public SlidingHorizontalMoveHelper(EntityLiving entity)
+	private TickTimer moveTimer = new TickTimer();
+
+	private ISlidingEntity slidingEntity;
+
+	public SlidingHorizontalMoveHelper(EntityLiving entity, ISlidingEntity slidingEntity)
 	{
 		super(entity);
+
+		this.slidingEntity = slidingEntity;
 	}
 
 	public void stop()
@@ -46,6 +53,8 @@ public class SlidingHorizontalMoveHelper extends EntityMoveHelper
 		this.distanceSlided = 0;
 
 		this.lastDirection = this.direction;
+
+		this.moveTimer.reset();
 	}
 
 	public double calculateDistanceToSlide(double x, double y, double z)
@@ -185,6 +194,20 @@ public class SlidingHorizontalMoveHelper extends EntityMoveHelper
 
 		if (this.moving)
 		{
+			if (this.moveTimer.getTicksPassed() < this.slidingEntity.getSlideCooldown())
+			{
+				this.moveTimer.tick();
+				return;
+			}
+
+			if (this.moveTimer.getTicksPassed() == this.slidingEntity.getSlideCooldown())
+			{
+				this.slidingEntity.onSlide();
+				this.moveTimer.tick();
+			}
+
+			this.slidingEntity.onSliding();
+
 			if (this.slideVelocity < 1.0f)
 			{
 				this.slideVelocity += 0.045f;
@@ -284,9 +307,7 @@ public class SlidingHorizontalMoveHelper extends EntityMoveHelper
 
 			this.missObstacleNextTick = false;
 
-			this.entity.playSound(SoundsAether.slider_move, 2.5F, 1.0F / (this.entity.getRNG().nextFloat() * 0.2F + 0.9F));
-
-			//this.entity.setPositionAndUpdate(MathHelper.floor_double(this.entity.posX), MathHelper.floor_double(this.entity.posY), MathHelper.floor_double(this.entity.posZ));
+			this.slidingEntity.onStartSlideCooldown(this.direction);
 		}
 	}
 
