@@ -205,16 +205,16 @@ public class BlocksAether
 	}, SoundType.WOOD);
 
 	public static final Block
-			labyrinth_glowing_pillar = new BlockLabyrinthPillar().setGlows(true),
+			labyrinth_glowing_pillar = new BlockLabyrinthPillar(),
 			labyrinth_pillar = new BlockLabyrinthPillar();
 
 	public static final BlockLabyrinthChest labyrinth_chest = new BlockLabyrinthChest();
 
 	public static final BlockLabyrinth
 			labyrinth_wall = new BlockLabyrinth(),
-			labyrinth_lightstone = new BlockLabyrinth().setLightLevel(1.0f),
-			labyrinth_base = new BlockLabyrinth().setLightLevel(0.50f),
-			labyrinth_headstone =  new BlockLabyrinth().setLightLevel(0.50f);
+			labyrinth_lightstone = new BlockLabyrinth(),
+			labyrinth_base = new BlockLabyrinth(),
+			labyrinth_headstone =  new BlockLabyrinth();
 
 	public static final BlockCustomWall
 			holystone_wall = new BlockCustomWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f),
@@ -225,7 +225,7 @@ public class BlocksAether
 			aerogel_wall = new BlockAerogelWall(BlocksAether.aerogel.getDefaultState(), 1.0f, 10.0f),
 			skyroot_log_wall = new BlockSkyrootWall(BlocksAether.skyroot_log.getDefaultState(), 2.0f, 10.0f),
 			divine_stone_wall = new BlockDivineWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f),
-			sentry_stone_wall = new BlockCustomWall(BlocksAether.labyrinth_lightstone.getDefaultState(), 1.0f, 10.0f).setGlows(true),
+			sentry_stone_wall = new BlockCustomWall(BlocksAether.labyrinth_lightstone.getDefaultState(), 1.0f, 10.0f),
 			divine_sentry_wall = new BlockDivineWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f);
 
 	public static final BlockCustomSlab
