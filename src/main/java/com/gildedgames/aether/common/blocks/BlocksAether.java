@@ -371,7 +371,7 @@ public class BlocksAether
 
 		registerBlock("wall_skyroot_sign", BlocksAether.wall_skyroot_sign);
 
-		registerBlock("labyrinth_chest", BlocksAether.labyrinth_chest.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("labyrinth_chest", BlocksAether.labyrinth_chest.setBlockUnbreakable().setResistance(6000000.0F).setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerBlock("holystone_wall", BlocksAether.holystone_wall.setCreativeTab(CreativeTabsAether.BLOCKS));
 		registerBlock("mossy_holystone_wall", BlocksAether.mossy_holystone_wall.setCreativeTab(CreativeTabsAether.BLOCKS));
@@ -388,15 +388,15 @@ public class BlocksAether
 
 		registerBlock("multiblock_dummy", BlocksAether.multiblock_dummy);
 
-		registerBlock("labyrinth_capstone", BlocksAether.labyrinth_capstone.setCreativeTab(CreativeTabsAether.BLOCKS));
-		registerBlock("labyrinth_glowing_pillar", BlocksAether.labyrinth_glowing_pillar.setCreativeTab(CreativeTabsAether.BLOCKS));
-		registerBlock("labyrinth_pillar", BlocksAether.labyrinth_pillar.setCreativeTab(CreativeTabsAether.BLOCKS));
-		registerBlock("labyrinth_wall", BlocksAether.labyrinth_wall.setCreativeTab(CreativeTabsAether.BLOCKS));
-		registerBlock("labyrinth_lightstone", BlocksAether.labyrinth_lightstone.setCreativeTab(CreativeTabsAether.BLOCKS));
-		registerBlock("labyrinth_base", BlocksAether.labyrinth_base.setCreativeTab(CreativeTabsAether.BLOCKS));
-		registerBlock("labyrinth_headstone", BlocksAether.labyrinth_headstone.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("labyrinth_capstone", BlocksAether.labyrinth_capstone.setBlockUnbreakable().setResistance(6000000.0F).setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("labyrinth_glowing_pillar", BlocksAether.labyrinth_glowing_pillar.setBlockUnbreakable().setResistance(6000000.0F).setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("labyrinth_pillar", BlocksAether.labyrinth_pillar.setBlockUnbreakable().setResistance(6000000.0F).setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("labyrinth_wall", BlocksAether.labyrinth_wall.setBlockUnbreakable().setResistance(6000000.0F).setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("labyrinth_lightstone", BlocksAether.labyrinth_lightstone.setBlockUnbreakable().setResistance(6000000.0F).setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("labyrinth_base", BlocksAether.labyrinth_base.setBlockUnbreakable().setResistance(6000000.0F).setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("labyrinth_headstone", BlocksAether.labyrinth_headstone.setBlockUnbreakable().setResistance(6000000.0F).setCreativeTab(CreativeTabsAether.BLOCKS));
 
-		registerBlock("unstable_labyrinth_capstone", BlocksAether.unstable_labyrinth_capstone);
+		registerBlock("unstable_labyrinth_capstone", BlocksAether.unstable_labyrinth_capstone.setBlockUnbreakable().setResistance(6000000.0F));
 
 		registerBlock("skyroot_slab", BlocksAether.skyroot_slab.setCreativeTab(CreativeTabsAether.BLOCKS),new ItemAetherSlab(BlocksAether.skyroot_slab));
 		registerBlock("holystone_slab", BlocksAether.holystone_slab.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemAetherSlab(BlocksAether.holystone_slab));
@@ -406,8 +406,8 @@ public class BlocksAether
 		registerBlock("sentry_stone_slab", BlocksAether.sentry_stone_slab.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemAetherSlab(BlocksAether.sentry_stone_slab));
 		registerBlock("divine_sentry_stone_slab", BlocksAether.divine_sentry_stone_slab.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemAetherSlab(BlocksAether.divine_sentry_stone_slab));
 		registerBlock("icestone_slab", BlocksAether.icestone_slab.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemAetherSlab(BlocksAether.icestone_slab));
-		registerBlock("labyrinth_capstone_slab", BlocksAether.labyrinth_capstone_slab.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemAetherSlab(BlocksAether.labyrinth_capstone_slab));
-		registerBlock("labyrinth_wall_slab", BlocksAether.labyrinth_wall_slab.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemAetherSlab(BlocksAether.labyrinth_wall_slab));
+		registerBlock("labyrinth_capstone_slab", BlocksAether.labyrinth_capstone_slab.setBlockUnbreakable().setResistance(6000000.0F).setCreativeTab(CreativeTabsAether.BLOCKS), new ItemAetherSlab(BlocksAether.labyrinth_capstone_slab));
+		registerBlock("labyrinth_wall_slab", BlocksAether.labyrinth_wall_slab.setBlockUnbreakable().setResistance(6000000.0F).setCreativeTab(CreativeTabsAether.BLOCKS), new ItemAetherSlab(BlocksAether.labyrinth_wall_slab));
 
 		registerBlock("labyrinth_strongblock", BlocksAether.labyrinth_strongblock.setCreativeTab(CreativeTabsAether.BLOCKS));
 
@@ -437,7 +437,7 @@ public class BlocksAether
 		registerBlock("present", BlocksAether.present.setCreativeTab(CreativeTabsAether.MISCELLANEOUS), new ItemBlockPresent(BlocksAether.present));
 		registerBlock("labyrinth_container", BlocksAether.labyrinth_container.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.labyrinth_container));
 
-		registerBlock("labyrinth_bridge", BlocksAether.labyrinth_bridge);
+		registerBlock("labyrinth_bridge", BlocksAether.labyrinth_bridge.setBlockUnbreakable().setResistance(6000000.0F));
 
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_log_wall, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.aether_planks, 5, 5);
@@ -533,9 +533,6 @@ public class BlocksAether
 		sentry_stone_slab.setHarvestLevel("pickaxe", 0);
 		divine_sentry_stone_slab.setHarvestLevel("pickaxe", 0);
 		icestone_slab.setHarvestLevel("pickaxe", 0);
-		labyrinth_capstone_slab.setHarvestLevel("pickaxe", 0);
-		labyrinth_wall_slab.setHarvestLevel("pickaxe", 0);
-		labyrinth_chest.setHarvestLevel("pickaxe", 0);
 	}
 
 	private static void registerBlock(String name, Block block, ItemBlock item)
