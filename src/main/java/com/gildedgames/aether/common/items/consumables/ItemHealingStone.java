@@ -101,24 +101,27 @@ public class ItemHealingStone extends Item
 	{
 		setUsesLeft(stack, getUsesLeft(stack) - 1);
 
-		if (entity.getHealth() < entity.getMaxHealth())
+		if (!worldIn.isRemote)
 		{
-			float dif = entity.getMaxHealth() - entity.getHealth();
-			float leftOver = 4.0F - dif;
+			if (entity.getHealth() < entity.getMaxHealth())
+			{
+				float dif = entity.getMaxHealth() - entity.getHealth();
+				float leftOver = 4.0F - dif;
 
-			if (dif > 4.0F)
-			{
-				entity.heal(4.0F);
+				if (dif > 4.0F)
+				{
+					entity.heal(4.0F);
+				}
+				else if (leftOver > 0.0F)
+				{
+					entity.heal(dif);
+					entity.setAbsorptionAmount(Math.min(20.0F, entity.getAbsorptionAmount() + leftOver));
+				}
 			}
-			else if (leftOver > 0.0F)
+			else
 			{
-				entity.heal(dif);
-				entity.setAbsorptionAmount(Math.min(20.0F, entity.getAbsorptionAmount() + leftOver));
+				entity.setAbsorptionAmount(Math.min(20.0F, entity.getAbsorptionAmount() + 4.0F));
 			}
-		}
-		else
-		{
-			entity.setAbsorptionAmount(Math.min(20.0F, entity.getAbsorptionAmount() + 4.0F));
 		}
 
 		if (getUsesLeft(stack) <= 0)
