@@ -116,7 +116,7 @@ public class TemplatePrimer
 
 						try
 						{
-							primer.setBlockState(blockpos.getX() - minX, blockpos.getY(), blockpos.getZ() - minZ, iblockstate1);
+							primer.setBlockState(blockpos.getX() - minX, blockpos.getY(), blockpos.getZ() - minZ, iblockstate1.getBlock() == Blocks.AIR ? Blocks.STRUCTURE_VOID.getDefaultState() : iblockstate1);
 						}
 						catch (ArrayIndexOutOfBoundsException ex)
 						{

@@ -1,8 +1,10 @@
 package com.gildedgames.aether.common.world.labyrinth;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceHandler;
+import com.gildedgames.util.core.util.ChunkPrimerDefaultState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -81,7 +83,7 @@ public class ChunkProviderSliderLabyrinth implements IChunkGenerator
 		
 		this.random.setSeed(chunkX * 0x4f9939f508L + chunkZ * 0x1ef1565bd5L);
 
-		ChunkPrimer primer = new ChunkPrimer();//newsystem ChunkPrimerDefaultState(BlocksAether.labyrinth_strongblock.getDefaultState());
+		ChunkPrimer primer = new ChunkPrimerDefaultState(BlocksAether.labyrinth_strongblock.getDefaultState());
 		
 		inst.getGenerator().generateChunk(this.world, this.random, inst, primer, chunkX, chunkZ);
 

@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.world.util.*;
 import com.gildedgames.util.core.util.BlockPosDimension;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
@@ -384,7 +385,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 
 		for (int i = layer.minY() + 1; i <= layer.minY() + height; i++)
 		{
-			//primer.setBlockState(x, i, z, Blocks.STRUCTURE_VOID.getDefaultState());
+			primer.setBlockState(x, i, z, Blocks.STRUCTURE_VOID.getDefaultState());
 		}
 
 		for (int i = layer.minY() + 1 + height; i <= layer.minY() + layer.getHeight(); i++)
