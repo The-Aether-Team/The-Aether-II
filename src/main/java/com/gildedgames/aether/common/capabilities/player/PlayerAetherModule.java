@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 public abstract class PlayerAetherModule implements IPlayerAetherCapability
@@ -21,6 +22,12 @@ public abstract class PlayerAetherModule implements IPlayerAetherCapability
 	public PlayerAetherImpl getPlayerAether()
 	{
 		return this.playerAether;
+	}
+
+	@Override
+	public void onPlaceBlock(BlockEvent.PlaceEvent event)
+	{
+
 	}
 
 	@Override

@@ -205,6 +205,13 @@ public class PlayerAetherEvents
 		{
 			data.mark(event.getPos());
 		}
+
+		IPlayerAetherCapability aePlayer = PlayerAetherImpl.getPlayer(event.getPlayer());
+
+		if (aePlayer != null)
+		{
+			aePlayer.onPlaceBlock(event);
+		}
 	}
 
 	@SubscribeEvent

@@ -10,6 +10,7 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
@@ -19,6 +20,8 @@ public interface IPlayerAetherCapability
 	// [--- Event handlers for the entity this capability is attached to. ---]
 
 	void onRespawn();
+
+	void onPlaceBlock(BlockEvent.PlaceEvent event);
 
 	void onUpdate(LivingUpdateEvent event);
 
