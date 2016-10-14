@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.entities.dungeon.labyrinth.boss;
 import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.util.BossStage;
+import com.gildedgames.aether.common.entities.util.BossStageAction;
 import com.gildedgames.aether.common.entities.util.sliding.EntitySliding;
 import com.gildedgames.aether.common.entities.util.sliding.SlidingHorizontalMoveHelper;
 import com.gildedgames.aether.common.entities.util.sliding.SlidingMoveHelper;
@@ -12,6 +13,7 @@ import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthBridge;
 import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.util.core.nbt.NBTHelper;
+import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -21,6 +23,7 @@ import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -35,6 +38,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import java.util.List;
@@ -67,18 +72,57 @@ public class EntitySlider extends EntitySliding implements IMob
 		@Override
 		protected void onStageBegin()
 		{
-			BlockPos min = EntitySlider.this.startLocation.add(-50, -1, -50);
-			BlockPos max = EntitySlider.this.startLocation.add(50, -1, 50);
-
-			for (BlockPos pos : BlockPos.getAllInBoxMutable(min, max))
+			EntitySlider.this.actions.add(new BossStageAction()
 			{
-				IBlockState state = EntitySlider.this.worldObj.getBlockState(pos);
 
-				if (state != null && state.getBlock() == BlocksAether.unstable_labyrinth_capstone)
+				private TickTimer timer = new TickTimer();
+
+				@Override
+				public boolean shouldRemove()
 				{
-					EntitySlider.this.worldObj.setBlockToAir(pos);
+					return this.timer.getSecondsPassed() >= 11;
 				}
-			}
+
+				@Override
+				public void update()
+				{
+					this.timer.tick();
+
+					if (this.timer.getSecondsPassed() < 10)
+					{
+						if (this.timer.isMultipleOfSeconds())
+						{
+							BlockPos min = EntitySlider.this.startLocation.add(-50, -1, -50);
+							BlockPos max = EntitySlider.this.startLocation.add(50, -1, 50);
+
+							for (BlockPos pos : BlockPos.getAllInBoxMutable(min, max))
+							{
+								IBlockState state = EntitySlider.this.worldObj.getBlockState(pos);
+
+								if (EntitySlider.this.getRNG().nextInt(10) == 0 && state != null && state.getBlock() == BlocksAether.unstable_labyrinth_capstone)
+								{
+									EntitySlider.this.worldObj.setBlockToAir(pos);
+								}
+							}
+						}
+					}
+					else
+					{
+						BlockPos min = EntitySlider.this.startLocation.add(-50, -1, -50);
+						BlockPos max = EntitySlider.this.startLocation.add(50, -1, 50);
+
+						for (BlockPos pos : BlockPos.getAllInBoxMutable(min, max))
+						{
+							IBlockState state = EntitySlider.this.worldObj.getBlockState(pos);
+
+							if (state != null && state.getBlock() == BlocksAether.unstable_labyrinth_capstone)
+							{
+								EntitySlider.this.worldObj.setBlockToAir(pos);
+							}
+						}
+					}
+				}
+			});
 		}
 	};
 
@@ -113,6 +157,8 @@ public class EntitySlider extends EntitySliding implements IMob
 	};
 
 	private BossStage[] stages;
+
+	private List<BossStageAction> actions = Lists.newArrayList();
 
 	public EntitySlider(World world)
 	{
@@ -201,6 +247,20 @@ public class EntitySlider extends EntitySliding implements IMob
 
 				this.attackTime = 20;
 			}
+
+			final List<BossStageAction> toRemove = Lists.newArrayList();
+
+			for (BossStageAction action : this.actions)
+			{
+				action.update();
+
+				if (action.shouldRemove())
+				{
+					toRemove.add(action);
+				}
+			}
+
+			this.actions.removeAll(toRemove);
 		}
 
 		if (!this.worldObj.isRemote)
