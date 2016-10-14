@@ -92,7 +92,7 @@ public class EntitySlider extends EntitySliding implements IMob
 					{
 						if (this.timer.isMultipleOfSeconds())
 						{
-							BlockPos min = EntitySlider.this.startLocation.add(-50, 1, -50);
+							BlockPos min = EntitySlider.this.startLocation.add(-50, -1, -50);
 							BlockPos max = EntitySlider.this.startLocation.add(50, -1, 50);
 
 							for (BlockPos pos : BlockPos.getAllInBox(min, max))
@@ -108,7 +108,7 @@ public class EntitySlider extends EntitySliding implements IMob
 					}
 					else
 					{
-						BlockPos min = EntitySlider.this.startLocation.add(-50, 1, -50);
+						BlockPos min = EntitySlider.this.startLocation.add(-50, -1, -50);
 						BlockPos max = EntitySlider.this.startLocation.add(50, -1, 50);
 
 						for (BlockPos pos : BlockPos.getAllInBox(min, max))
@@ -210,6 +210,8 @@ public class EntitySlider extends EntitySliding implements IMob
 	@Override
 	public void onUpdate()
 	{
+		//System.out.println(this.getPosition());
+
 		this.jumpMovementFactor = 0.0F;
 		this.renderYawOffset = this.rotationPitch = this.rotationYaw = 0.0F;
 
