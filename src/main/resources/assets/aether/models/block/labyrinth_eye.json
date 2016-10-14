@@ -1,7 +1,6 @@
 {
-	"parent": "aether:block/glowing",
+	"parent": "block/cube_all",
 	"textures": {
-		"all": "aether:blocks/dungeon/labyrinth_eye",
-		"overlay": "aether:blocks/dungeon/labyrinth_eye_highlight"
+		"all": "aether:blocks/dungeon/labyrinth_eye"
 	}
 }

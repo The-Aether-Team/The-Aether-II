@@ -5,7 +5,10 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
@@ -18,7 +21,6 @@ public class BlockAmbrosiumOre extends BlockAetherOre
 		this.setHardness(3.0f);
 		this.setResistance(5.0f);
 		this.setHarvestLevel("pickaxe", 0);
-		this.setLightLevel(0.4f);
 
 		this.setSoundType(SoundType.STONE);
 	}
@@ -34,4 +36,12 @@ public class BlockAmbrosiumOre extends BlockAetherOre
 	{
 		return MathHelper.getRandomIntegerInRange(rand, 0, 1);
 	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getBlockLayer()
+	{
+		return BlockRenderLayer.CUTOUT_MIPPED;
+	}
+
 }

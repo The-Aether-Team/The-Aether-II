@@ -1,9 +1,7 @@
 {
-	"parent": "aether:block/glowing_rotatable_side",
+	"parent": "block/column_side",
 	"textures": {
 		"end": "aether:blocks/dungeon/labyrinth_pillar_top",
-		"side": "aether:blocks/dungeon/labyrinth_pillar_side",
-		"end_overlay": "aether:blocks/dungeon/labyrinth_pillar_top_highlight",
-		"side_overlay": "aether:blocks/dungeon/labyrinth_pillar_side_highlight"
+		"side": "aether:blocks/dungeon/labyrinth_pillar_side"
 	}
 }

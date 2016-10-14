@@ -34,15 +34,18 @@ public class DungeonModule extends PlayerAetherModule
 			IPlayerInstances playerInstances = InstanceModule.INSTANCE.getPlayer(player);
 			NBT nbt = playerInstances.getInstance();
 
-			if (nbt instanceof DungeonInstance && !(event.getPlacedBlock().getBlock() instanceof BlockTorch))
+			if (nbt instanceof DungeonInstance)
 			{
-				event.getWorld().destroyBlock(event.getPos(), true);
-
-				if (this.chatTimer.getTicksPassed() >= 160)
+				if (!(event.getPlacedBlock().getBlock() instanceof BlockTorch))
 				{
-					player.addChatComponentMessage(new TextComponentString("Hmm... Some strange force is preventing me from placing blocks."));
+					event.getWorld().destroyBlock(event.getPos(), true);
 
-					this.chatTimer.reset();
+					if (this.chatTimer.getTicksPassed() >= 160)
+					{
+						player.addChatComponentMessage(new TextComponentString("Hmm... Some strange force is preventing me from placing blocks."));
+
+						this.chatTimer.reset();
+					}
 				}
 			}
 		}
