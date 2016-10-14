@@ -92,14 +92,14 @@ public class EntitySlider extends EntitySliding implements IMob
 					{
 						if (this.timer.isMultipleOfSeconds())
 						{
-							BlockPos min = EntitySlider.this.startLocation.add(-50, -1, -50);
+							BlockPos min = EntitySlider.this.startLocation.add(-50, 1, -50);
 							BlockPos max = EntitySlider.this.startLocation.add(50, -1, 50);
 
-							for (BlockPos pos : BlockPos.getAllInBoxMutable(min, max))
+							for (BlockPos pos : BlockPos.getAllInBox(min, max))
 							{
 								IBlockState state = EntitySlider.this.worldObj.getBlockState(pos);
 
-								if (EntitySlider.this.getRNG().nextInt(10) == 0 && state != null && state.getBlock() == BlocksAether.unstable_labyrinth_capstone)
+								if (EntitySlider.this.getRNG().nextInt(5) == 0 && state != null && state.getBlock() == BlocksAether.unstable_labyrinth_capstone)
 								{
 									EntitySlider.this.worldObj.setBlockToAir(pos);
 								}
@@ -108,10 +108,10 @@ public class EntitySlider extends EntitySliding implements IMob
 					}
 					else
 					{
-						BlockPos min = EntitySlider.this.startLocation.add(-50, -1, -50);
+						BlockPos min = EntitySlider.this.startLocation.add(-50, 1, -50);
 						BlockPos max = EntitySlider.this.startLocation.add(50, -1, 50);
 
-						for (BlockPos pos : BlockPos.getAllInBoxMutable(min, max))
+						for (BlockPos pos : BlockPos.getAllInBox(min, max))
 						{
 							IBlockState state = EntitySlider.this.worldObj.getBlockState(pos);
 
@@ -235,19 +235,6 @@ public class EntitySlider extends EntitySliding implements IMob
 
 		if (this.isAwake() && !this.worldObj.isRemote)
 		{
-			EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 2.3D);
-
-			if (player != null && this.isAttackingPlayer(player))
-			{
-				this.playSound(SoundsAether.slider_collide, 2.5F, 1.0F / (this.rand.nextFloat() * 0.2F + 0.9F));
-
-				player.motionY += 0.35D;
-				player.motionX *= 2.0D;
-				player.motionZ *= 2.0D;
-
-				this.attackTime = 20;
-			}
-
 			final List<BossStageAction> toRemove = Lists.newArrayList();
 
 			for (BossStageAction action : this.actions)
@@ -261,10 +248,28 @@ public class EntitySlider extends EntitySliding implements IMob
 			}
 
 			this.actions.removeAll(toRemove);
+
+			EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 2.3D);
+
+			if (player != null && this.isAttackingPlayer(player))
+			{
+				this.playSound(SoundsAether.slider_collide, 2.5F, 1.0F / (this.rand.nextFloat() * 0.2F + 0.9F));
+
+				player.motionY += 0.35D;
+				player.motionX *= 2.0D;
+				player.motionZ *= 2.0D;
+
+				this.attackTime = 20;
+			}
 		}
 
 		if (!this.worldObj.isRemote)
 		{
+			for (BossStage stage : this.stages)
+			{
+				stage.update();
+			}
+
 			if (!this.isAwake())
 			{
 				double x = MathHelper.floor_double(this.posX);
@@ -289,7 +294,7 @@ public class EntitySlider extends EntitySliding implements IMob
 			{
 				if (this.startLocation == null)
 				{
-					this.startLocation = this.getPosition();
+					this.startLocation = new BlockPos(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ));
 				}
 
 				if (this.isAIDisabled())
@@ -319,11 +324,6 @@ public class EntitySlider extends EntitySliding implements IMob
 
 						this.getMoveHelper().setMoveTo(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ, speed);
 					}
-				}
-
-				for (BossStage stage : this.stages)
-				{
-					stage.update();
 				}
 			}
 		}
@@ -524,7 +524,11 @@ public class EntitySlider extends EntitySliding implements IMob
 
 		this.setAwake(tag.getBoolean("isAwake"));
 		this.setCritical(tag.getBoolean("isCritical"));
-		this.startLocation = NBTHelper.readBlockPos((NBTTagCompound) tag.getTag("startLocation"));
+
+		if (tag.hasKey("startLocation"))
+		{
+			this.startLocation = NBTHelper.readBlockPos((NBTTagCompound) tag.getTag("startLocation"));
+		}
 	}
 
 	@Override
