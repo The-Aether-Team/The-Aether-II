@@ -51,7 +51,7 @@ public class EntityBattleSentry extends EntityMob
 		this.tasks.addTask(1, new AIHopFloat(this, hoppingMoveHelper));
 		this.tasks.addTask(2, new AIHopFollowAttackTarget(this, hoppingMoveHelper, 1.5D));
 
-		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true, true));
 
 		this.setSize(0.8F, 0.8F);
 	}

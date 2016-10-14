@@ -28,7 +28,7 @@ public class EntityDetonationSentry extends EntityMob implements IProjectile
 		this.tasks.addTask(1, new AIHopFloat(this, hoppingMoveHelper));
 		this.tasks.addTask(2, new AIHopFollowAttackTarget(this, hoppingMoveHelper, 1.0D));
 
-		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true, true));
 
 		this.setSize(1.0F, 1.0F);
 	}
