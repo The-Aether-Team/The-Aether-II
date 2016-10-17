@@ -41,7 +41,7 @@ public class BossModule extends PlayerAetherModule
 		{
 			IBossManager<?> manager = this.boss.getBossManager();
 
-			if (manager.getEntity() == null || manager.getEntity().isDead)
+			if (manager.getEntity() == null || manager.getEntity().isDead || this.getPlayer().isDead || this.getPlayer().getHealth() <= 0)
 			{
 				this.boss = null;
 				this.bossEntityUUID = null;
