@@ -12,10 +12,16 @@ import com.gildedgames.aether.common.capabilities.entity.properties.EntityProper
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherEvents;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.crafting.RecipesAether;
+import com.gildedgames.aether.common.entities.BossProcessor;
 import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.entities.EntityItemWatcher;
 import com.gildedgames.aether.common.entities.MountProcessor;
 import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffectsEventHooks;
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.boss.BreakFloorActionSlider;
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.boss.FirstStageSlider;
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.boss.SecondStageSlider;
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.boss.ThirdStageSlider;
+import com.gildedgames.aether.common.entities.util.SimpleBossManager;
 import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
@@ -95,6 +101,11 @@ public class CommonProxy
 		AetherCore.srl().registerSerialization(0, DungeonInstance.class, new Instantiator(DungeonInstance.class));
 		AetherCore.srl().registerSerialization(1, MoaGenePool.class, new Instantiator(MoaGenePool.class));
 		AetherCore.srl().registerSerialization(2, TickTimer.class, new Instantiator(TickTimer.class));
+		AetherCore.srl().registerSerialization(3, FirstStageSlider.class, new Instantiator(FirstStageSlider.class));
+		AetherCore.srl().registerSerialization(4, SecondStageSlider.class, new Instantiator(SecondStageSlider.class));
+		AetherCore.srl().registerSerialization(5, ThirdStageSlider.class, new Instantiator(ThirdStageSlider.class));
+		AetherCore.srl().registerSerialization(6, BreakFloorActionSlider.class, new Instantiator(BreakFloorActionSlider.class));
+		AetherCore.srl().registerSerialization(7, SimpleBossManager.class, new Instantiator(SimpleBossManager.class));
 	}
 
 	public void init(FMLInitializationEvent event)
@@ -105,6 +116,7 @@ public class CommonProxy
 		MinecraftForge.EVENT_BUS.register(EntityItemWatcher.class);
 		MinecraftForge.EVENT_BUS.register(MountProcessor.class);
 		MinecraftForge.EVENT_BUS.register(EntityProperties.class);
+		MinecraftForge.EVENT_BUS.register(BossProcessor.class);
 
 		MinecraftForge.EVENT_BUS.register(ItemSkyrootSword.class);
 

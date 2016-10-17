@@ -40,6 +40,27 @@ public class EntitySliding extends EntityCreature implements ISlidingEntity
 	}
 
 	@Override
+	public void onUpdate()
+	{
+		this.jumpMovementFactor = 0.0F;
+		this.renderYawOffset = this.rotationPitch = this.rotationYaw = 0.0F;
+
+		super.onUpdate();
+
+		this.jumpMovementFactor = 0.0F;
+		this.renderYawOffset = this.rotationPitch = this.rotationYaw = 0.0F;
+	}
+
+	@Override
+	public void onLivingUpdate()
+	{
+		this.jumpMovementFactor = 0.0F;
+		this.renderYawOffset = this.rotationPitch = this.rotationYaw = 0.0F;
+
+		super.onLivingUpdate();
+	}
+
+	@Override
 	public boolean hasNoGravity()
 	{
 		return true;

@@ -1,29 +1,21 @@
 package com.gildedgames.aether.common.entities.dungeon.labyrinth.boss;
 
-import com.gildedgames.aether.common.ReflectionAether;
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.util.BossStage;
-import com.gildedgames.aether.common.entities.util.BossStageAction;
+import com.gildedgames.aether.api.capabilites.entity.boss.IBoss;
+import com.gildedgames.aether.api.capabilites.entity.boss.IBossManager;
+import com.gildedgames.aether.common.entities.util.SimpleBossManager;
 import com.gildedgames.aether.common.entities.util.sliding.EntitySliding;
 import com.gildedgames.aether.common.entities.util.sliding.SlidingHorizontalMoveHelper;
-import com.gildedgames.aether.common.entities.util.sliding.SlidingMoveHelper;
 import com.gildedgames.aether.common.items.tools.EnumToolType;
 import com.gildedgames.aether.common.items.tools.ItemAetherTool;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthBridge;
 import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.util.core.nbt.NBTHelper;
-import com.google.common.collect.Lists;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -38,13 +30,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import java.util.List;
 
-public class EntitySlider extends EntitySliding implements IMob
+public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySlider>
 {
 
 	private static final DataParameter<Boolean> IS_AWAKE = EntityDataManager.createKey(EntitySlider.class, DataSerializers.BOOLEAN);
@@ -61,117 +50,18 @@ public class EntitySlider extends EntitySliding implements IMob
 
 	private BlockPos startLocation;
 
-	private BossStage firstStage = new BossStage()
-	{
-		@Override
-		protected boolean conditionsMet()
-		{
-			return EntitySlider.this.getHealth() <= 400;
-		}
-
-		@Override
-		protected void onStageBegin()
-		{
-			EntitySlider.this.actions.add(new BossStageAction()
-			{
-
-				private TickTimer timer = new TickTimer();
-
-				@Override
-				public boolean shouldRemove()
-				{
-					return this.timer.getSecondsPassed() >= 11;
-				}
-
-				@Override
-				public void update()
-				{
-					this.timer.tick();
-
-					if (this.timer.getSecondsPassed() < 10)
-					{
-						if (this.timer.isMultipleOfSeconds())
-						{
-							BlockPos min = EntitySlider.this.startLocation.add(-50, -1, -50);
-							BlockPos max = EntitySlider.this.startLocation.add(50, -1, 50);
-
-							for (BlockPos pos : BlockPos.getAllInBox(min, max))
-							{
-								IBlockState state = EntitySlider.this.worldObj.getBlockState(pos);
-
-								if (EntitySlider.this.getRNG().nextInt(5) == 0 && state != null && state.getBlock() == BlocksAether.unstable_labyrinth_capstone)
-								{
-									EntitySlider.this.worldObj.setBlockToAir(pos);
-								}
-							}
-						}
-					}
-					else
-					{
-						BlockPos min = EntitySlider.this.startLocation.add(-50, -1, -50);
-						BlockPos max = EntitySlider.this.startLocation.add(50, -1, 50);
-
-						for (BlockPos pos : BlockPos.getAllInBox(min, max))
-						{
-							IBlockState state = EntitySlider.this.worldObj.getBlockState(pos);
-
-							if (state != null && state.getBlock() == BlocksAether.unstable_labyrinth_capstone)
-							{
-								EntitySlider.this.worldObj.setBlockToAir(pos);
-							}
-						}
-					}
-				}
-			});
-		}
-	};
-
-	private BossStage secondStage = new BossStage()
-	{
-		@Override
-		protected boolean conditionsMet()
-		{
-			return EntitySlider.this.getHealth() <= 250;
-		}
-
-		@Override
-		protected void onStageBegin()
-		{
-			EntitySlider.this.setCritical(true);
-		}
-	};
-
-	private BossStage thirdStage = new BossStage()
-	{
-		@Override
-		protected boolean conditionsMet()
-		{
-			return EntitySlider.this.getHealth() <= 100;
-		}
-
-		@Override
-		protected void onStageBegin()
-		{
-
-		}
-	};
-
-	private BossStage[] stages;
-
-	private List<BossStageAction> actions = Lists.newArrayList();
+	private SimpleBossManager<EntitySlider> bossManager = new SimpleBossManager<>(this, "The Slider", new FirstStageSlider(), new SecondStageSlider(), new ThirdStageSlider());
 
 	public EntitySlider(World world)
 	{
 		super(world);
 
 		this.setSize(2.0F, 2.0F);
+	}
 
-		this.stages = new BossStage[]
-		{
-				this.firstStage,
-				this.secondStage,
-				this.thirdStage
-		};
+	public BlockPos getStartLocation()
+	{
+		return this.startLocation;
 	}
 
 	@Override
@@ -202,8 +92,6 @@ public class EntitySlider extends EntitySliding implements IMob
 	{
 		super.initEntityAI();
 
-		//this.tasks.addTask(1, new EntityAIAttackMelee(this, 0.4D, true));
-
 		this.targetTasks.addTask(0, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false));
 	}
 
@@ -211,9 +99,6 @@ public class EntitySlider extends EntitySliding implements IMob
 	public void onUpdate()
 	{
 		//System.out.println(this.getPosition());
-
-		this.jumpMovementFactor = 0.0F;
-		this.renderYawOffset = this.rotationPitch = this.rotationYaw = 0.0F;
 
 		this.fireResistance = -1;
 		this.extinguish();
@@ -237,20 +122,6 @@ public class EntitySlider extends EntitySliding implements IMob
 
 		if (this.isAwake() && !this.worldObj.isRemote)
 		{
-			final List<BossStageAction> toRemove = Lists.newArrayList();
-
-			for (BossStageAction action : this.actions)
-			{
-				action.update();
-
-				if (action.shouldRemove())
-				{
-					toRemove.add(action);
-				}
-			}
-
-			this.actions.removeAll(toRemove);
-
 			EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 2.3D);
 
 			if (player != null && this.isAttackingPlayer(player))
@@ -267,11 +138,6 @@ public class EntitySlider extends EntitySliding implements IMob
 
 		if (!this.worldObj.isRemote)
 		{
-			for (BossStage stage : this.stages)
-			{
-				stage.update();
-			}
-
 			if (!this.isAwake())
 			{
 				double x = MathHelper.floor_double(this.posX);
@@ -314,12 +180,12 @@ public class EntitySlider extends EntitySliding implements IMob
 					{
 						double speed = 1.0D;
 
-						if (this.firstStage.hasBegun())
+						if (this.getBossManager().hasBegun(FirstStageSlider.class))
 						{
 							speed = 2.0D;
 						}
 
-						if (this.thirdStage.hasBegun())
+						if (this.getBossManager().hasBegun(ThirdStageSlider.class))
 						{
 							speed = 3.0D;
 						}
@@ -332,18 +198,12 @@ public class EntitySlider extends EntitySliding implements IMob
 
 		super.onUpdate();
 
-		this.jumpMovementFactor = 0.0F;
-		this.renderYawOffset = this.rotationPitch = this.rotationYaw = 0.0F;
-
 		this.prevDirection = this.getDirection();
 	}
 
 	@Override
 	public void onLivingUpdate()
 	{
-		this.jumpMovementFactor = 0.0F;
-		this.renderYawOffset = this.rotationPitch = this.rotationYaw = 0.0F;
-
 		if (!this.worldObj.isRemote && this.getAttackTarget() == null)
 		{
 			this.setAwake(false);
@@ -517,6 +377,8 @@ public class EntitySlider extends EntitySliding implements IMob
 		tag.setBoolean("isAwake", this.isAwake());
 		tag.setBoolean("isCritical", this.isCritical());
 		tag.setTag("startLocation", NBTHelper.serializeBlockPos(this.startLocation));
+
+		NBTHelper.fullySerialize("bossManager", this.bossManager, tag);
 	}
 
 	@Override
@@ -531,6 +393,14 @@ public class EntitySlider extends EntitySliding implements IMob
 		{
 			this.startLocation = NBTHelper.readBlockPos((NBTTagCompound) tag.getTag("startLocation"));
 		}
+
+		SimpleBossManager<EntitySlider> bossManager = NBTHelper.fullyDeserialize("bossManager", tag);
+
+		if (bossManager != null)
+		{
+			this.bossManager = bossManager;
+			this.bossManager.setEntity(this);
+		}
 	}
 
 	@Override
@@ -544,7 +414,7 @@ public class EntitySlider extends EntitySliding implements IMob
 	@Override
 	public void onSliding()
 	{
-		if (this.firstStage.hasBegun())
+		if (this.getBossManager().hasBegun(FirstStageSlider.class))
 		{
 			List<AxisAlignedBB> boxes = this.worldObj.getCollisionBoxes(this.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
 
@@ -581,12 +451,12 @@ public class EntitySlider extends EntitySliding implements IMob
 	@Override
 	public int getSlideCooldown()
 	{
-		if (this.secondStage.hasBegun())
+		if (this.getBossManager().hasBegun(SecondStageSlider.class))
 		{
 			return 6;
 		}
 
-		if (this.thirdStage.hasBegun())
+		if (this.getBossManager().hasBegun(ThirdStageSlider.class))
 		{
 			return 0;
 		}
@@ -609,6 +479,11 @@ public class EntitySlider extends EntitySliding implements IMob
 		}
 
 		return true;
+	}
+
+	@Override public IBossManager<EntitySlider> getBossManager()
+	{
+		return this.bossManager;
 	}
 
 }
