@@ -38,6 +38,11 @@ public class SimpleBossManager<T extends Entity> implements IBossManager<T>
 		this.entity = entity;
 	}
 
+	@Override public T getEntity()
+	{
+		return this.entity;
+	}
+
 	@Override public String getName() { return this.name; }
 
 	@Override public List<BossStage<T>> getStages()

@@ -8,6 +8,8 @@ import java.util.List;
 public interface IBossManager<T extends Entity> extends NBT
 {
 
+	T getEntity();
+
 	String getName();
 
 	List<BossStage<T>> getStages();

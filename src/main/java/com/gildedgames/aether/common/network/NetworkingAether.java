@@ -29,6 +29,7 @@ public class NetworkingAether
 		instance.registerMessage(CompanionChangedPacket.Handler.class, CompanionChangedPacket.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(MidAirJumpsChangedPacket.Handler.class, MidAirJumpsChangedPacket.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(StructureInjectionPacket.Handler.class, StructureInjectionPacket.class, discriminant++, Side.SERVER);
+		instance.registerMessage(BossChangePacket.Handler.class, BossChangePacket.class, discriminant++, Side.CLIENT);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 	}

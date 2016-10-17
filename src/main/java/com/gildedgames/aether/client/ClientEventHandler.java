@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.capabilites.entity.boss.IBoss;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
@@ -34,6 +35,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -64,52 +66,7 @@ public class ClientEventHandler
 
 	private boolean prevJumpBindState;
 
-	private Timer timer = new Timer(20.0F);
-
 	private final Gui DUMMY_GUI = new Gui();
-
-	private boolean prevFancyGraphics, setInitialSettings;
-
-	@SideOnly(Side.CLIENT)
-	public void renderAetherPortalHUD(float timeInPortal, ScaledResolution scaledRes)
-	{
-		if (timeInPortal <= 0.0f) {
-			return;
-		}
-
-		if (timeInPortal < 1.0F)
-		{
-			timeInPortal = timeInPortal * timeInPortal;
-			timeInPortal = timeInPortal * timeInPortal;
-			timeInPortal = timeInPortal * 0.8F + 0.2F;
-		}
-
-		Minecraft mc = Minecraft.getMinecraft();
-
-		GlStateManager.disableAlpha();
-		GlStateManager.disableDepth();
-		GlStateManager.depthMask(false);
-		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-		GlStateManager.color(1.0F, 1.0F, 1.0F, timeInPortal);
-		mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-		TextureAtlasSprite textureatlassprite = mc.getBlockRendererDispatcher().getBlockModelShapes().getTexture(BlocksAether.aether_portal.getDefaultState());
-		float f = textureatlassprite.getMinU();
-		float f1 = textureatlassprite.getMinV();
-		float f2 = textureatlassprite.getMaxU();
-		float f3 = textureatlassprite.getMaxV();
-		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer vertexbuffer = tessellator.getBuffer();
-		vertexbuffer.begin(7, DefaultVertexFormats.POSITION_TEX);
-		vertexbuffer.pos(0.0D, (double)scaledRes.getScaledHeight(), -90.0D).tex((double)f, (double)f3).endVertex();
-		vertexbuffer.pos((double)scaledRes.getScaledWidth(), (double)scaledRes.getScaledHeight(), -90.0D).tex((double)f2, (double)f3).endVertex();
-		vertexbuffer.pos((double)scaledRes.getScaledWidth(), 0.0D, -90.0D).tex((double)f2, (double)f1).endVertex();
-		vertexbuffer.pos(0.0D, 0.0D, -90.0D).tex((double)f, (double)f1).endVertex();
-		tessellator.draw();
-		GlStateManager.depthMask(true);
-		GlStateManager.enableDepth();
-		GlStateManager.enableAlpha();
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-	}
 
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRenderGui(RenderGameOverlayEvent event)
@@ -118,22 +75,7 @@ public class ClientEventHandler
 
 		ScaledResolution scaledRes = new ScaledResolution(mc);
 
-		if (event.getType() == RenderGameOverlayEvent.ElementType.PORTAL)
-		{
-			if (!mc.thePlayer.isPotionActive(MobEffects.NAUSEA))
-			{
-				PlayerAetherImpl playerAether = PlayerAetherImpl.getPlayer(mc.thePlayer);
-				TeleportingModule teleporter = playerAether.getTeleportingModule();
-
-				float timeInPortal = teleporter.getPrevTimeInPortal() + (teleporter.getTimeInPortal() - teleporter.getPrevTimeInPortal()) * this.timer.renderPartialTicks;
-
-				if (timeInPortal > 0.0F)
-				{
-					this.renderAetherPortalHUD(timeInPortal, scaledRes);
-				}
-			}
-		}
-		else if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR)
+		if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR)
 		{
 			if (mc.thePlayer.isRiding())
 			{

@@ -45,6 +45,8 @@ public interface IPlayerAetherCapability
 
 	IPlayerCompanionManager getCompanionModule();
 
+
+
 	/**
 	 * @return The {@link EntityPlayer} this capability is attached to.
 	 */

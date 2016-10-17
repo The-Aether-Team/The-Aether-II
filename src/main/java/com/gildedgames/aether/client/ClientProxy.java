@@ -1,5 +1,7 @@
 package com.gildedgames.aether.client;
 
+import com.gildedgames.aether.client.gui.main_menu.BossBattleOverlay;
+import com.gildedgames.aether.client.gui.main_menu.PortalOverlay;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.client.gui.main_menu.WorldAetherOptionsOverlay;
 import com.gildedgames.aether.client.models.blocks.AetherBlockModels;
@@ -33,6 +35,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -72,6 +75,28 @@ public class ClientProxy extends CommonProxy
 			}
 
 		}, MinecraftGuiViewer.instance());
+
+		UiModule.locate().registerOverlay("aetherPortalOverlay", new Factory<GuiFrame>()
+		{
+
+			@Override
+			public GuiFrame create()
+			{
+				return new PortalOverlay();
+			}
+
+		}, MinecraftGuiViewer.instance(), RenderGameOverlayEvent.ElementType.PORTAL);
+
+		UiModule.locate().registerOverlay("bossBattleOverlay", new Factory<GuiFrame>()
+		{
+
+			@Override
+			public GuiFrame create()
+			{
+				return new BossBattleOverlay();
+			}
+
+		}, MinecraftGuiViewer.instance(), RenderGameOverlayEvent.ElementType.HOTBAR);
 
 		SimpleModelLoader loader = new SimpleModelLoader(AetherCore.MOD_ID);
 

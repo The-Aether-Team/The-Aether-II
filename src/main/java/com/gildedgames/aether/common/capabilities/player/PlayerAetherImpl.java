@@ -51,6 +51,8 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 
 	private final EquipmentModule equipmentModule;
 
+	private final BossModule bossModule;
+
 	public PlayerAetherImpl(EntityPlayer player)
 	{
 		this.player = player;
@@ -63,12 +65,14 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		this.teleportingModule = new TeleportingModule(this);
 		this.parachuteModule = new ParachuteModule(this);
 		this.equipmentModule = new EquipmentModule(this, this.equipmentInventory);
+		this.bossModule = new BossModule(this);
 
 		this.modules.add(this.companionModule);
 		this.modules.add(this.abilitiesModule);
 		this.modules.add(this.gravititeAbilityModule);
 		this.modules.add(this.teleportingModule);
 		this.modules.add(this.parachuteModule);
+		this.modules.add(this.bossModule);
 
 		this.modules.add(this.equipmentModule);
 		this.modules.add(new ExtendedReachModule(this));
@@ -208,14 +212,17 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		NBTTagCompound teleportingModule = new NBTTagCompound();
 		NBTTagCompound parachuteModule = new NBTTagCompound();
 		NBTTagCompound abilitiesModule = new NBTTagCompound();
+		NBTTagCompound bossModule = new NBTTagCompound();
 
 		this.getTeleportingModule().write(teleportingModule);
 		this.getParachuteModule().write(parachuteModule);
 		this.getAbilitiesModule().write(abilitiesModule);
+		this.getBossModule().write(bossModule);
 
 		tag.setTag("teleportingModule", teleportingModule);
 		tag.setTag("parachuteModule", parachuteModule);
 		tag.setTag("abilitiesModule", abilitiesModule);
+		tag.setTag("bossModule", bossModule);
 	}
 
 	@Override
@@ -224,10 +231,12 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		NBTTagCompound teleportingModule = tag.getCompoundTag("teleportingModule");
 		NBTTagCompound parachuteModule = tag.getCompoundTag("parachuteModule");
 		NBTTagCompound abilitiesModule = tag.getCompoundTag("abilitiesModule");
+		NBTTagCompound bossModule = tag.getCompoundTag("bossModule");
 
 		this.getTeleportingModule().read(teleportingModule);
 		this.getParachuteModule().read(parachuteModule);
 		this.getAbilitiesModule().read(abilitiesModule);
+		this.getBossModule().read(bossModule);
 	}
 
 	@Override
@@ -253,6 +262,8 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 	public AbilitiesModule getAbilitiesModule() { return this.abilitiesModule; }
 
 	public EquipmentModule getEquipmentModule() { return this.equipmentModule; }
+
+	public BossModule getBossModule() { return this.bossModule; }
 
 	public static class Storage implements IStorage<IPlayerAetherCapability>
 	{
