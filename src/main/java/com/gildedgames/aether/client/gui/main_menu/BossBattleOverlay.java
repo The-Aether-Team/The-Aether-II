@@ -133,7 +133,7 @@ public class BossBattleOverlay extends GuiFrame
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			DUMMY_GUI.drawTexturedModalRect(width / 2 - 128, 32 - offset2, x, 42, (int) staticHealth, 14);
 
-			if (this.ticksSinceTakenDamage > 100)
+			if (this.ticksSinceTakenDamage > 25)
 			{
 				if (this.healthBeforeAttacked > this.currentHealth)
 				{
