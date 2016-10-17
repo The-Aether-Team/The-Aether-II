@@ -6,7 +6,7 @@ import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.entities.companions.*;
 import com.gildedgames.aether.common.entities.dungeon.labyrinth.*;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.boss.EntitySlider;
+import com.gildedgames.aether.common.entities.dungeon.labyrinth.boss.slider.EntitySlider;
 import com.gildedgames.aether.common.entities.dungeon.util.EntityGenerator;
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
 import com.gildedgames.aether.common.entities.item.EntityRewardItemStack;

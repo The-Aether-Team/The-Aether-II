@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.entities.util;
 import com.gildedgames.aether.api.capabilites.entity.boss.BossStage;
 import com.gildedgames.aether.api.capabilites.entity.boss.BossStageAction;
 import com.gildedgames.aether.api.capabilites.entity.boss.IBossManager;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.boss.EntitySlider;
 import com.gildedgames.util.core.nbt.NBTHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;

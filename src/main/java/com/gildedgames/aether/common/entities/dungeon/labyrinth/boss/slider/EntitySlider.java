@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.entities.dungeon.labyrinth.boss;
+package com.gildedgames.aether.common.entities.dungeon.labyrinth.boss.slider;
 
 import com.gildedgames.aether.api.capabilites.entity.boss.IBoss;
 import com.gildedgames.aether.api.capabilites.entity.boss.IBossManager;
