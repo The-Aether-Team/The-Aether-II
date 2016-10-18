@@ -30,7 +30,7 @@ public class RenderBattleGolem extends RenderLiving<EntityLiving>
 	@Override
 	protected void preRenderCallback(EntityLiving entityliving, float f)
 	{
-		GL11.glScalef(0.75F, 0.75F, 0.75F);
+		GL11.glScalef(0.6F, 0.6F, 0.6F);
 	}
 
 }

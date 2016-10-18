@@ -46,7 +46,7 @@ public class EntityBattleGolem extends EntityMob implements IRangedAttackMob
 
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
-		this.setSize(2.0F, 2.4F);
+		this.setSize(1.5F, 1.9F);
 
 		this.stepHeight = 1.0F;
 	}
