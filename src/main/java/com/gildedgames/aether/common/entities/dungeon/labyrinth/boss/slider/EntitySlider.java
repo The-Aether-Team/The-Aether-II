@@ -44,7 +44,7 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 
 	private static final DataParameter<Integer> DIRECTION = EntityDataManager.createKey(EntitySlider.class, DataSerializers.VARINT);
 
-	private int chatCooldown, attackTime;
+	private int chatCooldown, attackTime, nextSlideCooldown = 12;
 
 	private TickTimer signalTimer = new TickTimer();
 
@@ -379,6 +379,7 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 		tag.setBoolean("isAwake", this.isAwake());
 		tag.setBoolean("isCritical", this.isCritical());
 		tag.setTag("startLocation", NBTHelper.serializeBlockPos(this.startLocation));
+		tag.setInteger("nextSlideCooldown", this.nextSlideCooldown);
 
 		NBTHelper.fullySerialize("bossManager", this.bossManager, tag);
 	}
@@ -396,6 +397,8 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 			this.startLocation = NBTHelper.readBlockPos((NBTTagCompound) tag.getTag("startLocation"));
 		}
 
+		this.nextSlideCooldown = tag.getInteger("nextSlideCooldown");
+
 		SimpleBossManager<EntitySlider> bossManager = NBTHelper.fullyDeserialize("bossManager", tag);
 
 		if (bossManager != null)
@@ -411,6 +414,19 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 		this.playSound(SoundsAether.slider_move, 2.5F, 1.0F / (this.getRNG().nextFloat() * 0.2F + 0.9F));
 
 		this.setDirection(SlidingHorizontalMoveHelper.Direction.NONE);
+
+		if (this.getBossManager().hasBegun(SecondStageSlider.class))
+		{
+			this.nextSlideCooldown = 2 + this.getRNG().nextInt(3);
+		}
+		else if (this.getBossManager().hasBegun(ThirdStageSlider.class))
+		{
+			this.nextSlideCooldown = this.getRNG().nextInt(2);
+		}
+		else
+		{
+			this.nextSlideCooldown = 6 + this.getRNG().nextInt(6);
+		}
 	}
 
 	@Override
@@ -453,17 +469,7 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 	@Override
 	public int getSlideCooldown()
 	{
-		if (this.getBossManager().hasBegun(SecondStageSlider.class))
-		{
-			return 6;
-		}
-
-		if (this.getBossManager().hasBegun(ThirdStageSlider.class))
-		{
-			return 0;
-		}
-
-		return 12;
+		return this.nextSlideCooldown;
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.dungeon.labyrinth.boss.slider;
 
 import com.gildedgames.aether.api.capabilites.entity.boss.BossStageAction;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.entities.util.sliding.SlidingHorizontalMoveHelper;
 import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.util.core.nbt.NBTHelper;
 import net.minecraft.block.state.IBlockState;
@@ -20,7 +21,7 @@ public class BreakFloorActionSlider implements BossStageAction<EntitySlider>
 
 	@Override public boolean shouldRemove()
 	{
-		return this.timer.getSecondsPassed() >= 11;
+		return this.timer.getSecondsPassed() >= 13;
 	}
 
 	@Override public void update(EntitySlider entity)
@@ -29,6 +30,15 @@ public class BreakFloorActionSlider implements BossStageAction<EntitySlider>
 		{
 			return;
 		}
+
+		if (entity.getDistance(entity.getStartLocation().getX(), entity.getStartLocation().getY(), entity.getStartLocation().getZ()) > 2.0D)
+		{
+			entity.getMoveHelper().setMoveTo(entity.getStartLocation().getX(), entity.getStartLocation().getY(), entity.getStartLocation().getZ(), 3.0D);
+
+			return;
+		}
+
+		((SlidingHorizontalMoveHelper)entity.getMoveHelper()).stop();
 
 		this.timer.tick();
 
