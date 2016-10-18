@@ -19,11 +19,23 @@ import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
 import com.gildedgames.aether.common.entities.projectiles.*;
+import com.gildedgames.aether.common.entities.util.AetherSpawnEggInfo;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class EntitiesAether
 {
+
+	public static HashMap<String, AetherSpawnEggInfo> entityEggs = new LinkedHashMap<String, AetherSpawnEggInfo>();
+
+	public static Map<String, Class<? extends Entity>> stringToClassMapping = new HashMap<String, Class<? extends Entity>>();
+
+	public static Map<Class<? extends Entity>, String> classToStringMapping = new HashMap<Class<? extends Entity>, String>();
+
 	private static int NEXT_ID = 0;
 
 	public static void preInit()
@@ -79,7 +91,9 @@ public class EntitiesAether
 	{
 		registerLivingEntity(entity, id);
 
-		EntityRegistry.registerEgg(entity, eggPrimaryColor, eggSecondaryColor);
+		entityEggs.put(id, new AetherSpawnEggInfo(id, eggPrimaryColor, eggSecondaryColor));
+		classToStringMapping.put(entity, id);
+		stringToClassMapping.put(id, entity);
 	}
 
 	private static void registerLivingEntity(Class<? extends Entity> entity, String id)
@@ -91,4 +105,15 @@ public class EntitiesAether
 	{
 		EntityRegistry.registerModEntity(entity, id, NEXT_ID++, AetherCore.INSTANCE, trackingRange, updateFrequency, sendsVelocityUpdates);
 	}
+
+	public static Class getClassFromID(String id)
+	{
+		return stringToClassMapping.get(id);
+	}
+
+	public static String getStringFromClass(Class clazz)
+	{
+		return clazz != null ? classToStringMapping.get(clazz) : null;
+	}
+
 }

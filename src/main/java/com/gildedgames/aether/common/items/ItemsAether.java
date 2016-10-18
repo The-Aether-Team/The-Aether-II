@@ -65,14 +65,7 @@ import com.gildedgames.aether.common.items.consumables.ItemShardOfLife;
 import com.gildedgames.aether.common.items.consumables.ItemSkyrootConsumableBucket;
 import com.gildedgames.aether.common.items.consumables.ItemStomperPop;
 import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
-import com.gildedgames.aether.common.items.misc.ItemAetherDeveloperWand;
-import com.gildedgames.aether.common.items.misc.ItemAetherFood;
-import com.gildedgames.aether.common.items.misc.ItemAetherPortalFrame;
-import com.gildedgames.aether.common.items.misc.ItemAetherRecord;
-import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
-import com.gildedgames.aether.common.items.misc.ItemSkyrootBed;
-import com.gildedgames.aether.common.items.misc.ItemSkyrootSign;
-import com.gildedgames.aether.common.items.misc.ItemWrappingPaper;
+import com.gildedgames.aether.common.items.misc.*;
 import com.gildedgames.aether.common.items.tools.EnumToolType;
 import com.gildedgames.aether.common.items.tools.ItemArkeniumTool;
 import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
@@ -534,6 +527,8 @@ public class ItemsAether
 			wrapping_paper = new ItemWrappingPaper(),
 			fried_moa_egg = new ItemFood(10, false);
 
+	public static final ItemAetherSpawnEgg aether_spawn_egg = new ItemAetherSpawnEgg();
+
 	public static final Item[] zanite_armor_set = new Item[] { zanite_helmet, zanite_chestplate, zanite_leggings, zanite_boots, zanite_gloves };
 
 	public static final Item[] gravitite_armor_set = new Item[] { gravitite_helmet, gravitite_chestplate, gravitite_leggings, gravitite_boots, gravitite_gloves };
@@ -748,7 +743,7 @@ public class ItemsAether
 		registerItem("skyroot_bed_item", skyroot_bed.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerItem("moa_egg_item", moa_egg);
-		registerItem("rainbow_moa_egg", rainbow_moa_egg.setCreativeTab(CreativeTabs.MISC));
+		registerItem("rainbow_moa_egg", rainbow_moa_egg.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
 		registerItem("aether_developer_wand", aether_developer_wand);
 
@@ -858,6 +853,8 @@ public class ItemsAether
 		registerItem("wrapping_paper", wrapping_paper.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
 		registerItem("fried_moa_egg", fried_moa_egg.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+
+		registerItem("aether_spawn_egg", aether_spawn_egg.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
 		final TemperatureHandler temperatureHandler = new TemperatureHandler();
 
