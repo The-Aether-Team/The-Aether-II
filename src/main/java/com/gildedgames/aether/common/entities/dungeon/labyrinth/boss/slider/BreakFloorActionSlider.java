@@ -55,7 +55,7 @@ public class BreakFloorActionSlider implements BossStageAction<EntitySlider>
 
 					if (entity.getRNG().nextInt(5) == 0 && state != null && state.getBlock() == BlocksAether.unstable_labyrinth_capstone)
 					{
-						entity.worldObj.setBlockToAir(pos);
+						entity.worldObj.destroyBlock(pos, false);
 					}
 				}
 			}
@@ -71,7 +71,7 @@ public class BreakFloorActionSlider implements BossStageAction<EntitySlider>
 
 				if (state != null && state.getBlock() == BlocksAether.unstable_labyrinth_capstone)
 				{
-					entity.worldObj.setBlockToAir(pos);
+					entity.worldObj.destroyBlock(pos, false);
 				}
 			}
 		}
