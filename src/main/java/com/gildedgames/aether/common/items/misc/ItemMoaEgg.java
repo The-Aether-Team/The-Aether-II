@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.genes.util.GeneUtil;
 import com.gildedgames.aether.common.genes.util.SimpleGeneStorage;
+import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
 import com.gildedgames.util.core.UtilModule;
 import net.minecraft.block.SoundType;
@@ -95,7 +96,7 @@ public class ItemMoaEgg extends Item
 	{
 		MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);
 
-		if (genePool.getFeathers() != null)
+		if (genePool.getFeathers() != null && stack.getItem() != ItemsAether.rainbow_moa_egg)
 		{
 			creativeList.add("\u2022 " + genePool.getFeathers().gene().localizedName() + " " + I18n.format("moa.feathers"));
 			creativeList.add("\u2022 " + genePool.getKeratin().gene().localizedName() + " " + I18n.format("moa.keratin"));
