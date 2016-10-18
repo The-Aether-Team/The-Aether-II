@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.entities.projectiles;
 
-import com.gildedgames.aether.common.entities.item.EntityRewardItemStack;
 import com.gildedgames.aether.common.util.RandomCraftedItemSelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -54,7 +53,7 @@ public class EntitySentryVaultbox extends EntityThrowable
 
     				if (!this.worldObj.isRemote)
     				{
-    					ItemStack reward = this.itemSelector.getRandomItem(this.rand);
+    					ItemStack reward = this.itemSelector.create(this.rand);
         				
         				Entity entity = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, reward);
     					

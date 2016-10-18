@@ -294,7 +294,7 @@ public class ItemModelsAether
 
 		registerItemModels(ItemsAether.bolt, new ItemModelBuilder("bolts/")
 				.add(ItemBoltType.SKYROOT.ordinal(), "skyroot_bolt")
-				.add(ItemBoltType.STONE.ordinal(), "holystone_bolt")
+				.add(ItemBoltType.HOLYSTONE.ordinal(), "holystone_bolt")
 				.add(ItemBoltType.ZANITE.ordinal(), "zanite_bolt")
 				.add(ItemBoltType.GRAVITITE.ordinal(), "gravitite_bolt")
 				.add(ItemBoltType.ARKENIUM.ordinal(), "arkenium_bolt"));

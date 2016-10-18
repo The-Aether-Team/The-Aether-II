@@ -2,6 +2,8 @@ package com.gildedgames.aether.common.entities.dungeon.labyrinth.boss.slider;
 
 import com.gildedgames.aether.api.capabilites.entity.boss.IBoss;
 import com.gildedgames.aether.api.capabilites.entity.boss.IBossManager;
+import com.gildedgames.aether.common.registry.LootDefinitions;
+import com.gildedgames.aether.api.loot.LootPool;
 import com.gildedgames.aether.common.entities.util.SimpleBossManager;
 import com.gildedgames.aether.common.entities.util.sliding.EntitySliding;
 import com.gildedgames.aether.common.entities.util.sliding.SlidingHorizontalMoveHelper;
@@ -82,7 +84,7 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 		this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(500);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10);
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(300);
 		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
 	}
@@ -481,9 +483,16 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 		return true;
 	}
 
-	@Override public IBossManager<EntitySlider> getBossManager()
+	@Override
+	public IBossManager<EntitySlider> getBossManager()
 	{
 		return this.bossManager;
+	}
+
+	@Override
+	public LootPool getLootPool()
+	{
+		return LootDefinitions.LABYRINTH_FINAL_BOSS;
 	}
 
 }

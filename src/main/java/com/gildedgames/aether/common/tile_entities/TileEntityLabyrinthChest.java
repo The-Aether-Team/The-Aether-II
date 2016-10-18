@@ -1,9 +1,8 @@
 package com.gildedgames.aether.common.tile_entities;
 
-import com.gildedgames.aether.api.capabilites.items.properties.ItemRarity;
 import com.gildedgames.aether.common.blocks.containers.BlockLabyrinthChest;
-import com.gildedgames.aether.common.world.dungeon.LootDefinitions;
-import com.gildedgames.aether.common.world.dungeon.LootGenerator;
+import com.gildedgames.aether.common.registry.LootDefinitions;
+import com.gildedgames.aether.api.loot.LootGenerator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
@@ -29,7 +28,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 	private int ticksSinceSync;
 	private String customName;
 
-	private boolean isMimic, generateLoot, hasInit;
+	private boolean isMimic, generateLoot, hasGeneratedLoot;
 
 	public TileEntityLabyrinthChest()
 	{
@@ -51,7 +50,47 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 	public void setGenerateLoot(boolean flag)
 	{
 		this.generateLoot = flag;
-		this.hasInit = false;
+		this.hasGeneratedLoot = false;
+	}
+
+	public void generateLootInside()
+	{
+		if (!this.generateLoot)
+		{
+			return;
+		}
+
+		if (!this.hasGeneratedLoot)
+		{
+			this.isMimic = this.worldObj.rand.nextInt(5) == 0;
+
+			if (this.isMimic)
+			{
+				this.worldObj.setBlockToAir(this.pos);
+
+				return;
+			}
+
+			int commonCount = 2 + this.worldObj.rand.nextInt(3);
+
+			for (int i = 0; i < commonCount; i++)
+			{
+				int slotID = this.worldObj.rand.nextInt(this.getSizeInventory());
+
+				while (this.getStackInSlot(slotID) != null)
+				{
+					slotID = this.worldObj.rand.nextInt(this.getSizeInventory());
+				}
+
+				ItemStack stack = LootGenerator.generate(LootDefinitions.LABYRINTH_TRASH, this.worldObj.rand);
+
+				this.setInventorySlotContentsWithoutMarking(slotID, stack);
+			}
+
+			this.markDirty();
+
+			this.hasGeneratedLoot = true;
+		}
 	}
 
 	public void setCustomName(String name)
@@ -67,43 +106,6 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 
 	public void update()
 	{
-		if (!this.hasInit)
-		{
-			if (this.generateLoot)
-			{
-				this.isMimic = this.worldObj.rand.nextBoolean();
-
-				int commonCount = 3 + this.worldObj.rand.nextInt(2);
-				int rareCount = 1 + this.worldObj.rand.nextInt(2);
-				int epicCount = this.worldObj.rand.nextInt(2);
-
-				for (int i = 0; i < commonCount; i++)
-				{
-					ItemStack stack = LootGenerator.generate(LootDefinitions.SLIDERS_LABYRINTH, ItemRarity.COMMON, this.worldObj.rand);
-
-					this.setInventorySlotContentsWithoutMarking(i, stack);
-				}
-
-				for (int i = 0; i < rareCount; i++)
-				{
-					ItemStack stack = LootGenerator.generate(LootDefinitions.SLIDERS_LABYRINTH, ItemRarity.RARE, this.worldObj.rand);
-
-					this.setInventorySlotContentsWithoutMarking(commonCount + i, stack);
-				}
-
-				for (int i = 0; i < epicCount; i++)
-				{
-					ItemStack stack = LootGenerator.generate(LootDefinitions.SLIDERS_LABYRINTH, ItemRarity.EPIC, this.worldObj.rand);
-
-					this.setInventorySlotContentsWithoutMarking(commonCount + rareCount + i, stack);
-				}
-
-				this.markDirty();
-			}
-
-			this.hasInit = true;
-		}
-
 		int i = this.pos.getX();
 		int j = this.pos.getY();
 		int k = this.pos.getZ();
@@ -386,7 +388,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 		}
 
 		this.isMimic = compound.getBoolean("isMimic");
-		this.hasInit = compound.getBoolean("hasInit");
+		this.hasGeneratedLoot = compound.getBoolean("hasGeneratedLoot");
 		this.generateLoot = compound.getBoolean("generateLoot");
 	}
 
@@ -414,7 +416,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 		}
 
 		compound.setBoolean("isMimic", this.isMimic);
-		compound.setBoolean("hasInit", this.hasInit);
+		compound.setBoolean("hasGeneratedLoot", this.hasGeneratedLoot);
 		compound.setBoolean("generateLoot", this.generateLoot);
 
 		return compound;

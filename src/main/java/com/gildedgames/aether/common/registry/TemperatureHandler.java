@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.registry;
 
 import com.gildedgames.aether.api.capabilites.items.properties.TemperatureProperties;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
 import com.gildedgames.aether.common.entities.util.MoaNest;
@@ -9,8 +8,6 @@ import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.items.ItemIrradiated;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -69,7 +66,7 @@ public class TemperatureHandler implements TemperatureProperties
             {
                 ItemIrradiated irradiated = (ItemIrradiated)stack.getItem();
 
-                return irradiated.getItemSelector().getRandomItem(rand);
+                return irradiated.getItemSelector().create(rand);
             }
         }
 

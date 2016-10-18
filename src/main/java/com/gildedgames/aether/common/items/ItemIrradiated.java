@@ -1,19 +1,19 @@
 package com.gildedgames.aether.common.items;
 
-import com.gildedgames.aether.common.crafting.loot.IItemSelector;
+import com.gildedgames.aether.api.loot.Loot;
 
 public class ItemIrradiated extends ItemIrradiatedVisuals
 {
 
-    private IItemSelector itemSelector;
+    private Loot itemSelector;
 
 
-    public ItemIrradiated(IItemSelector itemSelector)
+    public ItemIrradiated(Loot itemSelector)
     {
         this.itemSelector = itemSelector;
     }
 
-    public IItemSelector getItemSelector()
+    public Loot getItemSelector()
     {
         return this.itemSelector;
     }

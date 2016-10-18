@@ -80,11 +80,9 @@ public class BlockLabyrinthChest extends BlockContainer
 			{
 				TileEntityLabyrinthChest chest = (TileEntityLabyrinthChest)te;
 
-				if (chest.isMimic())
+				if (chest.generatesLoot())
 				{
-					world.setBlockToAir(pos);
-
-					return true;
+					chest.generateLootInside();
 				}
 			}
 

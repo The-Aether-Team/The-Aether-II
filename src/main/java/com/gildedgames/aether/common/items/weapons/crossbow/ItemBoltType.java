@@ -4,7 +4,7 @@ public enum ItemBoltType
 {
 	/* DAMAGES ARE NOT FINAL */
 	SKYROOT(1.0f, "skyroot"),
-	STONE(2.0f, "holystone"),
+	HOLYSTONE(2.0f, "holystone"),
 	ZANITE(3.5f, "zanite"),
 	ARKENIUM(5.0f, "arkenium"),
 	GRAVITITE(7.0f, "gravitite");

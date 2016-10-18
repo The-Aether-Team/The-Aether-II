@@ -1,8 +1,10 @@
 package com.gildedgames.aether.common.blocks.dungeon;
 
+import com.gildedgames.aether.api.loot.LootGenerator;
 import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
+import com.gildedgames.aether.common.registry.LootDefinitions;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
@@ -83,15 +85,29 @@ public class BlockLabyrinthContainer extends Block implements IBlockVariants {
 	{
 		if (!world.isRemote && world.getGameRules().getBoolean("doTileDrops"))
 		{
-			int amount = world.rand.nextInt(8) + 3;
-
-			while (amount > 0)
+			if (world.rand.nextInt(3) == 0)
 			{
-				int split = EntityXPOrb.getXPSplit(amount);
+				int amount = world.rand.nextInt(8) + 3;
 
-				amount -= split;
+				while (amount > 0)
+				{
+					int split = EntityXPOrb.getXPSplit(amount);
 
-				world.spawnEntityInWorld(new EntityXPOrb(world, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, split));
+					amount -= split;
+
+					world.spawnEntityInWorld(new EntityXPOrb(world, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, split));
+				}
+			}
+			else
+			{
+				int count = state.getValue(PROPERTY_VARIANT) == VARIANT_LARGE ? 2 : 1;
+
+				for (int i = 0; i < count; i++)
+				{
+					ItemStack loot = LootGenerator.generate(LootDefinitions.LABYRINTH_TRASH, world.rand);
+
+					Block.spawnAsEntity(world, pos, loot);
+				}
 			}
 		}
 	}

@@ -1,20 +1,15 @@
 package com.gildedgames.aether.common.util;
 
-import com.gildedgames.aether.common.crafting.loot.IItemSelector;
-import com.gildedgames.util.core.util.GGHelper;
+import com.gildedgames.aether.api.loot.Loot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.ShapedRecipes;
-import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraftforge.fml.common.registry.GameData;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class RandomItemSelector implements IItemSelector
+public class RandomItemSelector implements Loot
 {
 
 	private ArrayList<ItemStack> validStackCache;
@@ -27,7 +22,7 @@ public class RandomItemSelector implements IItemSelector
 	}
 
 	@Override
-	public ItemStack getRandomItem(Random random)
+	public ItemStack create(Random random)
 	{
 		if (this.validStackCache == null)
 		{
@@ -59,6 +54,12 @@ public class RandomItemSelector implements IItemSelector
 		stack.stackSize = 1;
 
 		return stack;
+	}
+
+	@Override
+	public ItemStack getCloningSource()
+	{
+		return null;
 	}
 
 }

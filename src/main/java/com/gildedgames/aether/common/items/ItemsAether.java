@@ -875,15 +875,30 @@ public class ItemsAether
 		AetherAPI.temperature().register(ItemsAether.irradiated_neckwear, temperatureHandler);
 		AetherAPI.temperature().register(ItemsAether.irradiated_charm, temperatureHandler);
 
+		AetherAPI.equipment().register(ItemsAether.neptune_helmet, ItemRarity.COMMON, null);
+		AetherAPI.equipment().register(ItemsAether.neptune_chestplate, ItemRarity.COMMON, null);
+		AetherAPI.equipment().register(ItemsAether.neptune_leggings, ItemRarity.COMMON, null);
+		AetherAPI.equipment().register(ItemsAether.neptune_boots, ItemRarity.COMMON, null);
+		AetherAPI.equipment().register(ItemsAether.neptune_gloves, ItemRarity.COMMON, ItemEquipmentType.HANDWEAR);
+
+		AetherAPI.equipment().register(ItemsAether.valkyrie_helmet, ItemRarity.RARE, null);
+		AetherAPI.equipment().register(ItemsAether.valkyrie_chestplate, ItemRarity.RARE, null);
+		AetherAPI.equipment().register(ItemsAether.valkyrie_leggings, ItemRarity.RARE, null);
+		AetherAPI.equipment().register(ItemsAether.valkyrie_boots, ItemRarity.RARE, null);
+		AetherAPI.equipment().register(ItemsAether.valkyrie_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
+
+		AetherAPI.equipment().register(ItemsAether.phoenix_helmet, ItemRarity.EPIC, null);
+		AetherAPI.equipment().register(ItemsAether.phoenix_chestplate, ItemRarity.EPIC, null);
+		AetherAPI.equipment().register(ItemsAether.phoenix_leggings, ItemRarity.EPIC, null);
+		AetherAPI.equipment().register(ItemsAether.phoenix_boots, ItemRarity.EPIC, null);
+		AetherAPI.equipment().register(ItemsAether.phoenix_gloves, ItemRarity.EPIC, ItemEquipmentType.HANDWEAR);
+
 		AetherAPI.equipment().register(ItemsAether.iron_ring, ItemRarity.NONE, ItemEquipmentType.RING);
 		AetherAPI.equipment().register(ItemsAether.gold_ring, ItemRarity.NONE, ItemEquipmentType.RING);
 		AetherAPI.equipment().register(ItemsAether.zanite_ring, ItemRarity.NONE, ItemEquipmentType.RING);
 
 		AetherAPI.equipment().register(ItemsAether.zanite_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
 		AetherAPI.equipment().register(ItemsAether.gravitite_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
-		AetherAPI.equipment().register(ItemsAether.valkyrie_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
-		AetherAPI.equipment().register(ItemsAether.neptune_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
-		AetherAPI.equipment().register(ItemsAether.phoenix_gloves, ItemRarity.RARE, ItemEquipmentType.HANDWEAR);
 		AetherAPI.equipment().register(ItemsAether.leather_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
 		AetherAPI.equipment().register(ItemsAether.iron_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
 		AetherAPI.equipment().register(ItemsAether.gold_gloves, ItemRarity.NONE, ItemEquipmentType.HANDWEAR);
@@ -917,13 +932,13 @@ public class ItemsAether
 		AetherAPI.equipment().register(ItemsAether.gold_pendant, ItemRarity.NONE, ItemEquipmentType.NECKWEAR);
 		AetherAPI.equipment().register(ItemsAether.zanite_pendant, ItemRarity.NONE, ItemEquipmentType.NECKWEAR);
 
-		AetherAPI.equipment().register(ItemsAether.ice_pendant, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
 		AetherAPI.equipment().register(ItemsAether.zanite_studded_choker, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
 		AetherAPI.equipment().register(ItemsAether.lesser_amulet_of_growth, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
 		AetherAPI.equipment().register(ItemsAether.hide_gorget, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
 		AetherAPI.equipment().register(ItemsAether.fleeting_scarf, ItemRarity.COMMON, ItemEquipmentType.NECKWEAR);
-		AetherAPI.equipment().register(ItemsAether.muggers_cloak, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
 
+		AetherAPI.equipment().register(ItemsAether.ice_pendant, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
+		AetherAPI.equipment().register(ItemsAether.muggers_cloak, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
 		AetherAPI.equipment().register(ItemsAether.amulet_of_growth, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
 		AetherAPI.equipment().register(ItemsAether.arkenium_studded_choker, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
 		AetherAPI.equipment().register(ItemsAether.raegorite_gorget, ItemRarity.RARE, ItemEquipmentType.NECKWEAR);
