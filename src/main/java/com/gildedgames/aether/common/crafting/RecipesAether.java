@@ -191,8 +191,8 @@ public class RecipesAether implements IAltarRecipeRegistry
 				'X', new ItemStack(BlocksAether.icestone_bricks));
 		registerShapedRecipe(new ItemStack(BlocksAether.carved_stone_wall, 6), "XXX", "XXX",
 				'X', new ItemStack(BlocksAether.carved_stone));
-		registerShapedRecipe(new ItemStack(BlocksAether.aerogel_wall, 6), "XXX", "XXX",
-				'X', new ItemStack(BlocksAether.aerogel));
+		registerShapedRecipe(new ItemStack(BlocksAether.scatterglass_wall, 6), "XXX", "XXX",
+				'X', new ItemStack(BlocksAether.crude_scatterglass));
 
 		// Slabs
 
@@ -340,8 +340,8 @@ public class RecipesAether implements IAltarRecipeRegistry
 		registerShapedRecipe(new ItemStack(BlocksAether.holystone_brick_stairs, 4), "U  ", "UU ", "UUU",
 				'U', new ItemStack(BlocksAether.holystone_brick));
 
-		registerShapedRecipe(new ItemStack(BlocksAether.aerogel_stairs, 4), "U  ", "UU ", "UUU",
-				'U', new ItemStack(BlocksAether.aerogel));
+		registerShapedRecipe(new ItemStack(BlocksAether.scatterglass_stairs, 4), "U  ", "UU ", "UUU",
+				'U', new ItemStack(BlocksAether.crude_scatterglass));
 	}
 
 	private void registerToolRecipes()

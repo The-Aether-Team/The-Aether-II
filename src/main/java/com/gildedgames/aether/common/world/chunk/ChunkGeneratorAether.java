@@ -323,7 +323,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 			{
 				for (int y = 0; y < 10; y++)
 				{
-					primer.setBlockState(x, y, z, BlocksAether.aerogel.getDefaultState());
+					primer.setBlockState(x, y, z, BlocksAether.crude_scatterglass.getDefaultState());
 				}
 			}
 		}

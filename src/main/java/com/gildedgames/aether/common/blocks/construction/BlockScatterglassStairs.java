@@ -1,5 +1,6 @@
-package com.gildedgames.aether.common.blocks.construction.walls;
+package com.gildedgames.aether.common.blocks.construction;
 
+import com.gildedgames.aether.common.blocks.util.BlockCustomStairs;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -8,12 +9,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-// Only exists because Aerogel walls are translucent.
-public class BlockAerogelWall extends BlockCustomWall
+public class BlockScatterglassStairs extends BlockCustomStairs
 {
-	public BlockAerogelWall(IBlockState state, float hardness, float resistance)
+	public BlockScatterglassStairs(IBlockState state)
 	{
-		super(state, hardness, resistance);
+		super(state);
 	}
 
 	@Override

@@ -2,9 +2,9 @@
 	"forge_marker": 1,
 	"defaults": {
 		"textures": {
-			"bottom": "aether:blocks/aerogel",
-			"side": "aether:blocks/aerogel",
-			"top": "aether:blocks/aerogel"
+			"bottom": "aether:blocks/scatterglass",
+			"side": "aether:blocks/scatterglass",
+			"top": "aether:blocks/scatterglass"
 		}
 	},
 	"variants": {

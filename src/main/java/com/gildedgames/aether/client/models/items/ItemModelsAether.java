@@ -135,7 +135,8 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.quicksoil, "quicksoil");
 		registerItemModels(BlocksAether.icestone_ore, "icestone_ore");
 		registerItemModels(BlocksAether.icestone_bricks, "icestone_bricks");
-		registerItemModels(BlocksAether.aerogel, "aerogel");
+		registerItemModels(BlocksAether.crude_scatterglass, "crude_scatterglass");
+		registerItemModels(BlocksAether.scatterglass, "scatterglass");
 
 		registerItemModels(BlocksAether.aether_crafting_table, new ItemModelBuilder("crafting_tables/")
 				.add(BlockAetherCraftingTable.SKYROOT.getMeta(), "skyroot_crafting_table")
@@ -358,7 +359,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.carved_stone_wall, "aether_wall/carved_stone_wall");
 		registerItemModels(BlocksAether.skyroot_log_wall, "aether_wall/skyroot_log_wall");
 		registerItemModels(BlocksAether.icestone_wall, "aether_wall/icestone_wall");
-		registerItemModels(BlocksAether.aerogel_wall, "aether_wall/aerogel_wall");
+		registerItemModels(BlocksAether.scatterglass_wall, "aether_wall/scatterglass_wall");
 		registerItemModels(BlocksAether.divine_stone_wall, "aether_wall/divine_stone_wall");
 		registerItemModels(BlocksAether.sentry_stone_wall, "aether_wall/sentry_stone_wall");
 		registerItemModels(BlocksAether.divine_sentry_wall, "aether_wall/divine_sentry_wall");
@@ -461,7 +462,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.carved_stone_stairs, "aether_stairs/carved_stone_stairs");
 		registerItemModels(BlocksAether.divine_carved_stone_stairs, "aether_stairs/divine_carved_stone_stairs");
 		registerItemModels(BlocksAether.icestone_brick_stairs, "aether_stairs/icestone_brick_stairs");
-		registerItemModels(BlocksAether.aerogel_stairs, "aether_stairs/aerogel_stairs");
+		registerItemModels(BlocksAether.scatterglass_stairs, "aether_stairs/scatterglass_stairs");
 
 		registerItemModels(BlocksAether.woven_sticks, new ItemModelBuilder("woven_sticks/")
 				.add(BlockWovenSticks.SKYROOT.getMeta(), "woven_skyroot_sticks")

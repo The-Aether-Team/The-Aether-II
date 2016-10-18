@@ -1,8 +1,0 @@
-{
-	"parent": "block/stairs",
-	"textures": {
-		"bottom": "aether:blocks/aerogel",
-		"side": "aether:blocks/aerogel",
-		"top": "aether:blocks/aerogel"
-	}
-}

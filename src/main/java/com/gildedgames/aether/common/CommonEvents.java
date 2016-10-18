@@ -425,7 +425,7 @@ public class CommonEvents
 	{
 		if (player.worldObj.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
-			player.worldObj.setBlockState(pos, BlocksAether.aerogel.getDefaultState());
+			player.worldObj.setBlockState(pos, BlocksAether.crude_scatterglass.getDefaultState());
 
 			if (!player.capabilities.isCreativeMode)
 			{

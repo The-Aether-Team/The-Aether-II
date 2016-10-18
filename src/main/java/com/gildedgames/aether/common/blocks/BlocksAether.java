@@ -12,7 +12,7 @@ import com.gildedgames.aether.common.blocks.construction.redstone.BlockSkyrootBu
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockSkyrootPressurePlate;
 import com.gildedgames.aether.common.blocks.construction.signs.BlockStandingSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.signs.BlockWallSkyrootSign;
-import com.gildedgames.aether.common.blocks.construction.walls.BlockAerogelWall;
+import com.gildedgames.aether.common.blocks.construction.walls.BlockScatterglassWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockCustomWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockDivineWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockSkyrootWall;
@@ -97,7 +97,9 @@ public class BlocksAether
 
 	public static final BlockIcestoneOre icestone_ore = new BlockIcestoneOre();
 
-	public static final BlockAerogel aerogel = new BlockAerogel();
+	public static final BlockCrudeScatterglass crude_scatterglass = new BlockCrudeScatterglass();
+
+	public static final BlockScatterglass scatterglass = new BlockScatterglass();
 
 	public static final Block zanite_block = new BlockCustom(Material.IRON).setSoundType(SoundType.METAL).setHardness(5f);
 
@@ -222,7 +224,7 @@ public class BlocksAether
 			holystone_brick_wall = new BlockCustomWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f),
 			carved_stone_wall = new BlockCustomWall(BlocksAether.carved_stone.getDefaultState(), 1.0f, 10.0f),
 			icestone_wall = new BlockCustomWall(BlocksAether.icestone_bricks.getDefaultState(), 3.0f, 10.0f),
-			aerogel_wall = new BlockAerogelWall(BlocksAether.aerogel.getDefaultState(), 1.0f, 10.0f),
+			scatterglass_wall = new BlockScatterglassWall(BlocksAether.scatterglass.getDefaultState(), 1.0f, 10.0f),
 			skyroot_log_wall = new BlockSkyrootWall(BlocksAether.skyroot_log.getDefaultState(), 2.0f, 10.0f),
 			divine_stone_wall = new BlockDivineWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f),
 			sentry_stone_wall = new BlockCustomWall(BlocksAether.labyrinth_lightstone.getDefaultState(), 1.0f, 10.0f),
@@ -251,7 +253,7 @@ public class BlocksAether
 			carved_stone_stairs = new BlockCustomStairs(BlocksAether.carved_stone.getDefaultState().withProperty(BlockDivine.PROPERTY_IS_DIVINE, true)),
 			divine_carved_stone_stairs = new BlockCustomStairs(BlocksAether.carved_stone.getDefaultState().withProperty(BlockDivine.PROPERTY_IS_DIVINE, true)),
 			icestone_brick_stairs = new BlockCustomStairs(BlocksAether.icestone_bricks.getDefaultState()),
-			aerogel_stairs = new BlockCustomStairs(BlocksAether.aerogel.getDefaultState());
+			scatterglass_stairs = new BlockScatterglassStairs(BlocksAether.scatterglass.getDefaultState());
 
 	public static final Block woven_sticks = new BlockWovenSticks();
 
@@ -322,7 +324,9 @@ public class BlocksAether
 
 		registerBlock("altar", BlocksAether.altar.setCreativeTab(CreativeTabsAether.BLOCKS));
 
-		registerBlock("aerogel", BlocksAether.aerogel.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("crude_scatterglass", BlocksAether.crude_scatterglass.setCreativeTab(CreativeTabsAether.BLOCKS));
+
+		registerBlock("scatterglass", BlocksAether.scatterglass.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerBlock("zanite_block", BlocksAether.zanite_block.setCreativeTab(CreativeTabsAether.BLOCKS));
 
@@ -379,7 +383,7 @@ public class BlocksAether
 		registerBlock("carved_stone_wall", BlocksAether.carved_stone_wall.setCreativeTab(CreativeTabsAether.BLOCKS));
 		registerBlock("icestone_wall", BlocksAether.icestone_wall.setCreativeTab(CreativeTabsAether.BLOCKS));
 		registerBlock("skyroot_log_wall", BlocksAether.skyroot_log_wall.setCreativeTab(CreativeTabsAether.BLOCKS));
-		registerBlock("aerogel_wall", BlocksAether.aerogel_wall.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("scatterglass_wall", BlocksAether.scatterglass_wall.setCreativeTab(CreativeTabsAether.BLOCKS));
 		registerBlock("sentry_stone_wall", BlocksAether.sentry_stone_wall.setCreativeTab(CreativeTabsAether.BLOCKS));
 		registerBlock("divine_sentry_wall", BlocksAether.divine_sentry_wall.setCreativeTab(CreativeTabsAether.BLOCKS));
 		registerBlock("divine_stone_wall", BlocksAether.divine_stone_wall.setCreativeTab(CreativeTabsAether.BLOCKS));
@@ -420,7 +424,7 @@ public class BlocksAether
 		registerBlock("carved_stone_stairs", BlocksAether.carved_stone_stairs.setCreativeTab(CreativeTabsAether.BLOCKS));
 		registerBlock("divine_carved_stone_stairs", BlocksAether.divine_carved_stone_stairs.setCreativeTab(CreativeTabsAether.BLOCKS));
 		registerBlock("icestone_brick_stairs", BlocksAether.icestone_brick_stairs.setCreativeTab(CreativeTabsAether.BLOCKS));
-		registerBlock("aerogel_stairs", BlocksAether.aerogel_stairs.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("scatterglass_stairs", BlocksAether.scatterglass_stairs.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerBlock("woven_sticks", BlocksAether.woven_sticks.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.woven_sticks));
 		registerBlock("moa_egg", BlocksAether.moa_egg);
@@ -499,7 +503,7 @@ public class BlocksAether
 
 		icestone_ore.setHarvestLevel("pickaxe", 1);
 		icestone_bricks.setHarvestLevel("pickaxe", 1);
-		aerogel.setHarvestLevel("pickaxe", 1);
+		crude_scatterglass.setHarvestLevel("pickaxe", 1);
 
 		altar.setHarvestLevel("pickaxe", 0);
 		holystone_furnace.setHarvestLevel("pickaxe", 0);
@@ -523,7 +527,7 @@ public class BlocksAether
 		carved_stone_wall.setHarvestLevel("pickaxe", 0);
 		skyroot_log_wall.setHarvestLevel("axe", 0);
 		icestone_wall.setHarvestLevel("pickaxe", 1);
-		aerogel_wall.setHarvestLevel("pickaxe", 1);
+		scatterglass_wall.setHarvestLevel("pickaxe", 1);
 
 		skyroot_slab.setHarvestLevel("axe", 0);
 		holystone_slab.setHarvestLevel("pickaxe", 0);

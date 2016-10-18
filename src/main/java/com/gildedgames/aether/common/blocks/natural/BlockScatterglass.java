@@ -7,9 +7,9 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockAerogel extends BlockBreakable
+public class BlockScatterglass extends BlockBreakable
 {
-	public BlockAerogel()
+	public BlockScatterglass()
 	{
 		super(Material.ROCK, false);
 

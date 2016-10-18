@@ -1,6 +1,6 @@
 {
 	"parent": "block/wall_inventory",
 	"textures": {
-		"wall": "aether:blocks/aerogel"
+		"wall": "aether:blocks/scatterglass"
 	}
 }

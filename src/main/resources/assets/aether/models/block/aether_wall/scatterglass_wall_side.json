@@ -1,6 +1,6 @@
 {
 	"parent": "block/wall_side",
 	"textures": {
-		"wall": "aether:blocks/aerogel"
+		"wall": "aether:blocks/scatterglass"
 	}
 }

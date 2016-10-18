@@ -1,6 +1,6 @@
 {
 	"parent": "block/wall_post",
 	"textures": {
-		"wall": "aether:blocks/aerogel"
+		"wall": "aether:blocks/scatterglass"
 	}
 }
