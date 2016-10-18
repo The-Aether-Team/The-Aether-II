@@ -119,7 +119,11 @@ public class WorldProviderSliderLabyrinth extends WorldProvider
 	@Override
 	protected void generateLightBrightnessTable()
 	{
-		super.generateLightBrightnessTable();
+		for (int i = 0; i <= 15; ++i)
+		{
+			float factor = 1.0F - (float) i / 15.0F;
+
+			this.lightBrightnessTable[i] = (1.0F - factor) / (factor * 3.0F + 1.0F) * 0.9F + 0.1F;
+		}
 	}
-	
 }

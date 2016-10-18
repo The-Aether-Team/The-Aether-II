@@ -59,7 +59,7 @@ public class GlowingBlockModel implements IModel
 		
 		this.format.addElement(DefaultVertexFormats.TEX_2S);
 
-		return new GlowingBlockBakedModel(this.format, bakedTextureGetter, base, overlay);
+		return new GlowingBlockBakedModel(this.format, bakedTextureGetter, this.base, this.overlay);
 	}
 
 	@Override

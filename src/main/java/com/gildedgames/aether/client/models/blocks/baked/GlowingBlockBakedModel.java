@@ -33,9 +33,9 @@ public class GlowingBlockBakedModel implements IBakedModel
 
 	private void putVertex(UnpackedBakedQuad.Builder builder, IBlockState state, Vec3d normal, EnumFacing side, double x, double y, double z, TextureAtlasSprite sprite, float u, float v, boolean hasBrightness, int brightness)
 	{
-		for (int e = 0; e < format.getElementCount(); e++)
+		for (int e = 0; e < this.format.getElementCount(); e++)
 		{
-			switch (format.getElement(e).getUsage())
+			switch (this.format.getElement(e).getUsage())
 			{
 			case POSITION:
 				builder.put(e, (float) x, (float) y, (float) z);
@@ -44,7 +44,7 @@ public class GlowingBlockBakedModel implements IBakedModel
 				builder.put(e, 1.0F, 1.0F, 1.0F, 1.0F);
 				break;
 			case UV:
-				if (format.getElement(e).getIndex() == 1)
+				if (this.format.getElement(e).getIndex() == 1)
 				{
 					if (hasBrightness)
 					{
@@ -78,14 +78,14 @@ public class GlowingBlockBakedModel implements IBakedModel
 	{
 		Vec3d normal = v1.subtract(v2).crossProduct(v3.subtract(v2));
 
-		UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(format);
+		UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(this.format);
 
 		builder.setTexture(sprite);
 
-		putVertex(builder, state, normal, side, v1.xCoord, v1.yCoord, v1.zCoord, sprite, 16, 16, hasBrightness, brightness);
-		putVertex(builder, state, normal, side, v2.xCoord, v2.yCoord, v2.zCoord, sprite, 16, 0, hasBrightness, brightness);
-		putVertex(builder, state, normal, side, v3.xCoord, v3.yCoord, v3.zCoord, sprite, 0, 0, hasBrightness, brightness);
-		putVertex(builder, state, normal, side, v4.xCoord, v4.yCoord, v4.zCoord, sprite, 0, 16, hasBrightness, brightness);
+		this.putVertex(builder, state, normal, side, v1.xCoord, v1.yCoord, v1.zCoord, sprite, 16, 16, hasBrightness, brightness);
+		this.putVertex(builder, state, normal, side, v2.xCoord, v2.yCoord, v2.zCoord, sprite, 16, 0, hasBrightness, brightness);
+		this.putVertex(builder, state, normal, side, v3.xCoord, v3.yCoord, v3.zCoord, sprite, 0, 0, hasBrightness, brightness);
+		this.putVertex(builder, state, normal, side, v4.xCoord, v4.yCoord, v4.zCoord, sprite, 0, 16, hasBrightness, brightness);
 
 		return builder.build();
 	}
@@ -100,21 +100,21 @@ public class GlowingBlockBakedModel implements IBakedModel
 
 		List<BakedQuad> quads = new ArrayList<>();
 
-		quads.add(createQuad(state, new Vec3d(1.0D, 0.0D, 0.0D), new Vec3d(1.0D, 0.0D, 1.0D), new Vec3d(0.0D, 0.0D, 1.0D), new Vec3d(0.0D, 0.0D, 0.0D), EnumFacing.DOWN, this.base, true, 0));
-		quads.add(createQuad(state, new Vec3d(0.0D, 1.0D, 0.0D), new Vec3d(0.0D, 1.0D, 1.0D), new Vec3d(1.0D, 1.0D, 1.0D), new Vec3d(1.0D, 1.0D, 0.0D), EnumFacing.UP, this.base, true, 0));
-		quads.add(createQuad(state, new Vec3d(1.0D, 0.0D, 1.0D), new Vec3d(1.0D, 1.0D, 1.0D), new Vec3d(0.0D, 1.0D, 1.0D), new Vec3d(0.0D, 0.0D, 1.0D), EnumFacing.SOUTH, this.base, true, 0));
-		quads.add(createQuad(state, new Vec3d(0.0D, 0.0D, 0.0D), new Vec3d(0.0D, 1.0D, 0.0D), new Vec3d(1.0D, 1.0D, 0.0D), new Vec3d(1.0D, 0.0D, 0.0D), EnumFacing.NORTH, this.base, true, 0));
-		quads.add(createQuad(state, new Vec3d(0.0D, 0.0D, 1.0D), new Vec3d(0.0D, 1.0D, 1.0D), new Vec3d(0.0D, 1.0D, 0.0D), new Vec3d(0.0D, 0.0D, 0.0D), EnumFacing.WEST, this.base, true, 0));
-		quads.add(createQuad(state, new Vec3d(1.0D, 0.0D, 0.0D), new Vec3d(1.0D, 1.0D, 0.0D), new Vec3d(1.0D, 1.0D, 1.0D), new Vec3d(1.0D, 0.0D, 1.0D), EnumFacing.EAST, this.base, true, 0));
+		quads.add(this.createQuad(state, new Vec3d(1.0D, 0.0D, 0.0D), new Vec3d(1.0D, 0.0D, 1.0D), new Vec3d(0.0D, 0.0D, 1.0D), new Vec3d(0.0D, 0.0D, 0.0D), EnumFacing.DOWN, this.base, true, 0));
+		quads.add(this.createQuad(state, new Vec3d(0.0D, 1.0D, 0.0D), new Vec3d(0.0D, 1.0D, 1.0D), new Vec3d(1.0D, 1.0D, 1.0D), new Vec3d(1.0D, 1.0D, 0.0D), EnumFacing.UP, this.base, true, 0));
+		quads.add(this.createQuad(state, new Vec3d(1.0D, 0.0D, 1.0D), new Vec3d(1.0D, 1.0D, 1.0D), new Vec3d(0.0D, 1.0D, 1.0D), new Vec3d(0.0D, 0.0D, 1.0D), EnumFacing.SOUTH, this.base, true, 0));
+		quads.add(this.createQuad(state, new Vec3d(0.0D, 0.0D, 0.0D), new Vec3d(0.0D, 1.0D, 0.0D), new Vec3d(1.0D, 1.0D, 0.0D), new Vec3d(1.0D, 0.0D, 0.0D), EnumFacing.NORTH, this.base, true, 0));
+		quads.add(this.createQuad(state, new Vec3d(0.0D, 0.0D, 1.0D), new Vec3d(0.0D, 1.0D, 1.0D), new Vec3d(0.0D, 1.0D, 0.0D), new Vec3d(0.0D, 0.0D, 0.0D), EnumFacing.WEST, this.base, true, 0));
+		quads.add(this.createQuad(state, new Vec3d(1.0D, 0.0D, 0.0D), new Vec3d(1.0D, 1.0D, 0.0D), new Vec3d(1.0D, 1.0D, 1.0D), new Vec3d(1.0D, 0.0D, 1.0D), EnumFacing.EAST, this.base, true, 0));
 
-		int brightness = 235;
+		int brightness = 255;
 
-		quads.add(createQuad(state, new Vec3d(1.0D, 0.0D, 0.0D), new Vec3d(1.0D, 0.0D, 1.0D), new Vec3d(0.0D, 0.0D, 1.0D), new Vec3d(0.0D, 0.0D, 0.0D), EnumFacing.DOWN, this.overlay, true, brightness));
-		quads.add(createQuad(state, new Vec3d(0.0D, 1.0D, 0.0D), new Vec3d(0.0D, 1.0D, 1.0D), new Vec3d(1.0D, 1.0D, 1.0D), new Vec3d(1.0D, 1.0D, 0.0D), EnumFacing.UP, this.overlay, true, brightness));
-		quads.add(createQuad(state, new Vec3d(1.0D, 0.0D, 1.0D), new Vec3d(1.0D, 1.0D, 1.0D), new Vec3d(0.0D, 1.0D, 1.0D), new Vec3d(0.0D, 0.0D, 1.0D), EnumFacing.SOUTH, this.overlay, true, brightness));
-		quads.add(createQuad(state, new Vec3d(0.0D, 0.0D, 0.0D), new Vec3d(0.0D, 1.0D, 0.0D), new Vec3d(1.0D, 1.0D, 0.0D), new Vec3d(1.0D, 0.0D, 0.0D), EnumFacing.NORTH, this.overlay, true, brightness));
-		quads.add(createQuad(state, new Vec3d(0.0D, 0.0D, 1.0D), new Vec3d(0.0D, 1.0D, 1.0D), new Vec3d(0.0D, 1.0D, 0.0D), new Vec3d(0.0D, 0.0D, 0.0D), EnumFacing.WEST, this.overlay, true, brightness));
-		quads.add(createQuad(state, new Vec3d(1.0D, 0.0D, 0.0D), new Vec3d(1.0D, 1.0D, 0.0D), new Vec3d(1.0D, 1.0D, 1.0D), new Vec3d(1.0D, 0.0D, 1.0D), EnumFacing.EAST, this.overlay, true, brightness));
+		quads.add(this.createQuad(state, new Vec3d(1.0D, 0.0D, 0.0D), new Vec3d(1.0D, 0.0D, 1.0D), new Vec3d(0.0D, 0.0D, 1.0D), new Vec3d(0.0D, 0.0D, 0.0D), EnumFacing.DOWN, this.overlay, true, brightness));
+		quads.add(this.createQuad(state, new Vec3d(0.0D, 1.0D, 0.0D), new Vec3d(0.0D, 1.0D, 1.0D), new Vec3d(1.0D, 1.0D, 1.0D), new Vec3d(1.0D, 1.0D, 0.0D), EnumFacing.UP, this.overlay, true, brightness));
+		quads.add(this.createQuad(state, new Vec3d(1.0D, 0.0D, 1.0D), new Vec3d(1.0D, 1.0D, 1.0D), new Vec3d(0.0D, 1.0D, 1.0D), new Vec3d(0.0D, 0.0D, 1.0D), EnumFacing.SOUTH, this.overlay, true, brightness));
+		quads.add(this.createQuad(state, new Vec3d(0.0D, 0.0D, 0.0D), new Vec3d(0.0D, 1.0D, 0.0D), new Vec3d(1.0D, 1.0D, 0.0D), new Vec3d(1.0D, 0.0D, 0.0D), EnumFacing.NORTH, this.overlay, true, brightness));
+		quads.add(this.createQuad(state, new Vec3d(0.0D, 0.0D, 1.0D), new Vec3d(0.0D, 1.0D, 1.0D), new Vec3d(0.0D, 1.0D, 0.0D), new Vec3d(0.0D, 0.0D, 0.0D), EnumFacing.WEST, this.overlay, true, brightness));
+		quads.add(this.createQuad(state, new Vec3d(1.0D, 0.0D, 0.0D), new Vec3d(1.0D, 1.0D, 0.0D), new Vec3d(1.0D, 1.0D, 1.0D), new Vec3d(1.0D, 0.0D, 1.0D), EnumFacing.EAST, this.overlay, true, brightness));
 
 		return quads;
 	}
