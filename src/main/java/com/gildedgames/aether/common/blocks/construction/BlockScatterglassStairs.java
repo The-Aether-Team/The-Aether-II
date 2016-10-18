@@ -11,9 +11,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockScatterglassStairs extends BlockCustomStairs
 {
+
 	public BlockScatterglassStairs(IBlockState state)
 	{
 		super(state);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
+	{
+		return super.shouldSideBeRendered(state, world, pos, side);
 	}
 
 	@Override
@@ -24,11 +32,15 @@ public class BlockScatterglassStairs extends BlockCustomStairs
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
+	public boolean isOpaqueCube(IBlockState state)
 	{
-		IBlockState neighborState = world.getBlockState(pos.offset(side.getOpposite()));
-
-		return state != neighborState && super.shouldSideBeRendered(state, world, pos, side);
+		return false;
 	}
+
+	@Override
+	public boolean isFullCube(IBlockState state)
+	{
+		return false;
+	}
+
 }
