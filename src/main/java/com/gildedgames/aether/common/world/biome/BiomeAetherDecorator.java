@@ -109,7 +109,10 @@ public class BiomeAetherDecorator
 			WorldServer worldServer = (WorldServer)world;
 			MinecraftServer server = worldServer.getMinecraftServer();
 
-			this.genSliderLabyrinthEntrance = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_entrance")));
+			if (this.genSliderLabyrinthEntrance == null)
+			{
+				this.genSliderLabyrinthEntrance = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_entrance")));
+			}
 		}
 
 		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(world, random, pos));
@@ -256,7 +259,7 @@ public class BiomeAetherDecorator
 				}
 			}
 		}
-		
+
 		this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));
 
 		this.templatePipeline.constructChunk(world, chunkX, chunkZ);
