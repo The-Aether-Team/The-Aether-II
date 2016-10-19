@@ -47,7 +47,7 @@ public class BlockCrudeScatterglass extends BlockBreakable
 
 		if (!wasPlaced)
 		{
-			Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.scatterglass_shard, world.rand.nextInt(5) + 1));
+			Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.scatterglass_shard, world.rand.nextInt(2) + 1));
 		}
 
 		super.harvestBlock(world, player, pos, state, te, stack);
