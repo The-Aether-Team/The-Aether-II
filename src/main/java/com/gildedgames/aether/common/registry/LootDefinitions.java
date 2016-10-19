@@ -144,6 +144,7 @@ public class LootDefinitions
 
 		Loot[] loot = new Loot[]
 		{
+			new SingleStackLoot(new ItemStack(ItemsAether.shard_of_life)),
 			new RangedLoot(new ItemStack(ItemsAether.icestone_poprocks), 2, 5),
 			new RangedLoot(new ItemStack(ItemsAether.orange_lollipop), 1, 3),
 			new RangedLoot(new ItemStack(ItemsAether.blueberry_lollipop), 1, 3),
