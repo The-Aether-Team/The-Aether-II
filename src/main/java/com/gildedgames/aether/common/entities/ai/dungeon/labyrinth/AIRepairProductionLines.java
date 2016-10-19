@@ -28,9 +28,12 @@ public class AIRepairProductionLines extends EntityAI<EntityLiving>
     {
         List<EntityProductionLine> entityList = this.entity().worldObj.getEntitiesWithinAABB(EntityProductionLine.class, this.entity().getEntityBoundingBox().expand(50.0D, 50.0D, 50.0D));
 
-        this.chosenToRepair = entityList.get(this.entity().getRNG().nextInt(entityList.size()));
+        if (entityList.size() > 0)
+        {
+            this.chosenToRepair = entityList.get(this.entity().getRNG().nextInt(entityList.size()));
 
-        this.entity().getNavigator().tryMoveToEntityLiving(this.chosenToRepair, 0.4D);
+            this.entity().getNavigator().tryMoveToEntityLiving(this.chosenToRepair, 0.4D);
+        }
     }
 
     @Override
@@ -60,6 +63,11 @@ public class AIRepairProductionLines extends EntityAI<EntityLiving>
     @Override
     public void updateTask()
     {
+        if (this.chosenToRepair == null)
+        {
+            return;
+        }
+
         if (this.entity().getDistanceToEntity(this.chosenToRepair) < 3.0F)
         {
             this.repairTimer.tick();
