@@ -156,6 +156,17 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 	}
 
 	@Override
+	protected void dropFewItems(boolean var1, int var2)
+	{
+		this.dropItem(Items.STRING, 1);
+
+		if (this.getRNG().nextBoolean())
+		{
+			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(5) + 1);
+		}
+	}
+
+	@Override
 	public Item getDropItem()
 	{
 		return Items.STRING;

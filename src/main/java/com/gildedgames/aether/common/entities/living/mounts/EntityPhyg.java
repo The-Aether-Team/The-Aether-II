@@ -88,6 +88,23 @@ public class EntityPhyg extends EntityFlyingAnimal
 		return this.rand.nextInt(3);
 	}
 
+
+	@Override
+	protected void dropFewItems(boolean p_70628_1_, int looting)
+	{
+		super.dropFewItems(p_70628_1_, looting);
+
+		if (this.getRNG().nextBoolean())
+		{
+			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(5) + 1);
+		}
+
+		if (this.getRNG().nextBoolean())
+		{
+			this.dropItem(Items.FEATHER, this.getRNG().nextInt(1) + 1);
+		}
+	}
+
 	@Override
 	protected Item getDropItem()
 	{

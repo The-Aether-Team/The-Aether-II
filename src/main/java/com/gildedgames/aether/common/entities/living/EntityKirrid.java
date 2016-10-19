@@ -48,4 +48,15 @@ public class EntityKirrid extends EntitySheep
 		return stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
 	}
 
+	@Override
+	protected void dropFewItems(boolean var1, int var2)
+	{
+		super.dropFewItems(var1, var2);
+
+		if (this.getRNG().nextBoolean())
+		{
+			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(5) + 1);
+		}
+	}
+
 }

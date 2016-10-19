@@ -350,7 +350,7 @@ public class ItemsAether
 			sunlit_scroll = new Item();
 
 	public static final Item moonlit_scroll = new Item(),
-			glamoured_cockatrice_heart = new ItemGlamoured();
+			glamoured_cockatrice_heart = new Item();
 
 	public static final Item damaged_moa_feather = new Item(),
 			osseous_bane = new Item(),
@@ -379,12 +379,12 @@ public class ItemsAether
 			thiefs_gorget = new Item(),
 			moon_sect_warden_gorget = new Item();
 
-	public static final Item glamoured_holystone_chip = new ItemGlamoured(),
-			glamoured_zephyr_husk = new ItemGlamoured(),
-			glamoured_ice_shard = new ItemGlamoured(),
-			glamoured_blue_swet_jelly = new ItemGlamoured(),
-			glamoured_cockatrice_talons = new ItemGlamoured(),
-			glamoured_coal_ember = new ItemGlamoured();
+	public static final Item glamoured_holystone_chip = new Item(),
+			glamoured_zephyr_husk = new Item(),
+			glamoured_ice_shard = new Item(),
+			glamoured_blue_swet_jelly = new Item(),
+			glamoured_cockatrice_talons = new Item(),
+			glamoured_coal_ember = new Item();
 
 	public static final Item granite_ring = new Item(),
 			gust_ring = new Item(),
@@ -438,26 +438,12 @@ public class ItemsAether
 			lesser_ring_of_wisdom = new Item(),
 			ring_of_wisdom = new Item();
 
-	public static final Item iron_screw = new Item(),
-			gold_screw = new Item(),
-			bone_shard = new Item(),
-			skyroot_twig = new Item(),
-			blue_skyroot_twig = new Item(),
-			dark_blue_skyroot_twig = new Item(),
-			blighted_twig = new Item();
+	public static final Item bone_shard = new Item();
 
-	public static final Item enchanted_skyroot_twig = new Item(),
-			cockatrice_heart = new Item(),
-			ice_shard = new Item(),
-			holystone_chip = new Item(),
-			zephyr_husk = new Item(),
-			coal_ember = new Item(),
-			aerogel_chip = new Item();
+	public static final Item holystone_chip = new Item(),
+			scatterglass_shard = new Item();
 
-	public static final Item cockatrice_talons = new Item(),
-			cockatrice_keratin = new Item(),
-			taegore_tusk = new Item(),
-			glamoured_cockatrice_keratin = new ItemGlamoured();
+	public static final Item glamoured_cockatrice_keratin = new Item();
 
 	public static final Item irradiated_chunk = new ItemIrradiated(new RandomItemSelector(new Constraint()
 			{
@@ -820,23 +806,9 @@ public class ItemsAether
 		registerItem("lesser_ring_of_wisdom", lesser_ring_of_wisdom.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("ring_of_wisdom", ring_of_wisdom.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 
-		registerItem("iron_screw", iron_screw.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("gold_screw", gold_screw.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("bone_shard", bone_shard.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("skyroot_twig", skyroot_twig.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("blue_skyroot_twig", blue_skyroot_twig.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("dark_blue_skyroot_twig", dark_blue_skyroot_twig.setCreativeTab(CreativeTabsAether.MATERIALS));
-		//registerItem("blighted_twig", blighted_twig.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("enchanted_skyroot_twig", enchanted_skyroot_twig.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("cockatrice_heart", cockatrice_heart.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("holystone_chip", holystone_chip.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("zephyr_husk", zephyr_husk.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("ice_shard", ice_shard.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("coal_ember", coal_ember.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("aerogel_chip", aerogel_chip.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("cockatrice_keratin", cockatrice_keratin.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("cockatrice_talons", cockatrice_talons.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("taegore_tusk", taegore_tusk.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("scatterglass_shard", scatterglass_shard.setCreativeTab(CreativeTabsAether.MATERIALS));
 
 		registerItem("irradiated_chunk", irradiated_chunk.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("irradiated_sword", irradiated_sword.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.MATERIALS));

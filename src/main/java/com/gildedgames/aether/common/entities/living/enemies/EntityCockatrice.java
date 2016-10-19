@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.living.enemies;
 
 import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
+import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceHide;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceSneakAttack;
@@ -15,6 +16,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityJumpHelper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -141,6 +143,19 @@ public class EntityCockatrice extends EntityMob implements IEntityProperties
 	public boolean isAttacking() { return this.dataManager.get(EntityCockatrice.IS_ATTACKING); }
 
 	public void setAttacking(boolean isAttacking) { this.dataManager.set(EntityCockatrice.IS_ATTACKING, isAttacking); }
+
+	@Override
+	protected void dropFewItems(boolean p_70628_1_, int looting)
+	{
+		super.dropFewItems(p_70628_1_, looting);
+
+		if (this.getRNG().nextBoolean())
+		{
+			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(5) + 1);
+		}
+
+		this.dropItem(Items.FEATHER, this.getRNG().nextInt(2) + 1);
+	}
 
 	@Override
 	public ElementalState getElementalState()

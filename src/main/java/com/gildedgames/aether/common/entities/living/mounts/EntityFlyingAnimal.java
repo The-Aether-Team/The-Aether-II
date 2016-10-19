@@ -129,11 +129,6 @@ public abstract class EntityFlyingAnimal extends EntityAetherAnimal implements I
 	{
 		super.dropFewItems(p_70628_1_, looting);
 
-		this.dropSaddle();
-	}
-
-	protected void dropSaddle()
-	{
 		if (this.isSaddled())
 		{
 			this.dropItem(Items.SADDLE, 1);

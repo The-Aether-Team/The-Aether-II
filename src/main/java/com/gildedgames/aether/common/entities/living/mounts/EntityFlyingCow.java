@@ -176,6 +176,16 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 				this.dropItem(Items.BEEF, 1);
 			}
 		}
+
+		if (this.getRNG().nextBoolean())
+		{
+			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(5) + 1);
+		}
+
+		if (this.getRNG().nextBoolean())
+		{
+			this.dropItem(Items.FEATHER, this.getRNG().nextInt(1) + 1);
+		}
 	}
 
 	@Override

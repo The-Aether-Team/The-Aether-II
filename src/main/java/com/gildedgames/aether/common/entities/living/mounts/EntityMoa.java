@@ -383,15 +383,17 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	{
 		super.dropFewItems(p_70628_1_, looting);
 
-		this.dropSaddle();
-	}
-
-	protected void dropSaddle()
-	{
 		if (this.isSaddled())
 		{
 			this.dropItem(Items.SADDLE, 1);
 		}
+
+		if (this.getRNG().nextBoolean())
+		{
+			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(5) + 1);
+		}
+
+		this.dropItem(Items.FEATHER, this.getRNG().nextInt(2) + 2);
 	}
 
 	@Override
@@ -645,5 +647,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	{
 		return stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
 	}
+
+
 
 }

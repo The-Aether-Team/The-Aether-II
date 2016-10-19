@@ -543,7 +543,7 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.swift_rune, "accessories/swift_rune");
 		registerItemModels(ItemsAether.wynd_cluster, "accessories/wynd_cluster");
 		registerItemModels(ItemsAether.wisdom_rune, "accessories/wisdom_rune");
-		registerItemModels(ItemsAether.glamoured_aerogel_chip, "aerogel_chip");
+		registerItemModels(ItemsAether.glamoured_aerogel_chip, "scatterglass_shard");
 
 		registerItemModels(ItemsAether.fleeting_scarf, "accessories/fleeting_scarf");
 		registerItemModels(ItemsAether.winged_necklace, "accessories/winged_necklace");
@@ -558,25 +558,9 @@ public class ItemModelsAether
 		/*registerItemModels(BlocksAether.skyroot_vines, "vines/skyroot_vines");
 		registerItemModels(BlocksAether.enchanted_skyroot_vines, "vines/enchanted_skyroot_vines");*/
 
-		registerItemModels(ItemsAether.iron_screw, "iron_screw");
-		registerItemModels(ItemsAether.gold_screw, "gold_screw");
 		registerItemModels(ItemsAether.bone_shard, "bone_shard");
-		registerItemModels(ItemsAether.skyroot_twig, "skyroot_twig");
-		registerItemModels(ItemsAether.blue_skyroot_twig, "blue_skyroot_twig");
-		registerItemModels(ItemsAether.dark_blue_skyroot_twig, "dark_blue_skyroot_twig");
-		/*registerItemModels(ItemsAether.blighted_twig, "blighted_twig");*/
-		registerItemModels(ItemsAether.enchanted_skyroot_twig, "enchanted_skyroot_twig");
-		registerItemModels(ItemsAether.cockatrice_heart, "cockatrice_heart");
 		registerItemModels(ItemsAether.holystone_chip, "holystone_chip");
-		registerItemModels(ItemsAether.zephyr_husk, "zephyr_husk");
-		registerItemModels(ItemsAether.ice_shard, "ice_shard");
-		registerItemModels(ItemsAether.coal_ember, "coal_ember");
-		registerItemModels(ItemsAether.aerogel_chip, "aerogel_chip");
-
-		registerItemModels(ItemsAether.cockatrice_keratin, "cockatrice_keratin");
-		registerItemModels(ItemsAether.cockatrice_talons, "cockatrice_talons");
-
-		registerItemModels(ItemsAether.taegore_tusk, "taegore_tusk");
+		registerItemModels(ItemsAether.scatterglass_shard, "scatterglass_shard");
 
 		registerItemModels(ItemsAether.glamoured_cockatrice_keratin, "cockatrice_keratin");
 

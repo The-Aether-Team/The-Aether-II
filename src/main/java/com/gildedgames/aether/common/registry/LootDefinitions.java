@@ -88,7 +88,7 @@ public class LootDefinitions
 			new SingleStackLoot(new ItemStack(ItemsAether.bone_shard)),
 			new SingleStackLoot(new ItemStack(ItemsAether.moa_feather)),
 			new SingleStackLoot(new ItemStack(ItemsAether.blight_ward)),
-			new SingleStackLoot(new ItemStack(ItemsAether.skyroot_twig)),
+			new SingleStackLoot(new ItemStack(ItemsAether.glamoured_skyroot_twig)),
 			new SingleStackLoot(new ItemStack(ItemsAether.glamoured_gold_screw)),
 			new SingleStackLoot(new ItemStack(ItemsAether.ambrosium_talisman)),
 			new SingleStackLoot(new ItemStack(ItemsAether.glamoured_cockatrice_heart)),
