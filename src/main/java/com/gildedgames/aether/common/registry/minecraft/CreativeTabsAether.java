@@ -43,7 +43,7 @@ public class CreativeTabsAether
 		BLOCKS.setDisplayStack(new ItemStack(BlocksAether.aether_grass, BlockAetherGrass.AETHER_GRASS.getMeta()));
 		MATERIALS.setDisplayStack(new ItemStack(ItemsAether.ambrosium_shard));
 		TOOLS.setDisplayStack(new ItemStack(ItemsAether.zanite_pickaxe));
-		WEAPONS.setDisplayStack(new ItemStack(ItemsAether.zanite_sword));
+		WEAPONS.setDisplayStack(new ItemStack(ItemsAether.gravitite_sword));
 		ARMOR.setDisplayStack(new ItemStack(ItemsAether.zanite_helmet));
 		CONSUMABLES.setDisplayStack(new ItemStack(ItemsAether.orange));
         COMPANIONS.setDisplayStack(new ItemStack(ItemsAether.pink_baby_swet));
@@ -52,8 +52,8 @@ public class CreativeTabsAether
 		RINGS.setDisplayStack(new ItemStack(ItemsAether.zanite_ring));
 		NECKWEAR.setDisplayStack(new ItemStack(ItemsAether.amulet_of_growth));
 		RELICS.setDisplayStack(new ItemStack(ItemsAether.regeneration_stone));
-		CHARMS.setDisplayStack(new ItemStack(ItemsAether.glamoured_bone_shard));
-		ARTIFACTS.setDisplayStack(new ItemStack(ItemsAether.gravitite_core));
+		CHARMS.setDisplayStack(new ItemStack(ItemsAether.blight_ward));
+		ARTIFACTS.setDisplayStack(new ItemStack(ItemsAether.valkyrie_wings));
 	}
 
 	public static class CreativeTab extends CreativeTabs

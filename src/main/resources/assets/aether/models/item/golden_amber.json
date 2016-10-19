@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/golden_amber"
+		"layer0": "aether:items/materials/golden_amber"
 	}
 }

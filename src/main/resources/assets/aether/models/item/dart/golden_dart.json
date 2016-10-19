@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/golden_dart"
+		"layer0": "aether:items/weapons/golden_dart"
 	}
 }

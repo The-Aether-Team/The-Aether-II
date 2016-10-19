@@ -395,11 +395,11 @@ public class ItemsAether
 	public static final Item white_moa_feather = new Item(),
 			sakura_moa_feather = new Item();
 
-	public static final Item gravitite_core = new Item(),
+	public static final Item valkyrie_wings = new Item(),
 			sunlit_tome = new Item(),
 			moonlit_tome = new Item(),
 			phoenix_rune = new Item(),
-			valkyrie_wings = new Item(),
+			gravitite_core = new Item(),
 			primal_totem_of_survival = new Item(),
 			primal_totem_of_rage = new Item(),
 			glamoured_taegore_tusk = new Item(),
@@ -774,8 +774,8 @@ public class ItemsAether
 		registerItem("phoenix_rune", phoenix_rune.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
 		registerItem("glamoured_taegore_tusk", glamoured_taegore_tusk.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 
-		registerItem("gravitite_core", gravitite_core.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.ARTIFACTS));
 		registerItem("valkyrie_wings", valkyrie_wings.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.ARTIFACTS));
+		registerItem("gravitite_core", gravitite_core.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.ARTIFACTS));
 
 		registerItem("butchers_knife", butchers_knife.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 

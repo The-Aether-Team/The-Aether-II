@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/skyroot_water_bucket"
+		"layer0": "aether:items/miscellaneous/skyroot_water_bucket"
 	}
 }

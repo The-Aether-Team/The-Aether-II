@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/bone_shard"
+		"layer0": "aether:items/materials/bone_shard"
 	}
 }

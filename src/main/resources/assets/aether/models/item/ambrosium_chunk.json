@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/ambrosium_chunk"
+		"layer0": "aether:items/materials/ambrosium_chunk"
 	}
 }

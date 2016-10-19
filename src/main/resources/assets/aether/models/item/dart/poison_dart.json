@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/poison_dart"
+		"layer0": "aether:items/weapons/poison_dart"
 	}
 }

@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/scatterglass_shard"
+		"layer0": "aether:items/materials/scatterglass_shard"
 	}
 }

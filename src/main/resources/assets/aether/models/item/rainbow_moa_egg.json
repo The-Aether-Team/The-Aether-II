@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/rainbow_moa_egg"
+		"layer0": "aether:items/miscellaneous/rainbow_moa_egg"
 	}
 }

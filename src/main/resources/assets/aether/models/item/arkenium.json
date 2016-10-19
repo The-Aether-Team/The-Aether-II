@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/arkenium"
+		"layer0": "aether:items/materials/arkenium_plate"
 	}
 }

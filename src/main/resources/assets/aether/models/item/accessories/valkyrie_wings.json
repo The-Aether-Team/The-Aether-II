@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:gui/slots/slot_relic"
+		"layer0": "aether:items/accessories/valkyrie_wings"
 	}
 }
