@@ -13,6 +13,8 @@ public class ItemBolt extends Item
 	private static final ItemBoltType[] ITEM_VARIANTS = new ItemBoltType[] {
 			ItemBoltType.SKYROOT,
 			ItemBoltType.HOLYSTONE,
+			ItemBoltType.SCATTERGLASS,
+			ItemBoltType.BONESHARD,
 			ItemBoltType.ZANITE,
 			ItemBoltType.ARKENIUM,
 			ItemBoltType.GRAVITITE
