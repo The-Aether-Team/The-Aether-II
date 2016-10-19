@@ -36,7 +36,24 @@ public class ItemShardOfLife extends Item
 			entity.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 600, 0));
 		}
 
-		return null;
+		boolean decreaseStackSize = true;
+
+		if (entity instanceof EntityPlayer)
+		{
+			EntityPlayer player = (EntityPlayer)entity;
+
+			if (player.capabilities.isCreativeMode)
+			{
+				decreaseStackSize = false;
+			}
+		}
+
+		if (decreaseStackSize)
+		{
+			stack.stackSize--;
+		}
+
+		return stack;
 	}
 
 	@Override
