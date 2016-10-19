@@ -129,7 +129,7 @@ public class ClientEventHandler
 
 						if (temperature < 0)
 						{
-							event.getToolTip().add(TextFormatting.DARK_AQUA + I18n.format("gui.aether.cooling_strength") + TextFormatting.RESET + " " + Math.abs(temperature));
+							event.getToolTip().add(TextFormatting.DARK_AQUA + I18n.format("gui.aether.coolant"));
 						}
 
 						if (temperature > 0)
