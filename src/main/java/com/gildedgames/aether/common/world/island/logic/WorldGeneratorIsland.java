@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.world.island.logic;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.util.OpenSimplexNoise;
 import com.gildedgames.aether.common.world.GenUtil;
+import com.google.common.base.Stopwatch;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
@@ -23,6 +24,8 @@ public class WorldGeneratorIsland
 
 	public void genIslandForChunk(ChunkPrimer primer, IslandData data, IslandSector sector, int chunkX, int chunkZ)
 	{
+		//Stopwatch watch = Stopwatch.createStarted();
+
 		int posX = chunkX * 16;
 		int posZ = chunkZ * 16;
 
@@ -56,14 +59,14 @@ public class WorldGeneratorIsland
 
 				double dist = 2.0 * Math.sqrt((distNX * distNX) + (distNZ * distNZ)); // Get distance from center of Island
 
-				value = (value + 0.0) - (0.7 * Math.pow(dist, 6)); // Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
+				value = (value + 0.0) - (0.7 * Math.pow(dist, 4)); // Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
 
 				double heightValue = value + 1.0;
 
-				double bottomHeight = 0.7 * height;
+				double bottomHeight = 0.8 * height;
 				double bottomMaxY = minY + bottomHeight;
 
-				double topHeight = 0.3 * height;
+				double topHeight = 0.2 * height;
 
 				if (heightValue > 0.8)
 				{
@@ -85,11 +88,11 @@ public class WorldGeneratorIsland
 					}
 				}
 
-				for (double y = minY + (height * 0.2); y < minY + height - (height * 0.05); y++)
+				for (double y = minY + (height * 0.5); y < minY + height; y++)
 				{
-					double stepY = y - minY - (height * 0.25);
+					double stepY = y - minY - (height * 0.55);
 
-					double ny = (stepY) / (height - (height * 0.25)) - 0.5;
+					double ny = (stepY) / (height - (height * 0.55)) - 0.5;
 
 					double noise3d1 = this.simplex.eval(nx * 8.0, ny * 8.0 / 1.8, nz * 8.0);
 					double noise3d2 = 0.5 * this.simplex.eval(nx * 16.0, ny * 16.0 / 1.8, nz * 16.0);
@@ -123,6 +126,8 @@ public class WorldGeneratorIsland
 				}
 			}
 		}
+
+		//System.out.println(watch.stop());
 	}
 
 }

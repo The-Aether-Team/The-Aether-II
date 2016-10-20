@@ -49,7 +49,7 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 
 		int height = 11;
 		boolean flag = true;
-		if (pos.getY() < 1 || pos.getY() + height + 1 > 128)
+		if (pos.getY() < 1 || pos.getY() + height + 1 > world.getActualHeight())
 		{
 			return false;
 		}

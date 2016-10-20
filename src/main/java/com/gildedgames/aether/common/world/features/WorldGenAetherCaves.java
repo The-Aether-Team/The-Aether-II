@@ -213,7 +213,7 @@ public class WorldGenAetherCaves extends MapGenBase
 		for (int j = 0; j < i; ++j)
 		{
 			double d0 = (double) (chunkX * 16 + this.rand.nextInt(16));
-			double d1 = (double) this.rand.nextInt(this.rand.nextInt(120) + 8);
+			double d1 = (double) this.rand.nextInt(this.rand.nextInt(240) + 8);
 			double d2 = (double) (chunkZ * 16 + this.rand.nextInt(16));
 			int k = 1;
 

@@ -87,7 +87,7 @@ public class WorldGenFruitTree extends WorldGenAbstractTree
 			}
 		}
 
-		if (y + (height + 2) <= world.getHeight() && cangen)
+		if (y + (height + 2) <= world.getActualHeight() && cangen)
 		{
 			pos = new BlockPos(x, y - 1, z);
 

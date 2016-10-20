@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.world.chunk;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.util.OpenSimplexNoise;
-import com.gildedgames.aether.common.world.chunk.gen.*;
 import com.gildedgames.aether.common.world.features.WorldGenAetherCaves;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -33,8 +32,6 @@ public class ChunkGeneratorAether implements IChunkGenerator
 	private final Random rand;
 
 	public final static int PLACEMENT_FLAG_TYPE = 2;
-
-	private ChunkGen mainLand, mainLandOverhangs, smallLayer1, smallLayer2, smallLayer3;
 
 	private NoiseGeneratorOctaves[] octaveNoiseGenerators;
 
@@ -72,13 +69,6 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		this.octaveNoiseGenerators[6] = new NoiseGeneratorOctaves(this.rand, 16);
 
 		this.cloudNoiseGenerator = new NoiseGeneratorOctaves(this.rand, 12);
-
-		this.mainLand = new ChunkGenContinents(world, seed, new GenPropsMainLand(this.aether_stone, 250.0D, 100));
-		//this.mainLandOverhangs = newsystem ChunkGenFloatingIsland(world, seed + 50L, newsystem GenPropsMainLand(aether_stone, 100.0D, 30));
-
-		this.smallLayer1 = new ChunkGenFloatingIsland(world, seed + 100L, new GenPropsSmallIslands(this.aether_stone, 100.0D, 50));
-		this.smallLayer2 = new ChunkGenFloatingIsland(world, seed + 200L, new GenPropsSmallIslands(this.aether_stone, 100.0D, 60));
-		this.smallLayer3 = new ChunkGenFloatingIsland(world, seed + 300L, new GenPropsSmallIslands(this.aether_stone, 100.0D, 70));
 	}
 
 	@Override
@@ -295,13 +285,6 @@ public class ChunkGeneratorAether implements IChunkGenerator
 	{
 		int posX = chunkX * 16;
 		int posZ = chunkZ * 16;
-
-		this.mainLand.prepare(chunkX, chunkZ, posX, posZ);
-		//this.mainLandOverhangs.prepare(chunkX, chunkZ, posX, posZ);
-
-		this.smallLayer1.prepare(chunkX, chunkZ, posX, posZ);
-		this.smallLayer2.prepare(chunkX, chunkZ, posX, posZ);
-		this.smallLayer3.prepare(chunkX, chunkZ, posX, posZ);
 	}
 
 	public void setBlocksInChunk(ChunkPrimer primer, int chunkX, int chunkZ)
@@ -327,13 +310,6 @@ public class ChunkGeneratorAether implements IChunkGenerator
 				}
 			}
 		}
-
-		this.mainLand.build(primer, chunkX, chunkZ, posX, posZ);
-		//this.mainLandOverhangs.build(primer, chunkX, chunkZ, posX, posZ);
-
-		this.smallLayer1.build(primer, chunkX, chunkZ, posX, posZ);
-		this.smallLayer2.build(primer, chunkX, chunkZ, posX, posZ);
-		this.smallLayer3.build(primer, chunkX, chunkZ, posX, posZ);
 	}
 
 	private OpenSimplexNoise simplex = new OpenSimplexNoise();
