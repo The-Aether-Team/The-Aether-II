@@ -57,7 +57,7 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 		this.noiseFields[2] = new double[256];
 		this.noiseFields[3] = new double[256];
 
-		this.islandGenerator = new WorldGeneratorIsland(world, this.rand);
+		this.islandGenerator = new WorldGeneratorIsland(world);
 
 		this.octaveNoiseGenerators = new NoiseGeneratorOctaves[7];
 

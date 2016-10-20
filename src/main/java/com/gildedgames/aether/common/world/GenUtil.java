@@ -12,6 +12,24 @@ import java.util.Random;
 public class GenUtil
 {
 
+	public static double bilinearInterpolate(double bottomLeftValue, double topLeftValue, double bottomRightValue, double topRightValue, double bottomLeftX, double topRightX, double bottomLeftY, double topRightY, double x, double y)
+	{
+		double x2x1, y2y1, x2x, y2y, yy1, xx1;
+		x2x1 = topRightX - bottomLeftX;
+		y2y1 = topRightY - bottomLeftY;
+		x2x = topRightX - x;
+		y2y = topRightY - y;
+		yy1 = y - bottomLeftY;
+		xx1 = x - bottomLeftX;
+
+		return 1.0 / (x2x1 * y2y1) * (
+				bottomLeftValue * x2x * y2y +
+						bottomRightValue * xx1 * y2y +
+						topLeftValue * x2x * yy1 +
+						topRightValue * xx1 * yy1
+		);
+	}
+
 	public static BlockPos getTopBlock(World world, BlockPos pos)
 	{
 		BlockPos searchPos = new BlockPos(pos.getX(), world.getActualHeight(), pos.getZ());
@@ -99,112 +117,6 @@ public class GenUtil
 		}
 
 		return noiseSum / weightSum;
-	}
-
-	/**
-	 * Fast array filling for identical value
-	 * @param array
-	 * @param value
-	 */
-	public static <T> void fillArray(T[] array, T value)
-	{
-		int len = array.length;
-
-		if (len > 0)
-		{
-			array[0] = value;
-		}
-
-		for (int i = 1; i < len; i += i)
-		{
-			System.arraycopy(array, 0, array, i, ((len - i) < i) ? (len - i) : i);
-		}
-	}
-
-	public static void fillArray(char[] array, char value)
-	{
-		int len = array.length;
-
-		if (len > 0)
-		{
-			array[0] = value;
-		}
-
-		for (int i = 1; i < len; i += i)
-		{
-			System.arraycopy(array, 0, array, i, ((len - i) < i) ? (len - i) : i);
-		}
-	}
-
-	public static void fillArray(short[] array, short value)
-	{
-		int len = array.length;
-
-		if (len > 0)
-		{
-			array[0] = value;
-		}
-
-		for (int i = 1; i < len; i += i)
-		{
-			System.arraycopy(array, 0, array, i, ((len - i) < i) ? (len - i) : i);
-		}
-	}
-
-	public static void cuboid(World world, BlockPos min, BlockPos max, IBlockState state)
-	{
-		GenUtil.cuboid(world, min, max, state, state, true);
-	}
-
-	public static void cuboid(World world, BlockPos min, BlockPos max, IBlockState state, boolean replaceSolidBlocks)
-	{
-		GenUtil.cuboid(world, min, max, state, state, replaceSolidBlocks);
-	}
-
-	public static void cuboid(World world, BlockPos min, BlockPos max, IBlockState edgeBlockState, IBlockState fillBlockState)
-	{
-		GenUtil.cuboid(world, min, max, edgeBlockState, fillBlockState, true);
-	}
-
-	public static void cuboid(World world, BlockPos min, BlockPos max, IBlockState edgeBlockState, IBlockState fillBlockState, boolean replaceSolidBlocks)
-	{
-		for (BlockPos pos : BlockPos.getAllInBoxMutable(min, max))
-		{
-			if (replaceSolidBlocks || world.isAirBlock(pos))
-			{
-				if (pos.getY() != min.getY() && pos.getY() != max.getY() && pos.getX() != min.getX() && pos.getX() != max.getX() && pos.getZ() != min.getZ() && pos.getZ() != max.getZ())
-				{
-					world.setBlockState(pos, fillBlockState);
-				}
-				else
-				{
-					world.setBlockState(pos, edgeBlockState);
-				}
-			}
-		}
-	}
-
-	public static void cuboidVaried(World world, BlockPos min, BlockPos max, IBlockState block1, IBlockState block2, int rarity, Random rand)
-	{
-		GenUtil.cuboidVaried(world, min, max, block1, block2, rarity, rand, true);
-	}
-
-	public static void cuboidVaried(World world, BlockPos min, BlockPos max, IBlockState block1, IBlockState block2, int rarity, Random rand, boolean replaceSolidBlocks)
-	{
-		for (BlockPos pos : BlockPos.getAllInBoxMutable(min, max))
-		{
-			if (replaceSolidBlocks || world.isAirBlock(pos))
-			{
-				IBlockState chosenState = block1;
-
-				if (rand.nextInt(rarity) == 1)
-				{
-					chosenState = block2;
-				}
-
-				world.setBlockState(pos, chosenState);
-			}
-		}
 	}
 
 }

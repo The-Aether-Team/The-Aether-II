@@ -59,7 +59,7 @@ public class IslandSectorFactory
 				}
 			}*/
 
-			IslandData islandData = new IslandData(bounds, 40 + rand.nextInt(60), set);
+			IslandData islandData = new IslandData(bounds, 80 + rand.nextInt(60), set);
 
 			data[i] = islandData;
 		}
