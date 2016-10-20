@@ -78,9 +78,14 @@ public class BiomeProviderAether extends BiomeProvider
 				int sectorX = IslandSectorAccess.inst().getSectorCoord(posX / 16);
 				int sectorY = IslandSectorAccess.inst().getSectorCoord(posZ / 16);
 
-				IslandSector sector = IslandSectorAccess.inst().attemptToLoadSector(sectorX, sectorY);
-
 				biomes[index] = BiomesAether.VOID;
+
+				if (this.world.isRemote)
+				{
+					continue;
+				}
+
+				IslandSector sector = IslandSectorAccess.inst().attemptToLoadSector(sectorX, sectorY);
 
 				if (sector != null)
 				{
