@@ -54,7 +54,7 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 				{
 					for (l = position.getZ() - b0; l <= position.getZ() + b0 && canCreateTree; ++l)
 					{
-						if (y >= 0 && y < 256)
+						if (y >= 0 && y < worldIn.getActualHeight())
 						{
 							pos.setPos(k, y, l);
 
@@ -81,7 +81,7 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 
 				IBlockState state = worldIn.getBlockState(position.down());
 
-				if (isSoil && position.getY() < 256 - i - 1)
+				if (isSoil && position.getY() < worldIn.getActualHeight() - i - 1)
 				{
 					rootState.getBlock().onPlantGrow(rootState, worldIn, rootBlockPos, position);
 
