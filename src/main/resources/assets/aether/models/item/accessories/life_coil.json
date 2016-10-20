@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/life_coil"
+		"layer0": "aether:items/rings/life_coil"
 	}
 }

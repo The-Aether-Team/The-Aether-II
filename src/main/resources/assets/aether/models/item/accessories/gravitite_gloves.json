@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/gravitite_gloves"
+		"layer0": "aether:items/armor/gravitite_gloves"
 	}
 }

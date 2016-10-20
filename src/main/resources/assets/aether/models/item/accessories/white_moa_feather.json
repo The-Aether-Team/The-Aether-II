@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/white_moa_feather"
+		"layer0": "aether:items/charms/white_moa_feather"
 	}
 }

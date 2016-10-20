@@ -1,7 +1,7 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/leather_gloves",
-		"layer1": "aether:items/accessories/leather_gloves_overlay"
+		"layer0": "aether:items/armor/leather_gloves",
+		"layer1": "aether:items/armor/leather_gloves_overlay"
 	}
 }

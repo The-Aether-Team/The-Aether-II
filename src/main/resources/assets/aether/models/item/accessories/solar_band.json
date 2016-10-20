@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/solar_band"
+		"layer0": "aether:items/rings/solar_band"
 	}
 }

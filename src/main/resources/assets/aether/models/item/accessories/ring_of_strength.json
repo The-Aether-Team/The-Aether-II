@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/ring_of_strength"
+		"layer0": "aether:items/rings/ring_of_strength"
 	}
 }

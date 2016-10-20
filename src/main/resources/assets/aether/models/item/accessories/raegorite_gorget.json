@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/raegorite_gorget"
+		"layer0": "aether:items/neckwear/raegorite_gorget"
 	}
 }

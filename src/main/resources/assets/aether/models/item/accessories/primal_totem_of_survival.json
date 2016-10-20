@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/primal_totem_of_survival"
+		"layer0": "aether:items/relics/primal_totem_of_survival"
 	}
 }

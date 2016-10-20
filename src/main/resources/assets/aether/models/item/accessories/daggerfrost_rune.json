@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/daggerfrost_rune"
+		"layer0": "aether:items/relics/daggerfrost_rune"
 	}
 }

@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/hide_gorget"
+		"layer0": "aether:items/neckwear/hide_gorget"
 	}
 }

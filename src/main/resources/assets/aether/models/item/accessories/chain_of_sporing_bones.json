@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/chain_of_sporing_bones"
+		"layer0": "aether:items/neckwear/chain_of_sporing_bones"
 	}
 }

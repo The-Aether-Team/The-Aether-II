@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/peer_healing_trinket"
+		"layer0": "aether:items/charms/peer_healing_trinket"
 	}
 }

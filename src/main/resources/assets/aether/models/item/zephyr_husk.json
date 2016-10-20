@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/zephyr_husk"
+		"layer0": "aether:items/charms/zephyr_husk"
 	}
 }

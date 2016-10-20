@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/glamoured_iron_screw"
+		"layer0": "aether:items/charms/glamoured_iron_screw"
 	}
 }

@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/typhoon_amulet"
+		"layer0": "aether:items/neckwear/typhoon_amulet"
 	}
 }

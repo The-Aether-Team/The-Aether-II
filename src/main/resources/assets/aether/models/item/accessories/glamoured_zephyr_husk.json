@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/glamoured_zephyr_husk"
+		"layer0": "aether:items/charms/glamoured_zephyr_husk"
 	}
 }

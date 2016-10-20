@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/amulet_of_growth"
+		"layer0": "aether:items/neckwear/amulet_of_growth"
 	}
 }

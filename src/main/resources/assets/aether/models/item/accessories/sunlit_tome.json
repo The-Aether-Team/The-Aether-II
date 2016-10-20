@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/sunlit_tome"
+		"layer0": "aether:items/relics/sunlit_tome"
 	}
 }

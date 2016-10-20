@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/rot_bane"
+		"layer0": "aether:items/charms/rot_bane"
 	}
 }

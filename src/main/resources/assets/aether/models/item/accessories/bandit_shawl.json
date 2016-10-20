@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/bandit_shawl"
+		"layer0": "aether:items/neckwear/bandit_shawl"
 	}
 }

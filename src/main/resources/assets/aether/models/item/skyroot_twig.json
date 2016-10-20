@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/skyroot_twig"
+		"layer0": "aether:items/charms/skyroot_twig"
 	}
 }

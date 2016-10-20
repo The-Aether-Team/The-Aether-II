@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/hide_pouch"
+		"layer0": "aether:items/charms/hide_pouch"
 	}
 }

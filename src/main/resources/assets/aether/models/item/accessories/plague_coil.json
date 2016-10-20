@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/plague_coil"
+		"layer0": "aether:items/rings/plague_coil"
 	}
 }

@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/zanite_ring"
+		"layer0": "aether:items/rings/zanite_ring"
 	}
 }

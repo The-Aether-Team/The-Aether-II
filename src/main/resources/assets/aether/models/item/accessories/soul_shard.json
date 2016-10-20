@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/soul_shard"
+		"layer0": "aether:items/charms/soul_shard"
 	}
 }

@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/gold_pendant"
+		"layer0": "aether:items/neckwear/gold_pendant"
 	}
 }

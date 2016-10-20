@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/iron_screw"
+		"layer0": "aether:items/charms/iron_screw"
 	}
 }

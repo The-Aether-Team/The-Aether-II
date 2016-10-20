@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/accessories/arkenium_ring"
+		"layer0": "aether:items/rings/arkenium_ring"
 	}
 }
