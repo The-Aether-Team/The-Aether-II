@@ -69,7 +69,7 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 			{
 				for (int l2 = pos.getZ() - byte0; l2 <= pos.getZ() + byte0 && flag; l2++)
 				{
-					if (i1 >= 0 && i1 < 128)
+					if (i1 >= 0 && i1 < world.getActualHeight())
 					{
 						nPos = new BlockPos(i2, i1, l2);
 
