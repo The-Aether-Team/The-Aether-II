@@ -159,13 +159,16 @@ public class BlockAetherLeaves extends Block implements IShearable
 					int y2;
 					int z2;
 
+					BlockPos.MutableBlockPos newPos = new BlockPos.MutableBlockPos();
+
 					for (x2 = -start; x2 <= start; ++x2)
 					{
 						for (y2 = -start; y2 <= start; ++y2)
 						{
 							for (z2 = -start; z2 <= start; ++z2)
 							{
-								BlockPos newPos = new BlockPos(x + x2, y + y2, z + z2);
+								newPos.setPos(x + x2, y + y2, z + z2);
+
 								Block block = world.getBlockState(newPos).getBlock();
 
 								if (!block.canSustainLeaves(state, world, newPos))
