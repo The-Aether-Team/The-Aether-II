@@ -100,7 +100,7 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 				IBlockState fillAetherBlock = biome.fillerBlock;
 				IBlockState stone = BlocksAether.holystone.getDefaultState();
 
-				for (int y = 127; y >= 0; y--)
+				for (int y = 220; y >= 0; y--)
 				{
 					Block block = primer.getBlockState(x, y, z).getBlock();
 

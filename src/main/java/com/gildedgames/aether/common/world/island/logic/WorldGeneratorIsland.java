@@ -3,11 +3,9 @@ package com.gildedgames.aether.common.world.island.logic;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.util.OpenSimplexNoise;
 import com.gildedgames.aether.common.world.GenUtil;
-import com.google.common.base.Stopwatch;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
-import org.apache.commons.lang3.time.StopWatch;
 
 import java.util.Random;
 
@@ -32,7 +30,7 @@ public class WorldGeneratorIsland
 		double height = data.getHeight();
 		double length = (double)data.getBounds().height;
 
-		double minY = 10;
+		double minY = data.getMinY();
 
 		for (double x = 0; x < 16; x++)
 		{
@@ -44,6 +42,11 @@ public class WorldGeneratorIsland
 				double nx = (stepX) / width - 0.5 + (double) sector.getSectorX(); // normalize coords
 				double nz = (stepZ) / length - 0.5 + (double) sector.getSectorY();
 
+				//double flat = GenUtil.octavedNoise(this.simplex, 4, 0.7D, 2.5D, nx, nz);
+
+				double distNX = nx - (double) sector.getSectorX(); // Subtract sector coords from nx/ny so that the noise is within range of the island center
+				double distNZ = nz - (double) sector.getSectorY();
+
 				double noise1 = this.simplex.eval(nx, nz);
 				double noise2 = 0.5 * this.simplex.eval(nx * 8D, nz * 8D);
 				double noise3 = 0.25 * this.simplex.eval(nx * 16D, nz * 16D);
@@ -51,58 +54,73 @@ public class WorldGeneratorIsland
 
 				double value = (noise1 + noise2 + noise3 + noise4) / 3.0D;
 
-				double distNX = nx - (double) sector.getSectorX(); // Subtract sector coords from nx/ny so that the noise is within range of the island center
-				double distNZ = nz - (double) sector.getSectorY();
 				double dist = 2.0 * Math.sqrt((distNX * distNX) + (distNZ * distNZ)); // Get distance from center of Island
 
 				value = (value + 0.0) - (0.7 * Math.pow(dist, 6)); // Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
 
 				double heightValue = value + 1.0;
 
+				double bottomHeight = 0.7 * height;
+				double bottomMaxY = minY + bottomHeight;
+
+				double topHeight = 0.3 * height;
+
 				if (heightValue > 0.8)
 				{
-					double bottomHeight = 0.8 * height;
-					double bottomMaxY = minY + bottomHeight;
-
-					double topHeight = 0.2 * height;
-
-					for (double y = bottomMaxY; y < bottomMaxY + ((heightValue - 0.8) * topHeight); y++)
-					{
-						primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.holystone.getDefaultState());
-					}
-
 					for (double y = bottomMaxY; y > bottomMaxY - ((heightValue - 0.8) * bottomHeight); y--)
 					{
 						primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.holystone.getDefaultState());
 					}
+
+					for (double y = bottomMaxY; y < bottomMaxY + ((heightValue - 0.8) * topHeight); y++)
+					{
+						/*if (y < bottomMaxY + 2)
+						{
+							primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.quicksoil.getDefaultState());
+						}
+						else*/
+						{
+							primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.holystone.getDefaultState());
+						}
+					}
 				}
 
-				/*for (double y = minY; y < minY + height; y++)
+				for (double y = minY + (height * 0.2); y < minY + height - (height * 0.05); y++)
 				{
-					double stepY = y - minY;
+					double stepY = y - minY - (height * 0.25);
 
-					double ny = (stepY) / height - 0.5;
+					double ny = (stepY) / (height - (height * 0.25)) - 0.5;
 
-					double value = GenUtil.octavedNoise3D(this.simplex, 4, 0.7D, 2.5D, nx, ny / 1.8D, nz);
+					double noise3d1 = this.simplex.eval(nx * 8.0, ny * 8.0 / 1.8, nz * 8.0);
+					double noise3d2 = 0.5 * this.simplex.eval(nx * 16.0, ny * 16.0 / 1.8, nz * 16.0);
 
-					double dist = 2.0 * Math.sqrt((distNX * distNX) + (ny * ny) + (distNZ * distNZ)); // Get distance from center of Island
+					double value3d = noise3d1 + noise3d2;
 
-					value = (value + 0.10) - (1.65 * Math.pow(dist, 1.50)); // Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
+					double dist3d = 2.0 * Math.sqrt((distNX * distNX) + (ny * ny) + (distNZ * distNZ)); // Get distance from center of Island
 
-					value = Math.min(1.0D, Math.max(-1.0D, value)); // Prevents noise from dropping below its minimum value
+					value3d = (value3d + 0.10) - (1.65 * Math.pow(dist3d, 1.50)); // Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
 
-					if (flat < 0.0)
+					value3d -= dist;
+
+					value3d = Math.min(1.0D, Math.max(-1.0D, value3d)); // Prevents noise from dropping below its minimum value
+
+					if (value3d > -0.8)
 					{
-						//value += flat * 4;
-					}
+						//if (y < bottomMaxY + ((heightValue - 0.8) * topHeight))
+						//{
+						/*if (y < bottomMaxY + 2)
+						{
+							primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.quicksoil.getDefaultState());
+						}
+						else*/
+						{
+							primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.holystone.getDefaultState());
+						}
+						//}
 
-					value = Math.min(1.0D, Math.max(-1.0D, value));
-
-					if (value > -0.8)
-					{
-						primer.setBlockState((int)x, (int)y, (int)z, BlocksAether.holystone.getDefaultState());
+						//primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.holystone.getDefaultState());
 					}
-				}*/
+				}
 			}
 		}
 	}

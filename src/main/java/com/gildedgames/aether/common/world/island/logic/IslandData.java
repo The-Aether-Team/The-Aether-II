@@ -7,15 +7,16 @@ public class IslandData
 
 	private Rectangle bounds;
 
-	private final int height;
+	private final int minY, height;
 
 	private boolean asleep, toRemove;
 
 	private final IslandBiomeSet biomeSet;
 
-	public IslandData(Rectangle bounds, int height, IslandBiomeSet biomeSet)
+	public IslandData(Rectangle bounds, int minY, int height, IslandBiomeSet biomeSet)
 	{
 		this.bounds = bounds;
+		this.minY = minY;
 		this.height = height;
 		this.biomeSet = biomeSet;
 	}
@@ -26,6 +27,8 @@ public class IslandData
 	}
 
 	public int getHeight() { return this.height; }
+
+	public int getMinY() { return this.minY; }
 
 	public boolean isAsleep()
 	{
