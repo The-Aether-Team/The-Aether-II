@@ -5,15 +5,18 @@ import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.util.core.UtilModule;
 import com.gildedgames.util.core.util.ChunkMap;
 import com.gildedgames.util.core.util.GGHelper;
+import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.event.world.ChunkWatchEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.apache.commons.lang3.time.StopWatch;
 
 import javax.annotation.Nullable;
 import java.io.File;
@@ -56,14 +59,19 @@ public class IslandSectorAccess
 		return (chunkCoord / IslandSector.CHUNK_WIDTH_PER_SECTOR) - (chunkCoord < 0 ? 1 : 0);
 	}
 
-	public IslandSector attemptToLoadSector(int sectorX, int sectorY)
+	public IslandSector attemptToLoadSector(World world, int sectorX, int sectorY)
 	{
-		if (this.isSectorLoadedInMemory(sectorX, sectorY))
+		if (world.isRemote)
 		{
-			return this.loadSectorFromMemory(sectorX, sectorY);
+			return null;
 		}
 
-		if (!this.wasSectorEverCreated(sectorX, sectorY))
+		if (this.isSectorLoadedInMemory(sectorX, sectorY))
+		{
+			return this.loadSectorFromMemory(world, sectorX, sectorY);
+		}
+
+		if (!this.wasSectorEverCreated(world, sectorX, sectorY))
 		{
 			return null;
 		}
@@ -75,16 +83,21 @@ public class IslandSectorAccess
 		return sector;
 	}
 
-	public IslandSector attemptToLoadSector(int sectorX, int sectorY, long seedForNewSector)
+	public IslandSector attemptToLoadSector(World world, int sectorX, int sectorY, long seedForNewSector)
 	{
-		if (this.isSectorLoadedInMemory(sectorX, sectorY))
+		if (world.isRemote)
 		{
-			return this.loadSectorFromMemory(sectorX, sectorY);
+			return null;
 		}
 
-		if (!this.wasSectorEverCreated(sectorX, sectorY))
+		if (this.isSectorLoadedInMemory(sectorX, sectorY))
 		{
-			IslandSector sector = this.createSectorAndSaveToDisk(sectorX, sectorY, seedForNewSector);
+			return this.loadSectorFromMemory(world, sectorX, sectorY);
+		}
+
+		if (!this.wasSectorEverCreated(world, sectorX, sectorY))
+		{
+			IslandSector sector = this.createSectorAndSaveToDisk(world, sectorX, sectorY, seedForNewSector);
 
 			this.addSectorToMemory(sector);
 
@@ -103,8 +116,13 @@ public class IslandSectorAccess
 		return this.activeSectors.containsKey(sectorX, sectorY);
 	}
 
-	public boolean wasSectorEverCreated(int sectorX, int sectorY)
+	public boolean wasSectorEverCreated(World world, int sectorX, int sectorY)
 	{
+		if (world.isRemote)
+		{
+			return false;
+		}
+
 		if (this.isSectorLoadedInMemory(sectorX, sectorY))
 		{
 			return true;
@@ -114,8 +132,13 @@ public class IslandSectorAccess
 	}
 
 	@Nullable
-	public IslandSector loadSectorFromMemory(int sectorX, int sectorY)
+	public IslandSector loadSectorFromMemory(World world, int sectorX, int sectorY)
 	{
+		if (world.isRemote)
+		{
+			return null;
+		}
+
 		if (this.activeSectors.containsKey(sectorX, sectorY))
 		{
 			return this.activeSectors.get(sectorX, sectorY);
@@ -126,39 +149,64 @@ public class IslandSectorAccess
 		return null;
 	}
 
-	public void unloadSectorFromMemory(IslandSector sector)
+	public void unloadSectorFromMemory(World world, IslandSector sector)
 	{
+		if (world.isRemote)
+		{
+			return;
+		}
+
 		if (!this.isSectorLoadedInMemory(sector.getSectorX(), sector.getSectorY()))
 		{
 			return;
 		}
 
-		this.saveSectorToDisk(sector);
+		this.saveSectorToDisk(world, sector);
 		this.activeSectors.remove(sector.getSectorX(), sector.getSectorY());
 	}
 
-	public void unloadSectorFromMemory(int sectorX, int sectorY)
+	public void unloadSectorFromMemory(World world, int sectorX, int sectorY)
 	{
+		if (world.isRemote)
+		{
+			return;
+		}
+
 		if (!this.isSectorLoadedInMemory(sectorX, sectorY))
 		{
 			return;
 		}
 
-		this.saveSectorToDisk(sectorX, sectorY);
+		this.saveSectorToDisk(world, sectorX, sectorY);
 		this.activeSectors.remove(sectorX, sectorY);
 	}
 
-	public void saveSectorToDisk(int sectorX, int sectorY)
+	public void saveSectorToDisk(World world, int sectorX, int sectorY)
 	{
+		if (world.isRemote)
+		{
+			return;
+		}
+
 		if (!this.isSectorLoadedInMemory(sectorX, sectorY))
 		{
 			return;
 		}
 
-		this.saveSectorToDisk(this.activeSectors.get(sectorX, sectorY));
+		this.saveSectorToDisk(world, this.activeSectors.get(sectorX, sectorY));
 	}
 
-	public void saveSectorToDisk(IslandSector sector)
+	public void saveSectorToDisk(World world, IslandSector sector)
+	{
+		if (world.isRemote)
+		{
+			return;
+		}
+
+		this.saveSectorToDisk(sector);
+	}
+
+	private void saveSectorToDisk(IslandSector sector)
 	{
 		File file = IslandSectorAccess.createSectorFile(sector.getSectorX(), sector.getSectorY());
 
@@ -189,11 +237,16 @@ public class IslandSectorAccess
 		return null;
 	}
 
-	public IslandSector createSectorAndSaveToDisk(int sectorX, int sectorY, long seed)
+	public IslandSector createSectorAndSaveToDisk(World world, int sectorX, int sectorY, long seed)
 	{
+		if (world.isRemote)
+		{
+			return null;
+		}
+
 		IslandSector sector = IslandSectorFactory.create(sectorX, sectorY, seed);
 
-		this.saveSectorToDisk(sector);
+		this.saveSectorToDisk(world, sector);
 
 		return sector;
 	}
@@ -218,7 +271,7 @@ public class IslandSectorAccess
 	{
 		WorldServer world = event.getPlayer().getServerWorld();
 
-		if (world.provider.getDimensionType() != DimensionsAether.AETHER)
+		if (world.provider.getDimensionType() != DimensionsAether.AETHER || world.isRemote)
 		{
 			return;
 		}
@@ -258,7 +311,7 @@ public class IslandSectorAccess
 
 		for (IslandSector sector : sectorsToUnload)
 		{
-			this.unloadSectorFromMemory(sector);
+			this.unloadSectorFromMemory(world, sector);
 		}
 	}
 

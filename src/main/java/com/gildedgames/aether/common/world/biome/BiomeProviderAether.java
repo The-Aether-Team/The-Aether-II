@@ -85,7 +85,7 @@ public class BiomeProviderAether extends BiomeProvider
 					continue;
 				}
 
-				IslandSector sector = IslandSectorAccess.inst().attemptToLoadSector(sectorX, sectorY);
+				IslandSector sector = IslandSectorAccess.inst().attemptToLoadSector(this.world, sectorX, sectorY);
 
 				if (sector != null)
 				{

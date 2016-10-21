@@ -173,12 +173,17 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 		long sectorSeed = 0;
 
-		if (!IslandSectorAccess.inst().wasSectorEverCreated(sectorX, sectorY))
+		if (!IslandSectorAccess.inst().wasSectorEverCreated(this.worldObj, sectorX, sectorY))
 		{
 			sectorSeed = this.rand.nextLong();
 		}
 
-		IslandSector sector = IslandSectorAccess.inst().attemptToLoadSector(sectorX, sectorY, sectorSeed);
+		IslandSector sector = IslandSectorAccess.inst().attemptToLoadSector(this.worldObj, sectorX, sectorY, sectorSeed);
+
+		if (sector == null)
+		{
+			return;
+		}
 
 		final List<IslandData> islandsToGenerate = Lists.newArrayList();
 
@@ -283,7 +288,7 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 		Chunk chunk = new Chunk(this.worldObj, primer, chunkX, chunkZ);
 
-		chunk.generateSkylightMap();
+		//chunk.generateSkylightMap();
 		chunk.resetRelightChecks();
 
 		return chunk;
