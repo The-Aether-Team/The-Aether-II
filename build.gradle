@@ -50,10 +50,6 @@ dependencies {
 jar {
 	from sourceSets.api.output
 	from sourceSets.main.output
-
-    manifest {
-        attributes 'FMLAT': 'forge_at.cfg', 'FMLCorePlugin': 'com.gildedgames.aether.common.lighting.TLLoadingPlugin', 'FMLCorePluginContainsFMLMod': 'true'
-    }
 }
 
 minecraft {
