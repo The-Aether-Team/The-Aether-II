@@ -11,12 +11,13 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
+import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class WorldProviderAether extends WorldProvider
+public class WorldProviderAether extends WorldProviderSurface
 {
 	private float[] sunriseSunsetColors = new float[4];
 
@@ -211,4 +212,9 @@ public class WorldProviderAether extends WorldProvider
 		return -128;
 	}
 
+	@Override
+	public boolean canDropChunk(int x, int z)
+	{
+		return true;
+	}
 }
