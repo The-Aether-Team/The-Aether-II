@@ -16,7 +16,7 @@ public class MoaMarkGene implements Gene
 
 	private Mutation[] potentialMutations;
 
-	private ResourceLocation back, head, tail, wing;
+	private ResourceLocation back, head, tail, wing, back_egg, head_egg;
 
 	public MoaMarkGene(String name, String resourceName, Inheritance inheritance, Mutation... potentialMutations)
 	{
@@ -31,6 +31,9 @@ public class MoaMarkGene implements Gene
 		this.head = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/head/" + resourceName + ".png");
 		this.tail = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/tail/" + resourceName + ".png");
 		this.wing = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/wing/" + resourceName + ".png");
+
+		this.back_egg = new ResourceLocation(AetherCore.MOD_ID, "textures/tile_entities/moa_egg/back/" + resourceName + ".png");
+		this.head_egg = new ResourceLocation(AetherCore.MOD_ID, "textures/tile_entities/moa_egg/head/" + resourceName + ".png");
 	}
 
 	@Override
@@ -55,6 +58,16 @@ public class MoaMarkGene implements Gene
 	public Inheritance inheritance()
 	{
 		return this.inheritance;
+	}
+
+	public ResourceLocation getEggBack()
+	{
+		return this.back_egg;
+	}
+
+	public ResourceLocation getEggHead()
+	{
+		return this.head_egg;
 	}
 
 	public ResourceLocation getBack()
