@@ -275,7 +275,7 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 		this.caveGenerator.generate(this.worldObj, chunkX, chunkZ, primer);
 
 		this.genClouds(primer, 90.0D, 40, chunkX, chunkZ);
-		this.genClouds(primer, 90.0D, 240, chunkX, chunkZ);
+		//this.genClouds(primer, 90.0D, 240, chunkX, chunkZ);
 		this.genClouds(primer, 130.0D, 180, chunkX, chunkZ);
 		this.genClouds(primer, 200.0D, 138, chunkX, chunkZ);
 
