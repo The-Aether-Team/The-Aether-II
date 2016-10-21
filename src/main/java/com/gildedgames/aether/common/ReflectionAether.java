@@ -62,7 +62,7 @@ public class ReflectionAether
 
 	public static final ReflectionEntry SEED_INPUT = new ReflectionEntry("field_189827_C");
 
-	public static final ReflectionEntry MAIN_MODEL = new ReflectionEntry("mainModel");
+	public static final ReflectionEntry EVENT_LISTENERS = new ReflectionEntry("field_73021_x", "eventListeners");
 
 	public static Field getField(Class clazz, String... names)
 	{

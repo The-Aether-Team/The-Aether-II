@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.registry;
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.capabilites.entity.spawning.EntitySpawn;
+import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.entities.living.*;
@@ -37,6 +38,7 @@ import net.minecraft.world.IWorldEventListener;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
@@ -144,7 +146,12 @@ public class SpawnRegistry
 	{
 		if (!event.getWorld().isRemote)
 		{
-			event.getWorld().addEventListener(this.listener);
+			List<IWorldEventListener> eventListeners = ObfuscationReflectionHelper.getPrivateValue(World.class, event.getWorld(), ReflectionAether.EVENT_LISTENERS.getMappings());
+
+			if (!eventListeners.contains(this.listener))
+			{
+				event.getWorld().addEventListener(this.listener);
+			}
 		}
 	}
 
