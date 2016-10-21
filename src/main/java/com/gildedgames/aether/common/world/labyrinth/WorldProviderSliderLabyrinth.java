@@ -127,4 +127,11 @@ public class WorldProviderSliderLabyrinth extends WorldProviderSurface
 			this.lightBrightnessTable[i] = (1.0F - factor) / (factor * 3.0F + 1.0F) * 0.9F + 0.1F;
 		}
 	}
+
+	@Override
+	public boolean canDropChunk(int x, int z)
+	{
+		return true;
+	}
+
 }
