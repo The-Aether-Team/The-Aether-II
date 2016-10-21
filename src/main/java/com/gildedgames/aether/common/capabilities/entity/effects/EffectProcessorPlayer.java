@@ -15,9 +15,7 @@ public interface EffectProcessorPlayer<I extends EntityEffectInstance> extends E
 	 * Called when the player interacts with anything in the game, mostly related
 	 * to mouse input.
 	 * @param event The event that is fired off.
-	 * @param source The player that is affected by this ability. 
-	 * @param holder The instances of this ability that are attached to the source.
-	 * @param attributes TODO
+	 * @param source The player that is affected by this ability.
 	 */
 	void onInteract(PlayerInteractEvent event, EntityPlayer source, List<I> instances);
 

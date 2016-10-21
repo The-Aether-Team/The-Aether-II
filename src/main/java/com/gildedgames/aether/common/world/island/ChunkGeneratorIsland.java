@@ -48,6 +48,11 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 	public ChunkGeneratorIsland(World world, long seed)
 	{
 		this.worldObj = world;
+
+		if (!this.worldObj.isRemote)
+		{
+			this.worldObj.setSeaLevel(255);
+		}
 		
 		this.rand = new Random(seed);
 
