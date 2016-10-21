@@ -225,7 +225,7 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 		}
 	}
 
-	public void genClouds(ChunkPrimer primer, int chunkX, int chunkZ)
+	public void genClouds(ChunkPrimer primer, double threshold, int posY, int chunkX, int chunkZ)
 	{
 		int height = 160;
 		int sampleSize = 40;
@@ -247,11 +247,11 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 					double sample = samples / sampleSize;
 
-					if (sample / 5.0D > 90.0D)
+					if (sample / 5.0D > threshold)
 					{
 						if (primer.getBlockState(x, y, z) == Blocks.AIR.getDefaultState())
 						{
-							primer.setBlockState(x, 40 + y / sampleSize, z, BlocksAether.aercloud.getDefaultState());
+							primer.setBlockState(x, posY + y / sampleSize, z, BlocksAether.aercloud.getDefaultState());
 						}
 					}
 				}
@@ -274,7 +274,10 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 		this.caveGenerator.generate(this.worldObj, chunkX, chunkZ, primer);
 
-		this.genClouds(primer, chunkX, chunkZ);
+		this.genClouds(primer, 90.0D, 40, chunkX, chunkZ);
+		this.genClouds(primer, 90.0D, 240, chunkX, chunkZ);
+		this.genClouds(primer, 130.0D, 180, chunkX, chunkZ);
+		this.genClouds(primer, 200.0D, 138, chunkX, chunkZ);
 
 		/*for (int x = 0; x < 16; x++)
 		{

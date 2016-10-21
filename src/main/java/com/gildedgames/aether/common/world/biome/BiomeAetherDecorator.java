@@ -299,11 +299,11 @@ public class BiomeAetherDecorator
 		}
 	}
 
-	private void generateCloud(WorldGenAercloud gen, World world, BlockPos pos, Random rand, int rarity, int width, int height)
+	private void generateCloud(WorldGenAercloud gen, World world, BlockPos pos, Random rand, int rarity, int width, int minY, int maxY)
 	{
 		if (rand.nextInt(rarity) == 0)
 		{
-			BlockPos nextPos = pos.add(rand.nextInt(width), rand.nextInt(height), rand.nextInt(width));
+			BlockPos nextPos = pos.add(rand.nextInt(width), minY + rand.nextInt(maxY - minY), rand.nextInt(width));
 
 			gen.generate(world, rand, nextPos);
 		}
@@ -332,10 +332,10 @@ public class BiomeAetherDecorator
 
 	protected void generateClouds(World world, Random random, BlockPos pos)
 	{
-		this.generateCloud(this.genBlueAercloud, world, pos, random, 15, 16, 65);
+		this.generateCloud(this.genBlueAercloud, world, pos, random, 15, 16, 90, 130);
 //		this.generateCloud(this.genColdFlatAercloud, world, pos, random, 10, 16, 32);
-		this.generateCloud(this.genColdColumbusAercloud, world, pos, random, 30, 16, 65);
+		this.generateCloud(this.genColdColumbusAercloud, world, pos, random, 30, 16, 90, 130);
 
-		this.generateCloud(this.genPurpleAercloud, world, pos, random, 50, 4, 32);
+		this.generateCloud(this.genPurpleAercloud, world, pos, random, 50, 4, 90, 130);
 	}
 }
