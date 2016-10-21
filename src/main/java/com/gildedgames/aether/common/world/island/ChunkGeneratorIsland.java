@@ -47,9 +47,12 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 	public ChunkGeneratorIsland(World world, long seed)
 	{
-		//world.setSeaLevel(255);
-
 		this.worldObj = world;
+
+		if (!this.worldObj.isRemote) {
+			this.worldObj.setSeaLevel(255);
+		}
+
 		this.rand = new Random(seed);
 
 		this.noiseFields = new double[9][];
@@ -281,6 +284,7 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 		Chunk chunk = new Chunk(this.worldObj, primer, chunkX, chunkZ);
 
 		chunk.generateSkylightMap();
+		chunk.resetRelightChecks();
 
 		return chunk;
 	}
