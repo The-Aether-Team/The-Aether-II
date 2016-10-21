@@ -241,11 +241,11 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 					double sample = samples / sampleSize;
 
-					if (sample / 5.0D > 200.0D)
+					if (sample / 5.0D > 90.0D)
 					{
 						if (primer.getBlockState(x, y, z) == Blocks.AIR.getDefaultState())
 						{
-							primer.setBlockState(x, 8 + y / sampleSize, z, BlocksAether.aercloud.getDefaultState());
+							primer.setBlockState(x, 40 + y / sampleSize, z, BlocksAether.aercloud.getDefaultState());
 						}
 					}
 				}
@@ -268,7 +268,7 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 		this.caveGenerator.generate(this.worldObj, chunkX, chunkZ, primer);
 
-		//this.genClouds(primer, chunkX, chunkZ);
+		this.genClouds(primer, chunkX, chunkZ);
 
 		/*for (int x = 0; x < 16; x++)
 		{
