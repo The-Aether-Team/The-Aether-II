@@ -10,6 +10,7 @@ import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.pathfinding.Path;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -105,9 +106,18 @@ public class AIMoaPackBreeding extends EntityAIBase
 	{
 		super.updateTask();
 
-		this.moa.getNavigator().tryMoveToXYZ(this.eggPos.getX() - 1, this.eggPos.getY(), this.eggPos.getZ() - 1, this.moveSpeed);
+		Path path = this.moa.getNavigator().getPath();
 
-		if (this.moa.getNavigator().getPath() != null && this.moa.getNavigator().getPath().isFinished())
+		boolean isNearEgg = this.moa.getDistanceSq(this.eggPos.getX() - 1, this.eggPos.getY(), this.eggPos.getZ() - 1) <= 4.0D;
+
+		if (path == null || path.isFinished())
+		{
+			if (!isNearEgg)
+			{
+				this.moa.getNavigator().tryMoveToXYZ(this.eggPos.getX() - 1, this.eggPos.getY(), this.eggPos.getZ() - 1, this.moveSpeed);
+			}
+		}
+		else if (isNearEgg && this.moa.getNavigator().getPath() != null && this.moa.getNavigator().getPath().isFinished())
 		{
 			this.world.setBlockState(this.eggPos, BlocksAether.moa_egg.getDefaultState());
 
