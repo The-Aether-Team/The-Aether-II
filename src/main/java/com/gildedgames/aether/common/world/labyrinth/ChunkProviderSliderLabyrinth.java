@@ -27,6 +27,12 @@ public class ChunkProviderSliderLabyrinth implements IChunkGenerator
 	public ChunkProviderSliderLabyrinth(World world, long seed)
 	{
 		this.world = world;
+
+		if (!this.world.isRemote)
+		{
+			this.world.setSeaLevel(255);
+		}
+
 		this.random = new Random(seed);
 	}
 
@@ -90,7 +96,7 @@ public class ChunkProviderSliderLabyrinth implements IChunkGenerator
 		Chunk chunk = new Chunk(this.world, primer, chunkX, chunkZ);
 
 		chunk.generateSkylightMap();
-		chunk.resetRelightChecks();
+		//chunk.resetRelightChecks();
 
 		return chunk;
 	}
