@@ -175,6 +175,7 @@ public class ItemCrossbow extends Item
 			EntityBolt dart = new EntityBolt(entityLiving.getEntityWorld(), entityLiving);
 			dart.setAim(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, speed * 2.0F, 1.0F);
 			dart.setBoltAbility(stack.getItem() == ItemsAether.arkenium_crossbow ? BoltAbility.DESTROY_BLOCKS : BoltAbility.NORMAL);
+			dart.setBoltType(ItemBoltType.values()[stack.getItemDamage()]);
 			dart.pickupStatus = EntityArrow.PickupStatus.ALLOWED;
 
 			entityLiving.getEntityWorld().spawnEntityInWorld(dart);
