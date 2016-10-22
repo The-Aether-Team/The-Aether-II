@@ -277,7 +277,7 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 		this.genClouds(primer, 90.0D, 40, chunkX, chunkZ);
 		//this.genClouds(primer, 90.0D, 240, chunkX, chunkZ);
 		this.genClouds(primer, 130.0D, 180, chunkX, chunkZ);
-		this.genClouds(primer, 200.0D, 138, chunkX, chunkZ);
+		this.genClouds(primer, 200.0D, 148, chunkX, chunkZ);
 
 		/*for (int x = 0; x < 16; x++)
 		{
