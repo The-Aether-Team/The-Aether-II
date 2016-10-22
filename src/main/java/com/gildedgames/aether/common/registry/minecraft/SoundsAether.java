@@ -106,7 +106,7 @@ public class SoundsAether
 		registerSound("portal.glowstone.trigger", glowstone_portal_trigger);
 		registerSound("portal.glowstone.travel", glowstone_portal_travel);
 
-		registerSound("portal.labyrinth_totem.hum", labyrinth_totem_drone);
+		registerSound("portal.labyrinth_totem.drone", labyrinth_totem_drone);
 
 		registerSound("block.aercloud.bounce", aercloud_bounce);
 
