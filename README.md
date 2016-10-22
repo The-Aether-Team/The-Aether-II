@@ -11,12 +11,12 @@ We ask that you have existing knowledge of Minecraft modding, locating crash rep
 ### Getting help
 We don't provide support for getting the Git repository and Gradle/Forge workspace setup. We expect those wishing to do so to have prior knowledge before attempting.
 
-If you run into bugs or other problems, feel free to create an issue on our [issue tracker](https://git.gildedgames.com/GildedGames/Aether-1.8/issues).
+If you run into bugs or other problems, feel free to create an issue on our [issue tracker](https://git.gildedgames.com/GildedGames/Aether-II/issues).
 
 ### For contributors
-Looking to create an issue or merge request? See our [contributor's guide](https://git.gildedgames.com/GildedGames/Aether-1.8/blob/master/CONTRIBUTING.md) for more details.
+Looking to create an issue or merge request? See our [contributor's guide](https://git.gildedgames.com/GildedGames/Aether-II/blob/master/CONTRIBUTING.md) for more details.
 
-Not sure what to help us with? Take a look at our issue tracker for some ideas! [Here's a quick link](https://git.gildedgames.com/GildedGames/Aether-1.8/issues?label_name%5B%5D=Contributions+Welcome) to show all the currently open issues that we'd love some help on.
+Not sure what to help us with? Take a look at our issue tracker for some ideas! [Here's a quick link](https://git.gildedgames.com/GildedGames/Aether-II/issues?label_name%5B%5D=Contributions+Welcome) to show all the currently open issues that we'd love some help on.
 
 Please note however that due to the rapid development pace of the Aether Rewrite, we're currently not accepting issues or merge requests of which are purely content additions or feature requests.
 
@@ -28,7 +28,7 @@ However, **you are not permitted to redistribute (upload) compiled builds** of t
 ### License
 The Aether II rewrite is under the [GNU GPL v3](http://www.gnu.org/licenses/gpl-3.0.en.html) license.
 
-Additionally, all assets of the Aether II rewrite (found in the [resources folder](https://git.gildedgames.com/GildedGames/Aether-1.8/tree/master/src/main/resources)) are under the [Creative Commons BY-NC-SA 4.0 license](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+Additionally, all assets of the Aether II rewrite (found in the [resources folder](https://git.gildedgames.com/GildedGames/Aether-II/tree/master/src/main/resources)) are under the [Creative Commons BY-NC-SA 4.0 license](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 ### Join us on Discord
 We don't bite, we promise!
