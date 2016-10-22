@@ -322,8 +322,8 @@ public class BiomeAetherDecorator
 	protected void generateOres(World world, Random random, BlockPos pos)
 	{
 		this.generateMineable(this.genAmbrosium, world, random, pos, 0, 128, 20);
-		this.generateMineable(this.genZanite, world, random, pos, 0, 64, 15);
-		this.generateMineable(this.genGravitite, world, random, pos, 0, 32, 6);
+		this.generateMineable(this.genZanite, world, random, pos, 0, 128, 15);
+		this.generateMineable(this.genGravitite, world, random, pos, 0, 100, 6);
 		this.generateMineable(this.genIcestone, world, random, pos, 0, 128, 10);
 		this.generateMineable(this.genArkenium, world, random, pos, 0, 128, 20);
 		this.generateCaveMineable(this.genMossyHolystone, world, random, pos, 0, 90, 45);
