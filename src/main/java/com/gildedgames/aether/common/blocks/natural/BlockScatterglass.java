@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import net.minecraft.block.BlockBreakable;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockRenderLayer;
@@ -11,12 +12,13 @@ public class BlockScatterglass extends BlockBreakable
 {
 	public BlockScatterglass()
 	{
-		super(Material.ROCK, false);
+		super(Material.GLASS, false);
 
 		this.setHardness(1f);
 		this.setResistance(2000f);
 
 		this.setLightOpacity(3);
+		this.setSoundType(SoundType.GLASS);
 	}
 
 	@Override

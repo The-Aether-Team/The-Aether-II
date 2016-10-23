@@ -30,12 +30,33 @@ public class BlockCrudeScatterglass extends BlockBreakable
 
 		this.setHardness(1f);
 		this.setResistance(2000f);
+
+		this.setLightOpacity(3);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getBlockLayer()
+	{
+		return BlockRenderLayer.TRANSLUCENT;
+	}
+
+	@Override
+	public boolean isOpaqueCube(IBlockState state)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isFullCube(IBlockState state)
+	{
+		return false;
 	}
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return Item.getItemFromBlock(BlocksAether.scatterglass);
+		return Item.getItemFromBlock(BlocksAether.crude_scatterglass);
 	}
 
 	@Override
@@ -47,7 +68,7 @@ public class BlockCrudeScatterglass extends BlockBreakable
 
 		if (!wasPlaced)
 		{
-			Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.scatterglass_shard, world.rand.nextInt(2) + 1));
+			Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.scatterglass_shard));
 		}
 
 		super.harvestBlock(world, player, pos, state, te, stack);
