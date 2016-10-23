@@ -129,7 +129,7 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 						j1 = sthWithHeightMap;
 
-						if (y >= 0)
+						if (y >= 0 && (y + 1 >= worldObj.getActualHeight() || primer.getBlockState(x, y + 1, z) == Blocks.AIR.getDefaultState()))
 						{
 							primer.setBlockState(x, y, z, topAetherBlock);
 						}
