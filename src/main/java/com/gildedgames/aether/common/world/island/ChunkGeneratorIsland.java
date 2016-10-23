@@ -33,7 +33,7 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 	private double[][] noiseFields;
 
-	private double[] cloudNoise;
+	private double[] cloudNoise1, cloudNoise2, cloudNoise3, cloudNoise4;
 
 	private NoiseGeneratorOctaves[] octaveNoiseGenerators;
 
@@ -43,7 +43,7 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 	private WorldGenAetherCaves caveGenerator = new WorldGenAetherCaves();
 
-	private NoiseGeneratorOctaves cloudNoiseGenerator;
+	private NoiseGeneratorOctaves cloudGenLayer1, cloudGenLayer2, cloudGenLayer3, cloudGenLayer4;
 
 	public ChunkGeneratorIsland(World world, long seed)
 	{
@@ -73,7 +73,10 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 		this.octaveNoiseGenerators[5] = new NoiseGeneratorOctaves(this.rand, 10);
 		this.octaveNoiseGenerators[6] = new NoiseGeneratorOctaves(this.rand, 16);
 
-		this.cloudNoiseGenerator = new NoiseGeneratorOctaves(this.rand, 12);
+		this.cloudGenLayer1 = new NoiseGeneratorOctaves(this.rand, 12);
+		this.cloudGenLayer2 = new NoiseGeneratorOctaves(new Random(seed + 100L), 12);
+		this.cloudGenLayer3 = new NoiseGeneratorOctaves(new Random(seed + 200L), 12);
+		this.cloudGenLayer4 = new NoiseGeneratorOctaves(new Random(seed + 300L), 12);
 	}
 
 	@Override
@@ -225,12 +228,12 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 		}
 	}
 
-	public void genClouds(ChunkPrimer primer, double threshold, int posY, int chunkX, int chunkZ)
+	public void genClouds(ChunkPrimer primer, double[] noise, NoiseGeneratorOctaves noiseGen, double threshold, int posY, int chunkX, int chunkZ)
 	{
 		int height = 160;
 		int sampleSize = 40;
 
-		this.cloudNoise = this.cloudNoiseGenerator.generateNoiseOctaves(this.cloudNoise, chunkX * 16, 0, chunkZ * 16, 16, height, 16, 64.0D, 1.5D, 64.0D);
+		noise = noiseGen.generateNoiseOctaves(noise, chunkX * 16, 0, chunkZ * 16, 16, height, 16, 64.0D, 1.5D, 64.0D);
 
 		for (int x = 0; x < 16; x++)
 		{
@@ -242,7 +245,7 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 					for (int y2 = y; y2 < y + sampleSize; y2++)
 					{
-						samples += this.cloudNoise[(x * 16 + z) * height + y];
+						samples += noise[(x * 16 + z) * height + y];
 					}
 
 					double sample = samples / sampleSize;
@@ -274,12 +277,12 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 		this.caveGenerator.generate(this.worldObj, chunkX, chunkZ, primer);
 
-		this.genClouds(primer, 90.0D, 40, chunkX, chunkZ);
-		this.genClouds(primer, 180.0D, 65, chunkX, chunkZ);
+		this.genClouds(primer, this.cloudNoise1, this.cloudGenLayer1, 10.0D, 40, chunkX, chunkZ);
+		this.genClouds(primer, this.cloudNoise2, this.cloudGenLayer2, 100.0D, 65, chunkX, chunkZ);
 
 		//this.genClouds(primer, 90.0D, 240, chunkX, chunkZ);
-		this.genClouds(primer, 130.0D, 180, chunkX, chunkZ);
-		this.genClouds(primer, 200.0D, 148, chunkX, chunkZ);
+		this.genClouds(primer, this.cloudNoise3, this.cloudGenLayer3, 130.0D, 180, chunkX, chunkZ);
+		this.genClouds(primer, this.cloudNoise4, this.cloudGenLayer4, 200.0D, 148, chunkX, chunkZ);
 
 		/*for (int x = 0; x < 16; x++)
 		{
