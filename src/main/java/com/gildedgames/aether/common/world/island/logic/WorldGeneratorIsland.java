@@ -77,11 +77,11 @@ public class WorldGeneratorIsland
 
 					for (double y = bottomMaxY; y < bottomMaxY + ((heightValue - 0.8) * topHeight); y++)
 					{
-						/*if (y < bottomMaxY + 2)
+						if (heightValue < 0.85 && y < bottomMaxY + 1)
 						{
 							primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.quicksoil.getDefaultState());
 						}
-						else*/
+						else
 						{
 							primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.holystone.getDefaultState());
 						}

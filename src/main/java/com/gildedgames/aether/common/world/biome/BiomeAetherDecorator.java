@@ -275,28 +275,6 @@ public class BiomeAetherDecorator
 			this.genBurstblossom.generate(world, random, pos.add(x, y, z));
 		}
 
-		// Quicksoil Generator
-		/*if (random.nextInt(5) == 0)
-		{
-			for (x = pos.getX(); x < pos.getX() + 16; x++)
-			{
-				for (z = pos.getZ(); z < pos.getZ() + 16; z++)
-				{
-					BlockPos top = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
-
-					for (y = top.getY(); y > 12 && y < 48; y--)
-					{
-						BlockPos randPos = new BlockPos(x, y, z);
-
-						if (world.isAirBlock(randPos) && world.getBlockState(randPos.up()).getBlock() == BlocksAether.aether_grass && world.isAirBlock(randPos.up(2)))
-						{
-							this.genQuicksoil.generate(world, random, randPos);
-						}
-					}
-				}
-			}
-		}*/
-
 		this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));
 
 		this.templatePipeline.constructChunk(world, chunkX, chunkZ);
