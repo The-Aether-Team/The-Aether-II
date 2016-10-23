@@ -4,9 +4,13 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.common.world.biome.BiomeAetherBase;
+import com.gildedgames.aether.common.world.features.TemplatePipeline;
+import com.gildedgames.aether.common.world.features.WorldGenTemplate;
 import com.gildedgames.aether.common.world.features.trees.WorldGenSkyrootTree;
 import net.minecraft.block.BlockLog;
+import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import java.util.Random;
 
@@ -29,6 +33,18 @@ public class BiomeHighlandForest extends BiomeAetherBase
 	public WorldGenAbstractTree genBigTreeChance(Random random)
 	{
 		return trees;
+	}
+
+	@Override
+	public void initTemplates(WorldServer world, TemplatePipeline pipeline, TemplateManager manager)
+	{
+
+	}
+
+	@Override
+	public WorldGenTemplate fetchTemplateToGenerate(Random random)
+	{
+		return null;
 	}
 
 }

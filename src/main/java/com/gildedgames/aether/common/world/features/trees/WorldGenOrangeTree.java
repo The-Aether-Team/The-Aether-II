@@ -20,13 +20,22 @@ public class WorldGenOrangeTree extends WorldGenerator
 	{
 		Object[] stages = BlockOrangeTree.PROPERTY_STAGE.getAllowedValues().toArray();
 
-		for (int i = 0; i < count; i++)
+		int i = 0;
+
+		while (i < this.count)
 		{
 			int x = rand.nextInt(8) - rand.nextInt(8);
 			int y = rand.nextInt(4) - rand.nextInt(4);
 			int z = rand.nextInt(8) - rand.nextInt(8);
 
 			BlockPos pos = position.add(x, y, z);
+
+			i++;
+
+			if (!world.isBlockLoaded(pos))
+			{
+				continue;
+			}
 
 			if (world.isAirBlock(pos) && world.isAirBlock(pos.up()) && this.treeBlock.isSuitableSoilBlock(world.getBlockState(pos.down())))
 			{

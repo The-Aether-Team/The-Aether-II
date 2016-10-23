@@ -163,4 +163,16 @@ public class BiomeFrostpine extends BiomeAetherBase
 		return null;
 	}
 
+	@Override
+	public WorldGenTemplate fetchTemplateToGenerate(Random random)
+	{
+		return null;
+	}
+
+	@Override
+	public void initTemplates(WorldServer world, TemplatePipeline pipeline, TemplateManager manager)
+	{
+
+	}
+
 }

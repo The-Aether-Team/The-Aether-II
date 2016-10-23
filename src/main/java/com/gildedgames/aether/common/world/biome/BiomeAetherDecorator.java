@@ -38,9 +38,9 @@ public class BiomeAetherDecorator
 
 	protected WorldGenAetherTallGrass genAetherGrass;
 
-	protected WorldGenMinable genAmbrosium, genZanite, genGravitite, genIcestone, genArkenium;
+	protected WorldGenAetherMinable genAmbrosium, genZanite, genGravitite, genIcestone, genArkenium;
 
-	protected WorldGenMinable genMossyHolystone, genCrudeScatterglass;
+	protected WorldGenAetherMinable genMossyHolystone, genCrudeScatterglass;
 
 	protected WorldGenAetherFlowers genPurpleFlowers, genWhiteRoses, genBurstblossom;
 
@@ -60,6 +60,8 @@ public class BiomeAetherDecorator
 
 	protected TemplatePipeline templatePipeline;
 
+	private boolean hasInit = false;
+
 	public boolean generateBushes = true;
 
 	public BiomeAetherDecorator()
@@ -68,14 +70,14 @@ public class BiomeAetherDecorator
 
 		BlockMatcher holystoneMatcher = BlockMatcher.forBlock(BlocksAether.holystone);
 
-		this.genAmbrosium = new WorldGenMinable(BlocksAether.ambrosium_ore.getDefaultState(), 16, holystoneMatcher);
-		this.genZanite = new WorldGenMinable(BlocksAether.zanite_ore.getDefaultState(), 8, holystoneMatcher);
-		this.genGravitite = new WorldGenMinable(BlocksAether.gravitite_ore.getDefaultState(), 4, holystoneMatcher);
-		this.genIcestone = new WorldGenMinable(BlocksAether.icestone_ore.getDefaultState(), 10, holystoneMatcher);
-		this.genArkenium = new WorldGenMinable(BlocksAether.arkenium_ore.getDefaultState(), 8, holystoneMatcher);
+		this.genAmbrosium = new WorldGenAetherMinable(BlocksAether.ambrosium_ore.getDefaultState(), 16, holystoneMatcher);
+		this.genZanite = new WorldGenAetherMinable(BlocksAether.zanite_ore.getDefaultState(), 8, holystoneMatcher);
+		this.genGravitite = new WorldGenAetherMinable(BlocksAether.gravitite_ore.getDefaultState(), 4, holystoneMatcher);
+		this.genIcestone = new WorldGenAetherMinable(BlocksAether.icestone_ore.getDefaultState(), 10, holystoneMatcher);
+		this.genArkenium = new WorldGenAetherMinable(BlocksAether.arkenium_ore.getDefaultState(), 8, holystoneMatcher);
 
-		this.genMossyHolystone = new WorldGenMinable(BlocksAether.holystone.getDefaultState().withProperty(BlockHolystone.PROPERTY_VARIANT, BlockHolystone.MOSSY_HOLYSTONE), 20, holystoneMatcher);
-		this.genCrudeScatterglass = new WorldGenMinable(BlocksAether.crude_scatterglass.getDefaultState(), 20, holystoneMatcher);
+		this.genMossyHolystone = new WorldGenAetherMinable(BlocksAether.holystone.getDefaultState().withProperty(BlockHolystone.PROPERTY_VARIANT, BlockHolystone.MOSSY_HOLYSTONE), 20, holystoneMatcher);
+		this.genCrudeScatterglass = new WorldGenAetherMinable(BlocksAether.crude_scatterglass.getDefaultState(), 20, holystoneMatcher);
 
 		this.genPurpleFlowers = new WorldGenAetherFlowers(BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER), 64);
 		this.genWhiteRoses = new WorldGenAetherFlowers(BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE), 64);
@@ -107,11 +109,26 @@ public class BiomeAetherDecorator
 		if (world instanceof WorldServer)
 		{
 			WorldServer worldServer = (WorldServer)world;
-			MinecraftServer server = worldServer.getMinecraftServer();
 
-			if (this.genSliderLabyrinthEntrance == null)
+			if (genBase instanceof BiomeAetherBase)
 			{
+				BiomeAetherBase biome = (BiomeAetherBase)genBase;
+
+				if (!biome.areTemplatesInitiated())
+				{
+					biome.initTemplates(worldServer, this.templatePipeline, MANAGER);
+
+					biome.markTemplatesInitiated();
+				}
+			}
+
+			if (!this.hasInit)
+			{
+				MinecraftServer server = worldServer.getMinecraftServer();
+
 				this.genSliderLabyrinthEntrance = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_entrance")));
+
+				this.hasInit = true;
 			}
 		}
 
@@ -169,6 +186,26 @@ public class BiomeAetherDecorator
 			if (treeGen != null)
 			{
 				treeGen.generate(world, random, randPos);
+			}
+		}
+
+		//Template Generator
+		if (genBase instanceof BiomeAetherBase)
+		{
+			BiomeAetherBase biome = (BiomeAetherBase)genBase;
+
+			for (count = 0; count < 4; count++)
+			{
+				x = random.nextInt(16) + 8;
+				z = random.nextInt(16) + 8;
+
+				WorldGenTemplate template = biome.fetchTemplateToGenerate(random);
+				BlockPos randPos = world.getHeight(pos.add(x, 0, z));
+
+				if (template != null)
+				{
+					template.generate(world, random, randPos);
+				}
 			}
 		}
 
@@ -239,7 +276,7 @@ public class BiomeAetherDecorator
 		}
 
 		// Quicksoil Generator
-		if (random.nextInt(5) == 0)
+		/*if (random.nextInt(5) == 0)
 		{
 			for (x = pos.getX(); x < pos.getX() + 16; x++)
 			{
@@ -258,24 +295,24 @@ public class BiomeAetherDecorator
 					}
 				}
 			}
-		}
+		}*/
 
 		this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));
 
 		this.templatePipeline.constructChunk(world, chunkX, chunkZ);
 
 		// Lake Generator
-		if (random.nextInt(4) == 0)
+		/*if (random.nextInt(4) == 0)
 		{
 			x = random.nextInt(16) + 8;
 			y = random.nextInt(128);
 			z = random.nextInt(16) + 8;
 
 			this.genAetherLakes.generate(world, random, pos.add(x, y, z));
-		}
+		}*/
 	}
 
-	private void generateMineable(WorldGenMinable minable, World world, Random random, BlockPos pos, int minY, int maxY, int attempts)
+	private void generateMineable(WorldGenAetherMinable minable, World world, Random random, BlockPos pos, int minY, int maxY, int attempts)
 	{
 		for (int count = 0; count < attempts; count++)
 		{
@@ -285,7 +322,7 @@ public class BiomeAetherDecorator
 		}
 	}
 
-	private void generateCaveMineable(WorldGenMinable minable, World world, Random random, BlockPos pos, int minY, int maxY, int attempts)
+	private void generateCaveMineable(WorldGenAetherMinable minable, World world, Random random, BlockPos pos, int minY, int maxY, int attempts)
 	{
 		for (int count = 0; count < attempts; count++)
 		{

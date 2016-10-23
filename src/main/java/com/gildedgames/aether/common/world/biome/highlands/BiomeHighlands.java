@@ -4,13 +4,19 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.common.world.biome.BiomeAetherBase;
+import com.gildedgames.aether.common.world.features.TemplatePipeline;
+import com.gildedgames.aether.common.world.features.WorldGenTemplate;
 import com.gildedgames.aether.common.world.features.trees.WorldGenFruitTree;
 import com.gildedgames.aether.common.world.features.trees.WorldGenLargeTree;
 import com.gildedgames.aether.common.world.features.trees.WorldGenMassiveSkyrootTree;
 import com.gildedgames.aether.common.world.features.trees.WorldGenSkyrootTree;
 import net.minecraft.block.BlockLog;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import java.util.Random;
 
@@ -32,6 +38,8 @@ public class BiomeHighlands extends BiomeAetherBase
 	public static final WorldGenLargeTree genGoldenOakTree = new WorldGenLargeTree(BlocksAether.golden_oak_log.getDefaultState(), BlocksAether.golden_oak_leaves.getDefaultState());
 
 	public static final WorldGenLargeTree genGreenLargeSkyrootTree = new WorldGenLargeTree(BlocksAether.skyroot_log.getDefaultState(), BlocksAether.green_skyroot_leaves.getDefaultState());
+
+	public WorldGenTemplate blue_skyroot_tree_1, blue_skyroot_tree_2, blue_skyroot_tree_3;
 
 	public BiomeHighlands()
 	{
@@ -57,7 +65,7 @@ public class BiomeHighlands extends BiomeAetherBase
 		}
 		else if (ratio > 18 && ratio <= 35)
 		{
-			return genBlueSkyrootTree;
+			return null;
 		}
 		else if (ratio > 35 && ratio <= 63)
 		{
@@ -77,6 +85,33 @@ public class BiomeHighlands extends BiomeAetherBase
 		}
 
 		return genGreenMassiveSkyrootTree2;
+	}
+
+	@Override
+	public WorldGenTemplate fetchTemplateToGenerate(Random random)
+	{
+		int select = random.nextInt(3);
+
+		if (select == 0)
+		{
+			return this.blue_skyroot_tree_1;
+		}
+		else if (select == 1)
+		{
+			return this.blue_skyroot_tree_2;
+		}
+
+		return this.blue_skyroot_tree_3;
+	}
+
+	@Override
+	public void initTemplates(WorldServer world, TemplatePipeline pipeline, TemplateManager manager)
+	{
+		MinecraftServer server = world.getMinecraftServer();
+
+		this.blue_skyroot_tree_1 = new WorldGenTemplate(pipeline, manager.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "highlands/blue_skyroot_tree_1")));
+		this.blue_skyroot_tree_2 = new WorldGenTemplate(pipeline, manager.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "highlands/blue_skyroot_tree_2")));
+		this.blue_skyroot_tree_3 = new WorldGenTemplate(pipeline, manager.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "highlands/blue_skyroot_tree_3")));
 	}
 
 }

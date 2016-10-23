@@ -34,9 +34,18 @@ public class WorldGenAetherTallGrass extends WorldGenerator
 			pos = pos.down();
 		}
 
-		for (int i = 0; i < 128; ++i)
+		int i = 0;
+
+		while (i < 128)
 		{
 			BlockPos randomPos = pos.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
+
+			i++;
+
+			if (!world.isAreaLoaded(pos, randomPos))
+			{
+				return false;
+			}
 
 			if (world.isAirBlock(randomPos) && BlocksAether.tall_aether_grass.canPlaceBlockAt(world, randomPos))
 			{

@@ -22,11 +22,20 @@ public class WorldGenAetherFlowers extends WorldGenerator
 	@Override
 	public boolean generate(World world, Random rand, BlockPos pos)
 	{
-		for (int i = 0; i < this.max; ++i)
+		int i = 0;
+
+		while (i < this.max)
 		{
 			BlockPos randomPos = pos.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
 
-			if (world.isAirBlock(randomPos) && (randomPos.getY() < 255) && this.state.getBlock().canPlaceBlockAt(world, randomPos))
+			i++;
+
+			if (!world.isBlockLoaded(randomPos))
+			{
+				continue;
+			}
+
+			if (world.isAirBlock(randomPos) && (randomPos.getY() < world.getActualHeight()) && this.state.getBlock().canPlaceBlockAt(world, randomPos))
 			{
 				world.setBlockState(randomPos, this.state, 2);
 			}

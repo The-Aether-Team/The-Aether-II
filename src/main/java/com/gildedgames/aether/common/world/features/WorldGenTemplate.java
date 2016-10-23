@@ -37,6 +37,11 @@ public class WorldGenTemplate extends WorldGenerator
 	{
 		final BlockPos max = pos.add(this.template.getSize().getX(), this.template.getSize().getY(), this.template.getSize().getZ());
 
+		if (!world.isAreaLoaded(pos, max))
+		{
+			return false;
+		}
+
 		if (max.getY() > world.getActualHeight())
 		{
 			return false;
@@ -107,7 +112,10 @@ public class WorldGenTemplate extends WorldGenerator
 	@Override
 	public boolean generate(World world, Random rand, BlockPos pos)
 	{
-		return this.generate(world, rand, pos, Rotation.NONE);
+		Rotation[] arotation = Rotation.values();
+		Rotation rotation = arotation[rand.nextInt(arotation.length)];
+
+		return this.generate(world, rand, pos, rotation);
 	}
 
 	protected boolean canGrowInto(Block blockType)
