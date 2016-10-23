@@ -61,6 +61,8 @@ public class WorldGeneratorIsland
 
 				value = (value + 0.0) - (0.7 * Math.pow(dist, 4)); // Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
 
+				value -= dist * 0.2;
+
 				double heightValue = value + 1.0;
 
 				double bottomHeight = 0.8 * height;
