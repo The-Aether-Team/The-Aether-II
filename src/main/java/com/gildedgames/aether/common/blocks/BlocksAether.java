@@ -503,7 +503,8 @@ public class BlocksAether
 
 		icestone_ore.setHarvestLevel("pickaxe", 1);
 		icestone_bricks.setHarvestLevel("pickaxe", 1);
-		crude_scatterglass.setHarvestLevel("pickaxe", 1);
+		crude_scatterglass.setHarvestLevel("pickaxe", 0);
+		scatterglass.setHarvestLevel("pickaxe", 0);
 
 		altar.setHarvestLevel("pickaxe", 0);
 		holystone_furnace.setHarvestLevel("pickaxe", 0);
