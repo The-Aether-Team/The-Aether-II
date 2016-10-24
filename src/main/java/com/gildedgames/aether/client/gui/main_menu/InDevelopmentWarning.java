@@ -84,6 +84,14 @@ public class InDevelopmentWarning extends GuiFrame
 		});
 
 		TextureElement bg = GuiFactory.texture(BG, Dim2D.build().area(input.getScreenWidth(), input.getScreenHeight()).flush());
+
+		if (input.getScreenWidth() > bg.dim().width() || input.getScreenHeight() > bg.dim().height())
+		{
+			float scale = input.getScreenHeight() > input.getScreenWidth() ? Math.abs(bg.dim().height() - input.getScreenHeight()) / bg.dim().height() : Math.abs(bg.dim().width() - input.getScreenWidth()) / bg.dim().width();
+
+			bg.dim().mod().scale(1.0F + scale).flush();
+		}
+
 		TextureElement logo = GuiFactory.texture(LOGO);
 
 		logo.dim().mod().area(275, 114).pos(InputHelper.getTopCenter(input)).centerX(true).addPos(0, 5).scale(0.5F).flush();
