@@ -2,7 +2,6 @@ package com.gildedgames.aether.client.gui.main_menu;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.util.core.gui.util.GuiFactory;
-import com.gildedgames.util.modules.ui.UiModule;
 import com.gildedgames.util.modules.ui.common.GuiFrame;
 import com.gildedgames.util.modules.ui.data.rect.Dim2D;
 import com.gildedgames.util.modules.ui.event.view.MouseEventGui;
@@ -10,13 +9,10 @@ import com.gildedgames.util.modules.ui.graphics.Graphics2D;
 import com.gildedgames.util.modules.ui.input.*;
 import com.gildedgames.util.modules.ui.util.InputHelper;
 import com.gildedgames.util.modules.ui.util.Text;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 

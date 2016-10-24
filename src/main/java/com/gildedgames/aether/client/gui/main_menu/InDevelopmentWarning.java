@@ -10,13 +10,13 @@ import com.gildedgames.util.modules.ui.common.GuiFrame;
 import com.gildedgames.util.modules.ui.data.AssetLocation;
 import com.gildedgames.util.modules.ui.data.Pos2D;
 import com.gildedgames.util.modules.ui.data.rect.Dim2D;
+import com.gildedgames.util.modules.ui.data.rect.Rect;
 import com.gildedgames.util.modules.ui.event.view.MouseEventGui;
 import com.gildedgames.util.modules.ui.graphics.Graphics2D;
 import com.gildedgames.util.modules.ui.input.*;
+import com.gildedgames.util.modules.ui.util.*;
 import com.gildedgames.util.modules.ui.util.Button;
-import com.gildedgames.util.modules.ui.util.InputHelper;
-import com.gildedgames.util.modules.ui.util.Text;
-import com.gildedgames.util.modules.ui.util.TextureElement;
+import com.gildedgames.util.modules.ui.util.decorators.ScrollableGui;
 import com.gildedgames.util.modules.ui.util.decorators.ScrollingGui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
@@ -52,7 +52,7 @@ public class InDevelopmentWarning extends GuiFrame
 			@Override
 			protected void onTrue(InputProvider input, MouseInputPool pool)
 			{
-				File areaFile = new File(Minecraft.getMinecraft().mcDataDir, "//config/in_development_displayed.dat");
+				/*File areaFile = new File(Minecraft.getMinecraft().mcDataDir, "//config/in_development_displayed.dat");
 
 				if (!areaFile.exists())
 				{
@@ -64,7 +64,7 @@ public class InDevelopmentWarning extends GuiFrame
 					{
 						e.printStackTrace();
 					}
-				}
+				}*/
 
 				UiModule.locate().close();
 			}
@@ -108,7 +108,15 @@ public class InDevelopmentWarning extends GuiFrame
 		texts[9] = GuiFactory.text(" ", Color.WHITE);
 		texts[10] = GuiFactory.text(I18n.format("indev.line7"), Color.LIGHT_GRAY);
 
-		GuiFrame text = GuiFactory.textBox(Dim2D.build().area(350, 200).pos(InputHelper.getCenter(input).clone().addY(15).flush()).center(true).flush(), false, texts);
+		Rect rect = Dim2D.build().area(350, 130).pos(InputHelper.getCenter(input).clone().addY(15).flush()).center(true).flush();
+
+		GuiFrame text = GuiFactory.textBox(rect, false, texts);
+
+		ScrollBar scrollBar = GuiFactory.createScrollBar();
+
+		scrollBar.setScrollSpeed(0.2F);
+
+		text = new ScrollableGui(rect, text, scrollBar, null, null, 7, 6);
 
 		this.content().set("text", text);
 	}
