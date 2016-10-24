@@ -172,7 +172,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 			{
 				if (this.isChild())
 				{
-					if (this.isRaisedByPlayer() && stack != null && stack.getItem() == ItemsAether.aechor_petal)
+					if (this.isRaisedByPlayer() && stack != null && stack.getItem() == ItemsAether.aechor_petal && this.isHungry())
 					{
 						if (!player.capabilities.isCreativeMode)
 						{
