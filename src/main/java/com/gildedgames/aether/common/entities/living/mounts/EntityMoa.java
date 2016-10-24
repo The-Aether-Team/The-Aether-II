@@ -518,6 +518,11 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 		if (this.pack != null && entity != null)
 		{
+			if (this.isRaisedByPlayer())
+			{
+				return;
+			}
+
 			this.pack.addOrRenewAggressor(entity);
 		}
 	}
