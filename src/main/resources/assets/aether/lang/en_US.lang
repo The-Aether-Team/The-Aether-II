@@ -717,3 +717,16 @@ tab.equipment=Equipment
 
 # Chat Messages
 chat.aether.resurrected=%s was resurrected by their Nex Spirit
+
+# In Development Menu
+indev.line1=Hello dear tester!
+indev.line2=Thank you for your interest in the mod. Before we proceed, we'd
+indev.line3=like you to understand that the build of the Aether mod you are
+indev.line4=about to play is IN-DEVELOPMENT.
+indev.line5=This means that this build will have the following:
+indev.line6=Models without textures!
+indev.line7=Mobs with no models at all!
+indev.line8=And most importantly, bugs!
+indev.line9=We are more than happy to let people test this build, but please
+indev.line10=understand that the mod is VERY unfinished and many things will
+indev.line11=change in the future.

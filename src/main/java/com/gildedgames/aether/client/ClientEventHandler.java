@@ -10,6 +10,7 @@ import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCa
 import com.gildedgames.aether.api.capabilites.items.properties.ItemRarity;
 import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
+import com.gildedgames.aether.client.gui.main_menu.InDevelopmentWarning;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
@@ -22,9 +23,11 @@ import com.gildedgames.aether.common.containers.slots.SlotMoaEgg;
 import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.AetherMovementPacket;
+import com.gildedgames.util.modules.ui.UiModule;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -43,6 +46,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.Timer;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -57,6 +61,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -67,6 +72,21 @@ public class ClientEventHandler
 	private boolean prevJumpBindState;
 
 	private final Gui DUMMY_GUI = new Gui();
+
+	@SubscribeEvent
+	public void onOpenGui(GuiOpenEvent event)
+	{
+		if (event.getGui() instanceof GuiMainMenu)
+		{
+			File areaFile = new File(Minecraft.getMinecraft().mcDataDir, "//config/in_development_displayed.dat");
+
+			if (!areaFile.exists())
+			{
+				UiModule.locate().open("indevWarning", new InDevelopmentWarning());
+				event.setCanceled(true);
+			}
+		}
+	}
 
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRenderGui(RenderGameOverlayEvent event)
