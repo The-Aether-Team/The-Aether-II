@@ -52,7 +52,7 @@ public class InDevelopmentWarning extends GuiFrame
 			@Override
 			protected void onTrue(InputProvider input, MouseInputPool pool)
 			{
-				File areaFile = new File(Minecraft.getMinecraft().mcDataDir, "//config/in_development_displayed.dat");
+				/*File areaFile = new File(Minecraft.getMinecraft().mcDataDir, "//config/in_development_displayed.dat");
 
 				if (!areaFile.exists())
 				{
@@ -64,7 +64,7 @@ public class InDevelopmentWarning extends GuiFrame
 					{
 						e.printStackTrace();
 					}
-				}
+				}*/
 
 				UiModule.locate().close();
 			}
@@ -116,7 +116,7 @@ public class InDevelopmentWarning extends GuiFrame
 
 		scrollBar.setScrollSpeed(0.2F);
 
-		text = new ScrollableGui(rect, text, scrollBar, null, null, 7, 6);
+		text = new ScrollableGui(rect, text, scrollBar, null, null, 7, 6, true);
 
 		this.content().set("text", text);
 	}
