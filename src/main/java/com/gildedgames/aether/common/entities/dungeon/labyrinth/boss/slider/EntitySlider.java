@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.dungeon.labyrinth.boss.slider;
 
 import com.gildedgames.aether.api.capabilites.entity.boss.IBoss;
 import com.gildedgames.aether.api.capabilites.entity.boss.IBossManager;
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.registry.LootDefinitions;
 import com.gildedgames.aether.api.loot.LootPool;
 import com.gildedgames.aether.common.entities.util.SimpleBossManager;
@@ -54,6 +55,8 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 
 	private SimpleBossManager<EntitySlider> bossManager = new SimpleBossManager<>(this, "The Slider", new FirstStageSlider(), new SecondStageSlider(), new ThirdStageSlider());
 
+	private boolean hasSetTotem = false;
+
 	public EntitySlider(World world)
 	{
 		super(world);
@@ -84,7 +87,7 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 		this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(500);
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(300);
 		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
 	}
@@ -100,7 +103,14 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 	@Override
 	public void onUpdate()
 	{
-		//System.out.println(this.getPosition());
+		if (!this.worldObj.isRemote && (this.isDead || this.getHealth() <= 0))
+		{
+			if (!this.hasSetTotem)
+			{
+				this.worldObj.setBlockState(this.getPosition(), BlocksAether.labyrinth_totem.getDefaultState());
+				this.hasSetTotem = true;
+			}
+		}
 
 		this.fireResistance = -1;
 		this.extinguish();
