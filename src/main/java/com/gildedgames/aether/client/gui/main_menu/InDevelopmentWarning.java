@@ -52,7 +52,7 @@ public class InDevelopmentWarning extends GuiFrame
 			@Override
 			protected void onTrue(InputProvider input, MouseInputPool pool)
 			{
-				/*File areaFile = new File(Minecraft.getMinecraft().mcDataDir, "//config/in_development_displayed.dat");
+				File areaFile = new File(Minecraft.getMinecraft().mcDataDir, "//config/in_development_displayed.dat");
 
 				if (!areaFile.exists())
 				{
@@ -64,7 +64,7 @@ public class InDevelopmentWarning extends GuiFrame
 					{
 						e.printStackTrace();
 					}
-				}*/
+				}
 
 				UiModule.locate().close();
 			}
