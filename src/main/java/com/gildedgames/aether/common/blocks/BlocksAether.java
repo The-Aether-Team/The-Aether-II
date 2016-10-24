@@ -443,6 +443,11 @@ public class BlocksAether
 
 		registerBlock("labyrinth_bridge", BlocksAether.labyrinth_bridge.setBlockUnbreakable().setResistance(6000000.0F));
 
+		Blocks.FIRE.setFireInfo(BlocksAether.aether_flower, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.orange_tree, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.blueberry_bush, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.enchanted_blueberry_bush, 5, 5);
+
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_log_wall, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.aether_planks, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_chest, 5, 5);
