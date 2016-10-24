@@ -3,33 +3,34 @@ package com.gildedgames.aether.client.gui.tab;
 import com.gildedgames.aether.client.gui.container.GuiEquipment;
 import com.gildedgames.aether.client.gui.main_menu.BugReportMenu;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.network.AetherGuiHandler;
+import com.gildedgames.util.core.gui.util.GuiFactory;
+import com.gildedgames.util.core.gui.util.decorators.MinecraftGui;
 import com.gildedgames.util.core.gui.viewing.MinecraftGuiWrapper;
 import com.gildedgames.util.modules.tab.common.util.ITab;
 import com.gildedgames.util.modules.tab.common.util.ITabClient;
+import com.gildedgames.util.modules.ui.UiModule;
 import com.gildedgames.util.modules.ui.common.GuiDecorator;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TabEquipment implements ITab
+import javax.swing.*;
+
+public class TabBugReport implements ITab
 {
 	@Override
 	public String getUnlocalizedName()
 	{
-		return "tab.equipment";
+		return "tab.bug_report";
 	}
 
 	@Override
 	public void onOpen(EntityPlayer player)
 	{
-		BlockPos pos = player.getPosition();
-
-		player.openGui(AetherCore.MOD_ID, AetherGuiHandler.INVENTORY_EQUIPMENT_ID, player.worldObj, pos.getX(), pos.getY(), pos.getZ());
+		UiModule.locate().open("bugReportMenu", new MinecraftGui(new BugReportMenu()));
 	}
 
 	@Override
@@ -41,13 +42,13 @@ public class TabEquipment implements ITab
 	@Override
 	public boolean isRemembered()
 	{
-		return true;
+		return false;
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static class Client extends TabEquipment implements ITabClient
+	public static class Client extends TabBugReport implements ITabClient
 	{
-		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/equipment.png");
+		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/bug_report.png");
 
 		@Override
 		public boolean isTabValid(GuiScreen gui)
@@ -81,7 +82,7 @@ public class TabEquipment implements ITab
 		@Override
 		public ResourceLocation getIcon()
 		{
-			return TabEquipment.Client.ICON;
+			return Client.ICON;
 		}
 	}
 }

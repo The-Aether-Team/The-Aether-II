@@ -44,7 +44,7 @@ public class InDevelopmentWarning extends GuiFrame
 	{
 		super.initContent(input);
 
-		GuiFrame button = GuiFactory.button(InputHelper.getCenter(input).clone().addY(100).flush(), 80, "I Understand", true);
+		GuiFrame button = GuiFactory.button(InputHelper.getCenter(input).clone().addY(100).flush(), 80, I18n.format("indev.button"), true);
 
 		button.events().set("press", new MouseEventGui(new MouseInput(MouseButton.LEFT, ButtonState.PRESS))
 		{
@@ -94,25 +94,21 @@ public class InDevelopmentWarning extends GuiFrame
 
 		this.content().set("button", button);
 
-		Text[] texts = new Text[15];
+		Text[] texts = new Text[11];
 
 		texts[0] = GuiFactory.text(TextFormatting.BOLD + I18n.format("indev.line1"), Color.WHITE);
 		texts[1] = GuiFactory.text(" ", Color.WHITE);
 		texts[2] = GuiFactory.text(I18n.format("indev.line2"), Color.LIGHT_GRAY);
-		texts[3] = GuiFactory.text(I18n.format("indev.line3"), Color.LIGHT_GRAY);
-		texts[4] = GuiFactory.text(I18n.format("indev.line4"), Color.LIGHT_GRAY);
+		texts[3] = GuiFactory.text(" ", Color.WHITE);
+		texts[4] = GuiFactory.text(I18n.format("indev.line3"), Color.LIGHT_GRAY);
 		texts[5] = GuiFactory.text(" ", Color.WHITE);
-		texts[6] = GuiFactory.text(I18n.format("indev.line5"), Color.LIGHT_GRAY);
-		texts[7] = GuiFactory.text(" ", Color.WHITE);
+		texts[6] = GuiFactory.text("\u2022 " + I18n.format("indev.line4"), Color.WHITE);
+		texts[7] = GuiFactory.text("\u2022 " + I18n.format("indev.line5"), Color.WHITE);
 		texts[8] = GuiFactory.text("\u2022 " + I18n.format("indev.line6"), Color.WHITE);
-		texts[9] = GuiFactory.text("\u2022 " + I18n.format("indev.line7"), Color.WHITE);
-		texts[10] = GuiFactory.text("\u2022 " + I18n.format("indev.line8"), Color.WHITE);
-		texts[11] = GuiFactory.text(" ", Color.WHITE);
-		texts[12] = GuiFactory.text(I18n.format("indev.line9"), Color.LIGHT_GRAY);
-		texts[13] = GuiFactory.text(I18n.format("indev.line10"), Color.LIGHT_GRAY);
-		texts[14] = GuiFactory.text(I18n.format("indev.line11"), Color.LIGHT_GRAY);
+		texts[9] = GuiFactory.text(" ", Color.WHITE);
+		texts[10] = GuiFactory.text(I18n.format("indev.line7"), Color.LIGHT_GRAY);
 
-		GuiFrame text = GuiFactory.centeredTextBox(Dim2D.build().area(400, 200).pos(InputHelper.getCenter(input).clone().addY(15).flush()).center(true).flush(), false, texts);
+		GuiFrame text = GuiFactory.textBox(Dim2D.build().area(350, 200).pos(InputHelper.getCenter(input).clone().addY(15).flush()).center(true).flush(), false, texts);
 
 		this.content().set("text", text);
 	}

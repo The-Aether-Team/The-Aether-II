@@ -2,6 +2,7 @@ package com.gildedgames.aether.client;
 
 import com.gildedgames.aether.client.gui.main_menu.BossBattleOverlay;
 import com.gildedgames.aether.client.gui.main_menu.PortalOverlay;
+import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.client.gui.main_menu.WorldAetherOptionsOverlay;
 import com.gildedgames.aether.client.models.blocks.AetherBlockModels;
@@ -134,6 +135,7 @@ public class ClientProxy extends CommonProxy
 		MinecraftForge.EVENT_BUS.register(StructureInjectionEvents.class);
 
 		TabModule.api().getInventoryGroup().registerClientTab(new TabEquipment.Client());
+		TabModule.api().getInventoryGroup().registerClientTab(new TabBugReport.Client());
 
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemMoaEggColorHandler(), ItemsAether.moa_egg);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new LeatherGlovesColorHandler(), ItemsAether.leather_gloves);

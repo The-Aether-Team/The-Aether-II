@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.api.registry.cooler.ITemperatureRegistry;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentProperties;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
+import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.properties.EntityProperties;
@@ -96,6 +97,7 @@ public class CommonProxy
 		this.recipeManager.preInit();
 
 		TabModule.api().getInventoryGroup().registerServerTab(new TabEquipment());
+		TabModule.api().getInventoryGroup().registerServerTab(new TabBugReport());
 
 		AetherCore.srl().registerSerialization(0, DungeonInstance.class, new Instantiator(DungeonInstance.class));
 		AetherCore.srl().registerSerialization(1, MoaGenePool.class, new Instantiator(MoaGenePool.class));
