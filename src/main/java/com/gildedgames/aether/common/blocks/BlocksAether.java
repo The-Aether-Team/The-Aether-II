@@ -97,9 +97,15 @@ public class BlocksAether
 
 	public static final BlockIcestoneOre icestone_ore = new BlockIcestoneOre();
 
+	public static final BlockQuicksoilGlass quicksoil_glass = new BlockQuicksoilGlass();
+
 	public static final BlockCrudeScatterglass crude_scatterglass = new BlockCrudeScatterglass();
 
 	public static final BlockScatterglass scatterglass = new BlockScatterglass();
+
+	public static final BlockSkyrootFrameScatterglass skyroot_frame_scatterglass = new BlockSkyrootFrameScatterglass();
+
+	public static final BlockSkyrootFrameQuicksoilGlass skyroot_frame_quicksoil_glass = new BlockSkyrootFrameQuicksoilGlass();
 
 	public static final BlockArkeniumFrameScatterglass arkenium_frame_scatterglass = new BlockArkeniumFrameScatterglass();
 
@@ -116,8 +122,6 @@ public class BlocksAether
 			sentry_stone = new BlockDivine().setLightLevel(0.50f);
 
 	public static final BlockHolystoneFurnace holystone_furnace = new BlockHolystoneFurnace();
-
-	public static final BlockQuicksoilGlass quicksoil_glass = new BlockQuicksoilGlass();
 
 	public static final BlockCustomDoor skyroot_door = new BlockCustomDoor(Material.WOOD, new Supplier<Item>()
 	{
@@ -328,9 +332,15 @@ public class BlocksAether
 
 		registerBlock("altar", BlocksAether.altar.setCreativeTab(CreativeTabsAether.BLOCKS));
 
+		registerBlock("quicksoil_glass", BlocksAether.quicksoil_glass.setCreativeTab(CreativeTabsAether.BLOCKS));
+
 		registerBlock("crude_scatterglass", BlocksAether.crude_scatterglass.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerBlock("scatterglass", BlocksAether.scatterglass.setCreativeTab(CreativeTabsAether.BLOCKS));
+
+		registerBlock("skyroot_frame_scatterglass", BlocksAether.skyroot_frame_scatterglass.setCreativeTab(CreativeTabsAether.BLOCKS));
+
+		registerBlock("skyroot_frame_quicksoil_glass", BlocksAether.skyroot_frame_quicksoil_glass.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerBlock("arkenium_frame_scatterglass", BlocksAether.arkenium_frame_scatterglass.setCreativeTab(CreativeTabsAether.BLOCKS));
 
@@ -347,8 +357,6 @@ public class BlocksAether
 		registerBlock("holystone_brick", BlocksAether.holystone_brick.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerBlock("holystone_furnace", BlocksAether.holystone_furnace.setCreativeTab(CreativeTabsAether.BLOCKS));
-
-		registerBlock("quicksoil_glass", BlocksAether.quicksoil_glass.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerBlock("skyroot_door", BlocksAether.skyroot_door);
 		registerBlock("arkenium_door", BlocksAether.arkenium_door);

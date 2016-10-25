@@ -108,11 +108,19 @@ public class RecipesAether implements IAltarRecipeRegistry
 		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_strip, 4), "X", "X",
 				'X', new ItemStack(ItemsAether.arkenium));
 
-		// Arkenium Framed Quicksoil Glass
+		// Skyroot Frame Quicksoil Glass
+		registerShapelessRecipe(new ItemStack(BlocksAether.skyroot_frame_quicksoil_glass, 1),
+				new ItemStack(BlocksAether.quicksoil_glass), new ItemStack(ItemsAether.skyroot_stick));
+
+		// Skyroot Frame Scatterglass
+		registerShapelessRecipe(new ItemStack(BlocksAether.skyroot_frame_scatterglass, 1),
+				new ItemStack(BlocksAether.scatterglass), new ItemStack(ItemsAether.skyroot_stick));
+
+		// Arkenium Frame Quicksoil Glass
 		registerShapelessRecipe(new ItemStack(BlocksAether.arkenium_frame_quicksoil_glass, 1),
 				new ItemStack(BlocksAether.quicksoil_glass), new ItemStack(ItemsAether.arkenium_strip));
 
-		// Arkenium Framed Scatterglass
+		// Arkenium Frame Scatterglass
 		registerShapelessRecipe(new ItemStack(BlocksAether.arkenium_frame_scatterglass, 1),
 				new ItemStack(BlocksAether.scatterglass), new ItemStack(ItemsAether.arkenium_strip));
 

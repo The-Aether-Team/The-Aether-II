@@ -139,6 +139,8 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.scatterglass, "scatterglass");
 		registerItemModels(BlocksAether.arkenium_frame_scatterglass, "arkenium_frame_scatterglass");
 		registerItemModels(BlocksAether.arkenium_frame_quicksoil_glass, "arkenium_frame_quicksoil_glass");
+		registerItemModels(BlocksAether.skyroot_frame_scatterglass, "skyroot_frame_scatterglass");
+		registerItemModels(BlocksAether.skyroot_frame_quicksoil_glass, "skyroot_frame_quicksoil_glass");
 
 		registerItemModels(BlocksAether.aether_crafting_table, new ItemModelBuilder("crafting_tables/")
 				.add(BlockAetherCraftingTable.SKYROOT.getMeta(), "skyroot_crafting_table")
