@@ -36,11 +36,11 @@ public class EntityCockatrice extends EntityMob implements IEntityProperties
 	{
 		super(world);
 
-		this.tasks.addTask(1, new EntityAISwimming(this));
-		this.tasks.addTask(4, new EntityAICockatriceWander(this, 0.35D));
+		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(1, new EntityAICockatriceHide(this, EntityPlayer.class, 0.9D));
+		this.tasks.addTask(2, new EntityAICockatriceWander(this, 0.35D));
 
-		this.targetTasks.addTask(2, new EntityAICockatriceHide(this, EntityPlayer.class, 0.9D));
-		this.targetTasks.addTask(1, new EntityAICockatriceSneakAttack(this, EntityPlayer.class));
+		this.targetTasks.addTask(0, new EntityAICockatriceSneakAttack(this, EntityPlayer.class));
 
 		this.jumpHelper = new JumpHelperDisable(this);
 

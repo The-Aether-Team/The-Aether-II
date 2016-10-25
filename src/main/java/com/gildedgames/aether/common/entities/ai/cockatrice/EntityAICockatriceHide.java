@@ -14,7 +14,6 @@ public class EntityAICockatriceHide extends EntityAIHideFromTarget
 		super(entity, clazz, movementSpeed);
 
 		this.cockatrice = entity;
-		this.setMutexBits(1);
 	}
 
 	@Override

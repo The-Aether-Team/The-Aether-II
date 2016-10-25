@@ -26,4 +26,15 @@ public class EntityAICockatriceWander extends EntityAIWander
 		return super.shouldExecute();
 	}
 
+	@Override
+	public boolean continueExecuting()
+	{
+		if (this.cockatrice.isHiding() || this.cockatrice.isAttacking())
+		{
+			return false;
+		}
+
+		return super.continueExecuting();
+	}
+
 }
