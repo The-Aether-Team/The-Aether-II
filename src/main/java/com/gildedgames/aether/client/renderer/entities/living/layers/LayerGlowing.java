@@ -33,7 +33,7 @@ public class LayerGlowing<T extends EntityLiving> implements LayerRenderer<T>
         this.glowingLayer = glowingLayer;
     }
 
-    public void doRenderLayer(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)
+    public void doRenderLayer(T entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)
     {
         if (this.glowingLayer.get() == null)
         {
@@ -41,32 +41,33 @@ public class LayerGlowing<T extends EntityLiving> implements LayerRenderer<T>
         }
 
         this.renderer.bindTexture(this.glowingLayer.get());
+
         GlStateManager.enableBlend();
         GlStateManager.disableAlpha();
         GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
-        GlStateManager.scale(1.01F, 1.01F, 1.01F);
 
-        if (entitylivingbaseIn.isInvisible())
-        {
-            GlStateManager.depthMask(false);
-        }
-        else
-        {
-            GlStateManager.depthMask(true);
-        }
+		GlStateManager.scale(1.001f, 1.001f, 1.001f);
+		
+		GlStateManager.depthMask(true);
 
         int i = 61680;
         int j = i % 65536;
         int k = i / 65536;
+
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)j, (float)k);
+
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        this.renderer.getMainModel().render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-        i = entitylivingbaseIn.getBrightnessForRender(partialTicks);
+
+        this.renderer.getMainModel().render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+
+        i = entity.getBrightnessForRender(partialTicks);
         j = i % 65536;
         k = i / 65536;
+
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)j, (float)k);
-        this.renderer.setLightmap(entitylivingbaseIn, partialTicks);
-        GlStateManager.disableBlend();
+        this.renderer.setLightmap(entity, partialTicks);
+
+		GlStateManager.disableBlend();
         GlStateManager.enableAlpha();
     }
 
