@@ -20,18 +20,19 @@ public class WorldGenCustomVines extends WorldGenerator
 		this.vines = vines;
 	}
 
-	public boolean generate(World worldIn, Random rand, BlockPos position)
+	@Override
+	public boolean generate(World world, Random rand, BlockPos pos)
 	{
-		for (; position.getY() < 128; position = position.up())
+		while (pos.getY() < 128)
 		{
-			if (worldIn.isAirBlock(position))
+			if (world.isAirBlock(pos))
 			{
 				for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL.facings())
 				{
-					if (Blocks.VINE.canPlaceBlockOnSide(worldIn, position, enumfacing))
+					if (Blocks.VINE.canPlaceBlockOnSide(world, pos, enumfacing))
 					{
-						IBlockState iblockstate = this.vines.withProperty(BlockVine.NORTH, Boolean.valueOf(enumfacing == EnumFacing.NORTH)).withProperty(BlockVine.EAST, Boolean.valueOf(enumfacing == EnumFacing.EAST)).withProperty(BlockVine.SOUTH, Boolean.valueOf(enumfacing == EnumFacing.SOUTH)).withProperty(BlockVine.WEST, Boolean.valueOf(enumfacing == EnumFacing.WEST));
-						worldIn.setBlockState(position, iblockstate, 2);
+						IBlockState iblockstate = this.vines.withProperty(BlockVine.NORTH, enumfacing == EnumFacing.NORTH).withProperty(BlockVine.EAST, enumfacing == EnumFacing.EAST).withProperty(BlockVine.SOUTH, Boolean.valueOf(enumfacing == EnumFacing.SOUTH)).withProperty(BlockVine.WEST, Boolean.valueOf(enumfacing == EnumFacing.WEST));
+						world.setBlockState(pos, iblockstate, 2);
 
 						break;
 					}
@@ -39,8 +40,10 @@ public class WorldGenCustomVines extends WorldGenerator
 			}
 			else
 			{
-				position = position.add(rand.nextInt(4) - rand.nextInt(4), 0, rand.nextInt(4) - rand.nextInt(4));
+				pos = pos.add(rand.nextInt(4) - rand.nextInt(4), 0, rand.nextInt(4) - rand.nextInt(4));
 			}
+
+			pos = pos.up();
 		}
 
 		return true;

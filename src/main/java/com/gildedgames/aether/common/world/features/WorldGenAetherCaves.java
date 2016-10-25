@@ -17,9 +17,9 @@ public class WorldGenAetherCaves extends MapGenBase
 {
 	protected static final IBlockState BLK_AIR = Blocks.AIR.getDefaultState();
 
-	protected void addRoom(long p_180703_1_, int p_180703_3_, int p_180703_4_, ChunkPrimer p_180703_5_, double p_180703_6_, double p_180703_8_, double p_180703_10_)
+	protected void addRoom(long seed, int chunkX, int chunkY, ChunkPrimer primer, double p_180703_6_, double p_180703_8_, double p_180703_10_)
 	{
-		this.addTunnel(p_180703_1_, p_180703_3_, p_180703_4_, p_180703_5_, p_180703_6_, p_180703_8_, p_180703_10_, 1.0F + this.rand.nextFloat() * 6.0F, 0.0F, 0.0F, -1, -1, 0.5D);
+		this.addTunnel(seed, chunkX, chunkY, primer, p_180703_6_, p_180703_8_, p_180703_10_, 1.0F + this.rand.nextFloat() * 6.0F, 0.0F, 0.0F, -1, -1, 0.5D);
 	}
 
 	protected void addTunnel(long seed, int chunkX, int chunkZ, ChunkPrimer primer, double p_180702_6_, double p_180702_8_, double p_180702_10_, float p_180702_12_, float p_180702_13_, float p_180702_14_, int p_180702_15_, int p_180702_16_, double p_180702_17_)
@@ -28,6 +28,7 @@ public class WorldGenAetherCaves extends MapGenBase
 		double d1 = (double) (chunkZ * 16 + 8);
 		float f = 0.0F;
 		float f1 = 0.0F;
+
 		Random random = new Random(seed);
 
 		if (p_180702_16_ <= 0)
@@ -215,6 +216,7 @@ public class WorldGenAetherCaves extends MapGenBase
 			double d0 = (double) (chunkX * 16 + this.rand.nextInt(16));
 			double d1 = (double) this.rand.nextInt(this.rand.nextInt(240) + 8);
 			double d2 = (double) (chunkZ * 16 + this.rand.nextInt(16));
+
 			int k = 1;
 
 			if (this.rand.nextInt(4) == 0)
@@ -249,6 +251,7 @@ public class WorldGenAetherCaves extends MapGenBase
 	protected void digBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop, IBlockState state, IBlockState up)
 	{
 		Biome biome = this.worldObj.getBiome(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
+
 		IBlockState top = biome.topBlock;
 		IBlockState filler = biome.fillerBlock;
 

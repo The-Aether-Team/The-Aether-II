@@ -20,7 +20,7 @@ public class MoaNest
 
 	public BlockPos pos;
 
-	public int nestSize, familyGeneticSeed;
+	public int familyGeneticSeed;
 
 	public boolean hasInitialized;
 	
@@ -48,50 +48,6 @@ public class MoaNest
 		this.familyGeneticSeed = familyGeneticSeed;
 	}
 
-	public void generate(World world, Random rand, int nestSize, IBlockState nestBlock)
-	{
-		this.nestSize = nestSize;
-
-		if (world.getBlockState(this.pos) != BlocksAether.aether_dirt && world.getBlockState(this.pos) != BlocksAether.aether_grass.getDefaultState())
-		{
-			return;
-		}
-
-		for (BlockPos pos : BlockPos.getAllInBoxMutable(this.pos.add(-this.nestSize, 0, -this.nestSize), this.pos.add(this.nestSize, 0, this.nestSize)))
-		{
-			if (this.isReplaceable(world, pos))
-			{
-				world.setBlockState(pos, nestBlock);
-			}
-		}
-
-		for (BlockPos pos : BlockPos.getAllInBoxMutable(this.pos.add(-this.nestSize, 1, -this.nestSize - 1), this.pos.add(this.nestSize, 1, this.nestSize + 1)))
-		{
-			if (this.isReplaceable(world, pos))
-			{
-				world.setBlockState(pos, nestBlock);
-			}
-		}
-
-		for (BlockPos pos : BlockPos.getAllInBoxMutable(this.pos.add(-this.nestSize - 1, 1, -this.nestSize), this.pos.add(this.nestSize + 1, 1, this.nestSize)))
-		{
-			if (this.isReplaceable(world, pos))
-			{
-				world.setBlockState(pos, nestBlock);
-			}
-		}
-
-		for (BlockPos pos : BlockPos.getAllInBoxMutable(this.pos.add(-this.nestSize, 1, -this.nestSize), this.pos.add(this.nestSize, 1, this.nestSize)))
-		{
-			if (world.getBlockState(pos) == nestBlock)
-			{
-				world.setBlockToAir(pos);
-			}
-		}
-		
-		this.spawnMoaFamily(world, 2 + world.rand.nextInt(nestSize + 1));
-	}
-	
 	public boolean isReplaceable(World world, BlockPos pos)
 	{
 		IBlockState state = world.getBlockState(pos);
@@ -107,7 +63,7 @@ public class MoaNest
 				state.getMaterial() == Material.VINE;
 	}
 	
-	private void spawnMoaFamily(World world, int familySize)
+	public void spawnMoaFamily(World world, int familySize)
 	{
 		this.pack = new EntityGroup(EntityGroup.getNextID());
 		this.pack.setOptimalSize(5);

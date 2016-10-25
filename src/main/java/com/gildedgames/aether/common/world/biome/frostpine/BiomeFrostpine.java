@@ -4,16 +4,12 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.world.GenUtil;
 import com.gildedgames.aether.common.world.biome.BiomeAetherBase;
 import com.gildedgames.aether.common.world.features.TemplatePipeline;
 import com.gildedgames.aether.common.world.features.WorldGenAetherFlowers;
 import com.gildedgames.aether.common.world.features.WorldGenTemplate;
-import com.gildedgames.aether.common.world.features.trees.WorldGenMassiveSkyrootTree;
-import com.gildedgames.aether.common.world.features.trees.WorldGenSkyrootTree;
-import net.minecraft.block.BlockLog;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
@@ -22,12 +18,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.structure.template.TemplateManager;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 
 import java.util.Random;
-
-import static com.gildedgames.aether.common.world.biome.highlands.BiomeHighlandPlains.pines;
 
 public class BiomeFrostpine extends BiomeAetherBase
 {
@@ -82,18 +74,19 @@ public class BiomeFrostpine extends BiomeAetherBase
 			x = random.nextInt(16) + 8;
 			z = random.nextInt(16) + 8;
 
-			y = GenUtil.getTopBlock(world, new BlockPos(pos.getX() + x, 0, pos.getZ() + z)).getY() + 1;
+			y = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z)).getY() + 1;
 
 			Rotation[] arotation = Rotation.values();
+
 			Rotation rotation = arotation[random.nextInt(arotation.length)];
 
 			if (random.nextBoolean())
 			{
-				this.pine1.generate(world, random, pos.add(x, y, z), rotation);
+				this.pine1.placeTemplate(world, random, pos.add(x, y, z), rotation);
 			}
 			else
 			{
-				this.pine2.generate(world, random, pos.add(x, y, z), rotation);
+				this.pine2.placeTemplate(world, random, pos.add(x, y, z), rotation);
 			}
 		}
 
@@ -102,7 +95,7 @@ public class BiomeFrostpine extends BiomeAetherBase
 			x = random.nextInt(16) + 8;
 			z = random.nextInt(16) + 8;
 
-			y = GenUtil.getTopBlock(world, new BlockPos(pos.getX() + x, 0, pos.getZ() + z)).getY() + 1;
+			y = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z)).getY() + 1;
 
 			Rotation[] arotation = Rotation.values();
 			Rotation rotation = arotation[random.nextInt(arotation.length)];
@@ -113,32 +106,32 @@ public class BiomeFrostpine extends BiomeAetherBase
 			{
 				case 0:
 				{
-					this.tree1.generate(world, random, pos.add(x, y, z), rotation);
+					this.tree1.placeTemplate(world, random, pos.add(x, y, z), rotation);
 					break;
 				}
 				case 1:
 				{
-					this.tree2.generate(world, random, pos.add(x, y, z), rotation);
+					this.tree2.placeTemplate(world, random, pos.add(x, y, z), rotation);
 					break;
 				}
 				case 2:
 				{
-					this.tree3.generate(world, random, pos.add(x, y, z), rotation);
+					this.tree3.placeTemplate(world, random, pos.add(x, y, z), rotation);
 					break;
 				}
 				case 3:
 				{
-					this.tree4.generate(world, random, pos.add(x, y, z), rotation);
+					this.tree4.placeTemplate(world, random, pos.add(x, y, z), rotation);
 					break;
 				}
 				case 4:
 				{
-					this.tree5.generate(world, random, pos.add(x, y, z), rotation);
+					this.tree5.placeTemplate(world, random, pos.add(x, y, z), rotation);
 					break;
 				}
 				case 5:
 				{
-					this.tree6.generate(world, random, pos.add(x, y, z), rotation);
+					this.tree6.placeTemplate(world, random, pos.add(x, y, z), rotation);
 					break;
 				}
 			}

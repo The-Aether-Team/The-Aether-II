@@ -1,13 +1,8 @@
 package com.gildedgames.aether.common.world;
 
 import com.gildedgames.aether.common.util.OpenSimplexNoise;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.NoiseGeneratorPerlin;
-import net.minecraft.world.gen.NoiseGeneratorSimplex;
-
-import java.util.Random;
 
 public class GenUtil
 {
@@ -30,21 +25,23 @@ public class GenUtil
 		);
 	}
 
-	public static BlockPos getTopBlock(World world, BlockPos pos)
+	public static BlockPos rotate(BlockPos origin, BlockPos pos, Rotation rotation)
 	{
-		BlockPos searchPos = new BlockPos(pos.getX(), world.getActualHeight(), pos.getZ());
+		int i = pos.getX();
+		int j = pos.getY();
+		int k = pos.getZ();
 
-		while (world.isAirBlock(searchPos))
+		switch (rotation)
 		{
-			if (searchPos.getY() <= 0)
-			{
-				break;
-			}
-
-			searchPos = searchPos.down();
+		case COUNTERCLOCKWISE_90:
+			return new BlockPos(origin.getX() + k, origin.getY() + j, origin.getZ() - i);
+		case CLOCKWISE_90:
+			return new BlockPos(origin.getX() - k, origin.getY() + j, origin.getZ() + i);
+		case CLOCKWISE_180:
+			return new BlockPos(origin.getX() - i, origin.getY() + j, origin.getZ() - k);
+		default:
+			return pos;
 		}
-
-		return searchPos;
 	}
 
 	public static double octavedNoise(OpenSimplexNoise noise, int octaves, double roughness, double scale, double x, double z)
