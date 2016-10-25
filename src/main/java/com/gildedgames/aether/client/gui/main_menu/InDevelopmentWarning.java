@@ -100,19 +100,20 @@ public class InDevelopmentWarning extends GuiFrame
 		this.content().set("logo", logo);
 		this.content().set("button", button);
 
-		Text[] texts = new Text[11];
+		Text[] texts = new Text[12];
 
 		texts[0] = GuiFactory.text(TextFormatting.BOLD + I18n.format("indev.line1"), Color.WHITE);
 		texts[1] = GuiFactory.text(" ", Color.WHITE);
 		texts[2] = GuiFactory.text(I18n.format("indev.line2"), Color.LIGHT_GRAY);
 		texts[3] = GuiFactory.text(" ", Color.WHITE);
-		texts[4] = GuiFactory.text(I18n.format("indev.line3"), Color.LIGHT_GRAY);
-		texts[5] = GuiFactory.text(" ", Color.WHITE);
-		texts[6] = GuiFactory.text("\u2022 " + I18n.format("indev.line4"), Color.WHITE);
-		texts[7] = GuiFactory.text("\u2022 " + I18n.format("indev.line5"), Color.WHITE);
-		texts[8] = GuiFactory.text("\u2022 " + I18n.format("indev.line6"), Color.WHITE);
-		texts[9] = GuiFactory.text(" ", Color.WHITE);
-		texts[10] = GuiFactory.text(I18n.format("indev.line7"), Color.LIGHT_GRAY);
+		texts[4] = GuiFactory.text("\u2022 " + I18n.format("indev.line3"), Color.WHITE);
+		texts[5] = GuiFactory.text("\u2022 " + I18n.format("indev.line4"), Color.WHITE);
+		texts[6] = GuiFactory.text("\u2022 " + I18n.format("indev.line5"), Color.WHITE);
+		texts[7] = GuiFactory.text("\u2022 " + I18n.format("indev.line6"), Color.WHITE);
+		texts[8] = GuiFactory.text(" ", Color.WHITE);
+		texts[9] = GuiFactory.text(I18n.format("indev.line7"), Color.LIGHT_GRAY);
+		texts[10] = GuiFactory.text(" ", Color.WHITE);
+		texts[11] = GuiFactory.text(I18n.format("indev.line8"), Color.LIGHT_GRAY);
 
 		Rect rect = Dim2D.build().area(350, 130).pos(InputHelper.getCenter(input).clone().addY(15).flush()).center(true).flush();
 

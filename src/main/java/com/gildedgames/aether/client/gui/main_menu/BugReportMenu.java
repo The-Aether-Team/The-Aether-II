@@ -29,7 +29,7 @@ public class BugReportMenu extends GuiFrame
 	{
 		super.initContent(input);
 
-		GuiFrame button = GuiFactory.button(InputHelper.getCenter(input).clone().addY(52).flush(), 80, I18n.format("bug_report.button"), true);
+		GuiFrame button = GuiFactory.button(InputHelper.getCenter(input).clone().addY(65).flush(), 110, I18n.format("bug_report.button"), true);
 
 		button.events().set("press", new MouseEventGui(new MouseInput(MouseButton.LEFT, ButtonState.PRESS))
 		{
@@ -63,13 +63,15 @@ public class BugReportMenu extends GuiFrame
 
 		this.content().set("button", button);
 
-		Text[] texts = new Text[5];
+		Text[] texts = new Text[7];
 
 		texts[0] = GuiFactory.text(TextFormatting.BOLD + I18n.format("bug_report.line1"), Color.WHITE);
 		texts[1] = GuiFactory.text(" ", Color.WHITE);
 		texts[2] = GuiFactory.text(I18n.format("bug_report.line2"), Color.LIGHT_GRAY);
 		texts[3] = GuiFactory.text(" ", Color.WHITE);
 		texts[4] = GuiFactory.text(I18n.format("bug_report.line3"), Color.LIGHT_GRAY);
+		texts[5] = GuiFactory.text(" ", Color.WHITE);
+		texts[6] = GuiFactory.text(I18n.format("bug_report.line4"), Color.LIGHT_GRAY);
 
 		GuiFrame text = GuiFactory.textBox(Dim2D.build().area(350, 200).pos(InputHelper.getCenter(input).clone().addY(-8).flush()).center(true).flush(), false, texts);
 

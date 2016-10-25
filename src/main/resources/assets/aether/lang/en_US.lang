@@ -722,17 +722,19 @@ tab.bug_report=Report Bugs
 chat.aether.resurrected=%s was resurrected by their Nex Spirit
 
 # In Development Menu
-indev.button=I Understand
-indev.line1=Hello dear tester!
-indev.line2=Thank you for your interest in the mod. Before we proceed, we'd like you to understand that the build of the Aether mod you are about to play is IN-DEVELOPMENT.
-indev.line3=This means that this build will have the following:
-indev.line4=Models without textures!
-indev.line5=Mobs with no models at all!
-indev.line6=And most importantly, bugs!
-indev.line7=We are more than happy to let people test this build, but please understand that the mod is VERY unfinished and many things will change in the future.
+indev.button=Bring it on!
+indev.line1=Hello, eager player!
+indev.line2=Thank you for your interest in the mod! Before we proceed, we'd like to clarify a few things. The version of the Aether you're playing is an in-development preview. This means you may encounter serious problems, such as:
+indev.line3=World corruption and crashes
+indev.line4=Mobs without models or textures
+indev.line5=Broken game mechanics
+indev.line6=And most importantly, lots of bugs!
+indev.line7=We're very happy to let you play an early glimpse of the Aether, but we ask kindly for your patience and support in return as we continue development.
+indev.line8=By pressing the button below, you're acknowledging that you understand the terms above, and that you will not hold us responsible if your game grows legs and runs off with your coffee.
 
 # Bug Report Menu
-bug_report.button=Report Bugs
-bug_report.line1=Hello dear tester!
-bug_report.line2=Thanks again for your interest in the Aether II mod. If you'd like to help support future development for the project, you can report bugs below by clicking "Report Bugs".
-bug_report.line3=This will take you to an external website where our issue tracker is located. Register an account and submit any issues you find with the mod!
+bug_report.button=Open Issue Tracker
+bug_report.line1=Hello, again!
+bug_report.line2=Did you run into an issue? If you'd like, you can help contribute to the Aether by visiting our issue tracker.
+bug_report.line3=Issues are an easy way to report bugs and other problems with the mod, giving you direct access to developer help and our amazing community of volunteers.
+bug_report.line4=Clicking the button below will take you to an external website in your browser where our issue tracker is located. Register an account today, and help us squash bugs faster than ever!
