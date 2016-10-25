@@ -14,7 +14,7 @@ public class FlatGroundPlacementCondition implements WorldGenTemplate.PlacementC
 {
 
 	@Override
-	public boolean canPlace(World world, BlockPos placedAt, List<Template.BlockInfo> blocks)
+	public boolean canPlace(Template template, World world, BlockPos placedAt, List<Template.BlockInfo> blocks)
 	{
 		for (Template.BlockInfo block : blocks)
 		{

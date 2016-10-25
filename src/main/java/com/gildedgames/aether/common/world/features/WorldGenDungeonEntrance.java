@@ -13,14 +13,19 @@ import java.util.Random;
 
 public class WorldGenDungeonEntrance extends WorldGenTemplate
 {
-	public WorldGenDungeonEntrance(TemplatePipeline pipeline, Template template)
+
+	private BlockPos totemOffset;
+
+	public WorldGenDungeonEntrance(TemplatePipeline pipeline, Template template, BlockPos totemOffset, PlacementCondition condition, PlacementCondition... conditions)
 	{
-		super(pipeline, template, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+		super(pipeline, template, condition, conditions);
+
+		this.totemOffset = totemOffset;
 	}
 
 	@Override
 	public void postGenerate(World world, Random random, BlockPos pos, Rotation rotation)
 	{
-		world.setBlockState(GenUtil.rotate(pos, pos.add(4, 2, 4), rotation), BlocksAether.labyrinth_totem.getDefaultState());
+		world.setBlockState(GenUtil.rotate(pos, pos.add(this.totemOffset), rotation), BlocksAether.labyrinth_totem.getDefaultState());
 	}
 }

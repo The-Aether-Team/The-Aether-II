@@ -10,7 +10,7 @@ import net.minecraft.world.gen.structure.template.Template;
 
 import java.util.List;
 
-public class InsideGroundPlacementCondition implements WorldGenTemplate.PlacementCondition
+public class UndergroundEntrancePlacementCondition implements WorldGenTemplate.PlacementCondition
 {
 
 	@Override
@@ -20,9 +20,7 @@ public class InsideGroundPlacementCondition implements WorldGenTemplate.Placemen
 		{
 			if (block.pos.getY() == placedAt.getY() + template.getSize().getY() - 1 && block.blockState.getBlock() != Blocks.AIR && block.blockState.getBlock() != Blocks.STRUCTURE_VOID)
 			{
-				BlockPos down = block.pos.down();
-
-				IBlockState state = world.getBlockState(down);
+				IBlockState state = world.getBlockState(block.pos);
 
 				if (state.getBlock() != BlocksAether.aether_grass)
 				{

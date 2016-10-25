@@ -38,7 +38,7 @@ public class WorldGenTemplate extends WorldGenerator
 		this.placementConditions.add(condition);
 	}
 
-	protected Template getTemplate()
+	public Template getTemplate()
 	{
 		return this.template;
 	}
@@ -58,7 +58,7 @@ public class WorldGenTemplate extends WorldGenerator
 
 		for (PlacementCondition condition : this.placementConditions)
 		{
-			if (!condition.canPlace(world, pos, infoTransformed))
+			if (!condition.canPlace(this.template, world, pos, infoTransformed))
 			{
 				return false;
 			}
@@ -162,7 +162,7 @@ public class WorldGenTemplate extends WorldGenerator
 	public interface PlacementCondition
 	{
 
-		boolean canPlace(World world, BlockPos placedAt, List<Template.BlockInfo> blocks);
+		boolean canPlace(Template template, World world, BlockPos placedAt, List<Template.BlockInfo> blocks);
 
 	}
 
