@@ -161,7 +161,7 @@ public class BiomeAetherDecorator
 
 		int count;
 
-		if (random.nextInt(10) == 0)
+		if (random.nextInt(8) == 0)
 		{
 			x = random.nextInt(16) + 8;
 			z = random.nextInt(16) + 8;
