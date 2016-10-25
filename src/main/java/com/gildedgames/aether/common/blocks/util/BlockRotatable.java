@@ -1,12 +1,14 @@
 package com.gildedgames.aether.common.blocks.util;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -19,6 +21,27 @@ public class BlockRotatable extends Block
 		super(material);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_AXIS, EnumFacing.Axis.Y));
+	}
+
+	@Override
+	public IBlockState withRotation(IBlockState state, Rotation rot)
+	{
+		switch (rot)
+		{
+			case COUNTERCLOCKWISE_90:
+			case CLOCKWISE_90:
+				switch (state.getValue(PROPERTY_AXIS))
+				{
+					case X:
+						return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.Z);
+					case Z:
+						return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.X);
+					default:
+						return state;
+				}
+			default:
+				return state;
+		}
 	}
 
 	@Override
