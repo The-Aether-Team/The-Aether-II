@@ -161,6 +161,18 @@ public class BiomeAetherDecorator
 
 		int count;
 
+		// Labyrinth Entrance
+		if (random.nextInt(5) == 0)
+		{
+			x = random.nextInt(16) + 8;
+			z = random.nextInt(16) + 8;
+
+			BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
+
+			this.labyrinth_entrance.generate(world, random, pos2);
+		}
+
+		// Labyrinth Ruins
 		if (random.nextInt(8) == 0)
 		{
 			x = random.nextInt(16) + 8;
@@ -191,17 +203,6 @@ public class BiomeAetherDecorator
 			BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z)).add(0, -1, 0);
 
 			this.moa_nest_group.generate(world, random, pos2);
-		}
-
-		// Entrance Generator
-		if (random.nextInt(5) == 0)
-		{
-			x = random.nextInt(16) + 8;
-			z = random.nextInt(16) + 8;
-
-			BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
-
-			this.labyrinth_entrance.generate(world, random, pos2);
 		}
 
 		// Tree Generator
