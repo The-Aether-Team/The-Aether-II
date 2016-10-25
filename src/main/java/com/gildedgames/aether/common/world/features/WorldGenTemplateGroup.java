@@ -38,7 +38,10 @@ public class WorldGenTemplateGroup extends WorldGenerator
 
 		if (possibleTemplates.size() > 0)
 		{
-			possibleTemplates.get(rand.nextInt(possibleTemplates.size())).placeTemplateWithoutCheck(world, rand, position, rotation);
+			WorldGenTemplate templateToGenerate = possibleTemplates.get(rand.nextInt(possibleTemplates.size()));
+
+			templateToGenerate.placeTemplateWithoutCheck(world, rand, position, rotation);
+			templateToGenerate.postGenerate(world, rand, position, rotation);
 
 			return true;
 		}
