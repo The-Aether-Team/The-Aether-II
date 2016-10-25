@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.world.features;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.world.GenUtil;
 import com.gildedgames.aether.common.world.features.placement_conditions.FlatGroundPlacementCondition;
 import com.gildedgames.aether.common.world.features.placement_conditions.ReplaceablePlacementCondition;
 import net.minecraft.util.Rotation;
@@ -19,15 +18,8 @@ public class WorldGenDungeonEntrance extends WorldGenTemplate
 	}
 
 	@Override
-	public boolean generate(World world, Random random, BlockPos pos)
+	public void postGenerate(World world, Random random, BlockPos pos, Rotation rotation)
 	{
-		boolean result = this.placeTemplate(world, random, pos, Rotation.NONE);
-
-		if (result)
-		{
-			world.setBlockState(pos.add(4, 2, 4), BlocksAether.labyrinth_totem.getDefaultState());
-		}
-
-		return result;
+		world.setBlockState(pos.add(4, 2, 4), BlocksAether.labyrinth_totem.getDefaultState());
 	}
 }

@@ -7,15 +7,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockAercloud.AercloudVarian
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
-import com.gildedgames.aether.common.world.features.TemplatePipeline;
-import com.gildedgames.aether.common.world.features.WorldGenAetherFlowers;
-import com.gildedgames.aether.common.world.features.WorldGenAetherLakes;
-import com.gildedgames.aether.common.world.features.WorldGenAetherMinable;
-import com.gildedgames.aether.common.world.features.WorldGenAetherTallGrass;
-import com.gildedgames.aether.common.world.features.WorldGenDungeonEntrance;
-import com.gildedgames.aether.common.world.features.WorldGenMoaNest;
-import com.gildedgames.aether.common.world.features.WorldGenQuicksoil;
-import com.gildedgames.aether.common.world.features.WorldGenTemplate;
+import com.gildedgames.aether.common.world.features.*;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenPurpleAercloud;
 import com.gildedgames.aether.common.world.features.placement_conditions.FlatGroundPlacementCondition;
@@ -64,9 +56,11 @@ public class BiomeAetherDecorator
 
 	protected WorldGenPurpleAercloud genPurpleAercloud;
 	
-	protected WorldGenTemplate genSliderLabyrinthEntrance;
+	protected WorldGenTemplate labyrinth_entrance, labyrinth_ruins_1, labyrinth_ruins_2, labyrinth_ruins_3, labyrinth_ruins_4, labyrinth_ruins_5;
 
-	protected WorldGenMoaNest genMoaNestTree, genMoaNest1, genMoaNest2;
+	protected WorldGenMoaNest moa_nest_tree_1, moa_nest_1, moa_nest_2;
+
+	protected WorldGenTemplateGroup moa_nest_group, labyrinth_ruins_group;
 
 	protected TemplatePipeline templatePipeline;
 
@@ -136,10 +130,21 @@ public class BiomeAetherDecorator
 			{
 				MinecraftServer server = worldServer.getMinecraftServer();
 
-				this.genSliderLabyrinthEntrance = new WorldGenDungeonEntrance(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_entrance")));
-				this.genMoaNestTree = new WorldGenMoaNest(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("moa_nest/skyroot_moa_nest_tree_1")), new BlockPos(4, 5, 4), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-				this.genMoaNest1 = new WorldGenMoaNest(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("moa_nest/skyroot_moa_nest_1")), new BlockPos(2, 0, 2), new InsideGroundPlacementCondition(), new ReplaceablePlacementCondition());
-				this.genMoaNest2 = new WorldGenMoaNest(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("moa_nest/skyroot_moa_nest_2")), new BlockPos(3, 0, 3), new InsideGroundPlacementCondition(), new ReplaceablePlacementCondition());
+				this.labyrinth_entrance = new WorldGenDungeonEntrance(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_entrance")));
+
+				this.labyrinth_ruins_1 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_ruins_1")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+				this.labyrinth_ruins_2 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_ruins_2")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+				this.labyrinth_ruins_3 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_ruins_3")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+				this.labyrinth_ruins_4 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_ruins_4")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+				this.labyrinth_ruins_5 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_ruins_5")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+
+				this.moa_nest_tree_1 = new WorldGenMoaNest(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("moa_nest/skyroot_moa_nest_tree_1")), new BlockPos(4, 5, 4), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+
+				this.moa_nest_1 = new WorldGenMoaNest(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("moa_nest/skyroot_moa_nest_1")), new BlockPos(2, 0, 2), new InsideGroundPlacementCondition(), new ReplaceablePlacementCondition());
+				this.moa_nest_2 = new WorldGenMoaNest(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("moa_nest/skyroot_moa_nest_2")), new BlockPos(3, 0, 3), new InsideGroundPlacementCondition(), new ReplaceablePlacementCondition());
+
+				this.moa_nest_group = new WorldGenTemplateGroup(this.moa_nest_1, this.moa_nest_2);
+				this.labyrinth_ruins_group = new WorldGenTemplateGroup(this.labyrinth_ruins_1, this.labyrinth_ruins_2, this.labyrinth_ruins_3, this.labyrinth_ruins_4, this.labyrinth_ruins_5);
 
 				this.hasInit = true;
 			}
@@ -156,6 +161,16 @@ public class BiomeAetherDecorator
 
 		int count;
 
+		if (random.nextInt(10) == 0)
+		{
+			x = random.nextInt(16) + 8;
+			z = random.nextInt(16) + 8;
+
+			BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
+
+			this.labyrinth_ruins_group.generate(world, random, pos2);
+		}
+
 		// Moa Nests In Tree
 		if (random.nextInt(2) == 0)
 		{
@@ -164,7 +179,7 @@ public class BiomeAetherDecorator
 
 			BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
 
-			this.genMoaNestTree.generate(world, random, pos2);
+			this.moa_nest_tree_1.generate(world, random, pos2);
 		}
 
 		// Moa Nests
@@ -175,14 +190,7 @@ public class BiomeAetherDecorator
 
 			BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z)).add(0, -1, 0);
 
-			if (random.nextBoolean())
-			{
-				this.genMoaNest1.generate(world, random, pos2);
-			}
-			else
-			{
-				this.genMoaNest2.generate(world, random, pos2);
-			}
+			this.moa_nest_group.generate(world, random, pos2);
 		}
 
 		// Entrance Generator
@@ -193,7 +201,7 @@ public class BiomeAetherDecorator
 
 			BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
 
-			this.genSliderLabyrinthEntrance.generate(world, random, pos2);
+			this.labyrinth_entrance.generate(world, random, pos2);
 		}
 
 		// Tree Generator

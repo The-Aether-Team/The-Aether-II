@@ -6,7 +6,6 @@ import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
@@ -69,19 +68,33 @@ public class WorldGenTemplate extends WorldGenerator
 	}
 
 	@Override
-	public boolean generate(World world, Random rand, BlockPos pos)
-	{
-		return this.placeTemplate(world, rand, pos);
-	}
-
-	protected boolean placeTemplate(World world, Random rand, BlockPos pos)
+	public final boolean generate(World world, Random rand, BlockPos pos)
 	{
 		Rotation rotation = ROTATIONS[rand.nextInt(ROTATIONS.length)];
 
-		return this.placeTemplate(world, rand, pos, rotation);
+		boolean result = this.placeTemplateWithCheck(world, rand, pos, rotation);
+
+		if (result)
+		{
+			this.postGenerate(world, rand, pos, rotation);
+		}
+
+		return result;
 	}
 
-	public boolean placeTemplate(World world, Random rand, BlockPos pos, Rotation rotation)
+	protected void postGenerate(World world, Random rand, BlockPos pos, Rotation rotation)
+	{
+
+	}
+
+	protected boolean placeTemplateWithCheck(World world, Random rand, BlockPos pos)
+	{
+		Rotation rotation = ROTATIONS[rand.nextInt(ROTATIONS.length)];
+
+		return this.placeTemplateWithCheck(world, rand, pos, rotation);
+	}
+
+	public boolean canPlaceTemplate(World world, Random rand, BlockPos pos, Rotation rotation)
 	{
 		PlacementSettings settings = new PlacementSettings()
 				.setMirror(Mirror.NONE)
@@ -93,12 +106,43 @@ public class WorldGenTemplate extends WorldGenerator
 
 		if (this.canGenerate(world, rand, pos, settings))
 		{
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean placeTemplateWithCheck(World world, Random rand, BlockPos pos, Rotation rotation)
+	{
+		PlacementSettings settings = new PlacementSettings()
+				.setMirror(Mirror.NONE)
+				.setRotation(rotation)
+				.setIgnoreEntities(false)
+				.setChunk(null)
+				.setReplacedBlock(null)
+				.setIgnoreStructureBlock(false);
+
+		if (this.canPlaceTemplate(world, rand, pos, rotation))
+		{
 			this.template.addBlocksToWorld(world, pos, settings);
 
 			return true;
 		}
 
 		return false;
+	}
+
+	public void placeTemplateWithoutCheck(World world, Random rand, BlockPos pos, Rotation rotation)
+	{
+		PlacementSettings settings = new PlacementSettings()
+				.setMirror(Mirror.NONE)
+				.setRotation(rotation)
+				.setIgnoreEntities(false)
+				.setChunk(null)
+				.setReplacedBlock(null)
+				.setIgnoreStructureBlock(false);
+
+		this.template.addBlocksToWorld(world, pos, settings);
 	}
 
 	public static boolean canGrowInto(Block block)

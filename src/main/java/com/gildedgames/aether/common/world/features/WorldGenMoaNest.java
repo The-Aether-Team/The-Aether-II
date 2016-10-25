@@ -22,19 +22,10 @@ public class WorldGenMoaNest extends WorldGenTemplate
 	}
 
 	@Override
-	public boolean generate(World world, Random random, BlockPos pos)
+	public void postGenerate(World world, Random random, BlockPos pos, Rotation rotation)
 	{
-		Rotation rotation = ROTATIONS[random.nextInt(ROTATIONS.length)];
+		MoaNest nest = new MoaNest(world, GenUtil.rotate(pos, pos.add(familySpawnOffset), rotation));
 
-		boolean result = this.placeTemplate(world, random, pos, rotation);
-
-		if (result)
-		{
-			MoaNest nest = new MoaNest(world, GenUtil.rotate(pos, pos.add(familySpawnOffset), rotation));
-
-			nest.spawnMoaFamily(world, 2 + world.rand.nextInt(4));
-		}
-
-		return result;
+		nest.spawnMoaFamily(world, 2 + world.rand.nextInt(4));
 	}
 }
