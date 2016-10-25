@@ -101,6 +101,10 @@ public class BlocksAether
 
 	public static final BlockScatterglass scatterglass = new BlockScatterglass();
 
+	public static final BlockArkeniumFrameScatterglass arkenium_frame_scatterglass = new BlockArkeniumFrameScatterglass();
+
+	public static final BlockArkeniumFrameQuicksoilGlass arkenium_frame_quicksoil_glass = new BlockArkeniumFrameQuicksoilGlass();
+
 	public static final Block zanite_block = new BlockCustom(Material.IRON).setSoundType(SoundType.METAL).setHardness(5f);
 
 	public static final Block enchanted_gravitite = new BlockCustom(Material.ROCK).setSoundType(SoundType.STONE).setHardness(5f);
@@ -327,6 +331,10 @@ public class BlocksAether
 		registerBlock("crude_scatterglass", BlocksAether.crude_scatterglass.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerBlock("scatterglass", BlocksAether.scatterglass.setCreativeTab(CreativeTabsAether.BLOCKS));
+
+		registerBlock("arkenium_frame_scatterglass", BlocksAether.arkenium_frame_scatterglass.setCreativeTab(CreativeTabsAether.BLOCKS));
+
+		registerBlock("arkenium_frame_quicksoil_glass", BlocksAether.arkenium_frame_quicksoil_glass.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerBlock("zanite_block", BlocksAether.zanite_block.setCreativeTab(CreativeTabsAether.BLOCKS));
 
