@@ -15,7 +15,6 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import com.gildedgames.aether.common.registry.AltarRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -109,11 +108,11 @@ public class RecipesAether implements IAltarRecipeRegistry
 				'X', new ItemStack(ItemsAether.arkenium));
 
 		// Arkenium Framed Quicksoil Glass
-		registerShapelessRecipe(new ItemStack(BlocksAether.arkenium_frame_quicksoil_glass, 1),
+		registerShapelessRecipe(new ItemStack(BlocksAether.framed_quicksoil_glass, 1),
 				new ItemStack(BlocksAether.quicksoil_glass), new ItemStack(ItemsAether.arkenium_strip));
 
 		// Arkenium Framed Scatterglass
-		registerShapelessRecipe(new ItemStack(BlocksAether.arkenium_frame_scatterglass, 1),
+		registerShapelessRecipe(new ItemStack(BlocksAether.framed_scatterglass, 1),
 				new ItemStack(BlocksAether.scatterglass), new ItemStack(ItemsAether.arkenium_strip));
 
 		// Skyroot Door
