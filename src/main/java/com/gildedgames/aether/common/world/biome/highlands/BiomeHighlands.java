@@ -6,6 +6,8 @@ import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
 import com.gildedgames.aether.common.world.biome.BiomeAetherBase;
 import com.gildedgames.aether.common.world.features.TemplatePipeline;
 import com.gildedgames.aether.common.world.features.WorldGenTemplate;
+import com.gildedgames.aether.common.world.features.placement_conditions.FlatGroundPlacementCondition;
+import com.gildedgames.aether.common.world.features.placement_conditions.ReplaceablePlacementCondition;
 import com.gildedgames.aether.common.world.features.trees.WorldGenFruitTree;
 import com.gildedgames.aether.common.world.features.trees.WorldGenLargeTree;
 import com.gildedgames.aether.common.world.features.trees.WorldGenMassiveSkyrootTree;
@@ -109,9 +111,9 @@ public class BiomeHighlands extends BiomeAetherBase
 	{
 		MinecraftServer server = world.getMinecraftServer();
 
-		this.blue_skyroot_tree_1 = new WorldGenTemplate(pipeline, manager.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "highlands/blue_skyroot_tree_1")));
-		this.blue_skyroot_tree_2 = new WorldGenTemplate(pipeline, manager.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "highlands/blue_skyroot_tree_2")));
-		this.blue_skyroot_tree_3 = new WorldGenTemplate(pipeline, manager.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "highlands/blue_skyroot_tree_3")));
+		this.blue_skyroot_tree_1 = new WorldGenTemplate(pipeline, manager.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "highlands/blue_skyroot_tree_1")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+		this.blue_skyroot_tree_2 = new WorldGenTemplate(pipeline, manager.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "highlands/blue_skyroot_tree_2")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+		this.blue_skyroot_tree_3 = new WorldGenTemplate(pipeline, manager.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "highlands/blue_skyroot_tree_3")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
 	}
 
 }

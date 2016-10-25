@@ -7,8 +7,6 @@ import com.gildedgames.aether.common.blocks.natural.BlockAercloud.AercloudVarian
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
-import com.gildedgames.aether.common.entities.util.MoaNest;
-import com.gildedgames.aether.common.world.GenUtil;
 import com.gildedgames.aether.common.world.features.TemplatePipeline;
 import com.gildedgames.aether.common.world.features.WorldGenAetherFlowers;
 import com.gildedgames.aether.common.world.features.WorldGenAetherLakes;
@@ -20,6 +18,9 @@ import com.gildedgames.aether.common.world.features.WorldGenQuicksoil;
 import com.gildedgames.aether.common.world.features.WorldGenTemplate;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenPurpleAercloud;
+import com.gildedgames.aether.common.world.features.placement_conditions.FlatGroundPlacementCondition;
+import com.gildedgames.aether.common.world.features.placement_conditions.InsideGroundPlacementCondition;
+import com.gildedgames.aether.common.world.features.placement_conditions.ReplaceablePlacementCondition;
 import com.gildedgames.aether.common.world.features.trees.WorldGenOrangeTree;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
@@ -65,7 +66,7 @@ public class BiomeAetherDecorator
 	
 	protected WorldGenTemplate genSliderLabyrinthEntrance;
 
-	protected WorldGenMoaNest genMoaNest;
+	protected WorldGenMoaNest genMoaNestTree, genMoaNest1, genMoaNest2;
 
 	protected TemplatePipeline templatePipeline;
 
@@ -136,7 +137,9 @@ public class BiomeAetherDecorator
 				MinecraftServer server = worldServer.getMinecraftServer();
 
 				this.genSliderLabyrinthEntrance = new WorldGenDungeonEntrance(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_entrance")));
-				this.genMoaNest = new WorldGenMoaNest(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("moa_nest/skyroot_moa_nest_1")));
+				this.genMoaNestTree = new WorldGenMoaNest(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("moa_nest/skyroot_moa_nest_tree_1")), new BlockPos(4, 5, 4), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+				this.genMoaNest1 = new WorldGenMoaNest(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("moa_nest/skyroot_moa_nest_1")), new BlockPos(2, 0, 2), new InsideGroundPlacementCondition(), new ReplaceablePlacementCondition());
+				this.genMoaNest2 = new WorldGenMoaNest(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("moa_nest/skyroot_moa_nest_2")), new BlockPos(3, 0, 3), new InsideGroundPlacementCondition(), new ReplaceablePlacementCondition());
 
 				this.hasInit = true;
 			}
@@ -153,7 +156,7 @@ public class BiomeAetherDecorator
 
 		int count;
 
-		// Moa Nests
+		// Moa Nests In Tree
 		if (random.nextInt(2) == 0)
 		{
 			x = random.nextInt(16) + 8;
@@ -161,7 +164,25 @@ public class BiomeAetherDecorator
 
 			BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
 
-			this.genMoaNest.generate(world, random, pos2);
+			this.genMoaNestTree.generate(world, random, pos2);
+		}
+
+		// Moa Nests
+		if (random.nextInt(4) == 0)
+		{
+			x = random.nextInt(16) + 8;
+			z = random.nextInt(16) + 8;
+
+			BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z)).add(0, -1, 0);
+
+			if (random.nextBoolean())
+			{
+				this.genMoaNest1.generate(world, random, pos2);
+			}
+			else
+			{
+				this.genMoaNest2.generate(world, random, pos2);
+			}
 		}
 
 		// Entrance Generator

@@ -27,18 +27,18 @@ public class GenUtil
 
 	public static BlockPos rotate(BlockPos origin, BlockPos pos, Rotation rotation)
 	{
-		int i = pos.getX();
-		int j = pos.getY();
-		int k = pos.getZ();
+		int i = pos.getX() - origin.getX();
+		int j = pos.getY() - origin.getY();
+		int k = pos.getZ() - origin.getZ();
 
 		switch (rotation)
 		{
 		case COUNTERCLOCKWISE_90:
-			return new BlockPos(origin.getX() + k, origin.getY() + j, origin.getZ() - i);
+			return new BlockPos(origin.getX() + k, pos.getY(), origin.getZ() - i);
 		case CLOCKWISE_90:
-			return new BlockPos(origin.getX() - k, origin.getY() + j, origin.getZ() + i);
+			return new BlockPos(origin.getX() - i, pos.getY(), origin.getZ() + i);
 		case CLOCKWISE_180:
-			return new BlockPos(origin.getX() - i, origin.getY() + j, origin.getZ() - k);
+			return new BlockPos(origin.getX() - i, pos.getY(), origin.getZ() - k);
 		default:
 			return pos;
 		}

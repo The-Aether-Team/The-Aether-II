@@ -97,9 +97,7 @@ public class InDevelopmentWarning extends GuiFrame
 		logo.dim().mod().area(275, 114).pos(InputHelper.getTopCenter(input)).centerX(true).addPos(0, 5).scale(0.5F).flush();
 
 		this.content().set("bg", bg);
-
 		this.content().set("logo", logo);
-
 		this.content().set("button", button);
 
 		Text[] texts = new Text[11];

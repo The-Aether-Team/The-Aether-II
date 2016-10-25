@@ -2,6 +2,8 @@ package com.gildedgames.aether.common.world.features;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.GenUtil;
+import com.gildedgames.aether.common.world.features.placement_conditions.FlatGroundPlacementCondition;
+import com.gildedgames.aether.common.world.features.placement_conditions.ReplaceablePlacementCondition;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -13,7 +15,7 @@ public class WorldGenDungeonEntrance extends WorldGenTemplate
 {
 	public WorldGenDungeonEntrance(TemplatePipeline pipeline, Template template)
 	{
-		super(pipeline, template);
+		super(pipeline, template, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
 	}
 
 	@Override
