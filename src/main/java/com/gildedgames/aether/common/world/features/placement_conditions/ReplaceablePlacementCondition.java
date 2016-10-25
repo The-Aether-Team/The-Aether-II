@@ -16,7 +16,7 @@ public class ReplaceablePlacementCondition implements WorldGenTemplate.Placement
 	{
 		for (Template.BlockInfo block : blocks)
 		{
-			if (block.blockState.getBlock() != Blocks.AIR && block.blockState.getBlock() != Blocks.STRUCTURE_VOID)
+			if (block.blockState.getBlock() != Blocks.STRUCTURE_VOID)
 			{
 				if (!WorldGenTemplate.isReplaceable(world, block.pos))// || !state.isSideSolid(world, itPos, EnumFacing.UP))
 				{
