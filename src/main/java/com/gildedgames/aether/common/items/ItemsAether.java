@@ -706,8 +706,8 @@ public class ItemsAether
 		registerItem("skyroot_sign", skyroot_sign.setCreativeTab(CreativeTabsAether.BLOCKS));
 		
 		registerItem("aether_portal_frame", aether_portal_frame.setCreativeTab(CreativeTabsAether.BLOCKS));
-		registerItem("nether_portal_frame", nether_portal_frame.setCreativeTab(CreativeTabs.MISC));
-		registerItem("end_portal_frame", end_portal_frame.setCreativeTab(CreativeTabs.MISC));
+		registerItem("nether_portal_frame", nether_portal_frame.setCreativeTab(CreativeTabs.TRANSPORTATION));
+		registerItem("end_portal_frame", end_portal_frame.setCreativeTab(CreativeTabs.TRANSPORTATION));
 
         registerItem("shard_of_life", shard_of_life.setMaxStackSize(4).setCreativeTab(CreativeTabsAether.CONSUMABLES));
 
