@@ -119,7 +119,7 @@ public class BlockAetherLeaves extends Block implements IShearable
 
 						if (newState.getBlock().isLeaves(state, worldIn, newPos))
 						{
-							newState.getBlock().beginLeavesDecay(state, worldIn, newPos);
+							newState.getBlock().beginLeavesDecay(newState, worldIn, newPos);
 						}
 					}
 				}
@@ -240,7 +240,7 @@ public class BlockAetherLeaves extends Block implements IShearable
 
 				if (x2 >= 0)
 				{
-					world.setBlockState(pos, state.withProperty(PROPERTY_CHECK_DECAY, false), 4);
+					world.setBlockState(pos, world.getBlockState(pos).withProperty(PROPERTY_CHECK_DECAY, false), 4);
 				}
 				else
 				{
