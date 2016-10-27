@@ -24,24 +24,28 @@ public class WorldGenTemplateGroup extends WorldGenerator
 	@Override
 	public boolean generate(World world, Random rand, BlockPos position)
 	{
-		List<WorldGenTemplate> possibleTemplates = Lists.newArrayList();
+		//List<WorldGenTemplate> possibleTemplates = Lists.newArrayList();
 
 		Rotation rotation = ROTATIONS[rand.nextInt(ROTATIONS.length)];
 
-		for (WorldGenTemplate template : this.templates)
+		/*for (WorldGenTemplate template : this.templates)
 		{
 			if (template.canPlaceTemplate(world, rand, position, rotation))
 			{
 				possibleTemplates.add(template);
 			}
-		}
+		}*/
 
-		if (possibleTemplates.size() > 0)
+		if (this.templates.size() > 0)
 		{
-			WorldGenTemplate templateToGenerate = possibleTemplates.get(rand.nextInt(possibleTemplates.size()));
+			WorldGenTemplate templateToGenerate = this.templates.get(rand.nextInt(this.templates.size()));
 
-			templateToGenerate.placeTemplateWithoutCheck(world, rand, position, rotation);
-			templateToGenerate.postGenerate(world, rand, position, rotation);
+			boolean flag = templateToGenerate.placeTemplateWithCheck(world, rand, position, rotation);
+
+			if (flag)
+			{
+				templateToGenerate.postGenerate(world, rand, position, rotation);
+			}
 
 			return true;
 		}

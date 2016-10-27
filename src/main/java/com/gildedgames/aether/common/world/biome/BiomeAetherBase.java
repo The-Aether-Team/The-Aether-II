@@ -82,14 +82,11 @@ public abstract class BiomeAetherBase extends Biome
 
 			this.tempNoise = new OpenSimplexNoise(rand.nextLong());
 			this.moistureNoise = new OpenSimplexNoise(rand.nextLong() + 100L);
+
+			this.hasInit = true;
 		}
 
 		this.biomeDecorator.genDecorations(world, random, pos, this);
-
-		if (!this.hasInit)
-		{
-			this.hasInit = true;
-		}
 	}
 
 	protected final void decorateEcosystems(World world, Random random, BlockPos pos)
