@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.world.island.logic;
 
+import net.minecraft.world.biome.Biome;
+
 import java.awt.*;
 
 public class IslandData
@@ -11,14 +13,14 @@ public class IslandData
 
 	private boolean asleep, toRemove;
 
-	private final IslandBiomeSet biomeSet;
+	private final Biome biome;
 
-	public IslandData(Rectangle bounds, int minY, int height, IslandBiomeSet biomeSet)
+	public IslandData(Rectangle bounds, int minY, int height, Biome biome)
 	{
 		this.bounds = bounds;
 		this.minY = minY;
 		this.height = height;
-		this.biomeSet = biomeSet;
+		this.biome = biome;
 	}
 
 	public Rectangle getBounds()
@@ -50,6 +52,6 @@ public class IslandData
 		this.toRemove = flag;
 	}
 
-	public IslandBiomeSet getBiomeSet() { return this.biomeSet; }
+	public Biome getBiome() { return this.biome; }
 
 }

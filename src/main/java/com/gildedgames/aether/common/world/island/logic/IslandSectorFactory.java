@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.world.island.logic;
 
-import com.gildedgames.aether.common.registry.IslandBiomeSets;
 import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
 
 import java.awt.*;
@@ -33,8 +32,6 @@ public class IslandSectorFactory
 
 			//int type = rand.nextInt(4);
 
-			IslandBiomeSet set = IslandBiomeSets.HIGHLANDS;
-
 			/*switch(type)
 			{
 				case 0:
@@ -59,7 +56,7 @@ public class IslandSectorFactory
 				}
 			}*/
 
-			IslandData islandData = new IslandData(bounds, 10, 100 + rand.nextInt(20), set);
+			IslandData islandData = new IslandData(bounds, 10, 100 + rand.nextInt(20), BiomesAether.HIGHLANDS);
 
 			data[i] = islandData;
 		}

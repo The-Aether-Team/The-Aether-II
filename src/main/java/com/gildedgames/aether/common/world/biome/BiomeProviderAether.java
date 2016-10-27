@@ -28,17 +28,12 @@ public class BiomeProviderAether extends BiomeProvider
 
 	private final World world;
 
-	private final OpenSimplexNoise tempNoise, moistureNoise;
-
 	public BiomeProviderAether(World world)
 	{
 		this.world = world;
 		this.cache = new BiomeCache(this);
 
 		Random rand = new Random(world.getSeed());
-
-		this.tempNoise = new OpenSimplexNoise(rand.nextLong());
-		this.moistureNoise = new OpenSimplexNoise(rand.nextLong() + 100L);
 	}
 
 	public List<Biome> getBiomesToSpawnIn()
@@ -93,12 +88,7 @@ public class BiomeProviderAether extends BiomeProvider
 
 					if (island != null)
 					{
-						double scale = 100D;
-
-						double temperatureValue = GenUtil.octavedNoise(this.tempNoise, 4, 0D, 1D, (double)posX / scale, (double)posZ / scale);
-						double moistureValue = GenUtil.octavedNoise(this.moistureNoise, 4, 0D, 1D, (double)posX / scale, (double)posZ / scale);
-
-						biomes[index] = island.getBiomeSet().provide(temperatureValue, moistureValue);
+						biomes[index] = island.getBiome();
 					}
 				}
 			}
