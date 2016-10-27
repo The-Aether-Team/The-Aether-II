@@ -139,7 +139,7 @@ public class EcosystemHighlandJungle implements Ecosystem
 			@Override
 			public int getGenerationCount()
 			{
-				return 25;
+				return 15;
 			}
 
 			@Override public WorldGenerator getGenerator()

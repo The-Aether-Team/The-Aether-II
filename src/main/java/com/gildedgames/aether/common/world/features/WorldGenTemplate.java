@@ -44,7 +44,7 @@ public class WorldGenTemplate extends WorldGenerator
 
 	protected boolean canGenerate(World world, Random rand, BlockPos pos, PlacementSettings settings)
 	{
-		final BlockPos max = pos.add(this.template.getSize().getX(), this.template.getSize().getY(), this.template.getSize().getZ());
+		final BlockPos max = pos.add(this.template.transformedSize(settings.getRotation()).getX(), this.template.transformedSize(settings.getRotation()).getY(), this.template.transformedSize(settings.getRotation()).getZ());
 
 		if (!world.isAreaLoaded(pos, max) || max.getY() > world.getActualHeight())
 		{
