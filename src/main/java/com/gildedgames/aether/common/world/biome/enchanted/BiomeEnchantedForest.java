@@ -41,27 +41,25 @@ public class BiomeEnchantedForest extends BiomeAetherBase
 
 	public BiomeEnchantedForest()
 	{
-		super(new Biome.BiomeProperties("Enchanted Forest").setRainDisabled().setTemperature(0.5f));
-
-		this.setRegistryName(AetherCore.getResource("aether_enchanted_forest"));
+		super(new Biome.BiomeProperties("Enchanted Forest").setRainDisabled().setTemperature(0.5f), AetherCore.getResource("aether_enchanted_forest"));
 
 		this.biomeDecorator.generateBushes = false;
 		this.topBlock = BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED_AETHER_GRASS);
 	}
 
-	@Override
+	/*@Override
 	public void decorate(World world, Random random, BlockPos pos)
 	{
 		super.decorate(world, random, pos);
 
-		/*for (int k = 0; k < 80; ++k)
+		*//*for (int k = 0; k < 80; ++k)
 		{
 			int x = random.nextInt(16) + 8;
 			byte y = (byte) (random.nextInt(64) + 32);
 			int z = random.nextInt(16) + 8;
 
 			BiomeEnchantedForest.vines.generate(world, random, new BlockPos(pos.getX() + x, y, pos.getZ() + z));
-		}*/
+		}*//*
 
 		int x, y, z;
 
@@ -73,9 +71,9 @@ public class BiomeEnchantedForest extends BiomeAetherBase
 
 			this.bushes.generate(world, random, pos.add(x, y, z));
 		}
-	}
+	}*/
 
-	@Override
+	/*@Override
 	public WorldGenAbstractTree genBigTreeChance(Random random)
 	{
 		int ratio = random.nextInt(100);
@@ -90,18 +88,6 @@ public class BiomeEnchantedForest extends BiomeAetherBase
 		}
 
 		return earthshifter_tree;
-	}
-
-	@Override
-	public WorldGenTemplate fetchTemplateToGenerate(Random random)
-	{
-		return null;
-	}
-
-	@Override
-	public void initTemplates(WorldServer world, TemplatePipeline pipeline, TemplateManager manager)
-	{
-
-	}
+	}*/
 
 }

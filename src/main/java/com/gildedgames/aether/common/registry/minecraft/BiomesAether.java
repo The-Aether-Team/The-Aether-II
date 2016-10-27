@@ -1,13 +1,8 @@
 package com.gildedgames.aether.common.registry.minecraft;
 
-import com.gildedgames.aether.common.world.biome.blighted.BiomeBlightedHighlands;
-import com.gildedgames.aether.common.world.biome.enchanted.BiomeEnchantedForest;
-import com.gildedgames.aether.common.world.biome.frostpine.BiomeFrostpine;
-import com.gildedgames.aether.common.world.biome.highlands.BiomeHighlandForest;
-import com.gildedgames.aether.common.world.biome.highlands.BiomeHighlandPlains;
-import com.gildedgames.aether.common.world.biome.highlands.BiomeHighlands;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.world.biome.BiomeVoid;
-import com.gildedgames.aether.common.world.biome.highlands.BiomeHighlandsCrystal;
+import com.gildedgames.aether.common.world.biome.highlands.BiomeHighlands;
 import com.gildedgames.aether.common.world.labyrinth.BiomeSliderLabyrinth;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -15,19 +10,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class BiomesAether
 {
 
-	public static final Biome HIGHLANDS = new BiomeHighlands();
-
-	public static final Biome HIGHLANDS_CRYSTAL = new BiomeHighlandsCrystal();
-
-	public static final Biome HIGHLANDS_PLAINS = new BiomeHighlandPlains();
-
-	public static final Biome HIGHLANDS_FOREST = new BiomeHighlandForest();
-
-	/*public static final Biome ENCHANTED_FOREST = new BiomeEnchantedForest();
-
-	public static final Biome FROSTPINE = new BiomeFrostpine();
-
-	public static final Biome BLIGHTED_HIGHLANDS = new BiomeBlightedHighlands();*/
+	public static final Biome HIGHLANDS = new BiomeHighlands(new Biome.BiomeProperties("Highlands").setRainDisabled().setTemperature(0.5f), AetherCore.getResource("aether_highlands"));
 
 	public static final Biome VOID = new BiomeVoid();
 
@@ -36,14 +19,9 @@ public class BiomesAether
 	public static void preInit()
 	{
 		GameRegistry.register(HIGHLANDS);
-		GameRegistry.register(HIGHLANDS_CRYSTAL);
-		GameRegistry.register(HIGHLANDS_PLAINS);
-		GameRegistry.register(HIGHLANDS_FOREST);
-		//GameRegistry.register(FROSTPINE);
-		//GameRegistry.register(BLIGHTED_HIGHLANDS);
 
 		GameRegistry.register(VOID);
-		//GameRegistry.register(ENCHANTED_FOREST);
+
 		GameRegistry.register(BIOME_SLIDER_LABYRINTH);
 	}
 }

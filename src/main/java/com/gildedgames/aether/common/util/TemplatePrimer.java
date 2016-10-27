@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.util;
 
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.tile_entities.TileEntityWildcard;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -82,6 +84,110 @@ public class TemplatePrimer
 		return ObfuscationReflectionHelper.getPrivateValue(Template.class, template, 1);
 	}
 
+	public static void populateAll(Template template, World world, BlockPos pos, @Nullable ITemplateProcessor processor, PlacementSettings settings)
+	{
+		List<Template.BlockInfo> blocks = TemplatePrimer.getBlocks(template);
+
+		if (!blocks.isEmpty() && template.getSize().getX() >= 1 && template.getSize().getY() >= 1 && template.getSize().getZ() >= 1)
+		{
+			Block block = settings.getReplacedBlock();
+			StructureBoundingBox bb = settings.getBoundingBox();
+
+			for (Template.BlockInfo template$blockinfo : blocks)
+			{
+				BlockPos blockpos = Template.transformedBlockPos(settings, template$blockinfo.pos).add(pos);
+				Template.BlockInfo template$blockinfo1 = processor != null ? processor.processBlock(world, blockpos, template$blockinfo) : template$blockinfo;
+
+				if (template$blockinfo1 != null)
+				{
+					Block block1 = template$blockinfo1.blockState.getBlock();
+
+					if ((block == null || block != block1) && (!settings.getIgnoreStructureBlock() || block1 != Blocks.STRUCTURE_BLOCK) && (bb == null || bb.isVecInside(blockpos)))
+					{
+						IBlockState iblockstate = template$blockinfo1.blockState.withMirror(settings.getMirror());
+						IBlockState iblockstate1 = iblockstate.withRotation(settings.getRotation());
+
+						if (iblockstate1.getBlock() == BlocksAether.wildcard)
+						{
+							TileEntityWildcard wildcard = new TileEntityWildcard();
+
+							wildcard.setWorldObj(world);
+
+							template$blockinfo1.tileentityData.setInteger("x", blockpos.getX());
+							template$blockinfo1.tileentityData.setInteger("y", blockpos.getY());
+							template$blockinfo1.tileentityData.setInteger("z", blockpos.getZ());
+							wildcard.readFromNBT(template$blockinfo1.tileentityData);
+							wildcard.mirror(settings.getMirror());
+							wildcard.rotate(settings.getRotation());
+
+							wildcard.onSchematicGeneration();
+
+							continue;
+						}
+
+						if (template$blockinfo1.tileentityData != null)
+						{
+							TileEntity tileentity = world.getTileEntity(blockpos);
+
+							if (tileentity != null)
+							{
+								if (tileentity instanceof IInventory)
+								{
+									((IInventory)tileentity).clear();
+								}
+							}
+						}
+
+						if (world.setBlockState(blockpos, iblockstate1, 2) && template$blockinfo1.tileentityData != null)
+						{
+							TileEntity tileentity2 = world.getTileEntity(blockpos);
+
+							if (tileentity2 != null)
+							{
+								template$blockinfo1.tileentityData.setInteger("x", blockpos.getX());
+								template$blockinfo1.tileentityData.setInteger("y", blockpos.getY());
+								template$blockinfo1.tileentityData.setInteger("z", blockpos.getZ());
+								tileentity2.readFromNBT(template$blockinfo1.tileentityData);
+								tileentity2.mirror(settings.getMirror());
+								tileentity2.rotate(settings.getRotation());
+
+								tileentity2.markDirty();
+							}
+						}
+					}
+				}
+			}
+
+			for (Template.BlockInfo template$blockinfo2 : blocks)
+			{
+				if (block == null || block != template$blockinfo2.blockState.getBlock())
+				{
+					BlockPos blockpos1 = Template.transformedBlockPos(settings, template$blockinfo2.pos).add(pos);
+
+					if (bb == null || bb.isVecInside(blockpos1))
+					{
+						world.notifyNeighborsRespectDebug(blockpos1, template$blockinfo2.blockState.getBlock());
+
+						if (template$blockinfo2.tileentityData != null)
+						{
+							TileEntity tileentity1 = world.getTileEntity(blockpos1);
+
+							if (tileentity1 != null)
+							{
+								tileentity1.markDirty();
+							}
+						}
+					}
+				}
+			}
+
+			if (!settings.getIgnoreEntities())
+			{
+				TemplatePrimer.addEntitiesToWorld(template, world, pos, settings.getMirror(), settings.getRotation(), bb);
+			}
+		}
+	}
+
 	public static void primeChunk(Template template, World world, ChunkPos chunk, ChunkPrimer primer, BlockPos pos, @Nullable ITemplateProcessor processor, PlacementSettings settings)
 	{
 		List<Template.BlockInfo> blocks = TemplatePrimer.getBlocks(template);
@@ -160,6 +266,24 @@ public class TemplatePrimer
 					{
 						IBlockState iblockstate = template$blockinfo1.blockState.withMirror(settings.getMirror());
 						IBlockState iblockstate1 = iblockstate.withRotation(settings.getRotation());
+
+						if (iblockstate1.getBlock() == BlocksAether.wildcard)
+						{
+							TileEntityWildcard wildcard = new TileEntityWildcard();
+
+							wildcard.setWorldObj(world);
+
+							template$blockinfo1.tileentityData.setInteger("x", blockpos.getX());
+							template$blockinfo1.tileentityData.setInteger("y", blockpos.getY());
+							template$blockinfo1.tileentityData.setInteger("z", blockpos.getZ());
+							wildcard.readFromNBT(template$blockinfo1.tileentityData);
+							wildcard.mirror(settings.getMirror());
+							wildcard.rotate(settings.getRotation());
+
+							wildcard.onSchematicGeneration();
+
+							continue;
+						}
 
 						if (template$blockinfo1.tileentityData != null)
 						{

@@ -14,9 +14,9 @@ public class WorldGenMoaNest extends WorldGenTemplate
 
 	private BlockPos familySpawnOffset;
 
-	public WorldGenMoaNest(TemplatePipeline pipeline, Template template, BlockPos familySpawnOffset, PlacementCondition condition, PlacementCondition... placementConditions)
+	public WorldGenMoaNest(Template template, BlockPos familySpawnOffset, PlacementCondition condition, PlacementCondition... placementConditions)
 	{
-		super(pipeline, template, condition, placementConditions);
+		super(template, condition, placementConditions);
 
 		this.familySpawnOffset = familySpawnOffset;
 	}

@@ -14,21 +14,7 @@ public class BiomeVoid extends BiomeAetherBase
 
 	public BiomeVoid()
 	{
-		super(new Biome.BiomeProperties("Aether Void").setRainDisabled().setTemperature(0.5f));
-
-		this.setRegistryName(AetherCore.getResource("aether_void"));
-	}
-
-	@Override
-	public WorldGenTemplate fetchTemplateToGenerate(Random random)
-	{
-		return null;
-	}
-
-	@Override
-	public void initTemplates(WorldServer world, TemplatePipeline pipeline, TemplateManager manager)
-	{
-
+		super(new Biome.BiomeProperties("Aether Void").setRainDisabled().setTemperature(0.5f), AetherCore.getResource("aether_void"));
 	}
 
 }

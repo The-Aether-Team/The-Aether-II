@@ -5,6 +5,8 @@ import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVaria
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import com.gildedgames.aether.common.world.biome.blighted.BiomeBlightedHighlands;
 import com.gildedgames.aether.common.world.biome.highlands.BiomeHighlands;
+import com.gildedgames.aether.common.world.biome.highlands.EcosystemCrystalHighlands;
+import com.gildedgames.aether.common.world.biome.highlands.EcosystemHighlands;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -104,23 +106,19 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 
 			if (meta == BLUE_SKYROOT.getMeta())
 			{
-				treeGenerator = BiomeHighlands.genBlueSkyrootTree;
+				treeGenerator = EcosystemCrystalHighlands.blue_skyroot_tree;
 			}
 			else if (meta == GREEN_SKYROOT.getMeta())
 			{
-				treeGenerator = BiomeHighlands.genGreenSkyrootTree;
+				treeGenerator = EcosystemHighlands.green_skyroot_tree;
 			}
 			else if (meta == GOLDEN_OAK.getMeta())
 			{
-				treeGenerator = BiomeHighlands.genGoldenOakTree;
-			}
-			else if (meta == BLIGHTED.getMeta())
-			{
-				treeGenerator = BiomeBlightedHighlands.blighted_tree;
+				treeGenerator = EcosystemHighlands.golden_oak;
 			}
 			else if (meta == DARK_BLUE_SKYROOT.getMeta())
 			{
-				treeGenerator = BiomeBlightedHighlands.dark_blue_tree;
+				treeGenerator = EcosystemCrystalHighlands.dark_blue_skyroot_oak;
 			}
 
 			if (treeGenerator != null)

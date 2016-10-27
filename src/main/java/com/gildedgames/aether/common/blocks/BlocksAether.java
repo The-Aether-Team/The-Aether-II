@@ -279,6 +279,8 @@ public class BlocksAether
 
 	public static final BlockLabyrinthContainer labyrinth_container = new BlockLabyrinthContainer();
 
+	public static final Block wildcard = new BlockWildcard();
+
 	public static void preInit()
 	{
 		registerBlock("aether_dirt", BlocksAether.aether_dirt.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.aether_dirt));
@@ -458,6 +460,8 @@ public class BlocksAether
 		registerBlock("labyrinth_container", BlocksAether.labyrinth_container.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.labyrinth_container));
 
 		registerBlock("labyrinth_bridge", BlocksAether.labyrinth_bridge.setBlockUnbreakable().setResistance(6000000.0F));
+
+		registerBlock("wildcard", BlocksAether.wildcard);
 
 		Blocks.FIRE.setFireInfo(BlocksAether.aether_flower, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.orange_tree, 5, 5);

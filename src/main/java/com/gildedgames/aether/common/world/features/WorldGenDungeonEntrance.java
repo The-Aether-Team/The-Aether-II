@@ -16,9 +16,9 @@ public class WorldGenDungeonEntrance extends WorldGenTemplate
 
 	private BlockPos totemOffset;
 
-	public WorldGenDungeonEntrance(TemplatePipeline pipeline, Template template, BlockPos totemOffset, PlacementCondition condition, PlacementCondition... conditions)
+	public WorldGenDungeonEntrance(Template template, BlockPos totemOffset, PlacementCondition condition, PlacementCondition... conditions)
 	{
-		super(pipeline, template, condition, conditions);
+		super(template, condition, conditions);
 
 		this.totemOffset = totemOffset;
 	}

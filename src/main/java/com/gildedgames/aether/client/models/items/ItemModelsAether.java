@@ -598,6 +598,8 @@ public class ItemModelsAether
 
 		registerItemModels(ItemsAether.aether_spawn_egg, "aether_spawn_egg");
 
+		registerItemModels(BlocksAether.wildcard, "wildcard");
+
 		ModelLoader.setCustomModelResourceLocation(getItem(BlocksAether.structure_extended), 0, new ModelResourceLocation("structure_block", "inventory"));
 	}
 

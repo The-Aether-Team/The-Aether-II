@@ -19,7 +19,8 @@ public class TileEntitiesAether
 			FROSTPINE_COOLER_ID = "aether.frostpine_cooler",
 			INCUBATOR_ID = "aether.incubator",
 			PRESENT_ID = "aether.present",
-			LABYRINTH_BRIDGE_ID = "aether.labyrinth_bridge";
+			LABYRINTH_BRIDGE_ID = "aether.labyrinth_bridge",
+			WILDCARD_ID = "aether.wildcard";
 
 	public static void preInit()
 	{
@@ -36,6 +37,7 @@ public class TileEntitiesAether
 		GameRegistry.registerTileEntity(TileEntityIncubator.class, INCUBATOR_ID);
 		GameRegistry.registerTileEntity(TileEntityPresent.class, PRESENT_ID);
 		GameRegistry.registerTileEntity(TileEntityLabyrinthBridge.class, LABYRINTH_BRIDGE_ID);
+		GameRegistry.registerTileEntity(TileEntityWildcard.class, WILDCARD_ID);
 	}
 	
 }

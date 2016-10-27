@@ -11,6 +11,8 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.structure.template.BlockRotationProcessor;
+import net.minecraft.world.gen.structure.template.ITemplateProcessor;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 
@@ -24,13 +26,10 @@ public class WorldGenTemplate extends WorldGenerator
 
 	private Template template;
 
-	private TemplatePipeline pipeline;
-
 	private List<PlacementCondition> placementConditions = Lists.newArrayList();
 
-	public WorldGenTemplate(TemplatePipeline pipeline, Template template, PlacementCondition condition, PlacementCondition... placementConditions)
+	public WorldGenTemplate(Template template, PlacementCondition condition, PlacementCondition... placementConditions)
 	{
-		this.pipeline = pipeline;
 		this.template = template;
 
 		this.placementConditions = Lists.newArrayList(placementConditions);
@@ -124,7 +123,8 @@ public class WorldGenTemplate extends WorldGenerator
 
 		if (this.canPlaceTemplate(world, rand, pos, rotation))
 		{
-			this.template.addBlocksToWorld(world, pos, settings);
+			ITemplateProcessor processor = new BlockRotationProcessor(pos, settings);
+			TemplatePrimer.populateAll(this.template, world, pos, processor, settings);
 
 			return true;
 		}
@@ -142,7 +142,8 @@ public class WorldGenTemplate extends WorldGenerator
 				.setReplacedBlock(null)
 				.setIgnoreStructureBlock(false);
 
-		this.template.addBlocksToWorld(world, pos, settings);
+		ITemplateProcessor processor = new BlockRotationProcessor(pos, settings);
+		TemplatePrimer.populateAll(this.template, world, pos, processor, settings);
 	}
 
 	public static boolean canGrowInto(Block block)

@@ -15,20 +15,20 @@ public class IslandBiomeSets
 		{
 			Biome biome = BiomesAether.HIGHLANDS;
 
-			if (temperature < 0.2 && moisture > 0.3)
+			/*if (temperature < 0.2 && moisture > 0.3)
 			{
-				biome = BiomesAether.HIGHLANDS_CRYSTAL;
+				biome = BiomesAether.CRYSTAL_HIGHLANDS;
 			}
 
 			if (temperature > 0.5 && moisture > 0.2)
 			{
-				biome = BiomesAether.HIGHLANDS_FOREST;
+				biome = BiomesAether.HIGHLAND_FOREST;
 			}
 
 			if (temperature > 0.2 && moisture < 0.2)
 			{
-				biome = BiomesAether.HIGHLANDS_PLAINS;
-			}
+				biome = BiomesAether.HIGHLAND_PLAINS;
+			}*/
 
 			return biome;
 		}

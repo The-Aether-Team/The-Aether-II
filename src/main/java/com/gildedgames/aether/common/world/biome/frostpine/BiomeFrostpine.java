@@ -33,18 +33,17 @@ public class BiomeFrostpine extends BiomeAetherBase
 
 	protected WorldGenAetherFlowers genMoonlitBlooms = new WorldGenAetherFlowers(BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.MOONLIT_BLOOM), 64);
 
-	public BiomeFrostpine()	{
-		super(new BiomeProperties("Frostpine").setRainDisabled().setTemperature(0.5f));
+	public BiomeFrostpine()
+	{
+		super(new BiomeProperties("Frostpine").setRainDisabled().setTemperature(0.5f), AetherCore.getResource("aether_frostpine"));
 
 		this.topBlock = BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.FROSTROOT);
 		this.fillerBlock = BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.PERMAFROST);
 
-		this.setRegistryName(AetherCore.getResource("aether_frostpine"));
-
 		this.templatePipeline = new TemplatePipeline();
 	}
 
-	@Override
+	/*@Override
 	public void decorate(World world, Random random, BlockPos pos)
 	{
 		if (world instanceof WorldServer)
@@ -149,24 +148,6 @@ public class BiomeFrostpine extends BiomeAetherBase
 
 			this.genMoonlitBlooms.generate(world, random, pos.add(x, y, z));
 		}
-	}
-
-	@Override
-	public WorldGenAbstractTree genBigTreeChance(Random random)
-	{
-		return null;
-	}
-
-	@Override
-	public WorldGenTemplate fetchTemplateToGenerate(Random random)
-	{
-		return null;
-	}
-
-	@Override
-	public void initTemplates(WorldServer world, TemplatePipeline pipeline, TemplateManager manager)
-	{
-
-	}
+	}*/
 
 }

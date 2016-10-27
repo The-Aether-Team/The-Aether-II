@@ -35,29 +35,15 @@ public class BiomeBlightedHighlands extends BiomeAetherBase
 
 	public BiomeBlightedHighlands()
 	{
-		super(new BiomeProperties("Blighted Highlands").setRainDisabled().setTemperature(0.5f));
+		super(new BiomeProperties("Blighted Highlands").setRainDisabled().setTemperature(0.5f), AetherCore.getResource("aether_blighted_highlands"));
 
 		this.topBlock = BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.BLIGHTED);
-
-		this.setRegistryName(AetherCore.getResource("aether_blighted_highlands"));
 	}
 
-	@Override
+	/*@Override
 	public WorldGenAbstractTree genBigTreeChance(Random random)
 	{
 		return blightwillow_tree;
-	}
-
-	@Override
-	public WorldGenTemplate fetchTemplateToGenerate(Random random)
-	{
-		return null;
-	}
-
-	@Override
-	public void initTemplates(WorldServer world, TemplatePipeline pipeline, TemplateManager manager)
-	{
-
-	}
+	}*/
 
 }

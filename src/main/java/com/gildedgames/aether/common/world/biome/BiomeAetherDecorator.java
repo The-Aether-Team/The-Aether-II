@@ -32,8 +32,6 @@ import java.util.Random;
 public class BiomeAetherDecorator
 {
 
-	public static final TemplateManager MANAGER = new TemplateManager("structures");
-
 	protected WorldGenAetherTallGrass genAetherGrass;
 
 	protected WorldGenAetherMinable genAmbrosium, genZanite, genGravitite, genIcestone, genArkenium;
@@ -54,13 +52,11 @@ public class BiomeAetherDecorator
 
 	protected WorldGenPurpleAercloud genPurpleAercloud;
 	
-	protected WorldGenTemplate labyrinth_entrance_1, labyrinth_entrance_underground_1, labyrinth_ruins_1, labyrinth_ruins_2, labyrinth_ruins_3, labyrinth_ruins_4, labyrinth_ruins_5;
+	protected WorldGenTemplate labyrinth_entrance_1, labyrinth_entrance_underground_1;
 
-	protected WorldGenMoaNest moa_nest_tree_1, moa_nest_1, moa_nest_2;
+	protected WorldGenMoaNest moa_nest_1, moa_nest_2;
 
-	protected WorldGenTemplateGroup moa_nest_group, labyrinth_ruins_group, labyrinth_entrance_group;
-
-	protected TemplatePipeline templatePipeline;
+	protected WorldGenTemplateGroup moa_nest_group, labyrinth_entrance_group;
 
 	private boolean hasInit = false;
 
@@ -97,8 +93,6 @@ public class BiomeAetherDecorator
 		this.genBlueAercloud = new WorldGenAercloud(this.getAercloudState(BlockAercloud.BLUE_AERCLOUD), 8, false);
 
 		this.genPurpleAercloud = new WorldGenPurpleAercloud(this.getAercloudState(BlockAercloud.PURPLE_AERCLOUD), 4, false);
-
-		this.templatePipeline = new TemplatePipeline();
 	}
 
 	protected IBlockState getAercloudState(AercloudVariant variant)
@@ -112,39 +106,18 @@ public class BiomeAetherDecorator
 		{
 			WorldServer worldServer = (WorldServer) world;
 
-			if (genBase instanceof BiomeAetherBase)
-			{
-				BiomeAetherBase biome = (BiomeAetherBase) genBase;
-
-				if (!biome.areTemplatesInitiated())
-				{
-					biome.initTemplates(worldServer, this.templatePipeline, MANAGER);
-
-					biome.markTemplatesInitiated();
-				}
-			}
-
 			if (!this.hasInit)
 			{
 				MinecraftServer server = worldServer.getMinecraftServer();
 
-				this.labyrinth_entrance_1 = new WorldGenDungeonEntrance(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_entrance_1")), new BlockPos(4, 2, 4), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-				this.labyrinth_entrance_underground_1 = new WorldGenDungeonEntrance(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_entrance_underground_1")), new BlockPos(8, 1, 2), new UndergroundEntrancePlacementCondition(), new UndergroundPlacementCondition());
+				this.labyrinth_entrance_1 = new WorldGenDungeonEntrance(BiomeAetherBase.MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_entrance_1")), new BlockPos(4, 2, 4), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+				this.labyrinth_entrance_underground_1 = new WorldGenDungeonEntrance(BiomeAetherBase.MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_entrance_underground_1")), new BlockPos(8, 1, 2), new UndergroundEntrancePlacementCondition(), new UndergroundPlacementCondition());
 
-				this.labyrinth_ruins_1 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_ruins_1")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-				this.labyrinth_ruins_2 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_ruins_2")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-				this.labyrinth_ruins_3 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_ruins_3")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-				this.labyrinth_ruins_4 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_ruins_4")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-				this.labyrinth_ruins_5 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_ruins_5")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-
-				this.moa_nest_tree_1 = new WorldGenMoaNest(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("moa_nest/skyroot_moa_nest_tree_1")), new BlockPos(4, 5, 4), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-
-				this.moa_nest_1 = new WorldGenMoaNest(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("moa_nest/skyroot_moa_nest_1")), new BlockPos(2, 0, 2), new InsideGroundPlacementCondition(), new ReplaceablePlacementCondition());
-				this.moa_nest_2 = new WorldGenMoaNest(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("moa_nest/skyroot_moa_nest_2")), new BlockPos(3, 0, 3), new InsideGroundPlacementCondition(), new ReplaceablePlacementCondition());
+				this.moa_nest_1 = new WorldGenMoaNest(BiomeAetherBase.MANAGER.getTemplate(server, AetherCore.getResource("moa_nest/skyroot_moa_nest_1")), new BlockPos(2, 0, 2), new InsideGroundPlacementCondition(), new ReplaceablePlacementCondition());
+				this.moa_nest_2 = new WorldGenMoaNest(BiomeAetherBase.MANAGER.getTemplate(server, AetherCore.getResource("moa_nest/skyroot_moa_nest_2")), new BlockPos(3, 0, 3), new InsideGroundPlacementCondition(), new ReplaceablePlacementCondition());
 
 				this.moa_nest_group = new WorldGenTemplateGroup(this.moa_nest_1, this.moa_nest_2);
 				this.labyrinth_entrance_group = new WorldGenTemplateGroup(this.labyrinth_entrance_1);
-				this.labyrinth_ruins_group = new WorldGenTemplateGroup(this.labyrinth_ruins_1, this.labyrinth_ruins_2, this.labyrinth_ruins_3, this.labyrinth_ruins_4, this.labyrinth_ruins_5);
 
 				this.hasInit = true;
 			}
@@ -184,28 +157,6 @@ public class BiomeAetherDecorator
 			this.labyrinth_entrance_group.generate(world, random, pos2);
 		}
 
-		// Labyrinth Ruins
-		if (random.nextInt(8) == 0)
-		{
-			x = random.nextInt(16) + 8;
-			z = random.nextInt(16) + 8;
-
-			BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
-
-			this.labyrinth_ruins_group.generate(world, random, pos2);
-		}
-
-		// Moa Nests In Tree
-		if (random.nextInt(2) == 0)
-		{
-			x = random.nextInt(16) + 8;
-			z = random.nextInt(16) + 8;
-
-			BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
-
-			this.moa_nest_tree_1.generate(world, random, pos2);
-		}
-
 		// Moa Nests
 		if (random.nextInt(4) == 0)
 		{
@@ -233,24 +184,12 @@ public class BiomeAetherDecorator
 			}
 		}
 
-		//Template Generator
+		//Decorate Ecosystems
 		if (genBase instanceof BiomeAetherBase)
 		{
 			BiomeAetherBase biome = (BiomeAetherBase)genBase;
 
-			for (count = 0; count < 4; count++)
-			{
-				x = random.nextInt(16) + 8;
-				z = random.nextInt(16) + 8;
-
-				WorldGenTemplate template = biome.fetchTemplateToGenerate(random);
-				BlockPos randPos = world.getHeight(pos.add(x, 0, z));
-
-				if (template != null)
-				{
-					template.generate(world, random, randPos);
-				}
-			}
+			biome.decorateEcosystems(world, random, pos);
 		}
 
 		// Orange Tree Generator
@@ -320,8 +259,6 @@ public class BiomeAetherDecorator
 		}
 
 		this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));
-
-		this.templatePipeline.constructChunk(world, chunkX, chunkZ);
 
 		// Lake Generator
 		/*if (random.nextInt(4) == 0)
