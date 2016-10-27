@@ -42,7 +42,7 @@ public class WorldGenTemplate extends WorldGenerator
 		return this.template;
 	}
 
-	protected boolean canGenerate(World world, Random rand, BlockPos pos, PlacementSettings settings)
+	protected boolean canGenerate(World world, BlockPos pos, PlacementSettings settings)
 	{
 		final BlockPos max = pos.add(this.template.transformedSize(settings.getRotation()).getX(), this.template.transformedSize(settings.getRotation()).getY(), this.template.transformedSize(settings.getRotation()).getZ());
 
@@ -71,7 +71,9 @@ public class WorldGenTemplate extends WorldGenerator
 	{
 		Rotation rotation = ROTATIONS[rand.nextInt(ROTATIONS.length)];
 
-		boolean result = this.placeTemplateWithCheck(world, rand, pos, rotation);
+		PlacementSettings settings = new PlacementSettings().setMirror(Mirror.NONE).setRotation(rotation).setIgnoreEntities(false).setChunk(null).setReplacedBlock(null).setIgnoreStructureBlock(false);
+
+		boolean result = this.placeTemplateWithCheck(world, pos, settings);
 
 		if (result)
 		{
@@ -86,24 +88,9 @@ public class WorldGenTemplate extends WorldGenerator
 
 	}
 
-	protected boolean placeTemplateWithCheck(World world, Random rand, BlockPos pos)
+	public boolean canPlaceTemplate(World world, BlockPos pos, PlacementSettings settings)
 	{
-		Rotation rotation = ROTATIONS[rand.nextInt(ROTATIONS.length)];
-
-		return this.placeTemplateWithCheck(world, rand, pos, rotation);
-	}
-
-	public boolean canPlaceTemplate(World world, Random rand, BlockPos pos, Rotation rotation)
-	{
-		PlacementSettings settings = new PlacementSettings()
-				.setMirror(Mirror.NONE)
-				.setRotation(rotation)
-				.setIgnoreEntities(false)
-				.setChunk(null)
-				.setReplacedBlock(null)
-				.setIgnoreStructureBlock(false);
-
-		if (this.canGenerate(world, rand, pos, settings))
+		if (this.canGenerate(world, pos, settings))
 		{
 			return true;
 		}
@@ -111,20 +98,11 @@ public class WorldGenTemplate extends WorldGenerator
 		return false;
 	}
 
-	public boolean placeTemplateWithCheck(World world, Random rand, BlockPos pos, Rotation rotation)
+	public boolean placeTemplateWithCheck(World world, BlockPos pos, PlacementSettings settings)
 	{
-		PlacementSettings settings = new PlacementSettings()
-				.setMirror(Mirror.NONE)
-				.setRotation(rotation)
-				.setIgnoreEntities(false)
-				.setChunk(null)
-				.setReplacedBlock(null)
-				.setIgnoreStructureBlock(false);
-
-		if (this.canPlaceTemplate(world, rand, pos, rotation))
+		if (this.canPlaceTemplate(world, pos, settings))
 		{
-			ITemplateProcessor processor = new BlockRotationProcessor(pos, settings);
-			TemplatePrimer.populateAll(this.template, world, pos, processor, settings);
+			this.placeTemplateWithoutCheck(world, pos, settings);
 
 			return true;
 		}
@@ -132,16 +110,8 @@ public class WorldGenTemplate extends WorldGenerator
 		return false;
 	}
 
-	public void placeTemplateWithoutCheck(World world, Random rand, BlockPos pos, Rotation rotation)
+	public void placeTemplateWithoutCheck(World world, BlockPos pos, PlacementSettings settings)
 	{
-		PlacementSettings settings = new PlacementSettings()
-				.setMirror(Mirror.NONE)
-				.setRotation(rotation)
-				.setIgnoreEntities(false)
-				.setChunk(null)
-				.setReplacedBlock(null)
-				.setIgnoreStructureBlock(false);
-
 		ITemplateProcessor processor = new BlockRotationProcessor(pos, settings);
 		TemplatePrimer.populateAll(this.template, world, pos, processor, settings);
 	}

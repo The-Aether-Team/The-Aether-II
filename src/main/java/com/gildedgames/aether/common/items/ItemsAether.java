@@ -93,6 +93,11 @@ import com.gildedgames.aether.common.registry.minecraft.MaterialsAether;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.util.Constraint;
 import com.gildedgames.aether.common.util.RandomItemSelector;
+import com.gildedgames.aether.common.world.biome.BiomeAetherBase;
+import com.gildedgames.aether.common.world.features.WorldGenTemplate;
+import com.gildedgames.aether.common.world.features.placement_conditions.FlatGroundPlacementCondition;
+import com.gildedgames.aether.common.world.features.placement_conditions.ReplaceablePlacementCondition;
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -109,12 +114,15 @@ import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.commons.lang3.tuple.Pair;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemsAether
@@ -270,6 +278,22 @@ public class ItemsAether
 	public static final Item skyroot_sign = new ItemSkyrootSign();
 	
 	public static final Item aether_portal_frame = new ItemAetherPortalFrame();
+
+	public static final Item nether_portal_frame = new ItemTemplatePlacer(new Function<WorldServer, WorldGenTemplate>()
+	{
+		@Nullable @Override public WorldGenTemplate apply(@Nullable WorldServer input)
+		{
+			return new WorldGenTemplate(BiomeAetherBase.MANAGER.getTemplate(input.getMinecraftServer(), new ResourceLocation(AetherCore.MOD_ID, "nether_portal")), new ReplaceablePlacementCondition());
+		}
+	});
+
+	public static final Item end_portal_frame = new ItemTemplatePlacer(new Function<WorldServer, WorldGenTemplate>()
+	{
+		@Nullable @Override public WorldGenTemplate apply(@Nullable WorldServer input)
+		{
+			return new WorldGenTemplate(BiomeAetherBase.MANAGER.getTemplate(input.getMinecraftServer(), new ResourceLocation(AetherCore.MOD_ID, "end_portal")), new ReplaceablePlacementCondition());
+		}
+	});
 
 	public static final Item aechor_petal = new Item();
 
@@ -682,6 +706,8 @@ public class ItemsAether
 		registerItem("skyroot_sign", skyroot_sign.setCreativeTab(CreativeTabsAether.BLOCKS));
 		
 		registerItem("aether_portal_frame", aether_portal_frame.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerItem("nether_portal_frame", nether_portal_frame.setCreativeTab(CreativeTabs.MISC));
+		registerItem("end_portal_frame", end_portal_frame.setCreativeTab(CreativeTabs.MISC));
 
         registerItem("shard_of_life", shard_of_life.setMaxStackSize(4).setCreativeTab(CreativeTabsAether.CONSUMABLES));
 

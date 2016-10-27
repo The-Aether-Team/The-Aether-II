@@ -1,10 +1,12 @@
 package com.gildedgames.aether.common.world.features;
 
 import com.google.common.collect.Lists;
+import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.structure.template.PlacementSettings;
 
 import java.util.List;
 import java.util.Random;
@@ -28,6 +30,8 @@ public class WorldGenTemplateGroup extends WorldGenerator
 
 		Rotation rotation = ROTATIONS[rand.nextInt(ROTATIONS.length)];
 
+		PlacementSettings settings = new PlacementSettings().setMirror(Mirror.NONE).setRotation(rotation).setIgnoreEntities(false).setChunk(null).setReplacedBlock(null).setIgnoreStructureBlock(false);
+
 		/*for (WorldGenTemplate template : this.templates)
 		{
 			if (template.canPlaceTemplate(world, rand, position, rotation))
@@ -40,7 +44,7 @@ public class WorldGenTemplateGroup extends WorldGenerator
 		{
 			WorldGenTemplate templateToGenerate = this.templates.get(rand.nextInt(this.templates.size()));
 
-			boolean flag = templateToGenerate.placeTemplateWithCheck(world, rand, position, rotation);
+			boolean flag = templateToGenerate.placeTemplateWithCheck(world, position, settings);
 
 			if (flag)
 			{
