@@ -258,7 +258,7 @@ public class BiomeAetherDecorator
 			this.genBurstblossom.generate(world, random, pos.add(x, y, z));
 		}
 
-		this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));
+		//this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));
 
 		// Lake Generator
 		/*if (random.nextInt(4) == 0)
