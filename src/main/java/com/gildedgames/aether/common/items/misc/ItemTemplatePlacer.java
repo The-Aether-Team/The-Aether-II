@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.items.misc;
 
 import com.gildedgames.aether.common.world.features.WorldGenTemplate;
-import com.google.common.base.Function;
+import com.google.common.base.Supplier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -9,30 +9,22 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 
 public class ItemTemplatePlacer extends Item
 {
 
-	private WorldGenTemplate template;
-
-	private Function<WorldServer, WorldGenTemplate> factory;
+	private Supplier<WorldGenTemplate> template;
 	
-	public ItemTemplatePlacer(Function<WorldServer, WorldGenTemplate> factory)
+	public ItemTemplatePlacer(Supplier<WorldGenTemplate> template)
 	{
 		this.maxStackSize = 1;
-		this.factory = factory;
+		this.template = template;
 	}
 
 	@Override
 	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if (world instanceof WorldServer && this.template == null)
-		{
-			this.template = this.factory.apply((WorldServer) world);
-		}
-
 		if (facing == EnumFacing.DOWN)
 		{
 			return EnumActionResult.FAIL;
@@ -72,7 +64,9 @@ public class ItemTemplatePlacer extends Item
 
 				PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(rotation).setIgnoreEntities(false).setChunk(null).setReplacedBlock(Blocks.AIR).setIgnoreStructureBlock(false);
 
-				BlockPos size = this.template.getTemplate().transformedSize(rotation);
+				final WorldGenTemplate template = this.template.get();
+
+				BlockPos size = template.getTemplate().transformedSize(rotation);
 
 				switch (rotation)
 				{
@@ -92,7 +86,7 @@ public class ItemTemplatePlacer extends Item
 						break;
 				}
 
-				this.template.placeTemplateWithoutCheck(world, pos, placementsettings);
+				template.placeTemplateWithoutCheck(world, pos, placementsettings);
 
 				--stack.stackSize;
 

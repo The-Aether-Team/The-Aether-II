@@ -29,6 +29,8 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 
 	private List<PlacementCondition> placementConditions = Lists.newArrayList();
 
+	private CenterOffsetProcessor centerOffsetProcessor;
+
 	public WorldGenTemplate(Template template, PlacementCondition condition, PlacementCondition... placementConditions)
 	{
 		this.template = template;
@@ -36,6 +38,16 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 		this.placementConditions = Lists.newArrayList(placementConditions);
 
 		this.placementConditions.add(condition);
+	}
+
+	public CenterOffsetProcessor getCenterOffsetProcessor()
+	{
+		return this.centerOffsetProcessor;
+	}
+
+	public void setCenterOffsetProcessor(CenterOffsetProcessor centerOffsetProcessor)
+	{
+		this.centerOffsetProcessor = centerOffsetProcessor;
 	}
 
 	@Override
@@ -53,18 +65,23 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 			{
 			case NONE:
 			default:
+				pos = pos.add(-(size.getX() / 2.0) + 1, 0, -(size.getZ() / 2.0) + 1);
 				break;
 			case CLOCKWISE_90:
-				pos = pos.add(-size.getX(), 0, 0);
+				pos = pos.add(size.getX() / 2.0, 0, -(size.getZ() / 2.0) + 1);
 				break;
 			case COUNTERCLOCKWISE_90:
-				pos = pos.add(0, 0, -size.getZ());
+				pos = pos.add(-(size.getX() / 2.0) + 1, 0, (size.getZ() / 2.0));
 				break;
 			case CLOCKWISE_180:
-				pos = pos.add(-size.getX(), 0, -size.getZ());
+				pos = pos.add((size.getX() / 2.0), 0, (size.getZ() / 2.0));
+				break;
 			}
 
-			pos = pos.add(-(size.getX() / 2.0) + 1, 0, -(size.getZ() / 2.0) + 1);
+			if (this.getCenterOffsetProcessor() != null)
+			{
+				pos = pos.add(this.getCenterOffsetProcessor().getOffset(rotation));
+			}
 		}
 
 		boolean result = this.placeTemplateWithCheck(world, pos, settings);
@@ -193,6 +210,13 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 
 		/** Should return true by default **/
 		boolean canPlaceCheckAll(Template template, World world, BlockPos placedAt, List<Template.BlockInfo> blocks);
+
+	}
+
+	public interface CenterOffsetProcessor
+	{
+
+		BlockPos getOffset(Rotation rotation);
 
 	}
 

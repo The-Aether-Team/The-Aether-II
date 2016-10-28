@@ -7,6 +7,8 @@ import com.gildedgames.aether.common.blocks.natural.BlockAercloud.AercloudVarian
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
+import com.gildedgames.aether.common.registry.GenerationAether;
+import com.gildedgames.aether.common.registry.TemplatesAether;
 import com.gildedgames.aether.common.world.features.*;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenPurpleAercloud;
@@ -51,14 +53,6 @@ public class BiomeAetherDecorator
 	protected WorldGenAercloud genColdColumbusAercloud, genColdFlatAercloud, genBlueAercloud;
 
 	protected WorldGenPurpleAercloud genPurpleAercloud;
-	
-	protected WorldGenTemplate labyrinth_entrance_1, labyrinth_entrance_underground_1;
-
-	protected WorldGenMoaNest moa_nest_1, moa_nest_2;
-
-	protected WorldGenTemplateGroup moa_nest_group, labyrinth_entrance_group;
-
-	private boolean hasInit = false;
 
 	public boolean generateBushes = true;
 
@@ -102,27 +96,6 @@ public class BiomeAetherDecorator
 
 	protected void genDecorations(final World world, Random random, BlockPos pos, Biome genBase)
 	{
-		if (world instanceof WorldServer)
-		{
-			WorldServer worldServer = (WorldServer) world;
-
-			if (!this.hasInit)
-			{
-				MinecraftServer server = worldServer.getMinecraftServer();
-
-				this.labyrinth_entrance_1 = new WorldGenDungeonEntrance(BiomeAetherBase.MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_entrance_1")), new BlockPos(4, 2, 4), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-				this.labyrinth_entrance_underground_1 = new WorldGenDungeonEntrance(BiomeAetherBase.MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth_entrance_underground_1")), new BlockPos(8, 1, 2), new UndergroundEntrancePlacementCondition(), new UndergroundPlacementCondition());
-
-				this.moa_nest_1 = new WorldGenMoaNest(BiomeAetherBase.MANAGER.getTemplate(server, AetherCore.getResource("moa_nest/skyroot_moa_nest_1")), new BlockPos(2, 0, 2), new InsideGroundPlacementCondition(), new ReplaceablePlacementCondition());
-				this.moa_nest_2 = new WorldGenMoaNest(BiomeAetherBase.MANAGER.getTemplate(server, AetherCore.getResource("moa_nest/skyroot_moa_nest_2")), new BlockPos(3, 0, 3), new InsideGroundPlacementCondition(), new ReplaceablePlacementCondition());
-
-				this.moa_nest_group = new WorldGenTemplateGroup(this.moa_nest_1, this.moa_nest_2);
-				this.labyrinth_entrance_group = new WorldGenTemplateGroup(this.labyrinth_entrance_1);
-
-				this.hasInit = true;
-			}
-		}
-
 		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(world, random, pos));
 
 		int chunkX = pos.getX() >> 4;
@@ -141,9 +114,9 @@ public class BiomeAetherDecorator
 
 			BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
 
-			pos2 = pos2.add(0, -this.labyrinth_entrance_underground_1.getTemplate().getSize().getY(), 0);
+			pos2 = pos2.add(0, -TemplatesAether.labyrinth_entrance_underground_1.getSize().getY(), 0);
 
-			this.labyrinth_entrance_underground_1.generate(world, random, pos2);
+			GenerationAether.labyrinth_entrance_underground_1.generate(world, random, pos2);
 		}
 
 		// Labyrinth Entrance
@@ -154,7 +127,7 @@ public class BiomeAetherDecorator
 
 			BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
 
-			this.labyrinth_entrance_group.generate(world, random, pos2);
+			GenerationAether.labyrinth_entrance.generate(world, random, pos2);
 		}
 
 		// Moa Nests
@@ -165,7 +138,7 @@ public class BiomeAetherDecorator
 
 			BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z)).add(0, -1, 0);
 
-			this.moa_nest_group.generate(world, random, pos2);
+			GenerationAether.skyroot_moa_nest.generate(world, random, pos2);
 		}
 
 		// Tree Generator

@@ -16,12 +16,6 @@ public interface Ecosystem
 
 	double getDesiredMoisture();
 
-	List<WorldDecoration> fetchDecorations();
-
-	void initDecorations(WorldServer world, TemplateManager manager);
-
-	boolean hasInitDecorations();
-
-	void setInitDecorations(boolean flag);
+	List<WorldDecoration> getDecorations();
 
 }

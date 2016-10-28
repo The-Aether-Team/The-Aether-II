@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.world;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.registry.TemplatesAether;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.util.core.util.BlockPosDimension;
@@ -351,11 +352,9 @@ public class TeleporterAether extends Teleporter implements NBT
 			return false;
 		}
 
-		Template portalFrame = MANAGER.getTemplate(this.worldServerInstance.getMinecraftServer(), new ResourceLocation(AetherCore.MOD_ID, "aether_portal"));
-
 		PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(rotation).setIgnoreEntities(false).setChunk(null).setReplacedBlock(Blocks.AIR).setIgnoreStructureBlock(false);
 
-		BlockPos size = portalFrame.transformedSize(rotation);
+		BlockPos size = TemplatesAether.aether_portal.transformedSize(rotation);
 		BlockPos pos = new BlockPos(x, y, z);
 
 		switch (rotation)
@@ -375,7 +374,7 @@ public class TeleporterAether extends Teleporter implements NBT
 				pos = pos.add(size.getX() / 2, 0, size.getZ() / 2);
 		}
 
-		portalFrame.addBlocksToWorld(world, pos, placementsettings);
+		TemplatesAether.aether_portal.addBlocksToWorld(world, pos, placementsettings);
 
 		return true;
 	}

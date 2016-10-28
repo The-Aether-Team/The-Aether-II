@@ -3,17 +3,12 @@ package com.gildedgames.aether.common.world.biome;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.util.OpenSimplexNoise;
 import com.gildedgames.aether.common.world.GenUtil;
-import com.gildedgames.aether.common.world.features.TemplatePipeline;
-import com.gildedgames.aether.common.world.features.WorldGenTemplate;
 import com.google.common.collect.Lists;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,8 +16,6 @@ import java.util.Random;
 
 public abstract class BiomeAetherBase extends Biome
 {
-
-	public static final TemplateManager MANAGER = new TemplateManager("structures");
 
 	protected final BiomeAetherDecorator biomeDecorator = new BiomeAetherDecorator();
 
@@ -114,18 +107,7 @@ public abstract class BiomeAetherBase extends Biome
 
 		for (Ecosystem ecosystem : this.ecosystems)
 		{
-			if (world instanceof WorldServer)
-			{
-				WorldServer worldServer = (WorldServer) world;
-
-				if (!ecosystem.hasInitDecorations())
-				{
-					ecosystem.initDecorations(worldServer, BiomeAetherBase.MANAGER);
-					ecosystem.setInitDecorations(true);
-				}
-			}
-
-			for (WorldDecoration decoration : ecosystem.fetchDecorations())
+			for (WorldDecoration decoration : ecosystem.getDecorations())
 			{
 				for (int count = 0; count < decoration.getGenerationCount(); count++)
 				{

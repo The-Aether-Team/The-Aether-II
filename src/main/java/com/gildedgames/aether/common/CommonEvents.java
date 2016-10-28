@@ -5,6 +5,8 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherShield;
+import com.gildedgames.aether.common.registry.GenerationAether;
+import com.gildedgames.aether.common.registry.TemplatesAether;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.util.PlayerUtil;
 import com.gildedgames.aether.common.world.TeleporterAether;
@@ -66,7 +68,11 @@ public class CommonEvents
 		{
 			if (event.getWorld().provider.getDimensionType() == DimensionsAether.AETHER)
 			{
-				AetherCore.TELEPORTER = new TeleporterAether((WorldServer) event.getWorld());
+				WorldServer world = (WorldServer)event.getWorld();
+
+				TemplatesAether.init(world.getMinecraftServer());
+				GenerationAether.init();
+				AetherCore.TELEPORTER = new TeleporterAether(world);
 			}
 		}
 	}

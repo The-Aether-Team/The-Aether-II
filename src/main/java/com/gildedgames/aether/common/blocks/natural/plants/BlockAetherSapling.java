@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.blocks.natural.plants;
 import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
+import com.gildedgames.aether.common.registry.GenerationAether;
 import com.gildedgames.aether.common.world.GenUtil;
 import com.gildedgames.aether.common.world.biome.blighted.BiomeBlightedHighlands;
 import com.gildedgames.aether.common.world.biome.highlands.BiomeHighlands;
@@ -110,19 +111,19 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 
 			if (meta == BLUE_SKYROOT.getMeta())
 			{
-				tree = EcosystemCrystalHighlands.blue_skyroot_tree;
+				tree = GenerationAether.blue_skyroot_tree;
 			}
 			else if (meta == GREEN_SKYROOT.getMeta())
 			{
-				tree = EcosystemHighlands.green_skyroot_tree;
+				tree = GenerationAether.green_skyroot_tree;
 			}
 			else if (meta == GOLDEN_OAK.getMeta())
 			{
-				tree = EcosystemHighlands.golden_oak;
+				tree = GenerationAether.golden_oak;
 			}
 			else if (meta == DARK_BLUE_SKYROOT.getMeta())
 			{
-				tree = EcosystemCrystalHighlands.dark_blue_skyroot_oak;
+				tree = GenerationAether.dark_blue_skyroot_oak;
 			}
 
 			if (tree != null)

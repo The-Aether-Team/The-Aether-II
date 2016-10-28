@@ -40,6 +40,33 @@ public class WorldGenTemplateGroup extends WorldGenerator implements IWorldGen
 		{
 			WorldGenTemplate templateToGenerate = this.templates.get(rand.nextInt(this.templates.size()));
 
+			if (centered)
+			{
+				BlockPos size = templateToGenerate.getTemplate().transformedSize(rotation);
+
+				switch (rotation)
+				{
+					case NONE:
+					default:
+						position = position.add(-(size.getX() / 2.0) + 1, 0, -(size.getZ() / 2.0) + 1);
+						break;
+					case CLOCKWISE_90:
+						position = position.add(size.getX() / 2.0, 0, -(size.getZ() / 2.0) + 1);
+						break;
+					case COUNTERCLOCKWISE_90:
+						position = position.add(-(size.getX() / 2.0) + 1, 0, (size.getZ() / 2.0));
+						break;
+					case CLOCKWISE_180:
+						position = position.add((size.getX() / 2.0), 0, (size.getZ() / 2.0));
+						break;
+				}
+
+				if (templateToGenerate.getCenterOffsetProcessor() != null)
+				{
+					position = position.add(templateToGenerate.getCenterOffsetProcessor().getOffset(rotation));
+				}
+			}
+
 			boolean flag = templateToGenerate.placeTemplateWithCheck(world, position, settings);
 
 			if (flag)

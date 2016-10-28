@@ -87,6 +87,7 @@ import com.gildedgames.aether.common.items.weapons.swords.ItemGravititeSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemHolystoneSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.items.weapons.swords.ItemZaniteSword;
+import com.gildedgames.aether.common.registry.GenerationAether;
 import com.gildedgames.aether.common.registry.TemperatureHandler;
 import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import com.gildedgames.aether.common.registry.minecraft.MaterialsAether;
@@ -98,6 +99,7 @@ import com.gildedgames.aether.common.world.features.WorldGenTemplate;
 import com.gildedgames.aether.common.world.features.placement_conditions.FlatGroundPlacementCondition;
 import com.gildedgames.aether.common.world.features.placement_conditions.ReplaceablePlacementCondition;
 import com.google.common.base.Function;
+import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -277,21 +279,27 @@ public class ItemsAether
 
 	public static final Item skyroot_sign = new ItemSkyrootSign();
 	
-	public static final Item aether_portal_frame = new ItemAetherPortalFrame();
-
-	public static final Item nether_portal_frame = new ItemTemplatePlacer(new Function<WorldServer, WorldGenTemplate>()
+	public static final Item aether_portal_frame = new ItemTemplatePlacer(new Supplier<WorldGenTemplate>()
 	{
-		@Nullable @Override public WorldGenTemplate apply(@Nullable WorldServer input)
+		@Override public WorldGenTemplate get()
 		{
-			return new WorldGenTemplate(BiomeAetherBase.MANAGER.getTemplate(input.getMinecraftServer(), new ResourceLocation(AetherCore.MOD_ID, "nether_portal")), new ReplaceablePlacementCondition());
+			return GenerationAether.aether_portal;
 		}
 	});
 
-	public static final Item end_portal_frame = new ItemTemplatePlacer(new Function<WorldServer, WorldGenTemplate>()
+	public static final Item nether_portal_frame = new ItemTemplatePlacer(new Supplier<WorldGenTemplate>()
 	{
-		@Nullable @Override public WorldGenTemplate apply(@Nullable WorldServer input)
+		@Override public WorldGenTemplate get()
 		{
-			return new WorldGenTemplate(BiomeAetherBase.MANAGER.getTemplate(input.getMinecraftServer(), new ResourceLocation(AetherCore.MOD_ID, "end_portal")), new ReplaceablePlacementCondition());
+			return GenerationAether.nether_portal;
+		}
+	});
+
+	public static final Item end_portal_frame = new ItemTemplatePlacer(new Supplier<WorldGenTemplate>()
+	{
+		@Override public WorldGenTemplate get()
+		{
+			return GenerationAether.end_portal;
 		}
 	});
 
