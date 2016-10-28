@@ -11,7 +11,7 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import java.util.List;
 import java.util.Random;
 
-public class WorldGenTemplateGroup extends WorldGenerator
+public class WorldGenTemplateGroup extends WorldGenerator implements IWorldGen
 {
 
 	protected static final Rotation[] ROTATIONS = Rotation.values();
@@ -26,19 +26,15 @@ public class WorldGenTemplateGroup extends WorldGenerator
 	@Override
 	public boolean generate(World world, Random rand, BlockPos position)
 	{
-		//List<WorldGenTemplate> possibleTemplates = Lists.newArrayList();
+		return this.generate(world, rand, position, false);
+	}
 
+	@Override
+	public boolean generate(World world, Random rand, BlockPos position, boolean centered)
+	{
 		Rotation rotation = ROTATIONS[rand.nextInt(ROTATIONS.length)];
 
 		PlacementSettings settings = new PlacementSettings().setMirror(Mirror.NONE).setRotation(rotation).setIgnoreEntities(false).setChunk(null).setReplacedBlock(null).setIgnoreStructureBlock(false);
-
-		/*for (WorldGenTemplate template : this.templates)
-		{
-			if (template.canPlaceTemplate(world, rand, position, rotation))
-			{
-				possibleTemplates.add(template);
-			}
-		}*/
 
 		if (this.templates.size() > 0)
 		{
@@ -51,7 +47,7 @@ public class WorldGenTemplateGroup extends WorldGenerator
 				templateToGenerate.postGenerate(world, rand, position, rotation);
 			}
 
-			return true;
+			return flag;
 		}
 
 		return false;

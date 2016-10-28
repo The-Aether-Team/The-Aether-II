@@ -20,7 +20,7 @@ import net.minecraft.world.gen.structure.template.Template;
 import java.util.List;
 import java.util.Random;
 
-public class WorldGenTemplate extends WorldGenerator
+public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 {
 
 	protected static final Rotation[] ROTATIONS = Rotation.values();
@@ -36,6 +36,45 @@ public class WorldGenTemplate extends WorldGenerator
 		this.placementConditions = Lists.newArrayList(placementConditions);
 
 		this.placementConditions.add(condition);
+	}
+
+	@Override
+	public boolean generate(World world, Random rand, BlockPos pos, boolean centered)
+	{
+		Rotation rotation = ROTATIONS[rand.nextInt(ROTATIONS.length)];
+
+		PlacementSettings settings = new PlacementSettings().setMirror(Mirror.NONE).setRotation(rotation).setIgnoreEntities(false).setChunk(null).setReplacedBlock(null).setIgnoreStructureBlock(false);
+
+		if (centered)
+		{
+			BlockPos size = this.template.transformedSize(rotation);
+
+			switch (rotation)
+			{
+			case NONE:
+			default:
+				break;
+			case CLOCKWISE_90:
+				pos = pos.add(-size.getX(), 0, 0);
+				break;
+			case COUNTERCLOCKWISE_90:
+				pos = pos.add(0, 0, -size.getZ());
+				break;
+			case CLOCKWISE_180:
+				pos = pos.add(-size.getX(), 0, -size.getZ());
+			}
+
+			pos = pos.add(-(size.getX() / 2.0) + 1, 0, -(size.getZ() / 2.0) + 1);
+		}
+
+		boolean result = this.placeTemplateWithCheck(world, pos, settings);
+
+		if (result)
+		{
+			this.postGenerate(world, rand, pos, rotation);
+		}
+
+		return result;
 	}
 
 	public Template getTemplate()
@@ -107,18 +146,7 @@ public class WorldGenTemplate extends WorldGenerator
 	@Override
 	public final boolean generate(World world, Random rand, BlockPos pos)
 	{
-		Rotation rotation = ROTATIONS[rand.nextInt(ROTATIONS.length)];
-
-		PlacementSettings settings = new PlacementSettings().setMirror(Mirror.NONE).setRotation(rotation).setIgnoreEntities(false).setChunk(null).setReplacedBlock(null).setIgnoreStructureBlock(false);
-
-		boolean result = this.placeTemplateWithCheck(world, pos, settings);
-
-		if (result)
-		{
-			this.postGenerate(world, rand, pos, rotation);
-		}
-
-		return result;
+		return this.generate(world, rand, pos, false);
 	}
 
 	protected void postGenerate(World world, Random rand, BlockPos pos, Rotation rotation)

@@ -3,10 +3,13 @@ package com.gildedgames.aether.common.blocks.natural.plants;
 import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
+import com.gildedgames.aether.common.world.GenUtil;
 import com.gildedgames.aether.common.world.biome.blighted.BiomeBlightedHighlands;
 import com.gildedgames.aether.common.world.biome.highlands.BiomeHighlands;
 import com.gildedgames.aether.common.world.biome.highlands.EcosystemCrystalHighlands;
 import com.gildedgames.aether.common.world.biome.highlands.EcosystemHighlands;
+import com.gildedgames.aether.common.world.features.IWorldGen;
+import com.gildedgames.aether.common.world.features.WorldGenTemplate;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -22,6 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.structure.template.Template;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -102,30 +106,30 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 		{
 			int meta = state.getValue(PROPERTY_VARIANT).getMeta();
 
-			WorldGenerator treeGenerator = null;
+			IWorldGen tree = null;
 
 			if (meta == BLUE_SKYROOT.getMeta())
 			{
-				treeGenerator = EcosystemCrystalHighlands.blue_skyroot_tree;
+				tree = EcosystemCrystalHighlands.blue_skyroot_tree;
 			}
 			else if (meta == GREEN_SKYROOT.getMeta())
 			{
-				treeGenerator = EcosystemHighlands.green_skyroot_tree;
+				tree = EcosystemHighlands.green_skyroot_tree;
 			}
 			else if (meta == GOLDEN_OAK.getMeta())
 			{
-				treeGenerator = EcosystemHighlands.golden_oak;
+				tree = EcosystemHighlands.golden_oak;
 			}
 			else if (meta == DARK_BLUE_SKYROOT.getMeta())
 			{
-				treeGenerator = EcosystemCrystalHighlands.dark_blue_skyroot_oak;
+				tree = EcosystemCrystalHighlands.dark_blue_skyroot_oak;
 			}
 
-			if (treeGenerator != null)
+			if (tree != null)
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
 
-				if (!treeGenerator.generate(world, random, pos))
+				if (!tree.generate(world, random, pos, true))
 				{
 					world.setBlockState(pos, state, 4);
 				}
