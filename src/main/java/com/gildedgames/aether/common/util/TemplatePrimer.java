@@ -389,7 +389,7 @@ public class TemplatePrimer
 		}
 	}
 
-	private static BlockPos transformedBlockPos(BlockPos pos, Mirror mirrorIn, Rotation rotationIn)
+	public static BlockPos transformedBlockPos(BlockPos pos, Mirror mirrorIn, Rotation rotationIn)
 	{
 		int i = pos.getX();
 		int j = pos.getY();

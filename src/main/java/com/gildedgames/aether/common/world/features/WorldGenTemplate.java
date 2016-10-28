@@ -11,6 +11,7 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.template.BlockRotationProcessor;
 import net.minecraft.world.gen.structure.template.ITemplateProcessor;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
@@ -42,11 +43,37 @@ public class WorldGenTemplate extends WorldGenerator
 		return this.template;
 	}
 
+	private StructureBoundingBox getBoundingBoxFromTemplate(BlockPos pos, PlacementSettings settings)
+	{
+		Rotation rotation = settings.getRotation();
+		BlockPos blockpos = this.template.transformedSize(rotation);
+		StructureBoundingBox bb = new StructureBoundingBox(0, 0, 0, blockpos.getX(), blockpos.getY() - 1, blockpos.getZ());
+
+		switch (rotation)
+		{
+		case NONE:
+		default:
+			break;
+		case CLOCKWISE_90:
+			bb.offset(-blockpos.getX(), 0, 0);
+			break;
+		case COUNTERCLOCKWISE_90:
+			bb.offset(0, 0, -blockpos.getZ());
+			break;
+		case CLOCKWISE_180:
+			bb.offset(-blockpos.getX(), 0, -blockpos.getZ());
+		}
+
+		bb.offset(pos.getX(), pos.getY(), pos.getZ());
+
+		return bb;
+	}
+
 	protected boolean canGenerate(World world, BlockPos pos, PlacementSettings settings)
 	{
-		final BlockPos max = pos.add(this.template.transformedSize(settings.getRotation()).getX(), this.template.transformedSize(settings.getRotation()).getY(), this.template.transformedSize(settings.getRotation()).getZ());
+		final StructureBoundingBox bb = this.getBoundingBoxFromTemplate(pos, settings);
 
-		if (!world.isAreaLoaded(pos, max) || max.getY() > world.getActualHeight())
+		if (!world.isAreaLoaded(bb) || bb.maxY > world.getActualHeight())
 		{
 			return false;
 		}
@@ -55,9 +82,20 @@ public class WorldGenTemplate extends WorldGenerator
 
 		List<Template.BlockInfo> infoTransformed = TemplatePrimer.getBlocks(info, pos, settings, this.template);
 
+		for (Template.BlockInfo block : infoTransformed)
+		{
+			for (PlacementCondition condition : this.placementConditions)
+			{
+				if (!condition.canPlace(this.template, world, pos, block))
+				{
+					return false;
+				}
+			}
+		}
+
 		for (PlacementCondition condition : this.placementConditions)
 		{
-			if (!condition.canPlace(this.template, world, pos, infoTransformed))
+			if (!condition.canPlaceCheckAll(this.template, world, pos, infoTransformed))
 			{
 				return false;
 			}
@@ -88,19 +126,9 @@ public class WorldGenTemplate extends WorldGenerator
 
 	}
 
-	public boolean canPlaceTemplate(World world, BlockPos pos, PlacementSettings settings)
-	{
-		if (this.canGenerate(world, pos, settings))
-		{
-			return true;
-		}
-
-		return false;
-	}
-
 	public boolean placeTemplateWithCheck(World world, BlockPos pos, PlacementSettings settings)
 	{
-		if (this.canPlaceTemplate(world, pos, settings))
+		if (this.canGenerate(world, pos, settings))
 		{
 			this.placeTemplateWithoutCheck(world, pos, settings);
 
@@ -133,7 +161,10 @@ public class WorldGenTemplate extends WorldGenerator
 	public interface PlacementCondition
 	{
 
-		boolean canPlace(Template template, World world, BlockPos placedAt, List<Template.BlockInfo> blocks);
+		boolean canPlace(Template template, World world, BlockPos placedAt, Template.BlockInfo block);
+
+		/** Should return true by default **/
+		boolean canPlaceCheckAll(Template template, World world, BlockPos placedAt, List<Template.BlockInfo> blocks);
 
 	}
 

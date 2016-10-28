@@ -15,7 +15,13 @@ public class UndergroundEntrancePlacementCondition implements WorldGenTemplate.P
 {
 
 	@Override
-	public boolean canPlace(Template template, World world, BlockPos placedAt, List<Template.BlockInfo> blocks)
+	public boolean canPlace(Template template, World world, BlockPos placedAt, Template.BlockInfo block)
+	{
+		return true;
+	}
+
+	@Override
+	public boolean canPlaceCheckAll(Template template, World world, BlockPos placedAt, List<Template.BlockInfo> blocks)
 	{
 		List<BlockPos> posToDelete = Lists.newArrayList();
 

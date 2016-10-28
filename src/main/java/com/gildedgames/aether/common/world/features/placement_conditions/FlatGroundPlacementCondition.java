@@ -14,23 +14,26 @@ public class FlatGroundPlacementCondition implements WorldGenTemplate.PlacementC
 {
 
 	@Override
-	public boolean canPlace(Template template, World world, BlockPos placedAt, List<Template.BlockInfo> blocks)
+	public boolean canPlace(Template template, World world, BlockPos placedAt, Template.BlockInfo block)
 	{
-		for (Template.BlockInfo block : blocks)
+		if (block.pos.getY() == placedAt.getY() && block.blockState.getBlock() != Blocks.AIR && block.blockState.getBlock() != Blocks.STRUCTURE_VOID)
 		{
-			if (block.pos.getY() == placedAt.getY() && block.blockState.getBlock() != Blocks.AIR && block.blockState.getBlock() != Blocks.STRUCTURE_VOID)
+			BlockPos down = block.pos.down();
+
+			IBlockState state = world.getBlockState(down);
+
+			if (state.getBlock() != BlocksAether.aether_grass)
 			{
-				BlockPos down = block.pos.down();
-
-				IBlockState state = world.getBlockState(down);
-
-				if (state.getBlock() != BlocksAether.aether_grass)
-				{
-					return false;
-				}
+				return false;
 			}
 		}
 
+		return true;
+	}
+
+	@Override
+	public boolean canPlaceCheckAll(Template template, World world, BlockPos placedAt, List<Template.BlockInfo> blocks)
+	{
 		return true;
 	}
 

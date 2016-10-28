@@ -12,19 +12,22 @@ public class ReplaceablePlacementCondition implements WorldGenTemplate.Placement
 {
 
 	@Override
-	public boolean canPlace(Template template, World world, BlockPos placedAt, List<Template.BlockInfo> blocks)
+	public boolean canPlace(Template template, World world, BlockPos placedAt, Template.BlockInfo block)
 	{
-		for (Template.BlockInfo block : blocks)
+		if (block.blockState.getBlock() != Blocks.STRUCTURE_VOID)
 		{
-			if (block.blockState.getBlock() != Blocks.STRUCTURE_VOID)
+			if (!WorldGenTemplate.isReplaceable(world, block.pos) || !block.blockState.getMaterial().isSolid() || (block.blockState != world.getBlockState(block.pos) && !world.isAirBlock(block.pos)))
 			{
-				if (!WorldGenTemplate.isReplaceable(world, block.pos) || !block.blockState.getMaterial().isSolid() || (block.blockState != world.getBlockState(block.pos) && !world.isAirBlock(block.pos)))
-				{
-					return false;
-				}
+				return false;
 			}
 		}
 
+		return true;
+	}
+
+	@Override
+	public boolean canPlaceCheckAll(Template template, World world, BlockPos placedAt, List<Template.BlockInfo> blocks)
+	{
 		return true;
 	}
 
