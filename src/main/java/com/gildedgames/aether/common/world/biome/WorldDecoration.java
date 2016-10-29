@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.world.biome;
 
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
@@ -15,5 +17,7 @@ public interface WorldDecoration
 	int getGenerationCount();
 
 	WorldGenerator getGenerator();
+
+	BlockPos findPositionToPlace(World world, Random rand, BlockPos pos);
 
 }

@@ -11,10 +11,11 @@ public class BiomeHighlands extends BiomeAetherBase
 	{
 		super(properties, registryName);
 
+		this.default_ecosystem = new EcosystemHighlandPlains();
+
 		this.registerEcosystem(new EcosystemHighlandJungle());
 		this.registerEcosystem(new EcosystemHighlands());
 		this.registerEcosystem(new EcosystemHighlandForest());
-		this.registerEcosystem(new EcosystemHighlandPlains());
 		this.registerEcosystem(new EcosystemCrystalHighlands());
 	}
 

@@ -21,6 +21,8 @@ public abstract class BiomeAetherBase extends Biome
 
 	protected final List<Ecosystem> ecosystems = Collections.synchronizedList(Lists.<Ecosystem>newArrayList());
 
+	protected Ecosystem default_ecosystem;
+
 	private boolean hasInit = false;
 
 	private OpenSimplexNoise tempNoise, moistureNoise;
@@ -105,6 +107,8 @@ public abstract class BiomeAetherBase extends Biome
 			}
 		}
 
+		int lowestRequiredChance = Integer.MAX_VALUE;
+
 		for (Ecosystem ecosystem : this.ecosystems)
 		{
 			for (WorldDecoration decoration : ecosystem.getDecorations())
@@ -121,7 +125,34 @@ public abstract class BiomeAetherBase extends Biome
 
 						int requiredChance = (int) ((temperatureDiff + moistureDiff) * 100 * 1.5);
 
+						if (requiredChance < lowestRequiredChance)
+						{
+							lowestRequiredChance = requiredChance;
+						}
+
 						if (random.nextInt(100) > requiredChance)
+						{
+							BlockPos placeAt = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
+
+							decoration.getGenerator().generate(world, random, placeAt);
+						}
+					}
+				}
+			}
+		}
+
+		if (this.default_ecosystem != null)
+		{
+			for (WorldDecoration decoration : this.default_ecosystem.getDecorations())
+			{
+				for (int count = 0; count < decoration.getGenerationCount(); count++)
+				{
+					if (decoration.shouldGenerate(random))
+					{
+						x = random.nextInt(16) + 8;
+						z = random.nextInt(16) + 8;
+
+						if (random.nextInt(100) < lowestRequiredChance)
 						{
 							BlockPos placeAt = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
 

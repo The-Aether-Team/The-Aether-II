@@ -1,9 +1,6 @@
 package com.gildedgames.aether.common.registry;
 
-import com.gildedgames.aether.common.world.features.WorldGenDungeonEntrance;
-import com.gildedgames.aether.common.world.features.WorldGenMoaNest;
-import com.gildedgames.aether.common.world.features.WorldGenTemplate;
-import com.gildedgames.aether.common.world.features.WorldGenTemplateGroup;
+import com.gildedgames.aether.common.world.features.*;
 import com.gildedgames.aether.common.world.features.placement_conditions.*;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
@@ -46,6 +43,8 @@ public class GenerationAether
 	public static WorldGenTemplateGroup dark_blue_skyroot_tree, dark_blue_skyroot_oak;
 
 	public static WorldGenTemplateGroup skyroot_moa_nest, labyrinth_entrance;
+
+	public static WorldGenAetherTallGrass aether_grass;
 
 	private GenerationAether()
 	{
@@ -152,6 +151,8 @@ public class GenerationAether
 		labyrinth_ruins = new WorldGenTemplateGroup(labyrinth_ruins_1, labyrinth_ruins_2, labyrinth_ruins_3, labyrinth_ruins_4, labyrinth_ruins_5);
 		skyroot_moa_nest = new WorldGenTemplateGroup(skyroot_moa_nest_1, skyroot_moa_nest_2);
 		labyrinth_entrance = new WorldGenTemplateGroup(labyrinth_entrance_1);
+
+		aether_grass = new WorldGenAetherTallGrass();
 	}
 
 }

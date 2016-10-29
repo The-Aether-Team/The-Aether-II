@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.world.biome;
 
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud.AercloudVariant;
@@ -12,20 +11,15 @@ import com.gildedgames.aether.common.registry.TemplatesAether;
 import com.gildedgames.aether.common.world.features.*;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenPurpleAercloud;
-import com.gildedgames.aether.common.world.features.placement_conditions.*;
 import com.gildedgames.aether.common.world.features.trees.WorldGenOrangeTree;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 
@@ -33,8 +27,6 @@ import java.util.Random;
 
 public class BiomeAetherDecorator
 {
-
-	protected WorldGenAetherTallGrass genAetherGrass;
 
 	protected WorldGenAetherMinable genAmbrosium, genZanite, genGravitite, genIcestone, genArkenium;
 
@@ -58,8 +50,6 @@ public class BiomeAetherDecorator
 
 	public BiomeAetherDecorator()
 	{
-		this.genAetherGrass = new WorldGenAetherTallGrass();
-
 		BlockMatcher holystoneMatcher = BlockMatcher.forBlock(BlocksAether.holystone);
 
 		this.genAmbrosium = new WorldGenAetherMinable(BlocksAether.ambrosium_ore.getDefaultState(), 16, holystoneMatcher);
@@ -195,7 +185,7 @@ public class BiomeAetherDecorator
 			z = random.nextInt(16) + 8;
 			y = this.nextInt(random, world.getHeight(pos.add(x, 0, z)).getY() * 2);
 
-			this.genAetherGrass.generate(world, random, pos.add(x, y, z));
+			GenerationAether.aether_grass.generate(world, random, pos.add(x, y, z));
 		}
 
 		// Purple Flowers Generator

@@ -5,8 +5,11 @@ import com.gildedgames.aether.common.world.biome.Ecosystem;
 import com.gildedgames.aether.common.world.biome.WorldDecoration;
 import com.gildedgames.aether.common.world.biome.WorldDecorationSimple;
 import com.google.common.collect.Lists;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.Random;
 
 public class EcosystemHighlandJungle implements Ecosystem
 {
@@ -44,6 +47,7 @@ public class EcosystemHighlandJungle implements Ecosystem
 		{
 			this.decorations = Lists.newArrayList();
 
+			this.decorations.add(new WorldDecorationSimple(8, GenerationAether.aether_grass));
 			this.decorations.add(new WorldDecorationSimple(1, GenerationAether.labyrinth_ruins, 0.125F));
 			this.decorations.add(new WorldDecorationSimple(1, GenerationAether.skyroot_moa_nest_tree_1, 0.5F));
 			this.decorations.add(new WorldDecorationSimple(15, GenerationAether.green_skyroot_windswept));

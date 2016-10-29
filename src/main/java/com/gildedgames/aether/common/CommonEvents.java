@@ -61,6 +61,8 @@ import java.util.UUID;
 public class CommonEvents
 {
 
+	private static boolean hasInitTemplates = false;
+
 	@SubscribeEvent
 	public static void onWorldLoaded(WorldEvent.Load event)
 	{
@@ -70,8 +72,14 @@ public class CommonEvents
 			{
 				WorldServer world = (WorldServer)event.getWorld();
 
-				TemplatesAether.init(world.getMinecraftServer());
-				GenerationAether.init();
+				if (!CommonEvents.hasInitTemplates)
+				{
+					TemplatesAether.init(world.getMinecraftServer());
+					GenerationAether.init();
+
+					CommonEvents.hasInitTemplates = true;
+				}
+
 				AetherCore.TELEPORTER = new TeleporterAether(world);
 			}
 		}

@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.world.biome;
 
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
@@ -46,6 +48,15 @@ public class WorldDecorationSimple implements WorldDecoration
 	public WorldGenerator getGenerator()
 	{
 		return this.generator;
+	}
+
+	@Override
+	public BlockPos findPositionToPlace(World world, Random rand, BlockPos pos)
+	{
+		int x = rand.nextInt(16) + 8;
+		int z = rand.nextInt(16) + 8;
+
+		return world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
 	}
 
 }
