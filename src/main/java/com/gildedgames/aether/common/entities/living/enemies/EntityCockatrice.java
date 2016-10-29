@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.living.enemies;
 
 import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
+import com.gildedgames.aether.common.entities.living.EntityAetherMob;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceHide;
@@ -23,7 +24,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class EntityCockatrice extends EntityMob implements IEntityProperties
+public class EntityCockatrice extends EntityAetherMob implements IEntityProperties
 {
 
 	private static final DataParameter<Boolean> IS_HIDING = new DataParameter<>(16, DataSerializers.BOOLEAN);

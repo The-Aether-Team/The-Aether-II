@@ -1,5 +1,9 @@
 package com.gildedgames.aether.common.entities.dungeon.labyrinth;
 
+import com.gildedgames.aether.common.entities.EntitiesAether;
+import com.gildedgames.aether.common.entities.util.AetherSpawnEggInfo;
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.misc.ItemAetherSpawnEgg;
 import com.gildedgames.aether.common.util.EntityUtil;
 import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.aether.common.world.dungeon.DungeonDefinitions;
@@ -9,10 +13,12 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;

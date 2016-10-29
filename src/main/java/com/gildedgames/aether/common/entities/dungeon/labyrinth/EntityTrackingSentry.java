@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.dungeon.labyrinth;
 
+import com.gildedgames.aether.common.entities.living.EntityAetherMob;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AIAlarmClose;
 import com.gildedgames.aether.common.util.TickTimer;
@@ -13,7 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntityTrackingSentry extends EntityMob
+public class EntityTrackingSentry extends EntityAetherMob
 {
 
 	private TickTimer timer = new TickTimer();

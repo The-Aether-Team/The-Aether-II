@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.dungeon.labyrinth;
 
+import com.gildedgames.aether.common.entities.living.EntityAetherMob;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AIDetonateClose;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFloat;
@@ -13,7 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityDetonationSentry extends EntityMob implements IProjectile
+public class EntityDetonationSentry extends EntityAetherMob implements IProjectile
 {
 
 	public EntityDetonationSentry(World worldIn)

@@ -1,7 +1,10 @@
 package com.gildedgames.aether.common.entities.living;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.entities.EntitiesAether;
+import com.gildedgames.aether.common.entities.util.AetherSpawnEggInfo;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.misc.ItemAetherSpawnEgg;
 import com.google.common.collect.Sets;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.ai.EntityAITempt;
@@ -9,6 +12,7 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -57,6 +61,24 @@ public class EntityKirrid extends EntitySheep
 		{
 			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(5) + 1);
 		}
+	}
+
+	@Override
+	public ItemStack getPickedResult(RayTraceResult target)
+	{
+		String id = EntitiesAether.getStringFromClass(this.getClass());
+
+		if (!EntitiesAether.entityEggs.containsKey(id))
+		{
+			return null;
+		}
+
+		AetherSpawnEggInfo info = EntitiesAether.entityEggs.get(id);
+
+		ItemStack stack = new ItemStack(ItemsAether.aether_spawn_egg, 1);
+		ItemAetherSpawnEgg.applyEntityIdToItemStack(stack, info.getSpawnedID());
+
+		return stack;
 	}
 
 }

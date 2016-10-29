@@ -3,6 +3,10 @@ package com.gildedgames.aether.common.entities.dungeon.labyrinth.boss.slider;
 import com.gildedgames.aether.api.capabilites.entity.boss.IBoss;
 import com.gildedgames.aether.api.capabilites.entity.boss.IBossManager;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.entities.EntitiesAether;
+import com.gildedgames.aether.common.entities.util.AetherSpawnEggInfo;
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.misc.ItemAetherSpawnEgg;
 import com.gildedgames.aether.common.registry.LootDefinitions;
 import com.gildedgames.aether.api.loot.LootPool;
 import com.gildedgames.aether.common.entities.util.SimpleBossManager;
@@ -31,6 +35,7 @@ import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
@@ -509,6 +514,24 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 	public LootPool getLootPool()
 	{
 		return LootDefinitions.LABYRINTH_FINAL_BOSS;
+	}
+
+	@Override
+	public ItemStack getPickedResult(RayTraceResult target)
+	{
+		String id = EntitiesAether.getStringFromClass(this.getClass());
+
+		if (!EntitiesAether.entityEggs.containsKey(id))
+		{
+			return null;
+		}
+
+		AetherSpawnEggInfo info = EntitiesAether.entityEggs.get(id);
+
+		ItemStack stack = new ItemStack(ItemsAether.aether_spawn_egg, 1);
+		ItemAetherSpawnEgg.applyEntityIdToItemStack(stack, info.getSpawnedID());
+
+		return stack;
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.dungeon.labyrinth;
 
+import com.gildedgames.aether.common.entities.living.EntityAetherMob;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.projectiles.EntityBattleBomb;
 import com.gildedgames.aether.common.util.TickTimer;
@@ -23,7 +24,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityBattleGolem extends EntityMob implements IRangedAttackMob
+public class EntityBattleGolem extends EntityAetherMob implements IRangedAttackMob
 {
 
 	private static final DataParameter<Integer> BOMB_COUNT = EntityDataManager.createKey(EntityBattleGolem.class, DataSerializers.VARINT);

@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityAechorPlant extends EntityMob implements IEntityProperties
+public class EntityAechorPlant extends EntityAetherMob implements IEntityProperties
 {
 	private static final DataParameter<Boolean> CAN_SEE_PREY = new DataParameter<>(16, DataSerializers.BOOLEAN);
 

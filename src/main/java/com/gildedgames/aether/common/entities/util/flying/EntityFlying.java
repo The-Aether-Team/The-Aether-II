@@ -1,6 +1,10 @@
 package com.gildedgames.aether.common.entities.util.flying;
 
+import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.entities.ai.EntityAIForcedWander;
+import com.gildedgames.aether.common.entities.util.AetherSpawnEggInfo;
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.misc.ItemAetherSpawnEgg;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityBodyHelper;
@@ -9,11 +13,13 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -218,6 +224,24 @@ public class EntityFlying extends EntityCreature
 		{
 			super.moveEntityWithHeading(strafe, forward);
 		}
+	}
+
+	@Override
+	public ItemStack getPickedResult(RayTraceResult target)
+	{
+		String id = EntitiesAether.getStringFromClass(this.getClass());
+
+		if (!EntitiesAether.entityEggs.containsKey(id))
+		{
+			return null;
+		}
+
+		AetherSpawnEggInfo info = EntitiesAether.entityEggs.get(id);
+
+		ItemStack stack = new ItemStack(ItemsAether.aether_spawn_egg, 1);
+		ItemAetherSpawnEgg.applyEntityIdToItemStack(stack, info.getSpawnedID());
+
+		return stack;
 	}
 
 }
