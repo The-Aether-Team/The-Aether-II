@@ -1,12 +1,7 @@
 package com.gildedgames.aether.common.entities.living.mounts;
 
-import com.gildedgames.aether.api.entity.IMount;
-import com.gildedgames.aether.api.entity.IMountProcessor;
-import com.gildedgames.aether.common.entities.util.flying.EntityFlying;
-import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
-import com.gildedgames.aether.common.entities.util.mounts.IFlyingMountData;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.util.PlayerUtil;
+import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
@@ -17,9 +12,6 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
@@ -33,7 +25,7 @@ import java.util.Set;
 public class EntityFlyingCow extends EntityFlyingAnimal
 {
 
-	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(new Item[] {Items.WHEAT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry});
+	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry);
 
 	public EntityFlyingCow(World world)
 	{

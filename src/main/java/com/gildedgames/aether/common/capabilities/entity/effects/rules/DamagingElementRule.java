@@ -7,7 +7,6 @@ import com.gildedgames.aether.common.capabilities.entity.properties.EntityProper
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class DamagingElementRule implements EntityEffectRule

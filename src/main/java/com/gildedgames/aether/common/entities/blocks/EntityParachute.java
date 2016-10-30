@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.entities.blocks;
 
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;

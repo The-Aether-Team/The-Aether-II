@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.models.entities.living;
 
-import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
+import com.gildedgames.aether.common.entities.living.mobs.EntityCockatrice;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;

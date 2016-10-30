@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.items.misc;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.signs.BlockStandingSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.signs.BlockWallSkyrootSign;
-import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootSign;
+import com.gildedgames.aether.common.tiles.TileEntitySkyrootSign;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;

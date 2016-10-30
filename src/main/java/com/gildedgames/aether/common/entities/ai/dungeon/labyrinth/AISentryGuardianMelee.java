@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.ai.dungeon.labyrinth;
 
 import com.gildedgames.aether.common.entities.ai.EntityAI;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntitySentryGuardian;
+import com.gildedgames.aether.common.entities.living.dungeon.labyrinth.EntitySentryGuardian;
 
 public class AISentryGuardianMelee extends EntityAI<EntitySentryGuardian>
 {

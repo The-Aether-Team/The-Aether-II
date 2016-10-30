@@ -10,15 +10,15 @@ import java.util.Random;
 
 public interface DungeonGenerator
 {
-	
+
 	BlockPosDimension getEntrancePos();
-	
+
 	boolean isLayoutReady();
-	
+
 	void generateLayout(MinecraftServer server, long seed, DungeonInstance inst, DungeonRoomProvider provider);
 
 	void generateChunk(World world, Random rand, DungeonInstance inst, ChunkPrimer primer, int chunkX, int chunkZ);
-	
+
 	void populateChunk(World world, Random rand, DungeonInstance inst, int chunkX, int chunkZ);
-	
+
 }

@@ -1,16 +1,9 @@
 package com.gildedgames.aether.common.entities.living.mounts;
 
-import com.gildedgames.aether.api.entity.IMount;
-import com.gildedgames.aether.api.entity.IMountProcessor;
-import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
-import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
-import com.gildedgames.aether.common.entities.util.mounts.IFlyingMountData;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.IJumpingMount;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,9 +11,6 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -31,7 +21,7 @@ import java.util.Set;
 public class EntityPhyg extends EntityFlyingAnimal
 {
 
-	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(new Item[] {Items.CARROT, Items.POTATO, Items.BEETROOT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry});
+	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.CARROT, Items.POTATO, Items.BEETROOT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry);
 
 	public EntityPhyg(World world)
 	{

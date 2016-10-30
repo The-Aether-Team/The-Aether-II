@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.capabilities.player;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
 import com.gildedgames.aether.common.capabilities.player.modules.EquipmentModule;
@@ -10,8 +9,8 @@ import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.world.island.logic.IslandData;
-import com.gildedgames.aether.common.world.island.logic.IslandSectorAccess;
+import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
+import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSectorAccess;
 import com.gildedgames.util.core.util.TeleporterGeneric;
 import com.gildedgames.util.modules.chunk.ChunkModule;
 import com.gildedgames.util.modules.chunk.impl.hooks.BlockBitFlagChunkHook;
@@ -23,7 +22,6 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
@@ -33,7 +31,6 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -41,10 +38,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PlayerAetherEvents
 {

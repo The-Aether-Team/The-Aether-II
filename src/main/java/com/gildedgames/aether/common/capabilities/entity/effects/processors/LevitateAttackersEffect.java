@@ -3,13 +3,11 @@ package com.gildedgames.aether.common.capabilities.entity.effects.processors;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
 import com.gildedgames.aether.common.capabilities.entity.effects.AbstractEffectProcessor;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EntityDamageSource;
-import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 

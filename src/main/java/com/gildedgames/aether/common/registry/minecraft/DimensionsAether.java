@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.registry.minecraft;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.world.TeleporterAether;
-import com.gildedgames.aether.common.world.WorldProviderAether;
-import com.gildedgames.aether.common.world.labyrinth.WorldProviderSliderLabyrinth;
+import com.gildedgames.aether.common.world.dimensions.aether.TeleporterAether;
+import com.gildedgames.aether.common.world.dimensions.aether.WorldProviderAether;
+import com.gildedgames.aether.common.world.dimensions.labyrinth.WorldProviderSliderLabyrinth;
 import com.gildedgames.util.core.util.GGHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.DimensionType;

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.containers;
 
-import com.gildedgames.aether.common.tile_entities.TileEntityHolystoneFurnace;
+import com.gildedgames.aether.common.tiles.TileEntityHolystoneFurnace;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;

@@ -45,7 +45,9 @@ class FaceConnector
 	public static boolean AreConnectable(FaceConnector a, FaceConnector b)
 	{
 		if (a.hashCode != b.hashCode)
+		{
 			return false;
+		}
 
 		int n = 2;
 		int[] av = a.vertices;
@@ -53,7 +55,9 @@ class FaceConnector
 		for (int i = 0; i < n; i++)
 		{
 			if (av[i] != bv[i])
+			{
 				return false;
+			}
 		}
 
 		return true;

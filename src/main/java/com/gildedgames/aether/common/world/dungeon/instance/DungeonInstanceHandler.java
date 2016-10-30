@@ -2,21 +2,19 @@ package com.gildedgames.aether.common.world.dungeon.instance;
 
 import com.gildedgames.util.core.util.BlockPosDimension;
 import com.gildedgames.util.modules.instances.InstanceHandler;
-import com.gildedgames.util.modules.instances.InstanceModule;
-import com.gildedgames.util.modules.instances.PlayerInstances;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
 public class DungeonInstanceHandler
 {
-	
+
 	private InstanceHandler<DungeonInstance> handler;
 
 	public DungeonInstanceHandler(InstanceHandler<DungeonInstance> handler)
 	{
 		this.handler = handler;
 	}
-	
+
 	public DungeonInstance getFromDimId(int dimId)
 	{
 		return this.handler.getInstanceForDimension(dimId);
@@ -31,10 +29,10 @@ public class DungeonInstanceHandler
 				return inst;
 			}
 		}
-		
+
 		DungeonInstance inst = this.handler.createNew();
 		inst.setOutsideEntrance(entrance);
-		
+
 		return inst;
 	}
 
@@ -44,7 +42,7 @@ public class DungeonInstanceHandler
 		{
 			inst.getGenerator().generateLayout(player.getServer(), inst.getLayoutSeed(), inst, inst.getRoomProvider());
 		}
-		
+
 		World world = this.handler.teleportPlayerToDimension(inst, player);
 
 		player.connection.setPlayerLocation(inst.getInsideEntrance().getX(), inst.getInsideEntrance().getY(), inst.getInsideEntrance().getZ(), 0, 0);

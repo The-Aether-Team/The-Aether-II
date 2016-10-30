@@ -144,7 +144,7 @@ public class EntityEffects implements IEntityEffectsCapability
 
 		for (EntityEffectRule rule : instance.getRules())
 		{
-			if (!rule.isMet(entity))
+			if (!rule.isMet(this.entity))
 			{
 				isMet = false;
 				break;

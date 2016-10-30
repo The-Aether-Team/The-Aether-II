@@ -9,9 +9,9 @@ public interface DungeonDefinition
 {
 
 	DungeonGenerator createGenerator();
-	
+
 	DungeonRoomProvider createRoomProvider();
 
 	Entity createRandomMob(World world, Random rand);
-	
+
 }

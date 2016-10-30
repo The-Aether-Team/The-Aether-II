@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.util.structure;
 
 import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.tile_entities.TileEntityStructureExtended;
+import com.gildedgames.aether.common.tiles.TileEntityStructureExtended;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
@@ -125,7 +125,7 @@ public class StructureInjectionEvents
 	{
 		try
 		{
-			return Long.valueOf(longString).longValue();
+			return Long.valueOf(longString);
 		}
 		catch (NumberFormatException var3)
 		{
@@ -137,7 +137,7 @@ public class StructureInjectionEvents
 	{
 		try
 		{
-			return Float.valueOf(floatString).floatValue();
+			return Float.valueOf(floatString);
 		}
 		catch (NumberFormatException var3)
 		{

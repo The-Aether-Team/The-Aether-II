@@ -6,19 +6,11 @@ import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.BossChangePacket;
-import com.gildedgames.aether.common.util.EntityUtil;
-import com.gildedgames.aether.common.util.TickTimer;
-import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
-import com.gildedgames.util.io_manager.io.NBT;
-import com.gildedgames.util.modules.instances.IPlayerInstances;
-import com.gildedgames.util.modules.instances.InstanceModule;
-import net.minecraft.block.BlockTorch;
+import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.world.BlockEvent;
 
 import java.util.UUID;
 

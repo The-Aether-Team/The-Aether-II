@@ -1,18 +1,15 @@
 package com.gildedgames.aether.common.util.structure;
 
-import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityStructure;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -77,7 +74,7 @@ public class StructureInjectionLogic
 
 	private static List<TileEntityStructure> getNearbyCornerBlocks(World world, BlockPos p_184418_1_, BlockPos p_184418_2_)
 	{
-		List<TileEntityStructure> list = Lists.<TileEntityStructure>newArrayList();
+		List<TileEntityStructure> list = Lists.newArrayList();
 
 		for (BlockPos.MutableBlockPos blockpos$mutableblockpos : BlockPos.getAllInBoxMutable(p_184418_1_, p_184418_2_))
 		{
@@ -103,7 +100,7 @@ public class StructureInjectionLogic
 
 		if (p_184416_2_.size() > 1)
 		{
-			BlockPos blockpos = ((TileEntityStructure)p_184416_2_.get(0)).getPos();
+			BlockPos blockpos = p_184416_2_.get(0).getPos();
 			structureboundingbox = new StructureBoundingBox(blockpos, blockpos);
 		}
 		else

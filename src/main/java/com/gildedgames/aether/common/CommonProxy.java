@@ -9,6 +9,7 @@ import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
 import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.capabilities.CapabilityManagerAether;
 import com.gildedgames.aether.common.capabilities.entity.properties.EntityProperties;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherEvents;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
@@ -18,12 +19,12 @@ import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.entities.EntityItemWatcher;
 import com.gildedgames.aether.common.entities.MountProcessor;
 import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffectsEventHooks;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.boss.slider.BreakFloorActionSlider;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.boss.slider.FirstStageSlider;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.boss.slider.SecondStageSlider;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.boss.slider.ThirdStageSlider;
+import com.gildedgames.aether.common.entities.living.boss.slider.BreakFloorActionSlider;
+import com.gildedgames.aether.common.entities.living.boss.slider.FirstStageSlider;
+import com.gildedgames.aether.common.entities.living.boss.slider.SecondStageSlider;
+import com.gildedgames.aether.common.entities.living.boss.slider.ThirdStageSlider;
 import com.gildedgames.aether.common.entities.util.SimpleBossManager;
-import com.gildedgames.aether.common.genes.moa.MoaGenePool;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -34,14 +35,14 @@ import com.gildedgames.aether.common.registry.TemplatesAether;
 import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
-import com.gildedgames.aether.common.tile_entities.TileEntitiesAether;
+import com.gildedgames.aether.common.tiles.TileEntitiesAether;
 import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.aether.common.world.chunk.PlacementFlagProvider;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceFactory;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceHandler;
-import com.gildedgames.aether.common.world.island.logic.IslandData;
-import com.gildedgames.aether.common.world.island.logic.IslandSector;
+import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
+import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSector;
 import com.gildedgames.util.io.Instantiator;
 import com.gildedgames.util.modules.chunk.ChunkModule;
 import com.gildedgames.util.modules.instances.InstanceModule;
@@ -57,7 +58,6 @@ import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 import java.io.File;
@@ -86,22 +86,21 @@ public class CommonProxy
 	{
 		this.storageDir = new File(event.getSourceFile().getParent(), "Aether/");
 
-		// Pre-initialize content
-		BiomesAether.preInit();
-		SoundsAether.preInit();
-
 		BlocksAether.preInit();
 		ItemsAether.preInit();
+
+		EntitiesAether.preInit();
+		TileEntitiesAether.preInit();
 
 		NetworkingAether.preInit();
 
 		DimensionsAether.preInit();
-
-		TileEntitiesAether.preInit();
-		EntitiesAether.preInit();
+		BiomesAether.preInit();
 
 		TemplatesAether.init();
 		GenerationAether.init();
+
+		SoundsAether.preInit();
 
 		this.recipeManager.preInit();
 
@@ -132,7 +131,7 @@ public class CommonProxy
 
 		MinecraftForge.EVENT_BUS.register(ItemSkyrootSword.class);
 
-		AetherCapabilityManager.init();
+		CapabilityManagerAether.init();
 
 		ChunkModule.api().registerChunkHookProvider(this.placementFlagProvider);
 

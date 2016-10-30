@@ -10,7 +10,7 @@ public class CheckTime implements PosCondition, WorldCondition
 
 	public enum Time
 	{
-		DAY, NIGHT;
+		DAY, NIGHT
 	}
 
 	private Time time;

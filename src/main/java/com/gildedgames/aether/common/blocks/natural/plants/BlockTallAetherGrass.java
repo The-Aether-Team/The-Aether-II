@@ -1,20 +1,12 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
-import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -43,7 +35,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 
 		this.setSoundType(SoundType.PLANT);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(TYPE, Integer.valueOf(0)));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(TYPE, 0));
 	}
 
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
@@ -67,7 +59,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 			type = BLIGHTED;
 		}*/
 
-		return state.withProperty(TYPE, Integer.valueOf(type));
+		return state.withProperty(TYPE, type);
 	}
 
 	@Override
@@ -119,7 +111,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] {TYPE});
+		return new BlockStateContainer(this, TYPE);
 	}
 
 }

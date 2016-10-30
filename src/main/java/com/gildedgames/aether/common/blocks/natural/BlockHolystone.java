@@ -30,7 +30,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Random;
 
 public class BlockHolystone extends Block implements IBlockVariants, ISkyrootMinable
 {

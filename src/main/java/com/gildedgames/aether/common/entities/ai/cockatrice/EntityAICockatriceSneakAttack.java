@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.ai.cockatrice;
 
-import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
+import com.gildedgames.aether.common.entities.living.mobs.EntityCockatrice;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;

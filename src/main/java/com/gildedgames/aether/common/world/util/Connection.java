@@ -19,7 +19,9 @@ public class Connection
 			int[] point1 = c.pointa;
 			int[] point2 = c.pointb;
 			if ((this.pointa == point1 && this.pointb == point2) || (this.pointa == point2 && this.pointb == point1))
+			{
 				return;
+			}
 		}
 		connections.add(this);
 		int[] subt = new int[2];

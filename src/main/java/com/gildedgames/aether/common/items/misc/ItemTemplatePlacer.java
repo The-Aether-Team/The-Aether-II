@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.misc;
 
-import com.gildedgames.aether.common.world.features.WorldGenTemplate;
+import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenTemplate;
 import com.google.common.base.Supplier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;

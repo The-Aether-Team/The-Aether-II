@@ -1,10 +1,9 @@
 package com.gildedgames.aether.common.items.consumables;
 
-import com.gildedgames.aether.common.entities.living.enemies.EntitySwet;
+import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import com.gildedgames.aether.common.items.misc.ItemAetherFood;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

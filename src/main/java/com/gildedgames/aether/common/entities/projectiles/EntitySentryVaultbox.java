@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.projectiles;
 
-import com.gildedgames.aether.common.util.RandomCraftedItemSelector;
+import com.gildedgames.aether.common.util.selectors.RandomCraftedItemSelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;

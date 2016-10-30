@@ -1,10 +1,9 @@
 package com.gildedgames.aether.common.capabilities.player.modules;
 
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.companions.IPlayerCompanionManager;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
-import com.gildedgames.aether.common.entities.companions.EntityCompanion;
+import com.gildedgames.aether.common.entities.living.companions.EntityCompanion;
 import com.gildedgames.aether.common.items.companions.ItemCompanion;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.CompanionChangedPacket;

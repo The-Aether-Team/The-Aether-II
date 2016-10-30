@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class DungeonRoom
 {
-	
+
 	public Template template;
 
 	public Rectangle rectangle;
@@ -16,9 +16,9 @@ public class DungeonRoom
 	public boolean toRemove;
 
 	public int[] position; //used during the triangulation
-	
+
 	private int height;
-	
+
 	public DungeonRoom(Template template)
 	{
 		this.template = template;
@@ -33,7 +33,7 @@ public class DungeonRoom
 		this.position[2] = (int) (this.rectangle.getX() * this.rectangle.getX() + this.rectangle.getY() * this.rectangle.getY());
 		return this.position;
 	}
-	
+
 	public void setPos(int x, int z)
 	{
 		this.rectangle.setLocation(x, z);
@@ -78,7 +78,7 @@ public class DungeonRoom
 	{
 		return (int) this.rectangle.getHeight();
 	}
-	
+
 	public int getHeight()
 	{
 		return this.template == null ? this.height : this.template.getSize().getY();

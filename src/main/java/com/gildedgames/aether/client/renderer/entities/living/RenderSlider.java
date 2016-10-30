@@ -4,7 +4,7 @@ import com.gildedgames.aether.client.models.entities.living.ModelSlider;
 import com.gildedgames.aether.client.renderer.entities.living.layers.GlowingLayer;
 import com.gildedgames.aether.client.renderer.entities.living.layers.LayerGlowing;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.boss.slider.EntitySlider;
+import com.gildedgames.aether.common.entities.living.boss.slider.EntitySlider;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

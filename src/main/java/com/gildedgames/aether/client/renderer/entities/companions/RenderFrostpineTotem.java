@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.renderer.entities.companions;
 
 import com.gildedgames.aether.client.models.entities.companions.ModelFrostpineTotem;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.companions.EntityFrostpineTotem;
+import com.gildedgames.aether.common.entities.living.companions.EntityFrostpineTotem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;

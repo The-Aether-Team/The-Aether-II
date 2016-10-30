@@ -1,7 +1,7 @@
 package com.gildedgames.aether.client.renderer.tile_entities;
 
 import com.gildedgames.aether.client.models.entities.ModelBlock;
-import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthBridge;
+import com.gildedgames.aether.common.tiles.TileEntityLabyrinthBridge;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 

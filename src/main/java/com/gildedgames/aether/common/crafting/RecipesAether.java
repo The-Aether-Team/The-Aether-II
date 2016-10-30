@@ -15,7 +15,6 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import com.gildedgames.aether.common.registry.AltarRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

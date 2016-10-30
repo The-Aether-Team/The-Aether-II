@@ -1,6 +1,10 @@
 package com.gildedgames.aether.common.world.util;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Stack;
 
 public class ConvexHull
 {
@@ -91,7 +95,9 @@ public class ConvexHull
 			for (int j = 0; j <= 2; j++)
 			{
 				if (face.adjacentFaces[j] == null)
+				{
 					continue;
+				}
 				cell.adjacency[j] = cells[face.adjacentFaces[j].tag];
 			}
 		}
@@ -142,9 +148,13 @@ public class ConvexHull
 		{
 			this.findBeyondVertices(face);
 			if (face.verticesBeyond.size() == 0)
+			{
 				this.convexFaces.add(face);
+			}
 			else
+			{
 				this.unprocessedFaces.add(face);
+			}
 		}
 
 		while (this.unprocessedFaces.first != null)
@@ -157,9 +167,13 @@ public class ConvexHull
 			this.tagAffectedFaces(currentFace);
 
 			if (!this.singularVertices.contains(this.currentVertex) && this.createCone(center))
+			{
 				this.commitCone();
+			}
 			else
+			{
 				this.handleSingular(center);
+			}
 			int count = this.affectedFaceBuffer.size();
 			for (ConvexFace anAffectedFaceBuffer : this.affectedFaceBuffer)
 				anAffectedFaceBuffer.tag = 0;
@@ -196,7 +210,9 @@ public class ConvexHull
 				extremes.add(this.currentInput.get(maxInd));
 			}
 			else
+			{
 				extremes.add(this.currentInput.get(minInd));
+			}
 		}
 		return extremes;
 	}
@@ -261,7 +277,9 @@ public class ConvexHull
 				}
 			}
 			if (maxPoint != null)
+			{
 				initialPoints.add(maxPoint);
+			}
 			else
 			{
 				for (int[] point : this.currentInput)
@@ -289,7 +307,9 @@ public class ConvexHull
 				}
 
 				if (maxPoint != null)
+				{
 					initialPoints.add(maxPoint);
+				}
 				//else TODO: this is when the generation is on one line.
 			}
 		}
@@ -371,7 +391,9 @@ public class ConvexHull
 			face.isNormalFlipped = true;
 		}
 		else
+		{
 			face.isNormalFlipped = false;
+		}
 		return true;
 	}
 
@@ -415,14 +437,20 @@ public class ConvexHull
 		//Find the first false index
 		for (i = 0; i < 3; i++)
 			if (!this.getMarked(lv.get(i)))
+			{
 				break;
+			}
 
 		if (i == 3)
+		{
 			return;
+		}
 
 		for (int j = i + 1; j < 3; j++)
 			if (!this.getMarked(lv.get(j)))
+			{
 				return;
+			}
 
 		//If this somehow is used, it means that two faces share an edge
 		l.adjacentFaces[i] = r;
@@ -431,7 +459,9 @@ public class ConvexHull
 		for (i = 0; i < 3; i++)
 		{
 			if (this.getMarked(rv.get(i)))
+			{
 				break;
+			}
 		}
 		r.adjacentFaces[i] = l;
 	}
@@ -725,7 +755,9 @@ public class ConvexHull
 		{
 			v = beyond.get(i);
 			if (v == this.currentVertex)
+			{
 				continue;
+			}
 			this.setMarked(v, false);
 			this.isBeyond(face, beyondVertices, v);
 		}
@@ -735,14 +767,18 @@ public class ConvexHull
 		{
 			v = beyond1.get(i);
 			if (this.getMarked(v))
+			{
 				this.isBeyond(face, beyondVertices, v);
+			}
 		}
 
 		face.furthestVertex = this.furthestVertex;
 		VertexBuffer temp = face.verticesBeyond;
 		face.verticesBeyond = beyondVertices;
 		if (temp.size() > 0)
+		{
 			temp.clear();
+		}
 		this.beyondBuffer = temp;
 	}
 

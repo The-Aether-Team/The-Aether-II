@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.renderer.tile_entities;
 
 import com.gildedgames.aether.client.models.entities.tile.ModelLabyrinthTotem;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthTotem;
+import com.gildedgames.aether.common.tiles.TileEntityLabyrinthTotem;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

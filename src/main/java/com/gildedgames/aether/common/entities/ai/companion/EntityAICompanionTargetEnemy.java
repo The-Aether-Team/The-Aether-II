@@ -1,17 +1,8 @@
 package com.gildedgames.aether.common.entities.ai.companion;
 
-import com.gildedgames.aether.common.entities.companions.EntityCompanion;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
+import com.gildedgames.aether.common.entities.living.companions.EntityCompanion;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAITarget;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.pathfinding.PathNavigate;
-import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 
 public class EntityAICompanionTargetEnemy extends EntityAITarget
 {

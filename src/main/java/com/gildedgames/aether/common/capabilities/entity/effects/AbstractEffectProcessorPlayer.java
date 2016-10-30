@@ -1,10 +1,8 @@
 package com.gildedgames.aether.common.capabilities.entity.effects;
 
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
-import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;

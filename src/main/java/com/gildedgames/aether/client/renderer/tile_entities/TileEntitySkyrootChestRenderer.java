@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.renderer.tile_entities;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.containers.BlockSkyrootChest;
-import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootChest;
+import com.gildedgames.aether.common.tiles.TileEntitySkyrootChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.client.model.ModelChest;

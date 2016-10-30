@@ -4,7 +4,6 @@ import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstanc
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
 import com.gildedgames.aether.api.capabilites.entity.properties.ElementalDamageSource;
 import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
-import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityPropertiesCapability;
 import com.gildedgames.aether.common.capabilities.entity.effects.AbstractEffectProcessor;
 import com.gildedgames.aether.common.capabilities.entity.effects.RangedAttributeModifier;
@@ -20,7 +19,6 @@ import net.minecraft.util.text.TextFormatting;
 
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 public class ModifyDamageEffect extends AbstractEffectProcessor<ModifyDamageEffect.Instance>
 {

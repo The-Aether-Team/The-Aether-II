@@ -1,7 +1,7 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.renderer.entities.living.layers.LayerSwetGel;
-import com.gildedgames.aether.common.entities.living.enemies.EntitySwet;
+import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

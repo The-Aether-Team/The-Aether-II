@@ -1,7 +1,7 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.models.entities.living.ModelCarrionSprout;
-import com.gildedgames.aether.common.entities.living.EntityCarrionSprout;
+import com.gildedgames.aether.common.entities.living.passive.EntityCarrionSprout;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

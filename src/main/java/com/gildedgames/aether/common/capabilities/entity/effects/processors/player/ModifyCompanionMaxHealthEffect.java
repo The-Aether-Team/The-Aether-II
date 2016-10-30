@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.capabilities.entity.effects.processors.pla
 
 import com.gildedgames.aether.common.capabilities.entity.effects.processors.ModifyMaxHealthEffect;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
-import com.gildedgames.aether.common.entities.companions.EntityCompanion;
+import com.gildedgames.aether.common.entities.living.companions.EntityCompanion;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

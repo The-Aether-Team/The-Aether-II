@@ -5,8 +5,7 @@ import com.gildedgames.aether.client.models.entities.living.ModelLabyrinthChestM
 import com.gildedgames.aether.client.renderer.entities.living.layers.GlowingLayer;
 import com.gildedgames.aether.client.renderer.entities.living.layers.LayerGlowing;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityChestMimic;
-import com.google.common.base.Supplier;
+import com.gildedgames.aether.common.entities.living.dungeon.labyrinth.EntityChestMimic;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

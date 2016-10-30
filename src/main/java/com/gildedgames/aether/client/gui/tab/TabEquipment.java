@@ -1,7 +1,7 @@
 package com.gildedgames.aether.client.gui.tab;
 
 import com.gildedgames.aether.client.gui.container.GuiEquipment;
-import com.gildedgames.aether.client.gui.main_menu.BugReportMenu;
+import com.gildedgames.aether.client.gui.menu.BugReportMenu;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.util.core.gui.viewing.MinecraftGuiWrapper;

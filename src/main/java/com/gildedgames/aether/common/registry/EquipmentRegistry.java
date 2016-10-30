@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.registry;
 
-import com.gildedgames.aether.api.capabilites.entity.properties.ElementalDamageSource;
 import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentType;
 import com.gildedgames.aether.api.capabilites.items.properties.ItemRarity;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentProperties;
@@ -9,7 +8,6 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class EquipmentRegistry implements IEquipmentRegistry
 {

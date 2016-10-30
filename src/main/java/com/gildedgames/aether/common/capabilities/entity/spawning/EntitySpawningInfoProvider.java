@@ -2,8 +2,6 @@ package com.gildedgames.aether.common.capabilities.entity.spawning;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.entity.spawning.ISpawningInfo;
-import com.gildedgames.aether.api.capabilites.items.IItemBreakable;
-import com.gildedgames.aether.common.capabilities.item.ItemBreakable;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;

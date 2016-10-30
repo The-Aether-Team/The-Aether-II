@@ -7,8 +7,8 @@ import com.gildedgames.aether.common.entities.ai.moa.*;
 import com.gildedgames.aether.common.entities.util.*;
 import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
 import com.gildedgames.aether.common.entities.util.mounts.IFlyingMountData;
-import com.gildedgames.aether.common.genes.moa.MoaGenePool;
-import com.gildedgames.aether.common.genes.util.GeneUtil;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
+import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import com.gildedgames.aether.common.util.TickTimer;
@@ -28,7 +28,6 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.RayTraceResult;
@@ -40,7 +39,7 @@ import java.util.Set;
 public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements EntityGroupMember, IMount, IFlyingMountData
 {
 
-	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(new Item[] {Items.WHEAT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry});
+	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry);
 
 	private static final DataParameter<Integer> REMAINING_JUMPS = EntityDataManager.createKey(EntityMoa.class, DataSerializers.VARINT);
 

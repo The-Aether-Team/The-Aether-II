@@ -2,8 +2,6 @@ package com.gildedgames.aether.common.capabilities.item;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.items.IItemBreakable;
-import com.gildedgames.aether.common.capabilities.item.extra_data.ItemExtraDataImpl;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;

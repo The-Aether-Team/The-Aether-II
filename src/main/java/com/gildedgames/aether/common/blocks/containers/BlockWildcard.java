@@ -2,9 +2,8 @@ package com.gildedgames.aether.common.blocks.containers;
 
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
-import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthChest;
-import com.gildedgames.aether.common.tile_entities.TileEntitySchematicBlock;
-import com.gildedgames.aether.common.tile_entities.TileEntityWildcard;
+import com.gildedgames.aether.common.tiles.TileEntitySchematicBlock;
+import com.gildedgames.aether.common.tiles.TileEntityWildcard;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

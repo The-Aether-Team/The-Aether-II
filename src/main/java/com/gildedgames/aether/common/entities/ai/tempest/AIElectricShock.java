@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.entities.ai.tempest;
 
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.EntityAI;
-import com.gildedgames.aether.common.entities.living.enemies.EntityTempest;
+import com.gildedgames.aether.common.entities.living.mobs.EntityTempest;
 import com.gildedgames.aether.common.util.TickTimer;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;

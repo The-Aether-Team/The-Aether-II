@@ -172,37 +172,37 @@ public class StructureInjectionPacket implements IMessage
 				{
 					if (tileentitystructure.save())
 					{
-						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.save_success", new Object[] {s4}));
+						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.save_success", s4));
 					}
 					else
 					{
-						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.save_failure", new Object[] {s4}));
+						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.save_failure", s4));
 					}
 				}
 				else if (message.action == 3)
 				{
 					if (!tileentitystructure.isStructureLoadable())
 					{
-						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.load_not_found", new Object[] {s4}));
+						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.load_not_found", s4));
 					}
 					else if (tileentitystructure.load())
 					{
-						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.load_success", new Object[] {s4}));
+						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.load_success", s4));
 					}
 					else
 					{
-						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.load_prepare", new Object[] {s4}));
+						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.load_prepare", s4));
 					}
 				}
 				else if (message.action == 4)
 				{
 					if (StructureInjectionLogic.detectSize(tileentitystructure))
 					{
-						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.size_success", new Object[] {s4}));
+						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.size_success", s4));
 					}
 					else
 					{
-						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.size_failure", new Object[0]));
+						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.size_failure"));
 					}
 				}
 

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.util;
 
-import com.gildedgames.aether.common.tile_entities.TileEntityStructureExtended;
+import com.gildedgames.aether.common.tiles.TileEntityStructureExtended;
 import net.minecraft.block.BlockStructure;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

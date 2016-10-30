@@ -1,12 +1,10 @@
 package com.gildedgames.aether.client.renderer;
 
-import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.client.models.entities.player.LayerPlayerGloves;
 import com.gildedgames.aether.client.renderer.entities.living.RenderPlayerHelper;
-import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffects;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.util.PlayerUtil;
+import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
@@ -18,8 +16,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import static sun.audio.AudioPlayer.player;
 
 public class ClientRenderHandler
 {

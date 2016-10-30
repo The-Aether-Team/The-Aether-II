@@ -2,12 +2,7 @@ package com.gildedgames.aether.common.capabilities.entity.effects.processors;
 
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.common.capabilities.entity.effects.AbstractEffectProcessorPlayer;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
-import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.MidAirJumpsChangedPacket;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayerMP;
 
 import java.util.List;
 

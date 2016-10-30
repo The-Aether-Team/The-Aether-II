@@ -151,7 +151,7 @@ public class ItemAetherSpawnEgg extends Item
 	{
 		if (worldIn.isRemote)
 		{
-			return new ActionResult(EnumActionResult.PASS, itemStackIn);
+			return new ActionResult<>(EnumActionResult.PASS, itemStackIn);
 		}
 		else
 		{
@@ -163,7 +163,7 @@ public class ItemAetherSpawnEgg extends Item
 
 				if (!(worldIn.getBlockState(blockpos).getBlock() instanceof BlockLiquid))
 				{
-					return new ActionResult(EnumActionResult.PASS, itemStackIn);
+					return new ActionResult<>(EnumActionResult.PASS, itemStackIn);
 				}
 				else if (worldIn.isBlockModifiable(playerIn, blockpos) && playerIn.canPlayerEdit(blockpos, raytraceresult.sideHit, itemStackIn))
 				{
@@ -171,7 +171,7 @@ public class ItemAetherSpawnEgg extends Item
 
 					if (entity == null)
 					{
-						return new ActionResult(EnumActionResult.PASS, itemStackIn);
+						return new ActionResult<>(EnumActionResult.PASS, itemStackIn);
 					}
 					else
 					{
@@ -188,17 +188,17 @@ public class ItemAetherSpawnEgg extends Item
 						}
 
 						playerIn.addStat(StatList.getObjectUseStats(this));
-						return new ActionResult(EnumActionResult.SUCCESS, itemStackIn);
+						return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
 					}
 				}
 				else
 				{
-					return new ActionResult(EnumActionResult.FAIL, itemStackIn);
+					return new ActionResult<>(EnumActionResult.FAIL, itemStackIn);
 				}
 			}
 			else
 			{
-				return new ActionResult(EnumActionResult.PASS, itemStackIn);
+				return new ActionResult<>(EnumActionResult.PASS, itemStackIn);
 			}
 		}
 	}
@@ -228,7 +228,7 @@ public class ItemAetherSpawnEgg extends Item
 					entity.setLocationAndAngles(x, y, z, MathHelper.wrapDegrees(worldIn.rand.nextFloat() * 360.0F), 0.0F);
 					entityliving.rotationYawHead = entityliving.rotationYaw;
 					entityliving.renderYawOffset = entityliving.rotationYaw;
-					entityliving.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityliving)), (IEntityLivingData) null);
+					entityliving.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityliving)), null);
 					worldIn.spawnEntityInWorld(entity);
 					entityliving.playLivingSound();
 				}

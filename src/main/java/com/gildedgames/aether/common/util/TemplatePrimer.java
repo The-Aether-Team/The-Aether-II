@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.util;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.tile_entities.TileEntityWildcard;
+import com.gildedgames.aether.common.tiles.TileEntityWildcard;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -29,9 +29,6 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
-
-import static java.awt.SystemColor.info;
-import static net.minecraft.world.gen.structure.template.Template.transformedBlockPos;
 
 public class TemplatePrimer
 {

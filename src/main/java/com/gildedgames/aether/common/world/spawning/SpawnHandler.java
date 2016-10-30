@@ -1,21 +1,18 @@
 package com.gildedgames.aether.common.world.spawning;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.capabilites.entity.spawning.EntitySpawn;
-import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
+import com.gildedgames.aether.api.capabilites.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.util.core.UtilModule;
+import com.gildedgames.util.core.util.ChunkMap;
 import com.gildedgames.util.core.util.GGHelper;
 import com.gildedgames.util.io_manager.io.NBT;
-import com.gildedgames.util.core.util.ChunkMap;
-import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -274,17 +271,17 @@ public class SpawnHandler implements NBT
 			maxRoll += entry.getRarityWeight();
 		}
 
-		if(table.size() == 0)
+		if (table.size() == 0)
 		{
 			return null;
 		}
 
-		roll = (int)(Math.random() * maxRoll);
+		roll = (int) (Math.random() * maxRoll);
 
 		for (SpawnEntry entry : table)
 		{
 			// return element if roll < weight
-			if(roll < entry.getRarityWeight())
+			if (roll < entry.getRarityWeight())
 			{
 				return entry;
 			}
@@ -302,7 +299,7 @@ public class SpawnHandler implements NBT
 
 		for (SpawnArea area : areas.getValues())
 		{
-			outer: while (area.getEntityCount() < this.targetEntityCountPerArea)
+			while (area.getEntityCount() < this.targetEntityCountPerArea)
 			{
 				SpawnEntry entry = this.getWeightedEntry();
 
@@ -332,7 +329,8 @@ public class SpawnHandler implements NBT
 
 				final int MAX_ATTEMPTS = 100;
 
-				inner: for (int count = 0; count < groupSize; count++)
+				inner:
+				for (int count = 0; count < groupSize; count++)
 				{
 					int scatterX = (world.rand.nextBoolean() ? 1 : -1) * (1 + world.rand.nextInt(entry.getPositionSelector().getScatter(world)));
 					int scatterZ = (world.rand.nextBoolean() ? 1 : -1) * (1 + world.rand.nextInt(entry.getPositionSelector().getScatter(world)));
@@ -403,7 +401,7 @@ public class SpawnHandler implements NBT
 					{
 						if (entity instanceof EntityLiving)
 						{
-							EntityLiving living = (EntityLiving)entity;
+							EntityLiving living = (EntityLiving) entity;
 
 							if (!ForgeEventFactory.doSpecialSpawn(living, world, posX, posY, posZ))
 							{

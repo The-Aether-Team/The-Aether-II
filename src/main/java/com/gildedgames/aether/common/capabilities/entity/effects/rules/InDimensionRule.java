@@ -4,7 +4,6 @@ import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class InDimensionRule implements EntityEffectRule

@@ -23,7 +23,7 @@ public class EntityAIForcedWander extends EntityAIWander
 	{
 		this.makeUpdate();
 
-		if (this.entity.getRNG().nextInt(chance) != 0)
+		if (this.entity.getRNG().nextInt(this.chance) != 0)
 		{
 			return false;
 		}

@@ -40,7 +40,7 @@ public class RangedAttributeModifier extends AttributeModifier
 		}
 		else
 		{
-			amount = ThreadLocalRandom.current().nextInt((int) min, (int) max + 1);
+			amount = ThreadLocalRandom.current().nextInt((int) this.min, (int) this.max + 1);
 		}
 
 		this.lastAmount = amount;

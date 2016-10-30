@@ -3,7 +3,7 @@ package com.gildedgames.aether.client.renderer.entities.living.layers;
 import com.gildedgames.aether.client.models.entities.living.ModelRamWool;
 import com.gildedgames.aether.client.renderer.entities.living.RenderKirrid;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.living.EntityKirrid;
+import com.gildedgames.aether.common.entities.living.passive.EntityKirrid;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;

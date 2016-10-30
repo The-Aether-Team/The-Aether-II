@@ -4,20 +4,24 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
-import com.gildedgames.aether.common.entities.companions.*;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.*;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.boss.slider.EntitySlider;
-import com.gildedgames.aether.common.entities.dungeon.util.EntityGenerator;
+import com.gildedgames.aether.common.entities.living.companions.*;
+import com.gildedgames.aether.common.entities.living.dungeon.labyrinth.*;
+import com.gildedgames.aether.common.entities.living.boss.slider.EntitySlider;
+import com.gildedgames.aether.common.entities.living.dungeon.util.EntityGenerator;
 import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
 import com.gildedgames.aether.common.entities.item.EntityRewardItemStack;
-import com.gildedgames.aether.common.entities.living.*;
-import com.gildedgames.aether.common.entities.living.enemies.EntityCockatrice;
-import com.gildedgames.aether.common.entities.living.enemies.EntitySwet;
-import com.gildedgames.aether.common.entities.living.enemies.EntityTempest;
-import com.gildedgames.aether.common.entities.living.enemies.EntityZephyr;
+import com.gildedgames.aether.common.entities.living.mobs.EntityAechorPlant;
+import com.gildedgames.aether.common.entities.living.mobs.EntityCockatrice;
+import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
+import com.gildedgames.aether.common.entities.living.mobs.EntityTempest;
+import com.gildedgames.aether.common.entities.living.mobs.EntityZephyr;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
+import com.gildedgames.aether.common.entities.living.passive.EntityAerbunny;
+import com.gildedgames.aether.common.entities.living.passive.EntityAerwhale;
+import com.gildedgames.aether.common.entities.living.passive.EntityCarrionSprout;
+import com.gildedgames.aether.common.entities.living.passive.EntityKirrid;
 import com.gildedgames.aether.common.entities.projectiles.*;
 import com.gildedgames.aether.common.entities.util.AetherSpawnEggInfo;
 import net.minecraft.entity.Entity;
@@ -30,11 +34,11 @@ import java.util.Map;
 public class EntitiesAether
 {
 
-	public static HashMap<String, AetherSpawnEggInfo> entityEggs = new LinkedHashMap<String, AetherSpawnEggInfo>();
+	public static HashMap<String, AetherSpawnEggInfo> entityEggs = new LinkedHashMap<>();
 
-	public static Map<String, Class<? extends Entity>> stringToClassMapping = new HashMap<String, Class<? extends Entity>>();
+	public static Map<String, Class<? extends Entity>> stringToClassMapping = new HashMap<>();
 
-	public static Map<Class<? extends Entity>, String> classToStringMapping = new HashMap<Class<? extends Entity>, String>();
+	public static Map<Class<? extends Entity>, String> classToStringMapping = new HashMap<>();
 
 	private static int NEXT_ID = 0;
 

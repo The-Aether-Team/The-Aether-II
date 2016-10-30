@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.registry;
 
 import com.gildedgames.aether.common.AetherCore;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;

@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.world.dungeon;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityBattleGolem;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityBattleSentry;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityDetonationSentry;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityTrackingSentry;
+import com.gildedgames.aether.common.entities.living.dungeon.labyrinth.EntityBattleGolem;
+import com.gildedgames.aether.common.entities.living.dungeon.labyrinth.EntityBattleSentry;
+import com.gildedgames.aether.common.entities.living.dungeon.labyrinth.EntityDetonationSentry;
+import com.gildedgames.aether.common.entities.living.dungeon.labyrinth.EntityTrackingSentry;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.MinecraftServer;
@@ -157,7 +157,7 @@ public class DungeonDefinitions
 		}
 
 	};
-	
+
 	public static final DungeonDefinition VALKYRIE_TEMPLE = new DungeonDefinition()
 	{
 
@@ -178,9 +178,9 @@ public class DungeonDefinitions
 		{
 			return null;
 		}
-		
+
 	};
-	
+
 	public static final DungeonDefinition MOLTEN_CORE = new DungeonDefinition()
 	{
 
@@ -201,7 +201,7 @@ public class DungeonDefinitions
 		{
 			return null;
 		}
-		
+
 	};
-	
+
 }

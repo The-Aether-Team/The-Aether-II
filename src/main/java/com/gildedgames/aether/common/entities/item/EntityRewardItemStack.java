@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.entities.item;
 
-import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

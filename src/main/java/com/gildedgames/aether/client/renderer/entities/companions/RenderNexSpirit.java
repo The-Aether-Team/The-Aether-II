@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.renderer.entities.companions;
 
 import com.gildedgames.aether.client.models.entities.companions.ModelNexSpirit;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.companions.EntityNexSpirit;
+import com.gildedgames.aether.common.entities.living.companions.EntityNexSpirit;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

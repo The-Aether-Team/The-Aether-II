@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.renderer.entities.companions;
 
 import com.gildedgames.aether.client.models.entities.companions.ModelKraisith;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.companions.EntityKraisith;
+import com.gildedgames.aether.common.entities.living.companions.EntityKraisith;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.blocks.dungeon;
 
 import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiController;
-import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthTotem;
+import com.gildedgames.aether.common.tiles.TileEntityLabyrinthTotem;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;

@@ -31,9 +31,13 @@ public class VertexBuffer
 		if (this.count + 1 > this.capacity)
 		{
 			if (this.capacity == 0)
+			{
 				this.capacity = 4;
+			}
 			else
+			{
 				this.capacity = 2 * this.capacity;
+			}
 			for (int i = 0; i < this.capacity; i++)
 			{
 				if (i >= this.items.size())

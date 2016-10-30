@@ -3,8 +3,6 @@ package com.gildedgames.aether.common.blocks.natural;
 import com.gildedgames.aether.client.renderer.particles.ParticleGolden;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;

@@ -1,9 +1,8 @@
 package com.gildedgames.aether.client.gui.tab;
 
 import com.gildedgames.aether.client.gui.container.GuiEquipment;
-import com.gildedgames.aether.client.gui.main_menu.BugReportMenu;
+import com.gildedgames.aether.client.gui.menu.BugReportMenu;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.util.core.gui.util.GuiFactory;
 import com.gildedgames.util.core.gui.util.decorators.MinecraftGui;
 import com.gildedgames.util.core.gui.viewing.MinecraftGuiWrapper;
 import com.gildedgames.util.modules.tab.common.util.ITab;
@@ -16,8 +15,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.swing.*;
 
 public class TabBugReport implements ITab
 {

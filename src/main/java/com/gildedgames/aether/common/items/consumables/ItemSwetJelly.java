@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.items.consumables;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.living.enemies.EntitySwet;
+import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import com.gildedgames.aether.common.items.misc.ItemAetherFood;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -9,7 +9,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;

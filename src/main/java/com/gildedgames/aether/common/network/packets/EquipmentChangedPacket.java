@@ -1,12 +1,6 @@
 package com.gildedgames.aether.common.network.packets;
 
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
-import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
-import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
-import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffects;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.util.core.io.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;

@@ -66,16 +66,22 @@ public class SpawnArea
 		return this.entityCount;
 	}
 
-	public boolean hasPlayerInside() { return this.hasPlayerInside; }
+	public boolean hasPlayerInside()
+	{
+		return this.hasPlayerInside;
+	}
 
-	public void setInPlayersRenderDistance(boolean flag) { this.hasPlayerInside = flag; }
+	public void setInPlayersRenderDistance(boolean flag)
+	{
+		this.hasPlayerInside = flag;
+	}
 
 	@Override
 	public boolean equals(Object obj)
 	{
 		if (obj instanceof SpawnArea)
 		{
-			SpawnArea area = (SpawnArea)obj;
+			SpawnArea area = (SpawnArea) obj;
 
 			if (area.min.equals(this.min) && area.max.equals(this.max))
 			{

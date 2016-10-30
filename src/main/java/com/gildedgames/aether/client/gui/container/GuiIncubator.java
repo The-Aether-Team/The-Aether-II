@@ -1,8 +1,8 @@
 package com.gildedgames.aether.client.gui.container;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.containers.ContainerIncubator;
-import com.gildedgames.aether.common.tile_entities.TileEntityIncubator;
+import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
+import com.gildedgames.aether.common.tiles.TileEntityIncubator;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;

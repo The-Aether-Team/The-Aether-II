@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.entities.ai.swet;
 
 import com.gildedgames.aether.common.entities.ai.EntityAI;
 import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
-import com.gildedgames.aether.common.entities.living.enemies.EntitySwet;
+import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import com.gildedgames.aether.common.util.TickTimer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

@@ -1,13 +1,8 @@
 package com.gildedgames.aether.common.world.biome;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.world.features.TemplatePipeline;
-import com.gildedgames.aether.common.world.features.WorldGenTemplate;
-import net.minecraft.world.WorldServer;
+import com.gildedgames.aether.common.world.dimensions.aether.biomes.BiomeAetherBase;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.structure.template.TemplateManager;
-
-import java.util.Random;
 
 public class BiomeVoid extends BiomeAetherBase
 {

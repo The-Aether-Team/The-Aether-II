@@ -1,14 +1,11 @@
 package com.gildedgames.aether.common.items.misc;
 
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.items.extra_data.IItemExtraDataCapability;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
-import com.gildedgames.aether.common.genes.moa.MoaGenePool;
-import com.gildedgames.aether.common.genes.util.GeneUtil;
-import com.gildedgames.aether.common.genes.util.SimpleGeneStorage;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
+import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.tile_entities.TileEntityMoaEgg;
+import com.gildedgames.aether.common.tiles.TileEntityMoaEgg;
 import com.gildedgames.util.core.UtilModule;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;

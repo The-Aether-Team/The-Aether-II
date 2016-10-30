@@ -9,7 +9,7 @@ import net.minecraft.world.WorldServer;
 
 public class DungeonInstanceFactory implements InstanceFactory<DungeonInstance>
 {
-	
+
 	private DimensionType dimensionType;
 
 	public DungeonInstanceFactory(DimensionType dimensionType)

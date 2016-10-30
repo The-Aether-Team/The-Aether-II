@@ -1,8 +1,6 @@
 package com.gildedgames.aether.common.capabilities.entity.properties;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
-import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityPropertiesCapability;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;

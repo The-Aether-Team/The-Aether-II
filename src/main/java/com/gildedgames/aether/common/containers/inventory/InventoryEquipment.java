@@ -11,9 +11,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.text.TextComponentBase;
 import net.minecraft.util.text.TextComponentTranslation;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class InventoryEquipment implements IInventoryEquipment
 {
 	private static final int INVENTORY_SIZE = 14;

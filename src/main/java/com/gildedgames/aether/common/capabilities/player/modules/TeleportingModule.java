@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.capabilities.player.modules;
 
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;

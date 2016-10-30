@@ -16,8 +16,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-import static com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower.*;
-
 public class BlockWovenSticks extends Block implements IBlockVariants
 {
 

@@ -6,7 +6,7 @@ import com.gildedgames.aether.api.loot.selectors.ChanceLoot;
 import com.gildedgames.aether.api.loot.selectors.RangedLoot;
 import com.gildedgames.aether.api.loot.selectors.SingleStackLoot;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.living.enemies.EntitySwet;
+import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import net.minecraft.item.ItemStack;

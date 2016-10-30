@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.entities.living.mounts;
 import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.living.EntityAetherAnimal;
+import com.gildedgames.aether.common.entities.living.passive.EntityAetherAnimal;
 import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
 import com.gildedgames.aether.common.entities.util.mounts.IFlyingMountData;
 import net.minecraft.entity.player.EntityPlayer;

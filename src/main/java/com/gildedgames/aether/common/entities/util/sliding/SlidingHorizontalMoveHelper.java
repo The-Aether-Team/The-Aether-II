@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.entities.util.sliding;
 
-import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.util.TickTimer;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -318,7 +317,7 @@ public class SlidingHorizontalMoveHelper extends EntityMoveHelper
 
 	public enum Direction
 	{
-		NONE, RIGHT, LEFT, FORWARD, BACKWARD;
+		NONE, RIGHT, LEFT, FORWARD, BACKWARD
 	}
 
 }

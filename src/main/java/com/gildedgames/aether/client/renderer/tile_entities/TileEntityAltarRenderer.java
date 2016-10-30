@@ -3,7 +3,7 @@ package com.gildedgames.aether.client.renderer.tile_entities;
 import com.gildedgames.aether.client.models.entities.tile.ModelAltar;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.tile_entities.TileEntityAltar;
+import com.gildedgames.aether.common.tiles.TileEntityAltar;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;

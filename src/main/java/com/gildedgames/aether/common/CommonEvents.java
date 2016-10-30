@@ -1,23 +1,19 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.client.gui.main_menu.WorldAetherOptionsOverlay;
+import com.gildedgames.aether.client.gui.menu.WorldAetherOptionsOverlay;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherShield;
-import com.gildedgames.aether.common.registry.GenerationAether;
-import com.gildedgames.aether.common.registry.TemplatesAether;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
-import com.gildedgames.aether.common.util.PlayerUtil;
-import com.gildedgames.aether.common.world.TeleporterAether;
+import com.gildedgames.aether.common.util.helpers.PlayerUtil;
+import com.gildedgames.aether.common.world.dimensions.aether.TeleporterAether;
 import com.gildedgames.util.core.UtilModule;
 import com.gildedgames.util.core.util.TeleporterGeneric;
-import com.gildedgames.util.modules.ui.util.input.BooleanInput;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -33,7 +29,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.*;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -42,7 +37,6 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
-import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.world.WorldEvent;
@@ -72,7 +66,7 @@ public class CommonEvents
 		{
 			if (event.getWorld().provider.getDimensionType() == DimensionsAether.AETHER)
 			{
-				WorldServer world = (WorldServer)event.getWorld();
+				WorldServer world = (WorldServer) event.getWorld();
 
 				AetherCore.TELEPORTER = new TeleporterAether(world);
 			}

@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.blocks.containers;
 
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityChestMimic;
+import com.gildedgames.aether.common.entities.living.dungeon.labyrinth.EntityChestMimic;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.tile_entities.TileEntityLabyrinthChest;
+import com.gildedgames.aether.common.tiles.TileEntityLabyrinthChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
@@ -256,7 +256,7 @@ public class BlockLabyrinthChest extends BlockContainer
 				return;
 			}
 
-			InventoryHelper.dropInventoryItems(world, pos, (IInventory) chest);
+			InventoryHelper.dropInventoryItems(world, pos, chest);
 		}
 
 		super.breakBlock(world, pos, state);

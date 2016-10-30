@@ -1,9 +1,6 @@
 package com.gildedgames.aether.common.items.consumables;
 
-import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
-import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -90,10 +87,10 @@ public class ItemHealingStone extends Item
 		if (getUsesLeft(stack) > 0 && playerIn.getAbsorptionAmount() < 20.0F)
 		{
 			playerIn.setActiveHand(EnumHand.MAIN_HAND);
-			return new ActionResult(EnumActionResult.SUCCESS, stack);
+			return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 		}
 
-		return new ActionResult(EnumActionResult.FAIL, stack);
+		return new ActionResult<>(EnumActionResult.FAIL, stack);
 	}
 
 	@Override

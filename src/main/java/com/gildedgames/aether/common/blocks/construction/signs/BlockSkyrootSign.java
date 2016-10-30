@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.blocks.construction.signs;
 
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.tile_entities.TileEntitySkyrootSign;
+import com.gildedgames.aether.common.tiles.TileEntitySkyrootSign;
 import net.minecraft.block.BlockSign;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;

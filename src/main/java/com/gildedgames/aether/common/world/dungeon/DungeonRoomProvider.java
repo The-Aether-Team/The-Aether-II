@@ -15,5 +15,5 @@ public interface DungeonRoomProvider
 	DungeonRoom createConnectionBottom(MinecraftServer server, Random rand, int layer);
 
 	DungeonRoom createConnectionTop(MinecraftServer server, Random rand, int layer);
-	
+
 }

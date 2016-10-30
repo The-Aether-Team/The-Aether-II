@@ -325,7 +325,7 @@ public class SlidingMoveHelper extends EntityMoveHelper
 
 	public enum Direction
 	{
-		NONE, UP, DOWN, RIGHT, LEFT, FORWARD, BACKWARD;
+		NONE, UP, DOWN, RIGHT, LEFT, FORWARD, BACKWARD
 	}
 
 }

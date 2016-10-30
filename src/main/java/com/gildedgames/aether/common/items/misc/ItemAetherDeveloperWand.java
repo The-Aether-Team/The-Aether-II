@@ -71,7 +71,7 @@ public class ItemAetherDeveloperWand extends Item
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World world, EntityPlayer playerIn, EnumHand hand)
 	{
-		return new ActionResult(EnumActionResult.PASS, itemStackIn);
+		return new ActionResult<>(EnumActionResult.PASS, itemStackIn);
 	}
 
 	@Nullable
@@ -91,7 +91,7 @@ public class ItemAetherDeveloperWand extends Item
 					entity.setLocationAndAngles(x, y, z, MathHelper.wrapDegrees(worldIn.rand.nextFloat() * 360.0F), 0.0F);
 					entityliving.rotationYawHead = entityliving.rotationYaw;
 					entityliving.renderYawOffset = entityliving.rotationYaw;
-					entityliving.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityliving)), (IEntityLivingData)null);
+					entityliving.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityliving)), null);
 					worldIn.spawnEntityInWorld(entity);
 					entityliving.playLivingSound();
 				}

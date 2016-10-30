@@ -1,8 +1,7 @@
 package com.gildedgames.aether.common.entities.ai.dungeon.labyrinth;
 
 import com.gildedgames.aether.common.entities.ai.EntityAI;
-import com.gildedgames.aether.common.entities.dungeon.labyrinth.EntityChestMimic;
-import com.gildedgames.aether.common.util.TickTimer;
+import com.gildedgames.aether.common.entities.living.dungeon.labyrinth.EntityChestMimic;
 
 public class AISavageAttack extends EntityAI<EntityChestMimic>
 {

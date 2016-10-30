@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.capabilites.items.properties.TemperatureProper
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
 import com.gildedgames.aether.common.entities.util.MoaNest;
-import com.gildedgames.aether.common.genes.moa.MoaGenePool;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.items.ItemIrradiated;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;

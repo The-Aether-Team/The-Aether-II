@@ -16,13 +16,13 @@ import java.util.List;
 
 public class DungeonInstance implements Instance
 {
-	
+
 	private DungeonDefinition def;
-	
+
 	private DungeonGenerator generator;
-	
+
 	private DungeonRoomProvider roomProvider;
-	
+
 	private List<EntityPlayer> players = Lists.newArrayList();
 
 	private BlockPosDimension outsideEntrance, insideEntrance;
@@ -30,18 +30,18 @@ public class DungeonInstance implements Instance
 	private int dimIdInside;
 
 	private long layoutSeed;
-	
+
 	@SuppressWarnings("unused")
 	private DungeonInstance()
 	{
-		
+
 	}
-	
+
 	public DungeonInstance(int id, InstanceHandler<DungeonInstance> instanceHandler)
 	{
 		this.dimIdInside = id;
 		this.layoutSeed = System.currentTimeMillis();
-		
+
 		this.def = DungeonDefinitions.SLIDERS_LABYRINTH;
 	}
 
@@ -51,20 +51,20 @@ public class DungeonInstance implements Instance
 		{
 			this.generator = this.def.createGenerator();
 		}
-		
+
 		return this.generator;
 	}
-	
+
 	public DungeonRoomProvider getRoomProvider()
 	{
 		if (this.roomProvider == null)
 		{
 			this.roomProvider = this.def.createRoomProvider();
 		}
-		
+
 		return this.roomProvider;
 	}
-	
+
 	public DungeonDefinition getDefinition()
 	{
 		return this.def;
@@ -79,30 +79,30 @@ public class DungeonInstance implements Instance
 	{
 		return this.outsideEntrance;
 	}
-	
+
 	public void setOutsideEntrance(BlockPosDimension entrance)
 	{
 		this.outsideEntrance = entrance;
 	}
-	
+
 	public BlockPosDimension getInsideEntrance()
 	{
 		return this.insideEntrance;
 	}
-	
+
 	public void setInsideEntrance(BlockPosDimension entrance)
 	{
 		this.insideEntrance = entrance;
 	}
-	
+
 	@Override
 	public void write(NBTTagCompound output)
 	{
 		output.setLong("layoutSeed", this.layoutSeed);
-		
+
 		output.setTag("outsideEntrance", NBTHelper.serializeBlockPosDimension(this.outsideEntrance));
 		output.setTag("insideEntrance", NBTHelper.serializeBlockPosDimension(this.insideEntrance));
-		
+
 		output.setInteger("dimIdInside", this.dimIdInside);
 	}
 
@@ -110,10 +110,10 @@ public class DungeonInstance implements Instance
 	public void read(NBTTagCompound input)
 	{
 		this.layoutSeed = input.getLong("layoutSeed");
-		
+
 		this.outsideEntrance = NBTHelper.getBlockPosDimension(input.getCompoundTag("outsideEntrance"));
 		this.insideEntrance = NBTHelper.getBlockPosDimension(input.getCompoundTag("insideEntrance"));
-		
+
 		this.dimIdInside = input.getInteger("dimIdInside");
 	}
 

@@ -1,15 +1,9 @@
 package com.gildedgames.aether.common.capabilities.player.modules;
 
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.util.PlayerUtil;
-import net.minecraft.block.material.Material;
-import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;

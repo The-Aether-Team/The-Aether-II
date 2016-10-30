@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.companions;
 
-import com.gildedgames.aether.common.entities.companions.EntityCompanion;
+import com.gildedgames.aether.common.entities.living.companions.EntityCompanion;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

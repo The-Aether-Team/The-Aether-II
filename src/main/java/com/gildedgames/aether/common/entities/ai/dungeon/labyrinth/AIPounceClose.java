@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.entities.ai.dungeon.labyrinth;
 
 import com.gildedgames.aether.common.entities.ai.EntityAI;
 import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
-import com.gildedgames.aether.common.util.EntityUtil;
+import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.gildedgames.aether.common.util.TickTimer;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.math.BlockPos;

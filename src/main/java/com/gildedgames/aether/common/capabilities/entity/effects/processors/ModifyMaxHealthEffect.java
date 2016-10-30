@@ -6,13 +6,11 @@ import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapab
 import com.gildedgames.aether.common.capabilities.entity.effects.AbstractEffectProcessor;
 import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffects;
 import com.gildedgames.aether.common.capabilities.entity.effects.processors.ModifyMaxHealthEffect.Instance;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.List;

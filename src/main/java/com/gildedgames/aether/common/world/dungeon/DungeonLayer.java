@@ -1,7 +1,5 @@
 package com.gildedgames.aether.common.world.dungeon;
 
-import com.gildedgames.aether.common.world.dungeon.DungeonRoom;
-
 import java.awt.*;
 import java.util.List;
 
@@ -30,9 +28,15 @@ public class DungeonLayer
 		this.rect = new Rectangle();
 	}
 
-	public int smallestRoomHeight() { return this.smallestRoomHeight; }
+	public int smallestRoomHeight()
+	{
+		return this.smallestRoomHeight;
+	}
 
-	public void setSmallestRoomHeight(int smallestRoomHeight) { this.smallestRoomHeight = smallestRoomHeight; }
+	public void setSmallestRoomHeight(int smallestRoomHeight)
+	{
+		this.smallestRoomHeight = smallestRoomHeight;
+	}
 
 	public List<DungeonRoom> getRooms()
 	{
@@ -101,12 +105,12 @@ public class DungeonLayer
 
 	protected void defineWidth(int width)
 	{
-		this.rect.setSize(width, (int)this.rect.getHeight());
+		this.rect.setSize(width, (int) this.rect.getHeight());
 	}
 
 	protected void defineLength(int length)
 	{
-		this.rect.setSize((int)this.rect.getWidth(), length);
+		this.rect.setSize((int) this.rect.getWidth(), length);
 	}
 
 	protected void defineHeight(int height)
@@ -149,6 +153,9 @@ public class DungeonLayer
 		this.entranceRoom = room;
 	}
 
-	protected DungeonRoom entranceRoom() { return this.entranceRoom; }
+	protected DungeonRoom entranceRoom()
+	{
+		return this.entranceRoom;
+	}
 
 }

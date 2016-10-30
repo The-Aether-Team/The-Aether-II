@@ -1,8 +1,5 @@
 package com.gildedgames.aether.common.world.biome;
 
-import net.minecraft.world.WorldServer;
-import net.minecraft.world.gen.structure.template.TemplateManager;
-
 import java.util.List;
 
 public interface Ecosystem

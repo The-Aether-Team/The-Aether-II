@@ -45,7 +45,10 @@ public class SpawnEntry
 		return this.conditions;
 	}
 
-	public Class<? extends Entity> getEntityClass() { return this.clazz; }
+	public Class<? extends Entity> getEntityClass()
+	{
+		return this.clazz;
+	}
 
 	public int getMinGroupSize()
 	{
@@ -57,7 +60,10 @@ public class SpawnEntry
 		return this.maxGroupSize;
 	}
 
-	public float getRarityWeight() { return this.rarityWeight; }
+	public float getRarityWeight()
+	{
+		return this.rarityWeight;
+	}
 
 	public PositionSelector getPositionSelector()
 	{

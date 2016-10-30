@@ -1,10 +1,10 @@
 package com.gildedgames.aether.client;
 
-import com.gildedgames.aether.client.gui.main_menu.BossBattleOverlay;
-import com.gildedgames.aether.client.gui.main_menu.PortalOverlay;
+import com.gildedgames.aether.client.gui.menu.BossBattleOverlay;
+import com.gildedgames.aether.client.gui.menu.PortalOverlay;
 import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
-import com.gildedgames.aether.client.gui.main_menu.WorldAetherOptionsOverlay;
+import com.gildedgames.aether.client.gui.menu.WorldAetherOptionsOverlay;
 import com.gildedgames.aether.client.models.blocks.AetherBlockModels;
 import com.gildedgames.aether.client.models.SimpleModelLoader;
 import com.gildedgames.aether.client.models.blocks.GlowingBlockModel;

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.registry;
 
-import com.gildedgames.aether.common.world.features.*;
-import com.gildedgames.aether.common.world.features.placement_conditions.*;
+import com.gildedgames.aether.common.world.dimensions.aether.features.*;
+import com.gildedgames.aether.common.world.gen.templates.conditions.*;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 
@@ -55,22 +55,22 @@ public class GenerationAether
 
 	public static void init()
 	{
-		blue_skyroot_tree_1 = new WorldGenTemplate(TemplatesAether.blue_skyroot_tree_1, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		blue_skyroot_tree_2 = new WorldGenTemplate(TemplatesAether.blue_skyroot_tree_2, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		blue_skyroot_tree_3 = new WorldGenTemplate(TemplatesAether.blue_skyroot_tree_3, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+		blue_skyroot_tree_1 = new WorldGenTemplate(TemplatesAether.blue_skyroot_tree_1, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		blue_skyroot_tree_2 = new WorldGenTemplate(TemplatesAether.blue_skyroot_tree_2, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		blue_skyroot_tree_3 = new WorldGenTemplate(TemplatesAether.blue_skyroot_tree_3, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
 
-		green_skyroot_tree_1 = new WorldGenTemplate(TemplatesAether.green_skyroot_tree_1, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		green_skyroot_tree_2 = new WorldGenTemplate(TemplatesAether.green_skyroot_tree_2, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		green_skyroot_tree_3 = new WorldGenTemplate(TemplatesAether.green_skyroot_tree_3, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+		green_skyroot_tree_1 = new WorldGenTemplate(TemplatesAether.green_skyroot_tree_1, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		green_skyroot_tree_2 = new WorldGenTemplate(TemplatesAether.green_skyroot_tree_2, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		green_skyroot_tree_3 = new WorldGenTemplate(TemplatesAether.green_skyroot_tree_3, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
 
-		green_skyroot_oak_1 = new WorldGenTemplate(TemplatesAether.green_skyroot_oak_1, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		green_skyroot_oak_2 = new WorldGenTemplate(TemplatesAether.green_skyroot_oak_2, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+		green_skyroot_oak_1 = new WorldGenTemplate(TemplatesAether.green_skyroot_oak_1, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		green_skyroot_oak_2 = new WorldGenTemplate(TemplatesAether.green_skyroot_oak_2, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
 
-		golden_oak_1 = new WorldGenTemplate(TemplatesAether.golden_oak_1, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		golden_oak_2 = new WorldGenTemplate(TemplatesAether.golden_oak_2, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+		golden_oak_1 = new WorldGenTemplate(TemplatesAether.golden_oak_1, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		golden_oak_2 = new WorldGenTemplate(TemplatesAether.golden_oak_2, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
 
-		dark_blue_skyroot_oak_1 = new WorldGenTemplate(TemplatesAether.dark_blue_skyroot_oak_1, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		dark_blue_skyroot_oak_2 = new WorldGenTemplate(TemplatesAether.dark_blue_skyroot_oak_2, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+		dark_blue_skyroot_oak_1 = new WorldGenTemplate(TemplatesAether.dark_blue_skyroot_oak_1, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		dark_blue_skyroot_oak_2 = new WorldGenTemplate(TemplatesAether.dark_blue_skyroot_oak_2, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
 
 		WorldGenTemplate.CenterOffsetProcessor oak_center = new WorldGenTemplate.CenterOffsetProcessor()
 		{
@@ -103,45 +103,45 @@ public class GenerationAether
 		dark_blue_skyroot_oak_1.setCenterOffsetProcessor(oak_center);
 		dark_blue_skyroot_oak_2.setCenterOffsetProcessor(oak_center);
 
-		green_skyroot_windswept_1 = new WorldGenTemplate(TemplatesAether.green_skyroot_windswept_1, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		green_skyroot_windswept_2 = new WorldGenTemplate(TemplatesAether.green_skyroot_windswept_2, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		green_skyroot_windswept_3 = new WorldGenTemplate(TemplatesAether.green_skyroot_windswept_3, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		green_skyroot_windswept_4 = new WorldGenTemplate(TemplatesAether.green_skyroot_windswept_4, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		green_skyroot_windswept_5 = new WorldGenTemplate(TemplatesAether.green_skyroot_windswept_5, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+		green_skyroot_windswept_1 = new WorldGenTemplate(TemplatesAether.green_skyroot_windswept_1, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		green_skyroot_windswept_2 = new WorldGenTemplate(TemplatesAether.green_skyroot_windswept_2, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		green_skyroot_windswept_3 = new WorldGenTemplate(TemplatesAether.green_skyroot_windswept_3, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		green_skyroot_windswept_4 = new WorldGenTemplate(TemplatesAether.green_skyroot_windswept_4, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		green_skyroot_windswept_5 = new WorldGenTemplate(TemplatesAether.green_skyroot_windswept_5, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
 
-		large_green_skyroot_pine_1 = new WorldGenTemplate(TemplatesAether.large_green_skyroot_pine_1, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		large_green_skyroot_pine_2 = new WorldGenTemplate(TemplatesAether.large_green_skyroot_pine_2, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		large_green_skyroot_pine_3 = new WorldGenTemplate(TemplatesAether.large_green_skyroot_pine_3, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		large_green_skyroot_pine_4 = new WorldGenTemplate(TemplatesAether.large_green_skyroot_pine_4, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+		large_green_skyroot_pine_1 = new WorldGenTemplate(TemplatesAether.large_green_skyroot_pine_1, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		large_green_skyroot_pine_2 = new WorldGenTemplate(TemplatesAether.large_green_skyroot_pine_2, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		large_green_skyroot_pine_3 = new WorldGenTemplate(TemplatesAether.large_green_skyroot_pine_3, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		large_green_skyroot_pine_4 = new WorldGenTemplate(TemplatesAether.large_green_skyroot_pine_4, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
 
-		green_skyroot_pine_1 = new WorldGenTemplate(TemplatesAether.green_skyroot_pine_1, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		green_skyroot_pine_2 = new WorldGenTemplate(TemplatesAether.green_skyroot_pine_2, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		green_skyroot_pine_3 = new WorldGenTemplate(TemplatesAether.green_skyroot_pine_3, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		green_skyroot_pine_4 = new WorldGenTemplate(TemplatesAether.green_skyroot_pine_4, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		green_skyroot_pine_5 = new WorldGenTemplate(TemplatesAether.green_skyroot_pine_5, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+		green_skyroot_pine_1 = new WorldGenTemplate(TemplatesAether.green_skyroot_pine_1, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		green_skyroot_pine_2 = new WorldGenTemplate(TemplatesAether.green_skyroot_pine_2, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		green_skyroot_pine_3 = new WorldGenTemplate(TemplatesAether.green_skyroot_pine_3, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		green_skyroot_pine_4 = new WorldGenTemplate(TemplatesAether.green_skyroot_pine_4, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		green_skyroot_pine_5 = new WorldGenTemplate(TemplatesAether.green_skyroot_pine_5, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
 
-		dark_blue_skyroot_tree_1 = new WorldGenTemplate(TemplatesAether.dark_blue_skyroot_tree_1, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		dark_blue_skyroot_tree_2 = new WorldGenTemplate(TemplatesAether.dark_blue_skyroot_tree_2, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		dark_blue_skyroot_tree_3 = new WorldGenTemplate(TemplatesAether.dark_blue_skyroot_tree_3, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+		dark_blue_skyroot_tree_1 = new WorldGenTemplate(TemplatesAether.dark_blue_skyroot_tree_1, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		dark_blue_skyroot_tree_2 = new WorldGenTemplate(TemplatesAether.dark_blue_skyroot_tree_2, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		dark_blue_skyroot_tree_3 = new WorldGenTemplate(TemplatesAether.dark_blue_skyroot_tree_3, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
 
-		labyrinth_ruins_1 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_1, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		labyrinth_ruins_2 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_2, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		labyrinth_ruins_3 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_3, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		labyrinth_ruins_4 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_4, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		labyrinth_ruins_5 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_5, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+		labyrinth_ruins_1 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_1, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		labyrinth_ruins_2 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_2, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		labyrinth_ruins_3 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_3, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		labyrinth_ruins_4 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_4, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		labyrinth_ruins_5 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_5, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
 
-		labyrinth_entrance_1 = new WorldGenDungeonEntrance(TemplatesAether.labyrinth_entrance_1, new BlockPos(4, 2, 4), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+		labyrinth_entrance_1 = new WorldGenDungeonEntrance(TemplatesAether.labyrinth_entrance_1, new BlockPos(4, 2, 4), TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
 		labyrinth_entrance_underground_1 = new WorldGenDungeonEntrance(TemplatesAether.labyrinth_entrance_underground_1, new BlockPos(8, 1, 2), new UndergroundEntrancePlacementCondition(), new UndergroundPlacementCondition());
 
-		skyroot_moa_nest_tree_1 = new WorldGenMoaNest(TemplatesAether.skyroot_moa_nest_tree_1, new BlockPos(4, 5, 4), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		skyroot_moa_nest_1 = new WorldGenMoaNest(TemplatesAether.skyroot_moa_nest_1, new BlockPos(2, 0, 2), new InsideGroundPlacementCondition(), new ReplaceablePlacementCondition());
-		skyroot_moa_nest_2 = new WorldGenMoaNest(TemplatesAether.skyroot_moa_nest_2, new BlockPos(3, 0, 3), new InsideGroundPlacementCondition(), new ReplaceablePlacementCondition());
+		skyroot_moa_nest_tree_1 = new WorldGenMoaNest(TemplatesAether.skyroot_moa_nest_tree_1, new BlockPos(4, 5, 4), TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
+		skyroot_moa_nest_1 = new WorldGenMoaNest(TemplatesAether.skyroot_moa_nest_1, new BlockPos(2, 0, 2), TemplateConditions.INSIDE_GROUND, TemplateConditions.REPLACEABLE);
+		skyroot_moa_nest_2 = new WorldGenMoaNest(TemplatesAether.skyroot_moa_nest_2, new BlockPos(3, 0, 3), TemplateConditions.INSIDE_GROUND, TemplateConditions.REPLACEABLE);
 		
-		aether_portal = new WorldGenTemplate(TemplatesAether.aether_portal, new ReplaceablePlacementCondition());
-		nether_portal = new WorldGenTemplate(TemplatesAether.nether_portal, new ReplaceablePlacementCondition());
-		end_portal = new WorldGenTemplate(TemplatesAether.end_portal, new ReplaceablePlacementCondition());
+		aether_portal = new WorldGenTemplate(TemplatesAether.aether_portal, TemplateConditions.REPLACEABLE);
+		nether_portal = new WorldGenTemplate(TemplatesAether.nether_portal, TemplateConditions.REPLACEABLE);
+		end_portal = new WorldGenTemplate(TemplatesAether.end_portal, TemplateConditions.REPLACEABLE);
 
-		mysterious_henge = new WorldGenTemplate(TemplatesAether.mysterious_henge, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+		mysterious_henge = new WorldGenTemplate(TemplatesAether.mysterious_henge, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
 
 		blue_skyroot_tree = new WorldGenTemplateGroup(blue_skyroot_tree_1, blue_skyroot_tree_2, blue_skyroot_tree_3);
 		green_skyroot_tree = new WorldGenTemplateGroup(green_skyroot_tree_1, green_skyroot_tree_2, green_skyroot_tree_3);

@@ -2,18 +2,12 @@ package com.gildedgames.aether.common.crafting.recipes;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.items.IItemBreakable;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.armor.ItemLeatherGloves;
-import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeHooks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -145,10 +139,7 @@ public class RecipeUnbreakable implements IRecipe
 			}
 		}
 
-		for (int i = 0; i < stacks.length; ++i)
-		{
-			stacks[i] = list[i];
-		}
+		System.arraycopy(list, 0, stacks, 0, stacks.length);
 
 		return stacks;
 	}

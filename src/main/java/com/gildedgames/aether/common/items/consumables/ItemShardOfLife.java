@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.items.consumables;
 
-import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -25,7 +24,7 @@ public class ItemShardOfLife extends Item
 	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
 		playerIn.setActiveHand(EnumHand.MAIN_HAND);
-		return new ActionResult(EnumActionResult.SUCCESS, stack);
+		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 	}
 
 	@Override

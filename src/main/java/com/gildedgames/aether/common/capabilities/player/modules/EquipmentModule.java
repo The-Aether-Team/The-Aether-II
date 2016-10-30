@@ -5,7 +5,6 @@ import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstanc
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
@@ -21,8 +20,6 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
-
-import static net.minecraft.realms.Tezzelator.t;
 
 public class EquipmentModule extends PlayerAetherModule
 {

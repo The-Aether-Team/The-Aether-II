@@ -5,7 +5,6 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class HoldingItemRule implements EntityEffectRule
