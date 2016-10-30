@@ -8,9 +8,6 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 public class TemplatesAether
 {
-	
-	private static MinecraftServer server;
-
 	public static final TemplateManager MANAGER = new TemplateManager("structures");
 
 	public static Template blue_skyroot_tree_1, blue_skyroot_tree_2, blue_skyroot_tree_3;
@@ -46,10 +43,8 @@ public class TemplatesAether
 
 	}
 
-	public static void init(MinecraftServer server)
+	public static void init()
 	{
-		TemplatesAether.server = server;
-
 		blue_skyroot_tree_1 = register("highlands/trees/normal/blue/blue_skyroot_tree_1");
 		blue_skyroot_tree_2 = register("highlands/trees/normal/blue/blue_skyroot_tree_2");
 		blue_skyroot_tree_3 = register("highlands/trees/normal/blue/blue_skyroot_tree_3");
@@ -115,7 +110,7 @@ public class TemplatesAether
 
 	private static Template register(ResourceLocation resourceLocation)
 	{
-		return TemplatesAether.MANAGER.getTemplate(server, resourceLocation);
+		return TemplatesAether.MANAGER.getTemplate(null, resourceLocation);
 	}
 
 }

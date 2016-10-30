@@ -27,8 +27,10 @@ import com.gildedgames.aether.common.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.registry.GenerationAether;
 import com.gildedgames.aether.common.registry.TemperatureRegistry;
 import com.gildedgames.aether.common.registry.EquipmentRegistry;
+import com.gildedgames.aether.common.registry.TemplatesAether;
 import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
@@ -55,6 +57,8 @@ import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 import java.io.File;
 import java.util.Random;
@@ -96,6 +100,9 @@ public class CommonProxy
 		TileEntitiesAether.preInit();
 		EntitiesAether.preInit();
 
+		TemplatesAether.init();
+		GenerationAether.init();
+
 		this.recipeManager.preInit();
 
 		TabModule.api().getInventoryGroup().registerServerTab(new TabEquipment());
@@ -135,6 +142,11 @@ public class CommonProxy
 	}
 
 	public void postInit(FMLPostInitializationEvent event)
+	{
+
+	}
+
+	public void serverStarting(FMLServerStartingEvent event)
 	{
 
 	}

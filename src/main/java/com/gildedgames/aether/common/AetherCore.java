@@ -68,6 +68,12 @@ public class AetherCore implements IAetherServices
 	}
 
 	@EventHandler
+	public void onServerStarting(FMLServerStartingEvent event)
+	{
+		AetherCore.PROXY.serverStarting(event);
+	}
+
+	@EventHandler
 	public void onServerStopping(FMLServerStoppingEvent event)
 	{
 		DimensionsAether.onServerStopping(event);
@@ -86,7 +92,8 @@ public class AetherCore implements IAetherServices
 	public void onFMLInit(FMLInitializationEvent event)
 	{
 		AetherCore.PROXY.init(event);
-		MinecraftForge.EVENT_BUS.register(this.SPAWN_REGISTRY);
+
+		MinecraftForge.EVENT_BUS.register(SPAWN_REGISTRY);
 	}
 
 	@EventHandler
