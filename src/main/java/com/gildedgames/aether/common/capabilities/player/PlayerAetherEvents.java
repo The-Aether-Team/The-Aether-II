@@ -10,6 +10,8 @@ import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.world.island.logic.IslandData;
+import com.gildedgames.aether.common.world.island.logic.IslandSectorAccess;
 import com.gildedgames.util.core.util.TeleporterGeneric;
 import com.gildedgames.util.modules.chunk.ChunkModule;
 import com.gildedgames.util.modules.chunk.impl.hooks.BlockBitFlagChunkHook;
@@ -21,6 +23,7 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
@@ -30,6 +33,7 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -239,15 +243,24 @@ public class PlayerAetherEvents
 
 			if (bedPos == null)
 			{
-				Teleporter teleporter = new TeleporterGeneric(toWorld);
+				IslandData island = IslandSectorAccess.inst().getIslandIfOnlyOne(mp.worldObj, mp.getPosition());
 
-				CommonEvents.teleportEntity(mp, toWorld, teleporter, 0);
+				if (island != null && island.getMysteriousHengePos() != null)
+				{
+					mp.connection.setPlayerLocation(island.getMysteriousHengePos().getX(), island.getMysteriousHengePos().getY() + 1, island.getMysteriousHengePos().getZ(), 0, 0);
+				}
+				else
+				{
+					Teleporter teleporter = new TeleporterGeneric(toWorld);
 
-				BlockPos pos = toWorld.provider.getRandomizedSpawnPoint();
+					CommonEvents.teleportEntity(mp, toWorld, teleporter, 0);
 
-				mp.connection.setPlayerLocation(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
+					BlockPos pos = toWorld.provider.getRandomizedSpawnPoint();
 
-				mp.getServerWorld().updateEntityWithOptionalForce(mp, true);
+					mp.connection.setPlayerLocation(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
+
+					mp.getServerWorld().updateEntityWithOptionalForce(mp, true);
+				}
 			}
 		}
 	}
