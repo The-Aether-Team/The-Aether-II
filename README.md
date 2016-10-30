@@ -4,7 +4,7 @@ You'll gain access to exclusive rewards and snapshot builds of the Aether Rewrit
 <a href="https://patreon.com/GildedGames"><img src="https://i.imgur.com/jm7VhPG.png" height="60"></a>
 <br><br>
 
-**ATTENTION:** This availability is intended for programmers and early adopters only. In its current state, the Aether Rewrite isn't suitable for public use or human consumption. Things are missing, broken, and subject to major change. **Proceed with caution.**
+**ATTENTION:** This availability is intended for programmers and early adopters only. In its current state, the Aether Rewrite may be unstable. Content may be missing, broken, or subject to major change. **Proceed with caution.**
 
 We ask that you have existing knowledge of Minecraft modding, locating crash reports, editing configuration files, and a bit of patience if you're wishing to report issues or contribute back.
 
@@ -23,7 +23,7 @@ Please note however that due to the rapid development pace of the Aether Rewrite
 ### Permissions
 You are free to upload or share any commentary, screenshots, videos, or anything else you make of the Aether II Rewrite. Go for it!
 
-However, **you are not permitted to redistribute (upload) compiled builds** of the Aether Rewrite. This includes builds that have been released by Gilded Games publicly or for patrons, and builds you have compiled from the Git repository. It's not a very nice thing to do, and may result in your access to said builds being removed.
+However, **you are not permitted to redistribute (upload) compiled builds** of the Aether Rewrite publicly. This includes builds that have been released by Gilded Games publicly or for patrons, and builds you have compiled from the Git repository. It's not a very nice thing to do, and may result in your access to said builds being removed.
 
 ### License
 The Aether II rewrite is under the [GNU GPL v3](http://www.gnu.org/licenses/gpl-3.0.en.html) license.
