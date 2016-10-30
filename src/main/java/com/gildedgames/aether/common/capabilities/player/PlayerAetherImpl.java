@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.capabilities.player.modules.*;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.util.PlayerUtil;
+import com.gildedgames.util.core.nbt.NBTHelper;
 import com.gildedgames.util.io_manager.io.NBT;
 import com.gildedgames.util.modules.instances.InstanceModule;
 import com.gildedgames.util.modules.instances.PlayerInstances;
@@ -18,6 +19,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -53,6 +55,8 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 
 	private final BossModule bossModule;
 
+	private BlockPos deathPos;
+
 	public PlayerAetherImpl(EntityPlayer player)
 	{
 		this.player = player;
@@ -82,6 +86,16 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 	public static PlayerAetherImpl getPlayer(Entity player)
 	{
 		return (PlayerAetherImpl) player.getCapability(AetherCapabilities.PLAYER_DATA, null);
+	}
+
+	public void setDeathPos(BlockPos pos)
+	{
+		this.deathPos = pos;
+	}
+
+	public BlockPos getDeathPos()
+	{
+		return this.deathPos;
 	}
 
 	@Override
@@ -223,6 +237,8 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		tag.setTag("parachuteModule", parachuteModule);
 		tag.setTag("abilitiesModule", abilitiesModule);
 		tag.setTag("bossModule", bossModule);
+
+		tag.setTag("deathPos", NBTHelper.serializeBlockPos(this.deathPos));
 	}
 
 	@Override
@@ -237,6 +253,11 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		this.getParachuteModule().read(parachuteModule);
 		this.getAbilitiesModule().read(abilitiesModule);
 		this.getBossModule().read(bossModule);
+
+		if (tag.hasKey("deathPos"))
+		{
+			this.deathPos = NBTHelper.readBlockPos(tag.getCompoundTag("deathPos"));
+		}
 	}
 
 	@Override
@@ -291,6 +312,8 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 			{
 				instance.getEquipmentInventory().read(compound.getCompoundTag("equipment"));
 			}
+
+			instance.read(compound);
 		}
 	}
 }

@@ -80,6 +80,11 @@ public class PlayerAetherEvents
 		{
 			EntityPlayer player = aePlayer.getPlayer();
 
+			if (player instanceof EntityPlayerMP)
+			{
+				aePlayer.setDeathPos(player.getPosition());
+			}
+
 			ItemStack companionItem = aePlayer.getCompanionModule().getEquippedCompanionItem();
 
 			if (companionItem != null && companionItem.getItem() instanceof ItemDeathSeal)
@@ -221,7 +226,7 @@ public class PlayerAetherEvents
 	@SubscribeEvent
 	public static void onPlayerRespawn(PlayerRespawnEvent event)
 	{
-		IPlayerAetherCapability aePlayer = PlayerAetherImpl.getPlayer(event.player);
+		PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(event.player);
 
 		if (aePlayer != null)
 		{
@@ -243,7 +248,7 @@ public class PlayerAetherEvents
 
 			if (bedPos == null)
 			{
-				IslandData island = IslandSectorAccess.inst().getIslandIfOnlyOne(mp.worldObj, mp.getPosition());
+				IslandData island = IslandSectorAccess.inst().getIslandIfOnlyOne(mp.worldObj, aePlayer.getDeathPos());
 
 				if (island != null && island.getMysteriousHengePos() != null)
 				{
