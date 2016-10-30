@@ -1,15 +1,27 @@
 package com.gildedgames.aether.common.world.island.logic;
 
-public class IslandSector
+import com.gildedgames.util.core.nbt.NBTHelper;
+import com.gildedgames.util.io_manager.io.NBT;
+import com.google.common.collect.Lists;
+import net.minecraft.nbt.NBTTagCompound;
+
+import java.util.List;
+
+public class IslandSector implements NBT
 {
 
 	public final static int CHUNK_WIDTH_PER_SECTOR = 20;
 
-	private final int sectorX, sectorY;
+	private int sectorX, sectorY;
 
-	private final long seed;
+	private long seed;
 
-	private final IslandData[] data;
+	private IslandData[] data;
+
+	private IslandSector()
+	{
+
+	}
 
 	public IslandSector(int sectorX, int sectorY, long seed, IslandData... data)
 	{
@@ -54,4 +66,25 @@ public class IslandSector
 		return this.seed;
 	}
 
+	@Override
+	public void write(NBTTagCompound tag)
+	{
+		tag.setInteger("x", this.getSectorX());
+		tag.setInteger("y", this.getSectorY());
+
+		tag.setLong("s", this.getSeed());
+
+		NBTHelper.fullySerializeArray("d", this.data, tag);
+	}
+
+	@Override
+	public void read(NBTTagCompound tag)
+	{
+		this.sectorX = tag.getInteger("x");
+		this.sectorY = tag.getInteger("y");
+
+		this.seed = tag.getLong("s");
+
+		this.data = NBTHelper.fullyDeserializeArray("d", IslandData[].class, tag);
+	}
 }

@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world.island.logic;
 
 import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
 
-import java.awt.*;
+import java.awt.Rectangle;
 import java.util.Random;
 
 public class IslandSectorFactory
@@ -25,43 +25,17 @@ public class IslandSectorFactory
 			int width = 320;
 			int height = 320;
 
-			int x = (sectorArea * sectorX) + Math.max(0, rand.nextInt(sectorArea) - width);
-			int y = (sectorArea * sectorY) + Math.max(0, rand.nextInt(sectorArea) - height);
+			int x = (sectorArea * sectorX);
+			int y = (sectorArea * sectorY);
 
 			Rectangle bounds = new Rectangle(x, y, width, height);
-
-			//int type = rand.nextInt(4);
-
-			/*switch(type)
-			{
-				case 0:
-				{
-					set = IslandBiomeSets.HIGHLANDS;
-					break;
-				}
-				case 1:
-				{
-					set = IslandBiomeSets.ENCHANTED_HIGHLANDS;
-					break;
-				}
-				case 2:
-				{
-					set = IslandBiomeSets.FROSTPINE;
-					break;
-				}
-				case 3:
-				{
-					set = IslandBiomeSets.BLIGHTED_HIGHLANDS;
-					break;
-				}
-			}*/
 
 			IslandData islandData = new IslandData(bounds, 10, 100 + rand.nextInt(20), BiomesAether.HIGHLANDS);
 
 			data[i] = islandData;
 		}
 
-		IslandSectorFactory.separate(data, sectorX, sectorY, 40);
+		//IslandSectorFactory.separate(data, sectorX, sectorY, 40);
 
 		IslandSector sector = new IslandSector(sectorX, sectorY, seed, data);
 

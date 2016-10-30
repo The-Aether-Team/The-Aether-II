@@ -39,6 +39,8 @@ public class TemplatesAether
 
 	public static Template aether_portal, nether_portal, end_portal;
 
+	public static Template mysterious_henge;
+
 	private TemplatesAether()
 	{
 
@@ -102,6 +104,8 @@ public class TemplatesAether
 		aether_portal = register("aether_portal");
 		nether_portal = register("nether_portal");
 		end_portal = register("end_portal");
+
+		mysterious_henge = register("mysterious_henge");
 	}
 
 	private static Template register(String resource)

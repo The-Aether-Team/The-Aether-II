@@ -12,6 +12,10 @@ import com.gildedgames.aether.common.world.features.*;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.features.aerclouds.WorldGenPurpleAercloud;
 import com.gildedgames.aether.common.world.features.trees.WorldGenOrangeTree;
+import com.gildedgames.aether.common.world.island.logic.IslandData;
+import com.gildedgames.aether.common.world.island.logic.IslandSector;
+import com.gildedgames.aether.common.world.island.logic.IslandSectorAccess;
+import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
@@ -23,6 +27,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 
+import java.util.List;
 import java.util.Random;
 
 public class BiomeAetherDecorator
@@ -97,6 +102,61 @@ public class BiomeAetherDecorator
 
 		int count;
 
+		int sectorX = IslandSectorAccess.inst().getSectorCoord(chunkX);
+		int sectorY = IslandSectorAccess.inst().getSectorCoord(chunkZ);
+
+		IslandSector sector = IslandSectorAccess.inst().attemptToLoadSector(world, sectorX, sectorY);
+
+		if (sector == null)
+		{
+			return;
+		}
+
+		final List<IslandData> islandsToGenerate = Lists.newArrayList();
+
+		for(x = 0; x < 16; x++)
+		{
+			for(z = 0; z < 16; z++)
+			{
+				IslandData island = sector.getIslandDataAtBlockPos(pos.getX() + x, pos.getZ() + z);
+
+				if (island == null || islandsToGenerate.contains(island))
+				{
+					continue;
+				}
+
+				islandsToGenerate.add(island);
+			}
+		}
+
+		boolean oneIslandOnly = islandsToGenerate.size() == 1;
+		IslandData island = null;
+
+		if (oneIslandOnly)
+		{
+			island = islandsToGenerate.get(0);
+		}
+
+		// Mysterious Henge
+		if (oneIslandOnly && island.getMysteriousHengePos() == null && random.nextBoolean())
+		{
+			for (int i = 0; i < 10; i++)
+			{
+				x = random.nextInt(16) + 8;
+				z = random.nextInt(16) + 8;
+
+				BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
+
+				boolean generated = GenerationAether.mysterious_henge.generate(world, random, pos2, true);
+
+				if (generated)
+				{
+					island.setMysteriousHengePos(pos2);
+					break;
+				}
+			}
+		}
+
 		//if (random.nextInt(5) == 0)
 		{
 			x = random.nextInt(16) + 8;
@@ -110,14 +170,23 @@ public class BiomeAetherDecorator
 		}
 
 		// Labyrinth Entrance
-		if (random.nextInt(5) == 0)
+		if (oneIslandOnly && island.getLabyrinthEntrancePos() == null && random.nextInt(5) == 0)
 		{
-			x = random.nextInt(16) + 8;
-			z = random.nextInt(16) + 8;
+			for (int i = 0; i < 10; i++)
+			{
+				x = random.nextInt(16) + 8;
+				z = random.nextInt(16) + 8;
 
-			BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
+				BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
 
-			GenerationAether.labyrinth_entrance.generate(world, random, pos2);
+				boolean generated = GenerationAether.labyrinth_entrance.generate(world, random, pos2);
+
+				if (generated)
+				{
+					island.setLabyrinthEntrancePos(pos2);
+					break;
+				}
+			}
 		}
 
 		// Moa Nests

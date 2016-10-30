@@ -34,6 +34,8 @@ public class GenerationAether
 
 	public static WorldGenTemplate aether_portal, nether_portal, end_portal;
 
+	public static WorldGenTemplate mysterious_henge;
+
 	public static WorldGenTemplateGroup green_skyroot_windswept, labyrinth_ruins;
 
 	public static WorldGenTemplateGroup large_green_skyroot_pine, green_skyroot_pine;
@@ -138,6 +140,8 @@ public class GenerationAether
 		aether_portal = new WorldGenTemplate(TemplatesAether.aether_portal, new ReplaceablePlacementCondition());
 		nether_portal = new WorldGenTemplate(TemplatesAether.nether_portal, new ReplaceablePlacementCondition());
 		end_portal = new WorldGenTemplate(TemplatesAether.end_portal, new ReplaceablePlacementCondition());
+
+		mysterious_henge = new WorldGenTemplate(TemplatesAether.mysterious_henge, new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
 
 		blue_skyroot_tree = new WorldGenTemplateGroup(blue_skyroot_tree_1, blue_skyroot_tree_2, blue_skyroot_tree_3);
 		green_skyroot_tree = new WorldGenTemplateGroup(green_skyroot_tree_1, green_skyroot_tree_2, green_skyroot_tree_3);

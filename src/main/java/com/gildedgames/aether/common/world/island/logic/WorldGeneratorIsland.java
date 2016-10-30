@@ -39,8 +39,8 @@ public class WorldGeneratorIsland
 		{
 			for (double z = 0; z < 16; z++)
 			{
-				double stepX = (double) posX - data.getBounds().getMinX() + x;
-				double stepZ = (double) posZ - data.getBounds().getMinY() + z;
+				double stepX = (double) posX - data.getBounds().getX() + x;
+				double stepZ = (double) posZ - data.getBounds().getY() + z;
 
 				double nx = (stepX) / width - 0.5 + (double) sector.getSectorX(); // normalize coords
 				double nz = (stepZ) / length - 0.5 + (double) sector.getSectorY();

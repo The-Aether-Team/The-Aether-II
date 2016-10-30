@@ -3,11 +3,13 @@ package com.gildedgames.aether.common.world.island.logic;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.util.core.UtilModule;
+import com.gildedgames.util.core.nbt.NBTHelper;
 import com.gildedgames.util.core.util.ChunkMap;
 import com.gildedgames.util.core.util.GGHelper;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
@@ -57,6 +59,43 @@ public class IslandSectorAccess
 	public int getSectorCoord(int chunkCoord)
 	{
 		return (chunkCoord / IslandSector.CHUNK_WIDTH_PER_SECTOR) - (chunkCoord < 0 ? 1 : 0);
+	}
+
+	public IslandData getIslandIfOnlyOne(World world, BlockPos pos)
+	{
+		int chunkX = pos.getX() >> 4;
+		int chunkZ = pos.getZ() >> 4;
+
+		int sectorX = IslandSectorAccess.inst().getSectorCoord(chunkX);
+		int sectorY = IslandSectorAccess.inst().getSectorCoord(chunkZ);
+
+		IslandSector sector = IslandSectorAccess.inst().attemptToLoadSector(world, sectorX, sectorY);
+
+		if (sector == null)
+		{
+			return null;
+		}
+
+		final List<IslandData> islands = Lists.newArrayList();
+
+		for(int x = 0; x < 16; x++)
+		{
+			for(int z = 0; z < 16; z++)
+			{
+				IslandData island = sector.getIslandDataAtBlockPos(pos.getX() + x, pos.getZ() + z);
+
+				if (island == null || islands.contains(island))
+				{
+					continue;
+				}
+
+				islands.add(island);
+			}
+		}
+
+		boolean oneIslandOnly = islands.size() == 1;
+
+		return oneIslandOnly ? islands.get(0) : null;
 	}
 
 	public IslandSector attemptToLoadSector(World world, int sectorX, int sectorY)
@@ -212,10 +251,7 @@ public class IslandSectorAccess
 
 		NBTTagCompound tag = new NBTTagCompound();
 
-		tag.setInteger("x", sector.getSectorX());
-		tag.setInteger("y", sector.getSectorY());
-
-		tag.setLong("s", sector.getSeed());
+		NBTHelper.fullySerialize("s", sector, tag);
 
 		GGHelper.writeNBTToFile(tag, file);
 	}
@@ -229,7 +265,7 @@ public class IslandSectorAccess
 		{
 			NBTTagCompound tag = GGHelper.readNBTFromFile(file);
 
-			IslandSector sector = IslandSectorFactory.create(tag.getInteger("x"), tag.getInteger("y"), tag.getLong("s"));
+			IslandSector sector = NBTHelper.fullyDeserialize("s", tag);
 
 			return sector;
 		}

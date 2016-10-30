@@ -38,6 +38,8 @@ import com.gildedgames.aether.common.world.chunk.PlacementFlagProvider;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceFactory;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceHandler;
+import com.gildedgames.aether.common.world.island.logic.IslandData;
+import com.gildedgames.aether.common.world.island.logic.IslandSector;
 import com.gildedgames.util.io.Instantiator;
 import com.gildedgames.util.modules.chunk.ChunkModule;
 import com.gildedgames.util.modules.instances.InstanceModule;
@@ -107,6 +109,8 @@ public class CommonProxy
 		AetherCore.srl().registerSerialization(5, ThirdStageSlider.class, new Instantiator(ThirdStageSlider.class));
 		AetherCore.srl().registerSerialization(6, BreakFloorActionSlider.class, new Instantiator(BreakFloorActionSlider.class));
 		AetherCore.srl().registerSerialization(7, SimpleBossManager.class, new Instantiator(SimpleBossManager.class));
+		AetherCore.srl().registerSerialization(8, IslandSector.class, new Instantiator(IslandSector.class));
+		AetherCore.srl().registerSerialization(9, IslandData.class, new Instantiator(IslandData.class));
 	}
 
 	public void init(FMLInitializationEvent event)
