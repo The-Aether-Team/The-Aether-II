@@ -248,6 +248,8 @@ public class PlayerAetherEvents
 				if (island != null && island.getMysteriousHengePos() != null)
 				{
 					mp.connection.setPlayerLocation(island.getMysteriousHengePos().getX(), island.getMysteriousHengePos().getY() + 1, island.getMysteriousHengePos().getZ(), 0, 0);
+
+					mp.getServerWorld().updateEntityWithOptionalForce(mp, true);
 				}
 				else
 				{
