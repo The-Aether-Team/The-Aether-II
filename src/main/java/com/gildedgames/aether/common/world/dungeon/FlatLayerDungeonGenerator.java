@@ -163,7 +163,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 			}
 			else
 			{
-				tiles = this.getTiles(rooms, Collections.<DungeonRoom>emptyList(), layer, prevLayer);
+				tiles = this.getTiles(rooms, Collections.emptyList(), layer, prevLayer);
 			}
 
 			layer.setRooms(rooms);

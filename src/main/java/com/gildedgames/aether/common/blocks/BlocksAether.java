@@ -123,50 +123,15 @@ public class BlocksAether
 
 	public static final BlockHolystoneFurnace holystone_furnace = new BlockHolystoneFurnace();
 
-	public static final BlockCustomDoor skyroot_door = new BlockCustomDoor(Material.WOOD, new Supplier<Item>()
-	{
-		@Override
-		public Item get()
-		{
-			return ItemsAether.skyroot_door;
-		}
-	}, SoundType.WOOD);
+	public static final BlockCustomDoor skyroot_door = new BlockCustomDoor(Material.WOOD, () -> ItemsAether.skyroot_door, SoundType.WOOD);
 
-	public static final BlockCustomDoor arkenium_door = new BlockCustomDoor(Material.IRON, new Supplier<Item>()
-	{
-		@Override
-		public Item get()
-		{
-			return ItemsAether.arkenium_door;
-		}
-	}, SoundType.METAL);
+	public static final BlockCustomDoor arkenium_door = new BlockCustomDoor(Material.IRON, () -> ItemsAether.arkenium_door, SoundType.METAL);
 
-	public static final Block blightwillow_door = new BlockCustomDoor(Material.WOOD, new Supplier<Item>()
-	{
-		@Override
-		public Item get()
-		{
-			return ItemsAether.blightwillow_door;
-		}
-	}, SoundType.WOOD).setLightLevel(0.6F);
+	public static final Block blightwillow_door = new BlockCustomDoor(Material.WOOD, () -> ItemsAether.blightwillow_door, SoundType.WOOD).setLightLevel(0.6F);
 
-	public static final BlockCustomDoor earthshifter_door = new BlockCustomDoor(Material.WOOD, new Supplier<Item>()
-	{
-		@Override
-		public Item get()
-		{
-			return ItemsAether.earthshifter_door;
-		}
-	}, SoundType.WOOD);
+	public static final BlockCustomDoor earthshifter_door = new BlockCustomDoor(Material.WOOD, () -> ItemsAether.earthshifter_door, SoundType.WOOD);
 
-	public static final BlockCustomDoor frostpine_door = new BlockCustomDoor(Material.WOOD, new Supplier<Item>()
-	{
-		@Override
-		public Item get()
-		{
-			return ItemsAether.frostpine_door;
-		}
-	}, SoundType.WOOD);
+	public static final BlockCustomDoor frostpine_door = new BlockCustomDoor(Material.WOOD, () -> ItemsAether.frostpine_door, SoundType.WOOD);
 
 	public static final BlockSkyrootChest skyroot_chest = new BlockSkyrootChest();
 
@@ -206,13 +171,7 @@ public class BlocksAether
 
 	public static final BlockLabyrinthBridge labyrinth_bridge = new BlockLabyrinthBridge();
 
-	public static final BlockBed skyroot_bed = new BlockCustomBed(new Supplier<Item>()
-	{
-		@Override public Item get()
-		{
-			return ItemsAether.skyroot_bed;
-		}
-	}, SoundType.WOOD);
+	public static final BlockBed skyroot_bed = new BlockCustomBed(() -> ItemsAether.skyroot_bed, SoundType.WOOD);
 
 	public static final Block
 			labyrinth_glowing_pillar = new BlockLabyrinthPillar(),

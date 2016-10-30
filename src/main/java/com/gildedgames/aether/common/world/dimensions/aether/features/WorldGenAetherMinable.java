@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.world.dimensions.aether.features;
 
-import com.google.common.base.Predicate;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
@@ -18,14 +17,14 @@ public class WorldGenAetherMinable extends WorldGenerator
 	/** The number of blocks to generate. */
 	private final int numberOfBlocks;
 
-	private final Predicate<IBlockState> predicate;
+	private final BlockMatcher predicate;
 
 	public WorldGenAetherMinable(IBlockState state, int blockCount)
 	{
 		this(state, blockCount, BlockMatcher.forBlock(Blocks.STONE));
 	}
 
-	public WorldGenAetherMinable(IBlockState state, int blockCount, Predicate<IBlockState> p_i45631_3_)
+	public WorldGenAetherMinable(IBlockState state, int blockCount, BlockMatcher p_i45631_3_)
 	{
 		this.oreBlock = state;
 		this.numberOfBlocks = blockCount;

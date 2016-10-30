@@ -72,28 +72,24 @@ public class GenerationAether
 		dark_blue_skyroot_oak_1 = new WorldGenTemplate(TemplatesAether.dark_blue_skyroot_oak_1, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
 		dark_blue_skyroot_oak_2 = new WorldGenTemplate(TemplatesAether.dark_blue_skyroot_oak_2, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
 
-		WorldGenTemplate.CenterOffsetProcessor oak_center = new WorldGenTemplate.CenterOffsetProcessor()
+		WorldGenTemplate.CenterOffsetProcessor oak_center = rotation ->
 		{
-			@Override
-			public BlockPos getOffset(Rotation rotation)
+			if (rotation == Rotation.CLOCKWISE_90)
 			{
-				if (rotation == Rotation.CLOCKWISE_90)
-				{
-					return new BlockPos(-1, 0, 0);
-				}
-
-				if (rotation == Rotation.COUNTERCLOCKWISE_90)
-				{
-					return new BlockPos(0, 0, -1);
-				}
-
-				if (rotation == Rotation.CLOCKWISE_180)
-				{
-					return new BlockPos(-1, 0, -1);
-				}
-
-				return new BlockPos(0, 0, 0);
+				return new BlockPos(-1, 0, 0);
 			}
+
+			if (rotation == Rotation.COUNTERCLOCKWISE_90)
+			{
+				return new BlockPos(0, 0, -1);
+			}
+
+			if (rotation == Rotation.CLOCKWISE_180)
+			{
+				return new BlockPos(-1, 0, -1);
+			}
+
+			return new BlockPos(0, 0, 0);
 		};
 
 		golden_oak_1.setCenterOffsetProcessor(oak_center);

@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.util;
 
-import com.google.common.base.Supplier;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -13,6 +12,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 import java.util.Random;
+import java.util.function.Supplier;
 
 public class BlockCustomDoor extends BlockDoor
 {

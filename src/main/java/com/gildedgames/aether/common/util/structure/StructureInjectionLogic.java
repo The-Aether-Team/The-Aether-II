@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.util.structure;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
@@ -11,7 +10,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class StructureInjectionLogic
@@ -62,13 +60,9 @@ public class StructureInjectionLogic
 
 	private static List<TileEntityStructure> filterRelatedCornerBlocks(final TileEntityStructure te, List<TileEntityStructure> p_184415_1_)
 	{
-		Iterable<TileEntityStructure> iterable = Iterables.filter(p_184415_1_, new Predicate<TileEntityStructure>()
-		{
-			public boolean apply(@Nullable TileEntityStructure p_apply_1_)
-			{
-				return p_apply_1_.getMode() == TileEntityStructure.Mode.CORNER && te.getName().equals(p_apply_1_.getName());
-			}
-		});
+		Iterable<TileEntityStructure> iterable = Iterables.filter(p_184415_1_, p_apply_1_ ->
+				p_apply_1_.getMode() == TileEntityStructure.Mode.CORNER && te.getName().equals(p_apply_1_.getName()));
+
 		return Lists.newArrayList(iterable);
 	}
 

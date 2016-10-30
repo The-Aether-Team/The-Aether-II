@@ -52,14 +52,7 @@ public class ModifyDamageEffect extends AbstractEffectProcessor<ModifyDamageEffe
 			this.getAttributes().setBoolean("floatRanges", floatRanges);
 
 			this.modifier = (RangedAttributeModifier) new RangedAttributeModifier("Extra Attack Damage", min, max, floatRanges, new Random(), 0).setSaved(false);
-			this.elementalDamageSource = new ElementalDamageSource(elementalState, new Supplier<Double>()
-			{
-				@Override
-				public Double get()
-				{
-					return Instance.this.modifier.getLastAmount();
-				}
-			});
+			this.elementalDamageSource = new ElementalDamageSource(elementalState, Instance.this.modifier::getLastAmount);
 		}
 
 		public AttributeModifier getModifier()

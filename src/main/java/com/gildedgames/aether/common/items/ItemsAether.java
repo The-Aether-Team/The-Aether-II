@@ -272,29 +272,11 @@ public class ItemsAether
 
 	public static final Item skyroot_sign = new ItemSkyrootSign();
 	
-	public static final Item aether_portal_frame = new ItemTemplatePlacer(new Supplier<WorldGenTemplate>()
-	{
-		@Override public WorldGenTemplate get()
-		{
-			return GenerationAether.aether_portal;
-		}
-	});
+	public static final Item aether_portal_frame = new ItemTemplatePlacer(() -> GenerationAether.aether_portal);
 
-	public static final Item nether_portal_frame = new ItemTemplatePlacer(new Supplier<WorldGenTemplate>()
-	{
-		@Override public WorldGenTemplate get()
-		{
-			return GenerationAether.nether_portal;
-		}
-	});
+	public static final Item nether_portal_frame = new ItemTemplatePlacer(() -> GenerationAether.nether_portal);
 
-	public static final Item end_portal_frame = new ItemTemplatePlacer(new Supplier<WorldGenTemplate>()
-	{
-		@Override public WorldGenTemplate get()
-		{
-			return GenerationAether.end_portal;
-		}
-	});
+	public static final Item end_portal_frame = new ItemTemplatePlacer(() -> GenerationAether.end_portal);
 
 	public static final Item aechor_petal = new Item();
 
@@ -325,25 +307,17 @@ public class ItemsAether
 			soaring_stone = new ItemCompanion(EntitySoaringWisp.class);
 
 	public static final ItemCompanion frostpine_totem = new ItemCompanion(EntityFrostpineTotem.class),
-			kraisith_capsule = new ItemCompanion(EntityKraisith.class, new InformationProvider()
+			kraisith_capsule = new ItemCompanion(EntityKraisith.class, (stack, player, tooltip, advanced) ->
 			{
-				@Override
-				public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
-				{
-					tooltip.add(TextFormatting.RED + "\u2022 " + "10 Health");
-					tooltip.add(TextFormatting.BLUE + "\u2022 " + "0.5 Attack Damage");
-					tooltip.add(TextFormatting.BLUE + "\u2022 " + "Slows Enemies");
-				}
+				tooltip.add(TextFormatting.RED + "\u2022 " + "10 Health");
+				tooltip.add(TextFormatting.BLUE + "\u2022 " + "0.5 Attack Damage");
+				tooltip.add(TextFormatting.BLUE + "\u2022 " + "Slows Enemies");
 			}),
 			orb_of_arkenzus = new ItemCompanion(EntityShadeOfArkenzus.class),
-			fangrin_capsule = new ItemCompanion(EntityFangrin.class, new InformationProvider()
+			fangrin_capsule = new ItemCompanion(EntityFangrin.class, (stack, player, tooltip, advanced) ->
 			{
-				@Override
-				public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
-				{
-					tooltip.add(TextFormatting.RED + "\u2022 " + "10 Health");
-					tooltip.add(TextFormatting.BLUE + "\u2022 " + "1.5 Attack Damage");
-				}
+				tooltip.add(TextFormatting.RED + "\u2022 " + "10 Health");
+				tooltip.add(TextFormatting.BLUE + "\u2022 " + "1.5 Attack Damage");
 			}),
 			death_seal = new ItemDeathSeal(EntityNexSpirit.class);
 
@@ -470,67 +444,27 @@ public class ItemsAether
 
 	public static final Item glamoured_cockatrice_keratin = new Item();
 
-	public static final Item irradiated_chunk = new ItemIrradiated(new RandomItemSelector(new Constraint()
+	public static final Item irradiated_chunk = new ItemIrradiated(new RandomItemSelector(stack -> !(stack.getItem() instanceof ItemIrradiated))),
+			irradiated_sword = new ItemIrradiated(new RandomItemSelector(stack -> stack.getUnlocalizedName().contains("sword") && !(stack.getItem() instanceof ItemIrradiated))),
+			irradiated_armor = new ItemIrradiated(new RandomItemSelector(stack -> stack.getItem() instanceof ItemArmor)),
+			irradiated_tool = new ItemIrradiated(new RandomItemSelector(stack -> stack.getItem() instanceof ItemTool)),
+			irradiated_ring = new ItemIrradiated(new RandomItemSelector(stack ->
 			{
-				@Override
-				public boolean accept(ItemStack stack)
-				{
-					return !(stack.getItem() instanceof ItemIrradiated);
-				}
-			})),
-			irradiated_sword = new ItemIrradiated(new RandomItemSelector(new Constraint()
-			{
-				@Override
-				public boolean accept(ItemStack stack)
-				{
-					return stack.getUnlocalizedName().contains("sword") && !(stack.getItem() instanceof ItemIrradiated);
-				}
-			})),
-			irradiated_armor = new ItemIrradiated(new RandomItemSelector(new Constraint()
-			{
-				@Override
-				public boolean accept(ItemStack stack)
-				{
-					return stack.getItem() instanceof ItemArmor;
-				}
-			})),
-			irradiated_tool = new ItemIrradiated(new RandomItemSelector(new Constraint()
-			{
-				@Override
-				public boolean accept(ItemStack stack)
-				{
-					return stack.getItem() instanceof ItemTool;
-				}
-			})),
-			irradiated_ring = new ItemIrradiated(new RandomItemSelector(new Constraint()
-			{
-				@Override
-				public boolean accept(ItemStack stack)
-				{
-					IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
+				IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
 
-					return props != null && props.getEquipmentType() == ItemEquipmentType.RING;
-				}
+				return props != null && props.getEquipmentType() == ItemEquipmentType.RING;
 			})),
-			irradiated_neckwear = new ItemIrradiated(new RandomItemSelector(new Constraint()
+			irradiated_neckwear = new ItemIrradiated(new RandomItemSelector(stack ->
 			{
-				@Override
-				public boolean accept(ItemStack stack)
-				{
-					IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
+				IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
 
-					return props != null && props.getEquipmentType() == ItemEquipmentType.NECKWEAR;
-				}
+				return props != null && props.getEquipmentType() == ItemEquipmentType.NECKWEAR;
 			})),
-			irradiated_charm = new ItemIrradiated(new RandomItemSelector(new Constraint()
+			irradiated_charm = new ItemIrradiated(new RandomItemSelector(stack ->
 			{
-				@Override
-				public boolean accept(ItemStack stack)
-				{
-					IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
+				IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
 
-					return props != null && props.getEquipmentType() == ItemEquipmentType.CHARM;
-				}
+				return props != null && props.getEquipmentType() == ItemEquipmentType.CHARM;
 			})),
 			irradiated_dust = new ItemIrradiatedVisuals();
 
@@ -1060,7 +994,7 @@ public class ItemsAether
 
 			public <I extends EntityEffectInstance> Effects add(EntityEffectProcessor<I> processor, I instance)
 			{
-				Pair<EntityEffectProcessor, EntityEffectInstance> effectPair = Pair.of((EntityEffectProcessor) processor, (EntityEffectInstance) instance);
+				Pair<EntityEffectProcessor, EntityEffectInstance> effectPair = Pair.of((EntityEffectProcessor) processor, instance);
 
 				this.pairs.add(effectPair);
 

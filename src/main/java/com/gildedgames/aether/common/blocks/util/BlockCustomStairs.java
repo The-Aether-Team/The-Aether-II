@@ -14,14 +14,7 @@ public class BlockCustomStairs extends BlockStairs
 
 		final Block block = state.getBlock();
 
-		BlocksAether.applyPostRegistration(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				BlockCustomStairs.this.setHarvestLevel(block.getHarvestTool(state), block.getHarvestLevel(state));
-			}
-		});
+		BlocksAether.applyPostRegistration(() -> BlockCustomStairs.this.setHarvestLevel(block.getHarvestTool(state), block.getHarvestLevel(state)));
 	}
 
 }

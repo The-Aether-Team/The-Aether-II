@@ -26,15 +26,7 @@ public class HoppingMoveHelper extends EntityMoveHelper
 
 	public HoppingMoveHelper(final EntityLiving entity, SoundEvent hoppingSound)
 	{
-		this(entity, hoppingSound, new HopTimer()
-		{
-
-			@Override public int jumpDelay()
-			{
-				return entity.getRNG().nextInt(20) + 10;
-			}
-
-		});
+		this(entity, hoppingSound, () -> entity.getRNG().nextInt(20) + 10);
 	}
 
 	public void setDirection(float p_179920_1_)

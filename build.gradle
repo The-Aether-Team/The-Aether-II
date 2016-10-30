@@ -20,8 +20,8 @@ ext.config = loadConfig(file('build.properties'))
 ext.repo = Grgit.open()
 
 allprojects {
-	sourceCompatibility = 1.7
-	targetCompatibility = 1.7
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
 }
 
 version = "${config.mod_version}"

@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.util;
 
-import com.google.common.base.Supplier;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -14,6 +13,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.Random;
+import java.util.function.Supplier;
 
 public class BlockCustomBed extends BlockBed
 {
@@ -36,7 +36,7 @@ public class BlockCustomBed extends BlockBed
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return state.getValue(PART) == BlockBed.EnumPartType.HEAD ? null : this.bedItem.get();
+		return state.getValue(PART) == EnumPartType.HEAD ? null : this.bedItem.get();
 	}
 
 	@Override

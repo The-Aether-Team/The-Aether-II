@@ -3,7 +3,10 @@ package com.gildedgames.aether.common.entities.living.companions;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.entities.ai.companion.EntityAICompanionFollow;
 import com.google.common.base.Optional;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -65,7 +68,7 @@ public abstract class EntityCompanion extends EntityCreature
 	{
 		super.entityInit();
 
-		this.dataManager.register(OWNER_UUID, Optional.<UUID>absent());
+		this.dataManager.register(OWNER_UUID, Optional.absent());
 	}
 
 	@Override
@@ -118,7 +121,7 @@ public abstract class EntityCompanion extends EntityCreature
 
 	public void setOwner(EntityPlayer owner)
 	{
-		this.dataManager.set(OWNER_UUID, owner == null ? Optional.<UUID>absent() : Optional.of(owner.getUniqueID()));
+		this.dataManager.set(OWNER_UUID, owner == null ? Optional.absent() : Optional.of(owner.getUniqueID()));
 	}
 
 	public EntityPlayer getOwner()

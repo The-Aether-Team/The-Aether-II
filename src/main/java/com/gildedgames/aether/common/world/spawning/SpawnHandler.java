@@ -118,7 +118,7 @@ public class SpawnHandler implements NBT
 
 		if (!this.activeAreas.containsKey(world.provider.getDimension()))
 		{
-			this.activeAreas.put(world.provider.getDimension(), new ChunkMap<SpawnArea>());
+			this.activeAreas.put(world.provider.getDimension(), new ChunkMap<>());
 		}
 
 		ChunkMap<SpawnArea> areas = this.activeAreas.get(world.provider.getDimension());

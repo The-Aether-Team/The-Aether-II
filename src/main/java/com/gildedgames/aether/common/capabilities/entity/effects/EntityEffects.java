@@ -105,7 +105,7 @@ public class EntityEffects implements IEntityEffectsCapability
 			}
 		}
 
-		EffectPool<I> pool = new EffectPool<>(processor, new ArrayList<I>());
+		EffectPool<I> pool = new EffectPool<>(processor, new ArrayList<>());
 
 		this.effects.add(pool);
 

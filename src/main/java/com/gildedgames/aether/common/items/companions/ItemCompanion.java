@@ -37,13 +37,9 @@ public class ItemCompanion extends Item
 
 	public ItemCompanion(Class<? extends EntityCompanion> companionClass)
 	{
-		this(companionClass, new InformationProvider()
+		this(companionClass, (stack, player, tooltip, advanced) ->
 		{
-			@Override
-			public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
-			{
 
-			}
 		});
 	}
 

@@ -34,14 +34,7 @@ public class BlockCustomSlab extends Block
 
 		final Block block = state.getBlock();
 
-		BlocksAether.applyPostRegistration(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				BlockCustomSlab.this.setHarvestLevel(block.getHarvestTool(state), block.getHarvestLevel(state));
-			}
-		});
+		BlocksAether.applyPostRegistration(() -> BlockCustomSlab.this.setHarvestLevel(block.getHarvestTool(state), block.getHarvestLevel(state)));
 
 		this.setLightOpacity(0);
 

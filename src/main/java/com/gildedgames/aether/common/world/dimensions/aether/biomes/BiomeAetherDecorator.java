@@ -32,6 +32,7 @@ import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 
 import java.util.List;
 import java.util.Random;
+import java.util.function.Predicate;
 
 public class BiomeAetherDecorator
 {
