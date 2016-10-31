@@ -136,7 +136,7 @@ public class TeleporterAether extends Teleporter implements NBT
 
 			final IBlockState block = this.worldServerInstance.getBlockState(pos);
 
-			if (GGHelper.isSolid(block, this.worldServerInstance, pos))
+			if (GGHelper.isSolid(block, this.worldServerInstance, pos) && block != BlocksAether.quicksoil.getDefaultState())
 			{
 				isSolid = true;
 				break;
