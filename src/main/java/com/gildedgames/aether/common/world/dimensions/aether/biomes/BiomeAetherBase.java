@@ -119,11 +119,10 @@ public abstract class BiomeAetherBase extends Biome
 				{
 					if (decoration.shouldGenerate(random))
 					{
-						x = random.nextInt(16) + 8;
-						z = random.nextInt(16) + 8;
+						BlockPos placeAt = decoration.findPositionToPlace(world, random, pos);
 
-						double temperatureDiff = ecosystem.hasDesiredTemperature() ? Math.abs(ecosystem.getDesiredTemperature() - temperatureValue[z + (x * 24)]) : 0;
-						double moistureDiff = ecosystem.hasDesiredMoisture() ? Math.abs(ecosystem.getDesiredMoisture() - moistureValue[z + (x * 24)]) : 0;
+						double temperatureDiff = ecosystem.hasDesiredTemperature() ? Math.abs(ecosystem.getDesiredTemperature() - temperatureValue[placeAt.getZ() + (placeAt.getX() * 24)]) : 0;
+						double moistureDiff = ecosystem.hasDesiredMoisture() ? Math.abs(ecosystem.getDesiredMoisture() - moistureValue[placeAt.getZ() + (placeAt.getX() * 24)]) : 0;
 
 						int requiredChance = (int) ((temperatureDiff + moistureDiff) * 100 * 1.5);
 
@@ -134,8 +133,6 @@ public abstract class BiomeAetherBase extends Biome
 
 						if (random.nextInt(100) > requiredChance)
 						{
-							BlockPos placeAt = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
-
 							decoration.getGenerator().generate(world, random, placeAt);
 						}
 					}
@@ -151,12 +148,9 @@ public abstract class BiomeAetherBase extends Biome
 				{
 					if (decoration.shouldGenerate(random))
 					{
-						x = random.nextInt(16) + 8;
-						z = random.nextInt(16) + 8;
-
 						if (random.nextInt(100) < lowestRequiredChance)
 						{
-							BlockPos placeAt = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
+							BlockPos placeAt = decoration.findPositionToPlace(world, random, pos);
 
 							decoration.getGenerator().generate(world, random, placeAt);
 						}
