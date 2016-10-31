@@ -93,9 +93,9 @@ public abstract class BiomeAetherBase extends Biome
 			return;
 		}
 
-		int x, z;
-
 		double scale = 600D;
+
+		int x, z;
 
 		double[] temperatureValue = new double[576];
 		double[] moistureValue = new double[576];
@@ -121,8 +121,11 @@ public abstract class BiomeAetherBase extends Biome
 					{
 						BlockPos placeAt = decoration.findPositionToPlace(world, random, pos);
 
-						double temperatureDiff = ecosystem.hasDesiredTemperature() ? Math.abs(ecosystem.getDesiredTemperature() - temperatureValue[placeAt.getZ() + (placeAt.getX() * 24)]) : 0;
-						double moistureDiff = ecosystem.hasDesiredMoisture() ? Math.abs(ecosystem.getDesiredMoisture() - moistureValue[placeAt.getZ() + (placeAt.getX() * 24)]) : 0;
+						x = placeAt.getX() - pos.getX();
+						z = placeAt.getZ() - pos.getZ();
+
+						double temperatureDiff = ecosystem.hasDesiredTemperature() ? Math.abs(ecosystem.getDesiredTemperature() - temperatureValue[z + (x * 24)]) : 0;
+						double moistureDiff = ecosystem.hasDesiredMoisture() ? Math.abs(ecosystem.getDesiredMoisture() - moistureValue[z + (x * 24)]) : 0;
 
 						int requiredChance = (int) ((temperatureDiff + moistureDiff) * 100 * 1.5);
 
