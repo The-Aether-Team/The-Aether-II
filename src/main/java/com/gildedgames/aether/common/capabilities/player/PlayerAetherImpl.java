@@ -22,6 +22,7 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
@@ -50,6 +51,8 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 
 	private final BossModule bossModule;
 
+	private final KeepInventoryModule keepInventoryModule;
+
 	private BlockPos deathPos;
 
 	public PlayerAetherImpl(EntityPlayer player)
@@ -65,6 +68,7 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		this.parachuteModule = new ParachuteModule(this);
 		this.equipmentModule = new EquipmentModule(this, this.equipmentInventory);
 		this.bossModule = new BossModule(this);
+		this.keepInventoryModule = new KeepInventoryModule(this);
 
 		this.modules.add(this.companionModule);
 		this.modules.add(this.abilitiesModule);
@@ -76,6 +80,8 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		this.modules.add(this.equipmentModule);
 		this.modules.add(new ExtendedReachModule(this));
 		this.modules.add(new DungeonModule(this));
+
+		this.modules.add(this.keepInventoryModule);
 	}
 
 	public static PlayerAetherImpl getPlayer(Entity player)
@@ -130,7 +136,7 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 	}
 
 	@Override
-	public void onDrops(LivingDropsEvent event)
+	public void onDrops(PlayerDropsEvent event)
 	{
 		for (PlayerAetherModule module : this.modules)
 		{
@@ -222,16 +228,19 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		NBTTagCompound parachuteModule = new NBTTagCompound();
 		NBTTagCompound abilitiesModule = new NBTTagCompound();
 		NBTTagCompound bossModule = new NBTTagCompound();
+		NBTTagCompound keepInventoryModule = new NBTTagCompound();
 
 		this.getTeleportingModule().write(teleportingModule);
 		this.getParachuteModule().write(parachuteModule);
 		this.getAbilitiesModule().write(abilitiesModule);
 		this.getBossModule().write(bossModule);
+		this.keepInventoryModule.write(keepInventoryModule);
 
 		tag.setTag("teleportingModule", teleportingModule);
 		tag.setTag("parachuteModule", parachuteModule);
 		tag.setTag("abilitiesModule", abilitiesModule);
 		tag.setTag("bossModule", bossModule);
+		tag.setTag("keepInventoryModule", keepInventoryModule);
 
 		tag.setTag("deathPos", NBTHelper.serializeBlockPos(this.deathPos));
 	}
@@ -243,11 +252,13 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		NBTTagCompound parachuteModule = tag.getCompoundTag("parachuteModule");
 		NBTTagCompound abilitiesModule = tag.getCompoundTag("abilitiesModule");
 		NBTTagCompound bossModule = tag.getCompoundTag("bossModule");
+		NBTTagCompound keepInventoryModule = tag.getCompoundTag("keepInventoryModule");
 
 		this.getTeleportingModule().read(teleportingModule);
 		this.getParachuteModule().read(parachuteModule);
 		this.getAbilitiesModule().read(abilitiesModule);
 		this.getBossModule().read(bossModule);
+		this.keepInventoryModule.read(keepInventoryModule);
 
 		if (tag.hasKey("deathPos"))
 		{

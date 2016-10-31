@@ -6,46 +6,27 @@ import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcess
 import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
+import com.gildedgames.aether.common.capabilities.player.ItemSlot;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
 import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffects;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
+import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.DimensionType;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
 public class EquipmentModule extends PlayerAetherModule
 {
-
-	public static class ItemSlot
-	{
-		private final int slot;
-
-		private final ItemStack stack;
-
-		public ItemSlot(int slot, ItemStack stack)
-		{
-			this.slot = slot;
-			this.stack = stack;
-		}
-
-		public int getSlot()
-		{
-			return this.slot;
-		}
-
-		public ItemStack getStack()
-		{
-			return this.stack;
-		}
-	}
 
 	private InventoryEquipment equipment;
 
@@ -195,9 +176,11 @@ public class EquipmentModule extends PlayerAetherModule
 	}
 
 	@Override
-	public void onDrops(LivingDropsEvent event)
+	public void onDrops(PlayerDropsEvent event)
 	{
-		if (!this.getPlayer().getEntityWorld().getGameRules().getBoolean("keepInventory"))
+		DimensionType type = event.getEntityPlayer().getEntityWorld().provider.getDimensionType();
+
+		if (!this.getPlayer().getEntityWorld().getGameRules().getBoolean("keepInventory") && type != DimensionsAether.AETHER && type != DimensionsAether.SLIDER_LABYRINTH)
 		{
 			this.getPlayer().captureDrops = true;
 

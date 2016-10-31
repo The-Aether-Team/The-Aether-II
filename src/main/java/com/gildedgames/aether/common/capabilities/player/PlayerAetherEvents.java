@@ -14,6 +14,7 @@ import com.gildedgames.aether.common.world.dimensions.aether.island.logic.Island
 import com.gildedgames.util.core.util.TeleporterGeneric;
 import com.gildedgames.util.modules.chunk.ChunkModule;
 import com.gildedgames.util.modules.chunk.impl.hooks.BlockBitFlagChunkHook;
+import com.gildedgames.util.modules.ui.util.input.BooleanInput;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
@@ -22,6 +23,7 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
@@ -31,6 +33,7 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -106,7 +109,7 @@ public class PlayerAetherEvents
 	}
 
 	@SubscribeEvent
-	public static void onDrops(LivingDropsEvent event)
+	public static void onDrops(PlayerDropsEvent event)
 	{
 		IPlayerAetherCapability aePlayer = PlayerAetherImpl.getPlayer(event.getEntity());
 

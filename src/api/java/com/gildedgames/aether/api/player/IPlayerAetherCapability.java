@@ -2,14 +2,13 @@ package com.gildedgames.aether.api.player;
 
 import com.gildedgames.aether.api.player.companions.IPlayerCompanionManager;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
-import com.gildedgames.util.io_manager.io.NBT;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
@@ -27,7 +26,7 @@ public interface IPlayerAetherCapability
 
 	void onDeath(LivingDeathEvent event);
 
-	void onDrops(LivingDropsEvent event);
+	void onDrops(PlayerDropsEvent event);
 
 	void onHurt(LivingHurtEvent event);
 

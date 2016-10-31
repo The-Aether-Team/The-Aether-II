@@ -70,8 +70,8 @@ public class SimpleBossManager<T extends Entity> implements IBossManager<T>
 	@Override public void read(NBTTagCompound input)
 	{
 		this.name = input.getString("name");
-		this.stages = NBTHelper.fullyDeserializeList("stages", input);
-		this.actions = NBTHelper.fullyDeserializeList("actions", input);
+		this.stages = NBTHelper.fullyDeserializeList("stages", input, this.stages);
+		this.actions = NBTHelper.fullyDeserializeList("actions", input, this.actions);
 	}
 
 	@Override public void updateStagesAndActions()

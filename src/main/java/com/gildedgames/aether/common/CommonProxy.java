@@ -11,6 +11,7 @@ import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.CapabilityManagerAether;
 import com.gildedgames.aether.common.capabilities.entity.properties.EntityProperties;
+import com.gildedgames.aether.common.capabilities.player.ItemSlot;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherEvents;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.crafting.RecipesAether;
@@ -117,6 +118,7 @@ public class CommonProxy
 		AetherCore.srl().registerSerialization(7, SimpleBossManager.class, new Instantiator(SimpleBossManager.class));
 		AetherCore.srl().registerSerialization(8, IslandSector.class, new Instantiator(IslandSector.class));
 		AetherCore.srl().registerSerialization(9, IslandData.class, new Instantiator(IslandData.class));
+		AetherCore.srl().registerSerialization(10, ItemSlot.class, new Instantiator(ItemSlot.class));
 	}
 
 	public void init(FMLInitializationEvent event)

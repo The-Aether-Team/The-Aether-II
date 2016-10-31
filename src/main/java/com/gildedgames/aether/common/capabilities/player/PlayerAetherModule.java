@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
@@ -49,7 +50,7 @@ public abstract class PlayerAetherModule implements IPlayerAetherCapability
 	}
 
 	@Override
-	public void onDrops(LivingDropsEvent event)
+	public void onDrops(PlayerDropsEvent event)
 	{
 
 	}
