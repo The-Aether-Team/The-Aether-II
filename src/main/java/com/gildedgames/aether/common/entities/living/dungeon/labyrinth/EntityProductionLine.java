@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.entities.living.dungeon.labyrinth;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.aether.common.world.dungeon.DungeonDefinitions;
-import com.gildedgames.util.core.nbt.NBTHelper;
+import com.gildedgames.aether.common.util.io.NBTHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;

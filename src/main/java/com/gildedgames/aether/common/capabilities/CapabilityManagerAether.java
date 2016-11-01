@@ -1,11 +1,13 @@
 package com.gildedgames.aether.common.capabilities;
 
+import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.chunk.IChunkAttachmentCapability;
 import com.gildedgames.aether.api.capabilites.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityPropertiesCapability;
 import com.gildedgames.aether.api.capabilites.entity.spawning.ISpawningInfo;
+import com.gildedgames.aether.api.capabilites.instances.IPlayerInstances;
 import com.gildedgames.aether.api.capabilites.items.IItemBreakable;
 import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
 import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
@@ -30,13 +32,19 @@ import com.gildedgames.aether.common.world.chunk.hooks.capabilities.ChunkAttachm
 import com.gildedgames.aether.common.world.chunk.hooks.capabilities.PlacementFlagCapability;
 import com.gildedgames.aether.common.world.chunk.hooks.capabilities.PlacementFlagProvider;
 import com.gildedgames.aether.common.world.chunk.hooks.events.AttachCapabilitiesChunkEvent;
+import com.gildedgames.aether.common.capabilities.instances.InstanceRegistryImpl;
+import com.gildedgames.aether.common.capabilities.instances.PlayerInstances;
+import com.gildedgames.aether.common.capabilities.instances.PlayerInstancesProvider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -57,6 +65,7 @@ public class CapabilityManagerAether
 		CapabilityManager.INSTANCE.register(ISpawningInfo.class, new EntitySpawningInfo.Storage(), EntitySpawningInfo.class);
 		CapabilityManager.INSTANCE.register(IPlacementFlagCapability.class, new PlacementFlagCapability.Storage(), PlacementFlagCapability.class);
 		CapabilityManager.INSTANCE.register(IChunkAttachmentCapability.class, new ChunkAttachmentCapability.Storage(), ChunkAttachmentCapability.class);
+		CapabilityManager.INSTANCE.register(IPlayerInstances.class, new PlayerInstances.Storage(), PlayerInstances.class);
 	}
 
 	@SubscribeEvent
@@ -137,6 +146,7 @@ public class CapabilityManagerAether
 		if (event.getEntity() instanceof EntityPlayer)
 		{
 			event.addCapability(AetherCore.getResource("PlayerData"), new PlayerAetherProvider(new PlayerAetherImpl((EntityPlayer) event.getEntity())));
+			event.addCapability(AetherCore.getResource("PlayerInstances"), new PlayerInstancesProvider((EntityPlayer) event.getEntity()));
 		}
 	}
 
@@ -185,4 +195,22 @@ public class CapabilityManagerAether
 			pool.save(event);
 		}
 	}
+
+	@SubscribeEvent
+	public static void onPlayerClone(PlayerEvent.Clone event)
+	{
+		IPlayerInstances oldPlayer = AetherAPI.instances().getPlayer(event.getOriginal());
+
+		if (oldPlayer != null)
+		{
+			IPlayerInstances newPlayer = AetherAPI.instances().getPlayer((EntityPlayer) event.getEntity());
+
+			Capability.IStorage<IPlayerInstances> storage = AetherCapabilities.PLAYER_INSTANCES.getStorage();
+
+			NBTBase state = storage.writeNBT(AetherCapabilities.PLAYER_INSTANCES, oldPlayer, null);
+
+			storage.readNBT(AetherCapabilities.PLAYER_INSTANCES, newPlayer, null, state);
+		}
+	}
+
 }

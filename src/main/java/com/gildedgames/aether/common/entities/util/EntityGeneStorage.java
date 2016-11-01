@@ -50,12 +50,6 @@ public class EntityGeneStorage implements IGeneStorage<NBTTagCompound, NBTTagCom
 	}
 
 	@Override
-	public boolean shouldRetransform()
-	{
-		return this.entity.shouldRetransform();
-	}
-
-	@Override
 	public void setShouldRetransform(boolean flag)
 	{
 		this.entity.setShouldRetransform(flag);

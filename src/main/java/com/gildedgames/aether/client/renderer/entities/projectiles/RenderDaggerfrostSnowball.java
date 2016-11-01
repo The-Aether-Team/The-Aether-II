@@ -1,7 +1,7 @@
 package com.gildedgames.aether.client.renderer.entities.projectiles;
 
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
-import com.gildedgames.util.core.client.SpriteGeneric;
+import com.gildedgames.aether.client.util.SpriteGeneric;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;

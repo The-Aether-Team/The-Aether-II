@@ -1,24 +1,24 @@
 package com.gildedgames.aether.client.gui.menu;
 
+import com.gildedgames.aether.client.ui.UiManager;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.util.core.gui.util.GuiFactory;
-import com.gildedgames.util.core.gui.util.MinecraftAssetLocation;
-import com.gildedgames.util.modules.ui.UiModule;
-import com.gildedgames.util.modules.ui.common.GuiFrame;
-import com.gildedgames.util.modules.ui.data.AssetLocation;
-import com.gildedgames.util.modules.ui.data.rect.Dim2D;
-import com.gildedgames.util.modules.ui.event.view.MouseEventGui;
-import com.gildedgames.util.modules.ui.graphics.Graphics2D;
-import com.gildedgames.util.modules.ui.input.ButtonState;
-import com.gildedgames.util.modules.ui.input.InputProvider;
-import com.gildedgames.util.modules.ui.input.MouseButton;
-import com.gildedgames.util.modules.ui.input.MouseInput;
-import com.gildedgames.util.modules.ui.input.MouseInputPool;
-import com.gildedgames.util.modules.ui.util.Button;
-import com.gildedgames.util.modules.ui.util.InputHelper;
-import com.gildedgames.util.modules.ui.util.Text;
-import com.gildedgames.util.modules.ui.util.TextureElement;
-import com.gildedgames.util.modules.ui.util.decorators.ScrollingGui;
+import com.gildedgames.aether.client.ui.minecraft.util.GuiFactory;
+import com.gildedgames.aether.client.ui.minecraft.util.MinecraftAssetLocation;
+import com.gildedgames.aether.client.ui.common.GuiFrame;
+import com.gildedgames.aether.client.ui.data.AssetLocation;
+import com.gildedgames.aether.client.ui.data.rect.Dim2D;
+import com.gildedgames.aether.client.ui.event.view.MouseEventGui;
+import com.gildedgames.aether.client.ui.graphics.Graphics2D;
+import com.gildedgames.aether.client.ui.input.ButtonState;
+import com.gildedgames.aether.client.ui.input.InputProvider;
+import com.gildedgames.aether.client.ui.input.MouseButton;
+import com.gildedgames.aether.client.ui.input.MouseInput;
+import com.gildedgames.aether.client.ui.input.MouseInputPool;
+import com.gildedgames.aether.client.ui.util.Button;
+import com.gildedgames.aether.client.ui.util.InputHelper;
+import com.gildedgames.aether.client.ui.util.Text;
+import com.gildedgames.aether.client.ui.util.TextureElement;
+import com.gildedgames.aether.client.ui.util.decorators.ScrollingGui;
 
 import java.awt.*;
 
@@ -51,7 +51,7 @@ public class AetherMenu extends GuiFrame
 			@Override
 			protected void onTrue(InputProvider input, MouseInputPool pool)
 			{
-				UiModule.locate().close();
+				UiManager.inst().close();
 			}
 
 			@Override

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.dimensions.aether.island.logic;
 
-import com.gildedgames.util.core.nbt.NBTHelper;
-import com.gildedgames.util.io_manager.io.NBT;
+import com.gildedgames.aether.common.util.io.NBTHelper;
+import com.gildedgames.aether.api.util.NBT;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;

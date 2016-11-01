@@ -1,14 +1,14 @@
 package com.gildedgames.aether.common.world.dungeon;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.util.TemplatePrimer;
+import com.gildedgames.aether.common.util.structure.TemplatePrimer;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
-import com.gildedgames.aether.common.world.util.Connection;
-import com.gildedgames.aether.common.world.util.ConnectionComparer;
-import com.gildedgames.aether.common.world.util.ConvexHull;
-import com.gildedgames.aether.common.world.util.RoomAreaComparer;
-import com.gildedgames.aether.common.world.util.TriangulationCell;
-import com.gildedgames.util.core.util.BlockPosDimension;
+import com.gildedgames.aether.common.world.util.delaunay_triangulation.Connection;
+import com.gildedgames.aether.common.world.util.delaunay_triangulation.ConnectionComparer;
+import com.gildedgames.aether.common.world.util.delaunay_triangulation.ConvexHull;
+import com.gildedgames.aether.common.world.util.delaunay_triangulation.RoomAreaComparer;
+import com.gildedgames.aether.common.world.util.delaunay_triangulation.TriangulationCell;
+import com.gildedgames.aether.api.util.BlockPosDimension;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;

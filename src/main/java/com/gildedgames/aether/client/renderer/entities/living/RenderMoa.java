@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
-import com.gildedgames.util.core.client.SpriteGeneric;
+import com.gildedgames.aether.client.util.SpriteGeneric;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;

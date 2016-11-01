@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceHandler;
-import com.gildedgames.util.core.util.ChunkPrimerDefaultState;
+import com.gildedgames.aether.common.world.util.ChunkPrimerDefaultState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;

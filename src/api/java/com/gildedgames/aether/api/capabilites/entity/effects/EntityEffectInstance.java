@@ -3,7 +3,7 @@ package com.gildedgames.aether.api.capabilites.entity.effects;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**
- * An instance of an {@link EntityEffectProcessor} containing the item's special characteristics.
+ * An instances of an {@link EntityEffectProcessor} containing the item's special characteristics.
  */
 public class EntityEffectInstance
 {
@@ -53,7 +53,7 @@ public class EntityEffectInstance
 
 	/**
 	 * Used internally to clone special traits.
-	 * @return A clone of this instance.
+	 * @return A clone of this instances.
 	 */
 	public EntityEffectInstance cloneInstance()
 	{

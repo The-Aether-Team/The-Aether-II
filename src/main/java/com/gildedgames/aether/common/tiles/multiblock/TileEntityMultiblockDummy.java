@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.tiles.multiblock;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.tiles.util.TileEntitySynced;
-import com.gildedgames.util.core.nbt.NBTHelper;
+import com.gildedgames.aether.common.util.io.NBTHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

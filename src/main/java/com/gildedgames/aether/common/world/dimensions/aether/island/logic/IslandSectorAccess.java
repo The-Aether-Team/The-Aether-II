@@ -2,10 +2,8 @@ package com.gildedgames.aether.common.world.dimensions.aether.island.logic;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
-import com.gildedgames.util.core.UtilModule;
-import com.gildedgames.util.core.nbt.NBTHelper;
-import com.gildedgames.util.core.util.ChunkMap;
-import com.gildedgames.util.core.util.GGHelper;
+import com.gildedgames.aether.common.util.io.NBTHelper;
+import com.gildedgames.aether.common.world.util.ChunkMap;
 import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -48,7 +46,7 @@ public class IslandSectorAccess
 	{
 		String sectorKey = IslandSectorAccess.createSectorKey(sectorX, sectorY);
 
-		File file = new File(UtilModule.getWorldDirectory(), "//data/island_sectors/" + sectorKey + ".dat");
+		File file = new File(AetherCore.getWorldDirectory(), "//data/island_sectors/" + sectorKey + ".dat");
 
 		return file;
 	}
@@ -250,7 +248,7 @@ public class IslandSectorAccess
 
 		NBTHelper.fullySerialize("s", sector, tag);
 
-		GGHelper.writeNBTToFile(tag, file);
+		NBTHelper.writeNBTToFile(tag, file);
 	}
 
 	@Nullable
@@ -260,7 +258,7 @@ public class IslandSectorAccess
 
 		if (file.exists())
 		{
-			NBTTagCompound tag = GGHelper.readNBTFromFile(file);
+			NBTTagCompound tag = NBTHelper.readNBTFromFile(file);
 
 			IslandSector sector = NBTHelper.fullyDeserialize("s", tag);
 

@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.capabilities.player;
 
-import com.gildedgames.util.core.nbt.NBTHelper;
-import com.gildedgames.util.io_manager.io.NBT;
+import com.gildedgames.aether.api.util.NBT;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 

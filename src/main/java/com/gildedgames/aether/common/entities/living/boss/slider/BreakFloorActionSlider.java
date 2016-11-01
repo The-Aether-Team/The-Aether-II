@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.capabilites.entity.boss.BossStageAction;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.util.sliding.SlidingHorizontalMoveHelper;
 import com.gildedgames.aether.common.util.TickTimer;
-import com.gildedgames.util.core.nbt.NBTHelper;
+import com.gildedgames.aether.common.util.io.NBTHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;

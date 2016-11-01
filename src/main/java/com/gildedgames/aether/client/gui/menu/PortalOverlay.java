@@ -1,11 +1,11 @@
 package com.gildedgames.aether.client.gui.menu;
 
+import com.gildedgames.aether.client.ui.input.InputProvider;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.modules.TeleportingModule;
-import com.gildedgames.util.modules.ui.common.GuiFrame;
-import com.gildedgames.util.modules.ui.graphics.Graphics2D;
-import com.gildedgames.util.modules.ui.input.*;
+import com.gildedgames.aether.client.ui.common.GuiFrame;
+import com.gildedgames.aether.client.ui.graphics.Graphics2D;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;

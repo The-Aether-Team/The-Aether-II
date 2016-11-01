@@ -17,7 +17,7 @@ import com.gildedgames.aether.common.items.tools.ItemAetherTool;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.tiles.TileEntityLabyrinthBridge;
 import com.gildedgames.aether.common.util.TickTimer;
-import com.gildedgames.util.core.nbt.NBTHelper;
+import com.gildedgames.aether.common.util.io.NBTHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;

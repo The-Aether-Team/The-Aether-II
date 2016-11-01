@@ -1,13 +1,13 @@
 package com.gildedgames.aether.common.world.dungeon.instance;
 
-import com.gildedgames.util.core.util.TeleporterGeneric;
-import com.gildedgames.util.modules.instances.InstanceFactory;
-import com.gildedgames.util.modules.instances.InstanceHandler;
+import com.gildedgames.aether.api.capabilites.instances.IInstanceHandler;
+import com.gildedgames.aether.common.world.util.TeleporterGeneric;
+import com.gildedgames.aether.api.capabilites.instances.IInstanceFactory;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
-public class DungeonInstanceFactory implements InstanceFactory<DungeonInstance>
+public class DungeonInstanceFactory implements IInstanceFactory<DungeonInstance>
 {
 
 	private DimensionType dimensionType;
@@ -18,7 +18,7 @@ public class DungeonInstanceFactory implements InstanceFactory<DungeonInstance>
 	}
 
 	@Override
-	public DungeonInstance createInstance(int dimId, InstanceHandler<DungeonInstance> instanceHandler)
+	public DungeonInstance createInstance(int dimId, IInstanceHandler instanceHandler)
 	{
 		return new DungeonInstance(dimId, instanceHandler);
 	}

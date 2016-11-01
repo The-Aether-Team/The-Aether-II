@@ -1,20 +1,25 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.capabilites.instances.IInstanceFactory;
+import com.gildedgames.aether.api.capabilites.instances.IInstanceRegistry;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.api.registry.cooler.ITemperatureRegistry;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentProperties;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
+import com.gildedgames.aether.api.registry.tab.ITabRegistry;
 import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.CapabilityManagerAether;
 import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffectsEventHooks;
 import com.gildedgames.aether.common.capabilities.entity.properties.EntityProperties;
+import com.gildedgames.aether.common.capabilities.instances.InstanceHandler;
 import com.gildedgames.aether.common.capabilities.player.ItemSlot;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherEvents;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.containers.tab.TabRegistryImpl;
 import com.gildedgames.aether.common.crafting.RecipesAether;
 import com.gildedgames.aether.common.entities.BossProcessor;
 import com.gildedgames.aether.common.entities.EntitiesAether;
@@ -43,9 +48,8 @@ import com.gildedgames.aether.common.world.dimensions.aether.island.logic.Island
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceFactory;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceHandler;
-import com.gildedgames.util.io.Instantiator;
-import com.gildedgames.util.modules.instances.InstanceModule;
-import com.gildedgames.util.modules.tab.TabModule;
+import com.gildedgames.aether.common.util.io.Instantiator;
+import com.gildedgames.aether.common.capabilities.instances.InstanceRegistryImpl;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -71,6 +75,10 @@ public class CommonProxy
 	private final IEquipmentRegistry equipmentRegistry = new EquipmentRegistry();
 
 	private final ITemperatureRegistry coolerRegistry = new TemperatureRegistry();
+
+	private final ITabRegistry tabRegistry = new TabRegistryImpl();
+
+	private final IInstanceRegistry instanceRegistry = new InstanceRegistryImpl();
 
 	private DungeonInstanceHandler dungeonInstanceHandler;
 
@@ -101,8 +109,8 @@ public class CommonProxy
 
 		this.recipeManager.preInit();
 
-		TabModule.api().getInventoryGroup().registerServerTab(new TabEquipment());
-		TabModule.api().getInventoryGroup().registerServerTab(new TabBugReport());
+		AetherAPI.tabs().getInventoryGroup().registerServerTab(new TabEquipment());
+		AetherAPI.tabs().getInventoryGroup().registerServerTab(new TabBugReport());
 
 		AetherCore.srl().registerSerialization(0, DungeonInstance.class, new Instantiator(DungeonInstance.class));
 		AetherCore.srl().registerSerialization(1, MoaGenePool.class, new Instantiator(MoaGenePool.class));
@@ -133,7 +141,7 @@ public class CommonProxy
 
 		DungeonInstanceFactory factory = new DungeonInstanceFactory(DimensionsAether.SLIDER_LABYRINTH);
 
-		this.dungeonInstanceHandler = new DungeonInstanceHandler(InstanceModule.INSTANCE.createInstanceHandler(factory));
+		//this.dungeonInstanceHandler = new DungeonInstanceHandler(AetherAPI.instances().createAndRegisterInstanceHandler(factory));
 	}
 
 	public void postInit(FMLPostInitializationEvent event)
@@ -221,6 +229,16 @@ public class CommonProxy
 	public ITemperatureRegistry getCoolerRegistry()
 	{
 		return this.coolerRegistry;
+	}
+
+	public ITabRegistry getTabRegistry()
+	{
+		return this.tabRegistry;
+	}
+
+	public IInstanceRegistry getInstanceRegistry()
+	{
+		return this.instanceRegistry;
 	}
 
 	public void setExtendedReachDistance(EntityPlayer entity, float distance)

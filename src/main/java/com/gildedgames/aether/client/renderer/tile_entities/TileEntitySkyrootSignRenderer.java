@@ -18,7 +18,7 @@ public class TileEntitySkyrootSignRenderer extends TileEntitySpecialRenderer<Til
 {
 	private static final ResourceLocation SIGN_TEXTURE = new ResourceLocation("aether:textures/tile_entities/skyroot_sign.png");
 
-	/** The ModelSign instance for use in this renderer */
+	/** The ModelSign instances for use in this renderer */
 	private final ModelSign model = new ModelSign();
 
 	@Override

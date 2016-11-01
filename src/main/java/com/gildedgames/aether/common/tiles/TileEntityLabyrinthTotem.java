@@ -1,18 +1,19 @@
 package com.gildedgames.aether.common.tiles;
 
+import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.client.sound.objects.LabyrinthTotemSound;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.tiles.multiblock.TileEntityMultiblockController;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceHandler;
-import com.gildedgames.util.core.UtilModule;
-import com.gildedgames.util.core.util.BlockPosDimension;
-import com.gildedgames.util.modules.instances.IPlayerInstances;
-import com.gildedgames.util.modules.instances.Instance;
-import com.gildedgames.util.modules.instances.InstanceModule;
-import com.gildedgames.util.modules.instances.networking.packet.PacketRegisterDimension;
+import com.gildedgames.aether.api.util.BlockPosDimension;
+import com.gildedgames.aether.api.capabilites.instances.IPlayerInstances;
+import com.gildedgames.aether.api.capabilites.instances.Instance;
+import com.gildedgames.aether.common.capabilities.instances.InstanceRegistryImpl;
+import com.gildedgames.aether.common.network.packets.PacketRegisterDimension;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
@@ -70,7 +71,7 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 
 		DungeonInstanceHandler handler = AetherCore.PROXY.getDungeonInstanceHandler();
 
-		IPlayerInstances hook = InstanceModule.INSTANCE.getPlayer(player);
+		IPlayerInstances hook = AetherAPI.instances().getPlayer(player);
 
 		if (hook.getInstance() instanceof Instance)
 		{
@@ -88,7 +89,7 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 
 				if (interactingPlayer instanceof EntityPlayerMP)
 				{
-					UtilModule.NETWORK.sendTo(new PacketRegisterDimension(DimensionsAether.SLIDER_LABYRINTH, inst.getDimIdInside()), (EntityPlayerMP)interactingPlayer);
+					NetworkingAether.sendPacketToPlayer(new PacketRegisterDimension(DimensionsAether.SLIDER_LABYRINTH, inst.getDimIdInside()), (EntityPlayerMP)interactingPlayer);
 				}
 
 				handler.teleportToInst(player, inst);
@@ -100,7 +101,7 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 
 			if (interactingPlayer instanceof EntityPlayerMP)
 			{
-				UtilModule.NETWORK.sendTo(new PacketRegisterDimension(DimensionsAether.SLIDER_LABYRINTH, inst.getDimIdInside()), (EntityPlayerMP)interactingPlayer);
+				NetworkingAether.sendPacketToPlayer(new PacketRegisterDimension(DimensionsAether.SLIDER_LABYRINTH, inst.getDimIdInside()), (EntityPlayerMP)interactingPlayer);
 			}
 
 			handler.teleportToInst(player, inst);

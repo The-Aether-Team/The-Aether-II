@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.genes;
 
-import com.gildedgames.util.io_manager.io.IO;
+import com.gildedgames.aether.api.util.IO;
 
 public interface IGeneStorage<I, O> extends IO<I, O>
 {
@@ -16,8 +16,6 @@ public interface IGeneStorage<I, O> extends IO<I, O>
 	void setFatherSeed(int seed);
 
 	void setMotherSeed(int seed);
-
-	boolean shouldRetransform();
 
 	void setShouldRetransform(boolean flag);
 

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.util;
 
-import com.gildedgames.util.io_manager.io.NBT;
+import com.gildedgames.aether.api.util.NBT;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class TickTimer implements NBT

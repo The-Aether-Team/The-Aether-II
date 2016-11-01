@@ -1,8 +1,10 @@
 package com.gildedgames.aether.api;
 
+import com.gildedgames.aether.api.capabilites.instances.IInstanceRegistry;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.api.registry.cooler.ITemperatureRegistry;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
+import com.gildedgames.aether.api.registry.tab.ITabRegistry;
 
 public class AetherAPI
 {
@@ -26,6 +28,10 @@ public class AetherAPI
 		return AetherAPI.services().getTemperatureRegistry();
 	}
 
+	public static ITabRegistry tabs() { return AetherAPI.services().getTabRegistry(); }
+
+	public static IInstanceRegistry instances() { return AetherAPI.services().getInstanceRegistry(); }
+
 	public static void init(IAetherServices services)
 	{
 		AetherAPI.services = services;
@@ -41,7 +47,7 @@ public class AetherAPI
 			}
 			catch (IllegalAccessException | NoSuchFieldException | ClassNotFoundException e)
 			{
-				throw new RuntimeException("Couldn't get the running instance of the Aether", e);
+				throw new RuntimeException("Couldn't get the running instances of the Aether", e);
 			}
 
 			if (AetherAPI.services == null)

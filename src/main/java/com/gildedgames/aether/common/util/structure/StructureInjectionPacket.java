@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.util.structure;
 
-import com.gildedgames.util.core.io.MessageHandlerServer;
+import com.gildedgames.aether.common.network.MessageHandlerServer;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

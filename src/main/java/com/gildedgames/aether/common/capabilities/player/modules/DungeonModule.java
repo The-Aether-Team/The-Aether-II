@@ -1,11 +1,12 @@
 package com.gildedgames.aether.common.capabilities.player.modules;
 
+import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.capabilites.instances.IPlayerInstances;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
-import com.gildedgames.util.io_manager.io.NBT;
-import com.gildedgames.util.modules.instances.*;
+import com.gildedgames.aether.api.util.NBT;
 import net.minecraft.block.BlockTorch;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.text.TextComponentString;
@@ -31,7 +32,7 @@ public class DungeonModule extends PlayerAetherModule
 		{
 			EntityPlayerMP player = (EntityPlayerMP) this.getPlayer();
 
-			IPlayerInstances playerInstances = InstanceModule.INSTANCE.getPlayer(player);
+			IPlayerInstances playerInstances = AetherAPI.instances().getPlayer(player);
 			NBT nbt = playerInstances.getInstance();
 
 			if (nbt instanceof DungeonInstance)
@@ -64,7 +65,7 @@ public class DungeonModule extends PlayerAetherModule
 		{
 			EntityPlayerMP player = (EntityPlayerMP)this.getPlayer();
 
-			IPlayerInstances playerInstances = InstanceModule.INSTANCE.getPlayer(player);
+			IPlayerInstances playerInstances = AetherAPI.instances().getPlayer(player);
 			NBT nbt = playerInstances.getInstance();
 
 			if (nbt instanceof DungeonInstance)

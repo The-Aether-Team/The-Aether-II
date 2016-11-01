@@ -50,12 +50,6 @@ public class SimpleGeneStorage implements IGeneStorage<NBTTagCompound, NBTTagCom
 	}
 
 	@Override
-	public boolean shouldRetransform()
-	{
-		return false;
-	}
-
-	@Override
 	public void setShouldRetransform(boolean flag)
 	{
 

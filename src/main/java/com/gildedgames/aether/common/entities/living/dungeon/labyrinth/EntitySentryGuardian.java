@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.entities.util.flying.EntityFlyingMob;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.gildedgames.aether.common.util.TickTimer;
-import com.gildedgames.util.core.nbt.NBTHelper;
+import com.gildedgames.aether.common.util.io.NBTHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;

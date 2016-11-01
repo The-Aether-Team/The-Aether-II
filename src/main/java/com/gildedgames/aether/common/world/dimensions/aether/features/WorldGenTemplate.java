@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.dimensions.aether.features;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.util.TemplatePrimer;
+import com.gildedgames.aether.common.util.structure.TemplatePrimer;
 import com.gildedgames.aether.common.world.gen.IWorldGen;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;

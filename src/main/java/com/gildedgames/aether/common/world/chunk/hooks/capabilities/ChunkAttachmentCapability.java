@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.world.chunk.hooks.capabilities;
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.chunk.IChunkAttachmentCapability;
 import com.gildedgames.aether.common.world.chunk.hooks.events.AttachCapabilitiesChunkEvent;
-import com.gildedgames.util.io_manager.io.NBT;
+import com.gildedgames.aether.api.util.NBT;
 import it.unimi.dsi.fastutil.longs.Long2ObjectArrayMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import net.minecraft.nbt.NBTBase;

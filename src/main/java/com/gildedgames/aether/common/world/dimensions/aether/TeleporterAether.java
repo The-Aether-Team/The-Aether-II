@@ -4,9 +4,10 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.registry.TemplatesAether;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
-import com.gildedgames.util.core.util.BlockPosDimension;
-import com.gildedgames.util.core.util.GGHelper;
-import com.gildedgames.util.io_manager.io.NBT;
+import com.gildedgames.aether.api.util.BlockPosDimension;
+import com.gildedgames.aether.api.util.NBT;
+import com.gildedgames.aether.common.util.helpers.BlockUtil;
+import com.gildedgames.aether.common.util.io.NBTHelper;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import net.minecraft.block.BlockFlower;
@@ -95,7 +96,7 @@ public class TeleporterAether extends Teleporter implements NBT
 
 		if (!this.hasLoadedPortalPairs)
 		{
-			NBTTagCompound tag = GGHelper.readNBTFromFile("//data//teleporter.dat");
+			NBTTagCompound tag = NBTHelper.readNBTFromFile("//data//teleporter.dat");
 
 			if (tag != null)
 			{
@@ -136,7 +137,7 @@ public class TeleporterAether extends Teleporter implements NBT
 
 			final IBlockState block = this.worldServerInstance.getBlockState(pos);
 
-			if (GGHelper.isSolid(block, this.worldServerInstance, pos) && block != BlocksAether.quicksoil.getDefaultState())
+			if (BlockUtil.isSolid(block, this.worldServerInstance, pos) && block != BlocksAether.quicksoil.getDefaultState())
 			{
 				isSolid = true;
 				break;
@@ -218,10 +219,10 @@ public class TeleporterAether extends Teleporter implements NBT
 
 	public boolean hasSolidBlocks(World world, int minX, int minY, int minZ, int maxX, int maxY, int maxZ)
 	{
-		for (final BlockPos pos : GGHelper.getInBox(minX, minY, minZ, maxX, maxY, maxZ))
+		for (final BlockPos pos : BlockUtil.getInBox(minX, minY, minZ, maxX, maxY, maxZ))
 		{
 			final IBlockState block = world.getBlockState(pos);
-			if (!GGHelper.isAir(block) && !(block.getBlock() instanceof BlockFlower))
+			if (!BlockUtil.isAir(block) && !(block.getBlock() instanceof BlockFlower))
 			{
 				return true;
 			}
@@ -294,7 +295,7 @@ public class TeleporterAether extends Teleporter implements NBT
 
 						final IBlockState blockID = world.getBlockState(pos);
 
-						if (GGHelper.isSolid(blockID, world, pos))
+						if (BlockUtil.isSolid(blockID, world, pos))
 						{
 							hasFoundPosition = true;
 						}
@@ -418,7 +419,7 @@ public class TeleporterAether extends Teleporter implements NBT
 		for (int i = world.getHeight(); i > 0; i--)
 		{
 			final IBlockState state = world.getBlockState(new BlockPos(x, i, z));
-			if (!GGHelper.isAir(state) && !(state.getBlock() instanceof BlockLeaves)
+			if (!BlockUtil.isAir(state) && !(state.getBlock() instanceof BlockLeaves)
 					&& !(state.getBlock() instanceof BlockFlower))
 			{
 				return i - 1;

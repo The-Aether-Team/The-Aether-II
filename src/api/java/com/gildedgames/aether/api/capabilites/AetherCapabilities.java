@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.capabilites.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityPropertiesCapability;
 import com.gildedgames.aether.api.capabilites.entity.spawning.ISpawningInfo;
+import com.gildedgames.aether.api.capabilites.instances.IPlayerInstances;
 import com.gildedgames.aether.api.capabilites.items.IItemBreakable;
 import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
 import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
@@ -40,4 +41,8 @@ public class AetherCapabilities
 
 	@CapabilityInject(IChunkAttachmentCapability.class)
 	public static final Capability<IChunkAttachmentCapability> CHUNK_ATTACHMENTS = null;
+
+	@CapabilityInject(IPlayerInstances.class)
+	public static final Capability<IPlayerInstances> PLAYER_INSTANCES = null;
+
 }

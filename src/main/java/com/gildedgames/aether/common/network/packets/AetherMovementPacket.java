@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import com.gildedgames.util.core.io.MessageHandlerServer;
+import com.gildedgames.aether.common.network.MessageHandlerServer;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;

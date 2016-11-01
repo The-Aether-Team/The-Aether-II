@@ -12,7 +12,7 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.world.chunk.hooks.capabilities.ChunkAttachmentCapability;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSectorAccess;
-import com.gildedgames.util.core.util.TeleporterGeneric;
+import com.gildedgames.aether.common.world.util.TeleporterGeneric;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;

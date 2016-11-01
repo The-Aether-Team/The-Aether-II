@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.capabilites.chunk;
 
-import com.gildedgames.util.io_manager.io.NBT;
+import com.gildedgames.aether.api.util.NBT;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.world.ChunkDataEvent;

@@ -1,13 +1,13 @@
 package com.gildedgames.aether.common.world.dungeon.instance;
 
+import com.gildedgames.aether.api.capabilites.instances.IInstanceHandler;
 import com.gildedgames.aether.common.world.dungeon.DungeonDefinition;
 import com.gildedgames.aether.common.world.dungeon.DungeonDefinitions;
 import com.gildedgames.aether.common.world.dungeon.DungeonGenerator;
 import com.gildedgames.aether.common.world.dungeon.DungeonRoomProvider;
-import com.gildedgames.util.core.nbt.NBTHelper;
-import com.gildedgames.util.core.util.BlockPosDimension;
-import com.gildedgames.util.modules.instances.Instance;
-import com.gildedgames.util.modules.instances.InstanceHandler;
+import com.gildedgames.aether.common.util.io.NBTHelper;
+import com.gildedgames.aether.api.util.BlockPosDimension;
+import com.gildedgames.aether.api.capabilites.instances.Instance;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -37,7 +37,7 @@ public class DungeonInstance implements Instance
 
 	}
 
-	public DungeonInstance(int id, InstanceHandler<DungeonInstance> instanceHandler)
+	public DungeonInstance(int id, IInstanceHandler instanceHandler)
 	{
 		this.dimIdInside = id;
 		this.layoutSeed = System.currentTimeMillis();

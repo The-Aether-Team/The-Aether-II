@@ -3,11 +3,11 @@ package com.gildedgames.aether.common.world.spawning;
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.entity.spawning.EntitySpawn;
 import com.gildedgames.aether.api.capabilites.entity.spawning.ISpawningInfo;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.util.TickTimer;
-import com.gildedgames.util.core.UtilModule;
-import com.gildedgames.util.core.util.ChunkMap;
-import com.gildedgames.util.core.util.GGHelper;
-import com.gildedgames.util.io_manager.io.NBT;
+import com.gildedgames.aether.common.util.io.NBTHelper;
+import com.gildedgames.aether.common.world.util.ChunkMap;
+import com.gildedgames.aether.api.util.NBT;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import net.minecraft.entity.Entity;
@@ -165,25 +165,25 @@ public class SpawnHandler implements NBT
 	{
 		String areaID = SpawnHandler.createAreaID(dim, area.getAreaX(), area.getAreaZ());
 
-		File areaFile = new File(UtilModule.getWorldDirectory(), "//data/spawn_areas/" + this.uniqueID + "/" + areaID + ".dat");
+		File areaFile = new File(AetherCore.getWorldDirectory(), "//data/spawn_areas/" + this.uniqueID + "/" + areaID + ".dat");
 		NBTTagCompound tag = new NBTTagCompound();
 
 		tag.setInteger("areaX", area.getAreaX());
 		tag.setInteger("areaZ", area.getAreaZ());
 		tag.setInteger("entityCount", area.getEntityCount());
 
-		GGHelper.writeNBTToFile(tag, areaFile);
+		NBTHelper.writeNBTToFile(tag, areaFile);
 	}
 
 	private SpawnArea loadArea(int dim, int areaX, int areaZ)
 	{
 		String areaID = SpawnHandler.createAreaID(dim, areaX, areaZ);
 
-		File areaFile = new File(UtilModule.getWorldDirectory(), "//data/spawn_areas/" + this.uniqueID + "/" + areaID + ".dat");
+		File areaFile = new File(AetherCore.getWorldDirectory(), "//data/spawn_areas/" + this.uniqueID + "/" + areaID + ".dat");
 
 		if (areaFile.exists())
 		{
-			NBTTagCompound tag = GGHelper.readNBTFromFile(areaFile);
+			NBTTagCompound tag = NBTHelper.readNBTFromFile(areaFile);
 
 			SpawnArea area = new SpawnArea(this.chunkArea, tag.getInteger("areaX"), tag.getInteger("areaZ"));
 

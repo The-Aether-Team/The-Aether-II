@@ -1,16 +1,22 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.IAetherServices;
+import com.gildedgames.aether.api.capabilites.instances.IInstanceRegistry;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.api.registry.cooler.ITemperatureRegistry;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
+import com.gildedgames.aether.api.registry.tab.ITabRegistry;
+import com.gildedgames.aether.common.capabilities.instances.InstanceEvents;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.world.dimensions.aether.TeleporterAether;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSectorAccess;
-import com.gildedgames.util.io.ClassSerializer;
+import com.gildedgames.aether.common.util.io.ClassSerializer;
+import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -18,6 +24,8 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.io.File;
 
 @Mod(name = AetherCore.MOD_NAME, modid = AetherCore.MOD_ID, version = AetherCore.MOD_VERSION, certificateFingerprint = AetherCore.MOD_FINGERPRINT, guiFactory = AetherCore.MOD_GUI_FACTORY)
 public class AetherCore implements IAetherServices
@@ -61,6 +69,7 @@ public class AetherCore implements IAetherServices
 
 		MinecraftForge.EVENT_BUS.register(AetherCore.CONFIG);
 		MinecraftForge.EVENT_BUS.register(IslandSectorAccess.inst());
+		MinecraftForge.EVENT_BUS.register(InstanceEvents.class);
 
 		AetherCore.PROXY.preInit(event);
 
@@ -80,12 +89,20 @@ public class AetherCore implements IAetherServices
 
 		AetherCore.SPAWN_REGISTRY.write();
 		IslandSectorAccess.inst().onServerStopping(event);
+		InstanceEvents.saveAllInstancesToDisk();
+	}
+
+	@EventHandler
+	public void onServerStopped(FMLServerStoppedEvent event)
+	{
+		InstanceEvents.unregisterAllInstances();
 	}
 
 	@EventHandler
 	public void serverStarted(FMLServerStartedEvent event)
 	{
 		AetherCore.SPAWN_REGISTRY.read();
+		InstanceEvents.loadAllInstancesFromDisk();
 	}
 
 	@EventHandler
@@ -119,6 +136,26 @@ public class AetherCore implements IAetherServices
 		return (AetherCore.MOD_ID + ":") + name;
 	}
 
+	public static boolean isClient()
+	{
+		return FMLCommonHandler.instance().getSide().isClient();
+	}
+
+	public static boolean isServer()
+	{
+		return FMLCommonHandler.instance().getSide().isServer();
+	}
+
+	public static File getWorldDirectory()
+	{
+		return DimensionManager.getCurrentSaveRootDirectory();
+	}
+
+	public static boolean isInsideDevEnvironment()
+	{
+		return Launch.blackboard.get("fml.deobfuscatedEnvironment") == Boolean.TRUE;
+	}
+
 	@Override
 	public IAltarRecipeRegistry getAltarRecipeRegistry()
 	{
@@ -135,6 +172,18 @@ public class AetherCore implements IAetherServices
 	public ITemperatureRegistry getTemperatureRegistry()
 	{
 		return AetherCore.PROXY.getCoolerRegistry();
+	}
+
+	@Override
+	public ITabRegistry getTabRegistry()
+	{
+		return AetherCore.PROXY.getTabRegistry();
+	}
+
+	@Override
+	public IInstanceRegistry getInstanceRegistry()
+	{
+		return AetherCore.PROXY.getInstanceRegistry();
 	}
 
 }

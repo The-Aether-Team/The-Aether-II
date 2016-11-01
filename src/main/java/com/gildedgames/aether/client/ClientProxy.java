@@ -1,8 +1,10 @@
 package com.gildedgames.aether.client;
 
+import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.client.gui.menu.BossBattleOverlay;
 import com.gildedgames.aether.client.gui.menu.PortalOverlay;
 import com.gildedgames.aether.client.gui.tab.TabBugReport;
+import com.gildedgames.aether.client.gui.tab.TabClientEvents;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.client.gui.menu.WorldAetherOptionsOverlay;
 import com.gildedgames.aether.client.models.blocks.AetherBlockModels;
@@ -17,17 +19,16 @@ import com.gildedgames.aether.client.renderer.items.ItemMoaEggColorHandler;
 import com.gildedgames.aether.client.renderer.items.LeatherGlovesColorHandler;
 import com.gildedgames.aether.client.renderer.items.WrappingPaperColorHandler;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
+import com.gildedgames.aether.client.ui.UiManager;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonProxy;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.util.structure.StructureInjectionEvents;
 import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.util.core.gui.viewing.MinecraftGuiViewer;
-import com.gildedgames.util.modules.tab.TabModule;
-import com.gildedgames.util.modules.ui.UiModule;
-import com.gildedgames.util.modules.ui.common.GuiFrame;
-import com.gildedgames.util.modules.ui.util.factory.Factory;
+import com.gildedgames.aether.client.ui.minecraft.viewing.MinecraftGuiViewer;
+import com.gildedgames.aether.client.ui.common.GuiFrame;
+import com.gildedgames.aether.client.ui.util.factory.Factory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.resources.I18n;
@@ -67,7 +68,7 @@ public class ClientProxy extends CommonProxy
 
 		CreativeTabsAether.registerTabIcons();
 
-		UiModule.locate().registerOverlay("worldAetherOptionsOverlay", new Factory<GuiFrame>()
+		UiManager.inst().registerOverlay("worldAetherOptionsOverlay", new Factory<GuiFrame>()
 		{
 
 			@Override
@@ -78,7 +79,7 @@ public class ClientProxy extends CommonProxy
 
 		}, MinecraftGuiViewer.instance());
 
-		UiModule.locate().registerOverlay("aetherPortalOverlay", new Factory<GuiFrame>()
+		UiManager.inst().registerOverlay("aetherPortalOverlay", new Factory<GuiFrame>()
 		{
 
 			@Override
@@ -89,7 +90,7 @@ public class ClientProxy extends CommonProxy
 
 		}, MinecraftGuiViewer.instance(), RenderGameOverlayEvent.ElementType.PORTAL);
 
-		UiModule.locate().registerOverlay("bossBattleOverlay", new Factory<GuiFrame>()
+		UiManager.inst().registerOverlay("bossBattleOverlay", new Factory<GuiFrame>()
 		{
 
 			@Override
@@ -109,7 +110,7 @@ public class ClientProxy extends CommonProxy
 
 		ModelLoaderRegistry.registerLoader(loader);
 
-		/*UiModule.locate().registerOverlay(MAIN_MENU_OVERLAY_ID, new Factory<GuiFrame>()
+		/*UiManager.inst().registerOverlay(MAIN_MENU_OVERLAY_ID, new Factory<GuiFrame>()
 		{
 
 			@Override
@@ -118,7 +119,7 @@ public class ClientProxy extends CommonProxy
 				return new MainMenuOverlay();
 			}
 
-		}, MinecraftGuiViewer.instance());*/
+		}, MinecraftGuiViewer.instances());*/
 	}
 
 	@Override
@@ -134,8 +135,11 @@ public class ClientProxy extends CommonProxy
 		MinecraftForge.EVENT_BUS.register(new ClientRenderHandler());
 		MinecraftForge.EVENT_BUS.register(StructureInjectionEvents.class);
 
-		TabModule.api().getInventoryGroup().registerClientTab(new TabEquipment.Client());
-		TabModule.api().getInventoryGroup().registerClientTab(new TabBugReport.Client());
+		MinecraftForge.EVENT_BUS.register(MinecraftGuiViewer.instance().getTickInfo());
+		MinecraftForge.EVENT_BUS.register(TabClientEvents.class);
+
+		AetherAPI.tabs().getInventoryGroup().registerClientTab(new TabEquipment.Client());
+		AetherAPI.tabs().getInventoryGroup().registerClientTab(new TabBugReport.Client());
 
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemMoaEggColorHandler(), ItemsAether.moa_egg);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new LeatherGlovesColorHandler(), ItemsAether.leather_gloves);

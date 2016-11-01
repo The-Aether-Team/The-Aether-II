@@ -1,18 +1,21 @@
 package com.gildedgames.aether.client.gui.menu;
 
+import com.gildedgames.aether.client.ui.UiManager;
+import com.gildedgames.aether.client.ui.input.*;
+import com.gildedgames.aether.client.ui.util.InputHelper;
+import com.gildedgames.aether.client.ui.util.ScrollBar;
+import com.gildedgames.aether.client.ui.util.Text;
+import com.gildedgames.aether.client.ui.util.TextureElement;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.util.core.gui.util.GuiFactory;
-import com.gildedgames.util.core.gui.util.MinecraftAssetLocation;
-import com.gildedgames.util.modules.ui.UiModule;
-import com.gildedgames.util.modules.ui.common.GuiFrame;
-import com.gildedgames.util.modules.ui.data.AssetLocation;
-import com.gildedgames.util.modules.ui.data.rect.Dim2D;
-import com.gildedgames.util.modules.ui.data.rect.Rect;
-import com.gildedgames.util.modules.ui.event.view.MouseEventGui;
-import com.gildedgames.util.modules.ui.graphics.Graphics2D;
-import com.gildedgames.util.modules.ui.input.*;
-import com.gildedgames.util.modules.ui.util.*;
-import com.gildedgames.util.modules.ui.util.decorators.ScrollableGui;
+import com.gildedgames.aether.client.ui.minecraft.util.GuiFactory;
+import com.gildedgames.aether.client.ui.minecraft.util.MinecraftAssetLocation;
+import com.gildedgames.aether.client.ui.common.GuiFrame;
+import com.gildedgames.aether.client.ui.data.AssetLocation;
+import com.gildedgames.aether.client.ui.data.rect.Dim2D;
+import com.gildedgames.aether.client.ui.data.rect.Rect;
+import com.gildedgames.aether.client.ui.event.view.MouseEventGui;
+import com.gildedgames.aether.client.ui.graphics.Graphics2D;
+import com.gildedgames.aether.client.ui.util.decorators.ScrollableGui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
@@ -60,7 +63,7 @@ public class InDevelopmentWarning extends GuiFrame
 					}
 				}
 
-				UiModule.locate().close();
+				UiManager.inst().close();
 			}
 
 			@Override

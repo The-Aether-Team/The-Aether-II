@@ -11,6 +11,7 @@ import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.client.gui.menu.InDevelopmentWarning;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
+import com.gildedgames.aether.client.ui.UiManager;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.containers.slots.SlotAmbrosium;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
@@ -19,7 +20,6 @@ import com.gildedgames.aether.common.containers.slots.SlotMoaEgg;
 import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.AetherMovementPacket;
-import com.gildedgames.util.modules.ui.UiModule;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
@@ -65,7 +65,7 @@ public class ClientEventHandler
 
 			if (!areaFile.exists())
 			{
-				UiModule.locate().open("indevWarning", new InDevelopmentWarning());
+				UiManager.inst().open("indevWarning", new InDevelopmentWarning());
 				event.setCanceled(true);
 			}
 		}

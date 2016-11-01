@@ -2,13 +2,13 @@ package com.gildedgames.aether.client.gui.tab;
 
 import com.gildedgames.aether.client.gui.container.GuiEquipment;
 import com.gildedgames.aether.client.gui.menu.BugReportMenu;
+import com.gildedgames.aether.client.ui.UiManager;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.util.core.gui.util.decorators.MinecraftGui;
-import com.gildedgames.util.core.gui.viewing.MinecraftGuiWrapper;
-import com.gildedgames.util.modules.tab.common.util.ITab;
-import com.gildedgames.util.modules.tab.common.util.ITabClient;
-import com.gildedgames.util.modules.ui.UiModule;
-import com.gildedgames.util.modules.ui.common.GuiDecorator;
+import com.gildedgames.aether.client.ui.minecraft.util.decorators.MinecraftGui;
+import com.gildedgames.aether.client.ui.minecraft.viewing.MinecraftGuiWrapper;
+import com.gildedgames.aether.api.registry.tab.ITab;
+import com.gildedgames.aether.api.registry.tab.ITabClient;
+import com.gildedgames.aether.client.ui.common.GuiDecorator;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +27,7 @@ public class TabBugReport implements ITab
 	@Override
 	public void onOpen(EntityPlayer player)
 	{
-		UiModule.locate().open("bugReportMenu", new MinecraftGui(new BugReportMenu()));
+		UiManager.inst().open("bugReportMenu", new MinecraftGui(new BugReportMenu()));
 	}
 
 	@Override

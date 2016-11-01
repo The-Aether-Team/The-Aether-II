@@ -8,8 +8,7 @@ import com.gildedgames.aether.common.items.armor.ItemAetherShield;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import com.gildedgames.aether.common.world.dimensions.aether.TeleporterAether;
-import com.gildedgames.util.core.UtilModule;
-import com.gildedgames.util.core.util.TeleporterGeneric;
+import com.gildedgames.aether.common.world.util.TeleporterGeneric;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -172,7 +171,7 @@ public class CommonEvents
 
 			if (WorldAetherOptionsOverlay.toggle)
 			{
-				File areaFile = new File(UtilModule.getWorldDirectory(), "//data/world_options_created.dat");
+				File areaFile = new File(AetherCore.getWorldDirectory(), "//data/world_options_created.dat");
 
 				if (!areaFile.exists())
 				{
@@ -339,7 +338,7 @@ public class CommonEvents
 				playerList.transferPlayerToDimension((EntityPlayerMP) entity, dimension, teleporter);
 				player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, 0, 0);
 
-				/** Strange flag that needs to be set to prevent the NetHandlerPlayServer instance from resetting your position **/
+				/** Strange flag that needs to be set to prevent the NetHandlerPlayServer instances from resetting your position **/
 				ObfuscationReflectionHelper.setPrivateValue(EntityPlayerMP.class, player, true, ReflectionAether.INVULNERABLE_DIMENSION_CHANGE.getMappings());
 			}
 

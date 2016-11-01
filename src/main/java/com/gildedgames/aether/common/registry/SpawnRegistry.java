@@ -19,6 +19,7 @@ import com.gildedgames.aether.common.entities.living.passive.EntityCarrionSprout
 import com.gildedgames.aether.common.entities.living.passive.EntityKirrid;
 import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
+import com.gildedgames.aether.common.util.io.NBTHelper;
 import com.gildedgames.aether.common.world.spawning.PosCondition;
 import com.gildedgames.aether.common.world.spawning.SpawnArea;
 import com.gildedgames.aether.common.world.spawning.SpawnEntry;
@@ -28,7 +29,6 @@ import com.gildedgames.aether.common.world.spawning.conditions.CheckBlockStateUn
 import com.gildedgames.aether.common.world.spawning.conditions.CheckDimension;
 import com.gildedgames.aether.common.world.spawning.conditions.CheckTime;
 import com.gildedgames.aether.common.world.spawning.util.FlyingPositionSelector;
-import com.gildedgames.util.core.util.GGHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -122,7 +122,7 @@ public class SpawnRegistry
 	{
 		for (SpawnHandler handler : this.spawnHandlers)
 		{
-			NBTTagCompound tag = GGHelper.readNBTFromFile("//data/spawn_areas/" + handler.getUniqueID() + ".dat");
+			NBTTagCompound tag = NBTHelper.readNBTFromFile("//data/spawn_areas/" + handler.getUniqueID() + ".dat");
 
 			if (tag == null)
 			{
@@ -141,7 +141,7 @@ public class SpawnRegistry
 
 			handler.write(tag);
 
-			GGHelper.writeNBTToFile(tag, "//data/spawn_areas/" + handler.getUniqueID() + ".dat");
+			NBTHelper.writeNBTToFile(tag, "//data/spawn_areas/" + handler.getUniqueID() + ".dat");
 		}
 	}
 

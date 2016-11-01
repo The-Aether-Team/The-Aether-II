@@ -1,7 +1,7 @@
 package com.gildedgames.aether.api.player.inventory;
 
 import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentType;
-import com.gildedgames.util.io_manager.io.NBT;
+import com.gildedgames.aether.api.util.NBT;
 import net.minecraft.inventory.IInventory;
 
 public interface IInventoryEquipment extends IInventory, NBT

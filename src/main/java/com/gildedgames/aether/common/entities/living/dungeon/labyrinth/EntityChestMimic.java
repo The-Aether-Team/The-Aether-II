@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AISavageAttack;
 import com.gildedgames.aether.common.entities.util.EntityExtendedMob;
 import com.gildedgames.aether.common.util.TickTimer;
-import com.gildedgames.util.core.nbt.NBTHelper;
+import com.gildedgames.aether.common.util.io.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;

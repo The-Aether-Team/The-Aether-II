@@ -1,12 +1,12 @@
 package com.gildedgames.aether.common.items.misc;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.tiles.TileEntityMoaEgg;
-import com.gildedgames.util.core.UtilModule;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -173,7 +173,7 @@ public class ItemMoaEgg extends Item
 	{
 		MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);
 
-		if (genePool.getMarks() != null && !this.creativeEgg && UtilModule.isClient())
+		if (genePool.getMarks() != null && !this.creativeEgg && AetherCore.isClient())
 		{
 			return genePool.getMarks().gene().localizedName() + " " + I18n.format(super.getUnlocalizedName(stack) + ".name");
 		}

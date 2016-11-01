@@ -6,7 +6,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-import com.gildedgames.aether.common.util.helpers.BlockPosUtil;
+import com.gildedgames.aether.common.util.helpers.BlockUtil;
 
 public class TileEntityWildcard extends TileEntitySchematicBlock
 {
@@ -75,7 +75,7 @@ public class TileEntityWildcard extends TileEntitySchematicBlock
 		}
 
 		this.getWorld().setBlockState(this.getPos(), block.getStateFromMeta(damage));
-		BlockPosUtil.setTileEntityNBT(this.getWorld(), this.getPos(), chosenStack);
+		BlockUtil.setTileEntityNBT(this.getWorld(), this.getPos(), chosenStack);
 		this.getWorld().scheduleUpdate(this.getPos(), block, 0);
 	}
 

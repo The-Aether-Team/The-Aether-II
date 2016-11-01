@@ -106,7 +106,7 @@ public class TechneConverter
 		/**
 		 * Multiply one matrix with another. This matrix is multiplied with the parameter one, not the other way around.
 		 * @param other The matrix to multiply with.
-		 * @return A new matrix instance. The multiplied matrices are not changed.
+		 * @return A new matrix instances. The multiplied matrices are not changed.
 		 */
 		public Matrix3x3 multiply(Matrix3x3 other)
 		{
@@ -332,7 +332,7 @@ public class TechneConverter
 
 	}
 
-	//Just an utility class, don't create an instance of it
+	//Just an utility class, don't create an instances of it
 	private TechneConverter()
 	{
 	}
