@@ -63,17 +63,6 @@ public class ItemMoaEgg extends Item
 
 	public static MoaGenePool getGenePool(ItemStack stack)
 	{
-		/*IItemExtraDataCapability extraData = stack.getCapability(AetherCapabilities.ITEM_EXTRA_DATA, null);
-
-		if (extraData != null)
-		{
-			if (!extraData.has("genePool"))
-			{
-				extraData.set("genePool", new MoaGenePool(new SimpleGeneStorage()));
-			}
-
-			return extraData.get("genePool");
-		}*/
 		if (stack.getTagCompound() == null)
 		{
 			ItemMoaEgg.setGenePool(stack, new MoaGenePool());

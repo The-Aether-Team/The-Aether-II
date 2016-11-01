@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.capabilites.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.util.modules.chunk.ChunkModule;
-import com.gildedgames.util.modules.chunk.impl.hooks.BlockBitFlagChunkHook;
+import com.gildedgames.aether.common.world.chunk.hooks.capabilities.ChunkAttachmentCapability;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -62,7 +63,7 @@ public class BlockCrudeScatterglass extends BlockBreakable
 	@Override
 	public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te, ItemStack stack)
 	{
-		BlockBitFlagChunkHook data = ChunkModule.api().getHook(world, pos, AetherCore.PROXY.getPlacementFlagProvider());
+		IPlacementFlagCapability data = ChunkAttachmentCapability.get(world).getAttachment(new ChunkPos(pos), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
 
 		boolean wasPlaced = data.isMarked(pos);
 

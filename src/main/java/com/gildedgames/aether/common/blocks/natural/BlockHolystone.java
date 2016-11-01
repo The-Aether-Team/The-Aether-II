@@ -1,14 +1,14 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.capabilites.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.util.ISkyrootMinable;
 import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.util.modules.chunk.ChunkModule;
-import com.gildedgames.util.modules.chunk.impl.hooks.BlockBitFlagChunkHook;
+import com.gildedgames.aether.common.world.chunk.hooks.capabilities.ChunkAttachmentCapability;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
@@ -23,6 +23,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -120,7 +121,7 @@ public class BlockHolystone extends Block implements IBlockVariants, ISkyrootMin
 	@Override
 	public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te, ItemStack stack)
 	{
-		BlockBitFlagChunkHook data = ChunkModule.api().getHook(world, pos, AetherCore.PROXY.getPlacementFlagProvider());
+		IPlacementFlagCapability data = ChunkAttachmentCapability.get(world).getAttachment(new ChunkPos(pos), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
 
 		boolean wasPlaced = data.isMarked(pos);
 

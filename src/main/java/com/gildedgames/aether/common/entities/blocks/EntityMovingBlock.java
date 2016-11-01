@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.blocks;
 
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.util.modules.chunk.ChunkModule;
-import com.gildedgames.util.modules.chunk.impl.hooks.BlockBitFlagChunkHook;
+import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.capabilites.chunk.IPlacementFlagCapability;
+import com.gildedgames.aether.common.world.chunk.hooks.capabilities.ChunkAttachmentCapability;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -89,7 +90,7 @@ public class EntityMovingBlock extends Entity
 
 			if (this.worldObj.getBlockState(pos).getBlock() == this.getBlockState().getBlock())
 			{
-				BlockBitFlagChunkHook data = ChunkModule.api().getHook(this.worldObj, pos, AetherCore.PROXY.getPlacementFlagProvider());
+				IPlacementFlagCapability data = ChunkAttachmentCapability.get(this.worldObj).getAttachment(new ChunkPos(pos), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
 
 				this.allowDoubleDrops = !data.isMarked(pos);
 
@@ -182,7 +183,8 @@ public class EntityMovingBlock extends Entity
 
 						if (!this.allowDoubleDrops)
 						{
-							BlockBitFlagChunkHook data = ChunkModule.api().getHook(this.worldObj, pos, AetherCore.PROXY.getPlacementFlagProvider());
+							IPlacementFlagCapability data = ChunkAttachmentCapability.get(this.worldObj).getAttachment(new ChunkPos(pos), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
+
 							data.mark(pos);
 						}
 

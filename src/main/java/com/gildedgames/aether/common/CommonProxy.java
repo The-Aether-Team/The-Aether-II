@@ -10,6 +10,7 @@ import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.CapabilityManagerAether;
+import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffectsEventHooks;
 import com.gildedgames.aether.common.capabilities.entity.properties.EntityProperties;
 import com.gildedgames.aether.common.capabilities.player.ItemSlot;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherEvents;
@@ -19,33 +20,30 @@ import com.gildedgames.aether.common.entities.BossProcessor;
 import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.entities.EntityItemWatcher;
 import com.gildedgames.aether.common.entities.MountProcessor;
-import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffectsEventHooks;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.living.boss.slider.BreakFloorActionSlider;
 import com.gildedgames.aether.common.entities.living.boss.slider.FirstStageSlider;
 import com.gildedgames.aether.common.entities.living.boss.slider.SecondStageSlider;
 import com.gildedgames.aether.common.entities.living.boss.slider.ThirdStageSlider;
 import com.gildedgames.aether.common.entities.util.SimpleBossManager;
-import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.registry.EquipmentRegistry;
 import com.gildedgames.aether.common.registry.GenerationAether;
 import com.gildedgames.aether.common.registry.TemperatureRegistry;
-import com.gildedgames.aether.common.registry.EquipmentRegistry;
 import com.gildedgames.aether.common.registry.TemplatesAether;
 import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.tiles.TileEntitiesAether;
 import com.gildedgames.aether.common.util.TickTimer;
-import com.gildedgames.aether.common.world.chunk.PlacementFlagProvider;
+import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
+import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSector;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceFactory;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceHandler;
-import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
-import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSector;
 import com.gildedgames.util.io.Instantiator;
-import com.gildedgames.util.modules.chunk.ChunkModule;
 import com.gildedgames.util.modules.instances.InstanceModule;
 import com.gildedgames.util.modules.tab.TabModule;
 import net.minecraft.entity.player.EntityPlayer;
@@ -73,8 +71,6 @@ public class CommonProxy
 	private final IEquipmentRegistry equipmentRegistry = new EquipmentRegistry();
 
 	private final ITemperatureRegistry coolerRegistry = new TemperatureRegistry();
-
-	private final PlacementFlagProvider placementFlagProvider = new PlacementFlagProvider();
 
 	private DungeonInstanceHandler dungeonInstanceHandler;
 
@@ -134,8 +130,6 @@ public class CommonProxy
 		MinecraftForge.EVENT_BUS.register(ItemSkyrootSword.class);
 
 		CapabilityManagerAether.init();
-
-		ChunkModule.api().registerChunkHookProvider(this.placementFlagProvider);
 
 		DungeonInstanceFactory factory = new DungeonInstanceFactory(DimensionsAether.SLIDER_LABYRINTH);
 
@@ -232,11 +226,6 @@ public class CommonProxy
 	public void setExtendedReachDistance(EntityPlayer entity, float distance)
 	{
 		((EntityPlayerMP) entity).interactionManager.setBlockReachDistance(5.0f + distance);
-	}
-
-	public PlacementFlagProvider getPlacementFlagProvider()
-	{
-		return this.placementFlagProvider;
 	}
 
 	public DungeonInstanceHandler getDungeonInstanceHandler()

@@ -1,15 +1,18 @@
 package com.gildedgames.aether.common.capabilities;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.capabilites.chunk.IChunkAttachmentCapability;
+import com.gildedgames.aether.api.capabilites.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.capabilites.entity.effects.IEntityEffectsCapability;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityPropertiesCapability;
 import com.gildedgames.aether.api.capabilites.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.capabilites.items.IItemBreakable;
 import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
-import com.gildedgames.aether.api.capabilites.items.extra_data.IItemExtraDataCapability;
 import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffects;
+import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffectsProvider;
 import com.gildedgames.aether.common.capabilities.entity.properties.EntityProperties;
 import com.gildedgames.aether.common.capabilities.entity.properties.EntityPropertiesProvider;
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfo;
@@ -18,14 +21,15 @@ import com.gildedgames.aether.common.capabilities.item.ItemBreakable;
 import com.gildedgames.aether.common.capabilities.item.ItemBreakableProvider;
 import com.gildedgames.aether.common.capabilities.item.effects.ItemEffects;
 import com.gildedgames.aether.common.capabilities.item.effects.ItemEffectsProvider;
-import com.gildedgames.aether.common.capabilities.item.extra_data.ItemExtraDataImpl;
-import com.gildedgames.aether.common.capabilities.item.extra_data.ItemExtraDataProvider;
 import com.gildedgames.aether.common.capabilities.item.properties.ItemPropertiesImpl;
 import com.gildedgames.aether.common.capabilities.item.properties.ItemPropertiesProvider;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherProvider;
-import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffects;
-import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffectsProvider;
+import com.gildedgames.aether.common.world.chunk.hooks.capabilities.ChunkAttachmentCapability;
+import com.gildedgames.aether.common.world.chunk.hooks.capabilities.ChunkAttachmentProvider;
+import com.gildedgames.aether.common.world.chunk.hooks.capabilities.PlacementFlagCapability;
+import com.gildedgames.aether.common.world.chunk.hooks.capabilities.PlacementFlagProvider;
+import com.gildedgames.aether.common.world.chunk.hooks.events.AttachCapabilitiesChunkEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -34,6 +38,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class CapabilityManagerAether
@@ -47,10 +52,11 @@ public class CapabilityManagerAether
 		CapabilityManager.INSTANCE.register(IItemPropertiesCapability.class, new ItemPropertiesImpl.Storage(), ItemPropertiesImpl.class);
 		CapabilityManager.INSTANCE.register(IPlayerAetherCapability.class, new PlayerAetherImpl.Storage(), PlayerAetherImpl.class);
 		CapabilityManager.INSTANCE.register(IEntityEffectsCapability.class, new EntityEffects.Storage(), EntityEffects.class);
-		CapabilityManager.INSTANCE.register(IItemExtraDataCapability.class, new ItemExtraDataImpl.Storage(), ItemExtraDataImpl.class);
 		CapabilityManager.INSTANCE.register(IEntityPropertiesCapability.class, new EntityProperties.Storage(), EntityProperties.class);
 		CapabilityManager.INSTANCE.register(IItemBreakable.class, new ItemBreakable.Storage(), ItemBreakable.class);
 		CapabilityManager.INSTANCE.register(ISpawningInfo.class, new EntitySpawningInfo.Storage(), EntitySpawningInfo.class);
+		CapabilityManager.INSTANCE.register(IPlacementFlagCapability.class, new PlacementFlagCapability.Storage(), PlacementFlagCapability.class);
+		CapabilityManager.INSTANCE.register(IChunkAttachmentCapability.class, new ChunkAttachmentCapability.Storage(), ChunkAttachmentCapability.class);
 	}
 
 	@SubscribeEvent
@@ -143,8 +149,40 @@ public class CapabilityManagerAether
 		event.addCapability(AetherCore.getResource("ItemStackEffects"), new ItemEffectsProvider(effects));
 
         event.addCapability(AetherCore.getResource("ItemStackProperties"), new ItemPropertiesProvider(event.getItemStack()));
-		event.addCapability(AetherCore.getResource("ItemExtraData"), new ItemExtraDataProvider());
 		event.addCapability(AetherCore.getResource("ItemBreakable"), new ItemBreakableProvider());
     }
 
+    @SubscribeEvent
+	public static void onWorldLoad(AttachCapabilitiesEvent.World event)
+	{
+		event.addCapability(AetherCore.getResource("AetherHooks"), new ChunkAttachmentProvider(new ChunkAttachmentCapability()));
+	}
+
+    @SubscribeEvent
+	public static void onChunkCapabilityAttach(AttachCapabilitiesChunkEvent event)
+	{
+		event.addCapability(AetherCore.getResource("PlacementFlags"), new PlacementFlagProvider(new PlacementFlagCapability()));
+	}
+
+	@SubscribeEvent
+	public static void onChunkLoaded(ChunkDataEvent.Load event)
+	{
+		if (event.getWorld().hasCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null))
+		{
+			IChunkAttachmentCapability pool = event.getWorld().getCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null);
+
+			pool.load(event);
+		}
+	}
+
+	@SubscribeEvent
+	public static void onChunkSaved(ChunkDataEvent.Save event)
+	{
+		if (event.getWorld().hasCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null))
+		{
+			IChunkAttachmentCapability pool = event.getWorld().getCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null);
+
+			pool.save(event);
+		}
+	}
 }

@@ -1,20 +1,18 @@
 package com.gildedgames.aether.common.capabilities.player;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.capabilites.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
 import com.gildedgames.aether.common.capabilities.player.modules.EquipmentModule;
 import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.world.chunk.hooks.capabilities.ChunkAttachmentCapability;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSectorAccess;
 import com.gildedgames.util.core.util.TeleporterGeneric;
-import com.gildedgames.util.modules.chunk.ChunkModule;
-import com.gildedgames.util.modules.chunk.impl.hooks.BlockBitFlagChunkHook;
-import com.gildedgames.util.modules.ui.util.input.BooleanInput;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
@@ -22,14 +20,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -204,7 +201,7 @@ public class PlayerAetherEvents
 	@SubscribeEvent
 	public static void onPlaceBlockEvent(BlockEvent.PlaceEvent event)
 	{
-		BlockBitFlagChunkHook data = ChunkModule.api().getHook(event.getWorld(), event.getPos(), AetherCore.PROXY.getPlacementFlagProvider());
+		IPlacementFlagCapability data = ChunkAttachmentCapability.get(event.getWorld()).getAttachment(new ChunkPos(event.getPos()), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
 
 		if (data != null)
 		{
