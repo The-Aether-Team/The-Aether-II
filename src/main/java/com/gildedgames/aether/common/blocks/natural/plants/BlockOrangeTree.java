@@ -42,6 +42,17 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
+	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos)
+	{
+		if (blockState.getValue(PROPERTY_IS_TOP_BLOCK) && blockState.getValue(PROPERTY_STAGE) >= STAGE_COUNT)
+		{
+			return 0.0f;
+		}
+
+		return super.getBlockHardness(blockState, worldIn, pos);
+	}
+
+	@Override
 	public boolean canPlaceBlockAt(World world, BlockPos pos)
 	{
 		IBlockState soilBlock = world.getBlockState(pos.down());

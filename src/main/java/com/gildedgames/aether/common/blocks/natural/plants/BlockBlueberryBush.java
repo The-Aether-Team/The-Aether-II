@@ -40,11 +40,22 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVarian
 	{
 		super(Material.LEAVES);
 
-		this.setHardness(1f);
+		this.setHardness(1.0f);
 
 		this.setSoundType(SoundType.PLANT);
 
 		this.setTickRandomly(true);
+	}
+
+	@Override
+	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos)
+	{
+		if (blockState.getValue(PROPERTY_HARVESTABLE))
+		{
+			return 0.0f;
+		}
+
+		return super.getBlockHardness(blockState, worldIn, pos);
 	}
 
 	@Override
