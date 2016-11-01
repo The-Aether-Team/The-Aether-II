@@ -141,7 +141,7 @@ public class CommonProxy
 
 		DungeonInstanceFactory factory = new DungeonInstanceFactory(DimensionsAether.SLIDER_LABYRINTH);
 
-		//this.dungeonInstanceHandler = new DungeonInstanceHandler(AetherAPI.instances().createAndRegisterInstanceHandler(factory));
+		this.dungeonInstanceHandler = new DungeonInstanceHandler(AetherAPI.instances().createAndRegisterInstanceHandler(factory));
 	}
 
 	public void postInit(FMLPostInitializationEvent event)

@@ -1,16 +1,16 @@
 package com.gildedgames.aether.common.world.dungeon.instance;
 
+import com.gildedgames.aether.api.capabilites.instances.IInstanceHandler;
 import com.gildedgames.aether.api.util.BlockPosDimension;
-import com.gildedgames.aether.common.capabilities.instances.InstanceHandler;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
 public class DungeonInstanceHandler
 {
 
-	private InstanceHandler<DungeonInstance> handler;
+	private IInstanceHandler<DungeonInstance> handler;
 
-	public DungeonInstanceHandler(InstanceHandler<DungeonInstance> handler)
+	public DungeonInstanceHandler(IInstanceHandler<DungeonInstance> handler)
 	{
 		this.handler = handler;
 	}
