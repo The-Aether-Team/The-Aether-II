@@ -1,5 +1,1 @@
-include ':gilded-games-util'
-
-project(":gilded-games-util").projectDir = file("modules/Gilded-Games-Util")
-
 rootProject.name = 'AetherII'
