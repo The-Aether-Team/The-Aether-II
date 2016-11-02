@@ -11,14 +11,18 @@ import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -36,6 +40,8 @@ public class BlockAetherGrass extends Block implements IBlockVariants, IGrowable
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", AETHER_GRASS, ENCHANTED_AETHER_GRASS);
 
+	public static final PropertyBool SNOWY = PropertyBool.create("snowy");
+
 	public BlockAetherGrass()
 	{
 		super(Material.GRASS);
@@ -45,7 +51,7 @@ public class BlockAetherGrass extends Block implements IBlockVariants, IGrowable
 		this.setHardness(0.5F);
 		this.setTickRandomly(true);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, AETHER_GRASS));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, AETHER_GRASS).withProperty(SNOWY, Boolean.valueOf(false)));
 	}
 
 	@Override
@@ -57,6 +63,13 @@ public class BlockAetherGrass extends Block implements IBlockVariants, IGrowable
 			list.add(new ItemStack(item, 1, variant.getMeta()));
 		}
 	}
+
+	@Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    {
+        Block block = worldIn.getBlockState(pos.up()).getBlock();
+        return state.withProperty(SNOWY, Boolean.valueOf(block == Blocks.SNOW || block == Blocks.SNOW_LAYER));
+    }
 
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
@@ -133,7 +146,7 @@ public class BlockAetherGrass extends Block implements IBlockVariants, IGrowable
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, PROPERTY_VARIANT);
+		return new BlockStateContainer(this, SNOWY, PROPERTY_VARIANT);
 	}
 
 	@Override
@@ -222,4 +235,11 @@ public class BlockAetherGrass extends Block implements IBlockVariants, IGrowable
 			}
 		}
 	}
+
+	@Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer()
+    {
+        return BlockRenderLayer.CUTOUT_MIPPED;
+    }
 }
