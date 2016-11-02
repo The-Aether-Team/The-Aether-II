@@ -1,5 +1,8 @@
 package com.gildedgames.aether.common.blocks.natural;
 
+import java.util.List;
+import java.util.Random;
+
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
@@ -7,6 +10,7 @@ import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import com.gildedgames.aether.common.world.dimensions.aether.features.trees.WorldGenOrangeTree;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -27,13 +31,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
-import java.util.Random;
-
 public class BlockAetherGrass extends Block implements IBlockVariants, IGrowable
 {
-	public static final BlockVariant
-			AETHER_GRASS = new BlockVariant(0, "normal"),
+	public static final BlockVariant AETHER_GRASS = new BlockVariant(0, "normal"),
 			ENCHANTED_AETHER_GRASS = new BlockVariant(1, "enchanted"),
 			FROSTROOT = new BlockVariant(2, "frostroot"),
 			BLIGHTED = new BlockVariant(3, "blighted");
@@ -65,11 +65,11 @@ public class BlockAetherGrass extends Block implements IBlockVariants, IGrowable
 	}
 
 	@Override
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-    {
-        Block block = worldIn.getBlockState(pos.up()).getBlock();
-        return state.withProperty(SNOWY, Boolean.valueOf(block == Blocks.SNOW || block == Blocks.SNOW_LAYER));
-    }
+	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	{
+		Block block = worldIn.getBlockState(pos.up()).getBlock();
+		return state.withProperty(SNOWY, Boolean.valueOf(block == Blocks.SNOW || block == Blocks.SNOW_LAYER));
+	}
 
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
@@ -198,7 +198,7 @@ public class BlockAetherGrass extends Block implements IBlockVariants, IGrowable
 						if (rand.nextInt(2) == 0 && BlocksAether.orange_tree.canPlaceBlockAt(worldIn, nextPos))
 						{
 							WorldGenOrangeTree orangeTree = new WorldGenOrangeTree();
-							
+
 							orangeTree.generate(worldIn, rand, nextPos);
 						}
 						else if (BlocksAether.blueberry_bush.canPlaceBlockAt(worldIn, nextPos))
@@ -237,9 +237,9 @@ public class BlockAetherGrass extends Block implements IBlockVariants, IGrowable
 	}
 
 	@Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
-    {
-        return BlockRenderLayer.CUTOUT_MIPPED;
-    }
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getBlockLayer()
+	{
+		return BlockRenderLayer.CUTOUT_MIPPED;
+	}
 }
