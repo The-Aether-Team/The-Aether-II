@@ -1,28 +1,140 @@
 {
 	"variants": {
-		"variant=normal": [
-			{ "model": "aether:grass/aether_grass" },
-			{ "model": "aether:grass/aether_grass", "y": 90 },
-			{ "model": "aether:grass/aether_grass", "y": 180 },
-			{ "model": "aether:grass/aether_grass", "y": 270 }
+		"snowy=false,variant=normal": [
+			{
+				"model": "aether:grass/aether_grass"
+			},
+			{
+				"model": "aether:grass/aether_grass",
+				"y": 90
+			},
+			{
+				"model": "aether:grass/aether_grass",
+				"y": 180
+			},
+			{
+				"model": "aether:grass/aether_grass",
+				"y": 270
+			}
 		],
-		"variant=enchanted": [
-			{ "model": "aether:grass/enchanted_aether_grass" },
-			{ "model": "aether:grass/enchanted_aether_grass", "y": 90 },
-			{ "model": "aether:grass/enchanted_aether_grass", "y": 180 },
-			{ "model": "aether:grass/enchanted_aether_grass", "y": 270 }
+		"snowy=true,variant=normal": [
+			{
+				"model": "aether:grass/aether_grass_snowed"
+			},
+			{
+				"model": "aether:grass/aether_grass_snowed",
+				"y": 90
+			},
+			{
+				"model": "aether:grass/aether_grass_snowed",
+				"y": 180
+			},
+			{
+				"model": "aether:grass/aether_grass_snowed",
+				"y": 270
+			}
 		],
-		"variant=frostroot": [
-			{ "model": "aether:grass/frostroot" },
-			{ "model": "aether:grass/frostroot", "y": 90 },
-			{ "model": "aether:grass/frostroot", "y": 180 },
-			{ "model": "aether:grass/frostroot", "y": 270 }
+		"snowy=true,variant=enchanted": [
+			{
+				"model": "aether:grass/aether_grass_snowed"
+			},
+			{
+				"model": "aether:grass/aether_grass_snowed",
+				"y": 90
+			},
+			{
+				"model": "aether:grass/aether_grass_snowed",
+				"y": 180
+			},
+			{
+				"model": "aether:grass/aether_grass_snowed",
+				"y": 270
+			}
 		],
-		"variant=blighted": [
-			{ "model": "aether:grass/blighted_aether_grass" },
-			{ "model": "aether:grass/blighted_aether_grass", "y": 90 },
-			{ "model": "aether:grass/blighted_aether_grass", "y": 180 },
-			{ "model": "aether:grass/blighted_aether_grass", "y": 270 }
+		"snowy=false,variant=enchanted": [
+			{
+				"model": "aether:grass/enchanted_aether_grass"
+			},
+			{
+				"model": "aether:grass/enchanted_aether_grass",
+				"y": 90
+			},
+			{
+				"model": "aether:grass/enchanted_aether_grass",
+				"y": 180
+			},
+			{
+				"model": "aether:grass/enchanted_aether_grass",
+				"y": 270
+			}
+		],
+		"snowy=false,variant=frostroot": [
+			{
+				"model": "aether:grass/frostroot"
+			},
+			{
+				"model": "aether:grass/frostroot",
+				"y": 90
+			},
+			{
+				"model": "aether:grass/frostroot",
+				"y": 180
+			},
+			{
+				"model": "aether:grass/frostroot",
+				"y": 270
+			}
+		],
+		"snowy=true,variant=frostroot": [
+			{
+				"model": "aether:grass/frostroot"
+			},
+			{
+				"model": "aether:grass/frostroot",
+				"y": 90
+			},
+			{
+				"model": "aether:grass/frostroot",
+				"y": 180
+			},
+			{
+				"model": "aether:grass/frostroot",
+				"y": 270
+			}
+		],
+		"snowy=true,variant=blighted": [
+			{
+				"model": "aether:grass/blighted_aether_grass"
+			},
+			{
+				"model": "aether:grass/blighted_aether_grass",
+				"y": 90
+			},
+			{
+				"model": "aether:grass/blighted_aether_grass",
+				"y": 180
+			},
+			{
+				"model": "aether:grass/blighted_aether_grass",
+				"y": 270
+			}
+		],
+		"snowy=false,variant=blighted": [
+			{
+				"model": "aether:grass/blighted_aether_grass"
+			},
+			{
+				"model": "aether:grass/blighted_aether_grass",
+				"y": 90
+			},
+			{
+				"model": "aether:grass/blighted_aether_grass",
+				"y": 180
+			},
+			{
+				"model": "aether:grass/blighted_aether_grass",
+				"y": 270
+			}
 		]
 	}
 }
