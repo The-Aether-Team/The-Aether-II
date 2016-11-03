@@ -80,7 +80,10 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 					this.entity().setAttacked(false);
 					this.entity().attackEntityAsMob(this.entity().getAttackTarget());
 
-					this.entity().getAttackTarget().addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 80, 3));
+					if (!this.entity().getAttackTarget().isActiveItemStackBlocking())
+					{
+						this.entity().getAttackTarget().addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 80, 3));
+					}
 
 					this.attackTimer.reset();
 					this.cooldownTimer.reset();
