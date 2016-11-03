@@ -1,6 +1,9 @@
 package com.gildedgames.aether.common.registry;
 
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.world.dimensions.aether.features.*;
+import com.gildedgames.aether.common.world.dimensions.aether.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.gen.templates.conditions.*;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
@@ -47,6 +50,8 @@ public class GenerationAether
 	public static WorldGenTemplateGroup skyroot_moa_nest, labyrinth_entrance;
 
 	public static WorldGenAetherTallGrass aether_grass;
+
+	public static WorldGenAercloud green_aercloud, golden_aercloud, storm_aercloud;
 
 	private GenerationAether()
 	{
@@ -153,6 +158,10 @@ public class GenerationAether
 		labyrinth_entrance = new WorldGenTemplateGroup(labyrinth_entrance_1);
 
 		aether_grass = new WorldGenAetherTallGrass();
+
+		green_aercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.BLUE_AERCLOUD), 4, false);
+		golden_aercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.GOLDEN_AERCLOUD), 4, false);
+		storm_aercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.STORM_AERCLOUD), 16, false);
 	}
 
 }

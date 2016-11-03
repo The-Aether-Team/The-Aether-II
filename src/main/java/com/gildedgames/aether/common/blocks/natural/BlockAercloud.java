@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.natural;
 
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
@@ -301,4 +302,10 @@ public class BlockAercloud extends Block implements IBlockVariants
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}
+
+	public IBlockState getAercloudState(AercloudVariant variant)
+	{
+		return BlocksAether.aercloud.getDefaultState().withProperty(BlockAercloud.PROPERTY_VARIANT, variant);
+	}
+
 }

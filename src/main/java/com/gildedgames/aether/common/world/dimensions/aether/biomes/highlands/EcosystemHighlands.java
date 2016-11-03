@@ -5,8 +5,11 @@ import com.gildedgames.aether.common.world.biome.Ecosystem;
 import com.gildedgames.aether.common.world.biome.WorldDecoration;
 import com.gildedgames.aether.common.world.biome.WorldDecorationSimple;
 import com.google.common.collect.Lists;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.Random;
 
 public class EcosystemHighlands implements Ecosystem
 {
@@ -48,6 +51,18 @@ public class EcosystemHighlands implements Ecosystem
 			this.decorations.add(new WorldDecorationSimple(2, GenerationAether.green_skyroot_tree));
 			this.decorations.add(new WorldDecorationSimple(2, GenerationAether.green_skyroot_oak));
 			this.decorations.add(new WorldDecorationSimple(2, GenerationAether.golden_oak));
+			this.decorations.add(new WorldDecorationSimple(1, GenerationAether.golden_aercloud, 0.06F)
+			{
+				@Override
+				public BlockPos findPositionToPlace(World world, Random rand, BlockPos pos)
+				{
+					int width = 16;
+					int minY = 90;
+					int maxY = 130;
+
+					return pos.add(rand.nextInt(width), minY + rand.nextInt(maxY - minY), rand.nextInt(width));
+				}
+			});
 		}
 
 		return this.decorations;
