@@ -118,6 +118,11 @@ public class BlockUtil
 		return !isAir(state) && state.getBlock().isBlockSolid(world, pos, EnumFacing.DOWN) && state.getBlock().getMaterial(state).isOpaque();
 	}
 
+	public static boolean isSolid(IBlockState state)
+	{
+		return !isAir(state) && state.getMaterial().isSolid() && state.getBlock().isOpaqueCube(state);
+	}
+
 	public static int getTopBlockHeight(final World world, int posX, int posZ)
 	{
 		final Chunk chunk = world.getChunkFromChunkCoords(posX >> 4, posZ >> 4);

@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.world.gen.templates.conditions;
 
+import com.gildedgames.aether.common.util.helpers.BlockUtil;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenTemplate;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -17,9 +18,7 @@ public class ReplaceablePlacementCondition implements WorldGenTemplate.Placement
 	{
 		if (block.blockState.getBlock() != Blocks.STRUCTURE_VOID)
 		{
-			Material material = block.blockState.getMaterial();
-
-			if (material.isOpaque() && material.isSolid() && WorldGenTemplate.isReplaceable(world, block.pos))
+			if (BlockUtil.isSolid(block.blockState) && WorldGenTemplate.isReplaceable(world, block.pos))
 			{
 				return true;
 			}

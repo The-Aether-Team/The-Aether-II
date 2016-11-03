@@ -305,7 +305,7 @@ public class TeleporterAether extends Teleporter implements NBT
 
 							this.portalPairs.put(oldPortal, linkedPortal);
 
-							GenerationAether.aether_portal.placeTemplateWithoutCheck(world, pos.up(), settings, true);
+							GenerationAether.aether_portal_for_world.placeTemplateWithoutCheck(world, pos.up(), settings, true);
 
 							AetherCore.LOGGER.debug("Created portal using " + (attempts + 1) + " attempts.");
 
@@ -363,7 +363,7 @@ public class TeleporterAether extends Teleporter implements NBT
 
 	public int getFirstUncoveredCoord(World world, int x, int z)
 	{
-		for (int i = world.getHeight(); i > 0; i--)
+		for (int i = world.getActualHeight(); i > 0; i--)
 		{
 			final IBlockState state = world.getBlockState(new BlockPos(x, i, z));
 			if (!BlockUtil.isAir(state) && !(state.getBlock() instanceof BlockLeaves)
