@@ -194,7 +194,7 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 	{
 		Material material = block.getDefaultState().getMaterial();
 
-		return material == Material.AIR || material == Material.LEAVES || block == BlocksAether.aether_grass || block == BlocksAether.aether_dirt || material == Material.PLANTS;
+		return material == Material.AIR || material == Material.LEAVES || material == Material.PLANTS;
 	}
 
 	public static boolean isReplaceable(World world, BlockPos pos)
