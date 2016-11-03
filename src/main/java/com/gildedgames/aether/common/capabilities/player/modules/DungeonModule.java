@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.capabilites.instances.IPlayerInstances;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
+import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
 import com.gildedgames.aether.api.util.NBT;
@@ -32,10 +33,7 @@ public class DungeonModule extends PlayerAetherModule
 		{
 			EntityPlayerMP player = (EntityPlayerMP) this.getPlayer();
 
-			IPlayerInstances playerInstances = AetherAPI.instances().getPlayer(player);
-			NBT nbt = playerInstances.getInstance();
-
-			if (nbt instanceof DungeonInstance)
+			if (player.getServerWorld().provider.getDimensionType() == DimensionsAether.SLIDER_LABYRINTH)
 			{
 				if (!(event.getPlacedBlock().getBlock() instanceof BlockTorch))
 				{
