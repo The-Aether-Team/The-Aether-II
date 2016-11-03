@@ -52,7 +52,7 @@ public class BlockIncubator extends BlockContainer
 	{
 		TileEntity tileEntity = world.getTileEntity(pos);
 
-		if (tileEntity instanceof TileEntityHolystoneFurnace)
+		if (tileEntity instanceof TileEntityIncubator)
 		{
 			InventoryHelper.dropInventoryItems(world, pos, (IInventory) tileEntity);
 		}
