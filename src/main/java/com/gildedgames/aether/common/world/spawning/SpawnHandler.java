@@ -17,6 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.ForgeEventFactory;
 
 import java.io.File;
@@ -397,6 +398,13 @@ public class SpawnHandler implements NBT
 
 					entity.setLocationAndAngles(posX + 0.5F, posY, posZ + 0.5F, world.rand.nextFloat() * 360.0F, 0.0F);
 
+					if (world instanceof WorldServer)
+					{
+						WorldServer worldServer = (WorldServer)world;
+
+						worldServer.updateEntityWithOptionalForce(entity, true);
+					}
+
 					if (SpawnHandler.isNotColliding(world, entity))
 					{
 						if (entity instanceof EntityLiving)
@@ -437,7 +445,7 @@ public class SpawnHandler implements NBT
 		}
 	}
 
-	private static boolean isNotColliding(World world, Entity entity)
+	public static boolean isNotColliding(World world, Entity entity)
 	{
 		return !world.containsAnyLiquid(entity.getEntityBoundingBox()) && world.getCollisionBoxes(entity, entity.getEntityBoundingBox()).isEmpty() && world.checkNoEntityCollision(entity.getEntityBoundingBox(), entity);
 	}
