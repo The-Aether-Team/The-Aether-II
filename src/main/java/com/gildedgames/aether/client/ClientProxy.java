@@ -20,6 +20,7 @@ import com.gildedgames.aether.client.renderer.items.LeatherGlovesColorHandler;
 import com.gildedgames.aether.client.renderer.items.WrappingPaperColorHandler;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.client.ui.UiManager;
+import com.gildedgames.aether.client.ui.minecraft.util.decorators.MinecraftGui;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonProxy;
 import com.gildedgames.aether.common.blocks.BlocksAether;
@@ -180,9 +181,12 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public void displayDismountMessage()
+	public void displayDismountMessage(EntityPlayer player)
 	{
-		Minecraft.getMinecraft().ingameGUI.setRecordPlaying(I18n.format("mount.onboard", new Object[] {Minecraft.getMinecraft().gameSettings.keyBindSneak.getDisplayName()}), false);
+		if (player == Minecraft.getMinecraft().thePlayer)
+		{
+			Minecraft.getMinecraft().ingameGUI.setRecordPlaying(I18n.format("mount.onboard", new Object[] {Minecraft.getMinecraft().gameSettings.keyBindSneak.getDisplayName()}), false);
+		}
 	}
 
 }

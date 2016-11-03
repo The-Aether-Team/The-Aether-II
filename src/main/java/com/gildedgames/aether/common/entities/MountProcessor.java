@@ -47,7 +47,7 @@ public class MountProcessor
 
 					processor.onMountedBy(target, event.getEntityPlayer());
 
-					AetherCore.PROXY.displayDismountMessage();
+					AetherCore.PROXY.displayDismountMessage(event.getEntityPlayer());
 				}
 			}
 		}

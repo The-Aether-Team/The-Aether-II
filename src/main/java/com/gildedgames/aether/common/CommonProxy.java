@@ -251,7 +251,7 @@ public class CommonProxy
 		return this.dungeonInstanceHandler;
 	}
 
-	public void displayDismountMessage()
+	public void displayDismountMessage(EntityPlayer player)
 	{
 
 	}

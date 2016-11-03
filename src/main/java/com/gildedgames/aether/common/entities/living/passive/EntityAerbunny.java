@@ -132,7 +132,7 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 				this.worldObj.playSound(player, player.getPosition(), SoundsAether.aerbunny_lift, SoundCategory.NEUTRAL, 1.0F, 0.8F + (this.rand.nextFloat() * 0.5F));
 
 				this.startRiding(player, true);
-				AetherCore.PROXY.displayDismountMessage();
+				AetherCore.PROXY.displayDismountMessage(player);
 
 				return true;
 			}
@@ -259,6 +259,12 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 		boolean flag = stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
 
 		return flag;
+	}
+
+	@Override
+	public boolean isEntityInsideOpaqueBlock()
+	{
+		return !this.isRiding() && super.isEntityInsideOpaqueBlock();
 	}
 
 }
