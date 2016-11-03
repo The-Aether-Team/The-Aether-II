@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.gen.templates.conditions;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.util.helpers.BlockUtil;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenTemplate;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -22,7 +22,7 @@ public class FlatGroundPlacementCondition implements WorldGenTemplate.PlacementC
 
 			IBlockState state = world.getBlockState(down);
 
-			if (state.getBlock() != BlocksAether.aether_grass)
+			if (!BlockUtil.isSolid(state, world, down))
 			{
 				return false;
 			}

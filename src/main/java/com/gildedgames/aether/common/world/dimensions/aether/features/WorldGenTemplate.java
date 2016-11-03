@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.world.dimensions.aether.features;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.util.structure.TemplatePrimer;
 import com.gildedgames.aether.common.world.gen.IWorldGen;
 import com.google.common.collect.Lists;
@@ -24,7 +23,7 @@ import java.util.Random;
 public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 {
 
-	protected static final Rotation[] ROTATIONS = Rotation.values();
+	public static final Rotation[] ROTATIONS = Rotation.values();
 
 	private Template template;
 
@@ -51,6 +50,35 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 		this.centerOffsetProcessor = centerOffsetProcessor;
 	}
 
+	public BlockPos getCenteredPos(BlockPos pos, PlacementSettings settings)
+	{
+		BlockPos size = this.template.transformedSize(settings.getRotation());
+
+		switch (settings.getRotation())
+		{
+		case NONE:
+		default:
+			pos = pos.add(-(size.getX() / 2.0) + 1, 0, -(size.getZ() / 2.0) + 1);
+			break;
+		case CLOCKWISE_90:
+			pos = pos.add(size.getX() / 2.0, 0, -(size.getZ() / 2.0) + 1);
+			break;
+		case COUNTERCLOCKWISE_90:
+			pos = pos.add(-(size.getX() / 2.0) + 1, 0, (size.getZ() / 2.0));
+			break;
+		case CLOCKWISE_180:
+			pos = pos.add((size.getX() / 2.0), 0, (size.getZ() / 2.0));
+			break;
+		}
+
+		if (this.getCenterOffsetProcessor() != null)
+		{
+			pos = pos.add(this.getCenterOffsetProcessor().getOffset(settings.getRotation()));
+		}
+
+		return pos;
+	}
+
 	@Override
 	public boolean generate(World world, Random rand, BlockPos pos, boolean centered)
 	{
@@ -60,29 +88,7 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 
 		if (centered)
 		{
-			BlockPos size = this.template.transformedSize(rotation);
-
-			switch (rotation)
-			{
-			case NONE:
-			default:
-				pos = pos.add(-(size.getX() / 2.0) + 1, 0, -(size.getZ() / 2.0) + 1);
-				break;
-			case CLOCKWISE_90:
-				pos = pos.add(size.getX() / 2.0, 0, -(size.getZ() / 2.0) + 1);
-				break;
-			case COUNTERCLOCKWISE_90:
-				pos = pos.add(-(size.getX() / 2.0) + 1, 0, (size.getZ() / 2.0));
-				break;
-			case CLOCKWISE_180:
-				pos = pos.add((size.getX() / 2.0), 0, (size.getZ() / 2.0));
-				break;
-			}
-
-			if (this.getCenterOffsetProcessor() != null)
-			{
-				pos = pos.add(this.getCenterOffsetProcessor().getOffset(rotation));
-			}
+			pos = this.getCenteredPos(pos, settings);
 		}
 
 		boolean result = this.placeTemplateWithCheck(world, pos, settings);
@@ -126,8 +132,18 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 		return bb;
 	}
 
-	protected boolean canGenerate(World world, BlockPos pos, PlacementSettings settings)
+	public boolean canGenerate(World world, BlockPos pos, PlacementSettings settings)
 	{
+		return this.canGenerate(world, pos, settings, false);
+	}
+
+	public boolean canGenerate(World world, BlockPos pos, PlacementSettings settings, boolean centered)
+	{
+		if (centered)
+		{
+			pos = this.getCenteredPos(pos, settings);
+		}
+
 		final StructureBoundingBox bb = this.getBoundingBoxFromTemplate(pos, settings);
 
 		if (!world.isAreaLoaded(bb) || bb.maxY > world.getActualHeight())
@@ -174,9 +190,14 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 
 	public boolean placeTemplateWithCheck(World world, BlockPos pos, PlacementSettings settings)
 	{
+		return this.placeTemplateWithCheck(world, pos, settings, false);
+	}
+
+	public boolean placeTemplateWithCheck(World world, BlockPos pos, PlacementSettings settings, boolean centered)
+	{
 		if (this.canGenerate(world, pos, settings))
 		{
-			this.placeTemplateWithoutCheck(world, pos, settings);
+			this.placeTemplateWithoutCheck(world, pos, settings, centered);
 
 			return true;
 		}
@@ -186,6 +207,16 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 
 	public void placeTemplateWithoutCheck(World world, BlockPos pos, PlacementSettings settings)
 	{
+		this.placeTemplateWithoutCheck(world, pos, settings, false);
+	}
+
+	public void placeTemplateWithoutCheck(World world, BlockPos pos, PlacementSettings settings, boolean centered)
+	{
+		if (centered)
+		{
+			pos = this.getCenteredPos(pos, settings);
+		}
+
 		ITemplateProcessor processor = new BlockRotationProcessor(pos, settings);
 		TemplatePrimer.populateAll(this.template, world, pos, processor, settings);
 	}

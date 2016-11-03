@@ -2,12 +2,14 @@ package com.gildedgames.aether.common.world.dimensions.aether;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.registry.GenerationAether;
 import com.gildedgames.aether.common.registry.TemplatesAether;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.api.util.BlockPosDimension;
 import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.util.helpers.BlockUtil;
 import com.gildedgames.aether.common.util.io.NBTHelper;
+import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenTemplate;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import net.minecraft.block.BlockFlower;
@@ -217,20 +219,6 @@ public class TeleporterAether extends Teleporter implements NBT
 		return false;
 	}
 
-	public boolean hasSolidBlocks(World world, int minX, int minY, int minZ, int maxX, int maxY, int maxZ)
-	{
-		for (final BlockPos pos : BlockUtil.getInBox(minX, minY, minZ, maxX, maxY, maxZ))
-		{
-			final IBlockState block = world.getBlockState(pos);
-			if (!BlockUtil.isAir(block) && !(block.getBlock() instanceof BlockFlower))
-			{
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	@Override
 	public boolean makePortal(Entity entity)
 	{
@@ -290,23 +278,21 @@ public class TeleporterAether extends Teleporter implements NBT
 
 						innerDirection.rotateY();
 
-						final int y1 = this.getFirstUncoveredCoord(world, xInner, zInner) + 1;
-						final BlockPos pos = new BlockPos(xInner, y1, zInner).down();
+						final int y1 = this.getFirstUncoveredCoord(world, xInner, zInner);
+						final BlockPos pos = new BlockPos(xInner, y1, zInner);
+
+						Rotation rotation = WorldGenTemplate.ROTATIONS[world.rand.nextInt(WorldGenTemplate.ROTATIONS.length)];
+
+						PlacementSettings settings = new PlacementSettings().setMirror(Mirror.NONE).setRotation(rotation).setIgnoreEntities(false).setChunk(null).setReplacedBlock(null).setIgnoreStructureBlock(false);
 
 						final IBlockState blockID = world.getBlockState(pos);
 
-						if (BlockUtil.isSolid(blockID, world, pos))
+						if (BlockUtil.isSolid(blockID, world, pos) && GenerationAether.aether_portal_for_world.canGenerate(world, pos.up(), settings, true))
 						{
 							hasFoundPosition = true;
 						}
 
-						// this.hasSolidBlocks call: Checks if there are no
-						// blocks where you would place the portal
-						if ((hasFoundPosition))// && !this.hasSolidBlocks(world,
-						// xInner - 1, y1 + 1, zInner -
-						// 1, xInner, y1 + 4, zInner +
-						// 4)) || attempts > maxAttempts
-						// - 15)
+						if (hasFoundPosition)
 						{
 							final int posX = MathHelper.floor_double(entity.posX);
 							final int posY = MathHelper.floor_double(entity.posY);
@@ -319,7 +305,7 @@ public class TeleporterAether extends Teleporter implements NBT
 
 							this.portalPairs.put(oldPortal, linkedPortal);
 
-							this.createPortalFrame(world, xInner, y1, zInner + 1);
+							GenerationAether.aether_portal.placeTemplateWithoutCheck(world, pos.up(), settings, true);
 
 							AetherCore.LOGGER.debug("Created portal using " + (attempts + 1) + " attempts.");
 
@@ -337,45 +323,6 @@ public class TeleporterAether extends Teleporter implements NBT
 		AetherCore.LOGGER.debug("Failed generating portal");
 
 		return isSolidChunk;
-	}
-
-	public boolean createPortalFrame(World world, int x, int y, int z)
-	{
-		return this.createPortalFrame(world, x, y, z, Rotation.NONE);
-	}
-
-	public boolean createPortalFrame(World world, int x, int y, int z, Rotation rotation)
-	{
-		if (!this.createPortal)
-		{
-			return false;
-		}
-
-		PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(rotation).setIgnoreEntities(false).setChunk(null).setReplacedBlock(Blocks.AIR).setIgnoreStructureBlock(false);
-
-		BlockPos size = TemplatesAether.aether_portal.transformedSize(rotation);
-		BlockPos pos = new BlockPos(x, y, z);
-
-		switch (rotation)
-		{
-		case NONE:
-			pos = pos.add(-size.getX() / 2, 0, -size.getZ() / 2);
-			break;
-		default:
-			break;
-		case CLOCKWISE_90:
-			pos = pos.add(size.getX() / 2, 0, -size.getZ() / 2);
-			break;
-		case COUNTERCLOCKWISE_90:
-			pos = pos.add(-size.getX() / 2, 0, size.getZ() / 2);
-			break;
-		case CLOCKWISE_180:
-			pos = pos.add(size.getX() / 2, 0, size.getZ() / 2);
-		}
-
-		TemplatesAether.aether_portal.addBlocksToWorld(world, pos, placementsettings);
-
-		return true;
 	}
 
 	@Override
@@ -422,7 +369,7 @@ public class TeleporterAether extends Teleporter implements NBT
 			if (!BlockUtil.isAir(state) && !(state.getBlock() instanceof BlockLeaves)
 					&& !(state.getBlock() instanceof BlockFlower))
 			{
-				return i - 1;
+				return i;
 			}
 		}
 		return 0;

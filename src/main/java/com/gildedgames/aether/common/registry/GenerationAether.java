@@ -35,7 +35,7 @@ public class GenerationAether
 
 	public static WorldGenTemplate labyrinth_entrance_1, labyrinth_entrance_underground_1;
 
-	public static WorldGenTemplate aether_portal, nether_portal, end_portal;
+	public static WorldGenTemplate aether_portal_for_world, aether_portal, nether_portal, end_portal;
 
 	public static WorldGenTemplate mysterious_henge;
 
@@ -141,6 +141,8 @@ public class GenerationAether
 		aether_portal = new WorldGenTemplate(TemplatesAether.aether_portal, TemplateConditions.REPLACEABLE);
 		nether_portal = new WorldGenTemplate(TemplatesAether.nether_portal, TemplateConditions.REPLACEABLE);
 		end_portal = new WorldGenTemplate(TemplatesAether.end_portal, TemplateConditions.REPLACEABLE);
+
+		aether_portal_for_world = new WorldGenTemplate(TemplatesAether.aether_portal, TemplateConditions.REPLACEABLE, TemplateConditions.FLAT_GROUND);
 
 		mysterious_henge = new WorldGenTemplate(TemplatesAether.mysterious_henge, TemplateConditions.FLAT_GROUND, TemplateConditions.REPLACEABLE);
 
