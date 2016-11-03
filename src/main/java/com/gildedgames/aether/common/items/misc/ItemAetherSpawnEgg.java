@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.items.misc;
 
 import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.entities.util.AetherSpawnEggInfo;
+import com.gildedgames.aether.common.world.spawning.SpawnHandler;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
@@ -26,11 +27,13 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 public class ItemAetherSpawnEgg extends Item
@@ -224,13 +227,30 @@ public class ItemAetherSpawnEgg extends Item
 
 				if (entity instanceof EntityLivingBase)
 				{
-					EntityLiving entityliving = (EntityLiving) entity;
+					EntityLiving living = (EntityLiving) entity;
 					entity.setLocationAndAngles(x, y, z, MathHelper.wrapDegrees(worldIn.rand.nextFloat() * 360.0F), 0.0F);
-					entityliving.rotationYawHead = entityliving.rotationYaw;
-					entityliving.renderYawOffset = entityliving.rotationYaw;
-					entityliving.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityliving)), null);
+					living.rotationYawHead = living.rotationYaw;
+					living.renderYawOffset = living.rotationYaw;
+
+					if (worldIn instanceof WorldServer)
+					{
+						WorldServer worldServer = (WorldServer) worldIn;
+
+						while (!SpawnHandler.isNotColliding(worldIn, living))
+						{
+							Random rand = living.getRNG();
+
+							float xOffset = (rand.nextBoolean() ? -1 : 1) * rand.nextFloat();
+							float zOffset = (rand.nextBoolean() ? -1 : 1) * rand.nextFloat();
+
+							living.setPositionAndUpdate(entity.posX + xOffset, entity.posY, entity.posZ + zOffset);
+							worldServer.updateEntityWithOptionalForce(living, true);
+						}
+					}
+
+					living.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(living)), null);
 					worldIn.spawnEntityInWorld(entity);
-					entityliving.playLivingSound();
+					living.playLivingSound();
 				}
 			}
 
