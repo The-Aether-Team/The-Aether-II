@@ -422,46 +422,44 @@ public class BlocksAether
 
 		registerBlock("wildcard", BlocksAether.wildcard);
 
-		Blocks.FIRE.setFireInfo(BlocksAether.aether_flower, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.orange_tree, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.blueberry_bush, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.enchanted_blueberry_bush, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.tall_aether_grass, 60, 100);
+		Blocks.FIRE.setFireInfo(BlocksAether.aether_flower, 60, 100);
+		Blocks.FIRE.setFireInfo(BlocksAether.orange_tree, 60, 100);
+		Blocks.FIRE.setFireInfo(BlocksAether.blueberry_bush, 60, 100);
+		Blocks.FIRE.setFireInfo(BlocksAether.enchanted_blueberry_bush, 60, 100);
 
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_log_wall, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.aether_planks, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_chest, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.aether_crafting_table, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.aether_planks, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_chest, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.aether_crafting_table, 5, 20);
 
-		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_door, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.blightwillow_door, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.earthshifter_door, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.frostpine_door, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_door, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.blightwillow_door, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.earthshifter_door, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.frostpine_door, 5, 20);
 
-		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_fence, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_fence_gate, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_fence, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_fence_gate, 5, 20);
 
-		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_ladder, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.blightwillow_ladder, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.earthshifter_ladder, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.frostpine_ladder, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_ladder, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.blightwillow_ladder, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.earthshifter_ladder, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.frostpine_ladder, 5, 20);
 
-		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_pressure_plate, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_bed, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_slab, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_trapdoor, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_stairs, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_button, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.woven_sticks, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_pressure_plate, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_bed, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_slab, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_trapdoor, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_stairs, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_button, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.woven_sticks, 30, 60);
 
-		Blocks.FIRE.setFireInfo(BlocksAether.frostpine_cooler, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.incubator, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.frostpine_cooler, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.incubator, 5, 20);
 
 		registerHarvestLevels();
 
-		for (Runnable runnable : BlocksAether.postRegistration)
-		{
-			runnable.run();
-		}
+		BlocksAether.postRegistration.forEach(Runnable::run);
 
 		BlocksAether.postRegistration.clear();
 	}
