@@ -795,6 +795,7 @@ public class ItemsAether
 		AetherAPI.temperature().register(ItemsAether.ambrosium_chunk, temperatureHandler);
 
 		AetherAPI.temperature().register(ItemsAether.moa_egg, temperatureHandler);
+		AetherAPI.temperature().register(ItemsAether.rainbow_moa_egg, temperatureHandler);
 
 		AetherAPI.temperature().register(ItemsAether.icestone, temperatureHandler);
 		AetherAPI.temperature().register(ItemsAether.irradiated_chunk, temperatureHandler);

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.registry;
 
 import com.gildedgames.aether.api.capabilites.items.properties.TemperatureProperties;
+import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
 import com.gildedgames.aether.common.entities.util.MoaNest;
@@ -48,7 +49,7 @@ public class TemperatureHandler implements TemperatureProperties
             {
                 return -50000;
             }
-            else if (stack.getItem() == ItemsAether.moa_egg)
+            else if (stack.getItem() == ItemsAether.moa_egg || stack.getItem() == ItemsAether.rainbow_moa_egg)
             {
                 return 100000;
             }
@@ -78,11 +79,22 @@ public class TemperatureHandler implements TemperatureProperties
     {
         if (stack != null)
         {
-            if (stack.getItem() == ItemsAether.moa_egg)
+            if (stack.getItem() == ItemsAether.moa_egg || stack.getItem() == ItemsAether.rainbow_moa_egg)
             {
                 if (!world.isRemote)
                 {
-                    MoaGenePool genes = ItemMoaEgg.getGenePool(stack);
+                    MoaGenePool genes;
+
+                    if (stack.getItem() == ItemsAether.moa_egg)
+                    {
+                        genes = ItemMoaEgg.getGenePool(stack);
+                    }
+                    else
+                    {
+                        genes = new MoaGenePool();
+
+                        genes.transformFromSeed(GeneUtil.getRandomSeed(world));
+                    }
 
                     MoaNest familyNest = new MoaNest(world);
 
