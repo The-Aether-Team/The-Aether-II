@@ -30,7 +30,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	{
 		super(world);
 
-		this.setSize(0.5F, 1.4F);
+		this.setSize(0.5F, 1.5F);
 
 		this.spawnableBlock = BlocksAether.aether_grass;
 

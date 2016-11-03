@@ -46,7 +46,7 @@ public class EntityBattleGolem extends EntityAetherMob implements IRangedAttackM
 
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
-		this.setSize(1.5F, 1.9F);
+		this.setSize(1.5F, 1.5F);
 
 		this.stepHeight = 1.0F;
 	}

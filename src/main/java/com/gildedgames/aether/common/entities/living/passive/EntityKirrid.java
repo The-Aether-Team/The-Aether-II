@@ -29,7 +29,7 @@ public class EntityKirrid extends EntitySheep
 
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
 
-		this.setSize(1.1F, 1.6F);
+		this.setSize(1.0F, 1.5F);
 
 		this.spawnableBlock = BlocksAether.aether_grass;
 	}

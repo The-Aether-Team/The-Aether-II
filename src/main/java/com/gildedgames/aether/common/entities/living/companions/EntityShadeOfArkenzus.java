@@ -9,7 +9,7 @@ public class EntityShadeOfArkenzus extends EntityCompanion
 	{
 		super(worldIn);
 
-		this.setSize(0.5f, 1.1f);
+		this.setSize(0.5f, 1.0f);
 	}
 
 	@Override

@@ -33,7 +33,7 @@ public class EntityTaegore extends EntityAetherAnimal implements IAnimatedEntity
 	{
 		super(world);
 
-		this.setSize(1.6F, 1.6F);
+		this.setSize(1.5F, 1.5F);
 
 		this.spawnableBlock = BlocksAether.aether_grass;
 	}

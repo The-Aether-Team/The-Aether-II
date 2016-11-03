@@ -40,7 +40,7 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(7, new EntityAILookIdle(this));
 
-		this.setSize(0.9F, 1.3F);
+		this.setSize(0.9F, 1.4F);
 	}
 
 	@Override

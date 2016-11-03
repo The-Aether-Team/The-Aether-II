@@ -81,7 +81,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 		this.familyNest = new MoaNest(world);
 
-		this.setSize(1.2F, 2.2F);
+		this.setSize(1.0F, 2.0F);
 		this.stepHeight = 1.0F;
 	}
 

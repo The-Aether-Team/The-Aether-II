@@ -11,7 +11,7 @@ public class EntityFrostpineTotem extends EntityBasicCompanion
 	{
 		super(worldIn);
 
-		this.setSize(0.9f, 2.1f);
+		this.setSize(0.9f, 2.0f);
 		this.setPotion(MobEffects.NIGHT_VISION, 0);
 
 		this.stepHeight = 1.0F;
