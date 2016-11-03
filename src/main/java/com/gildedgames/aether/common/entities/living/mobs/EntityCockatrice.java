@@ -87,7 +87,10 @@ public class EntityCockatrice extends EntityAetherMob implements IEntityProperti
 		{
 			EntityLivingBase living = (EntityLivingBase)entity;
 
-			living.addPotionEffect(new PotionEffect(MobEffects.POISON, 40));
+			if (!living.isActiveItemStackBlocking() || this.getRNG().nextInt(4) == 0)
+			{
+				living.addPotionEffect(new PotionEffect(MobEffects.POISON, 40));
+			}
 		}
 
 		return flag;
