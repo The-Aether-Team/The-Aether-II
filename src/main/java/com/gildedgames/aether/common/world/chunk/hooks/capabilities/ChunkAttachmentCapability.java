@@ -12,11 +12,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.event.world.ChunkDataEvent;
+import net.minecraftforge.event.world.ChunkEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,20 +35,14 @@ public class ChunkAttachmentCapability implements IChunkAttachmentCapability
 
 	public void load(ChunkDataEvent.Load event)
 	{
-		AttachCapabilitiesChunkEvent event2 = new AttachCapabilitiesChunkEvent(event.getChunk());
+		NBTTagCompound root = event.getData().getCompoundTag("aether_capabilities");
 
-		MinecraftForge.EVENT_BUS.post(event2);
+		ChunkAttachmentPool pool = this.createOrGetHookPool(event.getChunk());
 
-		ChunkAttachmentPool pool = new ChunkAttachmentPool(event2.getCapabilities());
-
-		this.setHookPool(event.getChunk().getChunkCoordIntPair(), pool);
-
-		if (pool.getWritableSize() <= 0)
+		if (pool == null || root == null)
 		{
 			return;
 		}
-
-		NBTTagCompound root = event.getData().getCompoundTag("aether_capabilities");
 
 		for (Map.Entry<ResourceLocation, ICapabilitySerializable<NBTBase>> entry : pool.writers().entrySet())
 		{
@@ -80,6 +76,18 @@ public class ChunkAttachmentCapability implements IChunkAttachmentCapability
 		event.getData().setTag("aether_capabilities", compound);
 	}
 
+	@Override
+	public void init(ChunkEvent.Load event)
+	{
+		this.createOrGetHookPool(event.getChunk());
+	}
+
+	@Override
+	public void destroy(ChunkEvent.Unload event)
+	{
+		this.destroyHookPool(event.getChunk().getChunkCoordIntPair());
+	}
+
 	public <T extends NBT> T getAttachment(ChunkPos pos, Capability<T> capability)
 	{
 		ChunkAttachmentPool pool = this.getHookPool(pos);
@@ -97,9 +105,32 @@ public class ChunkAttachmentCapability implements IChunkAttachmentCapability
 		return this.hooks.get(ChunkPos.asLong(pos.chunkXPos, pos.chunkZPos));
 	}
 
+	private ChunkAttachmentPool createOrGetHookPool(Chunk chunk)
+	{
+		ChunkAttachmentPool pool = this.getHookPool(chunk.getChunkCoordIntPair());
+
+		if (pool == null)
+		{
+			AttachCapabilitiesChunkEvent attachEvent = new AttachCapabilitiesChunkEvent(chunk);
+
+			MinecraftForge.EVENT_BUS.post(attachEvent);
+
+			pool = new ChunkAttachmentPool(attachEvent.getCapabilities());
+
+			this.setHookPool(chunk.getChunkCoordIntPair(), pool);
+		}
+
+		return pool;
+	}
+
 	private void setHookPool(ChunkPos pos, ChunkAttachmentPool pool)
 	{
 		this.hooks.put(ChunkPos.asLong(pos.chunkXPos, pos.chunkZPos), pool);
+	}
+
+	private void destroyHookPool(ChunkPos pos)
+	{
+		this.hooks.remove(ChunkPos.asLong(pos.chunkXPos, pos.chunkZPos));
 	}
 
 	private class ChunkAttachmentPool

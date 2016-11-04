@@ -47,6 +47,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.ChunkDataEvent;
+import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class CapabilityManagerAether
@@ -168,6 +169,28 @@ public class CapabilityManagerAether
 		event.addCapability(AetherCore.getResource("AetherHooks"), new ChunkAttachmentProvider(new ChunkAttachmentCapability()));
 	}
 
+	@SubscribeEvent
+	public static void onChunkUnload(ChunkEvent.Unload event)
+	{
+		if (event.getWorld().hasCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null))
+		{
+			IChunkAttachmentCapability pool = event.getWorld().getCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null);
+
+			pool.destroy(event);
+		}
+	}
+
+	@SubscribeEvent
+	public static void onChunkLoad(ChunkEvent.Load event)
+	{
+		if (event.getWorld().hasCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null))
+		{
+			IChunkAttachmentCapability pool = event.getWorld().getCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null);
+
+			pool.init(event);
+		}
+	}
+
     @SubscribeEvent
 	public static void onChunkCapabilityAttach(AttachCapabilitiesChunkEvent event)
 	{
@@ -175,7 +198,7 @@ public class CapabilityManagerAether
 	}
 
 	@SubscribeEvent
-	public static void onChunkLoaded(ChunkDataEvent.Load event)
+	public static void onChunkDataLoaded(ChunkDataEvent.Load event)
 	{
 		if (event.getWorld().hasCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null))
 		{
@@ -186,7 +209,7 @@ public class CapabilityManagerAether
 	}
 
 	@SubscribeEvent
-	public static void onChunkSaved(ChunkDataEvent.Save event)
+	public static void onChunkDataUnloaded(ChunkDataEvent.Save event)
 	{
 		if (event.getWorld().hasCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null))
 		{
