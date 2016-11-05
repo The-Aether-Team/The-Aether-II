@@ -3,6 +3,8 @@ package com.gildedgames.aether.common;
 import com.gildedgames.aether.client.gui.menu.WorldAetherOptionsOverlay;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
+import com.gildedgames.aether.common.entities.living.mobs.EntityAechorPlant;
+import com.gildedgames.aether.common.entities.living.passive.EntityCarrionSprout;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherShield;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
@@ -12,6 +14,7 @@ import com.gildedgames.aether.common.world.util.TeleporterGeneric;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,6 +41,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.*;
@@ -57,6 +61,22 @@ import java.util.UUID;
 
 public class CommonEvents
 {
+
+	@SubscribeEvent
+	public static void onBlockPlaced(BlockEvent.PlaceEvent event)
+	{
+		List<EntityLiving> entities = event.getWorld().getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(event.getPos()));
+
+		for (EntityLiving entity : entities)
+		{
+			if (entity instanceof EntityAechorPlant || entity instanceof EntityCarrionSprout)
+			{
+				event.setCanceled(true);
+
+				break;
+			}
+		}
+	}
 
 	@SubscribeEvent
 	public static void onWorldLoaded(WorldEvent.Load event)

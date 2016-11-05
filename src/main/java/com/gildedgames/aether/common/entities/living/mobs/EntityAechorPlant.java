@@ -94,13 +94,27 @@ public class EntityAechorPlant extends EntityAetherMob implements IEntityPropert
 			this.setCanSeePrey(isTargeting);
 		}
 
-		BlockPos beneathPos = new BlockPos(this.posX, this.getEntityBoundingBox().minY - 0.1D, this.posZ);
-		Block blockBeneath = this.worldObj.getBlockState(beneathPos).getBlock();
-
-		if (blockBeneath != BlocksAether.aether_grass && blockBeneath != BlocksAether.aether_dirt)
+		if (!this.canStayHere(new BlockPos(this)))
 		{
 			this.setHealth(0);
 		}
+	}
+
+	private boolean canStayHere(BlockPos pos)
+	{
+		if (!this.worldObj.isAirBlock(pos))
+		{
+			return false;
+		}
+
+		Block rootBlock = this.worldObj.getBlockState(pos.down()).getBlock();
+
+		if (rootBlock != BlocksAether.aether_grass && rootBlock != BlocksAether.aether_dirt)
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 	@Override
