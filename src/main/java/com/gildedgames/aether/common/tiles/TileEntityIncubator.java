@@ -280,6 +280,8 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
         }
 
         this.inventory[index] = stack;
+
+        this.sync();
     }
 
     @Override

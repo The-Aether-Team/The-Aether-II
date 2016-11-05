@@ -3,11 +3,14 @@ package com.gildedgames.aether.client.gui.container;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
 import com.gildedgames.aether.common.tiles.TileEntityIncubator;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -19,13 +22,13 @@ public class GuiIncubator extends GuiContainer
 	/** The player inventory bound to this GUI. */
 	private final InventoryPlayer playerInventory;
 
-	private final IInventory tile;
+	private final BlockPos incubatorPos;
 
-	public GuiIncubator(InventoryPlayer playerInv, IInventory coolerInv)
+	public GuiIncubator(InventoryPlayer playerInv, IInventory coolerInv, BlockPos incubatorPos)
 	{
 		super(new ContainerIncubator(playerInv, coolerInv));
 		this.playerInventory = playerInv;
-		this.tile = coolerInv;
+		this.incubatorPos = incubatorPos;
 	}
 
 	/**
@@ -33,13 +36,15 @@ public class GuiIncubator extends GuiContainer
 	 */
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		String s = this.tile.getDisplayName().getUnformattedText();
+		TileEntity tile = Minecraft.getMinecraft().theWorld.getTileEntity(this.incubatorPos);
+
+		String s = tile.getDisplayName().getUnformattedText();
 		this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		this.fontRendererObj.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
 
-		if (this.tile instanceof TileEntityIncubator)
+		if (tile instanceof TileEntityIncubator)
 		{
-			TileEntityIncubator te = (TileEntityIncubator) this.tile;
+			TileEntityIncubator te = (TileEntityIncubator) tile;
 
 			if (!te.hasStartedHeating())
 			{
