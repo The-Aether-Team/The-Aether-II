@@ -107,7 +107,7 @@ public class AIMoaPackBreeding extends EntityAIBase
 		{
 			if (!this.moa.getNavigator().tryMoveToXYZ(this.eggPos.getX() - 1, this.eggPos.getY(), this.eggPos.getZ() - 1, this.moveSpeed))
 			{
-				this.resetTimer();
+
 			}
 		}
 		else if (isNearEgg && this.moa.getNavigator().getPath() != null && this.moa.getNavigator().getPath().isFinished())
