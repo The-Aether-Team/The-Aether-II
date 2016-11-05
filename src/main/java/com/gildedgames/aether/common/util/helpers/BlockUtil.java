@@ -144,4 +144,24 @@ public class BlockUtil
 		return -1;
 	}
 
+	public static BlockPos getTopSolidOrLiquidBlockFromY(World world, BlockPos pos)
+	{
+		Chunk chunk = world.getChunkFromBlockCoords(pos);
+		BlockPos blockpos;
+		BlockPos blockpos1;
+
+		for (blockpos = new BlockPos(pos.getX(), pos.getY(), pos.getZ()); blockpos.getY() >= 0; blockpos = blockpos1)
+		{
+			blockpos1 = blockpos.down();
+			IBlockState state = chunk.getBlockState(blockpos1);
+
+			if (state.getMaterial().blocksMovement() && !state.getBlock().isLeaves(state, world, blockpos1) && !state.getBlock().isFoliage(world, blockpos1))
+			{
+				break;
+			}
+		}
+
+		return blockpos;
+	}
+
 }

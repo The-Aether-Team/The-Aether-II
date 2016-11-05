@@ -9,10 +9,12 @@ import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.util.helpers.BlockUtil;
 import com.gildedgames.aether.common.world.chunk.hooks.capabilities.ChunkAttachmentCapability;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSectorAccess;
 import com.gildedgames.aether.common.world.util.TeleporterGeneric;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
@@ -243,9 +245,23 @@ public class PlayerAetherEvents
 			{
 				IslandData island = IslandSectorAccess.inst().getIslandIfOnlyOne(mp.worldObj, aePlayer.getDeathPos());
 
-				if (island != null && island.getMysteriousHengePos() != null)
+				boolean shouldSpawnAtHenge = island != null && island.getMysteriousHengePos() != null;
+
+				BlockPos pos = null;
+
+				if (shouldSpawnAtHenge)
 				{
-					mp.connection.setPlayerLocation(island.getMysteriousHengePos().getX(), island.getMysteriousHengePos().getY() + 1, island.getMysteriousHengePos().getZ(), 0, 0);
+					pos = BlockUtil.getTopSolidOrLiquidBlockFromY(mp.getServerWorld(), island.getMysteriousHengePos());
+
+					BlockPos down = pos.down();
+					IBlockState state = mp.getServerWorld().getBlockState(down);
+
+					shouldSpawnAtHenge = BlockUtil.isSolid(state, mp.getServerWorld(), down);
+				}
+
+				if (shouldSpawnAtHenge)
+				{
+					mp.connection.setPlayerLocation(pos.getX(), pos.getY() + 1, pos.getZ(), 0, 0);
 
 					mp.getServerWorld().updateEntityWithOptionalForce(mp, true);
 				}
@@ -255,7 +271,7 @@ public class PlayerAetherEvents
 
 					CommonEvents.teleportEntity(mp, toWorld, teleporter, 0);
 
-					BlockPos pos = toWorld.provider.getRandomizedSpawnPoint();
+					pos = toWorld.provider.getRandomizedSpawnPoint();
 
 					mp.connection.setPlayerLocation(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
 
