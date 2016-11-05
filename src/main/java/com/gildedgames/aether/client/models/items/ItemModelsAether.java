@@ -50,6 +50,7 @@ public class ItemModelsAether
 	{
 		registerItemModels(BlocksAether.aether_dirt, new ItemModelBuilder("aether_dirt/")
 				.add(BlockAetherDirt.DIRT.getMeta(), "dirt")
+				.add(BlockAetherDirt.COARSE_DIRT.getMeta(), "coarse_dirt")
 				.add(BlockAetherDirt.PERMAFROST.getMeta(), "permafrost"));
 
 		registerItemModels(BlocksAether.aether_grass, new ItemModelBuilder("grass/")

@@ -92,7 +92,7 @@ public class BlockAetherGrass extends Block implements IBlockVariants, IGrowable
 						IBlockState aboveState = world.getBlockState(randomNeighbor.up());
 						IBlockState neighborState = world.getBlockState(randomNeighbor);
 
-						if (neighborState.getBlock() == BlocksAether.aether_dirt &&
+						if (neighborState.getBlock() == BlocksAether.aether_dirt && neighborState.getValue(BlockAetherDirt.PROPERTY_VARIANT) == BlockAetherDirt.DIRT &&
 								world.getLightFromNeighbors(randomNeighbor.up()) >= 4 && aboveState.getLightOpacity(world, randomNeighbor.up()) <= 2)
 						{
 							IBlockState grassState = this.getDefaultState().withProperty(PROPERTY_VARIANT, AETHER_GRASS);

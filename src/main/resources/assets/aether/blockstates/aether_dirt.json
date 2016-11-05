@@ -6,6 +6,12 @@
 			{ "model": "aether:aether_dirt/dirt", "y": 180 },
 			{ "model": "aether:aether_dirt/dirt", "y": 270 }
 		],
+		"variant=coarse_dirt": [
+			{ "model": "aether:aether_dirt/coarse_dirt" },
+			{ "model": "aether:aether_dirt/coarse_dirt", "y": 90 },
+			{ "model": "aether:aether_dirt/coarse_dirt", "y": 180 },
+			{ "model": "aether:aether_dirt/coarse_dirt", "y": 270 }
+		],
 		"variant=permafrost": [
 			{ "model": "aether:aether_dirt/permafrost" },
 			{ "model": "aether:aether_dirt/permafrost", "y": 90 },

@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.world.dimensions.aether.biomes;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud.AercloudVariant;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
@@ -30,6 +31,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
@@ -37,7 +39,7 @@ import java.util.function.Predicate;
 public class BiomeAetherDecorator
 {
 
-	protected WorldGenAetherMinable genAmbrosium, genZanite, genGravitite, genIcestone, genArkenium;
+	protected WorldGenAetherMinable genAmbrosium, genZanite, genGravitite, genIcestone, genArkenium, genCoarseAetherDirtOnDirt, genCoarseAetherDirtOnHolystone;
 
 	protected WorldGenAetherMinable genMossyHolystone, genCrudeScatterglass;
 
@@ -66,6 +68,11 @@ public class BiomeAetherDecorator
 		this.genGravitite = new WorldGenAetherMinable(BlocksAether.gravitite_ore.getDefaultState(), 4, holystoneMatcher);
 		this.genIcestone = new WorldGenAetherMinable(BlocksAether.icestone_ore.getDefaultState(), 10, holystoneMatcher);
 		this.genArkenium = new WorldGenAetherMinable(BlocksAether.arkenium_ore.getDefaultState(), 8, holystoneMatcher);
+
+		BlockMatcher dirtMatcher = BlockMatcher.forBlock(BlocksAether.aether_dirt);
+
+		this.genCoarseAetherDirtOnDirt = new WorldGenAetherMinable(BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.COARSE_DIRT), 22, dirtMatcher);
+		this.genCoarseAetherDirtOnHolystone = new WorldGenAetherMinable(BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.COARSE_DIRT), 22, holystoneMatcher);
 
 		this.genMossyHolystone = new WorldGenAetherMinable(BlocksAether.holystone.getDefaultState().withProperty(BlockHolystone.PROPERTY_VARIANT, BlockHolystone.MOSSY_HOLYSTONE), 20, holystoneMatcher);
 		this.genCrudeScatterglass = new WorldGenAetherMinable(BlocksAether.crude_scatterglass.getDefaultState(), 20, holystoneMatcher);
@@ -353,6 +360,10 @@ public class BiomeAetherDecorator
 		this.generateMineable(this.genGravitite, world, random, pos, 0, 100, 6);
 		this.generateMineable(this.genIcestone, world, random, pos, 0, 128, 10);
 		this.generateMineable(this.genArkenium, world, random, pos, 0, 128, 20);
+
+		this.generateMineable(this.genCoarseAetherDirtOnDirt, world, random, pos, 0, 128, 20);
+		this.generateMineable(this.genCoarseAetherDirtOnHolystone, world, random, pos, 0, 128, 20);
+
 		this.generateCaveMineable(this.genMossyHolystone, world, random, pos, 0, 90, 45);
 		this.generateCaveMineable(this.genCrudeScatterglass, world, random, pos, 0, 90, 45);
 	}
