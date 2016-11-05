@@ -35,16 +35,11 @@ public class AIMoaPackBreeding extends EntityAIBase
 		this.moveSpeed = moveSpeed;
 
 		this.moa = moa;
-		
-		if (!moa.isGroupLeader())
-		{
-			this.resetTimer();
-		}
 	}
 
 	public void resetTimer()
 	{
-		this.timeUntilLay = 60 + this.moa.getRNG().nextInt(120);
+		this.timeUntilLay = 30 + this.moa.getRNG().nextInt(60);
 	}
 
 	@Override
