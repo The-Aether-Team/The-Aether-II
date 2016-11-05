@@ -440,6 +440,7 @@ public class ItemsAether
 	public static final Item bone_shard = new Item();
 
 	public static final Item holystone_chip = new Item(),
+			skyroot_fragment = new Item(),
 			scatterglass_shard = new Item();
 
 	public static final Item glamoured_cockatrice_keratin = new Item();
@@ -769,6 +770,7 @@ public class ItemsAether
 
 		registerItem("bone_shard", bone_shard.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("holystone_chip", holystone_chip.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("skyroot_fragment", skyroot_fragment.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("scatterglass_shard", scatterglass_shard.setCreativeTab(CreativeTabsAether.MATERIALS));
 
 		registerItem("irradiated_chunk", irradiated_chunk.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.MATERIALS));

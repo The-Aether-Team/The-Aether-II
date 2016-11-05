@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.tools.ItemSkyrootTool;
 import com.gildedgames.aether.common.world.chunk.hooks.capabilities.ChunkAttachmentCapability;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
@@ -125,9 +126,9 @@ public class BlockHolystone extends Block implements IBlockVariants, ISkyrootMin
 
 		boolean wasPlaced = data.isMarked(pos);
 
-		if (!wasPlaced && world.rand.nextBoolean())
+		if (!wasPlaced && world.rand.nextInt(8) == 0)
 		{
-			Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.holystone_chip, world.rand.nextInt(1) + 1));
+			Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.holystone_chip, stack.getItem() == ItemsAether.skyroot_pickaxe ? 2 : 1));
 		}
 
 		super.harvestBlock(world, player, pos, state, te, stack);
@@ -145,11 +146,6 @@ public class BlockHolystone extends Block implements IBlockVariants, ISkyrootMin
 		List<ItemStack> drops = Lists.newArrayList();
 
 		drops.add(new ItemStack(state.getBlock().getItemDropped(state, living.getRNG(), 0)));
-
-		if (world.rand.nextBoolean())
-		{
-			drops.add(new ItemStack(ItemsAether.holystone_chip, world.rand.nextInt(1) + 1));
-		}
 
 		return drops;
 	}

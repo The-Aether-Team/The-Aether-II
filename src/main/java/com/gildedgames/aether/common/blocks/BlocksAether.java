@@ -61,7 +61,7 @@ public class BlocksAether
 
 	public static final Block aether_planks = new BlockAetherPlanks();
 
-	public static final BlockAetherLog skyroot_log = new BlockAetherLog(),
+	public static final BlockAetherLog skyroot_log = new BlockSkyrootLog(),
 			golden_oak_log = new BlockGoldenOakLog(),
 			frostpine_log = new BlockAetherLog(),
 			blightwillow_log = new BlockAetherLog(),

@@ -568,6 +568,7 @@ public class ItemModelsAether
 
 		registerItemModels(ItemsAether.bone_shard, "bone_shard");
 		registerItemModels(ItemsAether.holystone_chip, "holystone_chip");
+		registerItemModels(ItemsAether.skyroot_fragment, "skyroot_fragment");
 		registerItemModels(ItemsAether.scatterglass_shard, "scatterglass_shard");
 
 		registerItemModels(ItemsAether.glamoured_cockatrice_keratin, "cockatrice_keratin");

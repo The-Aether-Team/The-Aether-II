@@ -438,6 +438,7 @@ item.aether.fried_moa_egg.name=Fried Moa Egg
 item.aether.aether_spawn_egg.name=Spawn
 item.aether.nether_portal_frame.name=Nether Portal Frame
 item.aether.end_portal_frame.name=End Portal Frame
+item.aether.skyroot_fragment.name=Skyroot Fragment
 
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability: 
