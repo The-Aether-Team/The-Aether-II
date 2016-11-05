@@ -287,7 +287,7 @@ public class TeleporterAether extends Teleporter implements NBT
 
 						final IBlockState blockID = world.getBlockState(pos);
 
-						if (BlockUtil.isSolid(blockID, world, pos) && GenerationAether.aether_portal_for_world.canGenerate(world, pos.up(), settings, true))
+						if (BlockUtil.isSolid(blockID, world, pos) && GenerationAether.aether_portal_for_world.canGenerate(world, pos.up(), settings, true, false))
 						{
 							hasFoundPosition = true;
 						}

@@ -29,7 +29,7 @@ public class BlockWovenSticks extends Block implements IBlockVariants
 	
 	public BlockWovenSticks()
 	{
-		super(Material.GROUND);
+		super(Material.WOOD);
 		
 		this.setSoundType(SoundType.GROUND);
 		this.setHardness(0.5F);

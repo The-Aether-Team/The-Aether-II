@@ -31,6 +31,13 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 
 	private CenterOffsetProcessor centerOffsetProcessor;
 
+	public WorldGenTemplate(Template template)
+	{
+		this.template = template;
+
+		this.placementConditions = Lists.newArrayList();
+	}
+
 	public WorldGenTemplate(Template template, PlacementCondition condition, PlacementCondition... placementConditions)
 	{
 		this.template = template;
@@ -134,10 +141,15 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 
 	public boolean canGenerate(World world, BlockPos pos, PlacementSettings settings)
 	{
-		return this.canGenerate(world, pos, settings, false);
+		return this.canGenerate(world, pos, settings, false, true);
 	}
 
 	public boolean canGenerate(World world, BlockPos pos, PlacementSettings settings, boolean centered)
+	{
+		return this.canGenerate(world, pos, settings, centered, true);
+	}
+
+	public boolean canGenerate(World world, BlockPos pos, PlacementSettings settings, boolean centered, boolean checkAreaLoaded)
 	{
 		if (centered)
 		{
@@ -146,7 +158,7 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 
 		final StructureBoundingBox bb = this.getBoundingBoxFromTemplate(pos, settings);
 
-		if (!world.isAreaLoaded(bb) || bb.maxY > world.getActualHeight())
+		if ((checkAreaLoaded && !world.isAreaLoaded(bb)) || bb.maxY > world.getActualHeight())
 		{
 			return false;
 		}
