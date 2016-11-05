@@ -69,19 +69,9 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickable
 
 	public boolean hatchConditionsMet()
 	{
-		boolean hasWarmth = false;
-		boolean onWovenSticks = this.worldObj.getBlockState(this.getPos().add(0, -1, 0)) == BlocksAether.woven_sticks.getDefaultState();
+		boolean atMaxFamilySize = this.familyNest.getAnimalPack() != null && this.familyNest.getAnimalPack().getSize() >= this.familyNest.getAnimalPack().getOptimalSize();
 
-		for (BlockPos pos : BlockPos.getAllInBoxMutable(this.getPos().add(-1, -1, -1), this.getPos().add(1, 1, 1)))
-		{
-			if (this.worldObj.getLight(pos) >= 14)
-			{
-				hasWarmth = true;
-				break;
-			}
-		}
-
-		return hasWarmth && onWovenSticks;
+		return this.worldObj.getBlockState(this.getPos().add(0, -1, 0)) == BlocksAether.woven_sticks.getDefaultState() && !atMaxFamilySize;
 	}
 
 	public void hatchEgg()

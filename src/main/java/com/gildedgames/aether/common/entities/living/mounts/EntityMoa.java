@@ -71,8 +71,6 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 	private MoaNest familyNest;
 
-	private boolean addedBreedingTask;
-
 	public EntityMoa(World world)
 	{
 		super(world);
@@ -117,16 +115,17 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	private void initAI()
 	{
 		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(0, new AIMoaPackBreeding(this, 0.25F));
 		this.tasks.addTask(1, new AIPanicPack(this, 0.55F));
 		this.tasks.addTask(3, new EntityAIWander(this, 0.50F));
 		this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(5, new EntityAILookIdle(this));
 		this.tasks.addTask(6, new EntityAIMate(this, 0.65F));
 		this.tasks.addTask(8, new AIAnimalPack(this, 0.55F));
-		this.tasks.addTask(10, new AIStayNearNest(this, 8, 0.55F));
 		this.tasks.addTask(12, new AIAvoidEntityAsChild(this, EntityPlayer.class, 5.0F, 0.3D, 0.3D));
-		this.tasks.addTask(13, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
 		this.tasks.addTask(14, new EntityAIAttackMelee(this, 0.7D, true));
+		this.tasks.addTask(15, new AIStayNearNest(this, 8, 0.55F));
+		this.tasks.addTask(16, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
 
 		this.targetTasks.addTask(1, new AIProtectPack(this));
 	}
@@ -214,12 +213,6 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	public void onUpdate()
 	{
 		super.onUpdate();
-
-		if (!this.addedBreedingTask)
-		{
-			this.tasks.addTask(9, new AIMoaPackBreeding(this, 0.25F));
-			this.addedBreedingTask = true;
-		}
 
 		if (this.isJumping)
 		{

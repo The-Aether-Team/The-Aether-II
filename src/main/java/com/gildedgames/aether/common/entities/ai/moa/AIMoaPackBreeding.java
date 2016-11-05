@@ -44,7 +44,7 @@ public class AIMoaPackBreeding extends EntityAIBase
 
 	public void resetTimer()
 	{
-		this.timeUntilLay = 200 + this.moa.getRNG().nextInt(200);
+		this.timeUntilLay = 60 + this.moa.getRNG().nextInt(120);
 	}
 
 	@Override
@@ -56,13 +56,6 @@ public class AIMoaPackBreeding extends EntityAIBase
 		}
 
 		if (this.moa.isChild())
-		{
-			return false;
-		}
-
-		EntityGroupMember ourPackAnimal = this.moa;
-
-		if (ourPackAnimal.getGroup() != null && ourPackAnimal.getGroup().getSize() >= ourPackAnimal.getGroup().getOptimalSize())
 		{
 			return false;
 		}
@@ -110,14 +103,11 @@ public class AIMoaPackBreeding extends EntityAIBase
 
 		boolean isNearEgg = this.moa.getDistanceSq(this.eggPos.getX() - 1, this.eggPos.getY(), this.eggPos.getZ() - 1) <= 4.0D;
 
-		if (path == null || path.isFinished())
+		if ((path == null || path.isFinished()) && !isNearEgg)
 		{
-			if (!isNearEgg)
+			if (!this.moa.getNavigator().tryMoveToXYZ(this.eggPos.getX() - 1, this.eggPos.getY(), this.eggPos.getZ() - 1, this.moveSpeed))
 			{
-				if (!this.moa.getNavigator().tryMoveToXYZ(this.eggPos.getX() - 1, this.eggPos.getY(), this.eggPos.getZ() - 1, this.moveSpeed))
-				{
-					this.resetTimer();
-				}
+				this.resetTimer();
 			}
 		}
 		else if (isNearEgg && this.moa.getNavigator().getPath() != null && this.moa.getNavigator().getPath().isFinished())
