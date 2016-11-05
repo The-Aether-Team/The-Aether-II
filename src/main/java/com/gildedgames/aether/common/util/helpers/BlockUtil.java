@@ -113,6 +113,11 @@ public class BlockUtil
 		return state.getBlock().getMaterial(state) == Material.AIR;
 	}
 
+	public static boolean isSolid(World world, BlockPos pos)
+	{
+		return BlockUtil.isSolid(world.getBlockState(pos), world, pos);
+	}
+
 	public static boolean isSolid(IBlockState state, World world, BlockPos pos)
 	{
 		return !isAir(state) && state.getBlock().isBlockSolid(world, pos, EnumFacing.DOWN) && state.getBlock().getMaterial(state).isOpaque();

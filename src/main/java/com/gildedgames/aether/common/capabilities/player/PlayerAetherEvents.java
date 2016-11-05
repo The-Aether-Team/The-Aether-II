@@ -23,6 +23,7 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
@@ -246,6 +247,7 @@ public class PlayerAetherEvents
 				IslandData island = IslandSectorAccess.inst().getIslandIfOnlyOne(mp.worldObj, aePlayer.getDeathPos());
 
 				boolean shouldSpawnAtHenge = island != null && island.getMysteriousHengePos() != null;
+				boolean obstructed = false;
 
 				BlockPos pos = null;
 
@@ -254,9 +256,10 @@ public class PlayerAetherEvents
 					pos = BlockUtil.getTopSolidOrLiquidBlockFromY(mp.getServerWorld(), island.getMysteriousHengePos());
 
 					BlockPos down = pos.down();
-					IBlockState state = mp.getServerWorld().getBlockState(down);
 
-					shouldSpawnAtHenge = BlockUtil.isSolid(state, mp.getServerWorld(), down);
+					obstructed = BlockUtil.isSolid(mp.getServerWorld(), pos) || BlockUtil.isSolid(mp.getServerWorld(), pos.up());
+
+					shouldSpawnAtHenge = BlockUtil.isSolid(mp.getServerWorld(), down) && !obstructed;
 				}
 
 				if (shouldSpawnAtHenge)
@@ -276,6 +279,11 @@ public class PlayerAetherEvents
 					mp.connection.setPlayerLocation(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
 
 					mp.getServerWorld().updateEntityWithOptionalForce(mp, true);
+				}
+
+				if (obstructed)
+				{
+					mp.addChatComponentMessage(new TextComponentString("The nearest Mysterious Henge was obstructed with blocks - you could not respawn there."));
 				}
 			}
 		}
