@@ -17,6 +17,7 @@ import com.gildedgames.aether.common.world.util.TeleporterGeneric;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
@@ -257,7 +258,7 @@ public class PlayerAetherEvents
 
 					BlockPos down = pos.down();
 
-					obstructed = BlockUtil.isSolid(mp.getServerWorld(), pos) || BlockUtil.isSolid(mp.getServerWorld(), pos.up());
+					obstructed = mp.getServerWorld().getBlockState(pos) != Blocks.AIR.getDefaultState() || mp.getServerWorld().getBlockState(pos.up()) != Blocks.AIR.getDefaultState();
 
 					shouldSpawnAtHenge = BlockUtil.isSolid(mp.getServerWorld(), down) && !obstructed;
 				}
