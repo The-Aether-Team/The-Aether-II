@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.world.dimensions.aether;
 
+import com.gildedgames.aether.client.util.NOOPRenderHandler;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.world.dimensions.aether.biomes.BiomeProviderAether;
@@ -25,6 +26,8 @@ public class WorldProviderAether extends WorldProviderSurface
 	public WorldProviderAether()
 	{
 		this.hasNoSky = false;
+
+		this.setCloudRenderer(new NOOPRenderHandler());
 	}
 
 	@Override
