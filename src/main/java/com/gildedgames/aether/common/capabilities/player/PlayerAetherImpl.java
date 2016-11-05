@@ -126,6 +126,15 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 	}
 
 	@Override
+	public void onPlaceBlockMulti(BlockEvent.MultiPlaceEvent event)
+	{
+		for (PlayerAetherModule module : this.modules)
+		{
+			module.onPlaceBlockMulti(event);
+		}
+	}
+
+	@Override
 	public void onDeath(LivingDeathEvent event)
 	{
 		for (PlayerAetherModule module : this.modules)

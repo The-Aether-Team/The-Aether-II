@@ -22,6 +22,8 @@ public interface IPlayerAetherCapability
 
 	void onPlaceBlock(BlockEvent.PlaceEvent event);
 
+	void onPlaceBlockMulti(BlockEvent.MultiPlaceEvent event);
+
 	void onUpdate(LivingUpdateEvent event);
 
 	void onDeath(LivingDeathEvent event);

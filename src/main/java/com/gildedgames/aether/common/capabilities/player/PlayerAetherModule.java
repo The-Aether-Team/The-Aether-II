@@ -32,6 +32,12 @@ public abstract class PlayerAetherModule implements IPlayerAetherCapability
 	}
 
 	@Override
+	public void onPlaceBlockMulti(BlockEvent.MultiPlaceEvent event)
+	{
+
+	}
+
+	@Override
 	public void onRespawn()
 	{
 

@@ -11,6 +11,7 @@ import com.gildedgames.aether.api.util.NBT;
 import net.minecraft.block.BlockTorch;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.world.BlockEvent;
 
@@ -37,7 +38,7 @@ public class DungeonModule extends PlayerAetherModule
 			{
 				if (!(event.getPlacedBlock().getBlock() instanceof BlockTorch))
 				{
-					event.getWorld().destroyBlock(event.getPos(), true);
+					event.setCanceled(true);
 
 					if (this.chatTimer.getTicksPassed() >= 160)
 					{
@@ -48,6 +49,12 @@ public class DungeonModule extends PlayerAetherModule
 				}
 			}
 		}
+	}
+
+	@Override
+	public void onPlaceBlockMulti(BlockEvent.MultiPlaceEvent event)
+	{
+
 	}
 
 	@Override
