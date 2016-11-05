@@ -306,6 +306,10 @@ public class RecipesAether implements IAltarRecipeRegistry
 				'Z', new ItemStack(ItemsAether.arkenium_strip));
 
 		// Crossbow Bolts
+		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.SKYROOT.ordinal()), " Y", "X ",
+				'X', new ItemStack(ItemsAether.skyroot_stick),
+				'Y', new ItemStack(ItemsAether.skyroot_fragment));
+
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.HOLYSTONE.ordinal()), " Y", "X ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(ItemsAether.holystone_chip));
