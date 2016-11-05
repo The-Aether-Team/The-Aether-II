@@ -582,8 +582,8 @@ public class ItemsAether
 		registerItem("orange_lollipop", orange_lollipop);
 		registerItem("icestone_poprocks", icestone_poprocks);
 
-		registerItem("ginger_bread_man", ginger_bread_man);
-		registerItem("candy_cane", candy_cane);
+		registerItem("ginger_bread_man", ginger_bread_man.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		registerItem("candy_cane", candy_cane.setCreativeTab(CreativeTabsAether.CONSUMABLES));
 
 		registerItem("skyroot_bucket", skyroot_bucket);
 		registerItem("skyroot_water_bucket", skyroot_water_bucket);
