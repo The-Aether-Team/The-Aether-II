@@ -1,9 +1,8 @@
 package com.gildedgames.aether.common.registry;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.capabilites.entity.spawning.EntitySpawn;
-import com.gildedgames.aether.common.ReflectionAether;
+import com.gildedgames.aether.api.capabilites.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.entities.living.mobs.EntityAechorPlant;
@@ -30,24 +29,15 @@ import com.gildedgames.aether.common.world.spawning.conditions.CheckDimension;
 import com.gildedgames.aether.common.world.spawning.conditions.CheckTime;
 import com.gildedgames.aether.common.world.spawning.util.FlyingPositionSelector;
 import com.google.common.collect.Lists;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorldEventListener;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class SpawnRegistry
@@ -55,11 +45,9 @@ public class SpawnRegistry
 
 	private final List<SpawnHandler> spawnHandlers = Lists.newArrayList();
 
-	private final SpawnListener listener;
-
 	public SpawnRegistry()
 	{
-		this.listener = new SpawnListener(this.spawnHandlers);
+
 	}
 
 	public void registerAetherSpawnHandlers()
@@ -146,20 +134,6 @@ public class SpawnRegistry
 	}
 
 	@SubscribeEvent
-	public void onWorldLoad(WorldEvent.Load event)
-	{
-		if (!event.getWorld().isRemote)
-		{
-			List<IWorldEventListener> eventListeners = ObfuscationReflectionHelper.getPrivateValue(World.class, event.getWorld(), ReflectionAether.EVENT_LISTENERS.getMappings());
-
-			if (!eventListeners.contains(this.listener))
-			{
-				event.getWorld().addEventListener(this.listener);
-			}
-		}
-	}
-
-	@SubscribeEvent
 	public void onTick(WorldTickEvent event)
 	{
 		if (event.phase == Phase.END)
@@ -179,107 +153,32 @@ public class SpawnRegistry
 	@SubscribeEvent
 	public void onLivingDeath(LivingDeathEvent event)
 	{
+		EntityLivingBase entity = event.getEntityLiving();
 
-	}
-
-	private static class SpawnListener implements IWorldEventListener
-	{
-
-		private List<SpawnHandler> spawnHandlers;
-
-		public SpawnListener(List<SpawnHandler> spawnHandlers)
+		if (!entity.worldObj.isRemote && entity.hasCapability(AetherCapabilities.ENTITY_SPAWNING_INFO, null))
 		{
-			this.spawnHandlers = spawnHandlers;
-		}
+			ISpawningInfo spawningInfo = entity.getCapability(AetherCapabilities.ENTITY_SPAWNING_INFO, null);
 
-		@Override
-		public void notifyBlockUpdate(World worldIn, BlockPos pos, IBlockState oldState, IBlockState newState, int flags)
-		{
+			EntitySpawn area = spawningInfo.getSpawnArea();
 
-		}
-
-		@Override
-		public void notifyLightSet(BlockPos pos)
-		{
-
-		}
-
-		@Override
-		public void markBlockRangeForRenderUpdate(int x1, int y1, int z1, int x2, int y2, int z2)
-		{
-
-		}
-
-		@Override
-		public void playSoundToAllNearExcept(@Nullable EntityPlayer player, SoundEvent soundIn, SoundCategory category, double x, double y, double z, float volume, float pitch)
-		{
-
-		}
-
-		@Override
-		public void playRecord(SoundEvent soundIn, BlockPos pos)
-		{
-
-		}
-
-		@Override
-		public void spawnParticle(int particleID, boolean ignoreRange, double xCoord, double yCoord, double zCoord, double xSpeed, double ySpeed, double zSpeed, int... parameters)
-		{
-
-		}
-
-		@Override
-		public void onEntityAdded(Entity entityIn)
-		{
-
-		}
-
-		@Override
-		public void onEntityRemoved(Entity entity)
-		{
-			if (!entity.worldObj.isRemote && entity.isDead && entity.hasCapability(AetherCapabilities.ENTITY_SPAWNING_INFO, null) && !entity.getEntityWorld().isRemote)
+			if (area != null)
 			{
-				ISpawningInfo spawningInfo = entity.getCapability(AetherCapabilities.ENTITY_SPAWNING_INFO, null);
-
-				EntitySpawn area = spawningInfo.getSpawnArea();
-
-				if (area != null)
+				for (SpawnHandler handler : this.spawnHandlers)
 				{
-					for (SpawnHandler handler : this.spawnHandlers)
+					if (handler.getUniqueID().equals(area.getSpawnHandlerUniqueID()))
 					{
-						if (handler.getUniqueID().equals(area.getSpawnHandlerUniqueID()))
+						boolean areaLoaded = handler.isAreaLoaded(area.getDim(), area.getAreaX(), area.getAreaZ());
+						SpawnArea fetchedArea = handler.getAreaReadOnly(area.getDim(), area.getAreaX(), area.getAreaZ());
+
+						fetchedArea.addToEntityCount(-1);
+
+						if (!areaLoaded)
 						{
-							boolean areaLoaded = handler.isAreaLoaded(area.getDim(), area.getAreaX(), area.getAreaZ());
-							SpawnArea fetchedArea = handler.getAreaReadOnly(area.getDim(), area.getAreaX(), area.getAreaZ());
-
-							fetchedArea.addToEntityCount(-1);
-
-							if (!areaLoaded)
-							{
-								handler.saveArea(area.getDim(), fetchedArea);
-							}
+							handler.saveArea(area.getDim(), fetchedArea);
 						}
 					}
 				}
 			}
-		}
-
-		@Override
-		public void broadcastSound(int soundID, BlockPos pos, int data)
-		{
-
-		}
-
-		@Override
-		public void playEvent(EntityPlayer player, int type, BlockPos blockPosIn, int data)
-		{
-
-		}
-
-		@Override
-		public void sendBlockBreakProgress(int breakerId, BlockPos pos, int progress)
-		{
-
 		}
 	}
 
