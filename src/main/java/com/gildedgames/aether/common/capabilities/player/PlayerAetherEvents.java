@@ -258,7 +258,7 @@ public class PlayerAetherEvents
 
 					BlockPos down = pos.down();
 
-					obstructed = mp.getServerWorld().getBlockState(pos) != Blocks.AIR.getDefaultState() || mp.getServerWorld().getBlockState(pos.up()) != Blocks.AIR.getDefaultState();
+					obstructed = mp.getServerWorld().getBlockState(pos.up()) != Blocks.AIR.getDefaultState() || mp.getServerWorld().getBlockState(pos.up().up()) != Blocks.AIR.getDefaultState();
 
 					shouldSpawnAtHenge = BlockUtil.isSolid(mp.getServerWorld(), down) && !obstructed;
 				}
