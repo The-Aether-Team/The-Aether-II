@@ -80,7 +80,7 @@ public class EntitySentryGuardian extends EntityFlyingMob implements IRangedAtta
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80);
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(60);
 		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
 	}
 
 	@Override

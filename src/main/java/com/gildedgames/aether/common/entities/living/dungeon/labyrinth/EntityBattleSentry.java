@@ -79,6 +79,7 @@ public class EntityBattleSentry extends EntityAetherMob
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16);
+		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8.0D);
 	}
 
 	@Override
@@ -92,10 +93,9 @@ public class EntityBattleSentry extends EntityAetherMob
 
 	protected void dealDamage(EntityLivingBase entityIn)
 	{
-		if (entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 3.0F))
+		if (this.attackEntityAsMob(entityIn))
 		{
 			this.playSound(SoundEvents.ENTITY_GENERIC_BIG_FALL, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-			this.applyEnchantments(this, entityIn);
 		}
 	}
 

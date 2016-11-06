@@ -67,6 +67,7 @@ public class EntityChestMimic extends EntityExtendedMob
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40);
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16);
 		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
 	}
 
 	@Override
