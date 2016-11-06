@@ -29,7 +29,7 @@ public class ModifyMaxHealthEffect extends AbstractEffectProcessor<Instance>
 			super(rules);
 
 			this.getAttributes().setDouble("maxHealthMod", maxHealthMod);
-			this.modifier = new AttributeModifier(UUID.randomUUID(), "Extra Max Health", maxHealthMod * 2, 0).setSaved(false);
+			this.modifier = new AttributeModifier(UUID.randomUUID(), "Extra Max Health", maxHealthMod, 0).setSaved(false);
 		}
 
 		public AttributeModifier getModifier()
