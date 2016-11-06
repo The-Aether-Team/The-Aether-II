@@ -26,6 +26,8 @@ import javax.annotation.Nullable;
 public class ItemCrossbow extends Item
 {
 
+	public static final ItemBoltType[] BOLT_TYPES = ItemBoltType.values();
+
 	private float durationInTicks;
 	private float knockBackValue;
 
@@ -109,28 +111,28 @@ public class ItemCrossbow extends Item
 		stack.getTagCompound().setBoolean("loaded", loaded);
 	}
 
-	public static boolean isReadyToShoot(ItemStack stack)
+	public static ItemBoltType getLoadedBoltType(ItemStack stack)
 	{
-		if (stack == null) return false;
+		if (stack == null) return null;
 
 		checkTag(stack);
 
-		return stack.getTagCompound().getBoolean("readyToShoot");
+		return ItemCrossbow.BOLT_TYPES[stack.getTagCompound().getInteger("boltType")];
 	}
 
-	public static void setReadyToShoot(ItemStack stack, boolean readyToShoot)
+	public static void setLoadedBoltType(ItemStack stack, ItemBoltType type)
 	{
 		if (stack == null) return;
 
 		checkTag(stack);
 
-		stack.getTagCompound().setBoolean("readyToShoot", readyToShoot);
+		stack.getTagCompound().setInteger("boltType", type.ordinal());
 	}
 
 	@Override
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
 	{
-		if (ItemCrossbow.isReadyToShoot(stack))
+		if (ItemCrossbow.isLoaded(stack))
 		{
 			if (entityLiving.worldObj.isRemote)
 			{
@@ -141,6 +143,13 @@ public class ItemCrossbow extends Item
 
 			this.shootBolt(entityLiving, stack);
 
+			if (!entityLiving.worldObj.isRemote)
+			{
+				ItemCrossbow.setLoaded(stack, false);
+			}
+
+			ObfuscationReflectionHelper.setPrivateValue(EntityLivingBase.class, entityLiving, 0, "activeItemStackUseCount");
+
 			return true;
 		}
 
@@ -150,7 +159,7 @@ public class ItemCrossbow extends Item
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
-		if (!ItemCrossbow.isLoaded(stack) || !ItemCrossbow.isReadyToShoot(stack))
+		if (!ItemCrossbow.isLoaded(stack))
 		{
 			if (this.hasAmmo(playerIn))
 			{
@@ -163,20 +172,19 @@ public class ItemCrossbow extends Item
 
 	private void shootBolt(EntityLivingBase entityLiving, ItemStack stack)
 	{
-		if (ItemCrossbow.isLoaded(stack) && !entityLiving.worldObj.isRemote)
+		if (!entityLiving.worldObj.isRemote)
 		{
 			float speed = 1.0f;
 
+			ItemBoltType boltType = ItemCrossbow.getLoadedBoltType(stack);
+
 			EntityBolt dart = new EntityBolt(entityLiving.getEntityWorld(), entityLiving);
 			dart.setAim(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, speed * 2.0F, 1.0F);
-			dart.setBoltAbility(stack.getItem() == ItemsAether.arkenium_crossbow ? BoltAbility.DESTROY_BLOCKS : BoltAbility.NORMAL);
-			dart.setBoltType(ItemBoltType.values()[stack.getItemDamage()]);
+			dart.setBoltAbility(BoltAbility.NORMAL);
+			dart.setBoltType(boltType);
 			dart.pickupStatus = EntityArrow.PickupStatus.ALLOWED;
 
 			entityLiving.getEntityWorld().spawnEntityInWorld(dart);
-
-			ItemCrossbow.setLoaded(stack, false);
-			ItemCrossbow.setReadyToShoot(stack, false);
 		}
 	}
 
@@ -194,7 +202,20 @@ public class ItemCrossbow extends Item
 
 				if (use == (this.durationInTicks / 20.0F))
 				{
-					boltStack.stackSize--;
+					if (!player.getEntityWorld().isRemote)
+					{
+						ItemCrossbow.setLoadedBoltType(stack, ItemCrossbow.BOLT_TYPES[boltStack.getItemDamage()]);
+						ItemCrossbow.setLoaded(stack, true);
+
+						if (boltStack.stackSize == 1 || boltStack.stackSize <= 0)
+						{
+							entityPlayer.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, null);
+						}
+						else
+						{
+							boltStack.stackSize--;
+						}
+					}
 				}
 			}
 		}
@@ -203,17 +224,7 @@ public class ItemCrossbow extends Item
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
 	{
-		float use = (float)(stack.getMaxItemUseDuration() - entityLiving.getItemInUseCount()) / 20.0F;
 
-		if (use >= (this.durationInTicks / 20.0F))
-		{
-			ItemCrossbow.setLoaded(stack, true);
-		}
-
-		if (ItemCrossbow.isLoaded(stack))
-		{
-			ItemCrossbow.setReadyToShoot(stack, true);
-		}
 	}
 
 	@Override

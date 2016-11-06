@@ -44,8 +44,6 @@ public class PlayerUtil
 		return true;
 	}
 
-
-
 	public static void fillBucketInHand(EntityPlayer player, ItemStack emptyBucket, ItemStack fillBucket)
 	{
 		if (emptyBucket.stackSize == 1)

@@ -87,7 +87,7 @@ public class EntityBolt extends EntityArrow
 	@Override
 	protected ItemStack getArrowStack()
 	{
-		return new ItemStack(ItemsAether.dart, this.getBoltType().ordinal());
+		return new ItemStack(ItemsAether.bolt, 1, this.getBoltType().ordinal());
 	}
 
 	@Override

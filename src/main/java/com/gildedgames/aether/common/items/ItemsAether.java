@@ -244,11 +244,11 @@ public class ItemsAether
 			frostpine_door = new ItemDoor(BlocksAether.frostpine_door);
 
 	public static final ItemCrossbow skyroot_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F),
-			holystone_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.7F),
-			zanite_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F),
-			arkenium_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F),
-			gravitite_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(1.2F),
-			vampire_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.7F);
+			holystone_crossbow = new ItemCrossbow().setDurationInTicks(15).setKnockBackValue(0.7F),
+			zanite_crossbow = new ItemCrossbow().setDurationInTicks(10).setKnockBackValue(0.5F),
+			arkenium_crossbow = new ItemCrossbow().setDurationInTicks(10).setKnockBackValue(0.5F),
+			gravitite_crossbow = new ItemCrossbow().setDurationInTicks(5).setKnockBackValue(1.2F),
+			vampire_crossbow = new ItemCrossbow().setDurationInTicks(5).setKnockBackValue(0.7F);
 
 	public static final ItemBolt bolt = new ItemBolt();
 

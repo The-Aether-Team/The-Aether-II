@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.items.weapons.crossbow;
 
 public enum ItemBoltType
 {
+
 	/* DAMAGES ARE NOT FINAL */
 	SKYROOT(1.0f, "skyroot"),
 	HOLYSTONE(2.0f, "holystone"),
