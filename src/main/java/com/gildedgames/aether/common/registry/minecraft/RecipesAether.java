@@ -26,7 +26,7 @@ public class RecipesAether implements IAltarRecipeRegistry
 {
 	private final AltarRegistry altarRegistry = new AltarRegistry();
 
-	public void preInit()
+	public void init()
 	{
 		this.registerFurnaceRecipes();
 		this.registerCraftingRecipes();

@@ -40,15 +40,15 @@ public class BiomeFrostpine extends BiomeAetherBase
 			WorldServer worldServer = (WorldServer)world;
 			MinecraftServer server = worldServer.getMinecraftServer();
 
-			this.tree1 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak1")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-			this.tree2 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak2")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-			this.tree3 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak3")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-			this.tree4 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak4")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-			this.tree5 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak5")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-			this.tree6 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/oak6")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+			this.tree1 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("frostpine/oak1")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+			this.tree2 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("frostpine/oak2")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+			this.tree3 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("frostpine/oak3")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+			this.tree4 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("frostpine/oak4")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+			this.tree5 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("frostpine/oak5")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+			this.tree6 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("frostpine/oak6")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
 
-			this.pine1 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/pine1")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
-			this.pine2 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "frostpine/pine2")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+			this.pine1 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("frostpine/pine1")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
+			this.pine2 = new WorldGenTemplate(this.templatePipeline, MANAGER.getTemplate(server, AetherCore.getResource("frostpine/pine2")), new FlatGroundPlacementCondition(), new ReplaceablePlacementCondition());
 		}
 
 		super.decorate(world, random, pos);

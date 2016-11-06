@@ -25,7 +25,7 @@ public class EntityTaegore extends EntityAetherAnimal implements IAnimatedEntity
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry);
 
-	private static final ResourceLocation MODEL = new ResourceLocation(AetherCore.MOD_ID, "models/entities/taegore.tbl");
+	private static final ResourceLocation MODEL = AetherCore.getResource("models/entities/taegore.tbl");
 
 	private ProjectInfo projectInfo = ImportList.createProjectFromResource(MODEL);
 

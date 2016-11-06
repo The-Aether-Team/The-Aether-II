@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiFrostpineCooler extends GuiContainer
 {
-	private static final ResourceLocation TEXTURE = new ResourceLocation(AetherCore.MOD_ID, "textures/gui/inventory/frostpine_cooler.png");
+	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/gui/inventory/frostpine_cooler.png");
 
 	/** The player inventory bound to this GUI. */
 	private final InventoryPlayer playerInventory;

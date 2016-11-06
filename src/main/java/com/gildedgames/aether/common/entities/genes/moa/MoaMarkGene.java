@@ -27,13 +27,13 @@ public class MoaMarkGene implements Gene
 
 		this.potentialMutations = potentialMutations;
 
-		this.back = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/back/" + resourceName + ".png");
-		this.head = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/head/" + resourceName + ".png");
-		this.tail = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/tail/" + resourceName + ".png");
-		this.wing = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/wing/" + resourceName + ".png");
+		this.back = AetherCore.getResource("textures/entities/moa/back/" + resourceName + ".png");
+		this.head = AetherCore.getResource("textures/entities/moa/head/" + resourceName + ".png");
+		this.tail = AetherCore.getResource("textures/entities/moa/tail/" + resourceName + ".png");
+		this.wing = AetherCore.getResource("textures/entities/moa/wing/" + resourceName + ".png");
 
-		this.back_egg = new ResourceLocation(AetherCore.MOD_ID, "textures/tile_entities/moa_egg/back/" + resourceName + ".png");
-		this.head_egg = new ResourceLocation(AetherCore.MOD_ID, "textures/tile_entities/moa_egg/head/" + resourceName + ".png");
+		this.back_egg = AetherCore.getResource("textures/tile_entities/moa_egg/back/" + resourceName + ".png");
+		this.head_egg = AetherCore.getResource("textures/tile_entities/moa_egg/head/" + resourceName + ".png");
 	}
 
 	@Override

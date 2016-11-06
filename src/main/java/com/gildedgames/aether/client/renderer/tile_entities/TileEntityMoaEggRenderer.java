@@ -12,9 +12,9 @@ import org.lwjgl.opengl.GL12;
 public class TileEntityMoaEggRenderer extends TileEntitySpecialRenderer<TileEntityMoaEgg>
 {
 
-	private static final ResourceLocation TEXTURE_BASE = new ResourceLocation(AetherCore.MOD_ID, "textures/tile_entities/moa_egg/base.png");
+	private static final ResourceLocation TEXTURE_BASE = AetherCore.getResource("textures/tile_entities/moa_egg/base.png");
 	
-	private static final ResourceLocation TEXTURE_BEAK = new ResourceLocation(AetherCore.MOD_ID, "textures/tile_entities/moa_egg/beak.png");
+	private static final ResourceLocation TEXTURE_BEAK = AetherCore.getResource("textures/tile_entities/moa_egg/beak.png");
 
 	public ModelMoaEgg model = new ModelMoaEgg();
 

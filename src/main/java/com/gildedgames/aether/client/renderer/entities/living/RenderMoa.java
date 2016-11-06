@@ -24,21 +24,21 @@ import java.awt.*;
 public class RenderMoa extends RenderLiving<EntityMoa>
 {
 
-	public static ResourceLocation FEATHERS = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/feathers.png");
+	public static ResourceLocation FEATHERS = AetherCore.getResource("textures/entities/moa/feathers.png");
 
-	public static ResourceLocation BODY = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/body.png");
+	public static ResourceLocation BODY = AetherCore.getResource("textures/entities/moa/body.png");
 
-	public static ResourceLocation LEGS = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/legs.png");
+	public static ResourceLocation LEGS = AetherCore.getResource("textures/entities/moa/legs.png");
 
-	public static ResourceLocation BEAK = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/beak.png");
+	public static ResourceLocation BEAK = AetherCore.getResource("textures/entities/moa/beak.png");
 
-	public static ResourceLocation EYES = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/eyes.png");
+	public static ResourceLocation EYES = AetherCore.getResource("textures/entities/moa/eyes.png");
 
-	public static ResourceLocation TEETH = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/teeth.png");
+	public static ResourceLocation TEETH = AetherCore.getResource("textures/entities/moa/teeth.png");
 
-	public static ResourceLocation TONGUE = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/tongue.png");
+	public static ResourceLocation TONGUE = AetherCore.getResource("textures/entities/moa/tongue.png");
 
-	public static ResourceLocation SADDLE = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/moa/saddle.png");
+	public static ResourceLocation SADDLE = AetherCore.getResource("textures/entities/moa/saddle.png");
 
 	public static final ResourceLocation AECHOR_PETAL_TEXTURE = new ResourceLocation("aether", "textures/items/consumables/aechor_petal.png");
 

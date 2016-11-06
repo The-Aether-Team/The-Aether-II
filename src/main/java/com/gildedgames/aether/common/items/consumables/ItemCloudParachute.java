@@ -17,11 +17,8 @@ import java.util.List;
 
 public class ItemCloudParachute extends Item
 {
-
 	public ItemCloudParachute()
 	{
-		super();
-
 		this.maxStackSize = 1;
 	}
 

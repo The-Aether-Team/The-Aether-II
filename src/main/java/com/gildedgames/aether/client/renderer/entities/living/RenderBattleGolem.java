@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 public class RenderBattleGolem extends RenderLiving<EntityLiving>
 {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/battle_golem/battle_golem.png");
+	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/battle_golem/battle_golem.png");
 
 	public RenderBattleGolem(RenderManager renderManager)
 	{

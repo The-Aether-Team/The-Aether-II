@@ -17,7 +17,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiIncubator extends GuiContainer
 {
-	private static final ResourceLocation TEXTURE = new ResourceLocation(AetherCore.MOD_ID, "textures/gui/inventory/incubator.png");
+	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/gui/inventory/incubator.png");
 
 	/** The player inventory bound to this GUI. */
 	private final InventoryPlayer playerInventory;

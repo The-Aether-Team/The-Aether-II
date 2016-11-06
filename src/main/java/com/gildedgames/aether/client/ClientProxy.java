@@ -3,14 +3,11 @@ package com.gildedgames.aether.client;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.client.gui.menu.BossBattleOverlay;
 import com.gildedgames.aether.client.gui.menu.PortalOverlay;
+import com.gildedgames.aether.client.gui.menu.WorldAetherOptionsOverlay;
 import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabClientEvents;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
-import com.gildedgames.aether.client.gui.menu.WorldAetherOptionsOverlay;
 import com.gildedgames.aether.client.models.blocks.AetherBlockModels;
-import com.gildedgames.aether.client.models.SimpleModelLoader;
-import com.gildedgames.aether.client.models.blocks.GlowingBlockModel;
-import com.gildedgames.aether.client.models.blocks.GlowingColumnModel;
 import com.gildedgames.aether.client.models.items.ItemModelsAether;
 import com.gildedgames.aether.client.renderer.AetherRenderers;
 import com.gildedgames.aether.client.renderer.ClientRenderHandler;
@@ -20,16 +17,11 @@ import com.gildedgames.aether.client.renderer.items.LeatherGlovesColorHandler;
 import com.gildedgames.aether.client.renderer.items.WrappingPaperColorHandler;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.client.ui.UiManager;
-import com.gildedgames.aether.client.ui.minecraft.util.decorators.MinecraftGui;
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.CommonProxy;
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.util.structure.StructureInjectionEvents;
-import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
-import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.client.ui.minecraft.viewing.MinecraftGuiViewer;
-import com.gildedgames.aether.client.ui.common.GuiFrame;
-import com.gildedgames.aether.client.ui.util.factory.Factory;
+import com.gildedgames.aether.common.CommonProxy;
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
+import com.gildedgames.aether.common.util.structure.StructureInjectionEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.resources.I18n;
@@ -37,10 +29,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -49,8 +39,6 @@ public class ClientProxy extends CommonProxy
 {
 
 	public static PlayerControllerAetherMP clientPlayerController;
-
-	public static final String MAIN_MENU_OVERLAY_ID = "aetherMainMenuOverlay";
 
 	@Override
 	public EntityPlayer getPlayer()
@@ -69,58 +57,11 @@ public class ClientProxy extends CommonProxy
 
 		CreativeTabsAether.registerTabIcons();
 
-		UiManager.inst().registerOverlay("worldAetherOptionsOverlay", new Factory<GuiFrame>()
-		{
+		UiManager.inst().registerOverlay("worldAetherOptionsOverlay", WorldAetherOptionsOverlay::new, MinecraftGuiViewer.instance());
 
-			@Override
-			public GuiFrame create()
-			{
-				return new WorldAetherOptionsOverlay();
-			}
+		UiManager.inst().registerOverlay("aetherPortalOverlay", PortalOverlay::new, MinecraftGuiViewer.instance(), RenderGameOverlayEvent.ElementType.PORTAL);
 
-		}, MinecraftGuiViewer.instance());
-
-		UiManager.inst().registerOverlay("aetherPortalOverlay", new Factory<GuiFrame>()
-		{
-
-			@Override
-			public GuiFrame create()
-			{
-				return new PortalOverlay();
-			}
-
-		}, MinecraftGuiViewer.instance(), RenderGameOverlayEvent.ElementType.PORTAL);
-
-		UiManager.inst().registerOverlay("bossBattleOverlay", new Factory<GuiFrame>()
-		{
-
-			@Override
-			public GuiFrame create()
-			{
-				return new BossBattleOverlay();
-			}
-
-		}, MinecraftGuiViewer.instance(), RenderGameOverlayEvent.ElementType.HOTBAR);
-
-		/*SimpleModelLoader loader = new SimpleModelLoader(AetherCore.MOD_ID);
-
-		loader.registerModel(BlocksAether.labyrinth_lightstone, new GlowingBlockModel(new ResourceLocation(AetherCore.MOD_ID, "blocks/dungeon/labyrinth_lightstone"), new ResourceLocation(AetherCore.MOD_ID, "blocks/dungeon/labyrinth_lightstone_highlight")));
-		loader.registerModel(BlocksAether.labyrinth_glowing_pillar, new GlowingColumnModel(new ResourceLocation(AetherCore.MOD_ID, "blocks/dungeon/labyrinth_pillar_top"), new ResourceLocation(AetherCore.MOD_ID, "blocks/dungeon/labyrinth_pillar_side"), new ResourceLocation(AetherCore.MOD_ID, "blocks/dungeon/labyrinth_pillar_top_highlight"), new ResourceLocation(AetherCore.MOD_ID, "blocks/dungeon/labyrinth_pillar_side_highlight")));
-		loader.registerModel(BlocksAether.labyrinth_base, new GlowingColumnModel(new ResourceLocation(AetherCore.MOD_ID, "blocks/dungeon/labyrinth_base_top"), new ResourceLocation(AetherCore.MOD_ID, "blocks/dungeon/labyrinth_base_side"), new ResourceLocation(AetherCore.MOD_ID, "blocks/dungeon/labyrinth_base_top_highlight"), new ResourceLocation(AetherCore.MOD_ID, "blocks/dungeon/labyrinth_base_side_highlight")));
-		loader.registerModel(BlocksAether.ambrosium_ore, new GlowingBlockModel(new ResourceLocation(AetherCore.MOD_ID, "blocks/ores/ambrosium_ore"), new ResourceLocation(AetherCore.MOD_ID, "blocks/ores/ambrosium_ore_highlight")));
-
-		ModelLoaderRegistry.registerLoader(loader);*/
-
-		/*UiManager.inst().registerOverlay(MAIN_MENU_OVERLAY_ID, new Factory<GuiFrame>()
-		{
-
-			@Override
-			public GuiFrame create()
-			{
-				return new MainMenuOverlay();
-			}
-
-		}, MinecraftGuiViewer.instances());*/
+		UiManager.inst().registerOverlay("bossBattleOverlay", BossBattleOverlay::new, MinecraftGuiViewer.instance(), RenderGameOverlayEvent.ElementType.HOTBAR);
 	}
 
 	@Override
@@ -185,7 +126,7 @@ public class ClientProxy extends CommonProxy
 	{
 		if (player == Minecraft.getMinecraft().thePlayer)
 		{
-			Minecraft.getMinecraft().ingameGUI.setRecordPlaying(I18n.format("mount.onboard", new Object[] {Minecraft.getMinecraft().gameSettings.keyBindSneak.getDisplayName()}), false);
+			Minecraft.getMinecraft().ingameGUI.setRecordPlaying(I18n.format("mount.onboard", Minecraft.getMinecraft().gameSettings.keyBindSneak.getDisplayName()), false);
 		}
 	}
 

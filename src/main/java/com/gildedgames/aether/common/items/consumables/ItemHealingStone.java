@@ -27,18 +27,14 @@ public class ItemHealingStone extends Item
 	{
 		super();
 
-		this.addPropertyOverride(new ResourceLocation("uses"), new IItemPropertyGetter()
+		this.addPropertyOverride(new ResourceLocation("uses"), (stack, world, entity) ->
 		{
-			@SideOnly(Side.CLIENT)
-			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
+			if (stack != null)
 			{
-				if (stack != null)
-				{
-					return ItemHealingStone.getUsesLeft(stack) * 0.2F;
-				}
-
-				return 1.0F;
+				return ItemHealingStone.getUsesLeft(stack) * 0.2F;
 			}
+
+			return 1.0F;
 		});
 	}
 

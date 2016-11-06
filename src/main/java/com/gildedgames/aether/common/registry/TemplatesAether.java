@@ -104,7 +104,7 @@ public class TemplatesAether
 
 	private static Template register(String resource)
 	{
-		return register(new ResourceLocation(AetherCore.MOD_ID, resource));
+		return register(AetherCore.getResource(resource));
 	}
 
 	private static Template register(ResourceLocation resourceLocation)

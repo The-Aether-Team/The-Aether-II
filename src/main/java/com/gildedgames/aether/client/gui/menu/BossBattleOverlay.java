@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 public class BossBattleOverlay extends GuiFrame
 {
 
-	private static final ResourceLocation TEXTURE_BOSS_HP_BAR = new ResourceLocation(AetherCore.MOD_ID, "textures/gui/overlay/boss_hp_bar.png");
+	private static final ResourceLocation TEXTURE_BOSS_HP_BAR = AetherCore.getResource("textures/gui/overlay/boss_hp_bar.png");
 
 	private Minecraft mc = Minecraft.getMinecraft();
 

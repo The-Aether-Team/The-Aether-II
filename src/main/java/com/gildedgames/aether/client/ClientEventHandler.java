@@ -67,6 +67,7 @@ public class ClientEventHandler
 			if (!areaFile.exists())
 			{
 				UiManager.inst().open("indevWarning", new InDevelopmentWarning());
+
 				event.setCanceled(true);
 			}
 		}

@@ -43,17 +43,17 @@ public class DungeonDefinitions
 						return rooms;
 					}
 
-					Template loot_large_2 = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/loot_large_2"));
-					Template loot_large_4 = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/loot_large_4"));
-					Template loot_medium = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/loot_medium"));
-					Template loot_small = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/loot_small"));
-					Template feature_water_1 = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/feature_water_1"));
-					Template feature_water_2 = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/feature_water_2"));
-					Template feature_pillars_1 = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/feature_pillars_1"));
-					Template feature_pillars_2 = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/feature_pillars_2"));
-					Template loot_pillars_1 = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/loot_pillars_1"));
-					Template loot_pillars_2 = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/loot_pillars_2"));
-					Template sentry_production = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/sentry_production"));
+					Template loot_large_2 = MANAGER.getTemplate(server, AetherCore.getResource("labyrinth/loot_large_2"));
+					Template loot_large_4 = MANAGER.getTemplate(server, AetherCore.getResource("labyrinth/loot_large_4"));
+					Template loot_medium = MANAGER.getTemplate(server, AetherCore.getResource("labyrinth/loot_medium"));
+					Template loot_small = MANAGER.getTemplate(server, AetherCore.getResource("labyrinth/loot_small"));
+					Template feature_water_1 = MANAGER.getTemplate(server, AetherCore.getResource("labyrinth/feature_water_1"));
+					Template feature_water_2 = MANAGER.getTemplate(server, AetherCore.getResource("labyrinth/feature_water_2"));
+					Template feature_pillars_1 = MANAGER.getTemplate(server, AetherCore.getResource("labyrinth/feature_pillars_1"));
+					Template feature_pillars_2 = MANAGER.getTemplate(server, AetherCore.getResource("labyrinth/feature_pillars_2"));
+					Template loot_pillars_1 = MANAGER.getTemplate(server, AetherCore.getResource("labyrinth/loot_pillars_1"));
+					Template loot_pillars_2 = MANAGER.getTemplate(server, AetherCore.getResource("labyrinth/loot_pillars_2"));
+					Template sentry_production = MANAGER.getTemplate(server, AetherCore.getResource("labyrinth/sentry_production"));
 
 					//Template labTunnel = MANAGER.func_189942_b(server, newsystem ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel"));
 					//Template labTunnelLeft = MANAGER.func_189942_b(server, newsystem ResourceLocation(AetherCore.MOD_ID, "Dun_LAB_Room_Tunnel_Left"));
@@ -95,7 +95,7 @@ public class DungeonDefinitions
 				@Override
 				public DungeonRoom createEntranceRoom(MinecraftServer server, Random rand)
 				{
-					Template labEntrance = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/entrance"));
+					Template labEntrance = MANAGER.getTemplate(server, AetherCore.getResource("labyrinth/entrance"));
 
 					return new DungeonRoom(labEntrance);
 				}
@@ -105,12 +105,12 @@ public class DungeonDefinitions
 				{
 					if (layer == 1)
 					{
-						Template slider_room = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/slider_room"));
+						Template slider_room = MANAGER.getTemplate(server, AetherCore.getResource("labyrinth/slider_room"));
 
 						return new DungeonRoom(slider_room);
 					}
 
-					Template labStairs = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/stairs_bottom"));
+					Template labStairs = MANAGER.getTemplate(server, AetherCore.getResource("labyrinth/stairs_bottom"));
 
 					return new DungeonRoom(labStairs);
 				}
@@ -120,7 +120,7 @@ public class DungeonDefinitions
 				{
 					if (layer == 2)
 					{
-						Template slider_room_top_connection = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/slider_room_top_connection"));
+						Template slider_room_top_connection = MANAGER.getTemplate(server, AetherCore.getResource("labyrinth/slider_room_top_connection"));
 
 						return new DungeonRoom(slider_room_top_connection);
 					}
@@ -130,7 +130,7 @@ public class DungeonDefinitions
 						return null;
 					}
 
-					Template labStairs = MANAGER.getTemplate(server, new ResourceLocation(AetherCore.MOD_ID, "labyrinth/stairs_top"));
+					Template labStairs = MANAGER.getTemplate(server, AetherCore.getResource("labyrinth/stairs_top"));
 
 					return new DungeonRoom(labStairs);
 				}

@@ -103,7 +103,7 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityBattleGolem.class, new AetherRenderFactory<>(RenderBattleGolem.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBattleBomb.class, new AetherRenderFactory<>(RenderBattleBomb.class));
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityTaegore.class, new TabulaRenderFactory<>(RenderTabula.class, new ResourceLocation(AetherCore.MOD_ID, "textures/entities/taegore/taegore.png"), new ResourceLocation(AetherCore.MOD_ID, "models/entities/taegore.tbl")));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTaegore.class, new TabulaRenderFactory<>(RenderTabula.class, AetherCore.getResource("textures/entities/taegore/taegore.png"), AetherCore.getResource("models/entities/taegore.tbl")));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityRewardItemStack.class, new IRenderFactory<EntityRewardItemStack>()
 		{

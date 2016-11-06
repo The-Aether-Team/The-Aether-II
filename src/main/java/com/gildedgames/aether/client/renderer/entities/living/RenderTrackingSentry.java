@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 public class RenderTrackingSentry extends RenderLiving<EntityLiving>
 {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/detonation_sentry/detonation_sentry.png");
+	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/detonation_sentry/detonation_sentry.png");
 
 	public RenderTrackingSentry(RenderManager renderManager)
 	{

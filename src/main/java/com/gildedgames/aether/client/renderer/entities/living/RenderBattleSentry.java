@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 public class RenderBattleSentry extends RenderLiving<EntityLiving>
 {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(AetherCore.MOD_ID, "textures/entities/detonation_sentry/detonation_sentry.png");
+	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/detonation_sentry/detonation_sentry.png");
 
 	public RenderBattleSentry(RenderManager renderManager)
 	{
