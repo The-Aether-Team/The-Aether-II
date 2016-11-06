@@ -131,7 +131,7 @@ public class GenerationAether
 		labyrinth_ruins_4 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_4, TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
 		labyrinth_ruins_5 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_5, TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
 
-		labyrinth_entrance_1 = new WorldGenDungeonEntrance(TemplatesAether.labyrinth_entrance_1, new BlockPos(4, 2, 4), TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
+		labyrinth_entrance_1 = new WorldGenDungeonEntrance(TemplatesAether.labyrinth_entrance_1, new BlockPos(4, 2, 4), TemplateConditions.FLAT_GROUND, TemplateConditions.ON_AETHER_GRASS, TemplateConditions.REPLACEABLE);
 		labyrinth_entrance_underground_1 = new WorldGenDungeonEntrance(TemplatesAether.labyrinth_entrance_underground_1, new BlockPos(8, 1, 2), new UndergroundEntrancePlacementCondition(), new UndergroundPlacementCondition());
 
 		skyroot_moa_nest_tree_1 = new WorldGenMoaNest(TemplatesAether.skyroot_moa_nest_tree_1, new BlockPos(4, 5, 4), TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
