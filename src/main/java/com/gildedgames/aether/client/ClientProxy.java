@@ -102,14 +102,14 @@ public class ClientProxy extends CommonProxy
 
 		}, MinecraftGuiViewer.instance(), RenderGameOverlayEvent.ElementType.HOTBAR);
 
-		SimpleModelLoader loader = new SimpleModelLoader(AetherCore.MOD_ID);
+		/*SimpleModelLoader loader = new SimpleModelLoader(AetherCore.MOD_ID);
 
 		loader.registerModel(BlocksAether.labyrinth_lightstone, new GlowingBlockModel(new ResourceLocation(AetherCore.MOD_ID, "blocks/dungeon/labyrinth_lightstone"), new ResourceLocation(AetherCore.MOD_ID, "blocks/dungeon/labyrinth_lightstone_highlight")));
 		loader.registerModel(BlocksAether.labyrinth_glowing_pillar, new GlowingColumnModel(new ResourceLocation(AetherCore.MOD_ID, "blocks/dungeon/labyrinth_pillar_top"), new ResourceLocation(AetherCore.MOD_ID, "blocks/dungeon/labyrinth_pillar_side"), new ResourceLocation(AetherCore.MOD_ID, "blocks/dungeon/labyrinth_pillar_top_highlight"), new ResourceLocation(AetherCore.MOD_ID, "blocks/dungeon/labyrinth_pillar_side_highlight")));
 		loader.registerModel(BlocksAether.labyrinth_base, new GlowingColumnModel(new ResourceLocation(AetherCore.MOD_ID, "blocks/dungeon/labyrinth_base_top"), new ResourceLocation(AetherCore.MOD_ID, "blocks/dungeon/labyrinth_base_side"), new ResourceLocation(AetherCore.MOD_ID, "blocks/dungeon/labyrinth_base_top_highlight"), new ResourceLocation(AetherCore.MOD_ID, "blocks/dungeon/labyrinth_base_side_highlight")));
 		loader.registerModel(BlocksAether.ambrosium_ore, new GlowingBlockModel(new ResourceLocation(AetherCore.MOD_ID, "blocks/ores/ambrosium_ore"), new ResourceLocation(AetherCore.MOD_ID, "blocks/ores/ambrosium_ore_highlight")));
 
-		ModelLoaderRegistry.registerLoader(loader);
+		ModelLoaderRegistry.registerLoader(loader);*/
 
 		/*UiManager.inst().registerOverlay(MAIN_MENU_OVERLAY_ID, new Factory<GuiFrame>()
 		{
