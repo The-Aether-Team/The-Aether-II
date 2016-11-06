@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.crafting;
+package com.gildedgames.aether.common.registry.minecraft;
 
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.item.Item;

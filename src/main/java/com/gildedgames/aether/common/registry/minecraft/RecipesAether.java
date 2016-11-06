@@ -1,15 +1,15 @@
-package com.gildedgames.aether.common.crafting;
+package com.gildedgames.aether.common.registry.minecraft;
 
 import com.gildedgames.aether.api.registry.altar.IAltarRecipe;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
-import com.gildedgames.aether.common.crafting.recipes.RecipePresentCrafting;
-import com.gildedgames.aether.common.crafting.recipes.RecipeLeatherGlovesDyes;
-import com.gildedgames.aether.common.crafting.recipes.RecipeWrappingPaper;
-import com.gildedgames.aether.common.crafting.recipes.altar.AltarEnchantRecipe;
-import com.gildedgames.aether.common.crafting.recipes.altar.AltarRepairRecipe;
+import com.gildedgames.aether.common.recipes.RecipePresentCrafting;
+import com.gildedgames.aether.common.recipes.RecipeLeatherGlovesDyes;
+import com.gildedgames.aether.common.recipes.RecipeWrappingPaper;
+import com.gildedgames.aether.common.recipes.altar.AltarEnchantRecipe;
+import com.gildedgames.aether.common.recipes.altar.AltarRepairRecipe;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;

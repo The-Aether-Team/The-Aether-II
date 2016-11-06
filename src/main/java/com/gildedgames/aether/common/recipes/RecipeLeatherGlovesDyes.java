@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.crafting.recipes;
+package com.gildedgames.aether.common.recipes;
 
 import com.gildedgames.aether.common.items.armor.ItemLeatherGloves;
 import net.minecraft.entity.passive.EntitySheep;

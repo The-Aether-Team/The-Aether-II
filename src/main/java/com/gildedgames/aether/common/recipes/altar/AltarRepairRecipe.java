@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.crafting.recipes.altar;
+package com.gildedgames.aether.common.recipes.altar;
 
 import com.gildedgames.aether.api.registry.altar.IAltarRecipe;
 import com.gildedgames.aether.common.registry.minecraft.MaterialsAether;

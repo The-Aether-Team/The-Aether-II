@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.crafting.recipes;
+package com.gildedgames.aether.common.recipes;
 
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemWrappingPaper;
