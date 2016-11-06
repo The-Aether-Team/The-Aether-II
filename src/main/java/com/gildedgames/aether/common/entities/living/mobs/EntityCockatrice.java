@@ -45,6 +45,8 @@ public class EntityCockatrice extends EntityAetherMob implements IEntityProperti
 
 		this.setSize(1.0F, 2.0F);
 		this.stepHeight = 1.0F;
+
+		this.experienceValue = 7;
 	}
 
 	@Override

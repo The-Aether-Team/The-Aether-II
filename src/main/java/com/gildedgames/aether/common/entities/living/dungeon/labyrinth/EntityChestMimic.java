@@ -35,6 +35,8 @@ public class EntityChestMimic extends EntityExtendedMob
 
 		this.setSize(1.0F, 1.5F);
 		this.stepHeight = 1.0F;
+
+		this.experienceValue = 10;
 	}
 
 	public TickTimer getAttackTimer()

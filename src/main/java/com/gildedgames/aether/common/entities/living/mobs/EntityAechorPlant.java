@@ -50,6 +50,8 @@ public class EntityAechorPlant extends EntityAetherMob implements IEntityPropert
 		{
 			this.sinage = this.rand.nextFloat() * 6F;
 		}
+
+		this.experienceValue = 3;
 	}
 
 	@Override

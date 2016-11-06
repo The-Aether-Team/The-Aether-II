@@ -54,6 +54,8 @@ public class EntityBattleSentry extends EntityAetherMob
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true, true));
 
 		this.setSize(0.8F, 0.8F);
+
+		this.experienceValue = 3;
 	}
 
 	@Override

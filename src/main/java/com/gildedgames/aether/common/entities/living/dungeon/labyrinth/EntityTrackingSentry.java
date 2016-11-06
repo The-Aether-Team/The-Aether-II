@@ -30,6 +30,8 @@ public class EntityTrackingSentry extends EntityAetherMob
 
 		this.setSize(1.0F, 2.0F);
 		this.stepHeight = 1.0F;
+
+		this.experienceValue = 3;
 	}
 
 	@Override

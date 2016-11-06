@@ -21,6 +21,8 @@ public class EntityTempest extends EntityFlyingMob implements IEntityProperties
 		super(world);
 
 		this.setSize(1.0F, 1.0F);
+
+		this.experienceValue = 10;
 	}
 
 	@Override

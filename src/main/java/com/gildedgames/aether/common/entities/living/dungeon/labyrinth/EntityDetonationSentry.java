@@ -31,6 +31,8 @@ public class EntityDetonationSentry extends EntityAetherMob implements IProjecti
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true, true));
 
 		this.setSize(1.0F, 1.0F);
+
+		this.experienceValue = 3;
 	}
 
 	@Override

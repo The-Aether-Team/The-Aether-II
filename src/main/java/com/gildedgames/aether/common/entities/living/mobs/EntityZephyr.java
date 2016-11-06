@@ -14,6 +14,8 @@ public class EntityZephyr extends EntityFlyingDayMob implements IEntityPropertie
 		super(world);
 
 		this.setSize(1.0F, 1.0F);
+
+		this.experienceValue = 3;
 	}
 
 	@Override

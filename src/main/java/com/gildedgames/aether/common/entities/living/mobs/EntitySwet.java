@@ -80,6 +80,8 @@ public class EntitySwet extends EntityExtendedMob implements IEntityProperties
 		this.setSize(1.0F, 1.0F);
 
 		this.setType(Type.values()[this.worldObj.rand.nextInt(Type.values().length)]);
+
+		this.experienceValue = 3;
 	}
 
 	@Override

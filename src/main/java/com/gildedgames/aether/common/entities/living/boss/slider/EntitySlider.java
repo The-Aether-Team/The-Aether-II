@@ -67,6 +67,8 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 		super(world);
 
 		this.setSize(2.0F, 2.0F);
+
+		this.experienceValue = 40;
 	}
 
 	public BlockPos getStartLocation()

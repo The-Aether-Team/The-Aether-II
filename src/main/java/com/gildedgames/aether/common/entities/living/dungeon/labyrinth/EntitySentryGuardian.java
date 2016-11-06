@@ -43,6 +43,8 @@ public class EntitySentryGuardian extends EntityFlyingMob implements IRangedAtta
 		super(worldIn);
 
 		this.setSize(2.0F, 4.0F);
+
+		this.experienceValue = 20;
 	}
 
 	@Override
