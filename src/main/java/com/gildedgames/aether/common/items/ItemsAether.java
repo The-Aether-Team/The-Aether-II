@@ -8,6 +8,7 @@ import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
 import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
 import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentType;
 import com.gildedgames.aether.api.capabilites.items.properties.ItemRarity;
+import com.gildedgames.aether.api.registry.equipment.IEquipmentProperties;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffects;
@@ -118,10 +119,15 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class ItemsAether
 {
+	private static final Collection<Item> registeredItems = new ArrayList<>();
+
 	public static final Item skyroot_stick = new Item();
 
 	public static final Item ambrosium_shard = new Item(),
@@ -445,25 +451,25 @@ public class ItemsAether
 
 	public static final Item glamoured_cockatrice_keratin = new Item();
 
-	public static final Item irradiated_chunk = new ItemIrradiated(new RandomItemSelector(stack -> !(stack.getItem() instanceof ItemIrradiated))),
-			irradiated_sword = new ItemIrradiated(new RandomItemSelector(stack -> stack.getUnlocalizedName().contains("sword") && !(stack.getItem() instanceof ItemIrradiated))),
-			irradiated_armor = new ItemIrradiated(new RandomItemSelector(stack -> stack.getItem() instanceof ItemArmor)),
-			irradiated_tool = new ItemIrradiated(new RandomItemSelector(stack -> stack.getItem() instanceof ItemTool)),
-			irradiated_ring = new ItemIrradiated(new RandomItemSelector(stack ->
+	public static final Item irradiated_chunk = new ItemIrradiated(new RandomItemSelector(stack -> !(stack instanceof ItemIrradiated))),
+			irradiated_sword = new ItemIrradiated(new RandomItemSelector(item -> item.getUnlocalizedName().contains("sword") && !(item instanceof ItemIrradiated))),
+			irradiated_armor = new ItemIrradiated(new RandomItemSelector(item -> item instanceof ItemArmor)),
+			irradiated_tool = new ItemIrradiated(new RandomItemSelector(item -> item instanceof ItemTool)),
+			irradiated_ring = new ItemIrradiated(new RandomItemSelector(item ->
 			{
-				IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
+				IEquipmentProperties props = AetherAPI.equipment().getProperties(item);
 
 				return props != null && props.getEquipmentType() == ItemEquipmentType.RING;
 			})),
-			irradiated_neckwear = new ItemIrradiated(new RandomItemSelector(stack ->
+			irradiated_neckwear = new ItemIrradiated(new RandomItemSelector(item ->
 			{
-				IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
+				IEquipmentProperties props = AetherAPI.equipment().getProperties(item);
 
 				return props != null && props.getEquipmentType() == ItemEquipmentType.NECKWEAR;
 			})),
-			irradiated_charm = new ItemIrradiated(new RandomItemSelector(stack ->
+			irradiated_charm = new ItemIrradiated(new RandomItemSelector(item ->
 			{
-				IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
+				IEquipmentProperties props = AetherAPI.equipment().getProperties(item);
 
 				return props != null && props.getEquipmentType() == ItemEquipmentType.CHARM;
 			})),
@@ -474,16 +480,6 @@ public class ItemsAether
 			fried_moa_egg = new ItemFood(10, false);
 
 	public static final ItemAetherSpawnEgg aether_spawn_egg = new ItemAetherSpawnEgg();
-
-	public static final Item[] zanite_armor_set = new Item[] { zanite_helmet, zanite_chestplate, zanite_leggings, zanite_boots, zanite_gloves };
-
-	public static final Item[] gravitite_armor_set = new Item[] { gravitite_helmet, gravitite_chestplate, gravitite_leggings, gravitite_boots, gravitite_gloves };
-
-	public static final Item[] valkyrie_armor_set = new Item[] { valkyrie_helmet, valkyrie_chestplate, valkyrie_leggings, valkyrie_boots, valkyrie_gloves };
-
-	public static final Item[] phoenix_armor_set = new Item[] { phoenix_helmet, phoenix_chestplate, phoenix_leggings, phoenix_boots, phoenix_gloves };
-
-	public static final Item[] neptune_armor_set = new Item[] { neptune_helmet, neptune_chestplate, neptune_leggings, neptune_boots, neptune_gloves };
 
 	public static void preInit()
 	{
@@ -1353,6 +1349,13 @@ public class ItemsAether
 
 		GameRegistry.register(item);
 
+		registeredItems.add(item);
+
 		return item;
+	}
+
+	public static Collection<Item> getRegisteredItems()
+	{
+		return Collections.unmodifiableCollection(registeredItems);
 	}
 }

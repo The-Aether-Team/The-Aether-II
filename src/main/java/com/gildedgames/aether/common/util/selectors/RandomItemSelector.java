@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.util.selectors;
 
 import com.gildedgames.aether.api.loot.Loot;
+import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.util.Constraint;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,7 +14,7 @@ import java.util.Random;
 public class RandomItemSelector implements Loot
 {
 
-	private ArrayList<ItemStack> validStackCache;
+	private ArrayList<Item> validStackCache;
 
 	private Constraint constraint;
 
@@ -29,32 +30,23 @@ public class RandomItemSelector implements Loot
 		{
 			this.validStackCache = new ArrayList<>();
 
-			for (final Item item  : GameData.getItemRegistry().typeSafeIterable())//TODO: Make sure this gets all items
+			for (Item item : ItemsAether.getRegisteredItems())
 			{
 				if (item == null)
 				{
 					continue;
 				}
 
-				List<ItemStack> subItems = new ArrayList<>();
-
-				item.getSubItems(item, item.getCreativeTab(), subItems);
-
-				for (final ItemStack stack : subItems)
+				if (this.constraint.accept(item))
 				{
-					if (this.constraint.accept(stack))
-					{
-						this.validStackCache.add(stack);
-					}
+					this.validStackCache.add(item);
 				}
 			}
 		}
 
-		ItemStack stack = this.validStackCache.get(random.nextInt(this.validStackCache.size())).copy();
+		Item item = this.validStackCache.get(random.nextInt(this.validStackCache.size()));
 
-		stack.stackSize = 1;
-
-		return stack;
+		return new ItemStack(item);
 	}
 
 	@Override
