@@ -266,8 +266,6 @@ public class PlayerAetherEvents
 				if (shouldSpawnAtHenge)
 				{
 					mp.connection.setPlayerLocation(pos.getX(), pos.getY() + 1, pos.getZ(), 0, 0);
-
-					mp.getServerWorld().updateEntityWithOptionalForce(mp, true);
 				}
 				else
 				{
@@ -278,8 +276,6 @@ public class PlayerAetherEvents
 					pos = toWorld.provider.getRandomizedSpawnPoint();
 
 					mp.connection.setPlayerLocation(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
-
-					mp.getServerWorld().updateEntityWithOptionalForce(mp, true);
 				}
 
 				if (obstructed)
