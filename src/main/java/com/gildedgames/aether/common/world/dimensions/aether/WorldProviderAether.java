@@ -27,7 +27,10 @@ public class WorldProviderAether extends WorldProviderSurface
 	{
 		this.hasNoSky = false;
 
-		this.setCloudRenderer(new NOOPRenderHandler());
+		if (this.worldObj.isRemote)
+		{
+			this.setCloudRenderer(new NOOPRenderHandler());
+		}
 	}
 
 	@Override
