@@ -148,7 +148,7 @@ public class ItemCrossbow extends Item
 				ItemCrossbow.setLoaded(stack, false);
 			}
 
-			ObfuscationReflectionHelper.setPrivateValue(EntityLivingBase.class, entityLiving, 0, "activeItemStackUseCount");
+			ObfuscationReflectionHelper.setPrivateValue(EntityLivingBase.class, entityLiving, 0, ReflectionAether.ACTIVE_ITEMSTACK_USE_COUNT.getMappings());
 
 			return true;
 		}
