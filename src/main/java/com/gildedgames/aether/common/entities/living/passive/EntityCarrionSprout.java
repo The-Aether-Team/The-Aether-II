@@ -42,7 +42,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	{
 		super.applyEntityAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
 
 		this.setMaxSproutSize(8);
 		this.setSproutSize(1 + this.rand.nextInt(this.getMaxSproutSize()));

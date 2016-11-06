@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemAetherSpawnEgg;
 import com.google.common.collect.Sets;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Items;
@@ -32,6 +33,14 @@ public class EntityKirrid extends EntitySheep
 		this.setSize(1.0F, 1.5F);
 
 		this.spawnableBlock = BlocksAether.aether_grass;
+	}
+
+	@Override
+	protected void applyEntityAttributes()
+	{
+		super.applyEntityAttributes();
+
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12.0D);
 	}
 
 	@Override
