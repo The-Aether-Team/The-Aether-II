@@ -398,6 +398,8 @@ public class SpawnHandler implements NBT
 
 					entity.setLocationAndAngles(posX + 0.5F, posY, posZ + 0.5F, world.rand.nextFloat() * 360.0F, 0.0F);
 
+					world.spawnEntityInWorld(entity);
+
 					if (world instanceof WorldServer)
 					{
 						WorldServer worldServer = (WorldServer)world;
@@ -416,8 +418,6 @@ public class SpawnHandler implements NBT
 								living.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(living)), null);
 							}
 						}
-
-						world.spawnEntityInWorld(entity);
 
 						ISpawningInfo spawningInfo = entity.getCapability(AetherCapabilities.ENTITY_SPAWNING_INFO, null);
 
