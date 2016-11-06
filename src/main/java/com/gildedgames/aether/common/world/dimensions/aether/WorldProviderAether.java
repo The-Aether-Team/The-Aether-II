@@ -26,11 +26,6 @@ public class WorldProviderAether extends WorldProviderSurface
 	public WorldProviderAether()
 	{
 		this.hasNoSky = false;
-
-		if (this.worldObj.isRemote)
-		{
-			this.setCloudRenderer(new NOOPRenderHandler());
-		}
 	}
 
 	@Override
@@ -48,6 +43,11 @@ public class WorldProviderAether extends WorldProviderSurface
 	@Override
 	public IChunkGenerator createChunkGenerator()
 	{
+		if (this.worldObj.isRemote)
+		{
+			this.setCloudRenderer(new NOOPRenderHandler());
+		}
+
 		return new ChunkGeneratorIsland(this.worldObj, this.worldObj.getSeed());
 	}
 
