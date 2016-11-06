@@ -3,6 +3,7 @@ package com.gildedgames.aether.common;
 import com.gildedgames.aether.client.gui.menu.WorldAetherOptionsOverlay;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.entities.living.mobs.EntityAechorPlant;
 import com.gildedgames.aether.common.entities.living.passive.EntityCarrionSprout;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -26,11 +27,9 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerList;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.util.math.*;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -242,9 +241,9 @@ public class CommonEvents
 		}
 
 		// Checks whether or not an entity is in the Aether's void
-		if (entity.worldObj.provider.getDimensionType() == DimensionsAether.AETHER && entity.posY < -4)
+		if (entity.worldObj.provider.getDimensionType() == DimensionsAether.AETHER && entity.posY < -10)
 		{
-			List<UUID> uniquePassengerIDs = Lists.newArrayList();
+			/*List<UUID> uniquePassengerIDs = Lists.newArrayList();
 
 			for (Entity passenger : entity.getPassengers())
 			{
@@ -253,7 +252,7 @@ public class CommonEvents
 
 			if (!entity.worldObj.isRemote)
 			{
-				CommonEvents.onFallenFromAether(entity);
+
 			}
 
 			List<Entity> entities = entity.worldObj.getEntitiesWithinAABB(Entity.class, entity.getEntityBoundingBox().expand(16.0D, 16.0D, 16.0D));
@@ -263,6 +262,34 @@ public class CommonEvents
 				if (uniquePassengerIDs.contains(passenger.getUniqueID()))
 				{
 					passenger.startRiding(entity, true);
+				}
+			}*/
+
+			if (!entity.worldObj.isRemote)
+			{
+				if (entity instanceof EntityPlayer)
+				{
+					EntityPlayer player = (EntityPlayer)entity;
+					PlayerAetherImpl playerAether = PlayerAetherImpl.getPlayer(player);
+
+					if (playerAether.getParachuteModule().isParachuting())
+					{
+						CommonEvents.onFallenFromAether(entity);
+					}
+					else
+					{
+						player.attackEntityFrom(DamageSource.outOfWorld, 200.0F);
+
+						if (player.getHealth() <= 0 && !player.isDead)
+						{
+							player.addChatComponentMessage(new TextComponentString("You fell out of the Aether without a Cloud Parachute. Ouch!"));
+							player.isDead = true;
+						}
+					}
+				}
+				else
+				{
+					entity.setDead();
 				}
 			}
 		}

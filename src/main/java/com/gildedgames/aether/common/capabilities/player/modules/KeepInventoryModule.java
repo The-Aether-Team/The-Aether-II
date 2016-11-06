@@ -84,7 +84,7 @@ public class KeepInventoryModule extends PlayerAetherModule
 
 				this.getPlayer().inventory.markDirty();
 
-				this.getPlayer().addChatComponentMessage(new TextComponentString("A mysterious force returns your items to you.."));
+				this.getPlayer().addChatComponentMessage(new TextComponentString("A mysterious force returns your items to you."));
 			}
 
 			this.mainInvOnDeath.clear();
