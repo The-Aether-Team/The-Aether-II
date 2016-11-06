@@ -279,7 +279,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		{
 			if (this.ticksUntilFlap == 0)
 			{
-				this.worldObj.playSound(this.posX, this.posY, this.posZ, SoundEvents.ENTITY_ENDERDRAGON_FLAP, SoundCategory.NEUTRAL, 0.4f, 0.8f + (this.getRNG().nextFloat() * 0.6f), false);
+				this.worldObj.playSound(this.posX, this.posY, this.posZ, SoundsAether.generic_wing_flap, SoundCategory.NEUTRAL, 0.4f, 0.8f + (this.getRNG().nextFloat() * 0.6f), false);
 
 				this.ticksUntilFlap = 11;
 			}

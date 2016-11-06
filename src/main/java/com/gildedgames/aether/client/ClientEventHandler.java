@@ -20,6 +20,7 @@ import com.gildedgames.aether.common.containers.slots.SlotMoaEgg;
 import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.AetherMovementPacket;
+import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
@@ -232,7 +233,7 @@ public class ClientEventHandler
 							{
 								NetworkingAether.sendPacketToServer(new AetherMovementPacket(AetherMovementPacket.Action.EXTRA_JUMP));
 
-								world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ENDERDRAGON_FLAP, SoundCategory.PLAYERS, 0.4f, 0.8f + (world.rand.nextFloat() * 0.6f), false);
+								world.playSound(player.posX, player.posY, player.posZ, SoundsAether.generic_wing_flap, SoundCategory.PLAYERS, 0.4f, 0.8f + (world.rand.nextFloat() * 0.6f), false);
 							}
 						}
 					}

@@ -100,6 +100,8 @@ public class SoundsAether
 
 	public static final SoundEvent slider_signal = new SoundEvent(AetherCore.getResource("mob.slider.signal"));
 
+	public static final SoundEvent generic_wing_flap = new SoundEvent(AetherCore.getResource("mob.generic.wings.flap"));
+
 	public static void preInit()
 	{
 		registerSound("portal.glowstone.hum", glowstone_portal_hum);
@@ -167,6 +169,8 @@ public class SoundsAether
 		registerSound("mob.slider.die", slider_die);
 		registerSound("mob.slider.move", slider_move);
 		registerSound("mob.slider.signal", slider_signal);
+
+		registerSound("mob.generic.wings.flap", generic_wing_flap);
 	}
 
 	private static void registerSound(String resource, SoundEvent event) {

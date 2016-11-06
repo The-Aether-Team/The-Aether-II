@@ -128,6 +128,18 @@
 		],
 		"subtitle": "subtitles.aether.random.dart_shooter.fire"
 	},
+	"mob.generic.wings.flap": {
+		"category": "neutral",
+		"sounds": [
+			"mob/enderdragon/wings1",
+			"mob/enderdragon/wings2",
+			"mob/enderdragon/wings3",
+			"mob/enderdragon/wings4",
+			"mob/enderdragon/wings5",
+			"mob/enderdragon/wings6"
+		],
+		"subtitle": "subtitles.aether.mob.generic.wings.flap"
+	},
 	"mob.aerbunny.lift": {
 		"category": "neutral",
 		"sounds": [
