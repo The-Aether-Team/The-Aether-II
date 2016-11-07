@@ -33,7 +33,7 @@ public class ItemBolt extends Item
 	{
 		ItemBoltType type = ITEM_VARIANTS[stack.getItemDamage()];
 
-		float damage = type.getDamage();
+		float damage = type.getDamage() * 2.0F;
 
 		if (damage == Math.floor(damage))
 		{
