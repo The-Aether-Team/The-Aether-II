@@ -1,4 +1,5 @@
 {
+	"parent": "block/cube_all",
 	"textures": {
 		"particle": "aether:blocks/aether_portal",
 		"portal": "aether:blocks/aether_portal"
