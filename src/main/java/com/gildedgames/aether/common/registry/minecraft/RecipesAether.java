@@ -234,13 +234,13 @@ public class RecipesAether implements IAltarRecipeRegistry
 		registerShapedRecipe(new ItemStack(BlocksAether.labyrinth_wall_slab, 6), "XXX",
 				'X', new ItemStack(BlocksAether.labyrinth_wall));
 
-		// Fences
-        registerShapedRecipe(new ItemStack(BlocksAether.skyroot_fence, 3), "XYX", "XYX",
+		// Gates
+        registerShapedRecipe(new ItemStack(BlocksAether.skyroot_fence_gate, 1), "XYX", "XYX",
                 'X', new ItemStack(ItemsAether.skyroot_stick),
                 'Y', new ItemStack(BlocksAether.aether_planks));
 
-        // Gates
-		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_fence_gate, 1), "YXY", "YXY",
+        // Fences
+		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_fence, 3), "YXY", "YXY",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(BlocksAether.aether_planks));
 
