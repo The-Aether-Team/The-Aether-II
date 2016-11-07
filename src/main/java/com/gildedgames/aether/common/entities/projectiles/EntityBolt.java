@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.projectiles;
 
+import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import net.minecraft.block.material.Material;
@@ -15,6 +16,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -135,6 +137,8 @@ public class EntityBolt extends EntityArrow
 	public void setBoltType(ItemBoltType type)
 	{
 		this.dataManager.set(TYPE, (byte) type.ordinal());
+
+		ObfuscationReflectionHelper.setPrivateValue(EntityArrow.class, this, type.getDamage(), ReflectionAether.ENTITY_ARROW_DAMAGE.getMappings());
 	}
 
 	public ItemBoltType getBoltType()

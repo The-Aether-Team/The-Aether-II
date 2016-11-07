@@ -6,11 +6,11 @@ public enum ItemBoltType
 	/* DAMAGES ARE NOT FINAL */
 	SKYROOT(1.0f, "skyroot"),
 	HOLYSTONE(2.0f, "holystone"),
-	SCATTERGLASS(2.5f, "scatterglass"),
-	BONESHARD(2.5F, "boneshard"),
-	ZANITE(3.5f, "zanite"),
-	ARKENIUM(5.0f, "arkenium"),
-	GRAVITITE(7.0f, "gravitite");
+	SCATTERGLASS(3.0f, "scatterglass"),
+	BONESHARD(3.0F, "boneshard"),
+	ZANITE(4.0f, "zanite"),
+	ARKENIUM(4.0f, "arkenium"),
+	GRAVITITE(5.0f, "gravitite");
 
 	private final float damage;
 
