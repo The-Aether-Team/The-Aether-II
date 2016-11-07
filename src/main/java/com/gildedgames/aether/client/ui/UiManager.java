@@ -13,6 +13,8 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -124,14 +126,14 @@ public class UiManager
 
 	}
 
-	public ImmutableList<RegisteredOverlay> registeredOverlays()
+	public Collection<RegisteredOverlay> registeredOverlays()
 	{
-		return ImmutableList.copyOf(this.registeredOverlays.values());
+		return Collections.unmodifiableCollection(this.registeredOverlays.values());
 	}
 
-	public ImmutableList<Overlay> overlays()
+	public Collection<Overlay> overlays()
 	{
-		return ImmutableList.copyOf(this.overlays.values());
+		return Collections.unmodifiableCollection(this.overlays.values());
 	}
 
 	public void createRegisteredOverlays()
