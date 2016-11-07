@@ -14,6 +14,7 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -26,6 +27,17 @@ public class WorldProviderAether extends WorldProviderSurface
 	public WorldProviderAether()
 	{
 		this.hasNoSky = false;
+
+		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
+		{
+			this.setupClientRenderer();
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	private void setupClientRenderer()
+	{
+		this.setCloudRenderer(new NOOPRenderHandler());
 	}
 
 	@Override
@@ -43,11 +55,6 @@ public class WorldProviderAether extends WorldProviderSurface
 	@Override
 	public IChunkGenerator createChunkGenerator()
 	{
-		if (this.worldObj.isRemote)
-		{
-			this.setCloudRenderer(new NOOPRenderHandler());
-		}
-
 		return new ChunkGeneratorIsland(this.worldObj, this.worldObj.getSeed());
 	}
 
