@@ -4,7 +4,6 @@ import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt.BoltAbility;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.misc.ItemWrappingPaper;
 import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -12,6 +11,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
@@ -178,6 +178,10 @@ public class ItemCrossbow extends Item
 	{
 		if (!entityLiving.worldObj.isRemote)
 		{
+			World world = entityLiving.worldObj;
+
+			world.playSound(null, entityLiving.posX, entityLiving.posY, entityLiving.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F));
+
 			float speed = 1.0f;
 
 			ItemBoltType boltType = ItemCrossbow.getLoadedBoltType(stack);
