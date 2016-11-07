@@ -64,7 +64,7 @@ public class MoaNest
 	public void spawnMoaFamily(World world, int familySize)
 	{
 		this.pack = new EntityGroup(EntityGroup.getNextID());
-		this.pack.setOptimalSize(5);
+		this.pack.setOptimalSize(familySize);
 		
 		boolean hasExtraChild = world.rand.nextBoolean();
 		
