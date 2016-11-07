@@ -155,9 +155,9 @@ public class EntityCockatrice extends EntityAetherMob implements IEntityProperti
 	{
 		super.dropFewItems(p_70628_1_, looting);
 
-		if (this.getRNG().nextBoolean())
+		if (this.getRNG().nextInt(3) == 0)
 		{
-			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(5) + 1);
+			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(2) + 1);
 		}
 
 		this.dropItem(Items.FEATHER, this.getRNG().nextInt(2) + 1);

@@ -156,9 +156,9 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 	{
 		this.dropItem(Items.STRING, 1);
 
-		if (this.getRNG().nextBoolean())
+		if (this.getRNG().nextInt(3) == 0)
 		{
-			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(5) + 1);
+			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(2) + 1);
 		}
 	}
 

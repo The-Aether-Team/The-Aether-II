@@ -84,9 +84,9 @@ public class EntityPhyg extends EntityFlyingAnimal
 	{
 		super.dropFewItems(p_70628_1_, looting);
 
-		if (this.getRNG().nextBoolean())
+		if (this.getRNG().nextInt(3) == 0)
 		{
-			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(5) + 1);
+			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(2) + 1);
 		}
 
 		if (this.getRNG().nextBoolean())

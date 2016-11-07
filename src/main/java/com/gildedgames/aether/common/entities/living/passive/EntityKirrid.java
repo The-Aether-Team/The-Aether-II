@@ -66,9 +66,9 @@ public class EntityKirrid extends EntitySheep
 	{
 		super.dropFewItems(var1, var2);
 
-		if (this.getRNG().nextBoolean())
+		if (this.getRNG().nextInt(3) == 0)
 		{
-			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(5) + 1);
+			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(2) + 1);
 		}
 	}
 
