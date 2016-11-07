@@ -4,9 +4,11 @@ import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt.BoltAbility;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.misc.ItemWrappingPaper;
 import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -16,12 +18,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class ItemCrossbow extends Item
 {
@@ -255,6 +259,23 @@ public class ItemCrossbow extends Item
 		this.durationInTicks = x;
 
 		return this;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean adv)
+	{
+		float seconds = this.durationInTicks / 20.0F;
+
+		tooltip.add(TextFormatting.BLUE + I18n.format("item.aether.crossbow.desc1"));
+
+		if (seconds == Math.floor(seconds))
+		{
+			tooltip.add(TextFormatting.GRAY + "\u2022 " + String.valueOf((int)Math.floor(seconds)) + " " + I18n.format("item.aether.crossbow.desc" + (seconds < 1 || seconds > 1 ? "2" : "3")));
+		}
+		else
+		{
+			tooltip.add(TextFormatting.GRAY + "\u2022 " + String.valueOf(seconds) + " " + I18n.format("item.aether.crossbow.desc" + (seconds < 1 || seconds > 1 ? "2" : "3")));
+		}
 	}
 
 }

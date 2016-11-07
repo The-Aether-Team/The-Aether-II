@@ -505,6 +505,10 @@ item.aether.candy_cane_sword.ability.desc=Drops Candy Canes
 item.aether.valkyrie_lance.ability.desc=Extended Reach
 item.aether.sentry_vaultbox.ability.desc1=§dOutputs: §rRandom Items
 item.aether.sentry_vaultbox.ability.desc2=§3Throw: §rRight-Click
+item.aether.crossbow.desc1=Reload Speed
+item.aether.crossbow.desc2=Seconds
+item.aether.crossbow.desc3=Second
+item.aether.bolt.desc1=Attack Damage
 
 # Tool tooltips
 item.aether.tool.skyroot.ability.desc=Doubles drops from blocks
@@ -521,11 +525,6 @@ item.aether.tooltip.use=Use
 
 # Armor Tooltips
 item.aether.armor.zanite.ability.desc=Becomes Stronger with Wear
-item.aether.armor.gravitite.ability.desc=Double Jump
-item.aether.armor.neptune.ability.desc=Breathe and Walk Underwater
-item.aether.armor.phoenix.ability.desc=Fire Immunity
-item.aether.armor.valkyrie.ability.desc=Wing Gliding
-item.aether.armor.sentry_boots.ability.desc=Negates Fall Damage
 
 # Records
 item.aether.moa_music_disc.desc=Emile van Krieken - Approaches
