@@ -105,12 +105,19 @@ public class IslandSectorAccess
 			return this.loadSectorFromMemory(world, sectorX, sectorY);
 		}
 
-		if (!this.wasSectorEverCreated(world, sectorX, sectorY))
+		IslandSector sector = this.loadSectorFromDisk(sectorX, sectorY);
+
+		if (sector == null && this.wasSectorEverCreated(world, sectorX, sectorY))
+		{
+			File file = IslandSectorAccess.createSectorFile(sectorX, sectorY);
+
+			file.delete();
+		}
+
+		if (!this.wasSectorEverCreated(world, sectorX, sectorY) || sector == null)
 		{
 			return null;
 		}
-
-		IslandSector sector = this.loadSectorFromDisk(sectorX, sectorY);
 
 		this.addSectorToMemory(sector);
 
@@ -129,16 +136,23 @@ public class IslandSectorAccess
 			return this.loadSectorFromMemory(world, sectorX, sectorY);
 		}
 
-		if (!this.wasSectorEverCreated(world, sectorX, sectorY))
+		IslandSector sector = this.loadSectorFromDisk(sectorX, sectorY);
+
+		if (sector == null && this.wasSectorEverCreated(world, sectorX, sectorY))
 		{
-			IslandSector sector = this.createSectorAndSaveToDisk(world, sectorX, sectorY, seedForNewSector);
+			File file = IslandSectorAccess.createSectorFile(sectorX, sectorY);
+
+			file.delete();
+		}
+
+		if (!this.wasSectorEverCreated(world, sectorX, sectorY) || sector == null)
+		{
+			sector = this.createSectorAndSaveToDisk(world, sectorX, sectorY, seedForNewSector);
 
 			this.addSectorToMemory(sector);
 
 			return sector;
 		}
-
-		IslandSector sector = this.loadSectorFromDisk(sectorX, sectorY);
 
 		this.addSectorToMemory(sector);
 
