@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.blocks.natural;
 import java.util.List;
 import java.util.Random;
 
+import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
@@ -12,6 +13,7 @@ import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVa
 import com.gildedgames.aether.common.world.dimensions.aether.features.trees.WorldGenOrangeTree;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockGrass;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -28,10 +30,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockAetherGrass extends Block implements IBlockVariants, IGrowable
+public class BlockAetherGrass extends BlockGrass implements IBlockVariants
 {
 	public static final BlockVariant AETHER_GRASS = new BlockVariant(0, "normal"),
 			ENCHANTED_AETHER_GRASS = new BlockVariant(1, "enchanted"),
@@ -44,7 +47,7 @@ public class BlockAetherGrass extends Block implements IBlockVariants, IGrowable
 
 	public BlockAetherGrass()
 	{
-		super(Material.GRASS);
+		super();
 
 		this.setSoundType(SoundType.PLANT);
 
