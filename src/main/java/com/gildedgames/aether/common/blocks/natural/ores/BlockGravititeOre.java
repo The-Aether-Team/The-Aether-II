@@ -26,7 +26,7 @@ public class BlockGravititeOre extends BlockFloating
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return ItemsAether.gravitite_chunk;
+		return ItemsAether.gravitite_ore;
 	}
 
 }

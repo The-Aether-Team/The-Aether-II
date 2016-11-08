@@ -1,11 +1,9 @@
 package com.gildedgames.aether.common.items;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
 import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
 import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
-import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
 import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentType;
 import com.gildedgames.aether.api.capabilites.items.properties.ItemRarity;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentProperties;
@@ -84,15 +82,11 @@ import com.gildedgames.aether.common.registry.TemperatureHandler;
 import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import com.gildedgames.aether.common.registry.minecraft.MaterialsAether;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
-import com.gildedgames.aether.common.util.Constraint;
 import com.gildedgames.aether.common.util.selectors.RandomItemSelector;
-import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenTemplate;
-import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -126,8 +120,8 @@ public class ItemsAether
 			zanite_gemstone = new Item(),
 			arkenium = new Item(),
 			arkenium_strip = new Item(),
-			arkenium_chunk = new Item(),
-			gravitite_chunk = new Item(),
+			arkenium_ore = new Item(),
+			gravitite_ore = new Item(),
 			gravitite_plate = new Item();
 
 	public static final ItemSkyrootTool skyroot_axe = new ItemSkyrootTool(EnumToolType.AXE, 6.0F, -3.2F),
@@ -484,8 +478,8 @@ public class ItemsAether
 		registerItem("arkenium", arkenium.setCreativeTab(CreativeTabsAether.MATERIALS));
         registerItem("arkenium_strip", arkenium_strip.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("icestone", icestone.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("arkenium_chunk", arkenium_chunk.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("gravitite_chunk", gravitite_chunk.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("arkenium_ore_item", arkenium_ore.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("gravitite_ore_item", gravitite_ore.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("gravitite_plate", gravitite_plate.setCreativeTab(CreativeTabsAether.MATERIALS));
 
 		registerItem("skyroot_axe", skyroot_axe);

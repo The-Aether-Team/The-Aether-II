@@ -181,8 +181,8 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.zanite_gemstone, "zanite_gemstone");
 		registerItemModels(ItemsAether.arkenium, "arkenium");
 		registerItemModels(ItemsAether.arkenium_strip, "arkenium_strip");
-		registerItemModels(ItemsAether.arkenium_chunk, "arkenium_chunk");
-		registerItemModels(ItemsAether.gravitite_chunk, "gravitite_chunk");
+		registerItemModels(ItemsAether.arkenium_ore, "arkenium_ore");
+		registerItemModels(ItemsAether.gravitite_ore, "gravitite_ore");
 		registerItemModels(ItemsAether.gravitite_plate, "gravitite_plate");
 
 		registerItemModels(ItemsAether.skyroot_pickaxe, "tools/skyroot_pickaxe");
