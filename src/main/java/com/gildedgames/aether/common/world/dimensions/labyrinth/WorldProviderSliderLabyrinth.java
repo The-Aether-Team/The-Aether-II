@@ -133,4 +133,10 @@ public class WorldProviderSliderLabyrinth extends WorldProviderSurface
 		return true;
 	}
 
+	@Override
+	public float calculateCelestialAngle(long worldTime, float partialTicks)
+	{
+		return 0.5F;
+	}
+
 }
