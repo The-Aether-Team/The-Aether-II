@@ -41,7 +41,8 @@ public class RecipesAether implements IAltarRecipeRegistry
 
 	private void registerFurnaceRecipes()
 	{
-		registerSmeltingRecipe(new ItemStack(BlocksAether.arkenium_ore), new ItemStack(ItemsAether.arkenium), 0.85f);
+		registerSmeltingRecipe(new ItemStack(ItemsAether.arkenium_chunk), new ItemStack(ItemsAether.arkenium), 0.85f);
+		registerSmeltingRecipe(new ItemStack(ItemsAether.gravitite_chunk), new ItemStack(ItemsAether.gravitite_plate), 0.85f);
 		registerSmeltingRecipe(new ItemStack(ItemsAether.moa_egg), new ItemStack(ItemsAether.fried_moa_egg), 0.85f);
 		registerSmeltingRecipe(new ItemStack(ItemsAether.rainbow_moa_egg), new ItemStack(ItemsAether.fried_moa_egg), 0.85f);
 		registerSmeltingRecipe(new ItemStack(BlocksAether.crude_scatterglass), new ItemStack(BlocksAether.scatterglass), 0.85f);
@@ -186,6 +187,10 @@ public class RecipesAether implements IAltarRecipeRegistry
 		registerShapedRecipe(new ItemStack(BlocksAether.zanite_block), "XXX", "XXX", "XXX",
 				'X', new ItemStack(ItemsAether.zanite_gemstone));
 
+		// Gravitite Block
+		registerShapedRecipe(new ItemStack(BlocksAether.gravitite_block), "XXX", "XXX", "XXX",
+				'X', new ItemStack(ItemsAether.gravitite_plate));
+
         // Zanite Uncraft
         registerShapedRecipe(new ItemStack(ItemsAether.zanite_gemstone, 9), "X",
                 'X', new ItemStack(BlocksAether.zanite_block));
@@ -306,7 +311,7 @@ public class RecipesAether implements IAltarRecipeRegistry
 		registerShapedRecipe(new ItemStack(ItemsAether.gravitite_crossbow), "ZZY", "XYZ", "WXZ",
 				'W', new ItemStack(ItemsAether.skyroot_stick),
 				'X', new ItemStack(Items.STRING),
-				'Y', new ItemStack(BlocksAether.enchanted_gravitite),
+				'Y', new ItemStack(ItemsAether.gravitite_plate),
 				'Z', new ItemStack(ItemsAether.arkenium_strip));
 
 		// Crossbow Bolts
@@ -432,22 +437,22 @@ public class RecipesAether implements IAltarRecipeRegistry
 
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.GRAVITITE.ordinal()), "  Y", " X ", "Z  ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(BlocksAether.enchanted_gravitite),
+				'Y', new ItemStack(ItemsAether.gravitite_plate),
 				'Z', new ItemStack(Items.FEATHER));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.GRAVITITE.ordinal()), "  Z", " X ", "Y  ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(BlocksAether.enchanted_gravitite),
+				'Y', new ItemStack(ItemsAether.gravitite_plate),
 				'Z', new ItemStack(Items.FEATHER));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.GRAVITITE.ordinal()), " Y", " X", " Z",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(BlocksAether.enchanted_gravitite),
+				'Y', new ItemStack(ItemsAether.gravitite_plate),
 				'Z', new ItemStack(Items.FEATHER));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.GRAVITITE.ordinal()), " Z", " X", " Y",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(BlocksAether.enchanted_gravitite),
+				'Y', new ItemStack(ItemsAether.gravitite_plate),
 				'Z', new ItemStack(Items.FEATHER));
 
 		// Shields
@@ -469,7 +474,7 @@ public class RecipesAether implements IAltarRecipeRegistry
 
 		registerShapedRecipe(new ItemStack(ItemsAether.gravitite_shield), "YXY", "YYY", " Y ",
 				'X', new ItemStack(ItemsAether.arkenium_strip),
-				'Y', new ItemStack(BlocksAether.enchanted_gravitite));
+				'Y', new ItemStack(ItemsAether.gravitite_plate));
 
 		// Stairs
 
@@ -505,7 +510,7 @@ public class RecipesAether implements IAltarRecipeRegistry
 		ItemStack skyroot = new ItemStack(BlocksAether.aether_planks);
 		ItemStack holystone = new ItemStack(BlocksAether.holystone);
 		ItemStack zanite = new ItemStack(ItemsAether.zanite_gemstone);
-		ItemStack gravitite = new ItemStack(BlocksAether.enchanted_gravitite);
+		ItemStack gravitite = new ItemStack(ItemsAether.gravitite_plate);
 		ItemStack arkenium = new ItemStack(ItemsAether.arkenium);
 		ItemStack ark_strip = new ItemStack(ItemsAether.arkenium_strip);
 
@@ -582,7 +587,7 @@ public class RecipesAether implements IAltarRecipeRegistry
 	private void registerArmorRecipes()
 	{
 		ItemStack zanite = new ItemStack(ItemsAether.zanite_gemstone);
-		ItemStack gravitite = new ItemStack(BlocksAether.enchanted_gravitite);
+		ItemStack gravitite = new ItemStack(ItemsAether.gravitite_plate);
 
 		// Zanite Armor
 		registerShapedRecipe(new ItemStack(ItemsAether.zanite_helmet), "XXX", "X X",
@@ -708,10 +713,6 @@ public class RecipesAether implements IAltarRecipeRegistry
         // Quicksoil Glass
 		this.registerAltarRecipe(new AltarEnchantRecipe(1, new ItemStack(BlocksAether.quicksoil),
                 new ItemStack(BlocksAether.quicksoil_glass)));
-
-		// Enchanted Gravitite
-		this.registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(BlocksAether.gravitite_ore),
-                new ItemStack(BlocksAether.enchanted_gravitite)));
 
 		// Enchanted Dart Shooter
 		this.registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.GOLDEN.ordinal()),

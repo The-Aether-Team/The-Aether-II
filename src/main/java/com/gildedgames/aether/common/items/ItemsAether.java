@@ -134,7 +134,10 @@ public class ItemsAether
 			ambrosium_chunk = new ItemAmbrosiumChunk(),
 			zanite_gemstone = new Item(),
 			arkenium = new Item(),
-			arkenium_strip = new Item();
+			arkenium_strip = new Item(),
+			arkenium_chunk = new Item(),
+			gravitite_chunk = new Item(),
+			gravitite_plate = new Item();
 
 	public static final ItemSkyrootTool skyroot_axe = new ItemSkyrootTool(EnumToolType.AXE, 6.0F, -3.2F),
 			skyroot_pickaxe = new ItemSkyrootTool(EnumToolType.PICKAXE, 1.0F, -2.8F),
@@ -490,6 +493,9 @@ public class ItemsAether
 		registerItem("arkenium", arkenium.setCreativeTab(CreativeTabsAether.MATERIALS));
         registerItem("arkenium_strip", arkenium_strip.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("icestone", icestone.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("arkenium_chunk", arkenium_chunk.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("gravitite_chunk", gravitite_chunk.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("gravitite_plate", gravitite_plate.setCreativeTab(CreativeTabsAether.MATERIALS));
 
 		registerItem("skyroot_axe", skyroot_axe);
 		registerItem("skyroot_pickaxe", skyroot_pickaxe);

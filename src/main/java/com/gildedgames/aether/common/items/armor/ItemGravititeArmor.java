@@ -15,6 +15,6 @@ public class ItemGravititeArmor extends ItemAetherArmor
 	@Override
 	public boolean getIsRepairable(ItemStack target, ItemStack stack)
 	{
-		return stack.getItem() == Item.getItemFromBlock(BlocksAether.enchanted_gravitite);
+		return stack.getItem() == Item.getItemFromBlock(BlocksAether.gravitite_block);
 	}
 }

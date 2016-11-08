@@ -156,7 +156,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.orange_tree, "orange_tree");
 
 		registerItemModels(BlocksAether.zanite_block, "zanite_block");
-		registerItemModels(BlocksAether.enchanted_gravitite, "enchanted_gravitite");
+		registerItemModels(BlocksAether.gravitite_block, "gravitite_block");
 
 		registerItemModels(BlocksAether.aether_planks, new ItemModelBuilder("planks/")
 				.add(BlockAetherPlanks.SKYROOT.getMeta(), "skyroot_planks")
@@ -181,6 +181,9 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.zanite_gemstone, "zanite_gemstone");
 		registerItemModels(ItemsAether.arkenium, "arkenium");
 		registerItemModels(ItemsAether.arkenium_strip, "arkenium_strip");
+		registerItemModels(ItemsAether.arkenium_chunk, "arkenium_chunk");
+		registerItemModels(ItemsAether.gravitite_chunk, "gravitite_chunk");
+		registerItemModels(ItemsAether.gravitite_plate, "gravitite_plate");
 
 		registerItemModels(ItemsAether.skyroot_pickaxe, "tools/skyroot_pickaxe");
 		registerItemModels(ItemsAether.skyroot_axe, "tools/skyroot_axe");

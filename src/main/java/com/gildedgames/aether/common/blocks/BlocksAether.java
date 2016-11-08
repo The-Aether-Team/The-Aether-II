@@ -25,12 +25,10 @@ import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummy;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.blocks.ItemAetherSlab;
 import com.gildedgames.aether.common.items.blocks.ItemBlockVariants;
-import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -113,7 +111,7 @@ public class BlocksAether
 
 	public static final Block zanite_block = new BlockCustom(Material.IRON).setSoundType(SoundType.METAL).setHardness(5f);
 
-	public static final Block enchanted_gravitite = new BlockCustom(Material.ROCK).setSoundType(SoundType.STONE).setHardness(5f);
+	public static final Block gravitite_block = new BlockCustom(Material.ROCK).setSoundType(SoundType.STONE).setHardness(5f);
 
 	public static final BlockAetherSapling aether_sapling = new BlockAetherSapling();
 
@@ -309,7 +307,7 @@ public class BlocksAether
 
 		registerBlock("zanite_block", BlocksAether.zanite_block.setCreativeTab(CreativeTabsAether.BLOCKS));
 
-		registerBlock("enchanted_gravitite", BlocksAether.enchanted_gravitite.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("gravitite_block", BlocksAether.gravitite_block.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerBlock("carved_stone", BlocksAether.carved_stone.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.carved_stone));
 
@@ -496,7 +494,7 @@ public class BlocksAether
 		incubator.setHarvestLevel("axe", 0);
 
 		zanite_block.setHarvestLevel("pickaxe", 1);
-		enchanted_gravitite.setHarvestLevel("pickaxe", 2);
+		gravitite_block.setHarvestLevel("pickaxe", 2);
 
 		carved_stone.setHarvestLevel("pickaxe", 0);
 		labyrinth_lightstone.setHarvestLevel("pickaxe", 0);
