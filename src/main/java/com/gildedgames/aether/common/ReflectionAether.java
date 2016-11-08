@@ -24,11 +24,11 @@ public class ReflectionAether
 
 	public static final ReflectionEntry TOOL_CLASS = new ReflectionEntry("toolClass");
 
-	public static final ReflectionEntry EFFECTIVE_ON_AXE = new ReflectionEntry("field_150915_c", "EFFECTIVE_ON");
+	public static final ReflectionEntry EFFECTIVE_ON_AXE = new ReflectionEntry("field_150917_c", "EFFECTIVE_ON");
 
-	public static final ReflectionEntry EFFECTIVE_ON_PICKAXE = new ReflectionEntry("field_150916_c", "EFFECTIVE_ON");
+	public static final ReflectionEntry EFFECTIVE_ON_PICKAXE = new ReflectionEntry("field_150915_c", "EFFECTIVE_ON");
 
-	public static final ReflectionEntry EFFECTIVE_ON_SHOVEL = new ReflectionEntry("field_150917_c", "EFFECTIVE_ON");
+	public static final ReflectionEntry EFFECTIVE_ON_SHOVEL = new ReflectionEntry("field_150916_c", "EFFECTIVE_ON");
 
 	public static final ReflectionEntry ENTITY_ARROW_DAMAGE = new ReflectionEntry("field_70255_ao", "damage");
 
