@@ -693,9 +693,9 @@ public class RecipesAether implements IAltarRecipeRegistry
                 'Z', new ItemStack(ItemsAether.skyroot_stick));
 
         // Orange Lollipop
-        registerShapedRecipe(new ItemStack(ItemsAether.orange), "XY", "Z ",
+        registerShapedRecipe(new ItemStack(ItemsAether.orange_lollipop), "XY", "Z ",
                 'X', new ItemStack(Items.SUGAR),
-                'Y', new ItemStack(ItemsAether.blueberries),
+                'Y', new ItemStack(ItemsAether.orange),
                 'Z', new ItemStack(ItemsAether.skyroot_stick));
 
         // Icestone Poprocks
