@@ -161,7 +161,7 @@ public class GenerationAether
 
 		aether_grass = new WorldGenAetherTallGrass();
 
-		green_aercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.BLUE_AERCLOUD), 4, false);
+		green_aercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.GREEN_AERCLOUD), 4, false);
 		golden_aercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.GOLDEN_AERCLOUD), 4, false);
 		storm_aercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.STORM_AERCLOUD), 16, false);
 	}
