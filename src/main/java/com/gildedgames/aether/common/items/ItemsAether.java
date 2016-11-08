@@ -26,16 +26,7 @@ import com.gildedgames.aether.common.capabilities.entity.effects.processors.Modi
 import com.gildedgames.aether.common.capabilities.entity.effects.processors.RegenerateHealthEffect;
 import com.gildedgames.aether.common.capabilities.entity.effects.processors.SetAttackersOnFireEffect;
 import com.gildedgames.aether.common.capabilities.entity.effects.processors.player.ModifyXPCollectionEffect;
-import com.gildedgames.aether.common.capabilities.entity.effects.rules.DamagingElementRule;
-import com.gildedgames.aether.common.capabilities.entity.effects.rules.DamagingMobRule;
-import com.gildedgames.aether.common.capabilities.entity.effects.rules.DamagingPassiveAnimalsRule;
-import com.gildedgames.aether.common.capabilities.entity.effects.rules.DamagingUndeadRule;
-import com.gildedgames.aether.common.capabilities.entity.effects.rules.HoldingItemRule;
-import com.gildedgames.aether.common.capabilities.entity.effects.rules.InCombatRule;
-import com.gildedgames.aether.common.capabilities.entity.effects.rules.InDirectMoonlightRule;
-import com.gildedgames.aether.common.capabilities.entity.effects.rules.InDirectSunlightRule;
-import com.gildedgames.aether.common.capabilities.entity.effects.rules.OutOfCombatRule;
-import com.gildedgames.aether.common.capabilities.entity.effects.rules.WhenPoisonedRule;
+import com.gildedgames.aether.common.capabilities.entity.effects.rules.*;
 import com.gildedgames.aether.common.capabilities.item.effects.ItemEffects;
 import com.gildedgames.aether.common.entities.living.companions.EntityEtheralWisp;
 import com.gildedgames.aether.common.entities.living.companions.EntityFangrin;
@@ -1050,7 +1041,7 @@ public class ItemsAether
 				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(2.5D)));
 
 		ItemEffects.register(ItemsAether.gravitite_shield, new Effects()
-				.add(EntityEffects.LEVITATE_ATTACKERS, new LevitateAttackersEffect.Instance(0.02D))
+				.add(EntityEffects.LEVITATE_ATTACKERS, new LevitateAttackersEffect.Instance(0.02D, new BlockingRule()))
 				.add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(10D)));
 
 		ItemEffects.register(ItemsAether.phoenix_helmet, new Effects()
