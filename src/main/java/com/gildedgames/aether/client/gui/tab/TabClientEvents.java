@@ -10,6 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -90,63 +91,48 @@ public class TabClientEvents
 	}
 
 	@SubscribeEvent
-	public static void tickStart(TickEvent.ClientTickEvent event)
+	public static void onGuiMouseEvent(GuiScreenEvent.MouseInputEvent.Pre event)
 	{
-		if (event.phase == TickEvent.Phase.START)
+		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+
+		if (player == null || player.inventory.getItemStack() != null)
 		{
-			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+			return;
+		}
 
-			if (player == null || player.inventory.getItemStack() != null)
+		ITabGroupHandler groupHandler = AetherAPI.tabs().getActiveGroup();
+
+		if (groupHandler != null)
+		{
+			ITabGroup<ITabClient> activeGroup = groupHandler.getClientGroup();
+
+			if (activeGroup != null)
 			{
-				return;
-			}
+				ITabClient hoveredTab;
 
-			ITabGroupHandler groupHandler = AetherAPI.tabs().getActiveGroup();
+				hoveredTab = tabGroupRenderer.getHoveredTab(activeGroup);
 
-			if (groupHandler != null)
-			{
-				ITabGroup<ITabClient> activeGroup = groupHandler.getClientGroup();
-
-				if (activeGroup != null)
+				if (Mouse.getEventButtonState() && hoveredTab != null)
 				{
-					while (Mouse.next())
+					if (hoveredTab != activeGroup.getSelectedTab())
 					{
-						ITabClient hoveredTab;
+						activeGroup.getSelectedTab().onClose(Minecraft.getMinecraft().thePlayer);
+						activeGroup.setSelectedTab(hoveredTab);
 
-						hoveredTab = tabGroupRenderer.getHoveredTab(activeGroup);
-
-						if (Mouse.getEventButtonState() && hoveredTab != null)
+						if (hoveredTab != activeGroup.getRememberedTab() && hoveredTab.isRemembered())
 						{
-							if (hoveredTab != activeGroup.getSelectedTab())
+							if (activeGroup.getRememberedTab() != null)
 							{
-								activeGroup.getSelectedTab().onClose(Minecraft.getMinecraft().thePlayer);
-								activeGroup.setSelectedTab(hoveredTab);
-
-								if (hoveredTab != activeGroup.getRememberedTab() && hoveredTab.isRemembered())
-								{
-									if (activeGroup.getRememberedTab() != null)
-									{
-										activeGroup.getRememberedTab().onClose(Minecraft.getMinecraft().thePlayer);
-									}
-
-									activeGroup.setRememberedTab(hoveredTab);
-								}
-
-								hoveredTab.onOpen(Minecraft.getMinecraft().thePlayer);
-								NetworkingAether.sendPacketToServer(new PacketOpenTab(hoveredTab));
+								activeGroup.getRememberedTab().onClose(Minecraft.getMinecraft().thePlayer);
 							}
+
+							activeGroup.setRememberedTab(hoveredTab);
 						}
-						else if (Minecraft.getMinecraft().currentScreen != null)
-						{
-							try
-							{
-								Minecraft.getMinecraft().currentScreen.handleMouseInput();
-							}
-							catch (IOException e)
-							{
-								e.printStackTrace();
-							}
-						}
+
+						hoveredTab.onOpen(Minecraft.getMinecraft().thePlayer);
+						NetworkingAether.sendPacketToServer(new PacketOpenTab(hoveredTab));
+
+						event.setCanceled(true);
 					}
 				}
 			}
