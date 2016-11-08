@@ -215,13 +215,16 @@ public class ItemCrossbow extends Item
 						ItemCrossbow.setLoadedBoltType(stack, ItemCrossbow.BOLT_TYPES[boltStack.getItemDamage()]);
 						ItemCrossbow.setLoaded(stack, true);
 
-						if (boltStack.stackSize == 1 || boltStack.stackSize <= 0)
+						if (!((EntityPlayer) player).capabilities.isCreativeMode)
 						{
-							entityPlayer.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, null);
-						}
-						else
-						{
-							boltStack.stackSize--;
+							if (boltStack.stackSize == 1 || boltStack.stackSize <= 0)
+							{
+								entityPlayer.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, null);
+							}
+							else
+							{
+								boltStack.stackSize--;
+							}
 						}
 					}
 				}
