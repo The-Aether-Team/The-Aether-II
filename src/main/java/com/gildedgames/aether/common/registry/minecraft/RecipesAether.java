@@ -42,10 +42,11 @@ public class RecipesAether implements IAltarRecipeRegistry
 	private void registerFurnaceRecipes()
 	{
 		registerSmeltingRecipe(new ItemStack(ItemsAether.arkenium_chunk), new ItemStack(ItemsAether.arkenium), 0.85f);
-		registerSmeltingRecipe(new ItemStack(ItemsAether.gravitite_chunk), new ItemStack(ItemsAether.gravitite_plate), 0.85f);
-		registerSmeltingRecipe(new ItemStack(ItemsAether.moa_egg), new ItemStack(ItemsAether.fried_moa_egg), 0.85f);
-		registerSmeltingRecipe(new ItemStack(ItemsAether.rainbow_moa_egg), new ItemStack(ItemsAether.fried_moa_egg), 0.85f);
-		registerSmeltingRecipe(new ItemStack(BlocksAether.crude_scatterglass), new ItemStack(BlocksAether.scatterglass), 0.85f);
+		registerSmeltingRecipe(new ItemStack(ItemsAether.gravitite_chunk), new ItemStack(ItemsAether.gravitite_plate), 1.0f);
+		registerSmeltingRecipe(new ItemStack(BlocksAether.quicksoil), new ItemStack(BlocksAether.quicksoil_glass), 0.1f);
+		registerSmeltingRecipe(new ItemStack(ItemsAether.moa_egg), new ItemStack(ItemsAether.fried_moa_egg), 0.4f);
+		registerSmeltingRecipe(new ItemStack(ItemsAether.rainbow_moa_egg), new ItemStack(ItemsAether.fried_moa_egg), 0.4f);
+		registerSmeltingRecipe(new ItemStack(BlocksAether.crude_scatterglass), new ItemStack(BlocksAether.scatterglass), 0.1f);
 	}
 
 	private void registerCraftingRecipes()
@@ -710,10 +711,6 @@ public class RecipesAether implements IAltarRecipeRegistry
 
 	private void registerAltarRecipes()
 	{
-        // Quicksoil Glass
-		this.registerAltarRecipe(new AltarEnchantRecipe(1, new ItemStack(BlocksAether.quicksoil),
-                new ItemStack(BlocksAether.quicksoil_glass)));
-
 		// Enchanted Dart Shooter
 		this.registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.GOLDEN.ordinal()),
 				new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.ENCHANTED.ordinal())));
