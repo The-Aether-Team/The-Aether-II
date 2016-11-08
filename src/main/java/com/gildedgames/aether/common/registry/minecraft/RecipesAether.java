@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
+import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.recipes.RecipePresentCrafting;
 import com.gildedgames.aether.common.recipes.RecipeLeatherGlovesDyes;
 import com.gildedgames.aether.common.recipes.RecipeWrappingPaper;
@@ -176,7 +177,7 @@ public class RecipesAether implements IAltarRecipeRegistry
                 'Z', new ItemStack(Items.FEATHER));
 
         // Poison Dart
-        registerShapedRecipe(new ItemStack(ItemsAether.dart, 2), "XXX", "XYX", "XXX",
+        registerShapedRecipe(new ItemStack(ItemsAether.dart, 8, ItemDartType.POISON.ordinal()), "XXX", "XYX", "XXX",
                 'X', new ItemStack(ItemsAether.dart),
                 'Y', new ItemStack(ItemsAether.skyroot_poison_bucket));
 
