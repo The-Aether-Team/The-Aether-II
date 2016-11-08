@@ -309,42 +309,35 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 	{
 		ItemStack equippedItem = player.getHeldItemMainhand();
 
-		String tipPrefix = null;
+		String tipPrefix = "My fist doesn't seem to hurt it. Maybe I need a pickaxe?";
 
 		if (equippedItem != null)
 		{
-			if (!(equippedItem.getItem() instanceof ItemPickaxe))
+			if (equippedItem.getItem() instanceof ItemPickaxe)
 			{
-				if (equippedItem.getItem() instanceof ItemAetherTool)
+				return true;
+			}
+
+			if (equippedItem.getItem() instanceof ItemAetherTool)
+			{
+				ItemAetherTool aetherTool = (ItemAetherTool) equippedItem.getItem();
+
+				if (aetherTool.getToolType() == EnumToolType.PICKAXE)
 				{
-					ItemAetherTool aetherTool = (ItemAetherTool) equippedItem.getItem();
-
-					if (aetherTool.getToolType() == EnumToolType.PICKAXE)
-					{
-						return true;
-					}
+					return true;
 				}
-
-				tipPrefix = "My " + equippedItem.getDisplayName() + " doesn't seem to hurt it. Maybe I need a pickaxe?";
-			}
-		}
-		else
-		{
-			tipPrefix = "My fist doesn't seem to hurt it. Maybe I need a pickaxe?";
-		}
-
-		if (tipPrefix != null)
-		{
-			if (this.chatCooldown <= 0)
-			{
-				player.addChatComponentMessage(new TextComponentString("Hmm. It's a rock-solid block. " + tipPrefix));
-				this.chatCooldown = 120;
 			}
 
-			return false;
+			tipPrefix = "My " + equippedItem.getDisplayName() + " doesn't seem to hurt it. Maybe I need a pickaxe?";
 		}
 
-		return true;
+		if (this.chatCooldown <= 0)
+		{
+			player.addChatComponentMessage(new TextComponentString("Hmm. It's a rock-solid block. " + tipPrefix));
+			this.chatCooldown = 120;
+		}
+
+		return false;
 	}
 
 	public TickTimer getSignalTimer()
