@@ -515,6 +515,20 @@ public class RecipesAether implements IAltarRecipeRegistry
 		ItemStack arkenium = new ItemStack(ItemsAether.arkenium);
 		ItemStack ark_strip = new ItemStack(ItemsAether.arkenium_strip);
 
+		// Vanilla Gloves
+
+		registerShapedRecipe(new ItemStack(ItemsAether.leather_gloves), "X X",
+				'X', new ItemStack(Items.LEATHER));
+
+		registerShapedRecipe(new ItemStack(ItemsAether.iron_gloves), "X X",
+				'X', new ItemStack(Items.IRON_INGOT));
+
+		registerShapedRecipe(new ItemStack(ItemsAether.gold_gloves), "X X",
+				'X', new ItemStack(Items.GOLD_INGOT));
+
+		registerShapedRecipe(new ItemStack(ItemsAether.diamond_gloves), "X X",
+				'X', new ItemStack(Items.DIAMOND));
+
 		// Skyroot Tools
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_axe), "XX ", "XY ", " Y ",
 				'X', skyroot, 'Y', skyrootStick);

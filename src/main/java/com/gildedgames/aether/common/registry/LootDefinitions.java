@@ -167,6 +167,7 @@ public class LootDefinitions
 			new ChanceLoot(new ItemStack(ItemsAether.moa_music_disc), 0.05F),
 			new ChanceLoot(new ItemStack(ItemsAether.labyrinth_music_disc), 0.05F),
 			new ChanceLoot(new ItemStack(ItemsAether.valkyrie_music_disc), 0.05F),
+			new ChanceLoot(new ItemStack(ItemsAether.chain_gloves), 0.05F),
 			new RangedLoot(new ItemStack(ItemsAether.swet_jelly, 1, EntitySwet.Type.BLUE.ordinal()), 1, 4),
 			new RangedLoot(new ItemStack(ItemsAether.swet_jelly, 1, EntitySwet.Type.DARK.ordinal()), 1, 4),
 			new RangedLoot(new ItemStack(ItemsAether.swet_jelly, 1, EntitySwet.Type.LIGHT.ordinal()), 1, 4),
