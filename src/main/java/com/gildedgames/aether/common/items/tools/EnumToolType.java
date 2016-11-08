@@ -1,34 +1,56 @@
 package com.gildedgames.aether.common.items.tools;
 
-import com.google.common.collect.Sets;
+import com.gildedgames.aether.common.ReflectionAether;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemSpade;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import java.util.Set;
 
 public enum EnumToolType
 {
-	// TODO: 1.10
-	// It might be a good idea to look into using reflection instead of
-	// copying the lists out of the respective tool classes.
 
-	PICKAXE("pickaxe", Sets.newHashSet(Blocks.ACTIVATOR_RAIL, Blocks.COAL_ORE, Blocks.COBBLESTONE, Blocks.DETECTOR_RAIL, Blocks.DIAMOND_BLOCK, Blocks.DIAMOND_ORE, Blocks.DOUBLE_STONE_SLAB,
-			Blocks.GOLDEN_RAIL, Blocks.GOLD_BLOCK, Blocks.GOLD_ORE, Blocks.ICE, Blocks.IRON_BLOCK, Blocks.IRON_ORE, Blocks.LAPIS_BLOCK, Blocks.LAPIS_ORE, Blocks.LIT_REDSTONE_ORE,
-			Blocks.MOSSY_COBBLESTONE, Blocks.NETHERRACK, Blocks.PACKED_ICE, Blocks.RAIL, Blocks.REDSTONE_ORE, Blocks.SANDSTONE, Blocks.RED_SANDSTONE, Blocks.STONE, Blocks.STONE_SLAB)),
+	PICKAXE("pickaxe")
+	{
+		@Override
+		public Set<Block> createEffectiveBlockSet()
+		{
+			return ObfuscationReflectionHelper.getPrivateValue(ItemPickaxe.class, (ItemPickaxe)Items.WOODEN_PICKAXE, ReflectionAether.EFFECTIVE_ON_PICKAXE.getMappings());
+		}
+	},
 
-	AXE("axe", Sets.newHashSet(Blocks.PLANKS, Blocks.BOOKSHELF, Blocks.LOG, Blocks.LOG2, Blocks.CHEST, Blocks.PUMPKIN, Blocks.LIT_PUMPKIN, Blocks.MELON_BLOCK, Blocks.LADDER)),
+	AXE("axe")
+	{
+		@Override
+		public Set<Block> createEffectiveBlockSet()
+		{
+			return ObfuscationReflectionHelper.getPrivateValue(ItemAxe.class, (ItemAxe)Items.WOODEN_AXE, ReflectionAether.EFFECTIVE_ON_AXE.getMappings());
+		}
+	},
 
-	SHOVEL("shovel", Sets.newHashSet(Blocks.CLAY, Blocks.DIRT, Blocks.FARMLAND, Blocks.GRASS, Blocks.GRAVEL, Blocks.MYCELIUM, Blocks.SAND, Blocks.SNOW, Blocks.SNOW_LAYER, Blocks.SOUL_SAND));
+	SHOVEL("shovel")
+	{
+		@Override
+		public Set<Block> createEffectiveBlockSet()
+		{
+			return ObfuscationReflectionHelper.getPrivateValue(ItemSpade.class, (ItemSpade)Items.WOODEN_SHOVEL, ReflectionAether.EFFECTIVE_ON_SHOVEL.getMappings());
+		}
+	};
 
 	private final String toolClass;
 
 	private final Set<Block> effectiveBlocks;
 
-	EnumToolType(String toolClass, Set<Block> effectiveBlocks)
+	EnumToolType(String toolClass)
 	{
 		this.toolClass = toolClass;
-		this.effectiveBlocks = effectiveBlocks;
+		this.effectiveBlocks = this.createEffectiveBlockSet();
 	}
+
+	public abstract Set<Block> createEffectiveBlockSet();
 
 	public String getToolClass()
 	{
