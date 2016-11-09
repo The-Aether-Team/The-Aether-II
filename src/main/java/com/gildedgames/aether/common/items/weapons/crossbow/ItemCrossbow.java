@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -192,38 +193,46 @@ public class ItemCrossbow extends Item
 			dart.setBoltType(boltType);
 			dart.pickupStatus = EntityArrow.PickupStatus.ALLOWED;
 
+			if (entityLiving instanceof EntityPlayer)
+			{
+				EntityPlayer player = (EntityPlayer)entityLiving;
+
+				if (player.capabilities.isCreativeMode)
+				{
+					dart.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+				}
+			}
+
 			entityLiving.getEntityWorld().spawnEntityInWorld(dart);
 		}
 	}
 
 	@Override
-	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
+	public void onUsingTick(ItemStack stack, EntityLivingBase living, int count)
 	{
-		if (player instanceof EntityPlayer)
+		if (living instanceof EntityPlayer)
 		{
-			EntityPlayer entityPlayer = (EntityPlayer) player;
-			ItemStack boltStack = entityPlayer.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
+			EntityPlayer player = (EntityPlayer) living;
+			ItemStack boltStack = player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
 
-			if (this.hasAmmo(entityPlayer))
+			if (this.hasAmmo(player))
 			{
-				float use = (float)(stack.getMaxItemUseDuration() - player.getItemInUseCount()) / 20.0F;
+				float use = (float)(stack.getMaxItemUseDuration() - living.getItemInUseCount()) / 20.0F;
 
 				if (use == (this.durationInTicks / 20.0F))
 				{
-					if (!player.getEntityWorld().isRemote)
+					if (!living.getEntityWorld().isRemote)
 					{
 						ItemCrossbow.setLoadedBoltType(stack, ItemCrossbow.BOLT_TYPES[boltStack.getItemDamage()]);
 						ItemCrossbow.setLoaded(stack, true);
 
-						if (!((EntityPlayer) player).capabilities.isCreativeMode)
+						if (!player.capabilities.isCreativeMode)
 						{
-							if (boltStack.stackSize == 1 || boltStack.stackSize <= 0)
+							boltStack.stackSize--;
+
+							if (boltStack.stackSize == 0)
 							{
-								entityPlayer.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, null);
-							}
-							else
-							{
-								boltStack.stackSize--;
+								player.inventory.deleteStack(boltStack);
 							}
 						}
 					}
