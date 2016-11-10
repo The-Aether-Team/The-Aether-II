@@ -26,7 +26,7 @@ import com.gildedgames.aether.common.capabilities.entity.effects.processors.SetA
 import com.gildedgames.aether.common.capabilities.entity.effects.processors.player.ModifyXPCollectionEffect;
 import com.gildedgames.aether.common.capabilities.entity.effects.rules.*;
 import com.gildedgames.aether.common.capabilities.item.effects.ItemEffects;
-import com.gildedgames.aether.common.entities.living.companions.EntityEtheralWisp;
+import com.gildedgames.aether.common.entities.living.companions.EntityEtherealWisp;
 import com.gildedgames.aether.common.entities.living.companions.EntityFangrin;
 import com.gildedgames.aether.common.entities.living.companions.EntityFleetingWisp;
 import com.gildedgames.aether.common.entities.living.companions.EntityFrostpineTotem;
@@ -296,7 +296,7 @@ public class ItemsAether
 			arkenium_shield = new ItemAetherShield(),
 			gravitite_shield = new ItemAetherShield();
 
-	public static final ItemCompanion ethereal_stone = new ItemCompanion(EntityEtheralWisp.class),
+	public static final ItemCompanion ethereal_stone = new ItemCompanion(EntityEtherealWisp.class),
 			fleeting_stone = new ItemCompanion(EntityFleetingWisp.class),
 			soaring_stone = new ItemCompanion(EntitySoaringWisp.class);
 

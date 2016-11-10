@@ -5,10 +5,10 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntityEtheralWisp extends EntityBasicCompanion
+public class EntityEtherealWisp extends EntityBasicCompanion
 {
 
-	public EntityEtheralWisp(World worldIn)
+	public EntityEtherealWisp(World worldIn)
 	{
 		super(worldIn);
 

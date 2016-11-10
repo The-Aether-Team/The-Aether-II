@@ -41,7 +41,6 @@ import net.minecraft.client.renderer.entity.RenderEntityItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -83,7 +82,7 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityFrostpineTotem.class, new AetherRenderFactory<>(RenderFrostpineTotem.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityKraisith.class, new AetherRenderFactory<>(RenderKraisith.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityShadeOfArkenzus.class, new AetherRenderFactory<>(RenderShadeOfArkenzus.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityEtheralWisp.class, new AetherRenderFactory<>(RenderEtherealWisp.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityEtherealWisp.class, new AetherRenderFactory<>(RenderEtherealWisp.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityFleetingWisp.class, new AetherRenderFactory<>(RenderFleetingWisp.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySoaringWisp.class, new AetherRenderFactory<>(RenderSoaringWisp.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityFangrin.class, new AetherRenderFactory<>(RenderFangrin.class));

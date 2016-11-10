@@ -560,6 +560,15 @@ entity.aether.sentry_guardian.name=Sentry Guardian
 entity.aether.production_line.name=Production Line
 entity.aether.repair_sentry.name=Repair Sentry
 entity.aether.slider.name=Slider
+entity.aether.frostpine_totem.name=Frostpine Totem
+entity.aether.kraisith.name=Kraisith
+entity.aether.shade_of_arkenzus.name=Shade of Arkenzus
+entity.aether.ethereal_wisp.name=Ethereal Wisp
+entity.aether.fleeting_wisp.name=Fleeting Wisp
+entity.aether.soaring_wisp=Soaring Wisp
+entity.aether.fangrin.name=Fangrin
+entity.aether.nex_spirit.name=Nex Spirit
+entity.aether.pink_baby_swet.name=Pink Baby Swet
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether Blocks

@@ -69,7 +69,7 @@ public class EntitiesAether
 		registerLivingEntity(EntityFrostpineTotem.class, "frostpine_totem");
 		registerLivingEntity(EntityKraisith.class, "kraisith");
 		registerLivingEntity(EntityShadeOfArkenzus.class, "shade_of_arkenzus");
-		registerLivingEntity(EntityEtheralWisp.class, "ethereal_wisp");
+		registerLivingEntity(EntityEtherealWisp.class, "ethereal_wisp");
 		registerLivingEntity(EntityFleetingWisp.class, "fleeting_wisp");
 		registerLivingEntity(EntitySoaringWisp.class, "soaring_wisp");
 		registerLivingEntity(EntityFangrin.class, "fangrin");
