@@ -7,16 +7,22 @@ import com.gildedgames.aether.common.entities.living.companions.EntityCompanion;
 import com.gildedgames.aether.common.items.companions.ItemCompanion;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.CompanionChangedPacket;
+import com.gildedgames.aether.common.world.spawning.SpawnHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 public class PlayerCompanionModule extends PlayerAetherModule implements IPlayerCompanionManager
 {
@@ -50,6 +56,11 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 		ItemStack companionStack = this.getEquippedCompanionItem();
 
 		EntityCompanion companion = this.getCompanionEntity();
+
+		if (!this.player.worldObj.isBlockLoaded(this.player.getPosition()))
+		{
+			return;
+		}
 
 		if (companionStack != null)
 		{
@@ -92,15 +103,43 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 
 	private void spawnCompanion(ItemCompanion item)
 	{
+		World world = this.player.getEntityWorld();
 		EntityCompanion companion = item.createCompanionEntity(this.aePlayer);
 
 		companion.setOwner(this.player);
 
 		BlockPos pos = this.player.getPosition();
 
-		companion.setPosition(pos.getX(), pos.getY(), pos.getZ());
+		companion.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 0.0F);
+
+		int attemptsToNotCollide = 0;
+
+		if (world instanceof WorldServer)
+		{
+			WorldServer worldServer = (WorldServer) world;
+
+			while (!SpawnHandler.isNotColliding(world, companion) && attemptsToNotCollide < 20)
+			{
+				Random rand = companion.getRNG();
+
+				float xOffset = (rand.nextBoolean() ? -1 : 1) * rand.nextFloat();
+				float zOffset = (rand.nextBoolean() ? -1 : 1) * rand.nextFloat();
+
+				companion.setPositionAndUpdate(companion.posX + xOffset, companion.posY, companion.posZ + zOffset);
+				worldServer.updateEntityWithOptionalForce(companion, true);
+
+				attemptsToNotCollide++;
+			}
+
+			if (attemptsToNotCollide >= 20)
+			{
+				companion.setPositionAndUpdate(this.player.posX, this.player.posY, this.player.posZ);
+				worldServer.updateEntityWithOptionalForce(companion, true);
+			}
+		}
 
 		this.player.worldObj.spawnEntityInWorld(companion);
+
 		this.companionId = companion.getEntityId();
 
 		NetworkingAether.sendPacketToPlayer(new CompanionChangedPacket(this.companionId), (EntityPlayerMP) this.player);
