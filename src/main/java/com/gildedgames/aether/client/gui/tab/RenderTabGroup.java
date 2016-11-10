@@ -67,24 +67,20 @@ public class RenderTabGroup extends Gui
 		Minecraft mc = Minecraft.getMinecraft();
 		ScaledResolution scaledresolution = new ScaledResolution(mc);
 
-		int xPosition = (scaledresolution.getScaledWidth() - 28 * tabGroup.getEnabledTabs().size()) / 2;
-		int yPosition = 13;
-
-		int topY = -7;
-		int width = 28 * tabGroup.getEnabledTabs().size() + 30;
-		int centerX = scaledresolution.getScaledWidth() / 2;
+		int xPosition = 0;
+		int yPosition = 0;
 
 		mc.getTextureManager().bindTexture(TEXTURE_TAB_ITEMS);
 
 		GL11.glColor4f(1.f, 1.f, 1.f, 1.f);
 		GL11.glDisable(GL11.GL_LIGHTING);
 
-		this.drawTexturedModalRect(centerX - width / 2, topY, 0, 0, width / 2, 15);
-		this.drawTexturedModalRect(centerX - width / 2, topY + 15, 0, 130, width / 2, 5);
-		this.drawTexturedModalRect(centerX, topY, 194 - width / 2, 0, width / 2, 15);
-		this.drawTexturedModalRect(centerX, topY + 15, 194 - width / 2, 130, width / 2, 5);
+		//this.drawTexturedModalRect(centerX - width / 2, topY, 0, 0, width / 2, 15);
+		//this.drawTexturedModalRect(centerX - width / 2, topY + 15, 0, 130, width / 2, 5);
+		//this.drawTexturedModalRect(centerX, topY, 194 - width / 2, 0, width / 2, 15);
+		//this.drawTexturedModalRect(centerX, topY + 15, 194 - width / 2, 130, width / 2, 5);
 
-		this.drawCenteredString(mc.fontRendererObj, I18n.translateToLocal(tabGroup.getSelectedTab().getUnlocalizedName()), centerX, topY + 8, 0xFFFFFFFF);
+		//this.drawCenteredString(mc.fontRendererObj, I18n.translateToLocal(tabGroup.getSelectedTab().getUnlocalizedName()), centerX, topY + 8, 0xFFFFFFFF);
 
 		for (ITabClient tab : tabGroup.getEnabledTabs())
 		{
@@ -115,7 +111,7 @@ public class RenderTabGroup extends Gui
 					Gui.drawModalRectWithCustomSizedTexture(xPosition + 6, yPosition - 1, 0, 0, 16, 16, 16, 16);
 				}
 
-				xPosition += 28;
+				xPosition += 27;
 			}
 		}
 
@@ -123,7 +119,7 @@ public class RenderTabGroup extends Gui
 
 		if (hoveredTab != null)
 		{
-			this.drawHoveringText(I18n.translateToLocal(hoveredTab.getUnlocalizedName()), Mouse.getX() * scaledresolution.getScaledWidth() / mc.displayWidth, scaledresolution.getScaledHeight() - Mouse.getY() * scaledresolution.getScaledHeight() / mc.displayHeight - 1, mc.fontRendererObj);
+			this.drawHoveringText(I18n.translateToLocal(hoveredTab.getUnlocalizedName()), Mouse.getX() * scaledresolution.getScaledWidth() / mc.displayWidth, scaledresolution.getScaledHeight() - (Mouse.getY() - 42) * scaledresolution.getScaledHeight() / mc.displayHeight - 1, mc.fontRendererObj);
 		}
 	}
 
@@ -138,9 +134,9 @@ public class RenderTabGroup extends Gui
 		int x = Mouse.getX() * scaledresolution.getScaledWidth() / mc.displayWidth;
 		int y = scaledresolution.getScaledHeight() - Mouse.getY() * scaledresolution.getScaledHeight() / mc.displayHeight - 1;
 
-		if (y >= 13 && y <= 32)
+		if (y >= 0 && y <= 19)
 		{
-			int xPosition = (scaledresolution.getScaledWidth() - 28 * tabGroup.getEnabledTabs().size()) / 2;
+			int xPosition = 0;
 
 			x -= xPosition;
 
