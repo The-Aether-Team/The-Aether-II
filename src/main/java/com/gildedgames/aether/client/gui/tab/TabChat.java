@@ -55,6 +55,12 @@ public class TabChat implements ITab
 		}
 
 		@Override
+		public boolean isMainGui(GuiScreen gui)
+		{
+			return this.isTabValid(gui);
+		}
+
+		@Override
 		public ResourceLocation getIcon()
 		{
 			return TabChat.Client.ICON;

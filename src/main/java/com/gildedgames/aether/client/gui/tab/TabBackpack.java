@@ -54,6 +54,12 @@ public class TabBackpack implements ITab
 		}
 
 		@Override
+		public boolean isMainGui(GuiScreen gui)
+		{
+			return this.isTabValid(gui);
+		}
+
+		@Override
 		public void onOpen(EntityPlayer player)
 		{
 			Minecraft.getMinecraft().displayGuiScreen(new GuiInventory(player));

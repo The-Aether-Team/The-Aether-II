@@ -35,7 +35,7 @@ public class TabClientEvents
 		{
 			ITabClient selectedTab = groupHandler.getClientGroup().getSelectedTab();
 
-			if (event.getGui() != null && selectedTab.isTabValid(gui))
+			if (gui != null && selectedTab.isTabValid(gui))
 			{
 				return;
 			}
@@ -51,31 +51,9 @@ public class TabClientEvents
 			{
 				if (event.getGui() != null && tab.isTabValid(gui))
 				{
-					ITabClient selectedTab = tabGroup.getSelectedTab();
-
-					if (selectedTab != null && !selectedTab.isTabValid(gui))
+					if (tabGroup.getRememberSelectedTab() && tabGroup.getRememberedTab() != null)
 					{
-						if (tabGroup.getRememberSelectedTab())
-						{
-							event.setCanceled(true);
-
-							if (tabGroup.getRememberedTab() != null)
-							{
-								tabGroup.setSelectedTab(tabGroup.getRememberedTab());
-							}
-							else
-							{
-								tabGroup.setSelectedTab(tabGroup.getEnabledTabs().get(0));
-							}
-
-							tabGroup.getSelectedTab().onOpen(Minecraft.getMinecraft().thePlayer);
-
-							NetworkingAether.sendPacketToServer(new PacketOpenTab(tabGroup.getSelectedTab()));
-						}
-						else
-						{
-							tabGroup.setSelectedTab(tabGroup.getEnabledTabs().get(0));
-						}
+						tabGroup.setSelectedTab(tabGroup.getRememberedTab());
 					}
 					else
 					{
@@ -83,6 +61,14 @@ public class TabClientEvents
 					}
 
 					AetherAPI.tabs().setActiveGroup(tabGroupHandler);
+
+					if (gui == null || !tabGroup.getSelectedTab().isMainGui(gui))
+					{
+						tabGroup.getSelectedTab().onOpen(Minecraft.getMinecraft().thePlayer);
+						NetworkingAether.sendPacketToServer(new PacketOpenTab(tabGroup.getSelectedTab()));
+
+						event.setCanceled(true);
+					}
 
 					return;
 				}

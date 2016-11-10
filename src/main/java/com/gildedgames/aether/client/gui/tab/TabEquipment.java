@@ -52,6 +52,12 @@ public class TabEquipment implements ITab
 		@Override
 		public boolean isTabValid(GuiScreen gui)
 		{
+			return this.isMainGui(gui) || gui instanceof GuiInventory || gui instanceof GuiEquipment;
+		}
+
+		@Override
+		public boolean isMainGui(GuiScreen gui)
+		{
 			boolean flag = false;
 
 			if (gui instanceof MinecraftGuiWrapper)
@@ -70,7 +76,7 @@ public class TabEquipment implements ITab
 				}
 			}
 
-			return gui instanceof GuiInventory || gui instanceof GuiEquipment || flag;
+			return flag;
 		}
 
 		@Override
