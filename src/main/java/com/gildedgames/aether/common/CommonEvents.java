@@ -208,36 +208,6 @@ public class CommonEvents
 
 				WorldAetherOptionsOverlay.toggle = false;
 			}
-
-			List<AxisAlignedBB> boxes = entity.worldObj.getCollisionBoxes(entity.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
-
-			for (AxisAlignedBB box : boxes)
-			{
-				if (box != null)
-				{
-					BlockPos pos = new BlockPos(MathHelper.floor_double(box.minX + 0.5D), MathHelper.floor_double(box.minY + 0.5D), MathHelper.floor_double(box.minZ + 0.5D));
-
-					Block block = entity.worldObj.getBlockState(pos).getBlock();
-
-					if (block == BlocksAether.quicksoil)
-					{
-						if (entity.isSneaking())
-						{
-							boolean jumping = ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, (EntityLivingBase)entity, ReflectionAether.IS_JUMPING.getMappings());
-
-							if (!jumping)
-							{
-								entity.onGround = false;
-							}
-
-							entity.motionX *= 1.25D;
-							entity.motionZ *= 1.25D;
-
-							break;
-						}
-					}
-				}
-			}
 		}
 
 		// Checks whether or not an entity is in the Aether's void

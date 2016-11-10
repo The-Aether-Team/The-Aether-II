@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.api.registry.cooler.ITemperatureRegistry;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
 import com.gildedgames.aether.api.registry.tab.ITabRegistry;
+import com.gildedgames.aether.common.blocks.QuicksoilProcessor;
 import com.gildedgames.aether.common.capabilities.instances.InstanceEvents;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
 import com.gildedgames.aether.common.world.dimensions.aether.TeleporterAether;
@@ -70,6 +71,7 @@ public class AetherCore implements IAetherServices
 		MinecraftForge.EVENT_BUS.register(AetherCore.CONFIG);
 		MinecraftForge.EVENT_BUS.register(IslandSectorAccess.inst());
 		MinecraftForge.EVENT_BUS.register(InstanceEvents.class);
+		MinecraftForge.EVENT_BUS.register(QuicksoilProcessor.class);
 
 		AetherCore.PROXY.preInit(event);
 
