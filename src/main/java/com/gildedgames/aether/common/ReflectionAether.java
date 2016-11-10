@@ -22,6 +22,10 @@ public class ReflectionAether
 		}
 	}
 
+	public static final ReflectionEntry MAX_PAGES = new ReflectionEntry("maxPages");
+
+	public static final ReflectionEntry GUI_TOP = new ReflectionEntry("field_147009_r", "guiTop");
+
 	public static final ReflectionEntry TOOL_CLASS = new ReflectionEntry("toolClass");
 
 	public static final ReflectionEntry EFFECTIVE_ON_AXE = new ReflectionEntry("field_150917_c", "EFFECTIVE_ON");

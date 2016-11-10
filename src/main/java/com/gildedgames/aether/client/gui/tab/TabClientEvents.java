@@ -1,6 +1,8 @@
 package com.gildedgames.aether.client.gui.tab;
 
 import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketOpenTab;
 import com.gildedgames.aether.api.registry.tab.ITabClient;
@@ -8,9 +10,12 @@ import com.gildedgames.aether.api.registry.tab.ITabGroup;
 import com.gildedgames.aether.api.registry.tab.ITabGroupHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -23,6 +28,8 @@ public class TabClientEvents
 {
 	@SideOnly(Side.CLIENT)
 	private final static RenderTabGroup tabGroupRenderer = new RenderTabGroup();
+
+	private static int prevMaxPages;
 
 	@SubscribeEvent
 	public static void onGuiOpen(GuiOpenEvent event)
@@ -77,6 +84,32 @@ public class TabClientEvents
 	}
 
 	@SubscribeEvent
+	public static void onGuiMouseEvent(GuiScreenEvent.DrawScreenEvent event)
+	{
+		/** Hack to prevent page text from rendering in creative inventory **/
+		if (event.getGui() instanceof GuiContainerCreative)
+		{
+			GuiContainerCreative gui = (GuiContainerCreative)event.getGui();
+
+			int maxPages = ObfuscationReflectionHelper.getPrivateValue(GuiContainerCreative.class, gui, ReflectionAether.MAX_PAGES.getMappings());
+
+			int guiTop = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, gui, ReflectionAether.GUI_TOP.getMappings());
+
+			if (guiTop > 70 || AetherCore.CONFIG.getDisplayTabsOnLeft())
+			{
+				ObfuscationReflectionHelper.setPrivateValue(GuiContainerCreative.class, gui, TabClientEvents.prevMaxPages, ReflectionAether.MAX_PAGES.getMappings());
+			}
+			else if (maxPages != 0)
+			{
+				TabClientEvents.prevMaxPages = maxPages;
+				ObfuscationReflectionHelper.setPrivateValue(GuiContainerCreative.class, gui, 0, ReflectionAether.MAX_PAGES.getMappings());
+			}
+
+
+		}
+	}
+
+	@SubscribeEvent
 	public static void onGuiMouseEvent(GuiScreenEvent.MouseInputEvent.Pre event)
 	{
 		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
@@ -84,6 +117,14 @@ public class TabClientEvents
 		if (player == null || player.inventory.getItemStack() != null)
 		{
 			return;
+		}
+
+		/** Hack to prevent page text from rendering in creative inventory **/
+		if (event.getGui() instanceof GuiContainerCreative)
+		{
+			GuiContainerCreative gui = (GuiContainerCreative)event.getGui();
+
+			ObfuscationReflectionHelper.setPrivateValue(GuiContainerCreative.class, gui, TabClientEvents.prevMaxPages, ReflectionAether.MAX_PAGES.getMappings());
 		}
 
 		ITabGroupHandler groupHandler = AetherAPI.tabs().getActiveGroup();
