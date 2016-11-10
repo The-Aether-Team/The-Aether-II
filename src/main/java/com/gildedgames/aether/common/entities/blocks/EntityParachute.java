@@ -116,6 +116,8 @@ public class EntityParachute extends Entity
 				player.motionZ *= 0.6;
 			}
 
+			player.isAirBorne = true;
+
 			PlayerAetherImpl playerAether = PlayerAetherImpl.getPlayer(player);
 
 			if (!playerAether.getParachuteModule().isParachuting())

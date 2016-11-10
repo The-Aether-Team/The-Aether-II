@@ -22,6 +22,8 @@ public class ParachuteModule extends PlayerAetherModule
 
 	private int hitAmnt;
 
+	private boolean prevAllowFlying;
+
 	public ParachuteModule(PlayerAetherImpl playerAether)
 	{
 		super(playerAether);
@@ -69,11 +71,22 @@ public class ParachuteModule extends PlayerAetherModule
 		this.isParachuting = isParachuting;
 		this.type = type;
 
-		if (!isParachuting && !this.getPlayer().getEntityWorld().isRemote)
+		if (isParachuting)
 		{
-			EntityItem block = new EntityItem(this.getPlayer().getEntityWorld(), this.getPlayer().posX, this.getPlayer().posY, this.getPlayer().posZ, new ItemStack(ItemsAether.cloud_parachute, 1, type.ordinal()));
+			this.prevAllowFlying = this.getPlayer().capabilities.allowFlying;
+			this.getPlayer().capabilities.allowFlying = true;
+		}
 
-			this.getPlayer().getEntityWorld().spawnEntityInWorld(block);
+		if (!isParachuting)
+		{
+			if (!this.getPlayer().getEntityWorld().isRemote)
+			{
+				EntityItem block = new EntityItem(this.getPlayer().getEntityWorld(), this.getPlayer().posX, this.getPlayer().posY, this.getPlayer().posZ, new ItemStack(ItemsAether.cloud_parachute, 1, type.ordinal()));
+
+				this.getPlayer().getEntityWorld().spawnEntityInWorld(block);
+			}
+
+			this.getPlayer().capabilities.allowFlying = this.prevAllowFlying;
 		}
 	}
 
@@ -112,6 +125,7 @@ public class ParachuteModule extends PlayerAetherModule
 	{
 		output.setBoolean("parachuting", this.isParachuting);
 		output.setInteger("type", this.type.ordinal());
+		output.setBoolean("prevAllowFlying", this.prevAllowFlying);
 	}
 
 	@Override
@@ -119,6 +133,7 @@ public class ParachuteModule extends PlayerAetherModule
 	{
 		this.isParachuting = input.getBoolean("parachuting");
 		this.type = EntityParachute.Type.fromOrdinal(input.getInteger("type"));
+		this.prevAllowFlying = input.getBoolean("prevAllowFlying");
 	}
 
 }
