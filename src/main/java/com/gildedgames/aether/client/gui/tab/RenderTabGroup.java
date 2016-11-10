@@ -3,6 +3,7 @@ package com.gildedgames.aether.client.gui.tab;
 import com.gildedgames.aether.api.registry.tab.ITab;
 import com.gildedgames.aether.api.registry.tab.ITabClient;
 import com.gildedgames.aether.api.registry.tab.ITabGroup;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.tab.util.TabGroupHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -69,6 +70,11 @@ public class RenderTabGroup extends Gui
 
 		int xPosition = 0;
 		int yPosition = 0;
+
+		if (!AetherCore.CONFIG.getDisplayTabsOnLeft())
+		{
+			xPosition = (scaledresolution.getScaledWidth() - 28 * tabGroup.getEnabledTabs().size()) / 2;
+		}
 
 		mc.getTextureManager().bindTexture(TEXTURE_TAB_ITEMS);
 
@@ -137,6 +143,11 @@ public class RenderTabGroup extends Gui
 		if (y >= 0 && y <= 19)
 		{
 			int xPosition = 0;
+
+			if (!AetherCore.CONFIG.getDisplayTabsOnLeft())
+			{
+				xPosition = (scaledresolution.getScaledWidth() - 28 * tabGroup.getEnabledTabs().size()) / 2;
+			}
 
 			x -= xPosition;
 
