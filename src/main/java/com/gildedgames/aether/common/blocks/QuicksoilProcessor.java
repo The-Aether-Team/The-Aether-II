@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.blocks;
 
 import com.gildedgames.aether.common.ReflectionAether;
-import com.sun.xml.internal.bind.v2.model.annotation.Quick;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
