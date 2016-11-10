@@ -8,9 +8,16 @@ import com.gildedgames.aether.common.containers.tab.util.TabGroupHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.inventory.GuiContainerCreative;
+import net.minecraft.client.renderer.InventoryEffectRenderer;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Mouse;
@@ -74,6 +81,24 @@ public class RenderTabGroup extends Gui
 		if (!AetherCore.CONFIG.getDisplayTabsOnLeft())
 		{
 			xPosition = (scaledresolution.getScaledWidth() - 28 * tabGroup.getEnabledTabs().size()) / 2;
+
+			GuiScreen gui = Minecraft.getMinecraft().currentScreen;
+
+			if (gui instanceof GuiContainerCreative)
+			{
+				boolean hasVisibleEffect = false;
+
+				for(PotionEffect potioneffect : Minecraft.getMinecraft().thePlayer.getActivePotionEffects())
+				{
+					Potion potion = potioneffect.getPotion();
+					if(potion.shouldRender(potioneffect)) { hasVisibleEffect = true; break; }
+				}
+
+				if (Minecraft.getMinecraft().thePlayer.getActivePotionEffects().size() > 0 || hasVisibleEffect)
+				{
+					xPosition += (200 - (28 * tabGroup.getEnabledTabs().size())) / 2;
+				}
+			}
 		}
 
 		mc.getTextureManager().bindTexture(TEXTURE_TAB_ITEMS);

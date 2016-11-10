@@ -104,8 +104,6 @@ public class TabClientEvents
 				TabClientEvents.prevMaxPages = maxPages;
 				ObfuscationReflectionHelper.setPrivateValue(GuiContainerCreative.class, gui, 0, ReflectionAether.MAX_PAGES.getMappings());
 			}
-
-
 		}
 	}
 
