@@ -192,9 +192,10 @@ public class TabClientEvents
 		{
 			GuiScreen gui = Minecraft.getMinecraft().currentScreen;
 
-			if (gui != null)
+			if (gui instanceof GuiContainer)
 			{
-				int xArea = (gui.width / 2) - 20;
+				int guiLeft = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, (GuiContainer)gui, ReflectionAether.GUI_LEFT.getMappings());
+				int xArea = guiLeft + 75;
 
 				if (y < 25 && x > xArea && x < xArea + 10)
 				{
