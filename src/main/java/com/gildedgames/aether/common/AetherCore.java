@@ -6,6 +6,8 @@ import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.api.registry.cooler.ITemperatureRegistry;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
 import com.gildedgames.aether.api.registry.tab.ITabRegistry;
+import com.gildedgames.aether.client.ui.data.AssetLocation;
+import com.gildedgames.aether.client.ui.minecraft.util.MinecraftAssetLocation;
 import com.gildedgames.aether.common.blocks.QuicksoilProcessor;
 import com.gildedgames.aether.common.capabilities.instances.InstanceEvents;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
@@ -132,6 +134,10 @@ public class AetherCore implements IAetherServices
 	{
 		return new ResourceLocation(AetherCore.MOD_ID, name);
 	}
+
+	public static AssetLocation asset(String name) { return new MinecraftAssetLocation(AetherCore.MOD_ID, name); }
+
+	public static AssetLocation assetGui(String name) { return new MinecraftAssetLocation(AetherCore.MOD_ID, "textures/gui/" + name); }
 
 	public static String getResourcePath(String name)
 	{

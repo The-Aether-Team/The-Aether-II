@@ -33,7 +33,7 @@ public class MinecraftHoveredDesc extends GuiEvent<Gui>
 	@Override
 	public void initContent(InputProvider input)
 	{
-		this.dim().mod().width(this.text.scaledWidth()).height(this.text.scaledHeight()).flush();
+		this.dim().mod().width(this.text.scaledWidth()).height(this.text.scaledHeight() - 1).flush();
 
 		this.background = new MinecraftTextBackground(this.dim());
 		this.textElement = new TextElement(this.text, this.dim());
