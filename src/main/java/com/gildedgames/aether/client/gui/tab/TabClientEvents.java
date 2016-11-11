@@ -97,7 +97,10 @@ public class TabClientEvents
 
 			if (guiTop > 70 || AetherCore.CONFIG.getDisplayTabsOnLeft())
 			{
-				ObfuscationReflectionHelper.setPrivateValue(GuiContainerCreative.class, gui, TabClientEvents.prevMaxPages, ReflectionAether.MAX_PAGES.getMappings());
+				if (TabClientEvents.prevMaxPages != 0)
+				{
+					ObfuscationReflectionHelper.setPrivateValue(GuiContainerCreative.class, gui, TabClientEvents.prevMaxPages, ReflectionAether.MAX_PAGES.getMappings());
+				}
 			}
 			else if (maxPages != 0)
 			{
@@ -166,7 +169,10 @@ public class TabClientEvents
 			{
 				GuiContainerCreative gui = (GuiContainerCreative)Minecraft.getMinecraft().currentScreen;
 
-				ObfuscationReflectionHelper.setPrivateValue(GuiContainerCreative.class, gui, TabClientEvents.prevMaxPages, ReflectionAether.MAX_PAGES.getMappings());
+				if (TabClientEvents.prevMaxPages != 0)
+				{
+					ObfuscationReflectionHelper.setPrivateValue(GuiContainerCreative.class, gui, TabClientEvents.prevMaxPages, ReflectionAether.MAX_PAGES.getMappings());
+				}
 			}
 
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
