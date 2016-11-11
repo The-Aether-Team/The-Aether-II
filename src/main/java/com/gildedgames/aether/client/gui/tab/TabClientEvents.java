@@ -117,14 +117,6 @@ public class TabClientEvents
 			return;
 		}
 
-		/** Hack to prevent page text from rendering in creative inventory **/
-		if (event.getGui() instanceof GuiContainerCreative)
-		{
-			GuiContainerCreative gui = (GuiContainerCreative)event.getGui();
-
-			ObfuscationReflectionHelper.setPrivateValue(GuiContainerCreative.class, gui, TabClientEvents.prevMaxPages, ReflectionAether.MAX_PAGES.getMappings());
-		}
-
 		ITabGroupHandler groupHandler = AetherAPI.tabs().getActiveGroup();
 
 		if (groupHandler != null)
@@ -169,6 +161,14 @@ public class TabClientEvents
 	{
 		if (event.phase == TickEvent.Phase.END)
 		{
+			/** Hack to prevent page text from rendering in creative inventory **/
+			if (Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative)
+			{
+				GuiContainerCreative gui = (GuiContainerCreative)Minecraft.getMinecraft().currentScreen;
+
+				ObfuscationReflectionHelper.setPrivateValue(GuiContainerCreative.class, gui, TabClientEvents.prevMaxPages, ReflectionAether.MAX_PAGES.getMappings());
+			}
+
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 
 			if (player == null || player.inventory.getItemStack() != null)
