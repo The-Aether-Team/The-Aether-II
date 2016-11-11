@@ -22,9 +22,7 @@ public class ReflectionAether
 		}
 	}
 
-	public static final ReflectionEntry MAX_PAGES = new ReflectionEntry("maxPages");
-
-	public static final ReflectionEntry GUI_TOP = new ReflectionEntry("field_147009_r", "guiTop");
+	public static final ReflectionEntry FONT_RENDERER_OBJ = new ReflectionEntry("field_146289_q", "fontRendererObj");
 
 	public static final ReflectionEntry TOOL_CLASS = new ReflectionEntry("toolClass");
 

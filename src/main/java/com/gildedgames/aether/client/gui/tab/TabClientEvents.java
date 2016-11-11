@@ -9,10 +9,14 @@ import com.gildedgames.aether.api.registry.tab.ITabClient;
 import com.gildedgames.aether.api.registry.tab.ITabGroup;
 import com.gildedgames.aether.api.registry.tab.ITabGroupHandler;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -23,13 +27,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Mouse;
 
 import java.io.IOException;
+import java.util.List;
 
 public class TabClientEvents
 {
 	@SideOnly(Side.CLIENT)
 	private final static RenderTabGroup tabGroupRenderer = new RenderTabGroup();
-
-	private static int prevMaxPages;
 
 	@SubscribeEvent
 	public static void onGuiOpen(GuiOpenEvent event)
@@ -84,28 +87,19 @@ public class TabClientEvents
 	}
 
 	@SubscribeEvent
-	public static void onGuiMouseEvent(GuiScreenEvent.DrawScreenEvent event)
+	public static void onGuiDrawScreen(GuiScreenEvent.DrawScreenEvent event)
 	{
 		/** Hack to prevent page text from rendering in creative inventory **/
 		if (event.getGui() instanceof GuiContainerCreative)
 		{
 			GuiContainerCreative gui = (GuiContainerCreative)event.getGui();
 
-			int maxPages = ObfuscationReflectionHelper.getPrivateValue(GuiContainerCreative.class, gui, ReflectionAether.MAX_PAGES.getMappings());
+			FontRenderer original = ObfuscationReflectionHelper.getPrivateValue(GuiScreen.class, gui, ReflectionAether.FONT_RENDERER_OBJ.getMappings());
 
-			int guiTop = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, gui, ReflectionAether.GUI_TOP.getMappings());
-
-			if (guiTop > 70 || AetherCore.CONFIG.getDisplayTabsOnLeft())
+			if (!(original instanceof PageNumberHack))
 			{
-				if (TabClientEvents.prevMaxPages != 0)
-				{
-					ObfuscationReflectionHelper.setPrivateValue(GuiContainerCreative.class, gui, TabClientEvents.prevMaxPages, ReflectionAether.MAX_PAGES.getMappings());
-				}
-			}
-			else if (maxPages != 0)
-			{
-				TabClientEvents.prevMaxPages = maxPages;
-				ObfuscationReflectionHelper.setPrivateValue(GuiContainerCreative.class, gui, 0, ReflectionAether.MAX_PAGES.getMappings());
+				PageNumberHack hack = new PageNumberHack(original);
+				ObfuscationReflectionHelper.setPrivateValue(GuiScreen.class, gui, hack, ReflectionAether.FONT_RENDERER_OBJ.getMappings());
 			}
 		}
 	}
@@ -164,17 +158,6 @@ public class TabClientEvents
 	{
 		if (event.phase == TickEvent.Phase.END)
 		{
-			/** Hack to prevent page text from rendering in creative inventory **/
-			if (Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative)
-			{
-				GuiContainerCreative gui = (GuiContainerCreative)Minecraft.getMinecraft().currentScreen;
-
-				if (TabClientEvents.prevMaxPages != 0)
-				{
-					ObfuscationReflectionHelper.setPrivateValue(GuiContainerCreative.class, gui, TabClientEvents.prevMaxPages, ReflectionAether.MAX_PAGES.getMappings());
-				}
-			}
-
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 
 			if (player == null || player.inventory.getItemStack() != null)
@@ -194,6 +177,34 @@ public class TabClientEvents
 				}
 			}
 		}
+	}
+
+	private static class PageNumberHack extends FontRendererWrapper
+	{
+
+		public PageNumberHack(FontRenderer parent)
+		{
+			super(parent);
+		}
+
+		@Override
+		public int drawString(String text, int x, int y, int color)
+		{
+			GuiScreen gui = Minecraft.getMinecraft().currentScreen;
+
+			if (gui != null)
+			{
+				int xArea = (gui.width / 2) - 20;
+
+				if (y < 25 && x > xArea && x < xArea + 10)
+				{
+					return 0;
+				}
+			}
+
+			return this.parent.drawString(text, (float)x, (float)y, color, false);
+		}
+
 	}
 
 }
