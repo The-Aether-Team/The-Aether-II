@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.registry.tab.ITab;
 import com.gildedgames.aether.api.registry.tab.ITabClient;
 import com.gildedgames.aether.api.registry.tab.ITabGroup;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.containers.tab.util.TabGroupHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -86,15 +87,10 @@ public class RenderTabGroup extends Gui
 
 			if (gui instanceof GuiContainerCreative)
 			{
-				boolean hasVisibleEffect = false;
+				int guiLeft = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, (GuiContainer)gui, ReflectionAether.GUI_LEFT.getMappings());
+				int xSize = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, (GuiContainer)gui, ReflectionAether.X_SIZE.getMappings());
 
-				for(PotionEffect potioneffect : Minecraft.getMinecraft().thePlayer.getActivePotionEffects())
-				{
-					Potion potion = potioneffect.getPotion();
-					if(potion.shouldRender(potioneffect)) { hasVisibleEffect = true; break; }
-				}
-
-				if (Minecraft.getMinecraft().thePlayer.getActivePotionEffects().size() > 0 || hasVisibleEffect)
+				if (guiLeft == 160 + (gui.width - xSize - 200) / 2)
 				{
 					xPosition += (200 - (28 * tabGroup.getEnabledTabs().size())) / 2;
 				}

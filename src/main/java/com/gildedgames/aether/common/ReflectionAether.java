@@ -22,6 +22,10 @@ public class ReflectionAether
 		}
 	}
 
+	public static final ReflectionEntry GUI_LEFT = new ReflectionEntry("field_147003_i", "guiLeft");
+
+	public static final ReflectionEntry X_SIZE = new ReflectionEntry("field_146999_f", "xSize");
+
 	public static final ReflectionEntry FONT_RENDERER_OBJ = new ReflectionEntry("field_146289_q", "fontRendererObj");
 
 	public static final ReflectionEntry TOOL_CLASS = new ReflectionEntry("toolClass");
