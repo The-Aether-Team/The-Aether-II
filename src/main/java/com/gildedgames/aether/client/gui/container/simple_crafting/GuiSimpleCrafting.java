@@ -410,10 +410,10 @@ public class GuiSimpleCrafting extends GuiContainer
 			GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 			GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
-			Gui.drawModalRectWithCustomSizedTexture(this.guiLeft - 96, this.guiTop + 8, 0, 0, 72, 126, 72, 126);
+			Gui.drawModalRectWithCustomSizedTexture(this.guiLeft - 96, this.guiTop + 21, 0, 0, 72, 108, 72, 126);
 
-			this.drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "Nothing left", this.guiLeft - 60, this.guiTop + 53, 0xFFFFFF);
-			this.drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "to craft!", this.guiLeft - 60, this.guiTop + 63, 0xFFFFFF);
+			this.drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "Nothing left", this.guiLeft - 60, this.guiTop + 47, 0xFFFFFF);
+			this.drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "to craft!", this.guiLeft - 60, this.guiTop + 57, 0xFFFFFF);
 		}
 
 		if (this.hoverDescription != null && this.hoverDescription.length() > 0)
