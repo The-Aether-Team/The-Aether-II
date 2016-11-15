@@ -42,7 +42,7 @@ public class GuiSimpleCrafting extends GuiContainer
 
 	private static final ResourceLocation CRAFTING_TABLE_GUI_TEXTURES = new ResourceLocation("textures/gui/container/crafting_table.png");
 
-	private static final ResourceLocation CREATIVE_INVENTORY_TABS = new ResourceLocation("textures/gui/container/creative_inventory/tabs.png");
+	private static final ResourceLocation BOOK_SCROLL_BAR = AetherCore.getResource("textures/gui/inventory/book_scroll_bar.png");
 
 	private static final ResourceLocation BOOK_RECIPES = AetherCore.getResource("textures/gui/inventory/book_recipes.png");
 
@@ -64,7 +64,7 @@ public class GuiSimpleCrafting extends GuiContainer
 
 	public List<ISimpleRecipe> recipes = Lists.newArrayList();
 
-	private final List<GuiCraftingOption> options = new ArrayList<>(28);
+	private final List<GuiCraftingOption> options = new ArrayList<>(24);
 
 	private final List<GuiRequiredMaterial> materials = new ArrayList<>(9);
 
@@ -89,8 +89,6 @@ public class GuiSimpleCrafting extends GuiContainer
 	@Override
 	protected void mouseReleased(int mouseX, int mouseY, int state)
 	{
-
-
 		super.mouseReleased(mouseX, mouseY, state);
 
 		if ((this.lastStack == null && this.playerInventory.getItemStack() != null) || (this.lastStack != null && this.playerInventory.getItemStack() == null))
@@ -185,7 +183,7 @@ public class GuiSimpleCrafting extends GuiContainer
 
 	public void scrollTo(float p_148329_1_)
 	{
-		int i = (this.recipes.size() + 4 - 1) / 4 - 7;
+		int i = (this.recipes.size() + 4 - 1) / 4 - 6;
 		int j = (int)((double)(p_148329_1_ * (float)i) + 0.5D);
 
 		if (j < 0)
@@ -193,7 +191,7 @@ public class GuiSimpleCrafting extends GuiContainer
 			j = 0;
 		}
 
-		for (int k = 0; k < 7; ++k)
+		for (int k = 0; k < 6; ++k)
 		{
 			for (int l = 0; l < 4; ++l)
 			{
@@ -213,7 +211,7 @@ public class GuiSimpleCrafting extends GuiContainer
 
 	public boolean canScroll()
 	{
-		return this.recipes.size() > 20;
+		return this.recipes.size() > this.options.size();
 	}
 
 	private void updateCraftingOptions()
@@ -293,11 +291,11 @@ public class GuiSimpleCrafting extends GuiContainer
 	{
 		super.initGui();
 
-		for (int i = 0; i < 7; ++i)
+		for (int i = 0; i < 6; ++i)
 		{
 			for (int j = 0; j < 4; ++j)
 			{
-				GuiCraftingOption option = new GuiCraftingOption(j + i * 4, this.guiLeft - 96 + (j * 18), this.guiTop + (8 + i * 18), null);
+				GuiCraftingOption option = new GuiCraftingOption(j + i * 4, this.guiLeft - 96 + (j * 18), this.guiTop + (21 + i * 18), null);
 
 				this.buttonList.add(option);
 				this.options.add(j + i * 4, option);
@@ -362,9 +360,9 @@ public class GuiSimpleCrafting extends GuiContainer
 		int i = this.guiLeft;
 		int j = this.guiTop;
 		int k = i - 18;
-		int l = j + 9;
+		int l = j + 22;
 		int i1 = k + 14;
-		int j1 = l + 126;
+		int j1 = l + 108;
 
 		if (!this.wasClicking && flag && mouseX >= k && mouseY >= l && mouseX < i1 && mouseY < j1)
 		{
@@ -433,6 +431,8 @@ public class GuiSimpleCrafting extends GuiContainer
 	{
 		this.fontRendererObj.drawString(I18n.format("container.crafting"), 58, 6, 4210752);
 		this.fontRendererObj.drawString(I18n.format("container.inventory"), 38, this.ySize - 96 + 2, 4210752);
+
+		this.fontRendererObj.drawString("Recipes", -96, 7, 4210752);
 	}
 
 	/**
@@ -453,9 +453,9 @@ public class GuiSimpleCrafting extends GuiContainer
 		this.drawTexturedModalRect(x, z, 0, 0, this.xSize, this.ySize);
 
 		int i = this.guiLeft - 18;
-		int j = this.guiTop + 9;
-		int k = j + 126;
-		this.mc.getTextureManager().bindTexture(CREATIVE_INVENTORY_TABS);
+		int j = this.guiTop + 22;
+		int k = j + 108;
+		this.mc.getTextureManager().bindTexture(BOOK_SCROLL_BAR);
 
 		this.drawTexturedModalRect(i, j + (int)((float)(k - j - 17) * this.currentScroll), 232 + (this.needsScrollBars() ? 0 : 12), 0, 12, 15);
 	}
@@ -473,7 +473,7 @@ public class GuiSimpleCrafting extends GuiContainer
 
 		if (i != 0 && this.needsScrollBars())
 		{
-			int j = (this.recipes.size() + 4 - 1) / 4 - 7;
+			int j = (this.recipes.size() + 4 - 1) / 4 - 6;
 
 			if (i > 0)
 			{
