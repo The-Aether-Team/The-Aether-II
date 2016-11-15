@@ -17,8 +17,11 @@ public class ReplaceablePlacementCondition implements WorldGenTemplate.Placement
 
 	private List<Material> acceptedMaterials;
 
-	public ReplaceablePlacementCondition(Material... acceptedMaterials)
+	private final boolean isCriticalWithCheck;
+
+	public ReplaceablePlacementCondition(boolean isCriticalWithCheck, Material... acceptedMaterials)
 	{
+		this.isCriticalWithCheck = isCriticalWithCheck;
 		this.acceptedMaterials = Lists.newArrayList(acceptedMaterials);
 	}
 
@@ -33,7 +36,13 @@ public class ReplaceablePlacementCondition implements WorldGenTemplate.Placement
 			{
 				return true;
 			}
-			else if (block.blockState != state && !world.isAirBlock(block.pos))
+
+			if ((this.isCriticalWithCheck ? block.blockState == state : block.blockState.getBlock() == state.getBlock()) || this.acceptedMaterials.contains(state.getMaterial()))
+			{
+				return true;
+			}
+
+			if (!world.isAirBlock(block.pos))
 			{
 				return false;
 			}
