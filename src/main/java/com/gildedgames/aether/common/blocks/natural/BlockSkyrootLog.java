@@ -31,7 +31,7 @@ public class BlockSkyrootLog extends BlockAetherLog implements ISkyrootMinable
 
 		if (!wasPlaced && world.rand.nextInt(5) == 0)
 		{
-			Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.skyroot_fragment, stack.getItem() == ItemsAether.skyroot_axe ? 2 : 1));
+			Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.skyroot_fragment, stack != null && stack.getItem() == ItemsAether.skyroot_axe ? 2 : 1));
 		}
 
 		super.harvestBlock(world, player, pos, state, te, stack);
