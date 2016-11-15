@@ -314,7 +314,7 @@ public class GuiSimpleCrafting extends GuiContainer
 			}
 		}
 
-		this.result = new GuiRequiredMaterial(30, this.guiLeft + 123, this.guiTop + 34, null);
+		this.result = new GuiRequiredMaterial(30, this.guiLeft + 153, this.guiTop + 34, null);
 		this.result.resultStack = true;
 
 		this.buttonList.add(this.result);
