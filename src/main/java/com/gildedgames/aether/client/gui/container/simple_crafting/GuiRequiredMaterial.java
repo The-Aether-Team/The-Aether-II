@@ -3,12 +3,15 @@ package com.gildedgames.aether.client.gui.container.simple_crafting;
 import com.gildedgames.aether.client.util.gui.GuiUtil;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.PositionedSoundRecord;
+import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiCreateFlatWorld;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreDictionary;
@@ -94,6 +97,12 @@ public class GuiRequiredMaterial extends GuiButton
 
 			GlStateManager.popMatrix();
 		}
+	}
+
+	@Override
+	public void playPressSound(SoundHandler soundHandlerIn)
+	{
+
 	}
 
 }
