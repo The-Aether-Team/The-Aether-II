@@ -153,7 +153,7 @@ public class GenerationAether
 		green_skyroot_windswept = new WorldGenTemplateGroup(green_skyroot_windswept_1, green_skyroot_windswept_2, green_skyroot_windswept_3, green_skyroot_windswept_4, green_skyroot_windswept_5, green_skyroot_windswept_6, green_skyroot_windswept_7);
 		large_green_skyroot_pine = new WorldGenTemplateGroup(large_green_skyroot_pine_1, large_green_skyroot_pine_2);
 		green_skyroot_pine = new WorldGenTemplateGroup(green_skyroot_pine_1, green_skyroot_pine_2, green_skyroot_pine_3, green_skyroot_pine_4, green_skyroot_pine_5);
-		green_skyroot_small_pine = new WorldGenTemplateGroup(green_skyroot_pine_1, green_skyroot_pine_2);
+		green_skyroot_small_pine = new WorldGenTemplateGroup(green_skyroot_pine_1, green_skyroot_pine_2, green_skyroot_pine_3);
 		dark_blue_skyroot_tree = new WorldGenTemplateGroup(dark_blue_skyroot_tree_1, dark_blue_skyroot_tree_2, dark_blue_skyroot_tree_3);
 		dark_blue_skyroot_oak = new WorldGenTemplateGroup(dark_blue_skyroot_oak_1, dark_blue_skyroot_oak_2);
 		labyrinth_ruins = new WorldGenTemplateGroup(labyrinth_ruins_1, labyrinth_ruins_2, labyrinth_ruins_3, labyrinth_ruins_4, labyrinth_ruins_5);
