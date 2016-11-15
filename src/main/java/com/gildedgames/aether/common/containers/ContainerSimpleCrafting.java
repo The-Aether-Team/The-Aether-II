@@ -63,24 +63,24 @@ public class ContainerSimpleCrafting extends Container
 		{
 			for (int i1 = 0; i1 < 9; ++i1)
 			{
-				this.addSlotToContainer(new Slot(this.inventory, i1 + k * 9 + 9, 8 + i1 * 18, 84 + (k * 18)));
+				this.addSlotToContainer(new Slot(this.inventory, i1 + k * 9 + 9, 38 + i1 * 18, 84 + (k * 18)));
 			}
 		}
 
 		for (int l = 0; l < 9; ++l)
 		{
-			this.addSlotToContainer(new Slot(this.inventory, l, 8 + l * 18, 142));
+			this.addSlotToContainer(new Slot(this.inventory, l, 38 + l * 18, 142));
 		}
 
 		for (int i = 0; i < 3; ++i)
 		{
 			for (int j = 0; j < 3; ++j)
 			{
-				this.addSlotToContainer(new SlotMatrix(this.craftMatrix, j + i * 3, 30 + j * 18, 17 + i * 18));
+				this.addSlotToContainer(new SlotMatrix(this.craftMatrix, j + i * 3, 60 + j * 18, 17 + i * 18));
 			}
 		}
 
-		this.craftingResult = new SlotSimpleCrafting(this.player, this.craftMatrix, this.craftResult, 37, 124, 35);
+		this.craftingResult = new SlotSimpleCrafting(this.player, this.craftMatrix, this.craftResult, 37, 154, 35);
 
 		this.addSlotToContainer(this.craftingResult);
 
