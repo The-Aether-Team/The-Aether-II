@@ -14,12 +14,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class ContainerFrostpineCooler extends Container
+public class ContainerIcestoneCooler extends Container
 {
 
     private final IInventory tile;
 
-    public ContainerFrostpineCooler(InventoryPlayer playerInventory, IInventory coolerInventory)
+    public ContainerIcestoneCooler(InventoryPlayer playerInventory, IInventory coolerInventory)
     {
         this.tile = coolerInventory;
 

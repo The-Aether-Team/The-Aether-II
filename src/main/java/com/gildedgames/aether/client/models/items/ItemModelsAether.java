@@ -22,10 +22,7 @@ import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
-import com.gildedgames.aether.common.tiles.TileEntityAltar;
-import com.gildedgames.aether.common.tiles.TileEntityLabyrinthTotem;
-import com.gildedgames.aether.common.tiles.TileEntityPresent;
-import com.gildedgames.aether.common.tiles.TileEntitySkyrootChest;
+import com.gildedgames.aether.common.tiles.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -44,6 +41,7 @@ public class ItemModelsAether
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.labyrinth_totem), 0, TileEntityLabyrinthTotem.class);
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.altar), 0, TileEntityAltar.class);
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.present), 0, TileEntityPresent.class);
+		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.icestone_cooler), 0, TileEntityIcestoneCooler.class);
 	}
 
 	private static void registerModels()
@@ -382,6 +380,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.labyrinth_totem, "tesr");
 		registerItemModels(BlocksAether.multiblock_dummy, "tesr");
 		registerItemModels(BlocksAether.present, "tesr");
+		registerItemModels(BlocksAether.icestone_cooler, "tesr");
 
 		registerItemModels(ItemsAether.zanite_gloves, "accessories/zanite_gloves");
 		registerItemModels(ItemsAether.gravitite_gloves, "accessories/gravitite_gloves");
@@ -586,8 +585,6 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.irradiated_charm, "irradiated_charm");
 
 		registerItemModels(ItemsAether.irradiated_dust, "irradiated_dust");
-
-		registerItemModels(BlocksAether.frostpine_cooler, "holystone_furnace/holystone_furnace_unlit");
 
 		registerItemModels(BlocksAether.incubator, new ItemModelBuilder("incubator/")
 				.add(BlockIncubator.LIT_META, "lit")

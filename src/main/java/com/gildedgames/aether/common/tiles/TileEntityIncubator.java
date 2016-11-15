@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.tiles;
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.items.properties.TemperatureProperties;
 import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
-import com.gildedgames.aether.common.containers.tiles.ContainerFrostpineCooler;
+import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import com.gildedgames.aether.common.util.TickTimer;
 import net.minecraft.block.state.IBlockState;
@@ -400,7 +400,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
     @Override
     public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
     {
-        return new ContainerFrostpineCooler(playerInventory, this);
+        return new ContainerIcestoneCooler(playerInventory, this);
     }
 
     @Override

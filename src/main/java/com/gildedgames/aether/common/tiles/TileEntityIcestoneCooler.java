@@ -2,7 +2,9 @@ package com.gildedgames.aether.common.tiles;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.items.properties.TemperatureProperties;
-import com.gildedgames.aether.common.containers.tiles.ContainerFrostpineCooler;
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.construction.BlockAltar;
+import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.util.TickTimer;
 import net.minecraft.block.state.IBlockState;
@@ -16,11 +18,12 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityLockable;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 
 import javax.annotation.Nullable;
 
-public class TileEntityFrostpineCooler extends TileEntityLockable implements ITickable, IInventory
+public class TileEntityIcestoneCooler extends TileEntityLockable implements ITickable, IInventory
 {
 
     private static final int INVENTORY_SIZE = 7;
@@ -37,9 +40,21 @@ public class TileEntityFrostpineCooler extends TileEntityLockable implements ITi
 
     private TickTimer progress = new TickTimer();
 
-    public TileEntityFrostpineCooler()
+    public TileEntityIcestoneCooler()
     {
         this.inventory = new ItemStack[INVENTORY_SIZE];
+    }
+
+    public EnumFacing getFacing()
+    {
+        IBlockState state = this.worldObj.getBlockState(this.pos);
+
+        if (state.getBlock() == BlocksAether.icestone_cooler)
+        {
+            return state.getValue(BlockAltar.PROPERTY_FACING);
+        }
+
+        return EnumFacing.NORTH;
     }
 
     @Override
@@ -316,7 +331,7 @@ public class TileEntityFrostpineCooler extends TileEntityLockable implements ITi
     @Override
     public String getName()
     {
-        return "container.frostpine_cooler";
+        return "container.icestone_cooler";
     }
 
     @Override
@@ -361,13 +376,13 @@ public class TileEntityFrostpineCooler extends TileEntityLockable implements ITi
     @Override
     public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
     {
-        return new ContainerFrostpineCooler(playerInventory, this);
+        return new ContainerIcestoneCooler(playerInventory, this);
     }
 
     @Override
     public String getGuiID()
     {
-        return "aether:frostpine_cooler";
+        return "aether:icestone_cooler";
     }
 
     @Override

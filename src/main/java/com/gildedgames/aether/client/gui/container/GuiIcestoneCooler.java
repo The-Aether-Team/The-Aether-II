@@ -1,8 +1,8 @@
 package com.gildedgames.aether.client.gui.container;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.containers.tiles.ContainerFrostpineCooler;
-import com.gildedgames.aether.common.tiles.TileEntityFrostpineCooler;
+import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
+import com.gildedgames.aether.common.tiles.TileEntityIcestoneCooler;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -12,18 +12,18 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiFrostpineCooler extends GuiContainer
+public class GuiIcestoneCooler extends GuiContainer
 {
-	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/gui/inventory/frostpine_cooler.png");
+	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/gui/inventory/icestone_cooler.png");
 
 	/** The player inventory bound to this GUI. */
 	private final InventoryPlayer playerInventory;
 
 	private final IInventory tile;
 
-	public GuiFrostpineCooler(InventoryPlayer playerInv, IInventory coolerInv)
+	public GuiIcestoneCooler(InventoryPlayer playerInv, IInventory coolerInv)
 	{
-		super(new ContainerFrostpineCooler(playerInv, coolerInv));
+		super(new ContainerIcestoneCooler(playerInv, coolerInv));
 		this.playerInventory = playerInv;
 		this.tile = coolerInv;
 	}
@@ -37,9 +37,9 @@ public class GuiFrostpineCooler extends GuiContainer
 		this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		this.fontRendererObj.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
 
-		if (this.tile instanceof TileEntityFrostpineCooler)
+		if (this.tile instanceof TileEntityIcestoneCooler)
 		{
-			TileEntityFrostpineCooler te = (TileEntityFrostpineCooler) this.tile;
+			TileEntityIcestoneCooler te = (TileEntityIcestoneCooler) this.tile;
 
 			if (!te.isCooling())
 			{

@@ -5,7 +5,6 @@ import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
-import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.recipes.RecipePresentCrafting;
 import com.gildedgames.aether.common.recipes.RecipeLeatherGlovesDyes;
 import com.gildedgames.aether.common.recipes.RecipeWrappingPaper;
@@ -106,9 +105,9 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
         registerShapedRecipe(new ItemStack(BlocksAether.altar), "AZA", " H ", "HHH",
 				'H', new ItemStack(BlocksAether.holystone), 'Z', new ItemStack(ItemsAether.zanite_gemstone), 'A', new ItemStack(ItemsAether.arkenium));
 
-		// Frostpine Cooler
-		registerShapedRecipe(new ItemStack(BlocksAether.frostpine_cooler), "AZA", "HIH", "SSS",
-				'H', new ItemStack(BlocksAether.holystone), 'Z', new ItemStack(ItemsAether.arkenium), 'A', new ItemStack(ItemsAether.arkenium_strip), 'I', new ItemStack(ItemsAether.icestone), 'S', new ItemStack(BlocksAether.aether_planks));
+		// Icestone Cooler
+		registerShapedRecipe(new ItemStack(BlocksAether.icestone_cooler), "AAA", "SSS", "HHH",
+				'H', new ItemStack(BlocksAether.holystone), 'A', new ItemStack(ItemsAether.arkenium), 'S', new ItemStack(BlocksAether.aether_planks));
 
 		// Arkenium Strip
 		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_strip, 4), "X", "X",

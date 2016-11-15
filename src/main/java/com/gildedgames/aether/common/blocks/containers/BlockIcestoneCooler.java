@@ -2,8 +2,7 @@ package com.gildedgames.aether.common.blocks.containers;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
-import com.gildedgames.aether.common.tiles.TileEntityFrostpineCooler;
-import com.gildedgames.aether.common.tiles.TileEntityIncubator;
+import com.gildedgames.aether.common.tiles.TileEntityIcestoneCooler;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -22,12 +21,12 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockFrostpineCooler extends BlockContainer
+public class BlockIcestoneCooler extends BlockContainer
 {
 
 	public static final PropertyDirection PROPERTY_FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
-	public BlockFrostpineCooler()
+	public BlockIcestoneCooler()
 	{
 		super(Material.WOOD);
 
@@ -86,7 +85,7 @@ public class BlockFrostpineCooler extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
-		return new TileEntityFrostpineCooler();
+		return new TileEntityIcestoneCooler();
 	}
 
 	@Override
@@ -94,12 +93,25 @@ public class BlockFrostpineCooler extends BlockContainer
 	{
 		TileEntity tileEntity = world.getTileEntity(pos);
 
-		if (tileEntity instanceof TileEntityFrostpineCooler)
+		if (tileEntity instanceof TileEntityIcestoneCooler)
 		{
 			InventoryHelper.dropInventoryItems(world, pos, (IInventory) tileEntity);
 		}
 
 		super.breakBlock(world, pos, state);
+	}
+
+
+	@Override
+	public boolean isOpaqueCube(IBlockState state)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isFullCube(IBlockState state)
+	{
+		return false;
 	}
 
 }

@@ -147,7 +147,7 @@ tile.aether.aether_planks.earthshifter.name=Earthshifter Planks
 tile.aether.aether_planks.frostpine.name=Frostpine Planks
 tile.aether.skyroot_vines.name=Skyroot Vines
 tile.aether.enchanted_skyroot_vines.name=Enchanted Skyroot Vines
-tile.aether.frostpine_cooler.name=Frostpine Cooler
+tile.aether.icestone_cooler.name=Icestone Cooler
 tile.aether.incubator.name=Incubator
 tile.aether.present.name=Present
 tile.aether.labyrinth_container.small.name=Small Labyrinth Container
@@ -591,7 +591,7 @@ container.skyroot_chest=Skyroot Chest
 container.skyroot_double_chest=Large Skyroot Chest
 container.schematicBlock=Replace With (Chosen Randomly)
 container.labyrinth_chest=Labyrinth Chest
-container.frostpine_cooler=Frostpine Cooler
+container.icestone_cooler=Icestone Cooler
 container.incubator=Incubator
 
 # Sounds

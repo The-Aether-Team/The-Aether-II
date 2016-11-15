@@ -1,12 +1,12 @@
 package com.gildedgames.aether.common.network;
 
 import com.gildedgames.aether.client.gui.container.GuiEquipment;
-import com.gildedgames.aether.client.gui.container.GuiFrostpineCooler;
+import com.gildedgames.aether.client.gui.container.GuiIcestoneCooler;
 import com.gildedgames.aether.client.gui.container.GuiIncubator;
 import com.gildedgames.aether.client.gui.container.simple_crafting.GuiSimpleCrafting;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.containers.ContainerEquipment;
-import com.gildedgames.aether.common.containers.tiles.ContainerFrostpineCooler;
+import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
 import com.gildedgames.aether.common.containers.ContainerSimpleCrafting;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -40,7 +40,7 @@ public class AetherGuiHandler implements IGuiHandler
 		case INVENTORY_EQUIPMENT_ID:
 			return new ContainerEquipment(PlayerAetherImpl.getPlayer(player));
 		case FROSTPINE_COOLER_ID:
-			return new ContainerFrostpineCooler(player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
+			return new ContainerIcestoneCooler(player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
 		case INCUBATOR_ID:
 			return new ContainerIncubator(player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
 		default:
@@ -59,7 +59,7 @@ public class AetherGuiHandler implements IGuiHandler
 		case INVENTORY_EQUIPMENT_ID:
 			return new GuiEquipment(PlayerAetherImpl.getPlayer(player));
 		case FROSTPINE_COOLER_ID:
-			return new GuiFrostpineCooler(player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
+			return new GuiIcestoneCooler(player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
 		case INCUBATOR_ID:
 			BlockPos pos = new BlockPos(x, y, z);
 			return new GuiIncubator(player.inventory, (IInventory) world.getTileEntity(pos), pos);
