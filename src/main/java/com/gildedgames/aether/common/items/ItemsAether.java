@@ -1340,7 +1340,10 @@ public class ItemsAether
 
 		GameRegistry.register(item);
 
-		registeredItems.add(item);
+		if (!(item instanceof ItemMoaEgg) && !(item instanceof ItemAetherSpawnEgg))
+		{
+			registeredItems.add(item);
+		}
 
 		return item;
 	}

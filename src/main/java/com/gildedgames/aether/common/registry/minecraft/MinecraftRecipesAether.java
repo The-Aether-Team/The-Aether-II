@@ -23,7 +23,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.RecipeSorter;
 
-public class RecipesAether implements IAltarRecipeRegistry
+public class MinecraftRecipesAether implements IAltarRecipeRegistry
 {
 	private final AltarRegistry altarRegistry = new AltarRegistry();
 
@@ -171,7 +171,7 @@ public class RecipesAether implements IAltarRecipeRegistry
 				new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.GOLDEN.ordinal()), new ItemStack(ItemsAether.skyroot_poison_bucket));
 
         // Golden Dart
-        registerShapedRecipe(new ItemStack(ItemsAether.dart), " X", " Y", " Z",
+        registerShapedRecipe(new ItemStack(ItemsAether.dart, 8, ItemDartType.GOLDEN.ordinal()), " X", " Y", " Z",
                 'X', new ItemStack(ItemsAether.golden_amber),
                 'Y', new ItemStack(ItemsAether.skyroot_stick),
                 'Z', new ItemStack(Items.FEATHER));
@@ -196,6 +196,10 @@ public class RecipesAether implements IAltarRecipeRegistry
         // Zanite Uncraft
         registerShapedRecipe(new ItemStack(ItemsAether.zanite_gemstone, 9), "X",
                 'X', new ItemStack(BlocksAether.zanite_block));
+
+		// Gravitite Uncraft
+		registerShapedRecipe(new ItemStack(ItemsAether.gravitite_plate, 9), "X",
+				'X', new ItemStack(BlocksAether.gravitite_block));
 
 		// Holystone Brick
 		registerShapedRecipe(new ItemStack(BlocksAether.holystone_brick, 4), "XX", "XX",

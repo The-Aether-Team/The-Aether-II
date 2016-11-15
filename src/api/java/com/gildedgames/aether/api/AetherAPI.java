@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.capabilites.instances.IInstanceRegistry;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.api.registry.cooler.ITemperatureRegistry;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
+import com.gildedgames.aether.api.registry.simple_crafting.ISimpleCraftingRegistry;
 import com.gildedgames.aether.api.registry.tab.ITabRegistry;
 
 public class AetherAPI
@@ -31,6 +32,8 @@ public class AetherAPI
 	public static ITabRegistry tabs() { return AetherAPI.services().getTabRegistry(); }
 
 	public static IInstanceRegistry instances() { return AetherAPI.services().getInstanceRegistry(); }
+
+	public static ISimpleCraftingRegistry crafting() { return AetherAPI.services().getSimpleCraftingRegistry(); }
 
 	public static void init(IAetherServices services)
 	{

@@ -3,13 +3,13 @@ package com.gildedgames.aether.common.network;
 import com.gildedgames.aether.client.gui.container.GuiEquipment;
 import com.gildedgames.aether.client.gui.container.GuiFrostpineCooler;
 import com.gildedgames.aether.client.gui.container.GuiIncubator;
+import com.gildedgames.aether.client.gui.container.simple_crafting.GuiSimpleCrafting;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.containers.ContainerEquipment;
 import com.gildedgames.aether.common.containers.tiles.ContainerFrostpineCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
-import com.gildedgames.aether.common.containers.ContainerSkyrootWorkbench;
+import com.gildedgames.aether.common.containers.ContainerSimpleCrafting;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.gui.inventory.GuiCrafting;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -36,7 +36,7 @@ public class AetherGuiHandler implements IGuiHandler
 		switch (id)
 		{
 		case SKYROOT_WORKBENCH_ID:
-			return new ContainerSkyrootWorkbench(player.inventory, world, new BlockPos(x, y, z));
+			return new ContainerSimpleCrafting(player, new BlockPos(x, y, z));
 		case INVENTORY_EQUIPMENT_ID:
 			return new ContainerEquipment(PlayerAetherImpl.getPlayer(player));
 		case FROSTPINE_COOLER_ID:
@@ -55,7 +55,7 @@ public class AetherGuiHandler implements IGuiHandler
 		switch (id)
 		{
 		case SKYROOT_WORKBENCH_ID:
-			return new GuiCrafting(player.inventory, world, new BlockPos(x, y, z));
+			return new GuiSimpleCrafting(player, new BlockPos(x, y, z));
 		case INVENTORY_EQUIPMENT_ID:
 			return new GuiEquipment(PlayerAetherImpl.getPlayer(player));
 		case FROSTPINE_COOLER_ID:

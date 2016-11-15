@@ -7,6 +7,7 @@ import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.api.registry.cooler.ITemperatureRegistry;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentProperties;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
+import com.gildedgames.aether.api.registry.simple_crafting.ISimpleCraftingRegistry;
 import com.gildedgames.aether.api.registry.tab.ITabRegistry;
 import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
@@ -18,7 +19,8 @@ import com.gildedgames.aether.common.capabilities.player.ItemSlot;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherEvents;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.containers.tab.TabRegistryImpl;
-import com.gildedgames.aether.common.registry.minecraft.RecipesAether;
+import com.gildedgames.aether.common.recipes.simple.SimpleRecipe;
+import com.gildedgames.aether.common.registry.*;
 import com.gildedgames.aether.common.entities.BossProcessor;
 import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.entities.EntityItemWatcher;
@@ -32,12 +34,9 @@ import com.gildedgames.aether.common.entities.util.SimpleBossManager;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.registry.EquipmentRegistry;
-import com.gildedgames.aether.common.registry.GenerationAether;
-import com.gildedgames.aether.common.registry.TemperatureRegistry;
-import com.gildedgames.aether.common.registry.TemplatesAether;
 import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
 import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
+import com.gildedgames.aether.common.registry.minecraft.MinecraftRecipesAether;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.tiles.TileEntitiesAether;
 import com.gildedgames.aether.common.util.TickTimer;
@@ -68,7 +67,7 @@ public class CommonProxy
 {
 	private File storageDir;
 
-	private final RecipesAether recipeManager = new RecipesAether();
+	private final MinecraftRecipesAether recipeManager = new MinecraftRecipesAether();
 
 	private final IEquipmentRegistry equipmentRegistry = new EquipmentRegistry();
 
@@ -77,6 +76,8 @@ public class CommonProxy
 	private final ITabRegistry tabRegistry = new TabRegistryImpl();
 
 	private final IInstanceRegistry instanceRegistry = new InstanceRegistryImpl();
+
+	private final SimpleCraftingRegistry simpleCraftingRegistry = new SimpleCraftingRegistry();
 
 	private DungeonInstanceHandler dungeonInstanceHandler;
 
@@ -102,6 +103,9 @@ public class CommonProxy
 
 		SoundsAether.preInit();
 
+		this.recipeManager.init();
+		RecipesAether.preInit();
+
 		AetherAPI.tabs().getInventoryGroup().registerServerTab(new TabEquipment());
 		AetherAPI.tabs().getInventoryGroup().registerServerTab(new TabBugReport());
 
@@ -116,14 +120,13 @@ public class CommonProxy
 		AetherCore.srl().registerSerialization(8, IslandSector.class, new Instantiator(IslandSector.class));
 		AetherCore.srl().registerSerialization(9, IslandData.class, new Instantiator(IslandData.class));
 		AetherCore.srl().registerSerialization(10, ItemSlot.class, new Instantiator(ItemSlot.class));
+		AetherCore.srl().registerSerialization(11, SimpleRecipe.class, new Instantiator(SimpleRecipe.class));
 	}
 
 	public void init(FMLInitializationEvent event)
 	{
 		TemplatesAether.init();
 		GenerationAether.init();
-
-		this.recipeManager.init();
 
 		MinecraftForge.EVENT_BUS.register(CommonEvents.class);
 		MinecraftForge.EVENT_BUS.register(PlayerAetherEvents.class);
@@ -214,7 +217,7 @@ public class CommonProxy
 		return this.storageDir;
 	}
 
-	public RecipesAether getRecipeManager()
+	public MinecraftRecipesAether getRecipeManager()
 	{
 		return this.recipeManager;
 	}
@@ -238,6 +241,8 @@ public class CommonProxy
 	{
 		return this.instanceRegistry;
 	}
+
+	public SimpleCraftingRegistry getSimpleCraftingRegistry() { return this.simpleCraftingRegistry; }
 
 	public void setExtendedReachDistance(EntityPlayer entity, float distance)
 	{

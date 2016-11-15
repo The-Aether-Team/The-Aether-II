@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.capabilites.instances.IInstanceRegistry;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.api.registry.cooler.ITemperatureRegistry;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
+import com.gildedgames.aether.api.registry.simple_crafting.ISimpleCraftingRegistry;
 import com.gildedgames.aether.api.registry.tab.ITabRegistry;
 import com.gildedgames.aether.client.ui.data.AssetLocation;
 import com.gildedgames.aether.client.ui.minecraft.util.MinecraftAssetLocation;
@@ -192,6 +193,12 @@ public class AetherCore implements IAetherServices
 	public IInstanceRegistry getInstanceRegistry()
 	{
 		return AetherCore.PROXY.getInstanceRegistry();
+	}
+
+	@Override
+	public ISimpleCraftingRegistry getSimpleCraftingRegistry()
+	{
+		return AetherCore.PROXY.getSimpleCraftingRegistry();
 	}
 
 }

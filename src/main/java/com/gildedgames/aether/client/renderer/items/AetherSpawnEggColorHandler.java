@@ -17,16 +17,18 @@ public class AetherSpawnEggColorHandler implements IItemColor
 	{
 		if (stack != null && stack.getItem() instanceof ItemAetherSpawnEgg)
 		{
-			ItemAetherSpawnEgg spawnEgg = (ItemAetherSpawnEgg)stack.getItem();
 			AetherSpawnEggInfo info = EntitiesAether.entityEggs.get(ItemAetherSpawnEgg.getEntityIdFromItem(stack));
 
-			if (tintIndex == 0)
+			if (info != null)
 			{
-				return info.getPrimaryColor();
-			}
-			else if (tintIndex == 1)
-			{
-				return info.getSecondaryColor();
+				if (tintIndex == 0)
+				{
+					return info.getPrimaryColor();
+				}
+				else if (tintIndex == 1)
+				{
+					return info.getSecondaryColor();
+				}
 			}
 		}
 

@@ -38,6 +38,7 @@ public class NetworkingAether
 		instance.registerMessage(PacketRegisterDimension.Handler.class, PacketRegisterDimension.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketUnregisterDimension.Handler.class, PacketUnregisterDimension.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketRegisterInstance.Handler.class, PacketRegisterInstance.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(SimpleRecipeChangedPacket.HandlerServer.class, SimpleRecipeChangedPacket.class, discriminant++, Side.SERVER);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 	}
