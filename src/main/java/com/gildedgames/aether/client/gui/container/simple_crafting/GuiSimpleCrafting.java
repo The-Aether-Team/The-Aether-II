@@ -76,12 +76,29 @@ public class GuiSimpleCrafting extends GuiContainer
 
 	private GuiXButton xButton;
 
+	private ItemStack lastStack;
+
 	public GuiSimpleCrafting(EntityPlayer player, BlockPos blockPosition)
 	{
 		super(new ContainerSimpleCrafting(player, blockPosition));
 
 		this.playerInventory = player.inventory;
 		this.allowUserInput = true;
+	}
+
+	@Override
+	protected void mouseReleased(int mouseX, int mouseY, int state)
+	{
+
+
+		super.mouseReleased(mouseX, mouseY, state);
+
+		if ((this.lastStack == null && this.playerInventory.getItemStack() != null) || (this.lastStack != null && this.playerInventory.getItemStack() == null))
+		{
+			this.updateCraftingOptions();
+		}
+
+		this.lastStack = this.playerInventory.getItemStack();
 	}
 
 	@Override
