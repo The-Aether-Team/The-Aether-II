@@ -31,13 +31,13 @@ public class EcosystemHighlandForest implements Ecosystem
 	@Override
 	public double getDesiredTemperature()
 	{
-		return 0.3;
+		return -0.5;
 	}
 
 	@Override
 	public double getDesiredMoisture()
 	{
-		return 0.3;
+		return -0.5;
 	}
 
 	@Override
