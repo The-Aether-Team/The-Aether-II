@@ -19,9 +19,9 @@ public class GenerationAether
 
 	public static WorldGenTemplate golden_oak_1, golden_oak_2;
 
-	public static WorldGenTemplate green_skyroot_windswept_1, green_skyroot_windswept_2, green_skyroot_windswept_3, green_skyroot_windswept_4, green_skyroot_windswept_5;
+	public static WorldGenTemplate green_skyroot_windswept_1, green_skyroot_windswept_2, green_skyroot_windswept_3, green_skyroot_windswept_4, green_skyroot_windswept_5, green_skyroot_windswept_6, green_skyroot_windswept_7;
 
-	public static WorldGenTemplate large_green_skyroot_pine_1, large_green_skyroot_pine_2, large_green_skyroot_pine_3, large_green_skyroot_pine_4;
+	public static WorldGenTemplate large_green_skyroot_pine_1, large_green_skyroot_pine_2;
 
 	public static WorldGenTemplate green_skyroot_pine_1, green_skyroot_pine_2, green_skyroot_pine_3, green_skyroot_pine_4, green_skyroot_pine_5;
 
@@ -41,7 +41,7 @@ public class GenerationAether
 
 	public static WorldGenTemplateGroup green_skyroot_windswept, labyrinth_ruins;
 
-	public static WorldGenTemplateGroup large_green_skyroot_pine, green_skyroot_pine;
+	public static WorldGenTemplateGroup large_green_skyroot_pine, green_skyroot_pine, green_skyroot_small_pine;
 
 	public static WorldGenTemplateGroup blue_skyroot_tree, green_skyroot_tree, golden_oak, green_skyroot_oak;
 
@@ -109,11 +109,11 @@ public class GenerationAether
 		green_skyroot_windswept_3 = new WorldGenTemplate(TemplatesAether.green_skyroot_windswept_3, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_AETHER_GRASS, TemplateConditions.REPLACEABLE);
 		green_skyroot_windswept_4 = new WorldGenTemplate(TemplatesAether.green_skyroot_windswept_4, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_AETHER_GRASS, TemplateConditions.REPLACEABLE);
 		green_skyroot_windswept_5 = new WorldGenTemplate(TemplatesAether.green_skyroot_windswept_5, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_AETHER_GRASS, TemplateConditions.REPLACEABLE);
+		green_skyroot_windswept_6 = new WorldGenTemplate(TemplatesAether.green_skyroot_windswept_6, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_AETHER_GRASS, TemplateConditions.REPLACEABLE);
+		green_skyroot_windswept_7 = new WorldGenTemplate(TemplatesAether.green_skyroot_windswept_7, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_AETHER_GRASS, TemplateConditions.REPLACEABLE);
 
 		large_green_skyroot_pine_1 = new WorldGenTemplate(TemplatesAether.large_green_skyroot_pine_1, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_AETHER_GRASS, TemplateConditions.REPLACEABLE);
 		large_green_skyroot_pine_2 = new WorldGenTemplate(TemplatesAether.large_green_skyroot_pine_2, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_AETHER_GRASS, TemplateConditions.REPLACEABLE);
-		large_green_skyroot_pine_3 = new WorldGenTemplate(TemplatesAether.large_green_skyroot_pine_3, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_AETHER_GRASS, TemplateConditions.REPLACEABLE);
-		large_green_skyroot_pine_4 = new WorldGenTemplate(TemplatesAether.large_green_skyroot_pine_4, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_AETHER_GRASS, TemplateConditions.REPLACEABLE);
 
 		green_skyroot_pine_1 = new WorldGenTemplate(TemplatesAether.green_skyroot_pine_1, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_AETHER_GRASS, TemplateConditions.REPLACEABLE);
 		green_skyroot_pine_2 = new WorldGenTemplate(TemplatesAether.green_skyroot_pine_2, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_AETHER_GRASS, TemplateConditions.REPLACEABLE);
@@ -150,9 +150,10 @@ public class GenerationAether
 		green_skyroot_tree = new WorldGenTemplateGroup(green_skyroot_tree_1, green_skyroot_tree_2, green_skyroot_tree_3);
 		golden_oak = new WorldGenTemplateGroup(golden_oak_1, golden_oak_2);
 		green_skyroot_oak = new WorldGenTemplateGroup(green_skyroot_oak_1, green_skyroot_oak_2);
-		green_skyroot_windswept = new WorldGenTemplateGroup(green_skyroot_windswept_1, green_skyroot_windswept_2, green_skyroot_windswept_3, green_skyroot_windswept_4, green_skyroot_windswept_5);
-		large_green_skyroot_pine = new WorldGenTemplateGroup(large_green_skyroot_pine_1, large_green_skyroot_pine_2, large_green_skyroot_pine_3, large_green_skyroot_pine_4);
+		green_skyroot_windswept = new WorldGenTemplateGroup(green_skyroot_windswept_1, green_skyroot_windswept_2, green_skyroot_windswept_3, green_skyroot_windswept_4, green_skyroot_windswept_5, green_skyroot_windswept_6, green_skyroot_windswept_7);
+		large_green_skyroot_pine = new WorldGenTemplateGroup(large_green_skyroot_pine_1, large_green_skyroot_pine_2);
 		green_skyroot_pine = new WorldGenTemplateGroup(green_skyroot_pine_1, green_skyroot_pine_2, green_skyroot_pine_3, green_skyroot_pine_4, green_skyroot_pine_5);
+		green_skyroot_small_pine = new WorldGenTemplateGroup(green_skyroot_pine_1, green_skyroot_pine_2);
 		dark_blue_skyroot_tree = new WorldGenTemplateGroup(dark_blue_skyroot_tree_1, dark_blue_skyroot_tree_2, dark_blue_skyroot_tree_3);
 		dark_blue_skyroot_oak = new WorldGenTemplateGroup(dark_blue_skyroot_oak_1, dark_blue_skyroot_oak_2);
 		labyrinth_ruins = new WorldGenTemplateGroup(labyrinth_ruins_1, labyrinth_ruins_2, labyrinth_ruins_3, labyrinth_ruins_4, labyrinth_ruins_5);

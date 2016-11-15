@@ -17,13 +17,13 @@ public class TemplatesAether
 
 	public static Template golden_oak_1, golden_oak_2;
 
-	public static Template green_skyroot_windswept_1, green_skyroot_windswept_2, green_skyroot_windswept_3, green_skyroot_windswept_4, green_skyroot_windswept_5;
+	public static Template green_skyroot_windswept_1, green_skyroot_windswept_2, green_skyroot_windswept_3, green_skyroot_windswept_4, green_skyroot_windswept_5, green_skyroot_windswept_6, green_skyroot_windswept_7;
 
 	public static Template dark_blue_skyroot_tree_1, dark_blue_skyroot_tree_2, dark_blue_skyroot_tree_3;
 
 	public static Template dark_blue_skyroot_oak_1, dark_blue_skyroot_oak_2;
 
-	public static Template large_green_skyroot_pine_1, large_green_skyroot_pine_2, large_green_skyroot_pine_3, large_green_skyroot_pine_4;
+	public static Template large_green_skyroot_pine_1, large_green_skyroot_pine_2;
 
 	public static Template green_skyroot_pine_1, green_skyroot_pine_2, green_skyroot_pine_3, green_skyroot_pine_4, green_skyroot_pine_5;
 
@@ -63,6 +63,8 @@ public class TemplatesAether
 		green_skyroot_windswept_3 = register("highlands/trees/windswept/green/green_skyroot_windswept_3");
 		green_skyroot_windswept_4 = register("highlands/trees/windswept/green/green_skyroot_windswept_4");
 		green_skyroot_windswept_5 = register("highlands/trees/windswept/green/green_skyroot_windswept_5");
+		green_skyroot_windswept_6 = register("highlands/trees/windswept/green/green_skyroot_windswept_6");
+		green_skyroot_windswept_7 = register("highlands/trees/windswept/green/green_skyroot_windswept_7");
 
 		labyrinth_ruins_1 = register("labyrinth_ruins_1");
 		labyrinth_ruins_2 = register("labyrinth_ruins_2");
@@ -76,8 +78,6 @@ public class TemplatesAether
 
 		large_green_skyroot_pine_1 = register("highlands/trees/pine/green/large_green_skyroot_pine_1");
 		large_green_skyroot_pine_2 = register("highlands/trees/pine/green/large_green_skyroot_pine_2");
-		large_green_skyroot_pine_3 = register("highlands/trees/pine/green/large_green_skyroot_pine_3");
-		large_green_skyroot_pine_4 = register("highlands/trees/pine/green/large_green_skyroot_pine_4");
 
 		green_skyroot_pine_1 = register("highlands/trees/pine/green/green_skyroot_pine_1");
 		green_skyroot_pine_2 = register("highlands/trees/pine/green/green_skyroot_pine_2");

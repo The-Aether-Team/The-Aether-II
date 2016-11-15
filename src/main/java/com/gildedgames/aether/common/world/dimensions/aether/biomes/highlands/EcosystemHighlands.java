@@ -50,7 +50,9 @@ public class EcosystemHighlands implements Ecosystem
 			this.decorations.add(new WorldDecorationSimple(2, GenerationAether.blue_skyroot_tree));
 			this.decorations.add(new WorldDecorationSimple(2, GenerationAether.green_skyroot_tree));
 			this.decorations.add(new WorldDecorationSimple(2, GenerationAether.green_skyroot_oak));
+			this.decorations.add(new WorldDecorationSimple(2, GenerationAether.green_skyroot_small_pine));
 			this.decorations.add(new WorldDecorationSimple(2, GenerationAether.golden_oak));
+			this.decorations.add(new WorldDecorationSimple(1, GenerationAether.skyroot_moa_nest_tree_1, 0.5F));
 			this.decorations.add(new WorldDecorationSimple(1, GenerationAether.golden_aercloud, 0.06F)
 			{
 				@Override

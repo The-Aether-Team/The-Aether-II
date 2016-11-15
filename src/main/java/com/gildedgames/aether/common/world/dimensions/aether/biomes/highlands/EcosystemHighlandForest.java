@@ -47,9 +47,13 @@ public class EcosystemHighlandForest implements Ecosystem
 		{
 			this.decorations = Lists.newArrayList();
 
-			this.decorations.add(new WorldDecorationSimple(3, GenerationAether.large_green_skyroot_pine));
+			this.decorations.add(new WorldDecorationSimple(1, GenerationAether.large_green_skyroot_pine));
+			this.decorations.add(new WorldDecorationSimple(2, GenerationAether.blue_skyroot_tree));
+			this.decorations.add(new WorldDecorationSimple(1, GenerationAether.skyroot_moa_nest_tree_1, 0.5F));
+			this.decorations.add(new WorldDecorationSimple(2, GenerationAether.green_skyroot_tree));
 			this.decorations.add(new WorldDecorationSimple(15, GenerationAether.green_skyroot_pine));
 			this.decorations.add(new WorldDecorationSimple(1, GenerationAether.green_aercloud, 0.06F)
+
 			{
 				@Override
 				public BlockPos findPositionToPlace(World world, Random rand, BlockPos pos)
