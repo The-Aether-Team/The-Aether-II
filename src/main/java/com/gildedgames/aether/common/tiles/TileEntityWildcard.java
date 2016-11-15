@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.tiles;
 
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -27,7 +28,7 @@ public class TileEntityWildcard extends TileEntitySchematicBlock
 		if (contentSize == 0)
 		{
 			this.getWorld().setBlockToAir(this.getPos());
-			this.getWorld().scheduleUpdate(this.getPos(), this.blockType, 0);
+			this.getWorld().scheduleUpdate(this.getPos(), BlocksAether.wildcard, 0);
 
 			return;
 		}
