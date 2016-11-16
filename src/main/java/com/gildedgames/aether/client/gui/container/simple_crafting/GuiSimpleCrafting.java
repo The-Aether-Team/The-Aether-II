@@ -405,7 +405,7 @@ public class GuiSimpleCrafting extends GuiContainer
 		this.fontRendererObj.drawString(I18n.format("container.crafting"), 28, 6, 4210752);
 		this.fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
 
-		this.fontRendererObj.drawString("Recipes", -116, 7, 4210752);
+		this.fontRendererObj.drawString("Recipes", -126, 7, 4210752);
 	}
 
 	/**
