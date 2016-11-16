@@ -103,9 +103,6 @@ public class CommonProxy
 
 		SoundsAether.preInit();
 
-		this.recipeManager.init();
-		RecipesAether.preInit();
-
 		AetherAPI.tabs().getInventoryGroup().registerServerTab(new TabEquipment());
 		AetherAPI.tabs().getInventoryGroup().registerServerTab(new TabBugReport());
 
@@ -128,6 +125,8 @@ public class CommonProxy
 		TemplatesAether.init();
 		GenerationAether.init();
 
+		this.recipeManager.init();
+
 		MinecraftForge.EVENT_BUS.register(CommonEvents.class);
 		MinecraftForge.EVENT_BUS.register(PlayerAetherEvents.class);
 		MinecraftForge.EVENT_BUS.register(EntityEffectsEventHooks.class);
@@ -147,7 +146,7 @@ public class CommonProxy
 
 	public void postInit(FMLPostInitializationEvent event)
 	{
-
+		RecipesAether.preInit();
 	}
 
 	public void serverStarting(FMLServerStartingEvent event)
