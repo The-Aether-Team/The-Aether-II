@@ -14,11 +14,11 @@ import java.util.List;
 public class OnSpecificBlockPlacementCondition implements WorldGenTemplate.PlacementCondition
 {
 
-	private IBlockState state;
+	private IBlockState[] states;
 
-	public OnSpecificBlockPlacementCondition(IBlockState state)
+	public OnSpecificBlockPlacementCondition(IBlockState... states)
 	{
-		this.state = state;
+		this.states = states;
 	}
 
 	@Override
@@ -30,10 +30,15 @@ public class OnSpecificBlockPlacementCondition implements WorldGenTemplate.Place
 
 			IBlockState state = world.getBlockState(down);
 
-			if (this.state != state)
+			for (IBlockState s : this.states)
 			{
-				return false;
+				if (s == state)
+				{
+					return true;
+				}
 			}
+
+			return false;
 		}
 
 		return true;
