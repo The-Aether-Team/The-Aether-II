@@ -386,36 +386,6 @@ public class GuiSimpleCrafting extends GuiContainer
 
 		super.drawScreen(mouseX, mouseY, partialTicks);
 
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-		GlStateManager.disableLighting();
-
-		if (this.currentRecipe != null)
-		{
-			this.mc.getTextureManager().bindTexture(CRAFTING_MATRIX_NO_INTERACTION);
-			Gui.drawModalRectWithCustomSizedTexture(this.guiLeft + 59, this.guiTop + 16, 0, 0, 54, 54, 54, 54);
-			this.xButton.visible = true;
-		}
-		else
-		{
-			this.xButton.visible = false;
-		}
-
-		if (this.recipes.size() <= 0)
-		{
-			this.mc.getTextureManager().bindTexture(DARK_CRAFTING_OVERLAY);
-
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-
-			GlStateManager.enableBlend();
-			GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-			GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-
-			Gui.drawModalRectWithCustomSizedTexture(this.guiLeft - 96, this.guiTop + 21, 0, 0, 72, 108, 72, 126);
-
-			this.drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "Nothing left", this.guiLeft - 60, this.guiTop + 47, 0xFFFFFF);
-			this.drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "to craft!", this.guiLeft - 60, this.guiTop + 57, 0xFFFFFF);
-		}
-
 		if (this.hoverDescription != null && this.hoverDescription.length() > 0)
 		{
 			GuiUtil.drawHoveringText(Collections.singletonList(this.hoverDescription), mouseX, mouseY, Minecraft.getMinecraft().fontRendererObj);
@@ -458,6 +428,36 @@ public class GuiSimpleCrafting extends GuiContainer
 		this.mc.getTextureManager().bindTexture(BOOK_SCROLL_BAR);
 
 		this.drawTexturedModalRect(i, j + (int)((float)(k - j - 17) * this.currentScroll), 232 + (this.needsScrollBars() ? 0 : 12), 0, 12, 15);
+
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.disableLighting();
+
+		if (this.currentRecipe != null)
+		{
+			this.mc.getTextureManager().bindTexture(CRAFTING_MATRIX_NO_INTERACTION);
+			Gui.drawModalRectWithCustomSizedTexture(this.guiLeft + 59, this.guiTop + 16, 0, 0, 54, 54, 54, 54);
+			this.xButton.visible = true;
+		}
+		else
+		{
+			this.xButton.visible = false;
+		}
+
+		if (this.recipes.size() <= 0)
+		{
+			this.mc.getTextureManager().bindTexture(DARK_CRAFTING_OVERLAY);
+
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
+			GlStateManager.enableBlend();
+			GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+			GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+
+			Gui.drawModalRectWithCustomSizedTexture(this.guiLeft - 96, this.guiTop + 21, 0, 0, 72, 108, 72, 126);
+
+			this.drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "Nothing left", this.guiLeft - 60, this.guiTop + 47, 0xFFFFFF);
+			this.drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "to craft!", this.guiLeft - 60, this.guiTop + 57, 0xFFFFFF);
+		}
 	}
 
 	private boolean needsScrollBars()
