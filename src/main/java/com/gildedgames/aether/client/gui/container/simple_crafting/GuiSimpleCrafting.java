@@ -291,11 +291,14 @@ public class GuiSimpleCrafting extends GuiContainer
 	{
 		super.initGui();
 
+		this.guiLeft = 30 + ((this.width - this.xSize) / 2);
+		this.guiTop = ((this.height - this.ySize) / 2);
+
 		for (int i = 0; i < 6; ++i)
 		{
 			for (int j = 0; j < 4; ++j)
 			{
-				GuiCraftingOption option = new GuiCraftingOption(j + i * 4, this.guiLeft - 96 + (j * 18), this.guiTop + (21 + i * 18), null);
+				GuiCraftingOption option = new GuiCraftingOption(j + i * 4, this.guiLeft - 126 + (j * 18), this.guiTop + (21 + i * 18), null);
 
 				this.buttonList.add(option);
 				this.options.add(j + i * 4, option);
@@ -306,7 +309,7 @@ public class GuiSimpleCrafting extends GuiContainer
 		{
 			for (int j = 0; j < 3; ++j)
 			{
-				GuiRequiredMaterial material = new GuiRequiredMaterial(20 + (j + i * 3), this.guiLeft + 59 + (j * 18), this.guiTop + (16 + i * 18), null);
+				GuiRequiredMaterial material = new GuiRequiredMaterial(20 + (j + i * 3), this.guiLeft + 29 + (j * 18), this.guiTop + (16 + i * 18), null);
 
 				if (this.currentRecipe != null && j + i * 3 < this.currentRecipe.getRequired().length)
 				{
@@ -329,12 +332,12 @@ public class GuiSimpleCrafting extends GuiContainer
 			}
 		}
 
-		this.result = new GuiRequiredMaterial(30, this.guiLeft + 153, this.guiTop + 34, null);
+		this.result = new GuiRequiredMaterial(30, this.guiLeft + 123, this.guiTop + 34, null);
 		this.result.resultStack = true;
 
 		this.buttonList.add(this.result);
 
-		this.xButton = new GuiXButton(31, this.guiLeft + 46, this.guiTop + 16);
+		this.xButton = new GuiXButton(31, this.guiLeft + 16, this.guiTop + 16);
 		this.xButton.visible = false;
 
 		this.buttonList.add(this.xButton);
@@ -399,10 +402,10 @@ public class GuiSimpleCrafting extends GuiContainer
 	 */
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		this.fontRendererObj.drawString(I18n.format("container.crafting"), 58, 6, 4210752);
-		this.fontRendererObj.drawString(I18n.format("container.inventory"), 38, this.ySize - 96 + 2, 4210752);
+		this.fontRendererObj.drawString(I18n.format("container.crafting"), 28, 6, 4210752);
+		this.fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
 
-		this.fontRendererObj.drawString("Recipes", -96, 7, 4210752);
+		this.fontRendererObj.drawString("Recipes", -116, 7, 4210752);
 	}
 
 	/**
@@ -413,7 +416,7 @@ public class GuiSimpleCrafting extends GuiContainer
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
 		this.mc.getTextureManager().bindTexture(BOOK_RECIPES);
-		int x = this.guiLeft - 120;
+		int x = this.guiLeft - 150;
 		int z = this.guiTop - 5;
 		this.drawTexturedModalRect(x, z, 0, 0, 246, 178);
 
@@ -422,7 +425,7 @@ public class GuiSimpleCrafting extends GuiContainer
 		z = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(x, z, 0, 0, this.xSize, this.ySize);
 
-		int i = this.guiLeft - 18;
+		int i = this.guiLeft - 48;
 		int j = this.guiTop + 22;
 		int k = j + 108;
 		this.mc.getTextureManager().bindTexture(BOOK_SCROLL_BAR);
@@ -435,7 +438,7 @@ public class GuiSimpleCrafting extends GuiContainer
 		if (this.currentRecipe != null)
 		{
 			this.mc.getTextureManager().bindTexture(CRAFTING_MATRIX_NO_INTERACTION);
-			Gui.drawModalRectWithCustomSizedTexture(this.guiLeft + 59, this.guiTop + 16, 0, 0, 54, 54, 54, 54);
+			Gui.drawModalRectWithCustomSizedTexture(this.guiLeft + 29, this.guiTop + 16, 0, 0, 54, 54, 54, 54);
 			this.xButton.visible = true;
 		}
 		else
@@ -453,10 +456,10 @@ public class GuiSimpleCrafting extends GuiContainer
 			GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 			GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
-			Gui.drawModalRectWithCustomSizedTexture(this.guiLeft - 96, this.guiTop + 21, 0, 0, 72, 108, 72, 126);
+			Gui.drawModalRectWithCustomSizedTexture(this.guiLeft - 126, this.guiTop + 21, 0, 0, 72, 108, 72, 126);
 
-			this.drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "Nothing left", this.guiLeft - 60, this.guiTop + 47, 0xFFFFFF);
-			this.drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "to craft!", this.guiLeft - 60, this.guiTop + 57, 0xFFFFFF);
+			this.drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "Nothing left", this.guiLeft - 90, this.guiTop + 47, 0xFFFFFF);
+			this.drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "to craft!", this.guiLeft - 90, this.guiTop + 57, 0xFFFFFF);
 		}
 	}
 
