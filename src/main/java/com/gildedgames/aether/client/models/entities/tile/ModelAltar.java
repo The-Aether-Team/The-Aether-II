@@ -100,7 +100,7 @@ public class ModelAltar extends ModelBase
 		this.ZaniteGem1.setRotationPoint(0F, 0F, 0F);
 		this.ZaniteGem1.setTextureSize(64, 128);
 		this.ZaniteGem1.mirror = true;
-		this.setRotation(this.ZaniteGem1, 0F, 0.7853982F, 0F);
+		this.setRotation(this.ZaniteGem1, 0F, -0.7853982F, 0F);
 		this.ZaniteGem2 = new ModelRenderer(this, 22, 56);
 		this.ZaniteGem2.addBox(-2.5F, 7F, -2.5F, 5, 1, 5);
 		this.ZaniteGem2.setRotationPoint(0F, 0F, 0F);

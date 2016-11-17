@@ -106,11 +106,11 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 				'H', new ItemStack(BlocksAether.holystone), 'Z', new ItemStack(ItemsAether.zanite_gemstone), 'A', new ItemStack(ItemsAether.arkenium));
 
 		// Icestone Cooler
-		registerShapedRecipe(new ItemStack(BlocksAether.masonry_bench), "AAA", "SSS", "HHH",
+		registerShapedRecipe(new ItemStack(BlocksAether.icestone_cooler), "SAS", "H H", "SSS",
 				'H', new ItemStack(BlocksAether.holystone), 'A', new ItemStack(ItemsAether.arkenium), 'S', new ItemStack(BlocksAether.aether_planks));
 
 		// Masonry Bench
-		registerShapedRecipe(new ItemStack(BlocksAether.masonry_bench), "SAS", "H H", "SHS",
+		registerShapedRecipe(new ItemStack(BlocksAether.masonry_bench), "AAA", "SSS", "HHH",
 				'H', new ItemStack(BlocksAether.holystone), 'A', new ItemStack(ItemsAether.arkenium), 'S', new ItemStack(BlocksAether.aether_planks));
 
 		// Arkenium Strip
