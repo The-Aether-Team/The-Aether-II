@@ -15,6 +15,11 @@ public class WorldGeneratorIsland
 		this.simplex = new OpenSimplexNoise(world.getSeed());
 	}
 
+	public double getBias(double time, double bias)
+	{
+		return (time / ((((1.0/bias) - 2.0)*(1.0 - time))+1.0));
+	}
+
 	public void genIslandForChunk(ChunkPrimer primer, IslandData data, IslandSector sector, int chunkX, int chunkZ)
 	{
 		//Stopwatch watch = Stopwatch.createStarted();
@@ -52,24 +57,24 @@ public class WorldGeneratorIsland
 
 				double dist = 2.0 * Math.sqrt((distNX * distNX) + (distNZ * distNZ)); // Get distance from center of Island
 
-				//value = Math.pow(value, 1.1);
-
 				value = (value + 0.0) - (0.7 * Math.pow(dist, 4)); // Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
 
-				//value -= dist * 0.2;
-
-				double heightValue = value + 1.0;
+				double heightValue = value + 1.0;//Math.pow(value, 0.7);
 
 				double bottomHeight = 0.8 * height;
 				double bottomMaxY = minY + bottomHeight;
 
 				double topHeight = 0.2 * height;
 
-				if (heightValue > 0.8)
+				double cutoffPoint = 0.8;
+
+				double bottomHeightMod = Math.min(1.0, (heightValue - cutoffPoint) * 1.4);
+
+				if (heightValue > cutoffPoint)
 				{
-					for (double y = bottomMaxY; y > bottomMaxY - ((heightValue - 0.8) * bottomHeight); y--)
+					for (double y = bottomMaxY; y > bottomMaxY - (bottomHeight * bottomHeightMod); y--)
 					{
-						if (heightValue < 0.85 && y == bottomMaxY - 1)
+						if (heightValue < cutoffPoint + 0.05 && y == bottomMaxY - 1)
 						{
 							primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.quicksoil.getDefaultState());
 						}
@@ -79,9 +84,9 @@ public class WorldGeneratorIsland
 						}
 					}
 
-					for (double y = bottomMaxY; y < bottomMaxY + ((heightValue - 0.8) * topHeight); y++)
+					for (double y = bottomMaxY; y < bottomMaxY + ((heightValue - cutoffPoint) * topHeight); y++)
 					{
-						if (heightValue < 0.85 && y < bottomMaxY + 1)
+						if (heightValue < cutoffPoint + 0.05 && y < bottomMaxY + 1)
 						{
 							primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.quicksoil.getDefaultState());
 						}
@@ -92,7 +97,7 @@ public class WorldGeneratorIsland
 					}
 				}
 
-				for (double y = minY + (height * 0.5); y < minY + height; y++)
+				/*for (double y = minY + (height * 0.5); y < minY + height; y++)
 				{
 					double stepY = y - minY - (height * 0.55);
 
@@ -115,11 +120,11 @@ public class WorldGeneratorIsland
 					{
 						//if (y < bottomMaxY + ((heightValue - 0.8) * topHeight))
 						//{
-						/*if (y < bottomMaxY + 2)
+						*//*if (y < bottomMaxY + 2)
 						{
 							primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.quicksoil.getDefaultState());
 						}
-						else*/
+						else*//*
 						{
 							//primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.holystone.getDefaultState());
 						}
@@ -127,7 +132,7 @@ public class WorldGeneratorIsland
 
 						//primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.holystone.getDefaultState());
 					}
-				}
+				}*/
 			}
 		}
 
