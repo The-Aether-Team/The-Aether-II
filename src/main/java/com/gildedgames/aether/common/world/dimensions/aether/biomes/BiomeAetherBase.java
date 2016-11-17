@@ -136,7 +136,7 @@ public abstract class BiomeAetherBase extends Biome
 
 						if (random.nextInt(100) > requiredChance)
 						{
-							decoration.getGenerator().generate(world, random, placeAt);
+							decoration.getGenerator(random).generate(world, random, placeAt);
 						}
 					}
 				}
@@ -155,7 +155,7 @@ public abstract class BiomeAetherBase extends Biome
 						{
 							BlockPos placeAt = decoration.findPositionToPlace(world, random, pos);
 
-							decoration.getGenerator().generate(world, random, placeAt);
+							decoration.getGenerator(random).generate(world, random, placeAt);
 						}
 					}
 				}

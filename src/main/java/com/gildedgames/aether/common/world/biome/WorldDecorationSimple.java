@@ -11,19 +11,19 @@ public class WorldDecorationSimple implements WorldDecoration
 
 	private final int count;
 
-	private final WorldGenerator generator;
+	private final WorldGenerator[] generators;
 
 	private final float percentRequired;
 
-	public WorldDecorationSimple(int count, WorldGenerator generator)
+	public WorldDecorationSimple(int count, WorldGenerator... generators)
 	{
-		this(count, generator, 0);
+		this(count, 0, generators);
 	}
 
-	public WorldDecorationSimple(int count, WorldGenerator generator, float percentRequired)
+	public WorldDecorationSimple(int count, float percentRequired, WorldGenerator... generators)
 	{
 		this.count = count;
-		this.generator = generator;
+		this.generators = generators;
 		this.percentRequired = percentRequired;
 	}
 
@@ -45,9 +45,9 @@ public class WorldDecorationSimple implements WorldDecoration
 	}
 
 	@Override
-	public WorldGenerator getGenerator()
+	public WorldGenerator getGenerator(Random rand)
 	{
-		return this.generator;
+		return this.generators[rand.nextInt(this.generators.length)];
 	}
 
 	@Override

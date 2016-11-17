@@ -16,7 +16,7 @@ public interface WorldDecoration
 	 */
 	int getGenerationCount();
 
-	WorldGenerator getGenerator();
+	WorldGenerator getGenerator(Random rand);
 
 	BlockPos findPositionToPlace(World world, Random rand, BlockPos pos);
 

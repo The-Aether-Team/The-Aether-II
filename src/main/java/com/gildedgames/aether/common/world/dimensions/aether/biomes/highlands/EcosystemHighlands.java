@@ -48,12 +48,11 @@ public class EcosystemHighlands implements Ecosystem
 			this.decorations = Lists.newArrayList();
 
 			this.decorations.add(new WorldDecorationSimple(2, GenerationAether.blue_skyroot_tree));
-			this.decorations.add(new WorldDecorationSimple(2, GenerationAether.green_skyroot_tree));
+			this.decorations.add(new WorldDecorationSimple(2, GenerationAether.green_skyroot_tree, GenerationAether.green_skyroot_small_pine));
 			this.decorations.add(new WorldDecorationSimple(2, GenerationAether.green_skyroot_oak));
-			this.decorations.add(new WorldDecorationSimple(2, GenerationAether.green_skyroot_small_pine));
 			this.decorations.add(new WorldDecorationSimple(2, GenerationAether.golden_oak));
 			this.decorations.add(new WorldDecorationSimple(1, GenerationAether.skyroot_moa_nest_tree_1));
-			this.decorations.add(new WorldDecorationSimple(1, GenerationAether.golden_aercloud, 0.06F)
+			this.decorations.add(new WorldDecorationSimple(1, 0.06F, GenerationAether.golden_aercloud)
 			{
 				@Override
 				public BlockPos findPositionToPlace(World world, Random rand, BlockPos pos)
