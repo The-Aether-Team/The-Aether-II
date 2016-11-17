@@ -33,7 +33,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Collection;
 import java.util.List;
 
-public class BlockHolystone extends Block implements IBlockVariants, ISkyrootMinable
+public class BlockHolystone extends Block implements IBlockVariants
 {
 	public static final BlockVariant
 			NORMAL_HOLYSTONE = new BlockVariant(0, "normal"),
@@ -133,21 +133,4 @@ public class BlockHolystone extends Block implements IBlockVariants, ISkyrootMin
 
 		super.harvestBlock(world, player, pos, state, te, stack);
 	}
-
-	@Override
-	public boolean canBlockDropDoubles(EntityLivingBase player, ItemStack stack, IBlockState state)
-	{
-		return true;
-	}
-
-	@Override
-	public Collection<ItemStack> getAdditionalDrops(World world, BlockPos pos, IBlockState state, EntityLivingBase living)
-	{
-		List<ItemStack> drops = Lists.newArrayList();
-
-		drops.add(new ItemStack(state.getBlock().getItemDropped(state, living.getRNG(), 0)));
-
-		return drops;
-	}
-
 }
