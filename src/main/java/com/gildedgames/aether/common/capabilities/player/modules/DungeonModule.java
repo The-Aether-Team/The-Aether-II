@@ -30,11 +30,9 @@ public class DungeonModule extends PlayerAetherModule
 	@Override
 	public void onPlaceBlock(BlockEvent.PlaceEvent event)
 	{
-		if (this.getPlayer() instanceof EntityPlayerMP && !this.getPlayer().capabilities.isCreativeMode)
+		if (!event.getPlayer().capabilities.isCreativeMode)
 		{
-			EntityPlayerMP player = (EntityPlayerMP) this.getPlayer();
-
-			if (player.getServerWorld().provider.getDimensionType() == DimensionsAether.SLIDER_LABYRINTH)
+			if (event.getPlayer().getEntityWorld().provider.getDimensionType() == DimensionsAether.SLIDER_LABYRINTH)
 			{
 				if (!(event.getPlacedBlock().getBlock() instanceof BlockTorch))
 				{
@@ -42,7 +40,7 @@ public class DungeonModule extends PlayerAetherModule
 
 					if (this.chatTimer.getTicksPassed() >= 160)
 					{
-						player.addChatComponentMessage(new TextComponentString("Hmm... Some strange force is preventing me from placing blocks."));
+						event.getPlayer().addChatComponentMessage(new TextComponentString("Hmm... Some strange force is preventing me from placing blocks."));
 
 						this.chatTimer.reset();
 					}
