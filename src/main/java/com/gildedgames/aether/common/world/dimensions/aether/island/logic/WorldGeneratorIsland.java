@@ -97,7 +97,7 @@ public class WorldGeneratorIsland
 					}
 				}
 
-				/*for (double y = minY + (height * 0.5); y < minY + height; y++)
+				for (double y = minY + (height * 0.5); y < minY + height; y++)
 				{
 					double stepY = y - minY - (height * 0.55);
 
@@ -120,19 +120,19 @@ public class WorldGeneratorIsland
 					{
 						//if (y < bottomMaxY + ((heightValue - 0.8) * topHeight))
 						//{
-						*//*if (y < bottomMaxY + 2)
+						/*if (y < bottomMaxY + 2)
 						{
 							primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.quicksoil.getDefaultState());
 						}
-						else*//*
+						else*/
 						{
-							//primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.holystone.getDefaultState());
+							primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.holystone.getDefaultState());
 						}
 						//}
 
 						//primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.holystone.getDefaultState());
 					}
-				}*/
+				}
 			}
 		}
 
