@@ -4,6 +4,7 @@ import com.gildedgames.aether.client.util.ItemModelBuilder;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPlanks;
+import com.gildedgames.aether.common.blocks.construction.BlockHolystoneBrick;
 import com.gildedgames.aether.common.blocks.containers.BlockAetherCraftingTable;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
@@ -42,6 +43,7 @@ public class ItemModelsAether
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.altar), 0, TileEntityAltar.class);
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.present), 0, TileEntityPresent.class);
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.icestone_cooler), 0, TileEntityIcestoneCooler.class);
+		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.masonry_bench), 0, TileEntityMasonryBench.class);
 	}
 
 	private static void registerModels()
@@ -162,7 +164,17 @@ public class ItemModelsAether
 				.add(BlockAetherPlanks.EARTHSHIFTER.getMeta(), "earthshifter_planks")
 				.add(BlockAetherPlanks.FROSTPINE.getMeta(), "frostpine_planks"));
 
-		registerItemModels(BlocksAether.holystone_brick, "holystone_brick");
+		registerItemModels(BlocksAether.holystone_brick, new ItemModelBuilder("holystone_bricks/")
+				.add(BlockHolystoneBrick.NORMAL.getMeta(), "normal")
+				.add(BlockHolystoneBrick.BASE_BRICKS.getMeta(), "base_bricks")
+				.add(BlockHolystoneBrick.BASE_PILLAR.getMeta(), "base_pillar")
+				.add(BlockHolystoneBrick.CAPSTONE_BRICKS.getMeta(), "capstone_bricks")
+				.add(BlockHolystoneBrick.CAPSTONE_PILLAR.getMeta(), "capstone_pillar")
+				.add(BlockHolystoneBrick.FLAGSTONES.getMeta(), "flagstones")
+				.add(BlockHolystoneBrick.HEADSTONE.getMeta(), "headstone")
+				.add(BlockHolystoneBrick.KEYSTONE.getMeta(), "keystone"));
+
+		registerItemModels(BlocksAether.holystone_pillar, "holystone_bricks/pillar");
 
 		registerItemModels(BlocksAether.quicksoil_glass, "quicksoil_glass");
 
@@ -381,6 +393,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.multiblock_dummy, "tesr");
 		registerItemModels(BlocksAether.present, "tesr");
 		registerItemModels(BlocksAether.icestone_cooler, "tesr");
+		registerItemModels(BlocksAether.masonry_bench, "tesr");
 
 		registerItemModels(ItemsAether.zanite_gloves, "accessories/zanite_gloves");
 		registerItemModels(ItemsAether.gravitite_gloves, "accessories/gravitite_gloves");

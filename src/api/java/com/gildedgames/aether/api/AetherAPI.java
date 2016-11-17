@@ -35,6 +35,8 @@ public class AetherAPI
 
 	public static ISimpleCraftingRegistry crafting() { return AetherAPI.services().getSimpleCraftingRegistry(); }
 
+	public static ISimpleCraftingRegistry masonry() { return AetherAPI.services().getMasonryRegistry(); }
+
 	public static void init(IAetherServices services)
 	{
 		AetherAPI.services = services;

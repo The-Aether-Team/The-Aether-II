@@ -45,7 +45,9 @@ public class BlocksAether
 
 	public static final BlockHolystone holystone = new BlockHolystone();
 
-	public static final Block holystone_brick = new BlockCustom(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2f);
+	public static final BlockHolystoneBrick holystone_brick = new BlockHolystoneBrick();
+
+	public static final BlockHolystonePillar holystone_pillar = new BlockHolystonePillar();
 
 	public static final BlockAercloud aercloud = new BlockAercloud();
 
@@ -238,6 +240,8 @@ public class BlocksAether
 
 	public static final Block wildcard = new BlockWildcard();
 
+	public static final BlockMasonryBench masonry_bench = new BlockMasonryBench();
+
 	public static void preInit()
 	{
 		registerBlock("aether_dirt", BlocksAether.aether_dirt.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.aether_dirt));
@@ -313,7 +317,9 @@ public class BlocksAether
 
 		registerBlock("sentry_stone", BlocksAether.sentry_stone.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.sentry_stone));
 
-		registerBlock("holystone_brick", BlocksAether.holystone_brick.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("holystone_brick", BlocksAether.holystone_brick.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.holystone_brick));
+
+		registerBlock("holystone_pillar", BlocksAether.holystone_pillar.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerBlock("holystone_furnace", BlocksAether.holystone_furnace.setCreativeTab(CreativeTabsAether.BLOCKS));
 
@@ -420,6 +426,8 @@ public class BlocksAether
 
 		registerBlock("wildcard", BlocksAether.wildcard);
 
+		registerBlock("masonry_bench", BlocksAether.masonry_bench.setCreativeTab(CreativeTabsAether.BLOCKS));
+
 		Blocks.FIRE.setFireInfo(BlocksAether.tall_aether_grass, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.aether_flower, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.orange_tree, 60, 100);
@@ -492,6 +500,7 @@ public class BlocksAether
 		aether_crafting_table.setHarvestLevel("axe", 0);
 		icestone_cooler.setHarvestLevel("axe", 0);
 		incubator.setHarvestLevel("axe", 0);
+		masonry_bench.setHarvestLevel("axe", 0);
 
 		zanite_block.setHarvestLevel("pickaxe", 1);
 		gravitite_block.setHarvestLevel("pickaxe", 2);

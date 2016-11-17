@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.items.properties.TemperatureProperties;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
+import com.gildedgames.aether.common.blocks.containers.BlockIcestoneCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.util.TickTimer;
@@ -51,7 +52,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 
         if (state.getBlock() == BlocksAether.icestone_cooler)
         {
-            return state.getValue(BlockAltar.PROPERTY_FACING);
+            return state.getValue(BlockIcestoneCooler.PROPERTY_FACING);
         }
 
         return EnumFacing.NORTH;

@@ -79,6 +79,8 @@ public class CommonProxy
 
 	private final SimpleCraftingRegistry simpleCraftingRegistry = new SimpleCraftingRegistry();
 
+	private final SimpleCraftingRegistry masonryRegistry = new SimpleCraftingRegistry();
+
 	private DungeonInstanceHandler dungeonInstanceHandler;
 
 	public void construct(FMLConstructionEvent event)
@@ -117,7 +119,6 @@ public class CommonProxy
 		AetherCore.srl().registerSerialization(8, IslandSector.class, new Instantiator(IslandSector.class));
 		AetherCore.srl().registerSerialization(9, IslandData.class, new Instantiator(IslandData.class));
 		AetherCore.srl().registerSerialization(10, ItemSlot.class, new Instantiator(ItemSlot.class));
-		AetherCore.srl().registerSerialization(11, SimpleRecipe.class, new Instantiator(SimpleRecipe.class));
 	}
 
 	public void init(FMLInitializationEvent event)
@@ -242,6 +243,8 @@ public class CommonProxy
 	}
 
 	public SimpleCraftingRegistry getSimpleCraftingRegistry() { return this.simpleCraftingRegistry; }
+
+	public SimpleCraftingRegistry getMasonryRegistry() { return this.masonryRegistry; }
 
 	public void setExtendedReachDistance(EntityPlayer entity, float distance)
 	{

@@ -1,7 +1,52 @@
 {
 	"variants": {
-		"normal": {
-			"model": "aether:holystone_brick"
-		}
+		"variant=normal": [
+			{ "model": "aether:holystone_bricks/normal" },
+			{ "model": "aether:holystone_bricks/normal", "y": 90 },
+			{ "model": "aether:holystone_bricks/normal", "y": 180 },
+			{ "model": "aether:holystone_bricks/normal", "y": 270 }
+		],
+		"variant=base_bricks": [
+			{ "model": "aether:holystone_bricks/base_bricks" },
+			{ "model": "aether:holystone_bricks/base_bricks", "y": 90 },
+			{ "model": "aether:holystone_bricks/base_bricks", "y": 180 },
+			{ "model": "aether:holystone_bricks/base_bricks", "y": 270 }
+		],
+		"variant=base_pillar": [
+			{ "model": "aether:holystone_bricks/base_pillar" },
+			{ "model": "aether:holystone_bricks/base_pillar", "y": 90 },
+			{ "model": "aether:holystone_bricks/base_pillar", "y": 180 },
+			{ "model": "aether:holystone_bricks/base_pillar", "y": 270 }
+		],
+		"variant=capstone_bricks": [
+			{ "model": "aether:holystone_bricks/capstone_bricks" },
+			{ "model": "aether:holystone_bricks/capstone_bricks", "y": 90 },
+			{ "model": "aether:holystone_bricks/capstone_bricks", "y": 180 },
+			{ "model": "aether:holystone_bricks/capstone_bricks", "y": 270 }
+		],
+		"variant=capstone_pillar": [
+			{ "model": "aether:holystone_bricks/capstone_pillar" },
+			{ "model": "aether:holystone_bricks/capstone_pillar", "y": 90 },
+			{ "model": "aether:holystone_bricks/capstone_pillar", "y": 180 },
+			{ "model": "aether:holystone_bricks/capstone_pillar", "y": 270 }
+		],
+		"variant=flagstones": [
+			{ "model": "aether:holystone_bricks/flagstones" },
+			{ "model": "aether:holystone_bricks/flagstones", "y": 90 },
+			{ "model": "aether:holystone_bricks/flagstones", "y": 180 },
+			{ "model": "aether:holystone_bricks/flagstones", "y": 270 }
+		],
+		"variant=headstone": [
+			{ "model": "aether:holystone_bricks/headstone" },
+			{ "model": "aether:holystone_bricks/headstone", "y": 90 },
+			{ "model": "aether:holystone_bricks/headstone", "y": 180 },
+			{ "model": "aether:holystone_bricks/headstone", "y": 270 }
+		],
+		"variant=keystone": [
+			{ "model": "aether:holystone_bricks/keystone" },
+			{ "model": "aether:holystone_bricks/keystone", "y": 90 },
+			{ "model": "aether:holystone_bricks/keystone", "y": 180 },
+			{ "model": "aether:holystone_bricks/keystone", "y": 270 }
+		]
 	}
 }

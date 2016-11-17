@@ -1,0 +1,14 @@
+{
+	"variants": {
+		"axis=y": {
+			"model": "aether:holystone_bricks/pillar"
+		},
+		"axis=z": {
+			"model": "aether:holystone_bricks/pillar_side"
+		},
+		"axis=x": {
+			"model": "aether:holystone_bricks/pillar_side",
+			"y": 90
+		}
+	}
+}

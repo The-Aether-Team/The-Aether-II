@@ -22,4 +22,6 @@ public interface IAetherServices
 
 	ISimpleCraftingRegistry getSimpleCraftingRegistry();
 
+	ISimpleCraftingRegistry getMasonryRegistry();
+
 }

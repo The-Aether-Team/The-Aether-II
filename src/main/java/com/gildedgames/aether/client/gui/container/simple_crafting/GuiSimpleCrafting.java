@@ -3,6 +3,7 @@ package com.gildedgames.aether.client.gui.container.simple_crafting;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.registry.simple_crafting.ISimpleRecipe;
 import com.gildedgames.aether.api.registry.simple_crafting.ISimpleRecipeGroup;
+import com.gildedgames.aether.client.gui.IExtendedGui;
 import com.gildedgames.aether.client.util.gui.GuiUtil;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.ContainerSimpleCrafting;
@@ -37,7 +38,7 @@ import java.util.Collections;
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
-public class GuiSimpleCrafting extends GuiContainer
+public class GuiSimpleCrafting extends GuiContainer implements IExtendedGui
 {
 
 	private static final ResourceLocation CRAFTING_TABLE_GUI_TEXTURES = new ResourceLocation("textures/gui/container/crafting_table.png");
@@ -493,6 +494,18 @@ public class GuiSimpleCrafting extends GuiContainer
 
 			this.scrollTo(this.currentScroll);
 		}
+	}
+
+	@Override
+	public void setHoveredDescription(String desc)
+	{
+		this.hoverDescription = desc;
+	}
+
+	@Override
+	public String getHoveredDescription()
+	{
+		return this.hoverDescription;
 	}
 
 }

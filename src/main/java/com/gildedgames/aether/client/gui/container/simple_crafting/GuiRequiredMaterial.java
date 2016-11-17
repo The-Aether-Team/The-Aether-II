@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.gui.container.simple_crafting;
 
+import com.gildedgames.aether.client.gui.IExtendedGui;
 import com.gildedgames.aether.client.util.gui.GuiUtil;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
 import net.minecraft.client.Minecraft;
@@ -70,7 +71,6 @@ public class GuiRequiredMaterial extends GuiButton
 			RenderHelper.disableStandardItemLighting();
 			GlStateManager.disableRescaleNormal();
 
-
 			GlStateManager.pushMatrix();
 			GlStateManager.translate(0.0F, 0.0F, 300.0F);
 
@@ -87,11 +87,10 @@ public class GuiRequiredMaterial extends GuiButton
 			{
 				GuiScreen gui = Minecraft.getMinecraft().currentScreen;
 
-				if (gui instanceof GuiSimpleCrafting)
+				if (gui instanceof IExtendedGui)
 				{
-					GuiSimpleCrafting crafting = (GuiSimpleCrafting)gui;
-
-					crafting.hoverDescription = I18n.format(this.stack.getDisplayName());
+					IExtendedGui extendedGui = (IExtendedGui)gui;
+					extendedGui.setHoveredDescription(I18n.format(this.stack.getDisplayName()));
 				}
 			}
 

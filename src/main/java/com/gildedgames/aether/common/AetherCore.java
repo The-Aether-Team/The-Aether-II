@@ -201,4 +201,10 @@ public class AetherCore implements IAetherServices
 		return AetherCore.PROXY.getSimpleCraftingRegistry();
 	}
 
+	@Override
+	public ISimpleCraftingRegistry getMasonryRegistry()
+	{
+		return AetherCore.PROXY.getMasonryRegistry();
+	}
+
 }

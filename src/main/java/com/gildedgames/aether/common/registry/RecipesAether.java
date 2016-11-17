@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.registry.simple_crafting.ISimpleRecipe;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPlanks;
+import com.gildedgames.aether.common.blocks.construction.BlockHolystoneBrick;
 import com.gildedgames.aether.common.blocks.containers.BlockAetherCraftingTable;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
@@ -30,7 +31,7 @@ import java.util.List;
 public class RecipesAether
 {
 
-	private static int nextId;
+	private static int nextId, nextIdMasonry;
 
 	private static boolean hasInit;
 
@@ -45,6 +46,15 @@ public class RecipesAether
 		{
 			return;
 		}
+
+		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.BASE_BRICKS.getMeta()), new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.BASE_PILLAR.getMeta()), new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.CAPSTONE_BRICKS.getMeta()), new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.CAPSTONE_PILLAR.getMeta()), new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.FLAGSTONES.getMeta()), new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.HEADSTONE.getMeta()), new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.KEYSTONE.getMeta()), new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.holystone_pillar), new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.NORMAL.getMeta()));
 
 		List<ISimpleRecipe> recipes = Lists.newArrayList();
 
@@ -127,6 +137,7 @@ public class RecipesAether
 		}
 
 		AetherAPI.crafting().finalizeRecipes();
+		AetherAPI.masonry().finalizeRecipes();
 
 		hasInit = true;
 	}
@@ -134,6 +145,11 @@ public class RecipesAether
 	private static void add(ItemStack result, Object... required)
 	{
 		AetherAPI.crafting().registerRecipe(nextId++, new SimpleRecipe(result, required));
+	}
+
+	private static void addMasonry(ItemStack result, Object... required)
+	{
+		AetherAPI.masonry().registerRecipe(nextIdMasonry++, new SimpleRecipe(result, required));
 	}
 
 }
