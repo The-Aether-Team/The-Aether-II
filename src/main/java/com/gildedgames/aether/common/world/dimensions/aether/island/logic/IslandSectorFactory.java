@@ -24,15 +24,17 @@ public class IslandSectorFactory
 		{
 			final int sectorArea = IslandSector.CHUNK_WIDTH_PER_SECTOR * 16;
 
-			int width = 320;
-			int height = 320;
+			int width = 640;
+			int height = 120 + rand.nextInt(60);
+			int length = 640;
 
 			int x = (sectorArea * sectorX);
-			int y = (sectorArea * sectorY);
+			int y = 10;
+			int z = (sectorArea * sectorY);
 
-			Rectangle bounds = new Rectangle(x, y, width, height);
+			Rectangle bounds = new Rectangle(x, z, width, length);
 
-			IslandData islandData = new IslandData(bounds, 10, 100 + rand.nextInt(20), BiomesAether.HIGHLANDS);
+			IslandData islandData = new IslandData(bounds, y, height, BiomesAether.HIGHLANDS);
 
 			data[i] = islandData;
 		}

@@ -20,10 +20,10 @@ public class WorldGeneratorIslandNew
 
 	private final World world;
 
-	public WorldGeneratorIslandNew(World world, Random rand)
+	public WorldGeneratorIslandNew(World world)
 	{
 		this.world = world;
-		this.rand = rand;
+		this.rand = new Random(world.getSeed());
 
 		this.noiseFields = new double[9][];
 
@@ -50,7 +50,14 @@ public class WorldGeneratorIslandNew
 		final int dimY = 32;
 		final int dimYPlusOne = dimY + 1;
 
+		double width = (double) data.getBounds().width;
+		double height = data.getHeight();
+		double length = (double) data.getBounds().height;
+
 		this.noiseFields[0] = this.initializeNoiseField(this.noiseFields[0], chunkX * dimXZ, 0, chunkZ * dimXZ, dimXZPlusOne, dimYPlusOne, dimXZPlusOne);
+
+		int posX = chunkX * 16;
+		int posZ = chunkZ * 16;
 
 		for (int x = 0; x < dimXZ; x++)
 		{
@@ -87,7 +94,7 @@ public class WorldGeneratorIslandNew
 							for (int zIter = 0; zIter < 8; zIter++)
 							{
 								int blockX = xIter + x * 8;
-								int blockY = yIter + y * 4;
+								int blockY = 40 + (yIter + y * 4);
 								int blockZ = zIter + z * 8;
 
 								IBlockState fillBlock = Blocks.AIR.getDefaultState();
@@ -102,7 +109,22 @@ public class WorldGeneratorIslandNew
 
 								double value = d15 - (dist / 300);*/
 
-								if (d15 > -15.8D)
+								double stepX = (double) posX + blockX;
+								double stepZ = (double) posZ + blockZ;
+
+								double nx = (stepX + data.getBounds().getMinX()) / 300.0; // normalize coords
+								double nz = (stepZ + data.getBounds().getMinY()) / 300.0;
+
+								//double flat = GenUtil.octavedNoise(this.simplex, 4, 0.7D, 2.5D, nx, nz);
+
+								double distNX = ((stepX - data.getBounds().getMinX()) / width) - 0.5; // Subtract sector coords from nx/ny so that the noise is within range of the island center
+								double distNZ = ((stepZ - data.getBounds().getMinY()) / length) - 0.5;
+
+								double dist = 2.0 * Math.sqrt((distNX * distNX) + (distNZ * distNZ)); // Get distance from center of Island
+
+								//d15 = (d15 + 0.0) - (0.7 * Math.pow(dist, 4));
+
+								if (d15 - (25 * dist) > -15.8D)
 								{
 									fillBlock = BlocksAether.holystone.getDefaultState();
 								}

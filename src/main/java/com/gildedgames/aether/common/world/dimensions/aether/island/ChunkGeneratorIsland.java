@@ -2,10 +2,7 @@ package com.gildedgames.aether.common.world.dimensions.aether.island;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherCaves;
-import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
-import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSector;
-import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSectorAccess;
-import com.gildedgames.aether.common.world.dimensions.aether.island.logic.WorldGeneratorIsland;
+import com.gildedgames.aether.common.world.dimensions.aether.island.logic.*;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -195,14 +192,20 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 		{
 			for (int z = 0; z < 16; z++)
 			{
-				IslandData island = sector.getIslandDataAtBlockPos(posX + x, posZ + z);
+				List<IslandData> islands = sector.getIslandDataAtBlockPos(posX + x, posZ + z);
 
-				if (island == null || islandsToGenerate.contains(island))
+				if (islands.size() <= 0)
 				{
 					continue;
 				}
 
-				islandsToGenerate.add(island);
+				for (IslandData data : islands)
+				{
+					if (!islandsToGenerate.contains(data))
+					{
+						islandsToGenerate.add(data);
+					}
+				}
 
 				/*int islandWidth = (int)island.getBounds().getMinX();
 				int islandHeight = (int)island.getBounds().getMinY();

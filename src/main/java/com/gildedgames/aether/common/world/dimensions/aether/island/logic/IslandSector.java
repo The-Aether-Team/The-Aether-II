@@ -2,12 +2,15 @@ package com.gildedgames.aether.common.world.dimensions.aether.island.logic;
 
 import com.gildedgames.aether.common.util.io.NBTHelper;
 import com.gildedgames.aether.api.util.NBT;
+import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;
+
+import java.util.List;
 
 public class IslandSector implements NBT
 {
 
-	public final static int CHUNK_WIDTH_PER_SECTOR = 20;
+	public final static int CHUNK_WIDTH_PER_SECTOR = 40;
 
 	private int sectorX, sectorY;
 
@@ -35,17 +38,19 @@ public class IslandSector implements NBT
 		return this.data;
 	}
 
-	public IslandData getIslandDataAtBlockPos(int x, int y)
+	public List<IslandData> getIslandDataAtBlockPos(int x, int y)
 	{
-		for (IslandData data : this.data)
+		List<IslandData> data = Lists.newArrayList();
+
+		for (IslandData island : this.data)
 		{
-			if (data != null && data.getBounds().intersects(x, y, 1, 1))
+			if (island != null && island.getBounds().intersects(x, y, 1, 1) && !data.contains(island))
 			{
-				return data;
+				data.add(island);
 			}
 		}
 
-		return null;
+		return data;
 	}
 
 	public int getSectorX()

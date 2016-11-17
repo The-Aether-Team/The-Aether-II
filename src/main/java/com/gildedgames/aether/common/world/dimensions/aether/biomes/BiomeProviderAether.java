@@ -82,11 +82,16 @@ public class BiomeProviderAether extends BiomeProvider
 
 				if (sector != null)
 				{
-					IslandData island = sector.getIslandDataAtBlockPos(posX, posZ);
+					List<IslandData> islands = sector.getIslandDataAtBlockPos(posX, posZ);
 
-					if (island != null)
+					if (islands.size() > 0)
 					{
-						biomes[index] = island.getBiome();
+						IslandData island = islands.get(0);
+
+						if (island != null)
+						{
+							biomes[index] = island.getBiome();
+						}
 					}
 				}
 			}

@@ -58,6 +58,15 @@ public class IslandSectorAccess
 
 	public IslandData getIslandIfOnlyOne(World world, BlockPos pos)
 	{
+		List<IslandData> islandsToGen = this.getAllIslands(world, pos);
+
+		boolean oneIslandOnly = islandsToGen.size() == 1;
+
+		return oneIslandOnly ? islandsToGen.get(0) : null;
+	}
+
+	public List<IslandData> getAllIslands(World world, BlockPos pos)
+	{
 		int chunkX = pos.getX() >> 4;
 		int chunkZ = pos.getZ() >> 4;
 
@@ -71,26 +80,30 @@ public class IslandSectorAccess
 			return null;
 		}
 
-		final List<IslandData> islands = Lists.newArrayList();
+		final List<IslandData> islandsToGen = Lists.newArrayList();
 
 		for (int x = 0; x < 16; x++)
 		{
 			for (int z = 0; z < 16; z++)
 			{
-				IslandData island = sector.getIslandDataAtBlockPos(pos.getX() + x, pos.getZ() + z);
+				List<IslandData> islands = sector.getIslandDataAtBlockPos(pos.getX() + x, pos.getZ() + z);
 
-				if (island == null || islands.contains(island))
+				if (islands.size() <= 0)
 				{
 					continue;
 				}
 
-				islands.add(island);
+				for (IslandData data : islands)
+				{
+					if (!islandsToGen.contains(data))
+					{
+						islandsToGen.add(data);
+					}
+				}
 			}
 		}
 
-		boolean oneIslandOnly = islands.size() == 1;
-
-		return oneIslandOnly ? islands.get(0) : null;
+		return islandsToGen;
 	}
 
 	public IslandSector attemptToLoadSector(World world, int sectorX, int sectorY)

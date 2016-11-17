@@ -32,29 +32,31 @@ public class WorldGeneratorIsland
 		{
 			for (double z = 0; z < 16; z++)
 			{
-				double stepX = (double) posX - data.getBounds().getX() + x;
-				double stepZ = (double) posZ - data.getBounds().getY() + z;
+				double stepX = (double) posX + x;
+				double stepZ = (double) posZ + z;
 
-				double nx = (stepX) / width - 0.5 + (double) sector.getSectorX(); // normalize coords
-				double nz = (stepZ) / length - 0.5 + (double) sector.getSectorY();
+				double nx = (stepX + data.getBounds().getMinX()) / 300.0; // normalize coords
+				double nz = (stepZ + data.getBounds().getMinY()) / 300.0;
 
 				//double flat = GenUtil.octavedNoise(this.simplex, 4, 0.7D, 2.5D, nx, nz);
 
-				double distNX = nx - (double) sector.getSectorX(); // Subtract sector coords from nx/ny so that the noise is within range of the island center
-				double distNZ = nz - (double) sector.getSectorY();
+				double distNX = ((stepX - data.getBounds().getMinX()) / width) - 0.5; // Subtract sector coords from nx/ny so that the noise is within range of the island center
+				double distNZ = ((stepZ - data.getBounds().getMinY()) / length) - 0.5;
 
 				double noise1 = this.simplex.eval(nx, nz);
 				double noise2 = 0.5 * this.simplex.eval(nx * 8D, nz * 8D);
 				double noise3 = 0.25 * this.simplex.eval(nx * 16D, nz * 16D);
 				double noise4 = 0.1 * this.simplex.eval(nx * 32D, nz * 32D);
 
-				double value = (noise1 + noise2 + noise3 + noise4) / 3.0D;
+				double value = (noise1 + noise2 + noise3 + noise4) / 4.0;
 
 				double dist = 2.0 * Math.sqrt((distNX * distNX) + (distNZ * distNZ)); // Get distance from center of Island
 
+				//value = Math.pow(value, 1.1);
+
 				value = (value + 0.0) - (0.7 * Math.pow(dist, 4)); // Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
 
-				value -= dist * 0.2;
+				//value -= dist * 0.2;
 
 				double heightValue = value + 1.0;
 
@@ -119,7 +121,7 @@ public class WorldGeneratorIsland
 						}
 						else*/
 						{
-							primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.holystone.getDefaultState());
+							//primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.holystone.getDefaultState());
 						}
 						//}
 

@@ -43,6 +43,8 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensio
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 
+import java.util.List;
+
 public class PlayerAetherEvents
 {
 	@SubscribeEvent
@@ -245,10 +247,23 @@ public class PlayerAetherEvents
 
 			if (bedPos == null)
 			{
-				IslandData island = IslandSectorAccess.inst().getIslandIfOnlyOne(mp.worldObj, aePlayer.getDeathPos());
+				List<IslandData> islands = IslandSectorAccess.inst().getAllIslands(mp.worldObj, aePlayer.getDeathPos());
 
-				boolean shouldSpawnAtHenge = island != null && island.getMysteriousHengePos() != null;
+				boolean shouldSpawnAtHenge = false;
 				boolean obstructed = false;
+
+				IslandData island = null;
+
+				for (IslandData data : islands)
+				{
+					if (data != null && data.getMysteriousHengePos() != null)
+					{
+						shouldSpawnAtHenge = true;
+						island = data;
+
+						break;
+					}
+				}
 
 				BlockPos pos = null;
 

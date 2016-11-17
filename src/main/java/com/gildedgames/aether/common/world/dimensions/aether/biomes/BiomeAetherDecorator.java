@@ -124,14 +124,20 @@ public class BiomeAetherDecorator
 		{
 			for (z = 0; z < 16; z++)
 			{
-				IslandData island = sector.getIslandDataAtBlockPos(pos.getX() + x, pos.getZ() + z);
+				List<IslandData> islands = sector.getIslandDataAtBlockPos(pos.getX() + x, pos.getZ() + z);
 
-				if (island == null || islandsToGenerate.contains(island))
+				if (islands.size() <= 0)
 				{
 					continue;
 				}
 
-				islandsToGenerate.add(island);
+				for (IslandData data : islands)
+				{
+					if (!islandsToGenerate.contains(data))
+					{
+						islandsToGenerate.add(data);
+					}
+				}
 			}
 		}
 
