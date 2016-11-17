@@ -120,7 +120,6 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		this.tasks.addTask(3, new EntityAIWander(this, 0.50F));
 		this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(5, new EntityAILookIdle(this));
-		this.tasks.addTask(6, new EntityAIMate(this, 0.65F));
 		this.tasks.addTask(8, new AIAnimalPack(this, 0.55F));
 		this.tasks.addTask(12, new AIAvoidEntityAsChild(this, EntityPlayer.class, 5.0F, 0.3D, 0.3D));
 		this.tasks.addTask(14, new EntityAIAttackMelee(this, 0.7D, true));
@@ -522,26 +521,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	@Override
 	public EntityAgeable createChild(EntityAgeable matingAnimal)
 	{
-		if (matingAnimal instanceof EntityMoa)
-		{
-			EntityMoa mate = (EntityMoa) matingAnimal;
-
-			/*if (this.getGender() == AnimalGender.FEMALE)
-			{
-				this.tasks.addTask(2, new AIMoaLayEgg(this, this.getSeed(), mate.getSeed(), 0.35F));
-			}*/
-
-			this.setGrowingAge(6000);
-			mate.setGrowingAge(6000);
-			this.resetInLove();
-
-			this.setAttackTarget(null);
-			mate.setAttackTarget(null);
-
-			mate.resetInLove();
-		}
-
-		return null;
+		return new EntityMoa(this.worldObj);
 	}
 
 	@Override
