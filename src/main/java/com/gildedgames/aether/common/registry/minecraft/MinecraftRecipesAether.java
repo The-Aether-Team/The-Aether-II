@@ -20,6 +20,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.RecipeSorter;
 
 public class MinecraftRecipesAether implements IAltarRecipeRegistry
@@ -94,7 +95,7 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 
 		// Skyroot Bed
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_bed), "XXX", "YYY",
-				'X', new ItemStack(Blocks.WOOL),
+				'X', new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE),
 				'Y', new ItemStack(BlocksAether.aether_planks));
 
 		// Skyroot Chest
@@ -116,22 +117,6 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 		// Arkenium Strip
 		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_strip, 4), "X", "X",
 				'X', new ItemStack(ItemsAether.arkenium));
-
-		// Skyroot Frame Quicksoil Glass
-		registerShapelessRecipe(new ItemStack(BlocksAether.skyroot_frame_quicksoil_glass, 1),
-				new ItemStack(BlocksAether.quicksoil_glass), new ItemStack(ItemsAether.skyroot_stick));
-
-		// Skyroot Frame Scatterglass
-		registerShapelessRecipe(new ItemStack(BlocksAether.skyroot_frame_scatterglass, 1),
-				new ItemStack(BlocksAether.scatterglass), new ItemStack(ItemsAether.skyroot_stick));
-
-		// Arkenium Frame Quicksoil Glass
-		registerShapelessRecipe(new ItemStack(BlocksAether.arkenium_frame_quicksoil_glass, 1),
-				new ItemStack(BlocksAether.quicksoil_glass), new ItemStack(ItemsAether.arkenium_strip));
-
-		// Arkenium Frame Scatterglass
-		registerShapelessRecipe(new ItemStack(BlocksAether.arkenium_frame_scatterglass, 1),
-				new ItemStack(BlocksAether.scatterglass), new ItemStack(ItemsAether.arkenium_strip));
 
 		// Skyroot Door
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_door, 3), "XX", "XX", "XX",

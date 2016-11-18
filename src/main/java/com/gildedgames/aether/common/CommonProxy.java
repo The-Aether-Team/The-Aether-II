@@ -7,7 +7,6 @@ import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.api.registry.cooler.ITemperatureRegistry;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentProperties;
 import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
-import com.gildedgames.aether.api.registry.simple_crafting.ISimpleCraftingRegistry;
 import com.gildedgames.aether.api.registry.tab.ITabRegistry;
 import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
@@ -19,7 +18,6 @@ import com.gildedgames.aether.common.capabilities.player.ItemSlot;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherEvents;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.containers.tab.TabRegistryImpl;
-import com.gildedgames.aether.common.recipes.simple.SimpleRecipe;
 import com.gildedgames.aether.common.registry.*;
 import com.gildedgames.aether.common.entities.BossProcessor;
 import com.gildedgames.aether.common.entities.EntitiesAether;
@@ -147,7 +145,7 @@ public class CommonProxy
 
 	public void postInit(FMLPostInitializationEvent event)
 	{
-		RecipesAether.preInit();
+		SimpleRecipesAether.preInit();
 	}
 
 	public void serverStarting(FMLServerStartingEvent event)

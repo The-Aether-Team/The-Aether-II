@@ -28,25 +28,20 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.List;
 
-public class RecipesAether
+public class SimpleRecipesAether
 {
 
 	private static int nextId, nextIdMasonry;
 
 	private static boolean hasInit;
 
-	private RecipesAether()
+	private SimpleRecipesAether()
 	{
 
 	}
-
-	public static void preInit()
+	
+	private static void registerMasonryRecipes()
 	{
-		if (hasInit)
-		{
-			return;
-		}
-
 		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.BASE_BRICKS.getMeta()), new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.NORMAL.getMeta()));
 		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.BASE_PILLAR.getMeta()), new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.NORMAL.getMeta()));
 		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.CAPSTONE_BRICKS.getMeta()), new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.NORMAL.getMeta()));
@@ -56,6 +51,22 @@ public class RecipesAether
 		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.KEYSTONE.getMeta()), new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.NORMAL.getMeta()));
 		addMasonry(new ItemStack(BlocksAether.holystone_pillar), new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.NORMAL.getMeta()));
 
+		addMasonry(new ItemStack(BlocksAether.skyroot_frame_quicksoil_glass), new ItemStack(BlocksAether.quicksoil_glass));
+		addMasonry(new ItemStack(BlocksAether.skyroot_frame_scatterglass), new ItemStack(BlocksAether.scatterglass));
+
+		addMasonry(new ItemStack(BlocksAether.arkenium_frame_quicksoil_glass), new ItemStack(BlocksAether.quicksoil_glass));
+		addMasonry(new ItemStack(BlocksAether.arkenium_frame_scatterglass), new ItemStack(BlocksAether.scatterglass));
+	}
+
+	public static void preInit()
+	{
+		if (hasInit)
+		{
+			return;
+		}
+
+		registerMasonryRecipes();
+		
 		List<ISimpleRecipe> recipes = Lists.newArrayList();
 
 		top: for (IRecipe recipe : CraftingManager.getInstance().getRecipeList())
