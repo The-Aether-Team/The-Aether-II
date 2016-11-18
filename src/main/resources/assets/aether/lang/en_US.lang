@@ -167,6 +167,7 @@ tile.aether.holystone_pillar.name=Holystone Pillar
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
+item.aether.cloudwool.name=Cloudwool
 item.aether.ambrosium_shard.name=Ambrosium Shard
 item.aether.ambrosium_chunk.name=Ambrosium Chunk
 item.aether.zanite_gemstone.name=Zanite Gemstone

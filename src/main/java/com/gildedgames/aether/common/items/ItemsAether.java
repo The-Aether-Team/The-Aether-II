@@ -115,6 +115,8 @@ public class ItemsAether
 
 	public static final Item skyroot_stick = new Item();
 
+	public static final Item cloudwool = new Item();
+
 	public static final Item ambrosium_shard = new Item(),
 			ambrosium_chunk = new ItemAmbrosiumChunk(),
 			zanite_gemstone = new Item(),
@@ -472,6 +474,7 @@ public class ItemsAether
 	public static void preInit()
 	{
 		registerItem("skyroot_stick", skyroot_stick.setCreativeTab(CreativeTabsAether.MATERIALS));
+
 		registerItem("ambrosium_shard", ambrosium_shard.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("ambrosium_chunk", ambrosium_chunk.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("zanite_gemstone", zanite_gemstone.setCreativeTab(CreativeTabsAether.MATERIALS));
@@ -481,6 +484,7 @@ public class ItemsAether
 		registerItem("arkenium_ore_item", arkenium_ore.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("gravitite_ore_item", gravitite_ore.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("gravitite_plate", gravitite_plate.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("cloudwool", cloudwool.setCreativeTab(CreativeTabsAether.MATERIALS));
 
 		registerItem("skyroot_axe", skyroot_axe);
 		registerItem("skyroot_pickaxe", skyroot_pickaxe);

@@ -184,6 +184,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.wall_skyroot_sign, "tesr");
 
 		registerItemModels(ItemsAether.skyroot_stick, "skyroot_stick");
+		registerItemModels(ItemsAether.cloudwool, "cloudwool");
 		registerItemModels(ItemsAether.golden_amber, "golden_amber");
 
 		registerItemModels(ItemsAether.ambrosium_shard, "ambrosium_shard");
