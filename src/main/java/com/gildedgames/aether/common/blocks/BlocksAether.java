@@ -49,6 +49,10 @@ public class BlocksAether
 
 	public static final BlockHolystonePillar holystone_pillar = new BlockHolystonePillar();
 
+	public static final BlockFadedHolystoneBrick faded_holystone_brick = new BlockFadedHolystoneBrick();
+
+	public static final BlockFadedHolystonePillar faded_holystone_pillar = new BlockFadedHolystonePillar();
+
 	public static final BlockAercloud aercloud = new BlockAercloud();
 
 	public static final BlockAmbrosiumOre ambrosium_ore = new BlockAmbrosiumOre();
@@ -320,6 +324,10 @@ public class BlocksAether
 		registerBlock("holystone_brick", BlocksAether.holystone_brick.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.holystone_brick));
 
 		registerBlock("holystone_pillar", BlocksAether.holystone_pillar.setCreativeTab(CreativeTabsAether.BLOCKS));
+
+		registerBlock("faded_holystone_brick", BlocksAether.faded_holystone_brick.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.faded_holystone_brick));
+
+		registerBlock("faded_holystone_pillar", BlocksAether.faded_holystone_pillar.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerBlock("holystone_furnace", BlocksAether.holystone_furnace.setCreativeTab(CreativeTabsAether.BLOCKS));
 

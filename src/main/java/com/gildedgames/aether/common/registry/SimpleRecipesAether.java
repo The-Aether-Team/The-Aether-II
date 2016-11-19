@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.registry.simple_crafting.ISimpleRecipe;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPlanks;
+import com.gildedgames.aether.common.blocks.construction.BlockFadedHolystoneBrick;
 import com.gildedgames.aether.common.blocks.construction.BlockHolystoneBrick;
 import com.gildedgames.aether.common.blocks.containers.BlockAetherCraftingTable;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
@@ -17,6 +18,7 @@ import com.gildedgames.aether.common.recipes.simple.OreDictionaryRequirement;
 import com.gildedgames.aether.common.recipes.simple.SimpleRecipe;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
 import com.google.common.collect.Lists;
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -50,6 +52,16 @@ public class SimpleRecipesAether
 		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.HEADSTONE.getMeta()), new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.NORMAL.getMeta()));
 		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.KEYSTONE.getMeta()), new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.NORMAL.getMeta()));
 		addMasonry(new ItemStack(BlocksAether.holystone_pillar), new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneBrick.NORMAL.getMeta()), new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.NORMAL.getMeta()));
+
+		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneBrick.BASE_BRICKS.getMeta()), new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneBrick.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneBrick.BASE_PILLAR.getMeta()), new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneBrick.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneBrick.CAPSTONE_BRICKS.getMeta()), new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneBrick.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneBrick.CAPSTONE_PILLAR.getMeta()), new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneBrick.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneBrick.FLAGSTONES.getMeta()), new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneBrick.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneBrick.HEADSTONE.getMeta()), new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneBrick.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneBrick.KEYSTONE.getMeta()), new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneBrick.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.faded_holystone_pillar), new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneBrick.NORMAL.getMeta()));
 
 		addMasonry(new ItemStack(BlocksAether.skyroot_frame_quicksoil_glass), new ItemStack(BlocksAether.quicksoil_glass));
 		addMasonry(new ItemStack(BlocksAether.skyroot_frame_scatterglass), new ItemStack(BlocksAether.scatterglass));

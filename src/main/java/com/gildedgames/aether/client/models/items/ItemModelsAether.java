@@ -4,6 +4,7 @@ import com.gildedgames.aether.client.util.ItemModelBuilder;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPlanks;
+import com.gildedgames.aether.common.blocks.construction.BlockFadedHolystoneBrick;
 import com.gildedgames.aether.common.blocks.construction.BlockHolystoneBrick;
 import com.gildedgames.aether.common.blocks.containers.BlockAetherCraftingTable;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
@@ -175,6 +176,18 @@ public class ItemModelsAether
 				.add(BlockHolystoneBrick.KEYSTONE.getMeta(), "keystone"));
 
 		registerItemModels(BlocksAether.holystone_pillar, "holystone_bricks/pillar");
+
+		registerItemModels(BlocksAether.faded_holystone_brick, new ItemModelBuilder("faded_holystone_bricks/")
+				.add(BlockFadedHolystoneBrick.NORMAL.getMeta(), "normal")
+				.add(BlockFadedHolystoneBrick.BASE_BRICKS.getMeta(), "base_bricks")
+				.add(BlockFadedHolystoneBrick.BASE_PILLAR.getMeta(), "base_pillar")
+				.add(BlockFadedHolystoneBrick.CAPSTONE_BRICKS.getMeta(), "capstone_bricks")
+				.add(BlockFadedHolystoneBrick.CAPSTONE_PILLAR.getMeta(), "capstone_pillar")
+				.add(BlockFadedHolystoneBrick.FLAGSTONES.getMeta(), "flagstones")
+				.add(BlockFadedHolystoneBrick.HEADSTONE.getMeta(), "headstone")
+				.add(BlockFadedHolystoneBrick.KEYSTONE.getMeta(), "keystone"));
+
+		registerItemModels(BlocksAether.faded_holystone_pillar, "faded_holystone_bricks/pillar");
 
 		registerItemModels(BlocksAether.quicksoil_glass, "quicksoil_glass");
 

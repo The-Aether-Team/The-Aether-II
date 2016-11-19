@@ -164,6 +164,15 @@ tile.aether.holystone_brick.capstone_pillar.name=Holystone Capstone Pillar
 tile.aether.holystone_brick.flagstones.name=Holystone Flagstones
 tile.aether.holystone_brick.headstone.name=Holystone Headstone
 tile.aether.holystone_pillar.name=Holystone Pillar
+tile.aether.faded_holystone_brick.normal.name=Faded Holystone Brick
+tile.aether.faded_holystone_brick.base_bricks.name=Faded Holystone Base Bricks
+tile.aether.faded_holystone_brick.base_pillar.name=Faded Holystone Base Pillar
+tile.aether.faded_holystone_brick.keystone.name=Faded Holystone Keystone
+tile.aether.faded_holystone_brick.capstone_bricks.name=Faded Holystone Capstone Bricks
+tile.aether.faded_holystone_brick.capstone_pillar.name=Faded Holystone Capstone Pillar
+tile.aether.faded_holystone_brick.flagstones.name=Faded Holystone Flagstones
+tile.aether.faded_holystone_brick.headstone.name=Faded Holystone Headstone
+tile.aether.faded_holystone_pillar.name=Faded Holystone Pillar
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick

@@ -1,0 +1,28 @@
+{
+	"variants": {
+		"variant=normal": [
+			{ "model": "aether:faded_holystone_bricks/normal" }
+		],
+		"variant=base_bricks": [
+			{ "model": "aether:faded_holystone_bricks/base_bricks" }
+		],
+		"variant=base_pillar": [
+			{ "model": "aether:faded_holystone_bricks/base_pillar" }
+		],
+		"variant=capstone_bricks": [
+			{ "model": "aether:faded_holystone_bricks/capstone_bricks" }
+		],
+		"variant=capstone_pillar": [
+			{ "model": "aether:faded_holystone_bricks/capstone_pillar" }
+		],
+		"variant=flagstones": [
+			{ "model": "aether:faded_holystone_bricks/flagstones" }
+		],
+		"variant=headstone": [
+			{ "model": "aether:faded_holystone_bricks/headstone" }
+		],
+		"variant=keystone": [
+			{ "model": "aether:faded_holystone_bricks/keystone" }
+		]
+	}
+}
