@@ -37,6 +37,12 @@ public class TemplatesAether
 
 	public static Template mysterious_henge;
 
+	public static Template kura_tree_1, kura_tree_2, kura_tree_3, kura_tree_4, kura_tree_5;
+
+	public static Template large_kura_tree_1;
+
+	public static Template kura_bush_1, kura_bush_2, kura_bush_3, kura_bush_4;
+
 	private TemplatesAether()
 	{
 
@@ -100,6 +106,19 @@ public class TemplatesAether
 		end_portal = register("end_portal");
 
 		mysterious_henge = register("mysterious_henge");
+
+		kura_tree_1 = register("kura/trees/small/kura_tree_1");
+		kura_tree_2 = register("kura/trees/small/kura_tree_2");
+		kura_tree_3 = register("kura/trees/small/kura_tree_3");
+		kura_tree_4 = register("kura/trees/small/kura_tree_4");
+		kura_tree_5 = register("kura/trees/small/kura_tree_5");
+
+		large_kura_tree_1 = register("kura/trees/large/large_kura_tree_1");
+
+		kura_bush_1 = register("kura/trees/small/kura_bush_1");
+		kura_bush_2 = register("kura/trees/small/kura_bush_2");
+		kura_bush_3 = register("kura/trees/small/kura_bush_3");
+		kura_bush_4 = register("kura/trees/small/kura_bush_4");
 	}
 
 	private static Template register(String resource)

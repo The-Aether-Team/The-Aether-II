@@ -13,10 +13,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockWovenSticks;
+import com.gildedgames.aether.common.blocks.natural.plants.*;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -53,8 +50,8 @@ public class ItemModelsAether
 				.add(BlockAetherDirt.PERMAFROST.getMeta(), "permafrost"));
 
 		registerItemModels(BlocksAether.aether_grass, new ItemModelBuilder("grass/")
-				.add(BlockAetherGrass.AETHER_GRASS.getMeta(), "aether_grass")
-				.add(BlockAetherGrass.ENCHANTED_AETHER_GRASS.getMeta(), "enchanted_aether_grass")
+				.add(BlockAetherGrass.AETHER.getMeta(), "aether_grass")
+				.add(BlockAetherGrass.ENCHANTED.getMeta(), "enchanted_aether_grass")
 				.add(BlockAetherGrass.FROSTROOT.getMeta(), "frostroot")
 				.add(BlockAetherGrass.BLIGHTED.getMeta(), "blighted_aether_grass"));
 
@@ -152,7 +149,10 @@ public class ItemModelsAether
 
 		registerItemModels(ItemsAether.skyroot_bed, "skyroot_bed");
 
-		registerItemModels(BlocksAether.tall_aether_grass, "tall_aether_grass");
+		registerItemModels(BlocksAether.tall_aether_grass, new ItemModelBuilder("tall_grass/")
+				.add(BlockTallAetherGrass.SHORT.getMeta(), "short_aether")
+				.add(BlockTallAetherGrass.NORMAL.getMeta(), "normal_aether")
+				.add(BlockTallAetherGrass.LONG.getMeta(), "long_aether"));
 
 		registerItemModels(BlocksAether.orange_tree, "orange_tree");
 

@@ -15,6 +15,6 @@ public class TemplateConditions
 			REPLACEABLE_GROUND = new ReplaceablePlacementCondition(true, Material.GROUND, Material.GRASS),
 			UNDERGROUND_ENTRANCE = new UndergroundEntrancePlacementCondition(),
 			UNDERGROUND_PLACEMENT = new UndergroundPlacementCondition(),
-			ON_SOIL = new OnSpecificBlockPlacementCondition(BlocksAether.aether_grass.getDefaultState(), BlocksAether.aether_dirt.getDefaultState(), BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.COARSE_DIRT)),
+			ON_SOIL = new OnSpecificBlockPlacementCondition(BlocksAether.aether_grass, BlocksAether.aether_dirt),
 			IGNORE_QUICKSOIL = new IgnoreBlockPlacementCondition(BlocksAether.quicksoil.getDefaultState());
 }

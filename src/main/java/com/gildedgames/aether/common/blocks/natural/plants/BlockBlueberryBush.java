@@ -106,7 +106,7 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVarian
 		IBlockState stateUnderneath = world.getBlockState(pos.down());
 
 		boolean applyBonus = stateUnderneath.getBlock() == BlocksAether.aether_grass
-				&& stateUnderneath.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED_AETHER_GRASS;
+				&& stateUnderneath.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED;
 
 		int count = random.nextInt(2) + (applyBonus ? 2 : 1);
 

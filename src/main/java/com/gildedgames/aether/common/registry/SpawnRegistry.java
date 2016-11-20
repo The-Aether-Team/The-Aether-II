@@ -56,7 +56,7 @@ public class SpawnRegistry
 		SpawnHandler animals = new SpawnHandler("aether_animals").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(200);
 		animals.worldCondition(new CheckDimension(DimensionsAether.AETHER));
 
-		PosCondition grassCheck = new CheckBlockStateUnderneath(BlocksAether.aether_grass.getDefaultState(), BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED_AETHER_GRASS));
+		PosCondition grassCheck = new CheckBlockStateUnderneath(BlocksAether.aether_grass.getDefaultState(), BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED));
 
 		SpawnEntry flying_cow = new SpawnEntry(EntityFlyingCow.class, 10F, 2, 3).conditiion(grassCheck);
 		SpawnEntry ram = new SpawnEntry(EntityKirrid.class, 10F, 2, 3).conditiion(grassCheck);
@@ -74,7 +74,7 @@ public class SpawnRegistry
 		SpawnHandler hostiles = new SpawnHandler("aether_hostiles").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(1200);
 		hostiles.worldCondition(new CheckDimension(DimensionsAether.AETHER));
 
-		PosCondition groundCheck = new CheckBlockStateUnderneath(BlocksAether.aether_grass.getDefaultState(), BlocksAether.holystone.getDefaultState(), BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED_AETHER_GRASS));
+		PosCondition groundCheck = new CheckBlockStateUnderneath(BlocksAether.aether_grass.getDefaultState(), BlocksAether.holystone.getDefaultState(), BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED));
 
 		SpawnEntry zephyr = new SpawnEntry(EntityZephyr.class, 3F, 2, 3, new FlyingPositionSelector()).conditiion(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState()));
 		SpawnEntry tempest = new SpawnEntry(EntityTempest.class, 10F, 2, 3, new FlyingPositionSelector()).conditiion(new CheckTime(CheckTime.Time.NIGHT)).conditiion(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState()));

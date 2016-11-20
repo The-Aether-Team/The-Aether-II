@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.world.GenUtil;
 import com.gildedgames.aether.common.world.biome.Ecosystem;
 import com.gildedgames.aether.common.world.biome.WorldDecoration;
 import com.google.common.collect.Lists;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -43,6 +44,8 @@ public abstract class BiomeAetherBase extends Biome
 
 		this.setRegistryName(registryName);
 	}
+
+	public abstract IBlockState getCoastalBlock();
 
 	public void registerEcosystem(Ecosystem ecosystem)
 	{

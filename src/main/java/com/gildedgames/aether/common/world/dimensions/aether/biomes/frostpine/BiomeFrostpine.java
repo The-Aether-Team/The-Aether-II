@@ -9,6 +9,7 @@ import com.gildedgames.aether.common.world.dimensions.aether.biomes.BiomeAetherB
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherFlowers;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenTemplate;
 import com.gildedgames.aether.common.world.gen.TemplatePipeline;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
 public class BiomeFrostpine extends BiomeAetherBase
@@ -30,6 +31,12 @@ public class BiomeFrostpine extends BiomeAetherBase
 		this.fillerBlock = BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.PERMAFROST);
 
 		this.templatePipeline = new TemplatePipeline();
+	}
+
+	@Override
+	public IBlockState getCoastalBlock()
+	{
+		return BlocksAether.quicksoil.getDefaultState();
 	}
 
 	/*@Override

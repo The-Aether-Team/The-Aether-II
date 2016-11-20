@@ -12,6 +12,7 @@ import com.gildedgames.aether.common.world.dimensions.aether.features.trees.Worl
 import com.gildedgames.aether.common.world.dimensions.aether.features.trees.WorldGenMassiveSkyrootTree;
 import com.gildedgames.aether.common.world.dimensions.aether.features.trees.WorldGenSkyrootTree;
 import net.minecraft.block.BlockLog;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.biome.Biome;
 
 public class BiomeEnchantedForest extends BiomeAetherBase
@@ -35,7 +36,13 @@ public class BiomeEnchantedForest extends BiomeAetherBase
 		super(new Biome.BiomeProperties("Enchanted Forest").setRainDisabled().setTemperature(0.5f), AetherCore.getResource("aether_enchanted_forest"));
 
 		this.biomeDecorator.generateBushes = false;
-		this.topBlock = BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED_AETHER_GRASS);
+		this.topBlock = BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED);
+	}
+
+	@Override
+	public IBlockState getCoastalBlock()
+	{
+		return BlocksAether.quicksoil.getDefaultState();
 	}
 
 	/*@Override

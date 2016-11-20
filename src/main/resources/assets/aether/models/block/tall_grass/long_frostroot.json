@@ -1,6 +1,6 @@
 {
 	"parent": "block/tinted_cross",
 	"textures": {
-		"cross": "aether:blocks/tall_blighted_aether_grass"
+		"cross": "aether:blocks/tall_grass/long_frostroot"
 	}
 }

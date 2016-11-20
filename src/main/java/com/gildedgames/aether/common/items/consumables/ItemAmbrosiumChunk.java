@@ -19,11 +19,11 @@ public class ItemAmbrosiumChunk extends Item
 	{
 		IBlockState state = world.getBlockState(pos);
 
-		if (state.getBlock() == BlocksAether.aether_grass && state.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.AETHER_GRASS)
+		if (state.getBlock() == BlocksAether.aether_grass && state.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.AETHER)
 		{
 			if (player.canPlayerEdit(pos, side, stack))
 			{
-				world.setBlockState(pos, BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED_AETHER_GRASS));
+				world.setBlockState(pos, BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED));
 
 				if (!player.capabilities.isCreativeMode)
 				{

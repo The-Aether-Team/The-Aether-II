@@ -262,7 +262,7 @@ public class BiomeAetherDecorator
 			z = random.nextInt(16) + 8;
 			y = this.nextInt(random, world.getHeight(pos.add(x, 0, z)).getY() * 2);
 
-			GenerationAether.aether_grass.generate(world, random, pos.add(x, y, z));
+			//GenerationAether.short_aether_grass.generate(world, random, pos.add(x, y, z));
 		}
 
 		// Purple Flowers Generator

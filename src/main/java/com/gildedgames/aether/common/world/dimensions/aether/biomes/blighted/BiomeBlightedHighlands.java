@@ -9,6 +9,7 @@ import com.gildedgames.aether.common.world.dimensions.aether.features.trees.Worl
 import com.gildedgames.aether.common.world.dimensions.aether.features.trees.WorldGenMassiveSkyrootTree;
 import com.gildedgames.aether.common.world.dimensions.aether.features.trees.WorldGenSkyrootTree;
 import net.minecraft.block.BlockLog;
+import net.minecraft.block.state.IBlockState;
 
 public class BiomeBlightedHighlands extends BiomeAetherBase
 {
@@ -28,6 +29,12 @@ public class BiomeBlightedHighlands extends BiomeAetherBase
 		super(new BiomeProperties("Blighted Highlands").setRainDisabled().setTemperature(0.5f), AetherCore.getResource("aether_blighted_highlands"));
 
 		this.topBlock = BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.BLIGHTED);
+	}
+
+	@Override
+	public IBlockState getCoastalBlock()
+	{
+		return BlocksAether.quicksoil.getDefaultState();
 	}
 
 	/*@Override

@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.world.gen.templates.conditions;
 
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenTemplate;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -10,14 +9,14 @@ import net.minecraft.world.gen.structure.template.Template;
 
 import java.util.List;
 
-public class OnSpecificBlockPlacementCondition implements WorldGenTemplate.PlacementCondition
+public class OnSpecificBlockStatePlacementCondition implements WorldGenTemplate.PlacementCondition
 {
 
-	private Block[] blocks;
+	private IBlockState[] states;
 
-	public OnSpecificBlockPlacementCondition(Block... blocks)
+	public OnSpecificBlockStatePlacementCondition(IBlockState... states)
 	{
-		this.blocks = blocks;
+		this.states = states;
 	}
 
 	@Override
@@ -27,11 +26,11 @@ public class OnSpecificBlockPlacementCondition implements WorldGenTemplate.Place
 		{
 			BlockPos down = block.pos.down();
 
-			Block blockDown = world.getBlockState(down).getBlock();
+			IBlockState state = world.getBlockState(down);
 
-			for (Block s : this.blocks)
+			for (IBlockState s : this.states)
 			{
-				if (s == blockDown)
+				if (s == state)
 				{
 					return true;
 				}

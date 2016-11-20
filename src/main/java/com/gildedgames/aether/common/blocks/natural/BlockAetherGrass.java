@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.blocks.natural;
 import java.util.List;
 import java.util.Random;
 
-import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
@@ -14,9 +13,7 @@ import com.gildedgames.aether.common.world.dimensions.aether.features.trees.Worl
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
-import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -25,23 +22,22 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockAetherGrass extends BlockGrass implements IBlockVariants
 {
-	public static final BlockVariant AETHER_GRASS = new BlockVariant(0, "normal"),
-			ENCHANTED_AETHER_GRASS = new BlockVariant(1, "enchanted"),
-			FROSTROOT = new BlockVariant(2, "frostroot"),
-			BLIGHTED = new BlockVariant(3, "blighted");
+	public static final BlockVariant AETHER = new BlockVariant(0, "normal"),
+			ENCHANTED = new BlockVariant(1, "enchanted"),
+			KURA = new BlockVariant(2, "kura"),
+			FROSTROOT = new BlockVariant(3, "frostroot"),
+			BLIGHTED = new BlockVariant(4, "blighted");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", AETHER_GRASS, ENCHANTED_AETHER_GRASS);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", AETHER, ENCHANTED);
 
 	public static final PropertyBool SNOWY = PropertyBool.create("snowy");
 
@@ -54,7 +50,7 @@ public class BlockAetherGrass extends BlockGrass implements IBlockVariants
 		this.setHardness(0.5F);
 		this.setTickRandomly(true);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, AETHER_GRASS).withProperty(SNOWY, Boolean.FALSE));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, AETHER).withProperty(SNOWY, Boolean.FALSE));
 	}
 
 	@Override
@@ -78,7 +74,7 @@ public class BlockAetherGrass extends BlockGrass implements IBlockVariants
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
-		if (!world.isRemote && state.getValue(PROPERTY_VARIANT) == AETHER_GRASS)
+		if (!world.isRemote && state.getValue(PROPERTY_VARIANT) == AETHER)
 		{
 			if (world.getLightFromNeighbors(pos.up()) < 4 && world.getBlockState(pos.up()).getLightOpacity(world, pos.up()) > 2)
 			{
@@ -98,7 +94,7 @@ public class BlockAetherGrass extends BlockGrass implements IBlockVariants
 						if (neighborState.getBlock() == BlocksAether.aether_dirt && neighborState.getValue(BlockAetherDirt.PROPERTY_VARIANT) == BlockAetherDirt.DIRT &&
 								world.getLightFromNeighbors(randomNeighbor.up()) >= 4 && aboveState.getLightOpacity(world, randomNeighbor.up()) <= 2)
 						{
-							IBlockState grassState = this.getDefaultState().withProperty(PROPERTY_VARIANT, AETHER_GRASS);
+							IBlockState grassState = this.getDefaultState().withProperty(PROPERTY_VARIANT, AETHER);
 
 							world.setBlockState(randomNeighbor, grassState);
 						}

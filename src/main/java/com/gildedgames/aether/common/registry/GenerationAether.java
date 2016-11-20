@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.registry;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.registry.content.TemplatesAether;
 import com.gildedgames.aether.common.world.dimensions.aether.features.*;
 import com.gildedgames.aether.common.world.dimensions.aether.features.aerclouds.WorldGenAercloud;
@@ -50,9 +51,17 @@ public class GenerationAether
 
 	public static WorldGenTemplateGroup skyroot_moa_nest, labyrinth_entrance;
 
-	public static WorldGenAetherTallGrass aether_grass;
+	public static WorldGenAetherTallGrass short_aether_grass, aether_grass, long_aether_grass;
 
 	public static WorldGenAercloud green_aercloud, golden_aercloud, storm_aercloud;
+
+	public static WorldGenTemplate kura_tree_1, kura_tree_2, kura_tree_3, kura_tree_4, kura_tree_5;
+
+	public static WorldGenTemplate large_kura_tree_1;
+
+	public static WorldGenTemplate kura_bush_1, kura_bush_2, kura_bush_3, kura_bush_4;
+
+	public static WorldGenTemplateGroup kura_tree, large_kura_tree, kura_bush;
 
 	private GenerationAether()
 	{
@@ -147,6 +156,19 @@ public class GenerationAether
 
 		mysterious_henge = new WorldGenTemplate(TemplatesAether.mysterious_henge, TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
 
+		kura_tree_1 = new WorldGenTemplate(TemplatesAether.kura_tree_1, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE);
+		kura_tree_2 = new WorldGenTemplate(TemplatesAether.kura_tree_2, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE);
+		kura_tree_3 = new WorldGenTemplate(TemplatesAether.kura_tree_3, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE);
+		kura_tree_4 = new WorldGenTemplate(TemplatesAether.kura_tree_4, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE);
+		kura_tree_5 = new WorldGenTemplate(TemplatesAether.kura_tree_5, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE);
+
+		large_kura_tree_1 = new WorldGenTemplate(TemplatesAether.large_kura_tree_1, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE_CANOPY);
+
+		kura_bush_1 = new WorldGenTemplate(TemplatesAether.kura_bush_1, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE_CANOPY);
+		kura_bush_2 = new WorldGenTemplate(TemplatesAether.kura_bush_2, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE_CANOPY);
+		kura_bush_3 = new WorldGenTemplate(TemplatesAether.kura_bush_3, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE_CANOPY);
+		kura_bush_4 = new WorldGenTemplate(TemplatesAether.kura_bush_4, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE_CANOPY);
+
 		blue_skyroot_tree = new WorldGenTemplateGroup(blue_skyroot_tree_1, blue_skyroot_tree_2, blue_skyroot_tree_3);
 		green_skyroot_tree = new WorldGenTemplateGroup(green_skyroot_tree_1, green_skyroot_tree_2, green_skyroot_tree_3);
 		golden_oak = new WorldGenTemplateGroup(golden_oak_1, golden_oak_2);
@@ -160,8 +182,13 @@ public class GenerationAether
 		labyrinth_ruins = new WorldGenTemplateGroup(labyrinth_ruins_1, labyrinth_ruins_2, labyrinth_ruins_3, labyrinth_ruins_4, labyrinth_ruins_5);
 		skyroot_moa_nest = new WorldGenTemplateGroup(skyroot_moa_nest_1, skyroot_moa_nest_2);
 		labyrinth_entrance = new WorldGenTemplateGroup(labyrinth_entrance_1);
+		kura_tree = new WorldGenTemplateGroup(kura_tree_1, kura_tree_2, kura_tree_3, kura_tree_4, kura_tree_5);
+		large_kura_tree = new WorldGenTemplateGroup(large_kura_tree_1);
+		kura_bush = new WorldGenTemplateGroup(kura_bush_1, kura_bush_2, kura_bush_3, kura_bush_4);
 
-		aether_grass = new WorldGenAetherTallGrass();
+		short_aether_grass = new WorldGenAetherTallGrass(BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.SHORT));
+		aether_grass = new WorldGenAetherTallGrass(BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.NORMAL));
+		long_aether_grass = new WorldGenAetherTallGrass(BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.LONG));
 
 		green_aercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.GREEN_AERCLOUD), 4, false);
 		golden_aercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.GOLDEN_AERCLOUD), 4, false);

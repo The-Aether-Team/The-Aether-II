@@ -19,9 +19,7 @@ public class BiomesAether
 	public static void preInit()
 	{
 		GameRegistry.register(HIGHLANDS);
-
 		GameRegistry.register(VOID);
-
 		GameRegistry.register(BIOME_SLIDER_LABYRINTH);
 	}
 }

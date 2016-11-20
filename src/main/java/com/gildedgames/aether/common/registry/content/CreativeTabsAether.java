@@ -40,7 +40,7 @@ public class CreativeTabsAether
     @SideOnly(Side.CLIENT)
 	public static void registerTabIcons()
 	{
-		BLOCKS.setDisplayStack(new ItemStack(BlocksAether.aether_grass, BlockAetherGrass.AETHER_GRASS.getMeta()));
+		BLOCKS.setDisplayStack(new ItemStack(BlocksAether.aether_grass, BlockAetherGrass.AETHER.getMeta()));
 		MATERIALS.setDisplayStack(new ItemStack(ItemsAether.ambrosium_shard));
 		TOOLS.setDisplayStack(new ItemStack(ItemsAether.zanite_pickaxe));
 		WEAPONS.setDisplayStack(new ItemStack(ItemsAether.gravitite_sword));

@@ -1,17 +1,23 @@
 package com.gildedgames.aether.common.world.dimensions.aether.island.logic;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.world.dimensions.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.noise.OpenSimplexNoise;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 
 public class WorldGeneratorIsland
 {
 
+	private final World world;
+
 	private final OpenSimplexNoise simplex;
 
 	public WorldGeneratorIsland(World world)
 	{
+		this.world = world;
 		this.simplex = new OpenSimplexNoise(world.getSeed());
 	}
 
@@ -30,6 +36,8 @@ public class WorldGeneratorIsland
 		double width = (double) data.getBounds().width;
 		double height = data.getHeight();
 		double length = (double) data.getBounds().height;
+
+		Biome biome = this.world.getBiome(new BlockPos(posX + 16, 0, posZ + 16));
 
 		double minY = data.getMinY();
 
@@ -76,7 +84,12 @@ public class WorldGeneratorIsland
 					{
 						if (heightValue < cutoffPoint + 0.05 && y == bottomMaxY - 1)
 						{
-							primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.quicksoil.getDefaultState());
+							if (biome instanceof BiomeAetherBase)
+							{
+								BiomeAetherBase aetherBiome = (BiomeAetherBase)biome;
+
+								primer.setBlockState((int) x, (int) y, (int) z, aetherBiome.getCoastalBlock());
+							}
 						}
 						else
 						{
@@ -88,7 +101,12 @@ public class WorldGeneratorIsland
 					{
 						if (heightValue < cutoffPoint + 0.05 && y < bottomMaxY + 1)
 						{
-							primer.setBlockState((int) x, (int) y, (int) z, BlocksAether.quicksoil.getDefaultState());
+							if (biome instanceof BiomeAetherBase)
+							{
+								BiomeAetherBase aetherBiome = (BiomeAetherBase)biome;
+
+								primer.setBlockState((int) x, (int) y, (int) z, aetherBiome.getCoastalBlock());
+							}
 						}
 						else
 						{

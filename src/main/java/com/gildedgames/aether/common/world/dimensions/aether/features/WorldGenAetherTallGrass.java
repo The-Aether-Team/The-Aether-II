@@ -12,9 +12,9 @@ public class WorldGenAetherTallGrass extends WorldGenerator
 {
 	private final IBlockState state;
 
-	public WorldGenAetherTallGrass()
+	public WorldGenAetherTallGrass(IBlockState state)
 	{
-		this.state = BlocksAether.tall_aether_grass.getDefaultState();
+		this.state = state;
 	}
 
 	@Override

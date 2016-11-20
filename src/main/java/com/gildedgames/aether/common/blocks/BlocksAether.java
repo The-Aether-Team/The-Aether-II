@@ -28,6 +28,7 @@ import com.gildedgames.aether.common.items.blocks.ItemBlockVariants;
 import com.google.common.collect.Lists;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -312,7 +313,7 @@ public class BlocksAether
 
 		registerBlock("aether_portal", BlocksAether.aether_portal);
 
-		registerBlock("tall_aether_grass", BlocksAether.tall_aether_grass.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("tall_aether_grass", BlocksAether.tall_aether_grass.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.tall_aether_grass));
 
 		registerBlock("blueberry_bush", BlocksAether.blueberry_bush.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.blueberry_bush));
 		//registerBlock("enchanted_blueberry_bush", BlocksAether.enchanted_blueberry_bush.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.enchanted_blueberry_bush));
