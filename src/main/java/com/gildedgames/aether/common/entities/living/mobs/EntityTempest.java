@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
 import com.gildedgames.aether.common.entities.ai.tempest.AIElectricShock;
 import com.gildedgames.aether.common.entities.util.flying.EntityFlyingMob;
-import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;

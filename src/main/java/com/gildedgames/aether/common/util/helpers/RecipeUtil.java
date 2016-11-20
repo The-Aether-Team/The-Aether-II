@@ -1,11 +1,8 @@
 package com.gildedgames.aether.common.util.helpers;
 
 import com.gildedgames.aether.api.registry.simple_crafting.ISimpleRecipe;
-import com.gildedgames.aether.common.items.tools.ItemSkyrootTool;
 import com.gildedgames.aether.common.recipes.simple.OreDictionaryRequirement;
-import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 

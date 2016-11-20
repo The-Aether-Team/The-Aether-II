@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.living.dungeon.util;
 
-import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.world.dungeon.DungeonDefinitions;
 import net.minecraft.block.Block;

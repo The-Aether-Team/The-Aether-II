@@ -20,7 +20,7 @@ import com.gildedgames.aether.client.ui.UiManager;
 import com.gildedgames.aether.client.ui.minecraft.viewing.MinecraftGuiViewer;
 import com.gildedgames.aether.common.CommonProxy;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
+import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import com.gildedgames.aether.common.util.structure.StructureInjectionEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;

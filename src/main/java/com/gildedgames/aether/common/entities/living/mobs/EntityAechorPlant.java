@@ -5,7 +5,7 @@ import com.gildedgames.aether.api.capabilites.entity.properties.IEntityPropertie
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.ai.EntityAIAechorPlantAttack;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.registry.minecraft.LootTablesAether;
+import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -23,7 +23,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

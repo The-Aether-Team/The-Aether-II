@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.items.armor;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
+import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;

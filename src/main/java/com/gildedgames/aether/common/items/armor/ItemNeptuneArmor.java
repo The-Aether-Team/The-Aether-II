@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.armor;
 
-import com.gildedgames.aether.common.registry.minecraft.MaterialsAether;
+import com.gildedgames.aether.common.registry.content.MaterialsAether;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 

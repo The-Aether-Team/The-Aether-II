@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.living.mounts;
 
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.registry.minecraft.LootTablesAether;
+import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;

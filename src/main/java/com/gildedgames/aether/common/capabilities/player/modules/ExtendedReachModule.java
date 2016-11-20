@@ -4,7 +4,6 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.tools.ItemValkyrieTool;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,6 +11,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 
 public class ExtendedReachModule extends PlayerAetherModule
 {
+	private static final Item[] ITEM_SET = new Item[] { ItemsAether.valkyrie_axe, ItemsAether.valkyrie_pickaxe, ItemsAether.valkyrie_shovel, ItemsAether.valkyrie_lance };
 
 	public ExtendedReachModule(PlayerAetherImpl playerAether)
 	{
@@ -30,11 +30,12 @@ public class ExtendedReachModule extends PlayerAetherModule
 
 		if (stack != null)
 		{
-			Item item = stack.getItem();
-
-			if (item instanceof ItemValkyrieTool || item == ItemsAether.valkyrie_lance)
+			for (Item item : ITEM_SET)
 			{
-				return 3.5f;
+				if (item == stack.getItem())
+				{
+					return 3.5f;
+				}
 			}
 		}
 

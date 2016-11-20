@@ -27,15 +27,7 @@ public class ReflectionAether
 	public static final ReflectionEntry X_SIZE = new ReflectionEntry("field_146999_f", "xSize");
 
 	public static final ReflectionEntry FONT_RENDERER_OBJ = new ReflectionEntry("field_146289_q", "fontRendererObj");
-
-	public static final ReflectionEntry TOOL_CLASS = new ReflectionEntry("toolClass");
-
-	public static final ReflectionEntry EFFECTIVE_ON_AXE = new ReflectionEntry("field_150917_c", "EFFECTIVE_ON");
-
-	public static final ReflectionEntry EFFECTIVE_ON_PICKAXE = new ReflectionEntry("field_150915_c", "EFFECTIVE_ON");
-
-	public static final ReflectionEntry EFFECTIVE_ON_SHOVEL = new ReflectionEntry("field_150916_c", "EFFECTIVE_ON");
-
+	
 	public static final ReflectionEntry ENTITY_ARROW_DAMAGE = new ReflectionEntry("field_70255_ao", "damage");
 
 	public static final ReflectionEntry IN_MORE_WORLD_OPTIONS_DISPLAY = new ReflectionEntry("field_146344_y", "inMoreWorldOptionsDisplay");
@@ -79,8 +71,6 @@ public class ReflectionAether
 	public static final ReflectionEntry INTEGRITY_INPUT = new ReflectionEntry("field_189826_B");
 
 	public static final ReflectionEntry SEED_INPUT = new ReflectionEntry("field_189827_C");
-
-	public static final ReflectionEntry EVENT_LISTENERS = new ReflectionEntry("field_73021_x", "eventListeners");
 
 	public static Field getField(Class clazz, String... names)
 	{

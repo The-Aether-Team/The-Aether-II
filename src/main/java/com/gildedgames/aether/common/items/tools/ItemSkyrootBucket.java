@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.items.tools;
 
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
+import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;

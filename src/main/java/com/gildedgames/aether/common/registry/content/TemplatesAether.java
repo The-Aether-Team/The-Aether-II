@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.registry;
+package com.gildedgames.aether.common.registry.content;
 
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.util.ResourceLocation;

@@ -2,19 +2,17 @@ package com.gildedgames.aether.common.entities.living.boss.slider;
 
 import com.gildedgames.aether.api.capabilites.entity.boss.IBoss;
 import com.gildedgames.aether.api.capabilites.entity.boss.IBossManager;
+import com.gildedgames.aether.api.loot.LootPool;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.entities.util.AetherSpawnEggInfo;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.misc.ItemAetherSpawnEgg;
-import com.gildedgames.aether.common.registry.LootDefinitions;
-import com.gildedgames.aether.api.loot.LootPool;
 import com.gildedgames.aether.common.entities.util.SimpleBossManager;
 import com.gildedgames.aether.common.entities.util.sliding.EntitySliding;
 import com.gildedgames.aether.common.entities.util.sliding.SlidingHorizontalMoveHelper;
-import com.gildedgames.aether.common.items.tools.EnumToolType;
-import com.gildedgames.aether.common.items.tools.ItemAetherTool;
-import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.misc.ItemAetherSpawnEgg;
+import com.gildedgames.aether.common.registry.LootDefinitions;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.tiles.TileEntityLabyrinthBridge;
 import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.aether.common.util.io.NBTHelper;
@@ -316,16 +314,6 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 			if (equippedItem.getItem() instanceof ItemPickaxe)
 			{
 				return true;
-			}
-
-			if (equippedItem.getItem() instanceof ItemAetherTool)
-			{
-				ItemAetherTool aetherTool = (ItemAetherTool) equippedItem.getItem();
-
-				if (aetherTool.getToolType() == EnumToolType.PICKAXE)
-				{
-					return true;
-				}
 			}
 
 			tipPrefix = "My " + equippedItem.getDisplayName() + " doesn't seem to hurt it. Maybe I need a pickaxe?";

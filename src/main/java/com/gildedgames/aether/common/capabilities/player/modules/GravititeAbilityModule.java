@@ -3,10 +3,11 @@ package com.gildedgames.aether.common.capabilities.player.modules;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
-import com.gildedgames.aether.common.items.tools.ItemGravititeTool;
+import com.gildedgames.aether.common.registry.content.MaterialsAether;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -40,19 +41,21 @@ public class GravititeAbilityModule extends PlayerAetherModule
 			{
 				ItemStack stack = this.getPlayer().getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
 
-				// Check if the player is still using a gravitite tool
-				if (!(stack != null && stack.getItem() instanceof ItemGravititeTool))
+				if (stack != null && stack.getItem() instanceof ItemTool && ((ItemTool) stack.getItem()).getToolMaterial() == MaterialsAether.GRAVITITE_TOOL)
 				{
-					this.heldBlock.setHoldingPlayer(null);
+					if (this.heldBlock.ticksExisted % 20 == 0)
+					{
+						// Does damage 2 damage/sec, increasing the amount of damage by 1 every 3 seconds,
+						// for a maximum of 8 damage/sec
+
+						int extra = (int) Math.floor(Math.min(6, this.heldBlock.ticksExisted / 60));
+
+						stack.damageItem(2 + extra, this.getPlayer());
+					}
 				}
-				else if (this.heldBlock.ticksExisted % 20 == 0)
+				else
 				{
-					// Does damage 2 damage/sec, increasing the amount of damage by 1 every 3 seconds,
-					// for a maximum of 8 damage/sec
-
-					int extra = (int) Math.floor(Math.min(6, this.heldBlock.ticksExisted / 60));
-
-					stack.damageItem(2 + extra, this.getPlayer());
+					this.dropHeldBlock();
 				}
 			}
 		}

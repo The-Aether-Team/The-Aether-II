@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.blocks.construction;
 
 import com.gildedgames.aether.client.renderer.particles.ParticleAetherPortal;
-import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import net.minecraft.block.Block;

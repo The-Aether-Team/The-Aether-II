@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.living.dungeon.labyrinth;
 
 import com.gildedgames.aether.common.entities.living.mobs.EntityAetherMob;
-import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AIPounceClose;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFloat;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFollowAttackTarget;
@@ -11,7 +11,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class EntityBattleSentry extends EntityAetherMob

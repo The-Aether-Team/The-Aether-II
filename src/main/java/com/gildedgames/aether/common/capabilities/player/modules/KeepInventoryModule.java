@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.capabilities.player.modules;
 import com.gildedgames.aether.common.capabilities.player.ItemSlot;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
-import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
+import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.io.NBTHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.item.ItemStack;

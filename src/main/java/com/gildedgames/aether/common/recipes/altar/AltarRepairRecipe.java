@@ -1,9 +1,8 @@
 package com.gildedgames.aether.common.recipes.altar;
 
 import com.gildedgames.aether.api.registry.altar.IAltarRecipe;
-import com.gildedgames.aether.common.registry.minecraft.MaterialsAether;
-import com.gildedgames.aether.common.items.tools.ItemAetherTool;
 import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
+import com.gildedgames.aether.common.registry.content.MaterialsAether;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -20,7 +19,7 @@ public class AltarRepairRecipe implements IAltarRecipe
 	@Override
 	public int getAmbrosiumCost(ItemStack stack)
 	{
-		if (stack.getItem() instanceof ItemAetherTool || stack.getItem() instanceof ItemAetherSword)
+		if (stack.getItem() instanceof ItemAetherSword)
 		{
 			return 6;
 		}

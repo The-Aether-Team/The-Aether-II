@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.registry.minecraft;
+package com.gildedgames.aether.common.registry.content;
 
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.util.ResourceLocation;
@@ -26,7 +26,7 @@ public class LootTablesAether
 
 	public static ResourceLocation ENTITY_AERBUNNY;
 
-	public static void init()
+	public static void preInit()
 	{
 		ENTITY_KIRRID_SHEARED = LootTableList.register(AetherCore.getResource("entities/kirrid/kirrid_sheared"));
 		ENTITY_KIRRID = LootTableList.register(AetherCore.getResource("entities/kirrid/kirrid"));

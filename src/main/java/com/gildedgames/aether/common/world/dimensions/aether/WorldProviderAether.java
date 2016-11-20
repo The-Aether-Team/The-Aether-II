@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world.dimensions.aether;
 
 import com.gildedgames.aether.client.util.NOOPRenderHandler;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
+import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.dimensions.aether.biomes.BiomeProviderAether;
 import com.gildedgames.aether.common.world.dimensions.aether.island.ChunkGeneratorIsland;
 import net.minecraft.entity.player.EntityPlayerMP;

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.dimensions.aether.biomes;
 
-import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
+import com.gildedgames.aether.common.registry.content.BiomesAether;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSector;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSectorAccess;

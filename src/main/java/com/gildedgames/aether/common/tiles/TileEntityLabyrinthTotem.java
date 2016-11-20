@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.client.sound.objects.LabyrinthTotemSound;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
+import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.tiles.multiblock.TileEntityMultiblockController;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
@@ -12,7 +12,6 @@ import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceHandl
 import com.gildedgames.aether.api.util.BlockPosDimension;
 import com.gildedgames.aether.api.capabilites.instances.IPlayerInstances;
 import com.gildedgames.aether.api.capabilites.instances.Instance;
-import com.gildedgames.aether.common.capabilities.instances.InstanceRegistryImpl;
 import com.gildedgames.aether.common.network.packets.PacketRegisterDimension;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

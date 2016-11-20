@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.entities.living.mobs;
 
 import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
-import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.entities.util.flying.EntityFlyingDayMob;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.dimensions.labyrinth;
 
-import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
-import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
+import com.gildedgames.aether.common.registry.content.BiomesAether;
+import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;

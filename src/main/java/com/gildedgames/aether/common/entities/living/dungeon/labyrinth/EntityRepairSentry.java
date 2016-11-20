@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.entities.living.dungeon.labyrinth;
 
 import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AIRepairProductionLines;
 import com.gildedgames.aether.common.entities.util.flying.EntityFlyingMob;
-import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;

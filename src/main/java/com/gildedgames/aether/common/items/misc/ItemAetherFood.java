@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.misc;
 
-import com.gildedgames.aether.common.registry.minecraft.CreativeTabsAether;
+import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.item.ItemFood;
 
 public class ItemAetherFood extends ItemFood

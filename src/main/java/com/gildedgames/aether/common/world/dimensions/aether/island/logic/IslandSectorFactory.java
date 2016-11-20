@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.dimensions.aether.island.logic;
 
-import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
+import com.gildedgames.aether.common.registry.content.BiomesAether;
 
 import java.awt.*;
 import java.util.Random;

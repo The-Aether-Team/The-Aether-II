@@ -18,6 +18,7 @@ import com.gildedgames.aether.common.capabilities.player.ItemSlot;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherEvents;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.containers.tab.TabRegistryImpl;
+import com.gildedgames.aether.common.items.tools.ItemToolHandler;
 import com.gildedgames.aether.common.registry.*;
 import com.gildedgames.aether.common.entities.BossProcessor;
 import com.gildedgames.aether.common.entities.EntitiesAether;
@@ -32,6 +33,7 @@ import com.gildedgames.aether.common.entities.util.SimpleBossManager;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.registry.content.*;
 import com.gildedgames.aether.common.registry.minecraft.*;
 import com.gildedgames.aether.common.tiles.TileEntitiesAether;
 import com.gildedgames.aether.common.util.TickTimer;
@@ -90,7 +92,9 @@ public class CommonProxy
 		BlocksAether.preInit();
 		ItemsAether.preInit();
 
-		LootTablesAether.init();
+		EquipmentContent.preInit();
+
+		LootTablesAether.preInit();
 
 		EntitiesAether.preInit();
 		TileEntitiesAether.preInit();
@@ -132,6 +136,7 @@ public class CommonProxy
 		MinecraftForge.EVENT_BUS.register(MountProcessor.class);
 		MinecraftForge.EVENT_BUS.register(EntityProperties.class);
 		MinecraftForge.EVENT_BUS.register(BossProcessor.class);
+		MinecraftForge.EVENT_BUS.register(ItemToolHandler.class);
 
 		MinecraftForge.EVENT_BUS.register(ItemSkyrootSword.class);
 
