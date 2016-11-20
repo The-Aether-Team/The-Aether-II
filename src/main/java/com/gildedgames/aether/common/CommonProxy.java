@@ -32,10 +32,7 @@ import com.gildedgames.aether.common.entities.util.SimpleBossManager;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.registry.minecraft.BiomesAether;
-import com.gildedgames.aether.common.registry.minecraft.DimensionsAether;
-import com.gildedgames.aether.common.registry.minecraft.MinecraftRecipesAether;
-import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
+import com.gildedgames.aether.common.registry.minecraft.*;
 import com.gildedgames.aether.common.tiles.TileEntitiesAether;
 import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
@@ -92,6 +89,8 @@ public class CommonProxy
 
 		BlocksAether.preInit();
 		ItemsAether.preInit();
+
+		LootTablesAether.init();
 
 		EntitiesAether.preInit();
 		TileEntitiesAether.preInit();

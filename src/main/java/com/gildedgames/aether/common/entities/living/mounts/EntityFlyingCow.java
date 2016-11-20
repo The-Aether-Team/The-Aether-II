@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.living.mounts;
 
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.registry.minecraft.LootTablesAether;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
@@ -14,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -77,18 +79,6 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 	}
 
 	@Override
-	protected int getItemQuantityDropped()
-	{
-		return 0;
-	}
-
-	@Override
-	protected Item getDropItem()
-	{
-		return null;
-	}
-
-	@Override
 	public EnumActionResult applyPlayerInteraction(EntityPlayer player, Vec3d vec, @Nullable ItemStack stack, EnumHand hand)
 	{
 		EnumActionResult result = super.applyPlayerInteraction(player, vec, stack, hand);
@@ -143,41 +133,9 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 	}
 
 	@Override
-	protected void dropFewItems(boolean p_70628_1_, int looting)
+	protected ResourceLocation getLootTable()
 	{
-		super.dropFewItems(p_70628_1_, looting);
-
-		int j = this.rand.nextInt(3) + this.rand.nextInt(1 + looting);
-		int k;
-
-		for (k = 0; k < j; ++k)
-		{
-			this.dropItem(Items.LEATHER, 1);
-		}
-
-		j = this.rand.nextInt(3) + 1 + this.rand.nextInt(1 + looting);
-
-		for (k = 0; k < j; ++k)
-		{
-			if (this.isBurning())
-			{
-				this.dropItem(Items.COOKED_BEEF, 1);
-			}
-			else
-			{
-				this.dropItem(Items.BEEF, 1);
-			}
-		}
-
-		if (this.getRNG().nextInt(3) == 0)
-		{
-			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(2) + 1);
-		}
-
-		if (this.getRNG().nextBoolean())
-		{
-			this.dropItem(Items.FEATHER, this.getRNG().nextInt(1) + 1);
-		}
+		return LootTablesAether.ENTITY_FLYING_COW;
 	}
 
 	@Override

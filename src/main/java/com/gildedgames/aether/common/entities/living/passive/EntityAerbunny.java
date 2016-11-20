@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.registry.minecraft.LootTablesAether;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.google.common.collect.Sets;
@@ -19,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -152,20 +154,9 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 	}
 
 	@Override
-	protected void dropFewItems(boolean var1, int var2)
+	protected ResourceLocation getLootTable()
 	{
-		this.dropItem(Items.STRING, 1);
-
-		if (this.getRNG().nextInt(3) == 0)
-		{
-			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(2) + 1);
-		}
-	}
-
-	@Override
-	public Item getDropItem()
-	{
-		return Items.STRING;
+		return LootTablesAether.ENTITY_AERBUNNY;
 	}
 
 	@Override

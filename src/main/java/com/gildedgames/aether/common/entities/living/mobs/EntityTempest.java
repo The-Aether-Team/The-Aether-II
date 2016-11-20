@@ -2,15 +2,16 @@ package com.gildedgames.aether.common.entities.living.mobs;
 
 import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
-import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.tempest.AIElectricShock;
 import com.gildedgames.aether.common.entities.util.flying.EntityFlyingMob;
+import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 public class EntityTempest extends EntityFlyingMob implements IEntityProperties
@@ -70,19 +71,19 @@ public class EntityTempest extends EntityFlyingMob implements IEntityProperties
 	}
 
 	@Override
-	protected net.minecraft.util.SoundEvent getAmbientSound()
+	protected SoundEvent getAmbientSound()
 	{
 		return SoundsAether.tempest_ambient;
 	}
 
 	@Override
-	protected net.minecraft.util.SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
 		return SoundsAether.tempest_hurt;
 	}
 
 	@Override
-	protected net.minecraft.util.SoundEvent getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
 		return SoundsAether.tempest_death;
 	}

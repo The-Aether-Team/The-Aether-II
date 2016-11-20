@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.registry.minecraft.LootTablesAether;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -12,6 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -131,18 +133,6 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 		}
 	}
 
-	@Override
-	protected int getItemQuantityDropped()
-	{
-		return (this.getSproutSize() / 3) + 1;
-	}
-
-	@Override
-	protected Item getDropItem()
-	{
-		return ItemsAether.wyndberry;
-	}
-
 	public boolean isFullyGrown()
 	{
 		return (this.getSproutSize() >= this.getMaxSproutSize());
@@ -168,6 +158,12 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 		this.dataManager.set(SIZE, newSize);
 
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8f + (newSize * 1.5f));
+	}
+
+	@Override
+	protected ResourceLocation getLootTable()
+	{
+		return LootTablesAether.ENTITY_CARRION_SPROUT;
 	}
 
 	@SideOnly(Side.CLIENT)

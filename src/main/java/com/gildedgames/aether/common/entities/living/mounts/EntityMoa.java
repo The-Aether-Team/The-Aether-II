@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.living.mounts;
 
 import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
+import com.gildedgames.aether.common.registry.minecraft.LootTablesAether;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.moa.*;
 import com.gildedgames.aether.common.entities.util.*;
@@ -29,6 +30,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -378,13 +380,12 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		{
 			this.dropItem(Items.SADDLE, 1);
 		}
+	}
 
-		if (this.getRNG().nextInt(3) == 0)
-		{
-			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(2) + 1);
-		}
-
-		this.dropItem(Items.FEATHER, this.getRNG().nextInt(2) + 2);
+	@Override
+	protected ResourceLocation getLootTable()
+	{
+		return LootTablesAether.ENTITY_MOA;
 	}
 
 	@Override

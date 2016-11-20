@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.living.mounts;
 
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.registry.minecraft.LootTablesAether;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
@@ -11,6 +12,7 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -73,32 +75,9 @@ public class EntityPhyg extends EntityFlyingAnimal
 	}
 
 	@Override
-	protected int getItemQuantityDropped()
+	protected ResourceLocation getLootTable()
 	{
-		return this.rand.nextInt(3);
-	}
-
-
-	@Override
-	protected void dropFewItems(boolean p_70628_1_, int looting)
-	{
-		super.dropFewItems(p_70628_1_, looting);
-
-		if (this.getRNG().nextInt(3) == 0)
-		{
-			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(2) + 1);
-		}
-
-		if (this.getRNG().nextBoolean())
-		{
-			this.dropItem(Items.FEATHER, this.getRNG().nextInt(1) + 1);
-		}
-	}
-
-	@Override
-	protected Item getDropItem()
-	{
-		return this.isBurning() ? Items.COOKED_PORKCHOP : Items.PORKCHOP;
+		return LootTablesAether.ENTITY_PHYG;
 	}
 
 	@Override

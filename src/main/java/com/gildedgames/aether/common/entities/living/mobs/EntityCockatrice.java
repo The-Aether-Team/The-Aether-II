@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.entities.living.mobs;
 import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.registry.minecraft.LootTablesAether;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceHide;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceSneakAttack;
@@ -20,6 +21,8 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 public class EntityCockatrice extends EntityAetherMob implements IEntityProperties
@@ -109,19 +112,19 @@ public class EntityCockatrice extends EntityAetherMob implements IEntityProperti
 	}
 
 	@Override
-	protected net.minecraft.util.SoundEvent getAmbientSound()
+	protected SoundEvent getAmbientSound()
 	{
 		return SoundsAether.cockatrice_ambient;
 	}
 
 	@Override
-	protected net.minecraft.util.SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
 		return SoundsAether.cockatrice_hurt;
 	}
 
 	@Override
-	protected net.minecraft.util.SoundEvent getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
 		return SoundsAether.cockatrice_death;
 	}
@@ -151,16 +154,9 @@ public class EntityCockatrice extends EntityAetherMob implements IEntityProperti
 	public void setAttacking(boolean isAttacking) { this.dataManager.set(EntityCockatrice.IS_ATTACKING, isAttacking); }
 
 	@Override
-	protected void dropFewItems(boolean p_70628_1_, int looting)
+	protected ResourceLocation getLootTable()
 	{
-		super.dropFewItems(p_70628_1_, looting);
-
-		if (this.getRNG().nextInt(3) == 0)
-		{
-			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(2) + 1);
-		}
-
-		this.dropItem(Items.FEATHER, this.getRNG().nextInt(2) + 1);
+		return LootTablesAether.ENTITY_COCKATRICE;
 	}
 
 	@Override

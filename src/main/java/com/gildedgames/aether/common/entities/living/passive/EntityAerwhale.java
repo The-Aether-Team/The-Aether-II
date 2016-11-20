@@ -2,8 +2,9 @@ package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
-import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.util.flying.EntityFlying;
+import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 public class EntityAerwhale extends EntityFlying implements IEntityProperties
@@ -35,19 +36,19 @@ public class EntityAerwhale extends EntityFlying implements IEntityProperties
 	}
 
 	@Override
-	protected net.minecraft.util.SoundEvent getAmbientSound()
+	protected SoundEvent getAmbientSound()
 	{
 		return SoundsAether.aerwhale_ambient;
 	}
 
 	@Override
-	protected net.minecraft.util.SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
 		return SoundsAether.aerwhale_ambient;
 	}
 
 	@Override
-	protected net.minecraft.util.SoundEvent getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
 		return SoundsAether.aerwhale_death;
 	}

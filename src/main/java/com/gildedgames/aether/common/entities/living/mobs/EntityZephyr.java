@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
 import com.gildedgames.aether.common.registry.minecraft.SoundsAether;
 import com.gildedgames.aether.common.entities.util.flying.EntityFlyingDayMob;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 public class EntityZephyr extends EntityFlyingDayMob implements IEntityProperties
@@ -19,19 +20,19 @@ public class EntityZephyr extends EntityFlyingDayMob implements IEntityPropertie
 	}
 
 	@Override
-	protected net.minecraft.util.SoundEvent getAmbientSound()
+	protected SoundEvent getAmbientSound()
 	{
 		return SoundsAether.zephyr_ambient;
 	}
 
 	@Override
-	protected net.minecraft.util.SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
 		return SoundsAether.zephyr_ambient;
 	}
 
 	@Override
-	protected net.minecraft.util.SoundEvent getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
 		return SoundsAether.zephyr_ambient;
 	}

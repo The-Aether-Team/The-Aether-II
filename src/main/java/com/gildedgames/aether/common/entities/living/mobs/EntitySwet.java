@@ -10,6 +10,7 @@ import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
 import com.gildedgames.aether.common.entities.ai.swet.AILeech;
 import com.gildedgames.aether.common.entities.util.EntityExtendedMob;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.registry.minecraft.LootTablesAether;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -199,13 +200,21 @@ public class EntitySwet extends EntityExtendedMob implements IEntityProperties
 	}
 
 	@Override
-	protected void dropFewItems(boolean var1, int var2)
+	protected ResourceLocation getLootTable()
 	{
-		ItemStack stack = new ItemStack(ItemsAether.swet_jelly, this.rand.nextInt(4) + 1, this.getType().ordinal());
-		this.entityDropItem(stack, 0f);
-
-		ItemStack sugar = new ItemStack(Items.SUGAR, this.rand.nextInt(4), 0);
-		this.entityDropItem(sugar, 0f);
+		switch (this.getType())
+		{
+		case BLUE:
+			return LootTablesAether.ENTITY_SWET_BLUE;
+		case GOLDEN:
+			return LootTablesAether.ENTITY_SWET_GOLDEN;
+		case DARK:
+			return LootTablesAether.ENTITY_SWET_DARK;
+		case LIGHT:
+			return LootTablesAether.ENTITY_SWET_LIGHT;
+		default:
+			return LootTablesAether.ENTITY_SWET;
+		}
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.entities.util.AetherSpawnEggInfo;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemAetherSpawnEgg;
+import com.gildedgames.aether.common.registry.minecraft.LootTablesAether;
 import com.google.common.collect.Sets;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.IEntityLivingData;
@@ -15,9 +16,11 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.loot.LootTableList;
 
 import javax.annotation.Nullable;
 import java.util.Set;
@@ -83,6 +86,17 @@ public class EntityKirrid extends EntitySheep
 		{
 			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(2) + 1);
 		}
+	}
+
+	@Nullable
+	protected ResourceLocation getLootTable()
+	{
+		if (this.getSheared())
+		{
+			return LootTablesAether.ENTITY_KIRRID_SHEARED;
+		}
+
+		return LootTablesAether.ENTITY_KIRRID;
 	}
 
 	@Override
