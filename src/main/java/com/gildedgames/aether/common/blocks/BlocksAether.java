@@ -53,6 +53,12 @@ public class BlocksAether
 
 	public static final BlockFadedHolystonePillar faded_holystone_pillar = new BlockFadedHolystonePillar();
 
+	public static final BlockAngelstone angelstone = new BlockAngelstone();
+
+	public static final BlockAngelstoneBrick angelstone_brick = new BlockAngelstoneBrick();
+
+	public static final BlockAngelstonePillar angelstone_pillar = new BlockAngelstonePillar();
+
 	public static final BlockAercloud aercloud = new BlockAercloud();
 
 	public static final BlockCloudwoolBlock cloudwool_block = new BlockCloudwoolBlock();
@@ -284,15 +290,29 @@ public class BlocksAether
 		//registerBlock("earthshifter_leaves", BlocksAether.earthshifter_leaves.setCreativeTab(CreativeTabsAether.BLOCKS));
 		//registerBlock("vined_earthshifter_leaves", BlocksAether.vined_earthshifter_leaves.setCreativeTab(CreativeTabsAether.BLOCKS));
 
+		registerBlock("quicksoil", BlocksAether.quicksoil.setCreativeTab(CreativeTabsAether.BLOCKS));
+
+		registerBlock("aether_crafting_table", BlocksAether.aether_crafting_table.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.aether_crafting_table));
+
+		registerBlock("holystone_furnace", BlocksAether.holystone_furnace.setCreativeTab(CreativeTabsAether.BLOCKS));
+
+		registerBlock("altar", BlocksAether.altar.setCreativeTab(CreativeTabsAether.BLOCKS));
+
+		registerBlock("incubator", BlocksAether.incubator.setCreativeTab(CreativeTabsAether.BLOCKS));
+
+		registerBlock("masonry_bench", BlocksAether.masonry_bench.setCreativeTab(CreativeTabsAether.BLOCKS));
+
+		registerBlock("icestone_cooler", BlocksAether.icestone_cooler.setCreativeTab(CreativeTabsAether.BLOCKS));
+
+		registerBlock("skyroot_chest", BlocksAether.skyroot_chest.setCreativeTab(CreativeTabsAether.BLOCKS));
+
+		registerBlock("ambrosium_torch", BlocksAether.ambrosium_torch.setCreativeTab(CreativeTabsAether.BLOCKS));
+
 		registerBlock("aether_sapling", BlocksAether.aether_sapling.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.aether_sapling));
 
 		registerBlock("aether_portal", BlocksAether.aether_portal);
 
 		registerBlock("tall_aether_grass", BlocksAether.tall_aether_grass.setCreativeTab(CreativeTabsAether.BLOCKS));
-
-		registerBlock("quicksoil", BlocksAether.quicksoil.setCreativeTab(CreativeTabsAether.BLOCKS));
-
-		registerBlock("aether_crafting_table", BlocksAether.aether_crafting_table.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.aether_crafting_table));
 
 		registerBlock("blueberry_bush", BlocksAether.blueberry_bush.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.blueberry_bush));
 		//registerBlock("enchanted_blueberry_bush", BlocksAether.enchanted_blueberry_bush.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.enchanted_blueberry_bush));
@@ -300,8 +320,6 @@ public class BlocksAether
 		registerBlock("orange_tree", BlocksAether.orange_tree.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerBlock("aether_flower", BlocksAether.aether_flower.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.aether_flower));
-
-		registerBlock("altar", BlocksAether.altar.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerBlock("quicksoil_glass", BlocksAether.quicksoil_glass.setCreativeTab(CreativeTabsAether.BLOCKS));
 
@@ -333,17 +351,17 @@ public class BlocksAether
 
 		registerBlock("faded_holystone_pillar", BlocksAether.faded_holystone_pillar.setCreativeTab(CreativeTabsAether.BLOCKS));
 
-		registerBlock("holystone_furnace", BlocksAether.holystone_furnace.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("angelstone", BlocksAether.angelstone.setCreativeTab(CreativeTabsAether.BLOCKS));
+
+		registerBlock("angelstone_brick", BlocksAether.angelstone_brick.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.angelstone_brick));
+
+		registerBlock("angelstone_pillar", BlocksAether.angelstone_pillar.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerBlock("skyroot_door", BlocksAether.skyroot_door);
 		registerBlock("arkenium_door", BlocksAether.arkenium_door);
 		//registerBlock("blightwillow_door", BlocksAether.blightwillow_door);
 		//registerBlock("earthshifter_door", BlocksAether.earthshifter_door);
 		//registerBlock("frostpine_door", BlocksAether.frostpine_door);
-
-		registerBlock("skyroot_chest", BlocksAether.skyroot_chest.setCreativeTab(CreativeTabsAether.BLOCKS));
-
-		registerBlock("ambrosium_torch", BlocksAether.ambrosium_torch.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerBlock("icestone_bricks", BlocksAether.icestone_bricks.setCreativeTab(CreativeTabsAether.BLOCKS));
 
@@ -427,9 +445,6 @@ public class BlocksAether
 		//registerBlock("skyroot_vines", BlocksAether.skyroot_vines.setCreativeTab(CreativeTabsAether.BLOCKS));
 		//registerBlock("enchanted_skyroot_vines", BlocksAether.enchanted_skyroot_vines.setCreativeTab(CreativeTabsAether.BLOCKS));
 
-		registerBlock("icestone_cooler", BlocksAether.icestone_cooler.setCreativeTab(CreativeTabsAether.BLOCKS));
-
-		registerBlock("incubator", BlocksAether.incubator.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerBlock("present", BlocksAether.present.setCreativeTab(CreativeTabsAether.MISCELLANEOUS), new ItemBlockPresent(BlocksAether.present));
 		registerBlock("labyrinth_container", BlocksAether.labyrinth_container.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.labyrinth_container));
@@ -437,8 +452,6 @@ public class BlocksAether
 		registerBlock("labyrinth_bridge", BlocksAether.labyrinth_bridge.setBlockUnbreakable().setResistance(6000000.0F));
 
 		registerBlock("wildcard", BlocksAether.wildcard);
-
-		registerBlock("masonry_bench", BlocksAether.masonry_bench.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		Blocks.FIRE.setFireInfo(BlocksAether.tall_aether_grass, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.aether_flower, 60, 100);

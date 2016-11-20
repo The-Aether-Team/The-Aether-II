@@ -45,6 +45,7 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 
 	private void registerFurnaceRecipes()
 	{
+		registerSmeltingRecipe(new ItemStack(BlocksAether.holystone), new ItemStack(BlocksAether.angelstone), 0.1f);
 		registerSmeltingRecipe(new ItemStack(ItemsAether.arkenium_ore), new ItemStack(ItemsAether.arkenium), 0.85f);
 		registerSmeltingRecipe(new ItemStack(ItemsAether.gravitite_ore), new ItemStack(ItemsAether.gravitite_plate), 1.0f);
 		registerSmeltingRecipe(new ItemStack(BlocksAether.quicksoil), new ItemStack(BlocksAether.quicksoil_glass), 0.1f);
@@ -206,6 +207,11 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 		// Holystone Brick
 		registerShapedRecipe(new ItemStack(BlocksAether.holystone_brick, 4), "XX", "XX",
 				'X', new ItemStack(BlocksAether.holystone));
+
+		// Angelstone Brick
+		registerShapedRecipe(new ItemStack(BlocksAether.angelstone_brick, 4), "XX", "XX",
+				'X', new ItemStack(BlocksAether.angelstone));
+
 
 		// Icestone Bricks
 		registerShapedRecipe(new ItemStack(BlocksAether.icestone_bricks, 4), "XX", "XX",

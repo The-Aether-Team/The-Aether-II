@@ -3,9 +3,7 @@ package com.gildedgames.aether.client.models.items;
 import com.gildedgames.aether.client.util.ItemModelBuilder;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.construction.BlockAetherPlanks;
-import com.gildedgames.aether.common.blocks.construction.BlockFadedHolystoneBrick;
-import com.gildedgames.aether.common.blocks.construction.BlockHolystoneBrick;
+import com.gildedgames.aether.common.blocks.construction.*;
 import com.gildedgames.aether.common.blocks.containers.BlockAetherCraftingTable;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
@@ -190,6 +188,19 @@ public class ItemModelsAether
 				.add(BlockFadedHolystoneBrick.KEYSTONE.getMeta(), "keystone"));
 
 		registerItemModels(BlocksAether.faded_holystone_pillar, "faded_holystone_bricks/pillar");
+
+		registerItemModels(BlocksAether.angelstone, "angelstone");
+
+		registerItemModels(BlocksAether.angelstone_brick, new ItemModelBuilder("angelstone_bricks/")
+				.add(BlockAngelstoneBrick.NORMAL.getMeta(), "normal")
+				.add(BlockAngelstoneBrick.BASE_BRICKS.getMeta(), "base_bricks")
+				.add(BlockAngelstoneBrick.BASE_PILLAR.getMeta(), "base_pillar")
+				.add(BlockAngelstoneBrick.CAPSTONE_BRICKS.getMeta(), "capstone_bricks")
+				.add(BlockAngelstoneBrick.CAPSTONE_PILLAR.getMeta(), "capstone_pillar")
+				.add(BlockAngelstoneBrick.FLAGSTONES.getMeta(), "flagstones")
+				.add(BlockAngelstoneBrick.KEYSTONE.getMeta(), "keystone"));
+
+		registerItemModels(BlocksAether.angelstone_pillar, "angelstone_bricks/pillar");
 
 		registerItemModels(BlocksAether.quicksoil_glass, "quicksoil_glass");
 
