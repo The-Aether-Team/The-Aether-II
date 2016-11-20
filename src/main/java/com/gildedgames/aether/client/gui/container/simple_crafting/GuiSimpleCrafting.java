@@ -363,7 +363,7 @@ public class GuiSimpleCrafting extends GuiContainer implements IExtendedGui
 		boolean flag = Mouse.isButtonDown(0);
 		int i = this.guiLeft;
 		int j = this.guiTop;
-		int k = i - 18;
+		int k = i - 48;
 		int l = j + 22;
 		int i1 = k + 14;
 		int j1 = l + 108;
