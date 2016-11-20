@@ -7,7 +7,6 @@ public enum ItemBoltType
 	SKYROOT(0.5f, "skyroot"),
 	HOLYSTONE(1.0f, "holystone"),
 	SCATTERGLASS(1.5f, "scatterglass"),
-	BONESHARD(1.5F, "boneshard"),
 	ZANITE(2.0f, "zanite"),
 	ARKENIUM(2.0f, "arkenium"),
 	GRAVITITE(2.5f, "gravitite");

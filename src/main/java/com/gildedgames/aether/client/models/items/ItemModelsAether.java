@@ -331,7 +331,6 @@ public class ItemModelsAether
 				.add(ItemBoltType.SKYROOT.ordinal(), "skyroot_bolt")
 				.add(ItemBoltType.HOLYSTONE.ordinal(), "holystone_bolt")
 				.add(ItemBoltType.SCATTERGLASS.ordinal(), "scatterglass_bolt")
-				.add(ItemBoltType.BONESHARD.ordinal(), "boneshard_bolt")
 				.add(ItemBoltType.ZANITE.ordinal(), "zanite_bolt")
 				.add(ItemBoltType.GRAVITITE.ordinal(), "gravitite_bolt")
 				.add(ItemBoltType.ARKENIUM.ordinal(), "arkenium_bolt"));
