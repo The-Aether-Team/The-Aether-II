@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockWovenSticks;
 import com.gildedgames.aether.common.recipes.RecipePresentCrafting;
 import com.gildedgames.aether.common.recipes.RecipeLeatherGlovesDyes;
 import com.gildedgames.aether.common.recipes.RecipeWrappingPaper;
@@ -15,8 +16,10 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import com.gildedgames.aether.common.registry.AltarRegistry;
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -89,13 +92,25 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_stick, 4), "X", "X",
 				'X', new ItemStack(BlocksAether.aether_planks));
 
+		// Woven Skyroot Sticks
+		registerShapedRecipe(new ItemStack(BlocksAether.woven_sticks, 2, BlockWovenSticks.SKYROOT.getMeta()), "XX", "XX",
+				'X', new ItemStack(ItemsAether.skyroot_stick));
+
 		// Skyroot Crafting Table
 		registerShapedRecipe(new ItemStack(BlocksAether.aether_crafting_table), "XX", "XX",
 				'X', new ItemStack(BlocksAether.aether_planks));
 
+		// Cloudwool_Block
+		registerShapedRecipe(new ItemStack(BlocksAether.cloudwool_block), "XX", "XX",
+				'X', new ItemStack(ItemsAether.cloudwool));
+
+		// Cloudwool
+		registerShapedRecipe(new ItemStack(ItemsAether.cloudwool, 4), "X",
+				'X', new ItemStack(BlocksAether.cloudwool_block));
+
 		// Skyroot Bed
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_bed), "XXX", "YYY",
-				'X', new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE),
+				'X', new ItemStack(ItemsAether.cloudwool),
 				'Y', new ItemStack(BlocksAether.aether_planks));
 
 		// Skyroot Chest

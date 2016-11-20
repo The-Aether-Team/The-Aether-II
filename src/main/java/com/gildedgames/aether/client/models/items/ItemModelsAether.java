@@ -72,6 +72,8 @@ public class ItemModelsAether
 				.add(BlockAercloud.STORM_AERCLOUD.getMeta(), "storm_aercloud")
 				.add(BlockAercloud.PURPLE_AERCLOUD.getMeta(), "purple_aercloud"));
 
+		registerItemModels(BlocksAether.cloudwool_block, "cloudwool_block");
+
 		registerItemModels(BlocksAether.skyroot_log, "logs/skyroot_log");
 		registerItemModels(BlocksAether.golden_oak_log, "logs/golden_oak_log");
 		/*registerItemModels(BlocksAether.frostpine_log, "logs/frostpine_log");

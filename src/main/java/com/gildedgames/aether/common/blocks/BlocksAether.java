@@ -55,6 +55,8 @@ public class BlocksAether
 
 	public static final BlockAercloud aercloud = new BlockAercloud();
 
+	public static final BlockCloudwoolBlock cloudwool_block = new BlockCloudwoolBlock();
+
 	public static final BlockAmbrosiumOre ambrosium_ore = new BlockAmbrosiumOre();
 
 	public static final BlockZaniteOre zanite_ore = new BlockZaniteOre();
@@ -175,7 +177,7 @@ public class BlocksAether
 
 	public static final BlockLabyrinthBridge labyrinth_bridge = new BlockLabyrinthBridge();
 
-	public static final BlockBed skyroot_bed = new BlockCustomBed(() -> ItemsAether.skyroot_bed, SoundType.WOOD);
+	public static final BlockBed skyroot_bed = new BlockCustomBed(() -> ItemsAether.skyroot_bed, SoundType.CLOTH);
 
 	public static final Block
 			labyrinth_glowing_pillar = new BlockLabyrinthPillar(),
@@ -255,6 +257,8 @@ public class BlocksAether
 		registerBlock("skyroot_bed", BlocksAether.skyroot_bed);
 
 		registerBlock("aercloud", BlocksAether.aercloud.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.aercloud));
+
+		registerBlock("cloudwool_block", BlocksAether.cloudwool_block.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerBlock("aether_planks", BlocksAether.aether_planks.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.aether_planks));
 
