@@ -59,10 +59,11 @@ public class EntityKirrid extends EntitySheep
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata)
 	{
 		livingdata = super.onInitialSpawn(difficulty, livingdata);
+
 		this.setFleeceColor(EnumDyeColor.WHITE);
+
 		return livingdata;
 	}
-
 
 	@Override
 	protected float getSoundPitch()
@@ -80,17 +81,6 @@ public class EntityKirrid extends EntitySheep
 	public boolean isBreedingItem(@Nullable ItemStack stack)
 	{
 		return stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
-	}
-
-	@Override
-	protected void dropFewItems(boolean var1, int var2)
-	{
-		super.dropFewItems(var1, var2);
-
-		if (this.getRNG().nextInt(3) == 0)
-		{
-			this.dropItem(ItemsAether.bone_shard, this.getRNG().nextInt(2) + 1);
-		}
 	}
 
 	@Nullable

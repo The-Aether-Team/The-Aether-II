@@ -326,82 +326,62 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 		// Crossbow Bolts
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.SKYROOT.ordinal()), "  Y", " X ", "Z  ",
 			'X', new ItemStack(ItemsAether.skyroot_stick),
-			'Y', new ItemStack(ItemsAether.skyroot_fragment),
+			'Y', new ItemStack(BlocksAether.aether_planks),
 			'Z', new ItemStack(Items.FEATHER));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.SKYROOT.ordinal()), "  Z", " X ", "Y  ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(ItemsAether.skyroot_fragment),
+				'Y', new ItemStack(BlocksAether.aether_planks),
 				'Z', new ItemStack(Items.FEATHER));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.SKYROOT.ordinal()), " Y", " X", " Z",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(ItemsAether.skyroot_fragment),
+				'Y', new ItemStack(BlocksAether.aether_planks),
 				'Z', new ItemStack(Items.FEATHER));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.SKYROOT.ordinal()), " Z", " X", " Y",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(ItemsAether.skyroot_fragment),
+				'Y', new ItemStack(BlocksAether.aether_planks),
 				'Z', new ItemStack(Items.FEATHER));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.HOLYSTONE.ordinal()), "  Y", " X ", "Z  ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(ItemsAether.holystone_chip),
+				'Y', new ItemStack(BlocksAether.holystone),
 				'Z', new ItemStack(Items.FEATHER));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.HOLYSTONE.ordinal()), "  Z", " X ", "Y  ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(ItemsAether.holystone_chip),
+				'Y', new ItemStack(BlocksAether.holystone),
 				'Z', new ItemStack(Items.FEATHER));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.HOLYSTONE.ordinal()), " Y", " X", " Z",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(ItemsAether.holystone_chip),
+				'Y', new ItemStack(BlocksAether.holystone),
 				'Z', new ItemStack(Items.FEATHER));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.HOLYSTONE.ordinal()), " Z", " X", " Y",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(ItemsAether.holystone_chip),
+				'Y', new ItemStack(BlocksAether.holystone),
 				'Z', new ItemStack(Items.FEATHER));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.SCATTERGLASS.ordinal()), "  Y", " X ", "Z  ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(ItemsAether.scatterglass_shard),
+				'Y', new ItemStack(BlocksAether.scatterglass),
 				'Z', new ItemStack(Items.FEATHER));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.SCATTERGLASS.ordinal()), "  Z", " X ", "Y  ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(ItemsAether.scatterglass_shard),
+				'Y', new ItemStack(BlocksAether.scatterglass),
 				'Z', new ItemStack(Items.FEATHER));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.SCATTERGLASS.ordinal()), " Y", " X", " Z",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(ItemsAether.scatterglass_shard),
+				'Y', new ItemStack(BlocksAether.scatterglass),
 				'Z', new ItemStack(Items.FEATHER));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.SCATTERGLASS.ordinal()), " Z", " X", " Y",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(ItemsAether.scatterglass_shard),
-				'Z', new ItemStack(Items.FEATHER));
-
-		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.BONESHARD.ordinal()), "  Y", " X ", "Z  ",
-				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(ItemsAether.bone_shard),
-				'Z', new ItemStack(Items.FEATHER));
-
-		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.BONESHARD.ordinal()), "  Z", " X ", "Y  ",
-				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(ItemsAether.bone_shard),
-				'Z', new ItemStack(Items.FEATHER));
-
-		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.BONESHARD.ordinal()), " Y", " X", " Z",
-				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(ItemsAether.bone_shard),
-				'Z', new ItemStack(Items.FEATHER));
-
-		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.BONESHARD.ordinal()), " Z", " X", " Y",
-				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(ItemsAether.bone_shard),
+				'Y', new ItemStack(BlocksAether.scatterglass),
 				'Z', new ItemStack(Items.FEATHER));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.ZANITE.ordinal()), "  Y", " X ", "Z  ",

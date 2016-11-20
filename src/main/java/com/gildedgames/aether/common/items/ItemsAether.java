@@ -333,8 +333,7 @@ public class ItemsAether
 	public static final Item life_coil = new Item();
 
 	public static final Item glamoured_iron_screw = new Item(),
-			wisdom_bauble = new Item(),
-			glamoured_bone_shard = new Item();
+			wisdom_bauble = new Item();
 
 	public static final Item moa_feather = new Item(),
 			blight_ward = new Item(),
@@ -374,9 +373,7 @@ public class ItemsAether
 			thiefs_gorget = new Item(),
 			moon_sect_warden_gorget = new Item();
 
-	public static final Item glamoured_holystone_chip = new Item(),
-			glamoured_zephyr_husk = new Item(),
-			glamoured_ice_shard = new Item(),
+	public static final Item glamoured_zephyr_husk = new Item(),
 			glamoured_blue_swet_jelly = new Item(),
 			glamoured_cockatrice_talons = new Item(),
 			glamoured_coal_ember = new Item();
@@ -418,12 +415,10 @@ public class ItemsAether
 			bandit_shawl = new Item(),
 			hide_pouch = new Item(),
 			gruegar_pouch = new Item(),
-			soul_shard = new Item(),
 			angel_bandage = new Item(),
 			swift_rune = new Item(),
 			wynd_cluster = new Item(),
-			wisdom_rune = new Item(),
-			glamoured_aerogel_chip = new Item();
+			wisdom_rune = new Item();
 
 	public static final Item ring_of_strength = new Item(),
 			gruegar_ring = new Item(),
@@ -432,12 +427,6 @@ public class ItemsAether
 			wynd_cluster_ring = new Item(),
 			lesser_ring_of_wisdom = new Item(),
 			ring_of_wisdom = new Item();
-
-	public static final Item bone_shard = new Item();
-
-	public static final Item holystone_chip = new Item(),
-			skyroot_fragment = new Item(),
-			scatterglass_shard = new Item();
 
 	public static final Item glamoured_cockatrice_keratin = new Item();
 
@@ -667,7 +656,6 @@ public class ItemsAether
 		registerItem("life_coil", life_coil.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("glamoured_iron_screw", glamoured_iron_screw.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("wisdom_bauble", wisdom_bauble.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("glamoured_bone_shard", glamoured_bone_shard.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("moa_feather", moa_feather.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("blight_ward", blight_ward.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("glamoured_skyroot_twig", glamoured_skyroot_twig.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
@@ -699,9 +687,7 @@ public class ItemsAether
 		registerItem("thiefs_gorget", thiefs_gorget.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
 		registerItem("moon_sect_warden_gorget", moon_sect_warden_gorget.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
 
-		registerItem("glamoured_holystone_chip", glamoured_holystone_chip.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("glamoured_zephyr_husk", glamoured_zephyr_husk.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("glamoured_ice_shard", glamoured_ice_shard.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("glamoured_blue_swet_jelly", glamoured_blue_swet_jelly.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("glamoured_cockatrice_talons", glamoured_cockatrice_talons.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("glamoured_coal_ember", glamoured_coal_ember.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
@@ -744,12 +730,10 @@ public class ItemsAether
 
 		registerItem("hide_pouch", hide_pouch.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("gruegar_pouch", gruegar_pouch.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("soul_shard", soul_shard.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("angel_bandage", angel_bandage.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("swift_rune", swift_rune.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("wynd_cluster", wynd_cluster.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("wisdom_rune", wisdom_rune.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("glamoured_aerogel_chip", glamoured_aerogel_chip.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 
 		registerItem("ring_of_strength", ring_of_strength.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("gruegar_ring", gruegar_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
@@ -758,11 +742,6 @@ public class ItemsAether
 		registerItem("wynd_cluster_ring", wynd_cluster_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("lesser_ring_of_wisdom", lesser_ring_of_wisdom.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("ring_of_wisdom", ring_of_wisdom.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
-
-		registerItem("bone_shard", bone_shard.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("holystone_chip", holystone_chip.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("skyroot_fragment", skyroot_fragment.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("scatterglass_shard", scatterglass_shard.setCreativeTab(CreativeTabsAether.MATERIALS));
 
 		registerItem("irradiated_chunk", irradiated_chunk.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("irradiated_sword", irradiated_sword.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.MATERIALS));
@@ -938,10 +917,7 @@ public class ItemsAether
 		AetherAPI.equipment().register(ItemsAether.swift_rune, ItemRarity.COMMON, ItemEquipmentType.CHARM);
 
 		AetherAPI.equipment().register(ItemsAether.wisdom_rune, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		AetherAPI.equipment().register(ItemsAether.glamoured_bone_shard, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		AetherAPI.equipment().register(ItemsAether.glamoured_holystone_chip, ItemRarity.RARE, ItemEquipmentType.CHARM);
 		AetherAPI.equipment().register(ItemsAether.glamoured_zephyr_husk, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		AetherAPI.equipment().register(ItemsAether.glamoured_ice_shard, ItemRarity.RARE, ItemEquipmentType.CHARM);
 		AetherAPI.equipment().register(ItemsAether.glamoured_blue_swet_jelly, ItemRarity.RARE, ItemEquipmentType.CHARM);
 		AetherAPI.equipment().register(ItemsAether.glamoured_cockatrice_talons, ItemRarity.RARE, ItemEquipmentType.CHARM);
 		AetherAPI.equipment().register(ItemsAether.glamoured_coal_ember, ItemRarity.RARE, ItemEquipmentType.CHARM);
@@ -951,7 +927,6 @@ public class ItemsAether
 		AetherAPI.equipment().register(ItemsAether.glamoured_gold_screw, ItemRarity.RARE, ItemEquipmentType.CHARM);
 		AetherAPI.equipment().register(ItemsAether.ambrosium_talisman, ItemRarity.RARE, ItemEquipmentType.CHARM);
 		AetherAPI.equipment().register(ItemsAether.gruegar_pouch, ItemRarity.RARE, ItemEquipmentType.CHARM);
-		AetherAPI.equipment().register(ItemsAether.soul_shard, ItemRarity.RARE, ItemEquipmentType.CHARM);
 		AetherAPI.equipment().register(ItemsAether.wynd_cluster, ItemRarity.RARE, ItemEquipmentType.CHARM);
 		AetherAPI.equipment().register(ItemsAether.glamoured_cockatrice_keratin, ItemRarity.RARE, ItemEquipmentType.CHARM);
 
@@ -962,7 +937,6 @@ public class ItemsAether
 		AetherAPI.equipment().register(ItemsAether.osseous_bane, ItemRarity.EPIC, ItemEquipmentType.CHARM);
 		AetherAPI.equipment().register(ItemsAether.rot_bane, ItemRarity.EPIC, ItemEquipmentType.CHARM);
 		AetherAPI.equipment().register(ItemsAether.butchers_knife, ItemRarity.EPIC, ItemEquipmentType.CHARM);
-		AetherAPI.equipment().register(ItemsAether.glamoured_aerogel_chip, ItemRarity.EPIC, ItemEquipmentType.CHARM);
 
 		/** OFF-HAND **/
 
@@ -1245,7 +1219,6 @@ public class ItemsAether
 		ItemEffects.register(ItemsAether.life_coil, new Effects().add(EntityEffects.MODIFY_MAX_HEALTH, new ModifyMaxHealthEffect.Instance(4.0D)).add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, -4.0D)));
 		ItemEffects.register(ItemsAether.glamoured_iron_screw, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 0.2D)));
 		ItemEffects.register(ItemsAether.wisdom_bauble, new Effects().add(EntityEffects.MODIFY_XP_COLLECTION, new ModifyXPCollectionEffect.Instance(0.10D)));
-		ItemEffects.register(ItemsAether.glamoured_bone_shard, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 0.3D)));
 		ItemEffects.register(ItemsAether.moa_feather, new Effects().add(EntityEffects.MODIFY_SPEED, new ModifySpeedEffect.Instance((float) SharedMonsterAttributes.MOVEMENT_SPEED.getDefaultValue() * 0.05D)));
 		ItemEffects.register(ItemsAether.blight_ward, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BIOLOGICAL, 1D, new DamagingElementRule(ElementalState.BLIGHT))));
 		ItemEffects.register(ItemsAether.glamoured_skyroot_twig);
@@ -1272,9 +1245,7 @@ public class ItemsAether
 		ItemEffects.register(ItemsAether.thiefs_gorget, new Effects().add(EntityEffects.MODIFY_SPEED, new ModifySpeedEffect.Instance((float) SharedMonsterAttributes.MOVEMENT_SPEED.getDefaultValue() * 0.3D)).add(EntityEffects.INVISIBILITY, new EntityEffectInstance(new OutOfCombatRule(160))));
 		ItemEffects.register(ItemsAether.frostward_scarf, new Effects().add(EntityEffects.MODIFY_SPEED, new ModifySpeedEffect.Instance((float) SharedMonsterAttributes.MOVEMENT_SPEED.getDefaultValue() * 0.4D)).add(EntityEffects.MODIFY_DEFENSE, new ModifyDefenseEffect.Instance(ElementalState.FROST, 1.0D)));
 
-		ItemEffects.register(ItemsAether.glamoured_holystone_chip, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.EARTH, 0.3D)));
 		ItemEffects.register(ItemsAether.glamoured_zephyr_husk, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.AIR, 0.3D)));
-		ItemEffects.register(ItemsAether.glamoured_ice_shard, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.FROST, 0.3D)));
 		ItemEffects.register(ItemsAether.glamoured_blue_swet_jelly, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.WATER, 0.3D)));
 		ItemEffects.register(ItemsAether.glamoured_cockatrice_talons, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.BLIGHT, 0.3D)));
 		ItemEffects.register(ItemsAether.glamoured_coal_ember, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.FIRE, 0.3D)));
@@ -1311,12 +1282,10 @@ public class ItemsAether
 
 		ItemEffects.register(ItemsAether.hide_pouch, new Effects().add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(-3.0D)));
 		ItemEffects.register(ItemsAether.gruegar_pouch, new Effects().add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(-5.0D)));
-		ItemEffects.register(ItemsAether.soul_shard, new Effects().add(EntityEffects.MODIFY_MAX_HEALTH, new ModifyMaxHealthEffect.Instance(1.0D)));
 		ItemEffects.register(ItemsAether.angel_bandage, new Effects().add(EntityEffects.MODIFY_MAX_HEALTH, new ModifyMaxHealthEffect.Instance(0.5D)));
 		ItemEffects.register(ItemsAether.swift_rune, new Effects().add(EntityEffects.MODIFY_ATTACK_SPEED, new ModifyAttackSpeedEffect.Instance((float) SharedMonsterAttributes.ATTACK_SPEED.getDefaultValue() * 0.01D)));
 		ItemEffects.register(ItemsAether.wynd_cluster, new Effects().add(EntityEffects.MODIFY_ATTACK_SPEED, new ModifyAttackSpeedEffect.Instance((float) SharedMonsterAttributes.ATTACK_SPEED.getDefaultValue() * 0.02D)));
 		ItemEffects.register(ItemsAether.wisdom_rune, new Effects().add(EntityEffects.MODIFY_XP_COLLECTION, new ModifyXPCollectionEffect.Instance(0.20D)));
-		ItemEffects.register(ItemsAether.glamoured_aerogel_chip, new Effects().add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.AIR, 0.1D)).add(EntityEffects.MODIFY_DAMAGE, new ModifyDamageEffect.Instance(ElementalState.FIRE, 0.2D)));
 
 		ItemEffects.register(ItemsAether.gruegar_ring, new Effects().add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(-10.0D)));
 		ItemEffects.register(ItemsAether.ring_of_strength, new Effects().add(EntityEffects.MODIFY_WEIGHT, new ModifyWeightEffect.Instance(-7.5D)));

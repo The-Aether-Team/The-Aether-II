@@ -480,7 +480,6 @@ public class ItemModelsAether
 
 		registerItemModels(ItemsAether.glamoured_iron_screw, "iron_screw");
 		registerItemModels(ItemsAether.wisdom_bauble, "accessories/wisdom_bauble");
-		registerItemModels(ItemsAether.glamoured_bone_shard, "bone_shard");
 		registerItemModels(ItemsAether.moa_feather, "accessories/moa_feather");
 		registerItemModels(ItemsAether.blight_ward, "accessories/blight_ward");
 		registerItemModels(ItemsAether.glamoured_skyroot_twig, "skyroot_twig");
@@ -535,9 +534,7 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.thiefs_gorget, "accessories/thiefs_gorget");
 		registerItemModels(ItemsAether.frostward_scarf, "accessories/frostward_scarf");
 
-		registerItemModels(ItemsAether.glamoured_holystone_chip, "holystone_chip");
 		registerItemModels(ItemsAether.glamoured_zephyr_husk, "zephyr_husk");
-		registerItemModels(ItemsAether.glamoured_ice_shard, "ice_shard");
 		registerItemModels(ItemsAether.glamoured_blue_swet_jelly, "swet_jelly/blue_swet_jelly");
 		registerItemModels(ItemsAether.glamoured_cockatrice_talons, "cockatrice_talons");
 		registerItemModels(ItemsAether.glamoured_coal_ember, "coal_ember");
@@ -578,12 +575,10 @@ public class ItemModelsAether
 
 		registerItemModels(ItemsAether.hide_pouch, "accessories/hide_pouch");
 		registerItemModels(ItemsAether.gruegar_pouch, "accessories/gruegar_pouch");
-		registerItemModels(ItemsAether.soul_shard, "accessories/soul_shard");
 		registerItemModels(ItemsAether.angel_bandage, "accessories/angel_bandage");
 		registerItemModels(ItemsAether.swift_rune, "accessories/swift_rune");
 		registerItemModels(ItemsAether.wynd_cluster, "accessories/wynd_cluster");
 		registerItemModels(ItemsAether.wisdom_rune, "accessories/wisdom_rune");
-		registerItemModels(ItemsAether.glamoured_aerogel_chip, "scatterglass_shard");
 
 		registerItemModels(ItemsAether.fleeting_scarf, "accessories/fleeting_scarf");
 		registerItemModels(ItemsAether.winged_necklace, "accessories/winged_necklace");
@@ -597,11 +592,6 @@ public class ItemModelsAether
 
 		/*registerItemModels(BlocksAether.skyroot_vines, "vines/skyroot_vines");
 		registerItemModels(BlocksAether.enchanted_skyroot_vines, "vines/enchanted_skyroot_vines");*/
-
-		registerItemModels(ItemsAether.bone_shard, "bone_shard");
-		registerItemModels(ItemsAether.holystone_chip, "holystone_chip");
-		registerItemModels(ItemsAether.skyroot_fragment, "skyroot_fragment");
-		registerItemModels(ItemsAether.scatterglass_shard, "scatterglass_shard");
 
 		registerItemModels(ItemsAether.glamoured_cockatrice_keratin, "cockatrice_keratin");
 

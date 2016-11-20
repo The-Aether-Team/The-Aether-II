@@ -17,7 +17,6 @@ public class ItemBolt extends Item
 			ItemBoltType.SKYROOT,
 			ItemBoltType.HOLYSTONE,
 			ItemBoltType.SCATTERGLASS,
-			ItemBoltType.BONESHARD,
 			ItemBoltType.ZANITE,
 			ItemBoltType.ARKENIUM,
 			ItemBoltType.GRAVITITE

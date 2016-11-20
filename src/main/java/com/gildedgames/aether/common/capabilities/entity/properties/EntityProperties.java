@@ -5,12 +5,10 @@ import com.gildedgames.aether.api.capabilites.entity.properties.ElementalDamageS
 import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityPropertiesCapability;
-import com.gildedgames.aether.common.items.ItemsAether;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -196,7 +194,7 @@ public class EntityProperties implements IEntityPropertiesCapability
 					double motionY = (world.rand.nextBoolean() ? 0.25D : -0.25D) * world.rand.nextFloat();
 					double motionZ = (world.rand.nextBoolean() ? 0.25D : -0.25D) * world.rand.nextFloat();
 
-					worldServer.spawnParticle(EnumParticleTypes.ITEM_CRACK, victim.posX + motionX, victim.posY + (victim.height / 2) + motionY, victim.posZ + motionZ, 1, motionX, motionY, motionZ, (world.rand.nextBoolean() ? 0.05D : -0.05D), Item.getIdFromItem(ItemsAether.glamoured_holystone_chip));
+					worldServer.spawnParticle(EnumParticleTypes.BLOCK_DUST, victim.posX + motionX, victim.posY + (victim.height / 2) + motionY, victim.posZ + motionZ, 1, motionX, motionY, motionZ, (world.rand.nextBoolean() ? 0.05D : -0.05D), Block.getStateId(Blocks.DIRT.getDefaultState()));
 				}
 			}
 
