@@ -122,7 +122,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 			for (int i = 0; i < 9; i++)
 			{
-				this.materials.get(i).setItemStack(null);
+				this.materials.get(i).setRequiredObject(null);
 			}
 		}
 
@@ -144,18 +144,18 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 							if (req instanceof ItemStack)
 							{
-								this.materials.get(index).setItemStack((ItemStack) req);
+								this.materials.get(index).setRequiredObject((ItemStack) req);
 							}
 							else if (req instanceof OreDictionaryRequirement)
 							{
 								OreDictionaryRequirement oreReq = (OreDictionaryRequirement)req;
 
-								this.materials.get(index).setItemStack(OreDictionary.getOres(oreReq.getKey()).get(0));
+								this.materials.get(index).setRequiredObject(oreReq);
 							}
 						}
 						else
 						{
-							this.materials.get(index).setItemStack(null);
+							this.materials.get(index).setRequiredObject(null);
 						}
 					}
 				}
@@ -170,11 +170,11 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 				if (!RecipeUtil.canCraft(Minecraft.getMinecraft().thePlayer, option.getRecipe()) && option.getRecipe() != null)
 				{
-					this.result.setItemStack(option.getRecipe().getResult());
+					this.result.setRequiredObject(option.getRecipe().getResult());
 				}
 				else
 				{
-					this.result.setItemStack(null);
+					this.result.setRequiredObject(null);
 				}
 			}
 		}
@@ -320,13 +320,13 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 					if (req instanceof ItemStack)
 					{
-						material.setItemStack((ItemStack) req);
+						material.setRequiredObject((ItemStack) req);
 					}
 					else if (req instanceof OreDictionaryRequirement)
 					{
 						OreDictionaryRequirement oreReq = (OreDictionaryRequirement)req;
 
-						material.setItemStack(OreDictionary.getOres(oreReq.getKey()).get(0));
+						material.setRequiredObject(oreReq);
 					}
 				}
 
@@ -352,14 +352,14 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 	{
 		if (this.currentRecipe != null)
 		{
-			if (this.result.getItemStack() != this.currentRecipe.getResult() && !RecipeUtil.canCraft(Minecraft.getMinecraft().thePlayer, this.currentRecipe))
+			if (!RecipeUtil.areEqual(this.result.getRequiredObject(), this.currentRecipe.getResult()) && !RecipeUtil.canCraft(Minecraft.getMinecraft().thePlayer, this.currentRecipe))
 			{
-				this.result.setItemStack(this.currentRecipe.getResult());
+				this.result.setRequiredObject(this.currentRecipe.getResult());
 			}
 		}
 		else
 		{
-			this.result.setItemStack(null);
+			this.result.setRequiredObject(null);
 		}
 
 		boolean flag = Mouse.isButtonDown(0);

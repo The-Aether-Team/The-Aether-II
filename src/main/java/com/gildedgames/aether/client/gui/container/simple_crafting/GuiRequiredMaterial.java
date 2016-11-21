@@ -1,28 +1,23 @@
 package com.gildedgames.aether.client.gui.container.simple_crafting;
 
 import com.gildedgames.aether.client.gui.IExtendedGui;
-import com.gildedgames.aether.client.util.gui.GuiUtil;
+import com.gildedgames.aether.common.recipes.simple.OreDictionaryRequirement;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiCreateFlatWorld;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.Collections;
-
 public class GuiRequiredMaterial extends GuiButton
 {
 
-	private ItemStack stack;
+	private Object required;
 
 	private ItemStack displayStack;
 
@@ -32,25 +27,45 @@ public class GuiRequiredMaterial extends GuiButton
 	{
 		super(buttonId, x, y, 18, 18, "");
 
-		this.setItemStack(stack);
+		this.setRequiredObject(stack);
 	}
 
-	public ItemStack getItemStack()
+	public Object getRequiredObject()
 	{
-		return this.stack;
+		return this.required;
 	}
 
-	public void setItemStack(ItemStack stack)
+	public void setRequiredObject(Object obj)
 	{
-		if (stack != null && stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+		if (obj instanceof ItemStack)
 		{
-			this.stack = stack;
-			this.displayStack = new ItemStack(stack.getItem(), stack.stackSize);
-			return;
+			ItemStack stack = (ItemStack)obj;
+
+			if (stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+			{
+				this.required = stack;
+				this.displayStack = new ItemStack(stack.getItem(), stack.stackSize);
+				return;
+			}
 		}
 
-		this.stack = stack;
-		this.displayStack = stack;
+		this.required = obj;
+
+		if (obj instanceof OreDictionaryRequirement)
+		{
+			OreDictionaryRequirement ore = (OreDictionaryRequirement)obj;
+			this.displayStack = OreDictionary.getOres(((OreDictionaryRequirement) obj).getKey()).get(0).copy();
+			this.displayStack.stackSize = ore.getCount();
+		}
+		else if (obj instanceof ItemStack)
+		{
+			ItemStack stack = (ItemStack)obj;
+			this.displayStack = stack.copy();
+		}
+		else
+		{
+			this.displayStack = null;
+		}
 	}
 
 	@Override
@@ -58,7 +73,7 @@ public class GuiRequiredMaterial extends GuiButton
 	{
 		//super.drawButton(mc, mouseX, mouseY);
 
-		if (this.visible && this.stack != null)
+		if (this.visible && this.displayStack != null)
 		{
 			this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
 
@@ -74,13 +89,13 @@ public class GuiRequiredMaterial extends GuiButton
 			GlStateManager.pushMatrix();
 			GlStateManager.translate(0.0F, 0.0F, 300.0F);
 
-			if (!this.resultStack || this.stack.stackSize > 1)
+			if (!this.resultStack || this.displayStack.stackSize > 1)
 			{
-				boolean hasEnough = RecipeUtil.hasEnoughOfMaterial(Minecraft.getMinecraft().thePlayer, this.stack) || this.resultStack;
+				boolean hasEnough = RecipeUtil.hasEnoughOfMaterial(Minecraft.getMinecraft().thePlayer, this.required) || this.resultStack;
 
-				int xOffset = (Math.max(String.valueOf(this.stack.stackSize).length() - 1, 0)) * -6;
+				int xOffset = (Math.max(String.valueOf(this.displayStack.stackSize).length() - 1, 0)) * -6;
 
-				this.drawString(Minecraft.getMinecraft().fontRendererObj, (!hasEnough ? TextFormatting.RED : "") + String.valueOf(this.stack.stackSize), this.xPosition + 12 + xOffset, this.yPosition + this.height - 8, 0xFFFFFF);
+				this.drawString(Minecraft.getMinecraft().fontRendererObj, (!hasEnough ? TextFormatting.RED : "") + String.valueOf(this.displayStack.stackSize), this.xPosition + 12 + xOffset, this.yPosition + this.height - 8, 0xFFFFFF);
 			}
 
 			if (this.hovered)
@@ -90,7 +105,7 @@ public class GuiRequiredMaterial extends GuiButton
 				if (gui instanceof IExtendedGui)
 				{
 					IExtendedGui extendedGui = (IExtendedGui)gui;
-					extendedGui.setHoveredDescription(I18n.format(this.stack.getDisplayName()));
+					extendedGui.setHoveredDescription(I18n.format(this.displayStack.getDisplayName()));
 				}
 			}
 

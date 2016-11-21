@@ -27,6 +27,11 @@ public class OreDictionaryRequirement
 		return this.count;
 	}
 
+	public void addCount(int count)
+	{
+		this.count += count;
+	}
+
 	@Override
 	public boolean equals(Object obj)
 	{

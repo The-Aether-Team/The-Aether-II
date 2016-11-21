@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAngelstoneBrick;
 import com.gildedgames.aether.common.blocks.construction.BlockFadedHolystoneBrick;
 import com.gildedgames.aether.common.blocks.construction.BlockHolystoneBrick;
+import com.gildedgames.aether.common.recipes.simple.OreDictionaryRequirement;
 import com.gildedgames.aether.common.recipes.simple.SimpleRecipe;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
 import com.google.common.collect.Lists;
@@ -14,6 +15,8 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import java.util.List;
 
@@ -139,6 +142,101 @@ public class SimpleRecipesAether
 				}
 
 				SimpleRecipe simpleRecipe = new SimpleRecipe(shapeless.getRecipeOutput(), req.toArray(new ItemStack[req.size()]));
+
+				for (ISimpleRecipe r : recipes)
+				{
+					if (r.equals(simpleRecipe))
+					{
+						continue top;
+					}
+				}
+
+				recipes.add(simpleRecipe);
+
+				AetherAPI.crafting().registerRecipe(nextId++, simpleRecipe);
+			}
+			else if (recipe instanceof ShapedOreRecipe)
+			{
+				ShapedOreRecipe shaped = (ShapedOreRecipe) recipe;
+
+				List<Object> req = Lists.newArrayList();
+
+				outer: for (Object obj : shaped.getInput())
+				{
+					if (obj != null)
+					{
+						for (Object reqObj : req)
+						{
+							if (obj instanceof List)
+							{
+								List list = (List)obj;
+
+								if (list.size() > 0 && list.get(0) instanceof ItemStack)
+								{
+									int[] oreIDs = OreDictionary.getOreIDs((ItemStack) list.get(0));
+
+									for (int id : oreIDs)
+									{
+										if (RecipeUtil.areEqual(reqObj, OreDictionary.getOreName(id)))
+										{
+											if (reqObj instanceof ItemStack)
+											{
+												ItemStack reqStack = (ItemStack)reqObj;
+												reqStack.stackSize++;
+											}
+											else if (reqObj instanceof OreDictionaryRequirement)
+											{
+												OreDictionaryRequirement oreReq = (OreDictionaryRequirement)reqObj;
+
+												oreReq.addCount(1);
+											}
+
+											continue outer;
+										}
+									}
+								}
+							}
+
+							if (RecipeUtil.areEqual(reqObj, obj))
+							{
+								if (reqObj instanceof ItemStack)
+								{
+									ItemStack reqStack = (ItemStack)reqObj;
+									reqStack.stackSize++;
+								}
+								else if (reqObj instanceof OreDictionaryRequirement)
+								{
+									OreDictionaryRequirement oreReq = (OreDictionaryRequirement)reqObj;
+
+									oreReq.addCount(1);
+								}
+
+								continue outer;
+							}
+						}
+
+						if (obj instanceof List)
+						{
+							List list = (List)obj;
+
+							if (list.size() > 0 && list.get(0) instanceof ItemStack)
+							{
+								int[] oreIDs = OreDictionary.getOreIDs((ItemStack) list.get(0));
+
+								for (int id : oreIDs)
+								{
+									req.add(new OreDictionaryRequirement(OreDictionary.getOreName(id), 1));
+								}
+							}
+						}
+						else
+						{
+							req.add(obj);
+						}
+					}
+				}
+
+				SimpleRecipe simpleRecipe = new SimpleRecipe(shaped.getRecipeOutput(), req.toArray(new Object[req.size()]));
 
 				for (ISimpleRecipe r : recipes)
 				{
