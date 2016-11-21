@@ -10,18 +10,18 @@ import java.util.Random;
 public class WorldGenFloorPlacer extends WorldGenerator
 {
 
-	private final IBlockState state;
+	private final IBlockState[] states;
 
 	private final int amount;
 
-	public WorldGenFloorPlacer(IBlockState state)
+	public WorldGenFloorPlacer(IBlockState... states)
 	{
-		this(state, -1);
+		this(-1, states);
 	}
 
-	public WorldGenFloorPlacer(IBlockState state, int amount)
+	public WorldGenFloorPlacer(int amount, IBlockState... states)
 	{
-		this.state = state;
+		this.states = states;
 		this.amount = amount;
 	}
 
@@ -34,7 +34,7 @@ public class WorldGenFloorPlacer extends WorldGenerator
 		{
 			state = world.getBlockState(pos);
 
-			if (!state.getBlock().isAir(this.state, world, pos) && !state.getBlock().isLeaves(this.state, world, pos))
+			if (!state.getBlock().isAir(this.states[0], world, pos) && !state.getBlock().isLeaves(this.states[0], world, pos))
 			{
 				break;
 			}
@@ -56,9 +56,11 @@ public class WorldGenFloorPlacer extends WorldGenerator
 				return false;
 			}
 
-			if (world.isAirBlock(randomPos) && this.state.getBlock().canPlaceBlockAt(world, randomPos))
+			IBlockState chosen = this.states[rand.nextInt(this.states.length)];
+
+			if (world.isAirBlock(randomPos) && chosen.getBlock().canPlaceBlockAt(world, randomPos))
 			{
-				world.setBlockState(randomPos, this.state, 2);
+				world.setBlockState(randomPos, chosen, 2);
 
 				if (this.amount > 0)
 				{

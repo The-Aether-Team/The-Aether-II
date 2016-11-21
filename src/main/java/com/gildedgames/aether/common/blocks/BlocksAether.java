@@ -265,6 +265,8 @@ public class BlocksAether
 
 	public static final Block skyroot_twigs = new BlockFloorObject(Material.WOOD, () -> new ItemStack(ItemsAether.skyroot_stick)).setSoundType(SoundType.WOOD);
 
+	public static final Block holystone_rock = new BlockFloorObject(Material.ROCK, () -> new ItemStack(BlocksAether.holystone)).setSoundType(SoundType.STONE);
+
 	public static void preInit()
 	{
 		registerBlock("aether_dirt", BlocksAether.aether_dirt.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.aether_dirt));
@@ -473,6 +475,7 @@ public class BlocksAether
 		registerBlock("arkenium_frame_scatterglass_pane", BlocksAether.arkenium_frame_scatterglass_pane.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerBlock("skyroot_twigs", BlocksAether.skyroot_twigs.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("holystone_rock", BlocksAether.holystone_rock.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_twigs, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.tall_aether_grass, 60, 100);

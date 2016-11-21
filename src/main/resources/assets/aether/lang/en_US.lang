@@ -193,6 +193,7 @@ tile.aether.scatterglass_pane.name=Scatterglass Pane
 tile.aether.arkenium_frame_scatterglass_pane.name=Arkenium Frame Scatterglass Pane
 tile.aether.skyroot_frame_scatterglass_pane.name=Skyroot Frame Scatterglass Pane
 tile.aether.skyroot_twigs.name=Skyroot Twigs
+tile.aether.holystone_rock.name=Holystone Rock
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick

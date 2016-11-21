@@ -190,7 +190,7 @@ public class GenerationAether
 		aether_grass = new WorldGenFloorPlacer(BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.NORMAL));
 		long_aether_grass = new WorldGenFloorPlacer(BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.LONG));
 
-		skyroot_twigs = new WorldGenFloorPlacer(BlocksAether.skyroot_twigs.getDefaultState(), 4);
+		skyroot_twigs = new WorldGenFloorPlacer(4, BlocksAether.skyroot_twigs.getDefaultState(), BlocksAether.skyroot_twigs.getDefaultState(), BlocksAether.holystone_rock.getDefaultState());
 
 		green_aercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.GREEN_AERCLOUD), 4, false);
 		golden_aercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.GOLDEN_AERCLOUD), 4, false);

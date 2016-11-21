@@ -143,6 +143,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.skyroot_frame_quicksoil_glass, "skyroot_frame_quicksoil_glass");
 
 		registerItemModels(BlocksAether.skyroot_twigs, "skyroot_twigs");
+		registerItemModels(BlocksAether.holystone_rock, "holystone_rock");
 
 		registerItemModels(BlocksAether.quicksoil_glass_pane, "glass_pane/quicksoil_glass");
 		registerItemModels(BlocksAether.arkenium_frame_quicksoil_glass_pane, "glass_pane/arkenium_frame_quicksoil_glass");

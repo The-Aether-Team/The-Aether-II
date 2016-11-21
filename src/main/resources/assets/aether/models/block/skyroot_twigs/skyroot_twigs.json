@@ -1,12 +1,12 @@
 {
     "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
     "textures": {
-        "particle": "aether:blocks/logs/skyroot_log_side",
+        "particle": "aether:blocks/skyroot_twigs",
         "1": "aether:blocks/skyroot_twigs"
     },
     "display": {
         "gui": {
-            "rotation": [ 0, 0, 0 ],
+            "rotation": [ -30, -45, 0 ],
             "translation": [ 0, 2.5, 0],
             "scale":[ 0.825, 0.825, 0.825 ]
         },

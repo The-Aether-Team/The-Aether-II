@@ -1,7 +1,7 @@
 {
     "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
     "textures": {
-        "particle": "aether:blocks/logs/skyroot_log_side",
+        "particle": "aether:blocks/skyroot_twigs",
         "0": "aether:blocks/skyroot_twigs"
     },
     "elements": [
