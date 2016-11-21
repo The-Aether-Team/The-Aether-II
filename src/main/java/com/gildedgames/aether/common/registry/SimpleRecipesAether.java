@@ -104,7 +104,7 @@ public class SimpleRecipesAether
 					}
 				}
 
-				SimpleRecipe simpleRecipe = new SimpleRecipe(shaped.getRecipeOutput(), req.toArray(new ItemStack[req.size()]));
+				SimpleRecipe simpleRecipe = new SimpleRecipe(shaped.getRecipeOutput(), req.toArray());
 
 				for (ISimpleRecipe r : recipes)
 				{
@@ -141,7 +141,7 @@ public class SimpleRecipesAether
 					}
 				}
 
-				SimpleRecipe simpleRecipe = new SimpleRecipe(shapeless.getRecipeOutput(), req.toArray(new ItemStack[req.size()]));
+				SimpleRecipe simpleRecipe = new SimpleRecipe(shapeless.getRecipeOutput(), req.toArray());
 
 				for (ISimpleRecipe r : recipes)
 				{
