@@ -65,7 +65,7 @@ public class SimpleRecipesAether
 		addMasonry(new ItemStack(BlocksAether.arkenium_frame_scatterglass), new ItemStack(BlocksAether.scatterglass));
 	}
 
-	public static void preInit()
+	public static void postInit()
 	{
 		if (hasInit)
 		{

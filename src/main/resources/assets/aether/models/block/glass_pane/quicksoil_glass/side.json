@@ -1,0 +1,7 @@
+{
+	"parent": "block/glass_pane_side",
+	"textures": {
+		"edge": "aether:blocks/quicksoil_glass_pane_top",
+		"pane": "aether:blocks/quicksoil_glass"
+	}
+}

@@ -81,6 +81,26 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 		registerShapedRecipe(new ItemStack(ItemsAether.cloud_parachute, 1, EntityParachute.Type.GREEN.ordinal()), "XXX", " S ",
 				'X', new ItemStack(BlocksAether.aercloud, 1, BlockAercloud.GREEN_AERCLOUD.getMeta()), 'S', Items.STRING);
 
+		// Glass Panes
+
+		registerShapedRecipe(new ItemStack(BlocksAether.quicksoil_glass_pane, 16), "XXX", "XXX",
+				'X', BlocksAether.quicksoil_glass);
+
+		registerShapedRecipe(new ItemStack(BlocksAether.arkenium_frame_quicksoil_glass_pane, 16), "XXX", "XXX",
+				'X', BlocksAether.arkenium_frame_quicksoil_glass);
+
+		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_frame_quicksoil_glass_pane, 16), "XXX", "XXX",
+				'X', BlocksAether.skyroot_frame_quicksoil_glass);
+
+		registerShapedRecipe(new ItemStack(BlocksAether.scatterglass_pane, 16), "XXX", "XXX",
+				'X', BlocksAether.scatterglass);
+
+		registerShapedRecipe(new ItemStack(BlocksAether.arkenium_frame_scatterglass_pane, 16), "XXX", "XXX",
+				'X', BlocksAether.arkenium_frame_scatterglass);
+
+		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_frame_scatterglass_pane, 16), "XXX", "XXX",
+				'X', BlocksAether.skyroot_frame_scatterglass);
+
 		// Saddle
 		registerShapedRecipe(new ItemStack(Items.SADDLE, 1), "XXX", "XZX",
 				'X', Items.LEATHER, 'Z', Items.STRING);

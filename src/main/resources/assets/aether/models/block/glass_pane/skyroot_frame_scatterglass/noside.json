@@ -1,0 +1,6 @@
+{
+	"parent": "block/glass_pane_noside",
+	"textures": {
+		"pane": "aether:blocks/skyroot_frame_scatterglass"
+	}
+}

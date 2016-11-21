@@ -186,6 +186,12 @@ tile.aether.angelstone_brick.capstone_bricks.name=Angelstone Capstone Bricks
 tile.aether.angelstone_brick.capstone_pillar.name=Angelstone Capstone Pillar
 tile.aether.angelstone_brick.flagstones.name=Angelstone Flagstones
 tile.aether.angelstone_pillar.name=Angelstone Pillar
+tile.aether.quicksoil_glass_pane.name=Quicksoil Glass Pane
+tile.aether.arkenium_frame_quicksoil_glass_pane.name=Arkenium Frame Quicksoil Glass Pane
+tile.aether.skyroot_frame_quicksoil_glass_pane.name=Skyroot Frame Quicksoil Glass Pane
+tile.aether.scatterglass_pane.name=Scatterglass Pane
+tile.aether.arkenium_frame_scatterglass_pane.name=Arkenium Frame Scatterglass Pane
+tile.aether.skyroot_frame_scatterglass_pane.name=Skyroot Frame Scatterglass Pane
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick

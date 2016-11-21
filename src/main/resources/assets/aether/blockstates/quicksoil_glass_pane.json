@@ -1,0 +1,29 @@
+{
+    "multipart": [
+        {   "apply": { "model": "aether:glass_pane/quicksoil_glass/post" }},
+        {   "when": { "north": true },
+            "apply": { "model": "aether:glass_pane/quicksoil_glass/side" }
+        },
+        {   "when": { "east": true },
+            "apply": { "model": "aether:glass_pane/quicksoil_glass/side", "y": 90 }
+        },
+        {   "when": { "south": true },
+            "apply": { "model": "aether:glass_pane/quicksoil_glass/side_alt" }
+        },
+        {   "when": { "west": true },
+            "apply": { "model": "aether:glass_pane/quicksoil_glass/side_alt", "y": 90 }
+        },
+        {   "when": { "north": false },
+            "apply": { "model": "aether:glass_pane/quicksoil_glass/noside" }
+        },
+        {   "when": { "east": false },
+            "apply": { "model": "aether:glass_pane/quicksoil_glass/noside_alt" }
+        },
+        {   "when": { "south": false },
+            "apply": { "model": "aether:glass_pane/quicksoil_glass/noside_alt", "y": 90 }
+        },
+        {   "when": { "west": false },
+            "apply": { "model": "aether:glass_pane/quicksoil_glass/noside", "y": 270 }
+        }
+    ]
+}

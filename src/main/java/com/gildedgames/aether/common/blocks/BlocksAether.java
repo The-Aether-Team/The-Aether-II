@@ -255,6 +255,13 @@ public class BlocksAether
 
 	public static final BlockMasonryBench masonry_bench = new BlockMasonryBench();
 
+	public static final BlockCustomPane quicksoil_glass_pane = new BlockCustomPane(BlocksAether.quicksoil_glass.getDefaultState(), false),
+										skyroot_frame_quicksoil_glass_pane = new BlockCustomPane(BlocksAether.skyroot_frame_quicksoil_glass.getDefaultState(), false),
+										arkenium_frame_quicksoil_glass_pane = new BlockCustomPane(BlocksAether.arkenium_frame_quicksoil_glass.getDefaultState(), false),
+										scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState(), false),
+										skyroot_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.skyroot_frame_scatterglass.getDefaultState(), false),
+										arkenium_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.arkenium_frame_scatterglass.getDefaultState(), false);
+
 	public static void preInit()
 	{
 		registerBlock("aether_dirt", BlocksAether.aether_dirt.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.aether_dirt));
@@ -453,6 +460,14 @@ public class BlocksAether
 		registerBlock("labyrinth_bridge", BlocksAether.labyrinth_bridge.setBlockUnbreakable().setResistance(6000000.0F));
 
 		registerBlock("wildcard", BlocksAether.wildcard);
+
+		registerBlock("quicksoil_glass_pane", BlocksAether.quicksoil_glass_pane.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("skyroot_frame_quicksoil_glass_pane", BlocksAether.skyroot_frame_quicksoil_glass_pane.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("arkenium_frame_quicksoil_glass_pane", BlocksAether.arkenium_frame_quicksoil_glass_pane.setCreativeTab(CreativeTabsAether.BLOCKS));
+
+		registerBlock("scatterglass_pane", BlocksAether.scatterglass_pane.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("skyroot_frame_scatterglass_pane", BlocksAether.skyroot_frame_scatterglass_pane.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("arkenium_frame_scatterglass_pane", BlocksAether.arkenium_frame_scatterglass_pane.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		Blocks.FIRE.setFireInfo(BlocksAether.tall_aether_grass, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.aether_flower, 60, 100);
