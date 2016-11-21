@@ -142,7 +142,9 @@ public class SimpleCraftingRegistry implements ISimpleCraftingRegistry
 				}
 			}
 
-			return new ISimpleRecipeGroup[] { this.stackLookup.get(this.getHashForItemStack((ItemStack) req)) };
+			int hash = this.getHashForItemStack(stack);
+
+			return new ISimpleRecipeGroup[] { this.stackLookup.get(hash) };
 		}
 		else if (req instanceof OreDictionaryRequirement)
 		{
@@ -160,7 +162,7 @@ public class SimpleCraftingRegistry implements ISimpleCraftingRegistry
 	{
 		int hash = (Item.getIdFromItem(stack.getItem()) & 0xFFFF) << 16;
 
-		if (!stack.isItemStackDamageable())
+		if (!stack.isItemStackDamageable() && stack.getItemDamage() != OreDictionary.WILDCARD_VALUE)
 		{
 			hash = hash | (stack.getItemDamage() & 0xFFFF);
 		}
