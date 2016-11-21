@@ -142,6 +142,8 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.skyroot_frame_scatterglass, "skyroot_frame_scatterglass");
 		registerItemModels(BlocksAether.skyroot_frame_quicksoil_glass, "skyroot_frame_quicksoil_glass");
 
+		registerItemModels(BlocksAether.skyroot_twigs, "skyroot_twigs");
+
 		registerItemModels(BlocksAether.quicksoil_glass_pane, "glass_pane/quicksoil_glass");
 		registerItemModels(BlocksAether.arkenium_frame_quicksoil_glass_pane, "glass_pane/arkenium_frame_quicksoil_glass");
 		registerItemModels(BlocksAether.skyroot_frame_quicksoil_glass_pane, "glass_pane/skyroot_frame_quicksoil_glass");

@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.registry.GenerationAether;
 import com.gildedgames.aether.common.registry.content.TemplatesAether;
+import com.gildedgames.aether.common.world.biome.WorldDecorationSimple;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherFlowers;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherLakes;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherMinable;
@@ -253,16 +254,6 @@ public class BiomeAetherDecorator
 
 				this.genBlueberryBushes.generate(world, random, pos.add(x, y, z));
 			}
-		}
-
-		// Aether Tall Grass Generator
-		for (count = 0; count < 4; count++)
-		{
-			x = random.nextInt(16) + 8;
-			z = random.nextInt(16) + 8;
-			y = this.nextInt(random, world.getHeight(pos.add(x, 0, z)).getY() * 2);
-
-			//GenerationAether.short_aether_grass.generate(world, random, pos.add(x, y, z));
 		}
 
 		// Purple Flowers Generator

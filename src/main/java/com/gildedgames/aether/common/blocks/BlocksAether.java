@@ -31,6 +31,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.List;
@@ -262,6 +263,8 @@ public class BlocksAether
 										skyroot_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.skyroot_frame_scatterglass.getDefaultState(), false),
 										arkenium_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.arkenium_frame_scatterglass.getDefaultState(), false);
 
+	public static final Block skyroot_twigs = new BlockFloorObject(Material.WOOD, () -> new ItemStack(ItemsAether.skyroot_stick)).setSoundType(SoundType.WOOD);
+
 	public static void preInit()
 	{
 		registerBlock("aether_dirt", BlocksAether.aether_dirt.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.aether_dirt));
@@ -469,6 +472,9 @@ public class BlocksAether
 		registerBlock("skyroot_frame_scatterglass_pane", BlocksAether.skyroot_frame_scatterglass_pane.setCreativeTab(CreativeTabsAether.BLOCKS));
 		registerBlock("arkenium_frame_scatterglass_pane", BlocksAether.arkenium_frame_scatterglass_pane.setCreativeTab(CreativeTabsAether.BLOCKS));
 
+		registerBlock("skyroot_twigs", BlocksAether.skyroot_twigs.setCreativeTab(CreativeTabsAether.BLOCKS));
+
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_twigs, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.tall_aether_grass, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.aether_flower, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.orange_tree, 60, 100);

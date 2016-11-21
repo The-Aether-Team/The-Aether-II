@@ -51,7 +51,7 @@ public class GenerationAether
 
 	public static WorldGenTemplateGroup skyroot_moa_nest, labyrinth_entrance;
 
-	public static WorldGenAetherTallGrass short_aether_grass, aether_grass, long_aether_grass;
+	public static WorldGenFloorPlacer short_aether_grass, aether_grass, long_aether_grass, skyroot_twigs;
 
 	public static WorldGenAercloud green_aercloud, golden_aercloud, storm_aercloud;
 
@@ -186,9 +186,11 @@ public class GenerationAether
 		large_kura_tree = new WorldGenTemplateGroup(large_kura_tree_1);
 		kura_bush = new WorldGenTemplateGroup(kura_bush_1, kura_bush_2, kura_bush_3, kura_bush_4);
 
-		short_aether_grass = new WorldGenAetherTallGrass(BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.SHORT));
-		aether_grass = new WorldGenAetherTallGrass(BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.NORMAL));
-		long_aether_grass = new WorldGenAetherTallGrass(BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.LONG));
+		short_aether_grass = new WorldGenFloorPlacer(BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.SHORT));
+		aether_grass = new WorldGenFloorPlacer(BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.NORMAL));
+		long_aether_grass = new WorldGenFloorPlacer(BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.LONG));
+
+		skyroot_twigs = new WorldGenFloorPlacer(BlocksAether.skyroot_twigs.getDefaultState(), 4);
 
 		green_aercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.GREEN_AERCLOUD), 4, false);
 		golden_aercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.GOLDEN_AERCLOUD), 4, false);

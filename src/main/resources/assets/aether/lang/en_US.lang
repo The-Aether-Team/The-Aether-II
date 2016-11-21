@@ -192,6 +192,7 @@ tile.aether.skyroot_frame_quicksoil_glass_pane.name=Skyroot Frame Quicksoil Glas
 tile.aether.scatterglass_pane.name=Scatterglass Pane
 tile.aether.arkenium_frame_scatterglass_pane.name=Arkenium Frame Scatterglass Pane
 tile.aether.skyroot_frame_scatterglass_pane.name=Skyroot Frame Scatterglass Pane
+tile.aether.skyroot_twigs.name=Skyroot Twigs
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick

@@ -45,6 +45,7 @@ public class EcosystemHighlandPlains implements Ecosystem
 			this.decorations = Lists.newArrayList();
 
 			this.decorations.add(new WorldDecorationSimple(5, GenerationAether.short_aether_grass, GenerationAether.aether_grass));
+			this.decorations.add(new WorldDecorationSimple(1, 0.1F, GenerationAether.skyroot_twigs));
 			this.decorations.add(new WorldDecorationSimple(1, GenerationAether.blue_skyroot_tree, GenerationAether.green_skyroot_tree, GenerationAether.green_skyroot_small_pine, GenerationAether.golden_oak));
 		}
 
