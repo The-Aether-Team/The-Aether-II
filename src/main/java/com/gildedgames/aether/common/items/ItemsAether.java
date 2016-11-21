@@ -45,6 +45,10 @@ public class ItemsAether
 
 	public static final Item cloudwool = new Item();
 
+	public static final Item moa_feather = new Item();
+
+	public static final Item cockatrice_feather = new Item();
+
 	public static final Item ambrosium_shard = new Item(),
 			ambrosium_chunk = new ItemAmbrosiumChunk(),
 			zanite_gemstone = new Item(),
@@ -168,11 +172,11 @@ public class ItemsAether
 			frostpine_door = new ItemDoor(BlocksAether.frostpine_door);
 
 	public static final ItemCrossbow skyroot_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F),
-			holystone_crossbow = new ItemCrossbow().setDurationInTicks(15).setKnockBackValue(0.7F),
-			zanite_crossbow = new ItemCrossbow().setDurationInTicks(10).setKnockBackValue(0.5F),
-			arkenium_crossbow = new ItemCrossbow().setDurationInTicks(10).setKnockBackValue(0.5F),
-			gravitite_crossbow = new ItemCrossbow().setDurationInTicks(5).setKnockBackValue(1.2F),
-			vampire_crossbow = new ItemCrossbow().setDurationInTicks(5).setKnockBackValue(0.7F);
+			holystone_crossbow = new ItemCrossbow().setDurationInTicks(30).setKnockBackValue(0.7F),
+			zanite_crossbow = new ItemCrossbow().setDurationInTicks(15).setKnockBackValue(0.5F),
+			arkenium_crossbow = new ItemCrossbow().setDurationInTicks(35).setKnockBackValue(0.5F),
+			gravitite_crossbow = new ItemCrossbow().setDurationInTicks(25).setKnockBackValue(1.2F),
+			vampire_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.7F);
 
 	public static final ItemBolt bolt = new ItemBolt();
 
@@ -263,8 +267,7 @@ public class ItemsAether
 	public static final Item glamoured_iron_screw = new Item(),
 			wisdom_bauble = new Item();
 
-	public static final Item moa_feather = new Item(),
-			blight_ward = new Item(),
+	public static final Item blight_ward = new Item(),
 			glamoured_skyroot_twig = new Item();
 
 	public static final Item glamoured_gold_screw = new Item(),
@@ -402,6 +405,8 @@ public class ItemsAether
 		registerItem("gravitite_ore_item", gravitite_ore.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("gravitite_plate", gravitite_plate.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("cloudwool", cloudwool.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("moa_feather", moa_feather.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("cockatrice_feather", cockatrice_feather.setCreativeTab(CreativeTabsAether.MATERIALS));
 
 		registerItem("skyroot_axe", skyroot_axe);
 		registerItem("skyroot_pickaxe", skyroot_pickaxe);
@@ -584,7 +589,6 @@ public class ItemsAether
 		registerItem("life_coil", life_coil.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("glamoured_iron_screw", glamoured_iron_screw.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("wisdom_bauble", wisdom_bauble.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("moa_feather", moa_feather.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("blight_ward", blight_ward.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("glamoured_skyroot_twig", glamoured_skyroot_twig.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("glamoured_gold_screw", glamoured_gold_screw.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));

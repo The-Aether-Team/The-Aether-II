@@ -198,6 +198,8 @@ tile.aether.holystone_rock.name=Holystone Rock
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
 item.aether.cloudwool.name=Cloudwool
+item.aether.moa_feather.name=Moa Feather
+item.aether.cockatrice_feather.name=Cockatrice Feather
 item.aether.ambrosium_shard.name=Ambrosium Shard
 item.aether.ambrosium_chunk.name=Ambrosium Chunk
 item.aether.zanite_gemstone.name=Zanite Gemstone
@@ -479,7 +481,6 @@ item.aether.fried_moa_egg.name=Fried Moa Egg
 item.aether.aether_spawn_egg.name=Spawn
 item.aether.nether_portal_frame.name=Nether Portal Frame
 item.aether.end_portal_frame.name=End Portal Frame
-item.aether.skyroot_fragment.name=Skyroot Fragment
 item.aether.arkenium_ore_item.name=Arkenium Ore
 item.aether.gravitite_ore_item.name=Gravitite Ore
 item.aether.gravitite_plate.name=Gravitite Plate

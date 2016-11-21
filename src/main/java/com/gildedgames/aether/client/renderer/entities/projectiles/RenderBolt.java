@@ -23,6 +23,7 @@ public class RenderBolt extends Render<EntityBolt>
 	{
 		boltTextures.put(ItemBoltType.SKYROOT, AetherCore.getResource("textures/entities/bolts/skyroot_bolt.png"));
 		boltTextures.put(ItemBoltType.HOLYSTONE, AetherCore.getResource("textures/entities/bolts/stone_bolt.png"));
+		boltTextures.put(ItemBoltType.SCATTERGLASS, AetherCore.getResource("textures/entities/bolts/scatterglass_bolt.png"));
 		boltTextures.put(ItemBoltType.ZANITE, AetherCore.getResource("textures/entities/bolts/zanite_bolt.png"));
 		boltTextures.put(ItemBoltType.ARKENIUM, AetherCore.getResource("textures/entities/bolts/arkenium_bolt.png"));
 		boltTextures.put(ItemBoltType.GRAVITITE, AetherCore.getResource("textures/entities/bolts/gravitite_bolt.png"));

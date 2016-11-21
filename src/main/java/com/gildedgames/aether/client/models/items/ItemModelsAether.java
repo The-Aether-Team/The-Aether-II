@@ -224,6 +224,8 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.skyroot_stick, "skyroot_stick");
 		registerItemModels(ItemsAether.cloudwool, "cloudwool");
 		registerItemModels(ItemsAether.golden_amber, "golden_amber");
+		registerItemModels(ItemsAether.moa_feather, "moa_feather");
+		registerItemModels(ItemsAether.cockatrice_feather, "cockatrice_feather");
 
 		registerItemModels(ItemsAether.ambrosium_shard, "ambrosium_shard");
 		registerItemModels(ItemsAether.ambrosium_chunk, "ambrosium_chunk");
@@ -502,7 +504,6 @@ public class ItemModelsAether
 
 		registerItemModels(ItemsAether.glamoured_iron_screw, "iron_screw");
 		registerItemModels(ItemsAether.wisdom_bauble, "accessories/wisdom_bauble");
-		registerItemModels(ItemsAether.moa_feather, "accessories/moa_feather");
 		registerItemModels(ItemsAether.blight_ward, "accessories/blight_ward");
 		registerItemModels(ItemsAether.glamoured_skyroot_twig, "skyroot_twig");
 		registerItemModels(ItemsAether.glamoured_gold_screw, "gold_screw");

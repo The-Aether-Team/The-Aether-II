@@ -6,7 +6,7 @@
 			"entries": [
 				{
 					"type": "item",
-					"name": "minecraft:feather",
+					"name": "aether:moa_feather",
 					"weight": 1,
 					"functions": [
 						{

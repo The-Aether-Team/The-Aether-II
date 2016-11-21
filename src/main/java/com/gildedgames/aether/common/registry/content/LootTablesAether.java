@@ -35,7 +35,7 @@ public class LootTablesAether
 
 		ENTITY_COCKATRICE = LootTableList.register(AetherCore.getResource("entities/cockatrice"));
 
-		ENTITY_SWET = LootTableList.register(AetherCore.getResource("entities/swet"));
+		ENTITY_SWET = LootTableList.register(AetherCore.getResource("entities/swet/swet"));
 		ENTITY_SWET_BLUE = LootTableList.register(AetherCore.getResource("entities/swet/swet_blue"));
 		ENTITY_SWET_GOLDEN = LootTableList.register(AetherCore.getResource("entities/swet/swet_golden"));
 		ENTITY_SWET_DARK = LootTableList.register(AetherCore.getResource("entities/swet/swet_dark"));

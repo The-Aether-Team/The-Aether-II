@@ -92,6 +92,8 @@ public class CommonProxy
 		BlocksAether.preInit();
 		ItemsAether.preInit();
 
+		this.recipeManager.preInit();
+
 		EquipmentContent.preInit();
 
 		LootTablesAether.preInit();
