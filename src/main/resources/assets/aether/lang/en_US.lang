@@ -610,6 +610,7 @@ entity.aether.soaring_wisp=Soaring Wisp
 entity.aether.fangrin.name=Fangrin
 entity.aether.nex_spirit.name=Nex Spirit
 entity.aether.pink_baby_swet.name=Pink Baby Swet
+entity.aether.butterfly.name=Butterfly
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether Blocks

@@ -49,6 +49,20 @@ public class EcosystemHighlandJungle implements Ecosystem
 
 			this.decorations.add(new WorldDecorationSimple(8, GenerationAether.short_aether_grass, GenerationAether.aether_grass, GenerationAether.long_aether_grass));
 			this.decorations.add(new WorldDecorationSimple(1, 0.2F, GenerationAether.skyroot_twigs));
+
+			this.decorations.add(new WorldDecorationSimple(6, GenerationAether.holystone_rocks)
+			{
+				@Override
+				public BlockPos findPositionToPlace(World world, Random rand, BlockPos pos)
+				{
+					int x = rand.nextInt(16) + 8;
+					int y = rand.nextInt(128);
+					int z = rand.nextInt(16) + 8;
+
+					return pos.add(x, y, z);
+				}
+			});
+
 			this.decorations.add(new WorldDecorationSimple(1, 0.125F, GenerationAether.labyrinth_ruins));
 			this.decorations.add(new WorldDecorationSimple(3, GenerationAether.skyroot_moa_nest_tree_1));
 			this.decorations.add(new WorldDecorationSimple(35, GenerationAether.green_skyroot_windswept));

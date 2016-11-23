@@ -51,7 +51,7 @@ public class GenerationAether
 
 	public static WorldGenTemplateGroup skyroot_moa_nest, labyrinth_entrance;
 
-	public static WorldGenFloorPlacer short_aether_grass, aether_grass, long_aether_grass, skyroot_twigs;
+	public static WorldGenFloorPlacer short_aether_grass, aether_grass, long_aether_grass, skyroot_twigs, holystone_rocks;
 
 	public static WorldGenAercloud green_aercloud, golden_aercloud, storm_aercloud;
 
@@ -191,6 +191,9 @@ public class GenerationAether
 		long_aether_grass = new WorldGenFloorPlacer(BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.LONG));
 
 		skyroot_twigs = new WorldGenFloorPlacer(4, BlocksAether.skyroot_twigs.getDefaultState(), BlocksAether.skyroot_twigs.getDefaultState(), BlocksAether.holystone_rock.getDefaultState());
+		holystone_rocks = new WorldGenFloorPlacer(BlocksAether.holystone_rock.getDefaultState());
+
+		holystone_rocks.getStatesCanPlaceOn().add(BlocksAether.holystone.getDefaultState());
 
 		green_aercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.GREEN_AERCLOUD), 4, false);
 		golden_aercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.GOLDEN_AERCLOUD), 4, false);

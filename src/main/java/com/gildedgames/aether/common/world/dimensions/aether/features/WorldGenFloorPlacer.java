@@ -1,16 +1,20 @@
 package com.gildedgames.aether.common.world.dimensions.aether.features;
 
+import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
+import java.util.List;
 import java.util.Random;
 
 public class WorldGenFloorPlacer extends WorldGenerator
 {
 
 	private final IBlockState[] states;
+
+	private final List<IBlockState> statesCanPlaceOn = Lists.newArrayList();
 
 	private final int amount;
 
@@ -23,6 +27,11 @@ public class WorldGenFloorPlacer extends WorldGenerator
 	{
 		this.states = states;
 		this.amount = amount;
+	}
+
+	public List<IBlockState> getStatesCanPlaceOn()
+	{
+		return this.statesCanPlaceOn;
 	}
 
 	@Override
@@ -58,7 +67,7 @@ public class WorldGenFloorPlacer extends WorldGenerator
 
 			IBlockState chosen = this.states[rand.nextInt(this.states.length)];
 
-			if (world.isAirBlock(randomPos) && chosen.getBlock().canPlaceBlockAt(world, randomPos))
+			if (world.isAirBlock(randomPos) && chosen.getBlock().canPlaceBlockAt(world, randomPos) && (this.statesCanPlaceOn.isEmpty() || this.statesCanPlaceOn.contains(world.getBlockState(randomPos.down()))))
 			{
 				world.setBlockState(randomPos, chosen, 2);
 

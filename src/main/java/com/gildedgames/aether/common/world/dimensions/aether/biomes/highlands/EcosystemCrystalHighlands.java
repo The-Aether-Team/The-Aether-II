@@ -48,6 +48,20 @@ public class EcosystemCrystalHighlands implements Ecosystem
 			this.decorations = Lists.newArrayList();
 
 			this.decorations.add(new WorldDecorationSimple(4, GenerationAether.blue_skyroot_tree));
+
+			this.decorations.add(new WorldDecorationSimple(6, GenerationAether.holystone_rocks)
+			{
+				@Override
+				public BlockPos findPositionToPlace(World world, Random rand, BlockPos pos)
+				{
+					int x = rand.nextInt(16) + 8;
+					int y = rand.nextInt(128);
+					int z = rand.nextInt(16) + 8;
+
+					return pos.add(x, y, z);
+				}
+			});
+
 			this.decorations.add(new WorldDecorationSimple(3, GenerationAether.dark_blue_skyroot_tree));
 			this.decorations.add(new WorldDecorationSimple(2, GenerationAether.dark_blue_skyroot_oak));
 			this.decorations.add(new WorldDecorationSimple(1, 0.06F,  GenerationAether.storm_aercloud)

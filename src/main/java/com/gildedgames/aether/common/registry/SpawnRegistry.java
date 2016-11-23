@@ -12,10 +12,7 @@ import com.gildedgames.aether.common.entities.living.mobs.EntityTempest;
 import com.gildedgames.aether.common.entities.living.mobs.EntityZephyr;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
-import com.gildedgames.aether.common.entities.living.passive.EntityAerbunny;
-import com.gildedgames.aether.common.entities.living.passive.EntityAerwhale;
-import com.gildedgames.aether.common.entities.living.passive.EntityCarrionSprout;
-import com.gildedgames.aether.common.entities.living.passive.EntityKirrid;
+import com.gildedgames.aether.common.entities.living.passive.*;
 import com.gildedgames.aether.common.registry.content.BiomesAether;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.io.NBTHelper;
@@ -70,6 +67,14 @@ public class SpawnRegistry
 		animals.addEntry(phygs);
 		animals.addEntry(carrion_sprout);
 
+		/** ATMOSPHERIC **/
+		SpawnHandler atmospheric = new SpawnHandler("aether_atmospheric").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(200);
+		atmospheric.worldCondition(new CheckDimension(DimensionsAether.AETHER));
+
+		SpawnEntry butterfly = new SpawnEntry(EntityButterfly.class, 10F, 1, 6).conditiion(grassCheck);
+
+		atmospheric.addEntry(butterfly);
+
 		/** HOSTILES **/
 		SpawnHandler hostiles = new SpawnHandler("aether_hostiles").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(1200);
 		hostiles.worldCondition(new CheckDimension(DimensionsAether.AETHER));
@@ -97,6 +102,7 @@ public class SpawnRegistry
 		flying.addEntry(aerwhale);
 
 		this.registerSpawnHandler(animals);
+		this.registerSpawnHandler(atmospheric);
 		this.registerSpawnHandler(hostiles);
 		this.registerSpawnHandler(flying);
 	}
