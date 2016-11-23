@@ -122,7 +122,7 @@ public class EntityChestMimic extends EntityExtendedMob
 		super.readEntityFromNBT(tag);
 
 		this.setOverheating(tag.getBoolean("overheating"));
-		this.attackTimer = NBTHelper.fullyDeserialize("attackTimer", tag);
+		this.attackTimer = NBTHelper.fullyDeserialize("attackTimer", tag, this.attackTimer);
 	}
 
 	@Override

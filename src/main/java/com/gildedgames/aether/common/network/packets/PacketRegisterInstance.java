@@ -38,7 +38,7 @@ public class PacketRegisterInstance implements IMessage
 		}
 		else
 		{
-			this.instance = NBTHelper.fullyDeserialize("instances", tag);
+			this.instance = NBTHelper.fullyDeserialize("instances", tag, this.instance);
 		}
 	}
 

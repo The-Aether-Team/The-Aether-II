@@ -146,7 +146,7 @@ public class EntityBattleGolem extends EntityAetherMob implements IRangedAttackM
 
 		this.setBombCount(tag.getInteger("bombCount"));
 		this.setCurrentThrowingSide(tag.getBoolean("throwingSide") ? ThrowingSide.LEFT : ThrowingSide.RIGHT);
-		this.resupplyBombTimer = NBTHelper.fullyDeserialize("resupplyBombTimer", tag);
+		this.resupplyBombTimer = NBTHelper.fullyDeserialize("resupplyBombTimer", tag, this.resupplyBombTimer);
 	}
 
 	@Override

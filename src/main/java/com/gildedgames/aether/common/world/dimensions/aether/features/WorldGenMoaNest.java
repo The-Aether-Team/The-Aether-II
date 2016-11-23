@@ -26,6 +26,6 @@ public class WorldGenMoaNest extends WorldGenTemplate
 	{
 		MoaNest nest = new MoaNest(world, GenUtil.rotate(pos, pos.add(this.familySpawnOffset), rotation));
 
-		nest.spawnMoaFamily(world, 2 + world.rand.nextInt(4));
+		nest.spawnMoaFamily(world, 2 + random.nextInt(2), 3);
 	}
 }

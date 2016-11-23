@@ -224,11 +224,11 @@ public class NBTHelper
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T extends NBT> T fullyDeserialize(String key, NBTTagCompound tag)
+	public static <T extends NBT> T fullyDeserialize(String key, NBTTagCompound tag, T returnedIfNull)
 	{
 		if (!tag.hasKey(key + "_null") || tag.getBoolean(key + "_null"))
 		{
-			return null;
+			return returnedIfNull;
 		}
 
 		T nbt = (T) ClassSerializer.instantiate(key, tag);

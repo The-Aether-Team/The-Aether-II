@@ -84,7 +84,7 @@ public class BreakFloorActionSlider implements BossStageAction<EntitySlider>
 
 	@Override public void read(NBTTagCompound input)
 	{
-		this.timer = NBTHelper.fullyDeserialize("timer", input);
+		this.timer = NBTHelper.fullyDeserialize("timer", input, this.timer);
 	}
 
 }

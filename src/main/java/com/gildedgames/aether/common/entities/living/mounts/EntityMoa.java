@@ -13,7 +13,9 @@ import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import com.gildedgames.aether.common.util.TickTimer;
+import com.gildedgames.aether.common.util.io.NBTHelper;
 import com.google.common.collect.Sets;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -66,7 +68,9 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 	public int ticksUntilFlap;
 
-	private TickTimer hungryTimer = new TickTimer();
+	private TickTimer hungryTimer = new TickTimer(), dropFeatherTimer = new TickTimer();
+
+	private int timeUntilDropFeather;
 
 	private EntityGroup pack;
 
@@ -230,6 +234,23 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 		if (!this.worldObj.isRemote)
 		{
+			if (!this.isRaisedByPlayer())
+			{
+				this.dropFeatherTimer.tick();
+
+				if (this.timeUntilDropFeather == 0)
+				{
+					this.timeUntilDropFeather = 120 + this.getRNG().nextInt(80);
+				}
+
+				if (this.dropFeatherTimer.getSecondsPassed() >= this.timeUntilDropFeather)
+				{
+					this.timeUntilDropFeather = 0;
+					Block.spawnAsEntity(this.worldObj, this.getPosition(), new ItemStack(ItemsAether.moa_feather));
+					this.dropFeatherTimer.reset();
+				}
+			}
+
 			if (this.isChild() && this.isRaisedByPlayer())
 			{
 				if (this.getFoodEaten() >= this.getFoodRequired())
@@ -346,6 +367,11 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		nbt.setBoolean("isHungry", this.isHungry());
 		nbt.setInteger("foodRequired", this.getFoodRequired());
 		nbt.setInteger("foodEaten", this.getFoodEaten());
+
+		NBTHelper.fullySerialize("hungryTimer", this.hungryTimer, nbt);
+		NBTHelper.fullySerialize("dropFeatherTimer", this.dropFeatherTimer, nbt);
+
+		nbt.setInteger("timeUntilDropFeather", this.timeUntilDropFeather);
 	}
 
 	@Override
@@ -368,6 +394,11 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		this.setIsHungry(nbt.getBoolean("isHungry"));
 		this.setFoodRequired(nbt.getInteger("foodRequired"));
 		this.setFoodEaten(nbt.getInteger("foodEaten"));
+
+		this.hungryTimer = NBTHelper.fullyDeserialize("hungryTimer", nbt, this.hungryTimer);
+		this.dropFeatherTimer = NBTHelper.fullyDeserialize("dropFeatherTimer", nbt, this.dropFeatherTimer);
+
+		this.timeUntilDropFeather = nbt.getInteger("timeUntilDropFeather");
 	}
 
 	@Override

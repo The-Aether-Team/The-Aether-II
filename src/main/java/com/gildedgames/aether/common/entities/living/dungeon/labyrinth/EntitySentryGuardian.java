@@ -232,9 +232,9 @@ public class EntitySentryGuardian extends EntityFlyingMob implements IRangedAtta
 
 		this.setOverheating(tag.getBoolean("overheating"));
 
-		this.attackTimer = NBTHelper.fullyDeserialize("attackTimer", tag);
-		this.overheatingTimer = NBTHelper.fullyDeserialize("overheatingTimer", tag);
-		this.spawnRepairSentriesTimer = NBTHelper.fullyDeserialize("spawnRepairSentriesTimer", tag);
+		this.attackTimer = NBTHelper.fullyDeserialize("attackTimer", tag, this.attackTimer);
+		this.overheatingTimer = NBTHelper.fullyDeserialize("overheatingTimer", tag, this.overheatingTimer);
+		this.spawnRepairSentriesTimer = NBTHelper.fullyDeserialize("spawnRepairSentriesTimer", tag, this.spawnRepairSentriesTimer);
 
 		if (!tag.getBoolean("repairSentry1Null"))
 		{

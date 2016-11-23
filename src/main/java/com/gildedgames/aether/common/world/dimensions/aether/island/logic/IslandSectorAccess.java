@@ -287,7 +287,7 @@ public class IslandSectorAccess
 		{
 			NBTTagCompound tag = NBTHelper.readNBTFromFile(file);
 
-			IslandSector sector = NBTHelper.fullyDeserialize("s", tag);
+			IslandSector sector = NBTHelper.fullyDeserialize("s", tag, null);
 
 			return sector;
 		}

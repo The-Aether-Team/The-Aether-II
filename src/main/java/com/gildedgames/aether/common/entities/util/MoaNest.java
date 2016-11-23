@@ -61,19 +61,12 @@ public class MoaNest
 				state.getMaterial() == Material.VINE;
 	}
 	
-	public void spawnMoaFamily(World world, int familySize)
+	public void spawnMoaFamily(World world, int initialSize, int optimalSize)
 	{
 		this.pack = new EntityGroup(EntityGroup.getNextID());
-		this.pack.setOptimalSize(familySize);
-		
-		boolean hasExtraChild = world.rand.nextBoolean();
-		
-		if (hasExtraChild)
-		{
-			familySize++;
-		}
+		this.pack.setOptimalSize(optimalSize);
 
-		for (int amount = 0; amount < familySize; amount++)
+		for (int amount = 0; amount < initialSize; amount++)
 		{
 			EntityMoa moa = new EntityMoa(world, this);
 			
@@ -87,7 +80,7 @@ public class MoaNest
 				moa.setGender(AnimalGender.MALE);
 			}
 			
-			if (amount == 2)
+			if (amount >= 2)
 			{
 				moa.setGrowingAge(-24000);
 			}

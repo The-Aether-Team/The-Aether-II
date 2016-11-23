@@ -397,7 +397,7 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 
 		this.nextSlideCooldown = tag.getInteger("nextSlideCooldown");
 
-		SimpleBossManager<EntitySlider> bossManager = NBTHelper.fullyDeserialize("bossManager", tag);
+		SimpleBossManager<EntitySlider> bossManager = NBTHelper.fullyDeserialize("bossManager", tag, null);
 
 		if (bossManager != null)
 		{

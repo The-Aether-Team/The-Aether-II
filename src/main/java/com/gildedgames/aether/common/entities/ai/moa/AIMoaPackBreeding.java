@@ -68,6 +68,8 @@ public class AIMoaPackBreeding extends EntityAIBase
 
 		if (this.world.getBlockState(this.eggPos).getBlock() == BlocksAether.moa_egg)
 		{
+			this.resetTimer();
+
 			return false;
 		}
 

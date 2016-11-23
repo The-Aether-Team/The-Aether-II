@@ -88,7 +88,7 @@ public class EntityProductionLine extends EntityCreature
 		super.readEntityFromNBT(tag);
 
 		this.broken = tag.getBoolean("broken");
-		this.spawningTimer = NBTHelper.fullyDeserialize("spawningTimer", tag);
+		this.spawningTimer = NBTHelper.fullyDeserialize("spawningTimer", tag, this.spawningTimer);
 
 		int spawnedSize = tag.getInteger("spawnedSize");
 
