@@ -1,0 +1,7 @@
+{
+	"parent": "block/column_side",
+	"textures": {
+		"end": "aether:blocks/skyroot_planks/skyroot_base_top",
+		"side": "aether:blocks/skyroot_planks/skyroot_beam"
+	}
+}

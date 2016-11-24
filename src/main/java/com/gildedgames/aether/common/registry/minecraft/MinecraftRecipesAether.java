@@ -115,12 +115,12 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 				'X', Items.LEATHER, 'Z', Items.STRING);
 
 		// Skyroot Planks
-		registerShapelessRecipe(new ItemStack(BlocksAether.aether_planks, 4),
+		registerShapelessRecipe(new ItemStack(BlocksAether.skyroot_planks, 4),
 				new ItemStack(BlocksAether.skyroot_log));
 
 		// Skyroot Sticks
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_stick, 4), "X", "X",
-				'X', new ItemStack(BlocksAether.aether_planks));
+				'X', new ItemStack(BlocksAether.skyroot_planks));
 
 		// Woven Skyroot Sticks
 		registerShapedRecipe(new ItemStack(BlocksAether.woven_sticks, 2, BlockWovenSticks.SKYROOT.getMeta()), "XX", "XX",
@@ -128,7 +128,7 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 
 		// Skyroot Crafting Table
 		registerShapedRecipe(new ItemStack(BlocksAether.aether_crafting_table), "XX", "XX",
-				'X', new ItemStack(BlocksAether.aether_planks));
+				'X', new ItemStack(BlocksAether.skyroot_planks));
 
 		// Cloudwool_Block
 		registerShapedRecipe(new ItemStack(BlocksAether.cloudwool_block), "XX", "XX",
@@ -141,11 +141,11 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 		// Skyroot Bed
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_bed), "XXX", "YYY",
 				'X', new ItemStack(ItemsAether.cloudwool),
-				'Y', new ItemStack(BlocksAether.aether_planks));
+				'Y', new ItemStack(BlocksAether.skyroot_planks));
 
 		// Skyroot Chest
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_chest), "XXX", "X X", "XXX",
-				'X', new ItemStack(BlocksAether.aether_planks));
+				'X', new ItemStack(BlocksAether.skyroot_planks));
 
 		// Altar
         registerShapedRecipe(new ItemStack(BlocksAether.altar), "AZA", " H ", "HHH",
@@ -153,11 +153,11 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 
 		// Icestone Cooler
 		registerShapedRecipe(new ItemStack(BlocksAether.icestone_cooler), "SAS", "H H", "SSS",
-				'H', new ItemStack(BlocksAether.holystone), 'A', new ItemStack(ItemsAether.arkenium), 'S', new ItemStack(BlocksAether.aether_planks));
+				'H', new ItemStack(BlocksAether.holystone), 'A', new ItemStack(ItemsAether.arkenium), 'S', new ItemStack(BlocksAether.skyroot_planks));
 
 		// Masonry Bench
 		registerShapedRecipe(new ItemStack(BlocksAether.masonry_bench), "AAA", "SSS", "HHH",
-				'H', new ItemStack(BlocksAether.holystone), 'A', new ItemStack(ItemsAether.arkenium), 'S', new ItemStack(BlocksAether.aether_planks));
+				'H', new ItemStack(BlocksAether.holystone), 'A', new ItemStack(ItemsAether.arkenium), 'S', new ItemStack(BlocksAether.skyroot_planks));
 
 		// Arkenium Strip
 		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_strip, 4), "X", "X",
@@ -165,7 +165,7 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 
 		// Skyroot Door
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_door, 3), "XX", "XX", "XX",
-				'X', new ItemStack(BlocksAether.aether_planks));
+				'X', new ItemStack(BlocksAether.skyroot_planks));
 
 		// Arkenium Door
 		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_door, 3), "XX", "XX", "XX",
@@ -173,7 +173,7 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 
 		// Skyroot Trap Door
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_trapdoor, 2), "XXX", "XXX",
-				'X', new ItemStack(BlocksAether.aether_planks));
+				'X', new ItemStack(BlocksAether.skyroot_planks));
 
 		// Skyroot Ladder
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_ladder, 3), "X X", "XXX", "X X",
@@ -181,11 +181,11 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 
 		// Skyroot Pressure Plate
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_pressure_plate), "XX ",
-				'X', new ItemStack(BlocksAether.aether_planks));
+				'X', new ItemStack(BlocksAether.skyroot_planks));
 
 		// Skyroot Button
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_button), "X",
-				'X', new ItemStack(BlocksAether.aether_planks));
+				'X', new ItemStack(BlocksAether.skyroot_planks));
 
 		// Holystone Pressure Plate
 		registerShapedRecipe(new ItemStack(BlocksAether.holystone_pressure_plate), "XX ",
@@ -197,7 +197,7 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 
 		// Golden Dart Shooter
 		registerShapedRecipe(new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.GOLDEN.ordinal()), "X", "X", "Y",
-				'X', new ItemStack(BlocksAether.aether_planks), 'Y', new ItemStack(ItemsAether.golden_amber));
+				'X', new ItemStack(BlocksAether.skyroot_planks), 'Y', new ItemStack(ItemsAether.golden_amber));
 
 		// Poison Dart Shooter
 		registerShapelessRecipe(new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.POISON.ordinal()),
@@ -215,7 +215,7 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 
         // Skyroot Bucket
         registerShapedRecipe(new ItemStack(ItemsAether.skyroot_bucket), "X X", " X ",
-                'X', new ItemStack(BlocksAether.aether_planks));
+                'X', new ItemStack(BlocksAether.skyroot_planks));
 
 		// Zanite Block
 		registerShapedRecipe(new ItemStack(BlocksAether.zanite_block), "XXX", "XXX", "XXX",
@@ -266,7 +266,7 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 		// Slabs
 
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_slab, 6), "XXX",
-				'X', new ItemStack(BlocksAether.aether_planks));
+				'X', new ItemStack(BlocksAether.skyroot_planks));
 		registerShapedRecipe(new ItemStack(BlocksAether.holystone_slab, 6), "XXX",
 			    'X', new ItemStack(BlocksAether.holystone));
 		registerShapedRecipe(new ItemStack(BlocksAether.holystone_brick_slab, 6), "XXX",
@@ -285,16 +285,16 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 		// Gates
         registerShapedRecipe(new ItemStack(BlocksAether.skyroot_fence_gate, 1), "XYX", "XYX",
                 'X', new ItemStack(ItemsAether.skyroot_stick),
-                'Y', new ItemStack(BlocksAether.aether_planks));
+                'Y', new ItemStack(BlocksAether.skyroot_planks));
 
         // Fences
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_fence, 3), "YXY", "YXY",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(BlocksAether.aether_planks));
+				'Y', new ItemStack(BlocksAether.skyroot_planks));
 
 		// Sign
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_sign, 3), "XXX", "XXX", " Y ",
-				'X', new ItemStack(BlocksAether.aether_planks),
+				'X', new ItemStack(BlocksAether.skyroot_planks),
 				'Y', new ItemStack(ItemsAether.skyroot_stick));
 
         // Ambrosium Torch
@@ -324,13 +324,13 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 		registerShapedRecipe(new ItemStack(BlocksAether.incubator), "XXX", "XYX", "ZZZ",
 				'X', new ItemStack(BlocksAether.holystone),
 				'Y', new ItemStack(ItemsAether.ambrosium_chunk),
-				'Z', new ItemStack(BlocksAether.aether_planks));
+				'Z', new ItemStack(BlocksAether.skyroot_planks));
 
 		// Crossbow
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_crossbow), "ZZY", "XYZ", "WXZ",
 				'W', new ItemStack(ItemsAether.skyroot_stick),
 				'X', new ItemStack(Items.STRING),
-				'Y', new ItemStack(BlocksAether.aether_planks),
+				'Y', new ItemStack(BlocksAether.skyroot_planks),
 				'Z', new ItemStack(ItemsAether.arkenium_strip));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.holystone_crossbow), "ZZY", "XYZ", "WXZ",
@@ -361,7 +361,7 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.SKYROOT.ordinal()), "  Z", " X ", "Y  ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(BlocksAether.aether_planks),
+				'Y', new ItemStack(BlocksAether.skyroot_planks),
 				'Z', "feather"));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.HOLYSTONE.ordinal()), "  Z", " X ", "Y  ",
@@ -392,7 +392,7 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 		// Shields
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_shield), "YXY", "YYY", " Y ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
-				'Y', new ItemStack(BlocksAether.aether_planks));
+				'Y', new ItemStack(BlocksAether.skyroot_planks));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.holystone_shield), "YXY", "YYY", " Y ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
@@ -422,7 +422,7 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 				'U', ItemsAether.icestone);
 
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_stairs, 4), "U  ", "UU ", "UUU",
-				'U', BlocksAether.aether_planks);
+				'U', BlocksAether.skyroot_planks);
 
 		registerShapedRecipe(new ItemStack(BlocksAether.carved_stone_stairs, 4), "U  ", "UU ", "UUU",
 				'U', BlocksAether.carved_stone);
@@ -441,7 +441,7 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 	{
 		ItemStack skyrootStick = new ItemStack(ItemsAether.skyroot_stick);
 
-		ItemStack skyroot = new ItemStack(BlocksAether.aether_planks);
+		ItemStack skyroot = new ItemStack(BlocksAether.skyroot_planks);
 		ItemStack holystone = new ItemStack(BlocksAether.holystone);
 		ItemStack zanite = new ItemStack(ItemsAether.zanite_gemstone);
 		ItemStack gravitite = new ItemStack(ItemsAether.gravitite_plate);

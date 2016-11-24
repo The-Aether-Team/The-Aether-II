@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAngelstoneBrick;
 import com.gildedgames.aether.common.blocks.construction.BlockFadedHolystoneBrick;
 import com.gildedgames.aether.common.blocks.construction.BlockHolystoneBrick;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootPlanks;
 import com.gildedgames.aether.common.recipes.simple.OreDictionaryRequirement;
 import com.gildedgames.aether.common.recipes.simple.SimpleRecipe;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
@@ -60,6 +61,16 @@ public class SimpleRecipesAether
 		addMasonry(new ItemStack(BlocksAether.angelstone_brick, 1, BlockAngelstoneBrick.FLAGSTONES.getMeta()), new ItemStack(BlocksAether.angelstone_brick, 1, BlockAngelstoneBrick.NORMAL.getMeta()));
 		addMasonry(new ItemStack(BlocksAether.angelstone_brick, 1, BlockAngelstoneBrick.KEYSTONE.getMeta()), new ItemStack(BlocksAether.angelstone_brick, 1, BlockAngelstoneBrick.NORMAL.getMeta()));
 		addMasonry(new ItemStack(BlocksAether.angelstone_pillar), new ItemStack(BlocksAether.angelstone_brick, 1, BlockAngelstoneBrick.NORMAL.getMeta()));
+
+		addMasonry(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.BASE_PLANKS.getMeta()), new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.BASE_BEAM.getMeta()), new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.TOP_PLANKS.getMeta()), new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.TOP_BEAM.getMeta()), new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.FLOORBOARDS.getMeta()), new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.HIGHLIGHT.getMeta()), new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.TILES.getMeta()), new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.TILES_SMALL.getMeta()), new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.NORMAL.getMeta()));
+		addMasonry(new ItemStack(BlocksAether.skyroot_beam), new ItemStack(BlocksAether.skyroot_planks, 1, BlockAngelstoneBrick.NORMAL.getMeta()));
 
 		addMasonry(new ItemStack(BlocksAether.skyroot_frame_quicksoil_glass), new ItemStack(BlocksAether.quicksoil_glass));
 		addMasonry(new ItemStack(BlocksAether.skyroot_frame_scatterglass), new ItemStack(BlocksAether.scatterglass));

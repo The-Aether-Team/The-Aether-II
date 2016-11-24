@@ -171,12 +171,6 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.zanite_block, "zanite_block");
 		registerItemModels(BlocksAether.gravitite_block, "gravitite_block");
 
-		registerItemModels(BlocksAether.aether_planks, new ItemModelBuilder("planks/")
-				.add(BlockAetherPlanks.SKYROOT.getMeta(), "skyroot_planks")
-				.add(BlockAetherPlanks.BLIGHTWILLOW.getMeta(), "blightwillow_planks")
-				.add(BlockAetherPlanks.EARTHSHIFTER.getMeta(), "earthshifter_planks")
-				.add(BlockAetherPlanks.FROSTPINE.getMeta(), "frostpine_planks"));
-
 		registerItemModels(BlocksAether.holystone_brick, new ItemModelBuilder("holystone_bricks/")
 				.add(BlockHolystoneBrick.NORMAL.getMeta(), "normal")
 				.add(BlockHolystoneBrick.BASE_BRICKS.getMeta(), "base_bricks")
@@ -213,6 +207,19 @@ public class ItemModelsAether
 				.add(BlockAngelstoneBrick.KEYSTONE.getMeta(), "keystone"));
 
 		registerItemModels(BlocksAether.angelstone_pillar, "angelstone_bricks/pillar");
+
+		registerItemModels(BlocksAether.skyroot_planks, new ItemModelBuilder("skyroot_planks/")
+				.add(BlockSkyrootPlanks.NORMAL.getMeta(), "normal")
+				.add(BlockSkyrootPlanks.BASE_PLANKS.getMeta(), "base_planks")
+				.add(BlockSkyrootPlanks.BASE_BEAM.getMeta(), "base_beam")
+				.add(BlockSkyrootPlanks.TOP_PLANKS.getMeta(), "top_planks")
+				.add(BlockSkyrootPlanks.TOP_BEAM.getMeta(), "top_beam")
+				.add(BlockSkyrootPlanks.FLOORBOARDS.getMeta(), "floorboards")
+				.add(BlockSkyrootPlanks.HIGHLIGHT.getMeta(), "highlight")
+				.add(BlockSkyrootPlanks.TILES.getMeta(), "tiles")
+				.add(BlockSkyrootPlanks.TILES_SMALL.getMeta(), "tiles_small"));
+
+		registerItemModels(BlocksAether.skyroot_beam, "skyroot_planks/beam");
 
 		registerItemModels(BlocksAether.quicksoil_glass, "quicksoil_glass");
 

@@ -61,6 +61,10 @@ public class BlocksAether
 
 	public static final BlockAngelstonePillar angelstone_pillar = new BlockAngelstonePillar();
 
+	public static final BlockSkyrootPlanks skyroot_planks = new BlockSkyrootPlanks();
+
+	public static final BlockSkyrootBeam skyroot_beam = new BlockSkyrootBeam();
+
 	public static final BlockAercloud aercloud = new BlockAercloud();
 
 	public static final BlockCloudwoolBlock cloudwool_block = new BlockCloudwoolBlock();
@@ -72,8 +76,6 @@ public class BlocksAether
 	public static final BlockGravititeOre gravitite_ore = new BlockGravititeOre();
 
 	public static final BlockArkeniumOre arkenium_ore = new BlockArkeniumOre();
-
-	public static final Block aether_planks = new BlockAetherPlanks();
 
 	public static final BlockAetherLog skyroot_log = new BlockAetherLog(),
 			golden_oak_log = new BlockGoldenOakLog(),
@@ -212,7 +214,7 @@ public class BlocksAether
 			divine_sentry_wall = new BlockDivineWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f);
 
 	public static final BlockCustomSlab
-			skyroot_slab = new BlockCustomSlab(BlocksAether.aether_planks.getDefaultState()),
+			skyroot_slab = new BlockCustomSlab(BlocksAether.skyroot_planks.getDefaultState()),
 			holystone_slab = new BlockCustomSlab(BlocksAether.holystone.getDefaultState()),
 			holystone_brick_slab =  new BlockCustomSlab(BlocksAether.holystone_brick.getDefaultState()),
 			carved_stone_slab = new BlockCustomSlab(BlocksAether.carved_stone.getDefaultState()),
@@ -225,7 +227,7 @@ public class BlocksAether
 
 	public static final Block labyrinth_strongblock = new BlockLabyrinth().setBlockUnbreakable().setResistance(6000000.0F);
 
-	public static final Block skyroot_stairs = new BlockCustomStairs(BlocksAether.aether_planks.getDefaultState()),
+	public static final Block skyroot_stairs = new BlockCustomStairs(BlocksAether.skyroot_planks.getDefaultState()),
 			holystone_stairs = new BlockCustomStairs(BlocksAether.holystone.getDefaultState()),
 			mossy_holystone_stairs = new BlockCustomStairs(BlocksAether.holystone.getDefaultState().withProperty(BlockHolystone.PROPERTY_VARIANT, BlockHolystone.MOSSY_HOLYSTONE)),
 			holystone_brick_stairs = new BlockCustomStairs(BlocksAether.holystone_brick.getDefaultState()),
@@ -278,8 +280,6 @@ public class BlocksAether
 		registerBlock("aercloud", BlocksAether.aercloud.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.aercloud));
 
 		registerBlock("cloudwool_block", BlocksAether.cloudwool_block.setCreativeTab(CreativeTabsAether.BLOCKS));
-
-		registerBlock("aether_planks", BlocksAether.aether_planks.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.aether_planks));
 
 		registerBlock("ambrosium_ore", BlocksAether.ambrosium_ore.setCreativeTab(CreativeTabsAether.BLOCKS));
 		registerBlock("zanite_ore", BlocksAether.zanite_ore.setCreativeTab(CreativeTabsAether.BLOCKS));
@@ -369,6 +369,10 @@ public class BlocksAether
 		registerBlock("angelstone_brick", BlocksAether.angelstone_brick.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.angelstone_brick));
 
 		registerBlock("angelstone_pillar", BlocksAether.angelstone_pillar.setCreativeTab(CreativeTabsAether.BLOCKS));
+
+		registerBlock("skyroot_planks", BlocksAether.skyroot_planks.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.skyroot_planks));
+
+		registerBlock("skyroot_beam", BlocksAether.skyroot_beam.setCreativeTab(CreativeTabsAether.BLOCKS));
 
 		registerBlock("skyroot_door", BlocksAether.skyroot_door);
 		registerBlock("arkenium_door", BlocksAether.arkenium_door);
@@ -485,7 +489,7 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(BlocksAether.enchanted_blueberry_bush, 60, 100);
 
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_log_wall, 5, 5);
-		Blocks.FIRE.setFireInfo(BlocksAether.aether_planks, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_chest, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.aether_crafting_table, 5, 20);
 
@@ -532,7 +536,7 @@ public class BlocksAether
 		skyroot_chest.setHarvestLevel("axe", 0);
 		skyroot_log.setHarvestLevel("axe", 0);
 		golden_oak_log.setHarvestLevel("axe", 0);
-		aether_planks.setHarvestLevel("axe", 0);
+		skyroot_planks.setHarvestLevel("axe", 0);
 		woven_sticks.setHarvestLevel("axe", 0);
 
 		ambrosium_ore.setHarvestLevel("pickaxe", 0);
