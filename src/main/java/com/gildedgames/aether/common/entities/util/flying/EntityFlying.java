@@ -244,4 +244,9 @@ public class EntityFlying extends EntityCreature
 		return stack;
 	}
 
+	protected boolean canDespawn()
+	{
+		return false;
+	}
+
 }
