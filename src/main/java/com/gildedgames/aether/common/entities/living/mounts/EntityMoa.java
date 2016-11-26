@@ -240,7 +240,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 				if (this.timeUntilDropFeather == 0)
 				{
-					this.timeUntilDropFeather = 120 + this.getRNG().nextInt(80);
+					this.timeUntilDropFeather = 300 + this.getRNG().nextInt(80);
 				}
 
 				if (this.dropFeatherTimer.getSecondsPassed() >= this.timeUntilDropFeather)
