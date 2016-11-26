@@ -71,7 +71,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 	private ISimpleRecipe currentRecipe;
 
-	public String hoverDescription;
+	public List<String> hoverDescription;
 
 	private GuiXButton xButton;
 
@@ -392,9 +392,9 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 		super.drawScreen(mouseX, mouseY, partialTicks);
 
-		if (this.hoverDescription != null && this.hoverDescription.length() > 0)
+		if (this.hoverDescription != null && this.hoverDescription.size() > 0)
 		{
-			GuiUtil.drawHoveringText(Collections.singletonList(this.hoverDescription), mouseX, mouseY, Minecraft.getMinecraft().fontRendererObj);
+			GuiUtil.drawHoveringText(this.hoverDescription, mouseX, mouseY, Minecraft.getMinecraft().fontRendererObj);
 		}
 
 		this.hoverDescription = null;
@@ -499,13 +499,13 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 	}
 
 	@Override
-	public void setHoveredDescription(String desc)
+	public void setHoveredDescription(List<String> desc)
 	{
 		this.hoverDescription = desc;
 	}
 
 	@Override
-	public String getHoveredDescription()
+	public List<String> getHoveredDescription()
 	{
 		return this.hoverDescription;
 	}

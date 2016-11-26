@@ -1,10 +1,12 @@
 package com.gildedgames.aether.client.gui;
 
+import java.util.List;
+
 public interface IExtendedGui
 {
 
-	void setHoveredDescription(String desc);
+	void setHoveredDescription(List<String> desc);
 
-	String getHoveredDescription();
+	List<String> getHoveredDescription();
 
 }

@@ -105,7 +105,7 @@ public class GuiRequiredMaterial extends GuiButton
 				if (gui instanceof IExtendedGui)
 				{
 					IExtendedGui extendedGui = (IExtendedGui)gui;
-					extendedGui.setHoveredDescription(I18n.format(this.displayStack.getDisplayName()));
+					extendedGui.setHoveredDescription(this.displayStack.getTooltip(Minecraft.getMinecraft().thePlayer, false));
 				}
 			}
 

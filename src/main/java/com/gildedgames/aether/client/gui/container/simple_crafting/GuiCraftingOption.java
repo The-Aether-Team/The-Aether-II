@@ -64,7 +64,7 @@ public class GuiCraftingOption extends GuiButton
 				if (gui instanceof IExtendedGui)
 				{
 					IExtendedGui extendedGui = (IExtendedGui)gui;
-					extendedGui.setHoveredDescription(I18n.format(this.recipe.getResult().getDisplayName()));
+					extendedGui.setHoveredDescription(this.recipe.getResult().getTooltip(Minecraft.getMinecraft().thePlayer, false));
 				}
 			}
 
