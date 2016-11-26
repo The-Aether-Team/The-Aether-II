@@ -531,11 +531,11 @@ public class ItemsAether
 		registerItem("candy_cane_sword", candy_cane_sword);
 		registerItem("valkyrie_lance", valkyrie_lance);
 
-		registerItem("skyroot_door_item", skyroot_door.setCreativeTab(CreativeTabsAether.BLOCKS));
-		registerItem("arkenium_door_item", arkenium_door.setCreativeTab(CreativeTabsAether.BLOCKS));
-		//registerItem("blightwillow_door_item", blightwillow_door_item.setCreativeTab(CreativeTabsAether.BLOCKS));
-		//registerItem("earthshifter_door_item", earthshifter_door_item.setCreativeTab(CreativeTabsAether.BLOCKS));
-		//registerItem("frostpine_door_item", frostpine_door_item.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerItem("skyroot_door_item", skyroot_door.setCreativeTab(CreativeTabsAether.UTILITY));
+		registerItem("arkenium_door_item", arkenium_door.setCreativeTab(CreativeTabsAether.UTILITY));
+		//registerItem("blightwillow_door_item", blightwillow_door_item.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		//registerItem("earthshifter_door_item", earthshifter_door_item.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		//registerItem("frostpine_door_item", frostpine_door_item.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		registerItem("iron_ring", iron_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("gold_ring", gold_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
@@ -552,9 +552,9 @@ public class ItemsAether
 		registerItem("bone_ring", bone_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("skyroot_ring", skyroot_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		
-		registerItem("skyroot_sign", skyroot_sign.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerItem("skyroot_sign", skyroot_sign.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		
-		registerItem("aether_portal_frame", aether_portal_frame.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerItem("aether_portal_frame", aether_portal_frame.setCreativeTab(CreativeTabsAether.UTILITY));
 		registerItem("nether_portal_frame", nether_portal_frame.setCreativeTab(CreativeTabs.TRANSPORTATION));
 		registerItem("end_portal_frame", end_portal_frame.setCreativeTab(CreativeTabs.TRANSPORTATION));
 
@@ -599,7 +599,7 @@ public class ItemsAether
 		registerItem("damaged_moa_feather", damaged_moa_feather.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("osseous_bane", osseous_bane.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("rot_bane", rot_bane.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("skyroot_bed_item", skyroot_bed.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerItem("skyroot_bed_item", skyroot_bed.setCreativeTab(CreativeTabsAether.UTILITY));
 
 		registerItem("moa_egg_item", moa_egg);
 		registerItem("rainbow_moa_egg", rainbow_moa_egg.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));

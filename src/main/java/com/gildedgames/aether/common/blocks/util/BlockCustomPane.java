@@ -6,11 +6,9 @@ import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -26,7 +24,7 @@ public class BlockCustomPane extends BlockPane
 	{
 		super(state.getMaterial(), canDrop);
 
-		this.setCreativeTab(CreativeTabsAether.BLOCKS);
+		this.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS);
 
 		final Block block = state.getBlock();
 

@@ -17,9 +17,15 @@ import java.util.List;
 public class CreativeTabsAether
 {
 
-	public static final CreativeTab BLOCKS = new CreativeTab("aether.blocks");
+	public static final CreativeTab NATURAL_BLOCKS = new CreativeTab("aether.natural_blocks");
+
+	public static final CreativeTab CONSTRUCTION = new CreativeTab("aether.construction");
 
 	public static final CreativeTab VISUAL_VARIANTS = new CreativeTab("aether.visual_variants");
+
+	public static final CreativeTab UTILITY = new CreativeTab("aether.utility_blocks");
+
+	public static final CreativeTab DUNGEON = new CreativeTab("aether.dungeon_blocks");
 
     public static final CreativeTab TOOLS = new CreativeTab("aether.tools");
 
@@ -48,8 +54,11 @@ public class CreativeTabsAether
     @SideOnly(Side.CLIENT)
 	public static void registerTabIcons()
 	{
-		BLOCKS.setDisplayStack(new ItemStack(BlocksAether.aether_grass, 1, BlockAetherGrass.AETHER.getMeta()));
+		NATURAL_BLOCKS.setDisplayStack(new ItemStack(BlocksAether.aether_grass, 1, BlockAetherGrass.AETHER.getMeta()));
+		CONSTRUCTION.setDisplayStack(new ItemStack(BlocksAether.agiosite_brick));
 		VISUAL_VARIANTS.setDisplayStack(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.TOP_BEAM.getMeta()));
+		UTILITY.setDisplayStack(new ItemStack(BlocksAether.altar));
+		DUNGEON.setDisplayStack(new ItemStack(BlocksAether.labyrinth_base));
 		MATERIALS.setDisplayStack(new ItemStack(ItemsAether.ambrosium_shard));
 		TOOLS.setDisplayStack(new ItemStack(ItemsAether.zanite_pickaxe));
 		WEAPONS.setDisplayStack(new ItemStack(ItemsAether.gravitite_sword));
