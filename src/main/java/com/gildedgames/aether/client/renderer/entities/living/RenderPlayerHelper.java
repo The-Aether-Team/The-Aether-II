@@ -38,7 +38,7 @@ public class RenderPlayerHelper
 
 		//
 
-		RenderPlayerHelper.renderRings(player.getPlayer(), ring1, ring2, event);
+		//RenderPlayerHelper.renderRings(player.getPlayer(), ring1, ring2, event);
 	}
 
 	private static final ModelBiped modelBiped = new ModelBiped();
