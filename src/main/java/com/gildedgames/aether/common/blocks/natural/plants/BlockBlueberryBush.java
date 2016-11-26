@@ -205,4 +205,11 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVarian
 			return "missingno";
 		}
 	}
+
+	@Override
+	public void addItemsToCreativeTab(Item item, CreativeTabs tab, List<ItemStack> stackList)
+	{
+
+	}
+
 }

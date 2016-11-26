@@ -1,7 +1,0 @@
-{
-	"parent": "block/cube_column",
-	"textures": {
-		"end": "aether:blocks/angelstone_bricks/angelstone_base_top",
-		"side": "aether:blocks/angelstone_bricks/angelstone_pillar"
-	}
-}

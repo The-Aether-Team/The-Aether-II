@@ -1,17 +1,25 @@
 package com.gildedgames.aether.common.registry.content;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootPlanks;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
+import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.List;
+
 public class CreativeTabsAether
 {
+
 	public static final CreativeTab BLOCKS = new CreativeTab("aether.blocks");
+
+	public static final CreativeTab VISUAL_VARIANTS = new CreativeTab("aether.visual_variants");
 
     public static final CreativeTab TOOLS = new CreativeTab("aether.tools");
 
@@ -40,7 +48,8 @@ public class CreativeTabsAether
     @SideOnly(Side.CLIENT)
 	public static void registerTabIcons()
 	{
-		BLOCKS.setDisplayStack(new ItemStack(BlocksAether.aether_grass, BlockAetherGrass.AETHER.getMeta()));
+		BLOCKS.setDisplayStack(new ItemStack(BlocksAether.aether_grass, 1, BlockAetherGrass.AETHER.getMeta()));
+		VISUAL_VARIANTS.setDisplayStack(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.TOP_BEAM.getMeta()));
 		MATERIALS.setDisplayStack(new ItemStack(ItemsAether.ambrosium_shard));
 		TOOLS.setDisplayStack(new ItemStack(ItemsAether.zanite_pickaxe));
 		WEAPONS.setDisplayStack(new ItemStack(ItemsAether.gravitite_sword));
@@ -84,5 +93,43 @@ public class CreativeTabsAether
 		{
 			return this.stack.getItemDamage();
 		}
+
+		@SideOnly(Side.CLIENT)
+		public void displayAllRelevantItems(List<ItemStack> p_78018_1_)
+		{
+			for (Item item : Item.REGISTRY)
+			{
+				if (item == null)
+				{
+					continue;
+				}
+
+				for (CreativeTabs tab : item.getCreativeTabs())
+				{
+					if (tab == this)
+					{
+						item.getSubItems(item, this, p_78018_1_);
+					}
+				}
+
+				if (item instanceof ItemBlock)
+				{
+					ItemBlock itemBlock = (ItemBlock)item;
+
+					if (itemBlock.getBlock() instanceof IBlockVariants)
+					{
+						IBlockVariants blockVariants = (IBlockVariants)itemBlock.getBlock();
+
+						blockVariants.addItemsToCreativeTab(item, this, p_78018_1_);
+					}
+				}
+			}
+
+			if (this.getRelevantEnchantmentTypes() != null)
+			{
+				this.addEnchantmentBooksToList(p_78018_1_, this.getRelevantEnchantmentTypes());
+			}
+		}
+
 	}
 }

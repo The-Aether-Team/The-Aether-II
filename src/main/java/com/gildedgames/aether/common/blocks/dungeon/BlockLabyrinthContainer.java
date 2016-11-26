@@ -149,4 +149,11 @@ public class BlockLabyrinthContainer extends Block implements IBlockVariants {
 	public String getUnlocalizedName(ItemStack stack) {
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}
+
+	@Override
+	public void addItemsToCreativeTab(Item item, CreativeTabs tab, List<ItemStack> stackList)
+	{
+
+	}
+
 }

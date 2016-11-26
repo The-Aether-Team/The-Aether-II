@@ -28,10 +28,11 @@ import com.gildedgames.aether.common.items.blocks.ItemBlockVariants;
 import com.google.common.collect.Lists;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.List;
@@ -55,11 +56,11 @@ public class BlocksAether
 
 	public static final BlockFadedHolystonePillar faded_holystone_pillar = new BlockFadedHolystonePillar();
 
-	public static final BlockAngelstone angelstone = new BlockAngelstone();
+	public static final BlockAgiosite agiosite = new BlockAgiosite();
 
-	public static final BlockAngelstoneBrick angelstone_brick = new BlockAngelstoneBrick();
+	public static final BlockAgiositeBrick agiosite_brick = new BlockAgiositeBrick();
 
-	public static final BlockAngelstonePillar angelstone_pillar = new BlockAngelstonePillar();
+	public static final BlockAgiositePillar agiosite_pillar = new BlockAgiositePillar();
 
 	public static final BlockSkyrootPlanks skyroot_planks = new BlockSkyrootPlanks();
 
@@ -118,14 +119,6 @@ public class BlocksAether
 	public static final BlockCrudeScatterglass crude_scatterglass = new BlockCrudeScatterglass();
 
 	public static final BlockScatterglass scatterglass = new BlockScatterglass();
-
-	public static final BlockSkyrootFrameScatterglass skyroot_frame_scatterglass = new BlockSkyrootFrameScatterglass();
-
-	public static final BlockSkyrootFrameQuicksoilGlass skyroot_frame_quicksoil_glass = new BlockSkyrootFrameQuicksoilGlass();
-
-	public static final BlockArkeniumFrameScatterglass arkenium_frame_scatterglass = new BlockArkeniumFrameScatterglass();
-
-	public static final BlockArkeniumFrameQuicksoilGlass arkenium_frame_quicksoil_glass = new BlockArkeniumFrameQuicksoilGlass();
 
 	public static final Block zanite_block = new BlockCustom(Material.IRON).setSoundType(SoundType.METAL).setHardness(5f);
 
@@ -259,11 +252,11 @@ public class BlocksAether
 	public static final BlockMasonryBench masonry_bench = new BlockMasonryBench();
 
 	public static final BlockCustomPane quicksoil_glass_pane = new BlockCustomPane(BlocksAether.quicksoil_glass.getDefaultState(), false),
-										skyroot_frame_quicksoil_glass_pane = new BlockCustomPane(BlocksAether.skyroot_frame_quicksoil_glass.getDefaultState(), false),
-										arkenium_frame_quicksoil_glass_pane = new BlockCustomPane(BlocksAether.arkenium_frame_quicksoil_glass.getDefaultState(), false),
+										skyroot_frame_quicksoil_glass_pane = new BlockCustomPane(BlocksAether.quicksoil_glass.getDefaultState().withProperty(BlockQuicksoilGlass.PROPERTY_VARIANT, BlockQuicksoilGlass.SKYROOT_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.skyroot_frame.name")),
+										arkenium_frame_quicksoil_glass_pane = new BlockCustomPane(BlocksAether.quicksoil_glass.getDefaultState().withProperty(BlockQuicksoilGlass.PROPERTY_VARIANT, BlockQuicksoilGlass.ARKENIUM_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.arkenium_frame.name")),
 										scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState(), false),
-										skyroot_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.skyroot_frame_scatterglass.getDefaultState(), false),
-										arkenium_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.arkenium_frame_scatterglass.getDefaultState(), false);
+										skyroot_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState().withProperty(BlockScatterglass.PROPERTY_VARIANT, BlockScatterglass.SKYROOT_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.skyroot_frame.name")),
+										arkenium_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState().withProperty(BlockScatterglass.PROPERTY_VARIANT, BlockScatterglass.ARKENIUM_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.arkenium_frame.name"));
 
 	public static final Block skyroot_twigs = new BlockFloorObject(Material.WOOD, () -> new ItemStack(ItemsAether.skyroot_stick)).setSoundType(SoundType.WOOD);
 
@@ -334,19 +327,11 @@ public class BlocksAether
 
 		registerBlock("aether_flower", BlocksAether.aether_flower.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.aether_flower));
 
-		registerBlock("quicksoil_glass", BlocksAether.quicksoil_glass.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("quicksoil_glass", BlocksAether.quicksoil_glass.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.quicksoil_glass));
 
 		registerBlock("crude_scatterglass", BlocksAether.crude_scatterglass.setCreativeTab(CreativeTabsAether.BLOCKS));
 
-		registerBlock("scatterglass", BlocksAether.scatterglass.setCreativeTab(CreativeTabsAether.BLOCKS));
-
-		registerBlock("skyroot_frame_scatterglass", BlocksAether.skyroot_frame_scatterglass.setCreativeTab(CreativeTabsAether.BLOCKS));
-
-		registerBlock("skyroot_frame_quicksoil_glass", BlocksAether.skyroot_frame_quicksoil_glass.setCreativeTab(CreativeTabsAether.BLOCKS));
-
-		registerBlock("arkenium_frame_scatterglass", BlocksAether.arkenium_frame_scatterglass.setCreativeTab(CreativeTabsAether.BLOCKS));
-
-		registerBlock("arkenium_frame_quicksoil_glass", BlocksAether.arkenium_frame_quicksoil_glass.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("scatterglass", BlocksAether.scatterglass.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.scatterglass));
 
 		registerBlock("zanite_block", BlocksAether.zanite_block.setCreativeTab(CreativeTabsAether.BLOCKS));
 
@@ -358,21 +343,21 @@ public class BlocksAether
 
 		registerBlock("holystone_brick", BlocksAether.holystone_brick.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.holystone_brick));
 
-		registerBlock("holystone_pillar", BlocksAether.holystone_pillar.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("holystone_pillar", BlocksAether.holystone_pillar.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
 
 		registerBlock("faded_holystone_brick", BlocksAether.faded_holystone_brick.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.faded_holystone_brick));
 
-		registerBlock("faded_holystone_pillar", BlocksAether.faded_holystone_pillar.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("faded_holystone_pillar", BlocksAether.faded_holystone_pillar.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
 
-		registerBlock("angelstone", BlocksAether.angelstone.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("agiosite", BlocksAether.agiosite.setCreativeTab(CreativeTabsAether.BLOCKS));
 
-		registerBlock("angelstone_brick", BlocksAether.angelstone_brick.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.angelstone_brick));
+		registerBlock("agiosite_brick", BlocksAether.agiosite_brick.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.agiosite_brick));
 
-		registerBlock("angelstone_pillar", BlocksAether.angelstone_pillar.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("agiosite_pillar", BlocksAether.agiosite_pillar.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
 
 		registerBlock("skyroot_planks", BlocksAether.skyroot_planks.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.skyroot_planks));
 
-		registerBlock("skyroot_beam", BlocksAether.skyroot_beam.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("skyroot_beam", BlocksAether.skyroot_beam.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
 
 		registerBlock("skyroot_door", BlocksAether.skyroot_door);
 		registerBlock("arkenium_door", BlocksAether.arkenium_door);
@@ -462,7 +447,6 @@ public class BlocksAether
 		//registerBlock("skyroot_vines", BlocksAether.skyroot_vines.setCreativeTab(CreativeTabsAether.BLOCKS));
 		//registerBlock("enchanted_skyroot_vines", BlocksAether.enchanted_skyroot_vines.setCreativeTab(CreativeTabsAether.BLOCKS));
 
-
 		registerBlock("present", BlocksAether.present.setCreativeTab(CreativeTabsAether.MISCELLANEOUS), new ItemBlockPresent(BlocksAether.present));
 		registerBlock("labyrinth_container", BlocksAether.labyrinth_container.setCreativeTab(CreativeTabsAether.BLOCKS), new ItemBlockVariants(BlocksAether.labyrinth_container));
 
@@ -471,12 +455,21 @@ public class BlocksAether
 		registerBlock("wildcard", BlocksAether.wildcard);
 
 		registerBlock("quicksoil_glass_pane", BlocksAether.quicksoil_glass_pane.setCreativeTab(CreativeTabsAether.BLOCKS));
-		registerBlock("skyroot_frame_quicksoil_glass_pane", BlocksAether.skyroot_frame_quicksoil_glass_pane.setCreativeTab(CreativeTabsAether.BLOCKS));
-		registerBlock("arkenium_frame_quicksoil_glass_pane", BlocksAether.arkenium_frame_quicksoil_glass_pane.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("skyroot_frame_quicksoil_glass_pane", BlocksAether.skyroot_frame_quicksoil_glass_pane.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
+		registerBlock("arkenium_frame_quicksoil_glass_pane", BlocksAether.arkenium_frame_quicksoil_glass_pane.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
 
 		registerBlock("scatterglass_pane", BlocksAether.scatterglass_pane.setCreativeTab(CreativeTabsAether.BLOCKS));
-		registerBlock("skyroot_frame_scatterglass_pane", BlocksAether.skyroot_frame_scatterglass_pane.setCreativeTab(CreativeTabsAether.BLOCKS));
-		registerBlock("arkenium_frame_scatterglass_pane", BlocksAether.arkenium_frame_scatterglass_pane.setCreativeTab(CreativeTabsAether.BLOCKS));
+		registerBlock("skyroot_frame_scatterglass_pane", BlocksAether.skyroot_frame_scatterglass_pane.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS).setUnlocalizedName("scatterglass_pane"));
+		registerBlock("arkenium_frame_scatterglass_pane", BlocksAether.arkenium_frame_scatterglass_pane.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS).setUnlocalizedName("scatterglass_pane"));
+
+		String quicksoil_glass_pane_name = AetherCore.MOD_ID + "." + "quicksoil_glass_pane";
+		String scatterglass_pane_name = AetherCore.MOD_ID + "." + "scatterglass_pane";
+
+		BlocksAether.skyroot_frame_quicksoil_glass_pane.setUnlocalizedName(quicksoil_glass_pane_name);
+		BlocksAether.arkenium_frame_quicksoil_glass_pane.setUnlocalizedName(quicksoil_glass_pane_name);
+
+		BlocksAether.skyroot_frame_scatterglass_pane.setUnlocalizedName(scatterglass_pane_name);
+		BlocksAether.arkenium_frame_scatterglass_pane.setUnlocalizedName(scatterglass_pane_name);
 
 		registerBlock("skyroot_twigs", BlocksAether.skyroot_twigs.setCreativeTab(CreativeTabsAether.BLOCKS));
 		registerBlock("holystone_rock", BlocksAether.holystone_rock.setCreativeTab(CreativeTabsAether.BLOCKS));

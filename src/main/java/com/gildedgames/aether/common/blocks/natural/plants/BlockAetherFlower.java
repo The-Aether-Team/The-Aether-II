@@ -81,4 +81,11 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockVariant
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}
+
+	@Override
+	public void addItemsToCreativeTab(Item item, CreativeTabs tab, List<ItemStack> stackList)
+	{
+
+	}
+
 }

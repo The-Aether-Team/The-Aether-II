@@ -3,8 +3,10 @@ package com.gildedgames.aether.common.registry.minecraft;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipe;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.construction.BlockQuicksoilGlass;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
+import com.gildedgames.aether.common.blocks.natural.BlockScatterglass;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockWovenSticks;
 import com.gildedgames.aether.common.recipes.RecipePresentCrafting;
 import com.gildedgames.aether.common.recipes.RecipeLeatherGlovesDyes;
@@ -16,10 +18,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import com.gildedgames.aether.common.registry.AltarRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -46,7 +45,7 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 
 	private void registerFurnaceRecipes()
 	{
-		registerSmeltingRecipe(new ItemStack(BlocksAether.holystone), new ItemStack(BlocksAether.angelstone), 0.1f);
+		registerSmeltingRecipe(new ItemStack(BlocksAether.holystone), new ItemStack(BlocksAether.agiosite), 0.1f);
 		registerSmeltingRecipe(new ItemStack(ItemsAether.arkenium_ore), new ItemStack(ItemsAether.arkenium), 0.85f);
 		registerSmeltingRecipe(new ItemStack(ItemsAether.gravitite_ore), new ItemStack(ItemsAether.gravitite_plate), 1.0f);
 		registerSmeltingRecipe(new ItemStack(BlocksAether.quicksoil), new ItemStack(BlocksAether.quicksoil_glass), 0.1f);
@@ -96,19 +95,19 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 				'X', BlocksAether.quicksoil_glass);
 
 		registerShapedRecipe(new ItemStack(BlocksAether.arkenium_frame_quicksoil_glass_pane, 16), "XXX", "XXX",
-				'X', BlocksAether.arkenium_frame_quicksoil_glass);
+				'X', new ItemStack(BlocksAether.quicksoil_glass, 1, BlockQuicksoilGlass.ARKENIUM_FRAME.getMeta()));
 
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_frame_quicksoil_glass_pane, 16), "XXX", "XXX",
-				'X', BlocksAether.skyroot_frame_quicksoil_glass);
+				'X', new ItemStack(BlocksAether.quicksoil_glass, 1, BlockQuicksoilGlass.SKYROOT_FRAME.getMeta()));
 
 		registerShapedRecipe(new ItemStack(BlocksAether.scatterglass_pane, 16), "XXX", "XXX",
 				'X', BlocksAether.scatterglass);
 
 		registerShapedRecipe(new ItemStack(BlocksAether.arkenium_frame_scatterglass_pane, 16), "XXX", "XXX",
-				'X', BlocksAether.arkenium_frame_scatterglass);
+				'X', new ItemStack(BlocksAether.scatterglass, 1, BlockScatterglass.ARKENIUM_FRAME.getMeta()));
 
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_frame_scatterglass_pane, 16), "XXX", "XXX",
-				'X', BlocksAether.skyroot_frame_scatterglass);
+				'X', new ItemStack(BlocksAether.scatterglass, 1, BlockScatterglass.SKYROOT_FRAME.getMeta()));
 
 		// Saddle
 		registerShapedRecipe(new ItemStack(Items.SADDLE, 1), "XXX", "XZX",
@@ -237,9 +236,9 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 		registerShapedRecipe(new ItemStack(BlocksAether.holystone_brick, 4), "XX", "XX",
 				'X', new ItemStack(BlocksAether.holystone));
 
-		// Angelstone Brick
-		registerShapedRecipe(new ItemStack(BlocksAether.angelstone_brick, 4), "XX", "XX",
-				'X', new ItemStack(BlocksAether.angelstone));
+		// Agiosite Brick
+		registerShapedRecipe(new ItemStack(BlocksAether.agiosite_brick, 4), "XX", "XX",
+				'X', new ItemStack(BlocksAether.agiosite));
 
 
 		// Icestone Bricks

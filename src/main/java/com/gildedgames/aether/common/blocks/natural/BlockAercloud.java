@@ -308,4 +308,10 @@ public class BlockAercloud extends Block implements IBlockVariants
 		return BlocksAether.aercloud.getDefaultState().withProperty(BlockAercloud.PROPERTY_VARIANT, variant);
 	}
 
+	@Override
+	public void addItemsToCreativeTab(Item item, CreativeTabs tab, List<ItemStack> stackList)
+	{
+
+	}
+
 }

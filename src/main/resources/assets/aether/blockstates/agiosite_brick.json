@@ -1,0 +1,25 @@
+{
+	"variants": {
+		"variant=normal": [
+			{ "model": "aether:agiosite_bricks/normal" }
+		],
+		"variant=base_bricks": [
+			{ "model": "aether:agiosite_bricks/base_bricks" }
+		],
+		"variant=base_pillar": [
+			{ "model": "aether:agiosite_bricks/base_pillar" }
+		],
+		"variant=capstone_bricks": [
+			{ "model": "aether:agiosite_bricks/capstone_bricks" }
+		],
+		"variant=capstone_pillar": [
+			{ "model": "aether:agiosite_bricks/capstone_pillar" }
+		],
+		"variant=flagstones": [
+			{ "model": "aether:agiosite_bricks/flagstones" }
+		],
+		"variant=keystone": [
+			{ "model": "aether:agiosite_bricks/keystone" }
+		]
+	}
+}

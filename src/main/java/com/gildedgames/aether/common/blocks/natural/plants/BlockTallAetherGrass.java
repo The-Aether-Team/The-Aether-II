@@ -158,4 +158,10 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 		return state.getValue(PROPERTY_VARIANT).getMeta();
 	}
 
+	@Override
+	public void addItemsToCreativeTab(Item item, CreativeTabs tab, List<ItemStack> stackList)
+	{
+
+	}
+
 }

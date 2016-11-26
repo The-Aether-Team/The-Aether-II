@@ -67,4 +67,11 @@ public class BlockDivine extends BlockLabyrinth implements IBlockVariants
 			return "missingno";
 		}
 	}
+
+	@Override
+	public void addItemsToCreativeTab(Item item, CreativeTabs tab, List<ItemStack> stackList)
+	{
+
+	}
+
 }

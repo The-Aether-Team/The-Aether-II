@@ -9,10 +9,7 @@ import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
 import com.gildedgames.aether.common.blocks.dungeon.BlockDivine;
 import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthContainer;
-import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
-import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
+import com.gildedgames.aether.common.blocks.natural.*;
 import com.gildedgames.aether.common.blocks.natural.plants.*;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
@@ -136,11 +133,11 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.icestone_bricks, "icestone_bricks");
 
 		registerItemModels(BlocksAether.crude_scatterglass, "crude_scatterglass");
-		registerItemModels(BlocksAether.scatterglass, "scatterglass");
-		registerItemModels(BlocksAether.arkenium_frame_scatterglass, "arkenium_frame_scatterglass");
-		registerItemModels(BlocksAether.arkenium_frame_quicksoil_glass, "arkenium_frame_quicksoil_glass");
-		registerItemModels(BlocksAether.skyroot_frame_scatterglass, "skyroot_frame_scatterglass");
-		registerItemModels(BlocksAether.skyroot_frame_quicksoil_glass, "skyroot_frame_quicksoil_glass");
+
+		registerItemModels(BlocksAether.scatterglass, new ItemModelBuilder("scatterglass/")
+				.add(BlockScatterglass.NORMAL.getMeta(), "normal")
+				.add(BlockScatterglass.SKYROOT_FRAME.getMeta(), "skyroot_frame")
+				.add(BlockScatterglass.ARKENIUM_FRAME.getMeta(), "arkenium_frame"));
 
 		registerItemModels(BlocksAether.skyroot_twigs, "skyroot_twigs");
 		registerItemModels(BlocksAether.holystone_rock, "holystone_rock");
@@ -195,18 +192,18 @@ public class ItemModelsAether
 
 		registerItemModels(BlocksAether.faded_holystone_pillar, "faded_holystone_bricks/pillar");
 
-		registerItemModels(BlocksAether.angelstone, "angelstone");
+		registerItemModels(BlocksAether.agiosite, "agiosite");
 
-		registerItemModels(BlocksAether.angelstone_brick, new ItemModelBuilder("angelstone_bricks/")
-				.add(BlockAngelstoneBrick.NORMAL.getMeta(), "normal")
-				.add(BlockAngelstoneBrick.BASE_BRICKS.getMeta(), "base_bricks")
-				.add(BlockAngelstoneBrick.BASE_PILLAR.getMeta(), "base_pillar")
-				.add(BlockAngelstoneBrick.CAPSTONE_BRICKS.getMeta(), "capstone_bricks")
-				.add(BlockAngelstoneBrick.CAPSTONE_PILLAR.getMeta(), "capstone_pillar")
-				.add(BlockAngelstoneBrick.FLAGSTONES.getMeta(), "flagstones")
-				.add(BlockAngelstoneBrick.KEYSTONE.getMeta(), "keystone"));
+		registerItemModels(BlocksAether.agiosite_brick, new ItemModelBuilder("agiosite_bricks/")
+				.add(BlockAgiositeBrick.NORMAL.getMeta(), "normal")
+				.add(BlockAgiositeBrick.BASE_BRICKS.getMeta(), "base_bricks")
+				.add(BlockAgiositeBrick.BASE_PILLAR.getMeta(), "base_pillar")
+				.add(BlockAgiositeBrick.CAPSTONE_BRICKS.getMeta(), "capstone_bricks")
+				.add(BlockAgiositeBrick.CAPSTONE_PILLAR.getMeta(), "capstone_pillar")
+				.add(BlockAgiositeBrick.FLAGSTONES.getMeta(), "flagstones")
+				.add(BlockAgiositeBrick.KEYSTONE.getMeta(), "keystone"));
 
-		registerItemModels(BlocksAether.angelstone_pillar, "angelstone_bricks/pillar");
+		registerItemModels(BlocksAether.agiosite_pillar, "agiosite_bricks/pillar");
 
 		registerItemModels(BlocksAether.skyroot_planks, new ItemModelBuilder("skyroot_planks/")
 				.add(BlockSkyrootPlanks.NORMAL.getMeta(), "normal")
@@ -221,7 +218,10 @@ public class ItemModelsAether
 
 		registerItemModels(BlocksAether.skyroot_beam, "skyroot_planks/beam");
 
-		registerItemModels(BlocksAether.quicksoil_glass, "quicksoil_glass");
+		registerItemModels(BlocksAether.quicksoil_glass, new ItemModelBuilder("quicksoil_glass/")
+			.add(BlockQuicksoilGlass.NORMAL.getMeta(), "normal")
+			.add(BlockQuicksoilGlass.SKYROOT_FRAME.getMeta(), "skyroot_frame")
+			.add(BlockQuicksoilGlass.ARKENIUM_FRAME.getMeta(), "arkenium_frame"));
 
 		registerItemModels(BlocksAether.aether_portal, "aether_portal");
 

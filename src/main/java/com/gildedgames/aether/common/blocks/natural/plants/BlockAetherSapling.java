@@ -184,4 +184,11 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}
+
+	@Override
+	public void addItemsToCreativeTab(Item item, CreativeTabs tab, List<ItemStack> stackList)
+	{
+
+	}
+
 }

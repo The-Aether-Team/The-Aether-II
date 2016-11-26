@@ -1,0 +1,14 @@
+{
+	"variants": {
+		"axis=y": {
+			"model": "aether:agiosite_bricks/pillar"
+		},
+		"axis=z": {
+			"model": "aether:agiosite_bricks/pillar_side"
+		},
+		"axis=x": {
+			"model": "aether:agiosite_bricks/pillar_side",
+			"y": 90
+		}
+	}
+}
