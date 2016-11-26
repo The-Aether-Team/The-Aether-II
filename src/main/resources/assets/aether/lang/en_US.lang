@@ -57,7 +57,9 @@ tile.aether.aether_flower.moonlit_bloom.name=Moonlit Bloom
 tile.aether.altar.name=Altar
 tile.aether.icestone_ore.name=Icestone Ore
 tile.aether.icestone_bricks.name=Icestone Bricks
-tile.aether.crude_scatterglass.name=Crude Scatterglass
+tile.aether.crude_scatterglass.normal.name=Crude Scatterglass
+tile.aether.crude_scatterglass.skyroot_frame.name=Skyroot Frame
+tile.aether.crude_scatterglass.arkenium_frame.name=Arkenium Frame
 tile.aether.scatterglass.normal.name=Scatterglass
 tile.aether.scatterglass.arkenium_frame.name=Arkenium Frame
 tile.aether.quicksoil_glass.arkenium_frame.name=Arkenium Frame
@@ -202,6 +204,7 @@ tile.aether.skyroot_frame.name=Skyroot Frame
 tile.aether.scatterglass_pane.name=Scatterglass Pane
 tile.aether.skyroot_twigs.name=Skyroot Twigs
 tile.aether.holystone_rock.name=Holystone Rock
+tile.aether.crude_scatterglass_pane.name=Crude Scatterglass Pane
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick

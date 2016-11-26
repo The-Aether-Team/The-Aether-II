@@ -256,7 +256,10 @@ public class BlocksAether
 										arkenium_frame_quicksoil_glass_pane = new BlockCustomPane(BlocksAether.quicksoil_glass.getDefaultState().withProperty(BlockQuicksoilGlass.PROPERTY_VARIANT, BlockQuicksoilGlass.ARKENIUM_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.arkenium_frame.name")),
 										scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState(), false),
 										skyroot_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState().withProperty(BlockScatterglass.PROPERTY_VARIANT, BlockScatterglass.SKYROOT_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.skyroot_frame.name")),
-										arkenium_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState().withProperty(BlockScatterglass.PROPERTY_VARIANT, BlockScatterglass.ARKENIUM_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.arkenium_frame.name"));
+										arkenium_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState().withProperty(BlockScatterglass.PROPERTY_VARIANT, BlockScatterglass.ARKENIUM_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.arkenium_frame.name")),
+										crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState(), false),
+										skyroot_frame_crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState().withProperty(BlockCrudeScatterglass.PROPERTY_VARIANT, BlockCrudeScatterglass.SKYROOT_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.skyroot_frame.name")),
+										arkenium_frame_crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState().withProperty(BlockCrudeScatterglass.PROPERTY_VARIANT, BlockCrudeScatterglass.ARKENIUM_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.arkenium_frame.name"));
 
 	public static final Block skyroot_twigs = new BlockFloorObject(Material.WOOD, () -> new ItemStack(ItemsAether.skyroot_stick)).setSoundType(SoundType.WOOD);
 
@@ -329,7 +332,7 @@ public class BlocksAether
 
 		registerBlock("quicksoil_glass", BlocksAether.quicksoil_glass.setCreativeTab(CreativeTabsAether.CONSTRUCTION), new ItemBlockVariants(BlocksAether.quicksoil_glass));
 
-		registerBlock("crude_scatterglass", BlocksAether.crude_scatterglass.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		registerBlock("crude_scatterglass", BlocksAether.crude_scatterglass.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS), new ItemBlockVariants(BlocksAether.crude_scatterglass));
 
 		registerBlock("scatterglass", BlocksAether.scatterglass.setCreativeTab(CreativeTabsAether.CONSTRUCTION), new ItemBlockVariants(BlocksAether.scatterglass));
 
@@ -459,17 +462,25 @@ public class BlocksAether
 		registerBlock("arkenium_frame_quicksoil_glass_pane", BlocksAether.arkenium_frame_quicksoil_glass_pane.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
 
 		registerBlock("scatterglass_pane", BlocksAether.scatterglass_pane.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-		registerBlock("skyroot_frame_scatterglass_pane", BlocksAether.skyroot_frame_scatterglass_pane.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS).setUnlocalizedName("scatterglass_pane"));
-		registerBlock("arkenium_frame_scatterglass_pane", BlocksAether.arkenium_frame_scatterglass_pane.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS).setUnlocalizedName("scatterglass_pane"));
+		registerBlock("skyroot_frame_scatterglass_pane", BlocksAether.skyroot_frame_scatterglass_pane.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
+		registerBlock("arkenium_frame_scatterglass_pane", BlocksAether.arkenium_frame_scatterglass_pane.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
+
+		registerBlock("crude_scatterglass_pane", BlocksAether.crude_scatterglass_pane.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		registerBlock("skyroot_frame_crude_scatterglass_pane", BlocksAether.skyroot_frame_crude_scatterglass_pane.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
+		registerBlock("arkenium_frame_crude_scatterglass_pane", BlocksAether.arkenium_frame_crude_scatterglass_pane.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
 
 		String quicksoil_glass_pane_name = AetherCore.MOD_ID + "." + "quicksoil_glass_pane";
 		String scatterglass_pane_name = AetherCore.MOD_ID + "." + "scatterglass_pane";
+		String crude_scatterglass_pane_name = AetherCore.MOD_ID + "." + "crude_scatterglass_pane";
 
 		BlocksAether.skyroot_frame_quicksoil_glass_pane.setUnlocalizedName(quicksoil_glass_pane_name);
 		BlocksAether.arkenium_frame_quicksoil_glass_pane.setUnlocalizedName(quicksoil_glass_pane_name);
 
 		BlocksAether.skyroot_frame_scatterglass_pane.setUnlocalizedName(scatterglass_pane_name);
 		BlocksAether.arkenium_frame_scatterglass_pane.setUnlocalizedName(scatterglass_pane_name);
+
+		BlocksAether.skyroot_frame_crude_scatterglass_pane.setUnlocalizedName(crude_scatterglass_pane_name);
+		BlocksAether.arkenium_frame_crude_scatterglass_pane.setUnlocalizedName(crude_scatterglass_pane_name);
 
 		registerBlock("skyroot_twigs", BlocksAether.skyroot_twigs.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		registerBlock("holystone_rock", BlocksAether.holystone_rock.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));

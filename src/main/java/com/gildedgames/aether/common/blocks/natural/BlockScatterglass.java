@@ -61,6 +61,7 @@ public class BlockScatterglass extends BlockBreakable implements IBlockVariants
 	{
 		return false;
 	}
+
 	@Override
 	public int damageDropped(IBlockState state)
 	{

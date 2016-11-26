@@ -1,7 +1,13 @@
 {
 	"variants": {
-		"normal": {
-			"model": "aether:crude_scatterglass"
-		}
+		"variant=normal": [
+			{ "model": "aether:crude_scatterglass/normal" }
+		],
+		"variant=skyroot_frame": [
+			{ "model": "aether:crude_scatterglass/skyroot_frame" }
+		],
+		"variant=arkenium_frame": [
+			{ "model": "aether:crude_scatterglass/arkenium_frame" }
+		]
 	}
 }

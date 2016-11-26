@@ -132,7 +132,10 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.icestone_ore, "icestone_ore");
 		registerItemModels(BlocksAether.icestone_bricks, "icestone_bricks");
 
-		registerItemModels(BlocksAether.crude_scatterglass, "crude_scatterglass");
+		registerItemModels(BlocksAether.crude_scatterglass, new ItemModelBuilder("crude_scatterglass/")
+				.add(BlockCrudeScatterglass.NORMAL.getMeta(), "normal")
+				.add(BlockCrudeScatterglass.SKYROOT_FRAME.getMeta(), "skyroot_frame")
+				.add(BlockCrudeScatterglass.ARKENIUM_FRAME.getMeta(), "arkenium_frame"));
 
 		registerItemModels(BlocksAether.scatterglass, new ItemModelBuilder("scatterglass/")
 				.add(BlockScatterglass.NORMAL.getMeta(), "normal")
@@ -149,6 +152,10 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.scatterglass_pane, "glass_pane/scatterglass");
 		registerItemModels(BlocksAether.arkenium_frame_scatterglass_pane, "glass_pane/arkenium_frame_scatterglass");
 		registerItemModels(BlocksAether.skyroot_frame_scatterglass_pane, "glass_pane/skyroot_frame_scatterglass");
+
+		registerItemModels(BlocksAether.crude_scatterglass_pane, "glass_pane/crude_scatterglass");
+		registerItemModels(BlocksAether.arkenium_frame_crude_scatterglass_pane, "glass_pane/arkenium_frame_crude_scatterglass");
+		registerItemModels(BlocksAether.skyroot_frame_crude_scatterglass_pane, "glass_pane/skyroot_frame_crude_scatterglass");
 
 		registerItemModels(BlocksAether.aether_crafting_table, new ItemModelBuilder("crafting_tables/")
 				.add(BlockAetherCraftingTable.SKYROOT.getMeta(), "skyroot_crafting_table")

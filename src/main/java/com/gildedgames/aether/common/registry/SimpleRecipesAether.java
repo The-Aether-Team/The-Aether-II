@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.registry.simple_crafting.ISimpleRecipe;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.*;
+import com.gildedgames.aether.common.blocks.natural.BlockCrudeScatterglass;
 import com.gildedgames.aether.common.blocks.natural.BlockScatterglass;
 import com.gildedgames.aether.common.recipes.simple.OreDictionaryRequirement;
 import com.gildedgames.aether.common.recipes.simple.SimpleRecipe;
@@ -71,16 +72,22 @@ public class SimpleRecipesAether
 		addMasonry(new ItemStack(BlocksAether.skyroot_beam), new ItemStack(BlocksAether.skyroot_planks, 1, BlockAgiositeBrick.NORMAL.getMeta()));
 
 		addMasonry(new ItemStack(BlocksAether.quicksoil_glass, 1, BlockQuicksoilGlass.SKYROOT_FRAME.getMeta()), new ItemStack(BlocksAether.quicksoil_glass));
-		addMasonry(new ItemStack(BlocksAether.scatterglass, 1, BlockScatterglass.SKYROOT_FRAME.getMeta()), new ItemStack(BlocksAether.scatterglass));
-
 		addMasonry(new ItemStack(BlocksAether.quicksoil_glass, 1, BlockQuicksoilGlass.ARKENIUM_FRAME.getMeta()), new ItemStack(BlocksAether.quicksoil_glass));
+
+		addMasonry(new ItemStack(BlocksAether.scatterglass, 1, BlockScatterglass.SKYROOT_FRAME.getMeta()), new ItemStack(BlocksAether.scatterglass));
 		addMasonry(new ItemStack(BlocksAether.scatterglass, 1, BlockScatterglass.ARKENIUM_FRAME.getMeta()), new ItemStack(BlocksAether.scatterglass));
+
+		addMasonry(new ItemStack(BlocksAether.crude_scatterglass, 1, BlockCrudeScatterglass.SKYROOT_FRAME.getMeta()), new ItemStack(BlocksAether.crude_scatterglass));
+		addMasonry(new ItemStack(BlocksAether.crude_scatterglass, 1, BlockCrudeScatterglass.ARKENIUM_FRAME.getMeta()), new ItemStack(BlocksAether.crude_scatterglass));
 
 		addMasonry(new ItemStack(BlocksAether.arkenium_frame_quicksoil_glass_pane), new ItemStack(BlocksAether.quicksoil_glass_pane));
 		addMasonry(new ItemStack(BlocksAether.skyroot_frame_quicksoil_glass_pane), new ItemStack(BlocksAether.quicksoil_glass_pane));
 
 		addMasonry(new ItemStack(BlocksAether.arkenium_frame_scatterglass_pane), new ItemStack(BlocksAether.scatterglass_pane));
 		addMasonry(new ItemStack(BlocksAether.skyroot_frame_scatterglass_pane), new ItemStack(BlocksAether.scatterglass_pane));
+
+		addMasonry(new ItemStack(BlocksAether.arkenium_frame_crude_scatterglass_pane), new ItemStack(BlocksAether.crude_scatterglass_pane));
+		addMasonry(new ItemStack(BlocksAether.skyroot_frame_crude_scatterglass_pane), new ItemStack(BlocksAether.crude_scatterglass_pane));
 	}
 
 	public static void postInit()

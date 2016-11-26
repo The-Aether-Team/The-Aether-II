@@ -1,0 +1,6 @@
+{
+	"parent": "block/glass_pane_noside",
+	"textures": {
+		"pane": "aether:blocks/arkenium_frame_crude_scatterglass"
+	}
+}
