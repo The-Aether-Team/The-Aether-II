@@ -234,7 +234,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 		if (!this.worldObj.isRemote)
 		{
-			if (!this.isRaisedByPlayer())
+			if (!this.isRaisedByPlayer() && this.getGender() == AnimalGender.MALE)
 			{
 				this.dropFeatherTimer.tick();
 
