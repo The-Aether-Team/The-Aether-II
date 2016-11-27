@@ -1,6 +1,7 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:items/materials/moa_feather"
+		"layer0": "aether:items/materials/moa_feather_base",
+		"layer1": "aether:items/materials/moa_feather_top"
 	}
 }

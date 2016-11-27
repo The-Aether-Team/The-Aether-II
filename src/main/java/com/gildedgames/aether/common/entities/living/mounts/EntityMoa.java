@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.living.mounts;
 
 import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
+import com.gildedgames.aether.common.items.misc.ItemMoaFeather;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.moa.*;
@@ -246,7 +247,11 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 				if (this.dropFeatherTimer.getSecondsPassed() >= this.timeUntilDropFeather)
 				{
 					this.timeUntilDropFeather = 0;
-					Block.spawnAsEntity(this.worldObj, this.getPosition(), new ItemStack(ItemsAether.moa_feather));
+
+					ItemStack feather = new ItemStack(ItemsAether.moa_feather);
+					ItemMoaFeather.setColor(feather, this.getGenePool().getFeathers().gene().localizedName(), this.getGenePool().getFeathers().gene().data().getRGB());
+
+					Block.spawnAsEntity(this.worldObj, this.getPosition(), feather);
 					this.dropFeatherTimer.reset();
 				}
 			}
@@ -406,16 +411,15 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	{
 		super.dropFewItems(p_70628_1_, looting);
 
+		ItemStack feather = new ItemStack(ItemsAether.moa_feather, this.getRNG().nextInt(3));
+		ItemMoaFeather.setColor(feather, this.getGenePool().getFeathers().gene().localizedName(), this.getGenePool().getFeathers().gene().data().getRGB());
+
+		Block.spawnAsEntity(this.worldObj, this.getPosition(), feather);
+
 		if (this.isSaddled())
 		{
 			this.dropItem(Items.SADDLE, 1);
 		}
-	}
-
-	@Override
-	protected ResourceLocation getLootTable()
-	{
-		return LootTablesAether.ENTITY_MOA;
 	}
 
 	@Override
@@ -655,7 +659,5 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	{
 		return stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
 	}
-
-
 
 }

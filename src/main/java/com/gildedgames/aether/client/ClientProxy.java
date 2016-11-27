@@ -11,10 +11,7 @@ import com.gildedgames.aether.client.models.blocks.AetherBlockModels;
 import com.gildedgames.aether.client.models.items.ItemModelsAether;
 import com.gildedgames.aether.client.renderer.AetherRenderers;
 import com.gildedgames.aether.client.renderer.ClientRenderHandler;
-import com.gildedgames.aether.client.renderer.items.AetherSpawnEggColorHandler;
-import com.gildedgames.aether.client.renderer.items.ItemMoaEggColorHandler;
-import com.gildedgames.aether.client.renderer.items.LeatherGlovesColorHandler;
-import com.gildedgames.aether.client.renderer.items.WrappingPaperColorHandler;
+import com.gildedgames.aether.client.renderer.items.*;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.client.ui.UiManager;
 import com.gildedgames.aether.client.ui.minecraft.viewing.MinecraftGuiViewer;
@@ -87,6 +84,7 @@ public class ClientProxy extends CommonProxy
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new LeatherGlovesColorHandler(), ItemsAether.leather_gloves);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new WrappingPaperColorHandler(), ItemsAether.wrapping_paper);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new AetherSpawnEggColorHandler(), ItemsAether.aether_spawn_egg);
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new MoaFeatherColorHandler(), ItemsAether.moa_feather);
 	}
 
 	@Override

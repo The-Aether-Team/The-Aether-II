@@ -45,7 +45,7 @@ public class ItemsAether
 
 	public static final Item cloudwool = new Item();
 
-	public static final Item moa_feather = new Item();
+	public static final ItemMoaFeather moa_feather = new ItemMoaFeather();
 
 	public static final Item cockatrice_feather = new Item();
 

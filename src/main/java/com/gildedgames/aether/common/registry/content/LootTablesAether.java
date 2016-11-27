@@ -20,8 +20,6 @@ public class LootTablesAether
 
 	public static ResourceLocation ENTITY_PHYG;
 
-	public static ResourceLocation ENTITY_MOA;
-
 	public static ResourceLocation ENTITY_CARRION_SPROUT;
 
 	public static ResourceLocation ENTITY_AERBUNNY;
@@ -44,8 +42,6 @@ public class LootTablesAether
 		ENTITY_FLYING_COW = LootTableList.register(AetherCore.getResource("entities/flying_cow"));
 
 		ENTITY_PHYG = LootTableList.register(AetherCore.getResource("entities/phyg"));
-
-		ENTITY_MOA = LootTableList.register(AetherCore.getResource("entities/moa"));
 
 		ENTITY_CARRION_SPROUT = LootTableList.register(AetherCore.getResource("entities/carrion_sprout"));
 
