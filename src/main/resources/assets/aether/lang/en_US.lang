@@ -205,6 +205,7 @@ tile.aether.scatterglass_pane.name=Scatterglass Pane
 tile.aether.skyroot_twigs.name=Skyroot Twigs
 tile.aether.holystone_rock.name=Holystone Rock
 tile.aether.crude_scatterglass_pane.name=Crude Scatterglass Pane
+tile.aether.cloudwool_carpet.name=Cloudwool Carpet
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick

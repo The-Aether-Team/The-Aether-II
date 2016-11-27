@@ -119,6 +119,9 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_frame_crude_scatterglass_pane, 16), "XXX", "XXX",
 				'X', new ItemStack(BlocksAether.crude_scatterglass, 1, BlockCrudeScatterglass.SKYROOT_FRAME.getMeta()));
 
+		registerShapedRecipe(new ItemStack(BlocksAether.cloudwool_carpet, 3), "XX",
+				'X', BlocksAether.cloudwool_block);
+
 		// Saddle
 		registerShapedRecipe(new ItemStack(Items.SADDLE, 1), "XXX", "XZX",
 				'X', Items.LEATHER, 'Z', Items.STRING);

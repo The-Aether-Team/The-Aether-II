@@ -1,0 +1,7 @@
+{
+    "parent": "block/carpet",
+    "textures": {
+        "particle": "aether:blocks/cloudwool_block",
+        "wool": "aether:blocks/cloudwool_block"
+    }
+}
