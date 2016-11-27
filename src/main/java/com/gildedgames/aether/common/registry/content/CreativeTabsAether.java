@@ -33,13 +33,11 @@ public class CreativeTabsAether
 
 	public static final CreativeTab ARMOR = new CreativeTab("aether.armor");
 
-    public static final CreativeTab COMPANIONS = new CreativeTab("aether.companions");
+	public static final CreativeTab MATERIALS = new CreativeTab("aether.materials");
 
     public static final CreativeTab CONSUMABLES = new CreativeTab("aether.consumables");
 
-    public static final CreativeTab MISCELLANEOUS = new CreativeTab("aether.miscellaneous");
-
-    public static final CreativeTab MATERIALS = new CreativeTab("aether.materials");
+	public static final CreativeTab COMPANIONS = new CreativeTab("aether.companions");
 
 	public static final CreativeTab RINGS = new CreativeTab("aether.rings");
 
@@ -50,6 +48,8 @@ public class CreativeTabsAether
 	public static final CreativeTab CHARMS = new CreativeTab("aether.charms");
 
 	public static final CreativeTab ARTIFACTS = new CreativeTab("aether.artifacts");
+
+	public static final CreativeTab MISCELLANEOUS = new CreativeTab("aether.miscellaneous");
 
     @SideOnly(Side.CLIENT)
 	public static void registerTabIcons()
