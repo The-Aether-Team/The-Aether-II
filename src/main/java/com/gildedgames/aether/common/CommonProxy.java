@@ -151,7 +151,7 @@ public class CommonProxy
 
 	public void postInit(FMLPostInitializationEvent event)
 	{
-		SimpleRecipesAether.postInit();
+
 	}
 
 	public void serverStarting(FMLServerStartingEvent event)

@@ -11,6 +11,7 @@ import com.gildedgames.aether.client.ui.data.AssetLocation;
 import com.gildedgames.aether.client.ui.minecraft.util.MinecraftAssetLocation;
 import com.gildedgames.aether.common.blocks.QuicksoilProcessor;
 import com.gildedgames.aether.common.capabilities.instances.InstanceEvents;
+import com.gildedgames.aether.common.registry.SimpleRecipesAether;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.dimensions.aether.TeleporterAether;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
@@ -108,6 +109,8 @@ public class AetherCore implements IAetherServices
 	{
 		AetherCore.SPAWN_REGISTRY.read();
 		InstanceEvents.loadAllInstancesFromDisk();
+
+		SimpleRecipesAether.postInit();
 	}
 
 	@EventHandler

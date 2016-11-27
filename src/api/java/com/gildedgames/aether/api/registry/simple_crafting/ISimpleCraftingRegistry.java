@@ -1,13 +1,13 @@
 package com.gildedgames.aether.api.registry.simple_crafting;
 
-import net.minecraft.item.ItemStack;
-
 import java.util.Collection;
 
 public interface ISimpleCraftingRegistry
 {
 
 	Collection<ISimpleRecipe> getAllRecipes();
+
+	void clearAllRecipes();
 
 	void registerRecipe(int id, ISimpleRecipe recipe);
 

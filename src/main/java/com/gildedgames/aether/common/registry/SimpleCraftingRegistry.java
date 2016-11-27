@@ -32,6 +32,14 @@ public class SimpleCraftingRegistry implements ISimpleCraftingRegistry
 	}
 
 	@Override
+	public void clearAllRecipes()
+	{
+		this.recipes.clear();
+		this.stackLookup.clear();
+		this.oreDictionaryLookup.clear();
+	}
+
+	@Override
 	public void registerRecipe(int id, ISimpleRecipe recipe)
 	{
 		this.recipes.put(id, recipe);

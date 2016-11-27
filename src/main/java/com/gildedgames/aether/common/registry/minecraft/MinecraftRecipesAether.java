@@ -67,8 +67,6 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 		RecipeSorter.register("aether:wrappingPaper", RecipeWrappingPaper.class, RecipeSorter.Category.SHAPED, "after:minecraft:shaped");
 		RecipeSorter.register("aether:presentCrafting", RecipePresentCrafting.class, RecipeSorter.Category.SHAPED, "after:minecraft:shaped");
 
-
-
 		CraftingManager.getInstance().addRecipe(new RecipeLeatherGlovesDyes());
 		CraftingManager.getInstance().addRecipe(new RecipeWrappingPaper());
 		CraftingManager.getInstance().addRecipe(new RecipePresentCrafting());

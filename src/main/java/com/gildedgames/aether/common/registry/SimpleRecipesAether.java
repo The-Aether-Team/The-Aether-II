@@ -25,8 +25,6 @@ public class SimpleRecipesAether
 
 	private static int nextId, nextIdMasonry;
 
-	private static boolean hasInit;
-
 	private SimpleRecipesAether()
 	{
 
@@ -92,10 +90,8 @@ public class SimpleRecipesAether
 
 	public static void postInit()
 	{
-		if (hasInit)
-		{
-			return;
-		}
+		AetherAPI.crafting().clearAllRecipes();
+		AetherAPI.masonry().clearAllRecipes();
 
 		registerMasonryRecipes();
 		
@@ -276,8 +272,6 @@ public class SimpleRecipesAether
 
 		AetherAPI.crafting().finalizeRecipes();
 		AetherAPI.masonry().finalizeRecipes();
-
-		hasInit = true;
 	}
 
 	private static void add(ItemStack result, Object... required)
