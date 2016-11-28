@@ -266,6 +266,9 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 			int countO1 = RecipeUtil.getTotalTimesCanCraft(p, o1);
 			int countO2 = RecipeUtil.getTotalTimesCanCraft(p, o2);
 
+			int id1 = Item.getIdFromItem(o1.getResult().getItem());
+			int id2 = Item.getIdFromItem(o2.getResult().getItem());
+
 			if (countO1 > 0 && countO2 <= 0)
 			{
 				return 1;
@@ -276,7 +279,17 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 				return -1;
 			}
 
-			return Item.getIdFromItem(o1.getResult().getItem()) > Item.getIdFromItem(o2.getResult().getItem()) ? 1 : -1;
+			if (id1 > id2)
+			{
+				return 1;
+			}
+
+			if (id1 < id2)
+			{
+				return -1;
+			}
+
+			return 0;
 		});
 
 		Collections.reverse(this.recipes);
