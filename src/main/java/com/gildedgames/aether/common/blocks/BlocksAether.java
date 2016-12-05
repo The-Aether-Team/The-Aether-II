@@ -32,6 +32,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -267,6 +268,10 @@ public class BlocksAether
 
 	public static BlockCustomCarpet cloudwool_carpet = new BlockCustomCarpet(BlocksAether.cloudwool_block.getDefaultState());
 
+	public static Block skyroot_bookshelf = new BlockSkyrootBookshelf();
+
+	public static Block holystone_bookshelf = new BlockHolystoneBookshelf();
+
 	public static void preInit()
 	{
 		registerBlock("aether_dirt", BlocksAether.aether_dirt.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS), new ItemBlockVariants(BlocksAether.aether_dirt));
@@ -363,6 +368,11 @@ public class BlocksAether
 		registerBlock("skyroot_planks", BlocksAether.skyroot_planks.setCreativeTab(CreativeTabsAether.CONSTRUCTION), new ItemBlockVariants(BlocksAether.skyroot_planks));
 
 		registerBlock("skyroot_beam", BlocksAether.skyroot_beam.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
+
+		registerBlock("skyroot_bookshelf", BlocksAether.skyroot_bookshelf.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+
+		registerBlock("holystone_bookshelf", BlocksAether.holystone_bookshelf.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+
 
 		registerBlock("skyroot_door", BlocksAether.skyroot_door);
 		registerBlock("arkenium_door", BlocksAether.arkenium_door);

@@ -55,8 +55,8 @@ public class CreativeTabsAether
 	public static void registerTabIcons()
 	{
 		NATURAL_BLOCKS.setDisplayStack(new ItemStack(BlocksAether.aether_grass, 1, BlockAetherGrass.AETHER.getMeta()));
-		CONSTRUCTION.setDisplayStack(new ItemStack(BlocksAether.agiosite_brick));
-		VISUAL_VARIANTS.setDisplayStack(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.TOP_BEAM.getMeta()));
+		CONSTRUCTION.setDisplayStack(new ItemStack(BlocksAether.holystone_brick));
+		VISUAL_VARIANTS.setDisplayStack(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.HIGHLIGHT.getMeta()));
 		UTILITY.setDisplayStack(new ItemStack(BlocksAether.altar));
 		DUNGEON.setDisplayStack(new ItemStack(BlocksAether.labyrinth_base));
 		MATERIALS.setDisplayStack(new ItemStack(ItemsAether.ambrosium_shard));

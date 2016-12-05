@@ -256,6 +256,16 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 		registerShapedRecipe(new ItemStack(BlocksAether.icestone_bricks, 4), "XX", "XX",
 				'X', new ItemStack(ItemsAether.icestone));
 
+		// Skyroot Bookshelf
+		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_bookshelf), "XXX", "YYY", "XXX",
+				'X', new ItemStack(BlocksAether.skyroot_planks),
+		        'Y', new ItemStack(Items.BOOK));
+
+		// Holystone Bookshelf
+		registerShapedRecipe(new ItemStack(BlocksAether.holystone_bookshelf), "XXX", "YYY", "XXX",
+				'X', new ItemStack(BlocksAether.holystone_brick),
+				'Y', new ItemStack(Items.BOOK));
+
 		// Walls
 
 		registerShapedRecipe(new ItemStack(BlocksAether.holystone_wall, 6), "XXX", "XXX",

@@ -237,6 +237,10 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.standing_skyroot_sign, "tesr");
 		registerItemModels(BlocksAether.wall_skyroot_sign, "tesr");
 
+		registerItemModels(BlocksAether.skyroot_bookshelf, "skyroot_bookshelf");
+
+		registerItemModels(BlocksAether.holystone_bookshelf, "holystone_bookshelf");
+
 		registerItemModels(ItemsAether.skyroot_stick, "skyroot_stick");
 		registerItemModels(ItemsAether.cloudwool, "cloudwool");
 		registerItemModels(ItemsAether.golden_amber, "golden_amber");
