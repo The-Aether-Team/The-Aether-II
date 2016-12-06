@@ -3,12 +3,17 @@ package com.gildedgames.aether.common.registry;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
+import com.gildedgames.aether.common.entities.living.npc.EntityEdison;
 import com.gildedgames.aether.common.registry.content.TemplatesAether;
+import com.gildedgames.aether.common.world.GenUtil;
 import com.gildedgames.aether.common.world.dimensions.aether.features.*;
 import com.gildedgames.aether.common.world.dimensions.aether.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.gen.templates.conditions.*;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class GenerationAether
 {
@@ -154,7 +159,23 @@ public class GenerationAether
 
 		aether_portal_for_world = new WorldGenTemplate(TemplatesAether.aether_portal, TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE_GROUND);
 
-		mysterious_henge = new WorldGenTemplate(TemplatesAether.mysterious_henge, TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
+		mysterious_henge = new WorldGenTemplate(TemplatesAether.mysterious_henge, TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE)
+		{
+			private final BlockPos offset = new BlockPos(4, 2, 4);
+
+			@Override
+			public void postGenerate(World world, Random random, BlockPos pos, Rotation rotation)
+			{
+				EntityEdison edison = new EntityEdison(world);
+
+				BlockPos spawnAt = GenUtil.rotate(pos, pos.add(this.offset), rotation);
+
+				edison.setPositionAndUpdate(spawnAt.getX(), spawnAt.getY(), spawnAt.getZ());
+
+				world.spawnEntityInWorld(edison);
+			}
+
+		};
 
 		kura_tree_1 = new WorldGenTemplate(TemplatesAether.kura_tree_1, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE);
 		kura_tree_2 = new WorldGenTemplate(TemplatesAether.kura_tree_2, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE);

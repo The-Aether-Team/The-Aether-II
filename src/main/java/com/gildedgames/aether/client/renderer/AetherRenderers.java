@@ -27,6 +27,7 @@ import com.gildedgames.aether.common.entities.living.mobs.EntityZephyr;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
+import com.gildedgames.aether.common.entities.living.npc.EntityEdison;
 import com.gildedgames.aether.common.entities.living.passive.*;
 import com.gildedgames.aether.common.entities.projectiles.*;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -98,6 +99,7 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityBattleGolem.class, new AetherRenderFactory<>(RenderBattleGolem.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBattleBomb.class, new AetherRenderFactory<>(RenderBattleBomb.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityButterfly.class, new AetherRenderFactory<>(RenderButterfly.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityEdison.class, new AetherRenderFactory<>(RenderEdison.class));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityTaegore.class, new TabulaRenderFactory<>(RenderTabula.class, AetherCore.getResource("textures/entities/taegore/taegore.png"), AetherCore.getResource("models/entities/taegore.tbl")));
 

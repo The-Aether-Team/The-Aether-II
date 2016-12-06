@@ -40,6 +40,7 @@ public class NetworkingAether
 		instance.registerMessage(PacketRegisterInstance.Handler.class, PacketRegisterInstance.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(SimpleRecipeChangedPacket.HandlerServer.class, SimpleRecipeChangedPacket.class, discriminant++, Side.SERVER);
 		instance.registerMessage(MasonryRecipeChangedPacket.HandlerServer.class, MasonryRecipeChangedPacket.class, discriminant++, Side.SERVER);
+		instance.registerMessage(DiedInAetherPacket.HandlerClient.class, DiedInAetherPacket.class, discriminant++, Side.CLIENT);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 	}

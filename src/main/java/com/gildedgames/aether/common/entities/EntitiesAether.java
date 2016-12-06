@@ -18,6 +18,7 @@ import com.gildedgames.aether.common.entities.living.mobs.EntityZephyr;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
+import com.gildedgames.aether.common.entities.living.npc.EntityEdison;
 import com.gildedgames.aether.common.entities.living.passive.*;
 import com.gildedgames.aether.common.entities.projectiles.*;
 import com.gildedgames.aether.common.entities.util.AetherSpawnEggInfo;
@@ -63,6 +64,7 @@ public class EntitiesAether
 		registerLivingEntity(EntityRepairSentry.class, "repair_sentry", 0x414141, 0x4e9af7);
 		registerLivingEntity(EntitySlider.class, "slider", 0x414141, 0x4e9af7);
 		registerLivingEntity(EntityButterfly.class, "butterfly", 0x414141, 0x4e9af7);
+		registerLivingEntity(EntityEdison.class, "edison", 0x414141, 0x4e9af7);
 
 		registerLivingEntity(EntityFrostpineTotem.class, "frostpine_totem");
 		registerLivingEntity(EntityKraisith.class, "kraisith");

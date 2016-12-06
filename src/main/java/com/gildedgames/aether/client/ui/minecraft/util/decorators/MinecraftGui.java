@@ -31,9 +31,11 @@ public class MinecraftGui extends GuiDecorator<Gui>
 		return this.drawBackground;
 	}
 
-	public void setDrawBackground(boolean drawBackground)
+	public MinecraftGui setDrawBackground(boolean drawBackground)
 	{
 		this.drawBackground = drawBackground;
+
+		return this;
 	}
 
 	@Override

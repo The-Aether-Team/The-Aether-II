@@ -625,6 +625,7 @@ entity.aether.fangrin.name=Fangrin
 entity.aether.nex_spirit.name=Nex Spirit
 entity.aether.pink_baby_swet.name=Pink Baby Swet
 entity.aether.butterfly.name=Butterfly
+entity.aether.edison.name=Edison
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether Blocks
@@ -820,3 +821,31 @@ bug_report.line1=Hello, again!
 bug_report.line2=Did you run into an issue? If you'd like, you can help contribute to the Aether by visiting our issue tracker.
 bug_report.line3=Issues are an easy way to report bugs and other problems with the mod, giving you direct access to developer help and our amazing community of volunteers.
 bug_report.line4=Clicking the button below will take you to an external website in your browser where our issue tracker is located. Register an account today, and help us squash bugs faster than ever!
+
+dialog.back=Back
+
+edison.us.goodbye=Goodbye
+
+edison.them.outpost_start=You're lucky I found ya in time, mate. That must've hurt.
+
+edison.us.who_are_you=Who are you?
+edison.them.who_are_you=The name's Edison, kindly stranger. I'm a merchant by trade. You might've heard of me by now; nothin' can compete with my prices.
+
+edison.us.what_is_this_place=What is this place?
+edison.them.what_is_this_place=Ha! You got hit pretty bad, didn't ya? You talkin' bout the world we're in, or this outpost?
+
+edison.us.the_world_were_in=The world we're in.
+edison.them.the_world_were_in.1=Ooph, that bad, huh? Well.. I don' know how to tell you this, but we're high in the skies, my friend. This world is called the Aether. Can't say I've seen many humans around these parts, so I don't blame ya.
+edison.them.the_world_were_in.2=This place here, though? This just happens to be one of the many outposts that scatter the lands. The Aether is a hard place to traverse alone, so many of the locals have built outposts for people like us to rest during their travels.
+
+edison.us.this_outpost=This outpost.
+edison.them.this_outpost.1=This place? Mate, you must be really new around here. Let me fill ya in...
+edison.them.this_outpost.2=The Aether is a hard place to traverse alone, so many of the locals have built outposts for people like us to rest during their travels. This just happens to be one of the many outposts that scatter the lands.
+
+edison.us.why_am_i_here=Why am I here?
+edison.them.why_am_i_here.1=Because I saved your skin, kiddo. Me being a merchant and all, I tend to go off on supply raids; I'll find anything of value, round it up, and keep 'em for later sales.
+edison.them.why_am_i_here.2=Here I was mindin' my own business, gathering some more supplies, when I see you sprawled across the ground - limp and all!
+edison.them.why_am_i_here.3=Luckily for you, I patched your wounds up and brought ya back here. Don't fret, it's not gonna cost a thing - but I'm a man of business.
+edison.them.why_am_i_here.4=If I keep havin' to save your neck, it's only fair I get a little somethin' back. We'll call it an "appreciation fund", eh?
+
+edison.them.busy=I'm busy right now mate, sorry.

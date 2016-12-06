@@ -3,8 +3,11 @@ package com.gildedgames.aether.common.capabilities.player;
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
 import com.gildedgames.aether.common.capabilities.player.modules.EquipmentModule;
+import com.gildedgames.aether.common.network.AetherGuiHandler;
+import com.gildedgames.aether.common.network.packets.DiedInAetherPacket;
 import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
@@ -67,6 +70,7 @@ public class PlayerAetherEvents
 		PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
 
 		NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(player, EquipmentModule.getAllEquipment(aePlayer.getEquipmentInventory())), player);
+		NetworkingAether.sendPacketToPlayer(new DiedInAetherPacket(aePlayer.hasDiedInAetherBefore()), player);
 	}
 
 	@SubscribeEvent
@@ -78,9 +82,9 @@ public class PlayerAetherEvents
 		{
 			EntityPlayer player = aePlayer.getPlayer();
 
-			if (player instanceof EntityPlayerMP)
+			if (player instanceof EntityPlayerMP && ((EntityPlayerMP) player).worldObj.provider.getDimensionType() == DimensionsAether.AETHER)
 			{
-				aePlayer.setDeathPos(player.getPosition());
+				aePlayer.setAetherDeathPos(player.getPosition());
 			}
 
 			ItemStack companionItem = aePlayer.getCompanionModule().getEquippedCompanionItem();
@@ -165,7 +169,6 @@ public class PlayerAetherEvents
 		}
 	}
 
-
 	@SubscribeEvent
 	public static void onPlayerTeleported(PlayerChangedDimensionEvent event)
 	{
@@ -185,6 +188,24 @@ public class PlayerAetherEvents
 	}
 
 	@SubscribeEvent
+	public static void onPlaceBlockEvent(BlockEvent.PlaceEvent event)
+	{
+		IPlacementFlagCapability data = ChunkAttachmentCapability.get(event.getWorld()).getAttachment(new ChunkPos(event.getPos()), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
+
+		if (data != null)
+		{
+			data.mark(event.getPos());
+		}
+
+		IPlayerAetherCapability aePlayer = PlayerAetherImpl.getPlayer(event.getPlayer());
+
+		if (aePlayer != null)
+		{
+			aePlayer.onPlaceBlock(event);
+		}
+	}
+
+	@SubscribeEvent
 	public static void onPlayerClone(PlayerEvent.Clone event)
 	{
 		IPlayerAetherCapability oldPlayer = PlayerAetherImpl.getPlayer(event.getOriginal());
@@ -200,24 +221,6 @@ public class PlayerAetherEvents
 			storage.readNBT(AetherCapabilities.PLAYER_DATA, newPlayer, null, state);
 
 			//newPlayer.getEquipmentModule().resetEffects();
-		}
-	}
-
-	@SubscribeEvent
-	public static void onPlaceBlockEvent(BlockEvent.PlaceEvent event)
-	{
-		IPlacementFlagCapability data = ChunkAttachmentCapability.get(event.getWorld()).getAttachment(new ChunkPos(event.getPos()), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
-
-		if (data != null)
-		{
-			data.mark(event.getPos());
-		}
-
-		IPlayerAetherCapability aePlayer = PlayerAetherImpl.getPlayer(event.getPlayer());
-
-		if (aePlayer != null)
-		{
-			aePlayer.onPlaceBlock(event);
 		}
 	}
 
@@ -246,7 +249,7 @@ public class PlayerAetherEvents
 
 			if (bedPos == null)
 			{
-				List<IslandData> islands = IslandSectorAccess.inst().getAllIslands(mp.worldObj, aePlayer.getDeathPos());
+				List<IslandData> islands = IslandSectorAccess.inst().getAllIslands(mp.worldObj, aePlayer.getAetherDeathPos());
 
 				boolean shouldSpawnAtHenge = false;
 				boolean obstructed = false;
@@ -280,6 +283,15 @@ public class PlayerAetherEvents
 				if (shouldSpawnAtHenge)
 				{
 					mp.connection.setPlayerLocation(pos.getX(), pos.getY() + 1, pos.getZ(), 0, 0);
+
+					if (!aePlayer.hasDiedInAetherBefore())
+					{
+						mp.openGui(AetherCore.INSTANCE, AetherGuiHandler.EDISON_GUI_ID, mp.worldObj, pos.getX(), pos.getY(), pos.getZ());
+
+						aePlayer.setHasDiedInAetherBefore(true);
+
+						NetworkingAether.sendPacketToPlayer(new DiedInAetherPacket(), mp);
+					}
 				}
 				else
 				{

@@ -204,7 +204,7 @@ public class UiManager
 	}
 
 	/**
-	 * Returns true if the given screen is a wrapper around the GuiFrame class
+	 * Returns true if the given screen is a wrapper around the GuiScreenCustom class
 	 * given.
 	 */
 	public boolean containsFrame(GuiScreen screen, Class<? extends GuiFrame>... frames)
