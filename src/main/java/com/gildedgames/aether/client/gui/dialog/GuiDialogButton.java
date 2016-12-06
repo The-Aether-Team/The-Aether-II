@@ -41,7 +41,7 @@ public class GuiDialogButton extends GuiButton
 
 			FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
 
-			String label = I18n.format(this.buttonData.getUnlocalizedLabel());
+			String label = this.buttonData.getLabel().getFormattedText();
 
 			this.width = fontRenderer.getStringWidth(label) + 5;
 

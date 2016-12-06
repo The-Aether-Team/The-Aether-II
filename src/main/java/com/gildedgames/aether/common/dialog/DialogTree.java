@@ -1,8 +1,7 @@
 package com.gildedgames.aether.common.dialog;
 
-import com.sun.istack.internal.Nullable;
-
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class DialogTree

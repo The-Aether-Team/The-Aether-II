@@ -1,16 +1,17 @@
 package com.gildedgames.aether.common.dialog;
 
-import com.sun.istack.internal.Nullable;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public interface IDialogButton
 {
 
 	// The unlocalized label of the button.
 	@Nonnull
-	String getUnlocalizedLabel();
+	ITextComponent getLabel();
 
 	// Optional, gives the GUI button an icon if not null.
 	@Nullable

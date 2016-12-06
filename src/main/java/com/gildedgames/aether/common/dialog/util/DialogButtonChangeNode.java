@@ -3,25 +3,28 @@ package com.gildedgames.aether.common.dialog.util;
 import com.gildedgames.aether.common.dialog.IDialogButton;
 import com.gildedgames.aether.common.dialog.IDialogController;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
 
 import javax.annotation.Nonnull;
 
 public class DialogButtonChangeNode implements IDialogButton
 {
 
-	private final String name, node;
+	private final String node;
 
-	public DialogButtonChangeNode(String name, String node)
+	private final ITextComponent label;
+
+	public DialogButtonChangeNode(ITextComponent label, String node)
 	{
-		this.name = name;
+		this.label = label;
 		this.node = node;
 	}
 
 	@Nonnull
 	@Override
-	public String getUnlocalizedLabel()
+	public ITextComponent getLabel()
 	{
-		return this.name;
+		return this.label;
 	}
 
 	@Override

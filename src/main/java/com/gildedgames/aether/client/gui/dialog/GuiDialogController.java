@@ -11,9 +11,13 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import org.lwjgl.Sys;
 
 import java.io.IOException;
@@ -30,7 +34,7 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 
 	private IDialogNode node;
 
-	private GuiTextBox textBox;
+	private GuiTextBox topTextBox, bottomTextBox, namePlate;
 
 	private int textIndex;
 
@@ -51,41 +55,6 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	{
 		super.drawScreen(mouseX, mouseY, partialTicks);
-
-		if ((this.textIndex < this.node.getContent().size() && this.node.getButtons().isEmpty()) || this.node.getButtons().isEmpty())
-		{
-			double time = (Sys.getTime() * 1000) / Sys.getTimerResolution();
-			double timePassed = time - this.prevTime;
-
-			this.prevTime = time;
-
-			if (this.nextArrowAnim < 1000)
-			{
-				this.nextArrowAnim += timePassed;
-			}
-			else
-			{
-				this.nextArrowAnim = 0.0;
-			}
-
-			GlStateManager.pushMatrix();
-
-			double anim = this.nextArrowAnim;
-
-			if (this.nextArrowAnim < 500.0)
-			{
-				GlStateManager.translate(0, anim / 500.0, 0);
-			}
-			else if (this.nextArrowAnim >= 500.0)
-			{
-				GlStateManager.translate(0, -((anim - 500.0) / 500.0), 0);
-			}
-
-			Minecraft.getMinecraft().renderEngine.bindTexture(NEXT_ARROW);
-			Gui.drawModalRectWithCustomSizedTexture(this.textBox.xPosition + this.textBox.width - 20, this.textBox.yPosition + this.textBox.height - 20, 0, 0, 13, 12, 13, 12);
-
-			GlStateManager.popMatrix();
-		}
 	}
 
 	@Override
@@ -111,9 +80,61 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 		}
 
 		GlStateManager.pushMatrix();
-		GlStateManager.translate(0, 0, 300F);
+
+		GlStateManager.translate(0, 0, 100F);
+
 		GuiInventory.drawEntityOnScreen((this.width / 2) + 40, this.height, 120, -mouseX + (this.width / 2) + 40, (-mouseY / 10.0F), this.npc);
+
+		GlStateManager.translate(0, 0, 100F);
+		Gui.drawRect(0, this.height - 90, this.width, this.height, Integer.MIN_VALUE);
+
 		GlStateManager.popMatrix();
+
+		if ((this.textIndex < this.node.getContent().size() && this.node.getButtons().isEmpty()) || this.node.getButtons().isEmpty())
+		{
+			GlStateManager.pushMatrix();
+
+			double time = (Sys.getTime() * 1000) / Sys.getTimerResolution();
+			double timePassed = time - this.prevTime;
+
+			this.prevTime = time;
+
+			if (this.nextArrowAnim < 1000)
+			{
+				this.nextArrowAnim += timePassed;
+			}
+			else
+			{
+				this.nextArrowAnim = 0.0;
+			}
+
+			double anim = this.nextArrowAnim;
+
+			if (this.nextArrowAnim < 500.0)
+			{
+				GlStateManager.translate(0, anim / 500.0, 0);
+			}
+			else if (this.nextArrowAnim >= 500.0)
+			{
+				GlStateManager.translate(0, -((anim - 500.0) / 500.0), 0);
+			}
+
+			GlStateManager.translate(0, 0, 302F);
+			GlStateManager.color(1.0F, 1.0F, 1.0F);
+
+			Minecraft.getMinecraft().renderEngine.bindTexture(NEXT_ARROW);
+
+			if (this.node.getButtons().size() > 0)
+			{
+				Gui.drawModalRectWithCustomSizedTexture(this.topTextBox.xPosition + this.topTextBox.width + 5, this.topTextBox.yPosition + this.topTextBox.height - 20, 0, 0, 13, 12, 13, 12);
+			}
+			else
+			{
+				Gui.drawModalRectWithCustomSizedTexture(this.bottomTextBox.xPosition + this.bottomTextBox.width, this.bottomTextBox.yPosition + this.bottomTextBox.height - 20, 0, 0, 13, 12, 13, 12);
+			}
+
+			GlStateManager.popMatrix();
+		}
 	}
 
 	@Override
@@ -188,16 +209,18 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 		Collection<ITextComponent> text = node.getContent();
 
 		int baseBoxSize = 350;
+		boolean resize = this.width - 40 > baseBoxSize;
 
-		if (this.width - 40 > baseBoxSize)
-		{
-			this.textBox = new GuiTextBox(buttons.size(), (this.width / 2) - (baseBoxSize / 2), this.height - 110, baseBoxSize, 80);
-		}
-		else
+		if (!resize)
 		{
 			baseBoxSize = this.width - 40;
-			this.textBox = new GuiTextBox(buttons.size(), 20, this.height - 110, baseBoxSize, 80);
 		}
+
+		this.topTextBox = new GuiTextBox(buttons.size(), resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - 175, baseBoxSize, 80);
+		this.bottomTextBox = new GuiTextBox(buttons.size() + 1, resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - 85, baseBoxSize, 70);
+
+		this.topTextBox.showBackdrop = true;
+		this.topTextBox.bottomToTop = true;
 
 		if (buttons.size() > 0 && this.textIndex + 1 >= text.size())
 		{
@@ -205,7 +228,7 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 
 			for (IDialogButton btn : buttons)
 			{
-				this.buttonList.add(new GuiDialogButton(index, (this.width / 2) - (baseBoxSize / 2), this.height - 200 + (index * 20), btn));
+				this.buttonList.add(new GuiDialogButton(index, (this.width / 2) - (baseBoxSize / 2), this.height - 85 + (index * 20), btn));
 
 				index++;
 			}
@@ -219,7 +242,15 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 			{
 				if (i == this.textIndex)
 				{
-					this.textBox.setText(t);
+					if (this.node.getButtons().size() > 0)
+					{
+						this.topTextBox.setText(t);
+					}
+					else
+					{
+						this.bottomTextBox.setText(t);
+					}
+
 					break;
 				}
 
@@ -227,7 +258,28 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 			}
 		}
 
-		this.buttonList.add(this.textBox);
+		if (this.node.getSpeaker() != null)
+		{
+			this.fontRendererObj = Minecraft.getMinecraft().fontRendererObj;
+
+			boolean topText = this.node.getButtons().size() > 0;
+			String name = I18n.format(this.node.getSpeaker().getResourcePath() + ".name");
+
+			this.namePlate = new GuiTextBox(buttons.size() + 2, resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - (topText ? 122 + this.topTextBox.getTextHeight(this.fontRendererObj) : 107), this.fontRendererObj.getStringWidth(name + 10), 20);
+
+			ITextComponent t = new TextComponentString(name);
+			t.setStyle(new Style().setColor(TextFormatting.YELLOW).setItalic(true));
+
+			this.namePlate.setText(t);
+		}
+
+		this.buttonList.add(this.topTextBox);
+		this.buttonList.add(this.bottomTextBox);
+
+		if (this.node.getSpeaker() != null)
+		{
+			this.buttonList.add(this.namePlate);
+		}
 	}
 
 	private void nextAction()

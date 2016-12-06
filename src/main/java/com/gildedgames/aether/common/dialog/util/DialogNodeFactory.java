@@ -6,7 +6,9 @@ import com.gildedgames.aether.common.dialog.IDialogNode;
 import com.google.common.collect.Lists;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 
 import java.util.List;
 
@@ -51,14 +53,22 @@ public class DialogNodeFactory
 	// Creates a button that changes the node
 	public DialogNodeFactory button(String name, String node)
 	{
-		this.buttons.add(new DialogButtonChangeNode(name, node));
+		ITextComponent text = new TextComponentTranslation(name);
+
+		text.setStyle(new Style().setColor(TextFormatting.WHITE));
+
+		this.buttons.add(new DialogButtonChangeNode(text, node));
 
 		return this;
 	}
 
 	public DialogNodeFactory closeButton(String name)
 	{
-		this.buttons.add(new DialogButtonClose(name));
+		ITextComponent text = new TextComponentTranslation(name);
+
+		text.setStyle(new Style().setColor(TextFormatting.WHITE).setItalic(true));
+
+		this.buttons.add(new DialogButtonClose(text));
 
 		return this;
 	}
