@@ -82,6 +82,7 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 		GlStateManager.pushMatrix();
 
 		GlStateManager.translate(0, 0, 100F);
+		GlStateManager.color(1.0F, 1.0F, 1.0F);
 
 		GuiInventory.drawEntityOnScreen((this.width / 2) + 40, this.height, 120, -mouseX + (this.width / 2) + 40, (-mouseY / 10.0F), this.npc);
 
