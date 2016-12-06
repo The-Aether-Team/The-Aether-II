@@ -41,7 +41,11 @@ public class GuiTextBox extends GuiElement
 
 	public int getTextHeight(FontRenderer fontRenderer)
 	{
-		this.init(fontRenderer);
+		if (!this.hasInit)
+		{
+			this.init(fontRenderer);
+			this.hasInit = true;
+		}
 
 		int splitCount = Math.min((this.width + 12 - 5) / fontRenderer.FONT_HEIGHT, this.cachedSplitText.size());
 

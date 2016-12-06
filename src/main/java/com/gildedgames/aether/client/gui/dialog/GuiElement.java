@@ -7,7 +7,7 @@ import net.minecraft.client.gui.GuiButton;
 public abstract class GuiElement extends GuiButton
 {
 
-	private boolean hasInit;
+	protected boolean hasInit;
 
 	public GuiElement(int elementId, int x, int y)
 	{

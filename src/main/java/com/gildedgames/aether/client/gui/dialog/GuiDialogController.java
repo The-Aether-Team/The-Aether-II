@@ -204,6 +204,11 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 
 		this.resetGui();
 
+		if (this.mc == null)
+		{
+			return;
+		}
+
 		Collection<IDialogButton> buttons = node.getButtons();
 
 		Collection<ITextComponent> text = node.getContent();
