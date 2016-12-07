@@ -17,7 +17,11 @@ import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class SimpleRecipesAether
@@ -173,13 +177,29 @@ public class SimpleRecipesAether
 
 				AetherAPI.crafting().registerRecipe(nextId++, simpleRecipe);
 			}
-			else if (recipe instanceof ShapedOreRecipe)
+			else if (recipe instanceof ShapedOreRecipe || recipe instanceof ShapelessOreRecipe)
 			{
-				ShapedOreRecipe shaped = (ShapedOreRecipe) recipe;
+				Collection<Object> input = null;
+				ItemStack output = null;
+
+				if (recipe instanceof ShapedOreRecipe)
+				{
+					ShapedOreRecipe shaped = (ShapedOreRecipe) recipe;
+
+					input = Arrays.asList(shaped.getInput());
+					output = shaped.getRecipeOutput();
+				}
+				else if (recipe instanceof ShapelessOreRecipe)
+				{
+					ShapelessOreRecipe shapeless = (ShapelessOreRecipe) recipe;
+
+					input = shapeless.getInput();
+					output = shapeless.getRecipeOutput();
+				}
 
 				List<Object> req = Lists.newArrayList();
 
-				outer: for (Object obj : shaped.getInput())
+				outer: for (Object obj : input)
 				{
 					if (obj != null)
 					{
@@ -254,7 +274,7 @@ public class SimpleRecipesAether
 					}
 				}
 
-				SimpleRecipe simpleRecipe = new SimpleRecipe(shaped.getRecipeOutput(), req.toArray(new Object[req.size()]));
+				SimpleRecipe simpleRecipe = new SimpleRecipe(output, req.toArray(new Object[req.size()]));
 
 				for (ISimpleRecipe r : recipes)
 				{
