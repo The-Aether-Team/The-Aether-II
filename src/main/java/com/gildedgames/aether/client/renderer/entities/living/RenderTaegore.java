@@ -20,6 +20,9 @@ public class RenderTaegore extends RenderLiving<EntityTaegore>
 	@Override
 	protected void preRenderCallback(EntityTaegore entity, float partialTicks)
 	{
+		float scale = 0.7F;
+
+		GlStateManager.scale(scale, scale, scale);
 		GlStateManager.translate(0.0F, 0.0F, -0.4F);
 	}
 
