@@ -71,7 +71,7 @@ public class SpawnRegistry
 		SpawnHandler atmospheric = new SpawnHandler("aether_atmospheric").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(200);
 		atmospheric.worldCondition(new CheckDimension(DimensionsAether.AETHER));
 
-		SpawnEntry butterfly = new SpawnEntry(EntityButterfly.class, 10F, 1, 6).conditiion(grassCheck);
+		SpawnEntry butterfly = new SpawnEntry(EntityGlitterwing.class, 10F, 1, 6).conditiion(grassCheck);
 
 		atmospheric.addEntry(butterfly);
 

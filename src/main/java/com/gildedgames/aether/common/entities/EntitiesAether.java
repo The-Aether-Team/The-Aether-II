@@ -63,8 +63,8 @@ public class EntitiesAether
 		registerLivingEntity(EntityProductionLine.class, "production_line", 0x414141, 0x4e9af7);
 		registerLivingEntity(EntityRepairSentry.class, "repair_sentry", 0x414141, 0x4e9af7);
 		registerLivingEntity(EntitySlider.class, "slider", 0x414141, 0x4e9af7);
-		registerLivingEntity(EntityButterfly.class, "butterfly", 0x414141, 0x4e9af7);
-		registerLivingEntity(EntityEdison.class, "edison", 0x414141, 0x4e9af7);
+		registerLivingEntity(EntityGlitterwing.class, "glitterwing", 0x5368a9, 0x1a2341);
+		registerLivingEntity(EntityEdison.class, "edison", 0x788b7e, 0xedc5b1);
 
 		registerLivingEntity(EntityFrostpineTotem.class, "frostpine_totem");
 		registerLivingEntity(EntityKraisith.class, "kraisith");
