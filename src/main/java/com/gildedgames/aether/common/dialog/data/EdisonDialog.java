@@ -36,9 +36,11 @@ public class EdisonDialog
 				.button("edison.us.the_world_were_in", "the_world_were_in")
 				.button("edison.us.this_outpost", "this_outpost").flush();
 
-		public static final IDialogNode THE_WORLD_WERE_IN = DialogNodeFactory.build("the_world_were_in").speaker(EDISON).text("edison.them.the_world_were_in", 2).backToRootAction().flush();
+		public static final IDialogNode VALKYRIES = DialogNodeFactory.build("valkyries").speaker(EDISON).text("edison.them.valkyries", 3).backToRootAction().flush();
 
-		public static final IDialogNode THIS_OUTPOST = DialogNodeFactory.build("this_outpost").speaker(EDISON).text("edison.them.this_outpost", 2).backToRootAction().flush();
+		public static final IDialogNode THE_WORLD_WERE_IN = DialogNodeFactory.build("the_world_were_in").speaker(EDISON).text("edison.them.the_world_were_in", 2).button("edison.us.valkyries", "valkyries").flush();
+
+		public static final IDialogNode THIS_OUTPOST = DialogNodeFactory.build("this_outpost").speaker(EDISON).text("edison.them.this_outpost", 2).button("edison.us.valkyries", "valkyries").flush();
 
 		public static final IDialogNode WHY_AM_I_HERE = DialogNodeFactory.build("why_am_i_here").speaker(EDISON).text("edison.them.why_am_i_here", 4).backToRootAction().flush();
 
@@ -52,7 +54,7 @@ public class EdisonDialog
 
 		}
 
-		public static final DialogTree OUTPOST_SCENE = DialogTreeFactory.build().addNodes(Nodes.OUTPOST_START, Nodes.WHO_ARE_YOU, Nodes.WHAT_IS_THIS_PLACE, Nodes.THE_WORLD_WERE_IN, Nodes.THIS_OUTPOST, Nodes.WHY_AM_I_HERE).setRootNode(Nodes.OUTPOST_START).flush();
+		public static final DialogTree OUTPOST_SCENE = DialogTreeFactory.build().addNodes(Nodes.OUTPOST_START, Nodes.WHO_ARE_YOU, Nodes.WHAT_IS_THIS_PLACE, Nodes.THE_WORLD_WERE_IN, Nodes.THIS_OUTPOST, Nodes.WHY_AM_I_HERE, Nodes.VALKYRIES).setRootNode(Nodes.OUTPOST_START).flush();
 
 		public static final DialogTree BUSY_SCENE = DialogTreeFactory.build().addNodes(Nodes.BUSY).setRootNode(Nodes.BUSY).flush();
 

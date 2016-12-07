@@ -91,7 +91,7 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 
 		GlStateManager.popMatrix();
 
-		if ((this.textIndex < this.node.getContent().size() && this.node.getButtons().isEmpty()) || this.node.getButtons().isEmpty())
+		if (this.textIndex + 1 < this.node.getContent().size() || this.node.getButtons().isEmpty())
 		{
 			GlStateManager.pushMatrix();
 
@@ -125,7 +125,7 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 
 			Minecraft.getMinecraft().renderEngine.bindTexture(NEXT_ARROW);
 
-			if (this.node.getButtons().size() > 0)
+			if (this.textIndex + 1 >= this.node.getContent().size() && this.node.getButtons().size() > 0)
 			{
 				Gui.drawModalRectWithCustomSizedTexture(this.topTextBox.xPosition + this.topTextBox.width + 5, this.topTextBox.yPosition + this.topTextBox.height - 20, 0, 0, 13, 12, 13, 12);
 			}
@@ -248,7 +248,7 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 			{
 				if (i == this.textIndex)
 				{
-					if (this.node.getButtons().size() > 0)
+					if (this.textIndex + 1 >= text.size() && this.node.getButtons().size() > 0)
 					{
 						this.topTextBox.setText(t);
 					}
@@ -268,7 +268,7 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 		{
 			this.fontRendererObj = Minecraft.getMinecraft().fontRendererObj;
 
-			boolean topText = this.node.getButtons().size() > 0;
+			boolean topText = this.textIndex + 1 >= this.node.getContent().size() && this.node.getButtons().size() > 0;
 			String name = I18n.format(this.node.getSpeaker().getResourcePath() + ".name");
 
 			this.namePlate = new GuiTextBox(buttons.size() + 2, resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - (topText ? 122 + this.topTextBox.getTextHeight(this.fontRendererObj) : 107), this.fontRendererObj.getStringWidth(name + 10), 20);

@@ -828,26 +828,31 @@ edison.name=Edison
 
 edison.us.goodbye=Goodbye
 
-edison.them.outpost_start=You're lucky I found ya in time, mate. That must've hurt.
+edison.them.outpost_start=You should really take better care of yourself, I really can't have folks saving your skin everywhere you go.
 
 edison.us.who_are_you=Who are you?
-edison.them.who_are_you=The name's Edison, kindly stranger. I'm a merchant by trade. You might've heard of me by now; nothin' can compete with my prices.
+edison.them.who_are_you=Oh have we not been introduced? I'm Edison, Edison Wrenk. Merchant by trade, but our "mutual friend" has requested I act as your contact out in these parts.
 
 edison.us.what_is_this_place=What is this place?
-edison.them.what_is_this_place=Ha! You got hit pretty bad, didn't ya? You talkin' bout the world we're in, or this outpost?
+edison.them.what_is_this_place=Our friend didn't inform me as to what you've been told, so I wonder if you mean this structure around us or this world we're in?
 
 edison.us.the_world_were_in=The world we're in.
-edison.them.the_world_were_in.1=Ooph, that bad, huh? Well.. I don' know how to tell you this, but we're high in the skies, my friend. This world is called the Aether. Can't say I've seen many humans around these parts, so I don't blame ya.
-edison.them.the_world_were_in.2=This place here, though? This just happens to be one of the many outposts that scatter the lands. The Aether is a hard place to traverse alone, so many of the locals have built outposts for people like us to rest during their travels.
+edison.them.the_world_were_in.1=Okay then, not been told much? This here is The Aether! It's a world that exists high above our own, so high it has its own flora and fauna.
+edison.them.the_world_were_in.2=What you stand in now is one of many ancient Valkyrie outposts, they were set up originally as sacred burial grounds if I recall correctly, but since have served as a place of resting for many travellers.
 
 edison.us.this_outpost=This outpost.
-edison.them.this_outpost.1=This place? Mate, you must be really new around here. Let me fill ya in...
-edison.them.this_outpost.2=The Aether is a hard place to traverse alone, so many of the locals have built outposts for people like us to rest during their travels. This just happens to be one of the many outposts that scatter the lands.
+edison.them.this_outpost.1=Ah well this here is an old traveller's outpost! One built many years ago by the Valkyries as a burial ground.
+edison.them.this_outpost.2=Since then many people have taken it upon themselves to maintain these areas, making them a truly safe place for anyone wandering the Aether's landscape to rest.
+
+edison.us.valkyries=Valkyries?
+edison.them.valkyries.1=They're kinda like the city guards of this world but err... Heh... Much more powerful. A solo legionnaire could rip you to shreds if you gave it reason to.
+edison.them.valkyries.2=Luckily they're rather friendly, not big talkers though. You should find them wandering around most towns and villages. They have some sort of holy pact to protect people or something.
+edison.them.valkyries.3=Honestly I'm not entirely sure what they are, you're better off asking one of the natives. Or a Valkyrie in person! They're kinda hard to miss.
 
 edison.us.why_am_i_here=Why am I here?
-edison.them.why_am_i_here.1=Because I saved your skin, kiddo. Me being a merchant and all, I tend to go off on supply raids; I'll find anything of value, round it up, and keep 'em for later sales.
-edison.them.why_am_i_here.2=Here I was mindin' my own business, gathering some more supplies, when I see you sprawled across the ground - limp and all!
-edison.them.why_am_i_here.3=Luckily for you, I patched your wounds up and brought ya back here. Don't fret, it's not gonna cost a thing - but I'm a man of business.
-edison.them.why_am_i_here.4=If I keep havin' to save your neck, it's only fair I get a little somethin' back. We'll call it an "appreciation fund", eh?
+edison.them.why_am_i_here.1=Well, you see, part of my little agreement with our good friend is that I need to ensure you don't die out there on your little "mission" or whatever it is you're doing.
+edison.them.why_am_i_here.2=So I've had a few of my employees and aquaintances get familiar with your looks, so if they ever spot you in trouble, they'll bring you back to one of these outposts and patch you up.
+edison.them.why_am_i_here.3=They'll also contact me and I'll come running to check up on you, I'm getting a hefty pay for this contract so don't wanna make it look like I don't care...
+edison.them.why_am_i_here.4=That said I can't guarantee the fellas who find you won't try to line their pockets themselves. Not that they don't deserve it, but they might decide it's worth not telling ya about it is all.
 
-edison.them.busy=I'm busy right now mate, sorry.
+edison.them.busy=I'm working on something at the moment, friend. Come back in a bit.
