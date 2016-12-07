@@ -75,12 +75,6 @@ public class EntityPhyg extends EntityFlyingAnimal
 	}
 
 	@Override
-	protected ResourceLocation getLootTable()
-	{
-		return LootTablesAether.ENTITY_PHYG;
-	}
-
-	@Override
 	public EntityAgeable createChild(EntityAgeable ageable)
 	{
 		return new EntityPhyg(this.worldObj);

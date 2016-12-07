@@ -26,6 +26,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class MinecraftRecipesAether implements IAltarRecipeRegistry
 {
@@ -53,12 +54,14 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 		registerSmeltingRecipe(new ItemStack(ItemsAether.moa_egg), new ItemStack(ItemsAether.fried_moa_egg), 0.4f);
 		registerSmeltingRecipe(new ItemStack(ItemsAether.rainbow_moa_egg), new ItemStack(ItemsAether.fried_moa_egg), 0.4f);
 		registerSmeltingRecipe(new ItemStack(BlocksAether.crude_scatterglass), new ItemStack(BlocksAether.scatterglass), 0.1f);
+		registerSmeltingRecipe(new ItemStack(ItemsAether.raw_taegore_meat), new ItemStack(ItemsAether.taegore_steak), 0.4f);
 	}
 
 	public void preInit()
 	{
 		OreDictionary.registerOre("feather", ItemsAether.moa_feather);
 		OreDictionary.registerOre("feather", ItemsAether.cockatrice_feather);
+		OreDictionary.registerOre("leather", ItemsAether.taegore_hide);
 	}
 
 	private void registerCraftingRecipes()
@@ -122,7 +125,7 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 
 		// Saddle
 		registerShapedRecipe(new ItemStack(Items.SADDLE, 1), "XXX", "XZX",
-				'X', Items.LEATHER, 'Z', Items.STRING);
+				'X', "leather", 'Z', "string");
 
 		// Skyroot Planks
 		registerShapelessRecipe(new ItemStack(BlocksAether.skyroot_planks, 4),
@@ -349,31 +352,31 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 		// Crossbow
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_crossbow), "ZZY", "XYZ", "WXZ",
 				'W', new ItemStack(ItemsAether.skyroot_stick),
-				'X', new ItemStack(Items.STRING),
+				'X', "string",
 				'Y', new ItemStack(BlocksAether.skyroot_planks),
 				'Z', new ItemStack(ItemsAether.arkenium_strip));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.holystone_crossbow), "ZZY", "XYZ", "WXZ",
 				'W', new ItemStack(ItemsAether.skyroot_stick),
-				'X', new ItemStack(Items.STRING),
+				'X', "string",
 				'Y', new ItemStack(BlocksAether.holystone),
 				'Z', new ItemStack(ItemsAether.arkenium_strip));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.zanite_crossbow), "ZZY", "XYZ", "WXZ",
 				'W', new ItemStack(ItemsAether.skyroot_stick),
-				'X', new ItemStack(Items.STRING),
+				'X', "string",
 				'Y', new ItemStack(ItemsAether.zanite_gemstone),
 				'Z', new ItemStack(ItemsAether.arkenium_strip));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_crossbow), "ZZY", "XYZ", "WXZ",
 				'W', new ItemStack(ItemsAether.skyroot_stick),
-				'X', new ItemStack(Items.STRING),
+				'X', "string",
 				'Y', new ItemStack(ItemsAether.arkenium),
 				'Z', new ItemStack(ItemsAether.arkenium_strip));
 
 		registerShapedRecipe(new ItemStack(ItemsAether.gravitite_crossbow), "ZZY", "XYZ", "WXZ",
 				'W', new ItemStack(ItemsAether.skyroot_stick),
-				'X', new ItemStack(Items.STRING),
+				'X', "string",
 				'Y', new ItemStack(ItemsAether.gravitite_plate),
 				'Z', new ItemStack(ItemsAether.arkenium_strip));
 
@@ -471,7 +474,7 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 		// Vanilla Gloves
 
 		registerShapedRecipe(new ItemStack(ItemsAether.leather_gloves), "X X",
-				'X', new ItemStack(Items.LEATHER));
+				'X', "leather");
 
 		registerShapedRecipe(new ItemStack(ItemsAether.iron_gloves), "X X",
 				'X', new ItemStack(Items.IRON_INGOT));
@@ -596,21 +599,21 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
                 'X', new ItemStack(Items.IRON_INGOT));
         // Iron Pendant
         registerShapedRecipe(new ItemStack(ItemsAether.iron_pendant), "XXX", "X X", " Y ",
-                'X', new ItemStack(Items.STRING),
+                'X', "string",
                 'Y', new ItemStack(Items.IRON_INGOT));
         // Gold Ring
         registerShapedRecipe(new ItemStack(ItemsAether.gold_ring), " X ", "X X", " X ",
                 'X', new ItemStack(Items.GOLD_INGOT));
         // Gold Pendant
         registerShapedRecipe(new ItemStack(ItemsAether.gold_pendant), "XXX", "X X", " Y ",
-                'X', new ItemStack(Items.STRING),
+                'X', "string",
                 'Y', new ItemStack(Items.GOLD_INGOT));
         // Zanite Ring
         registerShapedRecipe(new ItemStack(ItemsAether.zanite_ring), " X ", "X X", " X ",
                 'X', new ItemStack(ItemsAether.zanite_gemstone));
         // Zanite Pendant
         registerShapedRecipe(new ItemStack(ItemsAether.zanite_pendant), "XXX", "X X", " Y ",
-                'X', new ItemStack(Items.STRING),
+                'X', "string",
                 'Y', new ItemStack(ItemsAether.zanite_gemstone));
     }
 
@@ -704,12 +707,12 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 
 	private static void registerShapelessRecipe(ItemStack output, Object... stacks)
 	{
-		GameRegistry.addShapelessRecipe(output, stacks);
+		GameRegistry.addRecipe(new ShapelessOreRecipe(output, stacks));
 	}
 
 	private static void registerShapedRecipe(ItemStack output, Object... params)
 	{
-		GameRegistry.addShapedRecipe(output, params);
+		GameRegistry.addRecipe(new ShapedOreRecipe(output, params));
 	}
 
 	private static void registerSmeltingRecipe(ItemStack input, ItemStack output, float xp)

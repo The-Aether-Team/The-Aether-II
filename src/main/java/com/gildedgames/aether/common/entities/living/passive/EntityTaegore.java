@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.google.common.collect.Sets;
 import net.minecraft.entity.EntityAgeable;
@@ -11,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
@@ -91,6 +93,12 @@ public class EntityTaegore extends EntityAetherAnimal
 	protected SoundEvent getDeathSound()
 	{
 		return SoundsAether.taegore_death;
+	}
+
+	@Override
+	protected ResourceLocation getLootTable()
+	{
+		return LootTablesAether.ENTITY_TAEGORE;
 	}
 
 }

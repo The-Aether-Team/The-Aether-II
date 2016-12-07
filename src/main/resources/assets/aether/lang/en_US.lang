@@ -498,6 +498,9 @@ item.aether.end_portal_frame.name=End Portal Frame
 item.aether.arkenium_ore_item.name=Arkenium Ore
 item.aether.gravitite_ore_item.name=Gravitite Ore
 item.aether.gravitite_plate.name=Gravitite Plate
+item.aether.raw_taegore_meat.name=Raw Taegore Meat
+item.aether.taegore_steak.name=Taegore Steak
+item.aether.taegore_hide.name=Taegore Hide
 
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability: 

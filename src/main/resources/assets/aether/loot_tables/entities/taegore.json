@@ -2,11 +2,11 @@
 	"pools": [
 		{
 			"rolls": 1,
-			"name": "pork",
+			"name": "raw_taegore_meat",
 			"entries": [
 				{
 					"type": "item",
-					"name": "minecraft:porkchop",
+					"name": "aether:raw_taegore_meat",
 					"weight": 1,
 					"functions": [
 						{
@@ -41,11 +41,11 @@
 		},
 		{
 			"rolls": 1,
-			"name": "feathers",
+			"name": "hide",
 			"entries": [
 				{
 					"type": "item",
-					"name": "minecraft:feather",
+					"name": "aether:taegore_hide",
 					"weight": 1,
 					"functions": [
 						{
