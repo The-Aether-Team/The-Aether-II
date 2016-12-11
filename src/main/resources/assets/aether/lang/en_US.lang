@@ -629,6 +629,7 @@ entity.aether.nex_spirit.name=Nex Spirit
 entity.aether.pink_baby_swet.name=Pink Baby Swet
 entity.aether.glitterwing.name=Glitterwing
 entity.aether.edison.name=Edison
+entity.aether.burrukai.name=Burrukai
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether Blocks
