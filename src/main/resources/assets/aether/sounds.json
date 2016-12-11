@@ -369,6 +369,32 @@
 		],
 		"subtitle": "subtitles.aether.mob.moa.hurt"
 	},
+	"mob.taegore.ambient": {
+		"category": "neutral",
+		"sounds": [
+			"aether:mob/taegore/say1",
+			"aether:mob/taegore/say2",
+			"aether:mob/taegore/say3",
+			"aether:mob/taegore/say4"
+		],
+		"subtitle": "subtitles.aether.mob.taegore.ambient"
+	},
+	"mob.taegore.hurt": {
+		"category": "neutral",
+		"sounds": [
+			"aether:mob/taegore/hurt1",
+			"aether:mob/taegore/hurt2",
+			"aether:mob/taegore/hurt3"
+		],
+		"subtitle": "subtitles.aether.mob.taegore.hurt"
+	},
+	"mob.taegore.death": {
+		"category": "neutral",
+		"sounds": [
+			"aether:mob/taegore/death"
+		],
+		"subtitle": "subtitles.aether.mob.teagore.death"
+	},
 	"mob.chest_mimic.awake": {
 		"category": "neutral",
 		"sounds": [

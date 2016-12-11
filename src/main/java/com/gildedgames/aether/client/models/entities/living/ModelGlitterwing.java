@@ -5,7 +5,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 
-public class ModelButterfly extends ModelBase
+public class ModelGlitterwing extends ModelBase
 {
 
     public ModelRenderer head;
@@ -15,7 +15,7 @@ public class ModelButterfly extends ModelBase
     public ModelRenderer wing_2;
     public ModelRenderer shape8;
 
-    public ModelButterfly()
+    public ModelGlitterwing()
     {
         this.textureWidth = 64;
         this.textureHeight = 32;

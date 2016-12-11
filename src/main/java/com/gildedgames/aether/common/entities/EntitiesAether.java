@@ -17,7 +17,7 @@ import com.gildedgames.aether.common.entities.living.mobs.EntityTempest;
 import com.gildedgames.aether.common.entities.living.mobs.EntityZephyr;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
-import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
+import com.gildedgames.aether.common.entities.living.npc.EntityEdison;
 import com.gildedgames.aether.common.entities.living.passive.*;
 import com.gildedgames.aether.common.entities.projectiles.*;
 import com.gildedgames.aether.common.entities.util.AetherSpawnEggInfo;
@@ -41,7 +41,6 @@ public class EntitiesAether
 
 	public static void preInit()
 	{
-		registerLivingEntity(EntityPhyg.class, "phyg", 0xfcb6bd, 0xfde27a);
 		registerLivingEntity(EntityFlyingCow.class, "flying_cow", 0xbbbbbb, 0xf5db72);
 		registerLivingEntity(EntityAechorPlant.class, "aechor_plant", 0x735190, 0xaed28f);
 		registerLivingEntity(EntityAerbunny.class, "aerbunny", 0xcbe1e6, 0xe08c8c);
@@ -52,7 +51,7 @@ public class EntitiesAether
 		registerLivingEntity(EntityZephyr.class, "zephyr", 0xb8b5ab, 0x988c65);
 		registerLivingEntity(EntityTempest.class, "tempest", 0x3c464c, 0xc3e6f0);
 		registerLivingEntity(EntitySwet.class, "swet", 0xCCFFFF, 0xCCCCFF);
-		//registerLivingEntity(EntityTaegore.class, "taegore", 0x607075, 0xbda54a);
+		registerLivingEntity(EntityTaegore.class, "taegore", 0x607075, 0xbda54a);
 		registerLivingEntity(EntityDetonationSentry.class, "detonation_sentry", 0x414141, 0x4e9af7);
 		registerLivingEntity(EntityBattleSentry.class, "battle_sentry", 0x414141, 0x4e9af7);
 		registerLivingEntity(EntityTrackingSentry.class, "tracking_sentry", 0x414141, 0x4e9af7);
@@ -62,7 +61,8 @@ public class EntitiesAether
 		registerLivingEntity(EntityProductionLine.class, "production_line", 0x414141, 0x4e9af7);
 		registerLivingEntity(EntityRepairSentry.class, "repair_sentry", 0x414141, 0x4e9af7);
 		registerLivingEntity(EntitySlider.class, "slider", 0x414141, 0x4e9af7);
-		registerLivingEntity(EntityButterfly.class, "butterfly", 0x414141, 0x4e9af7);
+		registerLivingEntity(EntityGlitterwing.class, "glitterwing", 0x5368a9, 0x1a2341);
+		registerLivingEntity(EntityEdison.class, "edison", 0xedc5b1, 0x788b7e);
 
 		registerLivingEntity(EntityFrostpineTotem.class, "frostpine_totem");
 		registerLivingEntity(EntityKraisith.class, "kraisith");

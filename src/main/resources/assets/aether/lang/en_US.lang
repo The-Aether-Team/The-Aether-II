@@ -498,6 +498,9 @@ item.aether.end_portal_frame.name=End Portal Frame
 item.aether.arkenium_ore_item.name=Arkenium Ore
 item.aether.gravitite_ore_item.name=Gravitite Ore
 item.aether.gravitite_plate.name=Gravitite Plate
+item.aether.raw_taegore_meat.name=Taegore Leg
+item.aether.taegore_steak.name=Roast Taegore
+item.aether.taegore_hide.name=Taegore Hide
 
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability: 
@@ -624,7 +627,8 @@ entity.aether.soaring_wisp=Soaring Wisp
 entity.aether.fangrin.name=Fangrin
 entity.aether.nex_spirit.name=Nex Spirit
 entity.aether.pink_baby_swet.name=Pink Baby Swet
-entity.aether.butterfly.name=Butterfly
+entity.aether.glitterwing.name=Glitterwing
+entity.aether.edison.name=Edison
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether Blocks
@@ -690,6 +694,9 @@ subtitles.aether.random.detonate=Explosive detonated
 subtitles.aether.random.dart_shooter.fire=Dart Shooter fired
 subtitles.aether.mob.moa.ambient=Moa moans
 subtitles.aether.mob.moa.hurt=Moa hurts
+subtitles.aether.mob.taegore.ambient=Taegore snorts
+subtitles.aether.mob.taegore.hurt=Taegore hurts
+subtitles.aether.mob.taegore.death=Taegore dies
 subtitles.aether.mob.chest_mimic.awake=Chest Mimic awakes
 subtitles.aether.random.present_unwrap=Present unwrapped
 subtitles.aether.random.dungeon.container.smash=Container smashed
@@ -820,3 +827,38 @@ bug_report.line1=Hello, again!
 bug_report.line2=Did you run into an issue? If you'd like, you can help contribute to the Aether by visiting our issue tracker.
 bug_report.line3=Issues are an easy way to report bugs and other problems with the mod, giving you direct access to developer help and our amazing community of volunteers.
 bug_report.line4=Clicking the button below will take you to an external website in your browser where our issue tracker is located. Register an account today, and help us squash bugs faster than ever!
+
+dialog.back=Back
+
+edison.name=Edison
+
+edison.us.goodbye=Goodbye
+
+edison.them.outpost_start=You should really take better care of yourself, I really can't have folks saving your skin everywhere you go.
+
+edison.us.who_are_you=Who are you?
+edison.them.who_are_you=Oh have we not been introduced? I'm Edison, Edison Wrenk. Merchant by trade, but our "mutual friend" has requested I act as your contact out in these parts.
+
+edison.us.what_is_this_place=What is this place?
+edison.them.what_is_this_place=Our friend didn't inform me as to what you've been told, so I wonder if you mean this structure around us or this world we're in?
+
+edison.us.the_world_were_in=The world we're in.
+edison.them.the_world_were_in.1=Okay then, not been told much? This here is The Aether! It's a world that exists high above our own, so high it has its own flora and fauna.
+edison.them.the_world_were_in.2=What you stand in now is one of many ancient Valkyrie outposts, they were set up originally as sacred burial grounds if I recall correctly, but since have served as a place of resting for many travellers.
+
+edison.us.this_outpost=This outpost.
+edison.them.this_outpost.1=Ah well this here is an old traveller's outpost! One built many years ago by the Valkyries as a burial ground.
+edison.them.this_outpost.2=Since then many people have taken it upon themselves to maintain these areas, making them a truly safe place for anyone wandering the Aether's landscape to rest.
+
+edison.us.valkyries=Valkyries?
+edison.them.valkyries.1=They're kinda like the city guards of this world but err... Heh... Much more powerful. A solo legionnaire could rip you to shreds if you gave it reason to.
+edison.them.valkyries.2=Luckily they're rather friendly, not big talkers though. You should find them wandering around most towns and villages. They have some sort of holy pact to protect people or something.
+edison.them.valkyries.3=Honestly I'm not entirely sure what they are, you're better off asking one of the natives. Or a Valkyrie in person! They're kinda hard to miss.
+
+edison.us.why_am_i_here=Why am I here?
+edison.them.why_am_i_here.1=Well, you see, part of my little agreement with our good friend is that I need to ensure you don't die out there on your little "mission" or whatever it is you're doing.
+edison.them.why_am_i_here.2=So I've had a few of my employees and aquaintances get familiar with your looks, so if they ever spot you in trouble, they'll bring you back to one of these outposts and patch you up.
+edison.them.why_am_i_here.3=They'll also contact me and I'll come running to check up on you, I'm getting a hefty pay for this contract so don't wanna make it look like I don't care...
+edison.them.why_am_i_here.4=That said I can't guarantee the fellas who find you won't try to line their pockets themselves. Not that they don't deserve it, but they might decide it's worth not telling ya about it is all.
+
+edison.them.busy=I'm working on something at the moment, friend. Come back in a bit.

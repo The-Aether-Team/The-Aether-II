@@ -58,20 +58,20 @@ public class SpawnRegistry
 		SpawnEntry flying_cow = new SpawnEntry(EntityFlyingCow.class, 10F, 2, 3).conditiion(grassCheck);
 		SpawnEntry ram = new SpawnEntry(EntityKirrid.class, 10F, 2, 3).conditiion(grassCheck);
 		SpawnEntry aerbunny = new SpawnEntry(EntityAerbunny.class, 13F, 3, 5).conditiion(grassCheck);
-		SpawnEntry phygs = new SpawnEntry(EntityPhyg.class, 13F, 2, 3).conditiion(grassCheck);
+		SpawnEntry taegore = new SpawnEntry(EntityTaegore.class, 13F, 2, 3).conditiion(grassCheck);
 		SpawnEntry carrion_sprout = new SpawnEntry(EntityCarrionSprout.class, 10F, 2, 3).conditiion(grassCheck);
 
 		animals.addEntry(flying_cow);
 		animals.addEntry(ram);
 		animals.addEntry(aerbunny);
-		animals.addEntry(phygs);
+		animals.addEntry(taegore);
 		animals.addEntry(carrion_sprout);
 
 		/** ATMOSPHERIC **/
 		SpawnHandler atmospheric = new SpawnHandler("aether_atmospheric").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(200);
 		atmospheric.worldCondition(new CheckDimension(DimensionsAether.AETHER));
 
-		SpawnEntry butterfly = new SpawnEntry(EntityButterfly.class, 10F, 1, 6).conditiion(grassCheck);
+		SpawnEntry butterfly = new SpawnEntry(EntityGlitterwing.class, 10F, 1, 6).conditiion(grassCheck);
 
 		atmospheric.addEntry(butterfly);
 

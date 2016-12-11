@@ -54,6 +54,8 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 
 	private BlockPos deathPos;
 
+	private boolean hasDiedInAetherBefore;
+
 	public PlayerAetherImpl(EntityPlayer player)
 	{
 		this.player = player;
@@ -88,14 +90,24 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		return (PlayerAetherImpl) player.getCapability(AetherCapabilities.PLAYER_DATA, null);
 	}
 
-	public void setDeathPos(BlockPos pos)
+	public void setAetherDeathPos(BlockPos pos)
 	{
 		this.deathPos = pos;
 	}
 
-	public BlockPos getDeathPos()
+	public BlockPos getAetherDeathPos()
 	{
 		return this.deathPos;
+	}
+
+	public boolean hasDiedInAetherBefore()
+	{
+		return this.hasDiedInAetherBefore;
+	}
+
+	public void setHasDiedInAetherBefore(boolean flag)
+	{
+		this.hasDiedInAetherBefore = flag;
 	}
 
 	@Override
@@ -251,6 +263,7 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		tag.setTag("keepInventoryModule", keepInventoryModule);
 
 		tag.setTag("deathPos", NBTHelper.serializeBlockPos(this.deathPos));
+		tag.setBoolean("hasDiedInAetherBefore", this.hasDiedInAetherBefore);
 	}
 
 	@Override
@@ -272,6 +285,8 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		{
 			this.deathPos = NBTHelper.readBlockPos(tag.getCompoundTag("deathPos"));
 		}
+
+		this.hasDiedInAetherBefore = tag.getBoolean("hasDiedInAetherBefore");
 	}
 
 	@Override

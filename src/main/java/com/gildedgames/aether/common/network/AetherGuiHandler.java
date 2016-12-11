@@ -5,12 +5,15 @@ import com.gildedgames.aether.client.gui.container.GuiIcestoneCooler;
 import com.gildedgames.aether.client.gui.container.GuiIncubator;
 import com.gildedgames.aether.client.gui.container.simple_crafting.GuiMasonryBench;
 import com.gildedgames.aether.client.gui.container.simple_crafting.GuiSimpleCrafting;
+import com.gildedgames.aether.client.gui.dialog.GuiDialogController;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.containers.ContainerDialogController;
 import com.gildedgames.aether.common.containers.ContainerEquipment;
 import com.gildedgames.aether.common.containers.ContainerMasonryBench;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
 import com.gildedgames.aether.common.containers.ContainerSimpleCrafting;
+import com.gildedgames.aether.common.dialog.data.EdisonDialog;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -34,6 +37,8 @@ public class AetherGuiHandler implements IGuiHandler
 
 	public static final int MASONRY_BENCH_ID = 5;
 
+	public static final int EDISON_GUI_ID = 6;
+
 	@Override
 	public Container getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
 	{
@@ -49,6 +54,8 @@ public class AetherGuiHandler implements IGuiHandler
 			return new ContainerIncubator(player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
 		case MASONRY_BENCH_ID:
 			return new ContainerMasonryBench(player, new BlockPos(x, y, z));
+		case EDISON_GUI_ID:
+			return new ContainerDialogController(player);
 		default:
 			return null;
 		}
@@ -71,6 +78,12 @@ public class AetherGuiHandler implements IGuiHandler
 			return new GuiIncubator(player.inventory, (IInventory) world.getTileEntity(pos), pos);
 		case MASONRY_BENCH_ID:
 			return new GuiMasonryBench(player, new BlockPos(x, y, z));
+		case EDISON_GUI_ID:
+			GuiDialogController controller = new GuiDialogController(player);
+
+			controller.show(EdisonDialog.Scenes.OUTPOST_SCENE);
+
+			return controller;
 		default:
 			return null;
 		}

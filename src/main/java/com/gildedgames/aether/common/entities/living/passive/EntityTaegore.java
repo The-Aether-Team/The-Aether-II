@@ -1,8 +1,9 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.registry.content.LootTablesAether;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.google.common.collect.Sets;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -12,22 +13,16 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import us.ichun.mods.ichunutil.common.module.tabula.client.formats.ImportList;
-import us.ichun.mods.ichunutil.common.module.tabula.client.model.IAnimatedEntity;
-import us.ichun.mods.ichunutil.common.module.tabula.common.project.ProjectInfo;
 
 import javax.annotation.Nullable;
 import java.util.Set;
 
-public class EntityTaegore extends EntityAetherAnimal implements IAnimatedEntity
+public class EntityTaegore extends EntityAetherAnimal
 {
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry);
-
-	private static final ResourceLocation MODEL = AetherCore.getResource("models/entities/taegore.tbl");
-
-	private ProjectInfo projectInfo = ImportList.createProjectFromResource(MODEL);
 
 	public EntityTaegore(World world)
 	{
@@ -77,27 +72,33 @@ public class EntityTaegore extends EntityAetherAnimal implements IAnimatedEntity
 	}
 
 	@Override
-	public ProjectInfo getProjectInfo()
-	{
-		return this.projectInfo;
-	}
-
-	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
+	}
 
-		if (this.worldObj.isRemote)
-		{
-			this.projectInfo.getAnimation("Walk cycle").playSpeed = 1.0F;//Math.max(0.5F, 30.0F * Math.abs((float)(this.motionX + this.motionZ) / 2.0F));
+	@Override
+	protected SoundEvent getAmbientSound()
+	{
+		return SoundsAether.taegore_ambient;
+	}
 
-			this.projectInfo.getAnimation("Walk cycle").loops = false;
+	@Override
+	protected SoundEvent getHurtSound()
+	{
+		return SoundsAether.taegore_hurt;
+	}
 
-			if (this.limbSwing * this.limbSwingAmount > 1.0F)
-			{
-				this.projectInfo.getAnimation("Walk cycle").play();
-			}
-		}
+	@Override
+	protected SoundEvent getDeathSound()
+	{
+		return SoundsAether.taegore_death;
+	}
+
+	@Override
+	protected ResourceLocation getLootTable()
+	{
+		return LootTablesAether.ENTITY_TAEGORE;
 	}
 
 }

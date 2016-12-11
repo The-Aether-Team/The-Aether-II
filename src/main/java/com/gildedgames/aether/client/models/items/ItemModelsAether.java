@@ -664,6 +664,10 @@ public class ItemModelsAether
 
 		registerItemModels(ItemsAether.aether_spawn_egg, "aether_spawn_egg");
 
+		registerItemModels(ItemsAether.raw_taegore_meat, "raw_taegore_meat");
+		registerItemModels(ItemsAether.taegore_steak, "taegore_steak");
+		registerItemModels(ItemsAether.taegore_hide, "taegore_hide");
+
 		registerItemModels(BlocksAether.wildcard, "wildcard");
 
 		ModelLoader.setCustomModelResourceLocation(getItem(BlocksAether.structure_extended), 0, new ModelResourceLocation("structure_block", "inventory"));

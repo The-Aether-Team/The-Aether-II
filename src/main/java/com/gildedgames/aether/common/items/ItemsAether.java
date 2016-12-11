@@ -115,7 +115,8 @@ public class ItemsAether
 			valkyrie_leggings = new ItemValkyrieArmor(EntityEquipmentSlot.LEGS),
 			valkyrie_boots = new ItemValkyrieArmor(EntityEquipmentSlot.FEET);
 
-	public static final Item golden_amber = new Item();
+	public static final Item golden_amber = new Item(),
+							taegore_hide = new Item();
 
 	public static final ItemAetherFood blueberries = new ItemAetherFood(2, false),
 			enchanted_blueberry = new ItemAetherFood(6, false),
@@ -123,7 +124,9 @@ public class ItemsAether
 			wyndberry = new ItemAetherFood(4, false),
 			enchanted_wyndberry = new ItemEnchantedWyndberry(),
 			swet_jelly = new ItemSwetJelly(),
-			gummy_swet = new ItemGummySwet();
+			gummy_swet = new ItemGummySwet(),
+			raw_taegore_meat = new ItemAetherFood(3, 0.3F, false),
+			taegore_steak = new ItemAetherFood(8, 0.8F, false);
 
 	public static final ItemAetherFood candy_corn = new ItemAetherFood(8, false),
 			cocoatrice = new ItemAetherFood(12, false),
@@ -475,6 +478,7 @@ public class ItemsAether
         registerItem("valkyrie_gloves", valkyrie_gloves);
 
 		registerItem("golden_amber", golden_amber.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("taegore_hide", taegore_hide.setCreativeTab(CreativeTabsAether.MATERIALS));
 
 		registerItem("aechor_petal", aechor_petal.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
@@ -485,6 +489,9 @@ public class ItemsAether
 		registerItem("enchanted_wyndberry", enchanted_wyndberry);
 		registerItem("swet_jelly", swet_jelly);
 		registerItem("gummy_swet", gummy_swet);
+
+		registerItem("raw_taegore_meat", raw_taegore_meat);
+		registerItem("taegore_steak", taegore_steak);
 
 		registerItem("candy_corn", candy_corn);
 		registerItem("cocoatrice", cocoatrice);
