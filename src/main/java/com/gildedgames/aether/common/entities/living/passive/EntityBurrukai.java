@@ -80,19 +80,24 @@ public class EntityBurrukai extends EntityAetherAnimal
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundsAether.taegore_ambient;
+		return SoundsAether.burrukai_ambient;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return SoundsAether.taegore_hurt;
+		return SoundsAether.burrukai_hurt;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundsAether.taegore_death;
+		return SoundsAether.burrukai_death;
+	}
+
+	protected float getSoundVolume()
+	{
+		return 0.6F;
 	}
 
 	@Override

@@ -395,6 +395,31 @@
 		],
 		"subtitle": "subtitles.aether.mob.teagore.death"
 	},
+	"mob.burrukai.ambient": {
+		"category": "neutral",
+		"sounds": [
+			"aether:mob/burrukai/say1",
+			"aether:mob/burrukai/say2",
+			"aether:mob/burrukai/say3",
+			"aether:mob/burrukai/say4"
+		],
+		"subtitle": "subtitles.aether.mob.burrukai.ambient"
+	},
+	"mob.burrukai.hurt": {
+		"category": "neutral",
+		"sounds": [
+			"aether:mob/burrukai/hurt1",
+			"aether:mob/burrukai/hurt2"
+		],
+		"subtitle": "subtitles.aether.mob.burrukai.hurt"
+	},
+	"mob.burrukai.death": {
+		"category": "neutral",
+		"sounds": [
+			"aether:mob/burrukai/death1"
+		],
+		"subtitle": "subtitles.aether.mob.burrukai.death"
+	},
 	"mob.chest_mimic.awake": {
 		"category": "neutral",
 		"sounds": [
