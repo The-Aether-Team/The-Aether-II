@@ -400,8 +400,7 @@
 		"sounds": [
 			"aether:mob/burrukai/say1",
 			"aether:mob/burrukai/say2",
-			"aether:mob/burrukai/say3",
-			"aether:mob/burrukai/say4"
+			"aether:mob/burrukai/say3"
 		],
 		"subtitle": "subtitles.aether.mob.burrukai.ambient"
 	},
