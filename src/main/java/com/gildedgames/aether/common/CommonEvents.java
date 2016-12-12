@@ -47,8 +47,6 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import us.ichun.mods.ichunutil.common.module.tabula.client.model.IAnimatedEntity;
-import us.ichun.mods.ichunutil.common.module.tabula.common.project.components.Animation;
 
 import java.io.File;
 import java.io.IOException;
@@ -170,16 +168,6 @@ public class CommonEvents
 	public static void onLivingEntityUpdate(LivingEvent.LivingUpdateEvent event)
 	{
 		final Entity entity = event.getEntity();
-
-		if (entity instanceof IAnimatedEntity)
-		{
-			IAnimatedEntity animated = (IAnimatedEntity) entity;
-
-			for (Animation anim : animated.getProjectInfo().anims)
-			{
-				anim.update();
-			}
-		}
 
 		if (entity instanceof EntityPlayer)
 		{
