@@ -108,6 +108,12 @@ public class SoundsAether
 
 	public static final SoundEvent taegore_death = new SoundEvent(AetherCore.getResource("mob.taegore.death"));
 
+	public static final SoundEvent burrukai_ambient = new SoundEvent(AetherCore.getResource("mob.burrukai.ambient"));
+
+	public static final SoundEvent burrukai_hurt = new SoundEvent(AetherCore.getResource("mob.burrukai.hurt"));
+
+	public static final SoundEvent burrukai_death = new SoundEvent(AetherCore.getResource("mob.burrukai.death"));
+
 	public static void preInit()
 	{
 		registerSound("portal.glowstone.hum", glowstone_portal_hum);
@@ -181,6 +187,10 @@ public class SoundsAether
 		registerSound("mob.taegore.ambient", taegore_ambient);
 		registerSound("mob.taegore.hurt", taegore_hurt);
 		registerSound("mob.taegore.death", taegore_death);
+
+		registerSound("mob.burrukai.ambient", burrukai_ambient);
+		registerSound("mob.burrukai.hurt", burrukai_hurt);
+		registerSound("mob.burrukai.death", burrukai_death);
 	}
 
 	private static void registerSound(String resource, SoundEvent event) {

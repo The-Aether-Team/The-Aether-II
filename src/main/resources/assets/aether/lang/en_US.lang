@@ -629,6 +629,7 @@ entity.aether.nex_spirit.name=Nex Spirit
 entity.aether.pink_baby_swet.name=Pink Baby Swet
 entity.aether.glitterwing.name=Glitterwing
 entity.aether.edison.name=Edison
+entity.aether.burrukai.name=Burrukai
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether Blocks
@@ -706,6 +707,9 @@ subtitles.aether.mob.slider.die=Slider dies
 subtitles.aether.mob.slider.move=Slider moves
 subtitles.aether.mob.slider.signal=Slider signals
 subtitles.aether.mob.generic.wings.flap=Wings flap
+subtitles.aether.mob.burrukai.ambient=Burrukai huffs
+subtitles.aether.mob.burrukai.hurt=Burrukai hurts
+subtitles.aether.mob.burrukai.death=Burrukai dies
 
 # Accessory slot names
 gui.aether.slot.neckwear=Neckwear

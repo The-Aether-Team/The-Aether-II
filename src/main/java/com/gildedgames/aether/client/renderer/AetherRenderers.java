@@ -101,6 +101,7 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityGlitterwing.class, new AetherRenderFactory<>(RenderGlitterwing.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityEdison.class, new AetherRenderFactory<>(RenderEdison.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTaegore.class, new AetherRenderFactory<>(RenderTaegore.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityBurrukai.class, new AetherRenderFactory<>(RenderBurrukai.class));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityRewardItemStack.class, new IRenderFactory<EntityRewardItemStack>()
 		{
