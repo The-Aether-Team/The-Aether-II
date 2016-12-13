@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.tiles.multiblock;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiController;
 import com.gildedgames.aether.common.tiles.util.TileEntitySynced;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 
@@ -24,7 +25,8 @@ public abstract class TileEntityMultiblockController extends TileEntitySynced im
 				continue;
 			}
 
-			this.worldObj.setBlockState(pos, BlocksAether.multiblock_dummy.getDefaultState());
+			this.worldObj.setBlockState(pos, BlocksAether.multiblock_dummy.getDefaultState(), 3);
+			this.worldObj.notifyBlockUpdate(pos, Blocks.AIR.getDefaultState(), BlocksAether.multiblock_dummy.getDefaultState(), 2);
 
 			TileEntityMultiblockDummy te = (TileEntityMultiblockDummy) this.worldObj.getTileEntity(pos);
 			te.linkController(new BlockPos(this.pos));
