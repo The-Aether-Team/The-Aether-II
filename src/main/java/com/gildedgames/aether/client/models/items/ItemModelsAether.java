@@ -667,6 +667,11 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.raw_taegore_meat, "raw_taegore_meat");
 		registerItemModels(ItemsAether.taegore_steak, "taegore_steak");
 		registerItemModels(ItemsAether.taegore_hide, "taegore_hide");
+		registerItemModels(ItemsAether.burrukai_rib_cut, "burrukai_rib_cut");
+		registerItemModels(ItemsAether.burrukai_ribs, "burrukai_ribs");
+		registerItemModels(ItemsAether.burrukai_pelt, "burrukai_pelt");
+		registerItemModels(ItemsAether.kirrid_loin, "kirrid_loin");
+		registerItemModels(ItemsAether.kirrid_cutlet, "kirrid_cutlet");
 
 		registerItemModels(BlocksAether.wildcard, "wildcard");
 

@@ -501,6 +501,11 @@ item.aether.gravitite_plate.name=Gravitite Plate
 item.aether.raw_taegore_meat.name=Taegore Leg
 item.aether.taegore_steak.name=Roast Taegore
 item.aether.taegore_hide.name=Taegore Hide
+item.aether.burrukai_rib_cut.name=Burrukai Rib Joint
+item.aether.burrukai_ribs.name=Burrukai Ribs
+item.aether.burrukai_pelt.name=Burrukai Pelt
+item.aether.kirrid_loin.name=Kirrid Loin
+item.aether.kirrid_cutlet.name=Kirrid Cutlet
 
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability: 
@@ -595,8 +600,6 @@ item.aether.valkyrie_music_disc.desc=Emile van Krieken - Ascending Dawn
 item.aether.recording_892.desc=Emile van Krieken - ???
 
 # Entities
-entity.aether.flying_cow.name=Flying Cow
-entity.aether.phyg.name=Phyg
 entity.aether.aechor_plant.name=Aechor Plant
 entity.aether.aerbunny.name=Aerbunny
 entity.aether.carrion_sprout.name=Carrion Sprout

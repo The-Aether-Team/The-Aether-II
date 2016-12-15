@@ -55,6 +55,8 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 		registerSmeltingRecipe(new ItemStack(ItemsAether.rainbow_moa_egg), new ItemStack(ItemsAether.fried_moa_egg), 0.4f);
 		registerSmeltingRecipe(new ItemStack(BlocksAether.crude_scatterglass), new ItemStack(BlocksAether.scatterglass), 0.1f);
 		registerSmeltingRecipe(new ItemStack(ItemsAether.raw_taegore_meat), new ItemStack(ItemsAether.taegore_steak), 0.4f);
+		registerSmeltingRecipe(new ItemStack(ItemsAether.burrukai_rib_cut), new ItemStack(ItemsAether.burrukai_ribs), 0.4f);
+		registerSmeltingRecipe(new ItemStack(ItemsAether.kirrid_loin), new ItemStack(ItemsAether.kirrid_cutlet), 0.4f);
 	}
 
 	public void preInit()
@@ -62,6 +64,7 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 		OreDictionary.registerOre("feather", ItemsAether.moa_feather);
 		OreDictionary.registerOre("feather", ItemsAether.cockatrice_feather);
 		OreDictionary.registerOre("leather", ItemsAether.taegore_hide);
+		OreDictionary.registerOre("leather", ItemsAether.burrukai_pelt);
 	}
 
 	private void registerCraftingRecipes()

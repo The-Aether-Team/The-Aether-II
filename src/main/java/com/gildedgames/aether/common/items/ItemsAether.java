@@ -116,7 +116,8 @@ public class ItemsAether
 			valkyrie_boots = new ItemValkyrieArmor(EntityEquipmentSlot.FEET);
 
 	public static final Item golden_amber = new Item(),
-							taegore_hide = new Item();
+							taegore_hide = new Item(),
+			                burrukai_pelt = new Item();
 
 	public static final ItemAetherFood blueberries = new ItemAetherFood(2, false),
 			enchanted_blueberry = new ItemAetherFood(6, false),
@@ -126,7 +127,11 @@ public class ItemsAether
 			swet_jelly = new ItemSwetJelly(),
 			gummy_swet = new ItemGummySwet(),
 			raw_taegore_meat = new ItemAetherFood(3, 0.3F, false),
-			taegore_steak = new ItemAetherFood(8, 0.8F, false);
+			taegore_steak = new ItemAetherFood(8, 0.8F, false),
+			burrukai_rib_cut = new ItemAetherFood(3, 0.3F, false),
+			burrukai_ribs = new ItemAetherFood(8, 0.8F, false),
+	        kirrid_loin = new ItemAetherFood(3, 0.3F, false),
+	        kirrid_cutlet = new ItemAetherFood(8, 0.8F, false);
 
 	public static final ItemAetherFood candy_corn = new ItemAetherFood(8, false),
 			cocoatrice = new ItemAetherFood(12, false),
@@ -479,6 +484,7 @@ public class ItemsAether
 
 		registerItem("golden_amber", golden_amber.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("taegore_hide", taegore_hide.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("burrukai_pelt", burrukai_pelt.setCreativeTab(CreativeTabsAether.MATERIALS));
 
 		registerItem("aechor_petal", aechor_petal.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
@@ -492,6 +498,12 @@ public class ItemsAether
 
 		registerItem("raw_taegore_meat", raw_taegore_meat);
 		registerItem("taegore_steak", taegore_steak);
+
+		registerItem("burrukai_rib_cut", burrukai_rib_cut);
+		registerItem("burrukai_ribs", burrukai_ribs);
+
+		registerItem("kirrid_loin", kirrid_loin);
+		registerItem("kirrid_cutlet", kirrid_cutlet);
 
 		registerItem("candy_corn", candy_corn);
 		registerItem("cocoatrice", cocoatrice);

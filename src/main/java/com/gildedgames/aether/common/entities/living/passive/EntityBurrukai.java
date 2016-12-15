@@ -113,7 +113,7 @@ public class EntityBurrukai extends EntityAetherAnimal
 	@Override
 	protected ResourceLocation getLootTable()
 	{
-		return LootTablesAether.ENTITY_TAEGORE;
+		return LootTablesAether.ENTITY_BURRUKAI;
 	}
 
 }
