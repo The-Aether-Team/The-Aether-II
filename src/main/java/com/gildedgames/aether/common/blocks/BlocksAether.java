@@ -266,9 +266,9 @@ public class BlocksAether
 										skyroot_frame_crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState().withProperty(BlockCrudeScatterglass.PROPERTY_VARIANT, BlockCrudeScatterglass.SKYROOT_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.skyroot_frame.name")),
 										arkenium_frame_crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState().withProperty(BlockCrudeScatterglass.PROPERTY_VARIANT, BlockCrudeScatterglass.ARKENIUM_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.arkenium_frame.name"));
 
-	public static final Block skyroot_twigs = new BlockFloorObject(Material.WOOD, () -> new ItemStack(ItemsAether.skyroot_stick)).setSoundType(SoundType.WOOD);
+	public static final Block skyroot_twigs = new BlockFloorObject(Material.PLANTS, () -> new ItemStack(ItemsAether.skyroot_stick)).setSoundType(SoundType.WOOD);
 
-	public static final Block holystone_rock = new BlockFloorObject(Material.ROCK, () -> new ItemStack(BlocksAether.holystone)).setSoundType(SoundType.STONE);
+	public static final Block holystone_rock = new BlockFloorObject(Material.PLANTS, () -> new ItemStack(BlocksAether.holystone)).setSoundType(SoundType.STONE);
 
 	public static BlockCustomCarpet cloudwool_carpet = new BlockCustomCarpet(BlocksAether.cloudwool_block.getDefaultState());
 

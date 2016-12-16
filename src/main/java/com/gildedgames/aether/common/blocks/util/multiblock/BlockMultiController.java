@@ -28,7 +28,7 @@ public abstract class BlockMultiController extends BlockMultiBase
 
 			if (!state.getBlock().isReplaceable(world, pos))
 			{
-				return false;
+				//return false;
 			}
 		}
 

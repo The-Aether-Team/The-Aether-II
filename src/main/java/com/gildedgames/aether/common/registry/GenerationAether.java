@@ -159,9 +159,9 @@ public class GenerationAether
 
 		aether_portal_for_world = new WorldGenTemplate(TemplatesAether.aether_portal, TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE_GROUND);
 
-		mysterious_henge = new WorldGenTemplate(TemplatesAether.mysterious_henge, TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE)
+		mysterious_henge = new WorldGenTemplate(TemplatesAether.mysterious_henge, TemplateConditions.INSIDE_GROUND, TemplateConditions.REPLACEABLE_GROUND)
 		{
-			private final BlockPos offset = new BlockPos(4, 2, 4);
+			private final BlockPos offset = new BlockPos(5.5, 2, 5.5);
 
 			@Override
 			public void postGenerate(World world, Random random, BlockPos pos, Rotation rotation)
@@ -176,6 +176,8 @@ public class GenerationAether
 			}
 
 		};
+
+		mysterious_henge.setRandomRotation(false);
 
 		kura_tree_1 = new WorldGenTemplate(TemplatesAether.kura_tree_1, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE);
 		kura_tree_2 = new WorldGenTemplate(TemplatesAether.kura_tree_2, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE);

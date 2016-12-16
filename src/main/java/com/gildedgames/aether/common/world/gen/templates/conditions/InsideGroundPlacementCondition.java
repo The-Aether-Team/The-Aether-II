@@ -16,7 +16,7 @@ public class InsideGroundPlacementCondition implements WorldGenTemplate.Placemen
 	@Override
 	public boolean canPlace(Template template, World world, BlockPos placedAt, Template.BlockInfo block)
 	{
-		if (block.pos.getY() == placedAt.getY() + template.getSize().getY() - 1 && block.blockState.getBlock() != Blocks.AIR && block.blockState.getBlock() != Blocks.STRUCTURE_VOID)
+		if (block.pos.getY() == placedAt.getY() + 1 && block.blockState.getBlock() != Blocks.AIR && block.blockState.getBlock() != Blocks.STRUCTURE_VOID)
 		{
 			BlockPos down = block.pos.down();
 

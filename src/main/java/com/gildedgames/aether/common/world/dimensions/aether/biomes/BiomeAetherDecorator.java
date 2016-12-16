@@ -154,7 +154,7 @@ public class BiomeAetherDecorator
 				x = random.nextInt(16) + 8;
 				z = random.nextInt(16) + 8;
 
-				BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
+				BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z)).add(0, -1, 0);
 
 				boolean generated = GenerationAether.mysterious_henge.generate(world, random, pos2, true);
 

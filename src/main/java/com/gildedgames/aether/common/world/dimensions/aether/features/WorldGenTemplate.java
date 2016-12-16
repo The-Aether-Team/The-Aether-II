@@ -31,6 +31,8 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 
 	private CenterOffsetProcessor centerOffsetProcessor;
 
+	private boolean randomRotation = true;
+
 	public WorldGenTemplate(Template template)
 	{
 		this.template = template;
@@ -45,6 +47,11 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 		this.placementConditions = Lists.newArrayList(placementConditions);
 
 		this.placementConditions.add(condition);
+	}
+
+	public void setRandomRotation(boolean flag)
+	{
+		this.randomRotation = flag;
 	}
 
 	public CenterOffsetProcessor getCenterOffsetProcessor()
@@ -89,7 +96,7 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 	@Override
 	public boolean generate(World world, Random rand, BlockPos pos, boolean centered)
 	{
-		Rotation rotation = ROTATIONS[rand.nextInt(ROTATIONS.length)];
+		Rotation rotation = this.randomRotation ? ROTATIONS[rand.nextInt(ROTATIONS.length)] : ROTATIONS[0];
 
 		PlacementSettings settings = new PlacementSettings().setMirror(Mirror.NONE).setRotation(rotation).setIgnoreEntities(false).setChunk(null).setReplacedBlock(null).setIgnoreStructureBlock(false);
 

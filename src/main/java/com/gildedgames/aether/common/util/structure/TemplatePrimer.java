@@ -1,14 +1,20 @@
 package com.gildedgames.aether.common.util.structure;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiController;
+import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummy;
+import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummyHalf;
 import com.gildedgames.aether.common.tiles.TileEntityWildcard;
+import com.gildedgames.aether.common.tiles.multiblock.TileEntityMultiblockController;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
 import net.minecraft.nbt.NBTTagList;
@@ -104,6 +110,11 @@ public class TemplatePrimer
 						IBlockState iblockstate = template$blockinfo1.blockState.withMirror(settings.getMirror());
 						IBlockState iblockstate1 = iblockstate.withRotation(settings.getRotation());
 
+						if (iblockstate1.getBlock() instanceof BlockMultiDummy || iblockstate1.getBlock() instanceof BlockMultiDummyHalf)
+						{
+							continue;
+						}
+
 						if (iblockstate1.getBlock() == BlocksAether.wildcard)
 						{
 							TileEntityWildcard wildcard = new TileEntityWildcard();
@@ -149,6 +160,13 @@ public class TemplatePrimer
 								tileentity2.rotate(settings.getRotation());
 
 								tileentity2.markDirty();
+
+								if (tileentity2 instanceof TileEntityMultiblockController)
+								{
+									TileEntityMultiblockController controller = (TileEntityMultiblockController)tileentity2;
+
+									controller.rebuild();
+								}
 							}
 						}
 					}

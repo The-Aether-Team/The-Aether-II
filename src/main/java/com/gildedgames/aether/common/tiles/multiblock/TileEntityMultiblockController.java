@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.tiles.util.TileEntitySynced;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
@@ -27,7 +28,7 @@ public abstract class TileEntityMultiblockController extends TileEntitySynced im
 	{
 		for (BlockPos.MutableBlockPos pos : this.block.getMultiblockVolumeIterator(this.pos, this.getWorld()))
 		{
-			if (this.worldObj.getTileEntity(pos) == this)
+			if (this.pos.equals(pos))
 			{
 				continue;
 			}

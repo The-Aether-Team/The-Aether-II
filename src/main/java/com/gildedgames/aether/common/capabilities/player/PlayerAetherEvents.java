@@ -271,7 +271,7 @@ public class PlayerAetherEvents
 
 				if (shouldSpawnAtHenge)
 				{
-					pos = BlockUtil.getTopSolidOrLiquidBlockFromY(mp.getServerWorld(), island.getMysteriousHengePos());
+					pos = BlockUtil.getTopSolidOrLiquidBlockFromY(mp.getServerWorld(), island.getMysteriousHengePos().add(2.5, 0, 2.5));
 
 					BlockPos down = pos.down();
 
