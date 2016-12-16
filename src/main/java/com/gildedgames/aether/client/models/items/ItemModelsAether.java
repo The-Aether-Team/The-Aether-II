@@ -37,6 +37,7 @@ public class ItemModelsAether
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.present), 0, TileEntityPresent.class);
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.icestone_cooler), 0, TileEntityIcestoneCooler.class);
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.masonry_bench), 0, TileEntityMasonryBench.class);
+		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.outpost_campfire), 0, TileEntityOutpostCampfire.class);
 	}
 
 	private static void registerModels()
@@ -451,9 +452,11 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.altar, "tesr");
 		registerItemModels(BlocksAether.labyrinth_totem, "tesr");
 		registerItemModels(BlocksAether.multiblock_dummy, "tesr");
+		registerItemModels(BlocksAether.multiblock_dummy_half, "tesr");
 		registerItemModels(BlocksAether.present, "tesr");
 		registerItemModels(BlocksAether.icestone_cooler, "tesr");
 		registerItemModels(BlocksAether.masonry_bench, "tesr");
+		registerItemModels(BlocksAether.outpost_campfire, "tesr");
 
 		registerItemModels(ItemsAether.zanite_gloves, "accessories/zanite_gloves");
 		registerItemModels(ItemsAether.gravitite_gloves, "accessories/gravitite_gloves");

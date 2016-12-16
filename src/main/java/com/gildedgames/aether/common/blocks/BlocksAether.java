@@ -3,6 +3,8 @@ package com.gildedgames.aether.common.blocks;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.containers.*;
 import com.gildedgames.aether.common.blocks.dungeon.*;
+import com.gildedgames.aether.common.blocks.misc.BlockOutpostCampfire;
+import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummyHalf;
 import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import com.gildedgames.aether.common.blocks.construction.*;
@@ -176,6 +178,8 @@ public class BlocksAether
 
 	public static final Block multiblock_dummy = new BlockMultiDummy().setBlockUnbreakable();
 
+	public static final Block multiblock_dummy_half = new BlockMultiDummyHalf().setBlockUnbreakable();
+
 	public static final BlockLabyrinth labyrinth_capstone = new BlockLabyrinth(),
 			unstable_labyrinth_capstone = new BlockLabyrinth();
 
@@ -271,6 +275,8 @@ public class BlocksAether
 	public static Block skyroot_bookshelf = new BlockSkyrootBookshelf();
 
 	public static Block holystone_bookshelf = new BlockHolystoneBookshelf();
+
+	public static BlockOutpostCampfire outpost_campfire = new BlockOutpostCampfire(Material.IRON);
 
 	public static void preInit()
 	{
@@ -419,6 +425,7 @@ public class BlocksAether
 		registerBlock("labyrinth_totem", BlocksAether.labyrinth_totem.setBlockUnbreakable().setResistance(6000000.0F).setCreativeTab(CreativeTabsAether.DUNGEON));
 
 		registerBlock("multiblock_dummy", BlocksAether.multiblock_dummy);
+		registerBlock("multiblock_dummy_half", BlocksAether.multiblock_dummy_half);
 
 		registerBlock("labyrinth_capstone", BlocksAether.labyrinth_capstone.setBlockUnbreakable().setResistance(6000000.0F).setCreativeTab(CreativeTabsAether.DUNGEON));
 		registerBlock("labyrinth_glowing_pillar", BlocksAether.labyrinth_glowing_pillar.setBlockUnbreakable().setResistance(6000000.0F).setCreativeTab(CreativeTabsAether.DUNGEON));
@@ -498,6 +505,8 @@ public class BlocksAether
 		registerBlock("holystone_rock", BlocksAether.holystone_rock.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		registerBlock("cloudwool_carpet", BlocksAether.cloudwool_carpet.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+
+		registerBlock("outpost_campfire", BlocksAether.outpost_campfire.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_twigs, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.tall_aether_grass, 60, 100);

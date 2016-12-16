@@ -136,5 +136,6 @@ public class AetherRenderers
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLabyrinthBridge.class, new TileEntityLabyrinthBridgeRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityIcestoneCooler.class, new TileEntityIcestoneCoolerRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMasonryBench.class, new TileEntityMasonryBenchRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOutpostCampfire.class, new TileEntityOutpostCampfireRenderer());
 	}
 }

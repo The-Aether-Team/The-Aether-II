@@ -208,6 +208,7 @@ tile.aether.crude_scatterglass_pane.name=Crude Scatterglass Pane
 tile.aether.cloudwool_carpet.name=Cloudwool Carpet
 tile.aether.skyroot_bookshelf.name=Skyroot Bookshelf
 tile.aether.holystone_bookshelf.name=Holystone Bookshelf
+tile.aether.outpost_campfire.name=Outpost Campfire
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick

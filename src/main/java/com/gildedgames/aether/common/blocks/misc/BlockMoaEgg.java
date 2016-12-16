@@ -55,7 +55,7 @@ public class BlockMoaEgg extends BlockContainer
 		{
 			TileEntityMoaEgg moaEgg = (TileEntityMoaEgg)te;
 
-			moaEgg.familyNest = new MoaNest(world, pos.add(0, - 1, 0));
+			moaEgg.familyNest = new MoaNest(world, pos.add(0, -1, 0));
 		}
 	}
 

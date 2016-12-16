@@ -21,7 +21,8 @@ public class TileEntitiesAether
 			PRESENT_ID = "aether.present",
 			LABYRINTH_BRIDGE_ID = "aether.labyrinth_bridge",
 			WILDCARD_ID = "aether.wildcard",
-			MASONRY_BENCH_ID = "aether.masonry_bench";
+			MASONRY_BENCH_ID = "aether.masonry_bench",
+			OUTPOST_CAMPFIRE_ID = "aether.outpost_campfire";
 
 	public static void preInit()
 	{
@@ -40,6 +41,7 @@ public class TileEntitiesAether
 		GameRegistry.registerTileEntity(TileEntityLabyrinthBridge.class, LABYRINTH_BRIDGE_ID);
 		GameRegistry.registerTileEntity(TileEntityWildcard.class, WILDCARD_ID);
 		GameRegistry.registerTileEntity(TileEntityMasonryBench.class, MASONRY_BENCH_ID);
+		GameRegistry.registerTileEntity(TileEntityOutpostCampfire.class, OUTPOST_CAMPFIRE_ID);
 	}
 	
 }

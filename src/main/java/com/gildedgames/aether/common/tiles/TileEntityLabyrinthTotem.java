@@ -36,7 +36,7 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 
 	public TileEntityLabyrinthTotem()
 	{
-		super(BlocksAether.labyrinth_totem);
+		super(BlocksAether.labyrinth_totem, BlocksAether.multiblock_dummy);
 	}
 
 	@Override

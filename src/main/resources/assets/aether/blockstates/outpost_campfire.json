@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"normal": [
+			{ "model": "aether:outpost_campfire" }
+		]
+	}
+}
