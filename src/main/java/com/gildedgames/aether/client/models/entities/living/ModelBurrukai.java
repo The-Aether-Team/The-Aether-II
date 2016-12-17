@@ -206,7 +206,7 @@ public class ModelBurrukai extends ModelBase
         this.setRotateAngle(FrontLegLeftHoofIn, 0.0F, 0.17453292519943295F, 0.0F);
         this.HeadChin = new ModelRenderer(this, 50, 73);
         this.HeadChin.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.HeadChin.addBox(-2.0F, -2.0F, -13.0F, 4, 7, 8, 0.0F);
+        this.HeadChin.addBox(-2.0F, -2.0F, -12.9F, 4, 7, 8, 0.0F);
         this.setRotateAngle(HeadChin, 0.7853981633974483F, -0.0F, 0.0F);
         this.HeadAntlerTopRight2 = new ModelRenderer(this, 23, 14);
         this.HeadAntlerTopRight2.setRotationPoint(0.0F, 0.0F, 0.0F);
