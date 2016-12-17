@@ -550,8 +550,8 @@ public class ItemsAether
 		registerItem("candy_cane_sword", candy_cane_sword);
 		registerItem("valkyrie_lance", valkyrie_lance);
 
-		registerItem("skyroot_door_item", skyroot_door.setCreativeTab(CreativeTabsAether.UTILITY));
-		registerItem("arkenium_door_item", arkenium_door.setCreativeTab(CreativeTabsAether.UTILITY));
+		registerItem("skyroot_door_item", skyroot_door.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		registerItem("arkenium_door_item", arkenium_door.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		//registerItem("blightwillow_door_item", blightwillow_door_item.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		//registerItem("earthshifter_door_item", earthshifter_door_item.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		//registerItem("frostpine_door_item", frostpine_door_item.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));

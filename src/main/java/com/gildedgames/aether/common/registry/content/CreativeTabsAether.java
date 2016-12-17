@@ -21,21 +21,23 @@ public class CreativeTabsAether
 
 	public static final CreativeTab CONSTRUCTION = new CreativeTab("aether.construction");
 
-	public static final CreativeTab VISUAL_VARIANTS = new CreativeTab("aether.visual_variants");
-
 	public static final CreativeTab UTILITY = new CreativeTab("aether.utility_blocks");
+
+	public static final CreativeTab VISUAL_VARIANTS = new CreativeTab("aether.visual_variants");
 
 	public static final CreativeTab DUNGEON = new CreativeTab("aether.dungeon_blocks");
 
-    public static final CreativeTab TOOLS = new CreativeTab("aether.tools");
+	public static final CreativeTab MATERIALS = new CreativeTab("aether.materials");
+
+	public static final CreativeTab CONSUMABLES = new CreativeTab("aether.consumables");
+
+	public static final CreativeTab TOOLS = new CreativeTab("aether.tools");
 
 	public static final CreativeTab WEAPONS = new CreativeTab("aether.weapons");
 
 	public static final CreativeTab ARMOR = new CreativeTab("aether.armor");
 
-	public static final CreativeTab MATERIALS = new CreativeTab("aether.materials");
 
-    public static final CreativeTab CONSUMABLES = new CreativeTab("aether.consumables");
 
 	public static final CreativeTab COMPANIONS = new CreativeTab("aether.companions");
 
