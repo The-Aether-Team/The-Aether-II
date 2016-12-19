@@ -44,7 +44,7 @@ public class GenerationAether
 
 	public static WorldGenTemplate aether_portal_for_world, aether_portal, nether_portal, end_portal;
 
-	public static WorldGenTemplate mysterious_henge;
+	public static WorldGenTemplate outpost;
 
 	public static WorldGenTemplateGroup green_skyroot_windswept, labyrinth_ruins;
 
@@ -140,11 +140,11 @@ public class GenerationAether
 		dark_blue_skyroot_tree_2 = new WorldGenTemplate(TemplatesAether.dark_blue_skyroot_tree_2, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE);
 		dark_blue_skyroot_tree_3 = new WorldGenTemplate(TemplatesAether.dark_blue_skyroot_tree_3, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE);
 
-		labyrinth_ruins_1 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_1, TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
-		labyrinth_ruins_2 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_2, TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
-		labyrinth_ruins_3 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_3, TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
-		labyrinth_ruins_4 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_4, TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
-		labyrinth_ruins_5 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_5, TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
+		labyrinth_ruins_1 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_1, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
+		labyrinth_ruins_2 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_2, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
+		labyrinth_ruins_3 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_3, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
+		labyrinth_ruins_4 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_4, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
+		labyrinth_ruins_5 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_5, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
 
 		labyrinth_entrance_1 = new WorldGenDungeonEntrance(TemplatesAether.labyrinth_entrance_1, new BlockPos(4, 2, 4), TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE);
 		labyrinth_entrance_underground_1 = new WorldGenDungeonEntrance(TemplatesAether.labyrinth_entrance_underground_1, new BlockPos(8, 1, 2), new UndergroundEntrancePlacementCondition(), new UndergroundPlacementCondition());
@@ -159,7 +159,7 @@ public class GenerationAether
 
 		aether_portal_for_world = new WorldGenTemplate(TemplatesAether.aether_portal, TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE_GROUND);
 
-		mysterious_henge = new WorldGenTemplate(TemplatesAether.mysterious_henge, TemplateConditions.INSIDE_GROUND, TemplateConditions.REPLACEABLE_GROUND)
+		outpost = new WorldGenTemplate(TemplatesAether.outpost, TemplateConditions.INSIDE_GROUND_AT_SOURCE)
 		{
 			private final BlockPos offset = new BlockPos(5.5, 2, 5.5);
 
@@ -177,7 +177,7 @@ public class GenerationAether
 
 		};
 
-		mysterious_henge.setRandomRotation(false);
+		outpost.setRandomRotation(false);
 
 		kura_tree_1 = new WorldGenTemplate(TemplatesAether.kura_tree_1, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE);
 		kura_tree_2 = new WorldGenTemplate(TemplatesAether.kura_tree_2, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE);

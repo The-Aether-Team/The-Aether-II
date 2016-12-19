@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.dialog.util;
 
 import com.gildedgames.aether.common.dialog.IDialogAction;
 import com.gildedgames.aether.common.dialog.IDialogButton;
+import com.gildedgames.aether.common.dialog.IDialogContent;
 import com.gildedgames.aether.common.dialog.IDialogNode;
 import com.google.common.collect.Lists;
 import net.minecraft.util.ResourceLocation;
@@ -17,7 +18,7 @@ public class DialogNodeFactory
 
 	private final String id;
 
-	private final List<ITextComponent> content = Lists.newArrayList();
+	private final List<IDialogContent> content = Lists.newArrayList();
 
 	private final List<IDialogButton> buttons = Lists.newArrayList();
 
@@ -73,19 +74,19 @@ public class DialogNodeFactory
 		return this;
 	}
 
-	public DialogNodeFactory text(String name)
+	public DialogNodeFactory text(ResourceLocation portrait, String name)
 	{
 		// uses vanilla text formatting
-		this.content.add(new TextComponentTranslation(name));
+		this.content.add(new DialogContentSimple(portrait, new TextComponentTranslation(name)));
 
 		return this;
 	}
 
-	public DialogNodeFactory text(String name, int textCount)
+	public DialogNodeFactory text(ResourceLocation portrait, String name, int textCount)
 	{
 		for (int i = 0; i < textCount; i++)
 		{
-			this.content.add(new TextComponentTranslation(name + "." + String.valueOf(i + 1)));
+			this.content.add(new DialogContentSimple(portrait, new TextComponentTranslation(name + "." + String.valueOf(i + 1))));
 		}
 
 		return this;

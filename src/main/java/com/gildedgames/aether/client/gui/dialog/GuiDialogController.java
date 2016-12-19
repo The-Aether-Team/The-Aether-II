@@ -26,7 +26,7 @@ import java.util.Collection;
 public class GuiDialogController extends GuiContainer implements IDialogController
 {
 
-	private static final ResourceLocation NEXT_ARROW = AetherCore.getResource("textures/gui/conversation/next_arrow.png");
+	private static final ResourceLocation NEXT_ARROW = AetherCore.getResource("textures/gui/dialog/next_arrow.png");
 
 	private final EntityPlayer player;
 
@@ -60,33 +60,37 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	{
-		/*GlStateManager.pushMatrix();
-		Minecraft.getMinecraft().renderEngine.bindTexture(PORTRAIT);
-
-		double scale = 0.2;
-
-		double scaledWidth = 780 * scale;
-		double scaledHeight = 1172 * scale;
-
-		GlStateManager.translate((this.width / 2) - (scaledWidth / 2) + 40, this.height - scaledHeight, 0);
-		GlStateManager.scale(scale, scale, scale);
-
-		Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, 780, 1172, 780, 1172);
-		GlStateManager.popMatrix();*/
-
-		if (this.npc == null)
+		if (this.textIndex < this.node.getContent().size())
 		{
-			this.npc = new EntityEdison(this.mc.theWorld);
+			int i = 0;
+
+			for (IDialogContent c : this.node.getContent())
+			{
+				if (i == this.textIndex)
+				{
+					GlStateManager.pushMatrix();
+
+					Minecraft.getMinecraft().renderEngine.bindTexture(c.getPortrait());
+
+					double scale = 1.6;
+
+					double scaledWidth = 110 * scale;
+					double scaledHeight = 98 * scale;
+
+					GlStateManager.translate((this.width / 2) - (scaledWidth / 2), this.height - 90 - scaledHeight, 0);
+					GlStateManager.scale(scale, scale, scale);
+
+					Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, 110, 98, 110, 98);
+					GlStateManager.popMatrix();
+					break;
+				}
+
+				i++;
+			}
 		}
 
 		GlStateManager.pushMatrix();
 
-		GlStateManager.translate(0, 0, 100F);
-		GlStateManager.color(1.0F, 1.0F, 1.0F);
-
-		GuiInventory.drawEntityOnScreen((this.width / 2) + 40, this.height, 120, -mouseX + (this.width / 2) + 40, (-mouseY / 10.0F), this.npc);
-
-		GlStateManager.translate(0, 0, 100F);
 		Gui.drawRect(0, this.height - 90, this.width, this.height, Integer.MIN_VALUE);
 
 		GlStateManager.popMatrix();
@@ -212,7 +216,7 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 
 		Collection<IDialogButton> buttons = node.getButtons();
 
-		Collection<ITextComponent> text = node.getContent();
+		Collection<IDialogContent> content = node.getContent();
 
 		int baseBoxSize = 350;
 		boolean resize = this.width - 40 > baseBoxSize;
@@ -228,7 +232,7 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 		this.topTextBox.showBackdrop = true;
 		this.topTextBox.bottomToTop = true;
 
-		if (buttons.size() > 0 && this.textIndex + 1 >= text.size())
+		if (buttons.size() > 0 && this.textIndex + 1 >= content.size())
 		{
 			int index = 0;
 
@@ -240,21 +244,21 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 			}
 		}
 
-		if (this.textIndex < text.size())
+		if (this.textIndex < content.size())
 		{
 			int i = 0;
 
-			for (ITextComponent t : text)
+			for (IDialogContent c : content)
 			{
 				if (i == this.textIndex)
 				{
-					if (this.textIndex + 1 >= text.size() && this.node.getButtons().size() > 0)
+					if (this.textIndex + 1 >= content.size() && this.node.getButtons().size() > 0)
 					{
-						this.topTextBox.setText(t);
+						this.topTextBox.setText(c.getText());
 					}
 					else
 					{
-						this.bottomTextBox.setText(t);
+						this.bottomTextBox.setText(c.getText());
 					}
 
 					break;
@@ -297,9 +301,9 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 			return;
 		}
 
-		Collection<ITextComponent> text = this.node.getContent();
+		Collection<IDialogContent> content = this.node.getContent();
 
-		if (text.size() <= 1)
+		if (content.size() <= 1)
 		{
 			for (IDialogAction action : this.node.getEndActions())
 			{
@@ -311,7 +315,7 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 
 		this.textIndex++;
 
-		if (this.textIndex < text.size())
+		if (this.textIndex < content.size())
 		{
 			this.buildGui(this.node);
 		}

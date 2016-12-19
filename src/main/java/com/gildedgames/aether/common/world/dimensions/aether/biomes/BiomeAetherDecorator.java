@@ -8,7 +8,6 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.registry.GenerationAether;
 import com.gildedgames.aether.common.registry.content.TemplatesAether;
-import com.gildedgames.aether.common.world.biome.WorldDecorationSimple;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherFlowers;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherLakes;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherMinable;
@@ -55,6 +54,8 @@ public class BiomeAetherDecorator
 	protected WorldGenPurpleAercloud genPurpleAercloud;
 
 	public boolean generateBushes = true;
+
+	private boolean shouldDecorate = true;
 
 	public BiomeAetherDecorator()
 	{
@@ -147,16 +148,18 @@ public class BiomeAetherDecorator
 		}
 
 		// Mysterious Henge
-		if (oneIslandOnly && island.getMysteriousHengePos() == null && random.nextBoolean())
+		if (oneIslandOnly && island.getMysteriousHengePos() == null)
 		{
-			for (int i = 0; i < 10; i++)
+			boolean generated = false;
+
+			for (int i = 0; i < 30; i++)
 			{
 				x = random.nextInt(16) + 8;
 				z = random.nextInt(16) + 8;
 
 				BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z)).add(0, -1, 0);
 
-				boolean generated = GenerationAether.mysterious_henge.generate(world, random, pos2, true);
+				generated = GenerationAether.outpost.generate(world, random, pos2, true);
 
 				if (generated)
 				{

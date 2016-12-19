@@ -31,7 +31,7 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 
 	private CenterOffsetProcessor centerOffsetProcessor;
 
-	private boolean randomRotation = true;
+	private boolean randomRotation = true, checkAreaLoaded = true;
 
 	public WorldGenTemplate(Template template)
 	{
@@ -47,6 +47,11 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 		this.placementConditions = Lists.newArrayList(placementConditions);
 
 		this.placementConditions.add(condition);
+	}
+
+	public void setCheckAreaLoaded(boolean flag)
+	{
+		this.checkAreaLoaded = flag;
 	}
 
 	public void setRandomRotation(boolean flag)
@@ -148,12 +153,12 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 
 	public boolean canGenerate(World world, BlockPos pos, PlacementSettings settings)
 	{
-		return this.canGenerate(world, pos, settings, false, true);
+		return this.canGenerate(world, pos, settings, false, this.checkAreaLoaded);
 	}
 
 	public boolean canGenerate(World world, BlockPos pos, PlacementSettings settings, boolean centered)
 	{
-		return this.canGenerate(world, pos, settings, centered, true);
+		return this.canGenerate(world, pos, settings, centered, this.checkAreaLoaded);
 	}
 
 	public boolean canGenerate(World world, BlockPos pos, PlacementSettings settings, boolean centered, boolean checkAreaLoaded)

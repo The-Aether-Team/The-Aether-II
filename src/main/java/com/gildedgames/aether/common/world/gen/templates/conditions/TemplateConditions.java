@@ -9,6 +9,7 @@ public class TemplateConditions
 {
 	public static final WorldGenTemplate.PlacementCondition FLAT_GROUND = new FlatGroundPlacementCondition(),
 			INSIDE_GROUND = new InsideGroundPlacementCondition(),
+			INSIDE_GROUND_AT_SOURCE = new InsideGroundAtSourcePlacementCondition(),
 			REPLACEABLE = new ReplaceablePlacementCondition(true),
 			REPLACEABLE_NOT_CRITICAL = new ReplaceablePlacementCondition(false),
 			REPLACEABLE_CANOPY = new ReplaceablePlacementCondition(false, Material.WOOD, Material.LEAVES),

@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.dialog.util;
 
 import com.gildedgames.aether.common.dialog.IDialogAction;
 import com.gildedgames.aether.common.dialog.IDialogButton;
+import com.gildedgames.aether.common.dialog.IDialogContent;
 import com.gildedgames.aether.common.dialog.IDialogNode;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -17,13 +18,13 @@ public class DialogNodeBasic implements IDialogNode
 	private final ResourceLocation speaker;
 
 	// Lists should be immutable
-	private final List<ITextComponent> content;
+	private final List<IDialogContent> content;
 
 	private final List<IDialogButton> buttons;
 
 	private final List<IDialogAction> endActions;
 
-	public DialogNodeBasic(String id, ResourceLocation speaker, List<ITextComponent> content, List<IDialogButton> buttons, List<IDialogAction> endActions)
+	public DialogNodeBasic(String id, ResourceLocation speaker, List<IDialogContent> content, List<IDialogButton> buttons, List<IDialogAction> endActions)
 	{
 		this.id = id;
 
@@ -39,7 +40,7 @@ public class DialogNodeBasic implements IDialogNode
 	}
 
 	@Override
-	public Collection<ITextComponent> getContent() {
+	public Collection<IDialogContent> getContent() {
 		return this.content;
 	}
 

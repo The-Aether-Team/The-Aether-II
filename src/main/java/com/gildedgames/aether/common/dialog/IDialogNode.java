@@ -21,7 +21,7 @@ public interface IDialogNode
 	 * Returns the content of this node. Basically the "body" of the dialogue.
 	 */
 	@Nonnull
-	Collection<ITextComponent> getContent();
+	Collection<IDialogContent> getContent();
 
 	/**
 	 * Returns the actions of this node that activate when the node is finished processing.

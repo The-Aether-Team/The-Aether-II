@@ -35,7 +35,7 @@ public class TemplatesAether
 
 	public static Template aether_portal, nether_portal, end_portal;
 
-	public static Template mysterious_henge;
+	public static Template outpost;
 
 	public static Template kura_tree_1, kura_tree_2, kura_tree_3, kura_tree_4, kura_tree_5;
 
@@ -105,7 +105,7 @@ public class TemplatesAether
 		nether_portal = register("nether_portal");
 		end_portal = register("end_portal");
 
-		mysterious_henge = register("mysterious_henge");
+		outpost = register("outpost");
 
 		kura_tree_1 = register("kura/trees/small/kura_tree_1");
 		kura_tree_2 = register("kura/trees/small/kura_tree_2");
