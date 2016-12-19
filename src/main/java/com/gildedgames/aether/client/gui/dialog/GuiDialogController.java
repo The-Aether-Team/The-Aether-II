@@ -294,6 +294,11 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 
 	private void nextAction()
 	{
+		if (this.node.getButtons().size() > 0 && this.textIndex + 1 >= this.node.getContent().size())
+		{
+			return;
+		}
+
 		if (!this.canApplyNextAction)
 		{
 			this.canApplyNextAction = true;
