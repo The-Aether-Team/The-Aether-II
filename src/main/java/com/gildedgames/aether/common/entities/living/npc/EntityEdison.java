@@ -13,6 +13,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
@@ -24,16 +26,17 @@ public class EntityEdison extends EntityNPC
 	public EntityEdison(World worldIn)
 	{
 		super(worldIn);
+
+		this.setSize(1.0F, 1.0F);
+
+		this.rotationYaw = 0.3F;
 	}
 
 	@Override
 	protected void initEntityAI()
 	{
-		this.tasks.addTask(1, new EntityAIWander(this, 0.3, 10));
-		this.tasks.addTask(2, new EntityAIMoveTowardsRestriction(this, 1.0D));
-		this.tasks.addTask(2, new EntityAISwimming(this));
-		this.tasks.addTask(3, new EntityAILookIdle(this));
-		this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
+		//this.tasks.addTask(1, new EntityAILookIdle(this));
+		this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
 	}
 
 	@Override
@@ -73,8 +76,26 @@ public class EntityEdison extends EntityNPC
 	}
 
 	@Override
+	protected void setRotation(float yaw, float pitch)
+	{
+
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void setAngles(float yaw, float pitch)
+	{
+
+	}
+
+	@Override
 	public void onUpdate()
 	{
+		this.posX = this.prevPosX;
+		this.posZ = this.prevPosZ;
+
+		//this.renderYawOffset = 0.3F;
+
 		this.setHealth(this.getMaxHealth());
 		this.isDead = false;
 
@@ -85,6 +106,11 @@ public class EntityEdison extends EntityNPC
 		}
 
 		super.onUpdate();
+
+		this.posX = this.prevPosX;
+		this.posZ = this.prevPosZ;
+
+		//this.renderYawOffset = 0.3F;
 	}
 
 	@Override

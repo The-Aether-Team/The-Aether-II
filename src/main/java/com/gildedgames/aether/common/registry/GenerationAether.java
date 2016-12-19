@@ -161,7 +161,7 @@ public class GenerationAether
 
 		outpost = new WorldGenTemplate(TemplatesAether.outpost, TemplateConditions.INSIDE_GROUND_AT_SOURCE)
 		{
-			private final BlockPos offset = new BlockPos(5.5, 2, 5.5);
+			private final BlockPos offset = new BlockPos(9.5, 2, 9.5);
 
 			@Override
 			public void postGenerate(World world, Random random, BlockPos pos, Rotation rotation)
