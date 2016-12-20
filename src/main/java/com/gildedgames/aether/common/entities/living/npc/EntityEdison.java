@@ -94,7 +94,7 @@ public class EntityEdison extends EntityNPC
 		this.posX = this.prevPosX;
 		this.posZ = this.prevPosZ;
 
-		//this.renderYawOffset = 0.3F;
+		this.renderYawOffset = 315F;
 
 		this.setHealth(this.getMaxHealth());
 		this.isDead = false;
@@ -110,7 +110,7 @@ public class EntityEdison extends EntityNPC
 		this.posX = this.prevPosX;
 		this.posZ = this.prevPosZ;
 
-		//this.renderYawOffset = 0.3F;
+		this.renderYawOffset = 315F;
 	}
 
 	@Override
