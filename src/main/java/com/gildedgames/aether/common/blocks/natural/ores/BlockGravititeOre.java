@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.natural.ores;
 
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.util.BlockFloating;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.SoundType;
@@ -21,12 +22,6 @@ public class BlockGravititeOre extends BlockFloating
 		this.setHarvestLevel("pickaxe", 2);
 
 		this.setSoundType(SoundType.STONE);
-	}
-
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
-		return ItemsAether.gravitite_ore;
 	}
 
 }

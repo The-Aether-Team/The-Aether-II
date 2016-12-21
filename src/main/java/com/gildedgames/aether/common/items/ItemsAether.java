@@ -54,8 +54,6 @@ public class ItemsAether
 			zanite_gemstone = new Item(),
 			arkenium = new Item(),
 			arkenium_strip = new Item(),
-			arkenium_ore = new Item(),
-			gravitite_ore = new Item(),
 			gravitite_plate = new Item();
 
 	public static final ItemTool skyroot_axe = new ItemAetherAxe(MaterialsAether.SKYROOT_TOOL),
@@ -409,8 +407,6 @@ public class ItemsAether
 		registerItem("arkenium", arkenium.setCreativeTab(CreativeTabsAether.MATERIALS));
         registerItem("arkenium_strip", arkenium_strip.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("icestone", icestone.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("arkenium_ore_item", arkenium_ore.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("gravitite_ore_item", gravitite_ore.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("gravitite_plate", gravitite_plate.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("cloudwool", cloudwool.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("moa_feather", moa_feather.setCreativeTab(CreativeTabsAether.MATERIALS));

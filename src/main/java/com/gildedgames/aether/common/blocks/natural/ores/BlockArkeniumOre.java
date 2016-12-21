@@ -22,10 +22,4 @@ public class BlockArkeniumOre extends BlockAetherOre
 		this.setSoundType(SoundType.STONE);
 	}
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
-		return ItemsAether.arkenium_ore;
-	}
-
 }
