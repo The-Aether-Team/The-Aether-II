@@ -300,7 +300,7 @@ public class PlayerAetherEvents
 
 				if (obstructed)
 				{
-					mp.addChatComponentMessage(new TextComponentString("The nearest Outpost was obstructed with blocks - you could not respawn there."));
+					mp.addChatComponentMessage(new TextComponentTranslation("outpost.obstructed"));
 				}
 			}
 			else

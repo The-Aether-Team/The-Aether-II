@@ -870,3 +870,6 @@ edison.them.why_am_i_here.3=They'll also contact me and I'll come running to che
 edison.them.why_am_i_here.4=That said I can't guarantee the fellas who find you won't try to line their pockets themselves. Not that they don't deserve it, but they might decide it's worth not telling ya about it is all.
 
 edison.them.busy=I'm working on something at the moment, friend. Come back in a bit.
+
+outpost.obstructed=The nearest Outpost was obstructed with blocks - you could not respawn there.
+outpost.edison_letter_received=Your items were returned to you by Edison.

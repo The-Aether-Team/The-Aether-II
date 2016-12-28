@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
@@ -99,7 +100,7 @@ public class KeepInventoryModule extends PlayerAetherModule
 
 					if (bedPos != null)
 					{
-						this.getPlayer().addChatComponentMessage(new TextComponentString("Your items were returned to you by Edison."));e
+						this.getPlayer().addChatComponentMessage(new TextComponentTranslation("outpost.edison_letter_received"));
 					}
 				}
 			}
