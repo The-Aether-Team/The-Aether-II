@@ -59,6 +59,7 @@ public class PlayerAetherEvents
 		if (event.getTarget() instanceof EntityPlayer)
 		{
 			NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(player, EquipmentModule.getAllEquipment(aePlayer.getEquipmentInventory())), player);
+			NetworkingAether.sendPacketToPlayer(new DiedInAetherPacket(aePlayer.hasDiedInAetherBefore()), player);
 		}
 	}
 
@@ -282,16 +283,9 @@ public class PlayerAetherEvents
 
 				if (shouldSpawnAtHenge)
 				{
+					aePlayer.setHasDiedInAetherBefore(true);
+
 					mp.connection.setPlayerLocation(pos.getX(), pos.getY() + 1, pos.getZ(), 0, 0);
-
-					if (!aePlayer.hasDiedInAetherBefore())
-					{
-						mp.openGui(AetherCore.INSTANCE, AetherGuiHandler.EDISON_GUI_ID, mp.worldObj, pos.getX(), pos.getY(), pos.getZ());
-
-						aePlayer.setHasDiedInAetherBefore(true);
-
-						NetworkingAether.sendPacketToPlayer(new DiedInAetherPacket(), mp);
-					}
 				}
 				else
 				{
@@ -306,9 +300,21 @@ public class PlayerAetherEvents
 
 				if (obstructed)
 				{
-					mp.addChatComponentMessage(new TextComponentString("The nearest Mysterious Henge was obstructed with blocks - you could not respawn there."));
+					mp.addChatComponentMessage(new TextComponentString("The nearest Outpost was obstructed with blocks - you could not respawn there."));
 				}
 			}
+			else
+			{
+				aePlayer.setHasDiedInAetherBefore(true);
+			}
+		}
+
+		if (event.player instanceof EntityPlayerMP)
+		{
+			EntityPlayerMP mp = (EntityPlayerMP)event.player;
+			PlayerAetherImpl playerAether = PlayerAetherImpl.getPlayer(mp);
+
+			NetworkingAether.sendPacketToPlayer(new DiedInAetherPacket(playerAether.hasDiedInAetherBefore()), mp);
 		}
 	}
 

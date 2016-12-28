@@ -6,10 +6,15 @@ import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.io.NBTHelper;
 import com.google.common.collect.Lists;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.DimensionType;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 
@@ -74,6 +79,8 @@ public class KeepInventoryModule extends PlayerAetherModule
 	{
 		if (!this.getPlayer().worldObj.isRemote)
 		{
+			EntityPlayerMP mp = (EntityPlayerMP)this.getPlayer();
+
 			DimensionType type = this.getPlayer().getEntityWorld().provider.getDimensionType();
 
 			if (type == DimensionsAether.AETHER || type == DimensionsAether.SLIDER_LABYRINTH)
@@ -84,7 +91,17 @@ public class KeepInventoryModule extends PlayerAetherModule
 
 				this.getPlayer().inventory.markDirty();
 
-				this.getPlayer().addChatComponentMessage(new TextComponentString("A mysterious force returns your items to you."));
+				BlockPos bedPos = this.getPlayer().getBedLocation(this.getPlayer().dimension);
+
+				if (bedPos != null)
+				{
+					bedPos = EntityPlayer.getBedSpawnLocation(mp.getServerWorld(), bedPos, mp.isSpawnForced(mp.dimension));
+
+					if (bedPos != null)
+					{
+						this.getPlayer().addChatComponentMessage(new TextComponentString("Your items were returned to you by Edison."));e
+					}
+				}
 			}
 
 			this.mainInvOnDeath.clear();
