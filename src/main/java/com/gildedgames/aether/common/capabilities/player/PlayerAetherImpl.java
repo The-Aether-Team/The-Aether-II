@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.capabilities.player;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.api.capabilites.entity.IPlayerAetherCapability;
 import com.gildedgames.aether.common.capabilities.player.modules.*;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
 import com.gildedgames.aether.common.util.io.NBTHelper;
@@ -67,9 +67,9 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		this.gravititeAbilityModule = new GravititeAbilityModule(this);
 		this.teleportingModule = new TeleportingModule(this);
 		this.parachuteModule = new ParachuteModule(this);
-		this.equipmentModule = new EquipmentModule(this, this.equipmentInventory);
 		this.bossModule = new BossModule(this);
 		this.keepInventoryModule = new KeepInventoryModule(this);
+		this.equipmentModule = new EquipmentModule(this);
 
 		this.modules.add(this.companionModule);
 		this.modules.add(this.abilitiesModule);
@@ -77,8 +77,8 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		this.modules.add(this.teleportingModule);
 		this.modules.add(this.parachuteModule);
 		this.modules.add(this.bossModule);
-
 		this.modules.add(this.equipmentModule);
+
 		this.modules.add(new ExtendedReachModule(this));
 		this.modules.add(new DungeonModule(this));
 
@@ -305,15 +305,30 @@ public class PlayerAetherImpl implements IPlayerAetherCapability
 		return this.gravititeAbilityModule;
 	}
 
-	public TeleportingModule getTeleportingModule() { return this.teleportingModule; }
+	public TeleportingModule getTeleportingModule()
+	{
+		return this.teleportingModule;
+	}
 
-	public ParachuteModule getParachuteModule() { return this.parachuteModule; }
+	public ParachuteModule getParachuteModule()
+	{
+		return this.parachuteModule;
+	}
 
-	public AbilitiesModule getAbilitiesModule() { return this.abilitiesModule; }
+	public AbilitiesModule getAbilitiesModule()
+	{
+		return this.abilitiesModule;
+	}
 
-	public EquipmentModule getEquipmentModule() { return this.equipmentModule; }
+	public BossModule getBossModule()
+	{
+		return this.bossModule;
+	}
 
-	public BossModule getBossModule() { return this.bossModule; }
+	public EquipmentModule getEquipmentModule()
+	{
+		return this.equipmentModule;
+	}
 
 	public static class Storage implements IStorage<IPlayerAetherCapability>
 	{

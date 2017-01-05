@@ -15,6 +15,7 @@ import com.gildedgames.aether.client.renderer.items.*;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.client.ui.UiManager;
 import com.gildedgames.aether.client.ui.minecraft.viewing.MinecraftGuiViewer;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonProxy;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
@@ -29,19 +30,13 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ClientProxy extends CommonProxy
 {
-
-	public static PlayerControllerAetherMP clientPlayerController;
-
-	@Override
-	public EntityPlayer getPlayer()
-	{
-		return Minecraft.getMinecraft().thePlayer;
-	}
+	private PlayerControllerAetherMP clientPlayerController;
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event)
@@ -111,7 +106,7 @@ public class ClientProxy extends CommonProxy
 	{
 		if (entity.worldObj instanceof WorldClient)
 		{
-			ClientProxy.clientPlayerController.setExtendedBlockReachDistance(distance);
+			this.clientPlayerController.setExtendedBlockReachDistance(distance);
 
 			return;
 		}
@@ -128,4 +123,19 @@ public class ClientProxy extends CommonProxy
 		}
 	}
 
+	@Override
+	public void onWorldLoaded(WorldEvent event)
+	{
+		if (event.getWorld() instanceof WorldClient)
+		{
+			Minecraft mc = Minecraft.getMinecraft();
+
+			if (!(mc.playerController instanceof PlayerControllerAetherMP))
+			{
+				Minecraft.getMinecraft().playerController = PlayerControllerAetherMP.create(mc.playerController);
+			}
+
+			this.clientPlayerController = (PlayerControllerAetherMP) mc.playerController;
+		}
+	}
 }

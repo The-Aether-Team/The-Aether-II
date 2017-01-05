@@ -1,7 +1,9 @@
 package com.gildedgames.aether.common.containers.inventory;
 
-import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentType;
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentSlot;
+import com.gildedgames.aether.api.capabilites.entity.IPlayerAetherCapability;
+import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -11,26 +13,29 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.text.TextComponentBase;
 import net.minecraft.util.text.TextComponentTranslation;
 
+import javax.annotation.Nonnull;
+import java.util.Optional;
+
 public class InventoryEquipment implements IInventoryEquipment
 {
 	private static final int INVENTORY_SIZE = 14;
 
-	public static final ItemEquipmentType[] slotTypes = new ItemEquipmentType[]
+	private static final ItemEquipmentSlot[] SLOT_TYPES = new ItemEquipmentSlot[]
 			{
-					ItemEquipmentType.RELIC,
-					ItemEquipmentType.RELIC,
-					ItemEquipmentType.HANDWEAR,
-					ItemEquipmentType.RING,
-					ItemEquipmentType.RING,
-					ItemEquipmentType.NECKWEAR,
-					ItemEquipmentType.COMPANION,
-					ItemEquipmentType.ARTIFACT,
-					ItemEquipmentType.CHARM,
-					ItemEquipmentType.CHARM,
-					ItemEquipmentType.CHARM,
-					ItemEquipmentType.CHARM,
-					ItemEquipmentType.CHARM,
-					ItemEquipmentType.CHARM
+					ItemEquipmentSlot.RELIC,
+					ItemEquipmentSlot.RELIC,
+					ItemEquipmentSlot.HANDWEAR,
+					ItemEquipmentSlot.RING,
+					ItemEquipmentSlot.RING,
+					ItemEquipmentSlot.NECKWEAR,
+					ItemEquipmentSlot.COMPANION,
+					ItemEquipmentSlot.ARTIFACT,
+					ItemEquipmentSlot.CHARM,
+					ItemEquipmentSlot.CHARM,
+					ItemEquipmentSlot.CHARM,
+					ItemEquipmentSlot.CHARM,
+					ItemEquipmentSlot.CHARM,
+					ItemEquipmentSlot.CHARM
 			};
 
 	private final IPlayerAetherCapability aePlayer;
@@ -40,11 +45,6 @@ public class InventoryEquipment implements IInventoryEquipment
 	public InventoryEquipment(IPlayerAetherCapability aePlayer)
 	{
 		this.aePlayer = aePlayer;
-	}
-
-	public ItemStack[] getInventory()
-	{
-		return this.inventory;
 	}
 
 	@Override
@@ -114,11 +114,11 @@ public class InventoryEquipment implements IInventoryEquipment
 	}
 
 	@Override
-	public int getNextEmptySlotForType(ItemEquipmentType type)
+	public int getNextEmptySlotForType(ItemEquipmentSlot type)
 	{
 		for (int i = 0; i < this.inventory.length; i++)
 		{
-			if (this.inventory[i] == null && slotTypes[i] == type)
+			if (this.inventory[i] == null && SLOT_TYPES[i] == type)
 			{
 				return i;
 			}
@@ -150,7 +150,7 @@ public class InventoryEquipment implements IInventoryEquipment
 	@Override
 	public int getInventoryStackLimit()
 	{
-		return 64;
+		return 1;
 	}
 
 	@Override
@@ -170,13 +170,20 @@ public class InventoryEquipment implements IInventoryEquipment
 	}
 
 	@Override
-	public void closeInventory(EntityPlayer player)
+	public void closeInventory(@Nonnull EntityPlayer player)
 	{
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int index, ItemStack stack)
+	public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack)
 	{
+		Optional<IEquipmentProperties> feature = AetherAPI.items().getEquipmentProperties(stack.getItem());
+
+		if (feature.isPresent())
+		{
+			return feature.get().getSlot() == SLOT_TYPES[index];
+		}
+
 		return true;
 	}
 
@@ -283,32 +290,4 @@ public class InventoryEquipment implements IInventoryEquipment
 		}
 	}
 
-	public static class PendingItemChange
-	{
-		private final int slot;
-
-		private final ItemStack before, after;
-
-		public PendingItemChange(int slot, ItemStack before, ItemStack after)
-		{
-			this.slot = slot;
-			this.before = before;
-			this.after = after;
-		}
-
-		public int getSlot()
-		{
-			return this.slot;
-		}
-
-		public ItemStack getBefore()
-		{
-			return this.before;
-		}
-
-		public ItemStack getAfter()
-		{
-			return this.after;
-		}
-	}
 }

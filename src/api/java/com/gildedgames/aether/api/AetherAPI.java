@@ -1,34 +1,24 @@
 package com.gildedgames.aether.api;
 
 import com.gildedgames.aether.api.capabilites.instances.IInstanceRegistry;
+import com.gildedgames.aether.api.registry.IEquipmentRegistry;
+import com.gildedgames.aether.api.registry.IItemPropertiesRegistry;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
-import com.gildedgames.aether.api.registry.cooler.ITemperatureRegistry;
-import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
 import com.gildedgames.aether.api.registry.simple_crafting.ISimpleCraftingRegistry;
 import com.gildedgames.aether.api.registry.tab.ITabRegistry;
 
+// TODO:
+// Modular functionality
 public class AetherAPI
 {
-
 	private static IAetherServices services;
-
-	private static boolean isInitialized = false;
 
 	public static IAltarRecipeRegistry altar()
 	{
 		return AetherAPI.services().getAltarRecipeRegistry();
 	}
 
-	public static IEquipmentRegistry equipment()
-	{
-		return AetherAPI.services().getEquipmentRegistry();
-	}
-
-	public static ITemperatureRegistry temperature()
-	{
-		return AetherAPI.services().getTemperatureRegistry();
-	}
-
+	// TODO: Reformat all of these...
 	public static ITabRegistry tabs() { return AetherAPI.services().getTabRegistry(); }
 
 	public static IInstanceRegistry instances() { return AetherAPI.services().getInstanceRegistry(); }
@@ -37,30 +27,28 @@ public class AetherAPI
 
 	public static ISimpleCraftingRegistry masonry() { return AetherAPI.services().getMasonryRegistry(); }
 
-	public static void init(IAetherServices services)
+	public static IItemPropertiesRegistry items()
 	{
+		return AetherAPI.services().getItemPropertiesRegistry();
+	}
+
+	public static IEquipmentRegistry equipment()
+	{
+		return AetherAPI.services().getEquipmentRegistry();
+	}
+
+	public static void registerProvider(IAetherServices services)
+	{
+		if (AetherAPI.services != null)
+		{
+			throw new IllegalStateException("The Aether API provider is already initialized");
+		}
+
 		AetherAPI.services = services;
 	}
 
 	public static IAetherServices services()
 	{
-		if (!AetherAPI.isInitialized)
-		{
-			try
-			{
-				AetherAPI.services = (IAetherServices) Class.forName("com.gildedgames.aether.common.AetherCore").getDeclaredField("INSTANCE").get(null);
-			}
-			catch (IllegalAccessException | NoSuchFieldException | ClassNotFoundException e)
-			{
-				throw new RuntimeException("Couldn't get the running instances of the Aether", e);
-			}
-
-			if (AetherAPI.services == null)
-			{
-				throw new IllegalStateException("The Aether is not initialized yet");
-			}
-		}
-
 		return AetherAPI.services;
 	}
 }

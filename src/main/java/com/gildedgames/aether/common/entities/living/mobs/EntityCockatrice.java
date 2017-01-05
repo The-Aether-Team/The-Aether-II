@@ -1,7 +1,5 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
-import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
-import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceHide;
@@ -23,7 +21,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-public class EntityCockatrice extends EntityAetherMob implements IEntityProperties
+public class EntityCockatrice extends EntityAetherMob
 {
 
 	private static final DataParameter<Boolean> IS_HIDING = new DataParameter<>(16, DataSerializers.BOOLEAN);
@@ -155,18 +153,6 @@ public class EntityCockatrice extends EntityAetherMob implements IEntityProperti
 	protected ResourceLocation getLootTable()
 	{
 		return LootTablesAether.ENTITY_COCKATRICE;
-	}
-
-	@Override
-	public ElementalState getElementalState()
-	{
-		return ElementalState.BLIGHT;
-	}
-
-	@Override
-	public ElementalState getAttackElement()
-	{
-		return ElementalState.BLIGHT;
 	}
 
 	public static class JumpHelperDisable extends EntityJumpHelper

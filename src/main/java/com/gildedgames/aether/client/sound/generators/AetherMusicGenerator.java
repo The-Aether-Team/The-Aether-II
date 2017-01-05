@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.sound.generators;
 
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.api.capabilites.entity.IPlayerAetherCapability;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import net.minecraft.util.SoundEvent;

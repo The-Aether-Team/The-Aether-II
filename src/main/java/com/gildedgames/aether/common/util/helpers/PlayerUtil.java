@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.util.helpers;
 
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.api.capabilites.entity.IPlayerAetherCapability;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

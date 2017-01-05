@@ -1,7 +1,5 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
-import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
-import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFloat;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFollowAttackTarget;
@@ -26,7 +24,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class EntitySwet extends EntityExtendedMob implements IEntityProperties
+public class EntitySwet extends EntityExtendedMob
 {
 
 	public enum Type
@@ -214,17 +212,4 @@ public class EntitySwet extends EntityExtendedMob implements IEntityProperties
 			return LootTablesAether.ENTITY_SWET;
 		}
 	}
-
-	@Override
-	public ElementalState getElementalState()
-	{
-		return ElementalState.WATER;
-	}
-
-	@Override
-	public ElementalState getAttackElement()
-	{
-		return ElementalState.WATER;
-	}
-
 }

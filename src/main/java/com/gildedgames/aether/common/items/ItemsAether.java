@@ -1,8 +1,6 @@
 package com.gildedgames.aether.common.items;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentType;
-import com.gildedgames.aether.api.registry.equipment.IEquipmentProperties;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.living.companions.*;
@@ -11,7 +9,10 @@ import com.gildedgames.aether.common.items.companions.ItemCompanion;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import com.gildedgames.aether.common.items.consumables.*;
 import com.gildedgames.aether.common.items.misc.*;
-import com.gildedgames.aether.common.items.tools.*;
+import com.gildedgames.aether.common.items.tools.ItemAetherAxe;
+import com.gildedgames.aether.common.items.tools.ItemAetherPickaxe;
+import com.gildedgames.aether.common.items.tools.ItemAetherShovel;
+import com.gildedgames.aether.common.items.tools.ItemSkyrootBucket;
 import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
 import com.gildedgames.aether.common.items.weapons.ItemVampireBlade;
@@ -19,7 +20,6 @@ import com.gildedgames.aether.common.items.weapons.crossbow.ItemBolt;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
 import com.gildedgames.aether.common.items.weapons.swords.*;
 import com.gildedgames.aether.common.registry.GenerationAether;
-import com.gildedgames.aether.common.registry.TemperatureHandler;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import com.gildedgames.aether.common.registry.content.MaterialsAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
@@ -375,21 +375,20 @@ public class ItemsAether
 			irradiated_tool = new ItemIrradiated(new RandomItemSelector(item -> item instanceof ItemTool)),
 			irradiated_ring = new ItemIrradiated(new RandomItemSelector(item ->
 			{
-				IEquipmentProperties props = AetherAPI.equipment().getProperties(item);
+				// TODO:
+//				ItemProperties props = AetherAPI.equipment().getProperties(item);
+//
+//				return props != null && props.getEquipmentType() == ItemEquipmentSlot.RING;
 
-				return props != null && props.getEquipmentType() == ItemEquipmentType.RING;
+				return false;
 			})),
 			irradiated_neckwear = new ItemIrradiated(new RandomItemSelector(item ->
 			{
-				IEquipmentProperties props = AetherAPI.equipment().getProperties(item);
-
-				return props != null && props.getEquipmentType() == ItemEquipmentType.NECKWEAR;
+				return false;
 			})),
 			irradiated_charm = new ItemIrradiated(new RandomItemSelector(item ->
 			{
-				IEquipmentProperties props = AetherAPI.equipment().getProperties(item);
-
-				return props != null && props.getEquipmentType() == ItemEquipmentType.CHARM;
+				return false;
 			})),
 			irradiated_dust = new ItemIrradiatedVisuals();
 
@@ -711,23 +710,6 @@ public class ItemsAether
 		registerItem("fried_moa_egg", fried_moa_egg.setCreativeTab(CreativeTabsAether.CONSUMABLES));
 
 		registerItem("aether_spawn_egg", aether_spawn_egg.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
-
-		final TemperatureHandler temperatureHandler = new TemperatureHandler();
-
-		AetherAPI.temperature().register(ItemsAether.irradiated_dust, temperatureHandler);
-		AetherAPI.temperature().register(ItemsAether.ambrosium_chunk, temperatureHandler);
-
-		AetherAPI.temperature().register(ItemsAether.moa_egg, temperatureHandler);
-		AetherAPI.temperature().register(ItemsAether.rainbow_moa_egg, temperatureHandler);
-
-		AetherAPI.temperature().register(ItemsAether.icestone, temperatureHandler);
-		AetherAPI.temperature().register(ItemsAether.irradiated_chunk, temperatureHandler);
-		AetherAPI.temperature().register(ItemsAether.irradiated_sword, temperatureHandler);
-		AetherAPI.temperature().register(ItemsAether.irradiated_armor, temperatureHandler);
-		AetherAPI.temperature().register(ItemsAether.irradiated_tool, temperatureHandler);
-		AetherAPI.temperature().register(ItemsAether.irradiated_ring, temperatureHandler);
-		AetherAPI.temperature().register(ItemsAether.irradiated_neckwear, temperatureHandler);
-		AetherAPI.temperature().register(ItemsAether.irradiated_charm, temperatureHandler);
 
 		registerItemProperties();
 	}

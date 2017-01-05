@@ -1,8 +1,7 @@
 package com.gildedgames.aether.common.containers.slots;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
-import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentType;
+import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentSlot;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.inventory.IInventory;
@@ -17,11 +16,11 @@ import java.util.HashMap;
 public class SlotEquipment extends Slot
 {
 	@SideOnly(Side.CLIENT)
-	private static HashMap<ItemEquipmentType, TextureAtlasSprite> icons;
+	private static HashMap<ItemEquipmentSlot, TextureAtlasSprite> icons;
 
-	private final ItemEquipmentType type;
+	private final ItemEquipmentSlot type;
 
-	public SlotEquipment(IInventory inventory, ItemEquipmentType type, int index, int xPosition, int yPosition)
+	public SlotEquipment(IInventory inventory, ItemEquipmentSlot type, int index, int xPosition, int yPosition)
 	{
 		super(inventory, index, xPosition, yPosition);
 
@@ -33,13 +32,13 @@ public class SlotEquipment extends Slot
 	{
 		icons = new HashMap<>();
 
-		icons.put(ItemEquipmentType.COMPANION, event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_companion")));
-		icons.put(ItemEquipmentType.HANDWEAR, event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_handwear")));
-		icons.put(ItemEquipmentType.RELIC, event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_relic")));
-		icons.put(ItemEquipmentType.NECKWEAR, event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_neckwear")));
-		icons.put(ItemEquipmentType.RING, event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_ring")));
-		icons.put(ItemEquipmentType.CHARM, event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_charm")));
-		icons.put(ItemEquipmentType.ARTIFACT, event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_artifact")));
+		icons.put(ItemEquipmentSlot.COMPANION, event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_companion")));
+		icons.put(ItemEquipmentSlot.HANDWEAR, event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_handwear")));
+		icons.put(ItemEquipmentSlot.RELIC, event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_relic")));
+		icons.put(ItemEquipmentSlot.NECKWEAR, event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_neckwear")));
+		icons.put(ItemEquipmentSlot.RING, event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_ring")));
+		icons.put(ItemEquipmentSlot.CHARM, event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_charm")));
+		icons.put(ItemEquipmentSlot.ARTIFACT, event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_artifact")));
 	}
 
 	@Override
@@ -52,25 +51,10 @@ public class SlotEquipment extends Slot
 	@Override
 	public boolean isItemValid(ItemStack stack)
 	{
-		if (stack == null)
-		{
-			return true;
-		}
-
-		if (stack.hasCapability(AetherCapabilities.ITEM_PROPERTIES, null))
-		{
-			IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
-
-			if (props.isEquippable())
-			{
-				return props.getEquipmentType() == this.getEquipmentType();
-			}
-		}
-
-		return false;
+		return this.inventory.isItemValidForSlot(this.getSlotIndex(), stack);
 	}
 
-	public ItemEquipmentType getEquipmentType()
+	public ItemEquipmentSlot getEquipmentType()
 	{
 		return this.type;
 	}

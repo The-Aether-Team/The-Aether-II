@@ -1,7 +1,6 @@
 package com.gildedgames.aether.api.loot;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
 import com.gildedgames.aether.api.capabilites.items.properties.ItemRarity;
 import com.google.common.collect.Lists;
 import net.minecraft.item.ItemStack;
@@ -35,12 +34,13 @@ public class LootGenerator
 
 				if (stack != null)
 				{
-					IItemPropertiesCapability properties = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
-
-					if (properties.getRarity() == rarity)
-					{
-						stacksWithRarity.add(loot);
-					}
+					// TODO: Port
+//					IItemPropertiesCapability properties = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
+//
+//					if (properties.getRarity() == rarity)
+//					{
+//						stacksWithRarity.add(loot);
+//					}
 				}
 			}
 		}

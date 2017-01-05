@@ -1,9 +1,8 @@
 package com.gildedgames.aether.common.containers;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
-import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentType;
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentSlot;
+import com.gildedgames.aether.api.capabilites.entity.IPlayerAetherCapability;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
@@ -129,24 +128,24 @@ public class ContainerEquipment extends ContainerPlayer
 
 		int inventorySlotId = 0;
 
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RELIC, inventorySlotId++, 14 + offsetX, 28 + offsetY));
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RELIC, inventorySlotId++, 64 + offsetX, 28 + offsetY));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RELIC, inventorySlotId++, 14 + offsetX, 28 + offsetY));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RELIC, inventorySlotId++, 64 + offsetX, 28 + offsetY));
 
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.HANDWEAR, inventorySlotId++, 64 + offsetX, 49 + offsetY));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.HANDWEAR, inventorySlotId++, 64 + offsetX, 49 + offsetY));
 
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RING, inventorySlotId++, 14 + offsetX, 70 + offsetY));
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.RING, inventorySlotId++, 14 + offsetX, 91 + offsetY));
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.NECKWEAR, inventorySlotId++, 14 + offsetX, 49 + offsetY));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RING, inventorySlotId++, 14 + offsetX, 70 + offsetY));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RING, inventorySlotId++, 14 + offsetX, 91 + offsetY));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.NECKWEAR, inventorySlotId++, 14 + offsetX, 49 + offsetY));
 
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.COMPANION, inventorySlotId++, 64 + offsetX, 70 + offsetY));
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.ARTIFACT, inventorySlotId++, 39 + offsetX, 122 + offsetY));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.COMPANION, inventorySlotId++, 64 + offsetX, 70 + offsetY));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.ARTIFACT, inventorySlotId++, 39 + offsetX, 122 + offsetY));
 
 		for (int x = 0; x < 6; x++)
 		{
 			int x1 = 35 + (x * 18);
 			int y1 = 128;
 
-			this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentType.CHARM, inventorySlotId, x1, y1));
+			this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.CHARM, inventorySlotId, x1, y1));
 			inventorySlotId++;
 		}
 	}
@@ -162,7 +161,7 @@ public class ContainerEquipment extends ContainerPlayer
 		return super.slotClick(slotId, dragType, clickTypeIn, player);
 	}
 
-	private int getNextEmptySlot(ItemEquipmentType type)
+	private int getNextEmptySlot(ItemEquipmentSlot type)
 	{
 		for (int i = 0; i < this.inventorySlots.size(); i++)
 		{
@@ -176,7 +175,7 @@ public class ContainerEquipment extends ContainerPlayer
 				}
 			}
 
-			if (type == ItemEquipmentType.OFFHAND && slot.getStack() == null && slot.getSlotIndex() == 40)
+			if (type == ItemEquipmentSlot.OFFHAND && slot.getStack() == null && slot.getSlotIndex() == 40)
 			{
 				return i;
 			}
@@ -188,41 +187,6 @@ public class ContainerEquipment extends ContainerPlayer
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotNumber)
 	{
-		Slot slot = this.inventorySlots.get(slotNumber);
-
-		if (slotNumber == this.binSlot.slotNumber && this.aePlayer.getPlayer().capabilities.isCreativeMode)
-		{
-			this.aePlayer.getPlayer().inventory.clear();
-			this.aePlayer.getEquipmentInventory().clear();
-		}
-
-		if (slot != null && slot.getHasStack())
-		{
-			ItemStack stack = slot.getStack();
-
-			if (!(slot instanceof SlotEquipment) && !(slot instanceof SlotCrafting))
-			{
-				int destIndex = -1;
-
-				if (stack.hasCapability(AetherCapabilities.ITEM_PROPERTIES, null))
-				{
-					IItemPropertiesCapability properties = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
-
-					destIndex = this.getNextEmptySlot(properties.getEquipmentType());
-				}
-
-				if (destIndex != -1)
-				{
-					Slot accessorySlot = this.inventorySlots.get(destIndex);
-					accessorySlot.putStack(stack);
-
-					slot.putStack(null);
-
-					return stack;
-				}
-			}
-		}
-
 		return super.transferStackInSlot(player, slotNumber);
 	}
 

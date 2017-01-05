@@ -37,8 +37,6 @@ public class CreativeTabsAether
 
 	public static final CreativeTab ARMOR = new CreativeTab("aether.armor");
 
-
-
 	public static final CreativeTab COMPANIONS = new CreativeTab("aether.companions");
 
 	public static final CreativeTab RINGS = new CreativeTab("aether.rings");

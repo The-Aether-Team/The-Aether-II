@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.containers.tiles;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.items.properties.TemperatureProperties;
 import com.gildedgames.aether.common.containers.slots.SlotAmbrosium;
 import com.gildedgames.aether.common.containers.slots.SlotInventory;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -80,123 +79,6 @@ public class ContainerIcestoneCooler extends Container
     @Nullable
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
     {
-        ItemStack itemstack = null;
-        Slot slot = this.inventorySlots.get(index);
-
-        if (slot != null && slot.getHasStack())
-        {
-            ItemStack itemstack1 = slot.getStack();
-            itemstack = itemstack1.copy();
-
-            if (index > 6)
-            {
-                TemperatureProperties props = itemstack1.getCapability(AetherCapabilities.ITEM_PROPERTIES, null).getTemperatureProperties();
-
-                if (props != null)
-                {
-                    if (props.getTemperature(itemstack1) < 0)
-                    {
-                        if (!this.mergeItemStack(itemstack1, 0, 4, false))
-                        {
-                            if (index < 34)
-                            {
-                                if (!this.mergeItemStack(itemstack1, 34, 43, false))
-                                {
-                                    return null;
-                                }
-                            }
-                            else
-                            {
-                                if (!this.mergeItemStack(itemstack1, 6, 34, false))
-                                {
-                                    return null;
-                                }
-                            }
-                        }
-                    }
-                    else if (props.getTemperatureThreshold(itemstack1) < 0)
-                    {
-                        if (!this.mergeItemStack(itemstack1, 5, 6, false))
-                        {
-                            if (index < 34)
-                            {
-                                if (!this.mergeItemStack(itemstack1, 34, 43, false))
-                                {
-                                    return null;
-                                }
-                            }
-                            else
-                            {
-                                if (!this.mergeItemStack(itemstack1, 6, 34, false))
-                                {
-                                    return null;
-                                }
-                            }
-                        }
-                    }
-                }
-                else if (itemstack1.getItem() == ItemsAether.ambrosium_shard)
-                {
-                    if (!this.mergeItemStack(itemstack1, 4, 5, true))
-                    {
-                        if (index < 34)
-                        {
-                            if (!this.mergeItemStack(itemstack1, 34, 43, false))
-                            {
-                                return null;
-                            }
-                        }
-                        else
-                        {
-                            if (!this.mergeItemStack(itemstack1, 6, 34, false))
-                            {
-                                return null;
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    if (index < 34)
-                    {
-                        if (!this.mergeItemStack(itemstack1, 34, 43, false))
-                        {
-                            return null;
-                        }
-                    }
-                    else
-                    {
-                        if (!this.mergeItemStack(itemstack1, 6, 34, false))
-                        {
-                            return null;
-                        }
-                    }
-                }
-
-                slot.onSlotChange(itemstack1, itemstack);
-            }
-            else if (!this.mergeItemStack(itemstack1, 6, 43, false))
-            {
-                return null;
-            }
-
-            if (itemstack1.stackSize == 0)
-            {
-                slot.putStack(null);
-            }
-            else
-            {
-                slot.onSlotChanged();
-            }
-
-            if (itemstack1.stackSize == itemstack.stackSize)
-            {
-                return null;
-            }
-
-            slot.onPickupFromSlot(playerIn, itemstack1);
-        }
-
-        return itemstack;
+        return super.transferStackInSlot(playerIn, index);
     }
 }

@@ -2,13 +2,11 @@ package com.gildedgames.aether.common.capabilities.player;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.chunk.IPlacementFlagCapability;
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
+import com.gildedgames.aether.api.capabilites.entity.IPlayerAetherCapability;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
-import com.gildedgames.aether.common.capabilities.player.modules.EquipmentModule;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.network.packets.DiedInAetherPacket;
-import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -41,7 +39,6 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 
@@ -50,26 +47,12 @@ import java.util.List;
 public class PlayerAetherEvents
 {
 	@SubscribeEvent
-	public static void onPlayerStartTracking(PlayerEvent.StartTracking event)
-	{
-		EntityPlayerMP player = (EntityPlayerMP) event.getEntity();
-
-		PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
-
-		if (event.getTarget() instanceof EntityPlayer)
-		{
-			NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(player, EquipmentModule.getAllEquipment(aePlayer.getEquipmentInventory())), player);
-		}
-	}
-
-	@SubscribeEvent
 	public static void onPlayerJoined(PlayerLoggedInEvent event)
 	{
 		EntityPlayerMP player = (EntityPlayerMP) event.player;
 
 		PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
 
-		NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(player, EquipmentModule.getAllEquipment(aePlayer.getEquipmentInventory())), player);
 		NetworkingAether.sendPacketToPlayer(new DiedInAetherPacket(aePlayer.hasDiedInAetherBefore()), player);
 	}
 
@@ -166,24 +149,6 @@ public class PlayerAetherEvents
 		if (aePlayer != null)
 		{
 			aePlayer.onHurt(event);
-		}
-	}
-
-	@SubscribeEvent
-	public static void onPlayerTeleported(PlayerChangedDimensionEvent event)
-	{
-		PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(event.player);
-
-		if (aePlayer != null)
-		{
-			aePlayer.onTeleport(event);
-
-			if (!event.player.getEntityWorld().isRemote)
-			{
-				NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(event.player, EquipmentModule.getAllEquipment(aePlayer.getEquipmentInventory())), (EntityPlayerMP) event.player);
-			}
-
-			//aePlayer.getEquipmentModule().resetEffects();
 		}
 	}
 

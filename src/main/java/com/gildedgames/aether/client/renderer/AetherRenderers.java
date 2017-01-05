@@ -1,6 +1,8 @@
 package com.gildedgames.aether.client.renderer;
 
-import com.gildedgames.aether.client.renderer.entities.*;
+import com.gildedgames.aether.client.renderer.entities.AetherRenderFactory;
+import com.gildedgames.aether.client.renderer.entities.RenderFloatingBlock;
+import com.gildedgames.aether.client.renderer.entities.RenderMovingBlock;
 import com.gildedgames.aether.client.renderer.entities.attachments.RenderParachute;
 import com.gildedgames.aether.client.renderer.entities.companions.*;
 import com.gildedgames.aether.client.renderer.entities.living.*;
@@ -10,20 +12,14 @@ import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDaggerf
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDart;
 import com.gildedgames.aether.client.renderer.items.RenderRewardItemStack;
 import com.gildedgames.aether.client.renderer.tile_entities.*;
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
+import com.gildedgames.aether.common.entities.item.EntityRewardItemStack;
+import com.gildedgames.aether.common.entities.living.boss.slider.EntitySlider;
 import com.gildedgames.aether.common.entities.living.companions.*;
 import com.gildedgames.aether.common.entities.living.dungeon.labyrinth.*;
-import com.gildedgames.aether.common.entities.living.boss.slider.EntitySlider;
-import com.gildedgames.aether.common.entities.item.EntityPhoenixItem;
-import com.gildedgames.aether.common.entities.item.EntityRewardItemStack;
-import com.gildedgames.aether.common.entities.living.mobs.EntityAechorPlant;
-import com.gildedgames.aether.common.entities.living.mobs.EntityCockatrice;
-import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
-import com.gildedgames.aether.common.entities.living.mobs.EntityTempest;
-import com.gildedgames.aether.common.entities.living.mobs.EntityZephyr;
+import com.gildedgames.aether.common.entities.living.mobs.*;
 import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
@@ -34,7 +30,6 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.tiles.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderEntityItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.entity.Entity;
@@ -68,14 +63,7 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityAechorPlant.class, new AetherRenderFactory<>(RenderAechorPlant.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityAerbunny.class, new AetherRenderFactory<>(RenderAerbunny.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCarrionSprout.class, new AetherRenderFactory<>(RenderCarrionSprout.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityPhoenixItem.class, new IRenderFactory<EntityPhoenixItem>()
-		{
-			@Override
-			public Render<? super EntityPhoenixItem> createRenderFor(RenderManager manager)
-			{
-				return new RenderEntityItem(manager, Minecraft.getMinecraft().getRenderItem());
-			}
-		});
+
 		RenderingRegistry.registerEntityRenderingHandler(EntityFrostpineTotem.class, new AetherRenderFactory<>(RenderFrostpineTotem.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityKraisith.class, new AetherRenderFactory<>(RenderKraisith.class));
 		RenderingRegistry.registerEntityRenderingHandler(EntityShadeOfArkenzus.class, new AetherRenderFactory<>(RenderShadeOfArkenzus.class));

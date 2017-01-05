@@ -1,8 +1,10 @@
 package com.gildedgames.aether.client.gui.container;
 
-import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentType;
+import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentSlot;
+import com.gildedgames.aether.api.items.equipment.effects.EffectPool;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.modules.EquipmentModule;
 import com.gildedgames.aether.common.containers.ContainerEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -11,8 +13,12 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
+import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Optional;
 
 public class GuiEquipment extends GuiContainer
 {
@@ -96,6 +102,8 @@ public class GuiEquipment extends GuiContainer
 		// this.drawCoinCounter();
 
 		this.drawSlotName(mouseX, mouseY);
+
+		this.drawEquipmentEffects();
 	}
 
 	@Override
@@ -125,7 +133,7 @@ public class GuiEquipment extends GuiContainer
 				{
 					if (slot instanceof SlotEquipment)
 					{
-						ItemEquipmentType type = ((SlotEquipment) slot).getEquipmentType();
+						ItemEquipmentSlot type = ((SlotEquipment) slot).getEquipmentType();
 
 						unlocalizedTooltip = type.getUnlocalizedName();
 					}
@@ -170,38 +178,26 @@ public class GuiEquipment extends GuiContainer
 
 	private void drawPlayer(int mouseX, int mouseY)
 	{
-		//		boolean hasCompanion = player.currentCompanion != null;
-		//		GuiInventory.drawEntityOnScreen(this.width / 2 - (hasCompanion ? 100 : 90), this.height / 2 + 40, 45, (this.guiLeft + 88) - mouseX, (this.guiTop + 42) - mouseY, this.mc.thePlayer);
-
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
 		GuiInventory.drawEntityOnScreen(this.width / 2 - 48, this.height / 2 + 10, 37, (this.guiLeft + 88) - mouseX, (this.guiTop + 42) - mouseY, this.mc.thePlayer);
-
-		//		if (player.currentCompanion != null)
-		//		{
-		//			EntityCompanion.invRender = true;
-		//			GL11.glPushMatrix();
-		//			GL11.glScalef(0.5F, 0.5F, 0.5F);
-		//			GuiInventory.drawEntityOnScreen(this.width - 140, this.height + 90, 45, (this.guiLeft + 88) - mouseX, (this.guiTop + 42) - mouseY, player.currentCompanion);
-		//			GL11.glPopMatrix();
-		//			EntityCompanion.invRender = false;
-		//		}
 	}
 
-	//	private void drawCoinCounter(/* ??? */)
-	//	{
-	//		int coinX = this.width / 2 - 89;
-	//		int coinY = this.height / 2 + 58;
-	//
-	//		int coinAmount = aePlayer.getAetherCoins();
-	//
-	//		this.mc.renderEngine.bindTexture(TEXTURE_COINBAR);
-	//
-	//		//drawTexturedModalRect(width / 2 - (71 / 2), dynamicY, 0, 0, 71, 15);
-	//		this.drawTexturedModalRect(coinX - ((this.mc.fontRendererObj.getStringWidth("x" + String.valueOf(coinAmount)) / 2) + 3) - (10 / 2), coinY + 1, 0, 15, 10, 10);
-	//
-	//		this.mc.fontRendererObj.drawStringWithShadow("x", coinX - ((this.mc.fontRendererObj.getStringWidth("x" + String.valueOf(coinAmount)) / 2) + 2) + 6, coinY + 1, 0xffffffff);
-	//		this.mc.fontRendererObj.drawStringWithShadow(String.valueOf(coinAmount), coinX - ((this.mc.fontRendererObj.getStringWidth("x" + String.valueOf(coinAmount)) / 2) + 2) + 13, coinY + 2, 0xffffffff);
-	//	}
+	private void drawEquipmentEffects()
+	{
+		ArrayList<String> effects = new ArrayList<>();
 
+		EquipmentModule equipment = this.aePlayer.getEquipmentModule();
+
+		for (ResourceLocation id : equipment.getActiveEffectProviders())
+		{
+			Optional<EffectPool> pool = equipment.getEffectPool(id);
+
+			pool.ifPresent(effectPool -> effectPool.getProcessor().addItemInformation(effects, effectPool.getState()));
+		}
+
+		String compiled = StringUtils.join(effects, TextFormatting.RESET + ", ");
+
+		this.mc.fontRendererObj.drawString(compiled, this.guiLeft, this.guiTop + 160, 0xFFFFFF, true);
+	}
 }

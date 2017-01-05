@@ -1,7 +1,5 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
-import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
-import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
 import com.gildedgames.aether.common.entities.ai.tempest.AIElectricShock;
 import com.gildedgames.aether.common.entities.util.flying.EntityFlyingMob;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
@@ -14,7 +12,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-public class EntityTempest extends EntityFlyingMob implements IEntityProperties
+public class EntityTempest extends EntityFlyingMob
 {
 
 	public EntityTempest(World world)
@@ -86,17 +84,5 @@ public class EntityTempest extends EntityFlyingMob implements IEntityProperties
 	protected SoundEvent getDeathSound()
 	{
 		return SoundsAether.tempest_death;
-	}
-
-	@Override
-	public ElementalState getElementalState()
-	{
-		return ElementalState.AIR;
-	}
-
-	@Override
-	public ElementalState getAttackElement()
-	{
-		return ElementalState.LIGHTNING;
 	}
 }

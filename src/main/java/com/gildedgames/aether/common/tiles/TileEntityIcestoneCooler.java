@@ -1,9 +1,7 @@
 package com.gildedgames.aether.common.tiles;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.items.properties.TemperatureProperties;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.blocks.containers.BlockIcestoneCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -66,54 +64,11 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
             return;
         }
 
-        ItemStack itemToCool = this.getItemToCool();
-        ItemStack ambrosium = this.getStackInSlot(AMBROSIUM_INDEX);
-        ItemStack irradiatedDust = this.getStackInSlot(IRRADIATED_DUST_INDEX);
-
-        if (itemToCool != null )
-        {
-            if (irradiatedDust == null)
-            {
-                TemperatureProperties props = itemToCool.getCapability(AetherCapabilities.ITEM_PROPERTIES, null).getTemperatureProperties();
-
-                if (props != null && props.getTemperatureThreshold(itemToCool) < 0 && ambrosium != null && ambrosium.stackSize >= 4)
-                {
-                    this.progress.tick();
-
-                    if (this.progress.isMultipleOfSeconds())
-                    {
-                        this.currentCoolingProgress += this.getTotalTemperature();
-                        this.sync();
-                    }
-
-                    if (this.currentCoolingProgress <= this.reqTemperatureThreshold)
-                    {
-                        this.setInventorySlotContents(ITEM_TO_COOL_INDEX, props.getResultWhenCooled(this.worldObj, this.getPos(), itemToCool, this.worldObj.rand));
-
-                        if (props.shouldDecreaseStackSize(false))
-                        {
-                            this.decrStackSize(ITEM_TO_COOL_INDEX, 1);
-                        }
-
-                        this.setInventorySlotContents(IRRADIATED_DUST_INDEX, new ItemStack(ItemsAether.irradiated_dust, 3 + this.worldObj.rand.nextInt(3)));
-
-                        this.decrStackSize(AMBROSIUM_INDEX, 4);
-
-                        this.currentCoolingProgress = 0;
-                        this.reqTemperatureThreshold = 0;
-                        this.progress.reset();
-                        this.sync();
-                    }
-                }
-            }
-        }
-        else
-        {
-            this.currentCoolingProgress = 0;
-            this.reqTemperatureThreshold = 0;
-            this.progress.reset();
-            this.sync();
-        }
+        // Re-implement
+//        this.currentCoolingProgress = 0;
+//        this.reqTemperatureThreshold = 0;
+//        this.progress.reset();
+//        this.sync();
     }
 
     public ItemStack getItemToCool()
@@ -138,26 +93,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 
     public int getTotalTemperature()
     {
-        int total = 0;
-
-        for (int count = 0; count < AMBROSIUM_INDEX; count++)
-        {
-            ItemStack stack = this.getStackInSlot(count);
-
-            if (stack == null)
-            {
-                continue;
-            }
-
-            TemperatureProperties props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null).getTemperatureProperties();
-
-            if (props != null && props.getTemperature(stack) < 0)
-            {
-                total += props.getTemperature(stack) * stack.stackSize;
-            }
-        }
-
-        return total;
+        return 0;
     }
 
     @Override
@@ -237,23 +173,6 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
         }
 
         this.inventory[index] = stack;
-
-        if (index == ITEM_TO_COOL_INDEX)
-        {
-            if (stack == null)
-            {
-                this.reqTemperatureThreshold = 0;
-            }
-            else
-            {
-                TemperatureProperties props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null).getTemperatureProperties();
-
-                if (props != null)
-                {
-                    this.reqTemperatureThreshold = props.getTemperatureThreshold(stack);
-                }
-            }
-        }
     }
 
     @Override
@@ -277,31 +196,6 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack)
     {
-        if (stack == null)
-        {
-            return false;
-        }
-
-        TemperatureProperties props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null).getTemperatureProperties();
-
-        if (index < AMBROSIUM_INDEX)
-        {
-            if (props != null && props.getTemperature(stack) < 0)
-            {
-                return true;
-            }
-        }
-
-        if (index == AMBROSIUM_INDEX)
-        {
-            return stack.getItem() == ItemsAether.ambrosium_shard;
-        }
-
-        if (index == ITEM_TO_COOL_INDEX)
-        {
-            return props != null && props.getTemperatureThreshold(stack) < 0;
-        }
-
         return false;
     }
 

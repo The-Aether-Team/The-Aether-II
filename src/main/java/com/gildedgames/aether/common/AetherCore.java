@@ -1,10 +1,11 @@
 package com.gildedgames.aether.common;
 
+import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.IAetherServices;
 import com.gildedgames.aether.api.capabilites.instances.IInstanceRegistry;
+import com.gildedgames.aether.api.registry.IEquipmentRegistry;
+import com.gildedgames.aether.api.registry.IItemPropertiesRegistry;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
-import com.gildedgames.aether.api.registry.cooler.ITemperatureRegistry;
-import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
 import com.gildedgames.aether.api.registry.simple_crafting.ISimpleCraftingRegistry;
 import com.gildedgames.aether.api.registry.tab.ITabRegistry;
 import com.gildedgames.aether.client.ui.data.AssetLocation;
@@ -12,11 +13,11 @@ import com.gildedgames.aether.client.ui.minecraft.util.MinecraftAssetLocation;
 import com.gildedgames.aether.common.blocks.QuicksoilProcessor;
 import com.gildedgames.aether.common.capabilities.instances.InstanceEvents;
 import com.gildedgames.aether.common.registry.SimpleRecipesAether;
-import com.gildedgames.aether.common.registry.content.DimensionsAether;
-import com.gildedgames.aether.common.world.dimensions.aether.TeleporterAether;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
-import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSectorAccess;
+import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.io.ClassSerializer;
+import com.gildedgames.aether.common.world.dimensions.aether.TeleporterAether;
+import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSectorAccess;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.DimensionManager;
@@ -68,6 +69,12 @@ public class AetherCore implements IAetherServices
 	}
 
 	@EventHandler
+	public void onFMLConstruction(FMLConstructionEvent event)
+	{
+		AetherAPI.registerProvider(this);
+	}
+
+	@EventHandler
 	public void onFMLPreInit(FMLPreInitializationEvent event)
 	{
 		AetherCore.CONFIG = new ConfigAether(event.getSuggestedConfigurationFile());
@@ -94,6 +101,7 @@ public class AetherCore implements IAetherServices
 		DimensionsAether.onServerStopping(event);
 
 		AetherCore.SPAWN_REGISTRY.write();
+
 		IslandSectorAccess.inst().onServerStopping(event);
 		InstanceEvents.saveAllInstancesToDisk();
 	}
@@ -175,18 +183,6 @@ public class AetherCore implements IAetherServices
 	}
 
 	@Override
-	public IEquipmentRegistry getEquipmentRegistry()
-	{
-		return AetherCore.PROXY.getEquipmentRegistry();
-	}
-
-	@Override
-	public ITemperatureRegistry getTemperatureRegistry()
-	{
-		return AetherCore.PROXY.getCoolerRegistry();
-	}
-
-	@Override
 	public ITabRegistry getTabRegistry()
 	{
 		return AetherCore.PROXY.getTabRegistry();
@@ -208,6 +204,18 @@ public class AetherCore implements IAetherServices
 	public ISimpleCraftingRegistry getMasonryRegistry()
 	{
 		return AetherCore.PROXY.getMasonryRegistry();
+	}
+
+	@Override
+	public IItemPropertiesRegistry getItemPropertiesRegistry()
+	{
+		return AetherCore.PROXY.getItemPropertiesRegistry();
+	}
+
+	@Override
+	public IEquipmentRegistry getEquipmentRegistry()
+	{
+		return AetherCore.PROXY.getEquipmentRegistry();
 	}
 
 }

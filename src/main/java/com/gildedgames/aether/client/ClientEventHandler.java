@@ -1,19 +1,22 @@
 package com.gildedgames.aether.client;
 
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectInstance;
-import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectProcessor;
-import com.gildedgames.aether.api.capabilites.entity.effects.EntityEffectRule;
-import com.gildedgames.aether.api.capabilites.items.effects.IItemEffectsCapability;
-import com.gildedgames.aether.api.capabilites.items.properties.IItemPropertiesCapability;
-import com.gildedgames.aether.api.capabilites.items.properties.ItemRarity;
+import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
+import com.gildedgames.aether.api.items.IItemProperties;
+import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectInstance;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectProcessor;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectState;
 import com.gildedgames.aether.client.gui.menu.InDevelopmentWarning;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.client.ui.UiManager;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
-import com.gildedgames.aether.common.containers.slots.*;
+import com.gildedgames.aether.common.containers.slots.SlotAmbrosium;
+import com.gildedgames.aether.common.containers.slots.SlotEquipment;
+import com.gildedgames.aether.common.containers.slots.SlotFlintAndSteel;
+import com.gildedgames.aether.common.containers.slots.SlotMoaEgg;
 import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.AetherMovementPacket;
@@ -23,11 +26,9 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -39,12 +40,10 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Collections;
+import java.util.Optional;
 
 public class ClientEventHandler
 {
@@ -97,106 +96,39 @@ public class ClientEventHandler
 	}
 
 	@SubscribeEvent
+	@SuppressWarnings("unchecked")
 	public void onTooltipConstruction(ItemTooltipEvent event)
 	{
 		ItemStack stack = event.getItemStack();
 
 		if (stack != null)
 		{
-			List<String> oldTooltip = new LinkedList<>(event.getToolTip());
-			oldTooltip.remove(0);
+			IItemProperties properties = AetherAPI.items().getProperties(event.getItemStack().getItem());
 
-			String name = event.getToolTip().get(0);
-
-			event.getToolTip().clear();
-
-			event.getToolTip().add(name);
-
-			if (stack.hasCapability(AetherCapabilities.ITEM_PROPERTIES, null))
+			// Equipment Properties
+			if (properties.getEquipmentProperties().isPresent())
 			{
-				IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
+				IEquipmentProperties equipment = properties.getEquipmentProperties().get();
 
-				if (props != null)
+				// Equipment Effects
+				for (IEffectInstance instance : equipment.getEffectInstances())
 				{
-					if (props.getRarity() != ItemRarity.NONE)
-					{
-						event.getToolTip().add(I18n.format(props.getRarity().getUnlocalizedName()));
-					}
-
-					if (props.getTemperatureProperties() != null)
-					{
-						int temperature = props.getTemperatureProperties().getTemperature(stack);
-						String resultName = props.getTemperatureProperties().getCooledName(stack);
-
-						if (temperature < 0)
-						{
-							event.getToolTip().add(TextFormatting.DARK_AQUA + I18n.format("gui.aether.coolant"));
-						}
-
-						if (temperature > 0)
-						{
-							event.getToolTip().add(TextFormatting.DARK_RED + I18n.format("gui.aether.incubator_fuel"));
-						}
-
-						if (resultName != null)
-						{
-							event.getToolTip().add(TextFormatting.DARK_RED + I18n.format("gui.aether.cools_into") + TextFormatting.RESET + " " + I18n.format(resultName));
-						}
-					}
+					IEffectProcessor<IEffectInstance, IEffectState> effect = AetherAPI.equipment().getEffect(instance.getProcessor());
+					effect.addItemInformation(event.getToolTip(), effect.createState(Collections.singleton(instance)));
 				}
+
+				// Slot Type
+				event.getToolTip().add("");
+				event.getToolTip().add(I18n.format(equipment.getSlot().getUnlocalizedName()));
 			}
 
-			if (stack.hasCapability(AetherCapabilities.ITEM_EFFECTS, null))
+			// Rarity
+			if (properties.getRarity().isPresent())
 			{
-				IItemEffectsCapability effects = stack.getCapability(AetherCapabilities.ITEM_EFFECTS, null);
-
-				if (effects.getEffectPairs() == null || effects.getEffectPairs().size() <= 0)
-				{
-
-				}
-				else
-				{
-					for (Pair<EntityEffectProcessor, EntityEffectInstance> effect : effects.getEffectPairs())
-					{
-						EntityEffectProcessor processor = effect.getLeft();
-						EntityEffectInstance instance = effect.getRight();
-
-						List<String> localizedDesc = new ArrayList<>();
-
-						for (String line : processor.getUnlocalizedDesc(event.getEntityPlayer(), instance))
-						{
-							localizedDesc.add(I18n.format(line, (Object[]) processor.getFormatParameters(event.getEntityPlayer(), instance)));
-						}
-
-						event.getToolTip().addAll(localizedDesc);
-
-						for (EntityEffectRule rule : instance.getRules())
-						{
-							for (String line : rule.getUnlocalizedDesc())
-							{
-								event.getToolTip().add(TextFormatting.GRAY + "\u2022 " + I18n.format(line));
-							}
-						}
-					}
-				}
+				event.getToolTip().add(I18n.format(properties.getRarity().get().getUnlocalizedName()));
 			}
 
-			event.getToolTip().addAll(oldTooltip);
-
-			if (stack.hasCapability(AetherCapabilities.ITEM_PROPERTIES, null))
-			{
-				IItemPropertiesCapability props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
-
-				if (props != null)
-				{
-					if (props.isEquippable())
-					{
-						event.getToolTip().add("");
-
-						event.getToolTip().add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + I18n.format(props.getEquipmentType().getUnlocalizedName()));
-					}
-				}
-			}
+			// TODO: Equipment re-write
 		}
 	}
 
@@ -246,17 +178,7 @@ public class ClientEventHandler
 	@SubscribeEvent
 	public void onWorldLoad(WorldEvent.Load event)
 	{
-		if (event.getWorld() instanceof WorldClient)
-		{
-			Minecraft mc = Minecraft.getMinecraft();
-
-			if (!(mc.playerController instanceof PlayerControllerAetherMP))
-			{
-				Minecraft.getMinecraft().playerController = PlayerControllerAetherMP.create(mc.playerController);
-			}
-
-			ClientProxy.clientPlayerController = (PlayerControllerAetherMP) mc.playerController;
-		}
+		AetherCore.PROXY.onWorldLoaded(event);
 	}
 
 	@SubscribeEvent

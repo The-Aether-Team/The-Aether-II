@@ -16,6 +16,11 @@ public class SlotInventory extends Slot
 
     public boolean isItemValid(@Nullable ItemStack stack)
     {
+        if (stack == null)
+        {
+            return true;
+        }
+
         return this.inventory.isItemValidForSlot(this.getSlotIndex(), stack);
     }
 

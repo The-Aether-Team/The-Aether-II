@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.tiles;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.items.properties.TemperatureProperties;
 import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
@@ -49,79 +48,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
             return;
         }
 
-        ItemStack itemToHeat = this.getMoaEgg();
-
-        boolean hasFuelSlotsFilled = true;
-
-        for (int count = 0; count < MOA_EGG_INDEX; count++)
-        {
-            ItemStack stack = this.getStackInSlot(count);
-
-            if (stack == null)
-            {
-                hasFuelSlotsFilled = false;
-                break;
-            }
-        }
-
-        if (itemToHeat != null)
-        {
-            TemperatureProperties props = itemToHeat.getCapability(AetherCapabilities.ITEM_PROPERTIES, null).getTemperatureProperties();
-
-            if (props != null && props.getTemperatureThreshold(itemToHeat) > 0 && this.getTotalHeatingItems() >= 4 && hasFuelSlotsFilled)
-            {
-                this.progress.tick();
-
-                if (this.progress.isMultipleOfSeconds())
-                {
-                    this.currentHeatingProgress += 5;
-                    this.sync();
-                }
-
-                if (this.currentHeatingProgress >= TileEntityIncubator.REQ_TEMPERATURE_THRESHOLD)
-                {
-                    ItemStack result = props.getResultWhenHeated(this.worldObj, this.getPos(), itemToHeat, this.worldObj.rand);
-
-                    this.setInventorySlotContents(MOA_EGG_INDEX, result);
-
-                    if (props.shouldDecreaseStackSize(true))
-                    {
-                        this.decrStackSize(MOA_EGG_INDEX, 1);
-                    }
-
-                    int totalDecreased = 0;
-
-                    for (int count = 0; count < MOA_EGG_INDEX; count++)
-                    {
-                        ItemStack stack = this.getStackInSlot(count);
-
-                        if (stack == null)
-                        {
-                            continue;
-                        }
-
-                        totalDecreased += 1;
-
-                        this.decrStackSize(count, 1);
-
-                        if (totalDecreased >= 4)
-                        {
-                            break;
-                        }
-                    }
-
-                    this.currentHeatingProgress = 0;
-                    this.progress.reset();
-                    this.sync();
-                }
-            }
-        }
-        else
-        {
-            this.currentHeatingProgress = 0;
-            this.progress.reset();
-            this.sync();
-        }
+        // TODO: Re-implement
 
         final IBlockState state = this.worldObj.getBlockState(this.pos);
 
@@ -181,26 +108,8 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
     public int getTotalHeatingItems()
     {
-        int total = 0;
-
-        for (int count = 0; count < MOA_EGG_INDEX; count++)
-        {
-            ItemStack stack = this.getStackInSlot(count);
-
-            if (stack == null)
-            {
-                continue;
-            }
-
-            TemperatureProperties props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null).getTemperatureProperties();
-
-            if (props != null && props.getTemperature(stack) > 0)
-            {
-                total += stack.stackSize;
-            }
-        }
-
-        return total;
+    	// Re-implement
+    	return 0;
     }
 
     @Override
@@ -305,27 +214,8 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack)
     {
-        if (stack == null)
-        {
-            return false;
-        }
-
-        TemperatureProperties props = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null).getTemperatureProperties();
-
-        if (index < MOA_EGG_INDEX)
-        {
-            if (props != null && props.getTemperature(stack) > 0)
-            {
-                return true;
-            }
-        }
-
-        if (index == MOA_EGG_INDEX)
-        {
-            return stack.getItem() instanceof ItemMoaEgg;
-        }
-
-        return false;
+    	// TODO: Re-implement
+		return false;
     }
 
     @Override

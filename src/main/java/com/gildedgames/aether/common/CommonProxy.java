@@ -2,27 +2,20 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.capabilites.instances.IInstanceRegistry;
-import com.gildedgames.aether.api.player.IPlayerAetherCapability;
-import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
-import com.gildedgames.aether.api.registry.cooler.ITemperatureRegistry;
-import com.gildedgames.aether.api.registry.equipment.IEquipmentProperties;
-import com.gildedgames.aether.api.registry.equipment.IEquipmentRegistry;
+import com.gildedgames.aether.api.registry.IEquipmentRegistry;
+import com.gildedgames.aether.api.registry.IItemPropertiesRegistry;
 import com.gildedgames.aether.api.registry.tab.ITabRegistry;
 import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.CapabilityManagerAether;
-import com.gildedgames.aether.common.capabilities.entity.effects.EntityEffectsEventHooks;
-import com.gildedgames.aether.common.capabilities.entity.properties.EntityProperties;
+import com.gildedgames.aether.common.capabilities.instances.InstanceRegistryImpl;
+import com.gildedgames.aether.common.capabilities.item.EquipmentRegistry;
 import com.gildedgames.aether.common.capabilities.player.ItemSlot;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherEvents;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
 import com.gildedgames.aether.common.containers.tab.TabRegistryImpl;
-import com.gildedgames.aether.common.items.tools.ItemToolHandler;
-import com.gildedgames.aether.common.registry.*;
 import com.gildedgames.aether.common.entities.BossProcessor;
 import com.gildedgames.aether.common.entities.EntitiesAether;
-import com.gildedgames.aether.common.entities.EntityItemWatcher;
 import com.gildedgames.aether.common.entities.MountProcessor;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.living.boss.slider.BreakFloorActionSlider;
@@ -31,19 +24,22 @@ import com.gildedgames.aether.common.entities.living.boss.slider.SecondStageSlid
 import com.gildedgames.aether.common.entities.living.boss.slider.ThirdStageSlider;
 import com.gildedgames.aether.common.entities.util.SimpleBossManager;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.tools.ItemToolHandler;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.registry.ItemPropertiesRegistry;
+import com.gildedgames.aether.common.registry.GenerationAether;
+import com.gildedgames.aether.common.registry.SimpleCraftingRegistry;
 import com.gildedgames.aether.common.registry.content.*;
-import com.gildedgames.aether.common.registry.minecraft.*;
+import com.gildedgames.aether.common.registry.minecraft.MinecraftRecipesAether;
 import com.gildedgames.aether.common.tiles.TileEntitiesAether;
 import com.gildedgames.aether.common.util.TickTimer;
+import com.gildedgames.aether.common.util.io.Instantiator;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSector;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceFactory;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceHandler;
-import com.gildedgames.aether.common.util.io.Instantiator;
-import com.gildedgames.aether.common.capabilities.instances.InstanceRegistryImpl;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -51,11 +47,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.event.FMLConstructionEvent;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.fml.common.event.*;
 
 import java.io.File;
 import java.util.Random;
@@ -66,9 +59,7 @@ public class CommonProxy
 
 	private final MinecraftRecipesAether recipeManager = new MinecraftRecipesAether();
 
-	private final IEquipmentRegistry equipmentRegistry = new EquipmentRegistry();
-
-	private final ITemperatureRegistry coolerRegistry = new TemperatureRegistry();
+	private final IItemPropertiesRegistry itemPropertiesRegistry = new ItemPropertiesRegistry();
 
 	private final ITabRegistry tabRegistry = new TabRegistryImpl();
 
@@ -77,6 +68,8 @@ public class CommonProxy
 	private final SimpleCraftingRegistry simpleCraftingRegistry = new SimpleCraftingRegistry();
 
 	private final SimpleCraftingRegistry masonryRegistry = new SimpleCraftingRegistry();
+
+	private final IEquipmentRegistry equipmentRegistry = new EquipmentRegistry();
 
 	private DungeonInstanceHandler dungeonInstanceHandler;
 
@@ -133,10 +126,7 @@ public class CommonProxy
 
 		MinecraftForge.EVENT_BUS.register(CommonEvents.class);
 		MinecraftForge.EVENT_BUS.register(PlayerAetherEvents.class);
-		MinecraftForge.EVENT_BUS.register(EntityEffectsEventHooks.class);
-		MinecraftForge.EVENT_BUS.register(EntityItemWatcher.class);
 		MinecraftForge.EVENT_BUS.register(MountProcessor.class);
-		MinecraftForge.EVENT_BUS.register(EntityProperties.class);
 		MinecraftForge.EVENT_BUS.register(BossProcessor.class);
 		MinecraftForge.EVENT_BUS.register(ItemToolHandler.class);
 
@@ -175,45 +165,48 @@ public class CommonProxy
 
 	public boolean tryEquipEquipment(EntityPlayer player, ItemStack stack, EnumHand hand)
 	{
-		if (stack == null)
-		{
-			return false;
-		}
-
-		IPlayerAetherCapability aePlayer = PlayerAetherImpl.getPlayer(player);
-
-		if (aePlayer == null)
-		{
-			return false;
-		}
-
-		IInventoryEquipment equipment = aePlayer.getEquipmentInventory();
-
-		IEquipmentProperties props = AetherAPI.equipment().getProperties(stack.getItem());
-
-		if (props != null)
-		{
-			int slot = equipment.getNextEmptySlotForType(props.getEquipmentType());
-
-			if (slot < 0)
-			{
-				return false;
-			}
-
-			equipment.setInventorySlotContents(slot, stack.copy());
-
-			if (!player.capabilities.isCreativeMode)
-			{
-				// Technically, there should never be STACKABLE equipment, but in case there is, we need to handle it.
-				stack.stackSize--;
-			}
-
-			player.setHeldItem(hand, stack.stackSize <= 0 ? null : stack);
-
-			return true;
-		}
-
+		// TODO
 		return false;
+
+//		if (stack == null)
+//		{
+//			return false;
+//		}
+//
+//		IPlayerAetherCapability aePlayer = PlayerAetherImpl.getPlayer(player);
+//
+//		if (aePlayer == null)
+//		{
+//			return false;
+//		}
+//
+//		IInventoryEquipment equipment = aePlayer.getEquipmentInventory();
+//
+//		ItemProperties props = AetherAPI.equipment().getProperties(stack.getItem());
+//
+//		if (props != null)
+//		{
+//			int slot = equipment.getNextEmptySlotForType(props.getEquipmentType());
+//
+//			if (slot < 0)
+//			{
+//				return false;
+//			}
+//
+//			equipment.setInventorySlotContents(slot, stack.copy());
+//
+//			if (!player.capabilities.isCreativeMode)
+//			{
+//				// Technically, there should never be STACKABLE equipment, but in case there is, we need to handle it.
+//				stack.stackSize--;
+//			}
+//
+//			player.setHeldItem(hand, stack.stackSize <= 0 ? null : stack);
+//
+//			return true;
+//		}
+//
+//		return false;
 	}
 
 	public File getAetherStorageDir()
@@ -226,14 +219,9 @@ public class CommonProxy
 		return this.recipeManager;
 	}
 
-	public IEquipmentRegistry getEquipmentRegistry()
+	public IItemPropertiesRegistry getItemPropertiesRegistry()
 	{
-		return this.equipmentRegistry;
-	}
-
-	public ITemperatureRegistry getCoolerRegistry()
-	{
-		return this.coolerRegistry;
+		return this.itemPropertiesRegistry;
 	}
 
 	public ITabRegistry getTabRegistry()
@@ -265,9 +253,11 @@ public class CommonProxy
 
 	}
 
-	public EntityPlayer getPlayer()
-	{
-		return null;
-	}
+	// NO-OP
+	public void onWorldLoaded(WorldEvent event) { }
 
+	public IEquipmentRegistry getEquipmentRegistry()
+	{
+		return this.equipmentRegistry;
+	}
 }

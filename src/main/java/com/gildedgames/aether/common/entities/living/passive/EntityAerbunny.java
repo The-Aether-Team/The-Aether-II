@@ -1,7 +1,5 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
-import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
-import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
@@ -31,7 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.Set;
 
-public class EntityAerbunny extends EntityAetherAnimal implements IEntityProperties
+public class EntityAerbunny extends EntityAetherAnimal
 {
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.CARROT, Items.POTATO, Items.BEETROOT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry);
@@ -230,18 +228,6 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 	public boolean canRiderInteract()
 	{
 		return true;
-	}
-
-	@Override
-	public ElementalState getElementalState()
-	{
-		return ElementalState.AIR;
-	}
-
-	@Override
-	public ElementalState getAttackElement()
-	{
-		return ElementalState.AIR;
 	}
 
 	@Override
