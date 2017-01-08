@@ -69,7 +69,7 @@ public class PlayerInstances implements IPlayerInstances
 			NBTTagCompound compound = (NBTTagCompound) nbt;
 
 			instance.setOutside(NBTHelper.getBlockPosDimension(compound.getCompoundTag("outside")));
-			instance.setInstance((Instance) NBTHelper.fullyDeserialize("activeInstance", compound, null));
+			instance.setInstance(NBTHelper.fullyDeserialize("activeInstance", compound, null));
 		}
 	}
 

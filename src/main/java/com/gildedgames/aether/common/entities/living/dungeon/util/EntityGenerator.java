@@ -51,12 +51,6 @@ public class EntityGenerator extends EntityCreature
 	}
 
 	@Override
-	protected void entityInit()
-	{
-		super.entityInit();
-	}
-
-	@Override
 	protected void playStepSound(BlockPos pos, Block blockIn)
 	{
 

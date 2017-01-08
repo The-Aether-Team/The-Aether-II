@@ -147,6 +147,7 @@ public class ChunkAttachment implements IChunkAttachment
 			}
 		}
 
+		@SuppressWarnings("unchecked")
 		public void register(ResourceLocation res, ICapabilityProvider provider)
 		{
 			this.providers.add(provider);

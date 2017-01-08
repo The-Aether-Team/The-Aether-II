@@ -2,6 +2,8 @@ package com.gildedgames.aether.client.util;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 
+@Deprecated
+// Will be removed.
 public class SpriteGeneric extends TextureAtlasSprite
 {
 

@@ -146,7 +146,7 @@ public class GuiSimpleCrafting extends GuiContainer implements IExtendedGui
 
 							if (req instanceof ItemStack)
 							{
-								this.materials.get(index).setRequiredObject((ItemStack) req);
+								this.materials.get(index).setRequiredObject(req);
 							}
 							else if (req instanceof OreDictionaryRequirement)
 							{
@@ -335,7 +335,7 @@ public class GuiSimpleCrafting extends GuiContainer implements IExtendedGui
 
 					if (req instanceof ItemStack)
 					{
-						material.setRequiredObject((ItemStack) req);
+						material.setRequiredObject(req);
 					}
 					else if (req instanceof OreDictionaryRequirement)
 					{

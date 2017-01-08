@@ -82,12 +82,6 @@ public class EntityBolt extends EntityArrow
 	}
 
 	@Override
-	protected void onHit(RayTraceResult raytraceResultIn)
-	{
-		super.onHit(raytraceResultIn);
-	}
-
-	@Override
 	protected ItemStack getArrowStack()
 	{
 		return new ItemStack(ItemsAether.bolt, 1, this.getBoltType().ordinal());

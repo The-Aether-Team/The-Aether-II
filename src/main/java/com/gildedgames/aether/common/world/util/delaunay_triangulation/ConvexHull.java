@@ -348,7 +348,7 @@ public class ConvexHull
 
 			ConvexFace newFace = new ConvexFace(new VertexBuffer());
 			newFace.vertices = vertices;
-			Collections.sort(vertices, new VertexComparer(this.fullInput));
+			vertices.sort(new VertexComparer(this.fullInput));
 			this.calculateFacePlane(newFace, center);
 			faces[i] = newFace;
 		}

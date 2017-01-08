@@ -385,11 +385,15 @@ public class ItemsAether
 			})),
 			irradiated_neckwear = new ItemIrradiated(new RandomItemSelector(item ->
 			{
-				return false;
+				Optional<IEquipmentProperties> equipment = AetherAPI.items().getEquipmentProperties(item);
+
+				return equipment.isPresent() && equipment.get().getSlot() == ItemEquipmentSlot.NECKWEAR;
 			})),
 			irradiated_charm = new ItemIrradiated(new RandomItemSelector(item ->
 			{
-				return false;
+				Optional<IEquipmentProperties> equipment = AetherAPI.items().getEquipmentProperties(item);
+
+				return equipment.isPresent() && equipment.get().getSlot() == ItemEquipmentSlot.CHARM;
 			})),
 			irradiated_dust = new ItemIrradiatedVisuals();
 

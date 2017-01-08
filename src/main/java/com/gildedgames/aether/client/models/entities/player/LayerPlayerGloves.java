@@ -14,6 +14,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
+import java.util.Objects;
+
 public class LayerPlayerGloves extends LayerBipedArmor
 {
 	private final RenderLivingBase<?> renderer;
@@ -65,7 +67,7 @@ public class LayerPlayerGloves extends LayerBipedArmor
 			GlStateManager.scale(0.92F, 0.92F, 0.92F);
 			GlStateManager.translate(0, 0.01F, 0);
 
-			if (skinType == "slim")
+			if (skinType.equals("slim"))
 			{
 				GlStateManager.translate(0, 0.05F, 0);
 			}

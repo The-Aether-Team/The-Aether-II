@@ -678,7 +678,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 	{
 		List<DungeonRoom> largeRooms = new ArrayList<>();
 
-		Collections.sort(rooms, new RoomAreaComparer());
+		rooms.sort(new RoomAreaComparer());
 
 		for (int i = 0; i < desiredLargeRoomCount; i++)
 		{
@@ -712,7 +712,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 		}
 
 		//Create minimal spanning trees from the delaunay triangulation
-		Collections.sort(connections, new ConnectionComparer());//Sort by the length of the connection
+		connections.sort(new ConnectionComparer());//Sort by the length of the connection
 		List<List<int[]>> branches = new ArrayList<>();//Contains branches of the minimal spanning trees while generating it
 		List<Connection> chosenConnections = new ArrayList<>();
 

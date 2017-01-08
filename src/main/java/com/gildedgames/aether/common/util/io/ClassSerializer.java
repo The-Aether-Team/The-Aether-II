@@ -6,6 +6,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.concurrent.Callable;
 
+@Deprecated
+// Will be removed/changed.
 public class ClassSerializer
 {
 
@@ -13,7 +15,7 @@ public class ClassSerializer
 
 	private static BiMap<String, ClassSerializer> locators = HashBiMap.create();
 
-	private static interface RegisteredEntry
+	private interface RegisteredEntry
 	{
 
 		Callable<?> serializer();
@@ -134,15 +136,11 @@ public class ClassSerializer
 			nbt.setString(key + "_srl", ClassSerializer.findSerializerLocationKey(srl));
 			nbt.setInteger(key + "_srlNumber", srl.getSerialNumber(clazz));
 		}
-		else
-		{
-			return;
-		}
 	}
 
 	public static Object instantiate(String key, NBTTagCompound nbt)
 	{
-		ClassSerializer srl = (ClassSerializer) ClassSerializer.locateSerializer(nbt.getString(key + "_srl"));
+		ClassSerializer srl = ClassSerializer.locateSerializer(nbt.getString(key + "_srl"));
 
 		return srl.instantiate(nbt.getInteger(key + "_srlNumber"));
 	}

@@ -18,7 +18,7 @@ public class ConfigAether
 
 	private int aetherBiomeID, sliderLabyrinthBiomeID;
 
-	private boolean displayInventoryPattern, displayTabsOnLeft;
+	private boolean displayInventoryPattern;
 
 	public ConfigAether(File file)
 	{
@@ -43,7 +43,6 @@ public class ConfigAether
 		this.sliderLabyrinthBiomeID = this.getInt(this.BIOMES, "Slider Labyrinth Biome ID", 238);
 
 		this.displayInventoryPattern = this.getBoolean(this.GENERAL, "Display Inventory Pattern", true);
-		this.displayTabsOnLeft = this.getBoolean(this.GENERAL, "Display Tabs On Left Side", false);
 
 		if (this.configuration.hasChanged())
 		{
@@ -93,11 +92,6 @@ public class ConfigAether
 	public boolean getDisplayInventoryPattern()
 	{
 		return this.displayInventoryPattern;
-	}
-
-	public boolean getDisplayTabsOnLeft()
-	{
-		return this.displayTabsOnLeft;
 	}
 
 }

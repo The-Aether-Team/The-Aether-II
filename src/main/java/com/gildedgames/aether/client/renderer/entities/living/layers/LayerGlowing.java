@@ -19,14 +19,7 @@ public class LayerGlowing<T extends EntityLiving> implements LayerRenderer<T>
 
 	public LayerGlowing(RenderLiving<T> renderer, final ResourceLocation glowingLayer)
 	{
-		this(renderer, new Supplier<ResourceLocation>()
-		{
-			@Override
-			public ResourceLocation get()
-			{
-				return glowingLayer;
-			}
-		});
+		this(renderer, () -> glowingLayer);
 	}
 
 	public LayerGlowing(RenderLiving<T> renderer, Supplier<ResourceLocation> glowingLayer)

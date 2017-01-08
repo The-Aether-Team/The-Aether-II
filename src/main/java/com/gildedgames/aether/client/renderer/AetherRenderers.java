@@ -1,6 +1,5 @@
 package com.gildedgames.aether.client.renderer;
 
-import com.gildedgames.aether.client.renderer.entities.AetherRenderFactory;
 import com.gildedgames.aether.client.renderer.entities.RenderFloatingBlock;
 import com.gildedgames.aether.client.renderer.entities.RenderMovingBlock;
 import com.gildedgames.aether.client.renderer.entities.attachments.RenderParachute;
@@ -29,12 +28,8 @@ import com.gildedgames.aether.common.entities.projectiles.*;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.tiles.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderSnowball;
-import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class AetherRenderers
@@ -51,65 +46,48 @@ public class AetherRenderers
 
 	private static void registerEntityRenderers()
 	{
-		RenderingRegistry.registerEntityRenderingHandler(EntityFloatingBlock.class, new AetherRenderFactory<>(RenderFloatingBlock.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityMovingBlock.class, new AetherRenderFactory<>(RenderMovingBlock.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDart.class, new AetherRenderFactory<>(RenderDart.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBolt.class, new AetherRenderFactory<>(RenderBolt.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDaggerfrostSnowball.class, new AetherRenderFactory<>(RenderDaggerfrostSnowball.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityParachute.class, new AetherRenderFactory<>(RenderParachute.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityFloatingBlock.class, RenderFloatingBlock::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityMovingBlock.class, RenderMovingBlock::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityDart.class, RenderDart::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityBolt.class, RenderBolt::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityDaggerfrostSnowball.class, RenderDaggerfrostSnowball::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityParachute.class, RenderParachute::new);
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityPhyg.class, new AetherRenderFactory<>(RenderPhyg.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityFlyingCow.class, new AetherRenderFactory<>(RenderFlyingCow.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityAechorPlant.class, new AetherRenderFactory<>(RenderAechorPlant.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityAerbunny.class, new AetherRenderFactory<>(RenderAerbunny.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityCarrionSprout.class, new AetherRenderFactory<>(RenderCarrionSprout.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityPhyg.class, RenderPhyg::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityFlyingCow.class, RenderFlyingCow::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityAechorPlant.class, RenderAechorPlant::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityAerbunny.class, RenderAerbunny::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityCarrionSprout.class, RenderCarrionSprout::new);
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityFrostpineTotem.class, new AetherRenderFactory<>(RenderFrostpineTotem.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityKraisith.class, new AetherRenderFactory<>(RenderKraisith.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityShadeOfArkenzus.class, new AetherRenderFactory<>(RenderShadeOfArkenzus.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityEtherealWisp.class, new AetherRenderFactory<>(RenderEtherealWisp.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityFleetingWisp.class, new AetherRenderFactory<>(RenderFleetingWisp.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntitySoaringWisp.class, new AetherRenderFactory<>(RenderSoaringWisp.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityFangrin.class, new AetherRenderFactory<>(RenderFangrin.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityNexSpirit.class, new AetherRenderFactory<>(RenderNexSpirit.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityCockatrice.class, new AetherRenderFactory<>(RenderCockatrice.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityKirrid.class, new AetherRenderFactory<>(RenderKirrid.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityMoa.class, new AetherRenderFactory<>(RenderMoa.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityAerwhale.class, new AetherRenderFactory<>(RenderAerwhale.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityZephyr.class, new AetherRenderFactory<>(RenderZephyr.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityTempest.class, new AetherRenderFactory<>(RenderTempest.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDetonationSentry.class, new AetherRenderFactory<>(RenderDetonationSentry.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBattleSentry.class, new AetherRenderFactory<>(RenderBattleSentry.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityTrackingSentry.class, new AetherRenderFactory<>(RenderTrackingSentry.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityChestMimic.class, new AetherRenderFactory<>(RenderLabyrinthChestMimic.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntitySwet.class, new AetherRenderFactory<>(RenderSwet.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityPinkBabySwet.class, new AetherRenderFactory<>(RenderPinkBabySwet.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBattleGolem.class, new AetherRenderFactory<>(RenderBattleGolem.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBattleBomb.class, new AetherRenderFactory<>(RenderBattleBomb.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityGlitterwing.class, new AetherRenderFactory<>(RenderGlitterwing.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityEdison.class, new AetherRenderFactory<>(RenderEdison.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityTaegore.class, new AetherRenderFactory<>(RenderTaegore.class));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBurrukai.class, new AetherRenderFactory<>(RenderBurrukai.class));
-
-		RenderingRegistry.registerEntityRenderingHandler(EntityRewardItemStack.class, new IRenderFactory<EntityRewardItemStack>()
-		{
-			@Override
-			public Render<? super EntityRewardItemStack> createRenderFor(RenderManager manager)
-			{
-				return new RenderRewardItemStack(manager, Minecraft.getMinecraft().getRenderItem());
-			}
-		});
-
-		RenderingRegistry.registerEntityRenderingHandler(EntitySentryVaultbox.class, new IRenderFactory<Entity>()
-		{
-			@Override
-			public Render<? super Entity> createRenderFor(RenderManager manager)
-			{
-				return new RenderSnowball<>(manager, ItemsAether.sentry_vaultbox, Minecraft.getMinecraft().getRenderItem());
-			}
-		});
-
-		RenderingRegistry.registerEntityRenderingHandler(EntitySlider.class, new AetherRenderFactory<>(RenderSlider.class));
+		RenderingRegistry.registerEntityRenderingHandler(EntityFrostpineTotem.class, RenderFrostpineTotem::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityKraisith.class, RenderKraisith::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityShadeOfArkenzus.class, RenderShadeOfArkenzus::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityEtherealWisp.class, RenderEtherealWisp::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityFleetingWisp.class, RenderFleetingWisp::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntitySoaringWisp.class, RenderSoaringWisp::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityFangrin.class, RenderFangrin::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityNexSpirit.class, RenderNexSpirit::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityCockatrice.class, RenderCockatrice::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityKirrid.class, RenderKirrid::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityMoa.class, RenderMoa::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityAerwhale.class, RenderAerwhale::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityZephyr.class, RenderZephyr::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityTempest.class, RenderTempest::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityDetonationSentry.class, RenderDetonationSentry::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityBattleSentry.class, RenderBattleSentry::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityTrackingSentry.class, RenderTrackingSentry::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityChestMimic.class, RenderLabyrinthChestMimic::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntitySwet.class, RenderSwet::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityPinkBabySwet.class, RenderPinkBabySwet::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityBattleGolem.class, RenderBattleGolem::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityBattleBomb.class, RenderBattleBomb::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityGlitterwing.class, RenderGlitterwing::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityEdison.class, RenderEdison::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityTaegore.class, RenderTaegore::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityBurrukai.class, RenderBurrukai::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityRewardItemStack.class, manager -> new RenderRewardItemStack(manager, Minecraft.getMinecraft().getRenderItem()));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySentryVaultbox.class, manager -> new RenderSnowball<>(manager, ItemsAether.sentry_vaultbox, Minecraft.getMinecraft().getRenderItem()));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySlider.class, RenderSlider::new);
 	}
 
 	private static void registerTESRs()

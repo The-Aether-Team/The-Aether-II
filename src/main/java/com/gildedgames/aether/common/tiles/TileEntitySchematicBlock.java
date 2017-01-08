@@ -230,9 +230,9 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		return this.worldObj.getTileEntity(this.pos) != this ? false :
+		return this.worldObj.getTileEntity(this.pos) == this && (
 				player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D)
-						<= 64.0D && player.capabilities.isCreativeMode;
+						<= 64.0D && player.capabilities.isCreativeMode);
 	}
 
 	@Override

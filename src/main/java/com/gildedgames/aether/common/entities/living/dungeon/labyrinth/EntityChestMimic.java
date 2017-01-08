@@ -6,7 +6,6 @@ import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.aether.common.util.io.NBTHelper;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
@@ -68,12 +67,6 @@ public class EntityChestMimic extends EntityExtendedMob
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16);
 		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
-	}
-
-	@Override
-	public boolean attackEntityAsMob(Entity entity)
-	{
-		return super.attackEntityAsMob(entity);
 	}
 
 	@Override

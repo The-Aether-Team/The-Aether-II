@@ -16,15 +16,6 @@ public interface ITabClient extends ITab
 	 */
 	@SideOnly(Side.CLIENT)
 	boolean isTabValid(GuiScreen gui);
-
-	/**
-	 * This represents whether or not the passed parameter is the main GuiScreen used for this tab.
-	 * @param gui
-	 * @return Whether or not the parameter is the main GuiScreen used for this tab
-	 */
-	@SideOnly(Side.CLIENT)
-	boolean isMainGui(GuiScreen gui);
-
 	/**
 	 * Called when the player selects another {@link ITab} within this {@link ITab}'s parent {@link ITabGroupHandler}. This includes
 	 * when the {@link ITabGroupHandler} is closed and this {@link ITab} was open.

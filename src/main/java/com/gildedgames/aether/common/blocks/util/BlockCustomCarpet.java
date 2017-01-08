@@ -78,17 +78,12 @@ public class BlockCustomCarpet extends Block
 		this.checkForDrop(worldIn, pos, state);
 	}
 
-	private boolean checkForDrop(World worldIn, BlockPos pos, IBlockState state)
+	private void checkForDrop(World worldIn, BlockPos pos, IBlockState state)
 	{
 		if (!this.canBlockStay(worldIn, pos))
 		{
 			this.dropBlockAsItem(worldIn, pos, state, 0);
 			worldIn.setBlockToAir(pos);
-			return false;
-		}
-		else
-		{
-			return true;
 		}
 	}
 

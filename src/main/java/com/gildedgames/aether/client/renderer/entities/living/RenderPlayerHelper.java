@@ -59,13 +59,13 @@ public class RenderPlayerHelper
 		if (ring1 != null)
 		{
 			RenderPlayerHelper.renderItem(ring1, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress(),
-					skinType == "slim" ? 0.075F : 0.09F, skinType == "slim" ? 0.0752F : 0.112F, skinType == "slim" ? -0.25F : -0.20F);
+					skinType.equals("slim") ? 0.075F : 0.09F, skinType.equals("slim") ? 0.0752F : 0.112F, skinType.equals("slim") ? -0.25F : -0.20F);
 		}
 
 		if (ring2 != null)
 		{
 			RenderPlayerHelper.renderItem(ring2, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress(),
-					skinType == "slim" ? 0.18F : 0.195F, skinType == "slim" ? 0.017F : 0.0552F, skinType == "slim" ? -0.24F : -0.19F);
+					skinType.equals("slim") ? 0.18F : 0.195F, skinType.equals("slim") ? 0.017F : 0.0552F, skinType.equals("slim") ? -0.24F : -0.19F);
 		}
 	}
 
@@ -159,7 +159,7 @@ public class RenderPlayerHelper
 
 		GlStateManager.translate(f * 5.6F, 0.0F, 0.0F);
 
-		if (skinType == "slim")
+		if (skinType.equals("slim"))
 		{
 			GlStateManager.translate(0.08F, 0.06F, 0.0F);
 		}

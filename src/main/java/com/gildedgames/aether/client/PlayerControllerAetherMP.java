@@ -23,7 +23,8 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import javax.annotation.Nullable;
 
-// Don't look at me...
+@Deprecated
+// Will be removed and Valkyrie Tools changed.
 public class PlayerControllerAetherMP extends PlayerControllerMP
 {
 	private final PlayerControllerMP baseController;

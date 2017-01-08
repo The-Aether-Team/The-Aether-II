@@ -144,7 +144,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 							if (req instanceof ItemStack)
 							{
-								this.materials.get(index).setRequiredObject((ItemStack) req);
+								this.materials.get(index).setRequiredObject(req);
 							}
 							else if (req instanceof OreDictionaryRequirement)
 							{
@@ -337,7 +337,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 					if (req instanceof ItemStack)
 					{
-						material.setRequiredObject((ItemStack) req);
+						material.setRequiredObject(req);
 					}
 					else if (req instanceof OreDictionaryRequirement)
 					{
@@ -459,14 +459,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.disableLighting();
 
-		if (this.currentRecipe != null)
-		{
-			this.xButton.visible = true;
-		}
-		else
-		{
-			this.xButton.visible = false;
-		}
+		this.xButton.visible = this.currentRecipe != null;
 
 		if (this.recipes.size() <= 0)
 		{

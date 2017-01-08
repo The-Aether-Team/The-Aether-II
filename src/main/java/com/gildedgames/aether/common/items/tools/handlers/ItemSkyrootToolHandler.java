@@ -33,7 +33,7 @@ public class ItemSkyrootToolHandler implements IToolEventHandler
 				return;
 			}
 
-			if (state.getBlock().canHarvestBlock(world, pos, (EntityPlayer) entity))
+			if (state.getBlock().canHarvestBlock(world, pos, entity))
 			{
 				int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
 

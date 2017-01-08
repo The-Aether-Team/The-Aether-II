@@ -83,12 +83,6 @@ public class BlockAetherPlant extends Block
 		return false;
 	}
 
-	@Override
-	public boolean isPassable(IBlockAccess world, BlockPos pos)
-	{
-		return super.isPassable(world, pos);
-	}
-
 	public boolean isSuitableSoilBlock(IBlockState state)
 	{
 		return state.getBlock() == BlocksAether.aether_grass || state.getBlock() == BlocksAether.aether_dirt;

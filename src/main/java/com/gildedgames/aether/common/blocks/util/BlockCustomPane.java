@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Collections;
 import java.util.List;
 
 public class BlockCustomPane extends BlockPane
@@ -52,10 +53,7 @@ public class BlockCustomPane extends BlockPane
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
 	{
-		for (String s : this.addInformation)
-		{
-			tooltip.add(s);
-		}
+		Collections.addAll(tooltip, this.addInformation);
 	}
 
 }

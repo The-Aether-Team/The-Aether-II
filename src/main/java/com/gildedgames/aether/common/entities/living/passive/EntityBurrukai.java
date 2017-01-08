@@ -76,12 +76,6 @@ public class EntityBurrukai extends EntityAetherAnimal
 	}
 
 	@Override
-	public void onUpdate()
-	{
-		super.onUpdate();
-	}
-
-	@Override
 	protected SoundEvent getAmbientSound()
 	{
 		return SoundsAether.burrukai_ambient;

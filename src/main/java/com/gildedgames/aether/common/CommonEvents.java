@@ -1,6 +1,9 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.client.gui.menu.WorldAetherOptionsOverlay;
+import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
+import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
+import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.capabilities.player.PlayerAether;
@@ -13,6 +16,7 @@ import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import com.gildedgames.aether.common.world.dimensions.aether.TeleporterAether;
 import com.gildedgames.aether.common.world.util.TeleporterGeneric;
 import com.google.common.collect.Lists;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntityCow;
@@ -49,9 +53,8 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 public class CommonEvents
@@ -170,32 +173,6 @@ public class CommonEvents
 	public static void onLivingEntityUpdate(LivingEvent.LivingUpdateEvent event)
 	{
 		final Entity entity = event.getEntity();
-
-		if (entity instanceof EntityPlayer)
-		{
-			EntityPlayer player = (EntityPlayer) entity;
-
-			if (WorldAetherOptionsOverlay.toggle)
-			{
-				File areaFile = new File(AetherCore.getWorldDirectory(), "//data/world_options_created.dat");
-
-				if (!areaFile.exists())
-				{
-					player.inventory.addItemStackToInventory(new ItemStack(ItemsAether.aether_portal_frame));
-
-					try
-					{
-						areaFile.createNewFile();
-					}
-					catch (IOException e)
-					{
-						e.printStackTrace();
-					}
-				}
-
-				WorldAetherOptionsOverlay.toggle = false;
-			}
-		}
 
 		// Checks whether or not an entity is in the Aether's void
 		if (entity.worldObj.provider.getDimensionType() == DimensionsAether.AETHER && entity.posY < -10)
@@ -363,10 +340,58 @@ public class CommonEvents
 	@SubscribeEvent
 	public static void onPlayerRightClickItem(PlayerInteractEvent.RightClickItem event)
 	{
-		if (AetherCore.PROXY.tryEquipEquipment(event.getEntityPlayer(), event.getItemStack(), event.getHand()))
+		IPlayerAether aePlayer = PlayerAether.getPlayer(event.getEntityPlayer());
+
+		if (event.getItemStack() == null || aePlayer == null)
 		{
+			return;
+		}
+
+		boolean result = CommonEvents.tryEquipEquipment(aePlayer, event.getItemStack(), event.getHand());
+
+		if (result)
+		{
+			// Unfortunately we have to play the equip animation manually...
+			if (event.getEntityPlayer().worldObj.isRemote)
+			{
+				Minecraft.getMinecraft().getItemRenderer().resetEquippedProgress(EnumHand.MAIN_HAND);
+			}
+
+			event.getEntityPlayer().worldObj.playSound(event.getEntityPlayer(), event.getEntityPlayer().getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.NEUTRAL, 1.0f, 1.0f);
 			event.setCanceled(true);
 		}
+	}
+
+	private static boolean tryEquipEquipment(IPlayerAether player, ItemStack stack, EnumHand hand)
+	{
+		IInventoryEquipment inventory = player.getEquipmentInventory();
+
+		Optional<IEquipmentProperties> equipment = AetherAPI.items().getEquipmentProperties(stack.getItem());
+
+		if (equipment.isPresent())
+		{
+			int slot = inventory.getNextEmptySlotForType(equipment.get().getSlot());
+
+			if (slot >= 0)
+			{
+				ItemStack newStack = stack.copy();
+				newStack.stackSize = 1;
+
+				inventory.setInventorySlotContents(slot, newStack);
+
+				if (!player.getEntity().capabilities.isCreativeMode)
+				{
+					// Technically, there should never be STACKABLE equipment, but in case there is, we need to handle it.
+					stack.stackSize--;
+				}
+
+				player.getEntity().setHeldItem(hand, stack.stackSize <= 0 ? null : stack);
+
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	@SubscribeEvent

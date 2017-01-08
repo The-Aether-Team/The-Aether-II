@@ -4,7 +4,6 @@ import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AIRepairProdu
 import com.gildedgames.aether.common.entities.util.flying.EntityFlyingMob;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class EntityRepairSentry extends EntityFlyingMob
@@ -40,24 +39,6 @@ public class EntityRepairSentry extends EntityFlyingMob
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20);
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(60);
 		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0.0D);
-	}
-
-	@Override
-	public void onUpdate()
-	{
-		super.onUpdate();
-	}
-
-	@Override
-	public void writeEntityToNBT(NBTTagCompound tag)
-	{
-		super.writeEntityToNBT(tag);
-	}
-
-	@Override
-	public void readEntityFromNBT(NBTTagCompound tag)
-	{
-		super.readEntityFromNBT(tag);
 	}
 
 	@Override

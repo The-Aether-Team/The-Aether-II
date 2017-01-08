@@ -3,19 +3,13 @@ package com.gildedgames.aether.client.gui.tab;
 import com.gildedgames.aether.api.registry.tab.ITab;
 import com.gildedgames.aether.api.registry.tab.ITabClient;
 import com.gildedgames.aether.api.registry.tab.ITabGroup;
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.containers.tab.util.TabGroupHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Mouse;
@@ -73,26 +67,8 @@ public class RenderTabGroup extends Gui
 		Minecraft mc = Minecraft.getMinecraft();
 		ScaledResolution scaledresolution = new ScaledResolution(mc);
 
-		int xPosition = 0;
+		int xPosition = (scaledresolution.getScaledWidth() - 28 * tabGroup.getEnabledTabs().size()) / 2;
 		int yPosition = 0;
-
-		if (!AetherCore.CONFIG.getDisplayTabsOnLeft())
-		{
-			xPosition = (scaledresolution.getScaledWidth() - 28 * tabGroup.getEnabledTabs().size()) / 2;
-
-			GuiScreen gui = Minecraft.getMinecraft().currentScreen;
-
-			if (gui instanceof GuiContainerCreative)
-			{
-				int guiLeft = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, (GuiContainer) gui, ReflectionAether.GUI_LEFT.getMappings());
-				int xSize = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, (GuiContainer) gui, ReflectionAether.X_SIZE.getMappings());
-
-				if (guiLeft == 160 + (gui.width - xSize - 200) / 2)
-				{
-					xPosition += (200 - (28 * tabGroup.getEnabledTabs().size())) / 2;
-				}
-			}
-		}
 
 		mc.getTextureManager().bindTexture(TEXTURE_TAB_ITEMS);
 
@@ -163,13 +139,7 @@ public class RenderTabGroup extends Gui
 
 		if (y >= 0 && y <= 19)
 		{
-			int xPosition = 0;
-
-			if (!AetherCore.CONFIG.getDisplayTabsOnLeft())
-			{
-				xPosition = (scaledresolution.getScaledWidth() - 28 * tabGroup.getEnabledTabs().size()) / 2;
-			}
-
+			int xPosition = (scaledresolution.getScaledWidth() - 28 * tabGroup.getEnabledTabs().size()) / 2;
 			x -= xPosition;
 
 			if (x > 0 && x < 28 * tabGroup.getEnabledTabs().size())

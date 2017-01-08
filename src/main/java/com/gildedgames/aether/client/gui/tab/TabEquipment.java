@@ -3,9 +3,6 @@ package com.gildedgames.aether.client.gui.tab;
 import com.gildedgames.aether.api.registry.tab.ITab;
 import com.gildedgames.aether.api.registry.tab.ITabClient;
 import com.gildedgames.aether.client.gui.container.GuiEquipment;
-import com.gildedgames.aether.client.gui.menu.BugReportMenu;
-import com.gildedgames.aether.client.ui.common.GuiDecorator;
-import com.gildedgames.aether.client.ui.minecraft.viewing.MinecraftGuiWrapper;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import net.minecraft.client.gui.GuiScreen;
@@ -52,31 +49,7 @@ public class TabEquipment implements ITab
 		@Override
 		public boolean isTabValid(GuiScreen gui)
 		{
-			return this.isMainGui(gui) || gui instanceof GuiInventory || gui instanceof GuiEquipment;
-		}
-
-		@Override
-		public boolean isMainGui(GuiScreen gui)
-		{
-			boolean flag = false;
-
-			if (gui instanceof MinecraftGuiWrapper)
-			{
-				MinecraftGuiWrapper wrapper = (MinecraftGuiWrapper) gui;
-
-				if (wrapper.getFrame() instanceof GuiDecorator)
-				{
-					GuiDecorator decorator = (GuiDecorator) wrapper.getFrame();
-
-					flag = decorator.getDecoratedElement() instanceof BugReportMenu;
-				}
-				else
-				{
-					flag = wrapper.getFrame() instanceof BugReportMenu;
-				}
-			}
-
-			return flag;
+			return gui instanceof GuiInventory || gui instanceof GuiEquipment;
 		}
 
 		@Override

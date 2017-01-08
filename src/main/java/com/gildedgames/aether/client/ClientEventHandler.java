@@ -7,9 +7,7 @@ import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
 import com.gildedgames.aether.api.items.equipment.effects.IEffect;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
-import com.gildedgames.aether.client.gui.menu.InDevelopmentWarning;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
-import com.gildedgames.aether.client.ui.UiManager;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.containers.slots.SlotAmbrosium;
@@ -23,7 +21,6 @@ import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -40,7 +37,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 
-import java.io.File;
 import java.util.Collections;
 
 public class ClientEventHandler
@@ -53,17 +49,7 @@ public class ClientEventHandler
 	@SubscribeEvent
 	public void onOpenGui(GuiOpenEvent event)
 	{
-		if (event.getGui() instanceof GuiMainMenu)
-		{
-			File areaFile = new File(Minecraft.getMinecraft().mcDataDir, "//config/in_development_displayed.dat");
 
-			if (!areaFile.exists())
-			{
-				UiManager.inst().open("indevWarning", new InDevelopmentWarning());
-
-				event.setCanceled(true);
-			}
-		}
 	}
 
 	@SubscribeEvent(priority = EventPriority.NORMAL)

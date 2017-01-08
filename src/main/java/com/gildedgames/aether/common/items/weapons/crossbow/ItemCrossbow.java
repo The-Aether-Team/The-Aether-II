@@ -85,12 +85,7 @@ public class ItemCrossbow extends Item
 	{
 		ItemStack boltStack = player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
 
-		if (boltStack != null && boltStack.getItem() == ItemsAether.bolt && boltStack.stackSize > 0)
-		{
-			return true;
-		}
-
-		return false;
+		return boltStack != null && boltStack.getItem() == ItemsAether.bolt && boltStack.stackSize > 0;
 	}
 
 	private static void checkTag(ItemStack stack)

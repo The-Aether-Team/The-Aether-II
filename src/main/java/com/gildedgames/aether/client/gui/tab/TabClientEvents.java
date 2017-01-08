@@ -65,7 +65,7 @@ public class TabClientEvents
 
 					AetherAPI.tabs().setActiveGroup(tabGroupHandler);
 
-					if (gui == null || !tabGroup.getSelectedTab().isMainGui(gui))
+					if (gui == null)
 					{
 						tabGroup.getSelectedTab().onOpen(Minecraft.getMinecraft().thePlayer);
 						NetworkingAether.sendPacketToServer(new PacketOpenTab(tabGroup.getSelectedTab()));
@@ -75,24 +75,6 @@ public class TabClientEvents
 
 					return;
 				}
-			}
-		}
-	}
-
-	@SubscribeEvent
-	public static void onGuiDrawScreen(GuiScreenEvent.DrawScreenEvent event)
-	{
-		/** Hack to prevent page text from rendering in creative inventory **/
-		if (event.getGui() instanceof GuiContainerCreative)
-		{
-			GuiContainerCreative gui = (GuiContainerCreative) event.getGui();
-
-			FontRenderer original = ObfuscationReflectionHelper.getPrivateValue(GuiScreen.class, gui, ReflectionAether.FONT_RENDERER_OBJ.getMappings());
-
-			if (!(original instanceof PageNumberHack))
-			{
-				PageNumberHack hack = new PageNumberHack(original);
-				ObfuscationReflectionHelper.setPrivateValue(GuiScreen.class, gui, hack, ReflectionAether.FONT_RENDERER_OBJ.getMappings());
 			}
 		}
 	}
@@ -171,34 +153,4 @@ public class TabClientEvents
 			}
 		}
 	}
-
-	private static class PageNumberHack extends FontRendererWrapper
-	{
-
-		public PageNumberHack(FontRenderer parent)
-		{
-			super(parent);
-		}
-
-		@Override
-		public int drawString(String text, int x, int y, int color)
-		{
-			GuiScreen gui = Minecraft.getMinecraft().currentScreen;
-
-			if (gui instanceof GuiContainer)
-			{
-				int guiLeft = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, (GuiContainer) gui, ReflectionAether.GUI_LEFT.getMappings());
-				int xArea = guiLeft + 75;
-
-				if (y < 25 && x > xArea && x < xArea + 10)
-				{
-					return 0;
-				}
-			}
-
-			return this.parent.drawString(text, (float) x, (float) y, color, false);
-		}
-
-	}
-
 }

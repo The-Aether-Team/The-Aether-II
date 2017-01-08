@@ -1,15 +1,6 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.IAetherServiceLocator;
-import com.gildedgames.aether.api.capabilites.instances.IInstanceRegistry;
-import com.gildedgames.aether.api.registry.IEquipmentRegistry;
-import com.gildedgames.aether.api.registry.IItemPropertiesRegistry;
-import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
-import com.gildedgames.aether.api.registry.simple_crafting.ISimpleCraftingRegistry;
-import com.gildedgames.aether.api.registry.tab.ITabRegistry;
-import com.gildedgames.aether.client.ui.data.AssetLocation;
-import com.gildedgames.aether.client.ui.minecraft.util.MinecraftAssetLocation;
 import com.gildedgames.aether.common.blocks.QuicksoilProcessor;
 import com.gildedgames.aether.common.capabilities.instances.InstanceEvents;
 import com.gildedgames.aether.common.registry.SimpleRecipesAether;
@@ -35,14 +26,14 @@ import java.io.File;
 
 @Mod(name = AetherCore.MOD_NAME, modid = AetherCore.MOD_ID, version = AetherCore.MOD_VERSION,
 		certificateFingerprint = AetherCore.MOD_FINGERPRINT, guiFactory = AetherCore.MOD_GUI_FACTORY)
-public class AetherCore implements IAetherServiceLocator
+public class AetherCore
 {
 
 	protected static final String MOD_GUI_FACTORY = "com.gildedgames.aether.client.gui.GuiFactoryAether";
 
 	protected static final String MOD_FINGERPRINT = "b9a9be44fb51751dd1aec1dbb881b6de1a086abc";
 
-	public static final String MOD_NAME = "Aether II";
+	public  static final String MOD_NAME = "Aether II";
 
 	public static final String MOD_ID = "aether";
 
@@ -72,7 +63,7 @@ public class AetherCore implements IAetherServiceLocator
 	@EventHandler
 	public void onFMLConstruction(FMLConstructionEvent event)
 	{
-		AetherAPI.registerProvider(this);
+		AetherAPI.registerProvider(AetherCore.PROXY);
 	}
 
 	@EventHandler
@@ -153,16 +144,6 @@ public class AetherCore implements IAetherServiceLocator
 		return new ResourceLocation(AetherCore.MOD_ID, name);
 	}
 
-	public static AssetLocation asset(String name)
-	{
-		return new MinecraftAssetLocation(AetherCore.MOD_ID, name);
-	}
-
-	public static AssetLocation assetGui(String name)
-	{
-		return new MinecraftAssetLocation(AetherCore.MOD_ID, "textures/gui/" + name);
-	}
-
 	public static String getResourcePath(String name)
 	{
 		return (AetherCore.MOD_ID + ":") + name;
@@ -187,47 +168,4 @@ public class AetherCore implements IAetherServiceLocator
 	{
 		return Launch.blackboard.get("fml.deobfuscatedEnvironment") == Boolean.TRUE;
 	}
-
-	@Override
-	public IAltarRecipeRegistry getAltarRecipeRegistry()
-	{
-		return AetherCore.PROXY.getRecipeManager();
-	}
-
-	@Override
-	public ITabRegistry getTabRegistry()
-	{
-		return AetherCore.PROXY.getTabRegistry();
-	}
-
-	@Override
-	public IInstanceRegistry getInstanceRegistry()
-	{
-		return AetherCore.PROXY.getInstanceRegistry();
-	}
-
-	@Override
-	public ISimpleCraftingRegistry getSimpleCraftingRegistry()
-	{
-		return AetherCore.PROXY.getSimpleCraftingRegistry();
-	}
-
-	@Override
-	public ISimpleCraftingRegistry getMasonryRegistry()
-	{
-		return AetherCore.PROXY.getMasonryRegistry();
-	}
-
-	@Override
-	public IItemPropertiesRegistry getItemPropertiesRegistry()
-	{
-		return AetherCore.PROXY.getItemPropertiesRegistry();
-	}
-
-	@Override
-	public IEquipmentRegistry getEquipmentRegistry()
-	{
-		return AetherCore.PROXY.getEquipmentRegistry();
-	}
-
 }

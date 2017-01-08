@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+@Deprecated
+// Will be removed/changed.
 public class Instantiator implements Callable<Object>
 {
 
@@ -40,7 +42,7 @@ public class Instantiator implements Callable<Object>
 				return instance;
 			}
 
-			final Constructor<?> constr = (Constructor<?>) this.clazz.getDeclaredConstructors()[0];
+			final Constructor<?> constr = this.clazz.getDeclaredConstructors()[0];
 			final List<Object> params = new ArrayList<>();
 
 			constr.setAccessible(false);

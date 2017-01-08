@@ -9,7 +9,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
-import com.gildedgames.aether.common.items.equipment.EffectPool;
+import com.gildedgames.aether.common.entities.effects.EffectPool;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

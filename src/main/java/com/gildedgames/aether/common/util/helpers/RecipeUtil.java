@@ -170,7 +170,6 @@ public class RecipeUtil
 
 		int totalCount = Integer.MAX_VALUE;
 
-		outside:
 		for (int reqIndex = 0; reqIndex < recipe.getRequired().length; reqIndex++)
 		{
 			Object req = recipe.getRequired()[reqIndex];

@@ -189,12 +189,6 @@ public class EntitySentryGuardian extends EntityFlyingMob implements IRangedAtta
 	}
 
 	@Override
-	public boolean attackEntityAsMob(Entity entity)
-	{
-		return super.attackEntityAsMob(entity);
-	}
-
-	@Override
 	public void writeEntityToNBT(NBTTagCompound tag)
 	{
 		super.writeEntityToNBT(tag);

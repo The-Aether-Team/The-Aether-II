@@ -1,12 +1,11 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
+import com.gildedgames.aether.api.IAetherServiceLocator;
 import com.gildedgames.aether.api.capabilites.instances.IInstanceRegistry;
-import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
-import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.api.registry.IEquipmentRegistry;
 import com.gildedgames.aether.api.registry.IItemPropertiesRegistry;
+import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.api.registry.tab.ITabRegistry;
 import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
@@ -14,7 +13,6 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.CapabilityManagerAether;
 import com.gildedgames.aether.common.capabilities.instances.InstanceRegistryImpl;
 import com.gildedgames.aether.common.capabilities.item.EquipmentRegistry;
-import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherEvents;
 import com.gildedgames.aether.common.containers.tab.TabRegistryImpl;
 import com.gildedgames.aether.common.entities.BossProcessor;
@@ -45,8 +43,6 @@ import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceFacto
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -54,10 +50,9 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.event.*;
 
 import java.io.File;
-import java.util.Optional;
 import java.util.Random;
 
-public class CommonProxy
+public class CommonProxy implements IAetherServiceLocator
 {
 	private File storageDir;
 
@@ -166,52 +161,6 @@ public class CommonProxy
 		}
 	}
 
-	public boolean tryEquipEquipment(EntityPlayer player, ItemStack stack, EnumHand hand)
-	{
-		if (stack == null)
-		{
-			return false;
-		}
-
-		IPlayerAether aePlayer = PlayerAether.getPlayer(player);
-
-		if (aePlayer == null)
-		{
-			return false;
-		}
-
-		IInventoryEquipment inventory = aePlayer.getEquipmentInventory();
-
-		Optional<IEquipmentProperties> equipment = AetherAPI.items().getEquipmentProperties(stack.getItem());
-
-		if (equipment.isPresent())
-		{
-			int slot = inventory.getNextEmptySlotForType(equipment.get().getSlot());
-
-			if (slot < 0)
-			{
-				return false;
-			}
-
-			ItemStack copy = stack.copy();
-			copy.stackSize = 1;
-
-			inventory.setInventorySlotContents(slot, copy);
-
-			if (!player.capabilities.isCreativeMode)
-			{
-				// Technically, there should never be STACKABLE equipment, but in case there is, we need to handle it.
-				stack.stackSize--;
-			}
-
-			player.setHeldItem(hand, stack.stackSize <= 0 ? null : stack);
-
-			return true;
-		}
-
-		return false;
-	}
-
 	public File getAetherStorageDir()
 	{
 		return this.storageDir;
@@ -270,5 +219,10 @@ public class CommonProxy
 	public IEquipmentRegistry getEquipmentRegistry()
 	{
 		return this.equipmentRegistry;
+	}
+
+	public IAltarRecipeRegistry getAltarRecipeRegistry()
+	{
+		return this.recipeManager.getAltarRegistry();
 	}
 }

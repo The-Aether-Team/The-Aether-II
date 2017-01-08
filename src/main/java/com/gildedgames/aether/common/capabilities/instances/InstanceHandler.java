@@ -144,11 +144,11 @@ public class InstanceHandler<T extends Instance> implements IInstanceHandler<T>
 				{
 					File[] content = oldDimFolder.listFiles();
 
-					for (int i = 0; i < content.length; i++)
+					for (File aContent : content)
 					{
 						try
 						{
-							FileUtils.moveFileToDirectory(content[i], newDimFolder, true);
+							FileUtils.moveFileToDirectory(aContent, newDimFolder, true);
 						}
 						catch (IOException e)
 						{

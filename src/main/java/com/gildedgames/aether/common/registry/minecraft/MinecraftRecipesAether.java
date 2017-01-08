@@ -1,7 +1,5 @@
 package com.gildedgames.aether.common.registry.minecraft;
 
-import com.gildedgames.aether.api.registry.altar.IAltarRecipe;
-import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockQuicksoilGlass;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
@@ -28,7 +26,7 @@ import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-public class MinecraftRecipesAether implements IAltarRecipeRegistry
+public class MinecraftRecipesAether
 {
 	private final AltarRegistry altarRegistry = new AltarRegistry();
 
@@ -685,26 +683,26 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 	private void registerAltarRecipes()
 	{
 		// Enchanted Dart Shooter
-		this.registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.GOLDEN.ordinal()),
+		this.getAltarRegistry().registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.GOLDEN.ordinal()),
 				new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.ENCHANTED.ordinal())));
 
 		// Enchanted Darts
-		this.registerAltarRecipe(new AltarEnchantRecipe(1, new ItemStack(ItemsAether.dart, 1, ItemDartType.GOLDEN.ordinal()),
+		this.getAltarRegistry().registerAltarRecipe(new AltarEnchantRecipe(1, new ItemStack(ItemsAether.dart, 1, ItemDartType.GOLDEN.ordinal()),
 				new ItemStack(ItemsAether.dart, 1, ItemDartType.ENCHANTED.ordinal())));
 
 		// Enchanted Strawberry
-		this.registerAltarRecipe(new AltarEnchantRecipe(2, new ItemStack(ItemsAether.blueberries),
+		this.getAltarRegistry().registerAltarRecipe(new AltarEnchantRecipe(2, new ItemStack(ItemsAether.blueberries),
 				new ItemStack(ItemsAether.enchanted_blueberry)));
 
 		// Rainbow Strawberry
-		this.registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(ItemsAether.wyndberry),
+		this.getAltarRegistry().registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(ItemsAether.wyndberry),
 				new ItemStack(ItemsAether.enchanted_wyndberry)));
 
 		// Tool Repair Recipes
-		this.registerAltarRecipe(new AltarRepairRecipe());
+		this.getAltarRegistry().registerAltarRecipe(new AltarRepairRecipe());
 
 		// Healing Stone
-		this.registerAltarRecipe(new AltarEnchantRecipe(5, new ItemStack(ItemsAether.healing_stone_depleted),
+		this.getAltarRegistry().registerAltarRecipe(new AltarEnchantRecipe(5, new ItemStack(ItemsAether.healing_stone_depleted),
 				new ItemStack(ItemsAether.healing_stone)));
 	}
 
@@ -721,18 +719,6 @@ public class MinecraftRecipesAether implements IAltarRecipeRegistry
 	private static void registerSmeltingRecipe(ItemStack input, ItemStack output, float xp)
 	{
 		GameRegistry.addSmelting(input, output, xp);
-	}
-
-	@Override
-	public void registerAltarEnchantment(ItemStack input, ItemStack output, int cost)
-	{
-		this.altarRegistry.addRecipe(new AltarEnchantRecipe(cost, input, output));
-	}
-
-	@Override
-	public void registerAltarRecipe(IAltarRecipe recipe)
-	{
-		this.altarRegistry.addRecipe(recipe);
 	}
 
 	public AltarRegistry getAltarRegistry()

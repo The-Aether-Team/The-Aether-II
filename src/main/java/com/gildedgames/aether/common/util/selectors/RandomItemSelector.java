@@ -2,21 +2,21 @@ package com.gildedgames.aether.common.util.selectors;
 
 import com.gildedgames.aether.api.loot.Loot;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.util.Constraint;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.function.Predicate;
 
 public class RandomItemSelector implements Loot
 {
 
 	private ArrayList<Item> validStackCache;
 
-	private Constraint constraint;
+	private Predicate<Item> constraint;
 
-	public RandomItemSelector(Constraint constraint)
+	public RandomItemSelector(Predicate<Item> constraint)
 	{
 		this.constraint = constraint;
 	}
@@ -35,7 +35,7 @@ public class RandomItemSelector implements Loot
 					continue;
 				}
 
-				if (this.constraint.accept(item))
+				if (this.constraint.test(item))
 				{
 					this.validStackCache.add(item);
 				}

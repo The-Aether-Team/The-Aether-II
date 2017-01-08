@@ -18,7 +18,7 @@ public class TabGroup<T extends ITab> implements ITabGroup<T>
 	@Override
 	public boolean getRememberSelectedTab()
 	{
-		return this.rememberSelectedTab;
+		return false;
 	}
 
 	@Override

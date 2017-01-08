@@ -41,12 +41,6 @@ public class EntityProductionLine extends EntityCreature
 	}
 
 	@Override
-	protected void entityInit()
-	{
-		super.entityInit();
-	}
-
-	@Override
 	public void playLivingSound()
 	{
 

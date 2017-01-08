@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.items.equipment;
+package com.gildedgames.aether.common.entities.effects;
 
 import com.gildedgames.aether.api.items.equipment.effects.IEffect;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectInstance;

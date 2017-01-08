@@ -1,9 +1,6 @@
 package com.gildedgames.aether.client;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.client.gui.menu.BossBattleOverlay;
-import com.gildedgames.aether.client.gui.menu.PortalOverlay;
-import com.gildedgames.aether.client.gui.menu.WorldAetherOptionsOverlay;
 import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabClientEvents;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
@@ -13,8 +10,6 @@ import com.gildedgames.aether.client.renderer.AetherRenderers;
 import com.gildedgames.aether.client.renderer.ClientRenderHandler;
 import com.gildedgames.aether.client.renderer.items.*;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
-import com.gildedgames.aether.client.ui.UiManager;
-import com.gildedgames.aether.client.ui.minecraft.viewing.MinecraftGuiViewer;
 import com.gildedgames.aether.common.CommonProxy;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
@@ -23,11 +18,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -48,11 +38,9 @@ public class ClientProxy extends CommonProxy
 
 		CreativeTabsAether.registerTabIcons();
 
-		UiManager.inst().registerOverlay("worldAetherOptionsOverlay", WorldAetherOptionsOverlay::new, MinecraftGuiViewer.instance());
-
-		UiManager.inst().registerOverlay("aetherPortalOverlay", PortalOverlay::new, MinecraftGuiViewer.instance(), RenderGameOverlayEvent.ElementType.PORTAL);
-
-		UiManager.inst().registerOverlay("bossBattleOverlay", BossBattleOverlay::new, MinecraftGuiViewer.instance(), RenderGameOverlayEvent.ElementType.HOTBAR);
+//		UiManager.inst().registerOverlay("worldAetherOptionsOverlay", WorldAetherOptionsOverlay::new, MinecraftGuiViewer.instance());
+//		UiManager.inst().registerOverlay("aetherPortalOverlay", PortalOverlay::new, MinecraftGuiViewer.instance(), RenderGameOverlayEvent.ElementType.PORTAL);
+//		UiManager.inst().registerOverlay("bossBattleOverlay", BossBattleOverlay::new, MinecraftGuiViewer.instance(), RenderGameOverlayEvent.ElementType.HOTBAR);
 	}
 
 	@Override
@@ -68,7 +56,6 @@ public class ClientProxy extends CommonProxy
 		MinecraftForge.EVENT_BUS.register(new ClientRenderHandler());
 		MinecraftForge.EVENT_BUS.register(StructureInjectionEvents.class);
 
-		MinecraftForge.EVENT_BUS.register(MinecraftGuiViewer.instance().getTickInfo());
 		MinecraftForge.EVENT_BUS.register(TabClientEvents.class);
 
 		AetherAPI.tabs().getInventoryGroup().registerClientTab(new TabEquipment.Client());
@@ -79,25 +66,6 @@ public class ClientProxy extends CommonProxy
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new WrappingPaperColorHandler(), ItemsAether.wrapping_paper);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new AetherSpawnEggColorHandler(), ItemsAether.aether_spawn_egg);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new MoaFeatherColorHandler(), ItemsAether.moa_feather);
-	}
-
-	@Override
-	public boolean tryEquipEquipment(EntityPlayer player, ItemStack stack, EnumHand hand)
-	{
-		boolean result = super.tryEquipEquipment(player, stack, hand);
-
-		if (result)
-		{
-			// Unfortunately we have to play the equip animation manually...
-			if (player.worldObj.isRemote)
-			{
-				Minecraft.getMinecraft().getItemRenderer().resetEquippedProgress(EnumHand.MAIN_HAND);
-			}
-
-			player.worldObj.playSound(player, player.getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.NEUTRAL, 1.0f, 1.0f);
-		}
-
-		return result;
 	}
 
 	@Override
