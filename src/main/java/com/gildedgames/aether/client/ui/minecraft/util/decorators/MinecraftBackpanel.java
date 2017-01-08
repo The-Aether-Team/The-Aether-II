@@ -34,7 +34,9 @@ public class MinecraftBackpanel extends GuiDecorator<Gui>
 	{
 		final TextureElement backPanel = GuiFactory.panel(Dim2D.build().flush());
 
-		backPanel.dim().mod().area(this.leftPadding + this.rightPadding, this.topPadding + this.bottomPadding).pos(-this.leftPadding, -this.topPadding).flush();
+		backPanel.dim().mod().area(
+				this.leftPadding + this.rightPadding,
+				this.topPadding + this.bottomPadding).pos(-this.leftPadding, -this.topPadding).flush();
 
 		backPanel.dim().add(this, RectModifier.ModifierType.AREA);
 

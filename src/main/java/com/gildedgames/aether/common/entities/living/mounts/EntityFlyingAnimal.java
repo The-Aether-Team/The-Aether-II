@@ -53,7 +53,8 @@ public abstract class EntityFlyingAnimal extends EntityAetherAnimal implements I
 	{
 		this.fallDistance = 0;
 
-		boolean riderSneaking = !this.getPassengers().isEmpty() && this.getPassengers().get(0) != null && this.getPassengers().get(0).isSneaking();
+		boolean riderSneaking =
+				!this.getPassengers().isEmpty() && this.getPassengers().get(0) != null && this.getPassengers().get(0).isSneaking();
 
 		if (this.motionY < 0.0D && !riderSneaking)
 		{

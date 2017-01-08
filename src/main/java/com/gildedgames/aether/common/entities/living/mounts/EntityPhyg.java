@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.entities.living.mounts;
 
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
@@ -12,7 +11,6 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

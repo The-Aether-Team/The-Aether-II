@@ -77,7 +77,8 @@ public class BlockPresent extends BlockContainer
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
+			@Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (!world.isRemote)
 		{
@@ -102,7 +103,8 @@ public class BlockPresent extends BlockContainer
 				world.spawnParticle(EnumParticleTypes.CLOUD, x2, y2, z2, 0.0D, 0.0D, 0.0D);
 			}
 
-			world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundsAether.present_unwrap, SoundCategory.NEUTRAL, 0.5f, 0.8f + (world.rand.nextFloat() * 0.5f), false);
+			world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundsAether.present_unwrap, SoundCategory.NEUTRAL, 0.5f,
+					0.8f + (world.rand.nextFloat() * 0.5f), false);
 
 			return true;
 		}
@@ -130,7 +132,9 @@ public class BlockPresent extends BlockContainer
 	}
 
 	@Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) { }
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	{
+	}
 
 	private void destroyPresent(World world, BlockPos pos)
 	{
@@ -159,7 +163,8 @@ public class BlockPresent extends BlockContainer
 	}
 
 	@Override
-	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, @Nullable ItemStack stack)
+	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te,
+			@Nullable ItemStack stack)
 	{
 		player.addStat(StatList.getBlockStats(this));
 		player.addExhaustion(0.025F);

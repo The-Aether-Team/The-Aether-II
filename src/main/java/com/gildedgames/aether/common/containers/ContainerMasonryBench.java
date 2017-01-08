@@ -6,7 +6,10 @@ import com.gildedgames.aether.common.containers.slots.SlotSimpleCrafting;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.*;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryCraftResult;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -78,7 +81,8 @@ public class ContainerMasonryBench extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer player)
 	{
-		return this.world.getBlockState(this.pos).getBlock() == BlocksAether.masonry_bench && player.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
+		return this.world.getBlockState(this.pos).getBlock() == BlocksAether.masonry_bench
+				&& player.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -128,7 +132,7 @@ public class ContainerMasonryBench extends Container
 
 			if (itemstack1.stackSize == 0)
 			{
-				slot.putStack((ItemStack)null);
+				slot.putStack((ItemStack) null);
 			}
 			else
 			{

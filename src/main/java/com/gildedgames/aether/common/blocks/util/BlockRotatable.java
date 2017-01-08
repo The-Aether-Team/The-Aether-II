@@ -44,7 +44,8 @@ public class BlockRotatable extends Block
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+			EntityLivingBase placer)
 	{
 		return super.onBlockPlaced(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(PROPERTY_AXIS, facing.getAxis());
 	}
@@ -56,15 +57,15 @@ public class BlockRotatable extends Block
 
 		switch (meta & 7)
 		{
-		case 1:
-			axis = EnumFacing.Axis.X;
-			break;
-		case 2:
-			axis = EnumFacing.Axis.Z;
-			break;
-		default:
-			axis = EnumFacing.Axis.Y;
-			break;
+			case 1:
+				axis = EnumFacing.Axis.X;
+				break;
+			case 2:
+				axis = EnumFacing.Axis.Z;
+				break;
+			default:
+				axis = EnumFacing.Axis.Y;
+				break;
 		}
 
 		return this.getDefaultState().withProperty(PROPERTY_AXIS, axis);
@@ -77,15 +78,15 @@ public class BlockRotatable extends Block
 
 		switch (state.getValue(PROPERTY_AXIS))
 		{
-		case X:
-			meta |= 1;
-			break;
-		case Z:
-			meta |= 2;
-			break;
-		default:
-			meta |= 0;
-			break;
+			case X:
+				meta |= 1;
+				break;
+			case Z:
+				meta |= 2;
+				break;
+			default:
+				meta |= 0;
+				break;
 		}
 
 		return meta;

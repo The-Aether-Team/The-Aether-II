@@ -56,7 +56,8 @@ public class WorldGenFloorPlacer extends WorldGenerator
 
 		while (i < 128)
 		{
-			BlockPos randomPos = pos.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
+			BlockPos randomPos = pos.add(
+					rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
 
 			i++;
 
@@ -67,7 +68,8 @@ public class WorldGenFloorPlacer extends WorldGenerator
 
 			IBlockState chosen = this.states[rand.nextInt(this.states.length)];
 
-			if (world.isAirBlock(randomPos) && chosen.getBlock().canPlaceBlockAt(world, randomPos) && (this.statesCanPlaceOn.isEmpty() || this.statesCanPlaceOn.contains(world.getBlockState(randomPos.down()))))
+			if (world.isAirBlock(randomPos) && chosen.getBlock().canPlaceBlockAt(world, randomPos) && (this.statesCanPlaceOn.isEmpty()
+					|| this.statesCanPlaceOn.contains(world.getBlockState(randomPos.down()))))
 			{
 				world.setBlockState(randomPos, chosen, 2);
 

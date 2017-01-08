@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.entities.genes.util.DataGene;
 import com.gildedgames.aether.common.entities.genes.util.SimpleInheritance;
 import com.google.common.collect.Lists;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -30,8 +30,11 @@ public class MoaGenePoolDataSet<T extends Gene>
 	}
 
 	public static final MoaGenePoolDataSet<DataGene<Color>> KERATIN = new MoaGenePoolDataSet<>();
+
 	public static final MoaGenePoolDataSet<DataGene<Color>> EYES = new MoaGenePoolDataSet<>();
+
 	public static final MoaGenePoolDataSet<DataGene<Color>> FEATHERS = new MoaGenePoolDataSet<>();
+
 	public static final MoaGenePoolDataSet<MoaMarkGene> MARKS = new MoaGenePoolDataSet<>();
 
 	public static final MoaGenePoolDataSet<DataGene<Integer>> WING_STRENGTH = new MoaGenePoolDataSet<>();

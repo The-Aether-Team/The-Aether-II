@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.blocks.misc;
 
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.util.EntityGroup;
 import com.gildedgames.aether.common.entities.util.MoaNest;
-import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import com.gildedgames.aether.common.tiles.TileEntityMoaEgg;
@@ -53,7 +53,7 @@ public class BlockMoaEgg extends BlockContainer
 
 		if (te instanceof TileEntityMoaEgg)
 		{
-			TileEntityMoaEgg moaEgg = (TileEntityMoaEgg)te;
+			TileEntityMoaEgg moaEgg = (TileEntityMoaEgg) te;
 
 			moaEgg.familyNest = new MoaNest(world, pos.add(0, -1, 0));
 		}
@@ -70,7 +70,8 @@ public class BlockMoaEgg extends BlockContainer
 			{
 				EntityGroup pack = egg.familyNest.getAnimalPack();
 				pack.addOrRenewAggressor(player);
-				List moas = world.getEntitiesWithinAABB(EntityMoa.class, new AxisAlignedBB(pos.getX() - 12, pos.getY() - 8, pos.getZ() - 12, pos.getX() + 12, pos.getY() + 8, pos.getZ() + 12));
+				List moas = world.getEntitiesWithinAABB(EntityMoa.class, new AxisAlignedBB(
+						pos.getX() - 12, pos.getY() - 8, pos.getZ() - 12, pos.getX() + 12, pos.getY() + 8, pos.getZ() + 12));
 
 				for (Object moa : moas)
 				{

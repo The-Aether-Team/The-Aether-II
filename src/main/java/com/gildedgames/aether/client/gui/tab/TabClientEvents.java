@@ -1,22 +1,18 @@
 package com.gildedgames.aether.client.gui.tab;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.ReflectionAether;
-import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.PacketOpenTab;
 import com.gildedgames.aether.api.registry.tab.ITabClient;
 import com.gildedgames.aether.api.registry.tab.ITabGroup;
 import com.gildedgames.aether.api.registry.tab.ITabGroupHandler;
+import com.gildedgames.aether.common.ReflectionAether;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.PacketOpenTab;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -25,9 +21,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Mouse;
-
-import java.io.IOException;
-import java.util.List;
 
 public class TabClientEvents
 {
@@ -92,7 +85,7 @@ public class TabClientEvents
 		/** Hack to prevent page text from rendering in creative inventory **/
 		if (event.getGui() instanceof GuiContainerCreative)
 		{
-			GuiContainerCreative gui = (GuiContainerCreative)event.getGui();
+			GuiContainerCreative gui = (GuiContainerCreative) event.getGui();
 
 			FontRenderer original = ObfuscationReflectionHelper.getPrivateValue(GuiScreen.class, gui, ReflectionAether.FONT_RENDERER_OBJ.getMappings());
 
@@ -194,7 +187,7 @@ public class TabClientEvents
 
 			if (gui instanceof GuiContainer)
 			{
-				int guiLeft = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, (GuiContainer)gui, ReflectionAether.GUI_LEFT.getMappings());
+				int guiLeft = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, (GuiContainer) gui, ReflectionAether.GUI_LEFT.getMappings());
 				int xArea = guiLeft + 75;
 
 				if (y < 25 && x > xArea && x < xArea + 10)
@@ -203,7 +196,7 @@ public class TabClientEvents
 				}
 			}
 
-			return this.parent.drawString(text, (float)x, (float)y, color, false);
+			return this.parent.drawString(text, (float) x, (float) y, color, false);
 		}
 
 	}

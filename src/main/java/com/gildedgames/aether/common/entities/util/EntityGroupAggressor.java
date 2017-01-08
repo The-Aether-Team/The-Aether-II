@@ -4,7 +4,7 @@ import net.minecraft.entity.EntityLivingBase;
 
 public class EntityGroupAggressor
 {
-	
+
 	public EntityLivingBase agressor;
 
 	public int time;
@@ -17,5 +17,5 @@ public class EntityGroupAggressor
 		this.time = time;
 		this.pack = pack;
 	}
-	
+
 }

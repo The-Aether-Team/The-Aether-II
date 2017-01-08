@@ -41,7 +41,8 @@ public class GravititeAbilityModule extends PlayerAetherModule
 			{
 				ItemStack stack = this.getEntity().getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
 
-				if (stack != null && stack.getItem() instanceof ItemTool && ((ItemTool) stack.getItem()).getToolMaterial() == MaterialsAether.GRAVITITE_TOOL)
+				if (stack != null && stack.getItem() instanceof ItemTool
+						&& ((ItemTool) stack.getItem()).getToolMaterial() == MaterialsAether.GRAVITITE_TOOL)
 				{
 					if (this.heldBlock.ticksExisted % 20 == 0)
 					{

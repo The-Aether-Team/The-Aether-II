@@ -1,7 +1,5 @@
 package com.gildedgames.aether.common.items.misc;
 
-import java.util.List;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,12 +8,15 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.List;
+
 public class ItemWrappingPaper extends Item
 {
 
 	public static class PresentDyeData
 	{
-		public static final String[] dyeNames = new String[] { "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Silver", "Gray", "Pink", "Lime", "Yellow", "Light Blue", "Magenta", "Orange", "White" };
+		public static final String[] dyeNames = new String[] { "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Silver", "Gray",
+				"Pink", "Lime", "Yellow", "Light Blue", "Magenta", "Orange", "White" };
 
 		private byte bowColor = 1, boxColor = 15;
 

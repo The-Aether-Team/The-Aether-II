@@ -7,31 +7,57 @@ import net.minecraft.entity.Entity;
 public class ModelIcestoneCooler extends ModelBase
 {
 	ModelRenderer LidBase1;
+
 	ModelRenderer LidBase2;
+
 	ModelRenderer LidBase3;
+
 	ModelRenderer LidBase4;
+
 	ModelRenderer LidHingeRight;
+
 	ModelRenderer LidHingeLeft;
+
 	ModelRenderer LidHandleBarRight;
+
 	ModelRenderer LidHandleBarLeft;
+
 	ModelRenderer LidHandle;
+
 	ModelRenderer LidTopCenter;
+
 	ModelRenderer LidTop1;
+
 	ModelRenderer LidTop2;
+
 	ModelRenderer LidTop3;
+
 	ModelRenderer LidTop4;
+
 	ModelRenderer ChamberFront;
+
 	ModelRenderer ChamberFrontLeft;
+
 	ModelRenderer ChamberFrontRight;
+
 	ModelRenderer ChamberBack;
+
 	ModelRenderer ChamberBackLeft;
+
 	ModelRenderer ChamberBackRight;
+
 	ModelRenderer ChamberLeft;
+
 	ModelRenderer ChamberRight;
+
 	ModelRenderer ChamberBase;
+
 	ModelRenderer ChamberAccentFront;
+
 	ModelRenderer ChamberAccentBack;
+
 	ModelRenderer ChamberAccentLeft;
+
 	ModelRenderer ChamberAccentRight;
 
 	public ModelIcestoneCooler()

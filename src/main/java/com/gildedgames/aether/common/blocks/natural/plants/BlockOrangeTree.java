@@ -75,7 +75,8 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 
 		int chance = 10;
 
-		if (soilState.getBlock() == BlocksAether.aether_grass && soilState.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED)
+		if (soilState.getBlock() == BlocksAether.aether_grass
+				&& soilState.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED)
 		{
 			chance /= 2;
 		}
@@ -197,7 +198,8 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 
 		int count = world.rand.nextInt(3) + 1;
 
-		if (state.getBlock() == BlocksAether.aether_grass && state.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED)
+		if (state.getBlock() == BlocksAether.aether_grass
+				&& state.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED)
 		{
 			count += 1;
 		}
@@ -255,7 +257,5 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 			}
 		}
 	}
-
-
 
 }

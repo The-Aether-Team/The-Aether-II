@@ -66,7 +66,8 @@ public class PlacementFlagCapability implements IPlacementFlagCapability
 		}
 
 		@Override
-		public void readNBT(Capability<IPlacementFlagCapability> capability, IPlacementFlagCapability instance, EnumFacing side, NBTBase nbt)
+		public void readNBT(Capability<IPlacementFlagCapability> capability, IPlacementFlagCapability instance, EnumFacing side,
+				NBTBase nbt)
 		{
 			NBTTagCompound input = (NBTTagCompound) nbt;
 			instance.read(input);

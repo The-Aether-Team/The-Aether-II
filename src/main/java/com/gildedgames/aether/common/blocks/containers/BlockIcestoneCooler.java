@@ -22,7 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockIcestoneCooler extends BlockContainer
-	{
+{
 
 	public static final PropertyDirection PROPERTY_FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
@@ -50,7 +50,8 @@ public class BlockIcestoneCooler extends BlockContainer
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem,
+			EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (!world.isRemote)
 		{
@@ -100,7 +101,6 @@ public class BlockIcestoneCooler extends BlockContainer
 
 		super.breakBlock(world, pos, state);
 	}
-
 
 	@Override
 	public boolean isOpaqueCube(IBlockState state)

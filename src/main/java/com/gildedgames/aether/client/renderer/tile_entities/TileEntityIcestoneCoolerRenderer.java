@@ -2,12 +2,7 @@ package com.gildedgames.aether.client.renderer.tile_entities;
 
 import com.gildedgames.aether.client.models.entities.tile.ModelIcestoneCooler;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.containers.BlockSkyrootChest;
 import com.gildedgames.aether.common.tiles.TileEntityIcestoneCooler;
-import com.gildedgames.aether.common.tiles.TileEntitySkyrootChest;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
-import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;

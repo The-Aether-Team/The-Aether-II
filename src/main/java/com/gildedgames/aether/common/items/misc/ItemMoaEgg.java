@@ -2,9 +2,9 @@ package com.gildedgames.aether.common.items.misc;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
+import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.tiles.TileEntityMoaEgg;
 import net.minecraft.block.SoundType;
@@ -90,12 +90,14 @@ public class ItemMoaEgg extends Item
 
 			creativeList.add("");
 
-			creativeList.add( TextFormatting.YELLOW + "" + TextFormatting.ITALIC + "" + genePool.getWingStrength().gene().data() + " " + I18n.format("moa.jumps"));
+			creativeList.add(TextFormatting.YELLOW + "" + TextFormatting.ITALIC + "" + genePool.getWingStrength().gene().data() + " "
+					+ I18n.format("moa.jumps"));
 		}
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing,
+			float hitX, float hitY, float hitZ)
 	{
 		IBlockState state = world.getBlockState(pos);
 
@@ -111,7 +113,8 @@ public class ItemMoaEgg extends Item
 		{
 			return EnumActionResult.FAIL;
 		}
-		else if ((world.isAirBlock(pos.add(0, yOffset, 0)) || replaceable) && BlocksAether.moa_egg.canPlaceBlockAt(world, pos.add(0, yOffset, 0)))
+		else if ((world.isAirBlock(pos.add(0, yOffset, 0)) || replaceable)
+				&& BlocksAether.moa_egg.canPlaceBlockAt(world, pos.add(0, yOffset, 0)))
 		{
 			if (player.capabilities.isCreativeMode || this.creativeEgg)
 			{
@@ -142,10 +145,13 @@ public class ItemMoaEgg extends Item
 
 				return EnumActionResult.SUCCESS;
 			}
-			else if (world.checkNoEntityCollision(BlocksAether.moa_egg.getCollisionBoundingBox(world.getBlockState(pos.add(0, yOffset, 0)), world, pos.add(0, yOffset, 0))) && world.setBlockState(pos.add(0, yOffset, 0), BlocksAether.moa_egg.getDefaultState()))
+			else if (
+					world.checkNoEntityCollision(BlocksAether.moa_egg.getCollisionBoundingBox(world.getBlockState(pos.add(0, yOffset, 0)), world, pos.add(0, yOffset, 0)))
+							&& world.setBlockState(pos.add(0, yOffset, 0), BlocksAether.moa_egg.getDefaultState()))
 			{
 				SoundType soundtype = world.getBlockState(pos).getBlock().getSoundType(world.getBlockState(pos), world, pos, player);
-				world.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+				world.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS,
+						(soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 
 				TileEntityMoaEgg egg = (TileEntityMoaEgg) world.getTileEntity(pos.add(0, yOffset, 0));
 

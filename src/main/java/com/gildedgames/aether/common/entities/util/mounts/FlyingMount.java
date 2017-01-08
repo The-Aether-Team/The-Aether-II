@@ -62,7 +62,7 @@ public class FlyingMount implements IMountProcessor
 	{
 		if (rider instanceof EntityPlayer)
 		{
-			EntityPlayer player = (EntityPlayer)rider;
+			EntityPlayer player = (EntityPlayer) rider;
 			ItemStack stack = player.getHeldItemMainhand();
 
 			return this.data.canProcessMountInteraction(player, stack);

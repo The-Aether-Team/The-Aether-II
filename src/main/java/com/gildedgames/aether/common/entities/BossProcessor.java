@@ -25,7 +25,7 @@ public class BossProcessor
 	{
 		if (event.getEntity() instanceof IBoss)
 		{
-			IBoss boss = (IBoss)event.getEntity();
+			IBoss boss = (IBoss) event.getEntity();
 			LootPool lootPool = boss.getLootPool();
 
 			if (lootPool != null)
@@ -66,7 +66,7 @@ public class BossProcessor
 	{
 		if (event.getEntity() instanceof IBoss)
 		{
-			IBoss boss = (IBoss)event.getEntity();
+			IBoss boss = (IBoss) event.getEntity();
 			IBossManager manager = boss.getBossManager();
 
 			manager.updateStagesAndActions();
@@ -78,8 +78,8 @@ public class BossProcessor
 	{
 		if (event.getEntity() instanceof IBoss && event.getSource().getSourceOfDamage() instanceof EntityPlayer)
 		{
-			EntityPlayer player = (EntityPlayer)event.getSource().getSourceOfDamage();
-			IBoss<?> boss = (IBoss)event.getEntity();
+			EntityPlayer player = (EntityPlayer) event.getSource().getSourceOfDamage();
+			IBoss<?> boss = (IBoss) event.getEntity();
 
 			PlayerAether playerAether = PlayerAether.getPlayer(player);
 

@@ -60,7 +60,7 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	{
 		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
 
-		return (variant == BLIGHTWILLOW ? (int)(0.6F * 15.0F) : this.lightValue);
+		return (variant == BLIGHTWILLOW ? (int) (0.6F * 15.0F) : this.lightValue);
 	}
 
 	@Override
@@ -139,7 +139,8 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta & 7)).withProperty(PROPERTY_STAGE, (meta & 8) >> 3);
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta & 7)).withProperty(PROPERTY_STAGE,
+				(meta & 8) >> 3);
 	}
 
 	@Override

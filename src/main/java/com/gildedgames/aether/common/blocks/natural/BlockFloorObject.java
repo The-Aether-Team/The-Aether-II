@@ -100,7 +100,8 @@ public class BlockFloorObject extends BlockCustom
 	{
 		IBlockState state = world.getBlockState(pos.down());
 
-		return state.getBlock() == BlocksAether.aether_grass || state.getBlock() == BlocksAether.aether_dirt || state.getBlock() == BlocksAether.holystone;
+		return state.getBlock() == BlocksAether.aether_grass || state.getBlock() == BlocksAether.aether_dirt
+				|| state.getBlock() == BlocksAether.holystone;
 	}
 
 	@Override

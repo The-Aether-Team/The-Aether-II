@@ -90,6 +90,9 @@ public class MoaMarkGene implements Gene
 		return this.wing;
 	}
 
-	public String getResourceName() { return this.resourceName; }
+	public String getResourceName()
+	{
+		return this.resourceName;
+	}
 
 }

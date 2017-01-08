@@ -32,12 +32,15 @@ public class ReplaceablePlacementCondition implements WorldGenTemplate.Placement
 		{
 			IBlockState state = world.getBlockState(block.pos);
 
-			if ((BlockUtil.isSolid(block.blockState) || block.blockState.getMaterial() == Material.PORTAL || block.blockState == Blocks.AIR.getDefaultState()) && (WorldGenTemplate.isReplaceable(world, block.pos) || this.acceptedMaterials.contains(state.getMaterial())))
+			if ((BlockUtil.isSolid(block.blockState) || block.blockState.getMaterial() == Material.PORTAL
+					|| block.blockState == Blocks.AIR.getDefaultState()) && (WorldGenTemplate.isReplaceable(world, block.pos)
+					|| this.acceptedMaterials.contains(state.getMaterial())))
 			{
 				return true;
 			}
 
-			if ((this.isCriticalWithCheck ? block.blockState == state : block.blockState.getBlock() == state.getBlock()) || this.acceptedMaterials.contains(state.getMaterial()))
+			if ((this.isCriticalWithCheck ? block.blockState == state : block.blockState.getBlock() == state.getBlock())
+					|| this.acceptedMaterials.contains(state.getMaterial()))
 			{
 				return true;
 			}

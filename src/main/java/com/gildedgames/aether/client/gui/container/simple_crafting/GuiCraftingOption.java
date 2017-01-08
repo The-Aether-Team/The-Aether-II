@@ -2,7 +2,6 @@ package com.gildedgames.aether.client.gui.container.simple_crafting;
 
 import com.gildedgames.aether.api.registry.simple_crafting.ISimpleRecipe;
 import com.gildedgames.aether.client.gui.IExtendedGui;
-import com.gildedgames.aether.client.util.gui.GuiUtil;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
 import net.minecraft.client.Minecraft;
@@ -11,7 +10,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 
@@ -46,7 +44,8 @@ public class GuiCraftingOption extends GuiButton
 
 		if (this.visible && this.recipe != null)
 		{
-			this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
+			this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width
+					&& mouseY < this.yPosition + this.height;
 
 			GlStateManager.enableRescaleNormal();
 			RenderHelper.enableGUIStandardItemLighting();
@@ -63,7 +62,7 @@ public class GuiCraftingOption extends GuiButton
 
 				if (gui instanceof IExtendedGui)
 				{
-					IExtendedGui extendedGui = (IExtendedGui)gui;
+					IExtendedGui extendedGui = (IExtendedGui) gui;
 					extendedGui.setHoveredDescription(this.recipe.getResult().getTooltip(Minecraft.getMinecraft().thePlayer, false));
 				}
 			}

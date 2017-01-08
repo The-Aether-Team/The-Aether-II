@@ -25,7 +25,8 @@ public class ItemAetherSlab extends ItemBlock
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing,
+			float hitX, float hitY, float hitZ)
 	{
 		if (stack.stackSize != 0 && player.canPlayerEdit(pos.offset(facing), facing, stack))
 		{
@@ -35,16 +36,19 @@ public class ItemAetherSlab extends ItemBlock
 			{
 				BlockCustomSlab.SlabState slabState = state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE);
 
-				if ((facing == EnumFacing.UP && slabState == BlockCustomSlab.SlabState.BOTTOM_HALF || facing == EnumFacing.DOWN && slabState == BlockCustomSlab.SlabState.TOP_HALF))
+				if ((facing == EnumFacing.UP && slabState == BlockCustomSlab.SlabState.BOTTOM_HALF
+						|| facing == EnumFacing.DOWN && slabState == BlockCustomSlab.SlabState.TOP_HALF))
 				{
 					IBlockState placeState = this.block.getDefaultState().withProperty(BlockCustomSlab.PROPERTY_SLAB_STATE, BlockCustomSlab.SlabState.FULL_BLOCK);
 
 					AxisAlignedBB bounds = placeState.getCollisionBoundingBox(worldIn, pos);
 
-					if (bounds != Block.NULL_AABB && worldIn.checkNoEntityCollision(bounds.offset(pos)) && worldIn.setBlockState(pos, placeState, 11))
+					if (bounds != Block.NULL_AABB && worldIn.checkNoEntityCollision(bounds.offset(pos))
+							&& worldIn.setBlockState(pos, placeState, 11))
 					{
 						SoundType soundtype = this.block.getSoundType();
-						worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+						worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS,
+								(soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 
 						--stack.stackSize;
 					}
@@ -53,7 +57,8 @@ public class ItemAetherSlab extends ItemBlock
 				}
 			}
 
-			return this.tryPlace(player, stack, worldIn, pos.offset(facing)) ? EnumActionResult.SUCCESS : super.onItemUse(stack, player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+			return this.tryPlace(player, stack, worldIn, pos.offset(facing)) ? EnumActionResult.SUCCESS :
+					super.onItemUse(stack, player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 		}
 		else
 		{
@@ -92,7 +97,8 @@ public class ItemAetherSlab extends ItemBlock
 			if (bounds != Block.NULL_AABB && worldIn.checkNoEntityCollision(bounds.offset(pos)) && worldIn.setBlockState(pos, state, 11))
 			{
 				SoundType soundtype = this.block.getSoundType();
-				worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+				worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS,
+						(soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 
 				--stack.stackSize;
 			}

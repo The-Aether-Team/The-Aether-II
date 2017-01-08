@@ -10,7 +10,8 @@ import java.util.List;
 
 public class ItemDart extends Item
 {
-	private static final ItemDartType[] ITEM_VARIANTS = new ItemDartType[] { ItemDartType.GOLDEN, ItemDartType.ENCHANTED, ItemDartType.POISON };
+	private static final ItemDartType[] ITEM_VARIANTS = new ItemDartType[] { ItemDartType.GOLDEN, ItemDartType.ENCHANTED,
+			ItemDartType.POISON };
 
 	public ItemDart()
 	{

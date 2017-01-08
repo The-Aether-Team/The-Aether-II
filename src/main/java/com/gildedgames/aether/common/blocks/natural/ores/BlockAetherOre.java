@@ -20,7 +20,8 @@ public class BlockAetherOre extends Block
 	@Override
 	public int quantityDroppedWithBonus(int fortune, Random random)
 	{
-		if (fortune > 0 && Item.getItemFromBlock(this) != this.getItemDropped(this.getBlockState().getValidStates().iterator().next(), random, fortune))
+		if (fortune > 0 && Item.getItemFromBlock(this)
+				!= this.getItemDropped(this.getBlockState().getValidStates().iterator().next(), random, fortune))
 		{
 			int rand = random.nextInt(fortune + 2) - 1;
 

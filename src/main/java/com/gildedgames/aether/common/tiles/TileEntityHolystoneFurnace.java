@@ -418,14 +418,14 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 	{
 		switch (id)
 		{
-		case 0:
-			return this.burnTime;
-		case 1:
-			return this.currentItemBurnTime;
-		case 2:
-			return this.cookTime;
-		case 3:
-			return this.totalCookTime;
+			case 0:
+				return this.burnTime;
+			case 1:
+				return this.currentItemBurnTime;
+			case 2:
+				return this.cookTime;
+			case 3:
+				return this.totalCookTime;
 		}
 
 		return 0;
@@ -435,18 +435,18 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 	{
 		switch (id)
 		{
-		case 0:
-			this.burnTime = value;
-			break;
-		case 1:
-			this.currentItemBurnTime = value;
-			break;
-		case 2:
-			this.cookTime = value;
-			break;
-		case 3:
-			this.totalCookTime = value;
-			break;
+			case 0:
+				this.burnTime = value;
+				break;
+			case 1:
+				this.currentItemBurnTime = value;
+				break;
+			case 2:
+				this.cookTime = value;
+				break;
+			case 3:
+				this.totalCookTime = value;
+				break;
 		}
 	}
 

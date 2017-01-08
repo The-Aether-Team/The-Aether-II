@@ -7,41 +7,42 @@ import net.minecraft.init.MobEffects;
 public class AIHopWander extends EntityAI<EntityLiving>
 {
 
-    private HoppingMoveHelper hoppingMoveHelper;
+	private HoppingMoveHelper hoppingMoveHelper;
 
-    private float chosenDegrees;
+	private float chosenDegrees;
 
-    private int nextRandomizeTime;
+	private int nextRandomizeTime;
 
-    public AIHopWander(EntityLiving entity, HoppingMoveHelper hoppingMoveHelper)
-    {
-        super(entity);
+	public AIHopWander(EntityLiving entity, HoppingMoveHelper hoppingMoveHelper)
+	{
+		super(entity);
 
-        this.hoppingMoveHelper = hoppingMoveHelper;
+		this.hoppingMoveHelper = hoppingMoveHelper;
 
-        this.setMutexBits(2);
-    }
+		this.setMutexBits(2);
+	}
 
-    /**
-     * Returns whether the EntityAIBase should begin execution.
-     */
-    public boolean shouldExecute()
-    {
-        return this.entity().getAttackTarget() == null && (this.entity().onGround || this.entity().isInWater() || this.entity().isInLava() || this.entity().isPotionActive(MobEffects.LEVITATION));
-    }
+	/**
+	 * Returns whether the EntityAIBase should begin execution.
+	 */
+	public boolean shouldExecute()
+	{
+		return this.entity().getAttackTarget() == null && (this.entity().onGround || this.entity().isInWater() || this.entity().isInLava()
+				|| this.entity().isPotionActive(MobEffects.LEVITATION));
+	}
 
-    /**
-     * Updates the task
-     */
-    public void updateTask()
-    {
-        if (--this.nextRandomizeTime <= 0)
-        {
-            this.nextRandomizeTime = 40 + this.entity().getRNG().nextInt(60);
-            this.chosenDegrees = (float)this.entity().getRNG().nextInt(360);
-        }
+	/**
+	 * Updates the task
+	 */
+	public void updateTask()
+	{
+		if (--this.nextRandomizeTime <= 0)
+		{
+			this.nextRandomizeTime = 40 + this.entity().getRNG().nextInt(60);
+			this.chosenDegrees = (float) this.entity().getRNG().nextInt(360);
+		}
 
-        this.hoppingMoveHelper.setSpeed(1.0D);
-        this.hoppingMoveHelper.setDirection(this.chosenDegrees);
-    }
+		this.hoppingMoveHelper.setSpeed(1.0D);
+		this.hoppingMoveHelper.setDirection(this.chosenDegrees);
+	}
 }

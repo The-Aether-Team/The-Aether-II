@@ -24,7 +24,8 @@ public class SpawnEntry
 		this(clazz, rarityWeight, minGroupSize, maxGroupSize, new GroundPositionSelector());
 	}
 
-	public SpawnEntry(Class<? extends Entity> clazz, float rarityWeight, int minGroupSize, int maxGroupSize, PositionSelector heightSelector)
+	public SpawnEntry(Class<? extends Entity> clazz, float rarityWeight, int minGroupSize, int maxGroupSize,
+			PositionSelector heightSelector)
 	{
 		this.clazz = clazz;
 		this.rarityWeight = rarityWeight;

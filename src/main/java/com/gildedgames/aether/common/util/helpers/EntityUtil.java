@@ -112,8 +112,8 @@ public class EntityUtil
 		double z = pos.getZ() - entity.posZ;
 
 		double d3 = (double) MathHelper.sqrt_double(x * x + z * z);
-		float f = (float)(MathHelper.atan2(z, x) * (180D / Math.PI)) - 90.0F;
-		float f1 = (float)(-(MathHelper.atan2(y, d3) * (180D / Math.PI)));
+		float f = (float) (MathHelper.atan2(z, x) * (180D / Math.PI)) - 90.0F;
+		float f1 = (float) (-(MathHelper.atan2(y, d3) * (180D / Math.PI)));
 
 		entity.rotationPitch = EntityUtil.updateRotation(entity.rotationPitch, f1, maxPitchIncrease);
 		entity.rotationYaw = EntityUtil.updateRotation(entity.rotationYaw, f, maxYawIncrease);
@@ -135,7 +135,7 @@ public class EntityUtil
 
 		return angle + f;
 	}
-	
+
 	public static void spawnParticleLineBetween(Entity e1, Entity e2, double density, EnumParticleTypes type, int... parameters)
 	{
 		for (int k = 0; k < 1; ++k)
@@ -181,8 +181,10 @@ public class EntityUtil
 				}
 				else if (e1.worldObj instanceof WorldServer)
 				{
-					WorldServer worldServer = (WorldServer)e1.worldObj;
-					worldServer.spawnParticle(type, currentX + randX, currentY, currentZ + randZ, 1, motionX, motionY, motionZ, (world.rand.nextBoolean() ? 0.01D : -0.01D), parameters);
+					WorldServer worldServer = (WorldServer) e1.worldObj;
+					worldServer.spawnParticle(type,
+							currentX + randX, currentY,
+							currentZ + randZ, 1, motionX, motionY, motionZ, (world.rand.nextBoolean() ? 0.01D : -0.01D), parameters);
 				}
 
 				currentX += difX;

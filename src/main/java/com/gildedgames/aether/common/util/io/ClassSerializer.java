@@ -101,7 +101,8 @@ public class ClassSerializer
 			}
 		}
 
-		throw new IllegalArgumentException("Object's class isn't registered as a serialization! Class: " + clazz.getCanonicalName() + ". Register with ClassSerializer.registerSerialization()");
+		throw new IllegalArgumentException("Object's class isn't registered as a serialization! Class: " + clazz.getCanonicalName()
+				+ ". Register with ClassSerializer.registerSerialization()");
 	}
 
 	public int getSerialNumber(Object obj)

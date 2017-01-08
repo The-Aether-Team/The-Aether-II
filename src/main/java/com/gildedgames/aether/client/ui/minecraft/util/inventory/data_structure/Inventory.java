@@ -1,57 +1,57 @@
 package com.gildedgames.aether.client.ui.minecraft.util.inventory.data_structure;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.util.io.NBTHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Inventory<E extends NBT> implements NBT
 {
-	
+
 	private final int size;
-	
+
 	private Class<? extends NBT> cls;
 
 	private E[] elements;
-	
+
 	private List<InventoryListener<E>> listeners = new ArrayList<InventoryListener<E>>();
 
 	private Inventory()
 	{
 		this(null);
 	}
-	
+
 	public Inventory(Class<? extends NBT> cls)
 	{
 		this(cls, 9);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public Inventory(Class<? extends NBT> cls, int size)
 	{
 		this.size = size;
-		
+
 		if (cls != null)
 		{
 			this.cls = cls;
 			this.elements = (E[]) Array.newInstance(this.cls, this.size);
 		}
 	}
-	
+
 	public void addListener(InventoryListener<E> listener)
 	{
 		this.listeners.add(listener);
 	}
-	
+
 	public void removeListener(InventoryListener<E> listener)
 	{
 		this.listeners.remove(listener);
 	}
-	
+
 	public int getMaxSize()
 	{
 		return this.size;
@@ -60,7 +60,7 @@ public class Inventory<E extends NBT> implements NBT
 	public int getElementCount()
 	{
 		int amount = 0;
-		
+
 		for (int i = 0; i < this.getMaxSize(); i++)
 		{
 			if (!this.isEmpty(i))
@@ -68,10 +68,10 @@ public class Inventory<E extends NBT> implements NBT
 				amount++;
 			}
 		}
-		
+
 		return amount;
 	}
-	
+
 	private void notifyListeners(int slotIndex, E element)
 	{
 		for (InventoryListener<E> listener : this.listeners)
@@ -79,7 +79,7 @@ public class Inventory<E extends NBT> implements NBT
 			listener.onChange(slotIndex, element);
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void clear()
 	{
@@ -87,10 +87,10 @@ public class Inventory<E extends NBT> implements NBT
 		{
 			this.notifyListeners(slotIndex, null);
 		}
-		
+
 		this.elements = (E[]) Array.newInstance(this.cls, this.getMaxSize());
 	}
-	
+
 	public boolean isEmpty(int slotIndex)
 	{
 		return this.elements[slotIndex] == null;
@@ -105,12 +105,12 @@ public class Inventory<E extends NBT> implements NBT
 	{
 		final E oldValue = (E) this.elements[slotIndex];
 		this.elements[slotIndex] = element;
-		
+
 		this.notifyListeners(slotIndex, element);
-		
+
 		return oldValue;
 	}
-	
+
 	public E setElementAtHeld(E element, EntityPlayer player)
 	{
 		final int slotIndex = this.getHeldElementIndex(player);
@@ -131,19 +131,19 @@ public class Inventory<E extends NBT> implements NBT
 				return i;
 			}
 		}
-		
+
 		return -1;
 	}
 
 	public List<E> getElements()
 	{
 		List<E> list = new ArrayList<E>();
-		
+
 		for (E element : this.elements)
 		{
 			list.add(element);
 		}
-		
+
 		return list;
 	}
 
@@ -162,10 +162,11 @@ public class Inventory<E extends NBT> implements NBT
 		try
 		{
 			Class<E> cls = (Class<E>) Class.forName(input.getString("cls"));
-			
+
 			this.cls = cls;
 
-			Class<E[]> clsArray = (Class<E[]>) Array.newInstance(cls.getComponentType(), 0).getClass();;
+			Class<E[]> clsArray = (Class<E[]>) Array.newInstance(cls.getComponentType(), 0).getClass();
+			;
 
 			this.elements = NBTHelper.fullyDeserializeArray("elements", clsArray, input);
 		}
@@ -184,7 +185,7 @@ public class Inventory<E extends NBT> implements NBT
 	{
 		return player.inventory.currentItem;
 	}
-	
+
 	public boolean hasElement(E element)
 	{
 		for (int i = 0; i < this.size; i++)
@@ -196,7 +197,7 @@ public class Inventory<E extends NBT> implements NBT
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -211,8 +212,8 @@ public class Inventory<E extends NBT> implements NBT
 				return i;
 			}
 		}
-		
+
 		return -1;
 	}
-	
+
 }

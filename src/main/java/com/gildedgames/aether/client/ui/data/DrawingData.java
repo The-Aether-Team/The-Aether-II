@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.ui.data;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class DrawingData
 {

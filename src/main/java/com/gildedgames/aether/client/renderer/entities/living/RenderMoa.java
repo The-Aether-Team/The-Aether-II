@@ -1,11 +1,11 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.models.entities.living.ModelMoa;
+import com.gildedgames.aether.client.util.SpriteGeneric;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
-import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
-import com.gildedgames.aether.client.util.SpriteGeneric;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
@@ -19,7 +19,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import org.lwjgl.opengl.GL11;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class RenderMoa extends RenderLiving<EntityMoa>
 {
@@ -43,7 +43,7 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 	public static final ResourceLocation AECHOR_PETAL_TEXTURE = new ResourceLocation("aether", "textures/items/consumables/aechor_petal.png");
 
 	public static final SpriteGeneric SPRITE = new SpriteGeneric("aechor_petal.png", 16, 16);
-	
+
 	public RenderMoa(RenderManager manager)
 	{
 		super(manager, new ModelMoa(), 1.0F);
@@ -68,9 +68,9 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 	protected void scaleMoa(EntityMoa entityMoa)
 	{
 		float moaScale = entityMoa.isChild() ? 0.5f : 0.85f;
-		
+
 		moaScale += entityMoa.isGroupLeader() ? 0.15F : 0.0F;
-		
+
 		GL11.glScalef(moaScale, moaScale, moaScale);
 	}
 
@@ -85,7 +85,7 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		float red = ((color >> 16) & 0xff) / 255F;
 		float green = ((color >> 8) & 0xff) / 255F;
 		float blue = (color & 0xff) / 255F;
-		
+
 		GL11.glColor3f(red, green, blue);
 
 		this.renderManager.renderEngine.bindTexture(texture);
@@ -96,17 +96,18 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		}
 	}
 
-	public void renderMoa(int color, ResourceLocation texture, EntityLivingBase entity, float par2, float par3, float par4, float par5, float par6, float par7)
+	public void renderMoa(int color, ResourceLocation texture, EntityLivingBase entity, float par2, float par3, float par4, float par5,
+			float par6, float par7)
 	{
 		ModelMoa model = ((ModelMoa) this.mainModel);
-		
+
 		float red = ((color >> 16) & 0xff) / 255F;
 		float green = ((color >> 8) & 0xff) / 255F;
 		float blue = (color & 0xff) / 255F;
 		GL11.glColor3f(red, green, blue);
 
 		this.renderManager.renderEngine.bindTexture(texture);
-		
+
 		model.LeftLeg2.isHidden = true;
 		model.LeftLeg2.isHidden = true;
 		model.RightLeg1.isHidden = true;
@@ -120,13 +121,20 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 
 	public Color darker(Color c, float factor)
 	{
-		return new Color(Math.max((int)(c.getRed()  * factor), 0), Math.max((int)(c.getGreen()* factor), 0), Math.max((int)(c.getBlue() * factor), 0), c.getAlpha());
+		return new Color(Math.max((int) (c.getRed() * factor), 0), Math.max((int) (c.getGreen() * factor), 0), Math.max((int) (c.getBlue()
+				* factor), 0), c.getAlpha());
 	}
 
 	private Color blend(Color c1, Color c2, float ratio)
 	{
-		if ( ratio > 1f ) ratio = 1f;
-		else if ( ratio < 0f ) ratio = 0f;
+		if (ratio > 1f)
+		{
+			ratio = 1f;
+		}
+		else if (ratio < 0f)
+		{
+			ratio = 0f;
+		}
 		float iRatio = 1.0f - ratio;
 
 		int i1 = c1.getRGB();
@@ -142,12 +150,12 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		int g2 = ((i2 & 0xff00) >> 8);
 		int b2 = (i2 & 0xff);
 
-		int a = (int)((a1 * iRatio) + (a2 * ratio));
-		int r = (int)((r1 * iRatio) + (r2 * ratio));
-		int g = (int)((g1 * iRatio) + (g2 * ratio));
-		int b = (int)((b1 * iRatio) + (b2 * ratio));
+		int a = (int) ((a1 * iRatio) + (a2 * ratio));
+		int r = (int) ((r1 * iRatio) + (r2 * ratio));
+		int g = (int) ((g1 * iRatio) + (g2 * ratio));
+		int b = (int) ((b1 * iRatio) + (b2 * ratio));
 
-		return new Color( a << 24 | r << 16 | g << 8 | b );
+		return new Color(a << 24 | r << 16 | g << 8 | b);
 	}
 
 	protected void renderMoa(EntityLivingBase entity, float par2, float par3, float par4, float par5, float par6, float par7)
@@ -160,7 +168,7 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		{
 			return;
 		}
-		
+
 		GL11.glPushMatrix();
 
 		GL11.glDepthMask(true);
@@ -183,15 +191,15 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 
 		this.renderMoa(patternColor.getRGB(), genePool.getMarks().gene().getBack(), entity, par7, model.Body, model.Chest);
 		this.renderMoa(patternColor.getRGB(), genePool.getMarks().gene().getWing(), entity, par7, model.LeftWing, model.RightWing);
-		
+
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 		this.renderManager.renderEngine.bindTexture(TONGUE);
 		model.Jaw.render(par7);
-		
+
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 		this.renderManager.renderEngine.bindTexture(TEETH);
 		model.Teeth.render(par7);
-		
+
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 		this.renderManager.renderEngine.bindTexture(LEGS);
 		model.Claw1Left.render(par7);
@@ -200,7 +208,7 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		model.Claw1Right.render(par7);
 		model.Claw2Right.render(par7);
 		model.Claw3Right.render(par7);
-		
+
 		if (moa.isSaddled())
 		{
 			GL11.glColor3f(1.0f, 1.0f, 1.0f);
@@ -213,7 +221,7 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 			model.Body.render(par7);
 			model.Chest.render(par7);
 		}
-		
+
 		if (moa.getGender() == AnimalGender.MALE)
 		{
 			this.renderMoa(genePool.getFeathers().gene().data().getRGB(), FEATHERS, entity, par7, model.feather1, model.feather2, model.feather3, model.feather4);

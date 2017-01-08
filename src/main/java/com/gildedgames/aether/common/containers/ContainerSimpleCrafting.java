@@ -5,7 +5,6 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.containers.slots.SlotMatrix;
 import com.gildedgames.aether.common.containers.slots.SlotSimpleCrafting;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
-import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
@@ -51,7 +50,7 @@ public class ContainerSimpleCrafting extends Container
 		{
 			if (slot instanceof SlotMatrix)
 			{
-				SlotMatrix slotMatrix = (SlotMatrix)slot;
+				SlotMatrix slotMatrix = (SlotMatrix) slot;
 				slotMatrix.setSimpleCrafting(flag);
 			}
 		}
@@ -154,7 +153,8 @@ public class ContainerSimpleCrafting extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer player)
 	{
-		return this.world.getBlockState(this.pos).getBlock() == BlocksAether.aether_crafting_table && player.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
+		return this.world.getBlockState(this.pos).getBlock() == BlocksAether.aether_crafting_table
+				&& player.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -204,7 +204,7 @@ public class ContainerSimpleCrafting extends Container
 
 			if (itemstack1.stackSize == 0)
 			{
-				slot.putStack((ItemStack)null);
+				slot.putStack((ItemStack) null);
 			}
 			else
 			{

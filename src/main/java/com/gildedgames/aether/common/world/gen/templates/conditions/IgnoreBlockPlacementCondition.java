@@ -22,7 +22,8 @@ public class IgnoreBlockPlacementCondition implements WorldGenTemplate.Placement
 	@Override
 	public boolean canPlace(Template template, World world, BlockPos placedAt, Template.BlockInfo block)
 	{
-		if (block.pos.getY() == placedAt.getY() && block.blockState.getBlock() != Blocks.AIR && block.blockState.getBlock() != Blocks.STRUCTURE_VOID)
+		if (block.pos.getY() == placedAt.getY() && block.blockState.getBlock() != Blocks.AIR
+				&& block.blockState.getBlock() != Blocks.STRUCTURE_VOID)
 		{
 			BlockPos down = block.pos.down();
 

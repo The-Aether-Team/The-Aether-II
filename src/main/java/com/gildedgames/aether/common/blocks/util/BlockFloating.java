@@ -55,7 +55,8 @@ public class BlockFloating extends Block
 				{
 					List<ItemStack> drops = this.getDrops(world, pos, world.getBlockState(pos), 0);
 
-					EntityFloatingBlock entity = new EntityFloatingBlock(world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, world.getBlockState(pos), drops);
+					EntityFloatingBlock entity = new EntityFloatingBlock(world,
+							pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, world.getBlockState(pos), drops);
 					world.spawnEntityInWorld(entity);
 				}
 			}

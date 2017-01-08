@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.ai.tempest;
 
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.EntityAI;
 import com.gildedgames.aether.common.entities.living.mobs.EntityTempest;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.util.TickTimer;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -26,7 +26,8 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 	{
 		IAttributeInstance movementSpeed = this.entity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 
-		this.entity().getNavigator().tryMoveToEntityLiving(this.entity().getAttackTarget(), movementSpeed != null ? movementSpeed.getAttributeValue() : 1.0D);
+		this.entity().getNavigator().tryMoveToEntityLiving(this.entity().getAttackTarget(),
+				movementSpeed != null ? movementSpeed.getAttributeValue() : 1.0D);
 	}
 
 	@Override
@@ -61,7 +62,8 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 			{
 				if (this.attackTimer.getTicksPassed() == 0)
 				{
-					this.entity().playSound(SoundsAether.zephyr_puff, 1.0F, (this.entity().getRNG().nextFloat() - this.entity().getRNG().nextFloat()) * 0.2F + 1.0F);
+					this.entity().playSound(SoundsAether.zephyr_puff, 1.0F,
+							(this.entity().getRNG().nextFloat() - this.entity().getRNG().nextFloat()) * 0.2F + 1.0F);
 				}
 
 				this.attackTimer.tick();
@@ -70,11 +72,13 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 
 				if (this.attackTimer.getSecondsPassed() >= 2)
 				{
-					this.entity().playSound(SoundsAether.tempest_electric_shock, 1.0F, (this.entity().getRNG().nextFloat() - this.entity().getRNG().nextFloat()) * 0.2F + 1.0F);
+					this.entity().playSound(SoundsAether.tempest_electric_shock, 1.0F,
+							(this.entity().getRNG().nextFloat() - this.entity().getRNG().nextFloat()) * 0.2F + 1.0F);
 
 					if (this.entity().getRNG().nextInt(8) == 0)
 					{
-						this.entity().playSound(SoundsAether.tempest_angry, 1.0F, (this.entity().getRNG().nextFloat() - this.entity().getRNG().nextFloat()) * 0.2F + 1.0F);
+						this.entity().playSound(SoundsAether.tempest_angry, 1.0F,
+								(this.entity().getRNG().nextFloat() - this.entity().getRNG().nextFloat()) * 0.2F + 1.0F);
 					}
 
 					this.entity().setAttacked(false);

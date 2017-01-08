@@ -5,7 +5,6 @@ import com.gildedgames.aether.common.tiles.util.TileEntitySynced;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
@@ -18,7 +17,7 @@ public abstract class TileEntityMultiblockController extends TileEntitySynced im
 
 	private final Block dummy;
 
-	public TileEntityMultiblockController (BlockMultiController block, Block dummy)
+	public TileEntityMultiblockController(BlockMultiController block, Block dummy)
 	{
 		this.block = block;
 		this.dummy = dummy;

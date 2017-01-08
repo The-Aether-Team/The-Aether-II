@@ -35,7 +35,8 @@ public class ItemCloudParachute extends Item
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> infoList, boolean par4)
 	{
-		infoList.add(I18n.format("cloudParachute.ability") + "\247r" + I18n.format("cloudParachute.ability." + EntityParachute.Type.fromOrdinal(stack.getMetadata()).name));
+		infoList.add(I18n.format("cloudParachute.ability") + "\247r" + I18n.format(
+				"cloudParachute.ability." + EntityParachute.Type.fromOrdinal(stack.getMetadata()).name));
 		infoList.add(I18n.format("cloudParachute.ability.rightClick"));
 	}
 

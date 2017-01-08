@@ -1,26 +1,22 @@
 package com.gildedgames.aether.client.gui.menu;
 
 import com.gildedgames.aether.client.ui.UiManager;
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.client.ui.minecraft.util.GuiFactory;
-import com.gildedgames.aether.client.ui.minecraft.util.MinecraftAssetLocation;
 import com.gildedgames.aether.client.ui.common.GuiFrame;
 import com.gildedgames.aether.client.ui.data.AssetLocation;
 import com.gildedgames.aether.client.ui.data.rect.Dim2D;
 import com.gildedgames.aether.client.ui.event.view.MouseEventGui;
 import com.gildedgames.aether.client.ui.graphics.Graphics2D;
-import com.gildedgames.aether.client.ui.input.ButtonState;
-import com.gildedgames.aether.client.ui.input.InputProvider;
-import com.gildedgames.aether.client.ui.input.MouseButton;
-import com.gildedgames.aether.client.ui.input.MouseInput;
-import com.gildedgames.aether.client.ui.input.MouseInputPool;
+import com.gildedgames.aether.client.ui.input.*;
+import com.gildedgames.aether.client.ui.minecraft.util.GuiFactory;
+import com.gildedgames.aether.client.ui.minecraft.util.MinecraftAssetLocation;
 import com.gildedgames.aether.client.ui.util.Button;
 import com.gildedgames.aether.client.ui.util.InputHelper;
 import com.gildedgames.aether.client.ui.util.Text;
 import com.gildedgames.aether.client.ui.util.TextureElement;
 import com.gildedgames.aether.client.ui.util.decorators.ScrollingGui;
+import com.gildedgames.aether.common.AetherCore;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class AetherMenu extends GuiFrame
 {

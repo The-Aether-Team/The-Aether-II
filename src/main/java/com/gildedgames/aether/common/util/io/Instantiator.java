@@ -54,14 +54,16 @@ public class Instantiator implements Callable<Object>
 
 			if (inst == null)
 			{
-				throw new NullPointerException("Something went wrong trying to create an instances of " + this.clazz.getName() + ". Most likely you forgot to create an empty constructor for it.");
+				throw new NullPointerException("Something went wrong trying to create an instances of " + this.clazz.getName()
+						+ ". Most likely you forgot to create an empty constructor for it.");
 			}
 
 			return inst;
 		}
 		catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
 		{
-			throw new NullPointerException("Something went wrong trying to create an instances of " + this.clazz.getName() + ". Most likely you forgot to create an empty constructor for it.");
+			throw new NullPointerException("Something went wrong trying to create an instances of " + this.clazz.getName()
+					+ ". Most likely you forgot to create an empty constructor for it.");
 		}
 	}
 

@@ -76,7 +76,7 @@ public class SimpleCraftingRegistry implements ISimpleCraftingRegistry
 				}
 				else if (req instanceof OreDictionaryRequirement)
 				{
-					OreDictionaryRequirement oreReq = (OreDictionaryRequirement)req;
+					OreDictionaryRequirement oreReq = (OreDictionaryRequirement) req;
 
 					if (!this.oreDictionaryLookup.containsKey(oreReq.getKey()))
 					{
@@ -127,7 +127,7 @@ public class SimpleCraftingRegistry implements ISimpleCraftingRegistry
 	{
 		if (req instanceof ItemStack)
 		{
-			ItemStack stack = (ItemStack)req;
+			ItemStack stack = (ItemStack) req;
 			int[] ids = OreDictionary.getOreIDs(stack);
 
 			if (ids.length > 0)

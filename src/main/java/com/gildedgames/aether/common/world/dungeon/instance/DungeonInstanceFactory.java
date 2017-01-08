@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world.dungeon.instance;
 
+import com.gildedgames.aether.api.capabilites.instances.IInstanceFactory;
 import com.gildedgames.aether.api.capabilites.instances.IInstanceHandler;
 import com.gildedgames.aether.common.world.util.TeleporterGeneric;
-import com.gildedgames.aether.api.capabilites.instances.IInstanceFactory;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;

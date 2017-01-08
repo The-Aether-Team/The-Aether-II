@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.containers;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
 import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
@@ -132,17 +131,25 @@ public class ContainerEquipment extends ContainerPlayer
 
 		int inventorySlotId = 0;
 
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RELIC, inventorySlotId++, 14 + offsetX, 28 + offsetY));
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RELIC, inventorySlotId++, 64 + offsetX, 28 + offsetY));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RELIC, inventorySlotId++,
+				14 + offsetX, 28 + offsetY));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RELIC, inventorySlotId++,
+				64 + offsetX, 28 + offsetY));
 
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.HANDWEAR, inventorySlotId++, 64 + offsetX, 49 + offsetY));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.HANDWEAR, inventorySlotId++,
+				64 + offsetX, 49 + offsetY));
 
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RING, inventorySlotId++, 14 + offsetX, 70 + offsetY));
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RING, inventorySlotId++, 14 + offsetX, 91 + offsetY));
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.NECKWEAR, inventorySlotId++, 14 + offsetX, 49 + offsetY));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RING, inventorySlotId++,
+				14 + offsetX, 70 + offsetY));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RING, inventorySlotId++,
+				14 + offsetX, 91 + offsetY));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.NECKWEAR, inventorySlotId++,
+				14 + offsetX, 49 + offsetY));
 
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.COMPANION, inventorySlotId++, 64 + offsetX, 70 + offsetY));
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.ARTIFACT, inventorySlotId++, 39 + offsetX, 122 + offsetY));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.COMPANION, inventorySlotId++,
+				64 + offsetX, 70 + offsetY));
+		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.ARTIFACT, inventorySlotId++,
+				39 + offsetX, 122 + offsetY));
 
 		for (int x = 0; x < 6; x++)
 		{

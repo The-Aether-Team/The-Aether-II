@@ -9,9 +9,13 @@ public class HoppingMoveHelper extends EntityMoveHelper
 {
 
 	private float yRot;
+
 	private int jumpDelay;
+
 	private final EntityLiving entity;
+
 	private SoundEvent hoppingSound;
+
 	private HopTimer hopTimer;
 
 	public HoppingMoveHelper(EntityLiving entity, SoundEvent hoppingSound, HopTimer hopTimer)
@@ -21,7 +25,7 @@ public class HoppingMoveHelper extends EntityMoveHelper
 		this.hopTimer = hopTimer;
 		this.hoppingSound = hoppingSound;
 		this.entity = entity;
-		this.yRot = 180.0F * entity.rotationYaw / (float)Math.PI;
+		this.yRot = 180.0F * entity.rotationYaw / (float) Math.PI;
 	}
 
 	public HoppingMoveHelper(final EntityLiving entity, SoundEvent hoppingSound)
@@ -56,7 +60,8 @@ public class HoppingMoveHelper extends EntityMoveHelper
 
 			if (this.entity.onGround)
 			{
-				this.entity.setAIMoveSpeed((float)(this.speed * this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
+				this.entity.setAIMoveSpeed((float) (this.speed
+						* this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
 
 				if (this.jumpDelay-- <= 0)
 				{
@@ -64,7 +69,8 @@ public class HoppingMoveHelper extends EntityMoveHelper
 
 					this.entity.getJumpHelper().setJumping();
 
-					this.entity.playSound(this.hoppingSound, 0.5F, ((this.entity.getRNG().nextFloat() - this.entity.getRNG().nextFloat()) * 0.2F + 1.0F) * 0.8F);
+					this.entity.playSound(this.hoppingSound, 0.5F,
+							((this.entity.getRNG().nextFloat() - this.entity.getRNG().nextFloat()) * 0.2F + 1.0F) * 0.8F);
 				}
 				else
 				{
@@ -75,7 +81,8 @@ public class HoppingMoveHelper extends EntityMoveHelper
 			}
 			else
 			{
-				this.entity.setAIMoveSpeed((float)(this.speed * this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
+				this.entity.setAIMoveSpeed((float) (this.speed
+						* this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
 			}
 		}
 	}

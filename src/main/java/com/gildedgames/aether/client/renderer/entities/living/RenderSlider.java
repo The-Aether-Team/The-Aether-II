@@ -13,16 +13,21 @@ public class RenderSlider extends RenderLiving<EntitySlider>
 {
 
 	private static final ResourceLocation AWAKE = AetherCore.getResource("textures/entities/slider/awake.png");
+
 	private static final ResourceLocation AWAKE_CRITICAL = AetherCore.getResource("textures/entities/slider/awake_critical.png");
 
 	private static final ResourceLocation ASLEEP = AetherCore.getResource("textures/entities/slider/asleep.png");
 
 	private static final ResourceLocation GLOW = AetherCore.getResource("textures/entities/slider/glow.png");
+
 	private static final ResourceLocation GLOW_CRITICAL = AetherCore.getResource("textures/entities/slider/glow_critical.png");
 
 	private static final ResourceLocation SIGNAL_LEFT = AetherCore.getResource("textures/entities/slider/signal_left.png");
+
 	private static final ResourceLocation SIGNAL_RIGHT = AetherCore.getResource("textures/entities/slider/signal_right.png");
+
 	private static final ResourceLocation SIGNAL_FORWARD = AetherCore.getResource("textures/entities/slider/signal_forward.png");
+
 	private static final ResourceLocation SIGNAL_BACKWARD = AetherCore.getResource("textures/entities/slider/signal_backward.png");
 
 	private GlowingLayer glowingLayer, signalLayer;
@@ -50,37 +55,37 @@ public class RenderSlider extends RenderLiving<EntitySlider>
 
 			if (entity.isCritical())
 			{
-				this.signalLayer.setResourceLocation(signalling  ? GLOW : null);
+				this.signalLayer.setResourceLocation(signalling ? GLOW : null);
 			}
 			else
 			{
-				switch(entity.getDirection())
+				switch (entity.getDirection())
 				{
-				case NONE:
-				{
-					this.signalLayer.setResourceLocation(null);
-					break;
-				}
-				case RIGHT:
-				{
-					this.signalLayer.setResourceLocation(signalling  ? SIGNAL_RIGHT : null);
-					break;
-				}
-				case LEFT:
-				{
-					this.signalLayer.setResourceLocation(signalling ? SIGNAL_LEFT : null);
-					break;
-				}
-				case FORWARD:
-				{
-					this.signalLayer.setResourceLocation(signalling ? SIGNAL_FORWARD : null);
-					break;
-				}
-				case BACKWARD:
-				{
-					this.signalLayer.setResourceLocation(signalling ? SIGNAL_BACKWARD : null);
-					break;
-				}
+					case NONE:
+					{
+						this.signalLayer.setResourceLocation(null);
+						break;
+					}
+					case RIGHT:
+					{
+						this.signalLayer.setResourceLocation(signalling ? SIGNAL_RIGHT : null);
+						break;
+					}
+					case LEFT:
+					{
+						this.signalLayer.setResourceLocation(signalling ? SIGNAL_LEFT : null);
+						break;
+					}
+					case FORWARD:
+					{
+						this.signalLayer.setResourceLocation(signalling ? SIGNAL_FORWARD : null);
+						break;
+					}
+					case BACKWARD:
+					{
+						this.signalLayer.setResourceLocation(signalling ? SIGNAL_BACKWARD : null);
+						break;
+					}
 				}
 			}
 

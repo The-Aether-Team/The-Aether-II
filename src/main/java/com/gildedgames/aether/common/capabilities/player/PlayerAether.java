@@ -24,7 +24,6 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Optional;
 
 public class PlayerAether implements IPlayerAether
 {

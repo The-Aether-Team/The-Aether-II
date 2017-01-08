@@ -229,9 +229,9 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.skyroot_beam, "skyroot_planks/beam");
 
 		registerItemModels(BlocksAether.quicksoil_glass, new ItemModelBuilder("quicksoil_glass/")
-			.add(BlockQuicksoilGlass.NORMAL.getMeta(), "normal")
-			.add(BlockQuicksoilGlass.SKYROOT_FRAME.getMeta(), "skyroot_frame")
-			.add(BlockQuicksoilGlass.ARKENIUM_FRAME.getMeta(), "arkenium_frame"));
+				.add(BlockQuicksoilGlass.NORMAL.getMeta(), "normal")
+				.add(BlockQuicksoilGlass.SKYROOT_FRAME.getMeta(), "skyroot_frame")
+				.add(BlockQuicksoilGlass.ARKENIUM_FRAME.getMeta(), "arkenium_frame"));
 
 		registerItemModels(BlocksAether.aether_portal, "aether_portal");
 

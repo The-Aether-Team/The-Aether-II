@@ -2,7 +2,6 @@ package com.gildedgames.aether.api.registry.tab;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.inventory.Container;
-import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.List;
 

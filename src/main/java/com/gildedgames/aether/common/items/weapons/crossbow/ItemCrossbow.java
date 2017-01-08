@@ -33,6 +33,7 @@ public class ItemCrossbow extends Item
 	public static final ItemBoltType[] BOLT_TYPES = ItemBoltType.values();
 
 	private float durationInTicks;
+
 	private float knockBackValue;
 
 	public ItemCrossbow()
@@ -62,7 +63,9 @@ public class ItemCrossbow extends Item
 						return 1.0F;
 					}
 
-					return itemstack != null && itemstack.getItem() == ItemCrossbow.this ? ((float)(stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / ItemCrossbow.this.durationInTicks) : 0.0F;
+					return itemstack != null && itemstack.getItem() == ItemCrossbow.this ?
+							((float) (stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / ItemCrossbow.this.durationInTicks) :
+							0.0F;
 				}
 			}
 		});
@@ -72,7 +75,8 @@ public class ItemCrossbow extends Item
 			@SideOnly(Side.CLIENT)
 			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
 			{
-				return entityIn != null && (entityIn.isHandActive() && entityIn.getActiveItemStack() == stack) || ItemCrossbow.isLoaded(stack) ? 1.0F : 0.0F;
+				return entityIn != null && (entityIn.isHandActive() && entityIn.getActiveItemStack() == stack)
+						|| ItemCrossbow.isLoaded(stack) ? 1.0F : 0.0F;
 			}
 		});
 	}
@@ -99,7 +103,10 @@ public class ItemCrossbow extends Item
 
 	public static boolean isLoaded(ItemStack stack)
 	{
-		if (stack == null) return false;
+		if (stack == null)
+		{
+			return false;
+		}
 
 		checkTag(stack);
 
@@ -108,7 +115,10 @@ public class ItemCrossbow extends Item
 
 	public static void setLoaded(ItemStack stack, boolean loaded)
 	{
-		if (stack == null) return;
+		if (stack == null)
+		{
+			return;
+		}
 
 		checkTag(stack);
 
@@ -117,7 +127,10 @@ public class ItemCrossbow extends Item
 
 	public static ItemBoltType getLoadedBoltType(ItemStack stack)
 	{
-		if (stack == null) return null;
+		if (stack == null)
+		{
+			return null;
+		}
 
 		checkTag(stack);
 
@@ -126,7 +139,10 @@ public class ItemCrossbow extends Item
 
 	public static void setLoadedBoltType(ItemStack stack, ItemBoltType type)
 	{
-		if (stack == null) return;
+		if (stack == null)
+		{
+			return;
+		}
 
 		checkTag(stack);
 
@@ -180,7 +196,8 @@ public class ItemCrossbow extends Item
 		{
 			World world = entityLiving.worldObj;
 
-			world.playSound(null, entityLiving.posX, entityLiving.posY, entityLiving.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F));
+			world.playSound(null, entityLiving.posX, entityLiving.posY, entityLiving.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 1.0F,
+					1.0F / (itemRand.nextFloat() * 0.4F + 1.2F));
 
 			float speed = 1.0f;
 
@@ -194,7 +211,7 @@ public class ItemCrossbow extends Item
 
 			if (entityLiving instanceof EntityPlayer)
 			{
-				EntityPlayer player = (EntityPlayer)entityLiving;
+				EntityPlayer player = (EntityPlayer) entityLiving;
 
 				if (player.capabilities.isCreativeMode)
 				{
@@ -216,7 +233,7 @@ public class ItemCrossbow extends Item
 
 			if (this.hasAmmo(player))
 			{
-				float use = (float)(stack.getMaxItemUseDuration() - living.getItemInUseCount()) / 20.0F;
+				float use = (float) (stack.getMaxItemUseDuration() - living.getItemInUseCount()) / 20.0F;
 
 				if (use == (this.durationInTicks / 20.0F))
 				{
@@ -258,7 +275,10 @@ public class ItemCrossbow extends Item
 		return true;
 	}
 
-	public float getKnockBackValue() { return this.knockBackValue; }
+	public float getKnockBackValue()
+	{
+		return this.knockBackValue;
+	}
 
 	public ItemCrossbow setKnockBackValue(float x)
 	{
@@ -267,7 +287,10 @@ public class ItemCrossbow extends Item
 		return this;
 	}
 
-	public float getDurationInTicks() { return this.durationInTicks; }
+	public float getDurationInTicks()
+	{
+		return this.durationInTicks;
+	}
 
 	public ItemCrossbow setDurationInTicks(int x)
 	{
@@ -285,11 +308,13 @@ public class ItemCrossbow extends Item
 
 		if (seconds == Math.floor(seconds))
 		{
-			tooltip.add(TextFormatting.GRAY + "\u2022 " + String.valueOf((int)Math.floor(seconds)) + " " + I18n.format("item.aether.crossbow.desc" + (seconds < 1 || seconds > 1 ? "2" : "3")));
+			tooltip.add(TextFormatting.GRAY + "\u2022 " + String.valueOf((int) Math.floor(seconds)) + " " + I18n.format(
+					"item.aether.crossbow.desc" + (seconds < 1 || seconds > 1 ? "2" : "3")));
 		}
 		else
 		{
-			tooltip.add(TextFormatting.GRAY + "\u2022 " + String.valueOf(seconds) + " " + I18n.format("item.aether.crossbow.desc" + (seconds < 1 || seconds > 1 ? "2" : "3")));
+			tooltip.add(TextFormatting.GRAY + "\u2022 " + String.valueOf(seconds) + " " + I18n.format(
+					"item.aether.crossbow.desc" + (seconds < 1 || seconds > 1 ? "2" : "3")));
 		}
 	}
 

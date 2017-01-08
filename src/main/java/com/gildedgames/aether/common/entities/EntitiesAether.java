@@ -96,7 +96,8 @@ public class EntitiesAether
 		registerEntity(entity, id, 80, 3, true);
 	}
 
-	private static void registerEntity(Class<? extends Entity> entity, String id, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates)
+	private static void registerEntity(Class<? extends Entity> entity, String id, int trackingRange, int updateFrequency,
+			boolean sendsVelocityUpdates)
 	{
 		EntityRegistry.registerModEntity(entity, id, NEXT_ID++, AetherCore.INSTANCE, trackingRange, updateFrequency, sendsVelocityUpdates);
 	}

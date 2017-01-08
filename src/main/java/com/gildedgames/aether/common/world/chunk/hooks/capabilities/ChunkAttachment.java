@@ -2,8 +2,8 @@ package com.gildedgames.aether.common.world.chunk.hooks.capabilities;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.chunk.IChunkAttachment;
-import com.gildedgames.aether.common.world.chunk.hooks.events.AttachCapabilitiesChunkEvent;
 import com.gildedgames.aether.api.util.NBT;
+import com.gildedgames.aether.common.world.chunk.hooks.events.AttachCapabilitiesChunkEvent;
 import it.unimi.dsi.fastutil.longs.Long2ObjectArrayMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import net.minecraft.nbt.NBTBase;

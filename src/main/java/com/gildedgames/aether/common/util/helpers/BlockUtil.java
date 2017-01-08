@@ -43,7 +43,7 @@ public class BlockUtil
 					NBTTagCompound nbttagcompound = new NBTTagCompound();
 					NBTTagCompound nbttagcompound1 = nbttagcompound.copy();
 					tileentity.writeToNBT(nbttagcompound);
-					NBTTagCompound nbttagcompound2 = (NBTTagCompound)stack.getTagCompound().getTag("BlockEntityTag");
+					NBTTagCompound nbttagcompound2 = (NBTTagCompound) stack.getTagCompound().getTag("BlockEntityTag");
 					nbttagcompound.merge(nbttagcompound2);
 					nbttagcompound.setInteger("x", pos.getX());
 					nbttagcompound.setInteger("y", pos.getY());
@@ -76,7 +76,7 @@ public class BlockUtil
 	{
 		return new AxisAlignedBB(start.getX(), start.getY(), start.getZ(), end.getX(), end.getY(), end.getZ());
 	}
-	
+
 	public static MutableBlockPos add(MutableBlockPos pos, BlockPos add)
 	{
 		return BlockUtil.add(pos, add.getX(), add.getY(), add.getZ());
@@ -120,7 +120,8 @@ public class BlockUtil
 
 	public static boolean isSolid(IBlockState state, World world, BlockPos pos)
 	{
-		return !isAir(state) && state.getBlock().isBlockSolid(world, pos, EnumFacing.DOWN) && state.getBlock().getMaterial(state).isOpaque();
+		return !isAir(state) && state.getBlock().isBlockSolid(world, pos, EnumFacing.DOWN)
+				&& state.getBlock().getMaterial(state).isOpaque();
 	}
 
 	public static boolean isSolid(IBlockState state)
@@ -140,7 +141,8 @@ public class BlockUtil
 		{
 			final IBlockState l = chunk.getBlockState(posX, k, posZ);
 
-			if (l != Blocks.AIR && l.getMaterial().blocksMovement() && l.getMaterial() != Material.LEAVES && !l.getBlock().isFoliage(world, new BlockPos(x, k, z)))
+			if (l != Blocks.AIR && l.getMaterial().blocksMovement() && l.getMaterial() != Material.LEAVES
+					&& !l.getBlock().isFoliage(world, new BlockPos(x, k, z)))
 			{
 				return k + 1;
 			}
@@ -160,7 +162,8 @@ public class BlockUtil
 			blockpos1 = blockpos.down();
 			IBlockState state = chunk.getBlockState(blockpos1);
 
-			if (state.getMaterial().blocksMovement() && !state.getBlock().isLeaves(state, world, blockpos1) && !state.getBlock().isFoliage(world, blockpos1))
+			if (state.getMaterial().blocksMovement() && !state.getBlock().isLeaves(state, world, blockpos1)
+					&& !state.getBlock().isFoliage(world, blockpos1))
 			{
 				break;
 			}

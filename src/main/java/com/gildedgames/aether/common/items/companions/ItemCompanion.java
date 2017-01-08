@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.items.companions;
 
 import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
+import com.gildedgames.aether.common.entities.living.companions.EntityCompanion;
 import com.gildedgames.aether.common.items.InformationProvider;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
-import com.gildedgames.aether.common.entities.living.companions.EntityCompanion;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

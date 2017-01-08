@@ -1,7 +1,8 @@
 package com.gildedgames.aether.common.dialog.data;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.dialog.*;
+import com.gildedgames.aether.common.dialog.DialogTree;
+import com.gildedgames.aether.common.dialog.IDialogNode;
 import com.gildedgames.aether.common.dialog.util.DialogNodeFactory;
 import com.gildedgames.aether.common.dialog.util.DialogTreeFactory;
 import net.minecraft.util.ResourceLocation;
@@ -9,7 +10,9 @@ import net.minecraft.util.ResourceLocation;
 public class EdisonDialog
 {
 
-	private EdisonDialog() {}
+	private EdisonDialog()
+	{
+	}
 
 	public static class Nodes
 	{

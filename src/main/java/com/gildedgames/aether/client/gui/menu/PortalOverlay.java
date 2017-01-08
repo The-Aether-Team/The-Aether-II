@@ -1,11 +1,11 @@
 package com.gildedgames.aether.client.gui.menu;
 
+import com.gildedgames.aether.client.ui.common.GuiFrame;
+import com.gildedgames.aether.client.ui.graphics.Graphics2D;
 import com.gildedgames.aether.client.ui.input.InputProvider;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.player.modules.TeleportingModule;
-import com.gildedgames.aether.client.ui.common.GuiFrame;
-import com.gildedgames.aether.client.ui.graphics.Graphics2D;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
@@ -21,7 +21,7 @@ public class PortalOverlay extends GuiFrame
 {
 
 	private Timer timer = new Timer(20.0F);
-	
+
 	private Minecraft mc = Minecraft.getMinecraft();
 
 	public PortalOverlay()
@@ -54,7 +54,8 @@ public class PortalOverlay extends GuiFrame
 			PlayerAether playerAether = PlayerAether.getPlayer(this.mc.thePlayer);
 			TeleportingModule teleporter = playerAether.getTeleportingModule();
 
-			float timeInPortal = teleporter.getPrevTimeInPortal() + (teleporter.getTimeInPortal() - teleporter.getPrevTimeInPortal()) * this.timer.renderPartialTicks;
+			float timeInPortal = teleporter.getPrevTimeInPortal()
+					+ (teleporter.getTimeInPortal() - teleporter.getPrevTimeInPortal()) * this.timer.renderPartialTicks;
 
 			if (timeInPortal > 0.0F)
 			{

@@ -21,7 +21,8 @@ public abstract class EntityAetherAnimal extends EntityAnimal
 	@Override
 	public float getBlockPathWeight(BlockPos pos)
 	{
-		return this.worldObj.getBlockState(pos.down()).getBlock() == BlocksAether.aether_grass ? 10.0F : this.worldObj.getLightBrightness(pos) - 0.5F;
+		return this.worldObj.getBlockState(pos.down()).getBlock() == BlocksAether.aether_grass ? 10.0F :
+				this.worldObj.getLightBrightness(pos) - 0.5F;
 	}
 
 	@Override

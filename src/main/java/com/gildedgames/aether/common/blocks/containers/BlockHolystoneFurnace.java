@@ -48,7 +48,8 @@ public class BlockHolystoneFurnace extends BlockContainer
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem,
+			EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (!world.isRemote)
 		{
@@ -93,21 +94,21 @@ public class BlockHolystoneFurnace extends BlockContainer
 
 			switch (facing)
 			{
-			case WEST:
-				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x - xOffset, y, z + zOffset, 0.0D, 0.0D, 0.0D);
-				world.spawnParticle(EnumParticleTypes.FLAME, x - xOffset, y, z + zOffset, 0.0D, 0.0D, 0.0D);
-				break;
-			case EAST:
-				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + xOffset, y, z + zOffset, 0.0D, 0.0D, 0.0D);
-				world.spawnParticle(EnumParticleTypes.FLAME, x + xOffset, y, z + zOffset, 0.0D, 0.0D, 0.0D);
-				break;
-			case NORTH:
-				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + zOffset, y, z - xOffset, 0.0D, 0.0D, 0.0D);
-				world.spawnParticle(EnumParticleTypes.FLAME, x + zOffset, y, z - xOffset, 0.0D, 0.0D, 0.0D);
-				break;
-			case SOUTH:
-				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + zOffset, y, z + xOffset, 0.0D, 0.0D, 0.0D);
-				world.spawnParticle(EnumParticleTypes.FLAME, x + zOffset, y, z + xOffset, 0.0D, 0.0D, 0.0D);
+				case WEST:
+					world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x - xOffset, y, z + zOffset, 0.0D, 0.0D, 0.0D);
+					world.spawnParticle(EnumParticleTypes.FLAME, x - xOffset, y, z + zOffset, 0.0D, 0.0D, 0.0D);
+					break;
+				case EAST:
+					world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + xOffset, y, z + zOffset, 0.0D, 0.0D, 0.0D);
+					world.spawnParticle(EnumParticleTypes.FLAME, x + xOffset, y, z + zOffset, 0.0D, 0.0D, 0.0D);
+					break;
+				case NORTH:
+					world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + zOffset, y, z - xOffset, 0.0D, 0.0D, 0.0D);
+					world.spawnParticle(EnumParticleTypes.FLAME, x + zOffset, y, z - xOffset, 0.0D, 0.0D, 0.0D);
+					break;
+				case SOUTH:
+					world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + zOffset, y, z + xOffset, 0.0D, 0.0D, 0.0D);
+					world.spawnParticle(EnumParticleTypes.FLAME, x + zOffset, y, z + xOffset, 0.0D, 0.0D, 0.0D);
 			}
 		}
 	}

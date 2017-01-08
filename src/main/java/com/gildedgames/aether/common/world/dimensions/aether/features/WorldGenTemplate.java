@@ -70,19 +70,19 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 
 		switch (settings.getRotation())
 		{
-		case NONE:
-		default:
-			pos = pos.add(-(size.getX() / 2.0) + 1, 0, -(size.getZ() / 2.0) + 1);
-			break;
-		case CLOCKWISE_90:
-			pos = pos.add(size.getX() / 2.0, 0, -(size.getZ() / 2.0) + 1);
-			break;
-		case COUNTERCLOCKWISE_90:
-			pos = pos.add(-(size.getX() / 2.0) + 1, 0, (size.getZ() / 2.0));
-			break;
-		case CLOCKWISE_180:
-			pos = pos.add((size.getX() / 2.0), 0, (size.getZ() / 2.0));
-			break;
+			case NONE:
+			default:
+				pos = pos.add(-(size.getX() / 2.0) + 1, 0, -(size.getZ() / 2.0) + 1);
+				break;
+			case CLOCKWISE_90:
+				pos = pos.add(size.getX() / 2.0, 0, -(size.getZ() / 2.0) + 1);
+				break;
+			case COUNTERCLOCKWISE_90:
+				pos = pos.add(-(size.getX() / 2.0) + 1, 0, (size.getZ() / 2.0));
+				break;
+			case CLOCKWISE_180:
+				pos = pos.add((size.getX() / 2.0), 0, (size.getZ() / 2.0));
+				break;
 		}
 
 		if (this.getCenterOffsetProcessor() != null)
@@ -128,17 +128,17 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 
 		switch (rotation)
 		{
-		case NONE:
-		default:
-			break;
-		case CLOCKWISE_90:
-			bb.offset(-blockpos.getX(), 0, 0);
-			break;
-		case COUNTERCLOCKWISE_90:
-			bb.offset(0, 0, -blockpos.getZ());
-			break;
-		case CLOCKWISE_180:
-			bb.offset(-blockpos.getX(), 0, -blockpos.getZ());
+			case NONE:
+			default:
+				break;
+			case CLOCKWISE_90:
+				bb.offset(-blockpos.getX(), 0, 0);
+				break;
+			case COUNTERCLOCKWISE_90:
+				bb.offset(0, 0, -blockpos.getZ());
+				break;
+			case CLOCKWISE_180:
+				bb.offset(-blockpos.getX(), 0, -blockpos.getZ());
 		}
 
 		bb.offset(pos.getX(), pos.getY(), pos.getZ());
@@ -251,7 +251,8 @@ public class WorldGenTemplate extends WorldGenerator implements IWorldGen
 	{
 		IBlockState state = world.getBlockState(pos);
 
-		return state.getBlock().isAir(state, world, pos) || state.getBlock().isLeaves(state, world, pos) || WorldGenTemplate.canGrowInto(state.getBlock());
+		return state.getBlock().isAir(state, world, pos) || state.getBlock().isLeaves(state, world, pos)
+				|| WorldGenTemplate.canGrowInto(state.getBlock());
 	}
 
 	public interface PlacementCondition

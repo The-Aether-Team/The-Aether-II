@@ -12,13 +12,14 @@ import net.minecraftforge.common.ForgeHooks;
 
 public class SlotSimpleCrafting extends SlotCrafting
 {
-private final EntityPlayer thePlayer;
+	private final EntityPlayer thePlayer;
 
 	private ISimpleRecipe recipe;
 
 	private boolean isSimpleCrafting;
 
-	public SlotSimpleCrafting(EntityPlayer player, InventoryCrafting craftingInventory, IInventory inventoryIn, int slotIndex, int xPosition, int yPosition)
+	public SlotSimpleCrafting(EntityPlayer player, InventoryCrafting craftingInventory, IInventory inventoryIn, int slotIndex,
+			int xPosition, int yPosition)
 	{
 		super(player, craftingInventory, inventoryIn, slotIndex, xPosition, yPosition);
 
@@ -32,7 +33,7 @@ private final EntityPlayer thePlayer;
 
 	public boolean isSimpleCrafting()
 	{
-		return  this.isSimpleCrafting;
+		return this.isSimpleCrafting;
 	}
 
 	public ISimpleRecipe getRecipe()
@@ -78,7 +79,8 @@ private final EntityPlayer thePlayer;
 		/** TODO: Implement remaining items like buckets ^ **/
 		ForgeHooks.setCraftingPlayer(null);
 
-		outerloop: for (int reqIndex = 0; reqIndex < this.getRecipe().getRequired().length; reqIndex++)
+		outerloop:
+		for (int reqIndex = 0; reqIndex < this.getRecipe().getRequired().length; reqIndex++)
 		{
 			Object req = recipe.getRequired()[reqIndex];
 
@@ -105,7 +107,6 @@ private final EntityPlayer thePlayer;
 
 					inventoryStack.stackSize -= Math.min(reqAmount - amountSoFar, reqAmount);
 					amountSoFar += Math.min(oldSize, reqAmount);
-
 
 					if (inventoryStack.stackSize <= 0)
 					{

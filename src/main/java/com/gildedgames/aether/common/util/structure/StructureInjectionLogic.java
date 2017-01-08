@@ -41,10 +41,16 @@ public class StructureInjectionLogic
 			{
 				StructureBoundingBox structureboundingbox = calculateEnclosingBoundingBox(blockpos, list1);
 
-				if (structureboundingbox.maxX - structureboundingbox.minX > 1 && structureboundingbox.maxY - structureboundingbox.minY > 1 && structureboundingbox.maxZ - structureboundingbox.minZ > 1)
+				if (structureboundingbox.maxX - structureboundingbox.minX > 1 && structureboundingbox.maxY - structureboundingbox.minY > 1
+						&& structureboundingbox.maxZ - structureboundingbox.minZ > 1)
 				{
-					te.setPosition(new BlockPos(structureboundingbox.minX - blockpos.getX() + 1, structureboundingbox.minY - blockpos.getY() + 1, structureboundingbox.minZ - blockpos.getZ() + 1));
-					te.setSize(new BlockPos(structureboundingbox.maxX - structureboundingbox.minX - 1, structureboundingbox.maxY - structureboundingbox.minY - 1, structureboundingbox.maxZ - structureboundingbox.minZ - 1));
+					te.setPosition(new BlockPos(
+							structureboundingbox.minX - blockpos.getX() + 1,
+							structureboundingbox.minY - blockpos.getY() + 1, structureboundingbox.minZ - blockpos.getZ() + 1));
+					te.setSize(new BlockPos(
+							structureboundingbox.maxX - structureboundingbox.minX - 1,
+							structureboundingbox.maxY - structureboundingbox.minY - 1,
+							structureboundingbox.maxZ - structureboundingbox.minZ - 1));
 					te.markDirty();
 					IBlockState iblockstate = te.getWorld().getBlockState(blockpos);
 					te.getWorld().notifyBlockUpdate(blockpos, iblockstate, iblockstate, 3);
@@ -80,7 +86,7 @@ public class StructureInjectionLogic
 
 				if (tileentity != null && tileentity instanceof TileEntityStructure)
 				{
-					list.add((TileEntityStructure)tileentity);
+					list.add((TileEntityStructure) tileentity);
 				}
 			}
 		}

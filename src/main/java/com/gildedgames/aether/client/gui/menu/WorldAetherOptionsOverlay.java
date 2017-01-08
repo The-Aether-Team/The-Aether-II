@@ -1,15 +1,15 @@
 package com.gildedgames.aether.client.gui.menu;
 
-import com.gildedgames.aether.client.ui.input.*;
-import com.gildedgames.aether.common.ReflectionAether;
-import com.gildedgames.aether.client.ui.minecraft.util.GuiFactory;
-import com.gildedgames.aether.client.ui.minecraft.util.wrappers.MinecraftButton;
 import com.gildedgames.aether.client.ui.common.GuiFrame;
 import com.gildedgames.aether.client.ui.data.rect.Dim2D;
 import com.gildedgames.aether.client.ui.data.rect.Rect;
 import com.gildedgames.aether.client.ui.event.view.MouseEventGui;
 import com.gildedgames.aether.client.ui.graphics.Graphics2D;
+import com.gildedgames.aether.client.ui.input.*;
+import com.gildedgames.aether.client.ui.minecraft.util.GuiFactory;
+import com.gildedgames.aether.client.ui.minecraft.util.wrappers.MinecraftButton;
 import com.gildedgames.aether.client.ui.util.InputHelper;
+import com.gildedgames.aether.common.ReflectionAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.client.gui.GuiWorldSelection;
@@ -83,7 +83,7 @@ public class WorldAetherOptionsOverlay extends GuiFrame
 			return false;
 		}
 
-		GuiCreateWorld gui = (GuiCreateWorld)Minecraft.getMinecraft().currentScreen;
+		GuiCreateWorld gui = (GuiCreateWorld) Minecraft.getMinecraft().currentScreen;
 		boolean inMoreWorldOptionsDisplay = ObfuscationReflectionHelper.getPrivateValue(GuiCreateWorld.class, gui, ReflectionAether.IN_MORE_WORLD_OPTIONS_DISPLAY.getMappings());
 
 		if (inMoreWorldOptionsDisplay)

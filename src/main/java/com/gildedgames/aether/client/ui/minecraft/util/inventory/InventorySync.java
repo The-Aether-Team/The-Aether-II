@@ -10,11 +10,11 @@ import com.gildedgames.aether.client.ui.util.events.slots.SlotStack;
 
 public class InventorySync<E extends NBT> implements InventoryListener<E>
 {
-	
+
 	private UIContainer inventoryContent;
-	
+
 	private IconParser<E> iconParser;
-	
+
 	public InventorySync(UIContainer inventoryContent, IconParser<E> iconParser)
 	{
 		this.inventoryContent = inventoryContent;
@@ -25,15 +25,15 @@ public class InventorySync<E extends NBT> implements InventoryListener<E>
 	public void onChange(int slotIndex, E contents)
 	{
 		GuiFrame slot = this.inventoryContent.get("slot" + slotIndex, GuiFrame.class);
-		
+
 		if (slot == null)
 		{
 			return;
 		}
-		
+
 		@SuppressWarnings("unchecked")
 		SlotBehavior<E> slotBehavior = slot.events().get("slotBehavior", SlotBehavior.class);
-		
+
 		if (slotBehavior.getSlotContents() != null && slotBehavior.getSlotContents().getData() != contents)
 		{
 			if (contents == null)

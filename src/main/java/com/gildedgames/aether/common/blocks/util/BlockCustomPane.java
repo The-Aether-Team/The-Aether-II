@@ -58,5 +58,4 @@ public class BlockCustomPane extends BlockPane
 		}
 	}
 
-
 }

@@ -82,6 +82,7 @@ public class EntityAIAechorPlantAttack extends EntityAITarget
 
 		double maxDistance = this.getTargetDistance();
 
-		return predator.getAttackTarget() != null && predator.isEntityAlive() && predator.getDistanceSqToEntity(predator.getAttackTarget()) < (maxDistance * maxDistance);
+		return predator.getAttackTarget() != null && predator.isEntityAlive()
+				&& predator.getDistanceSqToEntity(predator.getAttackTarget()) < (maxDistance * maxDistance);
 	}
 }

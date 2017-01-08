@@ -111,7 +111,8 @@ public class PlayerControllerAetherMP extends PlayerControllerMP
 	}
 
 	@Override
-	public EnumActionResult processRightClickBlock(EntityPlayerSP player, WorldClient worldIn, @Nullable ItemStack stack, BlockPos pos, EnumFacing facing, Vec3d vec, EnumHand hand)
+	public EnumActionResult processRightClickBlock(EntityPlayerSP player, WorldClient worldIn, @Nullable ItemStack stack, BlockPos pos,
+			EnumFacing facing, Vec3d vec, EnumHand hand)
 	{
 		return this.baseController.processRightClickBlock(player, worldIn, stack, pos, facing, vec, hand);
 	}
@@ -141,7 +142,8 @@ public class PlayerControllerAetherMP extends PlayerControllerMP
 	}
 
 	@Override
-	public EnumActionResult interactWithEntity(EntityPlayer player, Entity target, RayTraceResult raytrace, @Nullable ItemStack heldItem, EnumHand hand)
+	public EnumActionResult interactWithEntity(EntityPlayer player, Entity target, RayTraceResult raytrace, @Nullable ItemStack heldItem,
+			EnumHand hand)
 	{
 		return this.baseController.interactWithEntity(player, target, raytrace, heldItem, hand);
 	}

@@ -1,11 +1,11 @@
 package com.gildedgames.aether.common.entities.living.dungeon.labyrinth;
 
-import com.gildedgames.aether.common.entities.living.mobs.EntityAetherMob;
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AIDetonateClose;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFloat;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFollowAttackTarget;
 import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
+import com.gildedgames.aether.common.entities.living.mobs.EntityAetherMob;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -85,21 +85,21 @@ public class EntityDetonationSentry extends EntityAetherMob implements IProjecti
 	public void setThrowableHeading(double x, double y, double z, float velocity, float inaccuracy)
 	{
 		float f = MathHelper.sqrt_double(x * x + y * y + z * z);
-		x = x / (double)f;
-		y = y / (double)f;
-		z = z / (double)f;
-		x = x + this.rand.nextGaussian() * 0.007499999832361937D * (double)inaccuracy;
-		y = y + this.rand.nextGaussian() * 0.007499999832361937D * (double)inaccuracy;
-		z = z + this.rand.nextGaussian() * 0.007499999832361937D * (double)inaccuracy;
-		x = x * (double)velocity;
-		y = y * (double)velocity;
-		z = z * (double)velocity;
+		x = x / (double) f;
+		y = y / (double) f;
+		z = z / (double) f;
+		x = x + this.rand.nextGaussian() * 0.007499999832361937D * (double) inaccuracy;
+		y = y + this.rand.nextGaussian() * 0.007499999832361937D * (double) inaccuracy;
+		z = z + this.rand.nextGaussian() * 0.007499999832361937D * (double) inaccuracy;
+		x = x * (double) velocity;
+		y = y * (double) velocity;
+		z = z * (double) velocity;
 		this.motionX = x;
 		this.motionY = y;
 		this.motionZ = z;
 		float f1 = MathHelper.sqrt_double(x * x + z * z);
-		this.rotationYaw = (float)(MathHelper.atan2(x, z) * (180D / Math.PI));
-		this.rotationPitch = (float)(MathHelper.atan2(y, (double)f1) * (180D / Math.PI));
+		this.rotationYaw = (float) (MathHelper.atan2(x, z) * (180D / Math.PI));
+		this.rotationPitch = (float) (MathHelper.atan2(y, (double) f1) * (180D / Math.PI));
 		this.prevRotationYaw = this.rotationYaw;
 		this.prevRotationPitch = this.rotationPitch;
 	}

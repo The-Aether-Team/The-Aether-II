@@ -1,11 +1,11 @@
 package com.gildedgames.aether.client.gui.menu;
 
 import com.gildedgames.aether.api.capabilites.entity.boss.IBoss;
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.client.ui.common.GuiFrame;
 import com.gildedgames.aether.client.ui.graphics.Graphics2D;
 import com.gildedgames.aether.client.ui.input.InputProvider;
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;

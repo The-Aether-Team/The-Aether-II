@@ -44,7 +44,7 @@ public class BossModule extends PlayerAetherModule
 
 			if (entity instanceof IBoss)
 			{
-				this.boss = (IBoss)entity;
+				this.boss = (IBoss) entity;
 			}
 			else
 			{

@@ -34,7 +34,8 @@ public class QuicksoilProcessor
 		{
 			if (box != null)
 			{
-				BlockPos pos = new BlockPos(MathHelper.floor_double(box.minX + 0.5D), MathHelper.floor_double(box.minY + 0.5D), MathHelper.floor_double(box.minZ + 0.5D));
+				BlockPos pos = new BlockPos(MathHelper.floor_double(box.minX + 0.5D), MathHelper.floor_double(
+						box.minY + 0.5D), MathHelper.floor_double(box.minZ + 0.5D));
 
 				Block block = entity.worldObj.getBlockState(pos).getBlock();
 

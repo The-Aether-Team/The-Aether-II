@@ -30,7 +30,8 @@ public class RenderNexSpirit extends RenderCompanion<EntityNexSpirit>
 	}
 
 	@Override
-	protected void renderExtra(EntityNexSpirit entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, float opacity)
+	protected void renderExtra(EntityNexSpirit entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+			float headPitch, float scaleFactor, float opacity)
 	{
 		float partialTicks = Minecraft.getMinecraft().getRenderPartialTicks();
 

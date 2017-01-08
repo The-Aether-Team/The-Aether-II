@@ -112,7 +112,8 @@ public class TileEntityAltar extends TileEntitySynced implements ITickable
 
 	public EntityItem createEntityItemAboveAltar(ItemStack stack)
 	{
-		return new EntityItem(this.getWorld(), this.getPos().getX() + 0.5D, this.getPos().getY() + 1.1D, this.getPos().getZ() + 0.5D, stack);
+		return new EntityItem(this.getWorld(),
+				this.getPos().getX() + 0.5D, this.getPos().getY() + 1.1D, this.getPos().getZ() + 0.5D, stack);
 	}
 
 	public EnumFacing getFacing()

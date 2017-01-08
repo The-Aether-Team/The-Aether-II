@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.blocks.util;
 
-import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -55,7 +55,8 @@ public class BlockCustomSlab extends Block
 
 		SlabState slabState = state.getValue(PROPERTY_SLAB_STATE);
 
-		return (slabState == SlabState.TOP_HALF && face == EnumFacing.UP) || (slabState == SlabState.BOTTOM_HALF && face == EnumFacing.DOWN);
+		return (slabState == SlabState.TOP_HALF && face == EnumFacing.UP) || (slabState == SlabState.BOTTOM_HALF
+				&& face == EnumFacing.DOWN);
 	}
 
 	@Override
@@ -105,17 +106,18 @@ public class BlockCustomSlab extends Block
 	{
 		switch (state.getValue(PROPERTY_SLAB_STATE))
 		{
-		case BOTTOM_HALF:
-			return AABB_BOTTOM_HALF;
-		case TOP_HALF:
-			return AABB_TOP_HALF;
-		default:
-			return FULL_BLOCK_AABB;
+			case BOTTOM_HALF:
+				return AABB_BOTTOM_HALF;
+			case TOP_HALF:
+				return AABB_TOP_HALF;
+			default:
+				return FULL_BLOCK_AABB;
 		}
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+			EntityLivingBase placer)
 	{
 		IBlockState state = this.getDefaultState().withProperty(PROPERTY_SLAB_STATE, SlabState.BOTTOM_HALF);
 

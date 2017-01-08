@@ -11,12 +11,14 @@ public class SecondStageSlider extends BossStage<EntitySlider>
 
 	}
 
-	@Override protected boolean conditionsMet(EntitySlider entity, IBossManager<EntitySlider> manager)
+	@Override
+	protected boolean conditionsMet(EntitySlider entity, IBossManager<EntitySlider> manager)
 	{
 		return entity.getHealth() <= 250;
 	}
 
-	@Override protected void onStageBegin(EntitySlider entity, IBossManager<EntitySlider> manager)
+	@Override
+	protected void onStageBegin(EntitySlider entity, IBossManager<EntitySlider> manager)
 	{
 		entity.setCritical(true);
 	}

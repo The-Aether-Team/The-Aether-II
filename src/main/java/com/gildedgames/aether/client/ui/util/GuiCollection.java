@@ -86,7 +86,8 @@ public class GuiCollection<T extends Ui> extends GuiFrame
 							@Override
 							public void notifyDimChange(List<ModifierType> modifier)
 							{
-								if (!modifier.isEmpty() && !modifier.contains(ModifierType.X) && !modifier.contains(ModifierType.Y) && GuiCollection.this.isSorting)
+								if (!modifier.isEmpty() && !modifier.contains(ModifierType.X) && !modifier.contains(ModifierType.Y)
+										&& GuiCollection.this.isSorting)
 								{
 									GuiCollection.this.sortAndPositionContent();
 								}

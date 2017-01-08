@@ -35,18 +35,18 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 		{
 			switch (altar.getFacing())
 			{
-			case NORTH:
-				GlStateManager.rotate(270.0f, 0.0f, 1.0f, 0.0f);
-				break;
-			case WEST:
-				GlStateManager.rotate(0.0f, 0.0f, 1.0f, 0.0f);
-				break;
-			case SOUTH:
-				GlStateManager.rotate(90.0f, 0.0f, 1.0f, 0.0f);
-				break;
-			case EAST:
-				GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f);
-				break;
+				case NORTH:
+					GlStateManager.rotate(270.0f, 0.0f, 1.0f, 0.0f);
+					break;
+				case WEST:
+					GlStateManager.rotate(0.0f, 0.0f, 1.0f, 0.0f);
+					break;
+				case SOUTH:
+					GlStateManager.rotate(90.0f, 0.0f, 1.0f, 0.0f);
+					break;
+				case EAST:
+					GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f);
+					break;
 			}
 		}
 
@@ -89,7 +89,8 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 				GlStateManager.popMatrix();
 			}
 
-			this.renderOrbitingItems(altar.getAmbrosiumCount(), altar.prevAnimationTicks + (altar.animationTicks - altar.prevAnimationTicks) * partialTicks);
+			this.renderOrbitingItems(altar.getAmbrosiumCount(),
+					altar.prevAnimationTicks + (altar.animationTicks - altar.prevAnimationTicks) * partialTicks);
 		}
 
 		GlStateManager.disableRescaleNormal();

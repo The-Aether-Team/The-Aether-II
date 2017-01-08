@@ -79,7 +79,8 @@ public class BlockAercloud extends Block implements IBlockVariants
 
 					if (entity.worldObj.isRemote)
 					{
-						world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundsAether.aercloud_bounce, SoundCategory.BLOCKS, 0.8f, 0.9f + (world.rand.nextFloat() * 0.2f), false);
+						world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundsAether.aercloud_bounce, SoundCategory.BLOCKS, 0.8f,
+								0.9f + (world.rand.nextFloat() * 0.2f), false);
 
 						for (int i = 0; i < 50; i++)
 						{
@@ -256,7 +257,8 @@ public class BlockAercloud extends Block implements IBlockVariants
 	{
 		if (meta >= PURPLE_AERCLOUD.getMeta())
 		{
-			return this.getDefaultState().withProperty(PROPERTY_VARIANT, PURPLE_AERCLOUD).withProperty(PROPERTY_FACING, EnumFacing.getHorizontal(meta - PURPLE_AERCLOUD.getMeta()));
+			return this.getDefaultState().withProperty(PROPERTY_VARIANT, PURPLE_AERCLOUD).withProperty(PROPERTY_FACING, EnumFacing.getHorizontal(
+					meta - PURPLE_AERCLOUD.getMeta()));
 		}
 
 		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
@@ -286,7 +288,8 @@ public class BlockAercloud extends Block implements IBlockVariants
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+			EntityLivingBase placer)
 	{
 		return this.getStateFromMeta(meta).withProperty(PROPERTY_FACING, placer.getHorizontalFacing().getOpposite());
 	}

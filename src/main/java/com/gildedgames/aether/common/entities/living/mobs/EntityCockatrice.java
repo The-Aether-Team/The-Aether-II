@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
-import com.gildedgames.aether.common.registry.content.LootTablesAether;
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceHide;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceSneakAttack;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceWander;
+import com.gildedgames.aether.common.registry.content.LootTablesAether;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -88,7 +88,7 @@ public class EntityCockatrice extends EntityAetherMob
 
 		if (flag && entity instanceof EntityLivingBase)
 		{
-			EntityLivingBase living = (EntityLivingBase)entity;
+			EntityLivingBase living = (EntityLivingBase) entity;
 
 			if (!living.isActiveItemStackBlocking())
 			{
@@ -145,9 +145,15 @@ public class EntityCockatrice extends EntityAetherMob
 		this.dataManager.set(EntityCockatrice.IS_HIDDEN, isHidden);
 	}
 
-	public boolean isAttacking() { return this.dataManager.get(EntityCockatrice.IS_ATTACKING); }
+	public boolean isAttacking()
+	{
+		return this.dataManager.get(EntityCockatrice.IS_ATTACKING);
+	}
 
-	public void setAttacking(boolean isAttacking) { this.dataManager.set(EntityCockatrice.IS_ATTACKING, isAttacking); }
+	public void setAttacking(boolean isAttacking)
+	{
+		this.dataManager.set(EntityCockatrice.IS_ATTACKING, isAttacking);
+	}
 
 	@Override
 	protected ResourceLocation getLootTable()

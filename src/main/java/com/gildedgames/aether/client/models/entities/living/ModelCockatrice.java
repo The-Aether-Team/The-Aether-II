@@ -410,7 +410,8 @@ public class ModelCockatrice extends ModelBase
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entity)
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
+			float scaleFactor, Entity entity)
 	{
 		//super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		EntityCockatrice cockatrice = (EntityCockatrice) entity;

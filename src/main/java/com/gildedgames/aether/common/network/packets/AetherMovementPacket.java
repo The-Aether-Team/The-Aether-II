@@ -1,7 +1,5 @@
 package com.gildedgames.aether.common.network.packets;
 
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import io.netty.buffer.ByteBuf;
@@ -39,7 +37,7 @@ public class AetherMovementPacket implements IMessage
 		buf.writeByte(this.action.ordinal());
 	}
 
-	public static class Handler extends MessageHandlerServer<AetherMovementPacket,AetherMovementPacket>
+	public static class Handler extends MessageHandlerServer<AetherMovementPacket, AetherMovementPacket>
 	{
 		@Override
 		public AetherMovementPacket onMessage(AetherMovementPacket message, EntityPlayer player)
@@ -48,8 +46,8 @@ public class AetherMovementPacket implements IMessage
 
 			switch (message.action)
 			{
-			case EXTRA_JUMP:
-				aePlayer.getAbilitiesModule().performMidAirJump();
+				case EXTRA_JUMP:
+					aePlayer.getAbilitiesModule().performMidAirJump();
 			}
 
 			return null;

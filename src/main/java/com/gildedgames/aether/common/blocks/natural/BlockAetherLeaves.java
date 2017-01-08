@@ -82,7 +82,8 @@ public class BlockAetherLeaves extends Block implements IShearable
 	{
 		if (this == BlocksAether.golden_oak_leaves)
 		{
-			if (rand.nextInt(100) > 90) {
+			if (rand.nextInt(100) > 90)
+			{
 				double x = pos.getX() + (rand.nextFloat() * 6f) - 3f;
 				double y = pos.getY() + (rand.nextFloat() * 6f) - 3f;
 				double z = pos.getZ() + (rand.nextFloat() * 6f) - 3f;

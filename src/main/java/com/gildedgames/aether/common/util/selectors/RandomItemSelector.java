@@ -5,10 +5,8 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.util.Constraint;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameData;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class RandomItemSelector implements Loot

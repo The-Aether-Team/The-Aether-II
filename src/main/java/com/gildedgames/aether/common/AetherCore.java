@@ -33,7 +33,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
-@Mod(name = AetherCore.MOD_NAME, modid = AetherCore.MOD_ID, version = AetherCore.MOD_VERSION, certificateFingerprint = AetherCore.MOD_FINGERPRINT, guiFactory = AetherCore.MOD_GUI_FACTORY)
+@Mod(name = AetherCore.MOD_NAME, modid = AetherCore.MOD_ID, version = AetherCore.MOD_VERSION,
+		certificateFingerprint = AetherCore.MOD_FINGERPRINT, guiFactory = AetherCore.MOD_GUI_FACTORY)
 public class AetherCore implements IAetherServiceLocator
 {
 
@@ -138,8 +139,13 @@ public class AetherCore implements IAetherServiceLocator
 	@EventHandler
 	public void onFingerprintViolation(FMLFingerprintViolationEvent event)
 	{
+		if (AetherCore.isInsideDevEnvironment())
+		{
+			return;
+		}
+
 		AetherCore.LOGGER.warn("Heads up! Forge has failed to validate the integrity of the Aether.");
-		AetherCore.LOGGER.warn("This Aether mod could be running in a development workspace, corrupted, or packaged as an unofficial build. Proceed at your own risk.");
+		AetherCore.LOGGER.warn("The Aether may be packaged unofficially, tampered with, or corrupted. As a result, this build will not receive support.");
 	}
 
 	public static ResourceLocation getResource(String name)
@@ -147,9 +153,15 @@ public class AetherCore implements IAetherServiceLocator
 		return new ResourceLocation(AetherCore.MOD_ID, name);
 	}
 
-	public static AssetLocation asset(String name) { return new MinecraftAssetLocation(AetherCore.MOD_ID, name); }
+	public static AssetLocation asset(String name)
+	{
+		return new MinecraftAssetLocation(AetherCore.MOD_ID, name);
+	}
 
-	public static AssetLocation assetGui(String name) { return new MinecraftAssetLocation(AetherCore.MOD_ID, "textures/gui/" + name); }
+	public static AssetLocation assetGui(String name)
+	{
+		return new MinecraftAssetLocation(AetherCore.MOD_ID, "textures/gui/" + name);
+	}
 
 	public static String getResourcePath(String name)
 	{

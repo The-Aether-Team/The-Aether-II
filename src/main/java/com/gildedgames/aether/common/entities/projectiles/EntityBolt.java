@@ -23,13 +23,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class EntityBolt extends EntityArrow
 {
 	private static final DataParameter<Byte> TYPE = new DataParameter<>(20, DataSerializers.BYTE);
+
 	private static final DataParameter<Byte> ABILITY = new DataParameter<>(21, DataSerializers.BYTE);
-	
+
 	public enum BoltAbility
 	{
 		NORMAL, DESTROY_BLOCKS
 	}
-	
+
 	private int blocksCanDestroy = 1;
 
 	public EntityBolt(World worldIn)
@@ -41,22 +42,22 @@ public class EntityBolt extends EntityArrow
 	{
 		super(worldIn, shooter);
 	}
-	
+
 	@Override
-    public void onUpdate()
-    {
+	public void onUpdate()
+	{
 		if (this.getBoltAbility() == BoltAbility.DESTROY_BLOCKS)
 		{
 			Vec3d vec3d1 = new Vec3d(this.posX, this.posY, this.posZ);
-	        Vec3d vec3d = new Vec3d(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+			Vec3d vec3d = new Vec3d(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
 			RayTraceResult raytraceresult = this.worldObj.rayTraceBlocks(vec3d1, vec3d, false, true, false);
-			
+
 			if (raytraceresult != null)
 			{
 				BlockPos blockpos = raytraceresult.getBlockPos();
 
-		        IBlockState state = this.worldObj.getBlockState(blockpos);
+				IBlockState state = this.worldObj.getBlockState(blockpos);
 
 				if (this.shootingEntity instanceof EntityPlayer)
 				{
@@ -78,13 +79,13 @@ public class EntityBolt extends EntityArrow
 		}
 
 		super.onUpdate();
-    }
-	
+	}
+
 	@Override
-    protected void onHit(RayTraceResult raytraceResultIn)
-    {
+	protected void onHit(RayTraceResult raytraceResultIn)
+	{
 		super.onHit(raytraceResultIn);
-    }
+	}
 
 	@Override
 	protected ItemStack getArrowStack()
@@ -115,7 +116,7 @@ public class EntityBolt extends EntityArrow
 
 		if (this.worldObj.isBlockLoaded(blockpos$mutableblockpos))
 		{
-			blockpos$mutableblockpos.setY(MathHelper.floor_double(this.posY + (double)this.getEyeHeight()));
+			blockpos$mutableblockpos.setY(MathHelper.floor_double(this.posY + (double) this.getEyeHeight()));
 			return this.worldObj.getCombinedLight(blockpos$mutableblockpos, 0);
 		}
 		else
@@ -123,12 +124,12 @@ public class EntityBolt extends EntityArrow
 			return 0;
 		}
 	}
-	
+
 	public void setBoltAbility(BoltAbility ability)
 	{
 		this.dataManager.set(ABILITY, (byte) ability.ordinal());
 	}
-	
+
 	public BoltAbility getBoltAbility()
 	{
 		return BoltAbility.values()[this.dataManager.get(ABILITY)];

@@ -10,11 +10,11 @@ import org.lwjgl.input.Keyboard;
 
 public class BasicSlotParser<E extends NBT> implements SlotParser<E>
 {
-	
+
 	private Inventory<E> inventory;
-	
+
 	private int slotIndex;
-	
+
 	public BasicSlotParser(Inventory<E> inventory, int slotIndex)
 	{
 		this.inventory = inventory;
@@ -33,26 +33,26 @@ public class BasicSlotParser<E extends NBT> implements SlotParser<E>
 		if (newContents == null)
 		{
 			this.inventory.setElement(null, this.slotIndex);
-			
+
 			return;
 		}
-		
+
 		E element = newContents.getData();
-		
+
 		this.inventory.setElement(element, this.slotIndex);
 	}
-	
+
 	@Override
 	public boolean onMouseInput(MouseInputPool pool, InputProvider input)
 	{
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
 		{
 			this.inventory.setElement(null, this.slotIndex);
-			
+
 			return true;
 		}
-		
+
 		return false;
 	}
-	
+
 }

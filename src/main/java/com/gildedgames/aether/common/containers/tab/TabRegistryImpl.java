@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.containers.tab;
 
-import com.gildedgames.aether.api.registry.tab.ITabRegistry;
-import com.gildedgames.aether.client.gui.tab.TabBackpack;
 import com.gildedgames.aether.api.registry.tab.ITab;
 import com.gildedgames.aether.api.registry.tab.ITabGroupHandler;
+import com.gildedgames.aether.api.registry.tab.ITabRegistry;
+import com.gildedgames.aether.client.gui.tab.TabBackpack;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.tab.util.TabGroupHandler;
 import net.minecraft.client.gui.GuiScreen;

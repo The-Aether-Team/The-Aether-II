@@ -55,7 +55,7 @@ public class PlayerUtil
 			emptyBucket.stackSize--;
 
 			player.inventory.setInventorySlotContents(player.inventory.currentItem, emptyBucket);
-			
+
 			if (!player.inventory.addItemStackToInventory(fillBucket))
 			{
 				player.dropItem(fillBucket, false);

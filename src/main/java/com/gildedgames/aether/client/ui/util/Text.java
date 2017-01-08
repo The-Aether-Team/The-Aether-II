@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.ui.util;
 
 import com.gildedgames.aether.client.ui.data.DrawingData;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class Text
 {

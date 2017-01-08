@@ -39,7 +39,7 @@ public class ItemShardOfLife extends Item
 
 		if (entity instanceof EntityPlayer)
 		{
-			EntityPlayer player = (EntityPlayer)entity;
+			EntityPlayer player = (EntityPlayer) entity;
 
 			if (player.capabilities.isCreativeMode)
 			{

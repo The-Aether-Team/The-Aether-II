@@ -1,12 +1,12 @@
 package com.gildedgames.aether.client.gui.container;
 
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
-import com.gildedgames.aether.common.items.equipment.EffectPool;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.player.modules.EquipmentModule;
 import com.gildedgames.aether.common.containers.ContainerEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
+import com.gildedgames.aether.common.items.equipment.EffectPool;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
@@ -84,11 +84,13 @@ public class GuiEquipment extends GuiContainer
 
 		this.drawTexturedModalRect(this.width / 2 + 90 - 176 / 2, this.height / 2 - 166 / 2, 0, 0, 176, 166);
 
-		this.fontRendererObj.drawString(I18n.format("container.crafting"), this.width / 2 + (this.aePlayer.getEntity().capabilities.isCreativeMode ? 70 : 51), this.height / 2 - 135 / 2, 4210752);
+		this.fontRendererObj.drawString(I18n.format("container.crafting"),
+				this.width / 2 + (this.aePlayer.getEntity().capabilities.isCreativeMode ? 70 : 51), this.height / 2 - 135 / 2, 4210752);
 
 		if (AetherCore.CONFIG.getDisplayInventoryPattern())
 		{
-			this.mc.renderEngine.bindTexture(this.aePlayer.getEntity().capabilities.isCreativeMode ? textureBackpackCreativePattern : textureBackpackPattern);
+			this.mc.renderEngine.bindTexture(
+					this.aePlayer.getEntity().capabilities.isCreativeMode ? textureBackpackCreativePattern : textureBackpackPattern);
 
 			GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -180,7 +182,9 @@ public class GuiEquipment extends GuiContainer
 	{
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
-		GuiInventory.drawEntityOnScreen(this.width / 2 - 48, this.height / 2 + 10, 37, (this.guiLeft + 88) - mouseX, (this.guiTop + 42) - mouseY, this.mc.thePlayer);
+		GuiInventory.drawEntityOnScreen(
+				this.width / 2 - 48,
+				this.height / 2 + 10, 37, (this.guiLeft + 88) - mouseX, (this.guiTop + 42) - mouseY, this.mc.thePlayer);
 	}
 
 	private void drawEquipmentEffects()

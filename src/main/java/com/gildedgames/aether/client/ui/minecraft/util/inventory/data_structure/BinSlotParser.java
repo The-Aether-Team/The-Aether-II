@@ -10,9 +10,9 @@ import org.lwjgl.input.Keyboard;
 
 public class BinSlotParser<E extends NBT> implements SlotParser<E>
 {
-	
+
 	private Inventory<E> inventory;
-	
+
 	public BinSlotParser(Inventory<E> inventory)
 	{
 		this.inventory = inventory;
@@ -31,7 +31,7 @@ public class BinSlotParser<E extends NBT> implements SlotParser<E>
 		{
 			return;
 		}
-		
+
 		slot.clearSlotContents();
 	}
 
@@ -41,11 +41,11 @@ public class BinSlotParser<E extends NBT> implements SlotParser<E>
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
 		{
 			this.inventory.clear();
-			
+
 			return true;
 		}
-		
+
 		return false;
 	}
-	
+
 }

@@ -31,7 +31,6 @@ public class BlockCustomWall extends BlockWall
 		this.setHardness(hardness);
 		this.setSoundType(state.getBlock().getSoundType());
 
-
 	}
 
 	public BlockCustomWall setGlows(boolean glows)

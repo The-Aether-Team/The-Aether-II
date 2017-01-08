@@ -6,7 +6,6 @@ import com.gildedgames.aether.api.capabilites.instances.IInstanceHandler;
 import com.gildedgames.aether.api.capabilites.instances.IPlayerInstances;
 import com.gildedgames.aether.api.capabilites.instances.Instance;
 import com.gildedgames.aether.api.util.BlockPosDimension;
-import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketRegisterDimension;
@@ -167,17 +166,20 @@ public class InstanceHandler<T extends Instance> implements IInstanceHandler<T>
 		}
 	}
 
-	@Override public T getInstanceForDimension(int id)
+	@Override
+	public T getInstanceForDimension(int id)
 	{
 		return this.instances.get(id);
 	}
 
-	@Override public int getDimensionForInstance(Instance instance)
+	@Override
+	public int getDimensionForInstance(Instance instance)
 	{
 		return this.instances.inverse().get(instance);
 	}
 
-	@Override public World getWorldForInstance(Instance instance)
+	@Override
+	public World getWorldForInstance(Instance instance)
 	{
 		int dim = this.getDimensionForInstance(instance);
 
@@ -188,22 +190,26 @@ public class InstanceHandler<T extends Instance> implements IInstanceHandler<T>
 		return world;
 	}
 
-	@Override public int getInstancesSize()
+	@Override
+	public int getInstancesSize()
 	{
 		return this.instances.size();
 	}
 
-	@Override public Collection<T> getInstances()
+	@Override
+	public Collection<T> getInstances()
 	{
 		return this.instances.values();
 	}
 
-	@Override public BiMap<Integer, T> getInstancesMap()
+	@Override
+	public BiMap<Integer, T> getInstancesMap()
 	{
 		return this.instances;
 	}
 
-	@Override public World teleportPlayerToDimension(T instance, EntityPlayerMP player)
+	@Override
+	public World teleportPlayerToDimension(T instance, EntityPlayerMP player)
 	{
 		if (this.instances.containsValue(instance))
 		{
@@ -235,7 +241,8 @@ public class InstanceHandler<T extends Instance> implements IInstanceHandler<T>
 		return player.worldObj;
 	}
 
-	@Override public void teleportPlayerOutsideInstance(EntityPlayerMP player)
+	@Override
+	public void teleportPlayerOutsideInstance(EntityPlayerMP player)
 	{
 		IPlayerInstances hook = AetherAPI.instances().getPlayer(player);
 

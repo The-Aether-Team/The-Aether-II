@@ -6,7 +6,7 @@ import com.gildedgames.aether.client.ui.data.rect.RectModifier.ModifierType;
 import com.gildedgames.aether.client.ui.util.RectangleElement;
 import com.gildedgames.aether.common.util.ObjectFilter;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;

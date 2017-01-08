@@ -1,10 +1,10 @@
 package com.gildedgames.aether.client.ui.common;
 
+import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.client.ui.data.TickInfo;
 import com.gildedgames.aether.client.ui.data.UIContainer;
 import com.gildedgames.aether.client.ui.data.UIContainerEvents;
 import com.gildedgames.aether.client.ui.input.InputProvider;
-import com.gildedgames.aether.api.util.NBT;
 
 import java.util.List;
 

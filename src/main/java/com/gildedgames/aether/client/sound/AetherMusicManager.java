@@ -124,7 +124,8 @@ public class AetherMusicManager
 
 	private boolean canPlayMusic()
 	{
-		return !Minecraft.getMinecraft().isGamePaused() && (this.currentRecord == null || !this.getSoundHandler().isSoundPlaying(this.currentRecord));
+		return !Minecraft.getMinecraft().isGamePaused() && (this.currentRecord == null
+				|| !this.getSoundHandler().isSoundPlaying(this.currentRecord));
 	}
 
 	private SoundHandler getSoundHandler()

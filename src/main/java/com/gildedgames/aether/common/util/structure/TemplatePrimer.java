@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.util.structure;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiController;
 import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummy;
 import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummyHalf;
 import com.gildedgames.aether.common.tiles.TileEntityWildcard;
@@ -11,10 +10,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
 import net.minecraft.nbt.NBTTagList;
@@ -49,7 +46,8 @@ public class TemplatePrimer
 		return TemplatePrimer.getBlocks(TemplatePrimer.getBlocks(template), pos, settings, template);
 	}
 
-	public static List<Template.BlockInfo> getBlocks(List<Template.BlockInfo> blockInfo, BlockPos pos, PlacementSettings settings, Template template)
+	public static List<Template.BlockInfo> getBlocks(List<Template.BlockInfo> blockInfo, BlockPos pos, PlacementSettings settings,
+			Template template)
 	{
 		List<Template.BlockInfo> newInfo = Lists.newArrayList();
 
@@ -68,7 +66,8 @@ public class TemplatePrimer
 		return TemplatePrimer.getBlockPos(TemplatePrimer.getBlocks(template), pos, settings, template);
 	}
 
-	public static List<BlockPos> getBlockPos(List<Template.BlockInfo> blockInfo, BlockPos pos, PlacementSettings settings, Template template)
+	public static List<BlockPos> getBlockPos(List<Template.BlockInfo> blockInfo, BlockPos pos, PlacementSettings settings,
+			Template template)
 	{
 		List<BlockPos> blockPos = Lists.newArrayList();
 
@@ -87,7 +86,8 @@ public class TemplatePrimer
 		return ObfuscationReflectionHelper.getPrivateValue(Template.class, template, 1);
 	}
 
-	public static void populateAll(Template template, World world, BlockPos pos, @Nullable ITemplateProcessor processor, PlacementSettings settings)
+	public static void populateAll(Template template, World world, BlockPos pos, @Nullable ITemplateProcessor processor,
+			PlacementSettings settings)
 	{
 		List<Template.BlockInfo> blocks = TemplatePrimer.getBlocks(template);
 
@@ -99,13 +99,15 @@ public class TemplatePrimer
 			for (Template.BlockInfo template$blockinfo : blocks)
 			{
 				BlockPos blockpos = Template.transformedBlockPos(settings, template$blockinfo.pos).add(pos);
-				Template.BlockInfo template$blockinfo1 = processor != null ? processor.processBlock(world, blockpos, template$blockinfo) : template$blockinfo;
+				Template.BlockInfo template$blockinfo1 =
+						processor != null ? processor.processBlock(world, blockpos, template$blockinfo) : template$blockinfo;
 
 				if (template$blockinfo1 != null)
 				{
 					Block block1 = template$blockinfo1.blockState.getBlock();
 
-					if ((block == null || block != block1) && (!settings.getIgnoreStructureBlock() || block1 != Blocks.STRUCTURE_BLOCK) && (bb == null || bb.isVecInside(blockpos)))
+					if ((block == null || block != block1) && (!settings.getIgnoreStructureBlock() || block1 != Blocks.STRUCTURE_BLOCK) && (
+							bb == null || bb.isVecInside(blockpos)))
 					{
 						IBlockState iblockstate = template$blockinfo1.blockState.withMirror(settings.getMirror());
 						IBlockState iblockstate1 = iblockstate.withRotation(settings.getRotation());
@@ -141,7 +143,7 @@ public class TemplatePrimer
 							{
 								if (tileentity instanceof IInventory)
 								{
-									((IInventory)tileentity).clear();
+									((IInventory) tileentity).clear();
 								}
 							}
 						}
@@ -163,7 +165,7 @@ public class TemplatePrimer
 
 								if (tileentity2 instanceof TileEntityMultiblockController)
 								{
-									TileEntityMultiblockController controller = (TileEntityMultiblockController)tileentity2;
+									TileEntityMultiblockController controller = (TileEntityMultiblockController) tileentity2;
 
 									controller.rebuild();
 								}
@@ -203,7 +205,8 @@ public class TemplatePrimer
 		}
 	}
 
-	public static void primeChunk(Template template, World world, ChunkPos chunk, ChunkPrimer primer, BlockPos pos, @Nullable ITemplateProcessor processor, PlacementSettings settings)
+	public static void primeChunk(Template template, World world, ChunkPos chunk, ChunkPrimer primer, BlockPos pos,
+			@Nullable ITemplateProcessor processor, PlacementSettings settings)
 	{
 		List<Template.BlockInfo> blocks = TemplatePrimer.getBlocks(template);
 
@@ -224,20 +227,25 @@ public class TemplatePrimer
 			for (Template.BlockInfo template$blockinfo : blocks)
 			{
 				BlockPos blockpos = Template.transformedBlockPos(settings, template$blockinfo.pos).add(pos);
-				Template.BlockInfo template$blockinfo1 = processor != null ? processor.processBlock(world, blockpos, template$blockinfo) : template$blockinfo;
+				Template.BlockInfo template$blockinfo1 =
+						processor != null ? processor.processBlock(world, blockpos, template$blockinfo) : template$blockinfo;
 
 				if (template$blockinfo1 != null)
 				{
 					Block block1 = template$blockinfo1.blockState.getBlock();
 
-					if ((block == null || block != block1) && (!settings.getIgnoreStructureBlock() || block1 != Blocks.STRUCTURE_BLOCK) && chunkBB.isVecInside(blockpos))
+					if ((block == null || block != block1) && (!settings.getIgnoreStructureBlock() || block1 != Blocks.STRUCTURE_BLOCK)
+							&& chunkBB.isVecInside(blockpos))
 					{
 						IBlockState iblockstate = template$blockinfo1.blockState.withMirror(settings.getMirror());
 						IBlockState iblockstate1 = iblockstate.withRotation(settings.getRotation());
 
 						try
 						{
-							primer.setBlockState(blockpos.getX() - minX, blockpos.getY(), blockpos.getZ() - minZ, iblockstate1.getBlock() == Blocks.AIR ? Blocks.STRUCTURE_VOID.getDefaultState() : iblockstate1);
+							primer.setBlockState(
+									blockpos.getX() - minX, blockpos.getY(),
+									blockpos.getZ() - minZ,
+									iblockstate1.getBlock() == Blocks.AIR ? Blocks.STRUCTURE_VOID.getDefaultState() : iblockstate1);
 						}
 						catch (ArrayIndexOutOfBoundsException ex)
 						{
@@ -250,7 +258,8 @@ public class TemplatePrimer
 		}
 	}
 
-	public static void populateChunk(Template template, World world, ChunkPos chunk, BlockPos pos, @Nullable ITemplateProcessor processor, PlacementSettings settings, int placementFlags)
+	public static void populateChunk(Template template, World world, ChunkPos chunk, BlockPos pos, @Nullable ITemplateProcessor processor,
+			PlacementSettings settings, int placementFlags)
 	{
 		List<Template.BlockInfo> blocks = TemplatePrimer.getBlocks(template);
 
@@ -271,13 +280,15 @@ public class TemplatePrimer
 			for (Template.BlockInfo template$blockinfo : blocks)
 			{
 				BlockPos blockpos = Template.transformedBlockPos(settings, template$blockinfo.pos).add(pos);
-				Template.BlockInfo template$blockinfo1 = processor != null ? processor.processBlock(world, blockpos, template$blockinfo) : template$blockinfo;
+				Template.BlockInfo template$blockinfo1 =
+						processor != null ? processor.processBlock(world, blockpos, template$blockinfo) : template$blockinfo;
 
 				if (template$blockinfo1 != null)
 				{
 					Block block1 = template$blockinfo1.blockState.getBlock();
 
-					if ((block == null || block != block1) && (!settings.getIgnoreStructureBlock() || block1 != Blocks.STRUCTURE_BLOCK) && chunkBB.isVecInside(blockpos))
+					if ((block == null || block != block1) && (!settings.getIgnoreStructureBlock() || block1 != Blocks.STRUCTURE_BLOCK)
+							&& chunkBB.isVecInside(blockpos))
 					{
 						IBlockState iblockstate = template$blockinfo1.blockState.withMirror(settings.getMirror());
 						IBlockState iblockstate1 = iblockstate.withRotation(settings.getRotation());
@@ -308,7 +319,7 @@ public class TemplatePrimer
 							{
 								if (tileentity instanceof IInventory)
 								{
-									((IInventory)tileentity).clear();
+									((IInventory) tileentity).clear();
 								}
 							}
 						}
@@ -363,7 +374,8 @@ public class TemplatePrimer
 		}
 	}
 
-	private static void addEntitiesToWorld(Template template, World worldIn, BlockPos pos, Mirror mirrorIn, Rotation rotationIn, @Nullable StructureBoundingBox aabb)
+	private static void addEntitiesToWorld(Template template, World worldIn, BlockPos pos, Mirror mirrorIn, Rotation rotationIn,
+			@Nullable StructureBoundingBox aabb)
 	{
 		List<Template.EntityInfo> entities = TemplatePrimer.getEntities(template);
 
@@ -375,7 +387,7 @@ public class TemplatePrimer
 			{
 				NBTTagCompound nbttagcompound = template$entityinfo.entityData;
 				Vec3d vec3d = transformedVec3d(template$entityinfo.pos, mirrorIn, rotationIn);
-				Vec3d vec3d1 = vec3d.addVector((double)pos.getX(), (double)pos.getY(), (double)pos.getZ());
+				Vec3d vec3d1 = vec3d.addVector((double) pos.getX(), (double) pos.getY(), (double) pos.getZ());
 				NBTTagList nbttaglist = new NBTTagList();
 				nbttaglist.appendTag(new NBTTagDouble(vec3d1.xCoord));
 				nbttaglist.appendTag(new NBTTagDouble(vec3d1.yCoord));
@@ -413,26 +425,26 @@ public class TemplatePrimer
 
 		switch (mirrorIn)
 		{
-		case LEFT_RIGHT:
-			k = -k;
-			break;
-		case FRONT_BACK:
-			i = -i;
-			break;
-		default:
-			flag = false;
+			case LEFT_RIGHT:
+				k = -k;
+				break;
+			case FRONT_BACK:
+				i = -i;
+				break;
+			default:
+				flag = false;
 		}
 
 		switch (rotationIn)
 		{
-		case COUNTERCLOCKWISE_90:
-			return new BlockPos(k, j, -i);
-		case CLOCKWISE_90:
-			return new BlockPos(-k, j, i);
-		case CLOCKWISE_180:
-			return new BlockPos(-i, j, -k);
-		default:
-			return flag ? new BlockPos(i, j, k) : pos;
+			case COUNTERCLOCKWISE_90:
+				return new BlockPos(k, j, -i);
+			case CLOCKWISE_90:
+				return new BlockPos(-k, j, i);
+			case CLOCKWISE_180:
+				return new BlockPos(-i, j, -k);
+			default:
+				return flag ? new BlockPos(i, j, k) : pos;
 		}
 	}
 
@@ -445,26 +457,26 @@ public class TemplatePrimer
 
 		switch (mirrorIn)
 		{
-		case LEFT_RIGHT:
-			d2 = 1.0D - d2;
-			break;
-		case FRONT_BACK:
-			d0 = 1.0D - d0;
-			break;
-		default:
-			flag = false;
+			case LEFT_RIGHT:
+				d2 = 1.0D - d2;
+				break;
+			case FRONT_BACK:
+				d0 = 1.0D - d0;
+				break;
+			default:
+				flag = false;
 		}
 
 		switch (rotationIn)
 		{
-		case COUNTERCLOCKWISE_90:
-			return new Vec3d(d2, d1, 1.0D - d0);
-		case CLOCKWISE_90:
-			return new Vec3d(1.0D - d2, d1, d0);
-		case CLOCKWISE_180:
-			return new Vec3d(1.0D - d0, d1, 1.0D - d2);
-		default:
-			return flag ? new Vec3d(d0, d1, d2) : vec;
+			case COUNTERCLOCKWISE_90:
+				return new Vec3d(d2, d1, 1.0D - d0);
+			case CLOCKWISE_90:
+				return new Vec3d(1.0D - d2, d1, d0);
+			case CLOCKWISE_180:
+				return new Vec3d(1.0D - d0, d1, 1.0D - d2);
+			default:
+				return flag ? new Vec3d(d0, d1, d2) : vec;
 		}
 	}
 

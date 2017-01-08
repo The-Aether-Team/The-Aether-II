@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.network.packets;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.registry.simple_crafting.ISimpleRecipe;
 import com.gildedgames.aether.common.containers.ContainerMasonryBench;
-import com.gildedgames.aether.common.containers.ContainerSimpleCrafting;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;

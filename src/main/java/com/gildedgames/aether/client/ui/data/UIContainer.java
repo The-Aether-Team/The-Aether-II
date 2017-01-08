@@ -1,11 +1,11 @@
 package com.gildedgames.aether.client.ui.data;
 
+import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.client.ui.common.Gui;
 import com.gildedgames.aether.client.ui.common.Ui;
 import com.gildedgames.aether.client.ui.data.rect.Dim2D;
 import com.gildedgames.aether.client.ui.data.rect.Rect;
 import com.gildedgames.aether.common.util.ObjectFilter;
-import com.gildedgames.aether.api.util.NBT;
 import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.*;

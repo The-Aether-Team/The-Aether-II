@@ -24,7 +24,8 @@ public class Button extends GuiFrame
 		this(dim, defaultState, hoveredState, clickedState, null);
 	}
 
-	public Button(Rect dim, TextureElement defaultState, TextureElement hoveredState, TextureElement clickedState, TextureElement disabledState)
+	public Button(Rect dim, TextureElement defaultState, TextureElement hoveredState, TextureElement clickedState,
+			TextureElement disabledState)
 	{
 		super(dim);
 

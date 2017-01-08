@@ -36,7 +36,7 @@ public class ItemBolt extends Item
 
 		if (damage == Math.floor(damage))
 		{
-			tooltip.add(TextFormatting.GRAY + String.valueOf((int)Math.floor(damage)) + " " + I18n.format("item.aether.bolt.desc1"));
+			tooltip.add(TextFormatting.GRAY + String.valueOf((int) Math.floor(damage)) + " " + I18n.format("item.aether.bolt.desc1"));
 		}
 		else
 		{

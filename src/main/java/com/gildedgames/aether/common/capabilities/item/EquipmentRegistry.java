@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.capabilities.item;
 
-import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.api.items.equipment.effects.IEffect;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.api.registry.IEquipmentRegistry;
 import net.minecraft.util.ResourceLocation;
 

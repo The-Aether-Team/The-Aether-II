@@ -1,12 +1,6 @@
 package com.gildedgames.aether.common.blocks;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.containers.*;
-import com.gildedgames.aether.common.blocks.dungeon.*;
-import com.gildedgames.aether.common.blocks.misc.BlockOutpostCampfire;
-import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummyHalf;
-import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
-import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import com.gildedgames.aether.common.blocks.construction.*;
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystoneButton;
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystonePressurePlate;
@@ -14,19 +8,25 @@ import com.gildedgames.aether.common.blocks.construction.redstone.BlockSkyrootBu
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockSkyrootPressurePlate;
 import com.gildedgames.aether.common.blocks.construction.signs.BlockStandingSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.signs.BlockWallSkyrootSign;
-import com.gildedgames.aether.common.blocks.construction.walls.BlockScatterglassWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockCustomWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockDivineWall;
+import com.gildedgames.aether.common.blocks.construction.walls.BlockScatterglassWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockSkyrootWall;
+import com.gildedgames.aether.common.blocks.containers.*;
+import com.gildedgames.aether.common.blocks.dungeon.*;
 import com.gildedgames.aether.common.blocks.misc.BlockMoaEgg;
+import com.gildedgames.aether.common.blocks.misc.BlockOutpostCampfire;
 import com.gildedgames.aether.common.blocks.natural.*;
 import com.gildedgames.aether.common.blocks.natural.ores.*;
 import com.gildedgames.aether.common.blocks.natural.plants.*;
 import com.gildedgames.aether.common.blocks.util.*;
 import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummy;
+import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummyHalf;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.blocks.ItemAetherSlab;
+import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import com.gildedgames.aether.common.items.blocks.ItemBlockVariants;
+import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import com.google.common.collect.Lists;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -34,7 +34,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -170,9 +169,9 @@ public class BlocksAether
 	public static final BlockButtonStone holystone_button = new BlockHolystoneButton();
 
 	public static final BlockCustomLadder skyroot_ladder = new BlockCustomLadder(),
-										blightwillow_ladder = new BlockCustomLadder(),
-										earthshifter_ladder = new BlockCustomLadder(),
-										frostpine_ladder = new BlockCustomLadder();
+			blightwillow_ladder = new BlockCustomLadder(),
+			earthshifter_ladder = new BlockCustomLadder(),
+			frostpine_ladder = new BlockCustomLadder();
 
 	public static final BlockLabyrinthTotem labyrinth_totem = new BlockLabyrinthTotem(Material.IRON);
 
@@ -197,7 +196,7 @@ public class BlocksAether
 			labyrinth_wall = new BlockLabyrinth(),
 			labyrinth_lightstone = new BlockLabyrinth(),
 			labyrinth_base = new BlockLabyrinth(),
-			labyrinth_headstone =  new BlockLabyrinth();
+			labyrinth_headstone = new BlockLabyrinth();
 
 	public static final BlockCustomWall
 			holystone_wall = new BlockCustomWall(BlocksAether.holystone.getDefaultState(), 1.0f, 10.0f),
@@ -214,7 +213,7 @@ public class BlocksAether
 	public static final BlockCustomSlab
 			skyroot_slab = new BlockCustomSlab(BlocksAether.skyroot_planks.getDefaultState()),
 			holystone_slab = new BlockCustomSlab(BlocksAether.holystone.getDefaultState()),
-			holystone_brick_slab =  new BlockCustomSlab(BlocksAether.holystone_brick.getDefaultState()),
+			holystone_brick_slab = new BlockCustomSlab(BlocksAether.holystone_brick.getDefaultState()),
 			carved_stone_slab = new BlockCustomSlab(BlocksAether.carved_stone.getDefaultState()),
 			divine_carved_stone_slab = new BlockCustomSlab(BlocksAether.carved_stone.getDefaultState().withProperty(BlockDivine.PROPERTY_IS_DIVINE, true)),
 			sentry_stone_slab = new BlockCustomSlab(BlocksAether.sentry_stone.getDefaultState()),
@@ -257,14 +256,20 @@ public class BlocksAether
 	public static final BlockMasonryBench masonry_bench = new BlockMasonryBench();
 
 	public static final BlockCustomPane quicksoil_glass_pane = new BlockCustomPane(BlocksAether.quicksoil_glass.getDefaultState(), false),
-										skyroot_frame_quicksoil_glass_pane = new BlockCustomPane(BlocksAether.quicksoil_glass.getDefaultState().withProperty(BlockQuicksoilGlass.PROPERTY_VARIANT, BlockQuicksoilGlass.SKYROOT_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.skyroot_frame.name")),
-										arkenium_frame_quicksoil_glass_pane = new BlockCustomPane(BlocksAether.quicksoil_glass.getDefaultState().withProperty(BlockQuicksoilGlass.PROPERTY_VARIANT, BlockQuicksoilGlass.ARKENIUM_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.arkenium_frame.name")),
-										scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState(), false),
-										skyroot_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState().withProperty(BlockScatterglass.PROPERTY_VARIANT, BlockScatterglass.SKYROOT_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.skyroot_frame.name")),
-										arkenium_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState().withProperty(BlockScatterglass.PROPERTY_VARIANT, BlockScatterglass.ARKENIUM_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.arkenium_frame.name")),
-										crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState(), false),
-										skyroot_frame_crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState().withProperty(BlockCrudeScatterglass.PROPERTY_VARIANT, BlockCrudeScatterglass.SKYROOT_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.skyroot_frame.name")),
-										arkenium_frame_crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState().withProperty(BlockCrudeScatterglass.PROPERTY_VARIANT, BlockCrudeScatterglass.ARKENIUM_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.arkenium_frame.name"));
+			skyroot_frame_quicksoil_glass_pane = new BlockCustomPane(BlocksAether.quicksoil_glass.getDefaultState().withProperty(BlockQuicksoilGlass.PROPERTY_VARIANT, BlockQuicksoilGlass.SKYROOT_FRAME), false,
+					TextFormatting.GRAY + "" + I18n.format("tile.aether.skyroot_frame.name")),
+			arkenium_frame_quicksoil_glass_pane = new BlockCustomPane(BlocksAether.quicksoil_glass.getDefaultState().withProperty(BlockQuicksoilGlass.PROPERTY_VARIANT, BlockQuicksoilGlass.ARKENIUM_FRAME), false,
+					TextFormatting.GRAY + "" + I18n.format("tile.aether.arkenium_frame.name")),
+			scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState(), false),
+			skyroot_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState().withProperty(BlockScatterglass.PROPERTY_VARIANT, BlockScatterglass.SKYROOT_FRAME), false,
+					TextFormatting.GRAY + "" + I18n.format("tile.aether.skyroot_frame.name")),
+			arkenium_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState().withProperty(BlockScatterglass.PROPERTY_VARIANT, BlockScatterglass.ARKENIUM_FRAME), false,
+					TextFormatting.GRAY + "" + I18n.format("tile.aether.arkenium_frame.name")),
+			crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState(), false),
+			skyroot_frame_crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState().withProperty(BlockCrudeScatterglass.PROPERTY_VARIANT, BlockCrudeScatterglass.SKYROOT_FRAME), false,
+					TextFormatting.GRAY + "" + I18n.format("tile.aether.skyroot_frame.name")),
+			arkenium_frame_crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState().withProperty(BlockCrudeScatterglass.PROPERTY_VARIANT, BlockCrudeScatterglass.ARKENIUM_FRAME), false,
+					TextFormatting.GRAY + "" + I18n.format("tile.aether.arkenium_frame.name"));
 
 	public static final Block skyroot_twigs = new BlockFloorObject(Material.PLANTS, () -> new ItemStack(ItemsAether.skyroot_stick)).setSoundType(SoundType.WOOD);
 
@@ -379,7 +384,6 @@ public class BlocksAether
 
 		registerBlock("holystone_bookshelf", BlocksAether.holystone_bookshelf.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
-
 		registerBlock("skyroot_door", BlocksAether.skyroot_door);
 		registerBlock("arkenium_door", BlocksAether.arkenium_door);
 		//registerBlock("blightwillow_door", BlocksAether.blightwillow_door);
@@ -437,7 +441,7 @@ public class BlocksAether
 
 		registerBlock("unstable_labyrinth_capstone", BlocksAether.unstable_labyrinth_capstone.setBlockUnbreakable().setResistance(6000000.0F));
 
-		registerBlock("skyroot_slab", BlocksAether.skyroot_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION),new ItemAetherSlab(BlocksAether.skyroot_slab));
+		registerBlock("skyroot_slab", BlocksAether.skyroot_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION), new ItemAetherSlab(BlocksAether.skyroot_slab));
 		registerBlock("holystone_slab", BlocksAether.holystone_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION), new ItemAetherSlab(BlocksAether.holystone_slab));
 		registerBlock("holystone_brick_slab", BlocksAether.holystone_brick_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION), new ItemAetherSlab(BlocksAether.holystone_brick_slab));
 		registerBlock("carved_stone_slab", BlocksAether.carved_stone_slab.setCreativeTab(CreativeTabsAether.DUNGEON), new ItemAetherSlab(BlocksAether.carved_stone_slab));

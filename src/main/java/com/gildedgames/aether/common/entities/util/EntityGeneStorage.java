@@ -70,5 +70,5 @@ public class EntityGeneStorage implements IGeneStorage<NBTTagCompound, NBTTagCom
 		this.setFatherSeed(tag.getInteger("fatherSeed"));
 		this.setMotherSeed(tag.getInteger("motherSeed"));
 	}
-	
+
 }

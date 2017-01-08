@@ -5,7 +5,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class TileEntitiesAether
 {
-	
+
 	public static final String
 			ALTAR_ID = "aether.altar",
 			HOLYSTONE_FURNACE_ID = "aether.holystone_furnace",
@@ -43,5 +43,5 @@ public class TileEntitiesAether
 		GameRegistry.registerTileEntity(TileEntityMasonryBench.class, MASONRY_BENCH_ID);
 		GameRegistry.registerTileEntity(TileEntityOutpostCampfire.class, OUTPOST_CAMPFIRE_ID);
 	}
-	
+
 }

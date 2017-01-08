@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world.dimensions.aether;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.world.noise.OpenSimplexNoise;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherCaves;
+import com.gildedgames.aether.common.world.noise.OpenSimplexNoise;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
@@ -77,7 +77,8 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		return null;
 	}
 
-	public final double bilinearInterpolate(double bottomLeftValue, double topLeftValue, double bottomRightValue, double topRightValue, double bottomLeftX, double topRightX, double bottomLeftY, double topRightY, double x, double y)
+	public final double bilinearInterpolate(double bottomLeftValue, double topLeftValue, double bottomRightValue, double topRightValue,
+			double bottomLeftX, double topRightX, double bottomLeftY, double topRightY, double x, double y)
 	{
 		double x2x1, y2y1, x2x, y2y, yy1, xx1;
 		x2x1 = topRightX - bottomLeftX;
@@ -118,7 +119,8 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		double const1 = 684.41200000000003D * 2.0D;
 		double const2 = 684.41200000000003D;
 
-		this.noiseFields[4] = this.octaveNoiseGenerators[2].generateNoiseOctaves(this.noiseFields[4], x, y, z, width, height, length, const1 / 80D, const2 / 160D, const1 / 80D);
+		this.noiseFields[4] = this.octaveNoiseGenerators[2].generateNoiseOctaves(this.noiseFields[4], x, y, z, width, height, length,
+				const1 / 80D, const2 / 160D, const1 / 80D);
 		this.noiseFields[5] = this.octaveNoiseGenerators[0].generateNoiseOctaves(this.noiseFields[5], x, y, z, width, height, length, const1, const2, const1);
 		this.noiseFields[6] = this.octaveNoiseGenerators[1].generateNoiseOctaves(this.noiseFields[6], x, y, z, width, height, length, const1, const2, const1);
 
@@ -180,7 +182,8 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		int height = 160;
 		int sampleSize = 40;
 
-		this.cloudNoise = this.cloudNoiseGenerator.generateNoiseOctaves(this.cloudNoise, chunkX * 16, 0, chunkZ * 16, 16, height, 16, 64.0D, 1.5D, 64.0D);
+		this.cloudNoise = this.cloudNoiseGenerator.generateNoiseOctaves(this.cloudNoise,
+				chunkX * 16, 0, chunkZ * 16, 16, height, 16, 64.0D, 1.5D, 64.0D);
 
 		for (int x = 0; x < 16; x++)
 		{
@@ -213,9 +216,12 @@ public class ChunkGeneratorAether implements IChunkGenerator
 	{
 		double oneThirtySnd = 0.03125D;
 
-		this.noiseFields[1] = this.octaveNoiseGenerators[3].generateNoiseOctaves(this.noiseFields[1], chunkX * 16, chunkY * 16, 0, 16, 16, 1, oneThirtySnd, oneThirtySnd, 1.0D);
-		this.noiseFields[2] = this.octaveNoiseGenerators[3].generateNoiseOctaves(this.noiseFields[2], chunkX * 16, 109, chunkY * 16, 16, 1, 16, oneThirtySnd, 1.0D, oneThirtySnd);
-		this.noiseFields[3] = this.octaveNoiseGenerators[4].generateNoiseOctaves(this.noiseFields[3], chunkX * 16, chunkY * 16, 0, 16, 16, 1, oneThirtySnd * 2D, oneThirtySnd * 2D, oneThirtySnd * 2D);
+		this.noiseFields[1] = this.octaveNoiseGenerators[3].generateNoiseOctaves(this.noiseFields[1],
+				chunkX * 16, chunkY * 16, 0, 16, 16, 1, oneThirtySnd, oneThirtySnd, 1.0D);
+		this.noiseFields[2] = this.octaveNoiseGenerators[3].generateNoiseOctaves(this.noiseFields[2],
+				chunkX * 16, 109, chunkY * 16, 16, 1, 16, oneThirtySnd, 1.0D, oneThirtySnd);
+		this.noiseFields[3] = this.octaveNoiseGenerators[4].generateNoiseOctaves(this.noiseFields[3],
+				chunkX * 16, chunkY * 16, 0, 16, 16, 1, oneThirtySnd * 2D, oneThirtySnd * 2D, oneThirtySnd * 2D);
 
 		for (int x = 0; x < 16; x++)
 		{
@@ -298,7 +304,8 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		final int dimY = 32;
 		final int dimYPlusOne = dimY + 1;
 
-		this.noiseFields[0] = this.initializeNoiseField(this.noiseFields[0], chunkX * dimXZ, 0, chunkZ * dimXZ, dimXZPlusOne, dimYPlusOne, dimXZPlusOne);
+		this.noiseFields[0] = this.initializeNoiseField(this.noiseFields[0],
+				chunkX * dimXZ, 0, chunkZ * dimXZ, dimXZPlusOne, dimYPlusOne, dimXZPlusOne);
 
 		for (int z = 0; z < 16; z++)
 		{
@@ -379,7 +386,8 @@ public class ChunkGeneratorAether implements IChunkGenerator
 					{
 						final double FEATURE_SIZE_HIGH = 2000D;
 
-						double highNoise = this.octaveNoise(7, globalX / FEATURE_SIZE_HIGH, y / FEATURE_SIZE_HIGH, globalZ / FEATURE_SIZE_HIGH);
+						double highNoise = this.octaveNoise(7,
+								globalX / FEATURE_SIZE_HIGH, y / FEATURE_SIZE_HIGH, globalZ / FEATURE_SIZE_HIGH);
 						//double highNoise = this.octaveNoise(6, globalX / FEATURE_SIZE, y / FEATURE_SIZE, globalZ / FEATURE_SIZE);
 
 						highNoise += noiseValue;

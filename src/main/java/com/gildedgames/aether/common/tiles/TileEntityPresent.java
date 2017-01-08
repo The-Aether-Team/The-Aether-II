@@ -58,7 +58,8 @@ public class TileEntityPresent extends TileEntity
 
 		if (stack.getItem() == Item.getItemFromBlock(Blocks.TNT))
 		{
-			EntityTNTPrimed tnt = new EntityTNTPrimed(this.worldObj, this.getPos().getX() + 0.5D, this.getPos().getY() + 0.5D, this.getPos().getZ() + 0.5D, null);
+			EntityTNTPrimed tnt = new EntityTNTPrimed(this.worldObj,
+					this.getPos().getX() + 0.5D, this.getPos().getY() + 0.5D, this.getPos().getZ() + 0.5D, null);
 			tnt.setFuse(20);
 			entity = tnt;
 		}

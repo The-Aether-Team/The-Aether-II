@@ -1,11 +1,10 @@
 package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.common.network.MessageHandlerClient;
-import com.gildedgames.aether.api.capabilites.instances.Instance;
-import com.gildedgames.aether.common.util.io.NBTHelper;
 import com.gildedgames.aether.api.capabilites.instances.IPlayerInstances;
-import com.gildedgames.aether.common.capabilities.instances.InstanceRegistryImpl;
+import com.gildedgames.aether.api.capabilites.instances.Instance;
+import com.gildedgames.aether.common.network.MessageHandlerClient;
+import com.gildedgames.aether.common.util.io.NBTHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;

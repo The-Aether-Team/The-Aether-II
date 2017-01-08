@@ -455,7 +455,8 @@ public class ModelFrostpineTotem extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
+			float scale)
 	{
 		this.Moa_Body.render(scale);
 		this.Moa_Head.render(scale);

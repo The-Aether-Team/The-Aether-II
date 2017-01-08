@@ -6,7 +6,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiDialogButton extends GuiButton
@@ -33,11 +32,14 @@ public class GuiDialogButton extends GuiButton
 	{
 		if (this.visible)
 		{
-			this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
+			this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width
+					&& mouseY < this.yPosition + this.height;
 
-			Gui.drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, this.hovered ? Integer.MAX_VALUE : Integer.MIN_VALUE);
+			Gui.drawRect(this.xPosition, this.yPosition,
+					this.xPosition + this.width, this.yPosition + this.height, this.hovered ? Integer.MAX_VALUE : Integer.MIN_VALUE);
 
-			this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
+			this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width
+					&& mouseY < this.yPosition + this.height;
 
 			FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
 
@@ -45,7 +47,7 @@ public class GuiDialogButton extends GuiButton
 
 			this.width = fontRenderer.getStringWidth(label) + 5;
 
-			this.drawString(fontRenderer, label, this.xPosition + 3, this.yPosition +3, 0xFFFFFF);
+			this.drawString(fontRenderer, label, this.xPosition + 3, this.yPosition + 3, 0xFFFFFF);
 		}
 	}
 

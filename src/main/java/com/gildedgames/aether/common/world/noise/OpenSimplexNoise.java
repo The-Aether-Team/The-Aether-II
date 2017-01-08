@@ -69,7 +69,9 @@ public class OpenSimplexNoise
 		this.permGradIndex3D = new short[256];
 		short[] source = new short[256];
 		for (short i = 0; i < 256; i++)
+		{
 			source[i] = i;
+		}
 		seed = seed * 6364136223846793005L + 1442695040888963407L;
 		seed = seed * 6364136223846793005L + 1442695040888963407L;
 		seed = seed * 6364136223846793005L + 1442695040888963407L;
@@ -78,7 +80,9 @@ public class OpenSimplexNoise
 			seed = seed * 6364136223846793005L + 1442695040888963407L;
 			int r = (int) ((seed + 31) % (i + 1));
 			if (r < 0)
+			{
 				r += (i + 1);
+			}
 			this.perm[i] = source[r];
 			this.permGradIndex3D[i] = (short) ((this.perm[i] % (gradients3D.length / 3)) * 3);
 			source[r] = source[i];

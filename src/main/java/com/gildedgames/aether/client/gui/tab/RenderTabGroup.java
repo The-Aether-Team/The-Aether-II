@@ -13,9 +13,6 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
-import net.minecraft.client.renderer.InventoryEffectRenderer;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -87,8 +84,8 @@ public class RenderTabGroup extends Gui
 
 			if (gui instanceof GuiContainerCreative)
 			{
-				int guiLeft = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, (GuiContainer)gui, ReflectionAether.GUI_LEFT.getMappings());
-				int xSize = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, (GuiContainer)gui, ReflectionAether.X_SIZE.getMappings());
+				int guiLeft = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, (GuiContainer) gui, ReflectionAether.GUI_LEFT.getMappings());
+				int xSize = ObfuscationReflectionHelper.getPrivateValue(GuiContainer.class, (GuiContainer) gui, ReflectionAether.X_SIZE.getMappings());
 
 				if (guiLeft == 160 + (gui.width - xSize - 200) / 2)
 				{
@@ -146,7 +143,10 @@ public class RenderTabGroup extends Gui
 
 		if (hoveredTab != null)
 		{
-			this.drawHoveringText(I18n.translateToLocal(hoveredTab.getUnlocalizedName()), Mouse.getX() * scaledresolution.getScaledWidth() / mc.displayWidth, scaledresolution.getScaledHeight() - (Mouse.getY() - 42) * scaledresolution.getScaledHeight() / mc.displayHeight - 1, mc.fontRendererObj);
+			this.drawHoveringText(I18n.translateToLocal(hoveredTab.getUnlocalizedName()),
+					Mouse.getX() * scaledresolution.getScaledWidth() / mc.displayWidth,
+					scaledresolution.getScaledHeight() - (Mouse.getY() - 42) * scaledresolution.getScaledHeight() / mc.displayHeight
+							- 1, mc.fontRendererObj);
 		}
 	}
 

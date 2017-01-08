@@ -3,8 +3,8 @@ package com.gildedgames.aether.common.entities.living.dungeon.labyrinth;
 import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AISentryGuardianMelee;
 import com.gildedgames.aether.common.entities.util.flying.EntityFlyingMob;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
-import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.gildedgames.aether.common.util.TickTimer;
+import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.gildedgames.aether.common.util.io.NBTHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -96,7 +96,8 @@ public class EntitySentryGuardian extends EntityFlyingMob implements IRangedAtta
 				double motionY = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 				double motionZ = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 
-				this.worldObj.spawnParticle(EnumParticleTypes.CLOUD, this.posX + motionX, this.posY + 0.5D + motionY, this.posZ + motionZ, 0.1D, 0.1D, 0.1D);
+				this.worldObj.spawnParticle(EnumParticleTypes.CLOUD,
+						this.posX + motionX, this.posY + 0.5D + motionY, this.posZ + motionZ, 0.1D, 0.1D, 0.1D);
 			}
 		}
 
@@ -289,7 +290,7 @@ public class EntitySentryGuardian extends EntityFlyingMob implements IRangedAtta
 			return;
 		}
 
-		double d0 = target.posY + (double)target.getEyeHeight() - 1.100000023841858D;
+		double d0 = target.posY + (double) target.getEyeHeight() - 1.100000023841858D;
 		double d1 = target.posX + target.motionX - this.posX;
 		double d2 = d0 - this.posY;
 		double d3 = target.posZ + target.motionZ - this.posZ;
@@ -297,12 +298,13 @@ public class EntitySentryGuardian extends EntityFlyingMob implements IRangedAtta
 
 		EntityDetonationSentry sentry = new EntityDetonationSentry(this.worldObj);
 
-		sentry.setPosition(this.posX, this.posY + (double)this.getEyeHeight() - 0.10000000149011612D, this.posZ);
+		sentry.setPosition(this.posX, this.posY + (double) this.getEyeHeight() - 0.10000000149011612D, this.posZ);
 
 		sentry.rotationPitch -= -20.0F;
-		sentry.setThrowableHeading(d1, d2 + (double)(f * 0.2F), d3, 1.0F, 8.0F);
+		sentry.setThrowableHeading(d1, d2 + (double) (f * 0.2F), d3, 1.0F, 8.0F);
 
-		this.worldObj.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WITCH_THROW, this.getSoundCategory(), 1.0F, 0.8F + this.rand.nextFloat() * 0.4F);
+		this.worldObj.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WITCH_THROW, this.getSoundCategory(), 1.0F,
+				0.8F + this.rand.nextFloat() * 0.4F);
 
 		this.worldObj.spawnEntityInWorld(sentry);
 	}

@@ -8,7 +8,6 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.registry.GenerationAether;
 import com.gildedgames.aether.common.registry.content.TemplatesAether;
-import com.gildedgames.aether.common.world.biome.WorldDecorationSimple;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherFlowers;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherLakes;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherMinable;
@@ -312,12 +311,13 @@ public class BiomeAetherDecorator
 		}
 	}
 
-	private void generateCaveMineable(WorldGenAetherMinable minable, World world, Random random, BlockPos pos, int minY, int maxY, int attempts)
+	private void generateCaveMineable(WorldGenAetherMinable minable, World world, Random random, BlockPos pos, int minY, int maxY,
+			int attempts)
 	{
 		for (int count = 0; count < attempts; count++)
 		{
 			BlockPos randomPos = pos.add(random.nextInt(16), random.nextInt(maxY - minY) + minY, random.nextInt(16));
-//			randomPos = world.getTopBlockHeight(randomPos);
+			//			randomPos = world.getTopBlockHeight(randomPos);
 
 			if (world.getLightFor(EnumSkyBlock.SKY, randomPos) <= 7)
 			{
@@ -364,7 +364,7 @@ public class BiomeAetherDecorator
 	protected void generateClouds(World world, Random random, BlockPos pos)
 	{
 		this.generateCloud(this.genBlueAercloud, world, pos, random, 15, 16, 90, 130);
-//		this.generateCloud(this.genColdFlatAercloud, world, pos, random, 10, 16, 32);
+		//		this.generateCloud(this.genColdFlatAercloud, world, pos, random, 10, 16, 32);
 		this.generateCloud(this.genColdColumbusAercloud, world, pos, random, 30, 16, 90, 130);
 
 		this.generateCloud(this.genPurpleAercloud, world, pos, random, 50, 4, 90, 130);

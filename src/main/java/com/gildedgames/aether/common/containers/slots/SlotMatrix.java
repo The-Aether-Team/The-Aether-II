@@ -23,7 +23,7 @@ public class SlotMatrix extends Slot
 
 	public boolean isSimpleCrafting()
 	{
-		return  this.isSimpleCrafting;
+		return this.isSimpleCrafting;
 	}
 
 	public boolean isItemValid(@Nullable ItemStack stack)

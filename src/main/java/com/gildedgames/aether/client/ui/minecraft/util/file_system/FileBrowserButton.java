@@ -6,10 +6,10 @@ import com.gildedgames.aether.client.ui.data.rect.Rect;
 import com.gildedgames.aether.client.ui.event.view.MouseEventGui;
 import com.gildedgames.aether.client.ui.input.*;
 import com.gildedgames.aether.client.ui.minecraft.util.GuiFactory;
-import com.gildedgames.aether.client.ui.util.*;
 import com.gildedgames.aether.client.ui.util.Button;
+import com.gildedgames.aether.client.ui.util.TextureElement;
 
-import java.awt.*;
+import java.awt.Color;
 import java.io.File;
 
 public class FileBrowserButton extends GuiFrame
@@ -62,7 +62,9 @@ public class FileBrowserButton extends GuiFrame
 
 		this.content().set("button", button);
 
-		GuiFrame textBox = GuiFactory.centeredTextBox(Dim2D.build().pos(this.dim().width() / 2, this.dim().height() / 2 + 12).centerX(true).width(16).height(12).flush(), false, GuiFactory.text(this.name, Color.WHITE, 0.5f));
+		GuiFrame textBox = GuiFactory.centeredTextBox(Dim2D.build().pos(
+				this.dim().width() / 2, this.dim().height() / 2
+						+ 12).centerX(true).width(16).height(12).flush(), false, GuiFactory.text(this.name, Color.WHITE, 0.5f));
 
 		this.content().set("text", textBox);
 

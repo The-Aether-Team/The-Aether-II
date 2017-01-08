@@ -32,12 +32,14 @@ public class LayerPlayerGloves extends LayerBipedArmor
 	}
 
 	@Override
-	public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float p_177141_2_, float p_177141_3_, float partialTicks, float p_177141_5_, float p_177141_6_, float p_177141_7_, float scale)
+	public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float p_177141_2_, float p_177141_3_, float partialTicks,
+			float p_177141_5_, float p_177141_6_, float p_177141_7_, float scale)
 	{
 		this.renderGloves((EntityPlayer) entitylivingbaseIn, p_177141_2_, p_177141_3_, partialTicks, p_177141_5_, p_177141_6_, p_177141_7_, scale);
 	}
 
-	private void renderGloves(EntityPlayer entity, float p_177182_2_, float p_177182_3_, float partialTicks, float p_177182_5_, float p_177182_6_, float p_177182_7_, float scale)
+	private void renderGloves(EntityPlayer entity, float p_177182_2_, float p_177182_3_, float partialTicks, float p_177182_5_,
+			float p_177182_6_, float p_177182_7_, float scale)
 	{
 		IPlayerAether aePlayer = PlayerAether.getPlayer(entity);
 

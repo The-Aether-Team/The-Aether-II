@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.recipes.simple;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -37,7 +36,7 @@ public class OreDictionaryRequirement
 	{
 		if (obj instanceof ItemStack)
 		{
-			ItemStack stack = (ItemStack)obj;
+			ItemStack stack = (ItemStack) obj;
 
 			int[] stackIds = OreDictionary.getOreIDs(stack);
 			int ore = OreDictionary.getOreID(this.getKey());
@@ -52,13 +51,13 @@ public class OreDictionaryRequirement
 		}
 		else if (obj instanceof OreDictionaryRequirement)
 		{
-			OreDictionaryRequirement oreReq = (OreDictionaryRequirement)obj;
+			OreDictionaryRequirement oreReq = (OreDictionaryRequirement) obj;
 
 			return OreDictionary.getOreID(oreReq.getKey()) == OreDictionary.getOreID(this.getKey());
 		}
 		else if (obj instanceof String)
 		{
-			String key = (String)obj;
+			String key = (String) obj;
 
 			return OreDictionary.getOreID(key) == OreDictionary.getOreID(this.getKey());
 		}

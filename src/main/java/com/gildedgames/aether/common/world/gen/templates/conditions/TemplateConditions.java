@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.world.gen.templates.conditions;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenTemplate;
 import net.minecraft.block.material.Material;
 

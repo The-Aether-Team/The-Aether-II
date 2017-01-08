@@ -14,11 +14,15 @@ public class LayerBombs implements LayerRenderer
 	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/battle_golem/battle_golem.png");
 
 	private final ModelBomb1 bomb1 = new ModelBomb1();
+
 	private final ModelBomb2 bomb2 = new ModelBomb2();
+
 	private final ModelBomb3 bomb3 = new ModelBomb3();
+
 	private final ModelBomb4 bomb4 = new ModelBomb4();
 
 	private final ModelBombLeftHand bombLeftHand = new ModelBombLeftHand();
+
 	private final ModelBombRightHand bombRightHand = new ModelBombRightHand();
 
 	private final RenderBattleGolem render;
@@ -29,7 +33,8 @@ public class LayerBombs implements LayerRenderer
 	}
 
 	@Override
-	public void doRenderLayer(EntityLivingBase entity, float p_177141_2_, float p_177141_3_, float p_177141_4_, float p_177141_5_, float p_177141_6_, float p_177141_7_, float p_177141_8_)
+	public void doRenderLayer(EntityLivingBase entity, float p_177141_2_, float p_177141_3_, float p_177141_4_, float p_177141_5_,
+			float p_177141_6_, float p_177141_7_, float p_177141_8_)
 	{
 		EntityBattleGolem golem = (EntityBattleGolem) entity;
 

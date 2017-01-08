@@ -1,16 +1,16 @@
 package com.gildedgames.aether.client.gui.menu;
 
 import com.gildedgames.aether.client.ui.UiManager;
-import com.gildedgames.aether.client.ui.input.*;
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.client.ui.minecraft.util.GuiFactory;
-import com.gildedgames.aether.client.ui.minecraft.util.MinecraftAssetLocation;
 import com.gildedgames.aether.client.ui.common.GuiFrame;
 import com.gildedgames.aether.client.ui.data.AssetLocation;
 import com.gildedgames.aether.client.ui.data.rect.Dim2D;
 import com.gildedgames.aether.client.ui.event.view.MouseEventGui;
 import com.gildedgames.aether.client.ui.graphics.Graphics2D;
+import com.gildedgames.aether.client.ui.input.*;
+import com.gildedgames.aether.client.ui.minecraft.util.GuiFactory;
+import com.gildedgames.aether.client.ui.minecraft.util.MinecraftAssetLocation;
 import com.gildedgames.aether.client.ui.util.Button;
+import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
 

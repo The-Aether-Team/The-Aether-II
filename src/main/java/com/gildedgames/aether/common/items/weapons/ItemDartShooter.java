@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.items.weapons;
 
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -87,7 +87,8 @@ public class ItemDartShooter extends Item
 			return;
 		}
 
-		boolean isInfiniteArrow = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByLocation("infinity"), stack) > 0;
+		boolean isInfiniteArrow = player.capabilities.isCreativeMode
+				|| EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByLocation("infinity"), stack) > 0;
 
 		int duration = this.getMaxItemUseDuration(stack) - timeLeft - 5;
 

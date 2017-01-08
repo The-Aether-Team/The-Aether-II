@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.registry;
 
 import com.gildedgames.aether.api.items.IItemProperties;
+import com.gildedgames.aether.api.items.ItemProperties;
 import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
 import com.gildedgames.aether.api.registry.IItemPropertiesRegistry;
-import com.gildedgames.aether.api.items.ItemProperties;
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;

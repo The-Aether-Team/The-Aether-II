@@ -9,7 +9,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreDictionary;
@@ -39,7 +38,7 @@ public class GuiRequiredMaterial extends GuiButton
 	{
 		if (obj instanceof ItemStack)
 		{
-			ItemStack stack = (ItemStack)obj;
+			ItemStack stack = (ItemStack) obj;
 
 			if (stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
 			{
@@ -53,13 +52,13 @@ public class GuiRequiredMaterial extends GuiButton
 
 		if (obj instanceof OreDictionaryRequirement)
 		{
-			OreDictionaryRequirement ore = (OreDictionaryRequirement)obj;
+			OreDictionaryRequirement ore = (OreDictionaryRequirement) obj;
 			this.displayStack = OreDictionary.getOres(((OreDictionaryRequirement) obj).getKey()).get(0).copy();
 			this.displayStack.stackSize = ore.getCount();
 		}
 		else if (obj instanceof ItemStack)
 		{
-			ItemStack stack = (ItemStack)obj;
+			ItemStack stack = (ItemStack) obj;
 			this.displayStack = stack.copy();
 		}
 		else
@@ -75,7 +74,8 @@ public class GuiRequiredMaterial extends GuiButton
 
 		if (this.visible && this.displayStack != null)
 		{
-			this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
+			this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width
+					&& mouseY < this.yPosition + this.height;
 
 			GlStateManager.enableRescaleNormal();
 			RenderHelper.enableGUIStandardItemLighting();
@@ -95,7 +95,9 @@ public class GuiRequiredMaterial extends GuiButton
 
 				int xOffset = (Math.max(String.valueOf(this.displayStack.stackSize).length() - 1, 0)) * -6;
 
-				this.drawString(Minecraft.getMinecraft().fontRendererObj, (!hasEnough ? TextFormatting.RED : "") + String.valueOf(this.displayStack.stackSize), this.xPosition + 12 + xOffset, this.yPosition + this.height - 8, 0xFFFFFF);
+				this.drawString(Minecraft.getMinecraft().fontRendererObj,
+						(!hasEnough ? TextFormatting.RED : "") + String.valueOf(this.displayStack.stackSize),
+						this.xPosition + 12 + xOffset, this.yPosition + this.height - 8, 0xFFFFFF);
 			}
 
 			if (this.hovered)
@@ -104,7 +106,7 @@ public class GuiRequiredMaterial extends GuiButton
 
 				if (gui instanceof IExtendedGui)
 				{
-					IExtendedGui extendedGui = (IExtendedGui)gui;
+					IExtendedGui extendedGui = (IExtendedGui) gui;
 					extendedGui.setHoveredDescription(this.displayStack.getTooltip(Minecraft.getMinecraft().thePlayer, false));
 				}
 			}

@@ -58,7 +58,8 @@ public class ParachuteModule extends PlayerAetherModule
 				this.hitAmnt++;
 			}
 
-			if (this.getParachuteType() != EntityParachute.Type.BLUE && (!this.getEntity().worldObj.isAirBlock(new BlockPos(x, y - 1, z)) || !this.isParachuting) || (this.isParachuting && this.hitAmnt >= 4))
+			if (this.getParachuteType() != EntityParachute.Type.BLUE && (!this.getEntity().worldObj.isAirBlock(new BlockPos(x, y - 1, z))
+					|| !this.isParachuting) || (this.isParachuting && this.hitAmnt >= 4))
 			{
 				this.setParachuting(false, this.type);
 			}
@@ -99,7 +100,8 @@ public class ParachuteModule extends PlayerAetherModule
 		{
 			for (int z1 = (int) Math.floor(boundingBox.minZ); z1 <= (int) Math.ceil(boundingBox.maxZ); z1++)
 			{
-				if (!this.getEntity().worldObj.isAirBlock(pos.setPos(x1, y + 1, z1)) || !this.getEntity().worldObj.isAirBlock(pos.setPos(x1, y + 2, z1)))
+				if (!this.getEntity().worldObj.isAirBlock(pos.setPos(x1, y + 1, z1)) || !this.getEntity().worldObj.isAirBlock(pos.setPos(x1,
+						y + 2, z1)))
 				{
 					return true;
 				}

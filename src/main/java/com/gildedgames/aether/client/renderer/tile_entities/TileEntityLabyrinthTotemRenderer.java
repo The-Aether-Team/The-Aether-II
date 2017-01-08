@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 public class TileEntityLabyrinthTotemRenderer extends TileEntitySpecialRenderer<TileEntityLabyrinthTotem>
 {
 	private static final ResourceLocation TEXTURE_TOTEM = AetherCore.getResource("textures/tile_entities/labyrinth_totem.png"),
-				TEXTURE_TOTEM_GLOW = AetherCore.getResource("textures/tile_entities/labyrinth_totem_glow.png");
+			TEXTURE_TOTEM_GLOW = AetherCore.getResource("textures/tile_entities/labyrinth_totem_glow.png");
 
 	private final ModelLabyrinthTotem model = new ModelLabyrinthTotem();
 

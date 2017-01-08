@@ -26,7 +26,8 @@ public class WorldGenAetherFlowers extends WorldGenerator
 
 		while (i < this.max)
 		{
-			BlockPos randomPos = pos.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
+			BlockPos randomPos = pos.add(
+					rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
 
 			i++;
 
@@ -35,7 +36,8 @@ public class WorldGenAetherFlowers extends WorldGenerator
 				continue;
 			}
 
-			if (world.isAirBlock(randomPos) && (randomPos.getY() < world.getActualHeight()) && this.state.getBlock().canPlaceBlockAt(world, randomPos))
+			if (world.isAirBlock(randomPos) && (randomPos.getY() < world.getActualHeight())
+					&& this.state.getBlock().canPlaceBlockAt(world, randomPos))
 			{
 				world.setBlockState(randomPos, this.state, 2);
 			}

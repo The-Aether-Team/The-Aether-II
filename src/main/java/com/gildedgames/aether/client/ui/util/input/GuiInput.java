@@ -17,7 +17,7 @@ import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.util.ChatAllowedCharacters;
 import org.lwjgl.input.Keyboard;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class GuiInput<T> extends GuiFrame
 {
@@ -56,9 +56,11 @@ public class GuiInput<T> extends GuiFrame
 	{
 		super.initContent(input);
 
-		this.text = new TextElement(GuiFactory.text(this.title, Color.WHITE), Dim2D.build().x(this.dim().width() / 2).centerX(true).flush());
+		this.text = new TextElement(GuiFactory.text(this.title, Color.WHITE), Dim2D.build().x(
+				this.dim().width() / 2).centerX(true).flush());
 		GuiFrame inputBox = GuiFactory.createResizableTexture(this.texture, this.dim().clone().clear(ModifierType.POS).mod().pos(0, this.text.dim().height()).flush(), Sprite.UV.build().area(1, 1).flush(), Sprite.UV.build().area(1, 18).flush(), Sprite.UV.build().area(198, 1).flush());
-		this.input = new TextElement(GuiFactory.text(this.initContent, Color.WHITE), Dim2D.build().pos(2, this.text.dim().height() + inputBox.dim().height() / 2).centerY(true).flush());
+		this.input = new TextElement(GuiFactory.text(this.initContent, Color.WHITE), Dim2D.build().pos(2,
+				this.text.dim().height() + inputBox.dim().height() / 2).centerY(true).flush());
 
 		final GuiFrame cursor = GuiFactory.createResizableTexture(this.cursorTexture, Dim2D.build().width(1).height(this.text.getText().font().getHeight("h")).flush(), Sprite.UV.build().area(1, 1).flush(), Sprite.UV.build().area(1, 1).flush(), Sprite.UV.build().area(1, 1).flush());
 

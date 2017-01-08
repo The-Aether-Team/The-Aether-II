@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world.dimensions.aether.island.logic;
 
 import com.gildedgames.aether.common.registry.content.BiomesAether;
 
-import java.awt.*;
+import java.awt.Rectangle;
 import java.util.Random;
 
 public class IslandSectorFactory
@@ -81,7 +81,8 @@ public class IslandSectorFactory
 					vx += island2.getBounds().getCenterX() - room1x;
 					vz += island2.getBounds().getCenterY() - room1z;
 
-					double overlap = intersection.getWidth() > intersection.getHeight() ? intersection.getWidth() : intersection.getHeight();
+					double overlap =
+							intersection.getWidth() > intersection.getHeight() ? intersection.getWidth() : intersection.getHeight();
 
 					largestOverlap = largestOverlap > overlap ? largestOverlap : overlap;
 
@@ -144,7 +145,8 @@ public class IslandSectorFactory
 
 		for (IslandData island : data)
 		{
-			if (island.getBounds().getMaxX() > maxX || island.getBounds().getMaxY() > maxY || island.getBounds().getMinX() < minX || island.getBounds().getMinY() < minY)
+			if (island.getBounds().getMaxX() > maxX || island.getBounds().getMaxY() > maxY || island.getBounds().getMinX() < minX
+					|| island.getBounds().getMinY() < minY)
 			{
 				island.setToRemove(true);
 			}

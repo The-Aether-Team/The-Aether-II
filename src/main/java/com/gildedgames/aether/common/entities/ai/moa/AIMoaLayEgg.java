@@ -2,10 +2,10 @@ package com.gildedgames.aether.common.entities.ai.moa;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockWovenSticks;
-import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
-import com.gildedgames.aether.common.entities.util.MoaNest;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
+import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
+import com.gildedgames.aether.common.entities.util.MoaNest;
 import com.gildedgames.aether.common.tiles.TileEntityMoaEgg;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.SoundEvents;
@@ -15,13 +15,13 @@ public class AIMoaLayEgg extends EntityAIBase
 {
 
 	public World world;
-	
+
 	public EntityMoa mother;
 
 	private int motherSeed, fatherSeed;
 
 	public float moveSpeed;
-	
+
 	public boolean hasLayedEgg;
 
 	public AIMoaLayEgg(EntityMoa mother, int motherSeed, int fatherSeed, float moveSpeed)
@@ -48,7 +48,7 @@ public class AIMoaLayEgg extends EntityAIBase
 		{
 			return false;
 		}
-		
+
 		if (this.mother == null || this.world == null)
 		{
 			return false;
@@ -73,7 +73,7 @@ public class AIMoaLayEgg extends EntityAIBase
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
 
@@ -81,14 +81,14 @@ public class AIMoaLayEgg extends EntityAIBase
 	public void updateTask()
 	{
 		super.updateTask();
-		
+
 		MoaNest nest = this.mother.getFamilyNest();
 
 		if (nest == null || !nest.hasInitialized)
 		{
 			this.world.setBlockState(this.mother.getPosition(), BlocksAether.moa_egg.getDefaultState());
 
-			TileEntityMoaEgg egg = (TileEntityMoaEgg)this.world.getTileEntity(this.mother.getPosition());
+			TileEntityMoaEgg egg = (TileEntityMoaEgg) this.world.getTileEntity(this.mother.getPosition());
 
 			if (egg != null)
 			{
@@ -97,20 +97,21 @@ public class AIMoaLayEgg extends EntityAIBase
 				teGenes.transformFromParents(GeneUtil.getRandomSeed(this.mother.getEntityWorld()), this.fatherSeed, this.motherSeed);
 			}
 
-			this.mother.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.mother.getRNG().nextFloat() - this.mother.getRNG().nextFloat()) * 0.2F + 1.0F);
+			this.mother.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F,
+					(this.mother.getRNG().nextFloat() - this.mother.getRNG().nextFloat()) * 0.2F + 1.0F);
 
 			this.hasLayedEgg = true;
 
 			return;
 		}
-		
+
 		this.mother.getNavigator().tryMoveToXYZ(nest.pos.getX(), nest.pos.getY() + 1, nest.pos.getZ(), this.moveSpeed);
-		
+
 		if (this.mother.getNavigator().getPath() != null && this.mother.getNavigator().getPath().isFinished())
 		{
 			this.world.setBlockState(nest.pos.add(0, 1, 0), BlocksAether.moa_egg.getDefaultState());
 
-			TileEntityMoaEgg egg = (TileEntityMoaEgg)this.world.getTileEntity(nest.pos.add(0, 1, 0));
+			TileEntityMoaEgg egg = (TileEntityMoaEgg) this.world.getTileEntity(nest.pos.add(0, 1, 0));
 
 			if (egg != null)
 			{
@@ -119,10 +120,11 @@ public class AIMoaLayEgg extends EntityAIBase
 				teGenes.transformFromParents(GeneUtil.getRandomSeed(this.mother.getEntityWorld()), this.fatherSeed, this.motherSeed);
 			}
 
-			this.mother.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.mother.getRNG().nextFloat() - this.mother.getRNG().nextFloat()) * 0.2F + 1.0F);
+			this.mother.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F,
+					(this.mother.getRNG().nextFloat() - this.mother.getRNG().nextFloat()) * 0.2F + 1.0F);
 
 			this.hasLayedEgg = true;
 		}
 	}
-	
+
 }

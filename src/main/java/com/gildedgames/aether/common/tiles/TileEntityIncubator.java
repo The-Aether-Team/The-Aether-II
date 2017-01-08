@@ -1,9 +1,7 @@
 package com.gildedgames.aether.common.tiles;
 
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
-import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import com.gildedgames.aether.common.util.TickTimer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,332 +21,339 @@ import javax.annotation.Nullable;
 public class TileEntityIncubator extends TileEntityLockable implements ITickable, IInventory
 {
 
-    private static final int INVENTORY_SIZE = 5;
+	private static final int INVENTORY_SIZE = 5;
 
-    private static final int MOA_EGG_INDEX = 4;
+	private static final int MOA_EGG_INDEX = 4;
 
-    private ItemStack[] inventory;
+	private ItemStack[] inventory;
 
-    private static final int REQ_TEMPERATURE_THRESHOLD = 5000;
+	private static final int REQ_TEMPERATURE_THRESHOLD = 5000;
 
-    private int currentHeatingProgress;
+	private int currentHeatingProgress;
 
-    private TickTimer progress = new TickTimer();
+	private TickTimer progress = new TickTimer();
 
-    public TileEntityIncubator()
-    {
-        this.inventory = new ItemStack[INVENTORY_SIZE];
-    }
+	public TileEntityIncubator()
+	{
+		this.inventory = new ItemStack[INVENTORY_SIZE];
+	}
 
-    @Override
-    public void update()
-    {
-        if (this.worldObj.isRemote)
-        {
-            return;
-        }
+	@Override
+	public void update()
+	{
+		if (this.worldObj.isRemote)
+		{
+			return;
+		}
 
-        // TODO: Re-implement
+		// TODO: Re-implement
 
-        final IBlockState state = this.worldObj.getBlockState(this.pos);
+		final IBlockState state = this.worldObj.getBlockState(this.pos);
 
-        if (state.getBlock() instanceof BlockIncubator && state.getValue(BlockIncubator.PROPERTY_IS_LIT) != this.isHeating())
-        {
-            this.markDirty();
+		if (state.getBlock() instanceof BlockIncubator && state.getValue(BlockIncubator.PROPERTY_IS_LIT) != this.isHeating())
+		{
+			this.markDirty();
 
-            this.worldObj.setBlockState(this.pos, state.withProperty(BlockIncubator.PROPERTY_IS_LIT, this.isHeating()));
+			this.worldObj.setBlockState(this.pos, state.withProperty(BlockIncubator.PROPERTY_IS_LIT, this.isHeating()));
 
-            this.validate();
-            this.worldObj.setTileEntity(this.pos, this);
-        }
-    }
+			this.validate();
+			this.worldObj.setTileEntity(this.pos, this);
+		}
+	}
 
-    public ItemStack getMoaEgg()
-    {
-        return this.getStackInSlot(MOA_EGG_INDEX);
-    }
+	public ItemStack getMoaEgg()
+	{
+		return this.getStackInSlot(MOA_EGG_INDEX);
+	}
 
-    public boolean areFuelSlotsFilled()
-    {
-        boolean hasFuelSlotsFilled = true;
+	public boolean areFuelSlotsFilled()
+	{
+		boolean hasFuelSlotsFilled = true;
 
-        for (int count = 0; count < MOA_EGG_INDEX; count++)
-        {
-            ItemStack stack = this.getStackInSlot(count);
+		for (int count = 0; count < MOA_EGG_INDEX; count++)
+		{
+			ItemStack stack = this.getStackInSlot(count);
 
-            if (stack == null)
-            {
-                hasFuelSlotsFilled = false;
-                break;
-            }
-        }
+			if (stack == null)
+			{
+				hasFuelSlotsFilled = false;
+				break;
+			}
+		}
 
-        return hasFuelSlotsFilled;
-    }
+		return hasFuelSlotsFilled;
+	}
 
-    public boolean hasStartedHeating()
-    {
-        return (this.currentHeatingProgress > 0 || (this.getTotalHeatingItems() >= 4 && this.areFuelSlotsFilled())) && this.getMoaEgg() != null;
-    }
+	public boolean hasStartedHeating()
+	{
+		return (this.currentHeatingProgress > 0 || (this.getTotalHeatingItems() >= 4 && this.areFuelSlotsFilled()))
+				&& this.getMoaEgg() != null;
+	}
 
-    public boolean isHeating()
-    {
-        return this.getMoaEgg() != null && this.getTotalHeatingItems() >= 4 && this.areFuelSlotsFilled();
-    }
+	public boolean isHeating()
+	{
+		return this.getMoaEgg() != null && this.getTotalHeatingItems() >= 4 && this.areFuelSlotsFilled();
+	}
 
-    public int getCurrentHeatingProgress()
-    {
-        return this.currentHeatingProgress;
-    }
+	public int getCurrentHeatingProgress()
+	{
+		return this.currentHeatingProgress;
+	}
 
-    public int getRequiredTemperatureThreshold()
-    {
-        return TileEntityIncubator.REQ_TEMPERATURE_THRESHOLD;
-    }
+	public int getRequiredTemperatureThreshold()
+	{
+		return TileEntityIncubator.REQ_TEMPERATURE_THRESHOLD;
+	}
 
-    public int getTotalHeatingItems()
-    {
-    	// Re-implement
-    	return 0;
-    }
+	public int getTotalHeatingItems()
+	{
+		// Re-implement
+		return 0;
+	}
 
-    @Override
-    public int getSizeInventory()
-    {
-        return INVENTORY_SIZE;
-    }
+	@Override
+	public int getSizeInventory()
+	{
+		return INVENTORY_SIZE;
+	}
 
-    @Nullable
-    @Override
-    public ItemStack getStackInSlot(int index)
-    {
-        if (index >= this.getSizeInventory())
-        {
-            return null;
-        }
+	@Nullable
+	@Override
+	public ItemStack getStackInSlot(int index)
+	{
+		if (index >= this.getSizeInventory())
+		{
+			return null;
+		}
 
-        return this.inventory[index];
-    }
+		return this.inventory[index];
+	}
 
-    @Nullable
-    @Override
-    public ItemStack decrStackSize(int index, int count)
-    {
-        ItemStack stack = this.getStackInSlot(index);
+	@Nullable
+	@Override
+	public ItemStack decrStackSize(int index, int count)
+	{
+		ItemStack stack = this.getStackInSlot(index);
 
-        if (stack == null)
-        {
-            return null;
-        }
+		if (stack == null)
+		{
+			return null;
+		}
 
-        ItemStack copiedStack;
+		ItemStack copiedStack;
 
-        if (stack.stackSize <= count)
-        {
-            copiedStack = stack;
+		if (stack.stackSize <= count)
+		{
+			copiedStack = stack;
 
-            this.setInventorySlotContents(index, null);
+			this.setInventorySlotContents(index, null);
 
-            return copiedStack;
-        }
-        else
-        {
-            copiedStack = stack.splitStack(count);
+			return copiedStack;
+		}
+		else
+		{
+			copiedStack = stack.splitStack(count);
 
-            if (stack.stackSize == 0)
-            {
-                this.setInventorySlotContents(index, null);
-            }
+			if (stack.stackSize == 0)
+			{
+				this.setInventorySlotContents(index, null);
+			}
 
-            return copiedStack;
-        }
-    }
+			return copiedStack;
+		}
+	}
 
-    @Nullable
-    @Override
-    public ItemStack removeStackFromSlot(int index)
-    {
-        ItemStack stack = this.getStackInSlot(index);
+	@Nullable
+	@Override
+	public ItemStack removeStackFromSlot(int index)
+	{
+		ItemStack stack = this.getStackInSlot(index);
 
-        if (stack != null)
-        {
-            this.setInventorySlotContents(index, null);
+		if (stack != null)
+		{
+			this.setInventorySlotContents(index, null);
 
-            return stack;
-        }
+			return stack;
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    @Override
-    public void setInventorySlotContents(int index, @Nullable ItemStack stack)
-    {
-        if (index >= this.getSizeInventory())
-        {
-            return;
-        }
+	@Override
+	public void setInventorySlotContents(int index, @Nullable ItemStack stack)
+	{
+		if (index >= this.getSizeInventory())
+		{
+			return;
+		}
 
-        this.inventory[index] = stack;
+		this.inventory[index] = stack;
 
-        this.sync();
-    }
+		this.sync();
+	}
 
-    @Override
-    public int getInventoryStackLimit()
-    {
-        return 64;
-    }
+	@Override
+	public int getInventoryStackLimit()
+	{
+		return 64;
+	}
 
-    @Override
-    public boolean isUseableByPlayer(EntityPlayer player)
-    {
-        return this.worldObj.getTileEntity(this.pos) == this && player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
-    }
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer player)
+	{
+		return this.worldObj.getTileEntity(this.pos) == this
+				&& player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D)
+				<= 64.0D;
+	}
 
-    @Override
-    public void openInventory(EntityPlayer player) {}
+	@Override
+	public void openInventory(EntityPlayer player)
+	{
+	}
 
-    @Override
-    public void closeInventory(EntityPlayer player) {}
+	@Override
+	public void closeInventory(EntityPlayer player)
+	{
+	}
 
-    @Override
-    public boolean isItemValidForSlot(int index, ItemStack stack)
-    {
-    	// TODO: Re-implement
+	@Override
+	public boolean isItemValidForSlot(int index, ItemStack stack)
+	{
+		// TODO: Re-implement
 		return false;
-    }
+	}
 
-    @Override
-    public int getField(int id)
-    {
-        return 0;
-    }
+	@Override
+	public int getField(int id)
+	{
+		return 0;
+	}
 
-    @Override
-    public void setField(int id, int value)
-    {
+	@Override
+	public void setField(int id, int value)
+	{
 
-    }
+	}
 
-    @Override
-    public int getFieldCount()
-    {
-        return 0;
-    }
+	@Override
+	public int getFieldCount()
+	{
+		return 0;
+	}
 
-    @Override
-    public void clear()
-    {
-        this.inventory = new ItemStack[INVENTORY_SIZE];
-    }
+	@Override
+	public void clear()
+	{
+		this.inventory = new ItemStack[INVENTORY_SIZE];
+	}
 
-    @Override
-    public String getName()
-    {
-        return "container.incubator";
-    }
+	@Override
+	public String getName()
+	{
+		return "container.incubator";
+	}
 
-    @Override
-    public boolean hasCustomName()
-    {
-        return false;
-    }
+	@Override
+	public boolean hasCustomName()
+	{
+		return false;
+	}
 
-    public void sync()
-    {
-        IBlockState state = this.worldObj.getBlockState(this.pos);
+	public void sync()
+	{
+		IBlockState state = this.worldObj.getBlockState(this.pos);
 
-        this.worldObj.notifyBlockUpdate(this.pos, state, state, 3);
+		this.worldObj.notifyBlockUpdate(this.pos, state, state, 3);
 
-        this.markDirty();
-    }
+		this.markDirty();
+	}
 
-    @Override
-    public NBTTagCompound getUpdateTag()
-    {
-        NBTTagCompound tag = super.getUpdateTag();
+	@Override
+	public NBTTagCompound getUpdateTag()
+	{
+		NBTTagCompound tag = super.getUpdateTag();
 
-        this.writeToNBT(tag);
+		this.writeToNBT(tag);
 
-        return tag;
-    }
+		return tag;
+	}
 
-    @Override
-    public SPacketUpdateTileEntity getUpdatePacket()
-    {
-        NBTTagCompound compound = this.getUpdateTag();
+	@Override
+	public SPacketUpdateTileEntity getUpdatePacket()
+	{
+		NBTTagCompound compound = this.getUpdateTag();
 
-        return new SPacketUpdateTileEntity(this.pos, 1, compound);
-    }
+		return new SPacketUpdateTileEntity(this.pos, 1, compound);
+	}
 
-    @Override
-    public void onDataPacket(NetworkManager networkManager, SPacketUpdateTileEntity packet)
-    {
-        this.readFromNBT(packet.getNbtCompound());
-    }
+	@Override
+	public void onDataPacket(NetworkManager networkManager, SPacketUpdateTileEntity packet)
+	{
+		this.readFromNBT(packet.getNbtCompound());
+	}
 
-    @Override
-    public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
-    {
-        return new ContainerIcestoneCooler(playerInventory, this);
-    }
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	{
+		return new ContainerIcestoneCooler(playerInventory, this);
+	}
 
-    @Override
-    public String getGuiID()
-    {
-        return "aether:incubator";
-    }
+	@Override
+	public String getGuiID()
+	{
+		return "aether:incubator";
+	}
 
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound)
-    {
-        super.writeToNBT(compound);
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+	{
+		super.writeToNBT(compound);
 
-        NBTTagList stackList = new NBTTagList();
+		NBTTagList stackList = new NBTTagList();
 
-        for (int i = 0; i < this.inventory.length; ++i)
-        {
-            if (this.inventory[i] != null)
-            {
-                NBTTagCompound stackNBT = new NBTTagCompound();
+		for (int i = 0; i < this.inventory.length; ++i)
+		{
+			if (this.inventory[i] != null)
+			{
+				NBTTagCompound stackNBT = new NBTTagCompound();
 
-                stackNBT.setByte("slot", (byte) i);
+				stackNBT.setByte("slot", (byte) i);
 
-                this.inventory[i].writeToNBT(stackNBT);
+				this.inventory[i].writeToNBT(stackNBT);
 
-                stackList.appendTag(stackNBT);
-            }
-        }
+				stackList.appendTag(stackNBT);
+			}
+		}
 
-        compound.setTag("inventory", stackList);
+		compound.setTag("inventory", stackList);
 
-        compound.setInteger("currentHeatingProgress", this.currentHeatingProgress);
+		compound.setInteger("currentHeatingProgress", this.currentHeatingProgress);
 
-        return compound;
-    }
+		return compound;
+	}
 
-    @Override
-    public void readFromNBT(NBTTagCompound compound)
-    {
-        super.readFromNBT(compound);
+	@Override
+	public void readFromNBT(NBTTagCompound compound)
+	{
+		super.readFromNBT(compound);
 
-        this.inventory = new ItemStack[INVENTORY_SIZE];
+		this.inventory = new ItemStack[INVENTORY_SIZE];
 
-        NBTTagList stackList = compound.getTagList("inventory", 10);
+		NBTTagList stackList = compound.getTagList("inventory", 10);
 
-        for (int i = 0; i < stackList.tagCount(); ++i)
-        {
-            NBTTagCompound stack = stackList.getCompoundTagAt(i);
+		for (int i = 0; i < stackList.tagCount(); ++i)
+		{
+			NBTTagCompound stack = stackList.getCompoundTagAt(i);
 
-            byte slotPos = stack.getByte("slot");
+			byte slotPos = stack.getByte("slot");
 
-            if (slotPos >= 0 && slotPos < this.inventory.length)
-            {
-                this.inventory[slotPos] = ItemStack.loadItemStackFromNBT(stack);
-            }
-        }
+			if (slotPos >= 0 && slotPos < this.inventory.length)
+			{
+				this.inventory[slotPos] = ItemStack.loadItemStackFromNBT(stack);
+			}
+		}
 
-        this.currentHeatingProgress = compound.getInteger("currentHeatingProgress");
-    }
+		this.currentHeatingProgress = compound.getInteger("currentHeatingProgress");
+	}
 
 }

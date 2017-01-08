@@ -141,7 +141,8 @@ public class MinecraftGraphics2D implements Graphics2D
 		GlStateManager.enableTexture2D();
 	}
 
-	private void drawModalRectWithCustomSizedTexture(double x, double y, double u, double v, double width, double height, double textureWidth, double textureHeight)
+	private void drawModalRectWithCustomSizedTexture(double x, double y, double u, double v, double width, double height,
+			double textureWidth, double textureHeight)
 	{
 		double f4 = 1.0D / textureWidth;
 		double f5 = 1.0D / textureHeight;

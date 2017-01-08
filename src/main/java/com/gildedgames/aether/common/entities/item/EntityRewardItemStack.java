@@ -46,12 +46,12 @@ public class EntityRewardItemStack extends EntityItem
 		this.dataManager.register(PLAYER_NAME, "");
 		this.dataManager.register(IS_WHITELIST, true);
 	}
-	
+
 	public void setWhitelistMode(boolean whitelist)
 	{
 		this.dataManager.set(IS_WHITELIST, whitelist);
 	}
-	
+
 	public boolean isWhitelisted()
 	{
 		return this.dataManager.get(IS_WHITELIST);
@@ -88,7 +88,7 @@ public class EntityRewardItemStack extends EntityItem
 		this.setPlayerName(tag.getString("PlayerName"));
 		this.setWhitelistMode(tag.getBoolean("Whitelisted"));
 	}
-	
+
 	@Override
 	public void onUpdate()
 	{
@@ -99,10 +99,10 @@ public class EntityRewardItemStack extends EntityItem
 				double motX = (this.rand.nextBoolean() ? -1 : 1) * this.rand.nextDouble();
 				double motY = this.rand.nextDouble();
 				double motZ = (this.rand.nextBoolean() ? -1 : 1) * this.rand.nextDouble();
-				
+
 				this.worldObj.spawnParticle(EnumParticleTypes.SPELL_MOB, this.posX, this.posY, this.posZ, motX, motY, motZ);
 			}
-			
+
 			if (this.ticksExisted % 5 == 0)
 			{
 				for (int sparkCount = 1; sparkCount <= 10; sparkCount++)
@@ -110,12 +110,13 @@ public class EntityRewardItemStack extends EntityItem
 					double motX = (this.rand.nextBoolean() ? -1 : 1) * this.rand.nextDouble();
 					double motY = this.rand.nextDouble();
 					double motZ = (this.rand.nextBoolean() ? -1 : 1) * this.rand.nextDouble();
-					
-					this.worldObj.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, this.posX, this.posY, this.posZ, motX / 2, motY / 2, motZ / 2);
+
+					this.worldObj.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, this.posX, this.posY, this.posZ,
+							motX / 2, motY / 2, motZ / 2);
 				}
 			}
 		}
-		
+
 		super.onUpdate();
 	}
 
@@ -125,8 +126,9 @@ public class EntityRewardItemStack extends EntityItem
 		if (!this.worldObj.isRemote)
 		{
 			String username = player.getCommandSenderEntity().getName();
-			
-			if (this.getPlayerName() != null && (username.equalsIgnoreCase(this.getPlayerName()) && this.isWhitelisted()) || (!username.equalsIgnoreCase(this.getPlayerName()) && !this.isWhitelisted()))
+
+			if (this.getPlayerName() != null && (username.equalsIgnoreCase(this.getPlayerName()) && this.isWhitelisted()) || (
+					!username.equalsIgnoreCase(this.getPlayerName()) && !this.isWhitelisted()))
 			{
 				super.onCollideWithPlayer(player);
 			}

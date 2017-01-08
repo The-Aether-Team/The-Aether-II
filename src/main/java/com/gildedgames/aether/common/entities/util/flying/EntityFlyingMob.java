@@ -83,12 +83,12 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 	{
 		this.setAttacked(true);
 
-		float f = (float)this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
+		float f = (float) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
 		int i = 0;
 
 		if (entityIn instanceof EntityLivingBase)
 		{
-			f += EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((EntityLivingBase)entityIn).getCreatureAttribute());
+			f += EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((EntityLivingBase) entityIn).getCreatureAttribute());
 			i += EnchantmentHelper.getKnockbackModifier(this);
 		}
 
@@ -98,7 +98,9 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 		{
 			if (i > 0)
 			{
-				((EntityLivingBase)entityIn).knockBack(this, (float)i * 0.5F, (double) MathHelper.sin(this.rotationYaw * 0.017453292F), (double)(-MathHelper.cos(this.rotationYaw * 0.017453292F)));
+				((EntityLivingBase) entityIn).knockBack(this,
+						(float) i * 0.5F, (double) MathHelper.sin(this.rotationYaw * 0.017453292F), (double) (-MathHelper.cos(
+								this.rotationYaw * 0.017453292F)));
 				this.motionX *= 0.6D;
 				this.motionZ *= 0.6D;
 			}
@@ -112,18 +114,19 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 
 			if (entityIn instanceof EntityPlayer)
 			{
-				EntityPlayer entityplayer = (EntityPlayer)entityIn;
+				EntityPlayer entityplayer = (EntityPlayer) entityIn;
 				ItemStack itemstack = this.getHeldItemMainhand();
 				ItemStack itemstack1 = entityplayer.isHandActive() ? entityplayer.getActiveItemStack() : null;
 
-				if (itemstack != null && itemstack1 != null && itemstack.getItem() instanceof ItemAxe && itemstack1.getItem() == Items.SHIELD)
+				if (itemstack != null && itemstack1 != null && itemstack.getItem() instanceof ItemAxe
+						&& itemstack1.getItem() == Items.SHIELD)
 				{
-					float f1 = 0.25F + (float)EnchantmentHelper.getEfficiencyModifier(this) * 0.05F;
+					float f1 = 0.25F + (float) EnchantmentHelper.getEfficiencyModifier(this) * 0.05F;
 
 					if (this.rand.nextFloat() < f1)
 					{
 						entityplayer.getCooldownTracker().setCooldown(Items.SHIELD, 100);
-						this.worldObj.setEntityState(entityplayer, (byte)30);
+						this.worldObj.setEntityState(entityplayer, (byte) 30);
 					}
 				}
 			}

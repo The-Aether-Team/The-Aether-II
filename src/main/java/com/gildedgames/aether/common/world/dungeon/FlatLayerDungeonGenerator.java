@@ -1,14 +1,10 @@
 package com.gildedgames.aether.common.world.dungeon;
 
+import com.gildedgames.aether.api.util.BlockPosDimension;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.util.structure.TemplatePrimer;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
-import com.gildedgames.aether.common.world.util.delaunay_triangulation.Connection;
-import com.gildedgames.aether.common.world.util.delaunay_triangulation.ConnectionComparer;
-import com.gildedgames.aether.common.world.util.delaunay_triangulation.ConvexHull;
-import com.gildedgames.aether.common.world.util.delaunay_triangulation.RoomAreaComparer;
-import com.gildedgames.aether.common.world.util.delaunay_triangulation.TriangulationCell;
-import com.gildedgames.aether.api.util.BlockPosDimension;
+import com.gildedgames.aether.common.world.util.delaunay_triangulation.*;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -23,12 +19,8 @@ import net.minecraft.world.gen.structure.template.BlockRotationProcessor;
 import net.minecraft.world.gen.structure.template.ITemplateProcessor;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.awt.Rectangle;
+import java.util.*;
 
 public class FlatLayerDungeonGenerator implements DungeonGenerator
 {
@@ -206,7 +198,8 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 
 			if (layerNum == this.layers.size())
 			{
-				instance.setInsideEntrance(new BlockPosDimension((int) end.getCenterX() - 1, layer.minY() + 1, (int) end.getCenterZ() - 1, instance.getDimIdInside()));
+				instance.setInsideEntrance(new BlockPosDimension(
+						(int) end.getCenterX() - 1, layer.minY() + 1, (int) end.getCenterZ() - 1, instance.getDimIdInside()));
 			}
 		}
 
@@ -247,82 +240,82 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 
 					switch (tile)
 					{
-					case SMALL_ROOM:
-					{
-						//this.generateTile(layer, x, layer.smallestRoomHeight(), z, BlocksAether.labyrinth_wall.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
-						break;
-					}
-					case END_ROOM:
-					{
-						//this.generateTile(layer, x, layer.smallestRoomHeight(), z, Blocks.GLOWSTONE.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
-						break;
-					}
-					case ENTRANCE_ROOM:
-					{
-						//this.generateTile(layer, x, layer.smallestRoomHeight(), z, Blocks.DIAMOND_BLOCK.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
-						break;
-					}
-					case BIG_ROOM:
-					{
-						//this.generateTile(layer, x, layer.smallestRoomHeight(), z, BlocksAether.labyrinth_wall.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
-						break;
-					}
-					case PATH:
-					{
-						boolean createPillar = x % 4 == z % 4;
-
-						this.generateTile(layer, x, 4, z, BlocksAether.labyrinth_base.getDefaultState(), BlocksAether.labyrinth_wall.getDefaultState(), primer);
-
-						if (createPillar)
+						case SMALL_ROOM:
 						{
-							for (int i = layer.minY() + 1; i <= layer.minY() + 4; i++)
+							//this.generateTile(layer, x, layer.smallestRoomHeight(), z, BlocksAether.labyrinth_wall.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
+							break;
+						}
+						case END_ROOM:
+						{
+							//this.generateTile(layer, x, layer.smallestRoomHeight(), z, Blocks.GLOWSTONE.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
+							break;
+						}
+						case ENTRANCE_ROOM:
+						{
+							//this.generateTile(layer, x, layer.smallestRoomHeight(), z, Blocks.DIAMOND_BLOCK.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
+							break;
+						}
+						case BIG_ROOM:
+						{
+							//this.generateTile(layer, x, layer.smallestRoomHeight(), z, BlocksAether.labyrinth_wall.getDefaultState(), Blocks.AIR.getDefaultState(), primer);
+							break;
+						}
+						case PATH:
+						{
+							boolean createPillar = x % 4 == z % 4;
+
+							this.generateTile(layer, x, 4, z, BlocksAether.labyrinth_base.getDefaultState(), BlocksAether.labyrinth_wall.getDefaultState(), primer);
+
+							if (createPillar)
 							{
-								primer.setBlockState(x, i, z, BlocksAether.labyrinth_glowing_pillar.getDefaultState());
+								for (int i = layer.minY() + 1; i <= layer.minY() + 4; i++)
+								{
+									primer.setBlockState(x, i, z, BlocksAether.labyrinth_glowing_pillar.getDefaultState());
+								}
+
+								primer.setBlockState(x, layer.minY() + 1, z, BlocksAether.labyrinth_base.getDefaultState());
+								primer.setBlockState(x, layer.minY() + 4, z, BlocksAether.labyrinth_capstone.getDefaultState());
+							}
+
+							primer.setBlockState(x, layer.minY() + 5, z, BlocksAether.labyrinth_base.getDefaultState());
+
+							break;
+						}
+						case TRUE_PATH:
+						{
+							this.generateTile(layer, x, 4, z, BlocksAether.labyrinth_capstone.getDefaultState(), BlocksAether.labyrinth_wall.getDefaultState(), primer);
+							primer.setBlockState(x, layer.minY() + 5, z, BlocksAether.labyrinth_capstone.getDefaultState());
+
+							break;
+						}
+						case PATH_WALL:
+						{
+							for (int i = layer.minY(); i <= layer.minY() + 4; i++)
+							{
+								primer.setBlockState(x, i, z, BlocksAether.labyrinth_wall.getDefaultState());
 							}
 
 							primer.setBlockState(x, layer.minY() + 1, z, BlocksAether.labyrinth_base.getDefaultState());
 							primer.setBlockState(x, layer.minY() + 4, z, BlocksAether.labyrinth_capstone.getDefaultState());
+
+							break;
 						}
-
-						primer.setBlockState(x, layer.minY() + 5, z, BlocksAether.labyrinth_base.getDefaultState());
-
-						break;
-					}
-					case TRUE_PATH:
-					{
-						this.generateTile(layer, x, 4, z, BlocksAether.labyrinth_capstone.getDefaultState(), BlocksAether.labyrinth_wall.getDefaultState(), primer);
-						primer.setBlockState(x, layer.minY() + 5, z, BlocksAether.labyrinth_capstone.getDefaultState());
-
-						break;
-					}
-					case PATH_WALL:
-					{
-						for (int i = layer.minY(); i <= layer.minY() + 4; i++)
+						case WALL:
 						{
-							primer.setBlockState(x, i, z, BlocksAether.labyrinth_wall.getDefaultState());
+							this.generateTile(layer, x, 4, z, BlocksAether.labyrinth_wall.getDefaultState(), primer);
+
+							for (int i = layer.minY(); i <= layer.minY() + 4; i++)
+							{
+								primer.setBlockState(x, i, z, BlocksAether.labyrinth_wall.getDefaultState());
+							}
+
+							primer.setBlockState(x, layer.minY() + 1, z, BlocksAether.labyrinth_base.getDefaultState());
+							primer.setBlockState(x, layer.minY() + 4, z, BlocksAether.labyrinth_capstone.getDefaultState());
+
+							break;
 						}
-
-						primer.setBlockState(x, layer.minY() + 1, z, BlocksAether.labyrinth_base.getDefaultState());
-						primer.setBlockState(x, layer.minY() + 4, z, BlocksAether.labyrinth_capstone.getDefaultState());
-
-						break;
-					}
-					case WALL:
-					{
-						this.generateTile(layer, x, 4, z, BlocksAether.labyrinth_wall.getDefaultState(), primer);
-
-						for (int i = layer.minY(); i <= layer.minY() + 4; i++)
-						{
-							primer.setBlockState(x, i, z, BlocksAether.labyrinth_wall.getDefaultState());
-						}
-
-						primer.setBlockState(x, layer.minY() + 1, z, BlocksAether.labyrinth_base.getDefaultState());
-						primer.setBlockState(x, layer.minY() + 4, z, BlocksAether.labyrinth_capstone.getDefaultState());
-
-						break;
-					}
-					default:
-						break;
+						default:
+							break;
 					}
 				}
 			}
@@ -375,7 +368,8 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 			{
 				if (posX + x == inst.getInsideEntrance().getX() + 1 && posZ + z == inst.getInsideEntrance().getZ() + 1)
 				{
-					world.setBlockState(new BlockPos(posX + x, inst.getInsideEntrance().getY(), posZ + z), BlocksAether.labyrinth_totem.getDefaultState());
+					world.setBlockState(new BlockPos(
+							posX + x, inst.getInsideEntrance().getY(), posZ + z), BlocksAether.labyrinth_totem.getDefaultState());
 				}
 			}
 		}
@@ -436,7 +430,8 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 					vx += room2.getCenterX() - room1x;
 					vz += room2.getCenterZ() - room1z;
 
-					double overlap = intersection.getWidth() > intersection.getHeight() ? intersection.getWidth() : intersection.getHeight();
+					double overlap =
+							intersection.getWidth() > intersection.getHeight() ? intersection.getWidth() : intersection.getHeight();
 
 					largestOverlap = largestOverlap > overlap ? largestOverlap : overlap;
 
@@ -506,7 +501,8 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 		return rooms;
 	}
 
-	private int[][] createCorridors(DungeonInstance instance, List<DungeonRoom> rooms, DungeonLayer newLayer, DungeonLayer previousLayer, Random rand)
+	private int[][] createCorridors(DungeonInstance instance, List<DungeonRoom> rooms, DungeonLayer newLayer, DungeonLayer previousLayer,
+			Random rand)
 	{
 		List<DungeonRoom> largeRooms = this.findLargeRooms(rooms, rooms.size() / 2);
 
@@ -877,16 +873,16 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 						foundGoal = true;
 						break currentLoop;
 					}*/
-				case (2):
-				{
-					path.add(new int[] { x, z });
-					foundGoal = true;
-					break currentLoop;
-				}
-				default:
-				{
-					path.add(new int[] { currentX, currentZ });
-				}
+					case (2):
+					{
+						path.add(new int[] { x, z });
+						foundGoal = true;
+						break currentLoop;
+					}
+					default:
+					{
+						path.add(new int[] { currentX, currentZ });
+					}
 				}
 
 			}

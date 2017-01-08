@@ -7,7 +7,8 @@ import net.minecraft.util.math.BlockPos;
 public class GenUtil
 {
 
-	public static double bilinearInterpolate(double bottomLeftValue, double topLeftValue, double bottomRightValue, double topRightValue, double bottomLeftX, double topRightX, double bottomLeftY, double topRightY, double x, double y)
+	public static double bilinearInterpolate(double bottomLeftValue, double topLeftValue, double bottomRightValue, double topRightValue,
+			double bottomLeftX, double topRightX, double bottomLeftY, double topRightY, double x, double y)
 	{
 		double x2x1, y2y1, x2x, y2y, yy1, xx1;
 		x2x1 = topRightX - bottomLeftX;
@@ -33,14 +34,14 @@ public class GenUtil
 
 		switch (rotation)
 		{
-		case COUNTERCLOCKWISE_90:
-			return new BlockPos(origin.getX() + k, pos.getY(), origin.getZ() - i);
-		case CLOCKWISE_90:
-			return new BlockPos(origin.getX() - i, pos.getY(), origin.getZ() + i);
-		case CLOCKWISE_180:
-			return new BlockPos(origin.getX() - i, pos.getY(), origin.getZ() - k);
-		default:
-			return pos;
+			case COUNTERCLOCKWISE_90:
+				return new BlockPos(origin.getX() + k, pos.getY(), origin.getZ() - i);
+			case CLOCKWISE_90:
+				return new BlockPos(origin.getX() - i, pos.getY(), origin.getZ() + i);
+			case CLOCKWISE_180:
+				return new BlockPos(origin.getX() - i, pos.getY(), origin.getZ() - k);
+			default:
+				return pos;
 		}
 	}
 

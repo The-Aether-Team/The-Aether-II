@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.google.common.collect.Sets;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -129,7 +129,8 @@ public class EntityAerbunny extends EntityAetherAnimal
 		{
 			if (!this.isRiding() && player.getPassengers().size() <= 0)
 			{
-				this.worldObj.playSound(player, player.getPosition(), SoundsAether.aerbunny_lift, SoundCategory.NEUTRAL, 1.0F, 0.8F + (this.rand.nextFloat() * 0.5F));
+				this.worldObj.playSound(player, player.getPosition(), SoundsAether.aerbunny_lift, SoundCategory.NEUTRAL, 1.0F,
+						0.8F + (this.rand.nextFloat() * 0.5F));
 
 				this.startRiding(player, true);
 				AetherCore.PROXY.displayDismountMessage(player);

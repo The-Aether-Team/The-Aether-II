@@ -2,17 +2,16 @@ package com.gildedgames.aether.common.entities.living.mounts;
 
 import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
-import com.gildedgames.aether.common.items.misc.ItemMoaFeather;
-import com.gildedgames.aether.common.registry.content.LootTablesAether;
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.moa.*;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
+import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
 import com.gildedgames.aether.common.entities.util.*;
 import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
 import com.gildedgames.aether.common.entities.util.mounts.IFlyingMountData;
-import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
-import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
+import com.gildedgames.aether.common.items.misc.ItemMoaFeather;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.aether.common.util.io.NBTHelper;
 import com.google.common.collect.Sets;
@@ -32,7 +31,6 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -291,7 +289,8 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	{
 		this.fallDistance = 0;
 
-		boolean riderSneaking = !this.getPassengers().isEmpty() && this.getPassengers().get(0) != null && this.getPassengers().get(0).isSneaking();
+		boolean riderSneaking =
+				!this.getPassengers().isEmpty() && this.getPassengers().get(0) != null && this.getPassengers().get(0).isSneaking();
 
 		if (!this.onGround && this.motionY < 0.0D && !riderSneaking)
 		{
@@ -305,7 +304,8 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		{
 			if (this.ticksUntilFlap == 0)
 			{
-				this.worldObj.playSound(this.posX, this.posY, this.posZ, SoundsAether.generic_wing_flap, SoundCategory.NEUTRAL, 0.4f, 0.8f + (this.getRNG().nextFloat() * 0.6f), false);
+				this.worldObj.playSound(this.posX, this.posY, this.posZ, SoundsAether.generic_wing_flap, SoundCategory.NEUTRAL, 0.4f,
+						0.8f + (this.getRNG().nextFloat() * 0.6f), false);
 
 				this.ticksUntilFlap = 11;
 			}

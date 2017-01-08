@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.living.dungeon.labyrinth;
 
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AISavageAttack;
 import com.gildedgames.aether.common.entities.util.EntityExtendedMob;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.aether.common.util.io.NBTHelper;
 import net.minecraft.block.Block;
@@ -85,7 +85,8 @@ public class EntityChestMimic extends EntityExtendedMob
 			double motionY = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 			double motionZ = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 
-			this.worldObj.spawnParticle(EnumParticleTypes.SWEEP_ATTACK, this.posX + motionX, this.posY + 0.75D + motionY, this.posZ + motionZ, motionX, motionY, motionZ);
+			this.worldObj.spawnParticle(EnumParticleTypes.SWEEP_ATTACK,
+					this.posX + motionX, this.posY + 0.75D + motionY, this.posZ + motionZ, motionX, motionY, motionZ);
 		}
 	}
 
@@ -102,7 +103,8 @@ public class EntityChestMimic extends EntityExtendedMob
 				double motionY = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 				double motionZ = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 
-				this.worldObj.spawnParticle(EnumParticleTypes.CLOUD, this.posX + motionX, this.posY + 0.5D + motionY, this.posZ + motionZ, 0.1D, 0.1D, 0.1D);
+				this.worldObj.spawnParticle(EnumParticleTypes.CLOUD,
+						this.posX + motionX, this.posY + 0.5D + motionY, this.posZ + motionZ, 0.1D, 0.1D, 0.1D);
 			}
 		}
 	}

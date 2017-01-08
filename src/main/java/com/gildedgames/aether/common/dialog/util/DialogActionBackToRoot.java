@@ -7,7 +7,8 @@ public class DialogActionBackToRoot implements IDialogAction
 {
 
 	@Override
-	public void onAction(IDialogController controller) {
+	public void onAction(IDialogController controller)
+	{
 		controller.setNode(controller.getCurrentScene().getRootNode().getIdentifier());
 	}
 

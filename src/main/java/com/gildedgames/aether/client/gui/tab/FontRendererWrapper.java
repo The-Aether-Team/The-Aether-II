@@ -27,7 +27,7 @@ public class FontRendererWrapper extends FontRenderer
 	@Override
 	public int drawString(String text, int x, int y, int color)
 	{
-		return this.parent.drawString(text, (float)x, (float)y, color, false);
+		return this.parent.drawString(text, (float) x, (float) y, color, false);
 	}
 
 	@Override

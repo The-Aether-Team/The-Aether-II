@@ -27,10 +27,11 @@ public class MountProcessor
 
 		if (target instanceof IMount)
 		{
-			IMount mount = (IMount)target;
+			IMount mount = (IMount) target;
 			IMountProcessor processor = mount.getMountProcessor();
 
-			if (processor.canBeMounted(target) && !event.getEntityPlayer().isRiding() && processor.canProcessMountInteraction(event.getTarget(), event.getEntityPlayer()))
+			if (processor.canBeMounted(target) && !event.getEntityPlayer().isRiding()
+					&& processor.canProcessMountInteraction(event.getTarget(), event.getEntityPlayer()))
 			{
 				if (target.getPassengers().contains(event.getEntityPlayer()))
 				{
@@ -58,7 +59,7 @@ public class MountProcessor
 	{
 		if (event.getEntity() instanceof EntityPlayer)
 		{
-			EntityPlayer player = (EntityPlayer)event.getEntity();
+			EntityPlayer player = (EntityPlayer) event.getEntity();
 
 			Entity riding = player.getRidingEntity();
 
@@ -67,7 +68,7 @@ public class MountProcessor
 				IMount mount = (IMount) riding;
 				IMountProcessor processor = mount.getMountProcessor();
 
-				EntityLivingBase livingMount = (EntityLivingBase)riding;
+				EntityLivingBase livingMount = (EntityLivingBase) riding;
 
 				livingMount.renderYawOffset = player.renderYawOffset;
 				livingMount.setJumping(false);
@@ -115,7 +116,7 @@ public class MountProcessor
 
 		if (mount instanceof EntityCreature)
 		{
-			((EntityCreature)mount).getNavigator().clearPathEntity();
+			((EntityCreature) mount).getNavigator().clearPathEntity();
 		}
 
 		mount.rotationYaw = rider.rotationYaw;
@@ -147,7 +148,7 @@ public class MountProcessor
 
 		mount.jumpMovementFactor = mount.getAIMoveSpeed() * 0.1F;
 
-		mount.setAIMoveSpeed((float)mount.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
+		mount.setAIMoveSpeed((float) mount.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
 
 		double oldMotionY = mount.motionY;
 

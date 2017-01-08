@@ -19,7 +19,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -33,7 +32,7 @@ public class SimpleRecipesAether
 	{
 
 	}
-	
+
 	private static void registerMasonryRecipes()
 	{
 		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.BASE_BRICKS.getMeta()), new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneBrick.NORMAL.getMeta()));
@@ -98,18 +97,20 @@ public class SimpleRecipesAether
 		AetherAPI.masonry().clearAllRecipes();
 
 		registerMasonryRecipes();
-		
+
 		List<ISimpleRecipe> recipes = Lists.newArrayList();
 
-		top: for (IRecipe recipe : CraftingManager.getInstance().getRecipeList())
+		top:
+		for (IRecipe recipe : CraftingManager.getInstance().getRecipeList())
 		{
 			if (recipe instanceof ShapedRecipes)
 			{
-				ShapedRecipes shaped = (ShapedRecipes)recipe;
+				ShapedRecipes shaped = (ShapedRecipes) recipe;
 
 				List<ItemStack> req = Lists.newArrayList();
 
-				outer: for (ItemStack stack : shaped.recipeItems)
+				outer:
+				for (ItemStack stack : shaped.recipeItems)
 				{
 					if (stack != null)
 					{
@@ -146,7 +147,8 @@ public class SimpleRecipesAether
 
 				List<ItemStack> req = Lists.newArrayList();
 
-				outer: for (ItemStack stack : shapeless.recipeItems)
+				outer:
+				for (ItemStack stack : shapeless.recipeItems)
 				{
 					if (stack != null)
 					{
@@ -199,7 +201,8 @@ public class SimpleRecipesAether
 
 				List<Object> req = Lists.newArrayList();
 
-				outer: for (Object obj : input)
+				outer:
+				for (Object obj : input)
 				{
 					if (obj != null)
 					{
@@ -207,7 +210,7 @@ public class SimpleRecipesAether
 						{
 							if (obj instanceof List)
 							{
-								List list = (List)obj;
+								List list = (List) obj;
 
 								if (list.size() > 0 && list.get(0) instanceof ItemStack)
 								{
@@ -219,12 +222,12 @@ public class SimpleRecipesAether
 										{
 											if (reqObj instanceof ItemStack)
 											{
-												ItemStack reqStack = (ItemStack)reqObj;
+												ItemStack reqStack = (ItemStack) reqObj;
 												reqStack.stackSize++;
 											}
 											else if (reqObj instanceof OreDictionaryRequirement)
 											{
-												OreDictionaryRequirement oreReq = (OreDictionaryRequirement)reqObj;
+												OreDictionaryRequirement oreReq = (OreDictionaryRequirement) reqObj;
 
 												oreReq.addCount(1);
 											}
@@ -239,12 +242,12 @@ public class SimpleRecipesAether
 							{
 								if (reqObj instanceof ItemStack)
 								{
-									ItemStack reqStack = (ItemStack)reqObj;
+									ItemStack reqStack = (ItemStack) reqObj;
 									reqStack.stackSize++;
 								}
 								else if (reqObj instanceof OreDictionaryRequirement)
 								{
-									OreDictionaryRequirement oreReq = (OreDictionaryRequirement)reqObj;
+									OreDictionaryRequirement oreReq = (OreDictionaryRequirement) reqObj;
 
 									oreReq.addCount(1);
 								}
@@ -255,7 +258,7 @@ public class SimpleRecipesAether
 
 						if (obj instanceof List)
 						{
-							List list = (List)obj;
+							List list = (List) obj;
 
 							if (list.size() > 0 && list.get(0) instanceof ItemStack)
 							{

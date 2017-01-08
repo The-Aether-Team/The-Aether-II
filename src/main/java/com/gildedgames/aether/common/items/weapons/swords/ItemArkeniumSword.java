@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.items.weapons.swords;
 
-import com.gildedgames.aether.common.registry.content.MaterialsAether;
 import com.gildedgames.aether.common.items.ItemAbilityType;
+import com.gildedgames.aether.common.registry.content.MaterialsAether;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.entity.SharedMonsterAttributes;

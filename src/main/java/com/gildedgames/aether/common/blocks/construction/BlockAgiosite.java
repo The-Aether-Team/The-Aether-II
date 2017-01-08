@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.construction;
 
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 

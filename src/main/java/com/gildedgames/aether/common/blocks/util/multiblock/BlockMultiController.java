@@ -36,8 +36,8 @@ public abstract class BlockMultiController extends BlockMultiBase
 	}
 
 	@Override
-    public void onBlockAdded(World world, BlockPos pos, IBlockState state)
-    {
+	public void onBlockAdded(World world, BlockPos pos, IBlockState state)
+	{
 		TileEntity te = world.getTileEntity(pos);
 
 		if (te instanceof TileEntityMultiblockController)
@@ -46,8 +46,8 @@ public abstract class BlockMultiController extends BlockMultiBase
 
 			controller.rebuild();
 		}
-    }
-	
+	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public EnumBlockRenderType getRenderType(IBlockState state)

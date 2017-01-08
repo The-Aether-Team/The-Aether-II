@@ -193,7 +193,8 @@ public class SoundsAether
 		registerSound("mob.burrukai.death", burrukai_death);
 	}
 
-	private static void registerSound(String resource, SoundEvent event) {
+	private static void registerSound(String resource, SoundEvent event)
+	{
 		GameRegistry.register(event, AetherCore.getResource(resource));
 	}
 }

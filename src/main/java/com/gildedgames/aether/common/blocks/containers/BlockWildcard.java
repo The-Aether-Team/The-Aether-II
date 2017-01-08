@@ -31,13 +31,13 @@ public class BlockWildcard extends BlockContainer
 
 		this.setSoundType(SoundType.STONE);
 	}
-	
+
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state)
 	{
 		return EnumBlockRenderType.MODEL;
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
 	{
@@ -49,7 +49,7 @@ public class BlockWildcard extends BlockContainer
 	{
 		return true;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer()
 	{
@@ -63,7 +63,8 @@ public class BlockWildcard extends BlockContainer
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand,
+			@Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (world.isRemote)
 		{
@@ -74,11 +75,12 @@ public class BlockWildcard extends BlockContainer
 
 		if (tileentity instanceof TileEntitySchematicBlock)
 		{
-			TileEntitySchematicBlock te = (TileEntitySchematicBlock)tileentity;
+			TileEntitySchematicBlock te = (TileEntitySchematicBlock) tileentity;
 
 			if (heldItem != null && heldItem.getItem() == ItemsAether.aether_developer_wand)
 			{
-				world.playSound(playerIn, pos, SoundsAether.tempest_electric_shock, SoundCategory.NEUTRAL, 1.0F, 0.8F + (world.rand.nextFloat() * 0.5F));
+				world.playSound(playerIn, pos, SoundsAether.tempest_electric_shock, SoundCategory.NEUTRAL, 1.0F,
+						0.8F + (world.rand.nextFloat() * 0.5F));
 
 				te.setMarkedForGeneration(!te.isMarkedForGeneration());
 
@@ -86,18 +88,19 @@ public class BlockWildcard extends BlockContainer
 			}
 		}
 
-    	if (!playerIn.isSneaking())
-    	{
-    		return false;
-    	}
+		if (!playerIn.isSneaking())
+		{
+			return false;
+		}
 
 		if (tileentity instanceof TileEntitySchematicBlock)
 		{
-			TileEntitySchematicBlock te = (TileEntitySchematicBlock)tileentity;
+			TileEntitySchematicBlock te = (TileEntitySchematicBlock) tileentity;
 
 			if (heldItem != null && heldItem.getItem() == ItemsAether.aether_developer_wand)
 			{
-				world.playSound(playerIn, pos, SoundsAether.tempest_electric_shock, SoundCategory.NEUTRAL, 1.0F, 0.8F + (world.rand.nextFloat() * 0.5F));
+				world.playSound(playerIn, pos, SoundsAether.tempest_electric_shock, SoundCategory.NEUTRAL, 1.0F,
+						0.8F + (world.rand.nextFloat() * 0.5F));
 
 				te.setMarkedForGeneration(!te.isMarkedForGeneration());
 
@@ -107,7 +110,7 @@ public class BlockWildcard extends BlockContainer
 
 		if (tileentity instanceof ILockableContainer)
 		{
-			ILockableContainer ilockablecontainer = (ILockableContainer)tileentity;
+			ILockableContainer ilockablecontainer = (ILockableContainer) tileentity;
 
 			if (ilockablecontainer != null)
 			{
@@ -117,7 +120,7 @@ public class BlockWildcard extends BlockContainer
 			return true;
 		}
 
-        return true;
-    }
+		return true;
+	}
 
 }

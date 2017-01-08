@@ -36,7 +36,7 @@ public class EquipmentChangedPacket implements IMessage
 	public EquipmentChangedPacket(Entity entity, List<Pair<Integer, ItemStack>> changes)
 	{
 		this.entityId = entity.getEntityId();
-		
+
 		this.changes.addAll(changes);
 	}
 

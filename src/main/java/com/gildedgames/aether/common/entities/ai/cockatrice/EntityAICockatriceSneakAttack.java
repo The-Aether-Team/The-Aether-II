@@ -113,7 +113,7 @@ public class EntityAICockatriceSneakAttack extends EntityAIBase
 
 	protected double getAttackReachSqr(EntityLivingBase attackTarget)
 	{
-		return (double)(this.entity.width * 2.0F * this.entity.width * 2.0F + attackTarget.width);
+		return (double) (this.entity.width * 2.0F * this.entity.width * 2.0F + attackTarget.width);
 	}
 
 }

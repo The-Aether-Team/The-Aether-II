@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.blocks.containers;
 
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.entities.living.dungeon.labyrinth.EntityChestMimic;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.tiles.TileEntityLabyrinthChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -36,6 +36,7 @@ import javax.annotation.Nullable;
 public class BlockLabyrinthChest extends BlockContainer
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+
 	public final int chestType;
 
 	public BlockLabyrinthChest()
@@ -49,7 +50,8 @@ public class BlockLabyrinthChest extends BlockContainer
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand,
+			@Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		TileEntity te = world.getTileEntity(pos);
 
@@ -59,7 +61,8 @@ public class BlockLabyrinthChest extends BlockContainer
 
 			if (heldItem != null && heldItem.getItem() == ItemsAether.aether_developer_wand)
 			{
-				world.playSound(playerIn, pos, SoundsAether.tempest_electric_shock, SoundCategory.NEUTRAL, 1.0F, 0.8F + (world.rand.nextFloat() * 0.5F));
+				world.playSound(playerIn, pos, SoundsAether.tempest_electric_shock, SoundCategory.NEUTRAL, 1.0F,
+						0.8F + (world.rand.nextFloat() * 0.5F));
 
 				chest.setGenerateLoot(!chest.generatesLoot());
 
@@ -77,7 +80,7 @@ public class BlockLabyrinthChest extends BlockContainer
 
 			if (te instanceof TileEntityLabyrinthChest)
 			{
-				TileEntityLabyrinthChest chest = (TileEntityLabyrinthChest)te;
+				TileEntityLabyrinthChest chest = (TileEntityLabyrinthChest) te;
 
 				if (chest.generatesLoot())
 				{
@@ -102,7 +105,7 @@ public class BlockLabyrinthChest extends BlockContainer
 
 		if (tileentity instanceof TileEntityLabyrinthChest)
 		{
-			ILockableContainer ilockablecontainer = (TileEntityLabyrinthChest)tileentity;
+			ILockableContainer ilockablecontainer = (TileEntityLabyrinthChest) tileentity;
 
 			if (this.isBlocked(worldIn, pos))
 			{
@@ -145,9 +148,10 @@ public class BlockLabyrinthChest extends BlockContainer
 
 	private boolean isOcelotSittingOnChest(World worldIn, BlockPos pos)
 	{
-		for (Entity entity : worldIn.getEntitiesWithinAABB(EntityOcelot.class, new AxisAlignedBB((double)pos.getX(), (double)(pos.getY() + 1), (double)pos.getZ(), (double)(pos.getX() + 1), (double)(pos.getY() + 2), (double)(pos.getZ() + 1))))
+		for (Entity entity : worldIn.getEntitiesWithinAABB(EntityOcelot.class, new AxisAlignedBB((double) pos.getX(), (double) (pos.getY()
+				+ 1), (double) pos.getZ(), (double) (pos.getX() + 1), (double) (pos.getY() + 2), (double) (pos.getZ() + 1))))
 		{
-			EntityOcelot entityocelot = (EntityOcelot)entity;
+			EntityOcelot entityocelot = (EntityOcelot) entity;
 
 			if (entityocelot.isSitting())
 			{
@@ -159,7 +163,8 @@ public class BlockLabyrinthChest extends BlockContainer
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+			EntityLivingBase placer)
 	{
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
@@ -167,7 +172,8 @@ public class BlockLabyrinthChest extends BlockContainer
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
-		EnumFacing enumfacing = EnumFacing.getHorizontal(MathHelper.floor_double((double)(placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3).getOpposite();
+		EnumFacing enumfacing = EnumFacing.getHorizontal(
+				MathHelper.floor_double((double) (placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3).getOpposite();
 		BlockPos blockpos = pos.north();
 		BlockPos blockpos1 = pos.south();
 		BlockPos blockpos2 = pos.west();
@@ -211,12 +217,11 @@ public class BlockLabyrinthChest extends BlockContainer
 			worldIn.setBlockState(pos, state, 3);
 		}
 
-
 		TileEntity tileentity = worldIn.getTileEntity(pos);
 
 		if (tileentity instanceof TileEntityLabyrinthChest)
 		{
-			TileEntityLabyrinthChest chest = (TileEntityLabyrinthChest)tileentity;
+			TileEntityLabyrinthChest chest = (TileEntityLabyrinthChest) tileentity;
 
 			if (stack.hasDisplayName())
 			{
@@ -234,7 +239,7 @@ public class BlockLabyrinthChest extends BlockContainer
 
 		if (te instanceof TileEntityLabyrinthChest)
 		{
-			TileEntityLabyrinthChest chest = (TileEntityLabyrinthChest)te;
+			TileEntityLabyrinthChest chest = (TileEntityLabyrinthChest) te;
 
 			if (chest.isMimic())
 			{
@@ -248,7 +253,8 @@ public class BlockLabyrinthChest extends BlockContainer
 
 				world.setBlockToAir(pos);
 
-				mimic.playSound(SoundsAether.chest_mimic_awake, 1.0F, (mimic.getRNG().nextFloat() - mimic.getRNG().nextFloat()) * 0.2F + 1.0F);
+				mimic.playSound(SoundsAether.chest_mimic_awake, 1.0F,
+						(mimic.getRNG().nextFloat() - mimic.getRNG().nextFloat()) * 0.2F + 1.0F);
 
 				super.breakBlock(world, pos, state);
 

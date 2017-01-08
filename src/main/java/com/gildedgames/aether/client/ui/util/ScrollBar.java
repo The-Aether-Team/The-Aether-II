@@ -83,7 +83,8 @@ public class ScrollBar extends GuiFrame
 		this.bottomButton.events().set("bottomButtonScrollEvent", new ButtonScrollEvent(this.bottomButton, this, 1F));
 
 		this.baseBar = new RepeatableGui(Dim2D.build()
-				.area(this.baseBarTexture.dim().width(), this.dim().height() - this.topButton.dim().height() - this.bottomButton.dim().height())
+				.area(this.baseBarTexture.dim().width(),
+						this.dim().height() - this.topButton.dim().height() - this.bottomButton.dim().height())
 				.flush(), this.baseBarTexture);
 
 		this.grabbableBar = new RepeatableGui(Dim2D.build().area(this.grabbableBarTexture.dim().width(), 20).flush(), this.grabbableBarTexture);
@@ -105,7 +106,8 @@ public class ScrollBar extends GuiFrame
 			@Override
 			public boolean shouldReassemble()
 			{
-				return ScrollBar.this.topButton.dim().height() != this.topButtonHeight || ScrollBar.this.baseBar.dim().height() != this.baseBarHeight;
+				return ScrollBar.this.topButton.dim().height() != this.topButtonHeight
+						|| ScrollBar.this.baseBar.dim().height() != this.baseBarHeight;
 			}
 
 		};
@@ -168,7 +170,8 @@ public class ScrollBar extends GuiFrame
 
 		if (pool.has(MouseButton.LEFT))
 		{
-			if (pool.has(ButtonState.HOLD) && (input.isHovered(this.baseBar.dim()) || input.isHovered(this.grabbableBar.dim()) || this.grabbedBar))
+			if (pool.has(ButtonState.HOLD) && (input.isHovered(this.baseBar.dim()) || input.isHovered(this.grabbableBar.dim())
+					|| this.grabbedBar))
 			{
 				if (!this.grabbedBar)
 				{
@@ -190,7 +193,8 @@ public class ScrollBar extends GuiFrame
 		{
 			double contentAndScrollHeightDif = Math.abs(this.contentArea.dim().height() - this.scrollingAreas.dim().height());
 
-			float baseBarPercentage = this.contentArea.dim().height() < this.dim().height() ? 0f : (float) contentAndScrollHeightDif / this.contentArea.dim().height();
+			float baseBarPercentage = this.contentArea.dim().height() < this.dim().height() ? 0f :
+					(float) contentAndScrollHeightDif / this.contentArea.dim().height();
 
 			float barHeight = this.baseBar.dim().height() - (int) (this.baseBar.dim().height() * baseBarPercentage);
 
@@ -201,7 +205,8 @@ public class ScrollBar extends GuiFrame
 		{
 			double basePosY = input.getMouseY() - this.baseBar.dim().y() - this.grabbedMouseYOffset;
 
-			float percent = this.contentArea.dim().height() < this.dim().height() ? 0f : (float) basePosY / (this.baseBar.dim().height() - this.grabbableBar.dim().height());
+			float percent = this.contentArea.dim().height() < this.dim().height() ? 0f :
+					(float) basePosY / (this.baseBar.dim().height() - this.grabbableBar.dim().height());
 
 			this.setScrollPercentage(percent);
 		}

@@ -114,7 +114,8 @@ public class EntityMovingBlock extends Entity
 		{
 			if (this.holdingPlayer != null)
 			{
-				if (this.ticksStuck > 30 || this.getDistance(this.holdingPlayer.posX, this.holdingPlayer.posY, this.holdingPlayer.posZ) > 6.0D)
+				if (this.ticksStuck > 30
+						|| this.getDistance(this.holdingPlayer.posX, this.holdingPlayer.posY, this.holdingPlayer.posZ) > 6.0D)
 				{
 					this.setHoldingPlayer(null);
 				}
@@ -170,7 +171,8 @@ public class EntityMovingBlock extends Entity
 					{
 						IBlockState replacingState = this.worldObj.getBlockState(pos);
 
-						if (!replacingState.getBlock().isReplaceable(this.worldObj, pos)) {
+						if (!replacingState.getBlock().isReplaceable(this.worldObj, pos))
+						{
 							this.destroy();
 
 							return;
@@ -231,7 +233,8 @@ public class EntityMovingBlock extends Entity
 		}
 	}
 
-	private void destroy() {
+	private void destroy()
+	{
 		this.setDead();
 
 		BlockPos pos = new BlockPos(this);

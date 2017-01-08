@@ -83,7 +83,10 @@ public class WorldGenAetherLakes extends WorldGenerator
 			{
 				for (y = 0; y < 8; ++y)
 				{
-					flag = !aboolean[(x * 16 + z) * 8 + y] && (x < 15 && aboolean[((x + 1) * 16 + z) * 8 + y] || x > 0 && aboolean[((x - 1) * 16 + z) * 8 + y] || z < 15 && aboolean[(x * 16 + z + 1) * 8 + y] || z > 0 && aboolean[(x * 16 + (z - 1)) * 8 + y] || y < 7 && aboolean[(x * 16 + z) * 8 + y + 1] || y > 0 && aboolean[(x * 16 + z) * 8 + (y - 1)]);
+					flag = !aboolean[(x * 16 + z) * 8 + y] && (x < 15 && aboolean[((x + 1) * 16 + z) * 8 + y] || x > 0 && aboolean[
+							((x - 1) * 16 + z) * 8 + y] || z < 15 && aboolean[(x * 16 + z + 1) * 8 + y] || z > 0 && aboolean[
+							(x * 16 + (z - 1)) * 8 + y] || y < 7 && aboolean[(x * 16 + z) * 8 + y + 1] || y > 0 && aboolean[(x * 16 + z) * 8
+							+ (y - 1)]);
 
 					if (flag)
 					{
@@ -127,7 +130,8 @@ public class WorldGenAetherLakes extends WorldGenerator
 					{
 						BlockPos nextPos = pos.add(x, y - 1, z);
 
-						if (world.getBlockState(nextPos).getBlock() == BlocksAether.aether_dirt && world.getLightFor(EnumSkyBlock.SKY, pos.add(x, y, z)) > 0)
+						if (world.getBlockState(nextPos).getBlock() == BlocksAether.aether_dirt
+								&& world.getLightFor(EnumSkyBlock.SKY, pos.add(x, y, z)) > 0)
 						{
 							Biome biome = world.getBiome(new BlockPos(pos.getX(), 0, pos.getZ()));
 

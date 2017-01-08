@@ -7,7 +7,9 @@ import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -60,7 +62,8 @@ public class ItemAetherSpawnEgg extends Item
 	/**
 	 * Called when a Block is right-clicked with this Item
 	 */
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing,
+			float hitX, float hitY, float hitZ)
 	{
 		if (worldIn.isRemote)
 		{
@@ -80,7 +83,7 @@ public class ItemAetherSpawnEgg extends Item
 
 				if (tileentity instanceof TileEntityMobSpawner)
 				{
-					MobSpawnerBaseLogic mobspawnerbaselogic = ((TileEntityMobSpawner)tileentity).getSpawnerBaseLogic();
+					MobSpawnerBaseLogic mobspawnerbaselogic = ((TileEntityMobSpawner) tileentity).getSpawnerBaseLogic();
 					mobspawnerbaselogic.setEntityName(getEntityIdFromItem(stack));
 					tileentity.markDirty();
 					worldIn.notifyBlockUpdate(pos, iblockstate, iblockstate, 3);
@@ -97,12 +100,14 @@ public class ItemAetherSpawnEgg extends Item
 			pos = pos.offset(facing);
 			double d0 = 0.0D;
 
-			if (facing == EnumFacing.UP && iblockstate.getBlock() instanceof BlockFence) //Forge: Fix Vanilla bug comparing state instead of block
+			if (facing == EnumFacing.UP
+					&& iblockstate.getBlock() instanceof BlockFence) //Forge: Fix Vanilla bug comparing state instead of block
 			{
 				d0 = 0.5D;
 			}
 
-			Entity entity = spawnCreature(worldIn, getEntityIdFromItem(stack), (double)pos.getX() + 0.5D, (double)pos.getY() + d0, (double)pos.getZ() + 0.5D);
+			Entity entity = spawnCreature(worldIn, getEntityIdFromItem(stack),
+					(double) pos.getX() + 0.5D, (double) pos.getY() + d0, (double) pos.getZ() + 0.5D);
 
 			if (entity != null)
 			{
@@ -126,7 +131,8 @@ public class ItemAetherSpawnEgg extends Item
 	/**
 	 * Applies the data in the EntityTag tag of the given ItemStack to the given Entity.
 	 */
-	public static void applyItemEntityDataToEntity(World entityWorld, @Nullable EntityPlayer player, ItemStack stack, @Nullable Entity targetEntity)
+	public static void applyItemEntityDataToEntity(World entityWorld, @Nullable EntityPlayer player, ItemStack stack,
+			@Nullable Entity targetEntity)
 	{
 		MinecraftServer minecraftserver = entityWorld.getMinecraftServer();
 
@@ -136,7 +142,8 @@ public class ItemAetherSpawnEgg extends Item
 
 			if (nbttagcompound != null && nbttagcompound.hasKey("EntityTag", 10))
 			{
-				if (!entityWorld.isRemote && targetEntity.ignoreItemEntityData() && (player == null || !minecraftserver.getPlayerList().canSendCommands(player.getGameProfile())))
+				if (!entityWorld.isRemote && targetEntity.ignoreItemEntityData() && (player == null
+						|| !minecraftserver.getPlayerList().canSendCommands(player.getGameProfile())))
 				{
 					return;
 				}
@@ -168,9 +175,11 @@ public class ItemAetherSpawnEgg extends Item
 				{
 					return new ActionResult<>(EnumActionResult.PASS, itemStackIn);
 				}
-				else if (worldIn.isBlockModifiable(playerIn, blockpos) && playerIn.canPlayerEdit(blockpos, raytraceresult.sideHit, itemStackIn))
+				else if (worldIn.isBlockModifiable(playerIn, blockpos)
+						&& playerIn.canPlayerEdit(blockpos, raytraceresult.sideHit, itemStackIn))
 				{
-					Entity entity = spawnCreature(worldIn, getEntityIdFromItem(itemStackIn), (double)blockpos.getX() + 0.5D, (double)blockpos.getY() + 0.5D, (double)blockpos.getZ() + 0.5D);
+					Entity entity = spawnCreature(worldIn, getEntityIdFromItem(itemStackIn),
+							(double) blockpos.getX() + 0.5D, (double) blockpos.getY() + 0.5D, (double) blockpos.getZ() + 0.5D);
 
 					if (entity == null)
 					{

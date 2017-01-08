@@ -6,10 +6,10 @@ import com.gildedgames.aether.client.ui.minecraft.util.inventory.data_structure.
 
 public class InventoryElementIconParser implements IconParser<InventoryElement>
 {
-	
+
 	public InventoryElementIconParser()
 	{
-		
+
 	}
 
 	@Override
@@ -17,5 +17,5 @@ public class InventoryElementIconParser implements IconParser<InventoryElement>
 	{
 		return element.createIcon();
 	}
-	
+
 }

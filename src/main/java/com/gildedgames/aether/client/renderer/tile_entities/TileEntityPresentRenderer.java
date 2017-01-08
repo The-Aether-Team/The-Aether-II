@@ -16,7 +16,8 @@ public class TileEntityPresentRenderer extends TileEntitySpecialRenderer<TileEnt
 
 	public static final ResourceLocation[] bowTextures = new ResourceLocation[16];
 
-	public static final String[] colors = new String[] { "black", "red", "green", "brown", "blue", "purple", "cyan", "silver", "gray", "pink", "lime", "yellow", "light_blue", "magenta", "orange", "white" };
+	public static final String[] colors = new String[] { "black", "red", "green", "brown", "blue", "purple", "cyan", "silver", "gray",
+			"pink", "lime", "yellow", "light_blue", "magenta", "orange", "white" };
 
 	static
 	{

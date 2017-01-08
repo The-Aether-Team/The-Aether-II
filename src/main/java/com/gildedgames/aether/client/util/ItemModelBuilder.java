@@ -23,7 +23,8 @@ public class ItemModelBuilder
 
 	public ItemModelBuilder add(int meta, String path)
 	{
-		this.registrations.put(meta, new ModelResourceLocation(AetherCore.getResourcePath(this.rootFolder != null ? this.rootFolder + path : path), "inventory"));
+		this.registrations.put(meta, new ModelResourceLocation(AetherCore.getResourcePath(
+				this.rootFolder != null ? this.rootFolder + path : path), "inventory"));
 
 		return this;
 	}

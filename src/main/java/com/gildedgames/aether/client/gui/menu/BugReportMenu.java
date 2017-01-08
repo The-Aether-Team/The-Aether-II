@@ -1,18 +1,18 @@
 package com.gildedgames.aether.client.gui.menu;
 
-import com.gildedgames.aether.client.ui.input.*;
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.client.ui.minecraft.util.GuiFactory;
 import com.gildedgames.aether.client.ui.common.GuiFrame;
 import com.gildedgames.aether.client.ui.data.rect.Dim2D;
 import com.gildedgames.aether.client.ui.event.view.MouseEventGui;
 import com.gildedgames.aether.client.ui.graphics.Graphics2D;
+import com.gildedgames.aether.client.ui.input.*;
+import com.gildedgames.aether.client.ui.minecraft.util.GuiFactory;
 import com.gildedgames.aether.client.ui.util.InputHelper;
 import com.gildedgames.aether.client.ui.util.Text;
+import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
 
-import java.awt.*;
+import java.awt.Color;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -89,13 +89,13 @@ public class BugReportMenu extends GuiFrame
 		try
 		{
 			Class<?> oclass = Class.forName("java.awt.Desktop");
-			Object object = oclass.getMethod("getDesktop", new Class[0]).invoke((Object)null, new Object[0]);
-			oclass.getMethod("browse", new Class[] {URI.class}).invoke(object, new Object[] {url});
+			Object object = oclass.getMethod("getDesktop", new Class[0]).invoke((Object) null, new Object[0]);
+			oclass.getMethod("browse", new Class[] { URI.class }).invoke(object, new Object[] { url });
 		}
 		catch (Throwable throwable1)
 		{
 			Throwable throwable = throwable1.getCause();
-			AetherCore.LOGGER.error("Couldn\'t open link: {}", new Object[] {throwable == null ? "<UNKNOWN>" : throwable.getMessage()});
+			AetherCore.LOGGER.error("Couldn\'t open link: {}", new Object[] { throwable == null ? "<UNKNOWN>" : throwable.getMessage() });
 		}
 	}
 

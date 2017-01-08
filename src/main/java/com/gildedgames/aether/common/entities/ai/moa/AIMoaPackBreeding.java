@@ -2,10 +2,9 @@ package com.gildedgames.aether.common.entities.ai.moa;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockWovenSticks;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
-import com.gildedgames.aether.common.entities.util.EntityGroupMember;
-import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.tiles.TileEntityMoaEgg;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -128,7 +127,8 @@ public class AIMoaPackBreeding extends EntityAIBase
 				}
 			}
 
-			this.moa.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.moa.getRNG().nextFloat() - this.moa.getRNG().nextFloat()) * 0.2F + 1.0F);
+			this.moa.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F,
+					(this.moa.getRNG().nextFloat() - this.moa.getRNG().nextFloat()) * 0.2F + 1.0F);
 
 			this.resetTimer();
 		}

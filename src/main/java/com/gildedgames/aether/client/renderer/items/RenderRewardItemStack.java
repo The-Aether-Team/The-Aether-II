@@ -19,7 +19,7 @@ public class RenderRewardItemStack extends RenderEntityItem
 	{
 		if (item instanceof EntityRewardItemStack)
 		{
-			EntityRewardItemStack rewardStack = (EntityRewardItemStack)item;
+			EntityRewardItemStack rewardStack = (EntityRewardItemStack) item;
 
 			if (!rewardStack.getPlayerName().equalsIgnoreCase(Minecraft.getMinecraft().thePlayer.getCommandSenderEntity().getName()))
 			{

@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.world.dimensions.aether.biomes;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.world.noise.OpenSimplexNoise;
 import com.gildedgames.aether.common.world.GenUtil;
 import com.gildedgames.aether.common.world.biome.Ecosystem;
 import com.gildedgames.aether.common.world.biome.WorldDecoration;
+import com.gildedgames.aether.common.world.noise.OpenSimplexNoise;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
@@ -107,8 +107,10 @@ public abstract class BiomeAetherBase extends Biome
 		{
 			for (int j = 0; j < 24; j++)
 			{
-				temperatureValue[j + (i * 24)] = GenUtil.octavedNoise(this.tempNoise, 4, 0D, 1D, (double) (pos.getX() + i) / scale, (double) (pos.getZ() + j) / scale);
-				moistureValue[j + (i * 24)] = GenUtil.octavedNoise(this.moistureNoise, 4, 0D, 1D, (double) (pos.getX() + i) / scale, (double) (pos.getZ() + j) / scale);
+				temperatureValue[j + (i * 24)] = GenUtil.octavedNoise(this.tempNoise, 4, 0D, 1D,
+						(double) (pos.getX() + i) / scale, (double) (pos.getZ() + j) / scale);
+				moistureValue[j + (i * 24)] = GenUtil.octavedNoise(this.moistureNoise, 4, 0D, 1D,
+						(double) (pos.getX() + i) / scale, (double) (pos.getZ() + j) / scale);
 			}
 		}
 
@@ -127,8 +129,10 @@ public abstract class BiomeAetherBase extends Biome
 						x = placeAt.getX() - pos.getX();
 						z = placeAt.getZ() - pos.getZ();
 
-						double temperatureDiff = ecosystem.hasDesiredTemperature() ? Math.abs(ecosystem.getDesiredTemperature() - temperatureValue[z + (x * 24)]) : 0;
-						double moistureDiff = ecosystem.hasDesiredMoisture() ? Math.abs(ecosystem.getDesiredMoisture() - moistureValue[z + (x * 24)]) : 0;
+						double temperatureDiff = ecosystem.hasDesiredTemperature() ?
+								Math.abs(ecosystem.getDesiredTemperature() - temperatureValue[z + (x * 24)]) : 0;
+						double moistureDiff =
+								ecosystem.hasDesiredMoisture() ? Math.abs(ecosystem.getDesiredMoisture() - moistureValue[z + (x * 24)]) : 0;
 
 						int requiredChance = (int) ((temperatureDiff + moistureDiff) * 100 * 1.5);
 

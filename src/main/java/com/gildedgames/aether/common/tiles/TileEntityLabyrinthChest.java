@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.tiles;
 
+import com.gildedgames.aether.api.loot.LootGenerator;
 import com.gildedgames.aether.common.blocks.containers.BlockLabyrinthChest;
 import com.gildedgames.aether.common.registry.LootDefinitions;
-import com.gildedgames.aether.api.loot.LootGenerator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
@@ -21,11 +21,17 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 {
 
 	final private int CHEST_SIZE = 27;
+
 	private ItemStack[] chestContents = new ItemStack[this.CHEST_SIZE];
+
 	public float lidAngle;
+
 	public float prevLidAngle;
+
 	public int numPlayersUsing;
+
 	private int ticksSinceSync;
+
 	private String customName;
 
 	private boolean isMimic, generateLoot, hasGeneratedLoot;
@@ -45,7 +51,10 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 		return this.isMimic;
 	}
 
-	public boolean generatesLoot() { return this.generateLoot; }
+	public boolean generatesLoot()
+	{
+		return this.generateLoot;
+	}
 
 	public void setGenerateLoot(boolean flag)
 	{
@@ -116,11 +125,13 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 			this.numPlayersUsing = 0;
 			float f = 5.0F;
 
-			for (EntityPlayer entityplayer : this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB((double)((float)i - f), (double)((float)j - f), (double)((float)k - f), (double)((float)(i + 1) + f), (double)((float)(j + 1) + f), (double)((float)(k + 1) + f))))
+			for (EntityPlayer entityplayer : this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB((double) ((float) i
+					- f), (double) ((float) j - f), (double) ((float) k - f), (double) ((float) (i + 1) + f), (double) ((float) (j + 1)
+					+ f), (double) ((float) (k + 1) + f))))
 			{
 				if (entityplayer.openContainer instanceof ContainerChest)
 				{
-					IInventory iinventory = ((ContainerChest)entityplayer.openContainer).getLowerChestInventory();
+					IInventory iinventory = ((ContainerChest) entityplayer.openContainer).getLowerChestInventory();
 
 					if (iinventory == this)
 					{
@@ -135,10 +146,12 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 
 		if (this.numPlayersUsing > 0 && this.lidAngle == 0.0F)
 		{
-			double d1 = (double)i + 0.5D;
-			double d2 = (double)k + 0.5D;
+			double d1 = (double) i + 0.5D;
+			double d2 = (double) k + 0.5D;
 
-			this.worldObj.playSound(d1, (double)j + 0.5D, d2, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F, false);
+			this.worldObj.playSound(d1,
+					(double) j + 0.5D, d2, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F,
+					this.worldObj.rand.nextFloat() * 0.1F + 0.9F, false);
 		}
 
 		if (this.numPlayersUsing == 0 && this.lidAngle > 0.0F || this.numPlayersUsing > 0 && this.lidAngle < 1.0F)
@@ -163,10 +176,12 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 
 			if (this.lidAngle < f3 && f2 >= f3)
 			{
-				double d3 = (double)i + 0.5D;
-				double d0 = (double)k + 0.5D;
+				double d3 = (double) i + 0.5D;
+				double d0 = (double) k + 0.5D;
 
-				this.worldObj.playSound(d3, (double)j + 0.5D, d0, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F, false);
+				this.worldObj.playSound(d3,
+						(double) j + 0.5D, d0, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F,
+						this.worldObj.rand.nextFloat() * 0.1F + 0.9F, false);
 			}
 
 			if (this.lidAngle < 0.0F)
@@ -183,7 +198,9 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 				double motionY = (this.worldObj.rand.nextBoolean() ? 1.0D : -1.0D) * this.worldObj.rand.nextFloat();
 				double motionZ = (this.worldObj.rand.nextBoolean() ? 1.0D : -1.0D) * this.worldObj.rand.nextFloat();
 
-				this.worldObj.spawnParticle(EnumParticleTypes.SPELL_MOB, this.getPos().getX() + motionX, this.getPos().getY() + 0.5D + motionY, this.getPos().getZ() + motionZ, 0.1D, 0.1D, 0.1D);
+				this.worldObj.spawnParticle(EnumParticleTypes.SPELL_MOB,
+						this.getPos().getX() + motionX,
+						this.getPos().getY() + 0.5D + motionY, this.getPos().getZ() + motionZ, 0.1D, 0.1D, 0.1D);
 			}
 		}
 	}
@@ -290,7 +307,9 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		return this.worldObj.getTileEntity(this.pos) == this && player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(this.pos) == this
+				&& player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D)
+				<= 64.0D;
 	}
 
 	@Override
@@ -351,7 +370,6 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 		}
 	}
 
-
 	@Override
 	public String getName()
 	{
@@ -402,7 +420,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 			if (this.chestContents[i] != null)
 			{
 				NBTTagCompound nbttagcompound = new NBTTagCompound();
-				nbttagcompound.setByte("Slot", (byte)i);
+				nbttagcompound.setByte("Slot", (byte) i);
 				this.chestContents[i].writeToNBT(nbttagcompound);
 				nbttaglist.appendTag(nbttagcompound);
 			}

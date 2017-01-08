@@ -19,12 +19,14 @@ public class BreakFloorActionSlider implements BossStageAction<EntitySlider>
 
 	}
 
-	@Override public boolean shouldRemove()
+	@Override
+	public boolean shouldRemove()
 	{
 		return this.timer.getSecondsPassed() >= 13;
 	}
 
-	@Override public void update(EntitySlider entity)
+	@Override
+	public void update(EntitySlider entity)
 	{
 		if (entity.getStartLocation() == null)
 		{
@@ -38,7 +40,7 @@ public class BreakFloorActionSlider implements BossStageAction<EntitySlider>
 			return;
 		}
 
-		((SlidingHorizontalMoveHelper)entity.getMoveHelper()).stop();
+		((SlidingHorizontalMoveHelper) entity.getMoveHelper()).stop();
 
 		this.timer.tick();
 
@@ -77,12 +79,14 @@ public class BreakFloorActionSlider implements BossStageAction<EntitySlider>
 		}
 	}
 
-	@Override public void write(NBTTagCompound output)
+	@Override
+	public void write(NBTTagCompound output)
 	{
 		NBTHelper.fullySerialize("timer", this.timer, output);
 	}
 
-	@Override public void read(NBTTagCompound input)
+	@Override
+	public void read(NBTTagCompound input)
 	{
 		this.timer = NBTHelper.fullyDeserialize("timer", input, this.timer);
 	}

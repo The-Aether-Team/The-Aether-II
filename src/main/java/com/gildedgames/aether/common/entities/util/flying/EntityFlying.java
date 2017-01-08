@@ -87,7 +87,8 @@ public class EntityFlying extends EntityCreature
 	{
 		IBlockState state = this.worldObj.getBlockState((new BlockPos(this)).down());
 
-		return state.canEntitySpawn(this) && this.getBlockPathWeight(new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ)) >= 0.0F;
+		return state.canEntitySpawn(this)
+				&& this.getBlockPathWeight(new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ)) >= 0.0F;
 	}
 
 	@Override
@@ -149,8 +150,8 @@ public class EntityFlying extends EntityCreature
 
 		if (this.isCollidedHorizontally || this.isCollidedVertically || !this.isNotColliding())
 		{
-			this.motionX += (this.rand.nextBoolean() ? 1.0F : -1.0F) * (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F);
-			this.motionZ += (this.rand.nextBoolean() ? 1.0F : -1.0F) * (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F);
+			this.motionX += (this.rand.nextBoolean() ? 1.0F : -1.0F) * (double) ((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F);
+			this.motionZ += (this.rand.nextBoolean() ? 1.0F : -1.0F) * (double) ((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F);
 		}
 
 		if (this.worldObj.isRemote)
@@ -197,7 +198,8 @@ public class EntityFlying extends EntityCreature
 
 	public boolean isNotColliding()
 	{
-		return this.worldObj.checkNoEntityCollision(this.getEntityBoundingBox(), this) && this.worldObj.getCollisionBoxes(this, this.getEntityBoundingBox()).isEmpty();
+		return this.worldObj.checkNoEntityCollision(this.getEntityBoundingBox(), this)
+				&& this.worldObj.getCollisionBoxes(this, this.getEntityBoundingBox()).isEmpty();
 	}
 
 	public int getVerticalFaceSpeed()

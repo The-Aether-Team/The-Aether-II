@@ -121,7 +121,8 @@ public class EntityAIHideFromTarget extends EntityAIBase
 			int k = MathHelper.floor_double(this.entity.getEntityBoundingBox().minY + random.nextInt(6) - 3.0D);
 			int l = MathHelper.floor_double(this.entity.posZ + random.nextInt(20) - 10.0D);
 
-			RayTraceResult raytrace = world.rayTraceBlocks(new Vec3d(j, k + this.entity.getEyeHeight(), l), new Vec3d(this.hideFrom.posX, this.hideFrom.posY + this.hideFrom.getEyeHeight(), this.hideFrom.posZ));
+			RayTraceResult raytrace = world.rayTraceBlocks(new Vec3d(j, k + this.entity.getEyeHeight(), l), new Vec3d(this.hideFrom.posX,
+					this.hideFrom.posY + this.hideFrom.getEyeHeight(), this.hideFrom.posZ));
 
 			if (raytrace != null && raytrace.typeOfHit != null)
 			{

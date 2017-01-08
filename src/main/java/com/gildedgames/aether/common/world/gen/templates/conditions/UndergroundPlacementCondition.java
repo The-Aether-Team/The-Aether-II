@@ -16,7 +16,10 @@ public class UndergroundPlacementCondition implements WorldGenTemplate.Placement
 	{
 		if (block.blockState.getBlock() != Blocks.STRUCTURE_VOID)
 		{
-			if ((!WorldGenTemplate.isReplaceable(world, block.pos) && !world.getBlockState(block.pos).getMaterial().isSolid() && block.blockState.getBlock() != Blocks.AIR) || (block.blockState.getBlock() != Blocks.AIR && world.getBlockState(block.pos) == Blocks.AIR.getDefaultState()))// || !state.isSideSolid(world, itPos, EnumFacing.UP))
+			if ((!WorldGenTemplate.isReplaceable(world, block.pos) && !world.getBlockState(block.pos).getMaterial().isSolid()
+					&& block.blockState.getBlock() != Blocks.AIR) || (block.blockState.getBlock() != Blocks.AIR
+					&& world.getBlockState(block.pos)
+					== Blocks.AIR.getDefaultState()))// || !state.isSideSolid(world, itPos, EnumFacing.UP))
 			{
 				return false;
 			}

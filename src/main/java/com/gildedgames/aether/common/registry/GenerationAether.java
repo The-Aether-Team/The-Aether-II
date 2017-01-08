@@ -8,7 +8,9 @@ import com.gildedgames.aether.common.registry.content.TemplatesAether;
 import com.gildedgames.aether.common.world.GenUtil;
 import com.gildedgames.aether.common.world.dimensions.aether.features.*;
 import com.gildedgames.aether.common.world.dimensions.aether.features.aerclouds.WorldGenAercloud;
-import com.gildedgames.aether.common.world.gen.templates.conditions.*;
+import com.gildedgames.aether.common.world.gen.templates.conditions.TemplateConditions;
+import com.gildedgames.aether.common.world.gen.templates.conditions.UndergroundEntrancePlacementCondition;
+import com.gildedgames.aether.common.world.gen.templates.conditions.UndergroundPlacementCondition;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -17,7 +19,7 @@ import java.util.Random;
 
 public class GenerationAether
 {
-	
+
 	public static WorldGenTemplate blue_skyroot_tree_1, blue_skyroot_tree_2, blue_skyroot_tree_3;
 
 	public static WorldGenTemplate green_skyroot_tree_1, green_skyroot_tree_2, green_skyroot_tree_3;
@@ -152,7 +154,7 @@ public class GenerationAether
 		skyroot_moa_nest_tree_1 = new WorldGenMoaNest(TemplatesAether.skyroot_moa_nest_tree_1, new BlockPos(4, 5, 4), TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
 		skyroot_moa_nest_1 = new WorldGenMoaNest(TemplatesAether.skyroot_moa_nest_1, new BlockPos(2, 0, 2), TemplateConditions.INSIDE_GROUND, TemplateConditions.REPLACEABLE_GROUND);
 		skyroot_moa_nest_2 = new WorldGenMoaNest(TemplatesAether.skyroot_moa_nest_2, new BlockPos(3, 0, 3), TemplateConditions.INSIDE_GROUND, TemplateConditions.REPLACEABLE_GROUND);
-		
+
 		aether_portal = new WorldGenTemplate(TemplatesAether.aether_portal, TemplateConditions.REPLACEABLE);
 		nether_portal = new WorldGenTemplate(TemplatesAether.nether_portal, TemplateConditions.REPLACEABLE);
 		end_portal = new WorldGenTemplate(TemplatesAether.end_portal, TemplateConditions.REPLACEABLE);

@@ -5,6 +5,6 @@ import net.minecraft.item.Item;
 public interface Constraint
 {
 
-    boolean accept(Item item);
+	boolean accept(Item item);
 
 }

@@ -26,7 +26,8 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 		}
 		else
 		{
-			AetherCore.LOGGER.warn("TileEntityMultiblockDummy at " + this.pos.toString() + ", is missing it's linked controller at " + this.controllerPos.toString());
+			AetherCore.LOGGER.warn("TileEntityMultiblockDummy at " + this.pos.toString() + ", is missing it's linked controller at "
+					+ this.controllerPos.toString());
 		}
 	}
 
@@ -41,7 +42,8 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 		}
 		else
 		{
-			AetherCore.LOGGER.warn("TileEntityMultiblockDummy at " + this.pos.toString() + ", is missing it's linked controller at " + this.controllerPos.toString());
+			AetherCore.LOGGER.warn("TileEntityMultiblockDummy at " + this.pos.toString() + ", is missing it's linked controller at "
+					+ this.controllerPos.toString());
 		}
 	}
 
@@ -56,7 +58,8 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 		}
 		else
 		{
-			AetherCore.LOGGER.warn("TileEntityMultiblockDummy at " + this.pos.toString() + ", is missing it's linked controller at " + this.controllerPos.toString());
+			AetherCore.LOGGER.warn("TileEntityMultiblockDummy at " + this.pos.toString() + ", is missing it's linked controller at "
+					+ this.controllerPos.toString());
 		}
 
 		return null;

@@ -3,11 +3,11 @@ package com.gildedgames.aether.common.world.spawning;
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.entity.spawning.EntitySpawn;
 import com.gildedgames.aether.api.capabilites.entity.spawning.ISpawningInfo;
+import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.aether.common.util.io.NBTHelper;
 import com.gildedgames.aether.common.world.util.ChunkMap;
-import com.gildedgames.aether.api.util.NBT;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import net.minecraft.entity.Entity;
@@ -294,7 +294,8 @@ public class SpawnHandler implements NBT
 		return null;
 	}
 
-	private void checkAndSpawnEntries(World world, ChunkMap<SpawnArea> areas) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException
+	private void checkAndSpawnEntries(World world, ChunkMap<SpawnArea> areas)
+			throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException
 	{
 		int areaInBlocks = this.chunkArea * 16;
 
@@ -333,8 +334,10 @@ public class SpawnHandler implements NBT
 				inner:
 				for (int count = 0; count < groupSize; count++)
 				{
-					int scatterX = (world.rand.nextBoolean() ? 1 : -1) * (1 + world.rand.nextInt(entry.getPositionSelector().getScatter(world)));
-					int scatterZ = (world.rand.nextBoolean() ? 1 : -1) * (1 + world.rand.nextInt(entry.getPositionSelector().getScatter(world)));
+					int scatterX =
+							(world.rand.nextBoolean() ? 1 : -1) * (1 + world.rand.nextInt(entry.getPositionSelector().getScatter(world)));
+					int scatterZ =
+							(world.rand.nextBoolean() ? 1 : -1) * (1 + world.rand.nextInt(entry.getPositionSelector().getScatter(world)));
 
 					float posX = groupPosX + scatterX;
 					float posZ = groupPosZ + scatterZ;
@@ -402,7 +405,7 @@ public class SpawnHandler implements NBT
 
 					if (world instanceof WorldServer)
 					{
-						WorldServer worldServer = (WorldServer)world;
+						WorldServer worldServer = (WorldServer) world;
 
 						worldServer.updateEntityWithOptionalForce(entity, true);
 					}
@@ -447,7 +450,9 @@ public class SpawnHandler implements NBT
 
 	public static boolean isNotColliding(World world, Entity entity)
 	{
-		return !world.containsAnyLiquid(entity.getEntityBoundingBox()) && world.getCollisionBoxes(entity, entity.getEntityBoundingBox()).isEmpty() && world.checkNoEntityCollision(entity.getEntityBoundingBox(), entity);
+		return !world.containsAnyLiquid(entity.getEntityBoundingBox())
+				&& world.getCollisionBoxes(entity, entity.getEntityBoundingBox()).isEmpty()
+				&& world.checkNoEntityCollision(entity.getEntityBoundingBox(), entity);
 	}
 
 	@Override

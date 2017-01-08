@@ -21,7 +21,7 @@ public class ItemSentryVault extends Item
 	public ItemSentryVault()
 	{
 		super();
-		
+
 		this.maxStackSize = 1;
 	}
 
@@ -30,20 +30,21 @@ public class ItemSentryVault extends Item
 	{
 		if (!player.capabilities.isCreativeMode)
 		{
-            --stack.stackSize;
-        }
+			--stack.stackSize;
+		}
 
-		world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+		world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F,
+				0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
 		if (!world.isRemote)
-        {
+		{
 			EntitySentryVaultbox sentry_vault = new EntitySentryVaultbox(world, player);
 			sentry_vault.setHeadingFromThrower(player, player.rotationPitch, player.rotationYaw, 0.0F, 1.5F, 1.0F);
-            world.spawnEntityInWorld(sentry_vault);
-        }
+			world.spawnEntityInWorld(sentry_vault);
+		}
 
 		player.addStat(StatList.getObjectUseStats(this));
-		
+
 		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 	}
 

@@ -8,20 +8,35 @@ public class ModelMasonryBench extends ModelBase
 {
 	//fields
 	ModelRenderer MainBottom;
+
 	ModelRenderer Pedal;
+
 	ModelRenderer MainLeft;
+
 	ModelRenderer MainBack;
+
 	ModelRenderer MainRight;
+
 	ModelRenderer MainTop;
+
 	ModelRenderer TopRight;
+
 	ModelRenderer TopBack;
+
 	ModelRenderer TopLeft;
+
 	ModelRenderer Workslab;
+
 	ModelRenderer SawRotor;
+
 	ModelRenderer SawRight;
+
 	ModelRenderer SawLeft;
+
 	ModelRenderer RimRight;
+
 	ModelRenderer RimBack;
+
 	ModelRenderer RimLeft;
 
 	public ModelMasonryBench()

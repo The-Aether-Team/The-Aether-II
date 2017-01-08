@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world.dungeon;
 
 import net.minecraft.world.gen.structure.template.Template;
 
-import java.awt.*;
+import java.awt.Rectangle;
 
 public class DungeonRoom
 {

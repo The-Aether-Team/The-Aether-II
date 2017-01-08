@@ -61,6 +61,7 @@ public class GuiHotbar extends GuiFrame
 			inventory.addListener(this.listener);
 		}
 	}
+
 	@Override
 	public void onClose(InputProvider input)
 	{
@@ -78,6 +79,5 @@ public class GuiHotbar extends GuiFrame
 	{
 		super.draw(graphics, input);
 	}
-
 
 }

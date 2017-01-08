@@ -1,26 +1,26 @@
 package com.gildedgames.aether.client.gui.menu;
 
 import com.gildedgames.aether.client.ui.UiManager;
-import com.gildedgames.aether.client.ui.input.*;
-import com.gildedgames.aether.client.ui.util.InputHelper;
-import com.gildedgames.aether.client.ui.util.ScrollBar;
-import com.gildedgames.aether.client.ui.util.Text;
-import com.gildedgames.aether.client.ui.util.TextureElement;
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.client.ui.minecraft.util.GuiFactory;
-import com.gildedgames.aether.client.ui.minecraft.util.MinecraftAssetLocation;
 import com.gildedgames.aether.client.ui.common.GuiFrame;
 import com.gildedgames.aether.client.ui.data.AssetLocation;
 import com.gildedgames.aether.client.ui.data.rect.Dim2D;
 import com.gildedgames.aether.client.ui.data.rect.Rect;
 import com.gildedgames.aether.client.ui.event.view.MouseEventGui;
 import com.gildedgames.aether.client.ui.graphics.Graphics2D;
+import com.gildedgames.aether.client.ui.input.*;
+import com.gildedgames.aether.client.ui.minecraft.util.GuiFactory;
+import com.gildedgames.aether.client.ui.minecraft.util.MinecraftAssetLocation;
+import com.gildedgames.aether.client.ui.util.InputHelper;
+import com.gildedgames.aether.client.ui.util.ScrollBar;
+import com.gildedgames.aether.client.ui.util.Text;
+import com.gildedgames.aether.client.ui.util.TextureElement;
 import com.gildedgames.aether.client.ui.util.decorators.ScrollableGui;
+import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
 
-import java.awt.*;
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 
@@ -84,7 +84,9 @@ public class InDevelopmentWarning extends GuiFrame
 
 		if (input.getScreenWidth() > bg.dim().width() || input.getScreenHeight() > bg.dim().height())
 		{
-			float scale = input.getScreenHeight() > input.getScreenWidth() ? Math.abs(bg.dim().height() - input.getScreenHeight()) / bg.dim().height() : Math.abs(bg.dim().width() - input.getScreenWidth()) / bg.dim().width();
+			float scale = input.getScreenHeight() > input.getScreenWidth() ?
+					Math.abs(bg.dim().height() - input.getScreenHeight()) / bg.dim().height() :
+					Math.abs(bg.dim().width() - input.getScreenWidth()) / bg.dim().width();
 
 			bg.dim().mod().scale(1.0F + scale).flush();
 		}

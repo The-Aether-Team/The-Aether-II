@@ -4,5 +4,5 @@ public interface InventoryListener<T>
 {
 
 	void onChange(int slotIndex, T contents);
-	
+
 }

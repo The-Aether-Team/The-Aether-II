@@ -10,7 +10,7 @@ public class SimpleGeneStorage implements IGeneStorage<NBTTagCompound, NBTTagCom
 
 	public SimpleGeneStorage()
 	{
-		
+
 	}
 
 	@Override

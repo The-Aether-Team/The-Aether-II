@@ -27,7 +27,7 @@ public class StructureInjectionEvents
 				return;
 			}
 
-			GuiEditStructure gui = (GuiEditStructure)event.getGui();
+			GuiEditStructure gui = (GuiEditStructure) event.getGui();
 
 			TileEntityStructure structure = ObfuscationReflectionHelper.getPrivateValue(GuiEditStructure.class, gui, ReflectionAether.TILE_STRUCTURE.getMappings());
 
@@ -38,7 +38,7 @@ public class StructureInjectionEvents
 
 			if (event.getButton().id == 0)
 			{
-				sendStructureInjection(gui, structure, (byte)1);
+				sendStructureInjection(gui, structure, (byte) 1);
 
 				Minecraft.getMinecraft().displayGuiScreen(null);
 
@@ -48,7 +48,7 @@ public class StructureInjectionEvents
 			{
 				if (structure.getMode() == TileEntityStructure.Mode.SAVE)
 				{
-					sendStructureInjection(gui, structure, (byte)2);
+					sendStructureInjection(gui, structure, (byte) 2);
 
 					Minecraft.getMinecraft().displayGuiScreen(null);
 
@@ -59,7 +59,7 @@ public class StructureInjectionEvents
 			{
 				if (structure.getMode() == TileEntityStructure.Mode.LOAD)
 				{
-					sendStructureInjection(gui, structure, (byte)3);
+					sendStructureInjection(gui, structure, (byte) 3);
 
 					Minecraft.getMinecraft().displayGuiScreen(null);
 
@@ -70,7 +70,7 @@ public class StructureInjectionEvents
 			{
 				if (structure.getMode() == TileEntityStructure.Mode.SAVE)
 				{
-					sendStructureInjection(gui, structure, (byte)4);
+					sendStructureInjection(gui, structure, (byte) 4);
 
 					Minecraft.getMinecraft().displayGuiScreen(null);
 

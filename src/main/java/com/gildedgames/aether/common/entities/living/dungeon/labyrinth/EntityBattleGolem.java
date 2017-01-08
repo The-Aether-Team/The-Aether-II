@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.living.dungeon.labyrinth;
 
 import com.gildedgames.aether.common.entities.living.mobs.EntityAetherMob;
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.entities.projectiles.EntityBattleBomb;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.aether.common.util.io.NBTHelper;
 import net.minecraft.block.Block;
@@ -210,7 +210,7 @@ public class EntityBattleGolem extends EntityAetherMob implements IRangedAttackM
 			return;
 		}
 
-		double d0 = target.posY + (double)target.getEyeHeight() - 1.100000023841858D;
+		double d0 = target.posY + (double) target.getEyeHeight() - 1.100000023841858D;
 		double d1, d2, d3;
 
 		EntityBattleBomb bomb = new EntityBattleBomb(this.worldObj, this);
@@ -245,9 +245,10 @@ public class EntityBattleGolem extends EntityAetherMob implements IRangedAttackM
 		float f = MathHelper.sqrt_double(d1 * d1 + d3 * d3);
 
 		bomb.rotationPitch -= -20.0F;
-		bomb.setThrowableHeading(d1, d2 + (double)(f * 0.2F), d3, 0.75F, 8.0F);
+		bomb.setThrowableHeading(d1, d2 + (double) (f * 0.2F), d3, 0.75F, 8.0F);
 
-		this.worldObj.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WITCH_THROW, this.getSoundCategory(), 1.0F, 0.8F + this.rand.nextFloat() * 0.4F);
+		this.worldObj.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WITCH_THROW, this.getSoundCategory(), 1.0F,
+				0.8F + this.rand.nextFloat() * 0.4F);
 
 		this.worldObj.spawnEntityInWorld(bomb);
 

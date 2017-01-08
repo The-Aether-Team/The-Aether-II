@@ -58,16 +58,19 @@ public class RenderPlayerHelper
 
 		if (ring1 != null)
 		{
-			RenderPlayerHelper.renderItem(ring1, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress(), skinType == "slim" ? 0.075F : 0.09F, skinType == "slim" ? 0.0752F : 0.112F,  skinType == "slim" ? -0.25F : -0.20F);
+			RenderPlayerHelper.renderItem(ring1, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress(),
+					skinType == "slim" ? 0.075F : 0.09F, skinType == "slim" ? 0.0752F : 0.112F, skinType == "slim" ? -0.25F : -0.20F);
 		}
 
 		if (ring2 != null)
 		{
-			RenderPlayerHelper.renderItem(ring2, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress(), skinType == "slim" ? 0.18F : 0.195F, skinType == "slim" ? 0.017F : 0.0552F,  skinType == "slim" ? -0.24F : -0.19F);
+			RenderPlayerHelper.renderItem(ring2, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress(),
+					skinType == "slim" ? 0.18F : 0.195F, skinType == "slim" ? 0.017F : 0.0552F, skinType == "slim" ? -0.24F : -0.19F);
 		}
 	}
 
-	private static void renderGloves(EntityPlayer player, ItemAetherGloves glove, ItemStack stack, float partialTicks, float pitch, float swingProgress, float equipProgress)
+	private static void renderGloves(EntityPlayer player, ItemAetherGloves glove, ItemStack stack, float partialTicks, float pitch,
+			float swingProgress, float equipProgress)
 	{
 		RenderManager manager = Minecraft.getMinecraft().getRenderManager();
 
@@ -87,7 +90,8 @@ public class RenderPlayerHelper
 		GlStateManager.popMatrix();
 	}
 
-	private static void renderItem(ItemStack stack, float partialTicks, float pitch, float swingProgress, float equipProgress, float x, float y, float z)
+	private static void renderItem(ItemStack stack, float partialTicks, float pitch, float swingProgress, float equipProgress, float x,
+			float y, float z)
 	{
 		GlStateManager.pushMatrix();
 
@@ -97,9 +101,9 @@ public class RenderPlayerHelper
 
 		if (stack != null)
 		{
-			float f = -0.4F * MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float)Math.PI);
-			float f1 = 0.2F * MathHelper.sin(MathHelper.sqrt_float(swingProgress) * ((float)Math.PI * 2F));
-			float f2 = -0.2F * MathHelper.sin(swingProgress * (float)Math.PI);
+			float f = -0.4F * MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float) Math.PI);
+			float f1 = 0.2F * MathHelper.sin(MathHelper.sqrt_float(swingProgress) * ((float) Math.PI * 2F));
+			float f2 = -0.2F * MathHelper.sin(swingProgress * (float) Math.PI);
 			int i = 2;
 
 			GlStateManager.translate(x, y, z);
@@ -107,7 +111,7 @@ public class RenderPlayerHelper
 			RenderPlayerHelper.transformSideFirstPerson(EnumHandSide.RIGHT, equipProgress);
 			RenderPlayerHelper.transformFirstPerson(EnumHandSide.RIGHT, swingProgress);
 
-			GlStateManager.translate((float)i * f, f1, f2);
+			GlStateManager.translate((float) i * f, f1, f2);
 
 			GlStateManager.scale(0.2F, 0.2F, 0.2F);
 			//GlStateManager.rotate(15F, 1F, 0F, 0F);
@@ -128,15 +132,15 @@ public class RenderPlayerHelper
 		boolean flag = p_187456_3_ != EnumHandSide.LEFT;
 		float f = flag ? 1.0F : -1.0F;
 		float f1 = MathHelper.sqrt_float(p_187456_2_);
-		float f2 = -0.3F * MathHelper.sin(f1 * (float)Math.PI);
-		float f3 = 0.4F * MathHelper.sin(f1 * ((float)Math.PI * 2F));
-		float f4 = -0.4F * MathHelper.sin(p_187456_2_ * (float)Math.PI);
+		float f2 = -0.3F * MathHelper.sin(f1 * (float) Math.PI);
+		float f3 = 0.4F * MathHelper.sin(f1 * ((float) Math.PI * 2F));
+		float f4 = -0.4F * MathHelper.sin(p_187456_2_ * (float) Math.PI);
 
 		GlStateManager.translate(f * (f2 + 0.64000005F), f3 + -0.6F + p_187456_1_ * -0.6F, f4 + -0.71999997F);
 
 		GlStateManager.rotate(f * 45.0F, 0.0F, 1.0F, 0.0F);
-		float f5 = MathHelper.sin(p_187456_2_ * p_187456_2_ * (float)Math.PI);
-		float f6 = MathHelper.sin(f1 * (float)Math.PI);
+		float f5 = MathHelper.sin(p_187456_2_ * p_187456_2_ * (float) Math.PI);
+		float f6 = MathHelper.sin(f1 * (float) Math.PI);
 		GlStateManager.rotate(f * f6 * 70.0F, 0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(f * f5 * -20.0F, 0.0F, 0.0F, 1.0F);
 		AbstractClientPlayer abstractclientplayer = Minecraft.getMinecraft().thePlayer;
@@ -160,7 +164,7 @@ public class RenderPlayerHelper
 			GlStateManager.translate(0.08F, 0.06F, 0.0F);
 		}
 
-		RenderPlayer renderplayer = (RenderPlayer)Minecraft.getMinecraft().getRenderManager().getEntityRenderObject(abstractclientplayer);
+		RenderPlayer renderplayer = (RenderPlayer) Minecraft.getMinecraft().getRenderManager().getEntityRenderObject(abstractclientplayer);
 		GlStateManager.disableCull();
 
 		if (flag)
@@ -215,18 +219,18 @@ public class RenderPlayerHelper
 	private static void transformFirstPerson(EnumHandSide p_187453_1_, float p_187453_2_)
 	{
 		int i = p_187453_1_ == EnumHandSide.RIGHT ? 1 : -1;
-		float f = MathHelper.sin(p_187453_2_ * p_187453_2_ * (float)Math.PI);
-		GlStateManager.rotate((float)i * (45.0F + f * -20.0F), 0.0F, 1.0F, 0.0F);
-		float f1 = MathHelper.sin(MathHelper.sqrt_float(p_187453_2_) * (float)Math.PI);
-		GlStateManager.rotate((float)i * f1 * -20.0F, 0.0F, 0.0F, 1.0F);
+		float f = MathHelper.sin(p_187453_2_ * p_187453_2_ * (float) Math.PI);
+		GlStateManager.rotate((float) i * (45.0F + f * -20.0F), 0.0F, 1.0F, 0.0F);
+		float f1 = MathHelper.sin(MathHelper.sqrt_float(p_187453_2_) * (float) Math.PI);
+		GlStateManager.rotate((float) i * f1 * -20.0F, 0.0F, 0.0F, 1.0F);
 		GlStateManager.rotate(f1 * -80.0F, 1.0F, 0.0F, 0.0F);
-		GlStateManager.rotate((float)i * -45.0F, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate((float) i * -45.0F, 0.0F, 1.0F, 0.0F);
 	}
 
 	private static void transformSideFirstPerson(EnumHandSide p_187459_1_, float p_187459_2_)
 	{
 		int i = p_187459_1_ == EnumHandSide.RIGHT ? 1 : -1;
-		GlStateManager.translate((float)i * 0.56F, -0.52F + p_187459_2_ * -0.6F, -0.72F);
+		GlStateManager.translate((float) i * 0.56F, -0.52F + p_187459_2_ * -0.6F, -0.72F);
 	}
 
 }

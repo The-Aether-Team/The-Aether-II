@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.aether.api.registry.tab.ITab;
 import com.gildedgames.aether.api.registry.tab.ITabGroup;
 import com.gildedgames.aether.api.registry.tab.ITabGroupHandler;
+import com.gildedgames.aether.common.network.MessageHandlerServer;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

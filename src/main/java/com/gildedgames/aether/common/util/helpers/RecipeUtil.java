@@ -23,8 +23,8 @@ public class RecipeUtil
 
 		if (obj1 instanceof ItemStack && obj2 instanceof ItemStack)
 		{
-			ItemStack stack1 = (ItemStack)obj1;
-			ItemStack stack2 = (ItemStack)obj2;
+			ItemStack stack1 = (ItemStack) obj1;
+			ItemStack stack2 = (ItemStack) obj2;
 
 			if (stack1.getItemDamage() == OreDictionary.WILDCARD_VALUE || stack2.getItemDamage() == OreDictionary.WILDCARD_VALUE)
 			{
@@ -46,7 +46,7 @@ public class RecipeUtil
 
 		if (obj instanceof ItemStack)
 		{
-			ItemStack otherStack = (ItemStack)obj;
+			ItemStack otherStack = (ItemStack) obj;
 
 			if (otherStack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
 			{
@@ -57,7 +57,7 @@ public class RecipeUtil
 		}
 		else if (obj instanceof OreDictionaryRequirement)
 		{
-			OreDictionaryRequirement oreReq = (OreDictionaryRequirement)obj;
+			OreDictionaryRequirement oreReq = (OreDictionaryRequirement) obj;
 
 			return oreReq.equals(stack);
 		}
@@ -121,7 +121,8 @@ public class RecipeUtil
 			return false;
 		}
 
-		outside: for (int reqIndex = 0; reqIndex < recipe.getRequired().length; reqIndex++)
+		outside:
+		for (int reqIndex = 0; reqIndex < recipe.getRequired().length; reqIndex++)
 		{
 			Object req = recipe.getRequired()[reqIndex];
 
@@ -169,7 +170,8 @@ public class RecipeUtil
 
 		int totalCount = Integer.MAX_VALUE;
 
-		outside: for (int reqIndex = 0; reqIndex < recipe.getRequired().length; reqIndex++)
+		outside:
+		for (int reqIndex = 0; reqIndex < recipe.getRequired().length; reqIndex++)
 		{
 			Object req = recipe.getRequired()[reqIndex];
 

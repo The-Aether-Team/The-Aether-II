@@ -12,7 +12,7 @@ import com.gildedgames.aether.client.ui.util.RectangleElement;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class MinecraftGui extends GuiDecorator<Gui>
 {

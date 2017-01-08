@@ -16,7 +16,8 @@ public class ItemLeatherGloves extends ItemAetherGloves
 
 	public static boolean hasColor(ItemStack stack)
 	{
-		return stack.hasTagCompound() && (stack.getTagCompound().hasKey("display", 10) && stack.getTagCompound().getCompoundTag("display").hasKey("color", 3));
+		return stack.hasTagCompound() && (stack.getTagCompound().hasKey("display", 10)
+				&& stack.getTagCompound().getCompoundTag("display").hasKey("color", 3));
 	}
 
 	public static int getColor(ItemStack stack)

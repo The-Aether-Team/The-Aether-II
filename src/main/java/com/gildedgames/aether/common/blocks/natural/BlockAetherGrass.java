@@ -1,8 +1,5 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import java.util.List;
-import java.util.Random;
-
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
@@ -10,7 +7,6 @@ import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
 import com.gildedgames.aether.common.world.dimensions.aether.features.trees.WorldGenOrangeTree;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.SoundType;
@@ -28,6 +24,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
+import java.util.Random;
 
 public class BlockAetherGrass extends BlockGrass implements IBlockVariants
 {
@@ -91,8 +90,10 @@ public class BlockAetherGrass extends BlockGrass implements IBlockVariants
 						IBlockState aboveState = world.getBlockState(randomNeighbor.up());
 						IBlockState neighborState = world.getBlockState(randomNeighbor);
 
-						if (neighborState.getBlock() == BlocksAether.aether_dirt && neighborState.getValue(BlockAetherDirt.PROPERTY_VARIANT) == BlockAetherDirt.DIRT &&
-								world.getLightFromNeighbors(randomNeighbor.up()) >= 4 && aboveState.getLightOpacity(world, randomNeighbor.up()) <= 2)
+						if (neighborState.getBlock() == BlocksAether.aether_dirt
+								&& neighborState.getValue(BlockAetherDirt.PROPERTY_VARIANT) == BlockAetherDirt.DIRT &&
+								world.getLightFromNeighbors(randomNeighbor.up()) >= 4
+								&& aboveState.getLightOpacity(world, randomNeighbor.up()) <= 2)
 						{
 							IBlockState grassState = this.getDefaultState().withProperty(PROPERTY_VARIANT, AETHER);
 
@@ -203,7 +204,8 @@ public class BlockAetherGrass extends BlockGrass implements IBlockVariants
 						}
 						else if (BlocksAether.blueberry_bush.canPlaceBlockAt(worldIn, nextPos))
 						{
-							worldIn.setBlockState(nextPos, BlocksAether.blueberry_bush.getDefaultState().withProperty(BlockBlueberryBush.PROPERTY_HARVESTABLE, rand.nextInt(3) == 0));
+							worldIn.setBlockState(nextPos, BlocksAether.blueberry_bush.getDefaultState().withProperty(BlockBlueberryBush.PROPERTY_HARVESTABLE,
+									rand.nextInt(3) == 0));
 						}
 					}
 					else if (rand.nextInt(8) == 0 && BlocksAether.aether_flower.canPlaceBlockAt(worldIn, nextPos))

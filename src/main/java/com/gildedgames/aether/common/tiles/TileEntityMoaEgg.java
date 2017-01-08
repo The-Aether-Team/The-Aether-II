@@ -1,15 +1,14 @@
 package com.gildedgames.aether.common.tiles;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
+import com.gildedgames.aether.common.entities.genes.util.SimpleGeneStorage;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
 import com.gildedgames.aether.common.entities.util.MoaNest;
-import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
-import com.gildedgames.aether.common.entities.genes.util.SimpleGeneStorage;
 import com.gildedgames.aether.common.tiles.util.TileEntitySynced;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.BlockPos;
 
 public class TileEntityMoaEgg extends TileEntitySynced implements ITickable
 {
@@ -69,7 +68,8 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickable
 
 	public boolean hatchConditionsMet()
 	{
-		boolean atMaxFamilySize = this.familyNest.getAnimalPack() != null && this.familyNest.getAnimalPack().getSize() >= this.familyNest.getAnimalPack().getOptimalSize();
+		boolean atMaxFamilySize = this.familyNest.getAnimalPack() != null
+				&& this.familyNest.getAnimalPack().getSize() >= this.familyNest.getAnimalPack().getOptimalSize();
 
 		return this.worldObj.getBlockState(this.getPos().add(0, -1, 0)) == BlocksAether.woven_sticks.getDefaultState() && !atMaxFamilySize;
 	}

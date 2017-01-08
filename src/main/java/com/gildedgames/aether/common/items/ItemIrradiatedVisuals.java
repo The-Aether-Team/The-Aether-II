@@ -25,7 +25,8 @@ public class ItemIrradiatedVisuals extends Item
 	{
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
 		{
-			RENDER_MODEL_METHOD = ReflectionAether.getMethod(RenderItem.class, new Class<?>[] { IBakedModel.class, int.class }, "renderModel", "func_175035_a");
+			RENDER_MODEL_METHOD = ReflectionAether.getMethod(RenderItem.class, new Class<?>[] { IBakedModel.class,
+					int.class }, "renderModel", "func_175035_a");
 
 			RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
 		}

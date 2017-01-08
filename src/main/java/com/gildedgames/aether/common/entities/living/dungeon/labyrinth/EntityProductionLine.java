@@ -1,16 +1,16 @@
 package com.gildedgames.aether.common.entities.living.dungeon.labyrinth;
 
-import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.gildedgames.aether.common.util.TickTimer;
-import com.gildedgames.aether.common.world.dungeon.DungeonDefinitions;
+import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.gildedgames.aether.common.util.io.NBTHelper;
+import com.gildedgames.aether.common.world.dungeon.DungeonDefinitions;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

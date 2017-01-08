@@ -101,9 +101,9 @@ public class BlockCustomCarpet extends Block
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
 	{
-		return side == EnumFacing.UP ? true : (blockAccess.getBlockState(pos.offset(side)).getBlock() == this ? true : super.shouldSideBeRendered(blockState, blockAccess, pos, side));
+		return side == EnumFacing.UP ? true : (blockAccess.getBlockState(pos.offset(side)).getBlock() == this ? true :
+				super.shouldSideBeRendered(blockState, blockAccess, pos, side));
 	}
-
 
 	@Override
 	public int damageDropped(IBlockState state)

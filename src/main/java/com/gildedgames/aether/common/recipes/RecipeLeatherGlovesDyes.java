@@ -74,15 +74,15 @@ public class RecipeLeatherGlovesDyes implements IRecipe
 					{
 						int color = ItemLeatherGloves.getColor(stack);
 
-						float r = (float)(color >> 16 & 255) / 255.0F;
-						float g = (float)(color >> 8 & 255) / 255.0F;
-						float b = (float)(color & 255) / 255.0F;
+						float r = (float) (color >> 16 & 255) / 255.0F;
+						float g = (float) (color >> 8 & 255) / 255.0F;
+						float b = (float) (color & 255) / 255.0F;
 
-						intensity = (int)((float)intensity + Math.max(r, Math.max(g, b)) * 255.0F);
+						intensity = (int) ((float) intensity + Math.max(r, Math.max(g, b)) * 255.0F);
 
-						colors[0] = (int)((float)colors[0] + r * 255.0F);
-						colors[1] = (int)((float)colors[1] + g * 255.0F);
-						colors[2] = (int)((float)colors[2] + b * 255.0F);
+						colors[0] = (int) ((float) colors[0] + r * 255.0F);
+						colors[1] = (int) ((float) colors[1] + g * 255.0F);
+						colors[2] = (int) ((float) colors[2] + b * 255.0F);
 
 						++j;
 					}
@@ -96,9 +96,9 @@ public class RecipeLeatherGlovesDyes implements IRecipe
 
 					float[] afloat = EntitySheep.getDyeRgb(EnumDyeColor.byDyeDamage(invStack.getMetadata()));
 
-					int r2 = (int)(afloat[0] * 255.0F);
-					int g2 = (int)(afloat[1] * 255.0F);
-					int b2 = (int)(afloat[2] * 255.0F);
+					int r2 = (int) (afloat[0] * 255.0F);
+					int g2 = (int) (afloat[1] * 255.0F);
+					int b2 = (int) (afloat[2] * 255.0F);
 
 					intensity += Math.max(r2, Math.max(g2, b2));
 
@@ -121,12 +121,12 @@ public class RecipeLeatherGlovesDyes implements IRecipe
 			int g = colors[1] / j;
 			int b = colors[2] / j;
 
-			float f3 = (float)intensity / (float)j;
-			float f4 = (float)Math.max(r, Math.max(g, b));
+			float f3 = (float) intensity / (float) j;
+			float f4 = (float) Math.max(r, Math.max(g, b));
 
-			r = (int)((float)r * f3 / f4);
-			g = (int)((float)g * f3 / f4);
-			b = (int)((float)b * f3 / f4);
+			r = (int) ((float) r * f3 / f4);
+			g = (int) ((float) g * f3 / f4);
+			b = (int) ((float) b * f3 / f4);
 
 			int color = (r << 8) + g;
 			color = (color << 8) + b;

@@ -99,7 +99,9 @@ public class ItemSkyrootBucket extends ItemBucket
 				{
 					player.addStat(StatList.getObjectUseStats(this));
 
-					return !player.capabilities.isCreativeMode ? new ActionResult<>(EnumActionResult.SUCCESS, new ItemStack(ItemsAether.skyroot_bucket)) : new ActionResult<>(EnumActionResult.SUCCESS, itemStack);
+					return !player.capabilities.isCreativeMode ?
+							new ActionResult<>(EnumActionResult.SUCCESS, new ItemStack(ItemsAether.skyroot_bucket)) :
+							new ActionResult<>(EnumActionResult.SUCCESS, itemStack);
 				}
 				else
 				{

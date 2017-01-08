@@ -2,7 +2,10 @@ package com.gildedgames.aether.common.world.dimensions.aether.island;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherCaves;
-import com.gildedgames.aether.common.world.dimensions.aether.island.logic.*;
+import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
+import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSector;
+import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSectorAccess;
+import com.gildedgames.aether.common.world.dimensions.aether.island.logic.WorldGeneratorIsland;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -86,9 +89,12 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 	{
 		double oneThirtySnd = 0.03125D;
 
-		this.noiseFields[1] = this.octaveNoiseGenerators[3].generateNoiseOctaves(this.noiseFields[1], chunkX * 16, chunkY * 16, 0, 16, 16, 1, oneThirtySnd, oneThirtySnd, 1.0D);
-		this.noiseFields[2] = this.octaveNoiseGenerators[3].generateNoiseOctaves(this.noiseFields[2], chunkX * 16, 109, chunkY * 16, 16, 1, 16, oneThirtySnd, 1.0D, oneThirtySnd);
-		this.noiseFields[3] = this.octaveNoiseGenerators[4].generateNoiseOctaves(this.noiseFields[3], chunkX * 16, chunkY * 16, 0, 16, 16, 1, oneThirtySnd * 2D, oneThirtySnd * 2D, oneThirtySnd * 2D);
+		this.noiseFields[1] = this.octaveNoiseGenerators[3].generateNoiseOctaves(this.noiseFields[1],
+				chunkX * 16, chunkY * 16, 0, 16, 16, 1, oneThirtySnd, oneThirtySnd, 1.0D);
+		this.noiseFields[2] = this.octaveNoiseGenerators[3].generateNoiseOctaves(this.noiseFields[2],
+				chunkX * 16, 109, chunkY * 16, 16, 1, 16, oneThirtySnd, 1.0D, oneThirtySnd);
+		this.noiseFields[3] = this.octaveNoiseGenerators[4].generateNoiseOctaves(this.noiseFields[3],
+				chunkX * 16, chunkY * 16, 0, 16, 16, 1, oneThirtySnd * 2D, oneThirtySnd * 2D, oneThirtySnd * 2D);
 
 		for (int x = 0; x < 16; x++)
 		{
@@ -129,7 +135,8 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 						j1 = sthWithHeightMap;
 
-						if (y >= 0 && (y + 1 >= this.worldObj.getActualHeight() || primer.getBlockState(x, y + 1, z) == Blocks.AIR.getDefaultState()))
+						if (y >= 0 && (y + 1 >= this.worldObj.getActualHeight()
+								|| primer.getBlockState(x, y + 1, z) == Blocks.AIR.getDefaultState()))
 						{
 							primer.setBlockState(x, y, z, topAetherBlock);
 						}
@@ -231,7 +238,8 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 		}
 	}
 
-	public void genClouds(ChunkPrimer primer, double[] noise, NoiseGeneratorOctaves noiseGen, double threshold, int posY, int chunkX, int chunkZ)
+	public void genClouds(ChunkPrimer primer, double[] noise, NoiseGeneratorOctaves noiseGen, double threshold, int posY, int chunkX,
+			int chunkZ)
 	{
 		int height = 160;
 		int sampleSize = 40;

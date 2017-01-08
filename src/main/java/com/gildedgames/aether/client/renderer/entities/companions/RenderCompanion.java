@@ -23,7 +23,8 @@ public abstract class RenderCompanion<T extends EntityCompanion> extends RenderL
 	}
 
 	@Override
-	protected void renderModel(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor)
+	protected void renderModel(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
+			float scaleFactor)
 	{
 		boolean renderOutlines = !entity.isInvisible() || this.renderOutlines;
 		boolean isInvisible = !renderOutlines && !entity.isInvisibleToPlayer(Minecraft.getMinecraft().thePlayer);
@@ -81,7 +82,8 @@ public abstract class RenderCompanion<T extends EntityCompanion> extends RenderL
 		}
 	}
 
-	protected void renderExtra(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, float opacity)
+	protected void renderExtra(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
+			float scaleFactor, float opacity)
 	{
 
 	}

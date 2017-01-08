@@ -36,7 +36,8 @@ public class EntitySliding extends EntityCreature implements ISlidingEntity
 	{
 		IBlockState state = this.worldObj.getBlockState((new BlockPos(this)).down());
 
-		return state.canEntitySpawn(this) && this.getBlockPathWeight(new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ)) >= 0.0F;
+		return state.canEntitySpawn(this)
+				&& this.getBlockPathWeight(new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ)) >= 0.0F;
 	}
 
 	@Override

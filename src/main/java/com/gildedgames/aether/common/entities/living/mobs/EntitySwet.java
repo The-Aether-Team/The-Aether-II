@@ -147,7 +147,7 @@ public class EntitySwet extends EntityExtendedMob
 		{
 			this.squishAmount = -0.5F;
 		}
-        else if (!this.onGround && this.wasOnGround)
+		else if (!this.onGround && this.wasOnGround)
 		{
 			this.squishAmount = 1.0F;
 		}
@@ -200,16 +200,16 @@ public class EntitySwet extends EntityExtendedMob
 	{
 		switch (this.getType())
 		{
-		case BLUE:
-			return LootTablesAether.ENTITY_SWET_BLUE;
-		case GOLDEN:
-			return LootTablesAether.ENTITY_SWET_GOLDEN;
-		case DARK:
-			return LootTablesAether.ENTITY_SWET_DARK;
-		case LIGHT:
-			return LootTablesAether.ENTITY_SWET_LIGHT;
-		default:
-			return LootTablesAether.ENTITY_SWET;
+			case BLUE:
+				return LootTablesAether.ENTITY_SWET_BLUE;
+			case GOLDEN:
+				return LootTablesAether.ENTITY_SWET_GOLDEN;
+			case DARK:
+				return LootTablesAether.ENTITY_SWET_DARK;
+			case LIGHT:
+				return LootTablesAether.ENTITY_SWET_LIGHT;
+			default:
+				return LootTablesAether.ENTITY_SWET;
 		}
 	}
 }

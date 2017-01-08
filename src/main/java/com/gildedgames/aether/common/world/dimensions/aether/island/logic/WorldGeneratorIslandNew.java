@@ -54,7 +54,8 @@ public class WorldGeneratorIslandNew
 		double height = data.getHeight();
 		double length = (double) data.getBounds().height;
 
-		this.noiseFields[0] = this.initializeNoiseField(this.noiseFields[0], chunkX * dimXZ, 0, chunkZ * dimXZ, dimXZPlusOne, dimYPlusOne, dimXZPlusOne);
+		this.noiseFields[0] = this.initializeNoiseField(this.noiseFields[0],
+				chunkX * dimXZ, 0, chunkZ * dimXZ, dimXZPlusOne, dimYPlusOne, dimXZPlusOne);
 
 		int posX = chunkX * 16;
 		int posZ = chunkZ * 16;
@@ -117,7 +118,8 @@ public class WorldGeneratorIslandNew
 
 								//double flat = GenUtil.octavedNoise(this.simplex, 4, 0.7D, 2.5D, nx, nz);
 
-								double distNX = ((stepX - data.getBounds().getMinX()) / width) - 0.5; // Subtract sector coords from nx/ny so that the noise is within range of the island center
+								double distNX = ((stepX - data.getBounds().getMinX()) / width)
+										- 0.5; // Subtract sector coords from nx/ny so that the noise is within range of the island center
 								double distNZ = ((stepZ - data.getBounds().getMinY()) / length) - 0.5;
 
 								double dist = 2.0 * Math.sqrt((distNX * distNX) + (distNZ * distNZ)); // Get distance from center of Island
@@ -157,7 +159,8 @@ public class WorldGeneratorIslandNew
 		double const1 = 684.41200000000003D * 2.0D;
 		double const2 = 684.41200000000003D;
 
-		this.noiseFields[4] = this.octaveNoiseGenerators[2].generateNoiseOctaves(this.noiseFields[4], x, y, z, width, height, length, const1 / 20D, const2 / 160D, const1 / 80D);
+		this.noiseFields[4] = this.octaveNoiseGenerators[2].generateNoiseOctaves(this.noiseFields[4], x, y, z, width, height, length,
+				const1 / 20D, const2 / 160D, const1 / 80D);
 		this.noiseFields[5] = this.octaveNoiseGenerators[0].generateNoiseOctaves(this.noiseFields[5], x, y, z, width, height, length, const1, const2, const1);
 		this.noiseFields[6] = this.octaveNoiseGenerators[1].generateNoiseOctaves(this.noiseFields[6], x, y, z, width, height, length, const1, const2, const1);
 

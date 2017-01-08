@@ -51,7 +51,7 @@ public class CreativeTabsAether
 
 	public static final CreativeTab MISCELLANEOUS = new CreativeTab("aether.miscellaneous");
 
-    @SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT)
 	public static void registerTabIcons()
 	{
 		NATURAL_BLOCKS.setDisplayStack(new ItemStack(BlocksAether.aether_grass, 1, BlockAetherGrass.AETHER.getMeta()));
@@ -64,8 +64,8 @@ public class CreativeTabsAether
 		WEAPONS.setDisplayStack(new ItemStack(ItemsAether.gravitite_sword));
 		ARMOR.setDisplayStack(new ItemStack(ItemsAether.zanite_helmet));
 		CONSUMABLES.setDisplayStack(new ItemStack(ItemsAether.orange));
-        COMPANIONS.setDisplayStack(new ItemStack(ItemsAether.pink_baby_swet));
-        MISCELLANEOUS.setDisplayStack(new ItemStack(ItemsAether.skyroot_poison_bucket));
+		COMPANIONS.setDisplayStack(new ItemStack(ItemsAether.pink_baby_swet));
+		MISCELLANEOUS.setDisplayStack(new ItemStack(ItemsAether.skyroot_poison_bucket));
 
 		RINGS.setDisplayStack(new ItemStack(ItemsAether.zanite_ring));
 		NECKWEAR.setDisplayStack(new ItemStack(ItemsAether.amulet_of_growth));
@@ -123,11 +123,11 @@ public class CreativeTabsAether
 
 				if (item instanceof ItemBlock)
 				{
-					ItemBlock itemBlock = (ItemBlock)item;
+					ItemBlock itemBlock = (ItemBlock) item;
 
 					if (itemBlock.getBlock() instanceof IBlockVariants)
 					{
-						IBlockVariants blockVariants = (IBlockVariants)itemBlock.getBlock();
+						IBlockVariants blockVariants = (IBlockVariants) itemBlock.getBlock();
 
 						blockVariants.addItemsToCreativeTab(item, this, p_78018_1_);
 					}

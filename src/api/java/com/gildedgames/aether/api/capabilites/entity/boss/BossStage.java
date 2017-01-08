@@ -32,12 +32,14 @@ public abstract class BossStage<T extends Entity> implements NBT
 		this.hasBegun = flag;
 	}
 
-	@Override public void write(NBTTagCompound output)
+	@Override
+	public void write(NBTTagCompound output)
 	{
 		output.setBoolean("hasBegun", this.hasBegun);
 	}
 
-	@Override public void read(NBTTagCompound input)
+	@Override
+	public void read(NBTTagCompound input)
 	{
 		this.hasBegun = input.getBoolean("hasBegun");
 	}

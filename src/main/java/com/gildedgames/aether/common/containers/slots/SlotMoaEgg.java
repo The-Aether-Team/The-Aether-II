@@ -14,29 +14,29 @@ import javax.annotation.Nullable;
 public class SlotMoaEgg extends Slot
 {
 
-    private static TextureAtlasSprite sprite;
+	private static TextureAtlasSprite sprite;
 
-    public SlotMoaEgg(IInventory inventoryIn, int index, int xPosition, int yPosition)
-    {
-        super(inventoryIn, index, xPosition, yPosition);
-    }
+	public SlotMoaEgg(IInventory inventoryIn, int index, int xPosition, int yPosition)
+	{
+		super(inventoryIn, index, xPosition, yPosition);
+	}
 
-    public boolean isItemValid(@Nullable ItemStack stack)
-    {
-        return this.inventory.isItemValidForSlot(this.getSlotIndex(), stack);
-    }
+	public boolean isItemValid(@Nullable ItemStack stack)
+	{
+		return this.inventory.isItemValidForSlot(this.getSlotIndex(), stack);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public TextureAtlasSprite getBackgroundSprite()
-    {
-        return sprite;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public TextureAtlasSprite getBackgroundSprite()
+	{
+		return sprite;
+	}
 
-    @SideOnly(Side.CLIENT)
-    public static void registerIcons(TextureStitchEvent.Pre event)
-    {
-        sprite = event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_moa_egg"));
-    }
+	@SideOnly(Side.CLIENT)
+	public static void registerIcons(TextureStitchEvent.Pre event)
+	{
+		sprite = event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_moa_egg"));
+	}
 
 }

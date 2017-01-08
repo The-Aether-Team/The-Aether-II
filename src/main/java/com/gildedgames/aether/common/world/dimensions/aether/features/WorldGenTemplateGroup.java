@@ -47,19 +47,19 @@ public class WorldGenTemplateGroup extends WorldGenerator implements IWorldGen
 
 				switch (rotation)
 				{
-				case NONE:
-				default:
-					position = position.add(-(size.getX() / 2.0) + 1, 0, -(size.getZ() / 2.0) + 1);
-					break;
-				case CLOCKWISE_90:
-					position = position.add(size.getX() / 2.0, 0, -(size.getZ() / 2.0) + 1);
-					break;
-				case COUNTERCLOCKWISE_90:
-					position = position.add(-(size.getX() / 2.0) + 1, 0, (size.getZ() / 2.0));
-					break;
-				case CLOCKWISE_180:
-					position = position.add((size.getX() / 2.0), 0, (size.getZ() / 2.0));
-					break;
+					case NONE:
+					default:
+						position = position.add(-(size.getX() / 2.0) + 1, 0, -(size.getZ() / 2.0) + 1);
+						break;
+					case CLOCKWISE_90:
+						position = position.add(size.getX() / 2.0, 0, -(size.getZ() / 2.0) + 1);
+						break;
+					case COUNTERCLOCKWISE_90:
+						position = position.add(-(size.getX() / 2.0) + 1, 0, (size.getZ() / 2.0));
+						break;
+					case CLOCKWISE_180:
+						position = position.add((size.getX() / 2.0), 0, (size.getZ() / 2.0));
+						break;
 				}
 
 				if (templateToGenerate.getCenterOffsetProcessor() != null)

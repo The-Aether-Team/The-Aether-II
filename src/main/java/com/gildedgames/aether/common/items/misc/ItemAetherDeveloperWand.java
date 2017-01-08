@@ -3,7 +3,10 @@ package com.gildedgames.aether.common.items.misc;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -31,11 +34,13 @@ public class ItemAetherDeveloperWand extends Item
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing,
+			float hitX, float hitY, float hitZ)
 	{
 		if (worldIn.isRemote)
 		{
-			worldIn.playSound(playerIn, playerIn.getPosition(), SoundsAether.tempest_electric_shock, SoundCategory.NEUTRAL, 1.0F, 0.8F + (worldIn.rand.nextFloat() * 0.5F));
+			worldIn.playSound(playerIn, playerIn.getPosition(), SoundsAether.tempest_electric_shock, SoundCategory.NEUTRAL, 1.0F,
+					0.8F + (worldIn.rand.nextFloat() * 0.5F));
 
 			return EnumActionResult.SUCCESS;
 		}
@@ -57,12 +62,14 @@ public class ItemAetherDeveloperWand extends Item
 			pos = pos.offset(facing);
 			double d0 = 0.0D;
 
-			if (facing == EnumFacing.UP && iblockstate.getBlock() instanceof BlockFence) //Forge: Fix Vanilla bug comparing state instead of block
+			if (facing == EnumFacing.UP
+					&& iblockstate.getBlock() instanceof BlockFence) //Forge: Fix Vanilla bug comparing state instead of block
 			{
 				d0 = 0.5D;
 			}
 
-			ItemAetherDeveloperWand.spawnCreature(worldIn, "aether.generator", (double)pos.getX() + hitX, (double)pos.getY() + d0, (double)pos.getZ() + hitZ);
+			ItemAetherDeveloperWand.spawnCreature(worldIn, "aether.generator",
+					(double) pos.getX() + hitX, (double) pos.getY() + d0, (double) pos.getZ() + hitZ);
 
 			return EnumActionResult.SUCCESS;
 		}
@@ -87,7 +94,7 @@ public class ItemAetherDeveloperWand extends Item
 
 				if (entity instanceof EntityLivingBase)
 				{
-					EntityLiving entityliving = (EntityLiving)entity;
+					EntityLiving entityliving = (EntityLiving) entity;
 					entity.setLocationAndAngles(x, y, z, MathHelper.wrapDegrees(worldIn.rand.nextFloat() * 360.0F), 0.0F);
 					entityliving.rotationYawHead = entityliving.rotationYaw;
 					entityliving.renderYawOffset = entityliving.rotationYaw;

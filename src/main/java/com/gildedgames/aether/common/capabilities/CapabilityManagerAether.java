@@ -61,13 +61,13 @@ public class CapabilityManagerAether
 		}
 	}
 
-    @SubscribeEvent
+	@SubscribeEvent
 	public static void onWorldLoad(AttachCapabilitiesEvent.World event)
 	{
 		event.addCapability(AetherCore.getResource("AetherHooks"), new ChunkAttachmentProvider(new ChunkAttachment()));
 	}
 
-    @SubscribeEvent
+	@SubscribeEvent
 	public static void onChunkCapabilityAttach(AttachCapabilitiesChunkEvent event)
 	{
 		event.addCapability(AetherCore.getResource("PlacementFlags"), new PlacementFlagProvider(new PlacementFlagCapability()));

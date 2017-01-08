@@ -1,10 +1,6 @@
 package com.gildedgames.aether.common.world.util.delaunay_triangulation;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class ConvexHull
 {
@@ -83,7 +79,9 @@ public class ConvexHull
 			ConvexFace face = faces.get(i);
 			List<int[]> vertices = new ArrayList<>();
 			for (int j = 0; j <= 2; j++)
+			{
 				vertices.add(face.vertices.get(j));
+			}
 			cells[i] = new TriangulationCell(vertices, new TriangulationCell[3]);
 			face.tag = i;
 		}
@@ -176,7 +174,9 @@ public class ConvexHull
 			}
 			int count = this.affectedFaceBuffer.size();
 			for (ConvexFace anAffectedFaceBuffer : this.affectedFaceBuffer)
+			{
 				anAffectedFaceBuffer.tag = 0;
+			}
 		}
 
 		return this.convexFaces;
@@ -321,10 +321,14 @@ public class ConvexHull
 	{
 		int count = this.convexHull.size() + 1;
 		for (int i = 0; i < 3; i++)
+		{
 			center[i] *= (count - 1);
+		}
 		double f = 1.0 / count;
 		for (int i = 0; i < 3; i++)
+		{
 			center[i] = (f * (center[i] + this.currentVertex[i]));
+		}
 	}
 
 	protected ConvexFace[] initiateFaceDatabase(double[] center)
@@ -352,7 +356,9 @@ public class ConvexHull
 		for (int i = 0; i < 3; i++)
 		{
 			for (int j = i + 1; j < 4; j++)
+			{
 				this.updateAdjacency(faces[i], faces[j]);
+			}
 		}
 
 		return faces;
@@ -386,7 +392,9 @@ public class ConvexHull
 		if (centerDistance > 0)
 		{
 			for (int i = 0; i < 3; i++)
+			{
 				normal[i] = -normal[i];
+			}
 			face.offset = offset;
 			face.isNormalFlipped = true;
 		}
@@ -429,17 +437,23 @@ public class ConvexHull
 		int i;
 
 		for (i = 0; i < 3; i++)
+		{
 			this.setMarked(lv.get(i), false);
+		}
 
 		for (i = 0; i < 3; i++)
+		{
 			this.setMarked(rv.get(i), true);
+		}
 
 		//Find the first false index
 		for (i = 0; i < 3; i++)
+		{
 			if (!this.getMarked(lv.get(i)))
 			{
 				break;
 			}
+		}
 
 		if (i == 3)
 		{
@@ -447,15 +461,19 @@ public class ConvexHull
 		}
 
 		for (int j = i + 1; j < 3; j++)
+		{
 			if (!this.getMarked(lv.get(j)))
 			{
 				return;
 			}
+		}
 
 		//If this somehow is used, it means that two faces share an edge
 		l.adjacentFaces[i] = r;
 		for (i = 0; i < 3; i++)
+		{
 			this.setMarked(lv.get(i), false);
+		}
 		for (i = 0; i < 3; i++)
 		{
 			if (this.getMarked(rv.get(i)))
@@ -489,7 +507,9 @@ public class ConvexHull
 		this.furthestVertex = null;
 
 		for (int[] aCurrentInput : this.currentInput)
+		{
 			this.isBeyond(face, beyondVertices, aCurrentInput);
+		}
 		face.furthestVertex = this.furthestVertex;
 	}
 
@@ -512,7 +532,9 @@ public class ConvexHull
 		double[] normal = f.normal;
 		double distance = f.offset;
 		for (int i = 0; i < 3; i++)
+		{
 			distance += normal[i] * v[i];
+		}
 		return distance;
 	}
 
@@ -591,12 +613,16 @@ public class ConvexHull
 				if (vertices.size() < 3)
 				{
 					for (int j = 0; j < 3; j++)
+					{
 						vertices.add(oldFace.vertices.get(j));
+					}
 				}
 				else
 				{
 					for (int j = 0; j < 3; j++)
+					{
 						vertices.set(j, oldFace.vertices.get(j));
+					}
 				}
 				oldVertexIndex = this.getIndex(vertices.get(forbidden));
 
@@ -748,7 +774,9 @@ public class ConvexHull
 
 		int count = beyond1.size();
 		for (int i = 0; i < count; i++)
+		{
 			this.setMarked(beyond1.get(i), true);
+		}
 		this.setMarked(this.currentVertex, false);
 		count = beyond.size();
 		for (int i = 0; i < count; i++)
@@ -807,7 +835,9 @@ public class ConvexHull
 	{
 		int count = this.convexHull.size() + 1;
 		for (int i = 0; i < 3; i++)
+		{
 			center[i] *= count;
+		}
 		double f = 1.0 / (count - 1);
 		for (int i = 0; i < 3; i++)
 		{

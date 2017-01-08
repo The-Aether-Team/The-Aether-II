@@ -197,12 +197,12 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVarian
 	{
 		switch (stack.getMetadata())
 		{
-		case BERRY_BUSH_STEM:
-			return "stem";
-		case BERRY_BUSH_RIPE:
-			return "ripe";
-		default:
-			return "missingno";
+			case BERRY_BUSH_STEM:
+				return "stem";
+			case BERRY_BUSH_RIPE:
+				return "ripe";
+			default:
+				return "missingno";
 		}
 	}
 

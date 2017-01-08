@@ -45,7 +45,7 @@ public class EntityKraisith extends EntityCombatCompanion
 	@Override
 	public boolean attackEntityAsMob(Entity entity)
 	{
-		boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)((int)this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue()));
+		boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) ((int) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue()));
 
 		if (flag)
 		{
@@ -53,7 +53,7 @@ public class EntityKraisith extends EntityCombatCompanion
 
 			if (entity instanceof EntityLivingBase)
 			{
-				EntityLivingBase living = (EntityLivingBase)entity;
+				EntityLivingBase living = (EntityLivingBase) entity;
 
 				living.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20, 3));
 			}

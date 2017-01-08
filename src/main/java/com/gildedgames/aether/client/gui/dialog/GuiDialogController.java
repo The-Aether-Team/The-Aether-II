@@ -84,7 +84,8 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 		GlStateManager.translate(0, 0, 100F);
 		GlStateManager.color(1.0F, 1.0F, 1.0F);
 
-		GuiInventory.drawEntityOnScreen((this.width / 2) + 40, this.height, 120, -mouseX + (this.width / 2) + 40, (-mouseY / 10.0F), this.npc);
+		GuiInventory.drawEntityOnScreen(
+				(this.width / 2) + 40, this.height, 120, -mouseX + (this.width / 2) + 40, (-mouseY / 10.0F), this.npc);
 
 		GlStateManager.translate(0, 0, 100F);
 		Gui.drawRect(0, this.height - 90, this.width, this.height, Integer.MIN_VALUE);
@@ -127,11 +128,15 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 
 			if (this.textIndex + 1 >= this.node.getContent().size() && this.node.getButtons().size() > 0)
 			{
-				Gui.drawModalRectWithCustomSizedTexture(this.topTextBox.xPosition + this.topTextBox.width + 5, this.topTextBox.yPosition + this.topTextBox.height - 20, 0, 0, 13, 12, 13, 12);
+				Gui.drawModalRectWithCustomSizedTexture(
+						this.topTextBox.xPosition + this.topTextBox.width + 5,
+						this.topTextBox.yPosition + this.topTextBox.height - 20, 0, 0, 13, 12, 13, 12);
 			}
 			else
 			{
-				Gui.drawModalRectWithCustomSizedTexture(this.bottomTextBox.xPosition + this.bottomTextBox.width, this.bottomTextBox.yPosition + this.bottomTextBox.height - 20, 0, 0, 13, 12, 13, 12);
+				Gui.drawModalRectWithCustomSizedTexture(
+						this.bottomTextBox.xPosition + this.bottomTextBox.width,
+						this.bottomTextBox.yPosition + this.bottomTextBox.height - 20, 0, 0, 13, 12, 13, 12);
 			}
 
 			GlStateManager.popMatrix();
@@ -143,7 +148,7 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 	{
 		if (button instanceof GuiDialogButton)
 		{
-			GuiDialogButton dialogButton = (GuiDialogButton)button;
+			GuiDialogButton dialogButton = (GuiDialogButton) button;
 
 			dialogButton.getButtonData().onClicked(this);
 		}
@@ -222,8 +227,10 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 			baseBoxSize = this.width - 40;
 		}
 
-		this.topTextBox = new GuiTextBox(buttons.size(), resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - 175, baseBoxSize, 80);
-		this.bottomTextBox = new GuiTextBox(buttons.size() + 1, resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - 85, baseBoxSize, 70);
+		this.topTextBox = new GuiTextBox(buttons.size(),
+				resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - 175, baseBoxSize, 80);
+		this.bottomTextBox = new GuiTextBox(
+				buttons.size() + 1, resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - 85, baseBoxSize, 70);
 
 		this.topTextBox.showBackdrop = true;
 		this.topTextBox.bottomToTop = true;
@@ -271,7 +278,11 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 			boolean topText = this.textIndex + 1 >= this.node.getContent().size() && this.node.getButtons().size() > 0;
 			String name = I18n.format(this.node.getSpeaker().getResourcePath() + ".name");
 
-			this.namePlate = new GuiTextBox(buttons.size() + 2, resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - (topText ? 122 + this.topTextBox.getTextHeight(this.fontRendererObj) : 107), this.fontRendererObj.getStringWidth(name + 10), 20);
+			this.namePlate = new GuiTextBox(
+					buttons.size() + 2,
+					resize ? (this.width / 2) - (baseBoxSize / 2) : 20,
+					this.height - (topText ? 122 + this.topTextBox.getTextHeight(this.fontRendererObj) :
+							107), this.fontRendererObj.getStringWidth(name + 10), 20);
 
 			ITextComponent t = new TextComponentString(name);
 			t.setStyle(new Style().setColor(TextFormatting.YELLOW).setItalic(true));

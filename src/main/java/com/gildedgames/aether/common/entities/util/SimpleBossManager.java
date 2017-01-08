@@ -38,43 +38,54 @@ public class SimpleBossManager<T extends Entity> implements IBossManager<T>
 		this.entity = entity;
 	}
 
-	@Override public T getEntity()
+	@Override
+	public T getEntity()
 	{
 		return this.entity;
 	}
 
-	@Override public String getName() { return this.name; }
+	@Override
+	public String getName()
+	{
+		return this.name;
+	}
 
-	@Override public List<BossStage<T>> getStages()
+	@Override
+	public List<BossStage<T>> getStages()
 	{
 		return this.stages;
 	}
 
-	@Override public List<BossStageAction<T>> getActions()
+	@Override
+	public List<BossStageAction<T>> getActions()
 	{
 		return this.actions;
 	}
 
-	@Override public void addStageAction(BossStageAction<T> action)
+	@Override
+	public void addStageAction(BossStageAction<T> action)
 	{
 		this.actions.add(action);
 	}
 
-	@Override public void write(NBTTagCompound output)
+	@Override
+	public void write(NBTTagCompound output)
 	{
 		output.setString("name", this.name);
 		NBTHelper.fullySerializeList("stages", this.stages, output);
 		NBTHelper.fullySerializeList("actions", this.actions, output);
 	}
 
-	@Override public void read(NBTTagCompound input)
+	@Override
+	public void read(NBTTagCompound input)
 	{
 		this.name = input.getString("name");
 		this.stages = NBTHelper.fullyDeserializeList("stages", input, this.stages);
 		this.actions = NBTHelper.fullyDeserializeList("actions", input, this.actions);
 	}
 
-	@Override public void updateStagesAndActions()
+	@Override
+	public void updateStagesAndActions()
 	{
 		final List<BossStageAction<T>> toRemove = Lists.newArrayList();
 
@@ -96,7 +107,8 @@ public class SimpleBossManager<T extends Entity> implements IBossManager<T>
 		}
 	}
 
-	@Override public boolean hasBegun(BossStage stage)
+	@Override
+	public boolean hasBegun(BossStage stage)
 	{
 		boolean hasBegun = false;
 
@@ -112,7 +124,8 @@ public class SimpleBossManager<T extends Entity> implements IBossManager<T>
 		return hasBegun;
 	}
 
-	@Override public boolean hasBegun(Class<? extends BossStage> stage)
+	@Override
+	public boolean hasBegun(Class<? extends BossStage> stage)
 	{
 		boolean hasBegun = false;
 

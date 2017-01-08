@@ -29,7 +29,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreDictionary;
 import org.lwjgl.input.Mouse;
 
 import java.io.IOException;
@@ -90,7 +89,8 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 	{
 		super.mouseReleased(mouseX, mouseY, state);
 
-		if ((this.lastStack == null && this.playerInventory.getItemStack() != null) || (this.lastStack != null && this.playerInventory.getItemStack() == null))
+		if ((this.lastStack == null && this.playerInventory.getItemStack() != null) || (this.lastStack != null
+				&& this.playerInventory.getItemStack() == null))
 		{
 			this.updateCraftingOptions();
 		}
@@ -128,7 +128,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 		if (button instanceof GuiCraftingOption)
 		{
-			GuiCraftingOption option = (GuiCraftingOption)button;
+			GuiCraftingOption option = (GuiCraftingOption) button;
 
 			if (option.getRecipe() != null)
 			{
@@ -148,7 +148,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 							}
 							else if (req instanceof OreDictionaryRequirement)
 							{
-								OreDictionaryRequirement oreReq = (OreDictionaryRequirement)req;
+								OreDictionaryRequirement oreReq = (OreDictionaryRequirement) req;
 
 								this.materials.get(index).setRequiredObject(oreReq);
 							}
@@ -183,7 +183,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 	public void scrollTo(float p_148329_1_)
 	{
 		int i = (this.recipes.size() + 4 - 1) / 4 - 6;
-		int j = (int)((double)(p_148329_1_ * (float)i) + 0.5D);
+		int j = (int) ((double) (p_148329_1_ * (float) i) + 0.5D);
 
 		if (j < 0)
 		{
@@ -219,7 +219,8 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 		List<ItemStack> uniqueStacks = Lists.newArrayList();
 
-		outerloop: for (ItemStack stack : this.playerInventory.mainInventory)
+		outerloop:
+		for (ItemStack stack : this.playerInventory.mainInventory)
 		{
 			for (ItemStack uniqueStack : uniqueStacks)
 			{
@@ -243,7 +244,8 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 			{
 				if (group != null)
 				{
-					outer: for (ISimpleRecipe recipe : group.getRecipes())
+					outer:
+					for (ISimpleRecipe recipe : group.getRecipes())
 					{
 						for (ISimpleRecipe r : this.recipes) //TODO: Shouldn't be returning duplicate recipes..
 						{
@@ -312,7 +314,8 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 		{
 			for (int j = 0; j < 4; ++j)
 			{
-				GuiCraftingOption option = new GuiCraftingOption(j + i * 4, this.guiLeft - 126 + (j * 18), this.guiTop + (21 + i * 18), null);
+				GuiCraftingOption option = new GuiCraftingOption(
+						j + i * 4, this.guiLeft - 126 + (j * 18), this.guiTop + (21 + i * 18), null);
 
 				this.buttonList.add(option);
 				this.options.add(j + i * 4, option);
@@ -323,7 +326,8 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 		{
 			for (int j = 0; j < 3; ++j)
 			{
-				GuiRequiredMaterial material = new GuiRequiredMaterial(20 + (j + i * 3), this.guiLeft + 79 + (j * 18), this.guiTop + (17 + i * 18), null);
+				GuiRequiredMaterial material = new GuiRequiredMaterial(
+						20 + (j + i * 3), this.guiLeft + 79 + (j * 18), this.guiTop + (17 + i * 18), null);
 
 				material.resultStack = true;
 
@@ -337,7 +341,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 					}
 					else if (req instanceof OreDictionaryRequirement)
 					{
-						OreDictionaryRequirement oreReq = (OreDictionaryRequirement)req;
+						OreDictionaryRequirement oreReq = (OreDictionaryRequirement) req;
 
 						material.setRequiredObject(oreReq);
 					}
@@ -365,7 +369,8 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 	{
 		if (this.currentRecipe != null)
 		{
-			if (!RecipeUtil.areEqual(this.result.getRequiredObject(), this.currentRecipe.getResult()) && !RecipeUtil.canCraft(Minecraft.getMinecraft().thePlayer, this.currentRecipe))
+			if (!RecipeUtil.areEqual(this.result.getRequiredObject(), this.currentRecipe.getResult())
+					&& !RecipeUtil.canCraft(Minecraft.getMinecraft().thePlayer, this.currentRecipe))
 			{
 				this.result.setRequiredObject(this.currentRecipe.getResult());
 			}
@@ -397,7 +402,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 		if (this.isScrolling)
 		{
-			this.currentScroll = ((float)(mouseY - l) - 7.5F) / ((float)(j1 - l) - 15.0F);
+			this.currentScroll = ((float) (mouseY - l) - 7.5F) / ((float) (j1 - l) - 15.0F);
 			this.currentScroll = MathHelper.clamp_float(this.currentScroll, 0.0F, 1.0F);
 
 			this.scrollTo(this.currentScroll);
@@ -448,7 +453,8 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 		int k = j + 108;
 		this.mc.getTextureManager().bindTexture(BOOK_SCROLL_BAR);
 
-		this.drawTexturedModalRect(i, j + (int)((float)(k - j - 17) * this.currentScroll), 232 + (this.needsScrollBars() ? 0 : 12), 0, 12, 15);
+		this.drawTexturedModalRect(i,
+				j + (int) ((float) (k - j - 17) * this.currentScroll), 232 + (this.needsScrollBars() ? 0 : 12), 0, 12, 15);
 
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.disableLighting();
@@ -474,7 +480,8 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 			Gui.drawModalRectWithCustomSizedTexture(this.guiLeft - 126, this.guiTop + 21, 0, 0, 72, 108, 72, 126);
 
-			this.drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "Nothing left", this.guiLeft - 90, this.guiTop + 47, 0xFFFFFF);
+			this.drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "Nothing left",
+					this.guiLeft - 90, this.guiTop + 47, 0xFFFFFF);
 			this.drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "to craft!", this.guiLeft - 90, this.guiTop + 57, 0xFFFFFF);
 		}
 	}
@@ -504,7 +511,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 				i = -1;
 			}
 
-			this.currentScroll = (float)((double)this.currentScroll - (double)i / (double)j);
+			this.currentScroll = (float) ((double) this.currentScroll - (double) i / (double) j);
 			this.currentScroll = MathHelper.clamp_float(this.currentScroll, 0.0F, 1.0F);
 
 			this.scrollTo(this.currentScroll);

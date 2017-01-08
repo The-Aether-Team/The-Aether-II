@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.living.dungeon.labyrinth;
 
+import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AIAlarmClose;
 import com.gildedgames.aether.common.entities.living.mobs.EntityAetherMob;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
-import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AIAlarmClose;
 import com.gildedgames.aether.common.util.TickTimer;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;

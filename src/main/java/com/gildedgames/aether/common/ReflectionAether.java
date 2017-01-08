@@ -27,7 +27,7 @@ public class ReflectionAether
 	public static final ReflectionEntry X_SIZE = new ReflectionEntry("field_146999_f", "xSize");
 
 	public static final ReflectionEntry FONT_RENDERER_OBJ = new ReflectionEntry("field_146289_q", "fontRendererObj");
-	
+
 	public static final ReflectionEntry ENTITY_ARROW_DAMAGE = new ReflectionEntry("field_70255_ao", "damage");
 
 	public static final ReflectionEntry IN_MORE_WORLD_OPTIONS_DISPLAY = new ReflectionEntry("field_146344_y", "inMoreWorldOptionsDisplay");

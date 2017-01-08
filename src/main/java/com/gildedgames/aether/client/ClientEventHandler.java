@@ -5,8 +5,8 @@ import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.api.items.equipment.effects.IEffect;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.client.gui.menu.InDevelopmentWarning;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.client.ui.UiManager;
@@ -79,14 +79,15 @@ public class ClientEventHandler
 			{
 				if (mc.thePlayer.getRidingEntity() instanceof IMount)
 				{
-					IMount mount = (IMount)mc.thePlayer.getRidingEntity();
+					IMount mount = (IMount) mc.thePlayer.getRidingEntity();
 					IMountProcessor processor = mount.getMountProcessor();
 
 					if (processor instanceof FlyingMount)
 					{
-						FlyingMount flyingMount = (FlyingMount)processor;
+						FlyingMount flyingMount = (FlyingMount) processor;
 
-						DUMMY_GUI.drawCenteredString(mc.fontRendererObj, String.valueOf((int)(flyingMount.getData().getRemainingAirborneTime())), scaledRes.getScaledWidth() / 2, scaledRes.getScaledHeight() - 30, 0xFFFFFF);
+						DUMMY_GUI.drawCenteredString(mc.fontRendererObj, String.valueOf((int) (flyingMount.getData().getRemainingAirborneTime())),
+								scaledRes.getScaledWidth() / 2, scaledRes.getScaledHeight() - 30, 0xFFFFFF);
 					}
 				}
 			}
@@ -152,13 +153,15 @@ public class ClientEventHandler
 				{
 					if (mc.gameSettings.keyBindJump.isKeyDown() && !this.prevJumpBindState)
 					{
-						if (!player.isInWater() && aePlayer.getAbilitiesModule().getTicksAirborne() > 2 && !player.capabilities.isCreativeMode)
+						if (!player.isInWater() && aePlayer.getAbilitiesModule().getTicksAirborne() > 2
+								&& !player.capabilities.isCreativeMode)
 						{
 							if (aePlayer.getAbilitiesModule().performMidAirJump())
 							{
 								NetworkingAether.sendPacketToServer(new AetherMovementPacket(AetherMovementPacket.Action.EXTRA_JUMP));
 
-								world.playSound(player.posX, player.posY, player.posZ, SoundsAether.generic_wing_flap, SoundCategory.PLAYERS, 0.4f, 0.8f + (world.rand.nextFloat() * 0.6f), false);
+								world.playSound(player.posX, player.posY, player.posZ, SoundsAether.generic_wing_flap, SoundCategory.PLAYERS, 0.4f,
+										0.8f + (world.rand.nextFloat() * 0.6f), false);
 							}
 						}
 					}

@@ -106,7 +106,8 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 		//Can plant here check, not on clouds etc...
 		nPos = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ());
 
-		if (world.getBlockState(nPos).getBlock() != BlocksAether.aether_grass && world.getBlockState(nPos).getBlock() != BlocksAether.aether_dirt)
+		if (world.getBlockState(nPos).getBlock() != BlocksAether.aether_grass
+				&& world.getBlockState(nPos).getBlock() != BlocksAether.aether_dirt)
 		{
 			return false;
 		}
@@ -120,7 +121,8 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 				{
 					nPos = new BlockPos(x, y, z);
 
-					if ((x - pos.getX()) * (x - pos.getX()) + (y - pos.getY() - 8) * (y - pos.getY() - 8) + (z - pos.getZ()) * (z - pos.getZ()) < 16 + random.nextInt(5) && world.getBlockState(nPos).getBlock() == Blocks.AIR)
+					if ((x - pos.getX()) * (x - pos.getX()) + (y - pos.getY() - 8) * (y - pos.getY() - 8) + (z - pos.getZ()) * (z
+							- pos.getZ()) < 16 + random.nextInt(5) && world.getBlockState(nPos).getBlock() == Blocks.AIR)
 					{
 						this.setBlockAndNotifyAdequately(world, nPos, this.leafBlock);
 					}

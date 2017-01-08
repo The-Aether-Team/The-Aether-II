@@ -1,11 +1,11 @@
 package com.gildedgames.aether.common.entities.living.dungeon.labyrinth;
 
-import com.gildedgames.aether.common.entities.living.mobs.EntityAetherMob;
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.dungeon.labyrinth.AIPounceClose;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFloat;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFollowAttackTarget;
 import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
+import com.gildedgames.aether.common.entities.living.mobs.EntityAetherMob;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -24,7 +24,8 @@ public class EntityBattleSentry extends EntityAetherMob
 		{
 			private int hops;
 
-			@Override public int jumpDelay()
+			@Override
+			public int jumpDelay()
 			{
 				this.hops++;
 

@@ -2,8 +2,8 @@ package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.api.capabilites.entity.boss.IBoss;
 import com.gildedgames.aether.common.capabilities.player.PlayerAether;
-import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
+import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,7 +46,7 @@ public class BossChangePacket implements IMessage
 		ByteBufUtils.writeTag(buf, tag);
 	}
 
-	public static class Handler extends MessageHandlerClient<BossChangePacket,BossChangePacket>
+	public static class Handler extends MessageHandlerClient<BossChangePacket, BossChangePacket>
 	{
 		@Override
 		public BossChangePacket onMessage(BossChangePacket message, EntityPlayer player)
@@ -57,7 +57,7 @@ public class BossChangePacket implements IMessage
 
 			if (entity instanceof IBoss)
 			{
-				IBoss<?> boss = (IBoss)entity;
+				IBoss<?> boss = (IBoss) entity;
 
 				playerAether.getBossModule().setCurrentBoss(boss);
 			}

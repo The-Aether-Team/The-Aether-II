@@ -77,7 +77,8 @@ public class MinecraftInputProvider implements InputProvider
 			return false;
 		}
 
-		return this.getMouseX() >= dim.x() && this.getMouseY() >= dim.y() && this.getMouseX() < dim.x() + dim.width() && this.getMouseY() < dim.y() + dim.height();
+		return this.getMouseX() >= dim.x() && this.getMouseY() >= dim.y() && this.getMouseX() < dim.x() + dim.width()
+				&& this.getMouseY() < dim.y() + dim.height();
 	}
 
 	@Override
@@ -140,7 +141,8 @@ public class MinecraftInputProvider implements InputProvider
 	@Override
 	public void setMouseY(float y)
 	{
-		Mouse.setCursorPosition(Mouse.getX(), Display.getHeight() - MathHelper.floor_float((y / this.getScreenHeight() * this.mc.displayHeight + 1)));
+		Mouse.setCursorPosition(Mouse.getX(),
+				Display.getHeight() - MathHelper.floor_float((y / this.getScreenHeight() * this.mc.displayHeight + 1)));
 	}
 
 	@Override

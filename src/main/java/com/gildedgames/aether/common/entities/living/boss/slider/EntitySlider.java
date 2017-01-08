@@ -252,7 +252,7 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 	{
 		if (!this.worldObj.isRemote && source.getEntity() instanceof EntityPlayer)
 		{
-			EntityPlayer player = (EntityPlayer)source.getEntity();
+			EntityPlayer player = (EntityPlayer) source.getEntity();
 
 			if (this.canAttackSlider(player))
 			{
@@ -438,13 +438,14 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 			{
 				if (box != null)
 				{
-					BlockPos pos = new BlockPos(MathHelper.floor_double(box.minX + 0.5D), MathHelper.floor_double(box.minY + 0.5D), MathHelper.floor_double(box.minZ + 0.5D));
+					BlockPos pos = new BlockPos(MathHelper.floor_double(box.minX + 0.5D), MathHelper.floor_double(
+							box.minY + 0.5D), MathHelper.floor_double(box.minZ + 0.5D));
 
 					TileEntity te = this.worldObj.getTileEntity(pos);
 
 					if (te instanceof TileEntityLabyrinthBridge)
 					{
-						TileEntityLabyrinthBridge bridge = (TileEntityLabyrinthBridge)te;
+						TileEntityLabyrinthBridge bridge = (TileEntityLabyrinthBridge) te;
 
 						bridge.setDamage(bridge.getDamage() + 4);
 					}

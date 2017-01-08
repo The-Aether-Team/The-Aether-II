@@ -21,7 +21,8 @@ public class GuiXButton extends GuiButton
 	{
 		if (this.visible)
 		{
-			this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
+			this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width
+					&& mouseY < this.yPosition + this.height;
 
 			Minecraft.getMinecraft().getTextureManager().bindTexture(X_BUTTON);
 			Gui.drawModalRectWithCustomSizedTexture(this.xPosition, this.yPosition, 0, 0, 9, 9, 9, 9);

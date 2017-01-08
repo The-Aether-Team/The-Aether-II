@@ -23,7 +23,8 @@ public class DialogNodeBasic implements IDialogNode
 
 	private final List<IDialogAction> endActions;
 
-	public DialogNodeBasic(String id, ResourceLocation speaker, List<ITextComponent> content, List<IDialogButton> buttons, List<IDialogAction> endActions)
+	public DialogNodeBasic(String id, ResourceLocation speaker, List<ITextComponent> content, List<IDialogButton> buttons,
+			List<IDialogAction> endActions)
 	{
 		this.id = id;
 
@@ -34,25 +35,32 @@ public class DialogNodeBasic implements IDialogNode
 	}
 
 	@Override
-	public Collection<IDialogButton> getButtons() {
+	public Collection<IDialogButton> getButtons()
+	{
 		return this.buttons;
 	}
 
 	@Override
-	public Collection<ITextComponent> getContent() {
+	public Collection<ITextComponent> getContent()
+	{
 		return this.content;
 	}
 
 	@Override
-	public Collection<IDialogAction> getEndActions() { return this.endActions; }
+	public Collection<IDialogAction> getEndActions()
+	{
+		return this.endActions;
+	}
 
 	@Override
-	public ResourceLocation getSpeaker() {
+	public ResourceLocation getSpeaker()
+	{
 		return this.speaker;
 	}
 
 	@Override
-	public String getIdentifier() {
+	public String getIdentifier()
+	{
 		return this.id;
 	}
 }

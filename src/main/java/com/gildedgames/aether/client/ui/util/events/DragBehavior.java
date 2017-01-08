@@ -64,7 +64,8 @@ public class DragBehavior<T> extends GuiEvent<SlotStack<T>>
 			@Override
 			public boolean isMet(Gui gui)
 			{
-				return gui != null && gui.isVisible() && gui.isEnabled() && (gui.events().contains(SlotBehavior.class) || gui.events().contains(SlotStackFactory.class));
+				return gui != null && gui.isVisible() && gui.isEnabled() && (gui.events().contains(SlotBehavior.class)
+						|| gui.events().contains(SlotStackFactory.class));
 			}
 
 		}, input);

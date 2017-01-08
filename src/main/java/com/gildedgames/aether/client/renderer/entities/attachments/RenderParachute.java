@@ -1,14 +1,9 @@
 package com.gildedgames.aether.client.renderer.entities.attachments;
 
 import com.gildedgames.aether.client.models.entities.attachments.ModelParachute;
-import com.gildedgames.aether.client.models.entities.living.ModelAerwhale;
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -54,7 +49,7 @@ public class RenderParachute extends Render<EntityParachute>
 		this.model.Shape2.render(f);
 		this.model.Shape3.render(f);
 		this.model.Shape4.render(f);
-		
+
 		GL11.glDepthMask(false);
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();

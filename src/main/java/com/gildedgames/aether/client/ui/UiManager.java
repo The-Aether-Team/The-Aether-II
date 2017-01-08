@@ -6,18 +6,12 @@ import com.gildedgames.aether.client.ui.minecraft.util.decorators.MinecraftGui;
 import com.gildedgames.aether.client.ui.minecraft.viewing.MinecraftGuiViewer;
 import com.gildedgames.aether.client.ui.minecraft.viewing.MinecraftGuiWrapper;
 import com.gildedgames.aether.client.ui.util.factory.Factory;
-import com.google.common.collect.ImmutableList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class UiManager
 {
@@ -121,7 +115,8 @@ public class UiManager
 
 			Overlay overlay = (Overlay) o;
 
-			return this.frame.equals(overlay.getFrame()) && this.viewer.equals(overlay.getViewer()) && this.renderOrder.equals(overlay.getRenderOrder());
+			return this.frame.equals(overlay.getFrame()) && this.viewer.equals(overlay.getViewer())
+					&& this.renderOrder.equals(overlay.getRenderOrder());
 		}
 
 	}
@@ -171,7 +166,8 @@ public class UiManager
 		this.registerOverlay(uniqueSaveName, factory, viewer, null);
 	}
 
-	public void registerOverlay(String uniqueSaveName, Factory<GuiFrame> factory, GuiViewer viewer, RenderGameOverlayEvent.ElementType renderOrder)
+	public void registerOverlay(String uniqueSaveName, Factory<GuiFrame> factory, GuiViewer viewer,
+			RenderGameOverlayEvent.ElementType renderOrder)
 	{
 		this.registeredOverlays.put(uniqueSaveName, new RegisteredOverlay(factory, viewer, renderOrder));
 	}

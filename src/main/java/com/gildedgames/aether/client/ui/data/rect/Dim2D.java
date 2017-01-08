@@ -236,7 +236,8 @@ public class Dim2D implements Rect
 	{
 		String link = ", ";
 
-		return "X " + this.posX + " Y " + this.posY + link + "Area() Width: '" + this.width() + "', Height: '" + this.height() + "'" + link + "Centered() X: '" + this.centeredX + "', Y: '" + this.centeredY + "'" + link + "Scale() Value: '" + this.scale() + "'";
+		return "X " + this.posX + " Y " + this.posY + link + "Area() Width: '" + this.width() + "', Height: '" + this.height() + "'" + link
+				+ "Centered() X: '" + this.centeredX + "', Y: '" + this.centeredY + "'" + link + "Scale() Value: '" + this.scale() + "'";
 	}
 
 	@Override

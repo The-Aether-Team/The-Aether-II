@@ -42,7 +42,9 @@ public class StructureInjectionPacket implements IMessage
 
 	}
 
-	public StructureInjectionPacket(byte action, BlockPos pos, BlockPos relative, BlockPos size, TileEntityStructure.Mode mode, String structureName, Mirror mirror, Rotation rotation, String metadata, boolean ignoreEntities, boolean showsAir, boolean showsBoundingBox, float integrity, long seed, boolean showMessages)
+	public StructureInjectionPacket(byte action, BlockPos pos, BlockPos relative, BlockPos size, TileEntityStructure.Mode mode,
+			String structureName, Mirror mirror, Rotation rotation, String metadata, boolean ignoreEntities, boolean showsAir,
+			boolean showsBoundingBox, float integrity, long seed, boolean showMessages)
 	{
 		this.action = action;
 
@@ -129,7 +131,7 @@ public class StructureInjectionPacket implements IMessage
 		buf.writeBoolean(this.showMessages);
 	}
 
-	public static class Handler extends MessageHandlerServer<StructureInjectionPacket,StructureInjectionPacket>
+	public static class Handler extends MessageHandlerServer<StructureInjectionPacket, StructureInjectionPacket>
 	{
 		@Override
 		public StructureInjectionPacket onMessage(StructureInjectionPacket message, EntityPlayer player)
@@ -144,7 +146,7 @@ public class StructureInjectionPacket implements IMessage
 
 			if (tileentity1 instanceof TileEntityStructure)
 			{
-				TileEntityStructure tileentitystructure = (TileEntityStructure)tileentity1;
+				TileEntityStructure tileentitystructure = (TileEntityStructure) tileentity1;
 
 				tileentitystructure.setMode(message.mode);
 
@@ -172,37 +174,58 @@ public class StructureInjectionPacket implements IMessage
 				{
 					if (tileentitystructure.save())
 					{
-						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.save_success", s4));
+						if (message.showMessages)
+						{
+							player.addChatComponentMessage(new TextComponentTranslation("structure_block.save_success", s4));
+						}
 					}
 					else
 					{
-						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.save_failure", s4));
+						if (message.showMessages)
+						{
+							player.addChatComponentMessage(new TextComponentTranslation("structure_block.save_failure", s4));
+						}
 					}
 				}
 				else if (message.action == 3)
 				{
 					if (!tileentitystructure.isStructureLoadable())
 					{
-						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.load_not_found", s4));
+						if (message.showMessages)
+						{
+							player.addChatComponentMessage(new TextComponentTranslation("structure_block.load_not_found", s4));
+						}
 					}
 					else if (tileentitystructure.load())
 					{
-						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.load_success", s4));
+						if (message.showMessages)
+						{
+							player.addChatComponentMessage(new TextComponentTranslation("structure_block.load_success", s4));
+						}
 					}
 					else
 					{
-						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.load_prepare", s4));
+						if (message.showMessages)
+						{
+							player.addChatComponentMessage(new TextComponentTranslation("structure_block.load_prepare", s4));
+						}
 					}
 				}
 				else if (message.action == 4)
 				{
 					if (StructureInjectionLogic.detectSize(tileentitystructure))
 					{
-						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.size_success", s4));
+						if (message.showMessages)
+						{
+							player.addChatComponentMessage(new TextComponentTranslation("structure_block.size_success", s4));
+						}
 					}
 					else
 					{
-						if (message.showMessages) player.addChatComponentMessage(new TextComponentTranslation("structure_block.size_failure"));
+						if (message.showMessages)
+						{
+							player.addChatComponentMessage(new TextComponentTranslation("structure_block.size_failure"));
+						}
 					}
 				}
 

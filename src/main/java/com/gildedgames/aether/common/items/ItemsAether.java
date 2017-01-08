@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.items;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.items.ItemRarity;
 import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.common.AetherCore;
@@ -120,8 +119,8 @@ public class ItemsAether
 			valkyrie_boots = new ItemValkyrieArmor(EntityEquipmentSlot.FEET);
 
 	public static final Item golden_amber = new Item(),
-							taegore_hide = new Item(),
-			                burrukai_pelt = new Item();
+			taegore_hide = new Item(),
+			burrukai_pelt = new Item();
 
 	public static final ItemAetherFood blueberries = new ItemAetherFood(2, false),
 			enchanted_blueberry = new ItemAetherFood(6, false),
@@ -134,8 +133,8 @@ public class ItemsAether
 			taegore_steak = new ItemAetherFood(8, 0.8F, false),
 			burrukai_rib_cut = new ItemAetherFood(3, 0.3F, false),
 			burrukai_ribs = new ItemAetherFood(8, 0.8F, false),
-	        kirrid_loin = new ItemAetherFood(3, 0.3F, false),
-	        kirrid_cutlet = new ItemAetherFood(8, 0.8F, false);
+			kirrid_loin = new ItemAetherFood(3, 0.3F, false),
+			kirrid_cutlet = new ItemAetherFood(8, 0.8F, false);
 
 	public static final ItemAetherFood candy_corn = new ItemAetherFood(8, false),
 			cocoatrice = new ItemAetherFood(12, false),
@@ -211,7 +210,7 @@ public class ItemsAether
 	public static final Item icestone = new Item();
 
 	public static final Item skyroot_sign = new ItemSkyrootSign();
-	
+
 	public static final Item aether_portal_frame = new ItemTemplatePlacer(() -> GenerationAether.aether_portal);
 
 	public static final Item nether_portal_frame = new ItemTemplatePlacer(() -> GenerationAether.nether_portal);
@@ -232,10 +231,10 @@ public class ItemsAether
 			chain_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.CHAIN),
 			diamond_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.DIAMOND);
 
-    public static final Item pink_baby_swet = new ItemCompanion(EntityPinkBabySwet.class);
+	public static final Item pink_baby_swet = new ItemCompanion(EntityPinkBabySwet.class);
 
-    public static final Item shard_of_life = new ItemShardOfLife();
-    
+	public static final Item shard_of_life = new ItemShardOfLife();
+
 	public static final ItemAetherShield skyroot_shield = new ItemAetherShield(),
 			holystone_shield = new ItemAetherShield(),
 			zanite_shield = new ItemAetherShield(),
@@ -374,7 +373,8 @@ public class ItemsAether
 	public static final Item glamoured_cockatrice_keratin = new Item();
 
 	public static final Item irradiated_chunk = new ItemIrradiated(new RandomItemSelector(stack -> !(stack instanceof ItemIrradiated))),
-			irradiated_sword = new ItemIrradiated(new RandomItemSelector(item -> item.getUnlocalizedName().contains("sword") && !(item instanceof ItemIrradiated))),
+			irradiated_sword = new ItemIrradiated(new RandomItemSelector(item -> item.getUnlocalizedName().contains("sword")
+					&& !(item instanceof ItemIrradiated))),
 			irradiated_armor = new ItemIrradiated(new RandomItemSelector(item -> item instanceof ItemArmor)),
 			irradiated_tool = new ItemIrradiated(new RandomItemSelector(item -> item instanceof ItemTool)),
 			irradiated_ring = new ItemIrradiated(new RandomItemSelector(item ->
@@ -407,7 +407,7 @@ public class ItemsAether
 		registerItem("ambrosium_chunk", ambrosium_chunk.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("zanite_gemstone", zanite_gemstone.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("arkenium", arkenium.setCreativeTab(CreativeTabsAether.MATERIALS));
-        registerItem("arkenium_strip", arkenium_strip.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("arkenium_strip", arkenium_strip.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("icestone", icestone.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("arkenium_ore_item", arkenium_ore.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("gravitite_ore_item", gravitite_ore.setCreativeTab(CreativeTabsAether.MATERIALS));
@@ -420,7 +420,7 @@ public class ItemsAether
 		registerItem("skyroot_pickaxe", skyroot_pickaxe);
 		registerItem("skyroot_shovel", skyroot_shovel);
 		registerItem("skyroot_sword", skyroot_sword);
-        registerItem("skyroot_shield", skyroot_shield);
+		registerItem("skyroot_shield", skyroot_shield);
 
 		registerItem("holystone_axe", holystone_axe);
 		registerItem("holystone_pickaxe", holystone_pickaxe);
@@ -434,17 +434,17 @@ public class ItemsAether
 		registerItem("zanite_sword", zanite_sword);
 		registerItem("zanite_shield", zanite_shield);
 
-        registerItem("arkenium_axe", arkenium_axe);
-        registerItem("arkenium_pickaxe", arkenium_pickaxe);
-        registerItem("arkenium_shovel", arkenium_shovel);
-        registerItem("arkenium_sword", arkenium_sword);
-        registerItem("arkenium_shield", arkenium_shield);
+		registerItem("arkenium_axe", arkenium_axe);
+		registerItem("arkenium_pickaxe", arkenium_pickaxe);
+		registerItem("arkenium_shovel", arkenium_shovel);
+		registerItem("arkenium_sword", arkenium_sword);
+		registerItem("arkenium_shield", arkenium_shield);
 
 		registerItem("gravitite_axe", gravitite_axe);
 		registerItem("gravitite_pickaxe", gravitite_pickaxe);
 		registerItem("gravitite_shovel", gravitite_shovel);
 		registerItem("gravitite_sword", gravitite_sword);
-        registerItem("gravitite_shield", gravitite_shield);
+		registerItem("gravitite_shield", gravitite_shield);
 
 		registerItem("valkyrie_axe", valkyrie_axe);
 		registerItem("valkyrie_pickaxe", valkyrie_pickaxe);
@@ -456,31 +456,31 @@ public class ItemsAether
 		registerItem("zanite_chestplate", zanite_chestplate);
 		registerItem("zanite_leggings", zanite_leggings);
 		registerItem("zanite_boots", zanite_boots);
-        registerItem("zanite_gloves", zanite_gloves);
+		registerItem("zanite_gloves", zanite_gloves);
 
 		registerItem("gravitite_helmet", gravitite_helmet);
 		registerItem("gravitite_chestplate", gravitite_chestplate);
 		registerItem("gravitite_leggings", gravitite_leggings);
 		registerItem("gravitite_boots", gravitite_boots);
-        registerItem("gravitite_gloves", gravitite_gloves);
+		registerItem("gravitite_gloves", gravitite_gloves);
 
 		registerItem("neptune_helmet", neptune_helmet);
 		registerItem("neptune_chestplate", neptune_chestplate);
 		registerItem("neptune_leggings", neptune_leggings);
 		registerItem("neptune_boots", neptune_boots);
-        registerItem("neptune_gloves", neptune_gloves);
+		registerItem("neptune_gloves", neptune_gloves);
 
 		registerItem("phoenix_helmet", phoenix_helmet);
 		registerItem("phoenix_chestplate", phoenix_chestplate);
 		registerItem("phoenix_leggings", phoenix_leggings);
 		registerItem("phoenix_boots", phoenix_boots);
-        registerItem("phoenix_gloves", phoenix_gloves);
+		registerItem("phoenix_gloves", phoenix_gloves);
 
 		registerItem("valkyrie_helmet", valkyrie_helmet);
 		registerItem("valkyrie_chestplate", valkyrie_chestplate);
 		registerItem("valkyrie_leggings", valkyrie_leggings);
 		registerItem("valkyrie_boots", valkyrie_boots);
-        registerItem("valkyrie_gloves", valkyrie_gloves);
+		registerItem("valkyrie_gloves", valkyrie_gloves);
 
 		registerItem("golden_amber", golden_amber.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("taegore_hide", taegore_hide.setCreativeTab(CreativeTabsAether.MATERIALS));
@@ -570,14 +570,14 @@ public class ItemsAether
 		registerItem("candy_ring", candy_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("bone_ring", bone_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("skyroot_ring", skyroot_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
-		
+
 		registerItem("skyroot_sign", skyroot_sign.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-		
+
 		registerItem("aether_portal_frame", aether_portal_frame.setCreativeTab(CreativeTabsAether.UTILITY));
 		registerItem("nether_portal_frame", nether_portal_frame.setCreativeTab(CreativeTabs.TRANSPORTATION));
 		registerItem("end_portal_frame", end_portal_frame.setCreativeTab(CreativeTabs.TRANSPORTATION));
 
-        registerItem("shard_of_life", shard_of_life.setMaxStackSize(4).setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		registerItem("shard_of_life", shard_of_life.setMaxStackSize(4).setCreativeTab(CreativeTabsAether.CONSUMABLES));
 
 		registerItem("leather_gloves", leather_gloves.setCreativeTab(CreativeTabs.COMBAT));
 		registerItem("iron_gloves", iron_gloves.setCreativeTab(CreativeTabs.COMBAT));

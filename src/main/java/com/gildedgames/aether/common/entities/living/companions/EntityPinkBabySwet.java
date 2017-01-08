@@ -35,7 +35,7 @@ public class EntityPinkBabySwet extends EntityCompanion
 			this.faceEntity(this.getOwner(), 10.0F, 10.0F);
 		}
 
-		((HoppingMoveHelper)this.moveHelper).setDirection(this.rotationYaw);
+		((HoppingMoveHelper) this.moveHelper).setDirection(this.rotationYaw);
 
 		this.squishFactor += (this.squishAmount - this.squishFactor) * 0.5F;
 		this.prevSquishFactor = this.squishFactor;

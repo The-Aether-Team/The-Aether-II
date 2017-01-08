@@ -16,13 +16,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class ItemSkyrootBed extends Item {
+public class ItemSkyrootBed extends Item
+{
 	public ItemSkyrootBed()
 	{
 
 	}
 
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing,
+			float hitX, float hitY, float hitZ)
 	{
 		if (worldIn.isRemote)
 		{
@@ -43,7 +45,7 @@ public class ItemSkyrootBed extends Item {
 				pos = pos.up();
 			}
 
-			int i = MathHelper.floor_double((double)(playerIn.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+			int i = MathHelper.floor_double((double) (playerIn.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 			EnumFacing enumfacing = EnumFacing.getHorizontal(i);
 			BlockPos blockpos = pos.offset(enumfacing);
 
@@ -53,7 +55,8 @@ public class ItemSkyrootBed extends Item {
 				boolean flag2 = flag || worldIn.isAirBlock(pos);
 				boolean flag3 = flag1 || worldIn.isAirBlock(blockpos);
 
-				if (flag2 && flag3 && worldIn.getBlockState(pos.down()).isFullyOpaque() && worldIn.getBlockState(blockpos.down()).isFullyOpaque())
+				if (flag2 && flag3 && worldIn.getBlockState(pos.down()).isFullyOpaque()
+						&& worldIn.getBlockState(blockpos.down()).isFullyOpaque())
 				{
 					IBlockState iblockstate1 = BlocksAether.skyroot_bed.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.FALSE).withProperty(BlockBed.FACING, enumfacing).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
 
@@ -64,7 +67,8 @@ public class ItemSkyrootBed extends Item {
 					}
 
 					SoundType soundtype = iblockstate1.getBlock().getSoundType(iblockstate1, worldIn, pos, playerIn);
-					worldIn.playSound(null, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+					worldIn.playSound(null, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS,
+							(soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 					--stack.stackSize;
 					return EnumActionResult.SUCCESS;
 				}

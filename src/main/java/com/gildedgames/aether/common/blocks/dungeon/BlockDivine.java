@@ -59,12 +59,12 @@ public class BlockDivine extends BlockLabyrinth implements IBlockVariants
 	{
 		switch (stack.getMetadata())
 		{
-		case DIVINE:
-			return "divine";
-		case NORMAL:
-			return "normal";
-		default:
-			return "missingno";
+			case DIVINE:
+				return "divine";
+			case NORMAL:
+				return "normal";
+			default:
+				return "missingno";
 		}
 	}
 

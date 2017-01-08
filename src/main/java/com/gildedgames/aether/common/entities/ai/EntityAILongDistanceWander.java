@@ -9,11 +9,17 @@ public class EntityAILongDistanceWander extends EntityAIBase
 {
 
 	private final EntityCreature entity;
+
 	private double xPosition;
+
 	private double yPosition;
+
 	private double zPosition;
+
 	private final double speed;
+
 	private int executionChance;
+
 	private boolean mustUpdate;
 
 	private Vec3d longDistanceTarget;
@@ -38,7 +44,8 @@ public class EntityAILongDistanceWander extends EntityAIBase
 		{
 			this.longDistanceTarget = RandomPositionGenerator.findRandomTarget(this.entity, 100, 7);
 		}
-		else if (this.entity.getDistanceSq(this.longDistanceTarget.xCoord, this.longDistanceTarget.yCoord, this.longDistanceTarget.zCoord) < 10.0D * 10.0D)
+		else if (this.entity.getDistanceSq(this.longDistanceTarget.xCoord, this.longDistanceTarget.yCoord, this.longDistanceTarget.zCoord)
+				< 10.0D * 10.0D)
 		{
 			this.longDistanceTarget = RandomPositionGenerator.findRandomTarget(this.entity, 100, 7);
 		}

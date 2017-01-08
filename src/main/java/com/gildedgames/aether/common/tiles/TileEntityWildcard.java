@@ -1,13 +1,12 @@
 package com.gildedgames.aether.common.tiles;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.util.helpers.BlockUtil;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-
-import com.gildedgames.aether.common.util.helpers.BlockUtil;
 
 public class TileEntityWildcard extends TileEntitySchematicBlock
 {
@@ -64,7 +63,7 @@ public class TileEntityWildcard extends TileEntitySchematicBlock
 		}
 		else
 		{
-			ItemBlock itemBlock = (ItemBlock)chosenStack.getItem();
+			ItemBlock itemBlock = (ItemBlock) chosenStack.getItem();
 
 			block = itemBlock.getBlock();
 			damage = chosenStack.getItemDamage();

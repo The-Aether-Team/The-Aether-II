@@ -50,11 +50,12 @@ public class BlockAetherCraftingTable extends Block implements IBlockVariants
 	{
 		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
 
-		return (variant == BLIGHTWILLOW ? (int)(0.6F * 15.0F) : this.lightValue);
+		return (variant == BLIGHTWILLOW ? (int) (0.6F * 15.0F) : this.lightValue);
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem,
+			EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (!world.isRemote)
 		{

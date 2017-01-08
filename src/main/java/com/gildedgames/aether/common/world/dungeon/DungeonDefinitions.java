@@ -8,7 +8,6 @@ import com.gildedgames.aether.common.entities.living.dungeon.labyrinth.EntityTra
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;

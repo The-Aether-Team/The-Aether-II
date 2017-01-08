@@ -54,7 +54,7 @@ public class ConfigAether
 	@SubscribeEvent
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs)
 	{
-		if(eventArgs.getModID().equals(AetherCore.MOD_ID))
+		if (eventArgs.getModID().equals(AetherCore.MOD_ID))
 		{
 			this.loadAndSync();
 		}
@@ -90,8 +90,14 @@ public class ConfigAether
 		return this.sliderLabyrinthBiomeID;
 	}
 
-	public boolean getDisplayInventoryPattern() { return this.displayInventoryPattern; }
+	public boolean getDisplayInventoryPattern()
+	{
+		return this.displayInventoryPattern;
+	}
 
-	public boolean getDisplayTabsOnLeft() { return this.displayTabsOnLeft; }
+	public boolean getDisplayTabsOnLeft()
+	{
+		return this.displayTabsOnLeft;
+	}
 
 }

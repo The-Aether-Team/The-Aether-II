@@ -1,11 +1,11 @@
 package com.gildedgames.aether.common.world.dimensions.aether;
 
+import com.gildedgames.aether.api.util.BlockPosDimension;
+import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.registry.GenerationAether;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
-import com.gildedgames.aether.api.util.BlockPosDimension;
-import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.util.helpers.BlockUtil;
 import com.gildedgames.aether.common.util.io.NBTHelper;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenTemplate;
@@ -285,7 +285,8 @@ public class TeleporterAether extends Teleporter implements NBT
 
 						final IBlockState blockID = world.getBlockState(pos);
 
-						if (BlockUtil.isSolid(blockID, world, pos) && GenerationAether.aether_portal_for_world.canGenerate(world, pos.up(), settings, true, false))
+						if (BlockUtil.isSolid(blockID, world, pos)
+								&& GenerationAether.aether_portal_for_world.canGenerate(world, pos.up(), settings, true, false))
 						{
 							hasFoundPosition = true;
 						}

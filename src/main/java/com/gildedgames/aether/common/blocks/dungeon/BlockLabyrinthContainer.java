@@ -28,7 +28,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class BlockLabyrinthContainer extends Block implements IBlockVariants {
+public class BlockLabyrinthContainer extends Block implements IBlockVariants
+{
 	private static final AxisAlignedBB CONTAINER_SMALL_AABB = new AxisAlignedBB(0.2D, 0.0D, 0.2D, 0.8D, 0.6D, 0.8D),
 			CONTAINER_LARGE_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.7D, 0.9D);
 
@@ -68,9 +69,11 @@ public class BlockLabyrinthContainer extends Block implements IBlockVariants {
 	@Override
 	public void onBlockClicked(World world, BlockPos pos, EntityPlayer player)
 	{
-		world.playSound(player, pos, SoundsAether.break_labyrinth_container, SoundCategory.NEUTRAL, 0.4f, 0.8f + (world.rand.nextFloat() * 0.4f));
+		world.playSound(player, pos, SoundsAether.break_labyrinth_container, SoundCategory.NEUTRAL, 0.4f,
+				0.8f + (world.rand.nextFloat() * 0.4f));
 
-		for (int i = 0; i < 12; i++) {
+		for (int i = 0; i < 12; i++)
+		{
 			double x = pos.getX() + world.rand.nextDouble();
 			double y = pos.getY() + world.rand.nextDouble();
 			double z = pos.getZ() + world.rand.nextDouble();
@@ -94,7 +97,8 @@ public class BlockLabyrinthContainer extends Block implements IBlockVariants {
 
 					amount -= split;
 
-					world.spawnEntityInWorld(new EntityXPOrb(world, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, split));
+					world.spawnEntityInWorld(new EntityXPOrb(world,
+							(double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, split));
 				}
 			}
 			else

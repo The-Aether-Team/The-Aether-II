@@ -1,34 +1,15 @@
 package com.gildedgames.aether.common.items.misc;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
-import com.gildedgames.aether.common.entities.genes.moa.MoaGenePoolDataSet;
-import com.gildedgames.aether.common.entities.genes.util.DataGene;
-import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
-import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.tiles.TileEntityMoaEgg;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
-import java.awt.*;
+import java.awt.Color;
 import java.util.List;
 
 public class ItemMoaFeather extends Item
@@ -102,7 +83,6 @@ public class ItemMoaFeather extends Item
 
 		return I18n.format(super.getUnlocalizedName(stack) + ".name");
 	}
-
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack)

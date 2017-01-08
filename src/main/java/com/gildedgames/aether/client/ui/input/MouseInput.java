@@ -44,7 +44,8 @@ public class MouseInput extends ButtonInput
 
 			if (event.getButton() == this.getButton())
 			{
-				return super.equals(obj) && (event.getMotion() == this.getMotion() || event.getMotion() == MouseMotion.BOTH || this.getMotion() == MouseMotion.BOTH);
+				return super.equals(obj) && (event.getMotion() == this.getMotion() || event.getMotion() == MouseMotion.BOTH
+						|| this.getMotion() == MouseMotion.BOTH);
 			}
 		}
 

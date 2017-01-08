@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.blocks.construction;
 
 import com.gildedgames.aether.client.renderer.particles.ParticleAetherPortal;
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.SoundType;
@@ -63,13 +63,13 @@ public class BlockAetherPortal extends BlockBreakable
 	{
 		switch (state.getValue(PROPERTY_AXIS))
 		{
-		case X:
-			return X_AABB;
-		case Y:
-		default:
-			return Y_AABB;
-		case Z:
-			return Z_AABB;
+			case X:
+				return X_AABB;
+			case Y:
+			default:
+				return Y_AABB;
+			case Z:
+				return Z_AABB;
 		}
 	}
 
@@ -85,7 +85,11 @@ public class BlockAetherPortal extends BlockBreakable
 	{
 		if (rand.nextInt(150) == 0)
 		{
-			world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundsAether.glowstone_portal_hum, SoundCategory.BLOCKS, 0.2F, (rand.nextFloat() * 0.2F) + 0.9F, false);
+			world.playSound(
+					pos.getX() + 0.5D,
+					pos.getY() + 0.5D,
+					pos.getZ() + 0.5D, SoundsAether.glowstone_portal_hum, SoundCategory.BLOCKS, 0.2F,
+					(rand.nextFloat() * 0.2F) + 0.9F, false);
 		}
 
 		for (int count = 0; count < 4; count++)
@@ -144,12 +148,15 @@ public class BlockAetherPortal extends BlockBreakable
 
 		final boolean westFlag = world.getBlockState(pos.west()).getBlock() == this && world.getBlockState(pos.west(2)).getBlock() != this;
 		final boolean eastFlag = world.getBlockState(pos.east()).getBlock() == this && world.getBlockState(pos.east(2)).getBlock() != this;
-		final boolean northFlag = world.getBlockState(pos.north()).getBlock() == this && world.getBlockState(pos.north(2)).getBlock() != this;
-		final boolean southFlag = world.getBlockState(pos.south()).getBlock() == this && world.getBlockState(pos.south(2)).getBlock() != this;
+		final boolean northFlag =
+				world.getBlockState(pos.north()).getBlock() == this && world.getBlockState(pos.north(2)).getBlock() != this;
+		final boolean southFlag =
+				world.getBlockState(pos.south()).getBlock() == this && world.getBlockState(pos.south(2)).getBlock() != this;
 		final boolean wexFlag = westFlag || eastFlag || axis == EnumFacing.Axis.X;
 		final boolean nszFlag = northFlag || southFlag || axis == EnumFacing.Axis.Z;
 
-		return wexFlag && side == EnumFacing.WEST || (wexFlag && side == EnumFacing.EAST || (nszFlag && side == EnumFacing.NORTH || nszFlag && side == EnumFacing.SOUTH));
+		return wexFlag && side == EnumFacing.WEST || (wexFlag && side == EnumFacing.EAST || (nszFlag && side == EnumFacing.NORTH
+				|| nszFlag && side == EnumFacing.SOUTH));
 	}
 
 	@Override
@@ -171,12 +178,12 @@ public class BlockAetherPortal extends BlockBreakable
 			case CLOCKWISE_90:
 				switch (state.getValue(PROPERTY_AXIS))
 				{
-				case X:
-					return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.Z);
-				case Z:
-					return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.X);
-				default:
-					return state;
+					case X:
+						return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.Z);
+					case Z:
+						return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.X);
+					default:
+						return state;
 				}
 
 			default:
@@ -305,7 +312,8 @@ public class BlockAetherPortal extends BlockBreakable
 			{
 				final BlockPos offsetPos = pos.offset(facing, x);
 
-				if (!this.isBlockSuitable(this.world.getBlockState(offsetPos)) || this.world.getBlockState(offsetPos.down()).getBlock() != Blocks.GLOWSTONE)
+				if (!this.isBlockSuitable(this.world.getBlockState(offsetPos))
+						|| this.world.getBlockState(offsetPos.down()).getBlock() != Blocks.GLOWSTONE)
 				{
 					break;
 				}
@@ -382,7 +390,8 @@ public class BlockAetherPortal extends BlockBreakable
 
 		protected boolean isBlockSuitable(IBlockState state)
 		{
-			return state.getMaterial() == Material.AIR || state.getBlock() == Blocks.WATER || state.getBlock() == BlocksAether.aether_portal;
+			return state.getMaterial() == Material.AIR || state.getBlock() == Blocks.WATER
+					|| state.getBlock() == BlocksAether.aether_portal;
 		}
 
 		public boolean isWithinSizeBounds()

@@ -27,7 +27,8 @@ public class DialogButtonBackToRoot implements IDialogButton
 	}
 
 	@Override
-	public void onClicked(IDialogController controller) {
+	public void onClicked(IDialogController controller)
+	{
 		controller.setNode(controller.getCurrentScene().getRootNode().getIdentifier());
 	}
 

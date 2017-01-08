@@ -103,7 +103,8 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 									BlockPos blockpos = new BlockPos(k1, i3, i2);
 									state = worldIn.getBlockState(blockpos);
 
-									if (state.getBlock().isAir(state, worldIn, blockpos) || state.getBlock().isLeaves(state, worldIn, blockpos) || state.getMaterial() == Material.VINE)
+									if (state.getBlock().isAir(state, worldIn, blockpos)
+											|| state.getBlock().isLeaves(state, worldIn, blockpos) || state.getMaterial() == Material.VINE)
 									{
 										this.setBlockAndNotifyAdequately(worldIn, blockpos, this.leavesState);
 									}

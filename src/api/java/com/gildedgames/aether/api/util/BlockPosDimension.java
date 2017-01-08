@@ -35,7 +35,8 @@ public class BlockPosDimension extends BlockPos
 		if (object instanceof BlockPosDimension)
 		{
 			BlockPosDimension dungeonPosition = (BlockPosDimension) object;
-			return dungeonPosition.getX() == this.getX() && dungeonPosition.getY() == this.getY() && dungeonPosition.getZ() == this.getZ() && dungeonPosition.dimensionId == this.dimensionId;
+			return dungeonPosition.getX() == this.getX() && dungeonPosition.getY() == this.getY() && dungeonPosition.getZ() == this.getZ()
+					&& dungeonPosition.dimensionId == this.dimensionId;
 		}
 
 		return false;

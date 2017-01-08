@@ -15,7 +15,6 @@ import com.gildedgames.aether.client.renderer.items.*;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.client.ui.UiManager;
 import com.gildedgames.aether.client.ui.minecraft.viewing.MinecraftGuiViewer;
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonProxy;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;

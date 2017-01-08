@@ -39,7 +39,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockVariant
 	{
 		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
 
-		return (variant == MOONLIT_BLOOM ? (int)(0.6F * 15.0F) : this.lightValue);
+		return (variant == MOONLIT_BLOOM ? (int) (0.6F * 15.0F) : this.lightValue);
 	}
 
 	@Override

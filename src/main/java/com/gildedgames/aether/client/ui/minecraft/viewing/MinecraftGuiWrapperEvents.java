@@ -46,7 +46,9 @@ public class MinecraftGuiWrapperEvents implements TickInfo
 				if (this.mc.currentScreen != null)
 				{
 					if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.GuiScreenEvent.MouseInputEvent.Pre(this.mc.currentScreen)))
+					{
 						continue;
+					}
 
 					try
 					{
@@ -186,7 +188,8 @@ public class MinecraftGuiWrapperEvents implements TickInfo
 
 				InputProvider input = viewer.getInputProvider();
 
-				if (this.width != input.getScreenWidth() || this.height != input.getScreenHeight() || this.scaleFactor != input.getScaleFactor())
+				if (this.width != input.getScreenWidth() || this.height != input.getScreenHeight()
+						|| this.scaleFactor != input.getScaleFactor())
 				{
 					viewer.getInputProvider().refreshResolution();
 

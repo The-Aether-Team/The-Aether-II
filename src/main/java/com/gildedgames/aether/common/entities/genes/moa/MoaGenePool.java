@@ -2,15 +2,15 @@ package com.gildedgames.aether.common.entities.genes.moa;
 
 import com.gildedgames.aether.api.genes.GeneRegion;
 import com.gildedgames.aether.api.genes.IGeneStorage;
+import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.entities.genes.util.DataGene;
 import com.gildedgames.aether.common.entities.genes.util.GenePool;
 import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
 import com.gildedgames.aether.common.entities.genes.util.SimpleGeneStorage;
-import com.gildedgames.aether.api.util.NBT;
 import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.List;
 import java.util.Random;
 
@@ -111,7 +111,10 @@ public class MoaGenePool extends GenePool<NBTTagCompound, NBTTagCompound> implem
 		return this.marks;
 	}
 
-	public GeneRegion<DataGene<Integer>> getWingStrength() { return this.wingStrength; }
+	public GeneRegion<DataGene<Integer>> getWingStrength()
+	{
+		return this.wingStrength;
+	}
 
 	@Override
 	public void write(NBTTagCompound output)

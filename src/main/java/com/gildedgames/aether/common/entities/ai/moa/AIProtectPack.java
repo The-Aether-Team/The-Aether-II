@@ -17,7 +17,9 @@ public class AIProtectPack extends EntityAITarget
 	{
 		super(par1EntityCreature, false, true);
 		if (par1EntityCreature instanceof EntityGroupMember)
+		{
 			this.animal = (EntityGroupMember) par1EntityCreature;
+		}
 		this.setMutexBits(1);
 	}
 

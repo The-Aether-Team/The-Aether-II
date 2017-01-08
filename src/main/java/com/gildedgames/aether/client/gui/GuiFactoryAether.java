@@ -9,22 +9,26 @@ import java.util.Set;
 public class GuiFactoryAether implements IModGuiFactory
 {
 
-	@Override public void initialize(Minecraft minecraftInstance)
+	@Override
+	public void initialize(Minecraft minecraftInstance)
 	{
 
 	}
 
-	@Override public Class<? extends GuiScreen> mainConfigGuiClass()
+	@Override
+	public Class<? extends GuiScreen> mainConfigGuiClass()
 	{
 		return GuiConfigAether.class;
 	}
 
-	@Override public Set<RuntimeOptionCategoryElement> runtimeGuiCategories()
+	@Override
+	public Set<RuntimeOptionCategoryElement> runtimeGuiCategories()
 	{
 		return null;
 	}
 
-	@Override public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement element)
+	@Override
+	public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement element)
 	{
 		return null;
 	}

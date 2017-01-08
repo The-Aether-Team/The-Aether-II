@@ -72,18 +72,24 @@ public class GuiTextBox extends GuiElement
 			{
 				if (this.bottomToTop)
 				{
-					Gui.drawRect(this.xPosition, this.yPosition + this.height - (splitCount * fontRenderer.FONT_HEIGHT) - 10, this.xPosition + this.width, this.yPosition + this.height, Integer.MIN_VALUE);
+					Gui.drawRect(this.xPosition,
+							this.yPosition + this.height - (splitCount * fontRenderer.FONT_HEIGHT) - 10,
+							this.xPosition + this.width, this.yPosition + this.height, Integer.MIN_VALUE);
 				}
 				else
 				{
-					Gui.drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, Integer.MIN_VALUE);
+					Gui.drawRect(this.xPosition, this.yPosition,
+							this.xPosition + this.width, this.yPosition + this.height, Integer.MIN_VALUE);
 				}
 			}
 
 			for (int index = 0; index < splitCount; ++index)
 			{
 				ITextComponent text = this.cachedSplitText.get(index);
-				fontRenderer.drawStringWithShadow(text.getUnformattedText(), this.xPosition + 5, this.yPosition + (this.bottomToTop ? this.height - 5 : 5) + index * fontRenderer.FONT_HEIGHT - (this.bottomToTop ? (splitCount * fontRenderer.FONT_HEIGHT) : 0), 0xFFFFFF);
+				fontRenderer.drawStringWithShadow(text.getUnformattedText(),
+						this.xPosition + 5,
+						this.yPosition + (this.bottomToTop ? this.height - 5 : 5) + index * fontRenderer.FONT_HEIGHT - (this.bottomToTop ?
+								(splitCount * fontRenderer.FONT_HEIGHT) : 0), 0xFFFFFF);
 			}
 		}
 	}

@@ -40,12 +40,13 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fluids.*;
-import net.minecraftforge.fluids.capability.*;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
-import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.io.File;
@@ -125,7 +126,8 @@ public class CommonEvents
 			boolean hasWaterFluid = fluidStack != null && fluidStack.getFluid().getName().equals(FluidRegistry.WATER.getName());
 			boolean hasLavaFluid = fluidStack != null && fluidStack.getFluid().getName().equals(FluidRegistry.LAVA.getName());
 
-			if (hasWaterFluid || event.getEmptyBucket().getItem() == Items.WATER_BUCKET || event.getEmptyBucket().getItem() == ItemsAether.skyroot_water_bucket)
+			if (hasWaterFluid || event.getEmptyBucket().getItem() == Items.WATER_BUCKET
+					|| event.getEmptyBucket().getItem() == ItemsAether.skyroot_water_bucket)
 			{
 				CommonEvents.onWaterPlaced(event, player, pos);
 			}
@@ -171,7 +173,7 @@ public class CommonEvents
 
 		if (entity instanceof EntityPlayer)
 		{
-			EntityPlayer player = (EntityPlayer)entity;
+			EntityPlayer player = (EntityPlayer) entity;
 
 			if (WorldAetherOptionsOverlay.toggle)
 			{
@@ -224,7 +226,7 @@ public class CommonEvents
 			{
 				if (entity instanceof EntityPlayer)
 				{
-					EntityPlayer player = (EntityPlayer)entity;
+					EntityPlayer player = (EntityPlayer) entity;
 					PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 					if (playerAether.getParachuteModule().isParachuting())
@@ -335,7 +337,7 @@ public class CommonEvents
 
 			if (!toWorld.isRemote)
 			{
-				EntityPlayerMP player = (EntityPlayerMP)entity;
+				EntityPlayerMP player = (EntityPlayerMP) entity;
 
 				playerList.transferPlayerToDimension((EntityPlayerMP) entity, dimension, teleporter);
 				player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, 0, 0);
@@ -452,7 +454,8 @@ public class CommonEvents
 					event.getWorld().spawnParticle(EnumParticleTypes.CLOUD, parX, parY, parZ, 0, 0, 0);
 				}
 
-				event.getWorld().playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_GENERIC_BURN, SoundCategory.NEUTRAL, 0.8f, 1.2f + (rand.nextFloat() * 0.2f), false);
+				event.getWorld().playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_GENERIC_BURN, SoundCategory.NEUTRAL, 0.8f,
+						1.2f + (rand.nextFloat() * 0.2f), false);
 			}
 
 			event.setCanceled(true);
@@ -484,7 +487,8 @@ public class CommonEvents
 				{
 					float damage = event.getAmount();
 
-					if (damage >= 3.0F && player.getActiveItemStack() != null && player.getActiveItemStack().getItem() instanceof ItemAetherShield)
+					if (damage >= 3.0F && player.getActiveItemStack() != null
+							&& player.getActiveItemStack().getItem() instanceof ItemAetherShield)
 					{
 						int itemDamage = 1 + MathHelper.floor_float(damage);
 

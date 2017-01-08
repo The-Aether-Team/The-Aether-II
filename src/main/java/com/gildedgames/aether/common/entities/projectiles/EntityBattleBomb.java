@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.projectiles;
 
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.entities.living.dungeon.labyrinth.EntityBattleGolem;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.DamageSource;
@@ -41,7 +41,8 @@ public class EntityBattleBomb extends EntityThrowable
 
 		for (int j = 0; j < 8; ++j)
 		{
-			this.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY, this.posZ, 0.1D + (this.rand.nextDouble() * 0.1D), 0.1D + (this.rand.nextDouble() * 0.1D), 0.1D + (this.rand.nextDouble() * 0.1D));
+			this.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY, this.posZ,
+					0.1D + (this.rand.nextDouble() * 0.1D), 0.1D + (this.rand.nextDouble() * 0.1D), 0.1D + (this.rand.nextDouble() * 0.1D));
 		}
 
 		this.playSound(SoundsAether.detonate, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
@@ -51,5 +52,5 @@ public class EntityBattleBomb extends EntityThrowable
 			this.setDead();
 		}
 	}
-	
+
 }

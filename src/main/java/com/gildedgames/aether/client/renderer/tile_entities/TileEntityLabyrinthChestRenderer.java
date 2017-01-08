@@ -73,18 +73,18 @@ public class TileEntityLabyrinthChestRenderer extends TileEntitySpecialRenderer<
 
 		switch (metadata)
 		{
-		case 2:
-			angle = 180;
-			break;
-		case 3:
-			angle = 0;
-			break;
-		case 4:
-			angle = 90;
-			break;
-		case 5:
-			angle = -90;
-			break;
+			case 2:
+				angle = 180;
+				break;
+			case 3:
+				angle = 0;
+				break;
+			case 4:
+				angle = 90;
+				break;
+			case 5:
+				angle = -90;
+				break;
 		}
 
 		GlStateManager.translate(0.5F, -0.5F, -0.5F);
@@ -96,7 +96,7 @@ public class TileEntityLabyrinthChestRenderer extends TileEntitySpecialRenderer<
 		lidAngle = 1.0F - lidAngle * lidAngle * lidAngle;
 
 			/*
-	    ModelRenderer Main_Top;
+		ModelRenderer Main_Top;
     ModelRenderer Main_Bottom;
     ModelRenderer Hinge_Left;
     ModelRenderer Hinge_Right;

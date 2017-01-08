@@ -88,7 +88,8 @@ public class BlockSkyrootChest extends BlockChest
 
 	private boolean isOcelotSittingOnChest(World worldIn, BlockPos pos)
 	{
-		Iterator<EntityOcelot> iterator = worldIn.getEntitiesWithinAABB(EntityOcelot.class, new AxisAlignedBB(pos.getX(), pos.getY() + 1, pos.getZ(), pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1)).iterator();
+		Iterator<EntityOcelot> iterator = worldIn.getEntitiesWithinAABB(EntityOcelot.class, new AxisAlignedBB(pos.getX(),
+				pos.getY() + 1, pos.getZ(), pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1)).iterator();
 
 		EntityOcelot ocelot;
 

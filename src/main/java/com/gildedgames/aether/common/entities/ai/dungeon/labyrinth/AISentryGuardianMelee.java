@@ -31,7 +31,8 @@ public class AISentryGuardianMelee extends EntityAI<EntitySentryGuardian>
 	@Override
 	public boolean shouldExecute()
 	{
-		return this.entity().getAttackTarget() != null && this.entity().canEntityBeSeen(this.entity().getAttackTarget()) && !this.entity().isOverheating();
+		return this.entity().getAttackTarget() != null && this.entity().canEntityBeSeen(this.entity().getAttackTarget())
+				&& !this.entity().isOverheating();
 	}
 
 	@Override

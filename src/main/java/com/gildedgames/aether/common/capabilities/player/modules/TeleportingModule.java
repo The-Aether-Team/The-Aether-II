@@ -3,9 +3,9 @@ package com.gildedgames.aether.common.capabilities.player.modules;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
 import com.gildedgames.aether.common.capabilities.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import net.minecraft.client.Minecraft;
 import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
@@ -62,7 +62,8 @@ public class TeleportingModule extends PlayerAetherModule
 				this.teleportToAether();
 			}
 		}
-		else if (this.getEntity().isPotionActive(MobEffects.NAUSEA) && this.getEntity().getActivePotionEffect(MobEffects.NAUSEA).getDuration() > 60)
+		else if (this.getEntity().isPotionActive(MobEffects.NAUSEA)
+				&& this.getEntity().getActivePotionEffect(MobEffects.NAUSEA).getDuration() > 60)
 		{
 			this.timeInPortal += 0.006666667F;
 
@@ -116,9 +117,10 @@ public class TeleportingModule extends PlayerAetherModule
 
 		if (this.getEntity().worldObj instanceof WorldServer)
 		{
-			WorldServer worldServer = (WorldServer)this.getEntity().worldObj;
+			WorldServer worldServer = (WorldServer) this.getEntity().worldObj;
 
-			final int transferToID = this.getEntity().worldObj.provider.getDimensionType() == DimensionsAether.AETHER ? 0 : AetherCore.CONFIG.getAetherDimID();
+			final int transferToID = this.getEntity().worldObj.provider.getDimensionType() == DimensionsAether.AETHER ? 0 :
+					AetherCore.CONFIG.getAetherDimID();
 
 			CommonEvents.teleportEntity(this.getEntity(), worldServer, AetherCore.TELEPORTER, transferToID);
 		}

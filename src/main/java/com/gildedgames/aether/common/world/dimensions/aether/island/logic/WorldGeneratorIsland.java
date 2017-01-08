@@ -23,7 +23,7 @@ public class WorldGeneratorIsland
 
 	public double getBias(double time, double bias)
 	{
-		return (time / ((((1.0/bias) - 2.0)*(1.0 - time))+1.0));
+		return (time / ((((1.0 / bias) - 2.0) * (1.0 - time)) + 1.0));
 	}
 
 	public void genIslandForChunk(ChunkPrimer primer, IslandData data, IslandSector sector, int chunkX, int chunkZ)
@@ -53,7 +53,8 @@ public class WorldGeneratorIsland
 
 				//double flat = GenUtil.octavedNoise(this.simplex, 4, 0.7D, 2.5D, nx, nz);
 
-				double distNX = ((stepX - data.getBounds().getMinX()) / width) - 0.5; // Subtract sector coords from nx/ny so that the noise is within range of the island center
+				double distNX = ((stepX - data.getBounds().getMinX()) / width)
+						- 0.5; // Subtract sector coords from nx/ny so that the noise is within range of the island center
 				double distNZ = ((stepZ - data.getBounds().getMinY()) / length) - 0.5;
 
 				double noise1 = this.simplex.eval(nx, nz);
@@ -65,7 +66,8 @@ public class WorldGeneratorIsland
 
 				double dist = 2.0 * Math.sqrt((distNX * distNX) + (distNZ * distNZ)); // Get distance from center of Island
 
-				value = (value + 0.0) - (0.7 * Math.pow(dist, 4)); // Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
+				value = (value + 0.0) - (0.7
+						* Math.pow(dist, 4)); // Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
 
 				double heightValue = value + 1.0;//Math.pow(value, 0.7);
 
@@ -86,7 +88,7 @@ public class WorldGeneratorIsland
 						{
 							if (biome instanceof BiomeAetherBase)
 							{
-								BiomeAetherBase aetherBiome = (BiomeAetherBase)biome;
+								BiomeAetherBase aetherBiome = (BiomeAetherBase) biome;
 
 								primer.setBlockState((int) x, (int) y, (int) z, aetherBiome.getCoastalBlock());
 							}
@@ -103,7 +105,7 @@ public class WorldGeneratorIsland
 						{
 							if (biome instanceof BiomeAetherBase)
 							{
-								BiomeAetherBase aetherBiome = (BiomeAetherBase)biome;
+								BiomeAetherBase aetherBiome = (BiomeAetherBase) biome;
 
 								primer.setBlockState((int) x, (int) y, (int) z, aetherBiome.getCoastalBlock());
 							}
@@ -126,9 +128,11 @@ public class WorldGeneratorIsland
 
 					double value3d = noise3d1 + noise3d2;
 
-					double dist3d = 2.0 * Math.sqrt((distNX * distNX) + (ny * ny) + (distNZ * distNZ)); // Get distance from center of Island
+					double dist3d =
+							2.0 * Math.sqrt((distNX * distNX) + (ny * ny) + (distNZ * distNZ)); // Get distance from center of Island
 
-					value3d = (value3d + 0.10) - (1.65 * Math.pow(dist3d, 1.50)); // Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
+					value3d = (value3d + 0.10) - (1.65
+							* Math.pow(dist3d, 1.50)); // Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
 
 					value3d -= dist;
 

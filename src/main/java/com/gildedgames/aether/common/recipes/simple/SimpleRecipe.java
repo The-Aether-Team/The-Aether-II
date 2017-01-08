@@ -41,7 +41,7 @@ public class SimpleRecipe implements ISimpleRecipe
 	{
 		if (obj instanceof SimpleRecipe)
 		{
-			SimpleRecipe r = (SimpleRecipe)obj;
+			SimpleRecipe r = (SimpleRecipe) obj;
 
 			if (RecipeUtil.areEqual(r.getResult(), this.getResult()))
 			{

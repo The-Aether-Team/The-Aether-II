@@ -2,8 +2,8 @@ package com.gildedgames.aether.common.capabilities.instances;
 
 import com.gildedgames.aether.api.capabilites.instances.IPlayerInstances;
 import com.gildedgames.aether.api.capabilites.instances.Instance;
-import com.gildedgames.aether.common.util.io.NBTHelper;
 import com.gildedgames.aether.api.util.BlockPosDimension;
+import com.gildedgames.aether.common.util.io.NBTHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;

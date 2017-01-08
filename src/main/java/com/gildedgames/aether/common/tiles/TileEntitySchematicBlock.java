@@ -54,7 +54,9 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 				double motionY = (this.worldObj.rand.nextBoolean() ? 1.0D : -1.0D) * this.worldObj.rand.nextFloat() * 0.01F;
 				double motionZ = (this.worldObj.rand.nextBoolean() ? 1.0D : -1.0D) * this.worldObj.rand.nextFloat() * 0.01F;
 
-				this.worldObj.spawnParticle(EnumParticleTypes.SPELL_MOB, this.getPos().getX() + 0.5D + motionX, this.getPos().getY() + 0.5D + motionY, this.getPos().getZ() + 0.5D + motionZ, 0.0D, 0.0D, 0.0D);
+				this.worldObj.spawnParticle(EnumParticleTypes.SPELL_MOB,
+						this.getPos().getX() + 0.5D + motionX,
+						this.getPos().getY() + 0.5D + motionY, this.getPos().getZ() + 0.5D + motionZ, 0.0D, 0.0D, 0.0D);
 			}
 		}
 
@@ -85,7 +87,7 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 			if (this.contents[i] != null)
 			{
 				NBTTagCompound nbttagcompound = new NBTTagCompound();
-				nbttagcompound.setByte("Slot", (byte)i);
+				nbttagcompound.setByte("Slot", (byte) i);
 				this.contents[i].writeToNBT(nbttagcompound);
 				nbttaglist.appendTag(nbttagcompound);
 			}
@@ -228,7 +230,9 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		return this.worldObj.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D && player.capabilities.isCreativeMode;
+		return this.worldObj.getTileEntity(this.pos) != this ? false :
+				player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D)
+						<= 64.0D && player.capabilities.isCreativeMode;
 	}
 
 	@Override

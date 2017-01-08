@@ -148,237 +148,337 @@ public class WorldGenFruitTree extends WorldGenAbstractTree
 
 					switch (side)
 					{
-					case (0):
-						for (int x2 = x; x2 <= x + branchLength; x2++)
-						{
-							pos = new BlockPos(x2, y2, z);
+						case (0):
+							for (int x2 = x; x2 <= x + branchLength; x2++)
+							{
+								pos = new BlockPos(x2, y2, z);
 
+								world.setBlockState(pos, log);
+								this.setBlockAirCheck(world, x2, y2 + 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+								this.setBlockAirCheck(world, x2, y2 - 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+								this.setBlockAirCheck(world,
+										x2 + 1, y2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+								this.setBlockAirCheck(world,
+										x2 - 1, y2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							}
+
+							pos = new BlockPos(x + (branchLength + 1), y2 + 1, z);
 							world.setBlockState(pos, log);
-							this.setBlockAirCheck(world, x2, y2 + 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-							this.setBlockAirCheck(world, x2, y2 - 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-							this.setBlockAirCheck(world, x2 + 1, y2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-							this.setBlockAirCheck(world, x2 - 1, y2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						}
 
-						pos = new BlockPos(x + (branchLength + 1), y2 + 1, z);
-						world.setBlockState(pos, log);
-
-						pos = new BlockPos(x + (branchLength + 2), y2 + 2, z);
-						world.setBlockState(pos, log);
-
-						pos = new BlockPos(x + (branchLength + 2), y2 + 3, z);
-						world.setBlockState(pos, log);
-
-						this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 2, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 3, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + (branchLength + 2), y2 + 4, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						this.setBlockAirCheck(world, x + (branchLength + 3), y2 + 2, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + (branchLength + 3), y2 + 3, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						this.setBlockAirCheck(world, x + (branchLength + 2), y2 + 2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + (branchLength + 2), y2 + 3, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						this.setBlockAirCheck(world, x + (branchLength + 2), y2 + 2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + (branchLength + 2), y2 + 3, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 1, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 1, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						this.setBlockAirCheck(world, x + branchLength, y2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + branchLength, y2 + 1, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						this.setBlockAirCheck(world, x + branchLength, y2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + branchLength, y2 + 1, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						this.setBlockAirCheck(world, x + (branchLength - 1), y2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + (branchLength - 1), y2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						this.setBlockAirCheck(world, x + (branchLength - 2), y2 - 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + (branchLength - 1), y2 - 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + branchLength, y2 - 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						this.setBlockAirCheck(world, x + (branchLength + 1), y2, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + (branchLength + 2), y2 + 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						break;
-
-					case (1):
-						for (int x3 = x; x3 >= x - branchLength; x3--)
-						{
-							pos = new BlockPos(x3, y2, z);
-
+							pos = new BlockPos(x + (branchLength + 2), y2 + 2, z);
 							world.setBlockState(pos, log);
-							this.setBlockAirCheck(world, x3, y2 + 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-							this.setBlockAirCheck(world, x3, y2 - 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-							this.setBlockAirCheck(world, x3 + 1, y2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-							this.setBlockAirCheck(world, x3 - 1, y2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						}
 
-						pos = new BlockPos(x - (branchLength + 1), y2 + 1, z);
-						world.setBlockState(pos, log);
-
-						pos = new BlockPos(x - (branchLength + 2), y2 + 2, z);
-						world.setBlockState(pos, log);
-
-						pos = new BlockPos(x - (branchLength + 2), y2 + 3, z);
-						world.setBlockState(pos, log);
-
-						this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 2, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 3, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x - (branchLength + 2), y2 + 4, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						this.setBlockAirCheck(world, x - (branchLength + 3), y2 + 2, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x - (branchLength + 3), y2 + 3, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						this.setBlockAirCheck(world, x - (branchLength + 2), y2 + 2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x - (branchLength + 2), y2 + 3, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						this.setBlockAirCheck(world, x - (branchLength + 2), y2 + 2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x - (branchLength + 2), y2 + 3, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 1, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 1, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						this.setBlockAirCheck(world, x - branchLength, y2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x - branchLength, y2 + 1, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						this.setBlockAirCheck(world, x - branchLength, y2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x - branchLength, y2 + 1, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						this.setBlockAirCheck(world, x - (branchLength - 1), y2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x - (branchLength - 1), y2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						this.setBlockAirCheck(world, x - (branchLength - 2), y2 - 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x - (branchLength - 1), y2 - 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x - branchLength, y2 - 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						this.setBlockAirCheck(world, x - (branchLength + 1), y2, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x - (branchLength + 2), y2 + 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-
-						break;
-
-					case (2):
-						for (int z2 = z; z2 <= z + branchLength; z2++)
-						{
-							pos = new BlockPos(x, y2, z2);
-
+							pos = new BlockPos(x + (branchLength + 2), y2 + 3, z);
 							world.setBlockState(pos, log);
-							this.setBlockAirCheck(world, x, y2 + 1, z2, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-							this.setBlockAirCheck(world, x, y2 - 1, z2, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-							this.setBlockAirCheck(world, x + 1, y2, z2, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-							this.setBlockAirCheck(world, x - 1, y2, z2, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						}
 
-						pos = new BlockPos(x, y2 + 1, z + (branchLength + 1));
-						world.setBlockState(pos, log);
+							this.setBlockAirCheck(world,
+									x + (branchLength + 1), y2 + 2, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + (branchLength + 1), y2 + 3, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + (branchLength + 2), y2 + 4, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						pos = new BlockPos(x, y2 + 2, z + (branchLength + 2));
-						world.setBlockState(pos, log);
+							this.setBlockAirCheck(world,
+									x + (branchLength + 3), y2 + 2, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + (branchLength + 3), y2 + 3, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						pos = new BlockPos(x, y2 + 3, z + (branchLength + 2));
-						world.setBlockState(pos, log);
+							this.setBlockAirCheck(world,
+									x + (branchLength + 2), y2 + 2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + (branchLength + 2), y2 + 3, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						this.setBlockAirCheck(world, x, y2 + 2, z + (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x, y2 + 3, z + (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x, y2 + 4, z + (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + (branchLength + 2), y2 + 2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + (branchLength + 2), y2 + 3, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						this.setBlockAirCheck(world, x, y2 + 2, z + (branchLength + 3), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x, y2 + 3, z + (branchLength + 3), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + (branchLength + 1), y2 + 1, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + (branchLength + 1), y2 + 2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						this.setBlockAirCheck(world, x - 1, y2 + 2, z + (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x - 1, y2 + 3, z + (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + (branchLength + 1), y2 + 1, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + (branchLength + 1), y2 + 2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						this.setBlockAirCheck(world, x + 1, y2 + 2, z + (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + 1, y2 + 3, z + (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + branchLength, y2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + branchLength, y2 + 1, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						this.setBlockAirCheck(world, x - 1, y2 + 1, z + (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x - 1, y2 + 2, z + (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + branchLength, y2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + branchLength, y2 + 1, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						this.setBlockAirCheck(world, x + 1, y2 + 1, z + (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + 1, y2 + 2, z + (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + (branchLength - 1), y2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + (branchLength - 1), y2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						this.setBlockAirCheck(world, x - 1, y2, z + branchLength, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x - 1, y2 + 1, z + branchLength, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + (branchLength - 2), y2 - 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + (branchLength - 1), y2 - 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + branchLength, y2 - 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						this.setBlockAirCheck(world, x + 1, y2, z + branchLength, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + 1, y2 + 1, z + branchLength, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + (branchLength + 1), y2, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + (branchLength + 2), y2 + 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						this.setBlockAirCheck(world, x - 1, y2, z + (branchLength - 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + 1, y2, z + (branchLength - 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							break;
 
-						this.setBlockAirCheck(world, x, y2 - 1, z + (branchLength - 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x, y2 - 1, z + (branchLength - 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x, y2 - 1, z + branchLength, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+						case (1):
+							for (int x3 = x; x3 >= x - branchLength; x3--)
+							{
+								pos = new BlockPos(x3, y2, z);
 
-						this.setBlockAirCheck(world, x, y2, z + (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x, y2 + 1, z + (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+								world.setBlockState(pos, log);
+								this.setBlockAirCheck(world, x3, y2 + 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+								this.setBlockAirCheck(world, x3, y2 - 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+								this.setBlockAirCheck(world,
+										x3 + 1, y2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+								this.setBlockAirCheck(world,
+										x3 - 1, y2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							}
 
-						break;
-
-					case (3):
-						for (int z3 = z; z3 >= z - branchLength; z3--)
-						{
-							pos = new BlockPos(x, y2, z3);
-
+							pos = new BlockPos(x - (branchLength + 1), y2 + 1, z);
 							world.setBlockState(pos, log);
-							this.setBlockAirCheck(world, x, y2 + 1, z3, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-							this.setBlockAirCheck(world, x, y2 - 1, z3, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-							this.setBlockAirCheck(world, x + 1, y2, z3, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-							this.setBlockAirCheck(world, x - 1, y2, z3, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						}
 
-						pos = new BlockPos(x, y2 + 1, z - (branchLength + 1));
-						world.setBlockState(pos, log);
+							pos = new BlockPos(x - (branchLength + 2), y2 + 2, z);
+							world.setBlockState(pos, log);
 
-						pos = new BlockPos(x, y2 + 2, z - (branchLength + 2));
-						world.setBlockState(pos, log);
+							pos = new BlockPos(x - (branchLength + 2), y2 + 3, z);
+							world.setBlockState(pos, log);
 
-						pos = new BlockPos(x, y2 + 3, z - (branchLength + 2));
-						world.setBlockState(pos, log);
+							this.setBlockAirCheck(world,
+									x - (branchLength + 1), y2 + 2, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - (branchLength + 1), y2 + 3, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - (branchLength + 2), y2 + 4, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						this.setBlockAirCheck(world, x, y2 + 2, z - (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x, y2 + 3, z - (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x, y2 + 4, z - (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - (branchLength + 3), y2 + 2, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - (branchLength + 3), y2 + 3, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						this.setBlockAirCheck(world, x, y2 + 2, z - (branchLength + 3), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x, y2 + 3, z - (branchLength + 3), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - (branchLength + 2), y2 + 2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - (branchLength + 2), y2 + 3, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						this.setBlockAirCheck(world, x - 1, y2 + 2, z - (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x - 1, y2 + 3, z - (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - (branchLength + 2), y2 + 2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - (branchLength + 2), y2 + 3, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						this.setBlockAirCheck(world, x + 1, y2 + 2, z - (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + 1, y2 + 3, z - (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - (branchLength + 1), y2 + 1, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - (branchLength + 1), y2 + 2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						this.setBlockAirCheck(world, x - 1, y2 + 1, z - (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x - 1, y2 + 2, z - (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - (branchLength + 1), y2 + 1, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - (branchLength + 1), y2 + 2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						this.setBlockAirCheck(world, x + 1, y2 + 1, z - (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + 1, y2 + 2, z - (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - branchLength, y2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - branchLength, y2 + 1, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						this.setBlockAirCheck(world, x - 1, y2, z - branchLength, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x - 1, y2 + 1, z - branchLength, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - branchLength, y2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - branchLength, y2 + 1, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						this.setBlockAirCheck(world, x + 1, y2, z - branchLength, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + 1, y2 + 1, z - branchLength, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - (branchLength - 1), y2, z - 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - (branchLength - 1), y2, z + 1, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						this.setBlockAirCheck(world, x - 1, y2, z - (branchLength - 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x + 1, y2, z - (branchLength - 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - (branchLength - 2), y2 - 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - (branchLength - 1), y2 - 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - branchLength, y2 - 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						this.setBlockAirCheck(world, x, y2 - 1, z - (branchLength - 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x, y2 - 1, z - (branchLength - 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x, y2 - 1, z - branchLength, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - (branchLength + 1), y2, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - (branchLength + 2), y2 + 1, z, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
 
-						this.setBlockAirCheck(world, x, y2, z - (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
-						this.setBlockAirCheck(world, x, y2 + 1, z - (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							break;
 
-						break;
+						case (2):
+							for (int z2 = z; z2 <= z + branchLength; z2++)
+							{
+								pos = new BlockPos(x, y2, z2);
+
+								world.setBlockState(pos, log);
+								this.setBlockAirCheck(world, x, y2 + 1, z2, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+								this.setBlockAirCheck(world, x, y2 - 1, z2, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+								this.setBlockAirCheck(world, x + 1, y2, z2, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+								this.setBlockAirCheck(world, x - 1, y2, z2, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							}
+
+							pos = new BlockPos(x, y2 + 1, z + (branchLength + 1));
+							world.setBlockState(pos, log);
+
+							pos = new BlockPos(x, y2 + 2, z + (branchLength + 2));
+							world.setBlockState(pos, log);
+
+							pos = new BlockPos(x, y2 + 3, z + (branchLength + 2));
+							world.setBlockState(pos, log);
+
+							this.setBlockAirCheck(world, x,
+									y2 + 2, z + (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world, x,
+									y2 + 3, z + (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world, x,
+									y2 + 4, z + (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							this.setBlockAirCheck(world, x,
+									y2 + 2, z + (branchLength + 3), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world, x,
+									y2 + 3, z + (branchLength + 3), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							this.setBlockAirCheck(world,
+									x - 1, y2 + 2, z + (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - 1, y2 + 3, z + (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							this.setBlockAirCheck(world,
+									x + 1, y2 + 2, z + (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + 1, y2 + 3, z + (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							this.setBlockAirCheck(world,
+									x - 1, y2 + 1, z + (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - 1, y2 + 2, z + (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							this.setBlockAirCheck(world,
+									x + 1, y2 + 1, z + (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + 1, y2 + 2, z + (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							this.setBlockAirCheck(world,
+									x - 1, y2, z + branchLength, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - 1, y2 + 1, z + branchLength, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							this.setBlockAirCheck(world,
+									x + 1, y2, z + branchLength, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + 1, y2 + 1, z + branchLength, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							this.setBlockAirCheck(world,
+									x - 1, y2, z + (branchLength - 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + 1, y2, z + (branchLength - 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							this.setBlockAirCheck(world, x,
+									y2 - 1, z + (branchLength - 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world, x,
+									y2 - 1, z + (branchLength - 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world, x,
+									y2 - 1, z + branchLength, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							this.setBlockAirCheck(world, x, y2,
+									z + (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world, x,
+									y2 + 1, z + (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							break;
+
+						case (3):
+							for (int z3 = z; z3 >= z - branchLength; z3--)
+							{
+								pos = new BlockPos(x, y2, z3);
+
+								world.setBlockState(pos, log);
+								this.setBlockAirCheck(world, x, y2 + 1, z3, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+								this.setBlockAirCheck(world, x, y2 - 1, z3, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+								this.setBlockAirCheck(world, x + 1, y2, z3, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+								this.setBlockAirCheck(world, x - 1, y2, z3, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							}
+
+							pos = new BlockPos(x, y2 + 1, z - (branchLength + 1));
+							world.setBlockState(pos, log);
+
+							pos = new BlockPos(x, y2 + 2, z - (branchLength + 2));
+							world.setBlockState(pos, log);
+
+							pos = new BlockPos(x, y2 + 3, z - (branchLength + 2));
+							world.setBlockState(pos, log);
+
+							this.setBlockAirCheck(world, x,
+									y2 + 2, z - (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world, x,
+									y2 + 3, z - (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world, x,
+									y2 + 4, z - (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							this.setBlockAirCheck(world, x,
+									y2 + 2, z - (branchLength + 3), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world, x,
+									y2 + 3, z - (branchLength + 3), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							this.setBlockAirCheck(world,
+									x - 1, y2 + 2, z - (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - 1, y2 + 3, z - (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							this.setBlockAirCheck(world,
+									x + 1, y2 + 2, z - (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + 1, y2 + 3, z - (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							this.setBlockAirCheck(world,
+									x - 1, y2 + 1, z - (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - 1, y2 + 2, z - (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							this.setBlockAirCheck(world,
+									x + 1, y2 + 1, z - (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + 1, y2 + 2, z - (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							this.setBlockAirCheck(world,
+									x - 1, y2, z - branchLength, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x - 1, y2 + 1, z - branchLength, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							this.setBlockAirCheck(world,
+									x + 1, y2, z - branchLength, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + 1, y2 + 1, z - branchLength, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							this.setBlockAirCheck(world,
+									x - 1, y2, z - (branchLength - 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world,
+									x + 1, y2, z - (branchLength - 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							this.setBlockAirCheck(world, x,
+									y2 - 1, z - (branchLength - 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world, x,
+									y2 - 1, z - (branchLength - 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world, x,
+									y2 - 1, z - branchLength, this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							this.setBlockAirCheck(world, x, y2,
+									z - (branchLength + 1), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+							this.setBlockAirCheck(world, x,
+									y2 + 1, z - (branchLength + 2), this.leaves, random.nextInt(chance) == 0 ? this.fruit : air);
+
+							break;
 					}
 
 					side++;

@@ -8,13 +8,13 @@ public class AIStayNearNest extends EntityAIBase
 {
 
 	public World world;
-	
+
 	public EntityMoa moa;
 
 	public float moveSpeed;
-	
+
 	public int nestX, nestY, nestZ, stayCloseDist;
-	
+
 	public AIStayNearNest(EntityMoa moa, int stayCloseDist, float moveSpeed)
 	{
 		this.world = moa.worldObj;
@@ -39,7 +39,7 @@ public class AIStayNearNest extends EntityAIBase
 		{
 			return false;
 		}
-		
+
 		this.nestX = this.moa.getFamilyNest().pos.getX();
 		this.nestY = this.moa.getFamilyNest().pos.getY() + 1;
 		this.nestZ = this.moa.getFamilyNest().pos.getZ();
@@ -48,7 +48,7 @@ public class AIStayNearNest extends EntityAIBase
 		{
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -65,5 +65,5 @@ public class AIStayNearNest extends EntityAIBase
 	{
 		return this.shouldExecute();
 	}
-	
+
 }

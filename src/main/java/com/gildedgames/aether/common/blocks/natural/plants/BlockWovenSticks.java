@@ -26,11 +26,11 @@ public class BlockWovenSticks extends Block implements IBlockVariants
 			FROSTPINE = new BlockVariant(3, "frostpine");
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", SKYROOT);
-	
+
 	public BlockWovenSticks()
 	{
 		super(Material.WOOD);
-		
+
 		this.setSoundType(SoundType.GROUND);
 		this.setHardness(0.5F);
 
@@ -42,7 +42,7 @@ public class BlockWovenSticks extends Block implements IBlockVariants
 	{
 		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
 
-		return (variant == BLIGHTWILLOW ? (int)(0.6F * 15.0F) : this.lightValue);
+		return (variant == BLIGHTWILLOW ? (int) (0.6F * 15.0F) : this.lightValue);
 	}
 
 	@Override
@@ -90,5 +90,5 @@ public class BlockWovenSticks extends Block implements IBlockVariants
 	{
 
 	}
-	
+
 }

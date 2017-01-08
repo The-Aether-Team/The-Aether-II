@@ -46,7 +46,7 @@ public class RenderLabyrinthChestMimic extends RenderLiving<EntityChestMimic>
 	{
 		if (entity.ticksExisted < 10)
 		{
-			GlStateManager.translate(0.0D, -0.5D + (1.0D / (double)entity.ticksExisted), 0.0D);
+			GlStateManager.translate(0.0D, -0.5D + (1.0D / (double) entity.ticksExisted), 0.0D);
 
 			this.mainModel = this.spawnModel;
 		}

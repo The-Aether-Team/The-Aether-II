@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.registry.content;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
+import com.gildedgames.aether.api.items.ItemProperties;
 import com.gildedgames.aether.api.items.ItemRarity;
 import com.gildedgames.aether.api.items.equipment.EquipmentProperties;
-import com.gildedgames.aether.api.items.ItemProperties;
+import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.common.capabilities.item.effects.DebugEffect;
 import com.gildedgames.aether.common.capabilities.item.effects.RegenerationEffect;
 import com.gildedgames.aether.common.items.ItemsAether;

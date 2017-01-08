@@ -7,5 +7,5 @@ public interface IconParser<E extends NBT>
 {
 
 	GuiFrame parse(E element);
-	
+
 }

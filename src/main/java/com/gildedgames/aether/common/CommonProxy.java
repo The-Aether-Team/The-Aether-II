@@ -3,7 +3,6 @@ package com.gildedgames.aether.common;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
 import com.gildedgames.aether.api.capabilites.instances.IInstanceRegistry;
-import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.api.registry.IEquipmentRegistry;
@@ -238,9 +237,15 @@ public class CommonProxy
 		return this.instanceRegistry;
 	}
 
-	public SimpleCraftingRegistry getSimpleCraftingRegistry() { return this.simpleCraftingRegistry; }
+	public SimpleCraftingRegistry getSimpleCraftingRegistry()
+	{
+		return this.simpleCraftingRegistry;
+	}
 
-	public SimpleCraftingRegistry getMasonryRegistry() { return this.masonryRegistry; }
+	public SimpleCraftingRegistry getMasonryRegistry()
+	{
+		return this.masonryRegistry;
+	}
 
 	public void setExtendedReachDistance(EntityPlayer entity, float distance)
 	{
@@ -258,7 +263,9 @@ public class CommonProxy
 	}
 
 	// NO-OP
-	public void onWorldLoaded(WorldEvent event) { }
+	public void onWorldLoaded(WorldEvent event)
+	{
+	}
 
 	public IEquipmentRegistry getEquipmentRegistry()
 	{

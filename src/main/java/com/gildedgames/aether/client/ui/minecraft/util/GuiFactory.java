@@ -11,8 +11,6 @@ import com.gildedgames.aether.client.ui.graphics.Sprite;
 import com.gildedgames.aether.client.ui.minecraft.util.decorators.MinecraftButtonSounds;
 import com.gildedgames.aether.client.ui.minecraft.util.wrappers.MinecraftButton;
 import com.gildedgames.aether.client.ui.util.*;
-import com.gildedgames.aether.client.ui.util.Button;
-import com.gildedgames.aether.client.ui.util.Font;
 import com.gildedgames.aether.client.ui.util.decorators.ScrollableGui;
 import com.gildedgames.aether.client.ui.util.rect.RectCollection;
 import com.gildedgames.aether.common.AetherCore;
@@ -20,7 +18,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.List;
 
 public class GuiFactory
@@ -186,7 +184,8 @@ public class GuiFactory
 		return GuiFactory.texture(sprite, dim.rebuild().area(sprite.getAssetWidth(), sprite.getAssetHeight()).flush());
 	}
 
-	public static TextureElement createResizableTexture(AssetLocation asset, Rect dim, Sprite.UV corners, Sprite.UV verticalSides, Sprite.UV horizontalSides)
+	public static TextureElement createResizableTexture(AssetLocation asset, Rect dim, Sprite.UV corners, Sprite.UV verticalSides,
+			Sprite.UV horizontalSides)
 	{
 		return GuiFactory.texture(Sprite.create(asset, new ResizableUVBehavior(corners, verticalSides, horizontalSides)), dim);
 	}

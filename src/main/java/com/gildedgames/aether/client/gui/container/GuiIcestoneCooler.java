@@ -74,7 +74,8 @@ public class GuiIcestoneCooler extends GuiContainer
 
 			valueString += "%";
 
-			this.fontRendererObj.drawString(valueString, 136 - (this.fontRendererObj.getStringWidth(valueString) / 2), this.ySize - 105 + 2, 4210752);
+			this.fontRendererObj.drawString(valueString,
+					136 - (this.fontRendererObj.getStringWidth(valueString) / 2), this.ySize - 105 + 2, 4210752);
 		}
 	}
 

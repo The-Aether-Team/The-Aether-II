@@ -54,7 +54,8 @@ public class SlotBehavior<T> extends GuiEvent<GuiFrame>
 		this.slotContents = draggedState;
 
 		this.slotContents.dim().clear(ModifierType.POS);
-		this.slotContents.dim().mod().resetPos().x(this.getGui().dim().width() / 2).y(this.getGui().dim().height() / 2).center(true).flush();
+		this.slotContents.dim().mod().resetPos().x(this.getGui().dim().width() / 2).y(
+				this.getGui().dim().height() / 2).center(true).flush();
 
 		this.content().set("slotContents", this.slotContents);
 
@@ -164,7 +165,8 @@ public class SlotBehavior<T> extends GuiEvent<GuiFrame>
 			@Override
 			public boolean isActive(MouseInputPool pool, InputProvider input)
 			{
-				return SlotBehavior.this.getSlotContents() != null && (!input.isHovered(this.getGui().dim()) || !SlotBehavior.this.parser.onMouseInput(pool, input));
+				return SlotBehavior.this.getSlotContents() != null && (!input.isHovered(this.getGui().dim())
+						|| !SlotBehavior.this.parser.onMouseInput(pool, input));
 			}
 
 			@Override

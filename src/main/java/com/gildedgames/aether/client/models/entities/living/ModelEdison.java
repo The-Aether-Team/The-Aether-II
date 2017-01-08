@@ -7,12 +7,19 @@ import net.minecraft.entity.Entity;
 public class ModelEdison extends ModelBiped
 {
 	ModelRenderer arms;
+
 	ModelRenderer leftshoulder;
+
 	ModelRenderer vial1;
+
 	ModelRenderer rightshoulder;
+
 	ModelRenderer bigbag;
+
 	ModelRenderer belt;
+
 	ModelRenderer coinbag;
+
 	ModelRenderer vial2;
 
 	public ModelEdison()

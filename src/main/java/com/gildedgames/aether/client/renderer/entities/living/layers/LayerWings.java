@@ -26,7 +26,8 @@ public class LayerWings implements LayerRenderer
 	}
 
 	@Override
-	public void doRenderLayer(EntityLivingBase entity, float p_177141_2_, float p_177141_3_, float p_177141_4_, float p_177141_5_, float p_177141_6_, float p_177141_7_, float partialTicks)
+	public void doRenderLayer(EntityLivingBase entity, float p_177141_2_, float p_177141_3_, float p_177141_4_, float p_177141_5_,
+			float p_177141_6_, float p_177141_7_, float partialTicks)
 	{
 		EntityFlyingAnimal animal = (EntityFlyingAnimal) entity;
 

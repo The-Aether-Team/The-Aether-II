@@ -11,7 +11,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class ExtendedReachModule extends PlayerAetherModule
 {
-	private static final Item[] ITEM_SET = new Item[] { ItemsAether.valkyrie_axe, ItemsAether.valkyrie_pickaxe, ItemsAether.valkyrie_shovel, ItemsAether.valkyrie_lance };
+	private static final Item[] ITEM_SET = new Item[] { ItemsAether.valkyrie_axe, ItemsAether.valkyrie_pickaxe, ItemsAether.valkyrie_shovel,
+			ItemsAether.valkyrie_lance };
 
 	public ExtendedReachModule(PlayerAether playerAether)
 	{
