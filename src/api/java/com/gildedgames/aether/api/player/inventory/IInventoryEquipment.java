@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.player.inventory;
 
-import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentSlot;
+import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.util.NBT;
 import net.minecraft.inventory.IInventory;
 

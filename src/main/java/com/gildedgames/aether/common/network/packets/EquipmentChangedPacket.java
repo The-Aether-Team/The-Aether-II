@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.network.packets;
 
-import com.gildedgames.aether.api.capabilites.entity.IPlayerAetherCapability;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
@@ -96,7 +96,7 @@ public class EquipmentChangedPacket implements IMessage
 
 			if (entity != null)
 			{
-				IPlayerAetherCapability aePlayer = PlayerAetherImpl.getPlayer(player);
+				IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 
 				for (Pair<Integer, ItemStack> pair : message.changes)
 				{

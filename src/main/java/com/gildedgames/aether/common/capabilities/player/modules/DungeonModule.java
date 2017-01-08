@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.capabilities.player.modules;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.capabilites.instances.IPlayerInstances;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.TickTimer;
@@ -10,8 +10,8 @@ import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
 import com.gildedgames.aether.api.util.NBT;
 import net.minecraft.block.BlockTorch;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.world.BlockEvent;
 
 public class DungeonModule extends PlayerAetherModule
@@ -19,14 +19,13 @@ public class DungeonModule extends PlayerAetherModule
 
 	private TickTimer chatTimer = new TickTimer();
 
-	public DungeonModule(PlayerAetherImpl playerAether)
+	public DungeonModule(PlayerAether playerAether)
 	{
 		super(playerAether);
 
 		this.chatTimer.setTicksPassed(160);
 	}
 
-	@Override
 	public void onPlaceBlock(BlockEvent.PlaceEvent event)
 	{
 		if (!event.getPlayer().capabilities.isCreativeMode)
@@ -49,23 +48,28 @@ public class DungeonModule extends PlayerAetherModule
 	}
 
 	@Override
-	public void onPlaceBlockMulti(BlockEvent.MultiPlaceEvent event)
-	{
-
-	}
-
-	@Override
-	public void onUpdate(LivingEvent.LivingUpdateEvent event)
+	public void onUpdate()
 	{
 		this.chatTimer.tick();
 	}
 
 	@Override
+	public void write(NBTTagCompound compound)
+	{
+
+	}
+
+	@Override
+	public void read(NBTTagCompound compound)
+	{
+
+	}
+
 	public void onRespawn()
 	{
-		if (this.getPlayer() instanceof EntityPlayerMP)
+		if (this.getEntity() instanceof EntityPlayerMP)
 		{
-			EntityPlayerMP player = (EntityPlayerMP)this.getPlayer();
+			EntityPlayerMP player = (EntityPlayerMP)this.getEntity();
 
 			IPlayerInstances playerInstances = AetherAPI.instances().getPlayer(player);
 			NBT nbt = playerInstances.getInstance();

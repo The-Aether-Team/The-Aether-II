@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
-import com.gildedgames.aether.api.capabilites.entity.IPlayerAetherCapability;
+import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
 import com.gildedgames.aether.common.items.armor.ItemLeatherGloves;
 import net.minecraft.client.Minecraft;
@@ -23,13 +23,13 @@ import net.minecraftforge.client.event.RenderSpecificHandEvent;
 public class RenderPlayerHelper
 {
 
-	public static void renderFirstPersonHand(RenderSpecificHandEvent event, IPlayerAetherCapability player)
+	public static void renderFirstPersonHand(RenderSpecificHandEvent event, IPlayerAether player)
 	{
 		ItemStack gloveStack = player.getEquipmentInventory().getStackInSlot(2);
 
 		if (gloveStack != null && gloveStack.getItem() instanceof ItemAetherGloves)
 		{
-			RenderPlayerHelper.renderGloves(player.getPlayer(), (ItemAetherGloves) gloveStack.getItem(), gloveStack, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress());
+			RenderPlayerHelper.renderGloves(player.getEntity(), (ItemAetherGloves) gloveStack.getItem(), gloveStack, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress());
 		}
 
 		ItemStack ring1 = player.getEquipmentInventory().getStackInSlot(3);

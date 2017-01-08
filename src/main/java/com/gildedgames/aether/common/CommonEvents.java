@@ -3,7 +3,7 @@ package com.gildedgames.aether.common;
 import com.gildedgames.aether.client.gui.menu.WorldAetherOptionsOverlay;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.entities.living.mobs.EntityAechorPlant;
 import com.gildedgames.aether.common.entities.living.passive.EntityCarrionSprout;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -225,7 +225,7 @@ public class CommonEvents
 				if (entity instanceof EntityPlayer)
 				{
 					EntityPlayer player = (EntityPlayer)entity;
-					PlayerAetherImpl playerAether = PlayerAetherImpl.getPlayer(player);
+					PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 					if (playerAether.getParachuteModule().isParachuting())
 					{
@@ -355,15 +355,6 @@ public class CommonEvents
 			newEntity.setPositionAndUpdate(entity.posX, entity.posY, entity.posZ);
 
 			return newEntity;
-		}
-	}
-
-	@SubscribeEvent
-	public static void onPlayerRightClickBLock(PlayerInteractEvent.RightClickBlock event)
-	{
-		if (AetherCore.PROXY.tryEquipEquipment(event.getEntityPlayer(), event.getItemStack(), event.getHand()))
-		{
-			event.setUseItem(Event.Result.ALLOW);
 		}
 	}
 

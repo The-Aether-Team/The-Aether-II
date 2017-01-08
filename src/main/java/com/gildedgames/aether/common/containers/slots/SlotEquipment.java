@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.containers.slots;
 
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentSlot;
+import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.inventory.IInventory;

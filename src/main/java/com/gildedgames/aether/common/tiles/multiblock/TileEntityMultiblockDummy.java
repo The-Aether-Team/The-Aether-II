@@ -86,7 +86,7 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 	{
 		super.writeToNBT(compound);
 
-		compound.setTag("controller", NBTHelper.serializeBlockPos(this.controllerPos));
+		compound.setTag("controller", NBTHelper.writeBlockPos(this.controllerPos));
 
 		return compound;
 	}

@@ -1,21 +1,19 @@
 package com.gildedgames.aether.api.items.equipment;
 
-import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentSlot;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectInstance;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Optional;
 
 public class EquipmentProperties implements IEquipmentProperties
 {
 	private final ItemEquipmentSlot slot;
 
-	private final Collection<IEffectInstance> instances;
+	private final Collection<IEffectProvider> instances;
 
-	protected EquipmentProperties(ItemEquipmentSlot slot, Collection<IEffectInstance> instances)
+	protected EquipmentProperties(ItemEquipmentSlot slot, Collection<IEffectProvider> instances)
 	{
 		if (slot == null)
 		{
@@ -34,7 +32,7 @@ public class EquipmentProperties implements IEquipmentProperties
 	}
 
 	@Override
-	public Collection<IEffectInstance> getEffectInstances()
+	public Collection<IEffectProvider> getEffectInstances()
 	{
 		return Collections.unmodifiableCollection(this.instances);
 	}

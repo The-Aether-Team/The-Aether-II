@@ -1,7 +1,6 @@
 package com.gildedgames.aether.api.items.equipment;
 
-import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentSlot;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectInstance;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,7 +10,7 @@ import java.util.Collection;
  */
 public class EquipmentBuilder
 {
-	private final Collection<IEffectInstance> effects = new ArrayList<>();
+	private final Collection<IEffectProvider> effects = new ArrayList<>();
 
 	private ItemEquipmentSlot slot;
 
@@ -27,10 +26,10 @@ public class EquipmentBuilder
 	}
 
 	/**
-	 * Adds an {@link IEffectInstance} this equipment item will provide.
+	 * Adds an {@link IEffectProvider} this equipment item will provide.
 	 * @param effect The effect instance to add
 	 */
-	public EquipmentBuilder addEffect(IEffectInstance effect)
+	public EquipmentBuilder addEffect(IEffectProvider effect)
 	{
 		this.effects.add(effect);
 

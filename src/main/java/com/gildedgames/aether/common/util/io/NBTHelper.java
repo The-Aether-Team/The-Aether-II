@@ -300,7 +300,7 @@ public class NBTHelper
 		return new BlockPos(tag.getInteger("x"), tag.getInteger("y"), tag.getInteger("z"));
 	}
 
-	public static NBTBase serializeBlockPos(BlockPos pos)
+	public static NBTBase writeBlockPos(BlockPos pos)
 	{
 		NBTTagCompound tag = new NBTTagCompound();
 

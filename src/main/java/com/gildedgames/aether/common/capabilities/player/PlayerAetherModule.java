@@ -1,143 +1,42 @@
 package com.gildedgames.aether.common.capabilities.player;
 
-import com.gildedgames.aether.api.capabilites.entity.IPlayerAetherCapability;
-import com.gildedgames.aether.api.player.companions.IPlayerCompanionManager;
-import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.event.entity.player.PlayerDropsEvent;
-import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
-public abstract class PlayerAetherModule implements IPlayerAetherCapability
+public abstract class PlayerAetherModule
 {
+	private PlayerAether playerAether;
 
-	private PlayerAetherImpl playerAether;
-
-	public PlayerAetherModule(PlayerAetherImpl playerAether)
+	public PlayerAetherModule(PlayerAether playerAether)
 	{
 		this.playerAether = playerAether;
 	}
 
-	public PlayerAetherImpl getPlayerAether()
+	public abstract void onUpdate();
+
+	public final PlayerAether getPlayer()
 	{
 		return this.playerAether;
 	}
 
-	@Override
-	public void onPlaceBlock(BlockEvent.PlaceEvent event)
+	public final EntityPlayer getEntity()
 	{
-
+		return this.playerAether.getEntity();
 	}
 
-	@Override
-	public void onPlaceBlockMulti(BlockEvent.MultiPlaceEvent event)
-	{
+	/**
+	 * Writes this module's data to the player capability. **This might change in the future to prevent
+	 * modules from accessing data outside their scope.**
+	 *
+	 * @param compound The NBT tag to write to
+	 */
+	public abstract void write(NBTTagCompound compound);
 
-	}
-
-	@Override
-	public void onRespawn()
-	{
-
-	}
-
-	@Override
-	public void onUpdate(LivingEvent.LivingUpdateEvent event)
-	{
-
-	}
-
-	@Override
-	public void onDeath(LivingDeathEvent event)
-	{
-
-	}
-
-	@Override
-	public void onDrops(PlayerDropsEvent event)
-	{
-
-	}
-
-	@Override
-	public void onHurt(LivingHurtEvent event)
-	{
-
-	}
-
-	@Override
-	public void onFall(LivingFallEvent event)
-	{
-
-	}
-
-	@Override
-	public void onTeleport(PlayerEvent.PlayerChangedDimensionEvent event)
-	{
-
-	}
-
-	@Override
-	public void onSpawned(PlayerEvent.PlayerLoggedInEvent event)
-	{
-
-	}
-
-	@Override
-	public void onDespawn(PlayerEvent.PlayerLoggedOutEvent event)
-	{
-
-	}
-
-	@Override
-	public boolean performMidAirJump()
-	{
-		return false;
-	}
-
-	@Override
-	public void write(NBTTagCompound tag)
-	{
-
-	}
-
-	@Override
-	public void read(NBTTagCompound tag)
-	{
-
-	}
-
-	@Override
-	public int getTicksAirborne()
-	{
-		return 0;
-	}
-
-	/** Below should NOT be overriden **/
-
-	@Override
-	public final IInventoryEquipment getEquipmentInventory()
-	{
-		return null;
-	}
-
-	public final IPlayerCompanionManager getCompanionModule()
-	{
-		return null;
-	}
-
-	@Override
-	public final EntityPlayer getPlayer()
-	{
-		return this.playerAether.getPlayer();
-	}
-
-	@Override
-	public final float getMiningSpeedMultiplier()
-	{
-		return 0;
-	}
-
+	/**
+	 * Reads this module's data from the player capability. **This might change in the future to prevent
+	 * modules from accessing data outside their scope.**
+	 *
+	 * @param compound The NBT tag to read from
+	 */
+	public abstract void read(NBTTagCompound compound);
 }

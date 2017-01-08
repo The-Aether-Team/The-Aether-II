@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.network.packets;
 
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -43,7 +43,7 @@ public class DiedInAetherPacket implements IMessage
 				return null;
 			}
 
-			PlayerAetherImpl playerAether = PlayerAetherImpl.getPlayer(player);
+			PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 			playerAether.setHasDiedInAetherBefore(message.flag);
 

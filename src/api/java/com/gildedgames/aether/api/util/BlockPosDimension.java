@@ -2,7 +2,6 @@ package com.gildedgames.aether.api.util;
 
 import net.minecraft.util.math.BlockPos;
 
-/** TODO: MOVE THIS OUT OF THE API, FOR SOME REASON THE API CANNOT SEE THE MAIN AETHER SRC FILES **/
 public class BlockPosDimension extends BlockPos
 {
 

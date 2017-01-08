@@ -1,8 +1,7 @@
 package com.gildedgames.aether.common.capabilities.item;
 
-import com.gildedgames.aether.api.items.equipment.effects.IEffectInstance;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectProcessor;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectState;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
+import com.gildedgames.aether.api.items.equipment.effects.IEffect;
 import com.gildedgames.aether.api.registry.IEquipmentRegistry;
 import net.minecraft.util.ResourceLocation;
 
@@ -10,23 +9,23 @@ import java.util.HashMap;
 
 public class EquipmentRegistry implements IEquipmentRegistry
 {
-	private HashMap<ResourceLocation, IEffectProcessor<IEffectInstance, IEffectState>> processors = new HashMap<>();
+	private HashMap<ResourceLocation, IEffect<IEffectProvider>> factories = new HashMap<>();
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public void registerEffect(IEffectProcessor processor)
+	public void registerEffect(IEffect processor)
 	{
-		if (this.processors.containsKey(processor.getIdentifier()))
+		if (this.factories.containsKey(processor.getIdentifier()))
 		{
 			throw new IllegalArgumentException("Effect processor for " + processor.getIdentifier() + " already exists");
 		}
 
-		this.processors.put(processor.getIdentifier(), processor);
+		this.factories.put(processor.getIdentifier(), processor);
 	}
 
 	@Override
-	public IEffectProcessor<IEffectInstance, IEffectState> getEffect(ResourceLocation key)
+	public IEffect<IEffectProvider> getFactory(ResourceLocation key)
 	{
-		return this.processors.get(key);
+		return this.factories.get(key);
 	}
 }

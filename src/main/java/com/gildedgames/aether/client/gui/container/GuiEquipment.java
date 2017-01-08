@@ -1,9 +1,9 @@
 package com.gildedgames.aether.client.gui.container;
 
-import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentSlot;
-import com.gildedgames.aether.api.items.equipment.effects.EffectPool;
+import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
+import com.gildedgames.aether.common.items.equipment.EffectPool;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.player.modules.EquipmentModule;
 import com.gildedgames.aether.common.containers.ContainerEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
@@ -38,9 +38,9 @@ public class GuiEquipment extends GuiContainer
 
 	//	private static final ResourceLocation TEXTURE_COINBAR = newsystem ResourceLocation("aether", "textures/gui/coinbar.png");
 
-	private final PlayerAetherImpl aePlayer;
+	private final PlayerAether aePlayer;
 
-	public GuiEquipment(PlayerAetherImpl aePlayer)
+	public GuiEquipment(PlayerAether aePlayer)
 	{
 		super(new ContainerEquipment(aePlayer));
 
@@ -80,15 +80,15 @@ public class GuiEquipment extends GuiContainer
 			this.drawTexturedModalRect(this.width / 2 - 90 - 179 / 2, this.height / 2 - 169 / 2, 0, 0, 179, 169);
 		}
 
-		this.mc.renderEngine.bindTexture(this.aePlayer.getPlayer().capabilities.isCreativeMode ? textureBackpackCreative : textureBackpack);
+		this.mc.renderEngine.bindTexture(this.aePlayer.getEntity().capabilities.isCreativeMode ? textureBackpackCreative : textureBackpack);
 
 		this.drawTexturedModalRect(this.width / 2 + 90 - 176 / 2, this.height / 2 - 166 / 2, 0, 0, 176, 166);
 
-		this.fontRendererObj.drawString(I18n.format("container.crafting"), this.width / 2 + (this.aePlayer.getPlayer().capabilities.isCreativeMode ? 70 : 51), this.height / 2 - 135 / 2, 4210752);
+		this.fontRendererObj.drawString(I18n.format("container.crafting"), this.width / 2 + (this.aePlayer.getEntity().capabilities.isCreativeMode ? 70 : 51), this.height / 2 - 135 / 2, 4210752);
 
 		if (AetherCore.CONFIG.getDisplayInventoryPattern())
 		{
-			this.mc.renderEngine.bindTexture(this.aePlayer.getPlayer().capabilities.isCreativeMode ? textureBackpackCreativePattern : textureBackpackPattern);
+			this.mc.renderEngine.bindTexture(this.aePlayer.getEntity().capabilities.isCreativeMode ? textureBackpackCreativePattern : textureBackpackPattern);
 
 			GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -97,13 +97,13 @@ public class GuiEquipment extends GuiContainer
 
 		this.drawPlayer(mouseX, mouseY);
 
+		this.drawEquipmentEffects();
+
 		super.drawScreen(mouseX, mouseY, partialTick);
 
 		// this.drawCoinCounter();
 
 		this.drawSlotName(mouseX, mouseY);
-
-		this.drawEquipmentEffects();
 	}
 
 	@Override
@@ -138,7 +138,7 @@ public class GuiEquipment extends GuiContainer
 						unlocalizedTooltip = type.getUnlocalizedName();
 					}
 
-					final int dif = this.aePlayer.getPlayer().inventory.getSizeInventory() - 2;
+					final int dif = this.aePlayer.getEntity().inventory.getSizeInventory() - 2;
 
 					if (slot.getSlotIndex() == dif + 1)
 					{
@@ -193,7 +193,7 @@ public class GuiEquipment extends GuiContainer
 		{
 			Optional<EffectPool> pool = equipment.getEffectPool(id);
 
-			pool.ifPresent(effectPool -> effectPool.getProcessor().addItemInformation(effects, effectPool.getState()));
+			pool.ifPresent(effectPool -> effectPool.getInstance().addItemInformation(effects));
 		}
 
 		String compiled = StringUtils.join(effects, TextFormatting.RESET + ", ");

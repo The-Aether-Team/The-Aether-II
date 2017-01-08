@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.containers.inventory;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentSlot;
-import com.gildedgames.aether.api.capabilites.entity.IPlayerAetherCapability;
+import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
+import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
 import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,11 +38,11 @@ public class InventoryEquipment implements IInventoryEquipment
 					ItemEquipmentSlot.CHARM
 			};
 
-	private final IPlayerAetherCapability aePlayer;
+	private final IPlayerAether aePlayer;
 
 	private ItemStack[] inventory = new ItemStack[InventoryEquipment.INVENTORY_SIZE];
 
-	public InventoryEquipment(IPlayerAetherCapability aePlayer)
+	public InventoryEquipment(IPlayerAether aePlayer)
 	{
 		this.aePlayer = aePlayer;
 	}
@@ -161,7 +161,7 @@ public class InventoryEquipment implements IInventoryEquipment
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		return !this.aePlayer.getPlayer().isDead && player.getDistanceSqToEntity(this.aePlayer.getPlayer()) <= 64.0D;
+		return !this.aePlayer.getEntity().isDead && player.getDistanceSqToEntity(this.aePlayer.getEntity()) <= 64.0D;
 	}
 
 	@Override
@@ -219,7 +219,7 @@ public class InventoryEquipment implements IInventoryEquipment
 		{
 			if (stack != null)
 			{
-				this.aePlayer.getPlayer().dropItem(stack, true, false);
+				this.aePlayer.getEntity().dropItem(stack, true, false);
 			}
 		}
 
@@ -264,13 +264,13 @@ public class InventoryEquipment implements IInventoryEquipment
 			}
 		}
 
-		output.setTag("items", list);
+		output.setTag("Items", list);
 	}
 
 	@Override
 	public void read(NBTTagCompound input)
 	{
-		NBTTagList list = input.getTagList("items", 10);
+		NBTTagList list = input.getTagList("Items", 10);
 
 		if (list != null)
 		{

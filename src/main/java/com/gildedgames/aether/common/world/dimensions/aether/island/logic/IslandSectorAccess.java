@@ -32,6 +32,8 @@ public class IslandSectorAccess
 
 	}
 
+	@Deprecated
+	// Static access?! -JS
 	public static IslandSectorAccess inst()
 	{
 		return IslandSectorAccess.INST;
@@ -42,6 +44,7 @@ public class IslandSectorAccess
 		return sectorX + "_" + sectorY;
 	}
 
+	// TODO: Needs to be changed to chunk hook format... -JS
 	private static File createSectorFile(int sectorX, int sectorY)
 	{
 		String sectorKey = IslandSectorAccess.createSectorKey(sectorX, sectorY);

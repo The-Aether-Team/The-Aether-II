@@ -1,6 +1,9 @@
 package com.gildedgames.aether.common.items;
 
 import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.items.ItemRarity;
+import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
+import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.living.companions.*;
@@ -36,6 +39,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Optional;
 
 public class ItemsAether
 {
@@ -375,12 +379,9 @@ public class ItemsAether
 			irradiated_tool = new ItemIrradiated(new RandomItemSelector(item -> item instanceof ItemTool)),
 			irradiated_ring = new ItemIrradiated(new RandomItemSelector(item ->
 			{
-				// TODO:
-//				ItemProperties props = AetherAPI.equipment().getProperties(item);
-//
-//				return props != null && props.getEquipmentType() == ItemEquipmentSlot.RING;
+				Optional<IEquipmentProperties> equipment = AetherAPI.items().getEquipmentProperties(item);
 
-				return false;
+				return equipment.isPresent() && equipment.get().getSlot() == ItemEquipmentSlot.RING;
 			})),
 			irradiated_neckwear = new ItemIrradiated(new RandomItemSelector(item ->
 			{

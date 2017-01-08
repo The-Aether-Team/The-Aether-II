@@ -1,12 +1,23 @@
 package com.gildedgames.aether.api.items.equipment.effects;
 
-import net.minecraft.util.ResourceLocation;
+import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
 
+import java.util.Collection;
+
+/**
+ * This class contains the instance of an effect for an entity.
+ */
 public interface IEffectInstance
 {
 	/**
-	 * Returns the unique ID of this instance's processor.
-	 * @return The {@link ResourceLocation} which identifies the processor
+	 * Called when the entity updates.
+	 * @param player The player entity that is updating
 	 */
-	ResourceLocation getProcessor();
+	void onEntityUpdate(IPlayerAether player);
+
+	/**
+	 * Adds effect tooltips to {@param label}.
+	 * @param label The {@link Collection} to add to
+	 */
+	void addItemInformation(Collection<String> label);
 }

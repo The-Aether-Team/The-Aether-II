@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.capabilities.player.modules;
 
 import com.gildedgames.aether.api.player.companions.IPlayerCompanionManager;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.entities.living.companions.EntityCompanion;
 import com.gildedgames.aether.common.items.companions.ItemCompanion;
@@ -12,12 +12,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -26,29 +26,41 @@ import java.util.Random;
 
 public class PlayerCompanionModule extends PlayerAetherModule implements IPlayerCompanionManager
 {
-	private final PlayerAetherImpl aePlayer;
+	private final PlayerAether aePlayer;
 
 	private final EntityPlayer player;
 
 	private int companionId;
 
-	public PlayerCompanionModule(PlayerAetherImpl aePlayer)
+	public PlayerCompanionModule(PlayerAether aePlayer)
 	{
 		super(aePlayer);
 
 		this.aePlayer = aePlayer;
-		this.player = aePlayer.getPlayer();
+		this.player = aePlayer.getEntity();
 	}
 
 	@Override
-	public void onUpdate(LivingEvent.LivingUpdateEvent event)
+	public void onUpdate()
 	{
-		if (this.getPlayer().worldObj.isRemote || this.getPlayer().isDead)
+		if (this.getEntity().worldObj.isRemote || this.getEntity().isDead)
 		{
 			return;
 		}
 
 		this.update();
+	}
+
+	@Override
+	public void write(NBTTagCompound compound)
+	{
+
+	}
+
+	@Override
+	public void read(NBTTagCompound compound)
+	{
+
 	}
 
 	public void update()
@@ -167,7 +179,6 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 		}
 	}
 
-	@Override
 	public void onDeath(LivingDeathEvent event)
 	{
 		if (!event.isCanceled())
@@ -176,7 +187,6 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 		}
 	}
 
-	@Override
 	public void onTeleport(PlayerEvent.PlayerChangedDimensionEvent event)
 	{
 		if (!event.isCanceled())
@@ -187,13 +197,11 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 		}
 	}
 
-	@Override
-	public void onSpawned(PlayerEvent.PlayerLoggedInEvent event)
+	public void onSpawned()
 	{
 		this.update();
 	}
 
-	@Override
 	public void onDespawn(PlayerEvent.PlayerLoggedOutEvent event)
 	{
 		this.removeCompanion(false);

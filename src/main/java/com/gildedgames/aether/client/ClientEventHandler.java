@@ -5,14 +5,13 @@ import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectInstance;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectProcessor;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectState;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
+import com.gildedgames.aether.api.items.equipment.effects.IEffect;
 import com.gildedgames.aether.client.gui.menu.InDevelopmentWarning;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.client.ui.UiManager;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.containers.slots.SlotAmbrosium;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotFlintAndSteel;
@@ -43,7 +42,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 
 import java.io.File;
 import java.util.Collections;
-import java.util.Optional;
 
 public class ClientEventHandler
 {
@@ -111,10 +109,10 @@ public class ClientEventHandler
 				IEquipmentProperties equipment = properties.getEquipmentProperties().get();
 
 				// Equipment Effects
-				for (IEffectInstance instance : equipment.getEffectInstances())
+				for (IEffectProvider instance : equipment.getEffectInstances())
 				{
-					IEffectProcessor<IEffectInstance, IEffectState> effect = AetherAPI.equipment().getEffect(instance.getProcessor());
-					effect.addItemInformation(event.getToolTip(), effect.createState(Collections.singleton(instance)));
+					IEffect<IEffectProvider> factory = AetherAPI.equipment().getFactory(instance.getFactory());
+					factory.createInstance(Collections.singleton(instance)).addItemInformation(event.getToolTip());
 				}
 
 				// Slot Type
@@ -127,8 +125,6 @@ public class ClientEventHandler
 			{
 				event.getToolTip().add(I18n.format(properties.getRarity().get().getUnlocalizedName()));
 			}
-
-			// TODO: Equipment re-write
 		}
 	}
 
@@ -148,7 +144,7 @@ public class ClientEventHandler
 
 		if (world != null && player != null)
 		{
-			PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
+			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
 			if (aePlayer != null)
 			{
@@ -156,9 +152,9 @@ public class ClientEventHandler
 				{
 					if (mc.gameSettings.keyBindJump.isKeyDown() && !this.prevJumpBindState)
 					{
-						if (!player.isInWater() && aePlayer.getTicksAirborne() > 2 && !player.capabilities.isCreativeMode)
+						if (!player.isInWater() && aePlayer.getAbilitiesModule().getTicksAirborne() > 2 && !player.capabilities.isCreativeMode)
 						{
-							if (aePlayer.performMidAirJump())
+							if (aePlayer.getAbilitiesModule().performMidAirJump())
 							{
 								NetworkingAether.sendPacketToServer(new AetherMovementPacket(AetherMovementPacket.Action.EXTRA_JUMP));
 

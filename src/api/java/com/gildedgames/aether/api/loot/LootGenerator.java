@@ -1,11 +1,12 @@
 package com.gildedgames.aether.api.loot;
 
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.items.properties.ItemRarity;
+import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.items.ItemRarity;
 import com.google.common.collect.Lists;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 public class LootGenerator
@@ -34,13 +35,12 @@ public class LootGenerator
 
 				if (stack != null)
 				{
-					// TODO: Port
-//					IItemPropertiesCapability properties = stack.getCapability(AetherCapabilities.ITEM_PROPERTIES, null);
-//
-//					if (properties.getRarity() == rarity)
-//					{
-//						stacksWithRarity.add(loot);
-//					}
+					Optional<ItemRarity> itemRarity = AetherAPI.items().getProperties(stack.getItem()).getRarity();
+
+					if (itemRarity.isPresent() && itemRarity.get() == rarity)
+					{
+						stacksWithRarity.add(loot);
+					}
 				}
 			}
 		}

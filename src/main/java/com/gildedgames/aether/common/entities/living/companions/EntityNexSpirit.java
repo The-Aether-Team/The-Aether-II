@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.living.companions;
 
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.player.modules.PlayerCompanionModule;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import net.minecraft.block.Block;
@@ -29,7 +29,7 @@ public class EntityNexSpirit extends EntityCompanion
 
 		if (this.getOwner() != null)
 		{
-			PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(this.getOwner());
+			PlayerAether aePlayer = PlayerAether.getPlayer(this.getOwner());
 
 			PlayerCompanionModule companionManager = aePlayer.getCompanionModule();
 
@@ -53,19 +53,19 @@ public class EntityNexSpirit extends EntityCompanion
 	}
 
 	@Override
-	public void tickEffects(PlayerAetherImpl aePlayer)
+	public void tickEffects(PlayerAether aePlayer)
 	{
 
 	}
 
 	@Override
-	public void addEffects(PlayerAetherImpl aePlayer)
+	public void addEffects(PlayerAether aePlayer)
 	{
 
 	}
 
 	@Override
-	public void removeEffects(PlayerAetherImpl aePlayer)
+	public void removeEffects(PlayerAether aePlayer)
 	{
 
 	}

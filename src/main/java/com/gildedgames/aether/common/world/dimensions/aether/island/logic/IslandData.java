@@ -110,8 +110,8 @@ public class IslandData implements NBT
 
 		tag.setString("biomeID", this.biome.getRegistryName().toString());
 
-		tag.setTag("mysteriousHengePos", NBTHelper.serializeBlockPos(this.mysteriousHengePos));
-		tag.setTag("labyrinthEntrancePos", NBTHelper.serializeBlockPos(this.labyrinthEntrancePos));
+		tag.setTag("mysteriousHengePos", NBTHelper.writeBlockPos(this.mysteriousHengePos));
+		tag.setTag("labyrinthEntrancePos", NBTHelper.writeBlockPos(this.labyrinthEntrancePos));
 	}
 
 	@Override

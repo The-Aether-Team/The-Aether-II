@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.gui.menu;
 
 import com.gildedgames.aether.api.capabilites.entity.boss.IBoss;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.client.ui.common.GuiFrame;
 import com.gildedgames.aether.client.ui.graphics.Graphics2D;
 import com.gildedgames.aether.client.ui.input.InputProvider;
@@ -63,7 +63,7 @@ public class BossBattleOverlay extends GuiFrame
 			return false;
 		}
 
-		PlayerAetherImpl playerAether = PlayerAetherImpl.getPlayer(player);
+		PlayerAether playerAether = PlayerAether.getPlayer(player);
 		IBoss<?> boss = playerAether.getBossModule().getCurrentBoss();
 
 		return (this.boss = boss) != null;

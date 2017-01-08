@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.capabilities.player;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.entity.IPlayerAetherCapability;
+import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -9,11 +9,11 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 public class PlayerAetherProvider implements ICapabilitySerializable<NBTBase>
 {
-	private final PlayerAetherImpl.Storage storage = new PlayerAetherImpl.Storage();
+	private final PlayerAether.Storage storage = new PlayerAether.Storage();
 
-	private final IPlayerAetherCapability aePlayer;
+	private final IPlayerAether aePlayer;
 
-	public PlayerAetherProvider(IPlayerAetherCapability aePlayer)
+	public PlayerAetherProvider(IPlayerAether aePlayer)
 	{
 		this.aePlayer = aePlayer;
 	}

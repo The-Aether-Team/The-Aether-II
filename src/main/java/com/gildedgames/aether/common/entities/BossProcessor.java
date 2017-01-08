@@ -2,10 +2,10 @@ package com.gildedgames.aether.common.entities;
 
 import com.gildedgames.aether.api.capabilites.entity.boss.IBoss;
 import com.gildedgames.aether.api.capabilites.entity.boss.IBossManager;
-import com.gildedgames.aether.api.capabilites.items.properties.ItemRarity;
+import com.gildedgames.aether.api.items.ItemRarity;
 import com.gildedgames.aether.api.loot.LootGenerator;
 import com.gildedgames.aether.api.loot.LootPool;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -81,7 +81,7 @@ public class BossProcessor
 			EntityPlayer player = (EntityPlayer)event.getSource().getSourceOfDamage();
 			IBoss<?> boss = (IBoss)event.getEntity();
 
-			PlayerAetherImpl playerAether = PlayerAetherImpl.getPlayer(player);
+			PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 			playerAether.getBossModule().setCurrentBoss(boss);
 		}

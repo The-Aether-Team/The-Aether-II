@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.chunk.hooks.capabilities;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.chunk.IChunkAttachmentCapability;
+import com.gildedgames.aether.api.capabilites.chunk.IChunkAttachment;
 import com.gildedgames.aether.common.world.chunk.hooks.events.AttachCapabilitiesChunkEvent;
 import com.gildedgames.aether.api.util.NBT;
 import it.unimi.dsi.fastutil.longs.Long2ObjectArrayMap;
@@ -24,11 +24,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChunkAttachmentCapability implements IChunkAttachmentCapability
+public class ChunkAttachment implements IChunkAttachment
 {
 	private Long2ObjectMap<ChunkAttachmentPool> hooks = new Long2ObjectArrayMap<>();
 
-	public static IChunkAttachmentCapability get(World world)
+	public static IChunkAttachment get(World world)
 	{
 		return world.getCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null);
 	}
@@ -181,17 +181,17 @@ public class ChunkAttachmentCapability implements IChunkAttachmentCapability
 		}
 	}
 
-	public static class Storage implements Capability.IStorage<IChunkAttachmentCapability>
+	public static class Storage implements Capability.IStorage<IChunkAttachment>
 	{
 
 		@Override
-		public NBTBase writeNBT(Capability<IChunkAttachmentCapability> capability, IChunkAttachmentCapability instance, EnumFacing side)
+		public NBTBase writeNBT(Capability<IChunkAttachment> capability, IChunkAttachment instance, EnumFacing side)
 		{
 			return null;
 		}
 
 		@Override
-		public void readNBT(Capability<IChunkAttachmentCapability> capability, IChunkAttachmentCapability instance, EnumFacing side, NBTBase nbt)
+		public void readNBT(Capability<IChunkAttachment> capability, IChunkAttachment instance, EnumFacing side, NBTBase nbt)
 		{
 
 		}

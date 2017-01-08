@@ -98,7 +98,7 @@ public class MoaNest
 
 	public void writeToNBT(NBTTagCompound nbt)
 	{
-		nbt.setTag("pos", NBTHelper.serializeBlockPos(this.pos));
+		nbt.setTag("pos", NBTHelper.writeBlockPos(this.pos));
 		
 		nbt.setInteger("familyGeneticSeed", this.familyGeneticSeed);
 		

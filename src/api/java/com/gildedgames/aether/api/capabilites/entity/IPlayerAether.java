@@ -10,19 +10,20 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 
-public interface IPlayerAetherCapability
+public interface IPlayerAether
 {
-	// [--- Event handlers for the entity this capability is attached to. ---]
+	IInventoryEquipment getEquipmentInventory();
 
-	void onRespawn();
+	IPlayerCompanionManager getCompanionModule();
+
+	void onRespawn(PlayerEvent.PlayerRespawnEvent event);
 
 	void onPlaceBlock(BlockEvent.PlaceEvent event);
-
-	void onPlaceBlockMulti(BlockEvent.MultiPlaceEvent event);
 
 	void onUpdate(LivingUpdateEvent event);
 
@@ -40,30 +41,17 @@ public interface IPlayerAetherCapability
 
 	void onDespawn(PlayerLoggedOutEvent event);
 
-	// [--- End of event handlers. ---]
-
-	IInventoryEquipment getEquipmentInventory();
-
-	IPlayerCompanionManager getCompanionModule();
-
-
-
 	/**
 	 * @return The {@link EntityPlayer} this capability is attached to.
 	 */
-	EntityPlayer getPlayer();
+	EntityPlayer getEntity();
 
 	/**
 	 * @return This player's mining speed modifier.
 	 */
 	float getMiningSpeedMultiplier();
 
-	int getTicksAirborne();
-
-	boolean performMidAirJump();
-
 	void write(NBTTagCompound tag);
 
 	void read(NBTTagCompound tag);
-
 }

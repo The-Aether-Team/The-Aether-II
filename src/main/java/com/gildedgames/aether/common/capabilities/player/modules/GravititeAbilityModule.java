@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.capabilities.player.modules;
 
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import com.gildedgames.aether.common.registry.content.MaterialsAether;
@@ -8,25 +8,25 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 
 public class GravititeAbilityModule extends PlayerAetherModule
 {
 
 	private EntityMovingBlock heldBlock;
 
-	public GravititeAbilityModule(PlayerAetherImpl playerAether)
+	public GravititeAbilityModule(PlayerAether playerAether)
 	{
 		super(playerAether);
 	}
 
 	@Override
-	public void onUpdate(LivingEvent.LivingUpdateEvent event)
+	public void onUpdate()
 	{
-		if (this.getPlayer().worldObj.isRemote || this.getPlayer().isDead)
+		if (this.getEntity().worldObj.isRemote || this.getEntity().isDead)
 		{
 			return;
 		}
@@ -39,7 +39,7 @@ public class GravititeAbilityModule extends PlayerAetherModule
 			}
 			else
 			{
-				ItemStack stack = this.getPlayer().getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
+				ItemStack stack = this.getEntity().getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
 
 				if (stack != null && stack.getItem() instanceof ItemTool && ((ItemTool) stack.getItem()).getToolMaterial() == MaterialsAether.GRAVITITE_TOOL)
 				{
@@ -50,7 +50,7 @@ public class GravititeAbilityModule extends PlayerAetherModule
 
 						int extra = (int) Math.floor(Math.min(6, this.heldBlock.ticksExisted / 60));
 
-						stack.damageItem(2 + extra, this.getPlayer());
+						stack.damageItem(2 + extra, this.getEntity());
 					}
 				}
 				else
@@ -62,6 +62,17 @@ public class GravititeAbilityModule extends PlayerAetherModule
 	}
 
 	@Override
+	public void write(NBTTagCompound compound)
+	{
+
+	}
+
+	@Override
+	public void read(NBTTagCompound compound)
+	{
+
+	}
+
 	public void onDeath(LivingDeathEvent event)
 	{
 		this.dropHeldBlock();
@@ -71,7 +82,7 @@ public class GravititeAbilityModule extends PlayerAetherModule
 	{
 		if (this.heldBlock == null)
 		{
-			if (world.isBlockModifiable(this.getPlayer(), pos))
+			if (world.isBlockModifiable(this.getEntity(), pos))
 			{
 				IBlockState state = world.getBlockState(pos);
 
@@ -92,7 +103,7 @@ public class GravititeAbilityModule extends PlayerAetherModule
 		this.dropHeldBlock();
 
 		this.heldBlock = entity;
-		this.heldBlock.setHoldingPlayer(this.getPlayer());
+		this.heldBlock.setHoldingPlayer(this.getEntity());
 	}
 
 	public EntityMovingBlock getHeldBlock()

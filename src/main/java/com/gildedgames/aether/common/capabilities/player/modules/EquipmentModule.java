@@ -2,44 +2,65 @@ package com.gildedgames.aether.common.capabilities.player.modules;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.items.IItemProperties;
-import com.gildedgames.aether.api.items.equipment.effects.EffectPool;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectInstance;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectProcessor;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectState;
+import com.gildedgames.aether.api.items.equipment.effects.IEffect;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
+import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.capabilities.item.EquipmentRegistry;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
+import com.gildedgames.aether.common.items.equipment.EffectPool;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.entity.living.LivingEvent;
 
 import java.util.*;
 
 public class EquipmentModule extends PlayerAetherModule
 {
+	private final InventoryEquipment equipmentInventory;
+
 	private Map<ResourceLocation, EffectPool> pools = new HashMap<>();
 
 	private Collection<Item> watchedItems = new ArrayList<>();
 
-	public EquipmentModule(PlayerAetherImpl playerAether)
+	public EquipmentModule(PlayerAether player)
 	{
-		super(playerAether);
+		super(player);
+
+		this.equipmentInventory = new InventoryEquipment(player);
 	}
 
 	@Override
-	public void onUpdate(LivingEvent.LivingUpdateEvent event)
+	public void onUpdate()
 	{
 		this.updateInventory();
 
 		this.tickEquipment();
 	}
 
+	@Override
+	public void write(NBTTagCompound compound)
+	{
+		NBTTagCompound equipment = new NBTTagCompound();
+		compound.setTag("EquipmentInventory", equipment);
+
+		this.equipmentInventory.write(equipment);
+	}
+
+	@Override
+	public void read(NBTTagCompound compound)
+	{
+		if (compound.hasKey("EquipmentInventory"))
+		{
+			this.equipmentInventory.read(compound.getCompoundTag("EquipmentInventory"));
+		}
+	}
+
 	private void updateInventory()
 	{
-		InventoryEquipment equipment = this.getPlayerAether().getEquipmentInventory();
+		IInventoryEquipment equipment = this.getPlayer().getEquipmentInventory();
 
 		// All currently watched equipment is added. If we don't find an item from this list
 		// in the inventory, it will be removed.
@@ -78,7 +99,7 @@ public class EquipmentModule extends PlayerAetherModule
 	{
 		for (EffectPool pool : this.pools.values())
 		{
-			pool.getProcessor().onEntityUpdate(this, pool.getState());
+			pool.getInstance().onEntityUpdate(this.getPlayer());
 		}
 	}
 
@@ -129,7 +150,7 @@ public class EquipmentModule extends PlayerAetherModule
 	 * @param item The item
 	 * @return A collection of effect instances, empty if it provides none
 	 */
-	private Collection<IEffectInstance> getItemEffects(Item item)
+	private Collection<IEffectProvider> getItemEffects(Item item)
 	{
 		IItemProperties properties = AetherAPI.items().getProperties(item);
 
@@ -143,15 +164,15 @@ public class EquipmentModule extends PlayerAetherModule
 
 	/**
 	 * Removes the {@param instance} from the active pool of effects.
-	 * @param instance The {@link IEffectInstance} to remove
+	 * @param instance The {@link IEffectProvider} to remove
 	 */
-	private void removeEffect(IEffectInstance instance)
+	private void removeEffect(IEffectProvider instance)
 	{
-		EffectPool pool = this.pools.get(instance.getProcessor());
+		EffectPool pool = this.pools.get(instance.getFactory());
 
 		if (pool == null)
 		{
-			AetherCore.LOGGER.warn("An attempt was made to remove an effect instance from effect pool '{}', but it isn't active", instance.getProcessor().toString());
+			AetherCore.LOGGER.warn("An attempt was made to remove an effect instance from effect pool '{}', but it isn't active", instance.getFactory().toString());
 			return;
 		}
 
@@ -159,25 +180,30 @@ public class EquipmentModule extends PlayerAetherModule
 
 		if (pool.isEmpty())
 		{
-			this.pools.remove(instance.getProcessor());
+			this.pools.remove(instance.getFactory());
 		}
 	}
 
 	/**
 	 * Adds {@param instance} to the active pool of effects.
-	 * @param instance The {@link IEffectInstance} to add
+	 * @param instance The {@link IEffectProvider} to add
 	 */
-	private void addEffect(IEffectInstance instance)
+	private void addEffect(IEffectProvider instance)
 	{
-		EffectPool pool = this.pools.get(instance.getProcessor());
+		EffectPool pool = this.pools.get(instance.getFactory());
 
 		if (pool == null)
 		{
-			IEffectProcessor<IEffectInstance, IEffectState> processor = AetherAPI.equipment().getEffect(instance.getProcessor());
+			IEffect<IEffectProvider> factory = AetherAPI.equipment().getFactory(instance.getFactory());
 
-			this.pools.put(instance.getProcessor(), pool = new EffectPool(processor));
+			this.pools.put(instance.getFactory(), pool = new EffectPool(factory));
 		}
 
 		pool.addInstance(instance);
+	}
+
+	public IInventoryEquipment getInventory()
+	{
+		return this.equipmentInventory;
 	}
 }

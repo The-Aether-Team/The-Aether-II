@@ -10,8 +10,6 @@ package com.gildedgames.aether.api.util;
  * @param <I> The type used to read back the data inside of this class.
  * @param <O> The type used to write the data inside of this class.
  */
-
-/** TODO: MOVE THIS OUT OF THE API, FOR SOME REASON THE API CANNOT SEE THE MAIN AETHER SRC FILES **/
 public interface IO<I, O>
 {
 

@@ -1,4 +1,4 @@
-package com.gildedgames.aether.api.capabilites.items.properties;
+package com.gildedgames.aether.api.items.equipment;
 
 public enum ItemEquipmentSlot
 {

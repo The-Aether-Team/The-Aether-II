@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.network.packets;
 
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,7 +37,7 @@ public class CompanionChangedPacket implements IMessage
 		@Override
 		public IMessage onMessage(CompanionChangedPacket message, EntityPlayer player)
 		{
-			PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
+			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 			aePlayer.getCompanionModule().handleCompanionChange(message.entityId);
 
 			return null;

@@ -1,6 +1,5 @@
 package com.gildedgames.aether.api.items;
 
-import com.gildedgames.aether.api.capabilites.items.properties.ItemRarity;
 import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
 
 public class ItemPropertiesBuilder

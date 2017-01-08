@@ -13,20 +13,20 @@ import com.gildedgames.aether.client.ui.minecraft.util.inventory.data_structure.
 import com.gildedgames.aether.client.ui.minecraft.util.inventory.data_structure.InventoryElement;
 import com.gildedgames.aether.client.ui.minecraft.util.inventory.data_structure.InventoryListener;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 
 public class GuiHotbar extends GuiFrame
 {
 
 	private static final AssetLocation SLOT_OVLERAY = AetherCore.assetGui("inventory/slot_overlay.png");
 
-	private final PlayerAetherImpl player;
+	private final PlayerAether player;
 
 	private InventoryListener<InventoryElement> listener;
 
 	private Inventory<InventoryElement> inventory;
 
-	public GuiHotbar(PlayerAetherImpl player)
+	public GuiHotbar(PlayerAether player)
 	{
 		this.player = player;
 

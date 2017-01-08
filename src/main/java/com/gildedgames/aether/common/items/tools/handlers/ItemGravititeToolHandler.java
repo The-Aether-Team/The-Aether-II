@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.tools.handlers;
 
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -25,7 +25,7 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 	@Override
 	public void onRightClickBlock(ItemStack stack, World world, BlockPos pos, EntityPlayer player, EnumFacing facing)
 	{
-		PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
+		PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
 		if (aePlayer.getGravititeAbility().getHeldBlock() == null)
 		{
@@ -67,7 +67,7 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 	{
 		if (!world.isRemote)
 		{
-			PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(player);
+			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
 			if (aePlayer.getGravititeAbility().getHeldBlock() != null && aePlayer.getGravititeAbility().getHeldBlock().ticksExisted > 1)
 			{

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.living.npc;
 
 import com.gildedgames.aether.client.gui.dialog.GuiDialogController;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.dialog.data.EdisonDialog;
 import com.gildedgames.aether.common.util.io.NBTHelper;
 import net.minecraft.client.Minecraft;
@@ -50,7 +50,7 @@ public class EntityEdison extends EntityNPC
 	{
 		super.writeEntityToNBT(compound);
 
-		compound.setTag("spawned", NBTHelper.serializeBlockPos(this.spawned));
+		compound.setTag("spawned", NBTHelper.writeBlockPos(this.spawned));
 	}
 
 	@Override
@@ -94,7 +94,7 @@ public class EntityEdison extends EntityNPC
 		{
 			if (player.worldObj.isRemote)
 			{
-				PlayerAetherImpl playerAether = PlayerAetherImpl.getPlayer(player);
+				PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 				GuiDialogController controller = new GuiDialogController(player);
 

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.living.companions;
 
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import net.minecraft.world.World;
 
 public class EntityShadeOfArkenzus extends EntityCompanion
@@ -13,19 +13,19 @@ public class EntityShadeOfArkenzus extends EntityCompanion
 	}
 
 	@Override
-	public void tickEffects(PlayerAetherImpl aePlayer)
+	public void tickEffects(PlayerAether aePlayer)
 	{
 
 	}
 
 	@Override
-	public void addEffects(PlayerAetherImpl aePlayer)
+	public void addEffects(PlayerAether aePlayer)
 	{
 
 	}
 
 	@Override
-	public void removeEffects(PlayerAetherImpl aePlayer)
+	public void removeEffects(PlayerAether aePlayer)
 	{
 
 	}

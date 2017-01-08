@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.IAetherServices;
+import com.gildedgames.aether.api.IAetherServiceLocator;
 import com.gildedgames.aether.api.capabilites.instances.IInstanceRegistry;
 import com.gildedgames.aether.api.registry.IEquipmentRegistry;
 import com.gildedgames.aether.api.registry.IItemPropertiesRegistry;
@@ -34,7 +34,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 
 @Mod(name = AetherCore.MOD_NAME, modid = AetherCore.MOD_ID, version = AetherCore.MOD_VERSION, certificateFingerprint = AetherCore.MOD_FINGERPRINT, guiFactory = AetherCore.MOD_GUI_FACTORY)
-public class AetherCore implements IAetherServices
+public class AetherCore implements IAetherServiceLocator
 {
 
 	protected static final String MOD_GUI_FACTORY = "com.gildedgames.aether.client.gui.GuiFactoryAether";

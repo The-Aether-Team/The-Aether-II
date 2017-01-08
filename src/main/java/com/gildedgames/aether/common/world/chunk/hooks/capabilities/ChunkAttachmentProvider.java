@@ -9,9 +9,9 @@ import javax.annotation.Nullable;
 
 public class ChunkAttachmentProvider implements ICapabilityProvider
 {
-	private ChunkAttachmentCapability capability;
+	private ChunkAttachment capability;
 
-	public ChunkAttachmentProvider(ChunkAttachmentCapability capability)
+	public ChunkAttachmentProvider(ChunkAttachment capability)
 	{
 		this.capability = capability;
 	}

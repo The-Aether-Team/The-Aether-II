@@ -1,10 +1,9 @@
 package com.gildedgames.aether.common.capabilities.player.modules;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
@@ -17,7 +16,7 @@ public class AbilitiesModule extends PlayerAetherModule
 
 	private int ticksAirborne;
 
-	public AbilitiesModule(PlayerAetherImpl playerAether)
+	public AbilitiesModule(PlayerAether playerAether)
 	{
 		super(playerAether);
 	}
@@ -32,10 +31,9 @@ public class AbilitiesModule extends PlayerAetherModule
 		this.midAirJumpsAllowed = midAirJumpsAllowed;
 	}
 
-	@Override
-	public void onUpdate(LivingEvent.LivingUpdateEvent event)
+	public void onUpdate()
 	{
-		if (this.getPlayer().onGround)
+		if (this.getEntity().onGround)
 		{
 			this.jumpsSoFar = 0;
 			this.ticksAirborne = 0;
@@ -46,7 +44,6 @@ public class AbilitiesModule extends PlayerAetherModule
 		}
 	}
 
-	@Override
 	public void onFall(LivingFallEvent event)
 	{
 		if (this.getMidAirJumpsAllowed() > 0)
@@ -55,24 +52,22 @@ public class AbilitiesModule extends PlayerAetherModule
 		}
 	}
 
-	@Override
 	public int getTicksAirborne()
 	{
 		return this.ticksAirborne;
 	}
 
-	@Override
 	public boolean performMidAirJump()
 	{
 		if (this.jumpsSoFar < this.midAirJumpsAllowed && this.ticksAirborne > 2)
 		{
-			AetherCore.PROXY.spawnJumpParticles(this.getPlayer().worldObj, this.getPlayer().posX, this.getPlayer().posY, this.getPlayer().posZ, 1.5D, 12);
+			AetherCore.PROXY.spawnJumpParticles(this.getEntity().worldObj, this.getEntity().posX, this.getEntity().posY, this.getEntity().posZ, 1.5D, 12);
 
-			this.getPlayer().motionY = 0.55D;
-			this.getPlayer().fallDistance = -4;
+			this.getEntity().motionY = 0.55D;
+			this.getEntity().fallDistance = -4;
 
-			this.getPlayer().motionX *= 1.4D;
-			this.getPlayer().motionZ *= 1.4D;
+			this.getEntity().motionX *= 1.4D;
+			this.getEntity().motionZ *= 1.4D;
 
 			this.jumpsSoFar++;
 
@@ -85,6 +80,9 @@ public class AbilitiesModule extends PlayerAetherModule
 	@Override
 	public void write(NBTTagCompound tag)
 	{
+		NBTTagCompound root = new NBTTagCompound();
+		tag.setTag("Abilities", root);
+
 		tag.setInteger("midAirJumpsAllowed", this.midAirJumpsAllowed);
 		tag.setInteger("jumpsSoFar", this.jumpsSoFar);
 	}
@@ -92,8 +90,10 @@ public class AbilitiesModule extends PlayerAetherModule
 	@Override
 	public void read(NBTTagCompound tag)
 	{
-		this.midAirJumpsAllowed = tag.getInteger("midAirJumpsAllowed");
-		this.jumpsSoFar = tag.getInteger("jumpsSoFar");
+		NBTTagCompound root = tag.getCompoundTag("Abilities");
+
+		this.midAirJumpsAllowed = root.getInteger("midAirJumpsAllowed");
+		this.jumpsSoFar = root.getInteger("jumpsSoFar");
 	}
 
 }

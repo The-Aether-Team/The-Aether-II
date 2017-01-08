@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.api.capabilites.entity.boss.IBoss;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
@@ -51,7 +51,7 @@ public class BossChangePacket implements IMessage
 		@Override
 		public BossChangePacket onMessage(BossChangePacket message, EntityPlayer player)
 		{
-			PlayerAetherImpl playerAether = PlayerAetherImpl.getPlayer(player);
+			PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 			Entity entity = EntityUtil.getEntityFromUUID(player.worldObj, message.bossEntityUUID);
 

@@ -146,7 +146,8 @@ public class BlockLabyrinthContainer extends Block implements IBlockVariants {
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
+	public String getUnlocalizedName(ItemStack stack)
+	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}
 

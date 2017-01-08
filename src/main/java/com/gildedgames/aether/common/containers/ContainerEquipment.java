@@ -1,8 +1,10 @@
 package com.gildedgames.aether.common.containers;
 
+import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentSlot;
-import com.gildedgames.aether.api.capabilites.entity.IPlayerAetherCapability;
+import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
+import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
+import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
@@ -10,20 +12,22 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 
+import java.util.Optional;
+
 public class ContainerEquipment extends ContainerPlayer
 {
 	/** See {@link GuiContainerCreative#basicInventory} **/
-	private static InventoryBasic dumbInventory = new InventoryBasic("fake", true, 52);
+	private static InventoryBasic dumbInventory = new InventoryBasic("tmp", true, 52);
 
-	private final IPlayerAetherCapability aePlayer;
+	private final IPlayerAether aePlayer;
 
 	private final IInventoryEquipment inventoryEquipment;
 
 	private Slot binSlot;
 
-	public ContainerEquipment(IPlayerAetherCapability aePlayer)
+	public ContainerEquipment(IPlayerAether aePlayer)
 	{
-		super(aePlayer.getPlayer().inventory, false, aePlayer.getPlayer());
+		super(aePlayer.getEntity().inventory, false, aePlayer.getEntity());
 
 		this.aePlayer = aePlayer;
 		this.inventoryEquipment = aePlayer.getEquipmentInventory();
@@ -42,7 +46,7 @@ public class ContainerEquipment extends ContainerPlayer
 
 			if (itemstack != null)
 			{
-				itemstack.getItem().onUpdate(itemstack, this.aePlayer.getPlayer().getEntityWorld(), this.aePlayer.getPlayer(), i, false);
+				itemstack.getItem().onUpdate(itemstack, this.aePlayer.getEntity().getEntityWorld(), this.aePlayer.getEntity(), i, false);
 			}
 		}
 	}
@@ -91,7 +95,7 @@ public class ContainerEquipment extends ContainerPlayer
 
 		this.binSlot = new Slot(ContainerEquipment.dumbInventory, this.inventorySlots.size(), 213, 26);
 
-		if (this.aePlayer.getPlayer().capabilities.isCreativeMode)
+		if (this.aePlayer.getEntity().capabilities.isCreativeMode)
 		{
 			this.addSlotToContainer(this.binSlot);
 
@@ -155,7 +159,7 @@ public class ContainerEquipment extends ContainerPlayer
 	{
 		if (slotId == this.binSlot.slotNumber && player.capabilities.isCreativeMode)
 		{
-			this.aePlayer.getPlayer().inventory.setItemStack(null);
+			this.aePlayer.getEntity().inventory.setItemStack(null);
 		}
 
 		return super.slotClick(slotId, dragType, clickTypeIn, player);
@@ -187,6 +191,41 @@ public class ContainerEquipment extends ContainerPlayer
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotNumber)
 	{
+		Slot slot = this.inventorySlots.get(slotNumber);
+
+		if (slotNumber == this.binSlot.slotNumber && this.aePlayer.getEntity().capabilities.isCreativeMode)
+		{
+			this.aePlayer.getEntity().inventory.clear();
+			this.aePlayer.getEquipmentInventory().clear();
+		}
+
+		if (slot != null && slot.getHasStack())
+		{
+			ItemStack stack = slot.getStack();
+
+			if (!(slot instanceof SlotEquipment) && !(slot instanceof SlotCrafting))
+			{
+				int destIndex = -1;
+
+				Optional<IEquipmentProperties> properties = AetherAPI.items().getEquipmentProperties(stack.getItem());
+
+				if (properties.isPresent())
+				{
+					destIndex = this.getNextEmptySlot(properties.get().getSlot());
+				}
+
+				if (destIndex >= 0)
+				{
+					Slot accessorySlot = this.inventorySlots.get(destIndex);
+					accessorySlot.putStack(stack);
+
+					slot.putStack(null);
+
+					return stack;
+				}
+			}
+		}
+
 		return super.transferStackInSlot(player, slotNumber);
 	}
 

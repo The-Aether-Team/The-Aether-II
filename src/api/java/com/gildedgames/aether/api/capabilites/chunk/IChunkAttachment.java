@@ -6,7 +6,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.event.world.ChunkEvent;
 
-public interface IChunkAttachmentCapability
+public interface IChunkAttachment
 {
 	void load(ChunkDataEvent.Load event);
 

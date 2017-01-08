@@ -1,4 +1,8 @@
-package com.gildedgames.aether.api.items.equipment.effects;
+package com.gildedgames.aether.common.items.equipment;
+
+import com.gildedgames.aether.api.items.equipment.effects.IEffect;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectInstance;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,24 +12,24 @@ import java.util.Collection;
  */
 public class EffectPool
 {
-	private final Collection<IEffectInstance> instances = new ArrayList<>();
+	private final Collection<IEffectProvider> providers = new ArrayList<>();
 
-	private final IEffectProcessor<IEffectInstance, IEffectState> processor;
+	private final IEffect<IEffectProvider> factory;
 
-	private IEffectState state;
+	private IEffectInstance instance;
 
-	public EffectPool(IEffectProcessor<IEffectInstance, IEffectState> processor)
+	public EffectPool(IEffect<IEffectProvider> factory)
 	{
-		this.processor = processor;
+		this.factory = factory;
 	}
 
 	/**
 	 * Removes an instance from this entity, and rebuilds the state as needed.
 	 * @param instance The instance to remove
 	 */
-	public void removeInstance(IEffectInstance instance)
+	public void removeInstance(IEffectProvider instance)
 	{
-		this.instances.remove(instance);
+		this.providers.remove(instance);
 
 		this.rebuildState();
 	}
@@ -34,9 +38,9 @@ public class EffectPool
 	 * Adds an instance to this entity, and rebuilds the state as needed.
 	 * @param instance The instance to add
 	 */
-	public void addInstance(IEffectInstance instance)
+	public void addInstance(IEffectProvider instance)
 	{
-		this.instances.add(instance);
+		this.providers.add(instance);
 
 		this.rebuildState();
 	}
@@ -46,7 +50,7 @@ public class EffectPool
 	 */
 	private void rebuildState()
 	{
-		this.state = this.processor.createState(this.instances);
+		this.instance = this.factory.createInstance(this.providers);
 	}
 
 	/**
@@ -56,22 +60,22 @@ public class EffectPool
 	 */
 	public boolean isEmpty()
 	{
-		return this.instances.size() <= 0;
+		return this.providers.size() <= 0;
 	}
 
 	/**
 	 * @return The state of this effect for the entity
 	 */
-	public IEffectState getState()
+	public IEffectInstance getInstance()
 	{
-		return this.state;
+		return this.instance;
 	}
 
 	/**
 	 * @return The processor of this effect for the entity.
 	 */
-	public IEffectProcessor<IEffectInstance, IEffectState> getProcessor()
+	public IEffect<IEffectProvider> getFactory()
 	{
-		return this.processor;
+		return this.factory;
 	}
 }

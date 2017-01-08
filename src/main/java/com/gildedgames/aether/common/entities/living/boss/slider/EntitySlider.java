@@ -376,7 +376,7 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 
 		tag.setBoolean("isAwake", this.isAwake());
 		tag.setBoolean("isCritical", this.isCritical());
-		tag.setTag("startLocation", NBTHelper.serializeBlockPos(this.startLocation));
+		tag.setTag("startLocation", NBTHelper.writeBlockPos(this.startLocation));
 		tag.setInteger("nextSlideCooldown", this.nextSlideCooldown);
 
 		NBTHelper.fullySerialize("bossManager", this.bossManager, tag);

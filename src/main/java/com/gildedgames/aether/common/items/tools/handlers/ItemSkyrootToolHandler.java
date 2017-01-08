@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.items.tools.handlers;
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.common.blocks.util.ISkyrootMinable;
-import com.gildedgames.aether.common.world.chunk.hooks.capabilities.ChunkAttachmentCapability;
+import com.gildedgames.aether.common.world.chunk.hooks.capabilities.ChunkAttachment;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -26,7 +26,7 @@ public class ItemSkyrootToolHandler implements IToolEventHandler
 	{
 		if (!world.isRemote)
 		{
-			IPlacementFlagCapability data = ChunkAttachmentCapability.get(world).getAttachment(new ChunkPos(pos), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
+			IPlacementFlagCapability data = ChunkAttachment.get(world).getAttachment(new ChunkPos(pos), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
 
 			if (data.isMarked(pos))
 			{

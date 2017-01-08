@@ -27,4 +27,27 @@ public class EffectHelper
 
 		return total;
 	}
+
+	/**
+	 * A helper method to combine the specific value of multiple effect instances together.
+	 *
+	 * This method iterates through each object, using {@param func} to collect the values.
+	 *
+	 * @param instances The collection of objects to combine
+	 * @param func A {@link Function} which returns the value of each object to be combined
+	 * @param <T> The object type
+	 *
+	 * @return The combined value of every object in {@param instances}
+	 */
+	public static <T> int combineInt(Collection<T> instances, Function<T, Integer> func)
+	{
+		int total = 0;
+
+		for (T instance : instances)
+		{
+			total += func.apply(instance);
+		}
+
+		return total;
+	}
 }

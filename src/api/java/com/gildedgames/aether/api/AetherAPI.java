@@ -11,21 +11,32 @@ import com.gildedgames.aether.api.registry.tab.ITabRegistry;
 // Modular functionality
 public class AetherAPI
 {
-	private static IAetherServices services;
+	private static IAetherServiceLocator services;
 
 	public static IAltarRecipeRegistry altar()
 	{
 		return AetherAPI.services().getAltarRecipeRegistry();
 	}
 
-	// TODO: Reformat all of these...
-	public static ITabRegistry tabs() { return AetherAPI.services().getTabRegistry(); }
+	public static ITabRegistry tabs()
+	{
+		return AetherAPI.services().getTabRegistry();
+	}
 
-	public static IInstanceRegistry instances() { return AetherAPI.services().getInstanceRegistry(); }
+	public static IInstanceRegistry instances()
+	{
+		return AetherAPI.services().getInstanceRegistry();
+	}
 
-	public static ISimpleCraftingRegistry crafting() { return AetherAPI.services().getSimpleCraftingRegistry(); }
+	public static ISimpleCraftingRegistry crafting()
+	{
+		return AetherAPI.services().getSimpleCraftingRegistry();
+	}
 
-	public static ISimpleCraftingRegistry masonry() { return AetherAPI.services().getMasonryRegistry(); }
+	public static ISimpleCraftingRegistry masonry()
+	{
+		return AetherAPI.services().getMasonryRegistry();
+	}
 
 	public static IItemPropertiesRegistry items()
 	{
@@ -37,7 +48,7 @@ public class AetherAPI
 		return AetherAPI.services().getEquipmentRegistry();
 	}
 
-	public static void registerProvider(IAetherServices services)
+	public static void registerProvider(IAetherServiceLocator services)
 	{
 		if (AetherAPI.services != null)
 		{
@@ -47,7 +58,7 @@ public class AetherAPI
 		AetherAPI.services = services;
 	}
 
-	public static IAetherServices services()
+	public static IAetherServiceLocator services()
 	{
 		return AetherAPI.services;
 	}

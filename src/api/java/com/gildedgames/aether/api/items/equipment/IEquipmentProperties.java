@@ -1,11 +1,9 @@
 package com.gildedgames.aether.api.items.equipment;
 
-import com.gildedgames.aether.api.capabilites.items.properties.ItemEquipmentSlot;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectInstance;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 
 import javax.annotation.Nonnull;
 import java.util.Collection;
-import java.util.Optional;
 
 public interface IEquipmentProperties
 {
@@ -18,5 +16,5 @@ public interface IEquipmentProperties
 	/**
 	 * @return The collection of effect instances this item provides.
 	 */
-	Collection<IEffectInstance> getEffectInstances();
+	Collection<IEffectProvider> getEffectInstances();
 }

@@ -1,7 +1,11 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
 import com.gildedgames.aether.api.capabilites.instances.IInstanceRegistry;
+import com.gildedgames.aether.api.items.IItemProperties;
+import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
+import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.api.registry.IEquipmentRegistry;
 import com.gildedgames.aether.api.registry.IItemPropertiesRegistry;
 import com.gildedgames.aether.api.registry.tab.ITabRegistry;
@@ -11,7 +15,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.CapabilityManagerAether;
 import com.gildedgames.aether.common.capabilities.instances.InstanceRegistryImpl;
 import com.gildedgames.aether.common.capabilities.item.EquipmentRegistry;
-import com.gildedgames.aether.common.capabilities.player.ItemSlot;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherEvents;
 import com.gildedgames.aether.common.containers.tab.TabRegistryImpl;
 import com.gildedgames.aether.common.entities.BossProcessor;
@@ -27,8 +31,8 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.tools.ItemToolHandler;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.registry.ItemPropertiesRegistry;
 import com.gildedgames.aether.common.registry.GenerationAether;
+import com.gildedgames.aether.common.registry.ItemPropertiesRegistry;
 import com.gildedgames.aether.common.registry.SimpleCraftingRegistry;
 import com.gildedgames.aether.common.registry.content.*;
 import com.gildedgames.aether.common.registry.minecraft.MinecraftRecipesAether;
@@ -51,6 +55,7 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.event.*;
 
 import java.io.File;
+import java.util.Optional;
 import java.util.Random;
 
 public class CommonProxy
@@ -114,7 +119,6 @@ public class CommonProxy
 		AetherCore.srl().registerSerialization(7, SimpleBossManager.class, new Instantiator(SimpleBossManager.class));
 		AetherCore.srl().registerSerialization(8, IslandSector.class, new Instantiator(IslandSector.class));
 		AetherCore.srl().registerSerialization(9, IslandData.class, new Instantiator(IslandData.class));
-		AetherCore.srl().registerSerialization(10, ItemSlot.class, new Instantiator(ItemSlot.class));
 	}
 
 	public void init(FMLInitializationEvent event)
@@ -165,48 +169,48 @@ public class CommonProxy
 
 	public boolean tryEquipEquipment(EntityPlayer player, ItemStack stack, EnumHand hand)
 	{
-		// TODO
-		return false;
+		if (stack == null)
+		{
+			return false;
+		}
 
-//		if (stack == null)
-//		{
-//			return false;
-//		}
-//
-//		IPlayerAetherCapability aePlayer = PlayerAetherImpl.getPlayer(player);
-//
-//		if (aePlayer == null)
-//		{
-//			return false;
-//		}
-//
-//		IInventoryEquipment equipment = aePlayer.getEquipmentInventory();
-//
-//		ItemProperties props = AetherAPI.equipment().getProperties(stack.getItem());
-//
-//		if (props != null)
-//		{
-//			int slot = equipment.getNextEmptySlotForType(props.getEquipmentType());
-//
-//			if (slot < 0)
-//			{
-//				return false;
-//			}
-//
-//			equipment.setInventorySlotContents(slot, stack.copy());
-//
-//			if (!player.capabilities.isCreativeMode)
-//			{
-//				// Technically, there should never be STACKABLE equipment, but in case there is, we need to handle it.
-//				stack.stackSize--;
-//			}
-//
-//			player.setHeldItem(hand, stack.stackSize <= 0 ? null : stack);
-//
-//			return true;
-//		}
-//
-//		return false;
+		IPlayerAether aePlayer = PlayerAether.getPlayer(player);
+
+		if (aePlayer == null)
+		{
+			return false;
+		}
+
+		IInventoryEquipment inventory = aePlayer.getEquipmentInventory();
+
+		Optional<IEquipmentProperties> equipment = AetherAPI.items().getEquipmentProperties(stack.getItem());
+
+		if (equipment.isPresent())
+		{
+			int slot = inventory.getNextEmptySlotForType(equipment.get().getSlot());
+
+			if (slot < 0)
+			{
+				return false;
+			}
+
+			ItemStack copy = stack.copy();
+			copy.stackSize = 1;
+
+			inventory.setInventorySlotContents(slot, copy);
+
+			if (!player.capabilities.isCreativeMode)
+			{
+				// Technically, there should never be STACKABLE equipment, but in case there is, we need to handle it.
+				stack.stackSize--;
+			}
+
+			player.setHeldItem(hand, stack.stackSize <= 0 ? null : stack);
+
+			return true;
+		}
+
+		return false;
 	}
 
 	public File getAetherStorageDir()

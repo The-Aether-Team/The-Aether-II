@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.capabilities.player.modules;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
@@ -10,7 +10,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.event.entity.living.LivingEvent;
 
 public class TeleportingModule extends PlayerAetherModule
 {
@@ -19,7 +18,7 @@ public class TeleportingModule extends PlayerAetherModule
 
 	private boolean teleported, teleporting;
 
-	public TeleportingModule(PlayerAetherImpl playerAether)
+	public TeleportingModule(PlayerAether playerAether)
 	{
 		super(playerAether);
 	}
@@ -35,15 +34,15 @@ public class TeleportingModule extends PlayerAetherModule
 	}
 
 	@Override
-	public void onUpdate(LivingEvent.LivingUpdateEvent event)
+	public void onUpdate()
 	{
 		this.prevTimeInPortal = this.timeInPortal;
 
 		if (this.teleporting)
 		{
-			if (this.getPlayer().worldObj.isRemote && this.timeCharged == 0 && !this.teleported)
+			if (this.getEntity().worldObj.isRemote && this.timeCharged == 0 && !this.teleported)
 			{
-				if (Minecraft.getMinecraft().thePlayer.getEntityId() == this.getPlayer().getEntityId())
+				if (Minecraft.getMinecraft().thePlayer.getEntityId() == this.getEntity().getEntityId())
 				{
 					Minecraft.getMinecraft().thePlayer.playSound(SoundsAether.glowstone_portal_trigger, 1.0F, 1.0F);
 				}
@@ -58,12 +57,12 @@ public class TeleportingModule extends PlayerAetherModule
 				this.timeInPortal = 1.0F;
 			}
 
-			if (!this.teleported && (this.getPlayer().capabilities.isCreativeMode || this.timeInPortal == 1.0F))
+			if (!this.teleported && (this.getEntity().capabilities.isCreativeMode || this.timeInPortal == 1.0F))
 			{
 				this.teleportToAether();
 			}
 		}
-		else if (this.getPlayer().isPotionActive(MobEffects.NAUSEA) && this.getPlayer().getActivePotionEffect(MobEffects.NAUSEA).getDuration() > 60)
+		else if (this.getEntity().isPotionActive(MobEffects.NAUSEA) && this.getEntity().getActivePotionEffect(MobEffects.NAUSEA).getDuration() > 60)
 		{
 			this.timeInPortal += 0.006666667F;
 
@@ -92,9 +91,9 @@ public class TeleportingModule extends PlayerAetherModule
 			--this.timeCharged;
 		}
 
-		if (this.getPlayer().timeUntilPortal > 0)
+		if (this.getEntity().timeUntilPortal > 0)
 		{
-			--this.getPlayer().timeUntilPortal;
+			--this.getEntity().timeUntilPortal;
 		}
 
 		this.teleporting = false;
@@ -107,21 +106,21 @@ public class TeleportingModule extends PlayerAetherModule
 
 	private void teleportToAether()
 	{
-		this.getPlayer().timeUntilPortal = this.getPlayer().getPortalCooldown();
+		this.getEntity().timeUntilPortal = this.getEntity().getPortalCooldown();
 		this.teleported = true;
 
-		if (this.getPlayer().worldObj.isRemote && Minecraft.getMinecraft().thePlayer.getEntityId() == this.getPlayer().getEntityId())
+		if (this.getEntity().worldObj.isRemote && Minecraft.getMinecraft().thePlayer.getEntityId() == this.getEntity().getEntityId())
 		{
 			Minecraft.getMinecraft().thePlayer.playSound(SoundsAether.glowstone_portal_travel, 1.0F, 1.0F);
 		}
 
-		if (this.getPlayer().worldObj instanceof WorldServer)
+		if (this.getEntity().worldObj instanceof WorldServer)
 		{
-			WorldServer worldServer = (WorldServer)this.getPlayer().worldObj;
+			WorldServer worldServer = (WorldServer)this.getEntity().worldObj;
 
-			final int transferToID = this.getPlayer().worldObj.provider.getDimensionType() == DimensionsAether.AETHER ? 0 : AetherCore.CONFIG.getAetherDimID();
+			final int transferToID = this.getEntity().worldObj.provider.getDimensionType() == DimensionsAether.AETHER ? 0 : AetherCore.CONFIG.getAetherDimID();
 
-			CommonEvents.teleportEntity(this.getPlayer(), worldServer, AetherCore.TELEPORTER, transferToID);
+			CommonEvents.teleportEntity(this.getEntity(), worldServer, AetherCore.TELEPORTER, transferToID);
 		}
 
 		this.timeInPortal = 0.0F;
@@ -130,12 +129,17 @@ public class TeleportingModule extends PlayerAetherModule
 	@Override
 	public void write(NBTTagCompound output)
 	{
-		output.setFloat("timeCharged", this.timeCharged);
+		NBTTagCompound root = new NBTTagCompound();
+		output.setTag("Teleport", root);
+
+		root.setFloat("timeCharged", this.timeCharged);
 	}
 
 	@Override
 	public void read(NBTTagCompound input)
 	{
-		this.timeCharged = input.getFloat("timeCharged");
+		NBTTagCompound root = input.getCompoundTag("Teleport");
+
+		this.timeCharged = root.getFloat("timeCharged");
 	}
 }

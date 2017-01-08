@@ -1,7 +1,8 @@
 package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.entity.IPlayerAetherCapability;
+import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -43,20 +44,15 @@ public class AetherMovementPacket implements IMessage
 		@Override
 		public AetherMovementPacket onMessage(AetherMovementPacket message, EntityPlayer player)
 		{
-			IPlayerAetherCapability aePlayer = player.getCapability(AetherCapabilities.PLAYER_DATA, null);
+			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
 			switch (message.action)
 			{
 			case EXTRA_JUMP:
-				this.performExtraJump(aePlayer);
+				aePlayer.getAbilitiesModule().performMidAirJump();
 			}
 
 			return null;
-		}
-
-		private void performExtraJump(IPlayerAetherCapability player)
-		{
-			player.performMidAirJump();
 		}
 	}
 }

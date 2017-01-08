@@ -1,13 +1,13 @@
 package com.gildedgames.aether.common.util.helpers;
 
-import com.gildedgames.aether.api.capabilites.entity.IPlayerAetherCapability;
+import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class PlayerUtil
 {
-	public static boolean isWearingEquipment(IPlayerAetherCapability aePlayer, Item... items)
+	public static boolean isWearingEquipment(IPlayerAether aePlayer, Item... items)
 	{
 		for (Item item : items)
 		{
@@ -25,7 +25,7 @@ public class PlayerUtil
 				}
 			}
 
-			for (ItemStack stack : aePlayer.getPlayer().inventory.armorInventory)
+			for (ItemStack stack : aePlayer.getEntity().inventory.armorInventory)
 			{
 				if (stack != null && stack.getItem() == item)
 				{

@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.renderer;
 
 import com.gildedgames.aether.client.models.entities.player.LayerPlayerGloves;
 import com.gildedgames.aether.client.renderer.entities.living.RenderPlayerHelper;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import net.minecraft.client.Minecraft;
@@ -46,7 +46,7 @@ public class ClientRenderHandler
 	public void onRenderBlockOverlay(RenderBlockOverlayEvent event)
 	{
 		EntityPlayer player = event.getPlayer();
-		PlayerAetherImpl aePlayer = PlayerAetherImpl.getPlayer(event.getPlayer());
+		PlayerAether aePlayer = PlayerAether.getPlayer(event.getPlayer());
 
 		if (event.getOverlayType() == RenderBlockOverlayEvent.OverlayType.WATER)
 		{
@@ -79,7 +79,7 @@ public class ClientRenderHandler
 
 			//GlStateManager.rotate(event.getInterpolatedPitch(), 1f, 0f, 0f);
 
-			RenderPlayerHelper.renderFirstPersonHand(event, PlayerAetherImpl.getPlayer(Minecraft.getMinecraft().thePlayer));
+			RenderPlayerHelper.renderFirstPersonHand(event, PlayerAether.getPlayer(Minecraft.getMinecraft().thePlayer));
 
 			GlStateManager.popMatrix();
 		}

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.sound;
 
-import com.gildedgames.aether.api.capabilites.entity.IPlayerAetherCapability;
+import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
 import com.gildedgames.aether.client.sound.generators.AetherMusicGenerator;
 import com.gildedgames.aether.client.sound.generators.IMusicGenerator;
 import com.gildedgames.aether.common.AetherCore;
@@ -38,7 +38,7 @@ public class AetherMusicManager
 		this.generators.add(generator);
 	}
 
-	public void update(IPlayerAetherCapability aePlayer)
+	public void update(IPlayerAether aePlayer)
 	{
 		if (this.canPlayMusic() && !this.isPlayingMusic())
 		{
@@ -72,7 +72,7 @@ public class AetherMusicManager
 		}
 	}
 
-	private IMusicGenerator getNextPlayableSong(IPlayerAetherCapability aePlayer)
+	private IMusicGenerator getNextPlayableSong(IPlayerAether aePlayer)
 	{
 		for (IMusicGenerator generator : this.generators)
 		{

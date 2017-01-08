@@ -6,7 +6,7 @@ import com.gildedgames.aether.client.gui.container.GuiIncubator;
 import com.gildedgames.aether.client.gui.container.simple_crafting.GuiMasonryBench;
 import com.gildedgames.aether.client.gui.container.simple_crafting.GuiSimpleCrafting;
 import com.gildedgames.aether.client.gui.dialog.GuiDialogController;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.containers.ContainerDialogController;
 import com.gildedgames.aether.common.containers.ContainerEquipment;
 import com.gildedgames.aether.common.containers.ContainerMasonryBench;
@@ -47,7 +47,7 @@ public class AetherGuiHandler implements IGuiHandler
 		case SKYROOT_WORKBENCH_ID:
 			return new ContainerSimpleCrafting(player, new BlockPos(x, y, z));
 		case INVENTORY_EQUIPMENT_ID:
-			return new ContainerEquipment(PlayerAetherImpl.getPlayer(player));
+			return new ContainerEquipment(PlayerAether.getPlayer(player));
 		case FROSTPINE_COOLER_ID:
 			return new ContainerIcestoneCooler(player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
 		case INCUBATOR_ID:
@@ -70,7 +70,7 @@ public class AetherGuiHandler implements IGuiHandler
 		case SKYROOT_WORKBENCH_ID:
 			return new GuiSimpleCrafting(player, new BlockPos(x, y, z));
 		case INVENTORY_EQUIPMENT_ID:
-			return new GuiEquipment(PlayerAetherImpl.getPlayer(player));
+			return new GuiEquipment(PlayerAether.getPlayer(player));
 		case FROSTPINE_COOLER_ID:
 			return new GuiIcestoneCooler(player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
 		case INCUBATOR_ID:

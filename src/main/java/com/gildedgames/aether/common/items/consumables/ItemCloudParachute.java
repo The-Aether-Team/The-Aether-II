@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.consumables;
 
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherImpl;
+import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
@@ -44,7 +44,7 @@ public class ItemCloudParachute extends Item
 	{
 		EntityParachute parachute = new EntityParachute(world, player, EntityParachute.Type.fromOrdinal(stack.getMetadata()));
 
-		PlayerAetherImpl playerAether = PlayerAetherImpl.getPlayer(player);
+		PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 		playerAether.getParachuteModule().setParachuting(true, EntityParachute.Type.fromOrdinal(stack.getMetadata()));
 
