@@ -122,11 +122,11 @@ public class ItemsAether
 			taegore_hide = new Item(),
 			burrukai_pelt = new Item();
 
-	public static final ItemAetherFood blueberries = new ItemAetherFood(2, false),
-			enchanted_blueberry = new ItemAetherFood(6, false),
-			orange = new ItemAetherFood(4, false),
-			wyndberry = new ItemAetherFood(4, false),
-			enchanted_wyndberry = new ItemEnchantedWyndberry(),
+	public static final ItemAetherFood blueberries = new ItemAetherFood(2, false).setConsumptionDuration(12),
+			enchanted_blueberry = new ItemAetherFood(6, false).setConsumptionDuration(12),
+			orange = new ItemAetherFood(4, false).setConsumptionDuration(22),
+			wyndberry = new ItemAetherFood(4, false).setConsumptionDuration(22),
+			enchanted_wyndberry = new ItemEnchantedWyndberry().setConsumptionDuration(22),
 			swet_jelly = new ItemSwetJelly(),
 			gummy_swet = new ItemGummySwet(),
 			raw_taegore_meat = new ItemAetherFood(3, 0.3F, false),

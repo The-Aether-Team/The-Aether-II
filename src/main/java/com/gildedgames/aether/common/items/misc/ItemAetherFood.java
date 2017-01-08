@@ -2,9 +2,11 @@ package com.gildedgames.aether.common.items.misc;
 
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
 
 public class ItemAetherFood extends ItemFood
 {
+	private int duration = 32;
 
 	public ItemAetherFood(int amount, boolean isWolfFood)
 	{
@@ -20,4 +22,16 @@ public class ItemAetherFood extends ItemFood
 		this.setCreativeTab(CreativeTabsAether.CONSUMABLES);
 	}
 
+	public ItemAetherFood setConsumptionDuration(int duration)
+	{
+		this.duration = duration;
+
+		return this;
+	}
+
+	@Override
+	public int getMaxItemUseDuration(ItemStack stack)
+	{
+		return this.duration;
+	}
 }
