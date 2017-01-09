@@ -6,6 +6,7 @@ import net.minecraft.block.properties.IProperty;
 import java.util.Collection;
 import java.util.HashMap;
 
+@Deprecated
 public class PropertyVariant implements IProperty<BlockVariant>
 {
 	private final String name;

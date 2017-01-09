@@ -87,6 +87,11 @@ public class BlockAetherGrass extends BlockGrass implements IBlockVariants
 					{
 						BlockPos randomNeighbor = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
 
+						if (randomNeighbor.getY() >= 0 && randomNeighbor.getY() < 256 && !world.isBlockLoaded(randomNeighbor))
+						{
+							return;
+						}
+
 						IBlockState aboveState = world.getBlockState(randomNeighbor.up());
 						IBlockState neighborState = world.getBlockState(randomNeighbor);
 
