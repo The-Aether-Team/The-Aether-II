@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.util.structure;
 
+import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummy;
 import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummyHalf;
@@ -27,23 +28,28 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.template.ITemplateProcessor;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import javax.annotation.Nullable;
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.UUID;
 
 public class TemplatePrimer
 {
+	private static final Field GET_BLOCKS_FIELD = ReflectionAether.getField(Template.class, "blocks", "field_186270_a");
 
-	public static List<Template.BlockInfo> getBlocks(Template template)
+	private static final Field GET_ENTITIES_FIELD = ReflectionAether.getField(Template.class, "entities", "field_186271_b");
+
+	static
 	{
-		return ObfuscationReflectionHelper.getPrivateValue(Template.class, template, 0);
+		GET_BLOCKS_FIELD.setAccessible(true);
+		GET_ENTITIES_FIELD.setAccessible(true);
 	}
 
-	public static List<Template.BlockInfo> getBlocks(BlockPos pos, PlacementSettings settings, Template template)
+	@SuppressWarnings("unchecked")
+	public static List<Template.BlockInfo> getBlocks(Template template)
 	{
-		return TemplatePrimer.getBlocks(TemplatePrimer.getBlocks(template), pos, settings, template);
+		return (List<Template.BlockInfo>) ReflectionAether.getValue(GET_BLOCKS_FIELD, template);
 	}
 
 	public static List<Template.BlockInfo> getBlocks(List<Template.BlockInfo> blockInfo, BlockPos pos, PlacementSettings settings,
@@ -81,9 +87,10 @@ public class TemplatePrimer
 		return blockPos;
 	}
 
+	@SuppressWarnings("unchecked")
 	private static List<Template.EntityInfo> getEntities(Template template)
 	{
-		return ObfuscationReflectionHelper.getPrivateValue(Template.class, template, 1);
+		return (List<Template.EntityInfo>) ReflectionAether.getValue(GET_ENTITIES_FIELD, template);
 	}
 
 	public static void populateAll(Template template, World world, BlockPos pos, @Nullable ITemplateProcessor processor,
