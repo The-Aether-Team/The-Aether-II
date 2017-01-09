@@ -7,6 +7,7 @@ import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
 import com.gildedgames.aether.api.items.equipment.effects.IEffect;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
+import com.gildedgames.aether.client.gui.PerformanceIngame;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.player.PlayerAether;
@@ -41,6 +42,7 @@ import java.util.Collections;
 
 public class ClientEventHandler
 {
+	private final PerformanceIngame performanceLogger = new PerformanceIngame();
 
 	private boolean prevJumpBindState;
 
@@ -77,6 +79,11 @@ public class ClientEventHandler
 					}
 				}
 			}
+
+			this.performanceLogger.draw();
+		}
+		else if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR)
+		{
 		}
 	}
 
@@ -173,5 +180,7 @@ public class ClientEventHandler
 		SlotAmbrosium.registerIcons(event);
 		SlotMoaEgg.registerIcons(event);
 		SlotFlintAndSteel.registerIcons(event);
+
+		PerformanceIngame.registerIcons(event);
 	}
 }
