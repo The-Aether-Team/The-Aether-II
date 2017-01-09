@@ -2,95 +2,120 @@ package com.gildedgames.aether.client.gui;
 
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-
-import java.text.DecimalFormat;
 
 public class PerformanceIngame extends Gui
 {
-	private static final DecimalFormat FORMATTER = new DecimalFormat("#.#");
+	private static ResourceLocation SERVER_STALL_ICON = AetherCore.getResource("textures/gui/overlay/server_stall.png");
 
-	private static TextureAtlasSprite SERVER_STALL_ICON;
+	private static int ANIMATION_FRAMES = 4;
 
-	private float alpha = -1.0f;
+	private float iconAlpha = -1.0f;
 
-	private long warnUntil;
+	private float iconFrame;
 
-	private long lastTickSystemTime;
+	private long visibleUntil;
+
+	private long lastRenderSystemTime, lastTickSystemTime;
 
 	private long lag;
 
 	private int lastWorldTick;
 
-	public void draw()
+	public void renderIcon()
 	{
 		Minecraft mc = Minecraft.getMinecraft();
 
 		if (mc.isGamePaused())
 		{
+			this.lastTickSystemTime = System.currentTimeMillis();
+
 			return;
 		}
 
 		this.update();
 
+		if (AetherCore.CONFIG.getDisplayPerformanceIndicator())
+		{
+			this.renderIcon(mc);
+		}
+	}
+
+	private void renderIcon(Minecraft mc)
+	{
 		ScaledResolution res = new ScaledResolution(mc);
 
-		if (System.currentTimeMillis() < this.warnUntil)
-		{
-			this.alpha += 0.02f * mc.getRenderPartialTicks();
+		long now = System.currentTimeMillis();
 
-			if (this.alpha > 1.0f)
+		if (now < this.visibleUntil)
+		{
+			this.iconAlpha += 0.02f * mc.getRenderPartialTicks();
+
+			if (this.iconAlpha > 1.0f)
 			{
-				this.alpha = 1.0f;
+				this.iconAlpha = 1.0f;
 			}
 		}
 		else
 		{
-			this.alpha -= 0.02f * mc.getRenderPartialTicks();
+			this.iconAlpha -= 0.02f * mc.getRenderPartialTicks();
 
-			if (this.alpha < 0.0f)
+			if (this.iconAlpha < 0.0f)
 			{
-				this.alpha = 0.0f;
+				this.iconAlpha = 0.0f;
 			}
 		}
 
-		if (this.alpha > 0.0f)
+		if (this.iconAlpha > 0.0f)
 		{
-			mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-
 			GlStateManager.enableBlend();
 
 			if (this.lag > 1000)
 			{
-				GlStateManager.color(255 / 255.0f, 78 / 255.0f, 41 / 255.0f, this.alpha);
+				GlStateManager.color(255 / 255.0f, 78 / 255.0f, 41 / 255.0f, this.iconAlpha);
 			}
 			else if (this.lag > 500)
 			{
-				GlStateManager.color(255 / 255.0f, 137 / 255.0f, 41 / 255.0f, this.alpha);
+				GlStateManager.color(255 / 255.0f, 137 / 255.0f, 41 / 255.0f, this.iconAlpha);
 			}
 			else
 			{
-				GlStateManager.color(255 / 255.0f, 198 / 255.0f, 41 / 255.0f, this.alpha);
+				GlStateManager.color(255 / 255.0f, 198 / 255.0f, 41 / 255.0f, this.iconAlpha);
 			}
 
-			this.drawTexturedModalRect(res.getScaledWidth() - 24, 8, SERVER_STALL_ICON, 16, 16);
+			mc.getTextureManager().bindTexture(SERVER_STALL_ICON);
+
+			this.iconFrame += ((now - this.lastRenderSystemTime) / 400.0f);
+
+			if (this.iconFrame > ANIMATION_FRAMES)
+			{
+				this.iconFrame = 0.0f;
+			}
+
+			GlStateManager.pushMatrix();
+			GlStateManager.enableRescaleNormal();
+
+			GlStateManager.translate(res.getScaledWidth() - 24.0f, 8.0f, 0.0f);
+			GlStateManager.scale(0.25f, 0.25f, 0.25f);
+
+			this.drawTexturedModalRect(0, 0, 0, 64 * (int) this.iconFrame, 64, 64);
 
 			GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+			GlStateManager.popMatrix();
 		}
+
+		this.lastRenderSystemTime = now;
 	}
 
 	private void update()
 	{
 		int tickCounter = FMLCommonHandler.instance().getMinecraftServerInstance().getTickCounter();
 
-		if (tickCounter > this.lastWorldTick)
+		if (tickCounter != this.lastWorldTick)
 		{
 			this.lastWorldTick = tickCounter;
 			this.lastTickSystemTime = System.currentTimeMillis();
@@ -98,14 +123,9 @@ public class PerformanceIngame extends Gui
 
 		this.lag = System.currentTimeMillis() - this.lastTickSystemTime;
 
-		if (this.lag > 150)
+		if (this.lag > 100)
 		{
-			this.warnUntil = System.currentTimeMillis() + 500;
+			this.visibleUntil = System.currentTimeMillis() + 500;
 		}
-	}
-
-	public static void registerIcons(TextureStitchEvent.Pre event)
-	{
-		SERVER_STALL_ICON = event.getMap().registerSprite(AetherCore.getResource("gui/overlay/server_stall"));
 	}
 }

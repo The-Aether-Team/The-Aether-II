@@ -80,7 +80,7 @@ public class ClientEventHandler
 				}
 			}
 
-			this.performanceLogger.draw();
+			this.performanceLogger.renderIcon();
 		}
 		else if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR)
 		{
@@ -180,7 +180,5 @@ public class ClientEventHandler
 		SlotAmbrosium.registerIcons(event);
 		SlotMoaEgg.registerIcons(event);
 		SlotFlintAndSteel.registerIcons(event);
-
-		PerformanceIngame.registerIcons(event);
 	}
 }

@@ -20,6 +20,8 @@ public class ConfigAether
 
 	private boolean displayInventoryPattern;
 
+	private boolean displayPerformanceIndicator;
+
 	public ConfigAether(File file)
 	{
 		this.configuration = new Configuration(file, true);
@@ -43,6 +45,7 @@ public class ConfigAether
 		this.sliderLabyrinthBiomeID = this.getInt(this.BIOMES, "Slider Labyrinth Biome ID", 238);
 
 		this.displayInventoryPattern = this.getBoolean(this.GENERAL, "Display Inventory Pattern", true);
+		this.displayPerformanceIndicator = this.getBoolean(this.GENERAL, "Display Performance Indicator", true);
 
 		if (this.configuration.hasChanged())
 		{
@@ -94,4 +97,8 @@ public class ConfigAether
 		return this.displayInventoryPattern;
 	}
 
+	public boolean getDisplayPerformanceIndicator()
+	{
+		return this.displayPerformanceIndicator;
+	}
 }
