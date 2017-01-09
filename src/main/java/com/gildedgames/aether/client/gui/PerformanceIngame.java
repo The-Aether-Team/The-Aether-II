@@ -2,6 +2,7 @@ package com.gildedgames.aether.client.gui;
 
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
@@ -10,15 +11,21 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
+import java.text.DecimalFormat;
+
 public class PerformanceIngame extends Gui
 {
+	private static final DecimalFormat FORMATTER = new DecimalFormat("#.#");
+
 	private static TextureAtlasSprite SERVER_STALL_ICON;
 
-	private float pulse = -1.0f;
+	private float alpha = -1.0f;
 
-	private long pulseUntil;
+	private long warnUntil;
 
 	private long lastTickSystemTime;
+
+	private long lag;
 
 	private int lastWorldTick;
 
@@ -35,37 +42,48 @@ public class PerformanceIngame extends Gui
 
 		ScaledResolution res = new ScaledResolution(mc);
 
-		if (System.currentTimeMillis() < this.pulseUntil)
+		if (System.currentTimeMillis() < this.warnUntil)
 		{
-			this.pulse += 0.02f * mc.getRenderPartialTicks();
+			this.alpha += 0.02f * mc.getRenderPartialTicks();
 
-			if (this.pulse > 1.0f)
+			if (this.alpha > 1.0f)
 			{
-				this.pulse = -1.0f;
+				this.alpha = 1.0f;
 			}
 		}
 		else
 		{
-			this.pulse = Math.abs(this.pulse);
+			this.alpha -= 0.02f * mc.getRenderPartialTicks();
 
-			this.pulse -= 0.05f * mc.getRenderPartialTicks();
-
-			if (this.pulse < 0.0f)
+			if (this.alpha < 0.0f)
 			{
-				this.pulse = 0.0f;
+				this.alpha = 0.0f;
 			}
 		}
 
-		float alpha = Math.abs(this.pulse);
+		if (this.alpha > 0.0f)
+		{
+			mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
-		mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+			GlStateManager.enableBlend();
 
-		GlStateManager.enableBlend();
-		GlStateManager.color(1.0f, 1.0f, 1.0f, alpha);
+			if (this.lag > 1000)
+			{
+				GlStateManager.color(255 / 255.0f, 78 / 255.0f, 41 / 255.0f, this.alpha);
+			}
+			else if (this.lag > 500)
+			{
+				GlStateManager.color(255 / 255.0f, 137 / 255.0f, 41 / 255.0f, this.alpha);
+			}
+			else
+			{
+				GlStateManager.color(255 / 255.0f, 198 / 255.0f, 41 / 255.0f, this.alpha);
+			}
 
-		this.drawTexturedModalRect(res.getScaledWidth() - 24, 8, SERVER_STALL_ICON, 16, 16);
+			this.drawTexturedModalRect(res.getScaledWidth() - 24, 8, SERVER_STALL_ICON, 16, 16);
 
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+			GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+		}
 	}
 
 	private void update()
@@ -78,11 +96,11 @@ public class PerformanceIngame extends Gui
 			this.lastTickSystemTime = System.currentTimeMillis();
 		}
 
-		long lag = System.currentTimeMillis() - this.lastTickSystemTime;
+		this.lag = System.currentTimeMillis() - this.lastTickSystemTime;
 
-		if (lag > 100)
+		if (this.lag > 150)
 		{
-			this.pulseUntil = System.currentTimeMillis() + 500;
+			this.warnUntil = System.currentTimeMillis() + 500;
 		}
 	}
 
