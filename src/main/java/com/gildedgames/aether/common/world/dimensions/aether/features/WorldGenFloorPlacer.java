@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.world.dimensions.aether.features;
 
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -27,6 +28,8 @@ public class WorldGenFloorPlacer extends WorldGenerator
 	{
 		this.states = states;
 		this.amount = amount;
+
+		this.statesCanPlaceOn.add(BlocksAether.aether_grass.getDefaultState());
 	}
 
 	public List<IBlockState> getStatesCanPlaceOn()
@@ -37,39 +40,24 @@ public class WorldGenFloorPlacer extends WorldGenerator
 	@Override
 	public boolean generate(World world, Random rand, BlockPos pos)
 	{
-		IBlockState state;
+		pos = world.getTopSolidOrLiquidBlock(pos);
 
-		while (pos.getY() > 0)
-		{
-			state = world.getBlockState(pos);
-
-			if (!state.getBlock().isAir(this.states[0], world, pos) && !state.getBlock().isLeaves(this.states[0], world, pos))
-			{
-				break;
-			}
-
-			pos = pos.down();
-		}
-
-		int i = 0;
 		int count = 0;
 
-		while (i < 128)
+		for (int attempts = 0; attempts < 128; attempts++)
 		{
-			BlockPos randomPos = pos.add(
-					rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
+			BlockPos randomPos = pos.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
 
-			i++;
-
-			if (!world.isAreaLoaded(pos, randomPos))
+			if (!world.isBlockLoaded(randomPos))
 			{
 				return false;
 			}
 
 			IBlockState chosen = this.states[rand.nextInt(this.states.length)];
 
-			if (world.isAirBlock(randomPos) && chosen.getBlock().canPlaceBlockAt(world, randomPos) && (this.statesCanPlaceOn.isEmpty()
-					|| this.statesCanPlaceOn.contains(world.getBlockState(randomPos.down()))))
+			IBlockState below = world.getBlockState(randomPos.down());
+
+			if (world.isAirBlock(randomPos) && (this.statesCanPlaceOn.isEmpty() || this.statesCanPlaceOn.contains(below)))
 			{
 				world.setBlockState(randomPos, chosen, 2);
 
