@@ -26,20 +26,15 @@ public class PerformanceIngame extends Gui
 
 	private int lastWorldTick;
 
+	private boolean isDisabled;
+
 	public void renderIcon()
 	{
 		Minecraft mc = Minecraft.getMinecraft();
 
-		if (mc.isGamePaused())
-		{
-			this.lastTickSystemTime = System.currentTimeMillis();
+		this.update(mc);
 
-			return;
-		}
-
-		this.update();
-
-		if (AetherCore.CONFIG.getDisplayPerformanceIndicator())
+		if (!this.isDisabled && AetherCore.CONFIG.getDisplayPerformanceIndicator())
 		{
 			this.renderIcon(mc);
 		}
@@ -111,11 +106,21 @@ public class PerformanceIngame extends Gui
 		this.lastRenderSystemTime = now;
 	}
 
-	private void update()
+	private void update(Minecraft mc)
 	{
+		// No server to measure...
+		if (FMLCommonHandler.instance().getMinecraftServerInstance() == null)
+		{
+			this.isDisabled = true;
+
+			return;
+		}
+
+		this.isDisabled = false;
+
 		int tickCounter = FMLCommonHandler.instance().getMinecraftServerInstance().getTickCounter();
 
-		if (tickCounter != this.lastWorldTick)
+		if (tickCounter != this.lastWorldTick || mc.isGamePaused())
 		{
 			this.lastWorldTick = tickCounter;
 			this.lastTickSystemTime = System.currentTimeMillis();
