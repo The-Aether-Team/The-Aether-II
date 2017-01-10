@@ -1,5 +1,8 @@
 package com.gildedgames.aether.common.world.dimensions.aether.biomes;
 
+import java.util.List;
+import java.util.Random;
+
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
@@ -19,6 +22,7 @@ import com.gildedgames.aether.common.world.dimensions.aether.island.logic.Island
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSector;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSectorAccess;
 import com.google.common.collect.Lists;
+
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -28,9 +32,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
-
-import java.util.List;
-import java.util.Random;
 
 public class BiomeAetherDecorator
 {
@@ -57,7 +58,7 @@ public class BiomeAetherDecorator
 
 	public BiomeAetherDecorator()
 	{
-		BlockMatcher holystoneMatcher = BlockMatcher.forBlock(BlocksAether.holystone);
+		final BlockMatcher holystoneMatcher = BlockMatcher.forBlock(BlocksAether.holystone);
 
 		this.genAmbrosium = new WorldGenAetherMinable(BlocksAether.ambrosium_ore.getDefaultState(), 16, holystoneMatcher);
 		this.genZanite = new WorldGenAetherMinable(BlocksAether.zanite_ore.getDefaultState(), 8, holystoneMatcher);
@@ -65,7 +66,7 @@ public class BiomeAetherDecorator
 		this.genIcestone = new WorldGenAetherMinable(BlocksAether.icestone_ore.getDefaultState(), 10, holystoneMatcher);
 		this.genArkenium = new WorldGenAetherMinable(BlocksAether.arkenium_ore.getDefaultState(), 8, holystoneMatcher);
 
-		BlockMatcher dirtMatcher = BlockMatcher.forBlock(BlocksAether.aether_dirt);
+		final BlockMatcher dirtMatcher = BlockMatcher.forBlock(BlocksAether.aether_dirt);
 
 		this.genCoarseAetherDirtOnDirt = new WorldGenAetherMinable(BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.COARSE_DIRT), 22, dirtMatcher);
 		this.genCoarseAetherDirtOnHolystone = new WorldGenAetherMinable(BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.COARSE_DIRT), 22, holystoneMatcher);
@@ -91,12 +92,12 @@ public class BiomeAetherDecorator
 		this.genPurpleAercloud = new WorldGenPurpleAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.PURPLE_AERCLOUD), 4, false);
 	}
 
-	protected void genDecorations(final World world, Random random, BlockPos pos, Biome genBase)
+	protected void genDecorations(final World world, final Random random, final BlockPos pos, final Biome genBase)
 	{
 		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(world, random, pos));
 
-		int chunkX = pos.getX() >> 4;
-		int chunkZ = pos.getZ() >> 4;
+		final int chunkX = pos.getX() >> 4;
+		final int chunkZ = pos.getZ() >> 4;
 
 		this.generateOres(world, random, pos);
 
@@ -104,10 +105,7 @@ public class BiomeAetherDecorator
 
 		int count;
 
-		int sectorX = IslandSectorAccess.inst().getSectorCoord(chunkX);
-		int sectorY = IslandSectorAccess.inst().getSectorCoord(chunkZ);
-
-		IslandSector sector = IslandSectorAccess.inst().attemptToLoadSector(world, sectorX, sectorY);
+		final IslandSector sector = IslandSectorAccess.inst().attemptToLoadSectorInChunk(world, chunkX, chunkZ);
 
 		if (sector == null)
 		{
@@ -120,14 +118,14 @@ public class BiomeAetherDecorator
 		{
 			for (z = 0; z < 16; z++)
 			{
-				List<IslandData> islands = sector.getIslandDataAtBlockPos(pos.getX() + x, pos.getZ() + z);
+				final List<IslandData> islands = sector.getIslandDataAtBlockPos(pos.getX() + x, pos.getZ() + z);
 
 				if (islands.size() <= 0)
 				{
 					continue;
 				}
 
-				for (IslandData data : islands)
+				for (final IslandData data : islands)
 				{
 					if (!islandsToGenerate.contains(data))
 					{
@@ -137,7 +135,7 @@ public class BiomeAetherDecorator
 			}
 		}
 
-		boolean oneIslandOnly = islandsToGenerate.size() == 1;
+		final boolean oneIslandOnly = islandsToGenerate.size() == 1;
 		IslandData island = null;
 
 		if (oneIslandOnly)
@@ -153,9 +151,9 @@ public class BiomeAetherDecorator
 				x = random.nextInt(16) + 8;
 				z = random.nextInt(16) + 8;
 
-				BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z)).add(0, -1, 0);
+				final BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z)).add(0, -1, 0);
 
-				boolean generated = GenerationAether.mysterious_henge.generate(world, random, pos2, true);
+				final boolean generated = GenerationAether.mysterious_henge.generate(world, random, pos2, true);
 
 				if (generated)
 				{
@@ -185,9 +183,9 @@ public class BiomeAetherDecorator
 				x = random.nextInt(16) + 8;
 				z = random.nextInt(16) + 8;
 
-				BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
+				final BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
 
-				boolean generated = GenerationAether.labyrinth_entrance.generate(world, random, pos2);
+				final boolean generated = GenerationAether.labyrinth_entrance.generate(world, random, pos2);
 
 				if (generated)
 				{
@@ -203,7 +201,7 @@ public class BiomeAetherDecorator
 			x = random.nextInt(16) + 8;
 			z = random.nextInt(16) + 8;
 
-			BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z)).add(0, -1, 0);
+			final BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z)).add(0, -1, 0);
 
 			GenerationAether.skyroot_moa_nest.generate(world, random, pos2);
 		}
@@ -214,9 +212,9 @@ public class BiomeAetherDecorator
 			x = random.nextInt(16) + 8;
 			z = random.nextInt(16) + 8;
 
-			WorldGenerator treeGen = genBase.genBigTreeChance(random);
+			final WorldGenerator treeGen = genBase.genBigTreeChance(random);
 
-			BlockPos randPos = world.getHeight(pos.add(x, 0, z));
+			final BlockPos randPos = world.getHeight(pos.add(x, 0, z));
 
 			if (treeGen != null)
 			{
@@ -227,7 +225,7 @@ public class BiomeAetherDecorator
 		//Decorate Ecosystems
 		if (genBase instanceof BiomeAetherBase)
 		{
-			BiomeAetherBase biome = (BiomeAetherBase) genBase;
+			final BiomeAetherBase biome = (BiomeAetherBase) genBase;
 
 			biome.decorateEcosystems(world, random, pos);
 		}
@@ -296,27 +294,27 @@ public class BiomeAetherDecorator
 			x = random.nextInt(16) + 8;
 			y = random.nextInt(128);
 			z = random.nextInt(16) + 8;
-
+		
 			this.genAetherLakes.generate(world, random, pos.add(x, y, z));
 		}*/
 	}
 
-	private void generateMineable(WorldGenAetherMinable minable, World world, Random random, BlockPos pos, int minY, int maxY, int attempts)
+	private void generateMineable(final WorldGenAetherMinable minable, final World world, final Random random, final BlockPos pos, final int minY, final int maxY, final int attempts)
 	{
 		for (int count = 0; count < attempts; count++)
 		{
-			BlockPos randomPos = pos.add(random.nextInt(16), random.nextInt(maxY - minY) + minY, random.nextInt(16));
+			final BlockPos randomPos = pos.add(random.nextInt(16), random.nextInt(maxY - minY) + minY, random.nextInt(16));
 
 			minable.generate(world, random, randomPos);
 		}
 	}
 
-	private void generateCaveMineable(WorldGenAetherMinable minable, World world, Random random, BlockPos pos, int minY, int maxY,
-			int attempts)
+	private void generateCaveMineable(final WorldGenAetherMinable minable, final World world, final Random random, final BlockPos pos, final int minY, final int maxY,
+			final int attempts)
 	{
 		for (int count = 0; count < attempts; count++)
 		{
-			BlockPos randomPos = pos.add(random.nextInt(16), random.nextInt(maxY - minY) + minY, random.nextInt(16));
+			final BlockPos randomPos = pos.add(random.nextInt(16), random.nextInt(maxY - minY) + minY, random.nextInt(16));
 			//			randomPos = world.getTopBlockHeight(randomPos);
 
 			if (world.getLightFor(EnumSkyBlock.SKY, randomPos) <= 7)
@@ -326,17 +324,17 @@ public class BiomeAetherDecorator
 		}
 	}
 
-	private void generateCloud(WorldGenAercloud gen, World world, BlockPos pos, Random rand, int rarity, int width, int minY, int maxY)
+	private void generateCloud(final WorldGenAercloud gen, final World world, final BlockPos pos, final Random rand, final int rarity, final int width, final int minY, final int maxY)
 	{
 		if (rand.nextInt(rarity) == 0)
 		{
-			BlockPos nextPos = pos.add(rand.nextInt(width), minY + rand.nextInt(maxY - minY), rand.nextInt(width));
+			final BlockPos nextPos = pos.add(rand.nextInt(width), minY + rand.nextInt(maxY - minY), rand.nextInt(width));
 
 			gen.generate(world, rand, nextPos);
 		}
 	}
 
-	protected int nextInt(Random random, int i)
+	protected int nextInt(final Random random, final int i)
 	{
 		if (i <= 1)
 		{
@@ -346,7 +344,7 @@ public class BiomeAetherDecorator
 		return random.nextInt(i);
 	}
 
-	protected void generateOres(World world, Random random, BlockPos pos)
+	protected void generateOres(final World world, final Random random, final BlockPos pos)
 	{
 		this.generateMineable(this.genAmbrosium, world, random, pos, 0, 128, 20);
 		this.generateMineable(this.genZanite, world, random, pos, 0, 128, 15);
@@ -361,7 +359,7 @@ public class BiomeAetherDecorator
 		this.generateCaveMineable(this.genCrudeScatterglass, world, random, pos, 0, 90, 45);
 	}
 
-	protected void generateClouds(World world, Random random, BlockPos pos)
+	protected void generateClouds(final World world, final Random random, final BlockPos pos)
 	{
 		this.generateCloud(this.genBlueAercloud, world, pos, random, 15, 16, 90, 130);
 		//		this.generateCloud(this.genColdFlatAercloud, world, pos, random, 10, 16, 32);

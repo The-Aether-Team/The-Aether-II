@@ -1,21 +1,23 @@
 package com.gildedgames.aether.common.world.dimensions.aether.biomes;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
 import com.gildedgames.aether.common.registry.content.BiomesAether;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSector;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSectorAccess;
 import com.google.common.collect.Lists;
+
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeCache;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.layer.IntCache;
-
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class BiomeProviderAether extends BiomeProvider
 {
@@ -26,12 +28,15 @@ public class BiomeProviderAether extends BiomeProvider
 
 	private final World world;
 
-	public BiomeProviderAether(World world)
+	private final Random rand;
+
+	public BiomeProviderAether(final World world)
 	{
 		this.world = world;
 		this.cache = new BiomeCache(this);
+		this.rand = new Random();
 
-		Random rand = new Random(world.getSeed());
+		final Random rand = new Random(world.getSeed());
 	}
 
 	public List<Biome> getBiomesToSpawnIn()
@@ -46,30 +51,34 @@ public class BiomeProviderAether extends BiomeProvider
 	}
 
 	@Override
-	public Biome getBiome(BlockPos pos)
+	public Biome getBiome(final BlockPos pos)
 	{
 		return this.getBiome(pos, BiomesAether.VOID);
 	}
 
 	@Override
-	public Biome getBiome(BlockPos pos, Biome defaultBiome)
+	public Biome getBiome(final BlockPos pos, final Biome defaultBiome)
 	{
 		return this.cache.getBiome(pos.getX(), pos.getZ(), BiomesAether.VOID);
 	}
 
-	private Biome[] generateBiomes(Biome[] biomes, int x, int z, int width, int height)
+	private Biome[] generateBiomes(final Biome[] biomes, final int x, final int z, final int width, final int height)
 	{
+		IslandSector sector = null;
+
+		int prevChunkX = 0, prevChunkY = 0;
+
 		for (int i = 0; i < width; i++)
 		{
 			for (int j = 0; j < height; j++)
 			{
-				int index = j + (i * width);
+				final int index = j + (i * width);
 
-				int posX = i + x;
-				int posZ = j + z;
+				final int posX = i + x;
+				final int posZ = j + z;
 
-				int sectorX = IslandSectorAccess.inst().getSectorCoord(posX / 16);
-				int sectorY = IslandSectorAccess.inst().getSectorCoord(posZ / 16);
+				final int chunkX = posX / 16;
+				final int chunkY = posZ / 16;
 
 				biomes[index] = BiomesAether.VOID;
 
@@ -78,15 +87,30 @@ public class BiomeProviderAether extends BiomeProvider
 					continue;
 				}
 
-				IslandSector sector = IslandSectorAccess.inst().attemptToLoadSector(this.world, sectorX, sectorY);
+				if (chunkX != prevChunkX || chunkY != prevChunkY || sector == null)
+				{
+					long sectorSeed = 0;
+
+					if (!IslandSectorAccess.inst().wasSectorEverCreatedInChunk(this.world, chunkX, chunkY))
+					{
+						this.rand.setSeed((long) chunkX * 341873128712L + (long) chunkY * 132897987541L);
+
+						sectorSeed = this.rand.nextLong();
+					}
+
+					sector = IslandSectorAccess.inst().attemptToLoadSectorInChunk(this.world, chunkX, chunkY, sectorSeed);
+
+					prevChunkX = chunkX;
+					prevChunkY = chunkY;
+				}
 
 				if (sector != null)
 				{
-					List<IslandData> islands = sector.getIslandDataAtBlockPos(posX, posZ);
+					final List<IslandData> islands = sector.getIslandDataAtBlockPos(posX, posZ);
 
 					if (islands.size() > 0)
 					{
-						IslandData island = islands.get(0);
+						final IslandData island = islands.get(0);
 
 						if (island != null)
 						{
@@ -103,7 +127,7 @@ public class BiomeProviderAether extends BiomeProvider
 	/**
 	 * Returns an array of biomes for the location input.
 	 */
-	public Biome[] getBiomesForGeneration(Biome[] biomes, int x, int z, int width, int height)
+	public Biome[] getBiomesForGeneration(Biome[] biomes, final int x, final int z, final int width, final int height)
 	{
 		IntCache.resetIntCache();
 
@@ -121,7 +145,7 @@ public class BiomeProviderAether extends BiomeProvider
 	 * Gets biomes to use for the blocks and loads the other data like tempNoise and humidity onto the
 	 * WorldChunkManager.
 	 */
-	public Biome[] getBiomes(@Nullable Biome[] listToReuse, int x, int z, int width, int length)
+	public Biome[] getBiomes(@Nullable final Biome[] listToReuse, final int x, final int z, final int width, final int length)
 	{
 		return this.getBiomes(listToReuse, x, z, width, length, true);
 	}
@@ -129,7 +153,7 @@ public class BiomeProviderAether extends BiomeProvider
 	/**
 	 * Gets a list of biomes for the specified blocks.
 	 */
-	public Biome[] getBiomes(@Nullable Biome[] listToReuse, int x, int z, int width, int length, boolean cacheFlag)
+	public Biome[] getBiomes(@Nullable Biome[] listToReuse, final int x, final int z, final int width, final int length, final boolean cacheFlag)
 	{
 		IntCache.resetIntCache();
 
@@ -140,7 +164,7 @@ public class BiomeProviderAether extends BiomeProvider
 
 		if (cacheFlag && width == 16 && length == 16 && (x & 15) == 0 && (z & 15) == 0)
 		{
-			Biome[] abiome = this.cache.getCachedBiomes(x, z);
+			final Biome[] abiome = this.cache.getCachedBiomes(x, z);
 			System.arraycopy(abiome, 0, listToReuse, 0, width * length);
 
 			return listToReuse;
@@ -154,9 +178,9 @@ public class BiomeProviderAether extends BiomeProvider
 	}
 
 	@Nullable
-	public BlockPos findBiomePosition(int x, int z, int range, List<Biome> biomes, Random random)
+	public BlockPos findBiomePosition(final int x, final int z, final int range, final List<Biome> biomes, final Random random)
 	{
-		for (Biome biome : biomes)
+		for (final Biome biome : biomes)
 		{
 			if (!allowedBiomes.contains(biome))
 			{
@@ -170,9 +194,9 @@ public class BiomeProviderAether extends BiomeProvider
 	/**
 	 * checks given Chunk's Biomes against List of allowed ones
 	 */
-	public boolean areBiomesViable(int x, int z, int radius, List<Biome> allowed)
+	public boolean areBiomesViable(final int x, final int z, final int radius, final List<Biome> allowed)
 	{
-		for (Biome biome : allowed)
+		for (final Biome biome : allowed)
 		{
 			if (!allowedBiomes.contains(biome))
 			{
