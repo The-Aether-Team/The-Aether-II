@@ -100,16 +100,16 @@ public abstract class BiomeAetherBase extends Biome
 
 		int x, z;
 
-		double[] temperatureValue = new double[576];
-		double[] moistureValue = new double[576];
+		double[] temperatureValue = new double[64];
+		double[] moistureValue = new double[64];
 
-		for (int i = 0; i < 24; i++)
+		for (int i = 0; i < 8; i++)
 		{
-			for (int j = 0; j < 24; j++)
+			for (int j = 0; j < 8; j++)
 			{
-				temperatureValue[j + (i * 24)] = GenUtil.octavedNoise(this.tempNoise, 4, 0D, 1D,
+				temperatureValue[j + (i * 8)] = GenUtil.octavedNoise(this.tempNoise, 4, 0D, 1D,
 						(double) (pos.getX() + i) / scale, (double) (pos.getZ() + j) / scale);
-				moistureValue[j + (i * 24)] = GenUtil.octavedNoise(this.moistureNoise, 4, 0D, 1D,
+				moistureValue[j + (i * 8)] = GenUtil.octavedNoise(this.moistureNoise, 4, 0D, 1D,
 						(double) (pos.getX() + i) / scale, (double) (pos.getZ() + j) / scale);
 			}
 		}
@@ -130,9 +130,9 @@ public abstract class BiomeAetherBase extends Biome
 						z = placeAt.getZ() - pos.getZ();
 
 						double temperatureDiff = ecosystem.hasDesiredTemperature() ?
-								Math.abs(ecosystem.getDesiredTemperature() - temperatureValue[z + (x * 24)]) : 0;
+								Math.abs(ecosystem.getDesiredTemperature() - temperatureValue[z + (x / 2)]) : 0;
 						double moistureDiff =
-								ecosystem.hasDesiredMoisture() ? Math.abs(ecosystem.getDesiredMoisture() - moistureValue[z + (x * 24)]) : 0;
+								ecosystem.hasDesiredMoisture() ? Math.abs(ecosystem.getDesiredMoisture() - moistureValue[z + (x / 2)]) : 0;
 
 						int requiredChance = (int) ((temperatureDiff + moistureDiff) * 100 * 1.5);
 

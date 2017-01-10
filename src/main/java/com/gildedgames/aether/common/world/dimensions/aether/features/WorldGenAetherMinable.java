@@ -79,12 +79,8 @@ public class WorldGenAetherMinable extends WorldGenerator
 								{
 									BlockPos blockpos = new BlockPos(l1, i2, j2);
 
-									if (!worldIn.isBlockLoaded(blockpos))
-									{
-										continue;
-									}
-
 									IBlockState state = worldIn.getBlockState(blockpos);
+
 									if (state.getBlock().isReplaceableOreGen(state, worldIn, blockpos, this.predicate))
 									{
 										worldIn.setBlockState(blockpos, this.oreBlock, 2);

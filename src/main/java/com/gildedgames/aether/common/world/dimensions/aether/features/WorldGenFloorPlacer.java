@@ -12,12 +12,11 @@ import java.util.Random;
 
 public class WorldGenFloorPlacer extends WorldGenerator
 {
-
 	private final IBlockState[] states;
 
-	private final List<IBlockState> statesCanPlaceOn = Lists.newArrayList();
-
 	private final int amount;
+
+	private List<IBlockState> statesCanPlaceOn = Lists.newArrayList();
 
 	public WorldGenFloorPlacer(IBlockState... states)
 	{
@@ -32,9 +31,9 @@ public class WorldGenFloorPlacer extends WorldGenerator
 		this.statesCanPlaceOn.add(BlocksAether.aether_grass.getDefaultState());
 	}
 
-	public List<IBlockState> getStatesCanPlaceOn()
+	public void setStatesToPlaceOn(IBlockState... states)
 	{
-		return this.statesCanPlaceOn;
+		this.statesCanPlaceOn = Lists.newArrayList(states);
 	}
 
 	@Override

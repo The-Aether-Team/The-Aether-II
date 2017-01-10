@@ -218,7 +218,7 @@ public class GenerationAether
 		skyroot_twigs = new WorldGenFloorPlacer(4, BlocksAether.skyroot_twigs.getDefaultState(), BlocksAether.skyroot_twigs.getDefaultState(), BlocksAether.holystone_rock.getDefaultState());
 		holystone_rocks = new WorldGenFloorPlacer(BlocksAether.holystone_rock.getDefaultState());
 
-		holystone_rocks.getStatesCanPlaceOn().add(BlocksAether.holystone.getDefaultState());
+		holystone_rocks.setStatesToPlaceOn(BlocksAether.holystone.getDefaultState());
 
 		green_aercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.GREEN_AERCLOUD), 4, false);
 		golden_aercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.GOLDEN_AERCLOUD), 4, false);
