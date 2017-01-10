@@ -183,7 +183,16 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 		//StructureBoundingBox chunkBB = new StructureBoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
 
-		final IslandSector sector = IslandSectorAccess.inst().attemptToLoadSectorInChunk(this.worldObj, chunkX, chunkZ);
+		long sectorSeed = 0;
+
+		if (!IslandSectorAccess.inst().wasSectorEverCreatedInChunk(this.worldObj, chunkX, chunkZ))
+		{
+			this.rand.setSeed((long) chunkX * 341873128712L + (long) chunkZ * 132897987541L);
+
+			sectorSeed = this.rand.nextLong();
+		}
+
+		final IslandSector sector = IslandSectorAccess.inst().attemptToLoadSectorInChunk(this.worldObj, chunkX, chunkZ, sectorSeed);
 
 		if (sector == null)
 		{
