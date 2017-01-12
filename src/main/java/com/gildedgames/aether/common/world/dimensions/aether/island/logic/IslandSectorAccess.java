@@ -1,24 +1,24 @@
 package com.gildedgames.aether.common.world.dimensions.aether.island.logic;
 
+import java.io.File;
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.io.NBTHelper;
 import com.gildedgames.aether.common.world.util.ChunkMap;
 import com.google.common.collect.Lists;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.event.world.ChunkWatchEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import javax.annotation.Nullable;
-import java.io.File;
-import java.util.Iterator;
-import java.util.List;
 
 public class IslandSectorAccess
 {
@@ -39,44 +39,41 @@ public class IslandSectorAccess
 		return IslandSectorAccess.INST;
 	}
 
-	private static String createSectorKey(int sectorX, int sectorY)
+	private static String createSectorKey(final int sectorX, final int sectorY)
 	{
 		return sectorX + "_" + sectorY;
 	}
 
 	// TODO: Needs to be changed to chunk hook format... -JS
-	private static File createSectorFile(int sectorX, int sectorY)
+	private static File createSectorFile(final int sectorX, final int sectorY)
 	{
-		String sectorKey = IslandSectorAccess.createSectorKey(sectorX, sectorY);
+		final String sectorKey = IslandSectorAccess.createSectorKey(sectorX, sectorY);
 
-		File file = new File(AetherCore.getWorldDirectory(), "//data/island_sectors/" + sectorKey + ".dat");
+		final File file = new File(AetherCore.getWorldDirectory(), "//data/island_sectors/" + sectorKey + ".dat");
 
 		return file;
 	}
 
-	public int getSectorCoord(int chunkCoord)
+	public int getSectorCoord(final int chunkCoord)
 	{
 		return (chunkCoord / IslandSector.CHUNK_WIDTH_PER_SECTOR) - (chunkCoord < 0 ? 1 : 0);
 	}
 
-	public IslandData getIslandIfOnlyOne(World world, BlockPos pos)
+	public IslandData getIslandIfOnlyOne(final World world, final BlockPos pos)
 	{
-		List<IslandData> islandsToGen = this.getAllIslands(world, pos);
+		final List<IslandData> islandsToGen = this.getAllIslands(world, pos);
 
-		boolean oneIslandOnly = islandsToGen.size() == 1;
+		final boolean oneIslandOnly = islandsToGen.size() == 1;
 
 		return oneIslandOnly ? islandsToGen.get(0) : null;
 	}
 
-	public List<IslandData> getAllIslands(World world, BlockPos pos)
+	public List<IslandData> getAllIslands(final World world, final BlockPos pos)
 	{
-		int chunkX = pos.getX() >> 4;
-		int chunkZ = pos.getZ() >> 4;
+		final int chunkX = pos.getX() >> 4;
+		final int chunkZ = pos.getZ() >> 4;
 
-		int sectorX = IslandSectorAccess.inst().getSectorCoord(chunkX);
-		int sectorY = IslandSectorAccess.inst().getSectorCoord(chunkZ);
-
-		IslandSector sector = IslandSectorAccess.inst().attemptToLoadSector(world, sectorX, sectorY);
+		final IslandSector sector = IslandSectorAccess.inst().attemptToLoadSectorInChunk(world, chunkX, chunkZ);
 
 		if (sector == null)
 		{
@@ -89,14 +86,14 @@ public class IslandSectorAccess
 		{
 			for (int z = 0; z < 16; z++)
 			{
-				List<IslandData> islands = sector.getIslandDataAtBlockPos(pos.getX() + x, pos.getZ() + z);
+				final List<IslandData> islands = sector.getIslandDataAtBlockPos(pos.getX() + x, pos.getZ() + z);
 
 				if (islands.size() <= 0)
 				{
 					continue;
 				}
 
-				for (IslandData data : islands)
+				for (final IslandData data : islands)
 				{
 					if (!islandsToGen.contains(data))
 					{
@@ -109,7 +106,37 @@ public class IslandSectorAccess
 		return islandsToGen;
 	}
 
-	public IslandSector attemptToLoadSector(World world, int sectorX, int sectorY)
+	public IslandSector attemptToLoadSectorInChunk(final World world, final int chunkX, final int chunkY)
+	{
+		final int sectorX = IslandSectorAccess.INST.getSectorCoord(chunkX);
+		final int sectorY = IslandSectorAccess.INST.getSectorCoord(chunkY);
+
+		final IslandSector sector = this.attemptToLoadSector(world, sectorX, sectorY);
+
+		if (sector != null)
+		{
+			sector.trackLoadedChunk(chunkX, chunkY);
+		}
+
+		return sector;
+	}
+
+	public IslandSector attemptToLoadSectorInChunk(final World world, final int chunkX, final int chunkY, final long seedForNewSector)
+	{
+		final int sectorX = IslandSectorAccess.INST.getSectorCoord(chunkX);
+		final int sectorY = IslandSectorAccess.INST.getSectorCoord(chunkY);
+
+		final IslandSector sector = this.attemptToLoadSector(world, sectorX, sectorY, seedForNewSector);
+
+		if (sector != null)
+		{
+			sector.trackLoadedChunk(chunkX, chunkY);
+		}
+
+		return sector;
+	}
+
+	private IslandSector attemptToLoadSector(final World world, final int sectorX, final int sectorY)
 	{
 		if (world.isRemote)
 		{
@@ -121,11 +148,11 @@ public class IslandSectorAccess
 			return this.loadSectorFromMemory(world, sectorX, sectorY);
 		}
 
-		IslandSector sector = this.loadSectorFromDisk(sectorX, sectorY);
+		final IslandSector sector = this.loadSectorFromDisk(sectorX, sectorY);
 
 		if (sector == null && this.wasSectorEverCreated(world, sectorX, sectorY))
 		{
-			File file = IslandSectorAccess.createSectorFile(sectorX, sectorY);
+			final File file = IslandSectorAccess.createSectorFile(sectorX, sectorY);
 
 			file.delete();
 		}
@@ -140,7 +167,7 @@ public class IslandSectorAccess
 		return sector;
 	}
 
-	public IslandSector attemptToLoadSector(World world, int sectorX, int sectorY, long seedForNewSector)
+	private IslandSector attemptToLoadSector(final World world, final int sectorX, final int sectorY, final long seedForNewSector)
 	{
 		if (world.isRemote)
 		{
@@ -156,7 +183,7 @@ public class IslandSectorAccess
 
 		if (sector == null && this.wasSectorEverCreated(world, sectorX, sectorY))
 		{
-			File file = IslandSectorAccess.createSectorFile(sectorX, sectorY);
+			final File file = IslandSectorAccess.createSectorFile(sectorX, sectorY);
 
 			file.delete();
 		}
@@ -175,12 +202,30 @@ public class IslandSectorAccess
 		return sector;
 	}
 
-	public boolean isSectorLoadedInMemory(int sectorX, int sectorY)
+	private boolean isSectorLoadedInMemory(final int sectorX, final int sectorY)
 	{
 		return this.activeSectors.containsKey(sectorX, sectorY);
 	}
 
-	public boolean wasSectorEverCreated(World world, int sectorX, int sectorY)
+	public boolean wasSectorEverCreatedInChunk(final World world, final int chunkX, final int chunkY)
+	{
+		if (world.isRemote)
+		{
+			return false;
+		}
+
+		final int sectorX = IslandSectorAccess.INST.getSectorCoord(chunkX);
+		final int sectorY = IslandSectorAccess.INST.getSectorCoord(chunkY);
+
+		if (this.isSectorLoadedInMemory(sectorX, sectorY))
+		{
+			return true;
+		}
+
+		return IslandSectorAccess.createSectorFile(sectorX, sectorY).exists();
+	}
+
+	private boolean wasSectorEverCreated(final World world, final int sectorX, final int sectorY)
 	{
 		if (world.isRemote)
 		{
@@ -196,7 +241,7 @@ public class IslandSectorAccess
 	}
 
 	@Nullable
-	public IslandSector loadSectorFromMemory(World world, int sectorX, int sectorY)
+	private IslandSector loadSectorFromMemory(final World world, final int sectorX, final int sectorY)
 	{
 		if (world.isRemote)
 		{
@@ -213,7 +258,7 @@ public class IslandSectorAccess
 		return null;
 	}
 
-	public void unloadSectorFromMemory(World world, IslandSector sector)
+	public void unloadSectorFromMemory(final World world, final IslandSector sector)
 	{
 		if (world.isRemote)
 		{
@@ -229,38 +274,7 @@ public class IslandSectorAccess
 		this.activeSectors.remove(sector.getSectorX(), sector.getSectorY());
 	}
 
-	public void unloadSectorFromMemory(World world, int sectorX, int sectorY)
-	{
-		if (world.isRemote)
-		{
-			return;
-		}
-
-		if (!this.isSectorLoadedInMemory(sectorX, sectorY))
-		{
-			return;
-		}
-
-		this.saveSectorToDisk(world, sectorX, sectorY);
-		this.activeSectors.remove(sectorX, sectorY);
-	}
-
-	public void saveSectorToDisk(World world, int sectorX, int sectorY)
-	{
-		if (world.isRemote)
-		{
-			return;
-		}
-
-		if (!this.isSectorLoadedInMemory(sectorX, sectorY))
-		{
-			return;
-		}
-
-		this.saveSectorToDisk(world, this.activeSectors.get(sectorX, sectorY));
-	}
-
-	public void saveSectorToDisk(World world, IslandSector sector)
+	public void saveSectorToDisk(final World world, final IslandSector sector)
 	{
 		if (world.isRemote)
 		{
@@ -270,11 +284,11 @@ public class IslandSectorAccess
 		this.saveSectorToDisk(sector);
 	}
 
-	private void saveSectorToDisk(IslandSector sector)
+	private void saveSectorToDisk(final IslandSector sector)
 	{
-		File file = IslandSectorAccess.createSectorFile(sector.getSectorX(), sector.getSectorY());
+		final File file = IslandSectorAccess.createSectorFile(sector.getSectorX(), sector.getSectorY());
 
-		NBTTagCompound tag = new NBTTagCompound();
+		final NBTTagCompound tag = new NBTTagCompound();
 
 		NBTHelper.fullySerialize("s", sector, tag);
 
@@ -282,15 +296,15 @@ public class IslandSectorAccess
 	}
 
 	@Nullable
-	private IslandSector loadSectorFromDisk(int sectorX, int sectorY)
+	private IslandSector loadSectorFromDisk(final int sectorX, final int sectorY)
 	{
-		File file = IslandSectorAccess.createSectorFile(sectorX, sectorY);
+		final File file = IslandSectorAccess.createSectorFile(sectorX, sectorY);
 
 		if (file.exists())
 		{
-			NBTTagCompound tag = NBTHelper.readNBTFromFile(file);
+			final NBTTagCompound tag = NBTHelper.readNBTFromFile(file);
 
-			IslandSector sector = NBTHelper.fullyDeserialize("s", tag, null);
+			final IslandSector sector = NBTHelper.fullyDeserialize("s", tag, null);
 
 			return sector;
 		}
@@ -298,28 +312,28 @@ public class IslandSectorAccess
 		return null;
 	}
 
-	public IslandSector createSectorAndSaveToDisk(World world, int sectorX, int sectorY, long seed)
+	private IslandSector createSectorAndSaveToDisk(final World world, final int sectorX, final int sectorY, final long seed)
 	{
 		if (world.isRemote)
 		{
 			return null;
 		}
 
-		IslandSector sector = IslandSectorFactory.create(sectorX, sectorY, seed);
+		final IslandSector sector = IslandSectorFactory.create(sectorX, sectorY, seed);
 
 		this.saveSectorToDisk(world, sector);
 
 		return sector;
 	}
 
-	private void addSectorToMemory(IslandSector sector)
+	private void addSectorToMemory(final IslandSector sector)
 	{
 		this.activeSectors.put(sector.getSectorX(), sector.getSectorY(), sector);
 	}
 
-	public void onServerStopping(FMLServerStoppingEvent event)
+	public void onServerStopping(final FMLServerStoppingEvent event)
 	{
-		for (IslandSector sector : this.activeSectors.getValues())
+		for (final IslandSector sector : this.activeSectors.getValues())
 		{
 			this.saveSectorToDisk(sector);
 		}
@@ -328,40 +342,25 @@ public class IslandSectorAccess
 	}
 
 	@SubscribeEvent
-	public void onChunkUnWatch(ChunkWatchEvent.UnWatch event) // Unload sectors which are no longer in generating range
+	public void onChunkUnWatch(final ChunkWatchEvent.UnWatch event) // Unload sectors which are no longer in generating range
 	{
-		WorldServer world = event.getPlayer().getServerWorld();
+		final ChunkPos unloadedChunk = event.getChunk();
+		final WorldServer world = event.getPlayer().getServerWorld();
 
 		if (world.provider.getDimensionType() != DimensionsAether.AETHER || world.isRemote)
 		{
 			return;
 		}
 
-		List<IslandSector> sectorsToUnload = Lists.newArrayList();
+		final List<IslandSector> sectorsToUnload = Lists.newArrayList();
 
-		for (IslandSector sector : this.activeSectors.getValues())
+		for (final IslandSector sector : this.activeSectors.getValues())
 		{
-			Iterator<Chunk> chunks = world.getPlayerChunkMap().getChunkIterator();
-			boolean shouldUnloadSector = true;
+			final boolean shouldUnloadSector = sector.isLoadedChunksEmpty();
 
-			while (chunks.hasNext())
+			if (sector.isChunkLoaded(unloadedChunk.chunkXPos, unloadedChunk.chunkZPos))
 			{
-				Chunk chunk = chunks.next();
-				ChunkPos pos = chunk.getChunkCoordIntPair();
-
-				if (pos == event.getChunk())
-				{
-					continue;
-				}
-
-				int sectorX = this.getSectorCoord(pos.chunkXPos);
-				int sectorY = this.getSectorCoord(pos.chunkZPos);
-
-				if (sectorX == sector.getSectorX() && sectorY == sector.getSectorY())
-				{
-					shouldUnloadSector = false;
-					break;
-				}
+				sector.untrackLoadedChunk(unloadedChunk.chunkXPos, unloadedChunk.chunkZPos);
 			}
 
 			if (shouldUnloadSector)
@@ -370,7 +369,7 @@ public class IslandSectorAccess
 			}
 		}
 
-		for (IslandSector sector : sectorsToUnload)
+		for (final IslandSector sector : sectorsToUnload)
 		{
 			this.unloadSectorFromMemory(world, sector);
 		}

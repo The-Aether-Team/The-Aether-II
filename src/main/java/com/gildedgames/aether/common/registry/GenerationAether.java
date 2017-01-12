@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.registry;
 
+import java.util.Random;
+
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
@@ -11,11 +13,10 @@ import com.gildedgames.aether.common.world.dimensions.aether.features.aerclouds.
 import com.gildedgames.aether.common.world.gen.templates.conditions.TemplateConditions;
 import com.gildedgames.aether.common.world.gen.templates.conditions.UndergroundEntrancePlacementCondition;
 import com.gildedgames.aether.common.world.gen.templates.conditions.UndergroundPlacementCondition;
+
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class GenerationAether
 {
@@ -94,8 +95,7 @@ public class GenerationAether
 		dark_blue_skyroot_oak_1 = new WorldGenTemplate(TemplatesAether.dark_blue_skyroot_oak_1, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE);
 		dark_blue_skyroot_oak_2 = new WorldGenTemplate(TemplatesAether.dark_blue_skyroot_oak_2, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE);
 
-		WorldGenTemplate.CenterOffsetProcessor oak_center = rotation ->
-		{
+		final WorldGenTemplate.CenterOffsetProcessor oak_center = rotation -> {
 			if (rotation == Rotation.CLOCKWISE_90)
 			{
 				return new BlockPos(-1, 0, 0);
@@ -166,11 +166,11 @@ public class GenerationAether
 			private final BlockPos offset = new BlockPos(5.5, 2, 5.5);
 
 			@Override
-			public void postGenerate(World world, Random random, BlockPos pos, Rotation rotation)
+			public void postGenerate(final World world, final Random random, final BlockPos pos, final Rotation rotation)
 			{
-				EntityEdison edison = new EntityEdison(world);
+				final EntityEdison edison = new EntityEdison(world);
 
-				BlockPos spawnAt = GenUtil.rotate(pos, pos.add(this.offset), rotation);
+				final BlockPos spawnAt = GenUtil.rotate(pos, pos.add(this.offset), rotation);
 
 				edison.setPositionAndUpdate(spawnAt.getX(), spawnAt.getY(), spawnAt.getZ());
 
