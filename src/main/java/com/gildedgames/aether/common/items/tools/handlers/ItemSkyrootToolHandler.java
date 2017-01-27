@@ -16,8 +16,8 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ItemSkyrootToolHandler implements IToolEventHandler
 {
@@ -33,7 +33,7 @@ public class ItemSkyrootToolHandler implements IToolEventHandler
 				return;
 			}
 
-			if (state.getBlock().canHarvestBlock(world, pos, (EntityPlayer) entity))
+			if (state.getBlock().canHarvestBlock(world, pos, entity))
 			{
 				int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
 
@@ -48,11 +48,9 @@ public class ItemSkyrootToolHandler implements IToolEventHandler
 				}
 				else
 				{
-					List<ItemStack> copy = new ArrayList<>(drops);
-
 					for (int i = 0; i < fortune + 1; i++)
 					{
-						drops.addAll(copy);
+						drops.addAll(drops.stream().map(ItemStack::copyItemStack).collect(Collectors.toList()));
 					}
 				}
 			}
