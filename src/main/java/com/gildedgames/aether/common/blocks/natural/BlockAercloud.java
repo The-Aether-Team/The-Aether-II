@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
+import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -181,6 +182,10 @@ public class BlockAercloud extends Block implements IBlockVariants
 	@Override
 	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
+		// As the event cancelling the placement is only called on the server, it takes a moment for the client to realise the block is not there (so these activate)
+		if (entity.getEntityWorld().provider.getDimensionType() == DimensionsAether.SLIDER_LABYRINTH)
+			return;
+
 		entity.fallDistance = 0;
 
 		boolean canCollide = !entity.isSneaking();
