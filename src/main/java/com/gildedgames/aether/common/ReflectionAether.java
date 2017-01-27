@@ -6,7 +6,6 @@ import java.lang.reflect.Method;
 
 public class ReflectionAether
 {
-
 	public static class ReflectionEntry
 	{
 		private String[] mappings;

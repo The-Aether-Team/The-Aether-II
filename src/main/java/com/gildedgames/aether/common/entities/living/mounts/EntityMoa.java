@@ -247,7 +247,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 					this.timeUntilDropFeather = 0;
 
 					ItemStack feather = new ItemStack(ItemsAether.moa_feather);
-					ItemMoaFeather.setColor(feather, this.getGenePool().getFeathers().gene().localizedName(), this.getGenePool().getFeathers().gene().data().getRGB());
+					ItemMoaFeather.setColor(feather, this.getGenePool().getFeathers().gene().unlocalizedName(), this.getGenePool().getFeathers().gene().data().getRGB());
 
 					Block.spawnAsEntity(this.worldObj, this.getPosition(), feather);
 					this.dropFeatherTimer.reset();
@@ -412,7 +412,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		super.dropFewItems(p_70628_1_, looting);
 
 		ItemStack feather = new ItemStack(ItemsAether.moa_feather, this.getRNG().nextInt(3));
-		ItemMoaFeather.setColor(feather, this.getGenePool().getFeathers().gene().localizedName(), this.getGenePool().getFeathers().gene().data().getRGB());
+		ItemMoaFeather.setColor(feather, this.getGenePool().getFeathers().gene().unlocalizedName(), this.getGenePool().getFeathers().gene().data().getRGB());
 
 		Block.spawnAsEntity(this.worldObj, this.getPosition(), feather);
 

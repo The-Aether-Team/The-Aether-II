@@ -175,19 +175,6 @@ public class ItemMoaEgg extends Item
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack)
-	{
-		MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);
-
-		if (genePool.getMarks() != null && !this.creativeEgg && AetherCore.isClient())
-		{
-			return genePool.getMarks().gene().localizedName() + " " + I18n.format(super.getUnlocalizedName(stack) + ".name");
-		}
-
-		return super.getUnlocalizedName();
-	}
-
-	@Override
 	public String getItemStackDisplayName(ItemStack stack)
 	{
 		return this.creativeEgg ? super.getItemStackDisplayName(stack) : this.getUnlocalizedName(stack);

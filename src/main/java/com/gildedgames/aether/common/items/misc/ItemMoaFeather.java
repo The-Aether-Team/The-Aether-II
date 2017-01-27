@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.items.misc;
 
-import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -59,6 +58,7 @@ public class ItemMoaFeather extends Item
 		return tag.getInteger("color");
 	}
 
+	@SideOnly(Side.CLIENT)
 	public static String getColorName(ItemStack stack)
 	{
 		if (stack.getTagCompound() == null)
@@ -68,20 +68,7 @@ public class ItemMoaFeather extends Item
 
 		NBTTagCompound tag = stack.getTagCompound().getCompoundTag("featherColor");
 
-		return tag.getString("colorName");
-	}
-
-	@Override
-	public String getUnlocalizedName(ItemStack stack)
-	{
-		String colorName = ItemMoaFeather.getColorName(stack);
-
-		if (!colorName.isEmpty() && AetherCore.isClient())
-		{
-			return colorName + " " + I18n.format(super.getUnlocalizedName(stack) + ".name");
-		}
-
-		return I18n.format(super.getUnlocalizedName(stack) + ".name");
+		return I18n.format(tag.getString("colorName"));
 	}
 
 	@Override
