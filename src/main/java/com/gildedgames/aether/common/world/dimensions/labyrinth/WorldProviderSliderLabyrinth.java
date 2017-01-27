@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.world.dimensions.labyrinth;
 import com.gildedgames.aether.common.registry.content.BiomesAether;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -131,6 +132,14 @@ public class WorldProviderSliderLabyrinth extends WorldProviderSurface
 	public boolean canDropChunk(int x, int z)
 	{
 		return true;
+	}
+
+	@Override
+	public boolean canMineBlock(EntityPlayer player, BlockPos pos)
+	{
+		// Doing this will prevent buckets from being used when not GM1, but will not affect block
+		// placement/destruction (only called in World#isBlockModifiable(EntityPlayer, Blockpos) )
+		return (player.capabilities.isCreativeMode);
 	}
 
 	@Override
