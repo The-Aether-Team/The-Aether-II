@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.world.dimensions.aether.island.logic;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.dimensions.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.noise.OpenSimplexNoise;
@@ -115,14 +116,17 @@ public class WorldGeneratorIsland
 
 	private double[] generateNoise(IslandData island, int chunkX, int chunkZ)
 	{
+		final double posX = chunkX * 16;
+		final double posZ = chunkZ * 16;
+
 		final double width = (double) island.getBounds().width;
 		final double length = (double) island.getBounds().height;
 
 		final double minX = island.getBounds().getMinX();
 		final double minZ = island.getBounds().getMinY();
 
-		final double posX = chunkX * 16;
-		final double posZ = chunkZ * 16;
+		final double centerX = island.getBounds().getMinX() + (width / 2);
+		final double centerZ = island.getBounds().getMinY() + (length / 2);
 
 		final double[] data = new double[NOISE_RESOLUTION * NOISE_RESOLUTION];
 
@@ -133,20 +137,17 @@ public class WorldGeneratorIsland
 			final double worldX = posX + (x * NOISE_SCALE);
 			final double nx = (worldX + minX) / 300.0D;
 
-			// Get x-axis distance from island center
-			final double distNX = ((worldX - minX) / width) - 0.5D;
-
 			for (int z = 0; z < NOISE_RESOLUTION; z++)
 			{
 				// Creates world coordinate and normalized noise coordinate
-				final double worldY = posZ + (z * NOISE_SCALE);
-				final double nz = (worldY + minZ) / 300.0D;
+				final double worldZ = posZ + (z * NOISE_SCALE);
+				final double nz = (worldZ + minZ) / 300.0D;
 
-				// Get z-axis distance from island center
-				double distNZ = ((worldY - minZ) / length) - 0.5D;
+				double distX = Math.abs(centerX - worldX);
+				double distZ = Math.abs(centerZ - worldZ);
 
 				// Get distance from center of Island
-				double dist = 16.0D * ((distNX * distNX) + (distNZ * distNZ));
+				double dist = (distX + distZ) / 450.0D;
 
 				// Generate noise for X/Z coordinate
 				double noise1 = this.simplex.eval(nx, nz);
@@ -158,7 +159,7 @@ public class WorldGeneratorIsland
 				double sample = (noise1 + noise2 + noise3 + noise4) / 4.0D;
 
 				// Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
-				double height = sample - (0.7D * Math.pow(dist, 2.0D));
+				double height = sample - (0.7D * Math.pow(dist, 2));
 
 				data[x + (z * NOISE_RESOLUTION)] = height;
 			}

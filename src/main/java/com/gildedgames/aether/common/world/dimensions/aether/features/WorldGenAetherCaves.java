@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.world.dimensions.aether.features;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.world.dimensions.aether.biomes.BiomeAetherBase;
 import com.google.common.base.Objects;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -205,7 +206,7 @@ public class WorldGenAetherCaves extends MapGenBase
 
 	protected boolean canReplaceBlock(IBlockState state, IBlockState above)
 	{
-		return state.getBlock() == BlocksAether.holystone;
+		return state.getBlock() == BlocksAether.holystone || state.getBlock() == BlocksAether.quicksoil;
 	}
 
 	/**
