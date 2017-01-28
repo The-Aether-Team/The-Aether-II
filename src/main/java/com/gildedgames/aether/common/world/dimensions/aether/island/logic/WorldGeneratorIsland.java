@@ -14,7 +14,7 @@ public class WorldGeneratorIsland
 	// Resolution = x^2
 	private static final int NOISE_RESOLUTION = 9;
 
-	private static final double NOISE_DOWNSCALE = NOISE_RESOLUTION / 16.0D;
+	private static final double NOISE_DOWNSCALE = 8;
 
 	private final World world;
 
