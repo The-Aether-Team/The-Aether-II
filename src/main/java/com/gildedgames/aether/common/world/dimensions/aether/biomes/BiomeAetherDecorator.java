@@ -36,23 +36,23 @@ import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 public class BiomeAetherDecorator
 {
 
-	protected WorldGenAetherMinable genAmbrosium, genZanite, genGravitite, genIcestone, genArkenium, genCoarseAetherDirtOnDirt, genCoarseAetherDirtOnHolystone;
+	private final WorldGenAetherMinable genAmbrosium, genZanite, genGravitite, genIcestone, genArkenium, genCoarseAetherDirtOnDirt, genCoarseAetherDirtOnHolystone;
 
-	protected WorldGenAetherMinable genMossyHolystone, genCrudeScatterglass;
+	private final WorldGenAetherMinable genMossyHolystone, genCrudeScatterglass;
 
-	protected WorldGenAetherFlowers genPurpleFlowers, genWhiteRoses, genBurstblossom;
+	private final WorldGenAetherFlowers genPurpleFlowers, genWhiteRoses, genBurstblossom;
 
-	protected WorldGenOrangeTree genOrangeTree;
+	private final WorldGenOrangeTree genOrangeTree;
 
-	protected WorldGenAetherFlowers genBlueberryBushes;
+	private final WorldGenAetherFlowers genBlueberryBushes;
 
-	protected WorldGenQuicksoil genQuicksoil;
+	private final WorldGenQuicksoil genQuicksoil;
 
-	protected WorldGenAetherLakes genAetherLakes;
+	private final WorldGenAetherLakes genAetherLakes;
 
-	protected WorldGenAercloud genColdColumbusAercloud, genColdFlatAercloud, genBlueAercloud;
+	private final WorldGenAercloud genColdColumbusAercloud, genColdFlatAercloud, genBlueAercloud;
 
-	protected WorldGenPurpleAercloud genPurpleAercloud;
+	private final WorldGenPurpleAercloud genPurpleAercloud;
 
 	public boolean generateBushes = true;
 
@@ -309,21 +309,6 @@ public class BiomeAetherDecorator
 		}
 	}
 
-	private void generateCaveMineable(final WorldGenAetherMinable minable, final World world, final Random random, final BlockPos pos, final int minY, final int maxY,
-			final int attempts)
-	{
-		for (int count = 0; count < attempts; count++)
-		{
-			final BlockPos randomPos = pos.add(random.nextInt(16), random.nextInt(maxY - minY) + minY, random.nextInt(16));
-			//			randomPos = world.getTopBlockHeight(randomPos);
-
-			if (world.getLightFor(EnumSkyBlock.SKY, randomPos) <= 7)
-			{
-				minable.generate(world, random, randomPos);
-			}
-		}
-	}
-
 	private void generateCloud(final WorldGenAercloud gen, final World world, final BlockPos pos, final Random rand, final int rarity, final int width, final int minY, final int maxY)
 	{
 		if (rand.nextInt(rarity) == 0)
@@ -355,8 +340,8 @@ public class BiomeAetherDecorator
 		this.generateMineable(this.genCoarseAetherDirtOnDirt, world, random, pos, 0, 128, 20);
 		this.generateMineable(this.genCoarseAetherDirtOnHolystone, world, random, pos, 0, 128, 20);
 
-		this.generateCaveMineable(this.genMossyHolystone, world, random, pos, 0, 90, 45);
-		this.generateCaveMineable(this.genCrudeScatterglass, world, random, pos, 0, 90, 45);
+		this.generateMineable(this.genMossyHolystone, world, random, pos, 0, 90, 45);
+		this.generateMineable(this.genCrudeScatterglass, world, random, pos, 0, 90, 45);
 	}
 
 	protected void generateClouds(final World world, final Random random, final BlockPos pos)

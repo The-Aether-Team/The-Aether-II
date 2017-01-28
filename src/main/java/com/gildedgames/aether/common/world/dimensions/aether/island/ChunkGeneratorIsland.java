@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.world.dimensions.aether.island;
 import java.util.List;
 import java.util.Random;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherCaves;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
@@ -22,6 +23,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
+import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 
@@ -32,25 +34,15 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 	private final Random rand;
 
-	private final double[][] noiseFields;
+	private final WorldGeneratorIsland islandGenerator;
 
-	private double[] cloudNoise1, cloudNoise2, cloudNoise3, cloudNoise4;
+	private final WorldGenAetherCaves caveGenerator;
 
-	private final NoiseGeneratorOctaves[] octaveNoiseGenerators;
+	private final NoiseGeneratorPerlin surfaceNoise;
 
 	private Biome[] biomes;
 
-	private final WorldGeneratorIsland islandGenerator;
-
-	private final WorldGenAetherCaves caveGenerator = new WorldGenAetherCaves();
-
-	private final NoiseGeneratorOctaves cloudGenLayer1;
-
-	private final NoiseGeneratorOctaves cloudGenLayer2;
-
-	private final NoiseGeneratorOctaves cloudGenLayer3;
-
-	private final NoiseGeneratorOctaves cloudGenLayer4;
+	private double[] depthBuffer;
 
 	public ChunkGeneratorIsland(final World world, final long seed)
 	{
@@ -63,27 +55,10 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 		this.rand = new Random(seed);
 
-		this.noiseFields = new double[9][];
-		this.noiseFields[1] = new double[256];
-		this.noiseFields[2] = new double[256];
-		this.noiseFields[3] = new double[256];
+		this.surfaceNoise = new NoiseGeneratorPerlin(this.rand, 4);
 
 		this.islandGenerator = new WorldGeneratorIsland(world);
-
-		this.octaveNoiseGenerators = new NoiseGeneratorOctaves[7];
-
-		this.octaveNoiseGenerators[0] = new NoiseGeneratorOctaves(this.rand, 16);
-		this.octaveNoiseGenerators[1] = new NoiseGeneratorOctaves(this.rand, 16);
-		this.octaveNoiseGenerators[2] = new NoiseGeneratorOctaves(this.rand, 32);
-		this.octaveNoiseGenerators[3] = new NoiseGeneratorOctaves(this.rand, 64);
-		this.octaveNoiseGenerators[4] = new NoiseGeneratorOctaves(this.rand, 4);
-		this.octaveNoiseGenerators[5] = new NoiseGeneratorOctaves(this.rand, 10);
-		this.octaveNoiseGenerators[6] = new NoiseGeneratorOctaves(this.rand, 16);
-
-		this.cloudGenLayer1 = new NoiseGeneratorOctaves(this.rand, 12);
-		this.cloudGenLayer2 = new NoiseGeneratorOctaves(new Random(seed + 100L), 12);
-		this.cloudGenLayer3 = new NoiseGeneratorOctaves(new Random(seed + 200L), 12);
-		this.cloudGenLayer4 = new NoiseGeneratorOctaves(new Random(seed + 300L), 12);
+		this.caveGenerator = new WorldGenAetherCaves();
 	}
 
 	@Override
@@ -92,83 +67,54 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 		return null;
 	}
 
-	public void replaceBiomeBlocks(final ChunkPrimer primer, final int chunkX, final int chunkY, final Biome[] biomes)
+	public void replaceBiomeBlocks(ChunkPrimer primer, int chunkX, int chunkZ, Biome[] biomes)
 	{
-		final double oneThirtySnd = 0.03125D;
-
-		this.noiseFields[1] = this.octaveNoiseGenerators[3].generateNoiseOctaves(this.noiseFields[1],
-				chunkX * 16, chunkY * 16, 0, 16, 16, 1, oneThirtySnd, oneThirtySnd, 1.0D);
-		this.noiseFields[2] = this.octaveNoiseGenerators[3].generateNoiseOctaves(this.noiseFields[2],
-				chunkX * 16, 109, chunkY * 16, 16, 1, 16, oneThirtySnd, 1.0D, oneThirtySnd);
-		this.noiseFields[3] = this.octaveNoiseGenerators[4].generateNoiseOctaves(this.noiseFields[3],
-				chunkX * 16, chunkY * 16, 0, 16, 16, 1, oneThirtySnd * 2D, oneThirtySnd * 2D, oneThirtySnd * 2D);
+		// Penetration depth noise generation
+		this.depthBuffer = this.surfaceNoise.getRegion(this.depthBuffer,
+				(double) (chunkX * 16), (double) (chunkZ * 16),16, 16, 0.0625D, 0.0625D, 1.0D);
 
 		for (int x = 0; x < 16; x++)
 		{
 			for (int z = 0; z < 16; z++)
 			{
-				final Biome biome = biomes[z + x * 16];
+				Biome biome = biomes[x + (z * 16)];
 
-				final int sthWithHeightMap = (int) (this.noiseFields[3][x + z * 16] / 3D + 3D + this.rand.nextDouble() / 4);
+				double val = this.depthBuffer[x + (z * 16)];
 
-				int j1 = -1;
+				// Calculate max penetration depth
+				int depth = (int) (val / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
 
-				IBlockState topAetherBlock = biome.topBlock;
-				IBlockState fillAetherBlock = biome.fillerBlock;
-				final IBlockState stone = BlocksAether.holystone.getDefaultState();
+				int pentration = 0;
+				int top = 0;
 
-				for (int y = 220; y >= 0; y--)
+				// Find top-most block
+				for (int y = 256; y > 0; y--)
 				{
-					final Block block = primer.getBlockState(x, y, z).getBlock();
-
-					if (block == Blocks.AIR)
+					if (primer.getBlockState(x, y, z).getBlock() != Blocks.AIR)
 					{
-						j1 = -1;
-						continue;
+						top = y;
+
+						break;
+					}
+				}
+
+				// Penetrate ground and set biome blocks
+				for (int y = top; pentration <= depth & y > 0; y--)
+				{
+					IBlockState state = primer.getBlockState(x, y, z);
+
+					if (state.getBlock() == BlocksAether.holystone)
+					{
+						primer.setBlockState(x, y, z, pentration < 1 ? biome.topBlock : biome.fillerBlock);
 					}
 
-					if (block != stone.getBlock())
-					{
-						continue;
-					}
-
-					if (j1 == -1)
-					{
-						if (sthWithHeightMap <= 0)
-						{
-							topAetherBlock = Blocks.AIR.getDefaultState();
-							fillAetherBlock = stone;
-						}
-
-						j1 = sthWithHeightMap;
-
-						if (y >= 0 && (y + 1 >= this.worldObj.getActualHeight()
-								|| primer.getBlockState(x, y + 1, z) == Blocks.AIR.getDefaultState()))
-						{
-							primer.setBlockState(x, y, z, topAetherBlock);
-						}
-						else
-						{
-							primer.setBlockState(x, y, z, fillAetherBlock);
-						}
-
-						continue;
-					}
-
-					if (j1 <= 0)
-					{
-						continue;
-					}
-
-					primer.setBlockState(x, y, z, fillAetherBlock);
-
-					j1--;
+					pentration++;
 				}
 			}
 		}
 	}
 
-	public void generateIslands(final ChunkPrimer primer, final int chunkX, final int chunkZ)
+	private void generateIslands(final ChunkPrimer primer, final int chunkX, final int chunkZ)
 	{
 		final int posX = chunkX * 16;
 		final int posZ = chunkZ * 16;
@@ -244,76 +190,21 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 		}
 	}
 
-	public void genClouds(final ChunkPrimer primer, double[] noise, final NoiseGeneratorOctaves noiseGen, final double threshold, final int posY, final int chunkX,
-			final int chunkZ)
-	{
-		final int height = 160;
-		final int sampleSize = 40;
-
-		noise = noiseGen.generateNoiseOctaves(noise, chunkX * 16, 0, chunkZ * 16, 16, height, 16, 64.0D, 1.5D, 64.0D);
-
-		for (int x = 0; x < 16; x++)
-		{
-			for (int z = 0; z < 16; z++)
-			{
-				for (int y = 0; y < height; y += sampleSize)
-				{
-					double samples = 0.0D;
-
-					for (int y2 = y; y2 < y + sampleSize; y2++)
-					{
-						samples += noise[(x * 16 + z) * height + y];
-					}
-
-					final double sample = samples / sampleSize;
-
-					if (sample / 5.0D > threshold)
-					{
-						if (primer.getBlockState(x, y, z) == Blocks.AIR.getDefaultState())
-						{
-							primer.setBlockState(x, posY + y / sampleSize, z, BlocksAether.aercloud.getDefaultState());
-						}
-					}
-				}
-			}
-		}
-	}
-
 	@Override
 	public Chunk provideChunk(final int chunkX, final int chunkZ)
 	{
+		Biome[] biomes = this.worldObj.getBiomeProvider().getBiomesForGeneration(this.biomes, chunkX * 16, chunkZ * 16, 16, 16);
+
 		this.rand.setSeed((long) chunkX * 341873128712L + (long) chunkZ * 132897987541L);
 
 		final ChunkPrimer primer = new ChunkPrimer();
 
 		this.generateIslands(primer, chunkX, chunkZ);
-
-		this.biomes = this.worldObj.getBiomeProvider().getBiomesForGeneration(this.biomes, chunkX * 16, chunkZ * 16, 16, 16);
-
-		this.replaceBiomeBlocks(primer, chunkX, chunkZ, this.biomes);
+		this.replaceBiomeBlocks(primer, chunkX, chunkZ, biomes);
 
 		this.caveGenerator.generate(this.worldObj, chunkX, chunkZ, primer);
 
-//		this.genClouds(primer, this.cloudNoise1, this.cloudGenLayer1, 10.0D, 40, chunkX, chunkZ);
-		//this.genClouds(primer, this.cloudNoise2, this.cloudGenLayer2, 100.0D, 65, chunkX, chunkZ);
-
-		//this.genClouds(primer, 90.0D, 240, chunkX, chunkZ);
-		//this.genClouds(primer, this.cloudNoise3, this.cloudGenLayer3, 130.0D, 180, chunkX, chunkZ);
-		//this.genClouds(primer, this.cloudNoise4, this.cloudGenLayer4, 200.0D, 148, chunkX, chunkZ);
-
-		/*for (int x = 0; x < 16; x++)
-		{
-			for (int z = 0; z< 16; z++)
-			{
-				for (int y = 0; y < 80; y++)
-				{
-					primer.setBlockState(x, y, z, Blocks.DIRT.getDefaultState());
-				}
-			}
-		}*/
-
 		final Chunk chunk = new Chunk(this.worldObj, primer, chunkX, chunkZ);
-
 		chunk.generateSkylightMap();
 
 		return chunk;
@@ -333,10 +224,10 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 
 		this.rand.setSeed(this.worldObj.getSeed());
 
-		final long i1 = this.rand.nextLong() / 2L * 2L + 1L;
-		final long j1 = this.rand.nextLong() / 2L * 2L + 1L;
+		final long seedX = this.rand.nextLong() / 2L * 2L + 1L;
+		final long seedZ = this.rand.nextLong() / 2L * 2L + 1L;
 
-		this.rand.setSeed(chunkX * i1 + chunkZ * j1 ^ this.worldObj.getSeed());
+		this.rand.setSeed(chunkX * seedX + chunkZ * seedZ ^ this.worldObj.getSeed());
 
 		biome.decorate(this.worldObj, this.rand, pos);
 	}

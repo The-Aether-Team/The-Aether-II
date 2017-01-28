@@ -11,6 +11,10 @@ import net.minecraft.world.chunk.ChunkPrimer;
 
 public class WorldGeneratorIsland
 {
+	// Resolution = x^2
+	private static final int NOISE_RESOLUTION = 9;
+
+	private static final double NOISE_DOWNSCALE = 16.0D / NOISE_RESOLUTION;
 
 	private final World world;
 
@@ -22,76 +26,39 @@ public class WorldGeneratorIsland
 		this.simplex = new OpenSimplexNoise(world.getSeed());
 	}
 
-	public double getBias(double time, double bias)
+	public void genIslandForChunk(ChunkPrimer primer, IslandData island, IslandSector sector, int chunkX, int chunkZ)
 	{
-		return (time / ((((1.0 / bias) - 2.0) * (1.0 - time)) + 1.0));
-	}
-
-	public void genIslandForChunk(ChunkPrimer primer, IslandData data, IslandSector sector, int chunkX, int chunkZ)
-	{
-		int posX = chunkX * 16;
-		int posZ = chunkZ * 16;
-
-		double width = (double) data.getBounds().width;
-		double height = data.getHeight();
-		double length = (double) data.getBounds().height;
-
-		Biome biome = this.world.getBiome(new BlockPos(posX + 16, 0, posZ + 16));
-
-		double minY = data.getMinY();
+		Biome biome = this.world.getBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
 
 		IBlockState coastBlock = ((BiomeAetherBase) biome).getCoastalBlock();
+
+		double height = island.getHeight();
+
+		double[] heightMap = this.generateNoise(island, chunkX, chunkZ);
 
 		for (int x = 0; x < 16; x++)
 		{
 			for (int z = 0; z < 16; z++)
 			{
-				double stepX = (double) posX + x;
-				double stepZ = (double) posZ + z;
-
-				// normalize coords
-				double nx = (stepX + data.getBounds().getMinX()) / 300.0D;
-				double nz = (stepZ + data.getBounds().getMinY()) / 300.0D;
-
-				// Subtract sector coords from nx/ny so that the noise is within range of the island center
-				double distNX = ((stepX - data.getBounds().getMinX()) / width) - 0.5D;
-				double distNZ = ((stepZ - data.getBounds().getMinY()) / length) - 0.5D;
-
-				// Generate noise for X/Z coordinate
-				double noise1 = this.simplex.eval(nx, nz);
-				double noise2 = 0.5 * this.simplex.eval(nx * 8D, nz * 8D);
-				double noise3 = 0.25 * this.simplex.eval(nx * 16D, nz * 16D);
-				double noise4 = 0.1 * this.simplex.eval(nx * 32D, nz * 32D);
-
-				double value = (noise1 + noise2 + noise3 + noise4) / 4.0;
-
-				// Get distance from center of Island
-				double dist = 2.0 * Math.sqrt((distNX * distNX) + (distNZ * distNZ));
-
-				// Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
-				value = value - (0.7 * Math.pow(dist, 4));
-
-				double heightValue = value + 1.0;
+				double sample = this.interpolate(heightMap, x, z);
+				double heightSample = sample + 1.0D;
 
 				double bottomHeight = 0.8 * height;
-				double bottomMaxY = minY + bottomHeight;
+				double bottomMaxY = island.getMinY() + bottomHeight;
 
 				double topHeight = 0.2 * height;
 
 				double cutoffPoint = 0.8;
 
-				double bottomHeightMod = Math.min(1.0, (heightValue - cutoffPoint) * 1.4);
+				double bottomHeightMod = Math.min(1.0, (heightSample - cutoffPoint) * 1.4);
 
-				if (heightValue > cutoffPoint)
+				if (heightSample > cutoffPoint)
 				{
-					for (int y = (int) Math.floor(bottomMaxY); y > bottomMaxY - (bottomHeight * bottomHeightMod); y--)
+					for (int y = (int) bottomMaxY; y > bottomMaxY - (bottomHeight * bottomHeightMod); y--)
 					{
-						if (heightValue < cutoffPoint + 0.05 && y == bottomMaxY - 1)
+						if (coastBlock != null && heightSample < cutoffPoint + 0.05 && y == bottomMaxY - 1)
 						{
-							if (coastBlock != null)
-							{
-								primer.setBlockState(x, y, z, coastBlock);
-							}
+							primer.setBlockState(x, y, z, coastBlock);
 						}
 						else
 						{
@@ -99,50 +66,104 @@ public class WorldGeneratorIsland
 						}
 					}
 
-					for (int y = (int) Math.floor(bottomMaxY); y < bottomMaxY + ((heightValue - cutoffPoint) * topHeight); y++)
+					for (int y = (int) bottomMaxY; y < bottomMaxY + ((heightSample - cutoffPoint) * topHeight); y++)
 					{
-						if (heightValue < cutoffPoint + 0.05 && y < bottomMaxY + 1)
+						if (coastBlock != null && (heightSample < cutoffPoint + 0.05 && y < bottomMaxY + 1))
 						{
-							if (coastBlock != null)
-							{
-								primer.setBlockState(x, y, z, coastBlock);
-							}
+							primer.setBlockState(x, y, z, coastBlock);
 						}
 						else
 						{
 							primer.setBlockState(x, y, z, BlocksAether.holystone.getDefaultState());
 						}
-					}
-				}
-
-				for (int y = (int) Math.floor(minY + (height * 0.5)); y < minY + height; y++)
-				{
-					double stepY = y - minY - (height * 0.55);
-
-					double ny = (stepY) / (height - (height * 0.55)) - 0.5;
-
-					double noise3d1 = this.simplex.eval(nx * 8.0, ny * 8.0 / 1.8, nz * 8.0);
-					double noise3d2 = 0.5 * this.simplex.eval(nx * 16.0, ny * 16.0 / 1.8, nz * 16.0);
-
-					double value3d = noise3d1 + noise3d2;
-
-					double dist3d = 2.0 * Math.sqrt((distNX * distNX) + (ny * ny) + (distNZ * distNZ)); // Get distance from center of Island
-
-					// Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
-					value3d = (value3d + 0.10) - (1.65 * Math.pow(dist3d, 1.50));
-
-					value3d -= dist;
-
-					// Prevents noise from dropping below its minimum value
-					value3d = Math.min(1.0D, Math.max(-1.0D, value3d));
-
-					if (value3d > -0.8)
-					{
-						primer.setBlockState(x, y, z, BlocksAether.holystone.getDefaultState());
 					}
 				}
 			}
 		}
+	}
+
+	private double interpolate(double[] heightMap, int x, int z)
+	{
+		final double x0 = (x / NOISE_DOWNSCALE);
+		final double z0 = (z / NOISE_DOWNSCALE);
+
+		final double x1 = Math.floor(x0);
+		final double x2 = Math.ceil(x0) + 0.5D;
+
+		final double z1 = Math.floor(z0);
+		final double z2 = Math.ceil(z0) + 0.5D;
+
+		final double q11 = this.valueAt(heightMap, (int) x1, (int) z1);
+		final double q12 = this.valueAt(heightMap, (int) x1, (int) z2);
+		final double q21 = this.valueAt(heightMap, (int) x2, (int) z1);
+		final double q22 = this.valueAt(heightMap, (int) x2, (int) z2);
+
+		final double a1 = (x2 - x0) / (x2 - x1);
+		final double a2 = (x0 - x1) / (x2 - x1);
+
+		final double r1 = a1 * q11 + a2 * q21;
+		final double r2 = a1 * q12 + a2 * q22;
+
+		return ((z2 - z0) / (z2 - z1)) * r1 + ((z0 - z1) / (z2 - z1)) * r2;
+	}
+
+	private double valueAt(double[] heightMap, int x, int z)
+	{
+		return heightMap[x + (z * NOISE_RESOLUTION)];
+	}
+
+	private double[] generateNoise(IslandData island, int chunkX, int chunkZ)
+	{
+		final double width = (double) island.getBounds().width;
+		final double length = (double) island.getBounds().height;
+
+		final double minX = island.getBounds().getMinX();
+		final double minZ = island.getBounds().getMinY();
+
+		final double posX = chunkX * 16;
+		final double posZ = chunkZ * 16;
+
+		final double[] data = new double[NOISE_RESOLUTION * NOISE_RESOLUTION];
+
+		// Generate half-resolution noise
+		for (int x = 0; x < NOISE_RESOLUTION; x++)
+		{
+			// Creates world coordinate and normalized noise coordinate
+			final double worldX = posX + (x * NOISE_DOWNSCALE);
+			final double nx = (worldX + minX) / 300.0D;
+
+			// Get x-axis distance from island center
+			final double distNX = ((worldX - minX) / width) - 0.5D;
+
+			for (int z = 0; z < NOISE_RESOLUTION; z++)
+			{
+				// Creates world coordinate and normalized noise coordinate
+				final double worldY = posZ + (z * NOISE_DOWNSCALE);
+				final double nz = (worldY + minZ) / 300.0D;
+
+				// Get z-axis distance from island center
+				double distNZ = ((worldY - minZ) / length) - 0.5D;
+
+				// Get distance from center of Island
+				double dist = 16.0D * ((distNX * distNX) + (distNZ * distNZ));
+
+				// Generate noise for X/Z coordinate
+				double noise1 = this.simplex.eval(nx, nz);
+				double noise2 = 0.5D * this.simplex.eval(nx * 8D, nz * 8D);
+				double noise3 = 0.25D * this.simplex.eval(nx * 16D, nz * 16D);
+				double noise4 = 0.1D * this.simplex.eval(nx * 32D, nz * 32D);
+
+				// Averages noise samples linearly
+				double sample = (noise1 + noise2 + noise3 + noise4) / 4.0D;
+
+				// Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
+				double height = sample - (0.7D * Math.pow(dist, 2.0D));
+
+				data[x + (z * NOISE_RESOLUTION)] = height;
+			}
+		}
+
+		return data;
 	}
 
 }
