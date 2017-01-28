@@ -14,7 +14,8 @@ public class WorldGeneratorIsland
 	// Resolution = x^2
 	private static final int NOISE_RESOLUTION = 9;
 
-	private static final double NOISE_DOWNSCALE = 8;
+	private static final double NOISE_SCALE = 16.0D / NOISE_RESOLUTION,
+			NOISE_INVERSE = (16.0D / (NOISE_RESOLUTION - 1));
 
 	private final World world;
 
@@ -84,8 +85,8 @@ public class WorldGeneratorIsland
 
 	private double interpolate(double[] heightMap, int x, int z)
 	{
-		final double x0 = (x / NOISE_DOWNSCALE);
-		final double z0 = (z / NOISE_DOWNSCALE);
+		final double x0 = (x / NOISE_INVERSE);
+		final double z0 = (z / NOISE_INVERSE);
 
 		final double x1 = Math.floor(x0);
 		final double x2 = Math.ceil(x0) + 0.5D;
@@ -129,7 +130,7 @@ public class WorldGeneratorIsland
 		for (int x = 0; x < NOISE_RESOLUTION; x++)
 		{
 			// Creates world coordinate and normalized noise coordinate
-			final double worldX = posX + (x * NOISE_DOWNSCALE);
+			final double worldX = posX + (x * NOISE_SCALE);
 			final double nx = (worldX + minX) / 300.0D;
 
 			// Get x-axis distance from island center
@@ -138,7 +139,7 @@ public class WorldGeneratorIsland
 			for (int z = 0; z < NOISE_RESOLUTION; z++)
 			{
 				// Creates world coordinate and normalized noise coordinate
-				final double worldY = posZ + (z * NOISE_DOWNSCALE);
+				final double worldY = posZ + (z * NOISE_SCALE);
 				final double nz = (worldY + minZ) / 300.0D;
 
 				// Get z-axis distance from island center
