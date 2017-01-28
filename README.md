@@ -23,7 +23,9 @@ Please note however that due to the rapid development pace of the Aether Rewrite
 ### Permissions
 If you're wanting to create a gameplay video/review, extension or addon, parody, or any fan work of your own containing the Aether, go for it! We love seeing the content our community creates, and hope to make it as welcoming as possible for everyone. We ask however that you please don't advertise using our brand. If you're interested in sponsoring the Aether or Gilded Games, please [contact us](mailto:support@gildedgames.com).
 
-If you're creating a gameplay video or review, you are also entirely free to include any in-game music without requesting additional permission. While not required, it also helps us grow if you provide a small attribution to our [official website](https://aether.gildedgames.com) in your video or it's description.
+If you're creating a gameplay video or review, you are also entirely free to include any in-game music without requesting additional permission. For more information, please see the [CC BY-NC-SA 4.0](http://creativecommons.org/licenses/by-nc-sa/4.0/) license and our musician's [official written statement](https://www.facebook.com/notes/emile-van-krieken/about-using-my-music-in-your-videos/756628057699970).
+
+While not required, it also helps us grow if you provide a small attribution to our [official website](https://aether.gildedgames.com) in your video or it's description.
 
 Have any questions or concerns? Feel free to view our [support page](https://aether.gildedgames.com/support/), which contains some frequently asked questions and options to contact us.
 
