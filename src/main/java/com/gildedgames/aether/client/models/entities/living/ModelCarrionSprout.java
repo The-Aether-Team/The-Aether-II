@@ -253,10 +253,6 @@ public class ModelCarrionSprout extends ModelBase
 		this.animatePetal(this.bud_back, 0.0F, 3.141592653589793F, budAngle);
 		this.animatePetal(this.bud_left, 0.0F, -1.5707963267948966F, budAngle);
 		this.animatePetal(this.bud_right, 0.0F, 1.5707963267948966F, budAngle);
-
-		this.bud_front.rotationPointY = this.bud_back.rotationPointY = this.bud_left.rotationPointY = this.bud_right.rotationPointY = 0.0F;
-
-		this.bud_base.rotationPointY = 1.0F + (this.sinage2 * 0.5F);
 		this.stem.rotationPointY = (this.sinage2 * 0.5F);
 	}
 
@@ -266,8 +262,6 @@ public class ModelCarrionSprout extends ModelBase
 		model.rotateAngleX += angleX;
 		model.rotateAngleY = startAngleY;
 		model.rotateAngleY += this.pie;
-
-		model.rotationPointY = (this.sinage2 * 0.5F);
 	}
 
 }
