@@ -246,7 +246,7 @@ public class ModelCarrionSprout extends ModelBase
 
 		this.animatePetal(this.petal_back_left, 1.3962634015954636F, -2.356194490192345F, petalAngle);
 		this.animatePetal(this.petal_back_right, 1.3962634015954636F, 2.356194490192345F, petalAngle);
-		this.animatePetal(this.petal_front_left, 1.3962634015954636F, 0.7853981633974483F, petalAngle);
+		this.animatePetal(this.petal_front_left, 1.3962634015954636F, -0.7853981633974483F, petalAngle);
 		this.animatePetal(this.petal_front_right, 1.3962634015954636F, 0.7853981633974483F, petalAngle);
 
 		this.animatePetal(this.bud_front, 0.0F, 0.0F, budAngle);
