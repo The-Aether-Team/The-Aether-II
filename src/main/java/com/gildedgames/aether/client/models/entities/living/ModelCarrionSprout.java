@@ -237,7 +237,7 @@ public class ModelCarrionSprout extends ModelBase
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
 		final float petalAngle = this.sinage;
-		final float budAngle = this.sinage + 1.0F;
+		final float budAngle = (this.sinage * 0.3F) + 0.1F;
 
 		this.animatePetal(this.petal_left, 1.3962634015954636F, -1.5707963267948966F, petalAngle);
 		this.animatePetal(this.petal_right, 1.3962634015954636F, 1.5707963267948966F, petalAngle);
@@ -253,6 +253,11 @@ public class ModelCarrionSprout extends ModelBase
 		this.animatePetal(this.bud_back, 0.0F, 3.141592653589793F, budAngle);
 		this.animatePetal(this.bud_left, 0.0F, -1.5707963267948966F, budAngle);
 		this.animatePetal(this.bud_right, 0.0F, 1.5707963267948966F, budAngle);
+
+		this.bud_front.rotationPointY = this.bud_back.rotationPointY = this.bud_left.rotationPointY = this.bud_right.rotationPointY = 0.0F;
+
+		this.bud_base.rotationPointY = (this.sinage2 * 0.5F);
+		this.stem.rotationPointY = (this.sinage2 * 0.5F);
 	}
 
 	private void animatePetal(final ModelRenderer model, final float startAngleX, final float startAngleY, final float angleX)
@@ -261,6 +266,8 @@ public class ModelCarrionSprout extends ModelBase
 		model.rotateAngleX += angleX;
 		model.rotateAngleY = startAngleY;
 		model.rotateAngleY += this.pie;
+
+		model.rotationPointY = (this.sinage2 * 0.5F);
 	}
 
 }
