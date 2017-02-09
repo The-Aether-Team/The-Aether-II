@@ -256,7 +256,7 @@ public class ModelCarrionSprout extends ModelBase
 
 		this.bud_front.rotationPointY = this.bud_back.rotationPointY = this.bud_left.rotationPointY = this.bud_right.rotationPointY = 0.0F;
 
-		this.bud_base.rotationPointY = (this.sinage2 * 0.5F);
+		this.bud_base.rotationPointY = 1.0F + (this.sinage2 * 0.5F);
 		this.stem.rotationPointY = (this.sinage2 * 0.5F);
 	}
 
