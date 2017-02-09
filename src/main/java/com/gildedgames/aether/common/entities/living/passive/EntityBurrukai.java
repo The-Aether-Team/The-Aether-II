@@ -1,10 +1,15 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
+import java.util.Set;
+
+import javax.annotation.Nullable;
+
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.google.common.collect.Sets;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -19,15 +24,12 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
-import java.util.Set;
-
 public class EntityBurrukai extends EntityAetherAnimal
 {
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry);
 
-	public EntityBurrukai(World world)
+	public EntityBurrukai(final World world)
 	{
 		super(world);
 
@@ -48,7 +50,6 @@ public class EntityBurrukai extends EntityAetherAnimal
 		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
 		this.tasks.addTask(4, new EntityAIFollowParent(this, 1.25D));
-		this.tasks.addTask(4, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 20, 1.8F, 2.5F));
 		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(7, new EntityAILookIdle(this));
@@ -64,13 +65,13 @@ public class EntityBurrukai extends EntityAetherAnimal
 	}
 
 	@Override
-	public EntityBurrukai createChild(EntityAgeable ageable)
+	public EntityBurrukai createChild(final EntityAgeable ageable)
 	{
 		return new EntityBurrukai(this.world);
 	}
 
 	@Override
-	public boolean isBreedingItem(@Nullable ItemStack stack)
+	public boolean isBreedingItem(@Nullable final ItemStack stack)
 	{
 		return stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
 	}
@@ -100,7 +101,7 @@ public class EntityBurrukai extends EntityAetherAnimal
 	}
 
 	@Override
-	protected void playStepSound(BlockPos pos, Block blockIn)
+	protected void playStepSound(final BlockPos pos, final Block blockIn)
 	{
 		this.playSound(SoundEvents.ENTITY_COW_STEP, 0.15F, 1.0F);
 	}
