@@ -123,7 +123,7 @@ public class ModelAerbunny extends ModelBase
 
 		this.setRotationAngles(f, f1, f2, f3, f4, f5);
 
-		GlStateManager.translate(0F, 1.1F, 0F);
+		GlStateManager.translate(0F, 1.1F, -0.2F);
 
 		this.body.render(f5);
 
