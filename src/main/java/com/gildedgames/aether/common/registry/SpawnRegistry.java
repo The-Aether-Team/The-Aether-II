@@ -53,12 +53,14 @@ public class SpawnRegistry
 		final SpawnEntry aerbunny = new SpawnEntry(EntityAerbunny.class, 13F, 3, 5).conditiion(grassCheck);
 		final SpawnEntry taegore = new SpawnEntry(EntityTaegore.class, 13F, 2, 3).conditiion(grassCheck);
 		final SpawnEntry carrion_sprout = new SpawnEntry(EntityCarrionSprout.class, 10F, 2, 3).conditiion(grassCheck).conditiion(plantCheck);
+		final SpawnEntry aechor_plant = new SpawnEntry(EntityAechorPlant.class, 12F, 2, 3).conditiion(grassCheck).conditiion(plantCheck);
 
 		animals.addEntry(burrukai);
 		animals.addEntry(ram);
 		animals.addEntry(aerbunny);
 		animals.addEntry(taegore);
 		animals.addEntry(carrion_sprout);
+		animals.addEntry(aechor_plant);
 
 		/** ATMOSPHERIC **/
 		final SpawnHandler atmospheric = new SpawnHandler("aether_atmospheric").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(200);
@@ -78,13 +80,11 @@ public class SpawnRegistry
 		final SpawnEntry tempest = new SpawnEntry(EntityTempest.class, 10F, 2, 3, new FlyingPositionSelector()).conditiion(new CheckTime(CheckTime.Time.NIGHT)).conditiion(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState()));
 		final SpawnEntry cockatrice = new SpawnEntry(EntityCockatrice.class, 12F, 1, 1).conditiion(new CheckTime(CheckTime.Time.NIGHT)).conditiion(groundCheck);
 		final SpawnEntry swet = new SpawnEntry(EntitySwet.class, 10F, 2, 4).conditiion(groundCheck);
-		final SpawnEntry aechor_plant = new SpawnEntry(EntityAechorPlant.class, 10F, 2, 3).conditiion(grassCheck).conditiion(plantCheck);
 
 		hostiles.addEntry(zephyr);
 		hostiles.addEntry(tempest);
 		hostiles.addEntry(cockatrice);
 		hostiles.addEntry(swet);
-		hostiles.addEntry(aechor_plant);
 
 		/** FLYING **/
 		final SpawnHandler flying = new SpawnHandler("aether_flying").chunkArea(9).targetEntityCountPerArea(1).updateFrequencyInTicks(1200);
