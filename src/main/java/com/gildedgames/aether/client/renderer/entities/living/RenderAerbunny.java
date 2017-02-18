@@ -3,6 +3,7 @@ package com.gildedgames.aether.client.renderer.entities.living;
 import com.gildedgames.aether.client.models.entities.living.ModelAerbunny;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.living.passive.EntityAerbunny;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -12,12 +13,12 @@ public class RenderAerbunny extends RenderLiving<EntityAerbunny>
 {
 	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/aerbunny/aerbunny.png");
 
-	public RenderAerbunny(RenderManager renderManager)
+	public RenderAerbunny(final RenderManager renderManager)
 	{
 		super(renderManager, new ModelAerbunny(), 0.4f);
 	}
 
-	protected void rotateAerbunny(EntityAerbunny entity)
+	protected void rotateAerbunny(final EntityAerbunny entity)
 	{
 		if (!entity.onGround && entity.isRiding())
 		{
@@ -37,13 +38,13 @@ public class RenderAerbunny extends RenderLiving<EntityAerbunny>
 	}
 
 	@Override
-	protected void preRenderCallback(EntityAerbunny entity, float partialTicks)
+	protected void preRenderCallback(final EntityAerbunny entity, final float partialTicks)
 	{
 		this.rotateAerbunny(entity);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityAerbunny entity)
+	protected ResourceLocation getEntityTexture(final EntityAerbunny entity)
 	{
 		return texture;
 	}

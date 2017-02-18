@@ -1,13 +1,18 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
+import java.util.Set;
+
+import javax.annotation.Nullable;
+
 import com.gildedgames.aether.api.capabilites.entity.properties.ElementalState;
 import com.gildedgames.aether.api.capabilites.entity.properties.IEntityProperties;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.google.common.collect.Sets;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -28,9 +33,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
-import java.util.Set;
-
 public class EntityAerbunny extends EntityAetherAnimal implements IEntityProperties
 {
 
@@ -42,7 +44,7 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 	@SideOnly(Side.CLIENT)
 	private int puffiness;
 
-	public EntityAerbunny(World world)
+	public EntityAerbunny(final World world)
 	{
 		super(world);
 
@@ -72,6 +74,11 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 	@Override
 	public void onUpdate()
 	{
+		if (this.motionX != 0 || this.motionZ != 0)
+		{
+			this.setJumping(true);
+		}
+
 		super.onUpdate();
 
 		if (this.worldObj.isRemote)
@@ -83,7 +90,7 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 
 			if (this.prevMotionY <= 0 && this.motionY > 0)
 			{
-				BlockPos pos = this.getPosition();
+				final BlockPos pos = this.getPosition();
 
 				// Make sure we only spawn particles when it's jumping off a block
 				if (this.worldObj.isBlockFullCube(pos.down()))
@@ -99,7 +106,7 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 
 		if (this.isRiding())
 		{
-			Entity entity = this.getRidingEntity();
+			final Entity entity = this.getRidingEntity();
 
 			if (entity.isSneaking() && entity.onGround)
 			{
@@ -125,7 +132,7 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 	}
 
 	@Override
-	public boolean processInteract(EntityPlayer player, EnumHand hand, @Nullable ItemStack stack)
+	public boolean processInteract(final EntityPlayer player, final EnumHand hand, @Nullable final ItemStack stack)
 	{
 		if (!super.processInteract(player, hand, stack) && !this.isBreedingItem(stack))
 		{
@@ -178,22 +185,22 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 	}
 
 	@Override
-	protected PathNavigate getNewNavigator(World worldIn)
+	protected PathNavigate getNewNavigator(final World worldIn)
 	{
 		return new AerbunnyNavigator(this, worldIn);
 	}
 
 	@Override
-	public EntityAgeable createChild(EntityAgeable ageable)
+	public EntityAgeable createChild(final EntityAgeable ageable)
 	{
 		return new EntityAerbunny(this.worldObj);
 	}
 
 	private class AerbunnyJumpHelper extends EntityJumpHelper
 	{
-		private EntityLiving entity;
+		private final EntityLiving entity;
 
-		public AerbunnyJumpHelper(EntityAerbunny entity)
+		public AerbunnyJumpHelper(final EntityAerbunny entity)
 		{
 			super(entity);
 
@@ -203,12 +210,18 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 		public void doJump()
 		{
 			this.entity.setJumping(true);
+
+			if (this.entity.motionX == 0 && this.entity.motionZ == 0)
+			{
+				this.isJumping = false;
+				this.entity.setJumping(false);
+			}
 		}
 	}
 
 	private class AerbunnyNavigator extends PathNavigateGround
 	{
-		public AerbunnyNavigator(EntityLiving entity, World world)
+		public AerbunnyNavigator(final EntityLiving entity, final World world)
 		{
 			super(entity, world);
 		}
@@ -245,9 +258,9 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityPropert
 	}
 
 	@Override
-	public boolean isBreedingItem(@Nullable ItemStack stack)
+	public boolean isBreedingItem(@Nullable final ItemStack stack)
 	{
-		boolean flag = stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
+		final boolean flag = stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
 
 		return flag;
 	}
