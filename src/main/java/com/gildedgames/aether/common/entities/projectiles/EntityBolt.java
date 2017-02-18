@@ -27,10 +27,8 @@ public class EntityBolt extends EntityArrow
 	
 	public enum BoltAbility
 	{
-		NORMAL, DESTROY_BLOCKS
+		NORMAL
 	}
-	
-	private int blocksCanDestroy = 1;
 
 	public EntityBolt(World worldIn)
 	{
@@ -45,38 +43,6 @@ public class EntityBolt extends EntityArrow
 	@Override
     public void onUpdate()
     {
-		if (this.getBoltAbility() == BoltAbility.DESTROY_BLOCKS)
-		{
-			Vec3d vec3d1 = new Vec3d(this.posX, this.posY, this.posZ);
-	        Vec3d vec3d = new Vec3d(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-
-			RayTraceResult raytraceresult = this.worldObj.rayTraceBlocks(vec3d1, vec3d, false, true, false);
-			
-			if (raytraceresult != null)
-			{
-				BlockPos blockpos = raytraceresult.getBlockPos();
-
-		        IBlockState state = this.worldObj.getBlockState(blockpos);
-
-				if (this.shootingEntity instanceof EntityPlayer)
-				{
-					if (state.getMaterial() != Material.AIR && state.getMaterial().isToolNotRequired())
-					{
-						if (this.blocksCanDestroy > 0)
-						{
-							this.worldObj.destroyBlock(blockpos, true);
-
-							this.blocksCanDestroy--;
-						}
-						else
-						{
-							this.inGround = true;
-						}
-					}
-				}
-			}
-		}
-
 		super.onUpdate();
     }
 	
