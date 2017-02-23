@@ -39,7 +39,7 @@ public class RenderParachute extends Render<EntityParachute>
 		{
 			EntityPlayer player = entity.getParachutingPlayer();
 			float f2 = player.prevRenderYawOffset + ((player.renderYawOffset - player.prevRenderYawOffset));
-			GL11.glRotatef(f2, 0F, player.rotationYaw, 0F);
+			GL11.glRotatef(f2, 0F, Math.abs(player.rotationYaw), 0F);
 		}
 
 		GL11.glTranslatef(0.028f, -2f, -0.40f);
