@@ -7,6 +7,7 @@ import com.gildedgames.aether.api.items.equipment.EquipmentProperties;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.common.capabilities.item.effects.DebugEffect;
 import com.gildedgames.aether.common.capabilities.item.effects.RegenerationEffect;
+import com.gildedgames.aether.common.capabilities.item.effects.WaterBreathEffect;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.init.Items;
 
@@ -22,23 +23,24 @@ public class EquipmentContent
 	{
 		AetherAPI.equipment().registerEffect(new DebugEffect());
 		AetherAPI.equipment().registerEffect(new RegenerationEffect());
+		AetherAPI.equipment().registerEffect(new WaterBreathEffect());
 	}
 
 	private static void registerItems()
 	{
-		AetherAPI.items().registerItem(Items.STICK, ItemProperties.builder()
-				.setRarity(ItemRarity.RARE)
-				.setEquipmentProperties(EquipmentProperties.builder()
-						.setSlot(ItemEquipmentSlot.CHARM)
-						.addEffect(new DebugEffect.Provider(1.0f))
-						.build())
-				.build());
-
 		AetherAPI.items().registerItem(ItemsAether.regeneration_stone, ItemProperties.builder()
 				.setRarity(ItemRarity.RARE)
 				.setEquipmentProperties(EquipmentProperties.builder()
 						.setSlot(ItemEquipmentSlot.RELIC)
 						.addEffect(new RegenerationEffect.Provider(1))
+						.build())
+				.build());
+
+		AetherAPI.items().registerItem(ItemsAether.iron_bubble, ItemProperties.builder()
+				.setRarity(ItemRarity.RARE)
+				.setEquipmentProperties(EquipmentProperties.builder()
+						.setSlot(ItemEquipmentSlot.RELIC)
+						.addEffect(new WaterBreathEffect.Provider())
 						.build())
 				.build());
 	}
