@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.capabilities.player;
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.player.modules.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -11,7 +12,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -20,6 +23,7 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import java.util.ArrayList;
@@ -136,7 +140,18 @@ public class PlayerAether implements IPlayerAether
 	@Override
 	public void onHurt(LivingHurtEvent event)
 	{
+		PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
 
+		if (aePlayer != null)
+		{
+			if (aePlayer.getEquipmentModule().getEffectPool(new ResourceLocation(AetherCore.MOD_ID, "fire_immunity")).isPresent())
+			{
+				if (event.getSource() == DamageSource.inFire || event.getSource() == DamageSource.onFire || event.getSource() == DamageSource.lava)
+				{
+					event.setCanceled(true);
+				}
+			}
+		}
 	}
 
 	@Override
