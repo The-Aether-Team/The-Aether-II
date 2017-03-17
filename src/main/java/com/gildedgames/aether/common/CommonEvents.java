@@ -101,7 +101,7 @@ public class CommonEvents
 
 			WorldServer worldServer = server.worldServerForDimension(0);
 
-			if (world.getGameRules().getBoolean("doDaylightCycle"))
+			if (world.getGameRules().getBoolean("doDaylightCycle") && event.getEntityPlayer().isPlayerFullyAsleep())
 			{
 				long i = worldServer.getWorldInfo().getWorldTime() + 24000L;
 
