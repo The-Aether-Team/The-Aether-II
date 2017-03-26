@@ -5,10 +5,8 @@ import com.gildedgames.aether.api.items.equipment.effects.IEffect;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectInstance;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.common.AetherCore;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import java.util.Collection;
 
