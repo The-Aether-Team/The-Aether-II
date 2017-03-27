@@ -28,7 +28,7 @@ version = "${config.mod_version}"
 group = "com.gildedgames.aether"
 archivesBaseName = "AetherII"
 
-ext.ciVersion = System.getenv("BUILD_VERSION")
+ext.ciVersion = System.getenv("BUILD_NUMBER")
 ext.gitVersion = repo.head().abbreviatedId
 
 if (ciVersion != null) {
