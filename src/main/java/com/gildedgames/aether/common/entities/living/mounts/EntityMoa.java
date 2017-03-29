@@ -169,7 +169,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	{
 		if (!super.processInteract(player, hand, stack))
 		{
-			if (!player.worldObj.isRemote)
+			if (!player.world.isRemote)
 			{
 				if (this.isChild())
 				{
@@ -231,7 +231,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 		this.fallSlowly();
 
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			if (!this.isRaisedByPlayer() && this.getGender() == AnimalGender.MALE)
 			{
@@ -249,7 +249,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 					ItemStack feather = new ItemStack(ItemsAether.moa_feather);
 					ItemMoaFeather.setColor(feather, this.getGenePool().getFeathers().gene().unlocalizedName(), this.getGenePool().getFeathers().gene().data().getRGB());
 
-					Block.spawnAsEntity(this.worldObj, this.getPosition(), feather);
+					Block.spawnAsEntity(this.world, this.getPosition(), feather);
 					this.dropFeatherTimer.reset();
 				}
 			}
@@ -304,7 +304,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		{
 			if (this.ticksUntilFlap == 0)
 			{
-				this.worldObj.playSound(this.posX, this.posY, this.posZ, SoundsAether.generic_wing_flap, SoundCategory.NEUTRAL, 0.4f,
+				this.world.playSound(this.posX, this.posY, this.posZ, SoundsAether.generic_wing_flap, SoundCategory.NEUTRAL, 0.4f,
 						0.8f + (this.getRNG().nextFloat() * 0.6f), false);
 
 				this.ticksUntilFlap = 11;
@@ -414,7 +414,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		ItemStack feather = new ItemStack(ItemsAether.moa_feather, this.getRNG().nextInt(3));
 		ItemMoaFeather.setColor(feather, this.getGenePool().getFeathers().gene().unlocalizedName(), this.getGenePool().getFeathers().gene().data().getRGB());
 
-		Block.spawnAsEntity(this.worldObj, this.getPosition(), feather);
+		Block.spawnAsEntity(this.world, this.getPosition(), feather);
 
 		if (this.isSaddled())
 		{
@@ -556,7 +556,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	@Override
 	public EntityAgeable createChild(EntityAgeable matingAnimal)
 	{
-		return new EntityMoa(this.worldObj);
+		return new EntityMoa(this.world);
 	}
 
 	@Override

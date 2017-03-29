@@ -49,7 +49,7 @@ public class ItemCloudParachute extends Item
 
 		playerAether.getParachuteModule().setParachuting(true, EntityParachute.Type.fromOrdinal(stack.getMetadata()));
 
-		world.spawnEntityInWorld(parachute);
+		world.spawnEntity(parachute);
 
 		if (!player.capabilities.isCreativeMode)
 		{

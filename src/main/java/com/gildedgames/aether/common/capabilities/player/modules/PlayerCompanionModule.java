@@ -43,7 +43,7 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 	@Override
 	public void onUpdate()
 	{
-		if (this.getEntity().worldObj.isRemote || this.getEntity().isDead)
+		if (this.getEntity().world.isRemote || this.getEntity().isDead)
 		{
 			return;
 		}
@@ -69,7 +69,7 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 
 		EntityCompanion companion = this.getCompanionEntity();
 
-		if (!this.player.worldObj.isBlockLoaded(this.player.getPosition()))
+		if (!this.player.world.isBlockLoaded(this.player.getPosition()))
 		{
 			return;
 		}
@@ -82,7 +82,7 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 				{
 					if (!companion.wasDespawned())
 					{
-						ItemCompanion.setRespawnTimer(companionStack, this.player.worldObj, 20 * 240);
+						ItemCompanion.setRespawnTimer(companionStack, this.player.world, 20 * 240);
 					}
 
 					this.removeCompanion(true);
@@ -99,7 +99,7 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 
 			if (companion == null)
 			{
-				long respawnTimer = ItemCompanion.getTicksUntilRespawn(companionStack, this.player.worldObj);
+				long respawnTimer = ItemCompanion.getTicksUntilRespawn(companionStack, this.player.world);
 
 				if (respawnTimer <= 0)
 				{
@@ -150,7 +150,7 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 			}
 		}
 
-		this.player.worldObj.spawnEntityInWorld(companion);
+		this.player.world.spawnEntity(companion);
 
 		this.companionId = companion.getEntityId();
 
@@ -216,7 +216,7 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 	@Override
 	public EntityCompanion getCompanionEntity()
 	{
-		Entity entity = this.player.worldObj.getEntityByID(this.companionId);
+		Entity entity = this.player.world.getEntityByID(this.companionId);
 
 		if (entity != null && entity instanceof EntityCompanion)
 		{

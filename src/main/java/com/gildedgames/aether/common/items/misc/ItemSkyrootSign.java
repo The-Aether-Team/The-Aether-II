@@ -56,7 +56,7 @@ public class ItemSkyrootSign extends Item
 			{
 				if (side == EnumFacing.UP)
 				{
-					int rotation = MathHelper.floor_double((double) ((player.rotationYaw + 180.0F) * 16.0F / 360.0F) + 0.5D) & 15;
+					int rotation = MathHelper.floor((double) ((player.rotationYaw + 180.0F) * 16.0F / 360.0F) + 0.5D) & 15;
 					world.setBlockState(pos, BlocksAether.standing_skyroot_sign.getDefaultState().withProperty(BlockStandingSkyrootSign.ROTATION, rotation), 3);
 				}
 				else

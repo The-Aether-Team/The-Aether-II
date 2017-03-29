@@ -27,7 +27,7 @@ public class TileEntityAltar extends TileEntitySynced implements ITickable
 	@Override
 	public void update()
 	{
-		if (this.worldObj.isRemote)
+		if (this.world.isRemote)
 		{
 			this.prevAnimationTicks = this.animationTicks;
 
@@ -83,7 +83,7 @@ public class TileEntityAltar extends TileEntitySynced implements ITickable
 				{
 					ItemStack stack = recipe.getOutput(this.getStackOnAltar());
 
-					this.getWorld().spawnEntityInWorld(this.createEntityItemAboveAltar(stack));
+					this.getWorld().spawnEntity(this.createEntityItemAboveAltar(stack));
 
 					this.ambrosiumCount -= cost;
 					this.setStackOnAltar(null);
@@ -98,12 +98,12 @@ public class TileEntityAltar extends TileEntitySynced implements ITickable
 		{
 			ItemStack stack = new ItemStack(ItemsAether.ambrosium_shard, this.getAmbrosiumCount());
 
-			this.getWorld().spawnEntityInWorld(this.createEntityItemAboveAltar(stack));
+			this.getWorld().spawnEntity(this.createEntityItemAboveAltar(stack));
 		}
 
 		if (this.getStackOnAltar() != null)
 		{
-			this.getWorld().spawnEntityInWorld(this.createEntityItemAboveAltar(this.getStackOnAltar()));
+			this.getWorld().spawnEntity(this.createEntityItemAboveAltar(this.getStackOnAltar()));
 		}
 
 		this.setAmbrosiumCount(0);
@@ -118,7 +118,7 @@ public class TileEntityAltar extends TileEntitySynced implements ITickable
 
 	public EnumFacing getFacing()
 	{
-		IBlockState state = this.worldObj.getBlockState(this.pos);
+		IBlockState state = this.world.getBlockState(this.pos);
 
 		if (state.getBlock() == BlocksAether.altar)
 		{

@@ -67,7 +67,7 @@ public class TabClientEvents
 
 					if (gui == null)
 					{
-						tabGroup.getSelectedTab().onOpen(Minecraft.getMinecraft().thePlayer);
+						tabGroup.getSelectedTab().onOpen(Minecraft.getMinecraft().player);
 						NetworkingAether.sendPacketToServer(new PacketOpenTab(tabGroup.getSelectedTab()));
 
 						event.setCanceled(true);
@@ -82,7 +82,7 @@ public class TabClientEvents
 	@SubscribeEvent
 	public static void onGuiMouseEvent(GuiScreenEvent.MouseInputEvent.Pre event)
 	{
-		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+		EntityPlayer player = Minecraft.getMinecraft().player;
 
 		if (player == null || player.inventory.getItemStack() != null)
 		{
@@ -105,20 +105,20 @@ public class TabClientEvents
 				{
 					if (hoveredTab != activeGroup.getSelectedTab())
 					{
-						activeGroup.getSelectedTab().onClose(Minecraft.getMinecraft().thePlayer);
+						activeGroup.getSelectedTab().onClose(Minecraft.getMinecraft().player);
 						activeGroup.setSelectedTab(hoveredTab);
 
 						if (hoveredTab != activeGroup.getRememberedTab() && hoveredTab.isRemembered())
 						{
 							if (activeGroup.getRememberedTab() != null)
 							{
-								activeGroup.getRememberedTab().onClose(Minecraft.getMinecraft().thePlayer);
+								activeGroup.getRememberedTab().onClose(Minecraft.getMinecraft().player);
 							}
 
 							activeGroup.setRememberedTab(hoveredTab);
 						}
 
-						hoveredTab.onOpen(Minecraft.getMinecraft().thePlayer);
+						hoveredTab.onOpen(Minecraft.getMinecraft().player);
 						NetworkingAether.sendPacketToServer(new PacketOpenTab(hoveredTab));
 
 						event.setCanceled(true);
@@ -133,7 +133,7 @@ public class TabClientEvents
 	{
 		if (event.phase == TickEvent.Phase.END)
 		{
-			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+			EntityPlayer player = Minecraft.getMinecraft().player;
 
 			if (player == null || player.inventory.getItemStack() != null)
 			{

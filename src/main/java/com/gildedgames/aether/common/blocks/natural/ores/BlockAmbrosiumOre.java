@@ -34,7 +34,7 @@ public class BlockAmbrosiumOre extends BlockAetherOre
 	@Override
 	protected int getUnmodifiedExpDrop(Random rand)
 	{
-		return MathHelper.getRandomIntegerInRange(rand, 0, 1);
+		return MathHelper.getInt(rand, 0, 1);
 	}
 
 	@Override

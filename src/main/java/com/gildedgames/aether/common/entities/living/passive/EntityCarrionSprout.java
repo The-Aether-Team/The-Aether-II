@@ -81,7 +81,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	{
 		super.onUpdate();
 
-		if (this.worldObj.isRemote)
+		if (this.world.isRemote)
 		{
 			this.clientUpdate();
 		}
@@ -96,12 +96,12 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 
 	private boolean canStayHere(BlockPos pos)
 	{
-		if (!this.worldObj.isAirBlock(pos))
+		if (!this.world.isAirBlock(pos))
 		{
 			return false;
 		}
 
-		Block rootBlock = this.worldObj.getBlockState(pos.down()).getBlock();
+		Block rootBlock = this.world.getBlockState(pos.down()).getBlock();
 
 		if (rootBlock != BlocksAether.aether_grass && rootBlock != BlocksAether.aether_dirt)
 		{
@@ -119,7 +119,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 
 		if (this.ticksExisted == 0)
 		{
-			this.setRotation(this.worldObj.rand.nextFloat() * 360F, 0.0F);
+			this.setRotation(this.world.rand.nextFloat() * 360F, 0.0F);
 			this.renderYawOffset = this.rotationYaw;
 		}
 

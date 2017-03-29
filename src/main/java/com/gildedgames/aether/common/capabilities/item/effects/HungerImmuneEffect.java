@@ -118,12 +118,12 @@ public class HungerImmuneEffect implements IEffect<HungerImmuneEffect.Provider>
 		// currently not working, worldObj.isDaytime() seems to not be returning the proper values.
 		private boolean isInDirectSunlight(EntityPlayer player)
 		{
-			return (player.worldObj.getLight(player.getPosition()) >= 15 && player.worldObj.isDaytime());
+			return (player.world.getLight(player.getPosition()) >= 15 && player.world.isDaytime());
 		}
 
 		private boolean isInDirectMoonlight(EntityPlayer player)
 		{
-			return (player.worldObj.getLight(player.getPosition()) >= 15 && !player.worldObj.isDaytime());
+			return (player.world.getLight(player.getPosition()) >= 15 && !player.world.isDaytime());
 		}
 	}
 }

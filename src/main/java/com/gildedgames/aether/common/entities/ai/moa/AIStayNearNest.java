@@ -17,7 +17,7 @@ public class AIStayNearNest extends EntityAIBase
 
 	public AIStayNearNest(EntityMoa moa, int stayCloseDist, float moveSpeed)
 	{
-		this.world = moa.worldObj;
+		this.world = moa.world;
 		this.moveSpeed = moveSpeed;
 		this.moa = moa;
 		this.stayCloseDist = stayCloseDist;

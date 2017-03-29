@@ -76,7 +76,7 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 
 		if (this.npc == null)
 		{
-			this.npc = new EntityEdison(this.mc.theWorld);
+			this.npc = new EntityEdison(this.mc.world);
 		}
 
 		GlStateManager.pushMatrix();

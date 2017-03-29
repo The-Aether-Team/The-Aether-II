@@ -16,12 +16,12 @@ public class ItemHolystoneSword extends ItemAetherSword
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
 	{
-		if (target.worldObj.rand.nextInt(100) <= 5)
+		if (target.world.rand.nextInt(100) <= 5)
 		{
-			EntityItem entityItem = new EntityItem(target.worldObj, target.posX, target.posY, target.posZ);
+			EntityItem entityItem = new EntityItem(target.world, target.posX, target.posY, target.posZ);
 			entityItem.setEntityItemStack(new ItemStack(ItemsAether.ambrosium_shard, 1));
 
-			target.worldObj.spawnEntityInWorld(entityItem);
+			target.world.spawnEntity(entityItem);
 		}
 
 		return super.hitEntity(stack, target, attacker);

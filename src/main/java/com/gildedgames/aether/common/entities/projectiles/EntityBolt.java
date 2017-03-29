@@ -72,12 +72,12 @@ public class EntityBolt extends EntityArrow
 	@Override
 	public int getBrightnessForRender(float partialTicks)
 	{
-		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos(MathHelper.floor_double(this.posX), 0, MathHelper.floor_double(this.posZ));
+		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos(MathHelper.floor(this.posX), 0, MathHelper.floor(this.posZ));
 
-		if (this.worldObj.isBlockLoaded(blockpos$mutableblockpos))
+		if (this.world.isBlockLoaded(blockpos$mutableblockpos))
 		{
-			blockpos$mutableblockpos.setY(MathHelper.floor_double(this.posY + (double) this.getEyeHeight()));
-			return this.worldObj.getCombinedLight(blockpos$mutableblockpos, 0);
+			blockpos$mutableblockpos.setY(MathHelper.floor(this.posY + (double) this.getEyeHeight()));
+			return this.world.getCombinedLight(blockpos$mutableblockpos, 0);
 		}
 		else
 		{

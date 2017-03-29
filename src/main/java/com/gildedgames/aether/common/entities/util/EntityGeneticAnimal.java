@@ -51,7 +51,7 @@ public abstract class EntityGeneticAnimal<T extends IGenePool> extends EntityAni
 	{
 		super.onUpdate();
 
-		if (this.shouldRetransform() && this.worldObj.isRemote)
+		if (this.shouldRetransform() && this.world.isRemote)
 		{
 			if (this.getSeed() == this.getFatherSeed() && this.getSeed() == this.getMotherSeed())
 			{

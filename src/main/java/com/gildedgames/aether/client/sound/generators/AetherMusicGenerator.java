@@ -11,11 +11,11 @@ public class AetherMusicGenerator implements IMusicGenerator
 	@Override
 	public boolean isPlayable(IPlayerAether aePlayer)
 	{
-		long time = aePlayer.getEntity().worldObj.getWorldTime();
+		long time = aePlayer.getEntity().world.getWorldTime();
 
 		if ((time > 1000L && time < 8000L) || (time > 13000L && time < 20000L))
 		{
-			return aePlayer.getEntity().worldObj.provider.getDimensionType() == DimensionsAether.AETHER;
+			return aePlayer.getEntity().world.provider.getDimensionType() == DimensionsAether.AETHER;
 		}
 
 		return false;

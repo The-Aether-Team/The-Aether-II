@@ -53,7 +53,7 @@ public class NetworkingAether
 
 	public static void sendPacketToWatching(IMessage message, EntityLivingBase entity)
 	{
-		WorldServer world = (WorldServer) entity.worldObj;
+		WorldServer world = (WorldServer) entity.world;
 
 		EntityTracker tracker = world.getEntityTracker();
 

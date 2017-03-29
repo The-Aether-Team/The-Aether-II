@@ -92,7 +92,7 @@ public class EntityEdison extends EntityNPC
 	{
 		if (!super.processInteract(player, hand, stack))
 		{
-			if (player.worldObj.isRemote)
+			if (player.world.isRemote)
 			{
 				PlayerAether playerAether = PlayerAether.getPlayer(player);
 

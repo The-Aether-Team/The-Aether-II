@@ -103,7 +103,7 @@ public class MountProcessor
 	{
 		if (event.isDismounting() && event.getEntityBeingMounted() instanceof IMount)
 		{
-			if (!event.getEntityBeingMounted().worldObj.isRemote && !event.getEntityBeingMounted().onGround)
+			if (!event.getEntityBeingMounted().world.isRemote && !event.getEntityBeingMounted().onGround)
 			{
 				event.setCanceled(true);
 			}

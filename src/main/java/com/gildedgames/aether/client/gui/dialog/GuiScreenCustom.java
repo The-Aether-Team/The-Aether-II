@@ -14,9 +14,9 @@ public class GuiScreenCustom extends GuiScreen
 	{
 		super.updateScreen();
 
-		if (!this.mc.thePlayer.isEntityAlive() || this.mc.thePlayer.isDead)
+		if (!this.mc.player.isEntityAlive() || this.mc.player.isDead)
 		{
-			this.mc.thePlayer.closeScreen();
+			this.mc.player.closeScreen();
 		}
 	}
 

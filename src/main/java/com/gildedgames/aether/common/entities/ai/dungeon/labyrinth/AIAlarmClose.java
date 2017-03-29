@@ -26,7 +26,7 @@ public class AIAlarmClose extends EntityAI<EntityLiving>
 	@Override
 	public void startExecuting()
 	{
-		List<EntityLiving> entityList = this.entity().worldObj.getEntitiesWithinAABB(EntityLiving.class, this.entity().getEntityBoundingBox().expand(this.distanceRequired, this.distanceRequired, this.distanceRequired));
+		List<EntityLiving> entityList = this.entity().world.getEntitiesWithinAABB(EntityLiving.class, this.entity().getEntityBoundingBox().expand(this.distanceRequired, this.distanceRequired, this.distanceRequired));
 
 		for (EntityLiving entity : entityList)
 		{

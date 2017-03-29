@@ -71,27 +71,27 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 
 		if (!this.hasGeneratedLoot)
 		{
-			this.isMimic = this.worldObj.rand.nextInt(5) == 0;
+			this.isMimic = this.world.rand.nextInt(5) == 0;
 
 			if (this.isMimic)
 			{
-				this.worldObj.setBlockToAir(this.pos);
+				this.world.setBlockToAir(this.pos);
 
 				return;
 			}
 
-			int commonCount = 2 + this.worldObj.rand.nextInt(3);
+			int commonCount = 2 + this.world.rand.nextInt(3);
 
 			for (int i = 0; i < commonCount; i++)
 			{
-				int slotID = this.worldObj.rand.nextInt(this.getSizeInventory());
+				int slotID = this.world.rand.nextInt(this.getSizeInventory());
 
 				while (this.getStackInSlot(slotID) != null)
 				{
-					slotID = this.worldObj.rand.nextInt(this.getSizeInventory());
+					slotID = this.world.rand.nextInt(this.getSizeInventory());
 				}
 
-				ItemStack stack = LootGenerator.generate(LootDefinitions.LABYRINTH_TRASH, this.worldObj.rand);
+				ItemStack stack = LootGenerator.generate(LootDefinitions.LABYRINTH_TRASH, this.world.rand);
 
 				this.setInventorySlotContentsWithoutMarking(slotID, stack);
 			}
@@ -120,12 +120,12 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 		int k = this.pos.getZ();
 		++this.ticksSinceSync;
 
-		if (!this.worldObj.isRemote && this.numPlayersUsing != 0 && (this.ticksSinceSync + i + j + k) % 200 == 0)
+		if (!this.world.isRemote && this.numPlayersUsing != 0 && (this.ticksSinceSync + i + j + k) % 200 == 0)
 		{
 			this.numPlayersUsing = 0;
 			float f = 5.0F;
 
-			for (EntityPlayer entityplayer : this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB((double) ((float) i
+			for (EntityPlayer entityplayer : this.world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB((double) ((float) i
 					- f), (double) ((float) j - f), (double) ((float) k - f), (double) ((float) (i + 1) + f), (double) ((float) (j + 1)
 					+ f), (double) ((float) (k + 1) + f))))
 			{
@@ -149,9 +149,9 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 			double d1 = (double) i + 0.5D;
 			double d2 = (double) k + 0.5D;
 
-			this.worldObj.playSound(d1,
+			this.world.playSound(d1,
 					(double) j + 0.5D, d2, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F,
-					this.worldObj.rand.nextFloat() * 0.1F + 0.9F, false);
+					this.world.rand.nextFloat() * 0.1F + 0.9F, false);
 		}
 
 		if (this.numPlayersUsing == 0 && this.lidAngle > 0.0F || this.numPlayersUsing > 0 && this.lidAngle < 1.0F)
@@ -179,9 +179,9 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 				double d3 = (double) i + 0.5D;
 				double d0 = (double) k + 0.5D;
 
-				this.worldObj.playSound(d3,
+				this.world.playSound(d3,
 						(double) j + 0.5D, d0, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F,
-						this.worldObj.rand.nextFloat() * 0.1F + 0.9F, false);
+						this.world.rand.nextFloat() * 0.1F + 0.9F, false);
 			}
 
 			if (this.lidAngle < 0.0F)
@@ -194,11 +194,11 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 		{
 			for (int u = 0; u < 2; ++u)
 			{
-				double motionX = (this.worldObj.rand.nextBoolean() ? 1.0D : -1.0D) * this.worldObj.rand.nextFloat();
-				double motionY = (this.worldObj.rand.nextBoolean() ? 1.0D : -1.0D) * this.worldObj.rand.nextFloat();
-				double motionZ = (this.worldObj.rand.nextBoolean() ? 1.0D : -1.0D) * this.worldObj.rand.nextFloat();
+				double motionX = (this.world.rand.nextBoolean() ? 1.0D : -1.0D) * this.world.rand.nextFloat();
+				double motionY = (this.world.rand.nextBoolean() ? 1.0D : -1.0D) * this.world.rand.nextFloat();
+				double motionZ = (this.world.rand.nextBoolean() ? 1.0D : -1.0D) * this.world.rand.nextFloat();
 
-				this.worldObj.spawnParticle(EnumParticleTypes.SPELL_MOB,
+				this.world.spawnParticle(EnumParticleTypes.SPELL_MOB,
 						this.getPos().getX() + motionX,
 						this.getPos().getY() + 0.5D + motionY, this.getPos().getZ() + motionZ, 0.1D, 0.1D, 0.1D);
 			}
@@ -305,11 +305,10 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player)
+	public boolean isUsableByPlayer(EntityPlayer player)
 	{
-		return this.worldObj.getTileEntity(this.pos) == this
-				&& player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D)
-				<= 64.0D;
+		return this.world.getTileEntity(this.pos) == this &&
+			player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -323,7 +322,8 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 			}
 
 			++this.numPlayersUsing;
-			this.worldObj.addBlockEvent(this.pos, this.getBlockType(), 1, this.numPlayersUsing);
+
+			this.world.addBlockEvent(this.pos, this.getBlockType(), 1, this.numPlayersUsing);
 		}
 	}
 
@@ -333,7 +333,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 		if (!player.isSpectator() && this.getBlockType() instanceof BlockLabyrinthChest)
 		{
 			--this.numPlayersUsing;
-			this.worldObj.addBlockEvent(this.pos, this.getBlockType(), 1, this.numPlayersUsing);
+			this.world.addBlockEvent(this.pos, this.getBlockType(), 1, this.numPlayersUsing);
 		}
 	}
 

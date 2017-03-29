@@ -117,7 +117,7 @@ public class EntityFlyingCow extends EntityFlyingAnimal
 	@Override
 	public EntityAgeable createChild(EntityAgeable ageable)
 	{
-		return new EntityFlyingCow(this.worldObj);
+		return new EntityFlyingCow(this.world);
 	}
 
 	@Override

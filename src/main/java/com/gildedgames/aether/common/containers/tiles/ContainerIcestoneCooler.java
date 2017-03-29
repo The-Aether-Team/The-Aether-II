@@ -71,7 +71,7 @@ public class ContainerIcestoneCooler extends Container
 
 	public boolean canInteractWith(EntityPlayer playerIn)
 	{
-		return this.tile.isUseableByPlayer(playerIn);
+		return this.tile.isUsableByPlayer(playerIn);
 	}
 
 	/**

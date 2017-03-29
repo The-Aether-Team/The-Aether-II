@@ -32,6 +32,6 @@ public class BlockZaniteOre extends BlockAetherOre
 	@Override
 	protected int getUnmodifiedExpDrop(Random rand)
 	{
-		return MathHelper.getRandomIntegerInRange(rand, 2, 4);
+		return MathHelper.getInt(rand, 2, 4);
 	}
 }

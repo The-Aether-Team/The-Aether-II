@@ -97,7 +97,7 @@ public class BlockLabyrinthContainer extends Block implements IBlockVariants
 
 					amount -= split;
 
-					world.spawnEntityInWorld(new EntityXPOrb(world,
+					world.spawnEntity(new EntityXPOrb(world,
 							(double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, split));
 				}
 			}

@@ -30,9 +30,9 @@ public class ItemElementalSword extends ItemAetherSword
 					@Override
 					public void onEntityAttacked(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
 					{
-						if (!target.worldObj.isRemote)
+						if (!target.world.isRemote)
 						{
-							target.worldObj.addWeatherEffect(new EntityLightningBolt(target.worldObj, target.posX, target.posY, target.posZ, false));
+							target.world.addWeatherEffect(new EntityLightningBolt(target.world, target.posX, target.posY, target.posZ, false));
 						}
 					}
 				},

@@ -62,7 +62,7 @@ public class ItemDeathSeal extends ItemCompanion
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
 	{
-		long disabledTime = ItemDeathSeal.getTicksUntilEnabled(stack, player.worldObj);
+		long disabledTime = ItemDeathSeal.getTicksUntilEnabled(stack, player.world);
 
 		if (disabledTime > 0)
 		{

@@ -40,11 +40,11 @@ public class TeleportingModule extends PlayerAetherModule
 
 		if (this.teleporting)
 		{
-			if (this.getEntity().worldObj.isRemote && this.timeCharged == 0 && !this.teleported)
+			if (this.getEntity().world.isRemote && this.timeCharged == 0 && !this.teleported)
 			{
-				if (Minecraft.getMinecraft().thePlayer.getEntityId() == this.getEntity().getEntityId())
+				if (Minecraft.getMinecraft().player.getEntityId() == this.getEntity().getEntityId())
 				{
-					Minecraft.getMinecraft().thePlayer.playSound(SoundsAether.glowstone_portal_trigger, 1.0F, 1.0F);
+					Minecraft.getMinecraft().player.playSound(SoundsAether.glowstone_portal_trigger, 1.0F, 1.0F);
 				}
 
 				this.timeCharged = 70.0F;
@@ -110,16 +110,16 @@ public class TeleportingModule extends PlayerAetherModule
 		this.getEntity().timeUntilPortal = this.getEntity().getPortalCooldown();
 		this.teleported = true;
 
-		if (this.getEntity().worldObj.isRemote && Minecraft.getMinecraft().thePlayer.getEntityId() == this.getEntity().getEntityId())
+		if (this.getEntity().world.isRemote && Minecraft.getMinecraft().player.getEntityId() == this.getEntity().getEntityId())
 		{
-			Minecraft.getMinecraft().thePlayer.playSound(SoundsAether.glowstone_portal_travel, 1.0F, 1.0F);
+			Minecraft.getMinecraft().player.playSound(SoundsAether.glowstone_portal_travel, 1.0F, 1.0F);
 		}
 
-		if (this.getEntity().worldObj instanceof WorldServer)
+		if (this.getEntity().world instanceof WorldServer)
 		{
-			WorldServer worldServer = (WorldServer) this.getEntity().worldObj;
+			WorldServer worldServer = (WorldServer) this.getEntity().world;
 
-			final int transferToID = this.getEntity().worldObj.provider.getDimensionType() == DimensionsAether.AETHER ? 0 :
+			final int transferToID = this.getEntity().world.provider.getDimensionType() == DimensionsAether.AETHER ? 0 :
 					AetherCore.CONFIG.getAetherDimID();
 
 			CommonEvents.teleportEntity(this.getEntity(), worldServer, AetherCore.TELEPORTER, transferToID);

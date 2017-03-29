@@ -108,11 +108,11 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 	@Override
 	public void onUpdate()
 	{
-		if (!this.worldObj.isRemote && (this.isDead || this.getHealth() <= 0))
+		if (!this.world.isRemote && (this.isDead || this.getHealth() <= 0))
 		{
 			if (!this.hasSetTotem)
 			{
-				this.worldObj.setBlockState(this.getPosition(), BlocksAether.labyrinth_totem.getDefaultState());
+				this.world.setBlockState(this.getPosition(), BlocksAether.labyrinth_totem.getDefaultState());
 				this.hasSetTotem = true;
 			}
 		}
@@ -137,9 +137,9 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 			this.attackTime--;
 		}
 
-		if (this.isAwake() && !this.worldObj.isRemote)
+		if (this.isAwake() && !this.world.isRemote)
 		{
-			EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 2.3D);
+			EntityPlayer player = this.world.getClosestPlayerToEntity(this, 2.3D);
 
 			if (player != null && this.isAttackingPlayer(player))
 			{
@@ -153,19 +153,19 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 			}
 		}
 
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			if (!this.isAwake())
 			{
-				double x = MathHelper.floor_double(this.posX);
-				double y = MathHelper.floor_double(this.posY);
-				double z = MathHelper.floor_double(this.posZ);
+				double x = MathHelper.floor(this.posX);
+				double y = MathHelper.floor(this.posY);
+				double z = MathHelper.floor(this.posZ);
 
 				if (this.posX != x || this.posY != y || this.posZ != z)
 				{
-					this.posX = MathHelper.floor_double(this.posX);
-					this.posY = MathHelper.floor_double(this.posY);
-					this.posZ = MathHelper.floor_double(this.posZ);
+					this.posX = MathHelper.floor(this.posX);
+					this.posY = MathHelper.floor(this.posY);
+					this.posZ = MathHelper.floor(this.posZ);
 
 					this.setPositionAndUpdate(this.posX, this.posY, this.posZ);
 				}
@@ -179,7 +179,7 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 			{
 				if (this.startLocation == null)
 				{
-					this.startLocation = new BlockPos(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ));
+					this.startLocation = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY), MathHelper.floor(this.posZ));
 				}
 
 				if (this.isAIDisabled())
@@ -221,7 +221,7 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 	@Override
 	public void onLivingUpdate()
 	{
-		if (!this.worldObj.isRemote && this.getAttackTarget() == null)
+		if (!this.world.isRemote && this.getAttackTarget() == null)
 		{
 			this.setAwake(false);
 		}
@@ -250,7 +250,7 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float damage)
 	{
-		if (!this.worldObj.isRemote && source.getEntity() instanceof EntityPlayer)
+		if (!this.world.isRemote && source.getEntity() instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) source.getEntity();
 
@@ -321,7 +321,8 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 
 		if (this.chatCooldown <= 0)
 		{
-			player.addChatComponentMessage(new TextComponentString("Hmm. It's a rock-solid block. " + tipPrefix));
+			player.sendStatusMessage(new TextComponentString("Hmm. It's a rock-solid block. " + tipPrefix));
+
 			this.chatCooldown = 120;
 		}
 
@@ -432,16 +433,19 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 	{
 		if (this.getBossManager().hasBegun(FirstStageSlider.class))
 		{
-			List<AxisAlignedBB> boxes = this.worldObj.getCollisionBoxes(this.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
+			List<AxisAlignedBB> boxes = this.world.getCollisionBoxes(this.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
 
 			for (AxisAlignedBB box : boxes)
 			{
 				if (box != null)
 				{
-					BlockPos pos = new BlockPos(MathHelper.floor_double(box.minX + 0.5D), MathHelper.floor_double(
-							box.minY + 0.5D), MathHelper.floor_double(box.minZ + 0.5D));
+					BlockPos pos = new BlockPos(
+						MathHelper.floor(box.minX + 0.5D),
+						MathHelper.floor(box.minY + 0.5D),
+						MathHelper.floor(box.minZ + 0.5D)
+					);
 
-					TileEntity te = this.worldObj.getTileEntity(pos);
+					TileEntity te = this.world.getTileEntity(pos);
 
 					if (te instanceof TileEntityLabyrinthBridge)
 					{

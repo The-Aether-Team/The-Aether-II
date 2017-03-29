@@ -33,7 +33,7 @@ public class TileEntitySkyrootChestRenderer extends TileEntitySpecialRenderer<Ti
 			chest = nullChest;
 		}
 
-		if (!chest.hasWorldObj())
+		if (!chest.hasWorld())
 		{
 			metadata = 0;
 		}

@@ -30,7 +30,7 @@ public class EntityAICockatriceSneakAttack extends EntityAIBase
 	{
 		if (!this.entity.isAttacking() && this.entity.isHidden())
 		{
-			List entities = this.entity.worldObj.getEntitiesWithinAABB(this.attackClass, this.entity.getEntityBoundingBox().expand(16.0D, 16.0D, 16.0D));
+			List entities = this.entity.world.getEntitiesWithinAABB(this.attackClass, this.entity.getEntityBoundingBox().expand(16.0D, 16.0D, 16.0D));
 
 			if (entities.isEmpty())
 			{

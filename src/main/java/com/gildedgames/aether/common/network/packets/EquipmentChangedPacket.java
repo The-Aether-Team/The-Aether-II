@@ -55,7 +55,7 @@ public class EquipmentChangedPacket implements IMessage
 
 			try
 			{
-				ItemStack stack = pBuf.readItemStackFromBuffer();
+				ItemStack stack = pBuf.readItemStack();
 
 				this.changes.add(Pair.of(slot, stack));
 			}
@@ -78,7 +78,7 @@ public class EquipmentChangedPacket implements IMessage
 		for (Pair<Integer, ItemStack> pair : this.changes)
 		{
 			pBuf.writeByte(pair.getKey());
-			pBuf.writeItemStackToBuffer(pair.getValue());
+			pBuf.writeItemStack(pair.getValue());
 		}
 	}
 
@@ -87,12 +87,12 @@ public class EquipmentChangedPacket implements IMessage
 		@Override
 		public IMessage onMessage(EquipmentChangedPacket message, EntityPlayer player)
 		{
-			if (player == null || player.worldObj == null)
+			if (player == null || player.world == null)
 			{
 				return null;
 			}
 
-			Entity entity = player.worldObj.getEntityByID(message.entityId);
+			Entity entity = player.world.getEntityByID(message.entityId);
 
 			if (entity != null)
 			{

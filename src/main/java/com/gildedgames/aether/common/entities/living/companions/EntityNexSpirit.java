@@ -37,7 +37,7 @@ public class EntityNexSpirit extends EntityCompanion
 
 			if (equippedCompanion != null && equippedCompanion.getItem() instanceof ItemDeathSeal)
 			{
-				long ticks = ItemDeathSeal.getTicksUntilEnabled(equippedCompanion, this.worldObj);
+				long ticks = ItemDeathSeal.getTicksUntilEnabled(equippedCompanion, this.world);
 
 				this.setBroken(ticks > 0);
 			}

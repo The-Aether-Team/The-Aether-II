@@ -84,17 +84,17 @@ public class EntityMovingBlock extends Entity
 		this.rotationYaw *= 0.9f;
 		this.rotationPitch *= 0.9f;
 
-		if (!this.worldObj.isRemote && !this.hasActivated)
+		if (!this.world.isRemote && !this.hasActivated)
 		{
 			BlockPos pos = new BlockPos(this);
 
-			if (this.worldObj.getBlockState(pos).getBlock() == this.getBlockState().getBlock())
+			if (this.world.getBlockState(pos).getBlock() == this.getBlockState().getBlock())
 			{
-				IPlacementFlagCapability data = ChunkAttachment.get(this.worldObj).getAttachment(new ChunkPos(pos), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
+				IPlacementFlagCapability data = ChunkAttachment.get(this.world).getAttachment(new ChunkPos(pos), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
 
 				this.allowDoubleDrops = !data.isMarked(pos);
 
-				this.worldObj.setBlockToAir(pos);
+				this.world.setBlockToAir(pos);
 			}
 			else
 			{
@@ -108,9 +108,9 @@ public class EntityMovingBlock extends Entity
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
 
-		this.moveEntity(this.motionX, this.motionY, this.motionZ);
+		this.move(this.motionX, this.motionY, this.motionZ);
 
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			if (this.holdingPlayer != null)
 			{
@@ -167,25 +167,25 @@ public class EntityMovingBlock extends Entity
 				if ((this.motionY + this.motionX + this.motionZ) <= 0.04D && distanceFromCenter <= 2.0D)
 				{
 					// We've stopped moving
-					if (!this.worldObj.isRemote)
+					if (!this.world.isRemote)
 					{
-						IBlockState replacingState = this.worldObj.getBlockState(pos);
+						IBlockState replacingState = this.world.getBlockState(pos);
 
-						if (!replacingState.getBlock().isReplaceable(this.worldObj, pos))
+						if (!replacingState.getBlock().isReplaceable(this.world, pos))
 						{
 							this.destroy();
 
 							return;
 						}
 
-						this.worldObj.destroyBlock(pos, true);
+						this.world.destroyBlock(pos, true);
 
-						this.worldObj.setBlockState(pos, this.getBlockState());
-						this.worldObj.notifyNeighborsOfStateChange(pos, this.getBlockState().getBlock());
+						this.world.setBlockState(pos, this.getBlockState());
+						this.world.notifyNeighborsOfStateChange(pos, this.getBlockState().getBlock());
 
 						if (!this.allowDoubleDrops)
 						{
-							IPlacementFlagCapability data = ChunkAttachment.get(this.worldObj).getAttachment(new ChunkPos(pos), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
+							IPlacementFlagCapability data = ChunkAttachment.get(this.world).getAttachment(new ChunkPos(pos), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
 
 							data.mark(pos);
 						}
@@ -241,11 +241,11 @@ public class EntityMovingBlock extends Entity
 
 		IBlockState state = this.getBlockState();
 
-		List<ItemStack> drops = state.getBlock().getDrops(this.worldObj, pos, state, 0);
+		List<ItemStack> drops = state.getBlock().getDrops(this.world, pos, state, 0);
 
 		for (ItemStack stack : drops)
 		{
-			Block.spawnAsEntity(this.worldObj, pos, stack);
+			Block.spawnAsEntity(this.world, pos, stack);
 		}
 	}
 

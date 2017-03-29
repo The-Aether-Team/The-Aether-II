@@ -11,9 +11,9 @@ public abstract class TileEntitySynced extends TileEntity
 
 	public void sync()
 	{
-		IBlockState state = this.worldObj.getBlockState(this.pos);
+		IBlockState state = this.world.getBlockState(this.pos);
 
-		this.worldObj.notifyBlockUpdate(this.pos, state, state, 3);
+		this.world.notifyBlockUpdate(this.pos, state, state, 3);
 
 		this.markDirty();
 	}

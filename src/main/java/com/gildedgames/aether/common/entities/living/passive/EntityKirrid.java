@@ -73,7 +73,7 @@ public class EntityKirrid extends EntitySheep
 	@Override
 	public EntityKirrid createChild(EntityAgeable ageable)
 	{
-		return new EntityKirrid(this.worldObj);
+		return new EntityKirrid(this.world);
 	}
 
 	@Override

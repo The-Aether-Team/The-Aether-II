@@ -57,8 +57,8 @@ public class ContainerEquipment extends ContainerPlayer
 
 		for (Slot slot : this.inventorySlots)
 		{
-			slot.xDisplayPosition += widthOffset;
-			slot.yDisplayPosition += heightOffset;
+			slot.xPos += widthOffset;
+			slot.yPos += heightOffset;
 		}
 
 		Slot helmet = this.inventorySlots.get(5);
@@ -70,20 +70,20 @@ public class ContainerEquipment extends ContainerPlayer
 		int offsetX = -1;
 		int offsetY = -25;
 
-		shield.xDisplayPosition = 64 + offsetX;
-		shield.yDisplayPosition = 91 + offsetY;
+		shield.xPos = 64 + offsetX;
+		shield.yPos = 91 + offsetY;
 
-		helmet.xDisplayPosition = 39 + offsetX;
-		helmet.yDisplayPosition = 28 + offsetY;
+		helmet.xPos = 39 + offsetX;
+		helmet.yPos = 28 + offsetY;
 
-		chestplate.xDisplayPosition = 39 + offsetX;
-		chestplate.yDisplayPosition = 49 + offsetY;
+		chestplate.xPos = 39 + offsetX;
+		chestplate.yPos = 49 + offsetY;
 
-		leggings.xDisplayPosition = 39 + offsetX;
-		leggings.yDisplayPosition = 70 + offsetY;
+		leggings.xPos = 39 + offsetX;
+		leggings.yPos = 70 + offsetY;
 
-		boots.xDisplayPosition = 39 + offsetX;
-		boots.yDisplayPosition = 91 + offsetY;
+		boots.xPos = 39 + offsetX;
+		boots.yPos = 91 + offsetY;
 
 		Slot craftResult = this.inventorySlots.get(0);
 
@@ -98,35 +98,35 @@ public class ContainerEquipment extends ContainerPlayer
 		{
 			this.addSlotToContainer(this.binSlot);
 
-			craftResult.xDisplayPosition -= 27;
+			craftResult.xPos -= 27;
 
-			craft1.xDisplayPosition -= 27;
-			craft2.xDisplayPosition -= 27;
-			craft3.xDisplayPosition -= 27;
-			craft4.xDisplayPosition -= 27;
+			craft1.xPos -= 27;
+			craft2.xPos -= 27;
+			craft3.xPos -= 27;
+			craft4.xPos -= 27;
 
-			craftResult.yDisplayPosition += 8;
+			craftResult.yPos += 8;
 
-			craft1.yDisplayPosition += 8;
-			craft2.yDisplayPosition += 8;
-			craft3.yDisplayPosition += 8;
-			craft4.yDisplayPosition += 8;
+			craft1.yPos += 8;
+			craft2.yPos += 8;
+			craft3.yPos += 8;
+			craft4.yPos += 8;
 		}
 		else
 		{
-			craftResult.xDisplayPosition -= 46;
+			craftResult.xPos -= 46;
 
-			craft1.xDisplayPosition -= 46;
-			craft2.xDisplayPosition -= 46;
-			craft3.xDisplayPosition -= 46;
-			craft4.xDisplayPosition -= 46;
+			craft1.xPos -= 46;
+			craft2.xPos -= 46;
+			craft3.xPos -= 46;
+			craft4.xPos -= 46;
 
-			craftResult.yDisplayPosition += 8;
+			craftResult.yPos += 8;
 
-			craft1.yDisplayPosition += 8;
-			craft2.yDisplayPosition += 8;
-			craft3.yDisplayPosition += 8;
-			craft4.yDisplayPosition += 8;
+			craft1.yPos += 8;
+			craft2.yPos += 8;
+			craft3.yPos += 8;
+			craft4.yPos += 8;
 		}
 
 		int inventorySlotId = 0;

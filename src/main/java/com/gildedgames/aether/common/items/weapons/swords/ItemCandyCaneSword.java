@@ -24,9 +24,9 @@ public class ItemCandyCaneSword extends ItemAetherSword
 			return true;
 		}
 
-		if (!attacker.worldObj.isRemote && target != null && attacker instanceof EntityPlayer)
+		if (!attacker.world.isRemote && target != null && attacker instanceof EntityPlayer)
 		{
-			if (attacker.worldObj.rand.nextInt(3) == 0)
+			if (attacker.world.rand.nextInt(3) == 0)
 			{
 
 				target.dropItemWithOffset(ItemsAether.candy_cane, 1, 0F);

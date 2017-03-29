@@ -99,7 +99,7 @@ public class ItemAetherDeveloperWand extends Item
 					entityliving.rotationYawHead = entityliving.rotationYaw;
 					entityliving.renderYawOffset = entityliving.rotationYaw;
 					entityliving.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityliving)), null);
-					worldIn.spawnEntityInWorld(entity);
+					worldIn.spawnEntity(entity);
 					entityliving.playLivingSound();
 				}
 			}

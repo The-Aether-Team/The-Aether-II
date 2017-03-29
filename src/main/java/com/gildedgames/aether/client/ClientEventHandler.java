@@ -63,11 +63,11 @@ public class ClientEventHandler
 
 		if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR)
 		{
-			if (mc.thePlayer.isRiding())
+			if (mc.player.isRiding())
 			{
-				if (mc.thePlayer.getRidingEntity() instanceof IMount)
+				if (mc.player.getRidingEntity() instanceof IMount)
 				{
-					IMount mount = (IMount) mc.thePlayer.getRidingEntity();
+					IMount mount = (IMount) mc.player.getRidingEntity();
 					IMountProcessor processor = mount.getMountProcessor();
 
 					if (processor instanceof FlyingMount)

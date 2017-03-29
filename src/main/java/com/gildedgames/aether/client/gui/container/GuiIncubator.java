@@ -36,7 +36,7 @@ public class GuiIncubator extends GuiContainer
 	 */
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		TileEntity tile = Minecraft.getMinecraft().theWorld.getTileEntity(this.incubatorPos);
+		TileEntity tile = Minecraft.getMinecraft().world.getTileEntity(this.incubatorPos);
 
 		String s = tile.getDisplayName().getUnformattedText();
 		this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);

@@ -128,7 +128,7 @@ public class TemplatePrimer
 						{
 							TileEntityWildcard wildcard = new TileEntityWildcard();
 
-							wildcard.setWorldObj(world);
+							wildcard.setWorld(world);
 
 							template$blockinfo1.tileentityData.setInteger("x", blockpos.getX());
 							template$blockinfo1.tileentityData.setInteger("y", blockpos.getY());
@@ -304,7 +304,7 @@ public class TemplatePrimer
 						{
 							TileEntityWildcard wildcard = new TileEntityWildcard();
 
-							wildcard.setWorldObj(world);
+							wildcard.setWorld(world);
 
 							template$blockinfo1.tileentityData.setInteger("x", blockpos.getX());
 							template$blockinfo1.tileentityData.setInteger("y", blockpos.getY());
@@ -417,7 +417,7 @@ public class TemplatePrimer
 					float f = entity.getMirroredYaw(mirrorIn);
 					f = f + (entity.rotationYaw - entity.getRotatedYaw(rotationIn));
 					entity.setLocationAndAngles(vec3d1.xCoord, vec3d1.yCoord, vec3d1.zCoord, f, entity.rotationPitch);
-					worldIn.spawnEntityInWorld(entity);
+					worldIn.spawnEntity(entity);
 				}
 			}
 		}

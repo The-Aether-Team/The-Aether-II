@@ -33,7 +33,7 @@ public class ClientRenderHandler
 	{
 		if (event.getType() == RenderGameOverlayEvent.ElementType.AIR)
 		{
-			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+			EntityPlayer player = Minecraft.getMinecraft().player;
 
 			if (player.getAir() == 300 && player.isPotionActive(MobEffects.WATER_BREATHING))
 			{
@@ -79,7 +79,7 @@ public class ClientRenderHandler
 
 			//GlStateManager.rotate(event.getInterpolatedPitch(), 1f, 0f, 0f);
 
-			RenderPlayerHelper.renderFirstPersonHand(event, PlayerAether.getPlayer(Minecraft.getMinecraft().thePlayer));
+			RenderPlayerHelper.renderFirstPersonHand(event, PlayerAether.getPlayer(Minecraft.getMinecraft().player));
 
 			GlStateManager.popMatrix();
 		}

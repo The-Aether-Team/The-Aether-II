@@ -57,7 +57,7 @@ public class BlockFloating extends Block
 
 					EntityFloatingBlock entity = new EntityFloatingBlock(world,
 							pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, world.getBlockState(pos), drops);
-					world.spawnEntityInWorld(entity);
+					world.spawnEntity(entity);
 				}
 			}
 			else

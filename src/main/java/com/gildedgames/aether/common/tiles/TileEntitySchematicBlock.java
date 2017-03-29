@@ -50,11 +50,11 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 		{
 			for (int u = 0; u < 2; ++u)
 			{
-				double motionX = (this.worldObj.rand.nextBoolean() ? 1.0D : -1.0D) * this.worldObj.rand.nextFloat() * 0.01F;
-				double motionY = (this.worldObj.rand.nextBoolean() ? 1.0D : -1.0D) * this.worldObj.rand.nextFloat() * 0.01F;
-				double motionZ = (this.worldObj.rand.nextBoolean() ? 1.0D : -1.0D) * this.worldObj.rand.nextFloat() * 0.01F;
+				double motionX = (this.world.rand.nextBoolean() ? 1.0D : -1.0D) * this.world.rand.nextFloat() * 0.01F;
+				double motionY = (this.world.rand.nextBoolean() ? 1.0D : -1.0D) * this.world.rand.nextFloat() * 0.01F;
+				double motionZ = (this.world.rand.nextBoolean() ? 1.0D : -1.0D) * this.world.rand.nextFloat() * 0.01F;
 
-				this.worldObj.spawnParticle(EnumParticleTypes.SPELL_MOB,
+				this.world.spawnParticle(EnumParticleTypes.SPELL_MOB,
 						this.getPos().getX() + 0.5D + motionX,
 						this.getPos().getY() + 0.5D + motionY, this.getPos().getZ() + 0.5D + motionZ, 0.0D, 0.0D, 0.0D);
 			}
@@ -228,9 +228,9 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player)
+	public boolean isUsableByPlayer(EntityPlayer player)
 	{
-		return this.worldObj.getTileEntity(this.pos) == this && (
+		return this.world.getTileEntity(this.pos) == this && (
 				player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D)
 						<= 64.0D && player.capabilities.isCreativeMode);
 	}
@@ -277,9 +277,9 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 
 	public void sync()
 	{
-		IBlockState state = this.worldObj.getBlockState(this.pos);
+		IBlockState state = this.world.getBlockState(this.pos);
 
-		this.worldObj.notifyBlockUpdate(this.pos, state, state, 3);
+		this.world.notifyBlockUpdate(this.pos, state, state, 3);
 
 		this.markDirty();
 	}

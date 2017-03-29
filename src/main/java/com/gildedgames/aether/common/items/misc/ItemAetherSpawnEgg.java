@@ -258,7 +258,7 @@ public class ItemAetherSpawnEgg extends Item
 					}
 
 					living.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(living)), null);
-					worldIn.spawnEntityInWorld(entity);
+					worldIn.spawnEntity(entity);
 					living.playLivingSound();
 				}
 			}

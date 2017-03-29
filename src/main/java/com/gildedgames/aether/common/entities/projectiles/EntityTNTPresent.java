@@ -63,7 +63,7 @@ public class EntityTNTPresent extends Entity
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
 		this.motionY -= 0.039999999105930328D;
-		this.moveEntity(this.motionX, this.motionY, this.motionZ);
+		this.move(this.motionX, this.motionY, this.motionZ);
 		this.motionX *= 0.98000001907348633D;
 		this.motionY *= 0.98000001907348633D;
 		this.motionZ *= 0.98000001907348633D;
@@ -77,7 +77,7 @@ public class EntityTNTPresent extends Entity
 
 		if (this.fuse-- <= 0)
 		{
-			if (!this.worldObj.isRemote)
+			if (!this.world.isRemote)
 			{
 				this.setDead();
 				this.explode();
@@ -85,14 +85,14 @@ public class EntityTNTPresent extends Entity
 		}
 		else
 		{
-			this.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY + 0.5D, this.posZ, 0.0D, 0.0D, 0.0D);
+			this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY + 0.5D, this.posZ, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
 	private void explode()
 	{
 		float f = 0.5F;
-		this.worldObj.createExplosion(null, this.posX, this.posY, this.posZ, f, false);
+		this.world.createExplosion(null, this.posX, this.posY, this.posZ, f, false);
 	}
 
 	@Override

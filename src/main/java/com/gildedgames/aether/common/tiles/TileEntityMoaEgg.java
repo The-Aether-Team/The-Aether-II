@@ -25,7 +25,7 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickable
 
 	public TileEntityMoaEgg()
 	{
-		this.familyNest = new MoaNest(this.worldObj);
+		this.familyNest = new MoaNest(this.world);
 	}
 
 	public MoaGenePool getGenePool()
@@ -36,7 +36,7 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickable
 	@Override
 	public void update()
 	{
-		if (this.worldObj.isRemote)
+		if (this.world.isRemote)
 		{
 			return;
 		}
@@ -48,7 +48,7 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickable
 
 		if (this.secondsUntilHatch <= -1)
 		{
-			this.secondsUntilHatch = 100 + this.worldObj.rand.nextInt(100);
+			this.secondsUntilHatch = 100 + this.world.rand.nextInt(100);
 		}
 
 		this.ticksExisted++;
@@ -71,21 +71,21 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickable
 		boolean atMaxFamilySize = this.familyNest.getAnimalPack() != null
 				&& this.familyNest.getAnimalPack().getSize() >= this.familyNest.getAnimalPack().getOptimalSize();
 
-		return this.worldObj.getBlockState(this.getPos().add(0, -1, 0)) == BlocksAether.woven_sticks.getDefaultState() && !atMaxFamilySize;
+		return this.world.getBlockState(this.getPos().add(0, -1, 0)) == BlocksAether.woven_sticks.getDefaultState() && !atMaxFamilySize;
 	}
 
 	public void hatchEgg()
 	{
-		EntityMoa babyMoa = new EntityMoa(this.worldObj, this.familyNest, this.genePool.getStorage().getFatherSeed(), this.genePool.getStorage().getMotherSeed());
+		EntityMoa babyMoa = new EntityMoa(this.world, this.familyNest, this.genePool.getStorage().getFatherSeed(), this.genePool.getStorage().getMotherSeed());
 
 		babyMoa.setGrowingAge(-24000);
 		babyMoa.setPosition(this.getPos().getX() + 0.5D, this.getPos().getY(), this.getPos().getZ() + 0.5D);
 		babyMoa.setGender(this.gender);
 		babyMoa.setAnimalPack(this.familyNest.getAnimalPack());
 
-		this.worldObj.spawnEntityInWorld(babyMoa);
+		this.world.spawnEntity(babyMoa);
 
-		this.worldObj.destroyBlock(this.getPos(), false);
+		this.world.destroyBlock(this.getPos(), false);
 	}
 
 	public void setGender(AnimalGender gender)

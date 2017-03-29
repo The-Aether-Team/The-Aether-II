@@ -27,7 +27,7 @@ public class EntityTempest extends EntityFlyingMob
 	@Override
 	protected void handleClientAttack()
 	{
-		Entity target = this.worldObj.getNearestPlayerNotCreative(this, 20D);
+		Entity target = this.world.getNearestPlayerNotCreative(this, 20D);
 
 		if (target == null)
 		{

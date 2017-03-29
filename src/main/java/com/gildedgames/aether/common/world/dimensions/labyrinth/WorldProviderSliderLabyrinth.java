@@ -35,7 +35,7 @@ public class WorldProviderSliderLabyrinth extends WorldProviderSurface
 	@Override
 	public IChunkGenerator createChunkGenerator()
 	{
-		return new ChunkProviderSliderLabyrinth(this.worldObj, this.worldObj.getSeed());
+		return new ChunkProviderSliderLabyrinth(this.world, this.world.getSeed());
 	}
 
 	@Override

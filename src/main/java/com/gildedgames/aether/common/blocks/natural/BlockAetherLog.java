@@ -31,13 +31,6 @@ public class BlockAetherLog extends BlockLog
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-			EntityLivingBase placer)
-	{
-		return this.getStateFromMeta(meta).withProperty(PROPERTY_LOG_AXIS, BlockLog.EnumAxis.fromFacingAxis(facing.getAxis()));
-	}
-
-	@Override
 	public IBlockState withRotation(IBlockState state, Rotation rot)
 	{
 		switch (rot)

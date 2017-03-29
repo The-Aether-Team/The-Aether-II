@@ -127,7 +127,7 @@ public class ItemMoaEgg extends Item
 
 					moa.setRaisedByPlayer(true);
 
-					world.spawnEntityInWorld(moa);
+					world.spawnEntity(moa);
 
 					MoaGenePool genePool = moa.getGenePool();
 

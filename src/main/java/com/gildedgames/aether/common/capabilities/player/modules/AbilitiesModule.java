@@ -61,7 +61,7 @@ public class AbilitiesModule extends PlayerAetherModule
 	{
 		if (this.jumpsSoFar < this.midAirJumpsAllowed && this.ticksAirborne > 2)
 		{
-			AetherCore.PROXY.spawnJumpParticles(this.getEntity().worldObj, this.getEntity().posX, this.getEntity().posY, this.getEntity().posZ, 1.5D, 12);
+			AetherCore.PROXY.spawnJumpParticles(this.getEntity().world, this.getEntity().posX, this.getEntity().posY, this.getEntity().posZ, 1.5D, 12);
 
 			this.getEntity().motionY = 0.55D;
 			this.getEntity().fallDistance = -4;

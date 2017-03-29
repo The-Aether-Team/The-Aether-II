@@ -42,7 +42,7 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 	@Override
 	public void update()
 	{
-		if (this.worldObj.isRemote)
+		if (this.world.isRemote)
 		{
 			this.onClientUpdate();
 		}
@@ -59,7 +59,7 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 
 		if (this.ambiance == null || !soundHandler.isSoundPlaying(this.ambiance))
 		{
-			soundHandler.playSound(this.ambiance = new LabyrinthTotemSound(this.worldObj, this.pos));
+			soundHandler.playSound(this.ambiance = new LabyrinthTotemSound(this.world, this.pos));
 		}
 	}
 
@@ -84,7 +84,7 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 			}
 			else
 			{
-				DungeonInstance inst = handler.get(new BlockPosDimension(this.pos, this.worldObj.provider.getDimension()));
+				DungeonInstance inst = handler.get(new BlockPosDimension(this.pos, this.world.provider.getDimension()));
 
 				if (interactingPlayer instanceof EntityPlayerMP)
 				{
@@ -96,7 +96,7 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 		}
 		else
 		{
-			DungeonInstance inst = handler.get(new BlockPosDimension(this.pos, this.worldObj.provider.getDimension()));
+			DungeonInstance inst = handler.get(new BlockPosDimension(this.pos, this.world.provider.getDimension()));
 
 			if (interactingPlayer instanceof EntityPlayerMP)
 			{

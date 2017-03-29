@@ -38,7 +38,7 @@ public class DiedInAetherPacket implements IMessage
 		@Override
 		public IMessage onMessage(DiedInAetherPacket message, EntityPlayer player)
 		{
-			if (player == null || player.worldObj == null)
+			if (player == null || player.world == null)
 			{
 				return null;
 			}

@@ -53,9 +53,9 @@ public class BossProcessor
 						}
 					}
 
-					ItemStack stack = LootGenerator.generate(lootPool, rarity, event.getEntity().worldObj.rand);
+					ItemStack stack = LootGenerator.generate(lootPool, rarity, event.getEntity().world.rand);
 
-					Block.spawnAsEntity(event.getEntity().worldObj, pos, stack);
+					Block.spawnAsEntity(event.getEntity().world, pos, stack);
 				}
 			}
 		}

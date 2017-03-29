@@ -63,14 +63,14 @@ public class GuiCraftingOption extends GuiButton
 				if (gui instanceof IExtendedGui)
 				{
 					IExtendedGui extendedGui = (IExtendedGui) gui;
-					extendedGui.setHoveredDescription(this.recipe.getResult().getTooltip(Minecraft.getMinecraft().thePlayer, false));
+					extendedGui.setHoveredDescription(this.recipe.getResult().getTooltip(Minecraft.getMinecraft().player, false));
 				}
 			}
 
 			GlStateManager.pushMatrix();
 			GlStateManager.translate(0.0F, 0.0F, 300.0F);
 
-			int timesCanCraft = RecipeUtil.getTotalTimesCanCraft(Minecraft.getMinecraft().thePlayer, this.recipe);
+			int timesCanCraft = RecipeUtil.getTotalTimesCanCraft(Minecraft.getMinecraft().player, this.recipe);
 
 			if (timesCanCraft > 0)
 			{
@@ -80,7 +80,7 @@ public class GuiCraftingOption extends GuiButton
 				//this.drawString(Minecraft.getMinecraft().fontRendererObj, count, this.xPosition + 12 + xOffset, this.yPosition + this.height - 8, 0xFFFFFF);
 			}
 
-			if (!RecipeUtil.canCraft(Minecraft.getMinecraft().thePlayer, this.recipe))
+			if (!RecipeUtil.canCraft(Minecraft.getMinecraft().player, this.recipe))
 			{
 				mc.getTextureManager().bindTexture(DARK_OVERLAY);
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

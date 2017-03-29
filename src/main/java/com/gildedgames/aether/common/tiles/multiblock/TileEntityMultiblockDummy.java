@@ -18,7 +18,7 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 	@Override
 	public void onInteract(EntityPlayer player)
 	{
-		TileEntity entity = this.worldObj.getTileEntity(this.controllerPos);
+		TileEntity entity = this.world.getTileEntity(this.controllerPos);
 
 		if (entity instanceof TileEntityMultiblockController)
 		{
@@ -34,7 +34,7 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 	@Override
 	public void onDestroyed()
 	{
-		TileEntity entity = this.worldObj.getTileEntity(this.controllerPos);
+		TileEntity entity = this.world.getTileEntity(this.controllerPos);
 
 		if (entity instanceof TileEntityMultiblockInterface)
 		{
@@ -50,7 +50,7 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 	@Override
 	public ItemStack getPickedStack(World world, BlockPos pos, IBlockState state)
 	{
-		TileEntity entity = this.worldObj.getTileEntity(this.controllerPos);
+		TileEntity entity = this.world.getTileEntity(this.controllerPos);
 
 		if (entity instanceof TileEntityMultiblockInterface)
 		{

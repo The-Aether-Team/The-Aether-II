@@ -29,7 +29,7 @@ public class TileEntityLabyrinthChestRenderer extends TileEntitySpecialRenderer<
 			chest = nullChest;
 		}
 
-		if (!chest.hasWorldObj())
+		if (!chest.hasWorld())
 		{
 			metadata = 0;
 		}

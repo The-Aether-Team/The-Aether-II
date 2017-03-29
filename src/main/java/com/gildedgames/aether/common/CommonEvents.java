@@ -93,7 +93,7 @@ public class CommonEvents
 	@SubscribeEvent
 	public static void onPlayerSleepInBed(PlayerWakeUpEvent event)
 	{
-		World world = event.getEntityPlayer().worldObj;
+		World world = event.getEntityPlayer().world;
 
 		if (!world.isRemote && world.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
@@ -175,7 +175,7 @@ public class CommonEvents
 		final Entity entity = event.getEntity();
 
 		// Checks whether or not an entity is in the Aether's void
-		if (entity.worldObj.provider.getDimensionType() == DimensionsAether.AETHER && entity.posY < -10)
+		if (entity.world.provider.getDimensionType() == DimensionsAether.AETHER && entity.posY < -10)
 		{
 			/*List<UUID> uniquePassengerIDs = Lists.newArrayList();
 
@@ -199,7 +199,7 @@ public class CommonEvents
 				}
 			}*/
 
-			if (!entity.worldObj.isRemote)
+			if (!entity.world.isRemote)
 			{
 				if (entity instanceof EntityPlayer)
 				{
@@ -216,7 +216,7 @@ public class CommonEvents
 
 						if (player.getHealth() <= 0 && !player.isDead)
 						{
-							player.addChatComponentMessage(new TextComponentString("You fell out of the Aether without a Cloud Parachute. Ouch!"));
+							player.sendStatusMessage(new TextComponentString("You fell out of the Aether without a Cloud Parachute. Ouch!"));
 							player.isDead = true;
 						}
 					}
@@ -352,12 +352,12 @@ public class CommonEvents
 		if (result)
 		{
 			// Unfortunately we have to play the equip animation manually...
-			if (event.getEntityPlayer().worldObj.isRemote)
+			if (event.getEntityPlayer().world.isRemote)
 			{
 				Minecraft.getMinecraft().getItemRenderer().resetEquippedProgress(EnumHand.MAIN_HAND);
 			}
 
-			event.getEntityPlayer().worldObj.playSound(event.getEntityPlayer(), event.getEntityPlayer().getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+			event.getEntityPlayer().world.playSound(event.getEntityPlayer(), event.getEntityPlayer().getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.NEUTRAL, 1.0f, 1.0f);
 			event.setCanceled(true);
 		}
 	}
@@ -444,9 +444,9 @@ public class CommonEvents
 
 	private static void onLavaPlaced(FillBucketEvent event, EntityPlayer player, BlockPos pos)
 	{
-		if (player.worldObj.provider.getDimensionType() == DimensionsAether.AETHER)
+		if (player.world.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
-			player.worldObj.setBlockState(pos, BlocksAether.crude_scatterglass.getDefaultState());
+			player.world.setBlockState(pos, BlocksAether.crude_scatterglass.getDefaultState());
 
 			if (!player.capabilities.isCreativeMode)
 			{
@@ -515,7 +515,7 @@ public class CommonEvents
 					if (damage >= 3.0F && player.getActiveItemStack() != null
 							&& player.getActiveItemStack().getItem() instanceof ItemAetherShield)
 					{
-						int itemDamage = 1 + MathHelper.floor_float(damage);
+						int itemDamage = 1 + MathHelper.floor(damage);
 
 						player.getActiveItemStack().damageItem(itemDamage, player);
 
@@ -536,7 +536,7 @@ public class CommonEvents
 
 							player.setHeldItem(player.getActiveHand(), null);
 
-							player.playSound(SoundEvents.ITEM_SHIELD_BREAK, 0.8F, 0.8F + player.worldObj.rand.nextFloat() * 0.4F);
+							player.playSound(SoundEvents.ITEM_SHIELD_BREAK, 0.8F, 0.8F + player.world.rand.nextFloat() * 0.4F);
 						}
 					}
 				}

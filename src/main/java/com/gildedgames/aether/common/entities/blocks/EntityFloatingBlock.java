@@ -68,13 +68,13 @@ public class EntityFloatingBlock extends Entity
 		// Destroys the source block, since deleting a neighboring block in the actual block class
 		// causes a infinite loop of updates.
 
-		if (!this.worldObj.isRemote && !this.hasActivated)
+		if (!this.world.isRemote && !this.hasActivated)
 		{
 			BlockPos pos = new BlockPos(this);
 
-			if (this.worldObj.getBlockState(pos).getBlock() == this.getBlockState().getBlock())
+			if (this.world.getBlockState(pos).getBlock() == this.getBlockState().getBlock())
 			{
-				this.worldObj.setBlockToAir(pos);
+				this.world.setBlockToAir(pos);
 			}
 			else
 			{
@@ -88,15 +88,15 @@ public class EntityFloatingBlock extends Entity
 		{
 			this.setDead();
 
-			if (!this.worldObj.isRemote)
+			if (!this.world.isRemote)
 			{
-				if (this.worldObj.getGameRules().getBoolean("doTileDrops"))
+				if (this.world.getGameRules().getBoolean("doTileDrops"))
 				{
 					for (ItemStack stack : this.drops)
 					{
-						EntityItem entityItem = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, stack);
+						EntityItem entityItem = new EntityItem(this.world, this.posX, this.posY, this.posZ, stack);
 
-						this.worldObj.spawnEntityInWorld(entityItem);
+						this.world.spawnEntity(entityItem);
 					}
 				}
 			}
@@ -109,7 +109,7 @@ public class EntityFloatingBlock extends Entity
 
 			this.motionY += 0.04D;
 
-			this.moveEntity(this.motionX, this.motionY, this.motionZ);
+			this.move(this.motionX, this.motionY, this.motionZ);
 
 			this.motionX *= 0.98D;
 			this.motionY *= 0.98D;
@@ -117,11 +117,11 @@ public class EntityFloatingBlock extends Entity
 
 			BlockPos pos = new BlockPos(this);
 
-			if (!this.worldObj.isAirBlock(pos.up()))
+			if (!this.world.isAirBlock(pos.up()))
 			{
-				if (!this.worldObj.isRemote)
+				if (!this.world.isRemote)
 				{
-					this.worldObj.setBlockState(pos, this.getBlockState());
+					this.world.setBlockState(pos, this.getBlockState());
 
 					this.setDead();
 				}
@@ -131,9 +131,9 @@ public class EntityFloatingBlock extends Entity
 				this.posZ = pos.getZ() + 0.5D;
 			}
 
-			if (this.worldObj.isAirBlock(pos.down()) && this.worldObj.isRemote)
+			if (this.world.isAirBlock(pos.down()) && this.world.isRemote)
 			{
-				int count = MathHelper.floor_double(this.motionY / 0.15D);
+				int count = MathHelper.floor(this.motionY / 0.15D);
 
 				if (count > 5)
 				{
@@ -142,10 +142,10 @@ public class EntityFloatingBlock extends Entity
 
 				for (int i = 0; i < count; i++)
 				{
-					this.worldObj.spawnParticle(EnumParticleTypes.BLOCK_DUST,
-							this.posX - 0.5D + (this.worldObj.rand.nextDouble()),
+					this.world.spawnParticle(EnumParticleTypes.BLOCK_DUST,
+							this.posX - 0.5D + (this.world.rand.nextDouble()),
 							this.posY - 0.5D,
-							this.posZ - 0.5D + (this.worldObj.rand.nextDouble()), 0.0D, 0.0D, 0.0D,
+							this.posZ - 0.5D + (this.world.rand.nextDouble()), 0.0D, 0.0D, 0.0D,
 							Block.getStateId(this.getBlockState()));
 				}
 			}

@@ -26,7 +26,7 @@ public class GravititeAbilityModule extends PlayerAetherModule
 	@Override
 	public void onUpdate()
 	{
-		if (this.getEntity().worldObj.isRemote || this.getEntity().isDead)
+		if (this.getEntity().world.isRemote || this.getEntity().isDead)
 		{
 			return;
 		}
@@ -88,7 +88,7 @@ public class GravititeAbilityModule extends PlayerAetherModule
 				IBlockState state = world.getBlockState(pos);
 
 				EntityMovingBlock movingBlock = new EntityMovingBlock(world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, state);
-				world.spawnEntityInWorld(movingBlock);
+				world.spawnEntity(movingBlock);
 
 				this.holdBlock(movingBlock);
 

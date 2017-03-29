@@ -61,7 +61,7 @@ public abstract class EntityFlyingAnimal extends EntityAetherAnimal implements I
 			this.motionY *= 0.6D;
 		}
 
-		if (this.worldObj.isRemote)
+		if (this.world.isRemote)
 		{
 			float aimingForFold = 1.0F;
 
@@ -84,7 +84,7 @@ public abstract class EntityFlyingAnimal extends EntityAetherAnimal implements I
 	{
 		if (!super.processInteract(player, hand, stack))
 		{
-			if (!player.worldObj.isRemote)
+			if (!player.world.isRemote)
 			{
 				if (!this.isSaddled() && stack != null && stack.getItem() == Items.SADDLE && !this.isChild())
 				{

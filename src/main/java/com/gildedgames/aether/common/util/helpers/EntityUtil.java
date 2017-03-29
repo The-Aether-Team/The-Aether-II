@@ -23,13 +23,13 @@ public class EntityUtil
 
 	public static void despawnEntityDuringDaytime(Entity entity)
 	{
-		if (!entity.worldObj.isRemote && entity.worldObj.isDaytime())
+		if (!entity.world.isRemote && entity.world.isDaytime())
 		{
 			boolean canSee = false;
 
 			Vec3d vec3d = entity.getPositionVector();
 
-			for (EntityPlayer player : entity.worldObj.playerEntities)
+			for (EntityPlayer player : entity.world.playerEntities)
 			{
 				Vec3d look = player.getLook(1.0F);
 
@@ -75,7 +75,7 @@ public class EntityUtil
 
 	public static void teleport(Entity entity, BlockPos pos)
 	{
-		World world = entity.worldObj;
+		World world = entity.world;
 
 		entity.isDead = false;
 
@@ -99,7 +99,7 @@ public class EntityUtil
 
 		clone.setPositionAndUpdate(pos.getX(), pos.getY(), pos.getZ());
 
-		world.spawnEntityInWorld(clone);
+		world.spawnEntity(clone);
 		world.updateEntityWithOptionalForce(clone, false);
 
 		entity.isDead = true;
@@ -111,7 +111,7 @@ public class EntityUtil
 		double y = pos.getY() - entity.posY;
 		double z = pos.getZ() - entity.posZ;
 
-		double d3 = (double) MathHelper.sqrt_double(x * x + z * z);
+		double d3 = (double) MathHelper.sqrt(x * x + z * z);
 		float f = (float) (MathHelper.atan2(z, x) * (180D / Math.PI)) - 90.0F;
 		float f1 = (float) (-(MathHelper.atan2(y, d3) * (180D / Math.PI)));
 
@@ -140,7 +140,7 @@ public class EntityUtil
 	{
 		for (int k = 0; k < 1; ++k)
 		{
-			World world = e1.worldObj;
+			World world = e1.world;
 
 			double currentX = e2.posX;
 			double currentY = (e2.getEntityBoundingBox().maxY - e2.getEntityBoundingBox().minY) / 2 + e2.getEntityBoundingBox().minY;
@@ -175,13 +175,13 @@ public class EntityUtil
 				double motionY = e2.motionY * velcur;
 				double motionZ = e2.motionZ * velcur;
 
-				if (e1.worldObj.isRemote)
+				if (e1.world.isRemote)
 				{
-					e1.worldObj.spawnParticle(type, currentX + randX, currentY, currentZ + randZ, motionX, motionY, motionZ, parameters);
+					e1.world.spawnParticle(type, currentX + randX, currentY, currentZ + randZ, motionX, motionY, motionZ, parameters);
 				}
-				else if (e1.worldObj instanceof WorldServer)
+				else if (e1.world instanceof WorldServer)
 				{
-					WorldServer worldServer = (WorldServer) e1.worldObj;
+					WorldServer worldServer = (WorldServer) e1.world;
 					worldServer.spawnParticle(type,
 							currentX + randX, currentY,
 							currentZ + randZ, 1, motionX, motionY, motionZ, (world.rand.nextBoolean() ? 0.01D : -0.01D), parameters);

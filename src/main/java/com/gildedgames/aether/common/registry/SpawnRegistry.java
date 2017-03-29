@@ -155,7 +155,7 @@ public class SpawnRegistry
 	{
 		EntityLivingBase entity = event.getEntityLiving();
 
-		if (!entity.worldObj.isRemote && entity.hasCapability(AetherCapabilities.ENTITY_SPAWNING_INFO, null))
+		if (!entity.world.isRemote && entity.hasCapability(AetherCapabilities.ENTITY_SPAWNING_INFO, null))
 		{
 			ISpawningInfo spawningInfo = entity.getCapability(AetherCapabilities.ENTITY_SPAWNING_INFO, null);
 

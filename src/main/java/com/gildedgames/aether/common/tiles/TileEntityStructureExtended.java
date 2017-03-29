@@ -35,27 +35,27 @@ public class TileEntityStructureExtended extends TileEntityStructure
 
 	public void refreshMode()
 	{
-		if (this.worldObj != null)
+		if (this.world != null)
 		{
 			BlockPos blockpos = this.getPos();
-			IBlockState iblockstate = this.worldObj.getBlockState(blockpos);
+			IBlockState iblockstate = this.world.getBlockState(blockpos);
 
 			if (iblockstate.getBlock() == BlocksAether.structure_extended)
 			{
-				this.worldObj.setBlockState(blockpos, iblockstate.withProperty(BlockStructure.MODE, this.getMode()), 2);
+				this.world.setBlockState(blockpos, iblockstate.withProperty(BlockStructure.MODE, this.getMode()), 2);
 			}
 		}
 	}
 
 	@Override
-	public void setMode(TileEntityStructure.Mode modeIn)
+	public void setMode(Mode modeIn)
 	{
 		super.setMode(modeIn);
-		IBlockState iblockstate = this.worldObj.getBlockState(this.getPos());
+		IBlockState iblockstate = this.world.getBlockState(this.getPos());
 
 		if (iblockstate.getBlock() == BlocksAether.structure_extended)
 		{
-			this.worldObj.setBlockState(this.getPos(), iblockstate.withProperty(BlockStructure.MODE, modeIn), 2);
+			this.world.setBlockState(this.getPos(), iblockstate.withProperty(BlockStructure.MODE, modeIn), 2);
 		}
 	}
 

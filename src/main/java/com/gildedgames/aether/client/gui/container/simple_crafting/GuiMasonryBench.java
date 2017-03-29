@@ -168,7 +168,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 				NetworkingAether.sendPacketToServer(new MasonryRecipeChangedPacket(this.currentRecipe));
 
-				if (!RecipeUtil.canCraft(Minecraft.getMinecraft().thePlayer, option.getRecipe()) && option.getRecipe() != null)
+				if (!RecipeUtil.canCraft(Minecraft.getMinecraft().player, option.getRecipe()) && option.getRecipe() != null)
 				{
 					this.result.setRequiredObject(option.getRecipe().getResult());
 				}
@@ -261,7 +261,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 			}
 		}
 
-		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
+		EntityPlayer p = Minecraft.getMinecraft().player;
 
 		this.recipes.sort((o1, o2) ->
 		{
@@ -370,7 +370,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 		if (this.currentRecipe != null)
 		{
 			if (!RecipeUtil.areEqual(this.result.getRequiredObject(), this.currentRecipe.getResult())
-					&& !RecipeUtil.canCraft(Minecraft.getMinecraft().thePlayer, this.currentRecipe))
+					&& !RecipeUtil.canCraft(Minecraft.getMinecraft().player, this.currentRecipe))
 			{
 				this.result.setRequiredObject(this.currentRecipe.getResult());
 			}
@@ -403,7 +403,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 		if (this.isScrolling)
 		{
 			this.currentScroll = ((float) (mouseY - l) - 7.5F) / ((float) (j1 - l) - 15.0F);
-			this.currentScroll = MathHelper.clamp_float(this.currentScroll, 0.0F, 1.0F);
+			this.currentScroll = MathHelper.clamp(this.currentScroll, 0.0F, 1.0F);
 
 			this.scrollTo(this.currentScroll);
 		}
@@ -505,7 +505,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 			}
 
 			this.currentScroll = (float) ((double) this.currentScroll - (double) i / (double) j);
-			this.currentScroll = MathHelper.clamp_float(this.currentScroll, 0.0F, 1.0F);
+			this.currentScroll = MathHelper.clamp(this.currentScroll, 0.0F, 1.0F);
 
 			this.scrollTo(this.currentScroll);
 		}

@@ -120,7 +120,7 @@ public class GuiEquipment extends GuiContainer
 
 	private boolean isMouseOverSlot(Slot slot, int mouseX, int mouseY)
 	{
-		return this.isPointInRegion(slot.xDisplayPosition, slot.yDisplayPosition, 16, 16, mouseX, mouseY);
+		return this.isPointInRegion(slot.xPos, slot.yPos, 16, 16, mouseX, mouseY);
 	}
 
 	private void drawSlotName(int mouseX, int mouseY)
@@ -184,7 +184,7 @@ public class GuiEquipment extends GuiContainer
 
 		GuiInventory.drawEntityOnScreen(
 				this.width / 2 - 48,
-				this.height / 2 + 10, 37, (this.guiLeft + 88) - mouseX, (this.guiTop + 42) - mouseY, this.mc.thePlayer);
+				this.height / 2 + 10, 37, (this.guiLeft + 88) - mouseX, (this.guiTop + 42) - mouseY, this.mc.player);
 	}
 
 	private void drawEquipmentEffects()

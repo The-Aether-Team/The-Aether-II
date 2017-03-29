@@ -11,7 +11,7 @@ public class TileEntityMasonryBench extends TileEntitySynced
 
 	public EnumFacing getFacing()
 	{
-		IBlockState state = this.worldObj.getBlockState(this.pos);
+		IBlockState state = this.world.getBlockState(this.pos);
 
 		if (state.getBlock() == BlocksAether.masonry_bench)
 		{

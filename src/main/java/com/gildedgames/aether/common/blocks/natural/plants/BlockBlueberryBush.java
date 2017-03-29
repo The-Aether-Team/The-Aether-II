@@ -113,7 +113,7 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVarian
 		ItemStack itemStack = new ItemStack(ItemsAether.blueberries, count);
 		EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), itemStack);
 
-		world.spawnEntityInWorld(entityItem);
+		world.spawnEntity(entityItem);
 	}
 
 	@Override

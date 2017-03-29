@@ -71,7 +71,7 @@ public class BlockAetherLeaves extends Block implements IShearable
 	}
 
 	@Override
-	public boolean isVisuallyOpaque()
+	public boolean causesSuffocation()
 	{
 		return false;
 	}

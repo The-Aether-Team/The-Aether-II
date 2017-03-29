@@ -32,7 +32,7 @@ public class EntityExtendedMob extends EntityMob
 	{
 		super.onUpdate();
 
-		if (this.hasAttacked() && this.worldObj.isRemote)
+		if (this.hasAttacked() && this.world.isRemote)
 		{
 			this.handleClientAttack();
 

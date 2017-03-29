@@ -68,7 +68,7 @@ public class BossModule extends PlayerAetherModule
 		this.boss = boss;
 		this.bossEntityUUID = this.boss.getBossManager().getEntity().getUniqueID();
 
-		if (!this.getEntity().worldObj.isRemote)
+		if (!this.getEntity().world.isRemote)
 		{
 			NetworkingAether.sendPacketToPlayer(new BossChangePacket(this.bossEntityUUID), (EntityPlayerMP) this.getEntity());
 		}

@@ -62,7 +62,7 @@ public class EntityTaegore extends EntityAetherAnimal
 	@Override
 	public EntityTaegore createChild(EntityAgeable ageable)
 	{
-		return new EntityTaegore(this.worldObj);
+		return new EntityTaegore(this.world);
 	}
 
 	@Override

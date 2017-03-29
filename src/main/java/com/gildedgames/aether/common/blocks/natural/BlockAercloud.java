@@ -77,7 +77,7 @@ public class BlockAercloud extends Block implements IBlockVariants
 						}
 					}
 
-					if (entity.worldObj.isRemote)
+					if (entity.world.isRemote)
 					{
 						world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundsAether.aercloud_bounce, SoundCategory.BLOCKS, 0.8f,
 								0.9f + (world.rand.nextFloat() * 0.2f), false);
@@ -288,16 +288,11 @@ public class BlockAercloud extends Block implements IBlockVariants
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-			EntityLivingBase placer)
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+			EntityLivingBase placer, ItemStack stack)
 	{
 		return this.getStateFromMeta(meta).withProperty(PROPERTY_FACING, placer.getHorizontalFacing().getOpposite());
-	}
 
-	@Override
-	protected ItemStack createStackedBlock(IBlockState state)
-	{
-		return new ItemStack(this, 1, state.getValue(PROPERTY_VARIANT).getMeta());
 	}
 
 	@Override

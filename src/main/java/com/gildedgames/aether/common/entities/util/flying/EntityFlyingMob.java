@@ -39,14 +39,14 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 	{
 		super.onUpdate();
 
-		if (this.hasAttacked() && this.worldObj.isRemote)
+		if (this.hasAttacked() && this.world.isRemote)
 		{
 			this.handleClientAttack();
 
 			this.setAttacked(false);
 		}
 
-		if (!this.worldObj.isRemote && this.worldObj.getDifficulty() == EnumDifficulty.PEACEFUL)
+		if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL)
 		{
 			this.setDead();
 		}
@@ -126,7 +126,7 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 					if (this.rand.nextFloat() < f1)
 					{
 						entityplayer.getCooldownTracker().setCooldown(Items.SHIELD, 100);
-						this.worldObj.setEntityState(entityplayer, (byte) 30);
+						this.world.setEntityState(entityplayer, (byte) 30);
 					}
 				}
 			}
@@ -157,27 +157,27 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 	@Override
 	public boolean getCanSpawnHere()
 	{
-		return this.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL && this.isValidLightLevel() && super.getCanSpawnHere();
+		return this.world.getDifficulty() != EnumDifficulty.PEACEFUL && this.isValidLightLevel() && super.getCanSpawnHere();
 	}
 
 	protected boolean isValidLightLevel()
 	{
 		BlockPos blockpos = new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ);
 
-		if (this.worldObj.getLightFor(EnumSkyBlock.SKY, blockpos) > this.rand.nextInt(32))
+		if (this.world.getLightFor(EnumSkyBlock.SKY, blockpos) > this.rand.nextInt(32))
 		{
 			return false;
 		}
 		else
 		{
-			int i = this.worldObj.getLightFromNeighbors(blockpos);
+			int i = this.world.getLightFromNeighbors(blockpos);
 
-			if (this.worldObj.isThundering())
+			if (this.world.isThundering())
 			{
-				int j = this.worldObj.getSkylightSubtracted();
-				this.worldObj.setSkylightSubtracted(10);
-				i = this.worldObj.getLightFromNeighbors(blockpos);
-				this.worldObj.setSkylightSubtracted(j);
+				int j = this.world.getSkylightSubtracted();
+				this.world.setSkylightSubtracted(10);
+				i = this.world.getLightFromNeighbors(blockpos);
+				this.world.setSkylightSubtracted(j);
 			}
 
 			return i <= this.rand.nextInt(8);

@@ -82,7 +82,7 @@ public class EntityAechorPlant extends EntityAetherMob
 		this.motionX = 0.0D;
 		this.motionZ = 0.0D;
 
-		if (this.worldObj.isRemote)
+		if (this.world.isRemote)
 		{
 			this.tickAnimation();
 
@@ -104,12 +104,12 @@ public class EntityAechorPlant extends EntityAetherMob
 
 	private boolean canStayHere(BlockPos pos)
 	{
-		if (!this.worldObj.isAirBlock(pos))
+		if (!this.world.isAirBlock(pos))
 		{
 			return false;
 		}
 
-		Block rootBlock = this.worldObj.getBlockState(pos.down()).getBlock();
+		Block rootBlock = this.world.getBlockState(pos.down()).getBlock();
 
 		if (rootBlock != BlocksAether.aether_grass && rootBlock != BlocksAether.aether_dirt)
 		{
@@ -125,7 +125,7 @@ public class EntityAechorPlant extends EntityAetherMob
 	}
 
 	@Override
-	public void moveEntity(double x, double y, double z)
+	public void move(double x, double y, double z)
 	{
 	}
 
@@ -194,7 +194,7 @@ public class EntityAechorPlant extends EntityAetherMob
 	@Override
 	public boolean getCanSpawnHere()
 	{
-		return this.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL;
+		return this.world.getDifficulty() != EnumDifficulty.PEACEFUL;
 	}
 
 	public boolean canSeePrey()

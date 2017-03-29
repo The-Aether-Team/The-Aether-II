@@ -87,7 +87,7 @@ public class MoaNest
 
 			moa.setAnimalPack(this.pack);
 
-			world.spawnEntityInWorld(moa);
+			world.spawnEntity(moa);
 		}
 	}
 

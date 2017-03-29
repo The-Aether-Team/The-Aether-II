@@ -71,7 +71,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void setExtendedReachDistance(EntityPlayer entity, float distance)
 	{
-		if (entity.worldObj instanceof WorldClient)
+		if (entity.world instanceof WorldClient)
 		{
 			this.clientPlayerController.setExtendedBlockReachDistance(distance);
 
@@ -84,9 +84,9 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void displayDismountMessage(EntityPlayer player)
 	{
-		if (player == Minecraft.getMinecraft().thePlayer)
+		if (player == Minecraft.getMinecraft().player)
 		{
-			Minecraft.getMinecraft().ingameGUI.setRecordPlaying(I18n.format("mount.onboard", Minecraft.getMinecraft().gameSettings.keyBindSneak.getDisplayName()), false);
+			Minecraft.getMinecraft().ingameGUI.setOverlayMessage(I18n.format("mount.onboard", Minecraft.getMinecraft().gameSettings.keyBindSneak.getDisplayName()), false);
 		}
 	}
 

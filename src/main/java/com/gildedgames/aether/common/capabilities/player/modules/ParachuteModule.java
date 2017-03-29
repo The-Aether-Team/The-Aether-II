@@ -33,15 +33,15 @@ public class ParachuteModule extends PlayerAetherModule
 	{
 		if (this.isParachuting)
 		{
-			int x = MathHelper.floor_double(this.getEntity().posX);
-			int y = MathHelper.floor_double(this.getEntity().posY);
-			int z = MathHelper.floor_double(this.getEntity().posZ);
+			int x = MathHelper.floor(this.getEntity().posX);
+			int y = MathHelper.floor(this.getEntity().posY);
+			int z = MathHelper.floor(this.getEntity().posZ);
 
 			Vec3d vec3 = this.getEntity().getLookVec();
 
 			if (this.getParachuteType() == EntityParachute.Type.BLUE)
 			{
-				if (this.getEntity().posY >= this.getEntity().worldObj.getActualHeight() || this.isUnderABlock(y))
+				if (this.getEntity().posY >= this.getEntity().world.getActualHeight() || this.isUnderABlock(y))
 				{
 					this.setParachuting(false, this.type);
 				}
@@ -58,7 +58,7 @@ public class ParachuteModule extends PlayerAetherModule
 				this.hitAmnt++;
 			}
 
-			if (this.getParachuteType() != EntityParachute.Type.BLUE && (!this.getEntity().worldObj.isAirBlock(new BlockPos(x, y - 1, z))
+			if (this.getParachuteType() != EntityParachute.Type.BLUE && (!this.getEntity().world.isAirBlock(new BlockPos(x, y - 1, z))
 					|| !this.isParachuting) || (this.isParachuting && this.hitAmnt >= 4))
 			{
 				this.setParachuting(false, this.type);
@@ -83,7 +83,7 @@ public class ParachuteModule extends PlayerAetherModule
 			{
 				EntityItem block = new EntityItem(this.getEntity().getEntityWorld(), this.getEntity().posX, this.getEntity().posY, this.getEntity().posZ, new ItemStack(ItemsAether.cloud_parachute, 1, type.ordinal()));
 
-				this.getEntity().getEntityWorld().spawnEntityInWorld(block);
+				this.getEntity().getEntityWorld().spawnEntity(block);
 			}
 
 			this.getEntity().capabilities.allowFlying = this.prevAllowFlying;
@@ -100,8 +100,7 @@ public class ParachuteModule extends PlayerAetherModule
 		{
 			for (int z1 = (int) Math.floor(boundingBox.minZ); z1 <= (int) Math.ceil(boundingBox.maxZ); z1++)
 			{
-				if (!this.getEntity().worldObj.isAirBlock(pos.setPos(x1, y + 1, z1)) || !this.getEntity().worldObj.isAirBlock(pos.setPos(x1,
-						y + 2, z1)))
+				if (!this.getEntity().world.isAirBlock(pos.setPos(x1, y + 1, z1)) || !this.getEntity().world.isAirBlock(pos.setPos(x1, y + 2, z1)))
 				{
 					return true;
 				}

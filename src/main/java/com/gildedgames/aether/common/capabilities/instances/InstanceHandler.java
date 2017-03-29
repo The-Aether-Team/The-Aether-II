@@ -238,7 +238,7 @@ public class InstanceHandler<T extends Instance> implements IInstanceHandler<T>
 			return world;
 		}
 
-		return player.worldObj;
+		return player.world;
 	}
 
 	@Override

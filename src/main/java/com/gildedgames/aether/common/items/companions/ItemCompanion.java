@@ -73,7 +73,7 @@ public class ItemCompanion extends Item
 
 		try
 		{
-			companion = this.companionClass.getConstructor(World.class).newInstance(aePlayer.getEntity().worldObj);
+			companion = this.companionClass.getConstructor(World.class).newInstance(aePlayer.getEntity().world);
 		}
 		catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e)
 		{
@@ -91,7 +91,7 @@ public class ItemCompanion extends Item
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
 	{
-		long respawn = ItemCompanion.getTicksUntilRespawn(stack, player.worldObj);
+		long respawn = ItemCompanion.getTicksUntilRespawn(stack, player.world);
 
 		if (respawn > 0)
 		{

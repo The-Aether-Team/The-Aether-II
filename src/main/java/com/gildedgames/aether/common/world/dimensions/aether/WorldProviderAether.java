@@ -43,7 +43,7 @@ public class WorldProviderAether extends WorldProviderSurface
 	@Override
 	protected void createBiomeProvider()
 	{
-		this.biomeProvider = new BiomeProviderAether(this.worldObj);
+		this.biomeProvider = new BiomeProviderAether(this.world);
 	}
 
 	@Override
@@ -55,14 +55,14 @@ public class WorldProviderAether extends WorldProviderSurface
 	@Override
 	public IChunkGenerator createChunkGenerator()
 	{
-		return new ChunkGeneratorIsland(this.worldObj, this.worldObj.getSeed());
+		return new ChunkGeneratorIsland(this.world, this.world.getSeed());
 	}
 
 	public BlockPos getTopBlockPos(BlockPos pos)
 	{
 		BlockPos.MutableBlockPos testPos = new BlockPos.MutableBlockPos(pos.getX(), 0, pos.getZ());
 
-		while (!this.worldObj.isAirBlock(testPos.up()))
+		while (!this.world.isAirBlock(testPos.up()))
 		{
 			testPos = testPos.move(EnumFacing.UP);
 		}
@@ -111,7 +111,7 @@ public class WorldProviderAether extends WorldProviderSurface
 	{
 		BlockPos top = this.getTopBlockPos(new BlockPos(x, 0, z));
 
-		return !this.worldObj.isAirBlock(top) && this.worldObj.getBlockState(top) == BlocksAether.aether_grass.getDefaultState();
+		return !this.world.isAirBlock(top) && this.world.getBlockState(top) == BlocksAether.aether_grass.getDefaultState();
 	}
 
 	@Override

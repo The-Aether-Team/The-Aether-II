@@ -149,7 +149,7 @@ public class ItemCrossbow extends Item
 	{
 		if (ItemCrossbow.isLoaded(stack))
 		{
-			if (entityLiving.worldObj.isRemote)
+			if (entityLiving.world.isRemote)
 			{
 				ItemRenderer renderer = Minecraft.getMinecraft().getItemRenderer();
 
@@ -158,7 +158,7 @@ public class ItemCrossbow extends Item
 
 			this.shootBolt(entityLiving, stack);
 
-			if (!entityLiving.worldObj.isRemote)
+			if (!entityLiving.world.isRemote)
 			{
 				ItemCrossbow.setLoaded(stack, false);
 			}
@@ -187,9 +187,9 @@ public class ItemCrossbow extends Item
 
 	private void shootBolt(EntityLivingBase entityLiving, ItemStack stack)
 	{
-		if (!entityLiving.worldObj.isRemote)
+		if (!entityLiving.world.isRemote)
 		{
-			World world = entityLiving.worldObj;
+			World world = entityLiving.world;
 
 			world.playSound(null, entityLiving.posX, entityLiving.posY, entityLiving.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 1.0F,
 					1.0F / (itemRand.nextFloat() * 0.4F + 1.2F));
@@ -214,7 +214,7 @@ public class ItemCrossbow extends Item
 				}
 			}
 
-			entityLiving.getEntityWorld().spawnEntityInWorld(dart);
+			entityLiving.getEntityWorld().spawnEntity(dart);
 		}
 	}
 

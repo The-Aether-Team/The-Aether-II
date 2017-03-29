@@ -121,7 +121,7 @@ public class ItemDartShooter extends Item
 
 			if (!world.isRemote)
 			{
-				world.spawnEntityInWorld(dart);
+				world.spawnEntity(dart);
 			}
 
 			if (inventorySlot >= 0 && !player.capabilities.isCreativeMode)

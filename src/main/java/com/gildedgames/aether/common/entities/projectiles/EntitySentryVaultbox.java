@@ -51,17 +51,17 @@ public class EntitySentryVaultbox extends EntityThrowable
 					double motY = 1;
 					double motZ = (this.rand.nextBoolean() ? -1 : 1) * this.rand.nextDouble();
 
-					if (!this.worldObj.isRemote)
+					if (!this.world.isRemote)
 					{
 						ItemStack reward = this.itemSelector.create(this.rand);
 
-						Entity entity = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, reward);
+						Entity entity = new EntityItem(this.world, this.posX, this.posY, this.posZ, reward);
 
 						entity.motionX = motX;
 						entity.motionY = motY;
 						entity.motionZ = motZ;
 
-						this.worldObj.spawnEntityInWorld(entity);
+						this.world.spawnEntity(entity);
 					}
 
 					for (int sparkCount = 1; sparkCount <= 10; sparkCount++)
@@ -70,8 +70,8 @@ public class EntitySentryVaultbox extends EntityThrowable
 						motY = this.rand.nextDouble();
 						motZ = (this.rand.nextBoolean() ? -1 : 1) * this.rand.nextDouble();
 
-						this.worldObj.spawnParticle(EnumParticleTypes.SPELL_MOB_AMBIENT, this.posX, this.posY, this.posZ, motX, motY, motZ);
-						this.worldObj.spawnParticle(EnumParticleTypes.CLOUD, this.posX, this.posY, this.posZ, motX / 6, motY / 6, motZ / 6);
+						this.world.spawnParticle(EnumParticleTypes.SPELL_MOB_AMBIENT, this.posX, this.posY, this.posZ, motX, motY, motZ);
+						this.world.spawnParticle(EnumParticleTypes.CLOUD, this.posX, this.posY, this.posZ, motX / 6, motY / 6, motZ / 6);
 					}
 				}
 
@@ -85,8 +85,8 @@ public class EntitySentryVaultbox extends EntityThrowable
 					double motY = this.rand.nextDouble();
 					double motZ = (this.rand.nextBoolean() ? -1 : 1) * this.rand.nextDouble();
 
-					this.worldObj.spawnParticle(EnumParticleTypes.SPELL_MOB_AMBIENT, this.posX, this.posY, this.posZ, motX, motY, motZ);
-					this.worldObj.spawnParticle(EnumParticleTypes.CLOUD, this.posX, this.posY, this.posZ, motX / 6, motY / 6, motZ / 6);
+					this.world.spawnParticle(EnumParticleTypes.SPELL_MOB_AMBIENT, this.posX, this.posY, this.posZ, motX, motY, motZ);
+					this.world.spawnParticle(EnumParticleTypes.CLOUD, this.posX, this.posY, this.posZ, motX / 6, motY / 6, motZ / 6);
 				}
 
 				this.setDead();

@@ -174,7 +174,7 @@ public class GenerationAether
 
 				edison.setPositionAndUpdate(spawnAt.getX(), spawnAt.getY(), spawnAt.getZ());
 
-				world.spawnEntityInWorld(edison);
+				world.spawnEntity(edison);
 			}
 
 		};

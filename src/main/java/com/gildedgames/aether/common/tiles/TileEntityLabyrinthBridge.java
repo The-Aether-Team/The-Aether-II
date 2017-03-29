@@ -20,7 +20,7 @@ public class TileEntityLabyrinthBridge extends TileEntitySynced implements ITick
 		{
 			if (damage >= MAX_DAMAGE)
 			{
-				this.worldObj.destroyBlock(this.getPos(), false);
+				this.world.destroyBlock(this.getPos(), false);
 
 				return;
 			}

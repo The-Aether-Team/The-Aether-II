@@ -84,7 +84,7 @@ public class EntityDetonationSentry extends EntityAetherMob implements IProjecti
 	@Override
 	public void setThrowableHeading(double x, double y, double z, float velocity, float inaccuracy)
 	{
-		float f = MathHelper.sqrt_double(x * x + y * y + z * z);
+		float f = MathHelper.sqrt(x * x + y * y + z * z);
 		x = x / (double) f;
 		y = y / (double) f;
 		z = z / (double) f;
@@ -97,7 +97,7 @@ public class EntityDetonationSentry extends EntityAetherMob implements IProjecti
 		this.motionX = x;
 		this.motionY = y;
 		this.motionZ = z;
-		float f1 = MathHelper.sqrt_double(x * x + z * z);
+		float f1 = MathHelper.sqrt(x * x + z * z);
 		this.rotationYaw = (float) (MathHelper.atan2(x, z) * (180D / Math.PI));
 		this.rotationPitch = (float) (MathHelper.atan2(y, (double) f1) * (180D / Math.PI));
 		this.prevRotationYaw = this.rotationYaw;

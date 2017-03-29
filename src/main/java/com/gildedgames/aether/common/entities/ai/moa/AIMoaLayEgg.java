@@ -26,7 +26,7 @@ public class AIMoaLayEgg extends EntityAIBase
 
 	public AIMoaLayEgg(EntityMoa mother, int motherSeed, int fatherSeed, float moveSpeed)
 	{
-		this.world = mother.worldObj;
+		this.world = mother.world;
 
 		this.mother = mother;
 

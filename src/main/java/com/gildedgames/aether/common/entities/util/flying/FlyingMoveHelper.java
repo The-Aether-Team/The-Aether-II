@@ -23,7 +23,7 @@ public class FlyingMoveHelper extends EntityMoveHelper
 			double d1 = this.posY - this.entity.posY;
 			double d2 = this.posZ - this.entity.posZ;
 			double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-			d3 = (double) MathHelper.sqrt_double(d3);
+			d3 = (double) MathHelper.sqrt(d3);
 			d1 = d1 / d3;
 			float f = (float) (MathHelper.atan2(d2, d0) * (180D / Math.PI)) - 90.0F;
 			this.entity.rotationYaw = this.limitAngle(this.entity.rotationYaw, f, 90.0F);

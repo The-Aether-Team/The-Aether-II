@@ -91,7 +91,7 @@ public class GuiRequiredMaterial extends GuiButton
 
 			if (!this.resultStack || this.displayStack.stackSize > 1)
 			{
-				boolean hasEnough = RecipeUtil.hasEnoughOfMaterial(Minecraft.getMinecraft().thePlayer, this.required) || this.resultStack;
+				boolean hasEnough = RecipeUtil.hasEnoughOfMaterial(Minecraft.getMinecraft().player, this.required) || this.resultStack;
 
 				int xOffset = (Math.max(String.valueOf(this.displayStack.stackSize).length() - 1, 0)) * -6;
 
@@ -107,7 +107,7 @@ public class GuiRequiredMaterial extends GuiButton
 				if (gui instanceof IExtendedGui)
 				{
 					IExtendedGui extendedGui = (IExtendedGui) gui;
-					extendedGui.setHoveredDescription(this.displayStack.getTooltip(Minecraft.getMinecraft().thePlayer, false));
+					extendedGui.setHoveredDescription(this.displayStack.getTooltip(Minecraft.getMinecraft().player, false));
 				}
 			}
 

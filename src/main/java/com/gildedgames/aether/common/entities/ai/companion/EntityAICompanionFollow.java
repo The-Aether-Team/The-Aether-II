@@ -66,7 +66,7 @@ public class EntityAICompanionFollow extends EntityAIBase
 
 	private boolean isEmptyBlock(BlockPos pos)
 	{
-		IBlockState state = this.entity.worldObj.getBlockState(pos);
+		IBlockState state = this.entity.world.getBlockState(pos);
 
 		return state.getMaterial() == Material.AIR || !state.isFullCube();
 	}
@@ -89,15 +89,15 @@ public class EntityAICompanionFollow extends EntityAIBase
 
 			if (this.entity.getDistanceSqToEntity(this.entity.getOwner()) > 144.0D)
 			{
-				int i = MathHelper.floor_double(owner.posX) - 2;
-				int j = MathHelper.floor_double(owner.posZ) - 2;
-				int k = MathHelper.floor_double(owner.getEntityBoundingBox().minY);
+				int i = MathHelper.floor(owner.posX) - 2;
+				int j = MathHelper.floor(owner.posZ) - 2;
+				int k = MathHelper.floor(owner.getEntityBoundingBox().minY);
 
 				for (int l = 0; l <= 4; ++l)
 				{
 					for (int i1 = 0; i1 <= 4; ++i1)
 					{
-						if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && this.entity.worldObj.getBlockState(new BlockPos(
+						if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && this.entity.world.getBlockState(new BlockPos(
 								i + l, k - 1, j + i1)).isFullyOpaque() && this.isEmptyBlock(new BlockPos(i + l, k, j + i1))
 								&& this.isEmptyBlock(new BlockPos(i + l, k + 1, j + i1)))
 						{

@@ -53,23 +53,23 @@ public class EntityAIAechorPlantAttack extends EntityAITarget
 
 			EntityCreature predator = this.taskOwner;
 
-			if (!predator.worldObj.isRemote)
+			if (!predator.world.isRemote)
 			{
-				EntityDart dart = new EntityDart(predator.worldObj, predator);
+				EntityDart dart = new EntityDart(predator.world, predator);
 				dart.setThrowableHeading(prey.posX, prey.posY, prey.posZ, 0.6F, 1.0F);
 
 				double motionX = prey.posX - predator.posX;
 				double motionY = prey.getEntityBoundingBox().minY + (double) (prey.height / 3.0F) - dart.posY;
 				double motionZ = prey.posZ - predator.posZ;
 
-				double accel = (double) MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
+				double accel = (double) MathHelper.sqrt(motionX * motionX + motionZ * motionZ);
 
 				dart.setThrowableHeading(motionX, motionY + accel * 0.2D, motionZ, 1.6F, 0.5f);
 				dart.setDamage(0.5f);
 
 				dart.setDartType(ItemDartType.POISON);
 
-				dart.worldObj.spawnEntityInWorld(dart);
+				dart.world.spawnEntity(dart);
 			}
 		}
 

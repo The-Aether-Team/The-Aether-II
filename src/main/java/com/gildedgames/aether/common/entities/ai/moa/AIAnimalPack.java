@@ -22,7 +22,7 @@ public class AIAnimalPack extends EntityAIBase
 
 	public AIAnimalPack(EntityLiving animal, float moveSpeed)
 	{
-		this.world = animal.worldObj;
+		this.world = animal.world;
 		this.moveSpeed = moveSpeed;
 
 		if (animal instanceof EntityGroupMember)
@@ -39,7 +39,7 @@ public class AIAnimalPack extends EntityAIBase
 			return false;
 		}
 
-		List list = this.animal.worldObj.getEntitiesWithinAABB(this.animal.getClass(), this.animal.getEntityBoundingBox().expand(12.0D, 4.0D, 12.0D));
+		List list = this.animal.world.getEntitiesWithinAABB(this.animal.getClass(), this.animal.getEntityBoundingBox().expand(12.0D, 4.0D, 12.0D));
 		EntityAnimal potentialLeader = null;
 		double d0 = Double.MAX_VALUE;
 

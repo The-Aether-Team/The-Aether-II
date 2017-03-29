@@ -66,7 +66,7 @@ public class EntityBurrukai extends EntityAetherAnimal
 	@Override
 	public EntityBurrukai createChild(EntityAgeable ageable)
 	{
-		return new EntityBurrukai(this.worldObj);
+		return new EntityBurrukai(this.world);
 	}
 
 	@Override

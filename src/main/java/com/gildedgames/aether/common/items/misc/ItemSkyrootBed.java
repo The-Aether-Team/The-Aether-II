@@ -45,7 +45,7 @@ public class ItemSkyrootBed extends Item
 				pos = pos.up();
 			}
 
-			int i = MathHelper.floor_double((double) (playerIn.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+			int i = MathHelper.floor((double) (playerIn.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 			EnumFacing enumfacing = EnumFacing.getHorizontal(i);
 			BlockPos blockpos = pos.offset(enumfacing);
 

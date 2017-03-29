@@ -88,7 +88,7 @@ public class StructureInjectionPacket implements IMessage
 		this.showsAir = buf.readBoolean();
 		this.showsBoundingBox = buf.readBoolean();
 
-		this.integrity = MathHelper.clamp_float(buf.readFloat(), 0.0F, 1.0F);
+		this.integrity = MathHelper.clamp(buf.readFloat(), 0.0F, 1.0F);
 
 		this.seed = buf.readLong();
 
@@ -141,8 +141,8 @@ public class StructureInjectionPacket implements IMessage
 				return null;
 			}
 
-			IBlockState iblockstate1 = player.worldObj.getBlockState(message.pos);
-			TileEntity tileentity1 = player.worldObj.getTileEntity(message.pos);
+			IBlockState iblockstate1 = player.world.getBlockState(message.pos);
+			TileEntity tileentity1 = player.world.getTileEntity(message.pos);
 
 			if (tileentity1 instanceof TileEntityStructure)
 			{
@@ -176,14 +176,14 @@ public class StructureInjectionPacket implements IMessage
 					{
 						if (message.showMessages)
 						{
-							player.addChatComponentMessage(new TextComponentTranslation("structure_block.save_success", s4));
+							player.sendStatusMessage(new TextComponentTranslation("structure_block.save_success", s4));
 						}
 					}
 					else
 					{
 						if (message.showMessages)
 						{
-							player.addChatComponentMessage(new TextComponentTranslation("structure_block.save_failure", s4));
+							player.sendStatusMessage(new TextComponentTranslation("structure_block.save_failure", s4));
 						}
 					}
 				}
@@ -193,21 +193,21 @@ public class StructureInjectionPacket implements IMessage
 					{
 						if (message.showMessages)
 						{
-							player.addChatComponentMessage(new TextComponentTranslation("structure_block.load_not_found", s4));
+							player.sendStatusMessage(new TextComponentTranslation("structure_block.load_not_found", s4));
 						}
 					}
 					else if (tileentitystructure.load())
 					{
 						if (message.showMessages)
 						{
-							player.addChatComponentMessage(new TextComponentTranslation("structure_block.load_success", s4));
+							player.sendStatusMessage(new TextComponentTranslation("structure_block.load_success", s4));
 						}
 					}
 					else
 					{
 						if (message.showMessages)
 						{
-							player.addChatComponentMessage(new TextComponentTranslation("structure_block.load_prepare", s4));
+							player.sendStatusMessage(new TextComponentTranslation("structure_block.load_prepare", s4));
 						}
 					}
 				}
@@ -217,20 +217,20 @@ public class StructureInjectionPacket implements IMessage
 					{
 						if (message.showMessages)
 						{
-							player.addChatComponentMessage(new TextComponentTranslation("structure_block.size_success", s4));
+							player.sendStatusMessage(new TextComponentTranslation("structure_block.size_success", s4));
 						}
 					}
 					else
 					{
 						if (message.showMessages)
 						{
-							player.addChatComponentMessage(new TextComponentTranslation("structure_block.size_failure"));
+							player.sendStatusMessage(new TextComponentTranslation("structure_block.size_failure"));
 						}
 					}
 				}
 
 				tileentitystructure.markDirty();
-				player.worldObj.notifyBlockUpdate(message.pos, iblockstate1, iblockstate1, 3);
+				player.world.notifyBlockUpdate(message.pos, iblockstate1, iblockstate1, 3);
 			}
 
 			return null;

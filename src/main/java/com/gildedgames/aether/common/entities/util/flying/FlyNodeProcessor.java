@@ -18,8 +18,8 @@ public class FlyNodeProcessor extends NodeProcessor
 
 	public PathPoint getStart()
 	{
-		return this.openPoint(MathHelper.floor_double(this.entity.getEntityBoundingBox().minX), MathHelper.floor_double(
-				this.entity.getEntityBoundingBox().minY + 0.5D), MathHelper.floor_double(this.entity.getEntityBoundingBox().minZ));
+		return this.openPoint(MathHelper.floor(this.entity.getEntityBoundingBox().minX), MathHelper.floor(
+				this.entity.getEntityBoundingBox().minY + 0.5D), MathHelper.floor(this.entity.getEntityBoundingBox().minZ));
 	}
 
 	/**
@@ -27,8 +27,8 @@ public class FlyNodeProcessor extends NodeProcessor
 	 */
 	public PathPoint getPathPointToCoords(double x, double y, double z)
 	{
-		return this.openPoint(MathHelper.floor_double(x - (double) (this.entity.width / 2.0F)), MathHelper.floor_double(
-				y + 0.5D), MathHelper.floor_double(z - (double) (this.entity.width / 2.0F)));
+		return this.openPoint(MathHelper.floor(x - (double) (this.entity.width / 2.0F)), MathHelper.floor(
+				y + 0.5D), MathHelper.floor(z - (double) (this.entity.width / 2.0F)));
 	}
 
 	public int findPathOptions(PathPoint[] pathOptions, PathPoint currentPoint, PathPoint targetPoint, float maxDistance)

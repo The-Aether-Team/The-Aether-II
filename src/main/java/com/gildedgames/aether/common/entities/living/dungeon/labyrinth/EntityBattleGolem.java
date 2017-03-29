@@ -94,7 +94,7 @@ public class EntityBattleGolem extends EntityAetherMob implements IRangedAttackM
 	{
 		super.onUpdate();
 
-		if (this.worldObj.isRemote)
+		if (this.world.isRemote)
 		{
 			this.targetTasks.onUpdateTasks();
 
@@ -206,7 +206,7 @@ public class EntityBattleGolem extends EntityAetherMob implements IRangedAttackM
 		double d0 = target.posY + (double) target.getEyeHeight() - 1.100000023841858D;
 		double d1, d2, d3;
 
-		EntityBattleBomb bomb = new EntityBattleBomb(this.worldObj, this);
+		EntityBattleBomb bomb = new EntityBattleBomb(this.world, this);
 
 		double yaw = Math.toRadians(this.renderYawOffset);
 
@@ -235,15 +235,15 @@ public class EntityBattleGolem extends EntityAetherMob implements IRangedAttackM
 			bomb.setPosition(x, y, z);
 		}
 
-		float f = MathHelper.sqrt_double(d1 * d1 + d3 * d3);
+		float f = MathHelper.sqrt(d1 * d1 + d3 * d3);
 
 		bomb.rotationPitch -= -20.0F;
 		bomb.setThrowableHeading(d1, d2 + (double) (f * 0.2F), d3, 0.75F, 8.0F);
 
-		this.worldObj.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WITCH_THROW, this.getSoundCategory(), 1.0F,
+		this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WITCH_THROW, this.getSoundCategory(), 1.0F,
 				0.8F + this.rand.nextFloat() * 0.4F);
 
-		this.worldObj.spawnEntityInWorld(bomb);
+		this.world.spawnEntity(bomb);
 
 		this.removeBomb();
 		this.switchThrowingSide();

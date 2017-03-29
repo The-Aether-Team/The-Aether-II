@@ -76,7 +76,7 @@ public class EntitySwet extends EntityExtendedMob
 
 		this.setSize(1.0F, 1.0F);
 
-		this.setType(Type.values()[this.worldObj.rand.nextInt(Type.values().length)]);
+		this.setType(Type.values()[this.world.rand.nextInt(Type.values().length)]);
 
 		this.experienceValue = 3;
 	}
@@ -105,7 +105,7 @@ public class EntitySwet extends EntityExtendedMob
 	{
 		this.squishAmount = 3F;
 
-		Entity target = this.worldObj.getNearestPlayerNotCreative(this, 10D);
+		Entity target = this.world.getNearestPlayerNotCreative(this, 10D);
 
 		if (target == null)
 		{

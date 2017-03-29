@@ -100,7 +100,7 @@ public class EntityRewardItemStack extends EntityItem
 				double motY = this.rand.nextDouble();
 				double motZ = (this.rand.nextBoolean() ? -1 : 1) * this.rand.nextDouble();
 
-				this.worldObj.spawnParticle(EnumParticleTypes.SPELL_MOB, this.posX, this.posY, this.posZ, motX, motY, motZ);
+				this.world.spawnParticle(EnumParticleTypes.SPELL_MOB, this.posX, this.posY, this.posZ, motX, motY, motZ);
 			}
 
 			if (this.ticksExisted % 5 == 0)
@@ -111,7 +111,7 @@ public class EntityRewardItemStack extends EntityItem
 					double motY = this.rand.nextDouble();
 					double motZ = (this.rand.nextBoolean() ? -1 : 1) * this.rand.nextDouble();
 
-					this.worldObj.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, this.posX, this.posY, this.posZ,
+					this.world.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, this.posX, this.posY, this.posZ,
 							motX / 2, motY / 2, motZ / 2);
 				}
 			}
@@ -123,7 +123,7 @@ public class EntityRewardItemStack extends EntityItem
 	@Override
 	public void onCollideWithPlayer(EntityPlayer player)
 	{
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			String username = player.getCommandSenderEntity().getName();
 

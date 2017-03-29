@@ -96,7 +96,7 @@ public class EntitySentryGuardian extends EntityFlyingMob implements IRangedAtta
 				double motionY = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 				double motionZ = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 
-				this.worldObj.spawnParticle(EnumParticleTypes.CLOUD,
+				this.world.spawnParticle(EnumParticleTypes.CLOUD,
 						this.posX + motionX, this.posY + 0.5D + motionY, this.posZ + motionZ, 0.1D, 0.1D, 0.1D);
 			}
 		}
@@ -118,7 +118,7 @@ public class EntitySentryGuardian extends EntityFlyingMob implements IRangedAtta
 
 		if (this.spawnRepairSentriesTimer.isMultipleOfSeconds(60))
 		{
-			List<EntityProductionLine> productionLines = this.worldObj.getEntitiesWithinAABB(EntityProductionLine.class, this.getEntityBoundingBox().expand(60.0D, 60.0D, 60.0D));
+			List<EntityProductionLine> productionLines = this.world.getEntitiesWithinAABB(EntityProductionLine.class, this.getEntityBoundingBox().expand(60.0D, 60.0D, 60.0D));
 
 			for (EntityProductionLine productionLine : productionLines)
 			{
@@ -134,14 +134,14 @@ public class EntitySentryGuardian extends EntityFlyingMob implements IRangedAtta
 
 	private void spawnRepairSentries()
 	{
-		if (this.worldObj.isRemote)
+		if (this.world.isRemote)
 		{
 			return;
 		}
 
 		if (this.repairSentry1 != null)
 		{
-			Entity entity = EntityUtil.getEntityFromUUID(this.worldObj, this.repairSentry1);
+			Entity entity = EntityUtil.getEntityFromUUID(this.world, this.repairSentry1);
 
 			if (entity == null)
 			{
@@ -151,7 +151,7 @@ public class EntitySentryGuardian extends EntityFlyingMob implements IRangedAtta
 
 		if (this.repairSentry2 != null)
 		{
-			Entity entity = EntityUtil.getEntityFromUUID(this.worldObj, this.repairSentry2);
+			Entity entity = EntityUtil.getEntityFromUUID(this.world, this.repairSentry2);
 
 			if (entity == null)
 			{
@@ -161,28 +161,28 @@ public class EntitySentryGuardian extends EntityFlyingMob implements IRangedAtta
 
 		if (this.repairSentry1 == null)
 		{
-			EntityRepairSentry repairSentry = new EntityRepairSentry(this.worldObj);
+			EntityRepairSentry repairSentry = new EntityRepairSentry(this.world);
 
 			int scatterX = (this.rand.nextBoolean() ? 1 : -1) * 2;
 			int scatterZ = (this.rand.nextBoolean() ? 1 : -1) * 2;
 
 			repairSentry.setPosition(this.posX + scatterX, this.posY, this.posZ + scatterZ);
 
-			this.worldObj.spawnEntityInWorld(repairSentry);
+			this.world.spawnEntity(repairSentry);
 
 			this.repairSentry1 = repairSentry.getUniqueID();
 		}
 
 		if (this.repairSentry2 == null)
 		{
-			EntityRepairSentry repairSentry = new EntityRepairSentry(this.worldObj);
+			EntityRepairSentry repairSentry = new EntityRepairSentry(this.world);
 
 			int scatterX = (this.rand.nextBoolean() ? 1 : -1) * 2;
 			int scatterZ = (this.rand.nextBoolean() ? 1 : -1) * 2;
 
 			repairSentry.setPosition(this.posX + scatterX, this.posY, this.posZ + scatterZ);
 
-			this.worldObj.spawnEntityInWorld(repairSentry);
+			this.world.spawnEntity(repairSentry);
 
 			this.repairSentry2 = repairSentry.getUniqueID();
 		}
@@ -288,18 +288,18 @@ public class EntitySentryGuardian extends EntityFlyingMob implements IRangedAtta
 		double d1 = target.posX + target.motionX - this.posX;
 		double d2 = d0 - this.posY;
 		double d3 = target.posZ + target.motionZ - this.posZ;
-		float f = MathHelper.sqrt_double(d1 * d1 + d3 * d3);
+		float f = MathHelper.sqrt(d1 * d1 + d3 * d3);
 
-		EntityDetonationSentry sentry = new EntityDetonationSentry(this.worldObj);
+		EntityDetonationSentry sentry = new EntityDetonationSentry(this.world);
 
 		sentry.setPosition(this.posX, this.posY + (double) this.getEyeHeight() - 0.10000000149011612D, this.posZ);
 
 		sentry.rotationPitch -= -20.0F;
 		sentry.setThrowableHeading(d1, d2 + (double) (f * 0.2F), d3, 1.0F, 8.0F);
 
-		this.worldObj.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WITCH_THROW, this.getSoundCategory(), 1.0F,
+		this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WITCH_THROW, this.getSoundCategory(), 1.0F,
 				0.8F + this.rand.nextFloat() * 0.4F);
 
-		this.worldObj.spawnEntityInWorld(sentry);
+		this.world.spawnEntity(sentry);
 	}
 }

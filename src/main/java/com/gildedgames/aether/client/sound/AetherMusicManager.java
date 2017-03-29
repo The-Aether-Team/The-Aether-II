@@ -141,9 +141,9 @@ public class AetherMusicManager
 		{
 			if (!event.getSound().getSoundLocation().getResourceDomain().equals(AetherCore.MOD_ID))
 			{
-				EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+				EntityPlayer player = Minecraft.getMinecraft().player;
 
-				if (player != null && player.worldObj.provider.getDimensionType() == DimensionsAether.AETHER)
+				if (player != null && player.world.provider.getDimensionType() == DimensionsAether.AETHER)
 				{
 					event.setResultSound(null);
 				}

@@ -34,7 +34,7 @@ public class EntityGenerator extends EntityCreature
 	{
 		if (player.getHeldItemMainhand() != null && player.getHeldItemMainhand().getItem() == ItemsAether.aether_developer_wand)
 		{
-			this.worldObj.playSound(player, player.getPosition(), SoundsAether.tempest_electric_shock, SoundCategory.NEUTRAL, 1.0F,
+			this.world.playSound(player, player.getPosition(), SoundsAether.tempest_electric_shock, SoundCategory.NEUTRAL, 1.0F,
 					0.8F + (this.rand.nextFloat() * 0.5F));
 
 			this.setDead();
@@ -42,7 +42,7 @@ public class EntityGenerator extends EntityCreature
 			return EnumActionResult.SUCCESS;
 		}
 
-		this.worldObj.playSound(player, player.getPosition(), SoundsAether.chest_mimic_awake, SoundCategory.NEUTRAL, 1.0F,
+		this.world.playSound(player, player.getPosition(), SoundsAether.chest_mimic_awake, SoundCategory.NEUTRAL, 1.0F,
 				0.8F + (this.rand.nextFloat() * 0.5F));
 
 		this.activated = !this.activated;
@@ -81,15 +81,15 @@ public class EntityGenerator extends EntityCreature
 	@Override
 	public void onUpdate()
 	{
-		if (!this.hasInit && !this.worldObj.isRemote && !this.isDead)
+		if (!this.hasInit && !this.world.isRemote && !this.isDead)
 		{
 			if (this.activated)
 			{
-				Entity entity = DungeonDefinitions.SLIDERS_LABYRINTH.createRandomMob(this.worldObj, this.worldObj.rand);
+				Entity entity = DungeonDefinitions.SLIDERS_LABYRINTH.createRandomMob(this.world, this.world.rand);
 
 				entity.setPosition(this.posX, this.posY, this.posZ);
 
-				this.worldObj.spawnEntityInWorld(entity);
+				this.world.spawnEntity(entity);
 
 				this.setDead();
 
@@ -112,7 +112,7 @@ public class EntityGenerator extends EntityCreature
 				double motionY = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 				double motionZ = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 
-				this.worldObj.spawnParticle(EnumParticleTypes.SPELL_MOB,
+				this.world.spawnParticle(EnumParticleTypes.SPELL_MOB,
 						this.posX + motionX, this.posY + 0.5D + motionY, this.posZ + motionZ, 0.1D, 0.1D, 0.1D);
 			}
 		}

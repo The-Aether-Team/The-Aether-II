@@ -27,7 +27,7 @@ public abstract class RenderCompanion<T extends EntityCompanion> extends RenderL
 			float scaleFactor)
 	{
 		boolean renderOutlines = !entity.isInvisible() || this.renderOutlines;
-		boolean isInvisible = !renderOutlines && !entity.isInvisibleToPlayer(Minecraft.getMinecraft().thePlayer);
+		boolean isInvisible = !renderOutlines && !entity.isInvisibleToPlayer(Minecraft.getMinecraft().player);
 
 		if (renderOutlines || isInvisible)
 		{

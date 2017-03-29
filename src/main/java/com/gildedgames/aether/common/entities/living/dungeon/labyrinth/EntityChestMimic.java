@@ -78,7 +78,7 @@ public class EntityChestMimic extends EntityExtendedMob
 			double motionY = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 			double motionZ = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 
-			this.worldObj.spawnParticle(EnumParticleTypes.SWEEP_ATTACK,
+			this.world.spawnParticle(EnumParticleTypes.SWEEP_ATTACK,
 					this.posX + motionX, this.posY + 0.75D + motionY, this.posZ + motionZ, motionX, motionY, motionZ);
 		}
 	}
@@ -96,7 +96,7 @@ public class EntityChestMimic extends EntityExtendedMob
 				double motionY = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 				double motionZ = (this.getRNG().nextBoolean() ? 1.0D : -1.0D) * this.getRNG().nextFloat();
 
-				this.worldObj.spawnParticle(EnumParticleTypes.CLOUD,
+				this.world.spawnParticle(EnumParticleTypes.CLOUD,
 						this.posX + motionX, this.posY + 0.5D + motionY, this.posZ + motionZ, 0.1D, 0.1D, 0.1D);
 			}
 		}

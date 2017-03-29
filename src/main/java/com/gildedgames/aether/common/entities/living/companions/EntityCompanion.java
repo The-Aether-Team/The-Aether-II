@@ -78,7 +78,7 @@ public abstract class EntityCompanion extends EntityCreature
 
 		this.fallDistance = 0.0f;
 
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			if (this.getOwner() == null || this.getOwner().isDead)
 			{
@@ -133,7 +133,7 @@ public abstract class EntityCompanion extends EntityCreature
 			return null;
 		}
 
-		return this.worldObj.getPlayerEntityByUUID(uuid.get());
+		return this.world.getPlayerEntityByUUID(uuid.get());
 	}
 
 	public boolean wasDespawned()

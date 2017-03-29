@@ -101,8 +101,8 @@ public class RenderPlayerHelper
 
 		if (stack != null)
 		{
-			float f = -0.4F * MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float) Math.PI);
-			float f1 = 0.2F * MathHelper.sin(MathHelper.sqrt_float(swingProgress) * ((float) Math.PI * 2F));
+			float f = -0.4F * MathHelper.sin(MathHelper.sqrt(swingProgress) * (float) Math.PI);
+			float f1 = 0.2F * MathHelper.sin(MathHelper.sqrt(swingProgress) * ((float) Math.PI * 2F));
 			float f2 = -0.2F * MathHelper.sin(swingProgress * (float) Math.PI);
 			int i = 2;
 
@@ -121,7 +121,7 @@ public class RenderPlayerHelper
 			GlStateManager.rotate(40F, 1F, 0F, 0F);
 			//GlStateManager.rotate(pitch, 1F, 0F, 0F);
 
-			itemRenderer.renderItemSide(Minecraft.getMinecraft().thePlayer, stack, ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND, false);
+			itemRenderer.renderItemSide(Minecraft.getMinecraft().player, stack, ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND, false);
 		}
 
 		GlStateManager.popMatrix();
@@ -131,7 +131,7 @@ public class RenderPlayerHelper
 	{
 		boolean flag = p_187456_3_ != EnumHandSide.LEFT;
 		float f = flag ? 1.0F : -1.0F;
-		float f1 = MathHelper.sqrt_float(p_187456_2_);
+		float f1 = MathHelper.sqrt(p_187456_2_);
 		float f2 = -0.3F * MathHelper.sin(f1 * (float) Math.PI);
 		float f3 = 0.4F * MathHelper.sin(f1 * ((float) Math.PI * 2F));
 		float f4 = -0.4F * MathHelper.sin(p_187456_2_ * (float) Math.PI);
@@ -143,7 +143,7 @@ public class RenderPlayerHelper
 		float f6 = MathHelper.sin(f1 * (float) Math.PI);
 		GlStateManager.rotate(f * f6 * 70.0F, 0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(f * f5 * -20.0F, 0.0F, 0.0F, 1.0F);
-		AbstractClientPlayer abstractclientplayer = Minecraft.getMinecraft().thePlayer;
+		AbstractClientPlayer abstractclientplayer = Minecraft.getMinecraft().player;
 
 		GlStateManager.scale(0.78F, 0.78F, 0.78F);
 
@@ -151,7 +151,7 @@ public class RenderPlayerHelper
 
 		GlStateManager.translate(0.07F, -0.018F, -0.035F);
 
-		String skinType = DefaultPlayerSkin.getSkinType(Minecraft.getMinecraft().thePlayer.getUniqueID());
+		String skinType = DefaultPlayerSkin.getSkinType(Minecraft.getMinecraft().player.getUniqueID());
 
 		GlStateManager.rotate(f * 120.0F, 0.0F, 0.0F, 1.0F);
 		GlStateManager.rotate(200.0F, 1.0F, 0.0F, 0.0F);
@@ -221,7 +221,7 @@ public class RenderPlayerHelper
 		int i = p_187453_1_ == EnumHandSide.RIGHT ? 1 : -1;
 		float f = MathHelper.sin(p_187453_2_ * p_187453_2_ * (float) Math.PI);
 		GlStateManager.rotate((float) i * (45.0F + f * -20.0F), 0.0F, 1.0F, 0.0F);
-		float f1 = MathHelper.sin(MathHelper.sqrt_float(p_187453_2_) * (float) Math.PI);
+		float f1 = MathHelper.sin(MathHelper.sqrt(p_187453_2_) * (float) Math.PI);
 		GlStateManager.rotate((float) i * f1 * -20.0F, 0.0F, 0.0F, 1.0F);
 		GlStateManager.rotate(f1 * -80.0F, 1.0F, 0.0F, 0.0F);
 		GlStateManager.rotate((float) i * -45.0F, 0.0F, 1.0F, 0.0F);

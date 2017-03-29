@@ -75,7 +75,7 @@ public class EntityPhyg extends EntityFlyingAnimal
 	@Override
 	public EntityAgeable createChild(EntityAgeable ageable)
 	{
-		return new EntityPhyg(this.worldObj);
+		return new EntityPhyg(this.world);
 	}
 
 	@Override

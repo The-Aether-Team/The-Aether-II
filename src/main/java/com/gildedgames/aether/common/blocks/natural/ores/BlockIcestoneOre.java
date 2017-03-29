@@ -29,6 +29,6 @@ public class BlockIcestoneOre extends BlockAetherOre
 	@Override
 	protected int getUnmodifiedExpDrop(Random rand)
 	{
-		return MathHelper.getRandomIntegerInRange(rand, 0, 1);
+		return MathHelper.getInt(rand, 0, 1);
 	}
 }

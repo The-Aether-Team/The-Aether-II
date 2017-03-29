@@ -26,7 +26,7 @@ public class AIRepairProductionLines extends EntityAI<EntityLiving>
 	@Override
 	public void startExecuting()
 	{
-		List<EntityProductionLine> entityList = this.entity().worldObj.getEntitiesWithinAABB(EntityProductionLine.class, this.entity().getEntityBoundingBox().expand(50.0D, 50.0D, 50.0D));
+		List<EntityProductionLine> entityList = this.entity().world.getEntitiesWithinAABB(EntityProductionLine.class, this.entity().getEntityBoundingBox().expand(50.0D, 50.0D, 50.0D));
 
 		if (entityList.size() > 0)
 		{

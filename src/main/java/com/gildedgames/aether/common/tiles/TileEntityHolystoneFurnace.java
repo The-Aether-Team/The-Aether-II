@@ -96,6 +96,7 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 		}
 	}
 
+	@Override
 	public void setInventorySlotContents(int index, ItemStack stack)
 	{
 		boolean isEqual = stack != null && stack.isItemEqual(this.containedItemStacks[index]) &&
@@ -128,6 +129,7 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 		return this.customName != null && this.customName.length() > 0;
 	}
 
+	@Override
 	public void readFromNBT(NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
@@ -159,6 +161,7 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 		}
 	}
 
+	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
@@ -215,13 +218,13 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 			this.burnTime--;
 		}
 
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			if (!this.isBurning() && (this.containedItemStacks[1] == null || this.containedItemStacks[0] == null))
 			{
 				if (!this.isBurning() && this.cookTime > 0)
 				{
-					this.cookTime = MathHelper.clamp_int(this.cookTime - 2, 0, this.totalCookTime);
+					this.cookTime = MathHelper.clamp(this.cookTime - 2, 0, this.totalCookTime);
 				}
 			}
 			else
@@ -273,13 +276,13 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 			{
 				isDirty = true;
 
-				IBlockState state = this.worldObj.getBlockState(this.pos);
+				IBlockState state = this.world.getBlockState(this.pos);
 
-				this.worldObj.setBlockState(this.pos, state
+				this.world.setBlockState(this.pos, state
 						.withProperty(BlockHolystoneFurnace.PROPERTY_IS_LIT, this.isBurning()));
 
 				this.validate();
-				this.worldObj.setTileEntity(this.pos, this);
+				this.world.setTileEntity(this.pos, this);
 			}
 		}
 
@@ -356,9 +359,10 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 		}
 	}
 
-	public boolean isUseableByPlayer(EntityPlayer player)
+	@Override
+	public boolean isUsableByPlayer(EntityPlayer player)
 	{
-		return this.worldObj.getTileEntity(this.pos) == this &&
+		return this.world.getTileEntity(this.pos) == this &&
 				player.getDistanceSq(
 						(double) this.pos.getX() + 0.5D,
 						(double) this.pos.getY() + 0.5D,
@@ -366,29 +370,35 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 				) <= 64.0D;
 	}
 
+	@Override
 	public void openInventory(EntityPlayer player)
 	{
 	}
 
+	@Override
 	public void closeInventory(EntityPlayer player)
 	{
 	}
 
+	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
 		return index != 2 && (index != 1 || TileEntityFurnace.isItemFuel(stack) || SlotFurnaceFuel.isBucket(stack));
 	}
 
+	@Override
 	public int[] getSlotsForFace(EnumFacing side)
 	{
 		return side == EnumFacing.DOWN ? slotsBottom : (side == EnumFacing.UP ? slotsTop : slotsSides);
 	}
 
+	@Override
 	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction)
 	{
 		return this.isItemValidForSlot(index, itemStackIn);
 	}
 
+	@Override
 	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction)
 	{
 		if (direction == EnumFacing.DOWN && index == 1)
@@ -404,6 +414,7 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 		return true;
 	}
 
+	@Override
 	public String getGuiID()
 	{
 		return "minecraft:furnace";

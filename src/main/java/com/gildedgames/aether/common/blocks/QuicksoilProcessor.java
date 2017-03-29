@@ -26,7 +26,7 @@ public class QuicksoilProcessor
 	{
 		final Entity entity = event.getEntity();
 
-		List<AxisAlignedBB> boxes = entity.worldObj.getCollisionBoxes(entity.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
+		List<AxisAlignedBB> boxes = entity.world.getCollisionBoxes(entity.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
 
 		boolean onQuicksoil = false;
 
@@ -34,10 +34,10 @@ public class QuicksoilProcessor
 		{
 			if (box != null)
 			{
-				BlockPos pos = new BlockPos(MathHelper.floor_double(box.minX + 0.5D), MathHelper.floor_double(
-						box.minY + 0.5D), MathHelper.floor_double(box.minZ + 0.5D));
+				BlockPos pos = new BlockPos(MathHelper.floor(box.minX + 0.5D), MathHelper.floor(
+						box.minY + 0.5D), MathHelper.floor(box.minZ + 0.5D));
 
-				Block block = entity.worldObj.getBlockState(pos).getBlock();
+				Block block = entity.world.getBlockState(pos).getBlock();
 
 				if (block == BlocksAether.quicksoil)
 				{

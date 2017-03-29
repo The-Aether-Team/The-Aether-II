@@ -101,18 +101,18 @@ public class EntityProductionLine extends EntityCreature
 
 		this.spawningTimer.tick();
 
-		if (!this.broken && !this.worldObj.isRemote && !this.isDead && this.spawningTimer.isMultipleOfTicks(60))
+		if (!this.broken && !this.world.isRemote && !this.isDead && this.spawningTimer.isMultipleOfTicks(60))
 		{
 			if (this.spawnedUUIDs.size() < 3)
 			{
-				Entity entity = DungeonDefinitions.SLIDERS_LABYRINTH.createRandomMob(this.worldObj, this.worldObj.rand);
+				Entity entity = DungeonDefinitions.SLIDERS_LABYRINTH.createRandomMob(this.world, this.world.rand);
 
 				int scatterX = this.rand.nextBoolean() ? 1 : -1;
 				int scatterZ = this.rand.nextBoolean() ? 1 : -1;
 
 				entity.setPosition(this.posX + scatterX, this.posY, this.posZ + scatterZ);
 
-				this.worldObj.spawnEntityInWorld(entity);
+				this.world.spawnEntity(entity);
 
 				this.spawnedUUIDs.add(entity.getUniqueID());
 			}
@@ -122,7 +122,7 @@ public class EntityProductionLine extends EntityCreature
 
 				for (UUID uuid : this.spawnedUUIDs)
 				{
-					Entity entity = EntityUtil.getEntityFromUUID(this.worldObj, uuid);
+					Entity entity = EntityUtil.getEntityFromUUID(this.world, uuid);
 
 					if (entity == null || entity.isDead)
 					{

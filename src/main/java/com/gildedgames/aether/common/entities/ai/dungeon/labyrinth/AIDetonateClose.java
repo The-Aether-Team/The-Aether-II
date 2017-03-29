@@ -64,7 +64,7 @@ public class AIDetonateClose extends EntityAI<EntityLiving>
 
 			this.entity().setDead();
 
-			this.entity().worldObj.newExplosion(this.entity(), this.entity().posX, this.entity().posY, this.entity().posZ, 2, false, false);
+			this.entity().world.newExplosion(this.entity(), this.entity().posX, this.entity().posY, this.entity().posZ, 2, false, false);
 		}
 	}
 

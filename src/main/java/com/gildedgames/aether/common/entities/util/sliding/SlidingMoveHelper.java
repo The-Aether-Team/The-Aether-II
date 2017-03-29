@@ -51,8 +51,8 @@ public class SlidingMoveHelper extends EntityMoveHelper
 	public double calculateDistanceToSlide(double x, double y, double z)
 	{
 		Vec3d diff = new Vec3d(
-				x - MathHelper.floor_double(this.entity.posX),
-				y - MathHelper.floor_double(this.entity.posY), z - MathHelper.floor_double(this.entity.posZ));
+				x - MathHelper.floor(this.entity.posX),
+				y - MathHelper.floor(this.entity.posY), z - MathHelper.floor(this.entity.posZ));
 
 		double distanceToPlayer =
 				(
@@ -75,7 +75,7 @@ public class SlidingMoveHelper extends EntityMoveHelper
 	{
 		boolean collideUp = false;
 
-		List<AxisAlignedBB> boxes = this.entity.worldObj.getCollisionBoxes(this.entity.getEntityBoundingBox().offset(0.0D,
+		List<AxisAlignedBB> boxes = this.entity.world.getCollisionBoxes(this.entity.getEntityBoundingBox().offset(0.0D,
 				this.entity.height + 0.1D, 0.0D));
 
 		for (AxisAlignedBB box : boxes)
@@ -94,7 +94,7 @@ public class SlidingMoveHelper extends EntityMoveHelper
 	{
 		boolean collidingDown = false;
 
-		List<AxisAlignedBB> boxes = this.entity.worldObj.getCollisionBoxes(this.entity.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
+		List<AxisAlignedBB> boxes = this.entity.world.getCollisionBoxes(this.entity.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
 
 		for (AxisAlignedBB box : boxes)
 		{
@@ -112,8 +112,8 @@ public class SlidingMoveHelper extends EntityMoveHelper
 	{
 		Direction direction = Direction.NONE;
 		Vec3d diff = new Vec3d(
-				x - MathHelper.floor_double(this.entity.posX),
-				y - MathHelper.floor_double(this.entity.posY), z - MathHelper.floor_double(this.entity.posZ));
+				x - MathHelper.floor(this.entity.posX),
+				y - MathHelper.floor(this.entity.posY), z - MathHelper.floor(this.entity.posZ));
 
 		boolean willCollideUp = this.willCollideUp();
 		boolean willCollideDown = this.willCollideDown();

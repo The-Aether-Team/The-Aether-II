@@ -41,23 +41,23 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	@Override
 	public void update()
 	{
-		if (this.worldObj.isRemote)
+		if (this.world.isRemote)
 		{
 			return;
 		}
 
 		// TODO: Re-implement
 
-		final IBlockState state = this.worldObj.getBlockState(this.pos);
+		final IBlockState state = this.world.getBlockState(this.pos);
 
 		if (state.getBlock() instanceof BlockIncubator && state.getValue(BlockIncubator.PROPERTY_IS_LIT) != this.isHeating())
 		{
 			this.markDirty();
 
-			this.worldObj.setBlockState(this.pos, state.withProperty(BlockIncubator.PROPERTY_IS_LIT, this.isHeating()));
+			this.world.setBlockState(this.pos, state.withProperty(BlockIncubator.PROPERTY_IS_LIT, this.isHeating()));
 
 			this.validate();
-			this.worldObj.setTileEntity(this.pos, this);
+			this.world.setTileEntity(this.pos, this);
 		}
 	}
 
@@ -199,9 +199,9 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player)
+	public boolean isUsableByPlayer(EntityPlayer player)
 	{
-		return this.worldObj.getTileEntity(this.pos) == this
+		return this.world.getTileEntity(this.pos) == this
 				&& player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D)
 				<= 64.0D;
 	}
@@ -261,9 +261,9 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
 	public void sync()
 	{
-		IBlockState state = this.worldObj.getBlockState(this.pos);
+		IBlockState state = this.world.getBlockState(this.pos);
 
-		this.worldObj.notifyBlockUpdate(this.pos, state, state, 3);
+		this.world.notifyBlockUpdate(this.pos, state, state, 3);
 
 		this.markDirty();
 	}

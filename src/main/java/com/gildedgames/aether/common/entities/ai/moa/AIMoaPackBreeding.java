@@ -30,7 +30,7 @@ public class AIMoaPackBreeding extends EntityAIBase
 
 	public AIMoaPackBreeding(EntityMoa moa, float moveSpeed)
 	{
-		this.world = moa.worldObj;
+		this.world = moa.world;
 		this.moveSpeed = moveSpeed;
 
 		this.moa = moa;

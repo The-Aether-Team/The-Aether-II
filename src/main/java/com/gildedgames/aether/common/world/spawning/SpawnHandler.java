@@ -214,8 +214,8 @@ public class SpawnHandler implements NBT
 
 		for (EntityPlayer player : players)
 		{
-			final int chunkX = MathHelper.floor_double(player.posX) >> 4;
-			final int chunkZ = MathHelper.floor_double(player.posZ) >> 4;
+			final int chunkX = MathHelper.floor(player.posX) >> 4;
+			final int chunkZ = MathHelper.floor(player.posZ) >> 4;
 
 			int centerAreaX = chunkX / this.chunkArea;
 			int centerAreaZ = chunkZ / this.chunkArea;
@@ -342,7 +342,7 @@ public class SpawnHandler implements NBT
 					float posX = groupPosX + scatterX;
 					float posZ = groupPosZ + scatterZ;
 
-					int posY = entry.getPositionSelector().getPosY(world, MathHelper.floor_float(posX), MathHelper.floor_float(posZ));
+					int posY = entry.getPositionSelector().getPosY(world, MathHelper.floor(posX), MathHelper.floor(posZ));
 
 					BlockPos spawnAt = new BlockPos(posX, posY, posZ);
 
@@ -401,7 +401,7 @@ public class SpawnHandler implements NBT
 
 					entity.setLocationAndAngles(posX + 0.5F, posY, posZ + 0.5F, world.rand.nextFloat() * 360.0F, 0.0F);
 
-					world.spawnEntityInWorld(entity);
+					world.spawnEntity(entity);
 
 					if (world instanceof WorldServer)
 					{

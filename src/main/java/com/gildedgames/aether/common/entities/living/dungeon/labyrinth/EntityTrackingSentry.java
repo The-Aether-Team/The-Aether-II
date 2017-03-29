@@ -70,7 +70,7 @@ public class EntityTrackingSentry extends EntityAetherMob
 			this.timer.reset();
 		}
 
-		if (this.worldObj.isRemote)
+		if (this.world.isRemote)
 		{
 			this.targetTasks.onUpdateTasks();
 

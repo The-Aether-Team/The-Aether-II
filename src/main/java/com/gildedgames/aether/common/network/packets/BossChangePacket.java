@@ -53,7 +53,7 @@ public class BossChangePacket implements IMessage
 		{
 			PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-			Entity entity = EntityUtil.getEntityFromUUID(player.worldObj, message.bossEntityUUID);
+			Entity entity = EntityUtil.getEntityFromUUID(player.world, message.bossEntityUUID);
 
 			if (entity instanceof IBoss)
 			{

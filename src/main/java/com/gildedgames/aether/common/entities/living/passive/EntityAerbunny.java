@@ -72,7 +72,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 	{
 		super.onUpdate();
 
-		if (this.worldObj.isRemote)
+		if (this.world.isRemote)
 		{
 			if (this.puffiness > 0)
 			{
@@ -84,9 +84,9 @@ public class EntityAerbunny extends EntityAetherAnimal
 				BlockPos pos = this.getPosition();
 
 				// Make sure we only spawn particles when it's jumping off a block
-				if (this.worldObj.isBlockFullCube(pos.down()))
+				if (this.world.isBlockFullCube(pos.down()))
 				{
-					AetherCore.PROXY.spawnJumpParticles(this.worldObj, this.posX, pos.getY(), this.posZ, 0.6D, 6);
+					AetherCore.PROXY.spawnJumpParticles(this.world, this.posX, pos.getY(), this.posZ, 0.6D, 6);
 				}
 
 				this.puffiness = 10;
@@ -129,7 +129,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 		{
 			if (!this.isRiding() && player.getPassengers().size() <= 0)
 			{
-				this.worldObj.playSound(player, player.getPosition(), SoundsAether.aerbunny_lift, SoundCategory.NEUTRAL, 1.0F,
+				this.world.playSound(player, player.getPosition(), SoundsAether.aerbunny_lift, SoundCategory.NEUTRAL, 1.0F,
 						0.8F + (this.rand.nextFloat() * 0.5F));
 
 				this.startRiding(player, true);
@@ -177,7 +177,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 	}
 
 	@Override
-	protected PathNavigate getNewNavigator(World worldIn)
+	protected PathNavigate createNavigator(World worldIn)
 	{
 		return new AerbunnyNavigator(this, worldIn);
 	}
@@ -185,7 +185,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 	@Override
 	public EntityAgeable createChild(EntityAgeable ageable)
 	{
-		return new EntityAerbunny(this.worldObj);
+		return new EntityAerbunny(this.world);
 	}
 
 	private class AerbunnyJumpHelper extends EntityJumpHelper

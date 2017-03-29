@@ -26,7 +26,7 @@ public class TabEquipment implements ITab
 	{
 		BlockPos pos = player.getPosition();
 
-		player.openGui(AetherCore.MOD_ID, AetherGuiHandler.INVENTORY_EQUIPMENT_ID, player.worldObj, pos.getX(), pos.getY(), pos.getZ());
+		player.openGui(AetherCore.MOD_ID, AetherGuiHandler.INVENTORY_EQUIPMENT_ID, player.world, pos.getX(), pos.getY(), pos.getZ());
 	}
 
 	@Override

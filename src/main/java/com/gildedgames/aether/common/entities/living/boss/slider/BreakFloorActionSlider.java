@@ -53,11 +53,11 @@ public class BreakFloorActionSlider implements BossStageAction<EntitySlider>
 
 				for (BlockPos pos : BlockPos.getAllInBox(min, max))
 				{
-					IBlockState state = entity.worldObj.getBlockState(pos);
+					IBlockState state = entity.world.getBlockState(pos);
 
 					if (entity.getRNG().nextInt(5) == 0 && state != null && state.getBlock() == BlocksAether.unstable_labyrinth_capstone)
 					{
-						entity.worldObj.destroyBlock(pos, false);
+						entity.world.destroyBlock(pos, false);
 					}
 				}
 			}
@@ -69,11 +69,11 @@ public class BreakFloorActionSlider implements BossStageAction<EntitySlider>
 
 			for (BlockPos pos : BlockPos.getAllInBox(min, max))
 			{
-				IBlockState state = entity.worldObj.getBlockState(pos);
+				IBlockState state = entity.world.getBlockState(pos);
 
 				if (state != null && state.getBlock() == BlocksAether.unstable_labyrinth_capstone)
 				{
-					entity.worldObj.destroyBlock(pos, false);
+					entity.world.destroyBlock(pos, false);
 				}
 			}
 		}

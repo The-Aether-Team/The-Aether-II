@@ -38,7 +38,7 @@ public class DungeonModule extends PlayerAetherModule
 
 					if (this.chatTimer.getTicksPassed() >= 160)
 					{
-						event.getPlayer().addChatComponentMessage(new TextComponentString("Hmm... Some strange force is preventing me from placing blocks."));
+						event.getPlayer().sendStatusMessage(new TextComponentString("Hmm... Some strange force is preventing me from placing blocks."));
 
 						this.chatTimer.reset();
 					}

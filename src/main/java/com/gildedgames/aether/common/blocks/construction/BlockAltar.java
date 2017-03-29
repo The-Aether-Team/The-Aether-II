@@ -44,8 +44,8 @@ public class BlockAltar extends Block implements ITileEntityProvider
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-			EntityLivingBase placer)
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+			EntityLivingBase placer, ItemStack stack)
 	{
 		return this.getDefaultState().withProperty(PROPERTY_FACING, placer.getHorizontalFacing());
 	}
@@ -97,7 +97,7 @@ public class BlockAltar extends Block implements ITileEntityProvider
 
 					if (altar.getStackOnAltar() != null)
 					{
-						world.spawnEntityInWorld(altar.createEntityItemAboveAltar(altar.getStackOnAltar()));
+						world.spawnEntity(altar.createEntityItemAboveAltar(altar.getStackOnAltar()));
 					}
 
 					altar.setStackOnAltar(stack);
@@ -135,7 +135,7 @@ public class BlockAltar extends Block implements ITileEntityProvider
 
 		if (stack != null)
 		{
-			world.spawnEntityInWorld(altar.createEntityItemAboveAltar(stack));
+			world.spawnEntity(altar.createEntityItemAboveAltar(stack));
 		}
 	}
 

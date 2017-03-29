@@ -44,13 +44,13 @@ public class TileEntityPresent extends TileEntity
 
 		this.getPresentData().setStack(null);
 
-		double x2 = this.getPos().getX() + ((this.worldObj.rand.nextFloat() * radius) + (1.0F - radius) * 0.5D);
-		double y2 = this.getPos().getY() + ((this.worldObj.rand.nextFloat() * radius) + (1.0F - radius) * 0.5D);
-		double z2 = this.getPos().getZ() + ((this.worldObj.rand.nextFloat() * radius) + (1.0F - radius) * 0.5D);
+		double x2 = this.getPos().getX() + ((this.world.rand.nextFloat() * radius) + (1.0F - radius) * 0.5D);
+		double y2 = this.getPos().getY() + ((this.world.rand.nextFloat() * radius) + (1.0F - radius) * 0.5D);
+		double z2 = this.getPos().getZ() + ((this.world.rand.nextFloat() * radius) + (1.0F - radius) * 0.5D);
 
 		if (stack.getItem() instanceof ItemMonsterPlacer)
 		{
-			ItemMonsterPlacer.spawnCreature(this.worldObj, ItemMonsterPlacer.getEntityIdFromItem(stack), x2, y2, z2);
+			ItemMonsterPlacer.spawnCreature(this.world, ItemMonsterPlacer.getEntityIdFromItem(stack), x2, y2, z2);
 			return;
 		}
 
@@ -58,23 +58,23 @@ public class TileEntityPresent extends TileEntity
 
 		if (stack.getItem() == Item.getItemFromBlock(Blocks.TNT))
 		{
-			EntityTNTPrimed tnt = new EntityTNTPrimed(this.worldObj,
+			EntityTNTPrimed tnt = new EntityTNTPrimed(this.world,
 					this.getPos().getX() + 0.5D, this.getPos().getY() + 0.5D, this.getPos().getZ() + 0.5D, null);
 			tnt.setFuse(20);
 			entity = tnt;
 		}
 		else if (stack.getItem() == ItemsAether.sentry_vaultbox)
 		{
-			entity = new EntitySentryVaultbox(this.worldObj, x2, y2, z2);
+			entity = new EntitySentryVaultbox(this.world, x2, y2, z2);
 		}
 		else
 		{
-			EntityItem item = new EntityItem(this.worldObj, x2, y2, z2, stack);
+			EntityItem item = new EntityItem(this.world, x2, y2, z2, stack);
 			item.setPickupDelay(10);
 			entity = item;
 		}
 
-		this.worldObj.spawnEntityInWorld(entity);
+		this.world.spawnEntity(entity);
 	}
 
 	@Override
@@ -122,9 +122,9 @@ public class TileEntityPresent extends TileEntity
 
 	public void sync()
 	{
-		IBlockState state = this.worldObj.getBlockState(this.pos);
+		IBlockState state = this.world.getBlockState(this.pos);
 
-		this.worldObj.notifyBlockUpdate(this.pos, state, state, 3);
+		this.world.notifyBlockUpdate(this.pos, state, state, 3);
 
 		this.markDirty();
 	}

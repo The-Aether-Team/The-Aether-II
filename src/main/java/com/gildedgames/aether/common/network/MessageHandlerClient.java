@@ -14,7 +14,7 @@ public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMe
 	@SideOnly(Side.CLIENT)
 	public RES onMessage(REQ message, MessageContext ctx)
 	{
-		return this.onMessage(message, Minecraft.getMinecraft().thePlayer);
+		return this.onMessage(message, Minecraft.getMinecraft().player);
 	}
 
 	@SideOnly(Side.CLIENT)

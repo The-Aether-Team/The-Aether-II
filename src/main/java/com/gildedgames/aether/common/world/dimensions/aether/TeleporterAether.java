@@ -72,7 +72,7 @@ public class TeleporterAether extends Teleporter implements NBT
 	@Override
 	public void placeInPortal(Entity entity, float entityRotation)
 	{
-		this.previousWorld = entity.worldObj;
+		this.previousWorld = entity.getEntityWorld();
 
 		if (entity.dimension != this.worldServerInstance.provider.getDimension())
 		{
@@ -185,9 +185,9 @@ public class TeleporterAether extends Teleporter implements NBT
 	@Override
 	public boolean placeInExistingPortal(Entity entity, float entityRotation)
 	{
-		final int posX = MathHelper.floor_double(entity.posX);
-		final int posY = MathHelper.floor_double(entity.posY);
-		final int posZ = MathHelper.floor_double(entity.posZ);
+		final int posX = MathHelper.floor(entity.posX);
+		final int posY = MathHelper.floor(entity.posY);
+		final int posZ = MathHelper.floor(entity.posZ);
 
 		final BlockPosDimension previousPortal = this.getPortalPosition(this.previousWorld, posX, posY, posZ, false);
 
@@ -220,10 +220,10 @@ public class TeleporterAether extends Teleporter implements NBT
 	@Override
 	public boolean makePortal(Entity entity)
 	{
-		final World world = entity.worldObj;
+		final World world = entity.getEntityWorld();
 
-		int x = MathHelper.floor_double(entity.posX);
-		int z = MathHelper.floor_double(entity.posZ);
+		int x = MathHelper.floor(entity.posX);
+		int z = MathHelper.floor(entity.posZ);
 
 		int chunkX = x >> 4;
 		int chunkZ = z >> 4;
@@ -233,14 +233,14 @@ public class TeleporterAether extends Teleporter implements NBT
 		int attempts = 0;
 		final int maxAttempts = 250;
 
-		final EnumFacing outerDirection = EnumFacing.HORIZONTALS[entity.worldObj.rand.nextInt(4)];
+		final EnumFacing outerDirection = EnumFacing.HORIZONTALS[world.rand.nextInt(4)];
 		ChunkPos outerPosition = new ChunkPos(chunkX, chunkZ);
 
 		final boolean isWorldAether = this.worldServerInstance.provider.getDimensionType() == DimensionsAether.AETHER;
 
 		while (attempts < maxAttempts)
 		{
-			final EnumFacing outerPosFacing = entity.worldObj.rand.nextBoolean() ? outerDirection.rotateY() : outerDirection;
+			final EnumFacing outerPosFacing = world.rand.nextBoolean() ? outerDirection.rotateY() : outerDirection;
 
 			chunkX = outerPosition.chunkXPos + outerPosFacing.getFrontOffsetX();
 			chunkZ = outerPosition.chunkZPos + outerPosFacing.getFrontOffsetZ();
@@ -249,7 +249,7 @@ public class TeleporterAether extends Teleporter implements NBT
 
 			if (isWorldAether)
 			{
-				final IChunkProvider chunkProvider = entity.worldObj.getChunkProvider();
+				final IChunkProvider chunkProvider = world.getChunkProvider();
 
 				chunkProvider.provideChunk(chunkX, chunkZ);
 				this.markForPortals(chunkX, chunkZ);
@@ -293,9 +293,9 @@ public class TeleporterAether extends Teleporter implements NBT
 
 						if (hasFoundPosition)
 						{
-							final int posX = MathHelper.floor_double(entity.posX);
-							final int posY = MathHelper.floor_double(entity.posY);
-							final int posZ = MathHelper.floor_double(entity.posZ);
+							final int posX = MathHelper.floor(entity.posX);
+							final int posY = MathHelper.floor(entity.posY);
+							final int posZ = MathHelper.floor(entity.posZ);
 
 							final BlockPosDimension oldPortal = this.getPortalPosition(this.previousWorld, posX, posY,
 									posZ, true);

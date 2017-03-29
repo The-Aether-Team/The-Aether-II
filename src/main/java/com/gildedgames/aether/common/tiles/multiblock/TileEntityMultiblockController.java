@@ -32,10 +32,10 @@ public abstract class TileEntityMultiblockController extends TileEntitySynced im
 				continue;
 			}
 
-			this.worldObj.setBlockState(pos, this.dummy.getDefaultState(), 3);
-			this.worldObj.notifyBlockUpdate(pos, Blocks.AIR.getDefaultState(), this.dummy.getDefaultState(), 2);
+			this.world.setBlockState(pos, this.dummy.getDefaultState(), 3);
+			this.world.notifyBlockUpdate(pos, Blocks.AIR.getDefaultState(), this.dummy.getDefaultState(), 2);
 
-			TileEntityMultiblockDummy te = (TileEntityMultiblockDummy) this.worldObj.getTileEntity(pos);
+			TileEntityMultiblockDummy te = (TileEntityMultiblockDummy) this.world.getTileEntity(pos);
 			te.linkController(new BlockPos(this.pos));
 		}
 	}
@@ -47,15 +47,15 @@ public abstract class TileEntityMultiblockController extends TileEntitySynced im
 		{
 			if (this.doesControllerOwn(pos))
 			{
-				this.worldObj.removeTileEntity(pos);
-				this.worldObj.setBlockToAir(pos);
+				this.world.removeTileEntity(pos);
+				this.world.setBlockToAir(pos);
 			}
 		}
 	}
 
 	public boolean doesControllerOwn(BlockPos pos)
 	{
-		TileEntity entity = this.worldObj.getTileEntity(pos);
+		TileEntity entity = this.world.getTileEntity(pos);
 
 		if (entity instanceof TileEntityMultiblockController)
 		{
@@ -73,9 +73,9 @@ public abstract class TileEntityMultiblockController extends TileEntitySynced im
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public net.minecraft.util.math.AxisAlignedBB getRenderBoundingBox()
+	public AxisAlignedBB getRenderBoundingBox()
 	{
-		Iterable<BlockPos.MutableBlockPos> itPos = this.block.getMultiblockVolumeIterator(this.pos, this.worldObj);
+		Iterable<BlockPos.MutableBlockPos> itPos = this.block.getMultiblockVolumeIterator(this.pos, this.world);
 
 		BlockPos min = this.pos;
 		BlockPos max = this.pos;
@@ -85,7 +85,7 @@ public abstract class TileEntityMultiblockController extends TileEntitySynced im
 			max = pos;
 		}
 
-		AxisAlignedBB bb = new net.minecraft.util.math.AxisAlignedBB(min, max.add(1, 1, 1));
+		AxisAlignedBB bb = new AxisAlignedBB(min, max.add(1, 1, 1));
 
 		return bb;
 	}

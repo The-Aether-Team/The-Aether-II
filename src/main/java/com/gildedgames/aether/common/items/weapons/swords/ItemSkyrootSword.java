@@ -56,7 +56,7 @@ public class ItemSkyrootSword extends ItemAetherSword
 				{
 					EntityItem item = new EntityItem(player.getEntityWorld(), player.posX, player.posY, player.posZ, stack);
 
-					player.getEntityWorld().spawnEntityInWorld(item);
+					player.getEntityWorld().spawnEntity(item);
 				}
 			}
 		}

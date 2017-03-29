@@ -163,8 +163,8 @@ public class BlockLabyrinthChest extends BlockContainer
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-			EntityLivingBase placer)
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+		EntityLivingBase placer, ItemStack stack)
 	{
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
@@ -173,7 +173,7 @@ public class BlockLabyrinthChest extends BlockContainer
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
 		EnumFacing enumfacing = EnumFacing.getHorizontal(
-				MathHelper.floor_double((double) (placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3).getOpposite();
+				MathHelper.floor((double) (placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3).getOpposite();
 		BlockPos blockpos = pos.north();
 		BlockPos blockpos1 = pos.south();
 		BlockPos blockpos2 = pos.west();
@@ -249,7 +249,7 @@ public class BlockLabyrinthChest extends BlockContainer
 
 				mimic.setPositionAndUpdate(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D);
 
-				world.spawnEntityInWorld(mimic);
+				world.spawnEntity(mimic);
 
 				world.setBlockToAir(pos);
 

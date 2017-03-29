@@ -59,8 +59,8 @@ public class SlidingHorizontalMoveHelper extends EntityMoveHelper
 	public double calculateDistanceToSlide(double x, double y, double z)
 	{
 		Vec3d diff = new Vec3d(
-				x - MathHelper.floor_double(this.entity.posX),
-				y - MathHelper.floor_double(this.entity.posY), z - MathHelper.floor_double(this.entity.posZ));
+				x - MathHelper.floor(this.entity.posX),
+				y - MathHelper.floor(this.entity.posY), z - MathHelper.floor(this.entity.posZ));
 
 		double distanceToPlayer =
 				(
@@ -83,7 +83,7 @@ public class SlidingHorizontalMoveHelper extends EntityMoveHelper
 
 		double length = this.entity.getEntityBoundingBox().maxZ - this.entity.getEntityBoundingBox().minZ;
 
-		List<AxisAlignedBB> boxes = this.entity.worldObj.getCollisionBoxes(this.entity.getEntityBoundingBox().offset(0.0D, 0.0D,
+		List<AxisAlignedBB> boxes = this.entity.world.getCollisionBoxes(this.entity.getEntityBoundingBox().offset(0.0D, 0.0D,
 				length + 0.1D));
 
 		for (AxisAlignedBB box : boxes)
@@ -102,7 +102,7 @@ public class SlidingHorizontalMoveHelper extends EntityMoveHelper
 	{
 		boolean collidingDown = false;
 
-		List<AxisAlignedBB> boxes = this.entity.worldObj.getCollisionBoxes(this.entity.getEntityBoundingBox().offset(-0.1D, 0.0D, 0.0D));
+		List<AxisAlignedBB> boxes = this.entity.world.getCollisionBoxes(this.entity.getEntityBoundingBox().offset(-0.1D, 0.0D, 0.0D));
 
 		for (AxisAlignedBB box : boxes)
 		{
@@ -120,8 +120,8 @@ public class SlidingHorizontalMoveHelper extends EntityMoveHelper
 	{
 		Direction direction = Direction.NONE;
 		Vec3d diff = new Vec3d(
-				x - MathHelper.floor_double(this.entity.posX),
-				y - MathHelper.floor_double(this.entity.posY), z - MathHelper.floor_double(this.entity.posZ));
+				x - MathHelper.floor(this.entity.posX),
+				y - MathHelper.floor(this.entity.posY), z - MathHelper.floor(this.entity.posZ));
 
 		boolean willCollideLeft = this.willCollideForward();
 		boolean willCollideForward = this.willCollideLeft();
@@ -199,7 +199,7 @@ public class SlidingHorizontalMoveHelper extends EntityMoveHelper
 			return;
 		}
 
-		Vec3d pos = new Vec3d(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ));
+		Vec3d pos = new Vec3d(MathHelper.floor(this.posX), MathHelper.floor(this.posY), MathHelper.floor(this.posZ));
 
 		if (this.moving)
 		{
@@ -301,8 +301,8 @@ public class SlidingHorizontalMoveHelper extends EntityMoveHelper
 		else if (pos.distanceTo(this.entity.getPositionVector())
 				< this.entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).getAttributeValue())
 		{
-			this.direction = this.calculateDirection(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ));
-			this.distanceToSlide = this.calculateDistanceToSlide(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ));
+			this.direction = this.calculateDirection(MathHelper.floor(this.posX), MathHelper.floor(this.posY), MathHelper.floor(this.posZ));
+			this.distanceToSlide = this.calculateDistanceToSlide(MathHelper.floor(this.posX), MathHelper.floor(this.posY), MathHelper.floor(this.posZ));
 
 			this.moving = true;
 

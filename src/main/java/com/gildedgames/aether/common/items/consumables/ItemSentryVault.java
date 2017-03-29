@@ -40,7 +40,8 @@ public class ItemSentryVault extends Item
 		{
 			EntitySentryVaultbox sentry_vault = new EntitySentryVaultbox(world, player);
 			sentry_vault.setHeadingFromThrower(player, player.rotationPitch, player.rotationYaw, 0.0F, 1.5F, 1.0F);
-			world.spawnEntityInWorld(sentry_vault);
+
+			world.spawnEntity(sentry_vault);
 		}
 
 		player.addStat(StatList.getObjectUseStats(this));

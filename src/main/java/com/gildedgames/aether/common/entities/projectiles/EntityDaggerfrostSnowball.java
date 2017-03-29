@@ -42,10 +42,10 @@ public class EntityDaggerfrostSnowball extends EntitySnowball
 
 		for (int i = 0; i < 8; ++i)
 		{
-			this.worldObj.spawnParticle(EnumParticleTypes.SNOWBALL, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+			this.world.spawnParticle(EnumParticleTypes.SNOWBALL, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
 		}
 
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			this.setDead();
 		}
