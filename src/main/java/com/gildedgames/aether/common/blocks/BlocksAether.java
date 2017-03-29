@@ -263,9 +263,9 @@ public class BlocksAether
 			skyroot_frame_crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState().withProperty(BlockCrudeScatterglass.PROPERTY_VARIANT, BlockCrudeScatterglass.SKYROOT_FRAME)),
 			arkenium_frame_crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState().withProperty(BlockCrudeScatterglass.PROPERTY_VARIANT, BlockCrudeScatterglass.ARKENIUM_FRAME));
 
-	public static final Block skyroot_twigs = new BlockFloorObject(Material.PLANTS, () -> new ItemStack(ItemsAether.skyroot_stick)).setSoundType(SoundType.WOOD);
+	public static final Block skyroot_twigs = new BlockFloorObject(Material.PLANTS);
 
-	public static final Block holystone_rock = new BlockFloorObject(Material.PLANTS, () -> new ItemStack(BlocksAether.holystone)).setSoundType(SoundType.STONE);
+	public static final Block holystone_rock = new BlockFloorObject(Material.ROCK);
 
 	public static BlockCustomCarpet cloudwool_carpet = new BlockCustomCarpet(BlocksAether.cloudwool_block.getDefaultState());
 

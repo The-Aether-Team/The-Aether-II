@@ -24,13 +24,9 @@ public class BlockFloorObject extends BlockCustom
 
 	private static final AxisAlignedBB AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
 
-	private final Supplier<ItemStack> droppedStack;
-
-	public BlockFloorObject(Material material, Supplier<ItemStack> droppedStack)
+	public BlockFloorObject(Material material)
 	{
 		super(material);
-
-		this.droppedStack = droppedStack;
 	}
 
 	@Override
@@ -121,8 +117,6 @@ public class BlockFloorObject extends BlockCustom
 	protected void invalidateBlock(World world, BlockPos pos)
 	{
 		world.setBlockToAir(pos);
-
-		Block.spawnAsEntity(world, pos, this.droppedStack.get());
 	}
 
 }
