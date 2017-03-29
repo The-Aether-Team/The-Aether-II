@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.world.dimensions.aether.island.logic;
 
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.dimensions.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.noise.OpenSimplexNoise;

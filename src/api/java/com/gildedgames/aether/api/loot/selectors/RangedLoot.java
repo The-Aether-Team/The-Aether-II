@@ -8,9 +8,11 @@ import java.util.Random;
 public class RangedLoot implements Loot
 {
 
-	private ItemStack stack;
+	private final ItemStack stack;
 
-	private int min, max;
+	private final int min;
+
+	private final int max;
 
 	public RangedLoot(ItemStack stack, int min, int max)
 	{

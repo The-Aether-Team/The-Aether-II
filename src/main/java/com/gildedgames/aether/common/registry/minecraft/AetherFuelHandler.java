@@ -12,7 +12,7 @@ public class AetherFuelHandler implements IFuelHandler
 	@Override
 	public int getBurnTime(ItemStack fuel)
 	{
-		ArrayList<Item> fuelTools = new ArrayList<Item>();
+		ArrayList<Item> fuelTools = new ArrayList<>();
 		fuelTools.add(ItemsAether.skyroot_axe);
 		fuelTools.add(ItemsAether.skyroot_pickaxe);
 		fuelTools.add(ItemsAether.skyroot_shovel);

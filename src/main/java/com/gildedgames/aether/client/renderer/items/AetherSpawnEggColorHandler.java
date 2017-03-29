@@ -12,7 +12,7 @@ public class AetherSpawnEggColorHandler implements IItemColor
 	@Override
 	public int getColorFromItemstack(ItemStack stack, int tintIndex)
 	{
-		if (stack != null && stack.getItem() instanceof ItemAetherSpawnEgg)
+		if (stack.getItem() instanceof ItemAetherSpawnEgg)
 		{
 			AetherSpawnEggInfo info = EntitiesAether.entityEggs.get(ItemAetherSpawnEgg.getEntityIdFromItem(stack));
 

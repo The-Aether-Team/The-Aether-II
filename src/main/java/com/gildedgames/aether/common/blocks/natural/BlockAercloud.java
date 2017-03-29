@@ -120,7 +120,7 @@ public class BlockAercloud extends Block implements IBlockVariants
 				@Override
 				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
 				{
-					EnumFacing side = (EnumFacing) state.getValue(PROPERTY_FACING);
+					EnumFacing side = state.getValue(PROPERTY_FACING);
 
 					entity.motionX = side.getFrontOffsetX() * 1.2D;
 					entity.motionZ = side.getFrontOffsetZ() * 1.2D;
@@ -129,7 +129,7 @@ public class BlockAercloud extends Block implements IBlockVariants
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", COLD_AERCLOUD, BLUE_AERCLOUD, GREEN_AERCLOUD, GOLDEN_AERCLOUD, STORM_AERCLOUD, PURPLE_AERCLOUD);
 
-	public static final PropertyEnum PROPERTY_FACING = PropertyEnum.create("facing", EnumFacing.class);
+	public static final PropertyEnum<EnumFacing> PROPERTY_FACING = PropertyEnum.create("facing", EnumFacing.class);
 
 	public BlockAercloud()
 	{
@@ -206,7 +206,7 @@ public class BlockAercloud extends Block implements IBlockVariants
 			float y = pos.getY() + (rand.nextFloat() * 0.7f) + 0.15f;
 			float z = pos.getZ() + (rand.nextFloat() * 0.7f) + 0.15f;
 
-			EnumFacing facing = (EnumFacing) state.getValue(PROPERTY_FACING);
+			EnumFacing facing = state.getValue(PROPERTY_FACING);
 
 			float motionX = facing.getFrontOffsetX() * ((rand.nextFloat() * 0.01f) + 0.05f);
 			float motionZ = facing.getFrontOffsetZ() * ((rand.nextFloat() * 0.01f) + 0.05f);
@@ -257,8 +257,8 @@ public class BlockAercloud extends Block implements IBlockVariants
 	{
 		if (meta >= PURPLE_AERCLOUD.getMeta())
 		{
-			return this.getDefaultState().withProperty(PROPERTY_VARIANT, PURPLE_AERCLOUD).withProperty(PROPERTY_FACING, EnumFacing.getHorizontal(
-					meta - PURPLE_AERCLOUD.getMeta()));
+			return this.getDefaultState().withProperty(PROPERTY_VARIANT, PURPLE_AERCLOUD)
+					.withProperty(PROPERTY_FACING, EnumFacing.getHorizontal(meta - PURPLE_AERCLOUD.getMeta()));
 		}
 
 		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
@@ -269,7 +269,7 @@ public class BlockAercloud extends Block implements IBlockVariants
 	{
 		if (state.getValue(PROPERTY_VARIANT) == PURPLE_AERCLOUD)
 		{
-			return PURPLE_AERCLOUD.getMeta() + ((EnumFacing) state.getValue(PROPERTY_FACING)).getHorizontalIndex();
+			return PURPLE_AERCLOUD.getMeta() + state.getValue(PROPERTY_FACING).getHorizontalIndex();
 		}
 
 		return state.getValue(PROPERTY_VARIANT).getMeta();

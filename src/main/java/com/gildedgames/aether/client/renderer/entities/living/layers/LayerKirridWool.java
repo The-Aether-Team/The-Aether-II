@@ -6,10 +6,9 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.living.passive.EntityKirrid;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-public class LayerKirridWool implements LayerRenderer
+public class LayerKirridWool implements LayerRenderer<EntityKirrid>
 {
 	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/kirrid/kirrid_wool.png");
 
@@ -23,11 +22,9 @@ public class LayerKirridWool implements LayerRenderer
 	}
 
 	@Override
-	public void doRenderLayer(EntityLivingBase entity, float p_177141_2_, float p_177141_3_, float p_177141_4_, float p_177141_5_,
+	public void doRenderLayer(EntityKirrid ram, float p_177141_2_, float p_177141_3_, float p_177141_4_, float p_177141_5_,
 			float p_177141_6_, float p_177141_7_, float p_177141_8_)
 	{
-		EntityKirrid ram = (EntityKirrid) entity;
-
 		if (!ram.getSheared() && !ram.isInvisible())
 		{
 			GlStateManager.scale(1.01F, 1.01F, 1.01F);

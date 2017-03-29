@@ -6,10 +6,9 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.living.dungeon.labyrinth.EntityBattleGolem;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-public class LayerBombs implements LayerRenderer
+public class LayerBombs implements LayerRenderer<EntityBattleGolem>
 {
 	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/battle_golem/battle_golem.png");
 
@@ -33,11 +32,9 @@ public class LayerBombs implements LayerRenderer
 	}
 
 	@Override
-	public void doRenderLayer(EntityLivingBase entity, float p_177141_2_, float p_177141_3_, float p_177141_4_, float p_177141_5_,
+	public void doRenderLayer(EntityBattleGolem golem, float p_177141_2_, float p_177141_3_, float p_177141_4_, float p_177141_5_,
 			float p_177141_6_, float p_177141_7_, float p_177141_8_)
 	{
-		EntityBattleGolem golem = (EntityBattleGolem) entity;
-
 		if (!golem.isInvisible())
 		{
 			GlStateManager.scale(1.01F, 1.01F, 1.01F);

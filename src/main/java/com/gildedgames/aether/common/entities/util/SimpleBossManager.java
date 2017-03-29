@@ -26,6 +26,7 @@ public class SimpleBossManager<T extends Entity> implements IBossManager<T>
 
 	}
 
+	@SafeVarargs
 	public SimpleBossManager(T entity, String name, BossStage<T>... stages)
 	{
 		this.entity = entity;

@@ -11,7 +11,6 @@ import com.gildedgames.aether.common.capabilities.item.effects.HungerImmuneEffec
 import com.gildedgames.aether.common.capabilities.item.effects.RegenerationEffect;
 import com.gildedgames.aether.common.capabilities.item.effects.WaterBreathEffect;
 import com.gildedgames.aether.common.items.ItemsAether;
-import net.minecraft.init.Items;
 
 public class EquipmentContent
 {

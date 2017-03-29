@@ -1,13 +1,13 @@
 package com.gildedgames.aether.api.genes;
 
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 
 public class Mutation<T extends Gene>
 {
 
-	private Supplier<T> geneSupplier;
+	private final Supplier<T> geneSupplier;
 
-	private float chanceToMutate;
+	private final float chanceToMutate;
 
 	private Mutation(Supplier<T> geneSupplier, float chanceToMutate)
 	{

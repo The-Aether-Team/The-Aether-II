@@ -244,7 +244,7 @@ public class CommonEvents
 
 		List<Entity> teleportedPassengers = Lists.newLinkedList();
 
-		Entity teleportedEntity = null;
+		Entity teleportedEntity;
 
 		BlockPos teleportPos = new BlockPos(entity.posX, 200 + entity.posY, entity.posZ);
 

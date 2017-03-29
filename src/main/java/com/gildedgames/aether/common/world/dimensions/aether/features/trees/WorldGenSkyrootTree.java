@@ -79,7 +79,7 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 
 				boolean isSoil = BlocksAether.aether_sapling.isSuitableSoilBlock(rootState);
 
-				IBlockState state = worldIn.getBlockState(position.down());
+				IBlockState state;
 
 				if (isSoil && position.getY() < worldIn.getActualHeight() - i - 1)
 				{

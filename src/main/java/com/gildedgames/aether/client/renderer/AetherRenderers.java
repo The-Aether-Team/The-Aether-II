@@ -19,9 +19,7 @@ import com.gildedgames.aether.common.entities.living.boss.slider.EntitySlider;
 import com.gildedgames.aether.common.entities.living.companions.*;
 import com.gildedgames.aether.common.entities.living.dungeon.labyrinth.*;
 import com.gildedgames.aether.common.entities.living.mobs.*;
-import com.gildedgames.aether.common.entities.living.mounts.EntityFlyingCow;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
-import com.gildedgames.aether.common.entities.living.mounts.EntityPhyg;
 import com.gildedgames.aether.common.entities.living.npc.EntityEdison;
 import com.gildedgames.aether.common.entities.living.passive.*;
 import com.gildedgames.aether.common.entities.projectiles.*;
@@ -53,8 +51,6 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityDaggerfrostSnowball.class, RenderDaggerfrostSnowball::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityParachute.class, RenderParachute::new);
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityPhyg.class, RenderPhyg::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityFlyingCow.class, RenderFlyingCow::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityAechorPlant.class, RenderAechorPlant::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityAerbunny.class, RenderAerbunny::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityCarrionSprout.class, RenderCarrionSprout::new);

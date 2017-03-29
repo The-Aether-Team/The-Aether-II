@@ -8,7 +8,7 @@ import java.util.Random;
 public class SingleStackLoot implements Loot
 {
 
-	private ItemStack stack;
+	private final ItemStack stack;
 
 	public SingleStackLoot(ItemStack stack)
 	{

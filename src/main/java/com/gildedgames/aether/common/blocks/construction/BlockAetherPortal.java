@@ -130,11 +130,6 @@ public class BlockAetherPortal extends BlockBreakable
 		{
 			axis = state.getValue(PROPERTY_AXIS);
 
-			if (axis == null)
-			{
-				return false;
-			}
-
 			if (axis == EnumFacing.Axis.Z && side != EnumFacing.EAST && side != EnumFacing.WEST)
 			{
 				return false;

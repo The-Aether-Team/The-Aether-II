@@ -14,8 +14,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
-import java.util.Objects;
-
 public class LayerPlayerGloves extends LayerBipedArmor
 {
 	private final RenderLivingBase<?> renderer;

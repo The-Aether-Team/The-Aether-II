@@ -85,14 +85,11 @@ public class BlockMoaEgg extends BlockContainer
 
 				ItemStack eggStack = new ItemStack(ItemsAether.moa_egg, 1, 0);
 
-				if (egg != null)
-				{
-					MoaGenePool stackGenes = ItemMoaEgg.getGenePool(eggStack);
+				MoaGenePool stackGenes = ItemMoaEgg.getGenePool(eggStack);
 
-					stackGenes.transformFromParents(egg.getGenePool().getStorage().getSeed(), egg.getGenePool().getStorage().getFatherSeed(), egg.getGenePool().getStorage().getMotherSeed());
+				stackGenes.transformFromParents(egg.getGenePool().getStorage().getSeed(), egg.getGenePool().getStorage().getFatherSeed(), egg.getGenePool().getStorage().getMotherSeed());
 
-					ItemMoaEgg.setGenePool(eggStack, stackGenes);
-				}
+				ItemMoaEgg.setGenePool(eggStack, stackGenes);
 
 				world.setBlockToAir(pos);
 

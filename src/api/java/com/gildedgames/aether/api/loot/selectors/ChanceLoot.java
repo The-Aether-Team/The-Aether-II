@@ -8,9 +8,9 @@ import java.util.Random;
 public class ChanceLoot implements Loot
 {
 
-	private ItemStack stack;
+	private final ItemStack stack;
 
-	private float chance;
+	private final float chance;
 
 	public ChanceLoot(ItemStack stack, float chance)
 	{

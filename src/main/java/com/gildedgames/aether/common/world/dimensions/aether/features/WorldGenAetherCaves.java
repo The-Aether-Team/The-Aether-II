@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.world.dimensions.aether.features;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.world.dimensions.aether.biomes.BiomeAetherBase;
 import com.google.common.base.Objects;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
