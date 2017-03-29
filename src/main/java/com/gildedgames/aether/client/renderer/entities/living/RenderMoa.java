@@ -239,7 +239,13 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 	@Override
 	protected void renderModel(EntityMoa entity, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
-		this.renderMoa(entity, par2, par3, par4, par5, par6, par7);
+		boolean flag = !entity.isInvisible() || this.renderOutlines;
+		boolean flag1 = !flag && !entity.isInvisibleToPlayer(Minecraft.getMinecraft().player);
+
+		if (flag || flag1)
+		{
+			this.renderMoa(entity, par2, par3, par4, par5, par6, par7);
+		}
 	}
 
 	@Override
