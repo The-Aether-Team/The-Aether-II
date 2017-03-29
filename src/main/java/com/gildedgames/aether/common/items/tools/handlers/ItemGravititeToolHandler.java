@@ -36,7 +36,7 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 				return;
 			}
 
-			if (!state.getBlock().canHarvestBlock(world, pos, player))
+			if (!state.getBlock().canHarvestBlock(world, pos, player) || state.getBlockHardness(world, pos) < 0.0f)
 			{
 				return;
 			}
