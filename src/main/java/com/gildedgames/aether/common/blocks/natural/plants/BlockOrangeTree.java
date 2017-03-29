@@ -189,7 +189,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	@Override
 	public boolean isSuitableSoilBlock(IBlockState state)
 	{
-		return (state.getBlock() == this && !state.getValue(PROPERTY_IS_TOP_BLOCK)) || super.isSuitableSoilBlock(state);
+		return (state.getBlock() == this && !state.getValue(PROPERTY_IS_TOP_BLOCK) && state.getValue(PROPERTY_STAGE) >= 3) || super.isSuitableSoilBlock(state);
 	}
 
 	private void dropOranges(World world, BlockPos pos)
