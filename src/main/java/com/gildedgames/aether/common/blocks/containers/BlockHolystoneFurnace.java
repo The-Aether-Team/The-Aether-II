@@ -9,6 +9,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
@@ -91,6 +92,11 @@ public class BlockHolystoneFurnace extends BlockContainer
 
 			double xOffset = 0.5D;
 			double zOffset = rand.nextDouble() * 0.6D - 0.3D;
+
+			if (rand.nextDouble() < 0.1D)
+			{
+				world.playSound(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+			}
 
 			switch (facing)
 			{
