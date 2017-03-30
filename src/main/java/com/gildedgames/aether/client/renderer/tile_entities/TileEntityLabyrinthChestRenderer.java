@@ -66,7 +66,7 @@ public class TileEntityLabyrinthChestRenderer extends TileEntitySpecialRenderer<
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		}
 
-		GlStateManager.translate((float) x, (float) y, (float) z);
+		GlStateManager.translate((float) x, (float) y - 0.0625f, (float) z);
 		GlStateManager.scale(1.0F, -1.0F, -1.0F);
 
 		float angle = 0;
@@ -94,22 +94,6 @@ public class TileEntityLabyrinthChestRenderer extends TileEntitySpecialRenderer<
 
 		lidAngle = 1.0F - lidAngle;
 		lidAngle = 1.0F - lidAngle * lidAngle * lidAngle;
-
-			/*
-		ModelRenderer Main_Top;
-    ModelRenderer Main_Bottom;
-    ModelRenderer Hinge_Left;
-    ModelRenderer Hinge_Right;
-    ModelRenderer Corner_Bottom_Front_Right;
-    ModelRenderer Corner_Bottom_Front_Left;
-    ModelRenderer Corner_Bottom_Back_Left;
-    ModelRenderer Corner_Bottom_Back_Right;
-    ModelRenderer Corner_Top_Back_Left;
-    ModelRenderer Corner_Top_Back_Right;
-    ModelRenderer Corner_Top_Front_Left;
-    ModelRenderer Corner_Top_Front_Right;
-
-	 */
 
 		float rotateAngleX = -(lidAngle * (float) Math.PI / 2.0F);
 
