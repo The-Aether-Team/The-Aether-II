@@ -5,7 +5,7 @@ import com.gildedgames.aether.api.capabilites.instances.IInstanceFactory;
 import com.gildedgames.aether.api.capabilites.instances.IInstanceHandler;
 import com.gildedgames.aether.api.capabilites.instances.IPlayerInstances;
 import com.gildedgames.aether.api.capabilites.instances.Instance;
-import com.gildedgames.aether.api.util.BlockPosDimension;
+import com.gildedgames.aether.api.util.WorldPos;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketRegisterDimension;
@@ -217,7 +217,7 @@ public class InstanceHandler<T extends Instance> implements IInstanceHandler<T>
 
 			if (hook.getInstance() == null)
 			{
-				hook.setOutside(new BlockPosDimension((int) player.posX, (int) player.posY, (int) player.posZ, player.dimension));
+				hook.setOutside(new WorldPos((int) player.posX, (int) player.posY, (int) player.posZ, player.dimension));
 			}
 
 			int dimId = this.instances.inverse().get(instance);
@@ -250,10 +250,10 @@ public class InstanceHandler<T extends Instance> implements IInstanceHandler<T>
 		{
 			MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 
-			BlockPosDimension pos = hook.outside();
+			WorldPos pos = hook.outside();
 			Teleporter teleporter = new TeleporterGeneric(server.worldServerForDimension(player.dimension));
 			PlayerList playerList = server.getPlayerList();
-			playerList.transferPlayerToDimension(player, pos.dimId(), teleporter);
+			playerList.transferPlayerToDimension(player, pos.getDimension(), teleporter);
 			player.timeUntilPortal = player.getPortalCooldown();
 			hook.setOutside(null);
 			hook.setInstance(null);

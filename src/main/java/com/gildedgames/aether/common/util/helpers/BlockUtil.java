@@ -61,61 +61,11 @@ public class BlockUtil
 			return false;
 		}
 	}
-
-	public static Iterable<MutableBlockPos> getInBox(int minX, int minY, int minZ, int maxX, int maxY, int maxZ)
-	{
-		return BlockPos.getAllInBoxMutable(new BlockPos(minX, minY, minZ), new BlockPos(maxX, maxY, maxZ));
-	}
-
-	public static Iterable<MutableBlockPos> getInBox(AxisAlignedBB boundingBox)
-	{
-		return getInBox((int) boundingBox.minX, (int) boundingBox.minY, (int) boundingBox.minZ, (int) boundingBox.maxX, (int) boundingBox.maxY, (int) boundingBox.maxZ);
-	}
-
-	public static AxisAlignedBB bounds(BlockPos start, BlockPos end)
-	{
-		return new AxisAlignedBB(start.getX(), start.getY(), start.getZ(), end.getX(), end.getY(), end.getZ());
-	}
-
-	public static MutableBlockPos add(MutableBlockPos pos, BlockPos add)
-	{
-		return BlockUtil.add(pos, add.getX(), add.getY(), add.getZ());
-	}
-
-	public static MutableBlockPos add(MutableBlockPos pos, int x, int y, int z)
-	{
-		pos.setPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
-
-		return pos;
-	}
-
-	public static MutableBlockPos down(MutableBlockPos pos, int n)
-	{
-		pos.setPos(pos.getX(), pos.getY() - n, pos.getZ());
-
-		return pos;
-	}
-
-	public static MutableBlockPos set(MutableBlockPos pos, int x, int y, int z)
-	{
-		pos.setPos(x, y, z);
-
-		return pos;
-	}
-
-	public static MutableBlockPos toMutable(BlockPos pos)
-	{
-		return new MutableBlockPos(pos.getX(), pos.getY(), pos.getZ());
-	}
+	
 
 	public static boolean isAir(IBlockState state)
 	{
 		return state.getBlock().getMaterial(state) == Material.AIR;
-	}
-
-	public static boolean isSolid(World world, BlockPos pos)
-	{
-		return BlockUtil.isSolid(world.getBlockState(pos), world, pos);
 	}
 
 	public static boolean isSolid(IBlockState state, World world, BlockPos pos)
@@ -149,27 +99,6 @@ public class BlockUtil
 		}
 
 		return -1;
-	}
-
-	public static BlockPos getTopSolidOrLiquidBlockFromY(World world, BlockPos pos)
-	{
-		Chunk chunk = world.getChunkFromBlockCoords(pos);
-		BlockPos blockpos;
-		BlockPos blockpos1;
-
-		for (blockpos = new BlockPos(pos.getX(), pos.getY(), pos.getZ()); blockpos.getY() >= 0; blockpos = blockpos1)
-		{
-			blockpos1 = blockpos.down();
-			IBlockState state = chunk.getBlockState(blockpos1);
-
-			if (state.getMaterial().blocksMovement() && !state.getBlock().isLeaves(state, world, blockpos1)
-					&& !state.getBlock().isFoliage(world, blockpos1))
-			{
-				break;
-			}
-		}
-
-		return blockpos;
 	}
 
 }

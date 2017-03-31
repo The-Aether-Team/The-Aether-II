@@ -1,9 +1,9 @@
 package com.gildedgames.aether.api.genes;
 
-public interface IGenePool<I, O>
+public interface IGenePool
 {
 
-	IGeneStorage<I, O> getStorage();
+	IGeneStorage getStorage();
 
 	void transformFromParents(int seed, int fatherSeed, int motherSeed);
 

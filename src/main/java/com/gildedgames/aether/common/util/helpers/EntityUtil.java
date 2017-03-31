@@ -16,11 +16,6 @@ import java.util.UUID;
 public class EntityUtil
 {
 
-	private EntityUtil()
-	{
-
-	}
-
 	public static void despawnEntityDuringDaytime(Entity entity)
 	{
 		if (!entity.world.isRemote && entity.world.isDaytime())
@@ -63,46 +58,6 @@ public class EntityUtil
 		}
 
 		return null;
-	}
-
-	public static void copyDataFromOld(Entity clone, Entity oldEntity)
-	{
-		NBTTagCompound nbttagcompound = oldEntity.writeToNBT(new NBTTagCompound());
-		nbttagcompound.removeTag("Dimension");
-		clone.readFromNBT(nbttagcompound);
-		clone.timeUntilPortal = oldEntity.timeUntilPortal;
-	}
-
-	public static void teleport(Entity entity, BlockPos pos)
-	{
-		World world = entity.world;
-
-		entity.isDead = false;
-
-		world.updateEntityWithOptionalForce(entity, false);
-		Entity clone = EntityList.createEntityByName(EntityList.getEntityString(entity), world);
-
-		if (clone != null)
-		{
-			EntityUtil.copyDataFromOld(clone, entity);
-		}
-
-		world.removeEntityDangerously(entity);
-
-		clone.prevPosX = pos.getX();
-		clone.prevPosY = pos.getY();
-		clone.prevPosZ = pos.getZ();
-
-		clone.lastTickPosX = pos.getX();
-		clone.lastTickPosY = pos.getY();
-		clone.lastTickPosZ = pos.getZ();
-
-		clone.setPositionAndUpdate(pos.getX(), pos.getY(), pos.getZ());
-
-		world.spawnEntity(clone);
-		world.updateEntityWithOptionalForce(clone, false);
-
-		entity.isDead = true;
 	}
 
 	public static void facePos(Entity entity, BlockPos pos, float maxYawIncrease, float maxPitchIncrease)

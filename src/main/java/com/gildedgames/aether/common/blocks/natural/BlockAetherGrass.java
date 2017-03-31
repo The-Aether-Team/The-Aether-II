@@ -243,10 +243,4 @@ public class BlockAetherGrass extends BlockGrass implements IBlockVariants
 		}
 	}
 
-	@Override
-	public void addItemsToCreativeTab(Item item, CreativeTabs tab, List<ItemStack> stackList)
-	{
-
-	}
-
 }

@@ -1,8 +1,8 @@
 package com.gildedgames.aether.api.genes;
 
-import com.gildedgames.aether.api.util.IO;
+import com.gildedgames.aether.api.util.NBT;
 
-public interface IGeneStorage<I, O> extends IO<I, O>
+public interface IGeneStorage extends NBT
 {
 
 	int getSeed();

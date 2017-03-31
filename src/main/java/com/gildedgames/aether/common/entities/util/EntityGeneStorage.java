@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.entities.util;
 import com.gildedgames.aether.api.genes.IGeneStorage;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class EntityGeneStorage implements IGeneStorage<NBTTagCompound, NBTTagCompound>
+public class EntityGeneStorage implements IGeneStorage
 {
 
 	private EntityGeneticAnimal entity;

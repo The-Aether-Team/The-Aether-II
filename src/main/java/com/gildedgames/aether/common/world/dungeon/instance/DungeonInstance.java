@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world.dungeon.instance;
 
 import com.gildedgames.aether.api.capabilites.instances.IInstanceHandler;
 import com.gildedgames.aether.api.capabilites.instances.Instance;
-import com.gildedgames.aether.api.util.BlockPosDimension;
+import com.gildedgames.aether.api.util.WorldPos;
 import com.gildedgames.aether.common.util.io.NBTHelper;
 import com.gildedgames.aether.common.world.dungeon.DungeonDefinition;
 import com.gildedgames.aether.common.world.dungeon.DungeonDefinitions;
@@ -25,7 +25,7 @@ public class DungeonInstance implements Instance
 
 	private List<EntityPlayer> players = Lists.newArrayList();
 
-	private BlockPosDimension outsideEntrance, insideEntrance;
+	private WorldPos outsideEntrance, insideEntrance;
 
 	private int dimIdInside;
 
@@ -75,22 +75,22 @@ public class DungeonInstance implements Instance
 		return this.layoutSeed;
 	}
 
-	public BlockPosDimension getOutsideEntrance()
+	public WorldPos getOutsideEntrance()
 	{
 		return this.outsideEntrance;
 	}
 
-	public void setOutsideEntrance(BlockPosDimension entrance)
+	public void setOutsideEntrance(WorldPos entrance)
 	{
 		this.outsideEntrance = entrance;
 	}
 
-	public BlockPosDimension getInsideEntrance()
+	public WorldPos getInsideEntrance()
 	{
 		return this.insideEntrance;
 	}
 
-	public void setInsideEntrance(BlockPosDimension entrance)
+	public void setInsideEntrance(WorldPos entrance)
 	{
 		this.insideEntrance = entrance;
 	}

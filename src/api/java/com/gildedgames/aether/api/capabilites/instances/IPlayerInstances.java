@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.capabilites.instances;
 
-import com.gildedgames.aether.api.util.BlockPosDimension;
+import com.gildedgames.aether.api.util.WorldPos;
 
 public interface IPlayerInstances
 {
@@ -9,8 +9,8 @@ public interface IPlayerInstances
 
 	void setInstance(Instance instance);
 
-	BlockPosDimension outside();
+	WorldPos outside();
 
-	void setOutside(BlockPosDimension pos);
+	void setOutside(WorldPos pos);
 
 }

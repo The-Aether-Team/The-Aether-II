@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.dimensions.aether;
 
-import com.gildedgames.aether.api.util.BlockPosDimension;
+import com.gildedgames.aether.api.util.WorldPos;
 import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
@@ -51,7 +51,7 @@ public class TeleporterAether extends Teleporter implements NBT
 
 	private final Random random;
 
-	private final BiMap<BlockPosDimension, BlockPosDimension> portalPairs = HashBiMap.create();
+	private final BiMap<WorldPos, WorldPos> portalPairs = HashBiMap.create();
 
 	private WorldServer worldServerInstance;
 
@@ -155,10 +155,10 @@ public class TeleporterAether extends Teleporter implements NBT
 		chunksMarkedForPortal.remove(chunkPosition);
 	}
 
-	public BlockPosDimension getPortalPosition(World world, int x, int y, int z, boolean findPortalBlock)
+	public WorldPos getPortalPosition(World world, int x, int y, int z, boolean findPortalBlock)
 	{
 		final int radius = 2;
-		final BlockPosDimension check = new BlockPosDimension(x, y, z, world.provider.getDimension());
+		final WorldPos check = new WorldPos(x, y, z, world.provider.getDimension());
 
 		for (int x2 = x - radius; x2 < x + radius; ++x2)
 		{
@@ -166,7 +166,7 @@ public class TeleporterAether extends Teleporter implements NBT
 			{
 				for (int z2 = y - radius; z2 < y + radius; ++z2)
 				{
-					final BlockPosDimension pos = new BlockPosDimension(x2, z2, y2, world.provider.getDimension());
+					final WorldPos pos = new WorldPos(x2, z2, y2, world.provider.getDimension());
 
 					if (!findPortalBlock && (this.portalPairs.containsKey(pos) || this.portalPairs.containsValue(pos))
 							|| findPortalBlock && world.getBlockState(new BlockPos(x2, z2, y2))
@@ -189,16 +189,16 @@ public class TeleporterAether extends Teleporter implements NBT
 		final int posY = MathHelper.floor(entity.posY);
 		final int posZ = MathHelper.floor(entity.posZ);
 
-		final BlockPosDimension previousPortal = this.getPortalPosition(this.previousWorld, posX, posY, posZ, false);
+		final WorldPos previousPortal = this.getPortalPosition(this.previousWorld, posX, posY, posZ, false);
 
-		final BlockPosDimension linkedPortal = this.getLinkedPortal(previousPortal);
+		final WorldPos linkedPortal = this.getLinkedPortal(previousPortal);
 
 		if (linkedPortal != null)
 		{
 			if (entity instanceof EntityPlayerMP)
 			{
 				final EntityPlayerMP player = (EntityPlayerMP) entity;
-				final World world = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(linkedPortal.dimId());
+				final World world = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(linkedPortal.getDimension());
 				player.setPositionAndUpdate(linkedPortal.getX() + 1.5D, linkedPortal.getY(), linkedPortal.getZ() + 1.5D);
 
 				//this.worldServerInstance.updateEntityWithOptionalForce(player, true);
@@ -297,9 +297,9 @@ public class TeleporterAether extends Teleporter implements NBT
 							final int posY = MathHelper.floor(entity.posY);
 							final int posZ = MathHelper.floor(entity.posZ);
 
-							final BlockPosDimension oldPortal = this.getPortalPosition(this.previousWorld, posX, posY,
+							final WorldPos oldPortal = this.getPortalPosition(this.previousWorld, posX, posY,
 									posZ, true);
-							final BlockPosDimension linkedPortal = new BlockPosDimension(xInner, y1 + 1, zInner,
+							final WorldPos linkedPortal = new WorldPos(xInner, y1 + 1, zInner,
 									world.provider.getDimension());
 
 							this.portalPairs.put(oldPortal, linkedPortal);
@@ -327,17 +327,17 @@ public class TeleporterAether extends Teleporter implements NBT
 	@Override
 	public void removeStalePortalLocations(long totalWorldTime)
 	{
-		final Iterator<Entry<BlockPosDimension, BlockPosDimension>> iterator = this.portalPairs.entrySet().iterator();
+		final Iterator<Entry<WorldPos, WorldPos>> iterator = this.portalPairs.entrySet().iterator();
 
 		while (iterator.hasNext())
 		{
-			final Entry<BlockPosDimension, BlockPosDimension> entry = iterator.next();
-			final BlockPosDimension portal1 = entry.getKey();
-			final BlockPosDimension portal2 = entry.getValue();
+			final Entry<WorldPos, WorldPos> entry = iterator.next();
+			final WorldPos portal1 = entry.getKey();
+			final WorldPos portal2 = entry.getValue();
 
-			BlockPosDimension ourPortal;
+			WorldPos ourPortal;
 
-			if (portal1.dimId() == this.worldServerInstance.provider.getDimension())
+			if (portal1.getDimension() == this.worldServerInstance.provider.getDimension())
 			{
 				ourPortal = portal1;
 			}
@@ -346,7 +346,7 @@ public class TeleporterAether extends Teleporter implements NBT
 				ourPortal = portal2;
 			}
 
-			final BlockPosDimension checkPosition = this.getPortalPosition(this.worldServerInstance, ourPortal.getX(),
+			final WorldPos checkPosition = this.getPortalPosition(this.worldServerInstance, ourPortal.getX(),
 					ourPortal.getY(), ourPortal.getZ(), true);
 
 			if (this.worldServerInstance.getBlockState(checkPosition).getBlock() != BlocksAether.aether_portal)
@@ -374,14 +374,14 @@ public class TeleporterAether extends Teleporter implements NBT
 		return 0;
 	}
 
-	public BiMap<BlockPosDimension, BlockPosDimension> getPortalLinks()
+	public BiMap<WorldPos, WorldPos> getPortalLinks()
 	{
 		return this.portalPairs;
 	}
 
-	public BlockPosDimension getLinkedPortal(BlockPosDimension previousPortal)
+	public WorldPos getLinkedPortal(WorldPos previousPortal)
 	{
-		BlockPosDimension linkedPortal = null;
+		WorldPos linkedPortal = null;
 
 		if (this.portalPairs.containsValue(previousPortal))
 		{
@@ -402,19 +402,19 @@ public class TeleporterAether extends Teleporter implements NBT
 
 		int i = 0;
 
-		for (final Entry<BlockPosDimension, BlockPosDimension> entry : this.portalPairs.entrySet())
+		for (final Entry<WorldPos, WorldPos> entry : this.portalPairs.entrySet())
 		{
-			final BlockPosDimension pos1 = entry.getKey();
-			final BlockPosDimension pos2 = entry.getValue();
+			final WorldPos pos1 = entry.getKey();
+			final WorldPos pos2 = entry.getValue();
 			output.setInteger("tpx1" + i, pos1.getX());
 			output.setInteger("tpy1" + i, pos1.getY());
 			output.setInteger("tpz1" + i, pos1.getZ());
-			output.setInteger("tpd1" + i, pos1.dimId());
+			output.setInteger("tpd1" + i, pos1.getDimension());
 
 			output.setInteger("tpx2" + i, pos2.getX());
 			output.setInteger("tpy2" + i, pos2.getY());
 			output.setInteger("tpz2" + i, pos2.getZ());
-			output.setInteger("tpd2" + i, pos2.dimId());
+			output.setInteger("tpd2" + i, pos2.getDimension());
 			i++;
 		}
 	}
@@ -427,9 +427,9 @@ public class TeleporterAether extends Teleporter implements NBT
 		this.portalPairs.clear();
 		for (int i = 0; i < amount; i++)
 		{
-			final BlockPosDimension pos1 = new BlockPosDimension(input.getInteger("tpx1" + i),
+			final WorldPos pos1 = new WorldPos(input.getInteger("tpx1" + i),
 					input.getInteger("tpy1" + i), input.getInteger("tpz1" + i), input.getInteger("tpd1" + i));
-			final BlockPosDimension pos2 = new BlockPosDimension(input.getInteger("tpx2" + i),
+			final WorldPos pos2 = new WorldPos(input.getInteger("tpx2" + i),
 					input.getInteger("tpy2" + i), input.getInteger("tpz2" + i), input.getInteger("tpd2" + i));
 			this.portalPairs.put(pos1, pos2);
 		}

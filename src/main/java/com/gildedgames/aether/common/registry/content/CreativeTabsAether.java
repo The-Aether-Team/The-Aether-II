@@ -3,16 +3,12 @@ package com.gildedgames.aether.common.registry.content;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockSkyrootPlanks;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
-import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
 
 public class CreativeTabsAether
 {
@@ -102,43 +98,5 @@ public class CreativeTabsAether
 		{
 			return this.stack.getItemDamage();
 		}
-
-		@SideOnly(Side.CLIENT)
-		public void displayAllRelevantItems(List<ItemStack> p_78018_1_)
-		{
-			for (Item item : Item.REGISTRY)
-			{
-				if (item == null)
-				{
-					continue;
-				}
-
-				for (CreativeTabs tab : item.getCreativeTabs())
-				{
-					if (tab == this)
-					{
-						item.getSubItems(item, this, p_78018_1_);
-					}
-				}
-
-				if (item instanceof ItemBlock)
-				{
-					ItemBlock itemBlock = (ItemBlock) item;
-
-					if (itemBlock.getBlock() instanceof IBlockVariants)
-					{
-						IBlockVariants blockVariants = (IBlockVariants) itemBlock.getBlock();
-
-						blockVariants.addItemsToCreativeTab(item, this, p_78018_1_);
-					}
-				}
-			}
-
-			if (this.getRelevantEnchantmentTypes() != null)
-			{
-				this.addEnchantmentBooksToList(p_78018_1_, this.getRelevantEnchantmentTypes());
-			}
-		}
-
 	}
 }

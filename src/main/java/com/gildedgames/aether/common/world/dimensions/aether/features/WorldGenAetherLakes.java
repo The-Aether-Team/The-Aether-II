@@ -26,11 +26,11 @@ public class WorldGenAetherLakes extends WorldGenerator
 	@Override
 	public boolean generate(World world, Random rand, BlockPos position)
 	{
-		BlockPos.MutableBlockPos pos = BlockUtil.toMutable(position.add(-8, 0, -8));
+		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(position.add(-8, 0, -8));
 
 		while (pos.getY() > 5 && world.isAirBlock(pos))
 		{
-			pos = BlockUtil.down(pos, 1);
+			pos.setPos(pos.getX(), pos.getY() - 1, pos.getZ());
 		}
 
 		if (pos.getY() <= 4)
@@ -38,7 +38,7 @@ public class WorldGenAetherLakes extends WorldGenerator
 			return false;
 		}
 
-		pos = BlockUtil.down(pos, 4);
+		pos.setPos(pos.getX(), pos.getY() - 4, pos.getZ());
 
 		boolean[] aboolean = new boolean[2048];
 		int i = rand.nextInt(4) + 4;

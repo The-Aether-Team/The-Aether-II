@@ -46,8 +46,6 @@ public class ClientEventHandler
 
 	private boolean prevJumpBindState;
 
-	private final Gui DUMMY_GUI = new Gui();
-
 	@SubscribeEvent
 	public void onOpenGui(GuiOpenEvent event)
 	{
@@ -74,16 +72,13 @@ public class ClientEventHandler
 					{
 						FlyingMount flyingMount = (FlyingMount) processor;
 
-						DUMMY_GUI.drawCenteredString(mc.fontRendererObj, String.valueOf((int) (flyingMount.getData().getRemainingAirborneTime())),
+						mc.ingameGUI.drawCenteredString(mc.fontRendererObj, String.valueOf((int) (flyingMount.getData().getRemainingAirborneTime())),
 								scaledRes.getScaledWidth() / 2, scaledRes.getScaledHeight() - 30, 0xFFFFFF);
 					}
 				}
 			}
 
 			this.performanceLogger.renderIcon();
-		}
-		else if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR)
-		{
 		}
 	}
 

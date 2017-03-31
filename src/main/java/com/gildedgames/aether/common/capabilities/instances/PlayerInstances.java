@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.capabilities.instances;
 
 import com.gildedgames.aether.api.capabilites.instances.IPlayerInstances;
 import com.gildedgames.aether.api.capabilites.instances.Instance;
-import com.gildedgames.aether.api.util.BlockPosDimension;
+import com.gildedgames.aether.api.util.WorldPos;
 import com.gildedgames.aether.common.util.io.NBTHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
@@ -14,7 +14,7 @@ public class PlayerInstances implements IPlayerInstances
 {
 	private Instance activeInstance;
 
-	private BlockPosDimension outside;
+	private WorldPos outside;
 
 	private EntityPlayer player;
 
@@ -38,12 +38,12 @@ public class PlayerInstances implements IPlayerInstances
 		}
 	}
 
-	public BlockPosDimension outside()
+	public WorldPos outside()
 	{
 		return this.outside;
 	}
 
-	public void setOutside(BlockPosDimension pos)
+	public void setOutside(WorldPos pos)
 	{
 		this.outside = pos;
 	}

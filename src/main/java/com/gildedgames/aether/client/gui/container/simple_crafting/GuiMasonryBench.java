@@ -4,7 +4,6 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.registry.simple_crafting.ISimpleRecipe;
 import com.gildedgames.aether.api.registry.simple_crafting.ISimpleRecipeGroup;
 import com.gildedgames.aether.client.gui.IExtendedGui;
-import com.gildedgames.aether.client.util.gui.GuiUtil;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.ContainerMasonryBench;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -27,6 +26,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Mouse;
@@ -412,7 +412,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 		if (this.hoverDescription != null && this.hoverDescription.size() > 0)
 		{
-			GuiUtil.drawHoveringText(this.hoverDescription, mouseX, mouseY, Minecraft.getMinecraft().fontRendererObj);
+			GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, this.width, this.height, -1, this.fontRendererObj);
 		}
 
 		this.hoverDescription = null;

@@ -2,8 +2,20 @@ package com.gildedgames.aether.api.util;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-/** TODO: MOVE THIS OUT OF THE API, FOR SOME REASON THE API CANNOT SEE THE MAIN AETHER SRC FILES **/
-public interface NBT extends IO<NBTTagCompound, NBTTagCompound>
+/**
+ * Helper interface for NBT-serializable objects.
+ */
+public interface NBT
 {
+	/**
+	 * Writes this object's state to a {@link NBTTagCompound}
+	 * @param tag The tag to write to
+	 */
+	void write(NBTTagCompound tag);
 
+	/**
+	 * Reads this object's state from a {@link NBTTagCompound}
+	 * @param tag The tag to write to
+	 */
+	void read(NBTTagCompound tag);
 }

@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.blocks.natural;
 import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
-import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -95,17 +94,12 @@ public class BlockScatterglass extends BlockBreakable implements IBlockVariants
 	}
 
 	@Override
-	public void addItemsToCreativeTab(Item item, CreativeTabs tab, List<ItemStack> stackList)
+	@SideOnly(Side.CLIENT)
+	public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
 	{
-		if (tab == CreativeTabsAether.VISUAL_VARIANTS)
+		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
-			for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
-			{
-				if (variant != NORMAL)
-				{
-					stackList.add(new ItemStack(item, 1, variant.getMeta()));
-				}
-			}
+			list.add(new ItemStack(item, 1, variant.getMeta()));
 		}
 	}
 

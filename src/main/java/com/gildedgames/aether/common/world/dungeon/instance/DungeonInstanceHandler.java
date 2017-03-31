@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.dungeon.instance;
 
 import com.gildedgames.aether.api.capabilites.instances.IInstanceHandler;
-import com.gildedgames.aether.api.util.BlockPosDimension;
+import com.gildedgames.aether.api.util.WorldPos;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
@@ -20,7 +20,7 @@ public class DungeonInstanceHandler
 		return this.handler.getInstanceForDimension(dimId);
 	}
 
-	public DungeonInstance get(BlockPosDimension entrance)
+	public DungeonInstance get(WorldPos entrance)
 	{
 		for (DungeonInstance inst : this.handler.getInstances())
 		{

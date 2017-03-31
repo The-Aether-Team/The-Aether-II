@@ -14,7 +14,7 @@ import java.awt.Color;
 import java.util.List;
 import java.util.Random;
 
-public class MoaGenePool extends GenePool<NBTTagCompound, NBTTagCompound> implements NBT
+public class MoaGenePool extends GenePool implements NBT
 {
 
 	private GeneRegion<DataGene<Color>> keratin, feathers, eyes;
@@ -28,7 +28,7 @@ public class MoaGenePool extends GenePool<NBTTagCompound, NBTTagCompound> implem
 		this(new SimpleGeneStorage());
 	}
 
-	public MoaGenePool(IGeneStorage<NBTTagCompound, NBTTagCompound> storage)
+	public MoaGenePool(IGeneStorage storage)
 	{
 		super(storage);
 	}

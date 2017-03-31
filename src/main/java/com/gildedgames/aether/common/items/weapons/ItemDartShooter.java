@@ -92,7 +92,7 @@ public class ItemDartShooter extends Item
 
 		int duration = this.getMaxItemUseDuration(stack) - timeLeft - 5;
 
-		if (duration > 2)
+		if (duration > 3)
 		{
 			float speed = duration / 15f;
 			speed = (speed * speed + speed * 2.0F) / 4.0F;
@@ -103,7 +103,7 @@ public class ItemDartShooter extends Item
 			}
 
 			EntityDart dart = new EntityDart(world, player);
-			dart.setAim(player, player.rotationPitch, player.rotationYaw, 0.0F, speed * 2.0F, 1.0F);
+			dart.setAim(player, player.rotationPitch, player.rotationYaw, 0.0F, speed * 3.0F, 1.0F);
 			dart.setDartType(dartType);
 			dart.setDamage(dartType.getAmmoItem().getDamage());
 
@@ -127,12 +127,11 @@ public class ItemDartShooter extends Item
 			if (inventorySlot >= 0 && !player.capabilities.isCreativeMode)
 			{
 				ItemStack ammoStack = player.inventory.getStackInSlot(inventorySlot);
-
 				ammoStack.stackSize--;
 
 				if (ammoStack.stackSize <= 0)
 				{
-					player.inventory.setInventorySlotContents(inventorySlot, null);
+					player.inventory.deleteStack(ammoStack);
 				}
 			}
 		}

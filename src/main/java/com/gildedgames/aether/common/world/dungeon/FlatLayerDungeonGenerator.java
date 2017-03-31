@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.dungeon;
 
-import com.gildedgames.aether.api.util.BlockPosDimension;
+import com.gildedgames.aether.api.util.WorldPos;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.util.structure.TemplatePrimer;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
@@ -64,7 +64,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 	}
 
 	@Override
-	public BlockPosDimension getEntrancePos()
+	public WorldPos getEntrancePos()
 	{
 		return null;
 	}
@@ -198,7 +198,7 @@ public class FlatLayerDungeonGenerator implements DungeonGenerator
 
 			if (layerNum == this.layers.size())
 			{
-				instance.setInsideEntrance(new BlockPosDimension(
+				instance.setInsideEntrance(new WorldPos(
 						(int) end.getCenterX() - 1, layer.minY() + 1, (int) end.getCenterZ() - 1, instance.getDimIdInside()));
 			}
 		}

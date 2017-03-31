@@ -68,10 +68,4 @@ public class BlockDivine extends BlockLabyrinth implements IBlockVariants
 		}
 	}
 
-	@Override
-	public void addItemsToCreativeTab(Item item, CreativeTabs tab, List<ItemStack> stackList)
-	{
-
-	}
-
 }

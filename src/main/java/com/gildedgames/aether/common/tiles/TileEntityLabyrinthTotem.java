@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.tiles;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.capabilites.instances.IPlayerInstances;
 import com.gildedgames.aether.api.capabilites.instances.Instance;
-import com.gildedgames.aether.api.util.BlockPosDimension;
+import com.gildedgames.aether.api.util.WorldPos;
 import com.gildedgames.aether.client.sound.objects.LabyrinthTotemSound;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
@@ -84,7 +84,7 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 			}
 			else
 			{
-				DungeonInstance inst = handler.get(new BlockPosDimension(this.pos, this.world.provider.getDimension()));
+				DungeonInstance inst = handler.get(new WorldPos(this.pos, this.world.provider.getDimension()));
 
 				if (interactingPlayer instanceof EntityPlayerMP)
 				{
@@ -96,7 +96,7 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 		}
 		else
 		{
-			DungeonInstance inst = handler.get(new BlockPosDimension(this.pos, this.world.provider.getDimension()));
+			DungeonInstance inst = handler.get(new WorldPos(this.pos, this.world.provider.getDimension()));
 
 			if (interactingPlayer instanceof EntityPlayerMP)
 			{

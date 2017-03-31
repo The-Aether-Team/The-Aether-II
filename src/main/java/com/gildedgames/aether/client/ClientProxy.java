@@ -37,10 +37,6 @@ public class ClientProxy extends CommonProxy
 		AetherRenderers.preInit();
 
 		CreativeTabsAether.registerTabIcons();
-
-//		UiManager.inst().registerOverlay("worldAetherOptionsOverlay", WorldAetherOptionsOverlay::new, MinecraftGuiViewer.instance());
-//		UiManager.inst().registerOverlay("aetherPortalOverlay", PortalOverlay::new, MinecraftGuiViewer.instance(), RenderGameOverlayEvent.ElementType.PORTAL);
-//		UiManager.inst().registerOverlay("bossBattleOverlay", BossBattleOverlay::new, MinecraftGuiViewer.instance(), RenderGameOverlayEvent.ElementType.HOTBAR);
 	}
 
 	@Override

@@ -75,10 +75,4 @@ public class BlockAetherDirt extends BlockCustom implements IBlockVariants
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}
 
-	@Override
-	public void addItemsToCreativeTab(Item item, CreativeTabs tab, List<ItemStack> stackList)
-	{
-
-	}
-
 }

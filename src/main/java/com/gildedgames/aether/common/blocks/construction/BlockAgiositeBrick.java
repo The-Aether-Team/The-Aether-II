@@ -4,7 +4,6 @@ import com.gildedgames.aether.common.blocks.util.BlockCustom;
 import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
 import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
-import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -15,6 +14,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -73,18 +74,12 @@ public class BlockAgiositeBrick extends BlockCustom implements IBlockVariants
 		return NORMAL.getName();
 	}
 
-	@Override
-	public void addItemsToCreativeTab(Item item, CreativeTabs tab, List<ItemStack> stackList)
+	@SideOnly(Side.CLIENT)
+	public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
 	{
-		if (tab == CreativeTabsAether.VISUAL_VARIANTS)
+		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
-			for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
-			{
-				if (variant != NORMAL)
-				{
-					stackList.add(new ItemStack(item, 1, variant.getMeta()));
-				}
-			}
+			list.add(new ItemStack(item, 1, variant.getMeta()));
 		}
 	}
 

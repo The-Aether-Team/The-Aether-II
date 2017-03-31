@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.util.io;
 
-import com.gildedgames.aether.api.util.BlockPosDimension;
+import com.gildedgames.aether.api.util.WorldPos;
 import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.AetherCore;
 import com.google.common.collect.AbstractIterator;
@@ -279,14 +279,14 @@ public class NBTHelper
 		};
 	}
 
-	public static BlockPosDimension getBlockPosDimension(NBTTagCompound tag)
+	public static WorldPos getBlockPosDimension(NBTTagCompound tag)
 	{
 		if (tag == null || (tag.hasKey("_null") && tag.getBoolean("_null")))
 		{
 			return null;
 		}
 
-		return new BlockPosDimension(tag.getInteger("x"), tag.getInteger("y"), tag.getInteger("z"), tag.getInteger("d"));
+		return new WorldPos(tag.getInteger("x"), tag.getInteger("y"), tag.getInteger("z"), tag.getInteger("d"));
 	}
 
 	public static BlockPos readBlockPos(NBTTagCompound tag)
@@ -317,7 +317,7 @@ public class NBTHelper
 		return tag;
 	}
 
-	public static NBTTagCompound serializeBlockPosDimension(BlockPosDimension pos)
+	public static NBTTagCompound serializeBlockPosDimension(WorldPos pos)
 	{
 		NBTTagCompound tag = new NBTTagCompound();
 
@@ -331,7 +331,7 @@ public class NBTHelper
 		tag.setInteger("x", pos.getX());
 		tag.setInteger("y", pos.getY());
 		tag.setInteger("z", pos.getZ());
-		tag.setInteger("d", pos.dimId());
+		tag.setInteger("d", pos.getDimension());
 
 		return tag;
 	}

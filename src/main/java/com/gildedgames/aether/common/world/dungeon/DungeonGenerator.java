@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.dungeon;
 
-import com.gildedgames.aether.api.util.BlockPosDimension;
+import com.gildedgames.aether.api.util.WorldPos;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
@@ -11,7 +11,7 @@ import java.util.Random;
 public interface DungeonGenerator
 {
 
-	BlockPosDimension getEntrancePos();
+	WorldPos getEntrancePos();
 
 	boolean isLayoutReady();
 

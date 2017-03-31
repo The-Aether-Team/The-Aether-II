@@ -6,14 +6,14 @@ import com.gildedgames.aether.api.genes.IGeneStorage;
 
 import java.util.List;
 
-public abstract class GenePool<I, O> implements IGenePool<I, O>
+public abstract class GenePool implements IGenePool
 {
 
 	private List<GeneRegion> geneRegions;
 
-	private IGeneStorage<I, O> storage;
+	private IGeneStorage storage;
 
-	public GenePool(IGeneStorage<I, O> storage)
+	public GenePool(IGeneStorage storage)
 	{
 		this.storage = storage;
 	}
@@ -31,7 +31,7 @@ public abstract class GenePool<I, O> implements IGenePool<I, O>
 	}
 
 	@Override
-	public IGeneStorage<I, O> getStorage()
+	public IGeneStorage getStorage()
 	{
 		return this.storage;
 	}
