@@ -176,7 +176,8 @@ public class EntityFlying extends EntityCreature
 		}
 	}
 
-	protected PathNavigate getNewNavigator(World worldIn)
+	@Override
+	protected PathNavigate createNavigator(World worldIn)
 	{
 		return new PathNavigateFlyer(this, worldIn);
 	}
