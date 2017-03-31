@@ -75,12 +75,10 @@ public class EntityEdison extends EntityNPC
 	@Override
 	public void onUpdate()
 	{
-		this.setHealth(this.getMaxHealth());
-		this.isDead = false;
-
 		if (this.spawned == null)
 		{
 			this.spawned = this.getPosition();
+			
 			this.setHomePosAndDistance(this.spawned, 3);
 		}
 
