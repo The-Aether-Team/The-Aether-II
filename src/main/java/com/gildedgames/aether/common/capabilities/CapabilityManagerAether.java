@@ -6,10 +6,13 @@ import com.gildedgames.aether.api.capabilites.chunk.IChunkAttachment;
 import com.gildedgames.aether.api.capabilites.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
 import com.gildedgames.aether.api.capabilites.entity.spawning.ISpawningInfo;
+import com.gildedgames.aether.api.capabilites.entity.stats.IEntityStatContainer;
 import com.gildedgames.aether.api.capabilites.instances.IPlayerInstances;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfo;
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfoProvider;
+import com.gildedgames.aether.common.capabilities.entity.stats.EntityStatContainer;
+import com.gildedgames.aether.common.capabilities.entity.stats.EntityStatProvider;
 import com.gildedgames.aether.common.capabilities.instances.PlayerInstances;
 import com.gildedgames.aether.common.capabilities.instances.PlayerInstancesProvider;
 import com.gildedgames.aether.common.capabilities.player.PlayerAether;
@@ -19,6 +22,7 @@ import com.gildedgames.aether.common.world.chunk.hooks.capabilities.ChunkAttachm
 import com.gildedgames.aether.common.world.chunk.hooks.capabilities.PlacementFlagCapability;
 import com.gildedgames.aether.common.world.chunk.hooks.capabilities.PlacementFlagProvider;
 import com.gildedgames.aether.common.world.chunk.hooks.events.AttachCapabilitiesChunkEvent;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraftforge.common.MinecraftForge;
@@ -38,6 +42,8 @@ public class CapabilityManagerAether
 		MinecraftForge.EVENT_BUS.register(CapabilityManagerAether.class);
 
 		CapabilityManager.INSTANCE.register(IPlayerAether.class, new PlayerAether.Storage(), PlayerAether.class);
+		CapabilityManager.INSTANCE.register(IEntityStatContainer.class, new EntityStatContainer.Storage(), EntityStatContainer.class);
+
 		CapabilityManager.INSTANCE.register(ISpawningInfo.class, new EntitySpawningInfo.Storage(), EntitySpawningInfo.class);
 		CapabilityManager.INSTANCE.register(IPlacementFlagCapability.class, new PlacementFlagCapability.Storage(), PlacementFlagCapability.class);
 		CapabilityManager.INSTANCE.register(IChunkAttachment.class, new ChunkAttachment.Storage(), ChunkAttachment.class);
@@ -58,6 +64,11 @@ public class CapabilityManagerAether
 		{
 			event.addCapability(AetherCore.getResource("PlayerData"), new PlayerAetherProvider(new PlayerAether((EntityPlayer) event.getEntity())));
 			event.addCapability(AetherCore.getResource("PlayerInstances"), new PlayerInstancesProvider((EntityPlayer) event.getEntity()));
+		}
+
+		if (event.getEntity() instanceof EntityLivingBase)
+		{
+			event.addCapability(AetherCore.getResource("EntityStats"), new EntityStatProvider((EntityLivingBase) event.getEntity()));
 		}
 	}
 

@@ -1,5 +1,8 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
+import com.gildedgames.aether.api.capabilites.entity.stats.EntityStats;
+import com.gildedgames.aether.api.capabilites.entity.stats.IEntityWithStats;
+import com.gildedgames.aether.api.capabilites.entity.stats.StatBase;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -27,9 +30,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import java.util.Collection;
 import java.util.Set;
 
-public class EntityAerbunny extends EntityAetherAnimal
+public class EntityAerbunny extends EntityAetherAnimal implements IEntityWithStats
 {
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.CARROT, Items.POTATO, Items.BEETROOT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry);
@@ -186,6 +190,12 @@ public class EntityAerbunny extends EntityAetherAnimal
 	public EntityAgeable createChild(EntityAgeable ageable)
 	{
 		return new EntityAerbunny(this.world);
+	}
+
+	@Override
+	public void registerStats(Collection<StatBase> stats)
+	{
+		stats.add(new StatBase(EntityStats.VOLATILE, 0.2D));
 	}
 
 	private class AerbunnyJumpHelper extends EntityJumpHelper
