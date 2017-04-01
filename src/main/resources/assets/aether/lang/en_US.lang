@@ -521,10 +521,10 @@ moa.keratin=Keratin
 moa.eyes=Eyes
 moa.jumps=Mid-air Jumps
 
-moa.keratin.skyBlue=Sky-Blue
-moa.keratin.deepSky=Deep-Sky
+moa.keratin.sky_blue=Sky-Blue
+moa.keratin.deep_sky=Deep-Sky
 moa.keratin.sand=Sand
-moa.keratin.midnightSky=Midnight-Sky
+moa.keratin.midnight_sky=Midnight-Sky
 moa.keratin.swamp=Swamp
 moa.keratin.royal=Royal
 moa.keratin.tempest=Tempest
@@ -536,9 +536,9 @@ moa.eyes.cream=Cream
 moa.eyes.emerald=Emerald
 
 moa.feathers.cream=Cream
-moa.feathers.midnightSky=Midnight-Sky
+moa.feathers.midnight_sky=Midnight-Sky
 moa.feathers.dawn=Dawn
-moa.feathers.nightsPeak=Night-Peaked
+moa.feathers.nights_peak=Night-Peaked
 moa.feathers.sakura=Sakura
 moa.feathers.mud=Mud
 moa.feathers.enchanted=Enchanted

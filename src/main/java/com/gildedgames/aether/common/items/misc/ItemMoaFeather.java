@@ -1,10 +1,13 @@
 package com.gildedgames.aether.common.items.misc;
 
+import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -16,8 +19,6 @@ public class ItemMoaFeather extends Item
 
 	public ItemMoaFeather()
 	{
-		super();
-
 		this.setHasSubtypes(true);
 	}
 
@@ -26,7 +27,7 @@ public class ItemMoaFeather extends Item
 	public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems)
 	{
 		ItemStack feather = new ItemStack(itemIn);
-		ItemMoaFeather.setColor(feather, I18n.format("moa.feathers.dawn"), new Color(0x83c4e2).getRGB());
+		ItemMoaFeather.setColor(feather, "moa.feathers.dawn", new Color(0x83c4e2).getRGB());
 
 		subItems.add(feather);
 	}
@@ -68,13 +69,19 @@ public class ItemMoaFeather extends Item
 
 		NBTTagCompound tag = stack.getTagCompound().getCompoundTag("featherColor");
 
-		return I18n.format(tag.getString("colorName"));
+		return tag.getString("colorName");
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack stack)
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
 	{
-		return this.getUnlocalizedName(stack);
+		String colorName = ItemMoaFeather.getColorName(stack);
+
+		if (!colorName.isEmpty())
+		{
+			tooltip.add(TextFormatting.GRAY + "" + TextFormatting.ITALIC + "Color: " + I18n.format(colorName));
+		}
 	}
 
 	@Override

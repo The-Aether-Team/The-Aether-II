@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.util.LinkedList;
 import java.util.Random;
 
+// TODO: Replace with enums, this system is not upgrade-friendly
+@Deprecated
 public class MoaGenePoolDataSet<T extends Gene>
 {
 
@@ -41,10 +43,10 @@ public class MoaGenePoolDataSet<T extends Gene>
 
 	static
 	{
-		KERATIN.genes().add(new DataGene<>("moa.keratin.skyBlue", new Color(0x97c6cb), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
-		KERATIN.genes().add(new DataGene<>("moa.keratin.deepSky", new Color(0x717e7f), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
+		KERATIN.genes().add(new DataGene<>("moa.keratin.sky_blue", new Color(0x97c6cb), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
+		KERATIN.genes().add(new DataGene<>("moa.keratin.deep_sky", new Color(0x717e7f), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
 		KERATIN.genes().add(new DataGene<>("moa.keratin.sand", new Color(0x7f7e71), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
-		KERATIN.genes().add(new DataGene<>("moa.keratin.midnightSky", new Color(0x353f64), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
+		KERATIN.genes().add(new DataGene<>("moa.keratin.midnight_sky", new Color(0x353f64), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
 		KERATIN.genes().add(new DataGene<>("moa.keratin.swamp", new Color(0x576449), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
 		KERATIN.genes().add(new DataGene<>("moa.keratin.royal", new Color(0x494964), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
 		KERATIN.genes().add(new DataGene<>("moa.keratin.tempest", new Color(0x644949), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
@@ -56,9 +58,9 @@ public class MoaGenePoolDataSet<T extends Gene>
 		EYES.genes().add(new DataGene<>("moa.eyes.emerald", new Color(0x41b543), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
 
 		FEATHERS.genes().add(new DataGene<>("moa.feathers.cream", new Color(0xecebe1), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
-		FEATHERS.genes().add(new DataGene<>("moa.feathers.midnightSky", new Color(0x53576a), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
+		FEATHERS.genes().add(new DataGene<>("moa.feathers.midnight_sky", new Color(0x53576a), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
 		FEATHERS.genes().add(new DataGene<>("moa.feathers.dawn", new Color(0x83c4e2), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
-		FEATHERS.genes().add(new DataGene<>("moa.feathers.nightsPeak", new Color(0x484345), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
+		FEATHERS.genes().add(new DataGene<>("moa.feathers.nights_peak", new Color(0x484345), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
 		FEATHERS.genes().add(new DataGene<>("moa.feathers.sakura", new Color(0xf2b4ce), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
 		FEATHERS.genes().add(new DataGene<>("moa.feathers.mud", new Color(0xab7a5c), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
 		FEATHERS.genes().add(new DataGene<>("moa.feathers.enchanted", new Color(0xffc342), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
@@ -69,10 +71,10 @@ public class MoaGenePoolDataSet<T extends Gene>
 		MARKS.genes().add(new MoaMarkGene("moa.marks.ladder", "ladder", new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
 		MARKS.genes().add(new MoaMarkGene("moa.marks.lines", "lines", new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
 
-		WING_STRENGTH.genes().add(new DataGene<>("moa.wingStrength.weak", 1, new SimpleInheritance(SimpleInheritance.Type.RANDOM)));
-		WING_STRENGTH.genes().add(new DataGene<>("moa.wingStrength.normal", 2, new SimpleInheritance(SimpleInheritance.Type.RANDOM)));
-		WING_STRENGTH.genes().add(new DataGene<>("moa.wingStrength.strong", 3, new SimpleInheritance(SimpleInheritance.Type.RANDOM)));
-		WING_STRENGTH.genes().add(new DataGene<>("moa.wingStrength.excellent", 4, new SimpleInheritance(SimpleInheritance.Type.RANDOM)));
+		WING_STRENGTH.genes().add(new DataGene<>("moa.wing_strength.weak", 1, new SimpleInheritance(SimpleInheritance.Type.RANDOM)));
+		WING_STRENGTH.genes().add(new DataGene<>("moa.wing_strength.normal", 2, new SimpleInheritance(SimpleInheritance.Type.RANDOM)));
+		WING_STRENGTH.genes().add(new DataGene<>("moa.wing_strength.strong", 3, new SimpleInheritance(SimpleInheritance.Type.RANDOM)));
+		WING_STRENGTH.genes().add(new DataGene<>("moa.wing_strength.excellent", 4, new SimpleInheritance(SimpleInheritance.Type.RANDOM)));
 	}
 
 }

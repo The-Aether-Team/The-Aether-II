@@ -78,7 +78,7 @@ public class EntityEdison extends EntityNPC
 		if (this.spawned == null)
 		{
 			this.spawned = this.getPosition();
-			
+
 			this.setHomePosAndDistance(this.spawned, 3);
 		}
 
