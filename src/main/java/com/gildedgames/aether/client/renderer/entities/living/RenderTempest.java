@@ -14,19 +14,13 @@ public class RenderTempest extends RenderLiving<EntityLiving>
 
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/tempest/tempest.png");
 
-	private static final ResourceLocation TEXTURE_MARKINGS = AetherCore.getResource("textures/entities/tempest/markings.png");
+	private static final ResourceLocation TEXTURE_MARKINGS = AetherCore.getResource("textures/entities/tempest/tempest_markings.png");
 
 	public RenderTempest(RenderManager manager)
 	{
 		super(manager, new ModelTempest(), 1.0F);
 
 		this.addLayer(new LayerGlowing<>(this, TEXTURE_MARKINGS));
-	}
-
-	@Override
-	protected void preRenderCallback(EntityLiving entity, float f)
-	{
-		GlStateManager.translate(0.0D, 0.5D, 0.0D);
 	}
 
 	@Override
