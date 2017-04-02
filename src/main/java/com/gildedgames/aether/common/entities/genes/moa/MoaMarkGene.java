@@ -6,6 +6,8 @@ import com.gildedgames.aether.api.genes.Mutation;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MoaMarkGene implements Gene
 {
@@ -37,6 +39,7 @@ public class MoaMarkGene implements Gene
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public String localizedName()
 	{
 		return I18n.format(this.name);

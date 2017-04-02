@@ -4,6 +4,8 @@ import com.gildedgames.aether.api.genes.Gene;
 import com.gildedgames.aether.api.genes.Inheritance;
 import com.gildedgames.aether.api.genes.Mutation;
 import net.minecraft.client.resources.I18n;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class DataGene<T> implements Gene
 {
@@ -27,6 +29,7 @@ public class DataGene<T> implements Gene
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public String localizedName()
 	{
 		return I18n.format(this.name);

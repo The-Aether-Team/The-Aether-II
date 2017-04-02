@@ -256,15 +256,15 @@ public class BlocksAether
 
 	public static final BlockMasonryBench masonry_bench = new BlockMasonryBench();
 
-	public static final BlockCustomPane quicksoil_glass_pane = new BlockCustomPane(BlocksAether.quicksoil_glass.getDefaultState(), false),
-										skyroot_frame_quicksoil_glass_pane = new BlockCustomPane(BlocksAether.quicksoil_glass.getDefaultState().withProperty(BlockQuicksoilGlass.PROPERTY_VARIANT, BlockQuicksoilGlass.SKYROOT_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.skyroot_frame.name")),
-										arkenium_frame_quicksoil_glass_pane = new BlockCustomPane(BlocksAether.quicksoil_glass.getDefaultState().withProperty(BlockQuicksoilGlass.PROPERTY_VARIANT, BlockQuicksoilGlass.ARKENIUM_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.arkenium_frame.name")),
-										scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState(), false),
-										skyroot_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState().withProperty(BlockScatterglass.PROPERTY_VARIANT, BlockScatterglass.SKYROOT_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.skyroot_frame.name")),
-										arkenium_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState().withProperty(BlockScatterglass.PROPERTY_VARIANT, BlockScatterglass.ARKENIUM_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.arkenium_frame.name")),
-										crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState(), false),
-										skyroot_frame_crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState().withProperty(BlockCrudeScatterglass.PROPERTY_VARIANT, BlockCrudeScatterglass.SKYROOT_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.skyroot_frame.name")),
-										arkenium_frame_crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState().withProperty(BlockCrudeScatterglass.PROPERTY_VARIANT, BlockCrudeScatterglass.ARKENIUM_FRAME), false, TextFormatting.GRAY + "" + I18n.format("tile.aether.arkenium_frame.name"));
+	public static final BlockCustomPane quicksoil_glass_pane = new BlockCustomPane(BlocksAether.quicksoil_glass.getDefaultState()),
+			skyroot_frame_quicksoil_glass_pane = new BlockCustomPane(BlocksAether.quicksoil_glass.getDefaultState().withProperty(BlockQuicksoilGlass.PROPERTY_VARIANT, BlockQuicksoilGlass.SKYROOT_FRAME)),
+			arkenium_frame_quicksoil_glass_pane = new BlockCustomPane(BlocksAether.quicksoil_glass.getDefaultState().withProperty(BlockQuicksoilGlass.PROPERTY_VARIANT, BlockQuicksoilGlass.ARKENIUM_FRAME)),
+			scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState()),
+			skyroot_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState().withProperty(BlockScatterglass.PROPERTY_VARIANT, BlockScatterglass.SKYROOT_FRAME)),
+			arkenium_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState().withProperty(BlockScatterglass.PROPERTY_VARIANT, BlockScatterglass.ARKENIUM_FRAME)),
+			crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState()),
+			skyroot_frame_crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState().withProperty(BlockCrudeScatterglass.PROPERTY_VARIANT, BlockCrudeScatterglass.SKYROOT_FRAME)),
+			arkenium_frame_crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState().withProperty(BlockCrudeScatterglass.PROPERTY_VARIANT, BlockCrudeScatterglass.ARKENIUM_FRAME));
 
 	public static final Block skyroot_twigs = new BlockFloorObject(Material.PLANTS, () -> new ItemStack(ItemsAether.skyroot_stick)).setSoundType(SoundType.WOOD);
 

@@ -1,61 +1,67 @@
 package com.gildedgames.aether.common.blocks.util;
 
-import com.gildedgames.aether.common.ReflectionAether;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
+import javax.annotation.Nullable;
 
 public class BlockCustomPane extends BlockPane
 {
+	private final Block block;
 
-	private String[] addInformation;
+	private final IBlockState base;
 
-	public BlockCustomPane(final IBlockState state, boolean canDrop, String... addInformation)
+	public BlockCustomPane(IBlockState state)
 	{
-		super(state.getMaterial(), canDrop);
+		super(state.getMaterial(), false);
 
-		this.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS);
-
-		final Block block = state.getBlock();
-
-		BlocksAether.applyPostRegistration(() -> BlockCustomPane.this.setHarvestLevel(block.getHarvestTool(state), block.getHarvestLevel(state)));
+		this.base = state;
+		this.block = state.getBlock();
 
 		this.setLightOpacity(0);
-		this.setLightLevel(block.getLightValue(state));
 
-		this.setSoundType(block.getSoundType());
-
-		float blockHardness = ObfuscationReflectionHelper.getPrivateValue(Block.class, block, ReflectionAether.BLOCK_HARDNESS.getMappings());
-
-		this.setHardness(blockHardness);
-
-		this.addInformation = addInformation;
+		this.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer()
 	{
-		return BlockRenderLayer.TRANSLUCENT;
+		return this.block.getBlockLayer();
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
+	public int getHarvestLevel(IBlockState state)
 	{
-		for (String s : this.addInformation)
-		{
-			tooltip.add(s);
-		}
+		return this.block.getHarvestLevel(state);
+	}
+
+	@Override
+	public String getHarvestTool(IBlockState state)
+	{
+		return this.block.getHarvestTool(state);
+	}
+
+	@Override
+	public SoundType getSoundType(IBlockState state, World world, BlockPos pos, @Nullable Entity entity)
+	{
+		return this.block.getSoundType(state, world, pos, entity);
+	}
+
+	@Override
+	public Material getMaterial(IBlockState state)
+	{
+		return this.block.getMaterial(state);
 	}
 
 

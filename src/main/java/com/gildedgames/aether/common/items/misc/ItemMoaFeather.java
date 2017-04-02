@@ -78,6 +78,7 @@ public class ItemMoaFeather extends Item
 		return tag.getInteger("color");
 	}
 
+	@SideOnly(Side.CLIENT)
 	public static String getColorName(ItemStack stack)
 	{
 		if (stack.getTagCompound() == null)
@@ -87,7 +88,7 @@ public class ItemMoaFeather extends Item
 
 		NBTTagCompound tag = stack.getTagCompound().getCompoundTag("featherColor");
 
-		return tag.getString("colorName");
+		return I18n.format(tag.getString("colorName"));
 	}
 
 	@Override
