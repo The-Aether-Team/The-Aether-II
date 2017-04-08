@@ -34,7 +34,6 @@ public class TileEntitiesAether
 		GameRegistry.registerTileEntity(TileEntityLabyrinthTotem.class, LABYRINTH_TOTEM);
 		GameRegistry.registerTileEntity(TileEntityLabyrinthChest.class, LABYRINTH_CHEST_ID);
 		GameRegistry.registerTileEntity(TileEntityMoaEgg.class, MOA_EGG_ID);
-		GameRegistry.registerTileEntity(TileEntityStructureExtended.class, STRUCTURE_EXTENDED_ID);
 		GameRegistry.registerTileEntity(TileEntityIcestoneCooler.class, ICESTONE_COOLER_ID);
 		GameRegistry.registerTileEntity(TileEntityIncubator.class, INCUBATOR_ID);
 		GameRegistry.registerTileEntity(TileEntityPresent.class, PRESENT_ID);

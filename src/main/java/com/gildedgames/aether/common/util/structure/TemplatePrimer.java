@@ -190,7 +190,7 @@ public class TemplatePrimer
 
 					if (bb == null || bb.isVecInside(blockpos1))
 					{
-						world.notifyNeighborsRespectDebug(blockpos1, template$blockinfo2.blockState.getBlock());
+						world.notifyNeighborsRespectDebug(blockpos1, template$blockinfo2.blockState.getBlock(), false);
 
 						if (template$blockinfo2.tileentityData != null)
 						{
@@ -359,7 +359,7 @@ public class TemplatePrimer
 
 					if (chunkBB.isVecInside(blockpos1))
 					{
-						world.notifyNeighborsRespectDebug(blockpos1, template$blockinfo2.blockState.getBlock());
+						world.notifyNeighborsRespectDebug(blockpos1, template$blockinfo2.blockState.getBlock(), false);
 
 						if (template$blockinfo2.tileentityData != null)
 						{
@@ -432,26 +432,26 @@ public class TemplatePrimer
 
 		switch (mirrorIn)
 		{
-			case LEFT_RIGHT:
-				k = -k;
-				break;
-			case FRONT_BACK:
-				i = -i;
-				break;
-			default:
-				flag = false;
+		case LEFT_RIGHT:
+			k = -k;
+			break;
+		case FRONT_BACK:
+			i = -i;
+			break;
+		default:
+			flag = false;
 		}
 
 		switch (rotationIn)
 		{
-			case COUNTERCLOCKWISE_90:
-				return new BlockPos(k, j, -i);
-			case CLOCKWISE_90:
-				return new BlockPos(-k, j, i);
-			case CLOCKWISE_180:
-				return new BlockPos(-i, j, -k);
-			default:
-				return flag ? new BlockPos(i, j, k) : pos;
+		case COUNTERCLOCKWISE_90:
+			return new BlockPos(k, j, -i);
+		case CLOCKWISE_90:
+			return new BlockPos(-k, j, i);
+		case CLOCKWISE_180:
+			return new BlockPos(-i, j, -k);
+		default:
+			return flag ? new BlockPos(i, j, k) : pos;
 		}
 	}
 
@@ -464,26 +464,26 @@ public class TemplatePrimer
 
 		switch (mirrorIn)
 		{
-			case LEFT_RIGHT:
-				d2 = 1.0D - d2;
-				break;
-			case FRONT_BACK:
-				d0 = 1.0D - d0;
-				break;
-			default:
-				flag = false;
+		case LEFT_RIGHT:
+			d2 = 1.0D - d2;
+			break;
+		case FRONT_BACK:
+			d0 = 1.0D - d0;
+			break;
+		default:
+			flag = false;
 		}
 
 		switch (rotationIn)
 		{
-			case COUNTERCLOCKWISE_90:
-				return new Vec3d(d2, d1, 1.0D - d0);
-			case CLOCKWISE_90:
-				return new Vec3d(1.0D - d2, d1, d0);
-			case CLOCKWISE_180:
-				return new Vec3d(1.0D - d0, d1, 1.0D - d2);
-			default:
-				return flag ? new Vec3d(d0, d1, d2) : vec;
+		case COUNTERCLOCKWISE_90:
+			return new Vec3d(d2, d1, 1.0D - d0);
+		case CLOCKWISE_90:
+			return new Vec3d(1.0D - d2, d1, d0);
+		case CLOCKWISE_180:
+			return new Vec3d(1.0D - d0, d1, 1.0D - d2);
+		default:
+			return flag ? new Vec3d(d0, d1, d2) : vec;
 		}
 	}
 

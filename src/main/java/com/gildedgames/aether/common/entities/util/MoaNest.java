@@ -51,8 +51,7 @@ public class MoaNest
 		IBlockState state = world.getBlockState(pos);
 		Block block = state.getBlock();
 
-		return block == null ||
-				world.isAirBlock(pos) ||
+		return world.isAirBlock(pos) ||
 				block.isLeaves(state, world, pos) ||
 				block == BlocksAether.aether_grass ||
 				block == BlocksAether.aether_dirt ||

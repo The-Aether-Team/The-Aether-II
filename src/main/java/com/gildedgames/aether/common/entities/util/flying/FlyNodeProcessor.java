@@ -16,6 +16,7 @@ import javax.annotation.Nullable;
 public class FlyNodeProcessor extends NodeProcessor
 {
 
+	@Override
 	public PathPoint getStart()
 	{
 		return this.openPoint(MathHelper.floor(this.entity.getEntityBoundingBox().minX), MathHelper.floor(
@@ -25,12 +26,14 @@ public class FlyNodeProcessor extends NodeProcessor
 	/**
 	 * Returns PathPoint for given coordinates
 	 */
+	@Override
 	public PathPoint getPathPointToCoords(double x, double y, double z)
 	{
 		return this.openPoint(MathHelper.floor(x - (double) (this.entity.width / 2.0F)), MathHelper.floor(
 				y + 0.5D), MathHelper.floor(z - (double) (this.entity.width / 2.0F)));
 	}
 
+	@Override
 	public int findPathOptions(PathPoint[] pathOptions, PathPoint currentPoint, PathPoint targetPoint, float maxDistance)
 	{
 		int i = 0;
@@ -50,12 +53,14 @@ public class FlyNodeProcessor extends NodeProcessor
 		return i;
 	}
 
+	@Override
 	public PathNodeType getPathNodeType(IBlockAccess blockaccessIn, int x, int y, int z, EntityLiving entitylivingIn, int xSize, int ySize,
 			int zSize, boolean canBreakDoorsIn, boolean canEnterDoorsIn)
 	{
 		return PathNodeType.OPEN;
 	}
 
+	@Override
 	public PathNodeType getPathNodeType(IBlockAccess x, int y, int z, int p_186330_4_)
 	{
 		return PathNodeType.OPEN;

@@ -45,6 +45,7 @@ public class BlockMultiDummyHalf extends BlockMultiBase
 		return AABB;
 	}
 
+	@Override
 	@Deprecated
 	public boolean isFullBlock(IBlockState state)
 	{

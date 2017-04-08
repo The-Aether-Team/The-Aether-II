@@ -24,7 +24,7 @@ public class ItemHealingStone extends Item
 
 		this.addPropertyOverride(new ResourceLocation("uses"), (stack, world, entity) ->
 		{
-			if (stack != null)
+			if (stack != ItemStack.EMPTY)
 			{
 				return ItemHealingStone.getUsesLeft(stack) * 0.2F;
 			}
@@ -73,11 +73,13 @@ public class ItemHealingStone extends Item
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand)
 	{
-		if (getUsesLeft(stack) > 0 && playerIn.getAbsorptionAmount() < 20.0F)
+		ItemStack stack = player.getHeldItem(hand);
+
+		if (getUsesLeft(stack) > 0 && player.getAbsorptionAmount() < 20.0F)
 		{
-			playerIn.setActiveHand(EnumHand.MAIN_HAND);
+			player.setActiveHand(EnumHand.MAIN_HAND);
 			return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 		}
 

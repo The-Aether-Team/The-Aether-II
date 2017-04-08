@@ -10,7 +10,7 @@ public class MoaFeatherColorHandler implements IItemColor
 	@Override
 	public int getColorFromItemstack(ItemStack stack, int tintIndex)
 	{
-		if (stack != null && stack.getItem() instanceof ItemMoaFeather)
+		if (stack.getItem() instanceof ItemMoaFeather)
 		{
 			if (tintIndex == 1)
 			{

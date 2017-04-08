@@ -6,10 +6,11 @@ import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextComponentBase;
 import net.minecraft.util.text.TextComponentTranslation;
 
@@ -40,7 +41,7 @@ public class InventoryEquipment implements IInventoryEquipment
 
 	private final IPlayerAether aePlayer;
 
-	private ItemStack[] inventory = new ItemStack[InventoryEquipment.INVENTORY_SIZE];
+	private NonNullList<ItemStack> inventory = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
 
 	public InventoryEquipment(IPlayerAether aePlayer)
 	{
@@ -54,61 +55,52 @@ public class InventoryEquipment implements IInventoryEquipment
 	}
 
 	@Override
+	public boolean isEmpty()
+	{
+		for (ItemStack itemstack : this.inventory)
+		{
+			if (!itemstack.isEmpty())
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	@Override
 	public ItemStack getStackInSlot(int index)
 	{
-		return index >= 0 && index < this.inventory.length ? this.inventory[index] : null;
+		return index >= 0 && index < this.inventory.size() ? this.inventory.get(index) : ItemStack.EMPTY;
 	}
 
 	@Override
 	public ItemStack decrStackSize(int index, int count)
 	{
-		if (this.inventory[index] != null)
-		{
-			ItemStack stack;
-
-			if (this.inventory[index].stackSize <= count)
-			{
-				stack = this.inventory[index];
-
-				this.inventory[index] = null;
-			}
-			else
-			{
-				stack = this.inventory[index].splitStack(count);
-
-				if (this.inventory[index].stackSize == 0)
-				{
-					this.inventory[index] = null;
-				}
-			}
-
-			this.markDirty();
-
-			return stack;
-		}
-
-		return null;
+		return ItemStackHelper.getAndRemove(this.inventory, index);
 	}
 
 	@Override
 	public ItemStack removeStackFromSlot(int index)
 	{
-		if (this.inventory[index] != null)
+		ItemStack itemstack = this.inventory.get(index);
+
+		if (itemstack.isEmpty())
 		{
-			ItemStack stack = this.inventory[index];
-
-			this.setInventorySlotContents(index, null);
-
-			return stack;
+			return ItemStack.EMPTY;
 		}
+		else
+		{
+			this.inventory.set(index, ItemStack.EMPTY);
 
-		return null;
+			return itemstack;
+		}
 	}
 
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack)
 	{
-		this.inventory[index] = stack;
+		this.inventory.set(index, stack);
 
 		this.markDirty();
 	}
@@ -116,35 +108,15 @@ public class InventoryEquipment implements IInventoryEquipment
 	@Override
 	public int getNextEmptySlotForType(ItemEquipmentSlot type)
 	{
-		for (int i = 0; i < this.inventory.length; i++)
+		for (int i = 0; i < this.inventory.size(); i++)
 		{
-			if (this.inventory[i] == null && SLOT_TYPES[i] == type)
+			if (this.inventory.get(i) == ItemStack.EMPTY && SLOT_TYPES[i] == type)
 			{
 				return i;
 			}
 		}
 
 		return -1;
-	}
-
-	public boolean isItemEquipped(Item item)
-	{
-		return this.getCountOfEquippedAccessory(item) > 0;
-	}
-
-	public int getCountOfEquippedAccessory(Item item)
-	{
-		int count = 0;
-
-		for (ItemStack stack : this.inventory)
-		{
-			if (stack != null && stack.getItem() == item)
-			{
-				count++;
-			}
-		}
-
-		return count;
 	}
 
 	@Override
@@ -207,23 +179,7 @@ public class InventoryEquipment implements IInventoryEquipment
 	@Override
 	public void clear()
 	{
-		for (int i = 0; i < this.inventory.length; i++)
-		{
-			this.setInventorySlotContents(i, null);
-		}
-	}
-
-	public void dropAllItems()
-	{
-		for (ItemStack stack : this.inventory)
-		{
-			if (stack != null)
-			{
-				this.aePlayer.getEntity().dropItem(stack, true, false);
-			}
-		}
-
-		this.clear();
+		this.inventory.clear();
 	}
 
 	@Override
@@ -249,11 +205,11 @@ public class InventoryEquipment implements IInventoryEquipment
 	{
 		NBTTagList list = new NBTTagList();
 
-		for (int i = 0; i < this.inventory.length; ++i)
+		for (int i = 0; i < this.inventory.size(); ++i)
 		{
-			ItemStack stack = this.inventory[i];
+			ItemStack stack = this.inventory.get(i);
 
-			if (stack != null)
+			if (stack != ItemStack.EMPTY)
 			{
 				NBTTagCompound stackCompound = new NBTTagCompound();
 				stackCompound.setByte("Slot", (byte) i);
@@ -272,21 +228,13 @@ public class InventoryEquipment implements IInventoryEquipment
 	{
 		NBTTagList list = input.getTagList("Items", 10);
 
-		if (list != null)
+		for (int i = 0; i < list.tagCount(); i++)
 		{
-			for (int i = 0; i < list.tagCount(); i++)
-			{
-				NBTTagCompound compound = list.getCompoundTagAt(i);
+			NBTTagCompound compound = list.getCompoundTagAt(i);
 
-				ItemStack stack = ItemStack.loadItemStackFromNBT(compound);
+			int slot = compound.getByte("Slot") & 255;
 
-				if (stack != null)
-				{
-					int slot = compound.getByte("Slot") & 255;
-
-					this.inventory[slot] = stack;
-				}
-			}
+			this.inventory.set(slot, new ItemStack(compound));
 		}
 	}
 

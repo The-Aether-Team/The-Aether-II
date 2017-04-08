@@ -4,11 +4,12 @@
 			"model": "aether:labyrinth_pillar/labyrinth_pillar"
 		},
 		"axis=z": {
-			"model": "aether:labyrinth_pillar/labyrinth_pillar_side"
+			"model": "aether:labyrinth_pillar/labyrinth_pillar",
+			"x": 90
 		},
 		"axis=x": {
-			"model": "aether:labyrinth_pillar/labyrinth_pillar_side",
-			"y": 90
+			"model": "aether:labyrinth_pillar/labyrinth_pillar",
+			"x": 90, "y": 90
 		}
 	}
 }

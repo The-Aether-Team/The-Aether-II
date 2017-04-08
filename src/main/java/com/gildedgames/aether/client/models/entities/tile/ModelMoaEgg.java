@@ -7,11 +7,11 @@ import net.minecraft.entity.Entity;
 public class ModelMoaEgg extends ModelBase
 {
 
-	ModelRenderer Shape1;
+	private final ModelRenderer Shape1;
 
-	ModelRenderer Shape2;
+	private final ModelRenderer Shape2;
 
-	ModelRenderer Shape3;
+	private final ModelRenderer Shape3;
 
 	public ModelMoaEgg()
 	{
@@ -52,6 +52,7 @@ public class ModelMoaEgg extends ModelBase
 		model.rotateAngleZ = z;
 	}
 
+	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
 	{
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);

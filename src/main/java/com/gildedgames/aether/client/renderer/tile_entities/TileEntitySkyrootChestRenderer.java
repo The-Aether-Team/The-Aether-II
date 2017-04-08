@@ -112,18 +112,18 @@ public class TileEntitySkyrootChestRenderer extends TileEntitySpecialRenderer<Ti
 
 			switch (metadata)
 			{
-				case 2:
-					angle = 180;
-					break;
-				case 3:
-					angle = 0;
-					break;
-				case 4:
-					angle = 90;
-					break;
-				case 5:
-					angle = -90;
-					break;
+			case 2:
+				angle = 180;
+				break;
+			case 3:
+				angle = 0;
+				break;
+			case 4:
+				angle = 90;
+				break;
+			case 5:
+				angle = -90;
+				break;
 			}
 
 			if (metadata == 2 && chest.adjacentChestXPos != null)

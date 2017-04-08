@@ -37,12 +37,6 @@ public class EntityBolt extends EntityArrow
 	}
 
 	@Override
-	public void onUpdate()
-	{
-		super.onUpdate();
-	}
-
-	@Override
 	protected ItemStack getArrowStack()
 	{
 		return new ItemStack(ItemsAether.bolt, 1, this.getBoltType().ordinal());

@@ -22,6 +22,7 @@ public class BlockAmbrosiumTorch extends BlockTorch
 		this.setSoundType(SoundType.WOOD);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
 	{

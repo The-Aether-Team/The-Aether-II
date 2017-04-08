@@ -31,8 +31,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
-
 public class BlockLabyrinthChest extends BlockContainer
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
@@ -50,8 +48,8 @@ public class BlockLabyrinthChest extends BlockContainer
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand,
-			@Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing,
+			float hitX, float hitY, float hitZ)
 	{
 		TileEntity te = world.getTileEntity(pos);
 
@@ -59,9 +57,11 @@ public class BlockLabyrinthChest extends BlockContainer
 		{
 			TileEntityLabyrinthChest chest = (TileEntityLabyrinthChest) te;
 
-			if (heldItem != null && heldItem.getItem() == ItemsAether.aether_developer_wand)
+			ItemStack heldItem = player.getHeldItem(hand);
+
+			if (heldItem.getItem() == ItemsAether.aether_developer_wand)
 			{
-				world.playSound(playerIn, pos, SoundsAether.tempest_electric_shock, SoundCategory.NEUTRAL, 1.0F,
+				world.playSound(player, pos, SoundsAether.tempest_electric_shock, SoundCategory.NEUTRAL, 1.0F,
 						0.8F + (world.rand.nextFloat() * 0.5F));
 
 				chest.setGenerateLoot(!chest.generatesLoot());
@@ -92,7 +92,7 @@ public class BlockLabyrinthChest extends BlockContainer
 
 			if (ilockablecontainer != null)
 			{
-				playerIn.displayGUIChest(ilockablecontainer);
+				player.displayGUIChest(ilockablecontainer);
 			}
 
 			return true;
@@ -164,7 +164,7 @@ public class BlockLabyrinthChest extends BlockContainer
 
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-		EntityLivingBase placer, ItemStack stack)
+			EntityLivingBase placer, EnumHand hand)
 	{
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}

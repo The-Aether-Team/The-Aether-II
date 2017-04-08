@@ -3,12 +3,12 @@ package com.gildedgames.aether.common.tiles;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.containers.BlockIcestoneCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
-import com.gildedgames.aether.common.util.TickTimer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -17,8 +17,9 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.NonNullList;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 public class TileEntityIcestoneCooler extends TileEntityLockable implements ITickable, IInventory
 {
@@ -31,16 +32,9 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 
 	private static final int IRRADIATED_DUST_INDEX = 6;
 
-	private ItemStack[] inventory;
+	private NonNullList<ItemStack> inventory = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
 
 	private int reqTemperatureThreshold, currentCoolingProgress;
-
-	private TickTimer progress = new TickTimer();
-
-	public TileEntityIcestoneCooler()
-	{
-		this.inventory = new ItemStack[INVENTORY_SIZE];
-	}
 
 	public EnumFacing getFacing()
 	{
@@ -69,6 +63,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 		//        this.sync();
 	}
 
+	@Nonnull
 	public ItemStack getItemToCool()
 	{
 		return this.getStackInSlot(ITEM_TO_COOL_INDEX);
@@ -76,8 +71,8 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 
 	public boolean isCooling()
 	{
-		return this.getItemToCool() != null && this.reqTemperatureThreshold < 0 && this.getStackInSlot(IRRADIATED_DUST_INDEX) == null
-				&& this.getStackInSlot(AMBROSIUM_INDEX) != null && this.getStackInSlot(AMBROSIUM_INDEX).stackSize >= 4;
+		return this.getItemToCool() != ItemStack.EMPTY && this.reqTemperatureThreshold < 0 && this.getStackInSlot(IRRADIATED_DUST_INDEX) == ItemStack.EMPTY
+				&& this.getStackInSlot(AMBROSIUM_INDEX) != ItemStack.EMPTY && this.getStackInSlot(AMBROSIUM_INDEX).getCount() >= 4;
 	}
 
 	public int getCurrentCoolingProgress()
@@ -101,77 +96,48 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 		return INVENTORY_SIZE;
 	}
 
-	@Nullable
+	@Nonnull
 	@Override
 	public ItemStack getStackInSlot(int index)
 	{
 		if (index >= this.getSizeInventory())
 		{
-			return null;
+			return ItemStack.EMPTY;
 		}
 
-		return this.inventory[index];
+		return this.inventory.get(index);
 	}
 
-	@Nullable
+	@Nonnull
 	@Override
 	public ItemStack decrStackSize(int index, int count)
 	{
-		ItemStack stack = this.getStackInSlot(index);
+		ItemStack itemstack = ItemStackHelper.getAndSplit(this.inventory, index, count);
 
-		if (stack == null)
+		if (!itemstack.isEmpty())
 		{
-			return null;
+			//			this.markDirty();
 		}
 
-		ItemStack copiedStack;
-
-		if (stack.stackSize <= count)
-		{
-			copiedStack = stack;
-
-			this.setInventorySlotContents(index, null);
-
-			return copiedStack;
-		}
-		else
-		{
-			copiedStack = stack.splitStack(count);
-
-			if (stack.stackSize == 0)
-			{
-				this.setInventorySlotContents(index, null);
-			}
-
-			return copiedStack;
-		}
+		return itemstack;
 	}
 
-	@Nullable
+	@Nonnull
 	@Override
 	public ItemStack removeStackFromSlot(int index)
 	{
-		ItemStack stack = this.getStackInSlot(index);
-
-		if (stack != null)
-		{
-			this.setInventorySlotContents(index, null);
-
-			return stack;
-		}
-
-		return null;
+		return ItemStackHelper.getAndRemove(this.inventory, index);
 	}
 
 	@Override
-	public void setInventorySlotContents(int index, @Nullable ItemStack stack)
+	public void setInventorySlotContents(int index, @Nonnull ItemStack stack)
 	{
 		if (index >= this.getSizeInventory())
 		{
 			return;
 		}
 
-		this.inventory[index] = stack;
+		this.inventory.set(index, stack);
 	}
 
 	@Override
@@ -225,7 +191,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	@Override
 	public void clear()
 	{
-		this.inventory = new ItemStack[INVENTORY_SIZE];
+		this.inventory.clear();
 	}
 
 	@Override
@@ -292,15 +258,15 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 
 		NBTTagList stackList = new NBTTagList();
 
-		for (int i = 0; i < this.inventory.length; ++i)
+		for (int i = 0; i < this.inventory.size(); ++i)
 		{
-			if (this.inventory[i] != null)
+			if (this.inventory.get(i) != ItemStack.EMPTY)
 			{
 				NBTTagCompound stackNBT = new NBTTagCompound();
 
 				stackNBT.setByte("slot", (byte) i);
 
-				this.inventory[i].writeToNBT(stackNBT);
+				this.inventory.get(i).writeToNBT(stackNBT);
 
 				stackList.appendTag(stackNBT);
 			}
@@ -319,7 +285,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	{
 		super.readFromNBT(compound);
 
-		this.inventory = new ItemStack[INVENTORY_SIZE];
+		this.inventory = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
 
 		NBTTagList stackList = compound.getTagList("inventory", 10);
 
@@ -329,9 +295,9 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 
 			byte slotPos = stack.getByte("slot");
 
-			if (slotPos >= 0 && slotPos < this.inventory.length)
+			if (slotPos >= 0 && slotPos < this.inventory.size())
 			{
-				this.inventory[slotPos] = ItemStack.loadItemStackFromNBT(stack);
+				this.inventory.set(slotPos, new ItemStack(stack));
 			}
 		}
 
@@ -339,4 +305,17 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 		this.currentCoolingProgress = compound.getInteger("currentCoolingProgress");
 	}
 
+	@Override
+	public boolean isEmpty()
+	{
+		for (ItemStack itemstack : this.inventory)
+		{
+			if (!itemstack.isEmpty())
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
 }

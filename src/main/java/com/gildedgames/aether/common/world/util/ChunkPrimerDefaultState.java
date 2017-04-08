@@ -13,6 +13,7 @@ public class ChunkPrimerDefaultState extends ChunkPrimer
 		this.defaultState = defaultState;
 	}
 
+	@Override
 	public IBlockState getBlockState(int x, int y, int z)
 	{
 		IBlockState orig = super.getBlockState(x, y, z);

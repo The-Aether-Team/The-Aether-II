@@ -1,15 +1,14 @@
 package com.gildedgames.aether.common.world.dimensions.aether.island.logic;
 
-import java.util.HashSet;
-import java.util.List;
-
 import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.util.io.NBTHelper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.ChunkPos;
+
+import java.util.HashSet;
+import java.util.List;
 
 public class IslandSector implements NBT
 {

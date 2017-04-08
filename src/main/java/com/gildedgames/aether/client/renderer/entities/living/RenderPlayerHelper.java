@@ -27,17 +27,10 @@ public class RenderPlayerHelper
 	{
 		ItemStack gloveStack = player.getEquipmentInventory().getStackInSlot(2);
 
-		if (gloveStack != null && gloveStack.getItem() instanceof ItemAetherGloves)
+		if (gloveStack.getItem() instanceof ItemAetherGloves)
 		{
 			RenderPlayerHelper.renderGloves(player.getEntity(), (ItemAetherGloves) gloveStack.getItem(), gloveStack, event.getPartialTicks(), event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress());
 		}
-
-		ItemStack ring1 = player.getEquipmentInventory().getStackInSlot(3);
-		ItemStack ring2 = player.getEquipmentInventory().getStackInSlot(4);
-
-		//
-
-		//RenderPlayerHelper.renderRings(player.getPlayer(), ring1, ring2, event);
 	}
 
 	private static final ModelBiped modelBiped = new ModelBiped();

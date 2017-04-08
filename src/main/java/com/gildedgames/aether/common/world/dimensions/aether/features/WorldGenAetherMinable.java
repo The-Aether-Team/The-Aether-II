@@ -31,6 +31,7 @@ public class WorldGenAetherMinable extends WorldGenerator
 		this.predicate = p_i45631_3_;
 	}
 
+	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos position)
 	{
 		float f = rand.nextFloat() * (float) Math.PI;

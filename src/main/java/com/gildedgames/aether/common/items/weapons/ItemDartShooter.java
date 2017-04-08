@@ -16,11 +16,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
 
 public class ItemDartShooter extends Item
 {
@@ -33,7 +32,7 @@ public class ItemDartShooter extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems)
+	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
 		for (ItemDartType type : ItemDartType.values())
 		{
@@ -54,8 +53,10 @@ public class ItemDartShooter extends Item
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer player, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand)
 	{
+		ItemStack stack = player.getHeldItem(hand);
+
 		ItemDartType dartType = ItemDartType.fromOrdinal(stack.getMetadata());
 
 		int ammoSlot = this.getMatchingAmmoSlot(player.inventory, dartType.getAmmoItem());
@@ -127,9 +128,9 @@ public class ItemDartShooter extends Item
 			if (inventorySlot >= 0 && !player.capabilities.isCreativeMode)
 			{
 				ItemStack ammoStack = player.inventory.getStackInSlot(inventorySlot);
-				ammoStack.stackSize--;
+				ammoStack.shrink(1);
 
-				if (ammoStack.stackSize <= 0)
+				if (ammoStack.getCount() <= 0)
 				{
 					player.inventory.deleteStack(ammoStack);
 				}
@@ -141,11 +142,11 @@ public class ItemDartShooter extends Item
 	{
 		int searchMeta = ammo.ordinal();
 
-		for (int i = 0; i < inventory.mainInventory.length; i++)
+		for (int i = 0; i < inventory.mainInventory.size(); i++)
 		{
-			ItemStack stack = inventory.mainInventory[i];
+			ItemStack stack = inventory.mainInventory.get(i);
 
-			if (stack != null && stack.getItem() == ItemsAether.dart)
+			if (stack.getItem() == ItemsAether.dart)
 			{
 				if (stack.getMetadata() == searchMeta)
 				{

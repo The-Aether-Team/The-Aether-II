@@ -8,11 +8,10 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 public class ContainerIncubator extends Container
 {
@@ -44,37 +43,24 @@ public class ContainerIncubator extends Container
 		}
 	}
 
+	@Override
 	public void addListener(IContainerListener listener)
 	{
 		super.addListener(listener);
 		listener.sendAllWindowProperties(this, this.tile);
 	}
 
-	/**
-	 * Looks for changes made in the container, sends them to every listener.
-	 */
-	public void detectAndSendChanges()
-	{
-		super.detectAndSendChanges();
-	}
-
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int id, int data)
 	{
 		this.tile.setField(id, data);
 	}
 
-	public boolean canInteractWith(EntityPlayer playerIn)
+	@Override
+	public boolean canInteractWith(@Nonnull EntityPlayer playerIn)
 	{
 		return this.tile.isUsableByPlayer(playerIn);
 	}
 
-	/**
-	 * Take a stack from the specified inventory slot.
-	 */
-	@Nullable
-	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
-	{
-		return super.transferStackInSlot(playerIn, index);
-	}
 }

@@ -88,7 +88,7 @@ public class BlockIncubator extends BlockContainer
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, World world, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
 		return BOUNDS;
 	}
@@ -106,8 +106,8 @@ public class BlockIncubator extends BlockContainer
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem,
-			EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side,
+			float hitX, float hitY, float hitZ)
 	{
 		if (!world.isRemote)
 		{

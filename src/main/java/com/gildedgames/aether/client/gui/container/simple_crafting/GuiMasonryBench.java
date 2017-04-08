@@ -89,8 +89,8 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 	{
 		super.mouseReleased(mouseX, mouseY, state);
 
-		if ((this.lastStack == null && this.playerInventory.getItemStack() != null) || (this.lastStack != null
-				&& this.playerInventory.getItemStack() == null))
+		if ((this.lastStack == ItemStack.EMPTY && this.playerInventory.getItemStack() != ItemStack.EMPTY) || (this.lastStack != ItemStack.EMPTY
+				&& this.playerInventory.getItemStack() == ItemStack.EMPTY))
 		{
 			this.updateCraftingOptions();
 		}
@@ -103,7 +103,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 	{
 		super.handleMouseClick(slotIn, slotId, mouseButton, type);
 
-		if (slotIn != null && (slotIn.getHasStack() || this.playerInventory.getItemStack() != null))
+		if (slotIn != null && (slotIn.getHasStack() || this.playerInventory.getItemStack() != ItemStack.EMPTY))
 		{
 			this.updateCraftingOptions();
 		}
@@ -230,7 +230,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 				}
 			}
 
-			if (stack != null)
+			if (stack != ItemStack.EMPTY)
 			{
 				uniqueStacks.add(stack);
 			}
@@ -365,6 +365,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 		this.updateCraftingOptions();
 	}
 
+	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	{
 		if (this.currentRecipe != null)
@@ -412,7 +413,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 		if (this.hoverDescription != null && this.hoverDescription.size() > 0)
 		{
-			GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, this.width, this.height, -1, this.fontRendererObj);
+			GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, this.width, this.height, -1, this.fontRenderer);
 		}
 
 		this.hoverDescription = null;
@@ -421,19 +422,21 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 	/**
 	 * Draw the foreground layer for the GuiContainer (everything in front of the items)
 	 */
+	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
 		String name = I18n.format("container.masonry_bench");
 
-		this.fontRendererObj.drawString(name, 88 - (this.fontRendererObj.getStringWidth(name) / 2), 6, 4210752);
-		this.fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
+		this.fontRenderer.drawString(name, 88 - (this.fontRenderer.getStringWidth(name) / 2), 6, 4210752);
+		this.fontRenderer.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
 
-		this.fontRendererObj.drawString("Recipes", -126, 7, 4210752);
+		this.fontRenderer.drawString("Recipes", -126, 7, 4210752);
 	}
 
 	/**
 	 * Draws the background layer of this container (behind the items).
 	 */
+	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	{
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -473,9 +476,9 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 			Gui.drawModalRectWithCustomSizedTexture(this.guiLeft - 126, this.guiTop + 21, 0, 0, 72, 108, 72, 126);
 
-			this.drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "Nothing left",
+			this.drawCenteredString(Minecraft.getMinecraft().fontRenderer, "Nothing left",
 					this.guiLeft - 90, this.guiTop + 47, 0xFFFFFF);
-			this.drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "to craft!", this.guiLeft - 90, this.guiTop + 57, 0xFFFFFF);
+			this.drawCenteredString(Minecraft.getMinecraft().fontRenderer, "to craft!", this.guiLeft - 90, this.guiTop + 57, 0xFFFFFF);
 		}
 	}
 

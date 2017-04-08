@@ -9,6 +9,7 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class SlotAmbrosium extends Slot
@@ -21,7 +22,8 @@ public class SlotAmbrosium extends Slot
 		super(inventoryIn, index, xPosition, yPosition);
 	}
 
-	public boolean isItemValid(@Nullable ItemStack stack)
+	@Override
+	public boolean isItemValid(@Nonnull ItemStack stack)
 	{
 		return this.inventory.isItemValidForSlot(this.getSlotIndex(), stack);
 	}

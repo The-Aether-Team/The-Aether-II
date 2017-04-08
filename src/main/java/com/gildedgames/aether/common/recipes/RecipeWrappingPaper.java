@@ -8,6 +8,7 @@ import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
@@ -22,7 +23,7 @@ public class RecipeWrappingPaper implements IRecipe
 		{
 			ItemStack stack = inventory.getStackInSlot(i);
 
-			if (stack != null && stack.getItem() == Items.PAPER)
+			if (stack.getItem() == Items.PAPER)
 			{
 				if (paperLoc != -1)
 				{
@@ -57,7 +58,7 @@ public class RecipeWrappingPaper implements IRecipe
 		{
 			ItemStack stack = inventory.getStackInSlot(i);
 
-			if (stack != null && stack.getItem() == Items.PAPER)
+			if (stack.getItem() == Items.PAPER)
 			{
 				paperLoc = i;
 
@@ -69,12 +70,12 @@ public class RecipeWrappingPaper implements IRecipe
 
 		ItemWrappingPaper.PresentDyeData data = new ItemWrappingPaper.PresentDyeData();
 
-		if (bowDye != null)
+		if (bowDye != ItemStack.EMPTY)
 		{
 			data.setBowColor((byte) bowDye.getMetadata());
 		}
 
-		if (boxDye != null)
+		if (boxDye != ItemStack.EMPTY)
 		{
 			data.setBoxColor((byte) boxDye.getMetadata());
 		}
@@ -96,19 +97,19 @@ public class RecipeWrappingPaper implements IRecipe
 	@Override
 	public ItemStack getRecipeOutput()
 	{
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	@Override
-	public ItemStack[] getRemainingItems(InventoryCrafting inv)
+	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv)
 	{
-		ItemStack[] stacks = new ItemStack[inv.getSizeInventory()];
+		NonNullList<ItemStack> stacks = NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
 
-		for (int i = 0; i < stacks.length; ++i)
+		for (int i = 0; i < stacks.size(); ++i)
 		{
 			ItemStack stack = inv.getStackInSlot(i);
 
-			stacks[i] = ForgeHooks.getContainerItem(stack);
+			stacks.add(i, ForgeHooks.getContainerItem(stack));
 		}
 
 		return stacks;

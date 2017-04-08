@@ -10,7 +10,7 @@ import com.gildedgames.aether.common.entities.genes.util.SimpleGeneStorage;
 import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.List;
 import java.util.Random;
 

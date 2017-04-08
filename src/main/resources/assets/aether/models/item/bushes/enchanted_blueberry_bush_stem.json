@@ -1,6 +1,0 @@
-{
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "aether:blocks/bushes/enchanted_blueberry_bush_stem"
-	}
-}

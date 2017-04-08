@@ -29,31 +29,31 @@ public class BlockWallSkyrootSign extends BlockSkyrootSign
 	{
 		switch (state.getValue(FACING))
 		{
-			case NORTH:
-			default:
-				return SIGN_NORTH_AABB;
-			case SOUTH:
-				return SIGN_SOUTH_AABB;
-			case WEST:
-				return SIGN_WEST_AABB;
-			case EAST:
-				return SIGN_EAST_AABB;
+		case NORTH:
+		default:
+			return SIGN_NORTH_AABB;
+		case SOUTH:
+			return SIGN_SOUTH_AABB;
+		case WEST:
+			return SIGN_WEST_AABB;
+		case EAST:
+			return SIGN_EAST_AABB;
 		}
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
-		EnumFacing enumfacing = state.getValue(BlockWallSkyrootSign.FACING);
+		EnumFacing enumfacing = state.getValue(FACING);
 
-		if (!world.getBlockState(pos.offset(enumfacing.getOpposite())).getMaterial().isSolid())
+		if (!worldIn.getBlockState(pos.offset(enumfacing.getOpposite())).getMaterial().isSolid())
 		{
-			this.dropBlockAsItem(world, pos, state, 0);
+			this.dropBlockAsItem(worldIn, pos, state, 0);
 
-			world.setBlockToAir(pos);
+			worldIn.setBlockToAir(pos);
 		}
 
-		super.neighborChanged(state, world, pos, neighborBlock);
+		super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 
-import java.awt.Rectangle;
+import java.awt.*;
 
 public class IslandData implements NBT
 {

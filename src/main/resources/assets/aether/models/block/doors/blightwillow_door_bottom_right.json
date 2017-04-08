@@ -1,7 +1,0 @@
-{
-	"parent": "block/door_bottom_rh",
-	"textures": {
-		"bottom": "aether:blocks/doors/blightwillow_door_lower",
-		"top": "aether:blocks/doors/blightwillow_door_upper"
-	}
-}

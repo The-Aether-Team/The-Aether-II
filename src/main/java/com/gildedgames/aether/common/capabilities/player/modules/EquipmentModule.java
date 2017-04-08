@@ -71,7 +71,7 @@ public class EquipmentModule extends PlayerAetherModule
 		{
 			ItemStack stack = equipment.getStackInSlot(i);
 
-			if (stack == null)
+			if (stack == ItemStack.EMPTY)
 			{
 				continue;
 			}

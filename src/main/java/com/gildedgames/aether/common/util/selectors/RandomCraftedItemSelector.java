@@ -34,7 +34,7 @@ public class RandomCraftedItemSelector implements Loot
 		IRecipe recipe = this.validRecipeCache.get(random.nextInt(this.validRecipeCache.size()));
 
 		ItemStack stack = recipe.getRecipeOutput().copy();
-		stack.stackSize = 1;
+		stack.setCount(1);
 
 		return stack;
 	}

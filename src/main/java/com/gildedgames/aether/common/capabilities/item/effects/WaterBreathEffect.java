@@ -43,7 +43,8 @@ public class WaterBreathEffect implements IEffect<WaterBreathEffect.Provider>
 		@Override
 		public void onEntityUpdate(IPlayerAether player)
 		{
-			if (player.getEntity().isInWater()) {
+			if (player.getEntity().isInWater())
+			{
 				player.getEntity().setAir(300); // full breath
 			}
 		}

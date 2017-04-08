@@ -7,12 +7,11 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
 
 public class BlockDivine extends BlockLabyrinth implements IBlockVariants
 {
@@ -24,7 +23,7 @@ public class BlockDivine extends BlockLabyrinth implements IBlockVariants
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
+	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		list.add(new ItemStack(item, 1, NORMAL));
 		list.add(new ItemStack(item, 1, DIVINE));
@@ -59,12 +58,12 @@ public class BlockDivine extends BlockLabyrinth implements IBlockVariants
 	{
 		switch (stack.getMetadata())
 		{
-			case DIVINE:
-				return "divine";
-			case NORMAL:
-				return "normal";
-			default:
-				return "missingno";
+		case DIVINE:
+			return "divine";
+		case NORMAL:
+			return "normal";
+		default:
+			return "missingno";
 		}
 	}
 

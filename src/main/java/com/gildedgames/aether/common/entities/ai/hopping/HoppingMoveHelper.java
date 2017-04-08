@@ -44,6 +44,7 @@ public class HoppingMoveHelper extends EntityMoveHelper
 		this.action = EntityMoveHelper.Action.MOVE_TO;
 	}
 
+	@Override
 	public void onUpdateMoveHelper()
 	{
 		this.entity.rotationYaw = this.limitAngle(this.entity.rotationYaw, this.yRot, 90.0F);

@@ -44,6 +44,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
@@ -212,11 +213,11 @@ public class CommonEvents
 					}
 					else
 					{
-						player.attackEntityFrom(DamageSource.outOfWorld, 200.0F);
+						player.attackEntityFrom(DamageSource.OUT_OF_WORLD, 200.0F);
 
 						if (player.getHealth() <= 0 && !player.isDead)
 						{
-							player.sendStatusMessage(new TextComponentString("You fell out of the Aether without a Cloud Parachute. Ouch!"));
+							player.sendStatusMessage(new TextComponentString("You fell out of the Aether without a Cloud Parachute. Ouch!"), false);
 							player.isDead = true;
 						}
 					}
@@ -342,7 +343,7 @@ public class CommonEvents
 	{
 		IPlayerAether aePlayer = PlayerAether.getPlayer(event.getEntityPlayer());
 
-		if (event.getItemStack() == null || aePlayer == null)
+		if (event.getItemStack() == ItemStack.EMPTY || aePlayer == null)
 		{
 			return;
 		}
@@ -375,17 +376,17 @@ public class CommonEvents
 			if (slot >= 0)
 			{
 				ItemStack newStack = stack.copy();
-				newStack.stackSize = 1;
+				newStack.setCount(1);
 
 				inventory.setInventorySlotContents(slot, newStack);
 
 				if (!player.getEntity().capabilities.isCreativeMode)
 				{
 					// Technically, there should never be STACKABLE equipment, but in case there is, we need to handle it.
-					stack.stackSize--;
+					stack.shrink(1);
 				}
 
-				player.getEntity().setHeldItem(hand, stack.stackSize <= 0 ? null : stack);
+				player.getEntity().setHeldItem(hand, stack.getCount() <= 0 ? ItemStack.EMPTY : stack);
 
 				return true;
 			}
@@ -401,7 +402,7 @@ public class CommonEvents
 		{
 			final ItemStack stack = event.getEntityPlayer().inventory.getCurrentItem();
 
-			if (stack != null && stack.getItem() == ItemsAether.skyroot_bucket)
+			if (stack.getItem() == ItemsAether.skyroot_bucket)
 			{
 				PlayerUtil.fillBucketInHand(event.getEntityPlayer(), event.getItemStack(), new ItemStack(ItemsAether.skyroot_milk_bucket));
 			}
@@ -417,11 +418,13 @@ public class CommonEvents
 				if (!event.getEntityPlayer().capabilities.isCreativeMode)
 				{
 					IFluidHandler fluidHandler = FluidUtil.getFluidHandler(event.getEmptyBucket());
-					ItemStack stack = null;
+					ItemStack stack = ItemStack.EMPTY;
 
 					if (fluidHandler != null)
 					{
-						stack = FluidUtil.tryEmptyContainer(event.getEmptyBucket(), fluidHandler, Integer.MAX_VALUE, player, true);
+						FluidActionResult result = FluidUtil.tryEmptyContainer(event.getEmptyBucket(), fluidHandler, Integer.MAX_VALUE, player, true);
+
+						stack = result.getResult();
 					}
 
 					if (event.getEmptyBucket().getItem() == Items.WATER_BUCKET)
@@ -451,11 +454,13 @@ public class CommonEvents
 			if (!player.capabilities.isCreativeMode)
 			{
 				IFluidHandler fluidHandler = FluidUtil.getFluidHandler(event.getEmptyBucket());
-				ItemStack stack = null;
+				ItemStack stack = ItemStack.EMPTY;
 
 				if (fluidHandler != null)
 				{
-					stack = FluidUtil.tryEmptyContainer(event.getEmptyBucket(), fluidHandler, Integer.MAX_VALUE, player, true);
+					FluidActionResult result = FluidUtil.tryEmptyContainer(event.getEmptyBucket(), fluidHandler, Integer.MAX_VALUE, player, true);
+
+					stack = result.getResult();
 				}
 
 				if (event.getEmptyBucket().getItem() == Items.LAVA_BUCKET)
@@ -512,14 +517,13 @@ public class CommonEvents
 				{
 					float damage = event.getAmount();
 
-					if (damage >= 3.0F && player.getActiveItemStack() != null
-							&& player.getActiveItemStack().getItem() instanceof ItemAetherShield)
+					if (damage >= 3.0F && player.getActiveItemStack().getItem() instanceof ItemAetherShield)
 					{
 						int itemDamage = 1 + MathHelper.floor(damage);
 
 						player.getActiveItemStack().damageItem(itemDamage, player);
 
-						if (player.getActiveItemStack().stackSize <= 0)
+						if (player.getActiveItemStack().getCount() <= 0)
 						{
 							EnumHand hand = player.getActiveHand();
 
@@ -527,14 +531,14 @@ public class CommonEvents
 
 							if (hand == EnumHand.MAIN_HAND)
 							{
-								player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, null);
+								player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
 							}
 							else
 							{
-								player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, null);
+								player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, ItemStack.EMPTY);
 							}
 
-							player.setHeldItem(player.getActiveHand(), null);
+							player.setHeldItem(player.getActiveHand(), ItemStack.EMPTY);
 
 							player.playSound(SoundEvents.ITEM_SHIELD_BREAK, 0.8F, 0.8F + player.world.rand.nextFloat() * 0.4F);
 						}

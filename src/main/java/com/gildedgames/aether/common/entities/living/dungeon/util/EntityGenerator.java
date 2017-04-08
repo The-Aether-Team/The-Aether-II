@@ -30,9 +30,11 @@ public class EntityGenerator extends EntityCreature
 	}
 
 	@Override
-	public EnumActionResult applyPlayerInteraction(EntityPlayer player, Vec3d vec, ItemStack stack, EnumHand hand)
+	public EnumActionResult applyPlayerInteraction(EntityPlayer player, Vec3d vec, EnumHand hand)
 	{
-		if (player.getHeldItemMainhand() != null && player.getHeldItemMainhand().getItem() == ItemsAether.aether_developer_wand)
+		ItemStack stack = player.getHeldItem(hand);
+
+		if (stack.getItem() == ItemsAether.aether_developer_wand)
 		{
 			this.world.playSound(player, player.getPosition(), SoundsAether.tempest_electric_shock, SoundCategory.NEUTRAL, 1.0F,
 					0.8F + (this.rand.nextFloat() * 0.5F));

@@ -11,6 +11,7 @@ public class BlockCustom extends Block
 		super(blockMaterialIn);
 	}
 
+	@Override
 	public BlockCustom setSoundType(SoundType type)
 	{
 		super.setSoundType(type);

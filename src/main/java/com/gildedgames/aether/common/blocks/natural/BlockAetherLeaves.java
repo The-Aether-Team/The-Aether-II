@@ -8,7 +8,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -48,8 +47,6 @@ public class BlockAetherLeaves extends Block implements IShearable
 		this.setSoundType(SoundType.PLANT);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_DECAYABLE, Boolean.TRUE).withProperty(PROPERTY_CHECK_DECAY, Boolean.TRUE));
-
-		Blocks.FIRE.setFireInfo(this, 30, 60);
 	}
 
 	@Override
@@ -71,7 +68,7 @@ public class BlockAetherLeaves extends Block implements IShearable
 	}
 
 	@Override
-	public boolean causesSuffocation()
+	public boolean causesSuffocation(IBlockState state)
 	{
 		return false;
 	}
@@ -301,52 +298,52 @@ public class BlockAetherLeaves extends Block implements IShearable
 
 		switch (side)
 		{
-			case DOWN:
+		case DOWN:
 
-				if (axisalignedbb.minY > 0.0D)
-				{
-					return true;
-				}
+			if (axisalignedbb.minY > 0.0D)
+			{
+				return true;
+			}
 
-				break;
-			case UP:
+			break;
+		case UP:
 
-				if (axisalignedbb.maxY < 1.0D)
-				{
-					return true;
-				}
+			if (axisalignedbb.maxY < 1.0D)
+			{
+				return true;
+			}
 
-				break;
-			case NORTH:
+			break;
+		case NORTH:
 
-				if (axisalignedbb.minZ > 0.0D)
-				{
-					return true;
-				}
+			if (axisalignedbb.minZ > 0.0D)
+			{
+				return true;
+			}
 
-				break;
-			case SOUTH:
+			break;
+		case SOUTH:
 
-				if (axisalignedbb.maxZ < 1.0D)
-				{
-					return true;
-				}
+			if (axisalignedbb.maxZ < 1.0D)
+			{
+				return true;
+			}
 
-				break;
-			case WEST:
+			break;
+		case WEST:
 
-				if (axisalignedbb.minX > 0.0D)
-				{
-					return true;
-				}
+			if (axisalignedbb.minX > 0.0D)
+			{
+				return true;
+			}
 
-				break;
-			case EAST:
+			break;
+		case EAST:
 
-				if (axisalignedbb.maxX < 1.0D)
-				{
-					return true;
-				}
+			if (axisalignedbb.maxX < 1.0D)
+			{
+				return true;
+			}
 		}
 
 		return !blockAccess.getBlockState(pos.offset(side)).doesSideBlockRendering(blockAccess, pos.offset(side), side.getOpposite());

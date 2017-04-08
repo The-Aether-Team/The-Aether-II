@@ -50,7 +50,7 @@ public class TileEntityPresent extends TileEntity
 
 		if (stack.getItem() instanceof ItemMonsterPlacer)
 		{
-			ItemMonsterPlacer.spawnCreature(this.world, ItemMonsterPlacer.getEntityIdFromItem(stack), x2, y2, z2);
+			ItemMonsterPlacer.spawnCreature(this.world, ItemMonsterPlacer.getNamedIdFrom(stack), x2, y2, z2);
 			return;
 		}
 
@@ -61,6 +61,7 @@ public class TileEntityPresent extends TileEntity
 			EntityTNTPrimed tnt = new EntityTNTPrimed(this.world,
 					this.getPos().getX() + 0.5D, this.getPos().getY() + 0.5D, this.getPos().getZ() + 0.5D, null);
 			tnt.setFuse(20);
+
 			entity = tnt;
 		}
 		else if (stack.getItem() == ItemsAether.sentry_vaultbox)
@@ -70,7 +71,8 @@ public class TileEntityPresent extends TileEntity
 		else
 		{
 			EntityItem item = new EntityItem(this.world, x2, y2, z2, stack);
-			item.setPickupDelay(10);
+			item.setPickupDelay(10)
+			;
 			entity = item;
 		}
 

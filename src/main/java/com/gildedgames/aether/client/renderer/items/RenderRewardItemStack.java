@@ -15,6 +15,7 @@ public class RenderRewardItemStack extends RenderEntityItem
 		super(renderManager, renderItem);
 	}
 
+	@Override
 	public void doRender(EntityItem item, double x, double y, double z, float f1, float f2)
 	{
 		if (item instanceof EntityRewardItemStack)

@@ -45,7 +45,7 @@ public class BlockAltar extends Block implements ITileEntityProvider
 
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-			EntityLivingBase placer, ItemStack stack)
+			EntityLivingBase placer)
 	{
 		return this.getDefaultState().withProperty(PROPERTY_FACING, placer.getHorizontalFacing());
 	}
@@ -63,8 +63,8 @@ public class BlockAltar extends Block implements ITileEntityProvider
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem,
-			EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side,
+			float hitX, float hitY, float hitZ)
 	{
 		if (!world.isRemote)
 		{
@@ -72,42 +72,35 @@ public class BlockAltar extends Block implements ITileEntityProvider
 
 			ItemStack heldStack = player.inventory.getCurrentItem();
 
-			if (heldStack != null)
-			{
-				if (heldStack.isItemEqual(altar.getStackOnAltar()))
-				{
-					this.dropNextItem(altar, world);
-				}
-				else if (heldStack.getItem() == ItemsAether.ambrosium_shard)
-				{
-					if (altar.getAmbrosiumCount() < 16)
-					{
-						if (!player.capabilities.isCreativeMode)
-						{
-							heldStack.stackSize -= 1;
-						}
-
-						altar.addAmbrosiumShard();
-					}
-				}
-				else if (AetherCore.PROXY.getRecipeManager().getAltarRegistry().isEnchantableItem(heldStack))
-				{
-					ItemStack stack = heldStack.copy();
-					stack.stackSize = 1;
-
-					if (altar.getStackOnAltar() != null)
-					{
-						world.spawnEntity(altar.createEntityItemAboveAltar(altar.getStackOnAltar()));
-					}
-
-					altar.setStackOnAltar(stack);
-
-					heldStack.stackSize--;
-				}
-			}
-			else
+			if (heldStack.isItemEqual(altar.getStackOnAltar()))
 			{
 				this.dropNextItem(altar, world);
+			}
+			else if (heldStack.getItem() == ItemsAether.ambrosium_shard)
+			{
+				if (altar.getAmbrosiumCount() < 16)
+				{
+					if (!player.capabilities.isCreativeMode)
+					{
+						heldStack.shrink(1);
+					}
+
+					altar.addAmbrosiumShard();
+				}
+			}
+			else if (AetherCore.PROXY.getRecipeManager().getAltarRegistry().isEnchantableItem(heldStack))
+			{
+				ItemStack stack = heldStack.copy();
+				stack.setCount(1);
+
+				if (altar.getStackOnAltar() != null)
+				{
+					world.spawnEntity(altar.createEntityItemAboveAltar(altar.getStackOnAltar()));
+				}
+
+				altar.setStackOnAltar(stack);
+
+				heldStack.shrink(1);
 			}
 
 			altar.attemptCrafting();
@@ -124,7 +117,7 @@ public class BlockAltar extends Block implements ITileEntityProvider
 		{
 			stack = altar.getStackOnAltar();
 
-			altar.setStackOnAltar(null);
+			altar.setStackOnAltar(ItemStack.EMPTY);
 		}
 		else if (altar.getAmbrosiumCount() > 0)
 		{

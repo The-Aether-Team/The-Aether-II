@@ -1,19 +1,7 @@
 {
 	"variants": {
-        "type=0,variant=short": { "model": "aether:tall_grass/short_aether" },
-        "type=1,variant=short": { "model": "aether:tall_grass/short_enchanted" },
-        "type=2,variant=short": { "model": "aether:tall_grass/short_kura" },
-        "type=3,variant=short": { "model": "aether:tall_grass/short_frostroot" },
-        "type=4,variant=short": { "model": "aether:tall_grass/short_blighted" },
-        "type=0,variant=normal": { "model": "aether:tall_grass/normal_aether" },
-        "type=1,variant=normal": { "model": "aether:tall_grass/normal_enchanted" },
-        "type=2,variant=normal": { "model": "aether:tall_grass/normal_kura" },
-        "type=3,variant=normal": { "model": "aether:tall_grass/normal_frostroot" },
-        "type=4,variant=normal": { "model": "aether:tall_grass/normal_blighted" },
-        "type=0,variant=long": { "model": "aether:tall_grass/long_aether" },
-        "type=1,variant=long": { "model": "aether:tall_grass/long_enchanted" },
-        "type=2,variant=long": { "model": "aether:tall_grass/long_kura" },
-        "type=3,variant=long": { "model": "aether:tall_grass/long_frostroot" },
-        "type=4,variant=long": { "model": "aether:tall_grass/long_blighted" }
+        "variant=short": { "model": "aether:tall_grass/short_aether" },
+        "variant=normal": { "model": "aether:tall_grass/normal_aether" },
+        "variant=long": { "model": "aether:tall_grass/long_aether" }
     }
 }

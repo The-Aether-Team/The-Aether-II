@@ -20,7 +20,7 @@ public class TileEntityWildcard extends TileEntitySchematicBlock
 		{
 			if (stack != null && (stack.getItem() instanceof ItemBlock || stack.getItem() == Items.STRING))
 			{
-				contentSize += stack.stackSize;
+				contentSize += stack.getCount();
 			}
 		}
 
@@ -33,22 +33,23 @@ public class TileEntityWildcard extends TileEntitySchematicBlock
 		}
 
 		int currentIndex = this.getWorld().rand.nextInt(contentSize);
-		ItemStack chosenStack = null;
+		ItemStack chosenStack = ItemStack.EMPTY;
 
 		for (ItemStack stack : this.contents)
 		{
-			if (stack != null)
+			if (stack != ItemStack.EMPTY)
 			{
 				if (stack.getItem() instanceof ItemBlock || stack.getItem() == Items.STRING)
 				{
-					if (stack.stackSize > currentIndex)
+					if (stack.getCount() > currentIndex)
 					{
 						chosenStack = stack;
+
 						break;
 					}
 					else
 					{
-						currentIndex -= stack.stackSize;
+						currentIndex -= stack.getCount();
 					}
 				}
 			}

@@ -9,20 +9,24 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
+
+import javax.annotation.Nonnull;
 
 public class TileEntityLabyrinthChest extends TileEntityLockable implements net.minecraft.util.ITickable, IInventory
 {
 
 	final private int CHEST_SIZE = 27;
 
-	private ItemStack[] chestContents = new ItemStack[this.CHEST_SIZE];
+	private NonNullList<ItemStack> chestContents = NonNullList.withSize(this.CHEST_SIZE, ItemStack.EMPTY);
 
 	public float lidAngle;
 
@@ -86,7 +90,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 			{
 				int slotID = this.world.rand.nextInt(this.getSizeInventory());
 
-				while (this.getStackInSlot(slotID) != null)
+				while (this.getStackInSlot(slotID) != ItemStack.EMPTY)
 				{
 					slotID = this.world.rand.nextInt(this.getSizeInventory());
 				}
@@ -108,11 +112,6 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 	}
 
 	@Override
-	public void updateContainingBlockInfo()
-	{
-		super.updateContainingBlockInfo();
-	}
-
 	public void update()
 	{
 		int i = this.pos.getX();
@@ -224,65 +223,54 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 	}
 
 	@Override
+	public boolean isEmpty()
+	{
+		for (ItemStack itemstack : this.chestContents)
+		{
+			if (!itemstack.isEmpty())
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	@Override
+	@Nonnull
 	public ItemStack getStackInSlot(int index)
 	{
-		return this.chestContents[index];
+		return this.chestContents.get(index);
 	}
 
 	@Override
 	public ItemStack decrStackSize(int index, int count)
 	{
-		if (this.chestContents[index] != null)
-		{
-			if (this.chestContents[index].stackSize <= count)
-			{
-				ItemStack itemstack1 = this.chestContents[index];
-				this.chestContents[index] = null;
-				this.markDirty();
-				return itemstack1;
-			}
-			else
-			{
-				ItemStack itemstack = this.chestContents[index].splitStack(count);
+		ItemStack itemstack = ItemStackHelper.getAndSplit(this.chestContents, index, count);
 
-				if (this.chestContents[index].stackSize == 0)
-				{
-					this.chestContents[index] = null;
-				}
-
-				this.markDirty();
-				return itemstack;
-			}
-		}
-		else
+		if (!itemstack.isEmpty())
 		{
-			return null;
+			this.markDirty();
 		}
+
+		return itemstack;
 	}
 
 	@Override
+	@Nonnull
 	public ItemStack removeStackFromSlot(int index)
 	{
-		if (this.chestContents[index] != null)
-		{
-			ItemStack itemstack = this.chestContents[index];
-			this.chestContents[index] = null;
-			return itemstack;
-		}
-		else
-		{
-			return null;
-		}
+		return ItemStackHelper.getAndRemove(this.chestContents, index);
 	}
 
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack)
 	{
-		this.chestContents[index] = stack;
+		this.chestContents.set(index, stack);
 
-		if (stack != null && stack.stackSize > this.getInventoryStackLimit())
+		if (stack.getCount() > this.getInventoryStackLimit())
 		{
-			stack.stackSize = this.getInventoryStackLimit();
+			stack.setCount(this.getInventoryStackLimit());
 		}
 
 		this.markDirty();
@@ -290,11 +278,11 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 
 	public void setInventorySlotContentsWithoutMarking(int index, ItemStack stack)
 	{
-		this.chestContents[index] = stack;
+		this.chestContents.set(index, stack);
 
-		if (stack != null && stack.stackSize > this.getInventoryStackLimit())
+		if (stack.getCount() > this.getInventoryStackLimit())
 		{
-			stack.stackSize = this.getInventoryStackLimit();
+			stack.setCount(this.getInventoryStackLimit());
 		}
 	}
 
@@ -308,7 +296,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 	public boolean isUsableByPlayer(EntityPlayer player)
 	{
 		return this.world.getTileEntity(this.pos) == this &&
-			player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
+				player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -364,10 +352,7 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 	@Override
 	public void clear()
 	{
-		for (int i = 0; i < this.chestContents.length; ++i)
-		{
-			this.chestContents[i] = null;
-		}
+		this.chestContents.clear();
 	}
 
 	@Override
@@ -382,12 +367,13 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 		return this.customName != null && this.customName.length() > 0;
 	}
 
+	@Override
 	public void readFromNBT(NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
 
 		NBTTagList nbttaglist = compound.getTagList("Items", 10);
-		this.chestContents = new ItemStack[this.getSizeInventory()];
+		this.chestContents = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
 
 		if (compound.hasKey("CustomName", 8))
 		{
@@ -397,11 +383,12 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 		for (int i = 0; i < nbttaglist.tagCount(); ++i)
 		{
 			NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(i);
+
 			int j = nbttagcompound.getByte("Slot") & 255;
 
-			if (j >= 0 && j < this.chestContents.length)
+			if (j >= 0 && j < this.chestContents.size())
 			{
-				this.chestContents[j] = ItemStack.loadItemStackFromNBT(nbttagcompound);
+				this.chestContents.set(j, new ItemStack(nbttagcompound));
 			}
 		}
 
@@ -410,18 +397,22 @@ public class TileEntityLabyrinthChest extends TileEntityLockable implements net.
 		this.generateLoot = compound.getBoolean("generateLoot");
 	}
 
+	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
+
 		NBTTagList nbttaglist = new NBTTagList();
 
-		for (int i = 0; i < this.chestContents.length; ++i)
+		for (int i = 0; i < this.chestContents.size(); ++i)
 		{
-			if (this.chestContents[i] != null)
+			if (this.chestContents.get(i) != ItemStack.EMPTY)
 			{
 				NBTTagCompound nbttagcompound = new NBTTagCompound();
 				nbttagcompound.setByte("Slot", (byte) i);
-				this.chestContents[i].writeToNBT(nbttagcompound);
+
+				this.chestContents.get(i).writeToNBT(nbttagcompound);
+
 				nbttaglist.appendTag(nbttagcompound);
 			}
 		}

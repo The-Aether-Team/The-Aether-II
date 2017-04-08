@@ -19,6 +19,7 @@ public class ItemDeathSeal extends ItemCompanion
 		super(companionClass);
 	}
 
+	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
 	{
 		long disabledTime = ItemDeathSeal.getTicksUntilEnabled(stack, worldIn);
@@ -59,6 +60,7 @@ public class ItemDeathSeal extends ItemCompanion
 		return compound.getLong("disabledTimer") - world.getTotalWorldTime();
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
 	{

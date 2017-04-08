@@ -43,7 +43,7 @@ public class GuiRequiredMaterial extends GuiButton
 			if (stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
 			{
 				this.required = stack;
-				this.displayStack = new ItemStack(stack.getItem(), stack.stackSize);
+				this.displayStack = new ItemStack(stack.getItem(), stack.getCount());
 				return;
 			}
 		}
@@ -54,7 +54,7 @@ public class GuiRequiredMaterial extends GuiButton
 		{
 			OreDictionaryRequirement ore = (OreDictionaryRequirement) obj;
 			this.displayStack = OreDictionary.getOres(((OreDictionaryRequirement) obj).getKey()).get(0).copy();
-			this.displayStack.stackSize = ore.getCount();
+			this.displayStack.setCount(ore.getCount());
 		}
 		else if (obj instanceof ItemStack)
 		{
@@ -89,14 +89,14 @@ public class GuiRequiredMaterial extends GuiButton
 			GlStateManager.pushMatrix();
 			GlStateManager.translate(0.0F, 0.0F, 300.0F);
 
-			if (!this.resultStack || this.displayStack.stackSize > 1)
+			if (!this.resultStack || this.displayStack.getCount() > 1)
 			{
 				boolean hasEnough = RecipeUtil.hasEnoughOfMaterial(Minecraft.getMinecraft().player, this.required) || this.resultStack;
 
-				int xOffset = (Math.max(String.valueOf(this.displayStack.stackSize).length() - 1, 0)) * -6;
+				int xOffset = (Math.max(String.valueOf(this.displayStack.getCount()).length() - 1, 0)) * -6;
 
-				this.drawString(Minecraft.getMinecraft().fontRendererObj,
-						(!hasEnough ? TextFormatting.RED : "") + String.valueOf(this.displayStack.stackSize),
+				this.drawString(Minecraft.getMinecraft().fontRenderer,
+						(!hasEnough ? TextFormatting.RED : "") + String.valueOf(this.displayStack.getCount()),
 						this.xPosition + 12 + xOffset, this.yPosition + this.height - 8, 0xFFFFFF);
 			}
 

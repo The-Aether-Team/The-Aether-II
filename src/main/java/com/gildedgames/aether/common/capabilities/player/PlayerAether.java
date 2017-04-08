@@ -48,8 +48,6 @@ public class PlayerAether implements IPlayerAether
 
 	private final BossModule bossModule;
 
-	private final ExtendedReachModule extendedReachModule;
-
 	private final DungeonModule dungeonModule;
 
 	private boolean hasDiedInAetherBefore;
@@ -65,7 +63,6 @@ public class PlayerAether implements IPlayerAether
 		this.parachuteModule = new ParachuteModule(this);
 		this.bossModule = new BossModule(this);
 		this.equipmentModule = new EquipmentModule(this);
-		this.extendedReachModule = new ExtendedReachModule(this);
 		this.dungeonModule = new DungeonModule(this);
 
 		Collection<PlayerAetherModule> modules = new ArrayList<>();
@@ -76,7 +73,6 @@ public class PlayerAether implements IPlayerAether
 		modules.add(this.parachuteModule);
 		modules.add(this.bossModule);
 		modules.add(this.equipmentModule);
-		modules.add(this.extendedReachModule);
 		modules.add(this.dungeonModule);
 
 		this.modules = modules.toArray(new PlayerAetherModule[modules.size()]);
@@ -145,7 +141,7 @@ public class PlayerAether implements IPlayerAether
 		{
 			if (aePlayer.getEquipmentModule().getEffectPool(new ResourceLocation(AetherCore.MOD_ID, "fire_immunity")).isPresent())
 			{
-				if (event.getSource() == DamageSource.inFire || event.getSource() == DamageSource.onFire || event.getSource() == DamageSource.lava)
+				if (event.getSource() == DamageSource.ON_FIRE || event.getSource() == DamageSource.IN_FIRE || event.getSource() == DamageSource.LAVA)
 				{
 					event.setCanceled(true);
 				}
@@ -225,11 +221,13 @@ public class PlayerAether implements IPlayerAether
 		this.hasDiedInAetherBefore = tag.getBoolean("HasDiedInAether");
 	}
 
+	@Override
 	public EntityPlayer getEntity()
 	{
 		return this.entity;
 	}
 
+	@Override
 	public PlayerCompanionModule getCompanionModule()
 	{
 		return this.companionModule;

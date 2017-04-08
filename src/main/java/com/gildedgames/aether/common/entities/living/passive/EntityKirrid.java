@@ -1,10 +1,7 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.EntitiesAether;
-import com.gildedgames.aether.common.entities.util.AetherSpawnEggInfo;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.misc.ItemAetherSpawnEgg;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.google.common.collect.Sets;
 import net.minecraft.entity.EntityAgeable;
@@ -19,7 +16,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -82,6 +78,7 @@ public class EntityKirrid extends EntitySheep
 		return stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
 	}
 
+	@Override
 	@Nullable
 	protected ResourceLocation getLootTable()
 	{
@@ -91,24 +88,6 @@ public class EntityKirrid extends EntitySheep
 		}
 
 		return LootTablesAether.ENTITY_KIRRID;
-	}
-
-	@Override
-	public ItemStack getPickedResult(RayTraceResult target)
-	{
-		String id = EntitiesAether.getStringFromClass(this.getClass());
-
-		if (!EntitiesAether.entityEggs.containsKey(id))
-		{
-			return null;
-		}
-
-		AetherSpawnEggInfo info = EntitiesAether.entityEggs.get(id);
-
-		ItemStack stack = new ItemStack(ItemsAether.aether_spawn_egg, 1);
-		ItemAetherSpawnEgg.applyEntityIdToItemStack(stack, info.getSpawnedID());
-
-		return stack;
 	}
 
 	@Override

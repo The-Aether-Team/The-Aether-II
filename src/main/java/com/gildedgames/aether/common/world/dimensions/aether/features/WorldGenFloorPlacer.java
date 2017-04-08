@@ -1,15 +1,14 @@
 package com.gildedgames.aether.common.world.dimensions.aether.features;
 
-import java.util.List;
-import java.util.Random;
-
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.google.common.collect.Lists;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.List;
+import java.util.Random;
 
 public class WorldGenFloorPlacer extends WorldGenerator
 {

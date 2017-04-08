@@ -34,6 +34,7 @@ public class RenderSwet extends RenderLiving<EntitySwet>
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
 	}
 
+	@Override
 	protected ResourceLocation getEntityTexture(EntitySwet entity)
 	{
 		return entity.getType().texture;

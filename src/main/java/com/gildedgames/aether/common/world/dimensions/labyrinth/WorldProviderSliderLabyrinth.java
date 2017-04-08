@@ -21,7 +21,7 @@ public class WorldProviderSliderLabyrinth extends WorldProviderSurface
 	}
 
 	@Override
-	protected void createBiomeProvider()
+	protected void init()
 	{
 		this.biomeProvider = new BiomeProviderSingle(BiomesAether.BIOME_SLIDER_LABYRINTH);
 	}
@@ -60,12 +60,6 @@ public class WorldProviderSliderLabyrinth extends WorldProviderSurface
 	public int getRespawnDimension(EntityPlayerMP player)
 	{
 		return 0;
-	}
-
-	@Override
-	public String getSaveFolder()
-	{
-		return super.getSaveFolder();
 	}
 
 	@Override

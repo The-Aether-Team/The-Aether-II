@@ -15,6 +15,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -23,7 +24,6 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
 import java.util.Random;
 
 public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, IBlockVariants
@@ -32,11 +32,7 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 			BLUE_SKYROOT = new BlockVariant(0, "blue_skyroot"),
 			GREEN_SKYROOT = new BlockVariant(1, "green_skyroot"),
 			DARK_BLUE_SKYROOT = new BlockVariant(2, "dark_blue_skyroot"),
-			GOLDEN_OAK = new BlockVariant(3, "golden_oak"),
-			BLIGHTED = new BlockVariant(4, "blighted"),
-			BLIGHTWILLOW = new BlockVariant(5, "blightwillow"),
-			EARTHSHIFTER = new BlockVariant(6, "earthshifter"),
-			FROSTPINE = new BlockVariant(7, "frostpine");
+			GOLDEN_OAK = new BlockVariant(3, "golden_oak");
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BLUE_SKYROOT, GREEN_SKYROOT, DARK_BLUE_SKYROOT, GOLDEN_OAK);
 
@@ -56,14 +52,6 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	}
 
 	@Override
-	public int getLightValue(IBlockState state)
-	{
-		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
-
-		return (variant == BLIGHTWILLOW ? (int) (0.6F * 15.0F) : this.lightValue);
-	}
-
-	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
 		return SAPLING_AABB;
@@ -71,7 +59,7 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
+	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{

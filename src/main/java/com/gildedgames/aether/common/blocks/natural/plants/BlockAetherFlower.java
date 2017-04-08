@@ -10,10 +10,9 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
 
 public class BlockAetherFlower extends BlockAetherPlant implements IBlockVariants
 {
@@ -44,7 +43,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockVariant
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
+	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{

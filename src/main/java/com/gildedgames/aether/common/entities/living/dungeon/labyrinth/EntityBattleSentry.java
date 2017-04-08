@@ -117,6 +117,7 @@ public class EntityBattleSentry extends EntityAetherMob
 		return SoundsAether.sentry_death;
 	}
 
+	@Override
 	public int getVerticalFaceSpeed()
 	{
 		return 0;

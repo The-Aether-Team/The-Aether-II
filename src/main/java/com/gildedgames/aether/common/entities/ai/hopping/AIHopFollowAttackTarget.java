@@ -27,6 +27,7 @@ public class AIHopFollowAttackTarget extends EntityAI<EntityLiving>
 	/**
 	 * Returns whether the EntityAIBase should begin execution.
 	 */
+	@Override
 	public boolean shouldExecute()
 	{
 		EntityLivingBase entitylivingbase = this.entity().getAttackTarget();
@@ -37,6 +38,7 @@ public class AIHopFollowAttackTarget extends EntityAI<EntityLiving>
 	/**
 	 * Execute a one shot task or start executing a continuous task
 	 */
+	@Override
 	public void startExecuting()
 	{
 		this.growTieredTimer = 300;
@@ -46,6 +48,7 @@ public class AIHopFollowAttackTarget extends EntityAI<EntityLiving>
 	/**
 	 * Returns whether an in-progress EntityAIBase should continue executing
 	 */
+	@Override
 	public boolean continueExecuting()
 	{
 		EntityLivingBase entitylivingbase = this.entity().getAttackTarget();
@@ -57,6 +60,7 @@ public class AIHopFollowAttackTarget extends EntityAI<EntityLiving>
 	/**
 	 * Updates the task
 	 */
+	@Override
 	public void updateTask()
 	{
 		this.entity().faceEntity(this.entity().getAttackTarget(), 10.0F, 10.0F);

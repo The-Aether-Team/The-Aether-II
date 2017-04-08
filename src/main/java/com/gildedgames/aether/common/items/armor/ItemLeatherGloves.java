@@ -28,7 +28,7 @@ public class ItemLeatherGloves extends ItemAetherGloves
 		{
 			NBTTagCompound displayTag = compound.getCompoundTag("display");
 
-			if (displayTag != null && displayTag.hasKey("color", 3))
+			if (displayTag.hasKey("color", 3))
 			{
 				return displayTag.getInteger("color");
 			}
@@ -71,6 +71,7 @@ public class ItemLeatherGloves extends ItemAetherGloves
 		}
 	}
 
+	@Override
 	public ResourceLocation getGloveTexture(int layer)
 	{
 		if (layer > 0)

@@ -42,7 +42,6 @@ import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceFactory;
 import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceHandler;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -171,34 +170,34 @@ public class CommonProxy implements IAetherServiceLocator
 		return this.recipeManager;
 	}
 
+	@Override
 	public IItemPropertiesRegistry getItemPropertiesRegistry()
 	{
 		return this.itemPropertiesRegistry;
 	}
 
+	@Override
 	public ITabRegistry getTabRegistry()
 	{
 		return this.tabRegistry;
 	}
 
+	@Override
 	public IInstanceRegistry getInstanceRegistry()
 	{
 		return this.instanceRegistry;
 	}
 
+	@Override
 	public SimpleCraftingRegistry getSimpleCraftingRegistry()
 	{
 		return this.simpleCraftingRegistry;
 	}
 
+	@Override
 	public SimpleCraftingRegistry getMasonryRegistry()
 	{
 		return this.masonryRegistry;
-	}
-
-	public void setExtendedReachDistance(EntityPlayer entity, float distance)
-	{
-		((EntityPlayerMP) entity).interactionManager.setBlockReachDistance(5.0f + distance);
 	}
 
 	public DungeonInstanceHandler getDungeonInstanceHandler()
@@ -216,11 +215,13 @@ public class CommonProxy implements IAetherServiceLocator
 	{
 	}
 
+	@Override
 	public IEquipmentRegistry getEquipmentRegistry()
 	{
 		return this.equipmentRegistry;
 	}
 
+	@Override
 	public IAltarRecipeRegistry getAltarRecipeRegistry()
 	{
 		return this.recipeManager.getAltarRegistry();

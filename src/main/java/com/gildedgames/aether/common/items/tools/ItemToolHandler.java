@@ -49,7 +49,7 @@ public class ItemToolHandler
 	@SubscribeEvent
 	public static void onBlockActivated(PlayerInteractEvent.RightClickItem event)
 	{
-		if (event.getItemStack() != null && event.getItemStack().getItem() instanceof ItemTool)
+		if (event.getItemStack().getItem() instanceof ItemTool)
 		{
 			Item.ToolMaterial material = ((ItemTool) event.getItemStack().getItem()).getToolMaterial();
 
@@ -67,7 +67,7 @@ public class ItemToolHandler
 	@SubscribeEvent
 	public static void onBlockActivated(PlayerInteractEvent.RightClickBlock event)
 	{
-		if (event.getItemStack() != null && event.getItemStack().getItem() instanceof ItemTool)
+		if (event.getItemStack().getItem() instanceof ItemTool)
 		{
 			Item.ToolMaterial material = ((ItemTool) event.getItemStack().getItem()).getToolMaterial();
 
@@ -92,7 +92,7 @@ public class ItemToolHandler
 
 		ItemStack stack = event.getHarvester().getHeldItem(EnumHand.MAIN_HAND);
 
-		if (stack != null && stack.getItem() instanceof ItemTool)
+		if (stack.getItem() instanceof ItemTool)
 		{
 			Item.ToolMaterial material = ((ItemTool) stack.getItem()).getToolMaterial();
 
@@ -112,7 +112,7 @@ public class ItemToolHandler
 	{
 		ItemStack stack = event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND);
 
-		if (stack != null && stack.getItem() instanceof ItemTool)
+		if (stack.getItem() instanceof ItemTool)
 		{
 			Item.ToolMaterial material = ((ItemTool) stack.getItem()).getToolMaterial();
 

@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 public class ContainerMasonryBench extends Container
 {
@@ -68,7 +68,7 @@ public class ContainerMasonryBench extends Container
 	{
 		if (recipe == null || !RecipeUtil.canCraft(this.player, recipe))
 		{
-			this.craftResult.setInventorySlotContents(0, null);
+			this.craftResult.setInventorySlotContents(0, ItemStack.EMPTY);
 			this.craftingResult.setRecipe(null);
 
 			return;
@@ -79,7 +79,7 @@ public class ContainerMasonryBench extends Container
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer player)
+	public boolean canInteractWith(@Nonnull EntityPlayer player)
 	{
 		return this.world.getBlockState(this.pos).getBlock() == BlocksAether.masonry_bench
 				&& player.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
@@ -91,10 +91,12 @@ public class ContainerMasonryBench extends Container
 		return slotIn.inventory != this.craftResult && super.canMergeSlot(stack, slotIn);
 	}
 
-	@Nullable
+	@Override
+	@Nonnull
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
 	{
-		ItemStack itemstack = null;
+		ItemStack itemstack = ItemStack.EMPTY;
+
 		Slot slot = this.inventorySlots.get(index);
 
 		if (slot != null && slot.getHasStack())
@@ -106,7 +108,7 @@ public class ContainerMasonryBench extends Container
 			{
 				if (!this.mergeItemStack(itemstack1, 0, 36, true))
 				{
-					return null;
+					return ItemStack.EMPTY;
 				}
 
 				slot.onSlotChange(itemstack1, itemstack);
@@ -115,36 +117,36 @@ public class ContainerMasonryBench extends Container
 			{
 				if (!this.mergeItemStack(itemstack1, 27, 36, false))
 				{
-					return null;
+					return ItemStack.EMPTY;
 				}
 			}
 			else if (index >= 27 && index < 36)
 			{
 				if (!this.mergeItemStack(itemstack1, 0, 27, false))
 				{
-					return null;
+					return ItemStack.EMPTY;
 				}
 			}
 			else if (!this.mergeItemStack(itemstack1, 0, 36, false))
 			{
-				return null;
+				return ItemStack.EMPTY;
 			}
 
-			if (itemstack1.stackSize == 0)
+			if (itemstack1.getCount() == 0)
 			{
-				slot.putStack(null);
+				slot.putStack(ItemStack.EMPTY);
 			}
 			else
 			{
 				slot.onSlotChanged();
 			}
 
-			if (itemstack1.stackSize == itemstack.stackSize)
+			if (itemstack1.getCount() == itemstack.getCount())
 			{
-				return null;
+				return ItemStack.EMPTY;
 			}
 
-			slot.onPickupFromSlot(playerIn, itemstack1);
+			slot.onTake(playerIn, itemstack1);
 		}
 
 		return itemstack;

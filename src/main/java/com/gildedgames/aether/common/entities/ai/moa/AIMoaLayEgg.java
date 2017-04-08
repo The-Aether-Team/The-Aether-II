@@ -36,6 +36,7 @@ public class AIMoaLayEgg extends EntityAIBase
 		this.moveSpeed = moveSpeed;
 	}
 
+	@Override
 	public boolean isInterruptible()
 	{
 		return false;

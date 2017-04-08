@@ -8,13 +8,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
 
 public class EntityEdison extends EntityNPC
 {
@@ -86,9 +83,9 @@ public class EntityEdison extends EntityNPC
 	}
 
 	@Override
-	public boolean processInteract(EntityPlayer player, EnumHand hand, @Nullable ItemStack stack)
+	public boolean processInteract(EntityPlayer player, EnumHand hand)
 	{
-		if (!super.processInteract(player, hand, stack))
+		if (!super.processInteract(player, hand))
 		{
 			if (player.world.isRemote)
 			{

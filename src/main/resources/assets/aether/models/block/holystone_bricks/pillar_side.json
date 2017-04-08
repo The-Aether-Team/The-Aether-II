@@ -1,5 +1,5 @@
 {
-	"parent": "block/column_side",
+	"parent": "block/cube_column",
 	"textures": {
 		"end": "aether:blocks/holystone_bricks/holystone_base_top",
 		"side": "aether:blocks/holystone_bricks/holystone_pillar"

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.dungeon;
 
-import java.awt.Rectangle;
+import java.awt.*;
 import java.util.List;
 
 public class DungeonLayer

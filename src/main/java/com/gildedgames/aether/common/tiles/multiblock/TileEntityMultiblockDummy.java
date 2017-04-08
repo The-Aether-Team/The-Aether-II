@@ -75,6 +75,7 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 		return this.controllerPos;
 	}
 
+	@Override
 	public void readFromNBT(NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
@@ -85,6 +86,7 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 		}
 	}
 
+	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);

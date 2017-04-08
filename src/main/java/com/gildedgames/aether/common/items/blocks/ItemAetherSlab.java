@@ -25,10 +25,12 @@ public class ItemAetherSlab extends ItemBlock
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing,
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing,
 			float hitX, float hitY, float hitZ)
 	{
-		if (stack.stackSize != 0 && player.canPlayerEdit(pos.offset(facing), facing, stack))
+		ItemStack stack = player.getHeldItem(hand);
+
+		if (stack.getCount() != 0 && player.canPlayerEdit(pos.offset(facing), facing, stack))
 		{
 			IBlockState state = worldIn.getBlockState(pos);
 
@@ -50,15 +52,14 @@ public class ItemAetherSlab extends ItemBlock
 						worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS,
 								(soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 
-						--stack.stackSize;
+						stack.shrink(1);
 					}
 
 					return EnumActionResult.SUCCESS;
 				}
 			}
 
-			return this.tryPlace(player, stack, worldIn, pos.offset(facing)) ? EnumActionResult.SUCCESS :
-					super.onItemUse(stack, player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+			return this.tryPlace(player, stack, worldIn, pos.offset(facing)) ? EnumActionResult.SUCCESS : super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 		}
 		else
 		{
@@ -66,6 +67,7 @@ public class ItemAetherSlab extends ItemBlock
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side, EntityPlayer player, ItemStack stack)
 	{
@@ -100,7 +102,7 @@ public class ItemAetherSlab extends ItemBlock
 				worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS,
 						(soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 
-				--stack.stackSize;
+				stack.shrink(1);
 			}
 
 			return true;

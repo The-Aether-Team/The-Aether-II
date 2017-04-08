@@ -1,6 +1,0 @@
-{
-	"parent": "block/cross",
-	"textures": {
-		"cross": "aether:blocks/saplings/blightwillow_sapling"
-	}
-}

@@ -63,13 +63,13 @@ public class BlockAetherPortal extends BlockBreakable
 	{
 		switch (state.getValue(PROPERTY_AXIS))
 		{
-			case X:
-				return X_AABB;
-			case Y:
-			default:
-				return Y_AABB;
-			case Z:
-				return Z_AABB;
+		case X:
+			return X_AABB;
+		case Y:
+		default:
+			return Y_AABB;
+		case Z:
+			return Z_AABB;
 		}
 	}
 
@@ -165,24 +165,25 @@ public class BlockAetherPortal extends BlockBreakable
 		}
 	}
 
+	@Override
 	public IBlockState withRotation(IBlockState state, Rotation rot)
 	{
 		switch (rot)
 		{
-			case COUNTERCLOCKWISE_90:
-			case CLOCKWISE_90:
-				switch (state.getValue(PROPERTY_AXIS))
-				{
-					case X:
-						return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.Z);
-					case Z:
-						return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.X);
-					default:
-						return state;
-				}
-
+		case COUNTERCLOCKWISE_90:
+		case CLOCKWISE_90:
+			switch (state.getValue(PROPERTY_AXIS))
+			{
+			case X:
+				return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.Z);
+			case Z:
+				return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.X);
 			default:
 				return state;
+			}
+
+		default:
+			return state;
 		}
 	}
 
@@ -204,7 +205,7 @@ public class BlockAetherPortal extends BlockBreakable
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn)
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
 		final EnumFacing.Axis axis = state.getValue(PROPERTY_AXIS);
 

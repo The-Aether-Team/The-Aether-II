@@ -44,20 +44,20 @@ public class AetherGuiHandler implements IGuiHandler
 	{
 		switch (id)
 		{
-			case SKYROOT_WORKBENCH_ID:
-				return new ContainerSimpleCrafting(player, new BlockPos(x, y, z));
-			case INVENTORY_EQUIPMENT_ID:
-				return new ContainerEquipment(PlayerAether.getPlayer(player));
-			case FROSTPINE_COOLER_ID:
-				return new ContainerIcestoneCooler(player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
-			case INCUBATOR_ID:
-				return new ContainerIncubator(player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
-			case MASONRY_BENCH_ID:
-				return new ContainerMasonryBench(player, new BlockPos(x, y, z));
-			case EDISON_GUI_ID:
-				return new ContainerDialogController(player);
-			default:
-				return null;
+		case SKYROOT_WORKBENCH_ID:
+			return new ContainerSimpleCrafting(player, new BlockPos(x, y, z));
+		case INVENTORY_EQUIPMENT_ID:
+			return new ContainerEquipment(PlayerAether.getPlayer(player));
+		case FROSTPINE_COOLER_ID:
+			return new ContainerIcestoneCooler(player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
+		case INCUBATOR_ID:
+			return new ContainerIncubator(player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
+		case MASONRY_BENCH_ID:
+			return new ContainerMasonryBench(player, new BlockPos(x, y, z));
+		case EDISON_GUI_ID:
+			return new ContainerDialogController(player);
+		default:
+			return null;
 		}
 	}
 
@@ -67,25 +67,25 @@ public class AetherGuiHandler implements IGuiHandler
 	{
 		switch (id)
 		{
-			case SKYROOT_WORKBENCH_ID:
-				return new GuiSimpleCrafting(player, new BlockPos(x, y, z));
-			case INVENTORY_EQUIPMENT_ID:
-				return new GuiEquipment(PlayerAether.getPlayer(player));
-			case FROSTPINE_COOLER_ID:
-				return new GuiIcestoneCooler(player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
-			case INCUBATOR_ID:
-				BlockPos pos = new BlockPos(x, y, z);
-				return new GuiIncubator(player.inventory, (IInventory) world.getTileEntity(pos), pos);
-			case MASONRY_BENCH_ID:
-				return new GuiMasonryBench(player, new BlockPos(x, y, z));
-			case EDISON_GUI_ID:
-				GuiDialogController controller = new GuiDialogController(player);
+		case SKYROOT_WORKBENCH_ID:
+			return new GuiSimpleCrafting(player, new BlockPos(x, y, z));
+		case INVENTORY_EQUIPMENT_ID:
+			return new GuiEquipment(PlayerAether.getPlayer(player));
+		case FROSTPINE_COOLER_ID:
+			return new GuiIcestoneCooler(player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
+		case INCUBATOR_ID:
+			BlockPos pos = new BlockPos(x, y, z);
+			return new GuiIncubator(player.inventory, (IInventory) world.getTileEntity(pos), pos);
+		case MASONRY_BENCH_ID:
+			return new GuiMasonryBench(player, new BlockPos(x, y, z));
+		case EDISON_GUI_ID:
+			GuiDialogController controller = new GuiDialogController(player);
 
-				controller.show(EdisonDialog.Scenes.OUTPOST_SCENE);
+			controller.show(EdisonDialog.Scenes.OUTPOST_SCENE);
 
-				return controller;
-			default:
-				return null;
+			return controller;
+		default:
+			return null;
 		}
 	}
 }

@@ -15,6 +15,7 @@ public class PathNavigateFlyer extends PathNavigate
 		super(entitylivingIn, worldIn);
 	}
 
+	@Override
 	protected PathFinder getPathFinder()
 	{
 		return new PathFinder(new FlyNodeProcessor());
@@ -23,16 +24,19 @@ public class PathNavigateFlyer extends PathNavigate
 	/**
 	 * If on ground or swimming and can swim
 	 */
+	@Override
 	protected boolean canNavigate()
 	{
 		return true;
 	}
 
+	@Override
 	protected Vec3d getEntityPosition()
 	{
 		return new Vec3d(this.theEntity.posX, this.theEntity.posY + (double) this.theEntity.height * 0.5D, this.theEntity.posZ);
 	}
 
+	@Override
 	protected void pathFollow()
 	{
 		Vec3d vec3d = this.getEntityPosition();
@@ -46,7 +50,7 @@ public class PathNavigateFlyer extends PathNavigate
 		}
 
 		for (int j = Math.min(this.currentPath.getCurrentPathIndex() + 6, this.currentPath.getCurrentPathLength() - 1);
-				j > this.currentPath.getCurrentPathIndex(); --j)
+			 j > this.currentPath.getCurrentPathIndex(); --j)
 		{
 			Vec3d vec3d1 = this.currentPath.getVectorFromIndex(this.theEntity, j);
 
@@ -61,16 +65,9 @@ public class PathNavigateFlyer extends PathNavigate
 	}
 
 	/**
-	 * Trims path data from the end to the first sun covered block
-	 */
-	protected void removeSunnyPath()
-	{
-		super.removeSunnyPath();
-	}
-
-	/**
 	 * Checks if the specified entity can safely walk to the specified location.
 	 */
+	@Override
 	protected boolean isDirectPathBetweenPoints(Vec3d posVec31, Vec3d posVec32, int sizeX, int sizeY, int sizeZ)
 	{
 		RayTraceResult raytraceresult = this.world.rayTraceBlocks(posVec31, new Vec3d(posVec32.xCoord,
@@ -78,6 +75,7 @@ public class PathNavigateFlyer extends PathNavigate
 		return raytraceresult == null || raytraceresult.typeOfHit == RayTraceResult.Type.MISS;
 	}
 
+	@Override
 	public boolean canEntityStandOnPos(BlockPos pos)
 	{
 		return !this.world.getBlockState(pos).isFullBlock();

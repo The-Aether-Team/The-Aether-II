@@ -9,48 +9,47 @@ import org.lwjgl.opengl.GL11;
 
 public class ModelTrackingSentry extends ModelBase
 {
-	//fields
-	ModelRenderer Shape1;
+	private final ModelRenderer Shape1;
 
-	ModelRenderer Shape2;
+	private final ModelRenderer Shape2;
 
-	ModelRenderer Shape3;
+	private final ModelRenderer Shape3;
 
-	ModelRenderer Shape4;
+	private final ModelRenderer Shape4;
 
-	ModelRenderer Shape5;
+	private final ModelRenderer Shape5;
 
-	ModelRenderer Shape6;
+	private final ModelRenderer Shape6;
 
-	ModelRenderer Shape7;
+	private final ModelRenderer Shape7;
 
-	ModelRenderer Shape8;
+	private final ModelRenderer Shape8;
 
-	ModelRenderer Shape9;
+	private final ModelRenderer Shape9;
 
-	ModelRenderer Shape10;
+	private final ModelRenderer Shape10;
 
-	ModelRenderer Shape11;
+	private final ModelRenderer Shape11;
 
-	ModelRenderer body_eye;
+	private final ModelRenderer body_eye;
 
-	ModelRenderer body_crest_top;
+	private final ModelRenderer body_crest_top;
 
-	ModelRenderer body_crest_left_top;
+	private final ModelRenderer body_crest_left_top;
 
-	ModelRenderer body_crest_left_bottom;
+	private final ModelRenderer body_crest_left_bottom;
 
-	ModelRenderer body_crest_bottom;
+	private final ModelRenderer body_crest_bottom;
 
-	ModelRenderer body_crest_right_top;
+	private final ModelRenderer body_crest_right_top;
 
-	ModelRenderer body_crest_right_bottom;
+	private final ModelRenderer body_crest_right_bottom;
 
-	ModelRenderer body_crest_right_top2;
+	private final ModelRenderer body_crest_right_top2;
 
-	ModelRenderer body_crest_right_top3;
+	private final ModelRenderer body_crest_right_top3;
 
-	ModelRenderer Shape12;
+	private final ModelRenderer Shape12;
 
 	public ModelTrackingSentry()
 	{
@@ -185,6 +184,7 @@ public class ModelTrackingSentry extends ModelBase
 		this.setRotation(this.Shape12, 0F, 0F, 0F);
 	}
 
+	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
@@ -228,6 +228,7 @@ public class ModelTrackingSentry extends ModelBase
 		model.rotateAngleZ = z;
 	}
 
+	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
 	{
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.projectiles;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.MoverType;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.MathHelper;
@@ -63,7 +64,7 @@ public class EntityTNTPresent extends Entity
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
 		this.motionY -= 0.039999999105930328D;
-		this.move(this.motionX, this.motionY, this.motionZ);
+		this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
 		this.motionX *= 0.98000001907348633D;
 		this.motionY *= 0.98000001907348633D;
 		this.motionZ *= 0.98000001907348633D;

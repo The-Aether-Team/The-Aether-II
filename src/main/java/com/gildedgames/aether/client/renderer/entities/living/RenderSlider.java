@@ -61,31 +61,31 @@ public class RenderSlider extends RenderLiving<EntitySlider>
 			{
 				switch (entity.getDirection())
 				{
-					case NONE:
-					{
-						this.signalLayer.setResourceLocation(null);
-						break;
-					}
-					case RIGHT:
-					{
-						this.signalLayer.setResourceLocation(signalling ? SIGNAL_RIGHT : null);
-						break;
-					}
-					case LEFT:
-					{
-						this.signalLayer.setResourceLocation(signalling ? SIGNAL_LEFT : null);
-						break;
-					}
-					case FORWARD:
-					{
-						this.signalLayer.setResourceLocation(signalling ? SIGNAL_FORWARD : null);
-						break;
-					}
-					case BACKWARD:
-					{
-						this.signalLayer.setResourceLocation(signalling ? SIGNAL_BACKWARD : null);
-						break;
-					}
+				case NONE:
+				{
+					this.signalLayer.setResourceLocation(null);
+					break;
+				}
+				case RIGHT:
+				{
+					this.signalLayer.setResourceLocation(signalling ? SIGNAL_RIGHT : null);
+					break;
+				}
+				case LEFT:
+				{
+					this.signalLayer.setResourceLocation(signalling ? SIGNAL_LEFT : null);
+					break;
+				}
+				case FORWARD:
+				{
+					this.signalLayer.setResourceLocation(signalling ? SIGNAL_FORWARD : null);
+					break;
+				}
+				case BACKWARD:
+				{
+					this.signalLayer.setResourceLocation(signalling ? SIGNAL_BACKWARD : null);
+					break;
+				}
 				}
 			}
 

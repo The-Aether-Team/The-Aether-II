@@ -1,14 +1,14 @@
 {
 	"parent": "block/block",
 	"textures": {
-		"particle": "aether:blocks/labyrinth_chest/Labyrinth Chest Main Front",
-		"0": "aether:blocks/labyrinth_chest/Labyrinth Chest Main Side",
-		"1": "aether:blocks/labyrinth_chest/Labyrinth Chest Main Front",
-		"2": "aether:blocks/labyrinth_chest/Labyrinth Chest Main Open Bottom",
-		"3": "aether:blocks/labyrinth_chest/Labyrinth Chest Main Bottom",
-		"4": "aether:blocks/labyrinth_chest/Labyrinth Chest Main Top",
-		"5": "aether:blocks/labyrinth_chest/Labyrinth Chest Main Open Top",
-		"6": "aether:blocks/labyrinth_chest/Labyrinth Chest Corners"
+		"particle": "aether:blocks/labyrinth_chest/labyrinth_chest_main_front",
+		"0": "aether:blocks/labyrinth_chest/labyrinth_chest_main_side",
+		"1": "aether:blocks/labyrinth_chest/labyrinth_chest_main_front",
+		"2": "aether:blocks/labyrinth_chest/labyrinth_chest_main_open_bottom",
+		"3": "aether:blocks/labyrinth_chest/labyrinth_chest_main_bottom",
+		"4": "aether:blocks/labyrinth_chest/labyrinth_chest_main_top",
+		"5": "aether:blocks/labyrinth_chest/labyrinth_chest_main_open_top",
+		"6": "aether:blocks/labyrinth_chest/labyrinth_chest_corners"
 	},
 	"elements": [
 		{

@@ -28,7 +28,10 @@ import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import com.gildedgames.aether.common.items.blocks.ItemBlockVariants;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import com.google.common.collect.Lists;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockBed;
+import net.minecraft.block.BlockButtonStone;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
@@ -77,21 +80,17 @@ public class BlocksAether
 
 	public static final BlockArkeniumOre arkenium_ore = new BlockArkeniumOre();
 
-	public static final BlockAetherLog skyroot_log = new BlockAetherLog(),
-			golden_oak_log = new BlockGoldenOakLog(),
-			frostpine_log = new BlockAetherLog(),
-			blightwillow_log = new BlockAetherLog(),
-			earthshifter_log = new BlockAetherLog();
+	public static final BlockAetherLog skyroot_log = new BlockAetherLog();
 
-	public static final BlockAetherLeaves blue_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.BLUE_SKYROOT.getMeta()),
-			green_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.GREEN_SKYROOT.getMeta()),
-			dark_blue_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.DARK_BLUE_SKYROOT.getMeta()),
-			golden_oak_leaves = new BlockAetherLeaves(BlockAetherSapling.GOLDEN_OAK.getMeta()),
-			blighted_leaves = new BlockAetherLeaves(BlockAetherSapling.BLIGHTED.getMeta()),
-			frostpine_leaves = new BlockAetherLeaves(BlockAetherSapling.FROSTPINE.getMeta()),
-			blightwillow_leaves = new BlockAetherLeaves(BlockAetherSapling.BLIGHTWILLOW.getMeta()),
-			earthshifter_leaves = new BlockAetherLeaves(BlockAetherSapling.EARTHSHIFTER.getMeta()),
-			vined_earthshifter_leaves = new BlockAetherLeaves(BlockAetherSapling.EARTHSHIFTER.getMeta());
+	public static final BlockAetherLog golden_oak_log = new BlockGoldenOakLog();
+
+	public static final BlockAetherLeaves blue_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.BLUE_SKYROOT.getMeta());
+
+	public static final BlockAetherLeaves green_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.GREEN_SKYROOT.getMeta());
+
+	public static final BlockAetherLeaves dark_blue_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.DARK_BLUE_SKYROOT.getMeta());
+
+	public static final BlockAetherLeaves golden_oak_leaves = new BlockAetherLeaves(BlockAetherSapling.GOLDEN_OAK.getMeta());
 
 	public static final BlockAetherPortal aether_portal = new BlockAetherPortal();
 
@@ -102,8 +101,6 @@ public class BlocksAether
 	public static final BlockAetherCraftingTable aether_crafting_table = new BlockAetherCraftingTable();
 
 	public static final BlockBlueberryBush blueberry_bush = new BlockBlueberryBush();
-
-	public static final BlockBlueberryBush enchanted_blueberry_bush = new BlockBlueberryBush();
 
 	public static final BlockOrangeTree orange_tree = new BlockOrangeTree();
 
@@ -165,10 +162,7 @@ public class BlocksAether
 
 	public static final BlockButtonStone holystone_button = new BlockHolystoneButton();
 
-	public static final BlockCustomLadder skyroot_ladder = new BlockCustomLadder(),
-			blightwillow_ladder = new BlockCustomLadder(),
-			earthshifter_ladder = new BlockCustomLadder(),
-			frostpine_ladder = new BlockCustomLadder();
+	public static final BlockCustomLadder skyroot_ladder = new BlockCustomLadder();
 
 	public static final BlockLabyrinthTotem labyrinth_totem = new BlockLabyrinthTotem(Material.IRON);
 
@@ -236,10 +230,6 @@ public class BlocksAether
 
 	public static final BlockMoaEgg moa_egg = new BlockMoaEgg();
 
-	public static final Block structure_extended = new BlockStructureExtended().setBlockUnbreakable().setResistance(6000000.0F);
-
-	public static final BlockVine skyroot_vines = new BlockVineNoGrowth(), enchanted_skyroot_vines = new BlockVineNoGrowth();
-
 	public static final Block icestone_cooler = new BlockIcestoneCooler();
 
 	public static final Block incubator = new BlockIncubator();
@@ -294,19 +284,11 @@ public class BlocksAether
 
 		registerBlock("skyroot_log", BlocksAether.skyroot_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		registerBlock("golden_oak_log", BlocksAether.golden_oak_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		//registerBlock("frostpine_log", BlocksAether.frostpine_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		//registerBlock("blightwillow_log", BlocksAether.blightwillow_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS).setLightLevel(0.6F));
-		//registerBlock("earthshifter_log", BlocksAether.earthshifter_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		registerBlock("blue_skyroot_leaves", BlocksAether.blue_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		registerBlock("green_skyroot_leaves", BlocksAether.green_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		registerBlock("dark_blue_skyroot_leaves", BlocksAether.dark_blue_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		registerBlock("golden_oak_leaves", BlocksAether.golden_oak_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		//registerBlock("blighted_leaves", BlocksAether.blighted_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		//registerBlock("frostpine_leaves", BlocksAether.frostpine_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		//registerBlock("blightwillow_leaves", BlocksAether.blightwillow_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		//registerBlock("earthshifter_leaves", BlocksAether.earthshifter_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		//registerBlock("vined_earthshifter_leaves", BlocksAether.vined_earthshifter_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		registerBlock("quicksoil", BlocksAether.quicksoil.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
@@ -333,7 +315,6 @@ public class BlocksAether
 		registerBlock("tall_aether_grass", BlocksAether.tall_aether_grass.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS), new ItemBlockVariants(BlocksAether.tall_aether_grass));
 
 		registerBlock("blueberry_bush", BlocksAether.blueberry_bush.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS), new ItemBlockVariants(BlocksAether.blueberry_bush));
-		//registerBlock("enchanted_blueberry_bush", BlocksAether.enchanted_blueberry_bush.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS), new ItemBlockVariants(BlocksAether.enchanted_blueberry_bush));
 
 		registerBlock("orange_tree", BlocksAether.orange_tree.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
@@ -377,9 +358,6 @@ public class BlocksAether
 
 		registerBlock("skyroot_door", BlocksAether.skyroot_door);
 		registerBlock("arkenium_door", BlocksAether.arkenium_door);
-		//registerBlock("blightwillow_door", BlocksAether.blightwillow_door);
-		//registerBlock("earthshifter_door", BlocksAether.earthshifter_door);
-		//registerBlock("frostpine_door", BlocksAether.frostpine_door);
 
 		registerBlock("icestone_bricks", BlocksAether.icestone_bricks.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
@@ -392,9 +370,6 @@ public class BlocksAether
 		registerBlock("skyroot_trapdoor", BlocksAether.skyroot_trapdoor.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
 		registerBlock("skyroot_ladder", BlocksAether.skyroot_ladder.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-		//registerBlock("blightwillow_ladder", BlocksAether.blightwillow_ladder.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS).setLightLevel(0.6F));
-		//registerBlock("earthshifter_ladder", BlocksAether.earthshifter_ladder.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		//registerBlock("frostpine_ladder", BlocksAether.frostpine_ladder.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		registerBlock("skyroot_button", BlocksAether.skyroot_button.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		registerBlock("holystone_button", BlocksAether.holystone_button.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
@@ -459,11 +434,6 @@ public class BlocksAether
 		registerBlock("woven_sticks", BlocksAether.woven_sticks.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS), new ItemBlockVariants(BlocksAether.woven_sticks));
 		registerBlock("moa_egg", BlocksAether.moa_egg);
 
-		registerBlock("structure_extended", BlocksAether.structure_extended);
-
-		//registerBlock("skyroot_vines", BlocksAether.skyroot_vines.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		//registerBlock("enchanted_skyroot_vines", BlocksAether.enchanted_skyroot_vines.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-
 		registerBlock("present", BlocksAether.present.setCreativeTab(CreativeTabsAether.MISCELLANEOUS), new ItemBlockPresent(BlocksAether.present));
 		registerBlock("labyrinth_container", BlocksAether.labyrinth_container.setCreativeTab(CreativeTabsAether.DUNGEON), new ItemBlockVariants(BlocksAether.labyrinth_container));
 
@@ -508,7 +478,6 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(BlocksAether.aether_flower, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.orange_tree, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.blueberry_bush, 60, 100);
-		Blocks.FIRE.setFireInfo(BlocksAether.enchanted_blueberry_bush, 60, 100);
 
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_log_wall, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_planks, 5, 20);
@@ -524,9 +493,6 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_fence_gate, 5, 20);
 
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_ladder, 5, 20);
-		Blocks.FIRE.setFireInfo(BlocksAether.blightwillow_ladder, 5, 20);
-		Blocks.FIRE.setFireInfo(BlocksAether.earthshifter_ladder, 5, 20);
-		Blocks.FIRE.setFireInfo(BlocksAether.frostpine_ladder, 5, 20);
 
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_pressure_plate, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_bed, 5, 20);
@@ -539,10 +505,14 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(BlocksAether.icestone_cooler, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.incubator, 5, 20);
 
+		Blocks.FIRE.setFireInfo(BlocksAether.blue_skyroot_leaves, 30, 60);
+		Blocks.FIRE.setFireInfo(BlocksAether.dark_blue_skyroot_leaves, 30, 60);
+		Blocks.FIRE.setFireInfo(BlocksAether.golden_oak_leaves, 30, 60);
+		Blocks.FIRE.setFireInfo(BlocksAether.green_skyroot_leaves, 30, 60);
+
 		registerHarvestLevels();
 
 		BlocksAether.postRegistration.forEach(Runnable::run);
-
 		BlocksAether.postRegistration.clear();
 	}
 

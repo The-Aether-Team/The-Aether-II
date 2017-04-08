@@ -10,7 +10,7 @@ public abstract class MessageHandlerServer<REQ extends IMessage, RES extends IMe
 	@Override
 	public RES onMessage(REQ message, MessageContext ctx)
 	{
-		return this.onMessage(message, ctx.getServerHandler().playerEntity);
+		return this.onMessage(message, ctx.getServerHandler().player);
 	}
 
 	public abstract RES onMessage(REQ message, EntityPlayer player);

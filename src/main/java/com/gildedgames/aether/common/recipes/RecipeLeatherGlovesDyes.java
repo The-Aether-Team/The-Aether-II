@@ -7,6 +7,7 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
@@ -26,21 +27,18 @@ public class RecipeLeatherGlovesDyes implements IRecipe
 		{
 			ItemStack invStack = inventory.getStackInSlot(i);
 
-			if (invStack != null)
+			if (invStack.getItem() instanceof ItemLeatherGloves)
 			{
-				if (invStack.getItem() instanceof ItemLeatherGloves)
+				glovesStack = invStack;
+			}
+			else
+			{
+				if (invStack.getItem() != Items.DYE)
 				{
-					glovesStack = invStack;
+					return false;
 				}
-				else
-				{
-					if (invStack.getItem() != Items.DYE)
-					{
-						return false;
-					}
 
-					list.add(invStack);
-				}
+				list.add(invStack);
 			}
 		}
 
@@ -61,53 +59,50 @@ public class RecipeLeatherGlovesDyes implements IRecipe
 		{
 			ItemStack invStack = inv.getStackInSlot(k);
 
-			if (invStack != null)
+			if (invStack.getItem() instanceof ItemLeatherGloves)
 			{
-				if (invStack.getItem() instanceof ItemLeatherGloves)
+				leatherGloves = (ItemLeatherGloves) invStack.getItem();
+
+				stack = invStack.copy();
+				stack.setCount(1);
+
+				if (ItemLeatherGloves.hasColor(invStack))
 				{
-					leatherGloves = (ItemLeatherGloves) invStack.getItem();
+					int color = ItemLeatherGloves.getColor(stack);
 
-					stack = invStack.copy();
-					stack.stackSize = 1;
+					float r = (float) (color >> 16 & 255) / 255.0F;
+					float g = (float) (color >> 8 & 255) / 255.0F;
+					float b = (float) (color & 255) / 255.0F;
 
-					if (ItemLeatherGloves.hasColor(invStack))
-					{
-						int color = ItemLeatherGloves.getColor(stack);
+					intensity = (int) ((float) intensity + Math.max(r, Math.max(g, b)) * 255.0F);
 
-						float r = (float) (color >> 16 & 255) / 255.0F;
-						float g = (float) (color >> 8 & 255) / 255.0F;
-						float b = (float) (color & 255) / 255.0F;
-
-						intensity = (int) ((float) intensity + Math.max(r, Math.max(g, b)) * 255.0F);
-
-						colors[0] = (int) ((float) colors[0] + r * 255.0F);
-						colors[1] = (int) ((float) colors[1] + g * 255.0F);
-						colors[2] = (int) ((float) colors[2] + b * 255.0F);
-
-						++j;
-					}
-				}
-				else
-				{
-					if (invStack.getItem() != Items.DYE)
-					{
-						return null;
-					}
-
-					float[] afloat = EntitySheep.getDyeRgb(EnumDyeColor.byDyeDamage(invStack.getMetadata()));
-
-					int r2 = (int) (afloat[0] * 255.0F);
-					int g2 = (int) (afloat[1] * 255.0F);
-					int b2 = (int) (afloat[2] * 255.0F);
-
-					intensity += Math.max(r2, Math.max(g2, b2));
-
-					colors[0] += r2;
-					colors[1] += g2;
-					colors[2] += b2;
+					colors[0] = (int) ((float) colors[0] + r * 255.0F);
+					colors[1] = (int) ((float) colors[1] + g * 255.0F);
+					colors[2] = (int) ((float) colors[2] + b * 255.0F);
 
 					++j;
 				}
+			}
+			else
+			{
+				if (invStack.getItem() != Items.DYE)
+				{
+					return null;
+				}
+
+				float[] afloat = EntitySheep.getDyeRgb(EnumDyeColor.byDyeDamage(invStack.getMetadata()));
+
+				int r2 = (int) (afloat[0] * 255.0F);
+				int g2 = (int) (afloat[1] * 255.0F);
+				int b2 = (int) (afloat[2] * 255.0F);
+
+				intensity += Math.max(r2, Math.max(g2, b2));
+
+				colors[0] += r2;
+				colors[1] += g2;
+				colors[2] += b2;
+
+				++j;
 			}
 		}
 
@@ -146,19 +141,19 @@ public class RecipeLeatherGlovesDyes implements IRecipe
 	@Override
 	public ItemStack getRecipeOutput()
 	{
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	@Override
-	public ItemStack[] getRemainingItems(InventoryCrafting inv)
+	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv)
 	{
-		ItemStack[] stacks = new ItemStack[inv.getSizeInventory()];
+		NonNullList<ItemStack> stacks = NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
 
-		for (int i = 0; i < stacks.length; ++i)
+		for (int i = 0; i < stacks.size(); ++i)
 		{
 			ItemStack stack = inv.getStackInSlot(i);
 
-			stacks[i] = ForgeHooks.getContainerItem(stack);
+			stacks.set(i, ForgeHooks.getContainerItem(stack));
 		}
 
 		return stacks;

@@ -43,7 +43,7 @@ public class ContainerEquipment extends ContainerPlayer
 		{
 			ItemStack itemstack = this.inventorySlots.get(i).getStack();
 
-			if (itemstack != null)
+			if (itemstack != ItemStack.EMPTY)
 			{
 				itemstack.getItem().onUpdate(itemstack, this.aePlayer.getEntity().getEntityWorld(), this.aePlayer.getEntity(), i, false);
 			}
@@ -166,7 +166,7 @@ public class ContainerEquipment extends ContainerPlayer
 	{
 		if (slotId == this.binSlot.slotNumber && player.capabilities.isCreativeMode)
 		{
-			this.aePlayer.getEntity().inventory.setItemStack(null);
+			this.aePlayer.getEntity().inventory.setItemStack(ItemStack.EMPTY);
 		}
 
 		return super.slotClick(slotId, dragType, clickTypeIn, player);
@@ -178,7 +178,7 @@ public class ContainerEquipment extends ContainerPlayer
 		{
 			Slot slot = this.inventorySlots.get(i);
 
-			if (slot.getStack() == null && slot instanceof SlotEquipment)
+			if (slot.getStack() == ItemStack.EMPTY && slot instanceof SlotEquipment)
 			{
 				if (((SlotEquipment) slot).getEquipmentType() == type)
 				{
@@ -186,7 +186,7 @@ public class ContainerEquipment extends ContainerPlayer
 				}
 			}
 
-			if (type == ItemEquipmentSlot.OFFHAND && slot.getStack() == null && slot.getSlotIndex() == 40)
+			if (type == ItemEquipmentSlot.OFFHAND && slot.getStack() == ItemStack.EMPTY && slot.getSlotIndex() == 40)
 			{
 				return i;
 			}
@@ -226,7 +226,7 @@ public class ContainerEquipment extends ContainerPlayer
 					Slot accessorySlot = this.inventorySlots.get(destIndex);
 					accessorySlot.putStack(stack);
 
-					slot.putStack(null);
+					slot.putStack(ItemStack.EMPTY);
 
 					return stack;
 				}

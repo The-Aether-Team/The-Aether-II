@@ -46,6 +46,7 @@ public class SlotSimpleCrafting extends SlotCrafting
 		this.recipe = recipe;
 	}
 
+	@Override
 	public boolean canTakeStack(EntityPlayer player)
 	{
 		if (!this.isSimpleCrafting())
@@ -55,7 +56,7 @@ public class SlotSimpleCrafting extends SlotCrafting
 
 		if (this.recipe == null || !RecipeUtil.canCraft(player, this.recipe))
 		{
-			this.putStack(null);
+			this.putStack(ItemStack.EMPTY);
 
 			return false;
 		}
@@ -63,13 +64,14 @@ public class SlotSimpleCrafting extends SlotCrafting
 		return true;
 	}
 
-	public void onPickupFromSlot(EntityPlayer player, ItemStack stack)
+	@Override
+	public ItemStack onTake(EntityPlayer player, ItemStack stack)
 	{
 		if (!this.isSimpleCrafting())
 		{
-			super.onPickupFromSlot(player, stack);
+			super.onTake(player, stack);
 
-			return;
+			return stack;
 		}
 
 		this.onCrafting(stack);
@@ -82,13 +84,13 @@ public class SlotSimpleCrafting extends SlotCrafting
 		outerloop:
 		for (int reqIndex = 0; reqIndex < this.getRecipe().getRequired().length; reqIndex++)
 		{
-			Object req = recipe.getRequired()[reqIndex];
+			Object req = this.recipe.getRequired()[reqIndex];
 
 			int reqAmount = 0;
 
 			if (req instanceof ItemStack)
 			{
-				reqAmount = ((ItemStack) req).stackSize;
+				reqAmount = ((ItemStack) req).getCount();
 			}
 			else if (req instanceof OreDictionaryRequirement)
 			{
@@ -97,18 +99,18 @@ public class SlotSimpleCrafting extends SlotCrafting
 
 			int amountSoFar = 0;
 
-			for (int i = 0; i < player.inventory.mainInventory.length; i++)
+			for (int i = 0; i < player.inventory.mainInventory.size(); i++)
 			{
-				ItemStack inventoryStack = player.inventory.mainInventory[i];
+				ItemStack inventoryStack = player.inventory.mainInventory.get(i);
 
 				if (RecipeUtil.areEqual(req, inventoryStack))
 				{
-					int oldSize = inventoryStack.stackSize;
+					int oldSize = inventoryStack.getCount();
 
-					inventoryStack.stackSize -= Math.min(reqAmount - amountSoFar, reqAmount);
+					inventoryStack.shrink(Math.min(reqAmount - amountSoFar, reqAmount));
 					amountSoFar += Math.min(oldSize, reqAmount);
 
-					if (inventoryStack.stackSize <= 0)
+					if (inventoryStack.getCount() <= 0)
 					{
 						player.inventory.deleteStack(inventoryStack);
 					}
@@ -125,5 +127,7 @@ public class SlotSimpleCrafting extends SlotCrafting
 		{
 			this.putStack(this.recipe.getResult());
 		}
+
+		return stack;
 	}
 }

@@ -122,7 +122,7 @@ public class RenderTabGroup extends Gui
 			this.drawHoveringText(I18n.translateToLocal(hoveredTab.getUnlocalizedName()),
 					Mouse.getX() * scaledresolution.getScaledWidth() / mc.displayWidth,
 					scaledresolution.getScaledHeight() - (Mouse.getY() - 42) * scaledresolution.getScaledHeight() / mc.displayHeight
-							- 1, mc.fontRendererObj);
+							- 1, mc.fontRenderer);
 		}
 	}
 

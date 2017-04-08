@@ -1,11 +1,9 @@
 package com.gildedgames.aether.common.capabilities.entity.stats;
 
 import com.gildedgames.aether.api.capabilites.entity.stats.*;
-import com.gildedgames.aether.common.util.io.NBTHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;

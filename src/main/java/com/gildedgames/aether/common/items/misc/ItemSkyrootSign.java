@@ -25,7 +25,7 @@ public class ItemSkyrootSign extends Item
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side,
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side,
 			float hitX, float hitY, float hitZ)
 	{
 		if (side == EnumFacing.DOWN)
@@ -39,6 +39,8 @@ public class ItemSkyrootSign extends Item
 		else
 		{
 			pos = pos.offset(side);
+
+			ItemStack stack = player.getHeldItem(hand);
 
 			if (!player.canPlayerEdit(pos, side, stack))
 			{
@@ -64,7 +66,7 @@ public class ItemSkyrootSign extends Item
 					world.setBlockState(pos, BlocksAether.wall_skyroot_sign.getDefaultState().withProperty(BlockWallSkyrootSign.FACING, side), 3);
 				}
 
-				--stack.stackSize;
+				stack.shrink(1);
 				TileEntity tileentity = world.getTileEntity(pos);
 
 				if (tileentity instanceof TileEntitySkyrootSign && !ItemBlock.setTileEntityNBT(world, player, pos, stack))

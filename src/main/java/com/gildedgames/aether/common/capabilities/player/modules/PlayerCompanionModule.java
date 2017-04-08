@@ -231,7 +231,7 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 	{
 		ItemStack companionStack = this.aePlayer.getEquipmentInventory().getStackInSlot(6);
 
-		if (companionStack != null && companionStack.getItem() instanceof ItemCompanion)
+		if (companionStack.getItem() instanceof ItemCompanion)
 		{
 			return companionStack;
 		}

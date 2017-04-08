@@ -20,6 +20,7 @@ public class RenderBattleBomb extends Render<EntityBattleBomb>
 		super(renderManager);
 	}
 
+	@Override
 	public void doRender(EntityBattleBomb entity, double posX, double posY, double posZ, float entityYaw, float partialTicks)
 	{
 		GL11.glPushMatrix();

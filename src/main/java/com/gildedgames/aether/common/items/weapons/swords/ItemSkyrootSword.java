@@ -43,7 +43,7 @@ public class ItemSkyrootSword extends ItemAetherSword
 
 			ItemStack held = player.getHeldItem(EnumHand.MAIN_HAND);
 
-			if (held != null && held.getItem() == ItemsAether.skyroot_sword)
+			if (held.getItem() == ItemsAether.skyroot_sword)
 			{
 				List<ItemStack> stacks = new ArrayList<>();
 

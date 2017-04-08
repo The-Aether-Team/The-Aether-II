@@ -133,6 +133,7 @@ public class ModelAltar extends ModelBase
 		this.setRotation(this.AmbroGemBackLeft, 0F, 0F, 0F);
 	}
 
+	@Override
 	public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
 			float scale)
 	{

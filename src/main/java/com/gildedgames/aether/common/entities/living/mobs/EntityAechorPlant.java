@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,11 +15,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -125,8 +124,12 @@ public class EntityAechorPlant extends EntityAetherMob
 	}
 
 	@Override
-	public void move(double x, double y, double z)
+	public void move(MoverType type, double x, double y, double z)
 	{
+		if (type == MoverType.PISTON)
+		{
+			super.move(type, x, y, z);
+		}
 	}
 
 	@Override
@@ -136,9 +139,11 @@ public class EntityAechorPlant extends EntityAetherMob
 	}
 
 	@Override
-	public EnumActionResult applyPlayerInteraction(EntityPlayer player, Vec3d vec, ItemStack stack, EnumHand hand)
+	public boolean processInteract(EntityPlayer player, EnumHand hand)
 	{
-		if (!player.capabilities.isCreativeMode && stack != null && stack.getItem() == ItemsAether.skyroot_bucket)
+		ItemStack stack = player.getHeldItem(hand);
+
+		if (!player.capabilities.isCreativeMode && stack.getItem() == ItemsAether.skyroot_bucket)
 		{
 			if (this.getPoisonLeft() > 0)
 			{
@@ -146,11 +151,11 @@ public class EntityAechorPlant extends EntityAetherMob
 
 				this.setPoisonLeft(this.getPoisonLeft() - 1);
 
-				return EnumActionResult.SUCCESS;
+				return true;
 			}
 		}
 
-		return EnumActionResult.PASS;
+		return false;
 	}
 
 	@SideOnly(Side.CLIENT)

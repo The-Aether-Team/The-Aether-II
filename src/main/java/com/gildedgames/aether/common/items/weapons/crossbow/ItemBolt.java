@@ -5,6 +5,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -27,6 +28,7 @@ public class ItemBolt extends Item
 		this.setHasSubtypes(true);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean adv)
 	{
@@ -46,7 +48,7 @@ public class ItemBolt extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems)
+	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
 		for (ItemBoltType type : ITEM_VARIANTS)
 		{

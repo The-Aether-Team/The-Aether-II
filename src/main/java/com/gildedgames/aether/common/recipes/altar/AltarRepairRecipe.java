@@ -30,16 +30,16 @@ public class AltarRepairRecipe implements IAltarRecipe
 
 			switch (tool.getToolMaterial())
 			{
-				case WOOD:
-					return 2;
-				case STONE:
-					return 3;
-				case IRON:
-					return 4;
-				case DIAMOND:
-					return 5;
-				case GOLD:
-					return 3;
+			case WOOD:
+				return 2;
+			case STONE:
+				return 3;
+			case IRON:
+				return 4;
+			case DIAMOND:
+				return 5;
+			case GOLD:
+				return 3;
 			}
 		}
 		else if (stack.getItem() instanceof ItemArmor)
@@ -48,15 +48,15 @@ public class AltarRepairRecipe implements IAltarRecipe
 
 			switch (armor.getArmorMaterial())
 			{
-				case LEATHER:
-					return 2;
-				case IRON:
-					return 3;
-				case GOLD:
-				case CHAIN:
-					return 3;
-				case DIAMOND:
-					return 5;
+			case LEATHER:
+				return 2;
+			case IRON:
+				return 3;
+			case GOLD:
+			case CHAIN:
+				return 3;
+			case DIAMOND:
+				return 5;
 			}
 
 			if (armor.getArmorMaterial() == MaterialsAether.LEGENDARY_ARMOR || armor.getArmorMaterial() == MaterialsAether.VALKYRIE_ARMOR)

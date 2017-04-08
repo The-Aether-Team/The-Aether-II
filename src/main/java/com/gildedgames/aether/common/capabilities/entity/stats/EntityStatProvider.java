@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.capabilities.entity.stats;
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;

@@ -18,6 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
@@ -25,16 +26,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
 import java.util.Random;
 
 public class BlockAetherGrass extends BlockGrass implements IBlockVariants
 {
 	public static final BlockVariant AETHER = new BlockVariant(0, "normal"),
-			ENCHANTED = new BlockVariant(1, "enchanted"),
-			KURA = new BlockVariant(2, "kura"),
-			FROSTROOT = new BlockVariant(3, "frostroot"),
-			BLIGHTED = new BlockVariant(4, "blighted");
+			ENCHANTED = new BlockVariant(1, "enchanted");
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", AETHER, ENCHANTED);
 
@@ -54,7 +51,7 @@ public class BlockAetherGrass extends BlockGrass implements IBlockVariants
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
+	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
@@ -114,19 +111,6 @@ public class BlockAetherGrass extends BlockGrass implements IBlockVariants
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
 		return Item.getItemFromBlock(BlocksAether.aether_dirt);
-	}
-
-	@Override
-	public int damageDropped(IBlockState state)
-	{
-		int damage = BlockAetherDirt.DIRT.getMeta();
-
-		if (state.getValue(PROPERTY_VARIANT).getMeta() == FROSTROOT.getMeta())
-		{
-			damage = BlockAetherDirt.PERMAFROST.getMeta();
-		}
-
-		return damage;
 	}
 
 	@Override

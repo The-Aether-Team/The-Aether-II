@@ -28,6 +28,7 @@ public class RenderDaggerfrostSnowball extends Render<EntityDaggerfrostSnowball>
 		SPRITE.initSprite(16, 16, 0, 0, false);
 	}
 
+	@Override
 	public void doRender(EntityDaggerfrostSnowball entity, double posX, double posY, double posZ, float entityYaw, float partialTicks)
 	{
 		GlStateManager.pushMatrix();

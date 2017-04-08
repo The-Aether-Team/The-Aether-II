@@ -89,20 +89,20 @@ public class RecipeUtil
 
 		if (req instanceof ItemStack)
 		{
-			amount = ((ItemStack) req).stackSize;
+			amount = ((ItemStack) req).getCount();
 		}
 		else if (req instanceof OreDictionaryRequirement)
 		{
 			amount = ((OreDictionaryRequirement) req).getCount();
 		}
 
-		for (int i = 0; i < player.inventory.mainInventory.length; i++)
+		for (int i = 0; i < player.inventory.mainInventory.size(); i++)
 		{
-			ItemStack inventoryStack = player.inventory.mainInventory[i];
+			ItemStack inventoryStack = player.inventory.mainInventory.get(i);
 
 			if (RecipeUtil.areEqual(req, inventoryStack))
 			{
-				amount = Math.max(0, amount - inventoryStack.stackSize);
+				amount = Math.max(0, amount - inventoryStack.getCount());
 
 				if (amount <= 0)
 				{
@@ -130,20 +130,20 @@ public class RecipeUtil
 
 			if (req instanceof ItemStack)
 			{
-				amount = ((ItemStack) req).stackSize;
+				amount = ((ItemStack) req).getCount();
 			}
 			else if (req instanceof OreDictionaryRequirement)
 			{
 				amount = ((OreDictionaryRequirement) req).getCount();
 			}
 
-			for (int i = 0; i < player.inventory.mainInventory.length; i++)
+			for (int i = 0; i < player.inventory.mainInventory.size(); i++)
 			{
-				ItemStack inventoryStack = player.inventory.mainInventory[i];
+				ItemStack inventoryStack = player.inventory.mainInventory.get(i);
 
 				if (RecipeUtil.areEqual(req, inventoryStack))
 				{
-					amount = Math.max(0, amount - inventoryStack.stackSize);
+					amount = Math.max(0, amount - inventoryStack.getCount());
 
 					if (amount <= 0)
 					{
@@ -178,7 +178,7 @@ public class RecipeUtil
 
 			if (req instanceof ItemStack)
 			{
-				amount = ((ItemStack) req).stackSize;
+				amount = ((ItemStack) req).getCount();
 			}
 			else if (req instanceof OreDictionaryRequirement)
 			{
@@ -187,13 +187,13 @@ public class RecipeUtil
 
 			int innerTotalCount = 0;
 
-			for (int i = 0; i < player.inventory.mainInventory.length; i++)
+			for (int i = 0; i < player.inventory.mainInventory.size(); i++)
 			{
-				ItemStack inventoryStack = player.inventory.mainInventory[i];
+				ItemStack inventoryStack = player.inventory.mainInventory.get(i);
 
 				if (RecipeUtil.areEqual(req, inventoryStack))
 				{
-					innerTotalCount += inventoryStack.stackSize;
+					innerTotalCount += inventoryStack.getCount();
 				}
 			}
 

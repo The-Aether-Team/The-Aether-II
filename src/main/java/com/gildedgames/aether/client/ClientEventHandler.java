@@ -21,13 +21,11 @@ import com.gildedgames.aether.common.network.packets.AetherMovementPacket;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -45,12 +43,6 @@ public class ClientEventHandler
 	private final PerformanceIngame performanceLogger = new PerformanceIngame();
 
 	private boolean prevJumpBindState;
-
-	@SubscribeEvent
-	public void onOpenGui(GuiOpenEvent event)
-	{
-
-	}
 
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRenderGui(RenderGameOverlayEvent event)
@@ -72,7 +64,7 @@ public class ClientEventHandler
 					{
 						FlyingMount flyingMount = (FlyingMount) processor;
 
-						mc.ingameGUI.drawCenteredString(mc.fontRendererObj, String.valueOf((int) (flyingMount.getData().getRemainingAirborneTime())),
+						mc.ingameGUI.drawCenteredString(mc.fontRenderer, String.valueOf((int) (flyingMount.getData().getRemainingAirborneTime())),
 								scaledRes.getScaledWidth() / 2, scaledRes.getScaledHeight() - 30, 0xFFFFFF);
 					}
 				}
@@ -88,32 +80,29 @@ public class ClientEventHandler
 	{
 		ItemStack stack = event.getItemStack();
 
-		if (stack != null)
+		IItemProperties properties = AetherAPI.items().getProperties(event.getItemStack().getItem());
+
+		// Equipment Properties
+		if (properties.getEquipmentProperties().isPresent())
 		{
-			IItemProperties properties = AetherAPI.items().getProperties(event.getItemStack().getItem());
+			IEquipmentProperties equipment = properties.getEquipmentProperties().get();
 
-			// Equipment Properties
-			if (properties.getEquipmentProperties().isPresent())
+			// Equipment Effects
+			for (IEffectProvider instance : equipment.getEffectInstances())
 			{
-				IEquipmentProperties equipment = properties.getEquipmentProperties().get();
-
-				// Equipment Effects
-				for (IEffectProvider instance : equipment.getEffectInstances())
-				{
-					IEffect<IEffectProvider> factory = AetherAPI.equipment().getFactory(instance.getFactory());
-					factory.createInstance(Collections.singleton(instance)).addItemInformation(event.getToolTip());
-				}
-
-				// Slot Type
-				event.getToolTip().add("");
-				event.getToolTip().add(I18n.format(equipment.getSlot().getUnlocalizedName()));
+				IEffect<IEffectProvider> factory = AetherAPI.equipment().getFactory(instance.getFactory());
+				factory.createInstance(Collections.singleton(instance)).addItemInformation(event.getToolTip());
 			}
 
-			// Rarity
-			if (properties.getRarity().isPresent())
-			{
-				event.getToolTip().add(I18n.format(properties.getRarity().get().getUnlocalizedName()));
-			}
+			// Slot Type
+			event.getToolTip().add("");
+			event.getToolTip().add(I18n.format(equipment.getSlot().getUnlocalizedName()));
+		}
+
+		// Rarity
+		if (properties.getRarity().isPresent())
+		{
+			event.getToolTip().add(I18n.format(properties.getRarity().get().getUnlocalizedName()));
 		}
 	}
 

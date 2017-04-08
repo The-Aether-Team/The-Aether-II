@@ -42,11 +42,6 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.green_skyroot_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.dark_blue_skyroot_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.golden_oak_leaves, leavesMapper);
-		ModelLoader.setCustomStateMapper(BlocksAether.blighted_leaves, leavesMapper);
-		ModelLoader.setCustomStateMapper(BlocksAether.frostpine_leaves, leavesMapper);
-		ModelLoader.setCustomStateMapper(BlocksAether.blightwillow_leaves, leavesMapper);
-		ModelLoader.setCustomStateMapper(BlocksAether.earthshifter_leaves, leavesMapper);
-		ModelLoader.setCustomStateMapper(BlocksAether.vined_earthshifter_leaves, leavesMapper);
 
 		ModelLoader.setCustomStateMapper(BlocksAether.aether_sapling, new StateMap.Builder().ignore(BlockAetherSapling.PROPERTY_STAGE).build());
 

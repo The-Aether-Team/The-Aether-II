@@ -84,7 +84,7 @@ public class GuiEquipment extends GuiContainer
 
 		this.drawTexturedModalRect(this.width / 2 + 90 - 176 / 2, this.height / 2 - 166 / 2, 0, 0, 176, 166);
 
-		this.fontRendererObj.drawString(I18n.format("container.crafting"),
+		this.fontRenderer.drawString(I18n.format("container.crafting"),
 				this.width / 2 + (this.aePlayer.getEntity().capabilities.isCreativeMode ? 70 : 51), this.height / 2 - 135 / 2, 4210752);
 
 		if (AetherCore.CONFIG.getDisplayInventoryPattern())
@@ -174,7 +174,7 @@ public class GuiEquipment extends GuiContainer
 
 		if (unlocalizedTooltip != null)
 		{
-			this.drawHoveringText(Collections.singletonList(I18n.format(unlocalizedTooltip)), mouseX, mouseY, this.mc.fontRendererObj);
+			this.drawHoveringText(Collections.singletonList(I18n.format(unlocalizedTooltip)), mouseX, mouseY, this.mc.fontRenderer);
 		}
 	}
 
@@ -202,6 +202,6 @@ public class GuiEquipment extends GuiContainer
 
 		String compiled = StringUtils.join(effects, TextFormatting.RESET + ", ");
 
-		this.mc.fontRendererObj.drawString(compiled, this.guiLeft, this.guiTop + 160, 0xFFFFFF, true);
+		this.mc.fontRenderer.drawString(compiled, this.guiLeft, this.guiTop + 160, 0xFFFFFF, true);
 	}
 }

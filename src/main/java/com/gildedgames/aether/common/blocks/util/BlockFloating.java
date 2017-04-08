@@ -27,7 +27,7 @@ public class BlockFloating extends Block
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn)
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
 		world.scheduleUpdate(pos, this, this.tickRate(world));
 	}

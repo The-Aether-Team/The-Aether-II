@@ -96,6 +96,7 @@ public class ModelRamWool extends ModelBase
 		this.setRotation(this.Tail, 0.1745329F, 0F, 0F);
 	}
 
+	@Override
 	public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
 			float scale)
 	{
@@ -141,6 +142,7 @@ public class ModelRamWool extends ModelBase
 		model.rotateAngleZ = z;
 	}
 
+	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
 			float scaleFactor, Entity entity)
 	{

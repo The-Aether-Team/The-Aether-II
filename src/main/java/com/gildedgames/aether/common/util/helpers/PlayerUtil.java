@@ -17,7 +17,7 @@ public class PlayerUtil
 			{
 				ItemStack stack = aePlayer.getEquipmentInventory().getStackInSlot(i);
 
-				if (stack != null && stack.getItem() == item)
+				if (stack.getItem() == item)
 				{
 					found = true;
 
@@ -46,13 +46,13 @@ public class PlayerUtil
 
 	public static void fillBucketInHand(EntityPlayer player, ItemStack emptyBucket, ItemStack fillBucket)
 	{
-		if (emptyBucket.stackSize == 1)
+		if (emptyBucket.getCount() == 1)
 		{
 			player.inventory.setInventorySlotContents(player.inventory.currentItem, fillBucket);
 		}
 		else
 		{
-			emptyBucket.stackSize--;
+			emptyBucket.shrink(1);
 
 			player.inventory.setInventorySlotContents(player.inventory.currentItem, emptyBucket);
 

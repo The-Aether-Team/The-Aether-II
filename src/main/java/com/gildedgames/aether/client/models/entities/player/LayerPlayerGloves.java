@@ -45,7 +45,7 @@ public class LayerPlayerGloves extends LayerBipedArmor
 
 		ItemStack itemstack = aePlayer.getEquipmentInventory().getStackInSlot(2);
 
-		if (itemstack != null && itemstack.getItem() instanceof ItemAetherGloves)
+		if (itemstack.getItem() instanceof ItemAetherGloves)
 		{
 			ItemAetherGloves glove = (ItemAetherGloves) itemstack.getItem();
 

@@ -52,6 +52,7 @@ public class EntityBattleGolem extends EntityAetherMob implements IRangedAttackM
 		this.experienceValue = 10;
 	}
 
+	@Override
 	public boolean isOnLadder()
 	{
 		return false;

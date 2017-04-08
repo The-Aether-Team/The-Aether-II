@@ -33,21 +33,21 @@ public class BlockAetherLog extends BlockLog
 	{
 		switch (rot)
 		{
-			case COUNTERCLOCKWISE_90:
-			case CLOCKWISE_90:
+		case COUNTERCLOCKWISE_90:
+		case CLOCKWISE_90:
 
-				switch (state.getValue(PROPERTY_LOG_AXIS))
-				{
-					case X:
-						return state.withProperty(PROPERTY_LOG_AXIS, BlockLog.EnumAxis.Z);
-					case Z:
-						return state.withProperty(PROPERTY_LOG_AXIS, BlockLog.EnumAxis.X);
-					default:
-						return state;
-				}
-
+			switch (state.getValue(PROPERTY_LOG_AXIS))
+			{
+			case X:
+				return state.withProperty(PROPERTY_LOG_AXIS, BlockLog.EnumAxis.Z);
+			case Z:
+				return state.withProperty(PROPERTY_LOG_AXIS, BlockLog.EnumAxis.X);
 			default:
 				return state;
+			}
+
+		default:
+			return state;
 		}
 	}
 
@@ -79,15 +79,15 @@ public class BlockAetherLog extends BlockLog
 
 		switch (meta & 7)
 		{
-			case 1:
-				axis = BlockLog.EnumAxis.Y;
-				break;
-			case 2:
-				axis = BlockLog.EnumAxis.X;
-				break;
-			case 3:
-				axis = BlockLog.EnumAxis.Z;
-				break;
+		case 1:
+			axis = BlockLog.EnumAxis.Y;
+			break;
+		case 2:
+			axis = BlockLog.EnumAxis.X;
+			break;
+		case 3:
+			axis = BlockLog.EnumAxis.Z;
+			break;
 		}
 
 		return this.getDefaultState().withProperty(PROPERTY_LOG_AXIS, axis);
@@ -100,15 +100,15 @@ public class BlockAetherLog extends BlockLog
 
 		switch (state.getValue(PROPERTY_LOG_AXIS))
 		{
-			case Y:
-				meta |= 1;
-				break;
-			case X:
-				meta |= 2;
-				break;
-			case Z:
-				meta |= 3;
-				break;
+		case Y:
+			meta |= 1;
+			break;
+		case X:
+			meta |= 2;
+			break;
+		case Z:
+			meta |= 3;
+			break;
 		}
 
 		return meta;

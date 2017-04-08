@@ -26,7 +26,7 @@ public class QuicksoilProcessor
 	{
 		final Entity entity = event.getEntity();
 
-		List<AxisAlignedBB> boxes = entity.world.getCollisionBoxes(entity.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
+		List<AxisAlignedBB> boxes = entity.world.getCollisionBoxes(entity, entity.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
 
 		boolean onQuicksoil = false;
 

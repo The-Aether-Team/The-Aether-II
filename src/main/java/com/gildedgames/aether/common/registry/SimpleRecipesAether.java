@@ -118,7 +118,7 @@ public class SimpleRecipesAether
 						{
 							if (RecipeUtil.areEqual(reqStack, stack))
 							{
-								reqStack.stackSize += stack.stackSize;
+								reqStack.grow(stack.getCount());
 								continue outer;
 							}
 						}
@@ -156,7 +156,7 @@ public class SimpleRecipesAether
 						{
 							if (RecipeUtil.areEqual(reqStack, stack))
 							{
-								reqStack.stackSize += stack.stackSize;
+								reqStack.grow(stack.getCount());
 								continue outer;
 							}
 						}
@@ -223,7 +223,7 @@ public class SimpleRecipesAether
 											if (reqObj instanceof ItemStack)
 											{
 												ItemStack reqStack = (ItemStack) reqObj;
-												reqStack.stackSize++;
+												reqStack.grow(1);
 											}
 											else if (reqObj instanceof OreDictionaryRequirement)
 											{
@@ -243,7 +243,7 @@ public class SimpleRecipesAether
 								if (reqObj instanceof ItemStack)
 								{
 									ItemStack reqStack = (ItemStack) reqObj;
-									reqStack.stackSize++;
+									reqStack.grow(1);
 								}
 								else if (reqObj instanceof OreDictionaryRequirement)
 								{

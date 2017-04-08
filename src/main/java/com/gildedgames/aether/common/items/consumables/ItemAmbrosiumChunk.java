@@ -15,9 +15,11 @@ import net.minecraft.world.World;
 public class ItemAmbrosiumChunk extends Item
 {
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side,
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side,
 			float hitX, float hitY, float hitZ)
 	{
+		ItemStack stack = player.getHeldItem(hand);
+
 		IBlockState state = world.getBlockState(pos);
 
 		if (state.getBlock() == BlocksAether.aether_grass && state.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.AETHER)
@@ -28,7 +30,7 @@ public class ItemAmbrosiumChunk extends Item
 
 				if (!player.capabilities.isCreativeMode)
 				{
-					stack.stackSize -= 1;
+					stack.shrink(1);
 				}
 
 				return EnumActionResult.SUCCESS;

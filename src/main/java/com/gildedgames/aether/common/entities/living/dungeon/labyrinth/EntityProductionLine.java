@@ -157,12 +157,14 @@ public class EntityProductionLine extends EntityCreature
 		return false;
 	}
 
+	@Override
 	@Nullable
 	protected SoundEvent getHurtSound()
 	{
 		return SoundEvents.ENTITY_GENERIC_HURT;
 	}
 
+	@Override
 	@Nullable
 	protected SoundEvent getDeathSound()
 	{

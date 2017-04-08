@@ -165,19 +165,21 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	}
 
 	@Override
-	public boolean processInteract(EntityPlayer player, EnumHand hand, @Nullable ItemStack stack)
+	public boolean processInteract(EntityPlayer player, EnumHand hand)
 	{
-		if (!super.processInteract(player, hand, stack))
+		if (!super.processInteract(player, hand))
 		{
 			if (!player.world.isRemote)
 			{
+				ItemStack stack = player.getHeldItem(hand);
+
 				if (this.isChild())
 				{
-					if (this.isRaisedByPlayer() && stack != null && stack.getItem() == ItemsAether.aechor_petal && this.isHungry())
+					if (this.isRaisedByPlayer() && stack.getItem() == ItemsAether.aechor_petal && this.isHungry())
 					{
 						if (!player.capabilities.isCreativeMode)
 						{
-							stack.stackSize--;
+							stack.shrink(1);
 						}
 
 						this.setIsHungry(false);
@@ -192,13 +194,13 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 				}
 				else
 				{
-					if (this.isRaisedByPlayer() && !this.isSaddled() && stack != null && stack.getItem() == Items.SADDLE)
+					if (this.isRaisedByPlayer() && !this.isSaddled() && stack.getItem() == Items.SADDLE)
 					{
 						this.setIsSaddled(true);
 
 						if (!player.capabilities.isCreativeMode)
 						{
-							stack.stackSize--;
+							stack.shrink(1);
 						}
 
 						return true;
@@ -269,7 +271,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 					{
 						if (this.hungryTimer.isMultipleOfSeconds(10))
 						{
-							this.attackEntityFrom(DamageSource.starve, 1.0F);
+							this.attackEntityFrom(DamageSource.STARVE, 1.0F);
 						}
 					}
 				}

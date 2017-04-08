@@ -588,6 +588,7 @@ public class ModelBattleGolem extends ModelBase
 		this.setRotation(this.r_a_finger_bottom_right, -0.1919862F, -0.1745329F, -0.7679449F);
 	}
 
+	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
@@ -672,6 +673,7 @@ public class ModelBattleGolem extends ModelBase
 		model.rotateAngleZ = z;
 	}
 
+	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
 	{
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);

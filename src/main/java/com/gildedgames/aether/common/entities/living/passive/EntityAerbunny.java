@@ -127,9 +127,11 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityWithSta
 	}
 
 	@Override
-	public boolean processInteract(EntityPlayer player, EnumHand hand, @Nullable ItemStack stack)
+	public boolean processInteract(EntityPlayer player, EnumHand hand)
 	{
-		if (!super.processInteract(player, hand, stack) && !this.isBreedingItem(stack))
+		ItemStack stack = player.getHeldItem(hand);
+
+		if (!super.processInteract(player, hand) && !this.isBreedingItem(stack))
 		{
 			if (!this.isRiding() && player.getPassengers().size() <= 0)
 			{
@@ -209,6 +211,7 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityWithSta
 			this.entity = entity;
 		}
 
+		@Override
 		public void doJump()
 		{
 			this.entity.setJumping(true);

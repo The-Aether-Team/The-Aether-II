@@ -33,6 +33,7 @@ public class ChunkAttachment implements IChunkAttachment
 		return world.getCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null);
 	}
 
+	@Override
 	public void load(ChunkDataEvent.Load event)
 	{
 		NBTTagCompound root = event.getData().getCompoundTag("aether_capabilities");
@@ -57,9 +58,10 @@ public class ChunkAttachment implements IChunkAttachment
 		}
 	}
 
+	@Override
 	public void save(ChunkDataEvent.Save event)
 	{
-		ChunkAttachmentPool pool = this.getHookPool(event.getChunk().getChunkCoordIntPair());
+		ChunkAttachmentPool pool = this.getHookPool(event.getChunk().getPos());
 
 		if (pool == null || pool.getWritableSize() <= 0)
 		{
@@ -85,9 +87,10 @@ public class ChunkAttachment implements IChunkAttachment
 	@Override
 	public void destroy(ChunkEvent.Unload event)
 	{
-		this.destroyHookPool(event.getChunk().getChunkCoordIntPair());
+		this.destroyHookPool(event.getChunk().getPos());
 	}
 
+	@Override
 	public <T extends NBT> T getAttachment(ChunkPos pos, Capability<T> capability)
 	{
 		ChunkAttachmentPool pool = this.getHookPool(pos);
@@ -107,7 +110,7 @@ public class ChunkAttachment implements IChunkAttachment
 
 	private ChunkAttachmentPool createOrGetHookPool(Chunk chunk)
 	{
-		ChunkAttachmentPool pool = this.getHookPool(chunk.getChunkCoordIntPair());
+		ChunkAttachmentPool pool = this.getHookPool(chunk.getPos());
 
 		if (pool == null)
 		{
@@ -117,7 +120,7 @@ public class ChunkAttachment implements IChunkAttachment
 
 			pool = new ChunkAttachmentPool(attachEvent.getCapabilities());
 
-			this.setHookPool(chunk.getChunkCoordIntPair(), pool);
+			this.setHookPool(chunk.getPos(), pool);
 		}
 
 		return pool;

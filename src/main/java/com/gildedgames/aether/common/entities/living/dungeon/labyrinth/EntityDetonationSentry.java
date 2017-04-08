@@ -70,6 +70,7 @@ public class EntityDetonationSentry extends EntityAetherMob implements IProjecti
 		return SoundsAether.sentry_death;
 	}
 
+	@Override
 	public int getVerticalFaceSpeed()
 	{
 		return 0;

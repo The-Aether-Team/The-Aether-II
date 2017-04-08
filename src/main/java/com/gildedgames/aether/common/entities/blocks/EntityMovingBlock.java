@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.world.chunk.hooks.capabilities.ChunkAttachm
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -108,7 +109,7 @@ public class EntityMovingBlock extends Entity
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
 
-		this.move(this.motionX, this.motionY, this.motionZ);
+		this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
 
 		if (!this.world.isRemote)
 		{
@@ -181,7 +182,7 @@ public class EntityMovingBlock extends Entity
 						this.world.destroyBlock(pos, true);
 
 						this.world.setBlockState(pos, this.getBlockState());
-						this.world.notifyNeighborsOfStateChange(pos, this.getBlockState().getBlock());
+						this.world.notifyNeighborsOfStateChange(pos, this.getBlockState().getBlock(), false);
 
 						if (!this.allowDoubleDrops)
 						{

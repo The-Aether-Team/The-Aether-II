@@ -27,6 +27,7 @@ public class EntityBattleBomb extends EntityThrowable
 		super(worldIn, x, y, z);
 	}
 
+	@Override
 	protected void onImpact(RayTraceResult result)
 	{
 		if (result.entityHit != null)

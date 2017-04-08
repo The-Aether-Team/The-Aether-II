@@ -31,11 +31,12 @@ public class GuiIcestoneCooler extends GuiContainer
 	/**
 	 * Draw the foreground layer for the GuiContainer (everything in front of the items)
 	 */
+	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
 		String s = this.tile.getDisplayName().getUnformattedText();
-		this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
-		this.fontRendererObj.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
+		this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
+		this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
 
 		if (this.tile instanceof TileEntityIcestoneCooler)
 		{
@@ -74,14 +75,15 @@ public class GuiIcestoneCooler extends GuiContainer
 
 			valueString += "%";
 
-			this.fontRendererObj.drawString(valueString,
-					136 - (this.fontRendererObj.getStringWidth(valueString) / 2), this.ySize - 105 + 2, 4210752);
+			this.fontRenderer.drawString(valueString,
+					136 - (this.fontRenderer.getStringWidth(valueString) / 2), this.ySize - 105 + 2, 4210752);
 		}
 	}
 
 	/**
 	 * Draws the background layer of this container (behind the items).
 	 */
+	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	{
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

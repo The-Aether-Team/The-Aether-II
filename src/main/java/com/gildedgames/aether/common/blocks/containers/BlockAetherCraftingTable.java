@@ -16,21 +16,17 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
-
 public class BlockAetherCraftingTable extends Block implements IBlockVariants
 {
 
 	public static final BlockVariant
-			SKYROOT = new BlockVariant(0, "skyroot"),
-			BLIGHTWILLOW = new BlockVariant(1, "blightwillow"),
-			EARTHSHIFTER = new BlockVariant(2, "earthshifter"),
-			FROSTPINE = new BlockVariant(3, "frostpine");
+			SKYROOT = new BlockVariant(0, "skyroot");
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", SKYROOT);
 
@@ -46,16 +42,8 @@ public class BlockAetherCraftingTable extends Block implements IBlockVariants
 	}
 
 	@Override
-	public int getLightValue(IBlockState state)
-	{
-		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
-
-		return (variant == BLIGHTWILLOW ? (int) (0.6F * 15.0F) : this.lightValue);
-	}
-
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem,
-			EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side,
+			float hitX, float hitY, float hitZ)
 	{
 		if (!world.isRemote)
 		{
@@ -67,7 +55,7 @@ public class BlockAetherCraftingTable extends Block implements IBlockVariants
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
+	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{

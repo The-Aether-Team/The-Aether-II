@@ -1,16 +1,10 @@
 package com.gildedgames.aether.common.world.dimensions.aether.island.logic;
 
-import java.io.File;
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.io.NBTHelper;
 import com.gildedgames.aether.common.world.util.ChunkMap;
 import com.google.common.collect.Lists;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -19,6 +13,10 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.world.ChunkWatchEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import javax.annotation.Nullable;
+import java.io.File;
+import java.util.List;
 
 public class IslandSectorAccess
 {

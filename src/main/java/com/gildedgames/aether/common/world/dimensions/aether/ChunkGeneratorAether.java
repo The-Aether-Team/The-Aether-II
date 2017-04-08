@@ -19,6 +19,7 @@ import net.minecraftforge.event.terraingen.ChunkGeneratorEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
@@ -69,12 +70,6 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		this.octaveNoiseGenerators[6] = new NoiseGeneratorOctaves(this.rand, 16);
 
 		this.cloudNoiseGenerator = new NoiseGeneratorOctaves(this.rand, 12);
-	}
-
-	@Override
-	public BlockPos getStrongholdGen(World world, String structureName, BlockPos pos)
-	{
-		return null;
 	}
 
 	public final double bilinearInterpolate(double bottomLeftValue, double topLeftValue, double bottomRightValue, double topRightValue,
@@ -481,5 +476,12 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		{
 			return biomegenbase.getSpawnableList(creatureType);
 		}
+	}
+
+	@Nullable
+	@Override
+	public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position, boolean p_180513_4_)
+	{
+		return null;
 	}
 }

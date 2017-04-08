@@ -93,6 +93,7 @@ public class EntityBurrukai extends EntityAetherAnimal
 		return SoundsAether.burrukai_death;
 	}
 
+	@Override
 	protected float getSoundVolume()
 	{
 		return 0.6F;

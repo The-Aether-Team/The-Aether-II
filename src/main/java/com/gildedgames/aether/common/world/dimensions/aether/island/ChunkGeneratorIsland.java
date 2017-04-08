@@ -1,8 +1,5 @@
 package com.gildedgames.aether.common.world.dimensions.aether.island;
 
-import java.util.List;
-import java.util.Random;
-
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherCaves;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
@@ -10,7 +7,6 @@ import com.gildedgames.aether.common.world.dimensions.aether.island.logic.Island
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSectorAccess;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.WorldGeneratorIsland;
 import com.google.common.collect.Lists;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
@@ -23,6 +19,10 @@ import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class ChunkGeneratorIsland implements IChunkGenerator
 {
@@ -58,17 +58,11 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 		this.caveGenerator = new WorldGenAetherCaves();
 	}
 
-	@Override
-	public BlockPos getStrongholdGen(final World world, final String structureName, final BlockPos pos)
-	{
-		return null;
-	}
-
 	public void replaceBiomeBlocks(ChunkPrimer primer, int chunkX, int chunkZ, Biome[] biomes)
 	{
 		// Penetration depth noise generation
 		this.depthBuffer = this.surfaceNoise.getRegion(this.depthBuffer,
-				(double) (chunkX * 16), (double) (chunkZ * 16),16, 16, 0.0625D, 0.0625D, 1.0D);
+				(double) (chunkX * 16), (double) (chunkZ * 16), 16, 16, 0.0625D, 0.0625D, 1.0D);
 
 		for (int x = 0; x < 16; x++)
 		{
@@ -79,7 +73,7 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 				double val = this.depthBuffer[x + (z * 16)];
 
 				// Calculate max penetration depth
-				int depth = (int) (val / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
+				int depth = (int) (val / 3.0D + 3.0D + this.rand.nextDouble() * 0.25D);
 
 				int pentration = 0;
 				int top = 0;
@@ -254,5 +248,12 @@ public class ChunkGeneratorIsland implements IChunkGenerator
 		{
 			return biomegenbase.getSpawnableList(creatureType);
 		}
+	}
+
+	@Nullable
+	@Override
+	public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position, boolean p_180513_4_)
+	{
+		return null;
 	}
 }

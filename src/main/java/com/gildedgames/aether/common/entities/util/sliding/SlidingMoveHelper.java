@@ -75,8 +75,8 @@ public class SlidingMoveHelper extends EntityMoveHelper
 	{
 		boolean collideUp = false;
 
-		List<AxisAlignedBB> boxes = this.entity.world.getCollisionBoxes(this.entity.getEntityBoundingBox().offset(0.0D,
-				this.entity.height + 0.1D, 0.0D));
+		List<AxisAlignedBB> boxes = this.entity.world.getCollisionBoxes(this.entity,
+				this.entity.getEntityBoundingBox().offset(0.0D, this.entity.height + 0.1D, 0.0D));
 
 		for (AxisAlignedBB box : boxes)
 		{
@@ -94,7 +94,8 @@ public class SlidingMoveHelper extends EntityMoveHelper
 	{
 		boolean collidingDown = false;
 
-		List<AxisAlignedBB> boxes = this.entity.world.getCollisionBoxes(this.entity.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
+		List<AxisAlignedBB> boxes = this.entity.world.getCollisionBoxes(this.entity,
+				this.entity.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
 
 		for (AxisAlignedBB box : boxes)
 		{
@@ -203,96 +204,96 @@ public class SlidingMoveHelper extends EntityMoveHelper
 
 			switch (this.direction)
 			{
-				case UP:
+			case UP:
+			{
+				this.entity.motionY = this.slideVelocity;
+
+				this.distanceSlided += this.slideVelocity;
+
+				if (this.distanceSlided >= this.distanceToSlide)
 				{
-					this.entity.motionY = this.slideVelocity;
+					this.entity.motionY += add;
 
-					this.distanceSlided += this.slideVelocity;
-
-					if (this.distanceSlided >= this.distanceToSlide)
-					{
-						this.entity.motionY += add;
-
-						this.stop();
-					}
-
-					break;
+					this.stop();
 				}
-				case DOWN:
+
+				break;
+			}
+			case DOWN:
+			{
+				this.entity.motionY = -this.slideVelocity;
+
+				this.distanceSlided += this.slideVelocity;
+
+				if (this.distanceSlided >= this.distanceToSlide)
 				{
-					this.entity.motionY = -this.slideVelocity;
+					this.entity.motionY -= add;
 
-					this.distanceSlided += this.slideVelocity;
-
-					if (this.distanceSlided >= this.distanceToSlide)
-					{
-						this.entity.motionY -= add;
-
-						this.stop();
-					}
-
-					break;
+					this.stop();
 				}
-				case RIGHT:
+
+				break;
+			}
+			case RIGHT:
+			{
+				this.entity.motionX = this.slideVelocity;
+
+				this.distanceSlided += this.slideVelocity;
+
+				if (this.distanceSlided >= this.distanceToSlide)
 				{
-					this.entity.motionX = this.slideVelocity;
+					this.entity.motionX += add;
 
-					this.distanceSlided += this.slideVelocity;
-
-					if (this.distanceSlided >= this.distanceToSlide)
-					{
-						this.entity.motionX += add;
-
-						this.stop();
-					}
-
-					break;
+					this.stop();
 				}
-				case LEFT:
+
+				break;
+			}
+			case LEFT:
+			{
+				this.entity.motionX = -this.slideVelocity;
+
+				this.distanceSlided += this.slideVelocity;
+
+				if (this.distanceSlided >= this.distanceToSlide)
 				{
-					this.entity.motionX = -this.slideVelocity;
+					this.entity.motionX -= add;
 
-					this.distanceSlided += this.slideVelocity;
-
-					if (this.distanceSlided >= this.distanceToSlide)
-					{
-						this.entity.motionX -= add;
-
-						this.stop();
-					}
-
-					break;
+					this.stop();
 				}
-				case FORWARD:
+
+				break;
+			}
+			case FORWARD:
+			{
+				this.entity.motionZ = this.slideVelocity;
+
+				this.distanceSlided += this.slideVelocity;
+
+				if (this.distanceSlided >= this.distanceToSlide)
 				{
-					this.entity.motionZ = this.slideVelocity;
+					this.entity.motionZ += add;
 
-					this.distanceSlided += this.slideVelocity;
-
-					if (this.distanceSlided >= this.distanceToSlide)
-					{
-						this.entity.motionZ += add;
-
-						this.stop();
-					}
-
-					break;
+					this.stop();
 				}
-				case BACKWARD:
+
+				break;
+			}
+			case BACKWARD:
+			{
+				this.entity.motionZ = -this.slideVelocity;
+
+				this.distanceSlided += this.slideVelocity;
+
+				if (this.distanceSlided >= this.distanceToSlide)
 				{
-					this.entity.motionZ = -this.slideVelocity;
+					this.entity.motionZ -= add;
 
-					this.distanceSlided += this.slideVelocity;
-
-					if (this.distanceSlided >= this.distanceToSlide)
-					{
-						this.entity.motionZ -= add;
-
-						this.stop();
-					}
-
-					break;
+					this.stop();
 				}
+
+				break;
+			}
 			}
 
 			if (this.entity.isCollidedHorizontally)

@@ -20,11 +20,13 @@ public class BlockHolystoneBookshelf extends Block
 		this.setHarvestLevel("pickaxe", 0);
 	}
 
+	@Override
 	public int quantityDropped(Random random)
 	{
 		return 3;
 	}
 
+	@Override
 	@Nullable
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{

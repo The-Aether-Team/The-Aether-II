@@ -52,12 +52,6 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 	}
 
 	@Override
-	public void drawScreen(int mouseX, int mouseY, float partialTicks)
-	{
-		super.drawScreen(mouseX, mouseY, partialTicks);
-	}
-
-	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	{
 		/*GlStateManager.pushMatrix();
@@ -273,7 +267,7 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 
 		if (this.node.getSpeaker() != null)
 		{
-			this.fontRendererObj = Minecraft.getMinecraft().fontRendererObj;
+			this.fontRenderer = Minecraft.getMinecraft().fontRenderer;
 
 			boolean topText = this.textIndex + 1 >= this.node.getContent().size() && this.node.getButtons().size() > 0;
 			String name = I18n.format(this.node.getSpeaker().getResourcePath() + ".name");
@@ -281,8 +275,8 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 			this.namePlate = new GuiTextBox(
 					buttons.size() + 2,
 					resize ? (this.width / 2) - (baseBoxSize / 2) : 20,
-					this.height - (topText ? 122 + this.topTextBox.getTextHeight(this.fontRendererObj) :
-							107), this.fontRendererObj.getStringWidth(name + 10), 20);
+					this.height - (topText ? 122 + this.topTextBox.getTextHeight(this.fontRenderer) :
+							107), this.fontRenderer.getStringWidth(name + 10), 20);
 
 			ITextComponent t = new TextComponentString(name);
 			t.setStyle(new Style().setColor(TextFormatting.YELLOW).setItalic(true));

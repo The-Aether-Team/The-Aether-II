@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.util.io;
 
-import com.gildedgames.aether.api.util.WorldPos;
 import com.gildedgames.aether.api.util.NBT;
+import com.gildedgames.aether.api.util.WorldPos;
 import com.gildedgames.aether.common.AetherCore;
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Lists;

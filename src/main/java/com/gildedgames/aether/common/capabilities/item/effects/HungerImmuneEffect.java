@@ -12,7 +12,6 @@ import net.minecraft.util.text.TextFormatting;
 
 import java.util.Collection;
 
-
 public class HungerImmuneEffect implements IEffect<HungerImmuneEffect.Provider>
 {
 
@@ -47,6 +46,7 @@ public class HungerImmuneEffect implements IEffect<HungerImmuneEffect.Provider>
 		{
 			this.type = type;
 		}
+
 		@Override
 		public ResourceLocation getFactory()
 		{
@@ -62,7 +62,7 @@ public class HungerImmuneEffect implements IEffect<HungerImmuneEffect.Provider>
 		@Override
 		public void onEntityUpdate(IPlayerAether player)
 		{
-			setPlayerFull(player.getEntity());
+			this.setPlayerFull(player.getEntity());
 			/*
 			if (type == 0) {
 				setPlayerFull(player.getEntity());
@@ -91,15 +91,15 @@ public class HungerImmuneEffect implements IEffect<HungerImmuneEffect.Provider>
 		public void addItemInformation(Collection<String> label)
 		{
 			String ext;
-			if (type == 0)
+			if (this.type == 0)
 			{
 				ext = "Constant";
 			}
-			else if (type == 1)
+			else if (this.type == 1)
 			{
 				ext = "Sunlight";
 			}
-			else if (type == 2)
+			else if (this.type == 2)
 			{
 				ext = "Moonlight";
 			}

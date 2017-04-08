@@ -24,13 +24,9 @@ public class RangedLoot implements Loot
 	@Override
 	public ItemStack create(Random random)
 	{
-		int rangedResult = this.min + random.nextInt(this.max - this.min);
+		int amount = this.min + random.nextInt(this.max - this.min);
 
-		ItemStack copy = this.stack.copy();
-
-		copy.stackSize = rangedResult;
-
-		return copy;
+		return new ItemStack(this.stack.getItem(), amount);
 	}
 
 	@Override

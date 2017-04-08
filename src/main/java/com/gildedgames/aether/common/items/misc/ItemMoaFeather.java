@@ -1,17 +1,17 @@
 package com.gildedgames.aether.common.items.misc;
 
-import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.List;
 
 public class ItemMoaFeather extends Item
@@ -24,7 +24,7 @@ public class ItemMoaFeather extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems)
+	public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
 		ItemStack feather = new ItemStack(itemIn);
 		ItemMoaFeather.setColor(feather, "moa.feathers.dawn", new Color(0x83c4e2).getRGB());

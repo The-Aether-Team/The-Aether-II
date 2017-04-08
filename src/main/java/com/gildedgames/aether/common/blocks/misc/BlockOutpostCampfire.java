@@ -43,6 +43,7 @@ public class BlockOutpostCampfire extends BlockMultiController
 		return AABB;
 	}
 
+	@Override
 	@Deprecated
 	public boolean isFullBlock(IBlockState state)
 	{

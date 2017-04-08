@@ -20,11 +20,13 @@ public class BlockSkyrootBookshelf extends Block
 		this.setHarvestLevel("axe", 0);
 	}
 
+	@Override
 	public int quantityDropped(Random random)
 	{
 		return 3;
 	}
 
+	@Override
 	@Nullable
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{

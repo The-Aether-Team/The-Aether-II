@@ -23,10 +23,10 @@ public class TabBugReport implements ITab
 	public void onOpen(EntityPlayer player)
 	{
 		// TODO: Re-implement
-//		if (player.worldObj.isRemote)
-//		{
-//			UiManager.inst().open("bugReportMenu", new MinecraftGui(new BugReportMenu()));
-//		}
+		//		if (player.worldObj.isRemote)
+		//		{
+		//			UiManager.inst().open("bugReportMenu", new MinecraftGui(new BugReportMenu()));
+		//		}
 	}
 
 	@Override

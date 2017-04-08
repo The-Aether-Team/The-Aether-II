@@ -41,8 +41,9 @@ public class WorldProviderAether extends WorldProviderSurface
 	}
 
 	@Override
-	protected void createBiomeProvider()
+	protected void init()
 	{
+		this.hasSkyLight = true;
 		this.biomeProvider = new BiomeProviderAether(this.world);
 	}
 

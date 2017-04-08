@@ -1,7 +1,0 @@
-{
-	"parent": "block/vine_2_opposite",
-	"textures": {
-		"particle": "aether:blocks/vines/skyroot_vines",
-		"vine": "aether:blocks/vines/skyroot_vines"
-	}
-}

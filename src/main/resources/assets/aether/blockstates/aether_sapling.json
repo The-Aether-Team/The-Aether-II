@@ -11,21 +11,6 @@
 		},
 		"variant=golden_oak": {
 			"model": "aether:saplings/golden_oak_sapling"
-		},
-		"variant=blighted": {
-			"model": "aether:saplings/blighted_sapling"
-		},
-		"variant=blightwillow": {
-			"model": "aether:saplings/blightwillow_sapling"
-		},
-		"variant=earthshifter": {
-			"model": "aether:saplings/earthshifter_sapling"
-		},
-		"variant=emberoot": {
-			"model": "aether:saplings/emberoot_sapling"
-		},
-		"variant=frostpine": {
-			"model": "aether:saplings/frostpine_sapling"
 		}
 	}
 }

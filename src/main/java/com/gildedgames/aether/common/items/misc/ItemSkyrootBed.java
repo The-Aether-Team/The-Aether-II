@@ -23,10 +23,10 @@ public class ItemSkyrootBed extends Item
 
 	}
 
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing,
-			float hitX, float hitY, float hitZ)
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if (worldIn.isRemote)
+		if (world.isRemote)
 		{
 			return EnumActionResult.SUCCESS;
 		}
@@ -36,40 +36,49 @@ public class ItemSkyrootBed extends Item
 		}
 		else
 		{
-			IBlockState iblockstate = worldIn.getBlockState(pos);
-			Block block = iblockstate.getBlock();
-			boolean flag = block.isReplaceable(worldIn, pos);
+			IBlockState state = world.getBlockState(pos);
 
-			if (!flag)
+			Block block = state.getBlock();
+
+			boolean canReplace = block.isReplaceable(world, pos);
+
+			if (!canReplace)
 			{
 				pos = pos.up();
 			}
 
-			int i = MathHelper.floor((double) (playerIn.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-			EnumFacing enumfacing = EnumFacing.getHorizontal(i);
-			BlockPos blockpos = pos.offset(enumfacing);
+			int look = MathHelper.floor((double) (player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-			if (playerIn.canPlayerEdit(pos, facing, stack) && playerIn.canPlayerEdit(blockpos, facing, stack))
+			EnumFacing enumfacing = EnumFacing.getHorizontal(look);
+
+			BlockPos adjPos = pos.offset(enumfacing);
+
+			ItemStack heldStack = player.getHeldItem(hand);
+
+			if (player.canPlayerEdit(pos, facing, heldStack) && player.canPlayerEdit(adjPos, facing, heldStack))
 			{
-				boolean flag1 = worldIn.getBlockState(blockpos).getBlock().isReplaceable(worldIn, blockpos);
-				boolean flag2 = flag || worldIn.isAirBlock(pos);
-				boolean flag3 = flag1 || worldIn.isAirBlock(blockpos);
+				IBlockState adjBlock = world.getBlockState(adjPos);
 
-				if (flag2 && flag3 && worldIn.getBlockState(pos.down()).isFullyOpaque()
-						&& worldIn.getBlockState(blockpos.down()).isFullyOpaque())
+				boolean flag1 = adjBlock.getBlock().isReplaceable(world, adjPos);
+				boolean flag2 = canReplace || world.isAirBlock(pos);
+				boolean flag3 = flag1 || world.isAirBlock(adjPos);
+
+				if (flag2 && flag3 && world.getBlockState(pos.down()).isFullyOpaque() && world.getBlockState(adjPos.down()).isFullyOpaque())
 				{
-					IBlockState iblockstate1 = BlocksAether.skyroot_bed.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.FALSE).withProperty(BlockBed.FACING, enumfacing).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
+					IBlockState otherBed = BlocksAether.skyroot_bed.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.FALSE)
+							.withProperty(BlockBed.FACING, enumfacing).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
 
-					if (worldIn.setBlockState(pos, iblockstate1, 11))
-					{
-						IBlockState iblockstate2 = iblockstate1.withProperty(BlockBed.PART, BlockBed.EnumPartType.HEAD);
-						worldIn.setBlockState(blockpos, iblockstate2, 11);
-					}
+					world.setBlockState(pos, otherBed, 10);
+					world.setBlockState(adjPos, otherBed.withProperty(BlockBed.PART, BlockBed.EnumPartType.HEAD), 10);
 
-					SoundType soundtype = iblockstate1.getBlock().getSoundType(iblockstate1, worldIn, pos, playerIn);
-					worldIn.playSound(null, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS,
-							(soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
-					--stack.stackSize;
+					world.notifyNeighborsRespectDebug(pos, block, false);
+					world.notifyNeighborsRespectDebug(adjPos, adjBlock.getBlock(), false);
+
+					SoundType sound = otherBed.getBlock().getSoundType(otherBed, world, pos, player);
+					world.playSound(null, pos, sound.getPlaceSound(), SoundCategory.BLOCKS, (sound.getVolume() + 1.0F) / 2.0F, sound.getPitch() * 0.8F);
+
+					heldStack.shrink(1);
+
 					return EnumActionResult.SUCCESS;
 				}
 				else

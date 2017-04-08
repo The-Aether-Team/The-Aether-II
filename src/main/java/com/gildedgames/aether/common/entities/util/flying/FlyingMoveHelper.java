@@ -15,6 +15,7 @@ public class FlyingMoveHelper extends EntityMoveHelper
 		this.entity = entity;
 	}
 
+	@Override
 	public void onUpdateMoveHelper()
 	{
 		if (this.action == EntityMoveHelper.Action.MOVE_TO && !this.entity.getNavigator().noPath())

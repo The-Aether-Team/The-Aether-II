@@ -54,6 +54,7 @@ public class BlockPresent extends BlockContainer
 		return false;
 	}
 
+	@Override
 	@Deprecated
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
@@ -78,7 +79,7 @@ public class BlockPresent extends BlockContainer
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
-			@Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+			EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (!world.isRemote)
 		{
@@ -111,14 +112,14 @@ public class BlockPresent extends BlockContainer
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block)
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos)
 	{
 		if (!this.canPlaceBlockAt(world, pos))
 		{
 			this.destroyPresent(world, pos);
 		}
 
-		super.neighborChanged(state, world, pos, block);
+		super.neighborChanged(state, world, pos, block, fromPos);
 	}
 
 	private void destroyAndDropPresent(World world, TileEntityPresent tileEntity, BlockPos pos)
@@ -177,6 +178,7 @@ public class BlockPresent extends BlockContainer
 		world.setBlockToAir(pos);
 	}
 
+	@Override
 	@Deprecated
 	public boolean isOpaqueCube(IBlockState state)
 	{

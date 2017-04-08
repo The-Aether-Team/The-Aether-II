@@ -1,5 +1,5 @@
 {
-	"parent": "block/column_side",
+	"parent": "block/cube_column",
 	"textures": {
 		"end": "aether:blocks/faded_holystone_bricks/faded_holystone_base_top",
 		"side": "aether:blocks/faded_holystone_bricks/faded_holystone_pillar"

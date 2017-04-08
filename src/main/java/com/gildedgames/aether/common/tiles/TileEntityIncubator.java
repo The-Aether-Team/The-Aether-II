@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -15,8 +16,9 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.NonNullList;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 public class TileEntityIncubator extends TileEntityLockable implements ITickable, IInventory
 {
@@ -25,18 +27,13 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
 	private static final int MOA_EGG_INDEX = 4;
 
-	private ItemStack[] inventory;
+	private NonNullList<ItemStack> inventory = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
 
 	private static final int REQ_TEMPERATURE_THRESHOLD = 5000;
 
 	private int currentHeatingProgress;
 
 	private TickTimer progress = new TickTimer();
-
-	public TileEntityIncubator()
-	{
-		this.inventory = new ItemStack[INVENTORY_SIZE];
-	}
 
 	@Override
 	public void update()
@@ -61,6 +58,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 		}
 	}
 
+	@Nonnull
 	public ItemStack getMoaEgg()
 	{
 		return this.getStackInSlot(MOA_EGG_INDEX);
@@ -74,9 +72,10 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 		{
 			ItemStack stack = this.getStackInSlot(count);
 
-			if (stack == null)
+			if (stack == ItemStack.EMPTY)
 			{
 				hasFuelSlotsFilled = false;
+
 				break;
 			}
 		}
@@ -87,12 +86,12 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	public boolean hasStartedHeating()
 	{
 		return (this.currentHeatingProgress > 0 || (this.getTotalHeatingItems() >= 4 && this.areFuelSlotsFilled()))
-				&& this.getMoaEgg() != null;
+				&& this.getMoaEgg() != ItemStack.EMPTY;
 	}
 
 	public boolean isHeating()
 	{
-		return this.getMoaEgg() != null && this.getTotalHeatingItems() >= 4 && this.areFuelSlotsFilled();
+		return this.getMoaEgg() != ItemStack.EMPTY && this.getTotalHeatingItems() >= 4 && this.areFuelSlotsFilled();
 	}
 
 	public int getCurrentHeatingProgress()
@@ -117,78 +116,45 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 		return INVENTORY_SIZE;
 	}
 
-	@Nullable
 	@Override
 	public ItemStack getStackInSlot(int index)
 	{
 		if (index >= this.getSizeInventory())
 		{
-			return null;
+			return ItemStack.EMPTY;
 		}
 
-		return this.inventory[index];
+		return this.inventory.get(index);
 	}
 
-	@Nullable
 	@Override
 	public ItemStack decrStackSize(int index, int count)
 	{
-		ItemStack stack = this.getStackInSlot(index);
+		ItemStack itemstack = ItemStackHelper.getAndSplit(this.inventory, index, count);
 
-		if (stack == null)
+		if (!itemstack.isEmpty())
 		{
-			return null;
+			this.markDirty();
 		}
 
-		ItemStack copiedStack;
-
-		if (stack.stackSize <= count)
-		{
-			copiedStack = stack;
-
-			this.setInventorySlotContents(index, null);
-
-			return copiedStack;
-		}
-		else
-		{
-			copiedStack = stack.splitStack(count);
-
-			if (stack.stackSize == 0)
-			{
-				this.setInventorySlotContents(index, null);
-			}
-
-			return copiedStack;
-		}
+		return itemstack;
 	}
 
-	@Nullable
 	@Override
 	public ItemStack removeStackFromSlot(int index)
 	{
-		ItemStack stack = this.getStackInSlot(index);
-
-		if (stack != null)
-		{
-			this.setInventorySlotContents(index, null);
-
-			return stack;
-		}
-
-		return null;
+		return ItemStackHelper.getAndRemove(this.inventory, index);
 	}
 
 	@Override
-	public void setInventorySlotContents(int index, @Nullable ItemStack stack)
+	public void setInventorySlotContents(int index, @Nonnull ItemStack stack)
 	{
 		if (index >= this.getSizeInventory())
 		{
 			return;
 		}
 
-		this.inventory[index] = stack;
-
+		this.inventory.set(index, stack);
 		this.sync();
 	}
 
@@ -244,7 +210,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	@Override
 	public void clear()
 	{
-		this.inventory = new ItemStack[INVENTORY_SIZE];
+		this.inventory.clear();
 	}
 
 	@Override
@@ -311,15 +277,15 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
 		NBTTagList stackList = new NBTTagList();
 
-		for (int i = 0; i < this.inventory.length; ++i)
+		for (int i = 0; i < this.inventory.size(); ++i)
 		{
-			if (this.inventory[i] != null)
+			if (this.inventory.get(i) != ItemStack.EMPTY)
 			{
 				NBTTagCompound stackNBT = new NBTTagCompound();
 
 				stackNBT.setByte("slot", (byte) i);
 
-				this.inventory[i].writeToNBT(stackNBT);
+				this.inventory.get(i).writeToNBT(stackNBT);
 
 				stackList.appendTag(stackNBT);
 			}
@@ -337,7 +303,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	{
 		super.readFromNBT(compound);
 
-		this.inventory = new ItemStack[INVENTORY_SIZE];
+		this.inventory = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
 
 		NBTTagList stackList = compound.getTagList("inventory", 10);
 
@@ -347,13 +313,26 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
 			byte slotPos = stack.getByte("slot");
 
-			if (slotPos >= 0 && slotPos < this.inventory.length)
+			if (slotPos >= 0 && slotPos < this.inventory.size())
 			{
-				this.inventory[slotPos] = ItemStack.loadItemStackFromNBT(stack);
+				this.inventory.set(slotPos, new ItemStack(stack));
 			}
 		}
 
 		this.currentHeatingProgress = compound.getInteger("currentHeatingProgress");
 	}
 
+	@Override
+	public boolean isEmpty()
+	{
+		for (ItemStack itemstack : this.inventory)
+		{
+			if (!itemstack.isEmpty())
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
 }

@@ -260,6 +260,7 @@ public class ModelKirrid extends ModelBase
 		this.setRotation(this.HeadEarRight, 0F, 0F, 0.4363323F);
 	}
 
+	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float scale)
 	{
 		super.render(entity, f, f1, f2, f3, f4, scale);
@@ -347,6 +348,7 @@ public class ModelKirrid extends ModelBase
 		model.rotateAngleZ = z;
 	}
 
+	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
 			float scaleFactor, Entity entity)
 	{

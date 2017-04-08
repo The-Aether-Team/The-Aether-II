@@ -28,6 +28,7 @@ public class LayerGlowing<T extends EntityLiving> implements LayerRenderer<T>
 		this.glowingLayer = glowingLayer;
 	}
 
+	@Override
 	public void doRenderLayer(T entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
 			float headPitch, float scale)
 	{
@@ -67,6 +68,7 @@ public class LayerGlowing<T extends EntityLiving> implements LayerRenderer<T>
 		GlStateManager.enableAlpha();
 	}
 
+	@Override
 	public boolean shouldCombineTextures()
 	{
 		return false;

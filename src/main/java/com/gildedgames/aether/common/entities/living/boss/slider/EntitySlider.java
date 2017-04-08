@@ -4,13 +4,9 @@ import com.gildedgames.aether.api.capabilites.entity.boss.IBoss;
 import com.gildedgames.aether.api.capabilites.entity.boss.IBossManager;
 import com.gildedgames.aether.api.loot.LootPool;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.EntitiesAether;
-import com.gildedgames.aether.common.entities.util.AetherSpawnEggInfo;
 import com.gildedgames.aether.common.entities.util.SimpleBossManager;
 import com.gildedgames.aether.common.entities.util.sliding.EntitySliding;
 import com.gildedgames.aether.common.entities.util.sliding.SlidingHorizontalMoveHelper;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.misc.ItemAetherSpawnEgg;
 import com.gildedgames.aether.common.registry.LootDefinitions;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.tiles.TileEntityLabyrinthBridge;
@@ -33,7 +29,6 @@ import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
@@ -117,7 +112,7 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 			}
 		}
 
-		this.fireResistance = -1;
+		this.isImmuneToFire = true;
 		this.extinguish();
 
 		this.signalTimer.tick();
@@ -309,7 +304,7 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 
 		String tipPrefix = "My fist doesn't seem to hurt it. Maybe I need a pickaxe?";
 
-		if (equippedItem != null)
+		if (equippedItem != ItemStack.EMPTY)
 		{
 			if (equippedItem.getItem() instanceof ItemPickaxe)
 			{
@@ -321,7 +316,7 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 
 		if (this.chatCooldown <= 0)
 		{
-			player.sendStatusMessage(new TextComponentString("Hmm. It's a rock-solid block. " + tipPrefix));
+			player.sendStatusMessage(new TextComponentString("Hmm. It's a rock-solid block. " + tipPrefix), false);
 
 			this.chatCooldown = 120;
 		}
@@ -433,16 +428,16 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 	{
 		if (this.getBossManager().hasBegun(FirstStageSlider.class))
 		{
-			List<AxisAlignedBB> boxes = this.world.getCollisionBoxes(this.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
+			List<AxisAlignedBB> boxes = this.world.getCollisionBoxes(this, this.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
 
 			for (AxisAlignedBB box : boxes)
 			{
 				if (box != null)
 				{
 					BlockPos pos = new BlockPos(
-						MathHelper.floor(box.minX + 0.5D),
-						MathHelper.floor(box.minY + 0.5D),
-						MathHelper.floor(box.minZ + 0.5D)
+							MathHelper.floor(box.minX + 0.5D),
+							MathHelper.floor(box.minY + 0.5D),
+							MathHelper.floor(box.minZ + 0.5D)
 					);
 
 					TileEntity te = this.world.getTileEntity(pos);
@@ -502,24 +497,6 @@ public class EntitySlider extends EntitySliding implements IMob, IBoss<EntitySli
 	public LootPool getLootPool()
 	{
 		return LootDefinitions.LABYRINTH_FINAL_BOSS;
-	}
-
-	@Override
-	public ItemStack getPickedResult(RayTraceResult target)
-	{
-		String id = EntitiesAether.getStringFromClass(this.getClass());
-
-		if (!EntitiesAether.entityEggs.containsKey(id))
-		{
-			return null;
-		}
-
-		AetherSpawnEggInfo info = EntitiesAether.entityEggs.get(id);
-
-		ItemStack stack = new ItemStack(ItemsAether.aether_spawn_egg, 1);
-		ItemAetherSpawnEgg.applyEntityIdToItemStack(stack, info.getSpawnedID());
-
-		return stack;
 	}
 
 }

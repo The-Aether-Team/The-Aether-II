@@ -130,6 +130,7 @@ public class EntitySwet extends EntityExtendedMob
 		this.isAirBorne = true;
 	}
 
+	@Override
 	public int getVerticalFaceSpeed()
 	{
 		return 0;
@@ -200,16 +201,16 @@ public class EntitySwet extends EntityExtendedMob
 	{
 		switch (this.getType())
 		{
-			case BLUE:
-				return LootTablesAether.ENTITY_SWET_BLUE;
-			case GOLDEN:
-				return LootTablesAether.ENTITY_SWET_GOLDEN;
-			case DARK:
-				return LootTablesAether.ENTITY_SWET_DARK;
-			case LIGHT:
-				return LootTablesAether.ENTITY_SWET_LIGHT;
-			default:
-				return LootTablesAether.ENTITY_SWET;
+		case BLUE:
+			return LootTablesAether.ENTITY_SWET_BLUE;
+		case GOLDEN:
+			return LootTablesAether.ENTITY_SWET_GOLDEN;
+		case DARK:
+			return LootTablesAether.ENTITY_SWET_DARK;
+		case LIGHT:
+			return LootTablesAether.ENTITY_SWET_LIGHT;
+		default:
+			return LootTablesAether.ENTITY_SWET;
 		}
 	}
 }

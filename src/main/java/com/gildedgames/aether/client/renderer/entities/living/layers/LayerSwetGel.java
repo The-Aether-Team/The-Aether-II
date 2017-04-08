@@ -19,6 +19,7 @@ public class LayerSwetGel implements LayerRenderer<EntityLiving>
 		this.slimeRenderer = renderLiving;
 	}
 
+	@Override
 	public void doRenderLayer(EntityLiving entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
 			float netHeadYaw, float headPitch, float scale)
 	{
@@ -35,6 +36,7 @@ public class LayerSwetGel implements LayerRenderer<EntityLiving>
 		}
 	}
 
+	@Override
 	public boolean shouldCombineTextures()
 	{
 		return true;

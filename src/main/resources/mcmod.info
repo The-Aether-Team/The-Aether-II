@@ -9,7 +9,7 @@
     "authorList": [ "Brandon Pearce", "JellySquid", "Emile van Krieken", "Oscar Payn", "Hugo Payn", "Brandon Potts", "Christian Peterson", "Jon Lachney" ],
     "url": "http://AetherII.com",
     "credits": "Designed and Created by Gilded Games with <3",
-    "requiredMods": [ "Forge" ],
+    "requiredMods": [ ],
     "useDependencyInformation": true
   }]
 }

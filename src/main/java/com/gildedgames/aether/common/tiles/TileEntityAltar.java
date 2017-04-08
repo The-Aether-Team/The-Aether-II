@@ -15,12 +15,14 @@ import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class TileEntityAltar extends TileEntitySynced implements ITickable
 {
 	@SideOnly(Side.CLIENT)
 	public double animationTicks, prevAnimationTicks;
 
-	private ItemStack stackOnAltar;
+	private ItemStack stackOnAltar = ItemStack.EMPTY;
 
 	private int ambrosiumCount;
 
@@ -40,7 +42,7 @@ public class TileEntityAltar extends TileEntitySynced implements ITickable
 		return this.stackOnAltar;
 	}
 
-	public void setStackOnAltar(ItemStack stack)
+	public void setStackOnAltar(@Nonnull ItemStack stack)
 	{
 		this.stackOnAltar = stack;
 
@@ -86,7 +88,7 @@ public class TileEntityAltar extends TileEntitySynced implements ITickable
 					this.getWorld().spawnEntity(this.createEntityItemAboveAltar(stack));
 
 					this.ambrosiumCount -= cost;
-					this.setStackOnAltar(null);
+					this.setStackOnAltar(ItemStack.EMPTY);
 				}
 			}
 		}
@@ -107,7 +109,7 @@ public class TileEntityAltar extends TileEntitySynced implements ITickable
 		}
 
 		this.setAmbrosiumCount(0);
-		this.setStackOnAltar(null);
+		this.setStackOnAltar(ItemStack.EMPTY);
 	}
 
 	public EntityItem createEntityItemAboveAltar(ItemStack stack)
@@ -152,7 +154,7 @@ public class TileEntityAltar extends TileEntitySynced implements ITickable
 		super.readFromNBT(compound);
 
 		NBTTagCompound itemCompound = compound.getCompoundTag("StackOnAltar");
-		this.stackOnAltar = itemCompound.hasNoTags() ? null : ItemStack.loadItemStackFromNBT(itemCompound);
+		this.stackOnAltar = itemCompound.hasNoTags() ? null : new ItemStack(itemCompound);
 
 		this.ambrosiumCount = compound.getInteger("AmbrosiumCount");
 	}

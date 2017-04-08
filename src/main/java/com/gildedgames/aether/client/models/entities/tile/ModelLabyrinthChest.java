@@ -6,30 +6,29 @@ import net.minecraft.entity.Entity;
 
 public class ModelLabyrinthChest extends ModelBase
 {
-	//fields
-	public ModelRenderer Main_Top;
+	private ModelRenderer Main_Top;
 
-	public ModelRenderer Main_Bottom;
+	private ModelRenderer Main_Bottom;
 
-	public ModelRenderer Hinge_Left;
+	private ModelRenderer Hinge_Left;
 
-	public ModelRenderer Hinge_Right;
+	private ModelRenderer Hinge_Right;
 
-	public ModelRenderer Corner_Bottom_Front_Right;
+	private ModelRenderer Corner_Bottom_Front_Right;
 
-	public ModelRenderer Corner_Bottom_Front_Left;
+	private ModelRenderer Corner_Bottom_Front_Left;
 
-	public ModelRenderer Corner_Bottom_Back_Left;
+	private ModelRenderer Corner_Bottom_Back_Left;
 
-	public ModelRenderer Corner_Bottom_Back_Right;
+	private ModelRenderer Corner_Bottom_Back_Right;
 
-	public ModelRenderer Corner_Top_Back_Left;
+	private ModelRenderer Corner_Top_Back_Left;
 
-	public ModelRenderer Corner_Top_Back_Right;
+	private ModelRenderer Corner_Top_Back_Right;
 
-	public ModelRenderer Corner_Top_Front_Left;
+	private ModelRenderer Corner_Top_Front_Left;
 
-	public ModelRenderer Corner_Top_Front_Right;
+	private ModelRenderer Corner_Top_Front_Right;
 
 	public ModelLabyrinthChest()
 	{
@@ -110,6 +109,7 @@ public class ModelLabyrinthChest extends ModelBase
 		this.setRotation(this.Corner_Top_Front_Right, 0F, 0.7853982F, 0F);
 	}
 
+	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
@@ -135,26 +135,12 @@ public class ModelLabyrinthChest extends ModelBase
 		model.rotateAngleZ = z;
 	}
 
+	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
 	{
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 	}
 
-	/*
-		ModelRenderer Main_Top;
-    ModelRenderer Main_Bottom;
-    ModelRenderer Hinge_Left;
-    ModelRenderer Hinge_Right;
-    ModelRenderer Corner_Bottom_Front_Right;
-    ModelRenderer Corner_Bottom_Front_Left;
-    ModelRenderer Corner_Bottom_Back_Left;
-    ModelRenderer Corner_Bottom_Back_Right;
-    ModelRenderer Corner_Top_Back_Left;
-    ModelRenderer Corner_Top_Back_Right;
-    ModelRenderer Corner_Top_Front_Left;
-    ModelRenderer Corner_Top_Front_Right;
-
-	 */
 	public void renderAll()
 	{
 		float x = 0.0625F;

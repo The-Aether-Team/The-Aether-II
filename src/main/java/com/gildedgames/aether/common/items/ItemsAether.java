@@ -31,8 +31,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.ArrayList;
@@ -401,8 +399,6 @@ public class ItemsAether
 			wrapping_paper = new ItemWrappingPaper(),
 			fried_moa_egg = new ItemFood(10, false);
 
-	public static final ItemAetherSpawnEgg aether_spawn_egg = new ItemAetherSpawnEgg();
-
 	public static void preInit()
 	{
 		registerItem("skyroot_stick", skyroot_stick.setCreativeTab(CreativeTabsAether.MATERIALS));
@@ -714,15 +710,13 @@ public class ItemsAether
 
 		registerItem("fried_moa_egg", fried_moa_egg.setCreativeTab(CreativeTabsAether.CONSUMABLES));
 
-		registerItem("aether_spawn_egg", aether_spawn_egg.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
-
 		registerItemProperties();
 	}
 
 	private static void registerItemProperties()
 	{
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER,
-				new ItemStack(ItemsAether.skyroot_water_bucket), new ItemStack(ItemsAether.skyroot_bucket));
+		//		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER,
+		//				new ItemStack(ItemsAether.skyroot_water_bucket), new ItemStack(ItemsAether.skyroot_bucket));
 	}
 
 	private static <T extends Item> T registerItem(String name, T item)
@@ -732,7 +726,7 @@ public class ItemsAether
 
 		GameRegistry.register(item);
 
-		if (!(item instanceof ItemMoaEgg) && !(item instanceof ItemAetherSpawnEgg))
+		if (!(item instanceof ItemMoaEgg))
 		{
 			registeredItems.add(item);
 		}

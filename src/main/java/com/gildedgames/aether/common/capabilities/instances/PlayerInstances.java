@@ -23,11 +23,13 @@ public class PlayerInstances implements IPlayerInstances
 		this.player = player;
 	}
 
+	@Override
 	public Instance getInstance()
 	{
 		return this.activeInstance;
 	}
 
+	@Override
 	public void setInstance(Instance instance)
 	{
 		this.activeInstance = instance;
@@ -38,11 +40,13 @@ public class PlayerInstances implements IPlayerInstances
 		}
 	}
 
+	@Override
 	public WorldPos outside()
 	{
 		return this.outside;
 	}
 
+	@Override
 	public void setOutside(WorldPos pos)
 	{
 		this.outside = pos;

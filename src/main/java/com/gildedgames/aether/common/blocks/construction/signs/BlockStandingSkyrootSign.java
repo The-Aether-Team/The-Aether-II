@@ -18,7 +18,7 @@ public class BlockStandingSkyrootSign extends BlockSkyrootSign
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block neighborBlock, BlockPos fromPos)
 	{
 		if (!world.getBlockState(pos.down()).getMaterial().isSolid())
 		{
@@ -27,7 +27,7 @@ public class BlockStandingSkyrootSign extends BlockSkyrootSign
 			world.setBlockToAir(pos);
 		}
 
-		super.neighborChanged(state, world, pos, neighborBlock);
+		super.neighborChanged(state, world, pos, neighborBlock, fromPos);
 	}
 
 	@Override

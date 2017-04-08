@@ -88,6 +88,7 @@ public class ItemCompanion extends Item
 		return this.companionClass;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
 	{

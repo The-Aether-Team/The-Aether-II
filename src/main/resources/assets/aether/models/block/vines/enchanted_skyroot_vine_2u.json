@@ -1,7 +1,0 @@
-{
-	"parent": "block/vine_2u",
-	"textures": {
-		"particle": "aether:blocks/vines/enchanted_skyroot_vines",
-		"vine": "aether:blocks/vines/enchanted_skyroot_vines"
-	}
-}

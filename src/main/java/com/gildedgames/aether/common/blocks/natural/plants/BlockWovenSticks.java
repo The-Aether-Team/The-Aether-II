@@ -11,19 +11,15 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
 
 public class BlockWovenSticks extends Block implements IBlockVariants
 {
 
 	public static final BlockVariant
-			SKYROOT = new BlockVariant(0, "skyroot"),
-			BLIGHTWILLOW = new BlockVariant(1, "blightwillow"),
-			EARTHSHIFTER = new BlockVariant(2, "earthshifter"),
-			FROSTPINE = new BlockVariant(3, "frostpine");
+			SKYROOT = new BlockVariant(0, "skyroot");
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", SKYROOT);
 
@@ -38,16 +34,8 @@ public class BlockWovenSticks extends Block implements IBlockVariants
 	}
 
 	@Override
-	public int getLightValue(IBlockState state)
-	{
-		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
-
-		return (variant == BLIGHTWILLOW ? (int) (0.6F * 15.0F) : this.lightValue);
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
+	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{

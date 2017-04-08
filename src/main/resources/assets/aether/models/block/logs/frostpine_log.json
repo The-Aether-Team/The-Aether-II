@@ -1,7 +1,0 @@
-{
-	"parent": "block/cube_column",
-	"textures": {
-		"end": "aether:blocks/logs/frostpine_log_top",
-		"side": "aether:blocks/logs/frostpine_log_side"
-	}
-}

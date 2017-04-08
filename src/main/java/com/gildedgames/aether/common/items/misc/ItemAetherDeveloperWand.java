@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.misc;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.state.IBlockState;
@@ -34,9 +35,11 @@ public class ItemAetherDeveloperWand extends Item
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing,
+	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing,
 			float hitX, float hitY, float hitZ)
 	{
+		ItemStack stack = playerIn.getHeldItem(hand);
+
 		if (worldIn.isRemote)
 		{
 			worldIn.playSound(playerIn, playerIn.getPosition(), SoundsAether.tempest_electric_shock, SoundCategory.NEUTRAL, 1.0F,
@@ -68,7 +71,7 @@ public class ItemAetherDeveloperWand extends Item
 				d0 = 0.5D;
 			}
 
-			ItemAetherDeveloperWand.spawnCreature(worldIn, "aether.generator",
+			ItemAetherDeveloperWand.spawnCreature(worldIn, AetherCore.getResource("generator"),
 					(double) pos.getX() + hitX, (double) pos.getY() + d0, (double) pos.getZ() + hitZ);
 
 			return EnumActionResult.SUCCESS;
@@ -76,15 +79,15 @@ public class ItemAetherDeveloperWand extends Item
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World world, EntityPlayer playerIn, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer playerIn, EnumHand hand)
 	{
-		return new ActionResult<>(EnumActionResult.PASS, itemStackIn);
+		return new ActionResult<>(EnumActionResult.PASS, playerIn.getHeldItem(hand));
 	}
 
 	@Nullable
-	public static Entity spawnCreature(World worldIn, @Nullable String entityID, double x, double y, double z)
+	public static Entity spawnCreature(World worldIn, @Nullable ResourceLocation entityID, double x, double y, double z)
 	{
-		if (entityID != null && EntityList.NAME_TO_CLASS.containsKey(entityID))
+		if (entityID != null && EntityList.isRegistered(entityID))
 		{
 			Entity entity = null;
 

@@ -72,6 +72,7 @@ public class EntityPinkBabySwet extends EntityCompanion
 		this.isAirBorne = true;
 	}
 
+	@Override
 	public int getVerticalFaceSpeed()
 	{
 		return 0;

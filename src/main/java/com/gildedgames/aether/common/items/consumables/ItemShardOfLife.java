@@ -21,9 +21,11 @@ public class ItemShardOfLife extends Item
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
-		playerIn.setActiveHand(EnumHand.MAIN_HAND);
+		ItemStack stack = playerIn.getHeldItem(hand);
+		playerIn.setActiveHand(hand);
+
 		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 	}
 
@@ -49,7 +51,7 @@ public class ItemShardOfLife extends Item
 
 		if (decreaseStackSize)
 		{
-			stack.stackSize--;
+			stack.shrink(1);
 		}
 
 		return stack;

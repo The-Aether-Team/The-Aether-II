@@ -11,8 +11,6 @@ import net.minecraft.util.ResourceLocation;
 public class GuiDialogButton extends GuiButton
 {
 
-	private static final ResourceLocation DARK_OVERLAY = AetherCore.getResource("textures/gui/inventory/dark_slot_overlay.png");
-
 	private IDialogButton buttonData;
 
 	public GuiDialogButton(int buttonId, int x, int y, IDialogButton buttonData)
@@ -41,7 +39,7 @@ public class GuiDialogButton extends GuiButton
 			this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width
 					&& mouseY < this.yPosition + this.height;
 
-			FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
+			FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
 
 			String label = this.buttonData.getLabel().getFormattedText();
 

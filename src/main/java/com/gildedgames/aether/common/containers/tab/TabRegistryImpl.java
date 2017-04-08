@@ -61,11 +61,13 @@ public class TabRegistryImpl implements ITabRegistry
 		this.getRegisteredTabGroups().put(this.getRegisteredTabGroups().size(), tabGroup);
 	}
 
+	@Override
 	public ITabGroupHandler getActiveGroup()
 	{
 		return this.activeGroup;
 	}
 
+	@Override
 	public void setActiveGroup(ITabGroupHandler activeGroup)
 	{
 		this.activeGroup = activeGroup;

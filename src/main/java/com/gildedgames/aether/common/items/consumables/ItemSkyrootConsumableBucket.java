@@ -26,11 +26,12 @@ public class ItemSkyrootConsumableBucket extends Item
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
+		ItemStack stack = playerIn.getHeldItem(hand);
 		playerIn.setActiveHand(hand);
 
-		return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
+		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 	}
 
 	@Override
@@ -42,7 +43,7 @@ public class ItemSkyrootConsumableBucket extends Item
 
 			if (!((EntityPlayer) living).capabilities.isCreativeMode)
 			{
-				--stack.stackSize;
+				stack.shrink(1);
 			}
 
 			player.addStat(StatList.getObjectUseStats(this));
@@ -53,7 +54,7 @@ public class ItemSkyrootConsumableBucket extends Item
 			this.applyEffect(stack, world, living);
 		}
 
-		return stack.stackSize <= 0 ? new ItemStack(ItemsAether.skyroot_bucket) : stack;
+		return stack.getCount() <= 0 ? new ItemStack(ItemsAether.skyroot_bucket) : stack;
 	}
 
 	private void applyEffect(ItemStack stack, World world, EntityLivingBase player)

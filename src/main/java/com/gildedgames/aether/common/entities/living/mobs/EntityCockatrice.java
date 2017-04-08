@@ -169,11 +169,13 @@ public class EntityCockatrice extends EntityAetherMob
 			super(entityIn);
 		}
 
+		@Override
 		public void setJumping()
 		{
 
 		}
 
+		@Override
 		public void doJump()
 		{
 

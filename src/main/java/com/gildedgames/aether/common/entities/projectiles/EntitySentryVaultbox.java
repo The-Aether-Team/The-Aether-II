@@ -98,6 +98,7 @@ public class EntitySentryVaultbox extends EntityThrowable
 		}
 	}
 
+	@Override
 	protected void onImpact(RayTraceResult ray)
 	{
 		if (!this.hasHit)

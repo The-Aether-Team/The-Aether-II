@@ -24,9 +24,11 @@ public class ItemTemplatePlacer extends Item
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing,
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing,
 			float hitX, float hitY, float hitZ)
 	{
+		ItemStack stack = player.getHeldItem(hand);
+
 		if (facing == EnumFacing.DOWN)
 		{
 			return EnumActionResult.FAIL;
@@ -72,25 +74,25 @@ public class ItemTemplatePlacer extends Item
 
 				switch (rotation)
 				{
-					case NONE:
-						pos = pos.add(-size.getX() / 2, 0, -size.getZ() / 2);
-						break;
-					default:
-						break;
-					case CLOCKWISE_90:
-						pos = pos.add(size.getX() / 2, 0, -size.getZ() / 2);
-						break;
-					case COUNTERCLOCKWISE_90:
-						pos = pos.add(-size.getX() / 2, 0, size.getZ() / 2);
-						break;
-					case CLOCKWISE_180:
-						pos = pos.add(size.getX() / 2, 0, size.getZ() / 2);
-						break;
+				case NONE:
+					pos = pos.add(-size.getX() / 2, 0, -size.getZ() / 2);
+					break;
+				default:
+					break;
+				case CLOCKWISE_90:
+					pos = pos.add(size.getX() / 2, 0, -size.getZ() / 2);
+					break;
+				case COUNTERCLOCKWISE_90:
+					pos = pos.add(-size.getX() / 2, 0, size.getZ() / 2);
+					break;
+				case CLOCKWISE_180:
+					pos = pos.add(size.getX() / 2, 0, size.getZ() / 2);
+					break;
 				}
 
 				template.placeTemplateWithoutCheck(world, pos, placementsettings);
 
-				--stack.stackSize;
+				stack.shrink(1);
 
 				return EnumActionResult.SUCCESS;
 			}

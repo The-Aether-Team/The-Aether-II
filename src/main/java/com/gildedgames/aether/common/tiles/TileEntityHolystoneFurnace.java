@@ -6,10 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ContainerFurnace;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.inventory.SlotFurnaceFuel;
+import net.minecraft.inventory.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -19,7 +16,10 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
+
+import javax.annotation.Nonnull;
 
 public class TileEntityHolystoneFurnace extends TileEntityLockable implements ITickable, ISidedInventory
 {
@@ -28,7 +28,7 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 			slotsBottom = new int[] { 2, 1 },
 			slotsSides = new int[] { 1 };
 
-	private ItemStack[] containedItemStacks = new ItemStack[3];
+	private NonNullList<ItemStack> inventory = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
 
 	private String customName;
 
@@ -39,80 +39,68 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 	@Override
 	public int getSizeInventory()
 	{
-		return this.containedItemStacks.length;
+		return 3;
 	}
 
 	@Override
+	public boolean isEmpty()
+	{
+		for (ItemStack itemstack : this.inventory)
+		{
+			if (!itemstack.isEmpty())
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	@Override
+	@Nonnull
 	public ItemStack getStackInSlot(int index)
 	{
-		return this.containedItemStacks[index];
+		return this.inventory.get(index);
 	}
 
 	@Override
+	@Nonnull
 	public ItemStack decrStackSize(int index, int count)
 	{
-		if (this.containedItemStacks[index] != null)
+		ItemStack itemstack = ItemStackHelper.getAndSplit(this.inventory, index, count);
+
+		if (!itemstack.isEmpty())
 		{
-			ItemStack stack;
-
-			if (this.containedItemStacks[index].stackSize <= count)
-			{
-				stack = this.containedItemStacks[index];
-
-				this.containedItemStacks[index] = null;
-
-				return stack;
-			}
-			else
-			{
-				stack = this.containedItemStacks[index].splitStack(count);
-
-				if (this.containedItemStacks[index].stackSize == 0)
-				{
-					this.containedItemStacks[index] = null;
-				}
-
-				return stack;
-			}
+			this.markDirty();
 		}
-		else
-		{
-			return null;
-		}
+
+		return itemstack;
 	}
 
 	@Override
+	@Nonnull
 	public ItemStack removeStackFromSlot(int index)
 	{
-		if (this.containedItemStacks[index] != null)
-		{
-			ItemStack itemstack = this.containedItemStacks[index];
-			this.containedItemStacks[index] = null;
-			return itemstack;
-		}
-		else
-		{
-			return null;
-		}
+		return ItemStackHelper.getAndRemove(this.inventory, index);
 	}
 
 	@Override
-	public void setInventorySlotContents(int index, ItemStack stack)
+	public void setInventorySlotContents(int index, @Nonnull ItemStack stack)
 	{
-		boolean isEqual = stack != null && stack.isItemEqual(this.containedItemStacks[index]) &&
-				ItemStack.areItemStackTagsEqual(stack, this.containedItemStacks[index]);
+		boolean isEqual = stack.isItemEqual(this.inventory.get(index));
 
-		this.containedItemStacks[index] = stack;
+		this.inventory.set(index, stack);
 
-		if (stack != null && stack.stackSize > this.getInventoryStackLimit())
+		if (stack.getCount() > this.getInventoryStackLimit())
 		{
-			stack.stackSize = this.getInventoryStackLimit();
+			stack.setCount(this.getInventoryStackLimit());
 		}
 
 		if (index == 0 && !isEqual)
 		{
 			this.totalCookTime = this.getCookTimeForItem(stack);
 			this.cookTime = 0;
+
 			this.markDirty();
 		}
 	}
@@ -134,7 +122,7 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 	{
 		super.readFromNBT(compound);
 
-		this.containedItemStacks = new ItemStack[this.getSizeInventory()];
+		this.inventory = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
 
 		NBTTagList stackList = compound.getTagList("Items", 10);
 
@@ -144,16 +132,16 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 
 			byte slotPos = stack.getByte("Slot");
 
-			if (slotPos >= 0 && slotPos < this.containedItemStacks.length)
+			if (slotPos >= 0 && slotPos < this.inventory.size())
 			{
-				this.containedItemStacks[slotPos] = ItemStack.loadItemStackFromNBT(stack);
+				this.inventory.set(slotPos, new ItemStack(stack));
 			}
 		}
 
 		this.burnTime = compound.getShort("BurnTime");
 		this.cookTime = compound.getShort("CookTime");
 		this.totalCookTime = compound.getShort("CookTimeTotal");
-		this.currentItemBurnTime = TileEntityFurnace.getItemBurnTime(this.containedItemStacks[1]);
+		this.currentItemBurnTime = TileEntityFurnace.getItemBurnTime(this.inventory.get(1));
 
 		if (compound.hasKey("CustomName", 8))
 		{
@@ -172,15 +160,15 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 
 		NBTTagList stackList = new NBTTagList();
 
-		for (int i = 0; i < this.containedItemStacks.length; ++i)
+		for (int i = 0; i < this.inventory.size(); ++i)
 		{
-			if (this.containedItemStacks[i] != null)
+			if (this.inventory.get(i) != ItemStack.EMPTY)
 			{
 				NBTTagCompound stackNBT = new NBTTagCompound();
 
 				stackNBT.setByte("Slot", (byte) i);
 
-				this.containedItemStacks[i].writeToNBT(stackNBT);
+				this.inventory.get(i).writeToNBT(stackNBT);
 
 				stackList.appendTag(stackNBT);
 			}
@@ -196,6 +184,7 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 		return compound;
 	}
 
+	@Override
 	public int getInventoryStackLimit()
 	{
 		return 64;
@@ -220,7 +209,7 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 
 		if (!this.world.isRemote)
 		{
-			if (!this.isBurning() && (this.containedItemStacks[1] == null || this.containedItemStacks[0] == null))
+			if (!this.isBurning() && (this.inventory.get(1) == ItemStack.EMPTY || this.inventory.get(0) == ItemStack.EMPTY))
 			{
 				if (!this.isBurning() && this.cookTime > 0)
 				{
@@ -231,22 +220,17 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 			{
 				if (!this.isBurning() && this.canSmelt())
 				{
-					this.currentItemBurnTime = this.burnTime = TileEntityFurnace
-							.getItemBurnTime(this.containedItemStacks[1]);
+					this.currentItemBurnTime = this.burnTime = TileEntityFurnace.getItemBurnTime(this.inventory.get(1));
 
 					if (this.isBurning())
 					{
 						isDirty = true;
 
-						if (this.containedItemStacks[1] != null)
-						{
-							--this.containedItemStacks[1].stackSize;
+						this.inventory.get(1).shrink(1);
 
-							if (this.containedItemStacks[1].stackSize == 0)
-							{
-								this.containedItemStacks[1] = this.containedItemStacks[1].getItem()
-										.getContainerItem(this.containedItemStacks[1]);
-							}
+						if (this.inventory.get(1).getCount() == 0)
+						{
+							this.inventory.set(1, this.inventory.get(1).getItem().getContainerItem(this.inventory.get(1)));
 						}
 					}
 				}
@@ -259,7 +243,7 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 					{
 						this.cookTime = 0;
 
-						this.totalCookTime = this.getCookTimeForItem(this.containedItemStacks[0]);
+						this.totalCookTime = this.getCookTimeForItem(this.inventory.get(0));
 
 						this.smeltItem();
 
@@ -299,62 +283,49 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 
 	private boolean canSmelt()
 	{
-		if (this.containedItemStacks[0] == null)
+		ItemStack itemstack = FurnaceRecipes.instance().getSmeltingResult(this.inventory.get(0));
+
+		if (this.inventory.get(2) == ItemStack.EMPTY)
+		{
+			return true;
+		}
+
+		if (!this.inventory.get(2).isItemEqual(itemstack))
 		{
 			return false;
 		}
-		else
-		{
-			ItemStack itemstack = FurnaceRecipes.instance().getSmeltingResult(this.containedItemStacks[0]);
 
-			if (itemstack == null)
-			{
-				return false;
-			}
+		int result = this.inventory.get(2).getCount() + itemstack.getCount();
 
-			if (this.containedItemStacks[2] == null)
-			{
-				return true;
-			}
-
-			if (!this.containedItemStacks[2].isItemEqual(itemstack))
-			{
-				return false;
-			}
-
-			int result = this.containedItemStacks[2].stackSize + itemstack.stackSize;
-
-			return result <= this.getInventoryStackLimit() && result <= this.containedItemStacks[2].getMaxStackSize();
-		}
+		return result <= this.getInventoryStackLimit() && result <= this.inventory.get(2).getMaxStackSize();
 	}
 
 	public void smeltItem()
 	{
 		if (this.canSmelt())
 		{
-			ItemStack itemstack = FurnaceRecipes.instance().getSmeltingResult(this.containedItemStacks[0]);
+			ItemStack itemstack = FurnaceRecipes.instance().getSmeltingResult(this.inventory.get(0));
 
-			if (this.containedItemStacks[2] == null)
+			if (this.inventory.get(2) == ItemStack.EMPTY)
 			{
-				this.containedItemStacks[2] = itemstack.copy();
+				this.inventory.set(2, itemstack.copy());
 			}
-			else if (this.containedItemStacks[2].getItem() == itemstack.getItem())
+			else if (this.inventory.get(2).getItem() == itemstack.getItem())
 			{
-				this.containedItemStacks[2].stackSize += itemstack.stackSize;
-			}
-
-			if (this.containedItemStacks[0].getItem() == Item.getItemFromBlock(Blocks.SPONGE)
-					&& this.containedItemStacks[0].getMetadata() == 1 && this.containedItemStacks[1] != null
-					&& this.containedItemStacks[1].getItem() == Items.BUCKET)
-			{
-				this.containedItemStacks[1] = new ItemStack(Items.WATER_BUCKET);
+				this.inventory.get(2).grow(itemstack.getCount());
 			}
 
-			--this.containedItemStacks[0].stackSize;
-
-			if (this.containedItemStacks[0].stackSize <= 0)
+			if (this.inventory.get(0).getItem() == Item.getItemFromBlock(Blocks.SPONGE) &&
+					this.inventory.get(0).getMetadata() == 1 && this.inventory.get(1).getItem() == Items.BUCKET)
 			{
-				this.containedItemStacks[0] = null;
+				this.inventory.set(1, new ItemStack(Items.WATER_BUCKET));
+			}
+
+			this.inventory.get(0).shrink(1);
+
+			if (this.inventory.get(0).getCount() <= 0)
+			{
+				this.inventory.set(0, ItemStack.EMPTY);
 			}
 		}
 	}
@@ -420,57 +391,59 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 		return "minecraft:furnace";
 	}
 
+	@Override
 	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
 	{
 		return new ContainerFurnace(playerInventory, this);
 	}
 
+	@Override
 	public int getField(int id)
 	{
 		switch (id)
 		{
-			case 0:
-				return this.burnTime;
-			case 1:
-				return this.currentItemBurnTime;
-			case 2:
-				return this.cookTime;
-			case 3:
-				return this.totalCookTime;
+		case 0:
+			return this.burnTime;
+		case 1:
+			return this.currentItemBurnTime;
+		case 2:
+			return this.cookTime;
+		case 3:
+			return this.totalCookTime;
 		}
 
 		return 0;
 	}
 
+	@Override
 	public void setField(int id, int value)
 	{
 		switch (id)
 		{
-			case 0:
-				this.burnTime = value;
-				break;
-			case 1:
-				this.currentItemBurnTime = value;
-				break;
-			case 2:
-				this.cookTime = value;
-				break;
-			case 3:
-				this.totalCookTime = value;
-				break;
+		case 0:
+			this.burnTime = value;
+			break;
+		case 1:
+			this.currentItemBurnTime = value;
+			break;
+		case 2:
+			this.cookTime = value;
+			break;
+		case 3:
+			this.totalCookTime = value;
+			break;
 		}
 	}
 
+	@Override
 	public int getFieldCount()
 	{
 		return 4;
 	}
 
+	@Override
 	public void clear()
 	{
-		for (int i = 0; i < this.containedItemStacks.length; ++i)
-		{
-			this.containedItemStacks[i] = null;
-		}
+		this.inventory.clear();
 	}
 }

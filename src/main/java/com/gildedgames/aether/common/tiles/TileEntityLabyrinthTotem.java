@@ -72,7 +72,7 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 
 		IPlayerInstances hook = AetherAPI.instances().getPlayer(player);
 
-		if (hook.getInstance() instanceof Instance)
+		if (hook.getInstance() != null)
 		{
 			Instance instance = hook.getInstance();
 
@@ -86,10 +86,7 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 			{
 				DungeonInstance inst = handler.get(new WorldPos(this.pos, this.world.provider.getDimension()));
 
-				if (interactingPlayer instanceof EntityPlayerMP)
-				{
-					NetworkingAether.sendPacketToPlayer(new PacketRegisterDimension(DimensionsAether.SLIDER_LABYRINTH, inst.getDimIdInside()), (EntityPlayerMP) interactingPlayer);
-				}
+				NetworkingAether.sendPacketToPlayer(new PacketRegisterDimension(DimensionsAether.SLIDER_LABYRINTH, inst.getDimIdInside()), player);
 
 				handler.teleportToInst(player, inst);
 			}
@@ -98,10 +95,7 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 		{
 			DungeonInstance inst = handler.get(new WorldPos(this.pos, this.world.provider.getDimension()));
 
-			if (interactingPlayer instanceof EntityPlayerMP)
-			{
-				NetworkingAether.sendPacketToPlayer(new PacketRegisterDimension(DimensionsAether.SLIDER_LABYRINTH, inst.getDimIdInside()), (EntityPlayerMP) interactingPlayer);
-			}
+			NetworkingAether.sendPacketToPlayer(new PacketRegisterDimension(DimensionsAether.SLIDER_LABYRINTH, inst.getDimIdInside()), player);
 
 			handler.teleportToInst(player, inst);
 		}

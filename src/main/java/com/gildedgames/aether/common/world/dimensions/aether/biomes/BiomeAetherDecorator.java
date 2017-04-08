@@ -1,8 +1,5 @@
 package com.gildedgames.aether.common.world.dimensions.aether.biomes;
 
-import java.util.List;
-import java.util.Random;
-
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
@@ -22,7 +19,6 @@ import com.gildedgames.aether.common.world.dimensions.aether.island.logic.Island
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSector;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSectorAccess;
 import com.google.common.collect.Lists;
-
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -31,6 +27,9 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
+
+import java.util.List;
+import java.util.Random;
 
 public class BiomeAetherDecorator
 {

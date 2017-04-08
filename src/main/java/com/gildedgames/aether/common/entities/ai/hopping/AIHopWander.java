@@ -25,6 +25,7 @@ public class AIHopWander extends EntityAI<EntityLiving>
 	/**
 	 * Returns whether the EntityAIBase should begin execution.
 	 */
+	@Override
 	public boolean shouldExecute()
 	{
 		return this.entity().getAttackTarget() == null && (this.entity().onGround || this.entity().isInWater() || this.entity().isInLava()
@@ -34,6 +35,7 @@ public class AIHopWander extends EntityAI<EntityLiving>
 	/**
 	 * Updates the task
 	 */
+	@Override
 	public void updateTask()
 	{
 		if (--this.nextRandomizeTime <= 0)

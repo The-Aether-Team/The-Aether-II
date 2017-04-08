@@ -26,6 +26,7 @@ public class SlotMatrix extends Slot
 		return this.isSimpleCrafting;
 	}
 
+	@Override
 	public boolean isItemValid(@Nullable ItemStack stack)
 	{
 		return !this.isSimpleCrafting;

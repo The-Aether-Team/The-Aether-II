@@ -95,16 +95,18 @@ public class ItemMoaEgg extends Item
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing,
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing,
 			float hitX, float hitY, float hitZ)
 	{
+		ItemStack stack = player.getHeldItem(hand);
+
 		IBlockState state = world.getBlockState(pos);
 
 		boolean replaceable = state.getBlock().isReplaceable(world, pos);
 
 		int yOffset = replaceable ? 0 : 1;
 
-		if (stack.stackSize == 0)
+		if (stack.getCount() == 0)
 		{
 			return EnumActionResult.FAIL;
 		}
@@ -140,7 +142,7 @@ public class ItemMoaEgg extends Item
 					}
 				}
 
-				--stack.stackSize;
+				stack.shrink(1);
 
 				return EnumActionResult.SUCCESS;
 			}
@@ -164,7 +166,7 @@ public class ItemMoaEgg extends Item
 					egg.setPlayerPlaced();
 				}
 
-				--stack.stackSize;
+				stack.shrink(1);
 
 				return EnumActionResult.SUCCESS;
 			}
@@ -191,12 +193,6 @@ public class ItemMoaEgg extends Item
 
 	}
 
-	@Override
-	public net.minecraftforge.common.capabilities.ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt)
-	{
-		return super.initCapabilities(stack, nbt);
-	}
-
 	private static class ModelProperty implements IItemPropertyGetter
 	{
 
@@ -207,21 +203,19 @@ public class ItemMoaEgg extends Item
 			this.propertyName = propertyName;
 		}
 
+		@Override
 		@SideOnly(Side.CLIENT)
 		public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
 		{
-			if (stack != null)
+			MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);
+
+			if (genePool.getMarks() != null)
 			{
-				MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);
+				String mark = genePool.getMarks().gene().getResourceName();
 
-				if (genePool.getMarks() != null)
+				if (mark.equals(this.propertyName))
 				{
-					String mark = genePool.getMarks().gene().getResourceName();
-
-					if (mark.equals(this.propertyName))
-					{
-						return 1.0F;
-					}
+					return 1.0F;
 				}
 			}
 

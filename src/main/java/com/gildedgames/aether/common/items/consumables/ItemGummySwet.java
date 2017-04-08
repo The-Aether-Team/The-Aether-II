@@ -5,10 +5,9 @@ import com.gildedgames.aether.common.items.misc.ItemAetherFood;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
 
 public class ItemGummySwet extends ItemAetherFood
 {
@@ -22,7 +21,7 @@ public class ItemGummySwet extends ItemAetherFood
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems)
+	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
 		for (EntitySwet.Type types : EntitySwet.Type.values())
 		{

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.dimensions.aether;
 
-import com.gildedgames.aether.api.util.WorldPos;
 import com.gildedgames.aether.api.util.NBT;
+import com.gildedgames.aether.api.util.WorldPos;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.registry.GenerationAether;
@@ -28,7 +28,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
-import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -41,8 +40,6 @@ import java.util.Random;
 
 public class TeleporterAether extends Teleporter implements NBT
 {
-
-	public static final TemplateManager MANAGER = new TemplateManager("structures");
 
 	/**
 	 * Boolean here contains if the chunk is solid.

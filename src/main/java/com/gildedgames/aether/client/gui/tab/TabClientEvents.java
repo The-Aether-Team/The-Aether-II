@@ -9,6 +9,7 @@ import com.gildedgames.aether.common.network.packets.PacketOpenTab;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -79,7 +80,7 @@ public class TabClientEvents
 	{
 		EntityPlayer player = Minecraft.getMinecraft().player;
 
-		if (player == null || player.inventory.getItemStack() != null)
+		if (player == null || player.inventory.getItemStack() != ItemStack.EMPTY)
 		{
 			return;
 		}
@@ -130,7 +131,7 @@ public class TabClientEvents
 		{
 			EntityPlayer player = Minecraft.getMinecraft().player;
 
-			if (player == null || player.inventory.getItemStack() != null)
+			if (player == null || player.inventory.getItemStack() != ItemStack.EMPTY)
 			{
 				return;
 			}

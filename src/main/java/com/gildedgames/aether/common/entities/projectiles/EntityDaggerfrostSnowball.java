@@ -26,6 +26,7 @@ public class EntityDaggerfrostSnowball extends EntitySnowball
 		super(world, x, y, z);
 	}
 
+	@Override
 	protected void onImpact(RayTraceResult result)
 	{
 		if (result.entityHit != null)

@@ -14,6 +14,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
@@ -34,12 +35,6 @@ public class ChunkProviderSliderLabyrinth implements IChunkGenerator
 		}
 
 		this.random = new Random(seed);
-	}
-
-	@Override
-	public BlockPos getStrongholdGen(World world, String structureName, BlockPos pos)
-	{
-		return null;
 	}
 
 	@Override
@@ -114,6 +109,13 @@ public class ChunkProviderSliderLabyrinth implements IChunkGenerator
 		{
 			return biome.getSpawnableList(creatureType);
 		}
+	}
+
+	@Nullable
+	@Override
+	public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position, boolean p_180513_4_)
+	{
+		return null;
 	}
 
 	@Override

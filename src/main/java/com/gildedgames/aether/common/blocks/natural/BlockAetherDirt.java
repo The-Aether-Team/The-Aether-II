@@ -11,15 +11,15 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
 
 public class BlockAetherDirt extends BlockCustom implements IBlockVariants
 {
 
-	public static final BlockVariant DIRT = new BlockVariant(0, "dirt"), COARSE_DIRT = new BlockVariant(1, "coarse_dirt"), PERMAFROST = new BlockVariant(2, "permafrost");
+	public static final BlockVariant DIRT = new BlockVariant(0, "dirt"),
+			COARSE_DIRT = new BlockVariant(1, "coarse_dirt");
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", DIRT, COARSE_DIRT);
 
@@ -41,7 +41,7 @@ public class BlockAetherDirt extends BlockCustom implements IBlockVariants
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
+	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{

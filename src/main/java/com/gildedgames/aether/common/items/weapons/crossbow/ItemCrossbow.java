@@ -47,6 +47,7 @@ public class ItemCrossbow extends Item
 
 		this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter()
 		{
+			@Override
 			@SideOnly(Side.CLIENT)
 			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
 			{
@@ -63,7 +64,7 @@ public class ItemCrossbow extends Item
 						return 1.0F;
 					}
 
-					return itemstack != null && itemstack.getItem() == ItemCrossbow.this ?
+					return itemstack != ItemStack.EMPTY && itemstack.getItem() == ItemCrossbow.this ?
 							((float) (stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / ItemCrossbow.this.durationInTicks) :
 							0.0F;
 				}
@@ -72,6 +73,7 @@ public class ItemCrossbow extends Item
 
 		this.addPropertyOverride(new ResourceLocation("pulling"), new IItemPropertyGetter()
 		{
+			@Override
 			@SideOnly(Side.CLIENT)
 			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
 			{
@@ -85,7 +87,7 @@ public class ItemCrossbow extends Item
 	{
 		ItemStack boltStack = player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
 
-		return boltStack != null && boltStack.getItem() == ItemsAether.bolt && boltStack.stackSize > 0;
+		return boltStack != ItemStack.EMPTY && boltStack.getItem() == ItemsAether.bolt && boltStack.getCount() > 0;
 	}
 
 	private static void checkTag(ItemStack stack)
@@ -172,8 +174,10 @@ public class ItemCrossbow extends Item
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
+		ItemStack stack = playerIn.getHeldItem(hand);
+
 		if (!ItemCrossbow.isLoaded(stack))
 		{
 			if (this.hasAmmo(playerIn))
@@ -239,9 +243,9 @@ public class ItemCrossbow extends Item
 
 						if (!player.capabilities.isCreativeMode)
 						{
-							boltStack.stackSize--;
+							boltStack.shrink(1);
 
-							if (boltStack.stackSize == 0)
+							if (boltStack.getCount() == 0)
 							{
 								player.inventory.deleteStack(boltStack);
 							}
@@ -294,6 +298,7 @@ public class ItemCrossbow extends Item
 		return this;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean adv)
 	{

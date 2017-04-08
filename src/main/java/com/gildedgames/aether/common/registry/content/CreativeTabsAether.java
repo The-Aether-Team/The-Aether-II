@@ -5,7 +5,6 @@ import com.gildedgames.aether.common.blocks.construction.BlockSkyrootPlanks;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -72,7 +71,7 @@ public class CreativeTabsAether
 
 	public static class CreativeTab extends CreativeTabs
 	{
-		private ItemStack stack;
+		private ItemStack stack = ItemStack.EMPTY;
 
 		public CreativeTab(String unlocalizedName)
 		{
@@ -87,16 +86,9 @@ public class CreativeTabsAether
 
 		@Override
 		@SideOnly(Side.CLIENT)
-		public Item getTabIconItem()
+		public ItemStack getTabIconItem()
 		{
-			return this.stack.getItem();
-		}
-
-		@Override
-		@SideOnly(Side.CLIENT)
-		public int getIconItemDamage()
-		{
-			return this.stack.getItemDamage();
+			return this.stack;
 		}
 	}
 }

@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -24,7 +25,7 @@ public class ItemCloudParachute extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems)
+	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
 		for (EntityParachute.Type types : EntityParachute.Type.values())
 		{
@@ -41,22 +42,23 @@ public class ItemCloudParachute extends Item
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
 	{
+		ItemStack stack = player.getHeldItem(hand);
+
 		EntityParachute parachute = new EntityParachute(world, player, EntityParachute.Type.fromOrdinal(stack.getMetadata()));
 
 		PlayerAether playerAether = PlayerAether.getPlayer(player);
-
 		playerAether.getParachuteModule().setParachuting(true, EntityParachute.Type.fromOrdinal(stack.getMetadata()));
 
 		world.spawnEntity(parachute);
 
 		if (!player.capabilities.isCreativeMode)
 		{
-			stack.stackSize--;
+			stack.shrink(1);
 		}
 
-		return super.onItemRightClick(stack, world, player, hand);
+		return super.onItemRightClick(world, player, hand);
 	}
 
 	@Override

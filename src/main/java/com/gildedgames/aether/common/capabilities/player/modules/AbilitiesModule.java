@@ -31,6 +31,7 @@ public class AbilitiesModule extends PlayerAetherModule
 		this.midAirJumpsAllowed = midAirJumpsAllowed;
 	}
 
+	@Override
 	public void onUpdate()
 	{
 		if (this.getEntity().onGround)

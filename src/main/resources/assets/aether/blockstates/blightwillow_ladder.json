@@ -1,8 +1,0 @@
-{
-	"variants": {
-		"facing=north": { "model": "aether:ladders/blightwillow_ladder" },
-		"facing=east": { "model": "aether:ladders/blightwillow_ladder", "y": 90 },
-		"facing=south": { "model": "aether:ladders/blightwillow_ladder", "y": 180 },
-		"facing=west": { "model": "aether:ladders/blightwillow_ladder", "y": 270 }
-	}
-}

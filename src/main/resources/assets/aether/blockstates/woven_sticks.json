@@ -2,18 +2,6 @@
 	"variants": {
 		"variant=skyroot": {
 			"model": "aether:woven_sticks/woven_skyroot_sticks"
-		},
-		"variant=blightwillow": {
-			"model": "aether:woven_sticks/woven_blightwillow_sticks"
-		},
-		"variant=earthshifter": {
-			"model": "aether:woven_sticks/woven_earthshifter_sticks"
-		},
-		"variant=emberoot": {
-			"model": "aether:woven_sticks/woven_emberoot_sticks"
-		},
-		"variant=frostpine": {
-			"model": "aether:woven_sticks/woven_frostpine_sticks"
 		}
 	}
 }

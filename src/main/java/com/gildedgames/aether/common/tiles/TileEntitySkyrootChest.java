@@ -13,6 +13,7 @@ public class TileEntitySkyrootChest extends TileEntityChest
 		return this.hasCustomName() ? super.getName() : "container.skyroot_chest";
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox()
 	{

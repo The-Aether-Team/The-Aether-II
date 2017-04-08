@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.entities.genes.util.DataGene;
 import com.gildedgames.aether.common.entities.genes.util.SimpleInheritance;
 import com.google.common.collect.Lists;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.LinkedList;
 import java.util.Random;
 

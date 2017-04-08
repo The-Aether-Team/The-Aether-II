@@ -28,18 +28,18 @@ public class TileEntityIcestoneCoolerRenderer extends TileEntitySpecialRenderer<
 		{
 			switch (te.getFacing())
 			{
-				case NORTH:
-					GlStateManager.rotate(270.0f, 0.0f, 1.0f, 0.0f);
-					break;
-				case WEST:
-					GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f);
-					break;
-				case SOUTH:
-					GlStateManager.rotate(90.0f, 0.0f, 1.0f, 0.0f);
-					break;
-				case EAST:
-					GlStateManager.rotate(0.0f, 0.0f, 1.0f, 0.0f);
-					break;
+			case NORTH:
+				GlStateManager.rotate(270.0f, 0.0f, 1.0f, 0.0f);
+				break;
+			case WEST:
+				GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f);
+				break;
+			case SOUTH:
+				GlStateManager.rotate(90.0f, 0.0f, 1.0f, 0.0f);
+				break;
+			case EAST:
+				GlStateManager.rotate(0.0f, 0.0f, 1.0f, 0.0f);
+				break;
 			}
 		}
 		else

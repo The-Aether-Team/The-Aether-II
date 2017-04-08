@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.util.io.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -109,7 +110,7 @@ public class EntityFloatingBlock extends Entity
 
 			this.motionY += 0.04D;
 
-			this.move(this.motionX, this.motionY, this.motionZ);
+			this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
 
 			this.motionX *= 0.98D;
 			this.motionY *= 0.98D;
@@ -187,7 +188,7 @@ public class EntityFloatingBlock extends Entity
 
 			for (NBTTagCompound item : NBTHelper.getIterator(drops))
 			{
-				this.drops.add(ItemStack.loadItemStackFromNBT(item));
+				this.drops.add(new ItemStack(item));
 			}
 		}
 	}

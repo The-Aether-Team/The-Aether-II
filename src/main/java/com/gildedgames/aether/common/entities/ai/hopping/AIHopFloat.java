@@ -22,6 +22,7 @@ public class AIHopFloat extends EntityAI<EntityLiving>
 	/**
 	 * Returns whether the EntityAIBase should begin execution.
 	 */
+	@Override
 	public boolean shouldExecute()
 	{
 		return this.entity().isInWater() || this.entity().isInLava();
@@ -30,6 +31,7 @@ public class AIHopFloat extends EntityAI<EntityLiving>
 	/**
 	 * Updates the task
 	 */
+	@Override
 	public void updateTask()
 	{
 		if (this.entity().getRNG().nextFloat() < 0.8F)

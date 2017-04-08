@@ -14,6 +14,7 @@ public class SlotInventory extends Slot
 		super(inventoryIn, index, xPosition, yPosition);
 	}
 
+	@Override
 	public boolean isItemValid(@Nullable ItemStack stack)
 	{
 		if (stack == null)

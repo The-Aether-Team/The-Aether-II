@@ -111,7 +111,7 @@ public class TileEntitySkyrootSignRenderer extends TileEntitySpecialRenderer<Til
 
 					List<ITextComponent> list = GuiUtilRenderComponents.splitText(text, 90, fontrenderer, false, true);
 
-					String line = list != null && list.size() > 0 ? list.get(0).getFormattedText() : "";
+					String line = list.size() > 0 ? list.get(0).getFormattedText() : "";
 
 					if (i == te.lineBeingEdited)
 					{

@@ -28,7 +28,7 @@ public class ItemBlockPresent extends ItemBlock
 
 			if (compound.hasKey("item"))
 			{
-				data.stack = ItemStack.loadItemStackFromNBT(compound.getCompoundTag("item"));
+				data.stack = new ItemStack(compound.getCompoundTag("item"));
 			}
 
 			if (compound.hasKey("dye"))

@@ -14,9 +14,10 @@ public abstract class GuiElement extends GuiButton
 		super(elementId, x, y, "");
 	}
 
+	@Override
 	public final void drawButton(Minecraft mc, int mouseX, int mouseY)
 	{
-		FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
+		FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
 
 		if (!this.hasInit)
 		{

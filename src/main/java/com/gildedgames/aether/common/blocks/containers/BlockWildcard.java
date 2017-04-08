@@ -18,8 +18,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
-
 public class BlockWildcard extends BlockContainer
 {
 
@@ -50,6 +48,7 @@ public class BlockWildcard extends BlockContainer
 		return true;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer()
 	{
@@ -63,59 +62,41 @@ public class BlockWildcard extends BlockContainer
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand,
-			@Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side,
+			float hitX, float hitY, float hitZ)
 	{
 		if (world.isRemote)
 		{
 			return true;
 		}
 
-		TileEntity tileentity = world.getTileEntity(pos);
+		TileEntity te = world.getTileEntity(pos);
 
-		if (tileentity instanceof TileEntitySchematicBlock)
+		if (te instanceof TileEntitySchematicBlock)
 		{
-			TileEntitySchematicBlock te = (TileEntitySchematicBlock) tileentity;
+			TileEntitySchematicBlock schematic = (TileEntitySchematicBlock) te;
 
-			if (heldItem != null && heldItem.getItem() == ItemsAether.aether_developer_wand)
+			ItemStack heldItem = player.getHeldItem(hand);
+
+			if (heldItem.getItem() == ItemsAether.aether_developer_wand)
 			{
-				world.playSound(playerIn, pos, SoundsAether.tempest_electric_shock, SoundCategory.NEUTRAL, 1.0F,
+				world.playSound(player, pos, SoundsAether.tempest_electric_shock, SoundCategory.NEUTRAL, 1.0F,
 						0.8F + (world.rand.nextFloat() * 0.5F));
 
-				te.setMarkedForGeneration(!te.isMarkedForGeneration());
+				schematic.setMarkedForGeneration(!schematic.isMarkedForGeneration());
 
 				return true;
 			}
 		}
 
-		if (!playerIn.isSneaking())
+		if (!player.isSneaking())
 		{
 			return false;
 		}
 
-		if (tileentity instanceof TileEntitySchematicBlock)
+		if (te instanceof ILockableContainer)
 		{
-			TileEntitySchematicBlock te = (TileEntitySchematicBlock) tileentity;
-
-			if (heldItem != null && heldItem.getItem() == ItemsAether.aether_developer_wand)
-			{
-				world.playSound(playerIn, pos, SoundsAether.tempest_electric_shock, SoundCategory.NEUTRAL, 1.0F,
-						0.8F + (world.rand.nextFloat() * 0.5F));
-
-				te.setMarkedForGeneration(!te.isMarkedForGeneration());
-
-				return true;
-			}
-		}
-
-		if (tileentity instanceof ILockableContainer)
-		{
-			ILockableContainer ilockablecontainer = (ILockableContainer) tileentity;
-
-			if (ilockablecontainer != null)
-			{
-				playerIn.displayGUIChest(ilockablecontainer);
-			}
+			player.displayGUIChest((ILockableContainer) te);
 
 			return true;
 		}

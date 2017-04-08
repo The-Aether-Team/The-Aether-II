@@ -15,6 +15,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -23,7 +24,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Random;
 
 public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVariants, IGrowable
@@ -60,7 +60,7 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVarian
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		list.add(new ItemStack(itemIn, 1, BERRY_BUSH_STEM));
 		list.add(new ItemStack(itemIn, 1, BERRY_BUSH_RIPE));
@@ -187,7 +187,7 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVarian
 
 	@Override
 	@Nullable
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, World worldIn, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
 		return state.getValue(PROPERTY_HARVESTABLE) ? FULL_BLOCK_AABB : NULL_AABB;
 	}
@@ -197,12 +197,12 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVarian
 	{
 		switch (stack.getMetadata())
 		{
-			case BERRY_BUSH_STEM:
-				return "stem";
-			case BERRY_BUSH_RIPE:
-				return "ripe";
-			default:
-				return "missingno";
+		case BERRY_BUSH_STEM:
+			return "stem";
+		case BERRY_BUSH_RIPE:
+			return "ripe";
+		default:
+			return "missingno";
 		}
 	}
 }

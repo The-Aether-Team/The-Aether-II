@@ -6,6 +6,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,11 +16,14 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.NonNullList;
+
+import javax.annotation.Nonnull;
 
 public abstract class TileEntitySchematicBlock extends TileEntityLockable implements ITickable, IInventory
 {
 
-	protected ItemStack[] contents = new ItemStack[27];
+	protected NonNullList<ItemStack> contents = NonNullList.withSize(27, ItemStack.EMPTY);
 
 	private int ticksExisted;
 
@@ -82,13 +86,15 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 
 		NBTTagList nbttaglist = new NBTTagList();
 
-		for (int i = 0; i < this.contents.length; ++i)
+		for (int i = 0; i < this.contents.size(); ++i)
 		{
-			if (this.contents[i] != null)
+			if (this.contents.get(i) != ItemStack.EMPTY)
 			{
 				NBTTagCompound nbttagcompound = new NBTTagCompound();
 				nbttagcompound.setByte("Slot", (byte) i);
-				this.contents[i].writeToNBT(nbttagcompound);
+
+				this.contents.get(i).writeToNBT(nbttagcompound);
+
 				nbttaglist.appendTag(nbttagcompound);
 			}
 		}
@@ -106,16 +112,16 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 		super.readFromNBT(compound);
 
 		NBTTagList nbttaglist = compound.getTagList("Items", 10);
-		this.contents = new ItemStack[this.getSizeInventory()];
+		this.contents = NonNullList.withSize(27, ItemStack.EMPTY);
 
 		for (int i = 0; i < nbttaglist.tagCount(); ++i)
 		{
 			NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(i);
 			int j = nbttagcompound.getByte("Slot") & 255;
 
-			if (j >= 0 && j < this.contents.length)
+			if (j >= 0 && j < this.contents.size())
 			{
-				this.contents[j] = ItemStack.loadItemStackFromNBT(nbttagcompound);
+				this.contents.set(j, new ItemStack(nbttagcompound));
 			}
 		}
 
@@ -126,6 +132,7 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 
 	public abstract boolean shouldInvalidateTEOnGen();
 
+	@Override
 	public void invalidate()
 	{
 		super.invalidate();
@@ -157,65 +164,39 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 	}
 
 	@Override
+	@Nonnull
 	public ItemStack getStackInSlot(int index)
 	{
-		return this.contents[index];
+		return this.contents.get(index);
 	}
 
 	@Override
 	public ItemStack decrStackSize(int index, int count)
 	{
-		if (this.contents[index] != null)
-		{
-			if (this.contents[index].stackSize <= count)
-			{
-				ItemStack itemstack1 = this.contents[index];
-				this.contents[index] = null;
-				this.markDirty();
-				return itemstack1;
-			}
-			else
-			{
-				ItemStack itemstack = this.contents[index].splitStack(count);
+		ItemStack itemstack = ItemStackHelper.getAndSplit(this.contents, index, count);
 
-				if (this.contents[index].stackSize == 0)
-				{
-					this.contents[index] = null;
-				}
-
-				this.markDirty();
-				return itemstack;
-			}
-		}
-		else
+		if (!itemstack.isEmpty())
 		{
-			return null;
+			this.markDirty();
 		}
+
+		return itemstack;
 	}
 
 	@Override
 	public ItemStack removeStackFromSlot(int index)
 	{
-		if (this.contents[index] != null)
-		{
-			ItemStack itemstack = this.contents[index];
-			this.contents[index] = null;
-			return itemstack;
-		}
-		else
-		{
-			return null;
-		}
+		return ItemStackHelper.getAndRemove(this.contents, index);
 	}
 
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack)
 	{
-		this.contents[index] = stack;
+		this.contents.set(index, stack);
 
-		if (stack != null && stack.stackSize > this.getInventoryStackLimit())
+		if (stack.getCount() > this.getInventoryStackLimit())
 		{
-			stack.stackSize = this.getInventoryStackLimit();
+			stack.setCount(this.getInventoryStackLimit());
 		}
 
 		this.markDirty();
@@ -253,26 +234,27 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 		return stack.getItem() instanceof ItemBlock;
 	}
 
+	@Override
 	public int getField(int id)
 	{
 		return 0;
 	}
 
+	@Override
 	public void setField(int id, int value)
 	{
 	}
 
+	@Override
 	public int getFieldCount()
 	{
 		return 0;
 	}
 
+	@Override
 	public void clear()
 	{
-		for (int i = 0; i < this.contents.length; ++i)
-		{
-			this.contents[i] = null;
-		}
+		this.contents.clear();
 	}
 
 	public void sync()
@@ -306,6 +288,20 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 	public void onDataPacket(NetworkManager networkManager, SPacketUpdateTileEntity packet)
 	{
 		this.readFromNBT(packet.getNbtCompound());
+	}
+
+	@Override
+	public boolean isEmpty()
+	{
+		for (ItemStack itemstack : this.contents)
+		{
+			if (!itemstack.isEmpty())
+			{
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 }

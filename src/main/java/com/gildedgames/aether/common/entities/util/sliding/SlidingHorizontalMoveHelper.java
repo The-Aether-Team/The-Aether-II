@@ -83,8 +83,8 @@ public class SlidingHorizontalMoveHelper extends EntityMoveHelper
 
 		double length = this.entity.getEntityBoundingBox().maxZ - this.entity.getEntityBoundingBox().minZ;
 
-		List<AxisAlignedBB> boxes = this.entity.world.getCollisionBoxes(this.entity.getEntityBoundingBox().offset(0.0D, 0.0D,
-				length + 0.1D));
+		List<AxisAlignedBB> boxes = this.entity.world.getCollisionBoxes(this.entity,
+				this.entity.getEntityBoundingBox().offset(0.0D, 0.0D, length + 0.1D));
 
 		for (AxisAlignedBB box : boxes)
 		{
@@ -102,7 +102,8 @@ public class SlidingHorizontalMoveHelper extends EntityMoveHelper
 	{
 		boolean collidingDown = false;
 
-		List<AxisAlignedBB> boxes = this.entity.world.getCollisionBoxes(this.entity.getEntityBoundingBox().offset(-0.1D, 0.0D, 0.0D));
+		List<AxisAlignedBB> boxes = this.entity.world.getCollisionBoxes(this.entity,
+				this.entity.getEntityBoundingBox().offset(-0.1D, 0.0D, 0.0D));
 
 		for (AxisAlignedBB box : boxes)
 		{
@@ -230,66 +231,66 @@ public class SlidingHorizontalMoveHelper extends EntityMoveHelper
 
 			switch (this.direction)
 			{
-				case RIGHT:
+			case RIGHT:
+			{
+				this.entity.motionX = this.slideVelocity;
+
+				this.distanceSlided += this.slideVelocity;
+
+				if (this.distanceSlided >= this.distanceToSlide)
 				{
-					this.entity.motionX = this.slideVelocity;
+					this.entity.motionX += add;
 
-					this.distanceSlided += this.slideVelocity;
-
-					if (this.distanceSlided >= this.distanceToSlide)
-					{
-						this.entity.motionX += add;
-
-						this.stop();
-					}
-
-					break;
+					this.stop();
 				}
-				case LEFT:
+
+				break;
+			}
+			case LEFT:
+			{
+				this.entity.motionX = -this.slideVelocity;
+
+				this.distanceSlided += this.slideVelocity;
+
+				if (this.distanceSlided >= this.distanceToSlide)
 				{
-					this.entity.motionX = -this.slideVelocity;
+					this.entity.motionX -= add;
 
-					this.distanceSlided += this.slideVelocity;
-
-					if (this.distanceSlided >= this.distanceToSlide)
-					{
-						this.entity.motionX -= add;
-
-						this.stop();
-					}
-
-					break;
+					this.stop();
 				}
-				case FORWARD:
+
+				break;
+			}
+			case FORWARD:
+			{
+				this.entity.motionZ = this.slideVelocity;
+
+				this.distanceSlided += this.slideVelocity;
+
+				if (this.distanceSlided >= this.distanceToSlide)
 				{
-					this.entity.motionZ = this.slideVelocity;
+					this.entity.motionZ += add;
 
-					this.distanceSlided += this.slideVelocity;
-
-					if (this.distanceSlided >= this.distanceToSlide)
-					{
-						this.entity.motionZ += add;
-
-						this.stop();
-					}
-
-					break;
+					this.stop();
 				}
-				case BACKWARD:
+
+				break;
+			}
+			case BACKWARD:
+			{
+				this.entity.motionZ = -this.slideVelocity;
+
+				this.distanceSlided += this.slideVelocity;
+
+				if (this.distanceSlided >= this.distanceToSlide)
 				{
-					this.entity.motionZ = -this.slideVelocity;
+					this.entity.motionZ -= add;
 
-					this.distanceSlided += this.slideVelocity;
-
-					if (this.distanceSlided >= this.distanceToSlide)
-					{
-						this.entity.motionZ -= add;
-
-						this.stop();
-					}
-
-					break;
+					this.stop();
 				}
+
+				break;
+			}
 			}
 
 			if (this.entity.isCollidedHorizontally && !this.missObstacleNextTick)

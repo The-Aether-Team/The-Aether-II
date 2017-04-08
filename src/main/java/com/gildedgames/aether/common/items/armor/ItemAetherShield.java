@@ -22,6 +22,7 @@ public class ItemAetherShield extends Item
 
 		this.addPropertyOverride(new ResourceLocation("blocking"), new IItemPropertyGetter()
 		{
+			@Override
 			@SideOnly(Side.CLIENT)
 			public float apply(ItemStack stack, World worldIn, EntityLivingBase entity)
 			{
@@ -47,10 +48,11 @@ public class ItemAetherShield extends Item
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
 	{
-		playerIn.setActiveHand(hand);
+		ItemStack stack = playerIn.getHeldItem(handIn);
+		playerIn.setActiveHand(handIn);
 
-		return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
+		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 	}
 }
