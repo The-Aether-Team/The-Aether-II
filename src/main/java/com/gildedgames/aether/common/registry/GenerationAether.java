@@ -44,7 +44,7 @@ public class GenerationAether
 
 	public static WorldGenTemplate mysterious_henge;
 
-	public static WorldGenTemplateGroup green_skyroot_windswept, labyrinth_ruins;
+	public static WorldGenTemplateGroup green_skyroot_windswept;
 
 	public static WorldGenTemplateGroup large_green_skyroot_pine, green_skyroot_pine, green_skyroot_small_pine;
 

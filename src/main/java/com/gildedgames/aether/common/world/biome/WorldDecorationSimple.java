@@ -22,6 +22,14 @@ public class WorldDecorationSimple implements WorldDecoration
 
 	public WorldDecorationSimple(int count, float percentRequired, WorldGenerator... generators)
 	{
+		for (WorldGenerator generator : generators)
+		{
+			if (generator == null)
+			{
+				throw new IllegalArgumentException("Argument cannot be null");
+			}
+		}
+
 		this.count = count;
 		this.generators = generators;
 		this.percentRequired = percentRequired;

@@ -63,7 +63,6 @@ public class EcosystemHighlandJungle implements Ecosystem
 				}
 			});
 
-			this.decorations.add(new WorldDecorationSimple(1, 0.125F, GenerationAether.labyrinth_ruins));
 			this.decorations.add(new WorldDecorationSimple(3, GenerationAether.skyroot_moa_nest_tree_1));
 			this.decorations.add(new WorldDecorationSimple(35, GenerationAether.green_skyroot_windswept));
 			this.decorations.add(new WorldDecorationSimple(10, GenerationAether.green_skyroot_small_pine));
