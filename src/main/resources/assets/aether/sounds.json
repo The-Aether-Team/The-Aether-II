@@ -274,86 +274,6 @@
 		],
 		"subtitle": "subtitles.aether.mob.zephyr.puff"
 	},
-	"random.detonating": {
-		"category": "neutral",
-		"sounds": [
-			"aether:random/detonating"
-		],
-		"subtitle": "subtitles.aether.random.detonating"
-	},
-	"random.detonate": {
-		"category": "neutral",
-		"sounds": [
-			"aether:random/detonate"
-		],
-		"subtitle": "subtitles.aether.random.detonate"
-	},
-	"mob.sentry.ambient": {
-		"category": "neutral",
-		"sounds": [
-			"aether:mob/sentry/say1",
-			"aether:mob/sentry/say2",
-			"aether:mob/sentry/say3"
-		],
-		"subtitle": "subtitles.aether.mob.sentry.ambient"
-	},
-	"mob.sentry.hurt": {
-		"category": "neutral",
-		"sounds": [
-			"aether:mob/sentry/hurt1",
-			"aether:mob/sentry/hurt2"
-		],
-		"subtitle": "subtitles.aether.mob.sentry.hurt"
-	},
-	"mob.sentry.death": {
-		"category": "neutral",
-		"sounds": [
-			"aether:mob/sentry/death"
-		],
-		"subtitle": "subtitles.aether.mob.sentry.death"
-	},
-	"random.stone_thud": {
-		"category": "neutral",
-		"sounds": [
-			"aether:random/stone_thud"
-		],
-		"subtitle": "subtitles.aether.random.stone_thud"
-	},
-	"mob.battle_golem.ambient": {
-		"category": "neutral",
-		"sounds": [
-			"aether:mob/battle_golem/say1",
-			"aether:mob/battle_golem/say2",
-			"aether:mob/battle_golem/say3",
-			"aether:mob/battle_golem/say4"
-		],
-		"subtitle": "subtitles.aether.mob.battle_golem.ambient"
-	},
-	"mob.battle_golem.hurt": {
-		"category": "neutral",
-		"sounds": [
-			"aether:mob/battle_golem/hurt1",
-			"aether:mob/battle_golem/hurt2",
-			"aether:mob/battle_golem/hurt3"
-		],
-		"subtitle": "subtitles.aether.mob.battle_golem.hurt"
-	},
-	"mob.tracking_sentry.alarm": {
-		"category": "neutral",
-		"sounds": [
-			"aether:mob/tracking_sentry/alarm"
-		],
-		"subtitle": "subtitles.aether.mob.tracking_sentry.alarm"
-	},
-	"mob.battle_sentry.pounce": {
-		"category": "neutral",
-		"sounds": [
-			"aether:mob/battle_sentry/pounce1",
-			"aether:mob/battle_sentry/pounce2",
-			"aether:mob/battle_sentry/pounce3"
-		],
-		"subtitle": "subtitles.aether.mob.battle_sentry.pounce"
-	},
 	"mob.moa.ambient": {
 		"category": "neutral",
 		"sounds": [
@@ -419,13 +339,6 @@
 		],
 		"subtitle": "subtitles.aether.mob.burrukai.death"
 	},
-	"mob.chest_mimic.awake": {
-		"category": "neutral",
-		"sounds": [
-			"aether:mob/chest_mimic/awake"
-		],
-		"subtitle": "subtitles.aether.mob.chest_mimic.awake"
-	},
 	"random.present_unwrap": {
 		"category": "neutral",
 		"sounds": [
@@ -439,40 +352,5 @@
 			"aether:random/container_break"
 		],
 		"subtitle": "subtitles.aether.random.dungeon.container.smash"
-	},
-	"mob.slider.awake": {
-		"category": "neutral",
-		"sounds": [
-			"aether:mob/slider/awake"
-		],
-		"subtitle": "subtitles.aether.mob.slider.awake"
-	},
-	"mob.slider.collide": {
-		"category": "neutral",
-		"sounds": [
-			"aether:mob/slider/collide"
-		],
-		"subtitle": "subtitles.aether.mob.slider.collide"
-	},
-	"mob.slider.die": {
-		"category": "neutral",
-		"sounds": [
-			"aether:mob/slider/die"
-		],
-		"subtitle": "subtitles.aether.mob.slider.die"
-	},
-	"mob.slider.move": {
-		"category": "neutral",
-		"sounds": [
-			"aether:mob/slider/move"
-		],
-		"subtitle": "subtitles.aether.mob.slider.move"
-	},
-	"mob.slider.signal": {
-		"category": "neutral",
-		"sounds": [
-			"aether:mob/slider/signal"
-		],
-		"subtitle": "subtitles.aether.mob.slider.signal"
 	}
 }

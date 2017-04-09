@@ -28,11 +28,7 @@ public class TemplatesAether
 
 	public static Template green_skyroot_pine_1, green_skyroot_pine_2, green_skyroot_pine_3, green_skyroot_pine_4, green_skyroot_pine_5;
 
-	public static Template labyrinth_ruins_1, labyrinth_ruins_2, labyrinth_ruins_3, labyrinth_ruins_4, labyrinth_ruins_5;
-
 	public static Template skyroot_moa_nest_tree_1, skyroot_moa_nest_1, skyroot_moa_nest_2;
-
-	public static Template labyrinth_entrance_1, labyrinth_entrance_underground_1;
 
 	public static Template aether_portal, nether_portal, end_portal;
 
@@ -73,12 +69,6 @@ public class TemplatesAether
 		green_skyroot_windswept_6 = getTemplate("highlands/trees/windswept/green/green_skyroot_windswept_6");
 		green_skyroot_windswept_7 = getTemplate("highlands/trees/windswept/green/green_skyroot_windswept_7");
 
-		labyrinth_ruins_1 = getTemplate("labyrinth_ruins_1");
-		labyrinth_ruins_2 = getTemplate("labyrinth_ruins_2");
-		labyrinth_ruins_3 = getTemplate("labyrinth_ruins_3");
-		labyrinth_ruins_4 = getTemplate("labyrinth_ruins_4");
-		labyrinth_ruins_5 = getTemplate("labyrinth_ruins_5");
-
 		skyroot_moa_nest_tree_1 = getTemplate("moa_nest/skyroot_moa_nest_tree_1");
 		skyroot_moa_nest_1 = getTemplate("moa_nest/skyroot_moa_nest_1");
 		skyroot_moa_nest_2 = getTemplate("moa_nest/skyroot_moa_nest_2");
@@ -98,9 +88,6 @@ public class TemplatesAether
 
 		dark_blue_skyroot_oak_1 = getTemplate("highlands/trees/oak/dark_blue/dark_blue_skyroot_oak_1");
 		dark_blue_skyroot_oak_2 = getTemplate("highlands/trees/oak/dark_blue/dark_blue_skyroot_oak_2");
-
-		labyrinth_entrance_1 = getTemplate("labyrinth_entrance_1");
-		labyrinth_entrance_underground_1 = getTemplate("labyrinth_entrance_underground_1");
 
 		aether_portal = getTemplate("aether_portal");
 		nether_portal = getTemplate("nether_portal");

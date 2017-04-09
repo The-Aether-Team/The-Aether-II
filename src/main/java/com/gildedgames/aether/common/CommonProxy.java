@@ -15,15 +15,9 @@ import com.gildedgames.aether.common.capabilities.instances.InstanceRegistryImpl
 import com.gildedgames.aether.common.capabilities.item.EquipmentRegistry;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherEvents;
 import com.gildedgames.aether.common.containers.tab.TabRegistryImpl;
-import com.gildedgames.aether.common.entities.BossProcessor;
 import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.entities.MountProcessor;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
-import com.gildedgames.aether.common.entities.living.boss.slider.BreakFloorActionSlider;
-import com.gildedgames.aether.common.entities.living.boss.slider.FirstStageSlider;
-import com.gildedgames.aether.common.entities.living.boss.slider.SecondStageSlider;
-import com.gildedgames.aether.common.entities.living.boss.slider.ThirdStageSlider;
-import com.gildedgames.aether.common.entities.util.SimpleBossManager;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.tools.ItemToolHandler;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
@@ -38,9 +32,6 @@ import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.aether.common.util.io.Instantiator;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSector;
-import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
-import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceFactory;
-import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
@@ -68,8 +59,6 @@ public class CommonProxy implements IAetherServiceLocator
 	private final SimpleCraftingRegistry masonryRegistry = new SimpleCraftingRegistry();
 
 	private final IEquipmentRegistry equipmentRegistry = new EquipmentRegistry();
-
-	private DungeonInstanceHandler dungeonInstanceHandler;
 
 	public void construct(FMLConstructionEvent event)
 	{
@@ -102,14 +91,8 @@ public class CommonProxy implements IAetherServiceLocator
 		AetherAPI.tabs().getInventoryGroup().registerServerTab(new TabEquipment());
 		AetherAPI.tabs().getInventoryGroup().registerServerTab(new TabBugReport());
 
-		AetherCore.srl().registerSerialization(0, DungeonInstance.class, new Instantiator(DungeonInstance.class));
 		AetherCore.srl().registerSerialization(1, MoaGenePool.class, new Instantiator(MoaGenePool.class));
 		AetherCore.srl().registerSerialization(2, TickTimer.class, new Instantiator(TickTimer.class));
-		AetherCore.srl().registerSerialization(3, FirstStageSlider.class, new Instantiator(FirstStageSlider.class));
-		AetherCore.srl().registerSerialization(4, SecondStageSlider.class, new Instantiator(SecondStageSlider.class));
-		AetherCore.srl().registerSerialization(5, ThirdStageSlider.class, new Instantiator(ThirdStageSlider.class));
-		AetherCore.srl().registerSerialization(6, BreakFloorActionSlider.class, new Instantiator(BreakFloorActionSlider.class));
-		AetherCore.srl().registerSerialization(7, SimpleBossManager.class, new Instantiator(SimpleBossManager.class));
 		AetherCore.srl().registerSerialization(8, IslandSector.class, new Instantiator(IslandSector.class));
 		AetherCore.srl().registerSerialization(9, IslandData.class, new Instantiator(IslandData.class));
 	}
@@ -124,16 +107,11 @@ public class CommonProxy implements IAetherServiceLocator
 		MinecraftForge.EVENT_BUS.register(CommonEvents.class);
 		MinecraftForge.EVENT_BUS.register(PlayerAetherEvents.class);
 		MinecraftForge.EVENT_BUS.register(MountProcessor.class);
-		MinecraftForge.EVENT_BUS.register(BossProcessor.class);
 		MinecraftForge.EVENT_BUS.register(ItemToolHandler.class);
 
 		MinecraftForge.EVENT_BUS.register(ItemSkyrootSword.class);
 
 		CapabilityManagerAether.init();
-
-		DungeonInstanceFactory factory = new DungeonInstanceFactory(DimensionsAether.SLIDER_LABYRINTH);
-
-		this.dungeonInstanceHandler = new DungeonInstanceHandler(AetherAPI.instances().createAndRegisterInstanceHandler(factory));
 	}
 
 	public void postInit(FMLPostInitializationEvent event)
@@ -198,11 +176,6 @@ public class CommonProxy implements IAetherServiceLocator
 	public SimpleCraftingRegistry getMasonryRegistry()
 	{
 		return this.masonryRegistry;
-	}
-
-	public DungeonInstanceHandler getDungeonInstanceHandler()
-	{
-		return this.dungeonInstanceHandler;
 	}
 
 	public void displayDismountMessage(EntityPlayer player)

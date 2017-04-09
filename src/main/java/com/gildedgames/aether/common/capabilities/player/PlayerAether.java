@@ -46,10 +46,6 @@ public class PlayerAether implements IPlayerAether
 
 	private final EquipmentModule equipmentModule;
 
-	private final BossModule bossModule;
-
-	private final DungeonModule dungeonModule;
-
 	private boolean hasDiedInAetherBefore;
 
 	public PlayerAether(EntityPlayer entity)
@@ -61,9 +57,7 @@ public class PlayerAether implements IPlayerAether
 		this.gravititeAbilityModule = new GravititeAbilityModule(this);
 		this.teleportingModule = new TeleportingModule(this);
 		this.parachuteModule = new ParachuteModule(this);
-		this.bossModule = new BossModule(this);
 		this.equipmentModule = new EquipmentModule(this);
-		this.dungeonModule = new DungeonModule(this);
 
 		Collection<PlayerAetherModule> modules = new ArrayList<>();
 		modules.add(this.companionModule);
@@ -71,9 +65,7 @@ public class PlayerAether implements IPlayerAether
 		modules.add(this.gravititeAbilityModule);
 		modules.add(this.teleportingModule);
 		modules.add(this.parachuteModule);
-		modules.add(this.bossModule);
 		modules.add(this.equipmentModule);
-		modules.add(this.dungeonModule);
 
 		this.modules = modules.toArray(new PlayerAetherModule[modules.size()]);
 	}
@@ -110,13 +102,13 @@ public class PlayerAether implements IPlayerAether
 	@Override
 	public void onRespawn(PlayerEvent.PlayerRespawnEvent event)
 	{
-		this.dungeonModule.onRespawn();
+
 	}
 
 	@Override
 	public void onPlaceBlock(BlockEvent.PlaceEvent event)
 	{
-		this.dungeonModule.onPlaceBlock(event);
+
 	}
 
 	@Override
@@ -251,11 +243,6 @@ public class PlayerAether implements IPlayerAether
 	public AbilitiesModule getAbilitiesModule()
 	{
 		return this.abilitiesModule;
-	}
-
-	public BossModule getBossModule()
-	{
-		return this.bossModule;
 	}
 
 	public EquipmentModule getEquipmentModule()

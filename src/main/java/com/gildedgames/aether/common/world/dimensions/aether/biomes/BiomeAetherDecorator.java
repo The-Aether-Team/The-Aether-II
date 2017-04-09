@@ -161,38 +161,6 @@ public class BiomeAetherDecorator
 			}
 		}
 
-		//if (random.nextInt(5) == 0)
-		{
-			x = random.nextInt(16) + 8;
-			z = random.nextInt(16) + 8;
-
-			BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
-
-			pos2 = pos2.add(0, -TemplatesAether.labyrinth_entrance_underground_1.getSize().getY(), 0);
-
-			GenerationAether.labyrinth_entrance_underground_1.generate(world, random, pos2);
-		}
-
-		// Labyrinth Entrance
-		if (oneIslandOnly && island.getLabyrinthEntrancePos() == null && random.nextInt(5) == 0)
-		{
-			for (int i = 0; i < 10; i++)
-			{
-				x = random.nextInt(16) + 8;
-				z = random.nextInt(16) + 8;
-
-				final BlockPos pos2 = world.getTopSolidOrLiquidBlock(pos.add(x, 0, z));
-
-				final boolean generated = GenerationAether.labyrinth_entrance.generate(world, random, pos2);
-
-				if (generated)
-				{
-					island.setLabyrinthEntrancePos(pos2);
-					break;
-				}
-			}
-		}
-
 		// Moa Nests
 		if (random.nextInt(4) == 0)
 		{

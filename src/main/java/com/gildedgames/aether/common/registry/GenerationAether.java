@@ -38,11 +38,7 @@ public class GenerationAether
 
 	public static WorldGenTemplate dark_blue_skyroot_oak_1, dark_blue_skyroot_oak_2;
 
-	public static WorldGenTemplate labyrinth_ruins_1, labyrinth_ruins_2, labyrinth_ruins_3, labyrinth_ruins_4, labyrinth_ruins_5;
-
 	public static WorldGenTemplate skyroot_moa_nest_tree_1, skyroot_moa_nest_1, skyroot_moa_nest_2;
-
-	public static WorldGenTemplate labyrinth_entrance_1, labyrinth_entrance_underground_1;
 
 	public static WorldGenTemplate aether_portal_for_world, aether_portal, nether_portal, end_portal;
 
@@ -56,7 +52,7 @@ public class GenerationAether
 
 	public static WorldGenTemplateGroup dark_blue_skyroot_tree, dark_blue_skyroot_oak;
 
-	public static WorldGenTemplateGroup skyroot_moa_nest, labyrinth_entrance;
+	public static WorldGenTemplateGroup skyroot_moa_nest;
 
 	public static WorldGenFloorPlacer short_aether_grass, aether_grass, long_aether_grass, skyroot_twigs, holystone_rocks;
 
@@ -142,15 +138,6 @@ public class GenerationAether
 		dark_blue_skyroot_tree_2 = new WorldGenTemplate(TemplatesAether.dark_blue_skyroot_tree_2, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE);
 		dark_blue_skyroot_tree_3 = new WorldGenTemplate(TemplatesAether.dark_blue_skyroot_tree_3, TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE);
 
-		labyrinth_ruins_1 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_1, TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
-		labyrinth_ruins_2 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_2, TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
-		labyrinth_ruins_3 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_3, TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
-		labyrinth_ruins_4 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_4, TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
-		labyrinth_ruins_5 = new WorldGenTemplate(TemplatesAether.labyrinth_ruins_5, TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
-
-		labyrinth_entrance_1 = new WorldGenDungeonEntrance(TemplatesAether.labyrinth_entrance_1, new BlockPos(4, 2, 4), TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL, TemplateConditions.REPLACEABLE);
-		labyrinth_entrance_underground_1 = new WorldGenDungeonEntrance(TemplatesAether.labyrinth_entrance_underground_1, new BlockPos(8, 1, 2), new UndergroundEntrancePlacementCondition(), new UndergroundPlacementCondition());
-
 		skyroot_moa_nest_tree_1 = new WorldGenMoaNest(TemplatesAether.skyroot_moa_nest_tree_1, new BlockPos(4, 5, 4), TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE);
 		skyroot_moa_nest_1 = new WorldGenMoaNest(TemplatesAether.skyroot_moa_nest_1, new BlockPos(2, 0, 2), TemplateConditions.INSIDE_GROUND, TemplateConditions.REPLACEABLE_GROUND);
 		skyroot_moa_nest_2 = new WorldGenMoaNest(TemplatesAether.skyroot_moa_nest_2, new BlockPos(3, 0, 3), TemplateConditions.INSIDE_GROUND, TemplateConditions.REPLACEABLE_GROUND);
@@ -204,9 +191,7 @@ public class GenerationAether
 		green_skyroot_small_pine = new WorldGenTemplateGroup(green_skyroot_pine_1, green_skyroot_pine_2, green_skyroot_pine_3);
 		dark_blue_skyroot_tree = new WorldGenTemplateGroup(dark_blue_skyroot_tree_1, dark_blue_skyroot_tree_2, dark_blue_skyroot_tree_3);
 		dark_blue_skyroot_oak = new WorldGenTemplateGroup(dark_blue_skyroot_oak_1, dark_blue_skyroot_oak_2);
-		labyrinth_ruins = new WorldGenTemplateGroup(labyrinth_ruins_1, labyrinth_ruins_2, labyrinth_ruins_3, labyrinth_ruins_4, labyrinth_ruins_5);
 		skyroot_moa_nest = new WorldGenTemplateGroup(skyroot_moa_nest_1, skyroot_moa_nest_2);
-		labyrinth_entrance = new WorldGenTemplateGroup(labyrinth_entrance_1);
 		kura_tree = new WorldGenTemplateGroup(kura_tree_1, kura_tree_2, kura_tree_3, kura_tree_4, kura_tree_5);
 		large_kura_tree = new WorldGenTemplateGroup(large_kura_tree_1);
 		kura_bush = new WorldGenTemplateGroup(kura_bush_1, kura_bush_2, kura_bush_3, kura_bush_4);

@@ -14,9 +14,9 @@ public class ConfigAether
 
 	private final ConfigCategory GENERAL, BIOMES, DIMENSIONS;
 
-	private int sliderLabyrinthDimID, aetherDimID;
+	private int aetherDimID;
 
-	private int aetherBiomeID, sliderLabyrinthBiomeID;
+	private int aetherBiomeID;
 
 	private boolean displayInventoryPattern;
 
@@ -39,10 +39,7 @@ public class ConfigAether
 	private void loadAndSync()
 	{
 		this.aetherDimID = this.getInt(this.DIMENSIONS, "Aether Dimension ID", 3);
-		this.sliderLabyrinthDimID = this.getInt(this.DIMENSIONS, "Slider's Labyrinth Dimension ID", 4);
-
 		this.aetherBiomeID = this.getInt(this.BIOMES, "Aether Biome ID", 237);
-		this.sliderLabyrinthBiomeID = this.getInt(this.BIOMES, "Slider Labyrinth Biome ID", 238);
 
 		this.displayInventoryPattern = this.getBoolean(this.GENERAL, "Display Inventory Pattern", true);
 		this.displayPerformanceIndicator = this.getBoolean(this.GENERAL, "Display Performance Indicator", true);
@@ -77,19 +74,9 @@ public class ConfigAether
 		return this.aetherDimID;
 	}
 
-	public int getSliderLabyrinthDimID()
-	{
-		return this.sliderLabyrinthDimID;
-	}
-
 	public int getAetherBiomeID()
 	{
 		return this.aetherBiomeID;
-	}
-
-	public int getSliderLabyrinthBiomeID()
-	{
-		return this.sliderLabyrinthBiomeID;
 	}
 
 	public boolean getDisplayInventoryPattern()

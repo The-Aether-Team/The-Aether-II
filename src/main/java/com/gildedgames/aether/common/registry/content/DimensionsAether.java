@@ -4,7 +4,6 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.util.io.NBTHelper;
 import com.gildedgames.aether.common.world.dimensions.aether.TeleporterAether;
 import com.gildedgames.aether.common.world.dimensions.aether.WorldProviderAether;
-import com.gildedgames.aether.common.world.dimensions.labyrinth.WorldProviderSliderLabyrinth;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldServer;
@@ -18,16 +17,11 @@ public class DimensionsAether
 {
 	public static DimensionType AETHER;
 
-	public static DimensionType SLIDER_LABYRINTH;
-
 	public static void preInit()
 	{
 		// Register dimension types
 		DimensionsAether.AETHER = DimensionType.register("Aether", "_aether",
 				AetherCore.CONFIG.getAetherDimID(), WorldProviderAether.class, false);
-
-		DimensionsAether.SLIDER_LABYRINTH = DimensionType.register("AetherSliderLabyrinth", "_aether_slider_labyrinth",
-				AetherCore.CONFIG.getSliderLabyrinthDimID(), WorldProviderSliderLabyrinth.class, false);
 
 		// Register dimensions
 		DimensionManager.registerDimension(AetherCore.CONFIG.getAetherDimID(), DimensionsAether.AETHER);

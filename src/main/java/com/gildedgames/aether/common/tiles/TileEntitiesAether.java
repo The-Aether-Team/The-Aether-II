@@ -37,7 +37,6 @@ public class TileEntitiesAether
 		GameRegistry.registerTileEntity(TileEntityIcestoneCooler.class, ICESTONE_COOLER_ID);
 		GameRegistry.registerTileEntity(TileEntityIncubator.class, INCUBATOR_ID);
 		GameRegistry.registerTileEntity(TileEntityPresent.class, PRESENT_ID);
-		GameRegistry.registerTileEntity(TileEntityLabyrinthBridge.class, LABYRINTH_BRIDGE_ID);
 		GameRegistry.registerTileEntity(TileEntityWildcard.class, WILDCARD_ID);
 		GameRegistry.registerTileEntity(TileEntityMasonryBench.class, MASONRY_BENCH_ID);
 		GameRegistry.registerTileEntity(TileEntityOutpostCampfire.class, OUTPOST_CAMPFIRE_ID);

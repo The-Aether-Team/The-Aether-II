@@ -60,45 +60,13 @@ public class SoundsAether
 
 	public static final SoundEvent zephyr_puff = new SoundEvent(AetherCore.getResource("mob.zephyr.puff"));
 
-	public static final SoundEvent detonating = new SoundEvent(AetherCore.getResource("random.detonating"));
-
-	public static final SoundEvent detonate = new SoundEvent(AetherCore.getResource("random.detonate"));
-
-	public static final SoundEvent sentry_ambient = new SoundEvent(AetherCore.getResource("mob.sentry.ambient"));
-
-	public static final SoundEvent sentry_hurt = new SoundEvent(AetherCore.getResource("mob.sentry.hurt"));
-
-	public static final SoundEvent sentry_death = new SoundEvent(AetherCore.getResource("mob.sentry.death"));
-
-	public static final SoundEvent stone_thud = new SoundEvent(AetherCore.getResource("random.stone_thud"));
-
-	public static final SoundEvent battle_golem_ambient = new SoundEvent(AetherCore.getResource("mob.battle_golem.ambient"));
-
-	public static final SoundEvent battle_golem_hurt = new SoundEvent(AetherCore.getResource("mob.battle_golem.hurt"));
-
-	public static final SoundEvent tracking_sentry_alarm = new SoundEvent(AetherCore.getResource("mob.tracking_sentry.alarm"));
-
-	public static final SoundEvent battle_sentry_pounce = new SoundEvent(AetherCore.getResource("mob.battle_sentry.pounce"));
-
 	public static final SoundEvent moa_ambient = new SoundEvent(AetherCore.getResource("mob.moa.ambient"));
 
 	public static final SoundEvent moa_hurt = new SoundEvent(AetherCore.getResource("mob.moa.hurt"));
 
-	public static final SoundEvent chest_mimic_awake = new SoundEvent(AetherCore.getResource("mob.chest_mimic.awake"));
-
 	public static final SoundEvent present_unwrap = new SoundEvent(AetherCore.getResource("random.present_unwrap"));
 
 	public static final SoundEvent break_labyrinth_container = new SoundEvent(AetherCore.getResource("random.dungeon.container.smash"));
-
-	public static final SoundEvent slider_awake = new SoundEvent(AetherCore.getResource("mob.slider.awake"));
-
-	public static final SoundEvent slider_collide = new SoundEvent(AetherCore.getResource("mob.slider.collide"));
-
-	public static final SoundEvent slider_die = new SoundEvent(AetherCore.getResource("mob.slider.die"));
-
-	public static final SoundEvent slider_move = new SoundEvent(AetherCore.getResource("mob.slider.move"));
-
-	public static final SoundEvent slider_signal = new SoundEvent(AetherCore.getResource("mob.slider.signal"));
 
 	public static final SoundEvent generic_wing_flap = new SoundEvent(AetherCore.getResource("mob.generic.wings.flap"));
 
@@ -145,21 +113,6 @@ public class SoundsAether
 		registerSound("mob.zephyr.ambient", zephyr_ambient);
 		registerSound("mob.zephyr.puff", zephyr_puff);
 
-		registerSound("mob.battle_golem.ambient", battle_golem_ambient);
-		registerSound("mob.battle_golem.hurt", battle_golem_hurt);
-
-		registerSound("mob.tracking_sentry.alarm", tracking_sentry_alarm);
-
-		registerSound("mob.sentry.ambient", sentry_ambient);
-		registerSound("mob.sentry.hurt", sentry_hurt);
-		registerSound("mob.sentry.death", sentry_death);
-
-		registerSound("mob.battle_sentry.pounce", battle_sentry_pounce);
-
-		registerSound("random.stone.thud", stone_thud);
-		registerSound("random.detonating", detonating);
-		registerSound("random.detonate", detonate);
-
 		registerSound("record.aerwhale", record_aerwhale);
 		registerSound("record.labyrinth", record_labyrinth);
 		registerSound("record.moa", record_moa);
@@ -171,16 +124,8 @@ public class SoundsAether
 		registerSound("mob.moa.ambient", moa_ambient);
 		registerSound("mob.moa.hurt", moa_hurt);
 
-		registerSound("mob.chest_mimic.awake", chest_mimic_awake);
-
 		registerSound("random.present_unwrap", present_unwrap);
 		registerSound("random.dungeon.container.smash", break_labyrinth_container);
-
-		registerSound("mob.slider.awake", slider_awake);
-		registerSound("mob.slider.collide", slider_collide);
-		registerSound("mob.slider.die", slider_die);
-		registerSound("mob.slider.move", slider_move);
-		registerSound("mob.slider.signal", slider_signal);
 
 		registerSound("mob.generic.wings.flap", generic_wing_flap);
 

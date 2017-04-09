@@ -621,15 +621,12 @@ public class ItemModelsAether
 				.add(BlockIncubator.LIT_META, "lit")
 				.add(BlockIncubator.UNLIT_META, "unlit"));
 
-		registerItemModels(ItemsAether.sentry_vaultbox, "sentry_vaultbox");
 		registerItemModels(ItemsAether.wrapping_paper, "wrapping_paper");
 		registerItemModels(ItemsAether.fried_moa_egg, "fried_moa_egg");
 
 		registerItemModels(BlocksAether.labyrinth_container, new ItemModelBuilder("labyrinth_container/")
 				.add(BlockLabyrinthContainer.VARIANT_SMALL.getMeta(), "labyrinth_container_small")
 				.add(BlockLabyrinthContainer.VARIANT_LARGE.getMeta(), "labyrinth_container_large"));
-
-		registerItemModels(BlocksAether.labyrinth_bridge, "labyrinth_pillar");
 
 		registerItemModels(ItemsAether.raw_taegore_meat, "raw_taegore_meat");
 		registerItemModels(ItemsAether.taegore_steak, "taegore_steak");

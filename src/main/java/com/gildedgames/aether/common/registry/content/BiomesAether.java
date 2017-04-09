@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.registry.content;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.world.biome.BiomeVoid;
 import com.gildedgames.aether.common.world.dimensions.aether.biomes.highlands.BiomeHighlands;
-import com.gildedgames.aether.common.world.dimensions.labyrinth.BiomeSliderLabyrinth;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -14,12 +13,9 @@ public class BiomesAether
 
 	public static final Biome VOID = new BiomeVoid();
 
-	public static final Biome BIOME_SLIDER_LABYRINTH = new BiomeSliderLabyrinth();
-
 	public static void preInit()
 	{
 		GameRegistry.register(HIGHLANDS);
 		GameRegistry.register(VOID);
-		GameRegistry.register(BIOME_SLIDER_LABYRINTH);
 	}
 }

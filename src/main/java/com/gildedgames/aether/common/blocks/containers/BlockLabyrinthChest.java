@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.containers;
 
-import com.gildedgames.aether.common.entities.living.dungeon.labyrinth.EntityChestMimic;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.tiles.TileEntityLabyrinthChest;
@@ -245,18 +244,7 @@ public class BlockLabyrinthChest extends BlockContainer
 			{
 				chest.clear();
 
-				EntityChestMimic mimic = new EntityChestMimic(world);
-
-				mimic.setPositionAndUpdate(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D);
-
-				world.spawnEntity(mimic);
-
-				world.setBlockToAir(pos);
-
-				mimic.playSound(SoundsAether.chest_mimic_awake, 1.0F,
-						(mimic.getRNG().nextFloat() - mimic.getRNG().nextFloat()) * 0.2F + 1.0F);
-
-				super.breakBlock(world, pos, state);
+				// TODO: Spawn chest-mimic
 
 				return;
 			}

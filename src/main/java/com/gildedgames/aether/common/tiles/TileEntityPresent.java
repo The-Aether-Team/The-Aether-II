@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.tiles;
 
-import com.gildedgames.aether.common.entities.projectiles.EntitySentryVaultbox;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import com.gildedgames.aether.common.items.misc.ItemWrappingPaper;
@@ -63,10 +62,6 @@ public class TileEntityPresent extends TileEntity
 			tnt.setFuse(20);
 
 			entity = tnt;
-		}
-		else if (stack.getItem() == ItemsAether.sentry_vaultbox)
-		{
-			entity = new EntitySentryVaultbox(this.world, x2, y2, z2);
 		}
 		else
 		{

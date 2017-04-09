@@ -173,8 +173,6 @@ public class BlocksAether
 	public static final BlockLabyrinth labyrinth_capstone = new BlockLabyrinth(),
 			unstable_labyrinth_capstone = new BlockLabyrinth();
 
-	public static final BlockLabyrinthBridge labyrinth_bridge = new BlockLabyrinthBridge();
-
 	public static final BlockBed skyroot_bed = new BlockCustomBed(() -> ItemsAether.skyroot_bed, SoundType.CLOTH);
 
 	public static final Block
@@ -436,8 +434,6 @@ public class BlocksAether
 
 		registerBlock("present", BlocksAether.present.setCreativeTab(CreativeTabsAether.MISCELLANEOUS), new ItemBlockPresent(BlocksAether.present));
 		registerBlock("labyrinth_container", BlocksAether.labyrinth_container.setCreativeTab(CreativeTabsAether.DUNGEON), new ItemBlockVariants(BlocksAether.labyrinth_container));
-
-		registerBlock("labyrinth_bridge", BlocksAether.labyrinth_bridge.setBlockUnbreakable().setResistance(6000000.0F));
 
 		registerBlock("wildcard", BlocksAether.wildcard);
 

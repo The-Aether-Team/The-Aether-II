@@ -11,8 +11,6 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketRegisterDimension;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.tiles.multiblock.TileEntityMultiblockController;
-import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstance;
-import com.gildedgames.aether.common.world.dungeon.instance.DungeonInstanceHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
@@ -22,6 +20,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -68,37 +67,7 @@ public class TileEntityLabyrinthTotem extends TileEntityMultiblockController imp
 	{
 		EntityPlayerMP player = (EntityPlayerMP) interactingPlayer;
 
-		DungeonInstanceHandler handler = AetherCore.PROXY.getDungeonInstanceHandler();
-
-		IPlayerInstances hook = AetherAPI.instances().getPlayer(player);
-
-		if (hook.getInstance() != null)
-		{
-			Instance instance = hook.getInstance();
-
-			if (interactingPlayer.dimension == instance.getDimIdInside())
-			{
-				handler.teleportBack(player);
-
-				hook.setInstance(null);
-			}
-			else
-			{
-				DungeonInstance inst = handler.get(new WorldPos(this.pos, this.world.provider.getDimension()));
-
-				NetworkingAether.sendPacketToPlayer(new PacketRegisterDimension(DimensionsAether.SLIDER_LABYRINTH, inst.getDimIdInside()), player);
-
-				handler.teleportToInst(player, inst);
-			}
-		}
-		else
-		{
-			DungeonInstance inst = handler.get(new WorldPos(this.pos, this.world.provider.getDimension()));
-
-			NetworkingAether.sendPacketToPlayer(new PacketRegisterDimension(DimensionsAether.SLIDER_LABYRINTH, inst.getDimIdInside()), player);
-
-			handler.teleportToInst(player, inst);
-		}
+		player.sendMessage(new TextComponentString("Dungeons are not currently implemented. Sorry about that!"));
 	}
 
 	@Override

@@ -395,8 +395,7 @@ public class ItemsAether
 			})),
 			irradiated_dust = new ItemIrradiatedVisuals();
 
-	public static final Item sentry_vaultbox = new ItemSentryVault(),
-			wrapping_paper = new ItemWrappingPaper(),
+	public static final Item wrapping_paper = new ItemWrappingPaper(),
 			fried_moa_egg = new ItemFood(10, false);
 
 	public static void preInit()
@@ -705,7 +704,6 @@ public class ItemsAether
 
 		registerItem("glamoured_cockatrice_keratin", glamoured_cockatrice_keratin.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 
-		registerItem("sentry_vaultbox", sentry_vaultbox.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 		registerItem("wrapping_paper", wrapping_paper.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
 		registerItem("fried_moa_egg", fried_moa_egg.setCreativeTab(CreativeTabsAether.CONSUMABLES));
