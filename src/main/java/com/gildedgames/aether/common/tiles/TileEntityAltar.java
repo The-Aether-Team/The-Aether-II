@@ -37,6 +37,7 @@ public class TileEntityAltar extends TileEntitySynced implements ITickable
 		}
 	}
 
+	@Nonnull
 	public ItemStack getStackOnAltar()
 	{
 		return this.stackOnAltar;

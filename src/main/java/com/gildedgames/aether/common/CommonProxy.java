@@ -2,7 +2,6 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.IAetherServiceLocator;
-import com.gildedgames.aether.api.capabilites.instances.IInstanceRegistry;
 import com.gildedgames.aether.api.registry.IEquipmentRegistry;
 import com.gildedgames.aether.api.registry.IItemPropertiesRegistry;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
@@ -11,7 +10,6 @@ import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.CapabilityManagerAether;
-import com.gildedgames.aether.common.capabilities.instances.InstanceRegistryImpl;
 import com.gildedgames.aether.common.capabilities.item.EquipmentRegistry;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherEvents;
 import com.gildedgames.aether.common.containers.tab.TabRegistryImpl;
@@ -51,8 +49,6 @@ public class CommonProxy implements IAetherServiceLocator
 	private final IItemPropertiesRegistry itemPropertiesRegistry = new ItemPropertiesRegistry();
 
 	private final ITabRegistry tabRegistry = new TabRegistryImpl();
-
-	private final IInstanceRegistry instanceRegistry = new InstanceRegistryImpl();
 
 	private final SimpleCraftingRegistry simpleCraftingRegistry = new SimpleCraftingRegistry();
 
@@ -158,12 +154,6 @@ public class CommonProxy implements IAetherServiceLocator
 	public ITabRegistry getTabRegistry()
 	{
 		return this.tabRegistry;
-	}
-
-	@Override
-	public IInstanceRegistry getInstanceRegistry()
-	{
-		return this.instanceRegistry;
 	}
 
 	@Override

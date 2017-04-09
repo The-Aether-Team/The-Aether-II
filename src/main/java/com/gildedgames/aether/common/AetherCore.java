@@ -2,7 +2,6 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.common.blocks.QuicksoilProcessor;
-import com.gildedgames.aether.common.capabilities.instances.InstanceEvents;
 import com.gildedgames.aether.common.registry.SimpleRecipesAether;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
@@ -73,7 +72,6 @@ public class AetherCore
 
 		MinecraftForge.EVENT_BUS.register(AetherCore.CONFIG);
 		MinecraftForge.EVENT_BUS.register(IslandSectorAccess.inst());
-		MinecraftForge.EVENT_BUS.register(InstanceEvents.class);
 		MinecraftForge.EVENT_BUS.register(QuicksoilProcessor.class);
 
 		AetherCore.PROXY.preInit(event);
@@ -95,20 +93,18 @@ public class AetherCore
 		AetherCore.SPAWN_REGISTRY.write();
 
 		IslandSectorAccess.inst().onServerStopping(event);
-		InstanceEvents.saveAllInstancesToDisk();
 	}
 
 	@EventHandler
 	public void onServerStopped(FMLServerStoppedEvent event)
 	{
-		InstanceEvents.unregisterAllInstances();
+
 	}
 
 	@EventHandler
 	public void serverStarted(FMLServerStartedEvent event)
 	{
 		AetherCore.SPAWN_REGISTRY.read();
-		InstanceEvents.loadAllInstancesFromDisk();
 
 		SimpleRecipesAether.postInit();
 	}

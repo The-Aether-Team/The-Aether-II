@@ -1,15 +1,7 @@
 package com.gildedgames.aether.common.tiles;
 
-import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.capabilites.instances.IPlayerInstances;
-import com.gildedgames.aether.api.capabilites.instances.Instance;
-import com.gildedgames.aether.api.util.WorldPos;
 import com.gildedgames.aether.client.sound.objects.LabyrinthTotemSound;
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.PacketRegisterDimension;
-import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.tiles.multiblock.TileEntityMultiblockController;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
