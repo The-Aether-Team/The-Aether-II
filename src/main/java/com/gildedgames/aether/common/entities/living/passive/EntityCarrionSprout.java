@@ -105,7 +105,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 			return false;
 		}
 
-		final Block rootBlock = this.worldObj.getBlockState(pos.down()).getBlock();
+		final Block rootBlock = this.world.getBlockState(pos.down()).getBlock();
 
 		if (rootBlock != BlocksAether.aether_grass && rootBlock != BlocksAether.aether_dirt)
 		{
@@ -185,6 +185,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 		if (this.sinage > 3.141593F * 2F)
 		{
 			this.sinage -= (3.141593F * 2F);
+			this.prevSinage -= (3.141593F * 2F);
 		}
 	}
 

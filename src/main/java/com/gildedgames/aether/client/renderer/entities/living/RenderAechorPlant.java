@@ -19,21 +19,23 @@ public class RenderAechorPlant extends RenderLiving<EntityAechorPlant>
 	@Override
 	protected void preRenderCallback(EntityAechorPlant plant, float partialTicks)
 	{
-		float f1 = (float) Math.sin(plant.sinage);
+		float signage = plant.prevSinage + ((plant.sinage - plant.prevSinage) * partialTicks);
+
+		float f1 = (float) Math.sin(signage);
 		float f3;
 
 		if (plant.hurtTime > 0)
 		{
 			f1 *= 0.45F;
 			f1 -= 0.125F;
-			f3 = 1.75F + ((float) Math.sin(plant.sinage + 2.0F) * 1.5F);
+			f3 = 1.75F + ((float) Math.sin(signage + 2.0F) * 1.5F);
 		}
 		else
 		{
 			if (plant.canSeePrey())
 			{
 				f1 *= 0.25F;
-				f3 = 1.75F + ((float) Math.sin(plant.sinage + 2.0F) * 1.5F);
+				f3 = 1.75F + ((float) Math.sin(signage + 2.0F) * 1.5F);
 			}
 			else
 			{

@@ -29,24 +29,27 @@ public class RenderCarrionSprout extends RenderLiving<EntityCarrionSprout>
 
 		GL11.glScalef(scale, scale, scale);
 
-		float sinage = (float) Math.sin(sprout.sinage - 1);
-		final float sinage2;
+		float sinage = sprout.prevSinage + ((sprout.sinage - sprout.prevSinage) * partialTicks);
+
+		float f1 = (float) Math.sin(sinage - 1);
+
+		final float f2;
 
 		if (sprout.hurtTime > 0)
 		{
-			sinage *= 0.45F;
-			sinage -= 0.125F;
+			f1 *= 0.45F;
+			f1 -= 0.125F;
 
-			sinage2 = 1.75F + ((float) Math.sin(sprout.sinage + 2.0F) * 1.5F);
+			f2 = 1.75F + ((float) Math.sin(sinage + 2.0F) * 1.5F);
 		}
 		else
 		{
-			sinage *= 0.25F;
-			sinage2 = 1.75F + ((float) Math.sin(sprout.sinage + 2.0F) * 1.5F);
+			f1 *= 0.25F;
+			f2 = 1.75F + ((float) Math.sin(sinage + 2.0F) * 1.5F);
 		}
 
-		this.plantModel.sinage = sinage;
-		this.plantModel.sinage2 = sinage2;
+		this.plantModel.sinage = f1;
+		this.plantModel.sinage2 = f2;
 
 		this.shadowSize = 0.10f * sprout.getSproutSize();
 	}

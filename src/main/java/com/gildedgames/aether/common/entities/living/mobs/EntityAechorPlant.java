@@ -30,7 +30,7 @@ public class EntityAechorPlant extends EntityAetherMob
 	private static final DataParameter<Byte> PLANT_SIZE = new DataParameter<>(17, DataSerializers.BYTE);
 
 	@SideOnly(Side.CLIENT)
-	public float sinage;
+	public float sinage, prevSinage;
 
 	private int poisonLeft;
 
@@ -161,6 +161,8 @@ public class EntityAechorPlant extends EntityAetherMob
 	@SideOnly(Side.CLIENT)
 	private void tickAnimation()
 	{
+		this.prevSinage = this.sinage;
+
 		if (this.hurtTime > 0)
 		{
 			this.sinage += 0.5F;
@@ -175,6 +177,7 @@ public class EntityAechorPlant extends EntityAetherMob
 		if (this.sinage > pie2)
 		{
 			this.sinage -= pie2;
+			this.prevSinage -= pie2;
 		}
 	}
 
