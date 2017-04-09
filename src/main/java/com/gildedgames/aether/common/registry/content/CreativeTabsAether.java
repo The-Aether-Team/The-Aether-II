@@ -29,8 +29,6 @@ public class CreativeTabsAether
 
 	public static final CreativeTab VISUAL_VARIANTS = new CreativeTab("aether.visual_variants");
 
-	public static final CreativeTab DUNGEON = new CreativeTab("aether.dungeon_blocks");
-
 	public static final CreativeTab MATERIALS = new CreativeTab("aether.materials");
 
 	public static final CreativeTab CONSUMABLES = new CreativeTab("aether.consumables");
@@ -62,7 +60,6 @@ public class CreativeTabsAether
 		CONSTRUCTION.setDisplayStack(new ItemStack(BlocksAether.holystone_brick));
 		VISUAL_VARIANTS.setDisplayStack(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.HIGHLIGHT.getMeta()));
 		UTILITY.setDisplayStack(new ItemStack(BlocksAether.altar));
-		DUNGEON.setDisplayStack(new ItemStack(BlocksAether.labyrinth_base));
 		MATERIALS.setDisplayStack(new ItemStack(ItemsAether.ambrosium_shard));
 		TOOLS.setDisplayStack(new ItemStack(ItemsAether.zanite_pickaxe));
 		WEAPONS.setDisplayStack(new ItemStack(ItemsAether.gravitite_sword));

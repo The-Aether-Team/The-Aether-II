@@ -1,6 +1,0 @@
-{
-	"parent": "block/wall_side",
-	"textures": {
-		"wall": "aether:blocks/dungeon/sentry_stone"
-	}
-}

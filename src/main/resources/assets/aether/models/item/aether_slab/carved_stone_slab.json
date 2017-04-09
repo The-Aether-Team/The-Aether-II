@@ -1,8 +1,0 @@
-{
-	"parent": "block/half_slab",
-	"textures": {
-		"bottom": "aether:blocks/dungeon/carved_stone",
-		"top": "aether:blocks/dungeon/carved_stone",
-		"side": "aether:blocks/dungeon/carved_stone"
-	}
-}

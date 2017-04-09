@@ -12,14 +12,10 @@ public class TileEntitiesAether
 			SKYROOT_CHEST_ID = "aether.skyroot_chest",
 			SKYROOT_SIGN_ID = "aether.skyroot_sign",
 			MULTIBLOCK_DUMMY = "aether.multiblock_dummy",
-			LABYRINTH_TOTEM = "aether.labyrinth_totem",
-			LABYRINTH_CHEST_ID = "aether.labyrinth_chest",
 			MOA_EGG_ID = "aether.moa_egg",
-			STRUCTURE_EXTENDED_ID = "aether.structure_extended",
 			ICESTONE_COOLER_ID = "aether.icestone_cooler",
 			INCUBATOR_ID = "aether.incubator",
 			PRESENT_ID = "aether.present",
-			LABYRINTH_BRIDGE_ID = "aether.labyrinth_bridge",
 			WILDCARD_ID = "aether.wildcard",
 			MASONRY_BENCH_ID = "aether.masonry_bench",
 			OUTPOST_CAMPFIRE_ID = "aether.outpost_campfire";
@@ -31,8 +27,6 @@ public class TileEntitiesAether
 		GameRegistry.registerTileEntity(TileEntitySkyrootChest.class, SKYROOT_CHEST_ID);
 		GameRegistry.registerTileEntity(TileEntitySkyrootSign.class, SKYROOT_SIGN_ID);
 		GameRegistry.registerTileEntity(TileEntityMultiblockDummy.class, MULTIBLOCK_DUMMY);
-		GameRegistry.registerTileEntity(TileEntityLabyrinthTotem.class, LABYRINTH_TOTEM);
-		GameRegistry.registerTileEntity(TileEntityLabyrinthChest.class, LABYRINTH_CHEST_ID);
 		GameRegistry.registerTileEntity(TileEntityMoaEgg.class, MOA_EGG_ID);
 		GameRegistry.registerTileEntity(TileEntityIcestoneCooler.class, ICESTONE_COOLER_ID);
 		GameRegistry.registerTileEntity(TileEntityIncubator.class, INCUBATOR_ID);

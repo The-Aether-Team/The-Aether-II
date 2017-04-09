@@ -7,8 +7,6 @@ import com.gildedgames.aether.common.blocks.construction.*;
 import com.gildedgames.aether.common.blocks.containers.BlockAetherCraftingTable;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
-import com.gildedgames.aether.common.blocks.dungeon.BlockDivine;
-import com.gildedgames.aether.common.blocks.dungeon.BlockLabyrinthContainer;
 import com.gildedgames.aether.common.blocks.natural.*;
 import com.gildedgames.aether.common.blocks.natural.plants.*;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
@@ -32,7 +30,6 @@ public class ItemModelsAether
 		registerModels();
 
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.skyroot_chest), 0, TileEntitySkyrootChest.class);
-		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.labyrinth_totem), 0, TileEntityLabyrinthTotem.class);
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.altar), 0, TileEntityAltar.class);
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.present), 0, TileEntityPresent.class);
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.icestone_cooler), 0, TileEntityIcestoneCooler.class);
@@ -87,16 +84,6 @@ public class ItemModelsAether
 				.add(BlockAetherSapling.GREEN_SKYROOT.getMeta(), "green_skyroot_sapling")
 				.add(BlockAetherSapling.DARK_BLUE_SKYROOT.getMeta(), "dark_blue_skyroot_sapling")
 				.add(BlockAetherSapling.GOLDEN_OAK.getMeta(), "golden_oak_sapling"));
-
-		registerItemModels(BlocksAether.carved_stone, new ItemModelBuilder("carved_stone/")
-				.add(BlockDivine.NORMAL, "carved_stone")
-				.add(BlockDivine.DIVINE, "divine_carved_stone"));
-
-		registerItemModels(BlocksAether.sentry_stone, new ItemModelBuilder("sentry_stone/")
-				.add(BlockDivine.NORMAL, "sentry_stone")
-				.add(BlockDivine.DIVINE, "divine_sentry_stone"));
-
-		registerItemModels(BlocksAether.labyrinth_lightstone, "labyrinth_lightstone");
 
 		registerItemModels(BlocksAether.holystone_furnace, new ItemModelBuilder("holystone_furnace/")
 				.add(BlockHolystoneFurnace.LIT_META, "holystone_furnace_lit")
@@ -409,20 +396,15 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.holystone_wall, "aether_wall/holystone_wall");
 		registerItemModels(BlocksAether.mossy_holystone_wall, "aether_wall/mossy_holystone_wall");
 		registerItemModels(BlocksAether.holystone_brick_wall, "aether_wall/holystone_brick_wall");
-		registerItemModels(BlocksAether.carved_stone_wall, "aether_wall/carved_stone_wall");
 		registerItemModels(BlocksAether.skyroot_log_wall, "aether_wall/skyroot_log_wall");
 		registerItemModels(BlocksAether.icestone_wall, "aether_wall/icestone_wall");
 		registerItemModels(BlocksAether.scatterglass_wall, "aether_wall/scatterglass_wall");
-		registerItemModels(BlocksAether.divine_stone_wall, "aether_wall/divine_stone_wall");
-		registerItemModels(BlocksAether.sentry_stone_wall, "aether_wall/sentry_stone_wall");
-		registerItemModels(BlocksAether.divine_sentry_wall, "aether_wall/divine_sentry_wall");
 
 		registerItemModels(ItemsAether.aether_portal_frame, "aether_portal_frame");
 		registerItemModels(ItemsAether.nether_portal_frame, "nether_portal_frame");
 		registerItemModels(ItemsAether.end_portal_frame, "end_portal_frame");
 
 		registerItemModels(BlocksAether.altar, "tesr");
-		registerItemModels(BlocksAether.labyrinth_totem, "tesr");
 		registerItemModels(BlocksAether.multiblock_dummy, "tesr");
 		registerItemModels(BlocksAether.multiblock_dummy_half, "tesr");
 		registerItemModels(BlocksAether.present, "tesr");
@@ -440,16 +422,6 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.gold_gloves, "accessories/gold_gloves");
 		registerItemModels(ItemsAether.chain_gloves, "accessories/chain_gloves");
 		registerItemModels(ItemsAether.diamond_gloves, "accessories/diamond_gloves");
-
-		registerItemModels(BlocksAether.labyrinth_capstone, "labyrinth_capstone");
-		registerItemModels(BlocksAether.unstable_labyrinth_capstone, "labyrinth_capstone");
-		registerItemModels(BlocksAether.labyrinth_glowing_pillar, "labyrinth_glowing_pillar");
-		registerItemModels(BlocksAether.labyrinth_pillar, "labyrinth_pillar");
-		registerItemModels(BlocksAether.labyrinth_wall, "labyrinth_wall");
-		registerItemModels(BlocksAether.labyrinth_lightstone, "labyrinth_lightstone");
-		registerItemModels(BlocksAether.labyrinth_base, "labyrinth_base");
-		registerItemModels(BlocksAether.labyrinth_headstone, "labyrinth_headstone");
-		registerItemModels(BlocksAether.labyrinth_chest, "labyrinth_chest");
 
 		registerItemModels(ItemsAether.pink_baby_swet, "companions/pink_baby_swet");
 
@@ -473,15 +445,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.skyroot_slab, "aether_slab/skyroot_slab");
 		registerItemModels(BlocksAether.holystone_slab, "aether_slab/holystone_slab");
 		registerItemModels(BlocksAether.holystone_brick_slab, "aether_slab/holystone_brick_slab");
-		registerItemModels(BlocksAether.carved_stone_slab, "aether_slab/carved_stone_slab");
-		registerItemModels(BlocksAether.divine_carved_stone_slab, "aether_slab/divine_carved_stone_slab");
-		registerItemModels(BlocksAether.sentry_stone_slab, "aether_slab/sentry_stone_slab");
-		registerItemModels(BlocksAether.divine_sentry_stone_slab, "aether_slab/divine_sentry_stone_slab");
 		registerItemModels(BlocksAether.icestone_slab, "aether_slab/icestone_slab");
-		registerItemModels(BlocksAether.labyrinth_capstone_slab, "aether_slab/labyrinth_capstone_slab");
-		registerItemModels(BlocksAether.labyrinth_wall_slab, "aether_slab/labyrinth_wall_slab");
-
-		registerItemModels(BlocksAether.labyrinth_strongblock, "labyrinth_strongblock");
 
 		registerItemModels(ItemsAether.barbed_iron_ring, "accessories/barbed_iron_ring");
 		registerItemModels(ItemsAether.barbed_gold_ring, "accessories/barbed_gold_ring");
@@ -514,10 +478,6 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.holystone_stairs, "aether_stairs/holystone_stairs");
 		registerItemModels(BlocksAether.mossy_holystone_stairs, "aether_stairs/mossy_holystone_stairs");
 		registerItemModels(BlocksAether.holystone_brick_stairs, "aether_stairs/holystone_brick_stairs");
-		registerItemModels(BlocksAether.sentry_stone_stairs, "aether_stairs/sentry_stone_stairs");
-		registerItemModels(BlocksAether.divine_sentry_stone_stairs, "aether_stairs/divine_sentry_stone_stairs");
-		registerItemModels(BlocksAether.carved_stone_stairs, "aether_stairs/carved_stone_stairs");
-		registerItemModels(BlocksAether.divine_carved_stone_stairs, "aether_stairs/divine_carved_stone_stairs");
 		registerItemModels(BlocksAether.icestone_brick_stairs, "aether_stairs/icestone_brick_stairs");
 		registerItemModels(BlocksAether.scatterglass_stairs, "aether_stairs/scatterglass_stairs");
 
@@ -623,10 +583,6 @@ public class ItemModelsAether
 
 		registerItemModels(ItemsAether.wrapping_paper, "wrapping_paper");
 		registerItemModels(ItemsAether.fried_moa_egg, "fried_moa_egg");
-
-		registerItemModels(BlocksAether.labyrinth_container, new ItemModelBuilder("labyrinth_container/")
-				.add(BlockLabyrinthContainer.VARIANT_SMALL.getMeta(), "labyrinth_container_small")
-				.add(BlockLabyrinthContainer.VARIANT_LARGE.getMeta(), "labyrinth_container_large"));
 
 		registerItemModels(ItemsAether.raw_taegore_meat, "raw_taegore_meat");
 		registerItemModels(ItemsAether.taegore_steak, "taegore_steak");

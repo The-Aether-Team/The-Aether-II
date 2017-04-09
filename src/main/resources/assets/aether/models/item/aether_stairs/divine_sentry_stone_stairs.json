@@ -1,8 +1,0 @@
-{
-	"parent": "block/stairs",
-	"textures": {
-		"bottom": "aether:blocks/dungeon/divine_sentry_stone",
-		"side": "aether:blocks/dungeon/divine_sentry_stone",
-		"top": "aether:blocks/dungeon/divine_sentry_stone"
-	}
-}
