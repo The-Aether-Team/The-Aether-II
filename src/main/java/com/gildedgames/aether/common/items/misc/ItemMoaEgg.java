@@ -178,7 +178,7 @@ public class ItemMoaEgg extends Item
 	@Override
 	public String getItemStackDisplayName(ItemStack stack)
 	{
-		return this.creativeEgg ? super.getItemStackDisplayName(stack) : this.getUnlocalizedName(stack);
+		return this.creativeEgg ? super.getItemStackDisplayName(stack) : super.getItemStackDisplayName(stack);
 	}
 
 	@Override
