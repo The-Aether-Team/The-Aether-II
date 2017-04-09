@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -26,7 +27,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	@SideOnly(Side.CLIENT)
 	public float sinage, prevSinage;
 
-	public EntityCarrionSprout(World world)
+	public EntityCarrionSprout(final World world)
 	{
 		super(world);
 
@@ -45,7 +46,10 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
 
 		this.setMaxSproutSize(8);
-		this.setSproutSize(1 + this.rand.nextInt(this.getMaxSproutSize()));
+
+		final int min = 3;
+
+		this.setSproutSize(min + this.rand.nextInt(this.getMaxSproutSize() - min));
 	}
 
 	@Override
@@ -57,7 +61,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt)
+	public NBTTagCompound writeToNBT(final NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
 
@@ -68,7 +72,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	public void readFromNBT(final NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
 
@@ -94,14 +98,14 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 		}
 	}
 
-	private boolean canStayHere(BlockPos pos)
+	private boolean canStayHere(final BlockPos pos)
 	{
 		if (!this.world.isAirBlock(pos))
 		{
 			return false;
 		}
 
-		Block rootBlock = this.world.getBlockState(pos.down()).getBlock();
+		final Block rootBlock = this.worldObj.getBlockState(pos.down()).getBlock();
 
 		if (rootBlock != BlocksAether.aether_grass && rootBlock != BlocksAether.aether_dirt)
 		{
@@ -141,7 +145,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 		return this.maxSproutSize;
 	}
 
-	public void setMaxSproutSize(int x)
+	public void setMaxSproutSize(final int x)
 	{
 		this.maxSproutSize = x;
 	}
@@ -151,7 +155,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 		return this.dataManager.get(SIZE);
 	}
 
-	public void setSproutSize(int newSize)
+	public void setSproutSize(final int newSize)
 	{
 		this.dataManager.set(SIZE, newSize);
 
@@ -190,12 +194,12 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	} // remove jump
 
 	@Override
-	public void knockBack(Entity entityIn, float distance, double motionX, double motionY)
+	public void knockBack(final Entity entityIn, final float distance, final double motionX, final double motionY)
 	{
 	} // remove player damage knock-back
 
 	@Override
-	public EntityAgeable createChild(EntityAgeable ageable)
+	public EntityAgeable createChild(final EntityAgeable ageable)
 	{
 		return null;
 	}
