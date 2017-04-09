@@ -46,6 +46,7 @@ public class LayerGlowing<T extends EntityLiving> implements LayerRenderer<T>
 		GlStateManager.scale(1.001f, 1.001f, 1.001f);
 
 		GlStateManager.depthMask(true);
+		GlStateManager.disableLighting();
 
 		int i = 61680;
 		int j = i % 65536;
@@ -64,6 +65,7 @@ public class LayerGlowing<T extends EntityLiving> implements LayerRenderer<T>
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) j, (float) k);
 		this.renderer.setLightmap(entity, partialTicks);
 
+		GlStateManager.enableLighting();
 		GlStateManager.disableBlend();
 		GlStateManager.enableAlpha();
 	}

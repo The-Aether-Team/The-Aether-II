@@ -19,12 +19,6 @@ public class RenderZephyr extends RenderLiving<EntityLiving>
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLiving entity, float f)
-	{
-		GlStateManager.translate(0.0D, 0.65D, 0.0D);
-	}
-
-	@Override
 	protected ResourceLocation getEntityTexture(EntityLiving entity)
 	{
 		return TEXTURE;
