@@ -14,10 +14,27 @@ import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowb
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.entities.projectiles.EntityTNTPresent;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class EntitiesAether
 {
+	private static Collection<ResourceLocation> registeredEggs;
+
+	static
+	{
+		if (AetherCore.isClient())
+		{
+			registeredEggs = new ArrayList<>();
+		}
+	}
+
 	private static int NEXT_ID = 0;
 
 	public static void preInit()
@@ -56,15 +73,20 @@ public class EntitiesAether
 		registerEntity(EntityMoa.class, "moa", 80, 1, true);
 	}
 
-	private static void registerLivingEntityWithEgg(Class<? extends Entity> entity, String id, int eggPrimaryColor, int eggSecondaryColor)
+	private static void registerLivingEntityWithEgg(Class<? extends Entity> entity, String name, int eggPrimaryColor, int eggSecondaryColor)
 	{
+		ResourceLocation id = AetherCore.getResource(name);
+		name = AetherCore.MOD_ID + "." + name;
+
 		if (AetherCore.isClient())
 		{
-			EntityRegistry.registerModEntity(AetherCore.getResource(id), entity, id, NEXT_ID++, AetherCore.INSTANCE, 80, 3, true, eggPrimaryColor, eggSecondaryColor);
+			EntityRegistry.registerModEntity(id, entity, name, NEXT_ID++, AetherCore.INSTANCE, 80, 3, true, eggPrimaryColor, eggSecondaryColor);
+
+			registeredEggs.add(id);
 		}
 		else
 		{
-			EntityRegistry.registerModEntity(AetherCore.getResource(id), entity, id, NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
+			EntityRegistry.registerModEntity(id, entity, name, NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 		}
 	}
 
@@ -76,5 +98,11 @@ public class EntitiesAether
 	private static void registerEntity(Class<? extends Entity> entity, String id, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates)
 	{
 		EntityRegistry.registerModEntity(AetherCore.getResource(id), entity, id, NEXT_ID++, AetherCore.INSTANCE, trackingRange, updateFrequency, sendsVelocityUpdates);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public static Collection<ResourceLocation> getRegisteredSpawnEggs()
+	{
+		return Collections.unmodifiableCollection(registeredEggs);
 	}
 }
