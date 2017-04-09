@@ -63,7 +63,7 @@ public class EntitiesAether
 			EntityRegistry.registerModEntity(AetherCore.getResource(id), entity, id, NEXT_ID++, AetherCore.INSTANCE, 80, 3, true, eggPrimaryColor, eggSecondaryColor);
 		}
 		else
-			{
+		{
 			EntityRegistry.registerModEntity(AetherCore.getResource(id), entity, id, NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 		}
 	}

@@ -87,8 +87,7 @@ public class EntityBolt extends EntityArrow
 	public void setBoltType(ItemBoltType type)
 	{
 		this.dataManager.set(TYPE, (byte) type.ordinal());
-
-		ObfuscationReflectionHelper.setPrivateValue(EntityArrow.class, this, type.getDamage(), ReflectionAether.ENTITY_ARROW_DAMAGE.getMappings());
+		this.setDamage(type.getDamage());
 	}
 
 	public ItemBoltType getBoltType()
