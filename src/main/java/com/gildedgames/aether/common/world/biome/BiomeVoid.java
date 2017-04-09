@@ -11,7 +11,7 @@ public class BiomeVoid extends BiomeAetherBase
 
 	public BiomeVoid()
 	{
-		super(new Biome.BiomeProperties("Aether Void").setRainDisabled().setTemperature(0.5f), AetherCore.getResource("aether_void"));
+		super(new Biome.BiomeProperties("Aether Void").setRainDisabled().setTemperature(0.5f).setWaterColor(0x70DB70), AetherCore.getResource("aether_void"));
 	}
 
 	@Override

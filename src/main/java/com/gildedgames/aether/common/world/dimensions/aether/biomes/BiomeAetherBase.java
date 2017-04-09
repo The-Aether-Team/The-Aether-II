@@ -68,12 +68,6 @@ public abstract class BiomeAetherBase extends Biome
 	}
 
 	@Override
-	public int getWaterColorMultiplier()
-	{
-		return 0x70DB70;
-	}
-
-	@Override
 	public final void decorate(World world, Random random, BlockPos pos)
 	{
 		if (!this.hasInit)
