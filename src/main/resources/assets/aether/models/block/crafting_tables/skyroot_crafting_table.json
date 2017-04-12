@@ -6,7 +6,7 @@
 		"up": "aether:blocks/crafting_tables/skyroot_crafting_table_top",
 		"north": "aether:blocks/crafting_tables/skyroot_crafting_table_front",
 		"east": "aether:blocks/crafting_tables/skyroot_crafting_table_side",
-		"south": "aether:blocks/crafting_tables/skyroot_crafting_table_side",
-		"west": "aether:blocks/crafting_tables/skyroot_crafting_table_front"
+		"south": "aether:blocks/crafting_tables/skyroot_crafting_table_front",
+		"west": "aether:blocks/crafting_tables/skyroot_crafting_table_side"
 	}
 }
