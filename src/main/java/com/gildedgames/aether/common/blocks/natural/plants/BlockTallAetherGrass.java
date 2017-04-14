@@ -25,8 +25,9 @@ import java.util.Random;
 
 public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable, IBlockVariants
 {
-
-	private static final AxisAlignedBB GRASS_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
+	private static final AxisAlignedBB GRASS_SHORT_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
+	private static final AxisAlignedBB GRASS_NORMAL_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.6D, 0.9D);
+	private static final AxisAlignedBB GRASS_LONG_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.9D, 0.9D);
 
 	public static final BlockVariant SHORT = new BlockVariant(0, "short"),
 			NORMAL = new BlockVariant(1, "normal"),
@@ -84,7 +85,20 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		return GRASS_AABB;
+		if (state.getValue(PROPERTY_VARIANT) == SHORT)
+		{
+			return GRASS_SHORT_AABB;
+		}
+		else if (state.getValue(PROPERTY_VARIANT) == NORMAL)
+		{
+			return GRASS_NORMAL_AABB;
+		}
+		else if (state.getValue(PROPERTY_VARIANT) == LONG)
+		{
+			return GRASS_LONG_AABB;
+		}
+
+		return super.getBoundingBox(state, source, pos);
 	}
 
 	@Override

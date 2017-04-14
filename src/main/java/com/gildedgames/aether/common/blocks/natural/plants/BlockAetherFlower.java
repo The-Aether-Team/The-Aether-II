@@ -76,6 +76,12 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockVariant
 	}
 
 	@Override
+	public EnumOffsetType getOffsetType()
+	{
+		return EnumOffsetType.XZ;
+	}
+	
+	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
