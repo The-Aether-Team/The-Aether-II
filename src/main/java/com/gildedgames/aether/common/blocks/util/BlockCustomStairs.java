@@ -14,7 +14,10 @@ public class BlockCustomStairs extends BlockStairs
 
 		final Block block = state.getBlock();
 
-		BlocksAether.applyPostRegistration(() -> BlockCustomStairs.this.setHarvestLevel(block.getHarvestTool(state), block.getHarvestLevel(state)));
+		BlocksAether.applyPostRegistration(() ->
+				BlockCustomStairs.this.setHarvestLevel(block.getHarvestTool(state), block.getHarvestLevel(state)));
+
+		this.useNeighborBrightness = true;
 	}
 
 }

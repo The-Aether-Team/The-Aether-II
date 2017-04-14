@@ -44,6 +44,8 @@ public class BlockCustomSlab extends Block
 		float blockHardness = ObfuscationReflectionHelper.getPrivateValue(Block.class, block, ReflectionAether.BLOCK_HARDNESS.getMappings());
 
 		this.setHardness(blockHardness);
+
+		this.useNeighborBrightness = true;
 	}
 
 	@Override
