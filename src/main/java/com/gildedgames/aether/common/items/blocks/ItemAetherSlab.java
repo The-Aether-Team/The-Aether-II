@@ -1,7 +1,9 @@
 package com.gildedgames.aether.common.items.blocks;
 
 import com.gildedgames.aether.common.blocks.util.BlockCustomSlab;
+import com.gildedgames.aether.common.blocks.util.BlockCustomSlab.EnumSlabPart;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,81 +27,97 @@ public class ItemAetherSlab extends ItemBlock
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing,
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing,
 			float hitX, float hitY, float hitZ)
 	{
 		ItemStack stack = player.getHeldItem(hand);
 
-		if (stack.getCount() != 0 && player.canPlayerEdit(pos.offset(facing), facing, stack))
+		BlockPos target = pos;
+
+		IBlockState state = world.getBlockState(pos);
+
+		if (state.getBlock() == this.block && state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE) != EnumSlabPart.FULL_BLOCK)
 		{
-			IBlockState state = worldIn.getBlockState(pos);
+			EnumSlabPart part = state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE);
 
-			if (state.getBlock() == this.block)
+			if ((part == EnumSlabPart.BOTTOM_HALF && facing == EnumFacing.UP) ||
+					(part == EnumSlabPart.TOP_HALF && facing == EnumFacing.DOWN))
 			{
-				BlockCustomSlab.SlabState slabState = state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE);
+				IBlockState newState = state.withProperty(BlockCustomSlab.PROPERTY_SLAB_STATE, EnumSlabPart.FULL_BLOCK);
 
-				if ((facing == EnumFacing.UP && slabState == BlockCustomSlab.SlabState.BOTTOM_HALF
-						|| facing == EnumFacing.DOWN && slabState == BlockCustomSlab.SlabState.TOP_HALF))
+				if (player.canPlayerEdit(target, facing, stack) && world.setBlockState(target, newState, 11))
 				{
-					IBlockState placeState = this.block.getDefaultState().withProperty(BlockCustomSlab.PROPERTY_SLAB_STATE, BlockCustomSlab.SlabState.FULL_BLOCK);
-
-					AxisAlignedBB bounds = placeState.getCollisionBoundingBox(worldIn, pos);
-
-					if (bounds != Block.NULL_AABB && worldIn.checkNoEntityCollision(bounds.offset(pos))
-							&& worldIn.setBlockState(pos, placeState, 11))
-					{
-						SoundType soundtype = this.block.getSoundType();
-						worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS,
-								(soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
-
-						stack.shrink(1);
-					}
+					stack.shrink(1);
 
 					return EnumActionResult.SUCCESS;
 				}
 			}
-
-			return this.tryPlace(player, stack, worldIn, pos.offset(facing)) ? EnumActionResult.SUCCESS : super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 		}
 		else
 		{
-			return EnumActionResult.FAIL;
+			target = pos.offset(facing);
+			state = world.getBlockState(target);
+
+			if (state.getBlock() == this.block)
+			{
+				EnumSlabPart part = state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE);
+
+				if (part != EnumSlabPart.FULL_BLOCK)
+				{
+					IBlockState newState = state.withProperty(BlockCustomSlab.PROPERTY_SLAB_STATE, EnumSlabPart.FULL_BLOCK);
+
+					if (player.canPlayerEdit(target, facing, stack) && world.setBlockState(target, newState, 11))
+					{
+						stack.shrink(1);
+
+						return EnumActionResult.SUCCESS;
+					}
+				}
+			}
 		}
+
+		return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side, EntityPlayer player, ItemStack stack)
+	public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing side, EntityPlayer player, ItemStack stack)
 	{
-		IBlockState state = worldIn.getBlockState(pos);
+		BlockPos blockpos = pos;
 
-		if (state.getBlock() == this.block && state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE) != BlockCustomSlab.SlabState.FULL_BLOCK)
+		IBlockState state = world.getBlockState(pos);
+
+		if (state.getBlock() == this.block && state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE) != EnumSlabPart.FULL_BLOCK)
 		{
-			boolean flag = state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE) == BlockCustomSlab.SlabState.TOP_HALF;
+			boolean flag = state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE) == EnumSlabPart.TOP_HALF;
 
-			if ((side == EnumFacing.UP && !flag || side == EnumFacing.DOWN && flag))
+			if ((side == EnumFacing.UP && !flag || side == EnumFacing.DOWN && flag) && state.getBlock() == this.block)
 			{
 				return true;
 			}
 		}
 
-		return state.getBlock() == this.block || super.canPlaceBlockOnSide(worldIn, pos, side, player, stack);
+		pos = pos.offset(side);
+
+		IBlockState offsetState = world.getBlockState(pos);
+
+		return offsetState.getBlock() == this.block || super.canPlaceBlockOnSide(world, blockpos, side, player, stack);
 	}
 
-	private boolean tryPlace(EntityPlayer player, ItemStack stack, World worldIn, BlockPos pos)
+	private boolean tryPlace(EntityPlayer player, ItemStack stack, World world, BlockPos pos)
 	{
-		IBlockState iblockstate = worldIn.getBlockState(pos);
+		IBlockState iblockstate = world.getBlockState(pos);
 
 		if (iblockstate.getBlock() == this.block)
 		{
 			IBlockState state = this.block.getDefaultState();
 
-			AxisAlignedBB bounds = state.getCollisionBoundingBox(worldIn, pos);
+			AxisAlignedBB bounds = state.getCollisionBoundingBox(world, pos);
 
-			if (bounds != Block.NULL_AABB && worldIn.checkNoEntityCollision(bounds.offset(pos)) && worldIn.setBlockState(pos, state, 11))
+			if (bounds != Block.NULL_AABB && world.checkNoEntityCollision(bounds.offset(pos)) && world.setBlockState(pos, state, 11))
 			{
 				SoundType soundtype = this.block.getSoundType();
-				worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS,
+				world.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS,
 						(soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 
 				stack.shrink(1);
