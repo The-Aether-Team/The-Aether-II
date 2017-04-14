@@ -25,15 +25,7 @@ import java.util.Collections;
 
 public class EntitiesAether
 {
-	private static Collection<ResourceLocation> registeredEggs;
-
-	static
-	{
-		if (AetherCore.isClient())
-		{
-			registeredEggs = new ArrayList<>();
-		}
-	}
+	private static final Collection<ResourceLocation> registeredEggs = new ArrayList<>();
 
 	private static int NEXT_ID = 0;
 
@@ -76,28 +68,24 @@ public class EntitiesAether
 	private static void registerLivingEntityWithEgg(Class<? extends Entity> entity, String name, int eggPrimaryColor, int eggSecondaryColor)
 	{
 		ResourceLocation id = AetherCore.getResource(name);
-		name = AetherCore.MOD_ID + "." + name;
 
-		if (AetherCore.isClient())
-		{
-			EntityRegistry.registerModEntity(id, entity, name, NEXT_ID++, AetherCore.INSTANCE, 80, 3, true, eggPrimaryColor, eggSecondaryColor);
-
-			registeredEggs.add(id);
-		}
-		else
-		{
-			EntityRegistry.registerModEntity(id, entity, name, NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
-		}
+		EntityRegistry.registerModEntity(id, entity, EntitiesAether.getEntityName(name), NEXT_ID++, AetherCore.INSTANCE, 80, 3, true, eggPrimaryColor, eggSecondaryColor);
+		registeredEggs.add(id);
 	}
 
-	private static void registerLivingEntity(Class<? extends Entity> entity, String id)
+	private static void registerLivingEntity(Class<? extends Entity> entity, String name)
 	{
-		EntityRegistry.registerModEntity(AetherCore.getResource(id), entity, id, NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
+		EntityRegistry.registerModEntity(AetherCore.getResource(name), entity, EntitiesAether.getEntityName(name), NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 	}
 
-	private static void registerEntity(Class<? extends Entity> entity, String id, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates)
+	private static void registerEntity(Class<? extends Entity> entity, String name, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates)
 	{
-		EntityRegistry.registerModEntity(AetherCore.getResource(id), entity, id, NEXT_ID++, AetherCore.INSTANCE, trackingRange, updateFrequency, sendsVelocityUpdates);
+		EntityRegistry.registerModEntity(AetherCore.getResource(name), entity, EntitiesAether.getEntityName(name), NEXT_ID++, AetherCore.INSTANCE, trackingRange, updateFrequency, sendsVelocityUpdates);
+	}
+
+	private static String getEntityName(String name)
+	{
+		return AetherCore.MOD_ID + "." + name;
 	}
 
 	@SideOnly(Side.CLIENT)
