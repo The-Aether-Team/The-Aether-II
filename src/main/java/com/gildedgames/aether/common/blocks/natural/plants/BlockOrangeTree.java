@@ -220,7 +220,11 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 		}
 
 		world.setBlockToAir(pos);
-		world.setBlockToAir(adjPos);
+
+		if (world.getBlockState(adjPos).getBlock() == this)
+		{
+			world.setBlockToAir(adjPos);
+		}
 	}
 
 	@Override
