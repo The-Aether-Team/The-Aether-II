@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
+import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.entities.living.mobs.EntityAechorPlant;
 import com.gildedgames.aether.common.entities.living.passive.EntityCarrionSprout;
@@ -16,9 +17,11 @@ import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import com.gildedgames.aether.common.world.dimensions.aether.TeleporterAether;
 import com.gildedgames.aether.common.world.util.TeleporterGeneric;
 import com.google.common.collect.Lists;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -39,6 +42,7 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
@@ -60,7 +64,6 @@ import java.util.Random;
 
 public class CommonEvents
 {
-
 	@SubscribeEvent
 	public static void onBlockPlaced(BlockEvent.PlaceEvent event)
 	{
@@ -489,6 +492,28 @@ public class CommonEvents
 			}
 
 			event.setCanceled(true);
+		}
+	}
+
+	@SubscribeEvent
+	public static void onEntityFall(LivingFallEvent event)
+	{
+		EntityLivingBase ent = event.getEntityLiving();
+
+		if (ent.world.isRemote)
+		{
+			BlockPos pos = ent.getPosition().up();
+			IBlockState block = ent.world.getBlockState(pos);
+
+			while (block.getBlock() == Blocks.AIR)
+			{
+				block = ent.world.getBlockState(pos = pos.down());
+			}
+
+			if (block.getBlock() instanceof BlockAercloud && ((BlockAercloud.AercloudVariant) block.getProperties().get(BlockAercloud.PROPERTY_VARIANT)).hasSolidBottom())
+			{
+				event.setCanceled(true);
+			}
 		}
 	}
 
