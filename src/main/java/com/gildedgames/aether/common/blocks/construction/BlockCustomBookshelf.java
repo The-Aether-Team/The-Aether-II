@@ -5,25 +5,31 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockSkyrootBookshelf extends Block
+public class BlockCustomBookshelf extends Block
 {
-	public BlockSkyrootBookshelf()
+	public BlockCustomBookshelf(Material material)
 	{
-		super(Material.WOOD);
+		super(material);
 
 		this.setHardness(2.0F);
-
-		this.setHarvestLevel("axe", 0);
 	}
 
 	@Override
 	public int quantityDropped(Random random)
 	{
 		return 3;
+	}
+
+	@Override
+	public float getEnchantPowerBonus(World world, BlockPos pos)
+	{
+		return 1;
 	}
 
 	@Override

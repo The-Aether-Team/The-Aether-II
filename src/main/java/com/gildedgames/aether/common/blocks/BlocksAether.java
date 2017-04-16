@@ -9,7 +9,6 @@ import com.gildedgames.aether.common.blocks.construction.redstone.BlockSkyrootPr
 import com.gildedgames.aether.common.blocks.construction.signs.BlockStandingSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.signs.BlockWallSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockCustomWall;
-import com.gildedgames.aether.common.blocks.construction.walls.BlockDivineWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockScatterglassWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockSkyrootWall;
 import com.gildedgames.aether.common.blocks.containers.*;
@@ -216,9 +215,9 @@ public class BlocksAether
 
 	public static BlockCustomCarpet cloudwool_carpet = new BlockCustomCarpet(BlocksAether.cloudwool_block.getDefaultState());
 
-	public static Block skyroot_bookshelf = new BlockSkyrootBookshelf();
+	public static Block skyroot_bookshelf = new BlockCustomBookshelf(Material.WOOD);
 
-	public static Block holystone_bookshelf = new BlockHolystoneBookshelf();
+	public static Block holystone_bookshelf = new BlockCustomBookshelf(Material.ROCK);
 
 	public static BlockOutpostCampfire outpost_campfire = new BlockOutpostCampfire(Material.IRON);
 
@@ -488,6 +487,9 @@ public class BlocksAether
 		holystone_slab.setHarvestLevel("pickaxe", 0);
 		holystone_brick_slab.setHarvestLevel("pickaxe", 0);
 		icestone_slab.setHarvestLevel("pickaxe", 0);
+
+		holystone_bookshelf.setHarvestLevel("pickaxe", 0);
+		skyroot_bookshelf.setHarvestLevel("axe", 0);
 	}
 
 	private static void registerBlock(String name, Block block, ItemBlock item)
