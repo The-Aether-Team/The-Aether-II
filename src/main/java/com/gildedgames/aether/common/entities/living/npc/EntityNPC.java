@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.living.npc;
 
 import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -35,4 +36,9 @@ public abstract class EntityNPC extends EntityCreature
 		return false;
 	}
 
+	@Override
+	public boolean canBeLeashedTo(EntityPlayer player)
+	{
+		return false;
+	}
 }
