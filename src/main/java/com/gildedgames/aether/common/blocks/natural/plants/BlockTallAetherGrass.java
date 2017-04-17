@@ -70,7 +70,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
 	{
 		List<ItemStack> drops = new ArrayList<>();
-		drops.add(new ItemStack(this));
+		drops.add(new ItemStack(this, 1, this.getMetaFromState(world.getBlockState(pos))));
 
 		return drops;
 	}
