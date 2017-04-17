@@ -196,7 +196,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 				{
 					stack.shrink(1);
 				}
-				
+
 				return true;
 			}
 		}

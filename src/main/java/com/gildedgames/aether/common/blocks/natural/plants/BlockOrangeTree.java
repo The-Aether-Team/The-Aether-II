@@ -97,16 +97,28 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	@Override
 	protected void invalidateBlock(World world, BlockPos pos, IBlockState state)
 	{
-		BlockPos adjPos = state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos.down() : pos.up();
+		if (state.getValue(PROPERTY_STAGE) == STAGE_COUNT)
+		{
+			this.dropOranges(world, pos);
+		}
 
-		if (world.getBlockState(adjPos).getBlock() == this)
+		world.setBlockToAir(pos);
+	}
+
+	@Override
+	public boolean validatePosition(World world, BlockPos pos, IBlockState state)
+	{
+		if (state.getValue(PROPERTY_STAGE) >= 3)
 		{
-			this.destroyTree(world, pos, adjPos, true);
+			IBlockState adj = world.getBlockState(state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos.down() : pos.up());
+
+			if (adj.getBlock() != this)
+			{
+				return false;
+			}
 		}
-		else
-		{
-			world.setBlockToAir(pos);
-		}
+
+		return super.validatePosition(world, pos, state);
 	}
 
 	@Override

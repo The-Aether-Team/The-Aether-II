@@ -34,15 +34,15 @@ public class BlockAetherPlant extends Block
 	@Override
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos)
 	{
-		this.validatePosition(world, pos, state);
-	}
-
-	public void validatePosition(World world, BlockPos pos, IBlockState state)
-	{
-		if (!this.canPlaceBlockAt(world, pos))
+		if (!this.validatePosition(world, pos, state))
 		{
 			this.invalidateBlock(world, pos, state);
 		}
+	}
+
+	public boolean validatePosition(World world, BlockPos pos, IBlockState state)
+	{
+		return this.canPlaceBlockAt(world, pos);
 	}
 
 	protected void invalidateBlock(World world, BlockPos pos, IBlockState state)
