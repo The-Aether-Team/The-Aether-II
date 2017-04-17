@@ -23,6 +23,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -32,6 +33,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
@@ -167,51 +169,55 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand)
 	{
-		if (!super.processInteract(player, hand))
+		if (super.processInteract(player, hand))
 		{
-			if (!player.world.isRemote)
+			return true;
+		}
+
+		if (!this.isRaisedByPlayer())
+		{
+			return false;
+		}
+
+		ItemStack stack = player.getHeldItem(hand);
+
+		if (this.isChild())
+		{
+			if (this.isHungry() && stack.getItem() == ItemsAether.aechor_petal)
 			{
-				ItemStack stack = player.getHeldItem(hand);
+				this.setIsHungry(false);
+				this.hungryTimer.reset();
 
-				if (this.isChild())
+				this.setHealth(this.getMaxHealth());
+
+				this.setFoodEaten(this.getFoodEaten() + 1);
+
+				if (!player.capabilities.isCreativeMode)
 				{
-					if (this.isRaisedByPlayer() && stack.getItem() == ItemsAether.aechor_petal && this.isHungry())
-					{
-						if (!player.capabilities.isCreativeMode)
-						{
-							stack.shrink(1);
-						}
-
-						this.setIsHungry(false);
-						this.hungryTimer.reset();
-
-						this.setHealth(this.getMaxHealth());
-
-						this.setFoodEaten(this.getFoodEaten() + 1);
-
-						return true;
-					}
+					stack.shrink(1);
 				}
-				else
+				
+				return true;
+			}
+		}
+		else
+		{
+			if (!this.isSaddled() && stack.getItem() == Items.SADDLE)
+			{
+				this.setIsSaddled(true);
+
+				this.world.playSound(player, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_PIG_SADDLE, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+
+				if (!player.capabilities.isCreativeMode)
 				{
-					if (this.isRaisedByPlayer() && !this.isSaddled() && stack.getItem() == Items.SADDLE)
-					{
-						this.setIsSaddled(true);
-
-						if (!player.capabilities.isCreativeMode)
-						{
-							stack.shrink(1);
-						}
-
-						return true;
-					}
+					stack.shrink(1);
 				}
 
-				return false;
+				return true;
 			}
 		}
 
-		return true;
+		return false;
 	}
 
 	@Override
@@ -576,19 +582,19 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	}
 
 	@Override
-	protected net.minecraft.util.SoundEvent getAmbientSound()
+	protected SoundEvent getAmbientSound()
 	{
 		return SoundsAether.moa_ambient;
 	}
 
 	@Override
-	protected net.minecraft.util.SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound()
 	{
 		return SoundsAether.moa_hurt;
 	}
 
 	@Override
-	protected net.minecraft.util.SoundEvent getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
 		return SoundsAether.moa_hurt;
 	}
