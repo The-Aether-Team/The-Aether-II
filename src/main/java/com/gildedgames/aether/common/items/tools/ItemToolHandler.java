@@ -2,10 +2,14 @@ package com.gildedgames.aether.common.items.tools;
 
 import com.gildedgames.aether.common.items.tools.handlers.*;
 import com.gildedgames.aether.common.registry.content.MaterialsAether;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -125,5 +129,37 @@ public class ItemToolHandler
 
 			event.setNewSpeed(handler.getBreakSpeed(stack, event.getEntityPlayer().getEntityWorld(), event.getState(), event.getPos(), event.getEntityPlayer(), event.getOriginalSpeed()));
 		}
+	}
+
+	@SubscribeEvent
+	public static void onEntityHit(AttackEntityEvent event)
+	{
+		ItemStack stack = event.getEntityLiving().getHeldItem(EnumHand.MAIN_HAND);
+
+		if (stack.getItem() instanceof ItemTool)
+		{
+			Item.ToolMaterial material = ((ItemTool) stack.getItem()).getToolMaterial();
+
+			IToolEventHandler handler = handlers.get(material);
+
+			if (handler == null)
+			{
+				return;
+			}
+
+			handler.onEntityHit(stack, event.getTarget(), event.getEntityLiving());
+		}
+	}
+
+	public static boolean onEntityHit(ItemStack stack, Item.ToolMaterial material, EntityLivingBase target, EntityLivingBase attacker)
+	{
+		IToolEventHandler handler = handlers.get(material);
+
+		if (handler != null)
+		{
+			handler.onEntityHit(stack, target, attacker);
+		}
+
+		return true;
 	}
 }

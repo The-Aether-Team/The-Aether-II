@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.items.tools.handlers;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -18,6 +20,8 @@ public interface IToolEventHandler
 	void onRightClickItem(ItemStack stack, World world, EntityPlayer player);
 
 	void addInformation(ItemStack stack, List<String> tooltip);
+
+	void onEntityHit(ItemStack stack, Entity target, EntityLivingBase attacker);
 
 	float getBreakSpeed(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityPlayer player, float original);
 }

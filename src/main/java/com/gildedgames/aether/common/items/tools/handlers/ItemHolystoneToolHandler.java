@@ -1,8 +1,11 @@
 package com.gildedgames.aether.common.items.tools.handlers;
 
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.weapons.swords.ItemHolystoneSword;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -41,6 +44,12 @@ public class ItemHolystoneToolHandler implements IToolEventHandler
 		tooltip.add(1, String.format("%s: %s",
 				TextFormatting.BLUE + I18n.format("item.aether.tooltip.ability"),
 				TextFormatting.WHITE + I18n.format("item.aether.tool.holystone.ability.desc")));
+	}
+
+	@Override
+	public void onEntityHit(ItemStack stack, Entity target, EntityLivingBase attacker)
+	{
+		ItemHolystoneSword.trySpawnAmbrosium(stack, target, attacker);
 	}
 
 	@Override

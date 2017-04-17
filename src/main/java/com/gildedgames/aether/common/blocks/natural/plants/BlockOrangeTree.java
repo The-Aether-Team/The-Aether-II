@@ -3,6 +3,8 @@ package com.gildedgames.aether.common.blocks.natural.plants;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.registry.content.MaterialsAether;
+import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -13,11 +15,16 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.StatList;
+import net.minecraft.item.ItemTool;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
@@ -44,7 +51,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	@Override
 	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos)
 	{
-		if (blockState.getValue(PROPERTY_IS_TOP_BLOCK) && blockState.getValue(PROPERTY_STAGE) >= STAGE_COUNT)
+		if (blockState.getValue(PROPERTY_STAGE) >= STAGE_COUNT)
 		{
 			return 0.0f;
 		}
@@ -88,24 +95,6 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te, ItemStack stack)
-	{
-		player.addStat(StatList.getBlockStats(this));
-		player.addExhaustion(0.025F);
-	}
-
-	@Override
-	protected void invalidateBlock(World world, BlockPos pos, IBlockState state)
-	{
-		if (state.getValue(PROPERTY_STAGE) == STAGE_COUNT)
-		{
-			this.dropOranges(world, pos);
-		}
-
-		world.setBlockToAir(pos);
-	}
-
-	@Override
 	public boolean validatePosition(World world, BlockPos pos, IBlockState state)
 	{
 		if (state.getValue(PROPERTY_STAGE) >= 3)
@@ -122,6 +111,14 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
+	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack)
+	{
+		this.destroyTree(worldIn, pos, state);
+
+		super.harvestBlock(worldIn, player, pos, state, te, stack);
+	}
+
+	@Override
 	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
 	{
 		boolean isRoot = !state.getValue(PROPERTY_IS_TOP_BLOCK);
@@ -132,13 +129,16 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 		{
 			if (player.capabilities.isCreativeMode)
 			{
-				world.setBlockToAir(pos);
-				world.setBlockToAir(adjPos);
-				return false;
+				this.destroyTree(world, pos, state);
+
+				return true;
 			}
 			else
 			{
-				this.dropOranges(world, pos);
+				for (ItemStack item : this.getFruitDrops(world, state, player))
+				{
+					Block.spawnAsEntity(world, pos, item);
+				}
 			}
 
 			IBlockState adjState = world.getBlockState(adjPos);
@@ -153,7 +153,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 			return false;
 		}
 
-		this.destroyTree(world, pos, adjPos, !player.capabilities.isCreativeMode);
+		this.destroyTree(world, pos, state);
 
 		return true;
 	}
@@ -204,39 +204,65 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 		return (state.getBlock() == this && !state.getValue(PROPERTY_IS_TOP_BLOCK) && state.getValue(PROPERTY_STAGE) >= 3) || super.isSuitableSoilBlock(state);
 	}
 
-	private void dropOranges(World world, BlockPos pos)
+	private ArrayList<ItemStack> getFruitDrops(IBlockAccess world, IBlockState state, @Nullable EntityPlayer player)
 	{
-		IBlockState state = world.getBlockState(pos);
+		/* </shrug> */
+		Random rand = world instanceof World ? ((World) world).rand : new Random();
 
-		int count = world.rand.nextInt(3) + 1;
+		int count = rand.nextInt(3) + 1;
 
-		if (state.getBlock() == BlocksAether.aether_grass
-				&& state.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED)
+		if (state.getBlock() == BlocksAether.aether_grass && state.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED)
 		{
 			count += 1;
 		}
 
-		Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.orange, count));
-	}
-
-	private void destroyTree(World world, BlockPos pos, BlockPos adjPos, boolean doDrops)
-	{
-		if (doDrops)
+		if (player != null && player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemTool)
 		{
-			Block.spawnAsEntity(world, pos, new ItemStack(BlocksAether.orange_tree));
+			ItemTool tool = (ItemTool) player.getHeldItem(EnumHand.MAIN_HAND).getItem();
 
-			if (world.getBlockState(pos).getValue(PROPERTY_STAGE) >= STAGE_COUNT)
+			if (tool.getToolMaterial() == MaterialsAether.SKYROOT_TOOL)
 			{
-				this.dropOranges(world, pos);
+				count *= 2;
 			}
 		}
 
+		return Lists.newArrayList(new ItemStack(ItemsAether.orange, count));
+	}
+
+	private void destroyTree(World world, BlockPos pos, IBlockState state)
+	{
 		world.setBlockToAir(pos);
+
+		BlockPos adjPos = state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos.down() : pos.up();
 
 		if (world.getBlockState(adjPos).getBlock() == this)
 		{
 			world.setBlockToAir(adjPos);
 		}
+	}
+
+	@Override
+	protected void invalidateBlock(World world, BlockPos pos, IBlockState state)
+	{
+		if (world.getBlockState(state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos.down() : pos.up()).getBlock() == this)
+		{
+			this.dropBlockAsItem(world, pos, state, 0);
+		}
+
+		this.destroyTree(world, pos, state);
+	}
+
+	@Override
+	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	{
+		List<ItemStack> items = super.getDrops(world, pos, state, fortune);
+
+		if (state.getValue(PROPERTY_STAGE) == STAGE_COUNT)
+		{
+			items.addAll(this.getFruitDrops(world, state, null));
+		}
+
+		return items;
 	}
 
 	@Override

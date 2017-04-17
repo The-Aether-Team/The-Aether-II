@@ -78,7 +78,8 @@ public class EntityEdison extends EntityNPC
 			this.setHomePosAndDistance(this.spawned, 16);
 		}
 
-		if (!this.isWithinHomeDistanceCurrentPosition())
+		// Attempt once every 5 seconds
+		if (this.ticksExisted % 100 == 0 && !this.isWithinHomeDistanceCurrentPosition())
 		{
 			this.attemptTeleport(this.getHomePosition().getX(), this.getHomePosition().getY(), this.getHomePosition().getZ());
 		}

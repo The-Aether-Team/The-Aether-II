@@ -4,6 +4,8 @@ import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -86,6 +88,12 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 		tooltip.add(1, String.format("%s: %s",
 				TextFormatting.BLUE + I18n.format("item.aether.tooltip.ability"),
 				TextFormatting.WHITE + I18n.format("item.aether.tool.gravitite.ability.desc")));
+	}
+
+	@Override
+	public void onEntityHit(ItemStack stack, Entity target, EntityLivingBase attacker)
+	{
+
 	}
 
 	@Override

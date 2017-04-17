@@ -2,6 +2,8 @@ package com.gildedgames.aether.common.items.tools.handlers;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -37,6 +39,12 @@ public class ItemZaniteToolHandler implements IToolEventHandler
 		tooltip.add(1, String.format("%s: %s",
 				TextFormatting.BLUE + I18n.format("item.aether.tooltip.ability"),
 				TextFormatting.WHITE + I18n.format("item.aether.tool.zanite.ability.desc")));
+	}
+
+	@Override
+	public void onEntityHit(ItemStack stack, Entity target, EntityLivingBase attacker)
+	{
+
 	}
 
 	@Override
