@@ -15,7 +15,6 @@ import net.minecraft.world.World;
 
 public class EntityEdison extends EntityNPC
 {
-
 	private BlockPos spawned;
 
 	public EntityEdison(World worldIn)
@@ -76,7 +75,12 @@ public class EntityEdison extends EntityNPC
 		{
 			this.spawned = this.getPosition();
 
-			this.setHomePosAndDistance(this.spawned, 3);
+			this.setHomePosAndDistance(this.spawned, 16);
+		}
+
+		if (!this.isWithinHomeDistanceCurrentPosition())
+		{
+			this.attemptTeleport(this.getHomePosition().getX(), this.getHomePosition().getY(), this.getHomePosition().getZ());
 		}
 
 		super.onUpdate();

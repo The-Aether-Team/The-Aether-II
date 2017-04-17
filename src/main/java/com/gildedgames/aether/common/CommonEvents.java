@@ -9,6 +9,7 @@ import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.entities.living.mobs.EntityAechorPlant;
+import com.gildedgames.aether.common.entities.living.npc.EntityNPC;
 import com.gildedgames.aether.common.entities.living.passive.EntityCarrionSprout;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherShield;
@@ -40,6 +41,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
@@ -570,6 +572,15 @@ public class CommonEvents
 					}
 				}
 			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onEntityMounted(EntityMountEvent event)
+	{
+		if (event.getEntityMounting() instanceof EntityNPC)
+		{
+			event.setCanceled(true);
 		}
 	}
 }
