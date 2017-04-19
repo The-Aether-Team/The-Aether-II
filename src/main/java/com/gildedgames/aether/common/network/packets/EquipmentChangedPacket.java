@@ -82,7 +82,7 @@ public class EquipmentChangedPacket implements IMessage
 		}
 	}
 
-	public static class Handler extends MessageHandlerClient<EquipmentChangedPacket, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<EquipmentChangedPacket, IMessage>
 	{
 		@Override
 		public IMessage onMessage(EquipmentChangedPacket message, EntityPlayer player)

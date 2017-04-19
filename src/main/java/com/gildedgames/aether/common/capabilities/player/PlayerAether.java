@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.capabilities.player;
 
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
+import com.gildedgames.aether.api.dialog.IDialogController;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.player.modules.*;
@@ -46,6 +47,8 @@ public class PlayerAether implements IPlayerAether
 
 	private final EquipmentModule equipmentModule;
 
+	private final DialogModule dialogModule;
+
 	private boolean hasDiedInAetherBefore;
 
 	public PlayerAether(EntityPlayer entity)
@@ -58,6 +61,7 @@ public class PlayerAether implements IPlayerAether
 		this.teleportingModule = new TeleportingModule(this);
 		this.parachuteModule = new ParachuteModule(this);
 		this.equipmentModule = new EquipmentModule(this);
+		this.dialogModule = new DialogModule(this);
 
 		Collection<PlayerAetherModule> modules = new ArrayList<>();
 		modules.add(this.companionModule);
@@ -66,6 +70,7 @@ public class PlayerAether implements IPlayerAether
 		modules.add(this.teleportingModule);
 		modules.add(this.parachuteModule);
 		modules.add(this.equipmentModule);
+		modules.add(this.dialogModule);
 
 		this.modules = modules.toArray(new PlayerAetherModule[modules.size()]);
 	}
@@ -169,6 +174,12 @@ public class PlayerAether implements IPlayerAether
 	public IInventoryEquipment getEquipmentInventory()
 	{
 		return this.equipmentModule.getInventory();
+	}
+
+	@Override
+	public IDialogController getDialogController()
+	{
+		return this.dialogModule;
 	}
 
 	@Override

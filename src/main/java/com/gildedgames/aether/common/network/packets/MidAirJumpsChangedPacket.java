@@ -33,7 +33,7 @@ public class MidAirJumpsChangedPacket implements IMessage
 		buf.writeInt(this.midAirJumpsAllowed);
 	}
 
-	public static class Handler extends MessageHandlerClient<MidAirJumpsChangedPacket, MidAirJumpsChangedPacket>
+	public static class HandlerClient extends MessageHandlerClient<MidAirJumpsChangedPacket, MidAirJumpsChangedPacket>
 	{
 		@Override
 		public MidAirJumpsChangedPacket onMessage(MidAirJumpsChangedPacket message, EntityPlayer player)

@@ -1,12 +1,10 @@
 package com.gildedgames.aether.client.gui.dialog;
 
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.dialog.IDialogButton;
+import com.gildedgames.aether.api.dialog.IDialogButton;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.util.ResourceLocation;
 
 public class GuiDialogButton extends GuiButton
 {
@@ -41,7 +39,7 @@ public class GuiDialogButton extends GuiButton
 
 			FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
 
-			String label = this.buttonData.getLabel().getFormattedText();
+			String label = this.buttonData.getLocalizedLabel().getFormattedText();
 
 			this.width = fontRenderer.getStringWidth(label) + 5;
 

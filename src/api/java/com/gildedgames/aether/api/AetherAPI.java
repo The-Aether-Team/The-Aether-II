@@ -1,5 +1,6 @@
 package com.gildedgames.aether.api;
 
+import com.gildedgames.aether.api.dialog.IDialogManager;
 import com.gildedgames.aether.api.registry.IEquipmentRegistry;
 import com.gildedgames.aether.api.registry.IItemPropertiesRegistry;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
@@ -38,6 +39,11 @@ public class AetherAPI
 	public static IEquipmentRegistry equipment()
 	{
 		return AetherAPI.services().getEquipmentRegistry();
+	}
+
+	public static IDialogManager dialog()
+	{
+		return AetherAPI.services().getDialogManager();
 	}
 
 	public static void registerProvider(IAetherServiceLocator services)

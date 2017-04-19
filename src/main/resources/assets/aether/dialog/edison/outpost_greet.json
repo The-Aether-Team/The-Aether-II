@@ -1,0 +1,63 @@
+{
+	"nodes": [
+		{
+			"name": "#start",
+			"lines": [
+				{ "speaker": "aether:edison", "text": "edison.them.outpost_start" }
+			],
+			"buttons": [
+				{ "label": "edison.us.who_are_you", "action": { "type": "navigate", "target": "what.edison" } },
+				{ "label": "edison.us.what_is_this_place", "action": { "type": "navigate", "target": "what.this_place" } },
+				{ "label": "edison.us.why_am_i_here", "action": { "type": "navigate", "target": "why.me" } },
+				{ "label": "edison.us.goodbye", "action": { "type": "exit" } }
+			]
+		},
+		{
+			"name": "what.edison",
+			"lines": [
+				{ "speaker": "aether:edison", "text": "edison.them.who_are_you" }
+			]
+		},
+		{
+			"name": "what.this_place",
+			"lines": [
+				{ "speaker": "aether:edison", "text": "edison.them.what_is_this_place" }
+			],
+			"buttons": [
+				{ "label": "edison.us.the_world_were_in", "action": { "type": "navigate", "target": "what.the_world" } },
+				{ "label": "edison.us.this_outpost", "action": { "type": "navigate", "target": "what.the_outpost" } }
+			]
+		},
+		{
+			"name": "what.the_world",
+			"lines": [
+				{ "speaker": "aether:edison", "text": "edison.them.the_world_were_in.1" },
+				{ "speaker": "aether:edison", "text": "edison.them.the_world_were_in.2" }
+			]
+		},
+		{
+			"name": "what.the_outpost",
+			"lines": [
+				{ "speaker": "aether:edison", "text": "edison.them.this_outpost.1" },
+				{ "speaker": "aether:edison", "text": "edison.them.this_outpost.2" }
+			]
+		},
+		{
+			"name": "what.valkyries",
+			"lines": [
+				{ "speaker": "aether:edison", "text": "edison.them.valkyries.1" },
+				{ "speaker": "aether:edison", "text": "edison.them.valkyries.2" },
+				{ "speaker": "aether:edison", "text": "edison.them.valkyries.3" }
+			]
+		},
+		{
+			"name": "why.me",
+			"lines": [
+				{ "speaker": "aether:edison", "text": "edison.them.why_am_i_here.1" },
+				{ "speaker": "aether:edison", "text": "edison.them.why_am_i_here.2" },
+				{ "speaker": "aether:edison", "text": "edison.them.why_am_i_here.3" },
+				{ "speaker": "aether:edison", "text": "edison.them.why_am_i_here.4" }
+			]
+		}
+	]
+}

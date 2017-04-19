@@ -1,5 +1,6 @@
 package com.gildedgames.aether.api;
 
+import com.gildedgames.aether.api.dialog.IDialogManager;
 import com.gildedgames.aether.api.registry.IEquipmentRegistry;
 import com.gildedgames.aether.api.registry.IItemPropertiesRegistry;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
@@ -19,4 +20,6 @@ public interface IAetherServiceLocator
 	IItemPropertiesRegistry getItemPropertiesRegistry();
 
 	IEquipmentRegistry getEquipmentRegistry();
+
+	IDialogManager getDialogManager();
 }

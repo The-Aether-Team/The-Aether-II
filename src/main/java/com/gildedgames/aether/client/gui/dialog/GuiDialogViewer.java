@@ -1,42 +1,32 @@
 package com.gildedgames.aether.client.gui.dialog;
 
+import com.gildedgames.aether.api.dialog.*;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.containers.ContainerDialogController;
-import com.gildedgames.aether.common.dialog.*;
 import com.gildedgames.aether.common.entities.living.npc.EntityEdison;
 import com.gildedgames.aether.common.entities.living.npc.EntityNPC;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.*;
 import org.lwjgl.Sys;
 
 import java.io.IOException;
 import java.util.Collection;
 
-public class GuiDialogController extends GuiContainer implements IDialogController
+public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 {
 
 	private static final ResourceLocation NEXT_ARROW = AetherCore.getResource("textures/gui/conversation/next_arrow.png");
 
-	private final EntityPlayer player;
-
-	private DialogTree scene;
-
-	private IDialogNode node;
+	private final IDialogController controller;
 
 	private GuiTextBox topTextBox, bottomTextBox, namePlate;
-
-	private int textIndex;
 
 	private double nextArrowAnim, prevTime;
 
@@ -44,29 +34,21 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 
 	private EntityNPC npc;
 
-	public GuiDialogController(EntityPlayer player)
-	{
-		super(new ContainerDialogController(player));
+	private IDialogNode node;
 
-		this.player = player;
+	public GuiDialogViewer(IDialogController controller)
+	{
+		// This is needed, otherwise there's a 50/50 chance the GUI will crash when opening. No idea why.
+		this.mc = Minecraft.getMinecraft();
+
+		this.controller = controller;
+		this.controller.addListener(this);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
+	public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	{
-		/*GlStateManager.pushMatrix();
-		Minecraft.getMinecraft().renderEngine.bindTexture(PORTRAIT);
-
-		double scale = 0.2;
-
-		double scaledWidth = 780 * scale;
-		double scaledHeight = 1172 * scale;
-
-		GlStateManager.translate((this.width / 2) - (scaledWidth / 2) + 40, this.height - scaledHeight, 0);
-		GlStateManager.scale(scale, scale, scale);
-
-		Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, 780, 1172, 780, 1172);
-		GlStateManager.popMatrix();*/
+		this.drawDefaultBackground();
 
 		if (this.npc == null)
 		{
@@ -82,11 +64,14 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 				(this.width / 2) + 40, this.height, 120, -mouseX + (this.width / 2) + 40, (-mouseY / 10.0F), this.npc);
 
 		GlStateManager.translate(0, 0, 100F);
+
 		Gui.drawRect(0, this.height - 90, this.width, this.height, Integer.MIN_VALUE);
+
+		super.drawScreen(mouseX, mouseY, partialTicks);
 
 		GlStateManager.popMatrix();
 
-		if (this.textIndex + 1 < this.node.getContent().size() || this.node.getButtons().isEmpty())
+		if (!this.controller.isNodeFinished() || (this.controller.isNodeFinished() && this.node.getButtons().isEmpty()))
 		{
 			GlStateManager.pushMatrix();
 
@@ -120,7 +105,7 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 
 			Minecraft.getMinecraft().renderEngine.bindTexture(NEXT_ARROW);
 
-			if (this.textIndex + 1 >= this.node.getContent().size() && this.node.getButtons().size() > 0)
+			if (this.controller.isNodeFinished() && this.controller.getCurrentNode().getButtons().size() > 0)
 			{
 				Gui.drawModalRectWithCustomSizedTexture(
 						this.topTextBox.xPosition + this.topTextBox.width + 5,
@@ -144,47 +129,20 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 		{
 			GuiDialogButton dialogButton = (GuiDialogButton) button;
 
-			dialogButton.getButtonData().onClicked(this);
+			this.controller.activateButton(dialogButton.getButtonData());
+
+			if (this.controller.getCurrentScene() == null)
+			{
+				Minecraft.getMinecraft().displayGuiScreen(null);
+				return;
+			}
 		}
 	}
 
 	@Override
 	public void initGui()
 	{
-		this.buildGui(this.node);
-	}
-
-	@Override
-	public void show(DialogTree scene)
-	{
-		this.scene = scene;
-
-		this.buildGui(scene.getRootNode());
-	}
-
-	@Override
-	public DialogTree getCurrentScene()
-	{
-		return this.scene;
-	}
-
-	@Override
-	public void setNode(String nodeId)
-	{
-		IDialogNode node = this.scene.getNode(nodeId);
-
-		if (node == null)
-		{
-			throw new IllegalArgumentException("Node with name '" + nodeId + "' not found");
-		}
-
-		this.buildGui(node);
-	}
-
-	@Override
-	public void close()
-	{
-		Minecraft.getMinecraft().displayGuiScreen(null);
+		this.buildGui(this.controller.getCurrentNode());
 	}
 
 	private void resetGui()
@@ -197,7 +155,6 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 		if (this.node != node)
 		{
 			this.canApplyNextAction = false;
-			this.textIndex = 0;
 		}
 
 		this.node = node;
@@ -210,8 +167,6 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 		}
 
 		Collection<IDialogButton> buttons = node.getButtons();
-
-		Collection<ITextComponent> text = node.getContent();
 
 		int baseBoxSize = 350;
 		boolean resize = this.width - 40 > baseBoxSize;
@@ -229,7 +184,7 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 		this.topTextBox.showBackdrop = true;
 		this.topTextBox.bottomToTop = true;
 
-		if (buttons.size() > 0 && this.textIndex + 1 >= text.size())
+		if (this.controller.isNodeFinished())
 		{
 			int index = 0;
 
@@ -241,56 +196,40 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 			}
 		}
 
-		if (this.textIndex < text.size())
+		IDialogLine line = this.controller.getCurrentLine();
+
+		if (this.controller.isNodeFinished() && this.controller.getCurrentNode().getButtons().size() > 0)
 		{
-			int i = 0;
-
-			for (ITextComponent t : text)
-			{
-				if (i == this.textIndex)
-				{
-					if (this.textIndex + 1 >= text.size() && this.node.getButtons().size() > 0)
-					{
-						this.topTextBox.setText(t);
-					}
-					else
-					{
-						this.bottomTextBox.setText(t);
-					}
-
-					break;
-				}
-
-				i++;
-			}
+			this.topTextBox.setText(line.getLocalizedBody());
+		}
+		else
+		{
+			this.bottomTextBox.setText(line.getLocalizedBody());
 		}
 
-		if (this.node.getSpeaker() != null)
+		if (this.controller.getCurrentLine().getSpeaker().isPresent())
 		{
 			this.fontRenderer = Minecraft.getMinecraft().fontRenderer;
 
-			boolean topText = this.textIndex + 1 >= this.node.getContent().size() && this.node.getButtons().size() > 0;
-			String name = I18n.format(this.node.getSpeaker().getResourcePath() + ".name");
+			boolean topText = this.controller.isNodeFinished() && this.controller.getCurrentNode().getButtons().size() > 0;
+			String name = I18n.format(this.controller.getCurrentLine().getSpeaker().get() + ".name");
 
 			this.namePlate = new GuiTextBox(
 					buttons.size() + 2,
 					resize ? (this.width / 2) - (baseBoxSize / 2) : 20,
-					this.height - (topText ? 122 + this.topTextBox.getTextHeight(this.fontRenderer) :
-							107), this.fontRenderer.getStringWidth(name + 10), 20);
+					this.height - (topText ? 122 + this.topTextBox.getTextHeight(this.fontRenderer) : 107),
+					this.fontRenderer.getStringWidth(name + 10), 20);
 
-			ITextComponent t = new TextComponentString(name);
-			t.setStyle(new Style().setColor(TextFormatting.YELLOW).setItalic(true));
+			ITextComponent textComponent = new TextComponentTranslation(name);
+			textComponent.setStyle(new Style().setColor(TextFormatting.YELLOW).setItalic(true));
 
-			this.namePlate.setText(t);
+			this.namePlate.setText(textComponent);
+
+			this.buttonList.add(this.namePlate);
 		}
 
 		this.buttonList.add(this.topTextBox);
 		this.buttonList.add(this.bottomTextBox);
-
-		if (this.node.getSpeaker() != null)
-		{
-			this.buttonList.add(this.namePlate);
-		}
 	}
 
 	private void nextAction()
@@ -302,31 +241,7 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 			return;
 		}
 
-		Collection<ITextComponent> text = this.node.getContent();
-
-		if (text.size() <= 1)
-		{
-			for (IDialogAction action : this.node.getEndActions())
-			{
-				action.onAction(this);
-			}
-
-			return;
-		}
-
-		this.textIndex++;
-
-		if (this.textIndex < text.size())
-		{
-			this.buildGui(this.node);
-		}
-		else
-		{
-			for (IDialogAction action : this.node.getEndActions())
-			{
-				action.onAction(this);
-			}
-		}
+		this.controller.advance();
 	}
 
 	@Override
@@ -343,4 +258,17 @@ public class GuiDialogController extends GuiContainer implements IDialogControll
 		super.mouseReleased(mouseX, mouseY, state);
 	}
 
+	@Override
+	public void onDialogChanged()
+	{
+		this.buildGui(this.controller.getCurrentNode());
+	}
+
+	@Override
+	public void onSceneClosed()
+	{
+		Minecraft.getMinecraft().displayGuiScreen(null);
+
+		this.controller.removeListener(this);
+	}
 }

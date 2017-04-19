@@ -32,7 +32,7 @@ public class CompanionChangedPacket implements IMessage
 		buf.writeInt(this.entityId);
 	}
 
-	public static class Handler extends MessageHandlerClient<CompanionChangedPacket, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<CompanionChangedPacket, IMessage>
 	{
 		@Override
 		public IMessage onMessage(CompanionChangedPacket message, EntityPlayer player)

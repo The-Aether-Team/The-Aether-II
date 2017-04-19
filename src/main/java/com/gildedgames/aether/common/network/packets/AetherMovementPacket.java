@@ -37,7 +37,7 @@ public class AetherMovementPacket implements IMessage
 		buf.writeByte(this.action.ordinal());
 	}
 
-	public static class Handler extends MessageHandlerServer<AetherMovementPacket, AetherMovementPacket>
+	public static class HandlerServer extends MessageHandlerServer<AetherMovementPacket, AetherMovementPacket>
 	{
 		@Override
 		public AetherMovementPacket onMessage(AetherMovementPacket message, EntityPlayer player)

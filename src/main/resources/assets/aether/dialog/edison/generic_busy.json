@@ -1,0 +1,13 @@
+{
+	"nodes": [
+		{
+			"name": "#start",
+			"lines": [
+				{ "speaker": "aether:edison", "text": "edison.them.busy" }
+			],
+			"buttons": [
+				{ "label": "edison.us.goodbye", "action": { "type": "exit" } }
+			]
+		}
+	]
+}

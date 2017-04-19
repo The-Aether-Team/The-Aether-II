@@ -1,10 +1,9 @@
 package com.gildedgames.aether.common.entities.living.npc;
 
-import com.gildedgames.aether.client.gui.dialog.GuiDialogController;
+import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.player.PlayerAether;
-import com.gildedgames.aether.common.dialog.data.EdisonDialog;
 import com.gildedgames.aether.common.util.io.NBTHelper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -92,22 +91,10 @@ public class EntityEdison extends EntityNPC
 	{
 		if (!super.processInteract(player, hand))
 		{
-			if (player.world.isRemote)
+			if (!player.world.isRemote)
 			{
-				PlayerAether playerAether = PlayerAether.getPlayer(player);
-
-				GuiDialogController controller = new GuiDialogController(player);
-
-				if (!playerAether.hasDiedInAetherBefore())
-				{
-					controller.show(EdisonDialog.Scenes.BUSY_SCENE);
-				}
-				else
-				{
-					controller.show(EdisonDialog.Scenes.OUTPOST_SCENE);
-				}
-
-				Minecraft.getMinecraft().displayGuiScreen(controller);
+				IPlayerAether aePlayer = PlayerAether.getPlayer(player);
+				aePlayer.getDialogController().openScene(AetherCore.getResource("edison/outpost_greet"));
 			}
 		}
 

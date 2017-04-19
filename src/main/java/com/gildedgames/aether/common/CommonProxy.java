@@ -2,6 +2,7 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.IAetherServiceLocator;
+import com.gildedgames.aether.api.dialog.IDialogManager;
 import com.gildedgames.aether.api.registry.IEquipmentRegistry;
 import com.gildedgames.aether.api.registry.IItemPropertiesRegistry;
 import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
@@ -13,6 +14,7 @@ import com.gildedgames.aether.common.capabilities.CapabilityManagerAether;
 import com.gildedgames.aether.common.capabilities.item.EquipmentRegistry;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherEvents;
 import com.gildedgames.aether.common.containers.tab.TabRegistryImpl;
+import com.gildedgames.aether.common.dialog.DialogManager;
 import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.entities.MountProcessor;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
@@ -44,17 +46,19 @@ public class CommonProxy implements IAetherServiceLocator
 {
 	private File storageDir;
 
-	private final MinecraftRecipesAether recipeManager = new MinecraftRecipesAether();
+	protected final MinecraftRecipesAether recipeManager = new MinecraftRecipesAether();
 
-	private final IItemPropertiesRegistry itemPropertiesRegistry = new ItemPropertiesRegistry();
+	protected final ItemPropertiesRegistry itemPropertiesRegistry = new ItemPropertiesRegistry();
 
-	private final ITabRegistry tabRegistry = new TabRegistryImpl();
+	protected final TabRegistryImpl tabRegistry = new TabRegistryImpl();
 
-	private final SimpleCraftingRegistry simpleCraftingRegistry = new SimpleCraftingRegistry();
+	protected final SimpleCraftingRegistry simpleCraftingRegistry = new SimpleCraftingRegistry();
 
-	private final SimpleCraftingRegistry masonryRegistry = new SimpleCraftingRegistry();
+	protected final SimpleCraftingRegistry masonryRegistry = new SimpleCraftingRegistry();
 
-	private final IEquipmentRegistry equipmentRegistry = new EquipmentRegistry();
+	protected final EquipmentRegistry equipmentRegistry = new EquipmentRegistry();
+
+	protected final DialogManager dialogManager = new DialogManager(true);
 
 	public void construct(FMLConstructionEvent event)
 	{
@@ -95,6 +99,8 @@ public class CommonProxy implements IAetherServiceLocator
 
 	public void init(FMLInitializationEvent event)
 	{
+		CapabilityManagerAether.init();
+
 		TemplatesAether.init();
 		GenerationAether.init();
 
@@ -104,10 +110,7 @@ public class CommonProxy implements IAetherServiceLocator
 		MinecraftForge.EVENT_BUS.register(PlayerAetherEvents.class);
 		MinecraftForge.EVENT_BUS.register(MountProcessor.class);
 		MinecraftForge.EVENT_BUS.register(ItemToolHandler.class);
-
 		MinecraftForge.EVENT_BUS.register(ItemSkyrootSword.class);
-
-		CapabilityManagerAether.init();
 	}
 
 	public void postInit(FMLPostInitializationEvent event)
@@ -182,6 +185,12 @@ public class CommonProxy implements IAetherServiceLocator
 	public IEquipmentRegistry getEquipmentRegistry()
 	{
 		return this.equipmentRegistry;
+	}
+
+	@Override
+	public IDialogManager getDialogManager()
+	{
+		return this.dialogManager;
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.dialog;
 
+import com.gildedgames.aether.api.dialog.IDialogNode;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;

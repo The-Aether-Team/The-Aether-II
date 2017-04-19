@@ -1,5 +1,6 @@
 package com.gildedgames.aether.api.capabilites.entity;
 
+import com.gildedgames.aether.api.dialog.IDialogController;
 import com.gildedgames.aether.api.player.companions.IPlayerCompanionManager;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,6 +19,8 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 public interface IPlayerAether
 {
 	IInventoryEquipment getEquipmentInventory();
+
+	IDialogController getDialogController();
 
 	IPlayerCompanionManager getCompanionModule();
 
