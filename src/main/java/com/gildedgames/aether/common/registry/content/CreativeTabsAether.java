@@ -29,6 +29,8 @@ public class CreativeTabsAether
 
 	public static final CreativeTab VISUAL_VARIANTS = new CreativeTab("aether.visual_variants");
 
+	public static final CreativeTab MISCELLANEOUS = new CreativeTabMisc("aether.miscellaneous");
+
 	public static final CreativeTab MATERIALS = new CreativeTab("aether.materials");
 
 	public static final CreativeTab CONSUMABLES = new CreativeTab("aether.consumables");
@@ -51,7 +53,7 @@ public class CreativeTabsAether
 
 	public static final CreativeTab ARTIFACTS = new CreativeTab("aether.artifacts");
 
-	public static final CreativeTab MISCELLANEOUS = new CreativeTabMisc("aether.miscellaneous");
+
 
 	@SideOnly(Side.CLIENT)
 	public static void registerTabIcons()
