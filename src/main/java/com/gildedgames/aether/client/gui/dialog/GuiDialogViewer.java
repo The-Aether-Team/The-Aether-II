@@ -38,9 +38,6 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 
 	public GuiDialogViewer(IDialogController controller)
 	{
-		// This is needed, otherwise there's a 50/50 chance the GUI will crash when opening. No idea why.
-		this.mc = Minecraft.getMinecraft();
-
 		this.controller = controller;
 		this.controller.addListener(this);
 	}

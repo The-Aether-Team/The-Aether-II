@@ -46,8 +46,8 @@ public class AetherMovementPacket implements IMessage
 
 			switch (message.action)
 			{
-			case EXTRA_JUMP:
-				aePlayer.getAbilitiesModule().performMidAirJump();
+				case EXTRA_JUMP:
+					aePlayer.getAbilitiesModule().performMidAirJump();
 			}
 
 			return null;

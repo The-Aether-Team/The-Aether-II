@@ -10,10 +10,39 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMessage> implements IMessageHandler<REQ, RES>
 {
+	private final boolean executesOnGameThread;
+
+	public MessageHandlerClient()
+	{
+		this(true);
+	}
+
+
+	/**
+	 * Creates a message handler for the client-side.
+	 * @param safety True if this packet should process on the main game thread.
+	 *               You almost always want this unless you need to reply instantly
+	 *               to the packet.
+	 */
+	public MessageHandlerClient(boolean safety)
+	{
+		this.executesOnGameThread = safety;
+	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public RES onMessage(REQ message, MessageContext ctx)
 	{
+		if (this.executesOnGameThread)
+		{
+			Minecraft.getMinecraft().addScheduledTask(() -> {
+				this.onMessage(message, Minecraft.getMinecraft().player);
+			});
+
+			return null;
+		}
+
+
 		return this.onMessage(message, Minecraft.getMinecraft().player);
 	}
 
