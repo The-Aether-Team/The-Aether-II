@@ -50,10 +50,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fluids.FluidActionResult;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -117,6 +114,12 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
+	public static void onFluidEvent(FluidEvent.FluidDrainingEvent event)
+	{
+
+	}
+
+	@SubscribeEvent
 	public static void onPlayerUseBucket(FillBucketEvent event)
 	{
 		if (event.getTarget() != null && event.getTarget().typeOfHit == RayTraceResult.Type.BLOCK)
@@ -133,16 +136,11 @@ public class CommonEvents
 			final BlockPos pos = event.getTarget().getBlockPos().offset(event.getTarget().sideHit);
 
 			boolean hasWaterFluid = fluidStack != null && fluidStack.getFluid().getName().equals(FluidRegistry.WATER.getName());
-			boolean hasLavaFluid = fluidStack != null && fluidStack.getFluid().getName().equals(FluidRegistry.LAVA.getName());
 
 			if (hasWaterFluid || event.getEmptyBucket().getItem() == Items.WATER_BUCKET
 					|| event.getEmptyBucket().getItem() == ItemsAether.skyroot_water_bucket)
 			{
 				CommonEvents.onWaterPlaced(event, player, pos);
-			}
-			else if (hasLavaFluid || event.getEmptyBucket().getItem() == Items.LAVA_BUCKET)
-			{
-				CommonEvents.onLavaPlaced(event, player, pos);
 			}
 		}
 	}
@@ -447,53 +445,6 @@ public class CommonEvents
 
 				event.setCanceled(true);
 			}
-		}
-	}
-
-	private static void onLavaPlaced(FillBucketEvent event, EntityPlayer player, BlockPos pos)
-	{
-		if (player.world.provider.getDimensionType() == DimensionsAether.AETHER)
-		{
-			player.world.setBlockState(pos, BlocksAether.crude_scatterglass.getDefaultState());
-
-			if (!player.capabilities.isCreativeMode)
-			{
-				IFluidHandler fluidHandler = FluidUtil.getFluidHandler(event.getEmptyBucket());
-				ItemStack stack = ItemStack.EMPTY;
-
-				if (fluidHandler != null)
-				{
-					FluidActionResult result = FluidUtil.tryEmptyContainer(event.getEmptyBucket(), fluidHandler, Integer.MAX_VALUE, player, true);
-
-					stack = result.getResult();
-				}
-
-				if (event.getEmptyBucket().getItem() == Items.LAVA_BUCKET)
-				{
-					stack = new ItemStack(Items.BUCKET);
-				}
-
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, stack);
-			}
-
-			if (event.getWorld().isRemote)
-			{
-				final Random rand = event.getWorld().rand;
-
-				for (int count = 0; count < 8; count++)
-				{
-					final double parX = pos.getX() + rand.nextDouble();
-					final double parY = pos.getY() + rand.nextDouble();
-					final double parZ = pos.getZ() + rand.nextDouble();
-
-					event.getWorld().spawnParticle(EnumParticleTypes.CLOUD, parX, parY, parZ, 0, 0, 0);
-				}
-
-				event.getWorld().playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_GENERIC_BURN, SoundCategory.NEUTRAL, 0.8f,
-						1.2f + (rand.nextFloat() * 0.2f), false);
-			}
-
-			event.setCanceled(true);
 		}
 	}
 
