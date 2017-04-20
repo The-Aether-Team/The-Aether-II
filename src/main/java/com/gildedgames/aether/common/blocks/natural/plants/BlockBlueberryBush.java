@@ -85,7 +85,7 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVarian
 
 			if (!world.isRemote)
 			{
-				for (ItemStack item : this.getFruitDrops(world, pos, state, player))
+				for (ItemStack item : this.getFruitDrops(world, pos, state))
 				{
 					Block.spawnAsEntity(world, pos, item);
 				}
@@ -104,12 +104,12 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVarian
 	{
 		List<ItemStack> items = super.getDrops(world, pos, state, fortune);
 
-		items.addAll(this.getFruitDrops(world, pos, state,null));
+		items.addAll(this.getFruitDrops(world, pos, state));
 
 		return items;
 	}
 
-	private List<ItemStack> getFruitDrops(IBlockAccess world, BlockPos pos, IBlockState state, @Nullable EntityPlayer player)
+	private List<ItemStack> getFruitDrops(IBlockAccess world, BlockPos pos, IBlockState state)
 	{
 		Random rand = world instanceof World ? ((World) world).rand : new Random();
 
@@ -119,16 +119,6 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVarian
 				&& stateUnderneath.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED;
 
 		int count = state.getValue(PROPERTY_HARVESTABLE) ? (rand.nextInt(2) + (applyBonus ? 2 : 1)) : 0;
-
-		if (player != null && player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemTool)
-		{
-			ItemTool tool = (ItemTool) player.getHeldItem(EnumHand.MAIN_HAND).getItem();
-
-			if (tool.getToolMaterial() == MaterialsAether.SKYROOT_TOOL)
-			{
-				count *= 2;
-			}
-		}
 
 		return Lists.newArrayList(new ItemStack(ItemsAether.blueberries, count));
 	}

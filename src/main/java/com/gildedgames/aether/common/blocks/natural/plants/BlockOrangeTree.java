@@ -135,7 +135,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 			}
 			else
 			{
-				for (ItemStack item : this.getFruitDrops(world, state, player))
+				for (ItemStack item : this.getFruitDrops(world, state))
 				{
 					Block.spawnAsEntity(world, pos, item);
 				}
@@ -204,9 +204,8 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 		return (state.getBlock() == this && !state.getValue(PROPERTY_IS_TOP_BLOCK) && state.getValue(PROPERTY_STAGE) >= 3) || super.isSuitableSoilBlock(state);
 	}
 
-	private ArrayList<ItemStack> getFruitDrops(IBlockAccess world, IBlockState state, @Nullable EntityPlayer player)
+	private ArrayList<ItemStack> getFruitDrops(IBlockAccess world, IBlockState state)
 	{
-		/* </shrug> */
 		Random rand = world instanceof World ? ((World) world).rand : new Random();
 
 		int count = rand.nextInt(3) + 1;
@@ -214,16 +213,6 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 		if (state.getBlock() == BlocksAether.aether_grass && state.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED)
 		{
 			count += 1;
-		}
-
-		if (player != null && player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemTool)
-		{
-			ItemTool tool = (ItemTool) player.getHeldItem(EnumHand.MAIN_HAND).getItem();
-
-			if (tool.getToolMaterial() == MaterialsAether.SKYROOT_TOOL)
-			{
-				count *= 2;
-			}
 		}
 
 		return Lists.newArrayList(new ItemStack(ItemsAether.orange, count));
@@ -259,7 +248,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 
 		if (state.getValue(PROPERTY_STAGE) == STAGE_COUNT)
 		{
-			items.addAll(this.getFruitDrops(world, state, null));
+			items.addAll(this.getFruitDrops(world, state));
 		}
 
 		return items;
