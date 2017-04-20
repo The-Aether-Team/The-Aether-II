@@ -126,12 +126,6 @@ public class BlocksAether
 
 	public static final BlockCustomDoor arkenium_door = new BlockCustomDoor(Material.IRON, () -> ItemsAether.arkenium_door, SoundType.METAL);
 
-	public static final Block blightwillow_door = new BlockCustomDoor(Material.WOOD, () -> ItemsAether.blightwillow_door, SoundType.WOOD).setLightLevel(0.6F);
-
-	public static final BlockCustomDoor earthshifter_door = new BlockCustomDoor(Material.WOOD, () -> ItemsAether.earthshifter_door, SoundType.WOOD);
-
-	public static final BlockCustomDoor frostpine_door = new BlockCustomDoor(Material.WOOD, () -> ItemsAether.frostpine_door, SoundType.WOOD);
-
 	public static final BlockSkyrootChest skyroot_chest = new BlockSkyrootChest();
 
 	public static final BlockAmbrosiumTorch ambrosium_torch = new BlockAmbrosiumTorch();
@@ -400,16 +394,18 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(BlocksAether.orange_tree, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.blueberry_bush, 60, 100);
 
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_log, 5, 5);
+		Blocks.FIRE.setFireInfo(BlocksAether.golden_oak_log, 5, 5);
+
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_log_wall, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_chest, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_beam, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_stairs, 5, 20);
+
 		Blocks.FIRE.setFireInfo(BlocksAether.aether_crafting_table, 5, 20);
 
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_door, 5, 20);
-		Blocks.FIRE.setFireInfo(BlocksAether.blightwillow_door, 5, 20);
-		Blocks.FIRE.setFireInfo(BlocksAether.earthshifter_door, 5, 20);
-		Blocks.FIRE.setFireInfo(BlocksAether.frostpine_door, 5, 20);
-
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_fence, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_fence_gate, 5, 20);
 
@@ -430,6 +426,9 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(BlocksAether.dark_blue_skyroot_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(BlocksAether.golden_oak_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(BlocksAether.green_skyroot_leaves, 30, 60);
+
+		Blocks.FIRE.setFireInfo(BlocksAether.cloudwool_block, 30, 60);
+		Blocks.FIRE.setFireInfo(BlocksAether.cloudwool_carpet, 30, 60);
 
 		registerHarvestLevels();
 
@@ -484,6 +483,7 @@ public class BlocksAether
 		scatterglass_wall.setHarvestLevel("pickaxe", 1);
 
 		skyroot_slab.setHarvestLevel("axe", 0);
+
 		holystone_slab.setHarvestLevel("pickaxe", 0);
 		holystone_brick_slab.setHarvestLevel("pickaxe", 0);
 		icestone_slab.setHarvestLevel("pickaxe", 0);

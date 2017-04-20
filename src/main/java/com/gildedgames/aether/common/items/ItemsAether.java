@@ -175,10 +175,7 @@ public class ItemsAether
 			valkyrie_lance = new ItemAetherSword(MaterialsAether.LEGENDARY_TOOL, ItemAbilityType.PASSIVE);
 
 	public static final ItemDoor skyroot_door = new ItemDoor(BlocksAether.skyroot_door),
-			arkenium_door = new ItemDoor(BlocksAether.arkenium_door),
-			blightwillow_door = new ItemDoor(BlocksAether.blightwillow_door),
-			earthshifter_door = new ItemDoor(BlocksAether.earthshifter_door),
-			frostpine_door = new ItemDoor(BlocksAether.frostpine_door);
+			arkenium_door = new ItemDoor(BlocksAether.arkenium_door);
 
 	public static final ItemCrossbow skyroot_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F),
 			holystone_crossbow = new ItemCrossbow().setDurationInTicks(30).setKnockBackValue(0.7F),

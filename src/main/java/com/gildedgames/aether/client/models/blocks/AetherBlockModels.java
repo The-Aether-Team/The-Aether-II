@@ -49,9 +49,6 @@ public class AetherBlockModels
 
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.arkenium_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
-		ModelLoader.setCustomStateMapper(BlocksAether.blightwillow_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
-		ModelLoader.setCustomStateMapper(BlocksAether.earthshifter_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
-		ModelLoader.setCustomStateMapper(BlocksAether.frostpine_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_chest, new StateMap.Builder().ignore(BlockChest.FACING).build());
 
