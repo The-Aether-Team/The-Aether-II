@@ -354,9 +354,11 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.candy_cane_sword, "weapons/candy_cane_sword");
 
 		registerItemModels(ItemsAether.skyroot_door, "skyroot_door");
+		registerItemModels(ItemsAether.secret_skyroot_door, "secret_skyroot_door");
 		registerItemModels(ItemsAether.arkenium_door, "arkenium_door");
 
 		registerItemModels(BlocksAether.skyroot_trapdoor, "skyroot_trapdoor");
+		registerItemModels(BlocksAether.secret_skyroot_trapdoor, "secret_skyroot_trapdoor");
 
 		registerItemModels(BlocksAether.skyroot_ladder, "ladders/skyroot_ladder");
 

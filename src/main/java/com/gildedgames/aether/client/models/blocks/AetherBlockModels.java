@@ -48,6 +48,7 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.tall_aether_grass, new StateMap.Builder().ignore().build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.secret_skyroot_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.arkenium_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_chest, new StateMap.Builder().ignore(BlockChest.FACING).build());

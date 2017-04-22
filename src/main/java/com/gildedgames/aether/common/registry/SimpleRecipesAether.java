@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.*;
 import com.gildedgames.aether.common.blocks.natural.BlockCrudeScatterglass;
 import com.gildedgames.aether.common.blocks.natural.BlockScatterglass;
+import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.recipes.simple.OreDictionaryRequirement;
 import com.gildedgames.aether.common.recipes.simple.SimpleRecipe;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
@@ -89,6 +90,9 @@ public class SimpleRecipesAether
 
 		addMasonry(new ItemStack(BlocksAether.arkenium_frame_crude_scatterglass_pane), new ItemStack(BlocksAether.crude_scatterglass_pane));
 		addMasonry(new ItemStack(BlocksAether.skyroot_frame_crude_scatterglass_pane), new ItemStack(BlocksAether.crude_scatterglass_pane));
+
+		addMasonry(new ItemStack(BlocksAether.secret_skyroot_trapdoor), new ItemStack(BlocksAether.skyroot_trapdoor));
+		addMasonry(new ItemStack(ItemsAether.secret_skyroot_door), new ItemStack(ItemsAether.skyroot_door));
 	}
 
 	public static void postInit()

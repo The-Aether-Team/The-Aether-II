@@ -38,6 +38,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 
+
 public class ItemsAether
 {
 	private static final Collection<Item> registeredItems = new ArrayList<>();
@@ -175,6 +176,7 @@ public class ItemsAether
 			valkyrie_lance = new ItemAetherSword(MaterialsAether.LEGENDARY_TOOL, ItemAbilityType.PASSIVE);
 
 	public static final ItemDoor skyroot_door = new ItemDoor(BlocksAether.skyroot_door),
+	        secret_skyroot_door = new ItemDoor(BlocksAether.secret_skyroot_door),
 			arkenium_door = new ItemDoor(BlocksAether.arkenium_door);
 
 	public static final ItemCrossbow skyroot_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F),
@@ -547,6 +549,7 @@ public class ItemsAether
 		registerItem("valkyrie_lance", valkyrie_lance);
 
 		registerItem("skyroot_door_item", skyroot_door.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		registerItem("secret_skyroot_door_item", secret_skyroot_door.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
 		registerItem("arkenium_door_item", arkenium_door.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		//registerItem("blightwillow_door_item", blightwillow_door_item.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		//registerItem("earthshifter_door_item", earthshifter_door_item.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
