@@ -208,6 +208,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.holystone_bookshelf, "holystone_bookshelf");
 
 		registerItemModels(ItemsAether.skyroot_stick, "skyroot_stick");
+		registerItemModels(ItemsAether.cloudtwine, "cloudtwine");
 		registerItemModels(ItemsAether.cloudwool, "cloudwool");
 		registerItemModels(ItemsAether.golden_amber, "golden_amber");
 		registerItemModels(ItemsAether.moa_feather, "moa_feather");

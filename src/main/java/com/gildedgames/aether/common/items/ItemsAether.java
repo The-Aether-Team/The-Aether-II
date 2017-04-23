@@ -47,6 +47,8 @@ public class ItemsAether
 
 	public static final Item cloudwool = new Item();
 
+	public static final Item cloudtwine = new Item();
+
 	public static final ItemMoaFeather moa_feather = new ItemMoaFeather();
 
 	public static final Item cockatrice_feather = new Item();
@@ -406,6 +408,7 @@ public class ItemsAether
 		registerItem("arkenium_strip", arkenium_strip.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("icestone", icestone.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("gravitite_plate", gravitite_plate.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("cloudtwine", cloudtwine.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("cloudwool", cloudwool.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("moa_feather", moa_feather.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("cockatrice_feather", cockatrice_feather.setCreativeTab(CreativeTabsAether.MATERIALS));
