@@ -46,8 +46,8 @@ public class MinecraftRecipesAether
 	private void registerFurnaceRecipes()
 	{
 		registerSmeltingRecipe(new ItemStack(BlocksAether.holystone), new ItemStack(BlocksAether.agiosite), 0.1f);
-		registerSmeltingRecipe(new ItemStack(ItemsAether.arkenium_ore), new ItemStack(ItemsAether.arkenium), 0.85f);
-		registerSmeltingRecipe(new ItemStack(ItemsAether.gravitite_ore), new ItemStack(ItemsAether.gravitite_plate), 1.0f);
+		registerSmeltingRecipe(new ItemStack(BlocksAether.arkenium_ore), new ItemStack(ItemsAether.arkenium), 0.85f);
+		registerSmeltingRecipe(new ItemStack(BlocksAether.gravitite_ore), new ItemStack(ItemsAether.gravitite_plate), 1.0f);
 		registerSmeltingRecipe(new ItemStack(BlocksAether.quicksoil), new ItemStack(BlocksAether.quicksoil_glass), 0.1f);
 		registerSmeltingRecipe(new ItemStack(ItemsAether.moa_egg), new ItemStack(ItemsAether.fried_moa_egg), 0.4f);
 		registerSmeltingRecipe(new ItemStack(ItemsAether.rainbow_moa_egg), new ItemStack(ItemsAether.fried_moa_egg), 0.4f);
