@@ -24,6 +24,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.config.GuiUtils;
+import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.Validate;
 
 import javax.annotation.Nullable;
@@ -73,8 +74,16 @@ public class GuiSkyrootWorkbench extends GuiContainer
 
 				if (hovered && button.slot.getStack().isEmpty())
 				{
-					this.drawTooltip(button.stack, mouseX, mouseY,
-							Collections.singletonList(TextFormatting.YELLOW + "" + TextFormatting.ITALIC + "Required Item"));
+					ArrayList<String> list = new ArrayList<>();
+
+					if (button.stacks.size() > 1)
+					{
+						list.add(TextFormatting.GOLD + "" + TextFormatting.ITALIC + "(wildcard)");
+					}
+
+					list.add(TextFormatting.YELLOW + "" + TextFormatting.ITALIC + "Required Item");
+
+					this.drawTooltip(button.getItemStackForRender(), mouseX, mouseY, list);
 				}
 			}
 
@@ -82,7 +91,7 @@ public class GuiSkyrootWorkbench extends GuiContainer
 			{
 				if (this.isPointInRegion(button.x, button.y, button.width, button.height, mouseX, mouseY))
 				{
-					this.drawTooltip(button.stack, mouseX, mouseY,
+					this.drawTooltip(button.getItemStackForRender(), mouseX, mouseY,
 							button.complete ? null : Collections.singletonList(TextFormatting.GRAY + "" + TextFormatting.ITALIC + "Almost craftable!"));
 				}
 			}
@@ -245,33 +254,48 @@ public class GuiSkyrootWorkbench extends GuiContainer
 	{
 		for (Object obj : recipe.getCraftingMatrix())
 		{
-			final ItemStack stack = this.getItemStack(obj);
-
-			if (!stack.isEmpty())
+			if (obj == null)
 			{
-				if (this.uniqueItems.stream().noneMatch(o -> ItemStack.areItemsEqual(o, stack)))
+				continue;
+			}
+
+			final List<ItemStack> stacks = this.getItemStack(obj);
+
+			boolean oneMatched = stacks.size() <= 0;
+
+			for (ItemStack stack : stacks)
+			{
+				if (!stack.isEmpty())
 				{
-					return false;
+					if (this.uniqueItems.stream().anyMatch(o -> ItemStack.areItemsEqual(o, stack)))
+					{
+						oneMatched = true;
+					}
 				}
+			}
+
+			if (!oneMatched)
+			{
+				return false;
 			}
 		}
 
 		return true;
 	}
 
-	private ItemStack getItemStack(Object obj)
+	private List<ItemStack> getItemStack(Object obj)
 	{
 		if (obj instanceof ItemStack)
 		{
-			return (ItemStack) obj;
+			return Collections.singletonList((ItemStack) obj);
 		}
-		else if (obj instanceof List)
+		else if (obj instanceof Collection)
 		{
-			return (ItemStack) ((List) obj).get(0);
+			return (List<ItemStack>) obj;
 		}
 		else
 		{
-			return ItemStack.EMPTY;
+			return Collections.emptyList();
 		}
 	}
 
@@ -290,9 +314,9 @@ public class GuiSkyrootWorkbench extends GuiContainer
 		{
 			Object obj = matrix.get(i);
 
-			ItemStack stack = this.getItemStack(obj);
+			List<ItemStack> stacks = this.getItemStack(obj);
 
-			if (!stack.isEmpty())
+			if (!stacks.isEmpty())
 			{
 				int x = (i % this.getSelectedRecipe().getRecipeWidth());
 				int y = (i / this.getSelectedRecipe().getRecipeWidth());
@@ -304,7 +328,7 @@ public class GuiSkyrootWorkbench extends GuiContainer
 
 				Slot slot = this.inventorySlots.getSlot(1 + (x + (y * 3)));
 
-				this.ghostMatrixButtons.add(new GhostItemStackButton(this, i, slot, stack, slot.xPos, slot.yPos));
+				this.ghostMatrixButtons.add(new GhostItemStackButton(this, i, slot, stacks, slot.xPos, slot.yPos));
 			}
 		}
 	}
@@ -317,7 +341,8 @@ public class GuiSkyrootWorkbench extends GuiContainer
 
 		for (ItemStack item : this.uniqueItems)
 		{
-			index.getRecipesContainingItem(item).stream().filter(this::canPlayerCraft).forEach(recipes::add);
+			Collection<IIndexableRecipe> t = index.getRecipesContainingItem(item);
+			t.stream().filter(this::canPlayerCraft).forEach(recipes::add);
 		}
 
 		return recipes;

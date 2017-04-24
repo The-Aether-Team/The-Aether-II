@@ -42,6 +42,16 @@ public class RecipeIndexRegistry implements IRecipeIndexRegistry
 	@Override
 	public Collection<IIndexableRecipe> getRecipesContainingItem(ItemStack stack)
 	{
-		return this.cache.getOrDefault(new ItemMetaPair(stack), RecipeIndexRegistry.EMPTY);
+		ItemMetaPair pair = new ItemMetaPair(stack);
+
+		for (Map.Entry<ItemMetaPair, Collection<IIndexableRecipe>> entry : this.cache.entrySet())
+		{
+			if (entry.getKey().equals(pair))
+			{
+				return entry.getValue();
+			}
+		}
+
+		return EMPTY;
 	}
 }

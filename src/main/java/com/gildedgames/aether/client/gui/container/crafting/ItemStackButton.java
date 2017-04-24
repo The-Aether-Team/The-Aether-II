@@ -7,6 +7,9 @@ import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 
+import java.util.Collections;
+import java.util.List;
+
 public class ItemStackButton extends Gui
 {
 	protected final Minecraft mc;
@@ -19,9 +22,9 @@ public class ItemStackButton extends Gui
 
 	public final int width = 16, height = 16;
 
-	public final ItemStack stack;
+	public List<ItemStack> stacks;
 
-	public ItemStackButton(int id, ItemStack stack, int x, int y)
+	public ItemStackButton(int id, List<ItemStack> stacks, int x, int y)
 	{
 		this.id = id;
 
@@ -31,11 +34,21 @@ public class ItemStackButton extends Gui
 		this.x = x;
 		this.y = y;
 
-		this.stack = stack;
+		this.stacks = stacks;
+	}
+
+	public ItemStackButton(int id, ItemStack stack, int x, int y)
+	{
+		this(id, Collections.singletonList(stack), x, y);
 	}
 
 	public void drawButton(int mouseX, int mouseY, boolean hovered, boolean selected)
 	{
+		if (this.stacks.size() <= 0)
+		{
+			return;
+		}
+
 		if (hovered || selected)
 		{
 			if (hovered)
@@ -55,7 +68,7 @@ public class ItemStackButton extends Gui
 	{
 		this.itemRenderer.zLevel = -10.0F;
 
-		this.itemRenderer.renderItemAndEffectIntoGUI(this.mc.player, this.stack, this.x, this.y);
+		this.itemRenderer.renderItemAndEffectIntoGUI(this.mc.player, this.getItemStackForRender(), this.x, this.y);
 
 		this.itemRenderer.zLevel = 0.0F;
 	}
@@ -63,5 +76,12 @@ public class ItemStackButton extends Gui
 	public void performClick(int mouseX, int mouseY)
 	{
 		this.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+	}
+
+	public ItemStack getItemStackForRender()
+	{
+		int index = (int) (this.mc.world.getWorldTime() / 20) % this.stacks.size();
+
+		return this.stacks.get(index);
 	}
 }

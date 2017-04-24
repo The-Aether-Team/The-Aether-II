@@ -11,7 +11,7 @@ public class ItemMetaPair
 
 	public ItemMetaPair(ItemStack stack)
 	{
-		this(stack.getItem(), stack.getItemDamage());
+		this(stack.getItem(), stack.isItemStackDamageable() ? stack.getItemDamage() : 0);
 	}
 
 	public ItemMetaPair(Item item, int meta)
@@ -33,10 +33,7 @@ public class ItemMetaPair
 	@Override
 	public int hashCode()
 	{
-		int hash = (Item.getIdFromItem(this.item) & 0xFFFF) << 16;
-		hash = hash | (this.meta & 0xFFFF);
-
-		return hash;
+		return Item.getIdFromItem(this.item);
 	}
 
 	@Override

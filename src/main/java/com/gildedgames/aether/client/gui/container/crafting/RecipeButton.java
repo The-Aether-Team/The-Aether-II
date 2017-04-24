@@ -23,7 +23,7 @@ public class RecipeButton extends ItemStackButton
 	@Override
 	protected void renderItem(int mouseX, int mouseY, boolean hovered, boolean selected)
 	{
-		this.itemRenderer.renderItemAndEffectIntoGUI(this.mc.player, this.stack, this.x, this.y);
+		super.renderItem(mouseX, mouseY, hovered, selected);
 
 		if (this.workbench.getSelectedRecipe() == this.recipe)
 		{

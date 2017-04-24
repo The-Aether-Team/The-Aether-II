@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.registry.recipes.IIndexableRecipe;
 import com.gildedgames.aether.api.registry.recipes.ItemMetaPair;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import org.apache.commons.lang3.Validate;
 
@@ -38,9 +39,9 @@ public class ShapedRecipeWrapper implements IIndexableRecipe
 					this.unique.add(new ItemMetaPair(stack));
 				}
 			}
-			else if (matrixItem instanceof Collection)
+			else if (matrixItem instanceof NonNullList)
 			{
-				Collection list = (Collection) matrixItem;
+				NonNullList list = (NonNullList) matrixItem;
 
 				for (Object obj : list)
 				{

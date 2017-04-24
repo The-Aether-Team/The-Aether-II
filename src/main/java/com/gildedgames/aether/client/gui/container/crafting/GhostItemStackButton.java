@@ -1,9 +1,10 @@
 package com.gildedgames.aether.client.gui.container.crafting;
 
 import com.gildedgames.aether.client.gui.container.GuiSkyrootWorkbench;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 public class GhostItemStackButton extends ItemStackButton
 {
@@ -11,9 +12,9 @@ public class GhostItemStackButton extends ItemStackButton
 
 	public final Slot slot;
 
-	public GhostItemStackButton(GuiSkyrootWorkbench container, int id, Slot slot, ItemStack stack, int x, int y)
+	public GhostItemStackButton(GuiSkyrootWorkbench container, int id, Slot slot, List<ItemStack> stacks, int x, int y)
 	{
-		super(id, stack, x, y);
+		super(id, stacks, x, y);
 
 		this.container = container;
 		this.slot = slot;
@@ -24,7 +25,7 @@ public class GhostItemStackButton extends ItemStackButton
 	{
 		if (!this.slot.getHasStack() && !this.container.isDragging(this.slot))
 		{
-			this.itemRenderer.renderItemAndEffectIntoGUI(this.mc.player, this.stack, this.x, this.y);
+			super.renderItem(mouseX, mouseY, hovered, selected);
 
 			this.zLevel = 1000.0f;
 
