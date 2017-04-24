@@ -620,6 +620,7 @@ itemGroup.aether.utility_blocks=Aether Utility Blocks
 itemGroup.aether.dungeon_blocks=Aether Dungeon Blocks
 
 # Containers
+# TODO: Prefix with aether.
 container.holystone_furnace=Holystone Furnace
 container.skyroot_chest=Skyroot Chest
 container.skyroot_double_chest=Large Skyroot Chest
@@ -628,6 +629,7 @@ container.labyrinth_chest=Labyrinth Chest
 container.icestone_cooler=Icestone Cooler
 container.incubator=Incubator
 container.masonry_bench=Masonry Bench
+container.aether_workbench.recipes=Recipes
 
 # Sounds
 subtitles.aether.portal.glowstone.hum=Portal hums

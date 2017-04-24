@@ -24,7 +24,6 @@ import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.registry.GenerationAether;
 import com.gildedgames.aether.common.registry.ItemPropertiesRegistry;
-import com.gildedgames.aether.common.registry.SimpleCraftingRegistry;
 import com.gildedgames.aether.common.registry.content.*;
 import com.gildedgames.aether.common.registry.minecraft.MinecraftRecipesAether;
 import com.gildedgames.aether.common.tiles.TileEntitiesAether;
@@ -51,10 +50,6 @@ public class CommonProxy implements IAetherServiceLocator
 	protected final ItemPropertiesRegistry itemPropertiesRegistry = new ItemPropertiesRegistry();
 
 	protected final TabRegistryImpl tabRegistry = new TabRegistryImpl();
-
-	protected final SimpleCraftingRegistry simpleCraftingRegistry = new SimpleCraftingRegistry();
-
-	protected final SimpleCraftingRegistry masonryRegistry = new SimpleCraftingRegistry();
 
 	protected final EquipmentRegistry equipmentRegistry = new EquipmentRegistry();
 
@@ -157,18 +152,6 @@ public class CommonProxy implements IAetherServiceLocator
 	public ITabRegistry getTabRegistry()
 	{
 		return this.tabRegistry;
-	}
-
-	@Override
-	public SimpleCraftingRegistry getSimpleCraftingRegistry()
-	{
-		return this.simpleCraftingRegistry;
-	}
-
-	@Override
-	public SimpleCraftingRegistry getMasonryRegistry()
-	{
-		return this.masonryRegistry;
 	}
 
 	public void displayDismountMessage(EntityPlayer player)

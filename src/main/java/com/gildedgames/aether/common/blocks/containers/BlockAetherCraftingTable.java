@@ -47,7 +47,7 @@ public class BlockAetherCraftingTable extends Block implements IBlockVariants
 	{
 		if (!world.isRemote)
 		{
-			player.openGui(AetherCore.INSTANCE, AetherGuiHandler.SKYROOT_WORKBENCH_ID, world, pos.getX(), pos.getY(), pos.getZ());
+			player.openGui(AetherCore.INSTANCE, AetherGuiHandler.AETHER_WORKBENCH_ID, world, pos.getX(), pos.getY(), pos.getZ());
 		}
 
 		return true;

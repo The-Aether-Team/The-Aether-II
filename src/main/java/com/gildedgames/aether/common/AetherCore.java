@@ -2,7 +2,6 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.common.blocks.QuicksoilProcessor;
-import com.gildedgames.aether.common.registry.SimpleRecipesAether;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.io.ClassSerializer;
@@ -105,8 +104,6 @@ public class AetherCore
 	public void serverStarted(FMLServerStartedEvent event)
 	{
 		AetherCore.SPAWN_REGISTRY.read();
-
-		SimpleRecipesAether.postInit();
 	}
 
 	@EventHandler
