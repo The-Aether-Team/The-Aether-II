@@ -76,7 +76,7 @@ public class EquipmentModule extends PlayerAetherModule
 					this.onEquipmentAdded(newStack);
 				}
 
-				this.recordedInv.setInventorySlotContents(i, newStack.copy());
+				this.recordedInv.setInventorySlotContents(i, newStack.isEmpty() ? ItemStack.EMPTY : newStack.copy());
 			}
 		}
 	}
