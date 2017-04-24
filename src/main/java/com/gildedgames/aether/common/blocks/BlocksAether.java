@@ -405,28 +405,31 @@ public class BlocksAether
 
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_log_wall, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_planks, 5, 20);
-		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_chest, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_bookshelf, 5, 20);
+		//Blocks.FIRE.setFireInfo(BlocksAether.skyroot_chest, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_beam, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_stairs, 5, 20);
 
-		Blocks.FIRE.setFireInfo(BlocksAether.aether_crafting_table, 5, 20);
+		//Blocks.FIRE.setFireInfo(BlocksAether.aether_crafting_table, 5, 20);
 
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_door, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.secret_skyroot_door, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_fence, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_fence_gate, 5, 20);
 
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_ladder, 5, 20);
 
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_pressure_plate, 5, 20);
-		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_bed, 5, 20);
+		//Blocks.FIRE.setFireInfo(BlocksAether.skyroot_bed, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_slab, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_trapdoor, 5, 20);
+		Blocks.FIRE.setFireInfo(BlocksAether.secret_skyroot_trapdoor, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_stairs, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_button, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.woven_sticks, 30, 60);
 
-		Blocks.FIRE.setFireInfo(BlocksAether.icestone_cooler, 5, 20);
-		Blocks.FIRE.setFireInfo(BlocksAether.incubator, 5, 20);
+		//Blocks.FIRE.setFireInfo(BlocksAether.icestone_cooler, 5, 20);
+		//Blocks.FIRE.setFireInfo(BlocksAether.incubator, 5, 20);
 
 		Blocks.FIRE.setFireInfo(BlocksAether.blue_skyroot_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(BlocksAether.dark_blue_skyroot_leaves, 30, 60);
