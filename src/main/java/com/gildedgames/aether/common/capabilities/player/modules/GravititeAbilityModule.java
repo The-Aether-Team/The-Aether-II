@@ -87,7 +87,7 @@ public class GravititeAbilityModule extends PlayerAetherModule
 			{
 				IBlockState state = world.getBlockState(pos);
 
-				EntityMovingBlock movingBlock = new EntityMovingBlock(world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, state);
+				EntityMovingBlock movingBlock = new EntityMovingBlock(world, pos.getX() + 0.5D, pos.getY() + 0.1D, pos.getZ() + 0.5D, state);
 				world.spawnEntity(movingBlock);
 
 				this.holdBlock(movingBlock);

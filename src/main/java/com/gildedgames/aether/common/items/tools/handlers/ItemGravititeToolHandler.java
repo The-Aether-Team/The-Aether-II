@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -25,25 +26,32 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 	}
 
 	@Override
-	public void onRightClickBlock(ItemStack stack, World world, BlockPos pos, EntityPlayer player, EnumFacing facing)
+	public void onRightClickBlock(World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing facing)
 	{
+		if (hand != EnumHand.MAIN_HAND)
+		{
+			return;
+		}
+
 		PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
 		if (!aePlayer.getEntity().capabilities.allowEdit)
 		{
 			return;
 		}
-		
+
+		ItemStack stack = player.getHeldItem(hand);
+
 		if (aePlayer.getGravititeAbility().getHeldBlock() == null)
 		{
 			IBlockState state = world.getBlockState(pos);
 
-			if (!state.isNormalCube() || state.getBlock().hasTileEntity(state))
+			if (state.getBlock().hasTileEntity(state))
 			{
 				return;
 			}
 
-			if (!state.getBlock().canHarvestBlock(world, pos, player) || state.getBlockHardness(world, pos) < 0.0f)
+			if (!state.isFullBlock() || state.getBlockHardness(world, pos) < 0.0f)
 			{
 				return;
 			}
@@ -70,9 +78,9 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 	}
 
 	@Override
-	public void onRightClickItem(ItemStack stack, World world, EntityPlayer player)
+	public void onRightClickItem(EntityPlayer player, EnumHand hand)
 	{
-		if (!world.isRemote)
+		if (hand == EnumHand.MAIN_HAND && !player.world.isRemote)
 		{
 			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 

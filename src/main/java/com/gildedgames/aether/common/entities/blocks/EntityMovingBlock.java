@@ -8,6 +8,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -162,6 +163,16 @@ public class EntityMovingBlock extends Entity
 				// Try to snap into a coordinate on the ground
 				this.motionX += (pos.getX() - this.posX + 0.45D) * 0.15D;
 				this.motionZ += (pos.getZ() - this.posZ + 0.45D) * 0.15D;
+
+				IBlockState state = this.world.getBlockState(pos);
+
+				// We won't be able to land, reject and try to throw ourselves somewhere!
+				if (state.getBlock() != Blocks.AIR && !state.isNormalCube() && !state.getBlock().isReplaceable(this.world, pos))
+				{
+					this.motionX = -0.15D + (this.rand.nextDouble() * 0.3D);
+					this.motionY = 0.5D;
+					this.motionZ = -0.15D + (this.rand.nextDouble() * 0.3D);
+				}
 
 				double distanceFromCenter = pos.distanceSq(this.posX + 0.45D, this.posY, this.posZ + 0.45D);
 

@@ -6,9 +6,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -64,7 +62,7 @@ public class ItemToolHandler
 				return;
 			}
 
-			handler.onRightClickItem(event.getItemStack(), event.getWorld(), event.getEntityPlayer());
+			handler.onRightClickItem(event.getEntityPlayer(), event.getHand());
 		}
 	}
 
@@ -82,7 +80,7 @@ public class ItemToolHandler
 				return;
 			}
 
-			handler.onRightClickBlock(event.getItemStack(), event.getWorld(), event.getPos(), event.getEntityPlayer(), event.getFace());
+			handler.onRightClickBlock(event.getWorld(), event.getPos(), event.getEntityPlayer(), event.getHand(), event.getFace());
 		}
 	}
 
