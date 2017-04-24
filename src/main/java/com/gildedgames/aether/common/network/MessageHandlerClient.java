@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.network;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -33,19 +34,49 @@ public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMe
 	@SideOnly(Side.CLIENT)
 	public RES onMessage(REQ message, MessageContext ctx)
 	{
+		final Minecraft mc = Minecraft.getMinecraft();
+
 		if (this.executesOnGameThread)
 		{
-			Minecraft.getMinecraft().addScheduledTask(() -> {
-				this.onMessage(message, Minecraft.getMinecraft().player);
-			});
+			mc.addScheduledTask(new FutureMessage<>(this, message, mc.player));
 
 			return null;
 		}
 
 
-		return this.onMessage(message, Minecraft.getMinecraft().player);
+		return this.onMessage(message, mc.player);
 	}
 
 	@SideOnly(Side.CLIENT)
 	public abstract RES onMessage(REQ message, EntityPlayer player);
+
+	/**
+	 * This is needed to prevent a crash on dedicated servers. It seems that
+	 * {@link SideOnly} annotations don't apply to lambdas inside a method, causing
+	 * client code to be loaded on the server. It's unfortunate, but it is what it is.
+	 *
+	 * @param <REQ> The original {@link IMessage} type
+	 */
+	@SideOnly(Side.CLIENT)
+	private static class FutureMessage<REQ extends IMessage> implements Runnable
+	{
+		private final MessageHandlerClient<REQ, ?> handler;
+
+		private final REQ message;
+
+		private final EntityPlayerSP player;
+
+		private FutureMessage(MessageHandlerClient<REQ, ?> handler, REQ message, EntityPlayerSP player)
+		{
+			this.message = message;
+			this.player = player;
+			this.handler = handler;
+		}
+
+		@Override
+		public void run()
+		{
+			this.handler.onMessage(this.message, this.player);
+		}
+	}
 }
