@@ -29,6 +29,11 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 	{
 		PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
+		if (!aePlayer.getEntity().capabilities.allowEdit)
+		{
+			return;
+		}
+		
 		if (aePlayer.getGravititeAbility().getHeldBlock() == null)
 		{
 			IBlockState state = world.getBlockState(pos);
