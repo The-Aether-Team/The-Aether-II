@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.capabilities.item.effects;
 
 import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
 import com.gildedgames.aether.api.items.equipment.effects.IEffect;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectInstance;
+import com.gildedgames.aether.api.items.equipment.effects.EffectInstance;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.util.ResourceLocation;
@@ -15,7 +15,7 @@ public class WaterBreathEffect implements IEffect<WaterBreathEffect.Provider>
 	private static final ResourceLocation NAME = new ResourceLocation(AetherCore.MOD_ID, "water_breathing");
 
 	@Override
-	public IEffectInstance createInstance(Collection<Provider> providers)
+	public EffectInstance createInstance(Collection<Provider> providers)
 	{
 		Instance state = new Instance();
 
@@ -37,16 +37,12 @@ public class WaterBreathEffect implements IEffect<WaterBreathEffect.Provider>
 		}
 	}
 
-	class Instance implements IEffectInstance
+	private class Instance extends EffectInstance
 	{
-
 		@Override
 		public void onEntityUpdate(IPlayerAether player)
 		{
-			if (player.getEntity().isInWater())
-			{
-				player.getEntity().setAir(300); // full breath
-			}
+
 		}
 
 		@Override

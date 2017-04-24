@@ -1,7 +1,8 @@
 package com.gildedgames.aether.common.entities.effects;
 
+import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
 import com.gildedgames.aether.api.items.equipment.effects.IEffect;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectInstance;
+import com.gildedgames.aether.api.items.equipment.effects.EffectInstance;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 
 import java.util.ArrayList;
@@ -12,14 +13,17 @@ import java.util.Collection;
  */
 public class EffectPool
 {
+	private final IPlayerAether player;
+
 	private final Collection<IEffectProvider> providers = new ArrayList<>();
 
 	private final IEffect<IEffectProvider> factory;
 
-	private IEffectInstance instance;
+	private EffectInstance instance;
 
-	public EffectPool(IEffect<IEffectProvider> factory)
+	public EffectPool(IPlayerAether player, IEffect<IEffectProvider> factory)
 	{
+		this.player = player;
 		this.factory = factory;
 	}
 
@@ -50,7 +54,13 @@ public class EffectPool
 	 */
 	private void rebuildState()
 	{
+		if (this.instance != null)
+		{
+			this.instance.onInstanceRemoved(this.player);
+		}
+
 		this.instance = this.factory.createInstance(this.providers);
+		this.instance.onInstanceAdded(this.player);
 	}
 
 	/**
@@ -66,7 +76,7 @@ public class EffectPool
 	/**
 	 * @return The state of this effect for the entity
 	 */
-	public IEffectInstance getInstance()
+	public EffectInstance getInstance()
 	{
 		return this.instance;
 	}

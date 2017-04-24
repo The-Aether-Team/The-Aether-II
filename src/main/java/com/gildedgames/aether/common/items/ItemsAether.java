@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.items;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
@@ -376,21 +375,21 @@ public class ItemsAether
 			irradiated_tool = new ItemIrradiated(new RandomItemSelector(item -> item instanceof ItemTool)),
 			irradiated_ring = new ItemIrradiated(new RandomItemSelector(item ->
 			{
-				Optional<IEquipmentProperties> equipment = AetherAPI.items().getEquipmentProperties(item);
+				Optional<ItemEquipmentSlot> equipment = AetherAPI.items().getProperties(item).getEquipmentSlot();
 
-				return equipment.isPresent() && equipment.get().getSlot() == ItemEquipmentSlot.RING;
+				return equipment.isPresent() && equipment.get() == ItemEquipmentSlot.RING;
 			})),
 			irradiated_neckwear = new ItemIrradiated(new RandomItemSelector(item ->
 			{
-				Optional<IEquipmentProperties> equipment = AetherAPI.items().getEquipmentProperties(item);
+				Optional<ItemEquipmentSlot> equipment = AetherAPI.items().getProperties(item).getEquipmentSlot();
 
-				return equipment.isPresent() && equipment.get().getSlot() == ItemEquipmentSlot.NECKWEAR;
+				return equipment.isPresent() && equipment.get() == ItemEquipmentSlot.NECKWEAR;
 			})),
 			irradiated_charm = new ItemIrradiated(new RandomItemSelector(item ->
 			{
-				Optional<IEquipmentProperties> equipment = AetherAPI.items().getEquipmentProperties(item);
+				Optional<ItemEquipmentSlot> equipment = AetherAPI.items().getProperties(item).getEquipmentSlot();
 
-				return equipment.isPresent() && equipment.get().getSlot() == ItemEquipmentSlot.CHARM;
+				return equipment.isPresent() && equipment.get() == ItemEquipmentSlot.CHARM;
 			})),
 			irradiated_dust = new ItemIrradiatedVisuals();
 

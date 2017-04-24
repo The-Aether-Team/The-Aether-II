@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.containers;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
-import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
+import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
@@ -214,11 +214,11 @@ public class ContainerEquipment extends ContainerPlayer
 			{
 				int destIndex = -1;
 
-				Optional<IEquipmentProperties> properties = AetherAPI.items().getEquipmentProperties(stack.getItem());
+				IItemProperties properties = AetherAPI.items().getProperties(stack.getItem());
 
-				if (properties.isPresent())
+				if (properties.getEquipmentSlot().isPresent())
 				{
-					destIndex = this.getNextEmptySlot(properties.get().getSlot());
+					destIndex = this.getNextEmptySlot(properties.getEquipmentSlot().get());
 				}
 
 				if (destIndex >= 0)

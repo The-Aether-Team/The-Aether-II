@@ -5,15 +5,15 @@ import net.minecraft.util.ResourceLocation;
 import java.util.Collection;
 
 /***
- * Creates an {@link IEffectInstance} from the collection of {@link IEffectProvider} an entity has.
+ * Creates an {@link EffectInstance} from the collection of {@link IEffectProvider} an entity has.
  *
  * In layman's terms:
  * - {@link IEffect} creates an instanced effect for the entity from a set of {@link IEffectProvider}
  * - {@link IEffectProvider} provides an effect to an entity
- * - {@link IEffectInstance} is the instanced effect for an entity
+ * - {@link EffectInstance} is the instanced effect for an entity
  *
  * When a {@link IEffectProvider} is added to or removed from an entity (via equipping or
- * removing an item, usually), a new {@link IEffectInstance} will be created to represent the
+ * removing an item, usually), a new {@link EffectInstance} will be created to represent the
  * updated effect.
  *
  * @param <T> The {@link IEffectProvider} for this factory
@@ -21,11 +21,11 @@ import java.util.Collection;
 public interface IEffect<T extends IEffectProvider>
 {
 	/**
-	 * Creates an {@link IEffectInstance} of this effect from {@param instances}.
+	 * Creates an {@link EffectInstance} of this effect from {@param instances}.
 	 * @param providers The instances of this effect the entity currently has
-	 * @return The {@link IEffectInstance} for the entity
+	 * @return The {@link EffectInstance} for the entity
 	 */
-	IEffectInstance createInstance(Collection<T> providers);
+	EffectInstance createInstance(Collection<T> providers);
 
 	/**
 	 * The unique identifier used to link the factory a {@link IEffectProvider} uses. This

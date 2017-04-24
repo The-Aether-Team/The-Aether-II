@@ -1,7 +1,10 @@
 package com.gildedgames.aether.api.items;
 
-import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
+import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 
+import javax.annotation.Nullable;
+import java.util.Collection;
 import java.util.Optional;
 
 /**
@@ -10,10 +13,14 @@ import java.util.Optional;
 public interface IItemProperties
 {
 	/**
-	 * @return The equipment properties of this item, or empty if the item is
-	 * not equipment.
+	 * @return The equipment slot this item uses.
 	 */
-	Optional<IEquipmentProperties> getEquipmentProperties();
+	Optional<ItemEquipmentSlot> getEquipmentSlot();
+
+	/**
+	 * @return The collection of effect instances this item provides.
+	 */
+	Collection<IEffectProvider> getEffectProviders();
 
 	/**
 	 * @return The rarity of this item, or empty if this item does not have a

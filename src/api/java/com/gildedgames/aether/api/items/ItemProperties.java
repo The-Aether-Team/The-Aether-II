@@ -1,7 +1,11 @@
 package com.gildedgames.aether.api.items;
 
-import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
+import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 
+import javax.annotation.Nonnull;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Optional;
 
 /**
@@ -9,28 +13,40 @@ import java.util.Optional;
  */
 public class ItemProperties implements IItemProperties
 {
-	private final IEquipmentProperties equipment;
+	private final ItemEquipmentSlot slot;
+
+	private final Collection<IEffectProvider> effects;
 
 	private final ItemRarity rarity;
 
-	public ItemProperties(IEquipmentProperties equipment, ItemRarity rarity)
+	public ItemProperties()
 	{
-		this.equipment = equipment;
+		this(null, null, null);
+	}
+
+	public ItemProperties(ItemEquipmentSlot slot, Collection<IEffectProvider> effects, ItemRarity rarity)
+	{
+		this.slot = slot;
+		this.effects = effects == null ? Collections.emptyList() : effects;
 		this.rarity = rarity;
 	}
 
-	public Optional<IEquipmentProperties> getEquipmentProperties()
+	@Nonnull
+	@Override
+	public Optional<ItemEquipmentSlot> getEquipmentSlot()
 	{
-		return Optional.ofNullable(this.equipment);
+		return Optional.ofNullable(this.slot);
 	}
 
+	@Override
+	public Collection<IEffectProvider> getEffectProviders()
+	{
+		return this.effects;
+	}
+
+	@Override
 	public Optional<ItemRarity> getRarity()
 	{
 		return Optional.ofNullable(this.rarity);
-	}
-
-	public static ItemPropertiesBuilder builder()
-	{
-		return new ItemPropertiesBuilder();
 	}
 }

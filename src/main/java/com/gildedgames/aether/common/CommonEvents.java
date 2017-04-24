@@ -2,9 +2,8 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
-import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
+import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.capabilities.player.PlayerAether;
@@ -59,7 +58,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 public class CommonEvents
 {
@@ -370,11 +368,11 @@ public class CommonEvents
 	{
 		IInventoryEquipment inventory = player.getEquipmentInventory();
 
-		Optional<IEquipmentProperties> equipment = AetherAPI.items().getEquipmentProperties(stack.getItem());
+		IItemProperties equipment = AetherAPI.items().getProperties(stack.getItem());
 
-		if (equipment.isPresent())
+		if (equipment.getEquipmentSlot().isPresent())
 		{
-			int slot = inventory.getNextEmptySlotForType(equipment.get().getSlot());
+			int slot = inventory.getNextEmptySlotForType(equipment.getEquipmentSlot().get());
 
 			if (slot >= 0)
 			{

@@ -2,7 +2,8 @@ package com.gildedgames.aether.common.containers.inventory;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
-import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
+import com.gildedgames.aether.api.items.IItemProperties;
+import com.gildedgames.aether.api.items.ItemProperties;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,8 +20,6 @@ import java.util.Optional;
 
 public class InventoryEquipment implements IInventoryEquipment
 {
-	private static final int INVENTORY_SIZE = 14;
-
 	private static final ItemEquipmentSlot[] SLOT_TYPES = new ItemEquipmentSlot[]
 			{
 					ItemEquipmentSlot.RELIC,
@@ -41,7 +40,7 @@ public class InventoryEquipment implements IInventoryEquipment
 
 	private final IPlayerAether aePlayer;
 
-	private NonNullList<ItemStack> inventory = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
+	private NonNullList<ItemStack> inventory = NonNullList.withSize(14, ItemStack.EMPTY);
 
 	public InventoryEquipment(IPlayerAether aePlayer)
 	{
@@ -51,7 +50,7 @@ public class InventoryEquipment implements IInventoryEquipment
 	@Override
 	public int getSizeInventory()
 	{
-		return InventoryEquipment.INVENTORY_SIZE;
+		return this.inventory.size();
 	}
 
 	@Override
@@ -149,14 +148,9 @@ public class InventoryEquipment implements IInventoryEquipment
 	@Override
 	public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack)
 	{
-		Optional<IEquipmentProperties> feature = AetherAPI.items().getEquipmentProperties(stack.getItem());
+		IItemProperties props = AetherAPI.items().getProperties(stack.getItem());
 
-		if (feature.isPresent())
-		{
-			return feature.get().getSlot() == SLOT_TYPES[index];
-		}
-
-		return true;
+		return props.getEquipmentSlot().isPresent() && props.getEquipmentSlot().get() == SLOT_TYPES[index];
 	}
 
 	@Override

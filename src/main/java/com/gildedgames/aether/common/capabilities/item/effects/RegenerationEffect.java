@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.capabilities.item.effects;
 import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
 import com.gildedgames.aether.api.items.equipment.effects.EffectHelper;
 import com.gildedgames.aether.api.items.equipment.effects.IEffect;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectInstance;
+import com.gildedgames.aether.api.items.equipment.effects.EffectInstance;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.util.ResourceLocation;
@@ -19,7 +19,7 @@ public class RegenerationEffect implements IEffect<RegenerationEffect.Provider>
 	private static final ResourceLocation NAME = new ResourceLocation(AetherCore.MOD_ID, "regeneration");
 
 	@Override
-	public IEffectInstance createInstance(Collection<Provider> providers)
+	public EffectInstance createInstance(Collection<Provider> providers)
 	{
 		Instance state = new Instance();
 		state.healAmount = EffectHelper.combineInt(providers, instance -> instance.heal);
@@ -49,7 +49,7 @@ public class RegenerationEffect implements IEffect<RegenerationEffect.Provider>
 		}
 	}
 
-	class Instance implements IEffectInstance
+	private class Instance extends EffectInstance
 	{
 		private int healAmount;
 

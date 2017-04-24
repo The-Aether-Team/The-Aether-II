@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.api.items.IItemProperties;
-import com.gildedgames.aether.api.items.equipment.IEquipmentProperties;
+import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.items.equipment.effects.IEffect;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.client.gui.PerformanceIngame;
@@ -83,12 +83,12 @@ public class ClientEventHandler
 		IItemProperties properties = AetherAPI.items().getProperties(event.getItemStack().getItem());
 
 		// Equipment Properties
-		if (properties.getEquipmentProperties().isPresent())
+		if (properties.getEquipmentSlot().isPresent())
 		{
-			IEquipmentProperties equipment = properties.getEquipmentProperties().get();
+			ItemEquipmentSlot slot = properties.getEquipmentSlot().get();
 
 			// Equipment Effects
-			for (IEffectProvider instance : equipment.getEffectInstances())
+			for (IEffectProvider instance : properties.getEffectProviders())
 			{
 				IEffect<IEffectProvider> factory = AetherAPI.equipment().getFactory(instance.getFactory());
 				factory.createInstance(Collections.singleton(instance)).addItemInformation(event.getToolTip());
@@ -96,7 +96,7 @@ public class ClientEventHandler
 
 			// Slot Type
 			event.getToolTip().add("");
-			event.getToolTip().add(I18n.format(equipment.getSlot().getUnlocalizedName()));
+			event.getToolTip().add(I18n.format(slot.getUnlocalizedName()));
 		}
 
 		// Rarity

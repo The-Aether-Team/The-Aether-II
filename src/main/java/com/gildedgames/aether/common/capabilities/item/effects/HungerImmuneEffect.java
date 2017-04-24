@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.capabilities.item.effects;
 import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
 import com.gildedgames.aether.api.items.equipment.effects.EffectHelper;
 import com.gildedgames.aether.api.items.equipment.effects.IEffect;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectInstance;
+import com.gildedgames.aether.api.items.equipment.effects.EffectInstance;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,7 +18,7 @@ public class HungerImmuneEffect implements IEffect<HungerImmuneEffect.Provider>
 	private static final ResourceLocation NAME = new ResourceLocation(AetherCore.MOD_ID, "hunger_immune");
 
 	@Override
-	public IEffectInstance createInstance(Collection<Provider> providers)
+	public EffectInstance createInstance(Collection<Provider> providers)
 	{
 		Instance state = new Instance();
 		state.type = EffectHelper.combineInt(providers, instance -> instance.type);
@@ -54,7 +54,7 @@ public class HungerImmuneEffect implements IEffect<HungerImmuneEffect.Provider>
 		}
 	}
 
-	class Instance implements IEffectInstance
+	private class Instance extends EffectInstance
 	{
 
 		private int type;
