@@ -53,10 +53,8 @@ public class BlockFloating extends Block
 			{
 				if (!world.isRemote)
 				{
-					List<ItemStack> drops = this.getDrops(world, pos, world.getBlockState(pos), 0);
-
 					EntityFloatingBlock entity = new EntityFloatingBlock(world,
-							pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, world.getBlockState(pos), drops);
+							pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, world.getBlockState(pos));
 					world.spawnEntity(entity);
 				}
 			}

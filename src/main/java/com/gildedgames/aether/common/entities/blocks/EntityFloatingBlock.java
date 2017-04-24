@@ -27,8 +27,6 @@ public class EntityFloatingBlock extends Entity
 
 	private static final DataParameter<Byte> BLOCK_METADATA = new DataParameter<>(21, DataSerializers.BYTE);
 
-	private final List<ItemStack> drops = new ArrayList<>();
-
 	private boolean hasActivated = false;
 
 	public EntityFloatingBlock(World world)
@@ -41,7 +39,7 @@ public class EntityFloatingBlock extends Entity
 		this.motionZ = 0.0D;
 	}
 
-	public EntityFloatingBlock(World world, double x, double y, double z, IBlockState state, List<ItemStack> drops)
+	public EntityFloatingBlock(World world, double x, double y, double z, IBlockState state)
 	{
 		this(world);
 
@@ -52,8 +50,6 @@ public class EntityFloatingBlock extends Entity
 		this.prevPosX = x;
 		this.prevPosY = y;
 		this.prevPosZ = z;
-
-		this.drops.addAll(drops);
 	}
 
 	@Override
@@ -88,19 +84,6 @@ public class EntityFloatingBlock extends Entity
 		if (this.ticksExisted > 200)
 		{
 			this.setDead();
-
-			if (!this.world.isRemote)
-			{
-				if (this.world.getGameRules().getBoolean("doTileDrops"))
-				{
-					for (ItemStack stack : this.drops)
-					{
-						EntityItem entityItem = new EntityItem(this.world, this.posX, this.posY, this.posZ, stack);
-
-						this.world.spawnEntity(entityItem);
-					}
-				}
-			}
 		}
 		else
 		{
@@ -181,16 +164,6 @@ public class EntityFloatingBlock extends Entity
 		this.ticksExisted = compound.getInteger("TicksExisted");
 
 		this.hasActivated = this.ticksExisted > 1;
-
-		if (compound.hasKey("Drops"))
-		{
-			NBTTagList drops = compound.getTagList("Drops", 10);
-
-			for (NBTTagCompound item : NBTHelper.getIterator(drops))
-			{
-				this.drops.add(new ItemStack(item));
-			}
-		}
 	}
 
 	@Override
@@ -203,18 +176,6 @@ public class EntityFloatingBlock extends Entity
 		compound.setString("Block", Block.REGISTRY.getNameForObject(block).toString());
 		compound.setByte("BlockState", (byte) block.getMetaFromState(state));
 		compound.setInteger("TicksExisted", this.ticksExisted);
-
-		if (this.drops.size() > 0)
-		{
-			NBTTagList drops = new NBTTagList();
-
-			for (ItemStack stack : this.drops)
-			{
-				drops.appendTag(stack.writeToNBT(new NBTTagCompound()));
-			}
-
-			compound.setTag("Drops", drops);
-		}
 	}
 
 	public IBlockState getBlockState()
