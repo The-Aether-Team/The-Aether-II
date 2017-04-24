@@ -38,6 +38,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 
+
 public class ItemsAether
 {
 	private static final Collection<Item> registeredItems = new ArrayList<>();
@@ -45,6 +46,8 @@ public class ItemsAether
 	public static final Item skyroot_stick = new Item();
 
 	public static final Item cloudwool = new Item();
+
+	public static final Item cloudtwine = new Item();
 
 	public static final ItemMoaFeather moa_feather = new ItemMoaFeather();
 
@@ -55,8 +58,6 @@ public class ItemsAether
 			zanite_gemstone = new Item(),
 			arkenium = new Item(),
 			arkenium_strip = new Item(),
-			arkenium_ore = new Item(),
-			gravitite_ore = new Item(),
 			gravitite_plate = new Item();
 
 	public static final ItemTool skyroot_axe = new ItemAetherAxe(MaterialsAether.SKYROOT_TOOL),
@@ -175,6 +176,7 @@ public class ItemsAether
 			valkyrie_lance = new ItemAetherSword(MaterialsAether.LEGENDARY_TOOL, ItemAbilityType.PASSIVE);
 
 	public static final ItemDoor skyroot_door = new ItemDoor(BlocksAether.skyroot_door),
+	        secret_skyroot_door = new ItemDoor(BlocksAether.secret_skyroot_door),
 			arkenium_door = new ItemDoor(BlocksAether.arkenium_door);
 
 	public static final ItemCrossbow skyroot_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F),
@@ -405,9 +407,8 @@ public class ItemsAether
 		registerItem("arkenium", arkenium.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("arkenium_strip", arkenium_strip.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("icestone", icestone.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("arkenium_ore_item", arkenium_ore.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("gravitite_ore_item", gravitite_ore.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("gravitite_plate", gravitite_plate.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("cloudtwine", cloudtwine.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("cloudwool", cloudwool.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("moa_feather", moa_feather.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("cockatrice_feather", cockatrice_feather.setCreativeTab(CreativeTabsAether.MATERIALS));
@@ -547,6 +548,7 @@ public class ItemsAether
 		registerItem("valkyrie_lance", valkyrie_lance);
 
 		registerItem("skyroot_door_item", skyroot_door.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		registerItem("secret_skyroot_door_item", secret_skyroot_door.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
 		registerItem("arkenium_door_item", arkenium_door.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		//registerItem("blightwillow_door_item", blightwillow_door_item.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		//registerItem("earthshifter_door_item", earthshifter_door_item.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
@@ -569,9 +571,9 @@ public class ItemsAether
 
 		registerItem("skyroot_sign", skyroot_sign.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
-		registerItem("aether_portal_frame", aether_portal_frame.setCreativeTab(CreativeTabsAether.UTILITY));
-		registerItem("nether_portal_frame", nether_portal_frame.setCreativeTab(CreativeTabs.TRANSPORTATION));
-		registerItem("end_portal_frame", end_portal_frame.setCreativeTab(CreativeTabs.TRANSPORTATION));
+		registerItem("aether_portal_frame", aether_portal_frame.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
+		registerItem("nether_portal_frame", nether_portal_frame.setCreativeTab(CreativeTabs.MISC));
+		registerItem("end_portal_frame", end_portal_frame.setCreativeTab(CreativeTabs.MISC));
 
 		registerItem("shard_of_life", shard_of_life.setMaxStackSize(4).setCreativeTab(CreativeTabsAether.CONSUMABLES));
 

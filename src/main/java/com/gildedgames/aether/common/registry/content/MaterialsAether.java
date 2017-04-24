@@ -25,7 +25,7 @@ public class MaterialsAether
 
 	public static final ToolMaterial HOLYSTONE_TOOL = EnumHelper.addToolMaterial("aether_holystone", 2, 131, 4.0F, 1.0F, 5);
 
-	public static final ToolMaterial ARKENIUM_TOOL = EnumHelper.addToolMaterial("aether_arkenium", 1, 3192, 5.5F, 4.0F, 14);
+	public static final ToolMaterial ARKENIUM_TOOL = EnumHelper.addToolMaterial("aether_arkenium", 2, 3192, 5.5F, 4.0F, 14);
 
 	public static final ToolMaterial ZANITE_TOOL = EnumHelper.addToolMaterial("aether_zanite", 2, 250, 6.0F, 2.0F, 14);
 

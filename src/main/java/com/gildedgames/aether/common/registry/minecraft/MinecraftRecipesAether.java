@@ -84,16 +84,16 @@ public class MinecraftRecipesAether
 
 	private void registerFurnaceRecipes()
 	{
-		this.registerSmeltingRecipe(new ItemStack(BlocksAether.holystone), new ItemStack(BlocksAether.agiosite), 0.1f);
-		this.registerSmeltingRecipe(new ItemStack(ItemsAether.arkenium_ore), new ItemStack(ItemsAether.arkenium), 0.85f);
-		this.registerSmeltingRecipe(new ItemStack(ItemsAether.gravitite_ore), new ItemStack(ItemsAether.gravitite_plate), 1.0f);
-		this.registerSmeltingRecipe(new ItemStack(BlocksAether.quicksoil), new ItemStack(BlocksAether.quicksoil_glass), 0.1f);
-		this.registerSmeltingRecipe(new ItemStack(ItemsAether.moa_egg), new ItemStack(ItemsAether.fried_moa_egg), 0.4f);
-		this.registerSmeltingRecipe(new ItemStack(ItemsAether.rainbow_moa_egg), new ItemStack(ItemsAether.fried_moa_egg), 0.4f);
-		this.registerSmeltingRecipe(new ItemStack(BlocksAether.crude_scatterglass), new ItemStack(BlocksAether.scatterglass), 0.1f);
-		this.registerSmeltingRecipe(new ItemStack(ItemsAether.raw_taegore_meat), new ItemStack(ItemsAether.taegore_steak), 0.4f);
-		this.registerSmeltingRecipe(new ItemStack(ItemsAether.burrukai_rib_cut), new ItemStack(ItemsAether.burrukai_ribs), 0.4f);
-		this.registerSmeltingRecipe(new ItemStack(ItemsAether.kirrid_loin), new ItemStack(ItemsAether.kirrid_cutlet), 0.4f);
+		registerSmeltingRecipe(new ItemStack(BlocksAether.holystone), new ItemStack(BlocksAether.agiosite), 0.1f);
+		registerSmeltingRecipe(new ItemStack(BlocksAether.arkenium_ore), new ItemStack(ItemsAether.arkenium), 0.85f);
+		registerSmeltingRecipe(new ItemStack(BlocksAether.gravitite_ore), new ItemStack(ItemsAether.gravitite_plate), 1.0f);
+		registerSmeltingRecipe(new ItemStack(BlocksAether.quicksoil), new ItemStack(BlocksAether.quicksoil_glass), 0.1f);
+		registerSmeltingRecipe(new ItemStack(ItemsAether.moa_egg), new ItemStack(ItemsAether.fried_moa_egg), 0.4f);
+		registerSmeltingRecipe(new ItemStack(ItemsAether.rainbow_moa_egg), new ItemStack(ItemsAether.fried_moa_egg), 0.4f);
+		registerSmeltingRecipe(new ItemStack(BlocksAether.crude_scatterglass), new ItemStack(BlocksAether.scatterglass), 0.1f);
+		registerSmeltingRecipe(new ItemStack(ItemsAether.raw_taegore_meat), new ItemStack(ItemsAether.taegore_steak), 0.4f);
+		registerSmeltingRecipe(new ItemStack(ItemsAether.burrukai_rib_cut), new ItemStack(ItemsAether.burrukai_ribs), 0.4f);
+		registerSmeltingRecipe(new ItemStack(ItemsAether.kirrid_loin), new ItemStack(ItemsAether.kirrid_cutlet), 0.4f);
 	}
 
 	public void preInit()
@@ -116,20 +116,20 @@ public class MinecraftRecipesAether
 
 		// Parachutes
 
-		this.registerShapedRecipe(new ItemStack(ItemsAether.cloud_parachute, 1, EntityParachute.Type.COLD.ordinal()), "XXX", " S ",
-				'X', new ItemStack(BlocksAether.aercloud, 1, BlockAercloud.COLD_AERCLOUD.getMeta()), 'S', Items.STRING);
+		registerShapedRecipe(new ItemStack(ItemsAether.cloud_parachute, 1, EntityParachute.Type.COLD.ordinal()), "XXX", " S ",
+				'X', new ItemStack(BlocksAether.aercloud, 1, BlockAercloud.COLD_AERCLOUD.getMeta()), 'S', ItemsAether.cloudtwine);
 
-		this.registerShapedRecipe(new ItemStack(ItemsAether.cloud_parachute, 1, EntityParachute.Type.BLUE.ordinal()), "XXX", " S ",
-				'X', new ItemStack(BlocksAether.aercloud, 1, BlockAercloud.BLUE_AERCLOUD.getMeta()), 'S', Items.STRING);
+		registerShapedRecipe(new ItemStack(ItemsAether.cloud_parachute, 1, EntityParachute.Type.BLUE.ordinal()), "XXX", " S ",
+				'X', new ItemStack(BlocksAether.aercloud, 1, BlockAercloud.BLUE_AERCLOUD.getMeta()), 'S', ItemsAether.cloudtwine);
 
-		this.registerShapedRecipe(new ItemStack(ItemsAether.cloud_parachute, 1, EntityParachute.Type.GOLDEN.ordinal()), "XXX", " S ",
-				'X', new ItemStack(BlocksAether.aercloud, 1, BlockAercloud.GOLDEN_AERCLOUD.getMeta()), 'S', Items.STRING);
+		registerShapedRecipe(new ItemStack(ItemsAether.cloud_parachute, 1, EntityParachute.Type.GOLDEN.ordinal()), "XXX", " S ",
+				'X', new ItemStack(BlocksAether.aercloud, 1, BlockAercloud.GOLDEN_AERCLOUD.getMeta()), 'S', ItemsAether.cloudtwine);
 
-		this.registerShapedRecipe(new ItemStack(ItemsAether.cloud_parachute, 1, EntityParachute.Type.PURPLE.ordinal()), "XXX", " S ",
-				'X', new ItemStack(BlocksAether.aercloud, 1, BlockAercloud.PURPLE_AERCLOUD.getMeta()), 'S', Items.STRING);
+		registerShapedRecipe(new ItemStack(ItemsAether.cloud_parachute, 1, EntityParachute.Type.PURPLE.ordinal()), "XXX", " S ",
+				'X', new ItemStack(BlocksAether.aercloud, 1, BlockAercloud.PURPLE_AERCLOUD.getMeta()), 'S', ItemsAether.cloudtwine);
 
-		this.registerShapedRecipe(new ItemStack(ItemsAether.cloud_parachute, 1, EntityParachute.Type.GREEN.ordinal()), "XXX", " S ",
-				'X', new ItemStack(BlocksAether.aercloud, 1, BlockAercloud.GREEN_AERCLOUD.getMeta()), 'S', Items.STRING);
+		registerShapedRecipe(new ItemStack(ItemsAether.cloud_parachute, 1, EntityParachute.Type.GREEN.ordinal()), "XXX", " S ",
+				'X', new ItemStack(BlocksAether.aercloud, 1, BlockAercloud.GREEN_AERCLOUD.getMeta()), 'S', ItemsAether.cloudtwine);
 
 		// Glass Panes
 
@@ -164,8 +164,8 @@ public class MinecraftRecipesAether
 				'X', BlocksAether.cloudwool_block);
 
 		// Saddle
-		this.registerShapedRecipe(new ItemStack(Items.SADDLE, 1), "XXX", "XZX",
-				'X', "leather", 'Z', "string");
+		registerShapedRecipe(new ItemStack(Items.SADDLE, 1), "XXX", "XZX",
+				'X', "leather", 'Z', new ItemStack (ItemsAether.cloudtwine));
 
 		// Skyroot Planks
 		this.registerShapedRecipe(new ItemStack(BlocksAether.skyroot_planks, 4), "X",
@@ -205,8 +205,8 @@ public class MinecraftRecipesAether
 				'H', new ItemStack(BlocksAether.holystone), 'Z', new ItemStack(ItemsAether.zanite_gemstone), 'A', new ItemStack(ItemsAether.arkenium));
 
 		// Icestone Cooler
-		this.registerShapedRecipe(new ItemStack(BlocksAether.icestone_cooler), "SAS", "H H", "SSS",
-				'H', new ItemStack(BlocksAether.holystone), 'A', new ItemStack(ItemsAether.arkenium), 'S', new ItemStack(BlocksAether.skyroot_planks));
+		registerShapedRecipe(new ItemStack(BlocksAether.icestone_cooler), "AAA", "HIH", "SSS",
+				'H', new ItemStack(BlocksAether.holystone), 'A', new ItemStack(ItemsAether.arkenium), 'S', new ItemStack(BlocksAether.skyroot_planks), 'I', new ItemStack(ItemsAether.icestone));
 
 		// Masonry Bench
 		this.registerShapedRecipe(new ItemStack(BlocksAether.masonry_bench), "AAA", "SSS", "HHH",
@@ -381,31 +381,31 @@ public class MinecraftRecipesAether
 		// Crossbow
 		this.registerShapedRecipe(new ItemStack(ItemsAether.skyroot_crossbow), "ZZY", "XYZ", "WXZ",
 				'W', new ItemStack(ItemsAether.skyroot_stick),
-				'X', "string",
+				'X', new ItemStack (ItemsAether.cloudtwine),
 				'Y', new ItemStack(BlocksAether.skyroot_planks),
 				'Z', new ItemStack(ItemsAether.arkenium_strip));
 
 		this.registerShapedRecipe(new ItemStack(ItemsAether.holystone_crossbow), "ZZY", "XYZ", "WXZ",
 				'W', new ItemStack(ItemsAether.skyroot_stick),
-				'X', "string",
+				'X', new ItemStack (ItemsAether.cloudtwine),
 				'Y', new ItemStack(BlocksAether.holystone),
 				'Z', new ItemStack(ItemsAether.arkenium_strip));
 
 		this.registerShapedRecipe(new ItemStack(ItemsAether.zanite_crossbow), "ZZY", "XYZ", "WXZ",
 				'W', new ItemStack(ItemsAether.skyroot_stick),
-				'X', "string",
+				'X', new ItemStack (ItemsAether.cloudtwine),
 				'Y', new ItemStack(ItemsAether.zanite_gemstone),
 				'Z', new ItemStack(ItemsAether.arkenium_strip));
 
 		this.registerShapedRecipe(new ItemStack(ItemsAether.arkenium_crossbow), "ZZY", "XYZ", "WXZ",
 				'W', new ItemStack(ItemsAether.skyroot_stick),
-				'X', "string",
+				'X', new ItemStack (ItemsAether.cloudtwine),
 				'Y', new ItemStack(ItemsAether.arkenium),
 				'Z', new ItemStack(ItemsAether.arkenium_strip));
 
 		this.registerShapedRecipe(new ItemStack(ItemsAether.gravitite_crossbow), "ZZY", "XYZ", "WXZ",
 				'W', new ItemStack(ItemsAether.skyroot_stick),
-				'X', "string",
+				'X', new ItemStack (ItemsAether.cloudtwine),
 				'Y', new ItemStack(ItemsAether.gravitite_plate),
 				'Z', new ItemStack(ItemsAether.arkenium_strip));
 
@@ -636,8 +636,8 @@ public class MinecraftRecipesAether
 		this.registerShapedRecipe(new ItemStack(ItemsAether.zanite_ring), " X ", "X X", " X ",
 				'X', new ItemStack(ItemsAether.zanite_gemstone));
 		// Zanite Pendant
-		this.registerShapedRecipe(new ItemStack(ItemsAether.zanite_pendant), "XXX", "X X", " Y ",
-				'X', "string",
+		registerShapedRecipe(new ItemStack(ItemsAether.zanite_pendant), "XXX", "X X", " Y ",
+				'X', new ItemStack (ItemsAether.cloudtwine),
 				'Y', new ItemStack(ItemsAether.zanite_gemstone));
 	}
 

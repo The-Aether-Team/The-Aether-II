@@ -208,6 +208,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.holystone_bookshelf, "holystone_bookshelf");
 
 		registerItemModels(ItemsAether.skyroot_stick, "skyroot_stick");
+		registerItemModels(ItemsAether.cloudtwine, "cloudtwine");
 		registerItemModels(ItemsAether.cloudwool, "cloudwool");
 		registerItemModels(ItemsAether.golden_amber, "golden_amber");
 		registerItemModels(ItemsAether.moa_feather, "moa_feather");
@@ -218,8 +219,6 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.zanite_gemstone, "zanite_gemstone");
 		registerItemModels(ItemsAether.arkenium, "arkenium");
 		registerItemModels(ItemsAether.arkenium_strip, "arkenium_strip");
-		registerItemModels(ItemsAether.arkenium_ore, "arkenium_ore");
-		registerItemModels(ItemsAether.gravitite_ore, "gravitite_ore");
 		registerItemModels(ItemsAether.gravitite_plate, "gravitite_plate");
 
 		registerItemModels(ItemsAether.skyroot_pickaxe, "tools/skyroot_pickaxe");
@@ -354,9 +353,11 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.candy_cane_sword, "weapons/candy_cane_sword");
 
 		registerItemModels(ItemsAether.skyroot_door, "skyroot_door");
+		registerItemModels(ItemsAether.secret_skyroot_door, "secret_skyroot_door");
 		registerItemModels(ItemsAether.arkenium_door, "arkenium_door");
 
 		registerItemModels(BlocksAether.skyroot_trapdoor, "skyroot_trapdoor");
+		registerItemModels(BlocksAether.secret_skyroot_trapdoor, "secret_skyroot_trapdoor");
 
 		registerItemModels(BlocksAether.skyroot_ladder, "ladders/skyroot_ladder");
 

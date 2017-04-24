@@ -124,6 +124,8 @@ public class BlocksAether
 
 	public static final BlockCustomDoor skyroot_door = new BlockCustomDoor(Material.WOOD, () -> ItemsAether.skyroot_door, SoundType.WOOD);
 
+	public static final BlockCustomDoor secret_skyroot_door = new BlockCustomDoor(Material.WOOD, () -> ItemsAether.secret_skyroot_door, SoundType.WOOD);
+
 	public static final BlockCustomDoor arkenium_door = new BlockCustomDoor(Material.IRON, () -> ItemsAether.arkenium_door, SoundType.METAL);
 
 	public static final BlockSkyrootChest skyroot_chest = new BlockSkyrootChest();
@@ -141,6 +143,8 @@ public class BlocksAether
 	public static final BlockWallSkyrootSign wall_skyroot_sign = new BlockWallSkyrootSign();
 
 	public static final BlockSkyrootTrapDoor skyroot_trapdoor = new BlockSkyrootTrapDoor();
+
+	public static final BlockSecretSkyrootTrapDoor secret_skyroot_trapdoor = new BlockSecretSkyrootTrapDoor();
 
 	public static final BlockSkyrootPressurePlate skyroot_pressure_plate = new BlockSkyrootPressurePlate();
 
@@ -304,6 +308,7 @@ public class BlocksAether
 		registerBlock("holystone_bookshelf", BlocksAether.holystone_bookshelf.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
 		registerBlock("skyroot_door", BlocksAether.skyroot_door);
+		registerBlock("secret_skyroot_door", BlocksAether.secret_skyroot_door);
 		registerBlock("arkenium_door", BlocksAether.arkenium_door);
 
 		registerBlock("icestone_bricks", BlocksAether.icestone_bricks.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
@@ -315,6 +320,7 @@ public class BlocksAether
 		registerBlock("standing_skyroot_sign", BlocksAether.standing_skyroot_sign);
 
 		registerBlock("skyroot_trapdoor", BlocksAether.skyroot_trapdoor.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		registerBlock("secret_skyroot_trapdoor", BlocksAether.secret_skyroot_trapdoor.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
 
 		registerBlock("skyroot_ladder", BlocksAether.skyroot_ladder.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
@@ -475,6 +481,8 @@ public class BlocksAether
 
 		skyroot_door.setHarvestLevel("axe", 0);
 		skyroot_trapdoor.setHarvestLevel("axe", 0);
+		secret_skyroot_door.setHarvestLevel("axe", 0);
+		secret_skyroot_trapdoor.setHarvestLevel("axe", 0);
 
 		holystone_wall.setHarvestLevel("pickaxe", 0);
 		mossy_holystone_wall.setHarvestLevel("pickaxe", 0);
