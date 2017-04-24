@@ -3,13 +3,13 @@ package com.gildedgames.aether.common.capabilities.player;
 import com.gildedgames.aether.api.capabilites.AetherCapabilities;
 import com.gildedgames.aether.api.capabilites.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
-import com.gildedgames.aether.api.capabilites.entity.stats.EntityStats;
-import com.gildedgames.aether.api.capabilites.entity.stats.IEntityStat;
-import com.gildedgames.aether.api.capabilites.entity.stats.IEntityStatContainer;
+import com.gildedgames.aether.common.entities.SharedAetherAttributes;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.DiedInAetherPacket;
 import com.gildedgames.aether.common.world.chunk.hooks.capabilities.ChunkAttachment;
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.IAttribute;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.math.ChunkPos;
@@ -24,8 +24,6 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
-
-import java.util.Optional;
 
 public class PlayerAetherEvents
 {
@@ -106,25 +104,23 @@ public class PlayerAetherEvents
 		}
 
 		// TODO: remove this dumb debug effect
-		if (event.getEntity().hasCapability(AetherCapabilities.ENTITY_STATS, null))
+		EntityLivingBase entity = event.getEntityLiving();
+
+
+		IAttributeInstance attribute = entity.getEntityAttribute(SharedAetherAttributes.STAT_VOLATILE);
+
+		if (attribute == null)
 		{
-			Entity entity = event.getEntity();
+			return;
+		}
 
-			IEntityStatContainer container = entity.getCapability(AetherCapabilities.ENTITY_STATS, null);
+		double attempt = Math.random();
+		double threshold = attribute.getAttributeValue();
 
-			Optional<IEntityStat> stat = container.getStat(EntityStats.VOLATILE);
-
-			if (stat.isPresent())
-			{
-				double attempt = Math.random();
-				double threshold = stat.get().getValue();
-
-				if (attempt <= threshold)
-				{
-					entity.getEntityWorld().newExplosion(entity, entity.posX, entity.posY, entity.posZ, 2.0f, false, true);
-					entity.setDead();
-				}
-			}
+		if (attempt <= threshold)
+		{
+			entity.getEntityWorld().newExplosion(entity, entity.posX, entity.posY, entity.posZ, 2.0f, false, true);
+			entity.setDead();
 		}
 	}
 

@@ -1,15 +1,12 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
-import com.gildedgames.aether.api.capabilites.entity.stats.EntityStats;
-import com.gildedgames.aether.api.capabilites.entity.stats.IEntityWithStats;
-import com.gildedgames.aether.api.capabilites.entity.stats.StatBase;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.entities.SharedAetherAttributes;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.google.common.collect.Sets;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -31,12 +28,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
-import java.util.Collection;
 import java.util.Set;
 
-public class EntityAerbunny extends EntityAetherAnimal implements IEntityWithStats
+public class EntityAerbunny extends EntityAetherAnimal
 {
-
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.CARROT, Items.POTATO, Items.BEETROOT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry);
 
 	@SideOnly(Side.CLIENT)
@@ -70,6 +65,8 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityWithSta
 
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
+
+		this.getAttributeMap().registerAttribute(SharedAetherAttributes.STAT_VOLATILE).setBaseValue(0.2D);
 	}
 
 	@Override
@@ -198,12 +195,6 @@ public class EntityAerbunny extends EntityAetherAnimal implements IEntityWithSta
 	public EntityAgeable createChild(final EntityAgeable ageable)
 	{
 		return new EntityAerbunny(this.world);
-	}
-
-	@Override
-	public void registerStats(Collection<StatBase> stats)
-	{
-		stats.add(new StatBase(EntityStats.VOLATILE, 0.2D));
 	}
 
 	private class AerbunnyJumpHelper extends EntityJumpHelper

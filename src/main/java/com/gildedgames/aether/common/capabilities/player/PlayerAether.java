@@ -77,12 +77,17 @@ public class PlayerAether implements IPlayerAether
 
 	public static PlayerAether getPlayer(Entity player)
 	{
-		if (!player.hasCapability(AetherCapabilities.PLAYER_DATA, null))
+		if (!PlayerAether.hasCapability(player))
 		{
 			return null;
 		}
 
 		return (PlayerAether) player.getCapability(AetherCapabilities.PLAYER_DATA, null);
+	}
+
+	public static boolean hasCapability(Entity entity)
+	{
+		return entity.hasCapability(AetherCapabilities.PLAYER_DATA, null);
 	}
 
 	public boolean hasDiedInAetherBefore()
