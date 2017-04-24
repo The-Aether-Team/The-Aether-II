@@ -3,7 +3,9 @@ package com.gildedgames.aether.common.blocks;
 import com.gildedgames.aether.common.ReflectionAether;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -24,7 +26,15 @@ public class QuicksoilProcessor
 	@SubscribeEvent
 	public static void onLivingEntityUpdate(LivingEvent.LivingUpdateEvent event)
 	{
-		final Entity entity = event.getEntity();
+		final EntityLivingBase entity = event.getEntityLiving();
+
+		if (entity instanceof EntityPlayer)
+		{
+			if (((EntityPlayer) entity).isSpectator())
+			{
+				return;
+			}
+		}
 
 		List<AxisAlignedBB> boxes = entity.world.getCollisionBoxes(entity, entity.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
 
