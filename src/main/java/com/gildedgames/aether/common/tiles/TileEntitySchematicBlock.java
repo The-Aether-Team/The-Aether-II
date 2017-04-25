@@ -88,7 +88,7 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 
 		for (int i = 0; i < this.contents.size(); ++i)
 		{
-			if (this.contents.get(i) != ItemStack.EMPTY)
+			if (!this.contents.get(i).isEmpty())
 			{
 				NBTTagCompound nbttagcompound = new NBTTagCompound();
 				nbttagcompound.setByte("Slot", (byte) i);

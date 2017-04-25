@@ -344,7 +344,7 @@ public class CommonEvents
 	{
 		IPlayerAether aePlayer = PlayerAether.getPlayer(event.getEntityPlayer());
 
-		if (event.getItemStack() == ItemStack.EMPTY || aePlayer == null)
+		if (event.getItemStack().isEmpty() || aePlayer == null)
 		{
 			return;
 		}

@@ -24,7 +24,7 @@ public class ItemHealingStone extends Item
 
 		this.addPropertyOverride(new ResourceLocation("uses"), (stack, world, entity) ->
 		{
-			if (stack != ItemStack.EMPTY)
+			if (!stack.isEmpty())
 			{
 				return ItemHealingStone.getUsesLeft(stack) * 0.2F;
 			}

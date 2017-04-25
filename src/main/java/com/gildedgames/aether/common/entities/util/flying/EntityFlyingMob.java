@@ -119,8 +119,7 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 				ItemStack itemstack = this.getHeldItemMainhand();
 				ItemStack itemstack1 = entityplayer.isHandActive() ? entityplayer.getActiveItemStack() : ItemStack.EMPTY;
 
-				if (itemstack != ItemStack.EMPTY && itemstack1 != ItemStack.EMPTY && itemstack.getItem() instanceof ItemAxe
-						&& itemstack1.getItem() == Items.SHIELD)
+				if (itemstack.getItem() instanceof ItemAxe && itemstack1.getItem() == Items.SHIELD)
 				{
 					float f1 = 0.25F + (float) EnchantmentHelper.getEfficiencyModifier(this) * 0.05F;
 

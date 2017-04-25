@@ -71,8 +71,8 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 
 	public boolean isCooling()
 	{
-		return this.getItemToCool() != ItemStack.EMPTY && this.reqTemperatureThreshold < 0 && this.getStackInSlot(IRRADIATED_DUST_INDEX) == ItemStack.EMPTY
-				&& this.getStackInSlot(AMBROSIUM_INDEX) != ItemStack.EMPTY && this.getStackInSlot(AMBROSIUM_INDEX).getCount() >= 4;
+		return !this.getItemToCool().isEmpty() && this.reqTemperatureThreshold < 0 && this.getStackInSlot(IRRADIATED_DUST_INDEX).isEmpty()
+				&& !this.getStackInSlot(AMBROSIUM_INDEX).isEmpty() && this.getStackInSlot(AMBROSIUM_INDEX).getCount() >= 4;
 	}
 
 	public int getCurrentCoolingProgress()
@@ -260,7 +260,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 
 		for (int i = 0; i < this.inventory.size(); ++i)
 		{
-			if (this.inventory.get(i) != ItemStack.EMPTY)
+			if (!this.inventory.get(i).isEmpty())
 			{
 				NBTTagCompound stackNBT = new NBTTagCompound();
 

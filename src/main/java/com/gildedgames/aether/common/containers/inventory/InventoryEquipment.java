@@ -109,7 +109,7 @@ public class InventoryEquipment implements IInventoryEquipment
 	{
 		for (int i = 0; i < this.inventory.size(); i++)
 		{
-			if (this.inventory.get(i) == ItemStack.EMPTY && SLOT_TYPES[i] == type)
+			if (this.inventory.get(i).isEmpty() && SLOT_TYPES[i] == type)
 			{
 				return i;
 			}
@@ -203,7 +203,7 @@ public class InventoryEquipment implements IInventoryEquipment
 		{
 			ItemStack stack = this.inventory.get(i);
 
-			if (stack != ItemStack.EMPTY)
+			if (!stack.isEmpty())
 			{
 				NBTTagCompound stackCompound = new NBTTagCompound();
 				stackCompound.setByte("Slot", (byte) i);

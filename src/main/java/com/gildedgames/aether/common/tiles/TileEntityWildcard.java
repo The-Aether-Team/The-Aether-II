@@ -37,7 +37,7 @@ public class TileEntityWildcard extends TileEntitySchematicBlock
 
 		for (ItemStack stack : this.contents)
 		{
-			if (stack != ItemStack.EMPTY)
+			if (!stack.isEmpty())
 			{
 				if (stack.getItem() instanceof ItemBlock || stack.getItem() == Items.STRING)
 				{

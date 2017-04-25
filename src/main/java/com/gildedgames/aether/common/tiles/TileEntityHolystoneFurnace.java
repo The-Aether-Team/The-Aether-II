@@ -162,7 +162,7 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 
 		for (int i = 0; i < this.inventory.size(); ++i)
 		{
-			if (this.inventory.get(i) != ItemStack.EMPTY)
+			if (!this.inventory.get(i).isEmpty())
 			{
 				NBTTagCompound stackNBT = new NBTTagCompound();
 
@@ -209,7 +209,7 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 
 		if (!this.world.isRemote)
 		{
-			if (!this.isBurning() && (this.inventory.get(1) == ItemStack.EMPTY || this.inventory.get(0) == ItemStack.EMPTY))
+			if (!this.isBurning() && (this.inventory.get(1).isEmpty() || this.inventory.get(0).isEmpty()))
 			{
 				if (!this.isBurning() && this.cookTime > 0)
 				{
@@ -285,7 +285,7 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 	{
 		ItemStack itemstack = FurnaceRecipes.instance().getSmeltingResult(this.inventory.get(0));
 
-		if (this.inventory.get(2) == ItemStack.EMPTY)
+		if (this.inventory.get(2).isEmpty())
 		{
 			return true;
 		}
@@ -306,7 +306,7 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 		{
 			ItemStack itemstack = FurnaceRecipes.instance().getSmeltingResult(this.inventory.get(0));
 
-			if (this.inventory.get(2) == ItemStack.EMPTY)
+			if (this.inventory.get(2).isEmpty())
 			{
 				this.inventory.set(2, itemstack.copy());
 			}

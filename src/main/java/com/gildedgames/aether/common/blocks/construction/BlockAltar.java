@@ -93,7 +93,7 @@ public class BlockAltar extends Block implements ITileEntityProvider
 				ItemStack stack = heldStack.copy();
 				stack.setCount(1);
 
-				if (altar.getStackOnAltar() != ItemStack.EMPTY)
+				if (!altar.getStackOnAltar().isEmpty())
 				{
 					world.spawnEntity(altar.createEntityItemAboveAltar(altar.getStackOnAltar()));
 				}
@@ -113,7 +113,7 @@ public class BlockAltar extends Block implements ITileEntityProvider
 	{
 		ItemStack stack = null;
 
-		if (altar.getStackOnAltar() != ItemStack.EMPTY)
+		if (!altar.getStackOnAltar().isEmpty())
 		{
 			stack = altar.getStackOnAltar();
 

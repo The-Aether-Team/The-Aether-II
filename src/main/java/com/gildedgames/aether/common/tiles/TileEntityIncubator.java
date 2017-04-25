@@ -72,7 +72,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 		{
 			ItemStack stack = this.getStackInSlot(count);
 
-			if (stack == ItemStack.EMPTY)
+			if (stack.isEmpty())
 			{
 				hasFuelSlotsFilled = false;
 
@@ -85,13 +85,12 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
 	public boolean hasStartedHeating()
 	{
-		return (this.currentHeatingProgress > 0 || (this.getTotalHeatingItems() >= 4 && this.areFuelSlotsFilled()))
-				&& this.getMoaEgg() != ItemStack.EMPTY;
+		return (this.currentHeatingProgress > 0 || (this.getTotalHeatingItems() >= 4 && this.areFuelSlotsFilled())) && !this.getMoaEgg().isEmpty();
 	}
 
 	public boolean isHeating()
 	{
-		return this.getMoaEgg() != ItemStack.EMPTY && this.getTotalHeatingItems() >= 4 && this.areFuelSlotsFilled();
+		return !this.getMoaEgg().isEmpty() && this.getTotalHeatingItems() >= 4 && this.areFuelSlotsFilled();
 	}
 
 	public int getCurrentHeatingProgress()
@@ -279,7 +278,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
 		for (int i = 0; i < this.inventory.size(); ++i)
 		{
-			if (this.inventory.get(i) != ItemStack.EMPTY)
+			if (!this.inventory.get(i).isEmpty())
 			{
 				NBTTagCompound stackNBT = new NBTTagCompound();
 

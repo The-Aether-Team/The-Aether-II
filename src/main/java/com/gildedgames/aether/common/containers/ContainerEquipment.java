@@ -43,7 +43,7 @@ public class ContainerEquipment extends ContainerPlayer
 		{
 			ItemStack itemstack = this.inventorySlots.get(i).getStack();
 
-			if (itemstack != ItemStack.EMPTY)
+			if (!itemstack.isEmpty())
 			{
 				itemstack.getItem().onUpdate(itemstack, this.aePlayer.getEntity().getEntityWorld(), this.aePlayer.getEntity(), i, false);
 			}
@@ -178,7 +178,7 @@ public class ContainerEquipment extends ContainerPlayer
 		{
 			Slot slot = this.inventorySlots.get(i);
 
-			if (slot.getStack() == ItemStack.EMPTY && slot instanceof SlotEquipment)
+			if (slot.getStack().isEmpty() && slot instanceof SlotEquipment)
 			{
 				if (((SlotEquipment) slot).getEquipmentType() == type)
 				{
@@ -186,7 +186,7 @@ public class ContainerEquipment extends ContainerPlayer
 				}
 			}
 
-			if (type == ItemEquipmentSlot.OFFHAND && slot.getStack() == ItemStack.EMPTY && slot.getSlotIndex() == 40)
+			if (type == ItemEquipmentSlot.OFFHAND && slot.getStack().isEmpty() && slot.getSlotIndex() == 40)
 			{
 				return i;
 			}

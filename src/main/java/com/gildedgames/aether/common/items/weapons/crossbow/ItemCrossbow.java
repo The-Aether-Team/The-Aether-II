@@ -64,7 +64,7 @@ public class ItemCrossbow extends Item
 						return 1.0F;
 					}
 
-					return itemstack != ItemStack.EMPTY && itemstack.getItem() == ItemCrossbow.this ?
+					return itemstack.getItem() == ItemCrossbow.this ?
 							((float) (stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / ItemCrossbow.this.durationInTicks) :
 							0.0F;
 				}
@@ -87,7 +87,7 @@ public class ItemCrossbow extends Item
 	{
 		ItemStack boltStack = player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
 
-		return boltStack != ItemStack.EMPTY && boltStack.getItem() == ItemsAether.bolt && boltStack.getCount() > 0;
+		return boltStack.getItem() == ItemsAether.bolt && boltStack.getCount() > 0;
 	}
 
 	private static void checkTag(ItemStack stack)

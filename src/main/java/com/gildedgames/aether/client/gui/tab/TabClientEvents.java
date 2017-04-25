@@ -80,7 +80,7 @@ public class TabClientEvents
 	{
 		EntityPlayer player = Minecraft.getMinecraft().player;
 
-		if (player == null || player.inventory.getItemStack() != ItemStack.EMPTY)
+		if (player == null || !player.inventory.getItemStack().isEmpty())
 		{
 			return;
 		}
@@ -131,7 +131,7 @@ public class TabClientEvents
 		{
 			EntityPlayer player = Minecraft.getMinecraft().player;
 
-			if (player == null || player.inventory.getItemStack() != ItemStack.EMPTY)
+			if (player == null || !player.inventory.getItemStack().isEmpty())
 			{
 				return;
 			}

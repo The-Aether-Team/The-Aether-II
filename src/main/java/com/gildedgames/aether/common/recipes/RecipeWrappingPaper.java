@@ -70,12 +70,12 @@ public class RecipeWrappingPaper implements IRecipe
 
 		ItemWrappingPaper.PresentDyeData data = new ItemWrappingPaper.PresentDyeData();
 
-		if (bowDye != ItemStack.EMPTY)
+		if (!bowDye.isEmpty())
 		{
 			data.setBowColor((byte) bowDye.getMetadata());
 		}
 
-		if (boxDye != ItemStack.EMPTY)
+		if (!boxDye.isEmpty())
 		{
 			data.setBoxColor((byte) boxDye.getMetadata());
 		}

@@ -67,7 +67,7 @@ public class ClientRenderHandler
 	@SubscribeEvent
 	public void onRenderSpecificHandEvent(RenderSpecificHandEvent event)
 	{
-		if (event.getHand() == EnumHand.MAIN_HAND && event.getItemStack() == ItemStack.EMPTY)
+		if (event.getHand() == EnumHand.MAIN_HAND && event.getItemStack().isEmpty())
 		{
 			GlStateManager.pushMatrix();
 
