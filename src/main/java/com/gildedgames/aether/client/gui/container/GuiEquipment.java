@@ -195,9 +195,7 @@ public class GuiEquipment extends GuiContainer
 
 		for (ResourceLocation id : equipment.getActiveEffectProviders())
 		{
-			Optional<EffectPool> pool = equipment.getEffectPool(id);
-
-			pool.ifPresent(effectPool -> effectPool.getInstance().addItemInformation(effects));
+			equipment.getEffectPool(id).ifPresent(pool -> pool.getInstance().addItemInformation(effects));
 		}
 
 		String compiled = StringUtils.join(effects, TextFormatting.RESET + ", ");

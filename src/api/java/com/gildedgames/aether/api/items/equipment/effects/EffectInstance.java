@@ -20,7 +20,7 @@ public abstract class EffectInstance
 	public void onInstanceAdded(IPlayerAether player) { }
 
 	/**
-	 * Adds effect tooltips to {@param label}.
+	 * Builds a status tooltip to {@param label}.
 	 * @param label The {@link Collection} to add to
 	 */
 	public abstract void addItemInformation(Collection<String> label);
