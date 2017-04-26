@@ -510,6 +510,31 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.thiefs_gorget, "accessories/thiefs_gorget");
 		registerItemModels(ItemsAether.frostward_scarf, "accessories/frostward_scarf");
 
+		registerItemModels(ItemsAether.charm_arm_01, "charms/charm_arm_01");
+		registerItemModels(ItemsAether.charm_arm_02, "charms/charm_arm_02");
+		registerItemModels(ItemsAether.charm_arm_03, "charms/charm_arm_03");
+		registerItemModels(ItemsAether.charm_arm_tgh_01, "charms/charm_arm_tgh_01");
+		registerItemModels(ItemsAether.charm_arm_tgh_02, "charms/charm_arm_tgh_02");
+		registerItemModels(ItemsAether.charm_arm_tgh_03, "charms/charm_arm_tgh_03");
+		registerItemModels(ItemsAether.charm_atk_dmg_01, "charms/charm_atk_dmg_01");
+		registerItemModels(ItemsAether.charm_atk_dmg_02, "charms/charm_atk_dmg_02");
+		registerItemModels(ItemsAether.charm_atk_dmg_03, "charms/charm_atk_dmg_03");
+		registerItemModels(ItemsAether.charm_atk_spd_01, "charms/charm_atk_spd_01");
+		registerItemModels(ItemsAether.charm_atk_spd_02, "charms/charm_atk_spd_02");
+		registerItemModels(ItemsAether.charm_atk_spd_03, "charms/charm_atk_spd_03");
+		registerItemModels(ItemsAether.charm_kbk_res_01, "charms/charm_kbk_res_01");
+		registerItemModels(ItemsAether.charm_kbk_res_02, "charms/charm_kbk_res_02");
+		registerItemModels(ItemsAether.charm_kbk_res_03, "charms/charm_kbk_res_03");
+		registerItemModels(ItemsAether.charm_lck_01, "charms/charm_lck_01");
+		registerItemModels(ItemsAether.charm_lck_02, "charms/charm_lck_02");
+		registerItemModels(ItemsAether.charm_lck_03, "charms/charm_lck_03");
+		registerItemModels(ItemsAether.charm_max_hlt_01, "charms/charm_max_hlt_01");
+		registerItemModels(ItemsAether.charm_max_hlt_02, "charms/charm_max_hlt_02");
+		registerItemModels(ItemsAether.charm_max_hlt_03, "charms/charm_max_hlt_03");
+		registerItemModels(ItemsAether.charm_mve_spd_01, "charms/charm_mve_spd_01");
+		registerItemModels(ItemsAether.charm_mve_spd_02, "charms/charm_mve_spd_02");
+		registerItemModels(ItemsAether.charm_mve_spd_03, "charms/charm_mve_spd_03");
+
 		registerItemModels(ItemsAether.glamoured_zephyr_husk, "zephyr_husk");
 		registerItemModels(ItemsAether.glamoured_blue_swet_jelly, "swet_jelly/blue_swet_jelly");
 		registerItemModels(ItemsAether.glamoured_cockatrice_talons, "cockatrice_talons");
@@ -520,9 +545,6 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.typhoon_ring, "accessories/typhoon_ring");
 		registerItemModels(ItemsAether.sporing_ring, "accessories/sporing_ring");
 		registerItemModels(ItemsAether.ember_ring, "accessories/ember_ring");
-
-		registerItemModels(ItemsAether.white_moa_feather, "accessories/white_moa_feather");
-		registerItemModels(ItemsAether.sakura_moa_feather, "accessories/sakura_moa_feather");
 
 		registerItemModels(ItemsAether.gravitite_core, "accessories/gravitite_core");
 		registerItemModels(ItemsAether.sunlit_tome, "accessories/sunlit_tome");
@@ -565,8 +587,6 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.granite_studded_choker, "accessories/granite_studded_choker");
 		registerItemModels(ItemsAether.muggers_cloak, "accessories/muggers_cloak");
 		registerItemModels(ItemsAether.bandit_shawl, "accessories/bandit_shawl");
-
-		registerItemModels(ItemsAether.glamoured_cockatrice_keratin, "cockatrice_keratin");
 
 		registerItemModels(ItemsAether.irradiated_chunk, "irradiated_chunk");
 		registerItemModels(ItemsAether.irradiated_sword, "irradiated_sword");

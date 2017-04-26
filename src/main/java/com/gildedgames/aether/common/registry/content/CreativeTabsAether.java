@@ -73,7 +73,7 @@ public class CreativeTabsAether
 		RINGS.setDisplayStack(new ItemStack(ItemsAether.zanite_ring));
 		NECKWEAR.setDisplayStack(new ItemStack(ItemsAether.amulet_of_growth));
 		RELICS.setDisplayStack(new ItemStack(ItemsAether.regeneration_stone));
-		CHARMS.setDisplayStack(new ItemStack(ItemsAether.blight_ward));
+		CHARMS.setDisplayStack(new ItemStack(ItemsAether.charm_mve_spd_01));
 		ARTIFACTS.setDisplayStack(new ItemStack(ItemsAether.valkyrie_wings));
 	}
 

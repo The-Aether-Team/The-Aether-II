@@ -297,6 +297,58 @@ public class ItemsAether
 
 	public static final Item cloud_parachute = new ItemCloudParachute();
 
+	// Charms
+
+	public static final Item charm_atk_dmg_01 = new Item();
+
+	public static final Item charm_atk_dmg_02 = new Item();
+
+	public static final Item charm_atk_dmg_03 = new Item();
+
+	public static final Item charm_atk_spd_01 = new Item();
+
+	public static final Item charm_atk_spd_02 = new Item();
+
+	public static final Item charm_atk_spd_03 = new Item();
+
+	public static final Item charm_max_hlt_01 = new Item();
+
+	public static final Item charm_max_hlt_02 = new Item();
+
+	public static final Item charm_max_hlt_03 = new Item();
+
+	public static final Item charm_lck_01 = new Item();
+
+	public static final Item charm_lck_02 = new Item();
+
+	public static final Item charm_lck_03 = new Item();
+
+	public static final Item charm_mve_spd_01 = new Item();
+
+	public static final Item charm_mve_spd_02 = new Item();
+
+	public static final Item charm_mve_spd_03 = new Item();
+
+	public static final Item charm_arm_01 = new Item();
+
+	public static final Item charm_arm_02 = new Item();
+
+	public static final Item charm_arm_03 = new Item();
+
+	public static final Item charm_arm_tgh_01 = new Item();
+
+	public static final Item charm_arm_tgh_02 = new Item();
+
+	public static final Item charm_arm_tgh_03 = new Item();
+
+	public static final Item charm_kbk_res_01 = new Item();
+
+	public static final Item charm_kbk_res_02 = new Item();
+
+	public static final Item charm_kbk_res_03 = new Item();
+
+	// Neckwear
+
 	public static final Item amulet_of_growth = new Item(),
 			lesser_amulet_of_growth = new Item();
 
@@ -321,9 +373,6 @@ public class ItemsAether
 			typhoon_ring = new Item(),
 			sporing_ring = new Item(),
 			ember_ring = new Item();
-
-	public static final Item white_moa_feather = new Item(),
-			sakura_moa_feather = new Item();
 
 	public static final Item valkyrie_wings = new Item(),
 			sunlit_tome = new Item(),
@@ -365,8 +414,6 @@ public class ItemsAether
 			wynd_cluster_ring = new Item(),
 			lesser_ring_of_wisdom = new Item(),
 			ring_of_wisdom = new Item();
-
-	public static final Item glamoured_cockatrice_keratin = new Item();
 
 	public static final Item irradiated_chunk = new ItemIrradiated(new RandomItemSelector(stack -> !(stack instanceof ItemIrradiated))),
 			irradiated_sword = new ItemIrradiated(new RandomItemSelector(item -> item.getUnlocalizedName().contains("sword")
@@ -553,6 +600,38 @@ public class ItemsAether
 		//registerItem("earthshifter_door_item", earthshifter_door_item.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		//registerItem("frostpine_door_item", frostpine_door_item.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
+		registerItem("charm_atk_dmg_01", charm_atk_dmg_01.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("charm_atk_dmg_02", charm_atk_dmg_02.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("charm_atk_dmg_03", charm_atk_dmg_03.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+
+		registerItem("charm_atk_spd_01", charm_atk_spd_01.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("charm_atk_spd_02", charm_atk_spd_02.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("charm_atk_spd_03", charm_atk_spd_03.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+
+		registerItem("charm_max_hlt_01", charm_max_hlt_01.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("charm_max_hlt_02", charm_max_hlt_02.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("charm_max_hlt_03", charm_max_hlt_03.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+
+		registerItem("charm_lck_01", charm_lck_01.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("charm_lck_02", charm_lck_02.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("charm_lck_03", charm_lck_03.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+
+		registerItem("charm_mve_spd_01", charm_mve_spd_01.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("charm_mve_spd_02", charm_mve_spd_02.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("charm_mve_spd_03", charm_mve_spd_03.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+
+		registerItem("charm_arm_01", charm_arm_01.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("charm_arm_02", charm_arm_02.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("charm_arm_03", charm_arm_03.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+
+		registerItem("charm_arm_tgh_01", charm_arm_tgh_01.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("charm_arm_tgh_02", charm_arm_tgh_02.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("charm_arm_tgh_03", charm_arm_tgh_03.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+
+		registerItem("charm_kbk_res_01", charm_kbk_res_01.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("charm_kbk_res_02", charm_kbk_res_02.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+		registerItem("charm_kbk_res_03", charm_kbk_res_03.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+
 		registerItem("iron_ring", iron_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("gold_ring", gold_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("iron_pendant", iron_pendant.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
@@ -603,18 +682,9 @@ public class ItemsAether
 		registerItem("lesser_ring_of_growth", lesser_ring_of_growth.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("winged_ring", winged_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("life_coil", life_coil.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
-		registerItem("glamoured_iron_screw", glamoured_iron_screw.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("wisdom_bauble", wisdom_bauble.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("blight_ward", blight_ward.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("glamoured_skyroot_twig", glamoured_skyroot_twig.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("glamoured_gold_screw", glamoured_gold_screw.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("ambrosium_talisman", ambrosium_talisman.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("sunlit_scroll", sunlit_scroll.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
 		registerItem("moonlit_scroll", moonlit_scroll.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
-		registerItem("glamoured_cockatrice_heart", glamoured_cockatrice_heart.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("damaged_moa_feather", damaged_moa_feather.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("osseous_bane", osseous_bane.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("rot_bane", rot_bane.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
+
 		registerItem("skyroot_bed_item", skyroot_bed.setCreativeTab(CreativeTabsAether.UTILITY));
 
 		registerItem("moa_egg_item", moa_egg);
@@ -635,11 +705,6 @@ public class ItemsAether
 		registerItem("thiefs_gorget", thiefs_gorget.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
 		registerItem("moon_sect_warden_gorget", moon_sect_warden_gorget.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
 
-		registerItem("glamoured_zephyr_husk", glamoured_zephyr_husk.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("glamoured_blue_swet_jelly", glamoured_blue_swet_jelly.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("glamoured_cockatrice_talons", glamoured_cockatrice_talons.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("glamoured_coal_ember", glamoured_coal_ember.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-
 		registerItem("granite_ring", granite_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("gust_ring", gust_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("typhoon_ring", typhoon_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
@@ -650,21 +715,15 @@ public class ItemsAether
 		registerItem("storm_ring", storm_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("steam_ring", steam_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 
-		registerItem("white_moa_feather", white_moa_feather.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("sakura_moa_feather", sakura_moa_feather.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-
 		registerItem("sunlit_tome", sunlit_tome.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
 		registerItem("moonlit_tome", moonlit_tome.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
 		registerItem("primal_totem_of_survival", primal_totem_of_survival.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
 		registerItem("primal_totem_of_rage", primal_totem_of_rage.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
 		registerItem("divine_beacon", divine_beacon.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
 		registerItem("phoenix_rune", phoenix_rune.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
-		registerItem("glamoured_taegore_tusk", glamoured_taegore_tusk.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 
 		registerItem("valkyrie_wings", valkyrie_wings.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.ARTIFACTS));
 		registerItem("gravitite_core", gravitite_core.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.ARTIFACTS));
-
-		registerItem("butchers_knife", butchers_knife.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 
 		registerItem("fleeting_scarf", fleeting_scarf.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
 		registerItem("winged_necklace", winged_necklace.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
@@ -675,13 +734,6 @@ public class ItemsAether
 		registerItem("granite_studded_choker", granite_studded_choker.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
 		registerItem("muggers_cloak", muggers_cloak.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
 		registerItem("bandit_shawl", bandit_shawl.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
-
-		registerItem("hide_pouch", hide_pouch.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("gruegar_pouch", gruegar_pouch.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("angel_bandage", angel_bandage.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("swift_rune", swift_rune.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("wynd_cluster", wynd_cluster.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
-		registerItem("wisdom_rune", wisdom_rune.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 
 		registerItem("ring_of_strength", ring_of_strength.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("gruegar_ring", gruegar_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
@@ -699,8 +751,6 @@ public class ItemsAether
 		registerItem("irradiated_neckwear", irradiated_neckwear.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("irradiated_charm", irradiated_charm.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("irradiated_dust", irradiated_dust.setCreativeTab(CreativeTabsAether.MATERIALS));
-
-		registerItem("glamoured_cockatrice_keratin", glamoured_cockatrice_keratin.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 
 		registerItem("wrapping_paper", wrapping_paper.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
