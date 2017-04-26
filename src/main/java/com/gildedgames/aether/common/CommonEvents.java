@@ -32,7 +32,10 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerList;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.*;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.Teleporter;
@@ -57,7 +60,6 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.List;
-import java.util.Optional;
 
 public class CommonEvents
 {
@@ -449,19 +451,20 @@ public class CommonEvents
 	@SubscribeEvent
 	public static void onEntityFall(LivingFallEvent event)
 	{
-		EntityLivingBase ent = event.getEntityLiving();
+		EntityLivingBase entity = event.getEntityLiving();
 
-		if (ent.world.isRemote)
+		if (entity.world.isRemote)
 		{
-			BlockPos pos = ent.getPosition().up();
-			IBlockState block = ent.world.getBlockState(pos);
+			BlockPos pos = entity.getPosition().up();
 
-			while (block.getBlock() == Blocks.AIR)
+			IBlockState state = entity.world.getBlockState(pos);
+
+			while (state.getBlock() == Blocks.AIR)
 			{
-				block = ent.world.getBlockState(pos = pos.down());
+				state = entity.world.getBlockState(pos = pos.down());
 			}
 
-			if (block.getBlock() instanceof BlockAercloud && ((BlockAercloud.AercloudVariant) block.getProperties().get(BlockAercloud.PROPERTY_VARIANT)).hasSolidBottom())
+			if (state.getBlock() instanceof BlockAercloud)
 			{
 				event.setCanceled(true);
 			}

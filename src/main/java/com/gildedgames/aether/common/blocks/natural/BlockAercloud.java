@@ -29,99 +29,15 @@ import java.util.Random;
 
 public class BlockAercloud extends Block implements IBlockVariants
 {
-	public static class AercloudVariant extends BlockVariant
-	{
-		private boolean hasSolidBottom;
+	private static final AxisAlignedBB AERCLOUD_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3D, 1.0D);
 
-		public AercloudVariant(int meta, String name, boolean hasSolidBottom)
-		{
-			super(meta, name);
-
-			this.hasSolidBottom = hasSolidBottom;
-		}
-
-		public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
-		{
-			if (entity.motionY < 0)
-			{
-				entity.motionY *= 0.005D;
-			}
-		}
-
-		public boolean hasSolidBottom()
-		{
-			return this.hasSolidBottom;
-		}
-	}
-
-	protected static final AxisAlignedBB AERCLOUD_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.2D, 1.0D);
-
-	protected static final AxisAlignedBB EMPTY_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
-
-	public static final AercloudVariant
-			COLD_AERCLOUD = new AercloudVariant(0, "cold", true),
-			BLUE_AERCLOUD = new AercloudVariant(1, "blue", false)
-			{
-				@Override
-				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
-				{
-					if (!(entity instanceof EntityPlayer) && entity.getPassengers().isEmpty())
-					{
-						if (entity.motionY > -0.2D)
-						{
-							return;
-						}
-					}
-
-					if (entity.world.isRemote)
-					{
-						world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundsAether.aercloud_bounce, SoundCategory.BLOCKS, 0.8f,
-								0.9f + (world.rand.nextFloat() * 0.2f), false);
-
-						for (int i = 0; i < 50; i++)
-						{
-							double x = pos.getX() + world.rand.nextDouble();
-							double y = pos.getY() + 1.0D;
-							double z = pos.getZ() + world.rand.nextDouble();
-
-							world.spawnParticle(EnumParticleTypes.WATER_SPLASH, x, y, z, 0.0D, 0.0D, 0.0D);
-						}
-					}
-
-					entity.motionY = 1.2D;
-				}
-			},
-			GREEN_AERCLOUD = new AercloudVariant(2, "green", false)
-			{
-				@Override
-				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
-				{
-					EnumFacing facing = EnumFacing.random(world.rand);
-
-					entity.motionX = facing.getFrontOffsetX() * 2.5D;
-					entity.motionZ = facing.getFrontOffsetZ() * 2.5D;
-				}
-			},
-			GOLDEN_AERCLOUD = new AercloudVariant(3, "golden", false)
-			{
-				@Override
-				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
-				{
-					entity.motionY = -1.2D;
-				}
-			},
-			STORM_AERCLOUD = new AercloudVariant(4, "storm", true),
-			PURPLE_AERCLOUD = new AercloudVariant(5, "purple", false)
-			{
-				@Override
-				public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
-				{
-					EnumFacing side = state.getValue(PROPERTY_FACING);
-
-					entity.motionX = side.getFrontOffsetX() * 1.2D;
-					entity.motionZ = side.getFrontOffsetZ() * 1.2D;
-				}
-			};
+	public static final BlockVariant
+			COLD_AERCLOUD = new BlockVariant(0, "cold"),
+			BLUE_AERCLOUD = new BlockVariant(1, "blue"),
+			GREEN_AERCLOUD = new BlockVariant(2, "green"),
+			GOLDEN_AERCLOUD = new BlockVariant(3, "golden"),
+			STORM_AERCLOUD = new BlockVariant(4, "storm"),
+			PURPLE_AERCLOUD = new BlockVariant(5, "purple");
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", COLD_AERCLOUD, BLUE_AERCLOUD, GREEN_AERCLOUD, GOLDEN_AERCLOUD, STORM_AERCLOUD, PURPLE_AERCLOUD);
 
@@ -180,16 +96,47 @@ public class BlockAercloud extends Block implements IBlockVariants
 	{
 		entity.fallDistance = 0;
 
-		boolean canCollide = !entity.isSneaking();
+		boolean canCollide = !entity.isSneaking() && !(entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isFlying);
 
-		if (canCollide && entity instanceof EntityPlayer)
+		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
+
+		if (!canCollide || variant == COLD_AERCLOUD)
 		{
-			canCollide = !((EntityPlayer) entity).capabilities.isFlying;
+			if (entity.motionY < 0.0D)
+			{
+				entity.motionY *= 0.005D;
+			}
 		}
+		else if (variant == BLUE_AERCLOUD)
+		{
+			if (entity.world.isRemote)
+			{
+				world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundsAether.aercloud_bounce, SoundCategory.BLOCKS, 0.8f,
+						0.9f + (world.rand.nextFloat() * 0.2f), false);
 
-		AercloudVariant variant = canCollide ? (AercloudVariant) state.getValue(PROPERTY_VARIANT) : BlockAercloud.COLD_AERCLOUD;
+				for (int i = 0; i < 50; i++)
+				{
+					double x = pos.getX() + world.rand.nextDouble();
+					double y = pos.getY() + 1.0D;
+					double z = pos.getZ() + world.rand.nextDouble();
 
-		variant.onEntityCollision(world, pos, state, entity);
+					world.spawnParticle(EnumParticleTypes.WATER_SPLASH, x, y, z, 0.0D, 0.0D, 0.0D);
+				}
+			}
+
+			entity.motionY = 1.2D;
+		}
+		else if (variant == GREEN_AERCLOUD || variant == PURPLE_AERCLOUD)
+		{
+			EnumFacing facing = variant == GREEN_AERCLOUD ? EnumFacing.random(world.rand) : state.getValue(PROPERTY_FACING);
+
+			entity.motionX = facing.getFrontOffsetX() * 2.5D;
+			entity.motionZ = facing.getFrontOffsetZ() * 2.5D;
+		}
+		else if (variant == GOLDEN_AERCLOUD)
+		{
+			entity.motionY = -1.2D;
+		}
 	}
 
 	@Override
@@ -238,14 +185,12 @@ public class BlockAercloud extends Block implements IBlockVariants
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
-		AercloudVariant variant = (AercloudVariant) state.getValue(PROPERTY_VARIANT);
-
-		if (variant.hasSolidBottom())
+		if (state.getValue(PROPERTY_VARIANT) == BlockAercloud.COLD_AERCLOUD)
 		{
-			return AERCLOUD_AABB;
+			return BlockAercloud.AERCLOUD_AABB;
 		}
 
-		return EMPTY_AABB;
+		return Block.NULL_AABB;
 	}
 
 	@Override
@@ -297,7 +242,7 @@ public class BlockAercloud extends Block implements IBlockVariants
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}
 
-	public IBlockState getAercloudState(AercloudVariant variant)
+	public IBlockState getAercloudState(BlockVariant variant)
 	{
 		return BlocksAether.aercloud.getDefaultState().withProperty(BlockAercloud.PROPERTY_VARIANT, variant);
 	}
