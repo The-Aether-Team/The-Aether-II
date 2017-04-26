@@ -66,17 +66,17 @@ public class EquipmentContent
 		AetherAPI.items().registerItem(ItemsAether.charm_atk_dmg_01, new ItemPropertiesBuilder()
 				.withSlot(ItemEquipmentSlot.CHARM)
 				.withRarity(ItemRarity.RARE)
-				.withEffect(new StatEffect.StatProvider(SharedMonsterAttributes.ATTACK_DAMAGE, 0.2D, StatEffect.StatProvider.OP_ADD))
+				.withEffect(new StatEffect.StatProvider(SharedMonsterAttributes.ATTACK_DAMAGE, 0.5D, StatEffect.StatProvider.OP_ADD))
 				.build());
 		AetherAPI.items().registerItem(ItemsAether.charm_atk_dmg_02, new ItemPropertiesBuilder()
 				.withSlot(ItemEquipmentSlot.CHARM)
 				.withRarity(ItemRarity.EPIC)
-				.withEffect(new StatEffect.StatProvider(SharedMonsterAttributes.ATTACK_DAMAGE, 0.5D, StatEffect.StatProvider.OP_ADD))
+				.withEffect(new StatEffect.StatProvider(SharedMonsterAttributes.ATTACK_DAMAGE, 0.8D, StatEffect.StatProvider.OP_ADD))
 				.build());
 		AetherAPI.items().registerItem(ItemsAether.charm_atk_dmg_03, new ItemPropertiesBuilder()
 				.withSlot(ItemEquipmentSlot.CHARM)
 				.withRarity(ItemRarity.MYTHIC)
-				.withEffect(new StatEffect.StatProvider(SharedMonsterAttributes.ATTACK_DAMAGE, 1D, StatEffect.StatProvider.OP_ADD))
+				.withEffect(new StatEffect.StatProvider(SharedMonsterAttributes.ATTACK_DAMAGE, 1.2D, StatEffect.StatProvider.OP_ADD))
 				.build());
 
 		AetherAPI.items().registerItem(ItemsAether.charm_atk_spd_01, new ItemPropertiesBuilder()
