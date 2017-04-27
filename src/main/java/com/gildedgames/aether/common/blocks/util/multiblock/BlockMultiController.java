@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.util.multiblock;
 
-import com.gildedgames.aether.common.tiles.multiblock.TileEntityMultiblockController;
+import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockController;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.registry.content;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.util.io.NBTHelper;
+import com.gildedgames.aether.common.util.helpers.NBTHelper;
 import com.gildedgames.aether.common.world.dimensions.aether.TeleporterAether;
 import com.gildedgames.aether.common.world.dimensions.aether.WorldProviderAether;
 import net.minecraft.nbt.NBTTagCompound;

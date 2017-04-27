@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockWovenSticks;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
-import com.gildedgames.aether.common.tiles.TileEntityMoaEgg;
+import com.gildedgames.aether.common.entities.tiles.TileEntityMoaEgg;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.SoundEvents;

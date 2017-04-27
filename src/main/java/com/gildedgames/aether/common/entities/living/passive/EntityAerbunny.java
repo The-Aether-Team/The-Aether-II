@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.SharedAetherAttributes;
+import com.gildedgames.aether.common.entities.util.SharedAetherAttributes;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;

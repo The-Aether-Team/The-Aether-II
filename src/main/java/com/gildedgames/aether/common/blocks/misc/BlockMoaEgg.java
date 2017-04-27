@@ -6,7 +6,7 @@ import com.gildedgames.aether.common.entities.util.EntityGroup;
 import com.gildedgames.aether.common.entities.util.MoaNest;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
-import com.gildedgames.aether.common.tiles.TileEntityMoaEgg;
+import com.gildedgames.aether.common.entities.tiles.TileEntityMoaEgg;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;

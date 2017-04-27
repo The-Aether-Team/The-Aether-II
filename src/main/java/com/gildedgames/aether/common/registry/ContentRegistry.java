@@ -22,7 +22,6 @@ import com.gildedgames.aether.common.recipes.simple.RecipeIndexRegistry;
 import com.gildedgames.aether.common.recipes.simple.ShapedRecipeWrapper;
 import com.gildedgames.aether.common.recipes.simple.ShapelessRecipeWrapper;
 import com.gildedgames.aether.common.registry.content.*;
-import com.gildedgames.aether.common.tiles.TileEntitiesAether;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
@@ -50,21 +49,21 @@ public class ContentRegistry implements IContentRegistry
 	{
 		Validate.isTrue(!this.hasPreInit, "Already pre-initialized");
 
-		BlocksAether.preInit();
-		ItemsAether.preInit();
-		TileEntitiesAether.preInit();
+		this.measure("Pre-initialize blocks", BlocksAether::preInit);
+		this.measure("Pre-initialize items", ItemsAether::preInit);
+		this.measure("Pre-initialize tiles", TileEntitiesAether::preInit);
 
-		DimensionsAether.preInit();
-		BiomesAether.preInit();
+		this.measure("Pre-initialize dimensions", DimensionsAether::preInit);
+		this.measure("Pre-initialize biomes", BiomesAether::preInit);
 
-		LootTablesAether.preInit();
-		EntitiesAether.preInit();
+		this.measure("Pre-initialize loot tables", LootTablesAether::preInit);
+		this.measure("Pre-initialize entities", EntitiesAether::preInit);
 
-		EquipmentContent.preInit();
-		RecipesAether.preInit();
-		SoundsAether.preInit();
+		this.measure("Pre-initialize equipment", EquipmentContent::preInit);
+		this.measure("Pre-initialize recipes", RecipesAether::preInit);
+		this.measure("Pre-initialize sounds", SoundsAether::preInit);
 
-		NetworkingAether.preInit();
+		this.measure("Pre-initialize networking", NetworkingAether::preInit);
 
 		this.tabRegistry.getInventoryGroup().registerServerTab(new TabEquipment());
 		this.tabRegistry.getInventoryGroup().registerServerTab(new TabBugReport());
@@ -76,23 +75,27 @@ public class ContentRegistry implements IContentRegistry
 	{
 		Validate.isTrue(!this.hasInit, "Already initialized");
 
-		CapabilityManagerAether.init();
-
-		TemplatesAether.init();
-		GenerationAether.init();
-
-		this.rebuildIndexes();
+		this.measure("Initialize capabilities", CapabilityManagerAether::init);
+		this.measure("Initialize templates", TemplatesAether::init);
+		this.measure("Initialize generations", GenerationAether::init);
+		this.measure("Initialize recipes", RecipesAether::init);
+		this.measure("Initialize recipe indexes", this::rebuildIndexes);
 
 		this.hasInit = true;
+	}
+
+	private void measure(String name, Runnable o)
+	{
+		long start = System.nanoTime();
+
+		o.run();
+
+		AetherCore.LOGGER.debug("'{}' completed in {}ms", name, ((System.nanoTime() - start) / 1000000));
 	}
 
 	private void rebuildIndexes()
 	{
 		Collection<IRecipe> recipes = RecipesAether.getCraftableRecipes();
-
-		AetherCore.LOGGER.info("Rebuilding recipe indexes for {} recipes", recipes.size());
-
-		long start = System.nanoTime();
 
 		for (IRecipe recipe : recipes)
 		{
@@ -105,9 +108,6 @@ public class ContentRegistry implements IContentRegistry
 				this.craftableItemsIndex.registerRecipe(new ShapelessRecipeWrapper((ShapelessOreRecipe) recipe));
 			}
 		}
-
-		AetherCore.LOGGER.info("Created recipe index with {} indices in {}ms",
-				this.craftableItemsIndex.getIndexSize(), ((System.nanoTime() - start) / 1000000));
 	}
 
 	@Override

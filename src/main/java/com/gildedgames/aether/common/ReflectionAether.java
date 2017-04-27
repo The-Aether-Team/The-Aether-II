@@ -44,7 +44,7 @@ public class ReflectionAether
 			}
 		}
 
-		return null;
+		throw new RuntimeException("Couldn't find field");
 	}
 
 	public static Method getMethod(Class clazz, Class<?>[] args, String... names)
@@ -86,7 +86,7 @@ public class ReflectionAether
 			}
 		}
 
-		return null;
+		throw new RuntimeException("Couldn't find method");
 	}
 
 	public static void invokeMethod(Method method, Object obj, Object... args)
@@ -97,7 +97,7 @@ public class ReflectionAether
 		}
 		catch (IllegalAccessException | InvocationTargetException e)
 		{
-			e.printStackTrace();
+			throw new RuntimeException("Failed to invoke method through reflection", e);
 		}
 	}
 
@@ -109,9 +109,7 @@ public class ReflectionAether
 		}
 		catch (IllegalAccessException e)
 		{
-			e.printStackTrace();
+			throw new RuntimeException("Failed to fetch field value", e);
 		}
-
-		return null;
 	}
 }

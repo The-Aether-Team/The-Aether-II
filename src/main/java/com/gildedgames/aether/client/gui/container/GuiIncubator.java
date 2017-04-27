@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.gui.container;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
-import com.gildedgames.aether.common.tiles.TileEntityIncubator;
+import com.gildedgames.aether.common.entities.tiles.TileEntityIncubator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.containers;
 
-import com.gildedgames.aether.common.tiles.TileEntitySkyrootChest;
+import com.gildedgames.aether.common.entities.tiles.TileEntitySkyrootChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.SoundType;

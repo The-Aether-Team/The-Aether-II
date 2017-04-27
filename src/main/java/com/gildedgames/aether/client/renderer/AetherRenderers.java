@@ -20,7 +20,7 @@ import com.gildedgames.aether.common.entities.living.passive.*;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
-import com.gildedgames.aether.common.tiles.*;
+import com.gildedgames.aether.common.entities.tiles.*;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 

@@ -6,7 +6,7 @@ import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.util.MoaNest;
-import com.gildedgames.aether.common.tiles.TileEntityMoaEgg;
+import com.gildedgames.aether.common.entities.tiles.TileEntityMoaEgg;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.world.World;

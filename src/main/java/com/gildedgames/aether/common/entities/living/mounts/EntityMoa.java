@@ -13,7 +13,7 @@ import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import com.gildedgames.aether.common.items.misc.ItemMoaFeather;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.util.TickTimer;
-import com.gildedgames.aether.common.util.io.NBTHelper;
+import com.gildedgames.aether.common.util.helpers.NBTHelper;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;

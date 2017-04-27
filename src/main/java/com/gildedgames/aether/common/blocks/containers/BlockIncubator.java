@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.blocks.containers;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
-import com.gildedgames.aether.common.tiles.TileEntityIncubator;
+import com.gildedgames.aether.common.entities.tiles.TileEntityIncubator;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

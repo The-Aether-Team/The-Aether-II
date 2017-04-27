@@ -1,9 +1,8 @@
 package com.gildedgames.aether.common.blocks.construction;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.tiles.TileEntityAltar;
+import com.gildedgames.aether.common.entities.tiles.TileEntityAltar;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;

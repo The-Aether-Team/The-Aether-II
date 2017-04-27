@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world.dimensions.aether.island.logic;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
-import com.gildedgames.aether.common.util.io.NBTHelper;
+import com.gildedgames.aether.common.util.helpers.NBTHelper;
 import com.gildedgames.aether.common.world.util.ChunkMap;
 import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;

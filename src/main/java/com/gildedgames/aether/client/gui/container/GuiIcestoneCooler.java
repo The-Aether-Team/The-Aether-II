@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.gui.container;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
-import com.gildedgames.aether.common.tiles.TileEntityIcestoneCooler;
+import com.gildedgames.aether.common.entities.tiles.TileEntityIcestoneCooler;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;

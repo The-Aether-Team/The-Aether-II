@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.GenUtil;
 import com.gildedgames.aether.common.world.biome.Ecosystem;
 import com.gildedgames.aether.common.world.biome.WorldDecoration;
-import com.gildedgames.aether.common.world.noise.OpenSimplexNoise;
+import com.gildedgames.aether.common.world.util.OpenSimplexNoise;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;

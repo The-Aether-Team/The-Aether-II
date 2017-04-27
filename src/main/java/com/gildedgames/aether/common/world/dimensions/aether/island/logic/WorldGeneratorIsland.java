@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world.dimensions.aether.island.logic;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.dimensions.aether.biomes.BiomeAetherBase;
-import com.gildedgames.aether.common.world.noise.OpenSimplexNoise;
+import com.gildedgames.aether.common.world.util.OpenSimplexNoise;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

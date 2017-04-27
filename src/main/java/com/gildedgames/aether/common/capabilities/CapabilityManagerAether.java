@@ -10,11 +10,11 @@ import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawning
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfoProvider;
 import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherProvider;
-import com.gildedgames.aether.common.world.chunk.hooks.capabilities.ChunkAttachment;
-import com.gildedgames.aether.common.world.chunk.hooks.capabilities.ChunkAttachmentProvider;
-import com.gildedgames.aether.common.world.chunk.hooks.capabilities.PlacementFlagCapability;
-import com.gildedgames.aether.common.world.chunk.hooks.capabilities.PlacementFlagProvider;
-import com.gildedgames.aether.common.world.chunk.hooks.events.AttachCapabilitiesChunkEvent;
+import com.gildedgames.aether.common.world.chunk.capabilities.ChunkAttachment;
+import com.gildedgames.aether.common.world.chunk.capabilities.ChunkAttachmentProvider;
+import com.gildedgames.aether.common.world.chunk.capabilities.PlacementFlagCapability;
+import com.gildedgames.aether.common.world.chunk.capabilities.PlacementFlagProvider;
+import com.gildedgames.aether.common.world.chunk.events.AttachCapabilitiesChunkEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;

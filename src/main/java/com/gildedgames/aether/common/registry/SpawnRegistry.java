@@ -9,7 +9,7 @@ import com.gildedgames.aether.common.entities.living.mobs.*;
 import com.gildedgames.aether.common.entities.living.passive.*;
 import com.gildedgames.aether.common.registry.content.BiomesAether;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
-import com.gildedgames.aether.common.util.io.NBTHelper;
+import com.gildedgames.aether.common.util.helpers.NBTHelper;
 import com.gildedgames.aether.common.world.spawning.PosCondition;
 import com.gildedgames.aether.common.world.spawning.SpawnArea;
 import com.gildedgames.aether.common.world.spawning.SpawnEntry;

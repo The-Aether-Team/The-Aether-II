@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.blocks.containers;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
-import com.gildedgames.aether.common.tiles.TileEntityPresent;
+import com.gildedgames.aether.common.entities.tiles.TileEntityPresent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;

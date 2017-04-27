@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.dimensions.aether.island.logic;
 
 import com.gildedgames.aether.api.util.NBT;
-import com.gildedgames.aether.common.util.io.NBTHelper;
+import com.gildedgames.aether.common.util.helpers.NBTHelper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import net.minecraft.nbt.NBTTagCompound;

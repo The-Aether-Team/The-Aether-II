@@ -6,7 +6,7 @@ import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.util.TickTimer;
-import com.gildedgames.aether.common.util.io.NBTHelper;
+import com.gildedgames.aether.common.util.helpers.NBTHelper;
 import com.gildedgames.aether.common.world.util.ChunkMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;

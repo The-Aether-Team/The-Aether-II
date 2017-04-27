@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world.dimensions.aether;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherCaves;
-import com.gildedgames.aether.common.world.noise.OpenSimplexNoise;
+import com.gildedgames.aether.common.world.util.OpenSimplexNoise;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
