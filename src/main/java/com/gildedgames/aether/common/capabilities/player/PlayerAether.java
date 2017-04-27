@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.capabilities.player;
 
 import com.gildedgames.aether.api.AetherCapabilities;
-import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.dialog.IDialogController;
+import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.player.modules.*;
@@ -15,6 +15,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -143,7 +144,18 @@ public class PlayerAether implements IPlayerAether
 	@Override
 	public void onDrops(PlayerDropsEvent event)
 	{
+		if (!this.getEntity().world.isRemote && !this.getEntity().world.getGameRules().getBoolean("keepInventory"))
+		{
+			for (int i = 0; i < this.getEquipmentInventory().getSizeInventory(); i++)
+			{
+				ItemStack stack = this.getEquipmentInventory().removeStackFromSlot(i);
 
+				if (!stack.isEmpty())
+				{
+					this.getEntity().dropItem(stack, true, true);
+				}
+			}
+		}
 	}
 
 	@Override
