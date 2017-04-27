@@ -10,33 +10,33 @@ import net.minecraft.util.math.MathHelper;
 
 public class ModelAerbunny extends ModelBase
 {
-	public ModelRenderer body, puff;
+	private ModelRenderer body, puff;
 
-	public ModelRenderer leg_front_left;
+	private ModelRenderer leg_front_left;
 
-	public ModelRenderer leg_front_right;
+	private ModelRenderer leg_front_right;
 
-	public ModelRenderer leg_back_right_base;
+	private ModelRenderer leg_back_right_base;
 
-	public ModelRenderer leg_back_left_base;
+	private ModelRenderer leg_back_left_base;
 
-	public ModelRenderer tail;
+	private ModelRenderer tail;
 
-	public ModelRenderer head;
+	private ModelRenderer head;
 
-	public ModelRenderer leg_back_right_foot;
+	private ModelRenderer leg_back_right_foot;
 
-	public ModelRenderer leg_back_left_foot;
+	private ModelRenderer leg_back_left_foot;
 
-	public ModelRenderer ear_right;
+	private ModelRenderer ear_right;
 
-	public ModelRenderer ear_left;
+	private ModelRenderer ear_left;
 
-	public ModelRenderer nose;
+	private ModelRenderer nose;
 
-	public ModelRenderer whiskers_left;
+	private ModelRenderer whiskers_left;
 
-	public ModelRenderer whiskers_right;
+	private ModelRenderer whiskers_right;
 
 	public ModelAerbunny()
 	{
@@ -45,11 +45,11 @@ public class ModelAerbunny extends ModelBase
 		this.leg_front_left = new ModelRenderer(this, 0, 11);
 		this.leg_front_left.setRotationPoint(1.5F, 4.0F, 1.0F);
 		this.leg_front_left.addBox(-0.5F, -0.2F, -2.8F, 1, 2, 3, 0.0F);
-		this.setRotateAngle(leg_front_left, 0.17453292519943295F, -0.3490658503988659F, 0.0F);
+		this.setRotateAngle(this.leg_front_left, 0.17453292519943295F, -0.3490658503988659F, 0.0F);
 		this.leg_back_left_foot = new ModelRenderer(this, 0, 16);
 		this.leg_back_left_foot.setRotationPoint(0.5F, 1.8F, -0.3F);
 		this.leg_back_left_foot.addBox(-0.5F, -0.2F, -1.0F, 1, 1, 3, 0.0F);
-		this.setRotateAngle(leg_back_left_foot, 0.0F, -0.20943951023931953F, 0.0F);
+		this.setRotateAngle(this.leg_back_left_foot, 0.0F, -0.20943951023931953F, 0.0F);
 		this.head = new ModelRenderer(this, 22, 0);
 		this.head.setRotationPoint(0.0F, 2.4F, 0.0F);
 		this.head.addBox(-2.0F, -2.2F, -3.0F, 4, 4, 4, 0.0F);
@@ -57,11 +57,11 @@ public class ModelAerbunny extends ModelBase
 		this.leg_back_right_foot.mirror = true;
 		this.leg_back_right_foot.setRotationPoint(-0.5F, 1.8F, -0.3F);
 		this.leg_back_right_foot.addBox(-0.5F, -0.2F, -1.0F, 1, 1, 3, 0.0F);
-		this.setRotateAngle(leg_back_right_foot, 0.0F, 0.20943951023931953F, 0.0F);
+		this.setRotateAngle(this.leg_back_right_foot, 0.0F, 0.20943951023931953F, 0.0F);
 		this.ear_left = new ModelRenderer(this, 16, 1);
 		this.ear_left.setRotationPoint(1.0F, -2.0F, -1.2F);
 		this.ear_left.addBox(-0.5F, -2.8F, -1.0F, 1, 3, 2, 0.0F);
-		this.setRotateAngle(ear_left, -0.2617993877991494F, -0.08726646259971647F, 0.2617993877991494F);
+		this.setRotateAngle(this.ear_left, -0.2617993877991494F, -0.08726646259971647F, 0.2617993877991494F);
 		this.nose = new ModelRenderer(this, 0, 0);
 		this.nose.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.nose.addBox(-1.0F, -0.2F, -3.3F, 2, 1, 1, 0.0F);
@@ -69,7 +69,7 @@ public class ModelAerbunny extends ModelBase
 		this.leg_front_right.mirror = true;
 		this.leg_front_right.setRotationPoint(-1.5F, 4.0F, 1.0F);
 		this.leg_front_right.addBox(-0.5F, -0.2F, -2.8F, 1, 2, 3, 0.0F);
-		this.setRotateAngle(leg_front_right, 0.17453292519943295F, 0.3490658503988659F, 0.0F);
+		this.setRotateAngle(this.leg_front_right, 0.17453292519943295F, 0.3490658503988659F, 0.0F);
 		this.leg_back_right_base = new ModelRenderer(this, 8, 11);
 		this.leg_back_right_base.mirror = true;
 		this.leg_back_right_base.setRotationPoint(-2.5F, 3.5F, 5.0F);
@@ -81,11 +81,11 @@ public class ModelAerbunny extends ModelBase
 		this.ear_right.mirror = true;
 		this.ear_right.setRotationPoint(-1.0F, -2.0F, -1.2F);
 		this.ear_right.addBox(-0.5F, -2.8F, -1.0F, 1, 3, 2, 0.0F);
-		this.setRotateAngle(ear_right, -0.2617993877991494F, 0.08726646259971647F, -0.2617993877991494F);
+		this.setRotateAngle(this.ear_right, -0.2617993877991494F, 0.08726646259971647F, -0.2617993877991494F);
 		this.whiskers_left = new ModelRenderer(this, 0, 3);
 		this.whiskers_left.setRotationPoint(2.0F, 0.0F, -2.0F);
 		this.whiskers_left.addBox(-0.2F, -1.3F, 0.0F, 2, 3, 0, 0.0F);
-		this.setRotateAngle(whiskers_left, -0.17453292519943295F, -0.6981317007977318F, 0.17453292519943295F);
+		this.setRotateAngle(this.whiskers_left, -0.17453292519943295F, -0.6981317007977318F, 0.17453292519943295F);
 		this.body = new ModelRenderer(this, 0, 0);
 		this.body.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.body.addBox(-2.5F, 0.0F, 0.0F, 5, 5, 6, 0.0F);
@@ -95,12 +95,12 @@ public class ModelAerbunny extends ModelBase
 		this.tail = new ModelRenderer(this, 22, 8);
 		this.tail.setRotationPoint(0.0F, 1.5F, 5.0F);
 		this.tail.addBox(-1.5F, -0.4F, 0.2F, 3, 3, 2, 0.0F);
-		this.setRotateAngle(tail, 0.2617993877991494F, 0.0F, 0.0F);
+		this.setRotateAngle(this.tail, 0.2617993877991494F, 0.0F, 0.0F);
 		this.whiskers_right = new ModelRenderer(this, 0, 3);
 		this.whiskers_right.mirror = true;
 		this.whiskers_right.setRotationPoint(-2.0F, 0.0F, -2.0F);
 		this.whiskers_right.addBox(-1.8F, -1.3F, 0.0F, 2, 3, 0, 0.0F);
-		this.setRotateAngle(whiskers_right, -0.17453292519943295F, 0.6981317007977318F, -0.17453292519943295F);
+		this.setRotateAngle(this.whiskers_right, -0.17453292519943295F, 0.6981317007977318F, -0.17453292519943295F);
 		this.body.addChild(this.leg_front_left);
 		this.leg_back_left_base.addChild(this.leg_back_left_foot);
 		this.body.addChild(this.head);
@@ -117,15 +117,15 @@ public class ModelAerbunny extends ModelBase
 	}
 
 	@Override
-	public void render(final Entity entity, final float f, final float f1, final float f2, final float f3, final float f4, final float f5)
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
 		final EntityAerbunny bunny = (EntityAerbunny) entity;
 
-		this.setRotationAngles(f, f1, f2, f3, f4, f5);
+		this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
 
 		GlStateManager.translate(0F, 1.1F, -0.2F);
 
-		this.body.render(f5);
+		this.body.render(scale);
 
 		GlStateManager.pushMatrix();
 
@@ -133,7 +133,7 @@ public class ModelAerbunny extends ModelBase
 
 		GlStateManager.scale(puffScale, puffScale, puffScale);
 
-		this.puff.render(f5);
+		this.puff.render(scale);
 
 		GlStateManager.popMatrix();
 	}
@@ -141,26 +141,32 @@ public class ModelAerbunny extends ModelBase
 	/**
 	 * This is a helper function from Tabula to set the rotation of model parts
 	 */
-	public void setRotateAngle(final ModelRenderer modelRenderer, final float x, final float y, final float z)
+	private void setRotateAngle(final ModelRenderer modelRenderer, final float x, final float y, final float z)
 	{
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(final float f, final float f1, final float f2, final float f3, final float f4, final float f5)
+	@Override
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entity)
 	{
-		this.head.rotateAngleX = -(f4 / 57.29578F);
-		this.head.rotateAngleY = f3 / 57.29578F;
+		this.head.rotateAngleX = headPitch / 57.29578F;
+		this.head.rotateAngleY = netHeadYaw / 57.29578F;
 
-		this.ear_left.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.0F * f1;
-		this.ear_right.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.0F * f1;
+		if (entity.isRiding())
+		{
+			this.head.rotateAngleX = MathHelper.clamp(this.head.rotateAngleX * -1, -1.0f, 1.0f);
+		}
 
-		this.leg_back_left_base.rotateAngleX = MathHelper.cos(f * 0.6662F + 3.141593F) * 1.2F * f1;
-		this.leg_back_right_base.rotateAngleX = MathHelper.cos(f * 0.6662F + 3.141593F) * 1.2F * f1;
+		this.ear_left.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.0F * limbSwingAmount;
+		this.ear_right.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.0F * limbSwingAmount;
 
-		this.leg_front_left.rotateAngleX = MathHelper.cos(f * 0.6662F + 3.141593F) * 1.2F * f1;
-		this.leg_front_right.rotateAngleX = MathHelper.cos(f * 0.6662F + 3.141593F) * 1.2F * f1;
+		this.leg_back_left_base.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + 3.141593F) * 1.2F * limbSwingAmount;
+		this.leg_back_right_base.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + 3.141593F) * 1.2F * limbSwingAmount;
+
+		this.leg_front_left.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + 3.141593F) * 1.2F * limbSwingAmount;
+		this.leg_front_right.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + 3.141593F) * 1.2F * limbSwingAmount;
 	}
 
 }
