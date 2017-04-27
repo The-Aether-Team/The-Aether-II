@@ -45,6 +45,13 @@ public interface IPlayerAether
 	void onDespawn(PlayerLoggedOutEvent event);
 
 	/**
+	 * Called when another {@link IPlayerAether} begins watching this player.
+	 *
+	 * @param other The entity that has begun watching us
+	 */
+	void onPlayerBeginWatching(IPlayerAether other);
+
+	/**
 	 * @return The {@link EntityPlayer} this capability is attached to.
 	 */
 	EntityPlayer getEntity();

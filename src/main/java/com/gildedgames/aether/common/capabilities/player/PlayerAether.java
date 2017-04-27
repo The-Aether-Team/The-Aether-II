@@ -6,10 +6,14 @@ import com.gildedgames.aether.api.dialog.IDialogController;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.player.modules.*;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.DiedInAetherPacket;
+import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -100,9 +104,22 @@ public class PlayerAether implements IPlayerAether
 		this.hasDiedInAetherBefore = flag;
 	}
 
+	/**
+	 * Syncs the client and watching entities completely.
+	 */
+	public void sendFullUpdate()
+	{
+		NetworkingAether.sendPacketToPlayer(new DiedInAetherPacket(this.hasDiedInAetherBefore()), (EntityPlayerMP) this.getEntity());
+	}
+
 	@Override
 	public void onUpdate(LivingUpdateEvent event)
 	{
+		if (this.getEntity().world.isRemote)
+		{
+			System.out.println(this.getEquipmentInventory().isEmpty());
+		}
+
 		for (PlayerAetherModule module : this.modules)
 		{
 			module.onUpdate();
@@ -112,7 +129,7 @@ public class PlayerAether implements IPlayerAether
 	@Override
 	public void onRespawn(PlayerEvent.PlayerRespawnEvent event)
 	{
-
+		this.sendFullUpdate();
 	}
 
 	@Override
@@ -161,6 +178,8 @@ public class PlayerAether implements IPlayerAether
 	public void onTeleport(PlayerEvent.PlayerChangedDimensionEvent event)
 	{
 		this.companionModule.onTeleport(event);
+
+		this.sendFullUpdate();
 	}
 
 	@Override
@@ -173,6 +192,12 @@ public class PlayerAether implements IPlayerAether
 	public void onDespawn(PlayerEvent.PlayerLoggedOutEvent event)
 	{
 		this.companionModule.onDespawn(event);
+	}
+
+	@Override
+	public void onPlayerBeginWatching(IPlayerAether other)
+	{
+		NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(this), (EntityPlayerMP) other.getEntity());
 	}
 
 	@Override

@@ -9,9 +9,12 @@ import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
 import com.gildedgames.aether.common.entities.effects.EffectPool;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
@@ -59,6 +62,8 @@ public class EquipmentModule extends PlayerAetherModule
 
 	private void update()
 	{
+		final List<Pair<Integer, ItemStack>> updates = this.getEntity().world.isRemote ? Collections.emptyList() : new ArrayList<>();
+
 		for (int i = 0; i < this.stagingInv.getSizeInventory(); i++)
 		{
 			ItemStack oldStack = this.recordedInv.getStackInSlot(i);
@@ -76,8 +81,18 @@ public class EquipmentModule extends PlayerAetherModule
 					this.onEquipmentAdded(newStack);
 				}
 
+				if (!this.getEntity().world.isRemote)
+				{
+					updates.add(Pair.of(i, newStack));
+				}
+
 				this.recordedInv.setInventorySlotContents(i, newStack.isEmpty() ? ItemStack.EMPTY : newStack.copy());
 			}
+		}
+
+		if (!this.getEntity().world.isRemote)
+		{
+			NetworkingAether.sendPacketToWatching(new EquipmentChangedPacket(this.getEntity(), updates), this.getEntity(), true);
 		}
 	}
 

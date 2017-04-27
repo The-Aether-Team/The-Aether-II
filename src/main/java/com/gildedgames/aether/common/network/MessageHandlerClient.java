@@ -38,7 +38,7 @@ public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMe
 
 		if (this.executesOnGameThread)
 		{
-			mc.addScheduledTask(new FutureMessage<>(this, message, mc.player));
+			mc.addScheduledTask(new FutureMessage<>(this, message));
 
 			return null;
 		}
@@ -64,19 +64,16 @@ public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMe
 
 		private final REQ message;
 
-		private final EntityPlayerSP player;
-
-		private FutureMessage(MessageHandlerClient<REQ, ?> handler, REQ message, EntityPlayerSP player)
+		private FutureMessage(MessageHandlerClient<REQ, ?> handler, REQ message)
 		{
 			this.message = message;
-			this.player = player;
 			this.handler = handler;
 		}
 
 		@Override
 		public void run()
 		{
-			this.handler.onMessage(this.message, this.player);
+			this.handler.onMessage(this.message, Minecraft.getMinecraft().player);
 		}
 	}
 }

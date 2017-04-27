@@ -4,12 +4,9 @@ import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.entities.util.SharedAetherAttributes;
-import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.DiedInAetherPacket;
 import com.gildedgames.aether.common.world.chunk.capabilities.ChunkAttachment;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
@@ -21,6 +18,7 @@ import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 
@@ -33,7 +31,7 @@ public class PlayerEvents
 
 		if (aePlayer != null)
 		{
-			NetworkingAether.sendPacketToPlayer(new DiedInAetherPacket(aePlayer.hasDiedInAetherBefore()), (EntityPlayerMP) event.player);
+			aePlayer.sendFullUpdate();
 		}
 	}
 
@@ -158,6 +156,17 @@ public class PlayerEvents
 	}
 
 	@SubscribeEvent
+	public static void onPlayerChangedDimension(PlayerChangedDimensionEvent event)
+	{
+		PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
+
+		if (aePlayer != null)
+		{
+			aePlayer.onTeleport(event);
+		}
+	}
+
+	@SubscribeEvent
 	public static void onPlayerRespawn(PlayerRespawnEvent event)
 	{
 		PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
@@ -166,5 +175,18 @@ public class PlayerEvents
 		{
 			aePlayer.onRespawn(event);
 		}
+	}
+
+	@SubscribeEvent
+	public static void onBeginWatching(PlayerEvent.StartTracking event)
+	{
+		PlayerAether aeSourcePlayer = PlayerAether.getPlayer(event.getEntityPlayer());
+		PlayerAether aeTargetPlayer = PlayerAether.getPlayer(event.getTarget());
+
+		if (aeSourcePlayer != null && aeTargetPlayer != null)
+		{
+			aeTargetPlayer.onPlayerBeginWatching(aeSourcePlayer);
+		}
+
 	}
 }

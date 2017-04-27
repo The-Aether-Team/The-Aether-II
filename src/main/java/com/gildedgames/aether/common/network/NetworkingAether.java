@@ -47,7 +47,7 @@ public class NetworkingAether
 		NetworkingAether.instance.sendTo(message, player);
 	}
 
-	public static void sendPacketToWatching(IMessage message, EntityLivingBase entity)
+	public static void sendPacketToWatching(IMessage message, EntityLivingBase entity, boolean includeSelf)
 	{
 		WorldServer world = (WorldServer) entity.world;
 
@@ -59,7 +59,7 @@ public class NetworkingAether
 		}
 
 		// Entities don't watch themselves, take special care here
-		if (entity instanceof EntityPlayer)
+		if (includeSelf && entity instanceof EntityPlayer)
 		{
 			NetworkingAether.sendPacketToPlayer(message, (EntityPlayerMP) entity);
 		}

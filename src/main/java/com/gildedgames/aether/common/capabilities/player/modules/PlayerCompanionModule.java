@@ -177,7 +177,7 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 
 			if (notifyClient)
 			{
-				NetworkingAether.sendPacketToWatching(new CompanionChangedPacket(this.companionId), this.player);
+				NetworkingAether.sendPacketToWatching(new CompanionChangedPacket(this.companionId), this.player, true);
 			}
 		}
 	}
