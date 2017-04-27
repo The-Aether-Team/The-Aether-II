@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.living.companions;
 
+import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.player.modules.PlayerCompanionModule;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
@@ -33,7 +34,7 @@ public class EntityNexSpirit extends EntityCompanion
 
 			PlayerCompanionModule companionManager = aePlayer.getCompanionModule();
 
-			ItemStack equippedCompanion = companionManager.getEquippedCompanionItem();
+			ItemStack equippedCompanion = companionManager.getCompanionItem();
 
 			if (equippedCompanion != null && equippedCompanion.getItem() instanceof ItemDeathSeal)
 			{
@@ -53,19 +54,19 @@ public class EntityNexSpirit extends EntityCompanion
 	}
 
 	@Override
-	public void tickEffects(PlayerAether aePlayer)
+	public void tickEffects(IPlayerAether aePlayer)
 	{
 
 	}
 
 	@Override
-	public void addEffects(PlayerAether aePlayer)
+	public void addEffects(IPlayerAether aePlayer)
 	{
 
 	}
 
 	@Override
-	public void removeEffects(PlayerAether aePlayer)
+	public void removeEffects(IPlayerAether aePlayer)
 	{
 
 	}

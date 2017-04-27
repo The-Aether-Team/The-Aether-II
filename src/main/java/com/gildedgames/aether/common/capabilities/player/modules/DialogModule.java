@@ -58,7 +58,7 @@ public class DialogModule extends PlayerAetherModule implements IDialogControlle
 	@Override
 	public void openScene(ResourceLocation path)
 	{
-		IDialogScene scene = AetherAPI.dialog().getScene(path).orElseThrow(() ->
+		IDialogScene scene = AetherAPI.content().dialog().getScene(path).orElseThrow(() ->
 				new IllegalArgumentException("Couldn't get scene " + path));
 
 		if (this.getPlayer().getEntity().world.isRemote)

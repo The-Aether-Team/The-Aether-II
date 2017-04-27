@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
-import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
+import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
 import com.gildedgames.aether.common.items.armor.ItemLeatherGloves;
 import net.minecraft.client.Minecraft;

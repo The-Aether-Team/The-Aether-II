@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.tiles;
 
-import com.gildedgames.aether.api.registry.altar.IAltarRecipe;
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.recipes.altar.IAltarRecipe;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAltar;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -74,9 +74,9 @@ public class TileEntityAltar extends TileEntitySynced implements ITickable
 
 	public void attemptCrafting()
 	{
-		if (this.getStackOnAltar() != null && this.getAmbrosiumCount() > 0)
+		if (!this.getStackOnAltar().isEmpty() && this.getAmbrosiumCount() > 0)
 		{
-			IAltarRecipe recipe = AetherCore.PROXY.getRecipeManager().getAltarRegistry().getMatchingRecipe(this.getStackOnAltar());
+			IAltarRecipe recipe = AetherAPI.content().altar().getMatchingRecipe(this.getStackOnAltar());
 
 			if (recipe != null)
 			{
@@ -104,7 +104,7 @@ public class TileEntityAltar extends TileEntitySynced implements ITickable
 			this.getWorld().spawnEntity(this.createEntityItemAboveAltar(stack));
 		}
 
-		if (this.getStackOnAltar() != null)
+		if (!this.getStackOnAltar().isEmpty())
 		{
 			this.getWorld().spawnEntity(this.createEntityItemAboveAltar(this.getStackOnAltar()));
 		}

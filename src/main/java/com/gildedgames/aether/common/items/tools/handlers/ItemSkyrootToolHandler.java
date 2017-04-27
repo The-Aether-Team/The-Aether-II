@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.items.tools.handlers;
 
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.chunk.IPlacementFlagCapability;
+import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.common.blocks.util.ISkyrootMinable;
 import com.gildedgames.aether.common.world.chunk.hooks.capabilities.ChunkAttachment;
 import net.minecraft.block.IGrowable;
@@ -37,7 +37,7 @@ public class ItemSkyrootToolHandler implements IToolEventHandler
 
 			IPlacementFlagCapability data = ChunkAttachment.get(world).getAttachment(new ChunkPos(pos), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
 
-			if (data.isMarked(pos))
+			if (data.isModified(pos))
 			{
 				return;
 			}

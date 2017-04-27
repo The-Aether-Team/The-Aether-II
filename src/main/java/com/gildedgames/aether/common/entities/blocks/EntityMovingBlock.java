@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.blocks;
 
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.chunk.IPlacementFlagCapability;
+import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.common.world.chunk.hooks.capabilities.ChunkAttachment;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -94,7 +94,7 @@ public class EntityMovingBlock extends Entity
 			{
 				IPlacementFlagCapability data = ChunkAttachment.get(this.world).getAttachment(new ChunkPos(pos), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
 
-				this.allowDoubleDrops = !data.isMarked(pos);
+				this.allowDoubleDrops = !data.isModified(pos);
 
 				this.world.setBlockToAir(pos);
 			}
@@ -199,7 +199,7 @@ public class EntityMovingBlock extends Entity
 						{
 							IPlacementFlagCapability data = ChunkAttachment.get(this.world).getAttachment(new ChunkPos(pos), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
 
-							data.mark(pos);
+							data.markModified(pos);
 						}
 
 						this.setDead();

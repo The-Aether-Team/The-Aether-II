@@ -28,7 +28,7 @@ public class TabClientEvents
 	{
 		GuiScreen gui = event.getGui();
 
-		ITabGroupHandler groupHandler = AetherAPI.tabs().getActiveGroup();
+		ITabGroupHandler groupHandler = AetherAPI.content().tabs().getActiveGroup();
 
 		if (groupHandler != null)
 		{
@@ -39,10 +39,10 @@ public class TabClientEvents
 				return;
 			}
 
-			AetherAPI.tabs().setActiveGroup(null);
+			AetherAPI.content().tabs().setActiveGroup(null);
 		}
 
-		for (ITabGroupHandler tabGroupHandler : AetherAPI.tabs().getRegisteredTabGroups().values())
+		for (ITabGroupHandler tabGroupHandler : AetherAPI.content().tabs().getRegisteredTabGroups().values())
 		{
 			ITabGroup<ITabClient> tabGroup = tabGroupHandler.getClientGroup();
 
@@ -59,7 +59,7 @@ public class TabClientEvents
 						tabGroup.setSelectedTab(tab);
 					}
 
-					AetherAPI.tabs().setActiveGroup(tabGroupHandler);
+					AetherAPI.content().tabs().setActiveGroup(tabGroupHandler);
 
 					if (gui == null)
 					{
@@ -85,7 +85,7 @@ public class TabClientEvents
 			return;
 		}
 
-		ITabGroupHandler groupHandler = AetherAPI.tabs().getActiveGroup();
+		ITabGroupHandler groupHandler = AetherAPI.content().tabs().getActiveGroup();
 
 		if (groupHandler != null)
 		{
@@ -136,7 +136,7 @@ public class TabClientEvents
 				return;
 			}
 
-			ITabGroupHandler groupHandler = AetherAPI.tabs().getActiveGroup();
+			ITabGroupHandler groupHandler = AetherAPI.content().tabs().getActiveGroup();
 
 			if (groupHandler != null)
 			{

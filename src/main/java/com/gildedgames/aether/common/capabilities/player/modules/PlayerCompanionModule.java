@@ -22,6 +22,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Optional;
 import java.util.Random;
 
 public class PlayerCompanionModule extends PlayerAetherModule implements IPlayerCompanionManager
@@ -65,19 +66,21 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 
 	public void update()
 	{
-		ItemStack companionStack = this.getEquippedCompanionItem();
+		ItemStack companionStack = this.getCompanionItem();
 
-		EntityCompanion companion = this.getCompanionEntity();
+		Optional<Entity> entity = this.getCompanionEntity();
 
 		if (!this.player.world.isBlockLoaded(this.player.getPosition()))
 		{
 			return;
 		}
 
-		if (companionStack != null)
+		if (!companionStack.isEmpty())
 		{
-			if (companion != null)
+			if (entity.isPresent())
 			{
+				EntityCompanion companion = (EntityCompanion) entity.get();
+
 				if (companion.isDead)
 				{
 					if (!companion.wasDespawned())
@@ -96,8 +99,7 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 					companion.tickEffects(this.aePlayer);
 				}
 			}
-
-			if (companion == null)
+			else
 			{
 				long respawnTimer = ItemCompanion.getTicksUntilRespawn(companionStack, this.player.world);
 
@@ -107,7 +109,7 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 				}
 			}
 		}
-		else if (companion != null)
+		else if (entity != null)
 		{
 			this.removeCompanion(true);
 		}
@@ -161,10 +163,11 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 
 	private void removeCompanion(boolean notifyClient)
 	{
-		EntityCompanion companion = this.getCompanionEntity();
+		Optional<Entity> entity = this.getCompanionEntity();
 
-		if (companion != null)
+		if (entity.isPresent())
 		{
+			EntityCompanion companion = (EntityCompanion) entity.get();
 			companion.removeEffects(this.aePlayer);
 
 			companion.setOwner(null);
@@ -214,20 +217,20 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 	}
 
 	@Override
-	public EntityCompanion getCompanionEntity()
+	public Optional<Entity> getCompanionEntity()
 	{
 		Entity entity = this.player.world.getEntityByID(this.companionId);
 
 		if (entity != null && entity instanceof EntityCompanion)
 		{
-			return (EntityCompanion) entity;
+			return Optional.of(entity);
 		}
 
-		return null;
+		return Optional.empty();
 	}
 
 	@Override
-	public ItemStack getEquippedCompanionItem()
+	public ItemStack getCompanionItem()
 	{
 		ItemStack companionStack = this.aePlayer.getEquipmentInventory().getStackInSlot(6);
 
@@ -236,7 +239,7 @@ public class PlayerCompanionModule extends PlayerAetherModule implements IPlayer
 			return companionStack;
 		}
 
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 }

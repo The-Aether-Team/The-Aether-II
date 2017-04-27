@@ -23,7 +23,7 @@ public class PacketOpenTab implements IMessage
 
 	public PacketOpenTab(ITab tab)
 	{
-		for (Map.Entry<Integer, ITabGroupHandler> entry : AetherAPI.tabs().getRegisteredTabGroups().entrySet())
+		for (Map.Entry<Integer, ITabGroupHandler> entry : AetherAPI.content().tabs().getRegisteredTabGroups().entrySet())
 		{
 			int groupIndex = entry.getKey();
 
@@ -70,9 +70,9 @@ public class PacketOpenTab implements IMessage
 		{
 			if (player instanceof EntityPlayerMP)
 			{
-				if (message.tabGroupIndex < AetherAPI.tabs().getRegisteredTabGroups().size())
+				if (message.tabGroupIndex < AetherAPI.content().tabs().getRegisteredTabGroups().size())
 				{
-					ITabGroupHandler tabGroupHandler = AetherAPI.tabs().getRegisteredTabGroups().get(message.tabGroupIndex);
+					ITabGroupHandler tabGroupHandler = AetherAPI.content().tabs().getRegisteredTabGroups().get(message.tabGroupIndex);
 
 					if (tabGroupHandler == null)
 					{

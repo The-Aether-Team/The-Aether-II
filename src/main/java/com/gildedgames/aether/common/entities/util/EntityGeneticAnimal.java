@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.util;
 
-import com.gildedgames.aether.api.genes.IGenePool;
+import com.gildedgames.aether.api.entity.genes.IGenePool;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;

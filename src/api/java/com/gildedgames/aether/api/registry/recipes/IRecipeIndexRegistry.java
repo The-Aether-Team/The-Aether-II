@@ -1,12 +1,12 @@
 package com.gildedgames.aether.api.registry.recipes;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.Collection;
 
 /**
- * Index manager for recipes.
+ * Index manager for recipes. Adding items to this registry will create indexes for
+ * it's input items, allowing you to search for recipes that use a specific item.
  */
 public interface IRecipeIndexRegistry
 {
@@ -15,24 +15,22 @@ public interface IRecipeIndexRegistry
 	 *
 	 * @param recipe The recipe to register
 	 */
-	void addIndex(IIndexableRecipe recipe);
+	void registerRecipe(IIndexableRecipe recipe);
 
 	/**
-	 * Cleans the index.
-	 */
-	void dropAllIndexes();
-
-	/**
-	 * Returns the size of this index.
-	 * @return The number of indexes
+	 * Returns the number of indexes (keys) in this index. Not very useful other than for
+	 * statistical reporting.
+	 * @return The number of indexes this registry has currently allocated
 	 */
 	int getIndexSize();
 
 	/**
-	 * Gets a collection of recipes containing {@param item}.
+	 * Gets a collection of recipes that use {@param item} as an input. This is damage
+	 * value sensitive.
 	 *
-	 * @param item The item to search for recipes containing it
-	 * @return A non-null {@link Collection} of {@link IIndexableRecipe}
+	 * @param item The item index to search by
+	 * @return A {@link Collection} containing {@link IIndexableRecipe} which
+	 * contain {@param item}, empty if none.
 	 */
 	Collection<IIndexableRecipe> getRecipesContainingItem(ItemStack item);
 }

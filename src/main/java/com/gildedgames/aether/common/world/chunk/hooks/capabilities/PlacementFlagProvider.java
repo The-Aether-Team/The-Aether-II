@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.chunk.hooks.capabilities;
 
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.chunk.IPlacementFlagCapability;
+import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

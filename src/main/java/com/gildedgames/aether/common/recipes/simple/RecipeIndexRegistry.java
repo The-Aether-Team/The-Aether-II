@@ -16,7 +16,7 @@ public class RecipeIndexRegistry implements IRecipeIndexRegistry
 	private final Map<ItemMetaPair, Collection<IIndexableRecipe>> cache = new HashMap<>();
 
 	@Override
-	public void addIndex(IIndexableRecipe recipe)
+	public void registerRecipe(IIndexableRecipe recipe)
 	{
 		Validate.notNull(recipe);
 
@@ -25,12 +25,6 @@ public class RecipeIndexRegistry implements IRecipeIndexRegistry
 			Collection<IIndexableRecipe> group = this.cache.computeIfAbsent(item, k -> new ArrayList<>());
 			group.add(recipe);
 		}
-	}
-
-	@Override
-	public void dropAllIndexes()
-	{
-		this.cache.clear();
 	}
 
 	@Override

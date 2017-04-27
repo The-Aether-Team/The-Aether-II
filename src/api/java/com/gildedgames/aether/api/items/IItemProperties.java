@@ -13,18 +13,17 @@ import java.util.Optional;
 public interface IItemProperties
 {
 	/**
-	 * @return The equipment slot this item uses.
+	 * @return The equipment slot this item uses, empty if it's not equipment.
 	 */
 	Optional<ItemEquipmentSlot> getEquipmentSlot();
 
 	/**
-	 * @return The collection of effect instances this item provides.
-	 */
-	Collection<IEffectProvider> getEffectProviders();
-
-	/**
-	 * @return The rarity of this item, or empty if this item does not have a
-	 * rarity.
+	 * @return The rarity of this item, or empty if this item does not have a rarity.
 	 */
 	Optional<ItemRarity> getRarity();
+
+	/**
+	 * @return The collection of effect instances this item provides, empty if it provides none.
+	 */
+	Collection<IEffectProvider> getEffectProviders();
 }

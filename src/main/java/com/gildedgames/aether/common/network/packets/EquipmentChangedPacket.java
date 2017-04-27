@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.network.packets;
 
-import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
+import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
@@ -8,12 +8,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

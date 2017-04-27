@@ -84,7 +84,7 @@ public class ShapedRecipeWrapper implements IIndexableRecipe
 	}
 
 	@Override
-	public ItemStack getResult()
+	public ItemStack getCraftingResult()
 	{
 		return this.recipe.getRecipeOutput();
 	}

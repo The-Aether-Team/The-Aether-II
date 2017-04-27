@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.registry;
 
 import com.gildedgames.aether.api.items.IItemProperties;
-import com.gildedgames.aether.api.items.ItemProperties;
+import com.gildedgames.aether.api.items.ImplItemProperties;
 import com.gildedgames.aether.api.registry.IItemPropertiesRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class ItemPropertiesRegistry implements IItemPropertiesRegistry
 {
-	private static final IItemProperties DEFAULT = new ItemProperties();
+	private static final IItemProperties DEFAULT = new ImplItemProperties();
 
 	private final Map<ResourceLocation, IItemProperties> registry = new HashMap<>();
 

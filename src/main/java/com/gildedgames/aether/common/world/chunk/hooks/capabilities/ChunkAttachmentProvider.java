@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.chunk.hooks.capabilities;
 
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
+import com.gildedgames.aether.api.AetherCapabilities;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;

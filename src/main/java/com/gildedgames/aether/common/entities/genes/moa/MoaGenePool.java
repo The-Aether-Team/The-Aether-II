@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.genes.moa;
 
-import com.gildedgames.aether.api.genes.GeneRegion;
-import com.gildedgames.aether.api.genes.IGeneStorage;
+import com.gildedgames.aether.api.entity.genes.GeneRegion;
+import com.gildedgames.aether.api.entity.genes.IGeneStorage;
 import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.entities.genes.util.DataGene;
 import com.gildedgames.aether.common.entities.genes.util.GenePool;

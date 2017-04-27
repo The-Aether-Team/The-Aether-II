@@ -38,7 +38,7 @@ public class ItemPropertiesBuilder
 
 	/**
 	 * Adds an {@link IEffectProvider} this equipment item will provide.
-	 * @param effect The effect instance to add
+	 * @param effect The effect provider to add
 	 */
 	public ItemPropertiesBuilder withEffect(IEffectProvider effect)
 	{
@@ -49,6 +49,6 @@ public class ItemPropertiesBuilder
 
 	public IItemProperties build()
 	{
-		return new ItemProperties(this.slot, this.effects, this.rarity);
+		return new ImplItemProperties(this.slot, this.effects, this.rarity);
 	}
 }

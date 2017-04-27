@@ -2,31 +2,22 @@ package com.gildedgames.aether.api.items;
 
 public enum ItemRarity
 {
-
-	NONE("item.rarity.basic.name", 0),
-	COMMON("item.rarity.common.name", 50),
-	RARE("item.rarity.rare.name", 25),
-	EPIC("item.rarity.epic.name", 5),
-	MYTHIC("item.rarity.mythic.name", 3),
-	GODLY("item.rarity.godly.name", 1);
+	NONE("item.rarity.basic.name"),
+	COMMON("item.rarity.common.name"),
+	RARE("item.rarity.rare.name"),
+	EPIC("item.rarity.epic.name"),
+	MYTHIC("item.rarity.mythic.name"),
+	GODLY("item.rarity.godly.name");
 
 	private final String unlocalizedName;
 
-	private final int weight;
-
-	ItemRarity(String unlocalizedName, int weight)
+	ItemRarity(String unlocalizedName)
 	{
 		this.unlocalizedName = unlocalizedName;
-		this.weight = weight;
 	}
 
 	public String getUnlocalizedName()
 	{
 		return this.unlocalizedName;
-	}
-
-	public int getWeight()
-	{
-		return this.weight;
 	}
 }

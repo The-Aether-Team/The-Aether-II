@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.containers;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
+import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
@@ -10,8 +10,6 @@ import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
-
-import java.util.Optional;
 
 public class ContainerEquipment extends ContainerPlayer
 {
@@ -214,7 +212,7 @@ public class ContainerEquipment extends ContainerPlayer
 			{
 				int destIndex = -1;
 
-				IItemProperties properties = AetherAPI.items().getProperties(stack.getItem());
+				IItemProperties properties = AetherAPI.content().items().getProperties(stack.getItem());
 
 				if (properties.getEquipmentSlot().isPresent())
 				{

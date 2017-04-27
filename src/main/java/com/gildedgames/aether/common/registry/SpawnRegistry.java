@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.registry;
 
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.entity.spawning.EntitySpawn;
-import com.gildedgames.aether.api.capabilites.entity.spawning.ISpawningInfo;
+import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.entity.spawning.EntitySpawn;
+import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.entities.living.mobs.*;

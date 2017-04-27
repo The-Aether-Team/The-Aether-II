@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.genes.util;
 
-import com.gildedgames.aether.api.genes.Gene;
-import com.gildedgames.aether.api.genes.Inheritance;
-import com.gildedgames.aether.api.genes.Mutation;
+import com.gildedgames.aether.api.entity.genes.Gene;
+import com.gildedgames.aether.api.entity.genes.Inheritance;
+import com.gildedgames.aether.api.entity.genes.Mutation;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

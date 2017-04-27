@@ -1,42 +1,17 @@
 package com.gildedgames.aether.api;
 
-import com.gildedgames.aether.api.dialog.IDialogManager;
-import com.gildedgames.aether.api.registry.IEquipmentRegistry;
-import com.gildedgames.aether.api.registry.IItemPropertiesRegistry;
-import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
-import com.gildedgames.aether.api.registry.recipes.IRecipeIndexRegistry;
-import com.gildedgames.aether.api.registry.tab.ITabRegistry;
+import com.gildedgames.aether.api.registry.IContentRegistry;
 
 public class AetherAPI
 {
-	private static IAetherServiceLocator services;
+	private static IAetherServices services;
 
-	public static IAltarRecipeRegistry altar()
+	public static IContentRegistry content()
 	{
-		return AetherAPI.services().getAltarRecipeRegistry();
+		return AetherAPI.services().content();
 	}
 
-	public static ITabRegistry tabs()
-	{
-		return AetherAPI.services().getTabRegistry();
-	}
-
-	public static IItemPropertiesRegistry items()
-	{
-		return AetherAPI.services().getItemPropertiesRegistry();
-	}
-
-	public static IEquipmentRegistry equipment()
-	{
-		return AetherAPI.services().getEquipmentRegistry();
-	}
-
-	public static IDialogManager dialog()
-	{
-		return AetherAPI.services().getDialogManager();
-	}
-
-	public static void registerProvider(IAetherServiceLocator services)
+	public static void registerProvider(IAetherServices services)
 	{
 		if (AetherAPI.services != null)
 		{
@@ -46,7 +21,7 @@ public class AetherAPI
 		AetherAPI.services = services;
 	}
 
-	public static IAetherServiceLocator services()
+	public static IAetherServices services()
 	{
 		return AetherAPI.services;
 	}

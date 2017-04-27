@@ -1,9 +1,8 @@
 package com.gildedgames.aether.common.containers.inventory;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
+import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.items.IItemProperties;
-import com.gildedgames.aether.api.items.ItemProperties;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +15,6 @@ import net.minecraft.util.text.TextComponentBase;
 import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
-import java.util.Optional;
 
 public class InventoryEquipment implements IInventoryEquipment
 {
@@ -148,7 +146,7 @@ public class InventoryEquipment implements IInventoryEquipment
 	@Override
 	public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack)
 	{
-		IItemProperties props = AetherAPI.items().getProperties(stack.getItem());
+		IItemProperties props = AetherAPI.content().items().getProperties(stack.getItem());
 
 		return props.getEquipmentSlot().isPresent() && props.getEquipmentSlot().get() == SLOT_TYPES[index];
 	}

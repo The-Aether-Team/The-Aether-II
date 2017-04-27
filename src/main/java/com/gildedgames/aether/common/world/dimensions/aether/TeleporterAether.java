@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.dimensions.aether;
 
 import com.gildedgames.aether.api.util.NBT;
-import com.gildedgames.aether.api.util.WorldPos;
+import com.gildedgames.aether.common.util.WorldPos;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.registry.GenerationAether;

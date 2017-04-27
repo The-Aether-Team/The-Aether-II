@@ -1,14 +1,13 @@
 package com.gildedgames.aether.common.capabilities.player;
 
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.chunk.IPlacementFlagCapability;
-import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
+import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
+import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.entities.SharedAetherAttributes;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.DiedInAetherPacket;
 import com.gildedgames.aether.common.world.chunk.hooks.capabilities.ChunkAttachment;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTBase;
@@ -131,7 +130,7 @@ public class PlayerAetherEvents
 
 		if (data != null)
 		{
-			data.mark(event.getPos());
+			data.markModified(event.getPos());
 		}
 
 		PlayerAether aePlayer = PlayerAether.getPlayer(event.getPlayer());

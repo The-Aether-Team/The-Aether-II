@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.entities.genes.util;
 
-import com.gildedgames.aether.api.genes.Gene;
-import com.gildedgames.aether.api.genes.GeneRegion;
-import com.gildedgames.aether.api.genes.IGenePool;
-import com.gildedgames.aether.api.genes.IGeneStorage;
+import com.gildedgames.aether.api.entity.genes.Gene;
+import com.gildedgames.aether.api.entity.genes.GeneRegion;
+import com.gildedgames.aether.api.entity.genes.IGenePool;
+import com.gildedgames.aether.api.entity.genes.IGeneStorage;
 import net.minecraft.world.World;
 
 import java.util.Random;

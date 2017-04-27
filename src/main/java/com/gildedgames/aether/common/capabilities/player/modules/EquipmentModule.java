@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.capabilities.player.modules;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.items.equipment.effects.IEffect;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
@@ -98,7 +98,7 @@ public class EquipmentModule extends PlayerAetherModule
 	 */
 	private void onEquipmentAdded(ItemStack stack)
 	{
-		AetherAPI.items().getProperties(stack.getItem()).getEffectProviders().forEach(this::addEffect);
+		AetherAPI.content().items().getProperties(stack.getItem()).getEffectProviders().forEach(this::addEffect);
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class EquipmentModule extends PlayerAetherModule
 	 */
 	private void onEquipmentRemoved(ItemStack stack)
 	{
-		AetherAPI.items().getProperties(stack.getItem()).getEffectProviders().forEach(this::removeEffect);
+		AetherAPI.content().items().getProperties(stack.getItem()).getEffectProviders().forEach(this::removeEffect);
 	}
 
 	/**
@@ -162,7 +162,7 @@ public class EquipmentModule extends PlayerAetherModule
 
 		if (pool == null)
 		{
-			IEffect<IEffectProvider> factory = AetherAPI.equipment().getFactory(instance.getFactory());
+			IEffectFactory<IEffectProvider> factory = AetherAPI.content().effects().getFactory(instance.getFactory());
 
 			this.effects.put(instance.getFactory(), pool = new EffectPool(this.getPlayer(), factory));
 		}

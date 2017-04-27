@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.chunk.hooks.capabilities;
 
-import com.gildedgames.aether.api.capabilites.chunk.IPlacementFlagCapability;
+import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -16,25 +16,24 @@ public class PlacementFlagCapability implements IPlacementFlagCapability
 	private BitSet bits = new BitSet(CHUNK_SIZE);
 
 	@Override
-	public void mark(BlockPos pos)
+	public void markModified(BlockPos pos)
 	{
 		this.set(pos, true);
 	}
 
 	@Override
-	public void clear(BlockPos pos)
+	public void clearModified(BlockPos pos)
 	{
 		this.set(pos, false);
 	}
 
-	@Override
-	public void set(BlockPos pos, boolean value)
+	private void set(BlockPos pos, boolean value)
 	{
 		this.bits.set(this.getIndexFromCoordinate(pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15), value);
 	}
 
 	@Override
-	public boolean isMarked(BlockPos pos)
+	public boolean isModified(BlockPos pos)
 	{
 		return this.bits.get(this.getIndexFromCoordinate(pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15));
 	}

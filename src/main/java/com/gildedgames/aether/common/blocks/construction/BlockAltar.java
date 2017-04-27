@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.construction;
 
+import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.tiles.TileEntityAltar;
@@ -88,7 +89,7 @@ public class BlockAltar extends Block implements ITileEntityProvider
 					altar.addAmbrosiumShard();
 				}
 			}
-			else if (AetherCore.PROXY.getRecipeManager().getAltarRegistry().isEnchantableItem(heldStack))
+			else if (AetherAPI.content().altar().getMatchingRecipe(heldStack) != null)
 			{
 				ItemStack stack = heldStack.copy();
 				stack.setCount(1);

@@ -13,7 +13,7 @@ public class RecipeButton extends ItemStackButton
 
 	public RecipeButton(int id, GuiSkyrootWorkbench workbench, IIndexableRecipe recipe, int x, int y, boolean complete)
 	{
-		super(id, recipe.getResult(), x, y);
+		super(id, recipe.getCraftingResult(), x, y);
 
 		this.workbench = workbench;
 		this.recipe = recipe;

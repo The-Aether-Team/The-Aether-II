@@ -8,7 +8,8 @@ import net.minecraft.util.ResourceLocation;
 public interface IEffectProvider
 {
 	/**
-	 * Returns the unique ID of this instance's {@link IEffect}.
+	 * Returns the unique identifier of this effect's {@link IEffectFactory}.
+	 *
 	 * @return The {@link ResourceLocation} which identifies the factory
 	 */
 	ResourceLocation getFactory();

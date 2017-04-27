@@ -1,7 +1,9 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.registry.IContentRegistry;
 import com.gildedgames.aether.common.blocks.QuicksoilProcessor;
+import com.gildedgames.aether.common.registry.ContentRegistry;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.io.ClassSerializer;
@@ -79,9 +81,11 @@ public class AetherCore
 	}
 
 	@EventHandler
-	public void onServerStarting(FMLServerStartingEvent event)
+	public void onFMLInit(FMLInitializationEvent event)
 	{
-		AetherCore.PROXY.serverStarting(event);
+		AetherCore.PROXY.init(event);
+
+		MinecraftForge.EVENT_BUS.register(SPAWN_REGISTRY);
 	}
 
 	@EventHandler
@@ -95,29 +99,9 @@ public class AetherCore
 	}
 
 	@EventHandler
-	public void onServerStopped(FMLServerStoppedEvent event)
-	{
-
-	}
-
-	@EventHandler
 	public void serverStarted(FMLServerStartedEvent event)
 	{
 		AetherCore.SPAWN_REGISTRY.read();
-	}
-
-	@EventHandler
-	public void onFMLInit(FMLInitializationEvent event)
-	{
-		AetherCore.PROXY.init(event);
-
-		MinecraftForge.EVENT_BUS.register(SPAWN_REGISTRY);
-	}
-
-	@EventHandler
-	public void onFMLPostInit(FMLPostInitializationEvent event)
-	{
-		AetherCore.PROXY.postInit(event);
 	}
 
 	@EventHandler

@@ -60,7 +60,7 @@ public class ShapelessRecipeWrapper implements IIndexableRecipe
 	}
 
 	@Override
-	public ItemStack getResult()
+	public ItemStack getCraftingResult()
 	{
 		return this.recipe.getRecipeOutput();
 	}

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items;
 
-import com.gildedgames.aether.api.loot.Loot;
+import com.gildedgames.aether.api.items.loot.Loot;
 
 public class ItemIrradiated extends ItemIrradiatedVisuals
 {

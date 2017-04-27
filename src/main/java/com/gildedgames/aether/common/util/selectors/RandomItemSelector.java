@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.util.selectors;
 
-import com.gildedgames.aether.api.loot.Loot;
+import com.gildedgames.aether.api.items.loot.Loot;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,7 +22,7 @@ public class RandomItemSelector implements Loot
 	}
 
 	@Override
-	public ItemStack create(Random random)
+	public ItemStack select(Random random)
 	{
 		if (this.validStackCache == null)
 		{
@@ -45,12 +45,6 @@ public class RandomItemSelector implements Loot
 		Item item = this.validStackCache.get(random.nextInt(this.validStackCache.size()));
 
 		return new ItemStack(item);
-	}
-
-	@Override
-	public ItemStack getCloningSource()
-	{
-		return null;
 	}
 
 }

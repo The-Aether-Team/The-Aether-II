@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.living.companions;
 
-import com.gildedgames.aether.common.capabilities.player.PlayerAether;
+import com.gildedgames.aether.api.player.IPlayerAether;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -24,7 +24,7 @@ public abstract class EntityBasicCompanion extends EntityCompanion
 	}
 
 	@Override
-	public void tickEffects(PlayerAether aePlayer)
+	public void tickEffects(IPlayerAether aePlayer)
 	{
 		// Avoid sending potion packets every tick
 		if (this.ticksExisted % 100 == 0)
@@ -34,13 +34,13 @@ public abstract class EntityBasicCompanion extends EntityCompanion
 	}
 
 	@Override
-	public void addEffects(PlayerAether aePlayer)
+	public void addEffects(IPlayerAether aePlayer)
 	{
 		this.givePotion(aePlayer.getEntity());
 	}
 
 	@Override
-	public void removeEffects(PlayerAether aePlayer)
+	public void removeEffects(IPlayerAether aePlayer)
 	{
 		this.removePotion(aePlayer.getEntity());
 	}

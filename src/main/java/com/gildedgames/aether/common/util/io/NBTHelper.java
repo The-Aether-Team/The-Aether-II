@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.util.io;
 
 import com.gildedgames.aether.api.util.NBT;
-import com.gildedgames.aether.api.util.WorldPos;
+import com.gildedgames.aether.common.util.WorldPos;
 import com.gildedgames.aether.common.AetherCore;
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Lists;
@@ -277,16 +277,6 @@ public class NBTHelper
 				};
 			}
 		};
-	}
-
-	public static WorldPos getBlockPosDimension(NBTTagCompound tag)
-	{
-		if (tag == null || (tag.hasKey("_null") && tag.getBoolean("_null")))
-		{
-			return null;
-		}
-
-		return new WorldPos(tag.getInteger("x"), tag.getInteger("y"), tag.getInteger("z"), tag.getInteger("d"));
 	}
 
 	public static BlockPos readBlockPos(NBTTagCompound tag)

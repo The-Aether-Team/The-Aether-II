@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.capabilities;
 
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.chunk.IChunkAttachment;
-import com.gildedgames.aether.api.capabilites.chunk.IPlacementFlagCapability;
-import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
-import com.gildedgames.aether.api.capabilites.entity.spawning.ISpawningInfo;
+import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.chunk.IChunkAttachment;
+import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
+import com.gildedgames.aether.api.player.IPlayerAether;
+import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfo;
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfoProvider;

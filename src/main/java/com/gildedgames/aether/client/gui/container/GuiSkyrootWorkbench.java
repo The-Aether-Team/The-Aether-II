@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.gui.container;
 
+import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.registry.recipes.IIndexableRecipe;
 import com.gildedgames.aether.api.registry.recipes.IRecipeIndexRegistry;
 import com.gildedgames.aether.client.gui.container.crafting.GhostItemStackButton;
@@ -24,7 +25,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.config.GuiUtils;
-import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.Validate;
 
 import javax.annotation.Nullable;
@@ -222,7 +222,7 @@ public class GuiSkyrootWorkbench extends GuiContainer
 
 		this.craftableRecipes.clear();
 		this.craftableRecipes.addAll(this.getPossibleRecipes());
-		this.craftableRecipes.sort(Comparator.comparing(recipe -> Item.getIdFromItem(recipe.getResult().getItem())));
+		this.craftableRecipes.sort(Comparator.comparing(recipe -> Item.getIdFromItem(recipe.getCraftingResult().getItem())));
 
 		if (!this.craftableRecipes.contains(this.selectedRecipe))
 		{
@@ -335,7 +335,7 @@ public class GuiSkyrootWorkbench extends GuiContainer
 
 	private HashSet<IIndexableRecipe> getPossibleRecipes()
 	{
-		IRecipeIndexRegistry index = AetherCore.PROXY.getRecipeManager().getRecipeIndex();
+		IRecipeIndexRegistry index = AetherAPI.content().craftable();
 
 		HashSet<IIndexableRecipe> recipes = new HashSet<>();
 

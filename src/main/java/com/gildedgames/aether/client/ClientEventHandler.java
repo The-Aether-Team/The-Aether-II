@@ -5,7 +5,7 @@ import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
-import com.gildedgames.aether.api.items.equipment.effects.IEffect;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.client.gui.PerformanceIngame;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
@@ -80,7 +80,7 @@ public class ClientEventHandler
 	{
 		ItemStack stack = event.getItemStack();
 
-		IItemProperties properties = AetherAPI.items().getProperties(event.getItemStack().getItem());
+		IItemProperties properties = AetherAPI.content().items().getProperties(event.getItemStack().getItem());
 
 		// Equipment Properties
 		if (properties.getEquipmentSlot().isPresent())
@@ -90,8 +90,8 @@ public class ClientEventHandler
 			// Equipment Effects
 			for (IEffectProvider instance : properties.getEffectProviders())
 			{
-				IEffect<IEffectProvider> factory = AetherAPI.equipment().getFactory(instance.getFactory());
-				factory.createInstance(Collections.singleton(instance)).addItemInformation(event.getToolTip());
+				IEffectFactory<IEffectProvider> factory = AetherAPI.content().effects().getFactory(instance.getFactory());
+				factory.createInstance(Collections.singleton(instance)).addInformation(event.getToolTip());
 			}
 
 			// Slot Type
@@ -149,12 +149,6 @@ public class ClientEventHandler
 				AetherMusicManager.INSTANCE.update(aePlayer);
 			}
 		}
-	}
-
-	@SubscribeEvent
-	public void onWorldLoad(WorldEvent.Load event)
-	{
-		AetherCore.PROXY.onWorldLoaded(event);
 	}
 
 	@SubscribeEvent

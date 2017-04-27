@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.genes.moa;
 
-import com.gildedgames.aether.api.genes.Gene;
+import com.gildedgames.aether.api.entity.genes.Gene;
 import com.gildedgames.aether.common.entities.genes.util.DataGene;
 import com.gildedgames.aether.common.entities.genes.util.SimpleInheritance;
 import com.google.common.collect.Lists;

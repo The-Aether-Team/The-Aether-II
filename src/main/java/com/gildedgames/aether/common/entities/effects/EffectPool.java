@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.effects;
 
-import com.gildedgames.aether.api.capabilites.entity.IPlayerAether;
-import com.gildedgames.aether.api.items.equipment.effects.IEffect;
+import com.gildedgames.aether.api.player.IPlayerAether;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
 import com.gildedgames.aether.api.items.equipment.effects.EffectInstance;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 
@@ -17,11 +17,11 @@ public class EffectPool
 
 	private final Collection<IEffectProvider> providers = new ArrayList<>();
 
-	private final IEffect<IEffectProvider> factory;
+	private final IEffectFactory<IEffectProvider> factory;
 
 	private EffectInstance instance;
 
-	public EffectPool(IPlayerAether player, IEffect<IEffectProvider> factory)
+	public EffectPool(IPlayerAether player, IEffectFactory<IEffectProvider> factory)
 	{
 		this.player = player;
 		this.factory = factory;
@@ -84,7 +84,7 @@ public class EffectPool
 	/**
 	 * @return The processor of this effect for the entity.
 	 */
-	public IEffect<IEffectProvider> getFactory()
+	public IEffectFactory<IEffectProvider> getFactory()
 	{
 		return this.factory;
 	}

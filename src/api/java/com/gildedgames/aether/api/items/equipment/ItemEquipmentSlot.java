@@ -1,5 +1,8 @@
 package com.gildedgames.aether.api.items.equipment;
 
+/**
+ * The possible equipment slots for an item.
+ */
 public enum ItemEquipmentSlot
 {
 	RING("gui.aether.slot.ring"),
@@ -18,6 +21,9 @@ public enum ItemEquipmentSlot
 		this.unlocalizedName = unlocalizedName;
 	}
 
+	/**
+	 * @return Returns the unlocalized name of the the slot.
+	 */
 	public String getUnlocalizedName()
 	{
 		return this.unlocalizedName;

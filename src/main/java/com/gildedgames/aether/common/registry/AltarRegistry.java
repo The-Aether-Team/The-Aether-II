@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.registry;
 
-import com.gildedgames.aether.api.registry.altar.IAltarRecipe;
-import com.gildedgames.aether.api.registry.altar.IAltarRecipeRegistry;
+import com.gildedgames.aether.api.recipes.altar.IAltarRecipe;
+import com.gildedgames.aether.api.recipes.altar.IAltarRecipeRegistry;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
@@ -13,14 +13,10 @@ public class AltarRegistry implements IAltarRecipeRegistry
 	@Override
 	public void registerAltarRecipe(IAltarRecipe recipe)
 	{
-		this.addRecipe(recipe);
-	}
-
-	private void addRecipe(IAltarRecipe recipe)
-	{
 		this.altarRecipes.add(recipe);
 	}
 
+	@Override
 	public IAltarRecipe getMatchingRecipe(ItemStack stack)
 	{
 		for (IAltarRecipe recipe : this.altarRecipes)

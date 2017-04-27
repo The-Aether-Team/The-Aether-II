@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.capabilities.entity.spawning;
 
-import com.gildedgames.aether.api.capabilites.entity.spawning.EntitySpawn;
-import com.gildedgames.aether.api.capabilites.entity.spawning.ISpawningInfo;
+import com.gildedgames.aether.api.entity.spawning.EntitySpawn;
+import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

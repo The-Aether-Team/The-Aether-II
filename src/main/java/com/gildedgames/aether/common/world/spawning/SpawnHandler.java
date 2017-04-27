@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world.spawning;
 
-import com.gildedgames.aether.api.capabilites.AetherCapabilities;
-import com.gildedgames.aether.api.capabilites.entity.spawning.EntitySpawn;
-import com.gildedgames.aether.api.capabilites.entity.spawning.ISpawningInfo;
+import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.entity.spawning.EntitySpawn;
+import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.util.TickTimer;

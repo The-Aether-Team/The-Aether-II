@@ -18,8 +18,6 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.client.resources.IReloadableResourceManager;
-import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -53,15 +51,13 @@ public class ClientProxy extends CommonProxy
 
 		MinecraftForge.EVENT_BUS.register(TabClientEvents.class);
 
-		AetherAPI.tabs().getInventoryGroup().registerClientTab(new TabEquipment.Client());
-		AetherAPI.tabs().getInventoryGroup().registerClientTab(new TabBugReport.Client());
+		AetherAPI.content().tabs().getInventoryGroup().registerClientTab(new TabEquipment.Client());
+		AetherAPI.content().tabs().getInventoryGroup().registerClientTab(new TabBugReport.Client());
 
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemMoaEggColorHandler(), ItemsAether.moa_egg);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new LeatherGlovesColorHandler(), ItemsAether.leather_gloves);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new WrappingPaperColorHandler(), ItemsAether.wrapping_paper);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new MoaFeatherColorHandler(), ItemsAether.moa_feather);
-
-		this.dialogManager.attachReloadListener();
 	}
 
 	@Override

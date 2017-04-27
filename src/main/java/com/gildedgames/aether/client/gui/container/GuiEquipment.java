@@ -6,7 +6,6 @@ import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.player.modules.EquipmentModule;
 import com.gildedgames.aether.common.containers.ContainerEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
-import com.gildedgames.aether.common.entities.effects.EffectPool;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
@@ -18,7 +17,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Optional;
 
 public class GuiEquipment extends GuiContainer
 {
@@ -195,7 +193,7 @@ public class GuiEquipment extends GuiContainer
 
 		for (ResourceLocation id : equipment.getActiveEffectProviders())
 		{
-			equipment.getEffectPool(id).ifPresent(pool -> pool.getInstance().addItemInformation(effects));
+			equipment.getEffectPool(id).ifPresent(pool -> pool.getInstance().addInformation(effects));
 		}
 
 		String compiled = StringUtils.join(effects, TextFormatting.RESET + ", ");

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.recipes.altar;
 
-import com.gildedgames.aether.api.registry.altar.IAltarRecipe;
+import com.gildedgames.aether.api.recipes.altar.IAltarRecipe;
 import net.minecraft.item.ItemStack;
 
 public class AltarEnchantRecipe implements IAltarRecipe
