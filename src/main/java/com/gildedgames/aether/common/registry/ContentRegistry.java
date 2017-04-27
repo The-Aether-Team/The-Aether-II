@@ -22,6 +22,7 @@ import com.gildedgames.aether.common.recipes.simple.RecipeIndexRegistry;
 import com.gildedgames.aether.common.recipes.simple.ShapedRecipeWrapper;
 import com.gildedgames.aether.common.recipes.simple.ShapelessRecipeWrapper;
 import com.gildedgames.aether.common.registry.content.*;
+import com.gildedgames.aether.common.util.PerfHelper;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
@@ -49,21 +50,21 @@ public class ContentRegistry implements IContentRegistry
 	{
 		Validate.isTrue(!this.hasPreInit, "Already pre-initialized");
 
-		this.measure("Pre-initialize blocks", BlocksAether::preInit);
-		this.measure("Pre-initialize items", ItemsAether::preInit);
-		this.measure("Pre-initialize tiles", TileEntitiesAether::preInit);
+		PerfHelper.measure("Pre-initialize blocks", BlocksAether::preInit);
+		PerfHelper.measure("Pre-initialize items", ItemsAether::preInit);
+		PerfHelper.measure("Pre-initialize tiles", TileEntitiesAether::preInit);
 
-		this.measure("Pre-initialize dimensions", DimensionsAether::preInit);
-		this.measure("Pre-initialize biomes", BiomesAether::preInit);
+		PerfHelper.measure("Pre-initialize dimensions", DimensionsAether::preInit);
+		PerfHelper.measure("Pre-initialize biomes", BiomesAether::preInit);
 
-		this.measure("Pre-initialize loot tables", LootTablesAether::preInit);
-		this.measure("Pre-initialize entities", EntitiesAether::preInit);
+		PerfHelper.measure("Pre-initialize loot tables", LootTablesAether::preInit);
+		PerfHelper.measure("Pre-initialize entities", EntitiesAether::preInit);
 
-		this.measure("Pre-initialize equipment", EquipmentContent::preInit);
-		this.measure("Pre-initialize recipes", RecipesAether::preInit);
-		this.measure("Pre-initialize sounds", SoundsAether::preInit);
+		PerfHelper.measure("Pre-initialize equipment", EquipmentContent::preInit);
+		PerfHelper.measure("Pre-initialize recipes", RecipesAether::preInit);
+		PerfHelper.measure("Pre-initialize sounds", SoundsAether::preInit);
 
-		this.measure("Pre-initialize networking", NetworkingAether::preInit);
+		PerfHelper.measure("Pre-initialize networking", NetworkingAether::preInit);
 
 		this.tabRegistry.getInventoryGroup().registerServerTab(new TabEquipment());
 		this.tabRegistry.getInventoryGroup().registerServerTab(new TabBugReport());
@@ -75,23 +76,16 @@ public class ContentRegistry implements IContentRegistry
 	{
 		Validate.isTrue(!this.hasInit, "Already initialized");
 
-		this.measure("Initialize capabilities", CapabilityManagerAether::init);
-		this.measure("Initialize templates", TemplatesAether::init);
-		this.measure("Initialize generations", GenerationAether::init);
-		this.measure("Initialize recipes", RecipesAether::init);
-		this.measure("Initialize recipe indexes", this::rebuildIndexes);
+		PerfHelper.measure("Initialize capabilities", CapabilityManagerAether::init);
+		PerfHelper.measure("Initialize templates", TemplatesAether::init);
+		PerfHelper.measure("Initialize generations", GenerationAether::init);
+		PerfHelper.measure("Initialize recipes", RecipesAether::init);
+		PerfHelper.measure("Initialize recipe indexes", this::rebuildIndexes);
 
 		this.hasInit = true;
 	}
 
-	private void measure(String name, Runnable o)
-	{
-		long start = System.nanoTime();
 
-		o.run();
-
-		AetherCore.LOGGER.debug("'{}' completed in {}ms", name, ((System.nanoTime() - start) / 1000000));
-	}
 
 	private void rebuildIndexes()
 	{

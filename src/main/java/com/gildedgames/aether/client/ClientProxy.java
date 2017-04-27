@@ -16,6 +16,7 @@ import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.CommonProxy;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
+import com.gildedgames.aether.common.util.PerfHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,9 +31,9 @@ public class ClientProxy extends CommonProxy
 	{
 		super.preInit(event);
 
-		AetherBlockModels.preInit();
-		ItemModelsAether.preInit();
-		AetherRenderers.preInit();
+		PerfHelper.measure("Pre-initialize block models", AetherBlockModels::preInit);
+		PerfHelper.measure("Pre-initialize item models", ItemModelsAether::preInit);
+		PerfHelper.measure("Pre-initialize special renders", AetherRenderers::preInit);
 
 		CreativeTabsAether.registerTabIcons();
 	}
@@ -42,7 +43,7 @@ public class ClientProxy extends CommonProxy
 	{
 		super.init(event);
 
-		AetherRenderers.init();
+		PerfHelper.measure("Initialize special renders", AetherRenderers::init);
 
 		MinecraftForge.EVENT_BUS.register(AetherMusicManager.INSTANCE);
 
@@ -53,11 +54,6 @@ public class ClientProxy extends CommonProxy
 
 		AetherAPI.content().tabs().getInventoryGroup().registerClientTab(new TabEquipment.Client());
 		AetherAPI.content().tabs().getInventoryGroup().registerClientTab(new TabBugReport.Client());
-
-		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemMoaEggColorHandler(), ItemsAether.moa_egg);
-		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new LeatherGlovesColorHandler(), ItemsAether.leather_gloves);
-		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new WrappingPaperColorHandler(), ItemsAether.wrapping_paper);
-		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new MoaFeatherColorHandler(), ItemsAether.moa_feather);
 	}
 
 	@Override

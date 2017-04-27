@@ -8,6 +8,10 @@ import com.gildedgames.aether.client.renderer.entities.living.*;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderBolt;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDaggerfrostSnowball;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDart;
+import com.gildedgames.aether.client.renderer.items.ItemMoaEggColorHandler;
+import com.gildedgames.aether.client.renderer.items.LeatherGlovesColorHandler;
+import com.gildedgames.aether.client.renderer.items.MoaFeatherColorHandler;
+import com.gildedgames.aether.client.renderer.items.WrappingPaperColorHandler;
 import com.gildedgames.aether.client.renderer.tile_entities.*;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
@@ -21,6 +25,9 @@ import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.entities.tiles.*;
+import com.gildedgames.aether.common.items.ItemsAether;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
@@ -34,6 +41,12 @@ public class AetherRenderers
 	public static void init()
 	{
 		registerTESRs();
+
+		ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
+		itemColors.registerItemColorHandler(new ItemMoaEggColorHandler(), ItemsAether.moa_egg);
+		itemColors.registerItemColorHandler(new LeatherGlovesColorHandler(), ItemsAether.leather_gloves);
+		itemColors.registerItemColorHandler(new WrappingPaperColorHandler(), ItemsAether.wrapping_paper);
+		itemColors.registerItemColorHandler(new MoaFeatherColorHandler(), ItemsAether.moa_feather);
 	}
 
 	private static void registerEntityRenderers()
