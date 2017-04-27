@@ -115,11 +115,6 @@ public class PlayerAether implements IPlayerAether
 	@Override
 	public void onUpdate(LivingUpdateEvent event)
 	{
-		if (this.getEntity().world.isRemote)
-		{
-			System.out.println(this.getEquipmentInventory().isEmpty());
-		}
-
 		for (PlayerAetherModule module : this.modules)
 		{
 			module.onUpdate();
