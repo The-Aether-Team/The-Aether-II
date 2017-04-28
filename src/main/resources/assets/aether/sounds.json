@@ -313,7 +313,7 @@
 		"sounds": [
 			"aether:mob/taegore/death"
 		],
-		"subtitle": "subtitles.aether.mob.teagore.death"
+		"subtitle": "subtitles.aether.mob.taegore.death"
 	},
 	"mob.burrukai.ambient": {
 		"category": "neutral",
