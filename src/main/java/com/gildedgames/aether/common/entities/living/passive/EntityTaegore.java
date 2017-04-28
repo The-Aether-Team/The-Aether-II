@@ -28,7 +28,7 @@ public class EntityTaegore extends EntityAetherAnimal
 	{
 		super(world);
 
-		this.setSize(1.5F, 1.5F);
+		this.setSize(1.25F, 1.25F);
 
 		this.spawnableBlock = BlocksAether.aether_grass;
 	}
