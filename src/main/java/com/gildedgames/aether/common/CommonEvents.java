@@ -449,29 +449,6 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public static void onEntityFall(LivingFallEvent event)
-	{
-		EntityLivingBase entity = event.getEntityLiving();
-
-		if (entity.world.isRemote)
-		{
-			BlockPos pos = entity.getPosition().up();
-
-			IBlockState state = entity.world.getBlockState(pos);
-
-			while (state.getBlock() == Blocks.AIR)
-			{
-				state = entity.world.getBlockState(pos = pos.down());
-			}
-
-			if (state.getBlock() instanceof BlockAercloud)
-			{
-				event.setCanceled(true);
-			}
-		}
-	}
-
-	@SubscribeEvent
 	public static void onEntityAttacked(LivingAttackEvent event)
 	{
 		if (!(event.getEntityLiving() instanceof EntityPlayer))
