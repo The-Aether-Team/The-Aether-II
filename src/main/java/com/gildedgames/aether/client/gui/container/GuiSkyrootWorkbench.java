@@ -1,7 +1,7 @@
 package com.gildedgames.aether.client.gui.container;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.registry.recipes.IIndexableRecipe;
+import com.gildedgames.aether.api.recipes.IIndexableRecipe;
 import com.gildedgames.aether.api.registry.recipes.IRecipeIndexRegistry;
 import com.gildedgames.aether.client.gui.container.crafting.GhostItemStackButton;
 import com.gildedgames.aether.client.gui.container.crafting.ItemStackButton;

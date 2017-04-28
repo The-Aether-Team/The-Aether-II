@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.recipes.simple;
 
-import com.gildedgames.aether.api.registry.recipes.IIndexableRecipe;
-import com.gildedgames.aether.api.registry.recipes.ItemMetaPair;
+import com.gildedgames.aether.api.recipes.IIndexableRecipe;
+import com.gildedgames.aether.api.util.ItemMetaPair;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.ShapelessOreRecipe;

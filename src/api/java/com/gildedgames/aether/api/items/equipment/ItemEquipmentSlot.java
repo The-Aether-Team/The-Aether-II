@@ -5,6 +5,7 @@ package com.gildedgames.aether.api.items.equipment;
  */
 public enum ItemEquipmentSlot
 {
+	NONE("gui.aether.slot.none"),
 	RING("gui.aether.slot.ring"),
 	NECKWEAR("gui.aether.slot.neckwear"),
 	COMPANION("gui.aether.slot.companion"),

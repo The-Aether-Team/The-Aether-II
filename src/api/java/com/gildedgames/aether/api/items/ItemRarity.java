@@ -2,7 +2,7 @@ package com.gildedgames.aether.api.items;
 
 public enum ItemRarity
 {
-	NONE("item.rarity.basic.name"),
+	NONE("item.rarity.none.name"),
 	COMMON("item.rarity.common.name"),
 	RARE("item.rarity.rare.name"),
 	EPIC("item.rarity.epic.name"),

@@ -1,5 +1,6 @@
 package com.gildedgames.aether.api.registry.recipes;
 
+import com.gildedgames.aether.api.recipes.IIndexableRecipe;
 import net.minecraft.item.ItemStack;
 
 import java.util.Collection;

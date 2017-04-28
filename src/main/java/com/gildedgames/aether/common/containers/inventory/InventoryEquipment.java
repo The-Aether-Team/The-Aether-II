@@ -146,9 +146,9 @@ public class InventoryEquipment implements IInventoryEquipment
 	@Override
 	public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack)
 	{
-		IItemProperties props = AetherAPI.content().items().getProperties(stack.getItem());
+		ItemEquipmentSlot slot = AetherAPI.content().items().getProperties(stack.getItem()).getEquipmentSlot();
 
-		return props.getEquipmentSlot().isPresent() && props.getEquipmentSlot().get() == SLOT_TYPES[index];
+		return slot == SLOT_TYPES[index];
 	}
 
 	@Override

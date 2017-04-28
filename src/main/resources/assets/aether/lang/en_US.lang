@@ -539,7 +539,7 @@ moa.marks.ladder=Zipline
 moa.marks.lines=Lined
 
 # Item Rarities
-item.rarity.basic.name=§7§oBasic
+item.rarity.none.name=§7§oBasic
 item.rarity.common.name=§7§oCommon
 item.rarity.rare.name=§b§oRare
 item.rarity.epic.name=§5§oEpic
@@ -707,6 +707,7 @@ subtitles.aether.mob.burrukai.hurt=Burrukai hurts
 subtitles.aether.mob.burrukai.death=Burrukai dies
 
 # Accessory slot names
+gui.aether.slot.none=Not Equippable
 gui.aether.slot.neckwear=Neckwear
 gui.aether.slot.companion=Companion
 gui.aether.slot.shield=Shield

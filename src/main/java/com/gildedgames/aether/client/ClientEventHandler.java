@@ -4,12 +4,12 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.api.items.IItemProperties;
+import com.gildedgames.aether.api.items.ItemRarity;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.client.gui.PerformanceIngame;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.containers.slots.SlotAmbrosium;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
@@ -23,13 +23,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -78,14 +76,12 @@ public class ClientEventHandler
 	@SuppressWarnings("unchecked")
 	public void onTooltipConstruction(ItemTooltipEvent event)
 	{
-		ItemStack stack = event.getItemStack();
-
 		IItemProperties properties = AetherAPI.content().items().getProperties(event.getItemStack().getItem());
 
 		// Equipment Properties
-		if (properties.getEquipmentSlot().isPresent())
+		if (properties.getEquipmentSlot() != ItemEquipmentSlot.NONE)
 		{
-			ItemEquipmentSlot slot = properties.getEquipmentSlot().get();
+			ItemEquipmentSlot slot = properties.getEquipmentSlot();
 
 			// Equipment Effects
 			for (IEffectProvider instance : properties.getEffectProviders())
@@ -100,9 +96,9 @@ public class ClientEventHandler
 		}
 
 		// Rarity
-		if (properties.getRarity().isPresent())
+		if (properties.getRarity() != ItemRarity.NONE)
 		{
-			event.getToolTip().add(I18n.format(properties.getRarity().get().getUnlocalizedName()));
+			event.getToolTip().add(I18n.format(properties.getRarity().getUnlocalizedName()));
 		}
 	}
 

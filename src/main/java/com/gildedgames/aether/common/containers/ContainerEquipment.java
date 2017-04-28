@@ -214,9 +214,9 @@ public class ContainerEquipment extends ContainerPlayer
 
 				IItemProperties properties = AetherAPI.content().items().getProperties(stack.getItem());
 
-				if (properties.getEquipmentSlot().isPresent())
+				if (properties.getEquipmentSlot() != ItemEquipmentSlot.NONE)
 				{
-					destIndex = this.getNextEmptySlot(properties.getEquipmentSlot().get());
+					destIndex = this.getNextEmptySlot(properties.getEquipmentSlot());
 				}
 
 				if (destIndex >= 0)

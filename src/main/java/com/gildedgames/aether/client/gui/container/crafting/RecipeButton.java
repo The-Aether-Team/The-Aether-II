@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.gui.container.crafting;
 
-import com.gildedgames.aether.api.registry.recipes.IIndexableRecipe;
+import com.gildedgames.aether.api.recipes.IIndexableRecipe;
 import com.gildedgames.aether.client.gui.container.GuiSkyrootWorkbench;
 
 public class RecipeButton extends ItemStackButton

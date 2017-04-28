@@ -56,12 +56,6 @@ public class BlockAercloud extends Block implements IBlockVariants
 	}
 
 	@Override
-	public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
-	{
-		entityIn.fallDistance = 0;
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list)
 	{
@@ -95,6 +89,12 @@ public class BlockAercloud extends Block implements IBlockVariants
 		}
 
 		return block != this && super.shouldSideBeRendered(state, world, pos, side);
+	}
+
+	@Override
+	public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
+	{
+		entityIn.fallDistance = 0;
 	}
 
 	@Override

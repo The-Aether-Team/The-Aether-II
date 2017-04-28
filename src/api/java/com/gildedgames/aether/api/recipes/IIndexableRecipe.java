@@ -1,5 +1,6 @@
-package com.gildedgames.aether.api.registry.recipes;
+package com.gildedgames.aether.api.recipes;
 
+import com.gildedgames.aether.api.util.ItemMetaPair;
 import net.minecraft.item.ItemStack;
 
 import java.util.Collection;

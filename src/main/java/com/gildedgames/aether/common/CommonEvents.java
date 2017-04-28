@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
@@ -372,9 +373,9 @@ public class CommonEvents
 
 		IItemProperties equipment = AetherAPI.content().items().getProperties(stack.getItem());
 
-		if (equipment.getEquipmentSlot().isPresent())
+		if (equipment.getEquipmentSlot() != ItemEquipmentSlot.NONE)
 		{
-			int slot = inventory.getNextEmptySlotForType(equipment.getEquipmentSlot().get());
+			int slot = inventory.getNextEmptySlotForType(equipment.getEquipmentSlot());
 
 			if (slot >= 0)
 			{

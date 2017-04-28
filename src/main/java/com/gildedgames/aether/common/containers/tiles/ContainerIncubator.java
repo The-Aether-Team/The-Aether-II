@@ -47,6 +47,7 @@ public class ContainerIncubator extends Container
 	public void addListener(IContainerListener listener)
 	{
 		super.addListener(listener);
+
 		listener.sendAllWindowProperties(this, this.tile);
 	}
 

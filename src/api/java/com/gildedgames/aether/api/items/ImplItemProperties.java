@@ -21,21 +21,21 @@ public class ImplItemProperties implements IItemProperties
 
 	public ImplItemProperties()
 	{
-		this(null, null, null);
+		this(ItemEquipmentSlot.NONE, Collections.emptyList(), ItemRarity.NONE);
 	}
 
-	public ImplItemProperties(ItemEquipmentSlot slot, Collection<IEffectProvider> effects, ItemRarity rarity)
+	public ImplItemProperties(@Nonnull ItemEquipmentSlot slot, @Nonnull Collection<IEffectProvider> effects, @Nonnull ItemRarity rarity)
 	{
 		this.slot = slot;
-		this.effects = effects == null ? Collections.emptyList() : Collections.unmodifiableCollection(effects);
+		this.effects = Collections.unmodifiableCollection(effects);
 		this.rarity = rarity;
 	}
 
 	@Nonnull
 	@Override
-	public Optional<ItemEquipmentSlot> getEquipmentSlot()
+	public ItemEquipmentSlot getEquipmentSlot()
 	{
-		return Optional.ofNullable(this.slot);
+		return this.slot;
 	}
 
 	@Override
@@ -45,8 +45,8 @@ public class ImplItemProperties implements IItemProperties
 	}
 
 	@Override
-	public Optional<ItemRarity> getRarity()
+	public ItemRarity getRarity()
 	{
-		return Optional.ofNullable(this.rarity);
+		return this.rarity;
 	}
 }

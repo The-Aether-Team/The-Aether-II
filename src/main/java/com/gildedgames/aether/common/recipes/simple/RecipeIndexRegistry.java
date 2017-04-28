@@ -1,13 +1,12 @@
 package com.gildedgames.aether.common.recipes.simple;
 
-import com.gildedgames.aether.api.registry.recipes.IIndexableRecipe;
+import com.gildedgames.aether.api.recipes.IIndexableRecipe;
 import com.gildedgames.aether.api.registry.recipes.IRecipeIndexRegistry;
-import com.gildedgames.aether.api.registry.recipes.ItemMetaPair;
+import com.gildedgames.aether.api.util.ItemMetaPair;
 import net.minecraft.item.ItemStack;
 import org.apache.commons.lang3.Validate;
 
 import java.util.*;
-import java.util.function.Function;
 
 public class RecipeIndexRegistry implements IRecipeIndexRegistry
 {

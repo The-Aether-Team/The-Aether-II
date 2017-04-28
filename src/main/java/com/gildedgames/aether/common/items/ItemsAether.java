@@ -421,23 +421,11 @@ public class ItemsAether
 			irradiated_armor = new ItemIrradiated(new RandomItemSelector(item -> item instanceof ItemArmor)),
 			irradiated_tool = new ItemIrradiated(new RandomItemSelector(item -> item instanceof ItemTool)),
 			irradiated_ring = new ItemIrradiated(new RandomItemSelector(item ->
-			{
-				Optional<ItemEquipmentSlot> equipment = AetherAPI.content().items().getProperties(item).getEquipmentSlot();
-
-				return equipment.isPresent() && equipment.get() == ItemEquipmentSlot.RING;
-			})),
+					AetherAPI.content().items().getProperties(item).getEquipmentSlot() == ItemEquipmentSlot.RING)),
 			irradiated_neckwear = new ItemIrradiated(new RandomItemSelector(item ->
-			{
-				Optional<ItemEquipmentSlot> equipment = AetherAPI.content().items().getProperties(item).getEquipmentSlot();
-
-				return equipment.isPresent() && equipment.get() == ItemEquipmentSlot.NECKWEAR;
-			})),
+					AetherAPI.content().items().getProperties(item).getEquipmentSlot() == ItemEquipmentSlot.NECKWEAR)),
 			irradiated_charm = new ItemIrradiated(new RandomItemSelector(item ->
-			{
-				Optional<ItemEquipmentSlot> equipment = AetherAPI.content().items().getProperties(item).getEquipmentSlot();
-
-				return equipment.isPresent() && equipment.get() == ItemEquipmentSlot.CHARM;
-			})),
+					AetherAPI.content().items().getProperties(item).getEquipmentSlot() == ItemEquipmentSlot.CHARM)),
 			irradiated_dust = new ItemIrradiatedVisuals();
 
 	public static final Item wrapping_paper = new ItemWrappingPaper(),
