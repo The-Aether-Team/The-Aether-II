@@ -1,16 +1,23 @@
 package com.gildedgames.aether.client.gui;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.ReflectionAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 public class PerformanceIngame extends Gui
 {
 	private static ResourceLocation SERVER_STALL_ICON = AetherCore.getResource("textures/gui/overlay/server_stall.png");
+
+	private static final Field SERVER_CURRENT_TIME_FIELD = ReflectionAether.getField(MinecraftServer.class, ReflectionAether.SERVER_CURRENT_TIME.getMappings());
 
 	private static int ANIMATION_FRAMES = 4;
 
@@ -20,11 +27,9 @@ public class PerformanceIngame extends Gui
 
 	private long visibleUntil;
 
-	private long lastRenderSystemTime, lastTickSystemTime;
+	private long lastRenderSystemTime;
 
-	private long lag;
-
-	private int lastWorldTick;
+	private long timeSinceLastTick;
 
 	private boolean isDisabled;
 
@@ -69,11 +74,11 @@ public class PerformanceIngame extends Gui
 		{
 			GlStateManager.enableBlend();
 
-			if (this.lag > 1000)
+			if (this.timeSinceLastTick > 800)
 			{
 				GlStateManager.color(255 / 255.0f, 78 / 255.0f, 41 / 255.0f, this.iconAlpha);
 			}
-			else if (this.lag > 500)
+			else if (this.timeSinceLastTick > 400)
 			{
 				GlStateManager.color(255 / 255.0f, 137 / 255.0f, 41 / 255.0f, this.iconAlpha);
 			}
@@ -118,19 +123,12 @@ public class PerformanceIngame extends Gui
 
 		this.isDisabled = false;
 
-		int tickCounter = FMLCommonHandler.instance().getMinecraftServerInstance().getTickCounter();
+		this.timeSinceLastTick = System.currentTimeMillis() - (long) ReflectionAether.getValue(SERVER_CURRENT_TIME_FIELD,
+				FMLCommonHandler.instance().getMinecraftServerInstance());
 
-		if (tickCounter != this.lastWorldTick || mc.isGamePaused())
+		if (this.timeSinceLastTick > 200)
 		{
-			this.lastWorldTick = tickCounter;
-			this.lastTickSystemTime = System.currentTimeMillis();
-		}
-
-		this.lag = System.currentTimeMillis() - this.lastTickSystemTime;
-
-		if (this.lag > 100)
-		{
-			this.visibleUntil = System.currentTimeMillis() + 500;
+			this.visibleUntil = System.currentTimeMillis() + 1000;
 		}
 	}
 }

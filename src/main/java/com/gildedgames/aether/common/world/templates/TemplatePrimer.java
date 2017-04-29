@@ -40,12 +40,6 @@ public class TemplatePrimer
 
 	private static final Field GET_ENTITIES_FIELD = ReflectionAether.getField(Template.class, "entities", "field_186271_b");
 
-	static
-	{
-		GET_BLOCKS_FIELD.setAccessible(true);
-		GET_ENTITIES_FIELD.setAccessible(true);
-	}
-
 	@SuppressWarnings("unchecked")
 	public static List<Template.BlockInfo> getBlocks(Template template)
 	{

@@ -31,6 +31,8 @@ public class ReflectionAether
 
 	public static final ReflectionEntry IS_JUMPING = new ReflectionEntry("field_70703_bu", "isJumping");
 
+	public static final ReflectionEntry SERVER_CURRENT_TIME = new ReflectionEntry("field_175591_ab", "currentTime");
+
 	public static Field getField(Class clazz, String... names)
 	{
 		for (Field field : clazz.getDeclaredFields())
@@ -39,6 +41,8 @@ public class ReflectionAether
 			{
 				if (field.getName().equals(name))
 				{
+					field.setAccessible(true);
+
 					return field;
 				}
 			}
