@@ -1,28 +1,18 @@
 package com.gildedgames.aether.common.blocks;
 
-import com.gildedgames.aether.common.ReflectionAether;
+import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import java.util.List;
 
 public class QuicksoilProcessor
 {
-
-	private QuicksoilProcessor()
-	{
-
-	}
-
 	@SubscribeEvent
 	public static void onLivingEntityUpdate(LivingEvent.LivingUpdateEvent event)
 	{
@@ -36,68 +26,48 @@ public class QuicksoilProcessor
 			}
 		}
 
-		List<AxisAlignedBB> boxes = entity.world.getCollisionBoxes(entity, entity.getEntityBoundingBox().offset(0.0D, -0.1D, 0.0D));
+		AxisAlignedBB bb = entity.getEntityBoundingBox().offset(0.0D, -0.2D, 0.0D).expand(0.0D, 0.2D, 0.0D);
 
-		boolean onQuicksoil = false;
-
-		for (AxisAlignedBB box : boxes)
+		if (isBlockInAABB(bb, entity.getEntityWorld(), BlocksAether.quicksoil))
 		{
-			if (box != null)
+			AetherCore.PROXY.modifyEntityQuicksoil(entity);
+		}
+	}
+
+	private static boolean isBlockInAABB(AxisAlignedBB bb, World world, Block block)
+	{
+		int minX = MathHelper.floor(bb.minX);
+		int maxX = MathHelper.ceil(bb.maxX);
+		int minY = MathHelper.floor(bb.minY);
+		int maxY = MathHelper.ceil(bb.maxY);
+		int minZ = MathHelper.floor(bb.minZ);
+		int maxZ = MathHelper.ceil(bb.maxZ);
+
+		if (!world.isAreaLoaded(new BlockPos(minX, minY, minZ), new BlockPos(maxX, maxY, maxZ)))
+		{
+			return false;
+		}
+
+		BlockPos.PooledMutableBlockPos pos = BlockPos.PooledMutableBlockPos.retain();
+
+		for (int x = minX; x < maxX; x++)
+		{
+			for (int y = minY; y < maxY; y++)
 			{
-				BlockPos pos = new BlockPos(MathHelper.floor(box.minX + 0.5D), MathHelper.floor(
-						box.minY + 0.5D), MathHelper.floor(box.minZ + 0.5D));
-
-				Block block = entity.world.getBlockState(pos).getBlock();
-
-				if (block == BlocksAether.quicksoil)
+				for (int z = minZ; z < maxZ; z++)
 				{
-					onQuicksoil = true;
-
-					if (entity.isSneaking())
+					if (world.getBlockState(pos.setPos(x, y, z)).getBlock() == block)
 					{
-						boolean jumping = ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, (EntityLivingBase) entity, ReflectionAether.IS_JUMPING.getMappings());
+						pos.release();
 
-						if (!jumping)
-						{
-							entity.onGround = false;
-						}
-
-						entity.motionX *= 1.25D;
-						entity.motionZ *= 1.25D;
-
-						break;
+						return true;
 					}
 				}
 			}
 		}
 
-		if (onQuicksoil)
-		{
-			entity.motionX *= 1.7D;
-			entity.motionZ *= 1.7D;
+		pos.release();
 
-			double maxMotion = 0.7D;
-
-			if (entity.motionX > maxMotion)
-			{
-				entity.motionX = maxMotion;
-			}
-
-			if (entity.motionX < -maxMotion)
-			{
-				entity.motionX = -maxMotion;
-			}
-
-			if (entity.motionZ > maxMotion)
-			{
-				entity.motionZ = maxMotion;
-			}
-
-			if (entity.motionZ < -maxMotion)
-			{
-				entity.motionZ = -maxMotion;
-			}
-		}
+		return false;
 	}
-
 }

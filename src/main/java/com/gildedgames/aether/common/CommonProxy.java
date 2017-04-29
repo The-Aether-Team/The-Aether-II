@@ -12,8 +12,10 @@ import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.aether.common.util.io.Instantiator;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSector;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -73,6 +75,17 @@ public class CommonProxy implements IAetherServices
 	public void displayDismountMessage(EntityPlayer player)
 	{
 
+	}
+
+	public void modifyEntityQuicksoil(EntityLivingBase entity)
+	{
+		entity.motionX *= 1.7D;
+		entity.motionZ *= 1.7D;
+
+		double maxMotion = 0.7D;
+
+		entity.motionX = MathHelper.clamp(entity.motionX, -maxMotion, maxMotion);
+		entity.motionZ = MathHelper.clamp(entity.motionZ, -maxMotion, maxMotion);
 	}
 
 	@Override
