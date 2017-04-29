@@ -33,7 +33,7 @@ public class EntityBurrukai extends EntityAetherAnimal
 	{
 		super(world);
 
-		this.setSize(1.5F, 2.0F);
+		this.setSize(1.5F, 1.9F);
 
 		this.spawnableBlock = BlocksAether.aether_grass;
 	}

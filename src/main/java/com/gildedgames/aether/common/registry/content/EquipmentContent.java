@@ -37,6 +37,7 @@ public class EquipmentContent
 
 	private static void registerItems()
 	{
+		// Companions
 		createCompanionItem(ItemsAether.frostpine_totem, ItemEquipmentSlot.COMPANION, ItemRarity.RARE, EntityFrostpineTotem.class,
 				new PotionEffectProvider(MobEffects.NIGHT_VISION, 0));
 
@@ -58,6 +59,29 @@ public class EquipmentContent
 
 		createCompanionItem(ItemsAether.orb_of_arkenzus, ItemEquipmentSlot.COMPANION, ItemRarity.RARE, EntityShadeOfArkenzus.class);
 
+		// Gloves
+		createEquipmentItem(ItemsAether.zanite_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
+
+		createEquipmentItem(ItemsAether.gravitite_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
+
+		createEquipmentItem(ItemsAether.valkyrie_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
+
+		createEquipmentItem(ItemsAether.neptune_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
+
+		createEquipmentItem(ItemsAether.phoenix_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
+
+		createEquipmentItem(ItemsAether.leather_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
+
+		createEquipmentItem(ItemsAether.iron_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
+
+		createEquipmentItem(ItemsAether.gold_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
+
+		createEquipmentItem(ItemsAether.chain_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
+
+		createEquipmentItem(ItemsAether.diamond_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
+
+
+		// Charms
 		createEquipmentItem(ItemsAether.charm_arm_01, ItemEquipmentSlot.CHARM, ItemRarity.RARE,
 				new StatProvider(SharedMonsterAttributes.ARMOR, 0.3D, StatProvider.OP_ADD));
 
