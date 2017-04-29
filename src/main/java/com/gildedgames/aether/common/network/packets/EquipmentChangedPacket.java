@@ -30,7 +30,7 @@ public class EquipmentChangedPacket implements IMessage
 	{
 		this.entityId = aePlayer.getEntity().getEntityId();
 
-		IInventory inventory = aePlayer.getEquipmentInventory();
+		IInventory inventory = aePlayer.getEquipmentModule().getInventory();
 
 		for (int i = 0; i < inventory.getSizeInventory(); i++)
 		{
@@ -92,7 +92,7 @@ public class EquipmentChangedPacket implements IMessage
 			{
 				IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 
-				IInventory inventory = aePlayer.getEquipmentInventory();
+				IInventory inventory = aePlayer.getEquipmentModule().getInventory();
 
 				for (Pair<Integer, ItemStack> pair : message.changes)
 				{

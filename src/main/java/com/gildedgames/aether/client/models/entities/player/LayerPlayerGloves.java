@@ -18,38 +18,31 @@ public class LayerPlayerGloves extends LayerBipedArmor
 {
 	private final RenderLivingBase<?> renderer;
 
-	private final ModelPlayer slim, normal;
-
 	public LayerPlayerGloves(RenderLivingBase<?> rendererIn)
 	{
 		super(rendererIn);
 
 		this.renderer = rendererIn;
 		this.modelArmor = new ModelBiped(1.0f);
-
-		this.slim = new ModelPlayer(1.0F, true);
-		this.normal = new ModelPlayer(1.0F, false);
 	}
 
 	@Override
-	public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float p_177141_2_, float p_177141_3_, float partialTicks,
-			float p_177141_5_, float p_177141_6_, float p_177141_7_, float scale)
+	public void doRenderLayer(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
+			float netHeadYaw, float headPitch, float scale)
 	{
-		this.renderGloves((EntityPlayer) entitylivingbaseIn, p_177141_2_, p_177141_3_, partialTicks, p_177141_5_, p_177141_6_, p_177141_7_, scale);
+		this.renderGloves(PlayerAether.getPlayer(entity), limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale);
 	}
 
-	private void renderGloves(EntityPlayer entity, float p_177182_2_, float p_177182_3_, float partialTicks, float p_177182_5_,
-			float p_177182_6_, float p_177182_7_, float scale)
+	private void renderGloves(PlayerAether player, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
+			float netHeadYaw, float headPitch, float scale)
 	{
-		IPlayerAether aePlayer = PlayerAether.getPlayer(entity);
+		ItemStack stack = player.getEquipmentModule().getInventory().getStackInSlot(2);
 
-		ItemStack itemstack = aePlayer.getEquipmentInventory().getStackInSlot(2);
-
-		if (itemstack.getItem() instanceof ItemAetherGloves)
+		if (stack.getItem() instanceof ItemAetherGloves)
 		{
-			ItemAetherGloves glove = (ItemAetherGloves) itemstack.getItem();
+			ItemAetherGloves glove = (ItemAetherGloves) stack.getItem();
 
-			String skinType = DefaultPlayerSkin.getSkinType(entity.getUniqueID());
+			String skinType = DefaultPlayerSkin.getSkinType(player.getEntity().getUniqueID());
 
 			ModelBiped t = this.modelArmor;
 
@@ -58,7 +51,7 @@ public class LayerPlayerGloves extends LayerBipedArmor
 			t.bipedLeftLeg.showModel = true;
 
 			t.setModelAttributes(this.renderer.getMainModel());
-			t.setLivingAnimations(entity, p_177182_2_, p_177182_3_, partialTicks);
+			t.setLivingAnimations(player.getEntity(), limbSwing, limbSwingAmount, partialTicks);
 
 			GlStateManager.pushMatrix();
 
@@ -72,9 +65,7 @@ public class LayerPlayerGloves extends LayerBipedArmor
 
 			if (glove instanceof ItemLeatherGloves)
 			{
-				ItemLeatherGloves leatherGloves = (ItemLeatherGloves) glove;
-
-				int color = ItemLeatherGloves.getColor(itemstack);
+				int color = ItemLeatherGloves.getColor(stack);
 
 				float r = (float) (color >> 16 & 255) / 255.0F;
 				float g = (float) (color >> 8 & 255) / 255.0F;
@@ -83,18 +74,18 @@ public class LayerPlayerGloves extends LayerBipedArmor
 				GlStateManager.color(1.0f * r, 1.0f * g, 1.0f * b, 1.0f);
 
 				this.renderer.bindTexture(glove.getGloveTexture(0));
-				t.render(entity, p_177182_2_, p_177182_3_, p_177182_5_, p_177182_6_, p_177182_7_, scale);
+				t.render(player.getEntity(), limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
 				GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
 				this.renderer.bindTexture(glove.getGloveTexture(1));
-				t.render(entity, p_177182_2_, p_177182_3_, p_177182_5_, p_177182_6_, p_177182_7_, scale);
+				t.render(player.getEntity(), limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 			}
 			else
 			{
 				this.renderer.bindTexture(glove.getGloveTexture(0));
 
-				t.render(entity, p_177182_2_, p_177182_3_, p_177182_5_, p_177182_6_, p_177182_7_, scale);
+				t.render(player.getEntity(), limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 			}
 
 			GlStateManager.popMatrix();

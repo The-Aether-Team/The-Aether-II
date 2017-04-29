@@ -13,9 +13,9 @@ public class PlayerUtil
 		{
 			boolean found = false;
 
-			for (int i = 0; i < aePlayer.getEquipmentInventory().getSizeInventory(); i++)
+			for (int i = 0; i < aePlayer.getEquipmentModule().getInventory().getSizeInventory(); i++)
 			{
-				ItemStack stack = aePlayer.getEquipmentInventory().getStackInSlot(i);
+				ItemStack stack = aePlayer.getEquipmentModule().getInventory().getStackInSlot(i);
 
 				if (stack.getItem() == item)
 				{
@@ -27,7 +27,7 @@ public class PlayerUtil
 
 			for (ItemStack stack : aePlayer.getEntity().inventory.armorInventory)
 			{
-				if (stack != null && stack.getItem() == item)
+				if (stack.getItem() == item)
 				{
 					found = true;
 

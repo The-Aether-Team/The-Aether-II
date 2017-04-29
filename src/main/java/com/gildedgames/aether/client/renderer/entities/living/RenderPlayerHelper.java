@@ -25,7 +25,7 @@ public class RenderPlayerHelper
 
 	public static void renderFirstPersonHand(RenderSpecificHandEvent event, IPlayerAether player)
 	{
-		ItemStack gloveStack = player.getEquipmentInventory().getStackInSlot(2);
+		ItemStack gloveStack = player.getEquipmentModule().getInventory().getStackInSlot(2);
 
 		if (gloveStack.getItem() instanceof ItemAetherGloves)
 		{

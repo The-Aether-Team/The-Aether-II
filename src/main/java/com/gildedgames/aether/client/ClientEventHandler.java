@@ -6,7 +6,9 @@ import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.items.ItemRarity;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
+import com.gildedgames.aether.api.items.equipment.effects.EffectInstance;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectPool;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.client.gui.PerformanceIngame;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
@@ -23,6 +25,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -34,7 +37,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Optional;
 
 public class ClientEventHandler
 {
@@ -76,6 +81,8 @@ public class ClientEventHandler
 	@SuppressWarnings("unchecked")
 	public void onTooltipConstruction(ItemTooltipEvent event)
 	{
+		PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntityPlayer());
+
 		IItemProperties properties = AetherAPI.content().items().getProperties(event.getItemStack().getItem());
 
 		// Equipment Properties
@@ -84,10 +91,12 @@ public class ClientEventHandler
 			ItemEquipmentSlot slot = properties.getEquipmentSlot();
 
 			// Equipment Effects
-			for (IEffectProvider instance : properties.getEffectProviders())
+			for (IEffectProvider provider : properties.getEffectProviders())
 			{
-				IEffectFactory<IEffectProvider> factory = AetherAPI.content().effects().getFactory(instance.getFactory());
-				factory.createInstance(Collections.singleton(instance)).addInformation(event.getToolTip());
+				IEffectFactory<IEffectProvider> factory = AetherAPI.content().effects().getFactory(provider.getFactory());
+
+				EffectPoolTemporary pool = new EffectPoolTemporary(event.getItemStack(), provider);
+				factory.createInstance(pool).addInformation(event.getToolTip());
 			}
 
 			// Slot Type
@@ -155,4 +164,42 @@ public class ClientEventHandler
 		SlotMoaEgg.registerIcons(event);
 		SlotFlintAndSteel.registerIcons(event);
 	}
+
+	private class EffectPoolTemporary<T extends IEffectProvider> implements IEffectPool<T>
+	{
+		private final ItemStack stack;
+
+		private final T provider;
+
+		public EffectPoolTemporary(ItemStack stack, T provider)
+		{
+			this.stack = stack;
+			this.provider = provider;
+		}
+
+		@Override
+		public ItemStack getProvider(IEffectProvider instance)
+		{
+			return this.provider == instance ? this.stack : ItemStack.EMPTY;
+		}
+
+		@Override
+		public Collection<T> getActiveProviders()
+		{
+			return Collections.singleton(this.provider);
+		}
+
+		@Override
+		public Optional<EffectInstance> getInstance()
+		{
+			return Optional.empty();
+		}
+
+		@Override
+		public boolean isEmpty()
+		{
+			return false;
+		}
+	}
+
 }

@@ -1,14 +1,7 @@
 package com.gildedgames.aether.common.entities.living.companions;
 
-import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.common.capabilities.player.PlayerAether;
-import com.gildedgames.aether.common.capabilities.player.modules.PlayerCompanionModule;
-import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityNexSpirit extends EntityCompanion
@@ -21,6 +14,7 @@ public class EntityNexSpirit extends EntityCompanion
 
 		this.setSize(0.6f, 1.85f);
 		this.stepHeight = 1.0F;
+		this.isFlying = true;
 	}
 
 	@Override
@@ -28,21 +22,21 @@ public class EntityNexSpirit extends EntityCompanion
 	{
 		super.onUpdate();
 
-		if (this.getOwner() != null)
-		{
-			PlayerAether aePlayer = PlayerAether.getPlayer(this.getOwner());
-
-			PlayerCompanionModule companionManager = aePlayer.getCompanionModule();
-
-			ItemStack equippedCompanion = companionManager.getCompanionItem();
-
-			if (equippedCompanion != null && equippedCompanion.getItem() instanceof ItemDeathSeal)
-			{
-				long ticks = ItemDeathSeal.getTicksUntilEnabled(equippedCompanion, this.world);
-
-				this.setBroken(ticks > 0);
-			}
-		}
+//		if (this.getOwner() != null)
+//		{
+//			PlayerAether aePlayer = PlayerAether.getPlayer(this.getOwner());
+//
+//			PlayerCompanionModule companionManager = aePlayer.getCompanionModule();
+//
+//			ItemStack equippedCompanion = companionManager.getCompanionItem();
+//
+//			if (equippedCompanion.getItem() instanceof ItemDeathSeal)
+//			{
+//				long ticks = ItemDeathSeal.getTicksUntilEnabled(equippedCompanion, this.world);
+//
+//				this.setBroken(ticks > 0);
+//			}
+//		}
 	}
 
 	@Override
@@ -51,24 +45,6 @@ public class EntityNexSpirit extends EntityCompanion
 		super.entityInit();
 
 		this.dataManager.register(IS_BROKEN, false);
-	}
-
-	@Override
-	public void tickEffects(IPlayerAether aePlayer)
-	{
-
-	}
-
-	@Override
-	public void addEffects(IPlayerAether aePlayer)
-	{
-
-	}
-
-	@Override
-	public void removeEffects(IPlayerAether aePlayer)
-	{
-
 	}
 
 	public void setBroken(boolean broken)
@@ -80,17 +56,4 @@ public class EntityNexSpirit extends EntityCompanion
 	{
 		return this.dataManager.get(IS_BROKEN);
 	}
-
-	@Override
-	protected void playStepSound(BlockPos pos, Block blockIn)
-	{
-
-	}
-
-	@Override
-	public boolean canTriggerWalking()
-	{
-		return false;
-	}
-
 }

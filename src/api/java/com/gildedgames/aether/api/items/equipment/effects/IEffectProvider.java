@@ -13,4 +13,9 @@ public interface IEffectProvider
 	 * @return The {@link ResourceLocation} which identifies the factory
 	 */
 	ResourceLocation getFactory();
+
+	/**
+	 * Returns a copy of this provider.
+	 */
+	IEffectProvider copy();
 }

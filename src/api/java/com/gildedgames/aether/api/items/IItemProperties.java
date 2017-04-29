@@ -1,6 +1,7 @@
 package com.gildedgames.aether.api.items;
 
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectPrecondition;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 
 import javax.annotation.Nonnull;
@@ -22,6 +23,12 @@ public interface IItemProperties
 	 */
 	@Nonnull
 	ItemRarity getRarity();
+
+	/**
+	 * @return A collection of effect preconditions that are checked before applying effects
+	 * to the player.
+	 */
+	Collection<IEffectPrecondition> getEffectPreconditions();
 
 	/**
 	 * @return The collection of effect instances this item provides, empty if it provides none.

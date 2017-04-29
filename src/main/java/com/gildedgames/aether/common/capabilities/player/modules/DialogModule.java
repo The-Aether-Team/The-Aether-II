@@ -49,11 +49,6 @@ public class DialogModule extends PlayerAetherModule implements IDialogControlle
 		this.listeners.add(listener);
 	}
 
-	@Override
-	public void removeListener(IDialogChangeListener listener)
-	{
-		this.listeners.remove(listener);
-	}
 
 	@Override
 	public void openScene(ResourceLocation path)
@@ -159,6 +154,8 @@ public class DialogModule extends PlayerAetherModule implements IDialogControlle
 		{
 			listener.onSceneClosed();
 		}
+
+		this.listeners.clear();
 	}
 
 	@Override

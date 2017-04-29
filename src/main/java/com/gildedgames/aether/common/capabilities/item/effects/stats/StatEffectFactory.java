@@ -1,16 +1,14 @@
 package com.gildedgames.aether.common.capabilities.item.effects.stats;
 
+import com.gildedgames.aether.api.items.equipment.effects.*;
 import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.api.items.equipment.effects.EffectHelper;
-import com.gildedgames.aether.api.items.equipment.effects.EffectInstance;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.common.AetherCore;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttribute;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 
@@ -24,9 +22,9 @@ public class StatEffectFactory implements IEffectFactory<StatEffectFactory.StatP
 	private static final DecimalFormat POINT_FORMATTER = new DecimalFormat("#.#");
 
 	@Override
-	public EffectInstance createInstance(Collection<StatProvider> providers)
+	public EffectInstance createInstance(IEffectPool<StatProvider> pool)
 	{
-		return new StatInstance(providers);
+		return new StatInstance(pool.getActiveProviders());
 	}
 
 	@Override
@@ -57,6 +55,12 @@ public class StatEffectFactory implements IEffectFactory<StatEffectFactory.StatP
 		{
 			return StatEffectFactory.NAME;
 		}
+
+		@Override
+		public IEffectProvider copy()
+		{
+			return new StatProvider(this.attribute, this.amount, this.opcode);
+		}
 	}
 
 	public static class StatInstance extends EffectInstance
@@ -79,22 +83,12 @@ public class StatEffectFactory implements IEffectFactory<StatEffectFactory.StatP
 		@Override
 		public void onInstanceRemoved(IPlayerAether player)
 		{
-			if (player.getEntity().world.isRemote)
-			{
-				return;
-			}
-
 			player.getEntity().getAttributeMap().removeAttributeModifiers(this.attributes);
 		}
 
 		@Override
 		public void onInstanceAdded(IPlayerAether player)
 		{
-			if (player.getEntity().world.isRemote)
-			{
-				return;
-			}
-
 			player.getEntity().getAttributeMap().applyAttributeModifiers(this.attributes);
 		}
 

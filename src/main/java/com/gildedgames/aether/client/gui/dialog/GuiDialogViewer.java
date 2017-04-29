@@ -265,7 +265,5 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 	public void onSceneClosed()
 	{
 		Minecraft.getMinecraft().displayGuiScreen(null);
-
-		this.controller.removeListener(this);
 	}
 }

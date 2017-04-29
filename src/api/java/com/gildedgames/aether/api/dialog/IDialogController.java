@@ -11,16 +11,11 @@ import java.util.Optional;
 public interface IDialogController
 {
 	/**
-	 * Adds a {@link IDialogChangeListener} to this controller.
+	 * Adds a {@link IDialogChangeListener} to this controller. All listeners are removed
+	 * when the scene is changed.
 	 * @param listener The listener to add
 	 */
 	void addListener(IDialogChangeListener listener);
-
-	/**
-	 * Removes a {@link IDialogChangeListener} from this controller.
-	 * @param listener The listener to remove
-	 */
-	void removeListener(IDialogChangeListener listener);
 
 	/**
 	 * Opens and displays the scene at it's starting node.

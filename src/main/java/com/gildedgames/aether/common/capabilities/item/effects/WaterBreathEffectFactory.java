@@ -1,10 +1,12 @@
 package com.gildedgames.aether.common.capabilities.item.effects;
 
-import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
 import com.gildedgames.aether.api.items.equipment.effects.EffectInstance;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
+import com.gildedgames.aether.api.items.equipment.effects.IEffectPool;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
+import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 
@@ -15,11 +17,9 @@ public class WaterBreathEffectFactory implements IEffectFactory<WaterBreathEffec
 	private static final ResourceLocation NAME = new ResourceLocation(AetherCore.MOD_ID, "water_breathing");
 
 	@Override
-	public EffectInstance createInstance(Collection<Provider> providers)
+	public EffectInstance createInstance(IEffectPool<Provider> pool)
 	{
-		Instance state = new Instance();
-
-		return state;
+		return new Instance();
 	}
 
 	@Override
@@ -35,6 +35,12 @@ public class WaterBreathEffectFactory implements IEffectFactory<WaterBreathEffec
 		{
 			return WaterBreathEffectFactory.NAME;
 		}
+
+		@Override
+		public IEffectProvider copy()
+		{
+			return new Provider();
+		}
 	}
 
 	private class Instance extends EffectInstance
@@ -42,7 +48,7 @@ public class WaterBreathEffectFactory implements IEffectFactory<WaterBreathEffec
 		@Override
 		public void onEntityUpdate(IPlayerAether player)
 		{
-
+			player.getEntity().setAir(300);
 		}
 
 		@Override

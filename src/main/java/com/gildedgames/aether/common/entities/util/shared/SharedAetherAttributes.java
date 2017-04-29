@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.entities.util;
+package com.gildedgames.aether.common.entities.util.shared;
 
 import net.minecraft.entity.ai.attributes.RangedAttribute;
 

@@ -27,7 +27,6 @@ public class NetworkingAether
 
 		instance.registerMessage(AetherMovementPacket.HandlerServer.class, AetherMovementPacket.class, discriminant++, Side.SERVER);
 		instance.registerMessage(EquipmentChangedPacket.HandlerClient.class, EquipmentChangedPacket.class, discriminant++, Side.CLIENT);
-		instance.registerMessage(CompanionChangedPacket.HandlerClient.class, CompanionChangedPacket.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(MidAirJumpsChangedPacket.HandlerClient.class, MidAirJumpsChangedPacket.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketOpenTab.HandlerServer.class, PacketOpenTab.class, discriminant++, Side.SERVER);
 		instance.registerMessage(DiedInAetherPacket.HandlerClient.class, DiedInAetherPacket.class, discriminant++, Side.CLIENT);

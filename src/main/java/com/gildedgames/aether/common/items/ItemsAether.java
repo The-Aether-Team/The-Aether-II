@@ -227,7 +227,7 @@ public class ItemsAether
 			chain_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.CHAIN),
 			diamond_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.DIAMOND);
 
-	public static final Item pink_baby_swet = new ItemCompanion(EntityPinkBabySwet.class);
+	public static final Item pink_baby_swet = new ItemCompanion();
 
 	public static final Item shard_of_life = new ItemShardOfLife();
 
@@ -237,24 +237,24 @@ public class ItemsAether
 			arkenium_shield = new ItemAetherShield(),
 			gravitite_shield = new ItemAetherShield();
 
-	public static final ItemCompanion ethereal_stone = new ItemCompanion(EntityEtherealWisp.class),
-			fleeting_stone = new ItemCompanion(EntityFleetingWisp.class),
-			soaring_stone = new ItemCompanion(EntitySoaringWisp.class);
+	public static final ItemCompanion ethereal_stone = new ItemCompanion(),
+			fleeting_stone = new ItemCompanion(),
+			soaring_stone = new ItemCompanion();
 
-	public static final ItemCompanion frostpine_totem = new ItemCompanion(EntityFrostpineTotem.class),
-			kraisith_capsule = new ItemCompanion(EntityKraisith.class, (stack, player, tooltip, advanced) ->
+	public static final ItemCompanion frostpine_totem = new ItemCompanion(),
+			kraisith_capsule = new ItemCompanion((stack, player, tooltip, advanced) ->
 			{
 				tooltip.add(TextFormatting.RED + "\u2022 " + "10 Health");
 				tooltip.add(TextFormatting.BLUE + "\u2022 " + "0.5 Attack Damage");
 				tooltip.add(TextFormatting.BLUE + "\u2022 " + "Slows Enemies");
 			}),
-			orb_of_arkenzus = new ItemCompanion(EntityShadeOfArkenzus.class),
-			fangrin_capsule = new ItemCompanion(EntityFangrin.class, (stack, player, tooltip, advanced) ->
+			orb_of_arkenzus = new ItemCompanion(),
+			fangrin_capsule = new ItemCompanion((stack, player, tooltip, advanced) ->
 			{
 				tooltip.add(TextFormatting.RED + "\u2022 " + "10 Health");
 				tooltip.add(TextFormatting.BLUE + "\u2022 " + "1.5 Attack Damage");
 			}),
-			death_seal = new ItemDeathSeal(EntityNexSpirit.class);
+			death_seal = new ItemDeathSeal();
 
 	public static final Item barbed_iron_ring = new Item(),
 			barbed_gold_ring = new Item();

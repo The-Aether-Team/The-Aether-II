@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.util.SharedAetherAttributes;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
@@ -65,8 +64,6 @@ public class EntityAerbunny extends EntityAetherAnimal
 
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
-
-		this.getAttributeMap().registerAttribute(SharedAetherAttributes.STAT_VOLATILE).setBaseValue(0.2D);
 	}
 
 	@Override

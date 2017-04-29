@@ -27,7 +27,7 @@ public class ContainerEquipment extends ContainerPlayer
 		super(aePlayer.getEntity().inventory, false, aePlayer.getEntity());
 
 		this.aePlayer = aePlayer;
-		this.inventoryEquipment = aePlayer.getEquipmentInventory();
+		this.inventoryEquipment = aePlayer.getEquipmentModule().getInventory();
 
 		this.createSlots();
 	}
@@ -201,7 +201,7 @@ public class ContainerEquipment extends ContainerPlayer
 		if (slotNumber == this.binSlot.slotNumber && this.aePlayer.getEntity().capabilities.isCreativeMode)
 		{
 			this.aePlayer.getEntity().inventory.clear();
-			this.aePlayer.getEquipmentInventory().clear();
+			this.aePlayer.getEquipmentModule().getInventory().clear();
 		}
 
 		if (slot != null && slot.getHasStack())

@@ -1,7 +1,5 @@
 package com.gildedgames.aether.common.items.companions;
 
-import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.common.entities.living.companions.EntityCompanion;
 import com.gildedgames.aether.common.items.InformationProvider;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,34 +11,26 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.lang.reflect.InvocationTargetException;
 import java.text.DecimalFormat;
 import java.util.List;
 
 public class ItemCompanion extends Item
 {
-	private final Class<? extends EntityCompanion> companionClass;
+	private InformationProvider informationProvider;
 
-	private final InformationProvider informationProvider;
+	private final DecimalFormat timeFormat = new DecimalFormat("0.0");
 
-	protected final DecimalFormat timeFormat = new DecimalFormat("0.0");
-
-	public ItemCompanion(Class<? extends EntityCompanion> companionClass, InformationProvider informationProvider)
+	public ItemCompanion()
 	{
-		this.companionClass = companionClass;
-		this.informationProvider = informationProvider;
-
 		this.setMaxStackSize(1);
-
 		this.setCreativeTab(CreativeTabsAether.COMPANIONS);
 	}
 
-	public ItemCompanion(Class<? extends EntityCompanion> companionClass)
+	public ItemCompanion(InformationProvider informationProvider)
 	{
-		this(companionClass, (stack, player, tooltip, advanced) ->
-		{
+		this();
 
-		});
+		this.informationProvider = informationProvider;
 	}
 
 	public static void setRespawnTimer(ItemStack stack, World world, int timer)
@@ -67,27 +57,6 @@ public class ItemCompanion extends Item
 		return compound.getLong("respawnTimer") - world.getTotalWorldTime();
 	}
 
-	public EntityCompanion createCompanionEntity(IPlayerAether aePlayer)
-	{
-		EntityCompanion companion = null;
-
-		try
-		{
-			companion = this.companionClass.getConstructor(World.class).newInstance(aePlayer.getEntity().world);
-		}
-		catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e)
-		{
-			e.printStackTrace();
-		}
-
-		return companion;
-	}
-
-	public Class<? extends EntityCompanion> getCompanionEntityClass()
-	{
-		return this.companionClass;
-	}
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
@@ -96,10 +65,13 @@ public class ItemCompanion extends Item
 
 		if (respawn > 0)
 		{
-			tooltip.add(TextFormatting.RED + "Respawns in " + this.parseTicks(respawn));
+			tooltip.add(TextFormatting.RED + "" + TextFormatting.ITALIC + "Disabled! Respawns in " + this.parseTicks(respawn) + ".");
 		}
 
-		this.informationProvider.addInformation(stack, player, tooltip, advanced);
+		if (this.informationProvider != null)
+		{
+			this.informationProvider.addInformation(stack, player, tooltip, advanced);
+		}
 
 		super.addInformation(stack, player, tooltip, advanced);
 	}

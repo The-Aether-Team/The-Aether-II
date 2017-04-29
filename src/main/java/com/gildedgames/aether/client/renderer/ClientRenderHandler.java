@@ -45,12 +45,13 @@ public class ClientRenderHandler
 	@SubscribeEvent
 	public void onRenderBlockOverlay(RenderBlockOverlayEvent event)
 	{
-		EntityPlayer player = event.getPlayer();
+		EntityPlayer entity = event.getPlayer();
+
 		PlayerAether aePlayer = PlayerAether.getPlayer(event.getPlayer());
 
 		if (event.getOverlayType() == RenderBlockOverlayEvent.OverlayType.WATER)
 		{
-			if (player.getAir() >= 295 && PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.iron_bubble))
+			if (entity.getAir() >= 295 && PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.iron_bubble))
 			{
 				event.setCanceled(true);
 			}

@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.entities.living.companions;
 
-import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.world.World;
@@ -76,24 +75,6 @@ public class EntityPinkBabySwet extends EntityCompanion
 	public int getVerticalFaceSpeed()
 	{
 		return 0;
-	}
-
-	@Override
-	public void tickEffects(IPlayerAether aePlayer)
-	{
-
-	}
-
-	@Override
-	public void addEffects(IPlayerAether aePlayer)
-	{
-
-	}
-
-	@Override
-	public void removeEffects(IPlayerAether aePlayer)
-	{
-
 	}
 
 }

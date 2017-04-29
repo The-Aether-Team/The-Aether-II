@@ -187,16 +187,12 @@ public class GuiEquipment extends GuiContainer
 
 	private void drawEquipmentEffects()
 	{
-		ArrayList<String> effects = new ArrayList<>();
+		ArrayList<String> label = new ArrayList<>();
 
 		EquipmentModule equipment = this.aePlayer.getEquipmentModule();
+		equipment.getActivePools().forEach((pool) -> pool.getInstance().ifPresent(instance -> instance.addInformation(label)));
 
-		for (ResourceLocation id : equipment.getActiveEffectProviders())
-		{
-			equipment.getEffectPool(id).ifPresent(pool -> pool.getInstance().addInformation(effects));
-		}
-
-		String compiled = StringUtils.join(effects, TextFormatting.RESET + ", ");
+		String compiled = StringUtils.join(label, TextFormatting.RESET + ", ");
 
 		this.mc.fontRenderer.drawString(compiled, this.guiLeft, this.guiTop + 160, 0xFFFFFF, true);
 	}

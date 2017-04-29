@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.items.companions;
 
-import com.gildedgames.aether.common.entities.living.companions.EntityCompanion;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -14,11 +13,6 @@ import java.util.List;
 
 public class ItemDeathSeal extends ItemCompanion
 {
-	public ItemDeathSeal(Class<? extends EntityCompanion> companionClass)
-	{
-		super(companionClass);
-	}
-
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
 	{
@@ -64,11 +58,13 @@ public class ItemDeathSeal extends ItemCompanion
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
 	{
+		super.addInformation(stack, player, tooltip, advanced);
+
 		long disabledTime = ItemDeathSeal.getTicksUntilEnabled(stack, player.world);
 
 		if (disabledTime > 0)
 		{
-			tooltip.add(TextFormatting.RED + "Usable in " + this.parseTicks(disabledTime));
+			tooltip.add(TextFormatting.RED + "" + TextFormatting.ITALIC + "Disabled! Ready in " + this.parseTicks(disabledTime));
 		}
 	}
 }

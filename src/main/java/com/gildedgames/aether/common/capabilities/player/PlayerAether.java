@@ -40,8 +40,6 @@ public class PlayerAether implements IPlayerAether
 
 	private final EntityPlayer entity;
 
-	private final PlayerCompanionModule companionModule;
-
 	private final AbilitiesModule abilitiesModule;
 
 	private final GravititeAbilityModule gravititeAbilityModule;
@@ -60,7 +58,6 @@ public class PlayerAether implements IPlayerAether
 	{
 		this.entity = entity;
 
-		this.companionModule = new PlayerCompanionModule(this);
 		this.abilitiesModule = new AbilitiesModule(this);
 		this.gravititeAbilityModule = new GravititeAbilityModule(this);
 		this.teleportingModule = new TeleportingModule(this);
@@ -69,7 +66,6 @@ public class PlayerAether implements IPlayerAether
 		this.dialogModule = new DialogModule(this);
 
 		Collection<PlayerAetherModule> modules = new ArrayList<>();
-		modules.add(this.companionModule);
 		modules.add(this.abilitiesModule);
 		modules.add(this.gravititeAbilityModule);
 		modules.add(this.teleportingModule);
@@ -137,7 +133,6 @@ public class PlayerAether implements IPlayerAether
 	@Override
 	public void onDeath(LivingDeathEvent event)
 	{
-		this.companionModule.onDeath(event);
 		this.gravititeAbilityModule.onDeath(event);
 	}
 
@@ -146,9 +141,9 @@ public class PlayerAether implements IPlayerAether
 	{
 		if (!this.getEntity().world.isRemote && !this.getEntity().world.getGameRules().getBoolean("keepInventory"))
 		{
-			for (int i = 0; i < this.getEquipmentInventory().getSizeInventory(); i++)
+			for (int i = 0; i < this.getEquipmentModule().getInventory().getSizeInventory(); i++)
 			{
-				ItemStack stack = this.getEquipmentInventory().removeStackFromSlot(i);
+				ItemStack stack = this.getEquipmentModule().getInventory().removeStackFromSlot(i);
 
 				if (!stack.isEmpty())
 				{
@@ -184,33 +179,15 @@ public class PlayerAether implements IPlayerAether
 	@Override
 	public void onTeleport(PlayerEvent.PlayerChangedDimensionEvent event)
 	{
-		this.companionModule.onTeleport(event);
-
 		this.sendFullUpdate();
-	}
 
-	@Override
-	public void onSpawned(PlayerEvent.PlayerLoggedInEvent event)
-	{
-		this.companionModule.onSpawned();
-	}
-
-	@Override
-	public void onDespawn(PlayerEvent.PlayerLoggedOutEvent event)
-	{
-		this.companionModule.onDespawn(event);
+		this.equipmentModule.onTeleport();
 	}
 
 	@Override
 	public void onPlayerBeginWatching(IPlayerAether other)
 	{
 		NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(this), (EntityPlayerMP) other.getEntity());
-	}
-
-	@Override
-	public IInventoryEquipment getEquipmentInventory()
-	{
-		return this.equipmentModule.getInventory();
 	}
 
 	@Override
@@ -267,12 +244,6 @@ public class PlayerAether implements IPlayerAether
 		return this.entity;
 	}
 
-	@Override
-	public PlayerCompanionModule getCompanionModule()
-	{
-		return this.companionModule;
-	}
-
 	public GravititeAbilityModule getGravititeAbility()
 	{
 		return this.gravititeAbilityModule;
@@ -293,6 +264,7 @@ public class PlayerAether implements IPlayerAether
 		return this.abilitiesModule;
 	}
 
+	@Override
 	public EquipmentModule getEquipmentModule()
 	{
 		return this.equipmentModule;

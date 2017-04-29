@@ -1,11 +1,9 @@
 package com.gildedgames.aether.common.capabilities.item.effects;
 
+import com.gildedgames.aether.api.items.equipment.effects.*;
 import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.api.items.equipment.effects.EffectHelper;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
-import com.gildedgames.aether.api.items.equipment.effects.EffectInstance;
-import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.common.AetherCore;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 
@@ -19,10 +17,10 @@ public class RegenerationEffectFactory implements IEffectFactory<RegenerationEff
 	private static final ResourceLocation NAME = new ResourceLocation(AetherCore.MOD_ID, "regeneration");
 
 	@Override
-	public EffectInstance createInstance(Collection<Provider> providers)
+	public EffectInstance createInstance(IEffectPool<Provider> pool)
 	{
-		Instance state = new Instance();
-		state.healAmount = EffectHelper.combineInt(providers, instance -> instance.heal);
+		RegenerationEffectInstance state = new RegenerationEffectInstance();
+		state.healAmount = EffectHelper.combineInt(pool.getActiveProviders(), instance -> instance.heal);
 
 		return state;
 	}
@@ -47,9 +45,15 @@ public class RegenerationEffectFactory implements IEffectFactory<RegenerationEff
 		{
 			return RegenerationEffectFactory.NAME;
 		}
+
+		@Override
+		public IEffectProvider copy()
+		{
+			return new Provider(this.heal);
+		}
 	}
 
-	private class Instance extends EffectInstance
+	private class RegenerationEffectInstance extends EffectInstance
 	{
 		private int healAmount;
 

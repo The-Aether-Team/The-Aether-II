@@ -369,7 +369,7 @@ public class CommonEvents
 
 	private static boolean tryEquipEquipment(IPlayerAether player, ItemStack stack, EnumHand hand)
 	{
-		IInventoryEquipment inventory = player.getEquipmentInventory();
+		IInventoryEquipment inventory = player.getEquipmentModule().getInventory();
 
 		IItemProperties equipment = AetherAPI.content().items().getProperties(stack.getItem());
 

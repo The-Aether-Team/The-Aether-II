@@ -1,9 +1,8 @@
 package com.gildedgames.aether.common.entities.living.companions;
 
-import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.entities.ai.companion.EntityAICompanionFollow;
 import com.google.common.base.Optional;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
@@ -13,9 +12,11 @@ import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -26,6 +27,8 @@ public abstract class EntityCompanion extends EntityCreature
 	private static final DataParameter<Optional<UUID>> OWNER_UUID = new DataParameter<>(20, DataSerializers.OPTIONAL_UNIQUE_ID);
 
 	private boolean wasDespawned = false;
+
+	protected boolean isFlying = false;
 
 	public EntityCompanion(World worldIn)
 	{
@@ -73,34 +76,39 @@ public abstract class EntityCompanion extends EntityCreature
 	}
 
 	@Override
+	protected void playStepSound(BlockPos pos, Block blockIn)
+	{
+		if (!this.isFlying)
+		{
+			super.playStepSound(pos, blockIn);
+		}
+	}
+
+	@Override
+	public boolean canTriggerWalking()
+	{
+		return !this.isFlying;
+	}
+
+	@Override
+	public boolean canDespawn()
+	{
+		return false;
+	}
+
+	@Override
 	public void onUpdate()
 	{
+		if (!this.world.isRemote && (this.getOwner() == null || this.getOwner().isDead))
+		{
+			this.setDead();
+
+			this.wasDespawned = true;
+		}
+
 		super.onUpdate();
 
 		this.fallDistance = 0.0f;
-
-		if (!this.world.isRemote)
-		{
-			if (this.getOwner() == null || this.getOwner().isDead)
-			{
-				this.setDead();
-
-				this.wasDespawned = true;
-			}
-			else
-			{
-				PlayerAether aePlayer = PlayerAether.getPlayer(this.getOwner());
-
-				aePlayer.getCompanionModule().getCompanionEntity().ifPresent(entity -> {
-					if (entity == this)
-					{
-						this.setDead();
-
-						this.wasDespawned = true;
-					}
-				});
-			}
-		}
 	}
 
 	@Override
@@ -116,11 +124,27 @@ public abstract class EntityCompanion extends EntityCreature
 		return super.attackEntityFrom(source, amount);
 	}
 
-	public abstract void tickEffects(IPlayerAether aePlayer);
+	@Override
+	protected void collideWithEntity(Entity entity)
+	{
+		if (entity != this.getOwner())
+		{
+			entity.applyEntityCollision(this);
+		}
+	}
 
-	public abstract void addEffects(IPlayerAether aePlayer);
+	@Override
+	public boolean writeToNBTOptional(NBTTagCompound compound)
+	{
+		// Never save Companions to disk...
+		return false;
+	}
 
-	public abstract void removeEffects(IPlayerAether aePlayer);
+	@Override
+	public void setPortal(BlockPos pos)
+	{
+		// Never teleport the companion...
+	}
 
 	public void setOwner(EntityPlayer owner)
 	{
@@ -142,5 +166,10 @@ public abstract class EntityCompanion extends EntityCreature
 	public boolean wasDespawned()
 	{
 		return this.wasDespawned;
+	}
+
+	public void setDespawned(boolean despawned)
+	{
+		this.wasDespawned = despawned;
 	}
 }

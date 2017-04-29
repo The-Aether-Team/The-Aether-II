@@ -2,8 +2,6 @@ package com.gildedgames.aether.api.items.equipment.effects;
 
 import net.minecraft.util.ResourceLocation;
 
-import java.util.Collection;
-
 /***
  * Creates an {@link EffectInstance} from the collection of {@link IEffectProvider} an entity has.
  *
@@ -18,10 +16,10 @@ public interface IEffectFactory<T extends IEffectProvider>
 	/**
 	 * Creates an {@link EffectInstance} of this effect from {@param instances}.
 	 *
-	 * @param providers The instances of this effect the entity currently has
+	 * @param pool The pool this instance will be created for
 	 * @return The {@link EffectInstance} for the entity
 	 */
-	EffectInstance createInstance(Collection<T> providers);
+	EffectInstance createInstance(IEffectPool<T> pool);
 
 	/**
 	 * The unique identifier used to link the factory a {@link IEffectProvider} uses. This

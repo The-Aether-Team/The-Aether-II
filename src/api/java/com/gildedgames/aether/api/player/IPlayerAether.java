@@ -1,8 +1,6 @@
 package com.gildedgames.aether.api.player;
 
 import com.gildedgames.aether.api.dialog.IDialogController;
-import com.gildedgames.aether.api.player.companions.IPlayerCompanionManager;
-import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -18,11 +16,9 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 
 public interface IPlayerAether
 {
-	IInventoryEquipment getEquipmentInventory();
+	IEquipmentModule getEquipmentModule();
 
 	IDialogController getDialogController();
-
-	IPlayerCompanionManager getCompanionModule();
 
 	void onRespawn(PlayerEvent.PlayerRespawnEvent event);
 
@@ -39,10 +35,6 @@ public interface IPlayerAether
 	void onFall(LivingFallEvent event);
 
 	void onTeleport(PlayerChangedDimensionEvent event);
-
-	void onSpawned(PlayerLoggedInEvent event);
-
-	void onDespawn(PlayerLoggedOutEvent event);
 
 	/**
 	 * Called when another {@link IPlayerAether} begins watching this player.

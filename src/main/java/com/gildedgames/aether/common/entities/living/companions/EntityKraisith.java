@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.entities.living.companions;
 
-import com.gildedgames.aether.api.player.IPlayerAether;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -22,24 +21,6 @@ public class EntityKraisith extends EntityCombatCompanion
 		super.applyEntityAttributes();
 
 		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
-	}
-
-	@Override
-	public void tickEffects(IPlayerAether aePlayer)
-	{
-		// I'm useless!
-	}
-
-	@Override
-	public void addEffects(IPlayerAether aePlayer)
-	{
-
-	}
-
-	@Override
-	public void removeEffects(IPlayerAether aePlayer)
-	{
-
 	}
 
 	@Override

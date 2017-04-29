@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.capabilities.player;
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.common.entities.util.SharedAetherAttributes;
+import com.gildedgames.aether.common.entities.util.shared.SharedAetherAttributes;
 import com.gildedgames.aether.common.world.chunk.capabilities.ChunkAttachment;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
