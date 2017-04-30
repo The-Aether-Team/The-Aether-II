@@ -3,7 +3,7 @@ package com.gildedgames.aether.client.gui.container.crafting;
 import com.gildedgames.aether.api.recipes.IIndexableRecipe;
 import com.gildedgames.aether.client.gui.container.GuiSkyrootWorkbench;
 
-public class RecipeButton extends ItemStackButton
+public class CraftingBookRecipeButton extends CraftingBookStackButton
 {
 	private final GuiSkyrootWorkbench workbench;
 
@@ -11,7 +11,7 @@ public class RecipeButton extends ItemStackButton
 
 	public final boolean complete;
 
-	public RecipeButton(int id, GuiSkyrootWorkbench workbench, IIndexableRecipe recipe, int x, int y, boolean complete)
+	public CraftingBookRecipeButton(int id, GuiSkyrootWorkbench workbench, IIndexableRecipe recipe, int x, int y, boolean complete)
 	{
 		super(id, recipe.getCraftingResult(), x, y);
 
@@ -25,15 +25,17 @@ public class RecipeButton extends ItemStackButton
 	{
 		super.renderItem(mouseX, mouseY, hovered, selected);
 
+		this.zLevel = 100.0f;
+
 		if (this.workbench.getSelectedRecipe() == this.recipe)
 		{
-			this.drawGradientRect(this.x, this.y, this.x + this.width, this.y + this.height, 0x66fff999, 0xbbfff999);
+			this.drawGradientRect(this.xPosition, this.yPosition, this.xPosition + this.width,
+					this.yPosition + this.height, 0x66fff999, 0xbbfff999);
 		}
 		else if (!this.complete)
 		{
-			this.zLevel = 1000.0f;
-
-			this.drawGradientRect(this.x, this.y, this.x + this.width, this.y + this.height, 0x99484036, 0x99484036);
+			this.drawGradientRect(this.xPosition, this.yPosition, this.xPosition + this.width,
+					this.yPosition + this.height, 0x99484036, 0x99484036);
 		}
 
 		this.zLevel = 0.0f;

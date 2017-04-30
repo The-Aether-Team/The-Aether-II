@@ -6,13 +6,13 @@ import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
-public class GhostItemStackButton extends ItemStackButton
+public class CraftingBookMatrixButton extends CraftingBookStackButton
 {
 	protected final GuiSkyrootWorkbench container;
 
 	public final Slot slot;
 
-	public GhostItemStackButton(GuiSkyrootWorkbench container, int id, Slot slot, List<ItemStack> stacks, int x, int y)
+	public CraftingBookMatrixButton(GuiSkyrootWorkbench container, int id, Slot slot, List<ItemStack> stacks, int x, int y)
 	{
 		super(id, stacks, x, y);
 
@@ -23,13 +23,14 @@ public class GhostItemStackButton extends ItemStackButton
 	@Override
 	protected void renderItem(int mouseX, int mouseY, boolean hovered, boolean selected)
 	{
-		if (!this.slot.getHasStack() && !this.container.isDragging(this.slot))
+		if (!this.slot.getHasStack())
 		{
 			super.renderItem(mouseX, mouseY, hovered, selected);
 
-			this.zLevel = 1000.0f;
+			this.zLevel = 180.0f;
 
-			this.drawGradientRect(this.x, this.y, this.x + this.width, this.y + this.height, 0x668b8b8b, 0xbb8b8b8b);
+			this.drawGradientRect(this.xPosition, this.yPosition, this.xPosition + this.width,
+					this.yPosition + this.height, 0x668b8b8b, 0xbb8b8b8b);
 
 			this.zLevel = 0.0f;
 		}

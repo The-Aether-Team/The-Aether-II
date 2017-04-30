@@ -654,7 +654,7 @@ container.labyrinth_chest=Labyrinth Chest
 container.icestone_cooler=Icestone Cooler
 container.incubator=Incubator
 container.masonry_bench=Masonry Bench
-container.aether_workbench.recipes=Recipes
+container.aether_workbench.recipes=Recipes (%s/%s)
 
 # Sounds
 subtitles.aether.portal.glowstone.hum=Portal hums
