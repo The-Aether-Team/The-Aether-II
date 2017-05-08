@@ -225,7 +225,7 @@ public class RecipesAether
 				new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.GOLDEN.ordinal()), new ItemStack(ItemsAether.skyroot_poison_bucket));
 
 		// Golden Dart
-		registerShapedRecipe(new ItemStack(ItemsAether.dart, 8, ItemDartType.GOLDEN.ordinal()), " X", " Y",
+		registerShapedRecipe(new ItemStack(ItemsAether.dart, 8, ItemDartType.GOLDEN.ordinal()), "X ", " Y",
 				'X', new ItemStack(ItemsAether.golden_amber),
 				'Y', new ItemStack(ItemsAether.skyroot_stick));
 
