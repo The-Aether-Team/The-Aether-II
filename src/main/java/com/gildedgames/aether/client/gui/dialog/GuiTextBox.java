@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client.gui.dialog;
 
 import com.google.common.collect.Lists;
+import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiUtilRenderComponents;
@@ -59,6 +60,12 @@ public class GuiTextBox extends GuiElement
 		{
 			this.cachedSplitText = GuiUtilRenderComponents.splitText(this.text, this.width - 6, fontRenderer, true, true);
 		}
+	}
+
+	@Override
+	public void playPressSound(SoundHandler soundHandlerIn)
+	{
+		// NO-OP
 	}
 
 	@Override
