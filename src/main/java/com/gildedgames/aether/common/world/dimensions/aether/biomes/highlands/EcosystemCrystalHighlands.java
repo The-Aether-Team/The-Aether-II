@@ -37,7 +37,7 @@ public class EcosystemCrystalHighlands implements Ecosystem
 	@Override
 	public double getDesiredMoisture()
 	{
-		return 0.4;
+		return -0.4;
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class EcosystemCrystalHighlands implements Ecosystem
 		{
 			this.decorations = Lists.newArrayList();
 
-			this.decorations.add(new WorldDecorationSimple(4, GenerationAether.blue_skyroot_tree));
+			this.decorations.add(new WorldDecorationSimple(3, GenerationAether.blue_skyroot_tree));
 
 			this.decorations.add(new WorldDecorationSimple(6, GenerationAether.holystone_rocks)
 			{
@@ -62,8 +62,8 @@ public class EcosystemCrystalHighlands implements Ecosystem
 				}
 			});
 
-			this.decorations.add(new WorldDecorationSimple(3, GenerationAether.dark_blue_skyroot_tree));
-			this.decorations.add(new WorldDecorationSimple(2, GenerationAether.dark_blue_skyroot_oak));
+			this.decorations.add(new WorldDecorationSimple(4, GenerationAether.dark_blue_skyroot_tree));
+			this.decorations.add(new WorldDecorationSimple(3, GenerationAether.dark_blue_skyroot_oak));
 			this.decorations.add(new WorldDecorationSimple(1, 0.06F, GenerationAether.storm_aercloud)
 			{
 				@Override

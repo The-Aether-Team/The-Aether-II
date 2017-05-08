@@ -19,25 +19,25 @@ public class EcosystemHighlandPlains implements Ecosystem
 	@Override
 	public boolean hasDesiredTemperature()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean hasDesiredMoisture()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	public double getDesiredTemperature()
 	{
-		return 0;
+		return 0.4;
 	}
 
 	@Override
 	public double getDesiredMoisture()
 	{
-		return 0;
+		return 0.4;
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class EcosystemHighlandPlains implements Ecosystem
 		{
 			this.decorations = Lists.newArrayList();
 
-			this.decorations.add(new WorldDecorationSimple(5, GenerationAether.short_aether_grass, GenerationAether.aether_grass));
+			this.decorations.add(new WorldDecorationSimple(2, GenerationAether.short_aether_grass, GenerationAether.aether_grass));
 
 			this.decorations.add(new WorldDecorationSimple(6, GenerationAether.holystone_rocks)
 			{
@@ -63,7 +63,7 @@ public class EcosystemHighlandPlains implements Ecosystem
 			});
 
 			this.decorations.add(new WorldDecorationSimple(1, 0.1F, GenerationAether.skyroot_twigs));
-			this.decorations.add(new WorldDecorationSimple(1, GenerationAether.blue_skyroot_tree, GenerationAether.green_skyroot_tree, GenerationAether.green_skyroot_small_pine, GenerationAether.golden_oak));
+			this.decorations.add(new WorldDecorationSimple(1, GenerationAether.blue_skyroot_tree, GenerationAether.green_skyroot_tree, GenerationAether.green_skyroot_small_pine, GenerationAether.green_skyroot_pine, GenerationAether.golden_oak));
 		}
 
 		return this.decorations;

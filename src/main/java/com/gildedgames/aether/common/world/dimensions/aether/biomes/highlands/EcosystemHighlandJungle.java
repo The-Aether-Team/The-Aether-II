@@ -31,13 +31,13 @@ public class EcosystemHighlandJungle implements Ecosystem
 	@Override
 	public double getDesiredTemperature()
 	{
-		return 0.7;
+		return 0.8;
 	}
 
 	@Override
 	public double getDesiredMoisture()
 	{
-		return 0.7;
+		return 0.8;
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class EcosystemHighlandJungle implements Ecosystem
 		{
 			this.decorations = Lists.newArrayList();
 
-			this.decorations.add(new WorldDecorationSimple(8, GenerationAether.short_aether_grass, GenerationAether.aether_grass, GenerationAether.long_aether_grass));
+			this.decorations.add(new WorldDecorationSimple(4, GenerationAether.aether_grass, GenerationAether.long_aether_grass));
 			this.decorations.add(new WorldDecorationSimple(1, 0.2F, GenerationAether.skyroot_twigs));
 
 			this.decorations.add(new WorldDecorationSimple(6, GenerationAether.holystone_rocks)
@@ -64,8 +64,8 @@ public class EcosystemHighlandJungle implements Ecosystem
 			});
 
 			this.decorations.add(new WorldDecorationSimple(3, GenerationAether.skyroot_moa_nest_tree_1));
-			this.decorations.add(new WorldDecorationSimple(35, GenerationAether.green_skyroot_windswept));
-			this.decorations.add(new WorldDecorationSimple(10, GenerationAether.green_skyroot_small_pine));
+			this.decorations.add(new WorldDecorationSimple(18, GenerationAether.green_skyroot_windswept));
+			this.decorations.add(new WorldDecorationSimple(10, GenerationAether.green_skyroot_small_pine, GenerationAether.green_skyroot_pine));
 			this.decorations.add(new WorldDecorationSimple(1, 0.06F, GenerationAether.green_aercloud)
 			{
 				@Override

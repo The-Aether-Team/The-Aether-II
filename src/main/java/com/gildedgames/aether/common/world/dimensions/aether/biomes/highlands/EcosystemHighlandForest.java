@@ -31,13 +31,13 @@ public class EcosystemHighlandForest implements Ecosystem
 	@Override
 	public double getDesiredTemperature()
 	{
-		return -0.5;
+		return -0.8;
 	}
 
 	@Override
 	public double getDesiredMoisture()
 	{
-		return -0.5;
+		return -0.8;
 	}
 
 	@Override
@@ -63,8 +63,9 @@ public class EcosystemHighlandForest implements Ecosystem
 			});
 
 			this.decorations.add(new WorldDecorationSimple(1, GenerationAether.skyroot_moa_nest_tree_1));
-			this.decorations.add(new WorldDecorationSimple(2, GenerationAether.green_skyroot_tree, GenerationAether.blue_skyroot_tree));
-			this.decorations.add(new WorldDecorationSimple(15, GenerationAether.green_skyroot_pine));
+			this.decorations.add(new WorldDecorationSimple(4, GenerationAether.green_skyroot_tree, GenerationAether.blue_skyroot_tree));
+			this.decorations.add(new WorldDecorationSimple(12, GenerationAether.green_skyroot_small_pine, GenerationAether.green_skyroot_pine));
+			this.decorations.add(new WorldDecorationSimple(1, GenerationAether.blue_skyroot_tree));
 			this.decorations.add(new WorldDecorationSimple(1, 0.06F, GenerationAether.green_aercloud)
 
 			{
