@@ -344,8 +344,8 @@ public class GuiSkyrootWorkbench extends GuiContainer implements IContainerListe
 		// Add page buttons
 		if (this.tabPageMax > 0)
 		{
-			this.downPageBtn = new CraftingBookPageButton(1, this.guiLeft - 11, this.guiTop + 124, "<<");
-			this.upPageBtn = new CraftingBookPageButton(0, this.guiLeft - 11, this.guiTop + 140, ">>");
+			this.downPageBtn = new CraftingBookPageButton(1, this.guiLeft - 11, this.guiTop + 140, "<<");
+			this.upPageBtn = new CraftingBookPageButton(0, this.guiLeft - 11, this.guiTop + 124, ">>");
 
 			this.upPageBtn.enabled = this.tabPageIndex < this.tabPageMax;
 			this.downPageBtn.enabled = this.tabPageIndex > 0;
