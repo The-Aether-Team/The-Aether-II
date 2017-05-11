@@ -1,9 +1,11 @@
 package com.gildedgames.aether.client.models.entities.living;
 
+import com.gildedgames.aether.common.entities.living.passive.EntityKirrid;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
 
 public class ModelKirrid extends ModelBase
@@ -356,33 +358,21 @@ public class ModelKirrid extends ModelBase
 
 		this.Tail.rotateAngleZ = (MathHelper.cos(ageInTicks * 0.1662F) * 0.2F);
 
-		this.HeadNeck.rotateAngleX = headPitch * 0.017453292F;
+		setHeadRotations(headPitch);
+
 		this.HeadNeck.rotateAngleY = netHeadYaw * 0.017453292F;
-		this.HeadMain.rotateAngleX = headPitch * 0.017453292F;
 		this.HeadMain.rotateAngleY = netHeadYaw * 0.017453292F;
-		this.HeadSnout.rotateAngleX = 0.6108652F + (headPitch * 0.017453292F);
 		this.HeadSnout.rotateAngleY = netHeadYaw * 0.017453292F;
-		this.HeadCheekLeft.rotateAngleX = headPitch * 0.017453292F;
 		this.HeadCheekLeft.rotateAngleY = 0.2617994F + (netHeadYaw * 0.017453292F);
-		this.HeadCheekRight.rotateAngleX = headPitch * 0.017453292F;
 		this.HeadCheekRight.rotateAngleY = -0.2617994F + (netHeadYaw * 0.017453292F);
-		this.HeadJaw.rotateAngleX = -0.1745329F + (headPitch * 0.017453292F);
 		this.HeadJaw.rotateAngleY = netHeadYaw * 0.017453292F;
-		this.HeadEyeLeft.rotateAngleX = headPitch * 0.017453292F;
 		this.HeadEyeLeft.rotateAngleY = 0.2617994F + (netHeadYaw * 0.017453292F);
-		this.HeadEyeRight.rotateAngleX = headPitch * 0.017453292F;
 		this.HeadEyeRight.rotateAngleY = -0.2617994F + (netHeadYaw * 0.017453292F);
-		this.HeadBrowLeft.rotateAngleX = headPitch * 0.017453292F;
 		this.HeadBrowLeft.rotateAngleY = 0.2617994F + (netHeadYaw * 0.017453292F);
-		this.HeadBrowRight.rotateAngleX = headPitch * 0.017453292F;
 		this.HeadBrowRight.rotateAngleY = -0.2617994F + (netHeadYaw * 0.017453292F);
-		this.HeadPlate.rotateAngleX = 0.6108652F + (headPitch * 0.017453292F);
 		this.HeadPlate.rotateAngleY = netHeadYaw * 0.017453292F;
-		this.HeadTop.rotateAngleX = 0.1745329F + (headPitch * 0.017453292F);
 		this.HeadTop.rotateAngleY = netHeadYaw * 0.017453292F;
-		this.HeadEarLeft.rotateAngleX = headPitch * 0.017453292F;
 		this.HeadEarLeft.rotateAngleY = netHeadYaw * 0.017453292F;
-		this.HeadEarRight.rotateAngleX = headPitch * 0.017453292F;
 		this.HeadEarRight.rotateAngleY = netHeadYaw * 0.017453292F;
 
 		this.LegFrontLeft1.rotateAngleX = 0.0872665F + (MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);
@@ -400,6 +390,54 @@ public class ModelKirrid extends ModelBase
 		this.LegBackRight1.rotateAngleX = 0.6108652F + (MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);
 		this.LegBackRight2.rotateAngleX = 0.6108652F + (MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);
 		this.LegBackRight3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+
 	}
 
+	public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float p_78086_2_, float p_78086_3_, float partialTickTime)
+	{
+		super.setLivingAnimations(entitylivingbaseIn, p_78086_2_, p_78086_3_, partialTickTime);
+
+		float rotationPointY = 6.0F + ((EntityKirrid)entitylivingbaseIn).getHeadRotationPointY(partialTickTime) * 9.0F;
+		float headAng = ((EntityKirrid) entitylivingbaseIn).getHeadRotationAngleX(partialTickTime);
+
+		this.HeadNeck.rotationPointY = rotationPointY;
+		this.HeadMain.rotationPointY = rotationPointY;
+		this.HeadSnout.rotationPointY = rotationPointY;
+		this.HeadCheekLeft.rotationPointY = rotationPointY;
+		this.HeadCheekRight.rotationPointY = rotationPointY;
+		this.HeadJaw.rotationPointY = rotationPointY;
+		this.HeadEyeLeft.rotationPointY = rotationPointY;
+		this.HeadEyeRight.rotationPointY = rotationPointY;
+		this.HeadBrowLeft.rotationPointY = rotationPointY;
+		this.HeadBrowRight.rotationPointY = rotationPointY;
+		this.HeadPlate.rotationPointY = rotationPointY;
+		this.HeadTop.rotationPointY = rotationPointY;
+		this.HeadEarLeft.rotationPointY = rotationPointY;
+		this.HeadEarRight.rotationPointY = rotationPointY;
+
+		this.HeadCheekLeft.offsetX = MathHelper.sin(headAng * -0.3662F + (float) Math.PI) * 0.1F * ((EntityKirrid)entitylivingbaseIn).getHeadRotationAngleX(partialTickTime) + .005f;
+		this.HeadCheekRight.offsetX = MathHelper.sin(headAng * 0.3662F + (float) Math.PI) * 0.1F * ((EntityKirrid)entitylivingbaseIn).getHeadRotationAngleX(partialTickTime) -.001f;
+		this.HeadJaw.offsetY = MathHelper.sin(headAng * 0.6662F + (float) Math.PI) * 0.2F * ((EntityKirrid)entitylivingbaseIn).getHeadRotationAngleX(partialTickTime);
+
+		setHeadRotations(headAng * 9.0F);
+	}
+
+
+	private void setHeadRotations(float headPitch)
+	{
+		this.HeadNeck.rotateAngleX = headPitch * 0.017453292F;
+		this.HeadMain.rotateAngleX = headPitch * 0.017453292F;
+		this.HeadSnout.rotateAngleX = 0.6108652F + (headPitch * 0.017453292F);
+		this.HeadCheekLeft.rotateAngleX = headPitch * 0.017453292F;
+		this.HeadCheekRight.rotateAngleX = headPitch * 0.017453292F;
+		this.HeadJaw.rotateAngleX = -0.1745329F + (headPitch * 0.017453292F);
+		this.HeadEyeLeft.rotateAngleX = headPitch * 0.017453292F;
+		this.HeadEyeRight.rotateAngleX = headPitch * 0.017453292F;
+		this.HeadBrowLeft.rotateAngleX = headPitch * 0.017453292F;
+		this.HeadBrowRight.rotateAngleX = headPitch * 0.017453292F;
+		this.HeadPlate.rotateAngleX = 0.6108652F + (headPitch * 0.017453292F);
+		this.HeadTop.rotateAngleX = 0.1745329F + (headPitch * 0.017453292F);
+		this.HeadEarLeft.rotateAngleX = headPitch * 0.017453292F;
+		this.HeadEarRight.rotateAngleX = headPitch * 0.017453292F;
+	}
 }
