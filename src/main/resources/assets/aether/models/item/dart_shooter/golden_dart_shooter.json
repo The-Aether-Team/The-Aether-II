@@ -2,5 +2,27 @@
 	"parent": "item/generated",
 	"textures": {
 		"layer0": "aether:items/weapons/golden_dart_shooter"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [ -80, 0, -40 ],
+			"translation": [ -2, 0, 2.5 ],
+			"scale": [ 0.5, 0.5, 0.5 ]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [ -80, 0, 40 ],
+			"translation": [ -1, 0, 2.5 ],
+			"scale": [ 0.5, 0.5, 0.5 ]
+		},
+		"firstperson_righthand": {
+			"rotation": [ 0, -90, 25 ],
+			"translation": [ -1.5, 3.2, 1.13],
+			"scale": [ 0.68, 0.68, 0.68 ]
+		},
+		"firstperson_lefthand": {
+			"rotation": [ 0, 90, -25 ],
+			"translation": [ -1.5, 3.2, 1.13],
+			"scale": [ 0.68, 0.68, 0.68 ]
+		}
 	}
 }
