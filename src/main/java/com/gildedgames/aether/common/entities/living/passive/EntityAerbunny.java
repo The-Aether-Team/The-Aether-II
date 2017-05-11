@@ -22,6 +22,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -39,6 +40,9 @@ public class EntityAerbunny extends EntityAetherAnimal
 	@SideOnly(Side.CLIENT)
 	private int puffiness;
 
+	@SideOnly(Side.CLIENT)
+	private float curRotation;
+
 	public EntityAerbunny(final World world)
 	{
 		super(world);
@@ -47,7 +51,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
 		this.tasks.addTask(4, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 12.0F, 1.2F, 1.8F));
-		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
+		this.tasks.addTask(5, new EntityAIWander(this, 1.0D, 10));
 		this.tasks.addTask(11, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
 
 		this.jumpHelper = new AerbunnyJumpHelper(this);
@@ -237,6 +241,35 @@ public class EntityAerbunny extends EntityAetherAnimal
 	{
 		return this.puffiness;
 	}
+
+	@SideOnly(Side.CLIENT)
+	public float getRotation()
+	{
+		if (motionY != 0)
+		{
+			BlockPos pos = new BlockPos(posX, posY - 1, posZ);
+
+			if (motionY > 0)
+			{
+				curRotation += MathHelper.clamp(curRotation / 10f, -4f, -2f);
+			}
+			else
+			{
+				curRotation += MathHelper.clamp(curRotation / 10f, 2f, 4f);
+			}
+
+			if (onGround)
+			{
+				curRotation = 0f;
+			}
+
+			curRotation = MathHelper.clamp(curRotation, -30f, 30f);
+
+		}
+
+		return curRotation;
+	}
+
 
 	@Override
 	public boolean canRiderInteract()
