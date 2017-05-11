@@ -127,23 +127,23 @@ public class ModelAerbunny extends ModelBase
 		GlStateManager.translate(0F, 1.1F, -0.2F);
 		GlStateManager.rotate(rotation, 20f, 0f, 0f);
 
-		this.body.render(scale);
-
-		GlStateManager.pushMatrix();
-
 		/*
 		Animation for the legs, because the rotation for the bunnie's jump is from -30 to 30, offsetting it allows the feet to be in a preset position,
 		and dividing it by a greater number than it will ever become keeps the value < 1f
 		 */
 		if (!bunny.onGround)
 		{
-			leg_front_right.rotateAngleX = (rotation + 40) / 50f;
-			leg_front_left.rotateAngleX = (rotation + 40)  / 50f;
+			leg_front_right.rotateAngleX = (rotation + 20) / 30f;
+			leg_front_left.rotateAngleX = (rotation + 20)  / 30f;
 			leg_back_right_base.rotateAngleX = ((rotation + 40) / 50f);
 			leg_back_left_base.rotateAngleX = ((rotation + 40) / 50f);
 			leg_back_right_foot.rotateAngleX = ((rotation + 40) / 50f) * -1.5f;
 			leg_back_left_foot.rotateAngleX = ((rotation + 40) / 50f) * -1.5f;
 		}
+
+		this.body.render(scale);
+
+		GlStateManager.pushMatrix();
 
 		final float puffScale = 1.0F + ((bunny.getPuffiness() / 10F) * 0.2F);
 
