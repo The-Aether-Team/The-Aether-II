@@ -254,8 +254,6 @@ public class EntityAerbunny extends EntityAetherAnimal
 			curRotation += MathHelper.clamp(curRotation / 10f, 2f, 4f);
 		}
 
-		System.out.println(motionY);
-
 		if (onGround)
 		{
 			curRotation = 0f;
