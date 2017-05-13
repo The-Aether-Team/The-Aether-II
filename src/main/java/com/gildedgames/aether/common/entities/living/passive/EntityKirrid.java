@@ -52,7 +52,7 @@ public class EntityKirrid extends EntitySheep
 
 		this.entityAIEatGrass = new EntityAIEatAetherGrass(this);
 
-		this.tasks.addTask(5, this.entityAIEatGrass);
+		this.tasks.addTask(9, this.entityAIEatGrass);
 	}
 
 	@Override

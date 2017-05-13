@@ -245,27 +245,23 @@ public class EntityAerbunny extends EntityAetherAnimal
 	@SideOnly(Side.CLIENT)
 	public float getRotation()
 	{
-		if (motionY != 0)
+		if (motionY > 0)
 		{
-			BlockPos pos = new BlockPos(posX, posY - 1, posZ);
-
-			if (motionY > 0)
-			{
-				curRotation += MathHelper.clamp(curRotation / 10f, -4f, -2f);
-			}
-			else
-			{
-				curRotation += MathHelper.clamp(curRotation / 10f, 2f, 4f);
-			}
-
-			if (onGround)
-			{
-				curRotation = 0f;
-			}
-
-			curRotation = MathHelper.clamp(curRotation, -30f, 30f);
-
+			curRotation += MathHelper.clamp(curRotation / 10f, -4f, -2f);
 		}
+		else if (motionY < 0)
+		{
+			curRotation += MathHelper.clamp(curRotation / 10f, 2f, 4f);
+		}
+
+		System.out.println(motionY);
+
+		if (onGround)
+		{
+			curRotation = 0f;
+		}
+
+		curRotation = MathHelper.clamp(curRotation, -30f, 30f);
 
 		return curRotation;
 	}
