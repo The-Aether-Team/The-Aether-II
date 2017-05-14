@@ -62,6 +62,8 @@ public class EquipmentContent
 		// Gloves
 		createEquipmentItem(ItemsAether.zanite_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
 
+		createEquipmentItem(ItemsAether.arkenium_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
+
 		createEquipmentItem(ItemsAether.gravitite_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
 
 		createEquipmentItem(ItemsAether.valkyrie_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);

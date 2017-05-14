@@ -257,6 +257,12 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.zanite_leggings, "armor/zanite_leggings");
 		registerItemModels(ItemsAether.zanite_boots, "armor/zanite_boots");
 
+		registerItemModels(ItemsAether.arkenium_helmet, "armor/arkenium_helmet");
+		registerItemModels(ItemsAether.arkenium_chestplate, "armor/arkenium_chestplate");
+		registerItemModels(ItemsAether.arkenium_leggings, "armor/arkenium_leggings");
+		registerItemModels(ItemsAether.arkenium_boots, "armor/arkenium_boots");
+
+
 		registerItemModels(ItemsAether.gravitite_helmet, "armor/gravitite_helmet");
 		registerItemModels(ItemsAether.gravitite_chestplate, "armor/gravitite_chestplate");
 		registerItemModels(ItemsAether.gravitite_leggings, "armor/gravitite_leggings");
@@ -414,6 +420,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.outpost_campfire, "tesr");
 
 		registerItemModels(ItemsAether.zanite_gloves, "accessories/zanite_gloves");
+		registerItemModels(ItemsAether.arkenium_gloves, "accessories/arkenium_gloves");
 		registerItemModels(ItemsAether.gravitite_gloves, "accessories/gravitite_gloves");
 		registerItemModels(ItemsAether.neptune_gloves, "accessories/neptune_gloves");
 		registerItemModels(ItemsAether.phoenix_gloves, "accessories/phoenix_gloves");

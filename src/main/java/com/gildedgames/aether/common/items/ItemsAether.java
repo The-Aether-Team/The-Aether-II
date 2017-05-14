@@ -96,6 +96,12 @@ public class ItemsAether
 			zanite_leggings = new ItemZaniteArmor(EntityEquipmentSlot.LEGS),
 			zanite_boots = new ItemZaniteArmor(EntityEquipmentSlot.FEET);
 
+	public static final ItemArkeniumArmor arkenium_helmet = new ItemArkeniumArmor(EntityEquipmentSlot.HEAD),
+			arkenium_chestplate = new ItemArkeniumArmor(EntityEquipmentSlot.CHEST),
+			arkenium_leggings = new ItemArkeniumArmor(EntityEquipmentSlot.LEGS),
+			arkenium_boots = new ItemArkeniumArmor(EntityEquipmentSlot.FEET);
+
+
 	public static final ItemGravititeArmor gravitite_helmet = new ItemGravititeArmor(EntityEquipmentSlot.HEAD),
 			gravitite_chestplate = new ItemGravititeArmor(EntityEquipmentSlot.CHEST),
 			gravitite_leggings = new ItemGravititeArmor(EntityEquipmentSlot.LEGS),
@@ -216,7 +222,8 @@ public class ItemsAether
 	public static final Item aechor_petal = new Item();
 
 	public static final Item zanite_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.ZANITE),
-			gravitite_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.GRAVITITE),
+	        arkenium_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.ARKENIUM),
+	        gravitite_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.GRAVITITE),
 			valkyrie_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.VALKYRIE),
 			neptune_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.NEPTUNE),
 			phoenix_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.PHOENIX);
@@ -488,6 +495,12 @@ public class ItemsAether
 		registerItem("zanite_leggings", zanite_leggings);
 		registerItem("zanite_boots", zanite_boots);
 		registerItem("zanite_gloves", zanite_gloves);
+
+		registerItem("arkenium_helmet", arkenium_helmet);
+		registerItem("arkenium_chestplate", arkenium_chestplate);
+		registerItem("arkenium_leggings", arkenium_leggings);
+		registerItem("arkenium_boots", arkenium_boots);
+		registerItem("arkenium_gloves", arkenium_gloves);
 
 		registerItem("gravitite_helmet", gravitite_helmet);
 		registerItem("gravitite_chestplate", gravitite_chestplate);

@@ -549,6 +549,7 @@ public class RecipesAether
 	private static void registerArmorRecipes()
 	{
 		ItemStack zanite = new ItemStack(ItemsAether.zanite_gemstone);
+		ItemStack arkenium = new ItemStack(ItemsAether.arkenium);
 		ItemStack gravitite = new ItemStack(ItemsAether.gravitite_plate);
 
 		// Zanite Armor
@@ -566,6 +567,22 @@ public class RecipesAether
 
 		registerShapedRecipe(new ItemStack(ItemsAether.zanite_gloves), "X X",
 				'X', zanite);
+
+		// Arkenium Armor
+		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_helmet), "XXX", "X X",
+				'X', arkenium);
+
+		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_chestplate), "X X", "XXX", "XXX",
+				'X', arkenium);
+
+		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_leggings), "XXX", "X X", "X X",
+				'X', arkenium);
+
+		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_boots), "X X", "X X",
+				'X', arkenium);
+
+		registerShapedRecipe(new ItemStack(ItemsAether.arkenium_gloves), "X X",
+				'X', arkenium);
 
 		// Gravitite Armor
 		registerShapedRecipe(new ItemStack(ItemsAether.gravitite_helmet), "XXX", "X X",
