@@ -34,7 +34,7 @@ import java.util.Random;
 public class BiomeAetherDecorator
 {
 
-	private final WorldGenAetherMinable genAmbrosium, genZanite, genGravitite, genIcestone, genArkenium, genCoarseAetherDirtOnDirt, genCoarseAetherDirtOnHolystone;
+	private final WorldGenAetherMinable genAmbrosium, genZanite, genGravitite, genIcestone, genArkenium, genQuicksoilOnGrass, genCoarseAetherDirtOnDirt, genCoarseAetherDirtOnHolystone;
 
 	private final WorldGenAetherMinable genMossyHolystone, genCrudeScatterglass;
 
@@ -66,8 +66,12 @@ public class BiomeAetherDecorator
 
 		final BlockMatcher dirtMatcher = BlockMatcher.forBlock(BlocksAether.aether_dirt);
 
+		final BlockMatcher grassMatcher = BlockMatcher.forBlock(BlocksAether.aether_grass);
+
 		this.genCoarseAetherDirtOnDirt = new WorldGenAetherMinable(BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.COARSE_DIRT), 22, dirtMatcher);
 		this.genCoarseAetherDirtOnHolystone = new WorldGenAetherMinable(BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.COARSE_DIRT), 22, holystoneMatcher);
+
+		this.genQuicksoilOnGrass = new WorldGenAetherMinable(BlocksAether.quicksoil.getDefaultState(), 22, grassMatcher);
 
 		this.genMossyHolystone = new WorldGenAetherMinable(BlocksAether.holystone.getDefaultState().withProperty(BlockHolystone.PROPERTY_VARIANT, BlockHolystone.MOSSY_HOLYSTONE), 20, holystoneMatcher);
 		this.genCrudeScatterglass = new WorldGenAetherMinable(BlocksAether.crude_scatterglass.getDefaultState(), 16, holystoneMatcher);
@@ -305,6 +309,7 @@ public class BiomeAetherDecorator
 
 		this.generateMineable(this.genCoarseAetherDirtOnDirt, world, random, pos, 0, 128, 10);
 		this.generateMineable(this.genCoarseAetherDirtOnHolystone, world, random, pos, 0, 128, 20);
+		this.generateMineable(this.genQuicksoilOnGrass, world, random, pos, 0, 128, 10);
 
 		this.generateMineable(this.genMossyHolystone, world, random, pos, 0, 90, 45);
 		this.generateMineable(this.genCrudeScatterglass, world, random, pos, 0, 110, 25);
