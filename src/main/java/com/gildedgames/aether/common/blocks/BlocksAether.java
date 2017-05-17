@@ -124,11 +124,11 @@ public class BlocksAether
 
 	public static final BlockIcestoneOre icestone_ore = new BlockIcestoneOre();
 
-	public static final BlockRockGlass quicksoil_glass = new BlockRockGlass(),
+	public static final Block quicksoil_glass = new BlockRockGlass().setLightLevel(1f),
 			crude_scatterglass = new BlockRockGlass(),
 			scatterglass = new BlockRockGlass();
 
-	public static final BlockRockGlassDecorative quicksoil_glass_decorative = new BlockRockGlassDecorative(BlocksAether.quicksoil_glass),
+	public static final Block quicksoil_glass_decorative = new BlockRockGlassDecorative(BlocksAether.quicksoil_glass).setLightLevel(1f),
 			crude_scatterglass_decorative = new BlockRockGlassDecorative(BlocksAether.crude_scatterglass),
 			scatterglass_decorative = new BlockRockGlassDecorative(BlocksAether.scatterglass);
 
@@ -215,12 +215,12 @@ public class BlocksAether
 
 	public static final BlockMasonryBench masonry_bench = new BlockMasonryBench();
 
-	public static final BlockRockGlassPane quicksoil_glass_pane = new BlockRockGlassPane(BlocksAether.quicksoil_glass),
+	public static final Block quicksoil_glass_pane = new BlockRockGlassPane(BlocksAether.quicksoil_glass).setLightLevel(1f),
 			scatterglass_pane = new BlockRockGlassPane(BlocksAether.scatterglass),
 			crude_scatterglass_pane = new BlockRockGlassPane(BlocksAether.crude_scatterglass);
 
 
-	public static final BlockRockGlassPaneDecorative quicksoil_glass_pane_decorative = new BlockRockGlassPaneDecorative(BlocksAether.quicksoil_glass),
+	public static final Block quicksoil_glass_pane_decorative = new BlockRockGlassPaneDecorative(BlocksAether.quicksoil_glass).setLightLevel(1f),
 			scatterglass_pane_decorative = new BlockRockGlassPaneDecorative(BlocksAether.scatterglass),
 			crude_scatterglass_pane_decorative = new BlockRockGlassPaneDecorative(BlocksAether.crude_scatterglass);
 
@@ -324,7 +324,7 @@ public class BlocksAether
 		registerBlock("agiosite_pillar", BlocksAether.agiosite_pillar.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
 		registerBlock("skyroot_planks", BlocksAether.skyroot_planks.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-		registerBlock("skyroot_decorative", BlocksAether.skyroot_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+		registerBlock("skyroot_decorative", BlocksAether.skyroot_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS), new ItemBlockDecorative(BlocksAether.skyroot_decorative));
 
 		registerBlock("skyroot_beam", BlocksAether.skyroot_beam.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
