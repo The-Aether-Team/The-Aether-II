@@ -24,8 +24,8 @@ import java.util.List;
 
 public class BlockRockGlassPaneDecorative extends BlockPane
 {
-	public static final BlockVariant SKYROOT_FRAME = new BlockVariant(1, "skyroot_frame"),
-			ARKENIUM_FRAME = new BlockVariant(2, "arkenium_frame");
+	public static final BlockVariant SKYROOT_FRAME = new BlockVariant(0, "skyroot_frame"),
+			ARKENIUM_FRAME = new BlockVariant(1, "arkenium_frame");
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", SKYROOT_FRAME, ARKENIUM_FRAME);
 

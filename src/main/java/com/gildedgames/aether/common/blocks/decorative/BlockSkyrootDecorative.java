@@ -8,14 +8,14 @@ import net.minecraft.block.material.Material;
 
 public class BlockSkyrootDecorative extends BlockDecorative
 {
-	public static final BlockVariant BASE_PLANKS = new BlockVariant(1, "base_planks"),
-			BASE_BEAM = new BlockVariant(2, "base_beam"),
-			TOP_PLANKS = new BlockVariant(3, "top_planks"),
-			TOP_BEAM = new BlockVariant(4, "top_beam"),
-			FLOORBOARDS = new BlockVariant(5, "floorboards"),
-			HIGHLIGHT = new BlockVariant(6, "highlight"),
-			TILES = new BlockVariant(7, "tiles"),
-			TILES_SMALL = new BlockVariant(8, "tiles_small");
+	public static final BlockVariant BASE_PLANKS = new BlockVariant(0, "base_planks"),
+			BASE_BEAM = new BlockVariant(1, "base_beam"),
+			TOP_PLANKS = new BlockVariant(2, "top_planks"),
+			TOP_BEAM = new BlockVariant(3, "top_beam"),
+			FLOORBOARDS = new BlockVariant(4, "floorboards"),
+			HIGHLIGHT = new BlockVariant(5, "highlight"),
+			TILES = new BlockVariant(6, "tiles"),
+			TILES_SMALL = new BlockVariant(7, "tiles_small");
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BASE_PLANKS, BASE_BEAM, TOP_PLANKS, TOP_BEAM, FLOORBOARDS, HIGHLIGHT, TILES, TILES_SMALL);
 
