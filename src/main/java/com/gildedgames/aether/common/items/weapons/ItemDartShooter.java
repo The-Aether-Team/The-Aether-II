@@ -63,7 +63,7 @@ public class ItemDartShooter extends Item
 
 		if (ammoSlot > 0 || player.capabilities.isCreativeMode)
 		{
-			player.setActiveHand(EnumHand.MAIN_HAND);
+			player.setActiveHand(hand);
 		}
 
 		return new ActionResult<>(EnumActionResult.PASS, stack);

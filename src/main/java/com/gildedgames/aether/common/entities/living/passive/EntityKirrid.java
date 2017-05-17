@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.entities.ai.kirrid.EntityAIEatAetherGrass;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.google.common.collect.Sets;
@@ -30,6 +31,8 @@ public class EntityKirrid extends EntitySheep
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry);
 
+	private EntityAIEatAetherGrass entityAIEatGrass;
+	
 	public EntityKirrid(World world)
 	{
 		super(world);
@@ -39,6 +42,22 @@ public class EntityKirrid extends EntitySheep
 		this.setSize(1.0F, 1.5F);
 
 		this.spawnableBlock = BlocksAether.aether_grass;
+	}
+
+	@Override
+	protected void initEntityAI()
+	{
+		super.initEntityAI();
+
+		this.entityAIEatGrass = new EntityAIEatAetherGrass(this);
+
+		this.tasks.addTask(9, this.entityAIEatGrass);
+	}
+
+	@Override
+	protected void updateAITasks()
+	{
+		super.updateAITasks();
 	}
 
 	@Override

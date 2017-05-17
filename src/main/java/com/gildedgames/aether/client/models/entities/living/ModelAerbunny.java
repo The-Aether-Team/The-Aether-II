@@ -123,7 +123,23 @@ public class ModelAerbunny extends ModelBase
 
 		this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
 
+		float rotation = bunny.getRotation();
 		GlStateManager.translate(0F, 1.1F, -0.2F);
+		GlStateManager.rotate(rotation, 20f, 0f, 0f);
+
+		/*
+		Animation for the legs, because the rotation for the bunnie's jump is from -30 to 30, offsetting it allows the feet to be in a preset position,
+		and dividing it by a greater number than it will ever become keeps the value < 1f
+		 */
+		if (!bunny.onGround)
+		{
+			this.leg_front_right.rotateAngleX = (rotation + 20) / 30f;
+			this.leg_front_left.rotateAngleX = (rotation + 20) / 30f;
+			this.leg_back_right_base.rotateAngleX = ((rotation + 40) / 50f);
+			this.leg_back_left_base.rotateAngleX = ((rotation + 40) / 50f);
+			this.leg_back_right_foot.rotateAngleX = ((rotation + 40) / 50f) * -1.5f;
+			this.leg_back_left_foot.rotateAngleX = ((rotation + 40) / 50f) * -1.5f;
+		}
 
 		this.body.render(scale);
 
@@ -138,9 +154,6 @@ public class ModelAerbunny extends ModelBase
 		GlStateManager.popMatrix();
 	}
 
-	/**
-	 * This is a helper function from Tabula to set the rotation of model parts
-	 */
 	private void setRotateAngle(final ModelRenderer modelRenderer, final float x, final float y, final float z)
 	{
 		modelRenderer.rotateAngleX = x;
