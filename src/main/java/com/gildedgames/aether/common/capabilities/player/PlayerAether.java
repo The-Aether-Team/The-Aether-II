@@ -109,7 +109,6 @@ public class PlayerAether implements IPlayerAether
 		NetworkingAether.sendPacketToPlayer(new DiedInAetherPacket(this.hasDiedInAetherBefore()), (EntityPlayerMP) this.getEntity());
 	}
 
-	@Override
 	public void onUpdate(LivingUpdateEvent event)
 	{
 		for (PlayerAetherModule module : this.modules)
@@ -118,25 +117,21 @@ public class PlayerAether implements IPlayerAether
 		}
 	}
 
-	@Override
 	public void onRespawn(PlayerEvent.PlayerRespawnEvent event)
 	{
 		this.sendFullUpdate();
 	}
 
-	@Override
 	public void onPlaceBlock(BlockEvent.PlaceEvent event)
 	{
 
 	}
 
-	@Override
 	public void onDeath(LivingDeathEvent event)
 	{
 		this.gravititeAbilityModule.onDeath(event);
 	}
 
-	@Override
 	public void onDrops(PlayerDropsEvent event)
 	{
 		if (!this.getEntity().world.isRemote && !this.getEntity().world.getGameRules().getBoolean("keepInventory"))
@@ -153,7 +148,6 @@ public class PlayerAether implements IPlayerAether
 		}
 	}
 
-	@Override
 	public void onHurt(LivingHurtEvent event)
 	{
 		PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
@@ -170,13 +164,11 @@ public class PlayerAether implements IPlayerAether
 		}
 	}
 
-	@Override
 	public void onFall(LivingFallEvent event)
 	{
 		this.abilitiesModule.onFall(event);
 	}
 
-	@Override
 	public void onTeleport(PlayerEvent.PlayerChangedDimensionEvent event)
 	{
 		this.sendFullUpdate();
@@ -184,7 +176,6 @@ public class PlayerAether implements IPlayerAether
 		this.equipmentModule.onTeleport();
 	}
 
-	@Override
 	public void onPlayerBeginWatching(IPlayerAether other)
 	{
 		NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(this), (EntityPlayerMP) other.getEntity());

@@ -28,19 +28,19 @@ public class BlockRotatable extends Block
 	{
 		switch (rot)
 		{
-		case COUNTERCLOCKWISE_90:
-		case CLOCKWISE_90:
-			switch (state.getValue(PROPERTY_AXIS))
-			{
-			case X:
-				return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.Z);
-			case Z:
-				return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.X);
+			case COUNTERCLOCKWISE_90:
+			case CLOCKWISE_90:
+				switch (state.getValue(PROPERTY_AXIS))
+				{
+					case X:
+						return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.Z);
+					case Z:
+						return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.X);
+					default:
+						return state;
+				}
 			default:
 				return state;
-			}
-		default:
-			return state;
 		}
 	}
 
@@ -57,15 +57,15 @@ public class BlockRotatable extends Block
 
 		switch (meta & 7)
 		{
-		case 1:
-			axis = EnumFacing.Axis.X;
-			break;
-		case 2:
-			axis = EnumFacing.Axis.Z;
-			break;
-		default:
-			axis = EnumFacing.Axis.Y;
-			break;
+			case 1:
+				axis = EnumFacing.Axis.X;
+				break;
+			case 2:
+				axis = EnumFacing.Axis.Z;
+				break;
+			default:
+				axis = EnumFacing.Axis.Y;
+				break;
 		}
 
 		return this.getDefaultState().withProperty(PROPERTY_AXIS, axis);
@@ -78,15 +78,15 @@ public class BlockRotatable extends Block
 
 		switch (state.getValue(PROPERTY_AXIS))
 		{
-		case X:
-			meta |= 1;
-			break;
-		case Z:
-			meta |= 2;
-			break;
-		default:
-			meta |= 0;
-			break;
+			case X:
+				meta |= 1;
+				break;
+			case Z:
+				meta |= 2;
+				break;
+			default:
+				meta |= 0;
+				break;
 		}
 
 		return meta;

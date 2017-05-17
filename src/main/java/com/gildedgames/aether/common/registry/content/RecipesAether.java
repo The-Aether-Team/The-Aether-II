@@ -2,11 +2,8 @@ package com.gildedgames.aether.common.registry.content;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.construction.BlockQuicksoilGlass;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
-import com.gildedgames.aether.common.blocks.natural.BlockCrudeScatterglass;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
-import com.gildedgames.aether.common.blocks.natural.BlockScatterglass;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockWovenSticks;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -104,29 +101,29 @@ public class RecipesAether
 		registerShapedRecipe(new ItemStack(BlocksAether.quicksoil_glass_pane, 16), "XXX", "XXX",
 				'X', BlocksAether.quicksoil_glass);
 
-		registerShapedRecipe(new ItemStack(BlocksAether.arkenium_frame_quicksoil_glass_pane, 16), "XXX", "XXX",
-				'X', new ItemStack(BlocksAether.quicksoil_glass, 1, BlockQuicksoilGlass.ARKENIUM_FRAME.getMeta()));
-
-		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_frame_quicksoil_glass_pane, 16), "XXX", "XXX",
-				'X', new ItemStack(BlocksAether.quicksoil_glass, 1, BlockQuicksoilGlass.SKYROOT_FRAME.getMeta()));
+//		registerShapedRecipe(new ItemStack(BlocksAether.arkenium_frame_quicksoil_glass_pane, 16), "XXX", "XXX",
+//				'X', new ItemStack(BlocksAether.quicksoil_glass, 1, BlockFrameGlassDecorative.ARKENIUM_FRAME.getMeta()));
+//
+//		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_frame_quicksoil_glass_pane, 16), "XXX", "XXX",
+//				'X', new ItemStack(BlocksAether.quicksoil_glass, 1, BlockFrameGlassDecorative.SKYROOT_FRAME.getMeta()));
 
 		registerShapedRecipe(new ItemStack(BlocksAether.scatterglass_pane, 16), "XXX", "XXX",
 				'X', BlocksAether.scatterglass);
 
-		registerShapedRecipe(new ItemStack(BlocksAether.arkenium_frame_scatterglass_pane, 16), "XXX", "XXX",
-				'X', new ItemStack(BlocksAether.scatterglass, 1, BlockScatterglass.ARKENIUM_FRAME.getMeta()));
-
-		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_frame_scatterglass_pane, 16), "XXX", "XXX",
-				'X', new ItemStack(BlocksAether.scatterglass, 1, BlockScatterglass.SKYROOT_FRAME.getMeta()));
+//		registerShapedRecipe(new ItemStack(BlocksAether.arkenium_frame_scatterglass_pane, 16), "XXX", "XXX",
+//				'X', new ItemStack(BlocksAether.scatterglass, 1, BlockFrameGlassDecorative.ARKENIUM_FRAME.getMeta()));
+//
+//		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_frame_scatterglass_pane, 16), "XXX", "XXX",
+//				'X', new ItemStack(BlocksAether.scatterglass, 1, BlockFrameGlassDecorative.SKYROOT_FRAME.getMeta()));
 
 		registerShapedRecipe(new ItemStack(BlocksAether.crude_scatterglass_pane, 16), "XXX", "XXX",
 				'X', BlocksAether.crude_scatterglass);
 
-		registerShapedRecipe(new ItemStack(BlocksAether.arkenium_frame_crude_scatterglass_pane, 16), "XXX", "XXX",
-				'X', new ItemStack(BlocksAether.crude_scatterglass, 1, BlockCrudeScatterglass.ARKENIUM_FRAME.getMeta()));
-
-		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_frame_crude_scatterglass_pane, 16), "XXX", "XXX",
-				'X', new ItemStack(BlocksAether.crude_scatterglass, 1, BlockCrudeScatterglass.SKYROOT_FRAME.getMeta()));
+//		registerShapedRecipe(new ItemStack(BlocksAether.arkenium_frame_crude_scatterglass_pane, 16), "XXX", "XXX",
+//				'X', new ItemStack(BlocksAether.crude_scatterglass, 1, BlockFrameGlassDecorative.ARKENIUM_FRAME.getMeta()));
+//
+//		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_frame_crude_scatterglass_pane, 16), "XXX", "XXX",
+//				'X', new ItemStack(BlocksAether.crude_scatterglass, 1, BlockFrameGlassDecorative.SKYROOT_FRAME.getMeta()));
 
 		registerShapedRecipe(new ItemStack(BlocksAether.cloudwool_carpet, 3), "XX",
 				'X', BlocksAether.cloudwool_block);

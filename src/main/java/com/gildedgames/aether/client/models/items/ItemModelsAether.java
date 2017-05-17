@@ -3,18 +3,21 @@ package com.gildedgames.aether.client.models.items;
 import com.gildedgames.aether.client.util.ItemModelBuilder;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.construction.*;
 import com.gildedgames.aether.common.blocks.containers.BlockAetherCraftingTable;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
-import com.gildedgames.aether.common.blocks.natural.*;
+import com.gildedgames.aether.common.blocks.decorative.*;
+import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
+import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.natural.plants.*;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
+import com.gildedgames.aether.common.entities.tiles.*;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
-import com.gildedgames.aether.common.entities.tiles.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -101,32 +104,40 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.icestone_ore, "icestone_ore");
 		registerItemModels(BlocksAether.icestone_bricks, "icestone_bricks");
 
-		registerItemModels(BlocksAether.crude_scatterglass, new ItemModelBuilder("crude_scatterglass/")
-				.add(BlockCrudeScatterglass.NORMAL.getMeta(), "normal")
-				.add(BlockCrudeScatterglass.SKYROOT_FRAME.getMeta(), "skyroot_frame")
-				.add(BlockCrudeScatterglass.ARKENIUM_FRAME.getMeta(), "arkenium_frame"));
+		registerItemModels(BlocksAether.quicksoil_glass, "quicksoil_glass/normal");
+		registerItemModels(BlocksAether.quicksoil_glass_decorative, new ItemModelBuilder("quicksoil_glass/")
+				.add(BlockRockGlassDecorative.SKYROOT_FRAME.getMeta(), "skyroot_frame")
+				.add(BlockRockGlassDecorative.ARKENIUM_FRAME.getMeta(), "arkenium_frame"));
 
-		registerItemModels(BlocksAether.scatterglass, new ItemModelBuilder("scatterglass/")
-				.add(BlockScatterglass.NORMAL.getMeta(), "normal")
-				.add(BlockScatterglass.SKYROOT_FRAME.getMeta(), "skyroot_frame")
-				.add(BlockScatterglass.ARKENIUM_FRAME.getMeta(), "arkenium_frame"));
+		registerItemModels(BlocksAether.crude_scatterglass, "crude_scatterglass/normal");
+		registerItemModels(BlocksAether.crude_scatterglass_decorative, new ItemModelBuilder("crude_scatterglass/")
+				.add(BlockRockGlassDecorative.SKYROOT_FRAME.getMeta(), "skyroot_frame")
+				.add(BlockRockGlassDecorative.ARKENIUM_FRAME.getMeta(), "arkenium_frame"));
+
+		registerItemModels(BlocksAether.scatterglass, "scatterglass/normal");
+		registerItemModels(BlocksAether.scatterglass_decorative, new ItemModelBuilder("scatterglass/")
+				.add(BlockRockGlassDecorative.SKYROOT_FRAME.getMeta(), "skyroot_frame")
+				.add(BlockRockGlassDecorative.ARKENIUM_FRAME.getMeta(), "arkenium_frame"));
+
+		registerItemModels(BlocksAether.quicksoil_glass_pane, "glass_pane/quicksoil_glass");
+		registerItemModels(BlocksAether.quicksoil_glass_pane_decorative, new ItemModelBuilder("glass_pane/")
+				.add(BlockRockGlassPaneDecorative.SKYROOT_FRAME.getMeta(), "quicksoil_glass_skyroot")
+				.add(BlockRockGlassPaneDecorative.ARKENIUM_FRAME.getMeta(), "quicksoil_glass_arkenium"));
+
+		registerItemModels(BlocksAether.scatterglass_pane, "glass_pane/scatterglass");
+		registerItemModels(BlocksAether.scatterglass_pane_decorative, new ItemModelBuilder("glass_pane/")
+				.add(BlockRockGlassPaneDecorative.SKYROOT_FRAME.getMeta(), "scatterglass_skyroot")
+				.add(BlockRockGlassPaneDecorative.ARKENIUM_FRAME.getMeta(), "scatterglass_arkenium"));
+
+		registerItemModels(BlocksAether.crude_scatterglass_pane, "glass_pane/crude_scatterglass");
+		registerItemModels(BlocksAether.crude_scatterglass_pane_decorative, new ItemModelBuilder("glass_pane/")
+				.add(BlockRockGlassPaneDecorative.SKYROOT_FRAME.getMeta(), "crude_scatterglass_skyroot")
+				.add(BlockRockGlassPaneDecorative.ARKENIUM_FRAME.getMeta(), "crude_scatterglass_arkenium"));
 
 		registerItemModels(BlocksAether.skyroot_twigs, "skyroot_twigs");
 		registerItemModels(BlocksAether.holystone_rock, "holystone_rock");
 
 		registerItemModels(BlocksAether.cloudwool_carpet, "cloudwool_carpet");
-
-		registerItemModels(BlocksAether.quicksoil_glass_pane, "glass_pane/quicksoil_glass");
-		registerItemModels(BlocksAether.arkenium_frame_quicksoil_glass_pane, "glass_pane/arkenium_frame_quicksoil_glass");
-		registerItemModels(BlocksAether.skyroot_frame_quicksoil_glass_pane, "glass_pane/skyroot_frame_quicksoil_glass");
-
-		registerItemModels(BlocksAether.scatterglass_pane, "glass_pane/scatterglass");
-		registerItemModels(BlocksAether.arkenium_frame_scatterglass_pane, "glass_pane/arkenium_frame_scatterglass");
-		registerItemModels(BlocksAether.skyroot_frame_scatterglass_pane, "glass_pane/skyroot_frame_scatterglass");
-
-		registerItemModels(BlocksAether.crude_scatterglass_pane, "glass_pane/crude_scatterglass");
-		registerItemModels(BlocksAether.arkenium_frame_crude_scatterglass_pane, "glass_pane/arkenium_frame_crude_scatterglass");
-		registerItemModels(BlocksAether.skyroot_frame_crude_scatterglass_pane, "glass_pane/skyroot_frame_crude_scatterglass");
 
 		registerItemModels(BlocksAether.aether_crafting_table, new ItemModelBuilder("crafting_tables/")
 				.add(BlockAetherCraftingTable.SKYROOT.getMeta(), "skyroot_crafting_table"));
@@ -143,60 +154,59 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.zanite_block, "zanite_block");
 		registerItemModels(BlocksAether.gravitite_block, "gravitite_block");
 
-		registerItemModels(BlocksAether.holystone_brick, new ItemModelBuilder("holystone_bricks/")
-				.add(BlockHolystoneBrick.NORMAL.getMeta(), "normal")
-				.add(BlockHolystoneBrick.BASE_BRICKS.getMeta(), "base_bricks")
-				.add(BlockHolystoneBrick.BASE_PILLAR.getMeta(), "base_pillar")
-				.add(BlockHolystoneBrick.CAPSTONE_BRICKS.getMeta(), "capstone_bricks")
-				.add(BlockHolystoneBrick.CAPSTONE_PILLAR.getMeta(), "capstone_pillar")
-				.add(BlockHolystoneBrick.FLAGSTONES.getMeta(), "flagstones")
-				.add(BlockHolystoneBrick.HEADSTONE.getMeta(), "headstone")
-				.add(BlockHolystoneBrick.KEYSTONE.getMeta(), "keystone"));
+		registerItemModels(BlocksAether.holystone_brick_decorative, new ItemModelBuilder("holystone_bricks/")
+				.add(BlockHolystoneDecorative.BASE_BRICKS.getMeta(), "base_bricks")
+				.add(BlockHolystoneDecorative.BASE_PILLAR.getMeta(), "base_pillar")
+				.add(BlockHolystoneDecorative.CAPSTONE_BRICKS.getMeta(), "capstone_bricks")
+				.add(BlockHolystoneDecorative.CAPSTONE_PILLAR.getMeta(), "capstone_pillar")
+				.add(BlockHolystoneDecorative.FLAGSTONES.getMeta(), "flagstones")
+				.add(BlockHolystoneDecorative.HEADSTONE.getMeta(), "headstone")
+				.add(BlockHolystoneDecorative.KEYSTONE.getMeta(), "keystone"));
+
+		registerItemModels(BlocksAether.holystone_brick, "holystone_bricks/normal");
 
 		registerItemModels(BlocksAether.holystone_pillar, "holystone_bricks/pillar");
 
-		registerItemModels(BlocksAether.faded_holystone_brick, new ItemModelBuilder("faded_holystone_bricks/")
-				.add(BlockFadedHolystoneBrick.NORMAL.getMeta(), "normal")
-				.add(BlockFadedHolystoneBrick.BASE_BRICKS.getMeta(), "base_bricks")
-				.add(BlockFadedHolystoneBrick.BASE_PILLAR.getMeta(), "base_pillar")
-				.add(BlockFadedHolystoneBrick.CAPSTONE_BRICKS.getMeta(), "capstone_bricks")
-				.add(BlockFadedHolystoneBrick.CAPSTONE_PILLAR.getMeta(), "capstone_pillar")
-				.add(BlockFadedHolystoneBrick.FLAGSTONES.getMeta(), "flagstones")
-				.add(BlockFadedHolystoneBrick.HEADSTONE.getMeta(), "headstone")
-				.add(BlockFadedHolystoneBrick.KEYSTONE.getMeta(), "keystone"));
+		registerItemModels(BlocksAether.faded_holystone_brick, "faded_holystone_bricks/normal");
+
+		registerItemModels(BlocksAether.faded_holystone_brick_decorative, new ItemModelBuilder("faded_holystone_bricks/")
+				.add(BlockFadedHolystoneDecorative.BASE_BRICKS.getMeta(), "base_bricks")
+				.add(BlockFadedHolystoneDecorative.BASE_PILLAR.getMeta(), "base_pillar")
+				.add(BlockFadedHolystoneDecorative.CAPSTONE_BRICKS.getMeta(), "capstone_bricks")
+				.add(BlockFadedHolystoneDecorative.CAPSTONE_PILLAR.getMeta(), "capstone_pillar")
+				.add(BlockFadedHolystoneDecorative.FLAGSTONES.getMeta(), "flagstones")
+				.add(BlockFadedHolystoneDecorative.HEADSTONE.getMeta(), "headstone")
+				.add(BlockFadedHolystoneDecorative.KEYSTONE.getMeta(), "keystone"));
 
 		registerItemModels(BlocksAether.faded_holystone_pillar, "faded_holystone_bricks/pillar");
 
 		registerItemModels(BlocksAether.agiosite, "agiosite");
 
-		registerItemModels(BlocksAether.agiosite_brick, new ItemModelBuilder("agiosite_bricks/")
-				.add(BlockAgiositeBrick.NORMAL.getMeta(), "normal")
-				.add(BlockAgiositeBrick.BASE_BRICKS.getMeta(), "base_bricks")
-				.add(BlockAgiositeBrick.BASE_PILLAR.getMeta(), "base_pillar")
-				.add(BlockAgiositeBrick.CAPSTONE_BRICKS.getMeta(), "capstone_bricks")
-				.add(BlockAgiositeBrick.CAPSTONE_PILLAR.getMeta(), "capstone_pillar")
-				.add(BlockAgiositeBrick.FLAGSTONES.getMeta(), "flagstones")
-				.add(BlockAgiositeBrick.KEYSTONE.getMeta(), "keystone"));
+		registerItemModels(BlocksAether.agiosite_brick, "agiosite_bricks/normal");
+
+		registerItemModels(BlocksAether.agiosite_brick_decorative, new ItemModelBuilder("agiosite_bricks/")
+				.add(BlockAgiositeDecorative.BASE_BRICKS.getMeta(), "base_bricks")
+				.add(BlockAgiositeDecorative.BASE_PILLAR.getMeta(), "base_pillar")
+				.add(BlockAgiositeDecorative.CAPSTONE_BRICKS.getMeta(), "capstone_bricks")
+				.add(BlockAgiositeDecorative.CAPSTONE_PILLAR.getMeta(), "capstone_pillar")
+				.add(BlockAgiositeDecorative.FLAGSTONES.getMeta(), "flagstones")
+				.add(BlockAgiositeDecorative.KEYSTONE.getMeta(), "keystone"));
 
 		registerItemModels(BlocksAether.agiosite_pillar, "agiosite_bricks/pillar");
 
-		registerItemModels(BlocksAether.skyroot_planks, new ItemModelBuilder("skyroot_planks/")
-				.add(BlockSkyrootPlanks.NORMAL.getMeta(), "normal")
-				.add(BlockSkyrootPlanks.BASE_PLANKS.getMeta(), "base_planks")
-				.add(BlockSkyrootPlanks.BASE_BEAM.getMeta(), "base_beam")
-				.add(BlockSkyrootPlanks.TOP_PLANKS.getMeta(), "top_planks")
-				.add(BlockSkyrootPlanks.TOP_BEAM.getMeta(), "top_beam")
-				.add(BlockSkyrootPlanks.FLOORBOARDS.getMeta(), "floorboards")
-				.add(BlockSkyrootPlanks.HIGHLIGHT.getMeta(), "highlight")
-				.add(BlockSkyrootPlanks.TILES.getMeta(), "tiles")
-				.add(BlockSkyrootPlanks.TILES_SMALL.getMeta(), "tiles_small"));
+		registerItemModels(BlocksAether.skyroot_planks, "skyroot_planks/normal");
+
+		registerItemModels(BlocksAether.skyroot_decorative, new ItemModelBuilder("skyroot_planks/")
+				.add(BlockSkyrootDecorative.BASE_PLANKS.getMeta(), "base_planks")
+				.add(BlockSkyrootDecorative.BASE_BEAM.getMeta(), "base_beam")
+				.add(BlockSkyrootDecorative.TOP_PLANKS.getMeta(), "top_planks")
+				.add(BlockSkyrootDecorative.TOP_BEAM.getMeta(), "top_beam")
+				.add(BlockSkyrootDecorative.FLOORBOARDS.getMeta(), "floorboards")
+				.add(BlockSkyrootDecorative.HIGHLIGHT.getMeta(), "highlight")
+				.add(BlockSkyrootDecorative.TILES.getMeta(), "tiles")
+				.add(BlockSkyrootDecorative.TILES_SMALL.getMeta(), "tiles_small"));
 
 		registerItemModels(BlocksAether.skyroot_beam, "skyroot_planks/beam");
-
-		registerItemModels(BlocksAether.quicksoil_glass, new ItemModelBuilder("quicksoil_glass/")
-				.add(BlockQuicksoilGlass.NORMAL.getMeta(), "normal")
-				.add(BlockQuicksoilGlass.SKYROOT_FRAME.getMeta(), "skyroot_frame")
-				.add(BlockQuicksoilGlass.ARKENIUM_FRAME.getMeta(), "arkenium_frame"));
 
 		registerItemModels(BlocksAether.aether_portal, "aether_portal");
 

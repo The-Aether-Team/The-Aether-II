@@ -1,0 +1,11 @@
+{
+  "variants": {
+	"variant=skyroot_frame": [
+	  { "model": "aether:quicksoil_glass/skyroot_frame" }
+	],
+	"variant=arkenium_frame": [
+	  { "model": "aether:quicksoil_glass/arkenium_frame" }
+	]
+  }
+}
+

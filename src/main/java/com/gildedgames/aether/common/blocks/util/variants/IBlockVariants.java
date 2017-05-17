@@ -4,5 +4,5 @@ import net.minecraft.item.ItemStack;
 
 public interface IBlockVariants
 {
-	String getUnlocalizedName(ItemStack stack);
+	String getVariantName(ItemStack stack);
 }

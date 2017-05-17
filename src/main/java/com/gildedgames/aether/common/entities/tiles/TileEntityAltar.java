@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.entities.tiles;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.recipes.altar.IAltarRecipe;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.construction.BlockAltar;
+import com.gildedgames.aether.common.blocks.containers.BlockAltar;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.entities.tiles.util.TileEntitySynced;
 import net.minecraft.block.state.IBlockState;

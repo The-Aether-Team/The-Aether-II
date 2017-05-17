@@ -1,20 +1,16 @@
 package com.gildedgames.aether.common.registry.content;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.construction.BlockSkyrootPlanks;
+import com.gildedgames.aether.common.blocks.decorative.BlockSkyrootDecorative;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityList;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.EntityEntry;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -27,7 +23,7 @@ public class CreativeTabsAether
 
 	public static final CreativeTab UTILITY = new CreativeTab("aether.utility_blocks");
 
-	public static final CreativeTab VISUAL_VARIANTS = new CreativeTab("aether.visual_variants");
+	public static final CreativeTab DECORATIVE_BLOCKS = new CreativeTab("aether.visual_variants");
 
 	public static final CreativeTab MISCELLANEOUS = new CreativeTabMisc("aether.miscellaneous");
 
@@ -60,7 +56,7 @@ public class CreativeTabsAether
 	{
 		NATURAL_BLOCKS.setDisplayStack(new ItemStack(BlocksAether.aether_grass, 1, BlockAetherGrass.AETHER.getMeta()));
 		CONSTRUCTION.setDisplayStack(new ItemStack(BlocksAether.holystone_brick));
-		VISUAL_VARIANTS.setDisplayStack(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootPlanks.HIGHLIGHT.getMeta()));
+		DECORATIVE_BLOCKS.setDisplayStack(new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.HIGHLIGHT.getMeta()));
 		UTILITY.setDisplayStack(new ItemStack(BlocksAether.altar));
 		MATERIALS.setDisplayStack(new ItemStack(ItemsAether.ambrosium_shard));
 		TOOLS.setDisplayStack(new ItemStack(ItemsAether.zanite_pickaxe));

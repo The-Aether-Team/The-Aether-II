@@ -28,7 +28,7 @@ public class ItemBlockVariants extends ItemBlock
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		return super.getUnlocalizedName() + "." + this.blockWithVariants.getUnlocalizedName(stack);
+		return super.getUnlocalizedName() + "." + this.blockWithVariants.getVariantName(stack);
 	}
 
 }

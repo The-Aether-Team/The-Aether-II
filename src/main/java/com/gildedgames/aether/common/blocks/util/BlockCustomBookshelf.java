@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.blocks.construction;
+package com.gildedgames.aether.common.blocks.util;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

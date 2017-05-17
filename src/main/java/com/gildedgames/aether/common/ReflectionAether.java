@@ -116,4 +116,16 @@ public class ReflectionAether
 			throw new RuntimeException("Failed to fetch field value", e);
 		}
 	}
+
+	public static void setValue(Field field, Object instance, Object value)
+	{
+		try
+		{
+			field.set(instance, value);
+		}
+		catch (IllegalAccessException e)
+		{
+			throw new RuntimeException("Failed to fetch field value", e);
+		}
+	}
 }

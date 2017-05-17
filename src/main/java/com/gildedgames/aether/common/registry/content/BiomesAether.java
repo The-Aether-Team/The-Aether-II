@@ -13,7 +13,7 @@ public class BiomesAether
 
 	public static final Biome VOID = new BiomeVoid();
 
-	public static void preInit()
+	public static void init()
 	{
 		GameRegistry.register(HIGHLANDS);
 		GameRegistry.register(VOID);

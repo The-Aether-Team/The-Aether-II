@@ -80,7 +80,7 @@ public class RenderTabGroup extends Gui
 		//this.drawTexturedModalRect(centerX, topY, 194 - width / 2, 0, width / 2, 15);
 		//this.drawTexturedModalRect(centerX, topY + 15, 194 - width / 2, 130, width / 2, 5);
 
-		//this.drawCenteredString(mc.fontRendererObj, I18n.translateToLocal(tabGroup.getSelectedTab().getUnlocalizedName()), centerX, topY + 8, 0xFFFFFFFF);
+		//this.drawCenteredString(mc.fontRendererObj, I18n.translateToLocal(tabGroup.getSelectedTab().getVariantName()), centerX, topY + 8, 0xFFFFFFFF);
 
 		for (ITabClient tab : tabGroup.getEnabledTabs())
 		{

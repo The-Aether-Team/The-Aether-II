@@ -14,37 +14,26 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensio
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 
+/**
+ * The Aether's extended player capability that manages all Aether-related additions
+ * and states.
+ */
 public interface IPlayerAether
 {
+	/**
+	 * @return The player's {@link IEquipmentModule} that is responsible for updating and managing it's
+	 * equipment.
+	 */
 	IEquipmentModule getEquipmentModule();
 
+	/**
+	 * @return The player's {@link IDialogController} that is responsible for managing the player's
+	 * dialog state.
+	 */
 	IDialogController getDialogController();
 
-	void onRespawn(PlayerEvent.PlayerRespawnEvent event);
-
-	void onPlaceBlock(BlockEvent.PlaceEvent event);
-
-	void onUpdate(LivingUpdateEvent event);
-
-	void onDeath(LivingDeathEvent event);
-
-	void onDrops(PlayerDropsEvent event);
-
-	void onHurt(LivingHurtEvent event);
-
-	void onFall(LivingFallEvent event);
-
-	void onTeleport(PlayerChangedDimensionEvent event);
-
 	/**
-	 * Called when another {@link IPlayerAether} begins watching this player.
-	 *
-	 * @param other The entity that has begun watching us
-	 */
-	void onPlayerBeginWatching(IPlayerAether other);
-
-	/**
-	 * @return The {@link EntityPlayer} this capability is attached to.
+	 * @return The {@link EntityPlayer} entity this capability belongs to.
 	 */
 	EntityPlayer getEntity();
 
@@ -53,7 +42,15 @@ public interface IPlayerAether
 	 */
 	float getMiningSpeedMultiplier();
 
+	/**
+	 * Writes this capability to {@param tag}.
+	 * @param tag The {@link NBTTagCompound} to write to
+	 */
 	void write(NBTTagCompound tag);
 
+	/**
+	 * Updates this capability from {@param tag}.
+	 * @param tag The {@link NBTTagCompound} to read from
+	 */
 	void read(NBTTagCompound tag);
 }

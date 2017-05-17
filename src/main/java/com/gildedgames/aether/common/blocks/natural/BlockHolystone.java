@@ -101,7 +101,7 @@ public class BlockHolystone extends Block implements IBlockVariants
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack)
+	public String getVariantName(ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}

@@ -17,7 +17,7 @@ public class DimensionsAether
 {
 	public static DimensionType AETHER;
 
-	public static void preInit()
+	public static void init()
 	{
 		// Register dimension types
 		DimensionsAether.AETHER = DimensionType.register("Aether", "_aether",

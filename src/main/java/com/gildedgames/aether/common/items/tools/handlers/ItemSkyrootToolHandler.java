@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.items.tools.handlers;
 
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
-import com.gildedgames.aether.common.blocks.util.ISkyrootMinable;
 import com.gildedgames.aether.common.world.chunk.capabilities.ChunkAttachment;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
@@ -46,23 +45,11 @@ public class ItemSkyrootToolHandler implements IToolEventHandler
 			{
 				int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
 
-				if (state.getBlock() instanceof ISkyrootMinable)
-				{
-					ISkyrootMinable doubleBlock = (ISkyrootMinable) state.getBlock();
+				List<ItemStack> copy = new ArrayList<>(drops);
 
-					if (doubleBlock.canBlockDropDoubles(entity, stack, state))
-					{
-						drops.addAll(doubleBlock.getAdditionalDrops(world, pos, state, entity));
-					}
-				}
-				else
+				for (int i = 0; i < fortune + 1; i++)
 				{
-					List<ItemStack> copy = new ArrayList<>(drops);
-
-					for (int i = 0; i < fortune + 1; i++)
-					{
-						drops.addAll(copy);
-					}
+					drops.addAll(copy);
 				}
 			}
 		}

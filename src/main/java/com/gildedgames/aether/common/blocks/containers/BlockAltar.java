@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.blocks.construction;
+package com.gildedgames.aether.common.blocks.containers;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.common.items.ItemsAether;

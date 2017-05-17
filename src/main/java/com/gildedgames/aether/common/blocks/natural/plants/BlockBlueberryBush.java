@@ -200,7 +200,7 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVarian
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack)
+	public String getVariantName(ItemStack stack)
 	{
 		switch (stack.getMetadata())
 		{

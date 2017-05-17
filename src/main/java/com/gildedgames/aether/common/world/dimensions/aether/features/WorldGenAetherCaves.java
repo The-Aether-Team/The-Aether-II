@@ -212,7 +212,7 @@ public class WorldGenAetherCaves extends MapGenBase
 	 * Recursively called by generate()
 	 */
 	@Override
-	protected void recursiveGenerate(World worldIn, int chunkX, int chunkZ, int p_180701_4_, int p_180701_5_, ChunkPrimer chunkPrimerIn)
+	protected void recursiveGenerate(World worldIn, int chunkX, int chunkZ, int originalX, int originalZ, ChunkPrimer primer)
 	{
 		int i = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(15) + 1) + 1);
 
@@ -223,19 +223,20 @@ public class WorldGenAetherCaves extends MapGenBase
 
 		for (int j = 0; j < i; ++j)
 		{
-			double d0 = (double) (chunkX * 16 + this.rand.nextInt(16));
-			double d1 = (double) this.rand.nextInt(this.rand.nextInt(240) + 8);
-			double d2 = (double) (chunkZ * 16 + this.rand.nextInt(16));
+			double x = (double) (chunkX * 16 + this.rand.nextInt(16));
+			double y = (double) this.rand.nextInt(this.rand.nextInt(240) + 8);
+			double z = (double) (chunkZ * 16 + this.rand.nextInt(16));
 
-			int k = 1;
+			int tunnels = 1;
 
 			if (this.rand.nextInt(4) == 0)
 			{
-				this.addRoom(this.rand.nextLong(), p_180701_4_, p_180701_5_, chunkPrimerIn, d0, d1, d2);
-				k += this.rand.nextInt(4);
+				this.addRoom(this.rand.nextLong(), originalX, originalZ, primer, x, y, z);
+
+				tunnels += this.rand.nextInt(4);
 			}
 
-			for (int l = 0; l < k; ++l)
+			for (int l = 0; l < tunnels; ++l)
 			{
 				float f = this.rand.nextFloat() * ((float) Math.PI * 2F);
 				float f1 = (this.rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
@@ -246,7 +247,7 @@ public class WorldGenAetherCaves extends MapGenBase
 					f2 *= this.rand.nextFloat() * this.rand.nextFloat() * 3.0F + 1.0F;
 				}
 
-				this.addTunnel(this.rand.nextLong(), p_180701_4_, p_180701_5_, chunkPrimerIn, d0, d1, d2, f2, f, f1, 0, 0, 1.0D);
+				this.addTunnel(this.rand.nextLong(), originalX, originalZ, primer, x, y, z, f2, f, f1, 0, 0, 1.0D);
 			}
 		}
 	}

@@ -4,7 +4,6 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.living.companions.*;
 import com.gildedgames.aether.common.items.armor.*;
 import com.gildedgames.aether.common.items.companions.ItemCompanion;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
@@ -35,8 +34,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Optional;
-
 
 public class ItemsAether
 {
@@ -595,7 +592,7 @@ public class ItemsAether
 		registerItem("valkyrie_lance", valkyrie_lance);
 
 		registerItem("skyroot_door_item", skyroot_door.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-		registerItem("secret_skyroot_door_item", secret_skyroot_door.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
+		registerItem("secret_skyroot_door_item", secret_skyroot_door.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 		registerItem("arkenium_door_item", arkenium_door.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		//registerItem("blightwillow_door_item", blightwillow_door_item.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		//registerItem("earthshifter_door_item", earthshifter_door_item.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));

@@ -1,32 +1,7 @@
 {
 	"variants": {
-		"variant=normal": [
+		"normal": [
 			{ "model": "aether:skyroot_planks/normal" }
-		],
-		"variant=base_planks": [
-			{ "model": "aether:skyroot_planks/base_planks" }
-		],
-		"variant=base_beam": [
-			{ "model": "aether:skyroot_planks/base_beam" }
-		],
-		"variant=top_planks": [
-			{ "model": "aether:skyroot_planks/top_planks" }
-		],
-		"variant=top_beam": [
-			{ "model": "aether:skyroot_planks/top_beam" }
-		],
-		"variant=floorboards": [
-			{ "model": "aether:skyroot_planks/floorboards" }
-		],
-		"variant=highlight": [
-			{ "model": "aether:skyroot_planks/highlight" }
-		],
-		"variant=tiles": [
-			{ "model": "aether:skyroot_planks/tiles" }
-		],
-		"variant=tiles_small": [
-			{ "model": "aether:skyroot_planks/tiles_small" }
-
 		]
 	}
 }

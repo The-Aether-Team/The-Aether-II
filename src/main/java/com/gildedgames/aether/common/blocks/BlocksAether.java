@@ -12,6 +12,7 @@ import com.gildedgames.aether.common.blocks.construction.walls.BlockCustomWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockScatterglassWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockSkyrootWall;
 import com.gildedgames.aether.common.blocks.containers.*;
+import com.gildedgames.aether.common.blocks.decorative.*;
 import com.gildedgames.aether.common.blocks.misc.BlockMoaEgg;
 import com.gildedgames.aether.common.blocks.misc.BlockOutpostCampfire;
 import com.gildedgames.aether.common.blocks.natural.*;
@@ -22,6 +23,7 @@ import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummy;
 import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummyHalf;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.blocks.ItemAetherSlab;
+import com.gildedgames.aether.common.items.blocks.ItemBlockDecorative;
 import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import com.gildedgames.aether.common.items.blocks.ItemBlockVariants;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
@@ -48,23 +50,37 @@ public class BlocksAether
 
 	public static final BlockHolystone holystone = new BlockHolystone();
 
-	public static final BlockHolystoneBrick holystone_brick = new BlockHolystoneBrick();
+	public static final Block holystone_brick = new BlockCustom(Material.ROCK)
+			.setSoundType(SoundType.STONE).setHardness(2.0f);
 
-	public static final BlockHolystonePillar holystone_pillar = new BlockHolystonePillar();
+	public static final BlockHolystoneDecorative holystone_brick_decorative = new BlockHolystoneDecorative();
 
-	public static final BlockFadedHolystoneBrick faded_holystone_brick = new BlockFadedHolystoneBrick();
+	public static final Block holystone_pillar = new BlockParentPillar(Material.ROCK, BlocksAether.holystone_brick)
+			.setSoundType(SoundType.STONE).setHardness(2.0f);
 
-	public static final BlockFadedHolystonePillar faded_holystone_pillar = new BlockFadedHolystonePillar();
+	public static final Block faded_holystone_brick = new BlockCustom(Material.ROCK)
+			.setSoundType(SoundType.STONE).setHardness(2.0f);
 
-	public static final BlockAgiosite agiosite = new BlockAgiosite();
+	public static final BlockFadedHolystoneDecorative faded_holystone_brick_decorative = new BlockFadedHolystoneDecorative();
 
-	public static final BlockAgiositeBrick agiosite_brick = new BlockAgiositeBrick();
+	public static final Block faded_holystone_pillar = new BlockParentPillar(Material.ROCK, BlocksAether.faded_holystone_brick)
+			.setSoundType(SoundType.STONE).setHardness(2.0f);
 
-	public static final BlockAgiositePillar agiosite_pillar = new BlockAgiositePillar();
+	public static final Block agiosite = new BlockCustom(Material.ROCK)
+			.setSoundType(SoundType.STONE).setHardness(2.0f);
+
+	public static final Block agiosite_brick = new BlockCustom(Material.ROCK)
+			.setSoundType(SoundType.STONE).setHardness(2.0f);
+
+	public static final BlockAgiositeDecorative agiosite_brick_decorative = new BlockAgiositeDecorative();
+
+	public static final Block agiosite_pillar = new BlockParentPillar(Material.ROCK, BlocksAether.agiosite_brick)
+			.setSoundType(SoundType.STONE).setHardness(2.0f);
 
 	public static final BlockSkyrootPlanks skyroot_planks = new BlockSkyrootPlanks();
 
-	public static final BlockSkyrootBeam skyroot_beam = new BlockSkyrootBeam();
+	public static final Block skyroot_beam = new BlockParentPillar(Material.WOOD, BlocksAether.skyroot_planks)
+			.setSoundType(SoundType.WOOD).setHardness(2.0f);
 
 	public static final BlockAercloud aercloud = new BlockAercloud();
 
@@ -108,11 +124,13 @@ public class BlocksAether
 
 	public static final BlockIcestoneOre icestone_ore = new BlockIcestoneOre();
 
-	public static final BlockQuicksoilGlass quicksoil_glass = new BlockQuicksoilGlass();
+	public static final BlockRockGlass quicksoil_glass = new BlockRockGlass(),
+			crude_scatterglass = new BlockRockGlass(),
+			scatterglass = new BlockRockGlass();
 
-	public static final BlockCrudeScatterglass crude_scatterglass = new BlockCrudeScatterglass();
-
-	public static final BlockScatterglass scatterglass = new BlockScatterglass();
+	public static final BlockRockGlassDecorative quicksoil_glass_decorative = new BlockRockGlassDecorative(BlocksAether.quicksoil_glass),
+			crude_scatterglass_decorative = new BlockRockGlassDecorative(BlocksAether.crude_scatterglass),
+			scatterglass_decorative = new BlockRockGlassDecorative(BlocksAether.scatterglass);
 
 	public static final Block zanite_block = new BlockCustom(Material.IRON).setSoundType(SoundType.METAL).setHardness(5f);
 
@@ -144,7 +162,7 @@ public class BlocksAether
 
 	public static final BlockSkyrootTrapDoor skyroot_trapdoor = new BlockSkyrootTrapDoor();
 
-	public static final BlockSecretSkyrootTrapDoor secret_skyroot_trapdoor = new BlockSecretSkyrootTrapDoor();
+	public static final BlockSkyrootTrapDoor secret_skyroot_trapdoor = new BlockSkyrootTrapDoor();
 
 	public static final BlockSkyrootPressurePlate skyroot_pressure_plate = new BlockSkyrootPressurePlate();
 
@@ -197,15 +215,14 @@ public class BlocksAether
 
 	public static final BlockMasonryBench masonry_bench = new BlockMasonryBench();
 
-	public static final BlockCustomPane quicksoil_glass_pane = new BlockCustomPane(BlocksAether.quicksoil_glass.getDefaultState()),
-			skyroot_frame_quicksoil_glass_pane = new BlockCustomPane(BlocksAether.quicksoil_glass.getDefaultState().withProperty(BlockQuicksoilGlass.PROPERTY_VARIANT, BlockQuicksoilGlass.SKYROOT_FRAME)),
-			arkenium_frame_quicksoil_glass_pane = new BlockCustomPane(BlocksAether.quicksoil_glass.getDefaultState().withProperty(BlockQuicksoilGlass.PROPERTY_VARIANT, BlockQuicksoilGlass.ARKENIUM_FRAME)),
-			scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState()),
-			skyroot_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState().withProperty(BlockScatterglass.PROPERTY_VARIANT, BlockScatterglass.SKYROOT_FRAME)),
-			arkenium_frame_scatterglass_pane = new BlockCustomPane(BlocksAether.scatterglass.getDefaultState().withProperty(BlockScatterglass.PROPERTY_VARIANT, BlockScatterglass.ARKENIUM_FRAME)),
-			crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState()),
-			skyroot_frame_crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState().withProperty(BlockCrudeScatterglass.PROPERTY_VARIANT, BlockCrudeScatterglass.SKYROOT_FRAME)),
-			arkenium_frame_crude_scatterglass_pane = new BlockCustomPane(BlocksAether.crude_scatterglass.getDefaultState().withProperty(BlockCrudeScatterglass.PROPERTY_VARIANT, BlockCrudeScatterglass.ARKENIUM_FRAME));
+	public static final BlockRockGlassPane quicksoil_glass_pane = new BlockRockGlassPane(BlocksAether.quicksoil_glass),
+			scatterglass_pane = new BlockRockGlassPane(BlocksAether.scatterglass),
+			crude_scatterglass_pane = new BlockRockGlassPane(BlocksAether.crude_scatterglass);
+
+
+	public static final BlockRockGlassPaneDecorative quicksoil_glass_pane_decorative = new BlockRockGlassPaneDecorative(BlocksAether.quicksoil_glass),
+			scatterglass_pane_decorative = new BlockRockGlassPaneDecorative(BlocksAether.scatterglass),
+			crude_scatterglass_pane_decorative = new BlockRockGlassPaneDecorative(BlocksAether.crude_scatterglass);
 
 	public static final Block skyroot_twigs = new BlockFloorObject(Material.PLANTS);
 
@@ -218,6 +235,8 @@ public class BlocksAether
 	public static Block holystone_bookshelf = new BlockCustomBookshelf(Material.ROCK);
 
 	public static BlockOutpostCampfire outpost_campfire = new BlockOutpostCampfire(Material.IRON);
+
+	public static Block skyroot_decorative = new BlockSkyrootDecorative();
 
 	public static void preInit()
 	{
@@ -275,33 +294,39 @@ public class BlocksAether
 
 		registerBlock("aether_flower", BlocksAether.aether_flower.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS), new ItemBlockVariants(BlocksAether.aether_flower));
 
-		registerBlock("quicksoil_glass", BlocksAether.quicksoil_glass.setCreativeTab(CreativeTabsAether.CONSTRUCTION), new ItemBlockVariants(BlocksAether.quicksoil_glass));
+		registerBlock("quicksoil_glass", BlocksAether.quicksoil_glass.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		registerBlock("crude_scatterglass", BlocksAether.crude_scatterglass.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		registerBlock("scatterglass", BlocksAether.scatterglass.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
-		registerBlock("crude_scatterglass", BlocksAether.crude_scatterglass.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS), new ItemBlockVariants(BlocksAether.crude_scatterglass));
-
-		registerBlock("scatterglass", BlocksAether.scatterglass.setCreativeTab(CreativeTabsAether.CONSTRUCTION), new ItemBlockVariants(BlocksAether.scatterglass));
+		registerBlock("quicksoil_glass_decorative", BlocksAether.quicksoil_glass_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS), new ItemBlockDecorative(BlocksAether.quicksoil_glass_decorative));
+		registerBlock("crude_scatterglass_decorative", BlocksAether.crude_scatterglass_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS), new ItemBlockDecorative(BlocksAether.crude_scatterglass_decorative));
+		registerBlock("scatterglass_decorative", BlocksAether.scatterglass_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS), new ItemBlockDecorative(BlocksAether.scatterglass_decorative));
 
 		registerBlock("zanite_block", BlocksAether.zanite_block.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
 		registerBlock("gravitite_block", BlocksAether.gravitite_block.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
-		registerBlock("holystone_brick", BlocksAether.holystone_brick.setCreativeTab(CreativeTabsAether.CONSTRUCTION), new ItemBlockVariants(BlocksAether.holystone_brick));
+		registerBlock("holystone_brick", BlocksAether.holystone_brick.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		registerBlock("holystone_brick_decorative", BlocksAether.holystone_brick_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS), new ItemBlockDecorative(BlocksAether.holystone_brick_decorative));
 
-		registerBlock("holystone_pillar", BlocksAether.holystone_pillar.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
+		registerBlock("holystone_pillar", BlocksAether.holystone_pillar.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
-		registerBlock("faded_holystone_brick", BlocksAether.faded_holystone_brick.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS), new ItemBlockVariants(BlocksAether.faded_holystone_brick));
+		registerBlock("faded_holystone_brick", BlocksAether.faded_holystone_brick.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		registerBlock("faded_holystone_brick_decorative", BlocksAether.faded_holystone_brick_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS), new ItemBlockDecorative(BlocksAether.faded_holystone_brick_decorative));
 
-		registerBlock("faded_holystone_pillar", BlocksAether.faded_holystone_pillar.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
+		registerBlock("faded_holystone_pillar", BlocksAether.faded_holystone_pillar.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
 		registerBlock("agiosite", BlocksAether.agiosite.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
-		registerBlock("agiosite_brick", BlocksAether.agiosite_brick.setCreativeTab(CreativeTabsAether.CONSTRUCTION), new ItemBlockVariants(BlocksAether.agiosite_brick));
+		registerBlock("agiosite_brick", BlocksAether.agiosite_brick.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		registerBlock("agiosite_brick_decorative", BlocksAether.agiosite_brick_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS), new ItemBlockDecorative(BlocksAether.agiosite_brick_decorative));
 
-		registerBlock("agiosite_pillar", BlocksAether.agiosite_pillar.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
+		registerBlock("agiosite_pillar", BlocksAether.agiosite_pillar.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
-		registerBlock("skyroot_planks", BlocksAether.skyroot_planks.setCreativeTab(CreativeTabsAether.CONSTRUCTION), new ItemBlockVariants(BlocksAether.skyroot_planks));
+		registerBlock("skyroot_planks", BlocksAether.skyroot_planks.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		registerBlock("skyroot_decorative", BlocksAether.skyroot_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
-		registerBlock("skyroot_beam", BlocksAether.skyroot_beam.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
+		registerBlock("skyroot_beam", BlocksAether.skyroot_beam.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
 		registerBlock("skyroot_bookshelf", BlocksAether.skyroot_bookshelf.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
@@ -320,7 +345,7 @@ public class BlocksAether
 		registerBlock("standing_skyroot_sign", BlocksAether.standing_skyroot_sign);
 
 		registerBlock("skyroot_trapdoor", BlocksAether.skyroot_trapdoor.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-		registerBlock("secret_skyroot_trapdoor", BlocksAether.secret_skyroot_trapdoor.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
+		registerBlock("secret_skyroot_trapdoor", BlocksAether.secret_skyroot_trapdoor.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
 		registerBlock("skyroot_ladder", BlocksAether.skyroot_ladder.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
@@ -363,29 +388,12 @@ public class BlocksAether
 		registerBlock("wildcard", BlocksAether.wildcard);
 
 		registerBlock("quicksoil_glass_pane", BlocksAether.quicksoil_glass_pane.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-		registerBlock("skyroot_frame_quicksoil_glass_pane", BlocksAether.skyroot_frame_quicksoil_glass_pane.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
-		registerBlock("arkenium_frame_quicksoil_glass_pane", BlocksAether.arkenium_frame_quicksoil_glass_pane.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
-
 		registerBlock("scatterglass_pane", BlocksAether.scatterglass_pane.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-		registerBlock("skyroot_frame_scatterglass_pane", BlocksAether.skyroot_frame_scatterglass_pane.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
-		registerBlock("arkenium_frame_scatterglass_pane", BlocksAether.arkenium_frame_scatterglass_pane.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
-
 		registerBlock("crude_scatterglass_pane", BlocksAether.crude_scatterglass_pane.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-		registerBlock("skyroot_frame_crude_scatterglass_pane", BlocksAether.skyroot_frame_crude_scatterglass_pane.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
-		registerBlock("arkenium_frame_crude_scatterglass_pane", BlocksAether.arkenium_frame_crude_scatterglass_pane.setCreativeTab(CreativeTabsAether.VISUAL_VARIANTS));
 
-		String quicksoil_glass_pane_name = AetherCore.MOD_ID + "." + "quicksoil_glass_pane";
-		String scatterglass_pane_name = AetherCore.MOD_ID + "." + "scatterglass_pane";
-		String crude_scatterglass_pane_name = AetherCore.MOD_ID + "." + "crude_scatterglass_pane";
-
-		BlocksAether.skyroot_frame_quicksoil_glass_pane.setUnlocalizedName(quicksoil_glass_pane_name);
-		BlocksAether.arkenium_frame_quicksoil_glass_pane.setUnlocalizedName(quicksoil_glass_pane_name);
-
-		BlocksAether.skyroot_frame_scatterglass_pane.setUnlocalizedName(scatterglass_pane_name);
-		BlocksAether.arkenium_frame_scatterglass_pane.setUnlocalizedName(scatterglass_pane_name);
-
-		BlocksAether.skyroot_frame_crude_scatterglass_pane.setUnlocalizedName(crude_scatterglass_pane_name);
-		BlocksAether.arkenium_frame_crude_scatterglass_pane.setUnlocalizedName(crude_scatterglass_pane_name);
+		registerBlock("quicksoil_glass_pane_decorative", BlocksAether.quicksoil_glass_pane_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS), new ItemBlockDecorative(BlocksAether.quicksoil_glass_pane_decorative));
+		registerBlock("scatterglass_pane_decorative", BlocksAether.scatterglass_pane_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS), new ItemBlockDecorative(BlocksAether.scatterglass_pane_decorative));
+		registerBlock("crude_scatterglass_pane_decorative", BlocksAether.crude_scatterglass_pane_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS), new ItemBlockDecorative(BlocksAether.crude_scatterglass_pane_decorative));
 
 		registerBlock("skyroot_twigs", BlocksAether.skyroot_twigs.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		registerBlock("holystone_rock", BlocksAether.holystone_rock.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
@@ -406,11 +414,8 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_log_wall, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_bookshelf, 5, 20);
-		//Blocks.FIRE.setFireInfo(BlocksAether.skyroot_chest, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_beam, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_stairs, 5, 20);
-
-		//Blocks.FIRE.setFireInfo(BlocksAether.aether_crafting_table, 5, 20);
 
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_door, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.secret_skyroot_door, 5, 20);
@@ -420,16 +425,12 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_ladder, 5, 20);
 
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_pressure_plate, 5, 20);
-		//Blocks.FIRE.setFireInfo(BlocksAether.skyroot_bed, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_slab, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_trapdoor, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.secret_skyroot_trapdoor, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_stairs, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_button, 5, 20);
 		Blocks.FIRE.setFireInfo(BlocksAether.woven_sticks, 30, 60);
-
-		//Blocks.FIRE.setFireInfo(BlocksAether.icestone_cooler, 5, 20);
-		//Blocks.FIRE.setFireInfo(BlocksAether.incubator, 5, 20);
 
 		Blocks.FIRE.setFireInfo(BlocksAether.blue_skyroot_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(BlocksAether.dark_blue_skyroot_leaves, 30, 60);
@@ -454,6 +455,7 @@ public class BlocksAether
 		quicksoil.setHarvestLevel("shovel", 0);
 		aercloud.setHarvestLevel("shovel", 0);
 
+		skyroot_decorative.setHarvestLevel("axe", 0);
 		skyroot_chest.setHarvestLevel("axe", 0);
 		skyroot_log.setHarvestLevel("axe", 0);
 		golden_oak_log.setHarvestLevel("axe", 0);
@@ -479,8 +481,6 @@ public class BlocksAether
 
 		zanite_block.setHarvestLevel("pickaxe", 1);
 		gravitite_block.setHarvestLevel("pickaxe", 2);
-
-		holystone_brick.setHarvestLevel("pickaxe", 0);
 
 		skyroot_door.setHarvestLevel("axe", 0);
 		skyroot_trapdoor.setHarvestLevel("axe", 0);

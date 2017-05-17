@@ -106,7 +106,7 @@ public class BlockAercloud extends Block implements IBlockVariants
 
 		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
 
-		if (!canCollide || variant == COLD_AERCLOUD)
+		if (!canCollide || variant == COLD_AERCLOUD || variant == STORM_AERCLOUD)
 		{
 			if (entity.motionY < 0.0D)
 			{
@@ -191,7 +191,9 @@ public class BlockAercloud extends Block implements IBlockVariants
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
-		if (state.getValue(PROPERTY_VARIANT) == BlockAercloud.COLD_AERCLOUD)
+		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
+
+		if (variant == BlockAercloud.COLD_AERCLOUD || variant == BlockAercloud.STORM_AERCLOUD)
 		{
 			return BlockAercloud.AERCLOUD_AABB;
 		}
@@ -243,7 +245,7 @@ public class BlockAercloud extends Block implements IBlockVariants
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack)
+	public String getVariantName(ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}
