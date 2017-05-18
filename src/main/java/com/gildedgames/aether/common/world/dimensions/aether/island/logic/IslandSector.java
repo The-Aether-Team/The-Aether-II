@@ -105,19 +105,19 @@ public class IslandSector implements NBT
 		tag.setInteger("x", this.getSectorX());
 		tag.setInteger("y", this.getSectorY());
 
-		tag.setLong("s", this.getSeed());
+		tag.setLong("seed", this.getSeed());
 
-		NBTTagList d = new NBTTagList();
+		NBTTagList islands = new NBTTagList();
 
 		for (IslandData island : this.data)
 		{
 			NBTTagCompound islandData = new NBTTagCompound();
 			island.write(islandData);
 
-			d.appendTag(islandData);
+			islands.appendTag(islandData);
 		}
 
-		tag.setTag("d", d);
+		tag.setTag("islands", islands);
 	}
 
 	@Override
@@ -126,15 +126,15 @@ public class IslandSector implements NBT
 		this.sectorX = tag.getInteger("x");
 		this.sectorY = tag.getInteger("y");
 
-		this.seed = tag.getLong("s");
+		this.seed = tag.getLong("seed");
 
-		NBTTagList d = tag.getTagList("d", 13);
+		NBTTagList islands = tag.getTagList("islands", 10);
 
-		this.data = new IslandData[d.tagCount()];
+		this.data = new IslandData[islands.tagCount()];
 
-		for (int i = 0; i < d.tagCount(); i++)
+		for (int i = 0; i < islands.tagCount(); i++)
 		{
-			NBTTagCompound islandData = d.getCompoundTagAt(i);
+			NBTTagCompound islandData = islands.getCompoundTagAt(i);
 
 			this.data[i] = new IslandData(islandData);
 		}

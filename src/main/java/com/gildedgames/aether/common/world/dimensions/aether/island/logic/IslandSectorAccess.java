@@ -292,7 +292,7 @@ public class IslandSectorAccess
 
 		sector.write(sectorData);
 
-		tag.setTag("s", sectorData);
+		tag.setTag("sector", sectorData);
 
 		NBTHelper.writeNBTToFile(tag, file);
 	}
@@ -306,7 +306,7 @@ public class IslandSectorAccess
 		{
 			final NBTTagCompound tag = NBTHelper.readNBTFromFile(file);
 
-			return new IslandSector(tag.getCompoundTag("s"));
+			return new IslandSector(tag.getCompoundTag("sector"));
 		}
 
 		return null;

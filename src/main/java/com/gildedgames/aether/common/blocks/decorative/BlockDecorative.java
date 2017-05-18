@@ -1,8 +1,10 @@
 package com.gildedgames.aether.common.blocks.decorative;
 
+import com.gildedgames.aether.common.blocks.IBlockWithItem;
 import com.gildedgames.aether.common.blocks.util.BlockBuilder;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
+import com.gildedgames.aether.common.items.blocks.ItemBlockDecorative;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -11,6 +13,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
@@ -20,7 +23,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public abstract class BlockDecorative extends BlockBuilder
+public abstract class BlockDecorative extends BlockBuilder implements IBlockWithItem
 {
 	private final Block parentBlock;
 
@@ -83,5 +86,11 @@ public abstract class BlockDecorative extends BlockBuilder
 		String name = this.getStateFromMeta(stack.getItemDamage()).getValue(this.getVariantProperty()).getName();
 
 		tooltip.add(TextFormatting.GRAY + I18n.format(this.getUnlocalizedName() + "." + name + ".name"));
+	}
+
+	@Override
+	public ItemBlock createItemBlock()
+	{
+		return new ItemBlockDecorative(this);
 	}
 }

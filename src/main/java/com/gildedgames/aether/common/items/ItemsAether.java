@@ -27,6 +27,7 @@ import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import com.gildedgames.aether.common.registry.content.MaterialsAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.util.selectors.RandomItemSelector;
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -757,30 +758,7 @@ public class ItemsAether
 
 		registerItem("fried_moa_egg", fried_moa_egg.setCreativeTab(CreativeTabsAether.CONSUMABLES));
 
-		registerBlockItems();
 		registerItemProperties();
-	}
-
-	private static void registerBlockItems()
-	{
-		BlocksAether.getAllBlocks().forEach((block) -> {
-			Item item;
-
-			if (block instanceof IBlockWithItem)
-			{
-				item = ((IBlockWithItem) block).createItemBlock();
-			}
-			else if (block instanceof IBlockMultiName)
-			{
-				item = new ItemBlockMultiName(block);
-			}
-			else
-			{
-				item = new ItemBlock(block);
-			}
-
-			registerItem(block.getRegistryName().getResourcePath(), item);
-		});
 	}
 
 	private static void registerItemProperties()
@@ -789,7 +767,7 @@ public class ItemsAether
 		//				new ItemStack(ItemsAether.skyroot_water_bucket), new ItemStack(ItemsAether.skyroot_bucket));
 	}
 
-	private static <T extends Item> T registerItem(String name, T item)
+	public static <T extends Item> T registerItem(String name, T item)
 	{
 		item.setUnlocalizedName(AetherCore.MOD_ID + "." + name);
 		item.setRegistryName(name);

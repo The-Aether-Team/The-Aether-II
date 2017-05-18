@@ -13,15 +13,14 @@ import com.gildedgames.aether.common.blocks.construction.walls.BlockScatterglass
 import com.gildedgames.aether.common.blocks.construction.walls.BlockSkyrootWall;
 import com.gildedgames.aether.common.blocks.containers.*;
 import com.gildedgames.aether.common.blocks.decorative.*;
-import com.gildedgames.aether.common.blocks.natural.BlockMoaEgg;
-import com.gildedgames.aether.common.blocks.construction.BlockOutpostCampfire;
+import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummy;
+import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummyHalf;
 import com.gildedgames.aether.common.blocks.natural.*;
 import com.gildedgames.aether.common.blocks.natural.ores.*;
 import com.gildedgames.aether.common.blocks.natural.plants.*;
 import com.gildedgames.aether.common.blocks.util.*;
-import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummy;
-import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummyHalf;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.blocks.ItemBlockMultiName;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
@@ -29,6 +28,7 @@ import net.minecraft.block.BlockButtonStone;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.ArrayList;
@@ -500,7 +500,18 @@ public class BlocksAether
 
 		GameRegistry.register(block);
 
-		registeredBlocks.add(block);
+		if (block instanceof IBlockWithItem)
+		{
+			ItemsAether.registerItem(name, ((IBlockWithItem) block).createItemBlock());
+		}
+		else if (block instanceof IBlockMultiName)
+		{
+			ItemsAether.registerItem(name, new ItemBlockMultiName(block));
+		}
+		else
+		{
+			ItemsAether.registerItem(name, new ItemBlock(block));
+		}
 	}
 
 	public static Collection<Block> getAllBlocks()
