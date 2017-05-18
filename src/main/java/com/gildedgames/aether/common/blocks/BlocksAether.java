@@ -306,7 +306,7 @@ public class BlocksAether
 
 		registerBlock("holystone_pillar", holystone_pillar.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
-		registerBlock("faded_holystone_brick", faded_holystone_brick.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		registerBlock("faded_holystone_brick", faded_holystone_brick.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 		registerBlock("faded_holystone_brick_decorative", faded_holystone_brick_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
 		registerBlock("faded_holystone_pillar", faded_holystone_pillar.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
