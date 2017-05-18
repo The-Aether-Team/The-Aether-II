@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.entities.ai.tempest;
 import com.gildedgames.aether.common.entities.ai.EntityAI;
 import com.gildedgames.aether.common.entities.living.mobs.EntityTempest;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
-import com.gildedgames.aether.common.util.TickTimer;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.init.MobEffects;
@@ -12,9 +12,9 @@ import net.minecraft.potion.PotionEffect;
 public class AIElectricShock extends EntityAI<EntityTempest>
 {
 
-	private TickTimer attackTimer = new TickTimer();
+	private int attackTimer;
 
-	private TickTimer cooldownTimer = new TickTimer();
+	private int cooldownTimer;
 
 	public AIElectricShock(EntityTempest entity)
 	{
@@ -45,32 +45,34 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 	@Override
 	public void resetTask()
 	{
-		this.attackTimer.reset();
-		this.cooldownTimer.reset();
+		this.attackTimer = 0;
+		this.cooldownTimer = 0;
 	}
 
 	@Override
 	public void updateTask()
 	{
-		double distanceToAttackTarget = this.entity().getDistanceToEntity(this.entity().getAttackTarget());
+		EntityLivingBase prey = this.entity().getAttackTarget();
 
-		this.cooldownTimer.tick();
+		double distanceToAttackTarget = this.entity().getDistanceToEntity(prey);
+
+		this.cooldownTimer++;
 
 		if (distanceToAttackTarget < 7.0D)
 		{
-			if (this.cooldownTimer.getSecondsPassed() >= 3)
+			if (this.cooldownTimer >= 60)
 			{
-				if (this.attackTimer.getTicksPassed() == 0)
+				if (this.attackTimer == 0)
 				{
 					this.entity().playSound(SoundsAether.zephyr_puff, 1.0F,
 							(this.entity().getRNG().nextFloat() - this.entity().getRNG().nextFloat()) * 0.2F + 1.0F);
 				}
 
-				this.attackTimer.tick();
+				this.attackTimer++;
 
 				this.entity().getNavigator().clearPathEntity();
 
-				if (this.attackTimer.getSecondsPassed() >= 2)
+				if (this.attackTimer >= 40)
 				{
 					this.entity().playSound(SoundsAether.tempest_electric_shock, 1.0F,
 							(this.entity().getRNG().nextFloat() - this.entity().getRNG().nextFloat()) * 0.2F + 1.0F);
@@ -82,15 +84,15 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 					}
 
 					this.entity().setAttacked(false);
-					this.entity().attackEntityAsMob(this.entity().getAttackTarget());
+					this.entity().attackEntityAsMob(prey);
 
-					if (!this.entity().getAttackTarget().isActiveItemStackBlocking())
+					if (!prey.isActiveItemStackBlocking())
 					{
-						this.entity().getAttackTarget().addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 80, 3));
+						prey.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 80, 3));
 					}
 
-					this.attackTimer.reset();
-					this.cooldownTimer.reset();
+					this.attackTimer = 0;
+					this.cooldownTimer = 0;
 				}
 			}
 		}

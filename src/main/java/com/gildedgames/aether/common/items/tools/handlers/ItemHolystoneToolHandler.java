@@ -23,7 +23,10 @@ public class ItemHolystoneToolHandler implements IToolEventHandler
 	{
 		if (!world.isRemote && world.rand.nextInt(100) <= 5)
 		{
-			drops.add(new ItemStack(ItemsAether.ambrosium_shard));
+			if (state.getBlockHardness(world, pos) > 0.0f)
+			{
+				drops.add(new ItemStack(ItemsAether.ambrosium_shard));
+			}
 		}
 	}
 

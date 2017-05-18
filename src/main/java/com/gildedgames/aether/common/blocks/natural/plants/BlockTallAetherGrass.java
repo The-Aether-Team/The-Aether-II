@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
-import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
+import com.gildedgames.aether.common.blocks.IBlockMultiName;
+import com.gildedgames.aether.common.blocks.properties.BlockVariant;
+import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable, IBlockVariants
+public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable, IBlockMultiName
 {
 	private static final AxisAlignedBB GRASS_SHORT_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
 	private static final AxisAlignedBB GRASS_NORMAL_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.6D, 0.9D);
@@ -128,7 +128,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	}
 
 	@Override
-	public String getVariantName(ItemStack stack)
+	public String getUnlocalizedName(ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}

@@ -3,14 +3,13 @@ package com.gildedgames.aether.common.entities.ai.swet;
 import com.gildedgames.aether.common.entities.ai.EntityAI;
 import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
-import com.gildedgames.aether.common.util.TickTimer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 
 public class AILeech extends EntityAI<EntitySwet>
 {
 
-	private TickTimer timer;
+	private int timer;
 
 	private HoppingMoveHelper hoppingMoveHelper;
 
@@ -20,7 +19,7 @@ public class AILeech extends EntityAI<EntitySwet>
 	{
 		super(entity);
 
-		this.timer = new TickTimer();
+		this.timer = 0;
 		this.hoppingMoveHelper = hoppingMoveHelper;
 		this.leechDistance = leechDistance;
 
@@ -62,9 +61,9 @@ public class AILeech extends EntityAI<EntitySwet>
 		this.entity().getNavigator().clearPathEntity();
 		this.hoppingMoveHelper.setSpeed(0.0D);
 
-		this.timer.tick();
+		this.timer++;
 
-		if (this.timer.getTicksPassed() >= 40)
+		if (this.timer >= 40)
 		{
 			this.entity().setAttacked(false);
 
@@ -77,7 +76,7 @@ public class AILeech extends EntityAI<EntitySwet>
 
 			this.entity().setAttacked(true);
 
-			this.timer.reset();
+			this.timer = 0;
 
 			this.entity().playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F,
 					(this.entity().getRNG().nextFloat() - this.entity().getRNG().nextFloat()) * 0.2F + 1.0F);

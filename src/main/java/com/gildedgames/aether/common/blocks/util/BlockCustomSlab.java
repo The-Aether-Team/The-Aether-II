@@ -1,51 +1,47 @@
 package com.gildedgames.aether.common.blocks.util;
 
-import com.gildedgames.aether.common.ReflectionAether;
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
+import com.gildedgames.aether.common.blocks.IBlockWithItem;
+import com.gildedgames.aether.common.items.blocks.ItemCustomSlab;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import java.util.Random;
 
-public class BlockCustomSlab extends Block
+public class BlockCustomSlab extends Block implements IBlockWithItem
 {
-	protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
+	private static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 
-	protected static final AxisAlignedBB AABB_TOP_HALF = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 1.0D, 1.0D, 1.0D);
+	private static final AxisAlignedBB AABB_TOP_HALF = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 1.0D, 1.0D, 1.0D);
 
 	public static final PropertyEnum<EnumSlabPart> PROPERTY_SLAB_STATE = PropertyEnum.create("state", EnumSlabPart.class);
 
-	public BlockCustomSlab(final IBlockState state)
+	public BlockCustomSlab(Material material)
 	{
-		super(state.getMaterial());
-
-		this.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS);
-
-		final Block block = state.getBlock();
-
-		BlocksAether.applyPostRegistration(() ->
-				BlockCustomSlab.this.setHarvestLevel(block.getHarvestTool(state), block.getHarvestLevel(state)));
+		super(material);
 
 		this.setLightOpacity(0);
 
-		this.setSoundType(block.getSoundType());
-
-		float blockHardness = ObfuscationReflectionHelper.getPrivateValue(Block.class, block, ReflectionAether.BLOCK_HARDNESS.getMappings());
-
-		this.setHardness(blockHardness);
-
 		this.useNeighborBrightness = true;
+	}
+
+	@Override
+	public BlockCustomSlab setSoundType(SoundType type)
+	{
+		super.setSoundType(type);
+
+		return this;
 	}
 
 	@Override
@@ -152,6 +148,12 @@ public class BlockCustomSlab extends Block
 	public BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, PROPERTY_SLAB_STATE);
+	}
+
+	@Override
+	public ItemBlock createItemBlock()
+	{
+		return new ItemCustomSlab(this);
 	}
 
 	public enum EnumSlabPart implements IStringSerializable

@@ -1,9 +1,10 @@
 package com.gildedgames.aether.common.blocks.containers;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.IBlockWithItem;
+import com.gildedgames.aether.common.entities.tiles.TileEntityPresent;
 import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
-import com.gildedgames.aether.common.entities.tiles.TileEntityPresent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
@@ -12,6 +13,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
@@ -28,7 +30,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockPresent extends BlockContainer
+public class BlockPresent extends BlockContainer implements IBlockWithItem
 {
 
 	private static final AxisAlignedBB BOUNDS = new AxisAlignedBB(0.15f, 0f, 0.15f, 0.85f, 0.7f, 0.85f);
@@ -191,4 +193,9 @@ public class BlockPresent extends BlockContainer
 		return new TileEntityPresent();
 	}
 
+	@Override
+	public ItemBlock createItemBlock()
+	{
+		return new ItemBlockPresent(this);
+	}
 }

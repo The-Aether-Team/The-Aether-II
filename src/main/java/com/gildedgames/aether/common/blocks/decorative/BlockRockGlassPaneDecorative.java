@@ -1,7 +1,9 @@
 package com.gildedgames.aether.common.blocks.decorative;
 
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
+import com.gildedgames.aether.common.blocks.IBlockWithItem;
+import com.gildedgames.aether.common.blocks.properties.BlockVariant;
+import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
+import com.gildedgames.aether.common.items.blocks.ItemBlockDecorative;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.SoundType;
@@ -12,6 +14,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.NonNullList;
@@ -22,7 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class BlockRockGlassPaneDecorative extends BlockPane
+public class BlockRockGlassPaneDecorative extends BlockPane implements IBlockWithItem
 {
 	public static final BlockVariant SKYROOT_FRAME = new BlockVariant(0, "skyroot_frame"),
 			ARKENIUM_FRAME = new BlockVariant(1, "arkenium_frame");
@@ -107,5 +110,11 @@ public class BlockRockGlassPaneDecorative extends BlockPane
 	public BlockRenderLayer getBlockLayer()
 	{
 		return BlockRenderLayer.TRANSLUCENT;
+	}
+
+	@Override
+	public ItemBlock createItemBlock()
+	{
+		return new ItemBlockDecorative(this);
 	}
 }

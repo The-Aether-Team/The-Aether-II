@@ -1,12 +1,9 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.registry.IContentRegistry;
-import com.gildedgames.aether.common.blocks.QuicksoilProcessor;
-import com.gildedgames.aether.common.registry.ContentRegistry;
+import com.gildedgames.aether.common.entities.util.QuicksoilProcessor;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
-import com.gildedgames.aether.common.util.io.ClassSerializer;
 import com.gildedgames.aether.common.world.dimensions.aether.TeleporterAether;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSectorAccess;
 import net.minecraft.launchwrapper.Launch;
@@ -52,13 +49,6 @@ public class AetherCore
 	public static TeleporterAether TELEPORTER;
 
 	private static final SpawnRegistry SPAWN_REGISTRY = new SpawnRegistry();
-
-	private final ClassSerializer srl = new ClassSerializer(AetherCore.MOD_ID + "Srl");
-
-	public static ClassSerializer srl()
-	{
-		return AetherCore.INSTANCE.srl;
-	}
 
 	@EventHandler
 	public void onFMLConstruction(FMLConstructionEvent event)

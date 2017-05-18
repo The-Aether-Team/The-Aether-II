@@ -13,7 +13,5 @@ public class BlockSkyrootPressurePlate extends BlockPressurePlate
 		this.setSoundType(SoundType.WOOD);
 
 		this.setHardness(0.5f);
-
-		this.disableStats();
 	}
 }

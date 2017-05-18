@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.util.BlockCustom;
+import com.gildedgames.aether.common.blocks.util.BlockBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -17,7 +17,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockFloorObject extends BlockCustom
+public class BlockFloorObject extends BlockBuilder
 {
 
 	private static final AxisAlignedBB AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);

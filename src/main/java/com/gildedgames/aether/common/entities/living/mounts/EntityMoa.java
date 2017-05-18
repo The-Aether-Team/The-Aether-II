@@ -12,8 +12,6 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import com.gildedgames.aether.common.items.misc.ItemMoaFeather;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
-import com.gildedgames.aether.common.util.TickTimer;
-import com.gildedgames.aether.common.util.helpers.NBTHelper;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -69,7 +67,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 	public int ticksUntilFlap;
 
-	private TickTimer hungryTimer = new TickTimer(), dropFeatherTimer = new TickTimer();
+	private int hungryTimer, dropFeatherTimer;
 
 	private int timeUntilDropFeather;
 
@@ -186,8 +184,6 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 			if (this.isHungry() && stack.getItem() == ItemsAether.aechor_petal)
 			{
 				this.setIsHungry(false);
-				this.hungryTimer.reset();
-
 				this.setHealth(this.getMaxHealth());
 
 				this.setFoodEaten(this.getFoodEaten() + 1);
@@ -243,14 +239,14 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		{
 			if (!this.isRaisedByPlayer() && this.getGender() == AnimalGender.MALE)
 			{
-				this.dropFeatherTimer.tick();
+				this.dropFeatherTimer++;
 
 				if (this.timeUntilDropFeather == 0)
 				{
-					this.timeUntilDropFeather = 120 + this.getRNG().nextInt(80);
+					this.timeUntilDropFeather = (120 + this.getRNG().nextInt(80)) * 20;
 				}
 
-				if (this.dropFeatherTimer.getSecondsPassed() >= this.timeUntilDropFeather)
+				if (this.dropFeatherTimer >= this.timeUntilDropFeather)
 				{
 					this.timeUntilDropFeather = 0;
 
@@ -258,7 +254,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 					ItemMoaFeather.setColor(feather, this.getGenePool().getFeathers().gene().unlocalizedName(), this.getGenePool().getFeathers().gene().data().getRGB());
 
 					Block.spawnAsEntity(this.world, this.getPosition(), feather);
-					this.dropFeatherTimer.reset();
+					this.dropFeatherTimer = 0;
 				}
 			}
 
@@ -269,13 +265,13 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 					this.setGrowingAge(-1);
 				}
 
-				this.hungryTimer.tick();
+				this.hungryTimer++;
 
 				if (this.isHungry())
 				{
-					if (this.hungryTimer.getSecondsPassed() > 120)
+					if (this.hungryTimer > 2400)
 					{
-						if (this.hungryTimer.isMultipleOfSeconds(10))
+						if (this.hungryTimer % 200 == 0)
 						{
 							this.attackEntityFrom(DamageSource.STARVE, 1.0F);
 						}
@@ -283,10 +279,9 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 				}
 				else
 				{
-					if (this.hungryTimer.getSecondsPassed() > 120)
+					if (this.hungryTimer > 2400)
 					{
 						this.setIsHungry(true);
-						this.hungryTimer.reset();
 					}
 				}
 			}
@@ -381,8 +376,8 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		nbt.setInteger("foodRequired", this.getFoodRequired());
 		nbt.setInteger("foodEaten", this.getFoodEaten());
 
-		NBTHelper.fullySerialize("hungryTimer", this.hungryTimer, nbt);
-		NBTHelper.fullySerialize("dropFeatherTimer", this.dropFeatherTimer, nbt);
+		nbt.setInteger("hungryTimer", this.hungryTimer);
+		nbt.setInteger("dropFeatherTimer", this.dropFeatherTimer);
 
 		nbt.setInteger("timeUntilDropFeather", this.timeUntilDropFeather);
 	}
@@ -394,7 +389,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 		this.setRaisedByPlayer(nbt.getBoolean("playerGrown"));
 
-		if (nbt.getString("creatureGender") != null)
+		if (nbt.hasKey("creatureGender"))
 		{
 			this.setGender(AnimalGender.get(nbt.getString("creatureGender")));
 		}
@@ -408,8 +403,8 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		this.setFoodRequired(nbt.getInteger("foodRequired"));
 		this.setFoodEaten(nbt.getInteger("foodEaten"));
 
-		this.hungryTimer = NBTHelper.fullyDeserialize("hungryTimer", nbt, this.hungryTimer);
-		this.dropFeatherTimer = NBTHelper.fullyDeserialize("dropFeatherTimer", nbt, this.dropFeatherTimer);
+		this.hungryTimer = nbt.getInteger("hungryTimer");
+		this.dropFeatherTimer = nbt.getInteger("dropFeatherTimer");
 
 		this.timeUntilDropFeather = nbt.getInteger("timeUntilDropFeather");
 	}
@@ -515,6 +510,11 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 	public void setIsHungry(boolean flag)
 	{
+		if (this.dataManager.get(EntityMoa.IS_HUNGRY) != flag)
+		{
+			this.hungryTimer = 0;
+		}
+
 		this.dataManager.set(EntityMoa.IS_HUNGRY, flag);
 	}
 

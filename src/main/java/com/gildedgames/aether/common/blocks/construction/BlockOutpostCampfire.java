@@ -1,6 +1,6 @@
-package com.gildedgames.aether.common.blocks.misc;
+package com.gildedgames.aether.common.blocks.construction;
 
-import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiController;
+import com.gildedgames.aether.common.blocks.multiblock.BlockMultiController;
 import com.gildedgames.aether.common.entities.tiles.TileEntityOutpostCampfire;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

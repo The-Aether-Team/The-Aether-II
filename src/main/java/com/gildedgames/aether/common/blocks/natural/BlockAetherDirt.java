@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.blocks.util.BlockCustom;
-import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
+import com.gildedgames.aether.common.blocks.util.BlockBuilder;
+import com.gildedgames.aether.common.blocks.IBlockMultiName;
+import com.gildedgames.aether.common.blocks.properties.BlockVariant;
+import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -15,7 +15,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockAetherDirt extends BlockCustom implements IBlockVariants
+public class BlockAetherDirt extends BlockBuilder implements IBlockMultiName
 {
 
 	public static final BlockVariant DIRT = new BlockVariant(0, "dirt"),
@@ -70,7 +70,7 @@ public class BlockAetherDirt extends BlockCustom implements IBlockVariants
 	}
 
 	@Override
-	public String getVariantName(ItemStack stack)
+	public String getUnlocalizedName(ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}

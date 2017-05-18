@@ -4,15 +4,15 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-public class BlockCustom extends Block
+public class BlockBuilder extends Block
 {
-	public BlockCustom(Material blockMaterialIn)
+	public BlockBuilder(Material material)
 	{
-		super(blockMaterialIn);
+		super(material);
 	}
 
 	@Override
-	public BlockCustom setSoundType(SoundType type)
+	public BlockBuilder setSoundType(SoundType type)
 	{
 		super.setSoundType(type);
 

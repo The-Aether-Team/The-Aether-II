@@ -5,7 +5,6 @@ import com.gildedgames.aether.api.entity.spawning.EntitySpawn;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.util.TickTimer;
 import com.gildedgames.aether.common.util.helpers.NBTHelper;
 import com.gildedgames.aether.common.world.util.ChunkMap;
 import com.google.common.collect.Lists;
@@ -28,9 +27,6 @@ import java.util.Map;
 
 public class SpawnHandler implements NBT
 {
-
-	private final Map<Integer, TickTimer> tickTimers = Maps.newHashMap();
-
 	private final String uniqueID;
 
 	private int targetEntityCountPerArea, chunkArea = 1, updateFrequencyInTicks = 20;
@@ -95,16 +91,7 @@ public class SpawnHandler implements NBT
 
 	public void tick(World world, List<EntityPlayer> players)
 	{
-		if (!this.tickTimers.containsKey(world.provider.getDimension()))
-		{
-			this.tickTimers.put(world.provider.getDimension(), new TickTimer());
-		}
-
-		TickTimer timer = this.tickTimers.get(world.provider.getDimension());
-
-		timer.tick();
-
-		if (!timer.isMultipleOfTicks(this.updateFrequencyInTicks))
+		if (world.getWorldTime() % this.updateFrequencyInTicks != 0)
 		{
 			return;
 		}

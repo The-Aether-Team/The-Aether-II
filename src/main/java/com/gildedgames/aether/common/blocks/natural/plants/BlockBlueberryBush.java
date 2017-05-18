@@ -2,9 +2,8 @@ package com.gildedgames.aether.common.blocks.natural.plants;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
-import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
+import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.registry.content.MaterialsAether;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
@@ -17,8 +16,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -31,7 +28,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVariants, IGrowable
+public class BlockBlueberryBush extends BlockAetherPlant implements IBlockMultiName, IGrowable
 {
 	private static final AxisAlignedBB BUSH_AABB = new AxisAlignedBB(0.2D, 0.0D, 0.2D, 0.8D, 0.8D, 0.8D);
 
@@ -200,7 +197,7 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockVarian
 	}
 
 	@Override
-	public String getVariantName(ItemStack stack)
+	public String getUnlocalizedName(ItemStack stack)
 	{
 		switch (stack.getMetadata())
 		{

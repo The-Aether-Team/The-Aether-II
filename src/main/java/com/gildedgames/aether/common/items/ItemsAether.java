@@ -4,7 +4,10 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.IBlockWithItem;
+import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.items.armor.*;
+import com.gildedgames.aether.common.items.blocks.ItemBlockMultiName;
 import com.gildedgames.aether.common.items.companions.ItemCompanion;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import com.gildedgames.aether.common.items.consumables.*;
@@ -754,7 +757,30 @@ public class ItemsAether
 
 		registerItem("fried_moa_egg", fried_moa_egg.setCreativeTab(CreativeTabsAether.CONSUMABLES));
 
+		registerBlockItems();
 		registerItemProperties();
+	}
+
+	private static void registerBlockItems()
+	{
+		BlocksAether.getAllBlocks().forEach((block) -> {
+			Item item;
+
+			if (block instanceof IBlockWithItem)
+			{
+				item = ((IBlockWithItem) block).createItemBlock();
+			}
+			else if (block instanceof IBlockMultiName)
+			{
+				item = new ItemBlockMultiName(block);
+			}
+			else
+			{
+				item = new ItemBlock(block);
+			}
+
+			registerItem(block.getRegistryName().getResourcePath(), item);
+		});
 	}
 
 	private static void registerItemProperties()

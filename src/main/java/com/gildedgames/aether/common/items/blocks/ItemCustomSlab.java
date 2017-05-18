@@ -19,9 +19,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemAetherSlab extends ItemBlock
+public class ItemCustomSlab extends ItemBlock
 {
-	public ItemAetherSlab(Block block)
+	public ItemCustomSlab(Block block)
 	{
 		super(block);
 	}

@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.blocks.decorative;
 
-import com.gildedgames.aether.common.blocks.util.BlockCustom;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
+import com.gildedgames.aether.common.blocks.util.BlockBuilder;
+import com.gildedgames.aether.common.blocks.properties.BlockVariant;
+import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public abstract class BlockDecorative extends BlockCustom
+public abstract class BlockDecorative extends BlockBuilder
 {
 	private final Block parentBlock;
 

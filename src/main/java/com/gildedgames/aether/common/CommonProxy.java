@@ -4,14 +4,9 @@ import com.gildedgames.aether.api.IAetherServices;
 import com.gildedgames.aether.api.registry.IContentRegistry;
 import com.gildedgames.aether.common.capabilities.player.PlayerEvents;
 import com.gildedgames.aether.common.entities.util.MountEventHandler;
-import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.items.tools.ItemToolHandler;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.registry.ContentRegistry;
-import com.gildedgames.aether.common.util.TickTimer;
-import com.gildedgames.aether.common.util.io.Instantiator;
-import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
-import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSector;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
@@ -35,11 +30,6 @@ public class CommonProxy implements IAetherServices
 		this.storageDir = new File(event.getSourceFile().getParent(), "Aether/");
 
 		this.contentRegistry.preInit();
-
-		AetherCore.srl().registerSerialization(1, MoaGenePool.class, new Instantiator(MoaGenePool.class));
-		AetherCore.srl().registerSerialization(2, TickTimer.class, new Instantiator(TickTimer.class));
-		AetherCore.srl().registerSerialization(8, IslandSector.class, new Instantiator(IslandSector.class));
-		AetherCore.srl().registerSerialization(9, IslandData.class, new Instantiator(IslandData.class));
 	}
 
 	public void init(FMLInitializationEvent event)

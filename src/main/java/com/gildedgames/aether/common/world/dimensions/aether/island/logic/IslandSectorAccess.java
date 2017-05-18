@@ -14,6 +14,7 @@ import net.minecraftforge.event.world.ChunkWatchEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.File;
 import java.util.List;
@@ -272,7 +273,7 @@ public class IslandSectorAccess
 		this.activeSectors.remove(sector.getSectorX(), sector.getSectorY());
 	}
 
-	public void saveSectorToDisk(final World world, final IslandSector sector)
+	public void saveSectorToDisk(final World world, @Nonnull final IslandSector sector)
 	{
 		if (world.isRemote)
 		{
@@ -282,13 +283,16 @@ public class IslandSectorAccess
 		this.saveSectorToDisk(sector);
 	}
 
-	private void saveSectorToDisk(final IslandSector sector)
+	private void saveSectorToDisk(@Nonnull final IslandSector sector)
 	{
 		final File file = IslandSectorAccess.createSectorFile(sector.getSectorX(), sector.getSectorY());
 
 		final NBTTagCompound tag = new NBTTagCompound();
+		final NBTTagCompound sectorData = new NBTTagCompound();
 
-		NBTHelper.fullySerialize("s", sector, tag);
+		sector.write(sectorData);
+
+		tag.setTag("s", sectorData);
 
 		NBTHelper.writeNBTToFile(tag, file);
 	}
@@ -302,9 +306,7 @@ public class IslandSectorAccess
 		{
 			final NBTTagCompound tag = NBTHelper.readNBTFromFile(file);
 
-			final IslandSector sector = NBTHelper.fullyDeserialize("s", tag, null);
-
-			return sector;
+			return new IslandSector(tag.getCompoundTag("s"));
 		}
 
 		return null;

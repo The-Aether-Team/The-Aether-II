@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
+import com.gildedgames.aether.common.blocks.IBlockMultiName;
+import com.gildedgames.aether.common.blocks.properties.BlockVariant;
+import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import com.google.common.base.Predicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockHolystone extends Block implements IBlockVariants
+public class BlockHolystone extends Block implements IBlockMultiName
 {
 	public static final BlockVariant
 			NORMAL_HOLYSTONE = new BlockVariant(0, "normal"),
@@ -101,7 +101,7 @@ public class BlockHolystone extends Block implements IBlockVariants
 	}
 
 	@Override
-	public String getVariantName(ItemStack stack)
+	public String getUnlocalizedName(ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}

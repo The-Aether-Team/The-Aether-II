@@ -1,19 +1,19 @@
 package com.gildedgames.aether.common.items.blocks;
 
-import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
+import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockVariants extends ItemBlock
+public class ItemBlockMultiName extends ItemBlock
 {
-	private final IBlockVariants blockWithVariants;
+	private final IBlockMultiName blockWithVariants;
 
-	public ItemBlockVariants(Block block)
+	public ItemBlockMultiName(Block block)
 	{
 		super(block);
 
-		this.blockWithVariants = (IBlockVariants) block;
+		this.blockWithVariants = (IBlockMultiName) block;
 
 		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
@@ -28,7 +28,7 @@ public class ItemBlockVariants extends ItemBlock
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		return super.getUnlocalizedName() + "." + this.blockWithVariants.getVariantName(stack);
+		return super.getUnlocalizedName() + "." + this.blockWithVariants.getUnlocalizedName(stack);
 	}
 
 }

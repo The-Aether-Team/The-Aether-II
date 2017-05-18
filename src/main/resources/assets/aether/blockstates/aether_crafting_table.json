@@ -1,6 +1,6 @@
 {
 	"variants": {
-		"variant=skyroot": {
+		"normal": {
 			"model": "aether:crafting_tables/skyroot_crafting_table"
 		}
 	}

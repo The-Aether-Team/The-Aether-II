@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.util.helpers.NBTHelper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.ChunkPos;
 
 import java.util.HashSet;
@@ -23,9 +24,9 @@ public class IslandSector implements NBT
 
 	private final HashSet<Long> loadedChunks = Sets.newHashSet();
 
-	private IslandSector()
+	public IslandSector(NBTTagCompound tag)
 	{
-
+		this.read(tag);
 	}
 
 	public IslandSector(final int sectorX, final int sectorY, final long seed, final IslandData... data)
@@ -106,7 +107,17 @@ public class IslandSector implements NBT
 
 		tag.setLong("s", this.getSeed());
 
-		NBTHelper.fullySerializeArray("d", this.data, tag);
+		NBTTagList d = new NBTTagList();
+
+		for (IslandData island : this.data)
+		{
+			NBTTagCompound islandData = new NBTTagCompound();
+			island.write(islandData);
+
+			d.appendTag(islandData);
+		}
+
+		tag.setTag("d", d);
 	}
 
 	@Override
@@ -117,6 +128,15 @@ public class IslandSector implements NBT
 
 		this.seed = tag.getLong("s");
 
-		this.data = NBTHelper.fullyDeserializeArray("d", IslandData[].class, tag);
+		NBTTagList d = tag.getTagList("d", 13);
+
+		this.data = new IslandData[d.tagCount()];
+
+		for (int i = 0; i < d.tagCount(); i++)
+		{
+			NBTTagCompound islandData = d.getCompoundTagAt(i);
+
+			this.data[i] = new IslandData(islandData);
+		}
 	}
 }

@@ -3,9 +3,9 @@ package com.gildedgames.aether.common.blocks.natural;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
-import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
+import com.gildedgames.aether.common.blocks.IBlockMultiName;
+import com.gildedgames.aether.common.blocks.properties.BlockVariant;
+import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import com.gildedgames.aether.common.world.dimensions.aether.features.trees.WorldGenOrangeTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
@@ -28,7 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockAetherGrass extends BlockGrass implements IBlockVariants
+public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 {
 	public static final BlockVariant AETHER = new BlockVariant(0, "normal"),
 			ENCHANTED = new BlockVariant(1, "enchanted");
@@ -140,7 +140,7 @@ public class BlockAetherGrass extends BlockGrass implements IBlockVariants
 	}
 
 	@Override
-	public String getVariantName(ItemStack stack)
+	public String getUnlocalizedName(ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}

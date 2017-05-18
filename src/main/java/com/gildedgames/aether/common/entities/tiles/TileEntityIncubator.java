@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.entities.tiles;
 
 import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
-import com.gildedgames.aether.common.util.TickTimer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -32,8 +31,6 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	private static final int REQ_TEMPERATURE_THRESHOLD = 5000;
 
 	private int currentHeatingProgress;
-
-	private TickTimer progress = new TickTimer();
 
 	@Override
 	public void update()

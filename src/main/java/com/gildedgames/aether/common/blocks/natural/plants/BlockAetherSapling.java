@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
-import com.gildedgames.aether.common.blocks.util.variants.IBlockVariants;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.BlockVariant;
-import com.gildedgames.aether.common.blocks.util.variants.blockstates.PropertyVariant;
+import com.gildedgames.aether.common.blocks.IBlockMultiName;
+import com.gildedgames.aether.common.blocks.properties.BlockVariant;
+import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import com.gildedgames.aether.common.registry.GenerationAether;
 import com.gildedgames.aether.common.world.gen.IWorldGen;
 import net.minecraft.block.IGrowable;
@@ -26,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, IBlockVariants
+public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, IBlockMultiName
 {
 	public static final BlockVariant
 			BLUE_SKYROOT = new BlockVariant(0, "blue_skyroot"),
@@ -175,7 +175,7 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	}
 
 	@Override
-	public String getVariantName(ItemStack stack)
+	public String getUnlocalizedName(ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}

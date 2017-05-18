@@ -139,8 +139,7 @@ public class ItemModelsAether
 
 		registerItemModels(BlocksAether.cloudwool_carpet, "cloudwool_carpet");
 
-		registerItemModels(BlocksAether.aether_crafting_table, new ItemModelBuilder("crafting_tables/")
-				.add(BlockAetherCraftingTable.SKYROOT.getMeta(), "skyroot_crafting_table"));
+		registerItemModels(BlocksAether.aether_crafting_table, "crafting_tables/skyroot_crafting_table");
 
 		registerItemModels(ItemsAether.skyroot_bed, "skyroot_bed");
 

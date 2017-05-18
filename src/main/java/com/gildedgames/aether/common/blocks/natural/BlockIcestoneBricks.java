@@ -22,8 +22,6 @@ public class BlockIcestoneBricks extends Block
 		this.setHardness(3f);
 
 		this.setSoundType(SoundType.GLASS);
-
-		this.setTickRandomly(true);
 	}
 
 	@Override

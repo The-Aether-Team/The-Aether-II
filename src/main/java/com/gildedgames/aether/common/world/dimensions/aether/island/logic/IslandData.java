@@ -24,17 +24,17 @@ public class IslandData implements NBT
 
 	private BlockPos labyrinthEntrancePos;
 
-	private IslandData()
-	{
-
-	}
-
 	public IslandData(Rectangle bounds, int minY, int height, Biome biome)
 	{
 		this.bounds = bounds;
 		this.minY = minY;
 		this.height = height;
 		this.biome = biome;
+	}
+
+	public IslandData(NBTTagCompound islandData)
+	{
+		this.read(islandData);
 	}
 
 	public Rectangle getBounds()

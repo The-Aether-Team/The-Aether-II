@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.blocks.util.multiblock;
+package com.gildedgames.aether.common.blocks.multiblock;
 
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockInterface;
 import net.minecraft.block.BlockContainer;

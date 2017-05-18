@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.blocks.util.variants.blockstates;
+package com.gildedgames.aether.common.blocks.properties;
 
 public class BlockVariant implements Comparable<BlockVariant>
 {

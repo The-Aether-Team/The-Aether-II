@@ -2,8 +2,8 @@ package com.gildedgames.aether.common.world.templates;
 
 import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummy;
-import com.gildedgames.aether.common.blocks.util.multiblock.BlockMultiDummyHalf;
+import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummy;
+import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummyHalf;
 import com.gildedgames.aether.common.entities.tiles.TileEntityWildcard;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockController;
 import com.google.common.collect.Lists;

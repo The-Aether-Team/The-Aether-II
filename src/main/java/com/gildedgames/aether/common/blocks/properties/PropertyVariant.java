@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.blocks.util.variants.blockstates;
+package com.gildedgames.aether.common.blocks.properties;
 
 import com.google.common.base.Optional;
 import net.minecraft.block.properties.IProperty;

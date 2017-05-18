@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.blocks.misc;
+package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
