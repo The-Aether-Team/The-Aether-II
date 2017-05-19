@@ -60,11 +60,6 @@ public class AetherCore
 	public void onFMLPreInit(FMLPreInitializationEvent event)
 	{
 		AetherCore.CONFIG = new ConfigAether(event.getSuggestedConfigurationFile());
-
-		MinecraftForge.EVENT_BUS.register(AetherCore.CONFIG);
-		MinecraftForge.EVENT_BUS.register(IslandSectorAccess.inst());
-		MinecraftForge.EVENT_BUS.register(QuicksoilProcessor.class);
-
 		AetherCore.PROXY.preInit(event);
 
 		AetherCore.SPAWN_REGISTRY.registerAetherSpawnHandlers();

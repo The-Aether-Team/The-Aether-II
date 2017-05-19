@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.blocks.IBlockWithItem;
 import com.gildedgames.aether.common.blocks.util.BlockBuilder;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
-import com.gildedgames.aether.common.items.blocks.ItemBlockDecorative;
+import com.gildedgames.aether.common.items.blocks.ItemBlockSubtypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -91,6 +91,6 @@ public abstract class BlockDecorative extends BlockBuilder implements IBlockWith
 	@Override
 	public ItemBlock createItemBlock()
 	{
-		return new ItemBlockDecorative(this);
+		return new ItemBlockSubtypes(this);
 	}
 }

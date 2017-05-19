@@ -177,6 +177,11 @@ tile.aether.cloudwool_carpet.name=Cloudwool Carpet
 tile.aether.skyroot_bookshelf.name=Skyroot Bookshelf
 tile.aether.holystone_bookshelf.name=Holystone Bookshelf
 tile.aether.outpost_campfire.name=Outpost Campfire
+tile.aether.structure_hint.name=Structure Hint
+tile.aether.structure_hint.wildcard.name=Wildcard Block
+tile.aether.structure_hint.spawner_entity.name=Entity Spawner
+tile.aether.structure_hint.spawner_pack.name=Pack Spawner
+tile.aether.structure_hint.generator_loot.name=Loot Generator
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
@@ -837,33 +842,4 @@ dialog.back=Back
 
 edison.name=Edison
 
-edison.us.goodbye=Goodbye
-
-edison.them.outpost_start=You should really take better care of yourself, I really can't have folks saving your skin everywhere you go.
-
-edison.us.who_are_you=Who are you?
-edison.them.who_are_you=Oh have we not been introduced? I'm Edison, Edison Wrenk. Merchant by trade, but our "mutual friend" has requested I act as your contact out in these parts.
-
-edison.us.what_is_this_place=What is this place?
-edison.them.what_is_this_place=Our friend didn't inform me as to what you've been told, so I wonder if you mean this structure around us or this world we're in?
-
-edison.us.the_world_were_in=The world we're in.
-edison.them.the_world_were_in.1=Okay then, not been told much? This here is The Aether! It's a world that exists high above our own, so high it has its own flora and fauna.
-edison.them.the_world_were_in.2=What you stand in now is one of many ancient Valkyrie outposts, they were set up originally as sacred burial grounds if I recall correctly, but since have served as a place of resting for many travellers.
-
-edison.us.this_outpost=This outpost.
-edison.them.this_outpost.1=Ah well this here is an old traveller's outpost! One built many years ago by the Valkyries as a burial ground.
-edison.them.this_outpost.2=Since then many people have taken it upon themselves to maintain these areas, making them a truly safe place for anyone wandering the Aether's landscape to rest.
-
-edison.us.valkyries=Valkyries?
-edison.them.valkyries.1=They're kinda like the city guards of this world but err... Heh... Much more powerful. A solo legionnaire could rip you to shreds if you gave it reason to.
-edison.them.valkyries.2=Luckily they're rather friendly, not big talkers though. You should find them wandering around most towns and villages. They have some sort of holy pact to protect people or something.
-edison.them.valkyries.3=Honestly I'm not entirely sure what they are, you're better off asking one of the natives. Or a Valkyrie in person! They're kinda hard to miss.
-
-edison.us.why_am_i_here=Why am I here?
-edison.them.why_am_i_here.1=Well, you see, part of my little agreement with our good friend is that I need to ensure you don't die out there on your little "mission" or whatever it is you're doing.
-edison.them.why_am_i_here.2=So I've had a few of my employees and aquaintances get familiar with your looks, so if they ever spot you in trouble, they'll bring you back to one of these outposts and patch you up.
-edison.them.why_am_i_here.3=They'll also contact me and I'll come running to check up on you, I'm getting a hefty pay for this contract so don't wanna make it look like I don't care...
-edison.them.why_am_i_here.4=That said I can't guarantee the fellas who find you won't try to line their pockets themselves. Not that they don't deserve it, but they might decide it's worth not telling ya about it is all.
-
-edison.them.busy=I'm working on something at the moment, friend. Come back in a bit.
+aether.warning.deprecated_item=§cDeprecated! Will be removed!

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.blocks;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.blocks.builder.BlockStructureHint;
 import com.gildedgames.aether.common.blocks.construction.*;
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystoneButton;
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystonePressurePlate;
@@ -233,6 +234,8 @@ public class BlocksAether
 
 	public static Block skyroot_decorative = new BlockSkyrootDecorative();
 
+	public static Block structure_hint = new BlockStructureHint();
+
 	public static void preInit()
 	{
 		registerBlock("aether_dirt", aether_dirt.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
@@ -395,6 +398,8 @@ public class BlocksAether
 		registerBlock("cloudwool_carpet", cloudwool_carpet.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
 		registerBlock("outpost_campfire", outpost_campfire.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+
+		registerBlock("structure_hint", structure_hint.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
 		Blocks.FIRE.setFireInfo(skyroot_twigs, 60, 100);
 		Blocks.FIRE.setFireInfo(tall_aether_grass, 60, 100);

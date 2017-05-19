@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.blocks.decorative;
 import com.gildedgames.aether.common.blocks.IBlockWithItem;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
-import com.gildedgames.aether.common.items.blocks.ItemBlockDecorative;
+import com.gildedgames.aether.common.items.blocks.ItemBlockSubtypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.SoundType;
@@ -115,6 +115,6 @@ public class BlockRockGlassPaneDecorative extends BlockPane implements IBlockWit
 	@Override
 	public ItemBlock createItemBlock()
 	{
-		return new ItemBlockDecorative(this);
+		return new ItemBlockSubtypes(this);
 	}
 }

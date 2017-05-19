@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.blocks.util;
 
 import com.gildedgames.aether.common.blocks.IBlockWithItem;
-import com.gildedgames.aether.common.items.blocks.ItemCustomSlab;
+import com.gildedgames.aether.common.items.blocks.ItemBlockCustomSlab;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -153,7 +153,7 @@ public class BlockCustomSlab extends Block implements IBlockWithItem
 	@Override
 	public ItemBlock createItemBlock()
 	{
-		return new ItemCustomSlab(this);
+		return new ItemBlockCustomSlab(this);
 	}
 
 	public enum EnumSlabPart implements IStringSerializable

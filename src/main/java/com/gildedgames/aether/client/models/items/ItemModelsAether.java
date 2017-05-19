@@ -3,6 +3,7 @@ package com.gildedgames.aether.client.models.items;
 import com.gildedgames.aether.client.util.ItemModelBuilder;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.builder.BlockStructureHint;
 import com.gildedgames.aether.common.blocks.containers.BlockAetherCraftingTable;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
@@ -19,6 +20,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.ForgeHooksClient;
@@ -629,6 +631,12 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.burrukai_pelt, "burrukai_pelt");
 		registerItemModels(ItemsAether.kirrid_loin, "kirrid_loin");
 		registerItemModels(ItemsAether.kirrid_cutlet, "kirrid_cutlet");
+
+		registerItemModels(BlocksAether.structure_hint, new ItemModelBuilder("structure_hint/")
+				.add(BlockStructureHint.WILDCARD_BLOCK.getMeta(), "wildcard")
+				.add(BlockStructureHint.SPAWNER_ENTITY.getMeta(), "spawner_entity")
+				.add(BlockStructureHint.SPAWNER_PACK.getMeta(), "spawner_pack")
+				.add(BlockStructureHint.GENERATOR_LOOT.getMeta(), "generator_loot"));
 
 		registerItemModels(BlocksAether.wildcard, "wildcard");
 	}
