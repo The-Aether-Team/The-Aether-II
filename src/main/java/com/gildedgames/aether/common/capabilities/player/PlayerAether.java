@@ -3,12 +3,11 @@ package com.gildedgames.aether.common.capabilities.player;
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.dialog.IDialogController;
 import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.player.modules.*;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.DiedInAetherPacket;
-import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
+import com.gildedgames.aether.common.network.packets.PacketEquipment;
+import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -106,7 +105,7 @@ public class PlayerAether implements IPlayerAether
 	 */
 	public void sendFullUpdate()
 	{
-		NetworkingAether.sendPacketToPlayer(new DiedInAetherPacket(this.hasDiedInAetherBefore()), (EntityPlayerMP) this.getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(this.hasDiedInAetherBefore()), (EntityPlayerMP) this.getEntity());
 	}
 
 	public void onUpdate(LivingUpdateEvent event)
@@ -178,7 +177,7 @@ public class PlayerAether implements IPlayerAether
 
 	public void onPlayerBeginWatching(IPlayerAether other)
 	{
-		NetworkingAether.sendPacketToPlayer(new EquipmentChangedPacket(this), (EntityPlayerMP) other.getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketEquipment(this), (EntityPlayerMP) other.getEntity());
 	}
 
 	@Override

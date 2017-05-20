@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks.properties;
 
 import com.google.common.base.Optional;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.util.IntHashMap;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -12,22 +13,24 @@ public class PropertyVariant implements IProperty<BlockVariant>
 
 	private final BlockVariant defaultVariant;
 
-	private final HashMap<Integer, BlockVariant> metaMap;
+	private final IntHashMap<BlockVariant> mappings;
 
-	private final HashMap<String, BlockVariant> nameMap;
+	private final HashMap<String, BlockVariant> entries;
 
 	protected PropertyVariant(String name, BlockVariant... variants)
 	{
 		this.name = name;
-		this.metaMap = new HashMap<>();
-		this.nameMap = new HashMap<>();
+
+		this.mappings = new IntHashMap<>();
+		this.entries = new HashMap<>();
 
 		this.defaultVariant = variants[0];
 
 		for (BlockVariant variant : variants)
 		{
-			this.metaMap.put(variant.getMeta(), variant);
-			this.nameMap.put(variant.getName(), variant);
+			this.mappings.addKey(variant.getMeta(), variant);
+
+			this.entries.put(variant.getName(), variant);
 		}
 	}
 
@@ -45,7 +48,7 @@ public class PropertyVariant implements IProperty<BlockVariant>
 	@Override
 	public Collection<BlockVariant> getAllowedValues()
 	{
-		return this.metaMap.values();
+		return this.entries.values();
 	}
 
 	@Override
@@ -57,7 +60,7 @@ public class PropertyVariant implements IProperty<BlockVariant>
 	@Override
 	public Optional<BlockVariant> parseValue(String value)
 	{
-		return Optional.fromNullable(this.nameMap.get(value));
+		return Optional.fromNullable(this.entries.get(value));
 	}
 
 	@Override
@@ -68,7 +71,7 @@ public class PropertyVariant implements IProperty<BlockVariant>
 
 	public BlockVariant fromMeta(int meta)
 	{
-		BlockVariant variant = this.metaMap.get(meta);
+		BlockVariant variant = this.mappings.lookup(meta);
 
 		return variant != null ? variant : this.defaultVariant;
 	}

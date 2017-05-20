@@ -6,17 +6,17 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class DiedInAetherPacket implements IMessage
+public class PacketMarkPlayerDeath implements IMessage
 {
 
 	private boolean flag = true;
 
-	public DiedInAetherPacket()
+	public PacketMarkPlayerDeath()
 	{
 
 	}
 
-	public DiedInAetherPacket(boolean flag)
+	public PacketMarkPlayerDeath(boolean flag)
 	{
 		this.flag = flag;
 	}
@@ -33,10 +33,10 @@ public class DiedInAetherPacket implements IMessage
 		buf.writeBoolean(this.flag);
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<DiedInAetherPacket, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketMarkPlayerDeath, IMessage>
 	{
 		@Override
-		public IMessage onMessage(DiedInAetherPacket message, EntityPlayer player)
+		public IMessage onMessage(PacketMarkPlayerDeath message, EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{

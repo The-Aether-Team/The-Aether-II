@@ -88,5 +88,4 @@ public class NBTHelper
 
 		return tag;
 	}
-
 }

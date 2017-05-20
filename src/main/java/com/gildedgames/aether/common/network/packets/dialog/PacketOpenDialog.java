@@ -10,13 +10,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class DialogOpenPacket implements IMessage
+public class PacketOpenDialog implements IMessage
 {
 	private ResourceLocation name;
 
-	public DialogOpenPacket() { }
+	public PacketOpenDialog()
+	{
+	}
 
-	public DialogOpenPacket(ResourceLocation res)
+	public PacketOpenDialog(ResourceLocation res)
 	{
 		this.name = res;
 	}
@@ -33,10 +35,10 @@ public class DialogOpenPacket implements IMessage
 		ByteBufUtils.writeUTF8String(buf, this.name.toString());
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<DialogOpenPacket, DialogOpenPacket>
+	public static class HandlerClient extends MessageHandlerClient<PacketOpenDialog, PacketOpenDialog>
 	{
 		@Override
-		public DialogOpenPacket onMessage(DialogOpenPacket message, EntityPlayer player)
+		public PacketOpenDialog onMessage(PacketOpenDialog message, EntityPlayer player)
 		{
 			AetherCore.LOGGER.info("Server requested player to open dialog file {}", message.name);
 

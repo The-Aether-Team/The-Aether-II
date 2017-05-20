@@ -6,17 +6,17 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class MidAirJumpsChangedPacket implements IMessage
+public class PacketMoaJump implements IMessage
 {
 
 	private int midAirJumpsAllowed;
 
-	public MidAirJumpsChangedPacket()
+	public PacketMoaJump()
 	{
 
 	}
 
-	public MidAirJumpsChangedPacket(int midAirJumpsAllowed)
+	public PacketMoaJump(int midAirJumpsAllowed)
 	{
 		this.midAirJumpsAllowed = midAirJumpsAllowed;
 	}
@@ -33,10 +33,10 @@ public class MidAirJumpsChangedPacket implements IMessage
 		buf.writeInt(this.midAirJumpsAllowed);
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<MidAirJumpsChangedPacket, MidAirJumpsChangedPacket>
+	public static class HandlerClient extends MessageHandlerClient<PacketMoaJump, PacketMoaJump>
 	{
 		@Override
-		public MidAirJumpsChangedPacket onMessage(MidAirJumpsChangedPacket message, EntityPlayer player)
+		public PacketMoaJump onMessage(PacketMoaJump message, EntityPlayer player)
 		{
 			PlayerAether playerAether = PlayerAether.getPlayer(player);
 

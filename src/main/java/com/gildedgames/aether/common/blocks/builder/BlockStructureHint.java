@@ -11,7 +11,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -21,7 +20,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
-import java.util.Random;
 
 public class BlockStructureHint extends Block implements IBlockWithItem
 {
@@ -54,18 +52,6 @@ public class BlockStructureHint extends Block implements IBlockWithItem
 		{
 			list.add(new ItemStack(item, 1, variant.getMeta()));
 		}
-	}
-
-	@Override
-	public int quantityDropped(Random random)
-	{
-		return 0;
-	}
-
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
-		return Items.AIR;
 	}
 
 	@Override
@@ -109,6 +95,12 @@ public class BlockStructureHint extends Block implements IBlockWithItem
 	public ItemBlock createItemBlock()
 	{
 		return new ItemBlockSubtypes(this);
+	}
+
+	@Override
+	public int damageDropped(IBlockState state)
+	{
+		return state.getValue(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override

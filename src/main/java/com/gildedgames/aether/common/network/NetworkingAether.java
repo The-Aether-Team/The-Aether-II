@@ -2,8 +2,8 @@ package com.gildedgames.aether.common.network;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.packets.*;
-import com.gildedgames.aether.common.network.packets.dialog.DialogClosePacket;
-import com.gildedgames.aether.common.network.packets.dialog.DialogOpenPacket;
+import com.gildedgames.aether.common.network.packets.dialog.PacketCloseDialog;
+import com.gildedgames.aether.common.network.packets.dialog.PacketOpenDialog;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityTracker;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,13 +25,16 @@ public class NetworkingAether
 	{
 		instance = NetworkRegistry.INSTANCE.newSimpleChannel(AetherCore.MOD_ID);
 
-		instance.registerMessage(AetherMovementPacket.HandlerServer.class, AetherMovementPacket.class, discriminant++, Side.SERVER);
-		instance.registerMessage(EquipmentChangedPacket.HandlerClient.class, EquipmentChangedPacket.class, discriminant++, Side.CLIENT);
-		instance.registerMessage(MidAirJumpsChangedPacket.HandlerClient.class, MidAirJumpsChangedPacket.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketSpecialMovement.HandlerServer.class, PacketSpecialMovement.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketEquipment.HandlerClient.class, PacketEquipment.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketMoaJump.HandlerClient.class, PacketMoaJump.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketOpenTab.HandlerServer.class, PacketOpenTab.class, discriminant++, Side.SERVER);
-		instance.registerMessage(DiedInAetherPacket.HandlerClient.class, DiedInAetherPacket.class, discriminant++, Side.CLIENT);
-		instance.registerMessage(DialogOpenPacket.HandlerClient.class, DialogOpenPacket.class, discriminant++, Side.CLIENT);
-		instance.registerMessage(DialogClosePacket.HandlerServer.class, DialogClosePacket.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketMarkPlayerDeath.HandlerClient.class, PacketMarkPlayerDeath.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketOpenDialog.HandlerClient.class, PacketOpenDialog.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketCloseDialog.HandlerServer.class, PacketCloseDialog.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketStructureBuilder.HandlerServer.class, PacketStructureBuilder.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketStructureBuilder.HandlerClient.class, PacketStructureBuilder.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketSaveStructure.HandlerServer.class, PacketSaveStructure.class, discriminant++, Side.SERVER);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 	}

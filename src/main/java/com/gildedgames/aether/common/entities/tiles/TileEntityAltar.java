@@ -4,8 +4,8 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.recipes.altar.IAltarRecipe;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.containers.BlockAltar;
-import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.entities.tiles.util.TileEntitySynced;
+import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -47,7 +47,7 @@ public class TileEntityAltar extends TileEntitySynced implements ITickable
 	{
 		this.stackOnAltar = stack;
 
-		this.sync();
+		this.sendUpdatesToClients();
 	}
 
 	public int getAmbrosiumCount()
@@ -59,7 +59,7 @@ public class TileEntityAltar extends TileEntitySynced implements ITickable
 	{
 		this.ambrosiumCount = count;
 
-		this.sync();
+		this.sendUpdatesToClients();
 	}
 
 	public void removeAmbrosiumShard()

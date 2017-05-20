@@ -19,7 +19,7 @@ import com.gildedgames.aether.common.containers.slots.SlotFlintAndSteel;
 import com.gildedgames.aether.common.containers.slots.SlotMoaEgg;
 import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.AetherMovementPacket;
+import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -140,7 +140,7 @@ public class ClientEventHandler
 						{
 							if (aePlayer.getAbilitiesModule().performMidAirJump())
 							{
-								NetworkingAether.sendPacketToServer(new AetherMovementPacket(AetherMovementPacket.Action.EXTRA_JUMP));
+								NetworkingAether.sendPacketToServer(new PacketSpecialMovement(PacketSpecialMovement.Action.EXTRA_JUMP));
 
 								world.playSound(player.posX, player.posY, player.posZ, SoundsAether.generic_wing_flap, SoundCategory.PLAYERS, 0.4f,
 										0.8f + (world.rand.nextFloat() * 0.6f), false);

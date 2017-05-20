@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 public abstract class TileEntitySynced extends TileEntity
 {
 
-	public void sync()
+	public void sendUpdatesToClients()
 	{
 		IBlockState state = this.world.getBlockState(this.pos);
 

@@ -6,7 +6,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class AetherMovementPacket implements IMessage
+public class PacketSpecialMovement implements IMessage
 {
 	public enum Action
 	{
@@ -15,12 +15,12 @@ public class AetherMovementPacket implements IMessage
 
 	private Action action;
 
-	public AetherMovementPacket()
+	public PacketSpecialMovement()
 	{
 
 	}
 
-	public AetherMovementPacket(Action action)
+	public PacketSpecialMovement(Action action)
 	{
 		this.action = action;
 	}
@@ -37,10 +37,10 @@ public class AetherMovementPacket implements IMessage
 		buf.writeByte(this.action.ordinal());
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<AetherMovementPacket, AetherMovementPacket>
+	public static class HandlerServer extends MessageHandlerServer<PacketSpecialMovement, PacketSpecialMovement>
 	{
 		@Override
-		public AetherMovementPacket onMessage(AetherMovementPacket message, EntityPlayer player)
+		public PacketSpecialMovement onMessage(PacketSpecialMovement message, EntityPlayer player)
 		{
 			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 

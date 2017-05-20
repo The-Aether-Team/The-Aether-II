@@ -182,6 +182,7 @@ tile.aether.structure_hint.wildcard.name=Wildcard Block
 tile.aether.structure_hint.spawner_entity.name=Entity Spawner
 tile.aether.structure_hint.spawner_pack.name=Pack Spawner
 tile.aether.structure_hint.generator_loot.name=Loot Generator
+tile.aether.structure_builder.name=Structure Builder
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
@@ -874,3 +875,4 @@ edison.them.why_am_i_here.4=That said I can't guarantee the fellas who find you 
 edison.them.busy=I'm working on something at the moment, friend. Come back in a bit.
 
 aether.warning.deprecated_item=§cDeprecated! Will be removed!
+aether.warning.operator_item=Requires Operator privileges

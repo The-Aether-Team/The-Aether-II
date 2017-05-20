@@ -6,8 +6,8 @@ import com.gildedgames.aether.client.gui.dialog.GuiDialogViewer;
 import com.gildedgames.aether.common.capabilities.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.dialog.DialogClosePacket;
-import com.gildedgames.aether.common.network.packets.dialog.DialogOpenPacket;
+import com.gildedgames.aether.common.network.packets.dialog.PacketCloseDialog;
+import com.gildedgames.aether.common.network.packets.dialog.PacketOpenDialog;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -54,7 +54,7 @@ public class DialogModule extends PlayerAetherModule implements IDialogControlle
 	public void openScene(ResourceLocation path)
 	{
 		IDialogScene scene = AetherAPI.content().dialog().getScene(path).orElseThrow(() ->
-				new IllegalArgumentException("Couldn't get scene " + path));
+				new IllegalArgumentException("Couldn't getByte scene " + path));
 
 		if (this.getPlayer().getEntity().world.isRemote)
 		{
@@ -87,7 +87,7 @@ public class DialogModule extends PlayerAetherModule implements IDialogControlle
 	{
 		this.sceneInstance = new SceneInstance(this, scene);
 
-		NetworkingAether.sendPacketToPlayer(new DialogOpenPacket(res), (EntityPlayerMP) this.getPlayer().getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketOpenDialog(res), (EntityPlayerMP) this.getPlayer().getEntity());
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class DialogModule extends PlayerAetherModule implements IDialogControlle
 	@SideOnly(Side.CLIENT)
 	private void closeSceneClient()
 	{
-		NetworkingAether.sendPacketToServer(new DialogClosePacket());
+		NetworkingAether.sendPacketToServer(new PacketCloseDialog());
 	}
 
 	@Override

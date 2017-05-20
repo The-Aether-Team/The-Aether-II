@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.dialog.IDialogManager;
 import com.gildedgames.aether.api.recipes.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.api.registry.recipes.IRecipeIndexRegistry;
 import com.gildedgames.aether.api.registry.tab.ITabRegistry;
+import com.gildedgames.aether.api.structure.IStructureLoader;
 
 /**
  * Provider for Aether content interfaces.
@@ -39,4 +40,9 @@ public interface IContentRegistry
 	 * @return The {@link IRecipeIndexRegistry} provider for the Aether.
 	 */
 	IRecipeIndexRegistry craftable();
+
+	/**
+	 * @return The {@link IStructureLoader} provider for the Aether.
+	 */
+	IStructureLoader structures();
 }

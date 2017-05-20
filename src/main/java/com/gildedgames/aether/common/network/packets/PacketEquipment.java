@@ -15,18 +15,18 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EquipmentChangedPacket implements IMessage
+public class PacketEquipment implements IMessage
 {
 	private final List<Pair<Integer, ItemStack>> changes = new ArrayList<>();
 
 	private int entityId;
 
-	public EquipmentChangedPacket()
+	public PacketEquipment()
 	{
 
 	}
 
-	public EquipmentChangedPacket(PlayerAether aePlayer)
+	public PacketEquipment(PlayerAether aePlayer)
 	{
 		this.entityId = aePlayer.getEntity().getEntityId();
 
@@ -38,7 +38,7 @@ public class EquipmentChangedPacket implements IMessage
 		}
 	}
 
-	public EquipmentChangedPacket(Entity entity, List<Pair<Integer, ItemStack>> changes)
+	public PacketEquipment(Entity entity, List<Pair<Integer, ItemStack>> changes)
 	{
 		this.entityId = entity.getEntityId();
 
@@ -76,10 +76,10 @@ public class EquipmentChangedPacket implements IMessage
 		}
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<EquipmentChangedPacket, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketEquipment, IMessage>
 	{
 		@Override
-		public IMessage onMessage(EquipmentChangedPacket message, EntityPlayer player)
+		public IMessage onMessage(PacketEquipment message, EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{

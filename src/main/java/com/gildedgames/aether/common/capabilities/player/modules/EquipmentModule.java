@@ -11,7 +11,7 @@ import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
 import com.gildedgames.aether.common.entities.effects.EquipmentEffectPool;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.EquipmentChangedPacket;
+import com.gildedgames.aether.common.network.packets.PacketEquipment;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -94,7 +94,7 @@ public class EquipmentModule extends PlayerAetherModule implements IEquipmentMod
 
 		if (!this.getEntity().world.isRemote)
 		{
-			NetworkingAether.sendPacketToWatching(new EquipmentChangedPacket(this.getEntity(), updates), this.getEntity(), true);
+			NetworkingAether.sendPacketToWatching(new PacketEquipment(this.getEntity(), updates), this.getEntity(), true);
 		}
 
 		this.pools.values().forEach(EquipmentEffectPool::update);
