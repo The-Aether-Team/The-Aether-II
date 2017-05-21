@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.blocks.builder;
 
 import com.gildedgames.aether.common.entities.tiles.builder.TileEntityStructureBuilder;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.PacketStructureBuilder;
+import com.gildedgames.aether.common.network.packets.PacketUpdateStructure;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -15,6 +15,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -40,6 +41,13 @@ public class BlockStructureBuilder extends Block implements ITileEntityProvider
 	{
 		if (!world.isRemote)
 		{
+			if (!player.canUseCommand(2, ""))
+			{
+				player.sendMessage(new TextComponentString("You need to be an operator to use this block."));
+
+				return false;
+			}
+
 			TileEntityStructureBuilder tile = (TileEntityStructureBuilder) world.getTileEntity(pos);
 
 			if (tile == null)
@@ -47,7 +55,7 @@ public class BlockStructureBuilder extends Block implements ITileEntityProvider
 				return false;
 			}
 
-			PacketStructureBuilder packet = new PacketStructureBuilder(tile.getStructureData(), pos);
+			PacketUpdateStructure packet = new PacketUpdateStructure(pos, tile.getStructureData());
 
 			NetworkingAether.sendPacketToPlayer(packet, (EntityPlayerMP) player);
 		}

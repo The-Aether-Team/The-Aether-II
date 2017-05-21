@@ -12,17 +12,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class PacketStructureBuilder implements IMessage
+public class PacketUpdateStructure implements IMessage
 {
 	private BlockPos pos;
 
 	private TileEntityStructureBuilder.Data data;
 
-	public PacketStructureBuilder()
+	public PacketUpdateStructure()
 	{
 	}
 
-	public PacketStructureBuilder(TileEntityStructureBuilder.Data data, BlockPos pos)
+	public PacketUpdateStructure(BlockPos pos, TileEntityStructureBuilder.Data data)
 	{
 		this.data = data;
 		this.pos = pos;
@@ -47,10 +47,10 @@ public class PacketStructureBuilder implements IMessage
 		this.data.write(buf);
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketStructureBuilder, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketUpdateStructure, IMessage>
 	{
 		@Override
-		public IMessage onMessage(PacketStructureBuilder message, EntityPlayer player)
+		public IMessage onMessage(PacketUpdateStructure message, EntityPlayer player)
 		{
 			if (!player.canUseCommand(2, ""))
 			{
@@ -77,10 +77,10 @@ public class PacketStructureBuilder implements IMessage
 		}
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketStructureBuilder, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketUpdateStructure, IMessage>
 	{
 		@Override
-		public IMessage onMessage(PacketStructureBuilder message, EntityPlayer player)
+		public IMessage onMessage(PacketUpdateStructure message, EntityPlayer player)
 		{
 			Minecraft.getMinecraft().displayGuiScreen(new GuiStructureBuilder(player, message.pos, message.data));
 

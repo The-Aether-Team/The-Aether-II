@@ -4,8 +4,9 @@ import com.gildedgames.aether.client.gui.elements.GuiBlockPosEditor;
 import com.gildedgames.aether.common.entities.tiles.builder.TileEntityStructureBuilder;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSaveStructure;
-import com.gildedgames.aether.common.network.packets.PacketStructureBuilder;
+import com.gildedgames.aether.common.network.packets.PacketUpdateStructure;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
@@ -101,22 +102,13 @@ public class GuiStructureBuilder extends GuiScreen
 	}
 
 	@Override
-	protected void mouseReleased(int mouseX, int mouseY, int mouseButton)
-	{
-		super.mouseReleased(mouseX, mouseY, mouseButton);
-
-		this.editOrigin.mouseReleased(mouseX, mouseY);
-		this.editSize.mouseReleased(mouseX, mouseY);
-	}
-
-	@Override
 	public void initGui()
 	{
 		Keyboard.enableRepeatEvents(true);
 
 		this.editName = new GuiTextField(0, this.mc.fontRenderer, 20, 46, 200, 20);
-		this.editOrigin = new GuiBlockPosEditor(this.data.offset, 20, 90);
-		this.editSize = new GuiBlockPosEditor(this.data.size, 20, 134);
+		this.editOrigin = new GuiBlockPosEditor(this.data.offset, 20, 90, true);
+		this.editSize = new GuiBlockPosEditor(this.data.size, 20, 134, false);
 
 		this.updateButton = new GuiButton(10, this.width - 110, this.height - 30, 100, 20, "Update Changes");
 		this.cancelButton = new GuiButton(11, this.width - 174, this.height - 30, 60, 20, "Cancel");
@@ -145,21 +137,24 @@ public class GuiStructureBuilder extends GuiScreen
 		if (button.id == this.cancelButton.id)
 		{
 			Minecraft.getMinecraft().displayGuiScreen(null);
+
+			return;
 		}
-		else if (button.id == this.updateButton.id)
+
+		if (button.id == this.updateButton.id || button.id == this.saveButton.id)
 		{
 			this.data.name = this.editName.getText();
-
 			this.data.size = this.editSize.getModifiedPos();
 			this.data.offset = this.editOrigin.getModifiedPos();
 
-			NetworkingAether.sendPacketToServer(new PacketStructureBuilder(this.data, this.pos));
+			NetworkingAether.sendPacketToServer(new PacketUpdateStructure(this.pos, this.data));
+
+			if (button.id == this.saveButton.id)
+			{
+				NetworkingAether.sendPacketToServer(new PacketSaveStructure(this.pos));
+			}
 
 			Minecraft.getMinecraft().displayGuiScreen(null);
-		}
-		else if (button.id == this.saveButton.id)
-		{
-			NetworkingAether.sendPacketToServer(new PacketSaveStructure(this.pos));
 		}
 	}
 

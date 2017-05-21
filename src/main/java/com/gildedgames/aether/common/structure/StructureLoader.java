@@ -39,6 +39,13 @@ public class StructureLoader implements IStructureLoader
 	@Override
 	public void saveStructure(World world, IBakedStructure structure)
 	{
+		if (structure.getName().length() <= 0)
+		{
+			AetherCore.LOGGER.error("Tried to save structure with empty name");
+
+			return;
+		}
+
 		Path root = Paths.get(world.getSaveHandler().getWorldDirectory().getAbsolutePath(), DIRECTORY);
 
 		if (!Files.exists(root))
