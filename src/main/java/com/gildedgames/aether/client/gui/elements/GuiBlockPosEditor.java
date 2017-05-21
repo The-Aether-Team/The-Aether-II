@@ -13,7 +13,7 @@ import java.util.Collection;
 
 public class GuiBlockPosEditor extends Gui
 {
-	private final BlockPos pos;
+	private final BlockPos original;
 
 	private final GuiTextField editX;
 
@@ -25,9 +25,9 @@ public class GuiBlockPosEditor extends Gui
 
 	private final boolean allowNegative;
 
-	public GuiBlockPosEditor(BlockPos pos, int x, int y, boolean allowNegative)
+	public GuiBlockPosEditor(BlockPos original, int x, int y, boolean allowNegative)
 	{
-		this.pos = pos;
+		this.original = original;
 		this.allowNegative = allowNegative;
 
 		final FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
@@ -36,32 +36,33 @@ public class GuiBlockPosEditor extends Gui
 
 		this.editX = new GuiTextField(0, fontRenderer, x, y, width, 20);
 		this.editX.setTextColor(0xff9999);
-		this.editX.setText(String.valueOf(this.pos.getX()));
+		this.editX.setText(String.valueOf(this.original.getX()));
 
 		this.editY = new GuiTextField(1, fontRenderer, x + 46, y, width, 20);
 		this.editY.setTextColor(0x99ff99);
-		this.editY.setText(String.valueOf(this.pos.getY()));
+		this.editY.setText(String.valueOf(this.original.getY()));
 
 		this.editZ = new GuiTextField(2, fontRenderer, x + 92, y, width, 20);
 		this.editZ.setTextColor(0x9999ff);
-		this.editZ.setText(String.valueOf(this.pos.getZ()));
+		this.editZ.setText(String.valueOf(this.original.getZ()));
 
 		this.fields = Lists.newArrayList(this.editX, this.editY, this.editZ);
 		this.fields.forEach((field) ->
-				field.setValidator(input -> {
+				field.setValidator(input ->
+				{
 					if (input == null)
 					{
 						return false;
 					}
 
-					if (input.length() == 0)
+					if (input.length() == 0 || (this.allowNegative && input.charAt(0) == '-'))
 					{
 						return true;
 					}
 
 					Integer value = Ints.tryParse(input);
 
-					return value != null && !(!this.allowNegative && value >= 0);
+					return value != null && (this.allowNegative || value > 0);
 				}));
 	}
 
@@ -78,23 +79,25 @@ public class GuiBlockPosEditor extends Gui
 	public void mouseClicked(int mouseX, int mouseY, int mouseButton)
 	{
 		this.fields.forEach((field) -> {
+			boolean wasFocused = field.isFocused();
+
 			field.mouseClicked(mouseX, mouseY, mouseButton);
 
-			if (!field.isFocused())
+			if (wasFocused != field.isFocused())
 			{
-				if (field.getText().length() == 0)
+				if (Ints.tryParse(field.getText()) == null)
 				{
-					if (field.getId() == 0)
+					if (field == this.editX)
 					{
-						field.setText(String.valueOf(this.pos.getX()));
+						field.setText(String.valueOf(this.original.getX()));
 					}
-					else if (field.getId() == 1)
+					else if (field == this.editY)
 					{
-						field.setText(String.valueOf(this.pos.getY()));
+						field.setText(String.valueOf(this.original.getY()));
 					}
-					else if (field.getId() == 2)
+					else if (field == this.editZ)
 					{
-						field.setText(String.valueOf(this.pos.getZ()));
+						field.setText(String.valueOf(this.original.getZ()));
 					}
 				}
 
@@ -123,7 +126,13 @@ public class GuiBlockPosEditor extends Gui
 	{
 		this.fields.stream().filter(GuiTextField::isFocused).findFirst().ifPresent((field) ->
 		{
-			Integer value = Integer.parseInt(field.getText());
+			Integer value = Ints.tryParse(field.getText());
+
+			if (value == null)
+			{
+				return;
+			}
+
 			value += amount;
 
 			if (!this.allowNegative && value < 0)
@@ -137,9 +146,9 @@ public class GuiBlockPosEditor extends Gui
 
 	public BlockPos getModifiedPos()
 	{
-		int x = this.editX.getText().length() > 0 ? Integer.parseInt(this.editX.getText()) : 0;
-		int y = this.editY.getText().length() > 0 ? Integer.parseInt(this.editY.getText()) : 0;
-		int z = this.editZ.getText().length() > 0 ? Integer.parseInt(this.editZ.getText()) : 0;
+		int x = Integer.parseInt(this.editX.getText());
+		int y = Integer.parseInt(this.editY.getText());
+		int z = Integer.parseInt(this.editZ.getText());
 
 		return new BlockPos(x, y, z);
 	}
