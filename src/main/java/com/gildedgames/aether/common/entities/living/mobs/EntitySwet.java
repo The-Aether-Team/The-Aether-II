@@ -38,7 +38,7 @@ public class EntitySwet extends EntityExtendedMob
 		Type(String name)
 		{
 			this.name = name;
-			this.texture = AetherCore.getResource("textures/entities/swet/" + this.name + "_swet.png");
+			this.texture = AetherCore.getResource("textures/entities/swet/" + this.name + "_swet_jelly.png");
 		}
 
 		public static Type fromOrdinal(int ordinal)
