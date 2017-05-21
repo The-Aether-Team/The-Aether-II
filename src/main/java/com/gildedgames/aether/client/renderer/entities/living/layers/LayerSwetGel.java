@@ -27,14 +27,8 @@ public class LayerSwetGel implements LayerRenderer<EntitySwet>
 		{
 			this.renderer.bindTexture(entity.getType().texture);
 
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-			GlStateManager.enableNormalize();
-			GlStateManager.enableBlend();
-			GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 			this.swetModel.setModelAttributes(this.renderer.getMainModel());
 			this.swetModel.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-			GlStateManager.disableBlend();
-			GlStateManager.disableNormalize();
 		}
 	}
 
