@@ -5,6 +5,8 @@ import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PacketMoaJump implements IMessage
 {
@@ -33,6 +35,7 @@ public class PacketMoaJump implements IMessage
 		buf.writeInt(this.midAirJumpsAllowed);
 	}
 
+	@SideOnly(Side.CLIENT)
 	public static class HandlerClient extends MessageHandlerClient<PacketMoaJump, PacketMoaJump>
 	{
 		@Override

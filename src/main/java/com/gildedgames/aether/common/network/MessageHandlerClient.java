@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMessage> implements IMessageHandler<REQ, RES>
 {
 	private final boolean executesOnGameThread;

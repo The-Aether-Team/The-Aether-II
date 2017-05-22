@@ -11,6 +11,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PacketUpdateStructure implements IMessage
 {
@@ -77,6 +79,7 @@ public class PacketUpdateStructure implements IMessage
 		}
 	}
 
+	@SideOnly(Side.CLIENT)
 	public static class HandlerClient extends MessageHandlerClient<PacketUpdateStructure, IMessage>
 	{
 		@Override

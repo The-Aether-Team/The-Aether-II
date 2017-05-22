@@ -9,6 +9,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PacketOpenDialog implements IMessage
 {
@@ -35,6 +37,7 @@ public class PacketOpenDialog implements IMessage
 		ByteBufUtils.writeUTF8String(buf, this.name.toString());
 	}
 
+	@SideOnly(Side.CLIENT)
 	public static class HandlerClient extends MessageHandlerClient<PacketOpenDialog, PacketOpenDialog>
 	{
 		@Override

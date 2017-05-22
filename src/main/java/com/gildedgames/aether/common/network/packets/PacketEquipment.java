@@ -10,6 +10,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -76,6 +78,7 @@ public class PacketEquipment implements IMessage
 		}
 	}
 
+	@SideOnly(Side.CLIENT)
 	public static class HandlerClient extends MessageHandlerClient<PacketEquipment, IMessage>
 	{
 		@Override
