@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.gui.dialog;
 
+import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.dialog.*;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.living.npc.EntityEdison;
@@ -11,7 +12,6 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.*;
 import org.lwjgl.Sys;
@@ -35,6 +35,8 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 	private EntityNPC npc;
 
 	private IDialogNode node;
+
+	private IDialogSpeaker speaker;
 
 	public GuiDialogViewer(IDialogController controller)
 	{
@@ -206,10 +208,16 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 
 		if (this.controller.getCurrentLine().getSpeaker().isPresent())
 		{
+			ResourceLocation speakerPath = this.controller.getCurrentLine().getSpeaker().get();
+
+			this.speaker = AetherAPI.content().dialog().getSpeaker(speakerPath).orElseThrow(() ->
+					new IllegalArgumentException("Couldn't getByte speaker " + speakerPath));
+
 			this.fontRenderer = Minecraft.getMinecraft().fontRenderer;
 
 			boolean topText = this.controller.isNodeFinished() && this.controller.getCurrentNode().getButtons().size() > 0;
-			String name = I18n.format(this.controller.getCurrentLine().getSpeaker().get() + ".name");
+
+			String name = I18n.format(this.speaker.getUnlocalizedName());
 
 			this.namePlate = new GuiTextBox(
 					buttons.size() + 2,

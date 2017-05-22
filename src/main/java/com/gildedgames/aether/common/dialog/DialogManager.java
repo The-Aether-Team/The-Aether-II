@@ -3,9 +3,11 @@ package com.gildedgames.aether.common.dialog;
 import com.gildedgames.aether.api.dialog.IDialogAction;
 import com.gildedgames.aether.api.dialog.IDialogManager;
 import com.gildedgames.aether.api.dialog.IDialogScene;
+import com.gildedgames.aether.api.dialog.IDialogSpeaker;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.dialog.data.DialogActionDeserializer;
 import com.gildedgames.aether.common.dialog.data.DialogSchema;
+import com.gildedgames.aether.common.dialog.data.DialogSpeaker;
 import com.gildedgames.aether.common.dialog.data.actions.DialogActionExit;
 import com.gildedgames.aether.common.dialog.data.actions.DialogActionNavigate;
 import com.google.gson.Gson;
@@ -32,6 +34,8 @@ import java.util.Optional;
 public class DialogManager implements IDialogManager
 {
 	private final HashMap<ResourceLocation, IDialogScene> cachedScenes = new HashMap<>();
+
+	private final HashMap<ResourceLocation, IDialogSpeaker> cachedSpeakers = new HashMap<>();
 
 	private final Gson gson;
 
@@ -69,6 +73,35 @@ public class DialogManager implements IDialogManager
 		builder.registerTypeAdapter(DialogActionNavigate.class, new DialogActionNavigate.Deserializer());
 
 		return builder;
+	}
+
+	@Override
+	public Optional<IDialogSpeaker> getSpeaker(ResourceLocation resource)
+	{
+		if (this.allowCaching && this.cachedSpeakers.containsKey(resource))
+		{
+			return Optional.of(this.cachedSpeakers.get(resource));
+		}
+
+		final IDialogSpeaker speaker;
+
+		try
+		{
+			speaker = this.loadSpeaker(resource);
+
+			if (this.allowCaching)
+			{
+				this.cachedSpeakers.put(resource, speaker);
+			}
+		}
+		catch (IOException e)
+		{
+			AetherCore.LOGGER.error("Failed to load dialog speaker: {}", resource, e);
+
+			return Optional.empty();
+		}
+
+		return Optional.of(speaker);
 	}
 
 	@Override
@@ -111,6 +144,21 @@ public class DialogManager implements IDialogManager
 			try (InputStreamReader reader = new InputStreamReader(stream))
 			{
 				return this.gson.fromJson(reader, DialogSchema.class);
+			}
+		}
+	}
+
+	private IDialogSpeaker loadSpeaker(ResourceLocation resource) throws IOException
+	{
+		String path = "/assets/" + resource.getResourceDomain() + "/dialog/speakers/" + resource.getResourcePath() + ".json";
+
+		AetherCore.LOGGER.info("Loading dialog speaker from file {}", path);
+
+		try (InputStream stream = MinecraftServer.class.getResourceAsStream(path))
+		{
+			try (InputStreamReader reader = new InputStreamReader(stream))
+			{
+				return this.gson.fromJson(reader, DialogSpeaker.class);
 			}
 		}
 	}

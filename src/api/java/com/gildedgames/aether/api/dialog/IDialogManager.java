@@ -10,6 +10,16 @@ import java.util.Optional;
 public interface IDialogManager
 {
 	/**
+	 * Returns a {@link IDialogSpeaker} for the specified resource location. The default
+	 * implementation may also cache the speaker in memory for faster access later.
+	 *
+	 * This expects the file to be located at /assets/DOMAIN/dialog/speakers/NAME.json
+	 * @param resource The resource name of the speaker.
+	 * @return The {@link IDialogSpeaker} representing the resource.
+	 */
+	Optional<IDialogSpeaker> getSpeaker(ResourceLocation resource);
+
+	/**
 	 * Returns a {@link IDialogScene} for the specified resource location. The default
 	 * implementation may also cache the scene in memory for faster access later.
 	 *
