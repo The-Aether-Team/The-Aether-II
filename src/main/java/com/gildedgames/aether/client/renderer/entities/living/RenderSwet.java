@@ -1,8 +1,6 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
-import com.gildedgames.aether.client.models.entities.living.ModelSwet;
 import com.gildedgames.aether.client.renderer.entities.living.layers.LayerSwetGel;
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.GlStateManager;
@@ -13,11 +11,9 @@ import net.minecraft.util.ResourceLocation;
 public class RenderSwet extends RenderLiving<EntitySwet>
 {
 
-	private final static ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/swet/swet.png");
-
 	public RenderSwet(RenderManager renderManagerIn)
 	{
-		super(renderManagerIn, new ModelSwet(), 0.5F);
+		super(renderManagerIn, new ModelSlime(16), 1.0F);
 
 		this.addLayer(new LayerSwetGel(this));
 	}
@@ -25,7 +21,7 @@ public class RenderSwet extends RenderLiving<EntitySwet>
 	@Override
 	protected void preRenderCallback(EntitySwet entity, float partialTickTime)
 	{
-		GlStateManager.scale(0.35F, 0.35F, 0.35F);
+		GlStateManager.scale(0.999F, 0.999F, 0.999F);
 		float f1 = 2.0F;
 		float f2 = (entity.prevSquishFactor + (entity.squishFactor - entity.prevSquishFactor) * partialTickTime) / (f1 * 0.5F + 1.0F);
 		float f3 = 1.0F / (f2 + 1.0F);
@@ -41,6 +37,6 @@ public class RenderSwet extends RenderLiving<EntitySwet>
 	@Override
 	protected ResourceLocation getEntityTexture(EntitySwet entity)
 	{
-		return TEXTURE;
+		return entity.getType().texture;
 	}
 }
