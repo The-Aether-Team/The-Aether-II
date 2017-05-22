@@ -8,12 +8,10 @@ You'll gain access to exclusive rewards and snapshot builds of the Aether II bef
 
 We ask that you have existing knowledge of Minecraft modding, locating crash reports, editing configuration files, and a bit of patience if you're wishing to report issues or contribute back.
 
-### Getting help
-We don't provide support for getting the Git repository and Gradle/Forge workspace setup. We ask that those wishing to do so to have prior knowledge before attempting.
+### Report a bug or issue
+If you're running into bugs or other problems, feel free to create an issue on our [issue tracker](https://git.gildedgames.com/GildedGames/Aether-II/issues). Please read our [contributor's guide](https://git.gildedgames.com/GildedGames/Aether-II/blob/cleanup/CONTRIBUTING.md) before posting to learn how to create top-notch issues!
 
-If you run into bugs or other problems, feel free to create an issue on our [issue tracker](https://git.gildedgames.com/GildedGames/Aether-II/issues).
-
-### For contributors
+### Contribute to the project
 Looking to contribute to the project? See our [contributor's guide](https://git.gildedgames.com/GildedGames/Aether-II/blob/cleanup/CONTRIBUTING.md) for more details and our Contributor License Agreement (CLA).
 
 Not sure what to help us with? Take a look at our issue tracker for some ideas! [Here's a quick link](https://git.gildedgames.com/GildedGames/Aether-II/issues?label_name%5B%5D=Contributions+Welcome) which shows all the currently open issues that we'd love some help on.
