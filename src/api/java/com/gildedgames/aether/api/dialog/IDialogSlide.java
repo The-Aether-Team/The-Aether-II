@@ -1,6 +1,7 @@
 package com.gildedgames.aether.api.dialog;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -11,22 +12,17 @@ import java.util.Optional;
 public interface IDialogSlide
 {
     /**
-     * Used to locate this slide in a speaker definition.
-     * @return The string address for this slide.
+     * The returned String represents an implementation that is used to draw
+     * the {@link #getSlideData()} defined by this Slide.
+     * @return An {@link Optional} object containing a String which represents
+     * a renderer implementation
      */
-    String getAddress();
-    /**
-     * The returned implementation is used to draw the {@link #getSlideData()}
-     * defined by this Slide.
-     * @return An {@link Optional} object containing a {@link IDialogSlideRenderer}
-     * implementation.
-     */
-    Optional<IDialogSlideRenderer> getRenderer();
+    Optional<String> getRenderer();
 
     /**
      * Slide data that will eventually be interpreted by this Slide's
      * Renderer and drawn on screen.
-     * @return An {@link Optional} object containing a list of String data.
+     * @return An {@link Optional} object containing a map of String data.
      */
-    Optional<List<String>> getSlideData();
+    Optional<Map<String, String>> getSlideData();
 }

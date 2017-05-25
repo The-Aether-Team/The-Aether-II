@@ -15,6 +15,7 @@ import net.minecraft.util.ResourceLocation;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Draws static images.
@@ -38,16 +39,16 @@ public class DialogSlideRendererStatic implements IDialogSlideRenderer
 			return;
 		}
 
-		List<String> data = slide.getSlideData().get();
+		Map<String, String> data = slide.getSlideData().get();
 
-		if (data.size() > 0)
+		if (data.containsKey("resource"))
 		{
-			this.slideTexture = new ResourceLocation(data.get(0));
+			this.slideTexture = new ResourceLocation(data.get("resource"));
 		}
 
-		if (data.size() > 1)
+		if (data.containsKey("scale"))
 		{
-			this.scale = Double.valueOf(data.get(1));
+			this.scale = Double.valueOf(data.get("scale"));
 		}
 	}
 

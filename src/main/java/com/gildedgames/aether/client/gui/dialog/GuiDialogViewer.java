@@ -19,6 +19,7 @@ import org.lwjgl.Sys;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 {
@@ -41,6 +42,8 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 
 	private IDialogSlide slide;
 
+	private IDialogSlideRenderer renderer;
+
 	public GuiDialogViewer(IDialogController controller)
 	{
 		this.controller = controller;
@@ -62,11 +65,9 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 		GlStateManager.translate(0, 0, 100F);
 		GlStateManager.color(1.0F, 1.0F, 1.0F);
 
-		if (this.slide != null && this.slide.getRenderer().isPresent())
+		if (this.slide != null && this.renderer != null)
 		{
-			IDialogSlideRenderer renderer = this.slide.getRenderer().get();
-
-			renderer.draw(this.slide, this.width, this.height, mouseX, mouseY, partialTicks);
+			this.renderer.draw(this.slide, this.width, this.height, mouseX, mouseY, partialTicks);
 		}
 
 		GlStateManager.translate(0, 0, 100F);
@@ -218,32 +219,38 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 			ResourceLocation speakerPath = this.controller.getCurrentLine().getSpeaker().get();
 
 			this.speaker = AetherAPI.content().dialog().getSpeaker(speakerPath).orElseThrow(() ->
-					new IllegalArgumentException("Couldn't getByte speaker " + speakerPath));
+					new IllegalArgumentException("Couldn't getByte speaker: " + speakerPath));
 
 			String address;
 
-			if (this.controller.getCurrentLine().getSlideAddress().isPresent())
+			// Check if the speaker resourcelocation has a slide address
+			if (speakerPath.getResourcePath().contains("#"))
 			{
-				address = this.controller.getCurrentLine().getSlideAddress().get();
+				// Obtain the slide address from the Speaker resourcelocation
+				address = speakerPath.getResourcePath().substring(speakerPath.getResourcePath().indexOf("#") + 1,
+						speakerPath.getResourcePath().length());
 
 				this.slide = AetherAPI.content().dialog().findSlide(address, this.speaker).orElseThrow(() ->
-						new IllegalArgumentException("Couldn't find slide " + address));
+						new IllegalArgumentException("Couldn't find slide: " + address));
 			}
 			else if (this.speaker.getSlides().isPresent())
 			{
-				List<IDialogSlide> slides = this.speaker.getSlides().get();
+				Map<String, IDialogSlide> slides = this.speaker.getSlides().get();
 
-				if (!slides.isEmpty())
+				if (!slides.isEmpty() && slides.containsKey("default"))
 				{
-					this.slide = slides.get(0);
+					this.slide = slides.get("default");
 				}
 			}
 
 			if (this.slide != null && this.slide.getRenderer().isPresent())
 			{
-				IDialogSlideRenderer renderer = this.slide.getRenderer().get();
+				String renderType = this.slide.getRenderer().get();
 
-				renderer.setup(this.slide);
+				this.renderer = AetherAPI.content().dialog().findRenderer(renderType).orElseThrow(() ->
+						new IllegalArgumentException("Couldn't find slide renderer: " + renderType));
+
+				this.renderer.setup(this.slide);
 			}
 
 			this.fontRenderer = Minecraft.getMinecraft().fontRenderer;

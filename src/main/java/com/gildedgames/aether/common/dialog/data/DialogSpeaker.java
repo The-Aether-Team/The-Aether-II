@@ -7,6 +7,7 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class DialogSpeaker implements IDialogSpeaker
@@ -15,7 +16,7 @@ public class DialogSpeaker implements IDialogSpeaker
     private String name;
 
     @SerializedName("slides")
-    private List<IDialogSlide> slides;
+    private Map<String, IDialogSlide> slides;
 
     @Nonnull
     @Override
@@ -25,7 +26,7 @@ public class DialogSpeaker implements IDialogSpeaker
     }
 
     @Override
-    public Optional<List<IDialogSlide>> getSlides()
+    public Optional<Map<String, IDialogSlide>> getSlides()
     {
         return this.slides != null ? Optional.of(this.slides) : Optional.empty();
     }

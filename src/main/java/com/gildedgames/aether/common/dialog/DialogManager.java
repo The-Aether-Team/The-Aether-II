@@ -33,6 +33,8 @@ public class DialogManager implements IDialogManager
 
 	private final HashMap<ResourceLocation, IDialogSpeaker> cachedSpeakers = new HashMap<>();
 
+	private final HashMap<String, IDialogSlideRenderer> registeredRenders = new HashMap<>();
+
 	private final Gson gson;
 
 	private boolean allowCaching;
@@ -51,6 +53,7 @@ public class DialogManager implements IDialogManager
 		this.allowCaching = allowCaching;
 
 		this.gson = this.buildDeserializer().create();
+		this.registerRenders();
 	}
 
 	/**
@@ -77,6 +80,11 @@ public class DialogManager implements IDialogManager
 		builder.registerTypeAdapter(IDialogSlide.class, new DialogSlideDeserializer());
 
 		return builder;
+	}
+
+	protected void registerRenders()
+	{
+		this.registeredRenders.put("static", new DialogSlideRendererStatic());
 	}
 
 	@Override
@@ -140,20 +148,23 @@ public class DialogManager implements IDialogManager
 	@Override
 	public Optional<IDialogSlide> findSlide(String slideAddress, IDialogSpeaker speaker)
 	{
-		if (speaker == null || slideAddress == null || !speaker.getSlides().isPresent())
+		if (speaker == null || slideAddress == null || !speaker.getSlides().isPresent() || !speaker.getSlides().get().containsKey(slideAddress))
 		{
 			return Optional.empty();
 		}
 
-		for (IDialogSlide slide : speaker.getSlides().get())
+		return Optional.of(speaker.getSlides().get().get(slideAddress));
+	}
+
+	@Override
+	public Optional<IDialogSlideRenderer> findRenderer(String type)
+	{
+		if (type == null || !this.registeredRenders.containsKey(type))
 		{
-			if (slideAddress.equals(slide.getAddress()))
-			{
-				return Optional.of(slide);
-			}
+			return Optional.empty();
 		}
 
-		return Optional.empty();
+		return Optional.of(this.registeredRenders.get(type));
 	}
 
 	private IDialogScene loadScene(ResourceLocation resource) throws IOException
@@ -173,11 +184,19 @@ public class DialogManager implements IDialogManager
 
 	private IDialogSpeaker loadSpeaker(ResourceLocation resource) throws IOException
 	{
-		String path = "/assets/" + resource.getResourceDomain() + "/dialog/speakers/" + resource.getResourcePath() + ".json";
+		String path = resource.getResourcePath();
+		String pathWithoutSlide = path;
 
-		AetherCore.LOGGER.info("Loading dialog speaker from file {}", path);
+		if (path.contains("#"))
+		{
+			pathWithoutSlide = path.replace(path.substring(path.indexOf("#"), path.length()), "");
+		}
 
-		try (InputStream stream = MinecraftServer.class.getResourceAsStream(path))
+		String speakerPath = "/assets/" + resource.getResourceDomain() + "/dialog/speakers/" + pathWithoutSlide + ".json";
+
+		AetherCore.LOGGER.info("Loading dialog speaker from file {}", speakerPath);
+
+		try (InputStream stream = MinecraftServer.class.getResourceAsStream(speakerPath))
 		{
 			try (InputStreamReader reader = new InputStreamReader(stream))
 			{

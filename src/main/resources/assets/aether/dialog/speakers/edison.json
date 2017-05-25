@@ -1,10 +1,11 @@
 {
 	"name": "entity.aether.edison.name",
-	"slides": [
-		{ "address": "idle", "renderer": { "type": "static" }, "data": [ "aether:textures/dialog/edison/edison_neutral.png", "1.6"] },
-		{ "address": "displeased", "renderer": { "type": "static" }, "data": [ "aether:textures/dialog/edison/edison_displeased.png", "1.6" ] },
-		{ "address": "grin", "renderer": { "type": "static" }, "data": [ "aether:textures/dialog/edison/edison_grin.png", "1.6" ] },
-		{ "address": "sigh", "renderer": { "type": "static" }, "data": [ "aether:textures/dialog/edison/edison_sigh.png", "1.6" ] },
-		{ "address": "thought", "renderer": { "type": "static" }, "data": [ "aether:textures/dialog/edison/edison_thought.png", "1.6" ] }
-	]
+	"slides": {
+		"default": { "render": "static", "data": { "resource": "aether:textures/dialog/edison/edison_neutral.png", "scale": "1.6" } },
+		"idle": { "render": "static", "data": { "resource": "aether:textures/dialog/edison/edison_neutral.png", "scale": "1.6" } },
+		"displeased": { "render": "static", "data": { "resource": "aether:textures/dialog/edison/edison_displeased.png", "scale": "1.6" } },
+		"grin": { "render": "static", "data": { "resource": "aether:textures/dialog/edison/edison_grin.png", "scale": "1.6" } },
+		"sigh": { "render": "static", "data": { "resource": "aether:textures/dialog/edison/edison_sigh.png", "scale": "1.6" } },
+		"thought": { "render": "static", "data": { "resource": "aether:textures/dialog/edison/edison_thought.png", "scale": "1.6" } }
+	}
 }

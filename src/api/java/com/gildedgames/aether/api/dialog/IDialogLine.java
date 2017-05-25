@@ -22,19 +22,12 @@ public interface IDialogLine
 
 	/**
 	 * Returns the speaker of this line. If the result is empty, no speaker will be shown.
+	 * If the returned ResourceLocation has a #address suffix, it will use that to point to
+	 * a given slide registered within that speaker's json file.
 	 *
 	 * @return An {@link Optional} containing the {@link ResourceLocation} representing the speaker,
 	 * empty if there is no speaker.
 	 */
 	@Nonnull
 	Optional<ResourceLocation> getSpeaker();
-
-	/**
-	 * Returns the slide address for the defined speaker. If the result is empty, no slide will be shown.
-	 *
-	 * @return An {@link Optional} containing the {@link String} representing the slide address,
-	 * empty if there is no address.
-	 */
-	@Nonnull
-	Optional<String> getSlideAddress();
 }

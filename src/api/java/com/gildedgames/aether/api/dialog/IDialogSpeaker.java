@@ -4,6 +4,7 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -21,6 +22,6 @@ public interface IDialogSpeaker
      * Returns the slides for the viewer GUI to use. First one is default, if exists.
      * @return An {@link Optional} value containing the {@link IDialogSlide}s, if they exist.
      */
-    Optional<List<IDialogSlide>> getSlides();
+    Optional<Map<String, IDialogSlide>> getSlides();
 
 }

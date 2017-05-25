@@ -38,4 +38,12 @@ public interface IDialogManager
 	 * @return The {@link IDialogSlide} representing the address
 	 */
 	Optional<IDialogSlide> findSlide(String slideAddress, IDialogSpeaker speaker);
+
+	/**
+	 * Attempts to find a slide renderer implementation tied with the given
+	 * String. If not defined, it will return an empty optional.
+	 * @param type The defined String key/type for that registered renderer
+	 * @return The {@link IDialogSlideRenderer} representing the given String.
+	 */
+	Optional<IDialogSlideRenderer> findRenderer(String type);
 }
