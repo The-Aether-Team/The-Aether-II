@@ -107,6 +107,9 @@ public class DialogSchema implements IDialogScene
 		@SerializedName("speaker")
 		private String speaker = null;
 
+		@SerializedName("slide")
+		private String slideAddress = null;
+
 		@SerializedName("text")
 		private String text;
 
@@ -120,6 +123,13 @@ public class DialogSchema implements IDialogScene
 		public Optional<ResourceLocation> getSpeaker()
 		{
 			return this.speaker != null ? Optional.of(new ResourceLocation(this.speaker)) : Optional.empty();
+		}
+
+		@Nonnull
+		@Override
+		public Optional<String> getSlideAddress()
+		{
+			return this.slideAddress != null ? Optional.of(this.slideAddress) : Optional.empty();
 		}
 	}
 }

@@ -18,6 +18,7 @@ import org.lwjgl.Sys;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 
 public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 {
@@ -37,6 +38,8 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 	private IDialogNode node;
 
 	private IDialogSpeaker speaker;
+
+	private IDialogSlide slide;
 
 	public GuiDialogViewer(IDialogController controller)
 	{
@@ -59,8 +62,12 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 		GlStateManager.translate(0, 0, 100F);
 		GlStateManager.color(1.0F, 1.0F, 1.0F);
 
-		GuiInventory.drawEntityOnScreen(
-				(this.width / 2) + 40, this.height, 120, -mouseX + (this.width / 2) + 40, (-mouseY / 10.0F), this.npc);
+		if (this.slide != null && this.slide.getRenderer().isPresent())
+		{
+			IDialogSlideRenderer renderer = this.slide.getRenderer().get();
+
+			renderer.draw(this.slide, this.width, this.height, mouseX, mouseY, partialTicks);
+		}
 
 		GlStateManager.translate(0, 0, 100F);
 
@@ -212,6 +219,32 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 
 			this.speaker = AetherAPI.content().dialog().getSpeaker(speakerPath).orElseThrow(() ->
 					new IllegalArgumentException("Couldn't getByte speaker " + speakerPath));
+
+			String address;
+
+			if (this.controller.getCurrentLine().getSlideAddress().isPresent())
+			{
+				address = this.controller.getCurrentLine().getSlideAddress().get();
+
+				this.slide = AetherAPI.content().dialog().findSlide(address, this.speaker).orElseThrow(() ->
+						new IllegalArgumentException("Couldn't find slide " + address));
+			}
+			else if (this.speaker.getSlides().isPresent())
+			{
+				List<IDialogSlide> slides = this.speaker.getSlides().get();
+
+				if (!slides.isEmpty())
+				{
+					this.slide = slides.get(0);
+				}
+			}
+
+			if (this.slide != null && this.slide.getRenderer().isPresent())
+			{
+				IDialogSlideRenderer renderer = this.slide.getRenderer().get();
+
+				renderer.setup(this.slide);
+			}
 
 			this.fontRenderer = Minecraft.getMinecraft().fontRenderer;
 

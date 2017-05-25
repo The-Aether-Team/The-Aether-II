@@ -3,6 +3,7 @@ package com.gildedgames.aether.api.dialog;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -17,9 +18,9 @@ public interface IDialogSpeaker
     String getUnlocalizedName();
 
     /**
-     * Returns the style for the viewer GUI to use.
-     * @return An {@link Optional} value containing the style ResourceLocation, if it exists.
+     * Returns the slides for the viewer GUI to use. First one is default, if exists.
+     * @return An {@link Optional} value containing the {@link IDialogSlide}s, if they exist.
      */
-    Optional<ResourceLocation> getStyle();
+    Optional<List<IDialogSlide>> getSlides();
 
 }

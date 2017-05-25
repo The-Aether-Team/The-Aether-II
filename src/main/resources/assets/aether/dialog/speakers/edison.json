@@ -1,4 +1,10 @@
 {
 	"name": "entity.aether.edison.name",
-	"style": "aether:textures/dialog/edison/generic.png"
+	"slides": [
+		{ "address": "idle", "renderer": { "type": "static" }, "data": [ "aether:textures/dialog/edison/edison_neutral.png", "1.6"] },
+		{ "address": "displeased", "renderer": { "type": "static" }, "data": [ "aether:textures/dialog/edison/edison_displeased.png", "1.6" ] },
+		{ "address": "grin", "renderer": { "type": "static" }, "data": [ "aether:textures/dialog/edison/edison_grin.png", "1.6" ] },
+		{ "address": "sigh", "renderer": { "type": "static" }, "data": [ "aether:textures/dialog/edison/edison_sigh.png", "1.6" ] },
+		{ "address": "thought", "renderer": { "type": "static" }, "data": [ "aether:textures/dialog/edison/edison_thought.png", "1.6" ] }
+	]
 }

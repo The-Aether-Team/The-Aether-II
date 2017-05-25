@@ -29,4 +29,13 @@ public interface IDialogManager
 	 * @return The {@link IDialogScene} representing the resource
 	 */
 	Optional<IDialogScene> getScene(ResourceLocation resource);
+
+	/**
+	 * Attempts to find a slide with the given slideAddress. If not defined,
+	 * it will return an empty optional.
+	 * @param slideAddress The address of the slide we're attempting to find.
+	 * @param speaker The speaker where the slide is defined.
+	 * @return The {@link IDialogSlide} representing the address
+	 */
+	Optional<IDialogSlide> findSlide(String slideAddress, IDialogSpeaker speaker);
 }

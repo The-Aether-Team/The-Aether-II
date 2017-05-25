@@ -28,4 +28,13 @@ public interface IDialogLine
 	 */
 	@Nonnull
 	Optional<ResourceLocation> getSpeaker();
+
+	/**
+	 * Returns the slide address for the defined speaker. If the result is empty, no slide will be shown.
+	 *
+	 * @return An {@link Optional} containing the {@link String} representing the slide address,
+	 * empty if there is no address.
+	 */
+	@Nonnull
+	Optional<String> getSlideAddress();
 }

@@ -1,15 +1,11 @@
 package com.gildedgames.aether.common.dialog;
 
-import com.gildedgames.aether.api.dialog.IDialogAction;
-import com.gildedgames.aether.api.dialog.IDialogManager;
-import com.gildedgames.aether.api.dialog.IDialogScene;
-import com.gildedgames.aether.api.dialog.IDialogSpeaker;
+import com.gildedgames.aether.api.dialog.*;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.dialog.data.DialogActionDeserializer;
-import com.gildedgames.aether.common.dialog.data.DialogSchema;
-import com.gildedgames.aether.common.dialog.data.DialogSpeaker;
+import com.gildedgames.aether.common.dialog.data.*;
 import com.gildedgames.aether.common.dialog.data.actions.DialogActionExit;
 import com.gildedgames.aether.common.dialog.data.actions.DialogActionNavigate;
+import com.gildedgames.aether.common.dialog.data.slide_renderers.DialogSlideRendererStatic;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.minecraft.client.Minecraft;
@@ -68,9 +64,17 @@ public class DialogManager implements IDialogManager
 	protected GsonBuilder buildDeserializer()
 	{
 		final GsonBuilder builder = new GsonBuilder();
+
 		builder.registerTypeAdapter(IDialogAction.class, new DialogActionDeserializer());
+
 		builder.registerTypeAdapter(DialogActionExit.class, new DialogActionExit.Deserializer());
 		builder.registerTypeAdapter(DialogActionNavigate.class, new DialogActionNavigate.Deserializer());
+
+		builder.registerTypeAdapter(IDialogSlideRenderer.class, new DialogSlideRendererDeserializer());
+
+		builder.registerTypeAdapter(DialogSlideRendererStatic.class, new DialogSlideRendererStatic.Deserializer());
+
+		builder.registerTypeAdapter(IDialogSlide.class, new DialogSlideDeserializer());
 
 		return builder;
 	}
@@ -131,6 +135,25 @@ public class DialogManager implements IDialogManager
 		}
 
 		return Optional.of(scene);
+	}
+
+	@Override
+	public Optional<IDialogSlide> findSlide(String slideAddress, IDialogSpeaker speaker)
+	{
+		if (speaker == null || slideAddress == null || !speaker.getSlides().isPresent())
+		{
+			return Optional.empty();
+		}
+
+		for (IDialogSlide slide : speaker.getSlides().get())
+		{
+			if (slideAddress.equals(slide.getAddress()))
+			{
+				return Optional.of(slide);
+			}
+		}
+
+		return Optional.empty();
 	}
 
 	private IDialogScene loadScene(ResourceLocation resource) throws IOException

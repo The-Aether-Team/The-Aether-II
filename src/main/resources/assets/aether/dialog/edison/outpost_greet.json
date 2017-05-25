@@ -3,7 +3,7 @@
 		{
 			"name": "#start",
 			"lines": [
-				{ "speaker": "aether:edison", "text": "edison.them.outpost_start" }
+				{ "speaker": "aether:edison", "slide": "grin", "text": "edison.them.outpost_start" }
 			],
 			"buttons": [
 				{ "label": "edison.us.who_are_you", "action": { "type": "navigate", "target": "what.edison" } },
