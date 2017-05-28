@@ -1,8 +1,0 @@
-{
-	"aether:edison": {
-		"name": "aether.entity.edison",
-		"styles": {
-			"default": "aether:textures/dialog/edison/generic.png"
-		}
-	}
-}

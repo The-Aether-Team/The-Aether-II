@@ -49,7 +49,6 @@ public class DialogModule extends PlayerAetherModule implements IDialogControlle
 		this.listeners.add(listener);
 	}
 
-
 	@Override
 	public void openScene(ResourceLocation path)
 	{

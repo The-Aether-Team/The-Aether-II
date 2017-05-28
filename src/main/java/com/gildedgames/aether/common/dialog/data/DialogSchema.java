@@ -121,5 +121,6 @@ public class DialogSchema implements IDialogScene
 		{
 			return this.speaker != null ? Optional.of(new ResourceLocation(this.speaker)) : Optional.empty();
 		}
+
 	}
 }

@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.gui.dialog;
 
+import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.dialog.*;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.living.npc.EntityEdison;
@@ -11,13 +12,14 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.*;
 import org.lwjgl.Sys;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 {
@@ -35,6 +37,12 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 	private EntityNPC npc;
 
 	private IDialogNode node;
+
+	private IDialogSpeaker speaker;
+
+	private IDialogSlide slide;
+
+	private IDialogSlideRenderer renderer;
 
 	public GuiDialogViewer(IDialogController controller)
 	{
@@ -57,8 +65,10 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 		GlStateManager.translate(0, 0, 100F);
 		GlStateManager.color(1.0F, 1.0F, 1.0F);
 
-		GuiInventory.drawEntityOnScreen(
-				(this.width / 2) + 40, this.height, 120, -mouseX + (this.width / 2) + 40, (-mouseY / 10.0F), this.npc);
+		if (this.slide != null && this.renderer != null)
+		{
+			this.renderer.draw(this.slide, this.width, this.height, mouseX, mouseY, partialTicks);
+		}
 
 		GlStateManager.translate(0, 0, 100F);
 
@@ -206,10 +216,48 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 
 		if (this.controller.getCurrentLine().getSpeaker().isPresent())
 		{
+			ResourceLocation speakerPath = this.controller.getCurrentLine().getSpeaker().get();
+
+			this.speaker = AetherAPI.content().dialog().getSpeaker(speakerPath).orElseThrow(() ->
+					new IllegalArgumentException("Couldn't getByte speaker: " + speakerPath));
+
+			String address;
+
+			// Check if the speaker resourcelocation has a slide address
+			if (speakerPath.getResourcePath().contains("#"))
+			{
+				// Obtain the slide address from the Speaker resourcelocation
+				address = speakerPath.getResourcePath().substring(speakerPath.getResourcePath().indexOf("#") + 1,
+						speakerPath.getResourcePath().length());
+
+				this.slide = AetherAPI.content().dialog().findSlide(address, this.speaker).orElseThrow(() ->
+						new IllegalArgumentException("Couldn't find slide: " + address));
+			}
+			else if (this.speaker.getSlides().isPresent())
+			{
+				Map<String, IDialogSlide> slides = this.speaker.getSlides().get();
+
+				if (!slides.isEmpty() && slides.containsKey("default"))
+				{
+					this.slide = slides.get("default");
+				}
+			}
+
+			if (this.slide != null && this.slide.getRenderer().isPresent())
+			{
+				String renderType = this.slide.getRenderer().get();
+
+				this.renderer = AetherAPI.content().dialog().findRenderer(renderType).orElseThrow(() ->
+						new IllegalArgumentException("Couldn't find slide renderer: " + renderType));
+
+				this.renderer.setup(this.slide);
+			}
+
 			this.fontRenderer = Minecraft.getMinecraft().fontRenderer;
 
 			boolean topText = this.controller.isNodeFinished() && this.controller.getCurrentNode().getButtons().size() > 0;
-			String name = I18n.format(this.controller.getCurrentLine().getSpeaker().get() + ".name");
+
+			String name = I18n.format(this.speaker.getUnlocalizedName());
 
 			this.namePlate = new GuiTextBox(
 					buttons.size() + 2,
