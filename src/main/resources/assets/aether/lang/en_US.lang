@@ -841,6 +841,8 @@ bug_report.line4=Clicking the button below will take you to an external website 
 
 dialog.back=Back
 
+generic.us.okay=Okay
+
 edison.name=Edison
 
 edison.us.goodbye=Goodbye
@@ -849,6 +851,10 @@ edison.them.outpost_start=You should really take better care of yourself, I real
 
 edison.us.who_are_you=Who are you?
 edison.them.who_are_you=Oh have we not been introduced? I'm Edison, Edison Wrenk. Merchant by trade, but our "mutual friend" has requested I act as your contact out in these parts.
+
+edison.us.can_i_buy_something=Can I buy something?
+edison.them.can_i_buy_something.1=Sorry friend, I'm still working on getting my stock in order.
+edison.them.can_i_buy_something.2=Maybe come back later and I'll have more to offer.
 
 edison.us.what_is_this_place=What is this place?
 edison.them.what_is_this_place=Our friend didn't inform me as to what you've been told, so I wonder if you mean this structure around us or this world we're in?
