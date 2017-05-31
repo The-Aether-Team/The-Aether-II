@@ -72,7 +72,7 @@ public class AetherCore
 	{
 		AetherCore.PROXY.init(event);
 
-		AetherCore.ANALYTICS = !AetherCore.isInsideDevEnvironment() ? new GameAnalytics() :
+		AetherCore.ANALYTICS = AetherCore.isInsideDevEnvironment() ? new GameAnalytics() :
 				new GameAnalytics("c8e4d94251ce253e138ae8a702e20301", "1ba3cb91e03cbb578b97c26f872e812dd05f5bbb");
 		AetherCore.ANALYTICS.init();
 
