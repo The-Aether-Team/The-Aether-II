@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.common.entities.util.QuicksoilProcessor;
+import com.gildedgames.aether.common.analytics.GameAnalytics;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.dimensions.aether.TeleporterAether;
@@ -46,6 +46,8 @@ public class AetherCore
 
 	public static ConfigAether CONFIG;
 
+	public static GameAnalytics ANALYTICS;
+
 	public static TeleporterAether TELEPORTER;
 
 	private static final SpawnRegistry SPAWN_REGISTRY = new SpawnRegistry();
@@ -69,6 +71,10 @@ public class AetherCore
 	public void onFMLInit(FMLInitializationEvent event)
 	{
 		AetherCore.PROXY.init(event);
+
+		AetherCore.ANALYTICS = !AetherCore.isInsideDevEnvironment() ? new GameAnalytics() :
+				new GameAnalytics("c8e4d94251ce253e138ae8a702e20301", "1ba3cb91e03cbb578b97c26f872e812dd05f5bbb");
+		AetherCore.ANALYTICS.init();
 
 		MinecraftForge.EVENT_BUS.register(SPAWN_REGISTRY);
 	}

@@ -23,13 +23,18 @@ import java.util.Random;
 
 public class CommonProxy implements IAetherServices
 {
-	private File storageDir;
+	private File configDir;
 
 	private ContentRegistry contentRegistry = new ContentRegistry();
 
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		this.storageDir = new File(event.getSourceFile().getParent(), "Aether/");
+		this.configDir = new File(event.getModConfigurationDirectory(), "Aether/");
+
+		if (!this.configDir.exists() && !this.configDir.mkdir())
+		{
+			throw new RuntimeException("Couldn't create configuration directory");
+		}
 
 		this.contentRegistry.preInit();
 	}
@@ -64,9 +69,9 @@ public class CommonProxy implements IAetherServices
 		}
 	}
 
-	public File getAetherStorageDir()
+	public File getConfigDir()
 	{
-		return this.storageDir;
+		return this.configDir;
 	}
 
 	public void displayDismountMessage(EntityPlayer player)
