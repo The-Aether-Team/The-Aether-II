@@ -629,6 +629,7 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.burrukai_pelt, "burrukai_pelt");
 		registerItemModels(ItemsAether.kirrid_loin, "kirrid_loin");
 		registerItemModels(ItemsAether.kirrid_cutlet, "kirrid_cutlet");
+		registerItemModels(ItemsAether.kirrid_flower, "kirrid_flower");
 
 		registerItemModels(BlocksAether.structure_hint, new ItemModelBuilder("structure_hint/")
 				.add(BlockStructureHint.WILDCARD_BLOCK.getMeta(), "wildcard")

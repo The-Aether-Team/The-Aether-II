@@ -10,6 +10,7 @@ import com.gildedgames.aether.common.blocks.containers.BlockMasonryBench;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockKirridGrass;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.util.BlockCustomDoor;
 import com.google.common.collect.Maps;
@@ -94,6 +95,9 @@ public class AetherBlockModels
 				return new ModelResourceLocation(resourceLocation, this.getPropertyString(mappings));
 			}
 		});
+
+		// TODO: Implement actual states for the Kirrid_grass for the different growth states.
+		ModelLoader.setCustomStateMapper(BlocksAether.kirrid_grass, new StateMap.Builder().ignore(BlockKirridGrass.PROPERTY_HARVESTABLE).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.altar, new StateMap.Builder().ignore(BlockAltar.PROPERTY_FACING).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.icestone_cooler, new StateMap.Builder().ignore(BlockIcestoneCooler.PROPERTY_FACING).build());

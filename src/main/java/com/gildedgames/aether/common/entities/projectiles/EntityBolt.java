@@ -45,7 +45,6 @@ public class EntityBolt extends EntityArrow
 	@Override
 	protected void arrowHit(EntityLivingBase living)
 	{
-
 	}
 
 	@Override

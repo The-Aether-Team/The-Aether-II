@@ -1,0 +1,13 @@
+{
+	"variants": {
+		"variant=sprout": {
+			"model": "aether:kirrid_grass/kirrid_grass_sprout"
+		},
+		"variant=mid": {
+			"model": "aether:kirrid_grass/kirrid_grass_mid"
+		},
+		"variant=full": {
+			"model": "aether:kirrid_grass/kirrid_grass_full"
+		}
+	}
+}

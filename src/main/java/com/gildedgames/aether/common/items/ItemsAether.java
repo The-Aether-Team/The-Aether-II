@@ -222,6 +222,8 @@ public class ItemsAether
 
 	public static final Item aechor_petal = new Item();
 
+	public static final Item kirrid_flower = new ItemKirridFlower();
+
 	public static final Item zanite_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.ZANITE),
 	        arkenium_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.ARKENIUM),
 	        gravitite_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.GRAVITITE),
@@ -757,6 +759,8 @@ public class ItemsAether
 		registerItem("wrapping_paper", wrapping_paper.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
 		registerItem("fried_moa_egg", fried_moa_egg.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+
+		registerItem("kirrid_flower", kirrid_flower.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
 		registerItemProperties();
 	}

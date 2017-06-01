@@ -183,6 +183,7 @@ tile.aether.structure_hint.spawner_entity.name=Entity Spawner
 tile.aether.structure_hint.spawner_pack.name=Pack Spawner
 tile.aether.structure_hint.generator_loot.name=Loot Generator
 tile.aether.structure_builder.name=Structure Builder
+tile.aether.kirrid_grass.sprout.name=Kirrid Grass Sprout
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
@@ -507,6 +508,7 @@ item.aether.burrukai_ribs.name=Burrukai Ribs
 item.aether.burrukai_pelt.name=Burrukai Pelt
 item.aether.kirrid_loin.name=Kirrid Loin
 item.aether.kirrid_cutlet.name=Kirrid Cutlet
+item.aether.kirrid_flower.name=Kirrid Flower
 
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability: 
