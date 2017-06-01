@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockKirridGrass;
 import com.gildedgames.aether.common.registry.GenerationAether;
 import com.gildedgames.aether.common.registry.content.TemplatesAether;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherFlowers;
@@ -42,7 +43,7 @@ public class BiomeAetherDecorator
 
 	private final WorldGenOrangeTree genOrangeTree;
 
-	private final WorldGenAetherFlowers genBlueberryBushes;
+	private final WorldGenAetherFlowers genBlueberryBushes, genKirridGrass;
 
 	private final WorldGenQuicksoil genQuicksoil;
 
@@ -83,6 +84,7 @@ public class BiomeAetherDecorator
 		this.genOrangeTree = new WorldGenOrangeTree();
 
 		this.genBlueberryBushes = new WorldGenAetherFlowers(BlocksAether.blueberry_bush.getDefaultState().withProperty(BlockBlueberryBush.PROPERTY_HARVESTABLE, true), 32);
+		this.genKirridGrass = new WorldGenAetherFlowers(BlocksAether.kirrid_grass.getDefaultState().withProperty(BlockKirridGrass.PROPERTY_HARVESTABLE, true).withProperty(BlockKirridGrass.PROPERTY_VARIANT, BlockKirridGrass.FULL), 64);
 
 		this.genQuicksoil = new WorldGenQuicksoil();
 		this.genAetherLakes = new WorldGenAetherLakes(Blocks.WATER.getDefaultState());
@@ -254,6 +256,19 @@ public class BiomeAetherDecorator
 			z = random.nextInt(16) + 8;
 
 			this.genBurstblossom.generate(world, random, pos.add(x, y, z));
+		}
+
+		// Kirrid Grass Generator
+		for (count = 0; count < 6; count++)
+		{
+			if (random.nextInt(2) == 0)
+			{
+				x = random.nextInt(16) + 8;
+				y = random.nextInt(128);
+				z = random.nextInt(16) + 8;
+
+				this.genKirridGrass.generate(world, random, pos.add(x, y, z));
+			}
 		}
 
 		this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));
