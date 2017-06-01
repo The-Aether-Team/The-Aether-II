@@ -1,0 +1,6 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "aether:blocks/kirrid_grass/kirrid_grass_0"
+	}
+}

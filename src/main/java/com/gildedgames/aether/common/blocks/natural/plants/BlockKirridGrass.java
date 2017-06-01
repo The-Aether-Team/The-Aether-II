@@ -5,17 +5,24 @@ import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import com.gildedgames.aether.common.items.ItemsAether;
+import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +34,10 @@ import java.util.Random;
 
 public class BlockKirridGrass extends BlockAetherPlant implements IBlockMultiName, IGrowable
 {
+	private static final AxisAlignedBB GRASS_SHORT_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
+	private static final AxisAlignedBB GRASS_NORMAL_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.6D, 0.9D);
+	private static final AxisAlignedBB GRASS_LONG_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.9D, 0.9D);
+
 	private static final int KIRRID_GRASS_SPROUT = 0, KIRRID_GRASS_MID = 1, KIRRID_GRASS_FULL = 2;
 
 	public static final BlockVariant SPROUT = new BlockVariant(0, "sprout"),
@@ -124,23 +135,23 @@ public class BlockKirridGrass extends BlockAetherPlant implements IBlockMultiNam
 	}
 
 	@Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		List<ItemStack> items = new ArrayList<ItemStack>();
-		items.add(new ItemStack(ItemsAether.kirrid_flower));
+		if (state.getValue(PROPERTY_VARIANT) == SPROUT)
+		{
+			return GRASS_SHORT_AABB;
+		}
+		else if (state.getValue(PROPERTY_VARIANT) == MID)
+		{
+			return GRASS_NORMAL_AABB;
+		}
+		else if (state.getValue(PROPERTY_VARIANT) == FULL)
+		{
+			return GRASS_LONG_AABB;
+		}
 
-		return items;
+		return super.getBoundingBox(state, source, pos);
 	}
-
-	/*
-	 * TODO: FIX THIS
-	 * This method is called 3 times for some reason, and the block is destroyed even when the PROPERTY_HARVESTABLE is set to true
-	 * so essentially when the Kirrid Grass is harvestable it is set back to a sprout, then this method is called again and the block
-	 * is destroyed completely. Then this is called again Server side, and the block is destroyed on the server.
-	 *
-	 * If video evidence, more details of the problem is needed, a video can be provided by Chris but due to this being open source
-	 * I don't want to link it here.
-	 */
 
 	@Override
 	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
@@ -154,6 +165,11 @@ public class BlockKirridGrass extends BlockAetherPlant implements IBlockMultiNam
 				return false;
 			}
 
+			if (!world.isRemote)
+			{
+				Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.kirrid_flower));
+			}
+
 			world.setBlockState(pos, state.withProperty(PROPERTY_HARVESTABLE, false).withProperty(PROPERTY_VARIANT, SPROUT));
 
 			return false;
@@ -161,5 +177,22 @@ public class BlockKirridGrass extends BlockAetherPlant implements IBlockMultiNam
 		}
 
 		return super.removedByPlayer(state, world, pos, player, willHarvest);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list)
+	{
+		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
+		{
+			list.add(new ItemStack(item, 1, variant.getMeta()));
+		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Block.EnumOffsetType getOffsetType()
+	{
+		return EnumOffsetType.XZ;
 	}
 }

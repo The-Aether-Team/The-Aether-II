@@ -760,7 +760,7 @@ public class ItemsAether
 
 		registerItem("fried_moa_egg", fried_moa_egg.setCreativeTab(CreativeTabsAether.CONSUMABLES));
 
-		registerItem("kirrid_flower", kirrid_flower.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
+		registerItem("kirrid_flower", kirrid_flower.setCreativeTab(CreativeTabsAether.MATERIALS));
 
 		registerItemProperties();
 	}

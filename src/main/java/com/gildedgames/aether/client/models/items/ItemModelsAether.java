@@ -148,6 +148,11 @@ public class ItemModelsAether
 				.add(BlockTallAetherGrass.NORMAL.getMeta(), "normal_aether")
 				.add(BlockTallAetherGrass.LONG.getMeta(), "long_aether"));
 
+		registerItemModels(BlocksAether.kirrid_grass, new ItemModelBuilder("kirrid_grass/")
+				.add(BlockKirridGrass.SPROUT.getMeta(), "kirrid_grass_sprout")
+				.add(BlockKirridGrass.MID.getMeta(), "kirrid_grass_mid")
+				.add(BlockKirridGrass.FULL.getMeta(), "kirrid_grass_full"));
+
 		registerItemModels(BlocksAether.orange_tree, "orange_tree");
 
 		registerItemModels(BlocksAether.zanite_block, "zanite_block");
