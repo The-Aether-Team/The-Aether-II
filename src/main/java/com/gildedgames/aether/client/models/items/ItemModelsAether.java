@@ -150,7 +150,6 @@ public class ItemModelsAether
 
 		registerItemModels(BlocksAether.kirrid_grass, new ItemModelBuilder("kirrid_grass/")
 				.add(BlockKirridGrass.SPROUT.getMeta(), "kirrid_grass_sprout")
-				.add(BlockKirridGrass.MID.getMeta(), "kirrid_grass_mid")
 				.add(BlockKirridGrass.FULL.getMeta(), "kirrid_grass_full"));
 
 		registerItemModels(BlocksAether.orange_tree, "orange_tree");

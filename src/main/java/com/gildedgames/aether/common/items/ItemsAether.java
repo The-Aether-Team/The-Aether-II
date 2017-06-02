@@ -222,7 +222,7 @@ public class ItemsAether
 
 	public static final Item aechor_petal = new Item();
 
-	public static final Item kirrid_flower = new ItemKirridFlower();
+	public static final Item kirrid_flower = new Item();
 
 	public static final Item zanite_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.ZANITE),
 	        arkenium_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.ARKENIUM),

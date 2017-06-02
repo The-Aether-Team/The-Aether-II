@@ -259,10 +259,11 @@ public class BiomeAetherDecorator
 		}
 
 		// Kirrid Grass Generator
-		for (count = 0; count < 6; count++)
+		if (random.nextInt(12) == 0)
 		{
-			if (random.nextInt(2) == 0)
+			for (count = 0; count < 6; count++)
 			{
+
 				x = random.nextInt(16) + 8;
 				y = random.nextInt(128);
 				z = random.nextInt(16) + 8;

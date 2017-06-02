@@ -184,6 +184,7 @@ tile.aether.structure_hint.spawner_pack.name=Pack Spawner
 tile.aether.structure_hint.generator_loot.name=Loot Generator
 tile.aether.structure_builder.name=Structure Builder
 tile.aether.kirrid_grass.sprout.name=Kirrid Grass Sprout
+tile.aether.kirrid_grass.full.name=Kirrid Grass
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick

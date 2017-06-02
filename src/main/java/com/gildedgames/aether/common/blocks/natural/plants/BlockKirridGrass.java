@@ -176,7 +176,15 @@ public class BlockKirridGrass extends BlockAetherPlant implements IBlockMultiNam
 
 			if (!world.isRemote)
 			{
+				Random random = new Random();
 				Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.kirrid_flower));
+				Block.spawnAsEntity(world, pos, new ItemStack(BlocksAether.kirrid_grass));
+
+				// randomly spawn additional kirrid grass sprouts
+				for (int i = 0; i < random.nextInt(2); i++)
+				{
+					Block.spawnAsEntity(world, pos, new ItemStack(BlocksAether.kirrid_grass));
+				}
 			}
 
 			world.setBlockState(pos, state.withProperty(PROPERTY_HARVESTABLE, false).withProperty(PROPERTY_VARIANT, SPROUT));
@@ -194,7 +202,11 @@ public class BlockKirridGrass extends BlockAetherPlant implements IBlockMultiNam
 	{
 		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
-			list.add(new ItemStack(item, 1, variant.getMeta()));
+			// No reason to have the mid variant (as an option) in creative inventory.
+			if (variant != MID)
+			{
+				list.add(new ItemStack(item, 1, variant.getMeta()));
+			}
 		}
 	}
 
