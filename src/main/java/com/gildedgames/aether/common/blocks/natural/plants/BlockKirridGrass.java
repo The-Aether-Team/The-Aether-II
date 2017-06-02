@@ -178,10 +178,9 @@ public class BlockKirridGrass extends BlockAetherPlant implements IBlockMultiNam
 			{
 				Random random = new Random();
 				Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.kirrid_flower));
-				Block.spawnAsEntity(world, pos, new ItemStack(BlocksAether.kirrid_grass));
 
-				// randomly spawn additional kirrid grass sprouts
-				for (int i = 0; i < random.nextInt(2); i++)
+				// randomly spawn a kirrid grass sprout
+				if (random.nextInt(3) == 1)
 				{
 					Block.spawnAsEntity(world, pos, new ItemStack(BlocksAether.kirrid_grass));
 				}
