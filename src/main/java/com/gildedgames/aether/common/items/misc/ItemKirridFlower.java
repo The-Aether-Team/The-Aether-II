@@ -37,7 +37,7 @@ public class ItemKirridFlower extends Item
 
 		if (facing == EnumFacing.UP && player.canPlayerEdit(pos.offset(facing), facing, itemstack) && state.getBlock() instanceof BlockAetherGrass && worldIn.isAirBlock(pos.up()))
 		{
-			worldIn.setBlockState(pos.up(), PLANT.getDefaultState());
+			worldIn.setBlockState(pos.up(), PLANT.getDefaultState().withProperty(BlocksAether.kirrid_grass.PROPERTY_HARVESTABLE, false).withProperty(BlocksAether.kirrid_grass.PROPERTY_VARIANT, BlocksAether.kirrid_grass.SPROUT));
 			itemstack.shrink(1);
 			return EnumActionResult.SUCCESS;
 		}

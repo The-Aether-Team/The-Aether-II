@@ -13,9 +13,11 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -54,7 +56,8 @@ public class BlockKirridGrass extends BlockAetherPlant implements IBlockMultiNam
 		this.setHardness(0.0f);
 		this.setSoundType(SoundType.PLANT);
 		this.setTickRandomly(true);
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, SPROUT).withProperty(PROPERTY_HARVESTABLE, Boolean.FALSE));
+		// default state is set to fully grown and harvest-able because of odd activity when a world is loaded
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, FULL).withProperty(PROPERTY_HARVESTABLE, true));
 	}
 
 	@Override
@@ -73,6 +76,12 @@ public class BlockKirridGrass extends BlockAetherPlant implements IBlockMultiNam
 	public IBlockState getStateFromMeta(int meta)
 	{
 		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
+	}
+
+	@Override
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	{
+		return this.getStateFromMeta(meta).withProperty(PROPERTY_HARVESTABLE, false).withProperty(PROPERTY_VARIANT, SPROUT);
 	}
 
 	@Override
