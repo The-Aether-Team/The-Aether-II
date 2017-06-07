@@ -81,6 +81,9 @@ public class BlockKirridGrass extends BlockAetherPlant implements IBlockMultiNam
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
+		if (placer.getHeldItemMainhand().getMetadata() == KIRRID_GRASS_FULL) {
+			return this.getStateFromMeta(meta).withProperty(PROPERTY_HARVESTABLE, true).withProperty(PROPERTY_VARIANT, FULL);
+		}
 		return this.getStateFromMeta(meta).withProperty(PROPERTY_HARVESTABLE, false).withProperty(PROPERTY_VARIANT, SPROUT);
 	}
 
