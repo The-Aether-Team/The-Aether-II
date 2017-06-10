@@ -259,14 +259,6 @@ public class BlocksAether
 		registerBlock("arkenium_ore", arkenium_ore.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		registerBlock("icestone_ore", icestone_ore.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
-		registerBlock("skyroot_log", skyroot_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		registerBlock("golden_oak_log", golden_oak_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-
-		registerBlock("blue_skyroot_leaves", blue_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		registerBlock("green_skyroot_leaves", green_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		registerBlock("dark_blue_skyroot_leaves", dark_blue_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		registerBlock("golden_oak_leaves", golden_oak_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-
 		registerBlock("quicksoil", quicksoil.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		registerBlock("aether_crafting_table", aether_crafting_table.setCreativeTab(CreativeTabsAether.UTILITY));
@@ -285,6 +277,24 @@ public class BlocksAether
 
 		registerBlock("ambrosium_torch", ambrosium_torch.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
+		registerBlock("quicksoil_glass", quicksoil_glass.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		registerBlock("crude_scatterglass", crude_scatterglass.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		registerBlock("scatterglass", scatterglass.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+
+		registerBlock("quicksoil_glass_decorative", quicksoil_glass_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+		registerBlock("crude_scatterglass_decorative", crude_scatterglass_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+		registerBlock("scatterglass_decorative", scatterglass_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+
+		registerBlock("skyroot_log", skyroot_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		registerBlock("golden_oak_log", golden_oak_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+
+		registerBlock("blue_skyroot_leaves", blue_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		registerBlock("green_skyroot_leaves", green_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		registerBlock("dark_blue_skyroot_leaves", dark_blue_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		registerBlock("golden_oak_leaves", golden_oak_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+
+		registerBlock("woven_sticks", woven_sticks.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+
 		registerBlock("aether_sapling", aether_sapling.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		registerBlock("aether_portal", aether_portal);
@@ -295,17 +305,9 @@ public class BlocksAether
 
 		registerBlock("orange_tree", orange_tree.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
-		registerBlock("aether_flower", aether_flower.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-
 		registerBlock("kirrid_grass", kirrid_grass.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
-		registerBlock("quicksoil_glass", quicksoil_glass.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-		registerBlock("crude_scatterglass", crude_scatterglass.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		registerBlock("scatterglass", scatterglass.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-
-		registerBlock("quicksoil_glass_decorative", quicksoil_glass_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
-		registerBlock("crude_scatterglass_decorative", crude_scatterglass_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
-		registerBlock("scatterglass_decorative", scatterglass_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+		registerBlock("aether_flower", aether_flower.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		registerBlock("zanite_block", zanite_block.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
@@ -350,7 +352,6 @@ public class BlocksAether
 		registerBlock("standing_skyroot_sign", standing_skyroot_sign);
 
 		registerBlock("skyroot_trapdoor", skyroot_trapdoor.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-		registerBlock("secret_skyroot_trapdoor", secret_skyroot_trapdoor.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
 		registerBlock("skyroot_ladder", skyroot_ladder.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
@@ -384,7 +385,6 @@ public class BlocksAether
 		registerBlock("icestone_brick_stairs", icestone_brick_stairs.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		registerBlock("scatterglass_stairs", scatterglass_stairs.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
-		registerBlock("woven_sticks", woven_sticks.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		registerBlock("moa_egg", moa_egg);
 
 		registerBlock("present", present.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
@@ -398,6 +398,8 @@ public class BlocksAether
 		registerBlock("quicksoil_glass_pane_decorative", quicksoil_glass_pane_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 		registerBlock("scatterglass_pane_decorative", scatterglass_pane_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 		registerBlock("crude_scatterglass_pane_decorative", crude_scatterglass_pane_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+
+		registerBlock("secret_skyroot_trapdoor", secret_skyroot_trapdoor.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
 		registerBlock("skyroot_twigs", skyroot_twigs.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		registerBlock("holystone_rock", holystone_rock.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));

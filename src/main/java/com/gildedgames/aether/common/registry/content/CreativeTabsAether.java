@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -16,40 +17,37 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class CreativeTabsAether
 {
+	public static final Tab NATURAL_BLOCKS = new Tab("aether.natural_blocks");
 
-	public static final CreativeTab NATURAL_BLOCKS = new CreativeTab("aether.natural_blocks");
+	public static final Tab CONSTRUCTION = new Tab("aether.construction");
 
-	public static final CreativeTab CONSTRUCTION = new CreativeTab("aether.construction");
+	public static final Tab UTILITY = new Tab("aether.utility_blocks");
 
-	public static final CreativeTab UTILITY = new CreativeTab("aether.utility_blocks");
+	public static final Tab DECORATIVE_BLOCKS = new Tab("aether.visual_variants");
 
-	public static final CreativeTab DECORATIVE_BLOCKS = new CreativeTab("aether.visual_variants");
+	public static final Tab MISCELLANEOUS = new TabMisc("aether.miscellaneous");
 
-	public static final CreativeTab MISCELLANEOUS = new CreativeTabMisc("aether.miscellaneous");
+	public static final Tab MATERIALS = new Tab("aether.materials");
 
-	public static final CreativeTab MATERIALS = new CreativeTab("aether.materials");
+	public static final Tab CONSUMABLES = new Tab("aether.consumables");
 
-	public static final CreativeTab CONSUMABLES = new CreativeTab("aether.consumables");
+	public static final Tab TOOLS = new Tab("aether.tools");
 
-	public static final CreativeTab TOOLS = new CreativeTab("aether.tools");
+	public static final Tab WEAPONS = new Tab("aether.weapons");
 
-	public static final CreativeTab WEAPONS = new CreativeTab("aether.weapons");
+	public static final Tab ARMOR = new Tab("aether.armor");
 
-	public static final CreativeTab ARMOR = new CreativeTab("aether.armor");
+	public static final Tab COMPANIONS = new Tab("aether.companions");
 
-	public static final CreativeTab COMPANIONS = new CreativeTab("aether.companions");
+	public static final Tab RINGS = new Tab("aether.rings");
 
-	public static final CreativeTab RINGS = new CreativeTab("aether.rings");
+	public static final Tab NECKWEAR = new Tab("aether.neckwear");
 
-	public static final CreativeTab NECKWEAR = new CreativeTab("aether.neckwear");
+	public static final Tab RELICS = new Tab("aether.relics");
 
-	public static final CreativeTab RELICS = new CreativeTab("aether.relics");
+	public static final Tab CHARMS = new Tab("aether.charms");
 
-	public static final CreativeTab CHARMS = new CreativeTab("aether.charms");
-
-	public static final CreativeTab ARTIFACTS = new CreativeTab("aether.artifacts");
-
-
+	public static final Tab ARTIFACTS = new Tab("aether.artifacts");
 
 	@SideOnly(Side.CLIENT)
 	public static void registerTabIcons()
@@ -73,17 +71,17 @@ public class CreativeTabsAether
 		ARTIFACTS.setDisplayStack(new ItemStack(ItemsAether.valkyrie_wings));
 	}
 
-	public static class CreativeTab extends CreativeTabs
+	private static class Tab extends CreativeTabs
 	{
 		private ItemStack stack = ItemStack.EMPTY;
 
-		public CreativeTab(String unlocalizedName)
+		private Tab(String unlocalizedName)
 		{
 			super(unlocalizedName);
 		}
 
 		@SideOnly(Side.CLIENT)
-		public void setDisplayStack(ItemStack stack)
+		private void setDisplayStack(ItemStack stack)
 		{
 			this.stack = stack;
 		}
@@ -96,9 +94,9 @@ public class CreativeTabsAether
 		}
 	}
 
-	public static class CreativeTabMisc extends CreativeTab
+	private static class TabMisc extends Tab
 	{
-		public CreativeTabMisc(String unlocalizedName)
+		private TabMisc(String unlocalizedName)
 		{
 			super(unlocalizedName);
 		}
@@ -108,6 +106,13 @@ public class CreativeTabsAether
 		public void displayAllRelevantItems(NonNullList<ItemStack> list)
 		{
 			super.displayAllRelevantItems(list);
+
+			list.sort((o1, o2) -> {
+				boolean b1 = o1.getItem() instanceof ItemBlock;
+				boolean b2 = o2.getItem() instanceof ItemBlock;
+
+				return (b2 == b1 ? 0 : (b1 ? 1 : -1));
+			});
 
 			for (ResourceLocation res : EntitiesAether.getRegisteredSpawnEggs())
 			{

@@ -533,6 +533,8 @@ public class ItemsAether
 		registerItem("taegore_hide", taegore_hide.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("burrukai_pelt", burrukai_pelt.setCreativeTab(CreativeTabsAether.MATERIALS));
 
+		registerItem("kirrid_flower", kirrid_flower.setCreativeTab(CreativeTabsAether.MATERIALS));
+
 		registerItem("aechor_petal", aechor_petal.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
 		registerItem("blueberries", blueberries);
@@ -551,6 +553,8 @@ public class ItemsAether
 
 		registerItem("kirrid_loin", kirrid_loin);
 		registerItem("kirrid_cutlet", kirrid_cutlet);
+
+		registerItem("fried_moa_egg", fried_moa_egg.setCreativeTab(CreativeTabsAether.CONSUMABLES));
 
 		registerItem("candy_corn", candy_corn);
 		registerItem("cocoatrice", cocoatrice);
@@ -757,10 +761,6 @@ public class ItemsAether
 		registerItem("irradiated_dust", irradiated_dust.setCreativeTab(CreativeTabsAether.MATERIALS));
 
 		registerItem("wrapping_paper", wrapping_paper.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
-
-		registerItem("fried_moa_egg", fried_moa_egg.setCreativeTab(CreativeTabsAether.CONSUMABLES));
-
-		registerItem("kirrid_flower", kirrid_flower.setCreativeTab(CreativeTabsAether.MATERIALS));
 
 		registerItemProperties();
 	}
