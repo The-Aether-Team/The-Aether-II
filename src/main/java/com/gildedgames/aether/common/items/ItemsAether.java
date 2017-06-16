@@ -224,6 +224,10 @@ public class ItemsAether
 
 	public static final Item kirrid_flower = new Item();
 
+	public static final ItemBrettlCane brettl_cane = new ItemBrettlCane();
+
+	public static final Item brettl_grass = new Item();
+
 	public static final Item zanite_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.ZANITE),
 	        arkenium_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.ARKENIUM),
 	        gravitite_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.GRAVITITE),
@@ -750,6 +754,9 @@ public class ItemsAether
 		registerItem("wynd_cluster_ring", wynd_cluster_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("lesser_ring_of_wisdom", lesser_ring_of_wisdom.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("ring_of_wisdom", ring_of_wisdom.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
+
+		registerItem("brettl_cane", brettl_cane.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("brettl_grass", brettl_grass.setCreativeTab(CreativeTabsAether.MATERIALS));
 
 		registerItem("irradiated_chunk", irradiated_chunk.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("irradiated_sword", irradiated_sword.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.MATERIALS));

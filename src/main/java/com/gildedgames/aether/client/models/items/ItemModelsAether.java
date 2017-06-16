@@ -152,6 +152,10 @@ public class ItemModelsAether
 				.add(BlockKirridGrass.SPROUT.getMeta(), "kirrid_grass_sprout")
 				.add(BlockKirridGrass.FULL.getMeta(), "kirrid_grass_full"));
 
+		registerItemModels(BlocksAether.brettl_plant, "brettl_plant/brettl_plant");
+		registerItemModels(ItemsAether.brettl_cane, "brettl_plant/brettl_cane");
+		registerItemModels(ItemsAether.brettl_grass, "brettl_plant/brettl_grass");
+
 		registerItemModels(BlocksAether.orange_tree, "orange_tree");
 
 		registerItemModels(BlocksAether.zanite_block, "zanite_block");

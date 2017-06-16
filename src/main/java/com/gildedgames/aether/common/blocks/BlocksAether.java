@@ -120,6 +120,8 @@ public class BlocksAether
 
 	public static final BlockKirridGrass kirrid_grass = new BlockKirridGrass();
 
+	public static final BlockBrettlPlant brettl_plant = new BlockBrettlPlant();
+
 	public static final BlockAltar altar = new BlockAltar();
 
 	public static final BlockIcestoneOre icestone_ore = new BlockIcestoneOre();
@@ -306,6 +308,8 @@ public class BlocksAether
 		registerBlock("orange_tree", orange_tree.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		registerBlock("kirrid_grass", kirrid_grass.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+
+		registerBlock("brettl_plant", brettl_plant.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		registerBlock("aether_flower", aether_flower.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
