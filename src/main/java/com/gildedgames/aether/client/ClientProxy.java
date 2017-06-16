@@ -9,9 +9,11 @@ import com.gildedgames.aether.client.models.items.ItemModelsAether;
 import com.gildedgames.aether.client.renderer.AetherRenderers;
 import com.gildedgames.aether.client.renderer.ClientRenderHandler;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonProxy;
+import com.gildedgames.aether.common.analytics.GameAnalytics;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
-import com.gildedgames.aether.common.util.PerfHelper;
+import com.gildedgames.aether.common.util.helpers.PerfHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.KeyBinding;
@@ -40,12 +42,31 @@ public class ClientProxy extends CommonProxy
 	{
 		super.init(event);
 
+		PerfHelper.measure("Initialize analytics", () ->
+		{
+			AetherCore.ANALYTICS = AetherCore.isInsideDevEnvironment() ? new GameAnalytics() :
+					new GameAnalytics("c8e4d94251ce253e138ae8a702e20301", "1ba3cb91e03cbb578b97c26f872e812dd05f5bbb");
+
+			if (Minecraft.getMinecraft().isSnooperEnabled() && AetherCore.CONFIG.isAnalyticsEnabled())
+			{
+				AetherCore.ANALYTICS.setup();
+			}
+			else
+			{
+				AetherCore.LOGGER.info("GameAnalytics disabled by user preference (by config or vanilla snooper settings)");
+
+				AetherCore.ANALYTICS.disable();
+			}
+		});
+
 		PerfHelper.measure("Initialize special renders", AetherRenderers::init);
 
 		MinecraftForge.EVENT_BUS.register(AetherMusicManager.INSTANCE);
 
 		MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
 		MinecraftForge.EVENT_BUS.register(new ClientRenderHandler());
+
+		MinecraftForge.EVENT_BUS.register(new SessionEventHandler());
 
 		MinecraftForge.EVENT_BUS.register(TabClientEvents.class);
 

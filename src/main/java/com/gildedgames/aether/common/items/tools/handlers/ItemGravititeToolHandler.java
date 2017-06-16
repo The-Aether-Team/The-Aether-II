@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.tools.handlers;
 
-import com.gildedgames.aether.common.capabilities.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;

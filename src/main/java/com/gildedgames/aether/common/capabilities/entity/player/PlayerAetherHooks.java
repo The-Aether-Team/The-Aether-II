@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.capabilities.player;
+package com.gildedgames.aether.common.capabilities.entity.player;
 
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensio
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 
-public class PlayerEvents
+public class PlayerAetherHooks
 {
 	@SubscribeEvent
 	public static void onPlayerJoined(PlayerLoggedInEvent event)

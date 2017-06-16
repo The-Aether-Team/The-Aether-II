@@ -1,7 +1,7 @@
-package com.gildedgames.aether.common.capabilities.player.modules;
+package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
-import com.gildedgames.aether.common.capabilities.player.PlayerAether;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.entity.item.EntityItem;
@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
-public class ParachuteModule extends PlayerAetherModule
+public class PlayerParachuteModule extends PlayerAetherModule
 {
 
 	private boolean isParachuting;
@@ -23,7 +23,7 @@ public class ParachuteModule extends PlayerAetherModule
 
 	private boolean prevAllowFlying;
 
-	public ParachuteModule(PlayerAether playerAether)
+	public PlayerParachuteModule(PlayerAether playerAether)
 	{
 		super(playerAether);
 	}

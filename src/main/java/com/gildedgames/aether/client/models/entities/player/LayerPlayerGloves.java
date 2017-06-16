@@ -1,17 +1,14 @@
 package com.gildedgames.aether.client.models.entities.player;
 
-import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.common.capabilities.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
 import com.gildedgames.aether.common.items.armor.ItemLeatherGloves;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 public class LayerPlayerGloves extends LayerBipedArmor

@@ -1,7 +1,8 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.common.entities.util.QuicksoilProcessor;
+import com.gildedgames.aether.common.analytics.GAReporter;
+import com.gildedgames.aether.common.analytics.GameAnalytics;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.dimensions.aether.TeleporterAether;
@@ -45,6 +46,8 @@ public class AetherCore
 	public static CommonProxy PROXY;
 
 	public static ConfigAether CONFIG;
+
+	public static GAReporter ANALYTICS;
 
 	public static TeleporterAether TELEPORTER;
 

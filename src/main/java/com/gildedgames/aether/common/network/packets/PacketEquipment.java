@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.common.capabilities.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;

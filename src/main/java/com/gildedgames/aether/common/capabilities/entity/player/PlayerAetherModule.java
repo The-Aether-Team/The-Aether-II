@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.capabilities.player;
+package com.gildedgames.aether.common.capabilities.entity.player;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,7 +28,7 @@ public abstract class PlayerAetherModule
 	 * Writes this module's data to the player capability. **This might change in the future to prevent
 	 * modules from accessing data outside their scope.**
 	 *
-	 * @param compound The NBT tag to write to
+	 * @param compound The NBT tag to writeProperties to
 	 */
 	public abstract void write(NBTTagCompound compound);
 

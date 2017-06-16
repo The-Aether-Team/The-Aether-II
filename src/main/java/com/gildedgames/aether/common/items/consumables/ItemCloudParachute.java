@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.consumables;
 
-import com.gildedgames.aether.common.capabilities.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;

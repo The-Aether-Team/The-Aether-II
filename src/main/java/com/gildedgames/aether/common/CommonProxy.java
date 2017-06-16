@@ -2,7 +2,7 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.IAetherServices;
 import com.gildedgames.aether.api.registry.IContentRegistry;
-import com.gildedgames.aether.common.capabilities.player.PlayerEvents;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherHooks;
 import com.gildedgames.aether.common.entities.util.MountEventHandler;
 import com.gildedgames.aether.common.entities.util.QuicksoilProcessor;
 import com.gildedgames.aether.common.items.tools.ItemToolHandler;
@@ -23,13 +23,18 @@ import java.util.Random;
 
 public class CommonProxy implements IAetherServices
 {
-	private File storageDir;
+	private File configDir;
 
 	private ContentRegistry contentRegistry = new ContentRegistry();
 
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		this.storageDir = new File(event.getSourceFile().getParent(), "Aether/");
+		this.configDir = new File(event.getModConfigurationDirectory(), "Aether/");
+
+		if (!this.configDir.exists() && !this.configDir.mkdir())
+		{
+			throw new RuntimeException("Couldn't create configuration directory");
+		}
 
 		this.contentRegistry.preInit();
 	}
@@ -41,7 +46,7 @@ public class CommonProxy implements IAetherServices
 		MinecraftForge.EVENT_BUS.register(AetherCore.CONFIG);
 
 		MinecraftForge.EVENT_BUS.register(CommonEvents.class);
-		MinecraftForge.EVENT_BUS.register(PlayerEvents.class);
+		MinecraftForge.EVENT_BUS.register(PlayerAetherHooks.class);
 		MinecraftForge.EVENT_BUS.register(MountEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(ItemToolHandler.class);
 		MinecraftForge.EVENT_BUS.register(ItemSkyrootSword.class);
@@ -64,9 +69,9 @@ public class CommonProxy implements IAetherServices
 		}
 	}
 
-	public File getAetherStorageDir()
+	public File getConfigDir()
 	{
-		return this.storageDir;
+		return this.configDir;
 	}
 
 	public void displayDismountMessage(EntityPlayer player)

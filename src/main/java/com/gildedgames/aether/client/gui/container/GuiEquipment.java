@@ -2,8 +2,8 @@ package com.gildedgames.aether.client.gui.container;
 
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.capabilities.player.PlayerAether;
-import com.gildedgames.aether.common.capabilities.player.modules.EquipmentModule;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
 import com.gildedgames.aether.common.containers.ContainerEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -189,7 +189,7 @@ public class GuiEquipment extends GuiContainer
 	{
 		ArrayList<String> label = new ArrayList<>();
 
-		EquipmentModule equipment = this.aePlayer.getEquipmentModule();
+		PlayerEquipmentModule equipment = this.aePlayer.getEquipmentModule();
 		equipment.getActivePools().forEach((pool) -> pool.getInstance().ifPresent(instance -> instance.addInformation(label)));
 
 		String compiled = StringUtils.join(label, TextFormatting.RESET + ", ");

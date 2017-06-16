@@ -2,21 +2,22 @@ package com.gildedgames.aether.common;
 
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.io.File;
 
 public class ConfigAether
 {
+	private final Configuration configuration;
 
-	public final Configuration configuration;
-
-	private final ConfigCategory GENERAL, BIOMES, DIMENSIONS;
+	public final ConfigCategory general, biomes, dimensions;
 
 	private int aetherDimID;
 
 	private int aetherBiomeID;
+
+	private boolean analyticsEnabled;
 
 	private boolean displayInventoryPattern;
 
@@ -26,23 +27,25 @@ public class ConfigAether
 	{
 		this.configuration = new Configuration(file, true);
 
-		this.GENERAL = this.configuration.getCategory(Configuration.CATEGORY_GENERAL);
-		this.BIOMES = this.configuration.getCategory("Biome IDs");
-		this.DIMENSIONS = this.configuration.getCategory("Dimension IDs");
+		this.general = this.configuration.getCategory(Configuration.CATEGORY_GENERAL);
+		this.biomes = this.configuration.getCategory("Biome IDs");
+		this.dimensions = this.configuration.getCategory("Dimension IDs");
 
-		this.BIOMES.setRequiresMcRestart(true);
-		this.DIMENSIONS.setRequiresMcRestart(true);
+		this.biomes.setRequiresMcRestart(true);
+		this.dimensions.setRequiresMcRestart(true);
 
 		this.loadAndSync();
 	}
 
 	private void loadAndSync()
 	{
-		this.aetherDimID = this.getInt(this.DIMENSIONS, "Aether Dimension ID", 3);
-		this.aetherBiomeID = this.getInt(this.BIOMES, "Aether Biome ID", 237);
+		this.aetherDimID = this.getInt(this.dimensions, "Aether Dimension ID", 3);
+		this.aetherBiomeID = this.getInt(this.biomes, "Aether Biome ID", 237);
 
-		this.displayInventoryPattern = this.getBoolean(this.GENERAL, "Display Inventory Pattern", true);
-		this.displayPerformanceIndicator = this.getBoolean(this.GENERAL, "Display Performance Indicator", true);
+		this.analyticsEnabled = this.getBoolean(this.general, "Enable Analytics (client-side only)", true);
+
+		this.displayInventoryPattern = this.getBoolean(this.general, "Display Inventory Pattern", true);
+		this.displayPerformanceIndicator = this.getBoolean(this.general, "Display Performance Indicator", true);
 
 		if (this.configuration.hasChanged())
 		{
@@ -51,9 +54,9 @@ public class ConfigAether
 	}
 
 	@SubscribeEvent
-	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs)
+	public void onConfigChanged(OnConfigChangedEvent event)
 	{
-		if (eventArgs.getModID().equals(AetherCore.MOD_ID))
+		if (event.getModID().equals(AetherCore.MOD_ID))
 		{
 			this.loadAndSync();
 		}
@@ -87,5 +90,10 @@ public class ConfigAether
 	public boolean getDisplayPerformanceIndicator()
 	{
 		return this.displayPerformanceIndicator;
+	}
+
+	public boolean isAnalyticsEnabled()
+	{
+		return this.analyticsEnabled;
 	}
 }
