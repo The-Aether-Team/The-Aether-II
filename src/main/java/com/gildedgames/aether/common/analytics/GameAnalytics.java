@@ -95,10 +95,10 @@ public class GameAnalytics implements GAReporter
 	@Override
 	public void setup()
 	{
-		this.storage.load(this.getLocalFile());
-
 		CompletableFuture.runAsync(() ->
 		{
+			this.storage.load(this.getLocalFile());
+
 			GAInitResponse result;
 
 			try
@@ -201,7 +201,7 @@ public class GameAnalytics implements GAReporter
 		HttpPost post = new HttpPost(this.url + endpoint);
 		post.setHeader("Content-Encoding", "gzip");
 		post.setHeader("Content-Type", "application/json");
-		post.setHeader("Authorization", this.secret.signMessage(upload));
+		post.setHeader("Authorization", this.secret.createHmac(upload));
 
 		post.setEntity(new ByteArrayEntity(upload));
 

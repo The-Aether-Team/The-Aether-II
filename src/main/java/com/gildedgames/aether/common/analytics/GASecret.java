@@ -13,41 +13,34 @@ import java.security.NoSuchAlgorithmException;
  */
 public class GASecret
 {
-	private final SecretKeySpec key;
+	private static final String ALGORITHM = "HmacSHA256";
 
-	public GASecret(String key)
+	private final Mac mac;
+
+	public GASecret(String secret)
 	{
 		try
 		{
-			this.key = new SecretKeySpec(key.getBytes("UTF-8"), "HmacSHA256");
+			SecretKeySpec key = new SecretKeySpec(secret.getBytes("UTF-8"), ALGORITHM);
+
+			this.mac = Mac.getInstance(ALGORITHM);
+			this.mac.init(key);
 		}
-		catch (UnsupportedEncodingException e)
+		catch (NoSuchAlgorithmException | InvalidKeyException | UnsupportedEncodingException e)
 		{
-			throw new RuntimeException("Invalid key format", e);
+			throw new RuntimeException("Couldn't initialize MAC", e);
 		}
 	}
 
 	/**
-	 * Crates an HMAC-SHA256 for the provided data.
+	 * Crates an HMAC-SHA256 for the provided data using the secret key stored.
 	 *
 	 * @param data The data to create an HMAC for
 	 * @return The HMAC-SHA256 as a String with base64 encoding
 	 */
-	public String signMessage(byte[] data)
+	public String createHmac(byte[] data)
 	{
-		byte[] hmac;
-
-		try
-		{
-			Mac mac = Mac.getInstance("HmacSHA256");
-			mac.init(this.key);
-
-			hmac = mac.doFinal(data);
-		}
-		catch (NoSuchAlgorithmException | InvalidKeyException e)
-		{
-			throw new RuntimeException("Couldn't create HMAC", e);
-		}
+		byte[] hmac = this.mac.doFinal(data);
 
 		byte[] base64 = Base64.encodeBase64(hmac);
 
