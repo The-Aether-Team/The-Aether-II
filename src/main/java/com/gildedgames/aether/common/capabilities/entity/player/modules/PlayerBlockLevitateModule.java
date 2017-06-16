@@ -1,7 +1,7 @@
-package com.gildedgames.aether.common.capabilities.player.modules;
+package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
-import com.gildedgames.aether.common.capabilities.player.PlayerAether;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import com.gildedgames.aether.common.registry.content.MaterialsAether;
 import net.minecraft.block.state.IBlockState;
@@ -13,12 +13,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
-public class GravititeAbilityModule extends PlayerAetherModule
+public class PlayerBlockLevitateModule extends PlayerAetherModule
 {
 
 	private EntityMovingBlock heldBlock;
 
-	public GravititeAbilityModule(PlayerAether playerAether)
+	public PlayerBlockLevitateModule(PlayerAether playerAether)
 	{
 		super(playerAether);
 	}

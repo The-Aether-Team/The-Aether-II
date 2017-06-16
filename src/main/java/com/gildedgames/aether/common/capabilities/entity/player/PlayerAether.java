@@ -1,10 +1,10 @@
-package com.gildedgames.aether.common.capabilities.player;
+package com.gildedgames.aether.common.capabilities.entity.player;
 
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.dialog.IDialogController;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.capabilities.player.modules.*;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.*;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketEquipment;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
@@ -39,17 +39,17 @@ public class PlayerAether implements IPlayerAether
 
 	private final EntityPlayer entity;
 
-	private final AbilitiesModule abilitiesModule;
+	private final PlayerAbilitiesModule abilitiesModule;
 
-	private final GravititeAbilityModule gravititeAbilityModule;
+	private final PlayerBlockLevitateModule gravititeAbilityModule;
 
-	private final TeleportingModule teleportingModule;
+	private final PlayerPortalModule teleportingModule;
 
-	private final ParachuteModule parachuteModule;
+	private final PlayerParachuteModule parachuteModule;
 
-	private final EquipmentModule equipmentModule;
+	private final PlayerEquipmentModule equipmentModule;
 
-	private final DialogModule dialogModule;
+	private final PlayerDialogModule dialogModule;
 
 	private boolean hasDiedInAetherBefore;
 
@@ -57,12 +57,12 @@ public class PlayerAether implements IPlayerAether
 	{
 		this.entity = entity;
 
-		this.abilitiesModule = new AbilitiesModule(this);
-		this.gravititeAbilityModule = new GravititeAbilityModule(this);
-		this.teleportingModule = new TeleportingModule(this);
-		this.parachuteModule = new ParachuteModule(this);
-		this.equipmentModule = new EquipmentModule(this);
-		this.dialogModule = new DialogModule(this);
+		this.abilitiesModule = new PlayerAbilitiesModule(this);
+		this.gravititeAbilityModule = new PlayerBlockLevitateModule(this);
+		this.teleportingModule = new PlayerPortalModule(this);
+		this.parachuteModule = new PlayerParachuteModule(this);
+		this.equipmentModule = new PlayerEquipmentModule(this);
+		this.dialogModule = new PlayerDialogModule(this);
 
 		Collection<PlayerAetherModule> modules = new ArrayList<>();
 		modules.add(this.abilitiesModule);
@@ -234,28 +234,28 @@ public class PlayerAether implements IPlayerAether
 		return this.entity;
 	}
 
-	public GravititeAbilityModule getGravititeAbility()
+	public PlayerBlockLevitateModule getGravititeAbility()
 	{
 		return this.gravititeAbilityModule;
 	}
 
-	public TeleportingModule getTeleportingModule()
+	public PlayerPortalModule getTeleportingModule()
 	{
 		return this.teleportingModule;
 	}
 
-	public ParachuteModule getParachuteModule()
+	public PlayerParachuteModule getParachuteModule()
 	{
 		return this.parachuteModule;
 	}
 
-	public AbilitiesModule getAbilitiesModule()
+	public PlayerAbilitiesModule getAbilitiesModule()
 	{
 		return this.abilitiesModule;
 	}
 
 	@Override
-	public EquipmentModule getEquipmentModule()
+	public PlayerEquipmentModule getEquipmentModule()
 	{
 		return this.equipmentModule;
 	}

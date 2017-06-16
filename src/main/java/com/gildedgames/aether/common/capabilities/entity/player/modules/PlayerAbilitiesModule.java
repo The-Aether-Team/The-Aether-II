@@ -1,13 +1,13 @@
-package com.gildedgames.aether.common.capabilities.player.modules;
+package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.capabilities.player.PlayerAether;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
-public class AbilitiesModule extends PlayerAetherModule
+public class PlayerAbilitiesModule extends PlayerAetherModule
 {
 
 	private int jumpsSoFar;
@@ -16,7 +16,7 @@ public class AbilitiesModule extends PlayerAetherModule
 
 	private int ticksAirborne;
 
-	public AbilitiesModule(PlayerAether playerAether)
+	public PlayerAbilitiesModule(PlayerAether playerAether)
 	{
 		super(playerAether);
 	}

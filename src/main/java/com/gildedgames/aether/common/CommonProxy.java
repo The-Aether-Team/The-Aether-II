@@ -2,7 +2,7 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.IAetherServices;
 import com.gildedgames.aether.api.registry.IContentRegistry;
-import com.gildedgames.aether.common.capabilities.player.PlayerEvents;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherHooks;
 import com.gildedgames.aether.common.entities.util.MountEventHandler;
 import com.gildedgames.aether.common.entities.util.QuicksoilProcessor;
 import com.gildedgames.aether.common.items.tools.ItemToolHandler;
@@ -46,7 +46,7 @@ public class CommonProxy implements IAetherServices
 		MinecraftForge.EVENT_BUS.register(AetherCore.CONFIG);
 
 		MinecraftForge.EVENT_BUS.register(CommonEvents.class);
-		MinecraftForge.EVENT_BUS.register(PlayerEvents.class);
+		MinecraftForge.EVENT_BUS.register(PlayerAetherHooks.class);
 		MinecraftForge.EVENT_BUS.register(MountEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(ItemToolHandler.class);
 		MinecraftForge.EVENT_BUS.register(ItemSkyrootSword.class);

@@ -23,7 +23,7 @@ import com.gildedgames.aether.common.recipes.simple.ShapedRecipeWrapper;
 import com.gildedgames.aether.common.recipes.simple.ShapelessRecipeWrapper;
 import com.gildedgames.aether.common.registry.content.*;
 import com.gildedgames.aether.common.structure.StructureLoader;
-import com.gildedgames.aether.common.util.PerfHelper;
+import com.gildedgames.aether.common.util.helpers.PerfHelper;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;

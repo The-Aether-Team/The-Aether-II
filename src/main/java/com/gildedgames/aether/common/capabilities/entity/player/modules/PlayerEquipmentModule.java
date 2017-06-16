@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.capabilities.player.modules;
+package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
@@ -6,8 +6,8 @@ import com.gildedgames.aether.api.items.equipment.effects.IEffectPool;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.api.player.IEquipmentModule;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
-import com.gildedgames.aether.common.capabilities.player.PlayerAether;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
 import com.gildedgames.aether.common.entities.effects.EquipmentEffectPool;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -20,7 +20,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
-public class EquipmentModule extends PlayerAetherModule implements IEquipmentModule
+public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipmentModule
 {
 	private final InventoryEquipment stagingInv;
 
@@ -28,7 +28,7 @@ public class EquipmentModule extends PlayerAetherModule implements IEquipmentMod
 
 	private final Map<ResourceLocation, EquipmentEffectPool<IEffectProvider>> pools = new HashMap<>();
 
-	public EquipmentModule(PlayerAether player)
+	public PlayerEquipmentModule(PlayerAether player)
 	{
 		super(player);
 

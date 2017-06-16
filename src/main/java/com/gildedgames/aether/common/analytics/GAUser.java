@@ -2,61 +2,73 @@ package com.gildedgames.aether.common.analytics;
 
 import com.gildedgames.aether.common.analytics.events.GASessionEndEvent;
 import com.gildedgames.aether.common.analytics.events.GASessionStartEvent;
-import net.minecraft.nbt.NBTTagCompound;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.UUID;
 
 public class GAUser
 {
-	private final GameAnalytics reporter;
+	@Expose
+	@SerializedName("persistent_id")
+	private final UUID persistentId;
 
-	private final UUID persistentId, sessionId;
+	@Expose
+	@SerializedName("session_count")
+	private int sessionCount;
+
+	private final UUID sessionId;
 
 	private long sessionStart;
 
-	private int sessionCount;
-
-	protected GAUser(GameAnalytics reporter, NBTTagCompound tag)
+	/**
+	 * Creates a pre-existing GameAnalytics user and starts a new session. Used
+	 * for de-serialization by GSON.
+	 *
+	 * @param persistentId The user's persistent ID
+	 * @param sessionCount The user's session count
+	 */
+	protected GAUser(UUID persistentId, int sessionCount)
 	{
-		this.reporter = reporter;
+		this.persistentId = persistentId;
+		this.sessionCount = sessionCount;
 
-		this.persistentId = tag.getUniqueId("PersistentId");
 		this.sessionId = UUID.randomUUID();
-
-		this.sessionCount = tag.getInteger("SessionCount");
 	}
 
-	protected GAUser(GameAnalytics reporter, UUID id)
+	/**
+	 * Creates a new GameAnalytics user and starts a new session.
+	 */
+	protected GAUser()
 	{
-		this.reporter = reporter;
-
-		this.persistentId = id;
+		this.persistentId = UUID.randomUUID();
 		this.sessionId = UUID.randomUUID();
 	}
 
 	/**
 	 * Starts the user's session and records an event for it.
 	 */
-	public void startSession()
+	public void startSession(GAReporter reporter)
 	{
-		this.sessionStart = this.reporter.getSystemEpoch();
+		this.sessionStart = reporter.getEpochTimestamp();
 		this.sessionCount++;
 
-		this.reporter.event(new GASessionStartEvent(this));
+		reporter.schedule(new GASessionStartEvent());
 	}
 
 	/**
 	 * Ends the user's session and records an event for it.
 	 */
-	public void endSession()
+	public void endSession(GAReporter reporter)
 	{
-		long duration = this.reporter.getSystemEpoch() - this.sessionStart;
+		long duration = reporter.getEpochTimestamp() - this.sessionStart;
 
-		this.reporter.event(new GASessionEndEvent(this, duration));
+		reporter.schedule(new GASessionEndEvent(duration));
 	}
 
 	/**
-	 * Returns the number of sessions this users has had in total, including the current one
+	 * Returns the number of sessions this users has had in total, including the current one.
+	 *
 	 * @return The number of sessions, always positive
 	 */
 	public int getSessionCount()
@@ -65,7 +77,8 @@ public class GAUser
 	}
 
 	/**
-	 * Returns the user's persistent identifier, which doesn't change across sessions
+	 * Returns the user's persistent identifier, which doesn't change across sessions.
+	 *
 	 * @return The user's persistent ID
 	 */
 	public UUID getPersistentId()
@@ -74,20 +87,12 @@ public class GAUser
 	}
 
 	/**
-	 * Returns the ID of the user's current session
+	 * Returns the user's current session ID
+	 *
 	 * @return The user's session ID
 	 */
 	public UUID getSessionId()
 	{
 		return this.sessionId;
-	}
-
-	public NBTTagCompound write()
-	{
-		NBTTagCompound tag = new NBTTagCompound();
-		tag.setUniqueId("PersistentId", this.persistentId);
-		tag.setInteger("SessionCount", this.sessionCount);
-
-		return tag;
 	}
 }

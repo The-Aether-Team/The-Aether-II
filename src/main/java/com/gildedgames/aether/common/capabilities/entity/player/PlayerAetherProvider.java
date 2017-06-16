@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.capabilities.player;
+package com.gildedgames.aether.common.capabilities.entity.player;
 
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.player.IPlayerAether;

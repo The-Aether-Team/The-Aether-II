@@ -3,7 +3,6 @@ package com.gildedgames.aether.client.gui;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.config.GuiConfig;
 import net.minecraftforge.fml.client.config.IConfigElement;
 
@@ -21,14 +20,9 @@ public class GuiConfigAether extends GuiConfig
 	private static List<IConfigElement> getConfigElements()
 	{
 		List<IConfigElement> list = new ArrayList<>();
-
-		List<IConfigElement> general = new ConfigElement(AetherCore.CONFIG.configuration.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements();
-		List<IConfigElement> biomeIDs = new ConfigElement(AetherCore.CONFIG.configuration.getCategory("Biome IDs")).getChildElements();
-		List<IConfigElement> dimensionIDs = new ConfigElement(AetherCore.CONFIG.configuration.getCategory("Dimension IDs")).getChildElements();
-
-		list.addAll(general);
-		list.addAll(biomeIDs);
-		list.addAll(dimensionIDs);
+		list.addAll(new ConfigElement(AetherCore.CONFIG.general).getChildElements());
+		list.addAll(new ConfigElement(AetherCore.CONFIG.biomes).getChildElements());
+		list.addAll(new ConfigElement(AetherCore.CONFIG.dimensions).getChildElements());
 
 		return list;
 	}

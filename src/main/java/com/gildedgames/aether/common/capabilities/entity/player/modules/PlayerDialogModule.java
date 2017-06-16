@@ -1,10 +1,10 @@
-package com.gildedgames.aether.common.capabilities.player.modules;
+package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.dialog.*;
 import com.gildedgames.aether.client.gui.dialog.GuiDialogViewer;
-import com.gildedgames.aether.common.capabilities.player.PlayerAether;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.dialog.PacketCloseDialog;
 import com.gildedgames.aether.common.network.packets.dialog.PacketOpenDialog;
@@ -18,13 +18,13 @@ import org.apache.commons.lang3.Validate;
 
 import java.util.*;
 
-public class DialogModule extends PlayerAetherModule implements IDialogController
+public class PlayerDialogModule extends PlayerAetherModule implements IDialogController
 {
 	private final Set<IDialogChangeListener> listeners = new HashSet<>();
 
 	private SceneInstance sceneInstance;
 
-	public DialogModule(PlayerAether playerAether)
+	public PlayerDialogModule(PlayerAether playerAether)
 	{
 		super(playerAether);
 	}
@@ -171,7 +171,7 @@ public class DialogModule extends PlayerAetherModule implements IDialogControlle
 
 	private class SceneInstance
 	{
-		private final DialogModule controller;
+		private final PlayerDialogModule controller;
 
 		private final IDialogScene scene;
 
@@ -185,7 +185,7 @@ public class DialogModule extends PlayerAetherModule implements IDialogControlle
 
 		private int index;
 
-		private SceneInstance(DialogModule controller, IDialogScene scene)
+		private SceneInstance(PlayerDialogModule controller, IDialogScene scene)
 		{
 			this.controller = controller;
 			this.scene = scene;

@@ -1,9 +1,9 @@
-package com.gildedgames.aether.common.capabilities.player.modules;
+package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
-import com.gildedgames.aether.common.capabilities.player.PlayerAether;
-import com.gildedgames.aether.common.capabilities.player.PlayerAetherModule;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.client.Minecraft;
@@ -11,14 +11,14 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.WorldServer;
 
-public class TeleportingModule extends PlayerAetherModule
+public class PlayerPortalModule extends PlayerAetherModule
 {
 
 	private float prevTimeInPortal, timeInPortal, timeCharged;
 
 	private boolean teleported, teleporting;
 
-	public TeleportingModule(PlayerAether playerAether)
+	public PlayerPortalModule(PlayerAether playerAether)
 	{
 		super(playerAether);
 	}

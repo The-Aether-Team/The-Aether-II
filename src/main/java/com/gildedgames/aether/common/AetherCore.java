@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.common.analytics.GAReporter;
 import com.gildedgames.aether.common.analytics.GameAnalytics;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
@@ -46,7 +47,7 @@ public class AetherCore
 
 	public static ConfigAether CONFIG;
 
-	public static GameAnalytics ANALYTICS;
+	public static GAReporter ANALYTICS;
 
 	public static TeleporterAether TELEPORTER;
 
@@ -74,7 +75,17 @@ public class AetherCore
 
 		AetherCore.ANALYTICS = AetherCore.isInsideDevEnvironment() ? new GameAnalytics() :
 				new GameAnalytics("c8e4d94251ce253e138ae8a702e20301", "1ba3cb91e03cbb578b97c26f872e812dd05f5bbb");
-		AetherCore.ANALYTICS.init();
+
+		if (AetherCore.CONFIG.isAnalyticsEnabled())
+		{
+			AetherCore.ANALYTICS.setup();
+		}
+		else
+		{
+			AetherCore.LOGGER.info("GameAnalytics disabled by user preference (config)");
+
+			AetherCore.ANALYTICS.disable();
+		}
 
 		MinecraftForge.EVENT_BUS.register(SPAWN_REGISTRY);
 	}

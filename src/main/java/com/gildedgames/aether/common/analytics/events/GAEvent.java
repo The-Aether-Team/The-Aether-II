@@ -1,43 +1,36 @@
 package com.gildedgames.aether.common.analytics.events;
 
-import com.gildedgames.aether.common.analytics.GAUser;
+import com.gildedgames.aether.common.AetherCore;
 import com.google.gson.JsonObject;
-
-import javax.annotation.Nonnull;
 
 public abstract class GAEvent
 {
-	private final GAUser user;
-
 	private final long timestamp;
 
-	public GAEvent(GAUser user)
+	public GAEvent()
 	{
-		this(user, System.currentTimeMillis() / 1000);
-	}
-
-	public GAEvent(GAUser user, long timestamp)
-	{
-		this.user = user;
-		this.timestamp = timestamp;
+		this.timestamp = AetherCore.ANALYTICS.getEpochTimestamp();
 	}
 
 	/**
-	 * Serializes this event to an {@link JsonObject}. Shouldn't contain timestamp!
-	 * @return The serialized result
+	 * Serializes this event to an {@link JsonObject}
+	 * @return An {@link JsonObject} that can be reported to the GA
 	 */
-	@Nonnull
-	public abstract JsonObject serialize();
+	public JsonObject serialize()
+	{
+		JsonObject obj = new JsonObject();
+		obj.addProperty("client_ts", this.getTimestamp());
+
+		this.writeProperties(obj);
+
+		return obj;
+	}
 
 	/**
-	 * Returns the user that this event belongs to.
-	 * @return The {@link GAUser}
+	 * Writes this event's additional properties to an {@link JsonObject}.
+	 * @param obj The event's JSON object
 	 */
-	@Nonnull
-	public GAUser getUser()
-	{
-		return this.user;
-	}
+	protected abstract void writeProperties(JsonObject obj);
 
 	/**
 	 * Returns the timestamp this event was created.

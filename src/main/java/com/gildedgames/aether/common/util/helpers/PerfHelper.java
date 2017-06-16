@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.util;
+package com.gildedgames.aether.common.util.helpers;
 
 import com.gildedgames.aether.common.AetherCore;
 

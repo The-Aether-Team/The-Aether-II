@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class BlockUtil
 {
-
+	@Deprecated
 	public static boolean setTileEntityNBT(World worldIn, BlockPos pos, ItemStack stack)
 	{
 		MinecraftServer minecraftserver = FMLCommonHandler.instance().getMinecraftServerInstance();
