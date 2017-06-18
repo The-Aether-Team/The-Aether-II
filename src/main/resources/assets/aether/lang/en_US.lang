@@ -510,6 +510,8 @@ item.aether.burrukai_pelt.name=Burrukai Pelt
 item.aether.kirrid_loin.name=Kirrid Loin
 item.aether.kirrid_cutlet.name=Kirrid Cutlet
 item.aether.kirrid_flower.name=Kirrid Flower
+item.aether.brettl_cane.name=Brettl Cane
+item.aether.brettl_grass.name=Brettl Grass
 
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability: 

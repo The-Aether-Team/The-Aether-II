@@ -27,7 +27,7 @@ import net.minecraft.world.World;
 public class EntityBurrukai extends EntityAetherAnimal
 {
 
-	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry);
+	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsAether.brettl_grass);
 
 	public EntityBurrukai(final World world)
 	{

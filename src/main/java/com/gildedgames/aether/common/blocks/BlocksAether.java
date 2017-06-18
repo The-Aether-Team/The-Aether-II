@@ -309,7 +309,7 @@ public class BlocksAether
 
 		registerBlock("kirrid_grass", kirrid_grass.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
-		registerBlock("brettl_plant", brettl_plant.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		registerBlock("brettl_plant", brettl_plant);
 
 		registerBlock("aether_flower", aether_flower.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
