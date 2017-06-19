@@ -29,7 +29,6 @@ import java.util.Random;
 
 public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiName, IGrowable
 {
-	//protected static final AxisAlignedBB BRETTL_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 	protected static final AxisAlignedBB BRETTL_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.25D, 0.75D);
 	protected static final AxisAlignedBB BRETTL_TOP_AAB = new AxisAlignedBB(0D, 0D, 0D, 0D, 0D, 0D);
 	protected static final AxisAlignedBB BRETTL_MID_AAB = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.5D, 0.75D);
@@ -323,19 +322,25 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 			worldIn.setBlockToAir(pos);
 		}
 
+		// Causes a new top state to be placed ontop of an existing bot/mid section.
 		if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_MID || state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_BASE)
 		{
 			if (worldIn.isAirBlock(pos.up()))
 			{
-				worldIn.setBlockState(pos.up(), state.withProperty(PROPERTY_VARIANT, TOP).withProperty(PROPERTY_HARVESTABLE, false));
+				if (!worldIn.isAirBlock(pos))
+				{
+					worldIn.setBlockState(pos.up(), state.withProperty(PROPERTY_VARIANT, TOP).withProperty(PROPERTY_HARVESTABLE, false));
+				}
 				if (worldIn.getBlockState(pos.up(2)).getBlock() == BlocksAether.brettl_plant)
 				{
 					worldIn.setBlockToAir(pos.up(2));
 				}
 			}
 		}
+
 	}
 
+	// pos should be set to the middle of the 3 states.
 	private void fullyGrowPlant(World worldIn, BlockPos pos, IBlockState state)
 	{
 		worldIn.setBlockState(pos.down(), this.getDefaultState().withProperty(PROPERTY_VARIANT, BASE_G).withProperty(PROPERTY_HARVESTABLE, true));
@@ -348,7 +353,7 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	{
 		worldIn.setBlockState(pos.down(), this.getDefaultState().withProperty(PROPERTY_VARIANT, BASE).withProperty(PROPERTY_HARVESTABLE, false));
 		worldIn.setBlockState(pos, this.getDefaultState().withProperty(PROPERTY_VARIANT, MID).withProperty(PROPERTY_HARVESTABLE, false));
-		worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(PROPERTY_VARIANT, TOP).withProperty(PROPERTY_HARVESTABLE, false));
+		worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(PROPERTY_VARIANT, TOP_G).withProperty(PROPERTY_HARVESTABLE, false));
 
 	}
 }
