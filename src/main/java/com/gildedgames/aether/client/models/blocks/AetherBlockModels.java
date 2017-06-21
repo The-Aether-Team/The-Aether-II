@@ -98,7 +98,7 @@ public class AetherBlockModels
 		});
 
 		ModelLoader.setCustomStateMapper(BlocksAether.kirrid_grass, new StateMap.Builder().ignore(BlockKirridGrass.PROPERTY_HARVESTABLE).build());
-		ModelLoader.setCustomStateMapper(BlocksAether.brettl_plant, new StateMap.Builder().ignore(BlockBrettlPlant.PROPERTY_HARVESTABLE).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.brettl_plant, new StateMap.Builder().ignore(BlockBrettlPlant.PROPERTY_HARVESTABLE).ignore(BlockBrettlPlant.PROPERTY_AGE).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.altar, new StateMap.Builder().ignore(BlockAltar.PROPERTY_FACING).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.icestone_cooler, new StateMap.Builder().ignore(BlockIcestoneCooler.PROPERTY_FACING).build());

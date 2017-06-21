@@ -10,6 +10,7 @@ import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -47,6 +48,7 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BASE, MID, TOP, BASE_G, MID_G, TOP_G);
 	public static final PropertyBool PROPERTY_HARVESTABLE = PropertyBool.create("harvestable");
+	public static final PropertyInteger PROPERTY_AGE = PropertyInteger.create("age", 0, 10);
 
 
 	public BlockBrettlPlant()
@@ -60,7 +62,7 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, PROPERTY_VARIANT, PROPERTY_HARVESTABLE);
+		return new BlockStateContainer(this, PROPERTY_VARIANT, PROPERTY_HARVESTABLE, PROPERTY_AGE);
 	}
 
 	@Override
@@ -74,10 +76,10 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	{
 		if (meta <= 2)
 		{
-			return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta)).withProperty(PROPERTY_HARVESTABLE, false);
+			return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta)).withProperty(PROPERTY_HARVESTABLE, false).withProperty(PROPERTY_AGE, 0);
 		}
 
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta)).withProperty(PROPERTY_HARVESTABLE, true);
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta)).withProperty(PROPERTY_HARVESTABLE, true).withProperty(PROPERTY_AGE, 0);
 	}
 
 	@Override
@@ -114,6 +116,31 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 							}
 						}
 					}
+			}
+		}
+		else
+		{
+			if (state.getValue(PROPERTY_AGE) >= 8)
+			{
+				if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_TOP_G)
+				{
+					this.fullyPrunePlant(world, pos.down(), state);
+
+				}
+				else if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_MID_G)
+				{
+					this.fullyPrunePlant(world, pos, state);
+				}
+				else
+				{
+					this.fullyPrunePlant(world, pos.up(), state);
+				}
+				Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.brettl_grass));
+				Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.brettl_grass));
+			}
+			else
+			{
+				world.setBlockState(pos, state.withProperty(PROPERTY_AGE, state.getValue(PROPERTY_AGE) + 1));
 			}
 		}
 	}
@@ -343,17 +370,17 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	// pos should be set to the middle of the 3 states.
 	public void fullyGrowPlant(World worldIn, BlockPos pos, IBlockState state)
 	{
-		worldIn.setBlockState(pos.down(), this.getDefaultState().withProperty(PROPERTY_VARIANT, BASE_G).withProperty(PROPERTY_HARVESTABLE, true));
-		worldIn.setBlockState(pos, this.getDefaultState().withProperty(PROPERTY_VARIANT, MID_G).withProperty(PROPERTY_HARVESTABLE, true));
-		worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(PROPERTY_VARIANT, TOP_G).withProperty(PROPERTY_HARVESTABLE, true));
+		worldIn.setBlockState(pos.down(), this.getDefaultState().withProperty(PROPERTY_VARIANT, BASE_G).withProperty(PROPERTY_HARVESTABLE, true).withProperty(PROPERTY_AGE, 0));
+		worldIn.setBlockState(pos, this.getDefaultState().withProperty(PROPERTY_VARIANT, MID_G).withProperty(PROPERTY_HARVESTABLE, true).withProperty(PROPERTY_AGE, 0));
+		worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(PROPERTY_VARIANT, TOP_G).withProperty(PROPERTY_HARVESTABLE, true).withProperty(PROPERTY_AGE, 0));
 
 	}
 
 	public void fullyPrunePlant(World worldIn, BlockPos pos, IBlockState state)
 	{
-		worldIn.setBlockState(pos.down(), this.getDefaultState().withProperty(PROPERTY_VARIANT, BASE).withProperty(PROPERTY_HARVESTABLE, false));
-		worldIn.setBlockState(pos, this.getDefaultState().withProperty(PROPERTY_VARIANT, MID).withProperty(PROPERTY_HARVESTABLE, false));
-		worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(PROPERTY_VARIANT, TOP_G).withProperty(PROPERTY_HARVESTABLE, false));
+		worldIn.setBlockState(pos.down(), this.getDefaultState().withProperty(PROPERTY_VARIANT, BASE).withProperty(PROPERTY_HARVESTABLE, false).withProperty(PROPERTY_AGE, 0));
+		worldIn.setBlockState(pos, this.getDefaultState().withProperty(PROPERTY_VARIANT, MID).withProperty(PROPERTY_HARVESTABLE, false).withProperty(PROPERTY_AGE, 0));
+		worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(PROPERTY_VARIANT, TOP_G).withProperty(PROPERTY_HARVESTABLE, false).withProperty(PROPERTY_AGE, 0));
 
 	}
 }
