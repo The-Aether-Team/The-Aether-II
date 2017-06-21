@@ -341,7 +341,7 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	}
 
 	// pos should be set to the middle of the 3 states.
-	private void fullyGrowPlant(World worldIn, BlockPos pos, IBlockState state)
+	public void fullyGrowPlant(World worldIn, BlockPos pos, IBlockState state)
 	{
 		worldIn.setBlockState(pos.down(), this.getDefaultState().withProperty(PROPERTY_VARIANT, BASE_G).withProperty(PROPERTY_HARVESTABLE, true));
 		worldIn.setBlockState(pos, this.getDefaultState().withProperty(PROPERTY_VARIANT, MID_G).withProperty(PROPERTY_HARVESTABLE, true));
@@ -349,7 +349,7 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 
 	}
 
-	private void fullyPrunePlant(World worldIn, BlockPos pos, IBlockState state)
+	public void fullyPrunePlant(World worldIn, BlockPos pos, IBlockState state)
 	{
 		worldIn.setBlockState(pos.down(), this.getDefaultState().withProperty(PROPERTY_VARIANT, BASE).withProperty(PROPERTY_HARVESTABLE, false));
 		worldIn.setBlockState(pos, this.getDefaultState().withProperty(PROPERTY_VARIANT, MID).withProperty(PROPERTY_HARVESTABLE, false));

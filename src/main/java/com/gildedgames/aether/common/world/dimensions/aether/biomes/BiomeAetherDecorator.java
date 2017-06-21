@@ -12,6 +12,7 @@ import com.gildedgames.aether.common.registry.content.TemplatesAether;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherFlowers;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherLakes;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherMinable;
+import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenBrettlPlant;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenQuicksoil;
 import com.gildedgames.aether.common.world.dimensions.aether.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.dimensions.aether.features.aerclouds.WorldGenPurpleAercloud;
@@ -53,6 +54,8 @@ public class BiomeAetherDecorator
 
 	private final WorldGenPurpleAercloud genPurpleAercloud;
 
+	private final WorldGenBrettlPlant genBrettlPlant;
+
 	public boolean generateBushes = true;
 
 	public BiomeAetherDecorator()
@@ -88,6 +91,8 @@ public class BiomeAetherDecorator
 
 		this.genQuicksoil = new WorldGenQuicksoil();
 		this.genAetherLakes = new WorldGenAetherLakes(Blocks.WATER.getDefaultState());
+
+		this.genBrettlPlant = new WorldGenBrettlPlant();
 
 		this.genColdFlatAercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.COLD_AERCLOUD), 64, true);
 		this.genColdColumbusAercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.COLD_AERCLOUD), 16, false);
@@ -270,6 +275,16 @@ public class BiomeAetherDecorator
 
 				this.genKirridGrass.generate(world, random, pos.add(x, y, z));
 			}
+		}
+
+		// Brettl Plant Generator
+		if (random.nextInt(2) == 0)
+		{
+			x = random.nextInt(16) + 8;
+			y = random.nextInt(128);
+			z = random.nextInt(16) + 8;
+
+			this.genBrettlPlant.generate(world, random, pos.add(x, y, z));
 		}
 
 		this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));
