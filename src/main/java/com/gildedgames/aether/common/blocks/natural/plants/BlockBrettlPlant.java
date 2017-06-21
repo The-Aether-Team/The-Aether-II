@@ -135,8 +135,6 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 				{
 					this.fullyPrunePlant(world, pos.up(), state);
 				}
-				Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.brettl_grass));
-				Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.brettl_grass));
 			}
 			else
 			{
