@@ -47,6 +47,13 @@ public class ItemSkyrootBucket extends ItemBucket
 
 		ActionResult<ItemStack> ret = ForgeEventFactory.onBucketUse(player, worldIn, stack, traceResult);
 
+		// when traceResult is null it means the player has right clicked on an air block.
+		// Ignore intellij's warning that traceResult is never null.
+		if (traceResult == null)
+		{
+			return new ActionResult<>(EnumActionResult.PASS, stack);
+		}
+
 		if (ret != null)
 		{
 			return ret;
