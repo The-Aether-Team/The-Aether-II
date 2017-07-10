@@ -3,12 +3,30 @@ package com.gildedgames.aether.common.capabilities.entity.player;
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.player.IPlayerAether;
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.CommonEvents;
 import com.gildedgames.aether.common.entities.util.shared.SharedAetherAttributes;
+import com.gildedgames.aether.common.network.AetherGuiHandler;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.registry.content.DimensionsAether;
+import com.gildedgames.aether.common.util.helpers.BlockUtil;
 import com.gildedgames.aether.common.world.chunk.capabilities.ChunkAttachment;
+import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
+import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSectorAccess;
+import com.gildedgames.aether.common.world.util.TeleporterGeneric;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTBase;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.Teleporter;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -21,6 +39,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
+import net.minecraftforge.fml.common.network.NetworkHandshakeEstablished;
+
+import java.net.NetworkInterface;
+import java.util.List;
 
 public class PlayerAetherHooks
 {
@@ -170,10 +192,75 @@ public class PlayerAetherHooks
 	public static void onPlayerRespawn(PlayerRespawnEvent event)
 	{
 		PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
-
 		if (aePlayer != null)
 		{
 			aePlayer.onRespawn(event);
+		}
+
+		if (event.player instanceof EntityPlayerMP && ((EntityPlayerMP) event.player).world.provider.getDimensionType() == DimensionsAether.AETHER)
+		{
+			BlockPos bedPos = event.player.getBedLocation(((EntityPlayerMP) event.player).dimension);
+			EntityPlayerMP mp = (EntityPlayerMP)event.player;
+			WorldServer toWorld = DimensionManager.getWorld(0);
+
+			if (bedPos != null)
+			{
+				bedPos = EntityPlayer.getBedSpawnLocation(mp.getServerWorld(), bedPos, mp.isSpawnForced(mp.dimension));
+			}
+
+			if (bedPos == null)
+			{
+				List<IslandData> islands = IslandSectorAccess.inst().getAllIslands(mp.world, aePlayer.getEntity().getPosition());
+				boolean shouldSpawnAtOutpost = false;
+				boolean obstructed = false;
+				IslandData island = null;
+
+				for (IslandData data : islands)
+				{
+					if (data != null && data.getMysteriousHengePos() != null)
+					{
+						shouldSpawnAtOutpost = true;
+						island = data;
+						break;
+					}
+				}
+
+				BlockPos pos = null;
+
+				if (shouldSpawnAtOutpost)
+				{
+					pos = mp.world.getTopSolidOrLiquidBlock(island.getMysteriousHengePos());
+					BlockPos down = pos.down();
+					obstructed = mp.getServerWorld().getBlockState(pos.up()) != Blocks.AIR.getDefaultState() || mp.getServerWorld().getBlockState(pos.up(2)) != Blocks.AIR.getDefaultState();
+					shouldSpawnAtOutpost = BlockUtil.isSolid(mp.getServerWorld().getBlockState(pos.down())) && !obstructed;
+
+					mp.connection.setPlayerLocation(pos.getX(), pos.getY() + 1, pos.getZ(), 0, 0);
+					if (!aePlayer.hasDiedInAetherBefore())
+					{
+						// from 1.10 code; looks like EDISION_GUI_ID has not been implemented yet.
+						//mp.openGui(AetherCore.INSTANCE, AetherGuiHandler.EDISON_GUI_ID, mp.worldObj, pos.getX(), pos.getY(), pos.getZ());
+
+						aePlayer.setHasDiedInAetherBefore(true);
+
+						// Again, DiedInAetherPacket has not been implemented it seems.
+						//NetworkingAether.sendPacketToPlayer(new DiedInAetherPacket(), mp);
+					}
+				}
+				else
+				{
+					Teleporter teleporter = new TeleporterGeneric(toWorld);
+
+					CommonEvents.teleportEntity(mp, toWorld, teleporter, 3);
+					pos = toWorld.provider.getRandomizedSpawnPoint();
+					mp.connection.setPlayerLocation(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
+				}
+
+				if (obstructed)
+				{
+					mp.sendMessage(new TextComponentString("The nearest Mysterious Henge was obstructed with blocks - you could not respawn there."));
+				}
+			}
+
 		}
 	}
 
