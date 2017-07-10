@@ -3,18 +3,16 @@ package com.gildedgames.aether.common.capabilities.entity.player;
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
 import com.gildedgames.aether.common.entities.util.shared.SharedAetherAttributes;
-import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.helpers.BlockUtil;
 import com.gildedgames.aether.common.world.chunk.capabilities.ChunkAttachment;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
 import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSectorAccess;
 import com.gildedgames.aether.common.world.util.TeleporterGeneric;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,9 +37,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
-import net.minecraftforge.fml.common.network.NetworkHandshakeEstablished;
 
-import java.net.NetworkInterface;
 import java.util.List;
 
 public class PlayerAetherHooks
@@ -242,8 +238,7 @@ public class PlayerAetherHooks
 
 						aePlayer.setHasDiedInAetherBefore(true);
 
-						// Again, DiedInAetherPacket has not been implemented it seems.
-						//NetworkingAether.sendPacketToPlayer(new DiedInAetherPacket(), mp);
+						NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(), mp);
 					}
 				}
 				else
