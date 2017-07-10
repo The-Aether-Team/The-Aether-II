@@ -183,21 +183,7 @@ public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 				}
 				else if (worldIn.isAirBlock(nextPos))
 				{
-					if (rand.nextInt(50) == 0)
-					{
-						if (rand.nextInt(2) == 0 && BlocksAether.orange_tree.canPlaceBlockAt(worldIn, nextPos))
-						{
-							WorldGenOrangeTree orangeTree = new WorldGenOrangeTree();
-
-							orangeTree.generate(worldIn, rand, nextPos);
-						}
-						else if (BlocksAether.blueberry_bush.canPlaceBlockAt(worldIn, nextPos))
-						{
-							worldIn.setBlockState(nextPos, BlocksAether.blueberry_bush.getDefaultState().withProperty(BlockBlueberryBush.PROPERTY_HARVESTABLE,
-									rand.nextInt(3) == 0));
-						}
-					}
-					else if (rand.nextInt(8) == 0 && BlocksAether.aether_flower.canPlaceBlockAt(worldIn, nextPos))
+					if (rand.nextInt(8) == 0 && BlocksAether.aether_flower.canPlaceBlockAt(worldIn, nextPos))
 					{
 						int randFlower = rand.nextInt(3);
 
