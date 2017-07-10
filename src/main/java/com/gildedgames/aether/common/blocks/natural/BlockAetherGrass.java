@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
+import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.world.dimensions.aether.features.trees.WorldGenOrangeTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
@@ -18,6 +19,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -211,6 +214,21 @@ public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 				break;
 			}
 		}
+	}
+
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	{
+		if (playerIn.getHeldItemMainhand().getItem() == ItemsAether.swet_jelly)
+		{
+			if (!canGrow(worldIn, pos, state, true))
+			{
+				return false;
+			}
+			playerIn.getHeldItemMainhand().shrink(1);
+			this.grow(worldIn, new Random(), pos, state);
+			return true;
+		}
+		return false;
 	}
 
 }
