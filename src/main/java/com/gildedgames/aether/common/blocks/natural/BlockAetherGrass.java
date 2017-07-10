@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.natural;
 
+import com.gildedgames.aether.client.gui.tab.TabBackpack;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
@@ -216,17 +217,24 @@ public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 		}
 	}
 
+	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		if (playerIn.getHeldItemMainhand().getItem() == ItemsAether.swet_jelly)
 		{
-			if (!canGrow(worldIn, pos, state, true))
+			if (!worldIn.isRemote)
 			{
-				return false;
+				if (!canGrow(worldIn, pos, state, true))
+				{
+					return false;
+				}
+				if (!playerIn.isCreative())
+				{
+					playerIn.getHeldItemMainhand().shrink(1);
+				}
+				this.grow(worldIn, new Random(), pos, state);
+				return true;
 			}
-			playerIn.getHeldItemMainhand().shrink(1);
-			this.grow(worldIn, new Random(), pos, state);
-			return true;
 		}
 		return false;
 	}

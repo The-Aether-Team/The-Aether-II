@@ -18,6 +18,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import javax.annotation.OverridingMethodsMustInvokeSuper;
 import java.util.Random;
 
 public class BlockAetherPlant extends Block implements IGrowable
@@ -119,6 +120,7 @@ public class BlockAetherPlant extends Block implements IGrowable
 
 	}
 
+	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		if (playerIn.getHeldItemMainhand().getItem() == ItemsAether.swet_jelly)
@@ -127,7 +129,10 @@ public class BlockAetherPlant extends Block implements IGrowable
 			{
 				return false;
 			}
-			playerIn.getHeldItemMainhand().shrink(1);
+			if (!playerIn.isCreative())
+			{
+				playerIn.getHeldItemMainhand().shrink(1);
+			}
 			this.grow(worldIn, new Random(), pos, state);
 			return true;
 		}
