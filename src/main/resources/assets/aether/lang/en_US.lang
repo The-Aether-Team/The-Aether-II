@@ -183,8 +183,8 @@ tile.aether.structure_hint.spawner_entity.name=Entity Spawner
 tile.aether.structure_hint.spawner_pack.name=Pack Spawner
 tile.aether.structure_hint.generator_loot.name=Loot Generator
 tile.aether.structure_builder.name=Structure Builder
-tile.aether.kirrid_grass.sprout.name=Kirrid Grass Sprout
-tile.aether.kirrid_grass.full.name=Kirrid Grass
+tile.aether.valkyrie_grass.sprout.name=Valkyrie Grass Sprout
+tile.aether.valkyrie_grass.full.name=Valkyrie Grass
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
@@ -509,7 +509,7 @@ item.aether.burrukai_ribs.name=Burrukai Ribs
 item.aether.burrukai_pelt.name=Burrukai Pelt
 item.aether.kirrid_loin.name=Kirrid Loin
 item.aether.kirrid_cutlet.name=Kirrid Cutlet
-item.aether.kirrid_flower.name=Kirrid Flower
+item.aether.kirrid_flower.name=Valkyrie Wings
 item.aether.brettl_cane.name=Brettl Cane
 item.aether.brettl_grass.name=Brettl Grass
 
