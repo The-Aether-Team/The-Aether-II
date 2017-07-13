@@ -10,7 +10,6 @@ import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
-import com.gildedgames.aether.common.recipes.RecipeLeatherGlovesDyes;
 import com.gildedgames.aether.common.recipes.RecipePresentCrafting;
 import com.gildedgames.aether.common.recipes.RecipeWrappingPaper;
 import com.gildedgames.aether.common.recipes.altar.AltarEnchantRecipe;
@@ -72,11 +71,9 @@ public class RecipesAether
 
 	private static void registerCraftingRecipes()
 	{
-		RecipeSorter.register("aether:leatherGlovesDying", RecipeLeatherGlovesDyes.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
 		RecipeSorter.register("aether:wrappingPaper", RecipeWrappingPaper.class, RecipeSorter.Category.SHAPED, "after:minecraft:shaped");
 		RecipeSorter.register("aether:presentCrafting", RecipePresentCrafting.class, RecipeSorter.Category.SHAPED, "after:minecraft:shaped");
 
-		CraftingManager.getInstance().addRecipe(new RecipeLeatherGlovesDyes());
 		CraftingManager.getInstance().addRecipe(new RecipeWrappingPaper());
 		CraftingManager.getInstance().addRecipe(new RecipePresentCrafting());
 
@@ -460,20 +457,6 @@ public class RecipesAether
 		ItemStack arkenium = new ItemStack(ItemsAether.arkenium);
 		ItemStack ark_strip = new ItemStack(ItemsAether.arkenium_strip);
 
-		// Vanilla Gloves
-
-		registerShapedRecipe(new ItemStack(ItemsAether.leather_gloves), "X X",
-				'X', "leather");
-
-		registerShapedRecipe(new ItemStack(ItemsAether.iron_gloves), "X X",
-				'X', new ItemStack(Items.IRON_INGOT));
-
-		registerShapedRecipe(new ItemStack(ItemsAether.gold_gloves), "X X",
-				'X', new ItemStack(Items.GOLD_INGOT));
-
-		registerShapedRecipe(new ItemStack(ItemsAether.diamond_gloves), "X X",
-				'X', new ItemStack(Items.DIAMOND));
-
 		// Skyroot Tools
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_axe), "XX ", "XY ", " Y ",
 				'X', skyroot, 'Y', skyrootStick);
@@ -601,20 +584,6 @@ public class RecipesAether
 
 	private static void registerAccessoryRecipes()
 	{
-		// Iron Ring
-		registerShapedRecipe(new ItemStack(ItemsAether.iron_ring), " X ", "X X", " X ",
-				'X', new ItemStack(Items.IRON_INGOT));
-		// Iron Pendant
-		registerShapedRecipe(new ItemStack(ItemsAether.iron_pendant), "XXX", "X X", " Y ",
-				'X', "string",
-				'Y', new ItemStack(Items.IRON_INGOT));
-		// Gold Ring
-		registerShapedRecipe(new ItemStack(ItemsAether.gold_ring), " X ", "X X", " X ",
-				'X', new ItemStack(Items.GOLD_INGOT));
-		// Gold Pendant
-		registerShapedRecipe(new ItemStack(ItemsAether.gold_pendant), "XXX", "X X", " Y ",
-				'X', "string",
-				'Y', new ItemStack(Items.GOLD_INGOT));
 		// Zanite Ring
 		registerShapedRecipe(new ItemStack(ItemsAether.zanite_ring), " X ", "X X", " X ",
 				'X', new ItemStack(ItemsAether.zanite_gemstone));

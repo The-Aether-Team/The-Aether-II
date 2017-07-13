@@ -2,7 +2,6 @@ package com.gildedgames.aether.client.models.entities.player;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
-import com.gildedgames.aether.common.items.armor.ItemLeatherGloves;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
@@ -60,24 +59,6 @@ public class LayerPlayerGloves extends LayerBipedArmor
 				GlStateManager.translate(0, 0.05F, 0);
 			}
 
-			if (glove instanceof ItemLeatherGloves)
-			{
-				int color = ItemLeatherGloves.getColor(stack);
-
-				float r = (float) (color >> 16 & 255) / 255.0F;
-				float g = (float) (color >> 8 & 255) / 255.0F;
-				float b = (float) (color & 255) / 255.0F;
-
-				GlStateManager.color(1.0f * r, 1.0f * g, 1.0f * b, 1.0f);
-
-				this.renderer.bindTexture(glove.getGloveTexture(0));
-				t.render(player.getEntity(), limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-
-				GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-
-				this.renderer.bindTexture(glove.getGloveTexture(1));
-				t.render(player.getEntity(), limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-			}
 			else
 			{
 				this.renderer.bindTexture(glove.getGloveTexture(0));

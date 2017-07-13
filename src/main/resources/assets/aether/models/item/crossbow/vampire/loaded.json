@@ -1,6 +1,0 @@
-{
-	"parent": "aether:item/crossbow/vampire_crossbow",
-	"textures": {
-		"layer0": "aether:items/weapons/crossbow/vampire/loaded"
-	}
-}

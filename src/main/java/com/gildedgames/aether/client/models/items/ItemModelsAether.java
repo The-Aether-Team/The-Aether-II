@@ -264,11 +264,6 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.arkenium_sword, "weapons/arkenium_sword");
 		registerItemModels(ItemsAether.arkenium_shears, "tools/arkenium_shears");
 
-		registerItemModels(ItemsAether.valkyrie_pickaxe, "tools/valkyrie_pickaxe");
-		registerItemModels(ItemsAether.valkyrie_axe, "tools/valkyrie_axe");
-		registerItemModels(ItemsAether.valkyrie_shovel, "tools/valkyrie_shovel");
-		registerItemModels(ItemsAether.valkyrie_lance, "weapons/valkyrie_lance");
-
 		registerItemModels(ItemsAether.zanite_helmet, "armor/zanite_helmet");
 		registerItemModels(ItemsAether.zanite_chestplate, "armor/zanite_chestplate");
 		registerItemModels(ItemsAether.zanite_leggings, "armor/zanite_leggings");
@@ -284,21 +279,6 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.gravitite_chestplate, "armor/gravitite_chestplate");
 		registerItemModels(ItemsAether.gravitite_leggings, "armor/gravitite_leggings");
 		registerItemModels(ItemsAether.gravitite_boots, "armor/gravitite_boots");
-
-		registerItemModels(ItemsAether.neptune_helmet, "armor/neptune_helmet");
-		registerItemModels(ItemsAether.neptune_chestplate, "armor/neptune_chestplate");
-		registerItemModels(ItemsAether.neptune_leggings, "armor/neptune_leggings");
-		registerItemModels(ItemsAether.neptune_boots, "armor/neptune_boots");
-
-		registerItemModels(ItemsAether.phoenix_helmet, "armor/phoenix_helmet");
-		registerItemModels(ItemsAether.phoenix_chestplate, "armor/phoenix_chestplate");
-		registerItemModels(ItemsAether.phoenix_leggings, "armor/phoenix_leggings");
-		registerItemModels(ItemsAether.phoenix_boots, "armor/phoenix_boots");
-
-		registerItemModels(ItemsAether.valkyrie_helmet, "armor/valkyrie_helmet");
-		registerItemModels(ItemsAether.valkyrie_chestplate, "armor/valkyrie_chestplate");
-		registerItemModels(ItemsAether.valkyrie_leggings, "armor/valkyrie_leggings");
-		registerItemModels(ItemsAether.valkyrie_boots, "armor/valkyrie_boots");
 
 		registerItemModels(ItemsAether.aechor_petal, "aechor_petal");
 		registerItemModels(ItemsAether.blueberries, "blueberries");
@@ -358,7 +338,6 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.zanite_crossbow, "crossbow/zanite_crossbow");
 		registerItemModels(ItemsAether.arkenium_crossbow, "crossbow/arkenium_crossbow");
 		registerItemModels(ItemsAether.gravitite_crossbow, "crossbow/gravitite_crossbow");
-		registerItemModels(ItemsAether.vampire_crossbow, "crossbow/vampire_crossbow");
 
 		registerItemModels(ItemsAether.bolt, new ItemModelBuilder("bolts/")
 				.add(ItemBoltType.SKYROOT.ordinal(), "skyroot_bolt")
@@ -367,13 +346,6 @@ public class ItemModelsAether
 				.add(ItemBoltType.ZANITE.ordinal(), "zanite_bolt")
 				.add(ItemBoltType.GRAVITITE.ordinal(), "gravitite_bolt")
 				.add(ItemBoltType.ARKENIUM.ordinal(), "arkenium_bolt"));
-
-		registerItemModels(ItemsAether.flaming_sword, "weapons/flaming_sword");
-		registerItemModels(ItemsAether.holy_sword, "weapons/holy_sword");
-		registerItemModels(ItemsAether.lightning_sword, "weapons/lightning_sword");
-
-		registerItemModels(ItemsAether.vampire_blade, "weapons/vampire_blade");
-		registerItemModels(ItemsAether.candy_cane_sword, "weapons/candy_cane_sword");
 
 		registerItemModels(ItemsAether.skyroot_door, "skyroot_door");
 		registerItemModels(ItemsAether.secret_skyroot_door, "secret_skyroot_door");
@@ -390,11 +362,6 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.holystone_pressure_plate, "holystone_pressure_plate");
 		registerItemModels(BlocksAether.holystone_button, "holystone_button");
 
-		registerItemModels(ItemsAether.gold_ring, "accessories/gold_ring");
-		registerItemModels(ItemsAether.iron_ring, "accessories/iron_ring");
-		registerItemModels(ItemsAether.iron_pendant, "accessories/iron_pendant");
-		registerItemModels(ItemsAether.gold_pendant, "accessories/gold_pendant");
-
 		registerItemModels(ItemsAether.zanite_ring, "accessories/zanite_ring");
 		registerItemModels(ItemsAether.zanite_pendant, "accessories/zanite_pendant");
 
@@ -409,7 +376,6 @@ public class ItemModelsAether
 
 		registerItemModels(ItemsAether.daggerfrost_rune, "accessories/daggerfrost_rune");
 
-		registerItemModels(ItemsAether.candy_ring, "accessories/candy_ring");
 		registerItemModels(ItemsAether.bone_ring, "accessories/bone_ring");
 		registerItemModels(ItemsAether.skyroot_ring, "accessories/skyroot_ring");
 
@@ -439,14 +405,6 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.zanite_gloves, "accessories/zanite_gloves");
 		registerItemModels(ItemsAether.arkenium_gloves, "accessories/arkenium_gloves");
 		registerItemModels(ItemsAether.gravitite_gloves, "accessories/gravitite_gloves");
-		registerItemModels(ItemsAether.neptune_gloves, "accessories/neptune_gloves");
-		registerItemModels(ItemsAether.phoenix_gloves, "accessories/phoenix_gloves");
-		registerItemModels(ItemsAether.valkyrie_gloves, "accessories/valkyrie_gloves");
-		registerItemModels(ItemsAether.leather_gloves, "accessories/leather_gloves");
-		registerItemModels(ItemsAether.iron_gloves, "accessories/iron_gloves");
-		registerItemModels(ItemsAether.gold_gloves, "accessories/gold_gloves");
-		registerItemModels(ItemsAether.chain_gloves, "accessories/chain_gloves");
-		registerItemModels(ItemsAether.diamond_gloves, "accessories/diamond_gloves");
 
 		registerItemModels(ItemsAether.pink_baby_swet, "companions/pink_baby_swet");
 
@@ -471,9 +429,6 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.holystone_slab, "aether_slab/holystone_slab");
 		registerItemModels(BlocksAether.holystone_brick_slab, "aether_slab/holystone_brick_slab");
 		registerItemModels(BlocksAether.icestone_slab, "aether_slab/icestone_slab");
-
-		registerItemModels(ItemsAether.barbed_iron_ring, "accessories/barbed_iron_ring");
-		registerItemModels(ItemsAether.barbed_gold_ring, "accessories/barbed_gold_ring");
 
 		registerItemModels(ItemsAether.solar_band, "accessories/solar_band");
 		registerItemModels(ItemsAether.lunar_band, "accessories/lunar_band");

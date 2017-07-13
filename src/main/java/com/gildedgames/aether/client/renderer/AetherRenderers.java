@@ -45,7 +45,6 @@ public class AetherRenderers
 
 		ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
 		itemColors.registerItemColorHandler(new ItemMoaEggColorHandler(), ItemsAether.moa_egg);
-		itemColors.registerItemColorHandler(new LeatherGlovesColorHandler(), ItemsAether.leather_gloves);
 		itemColors.registerItemColorHandler(new WrappingPaperColorHandler(), ItemsAether.wrapping_paper);
 		itemColors.registerItemColorHandler(new MoaFeatherColorHandler(), ItemsAether.moa_feather);
 	}

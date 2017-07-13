@@ -2,7 +2,6 @@ package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
-import com.gildedgames.aether.common.items.armor.ItemLeatherGloves;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
@@ -164,20 +163,6 @@ public class RenderPlayerHelper
 		{
 			RenderLivingBase<?> playerRender = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
 
-			if (glove.getItem() instanceof ItemLeatherGloves)
-			{
-				int color = ItemLeatherGloves.getColor(glove);
-
-				float r = (float) (color >> 16 & 255) / 255.0F;
-				float g = (float) (color >> 8 & 255) / 255.0F;
-				float b = (float) (color & 255) / 255.0F;
-
-				GlStateManager.color(1.0f * r, 1.0f * g, 1.0f * b, 1.0f);
-			}
-			else
-			{
-				GlStateManager.color(1.0F, 1.0F, 1.0F);
-			}
 
 			ModelBiped t = new ModelBiped(1.0F);
 			t.bipedBody.showModel = true;
