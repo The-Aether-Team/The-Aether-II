@@ -1,6 +1,0 @@
-{
-	"parent": "block/tinted_cross",
-	"textures": {
-		"cross": "aether:blocks/kirrid_grass/kirrid_grass_0"
-	}
-}

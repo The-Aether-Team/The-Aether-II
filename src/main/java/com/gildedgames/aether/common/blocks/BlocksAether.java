@@ -118,7 +118,7 @@ public class BlocksAether
 
 	public static final BlockAetherFlower aether_flower = new BlockAetherFlower();
 
-	public static final BlockKirridGrass kirrid_grass = new BlockKirridGrass();
+	public static final BlockValkyrieGrass valkyrie_grass = new BlockValkyrieGrass();
 
 	public static final BlockBrettlPlant brettl_plant = new BlockBrettlPlant();
 
@@ -307,7 +307,7 @@ public class BlocksAether
 
 		registerBlock("orange_tree", orange_tree.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
-		registerBlock("kirrid_grass", kirrid_grass.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		registerBlock("valkyrie_grass", valkyrie_grass.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		registerBlock("brettl_plant", brettl_plant);
 

@@ -148,9 +148,9 @@ public class ItemModelsAether
 				.add(BlockTallAetherGrass.NORMAL.getMeta(), "normal_aether")
 				.add(BlockTallAetherGrass.LONG.getMeta(), "long_aether"));
 
-		registerItemModels(BlocksAether.kirrid_grass, new ItemModelBuilder("kirrid_grass/")
-				.add(BlockKirridGrass.SPROUT.getMeta(), "kirrid_grass_sprout")
-				.add(BlockKirridGrass.FULL.getMeta(), "kirrid_grass_full"));
+		registerItemModels(BlocksAether.valkyrie_grass, new ItemModelBuilder("valkyrie_grass/")
+				.add(BlockValkyrieGrass.SPROUT.getMeta(), "valkyrie_grass_sprout")
+				.add(BlockValkyrieGrass.FULL.getMeta(), "valkyrie_grass_full"));
 
 		registerItemModels(BlocksAether.brettl_plant, "brettl_plant/brettl_plant");
 		registerItemModels(ItemsAether.brettl_cane, "brettl_plant/brettl_cane");
@@ -525,12 +525,10 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.sporing_ring, "accessories/sporing_ring");
 		registerItemModels(ItemsAether.ember_ring, "accessories/ember_ring");
 
-		registerItemModels(ItemsAether.gravitite_core, "accessories/gravitite_core");
 		registerItemModels(ItemsAether.sunlit_tome, "accessories/sunlit_tome");
 		registerItemModels(ItemsAether.moonlit_tome, "accessories/moonlit_tome");
 		registerItemModels(ItemsAether.primal_totem_of_survival, "accessories/primal_totem_of_survival");
 		registerItemModels(ItemsAether.primal_totem_of_rage, "accessories/primal_totem_of_rage");
-		registerItemModels(ItemsAether.valkyrie_wings, "accessories/valkyrie_wings");
 		registerItemModels(ItemsAether.divine_beacon, "accessories/divine_beacon");
 		registerItemModels(ItemsAether.phoenix_rune, "accessories/phoenix_rune");
 		registerItemModels(ItemsAether.glamoured_taegore_tusk, "taegore_tusk");
@@ -592,7 +590,7 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.burrukai_pelt, "burrukai_pelt");
 		registerItemModels(ItemsAether.kirrid_loin, "kirrid_loin");
 		registerItemModels(ItemsAether.kirrid_cutlet, "kirrid_cutlet");
-		registerItemModels(ItemsAether.kirrid_flower, "kirrid_flower");
+		registerItemModels(ItemsAether.valkyrie_wings, "valkyrie_wings");
 
 		registerItemModels(BlocksAether.structure_hint, new ItemModelBuilder("structure_hint/")
 				.add(BlockStructureHint.WILDCARD_BLOCK.getMeta(), "wildcard")

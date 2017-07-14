@@ -9,7 +9,6 @@ import com.gildedgames.aether.client.renderer.entities.projectiles.RenderBolt;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDaggerfrostSnowball;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderDart;
 import com.gildedgames.aether.client.renderer.items.ItemMoaEggColorHandler;
-import com.gildedgames.aether.client.renderer.items.LeatherGlovesColorHandler;
 import com.gildedgames.aether.client.renderer.items.MoaFeatherColorHandler;
 import com.gildedgames.aether.client.renderer.items.WrappingPaperColorHandler;
 import com.gildedgames.aether.client.renderer.tile_entities.*;

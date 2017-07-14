@@ -190,7 +190,7 @@ public class ItemsAether
 
 	public static final Item aechor_petal = new Item();
 
-	public static final Item kirrid_flower = new Item();
+	public static final Item valkyrie_wings = new Item();
 
 	public static final ItemBrettlCane brettl_cane = new ItemBrettlCane();
 
@@ -345,11 +345,10 @@ public class ItemsAether
 			sporing_ring = new Item(),
 			ember_ring = new Item();
 
-	public static final Item valkyrie_wings = new Item(),
+	public static final Item
 			sunlit_tome = new Item(),
 			moonlit_tome = new Item(),
 			phoenix_rune = new Item(),
-			gravitite_core = new Item(),
 			primal_totem_of_survival = new Item(),
 			primal_totem_of_rage = new Item(),
 			glamoured_taegore_tusk = new Item(),
@@ -472,7 +471,7 @@ public class ItemsAether
 		registerItem("taegore_hide", taegore_hide.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("burrukai_pelt", burrukai_pelt.setCreativeTab(CreativeTabsAether.MATERIALS));
 
-		registerItem("kirrid_flower", kirrid_flower.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("valkyrie_wings", valkyrie_wings.setCreativeTab(CreativeTabsAether.MATERIALS));
 
 		registerItem("aechor_petal", aechor_petal.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
@@ -646,9 +645,6 @@ public class ItemsAether
 		registerItem("primal_totem_of_rage", primal_totem_of_rage.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
 		registerItem("divine_beacon", divine_beacon.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
 		registerItem("phoenix_rune", phoenix_rune.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RELICS));
-
-		registerItem("valkyrie_wings", valkyrie_wings.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.ARTIFACTS));
-		registerItem("gravitite_core", gravitite_core.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.ARTIFACTS));
 
 		registerItem("fleeting_scarf", fleeting_scarf.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));
 		registerItem("winged_necklace", winged_necklace.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.NECKWEAR));

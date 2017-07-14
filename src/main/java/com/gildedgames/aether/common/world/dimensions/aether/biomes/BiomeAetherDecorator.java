@@ -6,9 +6,8 @@ import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockKirridGrass;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockValkyrieGrass;
 import com.gildedgames.aether.common.registry.GenerationAether;
-import com.gildedgames.aether.common.registry.content.TemplatesAether;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherFlowers;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherLakes;
 import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenAetherMinable;
@@ -87,7 +86,7 @@ public class BiomeAetherDecorator
 		this.genOrangeTree = new WorldGenOrangeTree();
 
 		this.genBlueberryBushes = new WorldGenAetherFlowers(BlocksAether.blueberry_bush.getDefaultState().withProperty(BlockBlueberryBush.PROPERTY_HARVESTABLE, true), 32);
-		this.genKirridGrass = new WorldGenAetherFlowers(BlocksAether.kirrid_grass.getDefaultState().withProperty(BlockKirridGrass.PROPERTY_HARVESTABLE, true).withProperty(BlockKirridGrass.PROPERTY_VARIANT, BlockKirridGrass.FULL), 64);
+		this.genKirridGrass = new WorldGenAetherFlowers(BlocksAether.valkyrie_grass.getDefaultState().withProperty(BlockValkyrieGrass.PROPERTY_HARVESTABLE, true).withProperty(BlockValkyrieGrass.PROPERTY_VARIANT, BlockValkyrieGrass.FULL), 64);
 
 		this.genQuicksoil = new WorldGenQuicksoil();
 		this.genAetherLakes = new WorldGenAetherLakes(Blocks.WATER.getDefaultState());

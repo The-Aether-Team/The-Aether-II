@@ -11,7 +11,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBrettlPlant;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockKirridGrass;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockValkyrieGrass;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.util.BlockCustomDoor;
 import com.google.common.collect.Maps;
@@ -97,7 +97,7 @@ public class AetherBlockModels
 			}
 		});
 
-		ModelLoader.setCustomStateMapper(BlocksAether.kirrid_grass, new StateMap.Builder().ignore(BlockKirridGrass.PROPERTY_HARVESTABLE).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.valkyrie_grass, new StateMap.Builder().ignore(BlockValkyrieGrass.PROPERTY_HARVESTABLE).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.brettl_plant, new StateMap.Builder().ignore(BlockBrettlPlant.PROPERTY_HARVESTABLE).ignore(BlockBrettlPlant.PROPERTY_AGE).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.altar, new StateMap.Builder().ignore(BlockAltar.PROPERTY_FACING).build());

@@ -1,0 +1,6 @@
+{
+	"parent": "block/tinted_cross",
+	"textures": {
+		"cross": "aether:blocks/valkyrie_grass/valkyrie_grass_2"
+	}
+}

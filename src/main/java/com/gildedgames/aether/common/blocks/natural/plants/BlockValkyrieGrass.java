@@ -26,21 +26,19 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /*
  * Current state only allows growth through bonemeal.
  */
 
-public class BlockKirridGrass extends BlockAetherPlant implements IBlockMultiName, IGrowable
+public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiName, IGrowable
 {
 	private static final AxisAlignedBB GRASS_SHORT_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
 	private static final AxisAlignedBB GRASS_NORMAL_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.6D, 0.9D);
 	private static final AxisAlignedBB GRASS_LONG_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.9D, 0.9D);
 
-	private static final int KIRRID_GRASS_SPROUT = 0, KIRRID_GRASS_MID = 1, KIRRID_GRASS_FULL = 2;
+	private static final int VALKYRIE_GRASS_SPROUT = 0, VALKYRIE_GRASS_MID = 1, VALKYRIE_GRASS_FULL = 2;
 
 	public static final BlockVariant SPROUT = new BlockVariant(0, "sprout"),
 			MID = new BlockVariant(1, "mid"),
@@ -50,7 +48,7 @@ public class BlockKirridGrass extends BlockAetherPlant implements IBlockMultiNam
 
 	public static final PropertyBool PROPERTY_HARVESTABLE = PropertyBool.create("harvestable");
 
-	public BlockKirridGrass()
+	public BlockValkyrieGrass()
 	{
 		super(Material.LEAVES);
 		this.setHardness(0.0f);
@@ -81,7 +79,7 @@ public class BlockKirridGrass extends BlockAetherPlant implements IBlockMultiNam
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
-		if (placer.getHeldItemMainhand().getMetadata() == KIRRID_GRASS_FULL) {
+		if (placer.getHeldItemMainhand().getMetadata() == VALKYRIE_GRASS_FULL) {
 			return this.getStateFromMeta(meta).withProperty(PROPERTY_HARVESTABLE, true).withProperty(PROPERTY_VARIANT, FULL);
 		}
 		return this.getStateFromMeta(meta).withProperty(PROPERTY_HARVESTABLE, false).withProperty(PROPERTY_VARIANT, SPROUT);
@@ -128,14 +126,14 @@ public class BlockKirridGrass extends BlockAetherPlant implements IBlockMultiNam
 		if (!state.getValue(PROPERTY_HARVESTABLE))
 		{
 			// if sprout, grow to mid.
-			if (worldIn.getBlockState(pos).getValue(PROPERTY_VARIANT).getMeta() == KIRRID_GRASS_SPROUT)
+			if (worldIn.getBlockState(pos).getValue(PROPERTY_VARIANT).getMeta() == VALKYRIE_GRASS_SPROUT)
 			{
-				worldIn.setBlockState(pos, state.withProperty(PROPERTY_VARIANT, BlockKirridGrass.MID));
+				worldIn.setBlockState(pos, state.withProperty(PROPERTY_VARIANT, BlockValkyrieGrass.MID));
 			}
 			// if mid, grow to full and set harvestable.
-			else if (worldIn.getBlockState(pos).getValue(PROPERTY_VARIANT).getMeta() == KIRRID_GRASS_MID)
+			else if (worldIn.getBlockState(pos).getValue(PROPERTY_VARIANT).getMeta() == VALKYRIE_GRASS_MID)
 			{
-				worldIn.setBlockState(pos, state.withProperty(PROPERTY_HARVESTABLE, true).withProperty(PROPERTY_VARIANT, BlockKirridGrass.FULL));
+				worldIn.setBlockState(pos, state.withProperty(PROPERTY_HARVESTABLE, true).withProperty(PROPERTY_VARIANT, BlockValkyrieGrass.FULL));
 			}
 		}
 	}
@@ -143,7 +141,7 @@ public class BlockKirridGrass extends BlockAetherPlant implements IBlockMultiNam
 	@Override
 	public int damageDropped(IBlockState state)
 	{
-		return KIRRID_GRASS_SPROUT;
+		return VALKYRIE_GRASS_SPROUT;
 	}
 
 	@Override
@@ -180,12 +178,12 @@ public class BlockKirridGrass extends BlockAetherPlant implements IBlockMultiNam
 			if (!world.isRemote)
 			{
 				Random random = new Random();
-				Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.kirrid_flower));
+				Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.valkyrie_wings));
 
 				// randomly spawn a kirrid grass sprout
 				if (random.nextInt(3) == 1)
 				{
-					Block.spawnAsEntity(world, pos, new ItemStack(BlocksAether.kirrid_grass));
+					Block.spawnAsEntity(world, pos, new ItemStack(BlocksAether.valkyrie_grass));
 				}
 			}
 

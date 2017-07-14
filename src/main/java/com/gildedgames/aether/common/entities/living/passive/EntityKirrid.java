@@ -29,7 +29,7 @@ import java.util.Set;
 public class EntityKirrid extends EntitySheep
 {
 
-	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsAether.kirrid_flower);
+	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsAether.valkyrie_wings);
 
 	private EntityAIEatAetherGrass entityAIEatGrass;
 	
