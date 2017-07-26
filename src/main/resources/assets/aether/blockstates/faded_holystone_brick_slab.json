@@ -1,0 +1,27 @@
+{
+	"forge_marker": 1,
+	"variants": {
+		"state=bottom": [{
+			"textures": {
+				"bottom": "aether:blocks/faded_holystone_brick",
+				"top": "aether:blocks/faded_holystone_brick",
+				"side": "aether:blocks/faded_holystone_brick"
+			},
+			"model": "half_slab"
+		}],
+		"state=top": [{
+			"textures": {
+				"bottom": "aether:blocks/faded_holystone_brick",
+				"top": "aether:blocks/faded_holystone_brick",
+				"side": "aether:blocks/faded_holystone_brick"
+			},
+			"model": "upper_slab"
+		}],
+		"state=full": [{
+			"textures": {
+				"all": "aether:blocks/faded_holystone_brick"
+			},
+			"model": "cube_all"
+		}]
+	}
+}

@@ -1,0 +1,8 @@
+{
+	"parent": "block/stairs",
+	"textures": {
+		"bottom": "aether:blocks/agiosite_brick",
+		"side": "aether:blocks/agiosite_brick",
+		"top": "aether:blocks/agiosite_brick"
+	}
+}

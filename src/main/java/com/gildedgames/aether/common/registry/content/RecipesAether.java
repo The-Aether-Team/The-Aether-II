@@ -296,6 +296,15 @@ public class RecipesAether
 				'X', new ItemStack(BlocksAether.holystone_brick));
 		registerShapedRecipe(new ItemStack(BlocksAether.icestone_slab, 6), "XXX",
 				'X', new ItemStack(BlocksAether.icestone_bricks));
+		registerShapedRecipe(new ItemStack(BlocksAether.agiosite_slab, 6), "XXX",
+				'X', new ItemStack(BlocksAether.agiosite));
+		registerShapedRecipe(new ItemStack(BlocksAether.agiosite_brick_slab, 6), "XXX",
+				'X', new ItemStack(BlocksAether.agiosite_brick));
+		registerShapedRecipe(new ItemStack(BlocksAether.mossy_holystone_slab, 6), "XXX",
+				'X', new ItemStack(BlocksAether.holystone, 1, BlockHolystone.MOSSY_HOLYSTONE.getMeta()));
+		registerShapedRecipe(new ItemStack(BlocksAether.scatterglass_slab, 6), "XXX",
+				'X', new ItemStack(BlocksAether.scatterglass));
+
 
 		// Gates
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_fence_gate, 1), "XYX", "XYX",
@@ -444,6 +453,13 @@ public class RecipesAether
 
 		registerShapedRecipe(new ItemStack(BlocksAether.scatterglass_stairs, 4), "U  ", "UU ", "UUU",
 				'U', new ItemStack(BlocksAether.scatterglass));
+
+		registerShapedRecipe(new ItemStack(BlocksAether.agiosite_stairs, 4), "U  ", "UU ", "UUU",
+				'U', new ItemStack(BlocksAether.agiosite));
+
+		registerShapedRecipe(new ItemStack(BlocksAether.agiosite_brick_stairs, 4), "U  ", "UU ", "UUU",
+				'U', new ItemStack(BlocksAether.agiosite_brick));
+
 	}
 
 	private static void registerToolRecipes()

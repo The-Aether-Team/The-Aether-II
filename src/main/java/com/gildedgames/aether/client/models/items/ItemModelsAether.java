@@ -427,8 +427,14 @@ public class ItemModelsAether
 
 		registerItemModels(BlocksAether.skyroot_slab, "aether_slab/skyroot_slab");
 		registerItemModels(BlocksAether.holystone_slab, "aether_slab/holystone_slab");
+		registerItemModels(BlocksAether.mossy_holystone_slab, "aether_slab/mossy_holystone_slab");
 		registerItemModels(BlocksAether.holystone_brick_slab, "aether_slab/holystone_brick_slab");
+		registerItemModels(BlocksAether.faded_holystone_brick_slab, "aether_slab/faded_holystone_brick_slab");
 		registerItemModels(BlocksAether.icestone_slab, "aether_slab/icestone_slab");
+		registerItemModels(BlocksAether.agiosite_slab, "aether_slab/agiosite_slab");
+		registerItemModels(BlocksAether.agiosite_brick_slab, "aether_slab/agiosite_brick_slab");
+		registerItemModels(BlocksAether.scatterglass_slab, "aether_slab/scatterglass_slab");
+
 
 		registerItemModels(ItemsAether.solar_band, "accessories/solar_band");
 		registerItemModels(ItemsAether.lunar_band, "accessories/lunar_band");
@@ -460,6 +466,9 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.holystone_brick_stairs, "aether_stairs/holystone_brick_stairs");
 		registerItemModels(BlocksAether.icestone_brick_stairs, "aether_stairs/icestone_brick_stairs");
 		registerItemModels(BlocksAether.scatterglass_stairs, "aether_stairs/scatterglass_stairs");
+		registerItemModels(BlocksAether.faded_holystone_brick_stairs, "aether_stairs/faded_holystone_brick_stairs");
+		registerItemModels(BlocksAether.agiosite_stairs, "aether_stairs/agiosite_stairs");
+		registerItemModels(BlocksAether.agiosite_brick_stairs, "aether_stairs/agiosite_brick_stairs");
 
 		registerItemModels(BlocksAether.woven_sticks, new ItemModelBuilder("woven_sticks/")
 				.add(BlockWovenSticks.SKYROOT.getMeta(), "woven_skyroot_sticks"));
