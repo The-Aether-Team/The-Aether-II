@@ -5,13 +5,17 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.google.common.collect.Sets;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
@@ -23,6 +27,8 @@ public class EntityTaegore extends EntityAetherAnimal
 {
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry);
+	private final EntityAIAttackMelee AIAttackMelee = new EntityAIAttackMelee(this, 2D, true);
+	private final EntityAIPanic AIPanic = new EntityAIPanic(this, 2.0D);
 
 	public EntityTaegore(World world)
 	{
@@ -41,7 +47,6 @@ public class EntityTaegore extends EntityAetherAnimal
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
 
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIPanic(this, 2.0D));
 		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
 		this.tasks.addTask(4, new EntityAIFollowParent(this, 1.25D));
@@ -57,6 +62,12 @@ public class EntityTaegore extends EntityAetherAnimal
 
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
+	}
+
+	@Override
+	public void setAttackTarget(@Nullable EntityLivingBase entitylivingbaseIn)
+	{
+		super.setAttackTarget(entitylivingbaseIn);
 	}
 
 	@Override
@@ -93,6 +104,33 @@ public class EntityTaegore extends EntityAetherAnimal
 	protected ResourceLocation getLootTable()
 	{
 		return LootTablesAether.ENTITY_TAEGORE;
+	}
+
+	@Override
+	public void onEntityUpdate()
+	{
+		super.onEntityUpdate();
+
+		if (this.getAttackingEntity() != null)
+		{
+			this.tasks.addTask(3, this.AIAttackMelee);
+		}
+		this.setAttackTarget(this.getAttackingEntity());
+
+		if (this.getHealth() < 4F)
+		{
+			this.tasks.addTask(0, this.AIPanic);
+			this.tasks.removeTask(this.AIAttackMelee);
+		}
+
+		this.updateAITasks();
+	}
+
+	@Override
+	public boolean attackEntityAsMob(Entity entityIn)
+	{
+		entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 2.0F);
+		return true;
 	}
 
 }
