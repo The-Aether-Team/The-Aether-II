@@ -50,7 +50,7 @@ public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiN
 
 	public BlockValkyrieGrass()
 	{
-		super(Material.LEAVES);
+		super(Material.PLANTS);
 		this.setHardness(0.0f);
 		this.setSoundType(SoundType.PLANT);
 		this.setTickRandomly(true);

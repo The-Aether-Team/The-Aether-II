@@ -437,6 +437,8 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(aether_flower, 60, 100);
 		Blocks.FIRE.setFireInfo(orange_tree, 60, 100);
 		Blocks.FIRE.setFireInfo(blueberry_bush, 60, 100);
+		Blocks.FIRE.setFireInfo(valkyrie_grass, 60, 100);
+		Blocks.FIRE.setFireInfo(brettl_plant, 60, 100);
 
 		Blocks.FIRE.setFireInfo(skyroot_log, 5, 5);
 		Blocks.FIRE.setFireInfo(golden_oak_log, 5, 5);
