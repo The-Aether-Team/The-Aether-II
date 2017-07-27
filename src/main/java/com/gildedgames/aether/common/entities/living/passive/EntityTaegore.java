@@ -114,6 +114,7 @@ public class EntityTaegore extends EntityAetherAnimal
 		if (this.getAttackingEntity() != null)
 		{
 			this.tasks.addTask(3, this.AIAttackMelee);
+			this.updateAITasks();
 		}
 		this.setAttackTarget(this.getAttackingEntity());
 
@@ -121,9 +122,9 @@ public class EntityTaegore extends EntityAetherAnimal
 		{
 			this.tasks.addTask(0, this.AIPanic);
 			this.tasks.removeTask(this.AIAttackMelee);
+			this.updateAITasks();
 		}
 
-		this.updateAITasks();
 	}
 
 	@Override
