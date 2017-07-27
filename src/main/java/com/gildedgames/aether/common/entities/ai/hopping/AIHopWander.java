@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.entities.ai.hopping;
 
 import com.gildedgames.aether.common.entities.ai.EntityAI;
-import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.init.MobEffects;
 
-public class AIHopWander extends EntityAI<EntitySwet>
+public class AIHopWander extends EntityAI<EntityLiving>
 {
 
 	private final HoppingMoveHelper hoppingMoveHelper;
@@ -13,7 +13,7 @@ public class AIHopWander extends EntityAI<EntitySwet>
 
 	private int nextRandomizeTime;
 
-	public AIHopWander(final EntitySwet entity, final HoppingMoveHelper hoppingMoveHelper)
+	public AIHopWander(final EntityLiving entity, final HoppingMoveHelper hoppingMoveHelper)
 	{
 		super(entity);
 
@@ -40,7 +40,7 @@ public class AIHopWander extends EntityAI<EntitySwet>
 	{
 		if (--this.nextRandomizeTime <= 0)
 		{
-			this.nextRandomizeTime = 40 + (this.entity().getFoodSaturation() * 10) + this.entity().getRNG().nextInt(60);
+			this.nextRandomizeTime = 40 + this.entity().getRNG().nextInt(60);
 			this.chosenDegrees = (float) this.entity().getRNG().nextInt(360);
 		}
 

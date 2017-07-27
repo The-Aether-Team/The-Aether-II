@@ -46,7 +46,8 @@ public class EntitySwet extends EntityExtendedMob
 	{
 		super(worldIn);
 
-		final HoppingMoveHelper hoppingMoveHelper = new HoppingMoveHelper(this, SoundEvents.ENTITY_SLIME_JUMP);
+		final HoppingMoveHelper hoppingMoveHelper = new HoppingMoveHelper(this, SoundEvents.ENTITY_SLIME_JUMP,
+				() -> EntitySwet.this.getRNG().nextInt(20) + 10 + (EntitySwet.this.getFoodSaturation() * 8));
 
 		this.moveHelper = hoppingMoveHelper;
 
@@ -160,8 +161,6 @@ public class EntitySwet extends EntityExtendedMob
 	@Override
 	public void onUpdate()
 	{
-		System.out.println(this.getFoodSaturation());
-
 		this.squishFactor += (this.squishAmount - this.squishFactor) * 0.5F;
 		this.prevSquishFactor = this.squishFactor;
 
