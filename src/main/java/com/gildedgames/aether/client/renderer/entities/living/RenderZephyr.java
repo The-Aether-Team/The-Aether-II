@@ -13,13 +13,19 @@ public class RenderZephyr extends RenderLiving<EntityLiving>
 
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/zephyr/zephyr.png");
 
-	public RenderZephyr(RenderManager manager)
+	public RenderZephyr(final RenderManager manager)
 	{
 		super(manager, new ModelZephyr(), 1.0F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityLiving entity)
+	protected void preRenderCallback(final EntityLiving entity, final float partialTicks)
+	{
+		GlStateManager.translate(0.0F, -0.4F, 0.0F);
+	}
+
+	@Override
+	protected ResourceLocation getEntityTexture(final EntityLiving entity)
 	{
 		return TEXTURE;
 	}
