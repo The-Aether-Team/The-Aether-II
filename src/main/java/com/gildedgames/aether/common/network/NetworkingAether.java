@@ -47,25 +47,27 @@ public class NetworkingAether
 		instance.registerMessage(PacketMoaJump.HandlerClient.class, PacketMoaJump.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketOpenDialog.HandlerClient.class, PacketOpenDialog.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketUpdateStructure.HandlerClient.class, PacketUpdateStructure.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketLatchSwet.HandlerClient.class, PacketLatchSwet.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketDetachSwet.HandlerClient.class, PacketDetachSwet.class, discriminant++, Side.CLIENT);
 	}
 
-	public static void sendPacketToAllPlayers(IMessage message)
+	public static void sendPacketToAllPlayers(final IMessage message)
 	{
 		NetworkingAether.instance.sendToAll(message);
 	}
 
-	public static void sendPacketToPlayer(IMessage message, EntityPlayerMP player)
+	public static void sendPacketToPlayer(final IMessage message, final EntityPlayerMP player)
 	{
 		NetworkingAether.instance.sendTo(message, player);
 	}
 
-	public static void sendPacketToWatching(IMessage message, EntityLivingBase entity, boolean includeSelf)
+	public static void sendPacketToWatching(final IMessage message, final EntityLivingBase entity, final boolean includeSelf)
 	{
-		WorldServer world = (WorldServer) entity.world;
+		final WorldServer world = (WorldServer) entity.world;
 
-		EntityTracker tracker = world.getEntityTracker();
+		final EntityTracker tracker = world.getEntityTracker();
 
-		for (EntityPlayer player : tracker.getTrackingPlayers(entity))
+		for (final EntityPlayer player : tracker.getTrackingPlayers(entity))
 		{
 			NetworkingAether.sendPacketToPlayer(message, (EntityPlayerMP) player);
 		}
@@ -78,7 +80,7 @@ public class NetworkingAether
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static void sendPacketToServer(IMessage message)
+	public static void sendPacketToServer(final IMessage message)
 	{
 		NetworkingAether.instance.sendToServer(message);
 	}

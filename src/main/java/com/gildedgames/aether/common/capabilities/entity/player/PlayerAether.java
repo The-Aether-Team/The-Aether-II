@@ -51,9 +51,11 @@ public class PlayerAether implements IPlayerAether
 
 	private final PlayerDialogModule dialogModule;
 
+	private final PlayerSwetTracker swetTracker;
+
 	private boolean hasDiedInAetherBefore;
 
-	public PlayerAether(EntityPlayer entity)
+	public PlayerAether(final EntityPlayer entity)
 	{
 		this.entity = entity;
 
@@ -63,19 +65,21 @@ public class PlayerAether implements IPlayerAether
 		this.parachuteModule = new PlayerParachuteModule(this);
 		this.equipmentModule = new PlayerEquipmentModule(this);
 		this.dialogModule = new PlayerDialogModule(this);
+		this.swetTracker = new PlayerSwetTracker(this);
 
-		Collection<PlayerAetherModule> modules = new ArrayList<>();
+		final Collection<PlayerAetherModule> modules = new ArrayList<>();
 		modules.add(this.abilitiesModule);
 		modules.add(this.gravititeAbilityModule);
 		modules.add(this.teleportingModule);
 		modules.add(this.parachuteModule);
 		modules.add(this.equipmentModule);
 		modules.add(this.dialogModule);
+		modules.add(this.swetTracker);
 
 		this.modules = modules.toArray(new PlayerAetherModule[modules.size()]);
 	}
 
-	public static PlayerAether getPlayer(Entity player)
+	public static PlayerAether getPlayer(final Entity player)
 	{
 		if (!PlayerAether.hasCapability(player))
 		{
@@ -85,7 +89,7 @@ public class PlayerAether implements IPlayerAether
 		return (PlayerAether) player.getCapability(AetherCapabilities.PLAYER_DATA, null);
 	}
 
-	public static boolean hasCapability(Entity entity)
+	public static boolean hasCapability(final Entity entity)
 	{
 		return entity.hasCapability(AetherCapabilities.PLAYER_DATA, null);
 	}
@@ -95,7 +99,7 @@ public class PlayerAether implements IPlayerAether
 		return this.hasDiedInAetherBefore;
 	}
 
-	public void setHasDiedInAetherBefore(boolean flag)
+	public void setHasDiedInAetherBefore(final boolean flag)
 	{
 		this.hasDiedInAetherBefore = flag;
 	}
@@ -108,36 +112,36 @@ public class PlayerAether implements IPlayerAether
 		NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(this.hasDiedInAetherBefore()), (EntityPlayerMP) this.getEntity());
 	}
 
-	public void onUpdate(LivingUpdateEvent event)
+	public void onUpdate(final LivingUpdateEvent event)
 	{
-		for (PlayerAetherModule module : this.modules)
+		for (final PlayerAetherModule module : this.modules)
 		{
 			module.onUpdate();
 		}
 	}
 
-	public void onRespawn(PlayerEvent.PlayerRespawnEvent event)
+	public void onRespawn(final PlayerEvent.PlayerRespawnEvent event)
 	{
 		this.sendFullUpdate();
 	}
 
-	public void onPlaceBlock(BlockEvent.PlaceEvent event)
+	public void onPlaceBlock(final BlockEvent.PlaceEvent event)
 	{
 
 	}
 
-	public void onDeath(LivingDeathEvent event)
+	public void onDeath(final LivingDeathEvent event)
 	{
 		this.gravititeAbilityModule.onDeath(event);
 	}
 
-	public void onDrops(PlayerDropsEvent event)
+	public void onDrops(final PlayerDropsEvent event)
 	{
 		if (!this.getEntity().world.isRemote && !this.getEntity().world.getGameRules().getBoolean("keepInventory"))
 		{
 			for (int i = 0; i < this.getEquipmentModule().getInventory().getSizeInventory(); i++)
 			{
-				ItemStack stack = this.getEquipmentModule().getInventory().removeStackFromSlot(i);
+				final ItemStack stack = this.getEquipmentModule().getInventory().removeStackFromSlot(i);
 
 				if (!stack.isEmpty())
 				{
@@ -147,9 +151,9 @@ public class PlayerAether implements IPlayerAether
 		}
 	}
 
-	public void onHurt(LivingHurtEvent event)
+	public void onHurt(final LivingHurtEvent event)
 	{
-		PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
+		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
 
 		if (aePlayer != null)
 		{
@@ -163,19 +167,19 @@ public class PlayerAether implements IPlayerAether
 		}
 	}
 
-	public void onFall(LivingFallEvent event)
+	public void onFall(final LivingFallEvent event)
 	{
 		this.abilitiesModule.onFall(event);
 	}
 
-	public void onTeleport(PlayerEvent.PlayerChangedDimensionEvent event)
+	public void onTeleport(final PlayerEvent.PlayerChangedDimensionEvent event)
 	{
 		this.sendFullUpdate();
 
 		this.equipmentModule.onTeleport();
 	}
 
-	public void onPlayerBeginWatching(IPlayerAether other)
+	public void onPlayerBeginWatching(final IPlayerAether other)
 	{
 		NetworkingAether.sendPacketToPlayer(new PacketEquipment(this), (EntityPlayerMP) other.getEntity());
 	}
@@ -202,11 +206,11 @@ public class PlayerAether implements IPlayerAether
 	}
 
 	@Override
-	public void write(NBTTagCompound tag)
+	public void write(final NBTTagCompound tag)
 	{
-		NBTTagCompound modules = new NBTTagCompound();
+		final NBTTagCompound modules = new NBTTagCompound();
 
-		for (PlayerAetherModule module : this.modules)
+		for (final PlayerAetherModule module : this.modules)
 		{
 			module.write(modules);
 		}
@@ -216,11 +220,11 @@ public class PlayerAether implements IPlayerAether
 	}
 
 	@Override
-	public void read(NBTTagCompound tag)
+	public void read(final NBTTagCompound tag)
 	{
-		NBTTagCompound modules = tag.getCompoundTag("Modules");
+		final NBTTagCompound modules = tag.getCompoundTag("Modules");
 
-		for (PlayerAetherModule module : this.modules)
+		for (final PlayerAetherModule module : this.modules)
 		{
 			module.read(modules);
 		}
@@ -254,6 +258,11 @@ public class PlayerAether implements IPlayerAether
 		return this.abilitiesModule;
 	}
 
+	public PlayerSwetTracker getSwetTracker()
+	{
+		return this.swetTracker;
+	}
+
 	@Override
 	public PlayerEquipmentModule getEquipmentModule()
 	{
@@ -263,18 +272,18 @@ public class PlayerAether implements IPlayerAether
 	public static class Storage implements IStorage<IPlayerAether>
 	{
 		@Override
-		public NBTBase writeNBT(Capability<IPlayerAether> capability, IPlayerAether instance, EnumFacing side)
+		public NBTBase writeNBT(final Capability<IPlayerAether> capability, final IPlayerAether instance, final EnumFacing side)
 		{
-			NBTTagCompound compound = new NBTTagCompound();
+			final NBTTagCompound compound = new NBTTagCompound();
 			instance.write(compound);
 
 			return compound;
 		}
 
 		@Override
-		public void readNBT(Capability<IPlayerAether> capability, IPlayerAether instance, EnumFacing side, NBTBase nbt)
+		public void readNBT(final Capability<IPlayerAether> capability, final IPlayerAether instance, final EnumFacing side, final NBTBase nbt)
 		{
-			NBTTagCompound compound = (NBTTagCompound) nbt;
+			final NBTTagCompound compound = (NBTTagCompound) nbt;
 
 			instance.read(compound);
 		}

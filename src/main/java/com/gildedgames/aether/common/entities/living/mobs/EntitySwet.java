@@ -1,33 +1,36 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFloat;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFollowAttackTarget;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopWander;
 import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
-import com.gildedgames.aether.common.entities.ai.swet.AILeech;
+import com.gildedgames.aether.common.entities.ai.swet.AILatchOn;
 import com.gildedgames.aether.common.entities.util.EntityExtendedMob;
-import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.PacketDetachSwet;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
-import com.gildedgames.aether.common.util.helpers.EntityUtil;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class EntitySwet extends EntityExtendedMob
 {
 
+	public static final int FOOD_SATURATION_REQUIRED = 5;
+
 	private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntitySwet.class, DataSerializers.VARINT);
+
+	private static final DataParameter<Integer> FOOD_SATURATION = EntityDataManager.createKey(EntitySwet.class, DataSerializers.VARINT);
 
 	public float squishAmount;
 
@@ -37,6 +40,8 @@ public class EntitySwet extends EntityExtendedMob
 
 	private boolean wasOnGround;
 
+	private int timeSinceSucking, timeNotSucking;
+
 	public EntitySwet(final World worldIn)
 	{
 		super(worldIn);
@@ -45,12 +50,13 @@ public class EntitySwet extends EntityExtendedMob
 
 		this.moveHelper = hoppingMoveHelper;
 
-		this.tasks.addTask(0, new AILeech(this, hoppingMoveHelper, 4.0D));
+		this.tasks.addTask(0, new AILatchOn(this, hoppingMoveHelper));
 		this.tasks.addTask(1, new AIHopWander(this, hoppingMoveHelper));
 		this.tasks.addTask(2, new AIHopFloat(this, hoppingMoveHelper));
 		this.tasks.addTask(3, new AIHopFollowAttackTarget(this, hoppingMoveHelper, 1.0D));
 
-		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, 10, true, false,
+				e -> EntitySwet.canLatch(EntitySwet.this, e)));
 
 		this.setSize(1.0F, 1.0F);
 
@@ -59,12 +65,67 @@ public class EntitySwet extends EntityExtendedMob
 		this.experienceValue = 3;
 	}
 
+	public static boolean canLatch(final EntitySwet swet, final EntityPlayer player)
+	{
+		return !player.isInWater() && swet.getFoodSaturation() < EntitySwet.FOOD_SATURATION_REQUIRED && PlayerAether.getPlayer(player).getSwetTracker()
+				.canLatchOn();
+	}
+
+	public int getFoodSaturation()
+	{
+		return this.dataManager.get(EntitySwet.FOOD_SATURATION);
+	}
+
+	public void setFoodSaturation(final int foodSaturation)
+	{
+		this.dataManager.set(EntitySwet.FOOD_SATURATION, foodSaturation);
+	}
+
+	public void processSucking(final EntityPlayer player)
+	{
+		if (player.getFoodStats().getFoodLevel() <= 0)
+		{
+			return;
+		}
+
+		if (this.world.isRemote)
+		{
+			return;
+		}
+
+		this.timeSinceSucking++;
+
+		if (this.timeSinceSucking >= 40)
+		{
+			if (!this.world.isRemote)
+			{
+				player.getFoodStats().setFoodLevel((int) (player.getFoodStats().getFoodLevel() * 0.95F));
+				this.setFoodSaturation(this.getFoodSaturation() + 1);
+			}
+
+			player.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F, (player.getRNG().nextFloat() - player.getRNG().nextFloat()) * 0.2F + 1.0F);
+
+			this.timeSinceSucking = 0;
+		}
+
+		if (this.getFoodSaturation() >= EntitySwet.FOOD_SATURATION_REQUIRED)
+		{
+			PlayerAether.getPlayer(player).getSwetTracker().detachSwet(this);
+
+			if (!this.world.isRemote)
+			{
+				NetworkingAether.sendPacketToPlayer(new PacketDetachSwet(this.getType()), (EntityPlayerMP) player);
+			}
+		}
+	}
+
 	@Override
 	public void entityInit()
 	{
 		super.entityInit();
 
 		this.dataManager.register(EntitySwet.TYPE, 0);
+		this.dataManager.register(EntitySwet.FOOD_SATURATION, 1);
 	}
 
 	@Override
@@ -76,25 +137,6 @@ public class EntitySwet extends EntityExtendedMob
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(16.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16);
-	}
-
-	@Override
-	protected void handleClientAttack()
-	{
-		this.squishAmount = 3F;
-
-		final Entity target = this.world.getNearestPlayerNotCreative(this, 10D);
-
-		if (target == null)
-		{
-			return;
-		}
-
-		this.faceEntity(target, 10.0F, 10.0F);
-
-		EntityUtil
-				.spawnParticleLineBetween(this, target, 2D, EnumParticleTypes.ITEM_CRACK, Item.getIdFromItem(ItemsAether.swet_jelly), this.getType().ordinal());
-		EntityUtil.spawnParticleLineBetween(this, target, 7.4D, EnumParticleTypes.SPELL_MOB_AMBIENT);
 	}
 
 	@Override
@@ -118,6 +160,8 @@ public class EntitySwet extends EntityExtendedMob
 	@Override
 	public void onUpdate()
 	{
+		System.out.println(this.getFoodSaturation());
+
 		this.squishFactor += (this.squishAmount - this.squishFactor) * 0.5F;
 		this.prevSquishFactor = this.squishFactor;
 
@@ -134,6 +178,23 @@ public class EntitySwet extends EntityExtendedMob
 
 		this.wasOnGround = this.onGround;
 		this.alterSquishAmount();
+
+		if (!this.world.isRemote)
+		{
+			if (this.timeNotSucking < 1200)
+			{
+				this.timeNotSucking++;
+			}
+			else
+			{
+				this.timeNotSucking = 0;
+
+				if (this.getFoodSaturation() > 0)
+				{
+					this.setFoodSaturation(this.getFoodSaturation() - 1);
+				}
+			}
+		}
 	}
 
 	protected void alterSquishAmount()
@@ -157,6 +218,8 @@ public class EntitySwet extends EntityExtendedMob
 		super.readFromNBT(tag);
 
 		this.setType(Type.fromOrdinal(tag.getInteger("type")));
+		this.timeSinceSucking = tag.getInteger("timeSinceSucking");
+		this.setFoodSaturation(tag.getInteger("foodSaturation"));
 	}
 
 	@Override
@@ -165,6 +228,8 @@ public class EntitySwet extends EntityExtendedMob
 		super.writeToNBT(tag);
 
 		tag.setInteger("type", this.getType().ordinal());
+		tag.setInteger("timeSinceSucking", this.timeSinceSucking);
+		tag.setInteger("foodSaturation", this.getFoodSaturation());
 
 		return tag;
 	}
@@ -199,11 +264,20 @@ public class EntitySwet extends EntityExtendedMob
 
 		public final ResourceLocation texture_head, texture_jelly;
 
+		public final ResourceLocation left1, left2, right1, right2;
+
 		Type(final String name)
 		{
 			this.name = name;
+
 			this.texture_head = AetherCore.getResource("textures/entities/swet/swet_head_" + this.name + ".png");
 			this.texture_jelly = AetherCore.getResource("textures/entities/swet/swet_jelly_" + this.name + ".png");
+
+			this.left1 = AetherCore.getResource("textures/gui/overlay/swet/" + this.name + "_left_1.png");
+			this.left2 = AetherCore.getResource("textures/gui/overlay/swet/" + this.name + "_left_2.png");
+
+			this.right1 = AetherCore.getResource("textures/gui/overlay/swet/" + this.name + "_right_1.png");
+			this.right2 = AetherCore.getResource("textures/gui/overlay/swet/" + this.name + "_right_2.png");
 		}
 
 		public static Type fromOrdinal(final int ordinal)
