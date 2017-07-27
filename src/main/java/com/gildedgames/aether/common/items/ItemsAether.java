@@ -4,10 +4,7 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.IBlockWithItem;
-import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.items.armor.*;
-import com.gildedgames.aether.common.items.blocks.ItemBlockMultiName;
 import com.gildedgames.aether.common.items.companions.ItemCompanion;
 import com.gildedgames.aether.common.items.companions.ItemDeathSeal;
 import com.gildedgames.aether.common.items.consumables.*;
@@ -18,7 +15,6 @@ import com.gildedgames.aether.common.items.tools.ItemAetherShovel;
 import com.gildedgames.aether.common.items.tools.ItemSkyrootBucket;
 import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
-import com.gildedgames.aether.common.items.weapons.ItemVampireBlade;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBolt;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
 import com.gildedgames.aether.common.items.weapons.swords.*;
@@ -27,7 +23,6 @@ import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import com.gildedgames.aether.common.registry.content.MaterialsAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.util.selectors.RandomItemSelector;
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -41,8 +36,6 @@ import java.util.Collections;
 
 public class ItemsAether
 {
-	private static final Collection<Item> registeredItems = new ArrayList<>();
-
 	public static final Item skyroot_stick = new Item();
 
 	public static final Item cloudwool = new Item();
@@ -98,7 +91,6 @@ public class ItemsAether
 			arkenium_leggings = new ItemArkeniumArmor(EntityEquipmentSlot.LEGS),
 			arkenium_boots = new ItemArkeniumArmor(EntityEquipmentSlot.FEET);
 
-
 	public static final ItemGravititeArmor gravitite_helmet = new ItemGravititeArmor(EntityEquipmentSlot.HEAD),
 			gravitite_chestplate = new ItemGravititeArmor(EntityEquipmentSlot.CHEST),
 			gravitite_leggings = new ItemGravititeArmor(EntityEquipmentSlot.LEGS),
@@ -106,7 +98,8 @@ public class ItemsAether
 
 	public static final Item golden_amber = new Item(),
 			taegore_hide = new Item(),
-			burrukai_pelt = new Item();
+			burrukai_pelt = new Item(),
+			swet_gel = new ItemSwetGel();
 
 	public static final ItemAetherFood blueberries = new ItemAetherFood(2, false).setConsumptionDuration(12),
 			enchanted_blueberry = new ItemAetherFood(6, false).setConsumptionDuration(12),
@@ -114,7 +107,6 @@ public class ItemsAether
 			wyndberry = new ItemAetherFood(4, false).setConsumptionDuration(22),
 			enchanted_wyndberry = new ItemEnchantedWyndberry().setConsumptionDuration(22),
 			swet_jelly = new ItemSwetJelly(),
-			gummy_swet = new ItemGummySwet(),
 			raw_taegore_meat = new ItemAetherFood(3, 0.3F, false),
 			taegore_steak = new ItemAetherFood(8, 0.8F, false),
 			burrukai_rib_cut = new ItemAetherFood(3, 0.3F, false),
@@ -155,7 +147,7 @@ public class ItemsAether
 	public static final ItemDart dart = new ItemDart();
 
 	public static final ItemDoor skyroot_door = new ItemDoor(BlocksAether.skyroot_door),
-	        secret_skyroot_door = new ItemDoor(BlocksAether.secret_skyroot_door),
+			secret_skyroot_door = new ItemDoor(BlocksAether.secret_skyroot_door),
 			arkenium_door = new ItemDoor(BlocksAether.arkenium_door);
 
 	public static final ItemCrossbow skyroot_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F),
@@ -163,7 +155,6 @@ public class ItemsAether
 			zanite_crossbow = new ItemCrossbow().setDurationInTicks(15).setKnockBackValue(0.5F),
 			arkenium_crossbow = new ItemCrossbow().setDurationInTicks(35).setKnockBackValue(0.5F),
 			gravitite_crossbow = new ItemCrossbow().setDurationInTicks(25).setKnockBackValue(1.2F);
-
 
 	public static final ItemBolt bolt = new ItemBolt();
 
@@ -197,8 +188,8 @@ public class ItemsAether
 	public static final Item brettl_grass = new Item();
 
 	public static final Item zanite_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.ZANITE),
-	        arkenium_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.ARKENIUM),
-	        gravitite_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.GRAVITITE);
+			arkenium_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.ARKENIUM),
+			gravitite_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.GRAVITITE);
 
 	public static final Item pink_baby_swet = new ItemCompanion();
 
@@ -228,7 +219,6 @@ public class ItemsAether
 				tooltip.add(TextFormatting.BLUE + "\u2022 " + "1.5 Attack Damage");
 			}),
 			death_seal = new ItemDeathSeal();
-
 
 	public static final Item solar_band = new Item(),
 			lunar_band = new Item();
@@ -268,9 +258,9 @@ public class ItemsAether
 
 	public static final Item cloud_parachute = new ItemCloudParachute();
 
-	// Charms
-
 	public static final Item charm_atk_dmg_01 = new Item();
+
+	// Charms
 
 	public static final Item charm_atk_dmg_02 = new Item();
 
@@ -318,10 +308,10 @@ public class ItemsAether
 
 	public static final Item charm_kbk_res_03 = new Item();
 
-	// Neckwear
-
 	public static final Item amulet_of_growth = new Item(),
 			lesser_amulet_of_growth = new Item();
+
+	// Neckwear
 
 	public static final Item frostward_scarf = new Item(),
 			gruegar_scarf = new Item();
@@ -400,6 +390,10 @@ public class ItemsAether
 
 	public static final Item wrapping_paper = new ItemWrappingPaper(),
 			fried_moa_egg = new ItemFood(10, false);
+
+	public static final Item swet_sugar = new Item();
+
+	private static final Collection<Item> registeredItems = new ArrayList<>();
 
 	public static void preInit()
 	{
@@ -481,7 +475,9 @@ public class ItemsAether
 		registerItem("wyndberry", wyndberry);
 		registerItem("enchanted_wyndberry", enchanted_wyndberry);
 		registerItem("swet_jelly", swet_jelly);
-		registerItem("gummy_swet", gummy_swet);
+		registerItem("swet_gel", swet_gel).setCreativeTab(CreativeTabsAether.MATERIALS);
+
+		registerItem("swet_sugar", swet_sugar).setCreativeTab(CreativeTabsAether.MATERIALS);
 
 		registerItem("raw_taegore_meat", raw_taegore_meat);
 		registerItem("taegore_steak", taegore_steak);
@@ -687,7 +683,7 @@ public class ItemsAether
 		//				new ItemStack(ItemsAether.skyroot_water_bucket), new ItemStack(ItemsAether.skyroot_bucket));
 	}
 
-	public static <T extends Item> T registerItem(String name, T item)
+	public static <T extends Item> T registerItem(final String name, final T item)
 	{
 		item.setUnlocalizedName(AetherCore.MOD_ID + "." + name);
 		item.setRegistryName(name);

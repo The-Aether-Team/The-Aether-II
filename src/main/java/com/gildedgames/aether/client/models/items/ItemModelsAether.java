@@ -298,15 +298,17 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.ginger_bread_man, "ginger_bread_man");
 		registerItemModels(ItemsAether.candy_cane, "candy_cane");
 
+		registerItemModels(ItemsAether.swet_sugar, "swet_sugar");
+
 		registerItemModels(ItemsAether.swet_jelly, new ItemModelBuilder("swet_jelly/")
 				.add(EntitySwet.Type.BLUE.ordinal(), "blue_swet_jelly")
-				.add(EntitySwet.Type.GREEN.ordinal(), "golden_swet_jelly")
-				.add(EntitySwet.Type.PURPLE.ordinal(), "dark_swet_jelly"));
+				.add(EntitySwet.Type.GREEN.ordinal(), "green_swet_jelly")
+				.add(EntitySwet.Type.PURPLE.ordinal(), "purple_swet_jelly"));
 
-		registerItemModels(ItemsAether.gummy_swet, new ItemModelBuilder("gummy_swet/")
-				.add(EntitySwet.Type.BLUE.ordinal(), "blue_gummy_swet")
-				.add(EntitySwet.Type.GREEN.ordinal(), "golden_gummy_swet")
-				.add(EntitySwet.Type.PURPLE.ordinal(), "dark_gummy_swet"));
+		registerItemModels(ItemsAether.swet_gel, new ItemModelBuilder("swet_gel/")
+				.add(EntitySwet.Type.BLUE.ordinal(), "blue_swet_gel")
+				.add(EntitySwet.Type.GREEN.ordinal(), "green_swet_gel")
+				.add(EntitySwet.Type.PURPLE.ordinal(), "purple_swet_gel"));
 
 		registerItemModels(ItemsAether.skyroot_bucket, "skyroot_bucket/skyroot_bucket");
 		registerItemModels(ItemsAether.skyroot_water_bucket, "skyroot_bucket/skyroot_water_bucket");

@@ -6,7 +6,7 @@
 			"entries": [
 				{
 					"type": "item",
-					"name": "minecraft:sugar",
+					"name": "aether:swet_sugar",
 					"weight": 1,
 					"functions": [
 						{
