@@ -27,28 +27,6 @@ import net.minecraft.world.World;
 public class EntitySwet extends EntityExtendedMob
 {
 
-	public enum Type
-	{
-		BLUE("blue"), GOLDEN("golden"), DARK("dark"), LIGHT("light");
-
-		public final String name;
-
-		public final ResourceLocation texture;
-
-		Type(String name)
-		{
-			this.name = name;
-			this.texture = AetherCore.getResource("textures/entities/swet/" + this.name + "_swet.png");
-		}
-
-		public static Type fromOrdinal(int ordinal)
-		{
-			Type[] gummy = values();
-
-			return gummy[ordinal > gummy.length || ordinal < 0 ? 0 : ordinal];
-		}
-	}
-
 	private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntitySwet.class, DataSerializers.VARINT);
 
 	public float squishAmount;
@@ -59,11 +37,11 @@ public class EntitySwet extends EntityExtendedMob
 
 	private boolean wasOnGround;
 
-	public EntitySwet(World worldIn)
+	public EntitySwet(final World worldIn)
 	{
 		super(worldIn);
 
-		HoppingMoveHelper hoppingMoveHelper = new HoppingMoveHelper(this, SoundEvents.ENTITY_SLIME_JUMP);
+		final HoppingMoveHelper hoppingMoveHelper = new HoppingMoveHelper(this, SoundEvents.ENTITY_SLIME_JUMP);
 
 		this.moveHelper = hoppingMoveHelper;
 
@@ -105,7 +83,7 @@ public class EntitySwet extends EntityExtendedMob
 	{
 		this.squishAmount = 3F;
 
-		Entity target = this.world.getNearestPlayerNotCreative(this, 10D);
+		final Entity target = this.world.getNearestPlayerNotCreative(this, 10D);
 
 		if (target == null)
 		{
@@ -114,7 +92,8 @@ public class EntitySwet extends EntityExtendedMob
 
 		this.faceEntity(target, 10.0F, 10.0F);
 
-		EntityUtil.spawnParticleLineBetween(this, target, 2D, EnumParticleTypes.ITEM_CRACK, Item.getIdFromItem(ItemsAether.swet_jelly), this.getType().ordinal());
+		EntityUtil
+				.spawnParticleLineBetween(this, target, 2D, EnumParticleTypes.ITEM_CRACK, Item.getIdFromItem(ItemsAether.swet_jelly), this.getType().ordinal());
 		EntityUtil.spawnParticleLineBetween(this, target, 7.4D, EnumParticleTypes.SPELL_MOB_AMBIENT);
 	}
 
@@ -167,13 +146,13 @@ public class EntitySwet extends EntityExtendedMob
 		return Type.fromOrdinal(this.dataManager.get(EntitySwet.TYPE));
 	}
 
-	public void setType(Type type)
+	public void setType(final Type type)
 	{
 		this.dataManager.set(EntitySwet.TYPE, type.ordinal());
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound tag)
+	public void readFromNBT(final NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
 
@@ -181,7 +160,7 @@ public class EntitySwet extends EntityExtendedMob
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag)
+	public NBTTagCompound writeToNBT(final NBTTagCompound tag)
 	{
 		super.writeToNBT(tag);
 
@@ -201,16 +180,37 @@ public class EntitySwet extends EntityExtendedMob
 	{
 		switch (this.getType())
 		{
-		case BLUE:
-			return LootTablesAether.ENTITY_SWET_BLUE;
-		case GOLDEN:
-			return LootTablesAether.ENTITY_SWET_GOLDEN;
-		case DARK:
-			return LootTablesAether.ENTITY_SWET_DARK;
-		case LIGHT:
-			return LootTablesAether.ENTITY_SWET_LIGHT;
-		default:
-			return LootTablesAether.ENTITY_SWET;
+			case BLUE:
+				return LootTablesAether.ENTITY_SWET_BLUE;
+			case GREEN:
+				return LootTablesAether.ENTITY_SWET_GREEN;
+			case PURPLE:
+				return LootTablesAether.ENTITY_SWET_PURPLE;
+			default:
+				return LootTablesAether.ENTITY_SWET;
+		}
+	}
+
+	public enum Type
+	{
+		BLUE("blue"), GREEN("green"), PURPLE("purple");
+
+		public final String name;
+
+		public final ResourceLocation texture_head, texture_jelly;
+
+		Type(final String name)
+		{
+			this.name = name;
+			this.texture_head = AetherCore.getResource("textures/entities/swet/swet_head_" + this.name + ".png");
+			this.texture_jelly = AetherCore.getResource("textures/entities/swet/swet_jelly_" + this.name + ".png");
+		}
+
+		public static Type fromOrdinal(final int ordinal)
+		{
+			final Type[] gummy = values();
+
+			return gummy[ordinal > gummy.length || ordinal < 0 ? 0 : ordinal];
 		}
 	}
 }

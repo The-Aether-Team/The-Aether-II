@@ -274,7 +274,6 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.arkenium_leggings, "armor/arkenium_leggings");
 		registerItemModels(ItemsAether.arkenium_boots, "armor/arkenium_boots");
 
-
 		registerItemModels(ItemsAether.gravitite_helmet, "armor/gravitite_helmet");
 		registerItemModels(ItemsAether.gravitite_chestplate, "armor/gravitite_chestplate");
 		registerItemModels(ItemsAether.gravitite_leggings, "armor/gravitite_leggings");
@@ -301,15 +300,13 @@ public class ItemModelsAether
 
 		registerItemModels(ItemsAether.swet_jelly, new ItemModelBuilder("swet_jelly/")
 				.add(EntitySwet.Type.BLUE.ordinal(), "blue_swet_jelly")
-				.add(EntitySwet.Type.GOLDEN.ordinal(), "golden_swet_jelly")
-				.add(EntitySwet.Type.DARK.ordinal(), "dark_swet_jelly")
-				.add(EntitySwet.Type.LIGHT.ordinal(), "cream_swet_jelly"));
+				.add(EntitySwet.Type.GREEN.ordinal(), "golden_swet_jelly")
+				.add(EntitySwet.Type.PURPLE.ordinal(), "dark_swet_jelly"));
 
 		registerItemModels(ItemsAether.gummy_swet, new ItemModelBuilder("gummy_swet/")
 				.add(EntitySwet.Type.BLUE.ordinal(), "blue_gummy_swet")
-				.add(EntitySwet.Type.GOLDEN.ordinal(), "golden_gummy_swet")
-				.add(EntitySwet.Type.DARK.ordinal(), "dark_gummy_swet")
-				.add(EntitySwet.Type.LIGHT.ordinal(), "cream_gummy_swet"));
+				.add(EntitySwet.Type.GREEN.ordinal(), "golden_gummy_swet")
+				.add(EntitySwet.Type.PURPLE.ordinal(), "dark_gummy_swet"));
 
 		registerItemModels(ItemsAether.skyroot_bucket, "skyroot_bucket/skyroot_bucket");
 		registerItemModels(ItemsAether.skyroot_water_bucket, "skyroot_bucket/skyroot_water_bucket");
@@ -434,7 +431,6 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.agiosite_slab, "aether_slab/agiosite_slab");
 		registerItemModels(BlocksAether.agiosite_brick_slab, "aether_slab/agiosite_brick_slab");
 		registerItemModels(BlocksAether.scatterglass_slab, "aether_slab/scatterglass_slab");
-
 
 		registerItemModels(ItemsAether.solar_band, "accessories/solar_band");
 		registerItemModels(ItemsAether.lunar_band, "accessories/lunar_band");
@@ -612,26 +608,26 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.wildcard, "wildcard");
 	}
 
-	private static void registerItemModels(Block block, String path)
+	private static void registerItemModels(final Block block, final String path)
 	{
 		registerItemModels(getItem(block), path);
 	}
 
-	private static void registerItemModels(Item item, String path)
+	private static void registerItemModels(final Item item, final String path)
 	{
-		ModelResourceLocation resource = new ModelResourceLocation(AetherCore.getResourcePath(path), "inventory");
+		final ModelResourceLocation resource = new ModelResourceLocation(AetherCore.getResourcePath(path), "inventory");
 
 		ModelLoader.setCustomModelResourceLocation(item, 0, resource);
 	}
 
-	private static void registerItemModels(Block block, ItemModelBuilder builder)
+	private static void registerItemModels(final Block block, final ItemModelBuilder builder)
 	{
 		registerItemModels(getItem(block), builder);
 	}
 
-	private static void registerItemModels(Item item, ItemModelBuilder builder)
+	private static void registerItemModels(final Item item, final ItemModelBuilder builder)
 	{
-		for (Map.Entry<Integer, ModelResourceLocation> entry : builder.getRegistrations().entrySet())
+		for (final Map.Entry<Integer, ModelResourceLocation> entry : builder.getRegistrations().entrySet())
 		{
 			ModelLoader.setCustomModelResourceLocation(item, entry.getKey(), entry.getValue());
 		}
@@ -640,7 +636,7 @@ public class ItemModelsAether
 	/**
 	 * Shorthand utility method for Item.getItemFromBlock(block).
 	 */
-	private static Item getItem(Block block)
+	private static Item getItem(final Block block)
 	{
 		return Item.getItemFromBlock(block);
 	}
