@@ -46,7 +46,7 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 
 	public RenderMoa(RenderManager manager)
 	{
-		super(manager, new ModelMoa(), 1.0F);
+		super(manager, new ModelMoa(), 0.5F);
 
 		SPRITE.initSprite(16, 16, 0, 0, false);
 	}
