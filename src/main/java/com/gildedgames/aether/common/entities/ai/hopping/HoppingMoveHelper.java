@@ -5,20 +5,23 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.util.SoundEvent;
 
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+
 public class HoppingMoveHelper extends EntityMoveHelper
 {
+
+	private final EntityLiving entity;
 
 	private float yRot;
 
 	private int jumpDelay;
 
-	private final EntityLiving entity;
-
-	private SoundEvent hoppingSound;
+	private Supplier<SoundEvent> hoppingSound;
 
 	private HopTimer hopTimer;
 
-	public HoppingMoveHelper(EntityLiving entity, SoundEvent hoppingSound, HopTimer hopTimer)
+	public HoppingMoveHelper(EntityLiving entity, Supplier<SoundEvent> hoppingSound, HopTimer hopTimer)
 	{
 		super(entity);
 
@@ -28,7 +31,7 @@ public class HoppingMoveHelper extends EntityMoveHelper
 		this.yRot = 180.0F * entity.rotationYaw / (float) Math.PI;
 	}
 
-	public HoppingMoveHelper(final EntityLiving entity, SoundEvent hoppingSound)
+	public HoppingMoveHelper(final EntityLiving entity, Supplier<SoundEvent> hoppingSound)
 	{
 		this(entity, hoppingSound, () -> entity.getRNG().nextInt(20) + 10);
 	}
@@ -70,7 +73,7 @@ public class HoppingMoveHelper extends EntityMoveHelper
 
 					this.entity.getJumpHelper().setJumping();
 
-					this.entity.playSound(this.hoppingSound, 0.5F,
+					this.entity.playSound(this.hoppingSound.get(), 0.5F,
 							((this.entity.getRNG().nextFloat() - this.entity.getRNG().nextFloat()) * 0.2F + 1.0F) * 0.8F);
 				}
 				else

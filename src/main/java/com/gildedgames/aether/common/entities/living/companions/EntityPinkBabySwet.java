@@ -15,11 +15,11 @@ public class EntityPinkBabySwet extends EntityCompanion
 
 	private boolean wasOnGround;
 
-	public EntityPinkBabySwet(World worldIn)
+	public EntityPinkBabySwet(final World worldIn)
 	{
 		super(worldIn);
 
-		HoppingMoveHelper hoppingMoveHelper = new HoppingMoveHelper(this, SoundEvents.ENTITY_SMALL_SLIME_JUMP);
+		final HoppingMoveHelper hoppingMoveHelper = new HoppingMoveHelper(this, () -> SoundEvents.ENTITY_SMALL_SLIME_JUMP);
 
 		this.moveHelper = hoppingMoveHelper;
 

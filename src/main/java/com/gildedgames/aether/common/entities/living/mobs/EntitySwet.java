@@ -46,7 +46,8 @@ public class EntitySwet extends EntityExtendedMob
 	{
 		super(worldIn);
 
-		final HoppingMoveHelper hoppingMoveHelper = new HoppingMoveHelper(this, SoundEvents.ENTITY_SLIME_JUMP,
+		final HoppingMoveHelper hoppingMoveHelper = new HoppingMoveHelper(this,
+				() -> EntitySwet.this.getFoodSaturation() == 0 ? SoundEvents.ENTITY_SKELETON_STEP : SoundEvents.ENTITY_SLIME_JUMP,
 				() -> EntitySwet.this.getRNG().nextInt(20) + 10 + (EntitySwet.this.getFoodSaturation() * 8));
 
 		this.moveHelper = hoppingMoveHelper;
@@ -91,11 +92,6 @@ public class EntitySwet extends EntityExtendedMob
 			return;
 		}
 
-		if (this.world.isRemote)
-		{
-			return;
-		}
-
 		this.timeSinceSucking++;
 
 		if (this.timeSinceSucking >= 40)
@@ -113,10 +109,9 @@ public class EntitySwet extends EntityExtendedMob
 
 		if (this.getFoodSaturation() >= EntitySwet.FOOD_SATURATION_REQUIRED)
 		{
-			PlayerAether.getPlayer(player).getSwetTracker().detachSwet(this);
-
 			if (!this.world.isRemote)
 			{
+				PlayerAether.getPlayer(player).getSwetTracker().detachSwet(this);
 				NetworkingAether.sendPacketToPlayer(new PacketDetachSwet(this.getType()), (EntityPlayerMP) player);
 			}
 		}
