@@ -1,5 +1,7 @@
 package com.gildedgames.aether.client.models.entities.living;
 
+import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
+import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -82,6 +84,17 @@ public class ModelSwetHead extends ModelBase
 		GlStateManager.scale(0.8D, 0.8D, 0.8D);
 		GlStateManager.translate(-this.InnerBody.offsetX, -this.InnerBody.offsetY, -this.InnerBody.offsetZ);
 		GlStateManager.translate(-this.InnerBody.rotationPointX * f5, -this.InnerBody.rotationPointY * f5, -this.InnerBody.rotationPointZ * f5);
+
+		EntitySwet swet = (EntitySwet) entity;
+
+		((HoppingMoveHelper) swet.getMoveHelper()).getJumpDelay();
+
+		final float sc = ((swet.getFoodSaturation() - 1));
+		final float s = sc / 1.2F;
+		final float wiggle = (swet.prevSquishFactor + (swet.squishFactor - swet.prevSquishFactor) * f5) / (f1 * 0.5F + 1.0F);
+
+		GlStateManager.translate(0, -s * wiggle, (-sc / Math.cos(f5 * 10) * wiggle) / 2);
+
 		this.InnerBody.render(f5);
 		GlStateManager.popMatrix();
 	}

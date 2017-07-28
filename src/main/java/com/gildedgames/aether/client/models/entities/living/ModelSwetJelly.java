@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.models.entities.living;
 
+import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -55,7 +56,6 @@ public class ModelSwetJelly extends ModelBase
 		this.setRotateAngle(Top, -1.5707963267948966F, 0.0F, 0.0F);
 		this.Base.addChild(this.Right);
 		this.Base.addChild(this.Front);
-		this.Base.addChild(this.Bottom);
 		this.Base.addChild(this.Back);
 		this.Base.addChild(this.Left);
 		this.Base.addChild(this.Top);
@@ -67,7 +67,25 @@ public class ModelSwetJelly extends ModelBase
 		GlStateManager.enableBlend();
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 0.7F);
+
+		EntitySwet swet = (EntitySwet) entity;
+		final float wiggle = (swet.prevSquishFactor + (swet.squishFactor - swet.prevSquishFactor) * f5) / (f1 * 0.5F + 1.0F);
+
+		this.Base.rotateAngleX = wiggle;
 		this.Base.render(f5);
+
+		GlStateManager.pushMatrix();
+
+		float width = swet.timeOnGround;
+		float height = width * 1.14f;
+
+		GlStateManager.translate(0, -height / 2 + 1.2f,0);
+		GlStateManager.scale(width, height, width);
+
+		this.Bottom.render(f5);
+
+		GlStateManager.popMatrix();
+
 		GlStateManager.disableBlend();
 	}
 

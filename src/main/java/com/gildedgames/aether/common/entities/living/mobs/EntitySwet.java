@@ -40,6 +40,8 @@ public class EntitySwet extends EntityExtendedMob
 
 	private boolean wasOnGround;
 
+	public float timeOnGround;
+
 	private int timeSinceSucking, timeNotSucking;
 
 	public EntitySwet(final World worldIn)
@@ -175,6 +177,25 @@ public class EntitySwet extends EntityExtendedMob
 		else if (!this.onGround && this.wasOnGround)
 		{
 			this.squishAmount = 1.0F;
+		}
+
+		if (onGround)
+		{
+			timeOnGround += 0.2f;
+
+			if (timeOnGround > 1.75f)
+			{
+				timeOnGround = 1.75f;
+			}
+		}
+		else
+		{
+			timeOnGround -= 0.2f;
+
+			if (timeOnGround < 1)
+			{
+				timeOnGround = 1;
+			}
 		}
 
 		this.wasOnGround = this.onGround;
