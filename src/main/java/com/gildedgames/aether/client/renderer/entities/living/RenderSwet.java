@@ -21,6 +21,15 @@ public class RenderSwet extends RenderLiving<EntitySwet>
 	@Override
 	protected void preRenderCallback(final EntitySwet entity, final float partialTickTime)
 	{
+		final float sc = (entity.getFoodSaturation() / 5.0F);
+
+		this.shadowSize = 0.3F + (sc * 0.48F);
+
+		if (entity.getFoodSaturation() == 0)
+		{
+			GlStateManager.translate(0.0, 0.18, 0.0);
+		}
+
 		GlStateManager.scale(0.35F, 0.35F, 0.35F);
 		final float f1 = 2.0F;
 		final float f2 = (entity.prevSquishFactor + (entity.squishFactor - entity.prevSquishFactor) * partialTickTime) / (f1 * 0.5F + 1.0F);

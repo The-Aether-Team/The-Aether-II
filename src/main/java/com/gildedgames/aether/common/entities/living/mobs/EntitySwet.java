@@ -64,6 +64,8 @@ public class EntitySwet extends EntityExtendedMob
 		this.setType(Type.values()[this.world.rand.nextInt(Type.values().length)]);
 
 		this.experienceValue = 3;
+
+		this.setFoodSaturation(this.getRNG().nextInt(4));
 	}
 
 	public static boolean canLatch(final EntitySwet swet, final EntityPlayer player)
@@ -161,6 +163,11 @@ public class EntitySwet extends EntityExtendedMob
 	@Override
 	public void onUpdate()
 	{
+		if (this.isInWater())
+		{
+			this.setFoodSaturation(0);
+		}
+
 		this.squishFactor += (this.squishAmount - this.squishFactor) * 0.5F;
 		this.prevSquishFactor = this.squishFactor;
 
@@ -180,7 +187,7 @@ public class EntitySwet extends EntityExtendedMob
 
 		if (!this.world.isRemote)
 		{
-			if (this.timeNotSucking < 1200)
+			if (this.timeNotSucking < 2400)
 			{
 				this.timeNotSucking++;
 			}
