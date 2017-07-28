@@ -127,7 +127,7 @@ public class EntityBurrukai extends EntityAetherAnimal
 			this.tasks.addTask(3, this.AIAttackMelee);
 			this.updateAITasks();
 
-			if (this.getDistanceToEntity(this.getAttackingEntity()) > 16D)
+			if (this.getDistanceToEntity(this.getAttackingEntity()) > this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).getAttributeValue())
 			{
 				this.tasks.removeTask(this.AIAttackMelee);
 				this.updateAITasks();
