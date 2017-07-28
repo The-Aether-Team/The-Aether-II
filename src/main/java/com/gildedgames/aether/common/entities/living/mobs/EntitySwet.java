@@ -22,6 +22,8 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntitySwet extends EntityExtendedMob
 {
@@ -40,7 +42,7 @@ public class EntitySwet extends EntityExtendedMob
 
 	private boolean wasOnGround;
 
-	public float timeOnGround;
+	private float squishPoolSize;
 
 	private int timeSinceSucking, timeNotSucking;
 
@@ -181,20 +183,20 @@ public class EntitySwet extends EntityExtendedMob
 
 		if (onGround)
 		{
-			timeOnGround += 0.2f;
+			squishPoolSize += 0.2f;
 
-			if (timeOnGround > 1.75f)
+			if (squishPoolSize > 1.75f)
 			{
-				timeOnGround = 1.75f;
+				squishPoolSize = 1.75f;
 			}
 		}
 		else
 		{
-			timeOnGround -= 0.2f;
+			squishPoolSize -= 0.2f;
 
-			if (timeOnGround < 1)
+			if (squishPoolSize < 1)
 			{
-				timeOnGround = 1;
+				squishPoolSize = 1;
 			}
 		}
 
@@ -276,6 +278,12 @@ public class EntitySwet extends EntityExtendedMob
 			default:
 				return LootTablesAether.ENTITY_SWET;
 		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	public float getSquishPool()
+	{
+		return squishPoolSize;
 	}
 
 	public enum Type

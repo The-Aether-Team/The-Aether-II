@@ -76,7 +76,7 @@ public class ModelSwetJelly extends ModelBase
 
 		GlStateManager.pushMatrix();
 
-		float width = swet.timeOnGround;
+		float width = swet.getSquishPool();
 		float height = width * 1.14f;
 
 		GlStateManager.translate(0, -height / 2 + 1.2f,0);

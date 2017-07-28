@@ -91,11 +91,6 @@ public class HoppingMoveHelper extends EntityMoveHelper
 		}
 	}
 
-	public int getJumpDelay()
-	{
-		return jumpDelay;
-	}
-
 	public interface HopTimer
 	{
 
