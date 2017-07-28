@@ -26,11 +26,11 @@ public class LayerSwetJelly implements LayerRenderer<EntitySwet>
 		{
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-			final float sc = (entity.getFoodSaturation() / 5.0F);
+			final float sc = ((entity.getFoodSaturation() - 1) / 5.0F);
 			final float s = sc * 1.2F;
 
-			GlStateManager.scale(0.4F + s, 0.4F + s, 0.4F + s);
-			GlStateManager.translate(0.0, -(sc * 1.45) + 0.7F, 0.0);
+			GlStateManager.translate(-0.0, 0.45F + (s * -1.25F), -0.15);
+			GlStateManager.scale(0.6F + s, 0.6F + s, 0.6F + s);
 
 			this.render.bindTexture(entity.getType().texture_jelly);
 
