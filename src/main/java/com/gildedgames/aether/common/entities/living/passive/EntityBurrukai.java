@@ -5,12 +5,14 @@ import java.util.Set;
 import javax.annotation.Nullable;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.google.common.collect.Sets;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -19,6 +21,7 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -28,6 +31,7 @@ public class EntityBurrukai extends EntityAetherAnimal
 {
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsAether.brettl_grass);
+	private final EntityAIAttackMelee AIAttackMelee = new EntityAIAttackMelee(this, 1.2D, false);
 
 	public EntityBurrukai(final World world)
 	{
@@ -46,7 +50,6 @@ public class EntityBurrukai extends EntityAetherAnimal
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
 
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIPanic(this, 2.0D));
 		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
 		this.tasks.addTask(4, new EntityAIFollowParent(this, 1.25D));
@@ -62,6 +65,8 @@ public class EntityBurrukai extends EntityAetherAnimal
 
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
+		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(8.0);
 	}
 
 	@Override
@@ -110,6 +115,37 @@ public class EntityBurrukai extends EntityAetherAnimal
 	protected ResourceLocation getLootTable()
 	{
 		return LootTablesAether.ENTITY_BURRUKAI;
+	}
+
+	@Override
+	public void onEntityUpdate()
+	{
+		super.onEntityUpdate();
+
+		if (this.getAttackingEntity() != null)
+		{
+			this.tasks.addTask(3, this.AIAttackMelee);
+			this.updateAITasks();
+
+			if (this.getDistanceToEntity(this.getAttackingEntity()) > 16D)
+			{
+				this.tasks.removeTask(this.AIAttackMelee);
+				this.updateAITasks();
+			}
+		}
+
+
+
+		this.setAttackTarget(this.getAttackingEntity());
+	}
+
+	@Override
+	public boolean attackEntityAsMob(Entity entityIn)
+	{
+		EntityPlayer player = (EntityPlayer) entityIn;
+		player.attackEntityFrom(DamageSource.causeMobDamage(this), 4.0F);
+		player.knockBack(this, 1.2F, 0.2D, 0.2D);
+		return true;
 	}
 
 }

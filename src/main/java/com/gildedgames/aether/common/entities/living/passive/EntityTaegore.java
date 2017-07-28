@@ -27,7 +27,7 @@ public class EntityTaegore extends EntityAetherAnimal
 {
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry);
-	private final EntityAIAttackMelee AIAttackMelee = new EntityAIAttackMelee(this, 2D, true);
+	private final EntityAIAttackMelee AIAttackMelee = new EntityAIAttackMelee(this, 2.0D, true);
 	private final EntityAIPanic AIPanic = new EntityAIPanic(this, 2.0D);
 
 	public EntityTaegore(World world)
