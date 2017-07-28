@@ -86,9 +86,7 @@ public class ModelSwetHead extends ModelBase
 		GlStateManager.translate(-this.InnerBody.rotationPointX * f5, -this.InnerBody.rotationPointY * f5, -this.InnerBody.rotationPointZ * f5);
 
 		EntitySwet swet = (EntitySwet) entity;
-
-		((HoppingMoveHelper) swet.getMoveHelper()).getJumpDelay();
-
+		
 		final float sc = ((swet.getFoodSaturation() - 1));
 		final float s = sc / 1.2F;
 		final float wiggle = (swet.prevSquishFactor + (swet.squishFactor - swet.prevSquishFactor) * f5) / (f1 * 0.5F + 1.0F);
