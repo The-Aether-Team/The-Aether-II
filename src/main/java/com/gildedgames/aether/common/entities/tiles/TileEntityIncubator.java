@@ -1,8 +1,16 @@
 package com.gildedgames.aether.common.entities.tiles;
 
 import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
-import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
+import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
+import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
+import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
+import com.gildedgames.aether.common.entities.util.MoaNest;
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -13,24 +21,29 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
+import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
 public class TileEntityIncubator extends TileEntityLockable implements ITickable, IInventory
 {
 
-	private static final int INVENTORY_SIZE = 5;
-
-	private static final int MOA_EGG_INDEX = 4;
+	private static final int INVENTORY_SIZE = 2;
+	private static final int AMBRO_CHUNK_INDEX = 0;
+	private static final int MOA_EGG_INDEX = 1;
 
 	private NonNullList<ItemStack> inventory = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
 
-	private static final int REQ_TEMPERATURE_THRESHOLD = 5000;
+	public static final int REQ_TEMPERATURE_THRESHOLD = 5000;
+	private final int ambroDestroy = 1250;
 
-	private int currentHeatingProgress;
+	private float currentHeatingProgress;
+	private int ambroTimer;
+	private int eggTimer;
 
 	@Override
 	public void update()
@@ -40,9 +53,12 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 			return;
 		}
 
-		// TODO: Re-implement
-
 		final IBlockState state = this.world.getBlockState(this.pos);
+
+		if (!isHeating() && this.currentHeatingProgress > 0)
+		{
+			this.currentHeatingProgress -= 1.0F;
+		}
 
 		if (state.getBlock() instanceof BlockIncubator && state.getValue(BlockIncubator.PROPERTY_IS_LIT) != this.isHeating())
 		{
@@ -52,6 +68,51 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
 			this.validate();
 			this.world.setTileEntity(this.pos, this);
+		}
+
+
+		ItemStack fuelstack = this.inventory.get(AMBRO_CHUNK_INDEX);
+		ItemStack eggstack = this.getMoaEgg();
+		if (state.getBlock() instanceof BlockIncubator && state.getValue(BlockIncubator.PROPERTY_IS_LIT))
+		{
+			this.ambroTimer += 2;
+			if (this.currentHeatingProgress < REQ_TEMPERATURE_THRESHOLD)
+			{
+				this.currentHeatingProgress += 2;
+			}
+
+			if (this.ambroTimer >= this.ambroDestroy) {
+				this.ambroTimer = 0;
+				fuelstack.shrink(1);
+			}
+		}
+		if (hasStartedHeating())
+		{
+			if (this.canEggIncubate())
+			{
+				this.eggTimer += 1;
+			}
+			else
+			{
+				if (this.eggTimer > 0) {
+					this.eggTimer--;
+				}
+			}
+
+			if (eggTimer >= (REQ_TEMPERATURE_THRESHOLD / 2))
+			{
+				MoaGenePool stackGenes = ItemMoaEgg.getGenePool(eggstack);
+				EntityMoa moa = new EntityMoa(this.world, stackGenes.getStorage().getSeed());
+				moa.setPosition(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ());
+				this.world.spawnEntity(moa);
+
+				eggstack.shrink(1);
+				this.eggTimer = 0;
+			}
+		}
+		else
+		{
+			this.eggTimer = 0;
 		}
 	}
 
@@ -63,34 +124,21 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
 	public boolean areFuelSlotsFilled()
 	{
-		boolean hasFuelSlotsFilled = true;
-
-		for (int count = 0; count < MOA_EGG_INDEX; count++)
-		{
-			ItemStack stack = this.getStackInSlot(count);
-
-			if (stack.isEmpty())
-			{
-				hasFuelSlotsFilled = false;
-
-				break;
-			}
-		}
-
-		return hasFuelSlotsFilled;
+		ItemStack stack = this.getStackInSlot(AMBRO_CHUNK_INDEX);
+		return !stack.isEmpty();
 	}
 
 	public boolean hasStartedHeating()
 	{
-		return (this.currentHeatingProgress > 0 || (this.getTotalHeatingItems() >= 4 && this.areFuelSlotsFilled())) && !this.getMoaEgg().isEmpty();
+		return (this.currentHeatingProgress > 0 || this.areFuelSlotsFilled()) && !this.getMoaEgg().isEmpty();
 	}
 
 	public boolean isHeating()
 	{
-		return !this.getMoaEgg().isEmpty() && this.getTotalHeatingItems() >= 4 && this.areFuelSlotsFilled();
+		return (this.areFuelSlotsFilled());
 	}
 
-	public int getCurrentHeatingProgress()
+	public float getCurrentHeatingProgress()
 	{
 		return this.currentHeatingProgress;
 	}
@@ -100,10 +148,14 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 		return TileEntityIncubator.REQ_TEMPERATURE_THRESHOLD;
 	}
 
-	public int getTotalHeatingItems()
+	public boolean canEggIncubate()
 	{
-		// Re-implement
-		return 0;
+		return this.getCurrentHeatingProgress() >= 2500;
+	}
+
+	public int getEggTimer()
+	{
+		return this.eggTimer;
 	}
 
 	@Override
@@ -181,27 +233,42 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
-		// TODO: Re-implement
-		return false;
+		return stack.getItem() == ItemsAether.ambrosium_chunk || stack.getItem() == ItemsAether.rainbow_moa_egg;
 	}
+
 
 	@Override
 	public int getField(int id)
 	{
-		return 0;
+		switch (id)
+		{
+		case 0:
+			return (int)this.currentHeatingProgress;
+		case 1:
+			return this.eggTimer;
+		default:
+			return 0;
+		}
 	}
 
 	@Override
 	public void setField(int id, int value)
 	{
-
+		switch (id)
+		{
+		case 0:
+			this.currentHeatingProgress = value;
+		case 1:
+			this.eggTimer = value;
+		}
 	}
 
 	@Override
 	public int getFieldCount()
 	{
-		return 0;
+		return 2;
 	}
+
 
 	@Override
 	public void clear()
@@ -257,7 +324,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	@Override
 	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
 	{
-		return new ContainerIcestoneCooler(playerInventory, this);
+		return new ContainerIncubator(playerInventory, this);
 	}
 
 	@Override
@@ -289,7 +356,9 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
 		compound.setTag("inventory", stackList);
 
-		compound.setInteger("currentHeatingProgress", this.currentHeatingProgress);
+		compound.setFloat("currentHeatingProgress", this.currentHeatingProgress);
+		compound.setInteger("ambroTimer", this.ambroTimer);
+		compound.setInteger("eggTimer", this.eggTimer);
 
 		return compound;
 	}
@@ -316,6 +385,8 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 		}
 
 		this.currentHeatingProgress = compound.getInteger("currentHeatingProgress");
+		this.ambroTimer = compound.getInteger("ambroTimer");
+		this.eggTimer = compound.getInteger("eggTimer");
 	}
 
 	@Override

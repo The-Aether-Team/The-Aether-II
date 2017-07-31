@@ -21,14 +21,16 @@ public class GuiIncubator extends GuiContainer
 
 	/** The player inventory bound to this GUI. */
 	private final InventoryPlayer playerInventory;
+	private final IInventory tileIncubator;
 
 	private final BlockPos incubatorPos;
 
-	public GuiIncubator(InventoryPlayer playerInv, IInventory coolerInv, BlockPos incubatorPos)
+	public GuiIncubator(InventoryPlayer playerInv, IInventory incubatorInv, BlockPos incubatorPos)
 	{
-		super(new ContainerIncubator(playerInv, coolerInv));
+		super(new ContainerIncubator(playerInv, incubatorInv));
 		this.playerInventory = playerInv;
 		this.incubatorPos = incubatorPos;
+		this.tileIncubator = incubatorInv;
 	}
 
 	/**
@@ -47,6 +49,18 @@ public class GuiIncubator extends GuiContainer
 		{
 			TileEntityIncubator te = (TileEntityIncubator) tile;
 
+			if (te.canEggIncubate())
+			{
+				if (!te.getMoaEgg().isEmpty())
+				{
+					this.fontRenderer.drawString("Incubating", 126 - (this.fontRenderer.getStringWidth("Incubating") / 2), this.ySize - 126, 15435844);
+				}
+			}
+			else if (te.areFuelSlotsFilled() && te.getField(0) < 2500)
+			{
+				this.fontRenderer.drawString("Heating", 60 - (this.fontRenderer.getStringWidth("Heating") / 2), this.ySize - 126, 11743532);
+			}
+
 			if (!te.hasStartedHeating())
 			{
 				return;
@@ -54,11 +68,13 @@ public class GuiIncubator extends GuiContainer
 
 			float percent = 0.0F;
 
-			if (te.getCurrentHeatingProgress() > 0)
+			if (te.getField(1) > 0)
 			{
-				float thing = ((float) te.getCurrentHeatingProgress() / (float) te.getRequiredTemperatureThreshold());
+				// the percentage will represent the how long till the egg is finished incubation.
+				// currently the egg needs to incubate from 0 to half of the requiredTemperatureThreshold(5000/2 = 2500).
+				float eggMath = ((float) te.getEggTimer() / (float) (te.getRequiredTemperatureThreshold() / 2));
 
-				percent = thing * 100.0F;
+				percent = eggMath * 100.0F;
 			}
 
 			String valueString = percent == (int) Math.floor(percent) ? String.valueOf((int) Math.floor(percent)) : String.valueOf(percent);
@@ -80,8 +96,7 @@ public class GuiIncubator extends GuiContainer
 
 			valueString += "%";
 
-			this.fontRenderer.drawString(valueString,
-					113 - (this.fontRenderer.getStringWidth(valueString) / 2), this.ySize - 145 + 2, 4210752);
+			this.fontRenderer.drawString(valueString, 113 - (this.fontRenderer.getStringWidth(valueString) / 2), this.ySize - 145 + 2, 4210752);
 		}
 	}
 
@@ -91,11 +106,34 @@ public class GuiIncubator extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	{
+		TileEntity tile = Minecraft.getMinecraft().world.getTileEntity(this.incubatorPos);
+
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.getTextureManager().bindTexture(TEXTURE);
 		int i = (this.width - this.xSize) / 2;
 		int j = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
+
+		if (tile instanceof TileEntityIncubator)
+		{
+			TileEntityIncubator te = (TileEntityIncubator) tile;
+			int k = this.getHeatingScaled(13);
+			this.drawTexturedModalRect(i+78, j+36 +12 -k, 176, 12 - k, 20, k+1);
+		}
 	}
 
+	private int getHeatingScaled(int pixels)
+	{
+		int i = this.tileIncubator.getField(0);
+		int j = 2500;
+
+		return j != 0 && i != 0 ? i * pixels / j : 0;
+	}
+
+	public void updateScreen()
+	{
+		super.updateScreen();
+
+		this.drawGuiContainerForegroundLayer(0, 0);
+	}
 }

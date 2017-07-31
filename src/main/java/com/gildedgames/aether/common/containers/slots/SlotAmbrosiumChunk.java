@@ -11,14 +11,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
-public class SlotMoaEgg extends Slot
+public class SlotAmbrosiumChunk extends Slot
 {
 
 	private static TextureAtlasSprite sprite;
 
-	public SlotMoaEgg(IInventory inventoryIn, int index, int xPosition, int yPosition)
+	public SlotAmbrosiumChunk(IInventory inventoryIn, int index, int xPosition, int yPosition)
 	{
 		super(inventoryIn, index, xPosition, yPosition);
 	}
@@ -26,8 +25,7 @@ public class SlotMoaEgg extends Slot
 	@Override
 	public boolean isItemValid(@Nonnull ItemStack stack)
 	{
-		return stack.getItem() == ItemsAether.moa_egg;
-		//return this.inventory.isItemValidForSlot(this.getSlotIndex(), stack);
+		return stack.getItem() == ItemsAether.ambrosium_chunk;
 	}
 
 	@Override
