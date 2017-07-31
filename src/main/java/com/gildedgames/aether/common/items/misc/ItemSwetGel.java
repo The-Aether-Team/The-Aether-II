@@ -74,13 +74,13 @@ public class ItemSwetGel extends Item
 
 			return EnumActionResult.SUCCESS;
 		}
-
+		
 		return EnumActionResult.FAIL;
 	}
 
 	@Override
 	public String getUnlocalizedName(final ItemStack stack)
 	{
-		return "item.aether.swet_jelly." + EntitySwet.Type.fromOrdinal(stack.getMetadata()).name;
+		return "item.aether.swet_gel." + EntitySwet.Type.fromOrdinal(stack.getMetadata()).name;
 	}
 }
