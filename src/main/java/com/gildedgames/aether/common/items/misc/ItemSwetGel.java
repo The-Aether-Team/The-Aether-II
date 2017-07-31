@@ -74,7 +74,7 @@ public class ItemSwetGel extends Item
 
 			return EnumActionResult.SUCCESS;
 		}
-
+		
 		return EnumActionResult.FAIL;
 	}
 

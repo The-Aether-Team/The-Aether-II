@@ -25,7 +25,7 @@ public class EntityUtil
 	{
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER)
 		{
-			COPY_DATA_FROM_OLD = ReflectionAether.getMethod(Entity.class, new Class<?>[] { Entity.class }, "copyDataFromOld", "func_175035_a");
+			COPY_DATA_FROM_OLD = ReflectionAether.getMethod(Entity.class, new Class<?>[] { Entity.class }, "copyDataFromOld", "func_180432_n");
 		}
 	}
 
