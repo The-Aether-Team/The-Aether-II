@@ -27,7 +27,12 @@ public class SlotMoaEgg extends Slot
 	public boolean isItemValid(@Nonnull ItemStack stack)
 	{
 		return stack.getItem() == ItemsAether.moa_egg;
-		//return this.inventory.isItemValidForSlot(this.getSlotIndex(), stack);
+	}
+
+	@Override
+	public int getSlotStackLimit()
+	{
+		return 1;
 	}
 
 	@Override

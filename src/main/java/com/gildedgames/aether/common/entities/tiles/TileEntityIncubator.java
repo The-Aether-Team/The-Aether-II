@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
+import com.gildedgames.aether.common.entities.util.AnimalGender;
 import com.gildedgames.aether.common.entities.util.MoaNest;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
@@ -28,6 +29,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import java.util.Random;
 
 public class TileEntityIncubator extends TileEntityLockable implements ITickable, IInventory
 {
@@ -39,7 +41,14 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	private NonNullList<ItemStack> inventory = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
 
 	public static final int REQ_TEMPERATURE_THRESHOLD = 5000;
-	private final int ambroDestroy = 1250;
+	private final int ambroDestroy = 1250; // # of ticks before an ambrosium chunk is destroyed.
+
+	// increment and decrement values that can be adjusted to balance how fast or slow the incubator: heats, incubates, and cools.
+	private final float coolingDecrement = 1.0F;
+	private final float heatingIncrement = 2.0F;
+	private final int eggTimerIncrement = 1;
+	private final int eggtimerDecrement = 1;
+	private final float ambroTimerInecremt = 2.0F; // this should remain the same as heating increment.
 
 	private float currentHeatingProgress;
 	private int ambroTimer;
@@ -57,7 +66,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
 		if (!isHeating() && this.currentHeatingProgress > 0)
 		{
-			this.currentHeatingProgress -= 1.0F;
+			this.currentHeatingProgress -= this.coolingDecrement;
 		}
 
 		if (state.getBlock() instanceof BlockIncubator && state.getValue(BlockIncubator.PROPERTY_IS_LIT) != this.isHeating())
@@ -75,10 +84,10 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 		ItemStack eggstack = this.getMoaEgg();
 		if (state.getBlock() instanceof BlockIncubator && state.getValue(BlockIncubator.PROPERTY_IS_LIT))
 		{
-			this.ambroTimer += 2;
+			this.ambroTimer += this.ambroTimerInecremt;
 			if (this.currentHeatingProgress < REQ_TEMPERATURE_THRESHOLD)
 			{
-				this.currentHeatingProgress += 2;
+				this.currentHeatingProgress += this.heatingIncrement;
 			}
 
 			if (this.ambroTimer >= this.ambroDestroy) {
@@ -90,20 +99,28 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 		{
 			if (this.canEggIncubate())
 			{
-				this.eggTimer += 1;
+				this.eggTimer += this.eggTimerIncrement;
 			}
 			else
 			{
 				if (this.eggTimer > 0) {
-					this.eggTimer--;
+					this.eggTimer -= this.eggtimerDecrement;
 				}
 			}
 
 			if (eggTimer >= (REQ_TEMPERATURE_THRESHOLD / 2))
 			{
+				Random rand = new Random();
 				MoaGenePool stackGenes = ItemMoaEgg.getGenePool(eggstack);
+				MoaNest familyNest = new MoaNest(this.world);
 				EntityMoa moa = new EntityMoa(this.world, stackGenes.getStorage().getSeed());
+
+				moa.setRaisedByPlayer(true);
+				moa.setGrowingAge(-24000);
 				moa.setPosition(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ());
+				moa.setGender(rand.nextBoolean() ? AnimalGender.FEMALE : AnimalGender.MALE);
+				moa.setAnimalPack(familyNest.getAnimalPack());
+
 				this.world.spawnEntity(moa);
 
 				eggstack.shrink(1);
