@@ -124,6 +124,15 @@ public class EntityBurrukai extends EntityAetherAnimal
 
 		if (this.getAttackingEntity() != null)
 		{
+			if (this.getAttackingEntity() instanceof EntityPlayer)
+			{
+				PlayerAether player = PlayerAether.getPlayer((EntityPlayer) this.getAttackingEntity());
+				if (player.getEntity().isCreative())
+				{
+					return;
+				}
+			}
+
 			this.tasks.addTask(3, this.AIAttackMelee);
 			this.updateAITasks();
 

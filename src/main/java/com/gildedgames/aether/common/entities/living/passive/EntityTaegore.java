@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
@@ -113,6 +114,14 @@ public class EntityTaegore extends EntityAetherAnimal
 
 		if (this.getAttackingEntity() != null)
 		{
+			if (this.getAttackingEntity() instanceof EntityPlayer)
+			{
+				PlayerAether player = PlayerAether.getPlayer((EntityPlayer) this.getAttackingEntity());
+				if (player.getEntity().isCreative())
+				{
+					return;
+				}
+			}
 			this.tasks.addTask(3, this.AIAttackMelee);
 			this.updateAITasks();
 		}
