@@ -199,7 +199,7 @@ public class BlocksAether
 			agiosite_slab = new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2.0f),
 			agiosite_brick_slab = new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2.0f),
 			icestone_slab = new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.GLASS).setHardness(3.0f),
-			scatterglass_slab = new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.0f);
+			scatterglass_slab = new BlockScatterglassSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.0f);
 
 
 	public static final Block skyroot_stairs = new BlockCustomStairs(skyroot_planks.getDefaultState()),

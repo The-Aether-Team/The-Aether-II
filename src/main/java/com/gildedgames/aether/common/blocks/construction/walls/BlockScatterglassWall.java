@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.construction.walls;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -27,8 +28,9 @@ public class BlockScatterglassWall extends BlockCustomWall
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
-		IBlockState neighborState = world.getBlockState(pos.offset(side.getOpposite()));
+		IBlockState neighborState = world.getBlockState(pos.offset(side));
+		Block block = neighborState.getBlock();
 
-		return state != neighborState && super.shouldSideBeRendered(state, world, pos, side);
+		return block != this;
 	}
 }
