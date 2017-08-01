@@ -140,7 +140,7 @@ public class EntityTaegore extends EntityAetherAnimal
 	public boolean attackEntityAsMob(Entity entityIn)
 	{
 		entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 2.0F);
-		this.playSound(this.getDeathSound(), 0.5F, 1.0F);
+		this.playSound(SoundsAether.taegore_attack, 0.5F, 1.0F);
 		return true;
 	}
 

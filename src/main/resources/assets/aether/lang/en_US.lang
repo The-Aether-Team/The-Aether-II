@@ -679,6 +679,7 @@ subtitles.aether.mob.moa.hurt=Moa hurts
 subtitles.aether.mob.taegore.ambient=Taegore snorts
 subtitles.aether.mob.taegore.hurt=Taegore hurts
 subtitles.aether.mob.taegore.death=Taegore dies
+subtitles.aether.mob.taegore.attack=Taegore attacks
 subtitles.aether.mob.chest_mimic.awake=Chest Mimic awakes
 subtitles.aether.random.present_unwrap=Present unwrapped
 subtitles.aether.random.dungeon.container.smash=Container smashed
@@ -691,6 +692,7 @@ subtitles.aether.mob.generic.wings.flap=Wings flap
 subtitles.aether.mob.burrukai.ambient=Burrukai huffs
 subtitles.aether.mob.burrukai.hurt=Burrukai hurts
 subtitles.aether.mob.burrukai.death=Burrukai dies
+subtitles.aether.mob.burrukai.attack=Burrukai attacks
 
 # Accessory slot names
 gui.aether.slot.none=Not Equippable

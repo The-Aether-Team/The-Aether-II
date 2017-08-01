@@ -315,6 +315,13 @@
 		],
 		"subtitle": "subtitles.aether.mob.taegore.death"
 	},
+	"mob.taegore.attack": {
+		"category": "neutral",
+		"sounds": [
+			"aether:mob/taegore/death"
+		],
+		"subtitle": "subtitles.aether.mob.taegore.attack"
+	},
 	"mob.burrukai.ambient": {
 		"category": "neutral",
 		"sounds": [
@@ -338,6 +345,14 @@
 			"aether:mob/burrukai/death1"
 		],
 		"subtitle": "subtitles.aether.mob.burrukai.death"
+	},
+	"mob.burrukai.attack": {
+		"category": "neutral",
+		"sounds": [
+			"aether:mob/burrukai/hurt1",
+			"aether:mob/burrukai/hurt2"
+		],
+		"subtitle": "subtitles.aether.mob.burrukai.attack"
 	},
 	"random.present_unwrap": {
 		"category": "neutral",

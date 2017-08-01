@@ -43,7 +43,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	private final float heatingIncrement = 2.0F;
 	private final int eggTimerIncrement = 1;
 	private final int eggtimerDecrement = 1;
-	private final float ambroTimerInecremt = 2.0F; // this should remain the same as heating increment.
+	private final float ambroTimerIncrement = 2.0F; // this should remain the same as heating increment.
 
 	private float currentHeatingProgress;
 	private int ambroTimer;
@@ -79,7 +79,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 		ItemStack eggstack = this.getMoaEgg();
 		if (state.getBlock() instanceof BlockIncubator && state.getValue(BlockIncubator.PROPERTY_IS_LIT))
 		{
-			this.ambroTimer += this.ambroTimerInecremt;
+			this.ambroTimer += this.ambroTimerIncrement;
 			if (this.currentHeatingProgress < REQ_TEMPERATURE_THRESHOLD)
 			{
 				this.currentHeatingProgress += this.heatingIncrement;

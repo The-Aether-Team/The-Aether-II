@@ -153,7 +153,7 @@ public class EntityBurrukai extends EntityAetherAnimal
 	{
 		EntityPlayer player = (EntityPlayer) entityIn;
 		player.attackEntityFrom(DamageSource.causeMobDamage(this), 4.0F);
-		this.playSound(this.getHurtSound(), 0.5F, 1.0F);
+		this.playSound(SoundsAether.burrukai_attack, 0.5F, 1.0F);
 		player.knockBack(this, 1.2F, 0.2D, 0.2D);
 		return true;
 	}
