@@ -118,7 +118,7 @@ public class GuiIncubator extends GuiContainer
 		{
 			TileEntityIncubator te = (TileEntityIncubator) tile;
 			int k = this.getHeatingScaled(13);
-			this.drawTexturedModalRect(i+78, j+36 +12 -k, 176, 11 - k, 20, k+1);
+			this.drawTexturedModalRect(i+78, j+36 +12 -k, 176, 12 - k, 20, k);
 		}
 	}
 
