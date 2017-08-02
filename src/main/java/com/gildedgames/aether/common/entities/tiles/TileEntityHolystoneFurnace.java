@@ -10,20 +10,23 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerFurnace;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.SlotFurnaceFuel;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
-public class TileEntityHolystoneFurnace extends TileEntityFurnace
+public class TileEntityHolystoneFurnace extends TileEntityLockable implements ITickable, ISidedInventory
 {
 	private static final int[] SLOTS_TOP = new int[] { 0 };
 
@@ -113,7 +116,6 @@ public class TileEntityHolystoneFurnace extends TileEntityFurnace
 		return this.furnaceCustomName != null && !this.furnaceCustomName.isEmpty();
 	}
 
-	@Override
 	public void setCustomInventoryName(String p_145951_1_)
 	{
 		this.furnaceCustomName = p_145951_1_;
@@ -164,7 +166,6 @@ public class TileEntityHolystoneFurnace extends TileEntityFurnace
 		return 64;
 	}
 
-	@Override
 	public boolean isBurning()
 	{
 		return this.furnaceBurnTime > 0;
@@ -250,7 +251,6 @@ public class TileEntityHolystoneFurnace extends TileEntityFurnace
 		}
 	}
 
-	@Override
 	public int getCookTime(ItemStack stack)
 	{
 		return 200;
@@ -291,7 +291,6 @@ public class TileEntityHolystoneFurnace extends TileEntityFurnace
 		}
 	}
 
-	@Override
 	public void smeltItem()
 	{
 		if (this.canSmelt())
