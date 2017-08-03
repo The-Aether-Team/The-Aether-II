@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.items.consumables;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import com.gildedgames.aether.common.items.misc.ItemAetherFood;
 import net.minecraft.block.Block;
@@ -23,12 +24,12 @@ import java.util.HashMap;
 
 public class ItemSwetJelly extends ItemAetherFood
 {
-	private static final HashMap<Block, IBlockState> growables = new HashMap<>();
+	private static final HashMap<IBlockState, IBlockState> growables = new HashMap<>();
 
 	static
 	{
-		ItemSwetJelly.growables.put(Blocks.DIRT, Blocks.GRASS.getDefaultState());
-		ItemSwetJelly.growables.put(BlocksAether.aether_dirt, BlocksAether.aether_grass.getDefaultState());
+		ItemSwetJelly.growables.put(Blocks.DIRT.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.DIRT), Blocks.GRASS.getDefaultState());
+		ItemSwetJelly.growables.put(BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.DIRT), BlocksAether.aether_grass.getDefaultState());
 	}
 
 	public ItemSwetJelly()
@@ -54,9 +55,9 @@ public class ItemSwetJelly extends ItemAetherFood
 	{
 		IBlockState state = world.getBlockState(pos);
 
-		if (ItemSwetJelly.growables.containsKey(state.getBlock()))
+		if (ItemSwetJelly.growables.containsKey(state))
 		{
-			IBlockState nState = ItemSwetJelly.growables.get(state.getBlock());
+			IBlockState nState = ItemSwetJelly.growables.get(state);
 
 			int radius = 1;
 
@@ -66,7 +67,7 @@ public class ItemSwetJelly extends ItemAetherFood
 				{
 					BlockPos nPos = new BlockPos(x, pos.getY(), z);
 
-					if (world.getBlockState(nPos).getBlock() == state.getBlock() && !world.getBlockState(nPos.up()).isNormalCube())
+					if (world.getBlockState(nPos) == state && !world.getBlockState(nPos.up()).isNormalCube())
 					{
 						world.setBlockState(nPos, nState);
 					}
