@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import com.gildedgames.aether.common.items.misc.ItemAetherFood;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDirt;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,7 +29,7 @@ public class ItemSwetJelly extends ItemAetherFood
 
 	static
 	{
-		ItemSwetJelly.growables.put(Blocks.DIRT.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.DIRT), Blocks.GRASS.getDefaultState());
+		ItemSwetJelly.growables.put(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT), Blocks.GRASS.getDefaultState());
 		ItemSwetJelly.growables.put(BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.DIRT), BlocksAether.aether_grass.getDefaultState());
 	}
 
