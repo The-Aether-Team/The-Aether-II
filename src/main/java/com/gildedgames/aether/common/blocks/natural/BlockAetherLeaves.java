@@ -3,6 +3,8 @@ package com.gildedgames.aether.common.blocks.natural;
 import com.gildedgames.aether.client.renderer.particles.ParticleGolden;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -24,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BlockAetherLeaves extends Block implements IShearable
+public class BlockAetherLeaves extends BlockLeaves implements IShearable
 {
 
 	public static final PropertyBool PROPERTY_DECAYABLE = PropertyBool.create("decayable");
@@ -37,7 +39,6 @@ public class BlockAetherLeaves extends Block implements IShearable
 
 	public BlockAetherLeaves(int saplingMeta)
 	{
-		super(Material.LEAVES);
 
 		this.saplingMeta = saplingMeta;
 
@@ -71,6 +72,11 @@ public class BlockAetherLeaves extends Block implements IShearable
 	public boolean causesSuffocation(IBlockState state)
 	{
 		return false;
+	}
+
+	@Override public BlockPlanks.EnumType getWoodType(int meta)
+	{
+		return null;
 	}
 
 	@Override
