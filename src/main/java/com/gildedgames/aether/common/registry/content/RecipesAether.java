@@ -627,13 +627,13 @@ public class RecipesAether
 
 		// Cocoatrice
 		registerShapedRecipe(new ItemStack(ItemsAether.cocoatrice), "XY", "Z ",
-				'X', new ItemStack(Items.SUGAR),
+				'X', "sugar",
 				'Y', new ItemStack(Items.DYE, 1, 3),
 				'Z', new ItemStack(ItemsAether.skyroot_milk_bucket));
 
 		// Wrapped Chocolate
 		registerShapedRecipe(new ItemStack(ItemsAether.wrapped_chocolates), "WX", "YZ",
-				'W', new ItemStack(Items.SUGAR),
+				'W', "sugar",
 				'X', new ItemStack(Items.DYE, 1, 3),
 				'Y', new ItemStack(ItemsAether.skyroot_milk_bucket),
 				'Z', new ItemStack(ItemsAether.aechor_petal));
@@ -642,7 +642,7 @@ public class RecipesAether
 		registerShapedRecipe(new ItemStack(ItemsAether.jelly_pumpkin), "XY", "Z ",
 				'X', ItemsAether.swet_jelly,
 				'Y', new ItemStack(ItemsAether.orange),
-				'Z', new ItemStack(Items.SUGAR));
+				'Z', "sugar");
 
 		// Stomper Pop
 		registerShapedRecipe(new ItemStack(ItemsAether.stomper_pop), " X", " Z",
@@ -655,19 +655,19 @@ public class RecipesAether
 
 		// Blueberry Lollipop
 		registerShapedRecipe(new ItemStack(ItemsAether.blueberry_lollipop), "XY", "Z ",
-				'X', new ItemStack(Items.SUGAR),
+				'X', "sugar",
 				'Y', new ItemStack(ItemsAether.blueberries),
 				'Z', new ItemStack(ItemsAether.skyroot_stick));
 
 		// Orange Lollipop
 		registerShapedRecipe(new ItemStack(ItemsAether.orange_lollipop), "XY", "Z ",
-				'X', new ItemStack(Items.SUGAR),
+				'X', "sugar",
 				'Y', new ItemStack(ItemsAether.orange),
 				'Z', new ItemStack(ItemsAether.skyroot_stick));
 
 		// Icestone Poprocks
 		registerShapelessRecipe(new ItemStack(ItemsAether.icestone_poprocks, 1),
-				new ItemStack(Items.SUGAR), new ItemStack(ItemsAether.icestone));
+				"sugar", new ItemStack(ItemsAether.icestone));
 	}
 
 	private static void registerAltarRecipes()
