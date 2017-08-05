@@ -317,7 +317,7 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 		}
 		else
 		{
-			if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_MID && source.getBlockState(pos.up()).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_TOP_G)
+			if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_MID)
 			{
 				return BRETTL_MID_AAB;
 			}
