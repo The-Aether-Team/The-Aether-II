@@ -23,7 +23,9 @@ public class CoolerRecipes
 
 	private CoolerRecipes()
 	{
-		this.addCoolingFromItem(ItemsAether.irradiated_armor, new ItemStack(ItemsAether.arkenium_helmet), new ItemStack(ItemsAether.arkenium_chestplate),
+		this.addCoolingFromItem(ItemsAether.irradiated_armor,
+				new ItemStack(ItemsAether.arkenium_helmet),
+				new ItemStack(ItemsAether.arkenium_chestplate),
 				new ItemStack(ItemsAether.arkenium_leggings),
 				new ItemStack(ItemsAether.arkenium_boots),
 				new ItemStack(ItemsAether.gravitite_helmet),
@@ -38,13 +40,15 @@ public class CoolerRecipes
 				new ItemStack(ItemsAether.zanite_boots),
 				new ItemStack(ItemsAether.zanite_gloves));
 
-		this.addCoolingFromItem(ItemsAether.irradiated_sword, new ItemStack(ItemsAether.arkenium_sword),
+		this.addCoolingFromItem(ItemsAether.irradiated_sword,
+				new ItemStack(ItemsAether.arkenium_sword),
 				new ItemStack(ItemsAether.gravitite_sword),
 				new ItemStack(ItemsAether.holystone_sword),
 				new ItemStack(ItemsAether.zanite_sword),
 				new ItemStack(ItemsAether.skyroot_sword));
 
-		this.addCoolingFromItem(ItemsAether.irradiated_tool, new ItemStack(ItemsAether.arkenium_axe),
+		this.addCoolingFromItem(ItemsAether.irradiated_tool,
+				new ItemStack(ItemsAether.arkenium_axe),
 				new ItemStack(ItemsAether.arkenium_pickaxe),
 				new ItemStack(ItemsAether.arkenium_shovel),
 				new ItemStack(ItemsAether.zanite_axe),

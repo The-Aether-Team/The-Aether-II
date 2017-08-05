@@ -385,35 +385,35 @@ public class RecipesAether
 
 		// Crossbow Bolts
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.SKYROOT.ordinal()), "  Z", " X ", "Y  ",
+        registerShapedRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.SKYROOT.ordinal()), "  Z", " X ", "Y  ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(BlocksAether.skyroot_planks),
-				'Z', "feather"));
+				'Z', "feather");
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.HOLYSTONE.ordinal()), "  Z", " X ", "Y  ",
+        registerShapedRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.HOLYSTONE.ordinal()), "  Z", " X ", "Y  ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(BlocksAether.holystone),
-				'Z', "feather"));
+				'Z', "feather");
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.SCATTERGLASS.ordinal()), "  Z", " X ", "Y  ",
+        registerShapedRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.SCATTERGLASS.ordinal()), "  Z", " X ", "Y  ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(BlocksAether.scatterglass),
-				'Z', "feather"));
+				'Z', "feather");
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.ZANITE.ordinal()), "  Z", " X ", "Y  ",
+        registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.ZANITE.ordinal()), "  Z", " X ", "Y  ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(ItemsAether.zanite_gemstone),
-				'Z', "feather"));
+				'Z', "feather");
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.ARKENIUM.ordinal()), "  Z", " X ", "Y  ",
+        registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.ARKENIUM.ordinal()), "  Z", " X ", "Y  ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(ItemsAether.arkenium_strip),
-				'Z', "feather"));
+				'Z', "feather");
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemsAether.bolt, 16, ItemBoltType.GRAVITITE.ordinal()), "  Z", " X ", "Y  ",
+        registerShapedRecipe(new ItemStack(ItemsAether.bolt, 16, ItemBoltType.GRAVITITE.ordinal()), "  Z", " X ", "Y  ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(ItemsAether.gravitite_plate),
-				'Z', "feather"));
+				'Z', "feather");
 
 		// Shields
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_shield), "YXY", "YYY", " Y ",

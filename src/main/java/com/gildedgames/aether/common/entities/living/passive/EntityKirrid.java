@@ -81,23 +81,23 @@ public class EntityKirrid extends EntitySheep
 		return livingdata;
 	}
 
-	@Override
+	/*@Override
 	protected float getSoundPitch()
 	{
 		return (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 0.55F;
-	}
+	}*/
 
-	protected SoundEvent getAmbientSound() {
-		return SoundsAether.kirrid_ambient;
-	}
+    protected float getSoundPitch()
+    {
+        return this.isChild() ? (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1F : (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 0.55F;
+    }
 
-	protected SoundEvent getHurtSound() {
-		return SoundsAether.kirrid_hurt;
-	}
+	protected SoundEvent getAmbientSound() {return SoundsAether.kirrid_ambient;}
 
-	protected SoundEvent getDeathSound() {
-		return SoundsAether.kirrid_death;
-	}
+	protected SoundEvent getHurtSound() {return SoundsAether.kirrid_hurt;}
+
+	protected SoundEvent getDeathSound() {return SoundsAether.kirrid_death;}
+
 	@Override
 	public EntityKirrid createChild(EntityAgeable ageable)
 	{
