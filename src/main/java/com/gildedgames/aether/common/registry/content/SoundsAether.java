@@ -70,6 +70,12 @@ public class SoundsAether
 
 	public static final SoundEvent generic_wing_flap = new SoundEvent(AetherCore.getResource("mob.generic.wings.flap"));
 
+    public static final SoundEvent kirrid_ambient = new SoundEvent(AetherCore.getResource("mob.kirrid.ambient"));
+
+    public static final SoundEvent kirrid_hurt = new SoundEvent(AetherCore.getResource("mob.kirrid.hurt"));
+
+    public static final SoundEvent kirrid_death = new SoundEvent(AetherCore.getResource("mob.kirrid.death"));
+
 	public static final SoundEvent taegore_ambient = new SoundEvent(AetherCore.getResource("mob.taegore.ambient"));
 
 	public static final SoundEvent taegore_hurt = new SoundEvent(AetherCore.getResource("mob.taegore.hurt"));
@@ -132,6 +138,10 @@ public class SoundsAether
 		registerSound("random.dungeon.container.smash", break_labyrinth_container);
 
 		registerSound("mob.generic.wings.flap", generic_wing_flap);
+
+        registerSound("mob.kirrid.ambient", kirrid_ambient);
+        registerSound("mob.kirrid.hurt", kirrid_hurt);
+        registerSound("mob.kirrid.death", kirrid_death);
 
 		registerSound("mob.taegore.ambient", taegore_ambient);
 		registerSound("mob.taegore.hurt", taegore_hurt);

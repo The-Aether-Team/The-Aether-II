@@ -289,6 +289,33 @@
 		],
 		"subtitle": "subtitles.aether.mob.moa.hurt"
 	},
+	"mob.kirrid.ambient": {
+		"category": "neutral",
+		"sounds": [
+			"mob/sheep/say1",
+			"mob/sheep/say2",
+			"mob/sheep/say3"
+		],
+		"subtitle": "subtitles.aether.mob.kirrid.ambient"
+	},
+	"mob.kirrid.hurt": {
+		"category": "neutral",
+		"sounds": [
+			"mob/sheep/say1",
+			"mob/sheep/say2",
+			"mob/sheep/say3"
+		],
+		"subtitle": "subtitles.aether.mob.kirrid.hurt"
+	},
+	"mob.kirrid.death": {
+		"category": "neutral",
+		"sounds": [
+			"mob/sheep/say1",
+			"mob/sheep/say2",
+			"mob/sheep/say3"
+		],
+		"subtitle": "subtitles.aether.mob.kirrid.death"
+	},
 	"mob.taegore.ambient": {
 		"category": "neutral",
 		"sounds": [
