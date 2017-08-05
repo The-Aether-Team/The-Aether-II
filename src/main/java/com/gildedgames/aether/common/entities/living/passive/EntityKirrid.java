@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.kirrid.EntityAIEatAetherGrass;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
@@ -16,6 +17,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IBlockAccess;
@@ -85,6 +87,17 @@ public class EntityKirrid extends EntitySheep
 		return (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 0.55F;
 	}
 
+	protected SoundEvent getAmbientSound() {
+		return SoundsAether.kirrid_ambient;
+	}
+
+	protected SoundEvent getHurtSound() {
+		return SoundsAether.kirrid_hurt;
+	}
+
+	protected SoundEvent getDeathSound() {
+		return SoundsAether.kirrid_death;
+	}
 	@Override
 	public EntityKirrid createChild(EntityAgeable ageable)
 	{
