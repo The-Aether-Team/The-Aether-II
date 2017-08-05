@@ -445,10 +445,10 @@ public class RecipesAether
 				'U', new ItemStack(BlocksAether.holystone, 1, BlockHolystone.MOSSY_HOLYSTONE.getMeta()));
 
 		registerShapedRecipe(new ItemStack(BlocksAether.icestone_brick_stairs, 4), "U  ", "UU ", "UUU",
-				'U', ItemsAether.icestone);
+				'U', new ItemStack(BlocksAether.icestone_bricks));
 
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_stairs, 4), "U  ", "UU ", "UUU",
-				'U', BlocksAether.skyroot_planks);
+				'U', new ItemStack(BlocksAether.skyroot_planks));
 
 		registerShapedRecipe(new ItemStack(BlocksAether.holystone_brick_stairs, 4), "U  ", "UU ", "UUU",
 				'U', new ItemStack(BlocksAether.holystone_brick));
