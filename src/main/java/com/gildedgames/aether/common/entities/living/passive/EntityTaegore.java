@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.google.common.collect.Sets;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,11 +15,13 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -101,6 +104,11 @@ public class EntityTaegore extends EntityAetherAnimal
 		return SoundsAether.taegore_death;
 	}
 
+	@Override
+	protected void playStepSound(final BlockPos pos, final Block blockIn)
+	{
+		this.playSound(SoundEvents.ENTITY_PIG_STEP, 0.15F, 1.0F);
+	}
 	@Override
 	protected ResourceLocation getLootTable()
 	{
