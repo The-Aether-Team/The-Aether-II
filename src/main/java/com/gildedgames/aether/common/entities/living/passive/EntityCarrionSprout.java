@@ -39,6 +39,12 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	}
 
 	@Override
+	public boolean canBeLeashedTo(EntityPlayer player)
+	{
+		return false;
+	}
+	
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
