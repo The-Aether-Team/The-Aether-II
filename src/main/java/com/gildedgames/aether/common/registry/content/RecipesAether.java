@@ -142,10 +142,7 @@ public class RecipesAether
 
         registerShapelessRecipe(new ItemStack(ItemsAether.skyroot_stick, 4),
                 new ItemStack(BlocksAether.woven_sticks, 1, BlockWovenSticks.SKYROOT.getMeta()));
-
-        /*registerShapedRecipe(new ItemStack(ItemsAether.skyroot_stick, 4), "XX ",
-                'X', new ItemStack(BlocksAether.woven_sticks, 1, BlockWovenSticks.SKYROOT.getMeta()));*/
-
+        
 		// Woven Skyroot Sticks
 		registerShapedRecipe(new ItemStack(BlocksAether.woven_sticks, 2, BlockWovenSticks.SKYROOT.getMeta()), "XX", "XX",
 				'X', new ItemStack(ItemsAether.skyroot_stick));
