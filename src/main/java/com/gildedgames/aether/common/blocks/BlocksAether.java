@@ -154,6 +154,11 @@ public class BlocksAether
 
 	public static final BlockIcestoneBricks icestone_bricks = new BlockIcestoneBricks();
 
+	public static final BlockIcestoneBricksDecorative icestone_bricks_decorative = new BlockIcestoneBricksDecorative();
+
+	public static final Block icestone_pillar = new BlockParentPillar(Material.ROCK, icestone_bricks)
+			.setSoundType(SoundType.GLASS).setHardness(2.0f);
+
 	public static final BlockSkyrootFence skyroot_fence = new BlockSkyrootFence();
 
 	public static final BlockSkyrootFenceGate skyroot_fence_gate = new BlockSkyrootFenceGate();
@@ -357,6 +362,9 @@ public class BlocksAether
 		registerBlock("arkenium_door", arkenium_door);
 
 		registerBlock("icestone_bricks", icestone_bricks.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		registerBlock("icestone_bricks_decorative", icestone_bricks_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+
+		registerBlock("icestone_pillar", icestone_pillar.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
 		registerBlock("skyroot_fence", skyroot_fence.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 

@@ -104,6 +104,16 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.icestone_ore, "icestone_ore");
 		registerItemModels(BlocksAether.icestone_bricks, "icestone_bricks");
 
+		registerItemModels(BlocksAether.icestone_bricks_decorative, new ItemModelBuilder("icestone_bricks/")
+				.add(BlockIcestoneBricksDecorative.BASE_BRICKS.getMeta(), "base_bricks")
+				.add(BlockIcestoneBricksDecorative.BASE_PILLAR.getMeta(), "base_pillar")
+				.add(BlockIcestoneBricksDecorative.CAPSTONE_BRICKS.getMeta(), "capstone_bricks")
+				.add(BlockIcestoneBricksDecorative.CAPSTONE_PILLAR.getMeta(), "capstone_pillar")
+				.add(BlockIcestoneBricksDecorative.FLAGSTONES.getMeta(), "flagstones")
+				.add(BlockIcestoneBricksDecorative.KEYSTONE.getMeta(), "keystone"));
+
+		registerItemModels(BlocksAether.icestone_pillar, "icestone_bricks/pillar");
+
 		registerItemModels(BlocksAether.quicksoil_glass, "quicksoil_glass/normal");
 		registerItemModels(BlocksAether.quicksoil_glass_decorative, new ItemModelBuilder("quicksoil_glass/")
 				.add(BlockRockGlassDecorative.SKYROOT_FRAME.getMeta(), "skyroot_frame")

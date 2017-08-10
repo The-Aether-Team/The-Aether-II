@@ -1,0 +1,14 @@
+{
+	"variants": {
+		"axis=y": {
+			"model": "aether:icestone_bricks/pillar"
+		},
+		"axis=z": {
+			"model": "aether:icestone_bricks/pillar_side"
+		},
+		"axis=x": {
+			"model": "aether:icestone_bricks/pillar_side",
+			"y": 90
+		}
+	}
+}
