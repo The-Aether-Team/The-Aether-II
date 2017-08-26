@@ -238,7 +238,7 @@ public class PlayerAetherHooks
 
 						aePlayer.setHasDiedInAetherBefore(true);
 
-						NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(), mp);
+						//NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(aePlayer.hasDiedInAetherBefore()), mp);
 					}
 				}
 				else
