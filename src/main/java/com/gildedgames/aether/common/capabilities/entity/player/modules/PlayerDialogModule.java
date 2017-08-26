@@ -86,7 +86,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	{
 		this.sceneInstance = new SceneInstance(this, scene);
 
-		NetworkingAether.sendPacketToPlayer(new PacketOpenDialog(res), (EntityPlayerMP) this.getPlayer().getEntity());
+		//NetworkingAether.sendPacketToPlayer(new PacketOpenDialog(res), (EntityPlayerMP) this.getPlayer().getEntity());
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	@SideOnly(Side.CLIENT)
 	private void closeSceneClient()
 	{
-		NetworkingAether.sendPacketToServer(new PacketCloseDialog());
+		//NetworkingAether.sendPacketToServer(new PacketCloseDialog());
 	}
 
 	@Override
