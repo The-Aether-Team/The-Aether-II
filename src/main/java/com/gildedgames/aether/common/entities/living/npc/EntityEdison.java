@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.entities.living.npc;
 
 import com.gildedgames.aether.api.player.IPlayerAether;
+import com.gildedgames.aether.api.util.NBTHelper;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.aether.common.util.helpers.NBTHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +16,7 @@ public class EntityEdison extends EntityNPC
 {
 	private BlockPos spawned;
 
-	public EntityEdison(World worldIn)
+	public EntityEdison(final World worldIn)
 	{
 		super(worldIn);
 	}
@@ -41,7 +41,7 @@ public class EntityEdison extends EntityNPC
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound compound)
+	public void writeEntityToNBT(final NBTTagCompound compound)
 	{
 		super.writeEntityToNBT(compound);
 
@@ -49,7 +49,7 @@ public class EntityEdison extends EntityNPC
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound compound)
+	public void readEntityFromNBT(final NBTTagCompound compound)
 	{
 		super.readEntityFromNBT(compound);
 
@@ -87,13 +87,13 @@ public class EntityEdison extends EntityNPC
 	}
 
 	@Override
-	public boolean processInteract(EntityPlayer player, EnumHand hand)
+	public boolean processInteract(final EntityPlayer player, final EnumHand hand)
 	{
 		if (!super.processInteract(player, hand))
 		{
 			if (!player.world.isRemote)
 			{
-				IPlayerAether aePlayer = PlayerAether.getPlayer(player);
+				final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 				aePlayer.getDialogController().openScene(AetherCore.getResource("edison/outpost_greet"));
 			}
 		}

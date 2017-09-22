@@ -1,22 +1,28 @@
 package com.gildedgames.aether.common.world.templates.conditions;
 
-import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenTemplate;
+import com.gildedgames.aether.api.util.TemplateUtil;
+import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
+import com.gildedgames.aether.api.world.generation.PlacementCondition;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.Template;
 
 import java.util.List;
 
-public class UndergroundPlacementCondition implements WorldGenTemplate.PlacementCondition
+public class UndergroundPlacementCondition implements PlacementCondition
 {
 
 	@Override
-	public boolean canPlace(Template template, World world, BlockPos placedAt, Template.BlockInfo block)
+	public boolean canPlace(final Template template, final IBlockAccessExtended world, final BlockPos placedAt, final Template.BlockInfo block)
 	{
 		if (block.blockState.getBlock() != Blocks.STRUCTURE_VOID)
 		{
-			if ((!WorldGenTemplate.isReplaceable(world, block.pos) && !world.getBlockState(block.pos).getMaterial().isSolid()
+			if (!world.canAccess(block.pos))
+			{
+				return false;
+			}
+
+			if ((!TemplateUtil.isReplaceable(world, block.pos) && !world.getBlockState(block.pos).getMaterial().isSolid()
 					&& block.blockState.getBlock() != Blocks.AIR) || (block.blockState.getBlock() != Blocks.AIR
 					&& world.getBlockState(block.pos)
 					== Blocks.AIR.getDefaultState()))// || !state.isSideSolid(world, itPos, EnumFacing.UP))
@@ -29,7 +35,7 @@ public class UndergroundPlacementCondition implements WorldGenTemplate.Placement
 	}
 
 	@Override
-	public boolean canPlaceCheckAll(Template template, World world, BlockPos placedAt, List<Template.BlockInfo> blocks)
+	public boolean canPlaceCheckAll(final Template template, final IBlockAccessExtended world, final BlockPos placedAt, final List<Template.BlockInfo> blocks)
 	{
 		return true;
 	}

@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.entities.util;
 
+import com.gildedgames.aether.api.util.NBTHelper;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
-import com.gildedgames.aether.common.util.helpers.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -24,18 +24,18 @@ public class MoaNest
 
 	protected EntityGroup pack;
 
-	public MoaNest(World world)
+	public MoaNest(final World world)
 	{
 		this.world = world;
 		this.pack = new EntityGroup();
 	}
 
-	public MoaNest(World world, BlockPos pos)
+	public MoaNest(final World world, final BlockPos pos)
 	{
 		this(world, pos, GeneUtil.getRandomSeed(world));
 	}
 
-	public MoaNest(World world, BlockPos pos, int familyGeneticSeed)
+	public MoaNest(final World world, final BlockPos pos, final int familyGeneticSeed)
 	{
 		this(world);
 
@@ -46,10 +46,10 @@ public class MoaNest
 		this.familyGeneticSeed = familyGeneticSeed;
 	}
 
-	public boolean isReplaceable(World world, BlockPos pos)
+	public boolean isReplaceable(final World world, final BlockPos pos)
 	{
-		IBlockState state = world.getBlockState(pos);
-		Block block = state.getBlock();
+		final IBlockState state = world.getBlockState(pos);
+		final Block block = state.getBlock();
 
 		return world.isAirBlock(pos) ||
 				block.isLeaves(state, world, pos) ||
@@ -60,17 +60,17 @@ public class MoaNest
 				state.getMaterial() == Material.VINE;
 	}
 
-	public void spawnMoaFamily(World world, int initialSize, int optimalSize)
+	public void spawnMoaFamily(final World world, final int initialSize, final int optimalSize)
 	{
 		this.pack = new EntityGroup(EntityGroup.getNextID());
 		this.pack.setOptimalSize(optimalSize);
 
 		for (int amount = 0; amount < initialSize; amount++)
 		{
-			EntityMoa moa = new EntityMoa(world, this);
+			final EntityMoa moa = new EntityMoa(world, this);
 
-			int modifier = world.rand.nextBoolean() ? 1 : -1;
-			int scatterValue = (world.rand.nextInt(2) * modifier);
+			final int modifier = world.rand.nextBoolean() ? 1 : -1;
+			final int scatterValue = (world.rand.nextInt(2) * modifier);
 
 			moa.setPosition(this.pos.getX() + scatterValue, this.pos.getY() + 1, this.pos.getZ() + scatterValue);
 
@@ -95,7 +95,7 @@ public class MoaNest
 		return this.pack;
 	}
 
-	public void writeToNBT(NBTTagCompound nbt)
+	public void writeToNBT(final NBTTagCompound nbt)
 	{
 		nbt.setTag("pos", NBTHelper.writeBlockPos(this.pos));
 
@@ -106,7 +106,7 @@ public class MoaNest
 		this.pack.writeToNBT(nbt);
 	}
 
-	public void readFromNBT(NBTTagCompound nbt)
+	public void readFromNBT(final NBTTagCompound nbt)
 	{
 		this.pos = NBTHelper.readBlockPos(nbt.getCompoundTag("pos"));
 

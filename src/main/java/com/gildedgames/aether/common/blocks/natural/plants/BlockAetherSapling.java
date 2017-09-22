@@ -1,10 +1,12 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
+import com.gildedgames.aether.api.world.generation.TemplateDefinition;
+import com.gildedgames.aether.api.world.generation.TemplateLoc;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
-import com.gildedgames.aether.common.registry.GenerationAether;
-import com.gildedgames.aether.common.world.gen.IWorldGen;
+import com.gildedgames.aether.common.registry.content.GenerationAether;
+import com.gildedgames.aether.common.world.templates.TemplatePlacer;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -52,23 +54,23 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(final IBlockState state, final IBlockAccess source, final BlockPos pos)
 	{
 		return SAPLING_AABB;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(final Item item, final CreativeTabs tab, final NonNullList<ItemStack> list)
 	{
-		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
+		for (final BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
 			list.add(new ItemStack(item, 1, variant.getMeta()));
 		}
 	}
 
 	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(final World worldIn, final BlockPos pos, final IBlockState state, final Random rand)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -81,36 +83,36 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 		}
 	}
 
-	public void generateTree(World world, BlockPos pos, IBlockState state, Random random)
+	public void generateTree(final World world, final BlockPos pos, final IBlockState state, final Random random)
 	{
 		if (TerrainGen.saplingGrowTree(world, random, pos))
 		{
-			int meta = state.getValue(PROPERTY_VARIANT).getMeta();
+			final int meta = state.getValue(PROPERTY_VARIANT).getMeta();
 
-			IWorldGen tree = null;
+			TemplateDefinition tree = null;
 
 			if (meta == BLUE_SKYROOT.getMeta())
 			{
-				tree = GenerationAether.blue_skyroot_tree;
+				tree = GenerationAether.blue_skyroot_tree.getRandomDefinition(random);
 			}
 			else if (meta == GREEN_SKYROOT.getMeta())
 			{
-				tree = GenerationAether.green_skyroot_tree;
+				tree = GenerationAether.green_skyroot_tree.getRandomDefinition(random);
 			}
 			else if (meta == GOLDEN_OAK.getMeta())
 			{
-				tree = GenerationAether.golden_oak;
+				tree = GenerationAether.golden_oak.getRandomDefinition(random);
 			}
 			else if (meta == DARK_BLUE_SKYROOT.getMeta())
 			{
-				tree = GenerationAether.dark_blue_skyroot_oak;
+				tree = GenerationAether.dark_blue_skyroot_oak.getRandomDefinition(random);
 			}
 
 			if (tree != null)
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
 
-				if (!tree.generate(world, random, pos, true))
+				if (!TemplatePlacer.place(world, tree, new TemplateLoc().set(pos).set(true), random))
 				{
 					world.setBlockState(pos, state, 4);
 				}
@@ -119,20 +121,20 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	}
 
 	@Override
-	public int damageDropped(IBlockState state)
+	public int damageDropped(final IBlockState state)
 	{
 		return state.getValue(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
+	public IBlockState getStateFromMeta(final int meta)
 	{
 		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta & 7)).withProperty(PROPERTY_STAGE,
 				(meta & 8) >> 3);
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public int getMetaFromState(final IBlockState state)
 	{
 		return state.getValue(PROPERTY_VARIANT).getMeta() | (state.getValue(PROPERTY_STAGE) << 3);
 	}
@@ -144,19 +146,19 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	}
 
 	@Override
-	public boolean canGrow(World world, BlockPos pos, IBlockState state, boolean isClient)
+	public boolean canGrow(final World world, final BlockPos pos, final IBlockState state, final boolean isClient)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean canUseBonemeal(World world, Random rand, BlockPos pos, IBlockState state)
+	public boolean canUseBonemeal(final World world, final Random rand, final BlockPos pos, final IBlockState state)
 	{
 		return world.rand.nextFloat() < 0.45f;
 	}
 
 	@Override
-	public void grow(World world, Random rand, BlockPos pos, IBlockState state)
+	public void grow(final World world, final Random rand, final BlockPos pos, final IBlockState state)
 	{
 		if (state.getValue(PROPERTY_STAGE) == 0)
 		{
@@ -175,7 +177,7 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack)
+	public String getUnlocalizedName(final ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}

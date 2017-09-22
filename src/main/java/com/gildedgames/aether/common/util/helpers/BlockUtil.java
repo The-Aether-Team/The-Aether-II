@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.util.helpers;
 
+import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -9,6 +10,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -16,9 +18,9 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 public class BlockUtil
 {
 	@Deprecated
-	public static boolean setTileEntityNBT(World worldIn, BlockPos pos, ItemStack stack)
+	public static boolean setTileEntityNBT(final IBlockAccessExtended worldIn, final BlockPos pos, final ItemStack stack)
 	{
-		MinecraftServer minecraftserver = FMLCommonHandler.instance().getMinecraftServerInstance();
+		final MinecraftServer minecraftserver = FMLCommonHandler.instance().getMinecraftServerInstance();
 
 		if (minecraftserver == null)
 		{
@@ -28,20 +30,20 @@ public class BlockUtil
 		{
 			if (stack.hasTagCompound() && stack.getTagCompound().hasKey("BlockEntityTag", 10))
 			{
-				TileEntity tileentity = worldIn.getTileEntity(pos);
+				final TileEntity tileentity = worldIn.getTileEntity(pos);
 
 				if (tileentity != null)
 				{
 					// TODO: fix?
-					if (!worldIn.isRemote /*&& tileentity.func_183000_F()*/)
+					/*if (!worldIn.isRemote *//*&& tileentity.func_183000_F()*//*)
 					{
 						return false;
-					}
+					}*/
 
-					NBTTagCompound nbttagcompound = new NBTTagCompound();
-					NBTTagCompound nbttagcompound1 = nbttagcompound.copy();
+					final NBTTagCompound nbttagcompound = new NBTTagCompound();
+					final NBTTagCompound nbttagcompound1 = nbttagcompound.copy();
 					tileentity.writeToNBT(nbttagcompound);
-					NBTTagCompound nbttagcompound2 = (NBTTagCompound) stack.getTagCompound().getTag("BlockEntityTag");
+					final NBTTagCompound nbttagcompound2 = (NBTTagCompound) stack.getTagCompound().getTag("BlockEntityTag");
 					nbttagcompound.merge(nbttagcompound2);
 					nbttagcompound.setInteger("x", pos.getX());
 					nbttagcompound.setInteger("y", pos.getY());
@@ -60,18 +62,18 @@ public class BlockUtil
 		}
 	}
 
-	public static boolean isAir(IBlockState state)
+	public static boolean isAir(final IBlockState state)
 	{
 		return state.getBlock().getMaterial(state) == Material.AIR;
 	}
 
-	public static boolean isSolid(IBlockState state, World world, BlockPos pos)
+	public static boolean isSolid(final IBlockState state, final IBlockAccess world, final BlockPos pos)
 	{
 		return !isAir(state) && state.getBlock().isBlockSolid(world, pos, EnumFacing.DOWN)
 				&& state.getBlock().getMaterial(state).isOpaque();
 	}
 
-	public static boolean isSolid(IBlockState state)
+	public static boolean isSolid(final IBlockState state)
 	{
 		return !isAir(state) && state.getMaterial().isSolid() && state.getBlock().isOpaqueCube(state);
 	}

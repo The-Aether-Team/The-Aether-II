@@ -4,9 +4,9 @@ import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.entity.spawning.EntitySpawn;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.util.NBT;
+import com.gildedgames.aether.api.util.NBTHelper;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.util.helpers.NBTHelper;
-import com.gildedgames.aether.common.world.util.ChunkMap;
+import com.gildedgames.aether.common.util.ChunkMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import net.minecraft.entity.Entity;
@@ -29,8 +29,6 @@ public class SpawnHandler implements NBT
 {
 	private final String uniqueID;
 
-	private int targetEntityCountPerArea, chunkArea = 1, updateFrequencyInTicks = 20;
-
 	private final List<WorldCondition> worldConditions = Lists.newArrayList();
 
 	private final List<PosCondition> posConditions = Lists.newArrayList();
@@ -39,9 +37,23 @@ public class SpawnHandler implements NBT
 
 	private final Map<Integer, ChunkMap<SpawnArea>> activeAreas = Maps.newHashMap();
 
-	public SpawnHandler(String uniqueID)
+	private int targetEntityCountPerArea, chunkArea = 1, updateFrequencyInTicks = 20;
+
+	public SpawnHandler(final String uniqueID)
 	{
 		this.uniqueID = uniqueID;
+	}
+
+	private static String createAreaID(final int dim, final int areaX, final int areaZ)
+	{
+		return dim + "_" + areaX + "_" + areaZ;
+	}
+
+	public static boolean isNotColliding(final World world, final Entity entity)
+	{
+		return !world.containsAnyLiquid(entity.getEntityBoundingBox())
+				&& world.getCollisionBoxes(entity, entity.getEntityBoundingBox()).isEmpty()
+				&& world.checkNoEntityCollision(entity.getEntityBoundingBox(), entity);
 	}
 
 	public String getUniqueID()
@@ -49,54 +61,54 @@ public class SpawnHandler implements NBT
 		return this.uniqueID;
 	}
 
-	public SpawnHandler targetEntityCountPerArea(int targetEntityCountPerArea)
+	public SpawnHandler targetEntityCountPerArea(final int targetEntityCountPerArea)
 	{
 		this.targetEntityCountPerArea = targetEntityCountPerArea;
 
 		return this;
 	}
 
-	public SpawnHandler chunkArea(int chunkArea)
+	public SpawnHandler chunkArea(final int chunkArea)
 	{
 		this.chunkArea = chunkArea;
 
 		return this;
 	}
 
-	public SpawnHandler updateFrequencyInTicks(int updateFrequencyInTicks)
+	public SpawnHandler updateFrequencyInTicks(final int updateFrequencyInTicks)
 	{
 		this.updateFrequencyInTicks = updateFrequencyInTicks;
 
 		return this;
 	}
 
-	public <T extends WorldCondition> SpawnHandler worldCondition(T condition)
+	public <T extends WorldCondition> SpawnHandler worldCondition(final T condition)
 	{
 		this.worldConditions.add(condition);
 
 		return this;
 	}
 
-	public <T extends PosCondition> SpawnHandler condition(T condition)
+	public <T extends PosCondition> SpawnHandler condition(final T condition)
 	{
 		this.posConditions.add(condition);
 
 		return this;
 	}
 
-	public void addEntry(SpawnEntry entry)
+	public void addEntry(final SpawnEntry entry)
 	{
 		this.entries.add(entry);
 	}
 
-	public void tick(World world, List<EntityPlayer> players)
+	public void tick(final World world, final List<EntityPlayer> players)
 	{
 		if (world.getWorldTime() % this.updateFrequencyInTicks != 0)
 		{
 			return;
 		}
 
-		for (WorldCondition condition : this.worldConditions)
+		for (final WorldCondition condition : this.worldConditions)
 		{
 			if (!condition.isMet(world))
 			{
@@ -109,7 +121,7 @@ public class SpawnHandler implements NBT
 			this.activeAreas.put(world.provider.getDimension(), new ChunkMap<>());
 		}
 
-		ChunkMap<SpawnArea> areas = this.activeAreas.get(world.provider.getDimension());
+		final ChunkMap<SpawnArea> areas = this.activeAreas.get(world.provider.getDimension());
 
 		this.createMissingAreasAndRemoveInactiveAreas(world.provider.getDimension(), areas, players);
 
@@ -123,16 +135,16 @@ public class SpawnHandler implements NBT
 		}
 	}
 
-	public boolean isAreaLoaded(int dim, int areaX, int areaZ)
+	public boolean isAreaLoaded(final int dim, final int areaX, final int areaZ)
 	{
-		ChunkMap<SpawnArea> areas = this.activeAreas.get(dim);
+		final ChunkMap<SpawnArea> areas = this.activeAreas.get(dim);
 
 		return areas != null && areas.containsKey(areaX, areaZ);
 	}
 
-	public SpawnArea getAreaReadOnly(int dim, int areaX, int areaZ)
+	public SpawnArea getAreaReadOnly(final int dim, final int areaX, final int areaZ)
 	{
-		ChunkMap<SpawnArea> areas = this.activeAreas.get(dim);
+		final ChunkMap<SpawnArea> areas = this.activeAreas.get(dim);
 
 		if (areas != null && areas.containsKey(areaX, areaZ))
 		{
@@ -144,17 +156,12 @@ public class SpawnHandler implements NBT
 		}
 	}
 
-	private static String createAreaID(int dim, int areaX, int areaZ)
+	public void saveArea(final int dim, final SpawnArea area)
 	{
-		return dim + "_" + areaX + "_" + areaZ;
-	}
+		final String areaID = SpawnHandler.createAreaID(dim, area.getAreaX(), area.getAreaZ());
 
-	public void saveArea(int dim, SpawnArea area)
-	{
-		String areaID = SpawnHandler.createAreaID(dim, area.getAreaX(), area.getAreaZ());
-
-		File areaFile = new File(AetherCore.getWorldDirectory(), "//data/spawn_areas/" + this.uniqueID + "/" + areaID + ".dat");
-		NBTTagCompound tag = new NBTTagCompound();
+		final File areaFile = new File(AetherCore.getWorldDirectory(), "//data/spawn_areas/" + this.uniqueID + "/" + areaID + ".dat");
+		final NBTTagCompound tag = new NBTTagCompound();
 
 		tag.setInteger("areaX", area.getAreaX());
 		tag.setInteger("areaZ", area.getAreaZ());
@@ -163,17 +170,17 @@ public class SpawnHandler implements NBT
 		NBTHelper.writeNBTToFile(tag, areaFile);
 	}
 
-	private SpawnArea loadArea(int dim, int areaX, int areaZ)
+	private SpawnArea loadArea(final int dim, final int areaX, final int areaZ)
 	{
-		String areaID = SpawnHandler.createAreaID(dim, areaX, areaZ);
+		final String areaID = SpawnHandler.createAreaID(dim, areaX, areaZ);
 
-		File areaFile = new File(AetherCore.getWorldDirectory(), "//data/spawn_areas/" + this.uniqueID + "/" + areaID + ".dat");
+		final File areaFile = new File(AetherCore.getWorldDirectory(), "//data/spawn_areas/" + this.uniqueID + "/" + areaID + ".dat");
 
 		if (areaFile.exists())
 		{
-			NBTTagCompound tag = NBTHelper.readNBTFromFile(areaFile);
+			final NBTTagCompound tag = NBTHelper.readNBTFromFile(areaFile);
 
-			SpawnArea area = new SpawnArea(this.chunkArea, tag.getInteger("areaX"), tag.getInteger("areaZ"));
+			final SpawnArea area = new SpawnArea(this.chunkArea, tag.getInteger("areaX"), tag.getInteger("areaZ"));
 
 			area.setEntityCount(tag.getInteger("entityCount"));
 
@@ -181,7 +188,7 @@ public class SpawnHandler implements NBT
 		}
 		else
 		{
-			SpawnArea area = new SpawnArea(this.chunkArea, areaX, areaZ);
+			final SpawnArea area = new SpawnArea(this.chunkArea, areaX, areaZ);
 
 			this.saveArea(dim, area);
 
@@ -189,9 +196,9 @@ public class SpawnHandler implements NBT
 		}
 	}
 
-	private void createMissingAreasAndRemoveInactiveAreas(int dimension, ChunkMap<SpawnArea> areas, List<EntityPlayer> players)
+	private void createMissingAreasAndRemoveInactiveAreas(final int dimension, final ChunkMap<SpawnArea> areas, final List<EntityPlayer> players)
 	{
-		for (SpawnArea area : areas.getValues())
+		for (final SpawnArea area : areas.getValues())
 		{
 			if (area != null)
 			{
@@ -199,13 +206,13 @@ public class SpawnHandler implements NBT
 			}
 		}
 
-		for (EntityPlayer player : players)
+		for (final EntityPlayer player : players)
 		{
 			final int chunkX = MathHelper.floor(player.posX) >> 4;
 			final int chunkZ = MathHelper.floor(player.posZ) >> 4;
 
-			int centerAreaX = chunkX / this.chunkArea;
-			int centerAreaZ = chunkZ / this.chunkArea;
+			final int centerAreaX = chunkX / this.chunkArea;
+			final int centerAreaZ = chunkZ / this.chunkArea;
 
 			for (int areaX = centerAreaX - 1; areaX <= centerAreaX + 1; areaX++)
 			{
@@ -213,7 +220,7 @@ public class SpawnHandler implements NBT
 				{
 					if (!areas.containsKey(areaX, areaZ))
 					{
-						SpawnArea area = this.loadArea(dimension, areaX, areaZ);
+						final SpawnArea area = this.loadArea(dimension, areaX, areaZ);
 
 						area.setInPlayersRenderDistance(true);
 
@@ -227,9 +234,9 @@ public class SpawnHandler implements NBT
 			}
 		}
 
-		List<SpawnArea> areasToRemove = Lists.newArrayList();
+		final List<SpawnArea> areasToRemove = Lists.newArrayList();
 
-		for (SpawnArea area : areas.getValues())
+		for (final SpawnArea area : areas.getValues())
 		{
 			if (area != null && !area.hasPlayerInside())
 			{
@@ -237,7 +244,7 @@ public class SpawnHandler implements NBT
 			}
 		}
 
-		for (SpawnArea area : areasToRemove)
+		for (final SpawnArea area : areasToRemove)
 		{
 			this.saveArea(dimension, area);
 
@@ -250,9 +257,9 @@ public class SpawnHandler implements NBT
 		int maxRoll = 0;
 		int roll;
 
-		List<SpawnEntry> table = Lists.newArrayList();
+		final List<SpawnEntry> table = Lists.newArrayList();
 
-		for (SpawnEntry entry : this.entries)
+		for (final SpawnEntry entry : this.entries)
 		{
 			table.add(entry);
 
@@ -266,7 +273,7 @@ public class SpawnHandler implements NBT
 
 		roll = (int) (Math.random() * maxRoll);
 
-		for (SpawnEntry entry : table)
+		for (final SpawnEntry entry : table)
 		{
 			// return element if roll < weight
 			if (roll < entry.getRarityWeight())
@@ -281,38 +288,38 @@ public class SpawnHandler implements NBT
 		return null;
 	}
 
-	private void checkAndSpawnEntries(World world, ChunkMap<SpawnArea> areas)
+	private void checkAndSpawnEntries(final World world, final ChunkMap<SpawnArea> areas)
 			throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException
 	{
-		int areaInBlocks = this.chunkArea * 16;
+		final int areaInBlocks = this.chunkArea * 16;
 
-		for (SpawnArea area : areas.getValues())
+		for (final SpawnArea area : areas.getValues())
 		{
 			while (area.getEntityCount() < this.targetEntityCountPerArea)
 			{
-				SpawnEntry entry = this.getWeightedEntry();
+				final SpawnEntry entry = this.getWeightedEntry();
 
 				if (entry == null)
 				{
 					break;
 				}
 
-				int dif = entry.getMaxGroupSize() - entry.getMinGroupSize();
+				final int dif = entry.getMaxGroupSize() - entry.getMinGroupSize();
 
-				int randSize = dif > 0 ? world.rand.nextInt(dif) : 0;
+				final int randSize = dif > 0 ? world.rand.nextInt(dif) : 0;
 
-				int groupSize = entry.getMinGroupSize() + randSize;
+				final int groupSize = entry.getMinGroupSize() + randSize;
 
 				if (area.getEntityCount() + groupSize > this.targetEntityCountPerArea)
 				{
 					break;
 				}
 
-				int minX = (area.getMinChunkPos().chunkXPos) * 16;
-				int minZ = (area.getMinChunkPos().chunkZPos) * 16;
+				final int minX = (area.getMinChunkPos().chunkXPos) * 16;
+				final int minZ = (area.getMinChunkPos().chunkZPos) * 16;
 
-				int groupPosX = minX + world.rand.nextInt(areaInBlocks);
-				int groupPosZ = minZ + world.rand.nextInt(areaInBlocks);
+				final int groupPosX = minX + world.rand.nextInt(areaInBlocks);
+				final int groupPosZ = minZ + world.rand.nextInt(areaInBlocks);
 
 				int attempts = 0;
 
@@ -321,17 +328,17 @@ public class SpawnHandler implements NBT
 				inner:
 				for (int count = 0; count < groupSize; count++)
 				{
-					int scatterX =
+					final int scatterX =
 							(world.rand.nextBoolean() ? 1 : -1) * (1 + world.rand.nextInt(entry.getPositionSelector().getScatter(world)));
-					int scatterZ =
+					final int scatterZ =
 							(world.rand.nextBoolean() ? 1 : -1) * (1 + world.rand.nextInt(entry.getPositionSelector().getScatter(world)));
 
-					float posX = groupPosX + scatterX;
-					float posZ = groupPosZ + scatterZ;
+					final float posX = groupPosX + scatterX;
+					final float posZ = groupPosZ + scatterZ;
 
-					int posY = entry.getPositionSelector().getPosY(world, MathHelper.floor(posX), MathHelper.floor(posZ));
+					final int posY = entry.getPositionSelector().getPosY(world, MathHelper.floor(posX), MathHelper.floor(posZ));
 
-					BlockPos spawnAt = new BlockPos(posX, posY, posZ);
+					final BlockPos spawnAt = new BlockPos(posX, posY, posZ);
 
 					if (!world.isBlockLoaded(spawnAt, true))
 					{
@@ -355,7 +362,7 @@ public class SpawnHandler implements NBT
 						continue;
 					}
 
-					for (PosCondition condition : this.posConditions)
+					for (final PosCondition condition : this.posConditions)
 					{
 						if (!condition.isMet(world, spawnAt, spawnAt.down()))
 						{
@@ -369,7 +376,7 @@ public class SpawnHandler implements NBT
 						}
 					}
 
-					for (PosCondition condition : entry.getConditions())
+					for (final PosCondition condition : entry.getConditions())
 					{
 						if (!condition.isMet(world, spawnAt, spawnAt.down()))
 						{
@@ -383,7 +390,7 @@ public class SpawnHandler implements NBT
 						}
 					}
 
-					Constructor<?> cons = entry.getEntityClass().getConstructor(World.class);
+					final Constructor<?> cons = entry.getEntityClass().getConstructor(World.class);
 					final Entity entity = (Entity) cons.newInstance(world);
 
 					entity.setLocationAndAngles(posX + 0.5F, posY, posZ + 0.5F, world.rand.nextFloat() * 360.0F, 0.0F);
@@ -392,7 +399,7 @@ public class SpawnHandler implements NBT
 
 					if (world instanceof WorldServer)
 					{
-						WorldServer worldServer = (WorldServer) world;
+						final WorldServer worldServer = (WorldServer) world;
 
 						worldServer.updateEntityWithOptionalForce(entity, true);
 					}
@@ -401,7 +408,7 @@ public class SpawnHandler implements NBT
 					{
 						if (entity instanceof EntityLiving)
 						{
-							EntityLiving living = (EntityLiving) entity;
+							final EntityLiving living = (EntityLiving) entity;
 
 							if (!ForgeEventFactory.doSpecialSpawn(living, world, posX, posY, posZ))
 							{
@@ -409,7 +416,7 @@ public class SpawnHandler implements NBT
 							}
 						}
 
-						ISpawningInfo spawningInfo = entity.getCapability(AetherCapabilities.ENTITY_SPAWNING_INFO, null);
+						final ISpawningInfo spawningInfo = entity.getCapability(AetherCapabilities.ENTITY_SPAWNING_INFO, null);
 
 						spawningInfo.setSpawnArea(new EntitySpawn(this.uniqueID, world.provider.getDimension(), area.getAreaX(), area.getAreaZ()));
 
@@ -435,31 +442,24 @@ public class SpawnHandler implements NBT
 		}
 	}
 
-	public static boolean isNotColliding(World world, Entity entity)
-	{
-		return !world.containsAnyLiquid(entity.getEntityBoundingBox())
-				&& world.getCollisionBoxes(entity, entity.getEntityBoundingBox()).isEmpty()
-				&& world.checkNoEntityCollision(entity.getEntityBoundingBox(), entity);
-	}
-
 	@Override
-	public void write(NBTTagCompound output)
+	public void write(final NBTTagCompound output)
 	{
 		output.setInteger("dimensionCount", this.activeAreas.size());
 
 		int index = 0;
 
-		for (Map.Entry<Integer, ChunkMap<SpawnArea>> set : this.activeAreas.entrySet())
+		for (final Map.Entry<Integer, ChunkMap<SpawnArea>> set : this.activeAreas.entrySet())
 		{
-			int dimension = set.getKey();
-			ChunkMap<SpawnArea> chunkMap = set.getValue();
+			final int dimension = set.getKey();
+			final ChunkMap<SpawnArea> chunkMap = set.getValue();
 
 			output.setInteger("dimension" + index, dimension);
 			output.setInteger("areaCount" + index, chunkMap.size());
 
 			int areaIndex = 0;
 
-			for (SpawnArea area : chunkMap.getValues())
+			for (final SpawnArea area : chunkMap.getValues())
 			{
 				output.setInteger("map" + index + "_areaX" + areaIndex, area.getAreaX());
 				output.setInteger("map" + index + "_areaZ" + areaIndex, area.getAreaZ());
@@ -474,27 +474,27 @@ public class SpawnHandler implements NBT
 	}
 
 	@Override
-	public void read(NBTTagCompound input)
+	public void read(final NBTTagCompound input)
 	{
 		this.activeAreas.clear();
 
-		int dimensionCount = input.getInteger("dimensionCount");
+		final int dimensionCount = input.getInteger("dimensionCount");
 
 		for (int index = 0; index < dimensionCount; index++)
 		{
-			int dimension = input.getInteger("dimension" + index);
-			int areaCount = input.getInteger("areaCount" + index);
+			final int dimension = input.getInteger("dimension" + index);
+			final int areaCount = input.getInteger("areaCount" + index);
 
-			ChunkMap<SpawnArea> chunkMap = new ChunkMap<>();
+			final ChunkMap<SpawnArea> chunkMap = new ChunkMap<>();
 
 			for (int areaIndex = 0; areaIndex < areaCount; areaIndex++)
 			{
-				int areaX = input.getInteger("map" + index + "_areaX" + areaIndex);
-				int areaZ = input.getInteger("map" + index + "_areaZ" + areaIndex);
+				final int areaX = input.getInteger("map" + index + "_areaX" + areaIndex);
+				final int areaZ = input.getInteger("map" + index + "_areaZ" + areaIndex);
 
-				int entityCount = input.getInteger("map" + index + "_entityCount" + areaIndex);
+				final int entityCount = input.getInteger("map" + index + "_entityCount" + areaIndex);
 
-				SpawnArea area = new SpawnArea(this.chunkArea, areaX, areaZ);
+				final SpawnArea area = new SpawnArea(this.chunkArea, areaX, areaZ);
 
 				area.setEntityCount(entityCount);
 

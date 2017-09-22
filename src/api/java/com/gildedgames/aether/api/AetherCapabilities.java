@@ -2,8 +2,9 @@ package com.gildedgames.aether.api;
 
 import com.gildedgames.aether.api.chunk.IChunkAttachment;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
-import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
+import com.gildedgames.aether.api.player.IPlayerAether;
+import com.gildedgames.aether.api.world.ISectorAccess;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 
@@ -20,4 +21,7 @@ public class AetherCapabilities
 
 	@CapabilityInject(IChunkAttachment.class)
 	public static final Capability<IChunkAttachment> CHUNK_ATTACHMENTS = null;
+
+	@CapabilityInject(ISectorAccess.class)
+	public static final Capability<ISectorAccess> SECTOR_ACCESS = null;
 }

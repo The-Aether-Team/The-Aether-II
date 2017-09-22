@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.registry.content;
 
+import com.gildedgames.aether.api.util.NBTHelper;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.util.helpers.NBTHelper;
-import com.gildedgames.aether.common.world.dimensions.aether.TeleporterAether;
-import com.gildedgames.aether.common.world.dimensions.aether.WorldProviderAether;
+import com.gildedgames.aether.common.world.aether.TeleporterAether;
+import com.gildedgames.aether.common.world.aether.WorldProviderAether;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldServer;
@@ -30,7 +30,7 @@ public class DimensionsAether
 	}
 
 	@SubscribeEvent
-	public static void onWorldLoaded(WorldEvent.Load event)
+	public static void onWorldLoaded(final WorldEvent.Load event)
 	{
 		if (!(event.getWorld() instanceof WorldServer))
 		{
@@ -43,9 +43,9 @@ public class DimensionsAether
 		}
 	}
 
-	public static void onServerStopping(FMLServerStoppingEvent event)
+	public static void onServerStopping(final FMLServerStoppingEvent event)
 	{
-		NBTTagCompound tag = new NBTTagCompound();
+		final NBTTagCompound tag = new NBTTagCompound();
 
 		AetherCore.TELEPORTER.write(tag);
 

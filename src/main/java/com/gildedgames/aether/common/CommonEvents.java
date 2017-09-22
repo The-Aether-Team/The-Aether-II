@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
@@ -14,7 +14,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherShield;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
-import com.gildedgames.aether.common.world.dimensions.aether.TeleporterAether;
+import com.gildedgames.aether.common.world.aether.TeleporterAether;
 import com.gildedgames.aether.common.world.util.TeleporterGeneric;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
@@ -61,11 +61,11 @@ import java.util.List;
 public class CommonEvents
 {
 	@SubscribeEvent
-	public static void onBlockPlaced(BlockEvent.PlaceEvent event)
+	public static void onBlockPlaced(final BlockEvent.PlaceEvent event)
 	{
-		List<EntityLiving> entities = event.getWorld().getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(event.getPos()));
+		final List<EntityLiving> entities = event.getWorld().getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(event.getPos()));
 
-		for (EntityLiving entity : entities)
+		for (final EntityLiving entity : entities)
 		{
 			if (entity instanceof EntityAechorPlant || entity instanceof EntityCarrionSprout)
 			{
@@ -77,13 +77,13 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public static void onWorldLoaded(WorldEvent.Load event)
+	public static void onWorldLoaded(final WorldEvent.Load event)
 	{
 		if (event.getWorld() instanceof WorldServer)
 		{
 			if (event.getWorld().provider.getDimensionType() == DimensionsAether.AETHER)
 			{
-				WorldServer world = (WorldServer) event.getWorld();
+				final WorldServer world = (WorldServer) event.getWorld();
 
 				AetherCore.TELEPORTER = new TeleporterAether(world);
 			}
@@ -91,19 +91,19 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public static void onPlayerSleepInBed(PlayerWakeUpEvent event)
+	public static void onPlayerSleepInBed(final PlayerWakeUpEvent event)
 	{
-		World world = event.getEntityPlayer().world;
+		final World world = event.getEntityPlayer().world;
 
 		if (!world.isRemote && world.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
-			MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+			final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 
-			WorldServer worldServer = server.worldServerForDimension(0);
+			final WorldServer worldServer = server.worldServerForDimension(0);
 
 			if (world.getGameRules().getBoolean("doDaylightCycle") && event.getEntityPlayer().isPlayerFullyAsleep())
 			{
-				long i = worldServer.getWorldInfo().getWorldTime() + 24000L;
+				final long i = worldServer.getWorldInfo().getWorldTime() + 24000L;
 
 				worldServer.getWorldInfo().setWorldTime(i - i % 24000L);
 			}
@@ -111,13 +111,13 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public static void onFluidEvent(FluidEvent.FluidDrainingEvent event)
+	public static void onFluidEvent(final FluidEvent.FluidDrainingEvent event)
 	{
 
 	}
 
 	@SubscribeEvent
-	public static void onPlayerUseBucket(FillBucketEvent event)
+	public static void onPlayerUseBucket(final FillBucketEvent event)
 	{
 		if (event.getTarget() != null && event.getTarget().typeOfHit == RayTraceResult.Type.BLOCK)
 		{
@@ -132,7 +132,7 @@ public class CommonEvents
 
 			final BlockPos pos = event.getTarget().getBlockPos().offset(event.getTarget().sideHit);
 
-			boolean hasWaterFluid = fluidStack != null && fluidStack.getFluid().getName().equals(FluidRegistry.WATER.getName());
+			final boolean hasWaterFluid = fluidStack != null && fluidStack.getFluid().getName().equals(FluidRegistry.WATER.getName());
 
 			if (hasWaterFluid || event.getEmptyBucket().getItem() == Items.WATER_BUCKET
 					|| event.getEmptyBucket().getItem() == ItemsAether.skyroot_water_bucket)
@@ -142,7 +142,7 @@ public class CommonEvents
 		}
 	}
 
-	private static boolean tryToCreatePortal(World world, BlockPos target, BlockPos pos)
+	private static boolean tryToCreatePortal(final World world, final BlockPos target, final BlockPos pos)
 	{
 		if (world.getBlockState(target).getBlock() == Blocks.GLOWSTONE)
 		{
@@ -171,7 +171,7 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public static void onLivingEntityUpdate(LivingEvent.LivingUpdateEvent event)
+	public static void onLivingEntityUpdate(final LivingEvent.LivingUpdateEvent event)
 	{
 		final Entity entity = event.getEntity();
 
@@ -204,8 +204,8 @@ public class CommonEvents
 			{
 				if (entity instanceof EntityPlayer)
 				{
-					EntityPlayer player = (EntityPlayer) entity;
-					PlayerAether playerAether = PlayerAether.getPlayer(player);
+					final EntityPlayer player = (EntityPlayer) entity;
+					final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 					if (playerAether.getParachuteModule().isParachuting())
 					{
@@ -230,28 +230,28 @@ public class CommonEvents
 		}
 	}
 
-	private static void onFallenFromAether(Entity entity)
+	private static void onFallenFromAether(final Entity entity)
 	{
-		MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+		final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 
-		WorldServer toWorld = DimensionManager.getWorld(0);
+		final WorldServer toWorld = DimensionManager.getWorld(0);
 
-		Teleporter teleporter = new TeleporterGeneric(toWorld);
+		final Teleporter teleporter = new TeleporterGeneric(toWorld);
 
 		// TODO: Recrusive teleporting, newsystem in 1.9/1.10
-		Entity mount = entity.getRidingEntity();
+		final Entity mount = entity.getRidingEntity();
 
-		boolean hasPassengers = !entity.getPassengers().isEmpty();
+		final boolean hasPassengers = !entity.getPassengers().isEmpty();
 
-		List<Entity> teleportedPassengers = Lists.newLinkedList();
+		final List<Entity> teleportedPassengers = Lists.newLinkedList();
 
-		Entity teleportedEntity;
+		final Entity teleportedEntity;
 
-		BlockPos teleportPos = new BlockPos(entity.posX, 200 + entity.posY, entity.posZ);
+		final BlockPos teleportPos = new BlockPos(entity.posX, 200 + entity.posY, entity.posZ);
 
 		if (hasPassengers)
 		{
-			for (Entity passenger : entity.getPassengers())
+			for (final Entity passenger : entity.getPassengers())
 			{
 				passenger.dismountRidingEntity();
 
@@ -270,7 +270,7 @@ public class CommonEvents
 
 			teleportedEntity = CommonEvents.teleportEntity(entity, toWorld, teleporter, 0);
 
-			Entity teleportedMount = CommonEvents.teleportEntity(mount, toWorld, teleporter, 0);
+			final Entity teleportedMount = CommonEvents.teleportEntity(mount, toWorld, teleporter, 0);
 
 			teleportedEntity.setPositionAndUpdate(teleportPos.getX(), teleportPos.getY(), teleportPos.getZ());
 			teleportedMount.setPositionAndUpdate(teleportPos.getX(), teleportPos.getY(), teleportPos.getZ());
@@ -287,7 +287,7 @@ public class CommonEvents
 
 		if (hasPassengers)
 		{
-			for (Entity passenger : teleportedPassengers)
+			for (final Entity passenger : teleportedPassengers)
 			{
 				passenger.startRiding(teleportedEntity, true);
 			}
@@ -300,7 +300,7 @@ public class CommonEvents
 	 *
 	 * @return A newsystem entity if {@param entity} wasn't a player, or the same entity if it was a player
 	 */
-	public static Entity teleportEntity(Entity entity, WorldServer toWorld, Teleporter teleporter, int dimension)
+	public static Entity teleportEntity(final Entity entity, final WorldServer toWorld, final Teleporter teleporter, final int dimension)
 	{
 		if (entity == null)
 		{
@@ -315,7 +315,7 @@ public class CommonEvents
 
 			if (!toWorld.isRemote)
 			{
-				EntityPlayerMP player = (EntityPlayerMP) entity;
+				final EntityPlayerMP player = (EntityPlayerMP) entity;
 
 				playerList.transferPlayerToDimension((EntityPlayerMP) entity, dimension, teleporter);
 				player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, 0, 0);
@@ -328,7 +328,7 @@ public class CommonEvents
 		}
 		else
 		{
-			Entity newEntity = entity.changeDimension(dimension);
+			final Entity newEntity = entity.changeDimension(dimension);
 
 			// Forces the entity to be sent to clients as early as possible
 			newEntity.forceSpawn = true;
@@ -339,16 +339,16 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public static void onPlayerRightClickItem(PlayerInteractEvent.RightClickItem event)
+	public static void onPlayerRightClickItem(final PlayerInteractEvent.RightClickItem event)
 	{
-		IPlayerAether aePlayer = PlayerAether.getPlayer(event.getEntityPlayer());
+		final IPlayerAether aePlayer = PlayerAether.getPlayer(event.getEntityPlayer());
 
 		if (event.getItemStack().isEmpty() || aePlayer == null)
 		{
 			return;
 		}
 
-		boolean result = CommonEvents.tryEquipEquipment(aePlayer, event.getItemStack(), event.getHand());
+		final boolean result = CommonEvents.tryEquipEquipment(aePlayer, event.getItemStack(), event.getHand());
 
 		if (result)
 		{
@@ -358,24 +358,26 @@ public class CommonEvents
 				Minecraft.getMinecraft().getItemRenderer().resetEquippedProgress(EnumHand.MAIN_HAND);
 			}
 
-			event.getEntityPlayer().world.playSound(event.getEntityPlayer(), event.getEntityPlayer().getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+			event.getEntityPlayer().world
+					.playSound(event.getEntityPlayer(), event.getEntityPlayer().getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.NEUTRAL,
+							1.0f, 1.0f);
 			event.setCanceled(true);
 		}
 	}
 
-	private static boolean tryEquipEquipment(IPlayerAether player, ItemStack stack, EnumHand hand)
+	private static boolean tryEquipEquipment(final IPlayerAether player, final ItemStack stack, final EnumHand hand)
 	{
-		IInventoryEquipment inventory = player.getEquipmentModule().getInventory();
+		final IInventoryEquipment inventory = player.getEquipmentModule().getInventory();
 
-		IItemProperties equipment = AetherAPI.content().items().getProperties(stack.getItem());
+		final IItemProperties equipment = AetherAPI.content().items().getProperties(stack.getItem());
 
 		if (equipment.getEquipmentSlot() != ItemEquipmentSlot.NONE)
 		{
-			int slot = inventory.getNextEmptySlotForType(equipment.getEquipmentSlot());
+			final int slot = inventory.getNextEmptySlotForType(equipment.getEquipmentSlot());
 
 			if (slot >= 0)
 			{
-				ItemStack newStack = stack.copy();
+				final ItemStack newStack = stack.copy();
 				newStack.setCount(1);
 
 				inventory.setInventorySlotContents(slot, newStack);
@@ -396,7 +398,7 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public static void onPlayerInteract(PlayerInteractEvent.EntityInteract event)
+	public static void onPlayerInteract(final PlayerInteractEvent.EntityInteract event)
 	{
 		if (event.getTarget() instanceof EntityCow && !((EntityCow) event.getTarget()).isChild())
 		{
@@ -409,7 +411,7 @@ public class CommonEvents
 		}
 	}
 
-	private static void onWaterPlaced(FillBucketEvent event, EntityPlayer player, BlockPos pos)
+	private static void onWaterPlaced(final FillBucketEvent event, final EntityPlayer player, final BlockPos pos)
 	{
 		if (event.getWorld().getBlockState(event.getTarget().getBlockPos()).getBlock() == Blocks.GLOWSTONE)
 		{
@@ -417,12 +419,12 @@ public class CommonEvents
 			{
 				if (!event.getEntityPlayer().capabilities.isCreativeMode)
 				{
-					IFluidHandler fluidHandler = FluidUtil.getFluidHandler(event.getEmptyBucket());
+					final IFluidHandler fluidHandler = FluidUtil.getFluidHandler(event.getEmptyBucket());
 					ItemStack stack = ItemStack.EMPTY;
 
 					if (fluidHandler != null)
 					{
-						FluidActionResult result = FluidUtil.tryEmptyContainer(event.getEmptyBucket(), fluidHandler, Integer.MAX_VALUE, player, true);
+						final FluidActionResult result = FluidUtil.tryEmptyContainer(event.getEmptyBucket(), fluidHandler, Integer.MAX_VALUE, player, true);
 
 						stack = result.getResult();
 					}
@@ -446,39 +448,39 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public static void onEntityAttacked(LivingAttackEvent event)
+	public static void onEntityAttacked(final LivingAttackEvent event)
 	{
 		if (!(event.getEntityLiving() instanceof EntityPlayer))
 		{
 			return;
 		}
 
-		EntityPlayer player = (EntityPlayer) event.getEntityLiving();
+		final EntityPlayer player = (EntityPlayer) event.getEntityLiving();
 
 		if (!event.getSource().isUnblockable() && player.isActiveItemStackBlocking())
 		{
-			Vec3d vec3d = event.getSource().getDamageLocation();
+			final Vec3d vec3d = event.getSource().getDamageLocation();
 
 			if (vec3d != null)
 			{
-				Vec3d look = player.getLook(1.0F);
+				final Vec3d look = player.getLook(1.0F);
 
 				Vec3d reverse = vec3d.subtractReverse(new Vec3d(player.posX, player.posY, player.posZ)).normalize();
 				reverse = new Vec3d(reverse.xCoord, 0.0D, reverse.zCoord);
 
 				if (reverse.dotProduct(look) < 0.0D)
 				{
-					float damage = event.getAmount();
+					final float damage = event.getAmount();
 
 					if (damage >= 3.0F && player.getActiveItemStack().getItem() instanceof ItemAetherShield)
 					{
-						int itemDamage = 1 + MathHelper.floor(damage);
+						final int itemDamage = 1 + MathHelper.floor(damage);
 
 						player.getActiveItemStack().damageItem(itemDamage, player);
 
 						if (player.getActiveItemStack().getCount() <= 0)
 						{
-							EnumHand hand = player.getActiveHand();
+							final EnumHand hand = player.getActiveHand();
 
 							ForgeEventFactory.onPlayerDestroyItem(player, player.getActiveItemStack(), hand);
 
@@ -502,7 +504,7 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public static void onEntityMounted(EntityMountEvent event)
+	public static void onEntityMounted(final EntityMountEvent event)
 	{
 		if (event.getEntityMounting() instanceof EntityNPC)
 		{

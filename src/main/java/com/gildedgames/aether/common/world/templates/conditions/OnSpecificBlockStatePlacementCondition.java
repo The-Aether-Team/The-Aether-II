@@ -1,35 +1,40 @@
 package com.gildedgames.aether.common.world.templates.conditions;
 
-import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenTemplate;
+import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
+import com.gildedgames.aether.api.world.generation.PlacementCondition;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.Template;
 
 import java.util.List;
 
-public class OnSpecificBlockStatePlacementCondition implements WorldGenTemplate.PlacementCondition
+public class OnSpecificBlockStatePlacementCondition implements PlacementCondition
 {
 
-	private IBlockState[] states;
+	private final IBlockState[] states;
 
-	public OnSpecificBlockStatePlacementCondition(IBlockState... states)
+	public OnSpecificBlockStatePlacementCondition(final IBlockState... states)
 	{
 		this.states = states;
 	}
 
 	@Override
-	public boolean canPlace(Template template, World world, BlockPos placedAt, Template.BlockInfo block)
+	public boolean canPlace(final Template template, final IBlockAccessExtended world, final BlockPos placedAt, final Template.BlockInfo block)
 	{
 		if (block.pos.getY() == placedAt.getY() && block.blockState.getBlock() != Blocks.AIR
 				&& block.blockState.getBlock() != Blocks.STRUCTURE_VOID)
 		{
-			BlockPos down = block.pos.down();
+			final BlockPos down = block.pos.down();
 
-			IBlockState state = world.getBlockState(down);
+			if (!world.canAccess(down))
+			{
+				return false;
+			}
 
-			for (IBlockState s : this.states)
+			final IBlockState state = world.getBlockState(down);
+
+			for (final IBlockState s : this.states)
 			{
 				if (s == state)
 				{
@@ -44,7 +49,7 @@ public class OnSpecificBlockStatePlacementCondition implements WorldGenTemplate.
 	}
 
 	@Override
-	public boolean canPlaceCheckAll(Template template, World world, BlockPos placedAt, List<Template.BlockInfo> blocks)
+	public boolean canPlaceCheckAll(final Template template, final IBlockAccessExtended world, final BlockPos placedAt, final List<Template.BlockInfo> blocks)
 	{
 		return true;
 	}

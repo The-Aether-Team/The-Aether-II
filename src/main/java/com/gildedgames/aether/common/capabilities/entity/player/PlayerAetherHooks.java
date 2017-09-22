@@ -3,28 +3,12 @@ package com.gildedgames.aether.common.capabilities.entity.player;
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.common.CommonEvents;
+import com.gildedgames.aether.common.capabilities.world.chunk.ChunkAttachment;
 import com.gildedgames.aether.common.entities.util.shared.SharedAetherAttributes;
-import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
-import com.gildedgames.aether.common.registry.content.DimensionsAether;
-import com.gildedgames.aether.common.util.helpers.BlockUtil;
-import com.gildedgames.aether.common.world.chunk.capabilities.ChunkAttachment;
-import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandData;
-import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSectorAccess;
-import com.gildedgames.aether.common.world.util.TeleporterGeneric;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTBase;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.world.Teleporter;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -38,14 +22,12 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensio
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 
-import java.util.List;
-
 public class PlayerAetherHooks
 {
 	@SubscribeEvent
-	public static void onPlayerJoined(PlayerLoggedInEvent event)
+	public static void onPlayerJoined(final PlayerLoggedInEvent event)
 	{
-		PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
+		final PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
 
 		if (aePlayer != null)
 		{
@@ -54,9 +36,9 @@ public class PlayerAetherHooks
 	}
 
 	@SubscribeEvent
-	public static void onDeath(LivingDeathEvent event)
+	public static void onDeath(final LivingDeathEvent event)
 	{
-		PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
+		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
 
 		if (aePlayer != null)
 		{
@@ -65,9 +47,9 @@ public class PlayerAetherHooks
 	}
 
 	@SubscribeEvent
-	public static void onDrops(PlayerDropsEvent event)
+	public static void onDrops(final PlayerDropsEvent event)
 	{
-		PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
+		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
 
 		if (aePlayer != null)
 		{
@@ -76,9 +58,9 @@ public class PlayerAetherHooks
 	}
 
 	@SubscribeEvent
-	public static void onUpdate(LivingUpdateEvent event)
+	public static void onUpdate(final LivingUpdateEvent event)
 	{
-		PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
+		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
 
 		if (aePlayer != null)
 		{
@@ -87,9 +69,9 @@ public class PlayerAetherHooks
 	}
 
 	@SubscribeEvent
-	public static void onFall(LivingFallEvent event)
+	public static void onFall(final LivingFallEvent event)
 	{
-		PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
+		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
 
 		if (aePlayer != null)
 		{
@@ -98,9 +80,9 @@ public class PlayerAetherHooks
 	}
 
 	@SubscribeEvent
-	public static void onCalculateBreakSpeed(PlayerEvent.BreakSpeed event)
+	public static void onCalculateBreakSpeed(final PlayerEvent.BreakSpeed event)
 	{
-		PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
+		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
 
 		if (aePlayer != null)
 		{
@@ -109,9 +91,9 @@ public class PlayerAetherHooks
 	}
 
 	@SubscribeEvent
-	public static void onLivingEntityHurt(LivingHurtEvent event)
+	public static void onLivingEntityHurt(final LivingHurtEvent event)
 	{
-		PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
+		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
 
 		if (aePlayer != null)
 		{
@@ -119,18 +101,17 @@ public class PlayerAetherHooks
 		}
 
 		// TODO: remove this dumb debug effect
-		EntityLivingBase entity = event.getEntityLiving();
+		final EntityLivingBase entity = event.getEntityLiving();
 
-
-		IAttributeInstance attribute = entity.getEntityAttribute(SharedAetherAttributes.STAT_VOLATILE);
+		final IAttributeInstance attribute = entity.getEntityAttribute(SharedAetherAttributes.STAT_VOLATILE);
 
 		if (attribute == null)
 		{
 			return;
 		}
 
-		double attempt = Math.random();
-		double threshold = attribute.getAttributeValue();
+		final double attempt = Math.random();
+		final double threshold = attribute.getAttributeValue();
 
 		if (attempt <= threshold)
 		{
@@ -140,16 +121,17 @@ public class PlayerAetherHooks
 	}
 
 	@SubscribeEvent
-	public static void onPlaceBlockEvent(BlockEvent.PlaceEvent event)
+	public static void onPlaceBlockEvent(final BlockEvent.PlaceEvent event)
 	{
-		IPlacementFlagCapability data = ChunkAttachment.get(event.getWorld()).getAttachment(new ChunkPos(event.getPos()), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
+		final IPlacementFlagCapability data = ChunkAttachment.get(event.getWorld())
+				.getAttachment(new ChunkPos(event.getPos()), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
 
 		if (data != null)
 		{
 			data.markModified(event.getPos());
 		}
 
-		PlayerAether aePlayer = PlayerAether.getPlayer(event.getPlayer());
+		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getPlayer());
 
 		if (aePlayer != null)
 		{
@@ -158,25 +140,25 @@ public class PlayerAetherHooks
 	}
 
 	@SubscribeEvent
-	public static void onPlayerClone(PlayerEvent.Clone event)
+	public static void onPlayerClone(final PlayerEvent.Clone event)
 	{
-		PlayerAether oldPlayer = PlayerAether.getPlayer(event.getOriginal());
+		final PlayerAether oldPlayer = PlayerAether.getPlayer(event.getOriginal());
 
 		if (oldPlayer != null)
 		{
-			PlayerAether newPlayer = PlayerAether.getPlayer(event.getEntity());
+			final PlayerAether newPlayer = PlayerAether.getPlayer(event.getEntity());
 
-			IStorage<IPlayerAether> storage = AetherCapabilities.PLAYER_DATA.getStorage();
+			final IStorage<IPlayerAether> storage = AetherCapabilities.PLAYER_DATA.getStorage();
 
-			NBTBase state = storage.writeNBT(AetherCapabilities.PLAYER_DATA, oldPlayer, null);
+			final NBTBase state = storage.writeNBT(AetherCapabilities.PLAYER_DATA, oldPlayer, null);
 			storage.readNBT(AetherCapabilities.PLAYER_DATA, newPlayer, null, state);
 		}
 	}
 
 	@SubscribeEvent
-	public static void onPlayerChangedDimension(PlayerChangedDimensionEvent event)
+	public static void onPlayerChangedDimension(final PlayerChangedDimensionEvent event)
 	{
-		PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
+		final PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
 
 		if (aePlayer != null)
 		{
@@ -185,19 +167,20 @@ public class PlayerAetherHooks
 	}
 
 	@SubscribeEvent
-	public static void onPlayerRespawn(PlayerRespawnEvent event)
+	public static void onPlayerRespawn(final PlayerRespawnEvent event)
 	{
-		PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
+		final PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
+
 		if (aePlayer != null)
 		{
 			aePlayer.onRespawn(event);
 		}
 
-		if (event.player instanceof EntityPlayerMP && ((EntityPlayerMP) event.player).world.provider.getDimensionType() == DimensionsAether.AETHER)
+		/*if (event.player instanceof EntityPlayerMP && ((EntityPlayerMP) event.player).world.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
 			BlockPos bedPos = event.player.getBedLocation(((EntityPlayerMP) event.player).dimension);
-			EntityPlayerMP mp = (EntityPlayerMP)event.player;
-			WorldServer toWorld = DimensionManager.getWorld(0);
+			final EntityPlayerMP mp = (EntityPlayerMP) event.player;
+			final WorldServer toWorld = DimensionManager.getWorld(0);
 
 			if (bedPos != null)
 			{
@@ -206,16 +189,21 @@ public class PlayerAetherHooks
 
 			if (bedPos == null)
 			{
-				List<IslandData> islands = IslandSectorAccess.inst().getAllIslands(mp.world, aePlayer.getEntity().getPosition());
-				boolean shouldSpawnAtOutpost = false;
-				boolean obstructed = false;
-				IslandData island = null;
+				final ISector loadedSector = IslandSectorHelper.getAccess(mp.world)
+						.getLoadedSector(aePlayer.getEntity().chunkCoordX, aePlayer.getEntity().chunkCoordZ)
+						.orElseThrow(() -> new IllegalArgumentException("Couldn't find island sector:"));
+				final Collection<IIslandData> islands = loadedSector
+						.getIslandsForRegion(aePlayer.getEntity().getPosition().getX(), 0, aePlayer.getEntity().getPosition().getZ(), 1, 255, 1);
 
-				for (IslandData data : islands)
+				boolean shouldSpawnAtRespawnPoint = false;
+				boolean obstructed = false;
+				IIslandData island = null;
+
+				for (final IIslandData data : islands)
 				{
-					if (data != null && data.getMysteriousHengePos() != null)
+					if (data != null && data.getRespawnPoint() != null)
 					{
-						shouldSpawnAtOutpost = true;
+						shouldSpawnAtRespawnPoint = true;
 						island = data;
 						break;
 					}
@@ -223,16 +211,18 @@ public class PlayerAetherHooks
 
 				BlockPos pos = null;
 
-				if (shouldSpawnAtOutpost)
+				if (shouldSpawnAtRespawnPoint)
 				{
-					pos = mp.world.getTopSolidOrLiquidBlock(island.getMysteriousHengePos());
-					BlockPos down = pos.down();
-					obstructed = mp.getServerWorld().getBlockState(pos.up()) != Blocks.AIR.getDefaultState() || mp.getServerWorld().getBlockState(pos.up(2)) != Blocks.AIR.getDefaultState();
-					shouldSpawnAtOutpost = BlockUtil.isSolid(mp.getServerWorld().getBlockState(pos.down())) && !obstructed;
+					pos = mp.world.getTopSolidOrLiquidBlock(island.getRespawnPoint());
+					final BlockPos down = pos.down();
+					obstructed = mp.getServerWorld().getBlockState(pos.up()) != Blocks.AIR.getDefaultState()
+							|| mp.getServerWorld().getBlockState(pos.up(2)) != Blocks.AIR.getDefaultState();
+					shouldSpawnAtRespawnPoint = BlockUtil.isSolid(mp.getServerWorld().getBlockState(pos.down())) && !obstructed;
 
 					mp.connection.setPlayerLocation(pos.getX(), pos.getY() + 1, pos.getZ(), 0, 0);
 					if (!aePlayer.hasDiedInAetherBefore())
 					{
+						//TODO: Reimplement
 						// from 1.10 code; looks like EDISION_GUI_ID has not been implemented yet.
 						//mp.openGui(AetherCore.INSTANCE, AetherGuiHandler.EDISON_GUI_ID, mp.worldObj, pos.getX(), pos.getY(), pos.getZ());
 
@@ -243,7 +233,7 @@ public class PlayerAetherHooks
 				}
 				else
 				{
-					Teleporter teleporter = new TeleporterGeneric(toWorld);
+					final Teleporter teleporter = new TeleporterGeneric(toWorld);
 
 					CommonEvents.teleportEntity(mp, toWorld, teleporter, 3);
 					pos = toWorld.provider.getRandomizedSpawnPoint();
@@ -252,23 +242,22 @@ public class PlayerAetherHooks
 
 				if (obstructed)
 				{
-					mp.sendMessage(new TextComponentString("The nearest Mysterious Henge was obstructed with blocks - you could not respawn there."));
+					mp.sendMessage(new TextComponentString("The nearest Outpost was obstructed with blocks - you could not respawn there."));
 				}
 			}
 
-		}
+		}*/
 	}
 
 	@SubscribeEvent
-	public static void onBeginWatching(PlayerEvent.StartTracking event)
+	public static void onBeginWatching(final PlayerEvent.StartTracking event)
 	{
-		PlayerAether aeSourcePlayer = PlayerAether.getPlayer(event.getEntityPlayer());
-		PlayerAether aeTargetPlayer = PlayerAether.getPlayer(event.getTarget());
+		final PlayerAether aeSourcePlayer = PlayerAether.getPlayer(event.getEntityPlayer());
+		final PlayerAether aeTargetPlayer = PlayerAether.getPlayer(event.getTarget());
 
 		if (aeSourcePlayer != null && aeTargetPlayer != null)
 		{
 			aeTargetPlayer.onPlayerBeginWatching(aeSourcePlayer);
 		}
-
 	}
 }

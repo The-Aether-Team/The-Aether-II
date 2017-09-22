@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.tiles.multiblock;
 
+import com.gildedgames.aether.api.util.NBTHelper;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.util.TileEntitySynced;
-import com.gildedgames.aether.common.util.helpers.NBTHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -16,9 +16,9 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 	private BlockPos controllerPos;
 
 	@Override
-	public void onInteract(EntityPlayer player)
+	public void onInteract(final EntityPlayer player)
 	{
-		TileEntity entity = this.world.getTileEntity(this.controllerPos);
+		final TileEntity entity = this.world.getTileEntity(this.controllerPos);
 
 		if (entity instanceof TileEntityMultiblockController)
 		{
@@ -34,7 +34,7 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 	@Override
 	public void onDestroyed()
 	{
-		TileEntity entity = this.world.getTileEntity(this.controllerPos);
+		final TileEntity entity = this.world.getTileEntity(this.controllerPos);
 
 		if (entity instanceof TileEntityMultiblockInterface)
 		{
@@ -48,9 +48,9 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 	}
 
 	@Override
-	public ItemStack getPickedStack(World world, BlockPos pos, IBlockState state)
+	public ItemStack getPickedStack(final World world, final BlockPos pos, final IBlockState state)
 	{
-		TileEntity entity = this.world.getTileEntity(this.controllerPos);
+		final TileEntity entity = this.world.getTileEntity(this.controllerPos);
 
 		if (entity instanceof TileEntityMultiblockInterface)
 		{
@@ -65,7 +65,7 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 		return null;
 	}
 
-	public void linkController(BlockPos controllerPos)
+	public void linkController(final BlockPos controllerPos)
 	{
 		this.controllerPos = controllerPos;
 	}
@@ -76,7 +76,7 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound compound)
+	public void readFromNBT(final NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
 
@@ -87,7 +87,7 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+	public NBTTagCompound writeToNBT(final NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
 

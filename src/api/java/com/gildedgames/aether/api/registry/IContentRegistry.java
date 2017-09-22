@@ -5,12 +5,19 @@ import com.gildedgames.aether.api.recipes.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.api.registry.recipes.IRecipeIndexRegistry;
 import com.gildedgames.aether.api.registry.tab.ITabRegistry;
 import com.gildedgames.aether.api.structure.IStructureLoader;
+import com.gildedgames.aether.api.world.generation.ITemplateRegistry;
 
 /**
  * Provider for Aether content interfaces.
  */
 public interface IContentRegistry
 {
+
+	/**
+	 * @return The {@link ITemplateRegistry} provider for the Aether.
+	 */
+	ITemplateRegistry templates();
+
 	/**
 	 * @return The {@link IAltarRecipeRegistry} provider for the Aether.
 	 */

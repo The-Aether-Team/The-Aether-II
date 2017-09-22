@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.items.tools.handlers;
 
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
-import com.gildedgames.aether.common.world.chunk.capabilities.ChunkAttachment;
+import com.gildedgames.aether.common.capabilities.world.chunk.ChunkAttachment;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;

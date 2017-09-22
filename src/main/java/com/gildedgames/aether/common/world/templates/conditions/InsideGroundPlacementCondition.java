@@ -1,27 +1,32 @@
 package com.gildedgames.aether.common.world.templates.conditions;
 
+import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
+import com.gildedgames.aether.api.world.generation.PlacementCondition;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenTemplate;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.Template;
 
 import java.util.List;
 
-public class InsideGroundPlacementCondition implements WorldGenTemplate.PlacementCondition
+public class InsideGroundPlacementCondition implements PlacementCondition
 {
 
 	@Override
-	public boolean canPlace(Template template, World world, BlockPos placedAt, Template.BlockInfo block)
+	public boolean canPlace(final Template template, final IBlockAccessExtended world, final BlockPos placedAt, final Template.BlockInfo block)
 	{
 		if (block.pos.getY() == placedAt.getY() + 1 && block.blockState.getBlock() != Blocks.AIR
 				&& block.blockState.getBlock() != Blocks.STRUCTURE_VOID)
 		{
-			BlockPos down = block.pos.down();
+			final BlockPos down = block.pos.down();
 
-			IBlockState state = world.getBlockState(down);
+			if (!world.canAccess(down))
+			{
+				return false;
+			}
+
+			final IBlockState state = world.getBlockState(down);
 
 			if (state.getBlock() != BlocksAether.aether_grass)
 			{
@@ -33,7 +38,7 @@ public class InsideGroundPlacementCondition implements WorldGenTemplate.Placemen
 	}
 
 	@Override
-	public boolean canPlaceCheckAll(Template template, World world, BlockPos placedAt, List<Template.BlockInfo> blocks)
+	public boolean canPlaceCheckAll(final Template template, final IBlockAccessExtended world, final BlockPos placedAt, final List<Template.BlockInfo> blocks)
 	{
 		return true;
 	}

@@ -2,11 +2,9 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.common.analytics.GAReporter;
-import com.gildedgames.aether.common.analytics.GameAnalytics;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
-import com.gildedgames.aether.common.world.dimensions.aether.TeleporterAether;
-import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSectorAccess;
+import com.gildedgames.aether.common.world.aether.TeleporterAether;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.DimensionManager;
@@ -82,8 +80,6 @@ public class AetherCore
 		DimensionsAether.onServerStopping(event);
 
 		AetherCore.SPAWN_REGISTRY.write();
-
-		IslandSectorAccess.inst().onServerStopping(event);
 	}
 
 	@EventHandler
