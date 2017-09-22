@@ -30,11 +30,17 @@ public class RenderSwet extends RenderLiving<EntitySwet>
 		{
 			GlStateManager.translate(0.0, 0.18, 0.0);
 		}
+		else
+		{
+			GlStateManager.translate(0.0, 0.1, 0.0);
+		}
 
 		GlStateManager.scale(0.35F, 0.35F, 0.35F);
+
 		final float f1 = 2.0F;
 		final float f2 = (entity.prevSquishFactor + (entity.squishFactor - entity.prevSquishFactor) * partialTickTime) / (f1 * 0.5F + 1.0F);
 		final float f3 = 1.0F / (f2 + 1.0F);
+
 		GlStateManager.scale(f3 * f1, 1.0F / f3 * f1, f3 * f1);
 	}
 

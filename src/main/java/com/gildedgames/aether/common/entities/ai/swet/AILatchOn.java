@@ -60,6 +60,8 @@ public class AILatchOn extends EntityAI<EntitySwet>
 		{
 			final EntityPlayer player = (EntityPlayer) this.entity().getAttackTarget();
 
+			this.entity().setSucking(0);
+
 			NetworkingAether.sendPacketToPlayer(new PacketLatchSwet(this.entity().getType()), (EntityPlayerMP) player);
 			PlayerAether.getPlayer(player).getSwetTracker().latchSwet(this.entity());
 

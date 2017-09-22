@@ -21,6 +21,8 @@ public class HoppingMoveHelper extends EntityMoveHelper
 
 	private HopTimer hopTimer;
 
+	private boolean active;
+
 	public HoppingMoveHelper(EntityLiving entity, Supplier<SoundEvent> hoppingSound, HopTimer hopTimer)
 	{
 		super(entity);
@@ -29,6 +31,7 @@ public class HoppingMoveHelper extends EntityMoveHelper
 		this.hoppingSound = hoppingSound;
 		this.entity = entity;
 		this.yRot = 180.0F * entity.rotationYaw / (float) Math.PI;
+		this.active = true;
 	}
 
 	public HoppingMoveHelper(final EntityLiving entity, Supplier<SoundEvent> hoppingSound)
@@ -53,6 +56,11 @@ public class HoppingMoveHelper extends EntityMoveHelper
 		this.entity.rotationYaw = this.limitAngle(this.entity.rotationYaw, this.yRot, 90.0F);
 		this.entity.rotationYawHead = this.entity.rotationYaw;
 		this.entity.renderYawOffset = this.entity.rotationYaw;
+
+		if (!active)
+		{
+			return;
+		}
 
 		if (this.action != Action.MOVE_TO)
 		{
@@ -89,6 +97,21 @@ public class HoppingMoveHelper extends EntityMoveHelper
 						* this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
 			}
 		}
+	}
+
+	public void setActive(boolean isActive)
+	{
+		if (!isActive)
+		{
+			this.entity.setAIMoveSpeed(0.0F);
+		}
+		else
+		{
+			this.entity.setAIMoveSpeed((float) (this.speed
+				* this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
+		}
+
+		this.active = isActive;
 	}
 
 	public interface HopTimer

@@ -22,11 +22,11 @@ public class LayerSwetJelly implements LayerRenderer<EntitySwet>
 	public void doRenderLayer(final EntitySwet entity, final float limbSwing, final float limbSwingAmount, final float partialTicks, final float ageInTicks,
 			final float netHeadYaw, final float headPitch, final float scale)
 	{
-		if (!entity.isInvisible() && entity.getFoodSaturation() != 0)
+		if (!entity.isInvisible() && entity.getActualSaturation() != 0)
 		{
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-			final float sc = ((entity.getFoodSaturation() - 1) / 5.0F);
+			final float sc = ((entity.getActualSaturation() - 1) / 5.0F);
 			final float s = sc * 1.1F;
 
 			GlStateManager.translate(-0.0, 0.4F + (s * -1.35F), -0.15);
