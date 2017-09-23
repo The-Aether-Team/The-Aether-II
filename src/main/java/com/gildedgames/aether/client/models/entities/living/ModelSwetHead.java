@@ -97,6 +97,11 @@ public class ModelSwetHead extends ModelBase
 		GlStateManager.popMatrix();
 	}
 
+	public void renderRaw(final Entity entity, final float f, final float f1, final float f2, final float f3, final float f4, final float f5)
+	{
+		this.InnerBody.render(f5);
+	}
+
 	/**
 	 * This is a helper function from Tabula to set the rotation of model parts
 	 */

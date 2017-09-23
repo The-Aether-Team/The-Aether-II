@@ -28,6 +28,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Collection;
+import java.util.ArrayList;
+
 public class EntitySwet extends EntityExtendedMob
 {
 
@@ -55,7 +58,7 @@ public class EntitySwet extends EntityExtendedMob
 
 		final HoppingMoveHelper hoppingMoveHelper = new HoppingMoveHelper(this,
 				() -> EntitySwet.this.getFoodSaturation() == 0 ? SoundEvents.ENTITY_SLIME_JUMP : SoundEvents.ENTITY_SLIME_JUMP,
-				() -> EntitySwet.this.getRNG().nextInt(20) + 10 + (EntitySwet.this.getFoodSaturation() * 8));
+				() -> EntitySwet.this.getRNG().nextInt(EntitySwet.this.getFoodSaturation() == 3 ? 10 : 60) + (EntitySwet.this.getFoodSaturation() == 3 ? 40 : 50));
 
 		this.moveHelper = hoppingMoveHelper;
 
@@ -95,12 +98,9 @@ public class EntitySwet extends EntityExtendedMob
 
 	public void processSucking(final EntityPlayer player)
 	{
-		player.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 3, timeSinceSucking / 80));
+		PotionEffect slowness = new PotionEffect(Potion.getPotionById(2), 100, timeSinceSucking / 80, true, false);
 
-		if (player.getFoodStats().getFoodLevel() <= 0)
-		{
-			return;
-		}
+		player.addPotionEffect(slowness);
 
 		this.timeSinceSucking++;
 
@@ -109,12 +109,44 @@ public class EntitySwet extends EntityExtendedMob
 			if (!this.world.isRemote)
 			{
 				player.getFoodStats().setFoodLevel((int) (player.getFoodStats().getFoodLevel() * 0.95F));
+
+				Collection<PotionEffect> effects = player.getActivePotionEffects();
+
+				if (!effects.isEmpty())
+				{
+					ArrayList<PotionEffect> negEffects = new ArrayList();
+
+					for (PotionEffect p : effects)
+					{
+						if (p.getPotion().isBadEffect())
+						{
+							negEffects.add(p);
+						}
+					}
+
+					/*
+						Due to how potions work; give the swet the same potion, and add a new one to the player with 3/4th of time and amplifier to make it be removed with time
+					 */
+					for (PotionEffect p : negEffects)
+					{
+						if (!p.getPotion().equals(Potion.getPotionById(2)))
+						{
+							addPotionEffect(p);
+							player.removePotionEffect(p.getPotion());
+
+							if (p.getAmplifier() - 1 > 0 && p.getDuration() * .75 > 60)
+							{
+								player.addPotionEffect(new PotionEffect(p.getPotion(), (int) (p.getDuration() * .75), p.getAmplifier() - 1));
+							}
+						}
+					}
+				}
 			}
 
 			player.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F, (player.getRNG().nextFloat() - player.getRNG().nextFloat()) * 0.2F + 1.0F);
 		}
 
-		if (timeSinceSucking >= 300)
+		if (timeSinceSucking >= 300 || player.getFoodStats().getFoodLevel() <= 0)
 		{
 			if (!this.world.isRemote)
 			{
@@ -272,6 +304,8 @@ public class EntitySwet extends EntityExtendedMob
 
 		if (getFoodSaturation() == 4)
 		{
+			addPotionEffect(new PotionEffect(Potion.getPotionById(2), 10, 2, true, false));
+
 			digestTime++;
 
 			if (digestTime > 1200)
@@ -289,6 +323,8 @@ public class EntitySwet extends EntityExtendedMob
 	{
 		this.timeSinceSucking = timeSucking;
 	}
+
+	public int getTimeSinceSucking() { return timeSinceSucking; }
 
 	protected void alterSquishAmount()
 	{

@@ -50,6 +50,16 @@ public class HoppingMoveHelper extends EntityMoveHelper
 		this.action = EntityMoveHelper.Action.MOVE_TO;
 	}
 
+	public void setTime(HopTimer timer)
+	{
+		this.hopTimer = timer;
+	}
+
+	public HopTimer getTimer()
+	{
+		return hopTimer;
+	}
+
 	@Override
 	public void onUpdateMoveHelper()
 	{
