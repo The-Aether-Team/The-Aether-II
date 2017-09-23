@@ -98,7 +98,7 @@ public class EntitySwet extends EntityExtendedMob
 
 	public void processSucking(final EntityPlayer player)
 	{
-		PotionEffect slowness = new PotionEffect(Potion.getPotionById(2), 100, timeSinceSucking / 80, true, false);
+		PotionEffect slowness = new PotionEffect(Potion.getPotionById(2), 3, timeSinceSucking / 80, true, false);
 
 		player.addPotionEffect(slowness);
 
@@ -134,9 +134,13 @@ public class EntitySwet extends EntityExtendedMob
 							addPotionEffect(p);
 							player.removePotionEffect(p.getPotion());
 
-							if (p.getAmplifier() - 1 > 0 && p.getDuration() * .75 > 60)
+							if (p.getAmplifier() - 1 >= 0)
 							{
 								player.addPotionEffect(new PotionEffect(p.getPotion(), (int) (p.getDuration() * .75), p.getAmplifier() - 1));
+							}
+							else if (p.getDuration() > 60)
+							{
+								player.addPotionEffect(new PotionEffect(p.getPotion(), (int) (p.getDuration() * .75), p.getAmplifier()));
 							}
 						}
 					}
@@ -200,7 +204,7 @@ public class EntitySwet extends EntityExtendedMob
 	{
 		if (this.isInWater())
 		{
-			timeStarved = 0;
+			timeStarved = -rand.nextInt(60);
 			this.setFoodSaturation(0);
 		}
 
@@ -311,7 +315,7 @@ public class EntitySwet extends EntityExtendedMob
 			if (digestTime > 1200)
 			{
 				setFoodSaturation(3);
-				digestTime = 0;
+				digestTime = -rand.nextInt(300);
 			}
 		}
 
