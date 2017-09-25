@@ -33,9 +33,9 @@ public class AetherGuiHandler implements IGuiHandler
 	public static final int MASONRY_BENCH_ID = 5;
 
 	@Override
-	public Container getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
+	public Container getServerGuiElement(final int id, final EntityPlayer player, final World world, final int x, final int y, final int z)
 	{
-		BlockPos pos = new BlockPos(x, y, z);
+		final BlockPos pos = new BlockPos(x, y, z);
 
 		switch (id)
 		{
@@ -47,8 +47,8 @@ public class AetherGuiHandler implements IGuiHandler
 				return new ContainerIcestoneCooler(player.inventory, (IInventory) world.getTileEntity(pos));
 			case INCUBATOR_ID:
 				return new ContainerIncubator(player.inventory, (IInventory) world.getTileEntity(pos));
-//			case MASONRY_BENCH_ID:
-//				return new ContainerMasonryBench(player, new BlockPos(x, y, z));
+			//			case MASONRY_BENCH_ID:
+			//				return new ContainerMasonryBench(player, new BlockPos(x, y, z));
 			default:
 				return null;
 		}
@@ -56,9 +56,9 @@ public class AetherGuiHandler implements IGuiHandler
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public GuiContainer getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
+	public GuiContainer getClientGuiElement(final int id, final EntityPlayer player, final World world, final int x, final int y, final int z)
 	{
-		BlockPos pos = new BlockPos(x, y, z);
+		final BlockPos pos = new BlockPos(x, y, z);
 
 		switch (id)
 		{
@@ -70,8 +70,9 @@ public class AetherGuiHandler implements IGuiHandler
 				return new GuiIcestoneCooler(player.inventory, (IInventory) world.getTileEntity(pos));
 			case INCUBATOR_ID:
 				return new GuiIncubator(player.inventory, (IInventory) world.getTileEntity(pos), pos);
-//			case MASONRY_BENCH_ID:
-//				return new GuiMasonryBench(player, new BlockPos(x, y, z));
+			//			case MASONRY_BENCH_ID:
+			//				return new GuiMasonryBench(player, new BlockPos(x, y, z));
+
 			default:
 				return null;
 		}

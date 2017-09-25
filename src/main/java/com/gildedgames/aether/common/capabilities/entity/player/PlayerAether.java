@@ -109,7 +109,7 @@ public class PlayerAether implements IPlayerAether
 	 */
 	public void sendFullUpdate()
 	{
-		//NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(this.hasDiedInAetherBefore()), (EntityPlayerMP) this.getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(this.hasDiedInAetherBefore()), (EntityPlayerMP) this.getEntity());
 	}
 
 	public void onUpdate(final LivingUpdateEvent event)

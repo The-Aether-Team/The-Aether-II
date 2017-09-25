@@ -3,7 +3,6 @@ package com.gildedgames.aether.api.dialog;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
-import java.util.Optional;
 
 /**
  * Controls the progression and displaying of a scene to the player.

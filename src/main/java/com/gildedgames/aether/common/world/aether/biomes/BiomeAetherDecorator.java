@@ -21,6 +21,7 @@ import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenAer
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenPurpleAercloud;
 import com.gildedgames.aether.common.world.aether.features.trees.WorldGenOrangeTree;
 import com.gildedgames.aether.common.world.templates.TemplatePlacer;
+import com.gildedgames.aether.common.world.util.GenUtil;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -136,7 +137,7 @@ public class BiomeAetherDecorator
 
 				if (generated)
 				{
-					island.setRespawnPoint(pos2);
+					island.setRespawnPoint(GenUtil.rotate(loc.getPos(), loc.getPos().add(-0.5, 2, 1.0), loc.getSettings().getRotation()));
 					island.getVirtualDataManager().placeTemplate(def, loc);
 
 					break;
