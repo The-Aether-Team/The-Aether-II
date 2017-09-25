@@ -105,11 +105,6 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		final ISectorAccess access = IslandSectorHelper.getAccess(this.world);
 		final ISector sector = access.provideSector(chunkX, chunkZ);
 
-		if (sector == null)
-		{
-			return;
-		}
-
 		// TODO: support multiple islands in same chunk
 		final IIslandData island = sector.getIslandsForRegion(pos.getX(), 0, pos.getZ(), 16, 255, 16)
 				.stream().findFirst().orElse(null);
