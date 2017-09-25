@@ -62,7 +62,7 @@ public class AILatchOn extends EntityAI<EntitySwet>
 
 			this.entity().setSucking(0);
 
-			NetworkingAether.sendPacketToPlayer(new PacketLatchSwet(this.entity().getType()), (EntityPlayerMP) player);
+			NetworkingAether.sendPacketToWatching(new PacketLatchSwet(this.entity().getType(), player.getEntityId()), (EntityPlayerMP) player, true);
 			PlayerAether.getPlayer(player).getSwetTracker().latchSwet(this.entity());
 
 			this.entity().playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F,

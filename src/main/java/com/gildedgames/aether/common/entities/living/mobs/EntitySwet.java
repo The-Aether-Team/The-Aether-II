@@ -83,7 +83,7 @@ public class EntitySwet extends EntityExtendedMob
 	public static boolean canLatch(final EntitySwet swet, final EntityPlayer player)
 	{
 		return !player.isInWater() && swet.getFoodSaturation() == 3 && PlayerAether.getPlayer(player).getSwetTracker()
-				.canLatchOn();
+				.canLatchOn() && player.getFoodStats().getFoodLevel() > 4;
 	}
 
 	public int getFoodSaturation()
@@ -93,7 +93,10 @@ public class EntitySwet extends EntityExtendedMob
 
 	public void setFoodSaturation(final int foodSaturation)
 	{
-		this.dataManager.set(EntitySwet.FOOD_SATURATION, foodSaturation);
+		if (!world.isRemote)
+		{
+			this.dataManager.set(EntitySwet.FOOD_SATURATION, foodSaturation);
+		}
 	}
 
 	public void processSucking(final EntityPlayer player)
@@ -154,9 +157,13 @@ public class EntitySwet extends EntityExtendedMob
 		{
 			if (!this.world.isRemote)
 			{
-				this.setFoodSaturation(4);
+				if (timeSinceSucking >= 220)
+				{
+					this.setFoodSaturation(4);
+				}
+
 				PlayerAether.getPlayer(player).getSwetTracker().detachSwet(this);
-				NetworkingAether.sendPacketToPlayer(new PacketDetachSwet(this.getType()), (EntityPlayerMP) player);
+				NetworkingAether.sendPacketToWatching(new PacketDetachSwet(this.getType(), player.getEntityId()), (EntityPlayerMP) player, true);
 			}
 		}
 	}
@@ -205,6 +212,7 @@ public class EntitySwet extends EntityExtendedMob
 		if (this.isInWater())
 		{
 			timeStarved = -rand.nextInt(60);
+
 			this.setFoodSaturation(0);
 		}
 
@@ -212,6 +220,11 @@ public class EntitySwet extends EntityExtendedMob
 		this.prevSquishFactor = this.squishFactor;
 
 		super.onUpdate();
+
+		if (getAttackTarget() != null && getAttackTarget() instanceof EntityPlayer && ((EntityPlayer) getAttackTarget()).getFoodStats().getFoodLevel() < 5)
+		{
+			setAttackTarget(null);
+		}
 
 		if (this.onGround && !this.wasOnGround)
 		{
@@ -268,7 +281,7 @@ public class EntitySwet extends EntityExtendedMob
 				actualSaturation = getFoodSaturation();
 			}
 
-			if (getActualSaturation() != 0)
+			if (world.isRemote && getActualSaturation() != 0)
 			{
 				float[] redColors = new float[] { 0.486f, 0.45f, 0.411f};
 				float[] greenColors = new float[] { 0.439f, 0.686f, 0.654f };

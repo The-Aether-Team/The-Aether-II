@@ -9,18 +9,23 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.UUID;
+
 public class PacketLatchSwet implements IMessage
 {
 
 	private EntitySwet.Type type;
+
+	private int id;
 
 	public PacketLatchSwet()
 	{
 
 	}
 
-	public PacketLatchSwet(final EntitySwet.Type type)
+	public PacketLatchSwet(final EntitySwet.Type type, final int id)
 	{
+		this.id = id;
 		this.type = type;
 	}
 
@@ -28,12 +33,14 @@ public class PacketLatchSwet implements IMessage
 	public void fromBytes(final ByteBuf buf)
 	{
 		this.type = EntitySwet.Type.fromOrdinal(buf.readInt());
+		this.id = buf.readInt();
 	}
 
 	@Override
 	public void toBytes(final ByteBuf buf)
 	{
 		buf.writeInt(this.type.ordinal());
+		buf.writeInt(this.id);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -47,7 +54,9 @@ public class PacketLatchSwet implements IMessage
 				return null;
 			}
 
-			final PlayerAether playerAether = PlayerAether.getPlayer(player);
+			System.out.println(message.id);
+
+			final PlayerAether playerAether = PlayerAether.getPlayer(player.world.getEntityByID(message.id));
 
 			final EntitySwet swet = new EntitySwet(player.world);
 

@@ -46,50 +46,46 @@ public class LayerSwetLatch extends LayerBipedArmor
 		for (int i = 0; i < swets.size(); i++)
 		{
 			GlStateManager.pushMatrix();
-			if (swets.size() > 0)
+			EntitySwet swet = swets.get(i);
+			float s = (float) Math.cos(ageInTicks / 2f) / 20f;
+
+			GlStateManager.scale(.3f, .3f, .3f);
+
+			if (i == 0)
 			{
-				EntitySwet swet = swets.get(i);
-				float s = (float) Math.cos(ageInTicks / 2f) / 20f;
-
-				GlStateManager.scale(.3f, .3f, .3f);
-
-				if (i == 0)
-				{
-					GlStateManager.rotate(180, 0, 1, 0);
-					GlStateManager.rotate(30, -1, 0, .2f);
-					GlStateManager.translate(-0.1f, .2f, 1.2f);
-				}
-				else if (i == 1)
-				{
-					GlStateManager.rotate(180, 0, 1, 0);
-					GlStateManager.rotate(30, 1, 0, -.2f);
-					GlStateManager.translate(0.1f, .3f, -.2f);
-				}
-				else if (i == 2)
-				{
-					GlStateManager.rotate(30, 1, 0, .5f);
-					GlStateManager.translate(0.1f, .3f, .2f);
-				}
-
-				this.renderer.bindTexture(swet.getType().texture_head);
-
-				head.renderRaw(swet, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-
-				this.renderer.bindTexture(swet.getType().texture_jelly);
-
-				GlStateManager.color(1.0F, 1.0F, 1.0F, .7F);
-				GlStateManager.enableNormalize();
-				GlStateManager.enableBlend();
-				GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-
-				float s2 = swet.getTimeSinceSucking() / 2000f;
-				GlStateManager.scale(1 + s / 3f + s2, 1 + s / 5f + s2, 1 + s + s2);
-				jelly.renderRaw(swet, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-
-				GlStateManager.disableNormalize();
-				GlStateManager.disableBlend();
+				GlStateManager.rotate(180, 0, 1, 0);
+				GlStateManager.rotate(30, -1, 0, .2f);
+				GlStateManager.translate(-0.1f, .2f, 1.2f);
+			}
+			else if (i == 1)
+			{
+				GlStateManager.rotate(180, 0, 1, 0);
+				GlStateManager.rotate(30, 1, 0, -.2f);
+				GlStateManager.translate(0.1f, .3f, -.2f);
+			}
+			else if (i == 2)
+			{
+				GlStateManager.rotate(30, 1, 0, .5f);
+				GlStateManager.translate(0.1f, .3f, .2f);
 			}
 
+			this.renderer.bindTexture(swet.getType().texture_head);
+
+			head.renderRaw(swet, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+
+			this.renderer.bindTexture(swet.getType().texture_jelly);
+
+			GlStateManager.color(1.0F, 1.0F, 1.0F, .7F);
+			GlStateManager.enableNormalize();
+			GlStateManager.enableBlend();
+			GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+
+			float s2 = swet.getTimeSinceSucking() / 2000f;
+			GlStateManager.scale(1 + s / 3f + s2, 1 + s / 5f + s2, 1 + s + s2);
+			jelly.renderRaw(swet, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+
+			GlStateManager.disableNormalize();
+			GlStateManager.disableBlend();
 			GlStateManager.popMatrix();
 		}
 	}

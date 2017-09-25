@@ -58,7 +58,7 @@ public class PlayerSwetTracker extends PlayerAetherModule
 
 	public boolean canLatchOn()
 	{
-		return this.swets.size() < PlayerSwetTracker.MAX_SWET_COUNT;
+		return this.swets.size() < PlayerSwetTracker.MAX_SWET_COUNT ;
 	}
 
 	public void latchSwet(final EntitySwet swet)

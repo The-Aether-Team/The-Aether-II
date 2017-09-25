@@ -14,26 +14,31 @@ public class PacketDetachSwet implements IMessage
 
 	private EntitySwet.Type type;
 
+	private int id;
+
 	public PacketDetachSwet()
 	{
 
 	}
 
-	public PacketDetachSwet(final EntitySwet.Type type)
+	public PacketDetachSwet(final EntitySwet.Type type, final int id)
 	{
 		this.type = type;
+		this.id = id;
 	}
 
 	@Override
 	public void fromBytes(final ByteBuf buf)
 	{
 		this.type = EntitySwet.Type.fromOrdinal(buf.readInt());
+		this.id = buf.readInt();
 	}
 
 	@Override
 	public void toBytes(final ByteBuf buf)
 	{
 		buf.writeInt(this.type.ordinal());
+		buf.writeInt(this.id);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -47,7 +52,7 @@ public class PacketDetachSwet implements IMessage
 				return null;
 			}
 
-			final PlayerAether playerAether = PlayerAether.getPlayer(player);
+			final PlayerAether playerAether = PlayerAether.getPlayer(player.world.getEntityByID(message.id));
 
 			EntitySwet remove = null;
 
