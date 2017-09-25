@@ -115,7 +115,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 			return;
 		}
 
-		final BlockAccessExtendedWrapper blockAccess = new BlockAccessExtendedWrapper(world);
+		final BlockAccessExtendedWrapper blockAccess = new BlockAccessExtendedWrapper(this.world);
 
 		// Populate placed templates
 		for (final TemplateInstance instance : island.getVirtualDataManager().getPlacedTemplates())
