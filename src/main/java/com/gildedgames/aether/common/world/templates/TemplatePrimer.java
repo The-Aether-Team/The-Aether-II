@@ -416,7 +416,7 @@ public class TemplatePrimer
 							wildcard.mirror(settings.getMirror());
 							wildcard.rotate(settings.getRotation());
 
-							wildcard.onSchematicGeneration(blockAccess, world.rand);
+							//wildcard.onSchematicGeneration(blockAccess, world.rand);
 
 							continue;
 						}
