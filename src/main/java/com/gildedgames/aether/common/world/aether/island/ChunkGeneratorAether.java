@@ -128,12 +128,12 @@ public class ChunkGeneratorAether implements IChunkGenerator
 
 					if (!instance.hasGeneratedAChunk())
 					{
+						instance.markGeneratedAChunk();
+
 						for (final PostPlacement post : instance.getDef().getPostPlacements())
 						{
 							post.postGenerate(this.world, this.rand, instance.getLoc());
 						}
-
-						instance.markGeneratedAChunk();
 					}
 				}
 			}
