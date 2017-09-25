@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.tiles;
 
 import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.util.helpers.BlockUtil;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -29,7 +30,11 @@ public class TileEntityWildcard extends TileEntitySchematicBlock
 		if (contentSize == 0)
 		{
 			blockAccess.setBlockToAir(this.getPos());
-			//blockAccess.scheduleUpdate(this.getPos(), BlocksAether.wildcard, 0);
+
+			if (blockAccess.getWorld() != null)
+			{
+				blockAccess.getWorld().scheduleUpdate(this.getPos(), BlocksAether.wildcard, 0);
+			}
 
 			return;
 		}
@@ -79,7 +84,11 @@ public class TileEntityWildcard extends TileEntitySchematicBlock
 
 		blockAccess.setBlockState(this.getPos(), block.getStateFromMeta(damage));
 		BlockUtil.setTileEntityNBT(blockAccess, this.getPos(), chosenStack);
-		//blockAccess.scheduleUpdate(this.getPos(), block, 0);
+		
+		if (blockAccess.getWorld() != null)
+		{
+			blockAccess.getWorld().scheduleUpdate(this.getPos(), block, 0);
+		}
 	}
 
 	@Override

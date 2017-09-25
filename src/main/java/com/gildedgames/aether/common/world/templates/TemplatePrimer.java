@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.world.templates;
 
+import com.gildedgames.aether.api.util.BlockAccessChunkPrimer;
 import com.gildedgames.aether.api.util.BlockAccessExtendedWrapper;
 import com.gildedgames.aether.api.util.TemplateUtil;
 import com.gildedgames.aether.api.world.generation.*;
@@ -86,6 +87,16 @@ public class TemplatePrimer
 
 	public static boolean canGenerate(final World world, final TemplateDefinition def, final TemplateLoc loc)
 	{
+		return canGenerate(world, def, loc, true);
+	}
+
+	public static boolean canGenerateWithoutAreaCheck(final World world, final TemplateDefinition def, final TemplateLoc loc)
+	{
+		return canGenerate(world, def, loc, false);
+	}
+
+	private static boolean canGenerate(final World world, final TemplateDefinition def, final TemplateLoc loc, final boolean checkAreaLoaded)
+	{
 		BlockPos pos = loc.getPos();
 
 		if (loc.isCentered())
@@ -95,7 +106,7 @@ public class TemplatePrimer
 
 		final StructureBoundingBox bb = TemplateUtil.getBoundingBoxFromTemplate(def, loc);
 
-		if (!world.isAreaLoaded(bb) || bb.maxY > world.getActualHeight())
+		if ((checkAreaLoaded && !world.isAreaLoaded(bb)) || bb.maxY > world.getActualHeight())
 		{
 			return false;
 		}
@@ -167,8 +178,10 @@ public class TemplatePrimer
 			pos = TemplateUtil.getCenteredPos(def, loc);
 		}
 
+		final IBlockAccessExtended blockAccess = new BlockAccessChunkPrimer(world, primer);
+
 		final ITemplateProcessorExtended processor = new BlockRotationProcessorExtended(pos, loc.getSettings());
-		TemplatePrimer.primeChunk(def.getTemplate(), world, chunk, primer, pos, processor, loc.getSettings());
+		TemplatePrimer.primeChunk(def.getTemplate(), blockAccess, world, chunk, primer, pos, processor, loc.getSettings());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -349,7 +362,8 @@ public class TemplatePrimer
 		}
 	}
 
-	public static void primeChunk(final Template template, final World world, final ChunkPos chunk, final ChunkPrimer primer, final BlockPos pos,
+	public static void primeChunk(final Template template, final IBlockAccessExtended blockAccess, final World world, final ChunkPos chunk,
+			final ChunkPrimer primer, final BlockPos pos,
 			@Nullable final ITemplateProcessorExtended processor, final PlacementSettings settings)
 	{
 		final List<Template.BlockInfo> blocks = TemplatePrimer.getBlocks(template);
@@ -402,7 +416,7 @@ public class TemplatePrimer
 							wildcard.mirror(settings.getMirror());
 							wildcard.rotate(settings.getRotation());
 
-							//wildcard.onSchematicGeneration(blockAccess, world.rand);
+							wildcard.onSchematicGeneration(blockAccess, world.rand);
 
 							continue;
 						}
@@ -411,8 +425,7 @@ public class TemplatePrimer
 						{
 							primer.setBlockState(
 									blockpos.getX() - minX, blockpos.getY(),
-									blockpos.getZ() - minZ,
-									iblockstate1.getBlock() == Blocks.AIR ? Blocks.STRUCTURE_VOID.getDefaultState() : iblockstate1);
+									blockpos.getZ() - minZ, iblockstate1);
 						}
 						catch (final ArrayIndexOutOfBoundsException ex)
 						{
@@ -502,26 +515,31 @@ public class TemplatePrimer
 							}
 						}
 
-						if (blockAccess.setBlockState(blockpos, iblockstate1, 2) && template$blockinfo1.tileentityData != null)
+						if (blockAccess.setBlockState(blockpos, iblockstate1))
 						{
-							final TileEntity tileentity2 = blockAccess.getTileEntity(blockpos);
+							iblockstate.getBlock().onBlockAdded(world, blockpos, iblockstate1);
 
-							if (tileentity2 != null)
+							if (template$blockinfo1.tileentityData != null)
 							{
-								template$blockinfo1.tileentityData.setInteger("x", blockpos.getX());
-								template$blockinfo1.tileentityData.setInteger("y", blockpos.getY());
-								template$blockinfo1.tileentityData.setInteger("z", blockpos.getZ());
-								tileentity2.readFromNBT(template$blockinfo1.tileentityData);
-								tileentity2.mirror(settings.getMirror());
-								tileentity2.rotate(settings.getRotation());
+								final TileEntity tileentity2 = blockAccess.getTileEntity(blockpos);
 
-								tileentity2.markDirty();
-
-								if (tileentity2 instanceof TileEntityMultiblockController)
+								if (tileentity2 != null)
 								{
-									final TileEntityMultiblockController controller = (TileEntityMultiblockController) tileentity2;
+									template$blockinfo1.tileentityData.setInteger("x", blockpos.getX());
+									template$blockinfo1.tileentityData.setInteger("y", blockpos.getY());
+									template$blockinfo1.tileentityData.setInteger("z", blockpos.getZ());
+									tileentity2.readFromNBT(template$blockinfo1.tileentityData);
+									tileentity2.mirror(settings.getMirror());
+									tileentity2.rotate(settings.getRotation());
 
-									controller.rebuild();
+									tileentity2.markDirty();
+
+									if (tileentity2 instanceof TileEntityMultiblockController)
+									{
+										final TileEntityMultiblockController controller = (TileEntityMultiblockController) tileentity2;
+
+										controller.rebuild();
+									}
 								}
 							}
 						}

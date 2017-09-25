@@ -22,6 +22,8 @@ public class TemplateInstance implements NBT
 
 	private TemplateLoc loc;
 
+	private boolean hasGeneratedAChunk;
+
 	public TemplateInstance(final TemplateDefinition def, final TemplateLoc loc)
 	{
 		this.def = def;
@@ -52,6 +54,16 @@ public class TemplateInstance implements NBT
 		return this.chunksOccupied;
 	}
 
+	public void markGeneratedAChunk()
+	{
+		this.hasGeneratedAChunk = true;
+	}
+
+	public boolean hasGeneratedAChunk()
+	{
+		return this.hasGeneratedAChunk;
+	}
+
 	@Override
 	public boolean equals(final Object obj)
 	{
@@ -68,6 +80,7 @@ public class TemplateInstance implements NBT
 
 			builder.append(this.templateID, o.templateID);
 			builder.append(this.loc, o.loc);
+			builder.append(this.hasGeneratedAChunk, o.hasGeneratedAChunk);
 
 			flag = builder.isEquals();
 		}
@@ -82,6 +95,7 @@ public class TemplateInstance implements NBT
 
 		builder.append(this.templateID);
 		builder.append(this.loc);
+		builder.append(this.hasGeneratedAChunk);
 
 		return builder.toHashCode();
 	}
@@ -91,6 +105,7 @@ public class TemplateInstance implements NBT
 	{
 		tag.setInteger("id", this.templateID);
 		tag.setTag("loc", NBTHelper.write(this.loc));
+		tag.setBoolean("hasGeneratedAChunk", this.hasGeneratedAChunk);
 	}
 
 	@Override
@@ -98,5 +113,6 @@ public class TemplateInstance implements NBT
 	{
 		this.def = AetherAPI.content().templates().get(tag.getInteger("id"));
 		this.loc = new TemplateLoc(tag.getCompoundTag("loc"));
+		this.hasGeneratedAChunk = tag.getBoolean("hasGeneratedAChunk");
 	}
 }

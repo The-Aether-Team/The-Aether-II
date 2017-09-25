@@ -3,25 +3,28 @@ package com.gildedgames.aether.client.gui.dialog;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.dialog.*;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.containers.ContainerDialogController;
 import com.gildedgames.aether.common.entities.living.npc.EntityEdison;
 import com.gildedgames.aether.common.entities.living.npc.EntityNPC;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.*;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import org.lwjgl.Sys;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
-public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
+public class GuiDialogViewer extends GuiContainer implements IDialogChangeListener
 {
 
 	private static final ResourceLocation NEXT_ARROW = AetherCore.getResource("textures/gui/conversation/next_arrow.png");
@@ -44,16 +47,19 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 
 	private IDialogSlideRenderer renderer;
 
-	public GuiDialogViewer(IDialogController controller)
+	public GuiDialogViewer(final EntityPlayer player, final IDialogController controller)
 	{
+		super(new ContainerDialogController(player));
+
 		this.controller = controller;
 		this.controller.addListener(this);
 	}
 
 	@Override
-	public void drawScreen(int mouseX, int mouseY, float partialTicks)
+	public void drawScreen(final int mouseX, final int mouseY, final float partialTicks)
 	{
-		this.drawDefaultBackground();
+		this.drawWorldBackground(0);
+		net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.GuiScreenEvent.BackgroundDrawnEvent(this));
 
 		if (this.npc == null)
 		{
@@ -82,8 +88,8 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 		{
 			GlStateManager.pushMatrix();
 
-			double time = (Sys.getTime() * 1000) / Sys.getTimerResolution();
-			double timePassed = time - this.prevTime;
+			final double time = (Sys.getTime() * 1000) / Sys.getTimerResolution();
+			final double timePassed = time - this.prevTime;
 
 			this.prevTime = time;
 
@@ -96,7 +102,7 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 				this.nextArrowAnim = 0.0;
 			}
 
-			double anim = this.nextArrowAnim;
+			final double anim = this.nextArrowAnim;
 
 			if (this.nextArrowAnim < 500.0)
 			{
@@ -130,11 +136,23 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) throws IOException
+	public void drawDefaultBackground()
+	{
+
+	}
+
+	@Override
+	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY)
+	{
+
+	}
+
+	@Override
+	protected void actionPerformed(final GuiButton button) throws IOException
 	{
 		if (button instanceof GuiDialogButton)
 		{
-			GuiDialogButton dialogButton = (GuiDialogButton) button;
+			final GuiDialogButton dialogButton = (GuiDialogButton) button;
 
 			this.controller.activateButton(dialogButton.getButtonData());
 
@@ -157,7 +175,7 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 		this.buttonList.clear();
 	}
 
-	private void buildGui(IDialogNode node)
+	private void buildGui(final IDialogNode node)
 	{
 		if (this.node != node)
 		{
@@ -173,10 +191,10 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 			return;
 		}
 
-		Collection<IDialogButton> buttons = node.getButtons();
+		final Collection<IDialogButton> buttons = node.getButtons();
 
 		int baseBoxSize = 350;
-		boolean resize = this.width - 40 > baseBoxSize;
+		final boolean resize = this.width - 40 > baseBoxSize;
 
 		if (!resize)
 		{
@@ -195,7 +213,7 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 		{
 			int index = 0;
 
-			for (IDialogButton btn : buttons)
+			for (final IDialogButton btn : buttons)
 			{
 				this.buttonList.add(new GuiDialogButton(index, (this.width / 2) - (baseBoxSize / 2), this.height - 85 + (index * 20), btn));
 
@@ -203,7 +221,7 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 			}
 		}
 
-		IDialogLine line = this.controller.getCurrentLine();
+		final IDialogLine line = this.controller.getCurrentLine();
 
 		if (this.controller.isNodeFinished() && this.controller.getCurrentNode().getButtons().size() > 0)
 		{
@@ -216,12 +234,12 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 
 		if (this.controller.getCurrentLine().getSpeaker().isPresent())
 		{
-			ResourceLocation speakerPath = this.controller.getCurrentLine().getSpeaker().get();
+			final ResourceLocation speakerPath = this.controller.getCurrentLine().getSpeaker().get();
 
 			this.speaker = AetherAPI.content().dialog().getSpeaker(speakerPath).orElseThrow(() ->
 					new IllegalArgumentException("Couldn't getByte speaker: " + speakerPath));
 
-			String address;
+			final String address;
 
 			// Check if the speaker resourcelocation has a slide address
 			if (speakerPath.getResourcePath().contains("#"))
@@ -235,7 +253,7 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 			}
 			else if (this.speaker.getSlides().isPresent())
 			{
-				Map<String, IDialogSlide> slides = this.speaker.getSlides().get();
+				final Map<String, IDialogSlide> slides = this.speaker.getSlides().get();
 
 				if (!slides.isEmpty() && slides.containsKey("default"))
 				{
@@ -245,7 +263,7 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 
 			if (this.slide != null && this.slide.getRenderer().isPresent())
 			{
-				String renderType = this.slide.getRenderer().get();
+				final String renderType = this.slide.getRenderer().get();
 
 				this.renderer = AetherAPI.content().dialog().findRenderer(renderType).orElseThrow(() ->
 						new IllegalArgumentException("Couldn't find slide renderer: " + renderType));
@@ -255,9 +273,9 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 
 			this.fontRenderer = Minecraft.getMinecraft().fontRenderer;
 
-			boolean topText = this.controller.isNodeFinished() && this.controller.getCurrentNode().getButtons().size() > 0;
+			final boolean topText = this.controller.isNodeFinished() && this.controller.getCurrentNode().getButtons().size() > 0;
 
-			String name = I18n.format(this.speaker.getUnlocalizedName());
+			final String name = I18n.format(this.speaker.getUnlocalizedName());
 
 			this.namePlate = new GuiTextBox(
 					buttons.size() + 2,
@@ -265,7 +283,7 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 					this.height - (topText ? 122 + this.topTextBox.getTextHeight(this.fontRenderer) : 107),
 					this.fontRenderer.getStringWidth(name + 10), 20);
 
-			ITextComponent textComponent = new TextComponentTranslation(name);
+			final ITextComponent textComponent = new TextComponentTranslation(name);
 			textComponent.setStyle(new Style().setColor(TextFormatting.YELLOW).setItalic(true));
 
 			this.namePlate.setText(textComponent);
@@ -290,13 +308,13 @@ public class GuiDialogViewer extends GuiScreen implements IDialogChangeListener
 	}
 
 	@Override
-	protected void keyTyped(char typedChar, int keyCode) throws IOException
+	protected void keyTyped(final char typedChar, final int keyCode) throws IOException
 	{
 		this.nextAction();
 	}
 
 	@Override
-	protected void mouseReleased(int mouseX, int mouseY, int state)
+	protected void mouseReleased(final int mouseX, final int mouseY, final int state)
 	{
 		this.nextAction();
 
