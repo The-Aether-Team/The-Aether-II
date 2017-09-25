@@ -254,7 +254,7 @@ public class TemplatePrimer
 						{
 							final TileEntityWildcard wildcard = new TileEntityWildcard();
 
-							/*if (blockAccess.getWorld() != null)
+							if (blockAccess.getWorld() != null)
 							{
 								final World world = blockAccess.getWorld();
 
@@ -268,7 +268,7 @@ public class TemplatePrimer
 								wildcard.rotate(settings.getRotation());
 
 								wildcard.onSchematicGeneration(blockAccess, world.rand);
-							}*/
+							}
 
 							continue;
 						}
@@ -323,7 +323,7 @@ public class TemplatePrimer
 					{
 						if (blockAccess.getWorld() != null)
 						{
-							//blockAccess.getWorld().notifyNeighborsRespectDebug(blockpos1, template$blockinfo2.blockState.getBlock(), false);
+							blockAccess.getWorld().notifyNeighborsRespectDebug(blockpos1, template$blockinfo2.blockState.getBlock(), false);
 						}
 
 						if (template$blockinfo2.tileentityData != null)
@@ -332,7 +332,7 @@ public class TemplatePrimer
 
 							if (tileentity1 != null)
 							{
-								//tileentity1.markDirty();
+								tileentity1.markDirty();
 							}
 						}
 					}
@@ -343,7 +343,7 @@ public class TemplatePrimer
 			{
 				if (blockAccess.getWorld() != null)
 				{
-					//TemplatePrimer.addEntitiesToWorld(template, blockAccess.getWorld(), pos, settings.getMirror(), settings.getRotation(), bb);
+					TemplatePrimer.addEntitiesToWorld(template, blockAccess.getWorld(), pos, settings.getMirror(), settings.getRotation(), bb);
 				}
 			}
 		}
