@@ -64,6 +64,18 @@ public class ChunkGeneratorAether implements IChunkGenerator
 
 		this.preparation.generateBaseTerrain(primer, island, chunkX, chunkZ);
 
+		// Prime placed templates
+		for (final TemplateInstance instance : island.getVirtualDataManager().getPlacedTemplates())
+		{
+			for (final ChunkPos chunkPos : instance.getChunksOccupied())
+			{
+				if (chunkPos.chunkXPos == chunkX && chunkPos.chunkZPos == chunkZ)
+				{
+					TemplatePrimer.primeTemplateSingleChunk(chunkPos, this.world, primer, instance.getDef(), instance.getLoc());
+				}
+			}
+		}
+
 		final Chunk chunk = new Chunk(this.world, primer, chunkX, chunkZ);
 
 		chunk.generateSkylightMap();
@@ -91,7 +103,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		this.rand.setSeed(chunkX * seedX + chunkZ * seedZ ^ this.world.getSeed());
 
 		final ISectorAccess access = IslandSectorHelper.getAccess(this.world);
-		final ISector sector = access.getLoadedSector(chunkX, chunkZ).orElse(null);
+		final ISector sector = access.provideSector(chunkX, chunkZ);
 
 		if (sector == null)
 		{
@@ -109,11 +121,6 @@ public class ChunkGeneratorAether implements IChunkGenerator
 
 		final BlockAccessExtendedWrapper blockAccess = new BlockAccessExtendedWrapper(world);
 
-		if (island.getVirtualDataManager().getPlacedTemplates().isEmpty())
-		{
-			System.out.println(new ChunkPos(chunkX, chunkZ));
-		}
-
 		// Populate placed templates
 		for (final TemplateInstance instance : island.getVirtualDataManager().getPlacedTemplates())
 		{
@@ -121,7 +128,6 @@ public class ChunkGeneratorAether implements IChunkGenerator
 			{
 				if (chunkPos.chunkXPos == chunkX && chunkPos.chunkZPos == chunkZ)
 				{
-					System.out.println("lol");
 					TemplatePrimer.generateTemplateSingleChunk(chunkPos, this.world, blockAccess, instance.getDef(), instance.getLoc());
 				}
 			}
