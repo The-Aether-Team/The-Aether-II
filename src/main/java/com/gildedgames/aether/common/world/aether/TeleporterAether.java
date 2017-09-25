@@ -288,7 +288,8 @@ public class TeleporterAether extends Teleporter implements NBT
 
 						final TemplateLoc loc = new TemplateLoc().set(pos.up()).set(settings).set(true);
 
-						if (BlockUtil.isSolid(blockID, world, pos) && TemplatePrimer.canGenerate(world, GenerationAether.aether_portal_for_world, loc))
+						if (BlockUtil.isSolid(blockID, world, pos) && TemplatePrimer
+								.canGenerateWithoutAreaCheck(world, GenerationAether.aether_portal_for_world, loc))
 						{
 							hasFoundPosition = true;
 						}

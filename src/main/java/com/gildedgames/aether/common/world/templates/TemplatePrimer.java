@@ -87,6 +87,16 @@ public class TemplatePrimer
 
 	public static boolean canGenerate(final World world, final TemplateDefinition def, final TemplateLoc loc)
 	{
+		return canGenerate(world, def, loc, true);
+	}
+
+	public static boolean canGenerateWithoutAreaCheck(final World world, final TemplateDefinition def, final TemplateLoc loc)
+	{
+		return canGenerate(world, def, loc, false);
+	}
+
+	private static boolean canGenerate(final World world, final TemplateDefinition def, final TemplateLoc loc, final boolean checkAreaLoaded)
+	{
 		BlockPos pos = loc.getPos();
 
 		if (loc.isCentered())
@@ -96,7 +106,7 @@ public class TemplatePrimer
 
 		final StructureBoundingBox bb = TemplateUtil.getBoundingBoxFromTemplate(def, loc);
 
-		if (!world.isAreaLoaded(bb) || bb.maxY > world.getActualHeight())
+		if (checkAreaLoaded && (!world.isAreaLoaded(bb) || bb.maxY > world.getActualHeight()))
 		{
 			return false;
 		}
