@@ -1,14 +1,11 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.client.gui.tab.TabBackpack;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.world.dimensions.aether.features.trees.WorldGenOrangeTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.SoundType;
@@ -55,24 +52,24 @@ public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(final Item item, final CreativeTabs tab, final NonNullList<ItemStack> list)
 	{
-		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
+		for (final BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
 			list.add(new ItemStack(item, 1, variant.getMeta()));
 		}
 	}
 
 	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	public IBlockState getActualState(final IBlockState state, final IBlockAccess worldIn, final BlockPos pos)
 	{
-		Block block = worldIn.getBlockState(pos.up()).getBlock();
+		final Block block = worldIn.getBlockState(pos.up()).getBlock();
 
 		return state.withProperty(SNOWY, block == Blocks.SNOW || block == Blocks.SNOW_LAYER);
 	}
 
 	@Override
-	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(final World world, final BlockPos pos, final IBlockState state, final Random rand)
 	{
 		if (!world.isRemote && state.getValue(PROPERTY_VARIANT) == AETHER)
 		{
@@ -86,22 +83,22 @@ public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 				{
 					for (int i = 0; i < 4; ++i)
 					{
-						BlockPos randomNeighbor = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
+						final BlockPos randomNeighbor = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
 
 						if (randomNeighbor.getY() >= 0 && randomNeighbor.getY() < 256 && !world.isBlockLoaded(randomNeighbor))
 						{
 							return;
 						}
 
-						IBlockState aboveState = world.getBlockState(randomNeighbor.up());
-						IBlockState neighborState = world.getBlockState(randomNeighbor);
+						final IBlockState aboveState = world.getBlockState(randomNeighbor.up());
+						final IBlockState neighborState = world.getBlockState(randomNeighbor);
 
 						if (neighborState.getBlock() == BlocksAether.aether_dirt
 								&& neighborState.getValue(BlockAetherDirt.PROPERTY_VARIANT) == BlockAetherDirt.DIRT &&
 								world.getLightFromNeighbors(randomNeighbor.up()) >= 4
 								&& aboveState.getLightOpacity(world, randomNeighbor.up()) <= 2)
 						{
-							IBlockState grassState = this.getDefaultState().withProperty(PROPERTY_VARIANT, AETHER);
+							final IBlockState grassState = this.getDefaultState().withProperty(PROPERTY_VARIANT, AETHER);
 
 							world.setBlockState(randomNeighbor, grassState);
 						}
@@ -112,27 +109,27 @@ public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	public Item getItemDropped(final IBlockState state, final Random rand, final int fortune)
 	{
 		return Item.getItemFromBlock(BlocksAether.aether_dirt);
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
+	public IBlockState getStateFromMeta(final int meta)
 	{
-		BlockVariant variant = PROPERTY_VARIANT.fromMeta(meta);
+		final BlockVariant variant = PROPERTY_VARIANT.fromMeta(meta);
 
 		return this.getDefaultState().withProperty(PROPERTY_VARIANT, variant);
 	}
 
 	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
+	public ItemStack getPickBlock(final IBlockState state, final RayTraceResult target, final World world, final BlockPos pos, final EntityPlayer player)
 	{
 		return new ItemStack(this, 1, state.getValue(PROPERTY_VARIANT).getMeta());
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public int getMetaFromState(final IBlockState state)
 	{
 		return state.getValue(PROPERTY_VARIANT).getMeta();
 	}
@@ -144,25 +141,25 @@ public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack)
+	public String getUnlocalizedName(final ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}
 
 	@Override
-	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
+	public boolean canGrow(final World worldIn, final BlockPos pos, final IBlockState state, final boolean isClient)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	public boolean canUseBonemeal(final World worldIn, final Random rand, final BlockPos pos, final IBlockState state)
 	{
 		return true;
 	}
 
 	@Override
-	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	public void grow(final World worldIn, final Random rand, final BlockPos pos, final IBlockState state)
 	{
 		int count = 0;
 
@@ -189,20 +186,22 @@ public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 				{
 					if (rand.nextInt(8) == 0 && BlocksAether.aether_flower.canPlaceBlockAt(worldIn, nextPos))
 					{
-						int randFlower = rand.nextInt(3);
+						final int randFlower = rand.nextInt(3);
 
 						if (randFlower >= 2)
 						{
-							worldIn.setBlockState(nextPos, BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE));
+							worldIn.setBlockState(nextPos, BlocksAether.aether_flower.getDefaultState()
+									.withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE));
 						}
 						else
 						{
-							worldIn.setBlockState(nextPos, BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER));
+							worldIn.setBlockState(nextPos, BlocksAether.aether_flower.getDefaultState()
+									.withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER));
 						}
 					}
 					else
 					{
-						IBlockState nextState = BlocksAether.tall_aether_grass.getDefaultState();
+						final IBlockState nextState = BlocksAether.tall_aether_grass.getDefaultState();
 
 						if (BlocksAether.tall_aether_grass.canPlaceBlockAt(worldIn, nextPos))
 						{
@@ -218,7 +217,9 @@ public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(
+			final World worldIn, final BlockPos pos, final IBlockState state, final EntityPlayer playerIn, final EnumHand hand, final EnumFacing facing,
+			final float hitX, final float hitY, final float hitZ)
 	{
 		if (playerIn.getHeldItemMainhand().getItem() == ItemsAether.swet_jelly)
 		{

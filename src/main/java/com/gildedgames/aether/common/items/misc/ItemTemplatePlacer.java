@@ -1,6 +1,9 @@
 package com.gildedgames.aether.common.items.misc;
 
-import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenTemplate;
+import com.gildedgames.aether.api.util.BlockAccessExtendedWrapper;
+import com.gildedgames.aether.api.world.generation.TemplateDefinition;
+import com.gildedgames.aether.api.world.generation.TemplateLoc;
+import com.gildedgames.aether.common.world.templates.TemplatePrimer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -15,19 +18,19 @@ import java.util.function.Supplier;
 public class ItemTemplatePlacer extends Item
 {
 
-	private Supplier<WorldGenTemplate> template;
+	private final Supplier<TemplateDefinition> definitions;
 
-	public ItemTemplatePlacer(Supplier<WorldGenTemplate> template)
+	public ItemTemplatePlacer(final Supplier<TemplateDefinition> template)
 	{
 		this.maxStackSize = 1;
-		this.template = template;
+		this.definitions = template;
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing,
-			float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(final EntityPlayer player, final World world, BlockPos pos, final EnumHand hand, final EnumFacing facing,
+			final float hitX, final float hitY, final float hitZ)
 	{
-		ItemStack stack = player.getHeldItem(hand);
+		final ItemStack stack = player.getHeldItem(hand);
 
 		if (facing == EnumFacing.DOWN)
 		{
@@ -47,7 +50,7 @@ public class ItemTemplatePlacer extends Item
 			}
 			else
 			{
-				Rotation rotation;
+				final Rotation rotation;
 
 				if (player.getHorizontalFacing() == EnumFacing.NORTH)
 				{
@@ -66,31 +69,32 @@ public class ItemTemplatePlacer extends Item
 					rotation = Rotation.NONE;
 				}
 
-				PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(rotation).setIgnoreEntities(false).setChunk(null).setReplacedBlock(Blocks.AIR).setIgnoreStructureBlock(false);
+				final PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(rotation).setIgnoreEntities(false)
+						.setChunk(null).setReplacedBlock(Blocks.AIR).setIgnoreStructureBlock(false);
 
-				final WorldGenTemplate template = this.template.get();
+				final TemplateDefinition def = this.definitions.get();
 
-				BlockPos size = template.getTemplate().transformedSize(rotation);
+				final BlockPos size = def.getTemplate().transformedSize(rotation);
 
 				switch (rotation)
 				{
-				case NONE:
-					pos = pos.add(-size.getX() / 2, 0, -size.getZ() / 2);
-					break;
-				default:
-					break;
-				case CLOCKWISE_90:
-					pos = pos.add(size.getX() / 2, 0, -size.getZ() / 2);
-					break;
-				case COUNTERCLOCKWISE_90:
-					pos = pos.add(-size.getX() / 2, 0, size.getZ() / 2);
-					break;
-				case CLOCKWISE_180:
-					pos = pos.add(size.getX() / 2, 0, size.getZ() / 2);
-					break;
+					case NONE:
+						pos = pos.add(-size.getX() / 2, 0, -size.getZ() / 2);
+						break;
+					default:
+						break;
+					case CLOCKWISE_90:
+						pos = pos.add(size.getX() / 2, 0, -size.getZ() / 2);
+						break;
+					case COUNTERCLOCKWISE_90:
+						pos = pos.add(-size.getX() / 2, 0, size.getZ() / 2);
+						break;
+					case CLOCKWISE_180:
+						pos = pos.add(size.getX() / 2, 0, size.getZ() / 2);
+						break;
 				}
 
-				template.placeTemplateWithoutCheck(world, pos, placementsettings);
+				TemplatePrimer.generateTemplate(new BlockAccessExtendedWrapper(world), def, new TemplateLoc().set(pos).set(placementsettings));
 
 				stack.shrink(1);
 

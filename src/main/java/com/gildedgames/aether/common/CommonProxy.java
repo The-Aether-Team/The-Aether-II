@@ -8,7 +8,7 @@ import com.gildedgames.aether.common.entities.util.QuicksoilProcessor;
 import com.gildedgames.aether.common.items.tools.ItemToolHandler;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.registry.ContentRegistry;
-import com.gildedgames.aether.common.world.dimensions.aether.island.logic.IslandSectorAccess;
+import com.gildedgames.aether.common.world.SectorEventHandler;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
@@ -52,7 +52,7 @@ public class CommonProxy implements IAetherServices
 		MinecraftForge.EVENT_BUS.register(ItemSkyrootSword.class);
 		MinecraftForge.EVENT_BUS.register(QuicksoilProcessor.class);
 
-		MinecraftForge.EVENT_BUS.register(IslandSectorAccess.inst());
+		MinecraftForge.EVENT_BUS.register(SectorEventHandler.class);
 	}
 
 	public void spawnJumpParticles(World world, double x, double y, double z, double radius, int quantity)

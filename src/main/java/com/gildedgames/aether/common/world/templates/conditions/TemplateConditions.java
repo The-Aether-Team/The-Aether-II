@@ -1,13 +1,14 @@
 package com.gildedgames.aether.common.world.templates.conditions;
 
+import com.gildedgames.aether.api.world.generation.PlacementCondition;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenTemplate;
 import net.minecraft.block.material.Material;
 
 public class TemplateConditions
 {
-	public static final WorldGenTemplate.PlacementCondition FLAT_GROUND = new FlatGroundPlacementCondition(),
+	public static final PlacementCondition FLAT_GROUND = new FlatGroundPlacementCondition(),
 			INSIDE_GROUND = new InsideGroundPlacementCondition(),
+			INSIDE_GROUND_AT_SOURCE = new InsideGroundAtSourcePlacementCondition(),
 			REPLACEABLE = new ReplaceablePlacementCondition(true),
 			REPLACEABLE_NOT_CRITICAL = new ReplaceablePlacementCondition(false),
 			REPLACEABLE_CANOPY = new ReplaceablePlacementCondition(false, Material.WOOD, Material.LEAVES),

@@ -1,35 +1,40 @@
 package com.gildedgames.aether.common.world.templates.conditions;
 
-import com.gildedgames.aether.common.world.dimensions.aether.features.WorldGenTemplate;
+import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
+import com.gildedgames.aether.api.world.generation.PlacementCondition;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.Template;
 
 import java.util.List;
 
-public class OnSpecificBlockPlacementCondition implements WorldGenTemplate.PlacementCondition
+public class OnSpecificBlockPlacementCondition implements PlacementCondition
 {
 
-	private Block[] blocks;
+	private final Block[] blocks;
 
-	public OnSpecificBlockPlacementCondition(Block... blocks)
+	public OnSpecificBlockPlacementCondition(final Block... blocks)
 	{
 		this.blocks = blocks;
 	}
 
 	@Override
-	public boolean canPlace(Template template, World world, BlockPos placedAt, Template.BlockInfo block)
+	public boolean canPlace(final Template template, final IBlockAccessExtended world, final BlockPos placedAt, final Template.BlockInfo block)
 	{
 		if (block.pos.getY() == placedAt.getY() && block.blockState.getBlock() != Blocks.AIR
 				&& block.blockState.getBlock() != Blocks.STRUCTURE_VOID)
 		{
-			BlockPos down = block.pos.down();
+			final BlockPos down = block.pos.down();
 
-			Block blockDown = world.getBlockState(down).getBlock();
+			if (!world.canAccess(down))
+			{
+				return false;
+			}
 
-			for (Block s : this.blocks)
+			final Block blockDown = world.getBlockState(down).getBlock();
+
+			for (final Block s : this.blocks)
 			{
 				if (s == blockDown)
 				{
@@ -44,7 +49,7 @@ public class OnSpecificBlockPlacementCondition implements WorldGenTemplate.Place
 	}
 
 	@Override
-	public boolean canPlaceCheckAll(Template template, World world, BlockPos placedAt, List<Template.BlockInfo> blocks)
+	public boolean canPlaceCheckAll(final Template template, final IBlockAccessExtended world, final BlockPos placedAt, final List<Template.BlockInfo> blocks)
 	{
 		return true;
 	}

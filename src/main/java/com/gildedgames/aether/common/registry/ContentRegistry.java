@@ -8,6 +8,7 @@ import com.gildedgames.aether.api.registry.IItemPropertiesRegistry;
 import com.gildedgames.aether.api.registry.recipes.IRecipeIndexRegistry;
 import com.gildedgames.aether.api.registry.tab.ITabRegistry;
 import com.gildedgames.aether.api.structure.IStructureLoader;
+import com.gildedgames.aether.api.world.generation.ITemplateRegistry;
 import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.common.blocks.BlocksAether;
@@ -33,6 +34,8 @@ import java.util.Collection;
 
 public class ContentRegistry implements IContentRegistry
 {
+	private final TemplateRegistry templateRegistry = new TemplateRegistry();
+
 	private final AltarRegistry altarRegistry = new AltarRegistry();
 
 	private final TabRegistry tabRegistry = new TabRegistry();
@@ -90,9 +93,9 @@ public class ContentRegistry implements IContentRegistry
 
 	private void rebuildIndexes()
 	{
-		Collection<IRecipe> recipes = RecipesAether.getCraftableRecipes();
+		final Collection<IRecipe> recipes = RecipesAether.getCraftableRecipes();
 
-		for (IRecipe recipe : recipes)
+		for (final IRecipe recipe : recipes)
 		{
 			if (recipe instanceof ShapedOreRecipe)
 			{
@@ -103,6 +106,12 @@ public class ContentRegistry implements IContentRegistry
 				this.craftableItemsIndex.registerRecipe(new ShapelessRecipeWrapper((ShapelessOreRecipe) recipe));
 			}
 		}
+	}
+
+	@Override
+	public ITemplateRegistry templates()
+	{
+		return this.templateRegistry;
 	}
 
 	@Override
