@@ -17,19 +17,19 @@ public class PacketSaveStructure implements IMessage
 	{
 	}
 
-	public PacketSaveStructure(BlockPos pos)
+	public PacketSaveStructure(final BlockPos pos)
 	{
 		this.pos = pos;
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf)
+	public void fromBytes(final ByteBuf buf)
 	{
 		this.pos = new BlockPos(buf.readInt(), buf.readInt(), buf.readInt());
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf)
+	public void toBytes(final ByteBuf buf)
 	{
 		buf.writeInt(this.pos.getX());
 		buf.writeInt(this.pos.getY());
@@ -39,22 +39,24 @@ public class PacketSaveStructure implements IMessage
 	public static class HandlerServer extends MessageHandlerServer<PacketSaveStructure, IMessage>
 	{
 		@Override
-		public IMessage onMessage(PacketSaveStructure message, EntityPlayer player)
+		public IMessage onMessage(final PacketSaveStructure message, final EntityPlayer player)
 		{
 			if (!player.canUseCommand(2, ""))
 			{
-				AetherCore.LOGGER.warn("Player {} tried to send PacketStructureBuilder, but is not an operator. Ignoring...", player.getDisplayNameString());
+				AetherCore.LOGGER
+						.warn("Player {} tried to send PacketStructureBuilder, but is not an operator. Ignoring...", player.getDisplayNameString());
 
 				return null;
 			}
 
-			World world = player.getEntityWorld();
+			final World world = player.getEntityWorld();
 
-			TileEntityStructureBuilder te = (TileEntityStructureBuilder) world.getTileEntity(message.pos);
+			final TileEntityStructureBuilder te = (TileEntityStructureBuilder) world.getTileEntity(message.pos);
 
 			if (te == null)
 			{
-				AetherCore.LOGGER.warn("Player {} tried to send PacketStructureBuilder, but the world coordinates {} are invalid. Ignoring...", player.getDisplayNameString(), message.pos);
+				AetherCore.LOGGER.warn("Player {} tried to send PacketStructureBuilder, but the world coordinates {} are invalid. Ignoring...",
+						player.getDisplayNameString(), message.pos);
 
 				return null;
 			}

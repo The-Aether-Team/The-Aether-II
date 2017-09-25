@@ -6,10 +6,6 @@ import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.UUID;
 
 public class PacketLatchSwet implements IMessage
 {
@@ -43,7 +39,6 @@ public class PacketLatchSwet implements IMessage
 		buf.writeInt(this.id);
 	}
 
-	@SideOnly(Side.CLIENT)
 	public static class HandlerClient extends MessageHandlerClient<PacketLatchSwet, IMessage>
 	{
 		@Override
@@ -53,8 +48,6 @@ public class PacketLatchSwet implements IMessage
 			{
 				return null;
 			}
-
-			System.out.println(message.id);
 
 			final PlayerAether playerAether = PlayerAether.getPlayer(player.world.getEntityByID(message.id));
 

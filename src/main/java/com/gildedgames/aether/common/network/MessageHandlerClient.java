@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.network;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -9,7 +8,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
 public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMessage> implements IMessageHandler<REQ, RES>
 {
 	private final boolean executesOnGameThread;
@@ -19,21 +17,20 @@ public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMe
 		this(true);
 	}
 
-
 	/**
 	 * Creates a message handler for the client-side.
 	 * @param safety True if this packet should process on the main game thread.
 	 *               You almost always want this unless you need to reply instantly
 	 *               to the packet.
 	 */
-	public MessageHandlerClient(boolean safety)
+	public MessageHandlerClient(final boolean safety)
 	{
 		this.executesOnGameThread = safety;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public RES onMessage(REQ message, MessageContext ctx)
+	public RES onMessage(final REQ message, final MessageContext ctx)
 	{
 		final Minecraft mc = Minecraft.getMinecraft();
 
@@ -43,7 +40,6 @@ public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMe
 
 			return null;
 		}
-
 
 		return this.onMessage(message, mc.player);
 	}
@@ -65,7 +61,7 @@ public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMe
 
 		private final REQ message;
 
-		private FutureMessage(MessageHandlerClient<REQ, ?> handler, REQ message)
+		private FutureMessage(final MessageHandlerClient<REQ, ?> handler, final REQ message)
 		{
 			this.message = message;
 			this.handler = handler;

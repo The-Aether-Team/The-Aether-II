@@ -14,13 +14,13 @@ public class PacketCloseDialog implements IMessage
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf)
+	public void fromBytes(final ByteBuf buf)
 	{
 
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf)
+	public void toBytes(final ByteBuf buf)
 	{
 
 	}
@@ -28,9 +28,9 @@ public class PacketCloseDialog implements IMessage
 	public static class HandlerServer extends MessageHandlerServer<PacketCloseDialog, PacketCloseDialog>
 	{
 		@Override
-		public PacketCloseDialog onMessage(PacketCloseDialog message, EntityPlayer player)
+		public PacketCloseDialog onMessage(final PacketCloseDialog message, final EntityPlayer player)
 		{
-			IPlayerAether aePlayer = PlayerAether.getPlayer(player);
+			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 			aePlayer.getDialogController().closeScene();
 
 			return null;

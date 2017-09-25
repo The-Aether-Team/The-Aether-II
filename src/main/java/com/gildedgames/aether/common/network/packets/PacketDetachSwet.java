@@ -6,8 +6,6 @@ import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PacketDetachSwet implements IMessage
 {
@@ -41,7 +39,6 @@ public class PacketDetachSwet implements IMessage
 		buf.writeInt(this.id);
 	}
 
-	@SideOnly(Side.CLIENT)
 	public static class HandlerClient extends MessageHandlerClient<PacketDetachSwet, IMessage>
 	{
 		@Override

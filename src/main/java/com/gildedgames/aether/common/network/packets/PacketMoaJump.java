@@ -5,8 +5,6 @@ import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PacketMoaJump implements IMessage
 {
@@ -18,30 +16,29 @@ public class PacketMoaJump implements IMessage
 
 	}
 
-	public PacketMoaJump(int midAirJumpsAllowed)
+	public PacketMoaJump(final int midAirJumpsAllowed)
 	{
 		this.midAirJumpsAllowed = midAirJumpsAllowed;
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf)
+	public void fromBytes(final ByteBuf buf)
 	{
 		this.midAirJumpsAllowed = buf.readInt();
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf)
+	public void toBytes(final ByteBuf buf)
 	{
 		buf.writeInt(this.midAirJumpsAllowed);
 	}
 
-	@SideOnly(Side.CLIENT)
 	public static class HandlerClient extends MessageHandlerClient<PacketMoaJump, PacketMoaJump>
 	{
 		@Override
-		public PacketMoaJump onMessage(PacketMoaJump message, EntityPlayer player)
+		public PacketMoaJump onMessage(final PacketMoaJump message, final EntityPlayer player)
 		{
-			PlayerAether playerAether = PlayerAether.getPlayer(player);
+			final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 			playerAether.getAbilitiesModule().setMidAirJumpsAllowed(message.midAirJumpsAllowed);
 

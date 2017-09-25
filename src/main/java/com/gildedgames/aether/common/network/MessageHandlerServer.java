@@ -20,17 +20,18 @@ public abstract class MessageHandlerServer<REQ extends IMessage, RES extends IMe
 	 *               You almost always want this unless you need to reply instantly
 	 *               to the packet.
 	 */
-	public MessageHandlerServer(boolean safety)
+	public MessageHandlerServer(final boolean safety)
 	{
 		this.executesOnGameThread = safety;
 	}
 
 	@Override
-	public RES onMessage(REQ message, MessageContext ctx)
+	public RES onMessage(final REQ message, final MessageContext ctx)
 	{
 		if (this.executesOnGameThread)
 		{
-			ctx.getServerHandler().player.getServerWorld().addScheduledTask(() -> {
+			ctx.getServerHandler().player.getServerWorld().addScheduledTask(() ->
+			{
 				this.onMessage(message, ctx.getServerHandler().player);
 			});
 

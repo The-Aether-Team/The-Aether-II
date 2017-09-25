@@ -5,8 +5,6 @@ import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PacketMarkPlayerDeath implements IMessage
 {
@@ -18,35 +16,34 @@ public class PacketMarkPlayerDeath implements IMessage
 
 	}
 
-	public PacketMarkPlayerDeath(boolean flag)
+	public PacketMarkPlayerDeath(final boolean flag)
 	{
 		this.flag = flag;
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf)
+	public void fromBytes(final ByteBuf buf)
 	{
 		this.flag = buf.readBoolean();
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf)
+	public void toBytes(final ByteBuf buf)
 	{
 		buf.writeBoolean(this.flag);
 	}
 
-	@SideOnly(Side.CLIENT)
 	public static class HandlerClient extends MessageHandlerClient<PacketMarkPlayerDeath, IMessage>
 	{
 		@Override
-		public IMessage onMessage(PacketMarkPlayerDeath message, EntityPlayer player)
+		public IMessage onMessage(final PacketMarkPlayerDeath message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{
 				return null;
 			}
 
-			PlayerAether playerAether = PlayerAether.getPlayer(player);
+			final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 			playerAether.setHasDiedInAetherBefore(message.flag);
 

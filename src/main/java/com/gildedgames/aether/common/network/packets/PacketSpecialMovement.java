@@ -8,11 +8,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketSpecialMovement implements IMessage
 {
-	public enum Action
-	{
-		EXTRA_JUMP
-	}
-
 	private Action action;
 
 	public PacketSpecialMovement()
@@ -20,29 +15,34 @@ public class PacketSpecialMovement implements IMessage
 
 	}
 
-	public PacketSpecialMovement(Action action)
+	public PacketSpecialMovement(final Action action)
 	{
 		this.action = action;
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf)
+	public void fromBytes(final ByteBuf buf)
 	{
 		this.action = Action.values()[buf.readByte()];
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf)
+	public void toBytes(final ByteBuf buf)
 	{
 		buf.writeByte(this.action.ordinal());
+	}
+
+	public enum Action
+	{
+		EXTRA_JUMP
 	}
 
 	public static class HandlerServer extends MessageHandlerServer<PacketSpecialMovement, PacketSpecialMovement>
 	{
 		@Override
-		public PacketSpecialMovement onMessage(PacketSpecialMovement message, EntityPlayer player)
+		public PacketSpecialMovement onMessage(final PacketSpecialMovement message, final EntityPlayer player)
 		{
-			PlayerAether aePlayer = PlayerAether.getPlayer(player);
+			final PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
 			switch (message.action)
 			{

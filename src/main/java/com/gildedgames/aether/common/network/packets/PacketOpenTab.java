@@ -21,15 +21,15 @@ public class PacketOpenTab implements IMessage
 	{
 	}
 
-	public PacketOpenTab(ITab tab)
+	public PacketOpenTab(final ITab tab)
 	{
-		for (Map.Entry<Integer, ITabGroupHandler> entry : AetherAPI.content().tabs().getRegisteredTabGroups().entrySet())
+		for (final Map.Entry<Integer, ITabGroupHandler> entry : AetherAPI.content().tabs().getRegisteredTabGroups().entrySet())
 		{
-			int groupIndex = entry.getKey();
+			final int groupIndex = entry.getKey();
 
-			ITabGroupHandler handler = entry.getValue();
+			final ITabGroupHandler handler = entry.getValue();
 
-			for (ITab groupTab : handler.getClientGroup().getTabs())
+			for (final ITab groupTab : handler.getClientGroup().getTabs())
 			{
 				if (tab == groupTab)
 				{
@@ -43,21 +43,21 @@ public class PacketOpenTab implements IMessage
 		}
 	}
 
-	public PacketOpenTab(int tabGroupIndex, int tabIndex)
+	public PacketOpenTab(final int tabGroupIndex, final int tabIndex)
 	{
 		this.tabGroupIndex = tabGroupIndex;
 		this.tabIndex = tabIndex;
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf)
+	public void fromBytes(final ByteBuf buf)
 	{
 		this.tabGroupIndex = buf.readInt();
 		this.tabIndex = buf.readInt();
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf)
+	public void toBytes(final ByteBuf buf)
 	{
 		buf.writeInt(this.tabGroupIndex);
 		buf.writeInt(this.tabIndex);
@@ -66,24 +66,24 @@ public class PacketOpenTab implements IMessage
 	public static class HandlerServer extends MessageHandlerServer<PacketOpenTab, PacketOpenTab>
 	{
 		@Override
-		public PacketOpenTab onMessage(PacketOpenTab message, EntityPlayer player)
+		public PacketOpenTab onMessage(final PacketOpenTab message, final EntityPlayer player)
 		{
 			if (player instanceof EntityPlayerMP)
 			{
 				if (message.tabGroupIndex < AetherAPI.content().tabs().getRegisteredTabGroups().size())
 				{
-					ITabGroupHandler tabGroupHandler = AetherAPI.content().tabs().getRegisteredTabGroups().get(message.tabGroupIndex);
+					final ITabGroupHandler tabGroupHandler = AetherAPI.content().tabs().getRegisteredTabGroups().get(message.tabGroupIndex);
 
 					if (tabGroupHandler == null)
 					{
 						return null;
 					}
 
-					ITabGroup<ITab> tabGroup = tabGroupHandler.getServerGroup();
+					final ITabGroup<ITab> tabGroup = tabGroupHandler.getServerGroup();
 
 					if (message.tabIndex < tabGroup.getTabs().size())
 					{
-						ITab tab = tabGroup.getTabs().get(message.tabIndex);
+						final ITab tab = tabGroup.getTabs().get(message.tabIndex);
 						tab.onOpen(player);
 					}
 				}
