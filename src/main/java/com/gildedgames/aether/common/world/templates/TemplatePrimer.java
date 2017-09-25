@@ -106,7 +106,7 @@ public class TemplatePrimer
 
 		final StructureBoundingBox bb = TemplateUtil.getBoundingBoxFromTemplate(def, loc);
 
-		if (checkAreaLoaded && (!world.isAreaLoaded(bb) || bb.maxY > world.getActualHeight()))
+		if ((checkAreaLoaded && !world.isAreaLoaded(bb)) || bb.maxY > world.getActualHeight())
 		{
 			return false;
 		}
