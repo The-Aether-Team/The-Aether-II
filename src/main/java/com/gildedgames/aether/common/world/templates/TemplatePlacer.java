@@ -79,4 +79,18 @@ public class TemplatePlacer
 		return result;
 	}
 
+	public static boolean canPlace(final IBlockAccessExtended placeWith, final TemplateDefinition def, final TemplateLoc loc, final Random rand)
+	{
+		final Rotation rotation = def.hasRandomRotation() ? ROTATIONS[rand.nextInt(ROTATIONS.length)] : ROTATIONS[0];
+
+		loc.getSettings().setRotation(rotation);
+
+		if (loc.isCentered())
+		{
+			loc.set(TemplateUtil.getCenteredPos(def, loc));
+		}
+
+		return TemplatePrimer.canGenerate(placeWith, def, loc);
+	}
+
 }

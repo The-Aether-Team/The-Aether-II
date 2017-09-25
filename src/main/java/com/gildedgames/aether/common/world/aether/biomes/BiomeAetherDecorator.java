@@ -132,7 +132,7 @@ public class BiomeAetherDecorator
 			{
 				final TemplateLoc loc = new TemplateLoc().set(pos2).set(true);
 
-				generated = TemplatePlacer.place(island.getVirtualDataManager(), def, loc, random);
+				generated = TemplatePlacer.canPlace(island.getVirtualDataManager(), def, loc, random);
 
 				if (generated)
 				{

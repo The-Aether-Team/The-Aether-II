@@ -96,8 +96,6 @@ public class WorldPreparationAether
 			final BiomeAetherBase aetherBiome = (BiomeAetherBase) island.getBiome();
 
 			aetherBiome.getBiomeDecorator().prepareDecorationsWholeIsland(this.world, island, this.rand);
-
-			System.out.println("LOL");
 		}
 
 		for (int chunkX = minChunkX; chunkX < maxChunkX; chunkX++)
