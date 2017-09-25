@@ -5,12 +5,14 @@ import com.gildedgames.aether.api.util.NBTHelper;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityEdison extends EntityNPC
 {
@@ -19,16 +21,17 @@ public class EntityEdison extends EntityNPC
 	public EntityEdison(final World worldIn)
 	{
 		super(worldIn);
+
+		this.setSize(1.0F, 1.0F);
+
+		this.rotationYaw = 0.3F;
 	}
 
 	@Override
 	protected void initEntityAI()
 	{
-		this.tasks.addTask(1, new EntityAIWander(this, 0.3, 10));
-		this.tasks.addTask(2, new EntityAIMoveTowardsRestriction(this, 1.0D));
-		this.tasks.addTask(2, new EntityAISwimming(this));
-		this.tasks.addTask(3, new EntityAILookIdle(this));
-		this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
+		//this.tasks.addTask(1, new EntityAILookIdle(this));
+		this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
 	}
 
 	@Override
@@ -68,22 +71,41 @@ public class EntityEdison extends EntityNPC
 	}
 
 	@Override
+	protected void setRotation(final float yaw, final float pitch)
+	{
+
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void turn(final float yaw, final float pitch)
+	{
+
+	}
+
+	@Override
 	public void onUpdate()
 	{
+		this.posX = this.prevPosX;
+		this.posZ = this.prevPosZ;
+
+		this.renderYawOffset = 315F;
+
+		this.setHealth(this.getMaxHealth());
+		this.isDead = false;
+
 		if (this.spawned == null)
 		{
 			this.spawned = this.getPosition();
-
-			this.setHomePosAndDistance(this.spawned, 16);
-		}
-
-		// Attempt once every 5 seconds
-		if (this.ticksExisted % 100 == 0 && !this.isWithinHomeDistanceCurrentPosition())
-		{
-			this.attemptTeleport(this.getHomePosition().getX(), this.getHomePosition().getY(), this.getHomePosition().getZ());
+			this.setHomePosAndDistance(this.spawned, 3);
 		}
 
 		super.onUpdate();
+
+		this.posX = this.prevPosX;
+		this.posZ = this.prevPosZ;
+
+		this.renderYawOffset = 315F;
 	}
 
 	@Override

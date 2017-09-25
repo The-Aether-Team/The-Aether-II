@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.world.ISector;
 import com.gildedgames.aether.api.world.ISectorAccess;
 import com.gildedgames.aether.api.world.IslandSectorHelper;
 import com.gildedgames.aether.api.world.TemplateInstance;
+import com.gildedgames.aether.api.world.generation.PostPlacement;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.world.templates.TemplatePrimer;
 import net.minecraft.entity.EnumCreatureType;
@@ -124,6 +125,16 @@ public class ChunkGeneratorAether implements IChunkGenerator
 				if (chunkPos.chunkXPos == chunkX && chunkPos.chunkZPos == chunkZ)
 				{
 					TemplatePrimer.generateTemplateSingleChunk(chunkPos, this.world, blockAccess, instance.getDef(), instance.getLoc());
+
+					if (!instance.hasGeneratedAChunk())
+					{
+						for (final PostPlacement post : instance.getDef().getPostPlacements())
+						{
+							post.postGenerate(this.world, this.rand, instance.getLoc());
+						}
+
+						instance.markGeneratedAChunk();
+					}
 				}
 			}
 		}

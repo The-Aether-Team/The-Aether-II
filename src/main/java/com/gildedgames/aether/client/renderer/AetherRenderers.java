@@ -42,7 +42,7 @@ public class AetherRenderers
 	{
 		registerTESRs();
 
-		ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
+		final ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
 		itemColors.registerItemColorHandler(new ItemMoaEggColorHandler(), ItemsAether.moa_egg);
 		itemColors.registerItemColorHandler(new WrappingPaperColorHandler(), ItemsAether.wrapping_paper);
 		itemColors.registerItemColorHandler(new MoaFeatherColorHandler(), ItemsAether.moa_feather);
@@ -78,7 +78,7 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntitySwet.class, RenderSwet::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityPinkBabySwet.class, RenderPinkBabySwet::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityGlitterwing.class, RenderGlitterwing::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityEdison.class, RenderEdison::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityEdison.class, RenderEdisonSitting::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTaegore.class, RenderTaegore::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBurrukai.class, RenderBurrukai::new);
 	}

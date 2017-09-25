@@ -7,10 +7,13 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
+import com.gildedgames.aether.common.entities.living.npc.EntityEdison;
 import com.gildedgames.aether.common.world.aether.features.WorldGenFloorPlacer;
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.templates.conditions.TemplateConditions;
 import com.gildedgames.aether.common.world.templates.post.PostPlacementMoaFamily;
+import com.gildedgames.aether.common.world.templates.post.PostPlacementSetBlock;
+import com.gildedgames.aether.common.world.templates.post.PostPlacementSpawnEntity;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 
@@ -190,12 +193,24 @@ public class GenerationAether
 				.setConditions(TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL,
 						TemplateConditions.REPLACEABLE_GROUND);
 
-		mysterious_henge = new TemplateDefinition(TemplatesAether.mysterious_henge)
-				.setConditions(TemplateConditions.INSIDE_GROUND, TemplateConditions.REPLACEABLE_GROUND);
+		final BlockPos edisonPos = new BlockPos(-1.0, 2, -1.0);
+		final BlockPos campfirePos = new BlockPos(0.0, 1, 0.0);
 
-		outpost_a = new TemplateDefinition(TemplatesAether.outpost_a).setConditions(TemplateConditions.INSIDE_GROUND_AT_SOURCE);
-		outpost_b = new TemplateDefinition(TemplatesAether.outpost_b).setConditions(TemplateConditions.INSIDE_GROUND_AT_SOURCE);
-		outpost_c = new TemplateDefinition(TemplatesAether.outpost_c).setConditions(TemplateConditions.INSIDE_GROUND_AT_SOURCE);
+		mysterious_henge = new TemplateDefinition(TemplatesAether.mysterious_henge)
+				.setConditions(TemplateConditions.INSIDE_GROUND, TemplateConditions.REPLACEABLE_GROUND)
+				.setPostPlacements(new PostPlacementSpawnEntity(EntityEdison::new, edisonPos));
+
+		outpost_a = new TemplateDefinition(TemplatesAether.outpost_a).setConditions(TemplateConditions.INSIDE_GROUND_AT_SOURCE)
+				.setPostPlacements(new PostPlacementSpawnEntity(EntityEdison::new, edisonPos),
+						new PostPlacementSetBlock(BlocksAether.outpost_campfire.getDefaultState(), campfirePos));
+
+		outpost_b = new TemplateDefinition(TemplatesAether.outpost_b).setConditions(TemplateConditions.INSIDE_GROUND_AT_SOURCE)
+				.setPostPlacements(new PostPlacementSpawnEntity(EntityEdison::new, edisonPos),
+						new PostPlacementSetBlock(BlocksAether.outpost_campfire.getDefaultState(), campfirePos));
+
+		outpost_c = new TemplateDefinition(TemplatesAether.outpost_c).setConditions(TemplateConditions.INSIDE_GROUND_AT_SOURCE)
+				.setPostPlacements(new PostPlacementSpawnEntity(EntityEdison::new, edisonPos),
+						new PostPlacementSetBlock(BlocksAether.outpost_campfire.getDefaultState(), campfirePos));
 
 		mysterious_henge.setRandomRotation(false);
 
