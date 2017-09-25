@@ -118,7 +118,8 @@ public class BiomeAetherDecorator
 
 		final BlockPos pos = new BlockPos(startX, 0, startZ);
 
-		final TemplateDefinition def = TemplateUtil.pickRandom(random, GenerationAether.outpost_a, GenerationAether.outpost_b, GenerationAether.outpost_c);
+		final TemplateDefinition def = TemplateUtil
+				.pickRandom(random, GenerationAether.mysterious_henge, GenerationAether.outpost_a, GenerationAether.outpost_b, GenerationAether.outpost_c);
 
 		boolean generated = false;
 
