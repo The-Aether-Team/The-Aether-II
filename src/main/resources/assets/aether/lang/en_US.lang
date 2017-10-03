@@ -126,7 +126,7 @@ tile.aether.sentry_stone_stairs.name=Sentry Stone Stairs
 tile.aether.divine_sentry_stone_stairs.name=Divine Sentry Stone Stairs
 tile.aether.carved_stone_stairs.name=Carved Stone Stairs
 tile.aether.divine_carved_stone_stairs.name=Divine Carved Stone Stairs
-tile.aether.cloudwool_block.name=Cloudwool Block
+tile.aether.cloudwool_block.name=Cloudwool
 tile.aether.woven_sticks.skyroot.name=Woven Skyroot Sticks
 tile.aether.moa_egg.name=Moa Egg
 tile.aether.icestone_brick_stairs.name=Icestone Brick Stairs
@@ -205,7 +205,6 @@ tile.aether.valkyrie_grass.full.name=Valkyrie Grass
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
 item.aether.cloudtwine.name=Cloudtwine
-item.aether.cloudwool.name=Cloudwool
 item.aether.moa_feather.name=Moa Feather
 item.aether.cockatrice_feather.name=Cockatrice Feather
 item.aether.ambrosium_shard.name=Ambrosium Shard

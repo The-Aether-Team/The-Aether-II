@@ -236,7 +236,6 @@ public class ItemModelsAether
 
 		registerItemModels(ItemsAether.skyroot_stick, "skyroot_stick");
 		registerItemModels(ItemsAether.cloudtwine, "cloudtwine");
-		registerItemModels(ItemsAether.cloudwool, "cloudwool");
 		registerItemModels(ItemsAether.golden_amber, "golden_amber");
 		registerItemModels(ItemsAether.moa_feather, "moa_feather");
 		registerItemModels(ItemsAether.cockatrice_feather, "cockatrice_feather");

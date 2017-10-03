@@ -38,8 +38,6 @@ public class ItemsAether
 {
 	public static final Item skyroot_stick = new Item();
 
-	public static final Item cloudwool = new Item();
-
 	public static final Item cloudtwine = new Item();
 
 	public static final ItemMoaFeather moa_feather = new ItemMoaFeather();
@@ -407,7 +405,6 @@ public class ItemsAether
 		registerItem("icestone", icestone.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("gravitite_plate", gravitite_plate.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("cloudtwine", cloudtwine.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("cloudwool", cloudwool.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("moa_feather", moa_feather.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("cockatrice_feather", cockatrice_feather.setCreativeTab(CreativeTabsAether.MATERIALS));
 

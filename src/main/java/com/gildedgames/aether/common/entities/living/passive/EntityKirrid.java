@@ -133,7 +133,7 @@ public class EntityKirrid extends EntitySheep
 
 		for (int i = 0; i < count; i++)
 		{
-			ret.add(new ItemStack(ItemsAether.cloudwool));
+			ret.add(new ItemStack(BlocksAether.cloudwool_block));
 		}
 
 		this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);

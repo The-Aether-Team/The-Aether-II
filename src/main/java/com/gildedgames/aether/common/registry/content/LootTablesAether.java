@@ -14,7 +14,7 @@ public class LootTablesAether
 
 	public static ResourceLocation ENTITY_COCKATRICE;
 
-	public static ResourceLocation ENTITY_SWET, ENTITY_SWET_BLUE, ENTITY_SWET_GREEN, ENTITY_SWET_PURPLE, ENTITY_SWET_LIGHT;
+	public static ResourceLocation ENTITY_SWET, ENTITY_SWET_BLUE, ENTITY_SWET_GREEN, ENTITY_SWET_PURPLE;
 
 	public static ResourceLocation ENTITY_FLYING_COW;
 

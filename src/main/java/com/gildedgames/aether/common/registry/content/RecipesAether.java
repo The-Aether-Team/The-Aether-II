@@ -151,17 +151,9 @@ public class RecipesAether
 		registerShapedRecipe(new ItemStack(BlocksAether.aether_crafting_table), "XX", "XX",
 				'X', new ItemStack(BlocksAether.skyroot_planks));
 
-		// Cloudwool_Block
-		registerShapedRecipe(new ItemStack(BlocksAether.cloudwool_block), "XX", "XX",
-				'X', new ItemStack(ItemsAether.cloudwool));
-
-		// Cloudwool
-		registerShapedRecipe(new ItemStack(ItemsAether.cloudwool, 4), "X",
-				'X', new ItemStack(BlocksAether.cloudwool_block));
-
 		// Skyroot Bed
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_bed), "XXX", "YYY",
-				'X', new ItemStack(ItemsAether.cloudwool),
+				'X', new ItemStack(BlocksAether.cloudwool_block),
 				'Y', new ItemStack(BlocksAether.skyroot_planks));
 
 		// Skyroot Chest
