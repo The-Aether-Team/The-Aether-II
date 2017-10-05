@@ -273,6 +273,11 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.arkenium_sword, "weapons/arkenium_sword");
 		registerItemModels(ItemsAether.arkenium_shears, "tools/arkenium_shears");
 
+		registerItemModels(ItemsAether.taegore_hide_helmet, "armor/taegore_hide_helmet");
+		registerItemModels(ItemsAether.taegore_hide_chestplate, "armor/taegore_hide_chestplate");
+		registerItemModels(ItemsAether.taegore_hide_leggings, "armor/taegore_hide_leggings");
+		registerItemModels(ItemsAether.taegore_hide_boots, "armor/taegore_hide_boots");
+
 		registerItemModels(ItemsAether.zanite_helmet, "armor/zanite_helmet");
 		registerItemModels(ItemsAether.zanite_chestplate, "armor/zanite_chestplate");
 		registerItemModels(ItemsAether.zanite_leggings, "armor/zanite_leggings");
@@ -410,6 +415,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.masonry_bench, "tesr");
 		registerItemModels(BlocksAether.outpost_campfire, "tesr");
 
+		registerItemModels(ItemsAether.taegore_hide_gloves, "accessories/taegore_hide_gloves");
 		registerItemModels(ItemsAether.zanite_gloves, "accessories/zanite_gloves");
 		registerItemModels(ItemsAether.arkenium_gloves, "accessories/arkenium_gloves");
 		registerItemModels(ItemsAether.gravitite_gloves, "accessories/gravitite_gloves");
@@ -417,6 +423,8 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.pink_baby_swet, "companions/pink_baby_swet");
 
 		registerItemModels(ItemsAether.shard_of_life, "miscellaneous/shard_of_life");
+
+		registerItemModels(ItemsAether.aether_saddle, "aether_saddle");
 
 		registerItemModels(ItemsAether.skyroot_shield, "skyroot_shield");
 		registerItemModels(ItemsAether.holystone_shield, "holystone_shield");

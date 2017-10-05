@@ -60,6 +60,8 @@ public class EquipmentContent
 		createCompanionItem(ItemsAether.orb_of_arkenzus, ItemEquipmentSlot.COMPANION, ItemRarity.RARE, EntityShadeOfArkenzus.class);
 
 		// Gloves
+		createEquipmentItem(ItemsAether.taegore_hide_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
+
 		createEquipmentItem(ItemsAether.zanite_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
 
 		createEquipmentItem(ItemsAether.arkenium_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);

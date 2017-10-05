@@ -10,6 +10,7 @@ public class ItemAetherGloves extends Item
 {
 	public enum GloveType
 	{
+		TAEGOREHIDE("aether:textures/armor/taegore_hide_gloves.png"),
 		ZANITE("aether:textures/armor/zanite_gloves.png"),
 		ARKENIUM("aether:textures/armor/arkenium_gloves.png"),
 		GRAVITITE("aether:textures/armor/gravitite_gloves.png"),

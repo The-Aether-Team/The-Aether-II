@@ -44,6 +44,8 @@ public class ItemsAether
 
 	public static final Item cockatrice_feather = new Item();
 
+	public static final Item aether_saddle = new ItemAetherSaddle();
+
 	public static final Item ambrosium_shard = new Item(),
 			ambrosium_chunk = new ItemAmbrosiumChunk(),
 			zanite_gemstone = new Item(),
@@ -78,6 +80,11 @@ public class ItemsAether
 			zanite_sword = new ItemZaniteSword(),
 			gravitite_sword = new ItemGravititeSword(),
 			arkenium_sword = new ItemArkeniumSword();
+
+	public static final ItemTaegoreHideArmor taegore_hide_helmet = new ItemTaegoreHideArmor(EntityEquipmentSlot.HEAD),
+			taegore_hide_chestplate = new ItemTaegoreHideArmor(EntityEquipmentSlot.CHEST),
+			taegore_hide_leggings = new ItemTaegoreHideArmor(EntityEquipmentSlot.LEGS),
+			taegore_hide_boots = new ItemTaegoreHideArmor(EntityEquipmentSlot.FEET);
 
 	public static final ItemZaniteArmor zanite_helmet = new ItemZaniteArmor(EntityEquipmentSlot.HEAD),
 			zanite_chestplate = new ItemZaniteArmor(EntityEquipmentSlot.CHEST),
@@ -185,7 +192,8 @@ public class ItemsAether
 
 	public static final Item brettl_grass = new Item();
 
-	public static final Item zanite_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.ZANITE),
+	public static final Item taegore_hide_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.TAEGOREHIDE),
+			zanite_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.ZANITE),
 			arkenium_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.ARKENIUM),
 			gravitite_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.GRAVITITE);
 
@@ -440,6 +448,12 @@ public class ItemsAether
 
 		registerItem("arkenium_shears", arkenium_shears.setCreativeTab(CreativeTabsAether.TOOLS));
 
+		registerItem("taegore_hide_helmet", taegore_hide_helmet);
+		registerItem("taegore_hide_chestplate", taegore_hide_chestplate);
+		registerItem("taegore_hide_leggings", taegore_hide_leggings);
+		registerItem("taegore_hide_boots", taegore_hide_boots);
+		registerItem("taegore_hide_gloves", taegore_hide_gloves);
+
 		registerItem("zanite_helmet", zanite_helmet);
 		registerItem("zanite_chestplate", zanite_chestplate);
 		registerItem("zanite_leggings", zanite_leggings);
@@ -461,10 +475,13 @@ public class ItemsAether
 		registerItem("golden_amber", golden_amber.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("taegore_hide", taegore_hide.setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("burrukai_pelt", burrukai_pelt.setCreativeTab(CreativeTabsAether.MATERIALS));
-
 		registerItem("valkyrie_wings", valkyrie_wings.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("brettl_cane", brettl_cane.setCreativeTab(CreativeTabsAether.MATERIALS));
+		registerItem("brettl_grass", brettl_grass.setCreativeTab(CreativeTabsAether.MATERIALS));
 
 		registerItem("aechor_petal", aechor_petal.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
+
+		registerItem("aether_saddle", aether_saddle.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
 		registerItem("blueberries", blueberries);
 		registerItem("enchanted_blueberry", enchanted_blueberry);
@@ -526,9 +543,6 @@ public class ItemsAether
 		registerItem("skyroot_door_item", skyroot_door.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		registerItem("secret_skyroot_door_item", secret_skyroot_door.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 		registerItem("arkenium_door_item", arkenium_door.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-		//registerItem("blightwillow_door_item", blightwillow_door_item.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		//registerItem("earthshifter_door_item", earthshifter_door_item.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		//registerItem("frostpine_door_item", frostpine_door_item.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		registerItem("charm_atk_dmg_01", charm_atk_dmg_01.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
 		registerItem("charm_atk_dmg_02", charm_atk_dmg_02.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.CHARMS));
@@ -656,9 +670,6 @@ public class ItemsAether
 		registerItem("wynd_cluster_ring", wynd_cluster_ring.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("lesser_ring_of_wisdom", lesser_ring_of_wisdom.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
 		registerItem("ring_of_wisdom", ring_of_wisdom.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.RINGS));
-
-		registerItem("brettl_cane", brettl_cane.setCreativeTab(CreativeTabsAether.MATERIALS));
-		registerItem("brettl_grass", brettl_grass.setCreativeTab(CreativeTabsAether.MATERIALS));
 
 		registerItem("irradiated_chunk", irradiated_chunk.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.MATERIALS));
 		registerItem("irradiated_sword", irradiated_sword.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.MATERIALS));

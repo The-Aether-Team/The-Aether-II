@@ -38,8 +38,8 @@ public class RecipesAether
 	{
 		OreDictionary.registerOre("feather", ItemsAether.moa_feather);
 		OreDictionary.registerOre("feather", ItemsAether.cockatrice_feather);
-		OreDictionary.registerOre("leather", ItemsAether.taegore_hide);
-		OreDictionary.registerOre("leather", ItemsAether.burrukai_pelt);
+		OreDictionary.registerOre("aerleather", ItemsAether.taegore_hide);
+		OreDictionary.registerOre("aerleather", ItemsAether.burrukai_pelt);
 		OreDictionary.registerOre("sugar", ItemsAether.swet_sugar);
 	}
 
@@ -128,9 +128,9 @@ public class RecipesAether
 		registerShapedRecipe(new ItemStack(BlocksAether.cloudwool_carpet, 3), "XX",
 				'X', BlocksAether.cloudwool_block);
 
-		// Saddle
-		registerShapedRecipe(new ItemStack(Items.SADDLE, 1), "XXX", "XZX",
-				'X', "leather", 'Z', new ItemStack(ItemsAether.cloudtwine));
+		// Aether Saddle
+		registerShapedRecipe(new ItemStack(ItemsAether.aether_saddle, 1), "XXX", "XZX",
+				'X', "aerleather", 'Z', new ItemStack(ItemsAether.cloudtwine));
 
 		// Skyroot Planks
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_planks, 4), "X",
@@ -542,9 +542,27 @@ public class RecipesAether
 
 	private static void registerArmorRecipes()
 	{
+		final ItemStack taegorehide = new ItemStack(ItemsAether.taegore_hide);
 		final ItemStack zanite = new ItemStack(ItemsAether.zanite_gemstone);
 		final ItemStack arkenium = new ItemStack(ItemsAether.arkenium);
 		final ItemStack gravitite = new ItemStack(ItemsAether.gravitite_plate);
+
+		// Taegore Hide Armor
+		registerShapedRecipe(new ItemStack(ItemsAether.taegore_hide_helmet), "XXX", "X X",
+				'X', taegorehide);
+
+		registerShapedRecipe(new ItemStack(ItemsAether.taegore_hide_chestplate), "X X", "XXX", "XXX",
+				'X', taegorehide);
+
+		registerShapedRecipe(new ItemStack(ItemsAether.taegore_hide_leggings), "XXX", "X X", "X X",
+				'X', taegorehide);
+
+		registerShapedRecipe(new ItemStack(ItemsAether.taegore_hide_boots), "X X", "X X",
+				'X', taegorehide);
+
+		registerShapedRecipe(new ItemStack(ItemsAether.taegore_hide_gloves), "X X",
+				'X', taegorehide);
+
 
 		// Zanite Armor
 		registerShapedRecipe(new ItemStack(ItemsAether.zanite_helmet), "XXX", "X X",
