@@ -198,7 +198,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		}
 		else
 		{
-			if (!this.isSaddled() && stack.getItem() == Items.SADDLE)
+			if (!this.isSaddled() && stack.getItem() == ItemsAether.aether_saddle)
 			{
 				this.setIsSaddled(true);
 
@@ -421,7 +421,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 		if (this.isSaddled())
 		{
-			this.dropItem(Items.SADDLE, 1);
+			this.dropItem(ItemsAether.aether_saddle, 1);
 		}
 	}
 

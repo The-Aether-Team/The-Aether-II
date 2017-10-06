@@ -44,7 +44,7 @@ public class ItemsAether
 
 	public static final Item cockatrice_feather = new Item();
 
-	public static final Item aether_saddle = new ItemAetherSaddle();
+	public static final Item aether_saddle = new Item();
 
 	public static final Item ambrosium_shard = new Item(),
 			ambrosium_chunk = new ItemAmbrosiumChunk(),
