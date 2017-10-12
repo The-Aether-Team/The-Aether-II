@@ -94,6 +94,10 @@ public class BlocksAether
 
 	public static final BlockAetherLog skyroot_log = new BlockAetherLog();
 
+	public static final BlockAetherLog dark_skyroot_log = new BlockAetherLog();
+
+	public static final BlockAetherLog light_skyroot_log = new BlockAetherLog();
+
 	public static final BlockAetherLog golden_oak_log = new BlockGoldenOakLog();
 
 	public static final BlockAetherLeaves blue_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.BLUE_SKYROOT.getMeta());
@@ -302,6 +306,8 @@ public class BlocksAether
 		registerBlock("scatterglass_decorative", scatterglass_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
 		registerBlock("skyroot_log", skyroot_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		registerBlock("dark_skyroot_log", dark_skyroot_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		registerBlock("light_skyroot_log", light_skyroot_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		registerBlock("golden_oak_log", golden_oak_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		registerBlock("blue_skyroot_leaves", blue_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));

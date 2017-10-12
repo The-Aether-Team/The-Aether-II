@@ -1,0 +1,18 @@
+{
+	"variants": {
+		"axis=y": {
+			"model": "aether:logs/light_skyroot_log"
+		},
+		"axis=z": {
+			"model": "aether:logs/light_skyroot_log",
+			"x": 90
+		},
+		"axis=x": {
+			"model": "aether:logs/light_skyroot_log",
+			"x": 90, "y": 90
+		},
+		"axis=none": {
+			"model": "aether:logs/light_skyroot_log_bark"
+		}
+	}
+}

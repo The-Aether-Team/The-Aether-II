@@ -1,0 +1,6 @@
+{
+	"parent": "block/cube_all",
+	"textures": {
+		"all": "aether:blocks/logs/light_skyroot_log_side"
+	}
+}

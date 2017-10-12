@@ -65,6 +65,8 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.cloudwool_block, "cloudwool_block");
 
 		registerItemModels(BlocksAether.skyroot_log, "logs/skyroot_log");
+		registerItemModels(BlocksAether.dark_skyroot_log, "logs/dark_skyroot_log");
+		registerItemModels(BlocksAether.light_skyroot_log, "logs/light_skyroot_log");
 		registerItemModels(BlocksAether.golden_oak_log, "logs/golden_oak_log");
 
 		registerItemModels(BlocksAether.blue_skyroot_leaves, "leaves/blue_skyroot_leaves");
