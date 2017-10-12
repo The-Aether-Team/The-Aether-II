@@ -16,6 +16,7 @@ import com.gildedgames.aether.common.registry.ContentRegistry;
 import com.gildedgames.aether.common.world.SectorEventHandler;
 import com.gildedgames.orbis.client.RenderShape;
 import com.gildedgames.orbis.common.OrbisDeveloperModeEvents;
+import com.gildedgames.orbis.common.block.BlockDataContainer;
 import com.gildedgames.orbis.common.data.BlueprintData;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import com.gildedgames.orbis.common.world_objects.WorldRegion;
@@ -57,6 +58,7 @@ public class CommonProxy implements IAetherServices
 		s.register(4, WorldObjectGroup.class, new Instantiator<>(WorldObjectGroup.class));
 		s.register(5, WorldObjectManager.class, new Instantiator<>(WorldObjectManager.class));
 		s.register(6, Blueprint.class, new Instantiator<>(Blueprint.class));
+		s.register(7, BlockDataContainer.class, new Instantiator<>(BlockDataContainer.class));
 	}
 
 	public void init(final FMLInitializationEvent event)

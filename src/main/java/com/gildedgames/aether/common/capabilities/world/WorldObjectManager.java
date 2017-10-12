@@ -50,10 +50,7 @@ public class WorldObjectManager implements IWorldObjectManager
 	 */
 	private void refreshObserver(final IWorldObjectManagerObserver observer)
 	{
-		for (final IWorldObjectGroup object : this.idToGroup.values())
-		{
-			observer.onGroupAdded(this, object);
-		}
+		observer.onReloaded(this);
 	}
 
 	@Override

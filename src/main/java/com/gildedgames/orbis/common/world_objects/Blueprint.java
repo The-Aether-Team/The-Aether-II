@@ -154,6 +154,10 @@ public class Blueprint extends AbstractRegion implements IWorldObject, IMutableR
 		this.rotation = OrbisRotation.valueOf(tag.getString("rotation"));
 
 		this.data = data.get(this.world, "data");
+
+		this.max = RegionHelp.getMax(this.min, this.getWidth(), this.getHeight(), this.getLength());
+
+		this.notifyDataChange();
 	}
 
 	@Override

@@ -68,12 +68,12 @@ public class PacketOrbisWorldObjectAdd implements IMessage
 				return null;
 			}
 
-			message.worldObject = message.funnel.get(player.world, "worldObject");
+			final IWorldObject object = message.funnel.get(player.world, "worldObject");
 
 			final IWorldObjectManager manager = WorldObjectManager.get(player.world);
 			final IWorldObjectGroup group = manager.getGroup(message.groupId);
 
-			group.addObject(message.worldObject);
+			group.addObject(object);
 
 			return null;
 		}

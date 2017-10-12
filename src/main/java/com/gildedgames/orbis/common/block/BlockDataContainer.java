@@ -8,6 +8,7 @@ import com.gildedgames.orbis.common.exceptions.OrbisMissingModsException;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
@@ -153,13 +154,13 @@ public class BlockDataContainer implements NBT
 
 		for (final BlockData block : this.data)
 		{
-			final IBlockState blockState = block.getBlockState();
+			final IBlockState blockState = block == null ? Blocks.AIR.getDefaultState() : block.getBlockState();
 
 			final int id = OrbisCore.getRegistrar().getBlockId(blockState.getBlock());
 			final int meta = blockState.getBlock().getMetaFromState(blockState);
 
 			final ResourceLocation identifier = OrbisCore.getRegistrar().getIdentifierFor(blockState.getBlock());
-			final TileEntity tileEntity = block.getTileEntity();
+			final TileEntity tileEntity = block == null ? null : block.getTileEntity();
 
 			if (!identifiers.containsKey(id))
 			{

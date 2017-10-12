@@ -1,6 +1,7 @@
 package com.gildedgames.orbis.common.network.packets;
 
 import com.gildedgames.aether.api.orbis.IWorldObjectManager;
+import com.gildedgames.aether.client.ClientEventHandler;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
@@ -53,6 +54,11 @@ public class PacketOrbisWorldObjectManager implements IMessage
 			}
 
 			final IWorldObjectManager manager = WorldObjectManager.get(player.world);
+
+			if (!manager.containsObserver(ClientEventHandler.CHUNK_RENDERER_MANAGER))
+			{
+				manager.addObserver(ClientEventHandler.CHUNK_RENDERER_MANAGER);
+			}
 
 			manager.read(message.tag);
 
