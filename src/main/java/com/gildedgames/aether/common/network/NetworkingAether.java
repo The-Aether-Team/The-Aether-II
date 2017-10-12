@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.packets.*;
 import com.gildedgames.aether.common.network.packets.dialog.PacketCloseDialog;
 import com.gildedgames.aether.common.network.packets.dialog.PacketOpenDialog;
+import com.gildedgames.orbis.common.network.packets.*;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityTracker;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,6 +32,10 @@ public class NetworkingAether
 		instance.registerMessage(PacketCloseDialog.HandlerServer.class, PacketCloseDialog.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketUpdateStructure.HandlerServer.class, PacketUpdateStructure.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketSaveStructure.HandlerServer.class, PacketSaveStructure.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketOrbisExtendedReach.HandlerServer.class, PacketOrbisExtendedReach.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketOrbisWorldObjectAdd.HandlerServer.class, PacketOrbisWorldObjectAdd.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketOrbisWorldObjectRemove.HandlerServer.class, PacketOrbisWorldObjectRemove.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketOrbisActiveSelection.HandlerServer.class, PacketOrbisActiveSelection.class, discriminant++, Side.SERVER);
 
 		// C L I E N T
 		instance.registerMessage(PacketEquipment.HandlerClient.class, PacketEquipment.class, discriminant++, Side.CLIENT);
@@ -40,8 +45,16 @@ public class NetworkingAether
 		instance.registerMessage(PacketUpdateStructure.HandlerClient.class, PacketUpdateStructure.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketLatchSwet.HandlerClient.class, PacketLatchSwet.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketDetachSwet.HandlerClient.class, PacketDetachSwet.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketOrbisDeveloperMode.HandlerClient.class, PacketOrbisDeveloperMode.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketOrbisWorldObjectManager.HandlerClient.class, PacketOrbisWorldObjectManager.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketOrbisExtendedReach.HandlerClient.class, PacketOrbisExtendedReach.class, discriminant++, Side.CLIENT);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
+	}
+
+	public static void sendPacketToDimension(final IMessage message, final int dimension)
+	{
+		NetworkingAether.instance.sendToDimension(message, dimension);
 	}
 
 	public static void sendPacketToAllPlayers(final IMessage message)

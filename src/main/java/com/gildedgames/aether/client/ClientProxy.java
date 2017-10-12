@@ -14,6 +14,9 @@ import com.gildedgames.aether.common.CommonProxy;
 import com.gildedgames.aether.common.analytics.GameAnalytics;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import com.gildedgames.aether.common.util.helpers.PerfHelper;
+import com.gildedgames.orbis.client.AirSelectionRenderer;
+import com.gildedgames.orbis.client.OrbisDeveloperModeEventsClient;
+import com.gildedgames.orbis.client.OrbisKeyBindings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.KeyBinding;
@@ -25,8 +28,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ClientProxy extends CommonProxy
 {
+
 	@Override
-	public void preInit(FMLPreInitializationEvent event)
+	public void preInit(final FMLPreInitializationEvent event)
 	{
 		super.preInit(event);
 
@@ -38,7 +42,7 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public void init(FMLInitializationEvent event)
+	public void init(final FMLInitializationEvent event)
 	{
 		super.init(event);
 
@@ -72,19 +76,25 @@ public class ClientProxy extends CommonProxy
 
 		AetherAPI.content().tabs().getInventoryGroup().registerClientTab(new TabEquipment.Client());
 		AetherAPI.content().tabs().getInventoryGroup().registerClientTab(new TabBugReport.Client());
+
+		MinecraftForge.EVENT_BUS.register(AirSelectionRenderer.class);
+		MinecraftForge.EVENT_BUS.register(OrbisDeveloperModeEventsClient.class);
+
+		OrbisKeyBindings.init();
 	}
 
 	@Override
-	public void displayDismountMessage(EntityPlayer player)
+	public void displayDismountMessage(final EntityPlayer player)
 	{
 		if (player == Minecraft.getMinecraft().player)
 		{
-			Minecraft.getMinecraft().ingameGUI.setOverlayMessage(I18n.format("mount.onboard", Minecraft.getMinecraft().gameSettings.keyBindSneak.getDisplayName()), false);
+			Minecraft.getMinecraft().ingameGUI
+					.setOverlayMessage(I18n.format("mount.onboard", Minecraft.getMinecraft().gameSettings.keyBindSneak.getDisplayName()), false);
 		}
 	}
 
 	@Override
-	public void modifyEntityQuicksoil(EntityLivingBase entity)
+	public void modifyEntityQuicksoil(final EntityLivingBase entity)
 	{
 		if (entity == Minecraft.getMinecraft().player)
 		{

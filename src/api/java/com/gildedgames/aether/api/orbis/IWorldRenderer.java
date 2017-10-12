@@ -1,0 +1,33 @@
+package com.gildedgames.aether.api.orbis;
+
+import com.gildedgames.aether.api.orbis.region.IRegion;
+import com.gildedgames.aether.api.util.NBT;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.List;
+
+public interface IWorldRenderer extends NBT
+{
+
+	@Nullable
+	Object getRenderedObject();
+
+	void render(World world, BlockPos pos, float partialTicks);
+
+	IRegion getBoundingBox();
+
+	void startRendering(World world, float partialTicks);
+
+	void finishRendering(World world);
+
+	void prepare(World world);
+
+	void doGlobalRendering(World world, float partialTicks);
+
+	List<IWorldRenderer> getSubRenderers(World world);
+
+	void onRemoved();
+
+}

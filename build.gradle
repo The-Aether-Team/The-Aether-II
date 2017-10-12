@@ -25,7 +25,7 @@ allprojects {
 }
 
 version = "${config.mod_version}"
-group = "com.gildedgames.aether"
+group = "com.gildedgames"
 archivesBaseName = "AetherII"
 
 ext.ciVersion = System.getenv("BUILD_NUMBER")

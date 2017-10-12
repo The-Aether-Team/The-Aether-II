@@ -806,6 +806,12 @@ ability.setAttackersOnFire.desc1=§9Burns Attackers
 ability.setAttackersOnFire.desc2=%s%% Chance
 ability.attackSpeedMod.desc=%s Attack Speed
 
+# Commands
+gameMode.developer=Developer Mode
+
+# Key Bindings
+keybindings.control=Control
+
 # Tabs
 tab.equipment=Equipment
 tab.bug_report=Report Bugs

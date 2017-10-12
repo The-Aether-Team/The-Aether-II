@@ -25,10 +25,6 @@ import java.io.File;
 public class AetherCore
 {
 
-	protected static final String MOD_GUI_FACTORY = "com.gildedgames.aether.client.gui.GuiFactoryAether";
-
-	protected static final String MOD_FINGERPRINT = "b9a9be44fb51751dd1aec1dbb881b6de1a086abc";
-
 	public static final String MOD_NAME = "Aether II";
 
 	public static final String MOD_ID = "aether";
@@ -36,6 +32,14 @@ public class AetherCore
 	public static final String MOD_VERSION = "1.11.2-1.1.0";
 
 	public static final Logger LOGGER = LogManager.getLogger("AetherII");
+
+	protected static final String MOD_GUI_FACTORY = "com.gildedgames.aether.client.gui.GuiFactoryAether";
+
+	protected static final String MOD_FINGERPRINT = "b9a9be44fb51751dd1aec1dbb881b6de1a086abc";
+
+	private static final SpawnRegistry SPAWN_REGISTRY = new SpawnRegistry();
+
+	private static final IOHelper io = new IOHelper();
 
 	@Instance(AetherCore.MOD_ID)
 	public static AetherCore INSTANCE;
@@ -49,63 +53,12 @@ public class AetherCore
 
 	public static TeleporterAether TELEPORTER;
 
-	private static final SpawnRegistry SPAWN_REGISTRY = new SpawnRegistry();
-
-	@EventHandler
-	public void onFMLConstruction(FMLConstructionEvent event)
-	{
-		AetherAPI.registerProvider(AetherCore.PROXY);
-	}
-
-	@EventHandler
-	public void onFMLPreInit(FMLPreInitializationEvent event)
-	{
-		AetherCore.CONFIG = new ConfigAether(event.getSuggestedConfigurationFile());
-		AetherCore.PROXY.preInit(event);
-
-		AetherCore.SPAWN_REGISTRY.registerAetherSpawnHandlers();
-	}
-
-	@EventHandler
-	public void onFMLInit(FMLInitializationEvent event)
-	{
-		AetherCore.PROXY.init(event);
-
-		MinecraftForge.EVENT_BUS.register(SPAWN_REGISTRY);
-	}
-
-	@EventHandler
-	public void onServerStopping(FMLServerStoppingEvent event)
-	{
-		DimensionsAether.onServerStopping(event);
-
-		AetherCore.SPAWN_REGISTRY.write();
-	}
-
-	@EventHandler
-	public void serverStarted(FMLServerStartedEvent event)
-	{
-		AetherCore.SPAWN_REGISTRY.read();
-	}
-
-	@EventHandler
-	public void onFingerprintViolation(FMLFingerprintViolationEvent event)
-	{
-		if (AetherCore.isInsideDevEnvironment())
-		{
-			return;
-		}
-
-		AetherCore.LOGGER.warn("Heads up! Forge has failed to validate the integrity of the Aether.");
-		AetherCore.LOGGER.warn("The Aether may be packaged unofficially, tampered with, or corrupted. As a result, this build will not receive support.");
-	}
-
-	public static ResourceLocation getResource(String name)
+	public static ResourceLocation getResource(final String name)
 	{
 		return new ResourceLocation(AetherCore.MOD_ID, name);
 	}
 
-	public static String getResourcePath(String name)
+	public static String getResourcePath(final String name)
 	{
 		return (AetherCore.MOD_ID + ":") + name;
 	}
@@ -129,4 +82,59 @@ public class AetherCore
 	{
 		return Launch.blackboard.get("fml.deobfuscatedEnvironment") == Boolean.TRUE;
 	}
+
+	public static IOHelper io()
+	{
+		return AetherCore.io;
+	}
+
+	@EventHandler
+	public void onFMLConstruction(final FMLConstructionEvent event)
+	{
+		AetherAPI.registerProvider(AetherCore.PROXY);
+	}
+
+	@EventHandler
+	public void onFMLPreInit(final FMLPreInitializationEvent event)
+	{
+		AetherCore.CONFIG = new ConfigAether(event.getSuggestedConfigurationFile());
+		AetherCore.PROXY.preInit(event);
+
+		AetherCore.SPAWN_REGISTRY.registerAetherSpawnHandlers();
+	}
+
+	@EventHandler
+	public void onFMLInit(final FMLInitializationEvent event)
+	{
+		AetherCore.PROXY.init(event);
+
+		MinecraftForge.EVENT_BUS.register(SPAWN_REGISTRY);
+	}
+
+	@EventHandler
+	public void onServerStopping(final FMLServerStoppingEvent event)
+	{
+		DimensionsAether.onServerStopping(event);
+
+		AetherCore.SPAWN_REGISTRY.write();
+	}
+
+	@EventHandler
+	public void serverStarted(final FMLServerStartedEvent event)
+	{
+		AetherCore.SPAWN_REGISTRY.read();
+	}
+
+	@EventHandler
+	public void onFingerprintViolation(final FMLFingerprintViolationEvent event)
+	{
+		if (AetherCore.isInsideDevEnvironment())
+		{
+			return;
+		}
+
+		AetherCore.LOGGER.warn("Heads up! Forge has failed to validate the integrity of the Aether.");
+		AetherCore.LOGGER.warn("The Aether may be packaged unofficially, tampered with, or corrupted. As a result, this build will not receive support.");
+	}
+
 }

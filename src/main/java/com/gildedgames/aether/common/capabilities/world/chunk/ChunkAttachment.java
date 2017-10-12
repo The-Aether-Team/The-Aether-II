@@ -26,28 +26,52 @@ import java.util.Map;
 
 public class ChunkAttachment implements IChunkAttachment
 {
-	private Long2ObjectMap<ChunkAttachmentPool> hooks = new Long2ObjectArrayMap<>();
+	private final Long2ObjectMap<ChunkAttachmentPool> hooks = new Long2ObjectArrayMap<>();
 
-	public static IChunkAttachment get(World world)
+	private World world;
+
+	private int chunkX, chunkZ;
+
+	public static IChunkAttachment get(final World world)
 	{
 		return world.getCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null);
 	}
 
 	@Override
-	public void load(ChunkDataEvent.Load event)
+	public World getWorld()
 	{
-		NBTTagCompound root = event.getData().getCompoundTag("aether_capabilities");
+		return this.world;
+	}
 
-		ChunkAttachmentPool pool = this.createOrGetHookPool(event.getChunk());
+	@Override
+	public int getChunkX()
+	{
+		return this.chunkX;
+	}
+
+	@Override
+	public int getChunkZ()
+	{
+		return this.chunkZ;
+	}
+
+	@Override
+	public void load(final ChunkDataEvent.Load event)
+	{
+		this.world = event.getWorld();
+
+		final NBTTagCompound root = event.getData().getCompoundTag("aether_capabilities");
+
+		final ChunkAttachmentPool pool = this.createOrGetHookPool(event.getChunk());
 
 		if (pool == null || root == null)
 		{
 			return;
 		}
 
-		for (Map.Entry<ResourceLocation, ICapabilitySerializable<NBTBase>> entry : pool.writers().entrySet())
+		for (final Map.Entry<ResourceLocation, ICapabilitySerializable<NBTBase>> entry : pool.writers().entrySet())
 		{
-			NBTTagCompound tag = root.getCompoundTag(entry.getKey().toString());
+			final NBTTagCompound tag = root.getCompoundTag(entry.getKey().toString());
 
 			if (tag == null)
 			{
@@ -59,18 +83,18 @@ public class ChunkAttachment implements IChunkAttachment
 	}
 
 	@Override
-	public void save(ChunkDataEvent.Save event)
+	public void save(final ChunkDataEvent.Save event)
 	{
-		ChunkAttachmentPool pool = this.getHookPool(event.getChunk().getPos());
+		final ChunkAttachmentPool pool = this.getHookPool(event.getChunk().getPos());
 
 		if (pool == null || pool.getWritableSize() <= 0)
 		{
 			return;
 		}
 
-		NBTTagCompound compound = new NBTTagCompound();
+		final NBTTagCompound compound = new NBTTagCompound();
 
-		for (Map.Entry<ResourceLocation, ICapabilitySerializable<NBTBase>> entry : pool.writers().entrySet())
+		for (final Map.Entry<ResourceLocation, ICapabilitySerializable<NBTBase>> entry : pool.writers().entrySet())
 		{
 			compound.setTag(entry.getKey().toString(), entry.getValue().serializeNBT());
 		}
@@ -79,21 +103,24 @@ public class ChunkAttachment implements IChunkAttachment
 	}
 
 	@Override
-	public void init(ChunkEvent.Load event)
+	public void init(final ChunkEvent.Load event)
 	{
+		this.chunkX = event.getChunk().xPosition;
+		this.chunkZ = event.getChunk().zPosition;
+
 		this.createOrGetHookPool(event.getChunk());
 	}
 
 	@Override
-	public void destroy(ChunkEvent.Unload event)
+	public void destroy(final ChunkEvent.Unload event)
 	{
 		this.destroyHookPool(event.getChunk().getPos());
 	}
 
 	@Override
-	public <T extends NBT> T getAttachment(ChunkPos pos, Capability<T> capability)
+	public <T extends NBT> T getAttachment(final ChunkPos pos, final Capability<T> capability)
 	{
-		ChunkAttachmentPool pool = this.getHookPool(pos);
+		final ChunkAttachmentPool pool = this.getHookPool(pos);
 
 		if (pool == null)
 		{
@@ -103,18 +130,18 @@ public class ChunkAttachment implements IChunkAttachment
 		return pool.getCapability(capability);
 	}
 
-	private ChunkAttachmentPool getHookPool(ChunkPos pos)
+	private ChunkAttachmentPool getHookPool(final ChunkPos pos)
 	{
 		return this.hooks.get(ChunkPos.asLong(pos.chunkXPos, pos.chunkZPos));
 	}
 
-	private ChunkAttachmentPool createOrGetHookPool(Chunk chunk)
+	private ChunkAttachmentPool createOrGetHookPool(final Chunk chunk)
 	{
 		ChunkAttachmentPool pool = this.getHookPool(chunk.getPos());
 
 		if (pool == null)
 		{
-			AttachCapabilitiesEvent<IChunkAttachment> attachEvent = new AttachCapabilitiesEvent<>(IChunkAttachment.class, this);
+			final AttachCapabilitiesEvent<IChunkAttachment> attachEvent = new AttachCapabilitiesEvent<>(IChunkAttachment.class, this);
 
 			MinecraftForge.EVENT_BUS.post(attachEvent);
 
@@ -126,32 +153,48 @@ public class ChunkAttachment implements IChunkAttachment
 		return pool;
 	}
 
-	private void setHookPool(ChunkPos pos, ChunkAttachmentPool pool)
+	private void setHookPool(final ChunkPos pos, final ChunkAttachmentPool pool)
 	{
 		this.hooks.put(ChunkPos.asLong(pos.chunkXPos, pos.chunkZPos), pool);
 	}
 
-	private void destroyHookPool(ChunkPos pos)
+	private void destroyHookPool(final ChunkPos pos)
 	{
 		this.hooks.remove(ChunkPos.asLong(pos.chunkXPos, pos.chunkZPos));
 	}
 
+	public static class Storage implements Capability.IStorage<IChunkAttachment>
+	{
+
+		@Override
+		public NBTBase writeNBT(final Capability<IChunkAttachment> capability, final IChunkAttachment instance, final EnumFacing side)
+		{
+			return null;
+		}
+
+		@Override
+		public void readNBT(final Capability<IChunkAttachment> capability, final IChunkAttachment instance, final EnumFacing side, final NBTBase nbt)
+		{
+
+		}
+	}
+
 	private class ChunkAttachmentPool
 	{
-		private ArrayList<ICapabilityProvider> providers = new ArrayList<>();
+		private final ArrayList<ICapabilityProvider> providers = new ArrayList<>();
 
-		private HashMap<ResourceLocation, ICapabilitySerializable<NBTBase>> writers = new HashMap<>();
+		private final HashMap<ResourceLocation, ICapabilitySerializable<NBTBase>> writers = new HashMap<>();
 
-		public ChunkAttachmentPool(Map<ResourceLocation, ICapabilityProvider> map)
+		public ChunkAttachmentPool(final Map<ResourceLocation, ICapabilityProvider> map)
 		{
-			for (Map.Entry<ResourceLocation, ICapabilityProvider> entry : map.entrySet())
+			for (final Map.Entry<ResourceLocation, ICapabilityProvider> entry : map.entrySet())
 			{
 				this.register(entry.getKey(), entry.getValue());
 			}
 		}
 
 		@SuppressWarnings("unchecked")
-		public void register(ResourceLocation res, ICapabilityProvider provider)
+		public void register(final ResourceLocation res, final ICapabilityProvider provider)
 		{
 			this.providers.add(provider);
 
@@ -161,9 +204,9 @@ public class ChunkAttachment implements IChunkAttachment
 			}
 		}
 
-		public <T> T getCapability(Capability<T> capability)
+		public <T> T getCapability(final Capability<T> capability)
 		{
-			for (ICapabilityProvider provider : this.providers)
+			for (final ICapabilityProvider provider : this.providers)
 			{
 				if (provider.hasCapability(capability, null))
 				{
@@ -182,22 +225,6 @@ public class ChunkAttachment implements IChunkAttachment
 		public HashMap<ResourceLocation, ICapabilitySerializable<NBTBase>> writers()
 		{
 			return this.writers;
-		}
-	}
-
-	public static class Storage implements Capability.IStorage<IChunkAttachment>
-	{
-
-		@Override
-		public NBTBase writeNBT(Capability<IChunkAttachment> capability, IChunkAttachment instance, EnumFacing side)
-		{
-			return null;
-		}
-
-		@Override
-		public void readNBT(Capability<IChunkAttachment> capability, IChunkAttachment instance, EnumFacing side, NBTBase nbt)
-		{
-
 		}
 	}
 }

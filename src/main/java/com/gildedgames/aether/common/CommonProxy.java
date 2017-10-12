@@ -1,14 +1,24 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.IAetherServices;
+import com.gildedgames.aether.api.io.Instantiator;
+import com.gildedgames.aether.api.orbis.region.Region;
 import com.gildedgames.aether.api.registry.IContentRegistry;
+import com.gildedgames.aether.api.util.IClassSerializer;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherHooks;
+import com.gildedgames.aether.common.capabilities.world.WorldObjectGroup;
+import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.entities.util.MountEventHandler;
 import com.gildedgames.aether.common.entities.util.QuicksoilProcessor;
 import com.gildedgames.aether.common.items.tools.ItemToolHandler;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.registry.ContentRegistry;
 import com.gildedgames.aether.common.world.SectorEventHandler;
+import com.gildedgames.orbis.client.RenderShape;
+import com.gildedgames.orbis.common.OrbisDeveloperModeEvents;
+import com.gildedgames.orbis.common.data.BlueprintData;
+import com.gildedgames.orbis.common.world_objects.Blueprint;
+import com.gildedgames.orbis.common.world_objects.WorldRegion;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
@@ -23,11 +33,11 @@ import java.util.Random;
 
 public class CommonProxy implements IAetherServices
 {
+	private final ContentRegistry contentRegistry = new ContentRegistry();
+
 	private File configDir;
 
-	private ContentRegistry contentRegistry = new ContentRegistry();
-
-	public void preInit(FMLPreInitializationEvent event)
+	public void preInit(final FMLPreInitializationEvent event)
 	{
 		this.configDir = new File(event.getModConfigurationDirectory(), "Aether/");
 
@@ -37,9 +47,19 @@ public class CommonProxy implements IAetherServices
 		}
 
 		this.contentRegistry.preInit();
+
+		final IClassSerializer s = AetherCore.io().getSerializer();
+
+		s.register(0, Region.class, new Instantiator<>(Region.class));
+		s.register(1, BlueprintData.class, new Instantiator<>(BlueprintData.class));
+		s.register(2, RenderShape.class, new Instantiator<>(RenderShape.class));
+		s.register(3, WorldRegion.class, new Instantiator<>(WorldRegion.class));
+		s.register(4, WorldObjectGroup.class, new Instantiator<>(WorldObjectGroup.class));
+		s.register(5, WorldObjectManager.class, new Instantiator<>(WorldObjectManager.class));
+		s.register(6, Blueprint.class, new Instantiator<>(Blueprint.class));
 	}
 
-	public void init(FMLInitializationEvent event)
+	public void init(final FMLInitializationEvent event)
 	{
 		this.contentRegistry.init();
 
@@ -53,17 +73,19 @@ public class CommonProxy implements IAetherServices
 		MinecraftForge.EVENT_BUS.register(QuicksoilProcessor.class);
 
 		MinecraftForge.EVENT_BUS.register(SectorEventHandler.class);
+
+		MinecraftForge.EVENT_BUS.register(OrbisDeveloperModeEvents.class);
 	}
 
-	public void spawnJumpParticles(World world, double x, double y, double z, double radius, int quantity)
+	public void spawnJumpParticles(final World world, final double x, final double y, final double z, final double radius, final int quantity)
 	{
-		Random random = world.rand;
+		final Random random = world.rand;
 
 		for (int i = 0; i < quantity; i++)
 		{
-			double x2 = x + (random.nextDouble() * radius) - (radius * 0.5D);
-			double y2 = y + (random.nextDouble() * 0.4D);
-			double z2 = z + (random.nextDouble() * radius) - (radius * 0.5D);
+			final double x2 = x + (random.nextDouble() * radius) - (radius * 0.5D);
+			final double y2 = y + (random.nextDouble() * 0.4D);
+			final double z2 = z + (random.nextDouble() * radius) - (radius * 0.5D);
 
 			world.spawnParticle(EnumParticleTypes.CLOUD, x2, y2, z2, 0.0D, random.nextDouble() * 0.03D, 0.0D);
 		}
@@ -74,17 +96,17 @@ public class CommonProxy implements IAetherServices
 		return this.configDir;
 	}
 
-	public void displayDismountMessage(EntityPlayer player)
+	public void displayDismountMessage(final EntityPlayer player)
 	{
 
 	}
 
-	public void modifyEntityQuicksoil(EntityLivingBase entity)
+	public void modifyEntityQuicksoil(final EntityLivingBase entity)
 	{
 		entity.motionX *= 1.7D;
 		entity.motionZ *= 1.7D;
 
-		double maxMotion = 0.7D;
+		final double maxMotion = 0.7D;
 
 		entity.motionX = MathHelper.clamp(entity.motionX, -maxMotion, maxMotion);
 		entity.motionZ = MathHelper.clamp(entity.motionZ, -maxMotion, maxMotion);
@@ -95,4 +117,5 @@ public class CommonProxy implements IAetherServices
 	{
 		return this.contentRegistry;
 	}
+
 }

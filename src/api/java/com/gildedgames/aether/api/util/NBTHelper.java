@@ -5,6 +5,7 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 
 import java.io.File;
@@ -166,5 +167,38 @@ public class NBTHelper
 		nbt.write(tag);
 
 		return tag;
+	}
+
+	public static NBTTagCompound write(final IClassSerializer serializer, final NBT nbt)
+	{
+		final NBTTagCompound tag = new NBTTagCompound();
+
+		if (nbt == null)
+		{
+			tag.setBoolean("_null", true);
+
+			return tag;
+		}
+
+		tag.setInteger("id", serializer.serialize(nbt));
+
+		nbt.write(tag);
+
+		return tag;
+	}
+
+	public static <T extends NBT> T read(final World world, final IClassSerializer serializer, final NBTTagCompound tag)
+	{
+		if (tag.getBoolean("_null"))
+		{
+			return null;
+		}
+
+		final int id = tag.getInteger("id");
+
+		final T obj = serializer.deserialize(world, id);
+		obj.read(tag);
+
+		return obj;
 	}
 }

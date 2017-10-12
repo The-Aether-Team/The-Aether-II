@@ -2,6 +2,7 @@ package com.gildedgames.aether.api.chunk;
 
 import com.gildedgames.aether.api.util.NBT;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.event.world.ChunkEvent;
@@ -11,6 +12,13 @@ import net.minecraftforge.event.world.ChunkEvent;
  */
 public interface IChunkAttachment
 {
+
+	World getWorld();
+
+	int getChunkX();
+
+	int getChunkZ();
+
 	/**
 	 * Called when the chunk this attachment is added to is loaded. This is not guaranteed
 	 * to be called, and may not when a newly generated chunk is loaded with the attachment. You

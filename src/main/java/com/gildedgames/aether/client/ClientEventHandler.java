@@ -10,9 +10,12 @@ import com.gildedgames.aether.api.items.equipment.effects.EffectInstance;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectPool;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
+import com.gildedgames.aether.api.orbis.IWorldObjectManager;
 import com.gildedgames.aether.client.gui.PerformanceIngame;
+import com.gildedgames.aether.client.renderer.ChunkRendererManager;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.containers.slots.SlotAmbrosium;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotFlintAndSteel;
@@ -29,6 +32,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
@@ -43,16 +47,18 @@ import java.util.Optional;
 
 public class ClientEventHandler
 {
+	public static final ChunkRendererManager CHUNK_RENDERER_MANAGER = new ChunkRendererManager();
+
 	private final PerformanceIngame performanceLogger = new PerformanceIngame();
 
 	private boolean prevJumpBindState;
 
 	@SubscribeEvent(priority = EventPriority.NORMAL)
-	public void onRenderGui(RenderGameOverlayEvent event)
+	public void onRenderGui(final RenderGameOverlayEvent event)
 	{
-		Minecraft mc = Minecraft.getMinecraft();
+		final Minecraft mc = Minecraft.getMinecraft();
 
-		ScaledResolution scaledRes = new ScaledResolution(mc);
+		final ScaledResolution scaledRes = new ScaledResolution(mc);
 
 		if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR)
 		{
@@ -60,12 +66,12 @@ public class ClientEventHandler
 			{
 				if (mc.player.getRidingEntity() instanceof IMount)
 				{
-					IMount mount = (IMount) mc.player.getRidingEntity();
-					IMountProcessor processor = mount.getMountProcessor();
+					final IMount mount = (IMount) mc.player.getRidingEntity();
+					final IMountProcessor processor = mount.getMountProcessor();
 
 					if (processor instanceof FlyingMount)
 					{
-						FlyingMount flyingMount = (FlyingMount) processor;
+						final FlyingMount flyingMount = (FlyingMount) processor;
 
 						mc.ingameGUI.drawCenteredString(mc.fontRenderer, String.valueOf((int) (flyingMount.getData().getRemainingAirborneTime())),
 								scaledRes.getScaledWidth() / 2, scaledRes.getScaledHeight() - 30, 0xFFFFFF);
@@ -79,23 +85,23 @@ public class ClientEventHandler
 
 	@SubscribeEvent
 	@SuppressWarnings("unchecked")
-	public void onTooltipConstruction(ItemTooltipEvent event)
+	public void onTooltipConstruction(final ItemTooltipEvent event)
 	{
-		PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntityPlayer());
+		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntityPlayer());
 
-		IItemProperties properties = AetherAPI.content().items().getProperties(event.getItemStack().getItem());
+		final IItemProperties properties = AetherAPI.content().items().getProperties(event.getItemStack().getItem());
 
 		// Equipment Properties
 		if (properties.getEquipmentSlot() != ItemEquipmentSlot.NONE)
 		{
-			ItemEquipmentSlot slot = properties.getEquipmentSlot();
+			final ItemEquipmentSlot slot = properties.getEquipmentSlot();
 
 			// Equipment Effects
-			for (IEffectProvider provider : properties.getEffectProviders())
+			for (final IEffectProvider provider : properties.getEffectProviders())
 			{
-				IEffectFactory<IEffectProvider> factory = AetherAPI.content().effects().getFactory(provider.getFactory());
+				final IEffectFactory<IEffectProvider> factory = AetherAPI.content().effects().getFactory(provider.getFactory());
 
-				EffectPoolTemporary pool = new EffectPoolTemporary(event.getItemStack(), provider);
+				final EffectPoolTemporary pool = new EffectPoolTemporary(event.getItemStack(), provider);
 				factory.createInstance(pool).addInformation(event.getToolTip());
 			}
 
@@ -112,25 +118,44 @@ public class ClientEventHandler
 	}
 
 	@SubscribeEvent
-	public void onClientTick(ClientTickEvent event)
+	public void onClientTick(final ClientTickEvent event)
 	{
 		if (event.phase != TickEvent.Phase.END)
 		{
 			return;
 		}
 
-		Minecraft mc = FMLClientHandler.instance().getClient();
+		final Minecraft mc = FMLClientHandler.instance().getClient();
 
-		World world = FMLClientHandler.instance().getWorldClient();
+		final World world = FMLClientHandler.instance().getWorldClient();
 
-		EntityPlayerSP player = FMLClientHandler.instance().getClientPlayerEntity();
+		final EntityPlayerSP player = FMLClientHandler.instance().getClientPlayerEntity();
+
+		if (world != null)
+		{
+			final IWorldObjectManager manager = WorldObjectManager.get(player.world);
+
+			if (!manager.containsObserver(CHUNK_RENDERER_MANAGER))
+			{
+				manager.addObserver(CHUNK_RENDERER_MANAGER);
+			}
+		}
+		else
+		{
+			CHUNK_RENDERER_MANAGER.unload();
+		}
 
 		if (world != null && player != null)
 		{
-			PlayerAether aePlayer = PlayerAether.getPlayer(player);
+			final PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
 			if (aePlayer != null)
 			{
+				if (!aePlayer.containsObserver(CHUNK_RENDERER_MANAGER))
+				{
+					aePlayer.addObserver(CHUNK_RENDERER_MANAGER);
+				}
+
 				if (aePlayer.getAbilitiesModule().getMidAirJumpsAllowed() > 0)
 				{
 					if (mc.gameSettings.keyBindJump.isKeyDown() && !this.prevJumpBindState)
@@ -157,12 +182,20 @@ public class ClientEventHandler
 	}
 
 	@SubscribeEvent
-	public void onTextureStitchPre(TextureStitchEvent.Pre event)
+	public void onTextureStitchPre(final TextureStitchEvent.Pre event)
 	{
 		SlotEquipment.registerIcons(event);
 		SlotAmbrosium.registerIcons(event);
 		SlotMoaEgg.registerIcons(event);
 		SlotFlintAndSteel.registerIcons(event);
+	}
+
+	@SubscribeEvent
+	public void onRenderWorldLast(final RenderWorldLastEvent event)
+	{
+		final World world = Minecraft.getMinecraft().world;
+
+		CHUNK_RENDERER_MANAGER.render(world, event.getPartialTicks());
 	}
 
 	private class EffectPoolTemporary<T extends IEffectProvider> implements IEffectPool<T>
@@ -171,14 +204,14 @@ public class ClientEventHandler
 
 		private final T provider;
 
-		public EffectPoolTemporary(ItemStack stack, T provider)
+		public EffectPoolTemporary(final ItemStack stack, final T provider)
 		{
 			this.stack = stack;
 			this.provider = provider;
 		}
 
 		@Override
-		public ItemStack getProvider(IEffectProvider instance)
+		public ItemStack getProvider(final IEffectProvider instance)
 		{
 			return this.provider == instance ? this.stack : ItemStack.EMPTY;
 		}

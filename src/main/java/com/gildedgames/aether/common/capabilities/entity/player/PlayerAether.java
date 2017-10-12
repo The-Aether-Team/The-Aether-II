@@ -8,6 +8,11 @@ import com.gildedgames.aether.common.capabilities.entity.player.modules.*;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketEquipment;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
+import com.gildedgames.orbis.common.network.packets.PacketOrbisDeveloperMode;
+import com.gildedgames.orbis.common.network.packets.PacketOrbisExtendedReach;
+import com.gildedgames.orbis.common.player.PlayerOrbisModule;
+import com.gildedgames.orbis.common.player.PlayerSelectionModule;
+import com.google.common.collect.Lists;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -32,6 +37,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class PlayerAether implements IPlayerAether
 {
@@ -53,6 +59,12 @@ public class PlayerAether implements IPlayerAether
 
 	private final PlayerSwetTracker swetTracker;
 
+	private final PlayerOrbisModule orbisModule;
+
+	private final PlayerSelectionModule selectionModule;
+
+	private final List<PlayerAetherObserver> observers = Lists.newArrayList();
+
 	private boolean hasDiedInAetherBefore;
 
 	public PlayerAether(final EntityPlayer entity)
@@ -66,8 +78,11 @@ public class PlayerAether implements IPlayerAether
 		this.equipmentModule = new PlayerEquipmentModule(this);
 		this.dialogModule = new PlayerDialogModule(this);
 		this.swetTracker = new PlayerSwetTracker(this);
+		this.orbisModule = new PlayerOrbisModule(this);
+		this.selectionModule = new PlayerSelectionModule(this);
 
 		final Collection<PlayerAetherModule> modules = new ArrayList<>();
+
 		modules.add(this.abilitiesModule);
 		modules.add(this.gravititeAbilityModule);
 		modules.add(this.teleportingModule);
@@ -75,6 +90,8 @@ public class PlayerAether implements IPlayerAether
 		modules.add(this.equipmentModule);
 		modules.add(this.dialogModule);
 		modules.add(this.swetTracker);
+		modules.add(this.orbisModule);
+		modules.add(this.selectionModule);
 
 		this.modules = modules.toArray(new PlayerAetherModule[modules.size()]);
 	}
@@ -110,6 +127,9 @@ public class PlayerAether implements IPlayerAether
 	public void sendFullUpdate()
 	{
 		NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(this.hasDiedInAetherBefore()), (EntityPlayerMP) this.getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketOrbisDeveloperMode(this.getOrbisModule().inDeveloperMode()), (EntityPlayerMP) this.getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketOrbisExtendedReach(this.getOrbisModule().getExtendedReach()), (EntityPlayerMP) this.getEntity());
+		//NetworkingAether.sendPacketToPlayer(new PacketOrbisWorldObjectAdd(this.getSelectionModule().get), (EntityPlayerMP) this.getEntity());
 	}
 
 	public void onUpdate(final LivingUpdateEvent event)
@@ -117,6 +137,11 @@ public class PlayerAether implements IPlayerAether
 		for (final PlayerAetherModule module : this.modules)
 		{
 			module.onUpdate();
+		}
+
+		for (final PlayerAetherObserver observer : this.observers)
+		{
+			observer.onUpdate(this);
 		}
 	}
 
@@ -263,10 +288,35 @@ public class PlayerAether implements IPlayerAether
 		return this.swetTracker;
 	}
 
+	public PlayerOrbisModule getOrbisModule()
+	{
+		return this.orbisModule;
+	}
+
+	public PlayerSelectionModule getSelectionModule()
+	{
+		return this.selectionModule;
+	}
+
 	@Override
 	public PlayerEquipmentModule getEquipmentModule()
 	{
 		return this.equipmentModule;
+	}
+
+	public boolean containsObserver(final PlayerAetherObserver observer)
+	{
+		return this.observers.contains(observer);
+	}
+
+	public void addObserver(final PlayerAetherObserver observer)
+	{
+		this.observers.add(observer);
+	}
+
+	public boolean removeObserver(final PlayerAetherObserver observer)
+	{
+		return this.observers.remove(observer);
 	}
 
 	public static class Storage implements IStorage<IPlayerAether>
