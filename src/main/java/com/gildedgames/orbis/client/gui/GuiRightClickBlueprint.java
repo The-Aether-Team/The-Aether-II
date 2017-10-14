@@ -14,13 +14,13 @@ import net.minecraft.util.text.TextComponentString;
 
 import java.io.IOException;
 
-public class GuiBlueprintEdit extends GuiAdvanced
+public class GuiRightClickBlueprint extends GuiAdvanced
 {
 	public static long lastCloseTime;
 
 	private final Blueprint blueprint;
 
-	public GuiBlueprintEdit(final Blueprint blueprint)
+	public GuiRightClickBlueprint(final Blueprint blueprint)
 	{
 		super(Dim2D.flush());
 
@@ -36,7 +36,7 @@ public class GuiBlueprintEdit extends GuiAdvanced
 					@Override
 					public void onClick(final EntityPlayer player)
 					{
-
+						Minecraft.getMinecraft().displayGuiScreen(new GuiEditBlueprint(GuiRightClickBlueprint.this.blueprint));
 					}
 				},
 				new DropdownElement(new TextComponentString("Remove"))
@@ -46,7 +46,7 @@ public class GuiBlueprintEdit extends GuiAdvanced
 					{
 						final IWorldObjectManager manager = WorldObjectManager.get(player.world);
 
-						manager.getGroup(0).removeObject(GuiBlueprintEdit.this.blueprint);
+						manager.getGroup(0).removeObject(GuiRightClickBlueprint.this.blueprint);
 					}
 				},
 				new DropdownElement(new TextComponentString("Close"))
@@ -64,7 +64,10 @@ public class GuiBlueprintEdit extends GuiAdvanced
 	{
 		super.mouseClicked(mouseX, mouseY, mouseButton);
 
-		Minecraft.getMinecraft().displayGuiScreen(null);
-		GuiBlueprintEdit.lastCloseTime = System.currentTimeMillis();
+		if (Minecraft.getMinecraft().currentScreen == this)
+		{
+			Minecraft.getMinecraft().displayGuiScreen(null);
+			GuiRightClickBlueprint.lastCloseTime = System.currentTimeMillis();
+		}
 	}
 }

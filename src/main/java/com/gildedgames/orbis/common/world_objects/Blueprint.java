@@ -48,6 +48,11 @@ public class Blueprint extends AbstractRegion implements IWorldObject, IMutableR
 		this.setPos(pos);
 	}
 
+	public void saveRegionContent()
+	{
+		this.data.fetchBlocksInside(this, this.world, this.rotation);
+	}
+
 	@Override
 	public boolean equals(final Object o)
 	{

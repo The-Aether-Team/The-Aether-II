@@ -2,7 +2,7 @@ package com.gildedgames.orbis.client;
 
 import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.orbis.client.gui.GuiBlueprintEdit;
+import com.gildedgames.orbis.client.gui.GuiRightClickBlueprint;
 import com.gildedgames.orbis.common.player.PlayerSelectionModule;
 import com.gildedgames.orbis.common.util.OrbisRaytraceHelp;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
@@ -69,9 +69,9 @@ public class OrbisDeveloperModeEventsClient
 
 					if (player.getEntity().getEntityWorld().isRemote && !playerInside)
 					{
-						if (System.currentTimeMillis() - GuiBlueprintEdit.lastCloseTime > 200)
+						if (System.currentTimeMillis() - GuiRightClickBlueprint.lastCloseTime > 200)
 						{
-							Minecraft.getMinecraft().displayGuiScreen(new GuiBlueprintEdit((Blueprint) selectedShape));
+							Minecraft.getMinecraft().displayGuiScreen(new GuiRightClickBlueprint((Blueprint) selectedShape));
 						}
 					}
 				}

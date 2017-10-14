@@ -3,10 +3,14 @@ package com.gildedgames.orbis.common.data;
 import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.region.IDimensions;
 import com.gildedgames.aether.api.orbis.region.IRegion;
+import com.gildedgames.aether.api.orbis.shapes.IShape;
+import com.gildedgames.aether.api.orbis.util.OrbisRotation;
 import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.orbis.common.block.BlockData;
 import com.gildedgames.orbis.common.block.BlockDataContainer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlueprintData implements IDimensions, NBT
@@ -48,9 +52,7 @@ public class BlueprintData implements IDimensions, NBT
 	{
 		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
 
-		tag.setInteger("width", this.getWidth());
-		tag.setInteger("height", this.getHeight());
-		tag.setInteger("length", this.getLength());
+		funnel.set("dataContainer", this.dataContainer);
 	}
 
 	@Override
@@ -58,10 +60,26 @@ public class BlueprintData implements IDimensions, NBT
 	{
 		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
 
-		final int width = tag.getInteger("width");
-		final int height = tag.getInteger("height");
-		final int length = tag.getInteger("length");
+		this.dataContainer = funnel.get(this.world, "dataContainer");
+	}
 
-		this.dataContainer = new BlockDataContainer(this.world, width, height, length);
+	public void fetchBlocksInside(final IShape shape, final World world, final OrbisRotation rotation)
+	{
+		//TODO: Test. May need reversed rotation or sth (East -> West, West -> East)
+		//final IRegion rotated = RotationHelp.rotate(shape, rotation);
+		final BlockDataContainer container = new BlockDataContainer(world, shape.getBoundingBox());
+
+		final BlockPos min = shape.getBoundingBox().getMin();
+
+		for (final BlockPos pos : shape.createShapeData(world))//RotationHelp.getAllInRegionRotated(region, rotation))
+		{
+			final BlockData blockData = new BlockData().getDataFrom(pos, world);
+
+			final BlockPos translated = pos.add(-min.getX(), -min.getY(), -min.getZ());
+
+			container.set(blockData, translated);
+		}
+
+		this.dataContainer = container;
 	}
 }

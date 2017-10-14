@@ -148,10 +148,18 @@ public abstract class GuiAdvanced extends GuiContainer implements RectHolder
 		super.handleMouseClick(slotIn, slotId, mouseButton, type);
 	}
 
+	protected void keyTypedInner(final char typedChar, final int keyCode) throws IOException
+	{
+		super.keyTyped(typedChar, keyCode);
+	}
+
 	@Override
 	protected void keyTyped(final char typedChar, final int keyCode) throws IOException
 	{
-		super.keyTyped(typedChar, keyCode);
+		if (!this.children.isEmpty())
+		{
+			this.keyTypedInner(typedChar, keyCode);
+		}
 
 		for (final GuiAdvanced child : this.children)
 		{

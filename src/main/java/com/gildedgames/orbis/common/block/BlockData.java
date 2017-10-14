@@ -38,10 +38,12 @@ public class BlockData implements NBT
 		this.tileEntity = block.tileEntity;
 	}
 
-	public void getDataFrom(final BlockPos pos, final World world)
+	public BlockData getDataFrom(final BlockPos pos, final World world)
 	{
 		this.blockState = world.getBlockState(pos);
 		this.tileEntity = world.getTileEntity(pos);
+
+		return this;
 	}
 
 	public IBlockState getBlockState()

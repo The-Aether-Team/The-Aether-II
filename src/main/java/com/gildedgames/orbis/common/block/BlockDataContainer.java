@@ -30,6 +30,11 @@ public class BlockDataContainer implements NBT
 
 	private int width, height, length;
 
+	private BlockDataContainer(final World world)
+	{
+		this.world = world;
+	}
+
 	private BlockDataContainer(final World world, final NBTTagCompound tag)
 	{
 		this.world = world;
@@ -247,7 +252,12 @@ public class BlockDataContainer implements NBT
 		tag.setByteArray("blocks", blocks);
 		tag.setByteArray("metadata", metadata);
 
-		tag.setByteArray("addBlocks", addBlocks);
+		tag.setBoolean("addBlocks_null", addBlocks == null);
+
+		if (addBlocks != null)
+		{
+			tag.setByteArray("addBlocks", addBlocks);
+		}
 	}
 
 	@Override
@@ -307,8 +317,8 @@ public class BlockDataContainer implements NBT
 		}
 
 		final byte[] blockComp = tag.getByteArray("blocks");
-		final byte[] blockdata = tag.getByteArray("blockData");
-		final byte[] addBlocks = tag.getByteArray("addBlocks");
+		final byte[] metadata = tag.getByteArray("metadata");
+		final byte[] addBlocks = tag.getBoolean("addBlocks_null") ? null : tag.getByteArray("addBlocks");
 
 		if (blockComp.length != this.getVolume())
 		{
@@ -324,7 +334,7 @@ public class BlockDataContainer implements NBT
 		{
 			final int finalId;
 
-			if (i >> 1 >= addBlocks.length)
+			if (addBlocks == null || i >> 1 >= addBlocks.length)
 			{
 				finalId = blockComp[i] & 0xFF;
 			}
@@ -347,7 +357,7 @@ public class BlockDataContainer implements NBT
 				throw new NullPointerException("Wasn't able to load block with id " + finalId);
 			}
 
-			final IBlockState blockState = OrbisCore.getRegistrar().getStateFromMeta(block, blockdata[i]);
+			final IBlockState blockState = OrbisCore.getRegistrar().getStateFromMeta(block, metadata[i]);
 			this.data[i] = new BlockData(blockState, tileEntities.get(i));
 		}
 	}

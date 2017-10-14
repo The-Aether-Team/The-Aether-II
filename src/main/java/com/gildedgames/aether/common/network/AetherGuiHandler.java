@@ -9,7 +9,7 @@ import com.gildedgames.aether.common.containers.ContainerEquipment;
 import com.gildedgames.aether.common.containers.ContainerSkyrootWorkbench;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
-import com.gildedgames.orbis.client.gui.GuiBlueprintEdit;
+import com.gildedgames.orbis.client.gui.GuiRightClickBlueprint;
 import com.gildedgames.orbis.common.containers.ContainerGeneric;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -79,7 +79,7 @@ public class AetherGuiHandler implements IGuiHandler
 			//			case MASONRY_BENCH_ID:
 			//				return new GuiMasonryBench(player, new BlockPos(x, y, z));
 			case ORBIS_BLUEPRINT_EDIT:
-				return new GuiBlueprintEdit(null);
+				return new GuiRightClickBlueprint(null);
 			default:
 				return null;
 		}
