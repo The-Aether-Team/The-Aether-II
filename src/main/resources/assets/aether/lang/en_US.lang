@@ -813,6 +813,7 @@ gameMode.developer=Developer Mode
 
 # Key Bindings
 keybindings.control=Control
+keybindings.findPower=Switch Power
 
 # Tabs
 tab.equipment=Equipment
