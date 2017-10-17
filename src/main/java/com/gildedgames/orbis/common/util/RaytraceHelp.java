@@ -17,7 +17,7 @@ public class RaytraceHelp
 
 	public static BlockPos rayTrace(final PlayerAether player)
 	{
-		return rayTrace(player.getOrbisModule().getFinalExtendedReach(), 1.0F, player.getEntity());
+		return rayTrace(player.getOrbisModule().getReach(), 1.0F, player.getEntity());
 	}
 
 	public static BlockPos rayTrace(final double blockReachDistance, final float partialTicks, final Entity entity)
@@ -51,19 +51,19 @@ public class RaytraceHelp
 
 	public static BlockPos doOrbisRaytrace(final PlayerAether player)
 	{
-		final RayTraceResult raytrace = rayTraceNoBlocks(player.getOrbisModule().getFinalExtendedReach(), 1.0F, player.getEntity());
+		final RayTraceResult raytrace = rayTraceNoBlocks(player.getOrbisModule().getReach(), 1.0F, player.getEntity());
 
 		if (raytrace != null)
 		{
 			return fromMovingObjectPos(raytrace);
 		}
 
-		return player.getOrbisModule().getRegionRaytracing();
+		return player.getOrbisModule().raytraceWithRegionSnapping();
 	}
 
 	public static BlockPos doOrbisRaytrace(final PlayerAether player, final BlockPos airRayTrace)
 	{
-		final RayTraceResult raytrace = rayTraceNoBlocks(player.getOrbisModule().getFinalExtendedReach(), 1.0F, player.getEntity());
+		final RayTraceResult raytrace = rayTraceNoBlocks(player.getOrbisModule().getReach(), 1.0F, player.getEntity());
 
 		if (raytrace != null)
 		{

@@ -58,4 +58,14 @@ public class SimpleSerializer implements IClassSerializer
 
 		return obj;
 	}
+
+	@Override
+	public <T extends NBT> T deserialize(final int id)
+	{
+		final Class clazz = this.serialIDToClass.get(id);
+
+		@SuppressWarnings("unchecked") final T obj = (T) this.classToObjectCreation.get(clazz).apply(null);
+
+		return obj;
+	}
 }

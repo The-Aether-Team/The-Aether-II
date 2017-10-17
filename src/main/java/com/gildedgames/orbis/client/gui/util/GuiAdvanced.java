@@ -10,9 +10,11 @@ import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,6 +27,8 @@ public abstract class GuiAdvanced extends GuiContainer implements RectHolder
 	private final ModDim2D dim = new ModDim2D();
 
 	private boolean drawDefaultBackground;
+
+	private boolean hasInit;
 
 	public GuiAdvanced(final Rect rect)
 	{
@@ -95,18 +99,59 @@ public abstract class GuiAdvanced extends GuiContainer implements RectHolder
 	{
 		super.initGui();
 
-		this.init();
+		if (!this.hasInit)
+		{
+			this.init();
+
+			this.hasInit = true;
+		}
+	}
+
+	public void draw()
+	{
+
 	}
 
 	@Override
-	public void drawScreen(final int mouseX, final int mouseY, final float partialTicks)
+	public final void drawScreen(final int mouseX, final int mouseY, final float partialTicks)
 	{
 		super.drawScreen(mouseX, mouseY, partialTicks);
+
+		final float x = this.dim().x();
+		final float y = this.dim().y();
+
+		GlStateManager.pushMatrix();
+
+		GlStateManager.disableLighting();
+
+		GlStateManager.translate(x + (this.dim().width() / 2) + this.dim().originX(), (this.dim().height() / 2) + this.dim().originY() + y, 0);
+
+		GlStateManager.scale(this.dim().scale(), this.dim().scale(), 0);
+
+		GlStateManager.rotate(this.dim().degrees(), 0.0F, 0.0F, 1.0F);
+
+		GlStateManager.translate(-(this.dim().width() / 2) - this.dim().originX() - x, -(this.dim().height() / 2) - this.dim().originY() - y, 0);
+
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
+		GlStateManager.enableBlend();
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
+
+		GlStateManager.enableAlpha();
+
+		this.draw();
 
 		for (final GuiAdvanced child : this.children)
 		{
 			child.drawScreen(mouseX, mouseY, partialTicks);
 		}
+
+		GL11.glDisable(GL11.GL_ALPHA_TEST);
+		GlStateManager.disableAlpha();
+
+		GlStateManager.popMatrix();
 	}
 
 	@Override

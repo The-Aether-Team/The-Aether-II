@@ -1,19 +1,20 @@
 package com.gildedgames.orbis.client.gui;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.orbis.common.player.PlayerOrbisModule;
+import com.gildedgames.orbis.common.util.InputHelper;
 import com.gildedgames.orbis.client.gui.util.GuiAdvanced;
 import com.gildedgames.orbis.client.gui.util.GuiButtonGeneric;
 import com.gildedgames.orbis.client.gui.util.GuiInput;
 import com.gildedgames.orbis.client.gui.util.GuiText;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.client.util.rect.Pos2D;
-import com.gildedgames.orbis.common.util.InputHelper;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.world.World;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -83,8 +84,6 @@ public class GuiEditBlueprint extends GuiAdvanced
 		{
 			this.blueprint.saveRegionContent();
 
-			final World world = Minecraft.getMinecraft().player.world;
-
 			final File folder = new File(Minecraft.getMinecraft().mcDataDir, "/orbis");
 			folder.mkdirs();
 
@@ -101,6 +100,10 @@ public class GuiEditBlueprint extends GuiAdvanced
 			{
 				AetherCore.LOGGER.error("Failed to save Blueprint to disk", e);
 			}
+
+			final PlayerOrbisModule module = PlayerAether.getOrbisModule(Minecraft.getMinecraft().player);
+
+			module.powers().getBlueprintPower().setPlacingBlueprint(this.blueprint.getData());
 
 			Minecraft.getMinecraft().displayGuiScreen(null);
 			GuiRightClickBlueprint.lastCloseTime = System.currentTimeMillis();

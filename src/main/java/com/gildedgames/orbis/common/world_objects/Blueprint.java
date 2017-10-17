@@ -8,8 +8,11 @@ import com.gildedgames.aether.api.orbis.region.IMutableRegion;
 import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.orbis.util.OrbisRotation;
 import com.gildedgames.aether.api.orbis.util.RegionHelp;
+import com.gildedgames.aether.api.orbis.util.RotationHelp;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.orbis.client.RenderShape;
+import com.gildedgames.orbis.client.renderers.RenderShape;
+import com.gildedgames.orbis.common.block.BlockData;
+import com.gildedgames.orbis.common.block.BlockDataContainer;
 import com.gildedgames.orbis.common.data.BlueprintData;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -46,6 +49,41 @@ public class Blueprint extends AbstractRegion implements IWorldObject, IMutableR
 		this.data = data;
 
 		this.setPos(pos);
+	}
+
+	public Blueprint(final World world, final BlockPos pos, final OrbisRotation rotation, final BlueprintData data)
+	{
+		this.world = world;
+		this.data = data;
+		this.rotation = rotation;
+
+		this.setPos(pos);
+	}
+
+	public BlueprintData getData()
+	{
+		return this.data;
+	}
+
+	public OrbisRotation getRotation()
+	{
+		return this.rotation;
+	}
+
+	public BlockData getBlock(final BlockPos pos)
+	{
+		final BlockPos transformed = this.transformForBlueprint(pos);
+		return this.getBlockDataContainer().get(transformed);
+	}
+
+	public BlockPos transformForBlueprint(final BlockPos pos)
+	{
+		final OrbisRotation transformRot =
+				this.rotation == OrbisRotation.EAST ? OrbisRotation.WEST : this.rotation == OrbisRotation.WEST ? OrbisRotation.EAST : this.rotation;
+		final BlockPos rotated = RotationHelp.rotate(pos, this, transformRot);
+		final IRegion rotatedRegion = RotationHelp.rotate(this, transformRot);
+		return new BlockPos(rotated.getX() - rotatedRegion.getMin().getX(), rotated.getY() - rotatedRegion.getMin().getY(),
+				rotated.getZ() - rotatedRegion.getMin().getZ());
 	}
 
 	public void saveRegionContent()
@@ -181,5 +219,10 @@ public class Blueprint extends AbstractRegion implements IWorldObject, IMutableR
 		this.max = RegionHelp.getMax(corner1, corner2);
 
 		this.notifyDataChange();
+	}
+
+	public BlockDataContainer getBlockDataContainer()
+	{
+		return this.data.getBlockDataContainer();
 	}
 }

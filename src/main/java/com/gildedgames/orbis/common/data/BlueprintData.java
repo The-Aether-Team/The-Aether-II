@@ -29,6 +29,11 @@ public class BlueprintData implements IDimensions, NBT
 		this.dataContainer = new BlockDataContainer(world, region);
 	}
 
+	public BlockDataContainer getBlockDataContainer()
+	{
+		return this.dataContainer;
+	}
+
 	@Override
 	public int getWidth()
 	{

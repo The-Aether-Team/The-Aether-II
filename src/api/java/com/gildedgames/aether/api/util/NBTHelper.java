@@ -201,4 +201,19 @@ public class NBTHelper
 
 		return obj;
 	}
+
+	public static <T extends NBT> T read(final IClassSerializer serializer, final NBTTagCompound tag)
+	{
+		if (tag.getBoolean("_null"))
+		{
+			return null;
+		}
+
+		final int id = tag.getInteger("id");
+
+		final T obj = serializer.deserialize(id);
+		obj.read(tag);
+
+		return obj;
+	}
 }

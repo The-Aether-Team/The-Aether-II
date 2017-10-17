@@ -26,15 +26,13 @@ public class GuiTextLabel extends GuiAdvanced
 	}
 
 	@Override
-	public void drawScreen(final int mouseX, final int mouseY, final float partialTicks)
+	public void draw()
 	{
 		GlStateManager.pushMatrix();
 
 		this.drawTextBackground(this.dim().x(), this.dim().y(), this.dim().width(), this.dim().height());
 
 		GlStateManager.popMatrix();
-
-		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 
 	private void drawTextBackground(final float cornerX, final float cornerY, final float width, final float height)

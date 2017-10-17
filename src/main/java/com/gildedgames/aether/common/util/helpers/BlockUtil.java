@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
@@ -17,6 +18,16 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class BlockUtil
 {
+	public static IBlockState getBlockState(final ItemStack stack)
+	{
+		if (stack.getItem() instanceof ItemBlock)
+		{
+			return ((ItemBlock) stack.getItem()).block.getStateFromMeta(stack.getItemDamage());
+		}
+
+		return null;
+	}
+
 	@Deprecated
 	public static boolean setTileEntityNBT(final IBlockAccessExtended worldIn, final BlockPos pos, final ItemStack stack)
 	{

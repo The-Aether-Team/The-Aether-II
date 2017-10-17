@@ -51,10 +51,8 @@ public class GuiInput extends GuiAdvanced
 	}
 
 	@Override
-	public void drawScreen(final int mouseX, final int mouseY, final float partialTicks)
+	public void draw()
 	{
-		super.drawScreen(mouseX, mouseY, partialTicks);
-
 		this.field.xPosition = (int) this.dim().x();
 		this.field.yPosition = (int) this.dim().y();
 

@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.orbis.IWorldObject;
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
 import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.orbis.region.Region;
-import com.gildedgames.orbis.client.RenderShape;
+import com.gildedgames.orbis.client.renderers.RenderShape;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

@@ -1,6 +1,7 @@
 package com.gildedgames.orbis.client.gui.util;
 
 import com.gildedgames.orbis.client.util.rect.Rect;
+import com.gildedgames.orbis.common.util.InputHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 
@@ -52,16 +53,14 @@ public class GuiButtonGeneric extends GuiAdvanced
 	}
 
 	@Override
-	public void drawScreen(final int mouseX, final int mouseY, final float partialTicks)
+	public void draw()
 	{
-		super.drawScreen(mouseX, mouseY, partialTicks);
-
 		this.button.xPosition = (int) this.dim().x();
 		this.button.yPosition = (int) this.dim().y();
 
 		this.button.width = (int) this.dim().width();
 		this.button.height = (int) this.dim().height();
 
-		this.button.drawButton(Minecraft.getMinecraft(), mouseX, mouseY);
+		this.button.drawButton(Minecraft.getMinecraft(), (int) InputHelper.getMouseX(), (int) InputHelper.getMouseY());
 	}
 }

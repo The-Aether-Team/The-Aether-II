@@ -1,20 +1,28 @@
 package com.gildedgames.orbis.common.player;
 
+import com.gildedgames.aether.api.orbis.IWorldRenderer;
 import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.common.network.packets.PacketOrbisDeveloperMode;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisExtendedReach;
+import com.gildedgames.orbis.common.network.packets.PacketOrbisDeveloperReach;
+import com.gildedgames.orbis.common.player.modules.GodPowerModule;
 import com.gildedgames.orbis.common.util.OrbisRaytraceHelp;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 
+import java.util.Collections;
+import java.util.List;
+
 public class PlayerOrbisModule extends PlayerAetherModule
 {
 
-	private double extendedReach = 5.0D;
+	private final GodPowerModule godPowerModule;
+
+	private double developerReach = 5.0D;
 
 	private boolean reachSet;
 
@@ -23,11 +31,35 @@ public class PlayerOrbisModule extends PlayerAetherModule
 	public PlayerOrbisModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
+
+		this.godPowerModule = new GodPowerModule(playerAether);
+	}
+
+	public static PlayerOrbisModule get(final Entity player)
+	{
+		final PlayerAether playerAether = PlayerAether.getPlayer(player);
+
+		return playerAether.getOrbisModule();
+	}
+
+	public GodPowerModule powers()
+	{
+		return this.godPowerModule;
+	}
+
+	public List<IWorldRenderer> getActiveRenderers()
+	{
+		if (!this.inDeveloperMode())
+		{
+			return Collections.emptyList();
+		}
+
+		return this.powers().getCurrentPower().getClientHandler().getActiveRenderers(this, this.getWorld());
 	}
 
 	public boolean canInteractWithItems()
 	{
-		return !this.inDeveloperMode();
+		return this.powers().getCurrentPower().canInteractWithItems(this);
 	}
 
 	public boolean inDeveloperMode()
@@ -37,7 +69,7 @@ public class PlayerOrbisModule extends PlayerAetherModule
 
 	public IShape getSelectedRegion()
 	{
-		return OrbisRaytraceHelp.raytraceShapes(this.getEntity(), null, this.getFinalExtendedReach(), 1, false);
+		return OrbisRaytraceHelp.raytraceShapes(this.getEntity(), null, this.getReach(), 1, false);
 	}
 
 	public void setDeveloperMode(final boolean flag)
@@ -50,14 +82,14 @@ public class PlayerOrbisModule extends PlayerAetherModule
 		}
 	}
 
-	public BlockPos getAirRaytracing()
+	public BlockPos raytraceNoSnapping()
 	{
-		return OrbisRaytraceHelp.getAirRaytracing(this.getEntity());
+		return OrbisRaytraceHelp.raytraceNoSnapping(this.getEntity());
 	}
 
-	public BlockPos getRegionRaytracing()
+	public BlockPos raytraceWithRegionSnapping()
 	{
-		return OrbisRaytraceHelp.getRegionRaytracing(this.getEntity());
+		return OrbisRaytraceHelp.raytraceWithRegionSnapping(this.getEntity());
 	}
 
 	public double getReach()
@@ -74,29 +106,24 @@ public class PlayerOrbisModule extends PlayerAetherModule
 		}
 	}
 
-	public double getExtendedReach()
+	public double getDeveloperReach()
 	{
-		return this.extendedReach;
+		return this.developerReach;
 	}
 
-	public void setExtendedReach(final double reach)
+	public void setDeveloperReach(final double reach)
 	{
-		this.extendedReach = Math.max(1, reach);
+		this.developerReach = Math.max(1, reach);
 		this.reachSet = true;
 
 		if (!this.getEntity().world.isRemote)
 		{
-			NetworkingAether.sendPacketToPlayer(new PacketOrbisExtendedReach(this.extendedReach), (EntityPlayerMP) this.getEntity());
+			NetworkingAether.sendPacketToPlayer(new PacketOrbisDeveloperReach(this.developerReach), (EntityPlayerMP) this.getEntity());
 		}
 		else
 		{
-			NetworkingAether.sendPacketToServer(new PacketOrbisExtendedReach(this.extendedReach));
+			NetworkingAether.sendPacketToServer(new PacketOrbisDeveloperReach(this.developerReach));
 		}
-	}
-
-	public double getFinalExtendedReach()
-	{
-		return OrbisRaytraceHelp.getFinalExtendedReach(this.getEntity());
 	}
 
 	@Override
@@ -111,7 +138,7 @@ public class PlayerOrbisModule extends PlayerAetherModule
 		output.setBoolean("developerModeEnabled", this.developerModeEnabled);
 
 		output.setBoolean("reachSet", this.reachSet);
-		output.setDouble("extendedReach", this.extendedReach);
+		output.setDouble("developerReach", this.developerReach);
 	}
 
 	@Override
@@ -123,7 +150,7 @@ public class PlayerOrbisModule extends PlayerAetherModule
 
 		if (this.reachSet)
 		{
-			this.extendedReach = input.getDouble("extendedReach");
+			this.developerReach = input.getDouble("developerReach");
 		}
 	}
 

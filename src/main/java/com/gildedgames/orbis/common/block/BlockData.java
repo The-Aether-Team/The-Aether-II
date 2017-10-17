@@ -1,5 +1,6 @@
 package com.gildedgames.orbis.common.block;
 
+import com.gildedgames.aether.api.orbis.util.OrbisRotation;
 import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.orbis.common.OrbisCore;
 import net.minecraft.block.material.Material;
@@ -54,6 +55,12 @@ public class BlockData implements NBT
 	public TileEntity getTileEntity()
 	{
 		return this.tileEntity;
+	}
+
+	public IBlockState getRotatedBlockState(final OrbisRotation rotation)
+	{
+		//TODO: Rotate block state
+		return this.blockState;
 	}
 
 	@Override

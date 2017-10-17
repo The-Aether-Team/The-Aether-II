@@ -1,16 +1,14 @@
 package com.gildedgames.orbis.common.player;
 
-import com.gildedgames.aether.api.orbis.IWorldObjectGroup;
-import com.gildedgames.aether.api.orbis.IWorldObjectManager;
 import com.gildedgames.aether.api.orbis.region.Region;
 import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
-import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.common.network.packets.PacketOrbisActiveSelection;
+import com.gildedgames.orbis.common.player.godmode.IGodPower;
+import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
-import com.gildedgames.orbis.common.world_objects.Blueprint;
 import com.gildedgames.orbis.common.world_objects.WorldRegion;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -37,6 +35,11 @@ public class PlayerSelectionModule extends PlayerAetherModule
 	@Override
 	public void onUpdate()
 	{
+		final PlayerOrbisModule module = PlayerOrbisModule.get(this.getEntity());
+		final IGodPower power = module.powers().getCurrentPower();
+
+		final IShapeSelector selector = power.getShapeSelector();
+
 		if (this.selectPos != null)
 		{
 			final BlockPos endPos = RaytraceHelp.doOrbisRaytrace(this.getPlayer());
@@ -46,7 +49,7 @@ public class PlayerSelectionModule extends PlayerAetherModule
 			{
 				this.prevPos = endPos;
 				this.hasChanged = true;
-				this.activeSelection = new WorldRegion(this.selectPos, endPos, this.getEntity().world);
+				this.activeSelection = new WorldRegion(this.selectPos, endPos, this.getWorld());
 			}
 			else
 			{
@@ -54,7 +57,7 @@ public class PlayerSelectionModule extends PlayerAetherModule
 			}
 		}
 
-		if (!this.getPlayer().getOrbisModule().inDeveloperMode())
+		if (!this.getPlayer().getOrbisModule().inDeveloperMode() || !selector.isSelectorActive(module, this.getWorld()))
 		{
 			this.activeSelection = null;
 		}
@@ -62,35 +65,36 @@ public class PlayerSelectionModule extends PlayerAetherModule
 
 	public boolean setActiveSelectionCorner(final BlockPos pos)
 	{
+		final PlayerOrbisModule module = PlayerOrbisModule.get(this.getEntity());
+		final IGodPower power = module.powers().getCurrentPower();
+
+		final IShapeSelector selector = power.getShapeSelector();
+
 		if (this.activeSelection != null)
 		{
-			this.selectPos = pos;
-
-			if (this.getEntity().world.isRemote)
+			if (selector.canSelectShape(module, this.activeSelection, this.getWorld()))
 			{
-				final IWorldObjectManager manager = WorldObjectManager.get(this.getEntity().world);
+				this.selectPos = pos;
 
-				final IWorldObjectGroup group = manager.getGroup(0);
+				if (this.getEntity().world.isRemote)
+				{
+					NetworkingAether.sendPacketToServer(new PacketOrbisActiveSelection(this.activeSelection));
+				}
 
-				NetworkingAether.sendPacketToServer(new PacketOrbisActiveSelection(this.activeSelection));
+				selector.onSelect(module, this.activeSelection, this.getWorld());
 
-				group.addObject(new Blueprint(this.getEntity().world, this.activeSelection.getBoundingBox()));
+				this.activeSelection = null;
+
+				return true;
 			}
-
-			this.activeSelection = null;
-
-			return true;
 		}
-		else
+		else if (selector.isSelectorActive(module, this.getWorld()))
 		{
 			this.selectPos = pos;
 
-			final IShape newSelection = new Blueprint(this.getEntity().world, new Region(pos, pos));
+			final IShape newSelection = new WorldRegion(new Region(pos, pos), this.getEntity().world);
 
-			//if (power.canSelectShape(this.playerHook, newSelection, this.world))
-			{
-				this.activeSelection = newSelection;
-			}
+			this.activeSelection = newSelection;
 		}
 
 		return false;

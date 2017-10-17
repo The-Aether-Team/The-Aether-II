@@ -9,7 +9,7 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketEquipment;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
 import com.gildedgames.orbis.common.network.packets.PacketOrbisDeveloperMode;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisExtendedReach;
+import com.gildedgames.orbis.common.network.packets.PacketOrbisDeveloperReach;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.PlayerSelectionModule;
 import com.google.common.collect.Lists;
@@ -96,6 +96,13 @@ public class PlayerAether implements IPlayerAether
 		this.modules = modules.toArray(new PlayerAetherModule[modules.size()]);
 	}
 
+	public static PlayerOrbisModule getOrbisModule(final Entity player)
+	{
+		final PlayerAether playerAether = PlayerAether.getPlayer(player);
+
+		return playerAether.getOrbisModule();
+	}
+
 	public static PlayerAether getPlayer(final Entity player)
 	{
 		if (!PlayerAether.hasCapability(player))
@@ -128,7 +135,7 @@ public class PlayerAether implements IPlayerAether
 	{
 		NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(this.hasDiedInAetherBefore()), (EntityPlayerMP) this.getEntity());
 		NetworkingAether.sendPacketToPlayer(new PacketOrbisDeveloperMode(this.getOrbisModule().inDeveloperMode()), (EntityPlayerMP) this.getEntity());
-		NetworkingAether.sendPacketToPlayer(new PacketOrbisExtendedReach(this.getOrbisModule().getExtendedReach()), (EntityPlayerMP) this.getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketOrbisDeveloperReach(this.getOrbisModule().getDeveloperReach()), (EntityPlayerMP) this.getEntity());
 		//NetworkingAether.sendPacketToPlayer(new PacketOrbisWorldObjectAdd(this.getSelectionModule().get), (EntityPlayerMP) this.getEntity());
 	}
 

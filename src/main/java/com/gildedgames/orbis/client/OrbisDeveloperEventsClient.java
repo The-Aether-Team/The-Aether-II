@@ -2,21 +2,29 @@ package com.gildedgames.orbis.client;
 
 import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.orbis.client.gui.GuiChoiceMenu;
+import com.gildedgames.orbis.client.gui.GuiPowersChoiceMenu;
 import com.gildedgames.orbis.client.gui.GuiRightClickBlueprint;
+import com.gildedgames.orbis.client.renderers.AirSelectionRenderer;
+import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.PlayerSelectionModule;
+import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import com.gildedgames.orbis.common.util.OrbisRaytraceHelp;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import org.lwjgl.input.Keyboard;
 
-public class OrbisDeveloperModeEventsClient
+public class OrbisDeveloperEventsClient
 {
 
 	private static final Minecraft mc = Minecraft.getMinecraft();
@@ -26,16 +34,49 @@ public class OrbisDeveloperModeEventsClient
 	private static IShape prevShape;
 
 	@SubscribeEvent
+	public static void onGuiOpen(final GuiOpenEvent event)
+	{
+		if (event.getGui() instanceof GuiInventory)
+		{
+			final Minecraft mc = Minecraft.getMinecraft();
+
+			final PlayerOrbisModule module = PlayerOrbisModule.get(mc.player);
+
+			if (module.powers().getCurrentPower().getClientHandler().openGuiScreen())
+			{
+				event.setCanceled(true);
+			}
+		}
+	}
+
+	@SubscribeEvent
 	public static void onClienTick(final TickEvent.ClientTickEvent event)
 	{
 		if (mc.world != null && mc.player != null)
 		{
+			final PlayerOrbisModule module = PlayerOrbisModule.get(mc.player);
+
+			if (module.inDeveloperMode())
+			{
+				if (Keyboard.isKeyDown(OrbisKeyBindings.keyBindFindPower.getKeyCode()))
+				{
+					if (Minecraft.getMinecraft().currentScreen == null)
+					{
+						Minecraft.getMinecraft().displayGuiScreen(new GuiPowersChoiceMenu(module));
+					}
+				}
+				else if (Minecraft.getMinecraft().currentScreen instanceof GuiChoiceMenu)
+				{
+					Minecraft.getMinecraft().displayGuiScreen(null);
+				}
+			}
+
 			final PlayerAether player = PlayerAether.getPlayer(mc.player);
 
 			if (player.getSelectionModule().getActiveSelection() == null && prevShape != null && prevReach != 0.0D)
 			{
 				prevShape = null;
-				player.getOrbisModule().setExtendedReach(prevReach);
+				player.getOrbisModule().setDeveloperReach(prevReach);
 			}
 		}
 	}
@@ -44,16 +85,19 @@ public class OrbisDeveloperModeEventsClient
 	public static void onMouseEvent(final MouseEvent event)
 	{
 		final PlayerAether player = PlayerAether.getPlayer(Minecraft.getMinecraft().player);
+		final PlayerOrbisModule module = player.getOrbisModule();
+
+		final IShapeSelector selector = module.powers().getCurrentPower().getShapeSelector();
 
 		if (event.getButton() == 0 || event.getButton() == 1)
 		{
-			if (player.getOrbisModule().inDeveloperMode())
+			if (module.inDeveloperMode() && selector.isSelectorActive(module, mc.world))
 			{
 				event.setCanceled(true);
 
-				final BlockPos pos = OrbisRaytraceHelp.getAirRaytracing(player.getEntity());
+				final BlockPos pos = OrbisRaytraceHelp.raytraceNoSnapping(player.getEntity());
 
-				final PlayerSelectionModule selector = player.getSelectionModule();
+				final PlayerSelectionModule selectionModule = player.getSelectionModule();
 
 				final IShape selectedShape = player.getOrbisModule().getSelectedRegion();
 
@@ -77,19 +121,12 @@ public class OrbisDeveloperModeEventsClient
 				}
 				else
 				{
-					if (!event.isButtonstate() && selector.getActiveSelection() != null || event.isButtonstate() && selector.getActiveSelection() == null)
+					if (!event.isButtonstate() && selectionModule.getActiveSelection() != null
+							|| event.isButtonstate() && selectionModule.getActiveSelection() == null)
 					{
-						selector.setActiveSelectionCorner(pos);
+						selectionModule.setActiveSelectionCorner(pos);
 					}
 				}
-			}
-		}
-
-		if (event.getButton() == 2 && event.isButtonstate())
-		{
-			if (player.getOrbisModule().inDeveloperMode())
-			{
-				event.setCanceled(true);
 			}
 		}
 
@@ -102,21 +139,21 @@ public class OrbisDeveloperModeEventsClient
 			{
 				prevShape = activeRegion;
 
-				prevReach = player.getOrbisModule().getExtendedReach();
+				prevReach = player.getOrbisModule().getDeveloperReach();
 			}
 
 			if (OrbisKeyBindings.keyBindControl.isKeyDown())
 			{
-				prevReach = player.getOrbisModule().getExtendedReach();
+				prevReach = player.getOrbisModule().getDeveloperReach();
 			}
 
 			final RayTraceResult blockRaytrace = RaytraceHelp
-					.rayTraceNoBlocks(player.getOrbisModule().getFinalExtendedReach(), AirSelectionRenderer.PARTIAL_TICKS, player.getEntity());
-			double reach = player.getOrbisModule().getFinalExtendedReach();
+					.rayTraceNoBlocks(player.getOrbisModule().getReach(), AirSelectionRenderer.PARTIAL_TICKS, player.getEntity());
+			double reach = player.getOrbisModule().getReach();
 
 			if (event.getDwheel() > 0)
 			{
-				player.getOrbisModule().setExtendedReach(reach + 1);
+				player.getOrbisModule().setDeveloperReach(reach + 1);
 
 				event.setCanceled(true);
 			}
@@ -134,11 +171,11 @@ public class OrbisDeveloperModeEventsClient
 
 					final float distance = MathHelper.floor((float) Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ));
 
-					player.getOrbisModule().setExtendedReach(distance);
-					reach = player.getOrbisModule().getFinalExtendedReach();
+					player.getOrbisModule().setDeveloperReach(distance);
+					reach = player.getOrbisModule().getReach();
 				}
 
-				player.getOrbisModule().setExtendedReach(reach - 1);
+				player.getOrbisModule().setDeveloperReach(reach - 1);
 
 				event.setCanceled(true);
 			}

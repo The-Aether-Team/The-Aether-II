@@ -2,12 +2,13 @@ package com.gildedgames.aether.common.capabilities.entity.player;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public abstract class PlayerAetherModule
 {
-	private PlayerAether playerAether;
+	private final PlayerAether playerAether;
 
-	public PlayerAetherModule(PlayerAether playerAether)
+	public PlayerAetherModule(final PlayerAether playerAether)
 	{
 		this.playerAether = playerAether;
 	}
@@ -24,19 +25,24 @@ public abstract class PlayerAetherModule
 		return this.playerAether.getEntity();
 	}
 
+	public final World getWorld()
+	{
+		return this.getEntity().world;
+	}
+
 	/**
 	 * Writes this module's data to the player capability. **This might change in the future to prevent
 	 * modules from accessing data outside their scope.**
 	 *
-	 * @param compound The NBT tag to writeProperties to
+	 * @param tag The NBT tag to writeProperties to
 	 */
-	public abstract void write(NBTTagCompound compound);
+	public abstract void write(NBTTagCompound tag);
 
 	/**
 	 * Reads this module's data from the player capability. **This might change in the future to prevent
 	 * modules from accessing data outside their scope.**
 	 *
-	 * @param compound The NBT tag to read from
+	 * @param tag The NBT tag to read from
 	 */
-	public abstract void read(NBTTagCompound compound);
+	public abstract void read(NBTTagCompound tag);
 }

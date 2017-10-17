@@ -77,7 +77,7 @@ public class Dim2D implements Rect
 
 	public static Rect combine(final Rect... dimensions)
 	{
-		return Dim2D.combine(Arrays.asList(dimensions));
+		return combine(Arrays.asList(dimensions));
 	}
 
 	public static Rect combine(final List<Rect> dimensions)
@@ -125,7 +125,7 @@ public class Dim2D implements Rect
 	@Override
 	public RectBuilder rebuild()
 	{
-		return Dim2D.build(this);
+		return build(this);
 	}
 
 	@Override

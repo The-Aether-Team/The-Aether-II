@@ -25,11 +25,20 @@ public class Instantiator<T> implements Function<World, T>
 	{
 		try
 		{
-			final Constructor<T> constructor = this.clazz.getDeclaredConstructor(World.class);
+			final Constructor<T> constructor;
+
+			if (world == null)
+			{
+				constructor = this.clazz.getDeclaredConstructor();
+			}
+			else
+			{
+				constructor = this.clazz.getDeclaredConstructor(World.class);
+			}
 
 			constructor.setAccessible(true);
 
-			final T instance = constructor.newInstance(world);
+			final T instance = world != null ? constructor.newInstance(world) : constructor.newInstance();
 
 			constructor.setAccessible(false);
 
@@ -38,7 +47,7 @@ public class Instantiator<T> implements Function<World, T>
 		catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
 		{
 			throw new NullPointerException("Something went wrong trying to create an instances of " + this.clazz.getName()
-					+ ". Most likely you forgot to create an World constructor for it.");
+					+ ". Most likely you forgot to create a World constructor/default constructor for it.");
 		}
 	}
 

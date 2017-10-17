@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
+import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -61,6 +62,10 @@ public class PacketOrbisActiveSelection implements IMessage
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 			playerAether.getSelectionModule().setActiveSelection(shape);
+
+			final IShapeSelector selector = playerAether.getOrbisModule().powers().getCurrentPower().getShapeSelector();
+
+			selector.onSelect(playerAether.getOrbisModule(), shape, player.world);
 
 			return null;
 		}

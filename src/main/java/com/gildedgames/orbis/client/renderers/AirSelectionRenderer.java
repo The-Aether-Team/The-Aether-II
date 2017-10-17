@@ -1,7 +1,9 @@
-package com.gildedgames.orbis.client;
+package com.gildedgames.orbis.client.renderers;
 
 import com.gildedgames.aether.api.orbis.region.IMutableRegion;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
+import com.gildedgames.orbis.common.player.godmode.GodPowerCreative;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
 import com.gildedgames.orbis.common.world_objects.WorldRegion;
 import net.minecraft.block.state.IBlockState;
@@ -60,9 +62,9 @@ public class AirSelectionRenderer
 			return;
 		}
 
-		final BlockPos airRaytrace = playerAether.getOrbisModule().getAirRaytracing();
+		final BlockPos airRaytrace = playerAether.getOrbisModule().raytraceNoSnapping();
 
-		//if (!(playerHook.getCurrentPower() instanceof BackpackPower))
+		if (!(playerAether.getOrbisModule().powers().getCurrentPower() instanceof GodPowerCreative))
 		{
 			Minecraft.getMinecraft().objectMouseOver = new RayTraceResult(mc.player, mc.player.getLook(1.0F));
 		}
@@ -80,11 +82,13 @@ public class AirSelectionRenderer
 			renderRegion.gridAlpha = 0.0F;
 		}
 
-		final boolean has3DCursor = true;//playerHook.getCurrentPower().has3DCursor(playerHook);
+		final IGodPowerClient powerClient = playerAether.getOrbisModule().powers().getCurrentPower().getClientHandler();
+
+		final boolean has3DCursor = powerClient.has3DCursor(playerAether.getOrbisModule());
 
 		if (!has3DCursor)
 		{
-			fadeMin = 0.0F;//playerHook.getCurrentPower().minFade3DCursor();
+			fadeMin = powerClient.minFade3DCursor(playerAether.getOrbisModule());
 		}
 		else
 		{
@@ -130,7 +134,7 @@ public class AirSelectionRenderer
 			prevPos = pos;
 		}
 
-		if (prevReach != playerAether.getOrbisModule().getExtendedReach())
+		if (prevReach != playerAether.getOrbisModule().getDeveloperReach())
 		{
 			resetRegionAlpha();
 
@@ -140,7 +144,7 @@ public class AirSelectionRenderer
 			timeDifRequired = 0.0F;
 			timeToFade = 500.0F;
 
-			prevReach = playerAether.getOrbisModule().getExtendedReach();
+			prevReach = playerAether.getOrbisModule().getDeveloperReach();
 		}
 
 		region.setBounds(pos, pos);

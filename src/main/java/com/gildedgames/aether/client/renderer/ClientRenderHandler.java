@@ -9,6 +9,7 @@ import com.gildedgames.aether.client.renderer.entities.living.RenderPlayerHelper
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
+import com.gildedgames.orbis.client.overlays.GodModeOverlay;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -35,14 +36,19 @@ public class ClientRenderHandler
 		playerRender.addLayer(new LayerPlayerGloves(playerRender));
 		playerRender.addLayer(new LayerSwetLatch(playerRender));
 
-		playerRender  = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim");
+		playerRender = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim");
 
 		playerRender.addLayer(new LayerPlayerGloves(playerRender));
 		playerRender.addLayer(new LayerSwetLatch(playerRender));
 
+		ClientRenderHandler.addOverlay(new PortalOverlay());
+		ClientRenderHandler.addOverlay(new SwetOverlay());
+		ClientRenderHandler.addOverlay(new GodModeOverlay());
+	}
 
-		ClientRenderHandler.overlays.add(new PortalOverlay());
-		ClientRenderHandler.overlays.add(new SwetOverlay());
+	public static void addOverlay(final IOverlay overlay)
+	{
+		ClientRenderHandler.overlays.add(overlay);
 	}
 
 	@SubscribeEvent

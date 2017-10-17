@@ -32,6 +32,11 @@ public class NBTFunnel
 		this.tag.setTag(key, NBTHelper.write(this.serializer, nbt));
 	}
 
+	public <T extends NBT> T get(final String key)
+	{
+		return NBTHelper.read(this.serializer, this.tag.getCompoundTag(key));
+	}
+
 	public <T extends NBT> T get(final World world, final String key)
 	{
 		return NBTHelper.read(world, this.serializer, this.tag.getCompoundTag(key));
@@ -105,6 +110,21 @@ public class NBTFunnel
 			final NBTTagCompound data = nbtList.getCompoundTagAt(i);
 
 			readObjects.add(NBTHelper.read(world, this.serializer, data));
+		}
+
+		return readObjects;
+	}
+
+	public <T extends NBT> List<T> getList(final String key)
+	{
+		final List<T> readObjects = Lists.newArrayList();
+		final NBTTagList nbtList = this.tag.getTagList(key, 10);
+
+		for (int i = 0; i < nbtList.tagCount(); i++)
+		{
+			final NBTTagCompound data = nbtList.getCompoundTagAt(i);
+
+			readObjects.add(NBTHelper.read(this.serializer, data));
 		}
 
 		return readObjects;

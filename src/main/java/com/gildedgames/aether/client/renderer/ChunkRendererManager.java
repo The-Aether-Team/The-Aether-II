@@ -10,7 +10,8 @@ import com.gildedgames.aether.api.orbis.util.RegionHelp;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherObserver;
 import com.gildedgames.aether.common.capabilities.world.chunk.ChunkAttachment;
-import com.gildedgames.orbis.client.RenderShape;
+import com.gildedgames.orbis.client.renderers.RenderShape;
+import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
@@ -177,6 +178,7 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 	@Override
 	public void onUpdate(final PlayerAether playerAether)
 	{
+		final PlayerOrbisModule module = playerAether.getOrbisModule();
 		final IShape activeSelection = playerAether.getSelectionModule().getActiveSelection();
 
 		if (activeSelection != null && !playerAether.getSelectionModule().hasChanged())
@@ -193,8 +195,31 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 
 		if (activeSelection != null && playerAether.getSelectionModule().hasChanged())
 		{
-			this.addShapeRenderer(playerAether.getEntity().world, activeSelection);
+			final RenderShape renderRegion = new RenderShape(activeSelection);//TODO: It used to copy the region, dunno why
+
+			renderRegion.useCustomColors = true;
+
+			renderRegion.colorBorder = module.powers().getCurrentPower().getClientHandler().getShapeColor(module);
+			renderRegion.colorGrid = module.powers().getCurrentPower().getClientHandler().getShapeColor(module);
+
+			this.addPlayerRenderer(playerAether.getEntity().world, renderRegion);
 		}
+
+		final List<IWorldRenderer> activeRenderers = playerAether.getOrbisModule().getActiveRenderers();
+
+		if (activeRenderers != null && !activeRenderers.isEmpty())
+		{
+			for (final IWorldRenderer renderer : activeRenderers)
+			{
+				this.addPlayerRenderer(playerAether.getEntity().world, renderer);
+			}
+		}
+	}
+
+	private void addPlayerRenderer(final World world, final IWorldRenderer renderer)
+	{
+		this.playerRenderers.add(renderer);
+		this.addRenderer(world, renderer);
 	}
 
 	private void addShapeRenderer(final World world, final IShape shape)
@@ -203,9 +228,7 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 
 		renderRegion.useCustomColors = true;
 
-		this.playerRenderers.add(renderRegion);
-
-		this.addRenderer(world, renderRegion);
+		this.addPlayerRenderer(world, renderRegion);
 	}
 
 	@Override

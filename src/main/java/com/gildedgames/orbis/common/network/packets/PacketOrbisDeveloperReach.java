@@ -7,17 +7,17 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class PacketOrbisExtendedReach implements IMessage
+public class PacketOrbisDeveloperReach implements IMessage
 {
 
 	private double extendedReach;
 
-	public PacketOrbisExtendedReach()
+	public PacketOrbisDeveloperReach()
 	{
 
 	}
 
-	public PacketOrbisExtendedReach(final double extendedReach)
+	public PacketOrbisDeveloperReach(final double extendedReach)
 	{
 		this.extendedReach = extendedReach;
 	}
@@ -34,10 +34,10 @@ public class PacketOrbisExtendedReach implements IMessage
 		buf.writeDouble(this.extendedReach);
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketOrbisExtendedReach, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketOrbisDeveloperReach, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketOrbisExtendedReach message, final EntityPlayer player)
+		public IMessage onMessage(final PacketOrbisDeveloperReach message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{
@@ -46,16 +46,16 @@ public class PacketOrbisExtendedReach implements IMessage
 
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-			playerAether.getOrbisModule().setExtendedReach(message.extendedReach);
+			playerAether.getOrbisModule().setDeveloperReach(message.extendedReach);
 
 			return null;
 		}
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketOrbisExtendedReach, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketOrbisDeveloperReach, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketOrbisExtendedReach message, final EntityPlayer player)
+		public IMessage onMessage(final PacketOrbisDeveloperReach message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{
@@ -66,7 +66,7 @@ public class PacketOrbisExtendedReach implements IMessage
 
 			if (playerAether.getOrbisModule().inDeveloperMode())
 			{
-				playerAether.getOrbisModule().setExtendedReach(message.extendedReach);
+				playerAether.getOrbisModule().setDeveloperReach(message.extendedReach);
 			}
 
 			return null;

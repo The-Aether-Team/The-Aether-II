@@ -31,7 +31,7 @@ public class OrbisRaytraceHelp
 
 	public static double getFinalExtendedReach(final EntityPlayer player)
 	{
-		final BlockPos airRaytrace = getRegionRaytracing(player);
+		final BlockPos airRaytrace = raytraceWithRegionSnapping(player);
 
 		if (isSnappingToRegion(player) || isSelectingCorner(player))
 		{
@@ -49,7 +49,7 @@ public class OrbisRaytraceHelp
 
 		final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-		return playerAether.getOrbisModule().getExtendedReach();
+		return playerAether.getOrbisModule().getDeveloperReach();
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class OrbisRaytraceHelp
 	 * things like snapping and corners.
 	 * @return
 	 */
-	public static BlockPos getAirRaytracing(final EntityPlayer player)
+	public static BlockPos raytraceNoSnapping(final EntityPlayer player)
 	{
 		final Vec3d finalVec = getFinalVec(player);
 
@@ -104,7 +104,7 @@ public class OrbisRaytraceHelp
 	 * Does cool stuff like snap to the borders of regions and corners.
 	 * @return
 	 */
-	public static BlockPos getRegionRaytracing(final EntityPlayer player)
+	public static BlockPos raytraceWithRegionSnapping(final EntityPlayer player)
 	{
 		final Vec3d positionVec = getPositionEyes(1.0F, player);
 		final Vec3d finalVec = getFinalVec(player);
@@ -144,7 +144,7 @@ public class OrbisRaytraceHelp
 
 		final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-		final double reach = playerAether.getOrbisModule().getExtendedReach();
+		final double reach = playerAether.getOrbisModule().getDeveloperReach();
 
 		return positionVec.addVector(lookVec.xCoord * reach, lookVec.yCoord * reach, lookVec.zCoord * reach);
 	}

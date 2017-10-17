@@ -14,7 +14,7 @@ import com.gildedgames.aether.common.items.tools.ItemToolHandler;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.registry.ContentRegistry;
 import com.gildedgames.aether.common.world.SectorEventHandler;
-import com.gildedgames.orbis.client.RenderShape;
+import com.gildedgames.orbis.client.renderers.RenderShape;
 import com.gildedgames.orbis.common.OrbisDeveloperModeEvents;
 import com.gildedgames.orbis.common.block.BlockDataContainer;
 import com.gildedgames.orbis.common.data.BlueprintData;

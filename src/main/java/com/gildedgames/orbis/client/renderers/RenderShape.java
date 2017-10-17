@@ -1,4 +1,4 @@
-package com.gildedgames.orbis.client;
+package com.gildedgames.orbis.client.renderers;
 
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
 import com.gildedgames.aether.api.orbis.region.IRegion;

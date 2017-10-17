@@ -15,4 +15,6 @@ public interface IClassSerializer
 
 	<T extends NBT> T deserialize(World world, int id);
 
+	<T extends NBT> T deserialize(int id);
+
 }
