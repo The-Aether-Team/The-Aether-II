@@ -1,5 +1,6 @@
 package com.gildedgames.orbis.common.player.godmode;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.player.godmode.GodPowerReplaceClient;
 import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
 import com.gildedgames.orbis.common.block.BlockFilter;
@@ -13,13 +14,17 @@ import javax.annotation.Nullable;
 public class GodPowerReplace implements IGodPower
 {
 
-	private final GodPowerReplaceClient clientHandler;
-
 	private final ShapeSelectorFilter shapeSelector;
+
+	private GodPowerReplaceClient clientHandler;
 
 	public GodPowerReplace()
 	{
-		this.clientHandler = new GodPowerReplaceClient(this);
+		if (AetherCore.isClient())
+		{
+			this.clientHandler = new GodPowerReplaceClient(this);
+		}
+
 		this.shapeSelector = new ShapeSelectorFilter(itemStack -> new BlockFilter(BlockFilterHelper.getNewReplaceLayer(itemStack)), false);
 	}
 

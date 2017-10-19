@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.orbis.IWorldObject;
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
 import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.orbis.region.Region;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.renderers.RenderShape;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -11,9 +12,9 @@ import net.minecraft.world.World;
 
 public class WorldRegion extends Region implements IWorldObject
 {
-	private final IWorldRenderer renderer = new RenderShape(this);
+	private IWorldRenderer renderer;
 
-	protected WorldRegion(final World world)
+	private WorldRegion(final World world)
 	{
 		super(world);
 	}
@@ -81,6 +82,11 @@ public class WorldRegion extends Region implements IWorldObject
 	@Override
 	public IWorldRenderer getRenderer()
 	{
+		if (AetherCore.isClient() && this.renderer == null)
+		{
+			this.renderer = new RenderShape(this);
+		}
+
 		return this.renderer;
 	}
 

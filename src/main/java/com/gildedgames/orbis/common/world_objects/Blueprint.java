@@ -20,11 +20,11 @@ import net.minecraft.world.World;
 
 public class Blueprint extends AbstractRegion implements IWorldObject, IMutableRegion
 {
-	private final IWorldRenderer renderer = new RenderShape(this);
-
 	private final World world;
 
 	protected OrbisRotation rotation = OrbisRotation.NORTH;
+
+	private IWorldRenderer renderer;
 
 	private BlueprintData data;
 
@@ -160,6 +160,11 @@ public class Blueprint extends AbstractRegion implements IWorldObject, IMutableR
 	@Override
 	public IWorldRenderer getRenderer()
 	{
+		if (AetherCore.isClient() && this.renderer == null)
+		{
+			this.renderer = new RenderShape(this);
+		}
+
 		return this.renderer;
 	}
 

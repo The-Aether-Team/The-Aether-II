@@ -1,5 +1,6 @@
 package com.gildedgames.orbis.common.player.godmode;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.player.godmode.GodPowerCreativeClient;
 import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
@@ -11,13 +12,17 @@ import javax.annotation.Nullable;
 public class GodPowerCreative implements IGodPower
 {
 
-	private final GodPowerCreativeClient clientHandler;
-
 	private final IShapeSelector shapeSelector;
+
+	private GodPowerCreativeClient clientHandler;
 
 	public GodPowerCreative()
 	{
-		this.clientHandler = new GodPowerCreativeClient(this);
+		if (AetherCore.isClient())
+		{
+			this.clientHandler = new GodPowerCreativeClient(this);
+		}
+
 		this.shapeSelector = new ShapeSelectorInvalid();
 	}
 

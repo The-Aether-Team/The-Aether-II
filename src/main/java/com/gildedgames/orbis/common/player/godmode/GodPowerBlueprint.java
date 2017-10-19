@@ -1,6 +1,7 @@
 package com.gildedgames.orbis.common.player.godmode;
 
 import com.gildedgames.aether.api.orbis.util.OrbisRotation;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.player.godmode.GodPowerBlueprintClient;
 import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
 import com.gildedgames.orbis.common.data.BlueprintData;
@@ -14,17 +15,21 @@ import javax.annotation.Nullable;
 public class GodPowerBlueprint implements IGodPower
 {
 
-	private final GodPowerBlueprintClient clientHandler;
-
 	private final ShapeSelectorBlueprint shapeSelector;
 
 	private final OrbisRotation placingRotation = OrbisRotation.neutral();
+
+	private GodPowerBlueprintClient clientHandler;
 
 	private BlueprintData placingBlueprint;
 
 	public GodPowerBlueprint()
 	{
-		this.clientHandler = new GodPowerBlueprintClient(this);
+		if (AetherCore.isClient())
+		{
+			this.clientHandler = new GodPowerBlueprintClient(this);
+		}
+
 		this.shapeSelector = new ShapeSelectorBlueprint(this);
 	}
 

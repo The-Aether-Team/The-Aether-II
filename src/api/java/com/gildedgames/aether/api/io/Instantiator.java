@@ -46,6 +46,8 @@ public class Instantiator<T> implements Function<World, T>
 		}
 		catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
 		{
+			e.printStackTrace();
+
 			throw new NullPointerException("Something went wrong trying to create an instances of " + this.clazz.getName()
 					+ ". Most likely you forgot to create a World constructor/default constructor for it.");
 		}
