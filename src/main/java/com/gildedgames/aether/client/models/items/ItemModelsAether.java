@@ -72,6 +72,15 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.blue_skyroot_leaves, "leaves/blue_skyroot_leaves");
 		registerItemModels(BlocksAether.green_skyroot_leaves, "leaves/green_skyroot_leaves");
 		registerItemModels(BlocksAether.dark_blue_skyroot_leaves, "leaves/dark_blue_skyroot_leaves");
+
+		registerItemModels(BlocksAether.blue_dark_skyroot_leaves, "leaves/blue_dark_skyroot_leaves");
+		registerItemModels(BlocksAether.green_dark_skyroot_leaves, "leaves/green_dark_skyroot_leaves");
+		registerItemModels(BlocksAether.dark_blue_dark_skyroot_leaves, "leaves/dark_blue_dark_skyroot_leaves");
+
+		registerItemModels(BlocksAether.blue_light_skyroot_leaves, "leaves/blue_light_skyroot_leaves");
+		registerItemModels(BlocksAether.green_light_skyroot_leaves, "leaves/green_light_skyroot_leaves");
+		registerItemModels(BlocksAether.dark_blue_light_skyroot_leaves, "leaves/dark_blue_light_skyroot_leaves");
+
 		registerItemModels(BlocksAether.golden_oak_leaves, "leaves/golden_oak_leaves");
 
 		registerItemModels(BlocksAether.blueberry_bush, new ItemModelBuilder("bushes/")

@@ -94,17 +94,29 @@ public class BlocksAether
 
 	public static final BlockAetherLog skyroot_log = new BlockAetherLog();
 
-	public static final BlockAetherLog dark_skyroot_log = new BlockAetherLog();
-
-	public static final BlockAetherLog light_skyroot_log = new BlockAetherLog();
-
-	public static final BlockAetherLog golden_oak_log = new BlockGoldenOakLog();
-
 	public static final BlockAetherLeaves blue_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.BLUE_SKYROOT.getMeta());
 
 	public static final BlockAetherLeaves green_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.GREEN_SKYROOT.getMeta());
 
 	public static final BlockAetherLeaves dark_blue_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.DARK_BLUE_SKYROOT.getMeta());
+
+	public static final BlockAetherLog dark_skyroot_log = new BlockAetherLog();
+
+	public static final BlockAetherLeaves blue_dark_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.BLUE_SKYROOT.getMeta());
+
+	public static final BlockAetherLeaves green_dark_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.GREEN_SKYROOT.getMeta());
+
+	public static final BlockAetherLeaves dark_blue_dark_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.DARK_BLUE_SKYROOT.getMeta());
+
+	public static final BlockAetherLog light_skyroot_log = new BlockAetherLog();
+
+	public static final BlockAetherLeaves blue_light_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.BLUE_SKYROOT.getMeta());
+
+	public static final BlockAetherLeaves green_light_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.GREEN_SKYROOT.getMeta());
+
+	public static final BlockAetherLeaves dark_blue_light_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.DARK_BLUE_SKYROOT.getMeta());
+
+	public static final BlockAetherLog golden_oak_log = new BlockGoldenOakLog();
 
 	public static final BlockAetherLeaves golden_oak_leaves = new BlockAetherLeaves(BlockAetherSapling.GOLDEN_OAK.getMeta());
 
@@ -306,13 +318,21 @@ public class BlocksAether
 		registerBlock("scatterglass_decorative", scatterglass_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
 		registerBlock("skyroot_log", skyroot_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		registerBlock("dark_skyroot_log", dark_skyroot_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		registerBlock("light_skyroot_log", light_skyroot_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		registerBlock("golden_oak_log", golden_oak_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-
 		registerBlock("blue_skyroot_leaves", blue_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		registerBlock("green_skyroot_leaves", green_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		registerBlock("dark_blue_skyroot_leaves", dark_blue_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+
+		registerBlock("dark_skyroot_log", dark_skyroot_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		registerBlock("blue_dark_skyroot_leaves", blue_dark_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		registerBlock("green_dark_skyroot_leaves", green_dark_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		registerBlock("dark_blue_dark_skyroot_leaves", dark_blue_dark_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+
+		registerBlock("light_skyroot_log", light_skyroot_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		registerBlock("blue_light_skyroot_leaves", blue_light_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		registerBlock("green_light_skyroot_leaves", green_light_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		registerBlock("dark_blue_light_skyroot_leaves", dark_blue_light_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+
+		registerBlock("golden_oak_log", golden_oak_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		registerBlock("golden_oak_leaves", golden_oak_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		registerBlock("woven_sticks", woven_sticks.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
@@ -455,6 +475,8 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(brettl_plant, 60, 100);
 
 		Blocks.FIRE.setFireInfo(skyroot_log, 5, 5);
+		Blocks.FIRE.setFireInfo(light_skyroot_log, 5, 5);
+		Blocks.FIRE.setFireInfo(dark_skyroot_log, 5, 5);
 		Blocks.FIRE.setFireInfo(golden_oak_log, 5, 5);
 
 		Blocks.FIRE.setFireInfo(skyroot_log_wall, 5, 5);
@@ -481,7 +503,12 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(blue_skyroot_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(dark_blue_skyroot_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(golden_oak_leaves, 30, 60);
-		Blocks.FIRE.setFireInfo(green_skyroot_leaves, 30, 60);
+		Blocks.FIRE.setFireInfo(blue_dark_skyroot_leaves, 30, 60);
+		Blocks.FIRE.setFireInfo(dark_blue_dark_skyroot_leaves, 30, 60);
+		Blocks.FIRE.setFireInfo(green_dark_skyroot_leaves, 30, 60);
+		Blocks.FIRE.setFireInfo(blue_light_skyroot_leaves, 30, 60);
+		Blocks.FIRE.setFireInfo(dark_blue_light_skyroot_leaves, 30, 60);
+		Blocks.FIRE.setFireInfo(green_light_skyroot_leaves, 30, 60);
 
 		Blocks.FIRE.setFireInfo(cloudwool_block, 30, 60);
 		Blocks.FIRE.setFireInfo(cloudwool_carpet, 30, 60);
