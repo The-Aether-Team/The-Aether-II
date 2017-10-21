@@ -117,6 +117,9 @@ public abstract class GuiAdvanced extends GuiContainer implements RectHolder
 	{
 		super.drawScreen(mouseX, mouseY, partialTicks);
 
+		/** Enable for debug rectangle rendering to see dimensions **/
+		//Gui.drawRect((int) this.dim().x(), (int) this.dim().y(), (int) this.dim().maxX(), (int) this.dim().maxY(), Integer.MAX_VALUE);
+
 		final float x = this.dim().x();
 		final float y = this.dim().y();
 
@@ -124,13 +127,17 @@ public abstract class GuiAdvanced extends GuiContainer implements RectHolder
 
 		GlStateManager.disableLighting();
 
-		GlStateManager.translate(x + (this.dim().width() / 2) + this.dim().originX(), (this.dim().height() / 2) + this.dim().originY() + y, 0);
+		GlStateManager.translate(x + this.dim().originX(), y + this.dim().originY(), 0);
+
+		GlStateManager.translate(this.dim().isCenteredX() ? (this.dim().width() / 2) : 0, this.dim().isCenteredY() ? (this.dim().height() / 2) : 0, 0);
 
 		GlStateManager.scale(this.dim().scale(), this.dim().scale(), 0);
 
 		GlStateManager.rotate(this.dim().degrees(), 0.0F, 0.0F, 1.0F);
 
-		GlStateManager.translate(-(this.dim().width() / 2) - this.dim().originX() - x, -(this.dim().height() / 2) - this.dim().originY() - y, 0);
+		GlStateManager.translate(this.dim().isCenteredX() ? -(this.dim().width() / 2) : 0, this.dim().isCenteredY() ? -(this.dim().height() / 2) : 0, 0);
+
+		GlStateManager.translate(-x - this.dim().originX(), -y - this.dim().originY(), 0);
 
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 

@@ -136,8 +136,9 @@ public class ModDim2D implements Rect
 	public ModDim2D set(final Rect dim)
 	{
 		this.originalState = dim;
-		this.refreshModifiedState();
 		this.buildInto.set(this.originalState);
+
+		this.refreshModifiedState();
 		return this;
 	}
 

@@ -167,6 +167,11 @@ public class RectBuilder
 		return this;
 	}
 
+	public RectBuilder area(final float area)
+	{
+		return this.area(area, area);
+	}
+
 	public RectBuilder area(final float width, final float height)
 	{
 		return this.width(width).height(height);
