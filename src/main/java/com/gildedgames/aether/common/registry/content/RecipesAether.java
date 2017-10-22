@@ -139,6 +139,9 @@ public class RecipesAether
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_planks, 4), "X",
 				'X', new ItemStack(BlocksAether.skyroot_log));
 
+		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_planks, 2), "X",
+				'X', new ItemStack(BlocksAether.skyroot_log_wall));
+
 		// Dark Skyroot Planks
 		registerShapedRecipe(new ItemStack(BlocksAether.dark_skyroot_planks, 4), "X",
 				'X', new ItemStack(BlocksAether.dark_skyroot_log));
@@ -288,7 +291,7 @@ public class RecipesAether
 				'X', new ItemStack(BlocksAether.holystone, 1, BlockHolystone.MOSSY_HOLYSTONE.getMeta()));
 		registerShapedRecipe(new ItemStack(BlocksAether.holystone_brick_wall, 6), "XXX", "XXX",
 				'X', new ItemStack(BlocksAether.holystone_brick));
-		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_log_wall, 6), "XXX", "XXX",
+		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_log_wall, 12), "XXX", "XXX",
 				'X', new ItemStack(BlocksAether.skyroot_log));
 		registerShapedRecipe(new ItemStack(BlocksAether.icestone_wall, 6), "XXX", "XXX",
 				'X', new ItemStack(BlocksAether.icestone_bricks));
