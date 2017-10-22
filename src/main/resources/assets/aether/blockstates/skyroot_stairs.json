@@ -2,9 +2,9 @@
 	"forge_marker": 1,
 	"defaults": {
 		"textures": {
-			"bottom": "aether:blocks/planks/skyroot_planks",
-			"side": "aether:blocks/planks/skyroot_planks",
-			"top": "aether:blocks/planks/skyroot_planks"
+			"bottom": "aether:blocks/skyroot_planks/skyroot_planks",
+			"side": "aether:blocks/skyroot_planks/skyroot_planks",
+			"top": "aether:blocks/skyroot_planks/skyroot_planks"
 		}
 	},
 	"variants": {

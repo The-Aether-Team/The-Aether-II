@@ -1,0 +1,7 @@
+{
+	"parent": "block/cube_column",
+	"textures": {
+		"end": "aether:blocks/light_skyroot_planks/light_skyroot_base_top",
+		"side": "aether:blocks/light_skyroot_planks/light_skyroot_beam"
+	}
+}

@@ -234,6 +234,10 @@ public class ItemModelsAether
 				.add(BlockSkyrootDecorative.TILES.getMeta(), "tiles")
 				.add(BlockSkyrootDecorative.TILES_SMALL.getMeta(), "tiles_small"));
 
+		registerItemModels(BlocksAether.dark_skyroot_planks, "dark_skyroot_planks/normal");
+
+		registerItemModels(BlocksAether.light_skyroot_planks, "light_skyroot_planks/normal");
+
 		registerItemModels(BlocksAether.skyroot_beam, "skyroot_planks/beam");
 
 		registerItemModels(BlocksAether.aether_portal, "aether_portal");

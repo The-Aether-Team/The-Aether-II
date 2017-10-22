@@ -1,6 +1,6 @@
 {
     "parent": "block/wall_gate_closed",
     "textures": {
-        "texture": "aether:blocks/planks/skyroot_planks"
+        "texture": "aether:blocks/skyroot_planks/skyroot_planks"
     }
 }
