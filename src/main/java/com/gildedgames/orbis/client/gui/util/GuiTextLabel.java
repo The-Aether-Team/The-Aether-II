@@ -1,14 +1,16 @@
 package com.gildedgames.orbis.client.gui.util;
 
+import com.gildedgames.orbis.client.gui.data.Text;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.client.util.rect.Rect;
+import com.gildedgames.orbis.common.util.InputHelper;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.text.ITextComponent;
 
-public class GuiTextLabel extends GuiAdvanced
+public class GuiTextLabel extends GuiFrame
 {
 	private final GuiText text;
 
@@ -16,7 +18,7 @@ public class GuiTextLabel extends GuiAdvanced
 	{
 		super(rect);
 
-		this.text = new GuiText(Dim2D.flush(), component);
+		this.text = new GuiText(Dim2D.flush(), new Text(component, 1.0F));
 	}
 
 	@Override
@@ -30,20 +32,21 @@ public class GuiTextLabel extends GuiAdvanced
 	{
 		GlStateManager.pushMatrix();
 
-		this.drawTextBackground(this.dim().x(), this.dim().y(), this.dim().width(), this.dim().height());
+		this.drawTextBackground(this.dim().x(), this.dim().y(), this.dim().width(), this.dim().height(), InputHelper.isHovered(this) ? -267486864 : -267386864,
+				InputHelper.isHovered(this) ? 1547420415 : 1347420415);
 
 		GlStateManager.popMatrix();
 	}
 
-	private void drawTextBackground(final float cornerX, final float cornerY, final float width, final float height)
+	private void drawTextBackground(final float cornerX, final float cornerY, final float width, final float height, final int innerColor, final int outerColor)
 	{
-		final int l1 = -267386864;
+		final int l1 = innerColor;
 		this.drawGradientRect(cornerX - 3, cornerY - 4, cornerX + width + 3, cornerY - 3, l1, l1);
 		this.drawGradientRect(cornerX - 3, cornerY + height + 3, cornerX + width + 3, cornerY + height + 4, l1, l1);
 		this.drawGradientRect(cornerX - 3, cornerY - 3, cornerX + width + 3, cornerY + height + 3, l1, l1);
 		this.drawGradientRect(cornerX - 4, cornerY - 3, cornerX - 3, cornerY + height + 3, l1, l1);
 		this.drawGradientRect(cornerX + width + 3, cornerY - 3, cornerX + width + 4, cornerY + height + 3, l1, l1);
-		final int i2 = 1347420415;
+		final int i2 = outerColor;
 		final int j2 = (i2 & 16711422) >> 1 | i2 & -16777216;
 		this.drawGradientRect(cornerX - 3, cornerY - 3 + 1, cornerX - 3 + 1, cornerY + height + 3 - 1, i2, j2);
 		this.drawGradientRect(cornerX + width + 2, cornerY - 3 + 1, cornerX + width + 3, cornerY + height + 3 - 1, i2, j2);

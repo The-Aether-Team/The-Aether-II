@@ -107,7 +107,7 @@ public class OrbisDeveloperEventsClient
 				final int y = MathHelper.floor(entity.posY);
 				final int z = MathHelper.floor(entity.posZ);
 
-				if (selectedShape instanceof Blueprint)
+				if (selectedShape instanceof Blueprint && module.powers().getCurrentPower() == module.powers().getBlueprintPower())
 				{
 					final boolean playerInside = selectedShape.contains(x, y, z) || selectedShape.contains(x, MathHelper.floor(entity.posY + entity.height), z);
 

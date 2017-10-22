@@ -122,6 +122,11 @@ public class Dim2D implements Rect
 		return result.flush();
 	}
 
+	public static BuildWithRectHolder buildWith(final RectHolder holder)
+	{
+		return new BuildWithRectHolder(build(), holder);
+	}
+
 	@Override
 	public RectBuilder rebuild()
 	{

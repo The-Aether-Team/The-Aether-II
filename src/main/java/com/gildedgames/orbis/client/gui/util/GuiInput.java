@@ -6,7 +6,7 @@ import net.minecraft.client.gui.GuiTextField;
 
 import java.io.IOException;
 
-public class GuiInput extends GuiAdvanced
+public class GuiInput extends GuiFrame
 {
 	private final GuiTextField field;
 

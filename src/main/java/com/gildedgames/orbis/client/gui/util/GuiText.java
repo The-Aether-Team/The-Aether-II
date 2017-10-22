@@ -1,24 +1,32 @@
 package com.gildedgames.orbis.client.gui.util;
 
+import com.gildedgames.orbis.client.gui.data.IText;
 import com.gildedgames.orbis.client.util.rect.Rect;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.util.text.ITextComponent;
 
-public class GuiText extends GuiAdvanced
+public class GuiText extends GuiFrame
 {
-	private ITextComponent component;
+	private IText text;
 
-	public GuiText(final Rect rect, final ITextComponent component)
+	public GuiText(final Rect rect, final IText text)
 	{
 		super(rect);
-
-		this.component = component;
+		this.setText(text);
 	}
 
-	public void setText(final ITextComponent component)
+	public void setText(final IText component)
 	{
-		this.component = component;
+		this.text = component;
+
+		if (component == null)
+		{
+			this.dim().mod().width(0).flush();
+		}
+		else
+		{
+			this.dim().mod().scale(this.text.scale()).width(Minecraft.getMinecraft().fontRenderer.getStringWidth(this.text.component().getFormattedText()))
+					.flush();
+		}
 	}
 
 	@Override
@@ -30,15 +38,9 @@ public class GuiText extends GuiAdvanced
 	@Override
 	public void draw()
 	{
-		if (this.component != null)
+		if (this.text != null)
 		{
-			this.dim().mod().width(Minecraft.getMinecraft().fontRenderer.getStringWidth(this.component.getFormattedText())).flush();
-
-			GlStateManager.pushMatrix();
-
-			this.drawString(this.fontRenderer, this.component.getFormattedText(), (int) this.dim().x(), (int) this.dim().y(), 16777215);
-
-			GlStateManager.popMatrix();
+			this.drawString(this.fontRenderer, this.text.component().getFormattedText(), (int) this.dim().x(), (int) this.dim().y(), 16777215);
 		}
 	}
 }

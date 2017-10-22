@@ -1,15 +1,17 @@
 package com.gildedgames.orbis.client.gui;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.orbis.common.player.PlayerOrbisModule;
-import com.gildedgames.orbis.common.util.InputHelper;
-import com.gildedgames.orbis.client.gui.util.GuiAdvanced;
+import com.gildedgames.orbis.client.gui.data.Text;
+import com.gildedgames.orbis.client.gui.data.directory.DirectoryNavigator;
 import com.gildedgames.orbis.client.gui.util.GuiButtonGeneric;
+import com.gildedgames.orbis.client.gui.util.GuiFrame;
 import com.gildedgames.orbis.client.gui.util.GuiInput;
 import com.gildedgames.orbis.client.gui.util.GuiText;
+import com.gildedgames.orbis.client.gui.util.directory.GuiDirectoryViewer;
+import com.gildedgames.orbis.client.gui.util.directory.nodes.OrbisNavigatorNodeFactory;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.client.util.rect.Pos2D;
+import com.gildedgames.orbis.common.util.InputHelper;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompressedStreamTools;
@@ -20,13 +22,17 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class GuiEditBlueprint extends GuiAdvanced
+public class GuiEditBlueprint extends GuiFrame
 {
 	private final Blueprint blueprint;
+
+	private final File folder = new File(Minecraft.getMinecraft().mcDataDir, "/orbis");
 
 	private GuiInput nameInput;
 
 	private GuiButtonGeneric saveButton, closeButton;
+
+	private GuiDirectoryViewer directoryViewer;
 
 	public GuiEditBlueprint(final Blueprint blueprint)
 	{
@@ -39,10 +45,10 @@ public class GuiEditBlueprint extends GuiAdvanced
 	@Override
 	public void init()
 	{
-		final Pos2D center = Pos2D.flush(this.width / 2, this.height / 2);
+		final Pos2D center = Pos2D.flush((this.width / 2) + 100, this.height / 2);
 
 		final GuiText nameInputTitle = new GuiText(Dim2D.build().width(140).height(20).pos(center).addY(-25).addX(-70).flush(),
-				new TextComponentString("Blueprint Name:"));
+				new Text(new TextComponentString("Blueprint Name:"), 1.0F));
 
 		this.nameInput = new GuiInput(Dim2D.build().center(true).width(140).height(20).pos(center).flush());
 
@@ -58,6 +64,17 @@ public class GuiEditBlueprint extends GuiAdvanced
 		this.addChild(this.nameInput);
 		this.addChild(this.saveButton);
 		this.addChild(this.closeButton);
+
+		this.directoryViewer = new GuiDirectoryViewer(center.clone().addX(-200).flush(),
+				new DirectoryNavigator(new OrbisNavigatorNodeFactory()));
+
+		this.directoryViewer.dim().mod().center(true).flush();
+
+		this.folder.mkdirs();
+
+		this.directoryViewer.getNavigator().openDirectory(this.folder);
+
+		this.addChild(directoryViewer);
 	}
 
 	@Override
@@ -84,10 +101,7 @@ public class GuiEditBlueprint extends GuiAdvanced
 		{
 			this.blueprint.saveRegionContent();
 
-			final File folder = new File(Minecraft.getMinecraft().mcDataDir, "/orbis");
-			folder.mkdirs();
-
-			final File file = new File(folder, this.nameInput.getInner().getText() + ".nbt");
+			final File file = new File(this.directoryViewer.getNavigator().currentDirectory(), this.nameInput.getInner().getText() + ".blueprint");
 
 			try (FileOutputStream out = new FileOutputStream(file))
 			{
@@ -101,12 +115,7 @@ public class GuiEditBlueprint extends GuiAdvanced
 				AetherCore.LOGGER.error("Failed to save Blueprint to disk", e);
 			}
 
-			final PlayerOrbisModule module = PlayerAether.getOrbisModule(Minecraft.getMinecraft().player);
-
-			module.powers().getBlueprintPower().setPlacingBlueprint(this.blueprint.getData());
-
-			Minecraft.getMinecraft().displayGuiScreen(null);
-			GuiRightClickBlueprint.lastCloseTime = System.currentTimeMillis();
+			this.directoryViewer.getNavigator().refresh();
 		}
 	}
 }

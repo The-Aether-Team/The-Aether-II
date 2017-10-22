@@ -140,9 +140,9 @@ public class RecipesAether
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_stick, 4), "X", "X",
 				'X', new ItemStack(BlocksAether.skyroot_planks));
 
-        registerShapelessRecipe(new ItemStack(ItemsAether.skyroot_stick, 4),
-                new ItemStack(BlocksAether.woven_sticks, 1, BlockWovenSticks.SKYROOT.getMeta()));
-        
+		registerShapelessRecipe(new ItemStack(ItemsAether.skyroot_stick, 4),
+				new ItemStack(BlocksAether.woven_sticks, 1, BlockWovenSticks.SKYROOT.getMeta()));
+
 		// Woven Skyroot Sticks
 		registerShapedRecipe(new ItemStack(BlocksAether.woven_sticks, 2, BlockWovenSticks.SKYROOT.getMeta()), "XX", "XX",
 				'X', new ItemStack(ItemsAether.skyroot_stick));
@@ -197,7 +197,7 @@ public class RecipesAether
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_pressure_plate), "XX ",
 				'X', new ItemStack(BlocksAether.skyroot_planks));
 
-		// Skyroot Button
+		// Skyroot GuiAbstractButton
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_button), "X",
 				'X', new ItemStack(BlocksAether.skyroot_planks));
 
@@ -205,7 +205,7 @@ public class RecipesAether
 		registerShapedRecipe(new ItemStack(BlocksAether.holystone_pressure_plate), "XX ",
 				'X', new ItemStack(BlocksAether.holystone));
 
-		// Holystone Button
+		// Holystone GuiAbstractButton
 		registerShapedRecipe(new ItemStack(BlocksAether.holystone_button), "X",
 				'X', new ItemStack(BlocksAether.holystone));
 
@@ -380,32 +380,32 @@ public class RecipesAether
 
 		// Crossbow Bolts
 
-        registerShapedRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.SKYROOT.ordinal()), "  Z", " X ", "Y  ",
+		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.SKYROOT.ordinal()), "  Z", " X ", "Y  ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(BlocksAether.skyroot_planks),
 				'Z', "feather");
 
-        registerShapedRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.HOLYSTONE.ordinal()), "  Z", " X ", "Y  ",
+		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.HOLYSTONE.ordinal()), "  Z", " X ", "Y  ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(BlocksAether.holystone),
 				'Z', "feather");
 
-        registerShapedRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.SCATTERGLASS.ordinal()), "  Z", " X ", "Y  ",
+		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 4, ItemBoltType.SCATTERGLASS.ordinal()), "  Z", " X ", "Y  ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(BlocksAether.scatterglass),
 				'Z', "feather");
 
-        registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.ZANITE.ordinal()), "  Z", " X ", "Y  ",
+		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.ZANITE.ordinal()), "  Z", " X ", "Y  ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(ItemsAether.zanite_gemstone),
 				'Z', "feather");
 
-        registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.ARKENIUM.ordinal()), "  Z", " X ", "Y  ",
+		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 8, ItemBoltType.ARKENIUM.ordinal()), "  Z", " X ", "Y  ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(ItemsAether.arkenium_strip),
 				'Z', "feather");
 
-        registerShapedRecipe(new ItemStack(ItemsAether.bolt, 16, ItemBoltType.GRAVITITE.ordinal()), "  Z", " X ", "Y  ",
+		registerShapedRecipe(new ItemStack(ItemsAether.bolt, 16, ItemBoltType.GRAVITITE.ordinal()), "  Z", " X ", "Y  ",
 				'X', new ItemStack(ItemsAether.skyroot_stick),
 				'Y', new ItemStack(ItemsAether.gravitite_plate),
 				'Z', "feather");
@@ -562,7 +562,6 @@ public class RecipesAether
 
 		registerShapedRecipe(new ItemStack(ItemsAether.taegore_hide_gloves), "X X",
 				'X', taegorehide);
-
 
 		// Zanite Armor
 		registerShapedRecipe(new ItemStack(ItemsAether.zanite_helmet), "XXX", "X X",

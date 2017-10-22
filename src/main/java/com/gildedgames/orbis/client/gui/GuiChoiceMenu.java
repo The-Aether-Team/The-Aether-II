@@ -1,7 +1,8 @@
 package com.gildedgames.orbis.client.gui;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.orbis.client.gui.util.GuiAdvanced;
+import com.gildedgames.orbis.client.gui.data.Text;
+import com.gildedgames.orbis.client.gui.util.GuiFrame;
 import com.gildedgames.orbis.client.gui.util.GuiText;
 import com.gildedgames.orbis.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
@@ -14,7 +15,7 @@ import org.lwjgl.input.Mouse;
 
 import java.io.IOException;
 
-public class GuiChoiceMenu extends GuiAdvanced
+public class GuiChoiceMenu extends GuiFrame
 {
 
 	private final static ResourceLocation GRADIENT_TEXTURE = AetherCore.getResource("orbis/godmode/overlay/choose_power_gradient.png");
@@ -80,7 +81,7 @@ public class GuiChoiceMenu extends GuiAdvanced
 		final GuiTexture backdrop = new GuiTexture(Dim2D.build().pos(center).addX(-1).center(true).width(44).height(44).flush(), BACKDROP_TEXTURE);
 
 		this.arrow = new GuiTexture(Dim2D.build().pos(center).addX(-0.5F).addY(-2).center(true).width(11).height(12).flush(), ARROW_TEXTURE);
-		this.arrow.dim().mod().origin(0, 3).flush();
+		//this.arrow.dim().mod().origin(0, 3).flush();
 
 		this.choiceName = new GuiText(Dim2D.build().center(true).pos(center).addY(47).flush(), null);
 
@@ -160,7 +161,7 @@ public class GuiChoiceMenu extends GuiAdvanced
 		}
 		else
 		{
-			this.choiceName.setText(new TextComponentString(this.hoveredChoice.name()));
+			this.choiceName.setText(new Text(new TextComponentString(this.hoveredChoice.name()), 1.0F));
 
 			if (Mouse.isButtonDown(0))
 			{
@@ -183,12 +184,12 @@ public class GuiChoiceMenu extends GuiAdvanced
 		}
 	}
 
-	private float getChoiceX(final GuiAdvanced gui, final float degreesAngle, final float radius)
+	private float getChoiceX(final GuiFrame gui, final float degreesAngle, final float radius)
 	{
 		return Math.round(radius * Math.cos(Math.toRadians(degreesAngle)));
 	}
 
-	private float getChoiceY(final GuiAdvanced gui, final float degreesAngle, final float radius)
+	private float getChoiceY(final GuiFrame gui, final float degreesAngle, final float radius)
 	{
 		return Math.round(radius * Math.sin(Math.toRadians(degreesAngle)));
 	}

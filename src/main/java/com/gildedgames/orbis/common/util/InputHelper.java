@@ -14,8 +14,6 @@ public class InputHelper
 
 	private static final Minecraft mc = Minecraft.getMinecraft();
 
-	private static float screenWidth, screenHeight, scaleFactor, xOffset, yOffset;
-
 	private static ScaledResolution resolution;
 
 	public static float getMouseX()
@@ -49,17 +47,6 @@ public class InputHelper
 				.height();
 	}
 
-	public static void setScreen(final float screenWidth, final float screenHeight)
-	{
-		InputHelper.screenWidth = screenWidth;
-		InputHelper.screenHeight = screenHeight;
-	}
-
-	public static void setScaleFactor(final float scaleFactor)
-	{
-		InputHelper.scaleFactor = scaleFactor;
-	}
-
 	public static void refreshResolution()
 	{
 		resolution = new ScaledResolution(mc);
@@ -87,6 +74,11 @@ public class InputHelper
 		}
 
 		return isHovered(holder.dim());
+	}
+
+	public static float getScaleFactor()
+	{
+		return resolution.getScaleFactor();
 	}
 
 	public static Pos2D getCenter()

@@ -7,7 +7,7 @@ import net.minecraft.client.gui.GuiButton;
 
 import java.io.IOException;
 
-public class GuiButtonGeneric extends GuiAdvanced
+public class GuiButtonGeneric extends GuiFrame
 {
 	private final GuiButton button;
 

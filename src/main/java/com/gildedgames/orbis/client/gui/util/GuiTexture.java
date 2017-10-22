@@ -5,7 +5,7 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiTexture extends GuiAdvanced
+public class GuiTexture extends GuiFrame
 {
 	private final ResourceLocation texture;
 
@@ -38,5 +38,11 @@ public class GuiTexture extends GuiAdvanced
 				(int) this.dim().width(), (int) this.dim().height());
 
 		GlStateManager.popMatrix();
+	}
+
+	@Override
+	public GuiTexture clone()
+	{
+		return new GuiTexture(this.dim(), this.texture);
 	}
 }
