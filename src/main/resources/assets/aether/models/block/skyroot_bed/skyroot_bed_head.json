@@ -12,8 +12,8 @@
         "8": "aether:blocks/skyroot_bed/skyroot_bed_headboard_2",
         "9": "aether:blocks/skyroot_bed/skyroot_bed_legs_d_s_n",
         "10": "aether:blocks/skyroot_bed/skyroot_bed_legs_w_e",
-        "11": "aether:blocks/planks/skyroot_planks",
-        "particle": "aether:blocks/planks/skyroot_planks"
+        "11": "aether:blocks/skyroot_planks/skyroot_planks",
+        "particle": "aether:blocks/skyroot_planks/skyroot_planks"
     },
     "elements": [
         {

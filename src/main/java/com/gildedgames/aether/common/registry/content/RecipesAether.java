@@ -139,6 +139,10 @@ public class RecipesAether
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_planks, 4), "X",
 				'X', new ItemStack(BlocksAether.skyroot_log));
 
+		//Skyroot Planks Decorative Revert
+		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_planks, 1), "X",
+				'X', new ItemStack(BlocksAether.skyroot_decorative));
+
 		// Dark Skyroot Planks
 		registerShapedRecipe(new ItemStack(BlocksAether.dark_skyroot_planks, 4), "X",
 				'X', new ItemStack(BlocksAether.dark_skyroot_log));
@@ -262,13 +266,35 @@ public class RecipesAether
 		registerShapedRecipe(new ItemStack(BlocksAether.holystone_brick, 4), "XX", "XX",
 				'X', new ItemStack(BlocksAether.holystone));
 
+		// Holystone Brick Decorative Uncraft
+		registerShapedRecipe(new ItemStack(BlocksAether.holystone_brick, 1), "X",
+				'X', new ItemStack(BlocksAether.holystone_brick_decorative));
+
+		registerShapedRecipe(new ItemStack(BlocksAether.holystone_brick, 1), "X",
+				'X', new ItemStack(BlocksAether.faded_holystone_brick));
+
+		registerShapedRecipe(new ItemStack(BlocksAether.holystone_brick, 1), "X",
+				'X', new ItemStack(BlocksAether.faded_holystone_brick_decorative));
+
 		// Agiosite Brick
 		registerShapedRecipe(new ItemStack(BlocksAether.agiosite_brick, 4), "XX", "XX",
 				'X', new ItemStack(BlocksAether.agiosite));
 
+		// Agiosite Brick Decorative Uncraft
+		registerShapedRecipe(new ItemStack(BlocksAether.agiosite_brick, 1), "X",
+				'X', new ItemStack(BlocksAether.agiosite_brick_decorative));
+
 		// Icestone Bricks
 		registerShapedRecipe(new ItemStack(BlocksAether.icestone_bricks, 4), "XX", "XX",
 				'X', new ItemStack(ItemsAether.icestone));
+
+		// Icestone Bricks Uncraft
+		registerShapedRecipe(new ItemStack(ItemsAether.icestone,4), "X",
+				'X', new ItemStack(BlocksAether.icestone_bricks));
+
+		// Icestone Bricks Decorative Uncraft
+		registerShapedRecipe(new ItemStack(BlocksAether.icestone_bricks, 1), "X",
+				'X', new ItemStack(BlocksAether.icestone_bricks_decorative));
 
 		// Skyroot Bookshelf
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_bookshelf), "XXX", "YYY", "XXX",
