@@ -163,7 +163,7 @@ public class RecipesAether
 
 		// Skyroot Crafting Table
 		registerShapedRecipe(new ItemStack(BlocksAether.aether_crafting_table), "XX", "XX",
-				'X', "skyroot_planks");
+				'X', "skyrootplanks");
 
 		// Skyroot Bed
 		registerShapedRecipe(new ItemStack(ItemsAether.skyroot_bed), "XXX", "YYY",
