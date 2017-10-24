@@ -444,7 +444,7 @@ public abstract class GuiFrame extends GuiContainer implements IGuiFrame
 			return;
 		}
 
-		if (!this.children.isEmpty() || Minecraft.getMinecraft().currentScreen == this)
+		if (Minecraft.getMinecraft().currentScreen == this)
 		{
 			this.keyTypedInner(typedChar, keyCode);
 		}
