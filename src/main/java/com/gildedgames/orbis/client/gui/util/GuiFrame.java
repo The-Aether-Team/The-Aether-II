@@ -340,6 +340,11 @@ public abstract class GuiFrame extends GuiContainer implements IGuiFrame
 	@Override
 	protected void mouseClicked(final int mouseX, final int mouseY, final int mouseButton) throws IOException
 	{
+		if (!this.isEnabled())
+		{
+			return;
+		}
+
 		super.mouseClicked(mouseX, mouseY, mouseButton);
 
 		for (final IGuiFrame frame : this.children)
@@ -351,6 +356,11 @@ public abstract class GuiFrame extends GuiContainer implements IGuiFrame
 	@Override
 	protected void mouseClickMove(final int mouseX, final int mouseY, final int clickedMouseButton, final long timeSinceLastClick)
 	{
+		if (!this.isEnabled())
+		{
+			return;
+		}
+
 		super.mouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick);
 
 		for (final IGuiFrame frame : this.children)
@@ -362,6 +372,11 @@ public abstract class GuiFrame extends GuiContainer implements IGuiFrame
 	@Override
 	protected void mouseReleased(final int mouseX, final int mouseY, final int state)
 	{
+		if (!this.isEnabled())
+		{
+			return;
+		}
+
 		super.mouseReleased(mouseX, mouseY, state);
 
 		for (final IGuiFrame frame : this.children)
@@ -373,6 +388,11 @@ public abstract class GuiFrame extends GuiContainer implements IGuiFrame
 	@Override
 	protected void handleMouseClick(final Slot slotIn, final int slotId, final int mouseButton, final ClickType type)
 	{
+		if (!this.isEnabled())
+		{
+			return;
+		}
+
 		if (Minecraft.getMinecraft().currentScreen == this)
 		{
 			super.handleMouseClick(slotIn, slotId, mouseButton, type);
@@ -387,6 +407,11 @@ public abstract class GuiFrame extends GuiContainer implements IGuiFrame
 	@Override
 	public void handleMouseInput() throws IOException
 	{
+		if (!this.isEnabled())
+		{
+			return;
+		}
+
 		super.handleMouseInput();
 
 		final int i = Mouse.getEventDWheel();
@@ -400,6 +425,11 @@ public abstract class GuiFrame extends GuiContainer implements IGuiFrame
 	@Override
 	public void onMouseWheel(final int state)
 	{
+		if (!this.isEnabled())
+		{
+			return;
+		}
+
 		for (final IGuiFrame frame : this.children)
 		{
 			frame.onMouseWheel(state);
@@ -409,6 +439,11 @@ public abstract class GuiFrame extends GuiContainer implements IGuiFrame
 	@Override
 	protected void keyTyped(final char typedChar, final int keyCode) throws IOException
 	{
+		if (!this.isEnabled())
+		{
+			return;
+		}
+
 		if (!this.children.isEmpty() || Minecraft.getMinecraft().currentScreen == this)
 		{
 			this.keyTypedInner(typedChar, keyCode);
@@ -439,6 +474,11 @@ public abstract class GuiFrame extends GuiContainer implements IGuiFrame
 	@Override
 	public void updateScreen()
 	{
+		if (!this.isEnabled())
+		{
+			return;
+		}
+
 		super.updateScreen();
 
 		for (final IGuiFrame frame : this.children)
@@ -471,6 +511,11 @@ public abstract class GuiFrame extends GuiContainer implements IGuiFrame
 	@Override
 	protected void actionPerformed(final GuiButton button) throws IOException
 	{
+		if (!this.isEnabled())
+		{
+			return;
+		}
+
 		super.actionPerformed(button);
 
 		for (final IGuiFrame frame : this.children)

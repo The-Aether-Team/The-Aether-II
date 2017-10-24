@@ -11,7 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class GodPowerModule extends PlayerAetherModule
+public class PlayerPowerModule extends PlayerAetherModule
 {
 	private final IGodPower[] powers;
 
@@ -27,7 +27,7 @@ public class GodPowerModule extends PlayerAetherModule
 
 	private int currentPowerIndex;
 
-	public GodPowerModule(final PlayerAether playerAether)
+	public PlayerPowerModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
 
@@ -137,7 +137,7 @@ public class GodPowerModule extends PlayerAetherModule
 		return this.getCurrentPower() == power;
 	}
 
-	public IGodPower[] getPowers()
+	public IGodPower[] array()
 	{
 		return this.powers;
 	}

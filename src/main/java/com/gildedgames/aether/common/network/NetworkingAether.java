@@ -39,6 +39,7 @@ public class NetworkingAether
 		instance.registerMessage(PacketOrbisChangePower.HandlerServer.class, PacketOrbisChangePower.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketOrbisOpenGui.HandlerServer.class, PacketOrbisOpenGui.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketSetItemStack.HandlerServer.class, PacketSetItemStack.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketOrbisChangeSelectionType.HandlerServer.class, PacketOrbisChangeSelectionType.class, discriminant++, Side.SERVER);
 
 		// C L I E N T
 		instance.registerMessage(PacketEquipment.HandlerClient.class, PacketEquipment.class, discriminant++, Side.CLIENT);

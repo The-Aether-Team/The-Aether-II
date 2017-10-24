@@ -18,6 +18,13 @@ import com.gildedgames.orbis.client.renderers.RenderShape;
 import com.gildedgames.orbis.common.OrbisDeveloperModeEvents;
 import com.gildedgames.orbis.common.block.BlockDataContainer;
 import com.gildedgames.orbis.common.data.BlueprintData;
+import com.gildedgames.orbis.common.data.shapes.EllipsoidShape;
+import com.gildedgames.orbis.common.data.shapes.LineShape;
+import com.gildedgames.orbis.common.data.shapes.SphereShape;
+import com.gildedgames.orbis.common.player.godmode.selection_types.SelectionTypeCuboid;
+import com.gildedgames.orbis.common.player.godmode.selection_types.SelectionTypeEllipsoid;
+import com.gildedgames.orbis.common.player.godmode.selection_types.SelectionTypeLine;
+import com.gildedgames.orbis.common.player.godmode.selection_types.SelectionTypeSphere;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import com.gildedgames.orbis.common.world_objects.WorldRegion;
 import net.minecraft.entity.EntityLivingBase;
@@ -59,6 +66,13 @@ public class CommonProxy implements IAetherServices
 		s.register(5, WorldObjectManager.class, new Instantiator<>(WorldObjectManager.class));
 		s.register(6, Blueprint.class, new Instantiator<>(Blueprint.class));
 		s.register(7, BlockDataContainer.class, new Instantiator<>(BlockDataContainer.class));
+		s.register(8, SelectionTypeCuboid.class, new Instantiator<>(SelectionTypeCuboid.class));
+		s.register(9, SelectionTypeSphere.class, new Instantiator<>(SelectionTypeSphere.class));
+		s.register(10, SelectionTypeEllipsoid.class, new Instantiator<>(SelectionTypeEllipsoid.class));
+		s.register(11, SelectionTypeLine.class, new Instantiator<>(SelectionTypeLine.class));
+		s.register(12, SphereShape.class, new Instantiator<>(SphereShape.class));
+		s.register(13, EllipsoidShape.class, new Instantiator<>(EllipsoidShape.class));
+		s.register(14, LineShape.class, new Instantiator<>(LineShape.class));
 	}
 
 	public void init(final FMLInitializationEvent event)

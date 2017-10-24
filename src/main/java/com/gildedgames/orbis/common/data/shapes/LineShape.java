@@ -16,6 +16,7 @@ import java.util.List;
 
 public class LineShape implements IShape
 {
+	private World world;
 
 	private BlockPos start;
 
@@ -25,9 +26,9 @@ public class LineShape implements IShape
 
 	private Iterable<BlockPos.MutableBlockPos> data;
 
-	private LineShape()
+	private LineShape(final World world)
 	{
-
+		this.world = world;
 	}
 
 	public LineShape(final BlockPos start, final BlockPos end)

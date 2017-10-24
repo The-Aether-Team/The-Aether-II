@@ -4,18 +4,18 @@ import com.gildedgames.orbis.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.IGodPower;
 
-public class GuiPowersChoiceMenu extends GuiChoiceMenu
+public class GuiChoiceMenuPowers extends GuiChoiceMenu
 {
 
-	public GuiPowersChoiceMenu(final PlayerOrbisModule module)
+	public GuiChoiceMenuPowers(final PlayerOrbisModule module)
 	{
 		super();
 
-		this.choices = new Choice[module.powers().getPowers().length];
+		this.choices = new Choice[module.powers().array().length];
 
-		for (int i = 0; i < module.powers().getPowers().length; i++)
+		for (int i = 0; i < module.powers().array().length; i++)
 		{
-			final IGodPower power = module.powers().getPowers()[i];
+			final IGodPower power = module.powers().array()[i];
 			final GuiChoiceMenu.Choice choice = new PowerChoice(power, power.getClientHandler().displayName());
 
 			this.choices[i] = choice;

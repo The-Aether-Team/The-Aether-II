@@ -8,7 +8,8 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.common.network.packets.PacketOrbisDeveloperMode;
 import com.gildedgames.orbis.common.network.packets.PacketOrbisDeveloperReach;
 import com.gildedgames.orbis.common.player.godmode.IGodPower;
-import com.gildedgames.orbis.common.player.modules.GodPowerModule;
+import com.gildedgames.orbis.common.player.modules.PlayerPowerModule;
+import com.gildedgames.orbis.common.player.modules.PlayerSelectionTypesModule;
 import com.gildedgames.orbis.common.util.OrbisRaytraceHelp;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
@@ -22,7 +23,9 @@ import java.util.List;
 public class PlayerOrbisModule extends PlayerAetherModule
 {
 
-	private final GodPowerModule godPowerModule;
+	private final PlayerPowerModule godPowerModule;
+
+	private final PlayerSelectionTypesModule selectionTypeModule;
 
 	private double developerReach = 5.0D;
 
@@ -34,7 +37,8 @@ public class PlayerOrbisModule extends PlayerAetherModule
 	{
 		super(playerAether);
 
-		this.godPowerModule = new GodPowerModule(playerAether);
+		this.godPowerModule = new PlayerPowerModule(playerAether);
+		this.selectionTypeModule = new PlayerSelectionTypesModule(playerAether);
 	}
 
 	public static PlayerOrbisModule get(final Entity player)
@@ -44,9 +48,14 @@ public class PlayerOrbisModule extends PlayerAetherModule
 		return playerAether.getOrbisModule();
 	}
 
-	public GodPowerModule powers()
+	public PlayerPowerModule powers()
 	{
 		return this.godPowerModule;
+	}
+
+	public PlayerSelectionTypesModule selectionTypes()
+	{
+		return this.selectionTypeModule;
 	}
 
 	public List<IWorldRenderer> getActiveRenderers()
@@ -59,7 +68,7 @@ public class PlayerOrbisModule extends PlayerAetherModule
 		final List<IWorldRenderer> renderers = Lists.newArrayList();
 		final PlayerOrbisModule module = PlayerOrbisModule.get(this.getEntity());
 
-		for (final IGodPower power : module.powers().getPowers())
+		for (final IGodPower power : module.powers().array())
 		{
 			renderers.addAll(power.getClientHandler().getActiveRenderers(this, this.getWorld()));
 		}

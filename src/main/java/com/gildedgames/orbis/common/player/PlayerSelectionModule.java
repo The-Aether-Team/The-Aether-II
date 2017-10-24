@@ -1,6 +1,5 @@
 package com.gildedgames.orbis.common.player;
 
-import com.gildedgames.aether.api.orbis.region.Region;
 import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
@@ -9,7 +8,6 @@ import com.gildedgames.orbis.common.network.packets.PacketOrbisActiveSelection;
 import com.gildedgames.orbis.common.player.godmode.IGodPower;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
-import com.gildedgames.orbis.common.world_objects.WorldRegion;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 
@@ -49,7 +47,7 @@ public class PlayerSelectionModule extends PlayerAetherModule
 			{
 				this.prevPos = endPos;
 				this.hasChanged = true;
-				this.activeSelection = new WorldRegion(this.selectPos, endPos, this.getWorld());
+				this.activeSelection = module.selectionTypes().getCurrentSelectionType().createShape(this.selectPos, endPos, module, this.getEntity().world);
 			}
 			else
 			{
@@ -92,7 +90,7 @@ public class PlayerSelectionModule extends PlayerAetherModule
 		{
 			this.selectPos = pos;
 
-			final IShape newSelection = new WorldRegion(new Region(pos, pos), this.getEntity().world);
+			final IShape newSelection = module.selectionTypes().getCurrentSelectionType().createShape(pos, pos, module, this.getEntity().world);
 
 			this.activeSelection = newSelection;
 		}

@@ -3,8 +3,9 @@ package com.gildedgames.orbis.client;
 import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.orbis.client.gui.GuiChoiceMenu;
-import com.gildedgames.orbis.client.gui.GuiPowersChoiceMenu;
+import com.gildedgames.orbis.client.gui.GuiChoiceMenuHolder;
+import com.gildedgames.orbis.client.gui.GuiChoiceMenuPowers;
+import com.gildedgames.orbis.client.gui.GuiChoiceMenuSelectionTypes;
 import com.gildedgames.orbis.client.gui.GuiRightClickBlueprint;
 import com.gildedgames.orbis.client.renderers.AirSelectionRenderer;
 import com.gildedgames.orbis.common.network.packets.PacketOrbisOpenGui;
@@ -15,6 +16,7 @@ import com.gildedgames.orbis.common.util.OrbisRaytraceHelp;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -34,6 +36,8 @@ public class OrbisDeveloperEventsClient
 	private static double prevReach;
 
 	private static IShape prevShape;
+
+	private static GuiChoiceMenuHolder choiceMenuHolder;
 
 	@SubscribeEvent
 	public static void onGuiOpen(final GuiOpenEvent event)
@@ -63,15 +67,27 @@ public class OrbisDeveloperEventsClient
 
 			if (module.inDeveloperMode())
 			{
+				final GuiScreen current = Minecraft.getMinecraft().currentScreen;
+
 				if (Keyboard.isKeyDown(OrbisKeyBindings.keyBindFindPower.getKeyCode()))
 				{
-					if (Minecraft.getMinecraft().currentScreen == null)
+					if (current == null)
 					{
-						Minecraft.getMinecraft().displayGuiScreen(new GuiPowersChoiceMenu(module));
+						final GuiChoiceMenuHolder choiceMenuHolder = new GuiChoiceMenuHolder(new GuiChoiceMenuPowers(module),
+								new GuiChoiceMenuSelectionTypes(module));
+
+						Minecraft.getMinecraft().displayGuiScreen(choiceMenuHolder);
 					}
 				}
-				else if (Minecraft.getMinecraft().currentScreen instanceof GuiChoiceMenu)
+				else if (current instanceof GuiChoiceMenuHolder)
 				{
+					final GuiChoiceMenuHolder menu = (GuiChoiceMenuHolder) current;
+
+					if (menu.getCurrentMenu().getHoveredChoice() != null)
+					{
+						menu.getCurrentMenu().getHoveredChoice().onSelect(module);
+					}
+
 					Minecraft.getMinecraft().displayGuiScreen(null);
 				}
 			}

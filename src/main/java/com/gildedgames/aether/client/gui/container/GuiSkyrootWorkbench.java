@@ -475,21 +475,21 @@ public class GuiSkyrootWorkbench extends GuiContainer implements IContainerListe
 		}
 	}
 
+	public IIndexableRecipe getSelectedRecipe()
+	{
+		return this.selectedRecipe;
+	}
+
 	private void setSelectedRecipe(IIndexableRecipe recipe)
 	{
 		this.selectedRecipe = recipe;
 
 		if (this.selectedRecipe != null)
 		{
-			Validate.isTrue(this.availableRecipes.contains(recipe), "Recipe is not in craftable list");
+			Validate.isTrue(this.availableRecipes.contains(recipe), "Recipe is not in craftable array");
 
 			this.rebuildGui();
 		}
-	}
-
-	public IIndexableRecipe getSelectedRecipe()
-	{
-		return this.selectedRecipe;
 	}
 
 	public CreativeTabs getSelectedTab()

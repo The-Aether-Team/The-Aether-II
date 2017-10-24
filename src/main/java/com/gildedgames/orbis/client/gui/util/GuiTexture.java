@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiTexture extends GuiFrame
 {
-	private final ResourceLocation texture;
+	private ResourceLocation texture;
 
 	public GuiTexture(final Rect rect, final ResourceLocation texture)
 	{
@@ -19,6 +19,11 @@ public class GuiTexture extends GuiFrame
 	public ResourceLocation getResourceLocation()
 	{
 		return this.texture;
+	}
+
+	public void setResourceLocation(final ResourceLocation texture)
+	{
+		this.texture = texture;
 	}
 
 	@Override

@@ -47,14 +47,14 @@ public class GuiChoiceMenu extends GuiFrame
 		this.choices = choices;
 	}
 
+	public Choice getHoveredChoice()
+	{
+		return this.hoveredChoice;
+	}
+
 	@Override
 	public void onGuiClosed()
 	{
-		if (this.hoveredChoice != null)
-		{
-			this.hoveredChoice.onSelect(PlayerOrbisModule.get(mc.player));
-		}
-
 		GuiChoiceMenu.LAST_MOUSE_X = InputHelper.getMouseX();
 		GuiChoiceMenu.LAST_MOUSE_Y = InputHelper.getMouseY();
 
