@@ -25,6 +25,7 @@ import com.gildedgames.aether.common.recipes.simple.ShapelessRecipeWrapper;
 import com.gildedgames.aether.common.registry.content.*;
 import com.gildedgames.aether.common.structure.StructureLoader;
 import com.gildedgames.aether.common.util.helpers.PerfHelper;
+import com.gildedgames.orbis.common.items.ItemsOrbis;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
@@ -57,7 +58,8 @@ public class ContentRegistry implements IContentRegistry
 		Validate.isTrue(!this.hasPreInit, "Already pre-initialized");
 
 		PerfHelper.measure("Pre-initialize blocks", BlocksAether::preInit);
-		PerfHelper.measure("Pre-initialize items", ItemsAether::preInit);
+		PerfHelper.measure("Pre-initialize aether items", ItemsAether::preInit);
+		PerfHelper.measure("Pre-initialize orbis items", ItemsOrbis::preInit);
 		PerfHelper.measure("Pre-initialize tiles", TileEntitiesAether::preInit);
 
 		PerfHelper.measure("Pre-initialize dimensions", DimensionsAether::preInit);

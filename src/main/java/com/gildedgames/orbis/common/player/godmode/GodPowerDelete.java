@@ -7,6 +7,7 @@ import com.gildedgames.orbis.common.block.BlockFilter;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.selectors.ShapeSelectorFilter;
 import com.gildedgames.orbis.common.util.BlockFilterHelper;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
 import javax.annotation.Nullable;
@@ -36,6 +37,24 @@ public class GodPowerDelete implements IGodPower
 
 	@Override
 	public void read(final NBTTagCompound tag)
+	{
+
+	}
+
+	@Override
+	public void onUpdate(final EntityPlayer player, final PlayerOrbisModule module)
+	{
+
+	}
+
+	@Override
+	public boolean hasCustomGui()
+	{
+		return false;
+	}
+
+	@Override
+	public void onOpenGui(final EntityPlayer player)
 	{
 
 	}

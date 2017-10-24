@@ -1,9 +1,18 @@
 package com.gildedgames.orbis.client.gui.util;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.util.helpers.FileHelper;
+import com.gildedgames.orbis.client.gui.data.DropdownElement;
+import com.gildedgames.orbis.client.gui.data.IDropdownElement;
+import com.gildedgames.orbis.client.gui.data.directory.IDirectoryNavigator;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.client.util.rect.Rect;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentString;
+
+import java.io.File;
+import java.util.Collections;
 
 public class GuiFactory
 {
@@ -34,7 +43,43 @@ public class GuiFactory
 
 	private GuiFactory()
 	{
-		
+
+	}
+
+	public static IDropdownElement createCloseDropdownElement(final File file, final IDirectoryNavigator navigator)
+	{
+		return new DropdownElement(new TextComponentString("Close"))
+		{
+			@Override
+			public void onClick(final GuiDropdownList list, final EntityPlayer player)
+			{
+				list.setDropdownElements(Collections.emptyList());
+			}
+		};
+	}
+
+	public static IDropdownElement createDeleteFileDropdownElement(final File file, final IDirectoryNavigator navigator)
+	{
+		return new DropdownElement(new TextComponentString("Delete"))
+		{
+			@Override
+			public void onClick(final GuiDropdownList list, final EntityPlayer player)
+			{
+				if (file.isDirectory())
+				{
+					FileHelper.deleteDirectory(file);
+				}
+				else
+				{
+					file.delete();
+				}
+
+				list.setDropdownElements(Collections.emptyList());
+				list.setVisible(false);
+
+				navigator.refresh();
+			}
+		};
 	}
 
 	public static GuiAbstractButton createRefreshButton()

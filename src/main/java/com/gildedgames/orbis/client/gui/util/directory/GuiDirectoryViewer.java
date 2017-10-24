@@ -239,6 +239,12 @@ public class GuiDirectoryViewer extends GuiFrame implements IDirectoryNavigatorL
 	}
 
 	@Override
+	public void onNodeOpen(final IDirectoryNavigator navigator, final IDirectoryNode node)
+	{
+
+	}
+
+	@Override
 	public void onDirectoryOpen(final IDirectoryNavigator navigator, final File file)
 	{
 

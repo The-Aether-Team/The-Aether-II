@@ -25,6 +25,8 @@ public interface IDirectoryNavigator
 	 */
 	boolean removeListener(IDirectoryNavigatorListener listener);
 
+	void onOpenNode(IDirectoryNode node);
+
 	/**
 	 * Opens the provided file if it is a directory.
 	 * @param file

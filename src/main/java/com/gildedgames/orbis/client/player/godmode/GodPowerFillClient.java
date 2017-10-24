@@ -32,12 +32,6 @@ public class GodPowerFillClient implements IGodPowerClient
 	}
 
 	@Override
-	public boolean openGuiScreen()
-	{
-		return false;
-	}
-
-	@Override
 	public String displayName()
 	{
 		return "Fill";

@@ -129,7 +129,7 @@ public class PlayerOrbisModule extends PlayerAetherModule
 	@Override
 	public void onUpdate()
 	{
-
+		this.godPowerModule.onUpdate();
 	}
 
 	@Override

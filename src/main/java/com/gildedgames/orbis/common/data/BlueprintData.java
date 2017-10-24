@@ -19,7 +19,7 @@ public class BlueprintData implements IDimensions, NBT
 
 	private World world;
 
-	private BlueprintData(final World world)
+	public BlueprintData(final World world)
 	{
 		this.world = world;
 	}

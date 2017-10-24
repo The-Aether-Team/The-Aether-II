@@ -78,16 +78,6 @@ public class GodPowerModule extends PlayerAetherModule
 		return this.powers[this.currentPowerIndex];
 	}
 
-	public void setCurrentPower(int powerIndex)
-	{
-		this.currentPowerIndex = powerIndex;
-
-		if (this.getWorld().isRemote)
-		{
-			NetworkingAether.sendPacketToServer(new PacketOrbisChangePower(this.currentPowerIndex));
-		}
-	}
-
 	public void setCurrentPower(final Class<? extends IGodPower> clazz)
 	{
 		int foundIndex = -1;
@@ -111,6 +101,16 @@ public class GodPowerModule extends PlayerAetherModule
 			{
 				NetworkingAether.sendPacketToServer(new PacketOrbisChangePower(this.currentPowerIndex));
 			}
+		}
+	}
+
+	public void setCurrentPower(int powerIndex)
+	{
+		this.currentPowerIndex = powerIndex;
+
+		if (this.getWorld().isRemote)
+		{
+			NetworkingAether.sendPacketToServer(new PacketOrbisChangePower(this.currentPowerIndex));
 		}
 	}
 
@@ -145,7 +145,7 @@ public class GodPowerModule extends PlayerAetherModule
 	@Override
 	public void onUpdate()
 	{
-
+		this.getCurrentPower().onUpdate(this.getEntity(), PlayerOrbisModule.get(this.getEntity()));
 	}
 
 	@Override

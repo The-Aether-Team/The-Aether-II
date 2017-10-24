@@ -79,7 +79,7 @@ public class BlockDataContainer implements NBT
 		throw new ArrayIndexOutOfBoundsException("Tried to access position that's not in this BlockDataContainer");
 	}
 
-	private BlockData get(final int x, final int y, final int z)
+	public BlockData get(final int x, final int y, final int z)
 	{
 		final int index = this.getIndex(x, y, z);
 

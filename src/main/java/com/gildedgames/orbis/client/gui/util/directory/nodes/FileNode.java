@@ -1,22 +1,17 @@
 package com.gildedgames.orbis.client.gui.util.directory.nodes;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.util.helpers.FileHelper;
-import com.gildedgames.orbis.client.gui.data.DropdownElement;
 import com.gildedgames.orbis.client.gui.data.IDropdownElement;
 import com.gildedgames.orbis.client.gui.data.directory.IDirectoryNavigator;
 import com.gildedgames.orbis.client.gui.data.directory.IDirectoryNode;
-import com.gildedgames.orbis.client.gui.util.GuiDropdownList;
+import com.gildedgames.orbis.client.gui.util.GuiFactory;
 import com.gildedgames.orbis.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.google.common.collect.Lists;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentString;
 
 import java.io.File;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class FileNode implements IDirectoryNode
@@ -66,46 +61,8 @@ public class FileNode implements IDirectoryNode
 	{
 		final List<IDropdownElement> elements = Lists.newArrayList();
 
-		elements.add(new DropdownElement(new TextComponentString("Delete"))
-		{
-			@Override
-			public void onClick(final GuiDropdownList list, final EntityPlayer player)
-			{
-				final File file = FileNode.this.file;
-
-				if (file.isDirectory())
-				{
-					FileHelper.deleteDirectory(file);
-				}
-				else
-				{
-					file.delete();
-				}
-
-				list.setDropdownElements(Collections.emptyList());
-				list.setVisible(false);
-
-				navigator.refresh();
-			}
-		});
-
-		elements.add(new DropdownElement(new TextComponentString("Rename"))
-		{
-			@Override
-			public void onClick(final GuiDropdownList list, final EntityPlayer player)
-			{
-
-			}
-		});
-
-		elements.add(new DropdownElement(new TextComponentString("Close"))
-		{
-			@Override
-			public void onClick(final GuiDropdownList list, final EntityPlayer player)
-			{
-				list.setDropdownElements(Collections.emptyList());
-			}
-		});
+		elements.add(GuiFactory.createDeleteFileDropdownElement(this.file, navigator));
+		elements.add(GuiFactory.createCloseDropdownElement(this.file, navigator));
 
 		return elements;
 	}

@@ -10,13 +10,6 @@ import java.util.List;
 public interface IGodPowerClient
 {
 
-	/**
-	 *
-	 * @return Whether or not the gui screen was opened. If not, will default
-	 * to normal inventory screen.
-	 */
-	boolean openGuiScreen();
-
 	String displayName();
 
 	GuiTexture getIcon();

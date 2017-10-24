@@ -9,6 +9,7 @@ import com.gildedgames.orbis.common.util.InputHelper;
 import com.gildedgames.orbis.common.util.ObjectFilter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.inventory.ClickType;
@@ -18,14 +19,13 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public abstract class GuiFrame extends GuiContainer implements RectHolder
+public abstract class GuiFrame extends GuiContainer implements IGuiFrame
 {
 
-	private final List<GuiFrame> children = new CopyOnWriteArrayList<>();
+	private final List<IGuiFrame> children = new CopyOnWriteArrayList<>();
 
 	private final ModDim2D dim = new ModDim2D();
 
@@ -50,58 +50,66 @@ public abstract class GuiFrame extends GuiContainer implements RectHolder
 		this.dim.set(rect);
 	}
 
-	public Collection<GuiFrame> getChildren()
-	{
-		return this.children;
-	}
-
 	public void setDrawDefaultBackground(final boolean flag)
 	{
 		this.drawDefaultBackground = flag;
 	}
 
+	@Override
 	public void clearChildren()
 	{
 		this.children.clear();
 	}
 
+	@Override
+	public boolean hasInit()
+	{
+		return this.hasInit;
+	}
+
+	@Override
 	public void onHovered()
 	{
 
 	}
 
+	@Override
 	public void onHoverEnter()
 	{
 
 	}
 
+	@Override
 	public void onHoverExit()
 	{
 
 	}
 
-	public abstract void init();
-
-	public List<GuiFrame> seekAllContent()
+	@Override
+	public List<IGuiFrame> seekAllContent()
 	{
 		return this.children;
 	}
 
+	@Override
 	public boolean isVisible()
 	{
 		return this.visible;
 	}
 
+	@Override
 	public void setVisible(final boolean flag)
 	{
 		this.visible = flag;
 	}
 
+	@Override
 	public boolean isEnabled()
 	{
 		return this.enabled;
 	}
 
+	@Override
 	public void setEnabled(final boolean flag)
 	{
 		this.enabled = flag;
@@ -116,35 +124,46 @@ public abstract class GuiFrame extends GuiContainer implements RectHolder
 	@Override
 	public void updateState()
 	{
-
+		for (final IGuiFrame frame : this.children)
+		{
+			frame.updateState();
+		}
 	}
 
 	@Override
 	public void drawDefaultBackground()
 	{
-		if (this.drawDefaultBackground)
-		{
-			super.drawDefaultBackground();
-		}
+
+	}
+
+	@Override
+	public void publicDrawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY)
+	{
+		this.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY)
 	{
-
+		for (final IGuiFrame frame : this.children)
+		{
+			frame.publicDrawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
+		}
 	}
 
-	public void addChildNoMods(final GuiFrame element)
+	@Override
+	public void addChildNoMods(final IGuiFrame element)
 	{
 		this.addChild(element, false);
 	}
 
-	public void addChild(final GuiFrame element)
+	@Override
+	public void addChild(final IGuiFrame element)
 	{
 		this.addChild(element, true);
 	}
 
-	private void addChild(final GuiFrame element, final boolean mods)
+	private void addChild(final IGuiFrame element, final boolean mods)
 	{
 		final RectHolder gui = ObjectFilter.cast(element, RectHolder.class);
 		final RectHolder parentModifier = ObjectFilter.cast(this, RectHolder.class);
@@ -154,15 +173,21 @@ public abstract class GuiFrame extends GuiContainer implements RectHolder
 			gui.dim().add(parentModifier, RectModifier.ModifierType.POS, RectModifier.ModifierType.SCALE);
 		}
 
-		if (!element.hasInit && this.mc != null)
+		if (!element.hasInit() && this.mc != null)
 		{
-			element.setWorldAndResolution(this.mc, (int) InputHelper.getScreenWidth(), (int) InputHelper.getScreenHeight());
+			final GuiScreen g = ObjectFilter.cast(element, GuiScreen.class);
+
+			if (gui != null)
+			{
+				g.setWorldAndResolution(this.mc, (int) InputHelper.getScreenWidth(), (int) InputHelper.getScreenHeight());
+			}
 		}
 
 		this.children.add(element);
 	}
 
-	public void removeChild(final GuiFrame gui)
+	@Override
+	public void removeChild(final IGuiFrame gui)
 	{
 		this.children.remove(gui);
 	}
@@ -170,7 +195,10 @@ public abstract class GuiFrame extends GuiContainer implements RectHolder
 	@Override
 	public void initGui()
 	{
-		super.initGui();
+		if (Minecraft.getMinecraft().currentScreen == this)
+		{
+			super.initGui();
+		}
 
 		if (!this.hasInit)
 		{
@@ -180,11 +208,13 @@ public abstract class GuiFrame extends GuiContainer implements RectHolder
 		}
 	}
 
+	@Override
 	public void preDraw()
 	{
 
 	}
 
+	@Override
 	public void draw()
 	{
 
@@ -218,7 +248,10 @@ public abstract class GuiFrame extends GuiContainer implements RectHolder
 
 		this.preDraw();
 
-		super.drawScreen(mouseX, mouseY, partialTicks);
+		if (this.drawDefaultBackground)
+		{
+			super.drawDefaultBackground();
+		}
 
 		/** Enable for debug rectangle rendering to see dimensions **/
 		//Gui.drawRect((int) this.dim().x(), (int) this.dim().y(), (int) this.dim().maxX(), (int) this.dim().maxY(), Integer.MAX_VALUE);
@@ -253,20 +286,55 @@ public abstract class GuiFrame extends GuiContainer implements RectHolder
 
 		this.draw();
 
-		for (final GuiFrame child : this.children)
+		for (final IGuiFrame frame : this.children)
 		{
-			child.drawScreen(mouseX, mouseY, partialTicks);
+			final GuiScreen gui = ObjectFilter.cast(frame, GuiScreen.class);
+
+			if (gui != null)
+			{
+				gui.drawScreen(mouseX, mouseY, partialTicks);
+			}
 		}
 
 		GL11.glDisable(GL11.GL_ALPHA_TEST);
 		GlStateManager.disableAlpha();
 
 		GlStateManager.popMatrix();
+
+		if (Minecraft.getMinecraft().currentScreen == this)
+		{
+			super.drawScreen(mouseX, mouseY, partialTicks);
+		}
 	}
 
+	@Override
 	public void publicMouseClicked(final int mouseX, final int mouseY, final int mouseButton) throws IOException
 	{
 		this.mouseClicked(mouseX, mouseY, mouseButton);
+	}
+
+	@Override
+	public void publicMouseClickMove(final int mouseX, final int mouseY, final int clickedMouseButton, final long timeSinceLastClick)
+	{
+		this.mouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick);
+	}
+
+	@Override
+	public void publicMouseReleased(final int mouseX, final int mouseY, final int state)
+	{
+		this.mouseReleased(mouseX, mouseY, state);
+	}
+
+	@Override
+	public void publicKeyTyped(final char typedChar, final int keyCode) throws IOException
+	{
+		this.keyTyped(typedChar, keyCode);
+	}
+
+	@Override
+	public void publicActionPerformed(final GuiButton button) throws IOException
+	{
+		this.actionPerformed(button);
 	}
 
 	@Override
@@ -274,9 +342,9 @@ public abstract class GuiFrame extends GuiContainer implements RectHolder
 	{
 		super.mouseClicked(mouseX, mouseY, mouseButton);
 
-		for (final GuiFrame frame : this.children)
+		for (final IGuiFrame frame : this.children)
 		{
-			frame.mouseClicked(mouseX, mouseY, mouseButton);
+			frame.publicMouseClicked(mouseX, mouseY, mouseButton);
 		}
 	}
 
@@ -285,9 +353,9 @@ public abstract class GuiFrame extends GuiContainer implements RectHolder
 	{
 		super.mouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick);
 
-		for (final GuiFrame frame : this.children)
+		for (final IGuiFrame frame : this.children)
 		{
-			frame.mouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick);
+			frame.publicMouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick);
 		}
 	}
 
@@ -296,16 +364,19 @@ public abstract class GuiFrame extends GuiContainer implements RectHolder
 	{
 		super.mouseReleased(mouseX, mouseY, state);
 
-		for (final GuiFrame frame : this.children)
+		for (final IGuiFrame frame : this.children)
 		{
-			frame.mouseReleased(mouseX, mouseY, state);
+			frame.publicMouseReleased(mouseX, mouseY, state);
 		}
 	}
 
 	@Override
 	protected void handleMouseClick(final Slot slotIn, final int slotId, final int mouseButton, final ClickType type)
 	{
-		super.handleMouseClick(slotIn, slotId, mouseButton, type);
+		if (Minecraft.getMinecraft().currentScreen == this)
+		{
+			super.handleMouseClick(slotIn, slotId, mouseButton, type);
+		}
 	}
 
 	protected void keyTypedInner(final char typedChar, final int keyCode) throws IOException
@@ -326,9 +397,10 @@ public abstract class GuiFrame extends GuiContainer implements RectHolder
 		}
 	}
 
+	@Override
 	public void onMouseWheel(final int state)
 	{
-		for (final GuiFrame frame : this.children)
+		for (final IGuiFrame frame : this.children)
 		{
 			frame.onMouseWheel(state);
 		}
@@ -337,14 +409,14 @@ public abstract class GuiFrame extends GuiContainer implements RectHolder
 	@Override
 	protected void keyTyped(final char typedChar, final int keyCode) throws IOException
 	{
-		if (!this.children.isEmpty())
+		if (!this.children.isEmpty() || Minecraft.getMinecraft().currentScreen == this)
 		{
 			this.keyTypedInner(typedChar, keyCode);
 		}
 
-		for (final GuiFrame frame : this.children)
+		for (final IGuiFrame frame : this.children)
 		{
-			frame.keyTyped(typedChar, keyCode);
+			frame.publicKeyTyped(typedChar, keyCode);
 		}
 	}
 
@@ -353,9 +425,14 @@ public abstract class GuiFrame extends GuiContainer implements RectHolder
 	{
 		super.onGuiClosed();
 
-		for (final GuiFrame frame : this.children)
+		for (final IGuiFrame frame : this.children)
 		{
-			frame.onGuiClosed();
+			final GuiScreen gui = ObjectFilter.cast(frame, GuiScreen.class);
+
+			if (gui != null)
+			{
+				gui.onGuiClosed();
+			}
 		}
 	}
 
@@ -364,9 +441,14 @@ public abstract class GuiFrame extends GuiContainer implements RectHolder
 	{
 		super.updateScreen();
 
-		for (final GuiFrame frame : this.children)
+		for (final IGuiFrame frame : this.children)
 		{
-			frame.updateScreen();
+			final GuiScreen gui = ObjectFilter.cast(frame, GuiScreen.class);
+
+			if (gui != null)
+			{
+				gui.updateScreen();
+			}
 		}
 	}
 
@@ -375,9 +457,14 @@ public abstract class GuiFrame extends GuiContainer implements RectHolder
 	{
 		super.setWorldAndResolution(mc, width, height);
 
-		for (final GuiFrame frame : this.children)
+		for (final IGuiFrame frame : this.children)
 		{
-			frame.setWorldAndResolution(mc, width, height);
+			final GuiScreen gui = ObjectFilter.cast(frame, GuiScreen.class);
+
+			if (gui != null)
+			{
+				gui.setWorldAndResolution(mc, width, height);
+			}
 		}
 	}
 
@@ -386,9 +473,9 @@ public abstract class GuiFrame extends GuiContainer implements RectHolder
 	{
 		super.actionPerformed(button);
 
-		for (final GuiFrame frame : this.children)
+		for (final IGuiFrame frame : this.children)
 		{
-			frame.actionPerformed(button);
+			frame.publicActionPerformed(button);
 		}
 	}
 
@@ -397,9 +484,14 @@ public abstract class GuiFrame extends GuiContainer implements RectHolder
 	{
 		super.onResize(mcIn, w, h);
 
-		for (final GuiFrame frame : this.children)
+		for (final IGuiFrame frame : this.children)
 		{
-			frame.onResize(mcIn, w, h);
+			final GuiScreen gui = ObjectFilter.cast(frame, GuiScreen.class);
+
+			if (gui != null)
+			{
+				gui.onResize(mcIn, w, h);
+			}
 		}
 	}
 }

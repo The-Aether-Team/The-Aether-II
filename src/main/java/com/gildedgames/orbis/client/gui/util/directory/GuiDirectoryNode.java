@@ -85,6 +85,7 @@ public class GuiDirectoryNode extends GuiFrame
 				if (millisecondsSince < 200)
 				{
 					this.directoryNode.onOpen(this.navigator);
+					this.navigator.onOpenNode(this.directoryNode);
 				}
 			}
 		}

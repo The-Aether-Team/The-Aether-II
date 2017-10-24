@@ -45,6 +45,12 @@ public class DirectoryNavigator implements IDirectoryNavigator
 	}
 
 	@Override
+	public void onOpenNode(final IDirectoryNode node)
+	{
+		this.listeners.forEach(l -> l.onNodeOpen(this, node));
+	}
+
+	@Override
 	public void openDirectory(final File file)
 	{
 		if (!file.isDirectory())

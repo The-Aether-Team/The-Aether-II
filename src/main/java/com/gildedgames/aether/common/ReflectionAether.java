@@ -6,21 +6,6 @@ import java.lang.reflect.Method;
 
 public class ReflectionAether
 {
-	public static class ReflectionEntry
-	{
-		private String[] mappings;
-
-		private ReflectionEntry(String... mappings)
-		{
-			this.mappings = mappings;
-		}
-
-		public String[] getMappings()
-		{
-			return this.mappings;
-		}
-	}
-
 	public static final ReflectionEntry EQUIPPED_PROGRESS_MAIN_HAND = new ReflectionEntry("field_187469_f", "equippedProgressMainHand");
 
 	public static final ReflectionEntry ACTIVE_ITEMSTACK_USE_COUNT = new ReflectionEntry("field_184628_bn", "activeItemStackUseCount");
@@ -33,11 +18,11 @@ public class ReflectionAether
 
 	public static final ReflectionEntry SERVER_CURRENT_TIME = new ReflectionEntry("field_175591_ab", "currentTime");
 
-	public static Field getField(Class clazz, String... names)
+	public static Field getField(final Class clazz, final String... names)
 	{
-		for (Field field : clazz.getDeclaredFields())
+		for (final Field field : clazz.getDeclaredFields())
 		{
-			for (String name : names)
+			for (final String name : names)
 			{
 				if (field.getName().equals(name))
 				{
@@ -51,15 +36,15 @@ public class ReflectionAether
 		throw new RuntimeException("Couldn't find field");
 	}
 
-	public static Method getMethod(Class clazz, Class<?>[] args, String... names)
+	public static Method getMethod(final Class clazz, final Class<?>[] args, final String... names)
 	{
-		for (Method method : clazz.getDeclaredMethods())
+		for (final Method method : clazz.getDeclaredMethods())
 		{
-			for (String name : names)
+			for (final String name : names)
 			{
 				if (method.getName().equals(name))
 				{
-					Class<?>[] matching = method.getParameterTypes();
+					final Class<?>[] matching = method.getParameterTypes();
 
 					boolean matches = true;
 
@@ -93,7 +78,7 @@ public class ReflectionAether
 		throw new RuntimeException("Couldn't find method");
 	}
 
-	public static void invokeMethod(Method method, Object obj, Object... args)
+	public static void invokeMethod(final Method method, final Object obj, final Object... args)
 	{
 		try
 		{
@@ -105,27 +90,42 @@ public class ReflectionAether
 		}
 	}
 
-	public static Object getValue(Field field, Object obj)
+	public static Object getValue(final Field field, final Object obj)
 	{
 		try
 		{
 			return field.get(obj);
 		}
-		catch (IllegalAccessException e)
+		catch (final IllegalAccessException e)
 		{
 			throw new RuntimeException("Failed to fetch field value", e);
 		}
 	}
 
-	public static void setValue(Field field, Object instance, Object value)
+	public static void setValue(final Field field, final Object instance, final Object value)
 	{
 		try
 		{
 			field.set(instance, value);
 		}
-		catch (IllegalAccessException e)
+		catch (final IllegalAccessException e)
 		{
 			throw new RuntimeException("Failed to fetch field value", e);
+		}
+	}
+
+	public static class ReflectionEntry
+	{
+		private final String[] mappings;
+
+		private ReflectionEntry(final String... mappings)
+		{
+			this.mappings = mappings;
+		}
+
+		public String[] getMappings()
+		{
+			return this.mappings;
 		}
 	}
 }

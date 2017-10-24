@@ -5,6 +5,7 @@ import com.gildedgames.orbis.client.player.godmode.GodPowerCreativeClient;
 import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.selectors.ShapeSelectorInvalid;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
 import javax.annotation.Nullable;
@@ -34,6 +35,24 @@ public class GodPowerCreative implements IGodPower
 
 	@Override
 	public void read(final NBTTagCompound tag)
+	{
+
+	}
+
+	@Override
+	public void onUpdate(final EntityPlayer player, final PlayerOrbisModule module)
+	{
+
+	}
+
+	@Override
+	public boolean hasCustomGui()
+	{
+		return false;
+	}
+
+	@Override
+	public void onOpenGui(final EntityPlayer player)
 	{
 
 	}

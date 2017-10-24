@@ -17,6 +17,7 @@ import com.gildedgames.aether.common.util.helpers.PerfHelper;
 import com.gildedgames.orbis.client.OrbisDeveloperEventsClient;
 import com.gildedgames.orbis.client.OrbisKeyBindings;
 import com.gildedgames.orbis.client.renderers.AirSelectionRenderer;
+import com.gildedgames.orbis.client.renderers.ItemModelsOrbis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.KeyBinding;
@@ -35,7 +36,8 @@ public class ClientProxy extends CommonProxy
 		super.preInit(event);
 
 		PerfHelper.measure("Pre-initialize block models", AetherBlockModels::preInit);
-		PerfHelper.measure("Pre-initialize item models", ItemModelsAether::preInit);
+		PerfHelper.measure("Pre-initialize aether item models", ItemModelsAether::preInit);
+		PerfHelper.measure("Pre-initialize orbis item models", ItemModelsOrbis::preInit);
 		PerfHelper.measure("Pre-initialize special renders", AetherRenderers::preInit);
 
 		CreativeTabsAether.registerTabIcons();

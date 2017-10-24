@@ -36,7 +36,7 @@ public class GuiCanvas extends GuiFrame
 
 		GuiCanvas canvas = null;
 
-		for (final GuiFrame child : currentFrame.getChildren())
+		for (final IGuiFrame child : currentFrame.seekAllContent())
 		{
 			if (child instanceof GuiCanvas)
 			{

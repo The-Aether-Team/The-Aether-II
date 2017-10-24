@@ -93,13 +93,13 @@ public abstract class GuiDecorator<T extends GuiFrame> extends GuiFrame implemen
 	}
 
 	@Override
-	public void addChild(final GuiFrame element)
+	public void addChild(final IGuiFrame element)
 	{
 		this.element.addChild(element);
 	}
 
 	@Override
-	public void removeChild(final GuiFrame gui)
+	public void removeChild(final IGuiFrame gui)
 	{
 		this.element.removeChild(gui);
 	}

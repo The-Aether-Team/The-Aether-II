@@ -11,6 +11,7 @@ import com.gildedgames.orbis.client.gui.util.directory.GuiDirectoryViewer;
 import com.gildedgames.orbis.client.gui.util.directory.nodes.OrbisNavigatorNodeFactory;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.client.util.rect.Pos2D;
+import com.gildedgames.orbis.common.OrbisLocations;
 import com.gildedgames.orbis.common.util.InputHelper;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import net.minecraft.client.Minecraft;
@@ -25,8 +26,6 @@ import java.io.IOException;
 public class GuiEditBlueprint extends GuiFrame
 {
 	private final Blueprint blueprint;
-
-	private final File folder = new File(Minecraft.getMinecraft().mcDataDir, "/orbis");
 
 	private GuiInput nameInput;
 
@@ -70,11 +69,11 @@ public class GuiEditBlueprint extends GuiFrame
 
 		this.directoryViewer.dim().mod().center(true).flush();
 
-		this.folder.mkdirs();
+		OrbisLocations.BLUEPRINTS.mkdirs();
 
-		this.directoryViewer.getNavigator().openDirectory(this.folder);
+		this.directoryViewer.getNavigator().openDirectory(OrbisLocations.BLUEPRINTS);
 
-		this.addChild(directoryViewer);
+		this.addChild(this.directoryViewer);
 	}
 
 	@Override
@@ -106,7 +105,7 @@ public class GuiEditBlueprint extends GuiFrame
 			try (FileOutputStream out = new FileOutputStream(file))
 			{
 				final NBTTagCompound tag = new NBTTagCompound();
-				this.blueprint.write(tag);
+				this.blueprint.getData().write(tag);
 
 				CompressedStreamTools.writeCompressed(tag, out);
 			}

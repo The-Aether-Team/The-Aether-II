@@ -2,10 +2,12 @@ package com.gildedgames.orbis.client;
 
 import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.client.gui.GuiChoiceMenu;
 import com.gildedgames.orbis.client.gui.GuiPowersChoiceMenu;
 import com.gildedgames.orbis.client.gui.GuiRightClickBlueprint;
 import com.gildedgames.orbis.client.renderers.AirSelectionRenderer;
+import com.gildedgames.orbis.common.network.packets.PacketOrbisOpenGui;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.PlayerSelectionModule;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
@@ -42,8 +44,11 @@ public class OrbisDeveloperEventsClient
 
 			final PlayerOrbisModule module = PlayerOrbisModule.get(mc.player);
 
-			if (module.powers().getCurrentPower().getClientHandler().openGuiScreen())
+			if (module.powers().getCurrentPower().hasCustomGui())
 			{
+				module.powers().getCurrentPower().onOpenGui(mc.player);
+				NetworkingAether.sendPacketToServer(new PacketOrbisOpenGui());
+
 				event.setCanceled(true);
 			}
 		}
