@@ -30,7 +30,7 @@ public class ShapeSelectorFilter implements IShapeSelector
 	{
 		final ItemStack held = module.getEntity().getHeldItemMainhand();
 
-		return held.getItem() instanceof ItemBlock || this.canSelectWithoutItems;
+		return held.getItem() instanceof ItemBlock || (this.canSelectWithoutItems && held == ItemStack.EMPTY);
 	}
 
 	@Override
