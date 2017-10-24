@@ -7,8 +7,10 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModu
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.common.network.packets.PacketOrbisDeveloperMode;
 import com.gildedgames.orbis.common.network.packets.PacketOrbisDeveloperReach;
+import com.gildedgames.orbis.common.player.godmode.IGodPower;
 import com.gildedgames.orbis.common.player.modules.GodPowerModule;
 import com.gildedgames.orbis.common.util.OrbisRaytraceHelp;
+import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -54,7 +56,15 @@ public class PlayerOrbisModule extends PlayerAetherModule
 			return Collections.emptyList();
 		}
 
-		return this.powers().getCurrentPower().getClientHandler().getActiveRenderers(this, this.getWorld());
+		final List<IWorldRenderer> renderers = Lists.newArrayList();
+		final PlayerOrbisModule module = PlayerOrbisModule.get(this.getEntity());
+
+		for (final IGodPower power : module.powers().getPowers())
+		{
+			renderers.addAll(power.getClientHandler().getActiveRenderers(this, this.getWorld()));
+		}
+
+		return renderers;
 	}
 
 	public boolean canInteractWithItems()

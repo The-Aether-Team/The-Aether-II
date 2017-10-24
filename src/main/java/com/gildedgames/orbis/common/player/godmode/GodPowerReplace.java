@@ -42,7 +42,7 @@ public class GodPowerReplace implements IGodPower
 	}
 
 	@Override
-	public void onUpdate(final EntityPlayer player, final PlayerOrbisModule module)
+	public void onUpdate(final EntityPlayer player, final PlayerOrbisModule module, final boolean isPowerActive)
 	{
 
 	}

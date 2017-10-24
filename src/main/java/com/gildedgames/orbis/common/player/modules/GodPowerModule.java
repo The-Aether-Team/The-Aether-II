@@ -145,7 +145,12 @@ public class GodPowerModule extends PlayerAetherModule
 	@Override
 	public void onUpdate()
 	{
-		this.getCurrentPower().onUpdate(this.getEntity(), PlayerOrbisModule.get(this.getEntity()));
+		PlayerOrbisModule module = PlayerOrbisModule.get(this.getEntity());
+
+		for (IGodPower power : this.powers)
+		{
+			power.onUpdate(this.getEntity(), module, this.isCurrentPower(power));
+		}
 	}
 
 	@Override

@@ -71,7 +71,7 @@ public class GodPowerBlueprint implements IGodPower
 	}
 
 	@Override
-	public void onUpdate(final EntityPlayer player, final PlayerOrbisModule module)
+	public void onUpdate(final EntityPlayer player, final PlayerOrbisModule module, final boolean isPowerActive)
 	{
 		final ItemStack stack = player.getHeldItemMainhand();
 

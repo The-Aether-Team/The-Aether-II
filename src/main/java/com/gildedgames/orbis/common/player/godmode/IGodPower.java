@@ -8,7 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 public interface IGodPower extends NBT
 {
 
-	void onUpdate(EntityPlayer player, PlayerOrbisModule module);
+	void onUpdate(EntityPlayer player, PlayerOrbisModule module, boolean isPowerActive);
 
 	boolean hasCustomGui();
 
