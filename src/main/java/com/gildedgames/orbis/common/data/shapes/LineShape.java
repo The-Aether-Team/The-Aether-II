@@ -33,7 +33,7 @@ public class LineShape implements IShape
 
 	public LineShape(final BlockPos start, final BlockPos end)
 	{
-		this(start, end, 1);
+		this(start, end, 2);
 	}
 
 	public LineShape(final BlockPos start, final BlockPos end, final int lineRadius)
@@ -212,15 +212,18 @@ public class LineShape implements IShape
 	@Override
 	public boolean contains(final int x, final int y, final int z)
 	{
-		//This code is wrong! It will have a somewhat larger thickness than it should.
-		//Needs a lot of checking.
-		final double dx1 = Math.sqrt(this.start.distanceSq(x, y, z));
-		final double dx2 = Math.sqrt(this.end.distanceSq(x, y, z));
+		boolean flag = false;
 
-		final double startToEnd = Math.sqrt(this.start.distanceSq(this.end.getX(), this.end.getY(), this.end.getZ()));
-		final double halfSize = 2.0 + 0.1;
+		for (final BlockPos.MutableBlockPos pos : this.getShapeData())
+		{
+			if (pos.getX() == x && pos.getY() == y && pos.getZ() == z)
+			{
+				flag = true;
+				break;
+			}
+		}
 
-		return dx1 + dx2 > startToEnd - halfSize && dx1 + dx2 < startToEnd + halfSize;
+		return flag;
 	}
 
 	@Override

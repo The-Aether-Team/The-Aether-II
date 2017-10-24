@@ -22,11 +22,11 @@ public class GuiChoiceMenuHolder extends GuiFrame
 
 	private final static ResourceLocation CHOICE_TAB_UNPRESSED = AetherCore.getResource("orbis/godmode/overlay/choice_tab_unpressed.png");
 
+	private static int choicePageIndex;
+
 	private final GuiChoiceMenu[] menus;
 
 	private final GuiTexture[] tabs;
-
-	private int choicePageIndex;
 
 	public GuiChoiceMenuHolder(final GuiChoiceMenu... menus)
 	{
