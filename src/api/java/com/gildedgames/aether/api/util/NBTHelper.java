@@ -182,7 +182,11 @@ public class NBTHelper
 
 		tag.setInteger("id", serializer.serialize(nbt));
 
-		nbt.write(tag);
+		final NBTTagCompound data = new NBTTagCompound();
+
+		nbt.write(data);
+
+		tag.setTag("data", data);
 
 		return tag;
 	}
@@ -197,7 +201,7 @@ public class NBTHelper
 		final int id = tag.getInteger("id");
 
 		final T obj = serializer.deserialize(world, id);
-		obj.read(tag);
+		obj.read(tag.getCompoundTag("data"));
 
 		return obj;
 	}
@@ -212,7 +216,7 @@ public class NBTHelper
 		final int id = tag.getInteger("id");
 
 		final T obj = serializer.deserialize(id);
-		obj.read(tag);
+		obj.read(tag.getCompoundTag("data"));
 
 		return obj;
 	}
