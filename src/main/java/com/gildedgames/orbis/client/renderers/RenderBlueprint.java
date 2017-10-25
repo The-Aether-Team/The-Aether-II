@@ -124,17 +124,28 @@ public class RenderBlueprint implements IWorldRenderer
 
 		GlStateManager.color(1, 1, 1, 1);
 
+		final Iterable<BlockPos.MutableBlockPos> shapeData = this.blueprint.createShapeData(world);
+
 		final TextureManager textureManager = Minecraft.getMinecraft().renderEngine;
 		textureManager.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
 		buffer.begin(7, DefaultVertexFormats.BLOCK);
 
-		for (final BlockPos pos : this.blueprint.createShapeData(world))
+		for (final BlockPos pos : shapeData)
 		{
 			this.renderPos(pos, partialTicks);
 		}
 
 		Tessellator.getInstance().draw();
+
+		/** Render tile entities separately since they're done on their own
+		 * draw call with the tesselator **/
+		for (final BlockPos pos : shapeData)
+		{
+			GlStateManager.pushMatrix();
+			this.renderTileEntityIfPossible(pos, partialTicks);
+			GlStateManager.popMatrix();
+		}
 
 		GlStateManager.enableLighting();
 		GlStateManager.enableCull();
@@ -146,7 +157,7 @@ public class RenderBlueprint implements IWorldRenderer
 		GlStateManager.popMatrix();
 	}
 
-	private void renderPos(final BlockPos pos, final float partialTicks)
+	private void renderTileEntityIfPossible(final BlockPos pos, final float partialTicks)
 	{
 		if (!this.renderBlocks || !RegionHelp.contains(this.blueprint, pos))
 		{
@@ -165,10 +176,23 @@ public class RenderBlueprint implements IWorldRenderer
 
 				if (tileEntity != null && this.tileEntityRenderer.getSpecialRenderer(tileEntity) != null)
 				{
-					this.tileEntityRenderer.renderTileEntityAt(tileEntity, pos.getX(), pos.getY(), pos.getZ(), 1);//TODO: Partialticks?
+					this.tileEntityRenderer.renderTileEntityAt(tileEntity, pos.getX(), pos.getY(), pos.getZ(), partialTicks);//TODO: Partialticks?
 				}
 			}
+		}
+	}
 
+	private void renderPos(final BlockPos pos, final float partialTicks)
+	{
+		if (!this.renderBlocks || !RegionHelp.contains(this.blueprint, pos))
+		{
+			return;
+		}
+
+		final IBlockState state = this.cache.getBlockState(pos);
+
+		if (state != null && !BlockUtil.isAir(state) && !BlockUtil.isVoid(state))
+		{
 			//Thank you Ivorius for the rendering of blocks code <3333
 			GlStateManager.pushMatrix();
 
