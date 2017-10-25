@@ -7,6 +7,7 @@ import com.gildedgames.orbis.common.block.BlockFilterLayer;
 import com.gildedgames.orbis.common.block.BlockFilterType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
@@ -60,21 +61,37 @@ public class BlockFilterHelper
 		return layer;
 	}
 
-	public static BlockFilterLayer getNewReplaceLayer(final ItemStack stack)
+	public static BlockFilterLayer getNewReplaceLayer(final ItemStack mainHand, final ItemStack offHand)
 	{
-		if (!(stack.getItem() instanceof ItemBlock))
+		if (!(mainHand.getItem() instanceof ItemBlock))
 		{
 			throw new NullPointerException("ItemStack given to getNewFillLayer() is not a Block. Aborting.");
 		}
 
-		final IBlockState state = BlockUtil.getBlockState(stack);
+		final IBlockState mainHandState = BlockUtil.getBlockState(mainHand);
+		IBlockState offHandState = BlockUtil.getBlockState(offHand);
+
+		if (offHand.getItem() == Items.STRING)
+		{
+			offHandState = Blocks.AIR.getDefaultState();
+		}
 
 		final BlockFilterLayer layer = new BlockFilterLayer();
 
-		layer.setFilterType(BlockFilterType.ALL_EXCEPT);
+		if (offHandState == null)
+		{
+			layer.setFilterType(BlockFilterType.ALL_EXCEPT);
 
-		layer.getRequiredBlocks().add(new BlockDataWithConditions(Blocks.AIR.getDefaultState(), 1.0f));
-		layer.getReplacementBlocks().add(new BlockDataWithConditions(state, 1.0f));
+			layer.getRequiredBlocks().add(new BlockDataWithConditions(Blocks.AIR.getDefaultState(), 1.0f));
+			layer.getReplacementBlocks().add(new BlockDataWithConditions(mainHandState, 1.0f));
+		}
+		else
+		{
+			layer.setFilterType(BlockFilterType.ONLY);
+
+			layer.getRequiredBlocks().add(new BlockDataWithConditions(offHandState, 1.0f));
+			layer.getReplacementBlocks().add(new BlockDataWithConditions(mainHandState, 1.0f));
+		}
 
 		return layer;
 	}

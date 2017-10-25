@@ -73,6 +73,11 @@ public class BlockUtil
 		}
 	}
 
+	public static boolean isVoid(final IBlockState state)
+	{
+		return state.getBlock() == Blocks.STRUCTURE_VOID;
+	}
+
 	public static boolean isAir(final IBlockState state)
 	{
 		return state.getBlock().getMaterial(state) == Material.AIR;

@@ -26,7 +26,7 @@ public class GodPowerFill implements IGodPower
 			this.clientHandler = new GodPowerFillClient(this);
 		}
 
-		this.shapeSelector = new ShapeSelectorFilter(itemStack -> new BlockFilter(BlockFilterHelper.getNewFillLayer(itemStack)), false);
+		this.shapeSelector = new ShapeSelectorFilter(p -> new BlockFilter(BlockFilterHelper.getNewFillLayer(p.getHeldItemMainhand())), false);
 	}
 
 	@Override

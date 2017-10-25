@@ -26,7 +26,8 @@ public class GodPowerReplace implements IGodPower
 			this.clientHandler = new GodPowerReplaceClient(this);
 		}
 
-		this.shapeSelector = new ShapeSelectorFilter(itemStack -> new BlockFilter(BlockFilterHelper.getNewReplaceLayer(itemStack)), false);
+		this.shapeSelector = new ShapeSelectorFilter(
+				p -> new BlockFilter(BlockFilterHelper.getNewReplaceLayer(p.getHeldItemMainhand(), p.getHeldItemOffhand())), false);
 	}
 
 	@Override

@@ -26,7 +26,7 @@ public class GodPowerDelete implements IGodPower
 			this.clientHandler = new GodPowerDeleteClient(this);
 		}
 
-		this.shapeSelector = new ShapeSelectorFilter(itemStack -> new BlockFilter(BlockFilterHelper.getNewDeleteLayer(itemStack)), true);
+		this.shapeSelector = new ShapeSelectorFilter(p -> new BlockFilter(BlockFilterHelper.getNewDeleteLayer(p.getHeldItemMainhand())), true);
 	}
 
 	@Override

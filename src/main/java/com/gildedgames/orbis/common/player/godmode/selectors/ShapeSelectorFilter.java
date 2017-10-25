@@ -6,6 +6,7 @@ import com.gildedgames.orbis.common.data.CreationData;
 import com.gildedgames.orbis.common.data.ICreationData;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -15,11 +16,11 @@ import java.util.function.Function;
 public class ShapeSelectorFilter implements IShapeSelector
 {
 
-	private final Function<ItemStack, BlockFilter> filterSupplier;
+	private final Function<EntityPlayer, BlockFilter> filterSupplier;
 
 	private final boolean canSelectWithoutItems;
 
-	public ShapeSelectorFilter(final Function<ItemStack, BlockFilter> filterSupplier, final boolean canSelectWithoutItems)
+	public ShapeSelectorFilter(final Function<EntityPlayer, BlockFilter> filterSupplier, final boolean canSelectWithoutItems)
 	{
 		this.filterSupplier = filterSupplier;
 		this.canSelectWithoutItems = canSelectWithoutItems;
@@ -47,8 +48,7 @@ public class ShapeSelectorFilter implements IShapeSelector
 			return;
 		}
 
-		final ItemStack held = module.getEntity().getHeldItemMainhand();
-		final BlockFilter filter = this.filterSupplier.apply(held);
+		final BlockFilter filter = this.filterSupplier.apply(module.getEntity());
 
 		final ICreationData creationData = new CreationData(world, module.getEntity());
 		filter.apply(selectedShape, world, creationData);
