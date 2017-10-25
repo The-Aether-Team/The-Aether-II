@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.orbis.common.OrbisCore;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -93,6 +94,11 @@ public class BlockData implements NBT
 			// TODO: Feed it world reference
 			this.tileEntity = TileEntity.create(null, tag.getCompoundTag("tileEntity"));
 		}
+	}
+
+	public boolean isVoid()
+	{
+		return this.blockState.getBlock() == Blocks.STRUCTURE_VOID;
 	}
 
 	public boolean isAir()

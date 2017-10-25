@@ -32,6 +32,8 @@ public class NetworkingAether
 		instance.registerMessage(PacketCloseDialog.HandlerServer.class, PacketCloseDialog.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketUpdateStructure.HandlerServer.class, PacketUpdateStructure.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketSaveStructure.HandlerServer.class, PacketSaveStructure.class, discriminant++, Side.SERVER);
+
+		// O R B I S  S E R V E R
 		instance.registerMessage(PacketOrbisDeveloperReach.HandlerServer.class, PacketOrbisDeveloperReach.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketOrbisWorldObjectAdd.HandlerServer.class, PacketOrbisWorldObjectAdd.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketOrbisWorldObjectRemove.HandlerServer.class, PacketOrbisWorldObjectRemove.class, discriminant++, Side.SERVER);
@@ -40,6 +42,7 @@ public class NetworkingAether
 		instance.registerMessage(PacketOrbisOpenGui.HandlerServer.class, PacketOrbisOpenGui.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketSetItemStack.HandlerServer.class, PacketSetItemStack.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketOrbisChangeSelectionType.HandlerServer.class, PacketOrbisChangeSelectionType.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketOrbisFilterShape.HandlerServer.class, PacketOrbisFilterShape.class, discriminant++, Side.SERVER);
 
 		// C L I E N T
 		instance.registerMessage(PacketEquipment.HandlerClient.class, PacketEquipment.class, discriminant++, Side.CLIENT);
@@ -49,6 +52,8 @@ public class NetworkingAether
 		instance.registerMessage(PacketUpdateStructure.HandlerClient.class, PacketUpdateStructure.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketLatchSwet.HandlerClient.class, PacketLatchSwet.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketDetachSwet.HandlerClient.class, PacketDetachSwet.class, discriminant++, Side.CLIENT);
+
+		// O R B I S  C L I E N T
 		instance.registerMessage(PacketOrbisDeveloperMode.HandlerClient.class, PacketOrbisDeveloperMode.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketOrbisWorldObjectManager.HandlerClient.class, PacketOrbisWorldObjectManager.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketOrbisDeveloperReach.HandlerClient.class, PacketOrbisDeveloperReach.class, discriminant++, Side.CLIENT);

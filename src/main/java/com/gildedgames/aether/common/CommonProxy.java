@@ -17,7 +17,11 @@ import com.gildedgames.aether.common.world.SectorEventHandler;
 import com.gildedgames.orbis.client.renderers.RenderShape;
 import com.gildedgames.orbis.common.OrbisDeveloperModeEvents;
 import com.gildedgames.orbis.common.block.BlockDataContainer;
+import com.gildedgames.orbis.common.block.BlockDataWithConditions;
+import com.gildedgames.orbis.common.block.BlockFilter;
+import com.gildedgames.orbis.common.block.BlockFilterLayer;
 import com.gildedgames.orbis.common.data.BlueprintData;
+import com.gildedgames.orbis.common.data.DataCondition;
 import com.gildedgames.orbis.common.data.shapes.EllipsoidShape;
 import com.gildedgames.orbis.common.data.shapes.LineShape;
 import com.gildedgames.orbis.common.data.shapes.SphereShape;
@@ -73,6 +77,10 @@ public class CommonProxy implements IAetherServices
 		s.register(12, SphereShape.class, new Instantiator<>(SphereShape.class));
 		s.register(13, EllipsoidShape.class, new Instantiator<>(EllipsoidShape.class));
 		s.register(14, LineShape.class, new Instantiator<>(LineShape.class));
+		s.register(15, BlockFilter.class, new Instantiator<>(BlockFilter.class));
+		s.register(16, BlockFilterLayer.class, new Instantiator<>(BlockFilterLayer.class));
+		s.register(17, BlockDataWithConditions.class, new Instantiator<>(BlockDataWithConditions.class));
+		s.register(18, DataCondition.class, new Instantiator<>(DataCondition.class));
 	}
 
 	public void init(final FMLInitializationEvent event)

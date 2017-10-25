@@ -1,12 +1,18 @@
 package com.gildedgames.orbis.client.gui;
 
 import com.gildedgames.aether.api.orbis.IWorldObjectManager;
+import com.gildedgames.aether.api.orbis.region.Region;
+import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
+import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.client.gui.data.DropdownElement;
 import com.gildedgames.orbis.client.gui.util.GuiDropdownList;
 import com.gildedgames.orbis.client.gui.util.GuiFrame;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.client.util.rect.Pos2D;
+import com.gildedgames.orbis.common.block.BlockFilter;
+import com.gildedgames.orbis.common.network.packets.PacketOrbisFilterShape;
+import com.gildedgames.orbis.common.util.BlockFilterHelper;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -47,6 +53,17 @@ public class GuiRightClickBlueprint extends GuiFrame
 						final IWorldObjectManager manager = WorldObjectManager.get(player.world);
 
 						manager.getGroup(0).removeObject(GuiRightClickBlueprint.this.blueprint);
+					}
+				},
+				new DropdownElement(new TextComponentString("Fill With Void"))
+				{
+					@Override
+					public void onClick(final GuiDropdownList list, final EntityPlayer player)
+					{
+						final IShape shape = new Region(GuiRightClickBlueprint.this.blueprint.getBoundingBox());
+						final BlockFilter filter = new BlockFilter(BlockFilterHelper.getNewVoidLayer());
+
+						NetworkingAether.sendPacketToServer(new PacketOrbisFilterShape(shape, filter));
 					}
 				},
 				new DropdownElement(new TextComponentString("Close"))

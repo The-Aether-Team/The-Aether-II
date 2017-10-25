@@ -57,17 +57,17 @@ public class BlockFilterLayer implements NBT
 	/**
 	 * Sets the list of blocks that trigger the filter
 	 */
-	public void setRequiredBlocks(BlockDataWithConditions... requiredBlocks)
+	public void setRequiredBlocks(List<BlockDataWithConditions> requiredBlocks)
 	{
-		this.requiredBlocks = Lists.newArrayList(Arrays.asList(requiredBlocks));
+		this.requiredBlocks = Lists.newArrayList(requiredBlocks);
 	}
 
 	/**
 	 * Sets the list of blocks that trigger the filter
 	 */
-	public void setRequiredBlocks(List<BlockDataWithConditions> requiredBlocks)
+	public void setRequiredBlocks(BlockDataWithConditions... requiredBlocks)
 	{
-		this.requiredBlocks = Lists.newArrayList(requiredBlocks);
+		this.requiredBlocks = Lists.newArrayList(Arrays.asList(requiredBlocks));
 	}
 
 	public List<BlockDataWithConditions> getReplacementBlocks()
@@ -75,14 +75,14 @@ public class BlockFilterLayer implements NBT
 		return this.replacementBlocks;
 	}
 
-	public void setReplacementBlocks(BlockDataWithConditions... newBlocks)
-	{
-		this.replacementBlocks = Lists.newArrayList(Arrays.asList(newBlocks));
-	}
-
 	public void setReplacementBlocks(List<BlockDataWithConditions> newBlocks)
 	{
 		this.replacementBlocks = newBlocks;
+	}
+
+	public void setReplacementBlocks(BlockDataWithConditions... newBlocks)
+	{
+		this.replacementBlocks = Lists.newArrayList(Arrays.asList(newBlocks));
 	}
 
 	public BlockFilterType getFilterType()
@@ -187,9 +187,9 @@ public class BlockFilterLayer implements NBT
 
 		tag.setBoolean("chosenBlockPerBlock", this.chooseBlockPerBlock);
 
-		this.condition.write(tag);
-
 		NBTFunnel funnel = AetherCore.io().createFunnel(tag);
+
+		funnel.set("condition", this.condition);
 
 		funnel.setList("requiredBlocks", this.requiredBlocks);
 		funnel.setList("replacementBlocks", this.replacementBlocks);
@@ -204,9 +204,9 @@ public class BlockFilterLayer implements NBT
 
 		this.chooseBlockPerBlock = tag.getBoolean("chooseBlockPerBlock");
 
-		this.condition.read(tag);
-
 		NBTFunnel funnel = AetherCore.io().createFunnel(tag);
+
+		this.condition = funnel.get("condition");
 
 		this.requiredBlocks = funnel.getList("requiredBlocks");
 		this.replacementBlocks = funnel.getList("replacementBlocks");

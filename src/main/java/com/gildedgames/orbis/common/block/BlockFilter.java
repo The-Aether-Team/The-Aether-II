@@ -19,7 +19,6 @@ public class BlockFilter implements NBT
 	public BlockFilter()
 	{
 		super();
-
 	}
 
 	public BlockFilter(final BlockFilterLayer layer)

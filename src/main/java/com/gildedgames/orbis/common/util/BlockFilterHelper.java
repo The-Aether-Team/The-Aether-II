@@ -79,6 +79,20 @@ public class BlockFilterHelper
 		return layer;
 	}
 
+	public static BlockFilterLayer getNewVoidLayer()
+	{
+		final IBlockState state = Blocks.STRUCTURE_VOID.getDefaultState();
+
+		final BlockFilterLayer layer = new BlockFilterLayer();
+
+		layer.setFilterType(BlockFilterType.ONLY);
+
+		layer.getRequiredBlocks().add(new BlockDataWithConditions(Blocks.AIR.getDefaultState(), 1.0f));
+		layer.getReplacementBlocks().add(new BlockDataWithConditions(state, 1.0f));
+
+		return layer;
+	}
+
 	/**
 	 * The default Delete layer
 	 * @author Emile

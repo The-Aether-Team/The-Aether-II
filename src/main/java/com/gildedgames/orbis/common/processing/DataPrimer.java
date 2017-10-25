@@ -30,7 +30,7 @@ public class DataPrimer
 
 	public void create(final BlockData blockData, final BlockPos pos, final ICreationData creationData)
 	{
-		if (!blockData.isAir())
+		if (!blockData.isVoid())
 		{
 			// TODO: Implement rotation processing
 			final IBlockState rotated = blockData.getBlockState();
