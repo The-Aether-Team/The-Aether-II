@@ -44,7 +44,7 @@ public class OrbisDeveloperModeEvents
 				}
 				catch (final NumberInvalidException e)
 				{
-					e.printStackTrace();
+					return;
 				}
 			}
 
@@ -88,7 +88,6 @@ public class OrbisDeveloperModeEvents
 			{
 				e.printStackTrace();
 			}
-
 		}
 	}
 
