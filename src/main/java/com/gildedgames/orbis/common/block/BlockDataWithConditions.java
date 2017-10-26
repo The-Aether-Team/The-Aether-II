@@ -3,6 +3,7 @@ package com.gildedgames.orbis.common.block;
 import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.common.data.DataCondition;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -15,6 +16,13 @@ public class BlockDataWithConditions extends BlockData
 	protected BlockDataWithConditions()
 	{
 		super();
+	}
+
+	public BlockDataWithConditions(final Block block, final float placementChance)
+	{
+		super(block);
+
+		this.replaceCondition.setPlacementChance(placementChance);
 	}
 
 	public BlockDataWithConditions(final IBlockState state, final float placementChance)

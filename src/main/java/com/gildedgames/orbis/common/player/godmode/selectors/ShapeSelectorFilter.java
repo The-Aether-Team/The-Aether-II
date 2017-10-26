@@ -8,6 +8,7 @@ import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -31,7 +32,7 @@ public class ShapeSelectorFilter implements IShapeSelector
 	{
 		final ItemStack held = module.getEntity().getHeldItemMainhand();
 
-		return held.getItem() instanceof ItemBlock || (this.canSelectWithoutItems && held == ItemStack.EMPTY);
+		return held.getItem() instanceof ItemBlock || (this.canSelectWithoutItems && held == ItemStack.EMPTY) || held.getItem() instanceof ItemBucket;
 	}
 
 	@Override

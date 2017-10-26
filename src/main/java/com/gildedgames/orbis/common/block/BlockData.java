@@ -3,6 +3,7 @@ package com.gildedgames.orbis.common.block;
 import com.gildedgames.aether.api.orbis.util.OrbisRotation;
 import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.orbis.common.OrbisCore;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -13,6 +14,8 @@ import net.minecraft.world.World;
 
 public class BlockData implements NBT
 {
+	private Block block;
+
 	private IBlockState blockState;
 
 	private TileEntity tileEntity;
@@ -20,6 +23,12 @@ public class BlockData implements NBT
 	public BlockData()
 	{
 
+	}
+
+	public BlockData(final Block block)
+	{
+		this();
+		this.block = block;
 	}
 
 	public BlockData(final IBlockState blockState)
@@ -36,6 +45,7 @@ public class BlockData implements NBT
 
 	public BlockData(final BlockData block)
 	{
+		this.block = block.block;
 		this.blockState = block.blockState;
 		this.tileEntity = block.tileEntity;
 	}
@@ -48,8 +58,18 @@ public class BlockData implements NBT
 		return this;
 	}
 
+	public Block getBlock()
+	{
+		return this.block;
+	}
+
 	public IBlockState getBlockState()
 	{
+		if (this.block != null && this.blockState == null)
+		{
+			return this.block.getDefaultState();
+		}
+
 		return this.blockState;
 	}
 
@@ -67,7 +87,8 @@ public class BlockData implements NBT
 	@Override
 	public void write(final NBTTagCompound tag)
 	{
-		tag.setInteger("id", OrbisCore.getRegistrar().getStateId(this.blockState));
+		tag.setBoolean("noState", this.blockState == null);
+		tag.setInteger("id", OrbisCore.getRegistrar().getStateId(this.getBlockState()));
 
 		final boolean hasTileEntity = this.tileEntity != null;
 		tag.setBoolean("hasTileEntity", hasTileEntity);
@@ -85,7 +106,16 @@ public class BlockData implements NBT
 	@Override
 	public void read(final NBTTagCompound tag)
 	{
-		this.blockState = OrbisCore.getRegistrar().getStateFromId(tag.getInteger("id"));
+		final boolean noState = tag.getBoolean("noState");
+
+		if (noState)
+		{
+			this.block = OrbisCore.getRegistrar().getStateFromId(tag.getInteger("id")).getBlock();
+		}
+		else
+		{
+			this.blockState = OrbisCore.getRegistrar().getStateFromId(tag.getInteger("id"));
+		}
 
 		final boolean hasTileEntity = tag.getBoolean("hasTileEntity");
 
@@ -117,7 +147,7 @@ public class BlockData implements NBT
 		if (obj instanceof BlockData)
 		{
 			final BlockData block = (BlockData) obj;
-			return this.blockState.equals(block.blockState) && (this.tileEntity == null && block.tileEntity == null
+			return this.block == block.block && this.blockState.equals(block.blockState) && (this.tileEntity == null && block.tileEntity == null
 					|| this.tileEntity != null && this.tileEntity.equals(block.tileEntity));
 		}
 

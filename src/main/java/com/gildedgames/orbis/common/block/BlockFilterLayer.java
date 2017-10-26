@@ -132,7 +132,7 @@ public class BlockFilterLayer implements NBT
 			replacementBlock = this.getRandom(options.getRandom(), world);
 		}
 
-		for (final BlockPos pos : shape.createShapeData(world))
+		for (final BlockPos.MutableBlockPos pos : shape.createShapeData(world))
 		{
 			final IBlockState state = world.getBlockState(pos);
 
@@ -151,7 +151,7 @@ public class BlockFilterLayer implements NBT
 				continue;
 			}
 
-			world.setBlockState(pos, replacementBlock.getBlockState(), 3);//TODO: Test for weird interactions
+			world.setBlockState(pos.toImmutable(), replacementBlock.getBlockState(), 3);//TODO: Test for weird interactions
 
 			final ChangeBlockEvent blockEvent = new ChangeBlockEvent(world, pos, options.getCreator());
 			MinecraftForge.EVENT_BUS.post(blockEvent);

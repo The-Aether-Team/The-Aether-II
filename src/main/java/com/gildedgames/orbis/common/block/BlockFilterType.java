@@ -27,7 +27,7 @@ public enum BlockFilterType
 				{
 					for (final BlockDataWithConditions block : blackListedBlocks)
 					{
-						if (block.getBlockState() == blockToFilter)
+						if (block.getBlockState() == blockToFilter || block.getBlock() == blockToFilter.getBlock())
 						{
 							return false;
 						}
@@ -45,7 +45,8 @@ public enum BlockFilterType
 				{
 					for (final BlockDataWithConditions block : requiredBlocks)
 					{
-						if (block.getBlockState() == blockToFilter && block.getRequiredCondition().isMet(random, world))
+						if ((block.getBlock() == blockToFilter.getBlock() || block.getBlockState() == blockToFilter) && block.getRequiredCondition()
+								.isMet(random, world))
 						{
 							return true;
 						}
