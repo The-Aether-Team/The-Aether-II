@@ -2,7 +2,6 @@ package com.gildedgames.orbis.client.renderers;
 
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
 import com.gildedgames.aether.api.orbis.region.IRegion;
-import com.gildedgames.aether.api.orbis.util.RegionHelp;
 import com.gildedgames.aether.common.util.helpers.BlockUtil;
 import com.gildedgames.orbis.client.renderers.blueprint.BlueprintRenderCache;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
@@ -18,6 +17,7 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
@@ -42,9 +42,9 @@ public class RenderBlueprint implements IWorldRenderer
 
 	private final BlueprintRenderCache cache;
 
-	//----------------------------------------------------------------------
-
 	private final TileEntityRendererDispatcher tileEntityRenderer;
+
+	//----------------------------------------------------------------------
 
 	private final World worldIn;
 
@@ -73,9 +73,13 @@ public class RenderBlueprint implements IWorldRenderer
 	 */
 	public int color = 0x0000FF;
 
+	private BlockPos lastMin;
+
 	private float rotval = 0.0f;
 
 	private int glIndex = -1;
+
+	private Iterable<BlockPos.MutableBlockPos> shapeData;
 
 	public RenderBlueprint(final Blueprint blueprint, final World world)
 	{
@@ -115,51 +119,47 @@ public class RenderBlueprint implements IWorldRenderer
 
 		GlStateManager.pushMatrix();
 
-		this.glIndex = GlStateManager.glGenLists(1);
+		this.glIndex = GLAllocation.generateDisplayLists(1);
 		GlStateManager.glNewList(this.glIndex, GL11.GL_COMPILE);
 
-		GlStateManager.disableLighting();
-		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GlStateManager.disableCull();
-
 		GlStateManager.color(1, 1, 1, 1);
-
-		final Iterable<BlockPos.MutableBlockPos> shapeData = this.blueprint.createShapeData(world);
 
 		final TextureManager textureManager = Minecraft.getMinecraft().renderEngine;
 		textureManager.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
 		buffer.begin(7, DefaultVertexFormats.BLOCK);
 
-		for (final BlockPos pos : shapeData)
+		for (final BlockPos pos : this.shapeData)
 		{
 			this.renderPos(pos, partialTicks);
 		}
 
 		Tessellator.getInstance().draw();
 
-		/** Render tile entities separately since they're done on their own
-		 * draw call with the tesselator **/
-		for (final BlockPos pos : shapeData)
+		/** TODO: Temp disabled te rendering because of strange bug when holding a blueprint and loading a world first time**/
+		/*final int pass = net.minecraftforge.client.MinecraftForgeClient.getRenderPass();
+
+		TileEntityRendererDispatcher.instance.preDrawBatch();
+
+		*//** Render tile entities separately since they're done on their own
+	 * draw call with the tesselator **//*
+		for (final BlockPos pos : this.shapeData)
 		{
-			GlStateManager.pushMatrix();
-			this.renderTileEntityIfPossible(pos, partialTicks);
-			GlStateManager.popMatrix();
+			this.renderTileEntityIfPossible(pos, partialTicks, pass);
 		}
 
-		GlStateManager.enableLighting();
-		GlStateManager.enableCull();
+		TileEntityRendererDispatcher.instance.drawBatch(pass);*/
 
 		GlStateManager.glEndList();
 
-		this.doGlobalRendering(world, partialTicks);
-
 		GlStateManager.popMatrix();
+
+		this.doGlobalRendering(world, partialTicks);
 	}
 
-	private void renderTileEntityIfPossible(final BlockPos pos, final float partialTicks)
+	private void renderTileEntityIfPossible(final BlockPos pos, final float partialTicks, final int pass)
 	{
-		if (!this.renderBlocks || !RegionHelp.contains(this.blueprint, pos))
+		if (!this.renderBlocks)
 		{
 			return;
 		}
@@ -174,9 +174,9 @@ public class RenderBlueprint implements IWorldRenderer
 			{
 				final TileEntity tileEntity = this.cache.getTileEntity(pos);
 
-				if (tileEntity != null && this.tileEntityRenderer.getSpecialRenderer(tileEntity) != null)
+				if (!tileEntity.shouldRenderInPass(pass))
 				{
-					this.tileEntityRenderer.renderTileEntityAt(tileEntity, pos.getX(), pos.getY(), pos.getZ(), partialTicks);//TODO: Partialticks?
+					TileEntityRendererDispatcher.instance.renderTileEntityAt(tileEntity, pos.getX(), pos.getY(), pos.getZ(), partialTicks);
 				}
 			}
 		}
@@ -184,24 +184,21 @@ public class RenderBlueprint implements IWorldRenderer
 
 	private void renderPos(final BlockPos pos, final float partialTicks)
 	{
-		if (!this.renderBlocks || !RegionHelp.contains(this.blueprint, pos))
+		if (!this.renderBlocks)
 		{
 			return;
 		}
 
 		final IBlockState state = this.cache.getBlockState(pos);
 
-		if (state != null && !BlockUtil.isAir(state) && !BlockUtil.isVoid(state))
+		if (state != null && !BlockUtil.isAir(state) && !BlockUtil.isVoid(state) && state.getRenderType() != EnumBlockRenderType.INVISIBLE
+				&& state.getRenderType() != EnumBlockRenderType.ENTITYBLOCK_ANIMATED)
 		{
 			//Thank you Ivorius for the rendering of blocks code <3333
-			GlStateManager.pushMatrix();
-
 			final IBakedModel modelBaked = this.blockRenderer.getModelForState(state);
 
 			final BlockRendererDispatcher blockrendererdispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
 			blockrendererdispatcher.getBlockModelRenderer().renderModel(this.cache, modelBaked, state, pos, buffer, true);
-
-			GlStateManager.popMatrix();
 		}
 	}
 
@@ -223,37 +220,7 @@ public class RenderBlueprint implements IWorldRenderer
 	@Override
 	public void render(final World world, final BlockPos pos, final float partialTicks)
 	{
-		/*if (!this.renderBlocks || !RegionHelp.contains(this.blueprint, pos))
-		{
-			return;
-		}
 
-		final IBlockState state = this.cache.getBlockState(pos);
-
-		if (state != null && !BlockUtil.isAir(state))
-		{
-			final Block block = state.getBlock();
-
-			if (block.hasTileEntity(state))
-			{
-				final TileEntity tileEntity = this.cache.getTileEntity(pos);
-
-				if (tileEntity != null && this.tileEntityRenderer.getSpecialRenderer(tileEntity) != null)
-				{
-					this.tileEntityRenderer.renderTileEntityAt(tileEntity, pos.getX(), pos.getY(), pos.getZ(), 1);//TODO: Partialticks?
-				}
-			}
-
-			//Thank you Ivorius for the rendering of blocks code <3333
-			GlStateManager.pushMatrix();
-
-			final IBakedModel modelBaked = this.blockRenderer.getModelForState(state);
-
-			final BlockRendererDispatcher blockrendererdispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
-			blockrendererdispatcher.getBlockModelRenderer().renderModel(this.cache, modelBaked, state, pos, buffer, true);
-
-			GlStateManager.popMatrix();
-		}*/
 	}
 
 	@Override
@@ -281,6 +248,12 @@ public class RenderBlueprint implements IWorldRenderer
 	@Override
 	public void doGlobalRendering(final World world, final float partialTicks)
 	{
+		if (this.lastMin == null)
+		{
+			this.lastMin = this.blueprint.getMin();
+			this.shapeData = this.blueprint.createShapeData(world);
+		}
+
 		if (this.glIndex == -1)
 		{
 			this.renderFully(world, partialTicks);
@@ -295,6 +268,13 @@ public class RenderBlueprint implements IWorldRenderer
 
 		if (this.useCamera)
 		{
+			if (!this.lastMin.equals(this.blueprint.getMin()))
+			{
+				GlStateManager.translate(this.blueprint.getMin().getX() - this.lastMin.getX(),
+						this.blueprint.getMin().getY() - this.lastMin.getY(),
+						this.blueprint.getMin().getZ() - this.lastMin.getZ());
+			}
+
 			GlStateManager.translate(-offsetPlayerX, -offsetPlayerY, -offsetPlayerZ);
 		}
 		else
@@ -326,7 +306,14 @@ public class RenderBlueprint implements IWorldRenderer
 			GlStateManager.translate(-this.blueprint.getWidth() / 2.f, 0, -this.blueprint.getLength() / 2.f); //not centered at y
 		}
 
+		GlStateManager.disableLighting();
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GlStateManager.disableCull();
+
 		GlStateManager.callList(this.glIndex);
+
+		GlStateManager.enableLighting();
+		GlStateManager.enableCull();
 
 		if (this.useCamera)
 		{
@@ -341,7 +328,8 @@ public class RenderBlueprint implements IWorldRenderer
 	{
 		if (this.glIndex != -1)
 		{
-			GlStateManager.glDeleteLists(this.glIndex, 1);
+			GLAllocation.deleteDisplayLists(this.glIndex, 1);
+			this.glIndex = -1;
 		}
 	}
 }

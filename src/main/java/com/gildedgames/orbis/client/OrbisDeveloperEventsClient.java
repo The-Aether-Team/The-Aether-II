@@ -8,6 +8,7 @@ import com.gildedgames.orbis.client.gui.GuiChoiceMenuPowers;
 import com.gildedgames.orbis.client.gui.GuiChoiceMenuSelectionTypes;
 import com.gildedgames.orbis.client.gui.GuiRightClickBlueprint;
 import com.gildedgames.orbis.client.renderers.AirSelectionRenderer;
+import com.gildedgames.orbis.common.network.packets.PacketOrbisDeveloperReach;
 import com.gildedgames.orbis.common.network.packets.PacketOrbisOpenGui;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.PlayerSelectionModule;
@@ -98,6 +99,8 @@ public class OrbisDeveloperEventsClient
 			{
 				prevShape = null;
 				player.getOrbisModule().setDeveloperReach(prevReach);
+
+				NetworkingAether.sendPacketToServer(new PacketOrbisDeveloperReach(prevReach));
 			}
 		}
 	}
@@ -175,6 +178,7 @@ public class OrbisDeveloperEventsClient
 			if (event.getDwheel() > 0)
 			{
 				player.getOrbisModule().setDeveloperReach(reach + 1);
+				NetworkingAether.sendPacketToServer(new PacketOrbisDeveloperReach(reach + 1));
 
 				event.setCanceled(true);
 			}
@@ -193,10 +197,13 @@ public class OrbisDeveloperEventsClient
 					final float distance = MathHelper.floor((float) Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ));
 
 					player.getOrbisModule().setDeveloperReach(distance);
+					NetworkingAether.sendPacketToServer(new PacketOrbisDeveloperReach(distance));
+
 					reach = player.getOrbisModule().getReach();
 				}
 
 				player.getOrbisModule().setDeveloperReach(reach - 1);
+				NetworkingAether.sendPacketToServer(new PacketOrbisDeveloperReach(reach - 1));
 
 				event.setCanceled(true);
 			}

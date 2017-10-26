@@ -1,6 +1,6 @@
 package com.gildedgames.orbis.client.gui.util;
 
-import com.gildedgames.orbis.client.gui.data.IText;
+import com.gildedgames.aether.api.util.IText;
 import com.gildedgames.orbis.client.gui.data.Text;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.client.util.rect.Rect;

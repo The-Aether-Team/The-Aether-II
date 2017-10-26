@@ -8,6 +8,7 @@ import com.google.common.collect.Maps;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -52,6 +53,42 @@ public class NBTFunnel
 		return NBTHelper.readBlockPos(this.tag.getCompoundTag(key));
 	}
 
+	public void setIntToStringMap(final String key, final Map<Integer, String> nbtMap)
+	{
+		final NBTTagList writtenKeys = new NBTTagList();
+		final NBTTagList writtenObjects = new NBTTagList();
+
+		for (final Map.Entry<Integer, String> entrySet : nbtMap.entrySet())
+		{
+			final int intKey = entrySet.getKey();
+			final String string = entrySet.getValue();
+
+			writtenKeys.appendTag(new NBTTagInt(intKey));
+			writtenObjects.appendTag(new NBTTagString(string));
+		}
+
+		this.tag.setTag(key + "_keys", writtenKeys);
+		this.tag.setTag(key + "_obj", writtenObjects);
+	}
+
+	public Map<Integer, String> getIntToStringMap(final String key)
+	{
+		final Map<Integer, String> readObjects = Maps.newHashMap();
+
+		final NBTTagList keys = this.tag.getTagList(key + "_keys", 3);
+		final NBTTagList objects = this.tag.getTagList(key + "_obj", 8);
+
+		for (int i = 0; i < keys.tagCount(); i++)
+		{
+			final int intKey = keys.getIntAt(i);
+			final String data = keys.getStringTagAt(i);
+
+			readObjects.put(intKey, data);
+		}
+
+		return readObjects;
+	}
+
 	public void setIntMap(final String key, final Map<Integer, ? extends NBT> nbtMap)
 	{
 		final NBTTagList writtenKeys = new NBTTagList();
@@ -70,7 +107,7 @@ public class NBTFunnel
 		this.tag.setTag(key + "_obj", writtenObjects);
 	}
 
-	public <T extends NBT> Map<Integer, T> getIntMap(final World world, final String key)
+	private <T extends NBT> Map<Integer, T> getIntMapInner(final World world, final String key)
 	{
 		final Map<Integer, T> readObjects = Maps.newHashMap();
 
@@ -82,10 +119,20 @@ public class NBTFunnel
 			final int intKey = keys.getIntAt(i);
 			final NBTTagCompound data = objects.getCompoundTagAt(i);
 
-			readObjects.put(intKey, NBTHelper.read(world, this.serializer, data));
+			readObjects.put(intKey, world == null ? NBTHelper.read(this.serializer, data) : NBTHelper.read(world, this.serializer, data));
 		}
 
 		return readObjects;
+	}
+
+	public <T extends NBT> Map<Integer, T> getIntMap(final String key)
+	{
+		return this.getIntMapInner(null, key);
+	}
+
+	public <T extends NBT> Map<Integer, T> getIntMap(final World world, final String key)
+	{
+		return this.getIntMapInner(world, key);
 	}
 
 	public void setList(final String key, final List<? extends NBT> nbtList)
@@ -128,6 +175,31 @@ public class NBTFunnel
 		}
 
 		return readObjects;
+	}
+
+	public List<String> getStringList(final String key)
+	{
+		final List<String> readObjects = Lists.newArrayList();
+		final NBTTagList nbtList = this.tag.getTagList(key, 8);
+
+		for (int i = 0; i < nbtList.tagCount(); i++)
+		{
+			readObjects.add(nbtList.getStringTagAt(i));
+		}
+
+		return readObjects;
+	}
+
+	public void setStringList(final String key, final List<String> stringList)
+	{
+		final NBTTagList writtenObjects = new NBTTagList();
+
+		for (final String string : stringList)
+		{
+			writtenObjects.appendTag(new NBTTagString(string));
+		}
+
+		this.tag.setTag(key, writtenObjects);
 	}
 
 }

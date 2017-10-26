@@ -139,10 +139,6 @@ public class PlayerOrbisModule extends PlayerAetherModule
 		{
 			NetworkingAether.sendPacketToPlayer(new PacketOrbisDeveloperReach(this.developerReach), (EntityPlayerMP) this.getEntity());
 		}
-		else
-		{
-			NetworkingAether.sendPacketToServer(new PacketOrbisDeveloperReach(this.developerReach));
-		}
 	}
 
 	@Override

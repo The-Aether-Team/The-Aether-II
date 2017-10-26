@@ -2,7 +2,9 @@ package com.gildedgames.orbis.client.renderers;
 
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
 import com.gildedgames.aether.api.orbis.region.IRegion;
+import com.gildedgames.aether.api.orbis.region.Region;
 import com.gildedgames.aether.api.orbis.shapes.IShape;
+import com.gildedgames.orbis.client.OrbisKeyBindings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -47,6 +49,10 @@ public class RenderShape implements IWorldRenderer
 
 	private World world;
 
+	private Iterable<BlockPos.MutableBlockPos> shapeData;
+
+	private BlockPos lastMin, lastMax;
+
 	public RenderShape(final World world)
 	{
 		this.world = world;
@@ -58,8 +64,22 @@ public class RenderShape implements IWorldRenderer
 		this.shape = shape;
 	}
 
+	public void setShape(final IShape shape)
+	{
+		this.shape = shape;
+		this.object = shape;
+	}
+
 	public void renderFully(final World world, final float partialTicks)
 	{
+		if (this.lastMin == null || !this.lastMin.equals(this.shape.getBoundingBox().getMin()) || !this.lastMax.equals(this.shape.getBoundingBox().getMax()))
+		{
+			this.lastMin = this.shape.getBoundingBox().getMin();
+			this.lastMax = this.shape.getBoundingBox().getMax();
+
+			this.shapeData = this.shape.createShapeData(world);
+		}
+
 		GlStateManager.pushMatrix();
 
 		final int color = this.useCustomColors ? this.colorGrid : 0xFFFFFF;
@@ -71,20 +91,11 @@ public class RenderShape implements IWorldRenderer
 		this.glIndex = GlStateManager.glGenLists(1);
 		GlStateManager.glNewList(this.glIndex, GL11.GL_COMPILE);
 
-		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GlStateManager.disableCull();
-		GlStateManager.disableLighting();
-
-		GlStateManager.enableBlend();
-		GlStateManager.disableAlpha();
-		GlStateManager.disableTexture2D();
-		GlStateManager.depthMask(false);
-
 		GlStateManager.color(red, green, blue, this.boxAlpha);
 
 		buffer.begin(7, DefaultVertexFormats.POSITION);
 
-		for (final BlockPos pos : this.shape.createShapeData(world))
+		for (final BlockPos pos : this.shapeData)
 		{
 			this.renderBox(pos, partialTicks);
 		}
@@ -92,19 +103,12 @@ public class RenderShape implements IWorldRenderer
 		Tessellator.getInstance().draw();
 
 		buffer.setTranslation(0, 0, 0);
-		GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
-		GlStateManager.enableDepth();
-		GlStateManager.enableLighting();
 
-		GlStateManager.depthMask(true);
-		GlStateManager.enableTexture2D();
-		GlStateManager.disableBlend();
-		GlStateManager.enableAlpha();
 		GlStateManager.glEndList();
 
-		this.doGlobalRendering(world, partialTicks);
-
 		GlStateManager.popMatrix();
+
+		this.doGlobalRendering(world, partialTicks);
 	}
 
 	public void renderBox(final BlockPos pos, final float partialTicks)
@@ -226,6 +230,11 @@ public class RenderShape implements IWorldRenderer
 	@Override
 	public IRegion getBoundingBox()
 	{
+		if (this.shape == null)
+		{
+			return Region.ORIGIN;
+		}
+
 		return this.shape.getBoundingBox();
 	}
 
@@ -249,6 +258,25 @@ public class RenderShape implements IWorldRenderer
 	@Override
 	public void doGlobalRendering(final World world, final float partialTicks)
 	{
+		if (this.shape == null)
+		{
+			return;
+		}
+
+		if (this.lastMin == null || !this.lastMin.equals(this.shape.getBoundingBox().getMin()) || !this.lastMax.equals(this.shape.getBoundingBox().getMax()))
+		{
+			if (this.lastMin != null)
+			{
+				GlStateManager.glDeleteLists(this.glIndex, 1);
+				this.glIndex = -1;
+			}
+
+			this.lastMin = this.shape.getBoundingBox().getMin();
+			this.lastMax = this.shape.getBoundingBox().getMax();
+
+			this.shapeData = this.shape.createShapeData(world);
+		}
+
 		if (this.glIndex == -1)
 		{
 			this.renderFully(world, partialTicks);
@@ -261,15 +289,53 @@ public class RenderShape implements IWorldRenderer
 
 		GlStateManager.pushMatrix();
 
+		if (!this.lastMin.equals(this.shape.getBoundingBox().getMin()))
+		{
+			GlStateManager.translate(this.shape.getBoundingBox().getMin().getX() - this.lastMin.getX(),
+					this.shape.getBoundingBox().getMin().getY() - this.lastMin.getY(),
+					this.shape.getBoundingBox().getMin().getZ() - this.lastMin.getZ());
+		}
+
 		GlStateManager.translate(-offsetPlayerX, -offsetPlayerY, -offsetPlayerZ);
+
+		GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
+
+		GlStateManager.disableCull();
+		GlStateManager.disableAlpha();
+		GlStateManager.disableLighting();
+		GlStateManager.depthMask(false);
+
+		if (OrbisKeyBindings.keyBindControl.isKeyDown())
+		{
+			GlStateManager.disableDepth();
+		}
+
+		GlStateManager.enableBlend();
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GlStateManager.disableTexture2D();
+
 		GlStateManager.callList(this.glIndex);
+
+		GlStateManager.enableTexture2D();
+		GlStateManager.disableBlend();
+
+		if (OrbisKeyBindings.keyBindControl.isKeyDown())
+		{
+			GlStateManager.enableDepth();
+		}
+
+		GlStateManager.depthMask(true);
+		GlStateManager.enableLighting();
+		GlStateManager.enableAlpha();
+		GlStateManager.enableCull();
+
 		GlStateManager.translate(0, 0, 0);
 
 		GlStateManager.popMatrix();
 
 		if (this.renderDimensionsAbove)
 		{
-			RenderUtil.renderDimensionsAbove(this.shape.getBoundingBox(), partialTicks);
+			//RenderUtil.renderDimensionsAbove(this.shape.getBoundingBox(), partialTicks);
 		}
 	}
 
@@ -284,6 +350,7 @@ public class RenderShape implements IWorldRenderer
 		if (this.glIndex != -1)
 		{
 			GlStateManager.glDeleteLists(this.glIndex, 1);
+			this.glIndex = -1;
 		}
 	}
 

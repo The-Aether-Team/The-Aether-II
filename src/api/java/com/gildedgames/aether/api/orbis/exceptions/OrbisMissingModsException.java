@@ -1,4 +1,4 @@
-package com.gildedgames.orbis.common.exceptions;
+package com.gildedgames.aether.api.orbis.exceptions;
 
 import java.util.Set;
 

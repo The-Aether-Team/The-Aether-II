@@ -12,6 +12,8 @@ import net.minecraft.world.World;
 public class Region implements IMutableRegion
 {
 
+	public static final IRegion ORIGIN = new Region(new BlockPos(0, 0, 0));
+
 	private World world;
 
 	private BlockPos min, max;

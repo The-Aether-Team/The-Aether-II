@@ -14,6 +14,7 @@ import com.gildedgames.orbis.client.renderers.RenderShape;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
@@ -34,6 +35,8 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 
 	private IWorldObjectGroup activeWorldShapes;
 
+	private RenderShape activeSelectionRender;
+
 	public static IChunkRendererCapability getChunkRenderer(final World world, final int chunkX, final int chunkZ)
 	{
 		final IChunkRendererCapability data = ChunkAttachment.get(world).getAttachment(new ChunkPos(chunkX, chunkZ), AetherCapabilities.CHUNK_RENDERER);
@@ -43,6 +46,7 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 
 	public void unload()
 	{
+		this.activeSelectionRender = null;
 		this.allRenders.clear();
 		this.playerRenderers.clear();
 	}
@@ -63,6 +67,8 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 		final BlockPos maxPos = new BlockPos(playerPos.getX() + blockDist, 256, playerPos.getZ() + blockDist);
 
 		final IRegion encompassing = new Region(minPos, maxPos);
+
+		GlStateManager.pushMatrix();
 
 		for (final IWorldRenderer renderer : this.allRenders)
 		{
@@ -91,6 +97,7 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 			}
 		}
 
+		GlStateManager.popMatrix();
 	}
 
 	public void load(final World world, final int chunkX, final int chunkZ)
@@ -181,37 +188,51 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 		final PlayerOrbisModule module = playerAether.getOrbisModule();
 		final IShape activeSelection = playerAether.getSelectionModule().getActiveSelection();
 
-		if (activeSelection != null && !playerAether.getSelectionModule().hasChanged())
+		if (this.activeSelectionRender == null)
 		{
-			return;
+			this.activeSelectionRender = new RenderShape(activeSelection);
+
+			this.activeSelectionRender.useCustomColors = true;
+
+			this.addPlayerRenderer(playerAether.getEntity().world, this.activeSelectionRender);
 		}
-
-		for (final IWorldRenderer renderer : this.playerRenderers)
+		else if (activeSelection != null)
 		{
-			this.removeRenderer(playerAether.getEntity().world, renderer);
+			this.activeSelectionRender.colorBorder = module.powers().getCurrentPower().getClientHandler().getShapeColor(module);
+			this.activeSelectionRender.colorGrid = module.powers().getCurrentPower().getClientHandler().getShapeColor(module);
+
+			this.activeSelectionRender.setShape(activeSelection);
 		}
-
-		this.playerRenderers.clear();
-
-		if (activeSelection != null && playerAether.getSelectionModule().hasChanged())
+		else
 		{
-			final RenderShape renderRegion = new RenderShape(activeSelection);//TODO: It used to copy the region, dunno why
-
-			renderRegion.useCustomColors = true;
-
-			renderRegion.colorBorder = module.powers().getCurrentPower().getClientHandler().getShapeColor(module);
-			renderRegion.colorGrid = module.powers().getCurrentPower().getClientHandler().getShapeColor(module);
-
-			this.addPlayerRenderer(playerAether.getEntity().world, renderRegion);
+			this.activeSelectionRender.setShape(null);
 		}
 
 		final List<IWorldRenderer> activeRenderers = playerAether.getOrbisModule().getActiveRenderers();
+		final List<IWorldRenderer> renderersToRemove = Lists.newArrayList();
+
+		for (final IWorldRenderer playerRenderer : this.playerRenderers)
+		{
+			if (!activeRenderers.contains(playerRenderer) && playerRenderer != this.activeSelectionRender)
+			{
+				renderersToRemove.add(playerRenderer);
+			}
+		}
+
+		for (final IWorldRenderer renderer : renderersToRemove)
+		{
+			this.removeRenderer(playerAether.getEntity().world, renderer);
+			this.playerRenderers.remove(renderer);
+		}
 
 		if (activeRenderers != null && !activeRenderers.isEmpty())
 		{
 			for (final IWorldRenderer renderer : activeRenderers)
 			{
-				this.addPlayerRenderer(playerAether.getEntity().world, renderer);
+				if (!this.playerRenderers.contains(renderer))
+				{
+					this.addPlayerRenderer(playerAether.getEntity().world, renderer);
+				}
 			}
 		}
 	}

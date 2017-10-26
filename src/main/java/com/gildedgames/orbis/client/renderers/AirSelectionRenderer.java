@@ -176,8 +176,6 @@ public class AirSelectionRenderer
 			renderRegion.boxAlpha = fadeMax;
 		}
 
-		//System.out.println(renderRegion.boxAlpha);
-
 		GlStateManager.pushMatrix();
 		GlStateManager.disableDepth();
 

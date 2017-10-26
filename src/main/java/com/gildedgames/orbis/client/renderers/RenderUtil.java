@@ -87,10 +87,11 @@ public class RenderUtil
 			fontrenderer.drawString(name, -fontrenderer.getStringWidth(name) / 2, 0, 553648127);
 			fontrenderer.drawString(name, -fontrenderer.getStringWidth(name) / 2, 0, -1);
 
+			GlStateManager.enableLighting();
+
 			GlStateManager.enableDepth();
 			GlStateManager.depthMask(true);
 
-			GlStateManager.enableLighting();
 			GlStateManager.disableBlend();
 			GlStateManager.popMatrix();
 

@@ -1,8 +1,8 @@
-package com.gildedgames.orbis.client.gui.data;
+package com.gildedgames.aether.api.util;
 
 import net.minecraft.util.text.ITextComponent;
 
-public interface IText
+public interface IText extends NBT
 {
 	ITextComponent component();
 

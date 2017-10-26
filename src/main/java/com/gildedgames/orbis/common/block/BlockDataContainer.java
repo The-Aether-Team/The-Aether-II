@@ -1,10 +1,10 @@
 package com.gildedgames.orbis.common.block;
 
+import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingModsException;
 import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.common.OrbisCore;
-import com.gildedgames.orbis.common.exceptions.OrbisMissingModsException;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

@@ -1,17 +1,20 @@
 package com.gildedgames.orbis.client.gui.data;
 
+import com.gildedgames.aether.api.util.IText;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 
 public class Text implements IText
 {
 
 	private static final FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
 
-	private final ITextComponent component;
+	private ITextComponent component;
 
-	private final float scale;
+	private float scale;
 
 	public Text(final ITextComponent component, final float scale)
 	{
@@ -53,5 +56,19 @@ public class Text implements IText
 	public float height()
 	{
 		return fontRenderer.FONT_HEIGHT;
+	}
+
+	@Override
+	public void write(final NBTTagCompound tag)
+	{
+		tag.setFloat("scale", this.scale);
+		tag.setString("text", this.component.getUnformattedText());
+	}
+
+	@Override
+	public void read(final NBTTagCompound tag)
+	{
+		this.scale = tag.getFloat("Scale");
+		this.component = new TextComponentString(tag.getString("text"));
 	}
 }

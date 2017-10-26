@@ -8,6 +8,7 @@ import com.gildedgames.orbis.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.client.renderers.RenderBlueprint;
 import com.gildedgames.orbis.client.renderers.RenderShape;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
+import com.gildedgames.orbis.common.data.BlueprintData;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.GodPowerBlueprint;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
@@ -29,6 +30,14 @@ public class GodPowerBlueprintClient implements IGodPowerClient
 	private final GodPowerBlueprint server;
 
 	private final GuiTexture icon;
+
+	private Blueprint blueprint;
+
+	private IWorldRenderer renderer;
+
+	private RenderShape renderShape;
+
+	private BlueprintData prevBlueprintData;
 
 	public GodPowerBlueprintClient(final GodPowerBlueprint server)
 	{
@@ -74,27 +83,39 @@ public class GodPowerBlueprintClient implements IGodPowerClient
 	{
 		final List<IWorldRenderer> renderers = Lists.newArrayList();
 
+		if (this.prevBlueprintData != this.server.getPlacingBlueprint())
+		{
+			this.renderer = null;
+			this.prevBlueprintData = this.server.getPlacingBlueprint();
+		}
+
 		if (this.server.getPlacingBlueprint() != null)
 		{
 			final BlockPos pos = RaytraceHelp.doOrbisRaytrace(module.getPlayer(), module.raytraceWithRegionSnapping());
 
 			final IRegion renderRegion = RotationHelp.regionFromCenter(pos, this.server.getPlacingBlueprint(), this.server.getPlacingRotation());
 
-			final Blueprint region = new Blueprint(world, renderRegion.getMin(), this.server.getPlacingRotation(), this.server.getPlacingBlueprint());
-			final IWorldRenderer renderer = new RenderBlueprint(region, world);
+			if (this.renderer == null)
+			{
+				this.blueprint = new Blueprint(world, renderRegion.getMin(), this.server.getPlacingRotation(), this.server.getPlacingBlueprint());
+				this.renderer = new RenderBlueprint(this.blueprint, world);
 
-			renderers.add(renderer);
+				this.renderShape = new RenderShape(this.blueprint);
 
-			final RenderShape shape = new RenderShape(region);
+				this.renderShape.useCustomColors = true;
 
-			shape.useCustomColors = true;
+				this.renderShape.colorBorder = SHAPE_COLOR;
+				this.renderShape.colorGrid = SHAPE_COLOR;
 
-			shape.colorBorder = SHAPE_COLOR;
-			shape.colorGrid = SHAPE_COLOR;
+				this.renderShape.boxAlpha = 0.1F;
+			}
+			else
+			{
+				this.blueprint.setPos(renderRegion.getMin());
+			}
 
-			shape.boxAlpha = 0.1F;
-
-			renderers.add(shape);
+			renderers.add(this.renderer);
+			renderers.add(this.renderShape);
 		}
 
 		return renderers;
