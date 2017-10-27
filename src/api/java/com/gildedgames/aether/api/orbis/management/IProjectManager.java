@@ -16,6 +16,12 @@ public interface IProjectManager
 {
 
 	/**
+	 * Called on server stop. Should be implemented to save
+	 * all project data.
+	 */
+	void flushProjects();
+
+	/**
 	 * Scans the directory this manager is attached to for any
 	 * projects. Project structure should be a single folder with
 	 * a hidden .project file inside which contains all the necessary

@@ -5,6 +5,8 @@ import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingDataException;
 import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingProjectException;
 import com.gildedgames.aether.api.orbis.management.*;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.util.helpers.FileHelper;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,8 +14,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import javax.annotation.Nullable;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 public class OrbisProjectManager implements IProjectManager
@@ -22,24 +26,34 @@ public class OrbisProjectManager implements IProjectManager
 
 	private final Map<IProjectIdentifier, IProject> idToProject = Maps.newHashMap();
 
+	private final List<String> acceptedFileExtensions = Lists.newArrayList();
+
 	public OrbisProjectManager(final File baseDirectory)
 	{
-		if (!baseDirectory.isDirectory())
-		{
-			throw new IllegalArgumentException("File passed into OrbisProjectManager is not a directory!");
-		}
-
 		if (!baseDirectory.exists() && !baseDirectory.mkdirs())
 		{
 			throw new RuntimeException("Base directory for OrbisProjectManager cannot be created!");
 		}
 
+		if (!baseDirectory.isDirectory())
+		{
+			throw new IllegalArgumentException("File passed into OrbisProjectManager is not a directory!");
+		}
+
 		this.baseDirectory = baseDirectory;
+
+		this.acceptedFileExtensions.add("blueprint");
 	}
 
 	private void cacheProject(final IProject project)
 	{
 		this.idToProject.put(project.getProjectIdentifier(), project);
+	}
+
+	@Override
+	public void flushProjects()
+	{
+		this.idToProject.values().forEach(this::saveProjectToDisk);
 	}
 
 	@Override
@@ -134,10 +148,46 @@ public class OrbisProjectManager implements IProjectManager
 	public IProject createProject(final String name, final IProjectIdentifier identifier)
 	{
 		final File file = new File(this.baseDirectory, name);
-		final IProject project = new OrbisProject(file, identifier, null);
+		final IProject project = new OrbisProject(file, identifier, this.acceptedFileExtensions);
+
+		this.saveProjectToDisk(project);
 
 		this.cacheProject(project);
 
 		return project;
 	}
+
+	private void saveProjectToDisk(final IProject project)
+	{
+		final File projectFile = new File(project.getLocation(), ".project");
+
+		try
+		{
+			if (projectFile.exists())
+			{
+				FileHelper.unhide(projectFile);
+			}
+
+			try (FileOutputStream out = new FileOutputStream(projectFile))
+			{
+				final NBTTagCompound tag = new NBTTagCompound();
+				final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
+
+				funnel.set("project", project);
+
+				CompressedStreamTools.writeCompressed(tag, out);
+			}
+			catch (final IOException e)
+			{
+				AetherCore.LOGGER.error("Failed to save Project to disk", e);
+			}
+
+			FileHelper.hide(projectFile);
+		}
+		catch (final IOException e)
+		{
+			AetherCore.LOGGER.error(e);
+		}
+	}
+
 }

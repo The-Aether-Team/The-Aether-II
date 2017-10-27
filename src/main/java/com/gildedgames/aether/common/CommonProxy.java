@@ -23,6 +23,8 @@ import com.gildedgames.orbis.common.block.BlockFilter;
 import com.gildedgames.orbis.common.block.BlockFilterLayer;
 import com.gildedgames.orbis.common.data.BlueprintData;
 import com.gildedgames.orbis.common.data.DataCondition;
+import com.gildedgames.orbis.common.data.management.DataIdentifier;
+import com.gildedgames.orbis.common.data.management.OrbisProject;
 import com.gildedgames.orbis.common.data.management.ProjectIdentifier;
 import com.gildedgames.orbis.common.data.management.ProjectMetadata;
 import com.gildedgames.orbis.common.data.shapes.EllipsoidShape;
@@ -87,6 +89,8 @@ public class CommonProxy implements IAetherServices
 		s.register(19, Text.class, new Instantiator<>(Text.class));
 		s.register(20, ProjectMetadata.class, new Instantiator<>(ProjectMetadata.class));
 		s.register(21, ProjectIdentifier.class, new Instantiator<>(ProjectIdentifier.class));
+		s.register(22, OrbisProject.class, new Instantiator<>(OrbisProject.class));
+		s.register(23, DataIdentifier.class, new Instantiator<>(DataIdentifier.class));
 	}
 
 	public void init(final FMLInitializationEvent event)

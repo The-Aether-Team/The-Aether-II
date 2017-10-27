@@ -60,12 +60,22 @@ public class OrbisProject implements IProject
 
 	/**
 	 * Should be used to create a new project rather than an existing one.
-	 * @param location
-	 * @param identifier
-	 * @param acceptedFileExtensions
+	 * @param location The location of the project.
+	 * @param identifier The unique identifier for the project.
+	 * @param acceptedFileExtensions The file extensions that this project accepts.
 	 */
 	public OrbisProject(final File location, final IProjectIdentifier identifier, final List<String> acceptedFileExtensions)
 	{
+		if (!location.exists() && !location.mkdirs())
+		{
+			throw new RuntimeException("Location for OrbisProject cannot be created!");
+		}
+
+		if (!location.isDirectory())
+		{
+			throw new IllegalArgumentException("Location file passed into OrbisProject is not a directory!");
+		}
+
 		this.location = location;
 		this.identifier = identifier;
 		this.acceptedFileExtensions = acceptedFileExtensions;
@@ -93,6 +103,12 @@ public class OrbisProject implements IProject
 
 		this.identifier = funnel.get("identifier");
 		this.display = funnel.getList("display");
+	}
+
+	@Override
+	public File getLocation()
+	{
+		return this.location;
 	}
 
 	@Override

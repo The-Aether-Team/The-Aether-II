@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.analytics.GAReporter;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.aether.TeleporterAether;
+import com.gildedgames.orbis.common.OrbisCore;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.DimensionManager;
@@ -117,12 +118,16 @@ public class AetherCore
 		DimensionsAether.onServerStopping(event);
 
 		AetherCore.SPAWN_REGISTRY.write();
+
+		OrbisCore.onServerStopping(event);
 	}
 
 	@EventHandler
 	public void serverStarted(final FMLServerStartedEvent event)
 	{
 		AetherCore.SPAWN_REGISTRY.read();
+
+		OrbisCore.onServerStarted(event);
 	}
 
 	@EventHandler

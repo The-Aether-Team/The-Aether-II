@@ -17,6 +17,11 @@ public interface IProject extends NBT
 {
 
 	/**
+	 * @return The location of this project.
+	 */
+	File getLocation();
+
+	/**
 	 * Sets the directory/location of this project.
 	 * @param file The location of this project.
 	 */

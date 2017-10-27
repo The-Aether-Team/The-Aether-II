@@ -1,6 +1,9 @@
 package com.gildedgames.aether.common.util.helpers;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class FileHelper
 {
@@ -25,6 +28,16 @@ public class FileHelper
 		}
 
 		return (path.delete());
+	}
+
+	public static void unhide(final File file) throws IOException
+	{
+		Files.setAttribute(Paths.get(file.getPath()), "dos:hidden", false);
+	}
+
+	public static void hide(final File file) throws IOException
+	{
+		Files.setAttribute(Paths.get(file.getPath()), "dos:hidden", true);
 	}
 
 }

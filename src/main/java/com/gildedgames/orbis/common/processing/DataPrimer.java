@@ -71,13 +71,13 @@ public class DataPrimer
 		{
 			final Region region = new Region(min, max);
 
-			for (final BlockPos iterPos : region.getMutableBlockPosInRegion())
+			for (final BlockPos.MutableBlockPos iterPos : region.getMutableBlockPosInRegion())
 			{
 				final BlockData block = container.get(iterPos.getX() - min.getX(), iterPos.getY() - min.getY(), iterPos.getZ() - min.getZ());
 
 				if (block != null)
 				{
-					this.create(block, iterPos, options);
+					this.create(block, iterPos.toImmutable(), options);
 				}
 			}
 		}

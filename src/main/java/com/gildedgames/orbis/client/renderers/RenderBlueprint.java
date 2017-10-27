@@ -308,12 +308,12 @@ public class RenderBlueprint implements IWorldRenderer
 
 		GlStateManager.disableLighting();
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GlStateManager.disableCull();
+		GlStateManager.enableCull();
 
 		GlStateManager.callList(this.glIndex);
 
 		GlStateManager.enableLighting();
-		GlStateManager.enableCull();
+		//GlStateManager.enableCull();
 
 		if (this.useCamera)
 		{

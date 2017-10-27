@@ -1,11 +1,11 @@
 package com.gildedgames.aether.common.network;
 
+import com.gildedgames.aether.common.network.util.IMessageMultipleParts;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public abstract class MessageHandlerServer<REQ extends IMessage, RES extends IMessage> implements IMessageHandler<REQ, RES>
+public abstract class MessageHandlerServer<REQ extends IMessage, RES extends IMessage> extends MessageHandler<REQ, RES>
 {
 	private final boolean executesOnGameThread;
 
@@ -32,14 +32,31 @@ public abstract class MessageHandlerServer<REQ extends IMessage, RES extends IMe
 		{
 			ctx.getServerHandler().player.getServerWorld().addScheduledTask(() ->
 			{
-				this.onMessage(message, ctx.getServerHandler().player);
+				if (message instanceof IMessageMultipleParts)
+				{
+					final IMessageMultipleParts messageParts = (IMessageMultipleParts) message;
+
+					this.processPart(message, messageParts, ctx.getServerHandler().player);
+				}
+				else
+				{
+					this.onMessage(message, ctx.getServerHandler().player);
+				}
 			});
 
 			return null;
 		}
 
+		if (message instanceof IMessageMultipleParts)
+		{
+			final IMessageMultipleParts messageParts = (IMessageMultipleParts) message;
+
+			return this.processPart(message, messageParts, ctx.getServerHandler().player);
+		}
+
 		return this.onMessage(message, ctx.getServerHandler().player);
 	}
 
+	@Override
 	public abstract RES onMessage(REQ message, EntityPlayer player);
 }
