@@ -84,6 +84,8 @@ public class NBTHelper
 			return tag;
 		}
 
+		tag.setBoolean("_null", false);
+
 		tag.setInteger("x", pos.getX());
 		tag.setInteger("y", pos.getY());
 		tag.setInteger("z", pos.getZ());
@@ -111,6 +113,8 @@ public class NBTHelper
 
 			return tag;
 		}
+
+		tag.setBoolean("_null", false);
 
 		tag.setInteger("x", pos.chunkXPos);
 		tag.setInteger("z", pos.chunkZPos);
@@ -146,6 +150,7 @@ public class NBTHelper
 			return tag;
 		}
 
+		tag.setBoolean("_null", false);
 		tag.setInteger("length", array.length);
 
 		int i = 0;
@@ -180,6 +185,7 @@ public class NBTHelper
 			return tag;
 		}
 
+		tag.setBoolean("_null", false);
 		tag.setInteger("id", serializer.serialize(nbt));
 
 		final NBTTagCompound data = new NBTTagCompound();
