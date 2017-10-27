@@ -65,7 +65,7 @@ public class NBTHelper
 
 	public static BlockPos readBlockPos(final NBTTagCompound tag)
 	{
-		if (tag == null || (tag.hasKey("_null") && tag.getBoolean("_null")))
+		if (tag == null || tag.getBoolean("_null") || !tag.hasKey("_null"))
 		{
 			return null;
 		}
@@ -93,7 +93,7 @@ public class NBTHelper
 
 	public static ChunkPos readChunkPos(final NBTTagCompound tag)
 	{
-		if (tag == null || (tag.hasKey("_null") && tag.getBoolean("_null")))
+		if (tag == null || tag.getBoolean("_null") || !tag.hasKey("_null"))
 		{
 			return null;
 		}
@@ -193,7 +193,7 @@ public class NBTHelper
 
 	public static <T extends NBT> T read(final World world, final IClassSerializer serializer, final NBTTagCompound tag)
 	{
-		if (tag.getBoolean("_null"))
+		if (tag == null || tag.getBoolean("_null") || !tag.hasKey("_null"))
 		{
 			return null;
 		}
@@ -208,7 +208,7 @@ public class NBTHelper
 
 	public static <T extends NBT> T read(final IClassSerializer serializer, final NBTTagCompound tag)
 	{
-		if (tag.getBoolean("_null"))
+		if (tag == null || tag.getBoolean("_null") || !tag.hasKey("_null"))
 		{
 			return null;
 		}
