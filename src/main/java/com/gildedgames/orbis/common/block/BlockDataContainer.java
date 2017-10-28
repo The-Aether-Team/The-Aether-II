@@ -1,6 +1,7 @@
 package com.gildedgames.orbis.common.block;
 
 import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingModsException;
+import com.gildedgames.aether.api.orbis.region.IDimensions;
 import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.AetherCore;
@@ -21,7 +22,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class BlockDataContainer implements NBT
+public class BlockDataContainer implements NBT, IDimensions
 {
 
 	private final World world;
@@ -102,16 +103,19 @@ public class BlockDataContainer implements NBT
 		this.data[index] = block;
 	}
 
+	@Override
 	public int getWidth()
 	{
 		return this.width;
 	}
 
+	@Override
 	public int getHeight()
 	{
 		return this.height;
 	}
 
+	@Override
 	public int getLength()
 	{
 		return this.length;
