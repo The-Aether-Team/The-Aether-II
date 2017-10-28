@@ -7,6 +7,6 @@ import java.io.File;
 public class OrbisLocations
 {
 
-	public static final File BLUEPRINTS = new File(Minecraft.getMinecraft().mcDataDir, "/orbis/blueprints");
+	public static final File BLUEPRINTS = new File(Minecraft.getMinecraft().mcDataDir, "/orbis/blueprints/");
 
 }
