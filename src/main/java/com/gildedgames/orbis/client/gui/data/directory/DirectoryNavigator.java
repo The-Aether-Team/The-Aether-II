@@ -126,7 +126,7 @@ public class DirectoryNavigator implements IDirectoryNavigator
 				try
 				{
 					final String parent = file.getCanonicalPath().replace(file.getName(), "");
-					final String currentDirParent = this.currentDirectory.getCanonicalPath().replace(file.getName(), "") + "/";
+					final String currentDirParent = this.currentDirectory.getCanonicalPath().replace(file.getName(), "") + File.separator;
 
 					if (file.getPath().equals(this.currentDirectory.getPath()) || !parent.equals(currentDirParent))
 					{
