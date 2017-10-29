@@ -139,6 +139,9 @@ public class RecipesAether
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_planks, 4), "X",
 				'X', new ItemStack(BlocksAether.skyroot_log));
 
+		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_planks, 2), "X",
+				'X', new ItemStack(BlocksAether.skyroot_log_wall));
+
 		//Skyroot Planks Decorative Revert
 		registerShapedRecipe(new ItemStack(BlocksAether.skyroot_planks, 1), "X",
 				'X', new ItemStack(BlocksAether.skyroot_decorative));
@@ -289,7 +292,7 @@ public class RecipesAether
 				'X', new ItemStack(ItemsAether.icestone));
 
 		// Icestone Bricks Uncraft
-		registerShapedRecipe(new ItemStack(ItemsAether.icestone,4), "X",
+		registerShapedRecipe(new ItemStack(ItemsAether.icestone,1), "X",
 				'X', new ItemStack(BlocksAether.icestone_bricks));
 
 		// Icestone Bricks Decorative Uncraft
