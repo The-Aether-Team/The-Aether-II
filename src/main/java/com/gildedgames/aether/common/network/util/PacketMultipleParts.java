@@ -45,7 +45,17 @@ public abstract class PacketMultipleParts implements IMessage, IMessageMultipleP
 
 		int dataSize;
 
-		final IMessage[] parts = new IMessage[packetTotalParts];
+		final IMessage[] parts = new IMessage[Math.max(1, packetTotalParts)];
+
+		/**
+		 * If packet is empty, simply return one part
+		 */
+		if (dataLength <= 0)
+		{
+			parts[0] = this.createPart(new byte[0]);
+
+			return parts;
+		}
 
 		while (dataLength > 0)
 		{
@@ -74,7 +84,7 @@ public abstract class PacketMultipleParts implements IMessage, IMessageMultipleP
 			}
 			catch (final IOException e)
 			{
-				AetherCore.LOGGER.debug(e);
+				AetherCore.LOGGER.error("Couldn't write output fragment for message parts!", e);
 			}
 
 			parts[partIndex] = this.createPart(byteStream.toByteArray());

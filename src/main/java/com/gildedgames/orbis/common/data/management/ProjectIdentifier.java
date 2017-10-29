@@ -4,6 +4,8 @@ import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.management.IProjectIdentifier;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.nbt.NBTTagCompound;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * A basic concrete implementation of IProjectIdentifier.
@@ -13,6 +15,11 @@ public class ProjectIdentifier implements IProjectIdentifier
 	private String projectId;
 
 	private String originalCreator;
+
+	private ProjectIdentifier()
+	{
+
+	}
 
 	public ProjectIdentifier(final String projectId, final String originalCreator)
 	{
@@ -50,6 +57,37 @@ public class ProjectIdentifier implements IProjectIdentifier
 		return this.originalCreator;
 	}
 
-	// TODO: Equals and hash implementations
+	@Override
+	public boolean equals(final Object obj)
+	{
+		if (obj == this)
+		{
+			return true;
+		}
+
+		if (obj instanceof IProjectIdentifier)
+		{
+			final IProjectIdentifier id = (IProjectIdentifier) obj;
+			final EqualsBuilder builder = new EqualsBuilder();
+
+			builder.append(this.getProjectId(), id.getProjectId());
+			builder.append(this.getOriginalCreator(), id.getOriginalCreator());
+
+			return builder.isEquals();
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final HashCodeBuilder builder = new HashCodeBuilder(17, 37);
+
+		builder.append(this.getProjectId());
+		builder.append(this.getOriginalCreator());
+
+		return builder.toHashCode();
+	}
 
 }

@@ -1,28 +1,38 @@
 package com.gildedgames.orbis.client.gui.util.directory.nodes;
 
+import com.gildedgames.aether.api.orbis.management.IProject;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.orbis.client.gui.data.DropdownElement;
 import com.gildedgames.orbis.client.gui.data.IDropdownElement;
 import com.gildedgames.orbis.client.gui.data.directory.IDirectoryNavigator;
 import com.gildedgames.orbis.client.gui.data.directory.IDirectoryNode;
+import com.gildedgames.orbis.client.gui.util.GuiDropdownList;
 import com.gildedgames.orbis.client.gui.util.GuiFactory;
 import com.gildedgames.orbis.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
+import com.gildedgames.orbis.common.network.packets.PacketOrbisRequestProject;
 import com.google.common.collect.Lists;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentString;
 
 import java.io.File;
 import java.util.Collection;
 import java.util.List;
 
-public class FolderNode implements IDirectoryNode
+public class ProjectNode implements IDirectoryNode
 {
-	private static final ResourceLocation TEXTURE = AetherCore.getResource("orbis/navigator/folder.png");
+	private static final ResourceLocation TEXTURE = AetherCore.getResource("orbis/navigator/project.png");
 
 	private final File file;
 
 	private final GuiTexture icon = new GuiTexture(Dim2D.build().area(32).flush(), TEXTURE);
 
-	public FolderNode(final File file)
+	private final IProject project;
+
+	public ProjectNode(final File file, final IProject project)
 	{
 		if (!file.isDirectory())
 		{
@@ -30,6 +40,12 @@ public class FolderNode implements IDirectoryNode
 		}
 
 		this.file = file;
+		this.project = project;
+	}
+
+	public IProject getProject()
+	{
+		return this.project;
 	}
 
 	@Override
@@ -47,19 +63,22 @@ public class FolderNode implements IDirectoryNode
 	@Override
 	public boolean isOnClient()
 	{
-		return true;
+		return this.project.getMetadata().isDownloaded();
 	}
 
 	@Override
 	public boolean isDownloading()
 	{
-		return false;
+		return this.project.getMetadata().isDownloading();
 	}
 
 	@Override
 	public void onOpen(final IDirectoryNavigator navigator)
 	{
-		navigator.openDirectory(this.file);
+		if (this.project.getMetadata().isDownloaded() || Minecraft.getMinecraft().isIntegratedServerRunning())
+		{
+			navigator.openDirectory(this.file);
+		}
 	}
 
 	@Override
@@ -73,7 +92,19 @@ public class FolderNode implements IDirectoryNode
 	{
 		final List<IDropdownElement> elements = Lists.newArrayList();
 
-		elements.add(GuiFactory.createDeleteFileDropdownElement(this.file, navigator));
+		if (!Minecraft.getMinecraft().isIntegratedServerRunning() && !this.isOnClient() && !this.isDownloading())
+		{
+			elements.add(new DropdownElement(new TextComponentString("Download"))
+			{
+				@Override
+				public void onClick(final GuiDropdownList list, final EntityPlayer player)
+				{
+					ProjectNode.this.project.getMetadata().setDownloading(true);
+					NetworkingAether.sendPacketToServer(new PacketOrbisRequestProject(ProjectNode.this.project.getProjectIdentifier()));
+				}
+			});
+		}
+
 		elements.add(GuiFactory.createCloseDropdownElement(this.file, navigator));
 
 		return elements;

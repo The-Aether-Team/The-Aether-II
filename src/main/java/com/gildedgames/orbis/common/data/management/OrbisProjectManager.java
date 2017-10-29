@@ -19,12 +19,15 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 public class OrbisProjectManager implements IProjectManager
 {
 	private final File baseDirectory;
 
 	private final Map<IProjectIdentifier, IProject> idToProject = Maps.newHashMap();
+
+	private final Map<String, IProject> directoryToProject = Maps.newHashMap();
 
 	private final List<String> acceptedFileExtensions = Lists.newArrayList();
 
@@ -45,9 +48,36 @@ public class OrbisProjectManager implements IProjectManager
 		this.acceptedFileExtensions.add("blueprint");
 	}
 
-	private void cacheProject(final IProject project)
+	public static boolean isProjectDirectory(final File file)
 	{
+		final File[] innerFiles = file.listFiles();
+
+		if (innerFiles != null)
+		{
+			/** Attempt to find the hidden .project file that contains
+			 * the metadata for the project **/
+			for (final File innerFile : innerFiles)
+			{
+				if (innerFile != null && !innerFile.isDirectory() && innerFile.getName().equals(".project"))
+				{
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	private void cacheProject(final String folderName, final IProject project)
+	{
+		this.directoryToProject.put(folderName, project);
 		this.idToProject.put(project.getProjectIdentifier(), project);
+	}
+
+	@Override
+	public File getLocation()
+	{
+		return this.baseDirectory;
 	}
 
 	@Override
@@ -56,14 +86,13 @@ public class OrbisProjectManager implements IProjectManager
 		this.idToProject.values().forEach(this::saveProjectToDisk);
 	}
 
-	@Override
-	public void scanAndCacheProjects()
+	private void walkProjects(final BiConsumer<File, File> action)
 	{
 		final File[] files = this.baseDirectory.listFiles();
 
 		if (files == null)
 		{
-			throw new RuntimeException("Base directory in OrbisProjectManager cannot list any files inside!");
+			return;
 		}
 
 		for (final File file : files)
@@ -81,26 +110,75 @@ public class OrbisProjectManager implements IProjectManager
 					{
 						if (innerFile != null && !innerFile.isDirectory() && innerFile.getName().equals(".project"))
 						{
-							/** When found, load and cache the project into memory **/
-							try (FileInputStream in = new FileInputStream(innerFile))
-							{
-								final NBTTagCompound tag = CompressedStreamTools.readCompressed(in);
-
-								final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
-
-								final IProject project = funnel.get("project");
-
-								this.cacheProject(project);
-							}
-							catch (final IOException e)
-							{
-								AetherCore.LOGGER.catching(e);
-							}
+							action.accept(innerFile, file);
 						}
 					}
 				}
 			}
 		}
+	}
+
+	@Override
+	public void refreshCache()
+	{
+		final List<IProjectIdentifier> foundProjects = Lists.newArrayList();
+
+		this.walkProjects((innerFile, file) ->
+		{
+			try (FileInputStream in = new FileInputStream(innerFile))
+			{
+				final NBTTagCompound tag = CompressedStreamTools.readCompressed(in);
+				final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
+
+				final IProject project = funnel.get("project");
+
+				foundProjects.add(project.getProjectIdentifier());
+			}
+			catch (final IOException e)
+			{
+				AetherCore.LOGGER.catching(e);
+			}
+		});
+
+		final List<IProjectIdentifier> projectsToRemove = Lists.newArrayList();
+
+		this.idToProject.keySet().forEach(p ->
+		{
+			if (!foundProjects.contains(p))
+			{
+				projectsToRemove.add(p);
+			}
+		});
+
+		projectsToRemove.forEach(this.idToProject::remove);
+	}
+
+	@Override
+	public void scanAndCacheProjects()
+	{
+		this.walkProjects((innerFile, file) ->
+		{
+			/** When found, load and cache the project into memory **/
+			try (FileInputStream in = new FileInputStream(innerFile))
+			{
+				final NBTTagCompound tag = CompressedStreamTools.readCompressed(in);
+
+				final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
+
+				final IProject project = funnel.get("project");
+
+				project.setLocation(file);
+				project.setAcceptedFileExtensions(this.acceptedFileExtensions);
+
+				project.loadAndCacheData();
+
+				this.cacheProject(file.getName(), project);
+			}
+			catch (final IOException e)
+			{
+				AetherCore.LOGGER.catching(e);
+			}
+		});
 	}
 
 	@Override
@@ -111,7 +189,21 @@ public class OrbisProjectManager implements IProjectManager
 
 	@Nullable
 	@Override
-	public IProject findProject(final IProjectIdentifier identifier) throws OrbisMissingProjectException
+	public <T extends IProject> T findProject(final String folderName) throws OrbisMissingProjectException
+	{
+		final IProject project = this.directoryToProject.get(folderName);
+
+		if (project == null)
+		{
+			throw new OrbisMissingProjectException(folderName);
+		}
+
+		return (T) project;
+	}
+
+	@Nullable
+	@Override
+	public <T extends IProject> T findProject(final IProjectIdentifier identifier) throws OrbisMissingProjectException
 	{
 		final IProject project = this.idToProject.get(identifier);
 
@@ -120,12 +212,39 @@ public class OrbisProjectManager implements IProjectManager
 			throw new OrbisMissingProjectException(identifier);
 		}
 
-		return project;
+		return (T) project;
 	}
 
 	@Nullable
 	@Override
-	public IProjectData findData(final IDataIdentifier identifier) throws OrbisMissingDataException, OrbisMissingProjectException
+	public <T extends IData> T findData(final IProject project, final File file) throws OrbisMissingDataException, OrbisMissingProjectException
+	{
+		try
+		{
+			final boolean isInProject = file.getCanonicalPath().startsWith(project.getLocation().getCanonicalPath() + File.separator);
+
+			if (isInProject)
+			{
+				final String dataLocation = file.getCanonicalPath().replace(project.getLocation().getCanonicalPath() + File.separator, "");
+
+				final int dataId = project.getCache().getDataId(dataLocation);
+
+				final IData data = project.getCache().getData(dataId);
+
+				return (T) data;
+			}
+		}
+		catch (final IOException e)
+		{
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public <T extends IData> T findData(final IDataIdentifier identifier) throws OrbisMissingDataException, OrbisMissingProjectException
 	{
 		final IProject project = this.findProject(identifier.getProjectIdentifier());
 
@@ -134,27 +253,107 @@ public class OrbisProjectManager implements IProjectManager
 			throw new NullPointerException("Project is null when trying to find data!");
 		}
 
-		final IProjectData data = project.getCachedData(identifier.getDataId());
+		final IData data = project.getCache().getData(identifier.getDataId());
 
 		if (data == null)
 		{
 			throw new OrbisMissingDataException(identifier);
 		}
 
-		return data;
+		return (T) data;
+	}
+
+	@Nullable
+	@Override
+	public <T extends IDataMetadata> T findMetadata(final IDataIdentifier identifier) throws OrbisMissingDataException, OrbisMissingProjectException
+	{
+		final IProject project = this.findProject(identifier.getProjectIdentifier());
+
+		if (project == null)
+		{
+			throw new NullPointerException("Project is null when trying to find data!");
+		}
+
+		final IDataMetadata data = project.getCache().getMetadata(identifier.getDataId());
+
+		if (data == null)
+		{
+			throw new OrbisMissingDataException(identifier);
+		}
+
+		return (T) data;
 	}
 
 	@Override
-	public IProject createProject(final String name, final IProjectIdentifier identifier)
+	public <T extends IProject> T createAndSaveProject(final String name, final IProjectIdentifier identifier)
 	{
 		final File file = new File(this.baseDirectory, name);
 		final IProject project = new OrbisProject(file, identifier, this.acceptedFileExtensions);
 
 		this.saveProjectToDisk(project);
+		this.cacheProject(name, project);
 
-		this.cacheProject(project);
+		return (T) project;
+	}
 
-		return project;
+	@Override
+	public <T extends IProject> T saveProjectIfDoesntExist(final String name, final IProject project)
+	{
+		final File location = new File(this.baseDirectory, name);
+
+		final IProject existing = this.idToProject.get(project.getProjectIdentifier());
+
+		if (existing != null && existing.getLocation().exists())
+		{
+			/**
+			 * Check if project already exists and it has the same
+			 * "last changed" date. If so, move that project to the
+			 * requested folder.
+			 *
+			 * Then return so new project instance isn't cached.
+			 */
+			if (existing.getMetadata().getLastChanged().equals(project.getMetadata().getLastChanged()))
+			{
+				if (!existing.getLocation().equals(location))
+				{
+					if (!location.exists() || location.delete())
+					{
+						if (existing.getLocation().renameTo(location))
+						{
+							this.directoryToProject.remove(existing.getLocation().getName());
+
+							if (existing.getLocation().delete())
+							{
+								existing.setLocation(location);
+
+								this.directoryToProject.put(name, existing);
+							}
+						}
+						else
+						{
+							throw new RuntimeException("Could not rename project folder. Abort!");
+						}
+					}
+				}
+
+				return (T) existing;
+			}
+		}
+
+		if (!location.exists())
+		{
+			if (!location.mkdirs())
+			{
+				throw new RuntimeException("Location for Project cannot be created!");
+			}
+		}
+
+		project.setLocation(location);
+
+		this.saveProjectToDisk(project);
+		this.cacheProject(name, project);
+
+		return (T) existing;
 	}
 
 	private void saveProjectToDisk(final IProject project)

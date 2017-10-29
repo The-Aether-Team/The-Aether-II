@@ -301,7 +301,7 @@ public class Region implements IMutableRegion
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Iterable<BlockPos.MutableBlockPos> createShapeData(final World world)
+	public Iterable<BlockPos.MutableBlockPos> createShapeData()
 	{
 		return BlockPos.getAllInBoxMutable(this.min, this.max);
 	}
@@ -325,7 +325,7 @@ public class Region implements IMutableRegion
 	{
 		if (this.data == null || this.dataChanged)
 		{
-			this.data = this.createShapeData(null);
+			this.data = this.createShapeData();
 		}
 
 		return this.data;

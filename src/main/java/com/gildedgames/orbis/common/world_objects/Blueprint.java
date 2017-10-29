@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.orbis.IWorldRenderer;
 import com.gildedgames.aether.api.orbis.region.AbstractRegion;
 import com.gildedgames.aether.api.orbis.region.IMutableRegion;
 import com.gildedgames.aether.api.orbis.region.IRegion;
+import com.gildedgames.aether.api.orbis.region.IRotateable;
 import com.gildedgames.aether.api.orbis.util.OrbisRotation;
 import com.gildedgames.aether.api.orbis.util.RegionHelp;
 import com.gildedgames.aether.api.orbis.util.RotationHelp;
@@ -18,7 +19,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class Blueprint extends AbstractRegion implements IWorldObject, IMutableRegion
+public class Blueprint extends AbstractRegion implements IWorldObject, IMutableRegion, IRotateable
 {
 	private final World world;
 
@@ -38,7 +39,7 @@ public class Blueprint extends AbstractRegion implements IWorldObject, IMutableR
 	public Blueprint(final World world, final IRegion region)
 	{
 		this.world = world;
-		this.data = new BlueprintData(world, region);
+		this.data = new BlueprintData(region);
 
 		this.setBounds(region);
 	}
@@ -60,11 +61,13 @@ public class Blueprint extends AbstractRegion implements IWorldObject, IMutableR
 		this.setPos(pos);
 	}
 
+	@Override
 	public BlueprintData getData()
 	{
 		return this.data;
 	}
 
+	@Override
 	public OrbisRotation getRotation()
 	{
 		return this.rotation;
@@ -201,7 +204,7 @@ public class Blueprint extends AbstractRegion implements IWorldObject, IMutableR
 
 		this.rotation = OrbisRotation.valueOf(tag.getString("rotation"));
 
-		this.data = data.get(this.world, "data");
+		this.data = data.get("data");
 
 		this.max = RegionHelp.getMax(this.min, this.getWidth(), this.getHeight(), this.getLength());
 

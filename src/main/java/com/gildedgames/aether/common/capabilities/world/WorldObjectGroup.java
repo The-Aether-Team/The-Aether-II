@@ -7,9 +7,6 @@ import com.gildedgames.aether.api.orbis.IWorldObjectGroupObserver;
 import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.api.orbis.util.RegionHelp;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisWorldObjectAdd;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisWorldObjectRemove;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
@@ -61,11 +58,6 @@ public class WorldObjectGroup implements IWorldObjectGroup
 	@Override
 	public <T extends IWorldObject> void setObject(final int id, final T object)
 	{
-		if (this.world.isRemote)
-		{
-			NetworkingAether.sendPacketToServer(new PacketOrbisWorldObjectAdd(this.world, this, object));
-		}
-
 		this.idToObject.put(id, object);
 
 		for (final IWorldObjectGroupObserver observer : this.observers)
@@ -90,11 +82,6 @@ public class WorldObjectGroup implements IWorldObjectGroup
 	public boolean removeObject(final int id)
 	{
 		final IWorldObject object = this.idToObject.get(id);
-
-		if (this.world.isRemote)
-		{
-			NetworkingAether.sendPacketToServer(new PacketOrbisWorldObjectRemove(this.world, this, object));
-		}
 
 		this.idToObject.remove(id);
 

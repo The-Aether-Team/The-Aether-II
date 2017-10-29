@@ -35,7 +35,19 @@ public class SimpleSerializer implements IClassSerializer
 			throw new NullPointerException();
 		}
 
-		return this.serialIDToClass.inverse().get(obj);
+		int key = -1;
+
+		try
+		{
+			key = this.serialIDToClass.inverse().get(obj);
+		}
+		catch (final NullPointerException e)
+		{
+			e.printStackTrace();
+			System.out.println("Something went wrong! Looks like you haven't registered the object you're trying to serialize");
+		}
+
+		return key;
 	}
 
 	@Override

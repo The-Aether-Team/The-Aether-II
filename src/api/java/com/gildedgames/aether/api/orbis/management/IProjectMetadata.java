@@ -1,37 +1,45 @@
 package com.gildedgames.aether.api.orbis.management;
 
-import com.gildedgames.aether.api.util.IText;
-import com.gildedgames.aether.api.util.NBT;
+import java.time.LocalDateTime;
 
-import java.util.List;
-
-public interface IProjectMetadata extends NBT
+public interface IProjectMetadata extends IMetadata
 {
+	/**
+	 * @return Whether or not the project has been downloaded to the client.
+	 */
+	boolean isDownloaded();
 
 	/**
-	 * Used for displaying this metadata to users in the GUI.
-	 * @return The text that will be displayed.
+	 * @param downloaded Whether or not the project has been downloaded to the client.
 	 */
-	List<IText> getMetadataDisplay();
+	void setDownloaded(boolean downloaded);
 
 	/**
-	 * If the project manager cannot find the required dependencies,
-	 * this file cannot be used.
-	 * @return The data files that this data requires to function.
+	 * @return Whether or not the project is in the process of downloading to the client.
 	 */
-	List<IDataIdentifier> getDependencies();
+	boolean isDownloading();
 
 	/**
-	 * @return An identifier that signals which project this data is attached to,
-	 * as well as its internal data id.
+	 * @param downloading Whether or not the project is in the process of downloading to the client.
 	 */
-	IDataIdentifier getIdentifier();
+	void setDownloading(boolean downloading);
 
 	/**
-	 * Sets an identifier that signals which project this data is attached to,
-	 * as well as its internal data id.
-	 * @param projectIdentifier The project identifier
+	 * Very important that this is managed properly so that clients
+	 * that connect to a server know when their local projects are
+	 * no longer up to date.
+	 *
+	 * Whenever a change is made to the project, the date and time
+	 * should be set.
+	 *
+	 * @return The date and time this project was last changed.
 	 */
-	void setIdentifier(IDataIdentifier projectIdentifier);
+	LocalDateTime getLastChanged();
 
+	/**
+	 * Sets the internal "last changed" date.
+	 *
+	 * @param lastChanged The last time this project was changed.
+	 */
+	void setLastChanged(LocalDateTime lastChanged);
 }

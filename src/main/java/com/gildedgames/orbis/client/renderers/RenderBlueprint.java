@@ -251,7 +251,7 @@ public class RenderBlueprint implements IWorldRenderer
 		if (this.lastMin == null)
 		{
 			this.lastMin = this.blueprint.getMin();
-			this.shapeData = this.blueprint.createShapeData(world);
+			this.shapeData = this.blueprint.createShapeData();
 		}
 
 		if (this.glIndex == -1)

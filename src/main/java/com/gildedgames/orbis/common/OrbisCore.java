@@ -1,12 +1,18 @@
 package com.gildedgames.orbis.common;
 
 import com.gildedgames.aether.api.orbis.management.IProjectManager;
+import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.common.data.management.OrbisProjectManager;
-import com.gildedgames.orbis.common.data.management.ProjectIdentifier;
+import com.gildedgames.orbis.common.network.packets.PacketOrbisSendProjectListing;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import java.io.File;
 
@@ -17,8 +23,59 @@ public class OrbisCore
 
 	private static IProjectManager projectManager;
 
+	@SubscribeEvent
+	public static void onPlayerLogin(final PlayerEvent.PlayerLoggedInEvent event)
+	{
+		/**
+		 * Will only send if the server is a dedicated server.
+		 * This ensures that on singleplayer, the client uses the same
+		 * directory/data as the integrated server (instead of having to
+		 * "download" data from the integrated server).
+		 */
+		if (isServer() && event.player.getServer() != null && event.player.getServer().isDedicatedServer())
+		{
+			NetworkingAether.sendPacketToPlayer(new PacketOrbisSendProjectListing(), (EntityPlayerMP) event.player);
+		}
+	}
+
+	public static void startProjectManager()
+	{
+		if (projectManager != null)
+		{
+			return;
+		}
+
+		if (isClient())
+		{
+			final ServerData data = Minecraft.getMinecraft().getCurrentServerData();
+
+			if (data != null)
+			{
+				projectManager = new OrbisProjectManager(new File(Minecraft.getMinecraft().mcDataDir, "/orbis/" + data.serverIP + "/projects/"));
+			}
+		}
+
+		if (projectManager == null)
+		{
+			projectManager = new OrbisProjectManager(new File(DimensionManager.getCurrentSaveRootDirectory(), "/orbis/projects/"));
+		}
+
+		projectManager.scanAndCacheProjects();
+	}
+
+	public static void stopProjectManager()
+	{
+		projectManager.flushProjects();
+		projectManager = null;
+	}
+
 	public static IProjectManager getProjectManager()
 	{
+		if (projectManager == null)
+		{
+			startProjectManager();
+		}
+
 		return projectManager;
 	}
 
@@ -39,13 +96,11 @@ public class OrbisCore
 
 	public static void onServerStopping(final FMLServerStoppingEvent event)
 	{
-		projectManager.flushProjects();
+		stopProjectManager();
 	}
 
 	public static void onServerStarted(final FMLServerStartedEvent event)
 	{
-		projectManager = new OrbisProjectManager(new File(DimensionManager.getCurrentSaveRootDirectory(), "/orbis/projects/"));
-
-		projectManager.createProject("test_project", new ProjectIdentifier("test", "kingbdogz"));
+		startProjectManager();
 	}
 }

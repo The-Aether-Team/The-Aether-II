@@ -142,7 +142,10 @@ public class DirectoryNavigator implements IDirectoryNavigator
 
 				final IDirectoryNode node = this.nodeFactory.createFrom(file, extension);
 
-				this.nodesInCurrentDirectory.add(node);
+				if (node != null)
+				{
+					this.nodesInCurrentDirectory.add(node);
+				}
 			});
 		}
 		catch (final IOException e)

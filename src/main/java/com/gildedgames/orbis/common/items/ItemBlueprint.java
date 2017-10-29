@@ -1,8 +1,15 @@
 package com.gildedgames.orbis.common.items;
 
+import com.gildedgames.aether.api.io.NBTFunnel;
+import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingDataException;
+import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingProjectException;
+import com.gildedgames.aether.api.orbis.management.IDataIdentifier;
+import com.gildedgames.aether.api.orbis.management.IDataMetadata;
 import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.orbis.util.OrbisRotation;
 import com.gildedgames.aether.api.orbis.util.RotationHelp;
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.orbis.common.OrbisCore;
 import com.gildedgames.orbis.common.data.BlueprintData;
 import com.gildedgames.orbis.common.data.CreationData;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
@@ -19,7 +26,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.io.File;
 import java.util.List;
 
 public class ItemBlueprint extends Item
@@ -31,26 +37,30 @@ public class ItemBlueprint extends Item
 		this.setHasSubtypes(true);
 	}
 
-	public static void setBlueprintPath(final ItemStack stack, final File file)
+	public static void setBlueprint(final ItemStack stack, final IDataIdentifier id)
 	{
 		if (stack.getTagCompound() == null)
 		{
 			stack.setTagCompound(new NBTTagCompound());
 		}
 
-		stack.getTagCompound().setString("path", file.getPath());
+		final NBTFunnel funnel = AetherCore.io().createFunnel(stack.getTagCompound());
+
+		funnel.set("blueprint_id", id);
 	}
 
-	public static File getBlueprintPath(final ItemStack stack)
+	public static IDataIdentifier getBlueprintId(final ItemStack stack)
 	{
-		if (stack.getTagCompound() == null || !stack.getTagCompound().hasKey("path"))
+		if (stack.getTagCompound() == null || !stack.getTagCompound().hasKey("blueprint_id"))
 		{
 			return null;
 		}
 
-		final File file = new File(stack.getTagCompound().getString("path"));
+		final NBTFunnel funnel = AetherCore.io().createFunnel(stack.getTagCompound());
 
-		return file;
+		final IDataIdentifier id = funnel.get("blueprint_id");
+
+		return id;
 	}
 
 	@Override
@@ -84,22 +94,19 @@ public class ItemBlueprint extends Item
 	@Override
 	public void addInformation(final ItemStack stack, final EntityPlayer par2EntityPlayer, final List<String> creativeList, final boolean par4)
 	{
-		final File file = ItemBlueprint.getBlueprintPath(stack);
 
-		if (file != null)
-		{
-
-		}
 	}
 
 	@Override
 	public String getItemStackDisplayName(final ItemStack stack)
 	{
-		final File file = ItemBlueprint.getBlueprintPath(stack);
+		final IDataIdentifier id = ItemBlueprint.getBlueprintId(stack);
 
-		if (file != null)
+		if (id != null)
 		{
-			return file.getName().replace(".blueprint", "");
+			final IDataMetadata data = OrbisCore.getProjectManager().findMetadata(id);
+
+			return data.getName();
 		}
 
 		return super.getItemStackDisplayName(stack);
@@ -114,7 +121,21 @@ public class ItemBlueprint extends Item
 	@Override
 	public void onUpdate(final ItemStack stack, final World worldIn, final Entity entityIn, final int itemSlot, final boolean isSelected)
 	{
+		try
+		{
+			ItemBlueprint.getBlueprintId(stack);
+		}
+		catch (OrbisMissingProjectException | OrbisMissingDataException e)
+		{
+			AetherCore.LOGGER.error("Blueprint itemstack could not find its data!", e);
 
+			if (entityIn instanceof EntityPlayer)
+			{
+				final EntityPlayer player = (EntityPlayer) entityIn;
+
+				player.inventory.setInventorySlotContents(itemSlot, ItemStack.EMPTY);
+			}
+		}
 	}
 
 }

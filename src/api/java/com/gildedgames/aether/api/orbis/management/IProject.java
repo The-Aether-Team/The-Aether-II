@@ -1,6 +1,5 @@
 package com.gildedgames.aether.api.orbis.management;
 
-import com.gildedgames.aether.api.util.IText;
 import com.gildedgames.aether.api.util.NBT;
 
 import java.io.File;
@@ -55,42 +54,24 @@ public interface IProject extends NBT
 	IProjectIdentifier getProjectIdentifier();
 
 	/**
-	 * Used for displaying this project's metadata to users in the GUI.
-	 * @return
+	 * Used for displaying information about this project to the user.
+	 * @return The project's metadata.
 	 */
-	List<IText> getMetadataDisplay();
+	IProjectMetadata getMetadata();
 
 	/**
-	 * Fetches the cached IProjectData reference with the provided dataId.
-	 * @param dataId
-	 * @return
+	 * @return The cache for this project, if it's currently loaded.
+	 * Returns null if the cache is not loaded, in which case you should
+	 * call loadAndCacheData()
 	 */
-	IProjectData getCachedData(int dataId);
+	IProjectCache getCache();
 
 	/**
-	 * Fetched the cached IProjectMetadata reference that is attached to the
-	 * IProjectData object found via the provided dataId.
-	 * @param dataId
-	 * @return
+	 * Sets the cache internal to the project. Used when sending
+	 * cache over packets to a player then setting it to a project
+	 * on the client.
 	 */
-	IProjectMetadata getCachedMetadata(int dataId);
-
-	/**
-	 * Saves the data to the project and provides it with a data id internal
-	 * to the project. This is where the project should get the provided data's
-	 * metadata and call IProjectMetadata.setDataId()
-	 * @param data
-	 */
-	void saveNewData(IProjectData data, String location);
-
-	/**
-	 * Used to set an existing data's file path inside of the project. This shouldn't
-	 * be used to ACTUALLY move the file, but instead simply handle the mapped data
-	 * inside of the project so it knows where each data file is stored.
-	 * @param dataId
-	 * @param location
-	 */
-	void setDataLocation(int dataId, String location);
+	void setCache(IProjectCache cache);
 
 	/**
 	 * Loads the data inside of the project and also fetches its
@@ -103,16 +84,6 @@ public interface IProject extends NBT
 	 * in case data files have been moved around.
 	 */
 	void loadAndCacheData();
-
-	/**
-	 * Clears the loaded cache to free up memory. Should be called
-	 * when the project is not in use.
-	 *
-	 * It's recommended you don't clear the metadata cache since
-	 * that might still be used by directory navigators and other
-	 * interfaces.
-	 */
-	void clearDataCache();
 
 	/**
 	 * @return Whether or not the dependencies of this project (such as mods) are met.

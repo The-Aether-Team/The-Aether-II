@@ -71,16 +71,6 @@ public class PlayerSelectionTypesModule extends PlayerAetherModule
 		return this.selectionTypes[this.currentSelectionTypeIndex];
 	}
 
-	public void setCurrentSelectionType(int powerIndex)
-	{
-		this.currentSelectionTypeIndex = powerIndex;
-
-		if (this.getWorld().isRemote)
-		{
-			NetworkingAether.sendPacketToServer(new PacketOrbisChangeSelectionType(this.currentSelectionTypeIndex));
-		}
-	}
-
 	public void setCurrentSelectionType(final Class<? extends ISelectionType> clazz)
 	{
 		int foundIndex = -1;
@@ -104,6 +94,16 @@ public class PlayerSelectionTypesModule extends PlayerAetherModule
 			{
 				NetworkingAether.sendPacketToServer(new PacketOrbisChangeSelectionType(this.currentSelectionTypeIndex));
 			}
+		}
+	}
+
+	public void setCurrentSelectionType(int powerIndex)
+	{
+		this.currentSelectionTypeIndex = powerIndex;
+
+		if (this.getWorld().isRemote)
+		{
+			NetworkingAether.sendPacketToServer(new PacketOrbisChangeSelectionType(this.currentSelectionTypeIndex));
 		}
 	}
 
@@ -152,6 +152,7 @@ public class PlayerSelectionTypesModule extends PlayerAetherModule
 		}
 
 		tag.setTag("selectionTypes", modules);
+		tag.setInteger("currentSelectionTypeIndex", this.currentSelectionTypeIndex);
 	}
 
 	@Override
@@ -163,5 +164,7 @@ public class PlayerSelectionTypesModule extends PlayerAetherModule
 		{
 			s.read(modules);
 		}
+
+		this.currentSelectionTypeIndex = tag.getInteger("currentSelectionTypeIndex");
 	}
 }

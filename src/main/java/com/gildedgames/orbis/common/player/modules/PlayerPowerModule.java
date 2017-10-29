@@ -78,6 +78,16 @@ public class PlayerPowerModule extends PlayerAetherModule
 		return this.powers[this.currentPowerIndex];
 	}
 
+	public void setCurrentPower(int powerIndex)
+	{
+		this.currentPowerIndex = powerIndex;
+
+		if (this.getWorld().isRemote)
+		{
+			NetworkingAether.sendPacketToServer(new PacketOrbisChangePower(this.currentPowerIndex));
+		}
+	}
+
 	public void setCurrentPower(final Class<? extends IGodPower> clazz)
 	{
 		int foundIndex = -1;
@@ -101,16 +111,6 @@ public class PlayerPowerModule extends PlayerAetherModule
 			{
 				NetworkingAether.sendPacketToServer(new PacketOrbisChangePower(this.currentPowerIndex));
 			}
-		}
-	}
-
-	public void setCurrentPower(int powerIndex)
-	{
-		this.currentPowerIndex = powerIndex;
-
-		if (this.getWorld().isRemote)
-		{
-			NetworkingAether.sendPacketToServer(new PacketOrbisChangePower(this.currentPowerIndex));
 		}
 	}
 
@@ -164,6 +164,7 @@ public class PlayerPowerModule extends PlayerAetherModule
 		}
 
 		tag.setTag("powers", modules);
+		tag.setInteger("currentPowerIndex", this.currentPowerIndex);
 	}
 
 	@Override
@@ -175,5 +176,7 @@ public class PlayerPowerModule extends PlayerAetherModule
 		{
 			power.read(modules);
 		}
+
+		this.currentPowerIndex = tag.getInteger("currentPowerIndex");
 	}
 }

@@ -1,5 +1,6 @@
 package com.gildedgames.orbis.client.gui.util.directory;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.gui.data.Text;
 import com.gildedgames.orbis.client.gui.data.directory.IDirectoryNavigator;
 import com.gildedgames.orbis.client.gui.data.directory.IDirectoryNode;
@@ -9,7 +10,9 @@ import com.gildedgames.orbis.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.client.util.rect.Pos2D;
 import com.gildedgames.orbis.common.util.InputHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import org.apache.commons.io.FilenameUtils;
@@ -19,6 +22,12 @@ import java.io.IOException;
 
 public class GuiDirectoryNode extends GuiFrame
 {
+	private static final ResourceLocation TICK_TEXTURE = AetherCore.getResource("orbis/navigator/tick.png");
+
+	private static final ResourceLocation CROSS_TEXTURE = AetherCore.getResource("orbis/navigator/cross.png");
+
+	private static final ResourceLocation DOWNLOADING_TEXTURE = AetherCore.getResource("orbis/navigator/downloading.png");
+
 	public static int WIDTH = 40, HEIGHT = 54;
 
 	private final IDirectoryNode directoryNode;
@@ -26,6 +35,12 @@ public class GuiDirectoryNode extends GuiFrame
 	private final IDirectoryNavigator navigator;
 
 	private final GuiDirectoryViewer viewer;
+
+	private final GuiTexture tick_icon = new GuiTexture(Dim2D.build().width(10).height(12).flush(), TICK_TEXTURE);
+
+	private final GuiTexture cross_icon = new GuiTexture(Dim2D.build().width(9).height(9).flush(), CROSS_TEXTURE);
+
+	private final GuiTexture downloading_icon = new GuiTexture(Dim2D.build().width(9).height(9).flush(), DOWNLOADING_TEXTURE);
 
 	public long lastClickTime = System.currentTimeMillis();
 
@@ -57,14 +72,37 @@ public class GuiDirectoryNode extends GuiFrame
 
 		this.icon.dim().mod().x(WIDTH / 2).addX(1).centerX(true).flush();
 
+		this.cross_icon.dim().mod().x(WIDTH / 2).addX(3).y(HEIGHT / 2).addY(-11).centerX(true).flush();
+		this.tick_icon.dim().mod().x(WIDTH / 2).addX(3).y(HEIGHT / 2).addY(-11).centerX(true).flush();
+		this.downloading_icon.dim().mod().x(WIDTH / 2).addX(3).y(HEIGHT / 2).addY(-11).centerX(true).flush();
+
+		this.cross_icon.setVisible(false);
+		this.tick_icon.setVisible(false);
+		this.downloading_icon.setVisible(false);
+
 		this.addChild(this.icon);
 		this.addChild(this.nameplate);
+
+		this.addChild(this.cross_icon);
+		this.addChild(this.tick_icon);
+		this.addChild(this.downloading_icon);
 	}
 
 	@Override
 	public void preDraw()
 	{
-
+		if (Minecraft.getMinecraft().isIntegratedServerRunning())
+		{
+			this.tick_icon.setVisible(false);
+			this.cross_icon.setVisible(false);
+			this.downloading_icon.setVisible(false);
+		}
+		else
+		{
+			this.tick_icon.setVisible(this.directoryNode.isOnClient());
+			this.cross_icon.setVisible(!this.directoryNode.isOnClient() && !this.directoryNode.isDownloading());
+			this.downloading_icon.setVisible(this.directoryNode.isDownloading() && !this.directoryNode.isOnClient());
+		}
 	}
 
 	@Override

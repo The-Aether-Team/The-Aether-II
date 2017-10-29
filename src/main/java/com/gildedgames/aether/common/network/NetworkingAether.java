@@ -56,6 +56,11 @@ public class NetworkingAether
 		instance.registerMessage(PacketSetItemStack.HandlerServer.class, PacketSetItemStack.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketOrbisChangeSelectionType.HandlerServer.class, PacketOrbisChangeSelectionType.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketOrbisFilterShape.HandlerServer.class, PacketOrbisFilterShape.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketOrbisRequestProject.HandlerServer.class, PacketOrbisRequestProject.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketOrbisRequestProjectListing.HandlerServer.class, PacketOrbisRequestProjectListing.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketSaveWorldObjectToProject.HandlerServer.class, PacketSaveWorldObjectToProject.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketRequestCreateProject.HandlerServer.class, PacketRequestCreateProject.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketDeleteFile.HandlerServer.class, PacketDeleteFile.class, discriminant++, Side.SERVER);
 
 		// C L I E N T
 		instance.registerMessage(PacketEquipment.HandlerClient.class, PacketEquipment.class, discriminant++, Side.CLIENT);
@@ -70,6 +75,11 @@ public class NetworkingAether
 		instance.registerMessage(PacketOrbisDeveloperMode.HandlerClient.class, PacketOrbisDeveloperMode.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketOrbisWorldObjectManager.HandlerClient.class, PacketOrbisWorldObjectManager.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketOrbisDeveloperReach.HandlerClient.class, PacketOrbisDeveloperReach.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketOrbisSendProject.HandlerClient.class, PacketOrbisSendProject.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketOrbisSendProjectListing.HandlerClient.class, PacketOrbisSendProjectListing.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketOrbisWorldObjectRemove.HandlerClient.class, PacketOrbisWorldObjectRemove.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketOrbisWorldObjectAdd.HandlerClient.class, PacketOrbisWorldObjectAdd.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketDeleteFile.HandlerClient.class, PacketDeleteFile.class, discriminant++, Side.CLIENT);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 	}

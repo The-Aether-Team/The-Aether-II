@@ -27,6 +27,27 @@ public interface IDirectoryNode
 	GuiTexture getIcon();
 
 	/**
+	 * For interaction with server directories.
+	 *
+	 * Will determine whether or not the node is present
+	 * on the client (downloaded). If not, it will display
+	 * a cross icon next to the node. Alternatively, it'll show
+	 * a tick if it is present.
+	 * @return Whether or not the node is present on the client.
+	 */
+	boolean isOnClient();
+
+	/**
+	 * For interaction with server directories.
+	 *
+	 * Will determine whether or not the node is downloading currently.
+	 * If not, it will display a cross icon next to the node.
+	 * Alternatively, it'll show a down arrow if it is downloading.
+	 * @return Whether or not the node is downloading currently.
+	 */
+	boolean isDownloading();
+
+	/**
 	 * Listener method for when a directory controller opens this
 	 * Ui File.
 	 * @param navigator The directory controller that is opening this file
