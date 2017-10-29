@@ -119,35 +119,17 @@ public class OrbisDeveloperEventsClient
 			{
 				event.setCanceled(true);
 
-				final BlockPos pos = OrbisRaytraceHelp.raytraceNoSnapping(player.getEntity());
-
-				final PlayerSelectionModule selectionModule = player.getSelectionModule();
-
 				final IShape selectedShape = player.getOrbisModule().getSelectedRegion();
 
-				final EntityPlayer entity = player.getEntity();
-
-				final int x = MathHelper.floor(entity.posX);
-				final int y = MathHelper.floor(entity.posY);
-				final int z = MathHelper.floor(entity.posZ);
-
-				if (selectedShape instanceof Blueprint && module.powers().getCurrentPower() == module.powers().getBlueprintPower())
+				if (selectedShape == null ||
+					module.powers().getCurrentPower().getShapeSelector().onRightClickShape(module, selectedShape, event))
 				{
-					final boolean playerInside = selectedShape.contains(x, y, z) || selectedShape.contains(x, MathHelper.floor(entity.posY + entity.height), z);
+					final PlayerSelectionModule selectionModule = module.getPlayer().getSelectionModule();
 
-					if (player.getEntity().getEntityWorld().isRemote && !playerInside)
-					{
-						if (System.currentTimeMillis() - GuiRightClickBlueprint.lastCloseTime > 200)
-						{
-							Minecraft.getMinecraft().displayGuiScreen(new GuiRightClickBlueprint((Blueprint) selectedShape));
-						}
-					}
-				}
-				else
-				{
 					if (!event.isButtonstate() && selectionModule.getActiveSelection() != null
 							|| event.isButtonstate() && selectionModule.getActiveSelection() == null)
 					{
+						final BlockPos pos = OrbisRaytraceHelp.raytraceNoSnapping(module.getEntity());
 						selectionModule.setActiveSelectionCorner(pos);
 					}
 				}

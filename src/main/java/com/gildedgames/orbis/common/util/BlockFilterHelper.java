@@ -208,7 +208,6 @@ public class BlockFilterHelper
 
 	/**
 	 * The default Delete layer
-	 * @author Emile
 	 *
 	 */
 	public static class BlockDeleteFilter extends BlockFilter

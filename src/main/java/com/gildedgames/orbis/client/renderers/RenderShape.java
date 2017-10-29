@@ -24,7 +24,7 @@ public class RenderShape implements IWorldRenderer
 
 	private final static VertexBuffer buffer = Tessellator.getInstance().getBuffer();//new WorldRendererColorReplacer(2097152);
 
-	private final static List<IWorldRenderer> subRenderers = new ArrayList<IWorldRenderer>();
+	private final static List<IWorldRenderer> subRenderers = new ArrayList<>();
 
 	private final Minecraft mc = Minecraft.getMinecraft();
 

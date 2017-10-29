@@ -2,6 +2,7 @@ package com.gildedgames.orbis.client.gui;
 
 import com.gildedgames.aether.api.orbis.IWorldObject;
 import com.gildedgames.aether.api.orbis.IWorldObjectManager;
+import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.orbis.region.Region;
 import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
@@ -15,41 +16,30 @@ import com.gildedgames.orbis.common.block.BlockFilter;
 import com.gildedgames.orbis.common.network.packets.PacketOrbisFilterShape;
 import com.gildedgames.orbis.common.network.packets.PacketOrbisWorldObjectRemove;
 import com.gildedgames.orbis.common.util.BlockFilterHelper;
-import com.gildedgames.orbis.common.world_objects.Blueprint;
+import com.gildedgames.orbis.common.world_objects.WorldRegion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
 
 import java.io.IOException;
 
-public class GuiRightClickBlueprint extends GuiFrame
+public class GuiRightClickSelector extends GuiFrame
 {
-	public static long lastCloseTime;
+	private final WorldRegion region;
 
-	private final Blueprint blueprint;
-
-	public GuiRightClickBlueprint(final Blueprint blueprint)
+	public GuiRightClickSelector(final WorldRegion region)
 	{
 		super(Dim2D.flush());
 
-		this.blueprint = blueprint;
+		this.region = region;
 	}
 
 	@Override
 	public void init()
 	{
 		this.addChild(new GuiDropdownList(Pos2D.flush(this.width / 2, this.height / 2),
-				new DropdownElement(new TextComponentString("Edit"))
-				{
-					@Override
-					public void onClick(final GuiDropdownList list, final EntityPlayer player)
-					{
-						Minecraft.getMinecraft().displayGuiScreen(new GuiViewProjects(GuiRightClickBlueprint.this.blueprint));
-					}
-				},
-				GuiRightClickElements.remove(blueprint),
-				GuiRightClickElements.fillWithVoid(blueprint),
-				GuiRightClickElements.copy(blueprint),
+				GuiRightClickElements.delete(this.region),
+				GuiRightClickElements.copy(this.region),
 				GuiRightClickElements.close()));
 	}
 

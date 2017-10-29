@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.MouseEvent;
 
 public class ShapeSelectorInvalid implements IShapeSelector
 {
@@ -24,5 +25,11 @@ public class ShapeSelectorInvalid implements IShapeSelector
 	public void onSelect(final PlayerOrbisModule module, final IShape selectedShape, final World world)
 	{
 
+	}
+
+	@Override
+	public boolean onRightClickShape(PlayerOrbisModule module, IShape selectedShape, MouseEvent event)
+	{
+		return false;
 	}
 }

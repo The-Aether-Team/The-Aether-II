@@ -1,6 +1,5 @@
 package com.gildedgames.orbis.client.player.godmode;
 
-import com.gildedgames.aether.api.orbis.IWorldRenderer;
 import com.gildedgames.orbis.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import net.minecraft.world.World;
@@ -20,6 +19,6 @@ public interface IGodPowerClient
 
 	int getShapeColor(PlayerOrbisModule module);
 
-	List<IWorldRenderer> getActiveRenderers(PlayerOrbisModule module, World world);
+	List getActiveRenderers(PlayerOrbisModule module, World world);
 
 }

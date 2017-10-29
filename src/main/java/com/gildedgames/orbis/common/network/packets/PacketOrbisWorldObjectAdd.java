@@ -56,6 +56,8 @@ public class PacketOrbisWorldObjectAdd extends PacketMultipleParts
 
 	public static void onMessage(final PacketOrbisWorldObjectAdd message, final EntityPlayer player)
 	{
+		//TODO: This assumes the player sending this message is in the world we want to add the World Object
+		//Clients cannot send a packet requestion a change in a different dimension.
 		final IWorldObject object = message.funnel.get(player.world, "worldObject");
 
 		final IWorldObjectManager manager = WorldObjectManager.get(player.world);

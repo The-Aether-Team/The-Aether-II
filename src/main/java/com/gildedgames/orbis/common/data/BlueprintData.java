@@ -35,6 +35,12 @@ public class BlueprintData implements IDimensions, NBT, IData
 		this.dataContainer = new BlockDataContainer(region);
 	}
 
+	public BlueprintData(final BlockDataContainer container)
+	{
+		this();
+		this.dataContainer = container;
+	}
+
 	public BlockDataContainer getBlockDataContainer()
 	{
 		return this.dataContainer;

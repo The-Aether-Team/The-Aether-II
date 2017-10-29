@@ -42,7 +42,9 @@ public class PacketOrbisWorldObjectRemove implements IMessage
 
 	public static void onMessage(final PacketOrbisWorldObjectRemove message, final EntityPlayer player)
 	{
-		final IWorldObjectManager manager = WorldObjectManager.get(DimensionManager.getWorld(message.dimensionId));
+		//TODO: This assumes the player sending this message is in the world we want to add the World Object
+		//Clients cannot send a packet requestion a change in a different dimension.
+		final IWorldObjectManager manager = WorldObjectManager.get(player.world);
 		final IWorldObjectGroup group = manager.getGroup(message.groupId);
 
 		group.removeObject(message.objectId);

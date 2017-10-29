@@ -21,6 +21,8 @@ public class ItemModelsOrbis
 	private static void registerModels()
 	{
 		registerItemModels(ItemsOrbis.blueprint, "orbis/blueprint");
+
+		registerItemModels(ItemsOrbis.blockdata, "orbis/blueprint");
 	}
 
 	private static void registerItemModels(final Block block, final String path)

@@ -89,7 +89,7 @@ public class GodPowerBlueprintClient implements IGodPowerClient
 			this.prevBlueprintData = this.server.getPlacingBlueprint();
 		}
 
-		if (this.server.getPlacingBlueprint() != null)
+		if (this.server.getPlacingBlueprint() != null )
 		{
 			final BlockPos pos = RaytraceHelp.doOrbisRaytrace(module.getPlayer(), module.raytraceWithRegionSnapping());
 

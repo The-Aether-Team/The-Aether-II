@@ -4,10 +4,8 @@ import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.orbis.util.OrbisRotation;
 import com.gildedgames.aether.api.orbis.util.RotationHelp;
-import com.gildedgames.aether.api.util.NBTHelper;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.common.block.BlockDataContainer;
-import com.gildedgames.orbis.common.data.BlueprintData;
 import com.gildedgames.orbis.common.data.CreationData;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.processing.DataPrimer;
@@ -21,8 +19,6 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.io.File;
 
 public class ItemBlockDataContainer extends Item
 {

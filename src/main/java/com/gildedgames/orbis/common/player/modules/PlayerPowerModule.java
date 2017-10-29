@@ -25,6 +25,8 @@ public class PlayerPowerModule extends PlayerAetherModule
 
 	private final GodPowerReplace replacePower;
 
+	private final GodPowerSelect selectPower;
+
 	private int currentPowerIndex;
 
 	public PlayerPowerModule(final PlayerAether playerAether)
@@ -36,6 +38,7 @@ public class PlayerPowerModule extends PlayerAetherModule
 		this.deletePower = new GodPowerDelete();
 		this.replacePower = new GodPowerReplace();
 		this.blueprintPower = new GodPowerBlueprint();
+		this.selectPower = new GodPowerSelect();
 
 		final Collection<IGodPower> powers = new ArrayList<>();
 
@@ -44,6 +47,7 @@ public class PlayerPowerModule extends PlayerAetherModule
 		powers.add(this.deletePower);
 		powers.add(this.replacePower);
 		powers.add(this.blueprintPower);
+		powers.add(this.selectPower);
 
 		this.powers = powers.toArray(new IGodPower[powers.size()]);
 	}
@@ -72,6 +76,8 @@ public class PlayerPowerModule extends PlayerAetherModule
 	{
 		return this.blueprintPower;
 	}
+
+	public GodPowerSelect getSelectPower() { return this.selectPower;}
 
 	public IGodPower getCurrentPower()
 	{

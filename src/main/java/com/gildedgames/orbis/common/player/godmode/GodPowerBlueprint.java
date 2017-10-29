@@ -7,7 +7,9 @@ import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.orbis.client.player.godmode.GodPowerBlueprintClient;
 import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
 import com.gildedgames.orbis.common.OrbisCore;
+import com.gildedgames.orbis.common.block.BlockDataContainer;
 import com.gildedgames.orbis.common.data.BlueprintData;
+import com.gildedgames.orbis.common.items.ItemBlockDataContainer;
 import com.gildedgames.orbis.common.items.ItemBlueprint;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.selectors.ShapeSelectorBlueprint;
@@ -27,7 +29,9 @@ public class GodPowerBlueprint implements IGodPower
 
 	private GodPowerBlueprintClient clientHandler;
 
-	private IDataIdentifier placingBlueprintId;
+	private BlueprintData placingBlueprint;
+
+	private ItemStack previousStack;
 
 	public GodPowerBlueprint()
 	{
@@ -46,12 +50,7 @@ public class GodPowerBlueprint implements IGodPower
 
 	public BlueprintData getPlacingBlueprint()
 	{
-		if (this.placingBlueprintId == null)
-		{
-			return null;
-		}
-
-		return OrbisCore.getProjectManager().findData(this.placingBlueprintId);
+		return this.placingBlueprint;
 	}
 
 	@Override
@@ -71,18 +70,22 @@ public class GodPowerBlueprint implements IGodPower
 	{
 		final ItemStack stack = player.getHeldItemMainhand();
 
-		if (stack.getItem() instanceof ItemBlueprint)
+		if (this.previousStack != stack)
 		{
-			final IDataIdentifier id = ItemBlueprint.getBlueprintId(stack);
-
-			if ((this.placingBlueprintId == null || !this.placingBlueprintId.equals(id)) && id != null)
+			this.previousStack = stack;
+			if (stack.getItem() instanceof ItemBlueprint)
 			{
-				this.placingBlueprintId = id;
+				this.placingBlueprint = OrbisCore.getProjectManager().findData(ItemBlueprint.getBlueprintId(stack));
 			}
-		}
-		else
-		{
-			this.placingBlueprintId = null;
+			else if (stack.getItem() instanceof ItemBlockDataContainer)
+			{
+				final BlockDataContainer container = ItemBlockDataContainer.getDatacontainer(player.world, stack);
+				this.placingBlueprint = new BlueprintData(container);
+			}
+			else
+			{
+				this.placingBlueprint = null;
+			}
 		}
 	}
 

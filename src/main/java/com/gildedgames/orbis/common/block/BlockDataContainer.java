@@ -3,6 +3,7 @@ package com.gildedgames.orbis.common.block;
 import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingModsException;
 import com.gildedgames.aether.api.orbis.region.IDimensions;
 import com.gildedgames.aether.api.orbis.region.IRegion;
+import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.util.helpers.BlockUtil;
@@ -16,6 +17,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -33,6 +35,12 @@ public class BlockDataContainer implements NBT, IDimensions
 	{
 
 	}
+
+	private BlockDataContainer(World world)
+	{
+
+	}
+
 
 	private BlockDataContainer(final NBTTagCompound tag)
 	{
@@ -56,6 +64,24 @@ public class BlockDataContainer implements NBT, IDimensions
 	public BlockDataContainer(final IRegion region)
 	{
 		this(region.getWidth(), region.getHeight(), region.getLength());
+	}
+
+	public static BlockDataContainer fromShape(World world, IShape shape)
+	{
+		IRegion bounding = shape.getBoundingBox();
+		int minx = bounding.getMin().getX();
+		int miny = bounding.getMin().getY();
+		int minz = bounding.getMin().getZ();
+		BlockDataContainer container = new BlockDataContainer(bounding.getWidth(), bounding.getHeight(), bounding.getLength());
+		for (BlockPos pos : shape.getShapeData())
+		{
+			BlockData block = new BlockData();
+			block.getDataFrom(pos, world);
+
+			BlockPos tr = pos.add(-minx, -miny, -minz);
+			container.set(block, tr);
+		}
+		return container;
 	}
 
 	public int getVolume()

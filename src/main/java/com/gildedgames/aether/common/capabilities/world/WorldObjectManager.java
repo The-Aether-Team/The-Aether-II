@@ -9,10 +9,12 @@ import com.gildedgames.aether.common.AetherCore;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.Capability;
 
 import java.util.Collection;
@@ -38,6 +40,23 @@ public class WorldObjectManager implements IWorldObjectManager
 	{
 		this.world = world;
 	}
+
+	public static IWorldObjectManager get(final int dimId, EntityPlayer player)
+	{
+		if (player.world.isRemote)
+		{
+			if (player.dimension == dimId)
+			{
+				return get(player.world);
+			}
+			return null;
+		}
+		else
+		{
+			return get(DimensionManager.getWorld(dimId));
+		}
+	}
+
 
 	public static IWorldObjectManager get(final World world)
 	{
