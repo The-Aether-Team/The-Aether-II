@@ -51,7 +51,8 @@ public class OrbisCore
 
 			if (data != null)
 			{
-				projectManager = new OrbisProjectManager(new File(Minecraft.getMinecraft().mcDataDir, "/orbis/" + data.serverIP + "/projects/"));
+				projectManager = new OrbisProjectManager(
+						new File(Minecraft.getMinecraft().mcDataDir, "/orbis/" + data.serverIP.replace(":", "_") + "/projects/"));
 			}
 		}
 
