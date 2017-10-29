@@ -234,11 +234,23 @@ public class ItemModelsAether
 				.add(BlockSkyrootDecorative.TILES.getMeta(), "tiles")
 				.add(BlockSkyrootDecorative.TILES_SMALL.getMeta(), "tiles_small"));
 
+		registerItemModels(BlocksAether.skyroot_beam, "skyroot_planks/beam");
+
 		registerItemModels(BlocksAether.dark_skyroot_planks, "dark_skyroot_planks/normal");
 
 		registerItemModels(BlocksAether.light_skyroot_planks, "light_skyroot_planks/normal");
 
-		registerItemModels(BlocksAether.skyroot_beam, "skyroot_planks/beam");
+		registerItemModels(BlocksAether.light_skyroot_decorative, new ItemModelBuilder("light_skyroot_planks/")
+				.add(BlockSkyrootDecorative.BASE_PLANKS.getMeta(), "base_planks")
+				.add(BlockSkyrootDecorative.BASE_BEAM.getMeta(), "base_beam")
+				.add(BlockSkyrootDecorative.TOP_PLANKS.getMeta(), "top_planks")
+				.add(BlockSkyrootDecorative.TOP_BEAM.getMeta(), "top_beam")
+				.add(BlockSkyrootDecorative.FLOORBOARDS.getMeta(), "floorboards")
+				.add(BlockSkyrootDecorative.HIGHLIGHT.getMeta(), "highlight")
+				.add(BlockSkyrootDecorative.TILES.getMeta(), "tiles")
+				.add(BlockSkyrootDecorative.TILES_SMALL.getMeta(), "tiles_small"));
+
+		registerItemModels(BlocksAether.light_skyroot_beam, "light_skyroot_planks/beam");
 
 		registerItemModels(BlocksAether.aether_portal, "aether_portal");
 

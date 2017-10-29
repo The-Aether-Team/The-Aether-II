@@ -1,0 +1,14 @@
+{
+	"variants": {
+		"axis=y": {
+			"model": "aether:light_skyroot_planks/beam"
+		},
+		"axis=z": {
+			"model": "aether:light_skyroot_planks/beam_side"
+		},
+		"axis=x": {
+			"model": "aether:light_skyroot_planks/beam_side",
+			"y": 90
+		}
+	}
+}
