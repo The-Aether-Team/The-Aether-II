@@ -17,6 +17,7 @@ import com.gildedgames.orbis.common.network.packets.PacketOrbisFilterShape;
 import com.gildedgames.orbis.common.network.packets.PacketOrbisWorldObjectRemove;
 import com.gildedgames.orbis.common.util.BlockFilterHelper;
 import com.gildedgames.orbis.common.world_objects.WorldRegion;
+import com.gildedgames.orbis.common.world_objects.WorldShape;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
@@ -25,9 +26,9 @@ import java.io.IOException;
 
 public class GuiRightClickSelector extends GuiFrame
 {
-	private final WorldRegion region;
+	private final WorldShape region;
 
-	public GuiRightClickSelector(final WorldRegion region)
+	public GuiRightClickSelector(final WorldShape region)
 	{
 		super(Dim2D.flush());
 

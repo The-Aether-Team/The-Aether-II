@@ -22,6 +22,7 @@ import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import com.gildedgames.orbis.common.util.BlockFilterHelper;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import com.gildedgames.orbis.common.world_objects.WorldRegion;
+import com.gildedgames.orbis.common.world_objects.WorldShape;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -86,7 +87,7 @@ public class ShapeSelectorSelect implements IShapeSelector
 		final IWorldObjectManager manager = WorldObjectManager.get(world);
 		final IWorldObjectGroup group = manager.getGroup(0);
 
-		final WorldRegion region = new WorldRegion(selectedShape.getBoundingBox(), world);
+		final WorldShape region = new WorldShape(selectedShape, world);
 		group.addObject(region);
 
 		NetworkingAether.sendPacketToPlayer(new PacketOrbisWorldObjectAdd(world, group, region), (EntityPlayerMP) module.getEntity());
@@ -118,9 +119,13 @@ public class ShapeSelectorSelect implements IShapeSelector
 				{
 					Minecraft.getMinecraft().displayGuiScreen(new GuiRightClickBlueprint((Blueprint) selectedShape));
 				}
+				else if (selectedShape instanceof WorldShape)
+				{
+					Minecraft.getMinecraft().displayGuiScreen(new GuiRightClickSelector((WorldShape) selectedShape));
+				}
 				else
 				{
-					Minecraft.getMinecraft().displayGuiScreen(new GuiRightClickSelector((WorldRegion) selectedShape));
+					Minecraft.getMinecraft().displayGuiScreen(new GuiRightClickSelector(new WorldShape(selectedShape, entity.world)));
 				}
 				return false;
 			}

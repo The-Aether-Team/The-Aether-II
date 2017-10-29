@@ -55,14 +55,13 @@ public class GuiRightClickElements
 		};
 	}
 
-	public static DropdownElement fillWithVoid(IRegion region)
+	public static DropdownElement fillWithVoid(IShape shape)
 	{
 		return new DropdownElement(new TextComponentString("Fill With Void"))
 		{
 			@Override
 			public void onClick(final GuiDropdownList list, final EntityPlayer player)
 			{
-				final IShape shape = new Region(region.getBoundingBox());
 				final BlockFilter filter = new BlockFilter(BlockFilterHelper.getNewVoidLayer());
 
 				NetworkingAether.sendPacketToServer(new PacketOrbisFilterShape(shape, filter));
@@ -70,15 +69,13 @@ public class GuiRightClickElements
 		};
 	}
 
-	public static DropdownElement delete(IRegion region)
+	public static DropdownElement delete(IShape shape)
 	{
 		return new DropdownElement(new TextComponentString("Delete"))
 		{
 			@Override
 			public void onClick(final GuiDropdownList list, final EntityPlayer player)
 			{
-				final IShape shape = new Region(region.getBoundingBox());
-
 				// TODO: DESIGN DECISION: It deletes according to your current main hand. Might be confusing.
 				final BlockFilter filter = new BlockFilter(BlockFilterHelper.getNewDeleteLayer(player.getHeldItemMainhand()));
 

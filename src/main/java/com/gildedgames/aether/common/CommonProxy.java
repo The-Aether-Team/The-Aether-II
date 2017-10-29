@@ -34,6 +34,7 @@ import com.gildedgames.orbis.common.player.godmode.selection_types.SelectionType
 import com.gildedgames.orbis.common.player.godmode.selection_types.SelectionTypeSphere;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import com.gildedgames.orbis.common.world_objects.WorldRegion;
+import com.gildedgames.orbis.common.world_objects.WorldShape;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
@@ -91,6 +92,7 @@ public class CommonProxy implements IAetherServices
 		s.register(23, DataIdentifier.class, new Instantiator<>(DataIdentifier.class));
 		s.register(24, OrbisProjectCache.class, new Instantiator<>(OrbisProjectCache.class));
 		s.register(25, ProjectMetadata.class, new Instantiator<>(ProjectMetadata.class));
+		s.register(26, WorldShape.class, new Instantiator<>(WorldShape.class));
 	}
 
 	public void init(final FMLInitializationEvent event)
