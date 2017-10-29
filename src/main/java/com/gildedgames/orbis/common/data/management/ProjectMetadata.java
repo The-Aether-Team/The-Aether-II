@@ -1,31 +1,30 @@
 package com.gildedgames.orbis.common.data.management;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
-import com.gildedgames.aether.api.orbis.management.IDataIdentifier;
 import com.gildedgames.aether.api.orbis.management.IProjectMetadata;
 import com.gildedgames.aether.api.util.IText;
 import com.gildedgames.aether.common.AetherCore;
 import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * A basic concrete implementation of IProjectMetadata.
+ * A basic concrete implementation of IDataMetadata.
  * Can be decorated with ProjectMetadataDecorator.
  */
 public class ProjectMetadata implements IProjectMetadata
 {
+	private LocalDateTime lastChanged = LocalDateTime.now();
+
 	private List<IText> display;
 
-	private IDataIdentifier identifier;
-
-	private List<IDataIdentifier> dependencies;
+	private boolean downloaded, downloading;
 
 	public ProjectMetadata()
 	{
 		this.display = Lists.newArrayList();
-		this.dependencies = Lists.newArrayList();
 	}
 
 	@Override
@@ -33,10 +32,12 @@ public class ProjectMetadata implements IProjectMetadata
 	{
 		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
 
-		funnel.set("identifier", this.identifier);
-
-		funnel.setList("dependencies", this.dependencies);
 		funnel.setList("display", this.display);
+
+		tag.setBoolean("downloaded", this.downloaded);
+		tag.setBoolean("downloading", this.downloading);
+
+		funnel.setDate("lastChanged", this.lastChanged);
 	}
 
 	@Override
@@ -44,10 +45,12 @@ public class ProjectMetadata implements IProjectMetadata
 	{
 		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
 
-		this.identifier = funnel.get("identifier");
-
-		this.dependencies = funnel.getList("dependencies");
 		this.display = funnel.getList("display");
+
+		this.downloaded = tag.getBoolean("downloaded");
+		this.downloading = tag.getBoolean("downloading");
+
+		this.lastChanged = funnel.getDate("lastChanged");
 	}
 
 	@Override
@@ -57,20 +60,39 @@ public class ProjectMetadata implements IProjectMetadata
 	}
 
 	@Override
-	public List<IDataIdentifier> getDependencies()
+	public boolean isDownloaded()
 	{
-		return this.dependencies;
+		return this.downloaded;
 	}
 
 	@Override
-	public IDataIdentifier getIdentifier()
+	public void setDownloaded(final boolean downloaded)
 	{
-		return this.identifier;
+		this.downloaded = downloaded;
 	}
 
 	@Override
-	public void setIdentifier(final IDataIdentifier projectIdentifier)
+	public boolean isDownloading()
 	{
-		this.identifier = identifier;
+		return this.downloading;
 	}
+
+	@Override
+	public void setDownloading(final boolean downloading)
+	{
+		this.downloading = downloading;
+	}
+
+	@Override
+	public LocalDateTime getLastChanged()
+	{
+		return this.lastChanged;
+	}
+
+	@Override
+	public void setLastChanged(final LocalDateTime lastChanged)
+	{
+		this.lastChanged = lastChanged;
+	}
+
 }

@@ -63,7 +63,7 @@ public class EntityBurrukai extends EntityAetherAnimal
 	{
 		super.applyEntityAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(16.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(8.0);
@@ -152,9 +152,9 @@ public class EntityBurrukai extends EntityAetherAnimal
 	public boolean attackEntityAsMob(Entity entityIn)
 	{
 		EntityPlayer player = (EntityPlayer) entityIn;
-		player.attackEntityFrom(DamageSource.causeMobDamage(this), 4.0F);
+		player.attackEntityFrom(DamageSource.causeMobDamage(this), 5.0F);
 		this.playSound(SoundsAether.burrukai_attack, 0.5F, 1.0F);
-		player.knockBack(this, 1.2F, 0.2D, 0.2D);
+		player.knockBack(this, 1.0F, 0.2D, 0.2D);
 		return true;
 	}
 

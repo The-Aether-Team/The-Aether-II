@@ -2,12 +2,8 @@ package com.gildedgames.orbis.common.data.management;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.management.*;
-import com.gildedgames.aether.api.util.IText;
 import com.gildedgames.aether.common.AetherCore;
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import org.apache.commons.io.FilenameUtils;
@@ -19,18 +15,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
 
 public class OrbisProject implements IProject
 {
 	private final List<IProjectListener> listeners = Lists.newArrayList();
 
-	private final Map<Integer, IProjectMetadata> idToMetadata = Maps.newHashMap();
-
-	private final Map<Integer, String> idToLocation = Maps.newHashMap();
-
-	private final BiMap<Integer, IProjectData> idToData = HashBiMap.create();
+	private IProjectCache cache;
 
 	private File location;
 
@@ -38,13 +29,11 @@ public class OrbisProject implements IProject
 
 	private IProjectIdentifier identifier;
 
-	private int nextDataId;
-
-	private List<IText> display;
+	private IProjectMetadata metadata;
 
 	private OrbisProject()
 	{
-
+		this.cache = new OrbisProjectCache(this);
 	}
 
 	/**
@@ -54,18 +43,22 @@ public class OrbisProject implements IProject
 	 */
 	private OrbisProject(final File location, final List<String> acceptedFileExtensions)
 	{
+		this();
+
 		this.location = location;
 		this.acceptedFileExtensions = acceptedFileExtensions;
 	}
 
 	/**
-	 * Should be used to create a new project rather than an existing one.
+	 * Should be used to createTE a new project rather than an existing one.
 	 * @param location The location of the project.
 	 * @param identifier The unique identifier for the project.
 	 * @param acceptedFileExtensions The file extensions that this project accepts.
 	 */
 	public OrbisProject(final File location, final IProjectIdentifier identifier, final List<String> acceptedFileExtensions)
 	{
+		this();
+
 		if (!location.exists() && !location.mkdirs())
 		{
 			throw new RuntimeException("Location for OrbisProject cannot be created!");
@@ -80,7 +73,7 @@ public class OrbisProject implements IProject
 		this.identifier = identifier;
 		this.acceptedFileExtensions = acceptedFileExtensions;
 
-		this.display = Lists.newArrayList();
+		this.metadata = new ProjectMetadata();
 	}
 
 	@Override
@@ -88,10 +81,10 @@ public class OrbisProject implements IProject
 	{
 		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
 
-		tag.setInteger("nextDataId", this.nextDataId);
+		tag.setInteger("nextDataId", this.cache.getNextDataId());
 
 		funnel.set("identifier", this.identifier);
-		funnel.setList("display", this.display);
+		funnel.set("metadata", this.metadata);
 	}
 
 	@Override
@@ -99,10 +92,10 @@ public class OrbisProject implements IProject
 	{
 		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
 
-		this.nextDataId = tag.getInteger("nextDataId");
+		this.cache.setNextDataId(tag.getInteger("nextDataId"));
 
 		this.identifier = funnel.get("identifier");
-		this.display = funnel.getList("display");
+		this.metadata = funnel.get("metadata");
 	}
 
 	@Override
@@ -142,70 +135,33 @@ public class OrbisProject implements IProject
 	}
 
 	@Override
-	public List<IText> getMetadataDisplay()
+	public IProjectMetadata getMetadata()
 	{
-		return this.display;
+		return this.metadata;
 	}
 
 	@Override
-	public IProjectData getCachedData(final int dataId)
+	public IProjectCache getCache()
 	{
-		final IProjectData data = this.idToData.get(dataId);
-
-		if (data == null)
-		{
-			throw new RuntimeException("Attempted to fetch data that either hasn't been loaded yet, or doesn't exist in this project! Something's wrong!");
-		}
-
-		return data;
+		return this.cache;
 	}
 
 	@Override
-	public IProjectMetadata getCachedMetadata(final int dataId)
+	public void setCache(final IProjectCache cache)
 	{
-		final IProjectMetadata data = this.idToMetadata.get(dataId);
+		cache.setProject(this);
 
-		if (data == null)
-		{
-			throw new RuntimeException("Attempted to fetch metadata that either hasn't been loaded yet, or doesn't exist in this project! Something's wrong!");
-		}
-
-		return data;
-	}
-
-	@Override
-	public void saveNewData(final IProjectData data, final String location)
-	{
-		data.getMetadata().setIdentifier(new DataIdentifier(this.identifier, this.nextDataId++));
-
-		this.setData(data, location);
-	}
-
-	/**
-	 * Internal method to set data and its metadata to the cache,
-	 * as well as allocating the correct project identifier.
-	 * @param data The data itself.
-	 * @param location The location for the data within the project.
-	 */
-	private void setData(final IProjectData data, final String location)
-	{
-		final int id = data.getMetadata().getIdentifier().getDataId();
-
-		this.idToData.put(id, data);
-		this.idToMetadata.put(id, data.getMetadata());
-
-		this.setDataLocation(id, location);
-	}
-
-	@Override
-	public void setDataLocation(final int dataId, final String location)
-	{
-		this.idToLocation.put(dataId, location);
+		this.cache = cache;
 	}
 
 	@Override
 	public void loadAndCacheData()
 	{
+		/** Clear any links that persist after saving the project
+		 * Necessary so that projects send over packets contain their
+		 * file locations **/
+		//this.idToLocation.clear();
+
 		try (Stream<Path> paths = Files.walk(Paths.get(this.location.getPath())))
 		{
 			paths.forEach(p ->
@@ -235,37 +191,39 @@ public class OrbisProject implements IProject
 
 						final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
 
-						final IProjectData data = funnel.get("data");
+						final IData data = funnel.get("data");
 
-						final boolean fromOtherProject = !this.identifier.equals(data.getMetadata().getIdentifier().getProjectIdentifier());
-
-						/** If the data file seems to be moved from another project, it'll reassign a new data id for it **/
-						if (fromOtherProject)
+						if (data != null)
 						{
-							data.getMetadata().setIdentifier(new DataIdentifier(this.identifier, this.nextDataId++));
-						}
+							final boolean fromOtherProject = !this.identifier.equals(data.getMetadata().getIdentifier().getProjectIdentifier());
 
-						/** Loads data from file then sets it to the cache **/
-						this.setData(data, file.getCanonicalPath());
+							/** If the data file seems to be moved from another project, it'll reassign a new data id for it **/
+							if (fromOtherProject)
+							{
+								data.getMetadata().setIdentifier(this.cache.createNextIdentifier());
+							}
+
+							final String location = file.getCanonicalPath().replace(this.getLocation().getCanonicalPath() + File.separator, "");
+
+							/** Loads data from file then sets it to the cache **/
+							this.cache.setData(data, location);
+						}
+						else
+						{
+							AetherCore.LOGGER.error("Failed to load back a data file from project.", file);
+						}
 					}
 					catch (final IOException e)
 					{
-						AetherCore.LOGGER.catching(e);
+						AetherCore.LOGGER.error(e);
 					}
 				}
 			});
 		}
 		catch (final IOException e)
 		{
-			AetherCore.LOGGER.catching(e);
+			AetherCore.LOGGER.error(e);
 		}
-	}
-
-	@Override
-	public void clearDataCache()
-	{
-		this.idToData.clear();
-		this.idToLocation.clear();
 	}
 
 	@Override

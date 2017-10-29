@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,35 @@ public class NBTFunnel
 	public void set(final String key, final NBT nbt)
 	{
 		this.tag.setTag(key, NBTHelper.write(this.serializer, nbt));
+	}
+
+	public LocalDateTime getDate(final String key)
+	{
+		final NBTTagCompound tag = this.tag.getCompoundTag(key);
+
+		if (tag.getBoolean("_null") || !tag.hasKey("_null"))
+		{
+			return null;
+		}
+
+		return LocalDateTime.parse(tag.getString("date"));
+	}
+
+	public void setDate(final String key, final LocalDateTime date)
+	{
+		final NBTTagCompound tag = new NBTTagCompound();
+
+		if (date == null)
+		{
+			tag.setBoolean("_null", true);
+
+			return;
+		}
+
+		tag.setBoolean("_null", false);
+		tag.setString("date", date.toString());
+
+		this.tag.setTag(key, tag);
 	}
 
 	public <T extends NBT> T get(final String key)
@@ -81,7 +111,7 @@ public class NBTFunnel
 		for (int i = 0; i < keys.tagCount(); i++)
 		{
 			final int intKey = keys.getIntAt(i);
-			final String data = keys.getStringTagAt(i);
+			final String data = objects.getStringTagAt(i);
 
 			readObjects.put(intKey, data);
 		}

@@ -1,5 +1,6 @@
 package com.gildedgames.aether.api.orbis.management;
 
+import com.gildedgames.aether.api.orbis.IWorldObject;
 import com.gildedgames.aether.api.util.NBT;
 
 /**
@@ -9,8 +10,14 @@ import com.gildedgames.aether.api.util.NBT;
  *
  * It also stores metadata and a file extension.
  */
-public interface IProjectData extends NBT
+public interface IData extends NBT
 {
+
+	/**
+	 * Called just before the data is saved to disk
+	 * from a world object.
+	 */
+	void preSaveToDisk(IWorldObject object);
 
 	/**
 	 * The file extension for this data.
@@ -25,6 +32,6 @@ public interface IProjectData extends NBT
 	 * its internal id.
 	 * @return
 	 */
-	IProjectMetadata getMetadata();
+	IDataMetadata getMetadata();
 
 }

@@ -5,7 +5,6 @@ import com.gildedgames.aether.api.orbis.util.OrbisRotation;
 import com.gildedgames.aether.api.orbis.util.RegionHelp;
 import com.gildedgames.aether.api.orbis.util.RotationHelp;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 public abstract class AbstractRegion implements IRegion
 {
@@ -22,7 +21,7 @@ public abstract class AbstractRegion implements IRegion
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Iterable<BlockPos.MutableBlockPos> createShapeData(final World world)
+	public Iterable<BlockPos.MutableBlockPos> createShapeData()
 	{
 		return BlockPos.getAllInBoxMutable(this.getMin(), this.getMax());
 	}
@@ -32,7 +31,7 @@ public abstract class AbstractRegion implements IRegion
 	{
 		if (this.data == null || this.dataChanged)
 		{
-			this.data = this.createShapeData(null);
+			this.data = this.createShapeData();
 		}
 
 		return this.data;

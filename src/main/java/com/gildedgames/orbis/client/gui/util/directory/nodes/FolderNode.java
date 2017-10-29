@@ -45,6 +45,18 @@ public class FolderNode implements IDirectoryNode
 	}
 
 	@Override
+	public boolean isOnClient()
+	{
+		return true;
+	}
+
+	@Override
+	public boolean isDownloading()
+	{
+		return false;
+	}
+
+	@Override
 	public void onOpen(final IDirectoryNavigator navigator)
 	{
 		navigator.openDirectory(this.file);

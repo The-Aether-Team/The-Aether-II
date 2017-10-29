@@ -27,7 +27,7 @@ public abstract class AbstractShape implements IShape
 	}
 
 	@Override
-	public final Iterable<BlockPos.MutableBlockPos> createShapeData(final World world)
+	public final Iterable<BlockPos.MutableBlockPos> createShapeData()
 	{
 		return new Iterable<BlockPos.MutableBlockPos>()
 		{
@@ -35,7 +35,7 @@ public abstract class AbstractShape implements IShape
 			@Override
 			public Iterator<BlockPos.MutableBlockPos> iterator()
 			{
-				final Iterator<BlockPos.MutableBlockPos> iter = AbstractShape.this.getBoundingBox().createShapeData(world).iterator();
+				final Iterator<BlockPos.MutableBlockPos> iter = AbstractShape.this.getBoundingBox().createShapeData().iterator();
 				return new AbstractIterator<BlockPos.MutableBlockPos>()
 				{
 

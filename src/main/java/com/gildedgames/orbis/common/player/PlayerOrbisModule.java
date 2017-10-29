@@ -9,6 +9,7 @@ import com.gildedgames.orbis.common.network.packets.PacketOrbisDeveloperMode;
 import com.gildedgames.orbis.common.network.packets.PacketOrbisDeveloperReach;
 import com.gildedgames.orbis.common.player.godmode.IGodPower;
 import com.gildedgames.orbis.common.player.modules.PlayerPowerModule;
+import com.gildedgames.orbis.common.player.modules.PlayerProjectModule;
 import com.gildedgames.orbis.common.player.modules.PlayerSelectionTypesModule;
 import com.gildedgames.orbis.common.util.OrbisRaytraceHelp;
 import com.google.common.collect.Lists;
@@ -27,6 +28,10 @@ public class PlayerOrbisModule extends PlayerAetherModule
 
 	private final PlayerSelectionTypesModule selectionTypeModule;
 
+	private final PlayerProjectModule projectModule;
+
+	private final List<PlayerAetherModule> modules = Lists.newArrayList();
+
 	private double developerReach = 5.0D;
 
 	private boolean reachSet;
@@ -39,6 +44,11 @@ public class PlayerOrbisModule extends PlayerAetherModule
 
 		this.godPowerModule = new PlayerPowerModule(playerAether);
 		this.selectionTypeModule = new PlayerSelectionTypesModule(playerAether);
+		this.projectModule = new PlayerProjectModule(playerAether);
+
+		this.modules.add(this.godPowerModule);
+		this.modules.add(this.selectionTypeModule);
+		this.modules.add(this.projectModule);
 	}
 
 	public static PlayerOrbisModule get(final Entity player)
@@ -46,6 +56,11 @@ public class PlayerOrbisModule extends PlayerAetherModule
 		final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 		return playerAether.getOrbisModule();
+	}
+
+	public PlayerProjectModule projects()
+	{
+		return this.projectModule;
 	}
 
 	public PlayerPowerModule powers()
@@ -148,24 +163,40 @@ public class PlayerOrbisModule extends PlayerAetherModule
 	}
 
 	@Override
-	public void write(final NBTTagCompound output)
+	public void write(final NBTTagCompound tag)
 	{
-		output.setBoolean("developerModeEnabled", this.developerModeEnabled);
+		tag.setBoolean("developerModeEnabled", this.developerModeEnabled);
 
-		output.setBoolean("reachSet", this.reachSet);
-		output.setDouble("developerReach", this.developerReach);
+		tag.setBoolean("reachSet", this.reachSet);
+		tag.setDouble("developerReach", this.developerReach);
+
+		final NBTTagCompound modules = new NBTTagCompound();
+
+		for (final PlayerAetherModule module : this.modules)
+		{
+			module.write(modules);
+		}
+
+		tag.setTag("modules", modules);
 	}
 
 	@Override
-	public void read(final NBTTagCompound input)
+	public void read(final NBTTagCompound tag)
 	{
-		this.developerModeEnabled = input.getBoolean("developerModeEnabled");
+		this.developerModeEnabled = tag.getBoolean("developerModeEnabled");
 
-		this.reachSet = input.getBoolean("reachSet");
+		this.reachSet = tag.getBoolean("reachSet");
 
 		if (this.reachSet)
 		{
-			this.developerReach = input.getDouble("developerReach");
+			this.developerReach = tag.getDouble("developerReach");
+		}
+
+		final NBTTagCompound modules = tag.getCompoundTag("modules");
+
+		for (final PlayerAetherModule module : this.modules)
+		{
+			module.read(modules);
 		}
 	}
 

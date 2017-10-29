@@ -8,6 +8,13 @@ public class OrbisMissingProjectException extends RuntimeException
 
 	public final IProjectIdentifier identifier;
 
+	public OrbisMissingProjectException(final String folderName)
+	{
+		super("A project could not be found while trying load it: " + folderName);
+
+		this.identifier = null;
+	}
+
 	public OrbisMissingProjectException(final IProjectIdentifier identifier)
 	{
 		super("A project could not be found while trying load it: " + identifier.toString());

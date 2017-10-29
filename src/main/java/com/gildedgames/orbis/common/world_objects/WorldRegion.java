@@ -2,6 +2,7 @@ package com.gildedgames.orbis.common.world_objects;
 
 import com.gildedgames.aether.api.orbis.IWorldObject;
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
+import com.gildedgames.aether.api.orbis.management.IData;
 import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.orbis.region.Region;
 import com.gildedgames.aether.common.AetherCore;
@@ -88,6 +89,12 @@ public class WorldRegion extends Region implements IWorldObject
 		}
 
 		return this.renderer;
+	}
+
+	@Override
+	public IData getData()
+	{
+		return null;
 	}
 
 	@Override

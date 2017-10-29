@@ -77,7 +77,7 @@ public class RenderShape implements IWorldRenderer
 			this.lastMin = this.shape.getBoundingBox().getMin();
 			this.lastMax = this.shape.getBoundingBox().getMax();
 
-			this.shapeData = this.shape.createShapeData(world);
+			this.shapeData = this.shape.createShapeData();
 		}
 
 		GlStateManager.pushMatrix();
@@ -274,7 +274,7 @@ public class RenderShape implements IWorldRenderer
 			this.lastMin = this.shape.getBoundingBox().getMin();
 			this.lastMax = this.shape.getBoundingBox().getMax();
 
-			this.shapeData = this.shape.createShapeData(world);
+			this.shapeData = this.shape.createShapeData();
 		}
 
 		if (this.glIndex == -1)

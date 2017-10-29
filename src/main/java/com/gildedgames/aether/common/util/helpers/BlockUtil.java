@@ -10,14 +10,67 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.registry.GameData;
+import org.apache.logging.log4j.LogManager;
+
+import javax.annotation.Nullable;
 
 public class BlockUtil
 {
+	@Nullable
+	public static TileEntity createTE(final NBTTagCompound compound)
+	{
+		TileEntity tileentity = null;
+		final String s = compound.getString("id");
+		Class<? extends TileEntity> oclass = null;
+
+		try
+		{
+			oclass = (Class) GameData.getTileEntityRegistry().getObject(new ResourceLocation(s));
+
+			if (oclass != null)
+			{
+				tileentity = (TileEntity) oclass.newInstance();
+			}
+		}
+		catch (final Throwable throwable1)
+		{
+			LogManager.getLogger().error("Failed to createTE block entity {}", new Object[] { s, throwable1 });
+			net.minecraftforge.fml.common.FMLLog.log(org.apache.logging.log4j.Level.ERROR, throwable1,
+					"A TileEntity %s(%s) has thrown an exception during loading, its state cannot be restored. Report this to the mod author",
+					s, oclass.getName());
+		}
+
+		if (tileentity != null)
+		{
+			try
+			{
+
+				tileentity.readFromNBT(compound);
+			}
+			catch (final Throwable throwable)
+			{
+				LogManager.getLogger().error("Failed to load data for block entity {}", new Object[] { s, throwable });
+				net.minecraftforge.fml.common.FMLLog.log(org.apache.logging.log4j.Level.ERROR, throwable,
+						"A TileEntity %s(%s) has thrown an exception during loading, its state cannot be restored. Report this to the mod author",
+						s, oclass.getName());
+				tileentity = null;
+			}
+		}
+		else
+		{
+			LogManager.getLogger().warn("Skipping BlockEntity with id {}", new Object[] { s });
+		}
+
+		return tileentity;
+	}
+
 	public static IBlockState getBlockState(final ItemStack stack)
 	{
 		if (stack.getItem() instanceof ItemBlock)

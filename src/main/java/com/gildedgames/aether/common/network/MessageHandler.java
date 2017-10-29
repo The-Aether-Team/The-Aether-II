@@ -28,12 +28,20 @@ public abstract class MessageHandler<REQ extends IMessage, RES extends IMessage>
 	protected RES processPart(final REQ message, final IMessageMultipleParts messageParts, final EntityPlayer player)
 	{
 		final DataInputStream input = new DataInputStream(new ByteArrayInputStream(messageParts.getPartData()));
-
 		// Clear data in memory, copied into buffer
 		//messageParts.clearPartData();
 
 		try
 		{
+			/**
+			 * If packet is empty, simply read and return
+			 */
+			if (input.available() <= 0)
+			{
+				messageParts.read(Unpooled.buffer());
+				return this.onMessage(message, player);
+			}
+
 			final int partID = input.readInt();
 			final int packetTotalParts = input.readByte();
 			final int packetPart = input.readByte();
@@ -88,7 +96,7 @@ public abstract class MessageHandler<REQ extends IMessage, RES extends IMessage>
 		}
 		catch (final IOException e)
 		{
-			AetherCore.LOGGER.debug(e);
+			AetherCore.LOGGER.error("Couldn't process message part!", e);
 		}
 
 		return null;

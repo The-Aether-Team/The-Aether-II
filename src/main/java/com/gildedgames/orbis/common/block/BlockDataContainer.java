@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.orbis.region.IDimensions;
 import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.util.helpers.BlockUtil;
 import com.gildedgames.orbis.common.OrbisCore;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
@@ -15,7 +16,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -25,20 +25,17 @@ import java.util.Set;
 public class BlockDataContainer implements NBT, IDimensions
 {
 
-	private final World world;
-
 	private BlockData[] data;
 
 	private int width, height, length;
 
-	private BlockDataContainer(final World world)
+	private BlockDataContainer()
 	{
-		this.world = world;
+
 	}
 
-	private BlockDataContainer(final World world, final NBTTagCompound tag)
+	private BlockDataContainer(final NBTTagCompound tag)
 	{
-		this.world = world;
 		this.read(tag);
 	}
 
@@ -47,10 +44,8 @@ public class BlockDataContainer implements NBT, IDimensions
 	 * @param height Maximum height possible is 256
 	 * @param length
 	 */
-	public BlockDataContainer(final World world, final int width, final int height, final int length)
+	public BlockDataContainer(final int width, final int height, final int length)
 	{
-		this.world = world;
-
 		this.width = width;
 		this.height = Math.min(256, height);
 		this.length = length;
@@ -58,9 +53,9 @@ public class BlockDataContainer implements NBT, IDimensions
 		this.data = new BlockData[this.getVolume()];
 	}
 
-	public BlockDataContainer(final World world, final IRegion region)
+	public BlockDataContainer(final IRegion region)
 	{
-		this(world, region.getWidth(), region.getHeight(), region.getLength());
+		this(region.getWidth(), region.getHeight(), region.getLength());
 	}
 
 	public int getVolume()
@@ -317,7 +312,7 @@ public class BlockDataContainer implements NBT, IDimensions
 			final NBTTagCompound data = tileEntityList.getCompoundTagAt(i);
 
 			final NBTTagCompound tileEntData = data.getCompoundTag("tileEnt");
-			tileEntities.put(data.getInteger("orbisTEIndex"), TileEntity.create(this.world, tileEntData));
+			tileEntities.put(data.getInteger("orbisTEIndex"), BlockUtil.createTE(tileEntData));
 		}
 
 		final byte[] blockComp = tag.getByteArray("blocks");

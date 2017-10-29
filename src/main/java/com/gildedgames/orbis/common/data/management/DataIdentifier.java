@@ -5,6 +5,8 @@ import com.gildedgames.aether.api.orbis.management.IDataIdentifier;
 import com.gildedgames.aether.api.orbis.management.IProjectIdentifier;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.nbt.NBTTagCompound;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class DataIdentifier implements IDataIdentifier
 {
@@ -12,6 +14,11 @@ public class DataIdentifier implements IDataIdentifier
 	private int dataId;
 
 	private IProjectIdentifier projectIdentifier;
+
+	private DataIdentifier()
+	{
+
+	}
 
 	public DataIdentifier(final IProjectIdentifier identifier, final int dataId)
 	{
@@ -49,6 +56,37 @@ public class DataIdentifier implements IDataIdentifier
 		return this.projectIdentifier;
 	}
 
-	// TODO: Equals and hash implementations
+	@Override
+	public boolean equals(final Object obj)
+	{
+		if (obj == this)
+		{
+			return true;
+		}
+
+		if (obj instanceof IDataIdentifier)
+		{
+			final IDataIdentifier id = (IDataIdentifier) obj;
+			final EqualsBuilder builder = new EqualsBuilder();
+
+			builder.append(this.getDataId(), id.getDataId());
+			builder.append(this.getProjectIdentifier(), id.getProjectIdentifier());
+
+			return builder.isEquals();
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final HashCodeBuilder builder = new HashCodeBuilder(3, 7);
+
+		builder.append(this.getDataId());
+		builder.append(this.getProjectIdentifier());
+
+		return builder.toHashCode();
+	}
 
 }

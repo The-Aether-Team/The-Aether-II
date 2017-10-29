@@ -45,7 +45,7 @@ public class LineShape implements IShape
 	}
 
 	@Override
-	public Iterable<BlockPos.MutableBlockPos> createShapeData(final World world)
+	public Iterable<BlockPos.MutableBlockPos> createShapeData()
 	{
 		final List<BlockPos.MutableBlockPos> lineData = new ArrayList<>();
 
@@ -237,7 +237,7 @@ public class LineShape implements IShape
 	{
 		if (this.data == null)
 		{
-			this.data = this.createShapeData(null);
+			this.data = this.createShapeData();
 		}
 
 		return this.data;

@@ -1,5 +1,6 @@
 package com.gildedgames.orbis.client.gui;
 
+import com.gildedgames.aether.api.orbis.IWorldObject;
 import com.gildedgames.aether.api.orbis.IWorldObjectManager;
 import com.gildedgames.aether.api.orbis.region.Region;
 import com.gildedgames.aether.api.orbis.shapes.IShape;
@@ -12,6 +13,7 @@ import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.client.util.rect.Pos2D;
 import com.gildedgames.orbis.common.block.BlockFilter;
 import com.gildedgames.orbis.common.network.packets.PacketOrbisFilterShape;
+import com.gildedgames.orbis.common.network.packets.PacketOrbisWorldObjectRemove;
 import com.gildedgames.orbis.common.util.BlockFilterHelper;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import net.minecraft.client.Minecraft;
@@ -42,7 +44,7 @@ public class GuiRightClickBlueprint extends GuiFrame
 					@Override
 					public void onClick(final GuiDropdownList list, final EntityPlayer player)
 					{
-						Minecraft.getMinecraft().displayGuiScreen(new GuiEditBlueprint(GuiRightClickBlueprint.this.blueprint));
+						Minecraft.getMinecraft().displayGuiScreen(new GuiViewProjects(GuiRightClickBlueprint.this.blueprint));
 					}
 				},
 				new DropdownElement(new TextComponentString("Remove"))
@@ -51,8 +53,9 @@ public class GuiRightClickBlueprint extends GuiFrame
 					public void onClick(final GuiDropdownList list, final EntityPlayer player)
 					{
 						final IWorldObjectManager manager = WorldObjectManager.get(player.world);
+						final IWorldObject obj = GuiRightClickBlueprint.this.blueprint;
 
-						manager.getGroup(0).removeObject(GuiRightClickBlueprint.this.blueprint);
+						NetworkingAether.sendPacketToServer(new PacketOrbisWorldObjectRemove(obj.getWorld(), manager.getGroup(0), obj));
 					}
 				},
 				new DropdownElement(new TextComponentString("Fill With Void"))

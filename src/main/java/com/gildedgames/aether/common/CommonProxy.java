@@ -16,6 +16,7 @@ import com.gildedgames.aether.common.registry.ContentRegistry;
 import com.gildedgames.aether.common.world.SectorEventHandler;
 import com.gildedgames.orbis.client.gui.data.Text;
 import com.gildedgames.orbis.client.renderers.RenderShape;
+import com.gildedgames.orbis.common.OrbisCore;
 import com.gildedgames.orbis.common.OrbisDeveloperModeEvents;
 import com.gildedgames.orbis.common.block.BlockDataContainer;
 import com.gildedgames.orbis.common.block.BlockDataWithConditions;
@@ -23,10 +24,7 @@ import com.gildedgames.orbis.common.block.BlockFilter;
 import com.gildedgames.orbis.common.block.BlockFilterLayer;
 import com.gildedgames.orbis.common.data.BlueprintData;
 import com.gildedgames.orbis.common.data.DataCondition;
-import com.gildedgames.orbis.common.data.management.DataIdentifier;
-import com.gildedgames.orbis.common.data.management.OrbisProject;
-import com.gildedgames.orbis.common.data.management.ProjectIdentifier;
-import com.gildedgames.orbis.common.data.management.ProjectMetadata;
+import com.gildedgames.orbis.common.data.management.*;
 import com.gildedgames.orbis.common.data.shapes.EllipsoidShape;
 import com.gildedgames.orbis.common.data.shapes.LineShape;
 import com.gildedgames.orbis.common.data.shapes.SphereShape;
@@ -60,7 +58,7 @@ public class CommonProxy implements IAetherServices
 
 		if (!this.configDir.exists() && !this.configDir.mkdir())
 		{
-			throw new RuntimeException("Couldn't create configuration directory");
+			throw new RuntimeException("Couldn't createTE configuration directory");
 		}
 
 		this.contentRegistry.preInit();
@@ -87,10 +85,12 @@ public class CommonProxy implements IAetherServices
 		s.register(17, BlockDataWithConditions.class, new Instantiator<>(BlockDataWithConditions.class));
 		s.register(18, DataCondition.class, new Instantiator<>(DataCondition.class));
 		s.register(19, Text.class, new Instantiator<>(Text.class));
-		s.register(20, ProjectMetadata.class, new Instantiator<>(ProjectMetadata.class));
+		s.register(20, DataMetadata.class, new Instantiator<>(DataMetadata.class));
 		s.register(21, ProjectIdentifier.class, new Instantiator<>(ProjectIdentifier.class));
 		s.register(22, OrbisProject.class, new Instantiator<>(OrbisProject.class));
 		s.register(23, DataIdentifier.class, new Instantiator<>(DataIdentifier.class));
+		s.register(24, OrbisProjectCache.class, new Instantiator<>(OrbisProjectCache.class));
+		s.register(25, ProjectMetadata.class, new Instantiator<>(ProjectMetadata.class));
 	}
 
 	public void init(final FMLInitializationEvent event)
@@ -109,6 +109,7 @@ public class CommonProxy implements IAetherServices
 		MinecraftForge.EVENT_BUS.register(SectorEventHandler.class);
 
 		MinecraftForge.EVENT_BUS.register(OrbisDeveloperModeEvents.class);
+		MinecraftForge.EVENT_BUS.register(OrbisCore.class);
 	}
 
 	public void spawnJumpParticles(final World world, final double x, final double y, final double z, final double radius, final int quantity)

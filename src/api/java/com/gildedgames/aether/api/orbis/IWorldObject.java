@@ -1,5 +1,6 @@
 package com.gildedgames.aether.api.orbis;
 
+import com.gildedgames.aether.api.orbis.management.IData;
 import com.gildedgames.aether.api.util.NBT;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -21,5 +22,7 @@ public interface IWorldObject extends NBT
 
 	@SideOnly(Side.CLIENT)
 	IWorldRenderer getRenderer();
+
+	IData getData();
 
 }

@@ -1,5 +1,7 @@
 package com.gildedgames.orbis.client.gui;
 
+import com.gildedgames.aether.api.orbis.management.IData;
+import com.gildedgames.aether.api.orbis.management.IProject;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -11,12 +13,14 @@ import com.gildedgames.orbis.client.gui.util.GuiFrame;
 import com.gildedgames.orbis.client.gui.util.directory.GuiDirectoryViewer;
 import com.gildedgames.orbis.client.gui.util.directory.nodes.BlueprintNode;
 import com.gildedgames.orbis.client.gui.util.directory.nodes.OrbisNavigatorNodeFactory;
+import com.gildedgames.orbis.client.gui.util.directory.nodes.ProjectNode;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.client.util.rect.Pos2D;
-import com.gildedgames.orbis.common.OrbisLocations;
+import com.gildedgames.orbis.common.OrbisCore;
 import com.gildedgames.orbis.common.containers.ContainerGenericInventory;
 import com.gildedgames.orbis.common.items.ItemBlueprint;
 import com.gildedgames.orbis.common.items.ItemsOrbis;
+import com.gildedgames.orbis.common.network.packets.PacketOrbisRequestProjectListing;
 import com.gildedgames.orbis.common.network.packets.PacketSetItemStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
@@ -25,17 +29,28 @@ import net.minecraft.util.ResourceLocation;
 
 import java.io.File;
 
-public class GuiLoadBlueprint extends GuiFrame
+public class GuiLoadBlueprint extends GuiFrame implements IDirectoryNavigatorListener
 {
 	private static final ResourceLocation BACKPACK_CREATIVE = AetherCore.getResource("orbis/vanilla/backpack_creative.png");
 
 	private GuiDirectoryViewer directoryViewer;
+
+	private boolean requestListing = true;
+
+	private IProject project;
 
 	public GuiLoadBlueprint(final PlayerAether playerAether)
 	{
 		super(Dim2D.flush(), new ContainerGenericInventory(playerAether));
 
 		this.allowUserInput = true;
+	}
+
+	public void refreshNavigator()
+	{
+		this.requestListing = false;
+		this.directoryViewer.getNavigator().refresh();
+		this.requestListing = true;
 	}
 
 	@Override
@@ -60,50 +75,17 @@ public class GuiLoadBlueprint extends GuiFrame
 
 		this.directoryViewer.dim().mod().center(true).flush();
 
-		OrbisLocations.BLUEPRINTS.mkdirs();
-
-		this.directoryViewer.getNavigator().openDirectory(OrbisLocations.BLUEPRINTS);
-
-		this.directoryViewer.getNavigator().addListener(new IDirectoryNavigatorListener()
+		if (!OrbisCore.getProjectManager().getLocation().exists())
 		{
-			@Override
-			public void onNodeOpen(final IDirectoryNavigator navigator, final IDirectoryNode node)
+			if (!OrbisCore.getProjectManager().getLocation().mkdirs())
 			{
-				if (node instanceof BlueprintNode)
-				{
-					final ItemStack stack = new ItemStack(ItemsOrbis.blueprint);
-
-					ItemBlueprint.setBlueprintPath(stack, node.getFile());
-
-					NetworkingAether.sendPacketToServer(new PacketSetItemStack(stack));
-					Minecraft.getMinecraft().player.inventory.setItemStack(stack);
-				}
+				throw new RuntimeException("Project manager file could not be created!");
 			}
+		}
 
-			@Override
-			public void onDirectoryOpen(final IDirectoryNavigator navigator, final File file)
-			{
+		this.directoryViewer.getNavigator().addListener(this);
 
-			}
-
-			@Override
-			public void onBack(final IDirectoryNavigator navigator)
-			{
-
-			}
-
-			@Override
-			public void onForward(final IDirectoryNavigator navigator)
-			{
-
-			}
-
-			@Override
-			public void onRefresh(final IDirectoryNavigator navigator)
-			{
-
-			}
-		});
+		this.directoryViewer.getNavigator().openDirectory(OrbisCore.getProjectManager().getLocation());
 
 		this.addChild(this.directoryViewer);
 	}
@@ -133,4 +115,52 @@ public class GuiLoadBlueprint extends GuiFrame
 	{
 	}
 
+	@Override
+	public void onNodeOpen(final IDirectoryNavigator navigator, final IDirectoryNode node)
+	{
+		if (node instanceof BlueprintNode)
+		{
+			final ItemStack stack = new ItemStack(ItemsOrbis.blueprint);
+			final IData data = OrbisCore.getProjectManager().findData(GuiLoadBlueprint.this.project, node.getFile());
+
+			ItemBlueprint.setBlueprint(stack, data.getMetadata().getIdentifier());
+
+			NetworkingAether.sendPacketToServer(new PacketSetItemStack(stack));
+			Minecraft.getMinecraft().player.inventory.setItemStack(stack);
+		}
+
+		if (node instanceof ProjectNode)
+		{
+			final ProjectNode projectNode = (ProjectNode) node;
+
+			this.project = projectNode.getProject();
+		}
+	}
+
+	@Override
+	public void onDirectoryOpen(final IDirectoryNavigator navigator, final File file)
+	{
+
+	}
+
+	@Override
+	public void onBack(final IDirectoryNavigator navigator)
+	{
+
+	}
+
+	@Override
+	public void onForward(final IDirectoryNavigator navigator)
+	{
+
+	}
+
+	@Override
+	public void onRefresh(final IDirectoryNavigator navigator)
+	{
+		if (!Minecraft.getMinecraft().isIntegratedServerRunning() && this.requestListing)
+		{
+			NetworkingAether.sendPacketToServer(new PacketOrbisRequestProjectListing());
+		}
+	}
 }

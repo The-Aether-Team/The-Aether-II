@@ -106,7 +106,7 @@ public class EllipsoidShape extends AbstractShape
 	{
 		if (this.data == null)
 		{
-			this.data = this.createShapeData(null);
+			this.data = this.createShapeData();
 		}
 
 		return this.data;

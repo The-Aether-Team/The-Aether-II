@@ -1,7 +1,6 @@
 package com.gildedgames.orbis.client.gui.util;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.util.helpers.FileHelper;
 import com.gildedgames.orbis.client.gui.data.DropdownElement;
 import com.gildedgames.orbis.client.gui.data.IDropdownElement;
 import com.gildedgames.orbis.client.gui.data.directory.IDirectoryNavigator;
@@ -67,11 +66,11 @@ public class GuiFactory
 			{
 				if (file.isDirectory())
 				{
-					FileHelper.deleteDirectory(file);
+					//FileHelper.deleteDirectory(file);
 				}
 				else
 				{
-					file.delete();
+					//file.delete();
 				}
 
 				list.setDropdownElements(Collections.emptyList());
