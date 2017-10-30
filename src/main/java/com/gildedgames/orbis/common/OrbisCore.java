@@ -1,11 +1,15 @@
 package com.gildedgames.orbis.common;
 
+import com.gildedgames.aether.api.orbis.IWorldObjectGroup;
 import com.gildedgames.aether.api.orbis.management.IProjectManager;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.common.data.management.OrbisProjectManager;
+import com.gildedgames.orbis.common.network.packets.PacketClearSelectedRegion;
 import com.gildedgames.orbis.common.network.packets.PacketWorldObjectManager;
+import com.gildedgames.orbis.common.network.packets.PacketWorldObjectRemove;
 import com.gildedgames.orbis.common.network.packets.projects.PacketSendProjectListing;
+import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,6 +45,35 @@ public class OrbisCore
 		{
 			NetworkingAether.sendPacketToPlayer(new PacketSendProjectListing(), (EntityPlayerMP) event.player);
 		}
+	}
+
+	private static void clearSelection(final EntityPlayer player)
+	{
+		final World world = player.world;
+		final PlayerOrbisModule module = PlayerOrbisModule.get(player);
+
+		if (module.powers().getSelectPower().getSelectedRegion() != null && !world.isRemote)
+		{
+			final WorldObjectManager manager = WorldObjectManager.get(world);
+			final IWorldObjectGroup group = manager.getGroup(0);
+
+			NetworkingAether.sendPacketToServer(new PacketClearSelectedRegion());
+			NetworkingAether.sendPacketToServer(new PacketWorldObjectRemove(world, group, module.powers().getSelectPower().getSelectedRegion()));
+
+			module.powers().getSelectPower().setSelectedRegion(null);
+		}
+	}
+
+	@SubscribeEvent
+	public static void onPlayerLoggedOut(final PlayerEvent.PlayerLoggedOutEvent event)
+	{
+		clearSelection(event.player);
+	}
+
+	@SubscribeEvent
+	public static void onPlayerChangedDimension(final PlayerEvent.PlayerChangedDimensionEvent event)
+	{
+		clearSelection(event.player);
 	}
 
 	@SubscribeEvent
