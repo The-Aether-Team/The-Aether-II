@@ -144,6 +144,7 @@ public class ClientEventHandler
 		else
 		{
 			OrbisCore.stopProjectManager();
+			OrbisCore.stopWorldObjectManagerProvider();
 			CHUNK_RENDERER_MANAGER.unload();
 		}
 

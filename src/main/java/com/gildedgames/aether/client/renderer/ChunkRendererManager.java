@@ -34,7 +34,7 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 
 	public static IChunkRenderer getChunkRenderer(final World world, final int chunkX, final int chunkZ)
 	{
-		final IChunkRenderer data = OrbisCore.getWorldObjectManagerProvider().getRendererForWorld(world).get(chunkX, chunkZ);
+		final IChunkRenderer data = OrbisCore.getWorldObjectManagerProvider(false).getRendererForWorld(world).get(chunkX, chunkZ);
 
 		return data;
 	}

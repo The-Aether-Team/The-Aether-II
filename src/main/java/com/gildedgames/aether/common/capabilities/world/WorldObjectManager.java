@@ -52,12 +52,12 @@ public class WorldObjectManager implements IWorldObjectManager
 
 	public static IWorldObjectManager get(final World world)
 	{
-		return OrbisCore.getWorldObjectManagerProvider().getForWorld(world);
+		return OrbisCore.getWorldObjectManagerProvider(true).getForWorld(world);
 	}
 
 	public static IWorldObjectManager get(final int dimension)
 	{
-		return OrbisCore.getWorldObjectManagerProvider().getForDimension(dimension);
+		return OrbisCore.getWorldObjectManagerProvider(true).getForDimension(dimension);
 	}
 
 	/**

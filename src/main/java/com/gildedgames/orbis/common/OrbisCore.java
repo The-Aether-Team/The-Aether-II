@@ -66,7 +66,7 @@ public class OrbisCore
 		}
 	}
 
-	public static void startWorldObjectManagerProvider(final boolean read)
+	public synchronized static void startWorldObjectManagerProvider(final boolean read)
 	{
 		if (worldObjectManagerProvider != null)
 		{
@@ -88,7 +88,7 @@ public class OrbisCore
 		}
 	}
 
-	public static void stopWorldObjectManagerProvider()
+	public synchronized static void stopWorldObjectManagerProvider()
 	{
 		if (worldObjectManagerProvider != null)
 		{
@@ -97,17 +97,17 @@ public class OrbisCore
 		}
 	}
 
-	public static IWorldObjectManagerProvider getWorldObjectManagerProvider()
+	public synchronized static IWorldObjectManagerProvider getWorldObjectManagerProvider(final boolean read)
 	{
 		if (worldObjectManagerProvider == null)
 		{
-			startWorldObjectManagerProvider(false);
+			startWorldObjectManagerProvider(read);
 		}
 
 		return worldObjectManagerProvider;
 	}
 
-	public static void startProjectManager()
+	public synchronized static void startProjectManager()
 	{
 		if (projectManager != null)
 		{
@@ -133,7 +133,7 @@ public class OrbisCore
 		projectManager.scanAndCacheProjects();
 	}
 
-	public static void stopProjectManager()
+	public synchronized static void stopProjectManager()
 	{
 		if (projectManager != null)
 		{
@@ -142,7 +142,7 @@ public class OrbisCore
 		}
 	}
 
-	public static IProjectManager getProjectManager()
+	public synchronized static IProjectManager getProjectManager()
 	{
 		if (projectManager == null)
 		{
