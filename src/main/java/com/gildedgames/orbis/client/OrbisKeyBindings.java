@@ -17,12 +17,15 @@ public class OrbisKeyBindings
 
 	public static KeyBinding keyBindDelete = new KeyBinding("keybindings.delete", Keyboard.KEY_DELETE, "key.categories.misc");
 
+	public static KeyBinding keyBindCopy = new KeyBinding("keybindings.copy", Keyboard.KEY_C, "key.categories.misc");
+
 	public static void init()
 	{
 		ClientRegistry.registerKeyBinding(keyBindControl);
 		ClientRegistry.registerKeyBinding(keyBindFindPower);
 		ClientRegistry.registerKeyBinding(keyBindRotate);
 		ClientRegistry.registerKeyBinding(keyBindDelete);
+		ClientRegistry.registerKeyBinding(keyBindCopy);
 	}
 
 }

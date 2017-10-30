@@ -11,7 +11,10 @@ import com.gildedgames.orbis.client.gui.GuiChoiceMenuPowers;
 import com.gildedgames.orbis.client.gui.GuiChoiceMenuSelectionTypes;
 import com.gildedgames.orbis.client.renderers.AirSelectionRenderer;
 import com.gildedgames.orbis.common.OrbisCore;
+import com.gildedgames.orbis.common.block.BlockDataContainer;
 import com.gildedgames.orbis.common.block.BlockFilter;
+import com.gildedgames.orbis.common.items.ItemBlockDataContainer;
+import com.gildedgames.orbis.common.items.ItemsOrbis;
 import com.gildedgames.orbis.common.network.packets.*;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.PlayerSelectionModule;
@@ -25,6 +28,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiIngameMenu;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -101,20 +105,31 @@ public class OrbisDeveloperEventsClient
 		if (mc.world != null && mc.player != null)
 		{
 			final PlayerOrbisModule module = PlayerOrbisModule.get(mc.player);
+			final GodPowerSelect select = module.powers().getSelectPower();
 
 			if (module.inDeveloperMode())
 			{
+				final Minecraft mc = Minecraft.getMinecraft();
+
 				final GuiScreen current = Minecraft.getMinecraft().currentScreen;
+
+				if ((Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) && OrbisKeyBindings.keyBindCopy.isPressed())
+				{
+					final BlockDataContainer container = BlockDataContainer.fromShape(mc.player.world, select.getSelectedRegion());
+					final ItemStack item = new ItemStack(ItemsOrbis.blockdata);
+					ItemBlockDataContainer.setDatacontainer(item, container);
+
+					NetworkingAether.sendPacketToServer(new PacketSetItemStackInHand(item));
+					mc.player.inventory.setInventorySlotContents(mc.player.inventory.currentItem, item);
+				}
 
 				if (OrbisKeyBindings.keyBindDelete.isPressed())
 				{
-					final GodPowerSelect power = module.powers().getSelectPower();
-
-					if (power.getSelectedRegion() != null)
+					if (select.getSelectedRegion() != null)
 					{
 						final BlockFilter filter = new BlockFilter(BlockFilterHelper.getNewDeleteLayer(mc.player.getHeldItemMainhand()));
 
-						NetworkingAether.sendPacketToServer(new PacketFilterShape(power.getSelectedRegion(), filter));
+						NetworkingAether.sendPacketToServer(new PacketFilterShape(select.getSelectedRegion(), filter));
 					}
 				}
 

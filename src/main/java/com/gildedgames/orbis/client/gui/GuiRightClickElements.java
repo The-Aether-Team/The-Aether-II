@@ -11,7 +11,7 @@ import com.gildedgames.orbis.common.block.BlockFilter;
 import com.gildedgames.orbis.common.items.ItemBlockDataContainer;
 import com.gildedgames.orbis.common.items.ItemsOrbis;
 import com.gildedgames.orbis.common.network.packets.PacketFilterShape;
-import com.gildedgames.orbis.common.network.packets.PacketSetItemStack;
+import com.gildedgames.orbis.common.network.packets.PacketSetItemStackInHand;
 import com.gildedgames.orbis.common.network.packets.PacketWorldObjectRemove;
 import com.gildedgames.orbis.common.util.BlockFilterHelper;
 import net.minecraft.client.Minecraft;
@@ -45,8 +45,10 @@ public class GuiRightClickElements
 				final ItemStack item = new ItemStack(ItemsOrbis.blockdata);
 				ItemBlockDataContainer.setDatacontainer(item, container);
 
-				NetworkingAether.sendPacketToServer(new PacketSetItemStack(item));
-				Minecraft.getMinecraft().player.inventory.setItemStack(item);
+				final Minecraft mc = Minecraft.getMinecraft();
+
+				NetworkingAether.sendPacketToServer(new PacketSetItemStackInHand(item));
+				mc.player.inventory.setInventorySlotContents(mc.player.inventory.currentItem, item);
 			}
 		};
 	}
