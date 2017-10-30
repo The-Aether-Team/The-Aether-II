@@ -89,4 +89,10 @@ public class DataIdentifier implements IDataIdentifier
 		return builder.toHashCode();
 	}
 
+	@Override
+	public String toString()
+	{
+		return this.dataId + ":" + this.projectIdentifier.toString();
+	}
+
 }

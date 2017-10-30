@@ -6,7 +6,6 @@ import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingProjectException;
 import com.gildedgames.aether.api.orbis.management.IDataIdentifier;
 import com.gildedgames.aether.api.orbis.management.IDataMetadata;
 import com.gildedgames.aether.api.orbis.region.IRegion;
-import com.gildedgames.aether.api.orbis.util.OrbisRotation;
 import com.gildedgames.aether.api.orbis.util.RotationHelp;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.common.OrbisCore;
@@ -23,6 +22,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -76,13 +76,15 @@ public class ItemBlueprint extends Item
 
 				final BlueprintData data = module.powers().getBlueprintPower().getPlacingBlueprint();
 
-				final OrbisRotation rotation = OrbisRotation.neutral();
+				final Rotation rotation = module.powers().getBlueprintPower().getPlacingRotation();
 
 				final IRegion region = RotationHelp.regionFromCenter(selection, data, rotation);
 
 				final DataPrimer primer = new DataPrimer(new WorldPrimer(world));
 
 				primer.create(data.getBlockDataContainer(), region.getMin(), rotation, new CreationData(world, player));
+
+				System.out.println(data.getMetadata().getIdentifier());
 			}
 
 			return new ActionResult(EnumActionResult.SUCCESS, player.getHeldItem(handIn));
@@ -104,9 +106,16 @@ public class ItemBlueprint extends Item
 
 		if (id != null)
 		{
-			final IDataMetadata data = OrbisCore.getProjectManager().findMetadata(id);
+			try
+			{
+				final IDataMetadata data = OrbisCore.getProjectManager().findMetadata(id);
 
-			return data.getName();
+				return data.getName();
+			}
+			catch (OrbisMissingDataException | OrbisMissingProjectException e)
+			{
+				AetherCore.LOGGER.error(e);
+			}
 		}
 
 		return super.getItemStackDisplayName(stack);

@@ -13,10 +13,13 @@ public class OrbisKeyBindings
 
 	public static KeyBinding keyBindFindPower = new KeyBinding("keybindings.findPower", Keyboard.KEY_TAB, "key.categories.misc");
 
+	public static KeyBinding keyBindRotate = new KeyBinding("keybindings.rotate", Keyboard.KEY_R, "key.categories.misc");
+
 	public static void init()
 	{
 		ClientRegistry.registerKeyBinding(keyBindControl);
 		ClientRegistry.registerKeyBinding(keyBindFindPower);
+		ClientRegistry.registerKeyBinding(keyBindRotate);
 	}
 
 }

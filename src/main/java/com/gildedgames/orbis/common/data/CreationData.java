@@ -1,7 +1,7 @@
 package com.gildedgames.orbis.common.data;
 
-import com.gildedgames.aether.api.orbis.util.OrbisRotation;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.Rotation;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -15,7 +15,7 @@ public class CreationData implements ICreationData
 
 	private EntityPlayer creator;
 
-	private OrbisRotation rotation;
+	private Rotation rotation;
 
 	public CreationData(final World world)
 	{
@@ -49,7 +49,7 @@ public class CreationData implements ICreationData
 	}
 
 	@Override
-	public OrbisRotation getRotation()
+	public Rotation getRotation()
 	{
 		return this.rotation;
 	}

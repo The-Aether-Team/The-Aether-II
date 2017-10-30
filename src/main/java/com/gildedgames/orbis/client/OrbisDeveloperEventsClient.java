@@ -1,6 +1,7 @@
 package com.gildedgames.orbis.client;
 
 import com.gildedgames.aether.api.orbis.shapes.IShape;
+import com.gildedgames.aether.api.orbis.util.RotationHelp;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.client.gui.GuiChoiceMenuHolder;
@@ -8,11 +9,14 @@ import com.gildedgames.orbis.client.gui.GuiChoiceMenuPowers;
 import com.gildedgames.orbis.client.gui.GuiChoiceMenuSelectionTypes;
 import com.gildedgames.orbis.client.gui.GuiRightClickBlueprint;
 import com.gildedgames.orbis.client.renderers.AirSelectionRenderer;
+import com.gildedgames.orbis.common.OrbisCore;
 import com.gildedgames.orbis.common.network.packets.PacketClearSelection;
 import com.gildedgames.orbis.common.network.packets.PacketDeveloperReach;
 import com.gildedgames.orbis.common.network.packets.PacketOpenGui;
+import com.gildedgames.orbis.common.network.packets.PacketRotateBlueprint;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.PlayerSelectionModule;
+import com.gildedgames.orbis.common.player.godmode.GodPowerBlueprint;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import com.gildedgames.orbis.common.util.OrbisRaytraceHelp;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
@@ -86,6 +90,17 @@ public class OrbisDeveloperEventsClient
 			{
 				final GuiScreen current = Minecraft.getMinecraft().currentScreen;
 
+				if (OrbisKeyBindings.keyBindRotate.isPressed())
+				{
+					final GodPowerBlueprint power = module.powers().getBlueprintPower();
+
+					if (power.getPlacingBlueprint() != null)
+					{
+						power.setPlacingRotation(RotationHelp.getNextRotation(power.getPlacingRotation(), true));
+						NetworkingAether.sendPacketToServer(new PacketRotateBlueprint());
+					}
+				}
+
 				if (Keyboard.isKeyDown(OrbisKeyBindings.keyBindFindPower.getKeyCode()))
 				{
 					if (current == null)
@@ -118,6 +133,10 @@ public class OrbisDeveloperEventsClient
 
 				NetworkingAether.sendPacketToServer(new PacketDeveloperReach(prevReach));
 			}
+		}
+		else
+		{
+			OrbisCore.stopProjectManager();
 		}
 	}
 

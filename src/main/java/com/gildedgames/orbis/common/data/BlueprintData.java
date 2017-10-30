@@ -8,13 +8,13 @@ import com.gildedgames.aether.api.orbis.region.IDimensions;
 import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.orbis.region.IRotateable;
 import com.gildedgames.aether.api.orbis.shapes.IShape;
-import com.gildedgames.aether.api.orbis.util.OrbisRotation;
 import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.common.block.BlockData;
 import com.gildedgames.orbis.common.block.BlockDataContainer;
 import com.gildedgames.orbis.common.data.management.DataMetadata;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -76,15 +76,13 @@ public class BlueprintData implements IDimensions, NBT, IData
 		this.metadata = funnel.get("metadata");
 	}
 
-	public void fetchBlocksInside(final IShape shape, final World world, final OrbisRotation rotation)
+	public void fetchBlocksInside(final IShape shape, final World world, final Rotation rotation)
 	{
-		//TODO: Test. May need reversed rotation or sth (East -> West, West -> East)
-		//final IRegion rotated = RotationHelp.rotate(shape, rotation);
 		final BlockDataContainer container = new BlockDataContainer(shape.getBoundingBox());
 
 		final BlockPos min = shape.getBoundingBox().getMin();
 
-		for (final BlockPos pos : shape.createShapeData())//RotationHelp.getAllInRegionRotated(region, rotation))
+		for (final BlockPos pos : shape.createShapeData())
 		{
 			final BlockData blockData = new BlockData().getDataFrom(pos, world);
 
@@ -102,7 +100,7 @@ public class BlueprintData implements IDimensions, NBT, IData
 		if (object instanceof IShape)
 		{
 			final IShape shape = (IShape) object;
-			OrbisRotation rotation = OrbisRotation.neutral();
+			Rotation rotation = Rotation.NONE;
 
 			if (object instanceof IRotateable)
 			{
@@ -125,5 +123,19 @@ public class BlueprintData implements IDimensions, NBT, IData
 	public IDataMetadata getMetadata()
 	{
 		return this.metadata;
+	}
+
+	@Override
+	public IData clone()
+	{
+		final BlueprintData data = new BlueprintData();
+
+		final NBTTagCompound tag = new NBTTagCompound();
+
+		this.write(tag);
+
+		data.read(tag);
+
+		return data;
 	}
 }

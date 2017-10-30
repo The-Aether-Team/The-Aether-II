@@ -1,6 +1,8 @@
 package com.gildedgames.orbis.common.network.packets.projects;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
+import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingDataException;
+import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingProjectException;
 import com.gildedgames.aether.api.orbis.management.IProject;
 import com.gildedgames.aether.api.orbis.management.IProjectIdentifier;
 import com.gildedgames.aether.common.AetherCore;
@@ -71,9 +73,16 @@ public class PacketRequestProject extends PacketMultipleParts
 				return null;
 			}
 
-			final IProject project = OrbisCore.getProjectManager().findProject(message.project);
+			try
+			{
+				final IProject project = OrbisCore.getProjectManager().findProject(message.project);
 
-			NetworkingAether.sendPacketToPlayer(new PacketSendProject(project), (EntityPlayerMP) player);
+				NetworkingAether.sendPacketToPlayer(new PacketSendProject(project), (EntityPlayerMP) player);
+			}
+			catch (OrbisMissingDataException | OrbisMissingProjectException e)
+			{
+				AetherCore.LOGGER.error(e);
+			}
 
 			return null;
 		}

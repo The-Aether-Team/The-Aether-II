@@ -246,7 +246,7 @@ public class OrbisProjectManager implements IProjectManager
 		}
 		catch (final IOException e)
 		{
-			e.printStackTrace();
+			AetherCore.LOGGER.error(e);
 		}
 
 		return null;

@@ -1,5 +1,7 @@
 package com.gildedgames.orbis.client.gui;
 
+import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingDataException;
+import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingProjectException;
 import com.gildedgames.aether.api.orbis.management.IData;
 import com.gildedgames.aether.api.orbis.management.IProject;
 import com.gildedgames.aether.common.AetherCore;
@@ -121,12 +123,20 @@ public class GuiLoadBlueprint extends GuiFrame implements IDirectoryNavigatorLis
 		if (node instanceof BlueprintNode)
 		{
 			final ItemStack stack = new ItemStack(ItemsOrbis.blueprint);
-			final IData data = OrbisCore.getProjectManager().findData(GuiLoadBlueprint.this.project, node.getFile());
 
-			ItemBlueprint.setBlueprint(stack, data.getMetadata().getIdentifier());
+			try
+			{
+				final IData data = OrbisCore.getProjectManager().findData(GuiLoadBlueprint.this.project, node.getFile());
 
-			NetworkingAether.sendPacketToServer(new PacketSetItemStack(stack));
-			Minecraft.getMinecraft().player.inventory.setItemStack(stack);
+				ItemBlueprint.setBlueprint(stack, data.getMetadata().getIdentifier());
+
+				NetworkingAether.sendPacketToServer(new PacketSetItemStack(stack));
+				Minecraft.getMinecraft().player.inventory.setItemStack(stack);
+			}
+			catch (OrbisMissingDataException | OrbisMissingProjectException e)
+			{
+				AetherCore.LOGGER.error(e);
+			}
 		}
 
 		if (node instanceof ProjectNode)

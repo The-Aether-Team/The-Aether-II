@@ -1,11 +1,11 @@
 package com.gildedgames.aether.api.orbis.region;
 
 import com.gildedgames.aether.api.orbis.shapes.IShape;
-import com.gildedgames.aether.api.orbis.util.OrbisRotation;
 import com.gildedgames.aether.api.orbis.util.RegionHelp;
 import com.gildedgames.aether.api.orbis.util.RotationHelp;
 import com.gildedgames.aether.api.util.NBTHelper;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -307,7 +307,7 @@ public class Region implements IMutableRegion
 	}
 
 	@Override
-	public IShape rotate(final OrbisRotation rotation, final IRegion regionIn)
+	public IShape rotate(final Rotation rotation, final IRegion regionIn)
 	{
 		final IShape rotated = RotationHelp.rotate(this, regionIn, rotation);
 

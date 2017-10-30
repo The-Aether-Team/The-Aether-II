@@ -2,10 +2,18 @@ package com.gildedgames.aether.api.orbis.management;
 
 import com.gildedgames.aether.api.util.NBT;
 
+import javax.annotation.Nullable;
 import java.util.Collection;
 
 public interface IProjectCache extends NBT
 {
+
+	/**
+	 * @param dataId The data id for the data.
+	 * @return Whether or not the cache has a
+	 * piece of data stored with that data id.
+	 */
+	boolean hasData(int dataId);
 
 	/**
 	 * @param project The project that is using this cache.
@@ -32,6 +40,7 @@ public interface IProjectCache extends NBT
 	 * @param dataId
 	 * @return
 	 */
+	@Nullable
 	IData getData(int dataId);
 
 	/**
@@ -40,6 +49,7 @@ public interface IProjectCache extends NBT
 	 * @param dataId
 	 * @return
 	 */
+	@Nullable
 	IDataMetadata getMetadata(int dataId);
 
 	/**
@@ -76,6 +86,7 @@ public interface IProjectCache extends NBT
 	 * @param dataId The data id.
 	 * @return The location of that data.
 	 */
+	@Nullable
 	String getDataLocation(int dataId);
 
 	/**

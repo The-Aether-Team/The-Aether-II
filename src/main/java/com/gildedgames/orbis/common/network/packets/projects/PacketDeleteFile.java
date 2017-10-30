@@ -1,6 +1,8 @@
 package com.gildedgames.orbis.common.network.packets.projects;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
+import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingDataException;
+import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingProjectException;
 import com.gildedgames.aether.api.orbis.management.IProject;
 import com.gildedgames.aether.api.orbis.management.IProjectIdentifier;
 import com.gildedgames.aether.common.AetherCore;
@@ -82,27 +84,34 @@ public class PacketDeleteFile extends PacketMultipleParts
 				return null;
 			}
 
-			final IProject project = OrbisCore.getProjectManager().findProject(message.project);
-
-			project.getCache().removeData(project.getCache().getDataId(message.location));
-
-			final File file = new File(project.getLocation(), message.location);
-
-			if (file.delete())
+			try
 			{
-				if (Minecraft.getMinecraft().currentScreen instanceof GuiViewProjects)
+				final IProject project = OrbisCore.getProjectManager().findProject(message.project);
+
+				project.getCache().removeData(project.getCache().getDataId(message.location));
+
+				final File file = new File(project.getLocation(), message.location);
+
+				if (file.delete())
 				{
-					final GuiViewProjects viewProjects = (GuiViewProjects) Minecraft.getMinecraft().currentScreen;
+					if (Minecraft.getMinecraft().currentScreen instanceof GuiViewProjects)
+					{
+						final GuiViewProjects viewProjects = (GuiViewProjects) Minecraft.getMinecraft().currentScreen;
 
-					viewProjects.refreshNavigator();
+						viewProjects.refreshNavigator();
+					}
+
+					if (Minecraft.getMinecraft().currentScreen instanceof GuiLoadBlueprint)
+					{
+						final GuiLoadBlueprint loadBlueprints = (GuiLoadBlueprint) Minecraft.getMinecraft().currentScreen;
+
+						loadBlueprints.refreshNavigator();
+					}
 				}
-
-				if (Minecraft.getMinecraft().currentScreen instanceof GuiLoadBlueprint)
-				{
-					final GuiLoadBlueprint loadBlueprints = (GuiLoadBlueprint) Minecraft.getMinecraft().currentScreen;
-
-					loadBlueprints.refreshNavigator();
-				}
+			}
+			catch (OrbisMissingDataException | OrbisMissingProjectException e)
+			{
+				AetherCore.LOGGER.error(e);
 			}
 
 			return null;
