@@ -1,17 +1,21 @@
 package com.gildedgames.aether.common.capabilities.world.chunk;
 
-import com.gildedgames.aether.api.orbis.IChunkRenderer;
+import com.gildedgames.aether.api.orbis.IChunkRendererCapability;
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
 import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.orbis.region.Region;
 import com.gildedgames.aether.api.orbis.util.RegionHelp;
 import com.google.common.collect.Lists;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
 
 import java.util.List;
 
-public class ChunkRenderer implements IChunkRenderer
+public class ChunkRenderer implements IChunkRendererCapability
 {
 	private final Region boundingBox;
 
@@ -48,7 +52,7 @@ public class ChunkRenderer implements IChunkRenderer
 	private void render(final World world, final IWorldRenderer renderer, final float partialTicks)
 	{
 		renderer.startRendering(world, partialTicks);
-		
+
 		renderer.finishRendering(world);
 
 		for (final IWorldRenderer subRenderer : renderer.getSubRenderers(world))
@@ -85,6 +89,38 @@ public class ChunkRenderer implements IChunkRenderer
 	public IRegion getBoundingBox()
 	{
 		return this.boundingBox;
+	}
+
+	@Override
+	public void write(final NBTTagCompound tag)
+	{
+
+	}
+
+	@Override
+	public void read(final NBTTagCompound tag)
+	{
+
+	}
+
+	public static class Storage implements Capability.IStorage<IChunkRendererCapability>
+	{
+		@Override
+		public NBTBase writeNBT(final Capability<IChunkRendererCapability> capability, final IChunkRendererCapability instance, final EnumFacing side)
+		{
+			final NBTTagCompound out = new NBTTagCompound();
+			instance.write(out);
+
+			return out;
+		}
+
+		@Override
+		public void readNBT(final Capability<IChunkRendererCapability> capability, final IChunkRendererCapability instance, final EnumFacing side,
+				final NBTBase nbt)
+		{
+			final NBTTagCompound input = (NBTTagCompound) nbt;
+			instance.read(input);
+		}
 	}
 
 }

@@ -1,18 +1,22 @@
 package com.gildedgames.aether.common.capabilities.world;
 
+import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.IWorldObjectGroup;
 import com.gildedgames.aether.api.orbis.IWorldObjectManager;
 import com.gildedgames.aether.api.orbis.IWorldObjectManagerObserver;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.orbis.common.OrbisCore;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
@@ -47,30 +51,40 @@ public class WorldObjectManager implements IWorldObjectManager
 		this.world = world;
 	}
 
-	public static IWorldObjectManager get(final int dimId, EntityPlayer player)
+	public static IWorldObjectManager get(final int dimId, final EntityPlayer player)
 	{
 		if (player.world.isRemote)
 		{
 			if (player.dimension == dimId)
 			{
-				return OrbisCore.getWorldObjectManagerProvider(true).getForWorld(player.world);
+				return player.world.getCapability(AetherCapabilities.WORLD_OBJECT_MANAGER, null);
 			}
+
 			return null;
 		}
 		else
 		{
-			return get(DimensionManager.getWorld(dimId));
+			return DimensionManager.getWorld(dimId).getCapability(AetherCapabilities.WORLD_OBJECT_MANAGER, null);
 		}
 	}
 
 	public static IWorldObjectManager get(final World world)
 	{
-		return OrbisCore.getWorldObjectManagerProvider(true).getForWorld(world);
-	}
+		if (world.isRemote)
+		{
+			final Minecraft mc = Minecraft.getMinecraft();
 
-	public static IWorldObjectManager get(final int dimension)
-	{
-		return OrbisCore.getWorldObjectManagerProvider(true).getForDimension(dimension);
+			if (mc.world.provider.getDimension() == mc.player.dimension)
+			{
+				return mc.player.world.getCapability(AetherCapabilities.WORLD_OBJECT_MANAGER, null);
+			}
+
+			return null;
+		}
+		else
+		{
+			return DimensionManager.getWorld(world.provider.getDimension()).getCapability(AetherCapabilities.WORLD_OBJECT_MANAGER, null);
+		}
 	}
 
 	/**
@@ -187,6 +201,24 @@ public class WorldObjectManager implements IWorldObjectManager
 		}
 
 		this.idToGroup = HashBiMap.create(funnel.getIntMap(this.world, "groups"));
+	}
+
+	public static class Storage implements Capability.IStorage<IWorldObjectManager>
+	{
+		@Override
+		public NBTBase writeNBT(final Capability<IWorldObjectManager> capability, final IWorldObjectManager instance, final EnumFacing side)
+		{
+			final NBTTagCompound nbt = new NBTTagCompound();
+			instance.write(nbt);
+
+			return nbt;
+		}
+
+		@Override
+		public void readNBT(final Capability<IWorldObjectManager> capability, final IWorldObjectManager instance, final EnumFacing side, final NBTBase nbt)
+		{
+			instance.read((NBTTagCompound) nbt);
+		}
 	}
 
 }

@@ -4,7 +4,6 @@ import com.gildedgames.aether.api.orbis.IWorldObjectManager;
 import com.gildedgames.aether.api.orbis.IWorldObjectManagerProvider;
 import com.gildedgames.aether.api.orbis.management.IProjectManager;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
-import com.gildedgames.aether.common.capabilities.world.WorldObjectManagerProvider;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.common.data.management.OrbisProjectManager;
 import com.gildedgames.orbis.common.network.packets.PacketWorldObjectManager;
@@ -23,7 +22,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import java.io.File;
-import java.io.IOException;
 
 public class OrbisCore
 {
@@ -64,51 +62,6 @@ public class OrbisCore
 				NetworkingAether.sendPacketToPlayer(new PacketWorldObjectManager(manager), (EntityPlayerMP) player);
 			}
 		}
-	}
-
-	public synchronized static void startWorldObjectManagerProvider(final boolean read)
-	{
-		if (worldObjectManagerProvider != null)
-		{
-			return;
-		}
-
-		try
-		{
-			worldObjectManagerProvider = new WorldObjectManagerProvider(new File(DimensionManager.getCurrentSaveRootDirectory(), "/data/orbis/"));
-		}
-		catch (final IOException e)
-		{
-			e.printStackTrace();
-		}
-
-		if (read)
-		{
-			worldObjectManagerProvider.read();
-		}
-	}
-
-	public synchronized static void stopWorldObjectManagerProvider(final boolean write)
-	{
-		if (worldObjectManagerProvider != null)
-		{
-			if (write)
-			{
-				worldObjectManagerProvider.write();
-			}
-
-			worldObjectManagerProvider = null;
-		}
-	}
-
-	public synchronized static IWorldObjectManagerProvider getWorldObjectManagerProvider(final boolean read)
-	{
-		if (worldObjectManagerProvider == null)
-		{
-			startWorldObjectManagerProvider(read);
-		}
-
-		return worldObjectManagerProvider;
 	}
 
 	public synchronized static void startProjectManager()
@@ -173,12 +126,10 @@ public class OrbisCore
 	public static void onServerStopping(final FMLServerStoppingEvent event)
 	{
 		stopProjectManager();
-		stopWorldObjectManagerProvider(true);
 	}
 
 	public static void onServerStarted(final FMLServerStartedEvent event)
 	{
-		startWorldObjectManagerProvider(true);
 		startProjectManager();
 	}
 }

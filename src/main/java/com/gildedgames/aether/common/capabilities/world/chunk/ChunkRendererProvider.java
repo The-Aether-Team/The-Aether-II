@@ -1,51 +1,61 @@
 package com.gildedgames.aether.common.capabilities.world.chunk;
 
-import com.gildedgames.aether.api.orbis.IChunkRenderer;
-import com.gildedgames.aether.api.orbis.IChunkRendererProvider;
-import com.google.common.collect.Maps;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraftforge.event.world.ChunkEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.orbis.IChunkRendererCapability;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-import java.util.Map;
+import javax.annotation.Nullable;
 
-public class ChunkRendererProvider implements IChunkRendererProvider
+public class ChunkRendererProvider implements ICapabilitySerializable<NBTBase>
 {
-	private final Map<ChunkPos, IChunkRenderer> posToRenderer = Maps.newHashMap();
+	private final IChunkRendererCapability capability;
 
-	private final int dimension;
-
-	public ChunkRendererProvider(final int dimension)
+	public ChunkRendererProvider(final IChunkRendererCapability capability)
 	{
-		this.dimension = dimension;
+		this.capability = capability;
 	}
 
 	@Override
-	public IChunkRenderer get(final int chunkX, final int chunkZ)
+	public boolean hasCapability(final Capability<?> capability, @Nullable final EnumFacing facing)
 	{
-		return this.posToRenderer.get(new ChunkPos(chunkX, chunkZ));
+		return capability == AetherCapabilities.CHUNK_RENDERER && this.capability != null;
 	}
 
-	@SubscribeEvent
-	public void onChunkLoad(final ChunkEvent.Load event)
+	@Override
+	@SuppressWarnings("unchecked")
+	public <T> T getCapability(final Capability<T> capability, @Nullable final EnumFacing facing)
 	{
-		if (event.getWorld().provider.getDimension() == this.dimension)
+		return this.hasCapability(capability, facing) ? (T) this.capability : null;
+	}
+
+	@Override
+	public NBTBase serializeNBT()
+	{
+		if (this.capability == null)
 		{
-			final ChunkPos pos = event.getChunk().getPos();
-
-			this.posToRenderer.put(pos, new ChunkRenderer(pos.chunkXPos, pos.chunkZPos));
+			return null;
 		}
+
+		final NBTTagCompound tag = new NBTTagCompound();
+
+		this.capability.write(tag);
+
+		return tag;
 	}
 
-	@SubscribeEvent
-	public void onChunkUnload(final ChunkEvent.Unload event)
+	@Override
+	public void deserializeNBT(final NBTBase nbt)
 	{
-		if (event.getWorld().provider.getDimension() == this.dimension)
+		if (this.capability == null)
 		{
-			final ChunkPos pos = event.getChunk().getPos();
-
-			this.posToRenderer.remove(pos);
+			return;
 		}
-	}
 
+		this.capability.read((NBTTagCompound) nbt);
+	}
 }
+

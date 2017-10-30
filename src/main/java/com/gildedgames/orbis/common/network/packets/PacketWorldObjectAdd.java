@@ -61,7 +61,7 @@ public class PacketWorldObjectAdd extends PacketMultipleParts
 		//Clients cannot send a packet requestion a change in a different dimension.
 		final IWorldObject object = message.funnel.get(player.world, "worldObject");
 
-		final IWorldObjectManager manager = WorldObjectManager.get(message.dimensionId);
+		final IWorldObjectManager manager = WorldObjectManager.get(message.dimensionId, player);
 		final IWorldObjectGroup group = manager.getGroup(message.groupId);
 
 		group.addObject(object);

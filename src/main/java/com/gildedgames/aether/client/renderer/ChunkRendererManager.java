@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.renderer;
 
+import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.orbis.*;
 import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.orbis.region.Region;
@@ -7,13 +8,14 @@ import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.api.orbis.util.RegionHelp;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherObserver;
+import com.gildedgames.aether.common.capabilities.world.chunk.ChunkAttachment;
 import com.gildedgames.orbis.client.renderers.RenderShape;
-import com.gildedgames.orbis.common.OrbisCore;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -32,9 +34,9 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 
 	private RenderShape activeSelectionRender;
 
-	public static IChunkRenderer getChunkRenderer(final World world, final int chunkX, final int chunkZ)
+	public static IChunkRendererCapability getChunkRenderer(final World world, final int chunkX, final int chunkZ)
 	{
-		final IChunkRenderer data = OrbisCore.getWorldObjectManagerProvider(false).getRendererForWorld(world).get(chunkX, chunkZ);
+		final IChunkRendererCapability data = ChunkAttachment.get(world).getAttachment(new ChunkPos(chunkX, chunkZ), AetherCapabilities.CHUNK_RENDERER);
 
 		return data;
 	}
@@ -78,7 +80,7 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 			{
 				this.load(world, x, z);
 
-				final IChunkRenderer chunk = getChunkRenderer(world, x, z);
+				final IChunkRendererCapability chunk = getChunkRenderer(world, x, z);
 
 				if (chunk != null)
 				{
@@ -92,7 +94,7 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 
 	public void load(final World world, final int chunkX, final int chunkZ)
 	{
-		final IChunkRenderer chunk = getChunkRenderer(world, chunkX, chunkZ);
+		final IChunkRendererCapability chunk = getChunkRenderer(world, chunkX, chunkZ);
 
 		if (chunk != null && !chunk.hasBeenLoaded())
 		{
@@ -127,7 +129,7 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 		{
 			for (int z = minChunkZ; z <= maxChunkZ; z++)
 			{
-				final IChunkRenderer chunk = getChunkRenderer(world, x, z);
+				final IChunkRendererCapability chunk = getChunkRenderer(world, x, z);
 
 				if (chunk != null)
 				{
@@ -156,7 +158,7 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 		{
 			for (int z = minChunkZ; z <= maxChunkZ; z++)
 			{
-				final IChunkRenderer chunk = getChunkRenderer(world, x, z);
+				final IChunkRendererCapability chunk = getChunkRenderer(world, x, z);
 
 				if (chunk != null)
 				{

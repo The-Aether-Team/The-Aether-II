@@ -1,6 +1,7 @@
 package com.gildedgames.aether.api.orbis;
 
 import com.gildedgames.aether.api.orbis.region.IRegion;
+import com.gildedgames.aether.api.util.NBT;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  * Stores world renderers in a chunk. Used primarily by
  * Orbis to render regions/shapes in the world.
  */
-public interface IChunkRenderer
+public interface IChunkRendererCapability extends NBT
 {
 
 	boolean hasBeenLoaded();
