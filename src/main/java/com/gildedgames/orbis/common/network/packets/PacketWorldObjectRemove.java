@@ -2,7 +2,6 @@ package com.gildedgames.orbis.common.network.packets;
 
 import com.gildedgames.aether.api.orbis.IWorldObject;
 import com.gildedgames.aether.api.orbis.IWorldObjectGroup;
-import com.gildedgames.aether.api.orbis.IWorldObjectManager;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
@@ -31,7 +30,7 @@ public class PacketWorldObjectRemove implements IMessage
 
 	public PacketWorldObjectRemove(final World world, final IWorldObjectGroup group, final IWorldObject object)
 	{
-		final IWorldObjectManager manager = WorldObjectManager.get(world);
+		final WorldObjectManager manager = WorldObjectManager.get(world);
 
 		this.groupId = manager.getID(group);
 		this.objectId = group.getID(object);
@@ -42,7 +41,7 @@ public class PacketWorldObjectRemove implements IMessage
 	{
 		//TODO: This assumes the player sending this message is in the world we want to add the World Object
 		//Clients cannot send a packet requestion a change in a different dimension.
-		final IWorldObjectManager manager = WorldObjectManager.get(player.world);
+		final WorldObjectManager manager = WorldObjectManager.get(player.world);
 		final IWorldObjectGroup group = manager.getGroup(message.groupId);
 
 		group.removeObject(message.objectId);

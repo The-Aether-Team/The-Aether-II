@@ -1,7 +1,6 @@
 package com.gildedgames.orbis.common.player.godmode.selectors;
 
 import com.gildedgames.aether.api.orbis.IWorldObjectGroup;
-import com.gildedgames.aether.api.orbis.IWorldObjectManager;
 import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -38,7 +37,7 @@ public class ShapeSelectorBlueprint implements IShapeSelector
 	@Override
 	public boolean canSelectShape(final PlayerOrbisModule module, final IShape shape, final World world)
 	{
-		final IWorldObjectManager manager = WorldObjectManager.get(world);
+		final WorldObjectManager manager = WorldObjectManager.get(world);
 		final IWorldObjectGroup group = manager.getGroup(0);
 
 		return !group.isIntersectingShapes(shape);
@@ -47,7 +46,7 @@ public class ShapeSelectorBlueprint implements IShapeSelector
 	@Override
 	public void onSelect(final PlayerOrbisModule module, final IShape selectedShape, final World world)
 	{
-		final IWorldObjectManager manager = WorldObjectManager.get(world);
+		final WorldObjectManager manager = WorldObjectManager.get(world);
 		final IWorldObjectGroup group = manager.getGroup(0);
 
 		final Blueprint blueprint = new Blueprint(world, selectedShape.getBoundingBox());
@@ -64,9 +63,9 @@ public class ShapeSelectorBlueprint implements IShapeSelector
 	}
 
 	@Override
-	public boolean onRightClickShape(PlayerOrbisModule module, IShape selectedShape, MouseEvent event)
+	public boolean onRightClickShape(final PlayerOrbisModule module, final IShape selectedShape, final MouseEvent event)
 	{
-		EntityPlayer entity = module.getEntity();
+		final EntityPlayer entity = module.getEntity();
 
 		final int x = MathHelper.floor(entity.posX);
 		final int y = MathHelper.floor(entity.posY);

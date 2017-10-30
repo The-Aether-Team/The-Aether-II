@@ -1,7 +1,5 @@
 package com.gildedgames.orbis.common;
 
-import com.gildedgames.aether.api.orbis.IWorldObjectManager;
-import com.gildedgames.aether.api.orbis.IWorldObjectManagerProvider;
 import com.gildedgames.aether.api.orbis.management.IProjectManager;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -30,8 +28,6 @@ public class OrbisCore
 
 	private static IProjectManager projectManager;
 
-	private static IWorldObjectManagerProvider worldObjectManagerProvider;
-
 	@SubscribeEvent
 	public static void onPlayerLogin(final PlayerEvent.PlayerLoggedInEvent event)
 	{
@@ -57,7 +53,7 @@ public class OrbisCore
 
 			if (!world.isRemote)
 			{
-				final IWorldObjectManager manager = WorldObjectManager.get(world);
+				final WorldObjectManager manager = WorldObjectManager.get(player.getServer().worldServerForDimension(world.provider.getDimension()));
 
 				NetworkingAether.sendPacketToPlayer(new PacketWorldObjectManager(manager), (EntityPlayerMP) player);
 			}

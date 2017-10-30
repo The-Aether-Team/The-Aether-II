@@ -69,6 +69,8 @@ public class WorldObjectGroup implements IWorldObjectGroup
 		{
 			observer.onObjectAdded(this, object);
 		}
+
+		WorldObjectManager.get(this.world).markDirty();
 	}
 
 	@Override
@@ -88,11 +90,16 @@ public class WorldObjectGroup implements IWorldObjectGroup
 	{
 		final IWorldObject object = this.idToObject.get(id);
 
-		this.idToObject.remove(id);
-
-		for (final IWorldObjectGroupObserver observer : this.observers)
+		if (this.idToObject.containsKey(id))
 		{
-			observer.onObjectRemoved(this, object);
+			this.idToObject.remove(id);
+
+			for (final IWorldObjectGroupObserver observer : this.observers)
+			{
+				observer.onObjectRemoved(this, object);
+			}
+
+			WorldObjectManager.get(this.world).markDirty();
 		}
 
 		return object != null;

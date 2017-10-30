@@ -3,7 +3,6 @@ package com.gildedgames.orbis.common.network.packets;
 import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.IWorldObject;
 import com.gildedgames.aether.api.orbis.IWorldObjectGroup;
-import com.gildedgames.aether.api.orbis.IWorldObjectManager;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
@@ -48,7 +47,7 @@ public class PacketWorldObjectAdd extends PacketMultipleParts
 
 	public PacketWorldObjectAdd(final World world, final IWorldObjectGroup group, final IWorldObject object)
 	{
-		final IWorldObjectManager manager = WorldObjectManager.get(world);
+		final WorldObjectManager manager = WorldObjectManager.get(world);
 
 		this.groupId = manager.getID(group);
 		this.worldObject = object;
@@ -61,7 +60,7 @@ public class PacketWorldObjectAdd extends PacketMultipleParts
 		//Clients cannot send a packet requestion a change in a different dimension.
 		final IWorldObject object = message.funnel.get(player.world, "worldObject");
 
-		final IWorldObjectManager manager = WorldObjectManager.get(message.dimensionId, player);
+		final WorldObjectManager manager = WorldObjectManager.get(player.world);
 		final IWorldObjectGroup group = manager.getGroup(message.groupId);
 
 		group.addObject(object);

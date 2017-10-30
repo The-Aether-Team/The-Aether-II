@@ -7,7 +7,6 @@ import com.gildedgames.aether.api.registry.IContentRegistry;
 import com.gildedgames.aether.api.util.IClassSerializer;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherHooks;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectGroup;
-import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.entities.util.MountEventHandler;
 import com.gildedgames.aether.common.entities.util.QuicksoilProcessor;
 import com.gildedgames.aether.common.items.tools.ItemToolHandler;
@@ -71,7 +70,6 @@ public class CommonProxy implements IAetherServices
 		s.register(2, RenderShape.class, new Instantiator<>(RenderShape.class));
 		s.register(3, WorldRegion.class, new Instantiator<>(WorldRegion.class));
 		s.register(4, WorldObjectGroup.class, new Instantiator<>(WorldObjectGroup.class));
-		s.register(5, WorldObjectManager.class, new Instantiator<>(WorldObjectManager.class));
 		s.register(6, Blueprint.class, new Instantiator<>(Blueprint.class));
 		s.register(7, BlockDataContainer.class, new Instantiator<>(BlockDataContainer.class));
 		s.register(8, SelectionTypeCuboid.class, new Instantiator<>(SelectionTypeCuboid.class));

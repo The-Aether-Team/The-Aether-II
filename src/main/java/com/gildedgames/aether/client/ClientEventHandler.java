@@ -10,7 +10,6 @@ import com.gildedgames.aether.api.items.equipment.effects.EffectInstance;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectPool;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
-import com.gildedgames.aether.api.orbis.IWorldObjectManager;
 import com.gildedgames.aether.client.gui.PerformanceIngame;
 import com.gildedgames.aether.client.renderer.ChunkRendererManager;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
@@ -134,7 +133,7 @@ public class ClientEventHandler
 
 		if (world != null)
 		{
-			final IWorldObjectManager manager = WorldObjectManager.get(world);
+			final WorldObjectManager manager = WorldObjectManager.get(world);
 
 			if (!manager.containsObserver(CHUNK_RENDERER_MANAGER))
 			{

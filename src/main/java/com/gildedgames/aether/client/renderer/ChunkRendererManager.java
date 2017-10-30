@@ -8,6 +8,8 @@ import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.api.orbis.util.RegionHelp;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherObserver;
+import com.gildedgames.aether.common.capabilities.world.IWorldObjectManagerObserver;
+import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.capabilities.world.chunk.ChunkAttachment;
 import com.gildedgames.orbis.client.renderers.RenderShape;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
@@ -297,7 +299,7 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 	}
 
 	@Override
-	public void onGroupAdded(final IWorldObjectManager manager, final IWorldObjectGroup group)
+	public void onGroupAdded(final WorldObjectManager manager, final IWorldObjectGroup group)
 	{
 		if (!group.containsObserver(this))
 		{
@@ -306,7 +308,7 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 	}
 
 	@Override
-	public void onGroupRemoved(final IWorldObjectManager manager, final IWorldObjectGroup group)
+	public void onGroupRemoved(final WorldObjectManager manager, final IWorldObjectGroup group)
 	{
 		for (final IWorldObject object : group.getObjects())
 		{
@@ -315,7 +317,7 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 	}
 
 	@Override
-	public void onReloaded(final IWorldObjectManager manager)
+	public void onReloaded(final WorldObjectManager manager)
 	{
 		for (final IWorldObjectGroup group : manager.getGroups())
 		{

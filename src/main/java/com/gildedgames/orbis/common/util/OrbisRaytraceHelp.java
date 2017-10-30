@@ -1,7 +1,6 @@
 package com.gildedgames.orbis.common.util;
 
 import com.gildedgames.aether.api.orbis.IWorldObject;
-import com.gildedgames.aether.api.orbis.IWorldObjectManager;
 import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.api.orbis.util.RegionHelp;
@@ -441,7 +440,7 @@ public class OrbisRaytraceHelp
 			final Vec3d endPosition, final RaytraceAction action,
 			final boolean allProjects)
 	{
-		final IWorldObjectManager manager = WorldObjectManager.get(player.world);
+		final WorldObjectManager manager = WorldObjectManager.get(player.world);
 
 		final IShape foundRegion = allProjects ?
 				RegionHelper.getIntersectingWorldShapeGlobal(pos, player.getEntityWorld()) :

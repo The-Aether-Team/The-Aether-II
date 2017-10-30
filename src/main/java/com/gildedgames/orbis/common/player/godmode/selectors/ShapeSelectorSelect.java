@@ -1,7 +1,6 @@
 package com.gildedgames.orbis.common.player.godmode.selectors;
 
 import com.gildedgames.aether.api.orbis.IWorldObjectGroup;
-import com.gildedgames.aether.api.orbis.IWorldObjectManager;
 import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -80,7 +79,7 @@ public class ShapeSelectorSelect implements IShapeSelector
 			return;
 		}
 
-		final IWorldObjectManager manager = WorldObjectManager.get(world);
+		final WorldObjectManager manager = WorldObjectManager.get(world);
 		final IWorldObjectGroup group = manager.getGroup(0);
 
 		final WorldShape region = new WorldShape(selectedShape, world);

@@ -1,6 +1,5 @@
 package com.gildedgames.orbis.common.network.packets;
 
-import com.gildedgames.aether.api.orbis.IWorldObjectManager;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.util.PacketMultipleParts;
@@ -13,7 +12,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 public class PacketWorldObjectManager extends PacketMultipleParts
 {
 
-	private IWorldObjectManager manager;
+	private WorldObjectManager manager;
 
 	private NBTTagCompound tag;
 
@@ -27,7 +26,7 @@ public class PacketWorldObjectManager extends PacketMultipleParts
 		super(data);
 	}
 
-	public PacketWorldObjectManager(final IWorldObjectManager manager)
+	public PacketWorldObjectManager(final WorldObjectManager manager)
 	{
 		this.manager = manager;
 	}
@@ -49,7 +48,7 @@ public class PacketWorldObjectManager extends PacketMultipleParts
 	{
 		final NBTTagCompound tag = new NBTTagCompound();
 
-		this.manager.write(tag);
+		this.manager.writeToNBT(tag);
 
 		ByteBufUtils.writeTag(buf, tag);
 	}
@@ -64,11 +63,11 @@ public class PacketWorldObjectManager extends PacketMultipleParts
 				return null;
 			}
 
-			final IWorldObjectManager manager = WorldObjectManager.get(player.world);
+			final WorldObjectManager manager = WorldObjectManager.get(player.world);
 
 			manager.setWorld(player.world);
 
-			manager.read(message.tag);
+			manager.readFromNBT(message.tag);
 
 			return null;
 		}

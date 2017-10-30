@@ -1,24 +1,16 @@
 package com.gildedgames.aether.common.capabilities.world;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.IWorldObjectGroup;
-import com.gildedgames.aether.api.orbis.IWorldObjectManager;
-import com.gildedgames.aether.api.orbis.IWorldObjectManagerObserver;
 import com.gildedgames.aether.common.AetherCore;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldSavedData;
+import net.minecraft.world.storage.MapStorage;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fml.client.FMLClientHandler;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import java.util.Collection;
 import java.util.List;
@@ -29,8 +21,10 @@ import java.util.List;
  * improve performance and prevent any issues with
  * OOM exceptions.
  */
-public class WorldObjectManager implements IWorldObjectManager
+public class WorldObjectManager extends WorldSavedData
 {
+	private static final String DATA_NAME = AetherCore.MOD_ID + "_WorldObjectManager";
+
 	private final List<IWorldObjectManagerObserver> observers = Lists.newArrayList();
 
 	private int dimension;
@@ -43,48 +37,33 @@ public class WorldObjectManager implements IWorldObjectManager
 
 	public WorldObjectManager()
 	{
+		super(DATA_NAME);
+	}
 
+	public WorldObjectManager(final String s)
+	{
+		super(s);
 	}
 
 	public WorldObjectManager(final World world)
 	{
+		super(DATA_NAME);
+
 		this.world = world;
 	}
 
-	public static IWorldObjectManager get(final int dimId, final EntityPlayer player)
+	public static WorldObjectManager get(final World world)
 	{
-		if (player.world.isRemote)
-		{
-			if (player.dimension == dimId)
-			{
-				return player.world.getCapability(AetherCapabilities.WORLD_OBJECT_MANAGER, null);
-			}
+		final MapStorage storage = DimensionManager.getWorld(world.provider.getDimension()).getPerWorldStorage();
+		WorldObjectManager instance = (WorldObjectManager) storage.getOrLoadData(WorldObjectManager.class, DATA_NAME);
 
-			return null;
-		}
-		else
+		if (instance == null)
 		{
-			return DimensionManager.getWorld(dimId).getCapability(AetherCapabilities.WORLD_OBJECT_MANAGER, null);
+			instance = new WorldObjectManager(world);
+			storage.setData(DATA_NAME, instance);
 		}
-	}
 
-	public static IWorldObjectManager get(final World world)
-	{
-		if (world.isRemote)
-		{
-			final Minecraft mc = Minecraft.getMinecraft();
-
-			if (mc.world.provider.getDimension() == mc.player.dimension)
-			{
-				return mc.player.world.getCapability(AetherCapabilities.WORLD_OBJECT_MANAGER, null);
-			}
-
-			return null;
-		}
-		else
-		{
-			return DimensionManager.getWorld(world.provider.getDimension()).getCapability(AetherCapabilities.WORLD_OBJECT_MANAGER, null);
-		}
+		return instance;
 	}
 
 	/**
@@ -96,25 +75,21 @@ public class WorldObjectManager implements IWorldObjectManager
 		observer.onReloaded(this);
 	}
 
-	@Override
 	public World getWorld()
 	{
 		return this.world;
 	}
 
-	@Override
 	public void setWorld(final World world)
 	{
 		this.world = world;
 	}
 
-	@Override
 	public <T extends IWorldObjectGroup> int getID(final T group)
 	{
 		return this.idToGroup.inverse().get(group);
 	}
 
-	@Override
 	public <T extends IWorldObjectGroup> T getGroup(final int id)
 	{
 		IWorldObjectGroup group = this.idToGroup.get(id);
@@ -129,7 +104,6 @@ public class WorldObjectManager implements IWorldObjectManager
 		return (T) group;
 	}
 
-	@Override
 	public <T extends IWorldObjectGroup> void setGroup(final int id, final T object)
 	{
 		this.idToGroup.put(id, object);
@@ -138,21 +112,20 @@ public class WorldObjectManager implements IWorldObjectManager
 		{
 			observer.onGroupAdded(this, object);
 		}
+
+		this.markDirty();
 	}
 
-	@Override
 	public <T extends IWorldObjectGroup> void addGroup(final T object)
 	{
 		this.setGroup(this.nextId++, object);
 	}
 
-	@Override
 	public Collection<IWorldObjectGroup> getGroups()
 	{
 		return this.idToGroup.values();
 	}
 
-	@Override
 	public void addObserver(final IWorldObjectManagerObserver observer)
 	{
 		this.observers.add(observer);
@@ -160,20 +133,36 @@ public class WorldObjectManager implements IWorldObjectManager
 		this.refreshObserver(observer);
 	}
 
-	@Override
 	public boolean removeObserver(final IWorldObjectManagerObserver observer)
 	{
 		return this.observers.remove(observer);
 	}
 
-	@Override
 	public boolean containsObserver(final IWorldObjectManagerObserver observer)
 	{
 		return this.observers.contains(observer);
 	}
 
 	@Override
-	public void write(final NBTTagCompound tag)
+	public void readFromNBT(final NBTTagCompound tag)
+	{
+		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
+
+		this.nextId = tag.getInteger("nextId");
+		this.dimension = tag.getInteger("dimension");
+
+		this.world = DimensionManager.getWorld(this.dimension);
+
+		this.idToGroup = HashBiMap.create(funnel.getIntMap(this.world, "groups"));
+
+		for (final IWorldObjectManagerObserver observer : this.observers)
+		{
+			observer.onReloaded(this);
+		}
+	}
+
+	@Override
+	public NBTTagCompound writeToNBT(final NBTTagCompound tag)
 	{
 		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
 
@@ -181,44 +170,8 @@ public class WorldObjectManager implements IWorldObjectManager
 		tag.setInteger("dimension", this.dimension);
 
 		funnel.setIntMap("groups", this.idToGroup);
-	}
 
-	@Override
-	public void read(final NBTTagCompound tag)
-	{
-		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
-
-		this.nextId = tag.getInteger("nextId");
-		this.dimension = tag.getInteger("dimension");
-
-		if (FMLCommonHandler.instance().getMinecraftServerInstance() != null)
-		{
-			this.world = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(this.dimension);
-		}
-		else if (AetherCore.isClient())
-		{
-			this.world = FMLClientHandler.instance().getWorldClient();
-		}
-
-		this.idToGroup = HashBiMap.create(funnel.getIntMap(this.world, "groups"));
-	}
-
-	public static class Storage implements Capability.IStorage<IWorldObjectManager>
-	{
-		@Override
-		public NBTBase writeNBT(final Capability<IWorldObjectManager> capability, final IWorldObjectManager instance, final EnumFacing side)
-		{
-			final NBTTagCompound nbt = new NBTTagCompound();
-			instance.write(nbt);
-
-			return nbt;
-		}
-
-		@Override
-		public void readNBT(final Capability<IWorldObjectManager> capability, final IWorldObjectManager instance, final EnumFacing side, final NBTBase nbt)
-		{
-			instance.read((NBTTagCompound) nbt);
-		}
+		return tag;
 	}
 
 }

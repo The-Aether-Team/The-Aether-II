@@ -5,7 +5,6 @@ import com.gildedgames.aether.api.chunk.IChunkAttachment;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.orbis.IChunkRendererCapability;
-import com.gildedgames.aether.api.orbis.IWorldObjectManager;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.world.ISectorAccess;
 import com.gildedgames.aether.common.AetherCore;
@@ -13,8 +12,6 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherProvider;
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfo;
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfoProvider;
-import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
-import com.gildedgames.aether.common.capabilities.world.WorldObjectManagerProvider;
 import com.gildedgames.aether.common.capabilities.world.chunk.*;
 import com.gildedgames.aether.common.capabilities.world.sectors.IslandSectorAccessFlatFile;
 import com.gildedgames.aether.common.capabilities.world.sectors.SectorStorageProvider;
@@ -42,7 +39,6 @@ public class CapabilityManagerAether
 		CapabilityManager.INSTANCE.register(IChunkAttachment.class, new ChunkAttachment.Storage(), ChunkAttachment.class);
 		CapabilityManager.INSTANCE.register(IPlacementFlagCapability.class, new PlacementFlagCapability.Storage(), PlacementFlagCapability.class);
 
-		CapabilityManager.INSTANCE.register(IWorldObjectManager.class, new WorldObjectManager.Storage(), WorldObjectManager.class);
 		CapabilityManager.INSTANCE.register(IChunkRendererCapability.class, new ChunkRenderer.Storage(), ChunkRenderer.class);
 
 		CapabilityManager.INSTANCE.register(IPlayerAether.class, new PlayerAether.Storage(), PlayerAether.class);
@@ -71,8 +67,6 @@ public class CapabilityManagerAether
 		final World world = event.getObject();
 
 		event.addCapability(AetherCore.getResource("AetherHooks"), new ChunkAttachmentProvider(new ChunkAttachment()));
-		event.addCapability(AetherCore.getResource("WorldObjectManager"),
-				new WorldObjectManagerProvider(new WorldObjectManager(event.getObject())));
 
 		// Attach only to worlds of the Aether dimension on the server
 		if (!world.isRemote && world.provider.getDimensionType() == DimensionsAether.AETHER)
