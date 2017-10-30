@@ -112,7 +112,7 @@ public class PacketSaveWorldObjectToProject extends PacketMultipleParts
 					 * a clone. Many issues are caused if two files use
 					 * the same identifier.
 					 */
-					if (project.getCache().hasData(data.getMetadata().getIdentifier().getDataId()))
+					if (data.getMetadata().getIdentifier() != null && project.getCache().hasData(data.getMetadata().getIdentifier().getDataId()))
 					{
 						data = data.clone();
 						data.getMetadata().setIdentifier(project.getCache().createNextIdentifier());
