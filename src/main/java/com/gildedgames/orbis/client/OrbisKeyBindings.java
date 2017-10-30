@@ -15,11 +15,14 @@ public class OrbisKeyBindings
 
 	public static KeyBinding keyBindRotate = new KeyBinding("keybindings.rotate", Keyboard.KEY_R, "key.categories.misc");
 
+	public static KeyBinding keyBindDelete = new KeyBinding("keybindings.delete", Keyboard.KEY_DELETE, "key.categories.misc");
+
 	public static void init()
 	{
 		ClientRegistry.registerKeyBinding(keyBindControl);
 		ClientRegistry.registerKeyBinding(keyBindFindPower);
 		ClientRegistry.registerKeyBinding(keyBindRotate);
+		ClientRegistry.registerKeyBinding(keyBindDelete);
 	}
 
 }

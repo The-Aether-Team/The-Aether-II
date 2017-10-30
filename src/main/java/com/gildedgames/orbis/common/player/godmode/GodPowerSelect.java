@@ -13,6 +13,7 @@ import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.selectors.ShapeSelectorFilter;
 import com.gildedgames.orbis.common.player.godmode.selectors.ShapeSelectorSelect;
 import com.gildedgames.orbis.common.util.BlockFilterHelper;
+import com.gildedgames.orbis.common.world_objects.WorldShape;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -21,11 +22,11 @@ import net.minecraft.nbt.NBTTagCompound;
 public class GodPowerSelect implements IGodPower
 {
 
-	private GodPowerSelectClient clientHandler;
-
 	private final ShapeSelectorSelect shapeSelector;
 
-	private IWorldObject selectedRegion;
+	private GodPowerSelectClient clientHandler;
+
+	private WorldShape selectedRegion;
 
 	public GodPowerSelect()
 	{
@@ -89,12 +90,12 @@ public class GodPowerSelect implements IGodPower
 
 	}
 
-	public IWorldObject getSelectedRegion()
+	public WorldShape getSelectedRegion()
 	{
 		return this.selectedRegion;
 	}
 
-	public void setSelectedRegion(IWorldObject region)
+	public void setSelectedRegion(WorldShape region)
 	{
 		this.selectedRegion = region;
 	}

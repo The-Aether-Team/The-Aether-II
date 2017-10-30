@@ -11,11 +11,14 @@ import com.gildedgames.orbis.client.gui.GuiChoiceMenuPowers;
 import com.gildedgames.orbis.client.gui.GuiChoiceMenuSelectionTypes;
 import com.gildedgames.orbis.client.renderers.AirSelectionRenderer;
 import com.gildedgames.orbis.common.OrbisCore;
+import com.gildedgames.orbis.common.block.BlockFilter;
 import com.gildedgames.orbis.common.network.packets.*;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.PlayerSelectionModule;
 import com.gildedgames.orbis.common.player.godmode.GodPowerBlueprint;
+import com.gildedgames.orbis.common.player.godmode.GodPowerSelect;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
+import com.gildedgames.orbis.common.util.BlockFilterHelper;
 import com.gildedgames.orbis.common.util.OrbisRaytraceHelp;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
 import net.minecraft.client.Minecraft;
@@ -66,10 +69,10 @@ public class OrbisDeveloperEventsClient
 					final WorldObjectManager manager = WorldObjectManager.get(mc.world);
 					final IWorldObjectGroup group = manager.getGroup(0);
 
-					module.powers().getSelectPower().setSelectedRegion(null);
-
 					NetworkingAether.sendPacketToServer(new PacketClearSelectedRegion());
 					NetworkingAether.sendPacketToServer(new PacketWorldObjectRemove(mc.world, group, module.powers().getSelectPower().getSelectedRegion()));
+
+					module.powers().getSelectPower().setSelectedRegion(null);
 
 					event.setCanceled(true);
 				}
@@ -102,6 +105,18 @@ public class OrbisDeveloperEventsClient
 			if (module.inDeveloperMode())
 			{
 				final GuiScreen current = Minecraft.getMinecraft().currentScreen;
+
+				if (OrbisKeyBindings.keyBindDelete.isPressed())
+				{
+					final GodPowerSelect power = module.powers().getSelectPower();
+
+					if (power.getSelectedRegion() != null)
+					{
+						final BlockFilter filter = new BlockFilter(BlockFilterHelper.getNewDeleteLayer(mc.player.getHeldItemMainhand()));
+
+						NetworkingAether.sendPacketToServer(new PacketFilterShape(power.getSelectedRegion(), filter));
+					}
+				}
 
 				if (OrbisKeyBindings.keyBindRotate.isPressed())
 				{
