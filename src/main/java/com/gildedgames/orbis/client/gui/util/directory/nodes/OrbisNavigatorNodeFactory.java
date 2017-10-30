@@ -38,6 +38,8 @@ public class OrbisNavigatorNodeFactory implements IDirectoryNodeFactory
 		{
 			if (OrbisProjectManager.isProjectDirectory(file))
 			{
+				OrbisCore.getProjectManager().refreshCache();
+
 				try
 				{
 					final IProject project = OrbisCore.getProjectManager().findProject(file.getName());

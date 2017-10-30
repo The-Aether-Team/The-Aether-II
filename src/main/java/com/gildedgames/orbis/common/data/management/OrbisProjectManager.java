@@ -133,6 +133,16 @@ public class OrbisProjectManager implements IProjectManager
 				final IProject project = funnel.get("project");
 
 				foundProjects.add(project.getProjectIdentifier());
+
+				if (!this.idToProject.keySet().contains(project.getProjectIdentifier()))
+				{
+					project.setLocation(file);
+					project.setAcceptedFileExtensions(this.acceptedFileExtensions);
+
+					project.loadAndCacheData();
+
+					this.cacheProject(file.getName(), project);
+				}
 			}
 			catch (final IOException e)
 			{
