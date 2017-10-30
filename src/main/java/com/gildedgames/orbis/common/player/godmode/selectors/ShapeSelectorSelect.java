@@ -83,9 +83,13 @@ public class ShapeSelectorSelect implements IShapeSelector
 		final IWorldObjectGroup group = manager.getGroup(0);
 
 		final WorldShape region = new WorldShape(selectedShape, world);
+
 		group.addObject(region);
 
-		NetworkingAether.sendPacketToPlayer(new PacketWorldObjectAdd(world, group, region), (EntityPlayerMP) module.getEntity());
+		if (world.getMinecraftServer().isDedicatedServer())
+		{
+			NetworkingAether.sendPacketToPlayer(new PacketWorldObjectAdd(world, group, region), (EntityPlayerMP) module.getEntity());
+		}
 
 		if (this.power.getSelectedRegion() != null)
 		{
