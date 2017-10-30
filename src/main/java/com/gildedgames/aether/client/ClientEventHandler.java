@@ -15,7 +15,6 @@ import com.gildedgames.aether.client.gui.PerformanceIngame;
 import com.gildedgames.aether.client.renderer.ChunkRendererManager;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.containers.slots.SlotAmbrosium;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotFlintAndSteel;
@@ -134,7 +133,7 @@ public class ClientEventHandler
 
 		if (world != null)
 		{
-			final IWorldObjectManager manager = WorldObjectManager.get(player);
+			final IWorldObjectManager manager = OrbisCore.getWorldObjectManagerProvider(false).getForWorld(world);
 
 			if (!manager.containsObserver(CHUNK_RENDERER_MANAGER))
 			{
