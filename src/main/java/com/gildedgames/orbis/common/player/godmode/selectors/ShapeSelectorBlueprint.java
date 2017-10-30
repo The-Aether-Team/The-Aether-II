@@ -10,7 +10,6 @@ import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.GodPowerBlueprint;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -52,7 +51,7 @@ public class ShapeSelectorBlueprint implements IShapeSelector
 		{
 			group.addObject(blueprint);
 
-			NetworkingAether.sendPacketToPlayer(new PacketOrbisWorldObjectAdd(world, group, blueprint), (EntityPlayerMP) module.getEntity());
+			NetworkingAether.sendPacketToDimension(new PacketOrbisWorldObjectAdd(world, group, blueprint), world.provider.getDimension());
 		}
 	}
 }

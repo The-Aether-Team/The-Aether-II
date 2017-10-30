@@ -1,5 +1,6 @@
 package com.gildedgames.orbis.common.network.packets;
 
+import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.IGodPower;
@@ -36,6 +37,27 @@ public class PacketOrbisChangePower implements IMessage
 	public void toBytes(final ByteBuf buf)
 	{
 		buf.writeInt(this.powerIndex);
+	}
+
+	public static class HandlerClient extends MessageHandlerClient<PacketOrbisChangePower, IMessage>
+	{
+		@Override
+		public IMessage onMessage(final PacketOrbisChangePower message, final EntityPlayer player)
+		{
+			if (player == null || player.world == null)
+			{
+				return null;
+			}
+
+			final PlayerOrbisModule module = PlayerOrbisModule.get(player);
+
+			if (module.inDeveloperMode())
+			{
+				module.powers().setCurrentPower(message.powerIndex);
+			}
+
+			return null;
+		}
 	}
 
 	public static class HandlerServer extends MessageHandlerServer<PacketOrbisChangePower, IMessage>

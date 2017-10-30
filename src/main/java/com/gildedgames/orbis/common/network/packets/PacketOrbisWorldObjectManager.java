@@ -1,7 +1,6 @@
 package com.gildedgames.orbis.common.network.packets;
 
 import com.gildedgames.aether.api.orbis.IWorldObjectManager;
-import com.gildedgames.aether.client.ClientEventHandler;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.util.PacketMultipleParts;
@@ -67,10 +66,7 @@ public class PacketOrbisWorldObjectManager extends PacketMultipleParts
 
 			final IWorldObjectManager manager = WorldObjectManager.get(player.world);
 
-			if (!manager.containsObserver(ClientEventHandler.CHUNK_RENDERER_MANAGER))
-			{
-				manager.addObserver(ClientEventHandler.CHUNK_RENDERER_MANAGER);
-			}
+			manager.setWorld(player.world);
 
 			manager.read(message.tag);
 

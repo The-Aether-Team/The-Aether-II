@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.capabilities;
 
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IChunkAttachment;
-import com.gildedgames.aether.api.chunk.IChunkRendererCapability;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.orbis.IWorldObjectManager;
@@ -14,8 +13,10 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherProv
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfo;
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfoProvider;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
-import com.gildedgames.aether.common.capabilities.world.WorldObjectManagerProvider;
-import com.gildedgames.aether.common.capabilities.world.chunk.*;
+import com.gildedgames.aether.common.capabilities.world.chunk.ChunkAttachment;
+import com.gildedgames.aether.common.capabilities.world.chunk.ChunkAttachmentProvider;
+import com.gildedgames.aether.common.capabilities.world.chunk.PlacementFlagCapability;
+import com.gildedgames.aether.common.capabilities.world.chunk.PlacementFlagProvider;
 import com.gildedgames.aether.common.capabilities.world.sectors.IslandSectorAccessFlatFile;
 import com.gildedgames.aether.common.capabilities.world.sectors.SectorStorageProvider;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -28,6 +29,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.event.world.ChunkEvent;
@@ -44,9 +46,6 @@ public class CapabilityManagerAether
 
 		CapabilityManager.INSTANCE.register(IChunkAttachment.class, new ChunkAttachment.Storage(), ChunkAttachment.class);
 		CapabilityManager.INSTANCE.register(IPlacementFlagCapability.class, new PlacementFlagCapability.Storage(), PlacementFlagCapability.class);
-
-		CapabilityManager.INSTANCE.register(IWorldObjectManager.class, new WorldObjectManager.Storage(), WorldObjectManager.class);
-		CapabilityManager.INSTANCE.register(IChunkRendererCapability.class, new ChunkRendererCapability.Storage(), ChunkRendererCapability.class);
 
 		CapabilityManager.INSTANCE.register(IPlayerAether.class, new PlayerAether.Storage(), PlayerAether.class);
 		CapabilityManager.INSTANCE.register(ISpawningInfo.class, new EntitySpawningInfo.Storage(), EntitySpawningInfo.class);
@@ -74,8 +73,6 @@ public class CapabilityManagerAether
 		final World world = event.getObject();
 
 		event.addCapability(AetherCore.getResource("AetherHooks"), new ChunkAttachmentProvider(new ChunkAttachment()));
-		event.addCapability(AetherCore.getResource("WorldObjectManager"),
-				new WorldObjectManagerProvider(new WorldObjectManager(event.getObject())));
 
 		// Attach only to worlds of the Aether dimension on the server
 		if (!world.isRemote && world.provider.getDimensionType() == DimensionsAether.AETHER)
@@ -85,17 +82,18 @@ public class CapabilityManagerAether
 	}
 
 	@SubscribeEvent
-	public static void onPlayerLoggedIn(final net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event)
+	public static void onEntityJoinWorld(final EntityJoinWorldEvent event)
 	{
-		final World world = event.player.getEntityWorld();
-
-		if (world.hasCapability(AetherCapabilities.WORLD_OBJECT_MANAGER, null))
+		if (event.getEntity() instanceof EntityPlayer)
 		{
-			final IWorldObjectManager manager = WorldObjectManager.get(world);
+			final EntityPlayer player = (EntityPlayer) event.getEntity();
+			final World world = player.world;
 
 			if (!world.isRemote)
 			{
-				NetworkingAether.sendPacketToPlayer(new PacketOrbisWorldObjectManager(manager), (EntityPlayerMP) event.player);
+				final IWorldObjectManager manager = WorldObjectManager.get(player);
+
+				NetworkingAether.sendPacketToPlayer(new PacketOrbisWorldObjectManager(manager), (EntityPlayerMP) player);
 			}
 		}
 	}
@@ -109,7 +107,6 @@ public class CapabilityManagerAether
 		final int chunkZ = attachment.getChunkZ();
 
 		event.addCapability(AetherCore.getResource("PlacementFlags"), new PlacementFlagProvider(new PlacementFlagCapability()));
-		event.addCapability(AetherCore.getResource("ChunkRenderers"), new ChunkRendererProvider(new ChunkRendererCapability(chunkX, chunkZ)));
 	}
 
 	@SubscribeEvent

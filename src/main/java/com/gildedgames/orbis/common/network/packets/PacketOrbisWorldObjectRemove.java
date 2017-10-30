@@ -9,9 +9,7 @@ import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketOrbisWorldObjectRemove implements IMessage
@@ -42,7 +40,7 @@ public class PacketOrbisWorldObjectRemove implements IMessage
 
 	public static void onMessage(final PacketOrbisWorldObjectRemove message, final EntityPlayer player)
 	{
-		final IWorldObjectManager manager = WorldObjectManager.get(DimensionManager.getWorld(message.dimensionId));
+		final IWorldObjectManager manager = WorldObjectManager.get(message.dimensionId);
 		final IWorldObjectGroup group = manager.getGroup(message.groupId);
 
 		group.removeObject(message.objectId);
@@ -93,7 +91,7 @@ public class PacketOrbisWorldObjectRemove implements IMessage
 			PacketOrbisWorldObjectRemove.onMessage(message, player);
 
 			NetworkingAether
-					.sendPacketToPlayer(new PacketOrbisWorldObjectRemove(message.groupId, message.objectId, message.dimensionId), (EntityPlayerMP) player);
+					.sendPacketToDimension(new PacketOrbisWorldObjectRemove(message.groupId, message.objectId, message.dimensionId), message.dimensionId);
 
 			return null;
 		}

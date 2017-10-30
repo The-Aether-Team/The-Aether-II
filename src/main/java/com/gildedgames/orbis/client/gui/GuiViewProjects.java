@@ -173,6 +173,8 @@ public class GuiViewProjects extends GuiFrame implements IDirectoryNavigatorList
 							funnel.set("data", worldObject.getData());
 
 							CompressedStreamTools.writeCompressed(tag, out);
+
+							this.refreshNavigator();
 						}
 						catch (final IOException e)
 						{
@@ -197,7 +199,11 @@ public class GuiViewProjects extends GuiFrame implements IDirectoryNavigatorList
 		{
 			final IProjectIdentifier id = new ProjectIdentifier(this.projectNameInput.getInner().getText(), Minecraft.getMinecraft().player.getName());
 
-			NetworkingAether.sendPacketToServer(new PacketRequestCreateProject(this.projectNameInput.getInner().getText(), id));
+			if (!OrbisCore.getProjectManager().projectNameExists(this.projectNameInput.getInner().getText()) && !OrbisCore.getProjectManager()
+					.projectExists(id))
+			{
+				NetworkingAether.sendPacketToServer(new PacketRequestCreateProject(this.projectNameInput.getInner().getText(), id));
+			}
 		}
 	}
 

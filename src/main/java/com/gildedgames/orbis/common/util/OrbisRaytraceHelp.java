@@ -446,7 +446,8 @@ public class OrbisRaytraceHelp
 		final IShape foundRegion = allProjects ?
 				RegionHelper.getIntersectingWorldShapeGlobal(pos, player.getEntityWorld()) :
 				manager.getGroup(0).getIntersectingShape(pos);
-		IShape result = null;
+
+		final IShape result;
 
 		if (foundRegion != null)
 		{

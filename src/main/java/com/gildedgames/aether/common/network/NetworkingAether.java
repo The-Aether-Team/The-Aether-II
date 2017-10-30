@@ -11,7 +11,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityTracker;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.management.PlayerList;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -80,6 +82,7 @@ public class NetworkingAether
 		instance.registerMessage(PacketOrbisWorldObjectRemove.HandlerClient.class, PacketOrbisWorldObjectRemove.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketOrbisWorldObjectAdd.HandlerClient.class, PacketOrbisWorldObjectAdd.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketDeleteFile.HandlerClient.class, PacketDeleteFile.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketOrbisChangePower.HandlerClient.class, PacketOrbisChangePower.class, discriminant++, Side.CLIENT);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 	}
@@ -116,6 +119,22 @@ public class NetworkingAether
 		for (final IMessage part : fetchParts(message))
 		{
 			NetworkingAether.instance.sendToAll(part);
+		}
+	}
+
+	public static void sendPacketToAllPlayersExcept(final IMessage message, final EntityPlayerMP player)
+	{
+		final PlayerList playerList = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList();
+
+		for (final IMessage part : fetchParts(message))
+		{
+			for (final EntityPlayerMP p : playerList.getPlayers())
+			{
+				if (p != player)
+				{
+					NetworkingAether.instance.sendTo(part, p);
+				}
+			}
 		}
 	}
 

@@ -136,4 +136,16 @@ public interface IProjectManager
 	@Nullable
 	<T extends IProject> T saveProjectIfDoesntExist(String name, IProject project);
 
+	/**
+	 * @param name The name of the folder that the project is in.
+	 * @return Whether or not that folder name is taken already by another project.
+	 */
+	boolean projectNameExists(String name);
+
+	/**
+	 * @param id The id for the project.
+	 * @return Whether or not the project exists in this manager.
+	 */
+	boolean projectExists(IProjectIdentifier id);
+
 }

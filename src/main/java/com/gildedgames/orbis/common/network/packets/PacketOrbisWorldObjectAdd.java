@@ -12,7 +12,6 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.util.PacketMultipleParts;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
@@ -20,7 +19,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketOrbisWorldObjectAdd extends PacketMultipleParts
 {
-	private int groupId;
+	private int groupId, dimensionId;
 
 	private IWorldObject worldObject;
 
@@ -40,10 +39,11 @@ public class PacketOrbisWorldObjectAdd extends PacketMultipleParts
 		super(data);
 	}
 
-	public PacketOrbisWorldObjectAdd(final int groupId, final IWorldObject object)
+	public PacketOrbisWorldObjectAdd(final int groupId, final IWorldObject object, final int dimensionId)
 	{
 		this.groupId = groupId;
 		this.worldObject = object;
+		this.dimensionId = dimensionId;
 	}
 
 	public PacketOrbisWorldObjectAdd(final World world, final IWorldObjectGroup group, final IWorldObject object)
@@ -52,13 +52,14 @@ public class PacketOrbisWorldObjectAdd extends PacketMultipleParts
 
 		this.groupId = manager.getID(group);
 		this.worldObject = object;
+		this.dimensionId = object.getWorld().provider.getDimension();
 	}
 
 	public static void onMessage(final PacketOrbisWorldObjectAdd message, final EntityPlayer player)
 	{
 		final IWorldObject object = message.funnel.get(player.world, "worldObject");
 
-		final IWorldObjectManager manager = WorldObjectManager.get(player.world);
+		final IWorldObjectManager manager = WorldObjectManager.get(message.dimensionId);
 		final IWorldObjectGroup group = manager.getGroup(message.groupId);
 
 		group.addObject(object);
@@ -72,6 +73,7 @@ public class PacketOrbisWorldObjectAdd extends PacketMultipleParts
 		this.funnel = AetherCore.io().createFunnel(tag);
 
 		this.groupId = buf.readInt();
+		this.dimensionId = buf.readInt();
 	}
 
 	@Override
@@ -85,6 +87,7 @@ public class PacketOrbisWorldObjectAdd extends PacketMultipleParts
 		ByteBufUtils.writeTag(buf, tag);
 
 		buf.writeInt(this.groupId);
+		buf.writeInt(this.dimensionId);
 	}
 
 	@Override
@@ -105,7 +108,8 @@ public class PacketOrbisWorldObjectAdd extends PacketMultipleParts
 
 			PacketOrbisWorldObjectAdd.onMessage(message, player);
 
-			NetworkingAether.sendPacketToPlayer(new PacketOrbisWorldObjectAdd(message.groupId, message.worldObject), (EntityPlayerMP) player);
+			NetworkingAether
+					.sendPacketToDimension(new PacketOrbisWorldObjectAdd(message.groupId, message.worldObject, message.dimensionId), message.dimensionId);
 
 			return null;
 		}

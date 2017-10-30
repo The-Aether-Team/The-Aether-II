@@ -52,7 +52,7 @@ public class GuiRightClickBlueprint extends GuiFrame
 					@Override
 					public void onClick(final GuiDropdownList list, final EntityPlayer player)
 					{
-						final IWorldObjectManager manager = WorldObjectManager.get(player.world);
+						final IWorldObjectManager manager = WorldObjectManager.get(player);
 						final IWorldObject obj = GuiRightClickBlueprint.this.blueprint;
 
 						NetworkingAether.sendPacketToServer(new PacketOrbisWorldObjectRemove(obj.getWorld(), manager.getGroup(0), obj));

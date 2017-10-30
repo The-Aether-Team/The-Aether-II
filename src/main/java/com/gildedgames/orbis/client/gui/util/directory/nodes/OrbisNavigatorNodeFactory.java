@@ -1,6 +1,8 @@
 package com.gildedgames.orbis.client.gui.util.directory.nodes;
 
+import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingProjectException;
 import com.gildedgames.aether.api.orbis.management.IProject;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.gui.data.directory.IDirectoryNode;
 import com.gildedgames.orbis.client.gui.data.directory.IDirectoryNodeFactory;
 import com.gildedgames.orbis.common.OrbisCore;
@@ -18,7 +20,7 @@ public class OrbisNavigatorNodeFactory implements IDirectoryNodeFactory
 	@Override
 	public IDirectoryNode createFrom(final File file, final String extension)
 	{
-		final IDirectoryNode node;
+		IDirectoryNode node = null;
 
 		try
 		{
@@ -29,16 +31,23 @@ public class OrbisNavigatorNodeFactory implements IDirectoryNodeFactory
 		}
 		catch (final IOException e)
 		{
-			e.printStackTrace();
+			AetherCore.LOGGER.error(e);
 		}
 
 		if (file.isDirectory())
 		{
 			if (OrbisProjectManager.isProjectDirectory(file))
 			{
-				final IProject project = OrbisCore.getProjectManager().findProject(file.getName());
+				try
+				{
+					final IProject project = OrbisCore.getProjectManager().findProject(file.getName());
 
-				node = new ProjectNode(file, project);
+					node = new ProjectNode(file, project);
+				}
+				catch (final OrbisMissingProjectException e)
+				{
+					AetherCore.LOGGER.error("Project couldn't be found in cache, skipping node!", e);
+				}
 			}
 			else
 			{

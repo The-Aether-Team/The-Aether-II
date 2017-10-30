@@ -76,9 +76,12 @@ public class PacketRequestCreateProject extends PacketMultipleParts
 				return null;
 			}
 
-			OrbisCore.getProjectManager().createAndSaveProject(message.name, message.projectIdentifier);
+			if (!OrbisCore.getProjectManager().projectNameExists(message.name) && !OrbisCore.getProjectManager().projectExists(message.projectIdentifier))
+			{
+				OrbisCore.getProjectManager().createAndSaveProject(message.name, message.projectIdentifier);
 
-			NetworkingAether.sendPacketToPlayer(new PacketOrbisSendProjectListing(), (EntityPlayerMP) player);
+				NetworkingAether.sendPacketToPlayer(new PacketOrbisSendProjectListing(), (EntityPlayerMP) player);
+			}
 
 			return null;
 		}

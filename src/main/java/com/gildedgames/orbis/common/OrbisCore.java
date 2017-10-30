@@ -1,6 +1,8 @@
 package com.gildedgames.orbis.common;
 
+import com.gildedgames.aether.api.orbis.IWorldObjectManagerProvider;
 import com.gildedgames.aether.api.orbis.management.IProjectManager;
+import com.gildedgames.aether.common.capabilities.world.WorldObjectManagerProvider;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.common.data.management.OrbisProjectManager;
 import com.gildedgames.orbis.common.network.packets.PacketOrbisSendProjectListing;
@@ -15,6 +17,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import java.io.File;
+import java.io.IOException;
 
 public class OrbisCore
 {
@@ -22,6 +25,8 @@ public class OrbisCore
 	private static final GameRegistrar GAME_REGISTRAR = new GameRegistrar();
 
 	private static IProjectManager projectManager;
+
+	private static IWorldObjectManagerProvider worldObjectManagerProvider;
 
 	@SubscribeEvent
 	public static void onPlayerLogin(final PlayerEvent.PlayerLoggedInEvent event)
@@ -36,6 +41,47 @@ public class OrbisCore
 		{
 			NetworkingAether.sendPacketToPlayer(new PacketOrbisSendProjectListing(), (EntityPlayerMP) event.player);
 		}
+	}
+
+	public static void startWorldObjectManagerProvider()
+	{
+		if (worldObjectManagerProvider != null)
+		{
+			return;
+		}
+
+		try
+		{
+			worldObjectManagerProvider = new WorldObjectManagerProvider(new File(DimensionManager.getCurrentSaveRootDirectory(), "/data/orbis/"));
+		}
+		catch (final IOException e)
+		{
+			e.printStackTrace();
+		}
+
+		if (isServer())
+		{
+			worldObjectManagerProvider.read();
+		}
+	}
+
+	public static void stopWorldObjectManagerProvider()
+	{
+		if (worldObjectManagerProvider != null)
+		{
+			worldObjectManagerProvider.write();
+			worldObjectManagerProvider = null;
+		}
+	}
+
+	public static IWorldObjectManagerProvider getWorldObjectManagerProvider()
+	{
+		if (worldObjectManagerProvider == null)
+		{
+			startWorldObjectManagerProvider();
+		}
+
+		return worldObjectManagerProvider;
 	}
 
 	public static void startProjectManager()
@@ -66,8 +112,11 @@ public class OrbisCore
 
 	public static void stopProjectManager()
 	{
-		projectManager.flushProjects();
-		projectManager = null;
+		if (projectManager != null)
+		{
+			projectManager.flushProjects();
+			projectManager = null;
+		}
 	}
 
 	public static IProjectManager getProjectManager()
@@ -98,10 +147,12 @@ public class OrbisCore
 	public static void onServerStopping(final FMLServerStoppingEvent event)
 	{
 		stopProjectManager();
+		stopWorldObjectManagerProvider();
 	}
 
 	public static void onServerStarted(final FMLServerStartedEvent event)
 	{
+		startWorldObjectManagerProvider();
 		startProjectManager();
 	}
 }
