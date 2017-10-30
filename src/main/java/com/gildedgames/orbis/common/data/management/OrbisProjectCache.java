@@ -89,10 +89,11 @@ public class OrbisProjectCache implements IProjectCache
 			data.getMetadata().setIdentifier(this.createNextIdentifier());
 		}
 
-		if (this.idToLocation.inverse().containsKey(data))
+		/*TODO: Do I still need this?
+		if (this.idToLocation.inverse().containsKey(location))
 		{
 			return;
-		}
+		}*/
 
 		final int id = data.getMetadata().getIdentifier().getDataId();
 
