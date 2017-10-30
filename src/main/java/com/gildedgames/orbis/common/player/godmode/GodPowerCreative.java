@@ -1,12 +1,12 @@
 package com.gildedgames.orbis.common.player.godmode;
 
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.player.godmode.GodPowerCreativeClient;
 import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.selectors.ShapeSelectorInvalid;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
@@ -17,9 +17,9 @@ public class GodPowerCreative implements IGodPower
 
 	private GodPowerCreativeClient clientHandler;
 
-	public GodPowerCreative()
+	public GodPowerCreative(final World world)
 	{
-		if (AetherCore.isClient())
+		if (world.isRemote)
 		{
 			this.clientHandler = new GodPowerCreativeClient(this);
 		}

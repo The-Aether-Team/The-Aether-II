@@ -33,12 +33,12 @@ public class PlayerPowerModule extends PlayerAetherModule
 	{
 		super(playerAether);
 
-		this.creativePower = new GodPowerCreative();
-		this.fillPower = new GodPowerFill();
-		this.deletePower = new GodPowerDelete();
-		this.replacePower = new GodPowerReplace();
-		this.blueprintPower = new GodPowerBlueprint();
-		this.selectPower = new GodPowerSelect();
+		this.creativePower = new GodPowerCreative(this.getWorld());
+		this.fillPower = new GodPowerFill(this.getWorld());
+		this.deletePower = new GodPowerDelete(this.getWorld());
+		this.replacePower = new GodPowerReplace(this.getWorld());
+		this.blueprintPower = new GodPowerBlueprint(this.getWorld());
+		this.selectPower = new GodPowerSelect(this.getWorld());
 
 		final Collection<IGodPower> powers = new ArrayList<>();
 
@@ -84,6 +84,11 @@ public class PlayerPowerModule extends PlayerAetherModule
 		return this.powers[this.currentPowerIndex];
 	}
 
+	public void setCurrentPower(int powerIndex)
+	{
+		this.currentPowerIndex = powerIndex;
+	}
+
 	public void setCurrentPower(final Class<? extends IGodPower> clazz)
 	{
 		int foundIndex = -1;
@@ -108,11 +113,6 @@ public class PlayerPowerModule extends PlayerAetherModule
 				NetworkingAether.sendPacketToServer(new PacketChangePower(this.currentPowerIndex));
 			}
 		}
-	}
-
-	public void setCurrentPower(int powerIndex)
-	{
-		this.currentPowerIndex = powerIndex;
 	}
 
 	public int getCurrentPowerIndex()

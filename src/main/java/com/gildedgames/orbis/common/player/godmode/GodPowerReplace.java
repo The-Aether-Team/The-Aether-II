@@ -1,6 +1,5 @@
 package com.gildedgames.orbis.common.player.godmode;
 
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.player.godmode.GodPowerReplaceClient;
 import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
 import com.gildedgames.orbis.common.block.BlockFilter;
@@ -9,6 +8,7 @@ import com.gildedgames.orbis.common.player.godmode.selectors.ShapeSelectorFilter
 import com.gildedgames.orbis.common.util.BlockFilterHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
@@ -19,9 +19,9 @@ public class GodPowerReplace implements IGodPower
 
 	private GodPowerReplaceClient clientHandler;
 
-	public GodPowerReplace()
+	public GodPowerReplace(final World world)
 	{
-		if (AetherCore.isClient())
+		if (world.isRemote)
 		{
 			this.clientHandler = new GodPowerReplaceClient(this);
 		}

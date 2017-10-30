@@ -1,23 +1,17 @@
 package com.gildedgames.orbis.common.player.godmode;
 
-import com.gildedgames.aether.api.orbis.IWorldObject;
-import com.gildedgames.aether.api.orbis.region.IRegion;
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.orbis.client.player.godmode.GodPowerDeleteClient;
 import com.gildedgames.orbis.client.player.godmode.GodPowerSelectClient;
 import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
-import com.gildedgames.orbis.common.block.BlockFilter;
 import com.gildedgames.orbis.common.items.ItemBlockDataContainer;
 import com.gildedgames.orbis.common.items.ItemBlueprint;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
-import com.gildedgames.orbis.common.player.godmode.selectors.ShapeSelectorFilter;
 import com.gildedgames.orbis.common.player.godmode.selectors.ShapeSelectorSelect;
-import com.gildedgames.orbis.common.util.BlockFilterHelper;
 import com.gildedgames.orbis.common.world_objects.WorldShape;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class GodPowerSelect implements IGodPower
 {
@@ -28,9 +22,9 @@ public class GodPowerSelect implements IGodPower
 
 	private WorldShape selectedRegion;
 
-	public GodPowerSelect()
+	public GodPowerSelect(final World world)
 	{
-		if (AetherCore.isClient())
+		if (world.isRemote)
 		{
 			this.clientHandler = new GodPowerSelectClient(this);
 		}
@@ -39,7 +33,7 @@ public class GodPowerSelect implements IGodPower
 	}
 
 	@Override
-	public void onUpdate(EntityPlayer player, PlayerOrbisModule module, boolean isPowerActive)
+	public void onUpdate(final EntityPlayer player, final PlayerOrbisModule module, final boolean isPowerActive)
 	{
 
 	}
@@ -51,13 +45,13 @@ public class GodPowerSelect implements IGodPower
 	}
 
 	@Override
-	public void onOpenGui(EntityPlayer player)
+	public void onOpenGui(final EntityPlayer player)
 	{
 
 	}
 
 	@Override
-	public boolean canInteractWithItems(PlayerOrbisModule module)
+	public boolean canInteractWithItems(final PlayerOrbisModule module)
 	{
 		final ItemStack held = module.getEntity().getHeldItemMainhand();
 
@@ -79,13 +73,13 @@ public class GodPowerSelect implements IGodPower
 	}
 
 	@Override
-	public void write(NBTTagCompound tag)
+	public void write(final NBTTagCompound tag)
 	{
 
 	}
 
 	@Override
-	public void read(NBTTagCompound tag)
+	public void read(final NBTTagCompound tag)
 	{
 
 	}
@@ -95,7 +89,7 @@ public class GodPowerSelect implements IGodPower
 		return this.selectedRegion;
 	}
 
-	public void setSelectedRegion(WorldShape region)
+	public void setSelectedRegion(final WorldShape region)
 	{
 		this.selectedRegion = region;
 	}

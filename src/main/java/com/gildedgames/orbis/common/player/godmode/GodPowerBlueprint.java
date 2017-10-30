@@ -2,7 +2,6 @@ package com.gildedgames.orbis.common.player.godmode;
 
 import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingDataException;
 import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingProjectException;
-import com.gildedgames.aether.api.orbis.management.IData;
 import com.gildedgames.aether.api.orbis.management.IDataIdentifier;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
@@ -20,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
@@ -36,9 +36,9 @@ public class GodPowerBlueprint implements IGodPower
 
 	private ItemStack previousStack;
 
-	public GodPowerBlueprint()
+	public GodPowerBlueprint(final World world)
 	{
-		if (AetherCore.isClient())
+		if (world.isRemote)
 		{
 			this.clientHandler = new GodPowerBlueprintClient(this);
 		}
@@ -86,7 +86,7 @@ public class GodPowerBlueprint implements IGodPower
 				this.placingBlueprint = null;
 				try
 				{
-					IDataIdentifier id = ItemBlueprint.getBlueprintId(stack);
+					final IDataIdentifier id = ItemBlueprint.getBlueprintId(stack);
 					this.placingBlueprint = OrbisCore.getProjectManager().findData(id);
 				}
 				catch (final OrbisMissingDataException | OrbisMissingProjectException e)
