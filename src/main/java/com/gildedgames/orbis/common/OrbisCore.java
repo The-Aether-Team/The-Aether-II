@@ -88,11 +88,15 @@ public class OrbisCore
 		}
 	}
 
-	public synchronized static void stopWorldObjectManagerProvider()
+	public synchronized static void stopWorldObjectManagerProvider(final boolean write)
 	{
 		if (worldObjectManagerProvider != null)
 		{
-			worldObjectManagerProvider.write();
+			if (write)
+			{
+				worldObjectManagerProvider.write();
+			}
+
 			worldObjectManagerProvider = null;
 		}
 	}
@@ -165,7 +169,7 @@ public class OrbisCore
 	public static void onServerStopping(final FMLServerStoppingEvent event)
 	{
 		stopProjectManager();
-		stopWorldObjectManagerProvider();
+		stopWorldObjectManagerProvider(true);
 	}
 
 	public static void onServerStarted(final FMLServerStartedEvent event)
