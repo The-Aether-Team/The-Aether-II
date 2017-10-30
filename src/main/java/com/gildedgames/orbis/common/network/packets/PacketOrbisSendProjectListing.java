@@ -94,8 +94,7 @@ public class PacketOrbisSendProjectListing extends PacketMultipleParts
 				 * If the last date that the server project was changed is different to the
 				 * local one, it will request to download that project from the server.
 				 */
-				if (existing != null && !existing.getMetadata().getLastChanged().equals(project.getMetadata().getLastChanged()) && existing.getMetadata()
-						.isDownloaded())
+				if (existing != null && !existing.getMetadata().getLastChanged().equals(project.getMetadata().getLastChanged()))
 				{
 					project.getMetadata().setDownloading(true);
 					NetworkingAether.sendPacketToServer(new PacketOrbisRequestProject(project.getProjectIdentifier()));
