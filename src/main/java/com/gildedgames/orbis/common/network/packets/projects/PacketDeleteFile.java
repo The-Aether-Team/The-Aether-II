@@ -1,4 +1,4 @@
-package com.gildedgames.orbis.common.network.packets;
+package com.gildedgames.orbis.common.network.packets.projects;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.management.IProject;

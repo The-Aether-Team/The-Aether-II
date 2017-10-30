@@ -20,7 +20,7 @@ import com.gildedgames.orbis.common.OrbisCore;
 import com.gildedgames.orbis.common.containers.ContainerGenericInventory;
 import com.gildedgames.orbis.common.items.ItemBlueprint;
 import com.gildedgames.orbis.common.items.ItemsOrbis;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisRequestProjectListing;
+import com.gildedgames.orbis.common.network.packets.projects.PacketRequestProjectListing;
 import com.gildedgames.orbis.common.network.packets.PacketSetItemStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
@@ -160,7 +160,7 @@ public class GuiLoadBlueprint extends GuiFrame implements IDirectoryNavigatorLis
 	{
 		if (!Minecraft.getMinecraft().isIntegratedServerRunning() && this.requestListing)
 		{
-			NetworkingAether.sendPacketToServer(new PacketOrbisRequestProjectListing());
+			NetworkingAether.sendPacketToServer(new PacketRequestProjectListing());
 		}
 	}
 }

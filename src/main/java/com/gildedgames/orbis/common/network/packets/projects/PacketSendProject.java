@@ -1,4 +1,4 @@
-package com.gildedgames.orbis.common.network.packets;
+package com.gildedgames.orbis.common.network.packets.projects;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingProjectException;
@@ -24,7 +24,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-public class PacketOrbisSendProject extends PacketMultipleParts
+public class PacketSendProject extends PacketMultipleParts
 {
 
 	private IProjectIdentifier project;
@@ -33,17 +33,17 @@ public class PacketOrbisSendProject extends PacketMultipleParts
 
 	private LocalDateTime lastChanged;
 
-	public PacketOrbisSendProject()
+	public PacketSendProject()
 	{
 
 	}
 
-	private PacketOrbisSendProject(final byte[] data)
+	private PacketSendProject(final byte[] data)
 	{
 		super(data);
 	}
 
-	public PacketOrbisSendProject(final IProject project)
+	public PacketSendProject(final IProject project)
 	{
 		this.project = project.getProjectIdentifier();
 		this.cache = project.getCache();
@@ -77,13 +77,13 @@ public class PacketOrbisSendProject extends PacketMultipleParts
 	@Override
 	public PacketMultipleParts createPart(final byte[] data)
 	{
-		return new PacketOrbisSendProject(data);
+		return new PacketSendProject(data);
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketOrbisSendProject, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketSendProject, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketOrbisSendProject message, final EntityPlayer player)
+		public IMessage onMessage(final PacketSendProject message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{

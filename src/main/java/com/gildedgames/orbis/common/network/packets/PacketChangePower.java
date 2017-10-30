@@ -8,21 +8,21 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class PacketOrbisChangePower implements IMessage
+public class PacketChangePower implements IMessage
 {
 	private int powerIndex;
 
-	public PacketOrbisChangePower()
+	public PacketChangePower()
 	{
 
 	}
 
-	public PacketOrbisChangePower(final PlayerOrbisModule module, final IGodPower power)
+	public PacketChangePower(final PlayerOrbisModule module, final IGodPower power)
 	{
 		this.powerIndex = module.powers().getPowerIndex(power.getClass());
 	}
 
-	public PacketOrbisChangePower(final int powerIndex)
+	public PacketChangePower(final int powerIndex)
 	{
 		this.powerIndex = powerIndex;
 	}
@@ -39,10 +39,10 @@ public class PacketOrbisChangePower implements IMessage
 		buf.writeInt(this.powerIndex);
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketOrbisChangePower, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketChangePower, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketOrbisChangePower message, final EntityPlayer player)
+		public IMessage onMessage(final PacketChangePower message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{
@@ -60,10 +60,10 @@ public class PacketOrbisChangePower implements IMessage
 		}
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketOrbisChangePower, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketChangePower, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketOrbisChangePower message, final EntityPlayer player)
+		public IMessage onMessage(final PacketChangePower message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{

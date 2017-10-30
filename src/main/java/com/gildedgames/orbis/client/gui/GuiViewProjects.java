@@ -23,9 +23,9 @@ import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.client.util.rect.Pos2D;
 import com.gildedgames.orbis.common.OrbisCore;
 import com.gildedgames.orbis.common.data.management.ProjectIdentifier;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisRequestProjectListing;
-import com.gildedgames.orbis.common.network.packets.PacketRequestCreateProject;
-import com.gildedgames.orbis.common.network.packets.PacketSaveWorldObjectToProject;
+import com.gildedgames.orbis.common.network.packets.projects.PacketRequestCreateProject;
+import com.gildedgames.orbis.common.network.packets.projects.PacketRequestProjectListing;
+import com.gildedgames.orbis.common.network.packets.projects.PacketSaveWorldObjectToProject;
 import com.gildedgames.orbis.common.util.InputHelper;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import net.minecraft.client.Minecraft;
@@ -241,7 +241,7 @@ public class GuiViewProjects extends GuiFrame implements IDirectoryNavigatorList
 	{
 		if (!Minecraft.getMinecraft().isIntegratedServerRunning() && this.requestListing)
 		{
-			NetworkingAether.sendPacketToServer(new PacketOrbisRequestProjectListing());
+			NetworkingAether.sendPacketToServer(new PacketRequestProjectListing());
 		}
 	}
 }

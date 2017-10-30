@@ -7,17 +7,17 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class PacketOrbisDeveloperReach implements IMessage
+public class PacketDeveloperReach implements IMessage
 {
 
 	private double extendedReach;
 
-	public PacketOrbisDeveloperReach()
+	public PacketDeveloperReach()
 	{
 
 	}
 
-	public PacketOrbisDeveloperReach(final double extendedReach)
+	public PacketDeveloperReach(final double extendedReach)
 	{
 		this.extendedReach = extendedReach;
 	}
@@ -34,10 +34,10 @@ public class PacketOrbisDeveloperReach implements IMessage
 		buf.writeDouble(this.extendedReach);
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketOrbisDeveloperReach, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketDeveloperReach, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketOrbisDeveloperReach message, final EntityPlayer player)
+		public IMessage onMessage(final PacketDeveloperReach message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{
@@ -52,10 +52,10 @@ public class PacketOrbisDeveloperReach implements IMessage
 		}
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketOrbisDeveloperReach, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketDeveloperReach, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketOrbisDeveloperReach message, final EntityPlayer player)
+		public IMessage onMessage(final PacketDeveloperReach message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{

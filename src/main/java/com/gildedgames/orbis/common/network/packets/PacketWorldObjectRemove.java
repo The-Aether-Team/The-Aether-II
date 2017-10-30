@@ -12,24 +12,24 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class PacketOrbisWorldObjectRemove implements IMessage
+public class PacketWorldObjectRemove implements IMessage
 {
 
 	private int groupId, objectId, dimensionId;
 
-	public PacketOrbisWorldObjectRemove()
+	public PacketWorldObjectRemove()
 	{
 
 	}
 
-	public PacketOrbisWorldObjectRemove(final int groupId, final int objectId, final int dimensionId)
+	public PacketWorldObjectRemove(final int groupId, final int objectId, final int dimensionId)
 	{
 		this.groupId = groupId;
 		this.objectId = objectId;
 		this.dimensionId = dimensionId;
 	}
 
-	public PacketOrbisWorldObjectRemove(final World world, final IWorldObjectGroup group, final IWorldObject object)
+	public PacketWorldObjectRemove(final World world, final IWorldObjectGroup group, final IWorldObject object)
 	{
 		final IWorldObjectManager manager = WorldObjectManager.get(world);
 
@@ -38,7 +38,7 @@ public class PacketOrbisWorldObjectRemove implements IMessage
 		this.dimensionId = object.getWorld().provider.getDimension();
 	}
 
-	public static void onMessage(final PacketOrbisWorldObjectRemove message, final EntityPlayer player)
+	public static void onMessage(final PacketWorldObjectRemove message, final EntityPlayer player)
 	{
 		final IWorldObjectManager manager = WorldObjectManager.get(message.dimensionId);
 		final IWorldObjectGroup group = manager.getGroup(message.groupId);
@@ -62,36 +62,36 @@ public class PacketOrbisWorldObjectRemove implements IMessage
 		buf.writeInt(this.dimensionId);
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketOrbisWorldObjectRemove, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketWorldObjectRemove, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketOrbisWorldObjectRemove message, final EntityPlayer player)
+		public IMessage onMessage(final PacketWorldObjectRemove message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{
 				return null;
 			}
 
-			PacketOrbisWorldObjectRemove.onMessage(message, player);
+			PacketWorldObjectRemove.onMessage(message, player);
 
 			return null;
 		}
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketOrbisWorldObjectRemove, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketWorldObjectRemove, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketOrbisWorldObjectRemove message, final EntityPlayer player)
+		public IMessage onMessage(final PacketWorldObjectRemove message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{
 				return null;
 			}
 
-			PacketOrbisWorldObjectRemove.onMessage(message, player);
+			PacketWorldObjectRemove.onMessage(message, player);
 
 			NetworkingAether
-					.sendPacketToDimension(new PacketOrbisWorldObjectRemove(message.groupId, message.objectId, message.dimensionId), message.dimensionId);
+					.sendPacketToDimension(new PacketWorldObjectRemove(message.groupId, message.objectId, message.dimensionId), message.dimensionId);
 
 			return null;
 		}

@@ -6,17 +6,17 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class PacketOrbisDeveloperMode implements IMessage
+public class PacketDeveloperMode implements IMessage
 {
 
 	private boolean flag = true;
 
-	public PacketOrbisDeveloperMode()
+	public PacketDeveloperMode()
 	{
 
 	}
 
-	public PacketOrbisDeveloperMode(final boolean flag)
+	public PacketDeveloperMode(final boolean flag)
 	{
 		this.flag = flag;
 	}
@@ -33,10 +33,10 @@ public class PacketOrbisDeveloperMode implements IMessage
 		buf.writeBoolean(this.flag);
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketOrbisDeveloperMode, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketDeveloperMode, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketOrbisDeveloperMode message, final EntityPlayer player)
+		public IMessage onMessage(final PacketDeveloperMode message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{

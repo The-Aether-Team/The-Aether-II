@@ -1,4 +1,4 @@
-package com.gildedgames.orbis.common.network.packets;
+package com.gildedgames.orbis.common.network.packets.projects;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.management.IProject;
@@ -19,14 +19,14 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PacketOrbisSendProjectListing extends PacketMultipleParts
+public class PacketSendProjectListing extends PacketMultipleParts
 {
 
 	private List<String> projectNames;
 
 	private List<IProject> projects;
 
-	public PacketOrbisSendProjectListing()
+	public PacketSendProjectListing()
 	{
 		OrbisCore.getProjectManager().refreshCache();
 
@@ -36,7 +36,7 @@ public class PacketOrbisSendProjectListing extends PacketMultipleParts
 		this.projects.forEach(p -> this.projectNames.add(p.getLocation().getName()));
 	}
 
-	private PacketOrbisSendProjectListing(final byte[] data)
+	private PacketSendProjectListing(final byte[] data)
 	{
 		super(data);
 	}
@@ -66,13 +66,13 @@ public class PacketOrbisSendProjectListing extends PacketMultipleParts
 	@Override
 	public PacketMultipleParts createPart(final byte[] data)
 	{
-		return new PacketOrbisSendProjectListing(data);
+		return new PacketSendProjectListing(data);
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketOrbisSendProjectListing, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketSendProjectListing, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketOrbisSendProjectListing message, final EntityPlayer player)
+		public IMessage onMessage(final PacketSendProjectListing message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{
@@ -98,7 +98,7 @@ public class PacketOrbisSendProjectListing extends PacketMultipleParts
 						.isDownloaded())
 				{
 					project.getMetadata().setDownloading(true);
-					NetworkingAether.sendPacketToServer(new PacketOrbisRequestProject(project.getProjectIdentifier()));
+					NetworkingAether.sendPacketToServer(new PacketRequestProject(project.getProjectIdentifier()));
 				}
 			}
 

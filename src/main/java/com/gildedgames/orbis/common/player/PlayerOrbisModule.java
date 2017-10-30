@@ -6,8 +6,8 @@ import com.gildedgames.aether.api.util.NBTHelper;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisDeveloperMode;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisDeveloperReach;
+import com.gildedgames.orbis.common.network.packets.PacketDeveloperMode;
+import com.gildedgames.orbis.common.network.packets.PacketDeveloperReach;
 import com.gildedgames.orbis.common.player.godmode.IGodPower;
 import com.gildedgames.orbis.common.player.modules.PlayerPowerModule;
 import com.gildedgames.orbis.common.player.modules.PlayerProjectModule;
@@ -114,7 +114,7 @@ public class PlayerOrbisModule extends PlayerAetherModule
 
 		if (!this.getEntity().world.isRemote)
 		{
-			NetworkingAether.sendPacketToPlayer(new PacketOrbisDeveloperMode(flag), (EntityPlayerMP) this.getEntity());
+			NetworkingAether.sendPacketToPlayer(new PacketDeveloperMode(flag), (EntityPlayerMP) this.getEntity());
 		}
 	}
 
@@ -154,7 +154,7 @@ public class PlayerOrbisModule extends PlayerAetherModule
 
 		if (!this.getEntity().world.isRemote)
 		{
-			NetworkingAether.sendPacketToPlayer(new PacketOrbisDeveloperReach(this.developerReach), (EntityPlayerMP) this.getEntity());
+			NetworkingAether.sendPacketToPlayer(new PacketDeveloperReach(this.developerReach), (EntityPlayerMP) this.getEntity());
 		}
 	}
 

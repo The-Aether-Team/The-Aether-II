@@ -2,7 +2,7 @@ package com.gildedgames.orbis.client.gui;
 
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.client.gui.util.GuiTexture;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisChangePower;
+import com.gildedgames.orbis.common.network.packets.PacketChangePower;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.IGodPower;
 
@@ -41,7 +41,7 @@ public class GuiChoiceMenuPowers extends GuiChoiceMenu
 		{
 			module.powers().setCurrentPower(this.power.getClass());
 
-			NetworkingAether.sendPacketToServer(new PacketOrbisChangePower(module.powers().getCurrentPowerIndex()));
+			NetworkingAether.sendPacketToServer(new PacketChangePower(module.powers().getCurrentPowerIndex()));
 		}
 
 		@Override

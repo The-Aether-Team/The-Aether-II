@@ -7,21 +7,21 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class PacketOrbisChangeSelectionType implements IMessage
+public class PacketChangeSelectionType implements IMessage
 {
 	private int selectionTypeIndex;
 
-	public PacketOrbisChangeSelectionType()
+	public PacketChangeSelectionType()
 	{
 
 	}
 
-	public PacketOrbisChangeSelectionType(final PlayerOrbisModule module, final ISelectionType selectionType)
+	public PacketChangeSelectionType(final PlayerOrbisModule module, final ISelectionType selectionType)
 	{
 		this.selectionTypeIndex = module.selectionTypes().getSelectionTypeIndex(selectionType.getClass());
 	}
 
-	public PacketOrbisChangeSelectionType(final int powerIndex)
+	public PacketChangeSelectionType(final int powerIndex)
 	{
 		this.selectionTypeIndex = powerIndex;
 	}
@@ -38,10 +38,10 @@ public class PacketOrbisChangeSelectionType implements IMessage
 		buf.writeInt(this.selectionTypeIndex);
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketOrbisChangeSelectionType, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketChangeSelectionType, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketOrbisChangeSelectionType message, final EntityPlayer player)
+		public IMessage onMessage(final PacketChangeSelectionType message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{

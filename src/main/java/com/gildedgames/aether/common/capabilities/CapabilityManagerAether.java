@@ -21,7 +21,7 @@ import com.gildedgames.aether.common.capabilities.world.sectors.IslandSectorAcce
 import com.gildedgames.aether.common.capabilities.world.sectors.SectorStorageProvider;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisWorldObjectManager;
+import com.gildedgames.orbis.common.network.packets.PacketWorldObjectManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -93,7 +93,7 @@ public class CapabilityManagerAether
 			{
 				final IWorldObjectManager manager = WorldObjectManager.get(player);
 
-				NetworkingAether.sendPacketToPlayer(new PacketOrbisWorldObjectManager(manager), (EntityPlayerMP) player);
+				NetworkingAether.sendPacketToPlayer(new PacketWorldObjectManager(manager), (EntityPlayerMP) player);
 			}
 		}
 	}

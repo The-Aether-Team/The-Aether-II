@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class PacketOrbisWorldObjectAdd extends PacketMultipleParts
+public class PacketWorldObjectAdd extends PacketMultipleParts
 {
 	private int groupId, dimensionId;
 
@@ -25,7 +25,7 @@ public class PacketOrbisWorldObjectAdd extends PacketMultipleParts
 
 	private NBTFunnel funnel;
 
-	public PacketOrbisWorldObjectAdd()
+	public PacketWorldObjectAdd()
 	{
 		super();
 	}
@@ -34,19 +34,19 @@ public class PacketOrbisWorldObjectAdd extends PacketMultipleParts
 	 * Packet part constructor.
 	 * @param data The data.
 	 */
-	private PacketOrbisWorldObjectAdd(final byte[] data)
+	private PacketWorldObjectAdd(final byte[] data)
 	{
 		super(data);
 	}
 
-	public PacketOrbisWorldObjectAdd(final int groupId, final IWorldObject object, final int dimensionId)
+	public PacketWorldObjectAdd(final int groupId, final IWorldObject object, final int dimensionId)
 	{
 		this.groupId = groupId;
 		this.worldObject = object;
 		this.dimensionId = dimensionId;
 	}
 
-	public PacketOrbisWorldObjectAdd(final World world, final IWorldObjectGroup group, final IWorldObject object)
+	public PacketWorldObjectAdd(final World world, final IWorldObjectGroup group, final IWorldObject object)
 	{
 		final IWorldObjectManager manager = WorldObjectManager.get(world);
 
@@ -55,7 +55,7 @@ public class PacketOrbisWorldObjectAdd extends PacketMultipleParts
 		this.dimensionId = object.getWorld().provider.getDimension();
 	}
 
-	public static void onMessage(final PacketOrbisWorldObjectAdd message, final EntityPlayer player)
+	public static void onMessage(final PacketWorldObjectAdd message, final EntityPlayer player)
 	{
 		final IWorldObject object = message.funnel.get(player.world, "worldObject");
 
@@ -93,39 +93,39 @@ public class PacketOrbisWorldObjectAdd extends PacketMultipleParts
 	@Override
 	public PacketMultipleParts createPart(final byte[] data)
 	{
-		return new PacketOrbisWorldObjectAdd(data);
+		return new PacketWorldObjectAdd(data);
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketOrbisWorldObjectAdd, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketWorldObjectAdd, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketOrbisWorldObjectAdd message, final EntityPlayer player)
+		public IMessage onMessage(final PacketWorldObjectAdd message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{
 				return null;
 			}
 
-			PacketOrbisWorldObjectAdd.onMessage(message, player);
+			PacketWorldObjectAdd.onMessage(message, player);
 
 			NetworkingAether
-					.sendPacketToDimension(new PacketOrbisWorldObjectAdd(message.groupId, message.worldObject, message.dimensionId), message.dimensionId);
+					.sendPacketToDimension(new PacketWorldObjectAdd(message.groupId, message.worldObject, message.dimensionId), message.dimensionId);
 
 			return null;
 		}
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketOrbisWorldObjectAdd, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketWorldObjectAdd, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketOrbisWorldObjectAdd message, final EntityPlayer player)
+		public IMessage onMessage(final PacketWorldObjectAdd message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{
 				return null;
 			}
 
-			PacketOrbisWorldObjectAdd.onMessage(message, player);
+			PacketWorldObjectAdd.onMessage(message, player);
 
 			return null;
 		}

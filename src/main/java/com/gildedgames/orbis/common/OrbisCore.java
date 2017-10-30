@@ -5,7 +5,7 @@ import com.gildedgames.aether.api.orbis.management.IProjectManager;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManagerProvider;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.common.data.management.OrbisProjectManager;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisSendProjectListing;
+import com.gildedgames.orbis.common.network.packets.projects.PacketSendProjectListing;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -39,7 +39,7 @@ public class OrbisCore
 		 */
 		if (isServer() && event.player.getServer() != null && event.player.getServer().isDedicatedServer())
 		{
-			NetworkingAether.sendPacketToPlayer(new PacketOrbisSendProjectListing(), (EntityPlayerMP) event.player);
+			NetworkingAether.sendPacketToPlayer(new PacketSendProjectListing(), (EntityPlayerMP) event.player);
 		}
 	}
 

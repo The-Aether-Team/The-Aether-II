@@ -1,4 +1,4 @@
-package com.gildedgames.orbis.common.network.packets;
+package com.gildedgames.orbis.common.network.packets.projects;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.IWorldObject;
@@ -122,7 +122,7 @@ public class PacketSaveWorldObjectToProject extends PacketMultipleParts
 						AetherCore.LOGGER.error("Failed to save project data to disk", e);
 					}
 
-					NetworkingAether.sendPacketToPlayer(new PacketOrbisSendProjectListing(), (EntityPlayerMP) player);
+					NetworkingAether.sendPacketToPlayer(new PacketSendProjectListing(), (EntityPlayerMP) player);
 				}
 			}
 			catch (final OrbisMissingProjectException e)

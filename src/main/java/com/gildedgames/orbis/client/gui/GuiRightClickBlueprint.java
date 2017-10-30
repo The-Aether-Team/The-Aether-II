@@ -12,8 +12,8 @@ import com.gildedgames.orbis.client.gui.util.GuiFrame;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.client.util.rect.Pos2D;
 import com.gildedgames.orbis.common.block.BlockFilter;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisFilterShape;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisWorldObjectRemove;
+import com.gildedgames.orbis.common.network.packets.PacketFilterShape;
+import com.gildedgames.orbis.common.network.packets.PacketWorldObjectRemove;
 import com.gildedgames.orbis.common.util.BlockFilterHelper;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import net.minecraft.client.Minecraft;
@@ -55,7 +55,7 @@ public class GuiRightClickBlueprint extends GuiFrame
 						final IWorldObjectManager manager = WorldObjectManager.get(player);
 						final IWorldObject obj = GuiRightClickBlueprint.this.blueprint;
 
-						NetworkingAether.sendPacketToServer(new PacketOrbisWorldObjectRemove(obj.getWorld(), manager.getGroup(0), obj));
+						NetworkingAether.sendPacketToServer(new PacketWorldObjectRemove(obj.getWorld(), manager.getGroup(0), obj));
 					}
 				},
 				new DropdownElement(new TextComponentString("Fill With Void"))
@@ -66,7 +66,7 @@ public class GuiRightClickBlueprint extends GuiFrame
 						final IShape shape = new Region(GuiRightClickBlueprint.this.blueprint.getBoundingBox());
 						final BlockFilter filter = new BlockFilter(BlockFilterHelper.getNewVoidLayer());
 
-						NetworkingAether.sendPacketToServer(new PacketOrbisFilterShape(shape, filter));
+						NetworkingAether.sendPacketToServer(new PacketFilterShape(shape, filter));
 					}
 				},
 				new DropdownElement(new TextComponentString("Close"))
