@@ -1,7 +1,6 @@
 package com.gildedgames.orbis.common.network.packets;
 
 import com.gildedgames.aether.api.orbis.IWorldObjectManager;
-import com.gildedgames.aether.client.ClientEventHandler;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.util.PacketMultipleParts;
@@ -11,24 +10,24 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class PacketOrbisWorldObjectManager extends PacketMultipleParts
+public class PacketWorldObjectManager extends PacketMultipleParts
 {
 
 	private IWorldObjectManager manager;
 
 	private NBTTagCompound tag;
 
-	public PacketOrbisWorldObjectManager()
+	public PacketWorldObjectManager()
 	{
 
 	}
 
-	private PacketOrbisWorldObjectManager(final byte[] data)
+	private PacketWorldObjectManager(final byte[] data)
 	{
 		super(data);
 	}
 
-	public PacketOrbisWorldObjectManager(final IWorldObjectManager manager)
+	public PacketWorldObjectManager(final IWorldObjectManager manager)
 	{
 		this.manager = manager;
 	}
@@ -36,7 +35,7 @@ public class PacketOrbisWorldObjectManager extends PacketMultipleParts
 	@Override
 	public PacketMultipleParts createPart(final byte[] data)
 	{
-		return new PacketOrbisWorldObjectManager(data);
+		return new PacketWorldObjectManager(data);
 	}
 
 	@Override
@@ -55,10 +54,10 @@ public class PacketOrbisWorldObjectManager extends PacketMultipleParts
 		ByteBufUtils.writeTag(buf, tag);
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketOrbisWorldObjectManager, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketWorldObjectManager, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketOrbisWorldObjectManager message, final EntityPlayer player)
+		public IMessage onMessage(final PacketWorldObjectManager message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{
@@ -67,10 +66,7 @@ public class PacketOrbisWorldObjectManager extends PacketMultipleParts
 
 			final IWorldObjectManager manager = WorldObjectManager.get(player.world);
 
-			if (!manager.containsObserver(ClientEventHandler.CHUNK_RENDERER_MANAGER))
-			{
-				manager.addObserver(ClientEventHandler.CHUNK_RENDERER_MANAGER);
-			}
+			manager.setWorld(player.world);
 
 			manager.read(message.tag);
 

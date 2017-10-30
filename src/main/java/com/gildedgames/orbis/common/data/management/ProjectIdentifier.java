@@ -90,4 +90,10 @@ public class ProjectIdentifier implements IProjectIdentifier
 		return builder.toHashCode();
 	}
 
+	@Override
+	public String toString()
+	{
+		return this.projectId + ":" + this.originalCreator;
+	}
+
 }

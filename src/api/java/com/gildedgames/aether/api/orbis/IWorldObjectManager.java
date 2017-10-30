@@ -10,6 +10,8 @@ public interface IWorldObjectManager extends NBT
 
 	World getWorld();
 
+	void setWorld(World world);
+
 	<T extends IWorldObjectGroup> int getID(T group);
 
 	/**

@@ -2,6 +2,8 @@ package com.gildedgames.orbis.client.renderers;
 
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
 import com.gildedgames.aether.api.orbis.region.IRegion;
+import com.gildedgames.aether.api.orbis.util.OrbisTuple;
+import com.gildedgames.aether.api.orbis.util.RotationHelp;
 import com.gildedgames.aether.common.util.helpers.BlockUtil;
 import com.gildedgames.orbis.client.renderers.blueprint.BlueprintRenderCache;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
@@ -18,6 +20,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
@@ -81,6 +84,10 @@ public class RenderBlueprint implements IWorldRenderer
 
 	private Iterable<BlockPos.MutableBlockPos> shapeData;
 
+	private Iterable<OrbisTuple<BlockPos, BlockPos>> rotatedData;
+
+	private Rotation lastRotation;
+
 	public RenderBlueprint(final Blueprint blueprint, final World world)
 	{
 		this.blockRenderer = this.mc.getBlockRendererDispatcher();
@@ -129,9 +136,22 @@ public class RenderBlueprint implements IWorldRenderer
 
 		buffer.begin(7, DefaultVertexFormats.BLOCK);
 
-		for (final BlockPos pos : this.shapeData)
+		if (this.rotatedData != null)
 		{
-			this.renderPos(pos, partialTicks);
+			for (final OrbisTuple<BlockPos, BlockPos> tuple : this.rotatedData)
+			{
+				final BlockPos beforeRot = tuple.getFirst();
+				final BlockPos rotated = tuple.getSecond();
+
+				this.renderPos(rotated, beforeRot, partialTicks);
+			}
+		}
+		else
+		{
+			for (final BlockPos pos : this.shapeData)
+			{
+				this.renderPos(pos, pos, partialTicks);
+			}
 		}
 
 		Tessellator.getInstance().draw();
@@ -182,14 +202,14 @@ public class RenderBlueprint implements IWorldRenderer
 		}
 	}
 
-	private void renderPos(final BlockPos pos, final float partialTicks)
+	private void renderPos(final BlockPos renderPos, final BlockPos containerPos, final float partialTicks)
 	{
 		if (!this.renderBlocks)
 		{
 			return;
 		}
 
-		final IBlockState state = this.cache.getBlockState(pos);
+		final IBlockState state = this.cache.getBlockState(containerPos);
 
 		if (state != null && !BlockUtil.isAir(state) && !BlockUtil.isVoid(state) && state.getRenderType() != EnumBlockRenderType.INVISIBLE
 				&& state.getRenderType() != EnumBlockRenderType.ENTITYBLOCK_ANIMATED)
@@ -198,7 +218,7 @@ public class RenderBlueprint implements IWorldRenderer
 			final IBakedModel modelBaked = this.blockRenderer.getModelForState(state);
 
 			final BlockRendererDispatcher blockrendererdispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
-			blockrendererdispatcher.getBlockModelRenderer().renderModel(this.cache, modelBaked, state, pos, buffer, true);
+			blockrendererdispatcher.getBlockModelRenderer().renderModel(this.cache, modelBaked, state, renderPos, buffer, true);
 		}
 	}
 
@@ -252,6 +272,22 @@ public class RenderBlueprint implements IWorldRenderer
 		{
 			this.lastMin = this.blueprint.getMin();
 			this.shapeData = this.blueprint.createShapeData();
+		}
+
+		if (this.lastRotation != this.blueprint.getRotation())
+		{
+			this.lastRotation = this.blueprint.getRotation();
+
+			final int rotAmount = Math.abs(RotationHelp.getRotationAmount(this.blueprint.getRotation(), Rotation.NONE));
+
+			if (rotAmount != 0)
+			{
+				this.rotatedData = RotationHelp.getAllInBoxRotated(this.blueprint.getMin(), this.blueprint.getMax(), this.blueprint.getRotation());
+			}
+			else
+			{
+				this.rotatedData = null;
+			}
 		}
 
 		if (this.glIndex == -1)

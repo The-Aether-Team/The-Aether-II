@@ -27,6 +27,11 @@ public class WorldObjectGroup implements IWorldObjectGroup
 
 	private int nextId;
 
+	private WorldObjectGroup()
+	{
+
+	}
+
 	public WorldObjectGroup(final World world)
 	{
 		this.setWorld(world);
@@ -276,10 +281,5 @@ public class WorldObjectGroup implements IWorldObjectGroup
 		this.nextId = tag.getInteger("nextId");
 
 		this.idToObject = HashBiMap.create(funnel.getIntMap(this.world, "idToObject"));
-
-		for (final IWorldObjectGroupObserver observer : this.observers)
-		{
-			observer.onReloaded(this);
-		}
 	}
 }

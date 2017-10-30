@@ -37,6 +37,12 @@ public class OrbisProjectCache implements IProjectCache
 	}
 
 	@Override
+	public boolean hasData(final int dataId)
+	{
+		return this.idToData.containsKey(dataId);
+	}
+
+	@Override
 	public void setProject(final IProject project)
 	{
 		this.project = project;
@@ -59,27 +65,13 @@ public class OrbisProjectCache implements IProjectCache
 	@Override
 	public IData getData(final int dataId)
 	{
-		final IData data = this.idToData.get(dataId);
-
-		if (data == null)
-		{
-			throw new RuntimeException("Attempted to fetch data that either hasn't been loaded yet, or doesn't exist in this project! Something's wrong!");
-		}
-
-		return data;
+		return this.idToData.get(dataId);
 	}
 
 	@Override
 	public IDataMetadata getMetadata(final int dataId)
 	{
-		final IDataMetadata data = this.idToMetadata.get(dataId);
-
-		if (data == null)
-		{
-			throw new RuntimeException("Attempted to fetch metadata that either hasn't been loaded yet, or doesn't exist in this project! Something's wrong!");
-		}
-
-		return data;
+		return this.idToMetadata.get(dataId);
 	}
 
 	@Override
@@ -92,9 +84,14 @@ public class OrbisProjectCache implements IProjectCache
 	@Override
 	public void setData(final IData data, final String location)
 	{
-		if (data.getMetadata().getIdentifier() == null || this.idToData.containsKey(data.getMetadata().getIdentifier().getDataId()))
+		if (data.getMetadata().getIdentifier() == null)
 		{
 			data.getMetadata().setIdentifier(this.createNextIdentifier());
+		}
+
+		if (this.idToLocation.inverse().containsKey(data))
+		{
+			return;
 		}
 
 		final int id = data.getMetadata().getIdentifier().getDataId();

@@ -4,10 +4,10 @@ import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.orbis.region.Region;
 import com.gildedgames.aether.api.orbis.shapes.IShape;
-import com.gildedgames.aether.api.orbis.util.OrbisRotation;
 import com.gildedgames.aether.api.orbis.util.RotationHelp;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -183,7 +183,7 @@ public class LineShape implements IShape
 	}
 
 	@Override
-	public IShape rotate(final OrbisRotation rotation, final IRegion regionIn)
+	public IShape rotate(final Rotation rotation, final IRegion regionIn)
 	{
 		final BlockPos newStart = RotationHelp.rotate(this.start, regionIn, rotation);
 		final BlockPos newEnd = RotationHelp.rotate(this.end, regionIn, rotation);

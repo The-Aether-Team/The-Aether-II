@@ -1,6 +1,5 @@
 package com.gildedgames.orbis.common.player.godmode.selectors;
 
-import com.gildedgames.aether.api.orbis.IWorldObject;
 import com.gildedgames.aether.api.orbis.IWorldObjectGroup;
 import com.gildedgames.aether.api.orbis.IWorldObjectManager;
 import com.gildedgames.aether.api.orbis.shapes.IShape;
@@ -11,17 +10,14 @@ import com.gildedgames.orbis.client.gui.GuiRightClickSelector;
 import com.gildedgames.orbis.common.block.BlockFilter;
 import com.gildedgames.orbis.common.data.CreationData;
 import com.gildedgames.orbis.common.data.ICreationData;
-import com.gildedgames.orbis.common.items.ItemBlockDataContainer;
-import com.gildedgames.orbis.common.items.ItemBlueprint;
 import com.gildedgames.orbis.common.items.ItemsOrbis;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisWorldObjectAdd;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisWorldObjectRemove;
+import com.gildedgames.orbis.common.network.packets.PacketWorldObjectAdd;
+import com.gildedgames.orbis.common.network.packets.PacketWorldObjectRemove;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.GodPowerSelect;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import com.gildedgames.orbis.common.util.BlockFilterHelper;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
-import com.gildedgames.orbis.common.world_objects.WorldRegion;
 import com.gildedgames.orbis.common.world_objects.WorldShape;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -90,11 +86,11 @@ public class ShapeSelectorSelect implements IShapeSelector
 		final WorldShape region = new WorldShape(selectedShape, world);
 		group.addObject(region);
 
-		NetworkingAether.sendPacketToPlayer(new PacketOrbisWorldObjectAdd(world, group, region), (EntityPlayerMP) module.getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketWorldObjectAdd(world, group, region), (EntityPlayerMP) module.getEntity());
 
 		if (this.power.getSelectedRegion() != null)
 		{
-			NetworkingAether.sendPacketToPlayer(new PacketOrbisWorldObjectRemove(world, group, this.power.getSelectedRegion()), (EntityPlayerMP) module.getEntity());
+			NetworkingAether.sendPacketToPlayer(new PacketWorldObjectRemove(world, group, this.power.getSelectedRegion()), (EntityPlayerMP) module.getEntity());
 			group.removeObject(this.power.getSelectedRegion());
 		}
 		this.power.setSelectedRegion(region);

@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.orbis.region.Region;
 import com.google.common.collect.AbstractIterator;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.Iterator;
@@ -12,7 +13,7 @@ import java.util.Iterator;
 public class RotationHelp
 {
 
-	public static Iterable<OrbisTuple<BlockPos, BlockPos>> getAllInRegionRotated(final IRegion region, final OrbisRotation rotation)
+	public static Iterable<OrbisTuple<BlockPos, BlockPos>> getAllInRegionRotated(final IRegion region, final Rotation rotation)
 	{
 		return getAllInBoxRotated(region.getMin(), region.getMax(), rotation);
 	}
@@ -21,10 +22,10 @@ public class RotationHelp
 	 * Returns a tuple with blockpositions. The first BlockPos is the BlockPos used for iterating through the region.
 	 * The second BlockPos is a rotated BlockPos
 	 */
-	public static Iterable<OrbisTuple<BlockPos, BlockPos>> getAllInBoxRotated(final BlockPos from, final BlockPos to, final OrbisRotation rotation)
+	public static Iterable<OrbisTuple<BlockPos, BlockPos>> getAllInBoxRotated(final BlockPos from, final BlockPos to, final Rotation rotation)
 	{
-		final boolean clockwise = rotation.getGoClockwise(OrbisRotation.NORTH);
-		final int rotAmount = Math.abs(rotation.getRotationAmount(OrbisRotation.NORTH));
+		final boolean clockwise = getGoClockwise(rotation, Rotation.NONE);
+		final int rotAmount = Math.abs(getRotationAmount(rotation, Rotation.NONE));
 
 		final BlockPos min = new BlockPos(Math.min(from.getX(), to.getX()), Math.min(from.getY(), to.getY()), Math.min(from.getZ(), to.getZ()));
 		final BlockPos max = new BlockPos(Math.max(from.getX(), to.getX()), Math.max(from.getY(), to.getY()), Math.max(from.getZ(), to.getZ()));
@@ -164,10 +165,10 @@ public class RotationHelp
 		}
 	}
 
-	public static BlockPos rotate(final BlockPos pos, final BlockPos center, final OrbisRotation rotation, final int width, final int length)
+	public static BlockPos rotate(final BlockPos pos, final BlockPos center, final Rotation rotation, final int width, final int length)
 	{
-		final int rotAmount = rotation.getRotationAmount(OrbisRotation.neutral());
-		final boolean clockwise = rotation.getGoClockwise(OrbisRotation.neutral());
+		final int rotAmount = getRotationAmount(rotation, Rotation.NONE);
+		final boolean clockwise = getGoClockwise(rotation, Rotation.NONE);
 
 		final BlockPos.MutableBlockPos rotated = new BlockPos.MutableBlockPos(0, 0, 0);
 
@@ -176,12 +177,12 @@ public class RotationHelp
 		return rotated;
 	}
 
-	public static BlockPos rotate(final BlockPos pos, final IRegion region, final OrbisRotation rotation)
+	public static BlockPos rotate(final BlockPos pos, final IRegion region, final Rotation rotation)
 	{
 		return rotate(pos, RegionHelp.getBottomCenter(region), rotation, region.getWidth(), region.getLength());
 	}
 
-	public static IRegion rotate(final IRegion region, final BlockPos center, final OrbisRotation rotation, final int width, final int length)
+	public static IRegion rotate(final IRegion region, final BlockPos center, final Rotation rotation, final int width, final int length)
 	{
 		final BlockPos corner1 = rotate(region.getMin(), center, rotation, width, length);
 		final BlockPos corner2 = rotate(region.getMax(), center, rotation, width, length);
@@ -189,18 +190,18 @@ public class RotationHelp
 		return new Region(corner1, corner2);
 	}
 
-	public static IRegion rotate(final IRegion region, final IRegion rotateIn, final OrbisRotation rotation)
+	public static IRegion rotate(final IRegion region, final IRegion rotateIn, final Rotation rotation)
 	{
 		return rotate(region, RegionHelp.getBottomCenter(rotateIn), rotation, rotateIn.getWidth(), rotateIn.getLength());
 	}
 
-	public static IRegion rotate(final IRegion region, final OrbisRotation rotation)
+	public static IRegion rotate(final IRegion region, final Rotation rotation)
 	{
 		final BlockPos center = RegionHelp.getBottomCenter(region);
 		return regionFromCenter(center, region, rotation);
 	}
 
-	public static IRegion regionFromCenter(final int centerX, final int centerY, final int centerZ, final IDimensions dimensions, final OrbisRotation rotation)
+	public static IRegion regionFromCenter(final int centerX, final int centerY, final int centerZ, final IDimensions dimensions, final Rotation rotation)
 	{
 		final int width = getWidth(dimensions, rotation);
 		final int length = getLength(dimensions, rotation);
@@ -211,31 +212,31 @@ public class RotationHelp
 		return new Region(min, max);
 	}
 
-	public static IRegion regionFromCenter(final BlockPos center, final IDimensions dimensions, final OrbisRotation rotation)
+	public static IRegion regionFromCenter(final BlockPos center, final IDimensions dimensions, final Rotation rotation)
 	{
 		return regionFromCenter(center.getX(), center.getY(), center.getZ(), dimensions, rotation);
 	}
 
-	public static OrbisRotation fromFacing(final EnumFacing facing)
+	public static Rotation fromFacing(final EnumFacing facing)
 	{
 		switch (facing)
 		{
 			case NORTH:
-				return OrbisRotation.NORTH;
+				return Rotation.NONE;
 			case SOUTH:
-				return OrbisRotation.SOUTH;
+				return Rotation.CLOCKWISE_180;
 			case EAST:
-				return OrbisRotation.EAST;
+				return Rotation.CLOCKWISE_90;
 			case WEST:
-				return OrbisRotation.WEST;
+				return Rotation.COUNTERCLOCKWISE_90;
 			default:
 				throw new IllegalArgumentException();
 		}
 	}
 
-	public static int rotatedMinX(final int minX, final int width, final int length, final OrbisRotation rotation)
+	public static int rotatedMinX(final int minX, final int width, final int length, final Rotation rotation)
 	{
-		if (rotation.isOddDiffWithNeutral())
+		if (isOddDiffWithNeutral(rotation))
 		{
 			return minX + width / 2 - length / 2;
 		}
@@ -245,9 +246,9 @@ public class RotationHelp
 		}
 	}
 
-	public static int rotatedMinZ(final int minZ, final int width, final int length, final OrbisRotation rotation)
+	public static int rotatedMinZ(final int minZ, final int width, final int length, final Rotation rotation)
 	{
-		if (rotation.isOddDiffWithNeutral())
+		if (isOddDiffWithNeutral(rotation))
 		{
 			return minZ + length / 2 - width / 2;
 		}
@@ -257,9 +258,9 @@ public class RotationHelp
 		}
 	}
 
-	public static int getWidth(final IDimensions dimensions, final OrbisRotation rotation)
+	public static int getWidth(final IDimensions dimensions, final Rotation rotation)
 	{
-		if (rotation.isOddDiffWithNeutral())
+		if (isOddDiffWithNeutral(rotation))
 		{
 			return dimensions.getLength();
 		}
@@ -269,9 +270,9 @@ public class RotationHelp
 		}
 	}
 
-	public static int getLength(final IDimensions dimensions, final OrbisRotation rotation)
+	public static int getLength(final IDimensions dimensions, final Rotation rotation)
 	{
-		if (rotation.isOddDiffWithNeutral())
+		if (isOddDiffWithNeutral(rotation))
 		{
 			return dimensions.getWidth();
 		}
@@ -281,9 +282,9 @@ public class RotationHelp
 		}
 	}
 
-	public static int getWidth(final int width, final int length, final OrbisRotation rotation)
+	public static int getWidth(final int width, final int length, final Rotation rotation)
 	{
-		if (rotation.isOddDiffWithNeutral())
+		if (isOddDiffWithNeutral(rotation))
 		{
 			return length;
 		}
@@ -293,9 +294,9 @@ public class RotationHelp
 		}
 	}
 
-	public static int getLength(final int width, final int length, final OrbisRotation rotation)
+	public static int getLength(final int width, final int length, final Rotation rotation)
 	{
-		if (rotation.isOddDiffWithNeutral())
+		if (isOddDiffWithNeutral(rotation))
 		{
 			return width;
 		}
@@ -305,13 +306,67 @@ public class RotationHelp
 		}
 	}
 
-	public static BlockPos getMax(final BlockPos min, final int width, final int height, final int length, final OrbisRotation rotation)
+	public static BlockPos getMax(final BlockPos min, final int width, final int height, final int length, final Rotation rotation)
 	{
 		return RegionHelp.getMax(min, getWidth(width, length, rotation), height, getLength(width, length, rotation));
 	}
 
-	public static BlockPos getMax(final BlockPos min, final IDimensions dimensions, final OrbisRotation rotation)
+	public static BlockPos getMax(final BlockPos min, final IDimensions dimensions, final Rotation rotation)
 	{
 		return RotationHelp.getMax(min, dimensions.getWidth(), dimensions.getHeight(), dimensions.getLength(), rotation);
+	}
+
+	private static int indexDifference(final Rotation rot1, final Rotation rot2)
+	{
+		return rot1.ordinal() - rot2.ordinal();
+	}
+
+	public static int getRotationAmount(final Rotation rot1, final Rotation rot2)
+	{
+		final int rotationAmount = indexDifference(rot1, rot2);
+
+		if (rotationAmount == 3 || rotationAmount == -3)
+		{
+			return 1;
+		}
+
+		return rotationAmount;
+	}
+
+	public static boolean isOddDiffWithNeutral(final Rotation rot)
+	{
+		return Math.abs(getRotationAmount(rot, Rotation.NONE)) == 1;
+	}
+
+	public static Rotation getNextRotation(final Rotation rotation, final boolean clockwise)
+	{
+		int newIndex = rotation.ordinal() + (clockwise ? 1 : -1);
+
+		if (newIndex < 0)
+		{
+			newIndex = Rotation.values().length - 1;
+		}
+		else if (newIndex == Rotation.values().length)
+		{
+			newIndex = 0;
+		}
+
+		return Rotation.values()[newIndex];
+	}
+
+	public static boolean getGoClockwise(final Rotation rot1, final Rotation rot2)
+	{
+		final int rotationAmount = indexDifference(rot1, rot2);
+		final boolean clockwise = rotationAmount > 0;
+
+		if (rotationAmount == 3)
+		{
+			return false;
+		}
+		else if (rotationAmount == -3)
+		{
+			return true;
+		}
+		return clockwise;
 	}
 }

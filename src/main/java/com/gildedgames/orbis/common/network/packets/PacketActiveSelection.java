@@ -5,31 +5,27 @@ import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
-import com.gildedgames.orbis.common.block.BlockFilter;
-import com.gildedgames.orbis.common.data.CreationData;
+import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class PacketOrbisFilterShape implements IMessage
+public class PacketActiveSelection implements IMessage
 {
 	private IShape shape;
 
-	private BlockFilter filter;
-
 	private NBTFunnel funnel;
 
-	public PacketOrbisFilterShape()
+	public PacketActiveSelection()
 	{
 
 	}
 
-	public PacketOrbisFilterShape(final IShape shape, final BlockFilter filter)
+	public PacketActiveSelection(final IShape shape)
 	{
 		this.shape = shape;
-		this.filter = filter;
 	}
 
 	@Override
@@ -47,15 +43,14 @@ public class PacketOrbisFilterShape implements IMessage
 		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
 
 		funnel.set("shape", this.shape);
-		funnel.set("filter", this.filter);
 
 		ByteBufUtils.writeTag(buf, tag);
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketOrbisFilterShape, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketActiveSelection, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketOrbisFilterShape message, final EntityPlayer player)
+		public IMessage onMessage(final PacketActiveSelection message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{
@@ -63,11 +58,14 @@ public class PacketOrbisFilterShape implements IMessage
 			}
 
 			final IShape shape = message.funnel.get(player.world, "shape");
-			final BlockFilter filter = message.funnel.get("filter");
 
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-			filter.apply(shape, player.world, new CreationData(player.world, player));
+			playerAether.getSelectionModule().setActiveSelection(shape);
+
+			final IShapeSelector selector = playerAether.getOrbisModule().powers().getCurrentPower().getShapeSelector();
+
+			selector.onSelect(playerAether.getOrbisModule(), shape, player.world);
 
 			return null;
 		}

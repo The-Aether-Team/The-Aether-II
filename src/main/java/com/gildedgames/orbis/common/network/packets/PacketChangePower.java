@@ -1,5 +1,6 @@
 package com.gildedgames.orbis.common.network.packets;
 
+import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.IGodPower;
@@ -7,21 +8,21 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class PacketOrbisChangePower implements IMessage
+public class PacketChangePower implements IMessage
 {
 	private int powerIndex;
 
-	public PacketOrbisChangePower()
+	public PacketChangePower()
 	{
 
 	}
 
-	public PacketOrbisChangePower(final PlayerOrbisModule module, final IGodPower power)
+	public PacketChangePower(final PlayerOrbisModule module, final IGodPower power)
 	{
 		this.powerIndex = module.powers().getPowerIndex(power.getClass());
 	}
 
-	public PacketOrbisChangePower(final int powerIndex)
+	public PacketChangePower(final int powerIndex)
 	{
 		this.powerIndex = powerIndex;
 	}
@@ -38,10 +39,31 @@ public class PacketOrbisChangePower implements IMessage
 		buf.writeInt(this.powerIndex);
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketOrbisChangePower, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketChangePower, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketOrbisChangePower message, final EntityPlayer player)
+		public IMessage onMessage(final PacketChangePower message, final EntityPlayer player)
+		{
+			if (player == null || player.world == null)
+			{
+				return null;
+			}
+
+			final PlayerOrbisModule module = PlayerOrbisModule.get(player);
+
+			if (module.inDeveloperMode())
+			{
+				module.powers().setCurrentPower(message.powerIndex);
+			}
+
+			return null;
+		}
+	}
+
+	public static class HandlerServer extends MessageHandlerServer<PacketChangePower, IMessage>
+	{
+		@Override
+		public IMessage onMessage(final PacketChangePower message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{

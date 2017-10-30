@@ -1,8 +1,8 @@
 package com.gildedgames.aether.api.orbis.shapes;
 
 import com.gildedgames.aether.api.orbis.region.IRegion;
-import com.gildedgames.aether.api.orbis.util.OrbisRotation;
 import com.gildedgames.aether.api.util.NBT;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 
 public interface IShape extends NBT
@@ -21,7 +21,7 @@ public interface IShape extends NBT
 	 */
 	Iterable<BlockPos.MutableBlockPos> getShapeData();
 
-	IShape rotate(OrbisRotation rotation, IRegion in);
+	IShape rotate(Rotation rotation, IRegion in);
 
 	IShape translate(int x, int y, int z);
 

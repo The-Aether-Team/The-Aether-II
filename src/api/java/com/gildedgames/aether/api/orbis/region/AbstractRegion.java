@@ -1,9 +1,9 @@
 package com.gildedgames.aether.api.orbis.region;
 
 import com.gildedgames.aether.api.orbis.shapes.IShape;
-import com.gildedgames.aether.api.orbis.util.OrbisRotation;
 import com.gildedgames.aether.api.orbis.util.RegionHelp;
 import com.gildedgames.aether.api.orbis.util.RotationHelp;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 
 public abstract class AbstractRegion implements IRegion
@@ -62,7 +62,7 @@ public abstract class AbstractRegion implements IRegion
 	}
 
 	@Override
-	public IShape rotate(final OrbisRotation rotation, final IRegion in)
+	public IShape rotate(final Rotation rotation, final IRegion in)
 	{
 		return RotationHelp.rotate(this, in, rotation);
 	}

@@ -1,21 +1,17 @@
 package com.gildedgames.aether.common.capabilities.world.chunk;
 
-import com.gildedgames.aether.api.chunk.IChunkRendererCapability;
+import com.gildedgames.aether.api.orbis.IChunkRenderer;
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
 import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.orbis.region.Region;
 import com.gildedgames.aether.api.orbis.util.RegionHelp;
 import com.google.common.collect.Lists;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.Capability;
 
 import java.util.List;
 
-public class ChunkRendererCapability implements IChunkRendererCapability
+public class ChunkRenderer implements IChunkRenderer
 {
 	private final Region boundingBox;
 
@@ -23,7 +19,7 @@ public class ChunkRendererCapability implements IChunkRendererCapability
 
 	private boolean hasBeenLoaded;
 
-	public ChunkRendererCapability(final int chunkX, final int chunkZ)
+	public ChunkRenderer(final int chunkX, final int chunkZ)
 	{
 		this.boundingBox = new Region(new BlockPos(chunkX << 4, 0, chunkZ << 4), new BlockPos((chunkX << 4) + 16, 256, (chunkZ << 4) + 16));
 	}
@@ -70,18 +66,6 @@ public class ChunkRendererCapability implements IChunkRendererCapability
 	}
 
 	@Override
-	public void write(final NBTTagCompound tag)
-	{
-
-	}
-
-	@Override
-	public void read(final NBTTagCompound tag)
-	{
-
-	}
-
-	@Override
 	public void addRenderer(final IWorldRenderer object)
 	{
 		this.renderers.add(object);
@@ -111,25 +95,4 @@ public class ChunkRendererCapability implements IChunkRendererCapability
 		return this.boundingBox;
 	}
 
-	public static class Storage implements Capability.IStorage<com.gildedgames.aether.api.chunk.IChunkRendererCapability>
-	{
-		@Override
-		public NBTBase writeNBT(final Capability<com.gildedgames.aether.api.chunk.IChunkRendererCapability> capability,
-				final com.gildedgames.aether.api.chunk.IChunkRendererCapability instance, final EnumFacing side)
-		{
-			final NBTTagCompound out = new NBTTagCompound();
-			instance.write(out);
-
-			return out;
-		}
-
-		@Override
-		public void readNBT(final Capability<com.gildedgames.aether.api.chunk.IChunkRendererCapability> capability,
-				final com.gildedgames.aether.api.chunk.IChunkRendererCapability instance, final EnumFacing side,
-				final NBTBase nbt)
-		{
-			final NBTTagCompound input = (NBTTagCompound) nbt;
-			instance.read(input);
-		}
-	}
 }

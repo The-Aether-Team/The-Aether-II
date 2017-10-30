@@ -1,7 +1,9 @@
 package com.gildedgames.orbis.common.player.godmode;
 
+import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingDataException;
+import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingProjectException;
+import com.gildedgames.aether.api.orbis.management.IData;
 import com.gildedgames.aether.api.orbis.management.IDataIdentifier;
-import com.gildedgames.aether.api.orbis.util.OrbisRotation;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.orbis.client.player.godmode.GodPowerBlueprintClient;
@@ -16,6 +18,7 @@ import com.gildedgames.orbis.common.player.godmode.selectors.ShapeSelectorBluepr
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.Nullable;
@@ -25,7 +28,7 @@ public class GodPowerBlueprint implements IGodPower
 
 	private final ShapeSelectorBlueprint shapeSelector;
 
-	private final OrbisRotation placingRotation = OrbisRotation.neutral();
+	private Rotation placingRotation = Rotation.NONE;
 
 	private GodPowerBlueprintClient clientHandler;
 
@@ -43,9 +46,14 @@ public class GodPowerBlueprint implements IGodPower
 		this.shapeSelector = new ShapeSelectorBlueprint(this);
 	}
 
-	public OrbisRotation getPlacingRotation()
+	public Rotation getPlacingRotation()
 	{
 		return this.placingRotation;
+	}
+
+	public void setPlacingRotation(final Rotation rotation)
+	{
+		this.placingRotation = rotation;
 	}
 
 	public BlueprintData getPlacingBlueprint()
@@ -75,7 +83,17 @@ public class GodPowerBlueprint implements IGodPower
 			this.previousStack = stack;
 			if (stack.getItem() instanceof ItemBlueprint)
 			{
-				this.placingBlueprint = OrbisCore.getProjectManager().findData(ItemBlueprint.getBlueprintId(stack));
+				this.placingBlueprint = null;
+				try
+				{
+					IDataIdentifier id = ItemBlueprint.getBlueprintId(stack);
+					this.placingBlueprint = OrbisCore.getProjectManager().findData(id);
+				}
+				catch (final OrbisMissingDataException | OrbisMissingProjectException e)
+				{
+					AetherCore.LOGGER.error(e);
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+				}
 			}
 			else if (stack.getItem() instanceof ItemBlockDataContainer)
 			{

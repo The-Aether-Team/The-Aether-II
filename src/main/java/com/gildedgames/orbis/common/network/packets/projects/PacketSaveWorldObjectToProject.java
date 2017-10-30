@@ -1,8 +1,10 @@
-package com.gildedgames.orbis.common.network.packets;
+package com.gildedgames.orbis.common.network.packets.projects;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.IWorldObject;
+import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingDataException;
 import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingProjectException;
+import com.gildedgames.aether.api.orbis.management.IData;
 import com.gildedgames.aether.api.orbis.management.IProject;
 import com.gildedgames.aether.api.orbis.management.IProjectIdentifier;
 import com.gildedgames.aether.common.AetherCore;
@@ -102,18 +104,32 @@ public class PacketSaveWorldObjectToProject extends PacketMultipleParts
 
 				if (project != null && worldObject.getData() != null)
 				{
-					worldObject.getData().preSaveToDisk(worldObject);
+					IData data = worldObject.getData();
+
+					/**
+					 * Check if the data has already been stored.
+					 * If so, we should create a new identifier for it as
+					 * a clone. Many issues are caused if two files use
+					 * the same identifier.
+					 */
+					if (data.getMetadata().getIdentifier() != null && project.getCache().hasData(data.getMetadata().getIdentifier().getDataId()))
+					{
+						data = data.clone();
+						data.getMetadata().setIdentifier(project.getCache().createNextIdentifier());
+					}
+
+					data.preSaveToDisk(worldObject);
 
 					final File file = new File(project.getLocation(), message.location);
 
-					project.getCache().setData(worldObject.getData(), message.location);
+					project.getCache().setData(data, message.location);
 
 					try (FileOutputStream out = new FileOutputStream(file))
 					{
 						final NBTTagCompound tag = new NBTTagCompound();
 						final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
 
-						funnel.set("data", worldObject.getData());
+						funnel.set("data", data);
 
 						CompressedStreamTools.writeCompressed(tag, out);
 					}
@@ -122,10 +138,10 @@ public class PacketSaveWorldObjectToProject extends PacketMultipleParts
 						AetherCore.LOGGER.error("Failed to save project data to disk", e);
 					}
 
-					NetworkingAether.sendPacketToPlayer(new PacketOrbisSendProjectListing(), (EntityPlayerMP) player);
+					NetworkingAether.sendPacketToPlayer(new PacketSendProjectListing(), (EntityPlayerMP) player);
 				}
 			}
-			catch (final OrbisMissingProjectException e)
+			catch (OrbisMissingDataException | OrbisMissingProjectException e)
 			{
 				AetherCore.LOGGER.error(e);
 			}

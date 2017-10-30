@@ -3,10 +3,7 @@ package com.gildedgames.orbis.common.player.modules;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisChangePower;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisChangeSelectionType;
-import com.gildedgames.orbis.common.player.PlayerOrbisModule;
-import com.gildedgames.orbis.common.player.godmode.*;
+import com.gildedgames.orbis.common.network.packets.PacketChangeSelectionType;
 import com.gildedgames.orbis.common.player.godmode.selection_types.*;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -71,6 +68,16 @@ public class PlayerSelectionTypesModule extends PlayerAetherModule
 		return this.selectionTypes[this.currentSelectionTypeIndex];
 	}
 
+	public void setCurrentSelectionType(int powerIndex)
+	{
+		this.currentSelectionTypeIndex = powerIndex;
+
+		if (this.getWorld().isRemote)
+		{
+			NetworkingAether.sendPacketToServer(new PacketChangeSelectionType(this.currentSelectionTypeIndex));
+		}
+	}
+
 	public void setCurrentSelectionType(final Class<? extends ISelectionType> clazz)
 	{
 		int foundIndex = -1;
@@ -92,18 +99,8 @@ public class PlayerSelectionTypesModule extends PlayerAetherModule
 
 			if (this.getWorld().isRemote)
 			{
-				NetworkingAether.sendPacketToServer(new PacketOrbisChangeSelectionType(this.currentSelectionTypeIndex));
+				NetworkingAether.sendPacketToServer(new PacketChangeSelectionType(this.currentSelectionTypeIndex));
 			}
-		}
-	}
-
-	public void setCurrentSelectionType(int powerIndex)
-	{
-		this.currentSelectionTypeIndex = powerIndex;
-
-		if (this.getWorld().isRemote)
-		{
-			NetworkingAether.sendPacketToServer(new PacketOrbisChangeSelectionType(this.currentSelectionTypeIndex));
 		}
 	}
 

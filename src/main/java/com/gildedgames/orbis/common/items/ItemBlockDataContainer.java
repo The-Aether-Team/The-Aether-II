@@ -2,7 +2,6 @@ package com.gildedgames.orbis.common.items;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.region.IRegion;
-import com.gildedgames.aether.api.orbis.util.OrbisRotation;
 import com.gildedgames.aether.api.orbis.util.RotationHelp;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.common.block.BlockDataContainer;
@@ -17,6 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -69,7 +69,7 @@ public class ItemBlockDataContainer extends Item
 
 				final BlockPos selection = module.raytraceNoSnapping();
 
-				final OrbisRotation rotation = OrbisRotation.neutral();
+				final Rotation rotation = Rotation.NONE;
 
 				final IRegion region = RotationHelp.regionFromCenter(selection, container, rotation);
 

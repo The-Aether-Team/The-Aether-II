@@ -6,10 +6,10 @@ import com.gildedgames.aether.api.orbis.IWorldRenderer;
 import com.gildedgames.aether.api.orbis.management.IData;
 import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.orbis.shapes.IShape;
-import com.gildedgames.aether.api.orbis.util.OrbisRotation;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.renderers.RenderShape;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -88,7 +88,7 @@ public class WorldShape implements IShape, IWorldObject
 	}
 
 	@Override
-	public IShape rotate(OrbisRotation rotation, IRegion in)
+	public IShape rotate(Rotation rotation, IRegion in)
 	{
 		return this.shape.rotate(rotation, in);
 	}

@@ -3,6 +3,7 @@ package com.gildedgames.orbis.client.gui;
 import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.IWorldObject;
 import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingProjectException;
+import com.gildedgames.aether.api.orbis.management.IData;
 import com.gildedgames.aether.api.orbis.management.IProject;
 import com.gildedgames.aether.api.orbis.management.IProjectIdentifier;
 import com.gildedgames.aether.common.AetherCore;
@@ -23,9 +24,9 @@ import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.client.util.rect.Pos2D;
 import com.gildedgames.orbis.common.OrbisCore;
 import com.gildedgames.orbis.common.data.management.ProjectIdentifier;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisRequestProjectListing;
-import com.gildedgames.orbis.common.network.packets.PacketRequestCreateProject;
-import com.gildedgames.orbis.common.network.packets.PacketSaveWorldObjectToProject;
+import com.gildedgames.orbis.common.network.packets.projects.PacketRequestCreateProject;
+import com.gildedgames.orbis.common.network.packets.projects.PacketRequestProjectListing;
+import com.gildedgames.orbis.common.network.packets.projects.PacketSaveWorldObjectToProject;
 import com.gildedgames.orbis.common.util.InputHelper;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import net.minecraft.client.Minecraft;
@@ -159,20 +160,36 @@ public class GuiViewProjects extends GuiFrame implements IDirectoryNavigatorList
 				{
 					final IWorldObject worldObject = this.blueprint;
 
-					if (this.project != null && worldObject.getData() != null)
+					if (this.project != null && worldObject.getData() != null && !file.exists())
 					{
-						worldObject.getData().preSaveToDisk(worldObject);
+						IData data = worldObject.getData();
 
-						this.project.getCache().setData(worldObject.getData(), location);
+						/**
+						 * Check if the data has already been stored.
+						 * If so, we should create a new identifier for it as
+						 * a clone. Many issues are caused if two files use
+						 * the same identifier.
+						 */
+						if (data.getMetadata().getIdentifier() != null && this.project.getCache().hasData(data.getMetadata().getIdentifier().getDataId()))
+						{
+							data = data.clone();
+							data.getMetadata().setIdentifier(this.project.getCache().createNextIdentifier());
+						}
+
+						data.preSaveToDisk(worldObject);
+
+						this.project.getCache().setData(data, location);
 
 						try (FileOutputStream out = new FileOutputStream(file))
 						{
 							final NBTTagCompound tag = new NBTTagCompound();
 							final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
 
-							funnel.set("data", worldObject.getData());
+							funnel.set("data", data);
 
 							CompressedStreamTools.writeCompressed(tag, out);
+
+							this.refreshNavigator();
 						}
 						catch (final IOException e)
 						{
@@ -197,7 +214,11 @@ public class GuiViewProjects extends GuiFrame implements IDirectoryNavigatorList
 		{
 			final IProjectIdentifier id = new ProjectIdentifier(this.projectNameInput.getInner().getText(), Minecraft.getMinecraft().player.getName());
 
-			NetworkingAether.sendPacketToServer(new PacketRequestCreateProject(this.projectNameInput.getInner().getText(), id));
+			if (!OrbisCore.getProjectManager().projectNameExists(this.projectNameInput.getInner().getText()) && !OrbisCore.getProjectManager()
+					.projectExists(id))
+			{
+				NetworkingAether.sendPacketToServer(new PacketRequestCreateProject(this.projectNameInput.getInner().getText(), id));
+			}
 		}
 	}
 
@@ -235,7 +256,7 @@ public class GuiViewProjects extends GuiFrame implements IDirectoryNavigatorList
 	{
 		if (!Minecraft.getMinecraft().isIntegratedServerRunning() && this.requestListing)
 		{
-			NetworkingAether.sendPacketToServer(new PacketOrbisRequestProjectListing());
+			NetworkingAether.sendPacketToServer(new PacketRequestProjectListing());
 		}
 	}
 }

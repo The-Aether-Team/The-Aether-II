@@ -16,6 +16,7 @@ import com.gildedgames.orbis.common.world_objects.Blueprint;
 import com.google.common.collect.Lists;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -38,6 +39,8 @@ public class GodPowerBlueprintClient implements IGodPowerClient
 	private RenderShape renderShape;
 
 	private BlueprintData prevBlueprintData;
+
+	private Rotation prevRotation;
 
 	public GodPowerBlueprintClient(final GodPowerBlueprint server)
 	{
@@ -83,10 +86,11 @@ public class GodPowerBlueprintClient implements IGodPowerClient
 	{
 		final List<IWorldRenderer> renderers = Lists.newArrayList();
 
-		if (this.prevBlueprintData != this.server.getPlacingBlueprint())
+		if (this.prevBlueprintData != this.server.getPlacingBlueprint() || this.prevRotation != this.server.getPlacingRotation())
 		{
 			this.renderer = null;
 			this.prevBlueprintData = this.server.getPlacingBlueprint();
+			this.prevRotation = this.server.getPlacingRotation();
 		}
 
 		if (this.server.getPlacingBlueprint() != null )
@@ -98,6 +102,7 @@ public class GodPowerBlueprintClient implements IGodPowerClient
 			if (this.renderer == null)
 			{
 				this.blueprint = new Blueprint(world, renderRegion.getMin(), this.server.getPlacingRotation(), this.server.getPlacingBlueprint());
+
 				this.renderer = new RenderBlueprint(this.blueprint, world);
 
 				this.renderShape = new RenderShape(this.blueprint);

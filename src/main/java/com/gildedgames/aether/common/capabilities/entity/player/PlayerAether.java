@@ -3,13 +3,15 @@ package com.gildedgames.aether.common.capabilities.entity.player;
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.dialog.IDialogController;
 import com.gildedgames.aether.api.player.IPlayerAether;
+import com.gildedgames.aether.api.util.NBTHelper;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.*;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketEquipment;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisDeveloperMode;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisDeveloperReach;
+import com.gildedgames.orbis.common.network.packets.PacketChangePower;
+import com.gildedgames.orbis.common.network.packets.PacketDeveloperMode;
+import com.gildedgames.orbis.common.network.packets.PacketDeveloperReach;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.PlayerSelectionModule;
 import com.google.common.collect.Lists;
@@ -22,6 +24,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -134,9 +137,11 @@ public class PlayerAether implements IPlayerAether
 	public void sendFullUpdate()
 	{
 		NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(this.hasDiedInAetherBefore()), (EntityPlayerMP) this.getEntity());
-		NetworkingAether.sendPacketToPlayer(new PacketOrbisDeveloperMode(this.getOrbisModule().inDeveloperMode()), (EntityPlayerMP) this.getEntity());
-		NetworkingAether.sendPacketToPlayer(new PacketOrbisDeveloperReach(this.getOrbisModule().getDeveloperReach()), (EntityPlayerMP) this.getEntity());
-		//NetworkingAether.sendPacketToPlayer(new PacketOrbisWorldObjectAdd(this.getSelectionModule().get), (EntityPlayerMP) this.getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketDeveloperMode(this.getOrbisModule().inDeveloperMode()), (EntityPlayerMP) this.getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketDeveloperReach(this.getOrbisModule().getDeveloperReach()), (EntityPlayerMP) this.getEntity());
+		NetworkingAether
+				.sendPacketToPlayer(new PacketChangePower(this.getOrbisModule().powers().getCurrentPowerIndex()), (EntityPlayerMP) this.getEntity());
+		//NetworkingAether.sendPacketToPlayer(new PacketWorldObjectAdd(this.getSelectionModule().get), (EntityPlayerMP) this.getEntity());
 	}
 
 	public void onUpdate(final LivingUpdateEvent event)
@@ -240,11 +245,11 @@ public class PlayerAether implements IPlayerAether
 	@Override
 	public void write(final NBTTagCompound tag)
 	{
-		final NBTTagCompound modules = new NBTTagCompound();
+		final NBTTagList modules = new NBTTagList();
 
 		for (final PlayerAetherModule module : this.modules)
 		{
-			module.write(modules);
+			modules.appendTag(NBTHelper.write(module));
 		}
 
 		tag.setTag("Modules", modules);
@@ -254,11 +259,13 @@ public class PlayerAether implements IPlayerAether
 	@Override
 	public void read(final NBTTagCompound tag)
 	{
-		final NBTTagCompound modules = tag.getCompoundTag("Modules");
+		final NBTTagList modules = tag.getTagList("Modules", 10);
 
-		for (final PlayerAetherModule module : this.modules)
+		for (int i = 0; i < modules.tagCount(); i++)
 		{
-			module.read(modules);
+			final PlayerAetherModule module = this.modules[i];
+
+			module.read(modules.getCompoundTagAt(i));
 		}
 
 		this.hasDiedInAetherBefore = tag.getBoolean("HasDiedInAether");

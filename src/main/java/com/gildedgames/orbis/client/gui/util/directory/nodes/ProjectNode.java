@@ -11,7 +11,7 @@ import com.gildedgames.orbis.client.gui.util.GuiDropdownList;
 import com.gildedgames.orbis.client.gui.util.GuiFactory;
 import com.gildedgames.orbis.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisRequestProject;
+import com.gildedgames.orbis.common.network.packets.projects.PacketRequestProject;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -100,7 +100,7 @@ public class ProjectNode implements IDirectoryNode
 				public void onClick(final GuiDropdownList list, final EntityPlayer player)
 				{
 					ProjectNode.this.project.getMetadata().setDownloading(true);
-					NetworkingAether.sendPacketToServer(new PacketOrbisRequestProject(ProjectNode.this.project.getProjectIdentifier()));
+					NetworkingAether.sendPacketToServer(new PacketRequestProject(ProjectNode.this.project.getProjectIdentifier()));
 				}
 			});
 		}

@@ -2,11 +2,12 @@ package com.gildedgames.orbis.common.player;
 
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
 import com.gildedgames.aether.api.orbis.shapes.IShape;
+import com.gildedgames.aether.api.util.NBTHelper;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisDeveloperMode;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisDeveloperReach;
+import com.gildedgames.orbis.common.network.packets.PacketDeveloperMode;
+import com.gildedgames.orbis.common.network.packets.PacketDeveloperReach;
 import com.gildedgames.orbis.common.player.godmode.IGodPower;
 import com.gildedgames.orbis.common.player.modules.PlayerPowerModule;
 import com.gildedgames.orbis.common.player.modules.PlayerProjectModule;
@@ -16,6 +17,7 @@ import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.Collections;
@@ -112,7 +114,7 @@ public class PlayerOrbisModule extends PlayerAetherModule
 
 		if (!this.getEntity().world.isRemote)
 		{
-			NetworkingAether.sendPacketToPlayer(new PacketOrbisDeveloperMode(flag), (EntityPlayerMP) this.getEntity());
+			NetworkingAether.sendPacketToPlayer(new PacketDeveloperMode(flag), (EntityPlayerMP) this.getEntity());
 		}
 	}
 
@@ -152,7 +154,7 @@ public class PlayerOrbisModule extends PlayerAetherModule
 
 		if (!this.getEntity().world.isRemote)
 		{
-			NetworkingAether.sendPacketToPlayer(new PacketOrbisDeveloperReach(this.developerReach), (EntityPlayerMP) this.getEntity());
+			NetworkingAether.sendPacketToPlayer(new PacketDeveloperReach(this.developerReach), (EntityPlayerMP) this.getEntity());
 		}
 	}
 
@@ -170,11 +172,11 @@ public class PlayerOrbisModule extends PlayerAetherModule
 		tag.setBoolean("reachSet", this.reachSet);
 		tag.setDouble("developerReach", this.developerReach);
 
-		final NBTTagCompound modules = new NBTTagCompound();
+		final NBTTagList modules = new NBTTagList();
 
 		for (final PlayerAetherModule module : this.modules)
 		{
-			module.write(modules);
+			modules.appendTag(NBTHelper.write(module));
 		}
 
 		tag.setTag("modules", modules);
@@ -192,11 +194,13 @@ public class PlayerOrbisModule extends PlayerAetherModule
 			this.developerReach = tag.getDouble("developerReach");
 		}
 
-		final NBTTagCompound modules = tag.getCompoundTag("modules");
+		final NBTTagList modules = tag.getTagList("modules", 10);
 
-		for (final PlayerAetherModule module : this.modules)
+		for (int i = 0; i < modules.tagCount(); i++)
 		{
-			module.read(modules);
+			final PlayerAetherModule module = this.modules.get(i);
+
+			module.read(modules.getCompoundTagAt(i));
 		}
 	}
 

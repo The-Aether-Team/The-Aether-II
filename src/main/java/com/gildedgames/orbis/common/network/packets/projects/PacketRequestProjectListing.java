@@ -1,4 +1,4 @@
-package com.gildedgames.orbis.common.network.packets;
+package com.gildedgames.orbis.common.network.packets.projects;
 
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -8,15 +8,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class PacketOrbisRequestProjectListing extends PacketMultipleParts
+public class PacketRequestProjectListing extends PacketMultipleParts
 {
 
-	public PacketOrbisRequestProjectListing()
+	public PacketRequestProjectListing()
 	{
 
 	}
 
-	private PacketOrbisRequestProjectListing(final byte[] data)
+	private PacketRequestProjectListing(final byte[] data)
 	{
 		super(data);
 	}
@@ -36,20 +36,20 @@ public class PacketOrbisRequestProjectListing extends PacketMultipleParts
 	@Override
 	public PacketMultipleParts createPart(final byte[] data)
 	{
-		return new PacketOrbisRequestProjectListing(data);
+		return new PacketRequestProjectListing(data);
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketOrbisRequestProjectListing, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketRequestProjectListing, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketOrbisRequestProjectListing message, final EntityPlayer player)
+		public IMessage onMessage(final PacketRequestProjectListing message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{
 				return null;
 			}
 
-			NetworkingAether.sendPacketToPlayer(new PacketOrbisSendProjectListing(), (EntityPlayerMP) player);
+			NetworkingAether.sendPacketToPlayer(new PacketSendProjectListing(), (EntityPlayerMP) player);
 
 			return null;
 		}

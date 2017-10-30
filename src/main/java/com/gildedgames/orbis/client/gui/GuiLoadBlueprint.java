@@ -1,5 +1,7 @@
 package com.gildedgames.orbis.client.gui;
 
+import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingDataException;
+import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingProjectException;
 import com.gildedgames.aether.api.orbis.management.IData;
 import com.gildedgames.aether.api.orbis.management.IProject;
 import com.gildedgames.aether.common.AetherCore;
@@ -20,8 +22,8 @@ import com.gildedgames.orbis.common.OrbisCore;
 import com.gildedgames.orbis.common.containers.ContainerGenericInventory;
 import com.gildedgames.orbis.common.items.ItemBlueprint;
 import com.gildedgames.orbis.common.items.ItemsOrbis;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisRequestProjectListing;
 import com.gildedgames.orbis.common.network.packets.PacketSetItemStack;
+import com.gildedgames.orbis.common.network.packets.projects.PacketRequestProjectListing;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -121,12 +123,20 @@ public class GuiLoadBlueprint extends GuiFrame implements IDirectoryNavigatorLis
 		if (node instanceof BlueprintNode)
 		{
 			final ItemStack stack = new ItemStack(ItemsOrbis.blueprint);
-			final IData data = OrbisCore.getProjectManager().findData(GuiLoadBlueprint.this.project, node.getFile());
 
-			ItemBlueprint.setBlueprint(stack, data.getMetadata().getIdentifier());
+			try
+			{
+				final IData data = OrbisCore.getProjectManager().findData(GuiLoadBlueprint.this.project, node.getFile());
 
-			NetworkingAether.sendPacketToServer(new PacketSetItemStack(stack));
-			Minecraft.getMinecraft().player.inventory.setItemStack(stack);
+				ItemBlueprint.setBlueprint(stack, data.getMetadata().getIdentifier());
+
+				NetworkingAether.sendPacketToServer(new PacketSetItemStack(stack));
+				Minecraft.getMinecraft().player.inventory.setItemStack(stack);
+			}
+			catch (OrbisMissingDataException | OrbisMissingProjectException e)
+			{
+				AetherCore.LOGGER.error(e);
+			}
 		}
 
 		if (node instanceof ProjectNode)
@@ -160,7 +170,7 @@ public class GuiLoadBlueprint extends GuiFrame implements IDirectoryNavigatorLis
 	{
 		if (!Minecraft.getMinecraft().isIntegratedServerRunning() && this.requestListing)
 		{
-			NetworkingAether.sendPacketToServer(new PacketOrbisRequestProjectListing());
+			NetworkingAether.sendPacketToServer(new PacketRequestProjectListing());
 		}
 	}
 }

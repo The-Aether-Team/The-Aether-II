@@ -27,7 +27,7 @@ public class OrbisProjectManager implements IProjectManager
 
 	private final Map<IProjectIdentifier, IProject> idToProject = Maps.newHashMap();
 
-	private final Map<String, IProject> directoryToProject = Maps.newHashMap();
+	private final Map<String, IProject> nameToProject = Maps.newHashMap();
 
 	private final List<String> acceptedFileExtensions = Lists.newArrayList();
 
@@ -70,7 +70,7 @@ public class OrbisProjectManager implements IProjectManager
 
 	private void cacheProject(final String folderName, final IProject project)
 	{
-		this.directoryToProject.put(folderName, project);
+		this.nameToProject.put(folderName, project);
 		this.idToProject.put(project.getProjectIdentifier(), project);
 	}
 
@@ -133,6 +133,16 @@ public class OrbisProjectManager implements IProjectManager
 				final IProject project = funnel.get("project");
 
 				foundProjects.add(project.getProjectIdentifier());
+
+				if (!this.idToProject.keySet().contains(project.getProjectIdentifier()))
+				{
+					project.setLocation(file);
+					project.setAcceptedFileExtensions(this.acceptedFileExtensions);
+
+					project.loadAndCacheData();
+
+					this.cacheProject(file.getName(), project);
+				}
 			}
 			catch (final IOException e)
 			{
@@ -191,7 +201,7 @@ public class OrbisProjectManager implements IProjectManager
 	@Override
 	public <T extends IProject> T findProject(final String folderName) throws OrbisMissingProjectException
 	{
-		final IProject project = this.directoryToProject.get(folderName);
+		final IProject project = this.nameToProject.get(folderName);
 
 		if (project == null)
 		{
@@ -236,7 +246,7 @@ public class OrbisProjectManager implements IProjectManager
 		}
 		catch (final IOException e)
 		{
-			e.printStackTrace();
+			AetherCore.LOGGER.error(e);
 		}
 
 		return null;
@@ -320,13 +330,13 @@ public class OrbisProjectManager implements IProjectManager
 					{
 						if (existing.getLocation().renameTo(location))
 						{
-							this.directoryToProject.remove(existing.getLocation().getName());
+							this.nameToProject.remove(existing.getLocation().getName());
 
 							if (existing.getLocation().delete())
 							{
 								existing.setLocation(location);
 
-								this.directoryToProject.put(name, existing);
+								this.nameToProject.put(name, existing);
 							}
 						}
 						else
@@ -354,6 +364,18 @@ public class OrbisProjectManager implements IProjectManager
 		this.cacheProject(name, project);
 
 		return (T) existing;
+	}
+
+	@Override
+	public boolean projectNameExists(final String name)
+	{
+		return this.nameToProject.containsKey(name);
+	}
+
+	@Override
+	public boolean projectExists(final IProjectIdentifier id)
+	{
+		return this.idToProject.containsKey(id);
 	}
 
 	private void saveProjectToDisk(final IProject project)

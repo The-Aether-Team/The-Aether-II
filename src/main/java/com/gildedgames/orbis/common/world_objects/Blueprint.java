@@ -7,7 +7,6 @@ import com.gildedgames.aether.api.orbis.region.AbstractRegion;
 import com.gildedgames.aether.api.orbis.region.IMutableRegion;
 import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.orbis.region.IRotateable;
-import com.gildedgames.aether.api.orbis.util.OrbisRotation;
 import com.gildedgames.aether.api.orbis.util.RegionHelp;
 import com.gildedgames.aether.api.orbis.util.RotationHelp;
 import com.gildedgames.aether.common.AetherCore;
@@ -16,6 +15,7 @@ import com.gildedgames.orbis.common.block.BlockData;
 import com.gildedgames.orbis.common.block.BlockDataContainer;
 import com.gildedgames.orbis.common.data.BlueprintData;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -23,7 +23,7 @@ public class Blueprint extends AbstractRegion implements IWorldObject, IMutableR
 {
 	private final World world;
 
-	protected OrbisRotation rotation = OrbisRotation.NORTH;
+	protected Rotation rotation = Rotation.NONE;
 
 	private IWorldRenderer renderer;
 
@@ -52,7 +52,7 @@ public class Blueprint extends AbstractRegion implements IWorldObject, IMutableR
 		this.setPos(pos);
 	}
 
-	public Blueprint(final World world, final BlockPos pos, final OrbisRotation rotation, final BlueprintData data)
+	public Blueprint(final World world, final BlockPos pos, final Rotation rotation, final BlueprintData data)
 	{
 		this.world = world;
 		this.data = data;
@@ -68,7 +68,7 @@ public class Blueprint extends AbstractRegion implements IWorldObject, IMutableR
 	}
 
 	@Override
-	public OrbisRotation getRotation()
+	public Rotation getRotation()
 	{
 		return this.rotation;
 	}
@@ -81,17 +81,14 @@ public class Blueprint extends AbstractRegion implements IWorldObject, IMutableR
 
 	public BlockPos transformForBlueprint(final BlockPos pos)
 	{
-		final OrbisRotation transformRot =
-				this.rotation == OrbisRotation.EAST ? OrbisRotation.WEST : this.rotation == OrbisRotation.WEST ? OrbisRotation.EAST : this.rotation;
+		final Rotation transformRot =
+				this.rotation == Rotation.CLOCKWISE_90 ?
+						Rotation.COUNTERCLOCKWISE_90 :
+						this.rotation == Rotation.COUNTERCLOCKWISE_90 ? Rotation.CLOCKWISE_90 : this.rotation;
 		final BlockPos rotated = RotationHelp.rotate(pos, this, transformRot);
 		final IRegion rotatedRegion = RotationHelp.rotate(this, transformRot);
 		return new BlockPos(rotated.getX() - rotatedRegion.getMin().getX(), rotated.getY() - rotatedRegion.getMin().getY(),
 				rotated.getZ() - rotatedRegion.getMin().getZ());
-	}
-
-	public void saveRegionContent()
-	{
-		this.data.fetchBlocksInside(this, this.world, this.rotation);
 	}
 
 	@Override
@@ -202,7 +199,7 @@ public class Blueprint extends AbstractRegion implements IWorldObject, IMutableR
 
 		this.min = data.getPos("min");
 
-		this.rotation = OrbisRotation.valueOf(tag.getString("rotation"));
+		this.rotation = Rotation.valueOf(tag.getString("rotation"));
 
 		this.data = data.get("data");
 

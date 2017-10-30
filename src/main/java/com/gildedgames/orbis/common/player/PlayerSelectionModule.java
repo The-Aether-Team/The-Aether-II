@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisActiveSelection;
+import com.gildedgames.orbis.common.network.packets.PacketActiveSelection;
 import com.gildedgames.orbis.common.player.godmode.IGodPower;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
@@ -76,7 +76,7 @@ public class PlayerSelectionModule extends PlayerAetherModule
 
 				if (this.getEntity().world.isRemote)
 				{
-					NetworkingAether.sendPacketToServer(new PacketOrbisActiveSelection(this.activeSelection));
+					NetworkingAether.sendPacketToServer(new PacketActiveSelection(this.activeSelection));
 				}
 
 				selector.onSelect(module, this.activeSelection, this.getWorld());
@@ -109,8 +109,15 @@ public class PlayerSelectionModule extends PlayerAetherModule
 
 		if (this.getEntity().getEntityWorld().isRemote && this.activeSelection != null)
 		{
-			NetworkingAether.sendPacketToServer(new PacketOrbisActiveSelection(this.activeSelection));
+			NetworkingAether.sendPacketToServer(new PacketActiveSelection(this.activeSelection));
 		}
+	}
+
+	public void clearSelection()
+	{
+		this.activeSelection = null;
+		this.selectPos = null;
+		this.prevPos = null;
 	}
 
 	@Override

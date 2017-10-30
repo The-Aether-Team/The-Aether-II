@@ -6,14 +6,13 @@ import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.client.gui.GuiRightClickBlueprint;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisWorldObjectAdd;
+import com.gildedgames.orbis.common.network.packets.PacketWorldObjectAdd;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.GodPowerBlueprint;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -55,9 +54,12 @@ public class ShapeSelectorBlueprint implements IShapeSelector
 
 		if (!world.isRemote)
 		{
-			group.addObject(blueprint);
+			if (world.getMinecraftServer().isDedicatedServer())
+			{
+				group.addObject(blueprint);
+			}
 
-			NetworkingAether.sendPacketToPlayer(new PacketOrbisWorldObjectAdd(world, group, blueprint), (EntityPlayerMP) module.getEntity());
+			NetworkingAether.sendPacketToDimension(new PacketWorldObjectAdd(world, group, blueprint), world.provider.getDimension());
 		}
 	}
 

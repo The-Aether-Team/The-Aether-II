@@ -34,4 +34,9 @@ public interface IData extends NBT
 	 */
 	IDataMetadata getMetadata();
 
+	/**
+	 * @return A clone of this data.
+	 */
+	IData clone();
+
 }

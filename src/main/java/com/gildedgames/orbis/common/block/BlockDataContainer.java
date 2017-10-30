@@ -386,4 +386,18 @@ public class BlockDataContainer implements NBT, IDimensions
 			this.data[i] = new BlockData(blockState, tileEntities.get(i));
 		}
 	}
+
+	@Override
+	public BlockDataContainer clone()
+	{
+		final BlockDataContainer data = new BlockDataContainer();
+
+		final NBTTagCompound tag = new NBTTagCompound();
+
+		this.write(tag);
+
+		data.read(tag);
+
+		return data;
+	}
 }

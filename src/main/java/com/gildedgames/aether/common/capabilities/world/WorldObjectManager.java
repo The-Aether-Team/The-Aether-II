@@ -1,21 +1,19 @@
 package com.gildedgames.aether.common.capabilities.world;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.IWorldObjectGroup;
 import com.gildedgames.aether.api.orbis.IWorldObjectManager;
 import com.gildedgames.aether.api.orbis.IWorldObjectManagerObserver;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.orbis.common.OrbisCore;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import java.util.Collection;
 import java.util.List;
@@ -28,13 +26,20 @@ import java.util.List;
  */
 public class WorldObjectManager implements IWorldObjectManager
 {
-	private final World world;
-
 	private final List<IWorldObjectManagerObserver> observers = Lists.newArrayList();
+
+	private int dimension;
+
+	private World world;
 
 	private BiMap<Integer, IWorldObjectGroup> idToGroup = HashBiMap.create();
 
 	private int nextId;
+
+	public WorldObjectManager()
+	{
+
+	}
 
 	public WorldObjectManager(final World world)
 	{
@@ -57,10 +62,14 @@ public class WorldObjectManager implements IWorldObjectManager
 		}
 	}
 
-
 	public static IWorldObjectManager get(final World world)
 	{
-		return world.getCapability(AetherCapabilities.WORLD_OBJECT_MANAGER, null);
+		return OrbisCore.getWorldObjectManagerProvider(true).getForWorld(world);
+	}
+
+	public static IWorldObjectManager get(final int dimension)
+	{
+		return OrbisCore.getWorldObjectManagerProvider(true).getForDimension(dimension);
 	}
 
 	/**
@@ -76,6 +85,12 @@ public class WorldObjectManager implements IWorldObjectManager
 	public World getWorld()
 	{
 		return this.world;
+	}
+
+	@Override
+	public void setWorld(final World world)
+	{
+		this.world = world;
 	}
 
 	@Override
@@ -148,6 +163,7 @@ public class WorldObjectManager implements IWorldObjectManager
 		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
 
 		tag.setInteger("nextId", this.nextId);
+		tag.setInteger("dimension", this.dimension);
 
 		funnel.setIntMap("groups", this.idToGroup);
 	}
@@ -158,31 +174,14 @@ public class WorldObjectManager implements IWorldObjectManager
 		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
 
 		this.nextId = tag.getInteger("nextId");
+		this.dimension = tag.getInteger("dimension");
+
+		if (FMLCommonHandler.instance().getMinecraftServerInstance() != null)
+		{
+			this.world = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(this.dimension);
+		}
 
 		this.idToGroup = HashBiMap.create(funnel.getIntMap(this.world, "groups"));
-
-		for (final IWorldObjectManagerObserver observer : this.observers)
-		{
-			observer.onReloaded(this);
-		}
-	}
-
-	public static class Storage implements Capability.IStorage<IWorldObjectManager>
-	{
-		@Override
-		public NBTBase writeNBT(final Capability<IWorldObjectManager> capability, final IWorldObjectManager instance, final EnumFacing side)
-		{
-			final NBTTagCompound nbt = new NBTTagCompound();
-			instance.write(nbt);
-
-			return nbt;
-		}
-
-		@Override
-		public void readNBT(final Capability<IWorldObjectManager> capability, final IWorldObjectManager instance, final EnumFacing side, final NBTBase nbt)
-		{
-			instance.read((NBTTagCompound) nbt);
-		}
 	}
 
 }

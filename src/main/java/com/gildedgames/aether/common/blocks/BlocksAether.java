@@ -77,11 +77,14 @@ public class BlocksAether
 
 	public static final BlockSkyrootPlanks skyroot_planks = new BlockSkyrootPlanks();
 
+	public static final Block skyroot_beam = new BlockParentPillar(Material.WOOD, skyroot_planks)
+			.setSoundType(SoundType.WOOD).setHardness(2.0f);
+
 	public static final BlockSkyrootPlanks dark_skyroot_planks = new BlockSkyrootPlanks();
 
 	public static final BlockSkyrootPlanks light_skyroot_planks = new BlockSkyrootPlanks();
 
-	public static final Block skyroot_beam = new BlockParentPillar(Material.WOOD, skyroot_planks)
+	public static final Block light_skyroot_beam = new BlockParentPillar(Material.WOOD, light_skyroot_planks)
 			.setSoundType(SoundType.WOOD).setHardness(2.0f);
 
 	public static final BlockAercloud aercloud = new BlockAercloud();
@@ -273,6 +276,8 @@ public class BlocksAether
 
 	public static Block skyroot_decorative = new BlockSkyrootDecorative();
 
+	public static Block light_skyroot_decorative = new BlockLightSkyrootDecorative();
+
 	public static Block structure_hint = new BlockStructureHint();
 
 	public static Block structure_builder = new BlockStructureBuilder();
@@ -380,12 +385,13 @@ public class BlocksAether
 
 		registerBlock("skyroot_planks", skyroot_planks.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		registerBlock("skyroot_decorative", skyroot_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+		registerBlock("skyroot_beam", skyroot_beam.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
 		registerBlock("dark_skyroot_planks", dark_skyroot_planks.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
 		registerBlock("light_skyroot_planks", light_skyroot_planks.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-
-		registerBlock("skyroot_beam", skyroot_beam.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+		registerBlock("light_skyroot_decorative", light_skyroot_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+		registerBlock("light_skyroot_beam", light_skyroot_beam.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
 		registerBlock("skyroot_bookshelf", skyroot_bookshelf.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
@@ -422,7 +428,7 @@ public class BlocksAether
 		registerBlock("mossy_holystone_wall", mossy_holystone_wall.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		registerBlock("holystone_brick_wall", holystone_brick_wall.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		registerBlock("icestone_wall", icestone_wall.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-		registerBlock("skyroot_log_wall", skyroot_log_wall.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		registerBlock("skyroot_log_wall", skyroot_log_wall.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		registerBlock("scatterglass_wall", scatterglass_wall.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
 		registerBlock("multiblock_dummy", multiblock_dummy);

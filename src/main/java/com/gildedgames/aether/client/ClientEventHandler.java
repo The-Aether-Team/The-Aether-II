@@ -24,6 +24,7 @@ import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
+import com.gildedgames.orbis.common.OrbisCore;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.ScaledResolution;
@@ -133,7 +134,7 @@ public class ClientEventHandler
 
 		if (world != null)
 		{
-			final IWorldObjectManager manager = WorldObjectManager.get(player.world);
+			final IWorldObjectManager manager = WorldObjectManager.get(world);
 
 			if (!manager.containsObserver(CHUNK_RENDERER_MANAGER))
 			{
@@ -142,6 +143,8 @@ public class ClientEventHandler
 		}
 		else
 		{
+			OrbisCore.stopProjectManager();
+			OrbisCore.stopWorldObjectManagerProvider(false);
 			CHUNK_RENDERER_MANAGER.unload();
 		}
 

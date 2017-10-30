@@ -1,6 +1,8 @@
-package com.gildedgames.orbis.common.network.packets;
+package com.gildedgames.orbis.common.network.packets.projects;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
+import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingDataException;
+import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingProjectException;
 import com.gildedgames.aether.api.orbis.management.IProject;
 import com.gildedgames.aether.api.orbis.management.IProjectIdentifier;
 import com.gildedgames.aether.common.AetherCore;
@@ -15,22 +17,22 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class PacketOrbisRequestProject extends PacketMultipleParts
+public class PacketRequestProject extends PacketMultipleParts
 {
 
 	private IProjectIdentifier project;
 
-	public PacketOrbisRequestProject()
+	public PacketRequestProject()
 	{
 
 	}
 
-	private PacketOrbisRequestProject(final byte[] data)
+	private PacketRequestProject(final byte[] data)
 	{
 		super(data);
 	}
 
-	public PacketOrbisRequestProject(final IProjectIdentifier project)
+	public PacketRequestProject(final IProjectIdentifier project)
 	{
 		this.project = project;
 	}
@@ -58,22 +60,29 @@ public class PacketOrbisRequestProject extends PacketMultipleParts
 	@Override
 	public PacketMultipleParts createPart(final byte[] data)
 	{
-		return new PacketOrbisRequestProject(data);
+		return new PacketRequestProject(data);
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketOrbisRequestProject, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketRequestProject, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketOrbisRequestProject message, final EntityPlayer player)
+		public IMessage onMessage(final PacketRequestProject message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{
 				return null;
 			}
 
-			final IProject project = OrbisCore.getProjectManager().findProject(message.project);
+			try
+			{
+				final IProject project = OrbisCore.getProjectManager().findProject(message.project);
 
-			NetworkingAether.sendPacketToPlayer(new PacketOrbisSendProject(project), (EntityPlayerMP) player);
+				NetworkingAether.sendPacketToPlayer(new PacketSendProject(project), (EntityPlayerMP) player);
+			}
+			catch (OrbisMissingDataException | OrbisMissingProjectException e)
+			{
+				AetherCore.LOGGER.error(e);
+			}
 
 			return null;
 		}

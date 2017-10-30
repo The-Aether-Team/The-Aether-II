@@ -1,13 +1,21 @@
 package com.gildedgames.orbis.common;
 
+import com.gildedgames.aether.api.orbis.IWorldObjectManager;
+import com.gildedgames.aether.api.orbis.IWorldObjectManagerProvider;
 import com.gildedgames.aether.api.orbis.management.IProjectManager;
+import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
+import com.gildedgames.aether.common.capabilities.world.WorldObjectManagerProvider;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.common.data.management.OrbisProjectManager;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisSendProjectListing;
+import com.gildedgames.orbis.common.network.packets.PacketWorldObjectManager;
+import com.gildedgames.orbis.common.network.packets.projects.PacketSendProjectListing;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
@@ -15,6 +23,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import java.io.File;
+import java.io.IOException;
 
 public class OrbisCore
 {
@@ -22,6 +31,8 @@ public class OrbisCore
 	private static final GameRegistrar GAME_REGISTRAR = new GameRegistrar();
 
 	private static IProjectManager projectManager;
+
+	private static IWorldObjectManagerProvider worldObjectManagerProvider;
 
 	@SubscribeEvent
 	public static void onPlayerLogin(final PlayerEvent.PlayerLoggedInEvent event)
@@ -32,13 +43,75 @@ public class OrbisCore
 		 * directory/data as the integrated server (instead of having to
 		 * "download" data from the integrated server).
 		 */
-		if (isServer() && event.player.getServer() != null && event.player.getServer().isDedicatedServer())
+		if (!event.player.world.isRemote && event.player.getServer() != null && event.player.getServer().isDedicatedServer())
 		{
-			NetworkingAether.sendPacketToPlayer(new PacketOrbisSendProjectListing(), (EntityPlayerMP) event.player);
+			NetworkingAether.sendPacketToPlayer(new PacketSendProjectListing(), (EntityPlayerMP) event.player);
 		}
 	}
 
-	public static void startProjectManager()
+	@SubscribeEvent
+	public static void onEntityJoinWorld(final EntityJoinWorldEvent event)
+	{
+		if (event.getEntity() instanceof EntityPlayer)
+		{
+			final EntityPlayer player = (EntityPlayer) event.getEntity();
+			final World world = player.world;
+
+			if (!world.isRemote)
+			{
+				final IWorldObjectManager manager = WorldObjectManager.get(world);
+
+				NetworkingAether.sendPacketToPlayer(new PacketWorldObjectManager(manager), (EntityPlayerMP) player);
+			}
+		}
+	}
+
+	public synchronized static void startWorldObjectManagerProvider(final boolean read)
+	{
+		if (worldObjectManagerProvider != null)
+		{
+			return;
+		}
+
+		try
+		{
+			worldObjectManagerProvider = new WorldObjectManagerProvider(new File(DimensionManager.getCurrentSaveRootDirectory(), "/data/orbis/"));
+		}
+		catch (final IOException e)
+		{
+			e.printStackTrace();
+		}
+
+		if (read)
+		{
+			worldObjectManagerProvider.read();
+		}
+	}
+
+	public synchronized static void stopWorldObjectManagerProvider(final boolean write)
+	{
+		if (worldObjectManagerProvider != null)
+		{
+			if (write)
+			{
+				worldObjectManagerProvider.write();
+			}
+
+			worldObjectManagerProvider = null;
+		}
+	}
+
+	public synchronized static IWorldObjectManagerProvider getWorldObjectManagerProvider(final boolean read)
+	{
+		if (worldObjectManagerProvider == null)
+		{
+			startWorldObjectManagerProvider(read);
+		}
+
+		return worldObjectManagerProvider;
+	}
+
+	public synchronized static void startProjectManager()
 	{
 		if (projectManager != null)
 		{
@@ -52,7 +125,11 @@ public class OrbisCore
 			if (data != null)
 			{
 				projectManager = new OrbisProjectManager(
-						new File(Minecraft.getMinecraft().mcDataDir, "/orbis/" + data.serverIP.replace(":", "_") + "/projects/"));
+						new File(Minecraft.getMinecraft().mcDataDir, "/orbis/servers/" + data.serverIP.replace(":", "_") + "/projects/"));
+			}
+			else
+			{
+				projectManager = new OrbisProjectManager(new File(Minecraft.getMinecraft().mcDataDir, "/orbis/local/projects/"));
 			}
 		}
 
@@ -64,13 +141,16 @@ public class OrbisCore
 		projectManager.scanAndCacheProjects();
 	}
 
-	public static void stopProjectManager()
+	public synchronized static void stopProjectManager()
 	{
-		projectManager.flushProjects();
-		projectManager = null;
+		if (projectManager != null)
+		{
+			projectManager.flushProjects();
+			projectManager = null;
+		}
 	}
 
-	public static IProjectManager getProjectManager()
+	public synchronized static IProjectManager getProjectManager()
 	{
 		if (projectManager == null)
 		{
@@ -85,11 +165,6 @@ public class OrbisCore
 		return FMLCommonHandler.instance().getSide().isClient();
 	}
 
-	public static boolean isServer()
-	{
-		return FMLCommonHandler.instance().getSide().isServer();
-	}
-
 	public static GameRegistrar getRegistrar()
 	{
 		return OrbisCore.GAME_REGISTRAR;
@@ -98,10 +173,12 @@ public class OrbisCore
 	public static void onServerStopping(final FMLServerStoppingEvent event)
 	{
 		stopProjectManager();
+		stopWorldObjectManagerProvider(true);
 	}
 
 	public static void onServerStarted(final FMLServerStartedEvent event)
 	{
+		startWorldObjectManagerProvider(true);
 		startProjectManager();
 	}
 }

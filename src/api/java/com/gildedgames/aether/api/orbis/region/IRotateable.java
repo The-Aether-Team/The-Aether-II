@@ -1,10 +1,10 @@
 package com.gildedgames.aether.api.orbis.region;
 
-import com.gildedgames.aether.api.orbis.util.OrbisRotation;
+import net.minecraft.util.Rotation;
 
 public interface IRotateable
 {
 
-	OrbisRotation getRotation();
+	Rotation getRotation();
 
 }

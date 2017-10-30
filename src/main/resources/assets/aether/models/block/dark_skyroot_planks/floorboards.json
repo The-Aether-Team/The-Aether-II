@@ -1,6 +1,6 @@
 {
 	"parent": "block/cube_all",
 	"textures": {
-		"all": "aether:blocks/dark_skyroot_planks/dark_skyroot_floorboards"
+		"all": "aether:blocks/dark_skyroot_planks/greatroot_floorboards"
 	}
 }

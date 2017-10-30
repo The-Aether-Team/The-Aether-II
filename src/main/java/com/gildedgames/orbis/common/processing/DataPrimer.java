@@ -1,7 +1,6 @@
 package com.gildedgames.orbis.common.processing;
 
 import com.gildedgames.aether.api.orbis.region.Region;
-import com.gildedgames.aether.api.orbis.util.OrbisRotation;
 import com.gildedgames.aether.api.orbis.util.OrbisTuple;
 import com.gildedgames.aether.api.orbis.util.RotationHelp;
 import com.gildedgames.orbis.common.block.BlockData;
@@ -10,6 +9,7 @@ import com.gildedgames.orbis.common.block.BlockInstance;
 import com.gildedgames.orbis.common.data.ICreationData;
 import com.gildedgames.orbis.common.events.ChangeBlockEvent;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -39,6 +39,8 @@ public class DataPrimer
 
 			if (blockData.getTileEntity() != null)
 			{
+				blockData.getTileEntity().setWorld(this.primer.getWorld());
+
 				this.primer.setTileEntity(pos, blockData.getTileEntity());
 			}
 		}
@@ -47,13 +49,13 @@ public class DataPrimer
 		MinecraftForge.EVENT_BUS.post(changeBlockEvent);
 	}
 
-	public void create(final BlockDataContainer container, final BlockPos pos, final OrbisRotation rotation, final ICreationData options)
+	public void create(final BlockDataContainer container, final BlockPos pos, final Rotation rotation, final ICreationData options)
 	{
 		final BlockPos min = pos;
 		final BlockPos max = new BlockPos(min.getX() + container.getWidth() - 1, min.getY() + container.getHeight() - 1,
 				min.getZ() + container.getLength() - 1);
 
-		final int rotAmount = Math.abs(rotation.getRotationAmount(OrbisRotation.NORTH));
+		final int rotAmount = Math.abs(RotationHelp.getRotationAmount(rotation, Rotation.NONE));
 
 		if (rotAmount != 0)
 		{

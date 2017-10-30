@@ -3,7 +3,7 @@ package com.gildedgames.orbis.common.player.modules;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.orbis.common.network.packets.PacketOrbisChangePower;
+import com.gildedgames.orbis.common.network.packets.PacketChangePower;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.*;
 import net.minecraft.nbt.NBTTagCompound;
@@ -84,16 +84,6 @@ public class PlayerPowerModule extends PlayerAetherModule
 		return this.powers[this.currentPowerIndex];
 	}
 
-	public void setCurrentPower(int powerIndex)
-	{
-		this.currentPowerIndex = powerIndex;
-
-		if (this.getWorld().isRemote)
-		{
-			NetworkingAether.sendPacketToServer(new PacketOrbisChangePower(this.currentPowerIndex));
-		}
-	}
-
 	public void setCurrentPower(final Class<? extends IGodPower> clazz)
 	{
 		int foundIndex = -1;
@@ -115,9 +105,19 @@ public class PlayerPowerModule extends PlayerAetherModule
 
 			if (this.getWorld().isRemote)
 			{
-				NetworkingAether.sendPacketToServer(new PacketOrbisChangePower(this.currentPowerIndex));
+				NetworkingAether.sendPacketToServer(new PacketChangePower(this.currentPowerIndex));
 			}
 		}
+	}
+
+	public void setCurrentPower(int powerIndex)
+	{
+		this.currentPowerIndex = powerIndex;
+	}
+
+	public int getCurrentPowerIndex()
+	{
+		return this.currentPowerIndex;
 	}
 
 	public int getPowerIndex(final Class<? extends IGodPower> clazz)

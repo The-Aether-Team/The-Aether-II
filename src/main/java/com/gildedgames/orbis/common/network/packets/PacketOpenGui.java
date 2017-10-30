@@ -6,10 +6,10 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class PacketOrbisOpenGui implements IMessage
+public class PacketOpenGui implements IMessage
 {
 
-	public PacketOrbisOpenGui()
+	public PacketOpenGui()
 	{
 
 	}
@@ -24,10 +24,10 @@ public class PacketOrbisOpenGui implements IMessage
 	{
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketOrbisOpenGui, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketOpenGui, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketOrbisOpenGui message, final EntityPlayer player)
+		public IMessage onMessage(final PacketOpenGui message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{
