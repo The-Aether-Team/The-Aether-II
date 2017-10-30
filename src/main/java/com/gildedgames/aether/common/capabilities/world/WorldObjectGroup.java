@@ -74,9 +74,13 @@ public class WorldObjectGroup implements IWorldObjectGroup
 	}
 
 	@Override
-	public <T extends IWorldObject> void addObject(final T object)
+	public <T extends IWorldObject> int addObject(final T object)
 	{
+		final int id = this.nextId;
+
 		this.setObject(this.nextId++, object);
+
+		return id;
 	}
 
 	@Override

@@ -32,7 +32,7 @@ public interface IWorldObjectGroup extends NBT
 	 * @param object
 	 * @param <T>
 	 */
-	<T extends IWorldObject> void addObject(T object);
+	<T extends IWorldObject> int addObject(T object);
 
 	<T extends IWorldObject> boolean removeObject(T object);
 

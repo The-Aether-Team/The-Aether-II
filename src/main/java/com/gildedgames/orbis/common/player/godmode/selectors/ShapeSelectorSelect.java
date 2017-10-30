@@ -10,6 +10,7 @@ import com.gildedgames.orbis.common.block.BlockFilter;
 import com.gildedgames.orbis.common.data.CreationData;
 import com.gildedgames.orbis.common.data.ICreationData;
 import com.gildedgames.orbis.common.items.ItemsOrbis;
+import com.gildedgames.orbis.common.network.packets.PacketSetSelectedRegion;
 import com.gildedgames.orbis.common.network.packets.PacketWorldObjectAdd;
 import com.gildedgames.orbis.common.network.packets.PacketWorldObjectRemove;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
@@ -84,20 +85,22 @@ public class ShapeSelectorSelect implements IShapeSelector
 
 		final WorldShape region = new WorldShape(selectedShape, world);
 
-		group.addObject(region);
+		final int regionId = group.addObject(region);
 
 		if (world.getMinecraftServer().isDedicatedServer())
 		{
-			NetworkingAether.sendPacketToPlayer(new PacketWorldObjectAdd(world, group, region), (EntityPlayerMP) module.getEntity());
+			NetworkingAether.sendPacketToDimension(new PacketWorldObjectAdd(world, group, region), world.provider.getDimension());
 		}
 
 		if (this.power.getSelectedRegion() != null)
 		{
-			NetworkingAether.sendPacketToPlayer(new PacketWorldObjectRemove(world, group, this.power.getSelectedRegion()), (EntityPlayerMP) module.getEntity());
+			NetworkingAether.sendPacketToDimension(new PacketWorldObjectRemove(world, group, this.power.getSelectedRegion()), world.provider.getDimension());
 			group.removeObject(this.power.getSelectedRegion());
 		}
 
 		this.power.setSelectedRegion(region);
+
+		NetworkingAether.sendPacketToPlayer(new PacketSetSelectedRegion(regionId), (EntityPlayerMP) module.getEntity());
 	}
 
 	@Override

@@ -1,31 +1,27 @@
 package com.gildedgames.orbis.client;
 
+import com.gildedgames.aether.api.orbis.IWorldObjectGroup;
 import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.api.orbis.util.RotationHelp;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.client.gui.GuiChoiceMenuHolder;
 import com.gildedgames.orbis.client.gui.GuiChoiceMenuPowers;
 import com.gildedgames.orbis.client.gui.GuiChoiceMenuSelectionTypes;
-import com.gildedgames.orbis.client.gui.GuiRightClickBlueprint;
 import com.gildedgames.orbis.client.renderers.AirSelectionRenderer;
 import com.gildedgames.orbis.common.OrbisCore;
-import com.gildedgames.orbis.common.network.packets.PacketClearSelection;
-import com.gildedgames.orbis.common.network.packets.PacketDeveloperReach;
-import com.gildedgames.orbis.common.network.packets.PacketOpenGui;
-import com.gildedgames.orbis.common.network.packets.PacketRotateBlueprint;
+import com.gildedgames.orbis.common.network.packets.*;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.PlayerSelectionModule;
 import com.gildedgames.orbis.common.player.godmode.GodPowerBlueprint;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import com.gildedgames.orbis.common.util.OrbisRaytraceHelp;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
-import com.gildedgames.orbis.common.world_objects.Blueprint;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiIngameMenu;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -52,14 +48,31 @@ public class OrbisDeveloperEventsClient
 		if (event.getGui() instanceof GuiIngameMenu)
 		{
 			final PlayerSelectionModule selectionModule = PlayerAether.getPlayer(mc.player).getSelectionModule();
+			final PlayerOrbisModule module = PlayerOrbisModule.get(mc.player);
 
-			if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE) && selectionModule.getActiveSelection() != null)
+			if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
 			{
-				selectionModule.clearSelection();
+				if (selectionModule.getActiveSelection() != null)
+				{
+					selectionModule.clearSelection();
 
-				NetworkingAether.sendPacketToServer(new PacketClearSelection());
+					NetworkingAether.sendPacketToServer(new PacketClearSelection());
 
-				event.setCanceled(true);
+					event.setCanceled(true);
+				}
+
+				if (module.powers().getSelectPower().getSelectedRegion() != null)
+				{
+					final WorldObjectManager manager = WorldObjectManager.get(mc.world);
+					final IWorldObjectGroup group = manager.getGroup(0);
+
+					module.powers().getSelectPower().setSelectedRegion(null);
+
+					NetworkingAether.sendPacketToServer(new PacketClearSelectedRegion());
+					NetworkingAether.sendPacketToServer(new PacketWorldObjectRemove(mc.world, group, module.powers().getSelectPower().getSelectedRegion()));
+
+					event.setCanceled(true);
+				}
 			}
 		}
 
@@ -157,7 +170,7 @@ public class OrbisDeveloperEventsClient
 				final IShape selectedShape = player.getOrbisModule().getSelectedRegion();
 
 				if (selectedShape == null ||
-					module.powers().getCurrentPower().getShapeSelector().onRightClickShape(module, selectedShape, event))
+						module.powers().getCurrentPower().getShapeSelector().onRightClickShape(module, selectedShape, event))
 				{
 					final PlayerSelectionModule selectionModule = module.getPlayer().getSelectionModule();
 
