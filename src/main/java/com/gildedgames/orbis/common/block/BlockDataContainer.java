@@ -36,7 +36,7 @@ public class BlockDataContainer implements NBT, IDimensions
 
 	}
 
-	private BlockDataContainer(World world)
+	protected BlockDataContainer(World world)
 	{
 
 	}
@@ -72,7 +72,7 @@ public class BlockDataContainer implements NBT, IDimensions
 		int minx = bounding.getMin().getX();
 		int miny = bounding.getMin().getY();
 		int minz = bounding.getMin().getZ();
-		BlockDataContainer container = new BlockDataContainer(bounding.getWidth(), bounding.getHeight(), bounding.getLength());
+		BlockDataContainer container = new BlockDataContainerDefaultVoid(bounding.getWidth(), bounding.getHeight(), bounding.getLength());
 		for (BlockPos pos : shape.getShapeData())
 		{
 			BlockData block = new BlockData();
@@ -159,6 +159,13 @@ public class BlockDataContainer implements NBT, IDimensions
 		return false;
 	}
 
+	private final static BlockData _air = new BlockData(Blocks.AIR.getDefaultState());
+
+	protected BlockData defaultBlock()
+	{
+		return _air;
+	}
+
 	@Override
 	public void write(final NBTTagCompound tag)
 	{
@@ -182,8 +189,9 @@ public class BlockDataContainer implements NBT, IDimensions
 
 		int index = 0;
 
-		for (final BlockData block : this.data)
+		for (BlockData block : this.data)
 		{
+			block = block == null ? this.defaultBlock() : block;
 			final IBlockState blockState = block == null ? Blocks.AIR.getDefaultState() : block.getBlockState();
 
 			final int id = OrbisCore.getRegistrar().getBlockId(blockState.getBlock());

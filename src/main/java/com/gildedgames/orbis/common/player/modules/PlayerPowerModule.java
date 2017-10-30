@@ -185,4 +185,6 @@ public class PlayerPowerModule extends PlayerAetherModule
 
 		this.currentPowerIndex = tag.getInteger("currentPowerIndex");
 	}
+
+
 }
