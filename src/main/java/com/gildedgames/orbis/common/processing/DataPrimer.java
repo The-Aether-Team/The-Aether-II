@@ -39,6 +39,8 @@ public class DataPrimer
 
 			if (blockData.getTileEntity() != null)
 			{
+				blockData.getTileEntity().setWorld(this.primer.getWorld());
+
 				this.primer.setTileEntity(pos, blockData.getTileEntity());
 			}
 		}

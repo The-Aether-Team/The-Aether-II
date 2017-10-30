@@ -16,6 +16,12 @@ public class WorldPrimer implements IPrimer
 	}
 
 	@Override
+	public World getWorld()
+	{
+		return this.world;
+	}
+
+	@Override
 	public void setBlockState(final BlockPos pos, final IBlockState state)
 	{
 		this.world.setBlockState(pos, state);
