@@ -70,7 +70,10 @@ public class WorldObjectGroup implements IWorldObjectGroup
 			observer.onObjectAdded(this, object);
 		}
 
-		WorldObjectManager.get(this.world).markDirty();
+		if (this.world != null)
+		{
+			WorldObjectManager.get(this.world).markDirty();
+		}
 	}
 
 	@Override
@@ -103,7 +106,10 @@ public class WorldObjectGroup implements IWorldObjectGroup
 				observer.onObjectRemoved(this, object);
 			}
 
-			WorldObjectManager.get(this.world).markDirty();
+			if (this.world != null)
+			{
+				WorldObjectManager.get(this.world).markDirty();
+			}
 		}
 
 		return object != null;

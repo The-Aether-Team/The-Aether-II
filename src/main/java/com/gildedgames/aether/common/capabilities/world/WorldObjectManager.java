@@ -54,7 +54,18 @@ public class WorldObjectManager extends WorldSavedData
 
 	public static WorldObjectManager get(final World world)
 	{
-		final MapStorage storage = DimensionManager.getWorld(world.provider.getDimension()).getPerWorldStorage();
+		final World using;
+
+		if (world.isRemote)
+		{
+			using = world;
+		}
+		else
+		{
+			using = world.getMinecraftServer().worldServerForDimension(world.provider.getDimension());
+		}
+
+		final MapStorage storage = using.getPerWorldStorage();
 		WorldObjectManager instance = (WorldObjectManager) storage.getOrLoadData(WorldObjectManager.class, DATA_NAME);
 
 		if (instance == null)
@@ -151,7 +162,10 @@ public class WorldObjectManager extends WorldSavedData
 		this.nextId = tag.getInteger("nextId");
 		this.dimension = tag.getInteger("dimension");
 
-		this.world = DimensionManager.getWorld(this.dimension);
+		if (this.world == null)
+		{
+			this.world = DimensionManager.getWorld(this.dimension);
+		}
 
 		this.idToGroup = HashBiMap.create(funnel.getIntMap(this.world, "groups"));
 

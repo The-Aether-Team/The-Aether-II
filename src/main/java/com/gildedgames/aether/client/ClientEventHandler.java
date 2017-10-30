@@ -133,7 +133,7 @@ public class ClientEventHandler
 
 		if (world != null)
 		{
-			final WorldObjectManager manager = WorldObjectManager.get(world);
+			final WorldObjectManager manager = WorldObjectManager.get(player.world);
 
 			if (!manager.containsObserver(CHUNK_RENDERER_MANAGER))
 			{
