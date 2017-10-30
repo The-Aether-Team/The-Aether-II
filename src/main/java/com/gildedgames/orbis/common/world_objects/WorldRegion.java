@@ -11,7 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class WorldRegion extends Region implements IWorldObject
+public class WorldRegion extends Region implements IWorldObject, IColored
 {
 	private IWorldRenderer renderer;
 
@@ -107,5 +107,11 @@ public class WorldRegion extends Region implements IWorldObject
 	public void read(final NBTTagCompound tag)
 	{
 		super.read(tag);
+	}
+
+	@Override
+	public int getColor()
+	{
+		return 0x999999;
 	}
 }

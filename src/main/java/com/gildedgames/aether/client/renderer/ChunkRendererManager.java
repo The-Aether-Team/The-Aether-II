@@ -13,6 +13,7 @@ import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.capabilities.world.chunk.ChunkAttachment;
 import com.gildedgames.orbis.client.renderers.RenderShape;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
+import com.gildedgames.orbis.common.world_objects.IColored;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -257,12 +258,13 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 
 			renderRegion.useCustomColors = true;
 
-			final PlayerOrbisModule module = PlayerOrbisModule.get(Minecraft.getMinecraft().player);
+			if (object instanceof IColored)
+			{
+				final IColored colored = (IColored) object;
 
-			final int color = module.powers().getCurrentPower().getClientHandler().getShapeColor(module);
-
-			renderRegion.colorBorder = color;
-			renderRegion.colorGrid = color;
+				renderRegion.colorBorder = colored.getColor();
+				renderRegion.colorGrid = colored.getColor();
+			}
 
 			renderRegion.boxAlpha = 0.1F;
 

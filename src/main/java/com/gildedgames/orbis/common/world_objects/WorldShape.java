@@ -17,9 +17,9 @@ import net.minecraft.world.World;
  * Simple wrapper around an IShape so it can be used as a WorldObject.
  * This is used in for example the Select tool for shared non-box shape rendering
  */
-public class WorldShape implements IShape, IWorldObject
+public class WorldShape implements IShape, IWorldObject, IColored
 {
-	private World world;
+	private final World world;
 
 	private IShape shape;
 
@@ -36,7 +36,6 @@ public class WorldShape implements IShape, IWorldObject
 		this.world = world;
 	}
 
-
 	@Override
 	public World getWorld()
 	{
@@ -46,16 +45,16 @@ public class WorldShape implements IShape, IWorldObject
 	@Override
 	public BlockPos getPos()
 	{
-		 return shape.getBoundingBox().getMin();
+		return shape.getBoundingBox().getMin();
 	}
 
 	@Override
-	public void setPos(BlockPos pos)
+	public void setPos(final BlockPos pos)
 	{
-		BlockPos current = this.getPos();
-		int dx = pos.getX() - current.getX();
-		int dy = pos.getY() - current.getY();
-		int dz = pos.getZ() - current.getZ();
+		final BlockPos current = this.getPos();
+		final int dx = pos.getX() - current.getX();
+		final int dy = pos.getY() - current.getY();
+		final int dz = pos.getZ() - current.getZ();
 		this.shape = shape.translate(dx, dy, dz);
 	}
 
@@ -88,19 +87,19 @@ public class WorldShape implements IShape, IWorldObject
 	}
 
 	@Override
-	public IShape rotate(Rotation rotation, IRegion in)
+	public IShape rotate(final Rotation rotation, final IRegion in)
 	{
 		return this.shape.rotate(rotation, in);
 	}
 
 	@Override
-	public IShape translate(int x, int y, int z)
+	public IShape translate(final int x, final int y, final int z)
 	{
 		return this.shape.translate(x, y, z);
 	}
 
 	@Override
-	public IShape translate(BlockPos pos)
+	public IShape translate(final BlockPos pos)
 	{
 		return this.shape.translate(pos);
 	}
@@ -112,28 +111,34 @@ public class WorldShape implements IShape, IWorldObject
 	}
 
 	@Override
-	public boolean contains(int x, int y, int z)
+	public boolean contains(final int x, final int y, final int z)
 	{
 		return this.shape.contains(x, y, z);
 	}
 
 	@Override
-	public boolean contains(BlockPos pos)
+	public boolean contains(final BlockPos pos)
 	{
 		return this.shape.contains(pos);
 	}
 
 	@Override
-	public void write(NBTTagCompound tag)
+	public void write(final NBTTagCompound tag)
 	{
-		NBTFunnel funnel = AetherCore.io().createFunnel(tag);
+		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
 		funnel.set("shape", this.shape);
 	}
 
 	@Override
-	public void read(NBTTagCompound tag)
+	public void read(final NBTTagCompound tag)
 	{
-		NBTFunnel funnel = AetherCore.io().createFunnel(tag);
+		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
 		this.shape = funnel.get(this.world, "shape");
+	}
+
+	@Override
+	public int getColor()
+	{
+		return 0x999999;
 	}
 }

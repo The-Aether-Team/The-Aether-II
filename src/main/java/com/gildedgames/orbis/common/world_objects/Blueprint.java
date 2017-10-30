@@ -19,7 +19,7 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class Blueprint extends AbstractRegion implements IWorldObject, IMutableRegion, IRotateable
+public class Blueprint extends AbstractRegion implements IWorldObject, IMutableRegion, IRotateable, IColored
 {
 	private final World world;
 
@@ -229,5 +229,11 @@ public class Blueprint extends AbstractRegion implements IWorldObject, IMutableR
 	public BlockDataContainer getBlockDataContainer()
 	{
 		return this.data.getBlockDataContainer();
+	}
+
+	@Override
+	public int getColor()
+	{
+		return 0x99B6FF;
 	}
 }
