@@ -2,8 +2,10 @@ package com.gildedgames.orbis.client.player.godmode;
 
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
 import com.gildedgames.aether.api.orbis.region.IRegion;
+import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.api.orbis.util.RotationHelp;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.orbis.client.gui.GuiRightClickBlueprint;
 import com.gildedgames.orbis.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.client.renderers.RenderBlueprint;
 import com.gildedgames.orbis.client.renderers.RenderShape;
@@ -14,11 +16,15 @@ import com.gildedgames.orbis.common.player.godmode.GodPowerBlueprint;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import com.google.common.collect.Lists;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.MouseEvent;
 
 import java.util.List;
 
@@ -93,7 +99,7 @@ public class GodPowerBlueprintClient implements IGodPowerClient
 			this.prevRotation = this.server.getPlacingRotation();
 		}
 
-		if (this.server.getPlacingBlueprint() != null )
+		if (this.server.getPlacingBlueprint() != null)
 		{
 			final BlockPos pos = RaytraceHelp.doOrbisRaytrace(module.getPlayer(), module.raytraceWithRegionSnapping());
 
@@ -124,5 +130,31 @@ public class GodPowerBlueprintClient implements IGodPowerClient
 		}
 
 		return renderers;
+	}
+
+	@Override
+	public boolean onRightClickShape(final PlayerOrbisModule module, final IShape selectedShape, final MouseEvent event)
+	{
+		final EntityPlayer entity = module.getEntity();
+
+		final int x = MathHelper.floor(entity.posX);
+		final int y = MathHelper.floor(entity.posY);
+		final int z = MathHelper.floor(entity.posZ);
+
+		if (selectedShape instanceof Blueprint)
+		{
+			final boolean playerInside = selectedShape.contains(x, y, z) || selectedShape.contains(x, MathHelper.floor(entity.posY + entity.height), z);
+
+			if (entity.world.isRemote && !playerInside)
+			{
+				if (System.currentTimeMillis() - GuiRightClickBlueprint.lastCloseTime > 200)
+				{
+					Minecraft.getMinecraft().displayGuiScreen(new GuiRightClickBlueprint((Blueprint) selectedShape));
+				}
+			}
+
+			return false;
+		}
+		return true;
 	}
 }

@@ -4,18 +4,13 @@ import com.gildedgames.aether.api.orbis.IWorldObjectGroup;
 import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.orbis.client.gui.GuiRightClickBlueprint;
 import com.gildedgames.orbis.common.network.packets.PacketWorldObjectAdd;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.GodPowerBlueprint;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.MouseEvent;
 
 public class ShapeSelectorBlueprint implements IShapeSelector
 {
@@ -60,30 +55,5 @@ public class ShapeSelectorBlueprint implements IShapeSelector
 
 			NetworkingAether.sendPacketToDimension(new PacketWorldObjectAdd(world, group, blueprint), world.provider.getDimension());
 		}
-	}
-
-	@Override
-	public boolean onRightClickShape(final PlayerOrbisModule module, final IShape selectedShape, final MouseEvent event)
-	{
-		final EntityPlayer entity = module.getEntity();
-
-		final int x = MathHelper.floor(entity.posX);
-		final int y = MathHelper.floor(entity.posY);
-		final int z = MathHelper.floor(entity.posZ);
-
-		if (selectedShape instanceof Blueprint)
-		{
-			final boolean playerInside = selectedShape.contains(x, y, z) || selectedShape.contains(x, MathHelper.floor(entity.posY + entity.height), z);
-
-			if (entity.world.isRemote && !playerInside)
-			{
-				if (System.currentTimeMillis() - GuiRightClickBlueprint.lastCloseTime > 200)
-				{
-					Minecraft.getMinecraft().displayGuiScreen(new GuiRightClickBlueprint((Blueprint) selectedShape));
-				}
-			}
-			return false;
-		}
-		return true;
 	}
 }

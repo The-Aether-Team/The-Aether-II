@@ -1,8 +1,10 @@
 package com.gildedgames.orbis.client.player.godmode;
 
+import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.orbis.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.MouseEvent;
 
 import java.util.List;
 
@@ -20,5 +22,10 @@ public interface IGodPowerClient
 	int getShapeColor(PlayerOrbisModule module);
 
 	List getActiveRenderers(PlayerOrbisModule module, World world);
+
+	/**
+	 * @return True if it should use the regular active selection behaviour. False to cancel.
+	 */
+	boolean onRightClickShape(PlayerOrbisModule module, IShape selectedShape, MouseEvent event);
 
 }

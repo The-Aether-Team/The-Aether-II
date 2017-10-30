@@ -216,7 +216,7 @@ public class OrbisDeveloperEventsClient
 				final IShape selectedShape = player.getOrbisModule().getSelectedRegion();
 
 				if (selectedShape == null ||
-						module.powers().getCurrentPower().getShapeSelector().onRightClickShape(module, selectedShape, event))
+						module.powers().getCurrentPower().getClientHandler().onRightClickShape(module, selectedShape, event))
 				{
 					final PlayerSelectionModule selectionModule = module.getPlayer().getSelectionModule();
 

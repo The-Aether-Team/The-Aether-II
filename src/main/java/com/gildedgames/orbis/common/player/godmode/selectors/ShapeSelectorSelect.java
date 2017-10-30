@@ -4,8 +4,6 @@ import com.gildedgames.aether.api.orbis.IWorldObjectGroup;
 import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.orbis.client.gui.GuiRightClickBlueprint;
-import com.gildedgames.orbis.client.gui.GuiRightClickSelector;
 import com.gildedgames.orbis.common.block.BlockFilter;
 import com.gildedgames.orbis.common.data.CreationData;
 import com.gildedgames.orbis.common.data.ICreationData;
@@ -17,17 +15,12 @@ import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.GodPowerSelect;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import com.gildedgames.orbis.common.util.BlockFilterHelper;
-import com.gildedgames.orbis.common.world_objects.Blueprint;
 import com.gildedgames.orbis.common.world_objects.WorldShape;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.MouseEvent;
 
 public class ShapeSelectorSelect implements IShapeSelector
 {
@@ -101,39 +94,5 @@ public class ShapeSelectorSelect implements IShapeSelector
 		this.power.setSelectedRegion(region);
 
 		NetworkingAether.sendPacketToPlayer(new PacketSetSelectedRegion(regionId), (EntityPlayerMP) module.getEntity());
-	}
-
-	@Override
-	public boolean onRightClickShape(final PlayerOrbisModule module, final IShape selectedShape, final MouseEvent event)
-	{
-		final EntityPlayer entity = module.getEntity();
-
-		final int x = MathHelper.floor(entity.posX);
-		final int y = MathHelper.floor(entity.posY);
-		final int z = MathHelper.floor(entity.posZ);
-
-		final boolean playerInside = selectedShape.contains(x, y, z) || selectedShape.contains(x, MathHelper.floor(entity.posY + entity.height), z);
-
-		if (entity.world.isRemote && !playerInside)
-		{
-			if (System.currentTimeMillis() - GuiRightClickBlueprint.lastCloseTime > 200)
-			{
-				if (selectedShape instanceof Blueprint)
-				{
-					Minecraft.getMinecraft().displayGuiScreen(new GuiRightClickBlueprint((Blueprint) selectedShape));
-				}
-				else if (selectedShape instanceof WorldShape)
-				{
-					Minecraft.getMinecraft().displayGuiScreen(new GuiRightClickSelector((WorldShape) selectedShape));
-				}
-				else
-				{
-					Minecraft.getMinecraft().displayGuiScreen(new GuiRightClickSelector(new WorldShape(selectedShape, entity.world)));
-				}
-
-				return false;
-			}
-		}
-		return true;
 	}
 }
