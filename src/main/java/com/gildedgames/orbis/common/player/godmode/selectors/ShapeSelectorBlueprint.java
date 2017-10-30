@@ -49,7 +49,10 @@ public class ShapeSelectorBlueprint implements IShapeSelector
 
 		if (!world.isRemote)
 		{
-			group.addObject(blueprint);
+			if (world.getMinecraftServer().isDedicatedServer())
+			{
+				group.addObject(blueprint);
+			}
 
 			NetworkingAether.sendPacketToDimension(new PacketWorldObjectAdd(world, group, blueprint), world.provider.getDimension());
 		}

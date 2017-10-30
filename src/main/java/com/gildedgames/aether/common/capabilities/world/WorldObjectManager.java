@@ -164,7 +164,7 @@ public class WorldObjectManager implements IWorldObjectManager
 		this.nextId = tag.getInteger("nextId");
 		this.dimension = tag.getInteger("dimension");
 
-		if (OrbisCore.isServer())
+		if (FMLCommonHandler.instance().getMinecraftServerInstance() != null)
 		{
 			this.world = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(this.dimension);
 		}

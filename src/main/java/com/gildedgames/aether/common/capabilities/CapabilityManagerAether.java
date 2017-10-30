@@ -4,7 +4,6 @@ import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IChunkAttachment;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
-import com.gildedgames.aether.api.orbis.IWorldObjectManager;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.world.ISectorAccess;
 import com.gildedgames.aether.common.AetherCore;
@@ -12,24 +11,19 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherProvider;
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfo;
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfoProvider;
-import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.capabilities.world.chunk.ChunkAttachment;
 import com.gildedgames.aether.common.capabilities.world.chunk.ChunkAttachmentProvider;
 import com.gildedgames.aether.common.capabilities.world.chunk.PlacementFlagCapability;
 import com.gildedgames.aether.common.capabilities.world.chunk.PlacementFlagProvider;
 import com.gildedgames.aether.common.capabilities.world.sectors.IslandSectorAccessFlatFile;
 import com.gildedgames.aether.common.capabilities.world.sectors.SectorStorageProvider;
-import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
-import com.gildedgames.orbis.common.network.packets.PacketWorldObjectManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.event.world.ChunkEvent;
@@ -78,23 +72,6 @@ public class CapabilityManagerAether
 		if (!world.isRemote && world.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
 			event.addCapability(AetherCore.getResource("SectorAccess"), new SectorStorageProvider(world));
-		}
-	}
-
-	@SubscribeEvent
-	public static void onEntityJoinWorld(final EntityJoinWorldEvent event)
-	{
-		if (event.getEntity() instanceof EntityPlayer)
-		{
-			final EntityPlayer player = (EntityPlayer) event.getEntity();
-			final World world = player.world;
-
-			if (!world.isRemote)
-			{
-				final IWorldObjectManager manager = WorldObjectManager.get(player);
-
-				NetworkingAether.sendPacketToPlayer(new PacketWorldObjectManager(manager), (EntityPlayerMP) player);
-			}
 		}
 	}
 
