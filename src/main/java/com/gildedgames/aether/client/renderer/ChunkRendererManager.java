@@ -255,8 +255,12 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 
 			renderRegion.useCustomColors = true;
 
-			renderRegion.colorBorder = 0x99B6FF;
-			renderRegion.colorGrid = 0x99B6FF;
+			final PlayerOrbisModule module = PlayerOrbisModule.get(Minecraft.getMinecraft().player);
+
+			final int color = module.powers().getCurrentPower().getClientHandler().getShapeColor(module);
+
+			renderRegion.colorBorder = color;
+			renderRegion.colorGrid = color;
 
 			renderRegion.boxAlpha = 0.1F;
 

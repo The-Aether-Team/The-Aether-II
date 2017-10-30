@@ -39,7 +39,7 @@ public class ShapeSelectorSelect implements IShapeSelector
 	}
 
 	@Override
-	public boolean isSelectorActive(PlayerOrbisModule module, World world)
+	public boolean isSelectorActive(final PlayerOrbisModule module, final World world)
 	{
 		final ItemStack held = module.getEntity().getHeldItemMainhand();
 
@@ -47,13 +47,13 @@ public class ShapeSelectorSelect implements IShapeSelector
 	}
 
 	@Override
-	public boolean canSelectShape(PlayerOrbisModule module, IShape shape, World world)
+	public boolean canSelectShape(final PlayerOrbisModule module, final IShape shape, final World world)
 	{
 		return true;
 	}
 
 	@Override
-	public void onSelect(PlayerOrbisModule module, IShape selectedShape, World world)
+	public void onSelect(final PlayerOrbisModule module, final IShape selectedShape, final World world)
 	{
 		if (world.isRemote)
 		{
@@ -65,7 +65,7 @@ public class ShapeSelectorSelect implements IShapeSelector
 		if (held.getItem() instanceof ItemBlock)
 		{
 			final ItemStack offhand = module.getEntity().getHeldItem(EnumHand.OFF_HAND);
-			BlockFilter filter;
+			final BlockFilter filter;
 			if (offhand.getItem() instanceof ItemBlock)
 			{
 				filter = new BlockFilter(BlockFilterHelper.getNewReplaceLayer(held, offhand));
@@ -93,13 +93,14 @@ public class ShapeSelectorSelect implements IShapeSelector
 			NetworkingAether.sendPacketToPlayer(new PacketWorldObjectRemove(world, group, this.power.getSelectedRegion()), (EntityPlayerMP) module.getEntity());
 			group.removeObject(this.power.getSelectedRegion());
 		}
+
 		this.power.setSelectedRegion(region);
 	}
 
 	@Override
-	public boolean onRightClickShape(PlayerOrbisModule module, IShape selectedShape, MouseEvent event)
+	public boolean onRightClickShape(final PlayerOrbisModule module, final IShape selectedShape, final MouseEvent event)
 	{
-		EntityPlayer entity = module.getEntity();
+		final EntityPlayer entity = module.getEntity();
 
 		final int x = MathHelper.floor(entity.posX);
 		final int y = MathHelper.floor(entity.posY);
@@ -123,6 +124,7 @@ public class ShapeSelectorSelect implements IShapeSelector
 				{
 					Minecraft.getMinecraft().displayGuiScreen(new GuiRightClickSelector(new WorldShape(selectedShape, entity.world)));
 				}
+
 				return false;
 			}
 		}
