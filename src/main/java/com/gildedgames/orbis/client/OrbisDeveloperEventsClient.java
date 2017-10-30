@@ -8,6 +8,7 @@ import com.gildedgames.orbis.client.gui.GuiChoiceMenuPowers;
 import com.gildedgames.orbis.client.gui.GuiChoiceMenuSelectionTypes;
 import com.gildedgames.orbis.client.gui.GuiRightClickBlueprint;
 import com.gildedgames.orbis.client.renderers.AirSelectionRenderer;
+import com.gildedgames.orbis.common.network.packets.PacketClearSelection;
 import com.gildedgames.orbis.common.network.packets.PacketOrbisDeveloperReach;
 import com.gildedgames.orbis.common.network.packets.PacketOrbisOpenGui;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
@@ -17,6 +18,7 @@ import com.gildedgames.orbis.common.util.OrbisRaytraceHelp;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiIngameMenu;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
@@ -43,6 +45,20 @@ public class OrbisDeveloperEventsClient
 	@SubscribeEvent
 	public static void onGuiOpen(final GuiOpenEvent event)
 	{
+		if (event.getGui() instanceof GuiIngameMenu)
+		{
+			final PlayerSelectionModule selectionModule = PlayerAether.getPlayer(mc.player).getSelectionModule();
+
+			if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE) && selectionModule.getActiveSelection() != null)
+			{
+				selectionModule.clearSelection();
+
+				NetworkingAether.sendPacketToServer(new PacketClearSelection());
+
+				event.setCanceled(true);
+			}
+		}
+
 		if (event.getGui() instanceof GuiInventory)
 		{
 			final Minecraft mc = Minecraft.getMinecraft();

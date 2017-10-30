@@ -113,6 +113,13 @@ public class PlayerSelectionModule extends PlayerAetherModule
 		}
 	}
 
+	public void clearSelection()
+	{
+		this.activeSelection = null;
+		this.selectPos = null;
+		this.prevPos = null;
+	}
+
 	@Override
 	public void write(final NBTTagCompound output)
 	{
