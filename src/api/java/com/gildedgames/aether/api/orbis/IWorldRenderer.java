@@ -2,7 +2,6 @@ package com.gildedgames.aether.api.orbis;
 
 import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.util.NBT;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -13,8 +12,6 @@ public interface IWorldRenderer extends NBT
 
 	@Nullable
 	Object getRenderedObject();
-
-	void render(World world, BlockPos pos, float partialTicks);
 
 	IRegion getBoundingBox();
 

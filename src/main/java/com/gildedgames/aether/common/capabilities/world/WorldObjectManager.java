@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import java.util.Collection;
@@ -52,7 +53,7 @@ public class WorldObjectManager implements IWorldObjectManager
 		{
 			if (player.dimension == dimId)
 			{
-				return get(player.world);
+				return OrbisCore.getWorldObjectManagerProvider(true).getForWorld(player.world);
 			}
 			return null;
 		}
@@ -179,6 +180,10 @@ public class WorldObjectManager implements IWorldObjectManager
 		if (FMLCommonHandler.instance().getMinecraftServerInstance() != null)
 		{
 			this.world = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(this.dimension);
+		}
+		else if (AetherCore.isClient())
+		{
+			this.world = FMLClientHandler.instance().getWorldClient();
 		}
 
 		this.idToGroup = HashBiMap.create(funnel.getIntMap(this.world, "groups"));

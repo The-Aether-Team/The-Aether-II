@@ -48,15 +48,7 @@ public class ChunkRenderer implements IChunkRenderer
 	private void render(final World world, final IWorldRenderer renderer, final float partialTicks)
 	{
 		renderer.startRendering(world, partialTicks);
-
-		for (final BlockPos pos : renderer.getBoundingBox().getShapeData())
-		{
-			if (RegionHelp.contains(this.boundingBox, pos))
-			{
-				renderer.render(world, pos, partialTicks);
-			}
-		}
-
+		
 		renderer.finishRendering(world);
 
 		for (final IWorldRenderer subRenderer : renderer.getSubRenderers(world))

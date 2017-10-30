@@ -234,15 +234,6 @@ public class RenderBlueprint implements IWorldRenderer
 
 	}
 
-	/**
-	 * Draws a block from the blueprint in the world that is supposed to be at the given position
-	 */
-	@Override
-	public void render(final World world, final BlockPos pos, final float partialTicks)
-	{
-
-	}
-
 	@Override
 	public IRegion getBoundingBox()
 	{

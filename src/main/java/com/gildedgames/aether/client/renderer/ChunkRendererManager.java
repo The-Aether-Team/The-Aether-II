@@ -78,7 +78,7 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 			{
 				this.load(world, x, z);
 
-				final IChunkRenderer chunk = this.getChunkRenderer(world, x, z);
+				final IChunkRenderer chunk = getChunkRenderer(world, x, z);
 
 				if (chunk != null)
 				{
@@ -92,7 +92,7 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 
 	public void load(final World world, final int chunkX, final int chunkZ)
 	{
-		final IChunkRenderer chunk = this.getChunkRenderer(world, chunkX, chunkZ);
+		final IChunkRenderer chunk = getChunkRenderer(world, chunkX, chunkZ);
 
 		if (chunk != null && !chunk.hasBeenLoaded())
 		{
@@ -127,7 +127,7 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 		{
 			for (int z = minChunkZ; z <= maxChunkZ; z++)
 			{
-				final IChunkRenderer chunk = this.getChunkRenderer(world, x, z);
+				final IChunkRenderer chunk = getChunkRenderer(world, x, z);
 
 				if (chunk != null)
 				{
@@ -156,7 +156,7 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 		{
 			for (int z = minChunkZ; z <= maxChunkZ; z++)
 			{
-				final IChunkRenderer chunk = this.getChunkRenderer(world, x, z);
+				final IChunkRenderer chunk = getChunkRenderer(world, x, z);
 
 				if (chunk != null)
 				{

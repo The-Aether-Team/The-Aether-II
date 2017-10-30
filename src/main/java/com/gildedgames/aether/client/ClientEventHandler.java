@@ -134,7 +134,7 @@ public class ClientEventHandler
 
 		if (world != null)
 		{
-			final IWorldObjectManager manager = WorldObjectManager.get(world);
+			final IWorldObjectManager manager = OrbisCore.getWorldObjectManagerProvider(false).getForWorld(world);
 
 			if (!manager.containsObserver(CHUNK_RENDERER_MANAGER))
 			{

@@ -223,11 +223,6 @@ public class RenderShape implements IWorldRenderer
 	}
 
 	@Override
-	public void render(final World world, final BlockPos pos, final float partialTicks)
-	{
-	}
-
-	@Override
 	public IRegion getBoundingBox()
 	{
 		if (this.shape == null)
