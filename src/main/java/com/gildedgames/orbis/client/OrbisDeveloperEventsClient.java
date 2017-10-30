@@ -113,6 +113,22 @@ public class OrbisDeveloperEventsClient
 
 				final GuiScreen current = Minecraft.getMinecraft().currentScreen;
 
+				final PlayerAether player = PlayerAether.getPlayer(mc.player);
+
+				final double reach = module.getReach();
+
+				if (Keyboard.isKeyDown(OrbisKeyBindings.keyBindIncreaseReach.getKeyCode()))
+				{
+					player.getOrbisModule().setDeveloperReach(reach + 1);
+					NetworkingAether.sendPacketToServer(new PacketDeveloperReach(reach + 1));
+				}
+
+				if (Keyboard.isKeyDown(OrbisKeyBindings.keyBindDecreaseReach.getKeyCode()))
+				{
+					player.getOrbisModule().setDeveloperReach(reach - 1);
+					NetworkingAether.sendPacketToServer(new PacketDeveloperReach(reach - 1));
+				}
+
 				if ((Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) && OrbisKeyBindings.keyBindCopy.isPressed())
 				{
 					final BlockDataContainer container = BlockDataContainer.fromShape(mc.player.world, select.getSelectedRegion());
