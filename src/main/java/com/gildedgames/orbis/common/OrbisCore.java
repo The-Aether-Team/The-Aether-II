@@ -127,11 +127,15 @@ public class OrbisCore
 				projectManager = new OrbisProjectManager(
 						new File(Minecraft.getMinecraft().mcDataDir, "/orbis/servers/" + data.serverIP.replace(":", "_") + "/projects/"));
 			}
+			else
+			{
+				projectManager = new OrbisProjectManager(new File(Minecraft.getMinecraft().mcDataDir, "/orbis/local/projects/"));
+			}
 		}
 
 		if (projectManager == null)
 		{
-			projectManager = new OrbisProjectManager(new File(Minecraft.getMinecraft().mcDataDir, "/orbis/local/projects/"));
+			projectManager = new OrbisProjectManager(new File(DimensionManager.getCurrentSaveRootDirectory(), "/orbis/projects/"));
 		}
 
 		projectManager.scanAndCacheProjects();
