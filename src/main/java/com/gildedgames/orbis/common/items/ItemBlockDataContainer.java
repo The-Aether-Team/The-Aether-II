@@ -1,14 +1,14 @@
 package com.gildedgames.orbis.common.items;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
-import com.gildedgames.aether.api.orbis.region.IRegion;
-import com.gildedgames.aether.api.orbis.util.RotationHelp;
+import com.gildedgames.aether.api.orbis.IRegion;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.orbis.common.block.BlockDataContainer;
-import com.gildedgames.orbis.common.data.CreationData;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
-import com.gildedgames.orbis.common.processing.DataPrimer;
-import com.gildedgames.orbis.common.processing.WorldPrimer;
+import com.gildedgames.orbis_core.block.BlockDataContainer;
+import com.gildedgames.orbis_core.data.CreationData;
+import com.gildedgames.orbis_core.processing.DataPrimer;
+import com.gildedgames.orbis_core.processing.WorldPrimer;
+import com.gildedgames.orbis_core.util.RotationHelp;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -41,14 +41,14 @@ public class ItemBlockDataContainer extends Item
 		data.set("data", container);
 	}
 
-	public static BlockDataContainer getDatacontainer(World world, final ItemStack stack)
+	public static BlockDataContainer getDatacontainer(final World world, final ItemStack stack)
 	{
 		if (stack.getTagCompound() == null || !stack.getTagCompound().hasKey("data"))
 		{
 			return null;
 		}
 
-		NBTTagCompound tag = stack.getTagCompound();
+		final NBTTagCompound tag = stack.getTagCompound();
 		final NBTFunnel data = AetherCore.io().createFunnel(tag);
 
 		return data.get(world, "data");
@@ -57,7 +57,7 @@ public class ItemBlockDataContainer extends Item
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(final World world, final EntityPlayer player, final EnumHand handIn)
 	{
-		ItemStack stack = player.getHeldItem(handIn);
+		final ItemStack stack = player.getHeldItem(handIn);
 
 		final PlayerOrbisModule module = PlayerOrbisModule.get(player);
 
@@ -65,7 +65,7 @@ public class ItemBlockDataContainer extends Item
 		{
 			if (!world.isRemote)
 			{
-				BlockDataContainer container = getDatacontainer(world, stack);
+				final BlockDataContainer container = getDatacontainer(world, stack);
 
 				final BlockPos selection = module.raytraceNoSnapping();
 

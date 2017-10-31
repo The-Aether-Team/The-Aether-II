@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.analytics.GAReporter;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.aether.TeleporterAether;
-import com.gildedgames.orbis.common.OrbisCore;
+import com.gildedgames.orbis.common.Orbis;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.DimensionManager;
@@ -119,7 +119,7 @@ public class AetherCore
 
 		AetherCore.SPAWN_REGISTRY.write();
 
-		OrbisCore.onServerStopping(event);
+		Orbis.onServerStopping(event);
 	}
 
 	@EventHandler
@@ -127,7 +127,7 @@ public class AetherCore
 	{
 		AetherCore.SPAWN_REGISTRY.read();
 
-		OrbisCore.onServerStarted(event);
+		Orbis.onServerStarted(event);
 	}
 
 	@EventHandler

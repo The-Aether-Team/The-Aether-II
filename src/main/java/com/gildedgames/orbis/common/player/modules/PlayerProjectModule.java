@@ -1,13 +1,13 @@
 package com.gildedgames.orbis.common.player.modules;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
-import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingProjectException;
-import com.gildedgames.aether.api.orbis.management.IProject;
-import com.gildedgames.aether.api.orbis.management.IProjectIdentifier;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
-import com.gildedgames.orbis.common.OrbisCore;
+import com.gildedgames.orbis.common.Orbis;
+import com.gildedgames.orbis.common.exceptions.OrbisMissingProjectException;
+import com.gildedgames.orbis_core.data.management.IProject;
+import com.gildedgames.orbis_core.data.management.IProjectIdentifier;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class PlayerProjectModule extends PlayerAetherModule
@@ -58,7 +58,7 @@ public class PlayerProjectModule extends PlayerAetherModule
 		{
 			try
 			{
-				this.currentProject = OrbisCore.getProjectManager().findProject(id);
+				this.currentProject = Orbis.getProjectManager().findProject(id);
 			}
 			catch (final OrbisMissingProjectException e)
 			{

@@ -1,16 +1,16 @@
 package com.gildedgames.orbis.common.network.packets.projects;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
-import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingProjectException;
-import com.gildedgames.aether.api.orbis.management.IData;
-import com.gildedgames.aether.api.orbis.management.IProject;
-import com.gildedgames.aether.api.orbis.management.IProjectCache;
-import com.gildedgames.aether.api.orbis.management.IProjectIdentifier;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.util.PacketMultipleParts;
 import com.gildedgames.orbis.client.gui.GuiViewProjects;
-import com.gildedgames.orbis.common.OrbisCore;
+import com.gildedgames.orbis.common.Orbis;
+import com.gildedgames.orbis.common.exceptions.OrbisMissingProjectException;
+import com.gildedgames.orbis_core.data.management.IData;
+import com.gildedgames.orbis_core.data.management.IProject;
+import com.gildedgames.orbis_core.data.management.IProjectCache;
+import com.gildedgames.orbis_core.data.management.IProjectIdentifier;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -92,7 +92,7 @@ public class PacketSendProject extends PacketMultipleParts
 
 			try
 			{
-				final IProject project = OrbisCore.getProjectManager().findProject(message.project);
+				final IProject project = Orbis.getProjectManager().findProject(message.project);
 
 				if (project != null)
 				{

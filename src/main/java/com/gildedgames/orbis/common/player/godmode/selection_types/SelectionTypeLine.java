@@ -1,11 +1,11 @@
 package com.gildedgames.orbis.common.player.godmode.selection_types;
 
-import com.gildedgames.aether.api.orbis.shapes.IShape;
+import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.player.godmode.selection_types.ISelectionTypeClient;
 import com.gildedgames.orbis.client.player.godmode.selection_types.SelectionTypeClientLine;
-import com.gildedgames.orbis.common.data.shapes.LineShape;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
+import com.gildedgames.orbis_core.data.shapes.LineShape;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

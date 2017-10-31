@@ -1,6 +1,6 @@
 package com.gildedgames.orbis.client.util.rect;
 
-import com.gildedgames.orbis.common.util.ObjectFilter;
+import com.gildedgames.orbis_core.util.ObjectFilter;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;

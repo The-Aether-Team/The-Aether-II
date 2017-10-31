@@ -1,19 +1,19 @@
 package com.gildedgames.orbis.common.items;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
-import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingDataException;
-import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingProjectException;
-import com.gildedgames.aether.api.orbis.management.IDataIdentifier;
-import com.gildedgames.aether.api.orbis.management.IDataMetadata;
-import com.gildedgames.aether.api.orbis.region.IRegion;
-import com.gildedgames.aether.api.orbis.util.RotationHelp;
+import com.gildedgames.aether.api.orbis.IRegion;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.orbis.common.OrbisCore;
-import com.gildedgames.orbis.common.data.BlueprintData;
-import com.gildedgames.orbis.common.data.CreationData;
+import com.gildedgames.orbis.common.Orbis;
+import com.gildedgames.orbis.common.exceptions.OrbisMissingDataException;
+import com.gildedgames.orbis.common.exceptions.OrbisMissingProjectException;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
-import com.gildedgames.orbis.common.processing.DataPrimer;
-import com.gildedgames.orbis.common.processing.WorldPrimer;
+import com.gildedgames.orbis_core.data.BlueprintData;
+import com.gildedgames.orbis_core.data.CreationData;
+import com.gildedgames.orbis_core.data.management.IDataIdentifier;
+import com.gildedgames.orbis_core.data.management.IDataMetadata;
+import com.gildedgames.orbis_core.processing.DataPrimer;
+import com.gildedgames.orbis_core.processing.WorldPrimer;
+import com.gildedgames.orbis_core.util.RotationHelp;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -108,7 +108,7 @@ public class ItemBlueprint extends Item
 		{
 			try
 			{
-				final IDataMetadata data = OrbisCore.getProjectManager().findMetadata(id);
+				final IDataMetadata data = Orbis.getProjectManager().findMetadata(id);
 
 				return data.getName();
 			}

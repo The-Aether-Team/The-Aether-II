@@ -1,13 +1,13 @@
 package com.gildedgames.orbis.common.player;
 
-import com.gildedgames.aether.api.orbis.shapes.IShape;
+import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.common.network.packets.PacketActiveSelection;
 import com.gildedgames.orbis.common.player.godmode.IGodPower;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
-import com.gildedgames.orbis.common.util.RaytraceHelp;
+import com.gildedgames.orbis_core.util.RaytraceHelp;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 

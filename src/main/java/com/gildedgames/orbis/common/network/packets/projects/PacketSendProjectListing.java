@@ -1,13 +1,13 @@
 package com.gildedgames.orbis.common.network.packets.projects;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
-import com.gildedgames.aether.api.orbis.management.IProject;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.util.PacketMultipleParts;
 import com.gildedgames.orbis.client.gui.GuiViewProjects;
-import com.gildedgames.orbis.common.OrbisCore;
+import com.gildedgames.orbis.common.Orbis;
+import com.gildedgames.orbis_core.data.management.IProject;
 import com.google.common.collect.Lists;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -28,9 +28,9 @@ public class PacketSendProjectListing extends PacketMultipleParts
 
 	public PacketSendProjectListing()
 	{
-		OrbisCore.getProjectManager().refreshCache();
+		Orbis.getProjectManager().refreshCache();
 
-		this.projects = new ArrayList<>(OrbisCore.getProjectManager().getCachedProjects());
+		this.projects = new ArrayList<>(Orbis.getProjectManager().getCachedProjects());
 		this.projectNames = Lists.newArrayList();
 
 		this.projects.forEach(p -> this.projectNames.add(p.getLocation().getName()));
@@ -88,7 +88,7 @@ public class PacketSendProjectListing extends PacketMultipleParts
 				final String name = message.projectNames.get(i);
 				final IProject project = message.projects.get(i);
 
-				final IProject existing = OrbisCore.getProjectManager().saveProjectIfDoesntExist(name, project);
+				final IProject existing = Orbis.getProjectManager().saveProjectIfDoesntExist(name, project);
 
 				/**
 				 * If the last date that the server project was changed is different to the
@@ -102,7 +102,7 @@ public class PacketSendProjectListing extends PacketMultipleParts
 				}
 			}
 
-			OrbisCore.getProjectManager().refreshCache();
+			Orbis.getProjectManager().refreshCache();
 
 			if (Minecraft.getMinecraft().currentScreen instanceof GuiViewProjects)
 			{

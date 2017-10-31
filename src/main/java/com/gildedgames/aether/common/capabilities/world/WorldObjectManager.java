@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.capabilities.world;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
-import com.gildedgames.aether.api.orbis.IWorldObjectGroup;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.orbis.common.world_object.IWorldObjectGroup;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;

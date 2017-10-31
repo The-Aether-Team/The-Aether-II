@@ -1,6 +1,6 @@
 package com.gildedgames.orbis.client.renderers.blueprint;
 
-import com.gildedgames.orbis.common.world_objects.Blueprint;
+import com.gildedgames.orbis_core.world_objects.Blueprint;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 

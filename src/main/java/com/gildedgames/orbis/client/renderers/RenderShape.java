@@ -1,10 +1,10 @@
 package com.gildedgames.orbis.client.renderers;
 
+import com.gildedgames.aether.api.orbis.IRegion;
+import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
-import com.gildedgames.aether.api.orbis.region.IRegion;
-import com.gildedgames.aether.api.orbis.region.Region;
-import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.orbis.client.OrbisKeyBindings;
+import com.gildedgames.orbis_core.data.region.Region;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;

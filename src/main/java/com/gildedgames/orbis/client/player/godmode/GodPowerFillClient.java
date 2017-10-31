@@ -1,7 +1,7 @@
 package com.gildedgames.orbis.client.player.godmode;
 
+import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
-import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.client.util.rect.Dim2D;

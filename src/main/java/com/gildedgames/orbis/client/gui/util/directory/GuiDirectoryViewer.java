@@ -9,7 +9,7 @@ import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.client.util.rect.ModDim2D;
 import com.gildedgames.orbis.client.util.rect.Pos2D;
 import com.gildedgames.orbis.client.util.rect.Rect;
-import com.gildedgames.orbis.common.util.InputHelper;
+import com.gildedgames.orbis_core.util.InputHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;

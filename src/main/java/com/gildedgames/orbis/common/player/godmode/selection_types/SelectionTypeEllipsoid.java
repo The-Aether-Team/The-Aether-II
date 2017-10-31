@@ -1,14 +1,14 @@
 package com.gildedgames.orbis.common.player.godmode.selection_types;
 
-import com.gildedgames.aether.api.orbis.region.IRegion;
-import com.gildedgames.aether.api.orbis.region.Region;
-import com.gildedgames.aether.api.orbis.shapes.IShape;
-import com.gildedgames.aether.api.orbis.util.RegionHelp;
+import com.gildedgames.aether.api.orbis.IRegion;
+import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.player.godmode.selection_types.ISelectionTypeClient;
 import com.gildedgames.orbis.client.player.godmode.selection_types.SelectionTypeClientEllipsoid;
-import com.gildedgames.orbis.common.data.shapes.EllipsoidShape;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
+import com.gildedgames.orbis_core.data.region.Region;
+import com.gildedgames.orbis_core.data.shapes.EllipsoidShape;
+import com.gildedgames.orbis_core.util.RegionHelp;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

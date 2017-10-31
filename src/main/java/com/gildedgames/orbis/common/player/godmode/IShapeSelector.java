@@ -1,6 +1,6 @@
 package com.gildedgames.orbis.common.player.godmode;
 
-import com.gildedgames.aether.api.orbis.shapes.IShape;
+import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import net.minecraft.world.World;
 

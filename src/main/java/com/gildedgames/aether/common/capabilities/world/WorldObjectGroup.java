@@ -1,12 +1,12 @@
 package com.gildedgames.aether.common.capabilities.world;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
-import com.gildedgames.aether.api.orbis.IWorldObject;
-import com.gildedgames.aether.api.orbis.IWorldObjectGroup;
-import com.gildedgames.aether.api.orbis.IWorldObjectGroupObserver;
-import com.gildedgames.aether.api.orbis.shapes.IShape;
-import com.gildedgames.aether.api.orbis.util.RegionHelp;
+import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.orbis.common.world_object.IWorldObject;
+import com.gildedgames.orbis.common.world_object.IWorldObjectGroup;
+import com.gildedgames.orbis.common.world_object.IWorldObjectGroupObserver;
+import com.gildedgames.orbis_core.util.RegionHelp;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;

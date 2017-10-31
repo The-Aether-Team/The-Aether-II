@@ -1,19 +1,19 @@
 package com.gildedgames.orbis.common.player.godmode;
 
-import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingDataException;
-import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingProjectException;
-import com.gildedgames.aether.api.orbis.management.IDataIdentifier;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.orbis.client.player.godmode.GodPowerBlueprintClient;
 import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
-import com.gildedgames.orbis.common.OrbisCore;
-import com.gildedgames.orbis.common.block.BlockDataContainer;
-import com.gildedgames.orbis.common.data.BlueprintData;
+import com.gildedgames.orbis.common.Orbis;
+import com.gildedgames.orbis.common.exceptions.OrbisMissingDataException;
+import com.gildedgames.orbis.common.exceptions.OrbisMissingProjectException;
 import com.gildedgames.orbis.common.items.ItemBlockDataContainer;
 import com.gildedgames.orbis.common.items.ItemBlueprint;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.selectors.ShapeSelectorBlueprint;
+import com.gildedgames.orbis_core.block.BlockDataContainer;
+import com.gildedgames.orbis_core.data.BlueprintData;
+import com.gildedgames.orbis_core.data.management.IDataIdentifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -87,7 +87,7 @@ public class GodPowerBlueprint implements IGodPower
 				try
 				{
 					final IDataIdentifier id = ItemBlueprint.getBlueprintId(stack);
-					this.placingBlueprint = OrbisCore.getProjectManager().findData(id);
+					this.placingBlueprint = Orbis.getProjectManager().findData(id);
 				}
 				catch (final OrbisMissingDataException | OrbisMissingProjectException e)
 				{

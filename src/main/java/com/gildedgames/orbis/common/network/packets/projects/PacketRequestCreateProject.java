@@ -1,13 +1,13 @@
 package com.gildedgames.orbis.common.network.packets.projects;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
-import com.gildedgames.aether.api.orbis.management.IProjectIdentifier;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.util.PacketMultipleParts;
-import com.gildedgames.orbis.common.OrbisCore;
+import com.gildedgames.orbis.common.Orbis;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
+import com.gildedgames.orbis_core.data.management.IProjectIdentifier;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -76,9 +76,9 @@ public class PacketRequestCreateProject extends PacketMultipleParts
 				return null;
 			}
 
-			if (!OrbisCore.getProjectManager().projectNameExists(message.name) && !OrbisCore.getProjectManager().projectExists(message.projectIdentifier))
+			if (!Orbis.getProjectManager().projectNameExists(message.name) && !Orbis.getProjectManager().projectExists(message.projectIdentifier))
 			{
-				OrbisCore.getProjectManager().createAndSaveProject(message.name, message.projectIdentifier);
+				Orbis.getProjectManager().createAndSaveProject(message.name, message.projectIdentifier);
 
 				NetworkingAether.sendPacketToPlayer(new PacketSendProjectListing(), (EntityPlayerMP) player);
 			}

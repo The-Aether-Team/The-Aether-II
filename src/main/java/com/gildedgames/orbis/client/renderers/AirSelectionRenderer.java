@@ -1,11 +1,11 @@
 package com.gildedgames.orbis.client.renderers;
 
-import com.gildedgames.aether.api.orbis.region.IMutableRegion;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
 import com.gildedgames.orbis.common.player.godmode.GodPowerCreative;
-import com.gildedgames.orbis.common.util.RaytraceHelp;
-import com.gildedgames.orbis.common.world_objects.WorldRegion;
+import com.gildedgames.orbis_core.data.region.IMutableRegion;
+import com.gildedgames.orbis_core.util.RaytraceHelp;
+import com.gildedgames.orbis_core.world_objects.WorldRegion;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;

@@ -6,7 +6,7 @@ import com.gildedgames.orbis.common.items.ItemBlockDataContainer;
 import com.gildedgames.orbis.common.items.ItemBlueprint;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.selectors.ShapeSelectorSelect;
-import com.gildedgames.orbis.common.world_objects.WorldShape;
+import com.gildedgames.orbis_core.world_objects.WorldShape;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;

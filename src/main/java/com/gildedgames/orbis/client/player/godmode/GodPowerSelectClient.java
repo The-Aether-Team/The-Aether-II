@@ -1,7 +1,7 @@
 package com.gildedgames.orbis.client.player.godmode;
 
+import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
-import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.gui.GuiRightClickBlueprint;
 import com.gildedgames.orbis.client.gui.GuiRightClickSelector;
@@ -10,8 +10,8 @@ import com.gildedgames.orbis.client.renderers.RenderShape;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.GodPowerSelect;
-import com.gildedgames.orbis.common.world_objects.Blueprint;
-import com.gildedgames.orbis.common.world_objects.WorldShape;
+import com.gildedgames.orbis_core.world_objects.Blueprint;
+import com.gildedgames.orbis_core.world_objects.WorldShape;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -33,7 +33,7 @@ public class GodPowerSelectClient implements IGodPowerClient
 
 	private final GodPowerSelect server;
 
-	private ItemStack prevItemstack = null;
+	private final ItemStack prevItemstack = null;
 
 	private IWorldRenderer renderer;
 
@@ -59,25 +59,25 @@ public class GodPowerSelectClient implements IGodPowerClient
 	}
 
 	@Override
-	public boolean has3DCursor(PlayerOrbisModule module)
+	public boolean has3DCursor(final PlayerOrbisModule module)
 	{
 		return true;
 	}
 
 	@Override
-	public float minFade3DCursor(PlayerOrbisModule module)
+	public float minFade3DCursor(final PlayerOrbisModule module)
 	{
 		return 0;
 	}
 
 	@Override
-	public int getShapeColor(PlayerOrbisModule module)
+	public int getShapeColor(final PlayerOrbisModule module)
 	{
 		return SHAPE_COLOR;
 	}
 
 	@Override
-	public List<IWorldRenderer> getActiveRenderers(PlayerOrbisModule module, World world)
+	public List<IWorldRenderer> getActiveRenderers(final PlayerOrbisModule module, final World world)
 	{
 		return Collections.emptyList();
 	}

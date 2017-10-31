@@ -6,7 +6,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
 /**
- * Fired whenever Orbis changes a block. This is NOT fired on base terrain generation. 
+ * Fired whenever OrbisCore changes a block. This is NOT fired on base terrain generation.
  * @author Emile
  *
  */

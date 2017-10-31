@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.capabilities.world.chunk;
 
 import com.gildedgames.aether.api.orbis.IChunkRendererCapability;
+import com.gildedgames.aether.api.orbis.IRegion;
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
-import com.gildedgames.aether.api.orbis.region.IRegion;
-import com.gildedgames.aether.api.orbis.region.Region;
-import com.gildedgames.aether.api.orbis.util.RegionHelp;
+import com.gildedgames.orbis_core.data.region.Region;
+import com.gildedgames.orbis_core.util.RegionHelp;
 import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;

@@ -1,12 +1,8 @@
 package com.gildedgames.orbis.common.player.godmode.selectors;
 
-import com.gildedgames.aether.api.orbis.IWorldObjectGroup;
-import com.gildedgames.aether.api.orbis.shapes.IShape;
+import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.orbis.common.block.BlockFilter;
-import com.gildedgames.orbis.common.data.CreationData;
-import com.gildedgames.orbis.common.data.ICreationData;
 import com.gildedgames.orbis.common.items.ItemsOrbis;
 import com.gildedgames.orbis.common.network.packets.PacketSetSelectedRegion;
 import com.gildedgames.orbis.common.network.packets.PacketWorldObjectAdd;
@@ -14,8 +10,12 @@ import com.gildedgames.orbis.common.network.packets.PacketWorldObjectRemove;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.GodPowerSelect;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
-import com.gildedgames.orbis.common.util.BlockFilterHelper;
-import com.gildedgames.orbis.common.world_objects.WorldShape;
+import com.gildedgames.orbis.common.world_object.IWorldObjectGroup;
+import com.gildedgames.orbis_core.block.BlockFilter;
+import com.gildedgames.orbis_core.data.CreationData;
+import com.gildedgames.orbis_core.data.ICreationData;
+import com.gildedgames.orbis_core.util.BlockFilterHelper;
+import com.gildedgames.orbis_core.world_objects.WorldShape;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;

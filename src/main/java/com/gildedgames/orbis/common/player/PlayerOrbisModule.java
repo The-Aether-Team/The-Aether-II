@@ -1,7 +1,7 @@
 package com.gildedgames.orbis.common.player;
 
+import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
-import com.gildedgames.aether.api.orbis.shapes.IShape;
 import com.gildedgames.aether.api.util.NBTHelper;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
@@ -12,7 +12,7 @@ import com.gildedgames.orbis.common.player.godmode.IGodPower;
 import com.gildedgames.orbis.common.player.modules.PlayerPowerModule;
 import com.gildedgames.orbis.common.player.modules.PlayerProjectModule;
 import com.gildedgames.orbis.common.player.modules.PlayerSelectionTypesModule;
-import com.gildedgames.orbis.common.util.OrbisRaytraceHelp;
+import com.gildedgames.orbis_core.util.OrbisRaytraceHelp;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;

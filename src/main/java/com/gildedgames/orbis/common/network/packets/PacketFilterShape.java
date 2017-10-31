@@ -1,12 +1,12 @@
 package com.gildedgames.orbis.common.network.packets;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
-import com.gildedgames.aether.api.orbis.shapes.IShape;
+import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
-import com.gildedgames.orbis.common.block.BlockFilter;
-import com.gildedgames.orbis.common.data.CreationData;
+import com.gildedgames.orbis_core.block.BlockFilter;
+import com.gildedgames.orbis_core.data.CreationData;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;

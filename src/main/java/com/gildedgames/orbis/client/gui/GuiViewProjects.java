@@ -1,11 +1,6 @@
 package com.gildedgames.orbis.client.gui;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
-import com.gildedgames.aether.api.orbis.IWorldObject;
-import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingProjectException;
-import com.gildedgames.aether.api.orbis.management.IData;
-import com.gildedgames.aether.api.orbis.management.IProject;
-import com.gildedgames.aether.api.orbis.management.IProjectIdentifier;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.client.gui.data.Text;
@@ -22,13 +17,18 @@ import com.gildedgames.orbis.client.gui.util.directory.nodes.OrbisNavigatorNodeF
 import com.gildedgames.orbis.client.gui.util.directory.nodes.ProjectNode;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.client.util.rect.Pos2D;
-import com.gildedgames.orbis.common.OrbisCore;
-import com.gildedgames.orbis.common.data.management.ProjectIdentifier;
+import com.gildedgames.orbis.common.Orbis;
+import com.gildedgames.orbis.common.exceptions.OrbisMissingProjectException;
 import com.gildedgames.orbis.common.network.packets.projects.PacketRequestCreateProject;
 import com.gildedgames.orbis.common.network.packets.projects.PacketRequestProjectListing;
 import com.gildedgames.orbis.common.network.packets.projects.PacketSaveWorldObjectToProject;
-import com.gildedgames.orbis.common.util.InputHelper;
-import com.gildedgames.orbis.common.world_objects.Blueprint;
+import com.gildedgames.orbis.common.world_object.IWorldObject;
+import com.gildedgames.orbis_core.data.management.IData;
+import com.gildedgames.orbis_core.data.management.IProject;
+import com.gildedgames.orbis_core.data.management.IProjectIdentifier;
+import com.gildedgames.orbis_core.data.management.impl.ProjectIdentifier;
+import com.gildedgames.orbis_core.util.InputHelper;
+import com.gildedgames.orbis_core.world_objects.Blueprint;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
@@ -110,9 +110,9 @@ public class GuiViewProjects extends GuiFrame implements IDirectoryNavigatorList
 
 		this.directoryViewer.dim().mod().center(true).flush();
 
-		if (!OrbisCore.getProjectManager().getLocation().exists())
+		if (!Orbis.getProjectManager().getLocation().exists())
 		{
-			if (!OrbisCore.getProjectManager().getLocation().mkdirs())
+			if (!Orbis.getProjectManager().getLocation().mkdirs())
 			{
 				throw new RuntimeException("Project manager file could not be created!");
 			}
@@ -120,7 +120,7 @@ public class GuiViewProjects extends GuiFrame implements IDirectoryNavigatorList
 
 		this.directoryViewer.getNavigator().addListener(this);
 
-		this.directoryViewer.getNavigator().openDirectory(OrbisCore.getProjectManager().getLocation());
+		this.directoryViewer.getNavigator().openDirectory(Orbis.getProjectManager().getLocation());
 
 		this.addChild(this.directoryViewer);
 	}
@@ -145,7 +145,7 @@ public class GuiViewProjects extends GuiFrame implements IDirectoryNavigatorList
 			GuiRightClickBlueprint.lastCloseTime = System.currentTimeMillis();
 		}
 
-		if (InputHelper.isHovered(this.saveButton) && mouseButton == 0 && !OrbisCore.getProjectManager().getLocation()
+		if (InputHelper.isHovered(this.saveButton) && mouseButton == 0 && !Orbis.getProjectManager().getLocation()
 				.equals(this.directoryViewer.getNavigator()
 						.currentDirectory()))
 		{
@@ -208,13 +208,13 @@ public class GuiViewProjects extends GuiFrame implements IDirectoryNavigatorList
 			}
 		}
 
-		if (InputHelper.isHovered(this.saveProject) && mouseButton == 0 && OrbisCore.getProjectManager().getLocation()
+		if (InputHelper.isHovered(this.saveProject) && mouseButton == 0 && Orbis.getProjectManager().getLocation()
 				.equals(this.directoryViewer.getNavigator()
 						.currentDirectory()))
 		{
 			final IProjectIdentifier id = new ProjectIdentifier(this.projectNameInput.getInner().getText(), Minecraft.getMinecraft().player.getName());
 
-			if (!OrbisCore.getProjectManager().projectNameExists(this.projectNameInput.getInner().getText()) && !OrbisCore.getProjectManager()
+			if (!Orbis.getProjectManager().projectNameExists(this.projectNameInput.getInner().getText()) && !Orbis.getProjectManager()
 					.projectExists(id))
 			{
 				NetworkingAether.sendPacketToServer(new PacketRequestCreateProject(this.projectNameInput.getInner().getText(), id));

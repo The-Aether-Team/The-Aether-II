@@ -1,9 +1,5 @@
 package com.gildedgames.orbis.client.gui;
 
-import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingDataException;
-import com.gildedgames.aether.api.orbis.exceptions.OrbisMissingProjectException;
-import com.gildedgames.aether.api.orbis.management.IData;
-import com.gildedgames.aether.api.orbis.management.IProject;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -18,12 +14,16 @@ import com.gildedgames.orbis.client.gui.util.directory.nodes.OrbisNavigatorNodeF
 import com.gildedgames.orbis.client.gui.util.directory.nodes.ProjectNode;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.client.util.rect.Pos2D;
-import com.gildedgames.orbis.common.OrbisCore;
+import com.gildedgames.orbis.common.Orbis;
 import com.gildedgames.orbis.common.containers.ContainerGenericInventory;
+import com.gildedgames.orbis.common.exceptions.OrbisMissingDataException;
+import com.gildedgames.orbis.common.exceptions.OrbisMissingProjectException;
 import com.gildedgames.orbis.common.items.ItemBlueprint;
 import com.gildedgames.orbis.common.items.ItemsOrbis;
 import com.gildedgames.orbis.common.network.packets.PacketSetItemStack;
 import com.gildedgames.orbis.common.network.packets.projects.PacketRequestProjectListing;
+import com.gildedgames.orbis_core.data.management.IData;
+import com.gildedgames.orbis_core.data.management.IProject;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -77,9 +77,9 @@ public class GuiLoadBlueprint extends GuiFrame implements IDirectoryNavigatorLis
 
 		this.directoryViewer.dim().mod().center(true).flush();
 
-		if (!OrbisCore.getProjectManager().getLocation().exists())
+		if (!Orbis.getProjectManager().getLocation().exists())
 		{
-			if (!OrbisCore.getProjectManager().getLocation().mkdirs())
+			if (!Orbis.getProjectManager().getLocation().mkdirs())
 			{
 				throw new RuntimeException("Project manager file could not be created!");
 			}
@@ -87,7 +87,7 @@ public class GuiLoadBlueprint extends GuiFrame implements IDirectoryNavigatorLis
 
 		this.directoryViewer.getNavigator().addListener(this);
 
-		this.directoryViewer.getNavigator().openDirectory(OrbisCore.getProjectManager().getLocation());
+		this.directoryViewer.getNavigator().openDirectory(Orbis.getProjectManager().getLocation());
 
 		this.addChild(this.directoryViewer);
 	}
@@ -126,7 +126,7 @@ public class GuiLoadBlueprint extends GuiFrame implements IDirectoryNavigatorLis
 
 			try
 			{
-				final IData data = OrbisCore.getProjectManager().findData(GuiLoadBlueprint.this.project, node.getFile());
+				final IData data = Orbis.getProjectManager().findData(GuiLoadBlueprint.this.project, node.getFile());
 
 				ItemBlueprint.setBlueprint(stack, data.getMetadata().getIdentifier());
 

@@ -1,12 +1,12 @@
 package com.gildedgames.orbis.client.renderers;
 
+import com.gildedgames.aether.api.orbis.IRegion;
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
-import com.gildedgames.aether.api.orbis.region.IRegion;
-import com.gildedgames.aether.api.orbis.util.OrbisTuple;
-import com.gildedgames.aether.api.orbis.util.RotationHelp;
 import com.gildedgames.aether.common.util.helpers.BlockUtil;
 import com.gildedgames.orbis.client.renderers.blueprint.BlueprintRenderCache;
-import com.gildedgames.orbis.common.world_objects.Blueprint;
+import com.gildedgames.orbis_core.util.OrbisTuple;
+import com.gildedgames.orbis_core.util.RotationHelp;
+import com.gildedgames.orbis_core.world_objects.Blueprint;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

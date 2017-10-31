@@ -1,20 +1,20 @@
 package com.gildedgames.orbis.client.player.godmode;
 
+import com.gildedgames.aether.api.orbis.IRegion;
+import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
-import com.gildedgames.aether.api.orbis.region.IRegion;
-import com.gildedgames.aether.api.orbis.shapes.IShape;
-import com.gildedgames.aether.api.orbis.util.RotationHelp;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.gui.GuiRightClickBlueprint;
 import com.gildedgames.orbis.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.client.renderers.RenderBlueprint;
 import com.gildedgames.orbis.client.renderers.RenderShape;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
-import com.gildedgames.orbis.common.data.BlueprintData;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.GodPowerBlueprint;
-import com.gildedgames.orbis.common.util.RaytraceHelp;
-import com.gildedgames.orbis.common.world_objects.Blueprint;
+import com.gildedgames.orbis_core.data.BlueprintData;
+import com.gildedgames.orbis_core.util.RaytraceHelp;
+import com.gildedgames.orbis_core.util.RotationHelp;
+import com.gildedgames.orbis_core.world_objects.Blueprint;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,6 +1,5 @@
 package com.gildedgames.aether.api.orbis;
 
-import com.gildedgames.aether.api.orbis.region.IRegion;
 import com.gildedgames.aether.api.util.NBT;
 import net.minecraft.world.World;
 
