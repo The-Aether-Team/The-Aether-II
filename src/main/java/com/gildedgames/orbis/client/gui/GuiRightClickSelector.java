@@ -4,7 +4,7 @@ import com.gildedgames.orbis.client.gui.util.GuiDropdownList;
 import com.gildedgames.orbis.client.gui.util.GuiFrame;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.client.util.rect.Pos2D;
-import com.gildedgames.orbis_core.world_objects.WorldShape;
+import com.gildedgames.orbis.common.world_objects.WorldShape;
 import net.minecraft.client.Minecraft;
 
 import java.io.IOException;

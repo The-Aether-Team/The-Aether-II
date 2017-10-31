@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.capabilities.entity.player;
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.player.IPlayerAether;
+import com.gildedgames.aether.api.util.BlockUtil;
 import com.gildedgames.aether.api.world.ISector;
 import com.gildedgames.aether.api.world.IslandSectorHelper;
 import com.gildedgames.aether.api.world.islands.IIslandData;
@@ -13,7 +14,6 @@ import com.gildedgames.aether.common.entities.util.shared.SharedAetherAttributes
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
-import com.gildedgames.aether.common.util.helpers.BlockUtil;
 import com.gildedgames.aether.common.world.util.TeleporterGeneric;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;

@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.tiles;
 
+import com.gildedgames.aether.api.util.BlockUtil;
 import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.util.helpers.BlockUtil;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -84,7 +84,7 @@ public class TileEntityWildcard extends TileEntitySchematicBlock
 
 		blockAccess.setBlockState(this.getPos(), block.getStateFromMeta(damage));
 		BlockUtil.setTileEntityNBT(blockAccess, this.getPos(), chosenStack);
-		
+
 		if (blockAccess.getWorld() != null)
 		{
 			blockAccess.getWorld().scheduleUpdate(this.getPos(), block, 0);

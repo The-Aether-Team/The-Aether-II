@@ -40,8 +40,6 @@ public class AetherCore
 
 	private static final SpawnRegistry SPAWN_REGISTRY = new SpawnRegistry();
 
-	private static final IOHelper io = new IOHelper();
-
 	@Instance(AetherCore.MOD_ID)
 	public static AetherCore INSTANCE;
 
@@ -82,11 +80,6 @@ public class AetherCore
 	public static boolean isInsideDevEnvironment()
 	{
 		return Launch.blackboard.get("fml.deobfuscatedEnvironment") == Boolean.TRUE;
-	}
-
-	public static IOHelper io()
-	{
-		return AetherCore.io;
 	}
 
 	@EventHandler

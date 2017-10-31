@@ -2,6 +2,15 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.IAetherServices;
 import com.gildedgames.aether.api.io.Instantiator;
+import com.gildedgames.aether.api.orbis_core.OrbisCore;
+import com.gildedgames.aether.api.orbis_core.block.*;
+import com.gildedgames.aether.api.orbis_core.data.BlueprintData;
+import com.gildedgames.aether.api.orbis_core.data.DataCondition;
+import com.gildedgames.aether.api.orbis_core.data.management.impl.*;
+import com.gildedgames.aether.api.orbis_core.data.region.Region;
+import com.gildedgames.aether.api.orbis_core.data.shapes.EllipsoidShape;
+import com.gildedgames.aether.api.orbis_core.data.shapes.LineShape;
+import com.gildedgames.aether.api.orbis_core.data.shapes.SphereShape;
 import com.gildedgames.aether.api.registry.IContentRegistry;
 import com.gildedgames.aether.api.util.IClassSerializer;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherHooks;
@@ -19,18 +28,9 @@ import com.gildedgames.orbis.common.player.godmode.selection_types.SelectionType
 import com.gildedgames.orbis.common.player.godmode.selection_types.SelectionTypeEllipsoid;
 import com.gildedgames.orbis.common.player.godmode.selection_types.SelectionTypeLine;
 import com.gildedgames.orbis.common.player.godmode.selection_types.SelectionTypeSphere;
-import com.gildedgames.orbis_core.OrbisCore;
-import com.gildedgames.orbis_core.block.*;
-import com.gildedgames.orbis_core.data.BlueprintData;
-import com.gildedgames.orbis_core.data.DataCondition;
-import com.gildedgames.orbis_core.data.management.impl.*;
-import com.gildedgames.orbis_core.data.region.Region;
-import com.gildedgames.orbis_core.data.shapes.EllipsoidShape;
-import com.gildedgames.orbis_core.data.shapes.LineShape;
-import com.gildedgames.orbis_core.data.shapes.SphereShape;
-import com.gildedgames.orbis_core.world_objects.Blueprint;
-import com.gildedgames.orbis_core.world_objects.WorldRegion;
-import com.gildedgames.orbis_core.world_objects.WorldShape;
+import com.gildedgames.orbis.common.world_objects.Blueprint;
+import com.gildedgames.orbis.common.world_objects.WorldRegion;
+import com.gildedgames.orbis.common.world_objects.WorldShape;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
@@ -60,7 +60,7 @@ public class CommonProxy implements IAetherServices
 
 		this.contentRegistry.preInit();
 
-		final IClassSerializer s = AetherCore.io().getSerializer();
+		final IClassSerializer s = OrbisCore.io().getSerializer();
 
 		s.register(0, Region.class, new Instantiator<>(Region.class));
 		s.register(1, BlueprintData.class, new Instantiator<>(BlueprintData.class));

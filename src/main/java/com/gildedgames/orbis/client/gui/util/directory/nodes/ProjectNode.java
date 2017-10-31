@@ -1,5 +1,6 @@
 package com.gildedgames.orbis.client.gui.util.directory.nodes;
 
+import com.gildedgames.aether.api.orbis_core.data.management.IProject;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.client.gui.data.DropdownElement;
@@ -11,7 +12,6 @@ import com.gildedgames.orbis.client.gui.util.GuiFactory;
 import com.gildedgames.orbis.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.common.network.packets.projects.PacketRequestProject;
-import com.gildedgames.orbis_core.data.management.IProject;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;

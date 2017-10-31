@@ -1,7 +1,7 @@
 package com.gildedgames.orbis.client.gui.util;
 
 import com.gildedgames.orbis.client.util.rect.Rect;
-import com.gildedgames.orbis_core.util.InputHelper;
+import com.gildedgames.orbis.common.util.InputHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.templates.conditions;
 
 import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
-import com.gildedgames.aether.api.world.generation.PlacementCondition;
+import com.gildedgames.aether.api.world.generation.PlacementConditionTemplate;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -9,7 +9,7 @@ import net.minecraft.world.gen.structure.template.Template;
 
 import java.util.List;
 
-public class OnSpecificBlockStatePlacementCondition implements PlacementCondition
+public class OnSpecificBlockStatePlacementCondition implements PlacementConditionTemplate
 {
 
 	private final IBlockState[] states;

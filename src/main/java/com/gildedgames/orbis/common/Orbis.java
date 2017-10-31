@@ -1,5 +1,8 @@
 package com.gildedgames.orbis.common;
 
+import com.gildedgames.aether.api.orbis_core.data.management.IProjectManager;
+import com.gildedgames.aether.api.orbis_core.data.management.impl.OrbisProjectManager;
+import com.gildedgames.aether.api.world_object.IWorldObjectGroup;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.common.network.packets.PacketClearSelectedRegion;
@@ -7,9 +10,6 @@ import com.gildedgames.orbis.common.network.packets.PacketWorldObjectManager;
 import com.gildedgames.orbis.common.network.packets.PacketWorldObjectRemove;
 import com.gildedgames.orbis.common.network.packets.projects.PacketSendProjectListing;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
-import com.gildedgames.orbis.common.world_object.IWorldObjectGroup;
-import com.gildedgames.orbis_core.data.management.IProjectManager;
-import com.gildedgames.orbis_core.data.management.impl.OrbisProjectManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.entity.player.EntityPlayer;

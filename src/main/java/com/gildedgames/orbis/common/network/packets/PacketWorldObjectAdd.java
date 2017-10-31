@@ -1,14 +1,14 @@
 package com.gildedgames.orbis.common.network.packets;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.api.orbis_core.OrbisCore;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.util.PacketMultipleParts;
-import com.gildedgames.orbis.common.world_object.IWorldObject;
-import com.gildedgames.orbis.common.world_object.IWorldObjectGroup;
+import com.gildedgames.aether.api.world_object.IWorldObject;
+import com.gildedgames.aether.api.world_object.IWorldObjectGroup;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -71,7 +71,7 @@ public class PacketWorldObjectAdd extends PacketMultipleParts
 	{
 		final NBTTagCompound tag = ByteBufUtils.readTag(buf);
 
-		this.funnel = AetherCore.io().createFunnel(tag);
+		this.funnel = OrbisCore.io().createFunnel(tag);
 
 		this.groupId = buf.readInt();
 		this.dimensionId = buf.readInt();
@@ -81,7 +81,7 @@ public class PacketWorldObjectAdd extends PacketMultipleParts
 	public void write(final ByteBuf buf)
 	{
 		final NBTTagCompound tag = new NBTTagCompound();
-		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
+		final NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
 
 		funnel.set("worldObject", this.worldObject);
 

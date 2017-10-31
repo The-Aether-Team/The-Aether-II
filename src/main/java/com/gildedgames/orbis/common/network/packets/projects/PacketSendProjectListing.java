@@ -1,13 +1,13 @@
 package com.gildedgames.orbis.common.network.packets.projects;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.api.orbis_core.OrbisCore;
+import com.gildedgames.aether.api.orbis_core.data.management.IProject;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.util.PacketMultipleParts;
 import com.gildedgames.orbis.client.gui.GuiViewProjects;
 import com.gildedgames.orbis.common.Orbis;
-import com.gildedgames.orbis_core.data.management.IProject;
 import com.google.common.collect.Lists;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -45,7 +45,7 @@ public class PacketSendProjectListing extends PacketMultipleParts
 	public void read(final ByteBuf buf)
 	{
 		final NBTTagCompound tag = ByteBufUtils.readTag(buf);
-		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
+		final NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
 
 		this.projectNames = funnel.getStringList("projectNames");
 		this.projects = funnel.getList("projects");
@@ -55,7 +55,7 @@ public class PacketSendProjectListing extends PacketMultipleParts
 	public void write(final ByteBuf buf)
 	{
 		final NBTTagCompound tag = new NBTTagCompound();
-		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
+		final NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
 
 		funnel.setStringList("projectNames", this.projectNames);
 		funnel.setList("projects", this.projects);

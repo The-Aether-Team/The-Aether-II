@@ -2,11 +2,11 @@ package com.gildedgames.aether.common.capabilities.world;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.IShape;
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.orbis.common.world_object.IWorldObject;
-import com.gildedgames.orbis.common.world_object.IWorldObjectGroup;
-import com.gildedgames.orbis.common.world_object.IWorldObjectGroupObserver;
-import com.gildedgames.orbis_core.util.RegionHelp;
+import com.gildedgames.aether.api.orbis_core.OrbisCore;
+import com.gildedgames.aether.api.orbis_core.util.RegionHelp;
+import com.gildedgames.aether.api.world_object.IWorldObject;
+import com.gildedgames.aether.api.world_object.IWorldObjectGroup;
+import com.gildedgames.aether.api.world_object.IWorldObjectGroupObserver;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
@@ -283,7 +283,7 @@ public class WorldObjectGroup implements IWorldObjectGroup
 	@Override
 	public void write(final NBTTagCompound tag)
 	{
-		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
+		final NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
 
 		tag.setInteger("nextId", this.nextId);
 
@@ -293,7 +293,7 @@ public class WorldObjectGroup implements IWorldObjectGroup
 	@Override
 	public void read(final NBTTagCompound tag)
 	{
-		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
+		final NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
 
 		this.nextId = tag.getInteger("nextId");
 

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.api.world.generation;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -45,5 +46,12 @@ public interface IBlockAccessExtended extends IBlockAccess
 	 * @param flags The flags for this state's placement.
 	 */
 	boolean setBlockState(BlockPos pos, IBlockState state, int flags);
+
+	/**
+	 * Used to set a tile entity into the world.
+	 * @param pos The position the tile entity will be placed.
+	 * @param tileEntity The tile entity you're setting.
+	 */
+	void setTileEntity(BlockPos pos, TileEntity tileEntity);
 
 }

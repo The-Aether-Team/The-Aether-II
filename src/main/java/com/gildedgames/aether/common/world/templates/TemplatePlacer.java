@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.world.templates;
 import com.gildedgames.aether.api.util.BlockAccessExtendedWrapper;
 import com.gildedgames.aether.api.util.TemplateUtil;
 import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
-import com.gildedgames.aether.api.world.generation.PostPlacement;
+import com.gildedgames.aether.api.world.generation.PostPlacementTemplate;
 import com.gildedgames.aether.api.world.generation.TemplateDefinition;
 import com.gildedgames.aether.api.world.generation.TemplateLoc;
 import com.google.common.collect.Lists;
@@ -69,7 +69,7 @@ public class TemplatePlacer
 
 			if (placeWith.getWorld() != null)
 			{
-				for (final PostPlacement post : def.getPostPlacements())
+				for (final PostPlacementTemplate post : def.getPostPlacements())
 				{
 					post.postGenerate(placeWith.getWorld(), rand, loc);
 				}

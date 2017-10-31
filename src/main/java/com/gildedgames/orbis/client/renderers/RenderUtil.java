@@ -1,7 +1,7 @@
 package com.gildedgames.orbis.client.renderers;
 
 import com.gildedgames.aether.api.orbis.IRegion;
-import com.gildedgames.orbis_core.util.RegionHelp;
+import com.gildedgames.aether.api.orbis_core.util.RegionHelp;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;

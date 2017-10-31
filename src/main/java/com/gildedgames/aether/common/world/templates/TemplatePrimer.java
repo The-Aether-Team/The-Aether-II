@@ -65,7 +65,7 @@ public class TemplatePrimer
 
 		for (final Template.BlockInfo block : infoTransformed)
 		{
-			for (final PlacementCondition condition : def.getConditions())
+			for (final PlacementConditionTemplate condition : def.getConditions())
 			{
 				if (!blockAccess.canAccess(pos) || !condition.canPlace(def.getTemplate(), blockAccess, pos, block))
 				{
@@ -74,7 +74,7 @@ public class TemplatePrimer
 			}
 		}
 
-		for (final PlacementCondition condition : def.getConditions())
+		for (final PlacementConditionTemplate condition : def.getConditions())
 		{
 			if (!condition.canPlaceCheckAll(def.getTemplate(), blockAccess, pos, infoTransformed))
 			{
@@ -119,7 +119,7 @@ public class TemplatePrimer
 
 		for (final Template.BlockInfo block : infoTransformed)
 		{
-			for (final PlacementCondition condition : def.getConditions())
+			for (final PlacementConditionTemplate condition : def.getConditions())
 			{
 				if (!condition.canPlace(def.getTemplate(), blockAccess, pos, block))
 				{
@@ -128,7 +128,7 @@ public class TemplatePrimer
 			}
 		}
 
-		for (final PlacementCondition condition : def.getConditions())
+		for (final PlacementConditionTemplate condition : def.getConditions())
 		{
 			if (!condition.canPlaceCheckAll(def.getTemplate(), blockAccess, pos, infoTransformed))
 			{

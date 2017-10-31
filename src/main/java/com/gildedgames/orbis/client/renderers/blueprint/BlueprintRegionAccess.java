@@ -1,8 +1,8 @@
 package com.gildedgames.orbis.client.renderers.blueprint;
 
-import com.gildedgames.orbis_core.block.BlockData;
-import com.gildedgames.orbis_core.util.RegionHelp;
-import com.gildedgames.orbis_core.world_objects.Blueprint;
+import com.gildedgames.aether.api.orbis_core.block.BlockData;
+import com.gildedgames.aether.api.orbis_core.util.RegionHelp;
+import com.gildedgames.orbis.common.world_objects.Blueprint;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;

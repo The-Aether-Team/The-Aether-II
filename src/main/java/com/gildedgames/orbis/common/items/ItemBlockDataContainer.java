@@ -2,13 +2,13 @@ package com.gildedgames.orbis.common.items;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.IRegion;
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.api.orbis_core.OrbisCore;
+import com.gildedgames.aether.api.orbis_core.api.CreationData;
+import com.gildedgames.aether.api.orbis_core.block.BlockDataContainer;
+import com.gildedgames.aether.api.orbis_core.processing.DataPrimer;
+import com.gildedgames.aether.api.orbis_core.util.RotationHelp;
+import com.gildedgames.aether.api.util.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
-import com.gildedgames.orbis_core.block.BlockDataContainer;
-import com.gildedgames.orbis_core.data.CreationData;
-import com.gildedgames.orbis_core.processing.DataPrimer;
-import com.gildedgames.orbis_core.processing.WorldPrimer;
-import com.gildedgames.orbis_core.util.RotationHelp;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -36,7 +36,7 @@ public class ItemBlockDataContainer extends Item
 			stack.setTagCompound(new NBTTagCompound());
 		}
 
-		final NBTFunnel data = AetherCore.io().createFunnel(stack.getTagCompound());
+		final NBTFunnel data = OrbisCore.io().createFunnel(stack.getTagCompound());
 
 		data.set("data", container);
 	}
@@ -49,7 +49,7 @@ public class ItemBlockDataContainer extends Item
 		}
 
 		final NBTTagCompound tag = stack.getTagCompound();
-		final NBTFunnel data = AetherCore.io().createFunnel(tag);
+		final NBTFunnel data = OrbisCore.io().createFunnel(tag);
 
 		return data.get(world, "data");
 	}
@@ -73,8 +73,8 @@ public class ItemBlockDataContainer extends Item
 
 				final IRegion region = RotationHelp.regionFromCenter(selection, container, rotation);
 
-				final DataPrimer primer = new DataPrimer(new WorldPrimer(world));
-				primer.create(container, region.getMin(), rotation, new CreationData(world, player));
+				final DataPrimer primer = new DataPrimer(new BlockAccessExtendedWrapper(world));
+				primer.create(container, new CreationData(world, player).set(region.getMin()).set(rotation));
 			}
 
 			return new ActionResult(EnumActionResult.SUCCESS, stack);

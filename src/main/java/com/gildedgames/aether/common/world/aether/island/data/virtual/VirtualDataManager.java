@@ -1,5 +1,8 @@
 package com.gildedgames.aether.common.world.aether.island.data.virtual;
 
+import com.gildedgames.aether.api.orbis_core.api.BlueprintDefinition;
+import com.gildedgames.aether.api.orbis_core.api.BlueprintInstance;
+import com.gildedgames.aether.api.orbis_core.api.ICreationData;
 import com.gildedgames.aether.api.world.TemplateInstance;
 import com.gildedgames.aether.api.world.generation.TemplateDefinition;
 import com.gildedgames.aether.api.world.generation.TemplateLoc;
@@ -30,6 +33,8 @@ public class VirtualDataManager implements IVirtualDataManager
 	private final IIslandData parent;
 
 	private final List<TemplateInstance> templateInstances = Lists.newArrayList();
+
+	private final List<BlueprintInstance> blueprintInstances = Lists.newArrayList();
 
 	private IVirtualChunk[] chunks;
 
@@ -98,6 +103,26 @@ public class VirtualDataManager implements IVirtualDataManager
 	public boolean dropTemplate(final TemplateInstance templateInstance)
 	{
 		return this.templateInstances.remove(templateInstance);
+	}
+
+	@Override
+	public void placeBlueprint(final BlueprintDefinition def, final ICreationData data)
+	{
+		final BlueprintInstance instance = new BlueprintInstance(def, data);
+
+		this.blueprintInstances.add(instance);
+	}
+
+	@Override
+	public boolean dropBlueprint(final BlueprintInstance instance)
+	{
+		return this.blueprintInstances.remove(instance);
+	}
+
+	@Override
+	public List<BlueprintInstance> getPlacedBlueprints()
+	{
+		return this.blueprintInstances;
 	}
 
 	@Override
@@ -287,6 +312,19 @@ public class VirtualDataManager implements IVirtualDataManager
 		}
 
 		tag.setTag("templateInstances", templateInstances);
+
+		final NBTTagList blueprintInstances = new NBTTagList();
+
+		for (final BlueprintInstance instance : this.blueprintInstances)
+		{
+			final NBTTagCompound data = new NBTTagCompound();
+
+			instance.write(data);
+
+			blueprintInstances.appendTag(data);
+		}
+
+		tag.setTag("blueprintInstances", blueprintInstances);
 	}
 
 	@Override
@@ -304,6 +342,18 @@ public class VirtualDataManager implements IVirtualDataManager
 				final NBTTagCompound data = templateInstances.getCompoundTagAt(i);
 
 				this.templateInstances.add(new TemplateInstance(data));
+			}
+		}
+
+		final NBTTagList blueprintInstances = tag.getTagList("blueprintInstances", 10);
+
+		if (this.blueprintInstances.isEmpty())
+		{
+			for (int i = 0; i < blueprintInstances.tagCount(); i++)
+			{
+				final NBTTagCompound data = blueprintInstances.getCompoundTagAt(i);
+
+				this.blueprintInstances.add(new BlueprintInstance(data));
 			}
 		}
 	}
@@ -379,5 +429,11 @@ public class VirtualDataManager implements IVirtualDataManager
 	public boolean setBlockState(final BlockPos pos, final IBlockState state, final int flags)
 	{
 		return this.setBlockState(pos, state);
+	}
+
+	@Override
+	public void setTileEntity(final BlockPos pos, final TileEntity tileEntity)
+	{
+
 	}
 }

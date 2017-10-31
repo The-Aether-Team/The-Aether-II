@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.templates.conditions;
 
 import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
-import com.gildedgames.aether.api.world.generation.PlacementCondition;
+import com.gildedgames.aether.api.world.generation.PlacementConditionTemplate;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -10,7 +10,7 @@ import net.minecraft.world.gen.structure.template.Template;
 
 import java.util.List;
 
-public class InsideGroundPlacementCondition implements PlacementCondition
+public class InsideGroundPlacementCondition implements PlacementConditionTemplate
 {
 
 	@Override

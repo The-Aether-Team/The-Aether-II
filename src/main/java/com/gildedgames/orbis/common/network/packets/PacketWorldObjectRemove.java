@@ -1,11 +1,11 @@
 package com.gildedgames.orbis.common.network.packets;
 
+import com.gildedgames.aether.api.world_object.IWorldObject;
+import com.gildedgames.aether.api.world_object.IWorldObjectGroup;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.orbis.common.world_object.IWorldObject;
-import com.gildedgames.orbis.common.world_object.IWorldObjectGroup;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;

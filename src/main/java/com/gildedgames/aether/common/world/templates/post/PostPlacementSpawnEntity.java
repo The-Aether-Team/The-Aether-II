@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.templates.post;
 
-import com.gildedgames.aether.api.world.generation.PostPlacement;
+import com.gildedgames.aether.api.world.generation.PostPlacementTemplate;
 import com.gildedgames.aether.api.world.generation.TemplateLoc;
 import com.gildedgames.aether.common.world.util.GenUtil;
 import net.minecraft.entity.EntityLiving;
@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import java.util.Random;
 import java.util.function.Function;
 
-public class PostPlacementSpawnEntity implements PostPlacement
+public class PostPlacementSpawnEntity implements PostPlacementTemplate
 {
 	private final Function<World, EntityLiving> entity;
 

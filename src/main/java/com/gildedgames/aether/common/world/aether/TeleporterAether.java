@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.world.aether;
 
 import com.gildedgames.aether.api.util.BlockAccessExtendedWrapper;
+import com.gildedgames.aether.api.util.BlockUtil;
 import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.api.util.NBTHelper;
 import com.gildedgames.aether.api.world.generation.TemplateLoc;
@@ -9,7 +10,6 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.util.WorldPos;
-import com.gildedgames.aether.common.util.helpers.BlockUtil;
 import com.gildedgames.aether.common.world.templates.TemplatePlacer;
 import com.gildedgames.aether.common.world.templates.TemplatePrimer;
 import com.google.common.collect.BiMap;

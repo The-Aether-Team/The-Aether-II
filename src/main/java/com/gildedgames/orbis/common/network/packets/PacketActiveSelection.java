@@ -2,7 +2,7 @@ package com.gildedgames.orbis.common.network.packets;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.IShape;
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.api.orbis_core.OrbisCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
@@ -33,14 +33,14 @@ public class PacketActiveSelection implements IMessage
 	{
 		final NBTTagCompound tag = ByteBufUtils.readTag(buf);
 
-		this.funnel = AetherCore.io().createFunnel(tag);
+		this.funnel = OrbisCore.io().createFunnel(tag);
 	}
 
 	@Override
 	public void toBytes(final ByteBuf buf)
 	{
 		final NBTTagCompound tag = new NBTTagCompound();
-		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
+		final NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
 
 		funnel.set("shape", this.shape);
 

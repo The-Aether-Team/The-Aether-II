@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world.templates.conditions;
 
 import com.gildedgames.aether.api.util.TemplateUtil;
 import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
-import com.gildedgames.aether.api.world.generation.PlacementCondition;
+import com.gildedgames.aether.api.world.generation.PlacementConditionTemplate;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
@@ -12,7 +12,7 @@ import net.minecraft.world.gen.structure.template.Template;
 
 import java.util.List;
 
-public class UndergroundEntrancePlacementCondition implements PlacementCondition
+public class UndergroundEntrancePlacementCondition implements PlacementConditionTemplate
 {
 
 	@Override

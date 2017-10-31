@@ -78,6 +78,12 @@ public class BlockAccessChunkPrimer implements IBlockAccessExtended
 		return true;
 	}
 
+	@Override
+	public void setTileEntity(final BlockPos pos, final TileEntity tileEntity)
+	{
+		
+	}
+
 	@Nullable
 	@Override
 	public TileEntity getTileEntity(final BlockPos pos)

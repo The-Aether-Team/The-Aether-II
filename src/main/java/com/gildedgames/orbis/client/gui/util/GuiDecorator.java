@@ -1,7 +1,7 @@
 package com.gildedgames.orbis.client.gui.util;
 
+import com.gildedgames.aether.api.orbis_core.util.Decorator;
 import com.gildedgames.orbis.client.util.rect.ModDim2D;
-import com.gildedgames.orbis_core.util.Decorator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.inventory.ClickType;

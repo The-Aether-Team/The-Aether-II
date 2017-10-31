@@ -69,6 +69,12 @@ public class BlockAccessExtendedWrapper implements IBlockAccessExtended
 		return this.world.setBlockState(pos, state, flags);
 	}
 
+	@Override
+	public void setTileEntity(final BlockPos pos, final TileEntity tileEntity)
+	{
+		this.world.setTileEntity(pos, tileEntity);
+	}
+
 	@Nullable
 	@Override
 	public TileEntity getTileEntity(final BlockPos pos)

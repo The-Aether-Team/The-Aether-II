@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
 import com.gildedgames.orbis.client.player.godmode.selection_types.ISelectionTypeClient;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
-import com.gildedgames.orbis_core.util.InputHelper;
+import com.gildedgames.orbis.common.util.InputHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;

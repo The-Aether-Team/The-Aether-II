@@ -2,18 +2,19 @@ package com.gildedgames.orbis.common.items;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.IRegion;
+import com.gildedgames.aether.api.orbis_core.OrbisCore;
+import com.gildedgames.aether.api.orbis_core.api.CreationData;
+import com.gildedgames.aether.api.orbis_core.api.exceptions.OrbisMissingDataException;
+import com.gildedgames.aether.api.orbis_core.api.exceptions.OrbisMissingProjectException;
+import com.gildedgames.aether.api.orbis_core.data.BlueprintData;
+import com.gildedgames.aether.api.orbis_core.data.management.IDataIdentifier;
+import com.gildedgames.aether.api.orbis_core.data.management.IDataMetadata;
+import com.gildedgames.aether.api.orbis_core.processing.DataPrimer;
+import com.gildedgames.aether.api.orbis_core.util.RotationHelp;
+import com.gildedgames.aether.api.util.BlockAccessExtendedWrapper;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.common.Orbis;
-import com.gildedgames.orbis.common.exceptions.OrbisMissingDataException;
-import com.gildedgames.orbis.common.exceptions.OrbisMissingProjectException;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
-import com.gildedgames.orbis_core.data.BlueprintData;
-import com.gildedgames.orbis_core.data.CreationData;
-import com.gildedgames.orbis_core.data.management.IDataIdentifier;
-import com.gildedgames.orbis_core.data.management.IDataMetadata;
-import com.gildedgames.orbis_core.processing.DataPrimer;
-import com.gildedgames.orbis_core.processing.WorldPrimer;
-import com.gildedgames.orbis_core.util.RotationHelp;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -44,7 +45,7 @@ public class ItemBlueprint extends Item
 			stack.setTagCompound(new NBTTagCompound());
 		}
 
-		final NBTFunnel funnel = AetherCore.io().createFunnel(stack.getTagCompound());
+		final NBTFunnel funnel = OrbisCore.io().createFunnel(stack.getTagCompound());
 
 		funnel.set("blueprint_id", id);
 	}
@@ -56,7 +57,7 @@ public class ItemBlueprint extends Item
 			return null;
 		}
 
-		final NBTFunnel funnel = AetherCore.io().createFunnel(stack.getTagCompound());
+		final NBTFunnel funnel = OrbisCore.io().createFunnel(stack.getTagCompound());
 
 		final IDataIdentifier id = funnel.get("blueprint_id");
 
@@ -80,9 +81,9 @@ public class ItemBlueprint extends Item
 
 				final IRegion region = RotationHelp.regionFromCenter(selection, data, rotation);
 
-				final DataPrimer primer = new DataPrimer(new WorldPrimer(world));
+				final DataPrimer primer = new DataPrimer(new BlockAccessExtendedWrapper(world));
 
-				primer.create(data.getBlockDataContainer(), region.getMin(), rotation, new CreationData(world, player));
+				primer.create(data.getBlockDataContainer(), new CreationData(world, player).set(region.getMin()).set(rotation));
 
 				System.out.println(data.getMetadata().getIdentifier());
 			}

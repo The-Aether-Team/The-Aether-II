@@ -12,9 +12,9 @@ public class TemplateDefinition
 
 	private CenterOffsetProcessor offset;
 
-	private List<PlacementCondition> conditions = Lists.newArrayList();
+	private List<PlacementConditionTemplate> conditions = Lists.newArrayList();
 
-	private List<PostPlacement> postPlacements = Lists.newArrayList();
+	private List<PostPlacementTemplate> postPlacements = Lists.newArrayList();
 
 	private boolean randomRotation;
 
@@ -23,7 +23,7 @@ public class TemplateDefinition
 		this.template = template;
 	}
 
-	public TemplateDefinition setPostPlacements(final PostPlacement postPlacement, final PostPlacement... postPlacements)
+	public TemplateDefinition setPostPlacements(final PostPlacementTemplate postPlacement, final PostPlacementTemplate... postPlacements)
 	{
 		this.postPlacements = Lists.newArrayList(postPlacements);
 
@@ -32,12 +32,12 @@ public class TemplateDefinition
 		return this;
 	}
 
-	public List<PostPlacement> getPostPlacements()
+	public List<PostPlacementTemplate> getPostPlacements()
 	{
 		return this.postPlacements;
 	}
 
-	public TemplateDefinition setConditions(final PlacementCondition condition, final PlacementCondition... conditions)
+	public TemplateDefinition setConditions(final PlacementConditionTemplate condition, final PlacementConditionTemplate... conditions)
 	{
 		this.conditions = Lists.newArrayList(conditions);
 
@@ -58,7 +58,7 @@ public class TemplateDefinition
 		return this;
 	}
 
-	public List<PlacementCondition> getConditions()
+	public List<PlacementConditionTemplate> getConditions()
 	{
 		return this.conditions;
 	}

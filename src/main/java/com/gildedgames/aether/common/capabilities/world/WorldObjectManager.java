@@ -1,8 +1,9 @@
 package com.gildedgames.aether.common.capabilities.world;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
+import com.gildedgames.aether.api.orbis_core.OrbisCore;
+import com.gildedgames.aether.api.world_object.IWorldObjectGroup;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.orbis.common.world_object.IWorldObjectGroup;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
@@ -157,7 +158,7 @@ public class WorldObjectManager extends WorldSavedData
 	@Override
 	public void readFromNBT(final NBTTagCompound tag)
 	{
-		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
+		final NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
 
 		this.nextId = tag.getInteger("nextId");
 		this.dimension = tag.getInteger("dimension");
@@ -178,7 +179,7 @@ public class WorldObjectManager extends WorldSavedData
 	@Override
 	public NBTTagCompound writeToNBT(final NBTTagCompound tag)
 	{
-		final NBTFunnel funnel = AetherCore.io().createFunnel(tag);
+		final NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
 
 		tag.setInteger("nextId", this.nextId);
 		tag.setInteger("dimension", this.dimension);

@@ -7,7 +7,7 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.common.network.packets.PacketActiveSelection;
 import com.gildedgames.orbis.common.player.godmode.IGodPower;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
-import com.gildedgames.orbis_core.util.RaytraceHelp;
+import com.gildedgames.orbis.common.util.RaytraceHelp;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 

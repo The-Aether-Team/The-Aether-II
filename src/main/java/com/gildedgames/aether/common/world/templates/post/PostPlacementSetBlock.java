@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.templates.post;
 
-import com.gildedgames.aether.api.world.generation.PostPlacement;
+import com.gildedgames.aether.api.world.generation.PostPlacementTemplate;
 import com.gildedgames.aether.api.world.generation.TemplateLoc;
 import com.gildedgames.aether.common.world.util.GenUtil;
 import net.minecraft.block.state.IBlockState;
@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class PostPlacementSetBlock implements PostPlacement
+public class PostPlacementSetBlock implements PostPlacementTemplate
 {
 	private final IBlockState state;
 

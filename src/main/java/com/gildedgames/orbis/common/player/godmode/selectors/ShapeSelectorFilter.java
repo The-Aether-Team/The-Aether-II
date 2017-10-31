@@ -1,11 +1,11 @@
 package com.gildedgames.orbis.common.player.godmode.selectors;
 
 import com.gildedgames.aether.api.orbis.IShape;
+import com.gildedgames.aether.api.orbis_core.api.CreationData;
+import com.gildedgames.aether.api.orbis_core.api.ICreationData;
+import com.gildedgames.aether.api.orbis_core.block.BlockFilter;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
-import com.gildedgames.orbis_core.block.BlockFilter;
-import com.gildedgames.orbis_core.data.CreationData;
-import com.gildedgames.orbis_core.data.ICreationData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemBucket;

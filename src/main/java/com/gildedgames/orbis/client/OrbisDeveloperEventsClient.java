@@ -1,6 +1,11 @@
 package com.gildedgames.orbis.client;
 
 import com.gildedgames.aether.api.orbis.IShape;
+import com.gildedgames.aether.api.orbis_core.block.BlockDataContainer;
+import com.gildedgames.aether.api.orbis_core.block.BlockFilter;
+import com.gildedgames.aether.api.orbis_core.util.BlockFilterHelper;
+import com.gildedgames.aether.api.orbis_core.util.RotationHelp;
+import com.gildedgames.aether.api.world_object.IWorldObjectGroup;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -17,13 +22,8 @@ import com.gildedgames.orbis.common.player.PlayerSelectionModule;
 import com.gildedgames.orbis.common.player.godmode.GodPowerBlueprint;
 import com.gildedgames.orbis.common.player.godmode.GodPowerSelect;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
-import com.gildedgames.orbis.common.world_object.IWorldObjectGroup;
-import com.gildedgames.orbis_core.block.BlockDataContainer;
-import com.gildedgames.orbis_core.block.BlockFilter;
-import com.gildedgames.orbis_core.util.BlockFilterHelper;
-import com.gildedgames.orbis_core.util.OrbisRaytraceHelp;
-import com.gildedgames.orbis_core.util.RaytraceHelp;
-import com.gildedgames.orbis_core.util.RotationHelp;
+import com.gildedgames.orbis.common.util.OrbisRaytraceHelp;
+import com.gildedgames.orbis.common.util.RaytraceHelp;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiIngameMenu;
 import net.minecraft.client.gui.GuiScreen;

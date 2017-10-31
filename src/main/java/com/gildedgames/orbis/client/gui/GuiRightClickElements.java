@@ -1,6 +1,10 @@
 package com.gildedgames.orbis.client.gui;
 
 import com.gildedgames.aether.api.orbis.IShape;
+import com.gildedgames.aether.api.orbis_core.block.BlockDataContainer;
+import com.gildedgames.aether.api.orbis_core.block.BlockFilter;
+import com.gildedgames.aether.api.orbis_core.util.BlockFilterHelper;
+import com.gildedgames.aether.api.world_object.IWorldObject;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.client.gui.data.DropdownElement;
@@ -10,10 +14,6 @@ import com.gildedgames.orbis.common.items.ItemsOrbis;
 import com.gildedgames.orbis.common.network.packets.PacketFilterShape;
 import com.gildedgames.orbis.common.network.packets.PacketSetItemStackInHand;
 import com.gildedgames.orbis.common.network.packets.PacketWorldObjectRemove;
-import com.gildedgames.orbis.common.world_object.IWorldObject;
-import com.gildedgames.orbis_core.block.BlockDataContainer;
-import com.gildedgames.orbis_core.block.BlockFilter;
-import com.gildedgames.orbis_core.util.BlockFilterHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

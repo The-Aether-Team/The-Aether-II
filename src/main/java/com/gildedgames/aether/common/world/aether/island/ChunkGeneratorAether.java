@@ -1,11 +1,14 @@
 package com.gildedgames.aether.common.world.aether.island;
 
+import com.gildedgames.aether.api.orbis_core.api.BlueprintInstance;
+import com.gildedgames.aether.api.orbis_core.api.PostPlacement;
+import com.gildedgames.aether.api.orbis_core.processing.DataPrimer;
 import com.gildedgames.aether.api.util.BlockAccessExtendedWrapper;
 import com.gildedgames.aether.api.world.ISector;
 import com.gildedgames.aether.api.world.ISectorAccess;
 import com.gildedgames.aether.api.world.IslandSectorHelper;
 import com.gildedgames.aether.api.world.TemplateInstance;
-import com.gildedgames.aether.api.world.generation.PostPlacement;
+import com.gildedgames.aether.api.world.generation.PostPlacementTemplate;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.world.templates.TemplatePrimer;
 import net.minecraft.entity.EnumCreatureType;
@@ -130,9 +133,33 @@ public class ChunkGeneratorAether implements IChunkGenerator
 					{
 						instance.markGeneratedAChunk();
 
-						for (final PostPlacement post : instance.getDef().getPostPlacements())
+						for (final PostPlacementTemplate post : instance.getDef().getPostPlacements())
 						{
 							post.postGenerate(this.world, this.rand, instance.getLoc());
+						}
+					}
+				}
+			}
+		}
+
+		final DataPrimer primer = new DataPrimer(new BlockAccessExtendedWrapper(this.world));
+
+		// Populate placed blueprints
+		for (final BlueprintInstance instance : island.getVirtualDataManager().getPlacedBlueprints())
+		{
+			for (final ChunkPos chunkPos : instance.getChunksOccupied())
+			{
+				if (chunkPos.chunkXPos == chunkX && chunkPos.chunkZPos == chunkZ)
+				{
+					primer.createChunk(chunkPos, this.world, instance.getDef().getData(), instance.getCreationData());
+
+					if (!instance.hasGeneratedAChunk())
+					{
+						instance.markGeneratedAChunk();
+
+						for (final PostPlacement post : instance.getDef().getPostPlacements())
+						{
+							post.postGenerate(this.world, this.rand, instance.getCreationData());
 						}
 					}
 				}

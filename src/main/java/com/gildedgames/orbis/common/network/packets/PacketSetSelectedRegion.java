@@ -3,7 +3,7 @@ package com.gildedgames.orbis.common.network.packets;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
-import com.gildedgames.orbis_core.world_objects.WorldShape;
+import com.gildedgames.orbis.common.world_objects.WorldShape;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;

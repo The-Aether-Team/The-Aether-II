@@ -1,8 +1,8 @@
 package com.gildedgames.orbis.common.network.packets;
 
+import com.gildedgames.aether.api.orbis_core.util.RotationHelp;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
-import com.gildedgames.orbis_core.util.RotationHelp;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
