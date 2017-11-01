@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
@@ -59,7 +60,14 @@ public class WorldObjectManager extends WorldSavedData
 
 		if (world.isRemote)
 		{
-			using = world;
+			if (Minecraft.getMinecraft().isIntegratedServerRunning())
+			{
+				using = DimensionManager.getWorld(world.provider.getDimension());
+			}
+			else
+			{
+				using = world;
+			}
 		}
 		else
 		{
