@@ -295,7 +295,6 @@ public class RenderShape implements IWorldRenderer
 
 		GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
 
-		GlStateManager.disableCull();
 		GlStateManager.disableAlpha();
 		GlStateManager.disableLighting();
 		GlStateManager.depthMask(false);
@@ -322,7 +321,6 @@ public class RenderShape implements IWorldRenderer
 		GlStateManager.depthMask(true);
 		GlStateManager.enableLighting();
 		GlStateManager.enableAlpha();
-		GlStateManager.enableCull();
 
 		GlStateManager.translate(0, 0, 0);
 
@@ -330,7 +328,7 @@ public class RenderShape implements IWorldRenderer
 
 		if (this.renderDimensionsAbove)
 		{
-			//RenderUtil.renderDimensionsAbove(this.shape.getBoundingBox(), partialTicks);
+			RenderUtil.renderDimensionsAbove(this.shape.getBoundingBox(), partialTicks);
 		}
 	}
 
