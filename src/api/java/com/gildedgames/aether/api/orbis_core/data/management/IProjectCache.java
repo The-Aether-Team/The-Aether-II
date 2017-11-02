@@ -41,7 +41,7 @@ public interface IProjectCache extends NBT
 	 * @return
 	 */
 	@Nullable
-	IData getData(int dataId);
+	<T extends IData> T getData(int dataId);
 
 	/**
 	 * Fetched the cached IDataMetadata reference that is attached to the

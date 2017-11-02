@@ -1,10 +1,14 @@
 package com.gildedgames.aether.common.world.aether.biomes;
 
-import com.gildedgames.aether.api.util.TemplateUtil;
+import com.gildedgames.aether.api.orbis_core.api.BlueprintDefinition;
+import com.gildedgames.aether.api.orbis_core.api.BlueprintDefinitionPool;
+import com.gildedgames.aether.api.orbis_core.api.CreationData;
+import com.gildedgames.aether.api.orbis_core.api.ICreationData;
+import com.gildedgames.aether.api.orbis_core.api.util.BlueprintPlacer;
+import com.gildedgames.aether.api.orbis_core.processing.DataPrimer;
 import com.gildedgames.aether.api.world.ISector;
 import com.gildedgames.aether.api.world.ISectorAccess;
 import com.gildedgames.aether.api.world.IslandSectorHelper;
-import com.gildedgames.aether.api.world.generation.TemplateDefinition;
 import com.gildedgames.aether.api.world.generation.TemplateLoc;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IVirtualDataManager;
@@ -21,7 +25,6 @@ import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenAer
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenPurpleAercloud;
 import com.gildedgames.aether.common.world.aether.features.trees.WorldGenOrangeTree;
 import com.gildedgames.aether.common.world.templates.TemplatePlacer;
-import com.gildedgames.aether.common.world.util.GenUtil;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -111,36 +114,43 @@ public class BiomeAetherDecorator
 
 	public void prepareDecorationsWholeIsland(final World world, final IIslandData island, final Random random)
 	{
-		final IVirtualDataManager manager = island.getVirtualDataManager();
+		// TODO: REMOVE THIS DUMB CLONING SHIT. Essentially, island sectors seem to be syncing really strangely and as a result the virtual data manager's chunks are being cleared before this preparation is finished. So we need to clone its data and re set it at the end of this method.
+		final IVirtualDataManager manager = island.getVirtualDataManager().clone();
+		final DataPrimer primer = new DataPrimer(manager);
 
-		final int startX = (int) island.getBounds().getCenterX();
-		final int startZ = (int) island.getBounds().getCenterZ();
+		final int startX = island.getBounds().getMinX();
+		final int startZ = island.getBounds().getMinZ();
 
 		final BlockPos pos = new BlockPos(startX, 0, startZ);
-
-		final TemplateDefinition def = TemplateUtil.pickRandom(random, GenerationAether.outpost_a, GenerationAether.outpost_b, GenerationAether.outpost_c);
 
 		boolean generated = false;
 
 		for (int i = 0; i < 5000; i++)
 		{
-			final int x = random.nextInt(island.getBounds().getWidth() / 2);
-			final int z = random.nextInt(island.getBounds().getLength() / 2);
+			final BlueprintDefinition outpost = GenerationAether.OUTPOST_HIGHLANDS.getRandomDefinition(random);
 
-			final BlockPos pos2 = manager.getTopPos(pos.add(x, 0, z));
+			final int x = random.nextInt(island.getBounds().getWidth());
+			final int z = random.nextInt(island.getBounds().getLength());
 
-			if (pos2.getY() >= 0)
+			if (manager.canAccess(pos.getX() + x, pos.getZ() + z))
 			{
-				final TemplateLoc loc = new TemplateLoc().set(pos2).set(true);
+				final BlockPos pos2 = manager.getTopPos(pos.add(x, 0, z));
 
-				generated = TemplatePlacer.canPlace(island.getVirtualDataManager(), def, loc, random);
-
-				if (generated)
+				if (pos2.getY() >= 0)
 				{
-					island.setRespawnPoint(GenUtil.rotate(loc.getPos(), loc.getPos().add(-0.5, 2, 1.0), loc.getSettings().getRotation()));
-					island.getVirtualDataManager().placeTemplate(def, loc);
+					final ICreationData data = new CreationData(world).set(pos2);
 
-					break;
+					generated = BlueprintPlacer.findPlace(primer, outpost, data, random);
+
+					if (generated)
+					{
+						BlueprintPlacer.placeForced(primer, outpost, data, random);
+						manager.placeBlueprint(outpost, data);
+
+						//island.setRespawnPoint(GenUtil.rotate(data.getPos(), data.getPos().add(-0.5, 2, 1.0), data.getRotation()));
+
+						break;
+					}
 				}
 			}
 		}
@@ -148,6 +158,105 @@ public class BiomeAetherDecorator
 		if (!generated)
 		{
 			System.out.println("WARNING: OUTPOST NOT GENERATED ON AN ISLAND!");
+		}
+
+		this.generate(GenerationAether.ABAND_ANGEL_STOREROOM, 20, random.nextInt(2), -1, pos, island, manager, primer, world, random);
+		this.generate(GenerationAether.ABAND_ANGEL_WATCHTOWER, 20, random.nextInt(2), -1, pos, island, manager, primer, world, random);
+		this.generate(GenerationAether.ABAND_CAMPSITE_1A, 200, random.nextInt(3), 0, pos, island, manager, primer, world, random);
+		this.generate(GenerationAether.ABAND_HUMAN_HOUSE_1A, 20, random.nextInt(3), -1, pos, island, manager, primer, world, random);
+		this.generate(GenerationAether.ABAND_HUMAN_HOUSE_1B, 20, random.nextInt(2), -5, pos, island, manager, primer, world, random);
+		this.generate(GenerationAether.SKYROOT_WATCHTOWER_1A, 20, random.nextInt(3), 1, pos, island, manager, primer, world, random);
+		this.generate(GenerationAether.WELL, 20, random.nextInt(2), -1, pos, island, manager, primer, world, random);
+
+		island.getVirtualDataManager().setPlacedBlueprints(manager.getPlacedBlueprints());
+	}
+
+	private void generate(
+			final BlueprintDefinition def, final int tries, final int maxGenerated, final int floorHeight, final BlockPos startPos, final IIslandData island,
+			final IVirtualDataManager manager, final DataPrimer primer, final World world, final Random rand)
+	{
+		if (maxGenerated <= 0)
+		{
+			return;
+		}
+
+		int amountGenerated = 0;
+
+		for (int i = 0; i < tries; i++)
+		{
+			final int x = rand.nextInt(island.getBounds().getWidth());
+			final int z = rand.nextInt(island.getBounds().getLength());
+
+			if (manager.canAccess(startPos.getX() + x, startPos.getZ() + z))
+			{
+				final BlockPos pos2 = manager.getTopPos(startPos.add(x, 0, z)).add(0, floorHeight, 0);
+
+				if (pos2.getY() >= 0)
+				{
+					final ICreationData data = new CreationData(world).set(pos2);
+
+					final boolean generated = BlueprintPlacer.findPlace(primer, def, data, rand);
+
+					if (generated)
+					{
+						BlueprintPlacer.placeForced(primer, def, data, rand);
+						manager.placeBlueprint(def, data);
+
+						amountGenerated++;
+
+						if (amountGenerated >= maxGenerated)
+						{
+							return;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private void generate(
+			final BlueprintDefinitionPool pool, final int tries, final int maxGenerated, final int floorHeight, final BlockPos startPos,
+			final IIslandData island,
+			final IVirtualDataManager manager, final DataPrimer primer, final World world, final Random rand)
+	{
+		if (maxGenerated <= 0)
+		{
+			return;
+		}
+
+		int amountGenerated = 0;
+
+		for (int i = 0; i < tries; i++)
+		{
+			final BlueprintDefinition blueprint = pool.getRandomDefinition(rand);
+
+			final int x = rand.nextInt(island.getBounds().getWidth());
+			final int z = rand.nextInt(island.getBounds().getLength());
+
+			if (manager.canAccess(startPos.getX() + x, startPos.getZ() + z))
+			{
+				final BlockPos pos2 = manager.getTopPos(startPos.add(x, 0, z)).add(0, floorHeight, 0);
+
+				if (pos2.getY() >= 0)
+				{
+					final ICreationData data = new CreationData(world).set(pos2);
+
+					final boolean generated = BlueprintPlacer.findPlace(primer, blueprint, data, rand);
+
+					if (generated)
+					{
+						BlueprintPlacer.placeForced(primer, blueprint, data, rand);
+						manager.placeBlueprint(blueprint, data);
+
+						amountGenerated++;
+
+						if (amountGenerated >= maxGenerated)
+						{
+							return;
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -292,14 +401,14 @@ public class BiomeAetherDecorator
 		this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));
 
 		// Lake Generator
-		/*if (random.nextInt(4) == 0)
+		if (random.nextInt(4) == 0)
 		{
 			x = random.nextInt(16) + 8;
 			y = random.nextInt(128);
 			z = random.nextInt(16) + 8;
-		
+
 			this.genAetherLakes.generate(world, random, pos.add(x, y, z));
-		}*/
+		}
 	}
 
 	private void generateMineable(final WorldGenAetherMinable minable, final World world, final Random random, final BlockPos pos, final int minY,

@@ -28,6 +28,8 @@ public interface IVirtualDataManager extends IBlockAccessExtended, NBT
 
 	List<BlueprintInstance> getPlacedBlueprints();
 
+	void setPlacedBlueprints(List<BlueprintInstance> instances);
+
 	List<TemplateInstance> getPlacedTemplates();
 
 	Chunk createRealChunkFromVirtualData(final World world, final int chunkX, final int chunkZ);
@@ -52,5 +54,7 @@ public interface IVirtualDataManager extends IBlockAccessExtended, NBT
 	boolean isPreparing();
 
 	void setPreparing(boolean preparing);
+
+	IVirtualDataManager clone();
 
 }

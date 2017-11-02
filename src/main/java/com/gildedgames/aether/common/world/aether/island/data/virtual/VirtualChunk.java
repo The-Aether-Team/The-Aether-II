@@ -20,7 +20,6 @@ import java.util.Random;
  */
 public class VirtualChunk implements IVirtualChunk
 {
-
 	public final static int WIDTH = 16, LENGTH = 16, HEIGHT = 256;
 
 	public static final IBlockState DEFAULT_STATE = Blocks.AIR.getDefaultState();
@@ -182,5 +181,4 @@ public class VirtualChunk implements IVirtualChunk
 			aetherBiome.getBiomeDecorator().prepareDecorationsPerChunk(world, island, rand, pos, aetherBiome);
 		}
 	}
-
 }

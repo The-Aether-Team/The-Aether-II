@@ -23,6 +23,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.List;
 
 public class VirtualDataManager implements IVirtualDataManager
@@ -32,9 +33,9 @@ public class VirtualDataManager implements IVirtualDataManager
 
 	private final IIslandData parent;
 
-	private final List<TemplateInstance> templateInstances = Lists.newArrayList();
+	private List<TemplateInstance> templateInstances = Lists.newArrayList();
 
-	private final List<BlueprintInstance> blueprintInstances = Lists.newArrayList();
+	private List<BlueprintInstance> blueprintInstances = Lists.newArrayList();
 
 	private IVirtualChunk[] chunks;
 
@@ -108,7 +109,7 @@ public class VirtualDataManager implements IVirtualDataManager
 	@Override
 	public void placeBlueprint(final BlueprintDefinition def, final ICreationData data)
 	{
-		final BlueprintInstance instance = new BlueprintInstance(def, data);
+		final BlueprintInstance instance = new BlueprintInstance(data.getWorld(), def, data);
 
 		this.blueprintInstances.add(instance);
 	}
@@ -123,6 +124,12 @@ public class VirtualDataManager implements IVirtualDataManager
 	public List<BlueprintInstance> getPlacedBlueprints()
 	{
 		return this.blueprintInstances;
+	}
+
+	@Override
+	public void setPlacedBlueprints(final List<BlueprintInstance> instances)
+	{
+		this.blueprintInstances = instances;
 	}
 
 	@Override
@@ -249,6 +256,86 @@ public class VirtualDataManager implements IVirtualDataManager
 
 		final IVirtualChunk chunk = this.getChunkFromBlockPos(x, z);
 
+		// TODO: Might need this later if we don't save chunk data to disk
+		/*for (final BlueprintInstance instance : this.getPlacedBlueprints())
+		{
+			for (final ChunkPos pos : instance.getChunksOccupied())
+			{
+				if (pos.chunkXPos == chunk.getX() && pos.chunkZPos == chunk.getZ())
+				{
+					final BlockDataContainer blocks = instance.getDef().getData().getBlockDataContainer();
+
+					final BlockPos min = instance.getCreationData().getPos();
+					final BlockPos max = new BlockPos(min.getX() + blocks.getWidth() - 1, min.getY() + blocks.getHeight() - 1,
+							min.getZ() + blocks.getLength() - 1);
+
+					if (x >= min.getX() && x <= max.getX() && y >= min.getY() && y <= max.getY() && z >= min.getZ() && z <= max.getZ())
+					{
+						if (instance.getCreationData().getRotation() == Rotation.NONE)
+						{
+							return blocks.get(x - min.getX(), y - min.getY(), z - min.getZ()).getBlockState();
+						}
+						else
+						{
+							final boolean clockwise = true;
+							final int rotationAmount = Math.abs((Rotation.values().length - 1) - instance.getCreationData().getRotation().ordinal());
+
+							final int width = RegionHelp.getWidth(min, max);
+							final int length = RegionHelp.getLength(min, max);
+
+							final int centerX = min.getX() + width / 2;
+							final int centerZ = min.getZ() + length / 2;
+
+							final BlockPos center = new BlockPos(centerX, min.getY(), centerZ);
+
+							final int roundingX = RotationHelp.getRounding(width);
+							final int roundingZ = RotationHelp.getRounding(length);
+
+							final BlockPos.MutableBlockPos rotated = new BlockPos.MutableBlockPos(0, 0, 0);
+							final BlockPos.MutableBlockPos beforeRot = new BlockPos.MutableBlockPos(x, y, z);
+
+							if (x != min.getX() && y != min.getY() && z != min.getZ())
+							{
+								int i = beforeRot.getX();
+								int k = beforeRot.getY();
+								int j = beforeRot.getZ();
+
+								if (i < max.getX())
+								{
+									++i;
+								}
+								else if (k < max.getY())
+								{
+									i = min.getX();
+									++k;
+								}
+								else if (j < max.getZ())
+								{
+									i = min.getX();
+									k = min.getY();
+									++j;
+								}
+
+								RotationHelp.setX(beforeRot, i);
+								beforeRot.setY(k);
+								RotationHelp.setZ(beforeRot, j);
+							}
+
+							RotationHelp
+									.setRotated(rotated, beforeRot, center, roundingX, roundingZ, rotationAmount, clockwise);
+
+							final BlockData data = blocks.get(rotated.getX() - min.getX(), rotated.getY() - min.getY(), rotated.getZ() - min.getZ());
+
+							if (data != null)
+							{
+								return data.getBlockState();
+							}
+						}
+					}
+				}
+			}
+		}*/
+
 		return chunk.getState(x & 15, y, z & 15);
 	}
 
@@ -265,7 +352,7 @@ public class VirtualDataManager implements IVirtualDataManager
 		final int posX = x % 16;
 		final int posZ = z % 16;
 
-		chunk.setState(posX < 0 ? 16 + posX : posX, y, posZ < 0 ? 16 + posZ : posZ, state);
+		chunk.setState(Math.abs(posX), y, Math.abs(posZ), state);
 
 		return true;
 	}
@@ -292,6 +379,26 @@ public class VirtualDataManager implements IVirtualDataManager
 	public void setPreparing(final boolean preparing)
 	{
 		this.isPreparing = preparing;
+	}
+
+	@Override
+	public IVirtualDataManager clone()
+	{
+		final VirtualDataManager clone = new VirtualDataManager(this.world, this.parent);
+
+		clone.templateInstances = Lists.newArrayList(this.templateInstances);
+		clone.blueprintInstances = Lists.newArrayList();
+
+		for (final BlueprintInstance instance : this.blueprintInstances)
+		{
+			clone.blueprintInstances.add(instance.clone());
+		}
+
+		clone.chunks = Arrays.copyOf(this.chunks, this.chunks.length);
+		clone.isPrepped = this.isPrepped;
+		clone.isPreparing = this.isPreparing;
+
+		return clone;
 	}
 
 	@Override
@@ -325,6 +432,7 @@ public class VirtualDataManager implements IVirtualDataManager
 		}
 
 		tag.setTag("blueprintInstances", blueprintInstances);
+
 	}
 
 	@Override
@@ -353,7 +461,7 @@ public class VirtualDataManager implements IVirtualDataManager
 			{
 				final NBTTagCompound data = blueprintInstances.getCompoundTagAt(i);
 
-				this.blueprintInstances.add(new BlueprintInstance(data));
+				this.blueprintInstances.add(new BlueprintInstance(this.world, data));
 			}
 		}
 	}

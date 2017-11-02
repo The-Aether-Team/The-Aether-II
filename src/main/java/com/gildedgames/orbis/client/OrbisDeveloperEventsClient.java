@@ -129,7 +129,8 @@ public class OrbisDeveloperEventsClient
 					NetworkingAether.sendPacketToServer(new PacketDeveloperReach(reach - 1));
 				}
 
-				if ((Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) && OrbisKeyBindings.keyBindCopy.isPressed())
+				if (select.getSelectedRegion() != null && (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL))
+						&& OrbisKeyBindings.keyBindCopy.isPressed())
 				{
 					final BlockDataContainer container = BlockDataContainer.fromShape(mc.player.world, select.getSelectedRegion());
 					final ItemStack item = new ItemStack(ItemsOrbis.blockdata);

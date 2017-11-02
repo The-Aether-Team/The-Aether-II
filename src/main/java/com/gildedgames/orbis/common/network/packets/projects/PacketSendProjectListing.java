@@ -33,7 +33,7 @@ public class PacketSendProjectListing extends PacketMultipleParts
 		this.projects = new ArrayList<>(Orbis.getProjectManager().getCachedProjects());
 		this.projectNames = Lists.newArrayList();
 
-		this.projects.forEach(p -> this.projectNames.add(p.getLocation().getName()));
+		this.projects.forEach(p -> this.projectNames.add(p.getLocationAsFile().getName()));
 	}
 
 	private PacketSendProjectListing(final byte[] data)

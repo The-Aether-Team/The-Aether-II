@@ -7,13 +7,17 @@ import com.gildedgames.aether.api.orbis_core.api.util.BlueprintUtil;
 import com.gildedgames.aether.api.util.NBT;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.World;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.util.Arrays;
+
 public class BlueprintInstance implements NBT
 {
+	private final World world;
 
-	private final ChunkPos[] chunksOccupied;
+	private ChunkPos[] chunksOccupied;
 
 	private BlueprintDefinition def;
 
@@ -25,8 +29,9 @@ public class BlueprintInstance implements NBT
 
 	private boolean hasGeneratedAChunk;
 
-	public BlueprintInstance(final BlueprintDefinition def, final ICreationData data)
+	public BlueprintInstance(final World world, final BlueprintDefinition def, final ICreationData data)
 	{
+		this.world = world;
 		this.def = def;
 
 		this.registryId = def.getRegistry().getRegistryId();
@@ -36,8 +41,10 @@ public class BlueprintInstance implements NBT
 		this.chunksOccupied = BlueprintUtil.getChunksInsideTemplate(this.getDef(), this.getCreationData());
 	}
 
-	public BlueprintInstance(final NBTTagCompound tag)
+	public BlueprintInstance(final World world, final NBTTagCompound tag)
 	{
+		this.world = world;
+
 		this.read(tag);
 
 		this.chunksOccupied = BlueprintUtil.getChunksInsideTemplate(this.getDef(), this.getCreationData());
@@ -110,9 +117,9 @@ public class BlueprintInstance implements NBT
 		final NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
 
 		tag.setString("registryId", this.registryId);
-		tag.setInteger("id", this.definitionID);
+		tag.setInteger("definitionId", this.definitionID);
 
-		funnel.set("data", this.data);
+		funnel.set("creation", this.data);
 
 		tag.setBoolean("hasGeneratedAChunk", this.hasGeneratedAChunk);
 	}
@@ -122,10 +129,21 @@ public class BlueprintInstance implements NBT
 	{
 		final NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
 
-		this.def = OrbisAPI.services().findDefinitionRegistry(tag.getString("registryId")).get(tag.getInteger("id"));
+		this.def = OrbisAPI.services().findDefinitionRegistry(tag.getString("registryId")).get(tag.getInteger("definitionId"));
 
-		this.data = funnel.get("data");
+		this.data = funnel.get(this.world, "creation");
 
 		this.hasGeneratedAChunk = tag.getBoolean("hasGeneratedAChunk");
+	}
+
+	@Override
+	public BlueprintInstance clone()
+	{
+		final BlueprintInstance clone = new BlueprintInstance(this.world, this.def, this.data.clone());
+
+		clone.chunksOccupied = Arrays.copyOf(this.chunksOccupied, this.chunksOccupied.length);
+		clone.hasGeneratedAChunk = this.hasGeneratedAChunk;
+
+		return clone;
 	}
 }

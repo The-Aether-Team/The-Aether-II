@@ -14,6 +14,7 @@ import com.gildedgames.aether.api.orbis_core.util.OrbisTuple;
 import com.gildedgames.aether.api.orbis_core.util.RotationHelp;
 import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -62,47 +63,69 @@ public class DataPrimer
 
 	public boolean canGenerate(final BlueprintDefinition def, final ICreationData data)
 	{
-		BlockPos pos = data.getPos();
+		final BlockPos pos = data.getPos();
 
-		if (data.isCentered())
-		{
-			pos = BlueprintUtil.getCenteredPos(def, data);
-		}
-
-		final IRegion bb = BlueprintUtil.getRegionFromDefinition(def, data);
-
-		if (bb.getMax().getY() > 256)
+		if (data.getPos().getY() + def.getData().getHeight() > 256)
 		{
 			return false;
 		}
 
-		int index = 0;
+		final BlockDataContainer blocks = def.getData().getBlockDataContainer();
 
-		final BlockDataContainer rotated = def.getData().getBlockDataContainer();
+		final int rotAmount = Math.abs(RotationHelp.getRotationAmount(data.getRotation(), Rotation.NONE));
 
-		// TODO: Rotate block data container.
-		for (final BlockData block : rotated)
+		if (rotAmount != 0)
 		{
-			final int x = def.getData().getBlockDataContainer().getX(index) + pos.getX();
-			final int y = def.getData().getBlockDataContainer().getY(index) + pos.getY();
-			final int z = def.getData().getBlockDataContainer().getZ(index) + pos.getZ();
+			final BlockPos min = data.getPos();
+			final BlockPos max = new BlockPos(min.getX() + blocks.getWidth() - 1, min.getY() + blocks.getHeight() - 1,
+					min.getZ() + blocks.getLength() - 1);
 
-			for (final PlacementCondition condition : def.getConditions())
+			for (final OrbisTuple<BlockPos, BlockPos> tuple : RotationHelp.getAllInBoxRotated(min, max, data.getRotation()))
 			{
-				if (!this.access.canAccess(pos) || !condition.canPlace(def.getData(), this.access, pos, block, x, y, z))
+				final BlockPos beforeRot = tuple.getFirst();
+				final BlockPos rotated = tuple.getSecond();
+
+				final BlockData block = blocks
+						.get(beforeRot.getX() - min.getX(), beforeRot.getY() - min.getY(), beforeRot.getZ() - min.getZ());
+
+				for (final PlacementCondition condition : def.getConditions())
 				{
-					return false;
+					if (!this.access.canAccess(pos) || !condition.canPlace(def.getData(), this.access, pos, block, rotated))
+					{
+						return false;
+					}
 				}
 			}
 
-			index++;
+			// TODO: Do check for canPlaceCheckAll as well
 		}
-
-		for (final PlacementCondition condition : def.getConditions())
+		else
 		{
-			if (!condition.canPlaceCheckAll(def.getData(), this.access, pos, rotated))
+			int index = 0;
+
+			for (final BlockData block : blocks)
 			{
-				return false;
+				final int x = def.getData().getBlockDataContainer().getX(index) + pos.getX();
+				final int y = def.getData().getBlockDataContainer().getY(index) + pos.getY();
+				final int z = def.getData().getBlockDataContainer().getZ(index) + pos.getZ();
+
+				for (final PlacementCondition condition : def.getConditions())
+				{
+					if (!this.access.canAccess(pos) || !condition.canPlace(def.getData(), this.access, pos, block, new BlockPos(x, y, z)))
+					{
+						return false;
+					}
+				}
+
+				index++;
+			}
+
+			for (final PlacementCondition condition : def.getConditions())
+			{
+				if (!condition.canPlaceCheckAll(def.getData(), this.access, pos, blocks))
+				{
+					return false;
+				}
 			}
 		}
 
@@ -121,12 +144,7 @@ public class DataPrimer
 
 	private boolean canGenerate(final World world, final BlueprintDefinition def, final ICreationData data, final boolean checkAreaLoaded)
 	{
-		BlockPos pos = data.getPos();
-
-		if (data.isCentered())
-		{
-			pos = BlueprintUtil.getCenteredPos(def, data);
-		}
+		final BlockPos pos = data.getPos();
 
 		final IRegion bb = BlueprintUtil.getRegionFromDefinition(def, data);
 
@@ -135,33 +153,60 @@ public class DataPrimer
 			return false;
 		}
 
-		int index = 0;
+		final BlockDataContainer blocks = def.getData().getBlockDataContainer();
 
-		final BlockDataContainer rotated = def.getData().getBlockDataContainer();
+		final int rotAmount = Math.abs(RotationHelp.getRotationAmount(data.getRotation(), Rotation.NONE));
 
-		// TODO: Rotate block data container.
-		for (final BlockData block : rotated)
+		if (rotAmount != 0)
 		{
-			final int x = def.getData().getBlockDataContainer().getX(index) + pos.getX();
-			final int y = def.getData().getBlockDataContainer().getY(index) + pos.getY();
-			final int z = def.getData().getBlockDataContainer().getZ(index) + pos.getZ();
+			final BlockPos min = data.getPos();
+			final BlockPos max = new BlockPos(min.getX() + blocks.getWidth() - 1, min.getY() + blocks.getHeight() - 1,
+					min.getZ() + blocks.getLength() - 1);
+
+			for (final OrbisTuple<BlockPos, BlockPos> tuple : RotationHelp.getAllInBoxRotated(min, max, data.getRotation()))
+			{
+				final BlockPos beforeRot = tuple.getFirst();
+				final BlockPos rotated = tuple.getSecond();
+
+				final BlockData block = blocks
+						.get(beforeRot.getX() - min.getX(), beforeRot.getY() - min.getY(), beforeRot.getZ() - min.getZ());
+
+				for (final PlacementCondition condition : def.getConditions())
+				{
+					if (!this.access.canAccess(pos) || !condition.canPlace(def.getData(), this.access, pos, block, rotated))
+					{
+						return false;
+					}
+				}
+			}
+		}
+		else
+		{
+			int index = 0;
+
+			for (final BlockData block : blocks)
+			{
+				final int x = def.getData().getBlockDataContainer().getX(index) + pos.getX();
+				final int y = def.getData().getBlockDataContainer().getY(index) + pos.getY();
+				final int z = def.getData().getBlockDataContainer().getZ(index) + pos.getZ();
+
+				for (final PlacementCondition condition : def.getConditions())
+				{
+					if (!this.access.canAccess(pos) || !condition.canPlace(def.getData(), this.access, pos, block, new BlockPos(x, y, z)))
+					{
+						return false;
+					}
+				}
+
+				index++;
+			}
 
 			for (final PlacementCondition condition : def.getConditions())
 			{
-				if (!this.access.canAccess(pos) || !condition.canPlace(def.getData(), this.access, pos, block, x, y, z))
+				if (!condition.canPlaceCheckAll(def.getData(), this.access, pos, blocks))
 				{
 					return false;
 				}
-			}
-
-			index++;
-		}
-
-		for (final PlacementCondition condition : def.getConditions())
-		{
-			if (!condition.canPlaceCheckAll(def.getData(), this.access, pos, rotated))
-			{
-				return false;
 			}
 		}
 
@@ -177,16 +222,15 @@ public class DataPrimer
 	{
 		if (!blockData.isVoid())
 		{
-			// TODO: Implement rotation processing
-			final IBlockState rotated = blockData.getBlockState();
+			final IBlockState rotated = blockData.getRotatedBlockState(creationData.getRotation());
 
 			this.access.setBlockState(pos, rotated);
 
-			if (blockData.getTileEntity() != null)
+			if (blockData.getTileEntity() != null && this.access.getWorld() != null)
 			{
 				blockData.getTileEntity().setWorld(this.access.getWorld());
 
-				this.access.setTileEntity(pos, blockData.getTileEntity());
+				this.access.setTileEntity(pos, TileEntity.create(this.access.getWorld(), blockData.getTileEntity().serializeNBT()));
 			}
 		}
 
@@ -219,7 +263,7 @@ public class DataPrimer
 				{
 					final BlockData toCreate = container.get(beforeRot.getX() - min.getX(), beforeRot.getY() - min.getY(), beforeRot.getZ() - min.getZ());
 
-					this.create(toCreate, rotated, data);
+					this.create(toCreate, rotated.toImmutable(), data);
 				}
 			}
 		}

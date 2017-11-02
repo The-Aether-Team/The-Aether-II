@@ -12,6 +12,8 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class BlockData implements NBT
 {
 	private Block block;
@@ -58,6 +60,7 @@ public class BlockData implements NBT
 		return this;
 	}
 
+	@Nullable
 	public Block getBlock()
 	{
 		return this.block;

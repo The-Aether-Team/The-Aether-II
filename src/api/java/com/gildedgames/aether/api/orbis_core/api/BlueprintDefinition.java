@@ -20,7 +20,7 @@ public class BlueprintDefinition
 
 	private List<PostPlacement> postPlacements = Lists.newArrayList();
 
-	private boolean randomRotation;
+	private boolean randomRotation = true;
 
 	public BlueprintDefinition(final BlueprintData data)
 	{
@@ -65,6 +65,13 @@ public class BlueprintDefinition
 	public List<PlacementCondition> getConditions()
 	{
 		return this.conditions;
+	}
+
+	public BlueprintDefinition setConditions(final PlacementCondition[] conditions)
+	{
+		this.conditions = Lists.newArrayList(conditions);
+
+		return this;
 	}
 
 	public BlueprintData getData()

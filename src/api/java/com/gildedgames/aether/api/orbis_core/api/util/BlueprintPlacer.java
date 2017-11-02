@@ -49,17 +49,21 @@ public class BlueprintPlacer
 		return BlueprintPlacer.place(chosen, def, data, rand);
 	}
 
+	public static void placeForced(final DataPrimer placeWith, final BlueprintDefinition def, final ICreationData data, final Random rand)
+	{
+		placeWith.create(def.getData().getBlockDataContainer(), data);
+
+		if (placeWith.getWorld() != null)
+		{
+			for (final PostPlacement post : def.getPostPlacements())
+			{
+				post.postGenerate(placeWith.getWorld(), rand, data);
+			}
+		}
+	}
+
 	public static boolean place(final DataPrimer placeWith, final BlueprintDefinition def, final ICreationData data, final Random rand)
 	{
-		final Rotation rotation = def.hasRandomRotation() ? ROTATIONS[rand.nextInt(ROTATIONS.length)] : ROTATIONS[0];
-
-		data.set(rotation);
-
-		if (data.isCentered())
-		{
-			data.set(BlueprintUtil.getCenteredPos(def, data));
-		}
-
 		final boolean result = placeWith.canGenerate(def, data);
 
 		if (result)
@@ -78,16 +82,11 @@ public class BlueprintPlacer
 		return result;
 	}
 
-	public static boolean canPlace(final DataPrimer placeWith, final BlueprintDefinition def, final ICreationData data, final Random rand)
+	public static boolean findPlace(final DataPrimer placeWith, final BlueprintDefinition def, final ICreationData data, final Random rand)
 	{
 		final Rotation rotation = def.hasRandomRotation() ? ROTATIONS[rand.nextInt(ROTATIONS.length)] : ROTATIONS[0];
 
 		data.set(rotation);
-
-		if (data.isCentered())
-		{
-			data.set(BlueprintUtil.getCenteredPos(def, data));
-		}
 
 		return placeWith.canGenerate(def, data);
 	}

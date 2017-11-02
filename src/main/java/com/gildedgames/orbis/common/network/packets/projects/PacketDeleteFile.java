@@ -91,7 +91,7 @@ public class PacketDeleteFile extends PacketMultipleParts
 
 				project.getCache().removeData(project.getCache().getDataId(message.location));
 
-				final File file = new File(project.getLocation(), message.location);
+				final File file = new File(project.getLocationAsFile(), message.location);
 
 				if (file.delete())
 				{
@@ -133,7 +133,7 @@ public class PacketDeleteFile extends PacketMultipleParts
 
 			project.getCache().removeData(project.getCache().getDataId(message.location));
 
-			final File file = new File(project.getLocation(), message.location);
+			final File file = new File(project.getLocationAsFile(), message.location);
 
 			if (file.delete())
 			{

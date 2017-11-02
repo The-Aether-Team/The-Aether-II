@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world.aether.island;
 
 import com.gildedgames.aether.api.orbis_core.api.BlueprintInstance;
-import com.gildedgames.aether.api.orbis_core.api.PostPlacement;
 import com.gildedgames.aether.api.orbis_core.processing.DataPrimer;
+import com.gildedgames.aether.api.util.BlockAccessChunkPrimer;
 import com.gildedgames.aether.api.util.BlockAccessExtendedWrapper;
 import com.gildedgames.aether.api.world.ISector;
 import com.gildedgames.aether.api.world.ISectorAccess;
@@ -80,6 +80,20 @@ public class ChunkGeneratorAether implements IChunkGenerator
 			}
 		}
 
+		final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
+
+		// Prime placed templates
+		for (final BlueprintInstance instance : island.getVirtualDataManager().getPlacedBlueprints())
+		{
+			for (final ChunkPos chunkPos : instance.getChunksOccupied())
+			{
+				if (chunkPos.chunkXPos == chunkX && chunkPos.chunkZPos == chunkZ)
+				{
+					dataPrimer.createChunk(chunkPos, this.world, instance.getDef().getData(), instance.getCreationData());
+				}
+			}
+		}
+
 		final Chunk chunk = new Chunk(this.world, primer, chunkX, chunkZ);
 
 		chunk.generateSkylightMap();
@@ -144,8 +158,9 @@ public class ChunkGeneratorAether implements IChunkGenerator
 
 		final DataPrimer primer = new DataPrimer(new BlockAccessExtendedWrapper(this.world));
 
+		// TODO: Re-enable when we fix island sectors and their broken as fuck syncing.
 		// Populate placed blueprints
-		for (final BlueprintInstance instance : island.getVirtualDataManager().getPlacedBlueprints())
+		/*for (final BlueprintInstance instance : island.getVirtualDataManager().getPlacedBlueprints())
 		{
 			for (final ChunkPos chunkPos : instance.getChunksOccupied())
 			{
@@ -164,7 +179,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 					}
 				}
 			}
-		}
+		}*/
 
 		biome.decorate(this.world, this.rand, pos);
 	}

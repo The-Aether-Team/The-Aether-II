@@ -22,8 +22,6 @@ public class CreationData implements ICreationData
 
 	private Rotation rotation;
 
-	private boolean isCentered;
-
 	public CreationData(final World world)
 	{
 		this.world = world;
@@ -63,14 +61,6 @@ public class CreationData implements ICreationData
 	public ICreationData set(final Rotation rotation)
 	{
 		this.rotation = rotation;
-
-		return this;
-	}
-
-	@Override
-	public ICreationData set(final boolean isCentered)
-	{
-		this.isCentered = isCentered;
 
 		return this;
 	}
@@ -122,22 +112,15 @@ public class CreationData implements ICreationData
 	}
 
 	@Override
-	public boolean isCentered()
-	{
-		return this.isCentered;
-	}
-
-	@Override
 	public ICreationData clone()
 	{
-		return new CreationData(this.world).set(this.pos).set(this.rand).set(this.rotation).set(this.isCentered).set(this.creator);
+		return new CreationData(this.world).set(new BlockPos(this.pos)).set(this.rand).set(this.rotation).set(this.creator);
 	}
 
 	@Override
 	public void write(final NBTTagCompound tag)
 	{
 		tag.setTag("pos", NBTHelper.writeBlockPos(this.pos));
-		tag.setBoolean("isCentered", this.isCentered);
 		tag.setString("rotation", this.rotation.name());
 	}
 
@@ -145,7 +128,6 @@ public class CreationData implements ICreationData
 	public void read(final NBTTagCompound tag)
 	{
 		this.pos = NBTHelper.readBlockPos(tag.getCompoundTag("pos"));
-		this.isCentered = tag.getBoolean("isCentered");
 		this.rotation = Rotation.valueOf(tag.getString("rotation"));
 	}
 }

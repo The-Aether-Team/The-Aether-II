@@ -10,6 +10,8 @@ public class BlueprintDefinitionPool
 
 	private final List<BlueprintDefinition> definitions;
 
+	private boolean hasRandomRotation = true;
+
 	public BlueprintDefinitionPool(final BlueprintDefinition... definitions)
 	{
 		this.definitions = Lists.newArrayList(definitions);
@@ -18,6 +20,18 @@ public class BlueprintDefinitionPool
 	public BlueprintDefinition getRandomDefinition(final Random rand)
 	{
 		return this.definitions.get(rand.nextInt(this.definitions.size()));
+	}
+
+	public boolean hasRandomRotation()
+	{
+		return this.hasRandomRotation;
+	}
+
+	public BlueprintDefinitionPool setRandomRotation(final boolean flag)
+	{
+		this.hasRandomRotation = flag;
+
+		return this;
 	}
 
 }

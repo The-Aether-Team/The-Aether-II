@@ -18,12 +18,15 @@ public interface ICreationData extends NBT
 
 	ICreationData set(Rotation rotation);
 
-	ICreationData set(boolean isCentered);
-
 	ICreationData set(Random random);
 
 	ICreationData set(EntityPlayer creator);
 
+	/**
+	 * Should return the centered position if
+	 * this creation data returns true on isCentered()
+	 * @return The position we're creating at.
+	 */
 	BlockPos getPos();
 
 	World getWorld();
@@ -34,8 +37,6 @@ public interface ICreationData extends NBT
 
 	@Nullable
 	EntityPlayer getCreator();
-
-	boolean isCentered();
 
 	ICreationData clone();
 

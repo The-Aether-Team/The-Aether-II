@@ -244,7 +244,7 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 
 	private void addShapeRenderer(final World world, final IShape shape)
 	{
-		final RenderShape renderRegion = new RenderShape(shape);//TODO: It used to copy the region, dunno why
+		final RenderShape renderRegion = new RenderShape(shape);
 
 		renderRegion.useCustomColors = true;
 

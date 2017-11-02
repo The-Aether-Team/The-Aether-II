@@ -9,7 +9,7 @@ import net.minecraft.util.math.BlockPos;
 public interface PlacementCondition
 {
 
-	boolean canPlace(BlueprintData data, IBlockAccessExtended world, BlockPos placedAt, BlockData block, int x, int y, int z);
+	boolean canPlace(BlueprintData data, IBlockAccessExtended world, BlockPos placedAt, BlockData block, BlockPos pos);
 
 	/** Should return true by default **/
 	boolean canPlaceCheckAll(BlueprintData data, IBlockAccessExtended world, BlockPos placedAt, BlockDataContainer blocks);

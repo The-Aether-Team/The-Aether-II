@@ -115,22 +115,22 @@ public class RotationHelp
 		};
 	}
 
-	private static int getRounding(final int dimension)
+	public static int getRounding(final int dimension)
 	{
 		return dimension % 2 == 0 ? 1 : 0;
 	}
 
-	private static void setX(final BlockPos.MutableBlockPos pos, final int x)
+	public static void setX(final BlockPos.MutableBlockPos pos, final int x)
 	{
 		pos.setPos(x, pos.getY(), pos.getZ());
 	}
 
-	private static void setZ(final BlockPos.MutableBlockPos pos, final int z)
+	public static void setZ(final BlockPos.MutableBlockPos pos, final int z)
 	{
 		pos.setPos(pos.getX(), pos.getY(), z);
 	}
 
-	private static void setRotated(
+	public static void setRotated(
 			final BlockPos.MutableBlockPos rotated, final BlockPos toRotate, final BlockPos center, final int roundingX, final int roundingZ,
 			final int rotAmount,
 			final boolean clockwise)

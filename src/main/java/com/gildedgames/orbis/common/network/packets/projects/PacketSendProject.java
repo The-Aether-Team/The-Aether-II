@@ -104,7 +104,7 @@ public class PacketSendProject extends PacketMultipleParts
 					 */
 					for (final IData data : message.cache.getAllData())
 					{
-						final File file = new File(project.getLocation(), message.cache.getDataLocation(data.getMetadata().getIdentifier().getDataId()));
+						final File file = new File(project.getLocationAsFile(), message.cache.getDataLocation(data.getMetadata().getIdentifier().getDataId()));
 
 						try (FileOutputStream out = new FileOutputStream(file))
 						{
@@ -127,7 +127,7 @@ public class PacketSendProject extends PacketMultipleParts
 					project.getMetadata().setLastChanged(message.lastChanged);
 				}
 
-				AetherCore.LOGGER.debug("Project downloaded! " + project.getLocation().getName());
+				AetherCore.LOGGER.debug("Project downloaded! " + project.getLocationAsFile().getName());
 			}
 			catch (final OrbisMissingProjectException e)
 			{

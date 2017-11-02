@@ -1,7 +1,5 @@
 package com.gildedgames.orbis.client.gui;
 
-import com.gildedgames.aether.api.io.NBTFunnel;
-import com.gildedgames.aether.api.orbis_core.OrbisCore;
 import com.gildedgames.aether.api.orbis_core.api.exceptions.OrbisMissingProjectException;
 import com.gildedgames.aether.api.orbis_core.data.management.IData;
 import com.gildedgames.aether.api.orbis_core.data.management.IProject;
@@ -31,12 +29,9 @@ import com.gildedgames.orbis.common.network.packets.projects.PacketSaveWorldObje
 import com.gildedgames.orbis.common.util.InputHelper;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import net.minecraft.client.Minecraft;
-import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextComponentString;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class GuiViewProjects extends GuiFrame implements IDirectoryNavigatorListener
@@ -153,7 +148,7 @@ public class GuiViewProjects extends GuiFrame implements IDirectoryNavigatorList
 			final File file = new File(this.directoryViewer.getNavigator().currentDirectory(),
 					this.nameInput.getInner().getText() + "." + this.blueprint.getData().getFileExtension());
 
-			final String location = file.getCanonicalPath().replace(this.project.getLocation().getCanonicalPath() + File.separator, "");
+			final String location = file.getCanonicalPath().replace(this.project.getLocationAsFile().getCanonicalPath() + File.separator, "");
 
 			if (Minecraft.getMinecraft().isIntegratedServerRunning())
 			{
@@ -181,21 +176,8 @@ public class GuiViewProjects extends GuiFrame implements IDirectoryNavigatorList
 
 						this.project.getCache().setData(data, location);
 
-						try (FileOutputStream out = new FileOutputStream(file))
-						{
-							final NBTTagCompound tag = new NBTTagCompound();
-							final NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
-
-							funnel.set("data", data);
-
-							CompressedStreamTools.writeCompressed(tag, out);
-
-							this.refreshNavigator();
-						}
-						catch (final IOException e)
-						{
-							AetherCore.LOGGER.error("Failed to save project data to disk", e);
-						}
+						this.project.writeData(data, file);
+						this.refreshNavigator();
 					}
 				}
 				catch (final OrbisMissingProjectException e)

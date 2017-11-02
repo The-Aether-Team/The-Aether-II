@@ -94,7 +94,6 @@ public class RenderUtil
 
 			GlStateManager.disableBlend();
 			GlStateManager.popMatrix();
-
 		}
 	}
 

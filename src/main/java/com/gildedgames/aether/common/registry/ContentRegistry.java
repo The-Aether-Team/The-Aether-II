@@ -86,6 +86,7 @@ public class ContentRegistry implements IContentRegistry
 
 		PerfHelper.measure("Initialize capabilities", CapabilityManagerAether::init);
 		PerfHelper.measure("Initialize templates", TemplatesAether::init);
+		PerfHelper.measure("Initialize blueprints", BlueprintsAether::init);
 		PerfHelper.measure("Initialize generations", GenerationAether::init);
 		PerfHelper.measure("Initialize recipes", RecipesAether::init);
 		PerfHelper.measure("Initialize recipe indexes", this::rebuildIndexes);

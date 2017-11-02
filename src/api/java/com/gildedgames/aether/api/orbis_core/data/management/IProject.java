@@ -2,8 +2,9 @@ package com.gildedgames.aether.api.orbis_core.data.management;
 
 import com.gildedgames.aether.api.util.NBT;
 
+import javax.annotation.Nullable;
 import java.io.File;
-import java.util.List;
+import java.net.URI;
 
 /**
  * A project will be used to store data files such as Blueprints, Groups,
@@ -16,22 +17,35 @@ public interface IProject extends NBT
 {
 
 	/**
-	 * @return The location of this project.
+	 * Orbis client will always favour using the file location
+	 * instead of the URI. getJarLocation() is only used for loading
+	 * projects from a mod jar.
+	 *
+	 * @return If the URI location is a file, returns a file object.
+	 * If not, returns null.
 	 */
-	File getLocation();
+	File getLocationAsFile();
 
 	/**
 	 * Sets the directory/location of this project.
-	 * @param file The location of this project.
+	 * @param location The location of this project.
 	 */
-	void setLocation(File file);
+	void setLocationAsFile(File location);
 
 	/**
-	 * These will be used to determine which files to ignore or load when
-	 * loading in data from within the project.
-	 * @param acceptedFileExtensions The file extensions accepted by this project.
+	 * @return The location of this project.
 	 */
-	void setAcceptedFileExtensions(List<String> acceptedFileExtensions);
+	@Nullable
+	URI getJarLocation();
+
+	/**
+	 * Sets the URI location of this project.
+	 *
+	 * Should use this for streaming from a mod jar file.
+	 * Otherwise, use setLocationAsFile()
+	 * @param location The location of this project.
+	 */
+	void setJarLocation(URI location);
 
 	/**
 	 * Adds a listener to this project.
@@ -72,6 +86,18 @@ public interface IProject extends NBT
 	 * on the client.
 	 */
 	void setCache(IProjectCache cache);
+
+	/**
+	 * Writes the provided data to disk.
+	 *
+	 * This DOES NOT set the data to the project's
+	 * cache. It simply provides a universal method
+	 * for writing to the project's directory.
+	 *
+	 * @param data The data we're writing.
+	 * @param file The file the data will be written to.
+	 */
+	void writeData(IData data, File file);
 
 	/**
 	 * Loads the data inside of the project and also fetches its

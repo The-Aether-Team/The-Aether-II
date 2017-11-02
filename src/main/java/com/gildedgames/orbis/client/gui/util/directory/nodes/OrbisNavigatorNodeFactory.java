@@ -44,7 +44,13 @@ public class OrbisNavigatorNodeFactory implements IDirectoryNodeFactory
 				{
 					final IProject project = Orbis.getProjectManager().findProject(file.getName());
 
-					node = new ProjectNode(file, project);
+					if (project != null)
+					{
+						// TODO: Refresh cache in case contents of project changed outside of game.
+						//project.loadAndCacheData();
+
+						node = new ProjectNode(file, project);
+					}
 				}
 				catch (final OrbisMissingProjectException e)
 				{

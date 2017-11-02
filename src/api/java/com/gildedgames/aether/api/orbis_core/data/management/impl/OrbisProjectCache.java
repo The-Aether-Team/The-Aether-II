@@ -63,9 +63,9 @@ public class OrbisProjectCache implements IProjectCache
 	}
 
 	@Override
-	public IData getData(final int dataId)
+	public <T extends IData> T getData(final int dataId)
 	{
-		return this.idToData.get(dataId);
+		return (T) this.idToData.get(dataId);
 	}
 
 	@Override
@@ -88,12 +88,6 @@ public class OrbisProjectCache implements IProjectCache
 		{
 			data.getMetadata().setIdentifier(this.createNextIdentifier());
 		}
-
-		/*TODO: Do I still need this?
-		if (this.idToLocation.inverse().containsKey(location))
-		{
-			return;
-		}*/
 
 		final int id = data.getMetadata().getIdentifier().getDataId();
 

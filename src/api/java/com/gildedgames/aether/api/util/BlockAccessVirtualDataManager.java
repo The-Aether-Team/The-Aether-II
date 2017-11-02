@@ -2,27 +2,22 @@ package com.gildedgames.aether.api.util;
 
 import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.ChunkPrimer;
 
 import javax.annotation.Nullable;
 
-public class BlockAccessChunkPrimer implements IBlockAccessExtended
+public class BlockAccessVirtualDataManager implements IBlockAccessExtended
 {
 	private final World world;
 
-	private final ChunkPrimer primer;
-
-	public BlockAccessChunkPrimer(final World world, final ChunkPrimer primer)
+	public BlockAccessVirtualDataManager(final World world)
 	{
 		this.world = world;
-		this.primer = primer;
 	}
 
 	@Nullable
@@ -35,13 +30,13 @@ public class BlockAccessChunkPrimer implements IBlockAccessExtended
 	@Override
 	public boolean canAccess(final BlockPos pos)
 	{
-		return true;
+		return this.world.isBlockLoaded(pos);
 	}
 
 	@Override
 	public boolean canAccess(final int x, final int z)
 	{
-		return true;
+		return this.canAccess(new BlockPos(x, 0, z));
 	}
 
 	@Override
@@ -59,29 +54,25 @@ public class BlockAccessChunkPrimer implements IBlockAccessExtended
 	@Override
 	public void setBlockToAir(final BlockPos pos)
 	{
-		this.primer.setBlockState(Math.abs(pos.getX() % 16), pos.getY(), Math.abs(pos.getZ() % 16), Blocks.AIR.getDefaultState());
+		this.world.setBlockToAir(pos);
 	}
 
 	@Override
 	public boolean setBlockState(final BlockPos pos, final IBlockState state)
 	{
-		this.primer.setBlockState(Math.abs(pos.getX() % 16), pos.getY(), Math.abs(pos.getZ() % 16), state);
-
-		return true;
+		return this.world.setBlockState(pos, state);
 	}
 
 	@Override
 	public boolean setBlockState(final BlockPos pos, final IBlockState state, final int flags)
 	{
-		this.primer.setBlockState(Math.abs(pos.getX() % 16), pos.getY(), Math.abs(pos.getZ() % 16), state);
-
-		return true;
+		return this.world.setBlockState(pos, state, flags);
 	}
 
 	@Override
 	public void setTileEntity(final BlockPos pos, final TileEntity tileEntity)
 	{
-
+		this.world.setTileEntity(pos, tileEntity);
 	}
 
 	@Nullable
@@ -100,13 +91,13 @@ public class BlockAccessChunkPrimer implements IBlockAccessExtended
 	@Override
 	public IBlockState getBlockState(final BlockPos pos)
 	{
-		return this.primer.getBlockState(Math.abs(pos.getX() % 16), pos.getY(), Math.abs(pos.getZ() % 16));
+		return this.world.getBlockState(pos);
 	}
 
 	@Override
 	public boolean isAirBlock(final BlockPos pos)
 	{
-		return this.getBlockState(pos) != Blocks.AIR.getDefaultState();
+		return this.world.isAirBlock(pos);
 	}
 
 	@Override

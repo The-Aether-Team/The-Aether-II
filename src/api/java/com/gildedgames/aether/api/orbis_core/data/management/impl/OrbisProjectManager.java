@@ -29,8 +29,6 @@ public class OrbisProjectManager implements IProjectManager
 
 	private final Map<String, IProject> nameToProject = Maps.newHashMap();
 
-	private final List<String> acceptedFileExtensions = Lists.newArrayList();
-
 	public OrbisProjectManager(final File baseDirectory)
 	{
 		if (!baseDirectory.exists() && !baseDirectory.mkdirs())
@@ -44,8 +42,6 @@ public class OrbisProjectManager implements IProjectManager
 		}
 
 		this.baseDirectory = baseDirectory;
-
-		this.acceptedFileExtensions.add("blueprint");
 	}
 
 	public static boolean isProjectDirectory(final File file)
@@ -136,8 +132,7 @@ public class OrbisProjectManager implements IProjectManager
 
 				if (!this.idToProject.keySet().contains(project.getProjectIdentifier()))
 				{
-					project.setLocation(file);
-					project.setAcceptedFileExtensions(this.acceptedFileExtensions);
+					project.setLocationAsFile(file);
 
 					project.loadAndCacheData();
 
@@ -177,8 +172,7 @@ public class OrbisProjectManager implements IProjectManager
 
 				final IProject project = funnel.get("project");
 
-				project.setLocation(file);
-				project.setAcceptedFileExtensions(this.acceptedFileExtensions);
+				project.setLocationAsFile(file);
 
 				project.loadAndCacheData();
 
@@ -231,11 +225,11 @@ public class OrbisProjectManager implements IProjectManager
 	{
 		try
 		{
-			final boolean isInProject = file.getCanonicalPath().startsWith(project.getLocation().getCanonicalPath() + File.separator);
+			final boolean isInProject = file.getCanonicalPath().startsWith(project.getLocationAsFile().getCanonicalPath() + File.separator);
 
 			if (isInProject)
 			{
-				final String dataLocation = file.getCanonicalPath().replace(project.getLocation().getCanonicalPath() + File.separator, "");
+				final String dataLocation = file.getCanonicalPath().replace(project.getLocationAsFile().getCanonicalPath() + File.separator, "");
 
 				final int dataId = project.getCache().getDataId(dataLocation);
 
@@ -298,7 +292,7 @@ public class OrbisProjectManager implements IProjectManager
 	public <T extends IProject> T createAndSaveProject(final String name, final IProjectIdentifier identifier)
 	{
 		final File file = new File(this.baseDirectory, name);
-		final IProject project = new OrbisProject(file, identifier, this.acceptedFileExtensions);
+		final IProject project = new OrbisProject(file, identifier);
 
 		this.saveProjectToDisk(project);
 		this.cacheProject(name, project);
@@ -313,7 +307,7 @@ public class OrbisProjectManager implements IProjectManager
 
 		final IProject existing = this.idToProject.get(project.getProjectIdentifier());
 
-		if (existing != null && existing.getLocation().exists())
+		if (existing != null && existing.getLocationAsFile().exists())
 		{
 			/**
 			 * Check if project already exists and it has the same
@@ -324,17 +318,17 @@ public class OrbisProjectManager implements IProjectManager
 			 */
 			if (existing.getMetadata().getLastChanged().equals(project.getMetadata().getLastChanged()))
 			{
-				if (!existing.getLocation().equals(location))
+				if (!existing.getLocationAsFile().equals(location))
 				{
 					if (!location.exists() || location.delete())
 					{
-						if (existing.getLocation().renameTo(location))
+						if (existing.getLocationAsFile().renameTo(location))
 						{
-							this.nameToProject.remove(existing.getLocation().getName());
+							this.nameToProject.remove(existing.getLocationAsFile().getName());
 
-							if (existing.getLocation().delete())
+							if (existing.getLocationAsFile().delete())
 							{
-								existing.setLocation(location);
+								existing.setLocationAsFile(location);
 
 								this.nameToProject.put(name, existing);
 							}
@@ -358,7 +352,7 @@ public class OrbisProjectManager implements IProjectManager
 			}
 		}
 
-		project.setLocation(location);
+		project.setLocationAsFile(location);
 
 		this.saveProjectToDisk(project);
 		this.cacheProject(name, project);
@@ -380,7 +374,7 @@ public class OrbisProjectManager implements IProjectManager
 
 	private void saveProjectToDisk(final IProject project)
 	{
-		final File projectFile = new File(project.getLocation(), ".project");
+		final File projectFile = new File(project.getLocationAsFile(), ".project");
 
 		try
 		{

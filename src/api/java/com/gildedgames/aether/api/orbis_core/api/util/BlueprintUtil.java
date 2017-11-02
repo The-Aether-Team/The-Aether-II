@@ -21,12 +21,7 @@ public class BlueprintUtil
 	{
 		final IRegion region = RotationHelp.rotate(new Region(def.getData()), data.getRotation());
 
-		BlockPos pos = data.getPos();
-
-		if (data.isCentered())
-		{
-			pos = BlueprintUtil.getCenteredPos(def, data);
-		}
+		final BlockPos pos = data.getPos();
 
 		return (IRegion) region.translate(pos);
 	}
@@ -62,12 +57,12 @@ public class BlueprintUtil
 		return pos;
 	}
 
-	public static ChunkPos[] getChunksInsideTemplate(final BlueprintDefinition template, final ICreationData loc)
+	public static ChunkPos[] getChunksInsideTemplate(final BlueprintDefinition def, final ICreationData loc)
 	{
-		final IRegion bb = BlueprintUtil.getRegionFromDefinition(template, loc);
+		final IRegion bb = BlueprintUtil.getRegionFromDefinition(def, loc);
 
 		final int startChunkX = bb.getMin().getX() >> 4;
-		final int startChunkY = bb.getMax().getZ() >> 4;
+		final int startChunkY = bb.getMin().getZ() >> 4;
 
 		final int endChunkX = bb.getMax().getX() >> 4;
 		final int endChunkY = bb.getMax().getZ() >> 4;
