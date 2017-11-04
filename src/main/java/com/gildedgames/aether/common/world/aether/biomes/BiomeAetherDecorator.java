@@ -166,7 +166,7 @@ public class BiomeAetherDecorator
 		this.generate(GenerationAether.ABAND_HUMAN_HOUSE_1A, 20, random.nextInt(3), -1, pos, island, manager, primer, world, random);
 		this.generate(GenerationAether.ABAND_HUMAN_HOUSE_1B, 20, random.nextInt(2), -5, pos, island, manager, primer, world, random);
 		this.generate(GenerationAether.SKYROOT_WATCHTOWER_1A, 20, random.nextInt(3), 1, pos, island, manager, primer, world, random);
-		this.generate(GenerationAether.WELL, 20, random.nextInt(2), -1, pos, island, manager, primer, world, random);
+		this.generate(GenerationAether.WELL, 60, random.nextInt(3), -9, pos, island, manager, primer, world, random);
 
 		island.getVirtualDataManager().setPlacedBlueprints(manager.getPlacedBlueprints());
 	}
