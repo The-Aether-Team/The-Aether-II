@@ -131,7 +131,7 @@ public class ClientEventHandler
 
 		final EntityPlayerSP player = FMLClientHandler.instance().getClientPlayerEntity();
 
-		if (world != null)
+		if (player != null && player.world != null)
 		{
 			final WorldObjectManager manager = WorldObjectManager.get(player.world);
 
