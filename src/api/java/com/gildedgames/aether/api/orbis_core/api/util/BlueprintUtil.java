@@ -1,71 +1,46 @@
 package com.gildedgames.aether.api.orbis_core.api.util;
 
 import com.gildedgames.aether.api.orbis.IRegion;
-import com.gildedgames.aether.api.orbis_core.api.BlueprintDefinition;
 import com.gildedgames.aether.api.orbis_core.api.ICreationData;
+import com.gildedgames.aether.api.orbis_core.data.BlueprintData;
 import com.gildedgames.aether.api.orbis_core.data.region.Region;
 import com.gildedgames.aether.api.orbis_core.util.RotationHelp;
 import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-
-import java.util.Random;
 
 public class BlueprintUtil
 {
 
-	public static IRegion getRegionFromDefinition(final BlueprintDefinition def, final ICreationData data)
+	public static IRegion getRegionFromDefinition(final BlueprintData data, final ICreationData creationData)
 	{
-		final IRegion region = RotationHelp.rotate(new Region(def.getData()), data.getRotation());
+		final IRegion region =
+				creationData.getRotation() == Rotation.NONE ? new Region(data) : RotationHelp.rotate(new Region(data), creationData.getRotation());
 
-		final BlockPos pos = data.getPos();
+		final BlockPos pos = creationData.getPos();
 
 		return (IRegion) region.translate(pos);
 	}
 
-	public static BlockPos getCenteredPos(final BlueprintDefinition def, final ICreationData data)
+	public static ChunkPos[] getChunksInsideTemplate(final BlueprintData data, final ICreationData loc)
 	{
-		BlockPos pos = data.getPos();
+		final IRegion bb = BlueprintUtil.getRegionFromDefinition(data, loc);
 
-		final IRegion region = RotationHelp.rotate(new Region(def.getData()), data.getRotation());
+		final int minX = Math.min(bb.getMin().getX(), bb.getMax().getX());
+		final int minZ = Math.min(bb.getMin().getZ(), bb.getMax().getZ());
 
-		switch (data.getRotation())
-		{
-			case NONE:
-			default:
-				pos = pos.add(-(region.getWidth() / 2.0) + 1, 0, -(region.getLength() / 2.0) + 1);
-				break;
-			case CLOCKWISE_90:
-				pos = pos.add(region.getWidth() / 2.0, 0, -(region.getLength() / 2.0) + 1);
-				break;
-			case COUNTERCLOCKWISE_90:
-				pos = pos.add(-(region.getWidth() / 2.0) + 1, 0, (region.getLength() / 2.0));
-				break;
-			case CLOCKWISE_180:
-				pos = pos.add((region.getWidth() / 2.0), 0, (region.getLength() / 2.0));
-				break;
-		}
+		final int maxX = Math.max(bb.getMin().getX(), bb.getMax().getX());
+		final int maxZ = Math.max(bb.getMin().getZ(), bb.getMax().getZ());
 
-		if (def.getOffset() != null)
-		{
-			pos = pos.add(def.getOffset().process(data.getRotation()));
-		}
+		final int startChunkX = minX >> 4;
+		final int startChunkY = minZ >> 4;
 
-		return pos;
-	}
-
-	public static ChunkPos[] getChunksInsideTemplate(final BlueprintDefinition def, final ICreationData loc)
-	{
-		final IRegion bb = BlueprintUtil.getRegionFromDefinition(def, loc);
-
-		final int startChunkX = bb.getMin().getX() >> 4;
-		final int startChunkY = bb.getMin().getZ() >> 4;
-
-		final int endChunkX = bb.getMax().getX() >> 4;
-		final int endChunkY = bb.getMax().getZ() >> 4;
+		final int endChunkX = maxX >> 4;
+		final int endChunkY = maxZ >> 4;
 
 		final int width = endChunkX - startChunkX + 1;
 		final int length = endChunkY - startChunkY + 1;
@@ -96,11 +71,6 @@ public class BlueprintUtil
 
 		return state.getBlock().isAir(state, world, pos) || state.getBlock().isLeaves(state, world, pos)
 				|| BlueprintUtil.canGrowInto(state.getBlock());
-	}
-
-	public static <T> T pickRandom(final Random rand, final T... objects)
-	{
-		return objects[rand.nextInt(objects.length)];
 	}
 
 }

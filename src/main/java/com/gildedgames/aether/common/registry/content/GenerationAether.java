@@ -332,8 +332,10 @@ public class GenerationAether
 						PlacementConditions.replaceable(true, Material.ROCK, Material.GROUND, Material.GRASS, Material.AIR),
 						PlacementConditions.ignoreBlock(5, BlocksAether.quicksoil.getDefaultState()));
 
-		OUTPOST_HIGHLANDS_A = new BlueprintDefinition(BlueprintsAether.OUTPOST_HIGHLANDS_A).setRegistry(registry).setConditions(structureConditions);
-		OUTPOST_HIGHLANDS_B = new BlueprintDefinition(BlueprintsAether.OUTPOST_HIGHLANDS_B).setRegistry(registry).setConditions(structureConditions);
+		OUTPOST_HIGHLANDS_A = new BlueprintDefinition(BlueprintsAether.OUTPOST_HIGHLANDS_A).setRegistry(registry).setConditions(structureConditions)
+				.setRandomRotation(false);
+		OUTPOST_HIGHLANDS_B = new BlueprintDefinition(BlueprintsAether.OUTPOST_HIGHLANDS_B).setRegistry(registry).setConditions(structureConditions)
+				.setRandomRotation(false);
 
 		SKYROOT_WATCHTOWER_1A = new BlueprintDefinition(BlueprintsAether.SKYROOT_WATCHTOWER_1A).setRegistry(registry).setConditions(structureConditions);
 		SKYROOT_WATCHTOWER_1B = new BlueprintDefinition(BlueprintsAether.SKYROOT_WATCHTOWER_1B).setRegistry(registry).setConditions(structureConditions);

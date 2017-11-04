@@ -96,7 +96,7 @@ public class BlockDataContainer implements NBT, IDimensions, Iterable<BlockData>
 			return index;
 		}
 
-		throw new ArrayIndexOutOfBoundsException("Tried to access position that's not in this BlockDataContainer");
+		throw new ArrayIndexOutOfBoundsException("Tried to access position that's not in this BlockDataContainer: " + x + ", " + y + ", " + z);
 	}
 
 	public int getZ(final int index)
@@ -132,15 +132,21 @@ public class BlockDataContainer implements NBT, IDimensions, Iterable<BlockData>
 		return this.get(pos.getX(), pos.getY(), pos.getZ());
 	}
 
-	public void set(final BlockData block, final BlockPos pos)
+	public void set(final BlockData block, final int x, final int y, final int z)
 	{
 		if (block == null)
 		{
 			throw new NullPointerException("Tried to set a null block");
 		}
-		final int index = this.getIndex(pos.getX(), pos.getY(), pos.getZ());
+
+		final int index = this.getIndex(x, y, z);
 
 		this.data[index] = block;
+	}
+
+	public void set(final BlockData block, final BlockPos pos)
+	{
+		this.set(block, pos.getX(), pos.getY(), pos.getZ());
 	}
 
 	@Override

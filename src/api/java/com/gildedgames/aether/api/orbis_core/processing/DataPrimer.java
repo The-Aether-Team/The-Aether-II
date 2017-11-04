@@ -146,7 +146,7 @@ public class DataPrimer
 	{
 		final BlockPos pos = data.getPos();
 
-		final IRegion bb = BlueprintUtil.getRegionFromDefinition(def, data);
+		final IRegion bb = BlueprintUtil.getRegionFromDefinition(def.getData(), data);
 
 		if ((checkAreaLoaded && !world.isAreaLoaded(bb.getMin(), bb.getMax(), true)) || bb.getMax().getY() > world.getActualHeight())
 		{
@@ -246,7 +246,11 @@ public class DataPrimer
 
 	public void create(final BlockDataContainer container, final ICreationData data, final IRegion insideRegion)
 	{
-		final BlockPos min = data.getPos();
+		final boolean xNeg = data.getPos().getX() < 0;
+		final boolean yNeg = data.getPos().getY() < 0;
+		final boolean zNeg = data.getPos().getZ() < 0;
+
+		final BlockPos min = data.getPos();//new BlockPos(Math.abs(data.getPos().getX()), Math.abs(data.getPos().getY()), Math.abs(data.getPos().getZ()));
 		final BlockPos max = new BlockPos(min.getX() + container.getWidth() - 1, min.getY() + container.getHeight() - 1,
 				min.getZ() + container.getLength() - 1);
 
@@ -261,25 +265,29 @@ public class DataPrimer
 
 				if (insideRegion == null || insideRegion.contains(rotated))
 				{
-					final BlockData toCreate = container.get(beforeRot.getX() - min.getX(), beforeRot.getY() - min.getY(), beforeRot.getZ() - min.getZ());
+					final BlockData toCreate;
 
-					this.create(toCreate, rotated.toImmutable(), data);
+					toCreate = container.get(beforeRot.getX() - min.getX(), beforeRot.getY() - min.getY(), beforeRot.getZ() - min.getZ());
+
+					//this.create(toCreate, new BlockPos(), data);
 				}
 			}
 		}
 		else
 		{
-			final Region region = new Region(min, max);
+			final Region region = new Region(new BlockPos(0, 0, 0),
+					new BlockPos(container.getWidth() - 1, container.getHeight() - 1, container.getLength() - 1));
 
 			for (final BlockPos.MutableBlockPos iterPos : region.getMutableBlockPosInRegion())
 			{
-				if (insideRegion == null || insideRegion.contains(iterPos))
+				if (insideRegion == null || insideRegion.contains(iterPos.getX() + min.getX(), iterPos.getY() + min.getY(),
+						iterPos.getZ() + min.getZ()))
 				{
-					final BlockData block = container.get(iterPos.getX() - min.getX(), iterPos.getY() - min.getY(), iterPos.getZ() - min.getZ());
+					final BlockData block = container.get(iterPos.getX(), iterPos.getY(), iterPos.getZ());
 
 					if (block != null)
 					{
-						this.create(block, iterPos.toImmutable(), data);
+						this.create(block, iterPos.toImmutable().add(min.getX(), min.getY(), min.getZ()), data);
 					}
 				}
 			}

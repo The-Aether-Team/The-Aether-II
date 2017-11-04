@@ -4,8 +4,12 @@ import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis_core.OrbisCore;
 import com.gildedgames.aether.api.orbis_core.api.core.OrbisAPI;
 import com.gildedgames.aether.api.orbis_core.api.util.BlueprintUtil;
+import com.gildedgames.aether.api.orbis_core.block.BlockData;
+import com.gildedgames.aether.api.orbis_core.block.BlockDataContainer;
+import com.gildedgames.aether.api.orbis_core.data.region.Region;
 import com.gildedgames.aether.api.util.NBT;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -17,7 +21,7 @@ public class BlueprintInstance implements NBT
 {
 	private final World world;
 
-	private ChunkPos[] chunksOccupied;
+	private BlockDataChunk[] chunks;
 
 	private BlueprintDefinition def;
 
@@ -38,7 +42,8 @@ public class BlueprintInstance implements NBT
 		this.definitionID = def.getRegistry().getID(this.def);
 
 		this.data = data;
-		this.chunksOccupied = BlueprintUtil.getChunksInsideTemplate(this.getDef(), this.getCreationData());
+
+		this.bakeChunks();
 	}
 
 	public BlueprintInstance(final World world, final NBTTagCompound tag)
@@ -47,7 +52,70 @@ public class BlueprintInstance implements NBT
 
 		this.read(tag);
 
-		this.chunksOccupied = BlueprintUtil.getChunksInsideTemplate(this.getDef(), this.getCreationData());
+		this.bakeChunks();
+	}
+
+	private void bakeChunks()
+	{
+		final BlockDataContainer blocks = this.def.getData().getBlockDataContainer();
+
+		final ChunkPos[] chunksOccupied = BlueprintUtil.getChunksInsideTemplate(this.getDef().getData(), this.getCreationData());
+
+		this.chunks = new BlockDataChunk[chunksOccupied.length];
+
+		final BlockPos min = this.data.getPos();
+
+		final Region region = new Region(new BlockPos(0, 0, 0), new BlockPos(blocks.getWidth() - 1, blocks.getHeight() - 1, blocks.getLength() - 1));
+
+		final int startChunkX = min.getX() >> 4;
+		final int startChunkZ = min.getZ() >> 4;
+
+		int xDif = min.getX() % 16;
+		int zDif = min.getZ() % 16;
+
+		if (xDif < 0)
+		{
+			xDif = 16 - Math.abs(xDif);
+		}
+
+		if (zDif < 0)
+		{
+			zDif = 16 - Math.abs(zDif);
+		}
+
+		for (final BlockPos.MutableBlockPos iterPos : region.getMutableBlockPosInRegion())
+		{
+			final int chunkX = ((min.getX() + iterPos.getX()) >> 4) - startChunkX;
+			final int chunkZ = ((min.getZ() + iterPos.getZ()) >> 4) - startChunkZ;
+
+			int index = 0;
+
+			for (int i = 0; i < chunksOccupied.length; i++)
+			{
+				final ChunkPos p = chunksOccupied[i];
+
+				if (p.chunkXPos - startChunkX == chunkX && p.chunkZPos - startChunkZ == chunkZ)
+				{
+					if (this.chunks[i] == null)
+					{
+						this.chunks[i] = new BlockDataChunk(p, new BlockDataContainer(16, blocks.getHeight(), 16));
+					}
+
+					index = i;
+					break;
+				}
+			}
+
+			final BlockDataChunk chunk = this.chunks[index];
+
+			final BlockData block = blocks.get(iterPos.getX(), iterPos.getY(), iterPos.getZ());
+
+			if (chunk != null && block != null)
+			{
+				chunk.getContainer()
+						.set(block, (iterPos.getX() + xDif) % 16, iterPos.getY(), (iterPos.getZ() + zDif) % 16);
+			}
+		}
 	}
 
 	public BlueprintDefinition getDef()
@@ -60,9 +128,9 @@ public class BlueprintInstance implements NBT
 		return this.data;
 	}
 
-	public ChunkPos[] getChunksOccupied()
+	public BlockDataChunk[] getDataChunks()
 	{
-		return this.chunksOccupied;
+		return this.chunks;
 	}
 
 	public void markGeneratedAChunk()
@@ -141,7 +209,7 @@ public class BlueprintInstance implements NBT
 	{
 		final BlueprintInstance clone = new BlueprintInstance(this.world, this.def, this.data.clone());
 
-		clone.chunksOccupied = Arrays.copyOf(this.chunksOccupied, this.chunksOccupied.length);
+		clone.chunks = Arrays.copyOf(this.chunks, this.chunks.length);
 		clone.hasGeneratedAChunk = this.hasGeneratedAChunk;
 
 		return clone;

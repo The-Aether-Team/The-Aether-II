@@ -59,13 +59,39 @@ public class BlockAccessChunkPrimer implements IBlockAccessExtended
 	@Override
 	public void setBlockToAir(final BlockPos pos)
 	{
-		this.primer.setBlockState(Math.abs(pos.getX() % 16), pos.getY(), Math.abs(pos.getZ() % 16), Blocks.AIR.getDefaultState());
+		int xDif = pos.getX() % 16;
+		int zDif = pos.getZ() % 16;
+
+		if (xDif < 0)
+		{
+			xDif = 16 - Math.abs(xDif);
+		}
+
+		if (zDif < 0)
+		{
+			zDif = 16 - Math.abs(zDif);
+		}
+
+		this.primer.setBlockState(xDif, pos.getY(), zDif, Blocks.AIR.getDefaultState());
 	}
 
 	@Override
 	public boolean setBlockState(final BlockPos pos, final IBlockState state)
 	{
-		this.primer.setBlockState(Math.abs(pos.getX() % 16), pos.getY(), Math.abs(pos.getZ() % 16), state);
+		int xDif = pos.getX() % 16;
+		int zDif = pos.getZ() % 16;
+
+		if (xDif < 0)
+		{
+			xDif = 16 - Math.abs(xDif);
+		}
+
+		if (zDif < 0)
+		{
+			zDif = 16 - Math.abs(zDif);
+		}
+
+		this.primer.setBlockState(xDif, pos.getY(), zDif, state);
 
 		return true;
 	}
@@ -100,7 +126,20 @@ public class BlockAccessChunkPrimer implements IBlockAccessExtended
 	@Override
 	public IBlockState getBlockState(final BlockPos pos)
 	{
-		return this.primer.getBlockState(Math.abs(pos.getX() % 16), pos.getY(), Math.abs(pos.getZ() % 16));
+		int xDif = pos.getX() % 16;
+		int zDif = pos.getZ() % 16;
+
+		if (xDif < 0)
+		{
+			xDif = 16 - Math.abs(xDif);
+		}
+
+		if (zDif < 0)
+		{
+			zDif = 16 - Math.abs(zDif);
+		}
+
+		return this.primer.getBlockState(xDif, pos.getY(), zDif);
 	}
 
 	@Override

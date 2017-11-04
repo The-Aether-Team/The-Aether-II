@@ -1,6 +1,9 @@
 package com.gildedgames.aether.common.world.aether.island;
 
+import com.gildedgames.aether.api.orbis_core.api.BlockDataChunk;
 import com.gildedgames.aether.api.orbis_core.api.BlueprintInstance;
+import com.gildedgames.aether.api.orbis_core.api.ICreationData;
+import com.gildedgames.aether.api.orbis_core.api.PostPlacement;
 import com.gildedgames.aether.api.orbis_core.processing.DataPrimer;
 import com.gildedgames.aether.api.util.BlockAccessChunkPrimer;
 import com.gildedgames.aether.api.util.BlockAccessExtendedWrapper;
@@ -85,11 +88,19 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		// Prime placed templates
 		for (final BlueprintInstance instance : island.getVirtualDataManager().getPlacedBlueprints())
 		{
-			for (final ChunkPos chunkPos : instance.getChunksOccupied())
+			for (final BlockDataChunk dataChunk : instance.getDataChunks())
 			{
-				if (chunkPos.chunkXPos == chunkX && chunkPos.chunkZPos == chunkZ)
+				if (dataChunk == null)
 				{
-					dataPrimer.createChunk(chunkPos, this.world, instance.getDef().getData(), instance.getCreationData());
+					continue;
+				}
+
+				if (dataChunk.getPos().chunkXPos == chunkX && dataChunk.getPos().chunkZPos == chunkZ)
+				{
+					final ICreationData data = instance.getCreationData();
+
+					dataPrimer.create(dataChunk.getContainer(),
+							data.clone().set(new BlockPos(dataChunk.getPos().getXStart(), data.getPos().getY(), dataChunk.getPos().getZStart())));
 				}
 			}
 		}
@@ -158,15 +169,22 @@ public class ChunkGeneratorAether implements IChunkGenerator
 
 		final DataPrimer primer = new DataPrimer(new BlockAccessExtendedWrapper(this.world));
 
-		// TODO: Re-enable when we fix island sectors and their broken as fuck syncing.
 		// Populate placed blueprints
-		/*for (final BlueprintInstance instance : island.getVirtualDataManager().getPlacedBlueprints())
+		for (final BlueprintInstance instance : island.getVirtualDataManager().getPlacedBlueprints())
 		{
-			for (final ChunkPos chunkPos : instance.getChunksOccupied())
+			for (final BlockDataChunk dataChunk : instance.getDataChunks())
 			{
-				if (chunkPos.chunkXPos == chunkX && chunkPos.chunkZPos == chunkZ)
+				if (dataChunk == null)
 				{
-					primer.createChunk(chunkPos, this.world, instance.getDef().getData(), instance.getCreationData());
+					continue;
+				}
+
+				if (dataChunk.getPos().chunkXPos == chunkX && dataChunk.getPos().chunkZPos == chunkZ)
+				{
+					final ICreationData data = instance.getCreationData();
+
+					primer.create(dataChunk.getContainer(),
+							data.clone().set(new BlockPos(dataChunk.getPos().getXStart(), data.getPos().getY(), dataChunk.getPos().getZStart())));
 
 					if (!instance.hasGeneratedAChunk())
 					{
@@ -179,7 +197,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 					}
 				}
 			}
-		}*/
+		}
 
 		biome.decorate(this.world, this.rand, pos);
 	}
