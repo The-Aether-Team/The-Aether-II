@@ -192,7 +192,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 
 						for (final PostPlacement post : instance.getDef().getPostPlacements())
 						{
-							post.postGenerate(this.world, this.rand, instance.getCreationData());
+							post.postGenerate(this.world, this.rand, instance.getCreationData(), instance.getDef().getData().getBlockDataContainer());
 						}
 					}
 				}

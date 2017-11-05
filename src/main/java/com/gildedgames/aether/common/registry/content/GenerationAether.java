@@ -7,6 +7,7 @@ import com.gildedgames.aether.api.orbis_core.api.core.OrbisAPI;
 import com.gildedgames.aether.api.orbis_core.api.registry.IOrbisDefinitionRegistry;
 import com.gildedgames.aether.api.orbis_core.api.registry.OrbisDefinitionRegistry;
 import com.gildedgames.aether.api.orbis_core.api.util.PlacementConditions;
+import com.gildedgames.aether.api.orbis_core.api.util.PostPlacements;
 import com.gildedgames.aether.api.world.generation.CenterOffsetProcessor;
 import com.gildedgames.aether.api.world.generation.TemplateDefinition;
 import com.gildedgames.aether.api.world.generation.TemplateDefinitionPool;
@@ -333,9 +334,9 @@ public class GenerationAether
 						PlacementConditions.ignoreBlock(5, BlocksAether.quicksoil.getDefaultState()));
 
 		OUTPOST_HIGHLANDS_A = new BlueprintDefinition(BlueprintsAether.OUTPOST_HIGHLANDS_A).setRegistry(registry).setConditions(structureConditions)
-				.setRandomRotation(false);
+				.setRandomRotation(false).setPostPlacements(PostPlacements.spawnEntity(EntityEdison::new, edisonPos));
 		OUTPOST_HIGHLANDS_B = new BlueprintDefinition(BlueprintsAether.OUTPOST_HIGHLANDS_B).setRegistry(registry).setConditions(structureConditions)
-				.setRandomRotation(false);
+				.setRandomRotation(false).setPostPlacements(PostPlacements.spawnEntity(EntityEdison::new, edisonPos));
 
 		SKYROOT_WATCHTOWER_1A = new BlueprintDefinition(BlueprintsAether.SKYROOT_WATCHTOWER_1A).setRegistry(registry).setConditions(structureConditions);
 		SKYROOT_WATCHTOWER_1B = new BlueprintDefinition(BlueprintsAether.SKYROOT_WATCHTOWER_1B).setRegistry(registry).setConditions(structureConditions);

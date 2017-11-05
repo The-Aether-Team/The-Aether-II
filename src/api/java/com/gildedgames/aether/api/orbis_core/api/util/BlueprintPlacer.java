@@ -57,7 +57,7 @@ public class BlueprintPlacer
 		{
 			for (final PostPlacement post : def.getPostPlacements())
 			{
-				post.postGenerate(placeWith.getWorld(), rand, data);
+				post.postGenerate(placeWith.getWorld(), rand, data, def.getData().getBlockDataContainer());
 			}
 		}
 	}
@@ -74,7 +74,7 @@ public class BlueprintPlacer
 			{
 				for (final PostPlacement post : def.getPostPlacements())
 				{
-					post.postGenerate(placeWith.getWorld(), rand, data);
+					post.postGenerate(placeWith.getWorld(), rand, data, def.getData().getBlockDataContainer());
 				}
 			}
 		}
