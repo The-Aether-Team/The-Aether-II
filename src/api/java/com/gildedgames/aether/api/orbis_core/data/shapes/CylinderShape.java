@@ -11,7 +11,7 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ConeShape extends AbstractShape
+public class CylinderShape extends AbstractShape
 {
 
 	private BlockPos center;
@@ -20,12 +20,12 @@ public class ConeShape extends AbstractShape
 
 	private Iterable<BlockPos.MutableBlockPos> data;
 
-	private ConeShape(final World world)
+	private CylinderShape(final World world)
 	{
 		super(world);
 	}
 
-	public ConeShape(final BlockPos center, final int radius)
+	public CylinderShape(final BlockPos center, final int radius)
 	{
 		super((IMutableRegion) new Region(new BlockPos(-radius, -radius, -radius), new BlockPos(radius, radius, radius)).translate(center));
 		this.center = center;
@@ -72,7 +72,7 @@ public class ConeShape extends AbstractShape
 	@Override
 	public IShape translate(final int x, final int y, final int z)
 	{
-		return new ConeShape(this.center.add(x, y, z), (int) Math.sqrt(this.radiusSq));
+		return new CylinderShape(this.center.add(x, y, z), (int) Math.sqrt(this.radiusSq));
 	}
 
 	@Override
@@ -84,13 +84,9 @@ public class ConeShape extends AbstractShape
 	@Override
 	public boolean contains(final int x, final int y, final int z)
 	{
-		final int radius = (int) Math.sqrt(this.radiusSq) - (y - this.center.getY());
-
-		final int radiusClimb = radius * radius;
-
 		final double dist = this.center.add(0, y - this.center.getY(), 0).distanceSq(x, y, z);
 
-		return dist < radiusClimb && y >= this.center.getY();
+		return dist < this.radiusSq && y >= this.center.getY();
 	}
 
 	@Override

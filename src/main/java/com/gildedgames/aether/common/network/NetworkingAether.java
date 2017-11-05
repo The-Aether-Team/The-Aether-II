@@ -68,6 +68,7 @@ public class NetworkingAether
 		instance.registerMessage(PacketRotateBlueprint.HandlerServer.class, PacketRotateBlueprint.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketClearSelectedRegion.HandlerServer.class, PacketClearSelectedRegion.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketSetItemStackInHand.HandlerServer.class, PacketSetItemStackInHand.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketNextSelectionMode.HandlerServer.class, PacketNextSelectionMode.class, discriminant++, Side.SERVER);
 
 		// C L I E N T
 		instance.registerMessage(PacketEquipment.HandlerClient.class, PacketEquipment.class, discriminant++, Side.CLIENT);

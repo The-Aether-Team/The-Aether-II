@@ -4,9 +4,11 @@ import com.gildedgames.aether.api.orbis.IRegion;
 import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
 import com.gildedgames.aether.api.orbis_core.data.region.Region;
+import com.gildedgames.aether.api.orbis_core.data.shapes.AbstractShape;
 import com.gildedgames.orbis.client.OrbisKeyBindings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -37,7 +39,7 @@ public class RenderShape implements IWorldRenderer
 
 	public float boxAlpha = 0.25F, gridAlpha = 0.65F;
 
-	public boolean useCustomColors = false;
+	public boolean useCustomColors = false, xyz_box = false, box = true;
 
 	public int colorBorder = -1, colorGrid = -1;
 
@@ -46,6 +48,8 @@ public class RenderShape implements IWorldRenderer
 	private Object object;
 
 	private IShape shape;
+
+	private boolean shouldRefresh = false;
 
 	private World world;
 
@@ -70,14 +74,22 @@ public class RenderShape implements IWorldRenderer
 		this.object = shape;
 	}
 
+	public void refresh()
+	{
+		this.shouldRefresh = true;
+	}
+
 	public void renderFully(final World world, final float partialTicks)
 	{
-		if (this.lastMin == null || !this.lastMin.equals(this.shape.getBoundingBox().getMin()) || !this.lastMax.equals(this.shape.getBoundingBox().getMax()))
+		if (this.shouldRefresh || this.lastMin == null || !this.lastMin.equals(this.shape.getBoundingBox().getMin()) || !this.lastMax
+				.equals(this.shape.getBoundingBox().getMax()))
 		{
 			this.lastMin = this.shape.getBoundingBox().getMin();
 			this.lastMax = this.shape.getBoundingBox().getMax();
 
 			this.shapeData = this.shape.createShapeData();
+
+			this.shouldRefresh = false;
 		}
 
 		GlStateManager.pushMatrix();
@@ -109,6 +121,63 @@ public class RenderShape implements IWorldRenderer
 		GlStateManager.popMatrix();
 
 		this.doGlobalRendering(world, partialTicks);
+	}
+
+	protected void setLightmapDisabled(final boolean disabled)
+	{
+		GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+
+		if (disabled)
+		{
+			GlStateManager.disableTexture2D();
+		}
+		else
+		{
+			GlStateManager.enableTexture2D();
+		}
+
+		GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
+	}
+
+	private void renderBox(
+			final Tessellator tessellator, final VertexBuffer buffer, final double x1, final double y1, final double z1, final double x2, final double y2,
+			final double z2, final int color1, final int color2, final int color3)
+	{
+		buffer.begin(3, DefaultVertexFormats.POSITION_COLOR);
+
+		if (this.box)
+		{
+			buffer.pos(x1, y1, z1).color(color2, color2, color2, 0.0F).endVertex();
+			buffer.pos(x1, y1, z1).color(color2, color2, color2, color1).endVertex();
+			buffer.pos(x2, y1, z1).color(color2, color3, color3, color1).endVertex();
+			buffer.pos(x2, y1, z2).color(color2, color2, color2, color1).endVertex();
+			buffer.pos(x1, y1, z2).color(color2, color2, color2, color1).endVertex();
+			buffer.pos(x1, y1, z1).color(color3, color3, color2, color1).endVertex();
+			buffer.pos(x1, y2, z1).color(color3, color2, color3, color1).endVertex();
+			buffer.pos(x2, y2, z1).color(color2, color2, color2, color1).endVertex();
+			buffer.pos(x2, y2, z2).color(color2, color2, color2, color1).endVertex();
+			buffer.pos(x1, y2, z2).color(color2, color2, color2, color1).endVertex();
+			buffer.pos(x1, y2, z1).color(color2, color2, color2, color1).endVertex();
+			buffer.pos(x1, y2, z2).color(color2, color2, color2, color1).endVertex();
+			buffer.pos(x1, y1, z2).color(color2, color2, color2, color1).endVertex();
+			buffer.pos(x2, y1, z2).color(color2, color2, color2, color1).endVertex();
+			buffer.pos(x2, y2, z2).color(color2, color2, color2, color1).endVertex();
+			buffer.pos(x2, y2, z1).color(color2, color2, color2, color1).endVertex();
+			buffer.pos(x2, y1, z1).color(color2, color2, color2, color1).endVertex();
+			buffer.pos(x2, y1, z1).color(color2, color2, color2, 0.0F).endVertex();
+		}
+
+		if (this.xyz_box)
+		{
+			buffer.pos(x1, y1, z1).color(color2, color2, color2, color1).endVertex();
+			buffer.pos(x2, y1, z1).color(color2, color3, color3, color1).endVertex();
+			buffer.pos(x2, y1, z2).color(color2, color2, color2, 0.0F).endVertex();
+			buffer.pos(x1, y1, z2).color(color2, color2, color2, 0.0F).endVertex();
+			buffer.pos(x1, y1, z1).color(color3, color3, color2, color1).endVertex();
+			buffer.pos(x1, y2, z1).color(color3, color2, color3, color1).endVertex();
+		}
+
+		tessellator.draw();
 	}
 
 	public void renderBox(final BlockPos pos, final float partialTicks)
@@ -258,7 +327,8 @@ public class RenderShape implements IWorldRenderer
 			return;
 		}
 
-		if (this.lastMin == null || !this.lastMin.equals(this.shape.getBoundingBox().getMin()) || !this.lastMax.equals(this.shape.getBoundingBox().getMax()))
+		if (this.shouldRefresh || this.lastMin == null || !this.lastMin.equals(this.shape.getBoundingBox().getMin()) || !this.lastMax
+				.equals(this.shape.getBoundingBox().getMax()))
 		{
 			if (this.lastMin != null)
 			{
@@ -270,6 +340,8 @@ public class RenderShape implements IWorldRenderer
 			this.lastMax = this.shape.getBoundingBox().getMax();
 
 			this.shapeData = this.shape.createShapeData();
+
+			this.shouldRefresh = false;
 		}
 
 		if (this.glIndex == -1)
@@ -323,6 +395,55 @@ public class RenderShape implements IWorldRenderer
 		GlStateManager.enableAlpha();
 
 		GlStateManager.translate(0, 0, 0);
+
+		GlStateManager.popMatrix();
+
+		GlStateManager.pushMatrix();
+
+		if (!this.lastMin.equals(this.shape.getBoundingBox().getMin()))
+		{
+			GlStateManager.translate(this.shape.getBoundingBox().getMin().getX() - this.lastMin.getX(),
+					this.shape.getBoundingBox().getMin().getY() - this.lastMin.getY(),
+					this.shape.getBoundingBox().getMin().getZ() - this.lastMin.getZ());
+		}
+
+		GlStateManager.translate(-offsetPlayerX, -offsetPlayerY, -offsetPlayerZ);
+
+		BlockPos min = this.shape.getBoundingBox().getMin();
+		BlockPos max = this.shape.getBoundingBox().getMax();
+
+		if (this.shape instanceof AbstractShape)
+		{
+			final AbstractShape abShape = (AbstractShape) this.shape;
+
+			min = abShape.getRenderBoxMin();
+			max = abShape.getRenderBoxMax();
+		}
+
+		final BlockPos fromBB = min.add(-1, -1, -1);
+		final BlockPos toBB = max.add(1, 1, 1);
+
+		GlStateManager.disableLighting();
+		GlStateManager.disableTexture2D();
+		GlStateManager.enableBlend();
+		GlStateManager
+				.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE,
+						GlStateManager.DestFactor.ZERO);
+		GlStateManager.disableDepth();
+		GlStateManager.depthMask(false);
+
+		GlStateManager.glLineWidth(2.0F);
+
+		this.renderBox(Tessellator.getInstance(), buffer, fromBB.getX() + 0.98, fromBB.getY() + 0.98, fromBB.getZ() + 0.98,
+				toBB.getX() + 0.02, toBB.getY() + 0.02, toBB.getZ() + 0.02,
+				255, 223, 127);
+
+		GlStateManager.glLineWidth(1.0F);
+
+		GlStateManager.enableLighting();
+		GlStateManager.enableTexture2D();
+		GlStateManager.enableDepth();
+		GlStateManager.depthMask(true);
 
 		GlStateManager.popMatrix();
 

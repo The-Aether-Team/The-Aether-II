@@ -200,7 +200,15 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 			this.activeSelectionRender.colorBorder = module.powers().getCurrentPower().getClientHandler().getShapeColor(module);
 			this.activeSelectionRender.colorGrid = module.powers().getCurrentPower().getClientHandler().getShapeColor(module);
 
+			this.activeSelectionRender.useCustomColors = true;
+
 			this.activeSelectionRender.setShape(activeSelection);
+
+			if (playerAether.getSelectionModule().hasChanged())
+			{
+				this.activeSelectionRender.refresh();
+				playerAether.getSelectionModule().setHasChanged(false);
+			}
 		}
 		else
 		{

@@ -5,13 +5,13 @@ import com.gildedgames.orbis.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import net.minecraft.util.ResourceLocation;
 
-public class SelectionTypeClientEllipsoid implements ISelectionTypeClient
+public class SelectionTypeClientDome implements ISelectionTypeClient
 {
-	private static final ResourceLocation TEXTURE = AetherCore.getResource("orbis/godmode/shape_icons/ellipsoid_icon.png");
+	private static final ResourceLocation TEXTURE = AetherCore.getResource("orbis/godmode/shape_icons/dome_icon.png");
 
 	private final GuiTexture icon;
 
-	public SelectionTypeClientEllipsoid()
+	public SelectionTypeClientDome()
 	{
 		this.icon = new GuiTexture(Dim2D.build().width(14).height(14).flush(), TEXTURE);
 	}
@@ -19,7 +19,7 @@ public class SelectionTypeClientEllipsoid implements ISelectionTypeClient
 	@Override
 	public String displayName()
 	{
-		return "Ellipsoid";
+		return "Dome";
 	}
 
 	@Override

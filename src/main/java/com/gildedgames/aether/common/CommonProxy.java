@@ -24,7 +24,6 @@ import com.gildedgames.orbis.client.gui.data.Text;
 import com.gildedgames.orbis.client.renderers.RenderShape;
 import com.gildedgames.orbis.common.OrbisDeveloperModeEvents;
 import com.gildedgames.orbis.common.player.godmode.selection_types.SelectionTypeCuboid;
-import com.gildedgames.orbis.common.player.godmode.selection_types.SelectionTypeEllipsoid;
 import com.gildedgames.orbis.common.player.godmode.selection_types.SelectionTypeLine;
 import com.gildedgames.orbis.common.player.godmode.selection_types.SelectionTypeSphere;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
@@ -70,10 +69,8 @@ public class CommonProxy implements IAetherServices
 		s.register(7, BlockDataContainer.class, new Instantiator<>(BlockDataContainer.class));
 		s.register(8, SelectionTypeCuboid.class, new Instantiator<>(SelectionTypeCuboid.class));
 		s.register(9, SelectionTypeSphere.class, new Instantiator<>(SelectionTypeSphere.class));
-		s.register(10, SelectionTypeEllipsoid.class, new Instantiator<>(SelectionTypeEllipsoid.class));
 		s.register(11, SelectionTypeLine.class, new Instantiator<>(SelectionTypeLine.class));
 		s.register(12, SphereShape.class, new Instantiator<>(SphereShape.class));
-		s.register(13, EllipsoidShape.class, new Instantiator<>(EllipsoidShape.class));
 		s.register(14, LineShape.class, new Instantiator<>(LineShape.class));
 		s.register(15, BlockFilter.class, new Instantiator<>(BlockFilter.class));
 		s.register(16, BlockFilterLayer.class, new Instantiator<>(BlockFilterLayer.class));
@@ -91,6 +88,8 @@ public class CommonProxy implements IAetherServices
 		s.register(28, CreationData.class, new Instantiator<>(CreationData.class));
 		s.register(29, PyramidShape.class, new Instantiator<>(PyramidShape.class));
 		s.register(30, ConeShape.class, new Instantiator<>(ConeShape.class));
+		s.register(31, CylinderShape.class, new Instantiator<>(CylinderShape.class));
+		s.register(32, DomeShape.class, new Instantiator<>(DomeShape.class));
 	}
 
 	public void init(final FMLInitializationEvent event)

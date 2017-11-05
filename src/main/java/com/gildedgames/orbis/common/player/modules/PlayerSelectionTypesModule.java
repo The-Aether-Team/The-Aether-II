@@ -18,13 +18,15 @@ public class PlayerSelectionTypesModule extends PlayerAetherModule
 
 	private final SelectionTypeSphere sphere;
 
-	private final SelectionTypeEllipsoid ellipsoid;
-
 	private final SelectionTypeLine line;
 
 	private final SelectionTypePyramid pyramid;
 
 	private final SelectionTypeCone cone;
+
+	private final SelectionTypeCylinder cylinder;
+
+	private final SelectionTypeDome dome;
 
 	private int currentSelectionTypeIndex;
 
@@ -34,21 +36,33 @@ public class PlayerSelectionTypesModule extends PlayerAetherModule
 
 		this.cuboid = new SelectionTypeCuboid();
 		this.sphere = new SelectionTypeSphere();
-		this.ellipsoid = new SelectionTypeEllipsoid();
 		this.line = new SelectionTypeLine();
 		this.pyramid = new SelectionTypePyramid();
 		this.cone = new SelectionTypeCone();
+		this.cylinder = new SelectionTypeCylinder();
+		this.dome = new SelectionTypeDome();
 
 		final Collection<ISelectionType> selectionTypes = new ArrayList<>();
 
 		selectionTypes.add(this.cuboid);
 		selectionTypes.add(this.sphere);
-		selectionTypes.add(this.ellipsoid);
 		selectionTypes.add(this.line);
 		selectionTypes.add(this.pyramid);
+		selectionTypes.add(this.cylinder);
 		selectionTypes.add(this.cone);
+		selectionTypes.add(this.dome);
 
 		this.selectionTypes = selectionTypes.toArray(new ISelectionType[selectionTypes.size()]);
+	}
+
+	public SelectionTypeDome getDome()
+	{
+		return this.dome;
+	}
+
+	public SelectionTypeCylinder getCylinder()
+	{
+		return this.cylinder;
 	}
 
 	public SelectionTypeCone getCone()
@@ -71,11 +85,6 @@ public class PlayerSelectionTypesModule extends PlayerAetherModule
 		return this.sphere;
 	}
 
-	public SelectionTypeEllipsoid getEllipsoid()
-	{
-		return this.ellipsoid;
-	}
-
 	public SelectionTypeLine getLine()
 	{
 		return this.line;
@@ -84,16 +93,6 @@ public class PlayerSelectionTypesModule extends PlayerAetherModule
 	public ISelectionType getCurrentSelectionType()
 	{
 		return this.selectionTypes[this.currentSelectionTypeIndex];
-	}
-
-	public void setCurrentSelectionType(int powerIndex)
-	{
-		this.currentSelectionTypeIndex = powerIndex;
-
-		if (this.getWorld().isRemote)
-		{
-			NetworkingAether.sendPacketToServer(new PacketChangeSelectionType(this.currentSelectionTypeIndex));
-		}
 	}
 
 	public void setCurrentSelectionType(final Class<? extends ISelectionType> clazz)
@@ -119,6 +118,16 @@ public class PlayerSelectionTypesModule extends PlayerAetherModule
 			{
 				NetworkingAether.sendPacketToServer(new PacketChangeSelectionType(this.currentSelectionTypeIndex));
 			}
+		}
+	}
+
+	public void setCurrentSelectionType(int powerIndex)
+	{
+		this.currentSelectionTypeIndex = powerIndex;
+
+		if (this.getWorld().isRemote)
+		{
+			NetworkingAether.sendPacketToServer(new PacketChangeSelectionType(this.currentSelectionTypeIndex));
 		}
 	}
 

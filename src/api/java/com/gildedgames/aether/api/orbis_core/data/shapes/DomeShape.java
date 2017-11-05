@@ -4,34 +4,45 @@ import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.IRegion;
 import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.api.orbis_core.OrbisCore;
+import com.gildedgames.aether.api.orbis_core.data.region.IMutableRegion;
 import com.gildedgames.aether.api.orbis_core.data.region.Region;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EllipsoidShape extends AbstractShape
+public class DomeShape extends AbstractShape
 {
 
 	private BlockPos center;
 
-	private int radiusX, radiusY, radiusZ;
+	private int radiusSq;
 
 	private Iterable<BlockPos.MutableBlockPos> data;
 
-	private EllipsoidShape(final World world)
+	private DomeShape(final World world)
 	{
 		super(world);
 	}
 
-	public EllipsoidShape(final BlockPos center, final int radiusX, final int radiusY, final int radiusZ)
+	public DomeShape(final BlockPos center, final int radius)
 	{
-		super((IRegion) new Region(new BlockPos(-radiusX, -radiusY, -radiusZ), new BlockPos(radiusX, radiusY, radiusZ)).translate(center));
+		super((IMutableRegion) new Region(new BlockPos(-radius, -radius, -radius), new BlockPos(radius, radius, radius)).translate(center));
 		this.center = center;
 
-		this.radiusX = radiusX;
-		this.radiusY = radiusY;
-		this.radiusZ = radiusZ;
+		this.radiusSq = radius * radius;
+	}
+
+	@Override
+	public BlockPos getRenderBoxMin()
+	{
+		return this.getBoundingBox().getMin();
+	}
+
+	@Override
+	public BlockPos getRenderBoxMax()
+	{
+		return this.getBoundingBox().getMax();
 	}
 
 	@Override
@@ -39,10 +50,7 @@ public class EllipsoidShape extends AbstractShape
 	{
 		final NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
 
-		tag.setInteger("radiusX", this.radiusX);
-		tag.setInteger("radiusY", this.radiusY);
-		tag.setInteger("radiusZ", this.radiusZ);
-
+		tag.setInteger("radiusSq", this.radiusSq);
 		funnel.setPos("center", this.center);
 	}
 
@@ -51,10 +59,7 @@ public class EllipsoidShape extends AbstractShape
 	{
 		final NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
 
-		this.radiusX = tag.getInteger("radiusX");
-		this.radiusY = tag.getInteger("radiusY");
-		this.radiusZ = tag.getInteger("radiusZ");
-
+		this.radiusSq = tag.getInteger("radiusSq");
 		this.center = funnel.getPos("center");
 	}
 
@@ -67,7 +72,7 @@ public class EllipsoidShape extends AbstractShape
 	@Override
 	public IShape translate(final int x, final int y, final int z)
 	{
-		return new EllipsoidShape(this.center.add(x, y, z), this.radiusX, this.radiusY, this.radiusZ);
+		return new DomeShape(this.center.add(x, y, z), (int) Math.sqrt(this.radiusSq));
 	}
 
 	@Override
@@ -79,20 +84,9 @@ public class EllipsoidShape extends AbstractShape
 	@Override
 	public boolean contains(final int x, final int y, final int z)
 	{
-		if (this.radiusX == 0 || this.radiusY == 0 || this.radiusZ == 0)
-		{
-			return false;
-		}
+		final double distSq = this.center.distanceSq(x, y, z);
 
-		final BlockPos point = this.center.add(-x, -y, -z);
-
-		final double squareX = point.getX() * (1.0D / this.radiusX);
-		final double squareY = point.getY() * (1.0D / this.radiusY);
-		final double squareZ = point.getZ() * (1.0D / this.radiusZ);
-
-		final double dist = Math.sqrt(new BlockPos(0, 0, 0).distanceSq(squareX, squareY, squareZ));
-
-		return dist < 1;
+		return distSq < this.radiusSq && y >= this.center.getY();
 	}
 
 	@Override

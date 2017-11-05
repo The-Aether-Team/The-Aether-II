@@ -1,6 +1,7 @@
 package com.gildedgames.orbis.common.player;
 
 import com.gildedgames.aether.api.orbis.IShape;
+import com.gildedgames.aether.api.orbis_core.data.shapes.AbstractShape;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -14,15 +15,91 @@ import net.minecraft.util.math.BlockPos;
 public class PlayerSelectionModule extends PlayerAetherModule
 {
 
+	public static final int NON_UNIFORM = 0, CENTERED = 1, UNIFORM = 2;
+
+	public static final int MODES = 3;
+
 	private BlockPos selectPos, prevPos;
 
 	private boolean hasChanged;
 
 	private IShape activeSelection;
 
+	private int modeIndex;
+
 	public PlayerSelectionModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
+	}
+
+	public int currentSelectionMode()
+	{
+		return this.modeIndex;
+	}
+
+	public void nextSelectionMode()
+	{
+		if (this.modeIndex + 1 >= MODES)
+		{
+			this.modeIndex = 0;
+		}
+		else
+		{
+			this.modeIndex++;
+		}
+
+		if (this.activeSelection instanceof AbstractShape)
+		{
+			this.processSelectionMode((AbstractShape) this.activeSelection);
+		}
+
+		this.refreshSelection();
+	}
+
+	public void refreshSelection()
+	{
+		if (this.selectPos != null)
+		{
+			final PlayerOrbisModule module = PlayerOrbisModule.get(this.getEntity());
+
+			final BlockPos endPos = RaytraceHelp.doOrbisRaytrace(this.getPlayer());
+
+			this.prevPos = endPos;
+			this.hasChanged = true;
+			this.activeSelection = module.selectionTypes().getCurrentSelectionType().createShape(this.selectPos, endPos, module, this.getEntity().world);
+		}
+	}
+
+	public void processSelectionMode()
+	{
+		if (this.activeSelection instanceof AbstractShape)
+		{
+			this.processSelectionMode((AbstractShape) this.activeSelection);
+		}
+	}
+
+	private void processSelectionMode(final AbstractShape shape)
+	{
+		switch (this.modeIndex)
+		{
+			case (NON_UNIFORM):
+				shape.setCreateFromCenter(false);
+				shape.setUniform(false);
+				break;
+			case (CENTERED):
+				shape.setCreateFromCenter(true);
+				shape.setUniform(true);
+				break;
+			case (UNIFORM):
+				shape.setCreateFromCenter(false);
+				shape.setUniform(true);
+				break;
+		}
+	}
+
+	public void setHasChanged(final boolean flag)
+	{
+		this.hasChanged = flag;
 	}
 
 	public boolean hasChanged()
@@ -38,20 +115,19 @@ public class PlayerSelectionModule extends PlayerAetherModule
 
 		final IShapeSelector selector = power.getShapeSelector();
 
+		if (this.activeSelection instanceof AbstractShape)
+		{
+			this.processSelectionMode((AbstractShape) this.activeSelection);
+		}
+
 		if (this.selectPos != null)
 		{
 			final BlockPos endPos = RaytraceHelp.doOrbisRaytrace(this.getPlayer());
-			this.hasChanged = false;
 
 			if (this.activeSelection != null && !endPos.equals(this.prevPos))
 			{
 				this.prevPos = endPos;
-				this.hasChanged = true;
 				this.activeSelection = module.selectionTypes().getCurrentSelectionType().createShape(this.selectPos, endPos, module, this.getEntity().world);
-			}
-			else
-			{
-				//this.activeSelection.setShapeInput(this.selectPos, endPos);
 			}
 		}
 
@@ -82,6 +158,8 @@ public class PlayerSelectionModule extends PlayerAetherModule
 				selector.onSelect(module, this.activeSelection, this.getWorld());
 
 				this.activeSelection = null;
+				this.selectPos = null;
+				this.prevPos = null;
 
 				return true;
 			}
@@ -95,6 +173,11 @@ public class PlayerSelectionModule extends PlayerAetherModule
 			this.activeSelection = newSelection;
 		}
 
+		if (this.activeSelection instanceof AbstractShape)
+		{
+			this.processSelectionMode((AbstractShape) this.activeSelection);
+		}
+
 		return false;
 	}
 
@@ -106,6 +189,11 @@ public class PlayerSelectionModule extends PlayerAetherModule
 	public void setActiveSelection(final IShape activeSelection)
 	{
 		this.activeSelection = activeSelection;
+
+		if (this.activeSelection instanceof AbstractShape)
+		{
+			this.processSelectionMode((AbstractShape) this.activeSelection);
+		}
 
 		if (this.getEntity().getEntityWorld().isRemote && this.activeSelection != null)
 		{

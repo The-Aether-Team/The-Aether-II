@@ -11,7 +11,7 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class SphereShape extends AbstractShape
+public class CuboidShape extends AbstractShape
 {
 
 	private BlockPos start;
@@ -24,12 +24,12 @@ public class SphereShape extends AbstractShape
 
 	private BlockPos renderMin, renderMax;
 
-	private SphereShape(final World world)
+	private CuboidShape(final World world)
 	{
 		super(world);
 	}
 
-	public SphereShape(final BlockPos start, final BlockPos end, final boolean centered)
+	public CuboidShape(final BlockPos start, final BlockPos end, final boolean centered)
 	{
 		this.start = start;
 		this.end = end;
@@ -49,13 +49,13 @@ public class SphereShape extends AbstractShape
 	@Override
 	public BlockPos getRenderBoxMin()
 	{
-		return this.renderMin;
+		return this.getBoundingBox().getMin();
 	}
 
 	@Override
 	public BlockPos getRenderBoxMax()
 	{
-		return this.renderMax;
+		return this.getBoundingBox().getMax();
 	}
 
 	@Override
@@ -89,7 +89,7 @@ public class SphereShape extends AbstractShape
 	@Override
 	public IShape translate(final int x, final int y, final int z)
 	{
-		return new SphereShape(this.start.add(x, y, z), this.end.add(x, y, z), this.centered);
+		return new CuboidShape(this.start.add(x, y, z), this.end.add(x, y, z), this.centered);
 	}
 
 	@Override
@@ -101,63 +101,19 @@ public class SphereShape extends AbstractShape
 	@Override
 	public boolean contains(final int x, final int y, final int z)
 	{
-		if (this.createFromCenter())
+		if (this.createFromCenter() || !this.isUniform())
 		{
-			final int radiusSq = (int) this.start.distanceSq(this.end);
-
-			final double distSq = this.start.distanceSq(x, y, z);
-
-			return distSq < radiusSq;
+			return RegionHelp.contains(this.getBoundingBox(), x, y, z);
 		}
-		else //if (!this.isUniform())
+		else
 		{
-			final BlockPos center = RegionHelp.getCenter(this.getBoundingBox());
+			final int minSize = Math.min(this.getBoundingBox().getWidth(), this.getBoundingBox().getLength());
 
-			final BlockPos point = center.add(-x, -y, -z);
+			final int xDif = Math.abs(x - this.start.getX());
+			final int zDif = Math.abs(z - this.start.getZ());
 
-			final int radiusX = 1 + (this.getBoundingBox().getWidth() / 2);
-			final int radiusY = 1 + (this.getBoundingBox().getHeight() / 2);
-			final int radiusZ = 1 + (this.getBoundingBox().getLength() / 2);
-
-			final double squareX = point.getX() * (1.0D / radiusX);
-			final double squareY = point.getY() * (1.0D / radiusY);
-			final double squareZ = point.getZ() * (1.0D / radiusZ);
-
-			final double dist = Math.sqrt(new BlockPos(0, 0, 0).distanceSq(squareX, squareY, squareZ));
-
-			return dist < 1;
+			return RegionHelp.contains(this.getBoundingBox(), x, y, z) && xDif <= minSize && zDif <= minSize;
 		}
-		// TODO: Uniform spheres
-		/*else
-		{
-			final int width = this.getBoundingBox().getWidth();
-			final int height = this.getBoundingBox().getHeight();
-			final int length = this.getBoundingBox().getLength();
-
-			final boolean useWidth = width < length && width < height;
-			final boolean useHeight = height < length && height < width;
-			final boolean useLength = length < height && length < width;
-
-			final int dif = Math.abs(width - length);
-
-			final int xDif = useHeight ? Math.abs(height - width) : dif;
-			final int zDif = useHeight ? Math.abs(height - length) : dif;
-
-			final int yDif = Math.abs(height - (useWidth ? width : length));
-
-			final int xMod = this.end.getX() < this.start.getX() ? 1 : -1;
-			final int zMod = this.end.getZ() < this.start.getZ() ? 1 : -1;
-
-			final BlockPos newEnd = this.end.add(useWidth ? 0 : xDif * xMod, useHeight ? 0 : -yDif, useLength ? 0 : zDif * zMod);
-
-			final BlockPos center = RegionHelp.getCenter(new Region(this.start.add(-xMod, 1, -zMod), newEnd.add(0, -1, 0)));
-
-			final int radiusSq = (int) center.distanceSq(newEnd);
-
-			final double distSq = center.distanceSq(x, y, z);
-
-			return distSq < radiusSq;
-		}*/
 	}
 
 	@Override

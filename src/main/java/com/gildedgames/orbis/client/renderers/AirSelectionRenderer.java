@@ -2,6 +2,7 @@ package com.gildedgames.orbis.client.renderers;
 
 import com.gildedgames.aether.api.orbis_core.data.region.IMutableRegion;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.orbis.client.OrbisKeyBindings;
 import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
 import com.gildedgames.orbis.common.player.godmode.GodPowerCreative;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
@@ -183,6 +184,10 @@ public class AirSelectionRenderer
 
 		renderRegion.colorGrid = color;
 		renderRegion.colorBorder = color;
+
+		renderRegion.box = false;
+		renderRegion.xyz_box =
+				renderRegion.boxAlpha > 0 && OrbisKeyBindings.keyBindControl.isKeyDown() && playerAether.getSelectionModule().getActiveSelection() == null;
 
 		PARTIAL_TICKS = event.getPartialTicks();
 

@@ -140,6 +140,14 @@ public class OrbisDeveloperEventsClient
 					mc.player.inventory.setInventorySlotContents(mc.player.inventory.currentItem, item);
 				}
 
+				if (OrbisKeyBindings.keyBindChangeSelectionMode.isPressed())
+				{
+					player.getSelectionModule().nextSelectionMode();
+					NetworkingAether.sendPacketToServer(new PacketNextSelectionMode());
+				}
+
+				player.getSelectionModule().processSelectionMode();
+
 				if (OrbisKeyBindings.keyBindDelete.isPressed())
 				{
 					if (select.getSelectedRegion() != null)
