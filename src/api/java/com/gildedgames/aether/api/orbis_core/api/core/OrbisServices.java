@@ -86,7 +86,7 @@ public class OrbisServices implements IOrbisServices
 	private boolean readProject(final ResourceLocation server)
 	{
 		final String s = server.getResourcePath();
-		final File file1 = new File(this.baseFolder, s + "/.project");
+		final File file1 = new File(this.baseFolder, s + File.separator + "project_data.project");
 
 		if (!file1.exists())
 		{
@@ -100,7 +100,7 @@ public class OrbisServices implements IOrbisServices
 			try
 			{
 				inputstream = new FileInputStream(file1);
-				this.readProjectFromStream(s, inputstream, new File(this.baseFolder, s + "/").toURI());
+				this.readProjectFromStream(s, inputstream, new File(this.baseFolder, s + File.separator).toURI());
 				return true;
 			}
 			catch (final Throwable var10)
@@ -128,8 +128,8 @@ public class OrbisServices implements IOrbisServices
 
 		try
 		{
-			inputstream = MinecraftServer.class.getResourceAsStream("/assets/" + s + "/orbis/" + s1 + "/project");
-			this.readProjectFromStream(s1, inputstream, URI.create("/assets/" + s + "/orbis/" + s1 + "/"));
+			inputstream = MinecraftServer.class.getResourceAsStream("/assets/" + s + "/orbis/" + s1 + File.separator + "project_data.project");
+			this.readProjectFromStream(s1, inputstream, URI.create("/assets/" + s + "/orbis/" + s1 + File.separator));
 			return true;
 		}
 		catch (final Throwable var10)
