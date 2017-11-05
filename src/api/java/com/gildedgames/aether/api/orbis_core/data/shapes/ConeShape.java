@@ -20,6 +20,8 @@ public class ConeShape extends AbstractShape
 
 	private Iterable<BlockPos.MutableBlockPos> data;
 
+	private BlockPos renderMin, renderMax;
+
 	private ConeShape(final World world)
 	{
 		super(world);
@@ -31,6 +33,9 @@ public class ConeShape extends AbstractShape
 		this.center = center;
 
 		this.radiusSq = radius * radius;
+
+		this.renderMin = new BlockPos(this.getBoundingBox().getMin().getX(), this.center.getY(), this.getBoundingBox().getMin().getZ());
+		this.renderMax = this.getBoundingBox().getMax();
 	}
 
 	@Override
@@ -54,13 +59,13 @@ public class ConeShape extends AbstractShape
 	@Override
 	public BlockPos getRenderBoxMin()
 	{
-		return this.getBoundingBox().getMin();
+		return this.renderMin;
 	}
 
 	@Override
 	public BlockPos getRenderBoxMax()
 	{
-		return this.getBoundingBox().getMax();
+		return this.renderMax;
 	}
 
 	@Override
