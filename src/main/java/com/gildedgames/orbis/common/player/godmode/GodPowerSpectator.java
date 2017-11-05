@@ -6,6 +6,7 @@ import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.selectors.ShapeSelectorInvalid;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -42,7 +43,14 @@ public class GodPowerSpectator implements IGodPower
 	@Override
 	public void onUpdate(final EntityPlayer player, final PlayerOrbisModule module, final boolean isPowerActive)
 	{
-
+		if (isPowerActive)
+		{
+			player.setGameType(GameType.SPECTATOR);
+		}
+		else if (module.inDeveloperMode() && !player.isCreative())
+		{
+			player.setGameType(GameType.CREATIVE);
+		}
 	}
 
 	@Override
