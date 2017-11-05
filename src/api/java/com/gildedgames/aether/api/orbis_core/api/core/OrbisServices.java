@@ -128,11 +128,11 @@ public class OrbisServices implements IOrbisServices
 
 		try
 		{
-			inputstream = MinecraftServer.class.getResourceAsStream("/assets/" + s + "/orbis/" + s1 + "/.project");
+			inputstream = MinecraftServer.class.getResourceAsStream("/assets/" + s + "/orbis/" + s1 + "/project");
 			this.readProjectFromStream(s1, inputstream, URI.create("/assets/" + s + "/orbis/" + s1 + "/"));
 			return true;
 		}
-		catch (final IOException var10)
+		catch (final Throwable var10)
 		{
 			flag = false;
 			OrbisCore.LOGGER.error(var10);

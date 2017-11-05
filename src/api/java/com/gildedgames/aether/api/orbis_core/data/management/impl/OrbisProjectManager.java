@@ -54,7 +54,7 @@ public class OrbisProjectManager implements IProjectManager
 			 * the metadata for the project **/
 			for (final File innerFile : innerFiles)
 			{
-				if (innerFile != null && !innerFile.isDirectory() && innerFile.getName().equals(".project"))
+				if (innerFile != null && !innerFile.isDirectory() && innerFile.getName().equals("project"))
 				{
 					return true;
 				}
@@ -104,7 +104,7 @@ public class OrbisProjectManager implements IProjectManager
 					 * the metadata for the project **/
 					for (final File innerFile : innerFiles)
 					{
-						if (innerFile != null && !innerFile.isDirectory() && innerFile.getName().equals(".project"))
+						if (innerFile != null && !innerFile.isDirectory() && innerFile.getName().equals("project"))
 						{
 							action.accept(innerFile, file);
 						}
@@ -374,7 +374,7 @@ public class OrbisProjectManager implements IProjectManager
 
 	private void saveProjectToDisk(final IProject project)
 	{
-		final File projectFile = new File(project.getLocationAsFile(), ".project");
+		final File projectFile = new File(project.getLocationAsFile(), "project");
 
 		try
 		{
