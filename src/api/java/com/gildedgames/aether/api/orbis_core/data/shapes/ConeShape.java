@@ -29,7 +29,7 @@ public class ConeShape extends AbstractShape
 
 	public ConeShape(final BlockPos center, final int radius)
 	{
-		super((IMutableRegion) new Region(new BlockPos(-radius, -radius, -radius), new BlockPos(radius, radius, radius)).translate(center));
+		super((IMutableRegion) new Region(new BlockPos(-radius, 0, -radius), new BlockPos(radius, radius, radius)).translate(center));
 		this.center = center;
 
 		this.radiusSq = radius * radius;
