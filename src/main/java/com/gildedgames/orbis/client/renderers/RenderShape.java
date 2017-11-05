@@ -429,7 +429,12 @@ public class RenderShape implements IWorldRenderer
 		GlStateManager
 				.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE,
 						GlStateManager.DestFactor.ZERO);
-		GlStateManager.disableDepth();
+
+		if (OrbisKeyBindings.keyBindControl.isKeyDown())
+		{
+			GlStateManager.disableDepth();
+		}
+
 		GlStateManager.depthMask(false);
 
 		GlStateManager.glLineWidth(2.0F);
@@ -442,7 +447,12 @@ public class RenderShape implements IWorldRenderer
 
 		GlStateManager.enableLighting();
 		GlStateManager.enableTexture2D();
-		GlStateManager.enableDepth();
+
+		if (OrbisKeyBindings.keyBindControl.isKeyDown())
+		{
+			GlStateManager.enableDepth();
+		}
+
 		GlStateManager.depthMask(true);
 
 		GlStateManager.popMatrix();
