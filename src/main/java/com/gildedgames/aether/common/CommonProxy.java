@@ -90,6 +90,7 @@ public class CommonProxy implements IAetherServices
 		s.register(30, ConeShape.class, new Instantiator<>(ConeShape.class));
 		s.register(31, CylinderShape.class, new Instantiator<>(CylinderShape.class));
 		s.register(32, DomeShape.class, new Instantiator<>(DomeShape.class));
+		s.register(33, CuboidShape.class, new Instantiator<>(CuboidShape.class));
 	}
 
 	public void init(final FMLInitializationEvent event)
