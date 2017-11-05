@@ -100,7 +100,7 @@ public class OrbisServices implements IOrbisServices
 			try
 			{
 				inputstream = new FileInputStream(file1);
-				this.readProjectFromStream(s, inputstream, new File(this.baseFolder, s + File.separator).toURI());
+				this.readProjectFromStream(s, inputstream, new File(this.baseFolder, s + "/").toURI());
 				return true;
 			}
 			catch (final Throwable var10)
@@ -128,11 +128,11 @@ public class OrbisServices implements IOrbisServices
 
 		try
 		{
-			inputstream = MinecraftServer.class.getResourceAsStream("/assets/" + s + "/orbis/" + s1 + File.separator + "project_data.project");
-			this.readProjectFromStream(s1, inputstream, URI.create("/assets/" + s + "/orbis/" + s1 + File.separator));
+			inputstream = MinecraftServer.class.getResourceAsStream("/assets/" + s + "/orbis/" + s1 + "/project_data.project");
+			this.readProjectFromStream(s1, inputstream, URI.create("jar:///assets/" + s + "/orbis/" + s1 + "/"));
 			return true;
 		}
-		catch (final Throwable var10)
+		catch (final IOException var10)
 		{
 			flag = false;
 			OrbisCore.LOGGER.error(var10);

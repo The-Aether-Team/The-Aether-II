@@ -13,9 +13,9 @@ import javax.annotation.Nullable;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.FileSystem;
+import java.nio.file.*;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -194,10 +194,22 @@ public class OrbisProject implements IProject
 			 * Otherwise, uses URI and accesses from MC server resource
 			 * so it works when stored in a mod jar.
 			 */
-			final URI projectUri = this.jarLocation != null ? MinecraftServer.class.getResource(this.jarLocation.getPath()).toURI() : null;
-			final Path path = this.locationFile != null ? Paths.get(this.locationFile.getPath()) : Paths.get(projectUri);
+			final URI resources = MinecraftServer.class.getResource("/resources").toURI();
 
-			try (Stream<Path> paths = Files.walk(path))
+			final Path myPath;
+			FileSystem fileSystem = null;
+
+			if (resources.getScheme().equals("jar"))
+			{
+				fileSystem = FileSystems.newFileSystem(resources, Collections.<String, Object>emptyMap());
+				myPath = fileSystem.getPath("/assets");
+			}
+			else
+			{
+				myPath = Paths.get(resources);
+			}
+
+			try (Stream<Path> paths = Files.walk(myPath))
 			{
 				paths.forEach(p ->
 				{
@@ -286,10 +298,19 @@ public class OrbisProject implements IProject
 			{
 				OrbisCore.LOGGER.error(e);
 			}
+
+			if (fileSystem != null)
+			{
+				fileSystem.close();
+			}
+		}
+		catch (final IOException e)
+		{
+			e.printStackTrace();
 		}
 		catch (final URISyntaxException e)
 		{
-			OrbisCore.LOGGER.error(e);
+			e.printStackTrace();
 		}
 	}
 
