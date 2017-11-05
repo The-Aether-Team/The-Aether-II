@@ -22,6 +22,10 @@ public class PlayerSelectionTypesModule extends PlayerAetherModule
 
 	private final SelectionTypeLine line;
 
+	private final SelectionTypePyramid pyramid;
+
+	private final SelectionTypeCone cone;
+
 	private int currentSelectionTypeIndex;
 
 	public PlayerSelectionTypesModule(final PlayerAether playerAether)
@@ -32,6 +36,8 @@ public class PlayerSelectionTypesModule extends PlayerAetherModule
 		this.sphere = new SelectionTypeSphere();
 		this.ellipsoid = new SelectionTypeEllipsoid();
 		this.line = new SelectionTypeLine();
+		this.pyramid = new SelectionTypePyramid();
+		this.cone = new SelectionTypeCone();
 
 		final Collection<ISelectionType> selectionTypes = new ArrayList<>();
 
@@ -39,8 +45,20 @@ public class PlayerSelectionTypesModule extends PlayerAetherModule
 		selectionTypes.add(this.sphere);
 		selectionTypes.add(this.ellipsoid);
 		selectionTypes.add(this.line);
+		selectionTypes.add(this.pyramid);
+		selectionTypes.add(this.cone);
 
 		this.selectionTypes = selectionTypes.toArray(new ISelectionType[selectionTypes.size()]);
+	}
+
+	public SelectionTypeCone getCone()
+	{
+		return this.cone;
+	}
+
+	public SelectionTypePyramid getPyramid()
+	{
+		return this.pyramid;
 	}
 
 	public SelectionTypeCuboid getCuboid()

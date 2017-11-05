@@ -9,9 +9,7 @@ import com.gildedgames.aether.api.orbis_core.data.BlueprintData;
 import com.gildedgames.aether.api.orbis_core.data.DataCondition;
 import com.gildedgames.aether.api.orbis_core.data.management.impl.*;
 import com.gildedgames.aether.api.orbis_core.data.region.Region;
-import com.gildedgames.aether.api.orbis_core.data.shapes.EllipsoidShape;
-import com.gildedgames.aether.api.orbis_core.data.shapes.LineShape;
-import com.gildedgames.aether.api.orbis_core.data.shapes.SphereShape;
+import com.gildedgames.aether.api.orbis_core.data.shapes.*;
 import com.gildedgames.aether.api.registry.IContentRegistry;
 import com.gildedgames.aether.api.util.IClassSerializer;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherHooks;
@@ -91,6 +89,8 @@ public class CommonProxy implements IAetherServices
 		s.register(26, WorldShape.class, new Instantiator<>(WorldShape.class));
 		s.register(27, BlockDataContainerDefaultVoid.class, new Instantiator<>(BlockDataContainerDefaultVoid.class));
 		s.register(28, CreationData.class, new Instantiator<>(CreationData.class));
+		s.register(29, PyramidShape.class, new Instantiator<>(PyramidShape.class));
+		s.register(30, ConeShape.class, new Instantiator<>(ConeShape.class));
 	}
 
 	public void init(final FMLInitializationEvent event)
